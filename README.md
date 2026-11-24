@@ -29,7 +29,8 @@ proofs/Frontiers/       envelope duality, dominance calculus, free-energy sandwi
                         proof complexity of certificates
 proofs/CertificateAlgebra.lean   executable verification kernels + Master Soundness Theorems
 proofs/AxiomAudit.lean           automatic axiom audit of every declaration + non-vacuity witnesses
-experiments/            adversarial counterexample harness, separation benchmarks
+experiments/            adversarial counterexample harness, separation benchmarks,
+                        reference JSON certificate checker + conformance vectors (certs/)
 scripts/audit_all.sh    single-command audit
 ```
 

@@ -65,6 +65,11 @@ if [ -f experiments/separation_benchmarks.py ]; then
   python3 experiments/separation_benchmarks.py --quick >/dev/null 2>&1 || fail "separation benchmarks"
   echo "separation benchmarks: ok"
 fi
+if [ -f experiments/reference_checker.py ]; then
+  python3 experiments/reference_checker.py --selftest --quick >/dev/null 2>&1 \
+    || fail "reference checker: conformance vectors or soundness fuzz"
+  echo "reference checker (conformance vectors + soundness fuzz): ok"
+fi
 if [ -d docs ] && ls docs/*.md >/dev/null 2>&1; then
   python3 scripts/check_doc_refs.py || fail "docs cite Lean declarations that do not exist"
 fi

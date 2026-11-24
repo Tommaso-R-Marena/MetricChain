@@ -501,6 +501,13 @@ A re-implemented checker must reproduce the following kernel-evaluated facts
 7. **Torsion move.**  One static and one moving unit-mass atom at distance 1 from the axis,
    `φ = π`: `I_A = I_B = 1`, exact coaxial cost `2S − 2√(S² − 4) = 4 = 4·min(I_A,I_B)`.
 
+**Reference implementation.**  `experiments/reference_checker.py` implements the three checkers
+of §4–§5 on this JSON format in exact rational arithmetic (it is *not* trusted; the Lean kernels
+are).  `--selftest` reproduces vectors 1–4 above — also stored as files in `experiments/certs/` —
+and fuzzes random, mostly invalid certificates against brute force: an accepted certificate must
+never claim a bound above the true minimum, nor an interval missing the true partition sum.  Use
+it as the executable reading of the schema and as a regression oracle for faster checkers.
+
 Synthetic stress tests and tightness benchmarks: `experiments/falsify_conjectures.py`
 (counterexample search for every theorem) and `experiments/separation_benchmarks.py`
 (B1–B7; numbers quoted in the theory report).
