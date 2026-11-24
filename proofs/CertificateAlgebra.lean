@@ -470,6 +470,41 @@ theorem certified_gap (c : RCert n k) (P : RProblem n k) (D : Dom n k) (L : ℚ)
     ring
   exact ⟨h1, h2, by rw [← h2]; exact h1 av.1 hbox⟩
 
+/-! ### From rational certificates to real-valued energies (outward rounding) -/
+
+/-- A rational instance that lies termwise below a real pairwise model has a smaller energy. -/
+theorem PairInstance.cast_energy_le (I : PairInstance n k)
+    (M : PairModel ℝ (Fin n) (fun _ => Fin k)) (hh : ∀ i a, (I.h i a : ℝ) ≤ M.h i a)
+    (hJ : ∀ i j a b, (I.J i j a b : ℝ) ≤ M.J i j a b) (x : Config n k) :
+    ((I.energy x : ℚ) : ℝ) ≤ M.energy x := by
+  unfold PairInstance.energy PairModel.energy
+  push_cast
+  apply add_le_add
+  · exact Finset.sum_le_sum fun i _ => hh i (x i)
+  · exact Finset.sum_le_sum fun i _ => Finset.sum_le_sum fun j _ => hJ i j (x i) (x j)
+
+/-- **Soundness for real energies.**  If the published rational instance is an outward-rounded
+*lower* instance of a real pairwise model (every table entry rounded down), an accepted
+certificate bounds the true real energy on the box. -/
+theorem verify_sound_real (c : Cert n k) (I : PairInstance n k) (D : Dom n k) (L : ℚ)
+    (hv : verify c I D L = true) (M : PairModel ℝ (Fin n) (fun _ => Fin k))
+    (hh : ∀ i a, (I.h i a : ℝ) ≤ M.h i a) (hJ : ∀ i j a b, (I.J i j a b : ℝ) ≤ M.J i j a b)
+    (x : Config n k) (hx : InBox D x) : (L : ℝ) ≤ M.energy x := by
+  have h1 := verify_sound c I D L hv x hx
+  have h2 := I.cast_energy_le M hh hJ x
+  have h3 : (L : ℝ) ≤ ((I.energy x : ℚ) : ℝ) := by exact_mod_cast h1
+  linarith
+
+/-- **Soundness for real energies with an unknown residual.** -/
+theorem verifyR_sound_real (c : RCert n k) (P : RProblem n k) (D : Dom n k) (L : ℚ)
+    (hv : verifyR c P D L = true) (M : PairModel ℝ (Fin n) (fun _ => Fin k))
+    (hh : ∀ i a, (P.base.h i a : ℝ) ≤ M.h i a)
+    (hJ : ∀ i j a b, (P.base.J i j a b : ℝ) ≤ M.J i j a b) (g : Config n k → ℝ)
+    (hg : ResidualClass P g) (x : Config n k) (hx : InBox D x) : (L : ℝ) ≤ M.energy x + g x := by
+  have h1 := verifyR_sound c P D L hv g hg x hx
+  have h2 := P.base.cast_energy_le M hh hJ x
+  linarith
+
 /-! ### Executable examples (non-vacuity of the kernel)
 
 All `verify … = true` facts below are proved by `decide`, i.e. the checker is *run inside Lean's

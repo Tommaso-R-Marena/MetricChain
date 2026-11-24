@@ -655,6 +655,12 @@ minorant to the kernel above.  If `verifyR c P D L = true` then for **every** re
 those bounded differences and anchor values, `L ≤ E(x) + g(x)` on the box; with an anchor in the
 box the true optimum lies in `[L, E(a) + v]`.
 
+**Real-valued energies [V] (`verify_sound_real`, `verifyR_sound_real`).**  If the published
+rational instance is a termwise *lower* instance of a real pairwise model (every table entry
+rounded down, §5), an accepted certificate bounds the true real energy — with or without the
+unknown residual.  This is the minimisation counterpart of `Z_encloses_partitionFn` and closes the
+outward-rounding loop: floats may be used everywhere upstream of the certificate.
+
 **Partition-function kernel [V] (`zverify_sound`, §3.4).**
 
 All three kernels are evaluated on concrete instances by `decide +kernel` (Lean's trusted kernel,
@@ -788,7 +794,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/TorsionRMSD.lean` | `RigidWithin`, `rigidWithin_chain`, `coaxial_cost_eq`, `exists_coaxial_angle`, `coaxial_cost_le_min`, `reduced_le_coaxial_cost`, `IsTorsionMove.rigidWithin`, `rigidWithin_torsion_chain` |
 | `proofs/Frontiers/InvariantEnvelope.lean` | `invariant_lipschitz_of_rigidWithin`, `residual_torsion_move`, `residual_torsion_chain` |
 | `proofs/Frontiers/ProofComplexity.lean` | `leaf_two_config`, `triangle_no_leaf_certificate`, `triangles_energy_opt`, `sumFree_exponential`, `sumFree_gap_exponential`, `sumFree_complexity`, `sumFree_tight`, `sum_linear`, `sum_rule_separation` |
-| `proofs/CertificateAlgebra.lean` | `verify`, `verify_sound`, `verifyR`, `verifyR_sound`, `certified_gap`, kernel-evaluated examples |
+| `proofs/CertificateAlgebra.lean` | `verify`, `verify_sound`, `verifyR`, `verifyR_sound`, `certified_gap`, `verify_sound_real`, `verifyR_sound_real`, kernel-evaluated examples |
 | `proofs/AxiomAudit.lean` | `#audit_axioms MetricChain`, non-vacuity witnesses |
 
 ---

@@ -116,6 +116,8 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.verify_sound
 #print axioms MetricChain.verifyR_sound
 #print axioms MetricChain.certified_gap
+#print axioms MetricChain.verify_sound_real
+#print axioms MetricChain.verifyR_sound_real
 #print axioms MetricChain.triangle_verified
 #print axioms MetricChain.triangleResidual_gap
 #print axioms MetricChain.leaf_two_config

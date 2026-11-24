@@ -83,7 +83,10 @@ Rules for a producer that computes in binary64:
 | claimed bounds `hi`, ratios `q₀, q_j` (partition) | exact recomputation, or float plus error, rounded up | up |
 
 `err(e)` is a rigorous bound on the floating-point evaluation error of the table entry (interval
-arithmetic or a running error bound).  Because the checker re-verifies every inequality exactly,
+arithmetic or a running error bound).  Soundness of the protocol for real-valued energies is
+`verify_sound_real` / `verifyR_sound_real` (lower instance ⇒ bound on the true energy) and
+`Z_encloses_partitionFn` (lower/upper weight instances ⇒ enclosure of the true partition
+function).  Because the checker re-verifies every inequality exactly,
 a mistake in rounding can only cause rejection, never an unsound acceptance.  Precision loss per
 leaf is at most `(n + P)·2^{−p}` for `P` listed pairs.
 
