@@ -208,4 +208,79 @@ example : partitionFn 1 (fun b : Bool => if b then (1 : ℝ) else 3) {false} ≤
 example : (∀ x : Config 3 2, 1 ≤ triangle.energy x) ∧ triangle.energy ![0, 1, 0] = 1 :=
   ⟨triangle_lower_bound, triangle_optimum⟩
 
+/-- `robust_minimizer_with_anchors_iff` discriminates: with one anchor (`true`, value `0`),
+oscillation `1`, and white-box energies `f true = 0`, `f false = 3`, the state `false` cannot be
+optimal for any admissible residual matching the anchor, whereas `true` can. -/
+example :
+    (∃ g, Admissible (discreteEnvelope (X := Bool) 1) g ∧ (∀ a ∈ ({true} : Finset Bool), g a = 0) ∧
+        ∀ y, (fun b : Bool => if b then (0 : ℝ) else 3) true + g true ≤
+          (fun b : Bool => if b then (0 : ℝ) else 3) y + g y) ∧
+      ¬ (∃ g, Admissible (discreteEnvelope (X := Bool) 1) g ∧
+        (∀ a ∈ ({true} : Finset Bool), g a = 0) ∧
+        ∀ y, (fun b : Bool => if b then (0 : ℝ) else 3) false + g false ≤
+          (fun b : Bool => if b then (0 : ℝ) else 3) y + g y) := by
+  have hd := discreteEnvelope_isEnvelope (X := Bool) (ω := 1) (by norm_num)
+  have hA : ({true} : Finset Bool).Nonempty := Finset.singleton_nonempty true
+  have hv : ∀ a ∈ ({true} : Finset Bool), ∀ b ∈ ({true} : Finset Bool),
+      (fun _ : Bool => (0 : ℝ)) a - (fun _ : Bool => (0 : ℝ)) b ≤
+        discreteEnvelope (X := Bool) 1 a b := by
+    intro a ha b hb
+    rw [Finset.mem_singleton] at ha hb
+    subst ha
+    subst hb
+    simp [discreteEnvelope]
+  constructor
+  · refine (robust_minimizer_with_anchors_iff hd {true} hA (fun _ => 0) hv
+      (fun b : Bool => if b then (0 : ℝ) else 3) true).mpr ⟨fun y => ?_, fun y => ?_⟩
+    · cases y
+      · simp [discreteEnvelope]
+        norm_num
+      · simp [discreteEnvelope]
+    · simp only [lowerEnv, upperEnv, Finset.sup'_singleton, Finset.inf'_singleton]
+      cases y
+      · simp [discreteEnvelope]
+        norm_num
+      · simp [discreteEnvelope]
+  · intro h
+    have h2 := ((robust_minimizer_with_anchors_iff hd {true} hA (fun _ => 0) hv
+      (fun b : Bool => if b then (0 : ℝ) else 3) false).mp h).2 true
+    simp [lowerEnv, upperEnv, Finset.sup'_singleton, Finset.inf'_singleton, discreteEnvelope] at h2
+
+/-- `verify_sound_real` applies to a real pairwise model whose tables are bounded below by the
+rational triangle instance: its energy is at least `1` everywhere. -/
+example (M : PairModel ℝ (Fin 3) (fun _ => Fin 2))
+    (hh : ∀ i a, ((triangle.h i a : ℚ) : ℝ) ≤ M.h i a)
+    (hJ : ∀ i j a b, ((triangle.J i j a b : ℚ) : ℝ) ≤ M.J i j a b) (x : Config 3 2) :
+    ((1 : ℚ) : ℝ) ≤ M.energy x :=
+  verify_sound_real triangleCert triangle (fullDom 3 2) 1 triangle_verified M hh hJ x
+    (inBox_fullDom x)
+
+/-- `boltzmannAvg_dominance_error` on a two-state system (margin `2`): discarding the dominated
+state changes the average of any observable bounded by `1` by at most `2 e^{-2}`. -/
+example (f : Bool → ℝ) (hf : ∀ b, |f b| ≤ 1) :
+    |boltzmannAvg 1 (fun b : Bool => if b then (1 : ℝ) else 3) f ({false} ∪ {true}) -
+        boltzmannAvg 1 (fun b : Bool => if b then (1 : ℝ) else 3) f {true}| ≤
+      2 * 1 * Real.exp (-1 * 2) := by
+  apply boltzmannAvg_dominance_error (by norm_num) _ f (fun _ => true)
+  · intro x hx y hy _
+    simp only [Finset.coe_singleton, Set.mem_singleton_iff] at hx hy
+    rw [hx, hy]
+  · intro x _
+    simp
+  · intro x hx
+    simp only [Finset.mem_singleton] at hx
+    subst hx
+    norm_num
+  · simp
+  · exact Finset.singleton_nonempty true
+  · intro x _
+    exact hf x
+
+/-- The relative-entropy identity is instantiated on the uniform two-state reference. -/
+example (Δ : Bool → ℝ) (β : ℝ) :
+    klFin (fun _ : Bool => (1 / 2 : ℝ)) (tilt (fun _ => 1 / 2) Δ β) =
+      β * ∑ x : Bool, (1 / 2 : ℝ) * Δ x + Real.log (∑ x : Bool, (1 / 2 : ℝ) * Real.exp (-β * Δ x)) :=
+  kl_reference_target_eq_gap (fun _ => 1 / 2) Δ (fun _ => by norm_num)
+    (by rw [Fintype.sum_bool]; norm_num) β
+
 end MetricChain.NonVacuity
