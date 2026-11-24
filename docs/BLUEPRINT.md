@@ -346,9 +346,11 @@ ZCERT(model, beta, D):
 
 Guarantee: `lo(I⁻) ≤ ∫ e^{−βE} ≤ hi(I⁺)`, the integral being over the union of the product
 voxels of the box with respect to the product of the per-torsion measures
-(`certified_torsion_partition`: its hypotheses are exactly the entrywise inequalities produced
-above — table enclosures of the one-body and pair energies on the cells, cell measures, and
-outward-rounded Boltzmann factors — plus measurability; `Ilo ≥ 0` is checked by the kernel).
+(`certified_torsion_partition_top`: its hypotheses are exactly the entrywise inequalities
+produced above — table enclosures of the one-body and pair energies on the cells of the box,
+cell measures, and outward-rounded Boltzmann factors — plus measurability; nonnegativity of the
+factors is checked by the kernel `zverifyTop`, and cells removed from the domains need no energy
+enclosure).
 Cells of one site must be pairwise disjoint (half-open intervals in the chart coordinate).  For
 a cell `[t₁, t₂)` of a rational chart the angular measure is `2(arctan t₂ − arctan t₁)`; use the
 rational enclosure `(t₂−t₁)·2/(1+T²) ≤ vol ≤ 2(t₂−t₁)`, `T ≥ max(|t₁|,|t₂|)`

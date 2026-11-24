@@ -218,6 +218,13 @@ semantics.
      terms and its link graph is still to be written).
   5. Connecting the kernel to LeanCert-style continuous leaves (interval evaluation of the
      rational torus energy) to obtain one end-to-end verified mixed discrete–continuous checker.
+     *Status after cycle 5:* the chain "cell enclosures of the energy terms ⇒ rational weight
+     instances ⇒ kernel ⇒ bound on the continuous integral" is verified (`VoxelBridge`,
+     `IntervalInstance`), with a worked chart-arc instance for the potential `cos θ`.  Still
+     missing: verified interval evaluation of realistic terms (distances through forward
+     kinematics, Lennard-Jones, Coulomb) over cells; cells of the rotated charts; volume bounds
+     that converge under refinement inside the kernel input (the lemma
+     `two_arctan_sub_bounds_of_sq` provides them, the executable bracket uses the crude one).
   6. Realizability certificates for the data predictors actually emit: weighted or incomplete
      distance matrices with bond-length constraints, and a bound that keeps part of the
      diagonal-variance term discarded by the known spectral bound.
@@ -230,7 +237,15 @@ semantics.
 
 ### Open bottlenecks
 
-* No formal statement yet for dependent (Markov / Dobrushin) references in the sandwich.
+* No formal statement yet for weakly dependent (Markov / Dobrushin) references in the sandwich:
+  the verified statements are the two extremes — product references (`Σ c_i²`) and arbitrary
+  references (`(Σ c_i)²`).
+* A two-sided decomposition (product) rule for the partition kernel — tree elimination of
+  independent or weakly coupled sub-instances — is not in the verified kernel (`DEAD_ENDS.md`
+  D17); with it the separation theorem of `ProofComplexity` would have a finite-temperature
+  counterpart.
+* Envelope constants for a concrete learned residual (certified Lipschitz constants, inertia
+  bounds) are inputs; nothing here certifies them.
 * The Taylor step producing second-order (separable) voxel envelopes from Hessian bounds and the
   information-based lower bound are paper-level; the separable-envelope theorem itself is verified.
 * The Procrustes–Gram stability inequality (Tu et al. 2016) is cited, harness-tested, not

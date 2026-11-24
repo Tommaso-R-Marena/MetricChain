@@ -52,6 +52,10 @@ of a configuration `x` is `prodVoxel s x = ∏ i, s i (x i)`.
   brackets of the Boltzmann factors (`QInterval.contains_boltzmann` in `Core/Rounding.lean`, and
   `volume_chartArc_toReal_bounds` below for the volume factors); (iv) two kernel computations
   `zverify … = some …`.  No statement about voxel integrals is assumed any more.
+* `certified_torsion_partition_box` — the same with enclosures required only on the cells of the
+  box (removed cells, e.g. sterically excluded ones, need none);
+  `certified_torsion_partition_top` — additionally with the top-level kernel `zverifyTop`, so
+  that no nonnegativity hypothesis is left to the caller.
 * `certified_torsion_partition_full` — the full box: the integral over `∏ i, ⋃ a, s i a`.
 
 ## Chart arcs: rational bounds for the volume factors
@@ -293,6 +297,29 @@ theorem torsionEnergy_voxel_bounds {s : Fin n → Fin k → Set ℝ} {u : Fin n 
     · exact Finset.sum_le_sum fun i _ => Finset.sum_le_sum fun j hj =>
         (hU i j (Finset.ne_of_mem_erase hj) (x i) (x j) (θ i) (hθ' i) (θ j) (hθ' j)).2
 
+/-- **Energy enclosure on a product voxel, per configuration.**  The sharper form of
+`torsionEnergy_voxel_bounds`: only the table entries selected by the configuration `x` and only
+the cells `s i (x i)` of its voxel are involved. -/
+theorem torsionEnergy_config_bounds {s : Fin n → Fin k → Set ℝ} {u : Fin n → ℝ → ℝ}
+    {U : Fin n → Fin n → ℝ → ℝ → ℝ} {Mlo Mhi : PairModel ℝ (Fin n) (fun _ => Fin k)}
+    (x : Config n k)
+    (hu : ∀ i, ∀ t ∈ s i (x i), Mlo.h i (x i) ≤ u i t ∧ u i t ≤ Mhi.h i (x i))
+    (hU : ∀ i j, j ≠ i → ∀ t ∈ s i (x i), ∀ t' ∈ s j (x j),
+      Mlo.J i j (x i) (x j) ≤ U i j t t' ∧ U i j t t' ≤ Mhi.J i j (x i) (x j))
+    {θ : Fin n → ℝ} (hθ : θ ∈ prodVoxel s x) :
+    Mlo.energy x ≤ torsionEnergy u U θ ∧ torsionEnergy u U θ ≤ Mhi.energy x := by
+  have hθ' := mem_prodVoxel.mp hθ
+  unfold PairModel.energy torsionEnergy
+  constructor
+  · apply add_le_add
+    · exact Finset.sum_le_sum fun i _ => (hu i (θ i) (hθ' i)).1
+    · exact Finset.sum_le_sum fun i _ => Finset.sum_le_sum fun j hj =>
+        (hU i j (Finset.ne_of_mem_erase hj) (θ i) (hθ' i) (θ j) (hθ' j)).1
+  · apply add_le_add
+    · exact Finset.sum_le_sum fun i _ => (hu i (θ i) (hθ' i)).2
+    · exact Finset.sum_le_sum fun i _ => Finset.sum_le_sum fun j hj =>
+        (hU i j (Finset.ne_of_mem_erase hj) (θ i) (hθ' i) (θ j) (hθ' j)).2
+
 /-- **Integrability on a product voxel.**  For a measurable energy that is bounded below on a
 product voxel of measurable cells of finite measure, the Boltzmann factor is integrable on the
 voxel (`β ≥ 0`).  For pairwise energies measurability follows from `measurable_torsionEnergy` and
@@ -386,6 +413,66 @@ theorem certified_torsion_partition (ν : Fin n → Measure ℝ) [∀ i, SigmaFi
     (measurable_torsionEnergy hum hUm) hβ Mlo Mhi D
     (fun x _ _ hθ => torsionEnergy_voxel_bounds hu hU x hθ) Ilo Ihi hlo hwlo hWlo hwhi hWhi
     clo chi a b a' b' hclo hchi
+
+/-- **Box form of `certified_torsion_partition`.**  The table enclosures of the energy terms are
+only required on the cells of the box `D`: cells that have been removed from the box (for
+instance sterically excluded ones, on which the energy need not even be bounded) need no
+enclosure.  The entrywise brackets are still required for all table entries (they make
+`Ihi.Nonneg` derivable); for entries outside the box the tables are unconstrained. -/
+theorem certified_torsion_partition_box (ν : Fin n → Measure ℝ) [∀ i, SigmaFinite (ν i)]
+    (s : Fin n → Fin k → Set ℝ) (hs : ∀ i a, MeasurableSet (s i a))
+    (hsfin : ∀ i a, ν i (s i a) ≠ ⊤) (hsdisj : ∀ i a b, a ≠ b → Disjoint (s i a) (s i b))
+    (u : Fin n → ℝ → ℝ) (U : Fin n → Fin n → ℝ → ℝ → ℝ) (hum : ∀ i, Measurable (u i))
+    (hUm : ∀ i j, j ≠ i → Measurable (Function.uncurry (U i j))) {β : ℝ} (hβ : 0 ≤ β)
+    (Mlo Mhi : PairModel ℝ (Fin n) (fun _ => Fin k)) (D : Dom n k)
+    (hu : ∀ i, ∀ a ∈ D i, ∀ t ∈ s i a, Mlo.h i a ≤ u i t ∧ u i t ≤ Mhi.h i a)
+    (hU : ∀ i j, j ≠ i → ∀ a ∈ D i, ∀ b ∈ D j, ∀ t ∈ s i a, ∀ t' ∈ s j b,
+      Mlo.J i j a b ≤ U i j t t' ∧ U i j t t' ≤ Mhi.J i j a b)
+    (Ilo Ihi : WInstance n k) (hlo : Ilo.Nonneg)
+    (hwlo : ∀ i a, (Ilo.w i a : ℝ) ≤ (ν i (s i a)).toReal * Real.exp (-β * Mhi.h i a))
+    (hWlo : ∀ i j a b, (Ilo.W i j a b : ℝ) ≤ Real.exp (-β * Mhi.J i j a b))
+    (hwhi : ∀ i a, (ν i (s i a)).toReal * Real.exp (-β * Mlo.h i a) ≤ (Ihi.w i a : ℝ))
+    (hWhi : ∀ i j a b, Real.exp (-β * Mlo.J i j a b) ≤ (Ihi.W i j a b : ℝ))
+    (clo chi : ZCert n k) (a b a' b' : ℚ)
+    (hclo : zverify clo Ilo D = some (a, b)) (hchi : zverify chi Ihi D = some (a', b')) :
+    (a : ℝ) ≤ ∫ θ in ⋃ x ∈ boxFinset D, prodVoxel s x,
+        Real.exp (-β * torsionEnergy u U θ) ∂(Measure.pi ν) ∧
+      ∫ θ in ⋃ x ∈ boxFinset D, prodVoxel s x,
+        Real.exp (-β * torsionEnergy u U θ) ∂(Measure.pi ν) ≤ (b' : ℝ) :=
+  certified_prodVoxel_partition ν s hs hsfin hsdisj (torsionEnergy u U)
+    (measurable_torsionEnergy hum hUm) hβ Mlo Mhi D
+    (fun x hx _ hθ =>
+      have hxD := mem_boxFinset.mp hx
+      torsionEnergy_config_bounds x (fun i => hu i (x i) (hxD i))
+        (fun i j hji => hU i j hji (x i) (hxD i) (x j) (hxD j)) hθ)
+    Ilo Ihi hlo hwlo hWlo hwhi hWhi clo chi a b a' b' hclo hchi
+
+/-- **Top-level form.**  As `certified_torsion_partition_box`, but with the top-level kernel
+`zverifyTop`, which checks nonnegativity of the factors itself: no nonnegativity hypothesis is
+left to the caller, and energy enclosures are needed only on the cells of the box. -/
+theorem certified_torsion_partition_top (ν : Fin n → Measure ℝ) [∀ i, SigmaFinite (ν i)]
+    (s : Fin n → Fin k → Set ℝ) (hs : ∀ i a, MeasurableSet (s i a))
+    (hsfin : ∀ i a, ν i (s i a) ≠ ⊤) (hsdisj : ∀ i a b, a ≠ b → Disjoint (s i a) (s i b))
+    (u : Fin n → ℝ → ℝ) (U : Fin n → Fin n → ℝ → ℝ → ℝ) (hum : ∀ i, Measurable (u i))
+    (hUm : ∀ i j, j ≠ i → Measurable (Function.uncurry (U i j))) {β : ℝ} (hβ : 0 ≤ β)
+    (Mlo Mhi : PairModel ℝ (Fin n) (fun _ => Fin k)) (D : Dom n k)
+    (hu : ∀ i, ∀ a ∈ D i, ∀ t ∈ s i a, Mlo.h i a ≤ u i t ∧ u i t ≤ Mhi.h i a)
+    (hU : ∀ i j, j ≠ i → ∀ a ∈ D i, ∀ b ∈ D j, ∀ t ∈ s i a, ∀ t' ∈ s j b,
+      Mlo.J i j a b ≤ U i j t t' ∧ U i j t t' ≤ Mhi.J i j a b)
+    (Ilo Ihi : WInstance n k)
+    (hwlo : ∀ i a, (Ilo.w i a : ℝ) ≤ (ν i (s i a)).toReal * Real.exp (-β * Mhi.h i a))
+    (hWlo : ∀ i j a b, (Ilo.W i j a b : ℝ) ≤ Real.exp (-β * Mhi.J i j a b))
+    (hwhi : ∀ i a, (ν i (s i a)).toReal * Real.exp (-β * Mlo.h i a) ≤ (Ihi.w i a : ℝ))
+    (hWhi : ∀ i j a b, Real.exp (-β * Mlo.J i j a b) ≤ (Ihi.W i j a b : ℝ))
+    (clo chi : ZCert n k) (a b a' b' : ℚ)
+    (hclo : zverifyTop clo Ilo D = some (a, b)) (hchi : zverifyTop chi Ihi D = some (a', b')) :
+    (a : ℝ) ≤ ∫ θ in ⋃ x ∈ boxFinset D, prodVoxel s x,
+        Real.exp (-β * torsionEnergy u U θ) ∂(Measure.pi ν) ∧
+      ∫ θ in ⋃ x ∈ boxFinset D, prodVoxel s x,
+        Real.exp (-β * torsionEnergy u U θ) ∂(Measure.pi ν) ≤ (b' : ℝ) :=
+  certified_torsion_partition_box ν s hs hsfin hsdisj u U hum hUm hβ Mlo Mhi D hu hU Ilo Ihi
+    (zverifyTop_eq_some hclo).1 hwlo hWlo hwhi hWhi clo chi a b a' b'
+    (zverifyTop_eq_some hclo).2 (zverifyTop_eq_some hchi).2
 
 /-- **Full-box form of `certified_torsion_partition`.**  For `D = fullDom n k` the voxels tile the
 product domain, so the certified quantity is the partition integral over `∏ i, ⋃ a, s i a`. -/

@@ -455,7 +455,11 @@ accepted certificates give
     lo(I^lo)  ≤  ∫_{⋃_x V_x} e^{−βE} d(⊗ν)  ≤  hi(I^hi)        (`certified_torsion_partition`),
 
 with no hypothesis about voxel integrals; over the full box the domain of integration is the
-whole product `∏_i ⋃_a s_i(a)` (`certified_torsion_partition_full`).  What remains are
+whole product `∏_i ⋃_a s_i(a)` (`certified_torsion_partition_full`).  In the form
+`certified_torsion_partition_top` the certificates are checked by `zverifyTop` (no nonnegativity
+hypothesis) and the enclosures are needed only on the cells of the box, so cells removed from
+the domains — e.g. sterically excluded ones, where the energy need not be bounded — require
+nothing.  What remains are
 measurability of the cells and energy terms, the table enclosures of `u_i`, `U_ij` on the cells
 (the output of interval evaluation, an input here), and the displayed entrywise inequalities.
 For cells that are arcs with rational chart endpoints the latter are computable: the angular
@@ -918,7 +922,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/PartitionCertificate.lean` | `zverify`, `zverify_sound`, `zverifyTop`, `zverifyTop_sound`, `zprune_sound`, `Z_encloses_partitionFn`, `triangleZ_exact`, `negativeW_rejected` |
 | `proofs/Frontiers/IntervalInstance.lean` | `WInstance.lowerOfIntervals`, `WInstance.upperOfIntervals`, `Z_encloses_partitionFn_of_intervals`, `certified_partition_of_intervals`, `triangle_real_partition_enclosure` |
 | `proofs/Frontiers/VoxelEnclosure.lean` | `voxel_boltzmann_bounds`, `voxel_riemann_enclosure`, `Z_encloses_voxel_integral`, `certified_voxel_partition` |
-| `proofs/Frontiers/VoxelBridge.lean` | `pairwise_voxel_weight_bounds`, `certified_torsion_partition`, `two_arctan_sub_bounds` |
+| `proofs/Frontiers/VoxelBridge.lean` | `pairwise_voxel_weight_bounds`, `certified_prodVoxel_partition`, `certified_torsion_partition`, `certified_torsion_partition_top`, `certified_torsion_partition_full`, `two_arctan_sub_bounds`, `chartArc_onebody_brackets`, witnesses `exact_witness`, `pair_witness`, `chart_witness` |
 | `proofs/Frontiers/SeparableVoxel.lean` | `setIntegral_pi_prod`, `separable_voxel_bounds`, `separable_voxel_ratio` |
 | `proofs/Frontiers/HoffmanWielandt.lean` | `trace_mul_le_sum_sorted_eigenvalues`, `hoffman_wielandt` |
 | `proofs/Frontiers/Realizability.lean` | `K_identity`, `K_lower_bound`, `rank_psd_trace_obstruction`, `sstress_lower_bound`, `simplex_sstress_lower_bound`, `simplex_not_realizable` |

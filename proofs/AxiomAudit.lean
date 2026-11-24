@@ -112,6 +112,7 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.pairwise_voxel_weight_bounds
 #print axioms MetricChain.certified_torsion_partition
 #print axioms MetricChain.certified_torsion_partition_full
+#print axioms MetricChain.certified_torsion_partition_top
 #print axioms MetricChain.two_arctan_sub_bounds
 #print axioms MetricChain.chartArc_onebody_brackets
 #print axioms MetricChain.VoxelBridgeWitness.chart_witness

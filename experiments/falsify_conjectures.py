@@ -379,34 +379,40 @@ def t_mcshane(rng, trials):
 
 
 def _witness_instance(rng, it):
-    """Instance for II.4: configurations, weights c, Lipschitz factor kappa, white-box part f,
-    kappa-Lipschitz residual g (as arrays over the configurations) and the tolerance eps."""
+    """Instance for II.4: configurations, cost matrix D[a, y] = d(a, y), Lipschitz factor kappa, white-box
+    part f, residual g with g(x) - g(y) <= kappa d(x, y) (arrays over the configurations), tolerance eps.
+    d is the weighted Hamming envelope, except on every fourth instance where it is an arbitrary
+    asymmetric cost with zero diagonal (`anchor_necessary` assumes nothing else about d)."""
     if it == 0:
         # Planted tight instance (two binary sites, c = (1, 1), kappa = 1/2, eps = 1/10, tent residual
         # g = -kappa d(00, .)).  A = {00} is a valid eps-certificate and y = 01 has gap 0.45: above the
         # true threshold (1 - kappa) * 1 - eps = 0.4, below the two mutated thresholds 0.6 and 0.9.
         configs = all_configs(2, 2)
-        c = np.array([1.0, 1.0])
-        kappa, eps = 0.5, 0.1
-        g = np.array([-kappa * weighted_hamming(c, configs[0], y) for y in configs])
-        f = np.array([0.0, 0.95, 0.95, 2.5])
-        return configs, c, kappa, f, g, eps
+        D = np.array([[weighted_hamming((1.0, 1.0), x, y) for y in configs] for x in configs])
+        return configs, D, 0.5, np.array([0.0, 0.95, 0.95, 2.5]), -0.5 * D[0], 0.1
     n, k = 2, int(rng.integers(2, 4))
     if rng.random() < 0.4:
         n, k = 3, 2
     configs = all_configs(n, k)
     N = len(configs)
-    c = rng.uniform(0.5, 1.5, size=n)
-    if rng.random() < 0.15:
-        c[:] = c[0]
-    kappa = float(rng.uniform(0.0, 0.9))
-    u = rng.random()
-    if u < 0.08:
-        kappa = 0.0
-    elif u < 0.14:
-        kappa = 1.0
-    gd = random_lipschitz(rng, configs, c, kappa=kappa)
-    g = np.array([gd[x] for x in configs])
+    if it % 4 == 3:      # arbitrary asymmetric cost: d(x, y) = (g(x) - g(y)) / kappa + slack(x, y), slack >= 0
+        kappa = float(rng.uniform(0.1, 0.9))
+        g = rng.normal(0, 0.5, size=N)
+        D = (g[:, None] - g[None, :]) / kappa + rng.uniform(0.0, 1.5, size=(N, N)) * (rng.random(size=(N, N)) < 0.7)
+        np.fill_diagonal(D, 0.0)
+    else:                # weighted Hamming envelope, g a McShane-type function with factor kappa
+        c = rng.uniform(0.5, 1.5, size=n)
+        if rng.random() < 0.15:
+            c[:] = c[0]
+        kappa = float(rng.uniform(0.0, 0.9))
+        u = rng.random()
+        if u < 0.08:
+            kappa = 0.0
+        elif u < 0.14:
+            kappa = 1.0
+        gd = random_lipschitz(rng, configs, c, kappa=kappa)
+        g = np.array([gd[x] for x in configs])
+        D = np.array([[weighted_hamming(c, x, y) for y in configs] for x in configs])
     eps = float(rng.uniform(0.0, 0.2))
     if rng.random() < 0.15:
         eps = 0.0
@@ -421,25 +427,27 @@ def _witness_instance(rng, it):
         U0 = min(f[a] + g[a] for a in A0)
         for y in range(N):
             if y not in A0:
-                low = max(g[a] - weighted_hamming(c, configs[a], configs[y]) for a in A0)
+                low = max(g[a] - D[a, y] for a in A0)
                 f[y] = U0 - eps - low + float(rng.uniform(0.0, 0.3)) * float(rng.random() < 0.7)
-    return configs, c, kappa, f, g, eps
+    return configs, D, kappa, f, g, eps
 
 
 @conjecture("II.4 Witness-size lower bound: every state with gap < (1-kappa) sigma - eps must be an anchor of every eps-certificate")
 def t_witness_lower_bound(rng, trials):
     """Exhaustive form of `anchor_necessary` / `anchor_card_lower_bound` (EnvelopeDuality.lean).
 
-    For E = f + g with g kappa-Lipschitz for the weighted Hamming envelope d (kappa <= 1), a non-empty
-    anchor set A is an eps-certificate iff  min_A E - eps <= f(y) + max_{a in A} (g(a) - d(a, y))  for
-    ALL y.  The theorem: for every eps-certificate A, every y with
+    For E = f + g with g(x) - g(y) <= kappa d(x, y), kappa <= 1 (d: weighted Hamming envelope, or an
+    arbitrary asymmetric cost), a non-empty anchor set A is an eps-certificate iff
+        min_A E - eps <= f(y) + max_{a in A} (g(a) - d(a, y))    for ALL y.
+    The theorem: for every eps-certificate A, every y with
         E(y) - Estar < (1 - kappa) * sigma - eps,    sigma <= d(a, y) for all a in A, a != y,
     belongs to A (Estar any lower bound on E over A).  The test enumerates ALL non-empty subsets A of the
     configuration space, keeps the valid certificates and checks the conclusion for each of them with
       * the sharpest admissible separation sigma_y(A) = min_{a in A, a != y} d(a, y) (per-y form),
-      * the uniform separation sigma = min_i c_i (the cardinality bound |A| >= #forced),
+      * the uniform separation sigma = min_{a != y} d(a, y), which is min_i c_i for the weighted Hamming
+        envelope (the cardinality bound |A| >= #forced),
       * Estar = global minimum of E and Estar = min_A E (the largest admissible value),
-      * the nominal kappa and the exact Lipschitz constant of g (the smallest admissible value).
+      * the nominal kappa and the smallest admissible kappa (the exact Lipschitz constant of g).
     Power: the same enumeration must refute two mutated thresholds, (1 - kappa) sigma + eps (sign of
     eps flipped) and sigma - eps (kappa replaced by 0 although the true kappa is positive)."""
     st = dict(instances=0, valid_certificates=0, forced_nonempty=0, forced_nonempty_uniform=0,
@@ -448,14 +456,16 @@ def t_witness_lower_bound(rng, trials):
     largest_tight = 0
     masks = {}
     for it in range(max(40, trials)):
-        configs, c, kappa, f, g, eps = _witness_instance(rng, it)
+        configs, D, kappa, f, g, eps = _witness_instance(rng, it)
         N = len(configs)
-        D = np.array([[weighted_hamming(c, x, y) for y in configs] for x in configs])
         E = f + g
         if (g[:, None] - g[None, :] - kappa * D).max() > 1e-9:
             return False, dict(reason="generator produced a residual that is not kappa-Lipschitz")
         off = ~np.eye(N, dtype=bool)
-        kappa_eff = max(0.0, float(((g[:, None] - g[None, :])[off] / D[off]).max()))
+        pos = off & (D > 1e-12)
+        kappa_eff = max(0.0, float(((g[:, None] - g[None, :])[pos] / D[pos]).max())) if pos.any() else 0.0
+        if (g[:, None] - g[None, :] - kappa_eff * D).max() > 1e-9:
+            kappa_eff = kappa
         if N not in masks:
             r = np.arange(1, 2 ** N)
             masks[N] = ((r[:, None] >> np.arange(N)) & 1).astype(bool)
@@ -467,9 +477,9 @@ def t_witness_lower_bound(rng, trials):
         if not valid[-1]:
             return False, dict(reason="the full anchor set is not a certificate (it always is)")
         sigma = np.where(Mk[:, :, None], np.where(off, D, np.inf)[None, :, :], np.inf).min(axis=1)
+        sigma_u = float(D[off].min())                                    # uniform separation
         gap_global = np.broadcast_to(E - E.min(), sigma.shape)           # Estar = global minimum
         gap_anchor = E[None, :] - U[:, None]                             # Estar = min_A E
-        cmin = float(c.min())
 
         def forced_sets(kap, gap, sig, eps_sign=-1.0):
             """forced[A, y]: the hypothesis `gap < (1 - kap) sig - eps` holds (with a safety margin)."""
@@ -481,13 +491,13 @@ def t_witness_lower_bound(rng, trials):
 
         for kap in (kappa, kappa_eff):
             for gap in (gap_global, gap_anchor):
-                for sig, label in ((sigma, "per-y separation"), (cmin, "uniform separation")):
+                for sig, label in ((sigma, "per-y separation"), (sigma_u, "uniform separation")):
                     bad = valid[:, None] & forced_sets(kap, gap, sig) & ~Mk
                     if bad.any():
                         A, y = (int(v) for v in np.argwhere(bad)[0])
-                        sg = float(sigma[A, y]) if label.startswith("per") else cmin
+                        sg = float(sigma[A, y]) if label.startswith("per") else sigma_u
                         return False, dict(reason="forced configuration missing from a valid certificate (" + label + ")",
-                                           n_configs=N, c=c.tolist(), kappa=kap, eps=eps, f=f.tolist(), g=g.tolist(),
+                                           n_configs=N, d=D.tolist(), kappa=kap, eps=eps, f=f.tolist(), g=g.tolist(),
                                            anchors=[configs[a] for a in range(N) if Mk[A, a]], y=configs[y],
                                            gap=float(gap[A, y]), threshold=(1 - kap) * sg - eps)
         st["instances"] += 1
@@ -499,7 +509,7 @@ def t_witness_lower_bound(rng, trials):
         st["forced_nonempty"] += int(sel.sum())
         if sel.any():
             tight = min(tight, float((sizes[sel] / nf[sel]).min()))
-        nfu = int(forced_sets(kappa_eff, E - E.min(), cmin).sum())       # uniform forced set (same for all A)
+        nfu = int(forced_sets(kappa_eff, E - E.min(), sigma_u).sum())    # uniform forced set (same for all A)
         if nfu > 0:
             st["forced_nonempty_uniform"] += nv
             smallest = int(sizes[valid].min())
@@ -581,7 +591,7 @@ def t_query_model(rng, trials):
     return True, {}
 
 
-def _residual_data(rng, n, k, configs, plant=None):
+def _residual_data(rng, n, configs, plant=None):
     """Random published residual data for II.7: envelope constants c (multiples of 1/8, occasionally one
     negative) and a list of anchors (configuration, value), with values that are multiples of 1/8 so that
     consistency is decided exactly in floating point.  Sources of anchor values: an admissible hidden
@@ -637,7 +647,7 @@ def t_consistent_iff_nonempty(rng, trials):
         configs = all_configs(n, k)
         idx = {x: a for a, x in enumerate(configs)}
         N = len(configs)
-        c, anchors, duplicated = _residual_data(rng, n, k, configs, plant=planted[it] if it < len(planted) else None)
+        c, anchors, duplicated = _residual_data(rng, n, configs, plant=planted[it] if it < len(planted) else None)
         consistent = bool(np.all(c >= 0)) and all(vp - vq <= weighted_hamming(c, ap, aq)
                                                     for ap, vp in anchors for aq, vq in anchors)
         # the class as a linear feasibility problem in the k^n unknowns g(x)
@@ -1615,17 +1625,25 @@ def t_bnb_lower_bound(rng, trials):
         if abs(val - sum(leaf[dom[3 * q: 3 * q + 3]] for q in range(len(dom) // 3))) > 1e-7:
             return False, dict(reason="leaf bound does not decompose over the triangles", box=dom, lp_joint=val)
     n_boxes += len(lp_cache)
+    def show(d):
+        return " ".join(f"m={a}:{b}" for a, b in sorted(d.items()))
+
     # (2) power: with an UNSOUND elimination rule (dominance margin ignored) the search must find fewer leaves
     mutated = {nt: bnb_min_leaves_blocks(nt, nt, True, leaf, prune, unsound_prune=True) for nt in sorted(free)}
     if any(mutated[nt] >= 2 ** nt for nt in mutated):
-        return False, dict(reason="powerless: an unsound elimination rule did not reduce the number of leaves", **mutated)
-    # (3) with decomposition: one two-leaf certificate per triangle (bound 1 each), 2m leaves in total
+        return False, dict(reason="powerless: an unsound elimination rule did not reduce the number of leaves",
+                           leaves=show(mutated))
+    # (3) with decomposition (`sum` rule, as in `peelCert`): the instance is the termwise sum of its triangles;
+    #     each triangle alone is certified for the bound 1 by one branching and two dual leaves (never by a
+    #     single leaf), so the bound m = 1 + ... + 1 costs 2m leaves
     per_triangle = bnb_min_leaves_blocks(1, 1, True, leaf, prune)
     with_sum = {}
     for nt in sorted(free):
-        n, edges, h, J = triangles_tables(nt)
-        for q in range(nt):
-            sub = edges[3 * q: 3 * q + 3]            # sub-instance: triangle q alone (the parts add up to the instance)
+        n, edges = triangles_instance(nt)
+        parts = [edges[3 * q: 3 * q + 3] for q in range(nt)]
+        if sorted(e for part in parts for e in part) != sorted(edges):
+            return False, dict(reason="the triangles do not add up to the instance", m=nt)
+        for q, sub in enumerate(parts):
             if lp_bound(n, sub, _box((2,) * n)) >= 1 - 1e-7:
                 return False, dict(reason="a single leaf certifies a frustrated triangle", m=nt, triangle=q)
             for a in range(2):
@@ -1635,10 +1653,6 @@ def t_bnb_lower_bound(rng, trials):
         with_sum[nt] = nt * per_triangle
         if with_sum[nt] != 2 * nt or (nt >= 3 and with_sum[nt] >= free[nt]):
             return False, dict(reason="decomposed certificate does not have 2m leaves", m=nt, leaves=with_sum[nt])
-
-    def show(d):
-        return " ".join(f"m={a}:{b}" for a, b in sorted(d.items()))
-
     return True, dict(sum_free=show(free), sum_free_with_prune=show(pruned), with_decomposition=show(with_sum),
                       exhaustive_searches_equal_to_2_pow_K=n_searches, joint_boxes_validated=n_boxes,
                       valid_eliminations_per_triangle=int(sum(prune.values())), unsound_prune_mutation=show(mutated))
@@ -1795,16 +1809,18 @@ def _voxel_integral(lo, hi, beta, amp, freq, kappa):
     return g2, tol, disagreement / abs(g2)
 
 
-def _envelope_product(env, lo, hi, beta):
+def _envelope_product(env, lo, hi, beta, split=None):
     """prod_i int_{lo_i}^{hi_i} exp(-beta env_i(t)) dt by adaptive 1-D quadrature (scipy quad).
-    Returns (product, bound on its relative error from the quadrature error estimates)."""
+    Returns (product, bound on its relative error from the quadrature error estimates).  With `split`
+    every interval is first cut at lo_i + split * (hi_i - lo_i), which moves all quadrature nodes."""
     from scipy import integrate
     prod, rel = 1.0, 1e-12
     for i, fn in enumerate(env):
+        a, b = float(lo[i]), float(hi[i])
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", integrate.IntegrationWarning)
-            v, e = integrate.quad(lambda t: math.exp(-beta * fn(t)), float(lo[i]), float(hi[i]),
-                                  epsabs=0.0, epsrel=1e-12, limit=200)
+            v, e = integrate.quad(lambda t: math.exp(-beta * fn(t)), a, b, epsabs=0.0, epsrel=1e-12, limit=200,
+                                  points=None if split is None else [a + split * (b - a)])
         prod *= v
         rel += e / v
     return prod, rel
@@ -1875,9 +1891,10 @@ def t_separable_voxel(rng, trials):
 
     The d-dimensional integral is computed by tensor Gauss-Legendre rules of two orders (reference value)
     and by adaptive nested Gauss-Kronrod quadrature (`nquad`, error-controlled cross-check); the
-    one-dimensional envelope integrals by adaptive `quad`.  The reference value shares no grid with the
-    envelope integrals, so the inequalities are compared up to the quadrature error estimates only (a few
-    1e-11 relative) and can fail.  Envelopes: (A) phi_i, psi_i = a_i -+ kappa/d (the coupling is bounded by
+    one-dimensional envelope integrals by adaptive `quad` (for the ratio bound the two products are
+    computed on different nodes).  The reference value shares no grid with the envelope integrals, so
+    the inequalities are compared up to the quadrature error estimates only (a few 1e-11 relative) and
+    can fail.  Envelopes: (A) phi_i, psi_i = a_i -+ kappa/d (the coupling is bounded by
     kappa), (B) second-order Taylor envelopes with a diagonal Hessian enclosure; the hypothesis
     sum phi_i <= E <= sum psi_i of both is verified pointwise on sample points of the box.
     Power: deliberately INVALID envelopes (offset kappa/(4d); Taylor polynomial without Hessian
@@ -1932,8 +1949,19 @@ def t_separable_voxel(rng, trials):
             if not ok:
                 return False, dict(envelope=label, lower=lower, true=true, upper=upper, d=d, beta=beta, lo=lo.tolist(),
                                    hi=hi.tolist(), amp=amp.tolist(), freq=freq.tolist(), kappa=kappa, abs_tol=tol)
-            if upper > math.exp(beta * float(np.sum(w))) * lower * (1 + rel):
-                return False, dict(reason="ratio bound exp(beta * sum w_i) violated", envelope=label, lower=lower,
+            # ratio bound: its hypothesis psi_i <= phi_i + w_i is checked on a grid of every factor, and the
+            # lower product is recomputed on shifted nodes, so that the two sides of the comparison are not
+            # sums over the same quadrature nodes
+            for i in range(d):
+                t = np.linspace(lo[i], hi[i], 129)
+                if float(np.max(psis[i](t) - phis[i](t))) > w[i] + 1e-11 * (1.0 + abs(w[i])):
+                    return False, dict(reason="width hypothesis psi_i <= phi_i + w_i fails", envelope=label, axis=i, d=d)
+            lower2, rl2 = _envelope_product(psis, lo, hi, beta, split=0.381966)
+            if abs(lower2 - lower) > (rel + rl2) * lower:
+                return False, dict(reason="1-D quadratures of the same envelope integral disagree", envelope=label,
+                                   lower=lower, lower_shifted_nodes=lower2, d=d)
+            if upper > math.exp(beta * float(np.sum(w))) * lower2 * (1 + rel + rl2):
+                return False, dict(reason="ratio bound exp(beta * sum w_i) violated", envelope=label, lower=lower2,
                                    upper=upper, bound=math.exp(beta * float(np.sum(w))), d=d)
             checks += 1
             worst = max(worst, upper / lower)
