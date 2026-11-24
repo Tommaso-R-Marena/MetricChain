@@ -27,6 +27,8 @@ import proofs.Frontiers.ProductRates
 import proofs.Frontiers.BestFirst
 import proofs.Frontiers.ThermalRobustness
 import proofs.Frontiers.SecondOrderEnvelope
+import proofs.Frontiers.HigherOrderEnvelope
+import proofs.Frontiers.SampledSandwich
 import proofs.Frontiers.PartitionProduct
 import proofs.AuditCommand
 
@@ -233,6 +235,18 @@ import proofs.AuditCommand
 #print axioms MetricChain.secondOrder_envelope_exact
 #print axioms MetricChain.secondOrder_robust_min_exact
 #print axioms MetricChain.secondOrder_certified_minimizer_iff
+#print axioms MetricChain.anchored_decomposition
+#print axioms MetricChain.higherOrder_remainder
+#print axioms MetricChain.higherOrder_remainder_sharp
+#print axioms MetricChain.secondOrder_remainder_of_higherOrder
+#print axioms MetricChain.higherOrder_witness
+
+-- Probabilistic certificates: the sampled free-energy sandwich
+#print axioms MetricChain.sample_mgf
+#print axioms MetricChain.sample_mean_two_sided
+#print axioms MetricChain.sampled_free_energy_sandwich
+#print axioms MetricChain.sampled_free_energy_sandwich_good
+#print axioms MetricChain.sampled_free_energy_sandwich_of_sample_size
 
 -- Partition kernel with decomposition rules
 #print axioms MetricChain.zverify2_sound

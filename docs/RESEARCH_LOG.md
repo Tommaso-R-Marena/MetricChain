@@ -355,11 +355,12 @@ walked by the axiom audit).
 | `Frontiers/ThermalRobustness` | thermal contact interval (with and without evaluations), weight cone, slack forms of the envelope partition functions, transport–entropy inequality | **[V]** |
 | `Frontiers/SecondOrderEnvelope` | star remainder, pairwise sandwich, kernel statement, exact envelope, certified minimiser | **[V]** |
 | `Frontiers/PartitionProduct` | cut and elimination rules for the partition kernel, soundness, separations | **[V]** |
-| `Frontiers/SampledSandwich`, `Frontiers/HigherOrderEnvelope` | probabilistic free-energy certificate from independent samples; order-`m` anchored remainder | in progress at this checkpoint (not part of the audited tree) |
+| `Frontiers/HigherOrderEnvelope` | anchored decomposition, order-`m` remainder theorem with sharpness, consistency with order two | **[V]** (second checkpoint of the cycle) |
+| `Frontiers/SampledSandwich` | probabilistic free-energy certificate from independent samples of a product reference | **[V]** (second checkpoint of the cycle) |
 
 Paper-level only: the upper halves of the two exponent theorems (type covering), the converse
-half of the transport–entropy duality, the order-`m` remainder, the complexity-theoretic reading
-of the domination reduction.
+half of the transport–entropy duality, the complexity-theoretic reading of the domination
+reduction.
 
 **5. What was learned.**
 * The envelope cluster is one object seen five ways (a polytrope); nothing in it is new
@@ -396,7 +397,8 @@ of the domination reduction.
   between one linear functional and exponentially many pointwise evaluations (§11.6) says that
   the deterministic pointwise model is the wrong one for free energies.  A PAC-style kernel
   (sampled reference averages with verified concentration bounds) is the natural next
-  foundation; it was not started.
+  foundation; its first theorem, the sampled sandwich, is machine-checked (Theorem 11.21); the
+  kernel itself was not started.
 
 ### Resume here (state at the end of cycle 7)
 
@@ -412,9 +414,10 @@ authorised subsequent session should take up:
    source-coding exponent (Marton, Merhav) in disguise; attempt the interacting case, where the
    partition-function bound is the Shannon lower bound of a process rate–distortion function
    (theory report §12, item 1).
-3. **Probabilistic certificates.**  A sampled free-energy sandwich (harness XI.13) is being
-   formalised; a kernel that checks sampled reference averages against verified concentration
-   bounds, and the analogous statement for minimum energies, are not started.
+3. **Probabilistic certificates.**  The sampled free-energy sandwich (Theorem 11.21, harness
+   XI.13) is the first theorem; a kernel that checks sampled reference averages against
+   verified concentration bounds, and the analogous statement for minimum energies, are not
+   started.
 4. **Second-order envelopes with a real residual.**  Certified mixed-difference constants for
    one concrete residual; box-restricted constants; lower bounds on the number of evaluations
    (covering arrays).

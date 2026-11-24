@@ -518,6 +518,28 @@ the pair remainder at `y`.  For partition functions use the same two pairwise mo
 weight domain (`Z(E₀ + g_star + R) ≤ Z ≤ Z(E₀ + g_star − R)`, both certified by §6.3).  The
 constants `c_ij` are the producer's obligation; none are certified here for a concrete residual.
 
+**Step 4 — a probabilistic guarantee instead (free energies).**  When a statement that holds
+with probability `1 − δ` is acceptable, the free-energy difference between the target and a
+*product* reference `μ₀` (e.g. the one-body part of `E₀`, whose `Z₀` is explicit) needs only
+`N ≥ C ln(2/δ) / (2η²)` evaluations of the residual, `C = Σ_i c_i²`:
+
+```
+SAMPLED-SANDWICH(product reference p, residual oracle Δ, constants c_i, beta, eta, delta):
+  N ← ceil( C · ln(2/delta) / (2 eta²) )
+  the VERIFIER draws x⁽¹⁾ … x⁽ᴺ⁾ independently from p        # not the producer
+  m̂ ← (1/N) Σ_k Δ(x⁽ᵏ⁾)                                     # N oracle calls
+  return  ln(Z/Z₀) ∈ [ −β m̂ − |β| eta ,  −β m̂ + |β| eta + β² C / 8 ]
+```
+
+Guarantee: the interval contains `ln(Z/Z₀)` except on a set of sample tuples of probability at
+most `δ` (`sampled_free_energy_sandwich_of_sample_size`).  Two cautions.  (i) The probability is
+over the *sampler's* randomness: the statement is meaningless if the party that wants to
+convince chooses the sample points, so the samples must be drawn by the verifier (or from a
+committed seed); the verified kernels of this repository do not implement such a protocol.
+(ii) The width `β²C/8` is extensive, as in §6.4; the statement is useful when `β c_i` is small or
+after localisation.  For comparison, a deterministic certificate of the same accuracy from
+pointwise evaluations needs exponentially many of them (theory report §11.6, §11.9).
+
 ---
 
 ## 7. Envelope-exporting equivariant residuals

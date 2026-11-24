@@ -89,8 +89,9 @@ Certificates are coverings in a slack quasi-metric with radii equal to the point
 optimality gaps; with only a first-order envelope, on product landscapes one evaluation suffices
 iff every site is sharp and otherwise exponentially many are needed, with an exact exponent
 (a rate–distortion function); at finite temperature the same formula holds with the energy gap
-replaced by the free-energy gap of a macrostate, and the count is at least the exponential of
-the entropy; minimal certificates are NP-hard to find and best-first search is competitive only
+replaced by the free-energy gap of a macrostate (a corollary of a known source-coding theorem
+on exponential moments of distortion), and the count is at least the exponential of the
+entropy; minimal certificates are NP-hard to find and best-first search is competitive only
 with covers at shrunk radii.  The way out is the order of the envelope: with bounded mixed
 second differences, `n(k−1)+1` evaluations give an exact reduction to the pairwise kernel.  The
 one-shot lower bounds, the search guarantee and the second-order reduction are machine-checked;

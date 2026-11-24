@@ -1072,8 +1072,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 * **The exponent theorems of §11 are half formal.**  The lower bounds (Theorems 11.8, 11.13 and
   their product forms) are machine-checked for every system size; the matching upper bounds
   (Theorems 11.9, 11.15) are paper proofs through the type covering lemma, for independent sites
-  of finitely many types, and were checked numerically only.  Theorem 11.18 (order `m`) is a
-  paper proof with a harness test.
+  of finitely many types, and were checked numerically only.
 * **Certificate size is not algorithmic cost.**  §11 counts residual evaluations.  Finding a
   small certificate is NP-hard (Theorem 11.10), no search procedure is instance-optimal
   (`DEAD_ENDS.md` D26), and checking a certificate on a product space is itself a pairwise
@@ -1086,7 +1085,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   dichotomy, the Taylor step and the complexity count for second-order voxels,
   dependent-reference sandwiches and Rio's sharp function, the Procrustes–Gram corollary, the
   converse (Donsker–Varadhan) half of Theorem 11.14, the upper bounds of Theorems 11.9 and
-  11.15, Theorem 11.18, and the complexity-theoretic reading of Theorem 11.10.
+  11.15, and the complexity-theoretic reading of Theorem 11.10.
 * **Certified numerics outside Lean.**  Eigenvalue enclosures needed to *evaluate* the spectral
   bound of §4.1 on data are standard verified numerics but are not part of the development.
 
@@ -1124,6 +1123,8 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/BestFirst.lean` | `IsBestFirstRun`, `bestFirst_sep_a`, `bestFirst_sep_b`, `bestFirst_sep_c`, `not_cocovered`, `bestFirst_card_le_of_quasiSymm`, `bestFirst_card_le`, `bestFirst_certifies`, `bestFirst_card_le_sharp` |
 | `proofs/Frontiers/ThermalRobustness.lean` | `gibbsProb`, `gibbsProb_le_contact`, `gibbsProb_ge_sharp`, `gibbsProb_range_eq`, `gibbsProb_range_with_anchors_eq`, `admissible_iff_weights`, `Zhi_eq`, `Zlo_eq`, `Zhi_le_of_bracket`, `mean_slack_le`, `card_ge_laplace`, `transport_le`, `logMGF_eq_tilt`, `logMGF_le_transport_entropy`, `gap_le_of_T1` |
 | `proofs/Frontiers/SecondOrderEnvelope.lean` | `MixedDiffBound`, `starPart`, `pairRemainder`, `secondOrder_remainder`, `starPart_eq_of_additive`, `lowerModel`, `upperModel`, `pairwise_sandwich`, `verify_sound_secondOrder`, `secondOrder_envelope_exact`, `secondOrder_certified_minimizer_iff`, `secondOrder_witness` |
+| `proofs/Frontiers/HigherOrderEnvelope.lean` | `mixedDiff`, `HigherDiffBound`, `anchoredInterp`, `anchored_decomposition`, `higherOrder_remainder`, `higherOrder_remainder_of_vanish`, `higherRemainder_higherDiffBound`, `higherOrder_remainder_sharp`, `secondOrder_remainder_of_higherOrder`, `higherOrder_witness` |
+| `proofs/Frontiers/SampledSandwich.lean` | `sampleWeight`, `empMean`, `sample_mgf`, `sample_mean_two_sided`, `sandwich_of_mean_estimate`, `sampled_free_energy_sandwich`, `sampled_free_energy_sandwich_good`, `sampled_free_energy_sandwich_of_sample_size` |
 | `proofs/Frontiers/PartitionProduct.lean` | `ZCert2`, `zverify2`, `zverify2_sound`, `zverify2Top_sound`, `WInstance.Z_cut`, `WInstance.Z_cut_eq`, `WInstance.Z_elim1`, `WInstance.Z_elim2`, `chainCert`, `zverify2Top_chainCert`, `zverify2_elementary_exact_leaves`, `cut_rule_separation`, `elimination_separation`, `chain_separation`, `ferroChain_separation`, kernel-evaluated instances (`twoTriangles_cut_exact`, `chain_elim_exact`, `tree_elim_exact`, `ring_elim_exact`) |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
@@ -1148,18 +1149,21 @@ lower bounds on certificate size* — and that is what the second phase pursued 
 | G4 | **Dichotomy and exact exponent on product landscapes**: one evaluation suffices iff every site is sharp; otherwise the minimal certificate grows like `exp(n R*)`, `R* = max_P R(P; s − gap, 0)` | `product_single_certificate_iff`, `product_exp_weights`, `binary_certificate_exponential` **[V]** (lower bound, every `n`); upper bound **[P]** (type covering) | **no match found**; an application of the type covering lemma |
 | G5 | **Hardness**: minimal exact certificates contain minimum dominating sets | `domCertificate_card`, `domCertificate_min_card` **[V]** | immediate; known in spirit (k-center) |
 | G6 | **Best-first search with resource augmentation**: at most `\|C\| + 1` evaluations for every cover `C` at radii `θ(gap + ε/6)`, `θ = (1−κ)/(4(1+κ))`; augmentation is necessary | `bestFirst_card_le`, `bestFirst_certifies`, `bestFirst_card_le_sharp` **[V]** | **partially known** (dimension one without augmentation; `ℝ^d` with doubling constants); the dimension-free metric form was not found |
-| G7 | **Finite temperature**: thermal contact interval; free-energy certificates are quantizers of the Gibbs ensemble in exponential slack distortion; entropy bound; Hölder exponential-weights converse; exact exponent `R_β = max_Q R(Q; s, (F[Q] − F))` | `gibbsProb_range_eq`, `mean_slack_le`, `card_ge_entropy`, `thermal_exp_weights`, `thermal_product_exp_weights`, `thermal_binary_exponential` **[V]**; exponent formula **[P]** | contact interval and fixed-`β` duality **known in spirit**; certificate size through the rate–distortion function of the Gibbs ensemble: no match found |
-| G8 | **Second-order envelopes**: with bounded mixed differences, `n(k−1)+1` evaluations on a star give an exact pairwise sandwich; the extremal extensions are pairwise models; certified-minimiser criterion; order `m` in general | `secondOrder_remainder`, `pairwise_sandwich`, `verify_sound_secondOrder`, `secondOrder_envelope_exact`, `secondOrder_certified_minimizer_iff` **[V]**; order `m` **[P]** | anchored (cut-HDMR) decomposition **known**; as a certified uncertainty class with an exact reduction to the pairwise kernel: no match found |
+| G7 | **Finite temperature**: thermal contact interval; free-energy certificates are quantizers of the Gibbs ensemble in exponential slack distortion; entropy bound; Hölder exponential-weights converse; exact exponent `R_β = max_Q R(Q; s, (F[Q] − F))` | `gibbsProb_range_eq`, `mean_slack_le`, `card_ge_entropy`, `thermal_exp_weights`, `thermal_product_exp_weights`, `thermal_binary_exponential` **[V]**; exponent formula **[P]** | contact interval and fixed-`β` duality **known in spirit**; the exponent formula is a corollary of Merhav's (2011) theorem on exponential moments of distortion; the identification of certificate size with it, and the one-shot converses: no match found |
+| G8 | **Second-order envelopes**: with bounded mixed differences, `n(k−1)+1` evaluations on a star give an exact pairwise sandwich; the extremal extensions are pairwise models; certified-minimiser criterion; order `m` in general | `secondOrder_remainder`, `pairwise_sandwich`, `verify_sound_secondOrder`, `secondOrder_envelope_exact`, `secondOrder_certified_minimizer_iff`, `higherOrder_remainder`, `higherOrder_remainder_sharp` **[V]** | anchored (cut-HDMR) decomposition **known**; as a certified uncertainty class with an exact reduction to the pairwise kernel: no match found |
+| G10 | **Sampled free-energy sandwich**: `N` independent samples of a product reference pin `ln(Z/Z₀)` to `±\|β\|η + β²Σc_i²/8` outside an event of probability `2e^{−2Nη²/Σc_i²}` — polynomially many random evaluations where deterministic certification needs exponentially many | `sample_mean_two_sided`, `sampled_free_energy_sandwich`, `sampled_free_energy_sandwich_of_sample_size` **[V]** | standard concentration (Chernoff bound for a sub-Gaussian mean); stated as the constructive counterpart of G7 |
 | G9 | **Compositional partition kernel**: cut rule and elimination rule (exact on every chain, with one leaf), with exponential separations from the elementary rules for every chain length | `zverify2_sound`, `WInstance.Z_cut`, `cut_rule_separation`, `WInstance.Z_elim1`, `WInstance.Z_elim2`, `zverify2Top_chainCert`, `chain_separation`, `ferroChain_separation` **[V]** | repair of the kernel; variable elimination is classical; the separation is the formal counterpart of E2 at finite temperature |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
-(i) the exact exponent of certificate complexity on product landscapes with its dichotomy (G4)
-and its finite-temperature counterpart, in which the energy gap is replaced by the free-energy
-gap of a macrostate (G7); (ii) the dimension-free form of the best-first bound (G6); (iii)
-second-order envelope classes as a certified interface with a lossless pairwise reduction (G8).
-Each rests on textbook tools (type covering, Hölder, telescoping); the proofs are short.  §12
-says what a publication would still need.
+(i) the identification of certificate complexity on product landscapes with a rate–distortion
+exponent, its dichotomy (G4), and the finite-temperature counterpart in which the energy gap is
+replaced by the free-energy gap of a macrostate (G7) — the exponent formulas themselves are
+applications of the type covering lemma and, at finite temperature, of a known theorem of
+source coding; (ii) the dimension-free form of the best-first bound (G6); (iii) second-order
+envelope classes as a certified interface with a lossless pairwise reduction (G8).  Each rests
+on textbook tools (type covering, Hölder, telescoping); the proofs are short.  §12 says what a
+publication would still need.
 
 ---
 
@@ -1515,10 +1519,21 @@ numerically (the two sides agree to `10⁻³` on a grid; `R_β = 0.666, 0.482, 0
 `β = 1, 4, 40` for `e/c = 1/2`, approaching `R* = 0.188`, benchmark B8; harness XI.8 tests the
 one-shot converse on every evaluated set of small instances).  For the sharp site of the
 example above the exponent is `R_β = 0.514` (entropy `0.500`); the verified one-shot bound with
-uniform weights gives `ln(6/5) = 0.182`.  The optimum exponent for the exponential
-moment of a distortion is a known object of source coding (Marton's exponent; exponential
-moments of a loss, Merhav) **[K, not checked in detail]**; its identification with the
-complexity of certifying a free energy was not found (`prior_art/L4` C9, `prior_art/L6` T6).
+uniform weights gives `ln(6/5) = 0.182`.
+
+*Attribution.*  The upper bound is an instance of a known source-coding theorem.  Merhav
+("On optimum strategies for minimizing the exponential moments of a given cost function",
+arXiv:1103.2882, 2011) shows that for fixed-rate lossy coding of a memoryless source `P` the
+optimum exponential rate of `E exp(α n d)` is `max_Q [α D_Q(R) − D(Q‖P)]`, `D_Q(R)` the
+distortion–rate function of `Q`, by type covering; the formula for `R_β` is the rate at which
+this exponent vanishes for `P = π`, `α = β`, `d = s`.  (The guessing exponent
+`max_Q [ρ R(D;Q) − D(Q‖P)]` of Arikan–Merhav 1998 is the same kind of object.)  We read the
+general theorem and its variational identity in the paper; the rate–distortion example was
+available to us only through an automatic summary, so its exact conditions are **[K, not
+verified in detail]**.  What was not found is the identification — the complexity of
+certifying a free energy under an envelope *is* this exponent, with the distortion budget of a
+macrostate equal to its free-energy gap — and the one-shot converse of Theorem 11.13
+(`prior_art/L4` C9, `prior_art/L6` T6).
 
 *The contrast with linear information.*  One reference average `⟨Δ⟩₀` — a single *linear*
 functional of the residual — pins `ln Z` to within `β² Σ c_i²/8` (Theorem 3.1), and `N` random
@@ -1528,7 +1543,7 @@ the size of the state space **[K]**.  Deterministic point-wise certification to 
 Theorem 11.13(b), `n⁻¹ ln |A| ≥ H(π) − ln(1 + (k−1)e^{−t(1−κ)c}) − tε₁/β` for every `t` — which
 includes the accuracy `β²c²/8` per site of the sandwich when `βc` is small.  The exponential
 price is the price of *deterministic pointwise* information under a first-order envelope, not
-of the problem.
+of the problem; Theorem 11.21 (§11.9) is the machine-checked randomised statement.
 
 ### 11.7 Second-order envelopes: the way out
 
@@ -1564,11 +1579,16 @@ residual of the class iff it minimises its own lower pairwise model
 *measured* single-site excitation energies of the full energy compete with the pair constants
 `c_ij` only.  Harness XI.11 confirms exactness against a linear program over the whole class.
 
-**Theorem 11.18 (order `m`) [P; harness XI.10].**  If all mixed differences of order `m` over a
-set `T` of sites are bounded by `c_T`, then the anchored interpolant `I_{m−1} g` of order `m−1`
-(the truncated cut-HDMR / many-body expansion at `x₀`, which uses `g` on the Hamming ball of
-radius `m−1`) satisfies `|g(x) − I_{m−1}g(x)| ≤ Σ_{T ⊆ changed sites, |T| = m} c_T`, and the bound
-is attained by a member of the class with the same ball data.  *Proof.*  `h = g − I_{m−1}g`
+**Theorem 11.18 (order `m`) [V] (`HigherOrderEnvelope.lean`; harness XI.10).**  If all mixed
+differences of order `m` over a set `T` of sites are bounded by `c_T` (`HigherDiffBound`), then
+the anchored interpolant `I_{m−1} g` of order `m−1` (`anchoredInterp`: the truncated cut-HDMR /
+many-body expansion at `x₀`, which uses `g` on the Hamming ball of radius `m−1` and is exact
+there, `anchoredInterp_eq_of_card_lt`, by the Möbius identity `anchored_decomposition`)
+satisfies `|g(x) − I_{m−1}g(x)| ≤ Σ_{T ⊆ changed sites, |T| = m} c_T` (`higherOrder_remainder`),
+and for nonnegative constants the bound is attained at every configuration by a member of the
+class with the same ball data (`higherOrder_remainder_sharp`).  For `m = 2` it is Theorem 11.16
+(`secondOrder_remainder_of_higherOrder`); a three-site instance of order three is
+`higherOrder_witness`.  *Proof.*  `h = g − I_{m−1}g`
 vanishes on the ball and has the same order-`m` differences.  Induct on `m` and on the number
 `w` of changed sites: for a changed site `j`, `|h(x)| ≤ |h(x with j reset)| + |D_j h|`, and
 `D_j h`, as a function of the other sites, vanishes on the ball of radius `m−2` and has
@@ -1620,6 +1640,43 @@ and these two rules are the same idea in two semirings; what remains open is a l
 certificates that *do* use decomposition rules on frustrated connected families, and a
 comparison with proof systems for model counting.  Harness XI.12.
 
+### 11.9 Probabilistic certificates: the sampled sandwich
+
+The lower bounds of §11.6 concern deterministic certificates built from pointwise evaluations.
+Randomised evaluation of a *linear* functional of the residual behaves differently.
+
+**Theorem 11.21 (sampled free-energy sandwich) [V] (`SampledSandwich.lean`).**  Let
+`μ₀ = ⊗_i p_i` be a product reference on `n` sites, `Δ` a residual with bounded differences
+`c_i`, `C = Σ_i c_i²`, and let `x⁽¹⁾, …, x⁽ᴺ⁾` be independent samples of `μ₀` with empirical mean
+`m̂ = N⁻¹ Σ_k Δ(x⁽ᵏ⁾)`.  Then
+
+    P( |m̂ − ⟨Δ⟩₀| ≥ η ) ≤ 2 exp(−2Nη²/C)                              (`sample_mean_two_sided`),
+
+and outside an event of at most that probability
+
+    −β m̂ − |β| η  ≤  ln(Z/Z₀)  ≤  −β m̂ + |β| η + β² C/8                 (`sampled_free_energy_sandwich`, `sampled_free_energy_sandwich_good`).
+
+Hence `N ≥ C ln(2/δ)/(2η²)` samples give confidence `1 − δ`
+(`sampled_free_energy_sandwich_of_sample_size`), and one sample size works for all alphabets,
+all numbers of sites, all product references and all residuals with `Σ c_i² ≤ C₀`
+(`exists_sampled_sandwich_sample_size`): the number of evaluations does not depend on the
+number of states.  The proof is the Chernoff bound for
+the sum of `N` independent copies, each sub-Gaussian by the tensorisation lemma behind
+Theorem 3.1(c); probabilities are finite sums over sample tuples.  Harness XI.13 (exact
+enumeration of sample tuples).
+
+*The contrast, on one instance.*  Take the landscape of `thermal_binary_exponential`: `n`
+two-state sites, excitation energy `2`, envelope constants `1`, `β = ln 2`, the known part as
+the (product) reference.  A deterministic certificate of `ln Z` to within `ε` needs at least
+`e^{−ε} (6/5)ⁿ` evaluations (Theorem 11.15).  The sampled sandwich has width
+`β²C/8 + 2βη = 0.0601 n + 1.39 η`; at that accuracy the deterministic bound is still
+`exp(0.122 n − 1.39 η)`, whereas `n ln(2/δ)/(2η²)` samples suffice with confidence `1 − δ`.
+So the exponential price of §11.6 is the price of *deterministic pointwise* certification under
+a first-order envelope: a probabilistic guarantee from a reference average costs polynomially
+many evaluations.  The verified kernels do not check randomness; a kernel for such
+probabilistic certificates (sampled averages with verified concentration bounds) is the natural
+next foundation and is not built here.
+
 ---
 
 ## 12. Strongest unresolved questions, and what a publication would need
@@ -1640,8 +1697,10 @@ comparison with proof systems for model counting.  Harness XI.12.
    for binary symmetric Markov sources (Gray 1970), and strictly larger otherwise.  None of this
    is proved here; for independent sites the same remark explains when the Boltzmann choice of
    weights in Theorem 11.8 is optimal (two-state sites: always) and when general weights are
-   needed.  (d) a check against the source-coding literature on exponential moments of
-   distortion, which the last literature pass could not read in detail.
+   needed.  (d) a careful comparison with the source-coding literature on exponential moments
+   of distortion and on guessing (Merhav 2011; Arikan–Merhav 1998): Theorem 11.15 is a
+   corollary of the former, read here only in part; whether the zero-temperature statement with
+   its credit distortion and the dichotomy also appear there in some form is not settled.
 2. **Algorithms.**  On product landscapes plain enumeration after differential dead-end
    elimination (fix every white-box-sharp site, enumerate the others) uses
    `∏_{non-sharp} k_i` evaluations, which is polynomial in `N_cov ≥ exp(Σ_{non-sharp} r_i)` but
@@ -1730,7 +1789,8 @@ recovery: Piyavskii (1972); Shubert (1972); Danilin (1971); Sukharev (1971); Han
 (1977); Traub, Wasilkowski, Woźniakowski (1988); Munos (2011); Bouttier, Cesari, Gerchinovitz
 (2020); Bachoc, Cesari, Gerchinovitz (2021); Plesník (1987); Gørtz & Wirth (2006).  Covering and
 rate–distortion: Lovász (1975); Chvátal (1979); Csiszár (1974; 1998); Csiszár & Körner (2011,
-Lemma 9.1); Kostina & Verdú (2012); Polyanskiy & Wu (2025); Merhav (2025).  Transport–entropy:
+Lemma 9.1); Kostina & Verdú (2012); Polyanskiy & Wu (2025); Arikan & Merhav (1998, guessing
+subject to distortion); Merhav (2011, exponential moments of a cost function; 2025).  Transport–entropy:
 Marton (1996); Bobkov, Houdré, Tetali (2006); Alon, Boppana, Spencer (1998); Gozlan & Léonard
 (2007; 2010); Djellout, Guillin, Wu (2004); Paulin (2015).  Robust Bayes and ratio classes:
 DeRobertis & Hartigan (1981); Wasserman (1992); Walley (1997); Kairouz, Oh, Viswanath (2016).
