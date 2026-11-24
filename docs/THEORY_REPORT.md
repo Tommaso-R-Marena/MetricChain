@@ -40,7 +40,7 @@ output is stored in `benchmarks_output.txt`.
 |---|---|---|---|
 | A1 | **Contact-set theorem**: `x` can be optimal for some admissible residual ⇔ `E₀(x) ≤ E₀(y) + d(y,x) ∀y` | `robust_minimizer_iff` **[V]** | elementary (McShane/Lipschitz duality); formulation for dominance pruning with a black-box residual: no match found |
 | A2 | **Sharp-minimum theorem**: `x` optimal for every admissible residual ⇔ `d(x,y) ≤ E₀(y) − E₀(x) ∀y` | `robust_certified_iff` **[V]** | as A1 |
-| A3 | **Query-model theorem**: with evaluated anchors, `x` can be optimal ⇔ contact ∧ `E₀(x)+L(x) ≤ E₀(y)+U(y) ∀y` (`L, U` McShane envelopes) | `robust_minimizer_with_anchors_iff` **[V]** | optimality statement for pruning intervals not found in the literature (iMinDEE is the one-anchor, discrete-envelope case) |
+| A3 | **Query-model theorem**: with evaluated anchors, `x` can be optimal ⇔ contact ∧ `E₀(x)+L(x) ≤ E₀(y)+U(y) ∀y` (`L, U` McShane envelopes) | `robust_minimizer_with_anchors_iff` **[V]** | optimality statement for pruning intervals not found in the literature (iMinDEE's pruning interval is the special case of a one-sided bound and one evaluated conformation) |
 | A4 | **Exact robust interval** for `min(E₀+Δ)` and for `Z_β(E₀+Δ)`, all β | `robust_min_bracket`, `robust_partition_bracket` **[V]** | elementary; not found stated |
 | A5 | **Witness-size lower bound**: an ε-certificate must evaluate the residual on every state with gap `< (1−κ)σ − ε` | `anchor_necessary`, `anchor_card_lower_bound` **[V]** | discrete counterpart of certified Lipschitz optimisation bounds; not found for structured discrete landscapes |
 | A6 | Energy window is the exact limit with global bounds only | `energy_window_exact` **[V]** | known in spirit (energy-window DEE); exactness statement makes the "bottleneck" information-theoretic |
@@ -229,10 +229,13 @@ admissible; `g = v` on `A` because `γ + d(a,x) ≥ v(a)`; `g(x) = γ` because `
 
 The set violating one of the two conditions is therefore the **exact** set of configurations that
 may be discarded after the given evaluations.  For an anchor `y` the second condition reads
-"optimistic value of `x` ≤ evaluated value of `y`", i.e. *lower bound ≤ incumbent*: with one
-anchor and the discrete envelope this is the pruning interval of minimised DEE (iMinDEE), which
-Theorem 2.6 shows to be optimal in the query model and extends to arbitrary envelopes and any
-number of evaluations.
+"optimistic value of `x` ≤ evaluated value of `y`", i.e. *lower bound ≤ incumbent*.  The pruning
+interval of minimised DEE (iMinDEE) is the special case in which the only envelope information
+is a one-sided bound `Δ ≥ lo` — a virtual anchor `x₀` with `v(x₀) = lo`, `d(x₀, ·) = 0` and
+`d(·, x₀)` large, which is why envelopes are allowed to be asymmetric — and one conformation has
+been evaluated: then `L ≡ lo` off the anchor and condition 2 is `E₀(x) + lo ≤ E(x̂)`.
+Theorem 2.6 shows that this rule is optimal in the query model and extends it to arbitrary
+envelopes and any number of evaluations.
 
 **Corollaries [V].**
 * *Energy window* (`energy_window_exact`): with global bounds only, `x` can be optimal iff
@@ -305,6 +308,12 @@ same rule is checked factor by factor (`PruneZOK`, `zprune_sound` **[V]**): if
 `Z ≤ (1 + q₀ ∏_j q_j) Z'`.  Rounds compose multiplicatively, so a pruning schedule with margins
 `γ_k` certifies `0 ≤ ln Z − ln Z_pruned ≤ Σ_k ln(1 + m_k e^{−βγ_k})` (`m_k` states mapped to one
 survivor in round `k`).
+
+*Observables.*  The same margin controls ensemble averages: if the pruned set carries at most
+the fraction `ρ` of the survivors' weight, every observable bounded by `B` changes its Boltzmann
+average by at most `2Bρ`; for a dominance step, by at most `2B e^{−βγ}`
+(`boltzmannAvg_prune_error`, `boltzmannAvg_dominance_error` **[V]**; harness I.5).  Certified
+pruning therefore gives certified ensemble properties, not only free energies.
 
 ### 3.2 The free-energy sandwich
 
@@ -670,8 +679,9 @@ no compiler in the trusted base, no extra axioms): `triangle_verified`, `triangl
 ### 6.2 Verification cost and witness size
 
 Each `leaf`, `prune`, `sum` node is checked by one pass over the instance tables restricted to
-the current domains — `O(Σ_i |D_i| + Σ_{i≠j} |D_i||D_j|)` rational comparisons — and a `branch`
-node by one list traversal; the verifier never minimises or searches.  A node's witness is the
+the current domains — `O(Σ_i |D_i| + Σ_{i≠j} |D_i||D_j|)` rational comparisons, i.e.
+`O(Σ_i |D_i|·deg(i) + Σ_{i≠j} |D_i||D_j|)` arithmetic operations including the message sums —
+and a `branch` node by one list traversal; the verifier never minimises or searches.  A node's witness is the
 dual solution (`O(nk)` messages per neighbour pair) or `O(n)` link bounds.  This is the regime
 "large witness, linear-time check"; a witness without dual solutions would be smaller but force
 the checker to solve an LP (the hint trade-off familiar from LRAT-style proof formats).
@@ -782,7 +792,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Core/Basic.lean` | `partitionFn`, `freeEnergy`, `partitionFn_anti`, `freeEnergy_mono` |
 | `proofs/Core/Rounding.lean` | `roundDown_le`, `le_roundUp`, `roundUp_sub_roundDown_le`, `QInterval.contains_add/mul/sq/inv/outward`, `exp_enclosure`, `contains_exp`, `contains_boltzmann`, `circle_rational_atlas`, `contains_circParam` |
 | `proofs/Frontiers/EnvelopeDuality.lean` | `robust_minimizer_iff`, `robust_certified_iff`, `lowerEnv_admissible`, `upperEnv_admissible`, `robust_min_bracket`, `robust_partition_bracket`, `robust_minimizer_with_anchors_iff`, `anchor_necessary`, `anchor_card_lower_bound`, `admissible_of_single_site`, `differential_dee_sound`, `energy_window_exact` |
-| `proofs/Frontiers/Dominance.lean` | `partition_transport`, `partition_prune_bracket`, `freeEnergy_prune_bracket`, `min_transport`, `thermal_dee`, `isLeast_sum_of_block_separable`, `exact_margin_of_block_separable`, `PairModel.energy_update`, `goldstein_isLeast`, `goldstein_gauge_invariant`, `exactMargin_reparam`, `desmet_reparam_le`, `desmet_optimalGauge` |
+| `proofs/Frontiers/Dominance.lean` | `partition_transport`, `partition_prune_bracket`, `freeEnergy_prune_bracket`, `min_transport`, `thermal_dee`, `boltzmannAvg_dominance_error`, `isLeast_sum_of_block_separable`, `exact_margin_of_block_separable`, `PairModel.energy_update`, `goldstein_isLeast`, `goldstein_gauge_invariant`, `exactMargin_reparam`, `desmet_reparam_le`, `desmet_optimalGauge` |
 | `proofs/Frontiers/FreeEnergySandwich.lean` | `gibbs_bogoliubov`, `hoeffding_upper`, `free_energy_sandwich`, `partition_ratio_sandwich`, `bounded_differences_sandwich`, `additive_extremal`, `exists_two_level_worst_residual`, `balanced_additive_gap`, `log_cosh_bounds`, `mcdiarmid_no_better_constant` |
 | `proofs/Frontiers/HolderDecomposition.lean` | `partitionFn_holder`, `freeEnergy_holder` |
 | `proofs/Frontiers/PartitionCertificate.lean` | `zverify`, `zverify_sound`, `zprune_sound`, `Z_encloses_partitionFn`, `triangleZ_exact` |

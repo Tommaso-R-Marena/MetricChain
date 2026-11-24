@@ -74,6 +74,8 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.partition_transport
 #print axioms MetricChain.freeEnergy_prune_bracket
 #print axioms MetricChain.thermal_dee
+#print axioms MetricChain.boltzmannAvg_prune_error
+#print axioms MetricChain.boltzmannAvg_dominance_error
 #print axioms MetricChain.isLeast_sum_of_block_separable
 #print axioms MetricChain.exact_margin_of_block_separable
 #print axioms MetricChain.PairModel.goldstein_isLeast

@@ -233,6 +233,32 @@ def t_split_dominance(rng, trials):
     return True, {}
 
 
+@conjecture("I.5 Thermal pruning changes any Boltzmann average of |f| <= B by at most 2 B exp(-beta*gamma)")
+def t_observable_error(rng, trials):
+    worst = 0.0
+    for _ in range(trials):
+        n, k = int(rng.integers(2, 5)), int(rng.integers(2, 4))
+        h, J = random_pairwise(rng, n, k)
+        beta = float(rng.uniform(0.05, 4.0))
+        i = int(rng.integers(n))
+        r, t = rng.choice(k, size=2, replace=False).tolist()
+        domains = [list(range(k)) for _ in range(n)]
+        gamma = goldstein(h, J, i, r, t, domains)
+        configs = all_configs(n, k)
+        fvals = {x: float(rng.uniform(-1, 1)) for x in configs}
+        B = max(abs(v) for v in fvals.values())
+        wts = {x: math.exp(-beta * energy(h, J, x)) for x in configs}
+        full = sum(wts[x] * fvals[x] for x in configs) / sum(wts.values())
+        keep = [x for x in configs if x[i] != r]
+        pruned = sum(wts[x] * fvals[x] for x in keep) / sum(wts[x] for x in keep)
+        bound = 2 * B * math.exp(-beta * gamma)
+        if abs(full - pruned) > bound * (1 + 1e-9) + 1e-12:
+            return False, dict(diff=abs(full - pruned), bound=bound, gamma=gamma, beta=beta)
+        if bound > 0:
+            worst = max(worst, abs(full - pruned) / bound)
+    return True, dict(max_fraction_of_bound=worst)
+
+
 @conjecture("I.4 Exact dominance with chain-local 3-body terms factorises over the blocks of the link graph")
 def t_block_separable(rng, trials):
     for _ in range(max(20, trials // 4)):

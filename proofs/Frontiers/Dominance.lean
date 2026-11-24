@@ -102,6 +102,76 @@ theorem min_transport {γ : ℝ} (hγ : 0 ≤ γ) (E : Ω → ℝ) {A S : Finset
   · exact ⟨T x, hmaps x hA, by have := hdom x hA; linarith⟩
   · exact ⟨x, hS, le_rfl⟩
 
+/-- Boltzmann average of an observable `f` over a finite configuration set. -/
+noncomputable def boltzmannAvg (β : ℝ) (E f : Ω → ℝ) (S : Finset Ω) : ℝ :=
+  (∑ x ∈ S, Real.exp (-β * E x) * f x) / partitionFn β E S
+
+/-- **Ensemble averages under pruning.**  If the pruned set `A` carries at most the fraction `ρ`
+of the Boltzmann weight of the survivors `S`, every observable bounded by `B` changes its
+Boltzmann average by at most `2 B ρ` when `A` is discarded. -/
+theorem boltzmannAvg_prune_error {β ρ B : ℝ} (E f : Ω → ℝ) {A S : Finset Ω}
+    (hdisj : Disjoint A S) (hS : S.Nonempty)
+    (hρ : partitionFn β E A ≤ ρ * partitionFn β E S) (hB : ∀ x ∈ A ∪ S, |f x| ≤ B) :
+    |boltzmannAvg β E f (A ∪ S) - boltzmannAvg β E f S| ≤ 2 * B * ρ := by
+  have hZS : 0 < partitionFn β E S := partitionFn_pos β E hS
+  have hZA : 0 ≤ partitionFn β E A := partitionFn_nonneg β E A
+  have hB0 : 0 ≤ B := by
+    obtain ⟨x, hx⟩ := hS
+    exact le_trans (abs_nonneg _) (hB x (Finset.mem_union_right A hx))
+  have hρ0 : 0 ≤ ρ := by
+    by_contra hneg
+    have hlt : ρ < 0 := not_le.mp hneg
+    nlinarith
+  have hnum : ∀ T : Finset Ω, T ⊆ A ∪ S →
+      |∑ x ∈ T, Real.exp (-β * E x) * f x| ≤ B * partitionFn β E T := by
+    intro T hT
+    unfold partitionFn
+    rw [Finset.mul_sum]
+    refine le_trans (Finset.abs_sum_le_sum_abs _ _) (Finset.sum_le_sum fun x hx => ?_)
+    rw [abs_mul, abs_of_pos (Real.exp_pos _), mul_comm]
+    exact mul_le_mul_of_nonneg_right (hB x (hT hx)) (Real.exp_pos _).le
+  have hNA := hnum A Finset.subset_union_left
+  have hNS := hnum S Finset.subset_union_right
+  have havgU : boltzmannAvg β E f (A ∪ S) =
+      ((∑ x ∈ A, Real.exp (-β * E x) * f x) + ∑ x ∈ S, Real.exp (-β * E x) * f x) /
+        (partitionFn β E A + partitionFn β E S) := by
+    unfold boltzmannAvg
+    rw [partitionFn_union β E hdisj, Finset.sum_union hdisj]
+  have halg : ∀ NA NS ZA ZS : ℝ, 0 ≤ ZA → 0 < ZS →
+      (NA + NS) / (ZA + ZS) - NS / ZS = (NA * ZS - NS * ZA) / ((ZA + ZS) * ZS) := by
+    intro NA NS ZA ZS hA hS'
+    have h1 : ZA + ZS ≠ 0 := by positivity
+    field_simp
+    ring
+  have hbound : ∀ NA NS ZA ZS : ℝ, 0 ≤ ZA → 0 < ZS → ZA ≤ ρ * ZS → |NA| ≤ B * ZA →
+      |NS| ≤ B * ZS → |(NA * ZS - NS * ZA) / ((ZA + ZS) * ZS)| ≤ 2 * B * ρ := by
+    intro NA NS ZA ZS hA hS' hr hNA' hNS'
+    have hden : (0 : ℝ) < (ZA + ZS) * ZS := by positivity
+    rw [abs_div, abs_of_pos hden, div_le_iff₀ hden]
+    have h2 : |NA * ZS - NS * ZA| ≤ |NA| * ZS + |NS| * ZA := by
+      calc |NA * ZS - NS * ZA| ≤ |NA * ZS| + |NS * ZA| := abs_sub _ _
+        _ = |NA| * ZS + |NS| * ZA := by
+          rw [abs_mul, abs_mul, abs_of_pos hS', abs_of_nonneg hA]
+    have h3 : |NA| * ZS ≤ B * ZA * ZS := mul_le_mul_of_nonneg_right hNA' hS'.le
+    have h4 : |NS| * ZA ≤ B * ZS * ZA := mul_le_mul_of_nonneg_right hNS' hA
+    have h5 : B * ZA * ZS ≤ B * (ρ * ZS) * ZS :=
+      mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hr hB0) hS'.le
+    have h6 : 0 ≤ 2 * B * ρ * (ZA * ZS) := by positivity
+    nlinarith
+  rw [havgU]
+  unfold boltzmannAvg
+  rw [halg _ _ _ _ hZA hZS]
+  exact hbound _ _ _ _ hZA hZS hρ hNA hNS
+
+/-- **Thermal dominance controls observables.**  Pruning a dominated set with margin `γ` changes
+the Boltzmann average of any observable bounded by `B` by at most `2 B exp(-β γ)`. -/
+theorem boltzmannAvg_dominance_error {β γ B : ℝ} (hβ : 0 ≤ β) (E f : Ω → ℝ) {A S : Finset Ω}
+    (T : Ω → Ω) (hinj : Set.InjOn T A) (hmaps : ∀ x ∈ A, T x ∈ S)
+    (hdom : ∀ x ∈ A, E (T x) + γ ≤ E x) (hdisj : Disjoint A S) (hS : S.Nonempty)
+    (hB : ∀ x ∈ A ∪ S, |f x| ≤ B) :
+    |boltzmannAvg β E f (A ∪ S) - boltzmannAvg β E f S| ≤ 2 * B * Real.exp (-β * γ) :=
+  boltzmannAvg_prune_error E f hdisj hS (partition_transport hβ E T hinj hmaps hdom) hB
+
 end Transport
 
 /-! ### Site-level dominance on product domains -/
