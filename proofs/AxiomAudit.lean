@@ -74,6 +74,8 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.partition_transport
 #print axioms MetricChain.freeEnergy_prune_bracket
 #print axioms MetricChain.thermal_dee
+#print axioms MetricChain.isLeast_sum_of_block_separable
+#print axioms MetricChain.exact_margin_of_block_separable
 #print axioms MetricChain.PairModel.goldstein_isLeast
 #print axioms MetricChain.PairModel.goldstein_gauge_invariant
 #print axioms MetricChain.PairModel.desmet_reparam_le
@@ -119,6 +121,8 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.leaf_two_config
 #print axioms MetricChain.triangle_no_leaf_certificate
 #print axioms MetricChain.sumFree_exponential
+#print axioms MetricChain.sumFree_gap_exponential
+#print axioms MetricChain.sumFree_complexity
 #print axioms MetricChain.sumFree_tight
 #print axioms MetricChain.sum_linear
 #print axioms MetricChain.sum_rule_separation

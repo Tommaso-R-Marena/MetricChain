@@ -457,7 +457,7 @@ Worst-case (`ℓ¹`); for independent errors expect `√m` slack.
 | pure dual certificates | incomplete: the frustrated triangle has LP bound 0, optimum 1 | `triangle_no_leaf_certificate` |
 | certificates without `sum` | exactly `2^m` leaves on `m` independent frustrated triangles; `2m` with `sum` | `sumFree_exponential`, `sumFree_tight`, `sum_linear` |
 | free-energy sandwich | constant `1/8` is optimal; the worst residual is additive two-level; gap is extensive | `mcdiarmid_no_better_constant`, `exists_two_level_worst_residual` |
-| exact dominance with 3-body terms | coNP-hard in general; polynomial when the link graph of the site has bounded treewidth (chain-local terms) | theory report §2.2 (paper) |
+| exact dominance with 3-body terms | factorises over the connected components of the site's link graph (`exact_margin_of_block_separable`); cheap for chain-local terms; coNP-hard for unrestricted link graphs (paper) | theory report §2.2 |
 | voxel quadrature | `Θ((βΔM/ε)^{d/2})` voxels with second-order information; rate not improvable | theory report §3.4 (paper + cited) |
 | distances only | blind to chirality | §4.2 of the theory report |
 

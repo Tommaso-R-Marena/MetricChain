@@ -152,7 +152,8 @@ Engineering lessons recorded in `DEAD_ENDS.md` D6 (leaf rule), D7 (`decide +kern
   2. Second-order voxel certificates with the product-of-1-D structure; a verified checker.
   3. Size lower bounds for AND/OR (decomposition-aware) certificates on weakly coupled chains —
      the disjoint case is known, the coupled case is open.
-  4. A link-graph dichotomy theorem for exact dominance with 3-body terms, formalized.
+  4. The hardness half of the link-graph dichotomy for exact dominance with 3-body terms (the
+     tractable half — factorisation over link-graph components — is now verified).
   5. Connecting the kernel to LeanCert-style continuous leaves (interval evaluation of the
      rational torus energy) to obtain one end-to-end verified mixed discrete–continuous checker.
   6. Realizability certificates for the data predictors actually emit: weighted or incomplete

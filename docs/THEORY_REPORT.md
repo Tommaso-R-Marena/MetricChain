@@ -151,14 +151,19 @@ Consequently *dual reparameterisation cannot improve dominance pruning for pairw
 product domains*.  This answers the seeded question of Direction A in the negative and locates
 where dual methods do matter:
 
-* **Higher-order terms [P].**  With 3-body terms the difference energy at site `i` is a pairwise
-  model on the *link graph* of `i` (vertices: neighbours; edges: pairs sharing a 3-body term with
-  `i`).  Exact dominance is the minimisation of that model: linear time when the link graph is a
-  forest (e.g. chain-local terms `T_{i−1,i,i+1}`, whose link graph is a path on four sites),
-  exponential only in its treewidth in general, and coNP-hard without restriction (given a
-  pairwise model `g` on the neighbours put `T(r,·,·) = g`, `T(t,·,·) = 0`; then `t` dominates `r`
-  iff `min g ≥ 0`).  Any dual bound on the link model yields a sound criterion between the nested
-  sum-of-minima rule and exact dominance.
+* **Higher-order terms [V + P].**  With 3-body terms the difference energy at site `i` is a
+  pairwise model on the *link graph* of `i` (vertices: neighbours; edges: pairs sharing a 3-body
+  term with `i`).  *Exact dominance factorises over the connected components of the link graph*:
+  if the difference energy is a constant plus a sum of functions each depending on one block of
+  sites, the exact margin over a product domain is the constant plus the sum of the block minima
+  (`isLeast_sum_of_block_separable`, `exact_margin_of_block_separable` **[V]**; harness I.4).
+  Goldstein is the case of singleton blocks; chain-local terms `T_{i−1,i,i+1}` give one block of
+  at most four sites (a path), so exact dominance stays cheap for chain molecules; in general the
+  cost is exponential only in the treewidth of the link graph.  Without restriction exact
+  dominance is coNP-hard **[P]**: given a pairwise model `g` on the neighbours put
+  `T(r,·,·) = g`, `T(t,·,·) = 0`; then `t` dominates `r` iff `min g ≥ 0`.  Any dual bound on a
+  block yields a sound criterion between the nested sum-of-minima rule (LuCore et al. 2015) and
+  exact dominance.
 * **Non-product domains** (pair pruning, steric filters): exact dominance contains constraint
   satisfaction.
 * **Bound-based pruning** (lower bound of a slice against an incumbent) — gauge dependent by
@@ -677,6 +682,9 @@ pure reparameterisation certificates are incomplete.  (c) For `m` disjoint frust
 (optimum `m`, `triangles_energy_opt`), every certificate without `sum` that the kernel accepts
 for the bound `m` visits at least `2^m` leaves — including certificates that use DEE steps
 (`sumFree_exponential`, `sumFree_size_exponential`); the bound is attained (`sumFree_tight`).
+Approximation does not help much: certifying any bound `L ≥ m − d` still needs `2^{m−d}` leaves
+(`sumFree_gap_exponential`), and the exact sum-free complexity of the bound `K ≤ m` is `2^K`
+(`sumFree_complexity`).
 (d) With `sum`, `2m` leaves suffice for every `m ≥ 1` (`sum_linear`), hence for `m ≥ 3` there is
 an accepted certificate strictly smaller than every accepted sum-free certificate
 (`sum_rule_separation`).
@@ -751,7 +759,8 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   inputs and within `√((L+2)/2)` in general).
 * **No claim of practical performance.**  All experiments are synthetic and small; they check
   tightness and scaling of bounds, not solver speed.
-* **Unformalized statements** are marked [P] or [K]: the link-graph dichotomy, the Taylor step
+* **Unformalized statements** are marked [P] or [K]: the hardness half of the link-graph
+  dichotomy, the Taylor step
   and the complexity count for second-order voxels, dependent-reference sandwiches and Rio's
   sharp function,
   the Procrustes–Gram corollary, the T₁ equivalence.
@@ -767,7 +776,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Core/Basic.lean` | `partitionFn`, `freeEnergy`, `partitionFn_anti`, `freeEnergy_mono` |
 | `proofs/Core/Rounding.lean` | `roundDown_le`, `le_roundUp`, `roundUp_sub_roundDown_le`, `QInterval.contains_add/mul/sq/inv/outward`, `exp_enclosure`, `contains_exp`, `contains_boltzmann`, `circle_rational_atlas`, `contains_circParam` |
 | `proofs/Frontiers/EnvelopeDuality.lean` | `robust_minimizer_iff`, `robust_certified_iff`, `lowerEnv_admissible`, `upperEnv_admissible`, `robust_min_bracket`, `robust_partition_bracket`, `robust_minimizer_with_anchors_iff`, `anchor_necessary`, `anchor_card_lower_bound`, `admissible_of_single_site`, `differential_dee_sound`, `energy_window_exact` |
-| `proofs/Frontiers/Dominance.lean` | `partition_transport`, `partition_prune_bracket`, `freeEnergy_prune_bracket`, `min_transport`, `thermal_dee`, `PairModel.energy_update`, `goldstein_isLeast`, `goldstein_gauge_invariant`, `exactMargin_reparam`, `desmet_reparam_le`, `desmet_optimalGauge` |
+| `proofs/Frontiers/Dominance.lean` | `partition_transport`, `partition_prune_bracket`, `freeEnergy_prune_bracket`, `min_transport`, `thermal_dee`, `isLeast_sum_of_block_separable`, `exact_margin_of_block_separable`, `PairModel.energy_update`, `goldstein_isLeast`, `goldstein_gauge_invariant`, `exactMargin_reparam`, `desmet_reparam_le`, `desmet_optimalGauge` |
 | `proofs/Frontiers/FreeEnergySandwich.lean` | `gibbs_bogoliubov`, `hoeffding_upper`, `free_energy_sandwich`, `partition_ratio_sandwich`, `bounded_differences_sandwich`, `additive_extremal`, `exists_two_level_worst_residual`, `balanced_additive_gap`, `log_cosh_bounds`, `mcdiarmid_no_better_constant` |
 | `proofs/Frontiers/HolderDecomposition.lean` | `partitionFn_holder`, `freeEnergy_holder` |
 | `proofs/Frontiers/PartitionCertificate.lean` | `zverify`, `zverify_sound`, `zprune_sound`, `Z_encloses_partitionFn`, `triangleZ_exact` |
@@ -778,7 +787,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/Holonomy.lean` | `norm_mul_div_mul_le`, `norm_holProd_le_sum`, `norm_holProd_sq_le`, `norm_holTrans_le`, `exists_assignment_attaining_holonomy` |
 | `proofs/Frontiers/TorsionRMSD.lean` | `RigidWithin`, `rigidWithin_chain`, `coaxial_cost_eq`, `exists_coaxial_angle`, `coaxial_cost_le_min`, `reduced_le_coaxial_cost`, `IsTorsionMove.rigidWithin`, `rigidWithin_torsion_chain` |
 | `proofs/Frontiers/InvariantEnvelope.lean` | `invariant_lipschitz_of_rigidWithin`, `residual_torsion_move`, `residual_torsion_chain` |
-| `proofs/Frontiers/ProofComplexity.lean` | `leaf_two_config`, `triangle_no_leaf_certificate`, `triangles_energy_opt`, `sumFree_exponential`, `sumFree_tight`, `sum_linear`, `sum_rule_separation` |
+| `proofs/Frontiers/ProofComplexity.lean` | `leaf_two_config`, `triangle_no_leaf_certificate`, `triangles_energy_opt`, `sumFree_exponential`, `sumFree_gap_exponential`, `sumFree_complexity`, `sumFree_tight`, `sum_linear`, `sum_rule_separation` |
 | `proofs/CertificateAlgebra.lean` | `verify`, `verify_sound`, `verifyR`, `verifyR_sound`, `certified_gap`, kernel-evaluated examples |
 | `proofs/AxiomAudit.lean` | `#audit_axioms MetricChain`, non-vacuity witnesses |
 

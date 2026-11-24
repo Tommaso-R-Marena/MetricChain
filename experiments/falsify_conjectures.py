@@ -233,6 +233,50 @@ def t_split_dominance(rng, trials):
     return True, {}
 
 
+@conjecture("I.4 Exact dominance with chain-local 3-body terms factorises over the blocks of the link graph")
+def t_block_separable(rng, trials):
+    for _ in range(max(20, trials // 4)):
+        n, k = 6, int(rng.integers(2, 4))
+        h, J = random_pairwise(rng, n, k, sparse=0.6)
+        T = rng.normal(0, 1.0, size=(n - 2, k, k, k))  # T[j] couples sites j, j+1, j+2
+
+        def E(x):
+            return energy(h, J, x) + sum(T[j][x[j]][x[j + 1]][x[j + 2]] for j in range(n - 2))
+
+        i = int(rng.integers(n))
+        r, t = rng.choice(k, size=2, replace=False).tolist()
+        # exact margin by brute force over all contexts
+        exact = math.inf
+        for x in itertools.product(range(k), repeat=n):
+            if x[i] != 0:
+                continue  # the value at site i is irrelevant: enumerate contexts once
+            xr = x[:i] + (r,) + x[i + 1:]
+            xt = x[:i] + (t,) + x[i + 1:]
+            exact = min(exact, E(xr) - E(xt))
+        # block decomposition: one block for the chain neighbours within distance 2, singletons otherwise
+        block = [j for j in (i - 2, i - 1, i + 1, i + 2) if 0 <= j < n]
+        singles = [j for j in range(n) if j != i and j not in block]
+
+        def pair_link(j, s):
+            return J[i][j][r][s] + J[j][i][s][r] - J[i][j][t][s] - J[j][i][s][t]
+
+        total = h[i][r] - h[i][t] + sum(min(pair_link(j, s) for s in range(k)) for j in singles)
+        best_block = math.inf
+        for vals in itertools.product(range(k), repeat=len(block)):
+            ctx = dict(zip(block, vals))
+            v = sum(pair_link(j, ctx[j]) for j in block)
+            for j in range(n - 2):
+                if j <= i <= j + 2:
+                    trip_r = [r if q == i else ctx[q] for q in (j, j + 1, j + 2)]
+                    trip_t = [t if q == i else ctx[q] for q in (j, j + 1, j + 2)]
+                    v += T[j][trip_r[0]][trip_r[1]][trip_r[2]] - T[j][trip_t[0]][trip_t[1]][trip_t[2]]
+            best_block = min(best_block, v)
+        total += best_block
+        if abs(total - exact) > 1e-7:
+            return False, dict(block_formula=total, brute_force=exact, i=i, k=k)
+    return True, {}
+
+
 # ----------------------------------------------------------------------------------------------
 # Cluster I' — metric-envelope duality for non-decomposable residuals
 # ----------------------------------------------------------------------------------------------

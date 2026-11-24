@@ -175,6 +175,69 @@ theorem thermal_dee {β γ : ℝ} (hβ : 0 ≤ β) (E : (∀ i, σ i) → ℝ) (
 
 end SiteDominance
 
+/-! ### Higher-order terms: exact dominance factorises over blocks of the link graph -/
+
+section Blocks
+
+variable {ι : Type*} {σ : ι → Type*} {κ : Type*} [Fintype κ]
+
+/-- **Block-separable minimisation.**  Let the sites be partitioned into blocks by `blk`, and let
+`ℓ c` depend only on the coordinates of block `c`.  Over a product domain the minimum of
+`∑ c, ℓ c` is the sum of the block minima.
+
+For dead-end elimination with many-body terms this says: *the exact dominance margin of a site
+factorises over the connected components of its link graph* (the graph on the neighbours in which
+two neighbours are joined when they share a many-body term with the site).  Pairwise models are
+the case of singleton blocks (Goldstein); chain-local 3-body terms give blocks of bounded size,
+so exact dominance stays cheap; a single large block is a general pairwise minimisation problem
+(coNP-hard to bound exactly). -/
+theorem isLeast_sum_of_block_separable (D : ∀ j, Set (σ j)) (blk : ι → κ)
+    (ℓ : κ → (∀ j, σ j) → ℝ)
+    (hloc : ∀ c x y, (∀ j, blk j = c → x j = y j) → ℓ c x = ℓ c y) (m : κ → ℝ)
+    (hm : ∀ c, IsLeast (ℓ c '' {x | ∀ j, x j ∈ D j}) (m c)) :
+    IsLeast ((fun x => ∑ c, ℓ c x) '' {x | ∀ j, x j ∈ D j}) (∑ c, m c) := by
+  constructor
+  · -- glue the block minimisers
+    have hex : ∀ c, ∃ x : ∀ j, σ j, (∀ j, x j ∈ D j) ∧ ℓ c x = m c := fun c => by
+      obtain ⟨x, hx, hxm⟩ := (hm c).1
+      exact ⟨x, hx, hxm⟩
+    choose xs hxsD hxsm using hex
+    refine ⟨fun j => xs (blk j) j, fun j => hxsD (blk j) j, ?_⟩
+    simp only
+    apply Finset.sum_congr rfl
+    intro c _
+    rw [← hxsm c]
+    apply hloc
+    intro j hj
+    rw [hj]
+  · rintro _ ⟨x, hx, rfl⟩
+    exact Finset.sum_le_sum fun c _ => (hm c).2 ⟨x, hx, rfl⟩
+
+/-- **Exact dominance with many-body terms.**  If the energy difference between states `r` and
+`t` of site `i` is a constant plus a block-separable function of the context, the exact dominance
+margin over a product domain is the constant plus the sum of the block minima. -/
+theorem exact_margin_of_block_separable [DecidableEq ι] (E : (∀ j, σ j) → ℝ) (i : ι)
+    (r t : σ i) (D : ∀ j, Set (σ j)) (blk : ι → κ) (c₀ : ℝ) (ℓ : κ → (∀ j, σ j) → ℝ)
+    (hdiff : ∀ x, E (Function.update x i r) - E (Function.update x i t) = c₀ + ∑ c, ℓ c x)
+    (hloc : ∀ c x y, (∀ j, blk j = c → x j = y j) → ℓ c x = ℓ c y) (m : κ → ℝ)
+    (hm : ∀ c, IsLeast (ℓ c '' {x | ∀ j, x j ∈ D j}) (m c)) :
+    IsLeast ((fun x => E (Function.update x i r) - E (Function.update x i t)) ''
+        {x | ∀ j, x j ∈ D j}) (c₀ + ∑ c, m c) := by
+  have h := isLeast_sum_of_block_separable D blk ℓ hloc m hm
+  constructor
+  · obtain ⟨x, hx, hxm⟩ := h.1
+    refine ⟨x, hx, ?_⟩
+    simp only at hxm ⊢
+    rw [hdiff x, hxm]
+  · rintro _ ⟨x, hx, rfl⟩
+    simp only
+    rw [hdiff x]
+    have := h.2 ⟨x, hx, rfl⟩
+    simp only at this
+    linarith
+
+end Blocks
+
 /-! ### Pairwise models: separability, exactness of Goldstein, gauge invariance -/
 
 /-- A pairwise energy model with scalars `R` over sites `ι` with state spaces `σ i`.  The pair
