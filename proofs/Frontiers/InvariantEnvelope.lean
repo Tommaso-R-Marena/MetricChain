@@ -29,7 +29,9 @@ isometry group (`E(3)`: reflections included).
   uniform `c = Λ · 2 √(2 Ibar)` (`residual_torsion_move_uniform`), and
   `residualLowerClass_of_invariant_lipschitz` packages this as membership of `Δ ∘ emb` in the
   residual class of the certificate kernel, so that `verifyR_sound_invariant` certifies
-  `L ≤ E + Δ ∘ emb` on the box.
+  `L ≤ E + Δ ∘ emb` on the box; `residualIntervalClass_of_rigidWithinIn` and
+  `verifyITop_sound_invariant` are the versions for interval anchor data and the top-level
+  kernel.
 -/
 
 namespace MetricChain
@@ -223,5 +225,43 @@ theorem residual_torsion_chain {Δ : (ι → P) → ℝ} {Λ : ℝ} (hΛ : 0 ≤
         |Real.sin (δ k / 2)| :=
   invariant_lipschitz_of_rigidWithin hΛ hinv hlip (Finset.sum_nonneg fun _ _ => by positivity)
     (rigidWithin_torsion_chain X u B δ m h)
+
+omit [DecidableEq ι] in
+/-- **Interval form: membership in the class of the top-level residual kernel.**  As
+`residualLowerClass_of_rigidWithinIn`, for interval anchor data: if the published intervals
+contain the residual at the anchors, `Δ ∘ emb` belongs to `ResidualIntervalClass`. -/
+theorem residualIntervalClass_of_rigidWithinIn {n k : ℕ} {G : Submonoid (P ≃ᵢ P)}
+    {Δ : (ι → P) → ℝ} {Λ : ℝ} (hΛ : 0 ≤ Λ) (hinv : RigidInvariantIn G Δ)
+    (hlip : ConfigLipschitz Λ Δ) (emb : Config n k → ι → P) (ρ : Fin n → ℝ) (hρ : ∀ i, 0 ≤ ρ i)
+    (hmove : ∀ (x : Config n k) (i : Fin n) (s : Fin k),
+      RigidWithinIn G (emb x) (emb (Function.update x i s)) (ρ i))
+    (R : IProblem n k) (hc : ∀ i, Λ * ρ i ≤ (R.c i : ℝ))
+    (hanch : ∀ p ∈ R.anchors, (p.lo : ℝ) ≤ Δ (emb p.x) ∧ ∀ h ∈ p.hi, Δ (emb p.x) ≤ (h : ℝ)) :
+    ResidualIntervalClass R (fun x => Δ (emb x)) := by
+  refine ⟨fun x i s => ?_, hanch⟩
+  have h1 := invariant_lipschitz_of_rigidWithinIn hΛ hinv hlip (hρ i) (hmove x i s)
+  have h2 := neg_abs_le (Δ (emb x) - Δ (emb (Function.update x i s)))
+  have h3 := hc i
+  show Δ (emb (Function.update x i s)) - Δ (emb x) ≤ (R.c i : ℝ)
+  linarith
+
+omit [DecidableEq ι] in
+/-- **Certified two-sided statement for a pairwise energy plus an invariant Lipschitz residual,
+through the top-level kernel.**  If `verifyITop` accepts interval data that contain the residual
+at the anchors, then `L ≤ E + Δ ∘ emb` on the box, and at every anchor with an upper value the
+true energy is at most `E + hi`. -/
+theorem verifyITop_sound_invariant {n k : ℕ} {G : Submonoid (P ≃ᵢ P)} {Δ : (ι → P) → ℝ}
+    {Λ : ℝ} (hΛ : 0 ≤ Λ) (hinv : RigidInvariantIn G Δ) (hlip : ConfigLipschitz Λ Δ)
+    (emb : Config n k → ι → P) (ρ : Fin n → ℝ) (hρ : ∀ i, 0 ≤ ρ i)
+    (hmove : ∀ (x : Config n k) (i : Fin n) (s : Fin k),
+      RigidWithinIn G (emb x) (emb (Function.update x i s)) (ρ i))
+    (R : IProblem n k) (hc : ∀ i, Λ * ρ i ≤ (R.c i : ℝ))
+    (hanch : ∀ p ∈ R.anchors, (p.lo : ℝ) ≤ Δ (emb p.x) ∧ ∀ h ∈ p.hi, Δ (emb p.x) ≤ (h : ℝ))
+    (c : RCert n k) (D : Dom n k) (L : ℚ) (hv : verifyITop c R D L = true) :
+    (∀ x, InBox D x → (L : ℝ) ≤ (R.base.energy x : ℝ) + Δ (emb x)) ∧
+      ∀ p ∈ R.anchors, ∀ h ∈ p.hi,
+        (R.base.energy p.x : ℝ) + Δ (emb p.x) ≤ ((R.base.energy p.x + h : ℚ) : ℝ) :=
+  (verifyITop_sound c R D L hv).2 _
+    (residualIntervalClass_of_rigidWithinIn hΛ hinv hlip emb ρ hρ hmove R hc hanch)
 
 end MetricChain

@@ -144,6 +144,7 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.residualLowerClass_of_rigidWithinIn
 #print axioms MetricChain.residualLowerClass_of_invariant_lipschitz
 #print axioms MetricChain.verifyR_sound_invariant
+#print axioms MetricChain.verifyITop_sound_invariant
 
 -- Certificate algebra (Direction E): Master Soundness Theorems and kernel-evaluated examples
 #print axioms MetricChain.verify_sound

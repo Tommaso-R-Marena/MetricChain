@@ -692,7 +692,8 @@ inertia at the current conformation; with a conformation-independent bound `I_re
 torsion `i` the constant is the uniform `c_i = Λ · 2√(2 Ī_i)` (`residual_torsion_move_uniform`),
 and then `Δ ∘ emb` lies in the residual class of the certificate kernel for any published
 constants `≥ c_i` and anchor values `≤ Δ` (`residualLowerClass_of_invariant_lipschitz`), so an
-accepted residual certificate bounds `E + Δ ∘ emb` (`verifyR_sound_invariant`).  This turns an
+accepted residual certificate bounds `E + Δ ∘ emb` (`verifyR_sound_invariant`; for interval
+anchor data and the top-level kernel, `verifyITop_sound_invariant`).  This turns an
 invariant architecture with a Cartesian Lipschitz certificate and an inertia bound into the
 bounded-difference envelope required in §2 and §6.  (The bound `Ī_i` is a modelling input: e.g.
 the axial inertia of the lighter side of the torsion, bounded over the conformations considered.)
