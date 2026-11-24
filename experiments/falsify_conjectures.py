@@ -2129,6 +2129,787 @@ def t_separable_voxel(rng, trials):
 
 
 # ----------------------------------------------------------------------------------------------
+# Cluster XI — certification geometry (cycle 7): slack coverings, LP duals, rates, best-first,
+# conditional envelopes, thermal certificates, second-order envelopes, compositional Z rules
+# ----------------------------------------------------------------------------------------------
+
+def cg_metric(rng, n, asym=False):
+    """Shortest-path closure of random weights: a metric, or a quasi-metric if asym."""
+    W = rng.uniform(0.3, 2.0, size=(n, n))
+    if not asym:
+        W = (W + W.T) / 2
+    np.fill_diagonal(W, 0.0)
+    for k in range(n):
+        W = np.minimum(W, W[:, [k]] + W[[k], :])
+    return W
+
+
+def cg_lipschitz(rng, d, kappa):
+    """g with g(x) - g(y) <= kappa d(x,y): a convex combination of the two McShane extensions of random data."""
+    n = len(d)
+    if kappa == 0:
+        return np.zeros(n)
+    v = rng.normal(0, 1.0, size=n)
+    lo = np.max(v[:, None] - kappa * d, axis=0)          # max_a v(a) - kappa d(a, y)
+    hi = np.min(v[None, :] + kappa * d, axis=1)          # min_a v(a) + kappa d(y, a)
+    lam = rng.uniform()
+    return lam * lo + (1 - lam) * hi
+
+
+def cg_slack(d, g):
+    """s[a, y] = d(a, y) - g(a) + g(y)."""
+    return d - g[:, None] + g[None, :]
+
+
+def cg_bounds(d, f, g, A):
+    """What a verifier computes from the evaluations of g on A: (min(f+L), min(f+U), min_A (f+g), L, U)."""
+    A = list(A)
+    L = np.max(g[A][:, None] - d[A, :], axis=0)
+    U = np.min(g[A][None, :] + d[:, A], axis=1)
+    return float(np.min(f + L)), float(np.min(f + U)), float(np.min((f + g)[A])), L, U
+
+
+def cg_min_cover(C):
+    """Exact minimum number of rows of the boolean matrix C whose union is everything (brute force)."""
+    n, m = C.shape
+    masks = [sum(1 << y for y in range(m) if C[a, y]) for a in range(n)]
+    full = (1 << m) - 1
+    for size in range(1, n + 1):
+        for S in itertools.combinations(range(n), size):
+            acc = 0
+            for a in S:
+                acc |= masks[a]
+            if acc == full:
+                return size
+    return None
+
+
+def cg_frac_cover(C):
+    from scipy.optimize import linprog
+    res = linprog(np.ones(C.shape[0]), A_ub=-C.T.astype(float), b_ub=-np.ones(C.shape[1]), bounds=(0, None),
+                  method="highs")
+    return float(res.fun)
+
+
+def cg_instance(rng, nmax=8, kappas=(0.0, 0.3, 0.7, 1.0), asym_prob=0.4):
+    n = int(rng.integers(3, nmax + 1))
+    d = cg_metric(rng, n, asym=rng.random() < asym_prob)
+    kappa = float(rng.choice(kappas))
+    g = cg_lipschitz(rng, d, kappa)
+    f = rng.normal(0, 0.8, size=n)
+    eps = float(rng.choice([0.0, 0.1, 0.4]))
+    return n, d, kappa, f, g, eps
+
+
+@conjecture("XI.1 Certificates are coverings in the slack quasi-metric: LB(A) = min_y [E(y) - s(A,y)]; certificate <=> cover; N_cov <= N_val <= N* <= N_cov + 1")
+def t_cert_cover(rng, trials):
+    stats = dict(star_gt_cov=0, instances=0)
+    for _ in range(trials):
+        n, d, kappa, f, g, eps = cg_instance(rng)
+        E = f + g
+        s = cg_slack(d, g)
+        if s.min() < -1e-9 or np.max(np.abs(np.diag(s))) > 1e-12:
+            return False, dict(reason="slack is negative or non-zero on the diagonal")
+        if not np.all(s[:, None, :] <= s[:, :, None] + s[None, :, :] + 1e-9):
+            return False, dict(reason="slack violates the triangle inequality")
+        gap = E - E.min()
+        nval = nstar = None
+        for size in range(1, n + 1):
+            for A in itertools.combinations(range(n), size):
+                lb, ubval, ubpt, L, U = cg_bounds(d, f, g, A)
+                sA = s[list(A), :].min(axis=0)                     # s(A, y)
+                sAt = s[:, list(A)].min(axis=1)                    # s(y, A)
+                if np.max(np.abs(L - (g - sA))) > 1e-9 or np.max(np.abs(U - (g + sAt))) > 1e-9:
+                    return False, dict(reason="McShane bracket is not [g - s(A,.), g + s(.,A)]")
+                if abs(lb - float(np.min(E - sA))) > 1e-9:
+                    return False, dict(reason="LB(A) != min_y [E(y) - s(A,y)]")
+                is_cert = ubpt - lb <= eps + 1e-12
+                is_cover = bool(np.all(sA <= E - ubpt + eps + 1e-12))
+                if is_cert != is_cover:
+                    return False, dict(reason="certificate <=> covering with radii E(y) - UB + eps fails", A=A)
+                if nval is None and ubval - lb <= eps + 1e-12:
+                    nval = size
+                if nstar is None and is_cert:
+                    nstar = size
+            if nstar is not None:
+                break
+        ncov = cg_min_cover(s <= gap[None, :] + eps + 1e-12)
+        if not (ncov <= nval <= nstar <= ncov + 1):
+            return False, dict(reason="N_cov <= N_val <= N* <= N_cov + 1 fails", ncov=ncov, nval=nval, nstar=nstar)
+        stats["star_gt_cov"] += nstar > ncov
+        stats["instances"] += 1
+    return True, stats
+
+
+@conjecture("XI.2 Covering LP duality: forced points, fooling sets, volume, exponential-weights and partition-function bounds are <= N_frac <= N_cov <= (1 + ln max|S(a)|) N_frac")
+def t_cover_duals(rng, trials):
+    best = 0.0
+    for it in range(max(5, trials // 2)):
+        if it % 5 == 4:       # adversarial family: a cluster of near-degenerate minima closer than eps, far high states
+            m, r = int(rng.integers(2, 6)), int(rng.integers(1, 4))
+            n = m + r
+            delta = float(rng.uniform(0.05, 0.2))
+            d = np.full((n, n), float(rng.uniform(1.0, 2.0)))
+            d[:m, :m] = delta
+            np.fill_diagonal(d, 0.0)
+            kappa, g = 0.0, np.zeros(n)
+            f = np.concatenate([rng.uniform(0.0, delta / 4, size=m), np.full(r, 3.0)])
+            eps = float(rng.uniform(delta, 0.4))
+        else:
+            n, d, kappa, f, g, eps = cg_instance(rng, nmax=10, kappas=(0.0, 0.3, 0.7))
+        E = f + g
+        s = cg_slack(d, g)
+        gap = E - E.min()
+        rho = s - gap[None, :]                                    # a covers y  iff  rho[a, y] <= eps
+        C = rho <= eps + 1e-12
+        ncov, nfrac = cg_min_cover(C), cg_frac_cover(C)
+        if nfrac > ncov + 1e-7 or ncov > (1 + math.log(C.sum(axis=1).max())) * nfrac + 1e-7:
+            return False, dict(reason="N_frac <= N_cov <= (1 + ln max|S|) N_frac fails", ncov=ncov, nfrac=nfrac)
+        forced = [y for y in range(n) if not any(C[a, y] for a in range(n) if a != y)]
+        if len(forced) > nfrac + 1e-7:
+            return False, dict(reason="more forced points than the fractional cover number")
+        P = []                                                    # greedy fooling set
+        for y in rng.permutation(n):
+            if all(not np.any(C[:, y] & C[:, z]) for z in P):
+                P.append(int(y))
+        if len(P) > nfrac + 1e-7:
+            return False, dict(reason="fooling set larger than the fractional cover number")
+        M = np.array([max(C[a].sum() for a in range(n) if C[a, y]) for y in range(n)])
+        if float(np.sum(1.0 / M)) > nfrac + 1e-7:
+            return False, dict(reason="volume bound exceeds the fractional cover number")
+        for _ in range(20):
+            t = float(rng.uniform(0, 20))
+            v = rng.dirichlet(np.ones(n) * rng.uniform(0.2, 2.0))
+            bound = math.exp(-t * eps) * float(v.sum()) / float(np.max(np.exp(-t * rho) @ v))
+            part = math.exp(-t * eps) * float(np.sum(np.exp(-t * gap))) / float(np.max(np.sum(np.exp(-t * s), axis=1)))
+            if bound > nfrac + 1e-7 or part > nfrac + 1e-7:
+                return False, dict(reason="exponential-weights / partition bound exceeds N_frac", bound=bound, part=part,
+                                   nfrac=nfrac)
+            best = max(best, bound / nfrac, part / nfrac)
+        order = np.argsort(E)                                     # adversarial weights: uniform on the lowest states
+        for m_low in range(2, min(n, 5) + 1):
+            v = np.zeros(n)
+            v[order[:m_low]] = 1.0 / m_low
+            for t in (0.5, 2.0, 8.0, 30.0):
+                bound = math.exp(-t * eps) / float(np.max(np.exp(-t * rho) @ v))
+                if bound > nfrac + 1e-7:
+                    return False, dict(reason="exponential-weights bound (low-state weights) exceeds N_frac",
+                                       bound=bound, nfrac=nfrac)
+                best = max(best, bound / nfrac)
+    return True, dict(best_bound_over_Nfrac=best)
+
+
+@conjecture("XI.3 Product landscapes: one evaluation is an exact certificate iff every site is sharp (c_i <= white-box excitation energies); N_frac >= exp(sum_i r_i - t eps) for all t and all product weights")
+def t_product_rate(rng, trials):
+    seen = dict(sharp=0, nonsharp=0)
+    for it in range(max(4, trials // 2)):
+        n = int(rng.integers(2, 5))
+        k = int(rng.integers(2, 4)) if n <= 3 else 2
+        configs = all_configs(n, k)
+        arr = np.array(configs)
+        c = rng.uniform(0.2, 1.2, size=n)
+        kappa = float(rng.choice([0.0, 0.5]))
+        gs = kappa * c[:, None] * rng.uniform(-0.5, 0.5, size=(n, k))             # additive residual, kappa-Lipschitz
+        if it % 3 == 0:       # sharp regime: every excitation of the known part costs more than the envelope constant
+            phi = c[:, None] * rng.uniform(1.6, 3.0, size=(n, k))
+            phi[:, 0] = 0.0
+        elif it % 3 == 1:     # borderline regime: excitations within 40% of the envelope constants
+            phi = c[:, None] * rng.uniform(0.6, 1.4, size=(n, k))
+            phi[:, 0] = 0.0
+        else:                 # generic regime (some site is not sharp with overwhelming probability)
+            phi = rng.uniform(0.0, 1.0, size=(n, k))
+        Es = phi + gs
+        ground = Es.argmin(axis=1)
+        f = phi[np.arange(n)[None, :], arr].sum(axis=1)
+        g = gs[np.arange(n)[None, :], arr].sum(axis=1)
+        d = (c[None, None, :] * (arr[:, None, :] != arr[None, :, :])).sum(axis=2)
+        E = f + g
+        s = cg_slack(d, g)
+        gap = E - E.min()
+        x0 = int(np.argmin(E))
+        lb, _, ubpt, _, _ = cg_bounds(d, f, g, [x0])
+        single = ubpt - lb <= 1e-10
+        sharp = all(c[i] <= phi[i, a] - phi[i, ground[i]] + 1e-10 for i in range(n) for a in range(k) if a != ground[i])
+        if single != sharp:
+            return False, dict(reason="single evaluation certifies <=> all sites sharp fails", single=single, sharp=sharp)
+        seen["sharp" if sharp else "nonsharp"] += 1
+        eps = float(rng.choice([0.0, 0.05]))
+        C = s <= gap[None, :] + eps + 1e-12
+        nfrac = cg_frac_cover(C)
+        if sharp and eps == 0.0 and abs(nfrac - 1.0) > 1e-7:
+            return False, dict(reason="sharp landscape with N_frac != 1")
+        rho_site = [c[i] * (1 - np.eye(k)) - gs[i][:, None] + gs[i][None, :] - (Es[i] - Es[i].min())[None, :] for i in range(n)]
+        for _ in range(15):
+            t = float(rng.uniform(0, 12))
+            boltz = rng.random() < 0.4
+            logb = -t * eps
+            for i in range(n):
+                v = np.exp(-t * (Es[i] - Es[i].min())) if boltz else rng.dirichlet(np.ones(k))
+                logb += math.log(float(v.sum())) - math.log(float(np.max(np.exp(-t * rho_site[i]) @ v)))
+            if math.exp(logb) > nfrac + 1e-7:
+                return False, dict(reason="product exponential-weights bound exceeds N_frac", bound=math.exp(logb), nfrac=nfrac)
+    if seen["sharp"] == 0 or seen["nonsharp"] == 0:
+        return False, dict(reason="test did not see both regimes", **seen)
+    return True, seen
+
+
+def cg_best_first(d, f, g, eps, first):
+    """Piyavskii-Shubert / optimistic search: evaluate a minimiser of the certified lower bound until certified."""
+    A = [first]
+    while True:
+        lb, _, ubpt, L, _ = cg_bounds(d, f, g, A)
+        if ubpt - lb <= eps + 1e-12:
+            return A
+        y = int(np.argmin(f + L))
+        if y in A:
+            raise RuntimeError("best-first search re-evaluated a point")
+        A.append(y)
+
+
+@conjecture("XI.4 Best-first search: separation properties (a)-(c) and resource augmentation m <= |C| + 1 for every cover C with radii theta (gap + eps/6), theta = (1-kappa)/(4(1+kappa))")
+def t_best_first(rng, trials):
+    attained = 0
+    for it in range(2 * trials):
+        if it % 8 == 7:       # adversarial family: a far minimiser, a hub of huge energy next to shallow leaves
+            leaves = int(rng.integers(3, 9))
+            n = leaves + 2
+            d = np.full((n, n), 2.0)
+            d[0, :] = d[:, 0] = float(rng.uniform(4.0, 12.0))
+            d[1, 2:] = d[2:, 1] = 1.0
+            np.fill_diagonal(d, 0.0)
+            kappa = 0.0
+            g = np.zeros(n)
+            f = np.full(n, float(rng.uniform(1.1, 1.9)))
+            f[0], f[1] = 0.0, 100.0
+        else:
+            n = int(rng.integers(5, 13))
+            d = cg_metric(rng, n, asym=False)
+            kappa = float(rng.choice([0.0, 0.2, 0.5, 0.8]))
+            g = cg_lipschitz(rng, d, kappa)
+            f = rng.normal(0, 1.0, size=n) * float(rng.choice([0.2, 1.0, 3.0]))
+        E = f + g
+        gap = E - E.min()
+        s = cg_slack(d, g)
+        eps = float(rng.choice([0.05, 0.2, 0.5]))
+        A = cg_best_first(d, f, g, eps, int(rng.integers(n)))
+        m = len(A)
+        for kk in range(1, m):
+            for jj in range(kk):
+                if not gap[A[kk]] - gap[A[jj]] + eps < s[A[jj], A[kk]] + 1e-9:
+                    return False, dict(reason="separation (a) fails")
+                if not gap[A[kk]] <= s[A[jj], A[kk]] + 1e-9:
+                    return False, dict(reason="separation (b) fails")
+                if jj >= 1 and not gap[A[jj]] - gap[A[kk]] <= s[A[kk], A[jj]] + 1e-9:
+                    return False, dict(reason="separation (c) fails")
+        theta = (1 - kappa) / (4 * (1 + kappa))
+        nshr = cg_min_cover(s <= theta * (gap[None, :] + eps / 6) + 1e-12)
+        if m > nshr + 1:
+            return False, dict(reason="resource augmentation bound violated", m=m, shrunk_cover=nshr, kappa=kappa, eps=eps)
+        attained += m == nshr + 1
+    return True, dict(bound_attained=attained)
+
+
+@conjecture("XI.5 Hardness: on the domination instance (f = 1 on V, 0 at a far point; graph metric truncated at 2; zero residual) the minimal exact certificate has 1 + gamma(G) evaluations")
+def t_domination(rng, trials):
+    for _ in range(max(1, trials // 2)):
+        nv = int(rng.integers(3, 8))
+        p = float(rng.uniform(0.2, 0.7))
+        adj = np.triu(rng.random((nv, nv)) < p, 1)
+        adj = adj | adj.T
+        n = nv + 1
+        d = np.full((n, n), 2.0)
+        d[:nv, :nv][adj] = 1.0
+        np.fill_diagonal(d, 0.0)
+        f = np.ones(n)
+        f[nv] = 0.0
+        g = np.zeros(n)
+        gamma = None
+        for size in range(1, nv + 1):
+            for S in itertools.combinations(range(nv), size):
+                dom = np.zeros(nv, dtype=bool)
+                for v in S:
+                    dom[v] = True
+                    dom |= adj[v]
+                if dom.all():
+                    gamma = size
+                    break
+            if gamma:
+                break
+        nstar = None
+        for size in range(1, n + 1):
+            for A in itertools.combinations(range(n), size):
+                lb, _, ubpt, _, _ = cg_bounds(d, f, g, A)
+                if ubpt - lb <= 1e-12:
+                    nstar = size
+                    break
+            if nstar:
+                break
+        if nstar != gamma + 1:
+            return False, dict(reason="minimal certificate != 1 + domination number", nstar=nstar, gamma=gamma)
+    return True, {}
+
+
+@conjecture("XI.6 Conditional envelope: sup of g'(x) - g'(y) over residuals consistent with the evaluations is min(d(x,y), U(x) - L(y)) (LP); max-regret formula; configuration and point certificates differ by at most one evaluation")
+def t_conditional_envelope(rng, trials):
+    from scipy.optimize import linprog
+    stats = dict(conf_lt_point=0, instances=0)
+    for _ in range(max(1, trials // 3)):
+        n, d, kappa, f, g, eps = cg_instance(rng, nmax=6, kappas=(0.0, 0.5, 1.0))
+        E = f + g
+        size = int(rng.integers(1, n))
+        A = sorted(rng.choice(n, size=size, replace=False).tolist())
+        _, _, _, L, U = cg_bounds(d, f, g, A)
+        D = np.minimum(d, U[:, None] - L[None, :])               # conditional envelope D_A(x, y)
+        np.fill_diagonal(D, 0.0)
+        # LP: maximise g'(x) - g'(y) over the admissible class with g' = g on A
+        rows, rhs = [], []
+        for x in range(n):
+            for y in range(n):
+                if x != y:
+                    r = np.zeros(n)
+                    r[x], r[y] = 1, -1
+                    rows.append(r)
+                    rhs.append(d[x, y])
+        Aeq = np.zeros((len(A), n))
+        for r_, a in enumerate(A):
+            Aeq[r_, a] = 1
+        for x in range(n):
+            for y in range(n):
+                if x == y:
+                    continue
+                obj = np.zeros(n)
+                obj[x], obj[y] = -1, 1
+                res = linprog(obj, A_ub=np.array(rows), b_ub=np.array(rhs), A_eq=Aeq, b_eq=g[A], bounds=(None, None),
+                              method="highs")
+                if res.status != 0 or abs(-res.fun - D[x, y]) > 1e-7:
+                    return False, dict(reason="conditional envelope is not the LP optimum", lp=-res.fun, formula=D[x, y])
+        if not np.all(D[:, None, :] <= D[:, :, None] + D[None, :, :] + 1e-9):
+            return False, dict(reason="conditional envelope violates the triangle inequality")
+        # configuration certificates: x is eps-optimal for every consistent residual  <=>  max regret <= eps
+        s = cg_slack(d, g)
+        nconf = npoint = None
+        for sz in range(0, n + 1):
+            for B in itertools.combinations(range(n), sz):
+                B = list(B)
+                if B:
+                    lb, _, ubpt, LB_, UB_ = cg_bounds(d, f, g, B)
+                    DB = np.minimum(d, UB_[:, None] - LB_[None, :])
+                    np.fill_diagonal(DB, 0.0)
+                    is_point = ubpt - lb <= eps + 1e-12
+                else:
+                    DB, is_point = d, False
+                regret = np.max(DB + f[:, None] - f[None, :], axis=1)        # max regret of each candidate x
+                is_conf = bool(np.min(regret) <= eps + 1e-12)
+                if is_point and not is_conf:
+                    return False, dict(reason="a point certificate is not a configuration certificate")
+                if is_conf:
+                    xhat = int(np.argmin(regret))
+                    lb2, _, ubpt2, _, _ = cg_bounds(d, f, g, sorted(set(B) | {xhat}))
+                    if ubpt2 - lb2 > eps + 1e-9:
+                        return False, dict(reason="configuration certificate + its candidate is not a point certificate")
+                if nconf is None and is_conf:
+                    nconf = sz
+                if npoint is None and is_point:
+                    npoint = sz
+            if npoint is not None:
+                break
+        if not (nconf <= npoint <= nconf + 1):
+            return False, dict(reason="N_conf <= N_point <= N_conf + 1 fails", nconf=nconf, npoint=npoint)
+        stats["conf_lt_point"] += nconf < npoint
+        stats["instances"] += 1
+    return True, stats
+
+
+@conjecture("XI.7 Thermal contact: over the admissible class the Gibbs probability of x ranges exactly over [1/sum_y e^{-b(f(y)-f(x)-d(x,y))}, 1/sum_y e^{-b(f(y)-f(x)+d(y,x))}] (ends attained; vertex check)")
+def t_thermal_contact(rng, trials):
+    for _ in range(2 * trials):
+        n = int(rng.integers(2, 7))
+        d = cg_metric(rng, n, asym=rng.random() < 0.5)
+        f = rng.normal(0, 1.0, size=n)
+        beta = float(rng.choice([0.2, 1.0, 4.0]))
+        x = int(rng.integers(n))
+        hi = 1.0 / float(np.sum(np.exp(-beta * (f - f[x] + d[:, x]))))
+        lo = 1.0 / float(np.sum(np.exp(-beta * (f - f[x] - d[x, :]))))
+
+        def prob(g):
+            w = np.exp(-beta * (f + g - (f + g).min()))
+            return float(w[x] / w.sum())
+
+        if abs(prob(d[:, x]) - hi) > 1e-9 * hi or abs(prob(-d[x, :]) - lo) > 1e-9 * lo:
+            return False, dict(reason="extremal residuals d(.,x), -d(x,.) do not attain the closed forms")
+        for kappa in (0.3, 1.0, 1.0, 1.0):
+            p = prob(cg_lipschitz(rng, d, kappa))
+            if p > hi * (1 + 1e-9) or p < lo * (1 - 1e-9):
+                return False, dict(reason="admissible residual leaves the thermal contact interval", p=p, lo=lo, hi=hi)
+        for a in range(n):                                    # tropical vertices d(., a) and -d(a, .)
+            for gv in (d[:, a], -d[a, :]):
+                p = prob(gv)
+                if p > hi * (1 + 1e-9) or p < lo * (1 - 1e-9):
+                    return False, dict(reason="a vertex of the class leaves the thermal contact interval")
+    return True, {}
+
+
+@conjecture("XI.8 Free-energy certificates: Z_hi/Z = E_pi e^{b s(A,Y)}, Z_lo/Z = E_pi e^{-b s(Y,A)}; mean-slack, entropy and Hoelder exponential-weights converses hold for every evaluated set")
+def t_thermal_certificates(rng, trials):
+    best = 0.0
+    for _ in range(max(1, trials // 3)):
+        n, d, kappa, f, g, _ = cg_instance(rng, nmax=7, kappas=(0.0, 0.3, 0.7))
+        beta = float(rng.choice([0.3, 1.0, 3.0]))
+        E = f + g
+        s = cg_slack(d, g)
+        w = np.exp(-beta * (E - E.min()))
+        pi = w / w.sum()
+        H = float(-np.sum(pi * np.log(pi)))
+        params = []
+        for _ in range(12):
+            p = float(rng.uniform(0.05, 0.95))
+            t = beta * (1 - p) / p
+            v = rng.dirichlet(np.ones(n) * rng.uniform(0.2, 2.0))
+            lhs = float(np.sum(pi ** (1 - p) * v ** p))
+            params.append((p, t, v, lhs))
+        for size in range(1, n + 1):
+            for A in itertools.combinations(range(n), size):
+                A = list(A)
+                _, _, _, L, U = cg_bounds(d, f, g, A)
+                sA = s[A, :].min(axis=0)
+                sAt = s[:, A].min(axis=1)
+                zhi = float(np.sum(np.exp(-beta * (f + L - E.min()))) / w.sum())
+                zlo = float(np.sum(np.exp(-beta * (f + U - E.min()))) / w.sum())
+                if abs(zhi - float(np.sum(pi * np.exp(beta * sA)))) > 1e-9 * zhi or \
+                        abs(zlo - float(np.sum(pi * np.exp(-beta * sAt)))) > 1e-9:
+                    return False, dict(reason="slack forms of the envelope partition functions fail")
+                if not (zlo <= 1 + 1e-12 <= zhi + 2e-12):
+                    return False, dict(reason="partition bracket fails")
+                eps = math.log(zhi)                              # the certificate hypothesis holds with this eps
+                if beta * float(np.sum(pi * sA)) > eps + 1e-9:
+                    return False, dict(reason="mean-slack bound fails")
+                for t in (0.0, 0.5 * beta, beta, 4 * beta):
+                    B = float(np.max(np.sum(np.exp(-t * s[A, :]), axis=1)))
+                    if H > math.log(size * B) + t * eps / beta + 1e-9:
+                        return False, dict(reason="entropy bound fails", H=H, t=t)
+                for p, t, v, lhs in params:
+                    B = float(np.max(np.exp(-t * s[A, :]) @ v))
+                    rhs = (size * B) ** p * math.exp((1 - p) * eps)
+                    if lhs > rhs * (1 + 1e-9):
+                        return False, dict(reason="Hoelder exponential-weights converse fails", lhs=lhs, rhs=rhs)
+                    best = max(best, lhs / rhs)
+    return True, dict(best_lhs_over_rhs=best)
+
+
+def cg_transport(d, nu, mu):
+    """W_d(nu, mu) = sup { E_nu g - E_mu g : g(x) - g(y) <= d(x,y) }, with a maximising potential (LP)."""
+    from scipy.optimize import linprog
+    n = len(d)
+    rows, rhs = [], []
+    for x in range(n):
+        for y in range(n):
+            if x != y:
+                r = np.zeros(n)
+                r[x], r[y] = 1, -1
+                rows.append(r)
+                rhs.append(d[x, y])
+    Aeq = np.zeros((1, n))
+    Aeq[0, 0] = 1
+    res = linprog(-(nu - mu), A_ub=np.array(rows), b_ub=np.array(rhs), A_eq=Aeq, b_eq=[0.0], bounds=(None, None),
+                  method="highs")
+    return float(-res.fun), res.x
+
+
+@conjecture("XI.9 Transport-entropy duality at fixed beta: ln E_mu e^{b(g - E_mu g)} = b(E_nu g - E_mu g) - KL(nu||mu) <= b W_d(nu,mu) - KL(nu||mu) at the tilt nu, and every nu is dominated by its Kantorovich potential")
+def t_transport_entropy(rng, trials):
+    for _ in range(trials):
+        n = int(rng.integers(2, 7))
+        d = cg_metric(rng, n, asym=rng.random() < 0.4)
+        mu = rng.dirichlet(np.ones(n))
+        beta = float(rng.choice([0.3, 1.0, 3.0]))
+
+        def logmgf(g):
+            return math.log(float(np.sum(mu * np.exp(beta * (g - np.sum(mu * g))))))
+
+        g = cg_lipschitz(rng, d, 1.0)
+        nu = mu * np.exp(beta * g)
+        nu /= nu.sum()
+        kl = float(np.sum(nu * np.log(nu / mu)))
+        W, _ = cg_transport(d, nu, mu)
+        lm = logmgf(g)
+        if abs(lm - (beta * float(np.sum((nu - mu) * g)) - kl)) > 1e-9:
+            return False, dict(reason="tilt identity fails")
+        if lm > beta * W - kl + 1e-7:
+            return False, dict(reason="log-MGF exceeds beta W - KL at the tilted measure", lm=lm, bound=beta * W - kl)
+        nu2 = rng.dirichlet(np.ones(n))
+        W2, pot = cg_transport(d, nu2, mu)
+        if np.any(pot[:, None] - pot[None, :] > d + 1e-7):
+            return False, dict(reason="LP potential is not admissible")
+        kl2 = float(np.sum(nu2 * np.log(nu2 / mu)))
+        if beta * W2 - kl2 > logmgf(pot) + 1e-7:
+            return False, dict(reason="Donsker-Varadhan direction fails", lhs=beta * W2 - kl2, rhs=logmgf(pot))
+    return True, {}
+
+
+def so_mixed_diff(g, x, T, b):
+    """Mixed difference of g at the base point x over the coordinates T with target states b[i]."""
+    tot = 0.0
+    T = list(T)
+    for r in range(len(T) + 1):
+        for U in itertools.combinations(T, r):
+            y = list(x)
+            for i in U:
+                y[i] = b[i]
+            tot += (-1) ** (len(T) - r) * g[tuple(y)]
+    return tot
+
+
+def so_constants(g, n, k, m):
+    """Smallest c_T bounding all m-th order mixed differences over T."""
+    confs = all_configs(n, k)
+    c = {}
+    for T in itertools.combinations(range(n), m):
+        best = 0.0
+        for x in confs:
+            for bt in itertools.product(range(k), repeat=m):
+                best = max(best, abs(so_mixed_diff(g, x, T, dict(zip(T, bt)))))
+        c[T] = best
+    return c
+
+
+def so_interpolant(g, n, k, m, x0):
+    """Anchored (cut-HDMR) interpolant of order m - 1 at x0: uses g only on the Hamming ball of radius m - 1."""
+    out = {}
+    for y in all_configs(n, k):
+        S = [i for i in range(n) if y[i] != x0[i]]
+        out[y] = sum(so_mixed_diff(g, x0, T, {i: y[i] for i in T})
+                     for r in range(0, min(m - 1, len(S)) + 1) for T in itertools.combinations(S, r))
+    return out
+
+
+def so_random_function(rng, n, k, scales):
+    confs = all_configs(n, k)
+    g = {y: 0.0 for y in confs}
+    for order, scale in scales:
+        for T in itertools.combinations(range(n), min(order, n)):
+            table = rng.normal(0, scale, size=(k,) * len(T))
+            for y in confs:
+                g[y] += float(table[tuple(y[i] for i in T)])
+    return g
+
+
+@conjecture("XI.10 Order-m anchored remainder (m = 2, 3): |g - I_{m-1} g| <= sum of c_T over the m-subsets T of the changed sites; the extremal function I_{m-1} g - remainder stays in the class with the same ball data")
+def t_anchored_remainder(rng, trials):
+    worst = 0.0
+    for _ in range(max(2, trials // 6)):
+        n = int(rng.integers(3, 5))
+        k = int(rng.integers(2, 4)) if n == 3 else 2
+        m = int(rng.integers(2, 4))
+        confs = all_configs(n, k)
+        g = so_random_function(rng, n, k, ((1, 1.0), (2, 0.5), (3, 0.3), (n, 0.05)))
+        x0 = tuple(int(v) for v in rng.integers(0, k, size=n))
+        c = so_constants(g, n, k, m)
+        interp = so_interpolant(g, n, k, m, x0)
+        h = {}
+        for y in confs:
+            S = [i for i in range(n) if y[i] != x0[i]]
+            rem = sum(c[T] for T in itertools.combinations(S, m))
+            err = abs(g[y] - interp[y])
+            if err > rem + 1e-9:
+                return False, dict(reason="anchored remainder bound violated", m=m, err=err, rem=rem)
+            if rem > 0:
+                worst = max(worst, err / rem)
+            h[y] = interp[y] - rem
+        ch = so_constants(h, n, k, m)
+        if any(ch[T] > c[T] + 1e-9 for T in c):
+            return False, dict(reason="extremal extension leaves the class")
+        if any(abs(h[y] - g[y]) > 1e-9 for y in confs if sum(a != b for a, b in zip(y, x0)) < m):
+            return False, dict(reason="extremal extension changes the ball data")
+    return True, dict(max_err_over_remainder=worst)
+
+
+@conjecture("XI.11 Second-order envelopes: the star sandwich is the exact envelope (LP over the whole class with star data); x0 is certified for every consistent residual iff it minimises its own lower pairwise model")
+def t_star_exact(rng, trials):
+    from scipy.optimize import linprog
+    seen = dict(certified=0, not_certified=0)
+    for _ in range(max(2, trials // 6)):
+        n, k = (3, 2) if rng.random() < 0.6 else (3, 3)
+        confs = all_configs(n, k)
+        idx = {y: j for j, y in enumerate(confs)}
+        N = len(confs)
+        g = so_random_function(rng, n, k, ((1, 1.0), (2, 0.3), (3, 0.15)))
+        f = so_random_function(rng, n, k, ((1, 1.0), (2, 0.4)))
+        c = so_constants(g, n, k, 2)
+        x0 = min(confs, key=lambda y: f[y] + g[y])
+        rows, rhs = [], []
+        for (i, j) in itertools.combinations(range(n), 2):
+            for x in confs:
+                for a in range(k):
+                    for b in range(k):
+                        if a == x[i] or b == x[j]:
+                            continue
+                        row = np.zeros(N)
+                        for (ua, ub, sgn) in ((1, 1, 1), (1, 0, -1), (0, 1, -1), (0, 0, 1)):
+                            y = list(x)
+                            if ua:
+                                y[i] = a
+                            if ub:
+                                y[j] = b
+                            row[idx[tuple(y)]] += sgn
+                        rows += [row, -row]
+                        rhs += [c[(i, j)], c[(i, j)]]
+        star = [y for y in confs if sum(a != b for a, b in zip(y, x0)) <= 1]
+        Aeq = np.zeros((len(star), N))
+        for r_, y in enumerate(star):
+            Aeq[r_, idx[y]] = 1
+        beq = np.array([g[y] for y in star])
+        interp = so_interpolant(g, n, k, 2, x0)
+        lower = {}
+        for y in confs:
+            S = [i for i in range(n) if y[i] != x0[i]]
+            rem = sum(c[T] for T in itertools.combinations(S, 2))
+            lower[y] = interp[y] - rem
+            for sign in (1, -1):
+                obj = np.zeros(N)
+                obj[idx[y]] = sign
+                res = linprog(obj, A_ub=np.array(rows), b_ub=np.array(rhs), A_eq=Aeq, b_eq=beq, bounds=(None, None),
+                              method="highs")
+                if res.status != 0 or abs(sign * res.fun - (interp[y] - sign * rem)) > 1e-7:
+                    return False, dict(reason="star envelope is not the LP optimum", lp=sign * res.fun,
+                                       formula=interp[y] - sign * rem)
+        # certified minimiser:  x0 minimises f + lower  <=>  x0 minimises f + g' for every consistent g' in the class
+        own = all(f[y] + lower[y] >= f[x0] + g[x0] - 1e-10 for y in confs)
+        robust = True
+        for y in confs:                                           # LP: can some consistent g' make y strictly better?
+            obj = np.zeros(N)
+            obj[idx[y]] = 1
+            res = linprog(obj, A_ub=np.array(rows), b_ub=np.array(rhs), A_eq=Aeq, b_eq=beq, bounds=(None, None),
+                          method="highs")
+            if f[y] + res.fun < f[x0] + g[x0] - 1e-8:
+                robust = False
+        if own != robust:
+            return False, dict(reason="certified-minimiser criterion fails", own=own, robust=robust)
+        seen["certified" if own else "not_certified"] += 1
+    return True, seen
+
+
+def zk_weight(w, W, x):
+    n = len(w)
+    val = 1.0
+    for i in range(n):
+        val *= w[i][x[i]]
+        for j in range(n):
+            if j != i:
+                val *= W[i][j][x[i], x[j]]
+    return val
+
+
+def zk_Z(w, W, n, k):
+    return sum(zk_weight(w, W, x) for x in all_configs(n, k))
+
+
+@conjecture("XI.12 Partition-function rules: cut bracket Lam Z_S Z_Sc <= Z <= Ups Z_S Z_Sc with the products of cut-factor bounds; eliminating a site with at most two neighbours into one-body / pair factors preserves Z")
+def t_partition_rules(rng, trials):
+    for _ in range(max(2, trials // 2)):
+        n = int(rng.integers(3, 6))
+        k = int(rng.integers(2, 4)) if n <= 4 else 2
+        w = [rng.uniform(0.2, 2.0, size=k) for _ in range(n)]
+        # chain with optional next-nearest neighbour factors; all other pair factors are 1
+        W = [[np.ones((k, k)) for _ in range(n)] for _ in range(n)]
+        for i in range(n - 1):
+            W[i][i + 1] = rng.uniform(0.3, 1.5, size=(k, k))
+            if rng.random() < 0.5:
+                W[i + 1][i] = rng.uniform(0.3, 1.5, size=(k, k))
+        Z = zk_Z(w, W, n, k)
+        # --- cut rule
+        S = [i for i in range(n) if rng.random() < 0.5] or [0]
+        if len(S) == n:
+            S = S[:-1]
+        Sc = [i for i in range(n) if i not in S]
+
+        def restricted(part):
+            w2 = [w[i] if i in part else np.ones(k) for i in range(n)]
+            W2 = [[W[i][j] if (i in part and j in part) else np.ones((k, k)) for j in range(n)] for i in range(n)]
+            return zk_Z(w2, W2, n, k) / k ** (n - len(part))       # pinned sites contribute one state each
+        lam = ups = 1.0
+        for i in range(n):
+            for j in range(n):
+                if i != j and ((i in S) != (j in S)):
+                    lam *= W[i][j].min()
+                    ups *= W[i][j].max()
+        zs, zc = restricted(S), restricted(Sc)
+        if not (lam * zs * zc <= Z * (1 + 1e-9) and Z <= ups * zs * zc * (1 + 1e-9)):
+            return False, dict(reason="cut bracket fails", lo=lam * zs * zc, Z=Z, hi=ups * zs * zc)
+        # --- elimination of an end site (one neighbour) and of an interior site (two neighbours)
+        for site in (0, n // 2):
+            nb = [j for j in range(n) if j != site and (not np.all(W[site][j] == 1) or not np.all(W[j][site] == 1))]
+            if not 1 <= len(nb) <= 2:
+                continue
+            w2 = [v.copy() for v in w]
+            W2 = [[M.copy() for M in row] for row in W]
+            if len(nb) == 1:
+                j = nb[0]
+                T = np.array([sum(w[site][a] * W[site][j][a, b] * W[j][site][b, a] for a in range(k)) for b in range(k)])
+                w2[j] = w2[j] * T
+            else:
+                j, l = nb
+                T = np.array([[sum(w[site][a] * W[site][j][a, b] * W[j][site][b, a] * W[site][l][a, c_] * W[l][site][c_, a]
+                                   for a in range(k)) for c_ in range(k)] for b in range(k)])
+                W2[j][l] = W2[j][l] * T
+            w2[site] = np.ones(k)
+            for j in range(n):
+                W2[site][j] = np.ones((k, k))
+                W2[j][site] = np.ones((k, k))
+            Z2 = zk_Z(w2, W2, n, k) / k                              # the eliminated site is pinned to one state
+            if abs(Z2 - Z) > 1e-9 * Z:
+                return False, dict(reason="elimination changes Z", Z=Z, Z2=Z2, neighbours=len(nb))
+    return True, {}
+
+
+@conjecture("XI.13 Sampled free-energy sandwich: for N independent samples of a product reference, P(|empirical mean - mean| >= eta) <= 2 exp(-2 N eta^2 / sum c_i^2), and the sampled interval misses ln(Z/Z0) with at most that probability (exact enumeration of sample tuples)")
+def t_sampled_sandwich(rng, trials):
+    worst = 0.0
+    for _ in range(max(2, trials // 6)):
+        n = int(rng.integers(1, 4))
+        k = 2
+        N = int(rng.integers(1, 4 if n <= 2 else 3))
+        configs = all_configs(n, k)
+        p = [rng.dirichlet(np.ones(k) * rng.uniform(0.3, 3.0)) for _ in range(n)]
+        W = np.array([math.prod(p[i][x[i]] for i in range(n)) for x in configs])
+        # residual: additive part plus a small generic part; exact bounded-difference constants
+        g = {x: float(sum(rng.normal(0, 1.0, size=(n, k))[i, x[i]] for i in range(n))) for x in configs}
+        for x in configs:
+            g[x] += 0.3 * float(rng.normal())
+        c = np.array([max(abs(g[x] - g[x[:i] + (a,) + x[i + 1:]]) for x in configs for a in range(k)) for i in range(n)])
+        C = float(np.sum(c ** 2))
+        if C == 0:
+            continue
+        gv = np.array([g[x] for x in configs])
+        m = float(W @ gv)
+        beta = float(rng.uniform(-3.0, 3.0))
+        L = math.log(float(W @ np.exp(-beta * gv)))
+        if not (-beta * m - 1e-9 <= L <= -beta * m + beta ** 2 * C / 8 + 1e-9):
+            return False, dict(reason="exact sandwich fails (generator or III.2)")
+        etas = [float(rng.uniform(0.05, 1.5) * math.sqrt(C)) for _ in range(4)]
+        dev = np.zeros(len(etas))
+        bad = np.zeros(len(etas))
+        total = 0.0
+        for omega in itertools.product(range(len(configs)), repeat=N):
+            pw = math.prod(W[j] for j in omega)
+            mh = sum(gv[j] for j in omega) / N
+            total += pw
+            for e_, eta in enumerate(etas):
+                if abs(mh - m) >= eta:
+                    dev[e_] += pw
+                if not (-beta * mh - abs(beta) * eta <= L <= -beta * mh + abs(beta) * eta + beta ** 2 * C / 8):
+                    bad[e_] += pw
+        if abs(total - 1.0) > 1e-9:
+            return False, dict(reason="sample weights do not sum to one")
+        for e_, eta in enumerate(etas):
+            bound = 2 * math.exp(-2 * N * eta ** 2 / C)
+            if dev[e_] > bound + 1e-12 or bad[e_] > bound + 1e-12:
+                return False, dict(reason="sampled sandwich violated", deviation=float(dev[e_]), miss=float(bad[e_]),
+                                   bound=bound, N=N, n=n)
+            worst = max(worst, dev[e_] / bound)
+    return True, dict(max_prob_over_bound=worst)
+
+
+# ----------------------------------------------------------------------------------------------
 # Refuted conjectures kept for the record (see docs/DEAD_ENDS.md)
 # ----------------------------------------------------------------------------------------------
 
@@ -2218,6 +2999,138 @@ def t_dead_mcdiarmid_correlated(rng, trials):
         return False, dict(reason="explicit counterexample (random search found none): mu uniform on {00, 11}, g = x1 + x2",
                            ratio=lhs / rhs, lhs=lhs, rhs=rhs, n=2, k=2, beta=1.0)
     return True, {}
+
+
+@conjecture("DEAD.6 Best-first search needs at most N_cov + 1 evaluations (no radius augmentation)", expect_fail=True)
+def t_dead_best_first_optimal(rng, trials):
+    """Refuted claim: optimistic (Piyavskii-Shubert) search is within one evaluation of the smallest certificate.
+    It is only competitive with covers at shrunk radii (XI.4): a hub that covers many shallow states is never the
+    minimiser of the certified lower bound, so the search evaluates the states one by one."""
+    for it in range(trials):
+        n = int(rng.integers(5, 11))
+        d = cg_metric(rng, n, asym=False)
+        kappa = float(rng.choice([0.0, 0.2, 0.5]))
+        g = cg_lipschitz(rng, d, kappa)
+        f = rng.normal(0, 1.0, size=n) * float(rng.choice([0.2, 1.0, 3.0]))
+        E = f + g
+        eps = float(rng.choice([0.05, 0.2, 0.5]))
+        s = cg_slack(d, g)
+        ncov = cg_min_cover(s <= (E - E.min())[None, :] + eps + 1e-12)
+        m = len(cg_best_first(d, f, g, eps, int(rng.integers(n))))
+        if m > ncov + 1:
+            return False, dict(reason="random instance: best-first exceeds N_cov + 1", evaluations=m, N_cov=ncov,
+                               found_at_trial=it + 1)
+    # explicit family: minimiser far away, one hub of huge energy at distance 1 from N leaves (mutual distance 2)
+    N, far = 8, 10.0
+    n = N + 2
+    d = np.full((n, n), 2.0)
+    d[0, :] = d[:, 0] = far
+    d[1, 2:] = d[2:, 1] = 1.0
+    np.fill_diagonal(d, 0.0)
+    f = np.full(n, 1.5)
+    f[0], f[1] = 0.0, 100.0
+    g = np.zeros(n)
+    ncov = cg_min_cover(cg_slack(d, g) <= (f - f.min())[None, :] + 0.1 + 1e-12)
+    m = len(cg_best_first(d, f, g, 0.1, 0))
+    if m > ncov + 1:
+        return False, dict(reason="hub instance: best-first evaluates every leaf", evaluations=m, N_cov=ncov)
+    return True, {}
+
+
+@conjecture("DEAD.7 Every certificate of an eps-optimal configuration evaluates every state of the energy shell gap < (1-kappa) sigma - eps", expect_fail=True)
+def t_dead_shell_gloss(rng, trials):
+    """Refuted gloss of the witness-size bound (II.4 is the true statement, for certificates whose incumbent is an
+    evaluated point).  A configuration certificate (every residual consistent with the evaluations makes xhat
+    eps-optimal) may miss shell states: states separated from xhat by the white-box part alone cost nothing."""
+    for it in range(trials):
+        n, d, kappa, f, g, eps = cg_instance(rng, nmax=6, kappas=(0.0, 0.5))
+        E = f + g
+        gap = E - E.min()
+        for size in range(1, n):
+            for B in itertools.combinations(range(n), size):
+                B = list(B)
+                _, _, _, L, U = cg_bounds(d, f, g, B)
+                DB = np.minimum(d, U[:, None] - L[None, :])
+                np.fill_diagonal(DB, 0.0)
+                regret = np.max(DB + f[:, None] - f[None, :], axis=1)
+                if np.min(regret) > eps + 1e-12:
+                    continue                                       # not a configuration certificate
+                for y in range(n):
+                    if y in B:
+                        continue
+                    sigma = min(d[a, y] for a in B)
+                    if gap[y] < (1 - kappa) * sigma - eps - 1e-9:
+                        return False, dict(reason="configuration certificate misses a shell state", evaluated=len(B),
+                                           gap=float(gap[y]), threshold=float((1 - kappa) * sigma - eps),
+                                           found_at_trial=it + 1)
+    return True, {}
+
+
+@conjecture("DEAD.8 The transport-entropy (T1) constant is determined at a single inverse temperature: sup_g 2 ln E e^{b(g-Eg)} / b^2 does not depend on b", expect_fail=True)
+def t_dead_T1_single_beta(rng, trials):
+    """Refuted reading of the Bobkov-Goetze equivalence: it needs the bound for ALL beta.  Two-point space, discrete
+    metric, mu = Bernoulli(0.02): the T1 constant is 1/(2 phi(p)), phi(p) = ln((1-p)/p)/(1-2p), while at fixed beta the
+    best sub-Gaussian constant is strictly smaller."""
+    p = 0.02
+    C = (1 - 2 * p) / (2 * math.log((1 - p) / p))
+
+    def K(beta):                                                   # best constant at this beta (g = +-1[x = 1])
+        vals = []
+        for sgn in (1.0, -1.0):
+            lm = math.log((1 - p) * math.exp(-beta * sgn * p) + p * math.exp(beta * sgn * (1 - p)))
+            vals.append(2 * lm / beta ** 2)
+        return max(vals)
+
+    qs = np.linspace(1e-4, 1 - 1e-4, 40001)
+    qs = qs[np.abs(qs - p) > 1e-6]
+    t1 = float(np.max((qs - p) ** 2 / (2 * (qs * np.log(qs / p) + (1 - qs) * np.log((1 - qs) / (1 - p))))))
+    grid = [K(b) for b in np.linspace(0.05, 60, 2400)]
+    if abs(t1 - C) > 1e-4 or max(grid) > C * (1 + 1e-9) or max(grid) < C * (1 - 1e-3):
+        raise RuntimeError("sanity: T1 constant of the Bernoulli measure is not 1/(2 phi(p))")
+    if K(1.0) < C * (1 - 1e-6):
+        return False, dict(reason="fixed-beta constant is smaller than the T1 constant", T1_constant=C, K_beta_0_1=K(0.1),
+                           K_beta_1=K(1.0), K_beta_30=K(30.0))
+    return True, {}
+
+
+@conjecture("DEAD.9 For every reference (also dependent ones) the largest Jensen gap ln E e^{b(g-Eg)} over the bounded-difference class is attained by an additive two-level residual", expect_fail=True)
+def t_dead_additive_extremal_dependent(rng, trials):
+    """Refuted extension of III.3 (which needs a PRODUCT reference).  Two ternary sites, c = (1, 1), beta = 2, with the
+    correlated law below (every two-site law is a Markov chain): a non-additive admissible residual has a strictly
+    larger gap than every additive one (the best additive residual is two-level, by convexity).  Found by the
+    literature check L6 (T3) and re-verified here by enumeration of all {0,1,2}-valued admissible functions."""
+    beta = 2.0
+    law = np.array([[0.0112, 0.4674, 0.0278], [0.0782, 0.0002, 0.0909], [0.1403, 0.0296, 0.1544]])
+
+    def gap(mu, g):
+        return math.log(float(np.sum(mu * np.exp(beta * (g - np.sum(mu * g))))))
+
+    def admissible(g):
+        return all(abs(g[a, j] - g[b, j]) <= 1 + 1e-12 and abs(g[j, a] - g[j, b]) <= 1 + 1e-12
+                   for a in range(3) for b in range(3) for j in range(3))
+
+    def best_additive(mu):
+        return max(gap(mu, s1 * np.array(A1, dtype=float)[:, None] + s2 * np.array(A2, dtype=float)[None, :])
+                   for A1 in itertools.product([0, 1], repeat=3) for A2 in itertools.product([0, 1], repeat=3)
+                   for s1 in (1, -1) for s2 in (1, -1))
+
+    def best_integer(mu):
+        best = -1.0
+        for vals in itertools.product([0, 1, 2], repeat=9):
+            g = np.array(vals, dtype=float).reshape(3, 3)
+            if admissible(g):
+                best = max(best, gap(mu, g))
+        return best
+
+    mu = law                                                      # the dependent reference under test
+    add, full = best_additive(mu), best_integer(mu)
+    g_star = np.array([[1, 0, 1], [1, 1, 2], [2, 1, 2]], dtype=float)
+    if not admissible(g_star):
+        raise RuntimeError("sanity: the recorded extremal residual is not admissible")
+    if full > add + 1e-6:
+        return False, dict(reason="dependent reference: a non-additive residual beats every additive one",
+                           best_additive=add, best_overall=full, recorded_residual=gap(mu, g_star))
+    return True, dict(best_additive=add, best_overall=full)
 
 
 # ----------------------------------------------------------------------------------------------

@@ -282,10 +282,12 @@ theorem robust_min_interval_exact {d : X → X → ℝ} (hd : IsEnvelope d) (A :
   obtain ⟨hadm, hint⟩ := interpEnv_admissible_and_interpolates hd A hA v hv ht.1 ht.2
   exact ⟨_, hadm, hint, hFt⟩
 
-/-- **The robust interval is exact (finite temperature).**  For consistent anchor data and any
-`β`, every value between the partition functions computed with the upper and the lower McShane
-envelope is the partition function of `f + g` for some admissible residual `g` that matches the
-data on the anchors. -/
+/-- **The robust interval is exact (finite temperature).**  For consistent anchor data, every
+value between the partition functions computed with the upper and the lower McShane envelope is
+the partition function of `f + g` for some admissible residual `g` that matches the data on the
+anchors.  The statement is meaningful for `β ≥ 0`, where the hypothesis interval is the range of
+`Z` (`robust_partition_bracket`); for `β < 0` the two ends are exchanged and the hypothesis
+interval is empty or a single point. -/
 theorem robust_partition_interval_exact {d : X → X → ℝ} (hd : IsEnvelope d) (A : Finset X)
     (hA : A.Nonempty) (v : X → ℝ) (hv : ∀ a ∈ A, ∀ b ∈ A, v a - v b ≤ d a b) (f : X → ℝ)
     (S : Finset X) (β : ℝ) (τ : ℝ)
@@ -339,10 +341,13 @@ a minimiser of `f + g` for *some* admissible residual `g` that agrees with the d
 2. `f x + lowerEnv x ≤ f y + upperEnv y` for all `y` (its optimistic value does not exceed the
    pessimistic value of any competitor; for an anchor `y` this is "lower bound ≤ incumbent").
 
-Hence the *exact* set of configurations that may be discarded after the given evaluations is the
-set violating 1 or 2: no pruning rule using the same information can discard more, and any rule
-discarding less is not optimal.  With one anchor and the discrete envelope this is the
-pruning-interval rule of minimised dead-end elimination. -/
+Hence the set violating 1 or 2 is *exactly* the set of configurations that are minimisers for no
+admissible residual consistent with the evaluations: a rule that keeps every possible minimiser
+cannot discard more, and any rule discarding less is not optimal.  (A rule that only preserves
+the minimum *value* may discard more because of ties; the exact criterion for certifying a
+configuration is `robust_certified_with_anchors_iff` in `ConditionalEnvelope.lean`.)  With one
+anchor and the discrete envelope this is the pruning-interval rule of minimised dead-end
+elimination. -/
 theorem robust_minimizer_with_anchors_iff {d : X → X → ℝ} (hd : IsEnvelope d) (A : Finset X)
     (hA : A.Nonempty) (v : X → ℝ) (hv : ∀ a ∈ A, ∀ b ∈ A, v a - v b ≤ d a b) (f : X → ℝ)
     (x : X) :

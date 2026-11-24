@@ -7,7 +7,13 @@ entries tagged **[Lean]** are refuted or repaired by a machine-checked statement
 
 ---
 
-## D1. "Dual reparameterization can strictly improve dead-end elimination" — FALSE for pairwise models  **[harness: DEAD.1] [Lean]**
+## D1. "Dual reparameterization can strictly improve dead-end elimination" — FALSE for single-site (Goldstein-type) tests on pairwise models  **[harness: DEAD.1] [Lean]**
+
+*Scope (added after the referee report, `reviews/R1` item 3).*  The refutation below concerns
+single-site tests with a context-independent dominator.  It must not be read as "the gauge does
+not help dominance-type pruning": multi-site improving maps (maximum persistency) and bound-based
+pruning are gauge dependent, and on a binary ferromagnetic chain no single-site test fires
+although one reparameterisation bound certifies the improving map `x ↦ 0…0`.
 
 *Conjecture (charter Direction A, as seeded).* Optimizing an LP-dual / tree-reweighted gauge
 (moving cost between unary and pair tables) should let Goldstein-type pruning eliminate more
@@ -289,7 +295,8 @@ The partition kernel has leaf, branch and thermal-prune rules but no decompositi
 tropical `sum` rule (`min(E₁+E₂) ≥ min E₁ + min E₂`) has only a one-sided finite-temperature
 analogue (Hölder), which is proved as a theorem but is not a rule of `zverify`.  The claim was
 reworded; a two-sided product rule for independent sub-instances (tree elimination) is listed as
-a natural extension.
+a natural extension.  *(Cycle 7: the extension now exists — cut and elimination rules, with
+separation theorems; see D22.)*
 
 ## D18. The voxel pipeline assumed its key hypothesis; smaller overstatements  **[Lean]**
 
@@ -390,3 +397,150 @@ violations.
   a chirality pseudoscalar; it concerns a signed offset along the axis and is now called
   `signed_offset_residual_torsion_bound`.  `verifyITop_sound_invariant` had no instance in the
   repository; it has one now (`interval_invariant_instance`).
+
+---
+
+# Cycle 7 — findings of the independent referee report and of the second research phase
+
+The entries below come from the referee report on checkpoint 477391f (`reviews/R1_referee_report.md`),
+from three further literature checks (`prior_art/L4`–`L6`), and from the work on certification
+geometry (theory report §11).  No machine-checked statement was found false; the entries concern
+prose that went beyond the theorems, novelty claims, a weakness of one kernel, and conjectures of
+the new phase that were refuted before formalization.
+
+## D21. "Any ε-certificate must evaluate every state of the energy shell" — FALSE for configuration certificates  **[harness: DEAD.7, XI.6] [Lean]**
+
+*Claim (theory report §2.4, blueprint §6.2 and §9, research log, up to 477391f).*  The witness-size
+theorem `anchor_necessary` was glossed as a lower bound on the number of residual evaluations of
+*any* certificate.
+
+*Refutation (referee, item 1).*  The theorem is about one format — incumbent = best evaluated
+point, bound = McShane lower envelope.  A certificate that a *configuration* is ε-optimal for
+every consistent residual need not evaluate anything where the white-box part alone separates
+the candidate: `X = {0,1}`, `d = 1`, `E₀ = (0,5)`, `Δ ≡ 0`: the shell is `{0}` and the sharp-minimum
+theorem certifies `x = 0` with no evaluation.  The harness finds such certificates in the third
+random instance (`DEAD.7`); its mutation that restricts the candidate to evaluated points
+survives, as it must.
+
+*What is true (machine-checked, `proofs/Frontiers/CertificateNotions.lean`).*  Three notions —
+point, value and configuration certificates — are characterised exactly; a value certificate is
+a covering of every state within slack radius `gap + ε` (`cover_of_isValueCertificate`), a point
+certificate is a configuration certificate (`isConfigCertificate_of_isCertificate`), and a
+configuration certificate becomes a point certificate after evaluating the candidate
+(`isCertificate_insert_of_isConfigCertificate`).  So the minimal sizes differ by at most one, and
+the shell bound holds for configuration certificates up to the candidate and the states it
+covers itself.
+
+## D22. The partition-function kernel had no sub-exponential exact certificates on chains — LIMITATION, repaired  **[Lean]**
+
+*Finding (referee, item 4).*  With the rules leaf / branch / thermal prune, an exact enclosure of
+`Z` needs constant pair factors on every leaf box, i.e. full enumeration (`2ⁿ` leaves for a
+two-state chain), although a transfer matrix computes `Z` in `O(nk²)`.  "Two semirings, parallel
+certificate rules" (already weakened in D17) therefore overstated what the (+,×) kernel could do
+for the stated application to chain molecules.
+
+*Repair.*  A *cut* rule (bracket `Λ·Z_S·Z_{Sᶜ} ≤ Z ≤ Υ·Z_S·Z_{Sᶜ}` from bounds on the cut factors,
+exact for independent subsystems; `zverify2_sound`) with a machine-checked separation from
+cut-free certificates (`cut_rule_separation`), and an *elimination* rule that sums out a site
+with at most two neighbours (theory report §11.8).  Lower bounds for connected families and a
+comparison with proof systems for model counting remain open.
+
+## D23. Withdrawn sentences (referee, items 5–13)
+
+* *"No pruning rule using the same information can discard more"* (query-model theorem): true for
+  the notion "minimiser for no admissible residual"; a rule that only preserves the minimum
+  value may discard more because of ties.  Wording corrected ("up to ties").
+* *"The exponent `d/2` cannot be improved in the Hessian-interval oracle model"*: not
+  established — the cited lower bounds are for point evaluations on `C²` balls; a box-enclosure
+  oracle on smoother energies would do better.  Replaced by the correct, weaker statement.
+* *"Uniform racing is within `w⁻¹(g/2)/w⁻¹(g)` of the offline optimum"*: the benchmark was
+  undefined, the factor is an artefact for two states and wrong (unbounded ratio `≈ K/2`) for
+  `K > 2` states without elimination.  Withdrawn.
+* *"Classical scaling with the trace shift is within `√((L+2)/2)` in general"*: needs the
+  trace-shifted solution to be PSD; *"with the same constants as Sonthalia et al."*: only for
+  `λ_r(Ĝ) ≥ 0` (otherwise their Proposition 1 is strictly stronger).
+* *Blueprint §8.4*: `σ₃` must be that of the centred coordinate matrix.
+* *"2–2.5× tighter than the lever-arm bound"*: the baseline was weak; against superposing the
+  heavier side the gain is at most `√2`.
+* *"The decomposition rule is necessary"*: relative to pairwise-LP leaves, on a disconnected
+  family.
+* *"Dual reparameterisation cannot improve dominance pruning"*: see the scope note added to D1.
+
+## D24. Novelty claims withdrawn after the referee report and the checks L4–L6
+
+* **A1–A5 (envelope duality).**  "Not found in the literature" was a statement about the
+  dead-end-elimination literature only.  As mathematics A1, A2, A4 are the theory of difference
+  constraints / McShane extension / `c`-conjugation / sharp minima / optimal recovery; A3 for
+  `E₀ ≡ 0` is Lemma 8 of Malherbe–Vayatis (2017); A5 is the `(1 − Lip f/L)` adversary of
+  Bachoc–Cesari–Gerchinovitz (2021) at the finest scale.  Reclassified as known in substance.
+* **D2(d) (the worst residual is additive two-level, fixed product reference).**  In print:
+  Alon–Boppana–Spencer (1998), Bobkov–Houdré–Tetali (2006).
+* **Identifications of §11.1** (polytrope, simple temporal network, conditional envelope as
+  minimal network, Kantorovich–Rubinstein and transport–entropy duality, thermal contact):
+  textbook or known in spirit; stated as such.
+* **Tools of §11.3–11.6** (LP duality for coverings, the exponential-weights bound as Csiszár's
+  dual lower bound, type covering, one-shot converses): known; what was *not* found is their use
+  to determine certificate complexity (verdicts and search logs in `prior_art/L4` C4–C9,
+  `prior_art/L6` T6–T8).
+
+## D25. "For dependent references the worst residual is still additive" — FALSE  **[harness: DEAD.9]**
+
+*Conjecture (natural extension of Theorem 3.1(d), and the first step of a planned "transfer-matrix
+formula for the exact worst-case free-energy gap of a chain reference").*
+
+*Refutation (found by the literature check L6, re-verified here).*  Two ternary sites with the
+correlated law `((0.0112, 0.4674, 0.0278), (0.0782, 0.0002, 0.0909), (0.1403, 0.0296, 0.1544))`,
+`c = (1,1)`, `β = 2`: the non-additive admissible residual with table
+`((1,0,1), (1,1,2), (2,1,2))` has gap `1.2818`, every additive residual at most `1.2767`.  Every
+two-site law is a Markov chain.  On the even-weight strings of the 3-cube, `β = 1/2`: `0.1201`
+against `0.1074`.
+
+*What survives.*  The fixed-`β` duality `sup_g ln E e^{β(g − E g)} = sup_ν [β·W − KL]`
+(`logMGF_le_transport_entropy` and Theorem 11.14) holds for every reference; additive two-level
+residuals give a computable lower bound, Wasserstein-matrix constants `‖Γc‖²` an upper bound.
+Open: binary Markov trees (no counterexample in 21 000 random binary 3-chains).
+
+## D26. "Best-first search is within one evaluation of the smallest certificate" — FALSE without radius augmentation  **[harness: DEAD.6, XI.4] [Lean]**
+
+*Conjecture.*  Optimistic (Piyavskii–Shubert) search needs at most `N_cov(ε) + 1` evaluations.
+
+*Refutation.*  A far minimiser, one hub of huge energy at distance 1 from `N` shallow states at
+mutual distance 2: the two evaluations {minimiser, hub} certify, best-first search evaluates all
+`N` states because the hub is never a minimiser of the lower bound.  Random instances violate
+the claim too (16th trial).  In dimension `d ≥ 2` the same phenomenon is Baran's theorem
+(`OPT = 2` against `Ω(ε^{1−d})`, `prior_art/L4` C7).  More generally no algorithm can be
+instance-optimal with respect to the certificate size: finding the good hub among `M` candidates
+is a search problem although the certificate has two points.
+
+*What is true (machine-checked, `bestFirst_card_le`).*  For a symmetric envelope and a
+`κ`-Lipschitz residual, the search stops after at most `|C| + 1` evaluations for *every* cover
+`C` with radii shrunk to `θ·(gap + ε/6)`, `θ = (1−κ)/(4(1+κ))`.
+
+## D27. "The Bobkov–Götze equivalence holds at a fixed inverse temperature" — FALSE  **[harness: DEAD.8]**
+
+*Claim (theory report §3.2 up to 477391f).*  A uniform bound `ln⟨e^{−β(Δ−⟨Δ⟩)}⟩₀ ≤ β²C/2` over the
+envelope class is equivalent to the transport inequality `T₁(C)`.
+
+*Refutation (referee, item 6).*  The equivalence needs the bound for all `β ∈ ℝ`.  For
+Bernoulli(0.02) with the discrete metric the `T₁` constant is `0.1233` while the best constant at
+`β = 0.1, 1, 30` is `0.0202, 0.0276, 0.0566`.  The correct fixed-`β` statement is the conjugate
+duality of Theorem 11.14 (known: Gozlan–Léonard 2007).
+
+## D28. Point evaluations under a first-order envelope: a paradigm with an exponential price  **[Lean] [harness: XI.3, XI.8]**
+
+This is a theorem rather than a refuted conjecture, recorded here because it closes a direction
+that the blueprint (§6.2, up to 477391f) presented as the main loop for non-decomposable
+residuals.
+
+* *Zero temperature.*  On product landscapes one evaluation certifies the minimum iff every site
+  is sharp (`product_single_certificate_iff`); otherwise the number of evaluations grows
+  exponentially in the number of non-sharp sites, with an exact exponent (theory report
+  Theorems 11.8–11.9; `binary_certificate_exponential`: at least `(6/5)ⁿ` although the residual
+  vanishes identically).
+* *Finite temperature.*  Every certificate of `ln Z` to within `ε` needs at least
+  `exp(H(π) − tε/β) / max_a Σ_y e^{−t·slack}` evaluations (`card_ge_entropy`): exponentially many
+  in the entropy of the Gibbs ensemble, even for sharp landscapes.
+* *Ways out that work.*  Higher-order structure of the residual (bounded mixed differences:
+  `n(k−1)+1` evaluations give an exact pairwise reduction, `secondOrder_remainder`,
+  `verify_sound_secondOrder`); linear information (one reference average pins `ln Z` to
+  `β²Σc_i²/8`, Theorem 3.1); extensive accuracy.

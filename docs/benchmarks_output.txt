@@ -82,3 +82,32 @@ torsions eps(rad) | actual RMSD | reduced-inertia bound | naive lever-arm bound
       32     0.10 |      0.6685 |                3.3486 |                7.6397
       96     0.02 |      0.3899 |                3.8334 |                9.8673
       96     0.10 |      2.0094 |               19.6117 |               47.0006
+
+====================================================================================================
+B8. Certificate complexity exponent on product landscapes (exact layer counts) and at finite temperature
+====================================================================================================
+ rho=e/c | R* (predicted) | n=25   | n=50   | n=100  | n=200  | n=400    [(1/n) ln max_mu L_mu]
+    0.25 |         0.3509 | 0.4107 | 0.3920 | 0.3751 | 0.3647 | 0.3587
+    0.50 |         0.1882 | 0.2356 | 0.2192 | 0.2073 | 0.1994 | 0.1947
+    0.75 |         0.0798 | 0.1360 | 0.1155 | 0.1004 | 0.0916 | 0.0866
+
+finite temperature, e/c = 1/2 (zero-temperature exponent R* = 0.1882):
+  beta*c | entropy H(pi) |   R_beta
+     0.5 |        0.6854 |   0.6857
+     1.0 |        0.6628 |   0.6658
+     4.0 |        0.3653 |   0.4817
+    40.0 |        0.0000 |   0.2159
+sharp site (e/c = 2: one evaluation certifies the ground state), beta*c = ln 2:
+   0.693 |        0.5004 |   0.5143   (verified one-shot bound: ln(6/5) = 0.1823)
+
+====================================================================================================
+B9. Best-first search: evaluations vs minimal cover N_cov(eps) vs shrunk cover (theta, eps/6)
+====================================================================================================
+ kappa | mean evals | mean N_cov | mean shrunk+1 | evals > N_cov+1 | max evals/N_cov
+   0.0 |       3.06 |       2.39 |          8.13 |           0.030 |            3.00
+   0.2 |       3.10 |       2.41 |          9.14 |           0.050 |            3.00
+   0.5 |       3.00 |       2.38 |          9.65 |           0.033 |            4.00
+   0.8 |       2.90 |       2.00 |          9.59 |           0.133 |            4.00
+hub instance with  4 leaves: best-first evaluates  5 points, the smallest certificate has 2
+hub instance with  8 leaves: best-first evaluates  9 points, the smallest certificate has 2
+hub instance with 16 leaves: best-first evaluates 17 points, the smallest certificate has 2

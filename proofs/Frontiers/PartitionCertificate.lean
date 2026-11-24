@@ -18,8 +18,9 @@ instance; `Z_encloses_partitionFn` shows that their exact rational partition sum
 partition function, so `lo(I⁻) ≤ Z_true ≤ hi(I⁺)`.
 
 Certificate constructors (the `leaf` / `branch` / `prune` rules mirror those of the tropical
-kernel; the tropical decomposition rule `sum` has no two-sided counterpart here — its one-sided
-analogue is the Hölder bound `partitionFn_holder`, which is a theorem but not a kernel rule):
+kernel; the tropical decomposition rule `sum` has no counterpart among these three rules — the
+two-sided decomposition rules `cut` and `elim` are added in `PartitionProduct.lean`, and the
+one-sided Hölder bound `partitionFn_holder` is a theorem but not a kernel rule):
 
 * `leaf lo hi` — factorised bound: pair factors are replaced by certified constants, the
   remaining product measure sums exactly (`∏ i, ∑ a, w i a`);

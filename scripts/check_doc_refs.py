@@ -76,6 +76,11 @@ IGNORE = {
     "u_i", "p_ij", "m_ij", "h_i", "J_ij", "lo_ij", "hi_ij", "W_ij", "w_i", "ρ_max",
     "D_i", "A_i", "P_ij", "Pat_ij", "base_i", "m_k", "U_ij", "x_p", "x_q", "lo_p", "hi_q", "hi_p", "lo_a", "value_a",
     "mutation_tests", "reference_checker", "audit_selftest",
+    # mathematical notation of the certification-geometry sections (theory report §§10-12)
+    "D_A", "N_cov", "N_frac", "N_point", "N_value", "N_config", "N_Z", "T_P", "T_Q", "W_d", "c_T", "c_ij",
+    "n_B", "n_P", "L_A", "U_A", "g_star", "L_μ", "R_β", "S_C", "L4_certified_optimisation_and_recovery",
+    "L5_polytropes_interval_uncertainty", "L6_transport_entropy_and_information_limits", "R1_referee_report",
+    "e_ν", "p_E", "δ_ν", "p_gap", "p_slack", "D_Q", "R2_referee_report",
     # names of JSON conformance vectors (experiments/certs/*.json)
     "residual_inconsistent_reject", "residual_lower_only", "residual_negative_c_reject",
     "partition_negative_reject", "residual_interval", "residual_interval_inconsistent_reject",

@@ -18,6 +18,16 @@ import proofs.Frontiers.VoxelBridge
 import proofs.Frontiers.SeparableVoxel
 import proofs.CertificateAlgebra
 import proofs.Frontiers.ProofComplexity
+import proofs.Frontiers.CertificationGeometry
+import proofs.Frontiers.CertificateNotions
+import proofs.Frontiers.ConditionalEnvelope
+import proofs.Frontiers.CertificateComplexity
+import proofs.Frontiers.ExponentialWeights
+import proofs.Frontiers.ProductRates
+import proofs.Frontiers.BestFirst
+import proofs.Frontiers.ThermalRobustness
+import proofs.Frontiers.SecondOrderEnvelope
+import proofs.Frontiers.PartitionProduct
 import proofs.AuditCommand
 
 /-!
@@ -158,6 +168,87 @@ import proofs.AuditCommand
 #print axioms MetricChain.sum_rule_separation
 #print axioms MetricChain.sum_rule_separation_size
 #print axioms MetricChain.sum_rule_separation_dataSize
+
+-- Certification geometry (second phase): slack coverings and the three notions of certificate
+#print axioms MetricChain.slack_isEnvelope
+#print axioms MetricChain.certLB_eq
+#print axioms MetricChain.isCertificate_iff_cover
+#print axioms MetricChain.certificate_of_cover
+#print axioms MetricChain.card_ge_of_weights
+#print axioms MetricChain.card_ge_of_fooling
+#print axioms MetricChain.card_ge_sum_inv
+#print axioms MetricChain.partition_bound
+#print axioms MetricChain.anchor_necessary'
+#print axioms MetricChain.isConfigCertificate_iff
+#print axioms MetricChain.cover_of_isValueCertificate
+#print axioms MetricChain.isConfigCertificate_of_isCertificate
+#print axioms MetricChain.isCertificate_insert_of_isConfigCertificate
+
+-- Conditional envelope: evaluations as a tropical rank-one update
+#print axioms MetricChain.condEnv_isEnvelope
+#print axioms MetricChain.condEnv_isGreatest
+#print axioms MetricChain.condEnv_tower
+#print axioms MetricChain.robust_minimizer_with_anchors_iff'
+#print axioms MetricChain.robust_certified_with_anchors_iff
+#print axioms MetricChain.worst_case_regret_isGreatest
+
+-- Certificate complexity: hardness, product landscapes, exponential-weights converses
+#print axioms MetricChain.domCertificate_iff
+#print axioms MetricChain.domCertificate_min_card
+#print axioms MetricChain.product_single_certificate_iff
+#print axioms MetricChain.partition_bound_hamming
+#print axioms MetricChain.product_partition_bound
+#print axioms MetricChain.homogeneous_certificate_dichotomy
+#print axioms MetricChain.binary_certificate_exponential
+#print axioms MetricChain.card_ge_exp_weights
+#print axioms MetricChain.card_ge_entropy
+#print axioms MetricChain.thermal_exp_weights
+#print axioms MetricChain.product_exp_weights
+#print axioms MetricChain.thermal_product_exp_weights
+#print axioms MetricChain.thermal_binary_exponential
+
+-- Best-first search with resource augmentation
+#print axioms MetricChain.bestFirst_sep_a
+#print axioms MetricChain.bestFirst_sep_b
+#print axioms MetricChain.bestFirst_sep_c
+#print axioms MetricChain.not_cocovered
+#print axioms MetricChain.bestFirst_card_le
+#print axioms MetricChain.bestFirst_certifies
+#print axioms MetricChain.bestFirst_card_le_sharp
+
+-- Finite temperature: thermal contact, free-energy certificates, transport-entropy
+#print axioms MetricChain.gibbsProb_range_eq
+#print axioms MetricChain.gibbsProb_range_with_anchors_eq
+#print axioms MetricChain.admissible_iff_weights
+#print axioms MetricChain.Zhi_eq
+#print axioms MetricChain.mean_slack_le
+#print axioms MetricChain.card_ge_laplace
+#print axioms MetricChain.logMGF_le_transport_entropy
+#print axioms MetricChain.gap_le_of_T1
+
+-- Second-order envelopes: star sandwich, exact envelope, certified minimiser
+#print axioms MetricChain.secondOrder_remainder
+#print axioms MetricChain.pairwise_sandwich
+#print axioms MetricChain.verify_sound_secondOrder
+#print axioms MetricChain.secondOrder_envelope_exact
+#print axioms MetricChain.secondOrder_robust_min_exact
+#print axioms MetricChain.secondOrder_certified_minimizer_iff
+
+-- Partition kernel with decomposition rules
+#print axioms MetricChain.zverify2_sound
+#print axioms MetricChain.zverify2Top_sound
+#print axioms MetricChain.WInstance.Z_cut
+#print axioms MetricChain.cut_rule_separation
+#print axioms MetricChain.WInstance.Z_elim1
+#print axioms MetricChain.WInstance.Z_elim2
+#print axioms MetricChain.elimination_separation
+#print axioms MetricChain.zverify2Top_chainCert
+#print axioms MetricChain.chain_separation
+#print axioms MetricChain.ferroChain_separation
+#print axioms MetricChain.product_rate_bound
+#print axioms MetricChain.product_entropy_bound
+#print axioms MetricChain.thermal_binary_sharp
+#print axioms MetricChain.thermal_binary_single_tight
 
 /-! ### Non-vacuity witnesses -/
 
@@ -599,6 +690,127 @@ theorem signed_offset_residual_torsion_bound (p0 p1 : AxisSpace) (δ : ℝ) :
     subst this; rfl
   · have : i = 1 := Finset.mem_singleton.mp hi
     subst this; rfl
+
+/-! #### Certification geometry (second phase) -/
+
+/-- Slack partition sum of the two-point discrete envelope at `t = log 3`: `1 + 1/3`. -/
+theorem bool_slack_sum (a : Bool) :
+    ∑ y : Bool, Real.exp (-Real.log 3 * slack (discreteEnvelope 1) (fun _ : Bool => (0 : ℝ)) a y)
+      = 4 / 3 := by
+  have h3 : Real.exp (-Real.log 3) = 1 / 3 := by
+    rw [Real.exp_neg, Real.exp_log (by norm_num : (0 : ℝ) < 3)]
+    norm_num
+  rw [Fintype.sum_bool]
+  cases a <;> simp [slack, discreteEnvelope, h3] <;> norm_num
+
+/-- **Witness for `card_ge_exp_weights`.**  On two states with the discrete envelope of
+oscillation `1` and `f = g = 0`, both states together are an exact certificate, and the
+exponential-weights converse (uniform weights, `t = log 3`) shows that every exact certificate
+evaluates both: the hypotheses of the theorem are satisfiable and its conclusion is sharp. -/
+theorem exp_weights_two_state :
+    IsCertificate (discreteEnvelope 1) (fun _ : Bool => (0 : ℝ)) (fun _ => 0) univ
+        univ_nonempty 0 ∧
+      ∀ (A : Finset Bool) (hA : A.Nonempty),
+        IsCertificate (discreteEnvelope 1) (fun _ : Bool => (0 : ℝ)) (fun _ => 0) A hA 0 →
+          2 ≤ A.card := by
+  refine ⟨full_evaluation_certificate (fun x => by simp [discreteEnvelope]) _ _, ?_⟩
+  intro A hA h
+  have key := card_ge_exp_weights_certificate (t := Real.log 3) (Estar := 0) (B := 4 / 3)
+    (Real.log_nonneg (by norm_num)) (fun _ : Bool => (1 : ℝ)) (fun _ => zero_le_one)
+    (fun _ => by norm_num) h (by
+      intro a _
+      have := bool_slack_sum a
+      simp only [one_mul, add_zero, sub_zero] at this ⊢
+      exact this.le)
+  simp only [mul_zero, Real.exp_zero, one_mul, Fintype.sum_bool] at key
+  by_contra hlt
+  have hc : A.card ≤ 1 := by omega
+  have hc' : (A.card : ℝ) ≤ 1 := by exact_mod_cast hc
+  nlinarith
+
+/-- **Witness for `card_ge_entropy`.**  Two states, discrete envelope of oscillation `1`,
+`f = g = 0`, `β = 1`: the full evaluated set reproduces the partition function exactly, and the
+entropy bound at `t = log 3` shows that every evaluated set whose optimistic partition function
+is exact contains both states (`log 2 ≤ log (|A| · 4/3)`). -/
+theorem entropy_bound_two_state :
+    (∑ y : Bool, Real.exp (-1 * ((0 : ℝ) + lowerEnv (discreteEnvelope 1) univ univ_nonempty
+        (fun _ => 0) y)) ≤ Real.exp 0 * ∑ _y : Bool, Real.exp (-1 * ((0 : ℝ) + 0))) ∧
+      ∀ (A : Finset Bool) (hA : A.Nonempty),
+        (∑ y : Bool, Real.exp (-1 * ((0 : ℝ) + lowerEnv (discreteEnvelope 1) A hA
+          (fun _ => 0) y)) ≤ Real.exp 0 * ∑ _y : Bool, Real.exp (-1 * ((0 : ℝ) + 0))) →
+          2 ≤ A.card := by
+  have hd : IsEnvelope (discreteEnvelope (X := Bool) 1) := discreteEnvelope_isEnvelope zero_le_one
+  constructor
+  · have hL : ∀ y : Bool, lowerEnv (discreteEnvelope 1) univ univ_nonempty
+        (fun _ : Bool => (0 : ℝ)) y = 0 := fun y =>
+      lowerEnv_eq_of_mem hd univ univ_nonempty _
+        (fun a _ b _ => by
+          simp only [sub_self]
+          unfold discreteEnvelope
+          split_ifs <;> norm_num)
+        (mem_univ y)
+    simp only [hL]
+    rw [Real.exp_zero, one_mul]
+  · intro A hA h
+    have key := card_ge_entropy (discreteEnvelope 1) (fun _ : Bool => (0 : ℝ)) (fun _ => 0) A hA
+      (β := 1) (ε := 0) (t := Real.log 3) (B := 4 / 3) one_pos (Real.log_nonneg (by norm_num)) h
+      (fun a _ => (bool_slack_sum a).le)
+    have hπ : ∀ y : Bool, gibbsProb 1 (fun _ : Bool => (0 : ℝ)) y = 1 / 2 := by
+      intro y
+      simp [gibbsProb]
+    simp only [add_zero, hπ, Fintype.sum_bool, mul_zero, zero_div] at key
+    have hlog : Real.log 2 ≤ Real.log (A.card * (4 / 3)) := by
+      have h2 : Real.log (1 / 2) = -Real.log 2 := by
+        rw [one_div, Real.log_inv]
+      rw [h2] at key
+      linarith
+    have hpos : (0 : ℝ) < A.card * (4 / 3) := by
+      have : 0 < A.card := Finset.card_pos.mpr hA
+      positivity
+    have h2le : (2 : ℝ) ≤ A.card * (4 / 3) := by
+      by_contra hlt
+      have := Real.log_lt_log hpos (not_le.mp hlt)
+      linarith
+    by_contra hlt
+    have hc : A.card ≤ 1 := by omega
+    have hc' : (A.card : ℝ) ≤ 1 := by exact_mod_cast hc
+    nlinarith
+
+/-- **Witness for `CertificateNotions` (the referee's counterexample to the "any certificate"
+gloss).**  Two states, discrete envelope of oscillation `1`, known part `0` at `true` and `5` at
+`false`, zero residual.  The single evaluation at `false` certifies the configuration `true` as
+an exact minimiser for every admissible residual consistent with it, although
+(i) `{false}` is not a point certificate, and (ii) `true` is covered by no other point at the
+level of the minimum, so every point certificate must evaluate it.  Evaluating the candidate
+turns the configuration certificate into a point certificate. -/
+theorem config_certificate_skips_forced_point :
+    IsConfigCertificate (discreteEnvelope 1) (fun b : Bool => if b then (0 : ℝ) else 5)
+        (fun _ => 0) {false} (singleton_nonempty false) true 0 ∧
+      ¬ IsCertificate (discreteEnvelope 1) (fun b : Bool => if b then (0 : ℝ) else 5)
+        (fun _ => 0) {false} (singleton_nonempty false) 0 ∧
+      (∀ a : Bool, a ≠ true →
+        ¬ Covers (discreteEnvelope 1) (fun b : Bool => if b then (0 : ℝ) else 5) (fun _ => 0)
+          0 0 a true) ∧
+      IsCertificate (discreteEnvelope 1) (fun b : Bool => if b then (0 : ℝ) else 5)
+        (fun _ => 0) (insert true {false}) (insert_nonempty true {false}) 0 := by
+  have hadm : Admissible (discreteEnvelope 1) (fun _ : Bool => (0 : ℝ)) :=
+    admissible_of_bounds (lo := 0) _ fun _ => by norm_num
+  have hconf : IsConfigCertificate (discreteEnvelope 1) (fun b : Bool => if b then (0 : ℝ) else 5)
+      (fun _ => 0) {false} (singleton_nonempty false) true 0 := by
+    intro y
+    have h := condEnv_le (discreteEnvelope 1) {false} (singleton_nonempty false)
+      (fun _ : Bool => (0 : ℝ)) true y
+    cases y <;> simp [discreteEnvelope] at h ⊢ <;> linarith
+  refine ⟨hconf, ?_, ?_, isCertificate_insert_of_isConfigCertificate hadm _ hconf⟩
+  · rw [single_evaluation_certificate_iff]
+    intro h
+    have := h true
+    simp [discreteEnvelope] at this
+    linarith
+  · intro a ha
+    cases a
+    · simp [Covers, slack, discreteEnvelope]
+    · exact absurd rfl ha
 
 end MetricChain.NonVacuity
 

@@ -347,10 +347,14 @@ RESCERT(I, c, residual_oracle, eps):
 
 Why this is the right loop: a cell is closed exactly when `min (E₀ + L) ≥ U − ε` on it, and the
 only way to raise `L` is a new anchor inside or near the cell (`robust_min_bracket` is tight).
-Lower bound on the number of oracle calls of *any* such procedure: every configuration with
-energy gap below `(1−κ) c_min − ε` must be evaluated (`anchor_card_lower_bound`), where `κ` is
-the residual's true variation relative to the published constants — so tightening `c` is worth
-exactly as much as it shrinks that shell.
+Lower bound on the number of oracle calls of a procedure of *this form* (incumbent = best
+evaluated anchor, bound = McShane lower envelope): every configuration with energy gap below
+`(1−κ) c_min − ε` must be evaluated (`anchor_card_lower_bound`), where `κ` is the residual's true
+variation relative to the published constants.  This is not a bound for arbitrary certificates —
+a candidate that is separated from a state by the white-box part alone needs no evaluation there
+(theory report §2.4, correction) — and it is only the first layer of the covering bound: the
+exact statement is that the evaluated set must *cover* every configuration `y` within slack
+radius `gap(y) + ε` (theory report §11.2), which gives the a-priori estimates of §6.6 below.
 
 ### 6.3 Certified partition functions
 
@@ -395,13 +399,30 @@ Hessian enclosure: `φ_i(t) = E(c)/M + g_i (t−c_i) + (m/2)(t−c_i)²`, `ψ_i`
 relative width `≤ exp(β Σ_i (M−m) h_i²/2)` (`separable_voxel_ratio`).  Each one-dimensional
 integral is enclosed by a 1-D voxel sum with certified `exp` bounds, so the cost is
 `M × (1-D resolution)` per voxel, and the voxel count for accuracy `1+ε` drops from `ε^{-d}`-type
-to `ε^{-d/2}`-type scaling.  The Hessian enclosure itself (interval arithmetic on second
+to `ε^{-d/2}`-type scaling (with a dimension-dependent factor `d^{d/2}`; this is the rate of the
+scalar-sandwich scheme, not an optimal rate — theory report §3.4).  The Hessian enclosure itself (interval arithmetic on second
 derivatives) is the producer's obligation and is not covered by the Lean development.
 
-For exact tree-structured references use transfer matrices instead of branching: the kernel's
-`leaf` with `lo = hi = W` is exact on a fully fixed box, and a chain can be summed by `n` matrix
-products outside the kernel; a tree-elimination rule is a natural extension of the certificate
-algebra (not yet in the verified kernel).
+**Decomposition rules (Lean kernel `zverify2`, `proofs/Frontiers/PartitionProduct.lean`).**  With
+leaf / branch / thermal prune alone an exact enclosure needs full enumeration (`2ⁿ` leaves for a
+two-state chain; theory report §3.4, limitation).  The extended certificate type `ZCert2` adds:
+
+* `cut S p lo hi c₁ c₂` — split the sites into `S` and its complement; the checker verifies
+  `0 ≤ lo_ij ≤ W_ij ≤ hi_ij` on the box for every ordered pair across the cut and returns
+  `[Λ·l₁·l₂, Υ·h₁·h₂]` from the certificates of the two restricted instances
+  (`Λ = ∏ lo`, `Υ = ∏ hi`).  Exact when the two parts do not interact.  Use it whenever the
+  interaction graph (restricted to the current box) splits, or nearly splits.
+* `elim1 i j p rest`, `elim2 i j l p rest` — sum out a site `i` that interacts only with `j`
+  (resp. `j` and `l`) into a one-body factor of `j` (resp. a pair factor between `j` and `l`);
+  exact.  A chain is certified by `n − 1` eliminations and one leaf — the transfer-matrix
+  computation as a certificate (`chainCert`, `zverify2Top_chainCert`); trees, cycles and every
+  interaction graph of treewidth at most two reduce in the same way (always eliminate a site of
+  degree at most two).
+
+Producer order: eliminate while some site has at most two neighbours on the current box; cut
+when the graph splits; branch (conditioning) to create sites of low degree; prune thermally; a
+factorised leaf at the end.  The JSON format `metricchain-cert/1` and the reference checker do
+not carry `cut`/`elim` nodes yet; the conformance vectors of §11 are unchanged.
 
 ### 6.4 Free energies with a residual
 
@@ -434,6 +455,68 @@ oscillations, and the gap is second order in the cell size.
 To certify `Z^{(0)} > max_k Z^{(k)}` keep an interval per state and refine the state whose
 interval overlaps the leader's lower end most; stop when intervals separate.  Each interval is a
 `partition` certificate; the comparison itself needs no further proof object.
+
+### 6.6 What a residual certificate will cost, and the second-order alternative
+
+The loop of §6.2 is the right loop for a first-order envelope, but theory report §11 shows that
+its cost is dictated by the instance, not by the implementation.  Decide **before** running it.
+
+**Step 1 — is the incumbent sharp?**  For a candidate `x̂` test the sharp-minimum condition
+`d(x̂, y) ≤ E₀(y) − E₀(x̂) + ε` for all `y`, i.e. `min_y [E₀(y) − d(x̂,y)] ≥ E₀(x̂) − ε`: one
+`min` certificate for the pairwise model `E₀ − Σ_i δ_i(x̂_i, ·)`.  If it holds, `x̂` is ε-optimal
+for every admissible residual with **no** evaluation (`robust_certified_iff`), and the single
+evaluation at `x̂` is a point certificate (`single_evaluation_certificate_iff`).  With evaluations
+already made, the test is the same with the conditional envelope
+(`robust_certified_with_anchors_iff`).
+
+**Step 2 — if not, estimate the price.**  For every `t ≥ 0` any ε-certificate has
+
+    #evaluations  ≥  e^{−tε} · Σ_y e^{−t·gap(y)} / ∏_i (1 + (k_i − 1) e^{−t(1−κ)c_i})
+
+(`partition_bound_hamming`).  The numerator is a partition function of the landscape at inverse
+temperature `t`; for planning, bound `gap(y) ≤ E₀(y) − E₀(x̂) + κ·d(y, x̂) + (UB − LB)` and compute
+`Σ_y e^{−t(E₀(y) − E₀(x̂) + κ d(y,x̂))}` — a pairwise partition function with shifted one-body
+tables — by elimination (§6.3).  `κ` (the true variation of the residual relative to the
+published constants) is a planning parameter, not something the kernel knows.  On independent
+sites the bound is exponentially tight: the count is one if every site is sharp and otherwise
+about `exp(Σ_i r_i)` with `r_i = max_t [ln Z_i^{gap}(t) − ln Z_i^{slack}(t)]` (theory report
+Theorem 11.9).  For free energies the corresponding floor is
+`exp(H(π) − tε/β) / ∏_i (1 + (k_i−1) e^{−t(1−κ)c_i})` (`card_ge_entropy`): at least the
+exponential of the entropy.  If the estimate is beyond budget, do **not** run §6.2; change the
+information:
+
+* *linear information* — a reference average of the residual and the sandwich of §6.4;
+* *structure* — a second-order envelope (below);
+* *accuracy* — an extensive tolerance.
+
+**Step 3 — second-order envelopes.**  If the residual comes with certified bounds `c_ij` on its
+mixed second differences, `n(k−1)+1` evaluations on the star of a reference configuration `x₀`
+reduce the problem, without loss, to the pairwise kernel:
+
+```
+STARCERT(E0, residual oracle g, constants c_ij (symmetric, ≥ 0), eps):
+  x0 ← best configuration known
+  repeat
+    evaluate g at x0 and at every single-site neighbour of x0         # 1 + Σ_i (k_i − 1) calls
+    I⁻ ← pairwise instance:  h_i(s)    = E0.h_i(s) + [g(x0[i↦s]) − g(x0)]        (rounded down)
+                             J_ij(a,b) = E0.J_ij(a,b) − (c_ij/2)·[a ≠ x0_i]·[b ≠ x0_j]
+    (cert, L, y) ← MINCERT(I⁻)              # §6.1; y = minimiser found for I⁻
+    if y = x0:  return (x0, cert)            # x0 is optimal for EVERY residual of the class
+                                             # consistent with the star data
+    evaluate g(y);  UB ← min(UB, E(y))
+    if UB − (L + g(x0)) ≤ eps:  return (argmin, cert)
+    x0 ← best evaluated configuration        # re-centre: the remainder grows like the number
+                                             # of changed pairs, so stay near the incumbent
+```
+
+Guarantee: `L + g(x₀) ≤ E₀(x) + g(x)` for all `x` in the box (`verify_sound_secondOrder`); the
+two pairwise models `E₀ + g_star ∓ Σ_{i<j changed} c_ij` are the exact lower and upper envelopes
+of the class given the star data (`secondOrder_envelope_exact`), so no certificate using the
+same evaluations can report a larger bound; the exit `y = x0` is exact
+(`secondOrder_certified_minimizer_iff`).  After an evaluation at `y` the gap is at most twice
+the pair remainder at `y`.  For partition functions use the same two pairwise models in the
+weight domain (`Z(E₀ + g_star + R) ≤ Z ≤ Z(E₀ + g_star − R)`, both certified by §6.3).  The
+constants `c_ij` are the producer's obligation; none are certified here for a concrete residual.
 
 ---
 
@@ -486,8 +569,10 @@ theirs, obtaining `δ_i(a,b)` directly; close the tables; export `c_i = max_{a,b
 
 **What to optimise in training** (follows from Theorems 2.7 and 3.1): the certified constants
 `c_i` — not merely the fit.  Halving `c_i` (i) shrinks the free-energy uncertainty by 4,
-(ii) shrinks the energy shell that any optimality certificate must evaluate, (iii) enlarges the
-set pruned by differential DEE.  Steep physical terms (sterics, electrostatics) belong in the
+(ii) shrinks the covering problem that an optimality certificate must solve (below the
+sharp-minimum threshold `c_i ≤` single-site excitation energy one evaluation suffices; above it
+the number of evaluations grows exponentially with the chain length, theory report §11.4),
+(iii) enlarges the set pruned by differential DEE.  Steep physical terms (sterics, electrostatics) belong in the
 explicit part `E₀`.
 
 ---
@@ -536,6 +621,9 @@ Worst-case (`ℓ¹`); for independent errors expect `√m` slack.
 ### 8.4 Distance error versus RMSD
 
 `dRMSD ≤ √2·RMSD`; and `RMSD_{with reflections} ≤ ‖Δ(X) − Δ(Y)‖_F / (√(8(√2−1)) · √L · σ₃(X))`
+with `σ₃(X)` the third singular value of the **centred** coordinate matrix (with an uncentred `X`
+the inequality fails: a nearly planar molecule shifted along its normal gives RMSD `0.0348`
+against a "bound" of `0.0076`; `reviews/R1`, item 10)
 (harness-verified; cited, not formalized).  Frame-aligned errors: `RMSD ≤ min_i (L^{-1}Σ_j P_ij²)^{1/2}`.
 
 ---
@@ -544,16 +632,21 @@ Worst-case (`ℓ¹`); for independent errors expect `√m` slack.
 
 | boundary | statement | source |
 |---|---|---|
-| gauge optimisation cannot help pairwise DEE | the Goldstein value is the exact margin and gauge invariant | `goldstein_isLeast`, `goldstein_gauge_invariant` |
+| gauge optimisation cannot help *single-site* pairwise DEE | the Goldstein value is the exact margin and gauge invariant; multi-site improving maps and bound-based pruning do depend on the gauge | `goldstein_isLeast`, `goldstein_gauge_invariant` |
 | global bounds on the residual | exactly the energy window can be optimal; nothing inside it may be pruned | `energy_window_exact` |
 | envelope + anchors | the set of possible values of `min(E₀+Δ)` and of `Z` is exactly the interval between the values at `E₀+L` and `E₀+U`; no tighter certificate exists | `robust_min_bracket`, `robust_partition_bracket`, `robust_min_interval_exact`, `robust_partition_interval_exact` |
-| residual evaluations | at least the number of states with gap `< (1−κ)σ − ε` | `anchor_card_lower_bound` |
+| residual evaluations (incumbent = evaluated anchor) | at least the number of states with gap `< (1−κ)σ − ε`; in general the evaluated set must cover every `y` within slack radius `gap(y) + ε`, with LP-dual and rate–distortion lower bounds | `anchor_card_lower_bound`; `isCertificate_iff_cover`, `card_ge_of_weights`, `partition_bound` |
+| first-order envelope + pointwise evaluations, independent sites | one evaluation if every site is sharp, otherwise exponentially many (at least `(6/5)ⁿ` already for two-state sites with `c = 2e` and zero residual) | `product_single_certificate_iff`, `product_partition_bound`, `binary_certificate_exponential` |
+| free-energy certificates from pointwise evaluations | at least `exp(entropy − tε/β)` divided by a slack-ball partition sum, even for sharp landscapes | `card_ge_entropy`, `thermal_exp_weights` |
+| smallest certificate | NP-hard to find (contains minimum dominating set); best-first search is competitive only with covers at radii shrunk by `(1−κ)/(4(1+κ))` | `domCertificate_min_card`, `bestFirst_card_le`; `DEAD_ENDS.md` D26 |
+| second-order envelope + star data | the pairwise sandwich is the exact envelope; nothing tighter exists with the same evaluations | `secondOrder_envelope_exact` |
+| partition kernel without decomposition rules | exact certificates need one leaf per configuration on rigid instances (`k^n` on chains, against one leaf with elimination) | `zverify2_elementary_exact_leaves`, `cut_rule_separation`, `chain_separation`, `ferroChain_separation` |
 | pure dual certificates | incomplete: the frustrated triangle has LP bound 0, optimum 1 | `triangle_no_leaf_certificate` |
 | certificates without `sum` | exactly `2^m` leaves on `m` independent frustrated triangles; `2m` with `sum`; the gap persists in total description length (at most `147 m³` against at least `2^m`, hence smaller for `m ≥ 21`) | `sumFree_exponential`, `sumFree_tight`, `sum_linear`, `sum_rule_separation_dataSize` |
 | free-energy sandwich | product reference: constant `1/8` is optimal and the worst residual is additive two-level; the `Σ c_i²` width is false for correlated references; gap is extensive | `mcdiarmid_no_better_constant`, `exists_two_level_worst_residual`, `DEAD_ENDS.md` D14 |
 | inconsistent residual data | every claim about them is vacuous; they must be rejected | `IProblem.consistent_iff_nonempty`, `inconsistentResidual_rejected`, `inconsistentInterval_rejected` |
 | exact dominance with 3-body terms | factorises over blocks whenever the difference energy is block-separable (`exact_margin_of_block_separable`, verified in this abstract form); for 3-body terms the blocks are the connected components of the site's link graph (paper); cheap for chain-local terms; coNP-hard for unrestricted link graphs (paper) | theory report §2.2 |
-| voxel quadrature | `Θ((βΔM/ε)^{d/2})` voxels with second-order information; rate not improvable | theory report §3.4 (paper + cited) |
+| voxel quadrature | `O((βΔM·d/ε)^{d/2})` voxels with the scalar second-order sandwich; the exponent matches point-evaluation lower bounds for the class "only `mI ⪯ ∇²E ⪯ MI` known", but is not optimal for box-enclosure oracles on smoother energies | theory report §3.4 (paper + cited) |
 | distances only | blind to chirality | §4.2 of the theory report |
 
 ---

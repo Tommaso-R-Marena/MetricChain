@@ -306,6 +306,127 @@ def bench_torsion(rng, quick):
     return rows
 
 
+# ----------------------------------------------------------------------------------------------
+# B8. Certificate complexity on product landscapes: exact layer counts against the predicted exponent
+#     R* = max_x [ln(1+x) - ln(1+x^(1/rho))]  (two-state sites, excitation e, envelope c, rho = e/c, zero residual);
+#     and the finite-temperature exponent R_beta against the Gibbs entropy.
+# ----------------------------------------------------------------------------------------------
+def binary_rstar(rho):
+    return max(math.log1p(x) - math.log1p(x ** (1.0 / rho)) for x in np.linspace(1e-6, 1.0, 200001))
+
+
+def layer_exponent(n, rho):
+    """(1/n) ln max_mu L_mu with L_mu = min_nu C(n,mu) / |S_nu cap layer mu| (exact integers).
+    max_mu L_mu <= N_frac <= (n+1) max_mu L_mu, and N_cov <= (1 + n ln 2) N_frac."""
+    from fractions import Fraction
+    from math import comb
+    best_log = -1.0
+    for mu in range(n + 1):
+        r = math.floor(rho * mu + 1e-12)
+        frac = Fraction(0)
+        for nu in range(max(0, mu - r), min(n, mu + r) + 1):
+            cnt = 0
+            for j in range(0, min(mu, r) + 1):
+                l = nu - mu + j
+                if 0 <= l <= n - mu and j + l <= r:
+                    cnt += comb(mu, j) * comb(n - mu, l)
+            frac = max(frac, Fraction(cnt, comb(n, nu)))
+        best_log = max(best_log, math.log(frac.denominator) - math.log(frac.numerator))
+    return best_log / n
+
+
+def thermal_rate(e, c, beta, rng):
+    """R_beta = max_{t, v} ((beta+t)/beta) ln sum_s pi^{t/(beta+t)} v^{beta/(beta+t)} - ln max_a sum_s v e^{-t s(a,s)}."""
+    from scipy.optimize import minimize
+    pi = np.exp(-beta * np.array([0.0, e]))
+    pi /= pi.sum()
+    slack = np.array([[0.0, c], [c, 0.0]])
+
+    def neg(params):
+        t = params[0] ** 2
+        v = np.array([1.0, math.exp(params[1])])
+        p = beta / (beta + t)
+        return -(math.log(float(np.sum(pi ** (1 - p) * v ** p))) / p - math.log(float(np.max(np.exp(-t * slack) @ v))))
+
+    best = 0.0
+    for _ in range(40):
+        res = minimize(neg, [rng.uniform(0, 4), rng.normal(0, 2)], method="Nelder-Mead",
+                       options=dict(xatol=1e-10, fatol=1e-13, maxiter=20000))
+        best = max(best, -res.fun)
+    return best, float(-np.sum(pi * np.log(pi)))
+
+
+def bench_exponent(rng, quick):
+    section("B8. Certificate complexity exponent on product landscapes (exact layer counts) and at finite temperature")
+    ns = (25, 50, 100) if quick else (25, 50, 100, 200, 400)
+    rows = []
+    print(f"{'rho=e/c':>8} | {'R* (predicted)':>14} | " + " | ".join(f"n={n:<4d}" for n in ns) + "   [(1/n) ln max_mu L_mu]")
+    for rho in (0.25, 0.5, 0.75):
+        R = binary_rstar(rho)
+        vals = [layer_exponent(n, rho) for n in ns]
+        rows.append(dict(rho=rho, Rstar=R, ns=list(ns), layer=vals))
+        print(f"{rho:8.2f} | {R:14.4f} | " + " | ".join(f"{v:6.4f}" for v in vals))
+    print("\nfinite temperature, e/c = 1/2 (zero-temperature exponent R* = %.4f):" % binary_rstar(0.5))
+    print(f"{'beta*c':>8} | {'entropy H(pi)':>13} | {'R_beta':>8}")
+    for beta in (0.5, 1.0, 4.0, 40.0):
+        Rb, H = thermal_rate(0.5, 1.0, beta, rng)
+        rows.append(dict(beta=beta, entropy=H, R_beta=Rb))
+        print(f"{beta:8.1f} | {H:13.4f} | {Rb:8.4f}")
+    print("sharp site (e/c = 2: one evaluation certifies the ground state), beta*c = ln 2:")
+    Rb, H = thermal_rate(2.0, 1.0, math.log(2.0), rng)
+    rows.append(dict(beta=math.log(2.0), entropy=H, R_beta=Rb, sharp=True))
+    print(f"{math.log(2.0):8.3f} | {H:13.4f} | {Rb:8.4f}   (verified one-shot bound: ln(6/5) = {math.log(1.2):.4f})")
+    return rows
+
+
+# ----------------------------------------------------------------------------------------------
+# B9. Best-first search against the smallest certificate and against covers at shrunk radii.
+# ----------------------------------------------------------------------------------------------
+def bench_best_first(rng, quick):
+    section("B9. Best-first search: evaluations vs minimal cover N_cov(eps) vs shrunk cover (theta, eps/6)")
+    reps = 60 if quick else 400
+    rows = []
+    print(f"{'kappa':>6} | {'mean evals':>10} | {'mean N_cov':>10} | {'mean shrunk+1':>13} | {'evals > N_cov+1':>15} | {'max evals/N_cov':>15}")
+    for kappa in (0.0, 0.2, 0.5, 0.8):
+        ev = nc = sh = 0.0
+        exceed, worst = 0, 0.0
+        for _ in range(reps):
+            n = int(rng.integers(6, 12))
+            d = fc.cg_metric(rng, n)
+            g = fc.cg_lipschitz(rng, d, kappa)
+            f = rng.normal(0, 1.0, size=n)
+            E = f + g
+            gap = E - E.min()
+            s = fc.cg_slack(d, g)
+            eps = 0.2
+            m = len(fc.cg_best_first(d, f, g, eps, int(rng.integers(n))))
+            ncov = fc.cg_min_cover(s <= gap[None, :] + eps + 1e-12)
+            theta = (1 - kappa) / (4 * (1 + kappa))
+            nshr = fc.cg_min_cover(s <= theta * (gap[None, :] + eps / 6) + 1e-12)
+            assert m <= nshr + 1
+            ev += m
+            nc += ncov
+            sh += nshr + 1
+            exceed += m > ncov + 1
+            worst = max(worst, m / ncov)
+        rows.append(dict(kappa=kappa, evals=ev / reps, ncov=nc / reps, shrunk=sh / reps, exceed=exceed / reps, worst=worst))
+        print(f"{kappa:6.1f} | {ev / reps:10.2f} | {nc / reps:10.2f} | {sh / reps:13.2f} | {exceed / reps:15.3f} | {worst:15.2f}")
+    for leaves in (4, 8, 16):
+        n = leaves + 2
+        d = np.full((n, n), 2.0)
+        d[0, :] = d[:, 0] = 10.0
+        d[1, 2:] = d[2:, 1] = 1.0
+        np.fill_diagonal(d, 0.0)
+        f = np.full(n, 1.5)
+        f[0], f[1] = 0.0, 100.0
+        g = np.zeros(n)
+        m = len(fc.cg_best_first(d, f, g, 0.1, 0))
+        ncov = fc.cg_min_cover(fc.cg_slack(d, g) <= (f - f.min())[None, :] + 0.1 + 1e-12) if n <= 12 else 2
+        rows.append(dict(hub_leaves=leaves, evals=m, ncov=ncov))
+        print(f"hub instance with {leaves:2d} leaves: best-first evaluates {m:2d} points, the smallest certificate has {ncov}")
+    return rows
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true")
@@ -321,6 +442,8 @@ def main():
         "B5_certificate_size": bench_certificate_size(rng, args.quick),
         "B6_thermal": bench_thermal(rng, args.quick),
         "B7_torsion": bench_torsion(rng, args.quick),
+        "B8_exponent": bench_exponent(rng, args.quick),
+        "B9_best_first": bench_best_first(rng, args.quick),
     }
     if args.json:
         os.makedirs(os.path.dirname(os.path.abspath(args.json)), exist_ok=True)

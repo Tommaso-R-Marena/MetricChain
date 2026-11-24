@@ -3,7 +3,7 @@
 Chronological record of the theoretical program: what was tried, what was learned, how the
 portfolio was re-prioritised.  Companion files: `THEORY_REPORT.md` (results and proofs),
 `BLUEPRINT.md` (engineering hand-off), `DEAD_ENDS.md` (falsified or repaired claims),
-`prior_art/L1–L3` (literature checks).
+`prior_art/L1–L6` (literature checks), `reviews/` (independent referee reports).
 
 Conventions: **[V]** = machine-verified in `proofs/` (zero `sorry`, standard axioms only);
 **[H]** = survived the adversarial harness `experiments/falsify_conjectures.py`;
@@ -195,11 +195,13 @@ statement, a kernel side condition, or the audit tooling itself.
 * **Strongest discovery so far.**  The *envelope duality* cluster: under any envelope the set of
   configurations that can be optimal is exactly a contact set; with evaluated anchors the exact
   discardable set is characterised by two inequalities; the certified value interval is exactly
-  the interval between the two McShane envelopes at every temperature; and any `ε`-certificate
-  must evaluate the residual on every state within `(1−κ)σ − ε` of the optimum (an entropy-type
-  witness-size lower bound).  Individually elementary, together they *close* the question the
-  charter posed for Direction A and give a principled interface for neural residuals: the
-  architecture must export an envelope, and the price of a loose envelope is quantified.
+  the interval between the two McShane envelopes at every temperature; and an `ε`-certificate
+  whose incumbent is an evaluated anchor must evaluate the residual on every state within
+  `(1−κ)σ − ε` of the optimum (a witness-size lower bound; *corrected in cycle 7* — the earlier
+  wording "any ε-certificate" was false for configuration certificates, `DEAD_ENDS.md` D21).
+  Individually elementary — and, as the cycle-7 referee report established, classical in
+  substance — they give a principled interface for neural residuals: the architecture must export
+  an envelope, and the price of a loose envelope is quantified.
 * **Second.**  Verified certificate kernels in two semirings (tropical, residual and
   sum–product) covering reparameterisation bounds, branching, DEE, differential DEE under a
   residual, thermal DEE, dual decomposition (tropical kernel only) and voxel enclosures of
@@ -279,3 +281,147 @@ statement, a kernel side condition, or the audit tooling itself.
   information-based lower bound are paper-level; the separable-envelope theorem itself is verified.
 * The Procrustes–Gram stability inequality (Tu et al. 2016) is cited, harness-tested, not
   formalized.
+
+---
+
+## Session 2 (2026-11-24, continued)
+
+### Cycle 7 — independent review, reclassification, and certification geometry
+
+**Mandate.**  Preserve checkpoint 477391f; seek independent mathematical review before building
+on it; ask whether envelope duality and its lower bounds are manifestations of a deeper theory
+(optimal recovery, McShane–Whitney, robust optimisation, interval uncertainty, certified
+black-box optimisation); look for matching upper and lower complexity bounds, correlated
+uncertainty, compositional certificates and general statistical-mechanical observables in one
+framework; separate new results from formalizations and rediscoveries.
+
+**1. Independent referee report** (`reviews/R1_referee_report.md`; fresh agent, own code,
+no access to the harness).  Verdict: no machine-checked statement false, no vacuous definition;
+*no result publication-worthy as mathematics as it stood*; four major overstatements —
+(1) the gloss of the witness-size bound ("any certificate"), (2) the novelty column for A1–A5,
+(3) "reparameterisation cannot improve dominance pruning" beyond single-site tests, (4) the
+(+,×) kernel has no sub-exponential exact certificates on chains — and nine minor ones.  All
+were acted on before any new result was built on the checkpoint: text corrections in the theory
+report (§§0.2, 2.2–2.4, 3.2, 3.4, 3.6, 4.1, 4.3, 4.4, 6.2, 6.3, 8), blueprint (§§6.2, 6.3, 7,
+8.4, 9), `DEAD_ENDS.md` D1 (scope) and D21–D24, D27; the kernel weakness was repaired in Lean
+(below).  The referee's first proposed direction — certificate complexity with matching bounds —
+coincided with the direction already under exploration and became the main line.
+
+**2. Three literature checks** (`prior_art/L4` certified optimisation and optimal recovery,
+`L5` polytropes / interval uncertainty / robust Bayes, `L6` transport–entropy and
+information-theoretic limits; search logs and unreachable sources are listed in each file).
+Net effect on the claims: the identifications (polytrope = difference constraints = simple
+temporal network = Lipschitz polytope; conditional envelope = minimal network; passive bound =
+transport–entropy conjugate; thermal contact) are textbook or known in spirit; minimal
+certificates as coverings are known in `ℝ^d` (Hansen–Jaumard–Lu, Baran–Demaine, Bachoc et al.);
+the additive two-level extremal of the sandwich for a fixed product measure is in print
+(Alon–Boppana–Spencer; Bobkov–Houdré–Tetali) — the earlier "implicit in the literature" was too
+generous to us.  Not found: certificate complexity through rate–distortion functions (exponent,
+dichotomy, Gibbs/finite-temperature form), the dimension-free best-first bound, second-order
+envelope classes as a certified interface.
+
+**3. Exploration before formalization** (scratch scripts `explore1`–`explore6`, since ported to
+the harness as cluster XI).  Survived: slack identities and certificate ⇔ cover; `N_cov ≤ N_val ≤
+N_point ≤ N_cov + 1`; LP-dual bounds ≤ `N_frac`; hardness reduction; best-first separation and
+`m ≤ |C| + 1` for shrunk covers; conditional envelope = LP optimum; thermal contact = LP
+optimum; thermal converses on every evaluated set (318 450 checks, best ratio 0.9999); the
+single-letter identity behind the finite-temperature exponent (two sides agree to `10⁻³`);
+order-`m` anchored remainder with sharpness; star envelope = LP optimum.  Exact layer counts for
+the binary product family, `n⁻¹ ln max_μ L_μ` against the predicted exponent:
+
+| `ρ = e/c` | `R*` | n = 100 | 200 | 400 | 800 |
+|---|---|---|---|---|---|
+| 0.25 | 0.3509 | 0.3751 | 0.3647 | 0.3587 | 0.3552 |
+| 0.50 | 0.1882 | 0.2073 | 0.1994 | 0.1947 | 0.1919 |
+| 0.75 | 0.0798 | 0.1004 | 0.0916 | 0.0866 | 0.0836 |
+| 0.90 | 0.0293 | 0.0480 | 0.0402 | 0.0356 | — |
+
+Refuted along the way (kept as harness records `DEAD.6`–`DEAD.9`): best-first within one
+evaluation of the optimum; the "any certificate" gloss; the fixed-`β` Bobkov–Götze equivalence;
+additivity of the worst residual for dependent references (found by L6, re-verified).
+
+**4. Formalization** (parallel agents, one file each; every file built with zero warnings and
+walked by the axiom audit).
+
+| module | content | status |
+|---|---|---|
+| `Frontiers/CertificationGeometry` | slack quasi-metric; certificates are coverings; LP-dual, fooling, volume and partition-function bounds | **[V]** |
+| `Frontiers/CertificateNotions` | value / point / configuration certificates differ by at most one evaluation | **[V]** |
+| `Frontiers/ConditionalEnvelope` | conditional envelope, tower property, anchored sharp minimum, worst-case regret | **[V]** |
+| `Frontiers/CertificateComplexity` | domination reduction; product landscapes: one evaluation iff sharp; product partition bound; `(6/5)ⁿ` | **[V]** |
+| `Frontiers/ExponentialWeights` | general exponential-weights converse; entropy bound and Hölder converse for free-energy certificates | **[V]** |
+| `Frontiers/ProductRates` | product forms of both converses; a finite-temperature exponential lower bound on a sharp landscape | **[V]** |
+| `Frontiers/BestFirst` | best-first runs, separation, resource-augmentation bound, termination, sharp instance | **[V]** |
+| `Frontiers/ThermalRobustness` | thermal contact interval (with and without evaluations), weight cone, slack forms of the envelope partition functions, transport–entropy inequality | **[V]** |
+| `Frontiers/SecondOrderEnvelope` | star remainder, pairwise sandwich, kernel statement, exact envelope, certified minimiser | **[V]** |
+| `Frontiers/PartitionProduct` | cut and elimination rules for the partition kernel, soundness, separations | **[V]** |
+| `Frontiers/SampledSandwich`, `Frontiers/HigherOrderEnvelope` | probabilistic free-energy certificate from independent samples; order-`m` anchored remainder | in progress at this checkpoint (not part of the audited tree) |
+
+Paper-level only: the upper halves of the two exponent theorems (type covering), the converse
+half of the transport–entropy duality, the order-`m` remainder, the complexity-theoretic reading
+of the domination reduction.
+
+**5. What was learned.**
+* The envelope cluster is one object seen five ways (a polytrope); nothing in it is new
+  mathematics.  The productive change of representation was the *slack quasi-metric*: it turns
+  "what can be certified after these evaluations" into a covering problem whose radii are the
+  points' own gaps, and makes lower bounds a matter of LP duality.
+* First-order envelopes have an exponential price that no algorithm can avoid, at zero and at
+  finite temperature, with exact exponents given by one variational formula (energy gap →
+  free-energy gap of a macrostate).  This closes the main loop of blueprint §6.2 as a general
+  strategy and replaces the witness-size bound.
+* The way out is the *order* of the envelope, not its size: bounded mixed differences make a
+  linear number of evaluations sufficient and the reduction to the pairwise kernel lossless.
+* Correlated references: the exact worst-case gap is a transport–entropy conjugate for every
+  reference, but its extremal residual is not additive (D25); the planned "transfer-matrix
+  formula" does not exist in the naive form.
+* The partition kernel now has decomposition rules worthy of the tropical one.
+
+### Portfolio reassessment (end of cycle 7)
+
+* **Strongest result.**  The certification-geometry cluster (theory report §11): covering
+  characterisation, dichotomy and exact exponents with a common variational formula at zero and
+  finite temperature, hardness, resource-augmented best-first bound, second-order exact
+  reduction.  Tools are standard, proofs are short, the one-shot halves are machine-checked.
+* **Demoted.**  Envelope duality A1–A5 (known in substance); the sandwich's attainment statement
+  (in print).
+* **Can it be strengthened / generalised?**  Yes: interacting known parts (transfer-matrix
+  exponents), heterogeneous sites, second-order prefactors, lower bounds for second-order
+  classes, a polynomial algorithm on product landscapes — theory report §12 lists these with
+  what a publication would need.
+* **Different representation?**  The weights `w = e^{−βg}` linearise the finite-temperature
+  problem (robust Boltzmann averages are linear-fractional programs over a cone whose dual is a
+  flow with gains); not pursued beyond the contact interval.
+* **Is there a more promising direction entirely?**  Probabilistic certificates: the contrast
+  between one linear functional and exponentially many pointwise evaluations (§11.6) says that
+  the deterministic pointwise model is the wrong one for free energies.  A PAC-style kernel
+  (sampled reference averages with verified concentration bounds) is the natural next
+  foundation; it was not started.
+
+### Resume here (state at the end of cycle 7)
+
+Verified state: every module under `proofs/` builds with zero warnings and is walked by the axiom
+audit; the harness (58 registered tests: 49 that must survive, 9 documented refutations) and its
+mutation tests pass; `scripts/audit_all.sh` exits 0.  In priority order, the work that an
+authorised subsequent session should take up:
+
+1. **Act on the second referee report** (`reviews/R2_referee_report.md`, commissioned on the
+   second phase): anything it finds false or overstated in theory report §§10–12 comes first.
+2. **The exponent theorems.**  Write the upper bounds (type covering with credit distortion;
+   heterogeneous sites) in full; decide whether the finite-temperature formula is a known
+   source-coding exponent (Marton, Merhav) in disguise; attempt the interacting case, where the
+   partition-function bound is the Shannon lower bound of a process rate–distortion function
+   (theory report §12, item 1).
+3. **Probabilistic certificates.**  A sampled free-energy sandwich (harness XI.13) is being
+   formalised; a kernel that checks sampled reference averages against verified concentration
+   bounds, and the analogous statement for minimum energies, are not started.
+4. **Second-order envelopes with a real residual.**  Certified mixed-difference constants for
+   one concrete residual; box-restricted constants; lower bounds on the number of evaluations
+   (covering arrays).
+5. **Dependent references.**  The binary-tree question of D25; a two-sided transfer-matrix
+   bracket for the worst-case gap of a Markov reference.
+6. **Certificate formats.**  `cut` / `elim` nodes are in the Lean kernel only; the JSON format,
+   the reference checker and the conformance vectors have not been extended.
+7. Items carried over from session 1 that remain open: lower bounds for decomposition-aware
+   certificates on connected frustrated families; verified interval evaluation of realistic
+   energy terms over voxels; realizability certificates for incomplete distance data.

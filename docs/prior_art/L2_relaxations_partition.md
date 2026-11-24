@@ -28,6 +28,8 @@ Literature check performed on 2026-11-24 for the MetricChain program (internal c
 | C8(d) | Complexity lower bounds | KNOWN (Bakhvalov 1959; Hinrichs et al. 2014; Holzmuller-Bach 2025 specifically for log-partition) | High |
 | C8(e) | Stopping rules for ranking partition functions; best-arm identification; instance-optimal refinement | KNOWN-IN-SPIRIT (BBK*, marginal MAP, explorable uncertainty, input-thrifty algorithms, NRA instance optimality). A competitive-ratio theorem for partition-function ranking: NO MATCH FOUND | Medium |
 
+*Erratum (cycle 7).  The verdict of the row "C7, sharpness" is superseded by `L6_transport_entropy_and_information_limits.md`, T2: the additive two-level extremal for a fixed product measure is in print (Alon–Boppana–Spencer 1998; Bobkov–Houdré–Tetali 2006).  The row "C7, Bobkov-Gotze" needs the quantifier "for all beta" (referee report R1, item 6).*
+
 ---
 
 ## C6. Relaxations on the torus and verified arithmetic

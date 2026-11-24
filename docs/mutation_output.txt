@@ -70,5 +70,67 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] VII.2 M2: sum nodes not charged for the sub-instances they embed (closed form must disagree)
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.1 M1: slack without the residual terms (s = d)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.1 M2: claim N* <= N_cov (the extra evaluation of a minimiser dropped)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.2 M1: partition-function bound with the smallest slack partition sum (min over anchors)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.2 M2: exponential-weights bound without the factor exp(-t eps)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.3 M1: sharpness tested against half the envelope constant
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.3 M2: product bound with the smallest single-site kernel sum (min over anchor states)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.4 M1: no radius shrinkage (theta = (1-kappa)/(1+kappa))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.4 M2: separation (c) claimed for the arbitrary first point as well
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.5 M1: claim 'gamma(G) evaluations' (the minimiser is forgotten)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.5 M2: no distinguished minimiser (f = 1 everywhere)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.6 M1: conditional envelope without the original envelope (U(x) - L(y) only)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.6 M2: conditional envelope transposed (U(y) - L(x))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.6 M3: claim N_point <= N_conf
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.7 M1: upper end with the transposed envelope d(x, y)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.7 M2: interval claimed 1% narrower at the lower end
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.8 M1: entropy bound without the accuracy term t eps / beta
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.8 M2: Hoelder converse with the kernel exponent t = beta instead of beta (1 - p) / p
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.8 M3: optimistic partition function written with the slack TO the evaluated set
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.9 M1: relative entropy with its arguments exchanged
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.9 M2: transport cost with half the envelope
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.10 M1: remainder claimed to be half as large
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.10 M2: interpolant one order too low (ball of radius m - 2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.11 M1: star envelope claimed with half the pair remainder
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.11 M2: certified-minimiser criterion with the additive interpolant only (remainder ignored)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.12 M1: cut bracket from one direction of the cut pairs only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.12 M2: elimination of an end site without the factor on the reverse ordered pair
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.7 M1: candidate restricted to evaluated points (the true statement II.4) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.13 M1: tail bound claimed with exponent -8 N eta^2 / C
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.13 M2: sampled interval without the slack |beta| eta
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.9 M1: product reference with the same marginals (the true statement III.3) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.6 M1: comparison with covers at the shrunk radii (the true statement XI.4) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
 
-36 mutations: 35 caught, 1 expected pass, 0 not as expected
+67 mutations: 66 caught, 1 expected pass, 0 not as expected
