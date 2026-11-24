@@ -12,6 +12,7 @@ import proofs.Frontiers.TorsionRMSD
 import proofs.Frontiers.InvariantEnvelope
 import proofs.Frontiers.PartitionCertificate
 import proofs.Frontiers.VoxelEnclosure
+import proofs.Frontiers.SeparableVoxel
 import proofs.CertificateAlgebra
 import proofs.Frontiers.ProofComplexity
 
@@ -90,6 +91,8 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.Z_encloses_partitionFn
 #print axioms MetricChain.voxel_boltzmann_bounds
 #print axioms MetricChain.certified_voxel_partition
+#print axioms MetricChain.separable_voxel_bounds
+#print axioms MetricChain.separable_voxel_ratio
 #print axioms MetricChain.triangleZ_exact
 
 -- Realizability and geometric stability (Direction C)

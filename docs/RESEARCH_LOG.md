@@ -94,6 +94,7 @@ Verified modules and headline statements:
 | `Frontiers/Realizability` | K-identity, rank-constrained PSD approximation with trace penalty, s-stress lower bound, simplex certificates | **[V]** |
 | `Frontiers/PartitionCertificate` | sum–product kernel `zverify` with thermal DEE, soundness, enclosure of the real partition function | **[V]** |
 | `Frontiers/VoxelEnclosure` | Boltzmann voxel bounds with volume factor; assembly theorem from continuous integrals to the rational kernel | **[V]** |
+| `Frontiers/SeparableVoxel` | separable envelopes ⇒ product of one-dimensional Boltzmann integrals; relative-width bound | **[V]** |
 | `Frontiers/HolderDecomposition` | finite-temperature dual decomposition | **[V]** |
 | `Frontiers/FreeEnergySandwich` | Gibbs–Bogoliubov + Hoeffding/McDiarmid sandwich; the worst bounded-difference residual is additive and two-level; `1/8` optimal | **[V]** |
 | `Frontiers/Holonomy` | cycle-holonomy obstruction (conjugation-invariant norms), SE(3) translation holonomy with lever arms | **[V]** |
@@ -134,8 +135,8 @@ Engineering lessons recorded in `DEAD_ENDS.md` D6 (leaf rule), D7 (`decide +kern
   combinatorial problem (contact-set membership is an MRF minimisation); we certify, we do not
   solve.  (b) The free-energy sandwich is extensive in the number of sites; it certifies free
   energies only when `β c_i ≪ M^{-1/2}` or after localisation.  (c) Continuous integration is
-  certified only to zeroth order per voxel; second-order (Gaussian) envelopes are specified on
-  paper but not formalized.  (d) Nothing here bounds mixing times of samplers.
+  certified to zeroth order per voxel and, given separable envelopes, to second order; the
+  Taylor/Hessian step producing those envelopes is specified on paper only.  (d) Nothing here bounds mixing times of samplers.
 * **Could a different representation overcome it?**  For (b): replace the product reference by a
   tree reference and Hoeffding by a variance-aware (Bennett) bound with exactly computed
   conditional variances — the transfer matrix makes those computable.  For (c): the rational
@@ -167,6 +168,7 @@ Engineering lessons recorded in `DEAD_ENDS.md` D6 (leaf rule), D7 (`decide +kern
 ### Open bottlenecks
 
 * No formal statement yet for dependent (Markov / Dobrushin) references in the sandwich.
-* Second-order voxel envelope and the information-based lower bound are paper-level.
+* The Taylor step producing second-order (separable) voxel envelopes from Hessian bounds and the
+  information-based lower bound are paper-level; the separable-envelope theorem itself is verified.
 * The Procrustes–Gram stability inequality (Tu et al. 2016) is cited, harness-tested, not
   formalized.

@@ -1080,6 +1080,42 @@ def t_oracle_lower_bound(rng, trials):
     return True, {}
 
 
+@conjecture("X.1 Separable voxel envelope: prod_i int exp(-b psi_i) <= int_box exp(-b E) <= prod_i int exp(-b phi_i)")
+def t_separable_voxel(rng, trials):
+    worst = 0.0
+    nodes, weights = np.polynomial.legendre.leggauss(24)
+    for _ in range(max(10, trials // 8)):
+        d = int(rng.integers(1, 4))
+        lo = rng.uniform(-1.0, 0.0, size=d)
+        hi = lo + rng.uniform(0.2, 1.5, size=d)
+        beta = float(rng.uniform(0.1, 4.0))
+        amp = rng.normal(0, 1.0, size=d)
+        freq = rng.uniform(0.5, 3.0, size=d)
+        kappa = float(rng.uniform(0.0, 1.0))
+        # E(x) = sum_i amp_i cos(freq_i x_i) + kappa * prod_i sin(x_i);  |coupling| <= kappa
+        xs = [0.5 * (hi[i] - lo[i]) * nodes + 0.5 * (hi[i] + lo[i]) for i in range(d)]
+        ws = [0.5 * (hi[i] - lo[i]) * weights for i in range(d)]
+        grids = np.meshgrid(*xs, indexing="ij")
+        wgrid = np.ones_like(grids[0])
+        for i in range(d):
+            shape = [1] * d
+            shape[i] = -1
+            wgrid = wgrid * ws[i].reshape(shape)
+        E = sum(amp[i] * np.cos(freq[i] * grids[i]) for i in range(d)) + kappa * np.prod([np.sin(g) for g in grids], axis=0)
+        true = float(np.sum(wgrid * np.exp(-beta * E)))
+        lower = upper = 1.0
+        for i in range(d):
+            a = amp[i] * np.cos(freq[i] * xs[i])
+            upper *= float(np.sum(ws[i] * np.exp(-beta * (a - kappa / d))))   # phi_i = a_i - kappa/d
+            lower *= float(np.sum(ws[i] * np.exp(-beta * (a + kappa / d))))   # psi_i = a_i + kappa/d
+        if not (lower <= true * (1 + 1e-9) and true <= upper * (1 + 1e-9)):
+            return False, dict(lower=lower, true=true, upper=upper, d=d)
+        if upper > math.exp(2 * beta * kappa) * lower * (1 + 1e-9):
+            return False, dict(reason="ratio bound exp(beta * sum w_i) violated")
+        worst = max(worst, upper / lower)
+    return True, dict(max_ratio_upper_over_lower=worst)
+
+
 # ----------------------------------------------------------------------------------------------
 # Refuted conjectures kept for the record (see docs/DEAD_ENDS.md)
 # ----------------------------------------------------------------------------------------------

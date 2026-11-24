@@ -314,9 +314,17 @@ ZCERT(model, beta, D):
 
 Guarantee: `lo(I⁻) ≤ ∫ e^{−βE} ≤ hi(I⁺)` (`certified_voxel_partition`).  Unlike the
 minimised-voxel surrogate of `K*`-type algorithms the bound contains the voxel volumes, i.e. the
-conformational entropy inside each voxel.  Refining voxels tightens `[e_lo, e_hi]`; the
-second-order envelope of the theory report (§3.4, paper-level) reduces the voxel count from
-`ε^{-d}`-type to `ε^{-d/2}`-type scaling and factorises into one-dimensional integrals.
+conformational entropy inside each voxel.  Refining voxels tightens `[e_lo, e_hi]`.
+
+**Second-order voxels.**  If the producer has separable envelopes
+`Σ_i φ_i(θ_i) ≤ E(θ) ≤ Σ_i ψ_i(θ_i)` on a product voxel (from a Taylor expansion with a diagonal
+Hessian enclosure: `φ_i(t) = E(c)/M + g_i (t−c_i) + (m/2)(t−c_i)²`, `ψ_i` with `M` in place of
+`m`), then `∏_i ∫ e^{−βψ_i} ≤ ∫_voxel e^{−βE} ≤ ∏_i ∫ e^{−βφ_i}` (`separable_voxel_bounds`), with
+relative width `≤ exp(β Σ_i (M−m) h_i²/2)` (`separable_voxel_ratio`).  Each one-dimensional
+integral is enclosed by a 1-D voxel sum with certified `exp` bounds, so the cost is
+`M × (1-D resolution)` per voxel, and the voxel count for accuracy `1+ε` drops from `ε^{-d}`-type
+to `ε^{-d/2}`-type scaling.  The Hessian enclosure itself (interval arithmetic on second
+derivatives) is the producer's obligation and is not covered by the Lean development.
 
 For exact tree-structured references use transfer matrices instead of branching: the kernel's
 `leaf` with `lo = hi = W` is exact on a fully fixed box, and a chain can be summed by `n` matrix

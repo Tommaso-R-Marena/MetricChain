@@ -33,7 +33,7 @@ tok_re = re.compile(r"`([A-Za-z][A-Za-z0-9_.'₀-₉]*)`")
 missing = {}
 for doc in sorted((root / "docs").glob("*.md")):
     for tok in tok_re.findall(doc.read_text()):
-        if "_" not in tok or tok in IGNORE or tok.endswith(".lean") or tok.endswith(".py") or tok.endswith(".sh") or tok.endswith(".md"):
+        if "_" not in tok or tok in IGNORE or tok.endswith((".lean", ".py", ".sh", ".md", ".txt", ".json")):
             continue
         last = tok.split(".")[-1]
         if tok not in declared and last not in declared:

@@ -31,6 +31,9 @@ assumed about the structure of `Δ` (it may be a non-decomposable many-body term
   `-β ⟨Δ⟩ ≤ log (∑ x, W x * exp (-β Δ x)) ≤ -β ⟨Δ⟩ + β² (∑ i, (c i)²) / 8`.
   The engine is `bounded_differences_tensorization`: *any* family of single-site bounds on the
   centred moment generating function tensorizes over the sites.
+  `mcdiarmid_mgf_pi`, `bounded_differences_sandwich_pi` are the same statements for an
+  arbitrary finite site index type `ι` and site-dependent alphabets `σ i` (configurations
+  `x : ∀ i, σ i`; a heteropolymer, where every site has its own state space).
 * **T5** sharpness — the worst residual is *additive* (fully decomposable) and *two-level*:
   * `additive_gap_eq` — for an additive residual `Δ x = ∑ i, δ i (x i)` the Jensen gap is
     exactly the sum of the single-site gaps;
@@ -57,9 +60,10 @@ assumed about the structure of `Δ` (it may be a non-decomposable many-body term
   the probability measure `∑ x, w x • δ_x` on `Ω` (discrete σ-algebra), with respect to which
   every integral is the corresponding finite weighted sum.
 * T4 is the martingale (tensorization) argument, by induction on the number of sites using
-  `(Fin (n + 1) → α) ≃ α × (Fin n → α)`: one single-site step in the first coordinate
-  (`two_factor_step`, `two_factor_tensorization`), and the site-0 average of `g` again has
-  bounded differences.
+  `(∀ i : Fin (n + 1), σ i) ≃ σ 0 × (∀ i : Fin n, σ i.succ)`: one single-site step in the first
+  coordinate (`two_factor_step`, `two_factor_tensorization`), and the site-0 average of `g`
+  again has bounded differences.  The general index type is reduced to `Fin n` by transport
+  along an enumeration of the sites.
 * T5 uses `∏ i, ∑ a, f i a = ∑ x, ∏ i, f i (x i)` (`Fintype.prod_sum`) to factor sums of
   products of site terms; the tensorization engine of T4 with the *exact* single-site suprema
   in place of Hoeffding's bound; convexity of the centred moment generating function (its
@@ -415,15 +419,16 @@ theorem two_factor_tensorization {Ω₁ Ω₂ : Type*} [Fintype Ω₁] [Fintype 
     (fun y => hoeffding_core_osc p (fun x => g x y) hp hp1 c₁ (fun x x' => hg x x' y)) m
 
 /-- Splitting a sum over configurations of `n + 1` sites into the first site and the rest. -/
-theorem sum_config_succ {α : Type*} [Fintype α] {n : ℕ} (f : (Fin (n + 1) → α) → ℝ) :
-    ∑ x, f x = ∑ a : α, ∑ y : Fin n → α, f (Fin.cons a y) := by
-  rw [← Fintype.sum_prod_type (fun z : α × (Fin n → α) => f (Fin.cons z.1 z.2))]
-  exact (Equiv.sum_comp (Fin.consEquiv fun _ => α) f).symm
+theorem sum_config_succ {n : ℕ} {σ : Fin (n + 1) → Type*} [∀ i, Fintype (σ i)]
+    (f : (∀ i, σ i) → ℝ) :
+    ∑ x, f x = ∑ a : σ 0, ∑ y : ∀ i : Fin n, σ i.succ, f (Fin.cons a y) := by
+  rw [← Fintype.sum_prod_type (fun z : σ 0 × (∀ i : Fin n, σ i.succ) => f (Fin.cons z.1 z.2))]
+  exact (Equiv.sum_comp (Fin.consEquiv σ) f).symm
 
 /-- The product weight of `Fin.cons a y` factors as (site `0`) × (remaining sites). -/
-theorem prod_weight_cons {α : Type*} {n : ℕ} (p : Fin (n + 1) → α → ℝ) (a : α)
-    (y : Fin n → α) :
-    ∏ i, p i ((Fin.cons a y : Fin (n + 1) → α) i) = p 0 a * ∏ i : Fin n, p i.succ (y i) := by
+theorem prod_weight_cons {n : ℕ} {σ : Fin (n + 1) → Type*} (p : ∀ i, σ i → ℝ) (a : σ 0)
+    (y : ∀ i : Fin n, σ i.succ) :
+    ∏ i, p i ((Fin.cons a y : ∀ i, σ i) i) = p 0 a * ∏ i : Fin n, p i.succ (y i) := by
   rw [Fin.prod_univ_succ]
   simp only [Fin.cons_zero, Fin.cons_succ]
 
@@ -442,34 +447,38 @@ theorem neg_mul_bounded_differences {α : Type*} {n : ℕ} (Δ : (Fin n → α) 
   rw [e, abs_mul, abs_neg]
   exact mul_le_mul_of_nonneg_left (hΔ x i a) (abs_nonneg β)
 
-/-- Induction engine for `bounded_differences_tensorization`. -/
-theorem bounded_differences_tensorization_aux {α : Type*} [Fintype α] :
-    ∀ (n : ℕ) (p : Fin n → α → ℝ), (∀ i a, 0 ≤ p i a) → (∀ i, ∑ a, p i a = 1) →
+/-- Induction engine for `bounded_differences_tensorization` and
+`bounded_differences_tensorization_pi`, stated for site-dependent alphabets `σ i` so that the
+induction hypothesis applies to the tail `fun i => σ i.succ`. -/
+theorem bounded_differences_tensorization_aux :
+    ∀ (n : ℕ) (σ : Fin n → Type*) [∀ i, Fintype (σ i)] (p : ∀ i, σ i → ℝ),
+    (∀ i a, 0 ≤ p i a) → (∀ i, ∑ a, p i a = 1) →
     ∀ (c B : Fin n → ℝ), (∀ i, 0 ≤ B i) →
-    (∀ i (h : α → ℝ), (∀ a a', |h a - h a'| ≤ c i) →
+    (∀ i (h : σ i → ℝ), (∀ a a', |h a - h a'| ≤ c i) →
       ∑ a, p i a * Real.exp (h a - ∑ a', p i a' * h a') ≤ B i) →
-    ∀ (g : (Fin n → α) → ℝ), (∀ x i a, |g (Function.update x i a) - g x| ≤ c i) → ∀ m : ℝ,
+    ∀ (g : (∀ i, σ i) → ℝ), (∀ x i a, |g (Function.update x i a) - g x| ≤ c i) → ∀ m : ℝ,
     ∑ x, (∏ i, p i (x i)) * Real.exp (g x - m) ≤
       (∏ i, B i) * Real.exp (∑ x, (∏ i, p i (x i)) * g x - m) := by
   intro n
   induction n with
   | zero =>
-    intro p _ _ c B _ _ g _ m
+    intro σ _ p _ _ c B _ _ g _ m
     simp
   | succ n ih =>
-    intro p hp hp1 c B hB0 hB g hg m
-    have hq0 : ∀ y : Fin n → α, 0 ≤ ∏ i : Fin n, p i.succ (y i) :=
+    intro σ _ p hp hp1 c B hB0 hB g hg m
+    have hq0 : ∀ y : ∀ i : Fin n, σ i.succ, 0 ≤ ∏ i : Fin n, p i.succ (y i) :=
       fun y => Finset.prod_nonneg fun i _ => hp i.succ (y i)
     -- the left-hand side as an iterated sum over the first site and the remaining sites
     have hL : ∑ x, (∏ i, p i (x i)) * Real.exp (g x - m) =
-        ∑ a, ∑ y : Fin n → α, p 0 a * (∏ i : Fin n, p i.succ (y i)) *
+        ∑ a, ∑ y : ∀ i : Fin n, σ i.succ, p 0 a * (∏ i : Fin n, p i.succ (y i)) *
           Real.exp (g (Fin.cons a y) - m) := by
       rw [sum_config_succ]
       refine Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun y _ => ?_
       rw [prod_weight_cons]
     -- the mean of `g` is the mean of its site-0 average
     have hM : ∑ x, (∏ i, p i (x i)) * g x =
-        ∑ y : Fin n → α, (∏ i : Fin n, p i.succ (y i)) * ∑ a, p 0 a * g (Fin.cons a y) := by
+        ∑ y : ∀ i : Fin n, σ i.succ, (∏ i : Fin n, p i.succ (y i)) *
+          ∑ a, p 0 a * g (Fin.cons a y) := by
       rw [sum_config_succ, Finset.sum_comm]
       refine Finset.sum_congr rfl fun y _ => ?_
       rw [Finset.mul_sum]
@@ -477,13 +486,14 @@ theorem bounded_differences_tensorization_aux {α : Type*} [Fintype α] :
       rw [prod_weight_cons]
       ring
     -- one single-site step in the first coordinate
-    have h2 := two_factor_step (p 0) (fun y : Fin n → α => ∏ i : Fin n, p i.succ (y i)) hq0
+    have h2 := two_factor_step (p 0)
+      (fun y : ∀ i : Fin n, σ i.succ => ∏ i : Fin n, p i.succ (y i)) hq0
       (fun a y => g (Fin.cons a y)) (B 0)
       (fun y => hB 0 (fun a => g (Fin.cons a y)) (fun a a' => by
         have h := hg (Fin.cons a' y) 0 a
         rwa [Fin.update_cons_zero] at h)) m
     -- the site-0 average still has bounded differences
-    have hgb : ∀ (y : Fin n → α) (i : Fin n) (b : α),
+    have hgb : ∀ (y : ∀ i : Fin n, σ i.succ) (i : Fin n) (b : σ i.succ),
         |(∑ a, p 0 a * g (Fin.cons a (Function.update y i b))) -
           ∑ a, p 0 a * g (Fin.cons a y)| ≤ c i.succ := by
       intro y i b
@@ -498,20 +508,20 @@ theorem bounded_differences_tensorization_aux {α : Type*} [Fintype α] :
             have h := hg (Fin.cons a y) i.succ b
             rwa [← Fin.cons_update] at h
         _ = c i.succ := by rw [← Finset.sum_mul, hp1 0, one_mul]
-    have hih := ih (fun i => p i.succ) (fun i a => hp i.succ a) (fun i => hp1 i.succ)
-      (fun i => c i.succ) (fun i => B i.succ) (fun i => hB0 i.succ) (fun i => hB i.succ)
-      (fun y => ∑ a, p 0 a * g (Fin.cons a y)) hgb m
+    have hih := ih (fun i => σ i.succ) (fun i => p i.succ) (fun i a => hp i.succ a)
+      (fun i => hp1 i.succ) (fun i => c i.succ) (fun i => B i.succ) (fun i => hB0 i.succ)
+      (fun i => hB i.succ) (fun y => ∑ a, p 0 a * g (Fin.cons a y)) hgb m
     rw [hL, hM]
-    calc ∑ a, ∑ y : Fin n → α, p 0 a * (∏ i : Fin n, p i.succ (y i)) *
+    calc ∑ a, ∑ y : ∀ i : Fin n, σ i.succ, p 0 a * (∏ i : Fin n, p i.succ (y i)) *
           Real.exp (g (Fin.cons a y) - m)
-        ≤ B 0 * ∑ y : Fin n → α, (∏ i : Fin n, p i.succ (y i)) *
+        ≤ B 0 * ∑ y : ∀ i : Fin n, σ i.succ, (∏ i : Fin n, p i.succ (y i)) *
             Real.exp (∑ a, p 0 a * g (Fin.cons a y) - m) := h2
       _ ≤ B 0 * ((∏ i : Fin n, B i.succ) *
-            Real.exp (∑ y : Fin n → α, (∏ i : Fin n, p i.succ (y i)) *
+            Real.exp (∑ y : ∀ i : Fin n, σ i.succ, (∏ i : Fin n, p i.succ (y i)) *
               ∑ a, p 0 a * g (Fin.cons a y) - m)) :=
           mul_le_mul_of_nonneg_left hih (hB0 0)
       _ = (∏ i, B i) *
-            Real.exp (∑ y : Fin n → α, (∏ i : Fin n, p i.succ (y i)) *
+            Real.exp (∑ y : ∀ i : Fin n, σ i.succ, (∏ i : Fin n, p i.succ (y i)) *
               ∑ a, p 0 a * g (Fin.cons a y) - m) := by
           rw [Fin.prod_univ_succ, mul_assoc]
 
@@ -529,7 +539,7 @@ theorem bounded_differences_tensorization (p : Fin n → α → ℝ) (hp : ∀ i
     (g : (Fin n → α) → ℝ) (hg : ∀ x i a, |g (Function.update x i a) - g x| ≤ c i) (m : ℝ) :
     ∑ x, (∏ i, p i (x i)) * Real.exp (g x - m) ≤
       (∏ i, B i) * Real.exp (∑ x, (∏ i, p i (x i)) * g x - m) :=
-  bounded_differences_tensorization_aux n p hp hp1 c B hB0 hB g hg m
+  bounded_differences_tensorization_aux n (fun _ => α) p hp hp1 c B hB0 hB g hg m
 
 /-- Product weights of normalised site marginals sum to one. -/
 theorem prod_weight_sum_one (p : Fin n → α → ℝ) (hp1 : ∀ i, ∑ a, p i a = 1) :
@@ -594,6 +604,103 @@ theorem bounded_differences_sandwich (p : Fin n → α → ℝ) (hp : ∀ i a, 0
     mcdiarmid_log_upper p hp hp1 Δ c hΔ β⟩
 
 end Tensorization
+
+/-! ## T4 for arbitrary site index types and heterogeneous site alphabets -/
+
+section GeneralIndex
+
+variable {ι : Type*} [Fintype ι] [DecidableEq ι] {σ : ι → Type*} [∀ i, Fintype (σ i)]
+
+/-- **Tensorization of single-site bounds, general form.**  The statement of
+`bounded_differences_tensorization` for configurations `x : ∀ i, σ i` with an arbitrary finite
+site index type `ι` and site-dependent alphabets `σ i` (a heteropolymer: every site has its own
+state space). -/
+theorem bounded_differences_tensorization_pi (p : ∀ i, σ i → ℝ) (hp : ∀ i a, 0 ≤ p i a)
+    (hp1 : ∀ i, ∑ a, p i a = 1) (c B : ι → ℝ) (hB0 : ∀ i, 0 ≤ B i)
+    (hB : ∀ i (h : σ i → ℝ), (∀ a a', |h a - h a'| ≤ c i) →
+      ∑ a, p i a * Real.exp (h a - ∑ a', p i a' * h a') ≤ B i)
+    (g : (∀ i, σ i) → ℝ) (hg : ∀ x i a, |g (Function.update x i a) - g x| ≤ c i) (m : ℝ) :
+    ∑ x, (∏ i, p i (x i)) * Real.exp (g x - m) ≤
+      (∏ i, B i) * Real.exp (∑ x, (∏ i, p i (x i)) * g x - m) := by
+  -- transport everything along an enumeration `e` of the sites
+  obtain ⟨e⟩ : Nonempty (ι ≃ Fin (Fintype.card ι)) := ⟨Fintype.equivFin ι⟩
+  have hW : ∀ x : ∀ i, σ i, ∏ i, p i (x i) = ∏ k, p (e.symm k) (e.piCongrLeft' σ x k) :=
+    fun x => (Equiv.prod_comp e.symm (fun i => p i (x i))).symm
+  have hL : ∑ x, (∏ i, p i (x i)) * Real.exp (g x - m) =
+      ∑ y : ∀ k, σ (e.symm k), (∏ k, p (e.symm k) (y k)) *
+        Real.exp (g ((e.piCongrLeft' σ).symm y) - m) :=
+    Fintype.sum_equiv (e.piCongrLeft' σ) _ _
+      (fun x => by simp only [hW x, Equiv.symm_apply_apply])
+  have hM : ∑ x, (∏ i, p i (x i)) * g x =
+      ∑ y : ∀ k, σ (e.symm k), (∏ k, p (e.symm k) (y k)) * g ((e.piCongrLeft' σ).symm y) :=
+    Fintype.sum_equiv (e.piCongrLeft' σ) _ _
+      (fun x => by simp only [hW x, Equiv.symm_apply_apply])
+  have hBprod : ∏ i, B i = ∏ k, B (e.symm k) := (Equiv.prod_comp e.symm B).symm
+  have h := bounded_differences_tensorization_aux (Fintype.card ι) (fun k => σ (e.symm k))
+    (fun k => p (e.symm k)) (fun k a => hp (e.symm k) a) (fun k => hp1 (e.symm k))
+    (fun k => c (e.symm k)) (fun k => B (e.symm k)) (fun k => hB0 (e.symm k))
+    (fun k h hh => hB (e.symm k) h hh) (fun y => g ((e.piCongrLeft' σ).symm y))
+    (fun y k a => by
+      have h1 := hg ((e.piCongrLeft' σ).symm y) (e.symm k) a
+      rwa [← Function.piCongrLeft'_symm_update] at h1) m
+  rw [hL, hM, hBprod]
+  exact h
+
+/-- Product weights of normalised site marginals sum to one (general index type). -/
+theorem prod_weight_sum_one_pi (p : ∀ i, σ i → ℝ) (hp1 : ∀ i, ∑ a, p i a = 1) :
+    ∑ x : ∀ i, σ i, ∏ i, p i (x i) = 1 := by
+  rw [← Fintype.prod_sum]
+  exact Finset.prod_eq_one fun i _ => hp1 i
+
+/-- **T4, general form (McDiarmid tensorization).**  For an arbitrary finite site index type
+`ι`, site-dependent alphabets `σ i`, a product reference `W x = ∏ i, p i (x i)` on `∀ i, σ i`
+and a residual `g` with bounded differences `c`:
+`∑ x, W x * exp (g x - ⟨g⟩) ≤ exp ((∑ i, (c i)²) / 8)`. -/
+theorem mcdiarmid_mgf_pi (p : ∀ i, σ i → ℝ) (hp : ∀ i a, 0 ≤ p i a)
+    (hp1 : ∀ i, ∑ a, p i a = 1) (g : (∀ i, σ i) → ℝ) (c : ι → ℝ)
+    (hg : ∀ x i a, |g (Function.update x i a) - g x| ≤ c i) :
+    ∑ x, (∏ i, p i (x i)) * Real.exp (g x - ∑ y, (∏ i, p i (y i)) * g y) ≤
+      Real.exp ((∑ i, c i ^ 2) / 8) := by
+  have h := bounded_differences_tensorization_pi p hp hp1 c (fun i => Real.exp (c i ^ 2 / 8))
+    (fun i => (Real.exp_pos _).le)
+    (fun i h hh => hoeffding_core_osc (p i) h (hp i) (hp1 i) (c i) hh) g hg
+    (∑ y, (∏ i, p i (y i)) * g y)
+  rwa [sub_self, Real.exp_zero, mul_one, ← Real.exp_sum, ← Finset.sum_div] at h
+
+/-- **T4, general form (bounded-differences sandwich).**  For an arbitrary finite site index
+type `ι`, site-dependent alphabets `σ i`, a product reference `W x = ∏ i, p i (x i)` and a
+residual `Δ` with bounded differences `c`:
+`-β ⟨Δ⟩ ≤ log (∑ x, W x * exp (-β Δ x)) ≤ -β ⟨Δ⟩ + β² (∑ i, (c i)²) / 8`. -/
+theorem bounded_differences_sandwich_pi (p : ∀ i, σ i → ℝ) (hp : ∀ i a, 0 ≤ p i a)
+    (hp1 : ∀ i, ∑ a, p i a = 1) (Δ : (∀ i, σ i) → ℝ) (c : ι → ℝ)
+    (hΔ : ∀ x i a, |Δ (Function.update x i a) - Δ x| ≤ c i) (β : ℝ) :
+    -β * ∑ x, (∏ i, p i (x i)) * Δ x ≤
+        Real.log (∑ x, (∏ i, p i (x i)) * Real.exp (-β * Δ x)) ∧
+      Real.log (∑ x, (∏ i, p i (x i)) * Real.exp (-β * Δ x)) ≤
+        -β * ∑ x, (∏ i, p i (x i)) * Δ x + β ^ 2 * (∑ i, c i ^ 2) / 8 := by
+  have hW0 : ∀ x : ∀ i, σ i, 0 ≤ ∏ i, p i (x i) :=
+    fun x => Finset.prod_nonneg fun i _ => hp i (x i)
+  have hW1 := prod_weight_sum_one_pi p hp1
+  refine ⟨gibbs_bogoliubov (fun x : ∀ i, σ i => ∏ i, p i (x i)) Δ hW0 hW1 β, ?_⟩
+  have hbd : ∀ (x : ∀ i, σ i) (i : ι) (a : σ i),
+      |(-β * Δ (Function.update x i a)) - (-β * Δ x)| ≤ |β| * c i := by
+    intro x i a
+    have e : (-β * Δ (Function.update x i a)) - (-β * Δ x) =
+        -β * (Δ (Function.update x i a) - Δ x) := by ring
+    rw [e, abs_mul, abs_neg]
+    exact mul_le_mul_of_nonneg_left (hΔ x i a) (abs_nonneg β)
+  have h := log_weighted_exp_le_of_centered_le (fun x : ∀ i, σ i => ∏ i, p i (x i))
+    (fun x => -β * Δ x) hW0 hW1 _
+    (mcdiarmid_mgf_pi p hp hp1 (fun x => -β * Δ x) (fun i => |β| * c i) hbd)
+  rw [weighted_sum_neg_mul] at h
+  have e : (∑ i, (|β| * c i) ^ 2) / 8 = β ^ 2 * (∑ i, c i ^ 2) / 8 := by
+    rw [Finset.mul_sum]
+    congr 1
+    refine Finset.sum_congr rfl fun i _ => ?_
+    rw [mul_pow, sq_abs]
+  rwa [e] at h
+
+end GeneralIndex
 
 /-! ## T5. Sharpness: the worst residual is additive and two-level -/
 
@@ -1239,6 +1346,40 @@ example (β : ℝ) :
   constructor
   · linarith [h.1]
   · linarith [h.2]
+
+/-- Non-vacuity of the general form of T4 on a *heterogeneous* system: two sites indexed by
+`Bool`, the site `true` with `2` states and the site `false` with `3` states, uniform site
+marginals, and the non-decomposable "equal labels" interaction
+`g x = [(x true : ℕ) = (x false : ℕ)]`, which has bounded differences `c = (1, 1)`. -/
+example (β : ℝ) :
+    Real.log (∑ x : ∀ b : Bool, Fin (if b then 2 else 3),
+        (∏ b : Bool, (1 / (if b then 2 else 3) : ℝ)) *
+          Real.exp (-β * (if (x true : ℕ) = (x false : ℕ) then (1 : ℝ) else 0))) ≤
+      -β * ∑ x : ∀ b : Bool, Fin (if b then 2 else 3),
+        (∏ b : Bool, (1 / (if b then 2 else 3) : ℝ)) *
+          (if (x true : ℕ) = (x false : ℕ) then (1 : ℝ) else 0) + β ^ 2 / 4 := by
+  have h01 : ∀ y : ∀ b : Bool, Fin (if b then 2 else 3),
+      (0 : ℝ) ≤ (if (y true : ℕ) = (y false : ℕ) then (1 : ℝ) else 0) ∧
+        (if (y true : ℕ) = (y false : ℕ) then (1 : ℝ) else 0) ≤ 1 :=
+    fun y => by by_cases h : (y true : ℕ) = (y false : ℕ) <;> simp [h]
+  have h := (bounded_differences_sandwich_pi (ι := Bool) (σ := fun b => Fin (if b then 2 else 3))
+    (fun b _ => 1 / (if b then 2 else 3)) (fun b _ => by positivity)
+    (fun b => by
+      cases b
+      · show ∑ _a : Fin 3, (1 / 3 : ℝ) = 1
+        simp
+      · show ∑ _a : Fin 2, (1 / 2 : ℝ) = 1
+        simp)
+    (fun x => if (x true : ℕ) = (x false : ℕ) then (1 : ℝ) else 0) (fun _ => 1)
+    (fun x i a => by
+      rw [abs_le]
+      constructor <;> linarith [(h01 x).1, (h01 x).2, (h01 (Function.update x i a)).1,
+        (h01 (Function.update x i a)).2]) β).2
+  have e : β ^ 2 * (∑ _i : Bool, (1 : ℝ) ^ 2) / 8 = β ^ 2 / 4 := by
+    rw [Fintype.sum_bool]
+    ring
+  rw [e] at h
+  exact h
 
 end Examples
 

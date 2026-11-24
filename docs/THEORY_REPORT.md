@@ -9,7 +9,9 @@ data.  Every theorem marked **[V]** is machine-checked in Lean 4 + Mathlib (`pro
 `sorry`, axioms `propext`, `Classical.choice`, `Quot.sound` only); **[P]** marks statements proved
 here on paper only; **[K]** marks known results that are cited.  The falsification status of every
 claim is in `experiments/falsify_conjectures.py`; refuted or repaired claims are in
-`DEAD_ENDS.md`.  Literature checks with search logs are in `prior_art/`.
+`DEAD_ENDS.md`.  Literature checks with search logs are in `prior_art/`.  All benchmark numbers
+quoted below (B1–B7) are from one run of `experiments/separation_benchmarks.py` (seed 7), whose
+output is stored in `benchmarks_output.txt`.
 
 ---
 
@@ -47,7 +49,7 @@ claim is in `experiments/falsify_conjectures.py`; refuted or repaired claims are
 | D1 | **Dominance transport / thermal DEE**: `Z(A) ≤ e^{−βγ} Z(S)`; pruning changes `ln Z` by `≤ ln(1+e^{−βγ})` | `partition_transport`, `freeEnergy_prune_bracket`, `thermal_dee` **[V]** | inequality folklore; as a certificate rule for partition functions: no match found |
 | D2 | **Free-energy sandwich** `−β⟨Δ⟩₀ ≤ ln(Z/Z₀) ≤ −β⟨Δ⟩₀ + β² Σc_i²/8`; the worst residual in the bounded-difference class is additive and two-level; `1/8` is optimal | `bounded_differences_sandwich`, `exists_two_level_worst_residual`, `mcdiarmid_no_better_constant` **[V]** | inequality known in spirit (Jensen + McDiarmid; Rio 2013 for the sharp function); the attainment statement is implicit in the literature and is stated and machine-checked here |
 | D3 | **Partition-function kernel** with leaf/branch/thermal-prune rules; enclosure of the real `Z` | `zverify_sound`, `Z_encloses_partitionFn` **[V]** | verified checkers exist for exact model counting only; this rule set: no match found |
-| D4 | **Voxel enclosure**: continuous Boltzmann integrals → rational kernel, with the volume (entropy) factor | `voxel_boltzmann_bounds`, `certified_voxel_partition` **[V]** | `K*`-family algorithms use minimised voxel energies; rigorous voxel-integral bounds: no match found |
+| D4 | **Voxel enclosure**: continuous Boltzmann integrals → rational kernel, with the volume (entropy) factor; separable (second-order) envelopes factor an `M`-dimensional voxel integral into `M` one-dimensional ones | `voxel_boltzmann_bounds`, `certified_voxel_partition`, `separable_voxel_bounds` **[V]** | `K*`-family algorithms use minimised voxel energies; rigorous voxel-integral bounds: no match found |
 | D5 | Hölder decomposition with temperature rescaling | `partitionFn_holder`, `freeEnergy_holder` **[V]** | **known** (weighted mini-bucket) |
 | C1 | Hoffman–Wielandt and von Neumann trace inequality (real symmetric) | `hoffman_wielandt` **[V]** | **classical** (1953); formalization |
 | C2 | Trace-enhanced spectral obstruction: `min_X ‖D̂ − Δ(X)‖²_F ≥ 4 Σ_{k>r} λ_k² + (4/(r+1)) (Σ_{k>r} λ_k)²` | `rank_psd_trace_obstruction`, `sstress_lower_bound` **[V]** | **known** with these constants (Sonthalia et al. 2021; K-identity in Tsang–Pereira 2016); first machine-checked proof, down to Hoffman–Wielandt |
@@ -241,9 +243,10 @@ fraction of (site, state) pairs that can be discarded —
 
 | `c` | DEE, global oscillation | DEE, differential | exact, global oscillation (window) | exact, envelope (contact set) |
 |---|---|---|---|---|
-| 0.05 | 0.13 | 0.16 | 0.65 | 0.67 |
-| 0.20 | 0.04 | 0.13 | 0.47 | 0.58 |
-| 0.80 | 0.00 | 0.08 | 0.04 | 0.33 |
+| 0.05 | 0.13 | 0.16 | 0.63 | 0.65 |
+| 0.20 | 0.04 | 0.13 | 0.46 | 0.59 |
+| 0.40 | 0.03 | 0.14 | 0.24 | 0.48 |
+| 0.80 | 0.00 | 0.08 | 0.04 | 0.32 |
 
 The envelope retains pruning power where global bounds have none; single-site dominance rules
 capture only a fraction of what either information class permits, which is the quantitative
@@ -376,17 +379,25 @@ factor `vol(V)` is the conformational entropy of the voxel, which the minimised-
 `e^{−βE_min}` used by the `K*` family omits; with it the same enumeration yields a two-sided
 bound on the *integral*.
 
-*Second order [P].*  If `m·I ⪯ ∇²E ⪯ M·I` on a box with centre `c` and half-widths `w_i`, then
-`E(c) + g·u + (m/2)|u|² ≤ E(c+u) ≤ E(c) + g·u + (M/2)|u|²`, both integrals factorise into
-one-dimensional integrals of `exp(−a u − k u²/2)`, and the ratio of the two bounds is at most
-`exp(β (M−m) Σ w_i² / 2)`.  A relative accuracy `1+ε` therefore needs
-`N ≈ vol · (β (M−m) d / (8 ln(1+ε)))^{d/2}` voxels.  The exponent `d/2` cannot be improved in the
-Hessian-interval oracle model: information-based lower bounds for integration of `C^k` classes
-(Bakhvalov 1959) and, specifically for log-partition functions, `Θ(B n^{−m/d})`
-(Holzmüller–Bach 2025) give matching rates **[K]**.  The one-dimensional factors can themselves
-be certified by 1-D voxel sums, so the cost of a second-order certificate is `d ×` (1-D
-resolution) per box rather than a `d`-dimensional refinement.  Formalising this envelope is the
-highest-priority open item for Direction D.
+*Second order: separable envelopes [V] + Taylor step [P].*  If on a product voxel `∏_i s_i` the
+energy is bracketed by separable functions, `Σ_i φ_i(x_i) ≤ E(x) ≤ Σ_i ψ_i(x_i)`, then
+
+    ∏_i ∫_{s_i} e^{−βψ_i}  ≤  ∫_{∏ s_i} e^{−βE}  ≤  ∏_i ∫_{s_i} e^{−βφ_i}
+
+(`separable_voxel_bounds` **[V]**, Fubini on the box), and if `ψ_i ≤ φ_i + w_i` the two products
+differ by at most the factor `exp(β Σ_i w_i)` (`separable_voxel_ratio` **[V]**).  A second-order
+Taylor expansion with a diagonal Hessian enclosure `m·I ⪯ ∇²E ⪯ M·I` on a box with centre `c` and
+half-widths `h_i`,
+`E(c) + g·u + (m/2)|u|² ≤ E(c+u) ≤ E(c) + g·u + (M/2)|u|²`, is exactly such a pair of separable
+envelopes with `w_i = (M−m) h_i²/2` **[P]** (the Taylor step is standard and not formalized).
+Consequences: (i) an `M`-dimensional voxel integral is certified by `M` one-dimensional
+Gaussian-type integrals, each enclosed by one-dimensional voxel sums (`voxel_riemann_enclosure`),
+so a second-order certificate costs `M ×` (1-D resolution) per voxel instead of an
+`M`-dimensional refinement; (ii) the relative width is `exp(β (M−m) Σ h_i²/2)`, so accuracy
+`1+ε` needs `N ≈ vol · (β (M−m) d / (8 ln(1+ε)))^{d/2}` voxels.  The exponent `d/2` cannot be
+improved in the Hessian-interval oracle model: information-based lower bounds for integration of
+`C^k` classes (Bakhvalov 1959) and, specifically for log-partition functions, `Θ(B n^{−m/d})`
+(Holzmüller–Bach 2025) give matching rates **[K]**.
 
 ### 3.5 Decomposition at finite temperature [K, V]
 
@@ -733,14 +744,16 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   are themselves optimisation problems; the theorems say what a certificate must and may contain,
   not how to find it.
 * **Finite configuration spaces.**  §§2–3 are stated for finite sets; continuous variables enter
-  through voxel enclosures (zeroth order formalized, second order on paper).
+  through voxel enclosures (zeroth order and the separable-envelope step formalized; the Taylor
+  step that produces second-order envelopes from Hessian bounds is on paper).
 * **Extensivity** of the free-energy sandwich (§3.2).
 * **Worst-case geometry bounds** (Theorem 4.6 is `ℓ¹`; Theorem 4.3 is tight only for symmetric
   inputs and within `√((L+2)/2)` in general).
 * **No claim of practical performance.**  All experiments are synthetic and small; they check
   tightness and scaling of bounds, not solver speed.
-* **Unformalized statements** are marked [P] or [K]: the link-graph dichotomy, the second-order
-  voxel envelope and its complexity, dependent-reference sandwiches and Rio's sharp function,
+* **Unformalized statements** are marked [P] or [K]: the link-graph dichotomy, the Taylor step
+  and the complexity count for second-order voxels, dependent-reference sandwiches and Rio's
+  sharp function,
   the Procrustes–Gram corollary, the T₁ equivalence.
 * **Certified numerics outside Lean.**  Eigenvalue enclosures needed to *evaluate* the spectral
   bound of §4.1 on data are standard verified numerics but are not part of the development.
@@ -759,6 +772,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/HolderDecomposition.lean` | `partitionFn_holder`, `freeEnergy_holder` |
 | `proofs/Frontiers/PartitionCertificate.lean` | `zverify`, `zverify_sound`, `zprune_sound`, `Z_encloses_partitionFn`, `triangleZ_exact` |
 | `proofs/Frontiers/VoxelEnclosure.lean` | `voxel_boltzmann_bounds`, `voxel_riemann_enclosure`, `Z_encloses_voxel_integral`, `certified_voxel_partition` |
+| `proofs/Frontiers/SeparableVoxel.lean` | `setIntegral_pi_prod`, `separable_voxel_bounds`, `separable_voxel_ratio` |
 | `proofs/Frontiers/HoffmanWielandt.lean` | `trace_mul_le_sum_sorted_eigenvalues`, `hoffman_wielandt` |
 | `proofs/Frontiers/Realizability.lean` | `K_identity`, `K_lower_bound`, `rank_psd_trace_obstruction`, `sstress_lower_bound`, `simplex_sstress_lower_bound`, `simplex_not_realizable` |
 | `proofs/Frontiers/Holonomy.lean` | `norm_mul_div_mul_le`, `norm_holProd_le_sum`, `norm_holProd_sq_le`, `norm_holTrans_le`, `exists_assignment_attaining_holonomy` |

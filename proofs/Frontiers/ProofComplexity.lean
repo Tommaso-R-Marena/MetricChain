@@ -35,10 +35,13 @@ leaves, whereas `2 * m` leaves suffice with `sum`.
   `sumFree_size_exponential` is the same bound for `Cert.size`.  More generally
   (`sumFree_gap_exponential`) a sum-free certificate for any bound `L ≥ m - d` visits at least
   `2 ^ (m - d)` leaves: an additive gap `d` only saves a factor `2 ^ d`.
-* `sumFree_tight` — the bound is attained: a sum-free certificate with exactly `2 ^ m` leaves.
+* `sumFree_complexity`, `sumFree_tight` — the bounds are attained: for every `K ≤ m` the least
+  number of leaves of a sum-free certificate for the bound `K` is exactly `2 ^ K` (branch on one
+  site in each of `K` triangles, then one dual leaf).
 * `peelCert_verified`, `peelCert_visited`, `sum_linear` — **linear upper bound with `sum`**: the
   peeling certificate (split off one triangle with `sum`, branch once, two dual leaves) is
-  accepted for the bound `m` and visits `2 * m` leaves (`m ≥ 1`); its size is `4 * m - 1`.
+  accepted for the bound `m` and visits `2 * m` leaves for `m ≥ 1` (for `m = 0` there are no
+  sites and one trivial leaf is needed, `peelCert_visited_le`); its size is `4 * m - 1`.
 * `sum_rule_separation` — for `m ≥ 3` the certificate with `sum` beats every sum-free one.
 
 ## Proof of the lower bound
@@ -61,8 +64,9 @@ a sum-free certificate accepted on a good `D` for a bound `L ≥ m - d` visits a
   goodness and the set of untouched blocks.
 
 The separation is the tree-like versus DAG-like phenomenon known for branch-and-bound (Jeroslow
-1974; Basu, Conforti, Di Summa, Jiang 2023, for the same family in the stable-set formulation);
-here it is established for this kernel, i.e. for LP-dual leaves together with dominance steps.
+1974; Basu, Conforti, Di Summa, Jiang 2023, for the same family in the stable-set formulation;
+see `docs/THEORY_REPORT.md`, §6.3); here it is established for this kernel, i.e. for LP-dual
+leaves together with dominance steps.
 -/
 
 namespace MetricChain
@@ -799,7 +803,7 @@ theorem sumFree_size_exponential (m : ℕ) (c : Cert (m * 3) 2) (hc : c.SumFree)
 
 end LowerBound
 
-/-! ### Upper bounds: `2 ^ m` leaves without `sum`, `2 * m` leaves with `sum` -/
+/-! ### Upper bounds: `2 ^ K` leaves without `sum`, `2 * m` leaves with `sum` -/
 
 section UpperBound
 
@@ -825,28 +829,34 @@ theorem triMsg_pair : ∀ (v : Fin 2) (r r' : Fin 3) (a b : Fin 2), r ≠ r' →
     (0 : ℚ) ≤ (if a = b then 1 else 0) - triMsg v r r' a - triMsg v r' r b := by
   decide +kernel
 
-/-! #### Tightness of the lower bound: a sum-free certificate with `2 ^ m` leaves -/
+/-! #### Tightness of the lower bound: `2 ^ K` leaves for the bound `K` without `sum` -/
 
-/-- Dual leaf for all blocks at once, the first site of block `q` being fixed to `v q`. -/
-def prodLeaf (v : Fin m → Fin 2) : Cert (m * 3) 2 :=
-  .leaf (fun i => if posOf i = 1 then 1 else 0) (fun _ _ => 0)
+/-- Dual leaf for the blocks `0, …, K - 1` at once, the first site of block `q` being fixed to
+`v q`; the other blocks are ignored. -/
+def prodLeaf (K : ℕ) (v : Fin m → Fin 2) : Cert (m * 3) 2 :=
+  .leaf (fun i => if (blockOf i).val < K ∧ posOf i = 1 then 1 else 0) (fun _ _ => 0)
     (fun i j s =>
-      if blockOf i = blockOf j then triMsg (v (blockOf i)) (posOf i) (posOf j) s else 0)
+      if (blockOf i).val < K ∧ blockOf i = blockOf j then
+        triMsg (v (blockOf i)) (posOf i) (posOf j) s
+      else 0)
 
 /-- Branch on the first site of each of the blocks `k - 1, …, 0` (recording the chosen states in
-`v`), then close with one dual leaf. -/
-def prodCert (m : ℕ) : ℕ → (Fin m → Fin 2) → Cert (m * 3) 2
-  | 0, v => prodLeaf v
+`v`), then close with the dual leaf `prodLeaf K v`. -/
+def prodCert (m K : ℕ) : ℕ → (Fin m → Fin 2) → Cert (m * 3) 2
+  | 0, v => prodLeaf K v
   | k + 1, v =>
     if h : k < m then
-      .branch (blockSite ⟨k, h⟩ 0) fun a => prodCert m k (Function.update v ⟨k, h⟩ a)
-    else prodLeaf v
+      .branch (blockSite ⟨k, h⟩ 0) fun a => prodCert m K k (Function.update v ⟨k, h⟩ a)
+    else prodLeaf K v
 
-theorem prodLeaf_ok (v : Fin m → Fin 2) (D : Dom (m * 3) 2)
-    (hD : ∀ q : Fin m, ∀ c ∈ D (blockSite q 0), c = v q) :
-    LeafOK (triangles m) D (m : ℚ) (fun i => if posOf i = 1 then 1 else 0) (fun _ _ => 0)
+theorem prodLeaf_ok (K : ℕ) (hK : K ≤ m) (v : Fin m → Fin 2) (D : Dom (m * 3) 2)
+    (hD : ∀ q : Fin m, q.val < K → ∀ c ∈ D (blockSite q 0), c = v q) :
+    LeafOK (triangles m) D (K : ℚ)
+      (fun i => if (blockOf i).val < K ∧ posOf i = 1 then 1 else 0) (fun _ _ => 0)
       (fun i j s =>
-        if blockOf i = blockOf j then triMsg (v (blockOf i)) (posOf i) (posOf j) s else 0) := by
+        if (blockOf i).val < K ∧ blockOf i = blockOf j then
+          triMsg (v (blockOf i)) (posOf i) (posOf j) s
+        else 0) := by
   refine ⟨?_, ?_, ?_⟩
   · -- reparameterised unaries
     intro i a _
@@ -854,10 +864,12 @@ theorem prodLeaf_ok (v : Fin m → Fin 2) (D : Dom (m * 3) 2)
       intro j hb
       have hn : ¬ blockOf i = blockOf j := fun e => hb e.symm
       simp [hn])]
-    have h1 := triMsg_unary (v (blockOf i)) (posOf i) a
     have h0 : (triangles m).h i a = 0 := rfl
-    simp only [blockOf_blockSite, posOf_blockSite, if_true, h0]
-    linarith
+    by_cases hiK : (blockOf i).val < K
+    · have h1 := triMsg_unary (v (blockOf i)) (posOf i) a
+      simp only [hiK, true_and, blockOf_blockSite, posOf_blockSite, if_true, h0]
+      linarith
+    · simp [hiK, h0]
   · -- reparameterised pair tables
     intro i j hj a ha b hb
     have hji : j ≠ i := Finset.ne_of_mem_erase hj
@@ -865,43 +877,55 @@ theorem prodLeaf_ok (v : Fin m → Fin 2) (D : Dom (m * 3) 2)
     unfold PairInstance.Jsym at hs
     rw [hs]
     by_cases hq : blockOf i = blockOf j
-    · have hpos : posOf i ≠ posOf j := by
-        intro e
-        apply hji
-        rw [eq_blockSite_of_blockOf hq.symm, ← e, blockSite_blockOf_posOf]
-      have hfix : ∀ (l : Fin (m * 3)) (c : Fin 2), c ∈ D l → posOf l = 0 →
-          c = v (blockOf l) := by
-        intro l c hc e
-        rw [eq_blockSite_of_blockOf (rfl : blockOf l = blockOf l), e] at hc
-        exact hD _ c hc
-      have h3 := triMsg_pair (v (blockOf i)) (posOf i) (posOf j) a b hpos (hfix i a ha)
-        (by rw [hq]; exact hfix j b hb)
-      simp only [hq, true_and, if_true] at h3 ⊢
-      linarith
+    · by_cases hiK : (blockOf i).val < K
+      · have hjK : (blockOf j).val < K := hq ▸ hiK
+        have hpos : posOf i ≠ posOf j := by
+          intro e
+          apply hji
+          rw [eq_blockSite_of_blockOf hq.symm, ← e, blockSite_blockOf_posOf]
+        have hfix : ∀ (l : Fin (m * 3)) (c : Fin 2), (blockOf l).val < K → c ∈ D l →
+            posOf l = 0 → c = v (blockOf l) := by
+          intro l c hl hc e
+          rw [eq_blockSite_of_blockOf (rfl : blockOf l = blockOf l), e] at hc
+          exact hD _ hl c hc
+        have h3 := triMsg_pair (v (blockOf i)) (posOf i) (posOf j) a b hpos (hfix i a hiK ha)
+          (by rw [hq]; exact hfix j b hjK hb)
+        simp only [hq, hjK, true_and, and_self, if_true] at h3 ⊢
+        linarith
+      · have hjK : ¬ (blockOf j).val < K := hq ▸ hiK
+        simp only [hiK, hjK, false_and, if_false]
+        split_ifs <;> norm_num
     · have hq' : ¬ blockOf j = blockOf i := fun e => hq e.symm
       simp [hq, hq']
   · -- total
-    have h1 : ∑ i : Fin (m * 3), (if posOf i = 1 then (1 : ℚ) else 0) = (m : ℚ) := by
+    have h1 : ∑ i : Fin (m * 3), (if (blockOf i).val < K ∧ posOf i = 1 then (1 : ℚ) else 0) =
+        (K : ℚ) := by
       rw [← (finProdFinEquiv (m := m) (n := 3)).sum_comp, Fintype.sum_prod_type]
       have e : ∀ (q : Fin m) (r : Fin 3), finProdFinEquiv (q, r) = blockSite q r :=
         fun _ _ => rfl
-      simp [e]
+      have h2 : ∀ q : Fin m, ∑ r : Fin 3, (if q.val < K ∧ r = 1 then (1 : ℚ) else 0) =
+          if q.val < K then 1 else 0 := by
+        intro q
+        by_cases hq : q.val < K <;> simp [hq]
+      simp only [e, blockOf_blockSite, posOf_blockSite, h2]
+      rw [Finset.sum_boole, Fin.card_filter_val_lt, min_eq_right hK]
     rw [h1]
     simp
 
-theorem prodCert_verified_aux (m k : ℕ) (v : Fin m → Fin 2) (D : Dom (m * 3) 2) (hk : k ≤ m)
-    (hD : ∀ q : Fin m, k ≤ q.val → ∀ c ∈ D (blockSite q 0), c = v q) :
-    verify (prodCert m k v) (triangles m) D (m : ℚ) = true := by
+theorem prodCert_verified_aux (m K k : ℕ) (hK : K ≤ m) (hk : k ≤ K) (v : Fin m → Fin 2)
+    (D : Dom (m * 3) 2)
+    (hD : ∀ q : Fin m, k ≤ q.val → q.val < K → ∀ c ∈ D (blockSite q 0), c = v q) :
+    verify (prodCert m K k v) (triangles m) D (K : ℚ) = true := by
   induction k generalizing v D with
   | zero =>
     simp only [prodCert, prodLeaf, verify, decide_eq_true_eq]
-    exact prodLeaf_ok v D fun q => hD q (Nat.zero_le _)
+    exact prodLeaf_ok K hK v D fun q => hD q (Nat.zero_le _)
   | succ k ih =>
-    have hkm : k < m := hk
+    have hkm : k < m := by omega
     simp only [prodCert, hkm, dif_pos, verify, List.all_eq_true]
     intro a _
-    apply ih _ _ (by omega)
-    intro q hq c hc
+    apply ih (by omega)
+    intro q hq hqK c hc
     by_cases hqk : q = ⟨k, hkm⟩
     · subst hqk
       unfold Dom.fix at hc
@@ -916,11 +940,11 @@ theorem prodCert_verified_aux (m k : ℕ) (v : Fin m → Fin 2) (D : Dom (m * 3)
       unfold Dom.fix at hc
       rw [Function.update_of_ne hne] at hc
       rw [Function.update_of_ne hqk]
-      refine hD q ?_ c hc
+      refine hD q ?_ hqK c hc
       have hqv : q.val ≠ k := fun e => hqk (Fin.ext e)
       omega
 
-theorem prodCert_sumFree (m k : ℕ) (v : Fin m → Fin 2) : (prodCert m k v).SumFree := by
+theorem prodCert_sumFree (m K k : ℕ) (v : Fin m → Fin 2) : (prodCert m K k v).SumFree := by
   induction k generalizing v with
   | zero =>
     simp [prodCert, prodLeaf, Cert.SumFree]
@@ -930,9 +954,9 @@ theorem prodCert_sumFree (m k : ℕ) (v : Fin m → Fin 2) : (prodCert m k v).Su
       exact fun a => ih _
     · simp [prodCert, hkm, prodLeaf, Cert.SumFree]
 
-theorem prodCert_visited (m k : ℕ) (v : Fin m → Fin 2) (D : Dom (m * 3) 2) (hk : k ≤ m)
+theorem prodCert_visited (m K k : ℕ) (v : Fin m → Fin 2) (D : Dom (m * 3) 2) (hk : k ≤ m)
     (hD : ∀ q : Fin m, q.val < k → D (blockSite q 0) = List.finRange 2) :
-    (prodCert m k v).visited D = 2 ^ k := by
+    (prodCert m K k v).visited D = 2 ^ k := by
   induction k generalizing v D with
   | zero =>
     simp [prodCert, prodLeaf, Cert.visited]
@@ -941,7 +965,7 @@ theorem prodCert_visited (m k : ℕ) (v : Fin m → Fin 2) (D : Dom (m * 3) 2) (
     simp only [prodCert, hkm, dif_pos, Cert.visited]
     rw [hD ⟨k, hkm⟩ (Nat.lt_succ_self k)]
     have hstep : ∀ a : Fin 2,
-        (prodCert m k (Function.update v ⟨k, hkm⟩ a)).visited
+        (prodCert m K k (Function.update v ⟨k, hkm⟩ a)).visited
           (D.fix (blockSite ⟨k, hkm⟩ 0) a) = 2 ^ k := by
       intro a
       apply ih _ _ (by omega)
@@ -959,15 +983,33 @@ theorem prodCert_visited (m k : ℕ) (v : Fin m → Fin 2) (D : Dom (m * 3) 2) (
     simp [pow_succ]
     ring
 
+/-- **Exact sum-free complexity.**  For every `K ≤ m`, the least number of leaves visited by a
+sum-free certificate accepted for the bound `K` on `m` disjoint frustrated triangles is exactly
+`2 ^ K`: branching on one site in each of `K` triangles suffices, and nothing smaller does. -/
+theorem sumFree_complexity (m K : ℕ) (hK : K ≤ m) :
+    (∃ c : Cert (m * 3) 2, c.SumFree ∧
+      verify c (triangles m) (fullDom (m * 3) 2) (K : ℚ) = true ∧
+      c.visited (fullDom (m * 3) 2) = 2 ^ K) ∧
+    ∀ c : Cert (m * 3) 2, c.SumFree →
+      verify c (triangles m) (fullDom (m * 3) 2) (K : ℚ) = true →
+      2 ^ K ≤ c.visited (fullDom (m * 3) 2) := by
+  refine ⟨⟨prodCert m K K fun _ => 0, prodCert_sumFree m K K _,
+    prodCert_verified_aux m K K hK le_rfl _ _ fun q h1 h2 => absurd h2 (by omega),
+    prodCert_visited m K K _ _ hK fun _ _ => rfl⟩, fun c hc hv => ?_⟩
+  have hL : (m : ℚ) - ((m - K : ℕ) : ℚ) ≤ (K : ℚ) := by
+    rw [Nat.cast_sub hK]
+    linarith
+  have h := sumFree_gap_exponential m (m - K) (K : ℚ) hL c hc hv
+  have e : m - (m - K) = K := by omega
+  rwa [e] at h
+
 /-- **The lower bound is tight.**  There is a sum-free certificate accepted for the optimal bound
 `m` that visits exactly `2 ^ m` leaves. -/
 theorem sumFree_tight (m : ℕ) :
     ∃ c : Cert (m * 3) 2, c.SumFree ∧
       verify c (triangles m) (fullDom (m * 3) 2) (m : ℚ) = true ∧
       c.visited (fullDom (m * 3) 2) = 2 ^ m :=
-  ⟨prodCert m m fun _ => 0, prodCert_sumFree m m _,
-    prodCert_verified_aux m m _ _ le_rfl fun q hq => absurd q.isLt (by omega),
-    prodCert_visited m m _ _ le_rfl fun _ _ => rfl⟩
+  (sumFree_complexity m m le_rfl).1
 
 /-! #### With the `sum` rule the certificate is linear -/
 
