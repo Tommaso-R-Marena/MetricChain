@@ -103,7 +103,7 @@ Verified modules and headline statements:
 | `Frontiers/TorsionRMSD` | rigid-superposition chain rule, exact coaxial cost, two-sided reduced-inertia bounds, torsion-move chain | **[V]** |
 | `Frontiers/InvariantEnvelope` | Lipschitz residual invariant under a group of motions (SE(3) or E(3)) ⇒ torsion-space envelope ⇒ membership in the kernel's residual class (cycle 5) | **[V]** |
 | `Frontiers/ProofComplexity` | two-configuration weak duality, LP gap of the frustrated triangle, exact `2^m` bound for sum-free certificates, `2m` with `sum`, separation theorem | **[V]** |
-| `CertificateAlgebra` | `(min,+)` kernel `verify`, residual kernel `verifyR` with top-level entry points `verifyRTop` / `verifyRLowerTop` (consistency of the data checked; cycle 5), Master Soundness Theorems, kernel-evaluated examples | **[V]** |
+| `CertificateAlgebra` | `(min,+)` kernel `verify`, residual kernel `verifyR` with the top-level entry point `verifyITop` for interval anchor data (consistency of the data checked; cycles 5–6; `verifyRTop` / `verifyRLowerTop` are special cases), Master Soundness Theorems, kernel-evaluated examples | **[V]** |
 | `AxiomAudit` | automatic audit of every declaration + non-vacuity witnesses | **[V]** |
 
 Engineering lessons recorded in `DEAD_ENDS.md` D6 (leaf rule), D7 (`decide +kernel`).
@@ -153,13 +153,33 @@ were repaired in this cycle; the record of what was wrong is `DEAD_ENDS.md` D14�
 | many-to-one thermal pruning asserted, injective case proved | `partition_transport_fibers`, `partition_prune_bracket_fibers` |
 | the Boltzmann-factor brackets of `Z_encloses_partitionFn` were hypotheses never derived from the certified exponential | `IntervalInstance.lean`: instances computed from interval energy tables, `certified_partition_of_intervals`, and a kernel-evaluated real enclosure `Z_triangle(β=1) ∈ [2.3068, 2.3069]` |
 | trivial non-vacuity witness; anchors required to be exact rationals | new witness forcing every exact certificate to evaluate both states; `ResidualLowerClass`, `verifyR_sound_lower`, `certified_gap_interval` |
-| harness tests X.1, II.4, VII.1 could not fail | rewritten with independent computations, exhaustive certificate enumeration, the prune rule, and built-in power checks (each test now fails if a deliberately wrong variant of the claim is never caught); 33 mutations of the rewritten tests were run on scratch copies — 32 caught, the remaining one an expected pass; new tests I.6, II.7, II.8, III.6, VII.2, DEAD.5 (41 tests in total) |
+| harness tests X.1, II.4, VII.1 could not fail | rewritten with independent computations, exhaustive certificate enumeration, the prune rule, and built-in power checks (each test now fails if a deliberately wrong variant of the claim is never caught); mutation tests of the rewritten tests (`experiments/mutation_tests.py`, added to the repository in cycle 6: 36 mutations, 35 caught, one expected pass); new tests I.6, II.7, II.8, III.6, VII.2, DEAD.5 (41 tests in total) |
 
 The audit also changed one design decision rather than only wording: lower bounds need anchor
 values that are *lower bounds* on the residual, so a producer with floating-point evaluations
-should publish rounded-down values — and for those the pairwise consistency check is neither
-sound to demand nor needed.  The residual kernel therefore has two entry points with two stated
-semantics.
+should publish rounded values.  The first repair gave the residual kernel two entry points with
+two semantics; the re-audit showed that the lower-only one can never refute an envelope, and
+cycle 6 replaced both by interval anchor data.
+
+### Cycle 6 — re-audit of the repairs
+
+The same reviewer re-checked every finding against the repaired repository (three commits:
+kernels and theory, voxel follow-ups, harness).  Verdict: ten of eleven findings resolved, the
+`SE(3)` item partially; no theorem false, vacuous or circular; one new major point in the audit
+tooling and five minor ones (`DEAD_ENDS.md` D19).  Repairs of this cycle:
+
+* audit tooling: version-independent detection of incomplete proofs, token scan over all files,
+  named (audited) non-vacuity witnesses, a self-test with planted violations, mutation tests of
+  the harness as a repository artifact (36 mutations: 35 caught, 1 expected pass), import
+  coverage and conformance-vector freshness checks, doc-reference check extended to the README,
+  qualified names and structure fields;
+* residual kernel: **interval anchor data** with `verifyITop`, `IProblem.consistent_iff_nonempty`
+  and `verifyITop_sound`; the exact and lower-only kernels are special cases; the JSON schema
+  has no default reading of an anchor value; the reference checker validates well-formedness;
+* geometry: group-restricted `min`-inertia chain rule; a verified instance with an invariance
+  group smaller than all isometries and a residual that is not reflection-invariant; the
+  identification of that group with `SE(3)` is explicitly a paper step;
+* voxels: executable volume brackets that converge under subdivision.
 
 ### Portfolio reassessment (end of session 1)
 

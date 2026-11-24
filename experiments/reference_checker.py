@@ -4,20 +4,25 @@ Reference implementation of the MetricChain certificate checkers (format `metric
 docs/BLUEPRINT.md §4-§5) in exact rational arithmetic.
 
 This file is NOT part of the trusted base: the trusted checkers are the Lean definitions
-`verify`, `verifyRTop` / `verifyRLowerTop`, `zverifyTop` with their soundness theorems.  It exists
-so that an implementation team has (a) an executable reading of the JSON schema, (b) the
-conformance vectors that the Lean kernel evaluates (`triangle_verified`, `triangle_rejects`,
-`biased_verified`, `triangleResidual_verifiedTop`, `inconsistentResidual_rejected`,
-`inconsistentResidual_lowerTop`, `negativeEnvelope_rejected`, `triangleZ_exactTop`,
+`verify`, `verifyITop` (with its special cases `verifyRTop` / `verifyRLowerTop`), `zverifyTop` and
+their soundness theorems.  It exists so that an implementation team has (a) an executable reading
+of the JSON schema, (b) the conformance vectors that the Lean kernel evaluates
+(`triangle_verified`, `triangle_rejects`, `biased_verified`, `triangleResidual_verifiedTop`,
+`inconsistentResidual_rejected`, `inconsistentResidual_lowerTop`, `negativeEnvelope_rejected`,
+`triangleInterval_verified`, `inconsistentInterval_rejected`, `triangleZ_exactTop`,
 `triangleZ_coarse`, `negativeW_rejected`), and (c) a fuzzer that checks soundness against brute
 force on random instances and random (mostly invalid) certificates.
 
-Side conditions checked at file level (they are part of the top-level Lean kernels):
-  * residual, `anchor_semantics = "exact"` (default): `c >= 0` and pairwise compatibility of the
-    anchor values with the envelope (Lean `RProblem.Consistent`, which is exactly non-emptiness of
-    the residual class, `RProblem.consistent_iff_nonempty`);
-  * residual, `anchor_semantics = "lower"` (values are certified lower bounds, e.g. rounded-down
-    floats): `c >= 0` only (Lean `verifyRLowerTop`); no upper bound is reported;
+File-level checks (all part of the top-level Lean kernels, or of the well-formedness that Lean
+enforces by typing):
+  * well-formedness: every site index lies in [0, n), every state in [0, k), tables have the
+    declared shapes, domains are duplicate-free (`validate`); malformed files are rejected;
+  * residual: anchors carry interval data `lo <= residual(x) <= hi` (`hi` optional; `value` is
+    shorthand for `lo = hi`, to be used only for exactly rational residuals).  The data must be
+    consistent: `c >= 0` and `lo_p - hi_q <= sum_i c_i [x_p,i != x_q,i]` for all ordered pairs of
+    anchors of which the second has an upper value (Lean `IProblem.Consistent`, which is exactly
+    non-emptiness of the residual class, `IProblem.consistent_iff_nonempty`).  An upper bound on
+    the optimum is reported only from anchors that have an upper value;
   * partition: all factors nonnegative (Lean `zverifyTop`).
 
 Usage:
@@ -71,6 +76,229 @@ def pairmap(d, default=Q(0)):
         i, j = (int(s) for s in key.split(",")) if isinstance(key, str) else key
         out[(i, j)] = v
     return out, default
+
+
+# ----------------------------------------------------------------------------------------------
+# Well-formedness (in Lean these conditions are enforced by the types `Fin n`, `Fin k`)
+# ----------------------------------------------------------------------------------------------
+
+class Malformed(ValueError):
+    pass
+
+
+def _need(cond, msg):
+    if not cond:
+        raise Malformed(msg)
+
+
+def _is_int(v):
+    return isinstance(v, int) and not isinstance(v, bool)
+
+
+def _rat(v, what):
+    try:
+        return q(v)
+    except Exception as exc:  # noqa: BLE001
+        raise Malformed(f"{what}: not a rational ({v!r})") from exc
+
+
+def _site(v, n, what):
+    _need(_is_int(v) and 0 <= v < n, f"{what}: site index {v!r} outside [0, {n})")
+
+
+def _state(v, k, what):
+    _need(_is_int(v) and 0 <= v < k, f"{what}: state {v!r} outside [0, {k})")
+
+
+def _pair_key(key, n, what):
+    try:
+        i, j = (int(t) for t in key.split(",")) if isinstance(key, str) else key
+    except Exception as exc:  # noqa: BLE001
+        raise Malformed(f"{what}: bad pair key {key!r}") from exc
+    _need(_is_int(i) and _is_int(j) and 0 <= i < n and 0 <= j < n and i != j,
+          f"{what}: pair key {key!r} is not an ordered pair of distinct sites")
+    return i, j
+
+
+def _site_key(key, n, what):
+    try:
+        j = int(key)
+    except Exception as exc:  # noqa: BLE001
+        raise Malformed(f"{what}: bad site key {key!r}") from exc
+    _site(j, n, what)
+
+
+def _tables(one, two, n, k, what):
+    _need(isinstance(one, list) and len(one) == n, f"{what}: one-body table must have {n} rows")
+    for row in one:
+        _need(isinstance(row, list) and len(row) == k, f"{what}: one-body rows must have {k} entries")
+        for v in row:
+            _rat(v, what)
+    _need(isinstance(two or {}, dict), f"{what}: two-body tables must be an object")
+    for key, tab in (two or {}).items():
+        _pair_key(key, n, what)
+        _need(isinstance(tab, list) and len(tab) == k
+              and all(isinstance(r, list) and len(r) == k for r in tab),
+              f"{what}: two-body table {key!r} must be {k} x {k}")
+        for r in tab:
+            for v in r:
+                _rat(v, what)
+
+
+def _pair_scalars(d, n, what):
+    _need(isinstance(d or {}, dict), f"{what}: must be an object")
+    for key, v in (d or {}).items():
+        _pair_key(key, n, what)
+        _rat(v, what)
+
+
+def _branch(node, n, k, rec, what):
+    _site(node.get("site"), n, what)
+    ch = node.get("children")
+    _need(isinstance(ch, dict), f"{what}: children must be an object")
+    for key, sub in ch.items():
+        try:
+            a = int(key)
+        except Exception as exc:  # noqa: BLE001
+            raise Malformed(f"{what}: bad child key {key!r}") from exc
+        _state(a, k, what)
+        rec(sub)
+
+
+def _validate_min(node, n, k):
+    _need(isinstance(node, dict), "certificate node must be an object")
+    kind = node.get("node")
+    if kind == "leaf":
+        u = node.get("u")
+        _need(isinstance(u, list) and len(u) == n, f"leaf: u must have {n} entries")
+        for v in u:
+            _rat(v, "leaf u")
+        _pair_scalars(node.get("p"), n, "leaf p")
+        _need(isinstance(node.get("m") or {}, dict), "leaf m must be an object")
+        for key, row in (node.get("m") or {}).items():
+            _pair_key(key, n, "leaf m")
+            _need(isinstance(row, list) and len(row) == k, f"leaf m: rows must have {k} entries")
+            for v in row:
+                _rat(v, "leaf m")
+    elif kind == "branch":
+        _branch(node, n, k, lambda sub: _validate_min(sub, n, k), "branch")
+    elif kind == "prune":
+        _site(node.get("site"), n, "prune")
+        _state(node.get("remove"), k, "prune remove")
+        _state(node.get("dominator"), k, "prune dominator")
+        _need(isinstance(node.get("ell") or {}, dict), "prune ell must be an object")
+        for key, v in (node.get("ell") or {}).items():
+            _site_key(key, n, "prune ell")
+            _rat(v, "prune ell")
+        _validate_min(node.get("rest"), n, k)
+    elif kind == "sum":
+        parts = node.get("parts")
+        _need(isinstance(parts, list) and len(parts) == 2, "sum: exactly two parts")
+        for pt in parts:
+            _need(isinstance(pt, dict) and isinstance(pt.get("instance"), dict), "sum: part needs an instance")
+            _tables(pt["instance"].get("h"), pt["instance"].get("J", {}), n, k, "sum part")
+            _rat(pt.get("bound"), "sum bound")
+            _validate_min(pt.get("certificate"), n, k)
+    else:
+        raise Malformed(f"unknown node {kind!r}")
+
+
+def _validate_residual(node, n, k):
+    _need(isinstance(node, dict), "certificate node must be an object")
+    kind = node.get("node")
+    if kind == "anchor":
+        _need(_is_int(node.get("index")) and node["index"] >= 0, "anchor: index must be a natural number")
+        _validate_min(node.get("cert"), n, k)
+    elif kind == "branch":
+        _branch(node, n, k, lambda sub: _validate_residual(sub, n, k), "branch")
+    elif kind == "prune":
+        _site(node.get("site"), n, "prune")
+        _state(node.get("remove"), k, "prune remove")
+        _state(node.get("dominator"), k, "prune dominator")
+        for key, v in (node.get("ell") or {}).items():
+            _site_key(key, n, "prune ell")
+            _rat(v, "prune ell")
+        _validate_residual(node.get("rest"), n, k)
+    else:
+        raise Malformed(f"unknown node {kind!r}")
+
+
+def _validate_partition(node, n, k):
+    _need(isinstance(node, dict), "certificate node must be an object")
+    kind = node.get("node")
+    if kind == "leaf":
+        _pair_scalars(node.get("lo"), n, "leaf lo")
+        _pair_scalars(node.get("hi"), n, "leaf hi")
+    elif kind == "branch":
+        _branch(node, n, k, lambda sub: _validate_partition(sub, n, k), "branch")
+    elif kind == "prune":
+        _site(node.get("site"), n, "prune")
+        _state(node.get("remove"), k, "prune remove")
+        _state(node.get("dominator"), k, "prune dominator")
+        _rat(node.get("q0"), "prune q0")
+        for key, v in (node.get("q") or {}).items():
+            _site_key(key, n, "prune q")
+            _rat(v, "prune q")
+        _validate_partition(node.get("rest"), n, k)
+    else:
+        raise Malformed(f"unknown node {kind!r}")
+
+
+def validate(doc):
+    """Raise `Malformed` unless every index of the file is in range and every table has its shape."""
+    _need(isinstance(doc, dict) and doc.get("format") == "metricchain-cert/1", "unknown format")
+    n, k, kind = doc.get("n"), doc.get("k"), doc.get("kind")
+    _need(_is_int(n) and n >= 0 and _is_int(k) and k >= 0, "n and k must be natural numbers")
+    D = doc.get("domains")
+    _need(isinstance(D, list) and len(D) == n, f"domains must list {n} sites")
+    for d in D:
+        _need(isinstance(d, list), "each domain must be a list")
+        for a in d:
+            _state(a, k, "domain")
+        _need(len(set(d)) == len(d), "domains must not repeat a state")
+    inst = doc.get("instance")
+    _need(isinstance(inst, dict), "instance must be an object")
+    _need(isinstance(doc.get("claim", {}), dict), "claim must be an object")
+    if kind == "min":
+        _tables(inst.get("h"), inst.get("J", {}), n, k, "instance")
+        _rat(doc.get("claim", {}).get("lower_bound"), "claim.lower_bound")
+        w = doc.get("claim", {}).get("witness")
+        if w is not None:
+            _need(isinstance(w, list) and len(w) == n, "witness must assign a state to every site")
+            for a in w:
+                _state(a, k, "witness")
+        _validate_min(doc.get("certificate"), n, k)
+    elif kind == "residual":
+        _tables(inst.get("h"), inst.get("J", {}), n, k, "instance")
+        c = inst.get("c")
+        _need(isinstance(c, list) and len(c) == n, f"c must have {n} entries")
+        for v in c:
+            _rat(v, "c")
+        _need(isinstance(inst.get("anchors"), list), "anchors must be a list")
+        for a in inst["anchors"]:
+            _need(isinstance(a, dict), "anchor must be an object")
+            x = a.get("x")
+            _need(isinstance(x, list) and len(x) == n, "anchor: x must assign a state to every site")
+            for v in x:
+                _state(v, k, "anchor")
+            if "value" in a:
+                _need("lo" not in a and "hi" not in a, "anchor: give either value or lo/hi, not both")
+                _rat(a["value"], "anchor value")
+            else:
+                _need("lo" in a, "anchor: needs value, or lo (and optionally hi)")
+                _rat(a["lo"], "anchor lo")
+                if "hi" in a:
+                    _rat(a["hi"], "anchor hi")
+        _rat(doc.get("claim", {}).get("lower_bound"), "claim.lower_bound")
+        _validate_residual(doc.get("certificate"), n, k)
+    elif kind == "partition":
+        _tables(inst.get("w"), inst.get("W", {}), n, k, "instance")
+        for key in ("lo", "hi"):
+            if key in doc.get("claim", {}):
+                _rat(doc["claim"][key], f"claim.{key}")
+        _validate_partition(doc.get("certificate"), n, k)
+    else:
+        raise Malformed(f"unknown kind {kind!r}")
 
 
 # ----------------------------------------------------------------------------------------------
@@ -186,15 +414,21 @@ def anchored(I: Tables, c, x) -> Tables:
     return A
 
 
-def residual_consistent(c, anchors) -> bool:
-    """Lean `RProblem.Consistent`: c >= 0 and v_a - v_b <= sum_i c_i [a_i != b_i] for all anchor pairs."""
+def interval_consistent(c, anchors) -> bool:
+    """Lean `IProblem.Consistent`.  `anchors` is a list of (x, lo, hi) with hi possibly None:
+    c >= 0 and lo_p - hi_q <= sum_i c_i [x_p,i != x_q,i] for all ordered pairs with hi_q given."""
     if any(ci < 0 for ci in c):
         return False
-    for xa, va in anchors:
-        for xb, vb in anchors:
-            if va - vb > sum((c[i] for i in range(len(c)) if xa[i] != xb[i]), Q(0)):
+    for xa, lo_a, _ in anchors:
+        for xb, _, hi_b in anchors:
+            if hi_b is not None and lo_a - hi_b > sum((c[i] for i in range(len(c)) if xa[i] != xb[i]), Q(0)):
                 return False
     return True
+
+
+def residual_consistent(c, anchors) -> bool:
+    """Lean `RProblem.Consistent` (exact values): the interval criterion with lo = hi."""
+    return interval_consistent(c, [(x, v, v) for x, v in anchors])
 
 
 def verify_residual(node, I: Tables, c, anchors, D, L: Q) -> bool:
@@ -299,7 +533,10 @@ def zverify(node, I: Tables, D):
 # ----------------------------------------------------------------------------------------------
 
 def check_file(doc) -> dict:
-    assert doc["format"] == "metricchain-cert/1"
+    try:
+        validate(doc)
+    except Malformed as exc:
+        return dict(accepted=False, reason=f"malformed input: {exc}")
     n, k, D = doc["n"], doc["k"], [list(d) for d in doc["domains"]]
     inst = doc["instance"]
     kind = doc["kind"]
@@ -317,19 +554,23 @@ def check_file(doc) -> dict:
     if kind == "residual":
         I = Tables(n, k, inst["h"], inst.get("J", {}), 0)
         c = [q(v) for v in inst["c"]]
-        anchors = [(a["x"], q(a["value"])) for a in inst["anchors"]]
+        anchors = []
+        for a in inst["anchors"]:
+            if "value" in a:
+                lo = hi = q(a["value"])
+            else:
+                lo, hi = q(a["lo"]), (q(a["hi"]) if "hi" in a else None)
+            anchors.append((a["x"], lo, hi))
         L = q(doc["claim"]["lower_bound"])
-        semantics = inst.get("anchor_semantics", "exact")
-        if semantics not in ("exact", "lower"):
-            raise ValueError(f"unknown anchor_semantics {semantics!r}")
         if any(ci < 0 for ci in c):
             return dict(accepted=False, reason="negative envelope constant")
-        if semantics == "exact" and not residual_consistent(c, anchors):
+        if not interval_consistent(c, anchors):
             return dict(accepted=False, reason="inconsistent residual data (empty residual class)")
-        ok = verify_residual(doc["certificate"], I, c, anchors, D, L)
+        ok = verify_residual(doc["certificate"], I, c, [(x, lo) for x, lo, _ in anchors], D, L)
         out = dict(accepted=ok, lower_bound=str(L))
-        if ok and semantics == "exact":
-            inbox = [energy(I, x) + v for x, v in anchors if all(x[i] in D[i] for i in range(n))]
+        if ok:
+            inbox = [energy(I, x) + hi for x, _, hi in anchors
+                     if hi is not None and all(x[i] in D[i] for i in range(n))]
             if inbox:
                 out["upper_bound"] = str(min(inbox))
         return out
@@ -401,12 +642,32 @@ def conformance_docs():
     docs["residual_inconsistent_reject"] = dict(
         format="metricchain-cert/1", kind="residual", n=3, k=2, domains=full, instance=bad,
         claim=dict(lower_bound="41/4"), certificate=bad_cert)
-    docs["residual_lower_semantics"] = dict(
+    # the same values published as lower bounds only (Lean: inconsistentResidual_lowerTop)
+    docs["residual_lower_only"] = dict(
         format="metricchain-cert/1", kind="residual", n=3, k=2, domains=full,
-        instance=dict(bad, anchor_semantics="lower"), claim=dict(lower_bound="41/4"), certificate=bad_cert)
+        instance=dict(tri, c=["1/4"] * 3, anchors=[dict(x=anc, lo="0"), dict(x=anc2, lo="10")]),
+        claim=dict(lower_bound="41/4"), certificate=bad_cert)
+    # interval data (Lean: triangleInterval_verified): g(0,1,0) in [-9/64, -7/64]
+    docs["residual_interval"] = dict(
+        format="metricchain-cert/1", kind="residual", n=3, k=2, domains=full,
+        instance=dict(tri, c=["1/4"] * 3, anchors=[dict(x=anc, lo="-9/64", hi="-7/64")]),
+        claim=dict(lower_bound="7/64"),
+        certificate={"node": "anchor", "index": 0, "cert": exhaustive(anchored(Itri, [Q(1, 4)] * 3, anc))})
+    # rounded but incompatible evaluations (Lean: inconsistentInterval_rejected)
+    docs["residual_interval_inconsistent_reject"] = dict(
+        format="metricchain-cert/1", kind="residual", n=3, k=2, domains=full,
+        instance=dict(tri, c=["1/4"] * 3, anchors=[dict(x=anc, lo="-1/64", hi="1/64"),
+                                                   dict(x=anc2, lo="639/64", hi="641/64")]),
+        claim=dict(lower_bound="0"), certificate=bad_cert)
+    # malformed: an anchor configuration outside the state range (unrepresentable in Lean)
+    docs["residual_bad_anchor_reject"] = dict(
+        format="metricchain-cert/1", kind="residual", n=3, k=2, domains=full,
+        instance=dict(tri, c=["1/4"] * 3, anchors=[dict(x=[7, 7, 7], value="100")]),
+        claim=dict(lower_bound="401/4"),
+        certificate={"node": "anchor", "index": 0, "cert": exhaustive(anchored(Itri, [Q(1, 4)] * 3, anc))})
     docs["residual_negative_c_reject"] = dict(
         format="metricchain-cert/1", kind="residual", n=3, k=2, domains=full,
-        instance=dict(tri, c=["-10", "1/4", "1/4"], anchors=[dict(x=anc, value="0")], anchor_semantics="lower"),
+        instance=dict(tri, c=["-10", "1/4", "1/4"], anchors=[dict(x=anc, lo="0")]),
         claim=dict(lower_bound="-100"),
         certificate={"node": "anchor", "index": 0,
                      "cert": exhaustive(anchored(Itri, [Q(-10), Q(1, 4), Q(1, 4)], anc))})
@@ -415,6 +676,10 @@ def conformance_docs():
         format="metricchain-cert/1", kind="partition", n=2, k=1, domains=[[0]] * 2,
         instance={"w": [["-1"], ["1"]], "W": {"0,1": [["2"]], "1,0": [["2"]]}}, claim={},
         certificate={"node": "leaf", "lo": {"0,1": "1", "1,0": "1"}, "hi": {"0,1": "3", "1,0": "3"}})
+    # malformed: a negative state in a domain (Python would silently index from the end)
+    docs["partition_bad_domain_reject"] = dict(
+        format="metricchain-cert/1", kind="partition", n=1, k=1, domains=[[0, -1]],
+        instance={"w": [["1"]], "W": {}}, claim={}, certificate={"node": "leaf", "lo": {}, "hi": {}})
     wtri = {"w": [["1", "1"]] * 3, "W": triangle_J("1/2", "1")}
     Iw = Tables(3, 2, wtri["w"], wtri["W"], 1)
 
@@ -441,9 +706,13 @@ EXPECTED = {
     "biased_dee": dict(accepted=True, certified_gap="0"),
     "triangle_residual": dict(accepted=True, lower_bound="1/8", upper_bound="7/8"),
     "residual_inconsistent_reject": dict(accepted=False),
-    "residual_lower_semantics": dict(accepted=True, lower_bound="41/4", upper_bound=None),
+    "residual_lower_only": dict(accepted=True, lower_bound="41/4", upper_bound=None),
+    "residual_interval": dict(accepted=True, lower_bound="7/64", upper_bound="57/64"),
+    "residual_interval_inconsistent_reject": dict(accepted=False),
+    "residual_bad_anchor_reject": dict(accepted=False),
     "residual_negative_c_reject": dict(accepted=False),
     "partition_negative_reject": dict(accepted=False),
+    "partition_bad_domain_reject": dict(accepted=False),
     "triangle_partition_exact": dict(accepted=True, lo="13/4", hi="13/4"),
     "triangle_partition_coarse": dict(accepted=True, lo="1", hi="8"),
 }
@@ -457,7 +726,7 @@ def fuzz(seed, rounds):
     import random
     rnd = random.Random(seed)
     stats = dict(min_accepted=0, min_rejected=0, res_accepted=0, res_lower_accepted=0, res_inconsistent=0,
-                 z_accepted=0, z_rejected=0)
+                 res_interval_consistent=0, z_accepted=0, z_rejected=0)
 
     def rq(lo=-3, hi=3, den=4):
         return Q(rnd.randint(lo * den, hi * den), den)
@@ -542,15 +811,22 @@ def fuzz(seed, rounds):
                 if L > true_res:
                     return False, dict(reason="UNSOUND accept (residual, lower semantics)", L=str(L),
                                        true=str(true_res)), stats
-        # corrupted anchor data: whenever the data are inconsistent, brute force confirms that no residual
-        # with bounded differences c interpolates them (checked through the McShane criterion on the anchors
-        # themselves: consistency is necessary for any interpolant).
+        # interval data around the true values: a legitimate producer is never judged inconsistent
+        iv = [(x, v - Q(rnd.randint(0, 3), 8), v + Q(rnd.randint(0, 3), 8)) for x, v in anchors]
+        if not interval_consistent(c, iv):
+            return False, dict(reason="interval anchors of an admissible residual judged inconsistent"), stats
+        stats["res_interval_consistent"] += 1
+        # corrupted anchor data must be judged inconsistent (exact and interval form)
         if len(anchors) == 2:
             (xa, va), (xb, vb) = anchors
             dab = sum((c[i] for i in range(n) if xa[i] != xb[i]), Q(0))
             corrupt = [(xa, vb + dab + Q(1, 4)), (xb, vb)]
             if residual_consistent(c, corrupt):
                 return False, dict(reason="corrupted anchors judged consistent"), stats
+            eps = Q(1, 16)
+            corrupt_iv = [(xa, vb + dab + Q(1, 4) - eps, vb + dab + Q(1, 4) + eps), (xb, vb - eps, vb + eps)]
+            if interval_consistent(c, corrupt_iv):
+                return False, dict(reason="corrupted interval anchors judged consistent"), stats
             stats["res_inconsistent"] += 1
 
         # partition

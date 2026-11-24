@@ -76,10 +76,9 @@
      1,
      0
     ],
-    "value": "0"
+    "lo": "0"
    }
-  ],
-  "anchor_semantics": "lower"
+  ]
  },
  "claim": {
   "lower_bound": "-100"

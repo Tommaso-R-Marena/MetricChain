@@ -1,0 +1,74 @@
+[         caught] X.1 M1: valid envelope replaced by the invalid offset kappa/(4d) (pointwise hypothesis check active)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M1b: same, with the pointwise hypothesis check disabled (only the integral comparison can catch it)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M2: Taylor envelope without Hessian enclosure used as 'valid', pointwise check disabled
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M3: Gershgorin off-diagonal radius dropped from the Hessian enclosure (pointwise check active)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M4: claimed ratio bound with half the width (exp(beta*sum w/2))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M4b: Taylor width w_i reported 1% too small (ratio bound must fail on a second-order envelope)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M5: lower and upper envelopes swapped in the sandwich
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M6: 'Fubini' broken: envelope integrals multiplied by 1 + 1e-8 (tiny relative error in one factor)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.4 M1: threshold (1-kappa) sigma + eps (sign of eps flipped)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.4 M2: threshold sigma - eps (kappa replaced by 0)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.4 M3: threshold (1-kappa) sigma - eps/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.4 M4: threshold (1-kappa/2) sigma - eps
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.4 M5: certificate only required at non-anchor... replaced by: lower bound checked at anchors only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.4 M6: separation taken as the LARGEST distance to another anchor
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M1: unsound elimination rule in the tables and the joint search (margin >= -2 accepted)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M2: leaf bound = exact minimum instead of the LP bound (integrality gap ignored) in the block tables
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M2b: leaf rule mis-modelled: pair constraint with p_ij instead of 2 p_ij (bound doubles on pairs)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M2c: leaf = exact minimum in tables AND validation switched off (only the search result can catch it)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M3: branch charges only the cheaper child (block search)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M4: prune rule only wrong in the joint search (margin >= -2): joint ground truth must disagree
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M5: claim 'at least 2^(K+1) leaves' (too strong)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.7 M1: Consistent without the clause c_i >= 0
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.7 M2: pair condition checked in one direction only (p before q in the list)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.7 M3: pair condition with the absolute value of the envelope constants
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.7 M4: pair condition with a strict inequality
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.8 M1: upper envelope with twice the envelope (not admissible)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.8 M2: targets up to 1% beyond the upper end of the interval
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.8 M3: interpolation that is not a convex combination (pointwise max of the envelopes scaled)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.8 M4: partition-function interval claimed 2% wider
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] III.6 M1: bound with sum of squares (the DEAD.5 claim)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] III.6 M2: constant 1/8 replaced by 1/8.1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.5 M1: the surviving bound (sum c_i)^2 registered as a dead end -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[  expected pass] DEAD.5 M2: product references only (independent sites) -> random search must find nothing, fallback fires
+                  exit=0  ALL TESTS BEHAVE AS EXPECTED
+[         caught] I.6 M1: injective transport formula used for a many-to-one map (factor m dropped)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.2 M1: description length of the peeling certificate claimed to be at most 100 m^3
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.2 M2: sum nodes not charged for the sub-instances they embed (closed form must disagree)
+                  exit=1  1 TEST(S) MISBEHAVED
+
+36 mutations: 35 caught, 1 expected pass, 0 not as expected

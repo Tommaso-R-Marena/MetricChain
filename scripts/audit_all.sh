@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # MetricChain single-command audit:
 #   1. lake build (all modules under proofs/)            — must succeed, no "sorry" warnings
-#   2. forbidden-token scan of proofs/                    — no sorry / admit / axiom / native_decide ...
+#   0. self-test: planted violations must be detected by the checks below
+#   2. forbidden-token scan of proofs/ (all files)        — no sorry / admit / axiom / native_decide ...
 #   3. axiom audit (proofs/AxiomAudit.lean)               — only propext, Classical.choice, Quot.sound;
 #      every module under proofs/ must be imported there
-#   4. Python falsification harness + separation benchmarks
+#   4. Python falsification harness (+ mutation tests of the harness) + separation benchmarks
+#      + reference checker (conformance vectors, fuzz)
 #   5. every Lean declaration cited in docs/*.md exists in proofs/
 # Usage: scripts/audit_all.sh [--full]     (--full runs the long falsification pass)
 set -uo pipefail
@@ -13,16 +15,37 @@ source scripts/lean_env.sh || exit 1
 FULL=0; [ "${1:-}" = "--full" ] && FULL=1
 fail() { echo "AUDIT FAILED: $*" >&2; exit 1; }
 
+# Forbidden constructs.  `sorry` is forbidden as a substring (this also covers `sorryAx`), in every
+# file including AxiomAudit.lean; `stop` is the debugging tactic that closes goals without proof.
+FORBIDDEN='sorry|(^|[^A-Za-z_.])admit($|[^A-Za-z_])|native_decide|^[[:space:]]*(private |protected )?axiom[[:space:]]|implemented_by|^[[:space:]]*unsafe[[:space:]]|ofReduceBool|^[[:space:]]*stop([[:space:]]|$)'
+# Lean's warning for an incomplete proof (the quoting style has changed between versions).
+SORRY_WARNING='declaration uses .?sorry.?'
+
+echo "== [0/4] audit self-test: planted violations must be detected =="
+ST=$(mktemp -d)
+printf 'example : (1 : Nat) = 2 := sorry\n' > "$ST/Planted.lean"
+lean "$ST/Planted.lean" > "$ST/out" 2>&1
+grep -qE "$SORRY_WARNING" "$ST/out" \
+  || fail "self-test: the incomplete-proof warning of this Lean version is not recognised"
+for planted in 'theorem t : 1 = 2 := sorry' '  exact sorryAx _' 'example : 1 = 2 := by admit' \
+               'theorem t : 1 = 2 := by native_decide' 'axiom bad : 1 = 2' '  stop'; do
+  printf '%s\n' "$planted" | grep -qE "$FORBIDDEN" || fail "self-test: token scan misses: $planted"
+done
+for harmless in 'theorem admits_nothing : True := trivial' '#print axioms MetricChain.verify_sound' \
+                '  -- the proof stops here'; do
+  printf '%s\n' "$harmless" | grep -qE "$FORBIDDEN" && fail "self-test: token scan flags: $harmless"
+done
+echo "ok"
+
 echo "== [1/4] lake build =="
 BUILD_LOG=$(mktemp)
 if ! lake build >"$BUILD_LOG" 2>&1; then tail -n 40 "$BUILD_LOG"; fail "lake build"; fi
 tail -n 1 "$BUILD_LOG"
-if grep -q "declaration uses 'sorry'" "$BUILD_LOG"; then grep -n "sorry" "$BUILD_LOG" | head; fail "sorry in build"; fi
+if grep -qE "$SORRY_WARNING" "$BUILD_LOG"; then grep -nE "$SORRY_WARNING" "$BUILD_LOG" | head; fail "incomplete proof in build"; fi
 if grep -q "^error" "$BUILD_LOG"; then grep -n "^error" "$BUILD_LOG" | head; fail "errors in build log"; fi
 
 echo "== [2/4] forbidden tokens in proofs/ =="
-if grep -rnE '(^|[^A-Za-z_.])(sorry|admit)($|[^A-Za-z_])|native_decide|^[[:space:]]*(private |protected )?axiom[[:space:]]|implemented_by|^[[:space:]]*unsafe[[:space:]]|ofReduceBool' proofs/ --include='*.lean' \
-     | grep -v 'proofs/AxiomAudit.lean'; then
+if grep -rnE "$FORBIDDEN" proofs/ --include='*.lean'; then
   fail "forbidden token found"
 fi
 echo "none"
@@ -38,6 +61,7 @@ done
 [ -z "$MISSING" ] || fail "modules not imported by proofs/AxiomAudit.lean:$MISSING"
 AX_LOG=$(mktemp)
 if ! lake env lean proofs/AxiomAudit.lean >"$AX_LOG" 2>&1; then tail -n 30 "$AX_LOG"; fail "AxiomAudit.lean did not compile"; fi
+if grep -qE "$SORRY_WARNING" "$AX_LOG"; then grep -nE "$SORRY_WARNING" "$AX_LOG" | head; fail "incomplete proof in AxiomAudit.lean"; fi
 grep "AXIOM AUDIT OK" "$AX_LOG" || { tail -n 20 "$AX_LOG"; fail "automatic axiom audit did not report OK"; }
 python3 - "$AX_LOG" <<'PY' || exit 1
 import re, sys
@@ -71,6 +95,10 @@ else
   python3 experiments/falsify_conjectures.py --quick 2>/dev/null | tail -n 80 || fail "falsification harness"
 fi
 [ "${PIPESTATUS[0]}" = 0 ] || fail "falsification harness reported a misbehaving test"
+if [ -f experiments/mutation_tests.py ]; then
+  python3 experiments/mutation_tests.py 2>/dev/null | tail -n 1 || fail "mutation tests"
+  [ "${PIPESTATUS[0]}" = 0 ] || fail "a mutation of the harness was not caught (or the mutation list is stale)"
+fi
 if [ -f experiments/separation_benchmarks.py ]; then
   python3 experiments/separation_benchmarks.py --quick >/dev/null 2>&1 || fail "separation benchmarks"
   echo "separation benchmarks: ok"

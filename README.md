@@ -32,15 +32,17 @@ proofs/Frontiers/       envelope duality, dominance calculus, free-energy sandwi
                         proof complexity of certificates
 proofs/CertificateAlgebra.lean   executable verification kernels + Master Soundness Theorems
 proofs/AxiomAudit.lean           automatic axiom audit of every declaration + non-vacuity witnesses
-experiments/            adversarial counterexample harness, separation benchmarks,
-                        reference JSON certificate checker + conformance vectors (certs/)
-scripts/audit_all.sh    single-command audit
+experiments/            adversarial counterexample harness and its mutation tests, separation
+                        benchmarks, reference JSON certificate checker + conformance
+                        vectors (certs/)
+scripts/audit_all.sh    single-command audit (begins with a self-test on planted violations)
 ```
 
 ## Reproducing the audit
 
 ```bash
-scripts/audit_all.sh          # lake build, token scan, axiom audit, harness, benchmarks, doc refs
+scripts/audit_all.sh          # self-test, lake build, token scan, axiom audit, harness + mutation
+                              # tests, benchmarks, reference checker, doc refs
 scripts/audit_all.sh --full   # same with the long falsification pass
 ```
 
@@ -48,10 +50,14 @@ Requirements: the pinned Lean toolchain (via `elan`, or the release archive unpa
 `~/.lean/`; see `scripts/lean_env.sh`), `lake exe cache get` for the Mathlib cache, and Python 3
 with `numpy`, `scipy`, `mpmath`.
 
-The audit fails if any module contains `sorry`/`admit`/`native_decide`/a user axiom, if any
-declaration in the `MetricChain` namespace depends on an axiom other than `propext`,
-`Classical.choice`, `Quot.sound`, if a registered conjecture is falsified (or a documented dead end
-unexpectedly survives), or if the documentation cites a Lean declaration that does not exist.
+The audit fails if any file under `proofs/` contains `sorry`/`admit`/`native_decide`/a user axiom
+or produces Lean's incomplete-proof warning, if a module is not imported by the axiom audit, if
+any declaration in the `MetricChain` namespace (the non-vacuity witnesses included) depends on an
+axiom other than `propext`, `Classical.choice`, `Quot.sound`, if a registered conjecture is
+falsified (or a documented dead end unexpectedly survives), if a mutation of the harness goes
+undetected, if the stored conformance vectors differ from the reference checker's, or if the
+documentation cites a Lean declaration that does not exist.  The script first checks itself:
+planted violations must be detected.
 
 ## Status in one paragraph
 
@@ -64,8 +70,8 @@ certificates can and cannot achieve: exact characterisations of robust optimalit
 sharp-minimum and query-model theorems), a witness-size lower bound, the necessity of the
 decomposition rule (exponential separation), and sharp free-energy sandwiches for product
 references.  Several classical or recently published results are formalized along the way and
-are labelled as such; an independent adversarial audit of the whole development and the
-corrections it triggered are recorded in `docs/DEAD_ENDS.md` (D14–D18).
+are labelled as such; an independent adversarial audit of the whole development, a re-audit of
+the repairs, and the corrections both triggered are recorded in `docs/DEAD_ENDS.md` (D14–D19).
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

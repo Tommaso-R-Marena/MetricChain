@@ -682,6 +682,21 @@ theorem rigidWithinIn_torsion_chain (G : Submonoid (P ≃ᵢ P)) (X : ℕ → ι
   rigidWithinIn_chain G X _ m (fun _ _ => by positivity)
     fun k hk => (h k hk).rigidWithinIn G (hG k hk)
 
+/-- Restricted-group chain rule in the `min`-inertia form: a sequence of torsion moves displaces
+the configuration, up to a motion of `G`, by at most `∑ k, 2 √(min(I_A, I_B)_k) |sin (δ_k / 2)|`.
+For `G` the proper rigid motions this bounds the proper-rotation (Kabsch) superposition
+distance. -/
+theorem rigidWithinIn_torsion_chain_min (G : Submonoid (P ≃ᵢ P)) (X : ℕ → ι → P)
+    (u : ℕ → P ≃ᵢ AxisSpace) (B : ℕ → Finset ι) (δ : ℕ → ℝ) (m : ℕ)
+    (hG : ∀ k < m, ∀ ψ : ℝ, (u k).trans ((axisRot ψ).trans (u k).symm) ∈ G)
+    (h : ∀ k < m, IsTorsionMove (u k) (B k) (δ k) (X k) (X (k + 1))) :
+    RigidWithinIn G (X 0) (X m)
+      (∑ k ∈ range m,
+        2 * Real.sqrt (min (axialInertia (u k) (B k)ᶜ (X k)) (axialInertia (u k) (B k) (X k))) *
+          |Real.sin (δ k / 2)|) :=
+  rigidWithinIn_chain G X _ m (fun _ _ => by positivity)
+    fun k hk => (h k hk).rigidWithinIn_min G (hG k hk)
+
 /-- Linearised chain rule: the displacement is at most `∑ k < m, √(2 I_k) |δ_k|`, i.e. the
 rigid-superposition distance is Lipschitz in each torsion angle with constant `√(2 I_red)`. -/
 theorem rigidWithin_torsion_chain_abs (X : ℕ → ι → P) (u : ℕ → P ≃ᵢ AxisSpace)

@@ -58,8 +58,8 @@ output is stored in `benchmarks_output.txt`.
 | C3 | Cycle-holonomy obstruction; SE(3) translation holonomy with lever arms | `norm_holProd_le_sum`, `norm_holTrans_le` **[V]** | triangle bound **known** (Lerman–Shi 2022, Lemma 1); a sharp non-abelian Hodge-type bound is open |
 | C4 | **Finite-angle torsion → RMSD**: exact coaxial cost `2S − 2√(S² − 4 I_A I_B sin²(φ/2)) ≤ 4 min(I_A,I_B) sin²(φ/2)`; chain rule; envelope for Lipschitz residuals invariant under a group of motions containing the axis rotations (`SE(3)` or `E(3)`), down to membership in the kernel's residual class | `exists_coaxial_angle`, `coaxial_cost_le_min`, `rigidWithin_torsion_chain`, `residual_torsion_chain_in`, `residual_torsion_move_uniform`, `verifyR_sound_invariant` **[V]** | small-angle content classical (Pitzer–Gwinn; Eckart); finite-angle closed form and chained bound: no match found |
 | B1 | Outward rounding, rational intervals, certified `exp`, rational circle atlas | `Core/Rounding.lean` **[V]** | infrastructure; verified interval libraries exist (LeanCert, girving/interval) |
-| E1 | **Master Soundness Theorems** for the tropical, residual and sum–product kernels, with every side condition (consistency of the residual data, nonnegative factors) checked by the top-level kernels | `verify_sound`, `verifyRTop_sound`, `verifyRLowerTop_sound`, `certified_gap`, `zverifyTop_sound` **[V]** | no *native* verified checker for cost-function-network / MAP / DEE certificates found; such runs can in principle be encoded as pseudo-Boolean proofs and checked with existing verified checkers, so the gap concerns native witnesses and their checking cost (`prior_art/L1` §C4(ii)) |
-| E2 | Exponential separation: sum-free certificates need exactly `2^m` visited leaves on `m` frustrated triangles, `2m` suffice with `sum`; the separation persists for node counts and for the full description length (`sum` nodes charged for the sub-instances they embed: `< 147 m³` against `≥ 2^m`); LP gap of the triangle | `sumFree_exponential`, `sumFree_tight`, `sum_linear`, `sum_rule_separation`, `sum_rule_separation_size`, `sum_rule_separation_dataSize`, `triangle_no_leaf_certificate` **[V]** | **known phenomenon** (Basu et al. 2023; Jeroslow 1974); formalized for this kernel incl. DEE steps |
+| E1 | **Master Soundness Theorems** for the tropical, residual and sum–product kernels; the top-level kernels check their own side conditions (consistency of interval anchor data — which is exactly non-emptiness of the residual class — and nonnegative factors) | `verify_sound`, `verifyITop_sound`, `IProblem.consistent_iff_nonempty`, `certified_gap`, `zverifyTop_sound` **[V]** | no *native* verified checker for cost-function-network / MAP / DEE certificates found; such runs can in principle be encoded as pseudo-Boolean proofs and checked with existing verified checkers, so the gap concerns native witnesses and their checking cost (`prior_art/L1` §C4(ii)) |
+| E2 | Exponential separation: sum-free certificates need exactly `2^m` visited leaves on `m` frustrated triangles, `2m` suffice with `sum`; the separation persists for node counts (`m ≥ 4`) and for the full description length (`sum` nodes charged for the sub-instances they embed: at most `147 m³` against at least `2^m`, `m ≥ 21`); LP gap of the triangle | `sumFree_exponential`, `sumFree_tight`, `sum_linear`, `sum_rule_separation`, `sum_rule_separation_size`, `sum_rule_separation_dataSize`, `triangle_no_leaf_certificate` **[V]** | **known phenomenon** (Basu et al. 2023; Jeroslow 1974); formalized for this kernel incl. DEE steps |
 
 The honest reading of the last column: the *mathematical* content of most individual statements
 is elementary, classical, or — as three independent literature checks established — already in
@@ -458,14 +458,20 @@ with no hypothesis about voxel integrals; over the full box the domain of integr
 whole product `∏_i ⋃_a s_i(a)` (`certified_torsion_partition_full`).  In the form
 `certified_torsion_partition_top` the certificates are checked by `zverifyTop` (no nonnegativity
 hypothesis) and the enclosures are needed only on the cells of the box, so cells removed from
-the domains — e.g. sterically excluded ones, where the energy need not be bounded — require
-nothing.  What remains are
+the domains — e.g. sterically excluded ones, where the energy need not be bounded — need no
+energy enclosure (their table entries are unconstrained; the published factors must still
+bracket the Boltzmann factors of whatever table values are chosen there).  What remains are
 measurability of the cells and energy terms, the table enclosures of `u_i`, `U_ij` on the cells
 (the output of interval evaluation, an input here), and the displayed entrywise inequalities.
 For cells that are arcs with rational chart endpoints the latter are computable: the angular
 measure `2(arctan t₂ − arctan t₁)` has the rational enclosure `(t₂−t₁)·2/(1+T²) ≤ · ≤ 2(t₂−t₁)`
 for `|t| ≤ T` (`two_arctan_sub_bounds`), and `chartArc_onebody_brackets` combines it with the
-certified exponential.  Three kernel-evaluated instances are in `VoxelBridge.lean`
+certified exponential.  That upper bound does not improve when an arc is subdivided; the
+convergent form `(t₂−t₁)·2/(1+m²)` with `m ≤ |t|` on the arc (`two_arctan_sub_bounds_of_sq`) is
+available in executable form for arcs on one side of the chart origin
+(`chartArc_onebody_brackets_pos`, `chartArc_onebody_brackets_neg`), where the ratio of the two
+volume bounds is `(1+t₂²)/(1+t₁²) → 1`.  Only the base chart is formalized; the cells of the
+three rotated charts are translates by multiples of `π/2`.  Three kernel-evaluated instances are in `VoxelBridge.lean`
 (`exact_witness`, `pair_witness`, and `chart_witness`: the torsion potential `cos θ` on two
 chart arcs, with all tables, volume bounds and Boltzmann brackets computed by the interval
 layer).
@@ -634,8 +640,13 @@ integer lattice, and a sharp non-abelian Hodge-type lower bound is, to our knowl
 
 ### 4.4 Torsion errors and superposition RMSD: reduced moments of inertia
 
-`RigidWithin X Y c` means that some rigid motion `g` achieves `Σ_i |X_i − gY_i|² ≤ c²`
-(so the RMSD after superposition is at most `c/√N`).
+`RigidWithin X Y c` means that some isometry `g` of the ambient space (possibly improper)
+achieves `Σ_i |X_i − gY_i|² ≤ c²`, so that the RMSD after superposition by an isometry is at
+most `c/√N`; `RigidWithinIn G X Y c` restricts `g` to a group `G` of motions.  Every statement
+below holds in the restricted form for any `G` that contains the rotations about the torsion
+axes (`IsTorsionMove.rigidWithinIn_exact`, `IsTorsionMove.rigidWithinIn_min`,
+`rigidWithinIn_torsion_chain_min`), because the superposing motion constructed in the proofs is
+a rotation about the torsion axis.
 
 **Theorem 4.6 [V] (`TorsionRMSD.lean`).**
 (a) *Chain rule.*  `RigidWithin` composes additively: if `X^{(k)}`, `X^{(k+1)}` are within `c_k`
@@ -660,8 +671,11 @@ axis.
 with constant `√(2 I_red)` (`rigidWithin_torsion_chain_abs`).
 
 Hence torsion changes `δ_k` move the structure by at most
-`N^{-1/2} Σ_k 2 √(min(I_A,I_B)_k) |sin(δ_k/2)|` in Kabsch RMSD, the inertias being those of the
-intermediate conformations.  Compared with the naive lever-arm bound (rotate the distal part, no
+`N^{-1/2} Σ_k 2 √(min(I_A,I_B)_k) |sin(δ_k/2)|` in RMSD after optimal superposition by a motion
+of `G` (`rigidWithinIn_torsion_chain_min` **[V]**), the inertias being those of the intermediate
+conformations.  For `G` the proper rigid motions this is the Kabsch (proper-rotation) RMSD
+**[P]**: the group `SE(3)` itself is not defined in the development, the verified statement is
+for an arbitrary group containing the axis rotations.  Compared with the naive lever-arm bound (rotate the distal part, no
 re-superposition) the certificate is ≈ 2–2.5× tighter on idealised chains (benchmark B7); it is a
 worst-case (`ℓ¹`) bound and overestimates independent random errors by `≈ √m` (`DEAD_ENDS.md`
 D10).
@@ -670,8 +684,8 @@ D10).
 a group of rigid motions and let the residual `Δ` be `G`-invariant and `Λ`-Lipschitz in the `ℓ²`
 configuration distance.  Then `|Δ(X) − Δ(Y)| ≤ Λ c` whenever some motion of `G` superposes `Y`
 onto `X` within `c` (`invariant_lipschitz_of_rigidWithinIn`).  If `G` contains the rotations
-about the torsion axis — true for the proper motions `SE(3)`, so chirality-sensitive residuals
-are covered, and a fortiori for all isometries `E(3)` — one torsion move changes the residual by
+about the torsion axis — as the proper motions `SE(3)` do **[P]**, and a fortiori all isometries
+`E(3)` — one torsion move changes the residual by
 at most `Λ · 2√(2 I_red)|sin(δ/2)|` (`residual_torsion_move_in`, `residual_torsion_chain_in`;
 `residual_torsion_move`, `residual_torsion_chain` are the `E(3)` case).  `I_red` is the reduced
 inertia at the current conformation; with a conformation-independent bound `I_red ≤ Ī_i` for
@@ -682,6 +696,11 @@ accepted residual certificate bounds `E + Δ ∘ emb` (`verifyR_sound_invariant`
 invariant architecture with a Cartesian Lipschitz certificate and an inertia bound into the
 bounded-difference envelope required in §2 and §6.  (The bound `Ī_i` is a modelling input: e.g.
 the axial inertia of the lighter side of the torsion, bounded over the conformations considered.)
+The generalisation from all isometries to a group `G` has verified content: for `G` the group
+generated by the rotations about one axis and the signed height difference along that axis —
+a residual that is *not* invariant under the mirror reflection — the bound applies
+(`chiral_residual_torsion_bound`, with `Δz_not_rigidInvariant`), whereas the `E(3)` statements
+do not.  That a particular architecture is invariant under all proper motions is an input.
 
 *Prior art.*  The small-angle content is classical: the reduced moment of inertia of internal
 rotation (Pitzer–Gwinn 1942), optimal superposition and the Eckart conditions (Kudin–Dymarsky
@@ -751,35 +770,45 @@ minorant to the kernel above.  If `verifyR c P D L = true` then for **every** re
 those bounded differences and anchor values, `L ≤ E(x) + g(x)` on the box; with an anchor in the
 box the true optimum lies in `[L, E(a) + v]`.
 
-*Side conditions are checked, not assumed.*  `verifyR` checks rules only; if the published data
-are unsatisfiable — a negative constant, or two anchors whose values differ by more than the
-envelope allows — its soundness theorem holds vacuously (`inconsistentResidual_unguarded`: the
-bound `41/4` is accepted on a problem whose pairwise minimum is `1`).  The decidable predicate
-`RProblem.Consistent` (`c ≥ 0` and `v_a − v_b ≤ Σ_i c_i[a_i ≠ b_i]` for all anchor pairs) is
-*exactly* non-emptiness of the residual class (`RProblem.consistent_iff_nonempty` **[V]**, McShane
-extension), and the top-level kernel `verifyRTop` rejects inconsistent data
-(`verifyRTop_sound` **[V]**: the class is non-empty *and* the bound holds for every member).  For
-lower bounds the anchor values need only be lower bounds on the residual (`ResidualLowerClass`,
-`verifyR_sound_lower` **[V]**), so rounded-down floating-point evaluations may be published;
-under this reading pairwise compatibility is not required (rounding could even violate it) and
-`c ≥ 0` is the only side condition (`verifyRLowerTop_sound` **[V]**).  An upper bound on the
-optimum then needs a separately certified upper value at some configuration
-(`certified_gap_interval` **[V]**).
+*Side conditions are checked, not assumed: interval anchor data.*  `verifyR` checks rules only;
+if the published data are unsatisfiable — a negative constant, or two anchors whose values
+differ by more than the envelope allows — its soundness theorem holds vacuously
+(`inconsistentResidual_unguarded`: the bound `41/4` is accepted on a problem whose pairwise
+minimum is `1`).  The top-level kernel `verifyITop` therefore takes *interval* anchor data: at
+each anchor `x_p` the residual is published as `lo_p ≤ Δ(x_p) ≤ hi_p`, the upper value being
+optional (an exactly known value is `lo = hi`; a floating-point evaluation is
+`[fl − err, fl + err]`).  The decidable condition
+
+    c ≥ 0   and   lo_p − hi_q ≤ Σ_i c_i [x_p,i ≠ x_q,i]   for all ordered pairs with an upper value
+
+(`IProblem.Consistent`) is *exactly* non-emptiness of the class of residuals with these data
+(`IProblem.consistent_iff_nonempty` **[V]**; the McShane lower envelope of the lower values is
+the witness).  A legitimate producer always satisfies it, and incompatible evaluations are
+rejected even after rounding (`inconsistentInterval_rejected`).  `verifyITop_sound` **[V]**: if
+the kernel accepts, the class is non-empty, and for every member `L ≤ E + Δ` on the box and
+`E(x_p) + Δ(x_p) ≤ E(x_p) + hi_p` at every anchor with an upper value — so an anchor inside the
+box brackets the optimum in `[L, E(x_p) + hi_p]`.  The rule checker only ever uses the lower
+values (`verifyR_sound_lower` **[V]**).  Two special cases have their own names: exact values
+(`verifyRTop`, `verifyITop_ofExact`) and lower values only (`verifyRLowerTop`,
+`verifyITop_ofLower`); in the latter no upper value is published, so nothing but `c ≥ 0` can be
+checked and no upper bound on the optimum is certified — it should be used only when upper
+evaluations are genuinely unavailable.
 
 **Real-valued energies [V] (`verify_sound_real`, `verifyR_sound_real`).**  If the published
 rational instance is a termwise *lower* instance of a real pairwise model (every table entry
 rounded down, §5), an accepted certificate bounds the true real energy — with or without the
 unknown residual.  This is the minimisation counterpart of `Z_encloses_partitionFn`: floating
 point may be used upstream of the certificate provided the published tables are rounded down
-and, for residual problems, the published constants are rounded up and the anchor values down
-(lower-bound semantics above).
+and, for residual problems, the published constants are rounded up and the anchor intervals
+outward (lower values down, upper values up).
 
 **Partition-function kernel [V] (`zverify_sound`, `zverifyTop_sound`, §3.4).**
 
 All three kernels are evaluated on concrete instances by `decide +kernel` (Lean's trusted kernel,
 no compiler in the trusted base, no extra axioms): `triangle_verified`, `triangle_rejects`,
 `biased_verified`, `triangleResidual_verifiedTop`, `inconsistentResidual_rejected`,
-`negativeEnvelope_rejected`, `triangleZ_exactTop`, `negativeW_rejected`.
+`negativeEnvelope_rejected`, `triangleInterval_verified`, `inconsistentInterval_rejected`,
+`triangleZ_exactTop`, `negativeW_rejected`.
 
 ### 6.2 Verification cost and witness size
 
@@ -811,8 +840,8 @@ there is an accepted certificate that visits fewer leaves than every accepted su
 certificate (`sum_rule_separation`).  Leaves are not the whole cost — a `sum` node stores two
 sub-instances — so the separation is also proved for the node count (`4m − 1` against `≥ 2^m`,
 `m ≥ 4`: `sum_rule_separation_size`) and for the description length `Cert.dataSize`, which
-charges every node for all rational table entries it stores: below `147 m³` with `sum`, at least
-`2^m` without, for `m ≥ 21` (`sum_rule_separation_dataSize`; harness VII.1 searches all
+charges every node for all rational table entries it stores: at most `147 m³` with `sum`, at
+least `2^m` without, hence strictly smaller for `m ≥ 21` (`sum_rule_separation_dataSize`; harness VII.1 searches all
 sum-free certificates with and without the prune rule up to `m = 5`, VII.2 recomputes the
 description lengths).
 
@@ -853,8 +882,10 @@ We prove no new expressivity or mixing theorem; the following are consequences o
    above uses `Δ_θ` only via `d` and anchors.  Theorem 2.7 turns the looseness `1−κ` of a
    certified envelope into a lower bound on the number of network evaluations any certificate
    needs: the number of states in an energy shell of width `(1−κ) c_min`.  Theorem 3.1 turns the
-   same constants into a free-energy uncertainty that is sharp: `β² Σ c_i²/8` relative to a
-   product (independent-site) reference, and `β² (Σ c_i)²/8` relative to an arbitrary one.  Design rule:
+   same constants into a free-energy uncertainty: `β² Σ c_i²/8` relative to a product
+   (independent-site) reference, with the constant `1/8` optimal, and `β² (Σ c_i)²/8` relative
+   to an arbitrary one (approached as `β → 0` by perfectly correlated sites, harness III.6; no
+   sharpness theorem is formalized for this case).  Design rule:
    *put steep, structured physics (sterics, electrostatics) in the explicit part and constrain
    the residual to have small certified per-site variation*; unbounded Lipschitz constants are
    incompatible with certification, not merely inconvenient.
@@ -932,7 +963,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/TorsionRMSD.lean` | `RigidWithin`, `rigidWithin_chain`, `coaxial_cost_eq`, `exists_coaxial_angle`, `coaxial_cost_le_min`, `reduced_le_coaxial_cost`, `IsTorsionMove.rigidWithin`, `rigidWithin_torsion_chain` |
 | `proofs/Frontiers/InvariantEnvelope.lean` | `RigidInvariantIn`, `invariant_lipschitz_of_rigidWithinIn`, `residual_torsion_move_in`, `residual_torsion_chain_in`, `residual_torsion_move_uniform`, `residualLowerClass_of_invariant_lipschitz`, `verifyR_sound_invariant` (and the `E(3)` versions `residual_torsion_move`, `residual_torsion_chain`) |
 | `proofs/Frontiers/ProofComplexity.lean` | `leaf_two_config`, `triangle_no_leaf_certificate`, `triangles_energy_opt`, `sumFree_exponential`, `sumFree_gap_exponential`, `sumFree_complexity`, `sumFree_tight`, `sum_linear`, `sum_rule_separation`, `sum_rule_separation_size`, `sum_rule_separation_dataSize` |
-| `proofs/CertificateAlgebra.lean` | `verify`, `verify_sound`, `verifyR`, `verifyR_sound`, `verifyR_sound_lower`, `RProblem.Consistent`, `RProblem.consistent_iff_nonempty`, `verifyRTop`, `verifyRTop_sound`, `verifyRLowerTop`, `verifyRLowerTop_sound`, `certified_gap`, `certified_gap_interval`, `verify_sound_real`, `verifyR_sound_real`, kernel-evaluated examples |
+| `proofs/CertificateAlgebra.lean` | `verify`, `verify_sound`, `verifyR`, `verifyR_sound`, `verifyR_sound_lower`, `RProblem.Consistent`, `RProblem.consistent_iff_nonempty`, `verifyRTop`, `verifyRTop_sound`, `verifyRLowerTop`, `verifyRLowerTop_sound`, `IProblem.Consistent`, `IProblem.consistent_iff_nonempty`, `verifyITop`, `verifyITop_sound`, `verifyITop_ofExact`, `verifyITop_ofLower`, `certified_gap`, `certified_gap_interval`, `verify_sound_real`, `verifyR_sound_real`, kernel-evaluated examples |
 | `proofs/AxiomAudit.lean` | `#audit_axioms MetricChain`, non-vacuity witnesses |
 
 ---

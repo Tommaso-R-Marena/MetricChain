@@ -24,11 +24,18 @@ boundaries · 10 task mapping · 11 conformance tests.
 * The checker performs **only** rational additions, multiplications and comparisons.  It never
   minimises, searches, or evaluates a transcendental function.
 * A reference checker exists as Lean definitions with soundness theorems: `verify` for
-  minimisation, `verifyRTop` / `verifyRLowerTop` for residual problems, `zverifyTop` for partition
-  sums.  The `…Top` entry points check the side conditions of the soundness theorems themselves
-  (consistency of the residual data, nonnegative factors) before running the rule checkers
-  `verifyR`, `zverify`; a re-implementation must do the same and must agree with the Lean
-  kernels on the conformance vectors of §11.
+  minimisation, `verifyITop` for residual problems (interval anchor data; `verifyRTop` and
+  `verifyRLowerTop` are its special cases for exact and for lower-only values), `zverifyTop` for
+  partition sums.  The `…Top` entry points check the side conditions of the soundness theorems
+  themselves (consistency of the residual data, nonnegative factors) before running the rule
+  checkers `verifyR`, `zverify`; a re-implementation must do the same and must agree with the
+  Lean kernels on the conformance vectors of §11.
+* **Well-formedness is part of the check.**  In Lean, sites and states are elements of `Fin n`
+  and `Fin k`, so an out-of-range index cannot be written down.  A file format can express one;
+  a checker must therefore reject any file in which a site index is outside `[0, n)`, a state is
+  outside `[0, k)` (in domains, anchors, witnesses or certificate nodes), a table has the wrong
+  shape, or a domain repeats a state — *before* interpreting it (`validate` in the reference
+  checker; conformance vectors `residual_bad_anchor_reject`, `partition_bad_domain_reject`).
 * Guarantees are relative to the *published instance* (tables of rationals) and, for residual
   problems, to the *published envelope and anchor values*.  The correspondence between the
   published tables and a physical force field is the producer's obligation and is discharged by
@@ -44,8 +51,8 @@ boundaries · 10 task mapping · 11 conformance tests.
 | energy | `E(x) = Σ_i h[i][x_i] + Σ_{i≠j} J[i][j][x_i][x_j]` | `PairInstance.energy` |
 | domains `D` | list of surviving states per site; box `∏ D` | `Dom`, `InBox` |
 | envelope constants | `c[i] ≥ 0`: changing site `i` alone changes the residual by at most `c[i]` | `RProblem.c`, `ResidualClass` |
-| anchors | evaluated pairs `(x, v)`: `v = Δ(x)` (*exact* semantics) or `v ≤ Δ(x)` (*lower-bound* semantics, for rounded-down floating-point evaluations) | `RProblem.anchors`, `ResidualClass`, `ResidualLowerClass` |
-| consistency | `c ≥ 0` and `v_a − v_b ≤ Σ_i c[i]·[a_i ≠ b_i]` for all anchor pairs — equivalent to the existence of a residual with these data | `RProblem.Consistent`, `RProblem.consistent_iff_nonempty` |
+| anchors | interval evaluations `(x, lo, hi)`: `lo ≤ Δ(x) ≤ hi`, the upper value optional; an exactly known value is `lo = hi`, a floating-point evaluation is `[fl − err, fl + err]` | `IProblem.anchors`, `IAnchor`, `ResidualIntervalClass` |
+| consistency | `c ≥ 0` and `lo_p − hi_q ≤ Σ_i c[i]·[x_p,i ≠ x_q,i]` for all ordered pairs of anchors of which the second has an upper value — equivalent to the existence of a residual with these data | `IProblem.Consistent`, `IProblem.consistent_iff_nonempty` |
 | weight instance | `w[i][a] ≥ 0`, `W[i][j][a][b] ≥ 0` (rational Boltzmann factors) | `WInstance` |
 | partition sum | `Z(D) = Σ_{x∈∏D} ∏_i w[i][x_i] ∏_{i≠j} W[i][j][x_i][x_j]` | `WInstance.Z` |
 
@@ -84,8 +91,9 @@ Rules for a producer that computes in binary64:
 | table entry of an **upper** instance (used to evaluate incumbents) | `roundUp_p(fl(e) + err(e))` | up |
 | Boltzmann factor, lower / upper weight instance | `expLo`, `expHi` of the outward-rounded exponent (§3.4) | down / up |
 | envelope constant `c[i]` of a residual | certified bound, rounded up | up |
-| anchor value, lower-bound semantics | `roundDown_p(fl(Δ(x)) − err)` | down |
-| anchor value, exact semantics | the exact rational value of the residual (only for residuals that are exactly rational, e.g. table-based many-body terms) | — |
+| anchor lower value `lo` | `roundDown_p(fl(Δ(x)) − err)` | down |
+| anchor upper value `hi` | `roundUp_p(fl(Δ(x)) + err)` | up |
+| anchor `value` (shorthand for `lo = hi`) | the exact rational value of the residual — only for residuals that are exactly rational, e.g. table-based many-body terms; never for floating-point evaluations | — |
 | dual variables (messages `m`) | any rounding (nearest dyadic) | soundness does not depend on them |
 | claimed bounds `u, p, ℓ` (tropical) and `lo` (partition) | recomputed **in exact rational arithmetic** from the rounded duals and the published tables, or float value minus accumulated error, rounded down | down |
 | claimed bounds `hi`, ratios `q₀, q_j` (partition) | exact recomputation, or float plus error, rounded up | up |
@@ -185,21 +193,30 @@ independent frustrated components need `≥ 2^m` leaves (§9).
 
 ### 4.2 `kind = "residual"` — energy with a non-decomposable residual (`RCert`, `verifyR`)
 
-`"instance": {"h":…, "J":…, "c": [q × n], "anchors": [{"x": [...], "value": q}, ...],
-"anchor_semantics": "exact" | "lower"}` (default `"exact"`).
+`"instance": {"h":…, "J":…, "c": [q × n], "anchors": [A, …]}` where each anchor `A` is either
+`{"x": [...], "lo": q, "hi": q}` (interval evaluation; `"hi"` may be omitted) or
+`{"x": [...], "value": q}` (shorthand for `lo = hi = value`).  There is no default reading of a
+bare number: a producer that evaluates the residual in floating point must publish `lo` and
+`hi`.
 
-File-level checks, performed before any node is examined:
+File-level check, performed before any node is examined (`verifyITop`):
 
-| semantics | check | consequence of acceptance | Lean |
-|---|---|---|---|
-| `exact` (`value = Δ(x)`) | `c[i] ≥ 0` for all `i`, and `value_a − value_b ≤ Σ_i c[i]·[x^a_i ≠ x^b_i]` for every ordered pair of anchors | the class of residuals with these data is non-empty, the lower bound holds for every member, and `E(x^a) + value_a` is an upper bound on the optimum for every anchor in the box | `verifyRTop`, `verifyRTop_sound`, `certified_gap` |
-| `lower` (`value ≤ Δ(x)`) | `c[i] ≥ 0` for all `i` | the lower bound holds for every residual with bounded differences `c` and `Δ(x^a) ≥ value_a`; **no upper bound is implied** (publish a certified upper value separately, `certified_gap_interval`) | `verifyRLowerTop`, `verifyRLowerTop_sound` |
+    c[i] ≥ 0 for all i,   and   lo_p − hi_q ≤ Σ_i c[i]·[x_p,i ≠ x_q,i]
+    for every ordered pair of anchors (p, q) such that q has an upper value (p = q included).
 
-Why two readings: with exact values, inconsistent data make every claim vacuous (the rule checker
-accepts `L = 41/4` on the conformance vector `residual_inconsistent_reject`, whose pairwise
-minimum is `1`), so they must be rejected.  With rounded-down values pairwise compatibility is
-not a sound requirement — rounding can break it for a perfectly legitimate producer — and is not
-needed: the lower-bound class is non-empty as soon as `c ≥ 0`.
+This is exactly the condition that some residual with bounded differences `c` takes a value in
+every published interval (`IProblem.consistent_iff_nonempty`).  A legitimate producer always
+passes it — the true residual is a witness — whereas incompatible evaluations are rejected even
+when they have been rounded (conformance vector `residual_interval_inconsistent_reject`).
+Without the check every claim about inconsistent data would be vacuous: the rule checker alone
+accepts `L = 41/4` on the vector `residual_inconsistent_reject`, whose pairwise minimum is `1`.
+
+Consequences of acceptance (`verifyITop_sound`): for every residual `g` with bounded differences
+`c` and `lo_p ≤ g(x_p) ≤ hi_p` at the anchors, `L ≤ E(x) + g(x)` on the box; and for every anchor
+inside the box that has an upper value, `E(x_p) + hi_p` is an upper bound on the optimum, so the
+optimum lies in `[L, min_p (E(x_p) + hi_p)]`.  Anchors without an upper value contribute to the
+lower bound only; if *no* anchor has one, only `c ≥ 0` can be checked and no upper bound is
+reported (vector `residual_lower_only`) — avoid this unless upper evaluations are unavailable.
 
 | node | fields | check | Lean |
 |---|---|---|---|
@@ -207,10 +224,9 @@ needed: the lower-bound class is non-empty as soon as `c ≥ 0`.
 | `branch` | as above | as above | `verifyR` |
 | `prune` | as above | as above with margin `c_i` instead of `0` (differential DEE) | `PruneOK … (P.c i)` |
 
-Accepted ⇒ for **every** residual `g` with single-site variation `≤ c_i` and anchor values equal
-to (exact) or at least (lower) the listed ones, `L ≤ E(x) + g(x)` on the box (`verifyR_sound`,
-`verifyR_sound_lower`); with exact semantics, if anchor `a` lies in the box the true optimum is
-in `[L, E(x^a) + value_a]` (`certified_gap`).
+The nodes are checked against the *lower* values `lo_a` (written `value_a` in the table):
+accepted ⇒ for **every** residual `g` with single-site variation `≤ c_i` and `g(x^a) ≥ lo_a`,
+`L ≤ E(x) + g(x)` on the box (`verifyR_sound_lower`).
 
 ### 4.3 `kind = "partition"` — two-sided bound on a partition sum (`ZCert`, `zverify`)
 
@@ -354,7 +370,13 @@ enclosure).
 Cells of one site must be pairwise disjoint (half-open intervals in the chart coordinate).  For
 a cell `[t₁, t₂)` of a rational chart the angular measure is `2(arctan t₂ − arctan t₁)`; use the
 rational enclosure `(t₂−t₁)·2/(1+T²) ≤ vol ≤ 2(t₂−t₁)`, `T ≥ max(|t₁|,|t₂|)`
-(`two_arctan_sub_bounds`), or subdivide for tighter volume bounds.  Unlike the minimised-voxel
+(`two_arctan_sub_bounds`, `chartArc_onebody_brackets`).  The upper bound `2(t₂−t₁)` does **not**
+tighten when a cell is subdivided (it overestimates by up to the factor `1 + T²`); for cells on
+one side of the chart origin use `(t₂−t₁)·2/(1+t₂²) ≤ vol ≤ (t₂−t₁)·2/(1+t₁²)` (for
+`0 ≤ t₁ ≤ t₂`; mirrored for `t₁ ≤ t₂ ≤ 0`), whose relative width `(1+t₂²)/(1+t₁²)` tends to `1`
+(`chartArc_onebody_brackets_pos`, `chartArc_onebody_brackets_neg`) — so split every chart at
+`t = 0`.  Only the base chart is formalized; cells of the rotated charts are translates by
+multiples of `π/2` and have the same measures.  Unlike the minimised-voxel
 surrogate of `K*`-type algorithms the bound contains the voxel volumes, i.e. the conformational
 entropy inside each voxel.  Refining voxels tightens `[e_lo, e_hi]`.
 
@@ -428,9 +450,12 @@ or certified bound propagation), then for all conformations
     |Δ_θ(X) − Δ_θ(Y)|  ≤  Λ · min_{g∈G} ‖X − gY‖_F ,
 
 because the residual does not change under `g` (`invariant_lipschitz_of_rigidWithinIn`).  The
-superposition distance is a pseudo-metric, hence an envelope.  For a torsion move the optimal
-superposition can be taken to be a rotation about the torsion axis, which is a proper motion, so
-the reduced-inertia bounds (theory report, Theorem 4.6) apply to `SE(3)`-invariant residuals:
+superposition distance is a pseudo-metric, hence an envelope.  For a torsion move the
+superposition used in the proofs is a rotation about the torsion axis, so the reduced-inertia
+bounds (theory report, Theorem 4.6) hold for every group `G` that contains those rotations.  The
+verified statements are for such an abstract `G` (with a worked instance for a residual that is
+not reflection-invariant, `chiral_residual_torsion_bound`); that the proper motions `SE(3)` form
+such a group is immediate but `SE(3)` is not defined in the Lean development.  Consequently:
 changing torsion `k` by `δ` costs at most `2√(min(I_A,I_B)) |sin(δ/2)| ≤ 2√(2 I_red,k) |sin(δ/2)|`,
 so
 
@@ -439,9 +464,9 @@ so
 is a valid bounded-difference constant for torsion `k` (`residual_torsion_move_min_in`; the
 looser `Λ · 2√(2 Ī_k)` with `Ī_k ≥ I_red` is `residual_torsion_move_uniform`; use
 `Ī_k = min(N_A, N_B)·ρ_max²` with `ρ_max` a bound on lever arms if nothing better is known).
-Publishing constants `≥ c_k` (rounded up) and anchor values `≤ Δ_θ` (rounded down, lower-bound
-semantics) puts `Δ_θ` in the class for which the residual kernel is sound
-(`residualLowerClass_of_rigidWithinIn`, `verifyR_sound_invariant`).  Voxel-level constants follow
+Publishing constants `≥ c_k` (rounded up) and interval anchor data containing `Δ_θ` (lower
+values rounded down, upper values rounded up) puts `Δ_θ` in the class for which the residual
+kernel is sound (`residualLowerClass_of_rigidWithinIn`, `verifyR_sound_invariant`).  Voxel-level constants follow
 by replacing `|sin(δ/2)|` with its maximum over the pair of voxels.  The Lipschitz constant `Λ`
 and the inertia bounds are the producer's obligations; they are hypotheses of the verified
 statements, not conclusions.
@@ -515,9 +540,9 @@ Worst-case (`ℓ¹`); for independent errors expect `√m` slack.
 | envelope + anchors | the set of possible values of `min(E₀+Δ)` and of `Z` is exactly the interval between the values at `E₀+L` and `E₀+U`; no tighter certificate exists | `robust_min_bracket`, `robust_partition_bracket`, `robust_min_interval_exact`, `robust_partition_interval_exact` |
 | residual evaluations | at least the number of states with gap `< (1−κ)σ − ε` | `anchor_card_lower_bound` |
 | pure dual certificates | incomplete: the frustrated triangle has LP bound 0, optimum 1 | `triangle_no_leaf_certificate` |
-| certificates without `sum` | exactly `2^m` leaves on `m` independent frustrated triangles; `2m` with `sum`; the gap persists in total description length (`< 147 m³` against `≥ 2^m`) | `sumFree_exponential`, `sumFree_tight`, `sum_linear`, `sum_rule_separation_dataSize` |
+| certificates without `sum` | exactly `2^m` leaves on `m` independent frustrated triangles; `2m` with `sum`; the gap persists in total description length (at most `147 m³` against at least `2^m`, hence smaller for `m ≥ 21`) | `sumFree_exponential`, `sumFree_tight`, `sum_linear`, `sum_rule_separation_dataSize` |
 | free-energy sandwich | product reference: constant `1/8` is optimal and the worst residual is additive two-level; the `Σ c_i²` width is false for correlated references; gap is extensive | `mcdiarmid_no_better_constant`, `exists_two_level_worst_residual`, `DEAD_ENDS.md` D14 |
-| inconsistent residual data | every claim about them is vacuous; they must be rejected (exact semantics) | `RProblem.consistent_iff_nonempty`, `inconsistentResidual_rejected` |
+| inconsistent residual data | every claim about them is vacuous; they must be rejected | `IProblem.consistent_iff_nonempty`, `inconsistentResidual_rejected`, `inconsistentInterval_rejected` |
 | exact dominance with 3-body terms | factorises over blocks whenever the difference energy is block-separable (`exact_margin_of_block_separable`, verified in this abstract form); for 3-body terms the blocks are the connected components of the site's link graph (paper); cheap for chain-local terms; coNP-hard for unrestricted link graphs (paper) | theory report §2.2 |
 | voxel quadrature | `Θ((βΔM/ε)^{d/2})` voxels with second-order information; rate not improvable | theory report §3.4 (paper + cited) |
 | distances only | blind to chirality | §4.2 of the theory report |
@@ -554,19 +579,27 @@ A re-implemented checker must reproduce the following kernel-evaluated facts
    Certificate: anchor 0 + exhaustive certificate of the anchored instance.  Accept for
    `L = 1/8`; certified interval for the true optimum `[1/8, 7/8]`
    (`triangleResidual_verifiedTop`).
-   3a. **Inconsistent residual data.**  Same `c`, anchors `(0,1,0) ↦ 0` and `(1,1,0) ↦ 10`
-   (Hamming distance 1, values differing by more than `1/4`); certificate: anchor 1 + exhaustive
-   certificate, claim `L = 41/4`.  **Reject** with exact semantics (`inconsistentResidual_rejected`);
-   **accept** with `"anchor_semantics": "lower"`, reporting no upper bound
-   (`inconsistentResidual_lowerTop`).
-   3b. **Negative envelope constant.**  `c = (−10, 1/4, 1/4)`: reject under both semantics,
-   whatever the certificate (`negativeEnvelope_rejected`).
+   3a. **Inconsistent exact values.**  Same `c`, anchors `(0,1,0) ↦ 0` and `(1,1,0) ↦ 10` given
+   as `value` (Hamming distance 1, values differing by more than `1/4`); certificate: anchor 1 +
+   exhaustive certificate, claim `L = 41/4`.  **Reject** (`inconsistentResidual_rejected`).
+   3b. **Lower values only.**  The same two anchors given as `lo` without `hi`: **accept**
+   `L = 41/4`, report no upper bound (`inconsistentResidual_lowerTop`, `verifyITop_ofLower`).
+   3c. **Interval evaluation.**  Anchor `(0,1,0)` with `lo = −9/64`, `hi = −7/64`: accept
+   `L = 7/64`, upper bound `57/64` (`triangleInterval_verified`).
+   3d. **Rounded but incompatible intervals.**  `(0,1,0) ∈ [−1/64, 1/64]`,
+   `(1,1,0) ∈ [639/64, 641/64]`: **reject** whatever the certificate
+   (`inconsistentInterval_rejected`).
+   3e. **Negative envelope constant.**  `c = (−10, 1/4, 1/4)`: reject whatever the certificate
+   (`negativeEnvelope_rejected`).
+   3f. **Malformed anchor.**  Anchor configuration `[7,7,7]` with `k = 2`: reject as malformed.
 4. **Triangle, partition function.**  `w = 1`, `W[i][j][a][b] = 1/2` if `i<j` and `a=b`, else 1.
    Exhaustive certificate returns exactly `[13/4, 13/4]`; the single leaf with `lo = 1/2` on
    `i<j`, `hi = 1` returns `[1, 8]` (`triangleZ_exactTop`, `triangleZ_coarse`).
    4a. **Negative factor.**  `n = 2, k = 1`, `w = (−1, 1)`, `W = 2` on both ordered pairs: reject
    whatever the certificate (`negativeW_rejected`; the leaf `lo = 1, hi = 3` would otherwise
    return `(−1, −9)` although `Z = −4`).
+   4b. **Malformed domain.**  `n = 1, k = 1`, domains `[[0, −1]]`: reject as malformed (a
+   negative state would silently index from the end of a table in many languages).
 5. **Rounding.**  `roundDown_4(1/3) = 5/16`; `2.7182 ≤ exp(1) ≤ 2.7183` from `expLo/expHi`.
 6. **Realizability.**  Unit simplex on 5 points in `ℝ³`: bound `5·(5−4)/4 = 5/4`
    (`simplex_sstress_lower_bound`; a lower bound only — the optimum is ≈ 1.304).
@@ -575,10 +608,17 @@ A re-implemented checker must reproduce the following kernel-evaluated facts
 
 **Reference implementation.**  `experiments/reference_checker.py` implements the three checkers
 of §4–§5 on this JSON format in exact rational arithmetic (it is *not* trusted; the Lean kernels
-are).  `--selftest` reproduces vectors 1–4a above — also stored as files in `experiments/certs/` —
+are).  `--selftest` reproduces vectors 1–4b above — also stored as files in `experiments/certs/` —
 and fuzzes random, mostly invalid certificates against brute force: an accepted certificate must
 never claim a bound above the true minimum (also with rounded-down anchor values), nor an
-interval missing the true partition sum, and corrupted anchor data must be judged inconsistent.  Use
+interval missing the true partition sum; interval anchors around the true values must be judged
+consistent and corrupted ones inconsistent.
+
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 36 small
+mutations to a scratch copy of the falsification harness — each makes a tested claim false or
+breaks the test's model of it — and requires every one to be caught (output stored in
+`docs/mutation_output.txt`).  The audit script runs it, and starts with a self-test in which
+planted violations (an incomplete proof, forbidden tokens) must be detected.  Use
 it as the executable reading of the schema and as a regression oracle for faster checkers.
 
 Synthetic stress tests and tightness benchmarks: `experiments/falsify_conjectures.py`

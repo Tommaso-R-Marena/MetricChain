@@ -1,0 +1,26 @@
+{
+ "format": "metricchain-cert/1",
+ "kind": "partition",
+ "n": 1,
+ "k": 1,
+ "domains": [
+  [
+   0,
+   -1
+  ]
+ ],
+ "instance": {
+  "w": [
+   [
+    "1"
+   ]
+  ],
+  "W": {}
+ },
+ "claim": {},
+ "certificate": {
+  "node": "leaf",
+  "lo": {},
+  "hi": {}
+ }
+}

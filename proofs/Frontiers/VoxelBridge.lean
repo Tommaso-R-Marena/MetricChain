@@ -70,6 +70,10 @@ endpoints `t₁ ≤ t₂` is the arc of angles `[2 arctan t₁, 2 arctan t₂)`.
 * `chartArc_onebody_brackets` — computable rational brackets of `vol · exp(q)` for a chart arc
   (volume bounds times the `exp` enclosure of `Core/Rounding.lean`): the one-body hypotheses of
   the end-to-end theorem in executable form;
+* `chartArc_onebody_brackets_of_sq`, `chartArc_onebody_brackets_pos`,
+  `chartArc_onebody_brackets_neg` — the same with the upper volume bound `(t₂ - t₁)·2/(1 + m²)`,
+  whose ratio to the lower bound tends to `1` when the arc is subdivided (the crude bound
+  `2 (t₂ - t₁)` of `chartArc_onebody_brackets` does not improve under subdivision);
 * `circParam_two_arctan`, `chartArc_param_mem` — the chart point `circParam t` sits at the angle
   `2 arctan t`, and every angle of the arc has its chart parameter in `[t₁, t₂)`.
 
@@ -597,6 +601,78 @@ theorem chartArc_onebody_brackets {m r : ℕ} (hm : 0 < m) {t₁ t₂ T q₁ q�
   push_cast
   exact ⟨mul_le_mul hv.1 he₁ h0 ENNReal.toReal_nonneg,
     mul_le_mul hv.2 he₂ (Real.exp_pos _).le (by linarith)⟩
+
+/-- **Convergent rational bounds for the volume factor of a chart arc.**  With `m² ≤ t² ≤ T²` on
+the arc, the volume lies between `(t₂ - t₁) · 2/(1 + T²)` and `(t₂ - t₁) · 2/(1 + m²)`; the ratio
+of the two bounds tends to `1` when the arc is subdivided. -/
+theorem volume_chartArc_toReal_bounds_of_sq {t₁ t₂ m T : ℝ} (h : t₁ ≤ t₂)
+    (hm : ∀ x ∈ Set.Ioo t₁ t₂, m ^ 2 ≤ x ^ 2) (hT : ∀ x ∈ Set.Ioo t₁ t₂, x ^ 2 ≤ T ^ 2) :
+    (t₂ - t₁) * (2 / (1 + T ^ 2)) ≤
+        (volume (Set.Ico (2 * Real.arctan t₁) (2 * Real.arctan t₂))).toReal ∧
+      (volume (Set.Ico (2 * Real.arctan t₁) (2 * Real.arctan t₂))).toReal ≤
+        (t₂ - t₁) * (2 / (1 + m ^ 2)) := by
+  have hmono : Real.arctan t₁ ≤ Real.arctan t₂ := Real.arctan_strictMono.monotone h
+  rw [volume_chartArc, ENNReal.toReal_ofReal (by linarith)]
+  exact two_arctan_sub_bounds_of_sq h hm hT
+
+/-- **Computable one-body brackets on a chart arc, convergent form.**  As
+`chartArc_onebody_brackets`, with the upper volume bound `(t₂ - t₁) · 2/(1 + m²)` for
+`m² ≤ t²` on the arc, so that the enclosure tightens under subdivision of the arc. -/
+theorem chartArc_onebody_brackets_of_sq {N r : ℕ} (hN : 0 < N) {t₁ t₂ m T q₁ q₂ : ℚ}
+    (h : t₁ ≤ t₂) (hm : ∀ x ∈ Set.Ioo (t₁ : ℝ) (t₂ : ℝ), (m : ℝ) ^ 2 ≤ x ^ 2)
+    (hT : ∀ x ∈ Set.Ioo (t₁ : ℝ) (t₂ : ℝ), x ^ 2 ≤ (T : ℝ) ^ 2)
+    (hq₁ : |q₁| ≤ 2 ^ r) (hq₂ : |q₂| ≤ 2 ^ r) :
+    (((t₂ - t₁) * (2 / (1 + T ^ 2)) * expLo N r q₁ : ℚ) : ℝ) ≤
+        (volume (Set.Ico (2 * Real.arctan (t₁ : ℝ)) (2 * Real.arctan (t₂ : ℝ)))).toReal *
+          Real.exp (q₁ : ℝ) ∧
+      (volume (Set.Ico (2 * Real.arctan (t₁ : ℝ)) (2 * Real.arctan (t₂ : ℝ)))).toReal *
+          Real.exp (q₂ : ℝ) ≤ (((t₂ - t₁) * (2 / (1 + m ^ 2)) * expHi N r q₂ : ℚ) : ℝ) := by
+  have hle : (t₁ : ℝ) ≤ (t₂ : ℝ) := by exact_mod_cast h
+  have hv := volume_chartArc_toReal_bounds_of_sq hle hm hT
+  have he₁ := (exp_enclosure N r hN q₁ hq₁).1
+  have he₂ := (exp_enclosure N r hN q₂ hq₂).2
+  have h0 : (0 : ℝ) ≤ ((expLo N r q₁ : ℚ) : ℝ) := by exact_mod_cast expLo_nonneg N r q₁
+  have hpos : (0 : ℝ) ≤ ((t₂ : ℝ) - t₁) * (2 / (1 + (m : ℝ) ^ 2)) := by
+    have h1 : (0 : ℝ) ≤ (t₂ : ℝ) - t₁ := by linarith
+    positivity
+  push_cast
+  exact ⟨mul_le_mul hv.1 he₁ h0 ENNReal.toReal_nonneg,
+    mul_le_mul hv.2 he₂ (Real.exp_pos _).le hpos⟩
+
+/-- **Arcs on the nonnegative side of a chart** (`0 ≤ t₁ ≤ t₂`): `m = t₁`, `T = t₂`.  The relative
+width of the volume enclosure is `(1 + t₂²)/(1 + t₁²)`, which tends to `1` under subdivision. -/
+theorem chartArc_onebody_brackets_pos {N r : ℕ} (hN : 0 < N) {t₁ t₂ q₁ q₂ : ℚ} (h0 : 0 ≤ t₁)
+    (h : t₁ ≤ t₂) (hq₁ : |q₁| ≤ 2 ^ r) (hq₂ : |q₂| ≤ 2 ^ r) :
+    (((t₂ - t₁) * (2 / (1 + t₂ ^ 2)) * expLo N r q₁ : ℚ) : ℝ) ≤
+        (volume (Set.Ico (2 * Real.arctan (t₁ : ℝ)) (2 * Real.arctan (t₂ : ℝ)))).toReal *
+          Real.exp (q₁ : ℝ) ∧
+      (volume (Set.Ico (2 * Real.arctan (t₁ : ℝ)) (2 * Real.arctan (t₂ : ℝ)))).toReal *
+          Real.exp (q₂ : ℝ) ≤ (((t₂ - t₁) * (2 / (1 + t₁ ^ 2)) * expHi N r q₂ : ℚ) : ℝ) := by
+  have h0' : (0 : ℝ) ≤ (t₁ : ℝ) := by exact_mod_cast h0
+  refine chartArc_onebody_brackets_of_sq hN h (fun x hx => ?_) (fun x hx => ?_) hq₁ hq₂
+  · have hx1 := hx.1
+    nlinarith
+  · have hx1 := hx.1
+    have hx2 := hx.2
+    nlinarith
+
+/-- **Arcs on the nonpositive side of a chart** (`t₁ ≤ t₂ ≤ 0`): `m = -t₂`, `T = -t₁`. -/
+theorem chartArc_onebody_brackets_neg {N r : ℕ} (hN : 0 < N) {t₁ t₂ q₁ q₂ : ℚ} (h0 : t₂ ≤ 0)
+    (h : t₁ ≤ t₂) (hq₁ : |q₁| ≤ 2 ^ r) (hq₂ : |q₂| ≤ 2 ^ r) :
+    (((t₂ - t₁) * (2 / (1 + t₁ ^ 2)) * expLo N r q₁ : ℚ) : ℝ) ≤
+        (volume (Set.Ico (2 * Real.arctan (t₁ : ℝ)) (2 * Real.arctan (t₂ : ℝ)))).toReal *
+          Real.exp (q₁ : ℝ) ∧
+      (volume (Set.Ico (2 * Real.arctan (t₁ : ℝ)) (2 * Real.arctan (t₂ : ℝ)))).toReal *
+          Real.exp (q₂ : ℝ) ≤ (((t₂ - t₁) * (2 / (1 + t₂ ^ 2)) * expHi N r q₂ : ℚ) : ℝ) := by
+  have h0' : (t₂ : ℝ) ≤ 0 := by exact_mod_cast h0
+  refine chartArc_onebody_brackets_of_sq (m := t₂) (T := t₁) hN h (fun x hx => ?_)
+    (fun x hx => ?_) hq₁ hq₂
+  · have hx1 := hx.1
+    have hx2 := hx.2
+    nlinarith
+  · have hx1 := hx.1
+    have hx2 := hx.2
+    nlinarith
 
 /-- The chart point with parameter `t` sits at the angle `2 arctan t` (the converse reading of
 `circParam_tan_half`). -/

@@ -24,12 +24,14 @@ import proofs.Frontiers.ProofComplexity
 
 * `#audit_axioms` (invoked at the end of this file) walks **every** declaration in the
   `MetricChain` namespace and fails (throws) if any of them depends on an axiom other than
-  `propext`, `Classical.choice`, `Quot.sound`.  In particular `sorryAx`, `Lean.ofReduceBool`
-  (native evaluation) and user axioms are rejected.
+  `propext`, `Classical.choice`, `Quot.sound`.  In particular the placeholder axiom of incomplete
+  proofs, the axiom of native evaluation and user axioms are rejected.
 * The explicit `#print axioms` lines below list the headline theorems for human inspection;
   `scripts/audit_all.sh` parses them as a second, independent check.
-* The `example`s at the end are non-vacuity witnesses: concrete instantiations showing that the
-  hypotheses of each headline theorem are jointly satisfiable on non-trivial instances.
+* The theorems in the namespace `MetricChain.NonVacuity` are non-vacuity witnesses: concrete
+  instantiations showing that the hypotheses of each headline theorem are jointly satisfiable on
+  non-trivial instances.  They are *named* declarations (not anonymous examples) so that the
+  automatic audit covers them too.
 -/
 
 open Lean Elab Command in
@@ -113,6 +115,7 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.certified_torsion_partition
 #print axioms MetricChain.certified_torsion_partition_full
 #print axioms MetricChain.certified_torsion_partition_top
+#print axioms MetricChain.chartArc_onebody_brackets_pos
 #print axioms MetricChain.two_arctan_sub_bounds
 #print axioms MetricChain.chartArc_onebody_brackets
 #print axioms MetricChain.VoxelBridgeWitness.chart_witness
@@ -133,6 +136,7 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.exists_coaxial_angle
 #print axioms MetricChain.IsTorsionMove.rigidWithin
 #print axioms MetricChain.rigidWithin_torsion_chain
+#print axioms MetricChain.rigidWithinIn_torsion_chain_min
 #print axioms MetricChain.residual_torsion_chain
 #print axioms MetricChain.residual_torsion_chain_in
 #print axioms MetricChain.residual_torsion_move_uniform
@@ -148,6 +152,11 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.RProblem.consistent_iff_nonempty
 #print axioms MetricChain.verifyRTop_sound
 #print axioms MetricChain.verifyRLowerTop_sound
+#print axioms MetricChain.IProblem.consistent_iff_nonempty
+#print axioms MetricChain.verifyITop_sound
+#print axioms MetricChain.verifyITop_ofExact
+#print axioms MetricChain.verifyITop_ofLower
+#print axioms MetricChain.inconsistentInterval_rejected
 #print axioms MetricChain.negativeEnvelope_rejected
 #print axioms MetricChain.certified_gap_interval
 #print axioms MetricChain.inconsistentResidual_rejected
@@ -175,12 +184,12 @@ open Finset
 
 /-- The discrete envelope on `Bool` with oscillation `1` is an envelope, and the zero residual is
 admissible for it: the hypotheses of the envelope-duality theorems are satisfiable. -/
-example : IsEnvelope (discreteEnvelope (X := Bool) 1) ∧ Admissible (discreteEnvelope (X := Bool) 1) fun _ => 0 :=
+theorem envelope_satisfiable : IsEnvelope (discreteEnvelope (X := Bool) 1) ∧ Admissible (discreteEnvelope (X := Bool) 1) fun _ => 0 :=
   ⟨discreteEnvelope_isEnvelope (by norm_num), fun x y => by unfold discreteEnvelope; split_ifs <;> norm_num⟩
 
 /-- `robust_minimizer_iff` is not vacuous in either direction: with `f true = 0`, `f false = 2`
 and oscillation `1`, `true` is robustly optimal-for-some-residual and `false` is not. -/
-example :
+theorem robust_minimizer_discriminates :
     (∃ g, Admissible (discreteEnvelope (X := Bool) 1) g ∧
         ∀ y, (fun b : Bool => if b then (0 : ℝ) else 2) true + g true ≤
           (fun b : Bool => if b then (0 : ℝ) else 2) y + g y) ∧
@@ -198,7 +207,7 @@ example :
 /-- `anchor_necessary` forces a non-trivial conclusion: on two states at envelope distance `1`
 with zero white-box energy and zero residual (`κ = 0`), *every* exact certificate (`ε = 0`) must
 evaluate both states. -/
-example (A : Finset Bool) (hA : A.Nonempty)
+theorem exact_certificate_contains_all (A : Finset Bool) (hA : A.Nonempty)
     (hcert : ∀ y, A.inf' hA (fun _ => (0 : ℝ) + 0) - 0 ≤
       (0 : ℝ) + lowerEnv (discreteEnvelope (X := Bool) 1) A hA (fun _ => 0) y) :
     A = Finset.univ := by
@@ -218,7 +227,7 @@ example (A : Finset Bool) (hA : A.Nonempty)
 
 /-- … and such a certificate exists: with both states evaluated the certificate condition holds,
 so the hypotheses of `anchor_necessary` / `anchor_card_lower_bound` are jointly satisfiable. -/
-example : ∀ y, (Finset.univ : Finset Bool).inf' ⟨true, Finset.mem_univ _⟩ (fun _ => (0 : ℝ) + 0) - 0 ≤
+theorem exact_certificate_exists : ∀ y, (Finset.univ : Finset Bool).inf' ⟨true, Finset.mem_univ _⟩ (fun _ => (0 : ℝ) + 0) - 0 ≤
     (0 : ℝ) + lowerEnv (discreteEnvelope (X := Bool) 1) Finset.univ ⟨true, Finset.mem_univ _⟩
       (fun _ => 0) y := by
   intro y
@@ -233,7 +242,7 @@ example : ∀ y, (Finset.univ : Finset Bool).inf' ⟨true, Finset.mem_univ _⟩ 
 
 /-- The dominance transport lemma applies to a concrete two-state system: state `false`
 (energy `3`) is dominated by `true` (energy `1`) with margin `2`. -/
-example : partitionFn 1 (fun b : Bool => if b then (1 : ℝ) else 3) {false} ≤
+theorem transport_two_state : partitionFn 1 (fun b : Bool => if b then (1 : ℝ) else 3) {false} ≤
     Real.exp (-1 * 2) * partitionFn 1 (fun b : Bool => if b then (1 : ℝ) else 3) {true} := by
   apply partition_transport (by norm_num) _ (fun _ => true)
   · intro x hx y hy _
@@ -247,13 +256,13 @@ example : partitionFn 1 (fun b : Bool => if b then (1 : ℝ) else 3) {false} ≤
     norm_num
 
 /-- The kernel's master theorem is exercised on a concrete instance with a tight bound. -/
-example : (∀ x : Config 3 2, 1 ≤ triangle.energy x) ∧ triangle.energy ![0, 1, 0] = 1 :=
+theorem triangle_tight : (∀ x : Config 3 2, 1 ≤ triangle.energy x) ∧ triangle.energy ![0, 1, 0] = 1 :=
   ⟨triangle_lower_bound, triangle_optimum⟩
 
 /-- `robust_minimizer_with_anchors_iff` discriminates: with one anchor (`true`, value `0`),
 oscillation `1`, and white-box energies `f true = 0`, `f false = 3`, the state `false` cannot be
 optimal for any admissible residual matching the anchor, whereas `true` can. -/
-example :
+theorem query_model_discriminates :
     (∃ g, Admissible (discreteEnvelope (X := Bool) 1) g ∧ (∀ a ∈ ({true} : Finset Bool), g a = 0) ∧
         ∀ y, (fun b : Bool => if b then (0 : ℝ) else 3) true + g true ≤
           (fun b : Bool => if b then (0 : ℝ) else 3) y + g y) ∧
@@ -290,7 +299,7 @@ example :
 
 /-- `verify_sound_real` applies to a real pairwise model whose tables are bounded below by the
 rational triangle instance: its energy is at least `1` everywhere. -/
-example (M : PairModel ℝ (Fin 3) (fun _ => Fin 2))
+theorem real_model_bound (M : PairModel ℝ (Fin 3) (fun _ => Fin 2))
     (hh : ∀ i a, ((triangle.h i a : ℚ) : ℝ) ≤ M.h i a)
     (hJ : ∀ i j a b, ((triangle.J i j a b : ℚ) : ℝ) ≤ M.J i j a b) (x : Config 3 2) :
     ((1 : ℚ) : ℝ) ≤ M.energy x :=
@@ -299,7 +308,7 @@ example (M : PairModel ℝ (Fin 3) (fun _ => Fin 2))
 
 /-- `boltzmannAvg_dominance_error` on a two-state system (margin `2`): discarding the dominated
 state changes the average of any observable bounded by `1` by at most `2 e^{-2}`. -/
-example (f : Bool → ℝ) (hf : ∀ b, |f b| ≤ 1) :
+theorem observable_error_two_state (f : Bool → ℝ) (hf : ∀ b, |f b| ≤ 1) :
     |boltzmannAvg 1 (fun b : Bool => if b then (1 : ℝ) else 3) f ({false} ∪ {true}) -
         boltzmannAvg 1 (fun b : Bool => if b then (1 : ℝ) else 3) f {true}| ≤
       2 * 1 * Real.exp (-1 * 2) := by
@@ -319,7 +328,7 @@ example (f : Bool → ℝ) (hf : ∀ b, |f b| ≤ 1) :
     exact hf x
 
 /-- The relative-entropy identity is instantiated on the uniform two-state reference. -/
-example (Δ : Bool → ℝ) (β : ℝ) :
+theorem kl_identity_two_state (Δ : Bool → ℝ) (β : ℝ) :
     klFin (fun _ : Bool => (1 / 2 : ℝ)) (tilt (fun _ => 1 / 2) Δ β) =
       β * ∑ x : Bool, (1 / 2 : ℝ) * Δ x + Real.log (∑ x : Bool, (1 / 2 : ℝ) * Real.exp (-β * Δ x)) :=
   kl_reference_target_eq_gap (fun _ => 1 / 2) Δ (fun _ => by norm_num)
@@ -328,7 +337,7 @@ example (Δ : Bool → ℝ) (β : ℝ) :
 /-- `robust_min_interval_exact` on two states with one anchor (`true`, value `0`) and oscillation
 `1`: the envelope optima are `-1` and `0`, and *every* value in between is the optimal value of
 `f + g` for an admissible residual matching the anchor. -/
-example (τ : ℝ) (h1 : -1 ≤ τ) (h0 : τ ≤ 0) :
+theorem robust_interval_exact_two_state (τ : ℝ) (h1 : -1 ≤ τ) (h0 : τ ≤ 0) :
     ∃ g : Bool → ℝ, Admissible (discreteEnvelope (X := Bool) 1) g ∧ g true = 0 ∧
       (Finset.univ : Finset Bool).inf' ⟨true, Finset.mem_univ _⟩ (fun y => (0 : ℝ) + g y) = τ := by
   have hd := discreteEnvelope_isEnvelope (X := Bool) (ω := 1) (by norm_num)
@@ -354,7 +363,7 @@ example (τ : ℝ) (h1 : -1 ≤ τ) (h0 : τ ≤ 0) :
 
 /-- The top-level residual kernel is not vacuous: on the triangle problem the residual class is
 non-empty and the certified bound holds for every residual in the (lower) class. -/
-example : (∃ g : Config 3 2 → ℝ, ResidualClass triangleResidual g) ∧
+theorem residual_top_nonvacuous : (∃ g : Config 3 2 → ℝ, ResidualClass triangleResidual g) ∧
     ∀ g : Config 3 2 → ℝ, ResidualLowerClass triangleResidual g →
       ∀ x : Config 3 2, ((1 / 8 : ℚ) : ℝ) ≤ (triangle.energy x : ℝ) + g x := by
   obtain ⟨h1, h2⟩ := verifyRTop_sound triangleResidualCert triangleResidual (fullDom 3 2) (1 / 8)
@@ -437,7 +446,7 @@ def wProblem : RProblem 1 2 where
 
 /-- All hypotheses of `verifyR_sound_invariant` hold in this instance, and its conclusion is the
 concrete certified bound `-4 ≤ E + Δ ∘ emb` on both states. -/
-example (x : Config 1 2) : ((-4 : ℚ) : ℝ) ≤ (wProblem.base.energy x : ℝ) + wΔ (wEmb x) := by
+theorem invariant_pipeline_instance (x : Config 1 2) : ((-4 : ℚ) : ℝ) ≤ (wProblem.base.energy x : ℝ) + wΔ (wEmb x) := by
   have hv : verifyR (.anchor 0 (.leaf (fun _ => -4) (fun _ _ => 0) (fun _ _ _ => 0))) wProblem
       (fullDom 1 2) (-4) = true := by decide +kernel
   refine verifyR_sound_invariant (Λ := 2) (by norm_num) wΔ_invariant wΔ_lipschitz wEmb
@@ -453,6 +462,105 @@ example (x : Config 1 2) : ((-4 : ℚ) : ℝ) ≤ (wProblem.base.energy x : ℝ)
     show ((0 : ℚ) : ℝ) ≤ wΔ (wEmb ![0])
     rw [Rat.cast_zero]
     exact dist_nonneg
+
+/-! #### An invariance group smaller than the full isometry group
+
+`Gz` is the group generated by the rotations about the torsion axis (proper motions), and
+`Δz X = z(X 1) - z(X 0)` is the signed height difference along the axis: invariant under `Gz`,
+`2`-Lipschitz, but *not* invariant under the mirror reflection `z ↦ -z`.  So the `G`-parametrised
+torsion bound applies to an orientation-sensitive residual to which the `E(3)` statements
+(`RigidInvariant`) do not apply. -/
+
+/-- submonoid generated by the rotations about the `z`-axis -/
+noncomputable def Gz : Submonoid (AxisSpace ≃ᵢ AxisSpace) :=
+  Submonoid.closure (Set.range fun ψ : ℝ =>
+    (IsometryEquiv.refl AxisSpace).trans ((axisRot ψ).trans (IsometryEquiv.refl AxisSpace).symm))
+
+theorem Gz_axisRot_mem : ∀ ψ : ℝ,
+    (IsometryEquiv.refl AxisSpace).trans ((axisRot ψ).trans (IsometryEquiv.refl AxisSpace).symm) ∈
+      Gz :=
+  fun ψ => Submonoid.subset_closure ⟨ψ, rfl⟩
+
+/-- an orientation-sensitive residual: signed height difference along the axis -/
+noncomputable def Δz (X : Fin 2 → AxisSpace) : ℝ := (X 1).snd - (X 0).snd
+
+theorem Δz_invariantIn : RigidInvariantIn Gz Δz := by
+  intro g hg
+  induction hg using Submonoid.closure_induction with
+  | mem g hg =>
+    obtain ⟨ψ, rfl⟩ := hg
+    intro y
+    show ((axisRot ψ (y 1)).snd - (axisRot ψ (y 0)).snd) = (y 1).snd - (y 0).snd
+    simp
+  | one => intro y; rfl
+  | mul g h _ _ ihg ihh =>
+    intro y
+    have := ihg (fun i => h (y i))
+    rw [ihh y] at this
+    exact this
+
+/-- mirror reflection `(w, z) ↦ (w, -z)` -/
+noncomputable def reflZ : AxisSpace ≃ᵢ AxisSpace where
+  toFun p := WithLp.toLp 2 (p.fst, -p.snd)
+  invFun p := WithLp.toLp 2 (p.fst, -p.snd)
+  left_inv p := by
+    show WithLp.toLp 2 (p.fst, - -p.snd) = p
+    rw [neg_neg]; rfl
+  right_inv p := by
+    show WithLp.toLp 2 (p.fst, - -p.snd) = p
+    rw [neg_neg]; rfl
+  isometry_toFun := by
+    refine Isometry.of_dist_eq fun p q => ?_
+    rw [WithLp.prod_dist_eq_of_L2, WithLp.prod_dist_eq_of_L2]
+    simp only [WithLp.toLp_fst, WithLp.toLp_snd]
+    rw [dist_neg_neg]
+
+/-- `Δz` is not invariant under all isometries: the `E(3)` theorems do not apply to it. -/
+theorem Δz_not_rigidInvariant : ¬ RigidInvariant Δz := by
+  intro h
+  have h1 := h reflZ ![WithLp.toLp 2 ((0 : ℂ), (0 : ℝ)), WithLp.toLp 2 ((0 : ℂ), (1 : ℝ))]
+  simp [Δz, reflZ] at h1
+  norm_num at h1
+
+theorem snd_sub_le_dist (p q : AxisSpace) : |p.snd - q.snd| ≤ dist p q := by
+  rw [WithLp.prod_dist_eq_of_L2]
+  have h : dist p.snd q.snd ^ 2 ≤ dist p.fst q.fst ^ 2 + dist p.snd q.snd ^ 2 := by
+    nlinarith [sq_nonneg (dist p.fst q.fst)]
+  calc |p.snd - q.snd| = dist p.snd q.snd := (Real.dist_eq _ _).symm
+    _ = Real.sqrt (dist p.snd q.snd ^ 2) := (Real.sqrt_sq dist_nonneg).symm
+    _ ≤ Real.sqrt (dist p.fst q.fst ^ 2 + dist p.snd q.snd ^ 2) := Real.sqrt_le_sqrt h
+
+theorem Δz_lipschitz : ConfigLipschitz 2 Δz := by
+  intro x y
+  rw [Fin.sum_univ_two]
+  have h0 := snd_sub_le_dist (x 0) (y 0)
+  have h1 := snd_sub_le_dist (x 1) (y 1)
+  have s0 : dist (x 0) (y 0) ≤ Real.sqrt (dist (x 0) (y 0) ^ 2 + dist (x 1) (y 1) ^ 2) :=
+    Real.le_sqrt_of_sq_le (by nlinarith [sq_nonneg (dist (x 1) (y 1))])
+  have s1 : dist (x 1) (y 1) ≤ Real.sqrt (dist (x 0) (y 0) ^ 2 + dist (x 1) (y 1) ^ 2) :=
+    Real.le_sqrt_of_sq_le (by nlinarith [sq_nonneg (dist (x 0) (y 0))])
+  have e : Δz x - Δz y = ((x 1).snd - (y 1).snd) - ((x 0).snd - (y 0).snd) := by
+    unfold Δz; ring
+  rw [e]
+  have := abs_sub ((x 1).snd - (y 1).snd) ((x 0).snd - (y 0).snd)
+  linarith
+
+/-- The `G`-parametrised torsion bound instantiated at the proper subgroup `Gz ≠ ⊤` and a residual
+that is not `E(3)`-invariant: the generalisation from all isometries to a group of motions
+containing the axis rotations has content. -/
+theorem chiral_residual_torsion_bound (p0 p1 : AxisSpace) (δ : ℝ) :
+    |Δz ![p0, p1] - Δz ![p0, axisRot δ p1]| ≤
+      2 * (2 * Real.sqrt (2 * reducedInertia (IsometryEquiv.refl AxisSpace)
+        ({1} : Finset (Fin 2)) ![p0, p1]) * |Real.sin (δ / 2)|) := by
+  refine residual_torsion_move_in (by norm_num) Δz_invariantIn Δz_lipschitz Gz_axisRot_mem ?_
+  refine ⟨fun i hi => ?_, fun i hi => ?_⟩
+  · have : i = 0 := by
+      fin_cases i
+      · rfl
+      · exact absurd (Finset.mem_singleton.mpr rfl) hi
+    subst this; rfl
+  · have : i = 1 := Finset.mem_singleton.mp hi
+    subst this; rfl
 
 end MetricChain.NonVacuity
 

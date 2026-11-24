@@ -37,9 +37,14 @@ through bounded-difference envelopes and evaluated anchors.
   data, so that the statement is never vacuous — `RProblem.Consistent` is exactly non-emptiness
   of `ResidualClass` (`RProblem.consistent_iff_nonempty`), and nonnegative constants suffice for
   `ResidualLowerClass` (`RProblem.lowerClass_nonempty`).
+* `verifyITop_sound` : the recommended entry point for residual problems takes *interval* anchor
+  data `lo ≤ g x ≤ hi` (`hi` optional); `IProblem.Consistent` is exactly non-emptiness of the
+  interval class (`IProblem.consistent_iff_nonempty`), acceptance gives the lower bound on the box
+  and certified incumbent values at the anchors, and `verifyRTop` / `verifyRLowerTop` are the
+  special cases `[v, v]` and `[v, ∞)` (`verifyITop_ofExact`, `verifyITop_ofLower`).
 * `certified_gap` : together with an evaluated anchor in the box this pins the global optimum of
   the true (unknown-residual) energy inside `[L, U]`; `certified_gap_interval` is the version for
-  interval anchor data.
+  a separately certified upper value.
 
 ## Complexity (see `docs/BLUEPRINT.md`)
 
@@ -698,6 +703,244 @@ theorem certified_gap_interval (c : RCert n k) (P : RProblem n k) (D : Dom n k) 
     linarith
   exact ⟨h1, h2, le_trans (h1 a ha) h2⟩
 
+/-! ### Interval anchor data: one top-level kernel for exact, rounded and one-sided evaluations
+
+The two readings of anchor values above (`verifyRTop`: exact; `verifyRLowerTop`: lower bounds) are
+the extreme cases of *interval* anchor data: the residual at an anchor is known to lie in
+`[lo, hi]`, where `hi` may be absent.  A producer with floating-point evaluations publishes
+`[fl - err, fl + err]`.  Consistency of interval data — `lo_p - hi_q ≤ d(x_p, x_q)` for all
+ordered pairs with an upper value — is again decidable and *exactly* non-emptiness of the class
+(`IProblem.consistent_iff_nonempty`), a legitimate producer always satisfies it, and inconsistent
+evaluations are rejected even after rounding. -/
+
+/-- An anchor with interval data: the residual at `x` lies in `[lo, hi]`; `hi = none` means that
+only the lower bound is known. -/
+structure IAnchor (n k : ℕ) where
+  /-- evaluated configuration -/
+  x : Config n k
+  /-- certified lower value of the residual at `x` -/
+  lo : ℚ
+  /-- certified upper value of the residual at `x`, if any -/
+  hi : Option ℚ
+
+/-- A residual problem with interval anchor data. -/
+structure IProblem (n k : ℕ) where
+  /-- explicit pairwise part -/
+  base : PairInstance n k
+  /-- bounded-difference envelope of the residual -/
+  c : Fin n → ℚ
+  /-- interval evaluations of the residual -/
+  anchors : List (IAnchor n k)
+
+/-- The residual problem seen by the rule checker: the lower values. -/
+def IProblem.lower (P : IProblem n k) : RProblem n k where
+  base := P.base
+  c := P.c
+  anchors := P.anchors.map fun p => (p.x, p.lo)
+
+/-- Residuals compatible with interval data: bounded differences, and at every anchor a value in
+the published interval. -/
+def ResidualIntervalClass (P : IProblem n k) (g : Config n k → ℝ) : Prop :=
+  (∀ (x : Config n k) (i : Fin n) (s : Fin k), g (Function.update x i s) - g x ≤ (P.c i : ℝ)) ∧
+    ∀ p ∈ P.anchors, (p.lo : ℝ) ≤ g p.x ∧ ∀ h ∈ p.hi, g p.x ≤ (h : ℝ)
+
+theorem ResidualIntervalClass.lower {P : IProblem n k} {g : Config n k → ℝ}
+    (hg : ResidualIntervalClass P g) : ResidualLowerClass P.lower g := by
+  refine ⟨hg.1, ?_⟩
+  intro p hp
+  obtain ⟨a, ha, rfl⟩ := List.mem_map.mp hp
+  exact (hg.2 a ha).1
+
+/-- Consistency of interval data: nonnegative constants, and `lo_p - hi_q ≤ d(x_p, x_q)` for all
+ordered pairs of anchors of which the second has an upper value (`p = q` gives `lo ≤ hi`). -/
+def IProblem.Consistent (P : IProblem n k) : Prop :=
+  (∀ i, 0 ≤ P.c i) ∧
+    ∀ p ∈ P.anchors, ∀ q ∈ P.anchors, ∀ h ∈ q.hi,
+      p.lo - h ≤ ∑ i, if p.x i = q.x i then 0 else P.c i
+
+instance (P : IProblem n k) : Decidable P.Consistent := by
+  unfold IProblem.Consistent
+  infer_instance
+
+/-- Real form of the pairwise interval condition. -/
+theorem IProblem.Consistent.anchor_le {P : IProblem n k} (hP : P.Consistent)
+    {p q : IAnchor n k} (hp : p ∈ P.anchors) (hq : q ∈ P.anchors) {h : ℚ} (hh : h ∈ q.hi) :
+    (p.lo : ℝ) - (h : ℝ) ≤ ∑ i, if p.x i = q.x i then (0 : ℝ) else (P.c i : ℝ) := by
+  have e := hP.2 p hp q hq h hh
+  have e' : ((p.lo - h : ℚ) : ℝ) ≤ ((∑ i, if p.x i = q.x i then 0 else P.c i : ℚ) : ℝ) := by
+    exact_mod_cast e
+  push_cast at e'
+  have h4 : (∑ i, ((if p.x i = q.x i then (0 : ℚ) else P.c i : ℚ) : ℝ)) =
+      ∑ i, if p.x i = q.x i then (0 : ℝ) else (P.c i : ℝ) := by
+    apply Finset.sum_congr rfl
+    intro i _
+    split_ifs <;> simp
+  linarith
+
+/-- **Consistent interval data describe a non-empty class**: the McShane lower envelope of the
+lower values stays below every published upper value. -/
+theorem IProblem.Consistent.nonempty {P : IProblem n k} (hP : P.Consistent) :
+    ∃ g : Config n k → ℝ, ResidualIntervalClass P g := by
+  have hc : ∀ i, (0 : ℝ) ≤ (P.c i : ℝ) := fun i => by exact_mod_cast hP.1 i
+  by_cases hlen : 0 < P.anchors.length
+  · have hne : (Finset.univ : Finset (Fin P.anchors.length)).Nonempty :=
+      ⟨⟨0, hlen⟩, Finset.mem_univ _⟩
+    let φ : Config n k → Fin P.anchors.length → ℝ := fun y j =>
+      ((P.anchors.get j).lo : ℝ) -
+        ∑ i, if (P.anchors.get j).x i = y i then (0 : ℝ) else (P.c i : ℝ)
+    refine ⟨fun y => Finset.univ.sup' hne (φ y), ?_, ?_⟩
+    · intro x i s
+      have key : Finset.univ.sup' hne (φ (Function.update x i s)) ≤
+          Finset.univ.sup' hne (φ x) + (P.c i : ℝ) := by
+        apply Finset.sup'_le
+        intro j hj
+        have h1 : φ x j ≤ Finset.univ.sup' hne (φ x) := Finset.le_sup' (φ x) hj
+        have h2 := hamming_update_le (fun l => (P.c l : ℝ)) hc (P.anchors.get j).x x i s
+        show ((P.anchors.get j).lo : ℝ) -
+            ∑ l, (if (P.anchors.get j).x l = Function.update x i s l then (0 : ℝ)
+              else (P.c l : ℝ)) ≤ Finset.univ.sup' hne (φ x) + (P.c i : ℝ)
+        have h1' : ((P.anchors.get j).lo : ℝ) -
+            ∑ l, (if (P.anchors.get j).x l = x l then (0 : ℝ) else (P.c l : ℝ)) ≤
+              Finset.univ.sup' hne (φ x) := h1
+        linarith
+      show Finset.univ.sup' hne (φ (Function.update x i s)) - Finset.univ.sup' hne (φ x) ≤
+        (P.c i : ℝ)
+      linarith
+    · intro q hq
+      obtain ⟨j, hj⟩ := List.get_of_mem hq
+      constructor
+      · have h1 : φ q.x j ≤ Finset.univ.sup' hne (φ q.x) :=
+          Finset.le_sup' (φ q.x) (Finset.mem_univ j)
+        have h2 : φ q.x j = (q.lo : ℝ) := by
+          show ((P.anchors.get j).lo : ℝ) -
+            ∑ i, (if (P.anchors.get j).x i = q.x i then (0 : ℝ) else (P.c i : ℝ)) = (q.lo : ℝ)
+          rw [hj]
+          simp
+        show (q.lo : ℝ) ≤ Finset.univ.sup' hne (φ q.x)
+        linarith
+      · intro h hh
+        show Finset.univ.sup' hne (φ q.x) ≤ (h : ℝ)
+        apply Finset.sup'_le
+        intro l _
+        have e := hP.anchor_le (List.get_mem P.anchors l) hq hh
+        show ((P.anchors.get l).lo : ℝ) -
+          ∑ i, (if (P.anchors.get l).x i = q.x i then (0 : ℝ) else (P.c i : ℝ)) ≤ (h : ℝ)
+        linarith
+  · refine ⟨fun _ => 0, ?_, ?_⟩
+    · intro x i s
+      simpa using hc i
+    · intro p hp
+      exact absurd (List.length_pos_of_mem hp) hlen
+
+/-- **Inconsistent interval data describe an empty class** (given that configurations exist). -/
+theorem IProblem.consistent_of_nonempty (P : IProblem n k) (x₀ : Config n k)
+    (h : ∃ g : Config n k → ℝ, ResidualIntervalClass P g) : P.Consistent := by
+  obtain ⟨g, hg⟩ := h
+  constructor
+  · intro i
+    have h1 := hg.1 x₀ i (x₀ i)
+    rw [Function.update_eq_self] at h1
+    have h0 : (0 : ℝ) ≤ (P.c i : ℝ) := by linarith
+    exact_mod_cast h0
+  · intro p hp q hq u hu
+    have hmem : (p.x, p.lo) ∈ P.lower.anchors := List.mem_map.mpr ⟨p, hp, rfl⟩
+    have h1 := residual_ge_anchor P.lower g hg.lower (p.x, p.lo) hmem q.x
+    have h2 := (hg.2 q hq).2 u hu
+    have h3 : ∑ i, (if q.x i = p.x i then (0 : ℝ) else (P.c i : ℝ)) =
+        ∑ i, ((if p.x i = q.x i then (0 : ℚ) else P.c i : ℚ) : ℝ) := by
+      apply Finset.sum_congr rfl
+      intro i _
+      by_cases hi : p.x i = q.x i
+      · simp [hi]
+      · have hi' : ¬ q.x i = p.x i := fun e => hi e.symm
+        simp [hi, hi']
+    have h1' : (p.lo : ℝ) - ∑ i, (if q.x i = p.x i then (0 : ℝ) else (P.c i : ℝ)) ≤ g q.x := h1
+    rw [h3] at h1'
+    have h4 : ((p.lo - u : ℚ) : ℝ) ≤ ((∑ i, if p.x i = q.x i then 0 else P.c i : ℚ) : ℝ) := by
+      push_cast
+      linarith
+    exact_mod_cast h4
+
+/-- **Interval consistency is exactly non-emptiness of the interval class.** -/
+theorem IProblem.consistent_iff_nonempty (P : IProblem n k) (x₀ : Config n k) :
+    P.Consistent ↔ ∃ g : Config n k → ℝ, ResidualIntervalClass P g :=
+  ⟨fun h => h.nonempty, P.consistent_of_nonempty x₀⟩
+
+/-- **Top-level residual kernel for interval anchor data**: reject inconsistent data, then check
+the rules against the lower values. -/
+def verifyITop (c : RCert n k) (P : IProblem n k) (D : Dom n k) (L : ℚ) : Bool :=
+  decide P.Consistent && verifyR c P.lower D L
+
+/-- **Master Soundness Theorem, interval anchor data.**  If `verifyITop` accepts, then (i) some
+residual has the bounded differences and takes a value in every published interval, and for
+*every* such residual (ii) `L` is a lower bound on `E + g` over the box and (iii) at every anchor
+with an upper value `h` the true energy is at most `E + h` — so that an anchor inside the box
+certifies the optimum to lie in `[L, E + h]`. -/
+theorem verifyITop_sound (c : RCert n k) (P : IProblem n k) (D : Dom n k) (L : ℚ)
+    (hv : verifyITop c P D L = true) :
+    (∃ g : Config n k → ℝ, ResidualIntervalClass P g) ∧
+      ∀ g : Config n k → ℝ, ResidualIntervalClass P g →
+        (∀ x, InBox D x → (L : ℝ) ≤ (P.base.energy x : ℝ) + g x) ∧
+          ∀ p ∈ P.anchors, ∀ h ∈ p.hi,
+            (P.base.energy p.x : ℝ) + g p.x ≤ ((P.base.energy p.x + h : ℚ) : ℝ) := by
+  simp only [verifyITop, Bool.and_eq_true, decide_eq_true_eq] at hv
+  refine ⟨hv.1.nonempty, fun g hg => ⟨verifyR_sound_lower c P.lower D L hv.2 g hg.lower, ?_⟩⟩
+  intro p hp h hh
+  have h2 := (hg.2 p hp).2 h hh
+  push_cast
+  linarith
+
+/-- Exact anchor values as interval data `[v, v]`. -/
+def IProblem.ofExact (P : RProblem n k) : IProblem n k where
+  base := P.base
+  c := P.c
+  anchors := P.anchors.map fun p => ⟨p.1, p.2, some p.2⟩
+
+/-- Lower-bound anchor values as interval data `[v, ∞)`. -/
+def IProblem.ofLower (P : RProblem n k) : IProblem n k where
+  base := P.base
+  c := P.c
+  anchors := P.anchors.map fun p => ⟨p.1, p.2, none⟩
+
+theorem IProblem.ofExact_lower (P : RProblem n k) : (IProblem.ofExact P).lower = P := by
+  cases P
+  simp [IProblem.ofExact, IProblem.lower, List.map_map, Function.comp_def]
+
+theorem IProblem.ofLower_lower (P : RProblem n k) : (IProblem.ofLower P).lower = P := by
+  cases P
+  simp [IProblem.ofLower, IProblem.lower, List.map_map, Function.comp_def]
+
+/-- For exact data, interval consistency is the consistency of `verifyRTop`. -/
+theorem IProblem.ofExact_consistent (P : RProblem n k) :
+    (IProblem.ofExact P).Consistent ↔ P.Consistent := by
+  unfold IProblem.Consistent RProblem.Consistent IProblem.ofExact
+  simp only [List.mem_map, forall_exists_index, and_imp, forall_apply_eq_imp_iff₂,
+    Option.mem_def, Option.some.injEq, forall_eq']
+
+/-- For lower-bound data, interval consistency is nonnegativity of the constants. -/
+theorem IProblem.ofLower_consistent (P : RProblem n k) :
+    (IProblem.ofLower P).Consistent ↔ ∀ i, 0 ≤ P.c i := by
+  constructor
+  · intro h
+    exact h.1
+  · intro h
+    refine ⟨h, ?_⟩
+    intro p _ q hq u hu
+    obtain ⟨a, _, rfl⟩ := List.mem_map.mp hq
+    exact (Option.not_mem_none u hu).elim
+
+/-- The exact-value kernel is the interval kernel on intervals `[v, v]`. -/
+theorem verifyITop_ofExact (c : RCert n k) (P : RProblem n k) (D : Dom n k) (L : ℚ) :
+    verifyITop c (IProblem.ofExact P) D L = verifyRTop c P D L := by
+  unfold verifyITop verifyRTop
+  rw [IProblem.ofExact_lower, decide_eq_decide.mpr (IProblem.ofExact_consistent P)]
+
+/-- The lower-bound kernel is the interval kernel on intervals `[v, ∞)`. -/
+theorem verifyITop_ofLower (c : RCert n k) (P : RProblem n k) (D : Dom n k) (L : ℚ) :
+    verifyITop c (IProblem.ofLower P) D L = verifyRLowerTop c P D L := by
+  unfold verifyITop verifyRLowerTop
+  rw [IProblem.ofLower_lower, decide_eq_decide.mpr (IProblem.ofLower_consistent P)]
+
 /-! ### From rational certificates to real-valued energies (outward rounding) -/
 
 /-- A rational instance that lies termwise below a real pairwise model has a smaller energy. -/
@@ -869,5 +1112,30 @@ theorem negativeEnvelope_rejected (c : RCert 3 2) (L : ℚ) :
   have h1 : decide negativeEnvelope.Consistent = false := by decide +kernel
   have h2 : decide (∀ i, 0 ≤ negativeEnvelope.c i) = false := by decide +kernel
   simp [verifyRTop, verifyRLowerTop, h1, h2]
+
+/-- The triangle with an interval evaluation of the residual at `(0,1,0)`: `g ∈ [-9/64, -7/64]`. -/
+def triangleInterval : IProblem 3 2 where
+  base := triangle
+  c := fun _ => 1 / 4
+  anchors := [⟨![0, 1, 0], -9 / 64, some (-7 / 64)⟩]
+
+/-- Accepted for the bound `7/64`; the incumbent `E + hi = 57/64` then brackets the optimum. -/
+theorem triangleInterval_verified :
+    verifyITop triangleResidualCert triangleInterval (fullDom 3 2) (7 / 64) = true := by
+  decide +kernel
+
+/-- Rounded but incompatible evaluations: `g (0,1,0) ∈ [-1/64, 1/64]`, `g (1,1,0) ∈ [639/64, 641/64]`
+at Hamming distance one with envelope constant `1/4`. -/
+def inconsistentInterval : IProblem 3 2 where
+  base := triangle
+  c := fun _ => 1 / 4
+  anchors := [⟨![0, 1, 0], -1 / 64, some (1 / 64)⟩, ⟨![1, 1, 0], 639 / 64, some (641 / 64)⟩]
+
+/-- The interval kernel rejects them for every certificate and every bound — rounding does not
+hide an inconsistency larger than the rounding error. -/
+theorem inconsistentInterval_rejected (c : RCert 3 2) (L : ℚ) :
+    verifyITop c inconsistentInterval (fullDom 3 2) L = false := by
+  have h : decide inconsistentInterval.Consistent = false := by decide +kernel
+  simp [verifyITop, h]
 
 end MetricChain
