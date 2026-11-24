@@ -720,17 +720,48 @@ stronger than its theorems, and each review lists them.
 `βc₂n = 4`; torus threshold; Boltzmann averages), G (lever-arm law; growing constants; the RMSD
 envelope used directly).  **Review still running**: B (chains).
 
+### Cycle 9, fourth checkpoint — the reviews of B, D and G acted upon
+
+All six workstream reports are now reviewed and integrated with their reviewers' scope.
+* **D** (§11.13).  Second-order classes at finite temperature have a transition at the
+  Curie–Weiss coupling `βc₂n = 4`: below it Dobrushin uniqueness holds for the whole class and
+  a staged annealing algorithm is polynomial without a hint; above it droplets force
+  exponential cost.  The continuum threshold on the torus of angles is `Σ ln(sinh b_i/b_i)`.
+  Boltzmann averages are uncertifiable on most of their a-priori range.
+* **G** (§11.14; D42; blueprint §7).  The verified per-torsion RMSD constants grow like `m^{3/2}`
+  with the distance to the chain end, and with growing constants the weighted-Hamming format
+  is exponential with almost full exponent: **the route of §4.4 cannot certify long chains.**
+  The RMSD envelope used directly costs a stretched exponential at the zero residual.  The
+  constant of the soft-gap sampler does not depend on the residual (`SoftGapIndependence.lean`).
+* **B** (§11.15).  Chains as known parts: the droplet criterion; the exponent
+  `sup_ν R_ν(e(ν))` for homogeneous chains (the reviewer found no gap), which settles §12 item
+  1(c); the transfer-matrix planning bound is vacuous on the window `2h < c ≤ 2(J+h)`.
+  **Conjecture B.13 was refuted by the reviewer** (D41; first counterexample recomputed here):
+  additive residuals are not extremal for pairwise binary references, not even on trees.
+
+*Lessons recorded.*  (i) Six reports, six reviews, no false headline theorem, but in every
+report a summary stronger than its theorems: the summaries were not used; the theorems were,
+with the reviewers' scope.  (ii) A conjecture supported by thousands of random instances and
+by local search was false; the violating set had relative volume below `10⁻⁴` (D41).  Counts of
+non-violations are not evidence without an estimate of the power of the search.  (iii) The
+most consequential finding of the cycle for the original goal is negative (D42).
+
 ### Resume here (state at the end of cycle 9, second checkpoint)
 
-Verified state (third checkpoint): every module under `proofs/` (40 files) builds with zero
-warnings and is walked by the axiom audit (2789 declarations); the harness (81 registered
-tests: 64 that must survive, 17 documented refutations) and its mutation tests (110
-mutations: 109 caught, one expected pass) pass; `scripts/audit_all.sh` exits 0.
+Verified state (fourth checkpoint): every module under `proofs/` (41 files) builds with zero
+warnings and is walked by the axiom audit (2793 declarations); the harness (83 registered
+tests: 66 that must survive, 17 documented refutations) and its mutation tests (114
+mutations: 113 caught, one expected pass) pass; `scripts/audit_all.sh` exits 0.
 In priority order:
 
-1. **Integrate the reviewed results of D and G, and B when its review arrives** (A, C and E
-   are done): integrate what is confirmed with the reviewers' scope, record what is refuted
-   in `DEAD_ENDS.md`, leave the rest marked as claims.
+1. **Envelopes for chains** (theory report §12 item 9): the per-torsion route does not
+   scale (D42); find an envelope format whose constants do not grow with the chain length
+   and that still admits small certificates — sequence-local or windowed-frame classes, the
+   contact-map metric, classes linear in pair features — and build the corresponding kernel.
+   Close the bracket of Theorem 11.38.
+   **Machine-check more of the paper results of this cycle**, in order of value: the
+   single-letter part of the exponent theorem (11.27), the product assembly of the lower
+   bound on function spaces, the covering sandwich of 11.32, the droplet criterion 11.39.
    Candidates for theorems of the report, if confirmed: the normal form (C1), the second
    best-first bound (C4), the droplet criterion and the vacuous window for chains (B.1, B.5),
    the second-order dip and its consequences (E, Theorems A–C; D's phase transition), the

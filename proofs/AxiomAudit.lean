@@ -37,6 +37,7 @@ import proofs.Frontiers.QueryRefinements
 import proofs.Frontiers.GeneralisedDips
 import proofs.Frontiers.NormalForm
 import proofs.Frontiers.SecondOrderDip
+import proofs.Frontiers.SoftGapIndependence
 import proofs.AuditCommand
 
 /-!
@@ -345,6 +346,9 @@ import proofs.AuditCommand
 #print axioms MetricChain.SecondOrderDip.dip_witness
 #print axioms MetricChain.SecondOrderDip.star_upper
 #print axioms MetricChain.SecondOrderDip.stars_do_not_combine
+#print axioms MetricChain.sum_gibbs_exp_softGap_indep
+#print axioms MetricChain.sum_dipWeight_indep
+#print axioms MetricChain.spotCheck_const_le_cover
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp

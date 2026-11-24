@@ -4203,6 +4203,70 @@ def t_one_reference_sandwich(rng, trials):
     return True, stats
 
 
+@conjecture("XII.14 The constant of the soft-gap sampler does not depend on the residual: E_pi e^Lambda = sum_y e^{-beta f(y)} / sum_a e^{-beta (f(a) + d(a,y))} for every admissible g; and it is at most e^{beta r} times the number of cells of any partition into cells of envelope diameter at most r")
+def t_spot_check_constant(rng, trials):
+    stats = dict(instances=0, partitions=0)
+    for _ in range(trials):
+        n, d, kappa, f, g, _ = cg_instance(rng)
+        beta = float(rng.choice([0.3, 1.0, 2.5]))
+        E = f + g
+        w = np.exp(-beta * (E - E.min()))
+        Z = float(w.sum())
+        s = cg_slack(d, g)
+        Lam = np.array([math.log(Z) - math.log(float((w * np.exp(-beta * s[:, y])).sum())) for y in range(n)])
+        lhs = float((w * np.exp(Lam)).sum()) / Z
+        rhs = float(sum(math.exp(-beta * f[y]) / float(np.exp(-beta * (f + d[:, y])).sum()) for y in range(n)))
+        if abs(lhs - rhs) > 1e-9 * max(1.0, rhs):
+            return False, dict(reason="E_pi e^Lambda depends on the residual", with_residual=lhs, residual_free=rhs)
+        cells = rng.integers(0, int(rng.integers(1, n + 1)), size=n)
+        r = max(float(d[a, y]) for a in range(n) for y in range(n) if cells[a] == cells[y])
+        if rhs > math.exp(beta * r) * len(set(cells.tolist())) * (1 + 1e-9):
+            return False, dict(reason="spot-check constant exceeds the metric-entropy bound")
+        stats["instances"] += 1
+        stats["partitions"] += len(set(cells.tolist())) > 1
+    return True, stats
+
+
+@conjecture("XII.15 Second-order droplets and continuum sites: the droplet -c C(r + 1 - d_H(x,y), 2)_+ multiplies Z on the cube by 2^{-n} sum_k C(n,k) e^{beta c C(r+1-k, 2)}; the Curie-Weiss function max_m [w m^2/8 - I(m)] is positive iff w > 4; and on the circle the tent has Jensen gap ln(sinh b / b), b = beta L pi / 2, the largest among Lipschitz functions")
+def t_droplets_and_circle(rng, trials):
+    stats = dict(droplets=0, lipschitz=0)
+    for n in (4, 6, 8, 10):
+        N = 2 ** n
+        pop = np.array([bin(x).count("1") for x in range(N)])
+        for _ in range(3):
+            r, bc = int(rng.integers(1, n + 1)), float(rng.uniform(0.05, 0.6))
+            y = int(rng.integers(N))
+            dist = pop[np.arange(N) ^ y]
+            drop = -np.array([math.comb(max(r + 1 - int(t), 0), 2) for t in dist], dtype=float)
+            brute = float(np.exp(-bc * drop).sum()) / N
+            closed = sum(math.comb(n, k) * math.exp(bc * math.comb(max(r + 1 - k, 0), 2)) for k in range(n + 1)) / N
+            if abs(brute - closed) > 1e-9 * closed or np.any(drop[dist >= r] != 0):
+                return False, dict(reason="droplet partition function or support is wrong", n=n, r=r)
+            stats["droplets"] += 1
+    hb = lambda x: 0.0 if x <= 0 or x >= 1 else -x * math.log(x) - (1 - x) * math.log(1 - x)
+    fcw = lambda w: max(w * m * m / 8 - (math.log(2) - hb((1 + m) / 2)) for m in np.linspace(0.0, 0.999, 4000))
+    if fcw(3.0) > 1e-12 or fcw(4.0) > 1e-9 or not fcw(4.5) > 1e-4 or not fcw(8.0) > 0.1:
+        return False, dict(reason="Curie-Weiss free energy does not change sign at w = 4", values=[fcw(3.0), fcw(4.0), fcw(4.5)])
+    M = 720                                               # the circle, discretised
+    ang = np.minimum(np.arange(M), M - np.arange(M)) * 2 * math.pi / M        # geodesic distance to the point 0
+    for beta, L in ((1.0, 0.5), (1.0, 2.0), (0.5, 3.0)):
+        b = beta * L * math.pi / 2
+        gap = lambda phi: math.log(float(np.mean(np.exp(-beta * (phi - phi.mean())))))
+        tent = gap(L * ang)
+        if abs(tent - math.log(math.sinh(b) / b)) > 2e-3:
+            return False, dict(reason="Jensen gap of the tent differs from ln(sinh b / b)", tent=tent, formula=math.log(math.sinh(b) / b))
+        dcirc = np.minimum(np.abs(np.arange(M)[:, None] - np.arange(M)[None, :]), M - np.abs(np.arange(M)[:, None] - np.arange(M)[None, :])) * 2 * math.pi / M
+        for _ in range(6):
+            idx = rng.choice(M, size=int(rng.integers(1, 6)), replace=False)
+            a = rng.uniform(0.0, 2.0 * L, size=len(idx))
+            phi = (a[None, :] + L * dcirc[:, idx]).min(axis=1)      # L-Lipschitz on the circle
+            for sign in (1.0, -1.0):
+                if gap(sign * phi) > tent + 1e-9:
+                    return False, dict(reason="a Lipschitz function on the circle has a larger Jensen gap than the tent")
+                stats["lipschitz"] += 1
+    return True, stats
+
+
 @conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
 def t_dead_exact_free_energy(rng, trials):
     """Refuted (second referee, C1): with positive slack off the diagonal, an exact certificate of ln Z is the whole

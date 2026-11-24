@@ -19,7 +19,7 @@ evaluation only.
 | what turned out false, weaker, or already known | [`docs/DEAD_ENDS.md`](docs/DEAD_ENDS.md) |
 | the literature checks behind the novelty assessments | [`docs/prior_art/`](docs/prior_art) |
 | the independent referee reports on the theory report (four so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md) |
-| the independent reviews of the workstream reports | [`docs/reviews/`](docs/reviews) (`R_C_review.md`, `R_D_review.md`, `R_E_review.md`, `R_G_review.md`) |
+| the independent reviews of the workstream reports | [`docs/reviews/`](docs/reviews) (`R_B_review.md`, `R_C_review.md`, `R_D_review.md`, `R_E_review.md`, `R_G_review.md`) |
 | reports of independent exploratory workstreams (as delivered; not part of the theory report unless it says so) | [`docs/workstreams/`](docs/workstreams) |
 
 ## Layout
@@ -44,8 +44,9 @@ proofs/Frontiers/       envelope duality, dominance calculus, free-energy sandwi
                         refinements after the third referee report (pair detection, hedged
                         spot-check, exact-dip bounds on the cube), generalised dips with
                         the two-measure sandwich (thresholds beyond the cube), the normal
-                        form that absorbs the known part into the envelope, and the
-                        second-order dip (dense second-order classes)
+                        form that absorbs the known part into the envelope, the
+                        second-order dip (dense second-order classes), and the residual-
+                        independence of the soft-gap sampler's constant
 proofs/CertificateAlgebra.lean   executable verification kernels + Master Soundness Theorems
 proofs/AuditCommand.lean         the axiom walk (by defining module)
 proofs/AxiomAudit.lean           axiom audit of every project constant + non-vacuity witnesses
@@ -150,11 +151,14 @@ beyond the cube — single dips are not the extremal perturbations on product la
 three or more states per site (D38) — and supplied what replaces it (theory report Theorems
 11.27–11.28).  Every workstream report was then reviewed independently (`docs/reviews/`): no
 headline theorem was found false, several summaries were found stronger than their theorems,
-and what has been integrated so far — the exact exponent beyond the cube, the normal form, the
-theory of dense second-order classes (theory report §§11.10–11.12) — is integrated with the
-reviewers' scope.  Results on chains as known parts, on free energies of second-order classes,
-on continuous spaces and on chain geometry are reviewed but not yet part of the theory report.
-§12 of the report says what a publication would still need.
+and what has been integrated — the exact exponent beyond the cube, the normal form, dense
+second-order classes, second-order classes at finite temperature, the torus of angles,
+Boltzmann averages, chains as known parts, and what the theory predicts for chain geometry
+(theory report §§11.10–11.15) — is integrated with the reviewers' scope; one conjecture of a
+workstream was refuted by its reviewer (D41).  The finding with the most direct consequence
+for the original goal is negative: the verified per-torsion constants grow with the distance
+to the chain end, so the weighted-Hamming route cannot certify long chains (D42).  §12 of the
+report says what a publication would still need.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

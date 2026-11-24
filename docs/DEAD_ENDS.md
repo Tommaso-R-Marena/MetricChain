@@ -832,3 +832,51 @@ Also corrected by the reviewer in the workstream's own report: "all but a `2^{�
 fraction of the cube must be evaluated" (that is the fraction that *is* evaluated; the exponent
 is full), and "`N₂` is the algorithmic cost" (true up to `+1` only).
 
+## D41. "For pairwise binary references the worst-case Jensen gap is attained by an additive residual" — FALSE  **[recomputed for the theory report]**
+
+*Conjecture (workstream B, Conjecture B.13; it would have given the worst-case free-energy gap
+of a chain reference and the upper half of the accuracy threshold for chains).*  For every
+measure `π ∝ exp(Σ J_ij s_i s_j + Σ h_i s_i)` on `{0,1}ⁿ` and every tilt `θ`, the maximum of
+`ln E_π exp(−β(g − θM − E_π[g − θM]))` over the `c`-Hamming-Lipschitz `g` is attained at an
+additive `g = c Σ_i (±1) y_i`.  Evidence offered: no violation in about 6 100 exactly enumerated
+models and under adversarial search.
+
+*Refutation (the reviewer of workstream B, with 50–60-digit arithmetic; first instance recomputed
+here).*  (1) No tilt, antiferromagnetic complete graph on four sites with fields, `βc = 1.5`:
+the best additive residual gives `0.99202`, a non-additive vertex of the Lipschitz polytope
+`1.00985`.  (2) No tilt, a star with three leaves: margin `4.4·10⁻⁵` — so additivity fails for
+binary Markov trees, which D25 had left open; by a gauge transformation the same instance is a
+ferromagnetic star with non-uniform fields.  (3) Tilt `0.95c`, homogeneous antiferromagnetic
+open chain of three sites: `7.513` against `7.964`.  The mechanism is that of D34 (a union of
+dips on a slice where the measure is nearly degenerate).
+
+*Why the evidence had no power.*  Violations occupy tuned regimes of relative volume below
+`10⁻⁴`; random couplings of order one and local search from random starts miss them.  A count
+of instances without violations is not evidence when the violating set is thin.
+
+*What survives.*  No counterexample for all laws on two sites, for open chains without tilt
+(`n ≤ 5`), or for homogeneous ferromagnetic chains.  The statement for product measures is the
+classical tensorisation.
+
+## D42. "The verified per-torsion constants make long chains certifiable in weighted-Hamming format" — FALSE  **[theory report §11.14]**
+
+*Assumption (theory report §4.4, §7 and blueprint §7 up to d8d3777, implicitly).*  The verified
+torsion-to-RMSD chain rule turns an RMSD-Lipschitz residual into a weighted-Hamming envelope to
+which the kernels and the complexity theory of §11 apply; small constants then give small
+certificates.
+
+*What is wrong (workstream G, checked by its reviewer).*  The constants are not small: the
+verified ones satisfy `c_i ≥ 0.824·Λ b m_i^{3/2}`, `m_i` the distance to the nearer chain end, and
+no valid constants are below about `0.186·Λ b m_i^{3/2}` (lever arm).  With constants growing like
+any positive power the certificate size is `k^{n − o(n)}`; only `O(N^{1/3})` sites near the ends are
+sharp.  For contact-type residuals every torsion-Hamming envelope has constants growing
+linearly in `m_i`, whatever the metric.
+
+*What survives.*  The kernels are sound for whatever constants are supplied.  The RMSD envelope
+used directly (not through the chain rule) costs only a stretched exponential at the zero
+residual; residual classes that are local along the sequence, expressed in windowed local
+frames, or linear in pair features have bounded constants or few degrees of freedom.  Also
+recorded: the workstream's own summary sentence "the whole exponential price is the `ℓ¹` chain
+rule" was found too strong by its reviewer (one instance, `Lb/e = o(N)`, a bracket of two orders
+of magnitude in the exponent's constant).
+

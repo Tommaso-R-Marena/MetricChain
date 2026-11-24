@@ -599,7 +599,10 @@ sampling distribution with a guarantee is available in closed form (`thermalSamp
 `thermal_spotCheck_correct`): draw half of the samples from the Gibbs measure `π̂` of the model
 and half with probability proportional to `π̂(z)·(e^{ε/2} e^{Λ(z)} − 1)`, where the soft gap
 `Λ(z) = ln Z(E₀+ĝ) − ln Z(E₀ + ĝ(z) + d(·,z))` is a ratio of two partition functions of the
-model (for a chain-structured `E₀` and an additive `ĝ`, two transfer-matrix computations per
+model (its mean under the model, `E_π̂[e^{Λ}]`, does not depend on the residual at all — it equals
+`Σ_y e^{−βE₀(y)}/Σ_a e^{−β(E₀(a)+d(a,y))}`, `sum_gibbs_exp_softGap_indep`, and is at most `e^{βr}` times
+the number of cells of envelope diameter `r`, `spotCheck_const_le_cover` — so the sample size
+can be fixed before any evaluation; for a chain-structured `E₀` and an additive `ĝ`, two transfer-matrix computations per
 `z`); then `N = ⌈2 ln(1/δ) E_π̂[e^{Λ}] / (1 − e^{−ε/2})⌉` samples suffice.  The number
 `E_π̂[e^{Λ}]` is exponential in general — for the zero model on the cube `(2/(1+e^{−βc}))ⁿ`, still
 exponentially smaller than the `2ⁿ` of every deterministic procedure there
@@ -670,6 +673,20 @@ worked instance is `interval_invariant_instance`).  Voxel-level constants follow
 by replacing `|sin(δ/2)|` with its maximum over the pair of voxels.  The Lipschitz constant `Λ`
 and the inertia bounds are the producer's obligations; they are hypotheses of the verified
 statements, not conclusions.
+
+**Warning: this route does not scale with chain length** (theory report §11.14, `DEAD_ENDS.md`
+D42).  The constants above grow like `m^{3/2}` with the distance `m` of the torsion to the nearer
+chain end (the moment of inertia of an arm grows like `m³`), and no valid per-torsion constants
+are smaller in order.  With constants that grow like any positive power, a weighted-Hamming
+envelope makes the certificate size `k^{n − o(n)}`: only the `O(N^{1/3})` torsions near the two ends
+are sharp at a fixed RMSD-Lipschitz constant.  Use the per-torsion format for short chains,
+for loops between fixed anchors, or for the terminal segments only.  For longer chains the
+theory leaves room in three places: residual classes that are local along the sequence or
+expressed in windowed local frames (bounded constants); envelopes in a contact-map metric
+(sharpness becomes a condition per contact); and classes that are linear in pair features
+(at most as many evaluations as features).  The RMSD envelope used directly, without the
+chain rule, costs a stretched exponential `exp(Θ̃(√N))` at the zero residual instead of an
+exponential — a bound on certificate sizes, not yet a kernel.
 
 **From bound propagation to an envelope.**  Alternatively run interval or linear bound
 propagation through the network with site `i` ranging over its domain and the other sites over
@@ -829,7 +846,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 110 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 114 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  The audit script runs it, and starts with a self-test in which

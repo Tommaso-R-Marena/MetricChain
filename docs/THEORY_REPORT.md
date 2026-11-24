@@ -1108,6 +1108,13 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   coupling.**  No concrete residual with certified mixed-difference constants is provided, and
   the remainder of the star envelope grows with the square of the Hamming distance: with dense
   constants the exponential covering problem returns (§11.7; `DEAD_ENDS.md` D32).
+* **The route from chain geometry to certificates does not scale as built.**  The verified
+  per-torsion constants of §4.4 grow like `m^{3/2}` with the distance to the chain end, and with
+  growing constants a weighted-Hamming envelope makes certification exponential with almost
+  full exponent (§11.14).  The kernels remain sound; what fails is the hope that this envelope
+  format makes long chains certifiable.  §§11.13–11.14 are paper results of independent
+  workstreams, re-derived by reviewers but not machine-checked, and they ignore excluded
+  volume.
 * **No claim of practical performance.**  All experiments are synthetic and small; they check
   tightness and scaling of bounds, not solver speed.
 * **Unformalized statements** are marked [P] or [K]: the hardness half of the link-graph
@@ -1170,6 +1177,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/GeneralisedDips.lean` | `genDip`, `genDip_admissible`, `genDip_ne_imp_lt`, `dip_eq_genDip`, `slack_lipschitz`, `softGapOf`, `softGap_eq_softGapOf`, `sum_exp_genDip`, `log_sum_exp_genDip_ge`, `genDip_sensitive`, `genDip_expected_queries_ge`, `genDip_expected_queries_ge_exp_weights`, `genDip_recovers_dips`, `TwoMeasureBound`, `twoMeasureBound_prod`, `twoMeasureBound_pow`, `mass_ge_of_twoMeasureBound`, `product_mass_ge`, `sumSig_lipschitz`, `genDip_product_effect`, `detect_weight_le`, `TwoMeasureLower`, `twoMeasureLower_prod`, `twoMeasureLower_pow`, `product_sandwich` (generalised dips; the two-measure sandwich and its mirror image; after workstream A) |
 | `proofs/Frontiers/NormalForm.lean` | `reduce`, `reduce_isEnvelope`, `admissible_reduce_iff`, `slack_reduce`, `lowerEnv_reduce`, `upperEnv_reduce`, `phEnv`, `inf_add_phEnv_eq`, `reduce_phEnv_nonneg`, `certLB_normalForm`, `valueUB_normalForm`, `certUB_normalForm`, `isValueCertificate_iff_normalForm`, `isValueCertificate_normalForm_iff`, `client_eq_centre`, `gap_slack_lipschitz`, `not_cocovered_centre` (normal form; after workstream C) |
 | `proofs/Frontiers/SecondOrderDip.lean` | `SecondOrderDip.dip`, `SecondOrderDip.dip_mixedDiffBound`, `SecondOrderDip.dip_center`, `SecondOrderDip.dip_eq_zero`, `SecondOrderDip.dip_witness`, `SecondOrderDip.star_upper`, `SecondOrderDip.stars_do_not_combine` (dense second-order classes; from workstream E's scratch files) |
+| `proofs/Frontiers/SoftGapIndependence.lean` | `gibbs_mul_exp_softGap`, `sum_gibbs_exp_softGap_indep`, `sum_dipWeight_indep`, `spotCheck_const_le_cover` (the spot-check constant does not depend on the residual; from workstream G's scratch files) |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -1212,6 +1220,9 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G12 | **Beyond the cube at finite temperature**: every slack-Lipschitz function is the centre of an admissible perturbation that must be detected (generalised dips), with a single-letter lower bound on product landscapes that is a game over the vertices of the Lipschitz polytope of a site — single dips are not extremal for three or more states; a two-reference sandwich that tensorises, the sharp accuracy threshold of every additive instance, and the worst-case threshold of the whole class without a hint, for every alphabet (the smallest oscillation of the tilted site pressure; for two-state sites the largest chord gap of the pressure) | `genDip_admissible`, `log_sum_exp_genDip_ge`, `genDip_expected_queries_ge_exp_weights`, `twoMeasureBound_pow`, `twoMeasureLower_pow`, `product_sandwich`, `product_mass_ge`, `detect_weight_le` **[V]**; product assembly, thresholds, the minimax identity and the algorithmic reading **[P]**; the matching upper bound of the exponent **[P]**, checked by an independent referee (R4) | found by independent workstreams (A, B; D confirms) and, for the hint-free threshold of general alphabets, in their synthesis; tools **known** (Chernoff and packing; tensorisation of exponential-moment inequalities; for the upper bound of the exponent: inherently typical subsets, Ahlswede–Yang–Zhang; isoperimetric exponents of two product measures, Ahlswede–Zhang, Yu — read by the referee); the upper bound of the exponent is a new statement with a known proof, and may follow from the fixed-measure theorem used as a black box; its evaluation as a matrix game, the lower bound, the thresholds and the application were not found |
 | G13 | **Normal form**: a known part is the gradient part of an asymmetric envelope — value certificates of `(d, f, g)` are exactly the point certificates of `(σ, 0, f^d + g)`, `σ` the reduced cost of `d` under the Pasch–Hausdorff envelope `f^d`; a centre-form bound for best-first search valid for every admissible residual; best-first search is unboundedly worse than the smallest certificate on the line once there is a known part | `isValueCertificate_iff_normalForm`, `inf_add_phEnv_eq`, `certUB_normalForm`, `client_eq_centre`, `not_cocovered_centre` **[V]**; the search bound **[P]**; the line families computed | workstream C, verified by its reviewer; elementary (Johnson reweighting, min-plus adjointness); the packaging for certification apparently new; for `f ≡ 0`, symmetric `d` the covering characterisation and the hardness gadget are **known** (Hetland 2020), and the search bound is the known packing argument |
 | G14 | **Dense second-order classes**: a second-order dip; the uncertainty after any evaluations is at least `c·C(d+1, 2)` at Hamming distance `d` from the evaluated set; unions of stars give exactly the best single-star bound; covering sandwich for the certificate size; full exponent for constants of order one, a rate–distortion exponent with a square-root budget and a transition at `e/γ = 1/4` for mean-field constants; a three-legged spider beats the star | `SecondOrderDip.dip_mixedDiffBound`, `SecondOrderDip.dip_witness`, `SecondOrderDip.stars_do_not_combine` **[V]**; sandwich, asymptotics, spider **[P]**, verified by a reviewer with linear programmes over the whole class | workstream E (D found the dips independently); the `Θ(n²)` law is **known** for approximate modularity (Chierichetti–Dasgupta–Kumar 2020); the covering sandwich, the non-combination of stars and the spider were not found |
+| G15 | **Free energies beyond first-order product classes**: second-order classes have a transition at the Curie–Weiss coupling `βc₂n = 4` (polynomial below by Dobrushin uniqueness, exponential above by droplets); the accuracy threshold on the torus of angles is `Σ_i ln(sinh b_i/b_i)`; Boltzmann averages are uncertifiable on most of their a-priori range; the constant of the soft-gap sampler does not depend on the residual | `SecondOrderDip.dip_mixedDiffBound`, `sum_gibbs_exp_softGap_indep`, `spotCheck_const_le_cover` **[V]**; the three theorems **[P]**, re-derived by a reviewer | workstreams D and G; the two-regime picture and the order in fixed dimension are **known** (Holzmüller–Bach 2025); the transition for second-order classes, the torus threshold and the result on averages were not found (the reviewer's literature search was cut short) |
+| G16 | **Chain geometry**: the verified torsion-to-RMSD constants grow like `m^{3/2}` with the distance to the chain end (lever-arm law); with constants growing like any positive power, weighted-Hamming envelopes make certification exponential with almost full exponent; used directly, the RMSD envelope costs a stretched exponential `exp(Θ̃(√N))` at the zero residual; contact residuals force growing constants in every torsion-Hamming envelope | **[P]** from machine-checked bounds (`card_ge_exp_weights`, `expected_queries_ge_exp_weights_min`, `thermal_expected_queries_ge`); two constants numerical | workstream G, checked by a reviewer with own geometry code; lever-arm effects are folklore in molecular modelling, the quantitative consequences for certification were not found (no literature search was possible in the review) |
+| G17 | **Chains as known parts**: one evaluation certifies iff every contiguous droplet is sharp (`c ≤ τ`, a minimum-ratio cycle; `2h` for the Ising ferromagnet); the exponent of homogeneous chains is `sup_ν R_ν(e(ν))` over stationary processes; the transfer-matrix (Boltzmann) bound vanishes on the window `2h < c ≤ 2(J+h)`; the soft gap of a chain is a pinned free energy | **[P]**, re-derived by a reviewer (no Lean) | workstream B; the exactness criterion at zero field is **known** (Gray's critical distortion); the droplet criterion, the exponent theorem and the vacuous window were not found (no literature search was possible in the review) |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -1230,7 +1241,12 @@ regime (G11); (v) the extension beyond the cube (G12): the right family of pertu
 second reference measure, and the hint-free threshold of a product class as the smallest
 oscillation of a tilted site pressure; (vi) the normal form (G13), which shows that the known
 part was never a separate ingredient, and the covering sandwich for dense second-order classes
-(G14), which closes the "way out" of §11.7 for constants of order one.
+(G14), which closes the "way out" of §11.7 for constants of order one; (vii) the transition of
+second-order classes at finite temperature, the continuum threshold and the hardness of
+averages (G15), and what all of this predicts for the chain geometry the program started
+from (G16) — the last being the finding with the most direct consequence for the blueprint:
+the verified route through per-torsion constants cannot certify long chains; (viii) the first
+results with an interacting known part (G17).
 Each rests on textbook tools (type covering, Hölder, telescoping, linear-programming duality);
 the proofs are short.  The second referee's verdict on G1–G10 — "a coherent note, not a
 theorem-driven paper" — is reproduced in §12 together with what a publication would still
@@ -2619,6 +2635,202 @@ found there (their reviewer read that literature through summaries only).  Harne
 whether second-order structure changes the picture for free energies is the subject of
 workstream D (a transition at the Curie–Weiss coupling `βcn = 4`), which is under review.
 
+### 11.13 Free energies beyond first-order product classes
+
+Three results of workstream D, each re-derived by its independent reviewer, who completed two
+proof sketches and reproduced every table (`workstreams/D_REPORT.md`, Theorems 13, 6 and 12;
+`reviews/R_D_review.md`).  They are paper proofs; the only machine-checked ingredient is the
+droplet of Theorem 11.31.
+
+**Theorem 11.33 (second-order classes at finite temperature: a transition at the Curie–Weiss
+coupling) [P].**  Let `𝒢₂(c₂)` be the residuals on `{0,1}ⁿ` whose mixed second differences are
+bounded by `c₂`, and `w = βc₂n`.
+(a) *`w ≤ 4`: polynomially many evaluations, at every accuracy.*  Dobrushin's uniqueness
+condition holds for every member of the class and along the whole annealing path (the
+influence of one site on another is at most `tanh(βc₂/4)`, so the Dobrushin constant is at most
+`1 − 1/n`).  Hence: evaluate a star, form the additive interpolant, anneal from it to the
+residual in `⌈wn⌉` steps, sample each step by heat-bath Glauber dynamics (one evaluation per
+update) — the output is within `ε/2` of `ln Z` with probability `1 − δ` on the whole class, with a
+number of evaluations polynomial in `n`, `1/ε` and `ln(1/δ)` (about `n⁵ε^{−2}` at `w = 4`).  No hint
+is needed.
+(b) *`w > 4`: exponentially many for every algorithm.*  For `f ≡ 0` at the zero residual the
+droplets of Theorem 11.31, `−c₂·C(r + 1 − d_H(x,y), 2)₊`, multiply `Z` by
+`2^{−n} Σ_k C(n,k) e^{βc₂ C(r+1−k, 2)}`; if this exceeds `e^ε`, every algorithm makes at least
+`(1 − 2δ) 2ⁿ/|B(r−1)|` evaluations.  With `r = ρn` the exponent of the ratio at `ρ = 1/2` is the
+Curie–Weiss free energy `f_CW(w) = max_m [wm²/8 − I(m)]`, which is positive iff `w > 4`: for
+`w > 4` and every accuracy per site below `f_CW(w)` the cost is exponential in `n`.
+(c) With a first-order bound `c₁` as well, (a) is unchanged, and in (b) the threshold
+`max_x [∫₀^x min(βc₁, ws) ds − (ln 2 − h(½ − x))]` vanishes iff `w ≤ 4` and increases to the
+first-order threshold `ln cosh(βc₁/2)` of Theorem 11.25 as `w → ∞`.
+
+So for free energies second-order structure does rescue certification, but only in the
+high-temperature phase of the *class*: the boundary is the critical coupling of the mean-field
+ferromagnet, the worst member of the class.  Compare Theorem 11.32 for the minimum, where the
+boundary is at excitation energies of order `c·n`.  Scope (reviewer): (b) is asymptotic at
+fixed `w` — at `w = 5` the bound is only `e^{3.9}` for `n = 2000`; the bookkeeping of (a) was a sketch
+that the reviewer completed.
+
+**Theorem 11.34 (a continuous space: the torus of torsion angles) [P].**  Let
+`X = (ℝ/2πℤ)ⁿ` with the uniform reference, `f ≡ 0`, and the class of residuals with
+`|g(x) − g(y)| ≤ Σ_i L_i |x_i − y_i|` (geodesic distance on each circle); `b_i = βL_iπ/2`.  The
+largest Jensen gap of one site is `ln(sinh b_i/b_i)`, attained by the tent function, and
+(a) for `ε > J := Σ_i ln(sinh b_i/b_i)`, `⌈8 Σ_i b_i² ln(2/δ)/(ε − J)²⌉` uniform random evaluations
+give `ln Z` within `ε/2` with probability `1 − δ` on the whole class;
+(b) for `ε < J` every algorithm satisfies, at every constant residual,
+`ln E|Q| ≥ ln(1−2δ) + sup_{λ ≥ 0} [Σ_i Λ₁(λb_i) − λ(Σ_i Λ₁(b_i) + ε)]`, `Λ₁(b) = ln(2b/(1 − e^{−2b}))`, which
+is exponential in `n` for extensive accuracy below the mean of `ln(sinh b_i/b_i)`.
+This is Theorem 11.25 with the circle in place of the two-point space — the sites are
+homogeneous, so the Gibbs law of the known part is the optimal reference of Theorem 11.28(d)
+— and it is the form of the threshold that applies to torsion-angle coordinates.  In fixed
+dimension the cost is of the known order `(βL/ln βL)^d` (Holzmüller–Bach); with one global
+`ℓ₂` Lipschitz constant instead of per-coordinate ones the cost is dimension-free.
+
+**Theorem 11.35 (Boltzmann averages are harder than free energies) [P].**  On the cube with
+`f ≡ 0`, envelope `c·`Hamming and `u = βc`, let an algorithm return the mean magnetisation
+`⟨|x|/n⟩` within `η` with probability `1 − δ` on the whole class.  Over the class the average
+ranges over an interval of half-width `H(u) = ½ tanh(u/2)`.  Every algorithm needs exponentially
+many evaluations at the zero residual for `η < ε_set(u)`, where `ε_set/H` rises from `1/√2` at
+small `u` to `0.87` at `u = 8`: almost the whole a-priori range is uncertifiable, whereas for
+`ln Z` the uncertifiable fraction of the a-priori width is `ln cosh(u/2)/(u/2)`, which tends to
+zero at high temperature.  The extremal perturbations are generalised dips centred on *type
+classes* (Theorem 11.27 with `Φ` the slack distance to a set of configurations with prescribed
+magnetisations on two halves of the sites); single dips give only `O(u²)`, so they are not
+extremal for this observable even on the binary cube.  A bounded number of samples suffices,
+with the instance as a hint, above a level within one per cent of `ε_set` for `u ≥ 6`; at weak
+coupling the interval between `H/√2` and `H` is open.
+
+Smaller statements of the same report, also confirmed: free-energy differences between
+uncoupled macrostates have the sum of the two thresholds (no cancellation); certifying a
+ranking is cheap iff the margin exceeds the threshold of the loser; the quantity
+`E_π e^{Λ}` that governs the soft-gap sampler does not depend on the residual (workstream G;
+`sum_gibbs_exp_softGap_indep`, `spotCheck_const_le_cover` in `SoftGapIndependence.lean`).  One
+heading of the report, "staged protocols cannot help on the first-order class", claims more
+than its argument proves (staged protocols obey the lower bounds), and its remark on
+hint-free procedures is corrected by Theorem 11.28(d).
+
+### 11.14 What the theory says about chains: envelopes from torsion-space geometry
+
+The program started from articulated chains (§4.4: a verified bound "changing torsion `i`
+changes the superposition RMSD by at most `c_i`", which turns an RMSD-Lipschitz residual into a
+weighted-Hamming envelope `Σ_i c_i [x_i ≠ y_i]`).  Workstream G asked what §§11.4–11.10 then
+predict (`workstreams/G_REPORT.md`; `reviews/R_G_review.md`: no critical error, constants and
+scope corrected as stated below).  Setting: `n` torsions with `k` rotamers each, `N = n + 3`
+atoms, bond length `b`, a residual that is `L`-Lipschitz in RMSD, `m_i = min(i, n+1−i)`.  The
+product-domain statements ignore excluded volume.
+
+**Theorem 11.36 (lever-arm law) [P upper bound; lower constant numerical].**  The verified
+constants of Theorem 4.6 satisfy `c_i ≥ 0.824·Λ b m_i^{3/2}` (`Λ = L/√N`) for every position, and
+the smallest constants for which the weighted-Hamming envelope is valid are at least
+`0.186·Λ b m_i^{3/2}` (computed for `m ≤ 10⁵`; a proved bound has the same power with a smaller
+constant).  The cause is geometric: the moment of inertia of an arm of `m` atoms about a
+torsion axis grows like `m³` for extended and helical conformations.
+
+**Theorem 11.37 (growing constants make the weighted-Hamming format exponential) [P from V].**
+If `c_i ≥ c₀ m_i^γ` with `γ > 0`, then for an additive known part with total excitation energy `G`
+and zero residual
+
+    ln N_cov(ε)  ≥  n ln k − C_{k,γ} ((G + ε)/c₀)^{1/(1+γ)},
+
+every randomised algorithm pays `(1 − 2δ)` times this, and the same holds for `ln Z` at any
+extensive accuracy and fixed temperature (Theorems 11.6, 11.23, 11.24, with one common slope).
+With the lever-arm law (`γ = 3/2`) only `O(N^{1/3})` sites near the two ends are sharp at fixed
+`L`: **the verified chain-rule route of §4.4 cannot certify long chains.**  It is not rescued by
+changing the metric as long as the format is kept: for contact-type residuals every envelope
+in torsion-Hamming format has `c_i ≥ u₀⌊(m_i − 1)/2⌋` (a hairpin opened by one torsion changes
+`Θ(m_i)` contacts; verified on the diamond lattice).
+
+**Theorem 11.38 (the RMSD envelope used directly) [P; one constant numerical].**  For an
+additive known part with excitation energy `e` per torsion, zero residual, and the envelope
+`d = L·RMSD` itself (no chain rule), with `λ = Lb/e`:
+
+    c·√(λN)  ≤  ln N_cov(0)  ≤  4.91 √(λN ln(e(k−1)n)) + ln(81(n+1))
+
+(upper bound: a complete proof — cover the configurations with few excitations exactly and the
+others by cells of small RMSD diameter; lower bound: a packing of block conformations whose
+separation `Δ_s ≈ 0.066 s^{3/2} b` was computed, not proved; the reviewer's grids support
+`c ≈ 0.043`).  Every randomised algorithm pays `(1 − 2δ)` times the lower bound.  So at the zero
+residual, and for `Lb/e = o(N)`, certification under an RMSD envelope costs a *stretched*
+exponential in the chain length, `exp(Θ̃(√N))`, where the weighted-Hamming format costs
+`exp(Θ(N))`: at that instance most of the price of the chain-rule route is the `ℓ¹` relaxation,
+not the RMSD assumption.  This is a statement about one instance and a wide bracket (at
+`n = 1000`, `λ = 1`: between `e^{1.6}` and `e^{235}`), not a claim that chains are certifiable.
+
+Consequences for the architecture (§7, blueprint §7): constants stay bounded only for
+residuals that are local along the sequence or expressed in windowed local frames; an
+extensive local residual forces `L` of order `N` in RMSD units; second-order structure in
+torsion coordinates is dense and growing for tertiary contacts (one contact has interaction
+order about `0.6` times the loop length), so §11.12 applies; leaving the product format —
+envelopes in the contact-map metric, where sharpness is a condition per contact, or residual
+classes that are linear in pair features, which need at most as many evaluations as features
+— is where the theory leaves room.
+
+### 11.15 Chains as known parts
+
+Everything in §§11.4–11.10 that has an exponent or a threshold was proved for independent
+sites.  Workstream B took a nearest-neighbour chain as known part (`workstreams/B_REPORT.md`;
+`reviews/R_B_review.md`: the theorems below were re-derived and their tables reproduced; one
+conjecture of the report was refuted).  Envelope `c·`Hamming throughout; `J`, `h` are the coupling
+and field of the Ising chain.  Paper proofs; no Lean.
+
+**Theorem 11.39 (one evaluation: the droplet criterion) [P].**  Let `x̂` minimise the known part.
+The single evaluation at `x̂` certifies the minimum for every residual iff every *contiguous
+droplet* is sharp: for every interval `I` and every `y` that differs from `x̂` exactly on `I`,
+`f(y) − f(x̂) ≥ c|I|`; equivalently `c ≤ τ := min_y gap(y)/d_H(x̂, y)`, a minimum cost-to-time
+ratio cycle, computable by one min-plus transfer-matrix product.  If `c > τ` the certificate
+size grows exponentially, with an explicit base, also for every randomised algorithm (proved at
+the zero residual).  For the ferromagnetic Ising chain `τ = 2h` whatever `J`; with a degenerate
+or periodic ground state `τ = 0`: at zero field no chain is sharp for any `c > 0`.
+
+**Theorem 11.40 (the exponent for homogeneous chains) [P; checked by a reviewer, no gap found].**
+For a homogeneous nearest-neighbour chain, an additive residual with `κ < 1` and `ε_n = o(n)`
+(exact certification included),
+
+    lim n⁻¹ ln N_cov(n, ε_n)  =  sup_ν R_ν(e(ν)),
+
+the supremum over stationary processes `ν`, with `e(ν)` the excitation energy per site and `R_ν`
+the rate–distortion function of `ν` for the single-site slack; the same limit holds for point
+certificates and for the fractional covering number, and `(1 − 2δ)` times it bounds every
+randomised algorithm.  This settles the conjecture of §12 item 1(c).  The proof avoids
+covering lemmas for Markov types, which that item had identified as the obstacle: block
+coding with ordinary type covering, a convexity estimate for the boundary energies, and a
+separate treatment of the low-energy shell.
+
+**Proposition 11.41 (the transfer-matrix bound is vacuous on a window) [P].**  For the
+ferromagnetic Ising chain with `c > 2h`, the bound `max_t [p(t) − ln(1 + e^{−tc})]` of §12 item
+1(c) and of the blueprint — the Shannon lower bound with Boltzmann weights — is positive iff
+`c > 2(J + h)`.  On the window `2h < c ≤ 2(J + h)` it is zero although certification is
+exponential (Theorem 11.39); it is exact only when `cosh(ct/2) ≥ e^{2Jt} cosh(ht)` at its
+optimum — at zero field this is Gray's critical distortion for binary symmetric Markov
+sources, so that part is known — and below it the exponent is of the kind of the
+rate–distortion function of a Markov source beyond critical distortion, for which no closed
+form is known.  "Two-state sites: Boltzmann weights are always optimal" (Theorem 11.8) does not
+survive a coupling.  A free block of length 12 gives the two-sided bracket
+`0.215 ≤ R* ≤ 0.242` at `c = 4J`, `h = 0` (the Boltzmann bound gives `0.188`).
+
+**Proposition 11.42 (finite temperature on a chain) [P].**  For a site-additive slack the soft
+gap is a hidden-Markov log-likelihood: at the zero residual
+`Λ(y) = −ln π̃(y) − n ln(1 + (k−1)q)`, `π̃` the law of a Gibbs sample observed through a memoryless
+symmetric channel — for the Ising chain, the free-energy cost of a pinning field of magnitude
+`c/2` with the signs of `y`, a ratio of two transfer-matrix partition functions.  The dip
+threshold at the additive instance `θM` is the chord gap of the chain's pressure in the field,
+`G(0) = p(h + c/2)`-type second differences in closed form; it increases from
+`ln cosh(βc/2)` at `J = 0` to `βc/2` as `βJ → ∞`.
+
+*What turned out false* (`DEAD_ENDS.md` D41).  The report conjectured that for pairwise binary
+references the worst-case Jensen gap over Hamming-Lipschitz residuals is attained by an
+additive residual, which would have given the upper half of the threshold for chains and the
+exact worst-case free-energy gap of a chain reference (§12 item 5).  Its reviewer refuted it
+with explicit instances — an antiferromagnetic complete graph on four sites (`0.99202` for the
+best additive residual against `1.00985`; recomputed for this revision), a star (so additivity
+already fails for binary Markov *trees*, which answers the question left open in D25), and a
+tilted antiferromagnetic chain of three sites — and showed why random search had no power
+against it (the violations occupy tuned regimes of relative volume below `10⁻⁴`).  No
+counterexample was found for open chains without tilt.  For antiferromagnetic chains the best
+additive residual is staggered, and the uniform chord gap is not the threshold of the class.
+So for chains the one-reference sandwich of Theorem 11.28(d) holds as stated there — it does
+not use the product structure — but its width is not a single-site quantity, and the threshold
+is open.
+
 ---
 
 ## 12. Strongest unresolved questions, and what a publication would need
@@ -2642,6 +2854,10 @@ workstream D (a transition at the Curie–Weiss coupling `βcn = 4`), which is u
    the pair marginal is not an off-the-shelf lemma (second referee).  For independent sites the
    same remark explains when the Boltzmann choice of weights in Theorem 11.8 is optimal
    (two-state sites with zero residual: always) and when general weights are needed.
+   *Added in cycle 9:* for homogeneous chains the exponent is `sup_ν R_ν(e(ν))` (Theorem 11.40),
+   by a proof that avoids Markov-type covering; the Shannon lower bound above vanishes on a
+   window (Proposition 11.41).  Open: a computable form of the exponent below the critical
+   distortion; inhomogeneous chains; the finite-temperature exponents of a chain.
    (c') the exponent of Theorem 11.15 for exponentially small accuracies `ε_n = e^{−λn}`: between
    `max(R_β, max{H(Q) : KL(Q‖π) < λ})` and `max_Q R(Q; s, (KL(Q‖π) − λ)₊/β)`.
    (d) a careful comparison with the source-coding literature on exponential moments
@@ -2701,9 +2917,10 @@ workstream D (a transition at the Curie–Weiss coupling `βcn = 4`), which is u
    box-restricted class; certified constants `c_ij` for one concrete residual — without which
    the interface is hypothetical.
 5. **Dependent references.**  The exact worst-case free-energy gap for a Markov-chain
-   reference: additivity fails in general (D25) but no binary counterexample is known; a
-   two-sided bracket from transfer matrices (best additive two-level residual below,
-   Wasserstein-matrix bound above) is unwritten.
+   reference: additivity fails in general (D25), and it fails for binary pairwise models and
+   binary Markov trees as well (D41); for open binary chains without tilt no counterexample
+   is known; a two-sided bracket from transfer matrices (best additive two-level residual
+   below, Wasserstein-matrix bound above) is unwritten.
 6. **Proof complexity of the extended kernels.**  Lower bounds for connected families
    (triangles coupled along a chain) for cut-free and for decomposition-aware certificates; an
    approximate version of the partition-kernel separation and a representation-independent
@@ -2719,6 +2936,17 @@ workstream D (a transition at the Curie–Weiss coupling `βcn = 4`), which is u
    closed slack balls and the set of near-minimisers (harness XII.4, XII.7); for free energies
    it is an isoperimetric quantity (item 2(b)) — at additive instances above the threshold the
    two-reference sandwich certifies it by a single-site computation.
+9. **Envelopes for chains** (§11.14).  Which envelope formats have constants that do not grow
+   with the chain length and still admit small certificates?  Candidates: sequence-local or
+   windowed-frame residual classes; the contact-map metric (sharpness per contact); classes
+   linear in pair features.  Close the bracket of Theorem 11.38 (constants two orders of
+   magnitude apart; lower bound at the zero residual only; excluded volume ignored) and prove
+   the lower constant of the lever-arm law.
+10. **Second-order classes at finite temperature** (Theorem 11.33): sharpen the polynomial
+   bound below the Curie–Weiss coupling; non-homogeneous constants (Dobrushin's condition is
+   then a row-sum condition); `k`-state sites; the continuous analogue and its relation to the
+   smoothness classes of Holzmüller–Bach.  **Observables other than `ln Z`** (Theorem 11.35):
+   close the interval between `H/√2` and `H` for the magnetisation at weak coupling.
 
 As it stands, the second phase contains one cluster with the shape of a research contribution —
 *the query complexity of certifying ground states and free energies under envelope
