@@ -342,6 +342,14 @@ So one reference expectation plus the envelope constants pin `ln Z` in an interv
 non-decomposable residual is a fully decomposable one — the exact supremum of the gap over the
 class is `Σ_i max_{A_i} ln(p_i e^{βc_i(1−p_i)} + (1−p_i) e^{−βc_i p_i})`, `p_i = μ_i(A_i)`.
 
+*The gap is a relative entropy [V] (`EnsembleDivergence.lean`).*  With `μ₀` the reference
+ensemble and `μ ∝ μ₀ e^{−βΔ}` the target ensemble, `ln(Z/Z₀) + β⟨Δ⟩₀ = KL(μ₀ ‖ μ)` exactly
+(`kl_reference_target_eq_gap`).  Therefore `0 ≤ KL(μ₀ ‖ μ) ≤ β²(b−a)²/8`, and
+`≤ β² Σ_i c_i²/8` for product references (`kl_reference_target_le_hoeffding`,
+`kl_reference_target_le_bounded_differences`): the envelope constants certify how well *any
+sampler of the reference ensemble* approximates the target ensemble, and by Pinsker's inequality
+**[K]** every observable bounded by `B` shifts by at most `B β (Σ_i c_i²)^{1/2}/2`.
+
 *Sharper and more general forms [K].*  The exact extremal function is Rio's
 `ℓ(t) = sup_r [ln(1 + r(e^t − 1)) − tr] ≤ t²/8` (Rio 2013, Lemma 4.1): the gap is at most
 `Σ_i ℓ(β c_i)`, which grows only linearly in `β` at low temperature (benchmark B4: at `βc = 10`,
@@ -754,10 +762,14 @@ We prove no new expressivity or mixing theorem; the following are consequences o
    distance-based certificates (Theorem 4.3, §4.2) are blind to chirality by construction; frame
    data (§4.3) are not.  This is the realizability-side counterpart of the known incompleteness
    of distance-only invariant networks.
-4. **Sampling.**  Thermal dominance and the robust partition bracket give deterministic control
-   of ensemble weights without sampling; the T₁ equivalence (§3.2) identifies the property of a
-   reference sampler's stationary law that makes second-order free-energy corrections uniformly
-   valid.  Convergence-rate theory for torsional diffusion or Langevin samplers on `T^M` is
+4. **Sampling.**  (a) A sampler of the reference ensemble is a certified approximate sampler of
+   the target: `KL(reference ‖ target) ≤ β² Σ c_i²/8`, exactly the sandwich gap
+   (`kl_reference_target_eq_gap` **[V]**), with the constant `1/8` optimal.  (b) Thermal dominance
+   bounds the change of every bounded observable under pruning by `2B e^{−βγ}`
+   (`boltzmannAvg_dominance_error` **[V]**), and the robust partition bracket controls ensemble
+   weights deterministically.  (c) The T₁ equivalence (§3.2) identifies the property of a
+   reference sampler's stationary law that makes second-order corrections uniformly valid.
+   Convergence-rate (mixing) theory for torsional diffusion or Langevin samplers on `T^M` is
    outside what was established here.
 
 ---
@@ -794,6 +806,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/EnvelopeDuality.lean` | `robust_minimizer_iff`, `robust_certified_iff`, `lowerEnv_admissible`, `upperEnv_admissible`, `robust_min_bracket`, `robust_partition_bracket`, `robust_minimizer_with_anchors_iff`, `anchor_necessary`, `anchor_card_lower_bound`, `admissible_of_single_site`, `differential_dee_sound`, `energy_window_exact` |
 | `proofs/Frontiers/Dominance.lean` | `partition_transport`, `partition_prune_bracket`, `freeEnergy_prune_bracket`, `min_transport`, `thermal_dee`, `boltzmannAvg_dominance_error`, `isLeast_sum_of_block_separable`, `exact_margin_of_block_separable`, `PairModel.energy_update`, `goldstein_isLeast`, `goldstein_gauge_invariant`, `exactMargin_reparam`, `desmet_reparam_le`, `desmet_optimalGauge` |
 | `proofs/Frontiers/FreeEnergySandwich.lean` | `gibbs_bogoliubov`, `hoeffding_upper`, `free_energy_sandwich`, `partition_ratio_sandwich`, `bounded_differences_sandwich`, `additive_extremal`, `exists_two_level_worst_residual`, `balanced_additive_gap`, `log_cosh_bounds`, `mcdiarmid_no_better_constant` |
+| `proofs/Frontiers/EnsembleDivergence.lean` | `klFin`, `tilt`, `kl_reference_target_eq_gap`, `kl_reference_target_le_hoeffding`, `kl_reference_target_le_bounded_differences` |
 | `proofs/Frontiers/HolderDecomposition.lean` | `partitionFn_holder`, `freeEnergy_holder` |
 | `proofs/Frontiers/PartitionCertificate.lean` | `zverify`, `zverify_sound`, `zprune_sound`, `Z_encloses_partitionFn`, `triangleZ_exact` |
 | `proofs/Frontiers/VoxelEnclosure.lean` | `voxel_boltzmann_bounds`, `voxel_riemann_enclosure`, `Z_encloses_voxel_integral`, `certified_voxel_partition` |

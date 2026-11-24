@@ -594,6 +594,28 @@ def t_additive_extremal(rng, trials):
     return True, dict(max_gap_between_bound_and_local_search=worst_gap)
 
 
+@conjecture("III.5 Sandwich gap = KL(reference || target): ln<e^{-b D}> + b<D> = sum w ln(w / tilt)")
+def t_kl_identity(rng, trials):
+    worst = 0.0
+    for _ in range(trials):
+        N = int(rng.integers(2, 30))
+        w = rng.dirichlet(np.ones(N) * rng.uniform(0.2, 3.0))
+        if rng.random() < 0.3:
+            w[rng.integers(N)] = 0.0
+            w = w / w.sum()
+        d = rng.normal(0, rng.uniform(0.1, 3.0), size=N)
+        beta = float(rng.uniform(0.01, 5.0))
+        tilt = w * np.exp(-beta * d)
+        tilt = tilt / tilt.sum()
+        mask = w > 0
+        kl = float(np.sum(w[mask] * (np.log(w[mask]) - np.log(tilt[mask]))))
+        gap = math.log(float(w @ np.exp(-beta * d))) + beta * float(w @ d)
+        worst = max(worst, abs(kl - gap))
+        if abs(kl - gap) > 1e-8 * max(1.0, abs(gap)):
+            return False, dict(kl=kl, gap=gap)
+    return True, dict(max_abs_diff=worst)
+
+
 @conjecture("III.4 Hoelder/TRW temperature-rescaled decomposition: F_b(E1+E2) >= F_{b/rho}(E1) + F_{b/(1-rho)}(E2)")
 def t_holder(rng, trials):
     for _ in range(trials):

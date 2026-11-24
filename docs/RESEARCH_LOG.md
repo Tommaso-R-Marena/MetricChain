@@ -96,6 +96,7 @@ Verified modules and headline statements:
 | `Frontiers/VoxelEnclosure` | Boltzmann voxel bounds with volume factor; assembly theorem from continuous integrals to the rational kernel | **[V]** |
 | `Frontiers/SeparableVoxel` | separable envelopes ⇒ product of one-dimensional Boltzmann integrals; relative-width bound | **[V]** |
 | `Frontiers/HolderDecomposition` | finite-temperature dual decomposition | **[V]** |
+| `Frontiers/EnsembleDivergence` | sandwich gap = relative entropy of target w.r.t. reference; certified sampler error | **[V]** |
 | `Frontiers/FreeEnergySandwich` | Gibbs–Bogoliubov + Hoeffding/McDiarmid sandwich; the worst bounded-difference residual is additive and two-level; `1/8` optimal | **[V]** |
 | `Frontiers/Holonomy` | cycle-holonomy obstruction (conjugation-invariant norms), SE(3) translation holonomy with lever arms | **[V]** |
 | `Frontiers/TorsionRMSD` | rigid-superposition chain rule, exact coaxial cost, two-sided reduced-inertia bounds, torsion-move chain | **[V]** |
@@ -122,6 +123,8 @@ Driven by the open items listed below and by the reviewers' "how to sharpen" not
   rational lower instance bound the true real-valued energy.
 * `sumFree_gap_exponential`, `sumFree_complexity` **[V]** — approximate sum-free certificates
   (within `d` of the optimum) still need `2^{m−d}` leaves; exact complexity `2^K` for bound `K`.
+* `EnsembleDivergence` **[V]** — the sandwich gap equals `KL(reference ‖ target)`; certified error
+  of a reference sampler in terms of the envelope constants.
 * `experiments/reference_checker.py` — untrusted reference implementation of the three checkers
   on the JSON format, six conformance vectors identical to the kernel-evaluated Lean examples,
   soundness fuzzing against brute force.

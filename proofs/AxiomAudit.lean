@@ -5,6 +5,7 @@ import proofs.Frontiers.EnvelopeDuality
 import proofs.Frontiers.Dominance
 import proofs.Frontiers.HolderDecomposition
 import proofs.Frontiers.FreeEnergySandwich
+import proofs.Frontiers.EnsembleDivergence
 import proofs.Frontiers.HoffmanWielandt
 import proofs.Frontiers.Realizability
 import proofs.Frontiers.Holonomy
@@ -91,6 +92,8 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.bounded_differences_sandwich
 #print axioms MetricChain.exists_two_level_worst_residual
 #print axioms MetricChain.mcdiarmid_no_better_constant
+#print axioms MetricChain.kl_reference_target_eq_gap
+#print axioms MetricChain.kl_reference_target_le_bounded_differences
 #print axioms MetricChain.zverify_sound
 #print axioms MetricChain.Z_encloses_partitionFn
 #print axioms MetricChain.voxel_boltzmann_bounds
