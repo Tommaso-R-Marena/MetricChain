@@ -502,9 +502,18 @@ information:
 mixed second differences, `n(k−1)+1` evaluations on the star of a reference configuration `x₀`
 reduce the problem, without loss, to the pairwise kernel.  *Check the row-sum condition first*:
 if `½ Σ_{j≠i} c_ij` is below the measured single-site excitation energies at every site, the
-star at the minimiser certifies it.  With dense constants it does not, and no star-type data
-will (the envelope's half-width grows with the square of the Hamming distance; theory report
-§11.7, `DEAD_ENDS.md` D32) — the loop below then needs its fallback.
+star at the minimiser certifies it.  With dense constants it does not, and no data of any
+kind will: after any evaluations the uncertainty at Hamming distance `d` from the evaluated
+set is at least `c·C(d+1, 2)`, and several stars give only the best single-star bound (theory
+report §11.12; `SecondOrderDip.dip_witness`, `SecondOrderDip.stars_do_not_combine`; `DEAD_ENDS.md`
+D32, D40) — the loop below then needs its fallback.  *Plan with the covering sandwich*: the
+number of evaluations lies between `K₋` and `(n+1)K₊ + 1`, the sizes of the smallest codes that
+cover every `y` within Hamming distance `ρ(y)`, `c·C(ρ+1, 2) ≤ gap(y) + ε` (respectively
+`c·C(ρ, 2)`); for dense constants of order one this is `2^{n − Θ(√n log n)}`, for mean-field
+constants `c = γ/n` it is polynomial iff the excitation energy per site is at least `γ/4`.  If
+only `n+1` evaluations are affordable and the constants are dense, use three nested chains
+from the reference configuration (a "spider") rather than its star: it certifies for
+excitation energies down to `c·n/3` instead of `c(n−1)/2`.
 
 ```
 STARCERT(E0, residual oracle g, constants c_ij (symmetric, ≥ 0), eps):
@@ -820,7 +829,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 104 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 110 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  The audit script runs it, and starts with a self-test in which

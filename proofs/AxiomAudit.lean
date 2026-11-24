@@ -35,6 +35,8 @@ import proofs.Frontiers.QueryLowerBound
 import proofs.Frontiers.SoftGapBounds
 import proofs.Frontiers.QueryRefinements
 import proofs.Frontiers.GeneralisedDips
+import proofs.Frontiers.NormalForm
+import proofs.Frontiers.SecondOrderDip
 import proofs.AuditCommand
 
 /-!
@@ -329,6 +331,20 @@ import proofs.AuditCommand
 #print axioms MetricChain.twoMeasureLower_prod
 #print axioms MetricChain.twoMeasureLower_pow
 #print axioms MetricChain.product_sandwich
+
+-- Normal form (after workstream C) and dense second-order classes (after workstream E)
+#print axioms MetricChain.reduce_isEnvelope
+#print axioms MetricChain.admissible_reduce_iff
+#print axioms MetricChain.inf_add_phEnv_eq
+#print axioms MetricChain.certLB_normalForm
+#print axioms MetricChain.certUB_normalForm
+#print axioms MetricChain.isValueCertificate_iff_normalForm
+#print axioms MetricChain.isValueCertificate_normalForm_iff
+#print axioms MetricChain.not_cocovered_centre
+#print axioms MetricChain.SecondOrderDip.dip_mixedDiffBound
+#print axioms MetricChain.SecondOrderDip.dip_witness
+#print axioms MetricChain.SecondOrderDip.star_upper
+#print axioms MetricChain.SecondOrderDip.stars_do_not_combine
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp

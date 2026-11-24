@@ -3240,6 +3240,121 @@ def qc_cube_kstar(logex, log_target):
     return len(logex)
 
 
+@conjecture("XI.14 Normal form: with f^d = min_x [f(x) + d(x, .)], sigma(a,y) = d(a,y) + f^d(a) - f^d(y) >= 0 and E^d = f^d + g, min(f + g') = min(f^d + g') on the admissible class, and for every evaluated set A the certified lower bound and the value upper bound of (d, f, g) are the lower bound and the incumbent of the instance (sigma, 0, E^d) without known part; s(a,y) - gap^d(y) = sigma(a,y) - gap^d(a)")
+def t_normal_form(rng, trials):
+    stats = dict(sets=0, instances=0, strict_point_gap=0)
+    for _ in range(max(20, trials // 3)):
+        n, d, kappa, f, g, eps = cg_instance(rng, nmax=7)
+        if rng.random() < 0.5:
+            f = f * float(rng.uniform(1.0, 4.0))          # known parts that are far from d-Lipschitz
+        fd = np.min(f[:, None] + d, axis=0)               # Pasch-Hausdorff envelope f^d(y) = min_x [f(x) + d(x, y)]
+        phi = fd                                          # the potential of the normal form
+        sig = d + phi[:, None] - phi[None, :]
+        Ed = phi + g
+        if sig.min() < -1e-9 or np.max(np.abs(np.diag(sig))) > 1e-12 or not np.all(sig[:, None, :] <= sig[:, :, None] + sig[None, :, :] + 1e-9):
+            return False, dict(reason="the reduced envelope is not a quasi-metric")
+        if np.any(Ed[:, None] - Ed[None, :] > sig + 1e-9):
+            return False, dict(reason="E^d is not admissible for the reduced envelope")
+        for _ in range(6):                                # the minimum is unchanged on the class
+            gp = cg_lipschitz(rng, d, 1.0) + float(rng.normal())
+            if abs(float(np.min(f + gp)) - float(np.min(fd + gp))) > 1e-9:
+                return False, dict(reason="min(f + g') differs from min(f^d + g')")
+        s = cg_slack(d, g)
+        gapd = Ed - float(np.min(Ed))
+        if np.max(np.abs((s - gapd[None, :]) - (sig - gapd[:, None]))) > 1e-9:
+            return False, dict(reason="client form and centre form of the covering relation differ")
+        zero = np.zeros(n)
+        for mask in range(1, 2 ** n):
+            A = [a for a in range(n) if mask >> a & 1]
+            lb, ubval, ubpt, _, _ = cg_bounds(d, f, g, A)
+            lb2, ubval2, ubpt2, _, _ = cg_bounds(sig, zero, Ed, A)
+            if abs(lb - lb2) > 1e-9 or abs(ubval - ubval2) > 1e-9 or abs(ubval - ubpt2) > 1e-9:
+                return False, dict(reason="certified bounds of the normal form differ from those of the instance", lb=lb, lb_nf=lb2,
+                                   value_ub=ubval, value_ub_nf=ubval2, incumbent_nf=ubpt2)
+            stats["sets"] += 1
+            stats["strict_point_gap"] += ubpt > ubval + 1e-9
+        stats["instances"] += 1
+    if stats["strict_point_gap"] == 0:
+        return False, dict(reason="coverage: point and value upper bounds never differed in the original instances")
+    return True, stats
+
+
+def so_class_lp(n, c, A, y, sign=1.0):
+    """max of sign * h(y) over h on {0,1}^n with all mixed second differences in [-c, c] and h = 0 on A (linear programme)."""
+    from scipy.optimize import linprog
+    N = 2 ** n
+    rows, rhs = [], []
+    for i in range(n):
+        for j in range(i + 1, n):
+            for x in range(N):
+                if not (x >> i & 1) and not (x >> j & 1):
+                    r = np.zeros(N)
+                    r[x], r[x | 1 << i], r[x | 1 << j], r[x | 1 << i | 1 << j] = 1.0, -1.0, -1.0, 1.0
+                    rows += [r, -r]
+                    rhs += [c, c]
+    obj = np.zeros(N)
+    obj[y] = -sign
+    res = linprog(obj, A_ub=np.array(rows), b_ub=np.array(rhs), bounds=[(0.0, 0.0) if x in A else (None, None) for x in range(N)],
+                  method="highs")
+    if res.status == 3:
+        return float("inf")                               # A does not pin down the additive part
+    if res.status != 0:
+        raise RuntimeError("second-order class LP failed")
+    return float(-res.fun)
+
+
+@conjecture("XI.15 Dense second-order class on the cube: the dip c * C(r - d_H(x,y), 2)_+ has all mixed second differences in [0, c] up to sign, equals c C(r,2) at its centre and vanishes outside the ball of radius r - 2; hence the largest value at y of a class member vanishing on A is at least c C(d(y,A) + 1, 2), and for a union of stars it is exactly c C(d(y, centres), 2): stars do not combine")
+def t_second_order_dip(rng, trials):
+    stats = dict(dips=0, lp_sets=0, star_unions=0, tight=0)
+    c = 1.0
+    for n in (3, 4, 5, 6):
+        N = 2 ** n
+        pop = np.array([bin(x).count("1") for x in range(N)])
+        for _ in range(4):
+            y = int(rng.integers(N))
+            r = int(rng.integers(0, n + 3))
+            dist = pop[np.arange(N) ^ y]
+            b = c * np.array([math.comb(max(r - int(t), 0), 2) for t in dist], dtype=float)
+            if abs(b[y] - c * math.comb(r, 2)) > 1e-12 or np.any(b[dist >= r - 1] != 0):
+                return False, dict(reason="dip has the wrong centre value or support")
+            for i in range(n):
+                for j in range(i + 1, n):
+                    for x in range(N):
+                        if not (x >> i & 1) and not (x >> j & 1):
+                            m = b[x | 1 << i | 1 << j] - b[x | 1 << i] - b[x | 1 << j] + b[x]
+                            if abs(m) > c + 1e-12:
+                                return False, dict(reason="dip violates the mixed second difference bound", n=n, r=r)
+            stats["dips"] += 1
+    for _ in range(max(6, trials // 10)):                 # the whole class, by linear programming
+        n = int(rng.integers(3, 6))
+        N = 2 ** n
+        pop = np.array([bin(x).count("1") for x in range(N)])
+        a0 = int(rng.integers(N))                         # a star (pins down the additive part) and a few more points
+        A = {a0} | {a0 ^ (1 << i) for i in range(n)} | set(int(a) for a in rng.choice(N, size=int(rng.integers(0, 4)), replace=False))
+        for y in rng.choice(N, size=4, replace=False):
+            y = int(y)
+            if y in A:
+                continue
+            dA = min(int(pop[y ^ a]) for a in A)
+            w = so_class_lp(n, c, A, y)
+            if w < c * math.comb(dA + 1, 2) - 1e-7:
+                return False, dict(reason="uncertainty below the dip bound c C(d+1, 2)", n=n, d=dA, lp=w)
+            stats["lp_sets"] += 1
+            stats["tight"] += abs(w - c * math.comb(dA + 1, 2)) < 1e-7
+        centres = [int(a) for a in rng.choice(N, size=int(rng.integers(1, 3)), replace=False)]
+        A = set(centres) | {a ^ (1 << i) for a in centres for i in range(n)}
+        for y in range(N):
+            if y not in A:
+                d0 = min(int(pop[y ^ a]) for a in centres)
+                w = so_class_lp(n, c, A, y)
+                if abs(w - c * math.comb(d0, 2)) > 1e-7:
+                    return False, dict(reason="union of stars: uncertainty differs from c C(d(y, centres), 2)", n=n, d=d0, lp=w)
+                stats["star_unions"] += 1
+    if stats["lp_sets"] == 0 or stats["tight"] == 0 or stats["star_unions"] == 0:
+        return False, dict(reason="coverage: no linear programme, no tight case or no union of stars", **stats)
+    return True, stats
+
+
 @conjecture("XII.1 Dips: a dip of depth c at y is admissible, differs from g exactly on the open slack ball {a : s(a,y) < c}, lowers the minimum by at least eps' at depth gap(y)+eps', and multiplies Z by E_pi exp(beta (c - s(.,y))_+) >= exp(beta c - softgap(y)), with 0 <= softgap(y) <= -ln pi(y)")
 def t_dips(rng, trials):
     stats = dict(dips=0)
@@ -4282,6 +4397,32 @@ def t_dead_dips_extremal_on_products(rng, trials):
         return False, dict(reason="dips centred at boxes are exponentially harder to hit than single dips",
                            log_ratio_8_states_n1000=box8 - dip8, log_ratio_4_states_n20000=box4 - dip4,
                            exponents_8=(limits[0], limits[1]), exponents_4=(limits[2], limits[3]))
+    return True, {}
+
+
+@conjecture("DEAD.17 On the line best-first search needs at most 4 N_point + 1 evaluations also when there is a known part (the one-dimensional theorem of Hansen-Jaumard-Lu extends)", expect_fail=True)
+def t_dead_line_known_part(rng, trials):
+    """Refuted (workstream C, Proposition C5; family B' of its reviewer).  Points x* = -D, the hub c = 0, a grid
+    t_j = j h to the right of the hub and one far point y0; known part f(x*) = D, f(0) = G, f(t) = G + (1 - eta) t,
+    residual g = -|x| (extremal), eps = 0.01 G.  {x*, c, y0} is a point certificate, but best-first search, started at
+    the minimiser of the known part, walks back from the far end in steps of length D: about 1.3 / eta evaluations."""
+    eta, G = 0.05, 1.0
+    D, eps = 0.75 * G, 0.01 * G
+    h = D / 8
+    M = int(round(0.98 * G / eta / h))
+    X = np.array([-D, 0.0] + [j * h for j in range(1, M + 1)] + [-D - 2 * G])
+    f = np.array([D, G] + [G + (1 - eta) * j * h for j in range(1, M + 1)] + [D + 1.4 * G])
+    g = -np.abs(X)
+    g[-1] = g[0] + 2 * G
+    d = np.abs(X[:, None] - X[None, :])
+    if np.any(np.abs(g[:, None] - g[None, :]) > d + 1e-12):
+        raise RuntimeError("sanity: residual is not admissible")
+    cert = [0, 1, len(X) - 1]
+    lb, _, ubpt, _, _ = cg_bounds(d, f, g, cert)
+    evaluated = cg_best_first(d, f, g, eps, int(np.argmin(f)))
+    if ubpt - lb <= eps + 1e-12 and len(evaluated) > 4 * len(cert) + 1:
+        return False, dict(reason="best-first search far exceeds 4 N_point + 1 on a line instance with a known part",
+                           certificate_size=len(cert), best_first_evaluations=len(evaluated), eta=eta)
     return True, {}
 
 

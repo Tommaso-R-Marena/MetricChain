@@ -18,7 +18,8 @@ evaluation only.
 | how the program evolved and what is open | [`docs/RESEARCH_LOG.md`](docs/RESEARCH_LOG.md) |
 | what turned out false, weaker, or already known | [`docs/DEAD_ENDS.md`](docs/DEAD_ENDS.md) |
 | the literature checks behind the novelty assessments | [`docs/prior_art/`](docs/prior_art) |
-| the independent referee reports (three so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`docs/reviews/R2_referee_report.md`](docs/reviews/R2_referee_report.md), [`docs/reviews/R3_referee_report.md`](docs/reviews/R3_referee_report.md) |
+| the independent referee reports on the theory report (four so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md) |
+| the independent reviews of the workstream reports | [`docs/reviews/`](docs/reviews) (`R_C_review.md`, `R_D_review.md`, `R_E_review.md`, `R_G_review.md`) |
 | reports of independent exploratory workstreams (as delivered; not part of the theory report unless it says so) | [`docs/workstreams/`](docs/workstreams) |
 
 ## Layout
@@ -41,8 +42,10 @@ proofs/Frontiers/       envelope duality, dominance calculus, free-energy sandwi
                         for every algorithm, deterministic or randomised, two-sided
                         soft-gap bounds for randomised free-energy estimation, the
                         refinements after the third referee report (pair detection, hedged
-                        spot-check, exact-dip bounds on the cube), and generalised dips with
-                        the two-measure sandwich (thresholds beyond the cube)
+                        spot-check, exact-dip bounds on the cube), generalised dips with
+                        the two-measure sandwich (thresholds beyond the cube), the normal
+                        form that absorbs the known part into the envelope, and the
+                        second-order dip (dense second-order classes)
 proofs/CertificateAlgebra.lean   executable verification kernels + Master Soundness Theorems
 proofs/AuditCommand.lean         the axiom walk (by defining module)
 proofs/AxiomAudit.lean           axiom audit of every project constant + non-vacuity witnesses
@@ -122,7 +125,12 @@ accuracy threshold — the value of a single-site game with a second reference m
 threshold of the whole class, for algorithms that are given nothing, is the smallest
 oscillation of a tilted site pressure, for every alphabet (for two-state sites: the largest
 chord gap of the pressure).  The lower bounds and both tensorisations are machine-checked;
-the rest are paper proofs.
+the rest are paper proofs, among them the matching upper bound of the exponent below the
+threshold, which an independent referee checked.  A known part turns out to be nothing but the
+gradient part of an asymmetric envelope (normal form, machine-checked).  Second-order
+structure does not rescue certification when its constants are dense: the uncertainty left by
+any set of evaluations grows quadratically with the distance to it (machine-checked), so the
+price is exponential unless the excitation energies are of the order of `c·n`.
 Minimal certificates are NP-hard to find and best-first search is
 competitive only with covers at shrunk radii.  Under weak second-order coupling, `n(k−1)+1`
 evaluations give an exact reduction to the pairwise kernel.  The one-shot lower bounds (for
@@ -140,11 +148,13 @@ ones), a converse that was not tight, and four statements of scope that were too
 the conjecture this README's previous version relied on for finite-temperature exponents
 beyond the cube — single dips are not the extremal perturbations on product landscapes with
 three or more states per site (D38) — and supplied what replaces it (theory report Theorems
-11.27–11.28).  Their further results (an exact exponent claimed for every alphabet; chains as
-known parts; a normal form that absorbs the known part into the envelope; second-order
-classes; continuous spaces) are preserved in `docs/workstreams/` as delivered and are being
-reviewed independently; they are not part of the theory report until verified.  §12 of the
-report says what a publication would still need.
+11.27–11.28).  Every workstream report was then reviewed independently (`docs/reviews/`): no
+headline theorem was found false, several summaries were found stronger than their theorems,
+and what has been integrated so far — the exact exponent beyond the cube, the normal form, the
+theory of dense second-order classes (theory report §§11.10–11.12) — is integrated with the
+reviewers' scope.  Results on chains as known parts, on free energies of second-order classes,
+on continuous spaces and on chain geometry are reviewed but not yet part of the theory report.
+§12 of the report says what a publication would still need.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

@@ -71,7 +71,7 @@
 [         caught] VII.2 M2: sum nodes not charged for the sub-instances they embed (closed form must disagree)
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.1 M1: slack without the residual terms (s = d)
-                  exit=1  1 TEST(S) MISBEHAVED
+                  exit=1  2 TEST(S) MISBEHAVED
 [         caught] XI.1 M2: claim N* <= N_cov (the extra evaluation of a minimiser dropped)
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.2 M1: partition-function bound with the smallest slack partition sum (min over anchors)
@@ -131,6 +131,18 @@
 [         caught] DEAD.9 M1: product reference with the same marginals (the true statement III.3) -> must be flagged UNEXPECTEDLY SURVIVED
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.6 M1: comparison with covers at the shrunk radii (the true statement XI.4) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.14 M1: normal form built from the known part itself instead of its Pasch-Hausdorff envelope
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.14 M2: client form compared with the transposed centre form
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.15 M1: dip bound claimed one step larger, c C(d + 2, 2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.15 M2: stars claimed to combine (uncertainty c C(d - 1, 2) for unions of stars)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.15 M3: dip profile with the wrong support (vanishing only from distance r + 1 on)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.17 M1: a steep known part (eta = 0.9: the grid right of the hub is short) -> must be flagged UNEXPECTEDLY SURVIVED
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XII.1 M1: dip built from the transposed envelope (d(y, a) instead of d(a, y))
                   exit=1  1 TEST(S) MISBEHAVED
@@ -207,4 +219,4 @@
 [         caught] DEAD.14 M1: a deeper perturbation scale (beta = 3: single local dips are sensitive) -> must be flagged UNEXPECTEDLY SURVIVED
                   exit=1  1 TEST(S) MISBEHAVED
 
-104 mutations: 103 caught, 1 expected pass, 0 not as expected
+110 mutations: 109 caught, 1 expected pass, 0 not as expected

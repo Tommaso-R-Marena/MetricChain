@@ -275,6 +275,26 @@ MUTS["XI"] = [
        "    ncov = cg_min_cover(cg_slack(d, g) <= 0.25 * ((f - f.min())[None, :] + 0.1 / 6) + 1e-12)")], "DEAD.6"),
 ]
 
+MUTS["XI9"] = [
+    ("XI.14 M1: normal form built from the known part itself instead of its Pasch-Hausdorff envelope",
+     [("        phi = fd                                          # the potential of the normal form", "        phi = f")], "XI.14"),
+    ("XI.14 M2: client form compared with the transposed centre form",
+     [("        if np.max(np.abs((s - gapd[None, :]) - (sig - gapd[:, None]))) > 1e-9:",
+       "        if np.max(np.abs((s - gapd[None, :]) - (sig - gapd[None, :]))) > 1e-9:")], "XI.14"),
+    ("XI.15 M1: dip bound claimed one step larger, c C(d + 2, 2)",
+     [("            if w < c * math.comb(dA + 1, 2) - 1e-7:", "            if w < c * math.comb(dA + 2, 2) - 1e-7:")], "XI.15"),
+    ("XI.15 M2: stars claimed to combine (uncertainty c C(d - 1, 2) for unions of stars)",
+     [("                if abs(w - c * math.comb(d0, 2)) > 1e-7:", "                if abs(w - c * math.comb(d0 - 1, 2)) > 1e-7:")], "XI.15"),
+    ("XI.15 M3: dip profile with the wrong support (vanishing only from distance r + 1 on)",
+     [("            b = c * np.array([math.comb(max(r - int(t), 0), 2) for t in dist], dtype=float)",
+       "            b = c * np.array([math.comb(max(r + 2 - int(t), 0), 2) for t in dist], dtype=float)")], "XI.15"),
+]
+
+MUTS["XI9"] += [
+    ("DEAD.17 M1: a steep known part (eta = 0.9: the grid right of the hub is short) -> must be flagged UNEXPECTEDLY SURVIVED",
+     [("    eta, G = 0.05, 1.0\n    D, eps = 0.75 * G, 0.01 * G", "    eta, G = 0.9, 1.0\n    D, eps = 0.75 * G, 0.01 * G")], "DEAD.17"),
+]
+
 MUTS["XII"] = [
     ("XII.1 M1: dip built from the transposed envelope (d(y, a) instead of d(a, y))",
      [("    return np.minimum(g, g[y] - c + d[:, y])", "    return np.minimum(g, g[y] - c + d[y, :])")], "XII.1"),

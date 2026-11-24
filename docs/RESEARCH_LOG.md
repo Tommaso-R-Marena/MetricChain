@@ -680,16 +680,57 @@ worked around, and all computations of this cycle are local.
   `ℓ¹` chain rule, not from RMSD; a zipper bound for contact residuals.  A sixth reviewer is
   reading it.
 
+### Cycle 9, third checkpoint — the reviews of A, C and E acted upon
+
+*Incident.*  During the regeneration for the second checkpoint the container ran out of memory
+(six reviewers, a Lean build and the mutation run at once) and was restarted.  The working
+tree and the scratch files survived; the checkpoint was then audited and pushed (459319d) with
+nothing else running, and the five interrupted reviewers were resumed one or two at a time
+with a memory cap.  Lesson: heavy jobs are now run sequentially.
+
+**Reviews received** (`reviews/`): R4 on workstream A, and the reviews of C, D, E and G.  No
+headline theorem of any workstream was found false; every report had summary sentences
+stronger than its theorems, and each review lists them.
+
+**Integrated in this checkpoint.**
+* *The exact exponent beyond the cube* (Theorem 11.27).  R4 re-derived the whole upper-bound
+  proof of workstream A (inherently typical subsets; the collapse of the auxiliary-variable
+  optimisation to a matrix game) and found no gap; it is now stated as a paper proof checked
+  by one referee.  Its novelty claim was narrowed: the proof is Ahlswede–Zhang's and Yu's, and
+  the fixed-measure theorem used as a black box seems to give the same number; what is new is
+  the evaluation, the lower bound and the application.
+* *Normal form* (§11.11, Theorem 11.29; `NormalForm.lean`; harness XI.14).  A known part is the
+  gradient part of an asymmetric envelope: value certificates of `(d, f, g)` are exactly the
+  point certificates of `(σ, 0, f^d + g)`.  The workstream had the algebraic core in Lean and the
+  identification of certificates on paper; the identification is now machine-checked as well
+  (it compiled at the first attempt, after the reviewer's exhaustive tests had confirmed the
+  statement).  With it: a centre-form bound for best-first search that covers `κ = 1`
+  (Proposition 11.30, with the reviewer's observation that its hypothesis excludes dominated
+  states), and line instances on which best-first search is unboundedly worse than the
+  smallest certificate (D39, `DEAD.17`: 29 evaluations against 3).
+* *Dense second-order classes* (§11.12, Theorems 11.31–11.32; `SecondOrderDip.lean`; harness
+  XI.15; D40).  The second-order dip `c·C(r − d_H, 2)₊`; the uncertainty after any evaluations is
+  at least `c·C(d+1, 2)`; stars do not combine; covering sandwich; full exponent for constants of
+  order one; mean-field transition at `e/γ = 1/4`; the spider.  This answers §12 item 4 of the
+  previous revision.
+* Prior art added: Hetland (2020) for the covering characterisation and the hardness gadget in
+  metric search; Chierichetti–Dasgupta–Kumar for the quadratic law.
+
+**Reviewed, integration pending**: D (transition for `ln Z` in second-order classes at
+`βc₂n = 4`; torus threshold; Boltzmann averages), G (lever-arm law; growing constants; the RMSD
+envelope used directly).  **Review still running**: B (chains).
+
 ### Resume here (state at the end of cycle 9, second checkpoint)
 
-Verified state: every module under `proofs/` (38 files) builds with zero warnings and is walked
-by the axiom audit; the harness (78 registered tests: 62 that must survive, 16 documented
-refutations) and its mutation tests (104 mutations: 103 caught, one expected pass) pass;
-`scripts/audit_all.sh` exits 0.
+Verified state (third checkpoint): every module under `proofs/` (40 files) builds with zero
+warnings and is walked by the axiom audit (2789 declarations); the harness (81 registered
+tests: 64 that must survive, 17 documented refutations) and its mutation tests (110
+mutations: 109 caught, one expected pass) pass; `scripts/audit_all.sh` exits 0.
 In priority order:
 
-1. **Act on the six reviews** (A's proofs; B, C, D, E, G) as they arrive: integrate what is
-   confirmed, record what is refuted in `DEAD_ENDS.md`, leave the rest marked as claims.
+1. **Integrate the reviewed results of D and G, and B when its review arrives** (A, C and E
+   are done): integrate what is confirmed with the reviewers' scope, record what is refuted
+   in `DEAD_ENDS.md`, leave the rest marked as claims.
    Candidates for theorems of the report, if confirmed: the normal form (C1), the second
    best-first bound (C4), the droplet criterion and the vacuous window for chains (B.1, B.5),
    the second-order dip and its consequences (E, Theorems A–C; D's phase transition), the

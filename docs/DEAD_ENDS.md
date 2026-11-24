@@ -758,7 +758,7 @@ Recorded together because they are the same kind of slip (third referee, M2–M4
   which strengthens lower bounds; continuum mixtures follow by the same pointwise argument but
   are not formalised.
 
-## D38. "On product landscapes single dips are extremal at the exponential scale" — FALSE for sites with three or more states  **[harness: DEAD.16]**
+## D38. "On product landscapes single dips are extremal at the exponential scale" — FALSE in general for sites with three or more states  **[harness: DEAD.16]**
 
 *Conjecture (theory report at 6344bf9, "What is not proved", and §12 item 2(b)).*  At an
 additive instance of a product landscape the randomised exponent of `ln Z` is the dip exponent
@@ -788,5 +788,47 @@ single dip, which is why the zero-temperature theory is a covering theory.
 XII.9–XII.12).  The lower bound with all slack-Lipschitz centre functions, machine-checked on
 every instance; on product landscapes the single-letter bound `R^gen_β`, a game over the vertices
 of the Lipschitz polytope of a site; and the threshold `min_Q max_Φ[βE_QΦ − Λ(Φ)]`, which is
-sharp at every additive instance.  Whether `R^gen_β` is the exact exponent is claimed by the
-workstream and under independent review.
+sharp at every additive instance.  That `R^gen_β` is the exact exponent at additive instances
+of identical sites is a paper proof of the workstream that an independent referee checked
+without finding a gap (`reviews/R4_referee_report.md`); the conjecture therefore holds for all
+two-state sites, and it also holds on some sites with more states (the flat three-state site).
+
+## D39. "Best-first search is within a constant factor of the smallest certificate on the line, also with a known part" — FALSE  **[harness: DEAD.17]**
+
+*Claim (implicit in theory report §11.5 at 6344bf9, which left open whether the one-dimensional
+theorem of Hansen–Jaumard–Lu, `n_PY ≤ 4n_B + 1`, survives a known part; D30 had shown only that
+the comparison class of Theorem 11.11 degenerates).*
+
+*Refutation (workstream C, Proposition C5; family B′ of its reviewer; recomputed in the
+harness).*  Points `x* = −D`, a hub `c = 0`, a grid to the right of the hub, known part
+`f(0) = G`, `f(t) = G + (1−η)t`.  With zero residual and `f(x*) = 0`, `{x*, c}` is a certificate and
+best-first search makes `4, 5, 6, 6, 7, 8` evaluations for `η = 0.2, …, 0.00625` (`11` at
+`η = 1/1280`); with the extremal residual `g = −|x|` and one further point it makes
+`9, 16, 29, 55, 107, 212` against a certificate of three.  In normal form the half-line right of
+the hub has cost density `η` in one direction and `2 − η` in the other: the hub almost
+dominates everything to its right, but the lower bound is lowest at the far end.
+
+*What survives.*  Theorem 11.11 and Proposition 11.30 (both consistent with the families).  The
+growth laws `log₂(1/η)` and `1.3/η` are computed, not proved.  One overstatement of the
+workstream report was corrected by its reviewer: without the extra point, the second family is
+solved in two evaluations by a search that starts at a centre of the reduced envelope.
+
+## D40. Three hopes for dense second-order classes — FALSE  **[Lean] [harness: XI.15]**
+
+Recorded together; all three were live in theory report §12 item 4 and blueprint §6.6 before
+workstream E (theory report §11.12).
+
+* *"A cleverer evaluation set than stars (covering arrays, codes, random sets) determines the
+  residual up to `O(c)`."*  For every evaluated set the uncertainty at Hamming distance `d` is at
+  least `c·C(d+1, 2)` (`SecondOrderDip.dip_witness`).  With polynomially many evaluations it is
+  `(1 − o(1))·c·n²/8` somewhere.
+* *"Several stars combine."*  A union of stars gives exactly the best single-star bound
+  (`SecondOrderDip.stars_do_not_combine`): the information is combined by a minimum, as in the
+  first-order class.
+* *"The star is the right `n+1` evaluations."*  A balanced three-legged spider certifies for
+  `e ≥ c·n/3`, the star only for `e ≥ c(n−1)/2`.
+
+Also corrected by the reviewer in the workstream's own report: "all but a `2^{−Θ(√n log n)}`
+fraction of the cube must be evaluated" (that is the fraction that *is* evaluated; the exponent
+is full), and "`N₂` is the algorithmic cost" (true up to `+1` only).
+

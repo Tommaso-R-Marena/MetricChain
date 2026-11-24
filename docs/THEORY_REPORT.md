@@ -1092,9 +1092,9 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   worst-case statements over the instances of a class.  At finite temperature, beyond the
   uniform cube, single dips are not the extremal perturbations when sites have three or more
   states (D38), so the dip exponent `R^rand_β` and its threshold `ε₁^crit` are lower bounds only;
-  the generalised exponent `R^gen_β` of Theorem 11.27 is a lower bound whose tightness is claimed
-  but not refereed; the thresholds of Theorem 11.28 are proved for identical sites at additive
-  instances.
+  the generalised exponent `R^gen_β` of Theorem 11.27 is a machine-checked lower bound whose
+  tightness rests on a paper proof checked by one referee; the thresholds of Theorem 11.28 are
+  proved for identical sites at additive instances.
   "Every randomised algorithm" means every finite mixture of the abstract deterministic
   algorithms of `QueryLowerBound.lean`.
 * **Evaluations are counted, not computation.**  §11 counts residual evaluations; by §11.10 the
@@ -1168,6 +1168,8 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/SoftGapBounds.lean` | `softGap_le_add_slack`, `detection_weight_ge`, `gibbs_weight_ne_ge`, `dipWeight`, `thermalSampler`, `thermal_spotCheck_correct`, `exists_thermal_spotCheck_sample_size`, `sum_dipWeight_eq`, `cube_deterministic_lower_bound`, `cube_dipWeight_sum`, `softGap_hamEnv_additive`, `thermal_product_randomized` |
 | `proofs/Frontiers/QueryRefinements.lean` | `exists_query_ne_pair`, `prob_query_ne_pair`, `hedgedSpotCheck`, `hedgedSpotCheck_correct`, `hedged_window_up`, `min_hedgedSpotCheck_correct`, `cube_one_point_dip`, `cube_small_accuracy_randomized`, `cube_exact_randomized`, `thermal_exact_dip_randomized`, `cube_exact_dip_randomized`, `Referee3.pathoAlg_not_a_tree`, `Referee3.packing_factor_attained` (lemmas of the third referee, and the exact-dip bounds) |
 | `proofs/Frontiers/GeneralisedDips.lean` | `genDip`, `genDip_admissible`, `genDip_ne_imp_lt`, `dip_eq_genDip`, `slack_lipschitz`, `softGapOf`, `softGap_eq_softGapOf`, `sum_exp_genDip`, `log_sum_exp_genDip_ge`, `genDip_sensitive`, `genDip_expected_queries_ge`, `genDip_expected_queries_ge_exp_weights`, `genDip_recovers_dips`, `TwoMeasureBound`, `twoMeasureBound_prod`, `twoMeasureBound_pow`, `mass_ge_of_twoMeasureBound`, `product_mass_ge`, `sumSig_lipschitz`, `genDip_product_effect`, `detect_weight_le`, `TwoMeasureLower`, `twoMeasureLower_prod`, `twoMeasureLower_pow`, `product_sandwich` (generalised dips; the two-measure sandwich and its mirror image; after workstream A) |
+| `proofs/Frontiers/NormalForm.lean` | `reduce`, `reduce_isEnvelope`, `admissible_reduce_iff`, `slack_reduce`, `lowerEnv_reduce`, `upperEnv_reduce`, `phEnv`, `inf_add_phEnv_eq`, `reduce_phEnv_nonneg`, `certLB_normalForm`, `valueUB_normalForm`, `certUB_normalForm`, `isValueCertificate_iff_normalForm`, `isValueCertificate_normalForm_iff`, `client_eq_centre`, `gap_slack_lipschitz`, `not_cocovered_centre` (normal form; after workstream C) |
+| `proofs/Frontiers/SecondOrderDip.lean` | `SecondOrderDip.dip`, `SecondOrderDip.dip_mixedDiffBound`, `SecondOrderDip.dip_center`, `SecondOrderDip.dip_eq_zero`, `SecondOrderDip.dip_witness`, `SecondOrderDip.star_upper`, `SecondOrderDip.stars_do_not_combine` (dense second-order classes; from workstream E's scratch files) |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -1200,14 +1202,16 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G2 | **Conditional envelope** `D_A(x,y) = min(d(x,y), U(x) − L(y))`: exact supremum of `g(x) − g(y)` over consistent residuals; anchored sharp-minimum theorem; worst-case regret | `condEnv_isGreatest`, `robust_certified_with_anchors_iff`, `worst_case_regret_isGreatest` **[V]** | **known** (minimal simple temporal network); stated for completeness |
 | G3 | **Dual lower bounds** on certificate size: LP weights, forced points, fooling sets, volume, and the exponential-weights bound `e^{−tε} Σ_y v(y) ≤ \|A\| · max_a Σ_y v(y) e^{−t(s(a,y) − gap(y))}` | `card_ge_of_weights`, `card_ge_of_fooling`, `card_ge_sum_inv`, `card_ge_exp_weights`, `partition_bound` **[V]** | tools **known** (covering LP; Csiszár's dual bound on rate–distortion); the use for certificate size: no match found |
 | G4 | **Dichotomy and exact exponent on product landscapes**: one evaluation suffices iff every site is sharp; otherwise the minimal certificate grows like `exp(n R*)`, `R* = max_P R(P; s − gap, 0)` | `product_single_certificate_iff`, `product_exp_weights`, `binary_certificate_exponential` **[V]** (lower bound, every `n`); upper bound **[P]** (type covering) | **no match found**; an application of the type covering lemma |
-| G5 | **Hardness**: minimal exact certificates contain minimum dominating sets | `domCertificate_card`, `domCertificate_min_card` **[V]** | immediate; known in spirit (k-center) |
+| G5 | **Hardness**: minimal exact certificates contain minimum dominating sets | `domCertificate_card`, `domCertificate_min_card` **[V]** | **known** for metric search with the same 0/1/2-distance gadget (Hetland 2020; found by workstream C); immediate |
 | G6 | **Best-first search with resource augmentation**: at most `\|C\| + 1` evaluations for every cover `C` at radii `θ(gap + ε/6)`, `θ = (1−κ)/(4(1+κ))`; the `+1` is attained | `bestFirst_card_le`, `bestFirst_certifies`, `bestFirst_card_le_sharp` **[V]**; that some augmentation is necessary is shown by the hub family (harness `DEAD.6`), not by a theorem; the constants are not claimed tight | **partially known** (dimension one without augmentation; `ℝ^d` with doubling constants); the dimension-free metric form was not found.  With a known part the comparison class can be unboundedly larger than `N_cov` even on the line (D30) |
 | G7 | **Finite temperature**: thermal contact interval; free-energy certificates are quantizers of the Gibbs ensemble in exponential slack distortion; entropy bound; Hölder exponential-weights converse; exact exponent `R_β = max_Q R(Q; s, (F[Q] − F))` for accuracies that are not exponentially small | `gibbsProb_range_eq`, `mean_slack_le`, `card_ge_entropy`, `thermal_exp_weights`, `thermal_product_exp_weights`, `thermal_binary_exponential` **[V]**; exponent formula **[P]** | contact interval and fixed-`β` duality **known in spirit**; the exponent formula is a corollary of Merhav's (2011) theorem on exponential moments of distortion; the identification of certificate size with it, and the one-shot converses: no match found |
 | G8 | **Second-order envelopes**: with bounded mixed differences, `n(k−1)+1` evaluations on a star give an exact pairwise sandwich; the extremal extensions are pairwise models; certified-minimiser criterion; order `m` in general.  The remainder is quadratic in the Hamming distance, so this is a way out only under weak second-order coupling (D32) | `secondOrder_remainder`, `pairwise_sandwich`, `verify_sound_secondOrder`, `secondOrder_envelope_exact`, `secondOrder_certified_minimizer_iff`, `higherOrder_remainder`, `higherOrder_remainder_sharp` **[V]** | anchored (cut-HDMR) decomposition **known**; as a certified uncertainty class with an exact reduction to the pairwise kernel: no match found |
 | G10 | **Sampled free-energy sandwich**: `N` independent samples of a product reference pin `ln(Z/Z₀)` to `±\|β\|η + β²Σc_i²/8` outside an event of probability `2e^{−2Nη²/Σc_i²}` — polynomially many random evaluations where deterministic certification needs exponentially many | `sample_mean_two_sided`, `sampled_free_energy_sandwich`, `sampled_free_energy_sandwich_of_sample_size` **[V]** | standard concentration (Chernoff bound for a sub-Gaussian mean); stated as the constructive counterpart of G7 |
 | G9 | **Compositional partition kernel**: cut rule and elimination rule (exact on every chain, with one leaf), with exponential separations from the elementary rules for every chain length — for certificates whose lower end is exact, and relative to the given representation of the instance (D33) | `zverify2_sound`, `WInstance.Z_cut`, `cut_rule_separation`, `WInstance.Z_elim1`, `WInstance.Z_elim2`, `zverify2Top_chainCert`, `chain_separation`, `ferroChain_separation` **[V]** | repair of the kernel; variable elimination is classical; the separation is the formal counterpart of E2 at finite temperature |
 | G11 | **Query complexity of every algorithm**: sensitive alternatives must be detected (any class, any functional; deterministic and randomised), with a hedged spot-check converse; for the minimum, the instance-wise deterministic complexity *equals* the size of a value certificate, and every randomised algorithm (finite mixture) pays `(1−2δ)` times each fractional covering bound — attained by the hedged spot-check up to `ln(1/δ)`; for `ln Z`, a soft-gap radius for every algorithm and an upper bound for randomised ones in the same quantity, a lower bound on the randomised exponent with an upper bound in the same quantity, a machine-checked exponential gap between deterministic and randomised cost at the zero residual of the cube, and there a sharp worst-case accuracy threshold and the exponent in every accuracy regime | `exists_query_ne`, `prob_query_ne_ge`, `expected_queries_ge_packing`, `spotCheck_correct`, `instance_query_complexity`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `thermal_queries_strict_cover`, `thermal_queries_bracket`, `thermal_expected_queries_ge`, `thermal_product_randomized`, `cube_thermal_randomized_bound`, `detection_weight_ge`, `thermal_spotCheck_correct`, `cube_deterministic_lower_bound`, `exists_query_ne_pair`, `hedgedSpotCheck_correct`, `min_hedgedSpotCheck_correct`, `thermal_exact_dip_randomized`, `cube_exact_dip_randomized` **[V]**; single-letter forms and the upper bounds on the cube **[P + K]** | method **known** (radius of information; instance complexity; fractional block sensitivity as a bound on randomised query complexity); that randomisation helps for `ln Z` only above an accuracy scale is **known** for smoothness classes (Holzmüller–Bach 2025, §2.2); the instance-wise randomised bound with gap radii, the soft gap, and the exact threshold and accuracy diagram on the cube: not found |
-| G12 | **Beyond the cube at finite temperature**: every slack-Lipschitz function is the centre of an admissible perturbation that must be detected (generalised dips), with a single-letter lower bound on product landscapes that is a game over the vertices of the Lipschitz polytope of a site — single dips are not extremal for three or more states; a two-reference sandwich that tensorises, the sharp accuracy threshold of every additive instance, and the worst-case threshold of the whole class without a hint, for every alphabet (the smallest oscillation of the tilted site pressure; for two-state sites the largest chord gap of the pressure) | `genDip_admissible`, `log_sum_exp_genDip_ge`, `genDip_expected_queries_ge_exp_weights`, `twoMeasureBound_pow`, `twoMeasureLower_pow`, `product_sandwich`, `product_mass_ge`, `detect_weight_le` **[V]**; product assembly, thresholds, the minimax identity and the algorithmic reading **[P]**; the matching upper bound of the exponent: claimed by workstream A, **not refereed** | found by independent workstreams (A, B; D confirms) and, for the hint-free threshold of general alphabets, in their synthesis; tools **known** (Chernoff and packing; tensorisation of exponential-moment inequalities; for the claimed upper bound: inherently typical subsets, Ahlswede–Yang–Zhang; isoperimetric exponents of two product measures, Ahlswede–Zhang, Yu — not read by us); the statements themselves were not found |
+| G12 | **Beyond the cube at finite temperature**: every slack-Lipschitz function is the centre of an admissible perturbation that must be detected (generalised dips), with a single-letter lower bound on product landscapes that is a game over the vertices of the Lipschitz polytope of a site — single dips are not extremal for three or more states; a two-reference sandwich that tensorises, the sharp accuracy threshold of every additive instance, and the worst-case threshold of the whole class without a hint, for every alphabet (the smallest oscillation of the tilted site pressure; for two-state sites the largest chord gap of the pressure) | `genDip_admissible`, `log_sum_exp_genDip_ge`, `genDip_expected_queries_ge_exp_weights`, `twoMeasureBound_pow`, `twoMeasureLower_pow`, `product_sandwich`, `product_mass_ge`, `detect_weight_le` **[V]**; product assembly, thresholds, the minimax identity and the algorithmic reading **[P]**; the matching upper bound of the exponent **[P]**, checked by an independent referee (R4) | found by independent workstreams (A, B; D confirms) and, for the hint-free threshold of general alphabets, in their synthesis; tools **known** (Chernoff and packing; tensorisation of exponential-moment inequalities; for the upper bound of the exponent: inherently typical subsets, Ahlswede–Yang–Zhang; isoperimetric exponents of two product measures, Ahlswede–Zhang, Yu — read by the referee); the upper bound of the exponent is a new statement with a known proof, and may follow from the fixed-measure theorem used as a black box; its evaluation as a matrix game, the lower bound, the thresholds and the application were not found |
+| G13 | **Normal form**: a known part is the gradient part of an asymmetric envelope — value certificates of `(d, f, g)` are exactly the point certificates of `(σ, 0, f^d + g)`, `σ` the reduced cost of `d` under the Pasch–Hausdorff envelope `f^d`; a centre-form bound for best-first search valid for every admissible residual; best-first search is unboundedly worse than the smallest certificate on the line once there is a known part | `isValueCertificate_iff_normalForm`, `inf_add_phEnv_eq`, `certUB_normalForm`, `client_eq_centre`, `not_cocovered_centre` **[V]**; the search bound **[P]**; the line families computed | workstream C, verified by its reviewer; elementary (Johnson reweighting, min-plus adjointness); the packaging for certification apparently new; for `f ≡ 0`, symmetric `d` the covering characterisation and the hardness gadget are **known** (Hetland 2020), and the search bound is the known packing argument |
+| G14 | **Dense second-order classes**: a second-order dip; the uncertainty after any evaluations is at least `c·C(d+1, 2)` at Hamming distance `d` from the evaluated set; unions of stars give exactly the best single-star bound; covering sandwich for the certificate size; full exponent for constants of order one, a rate–distortion exponent with a square-root budget and a transition at `e/γ = 1/4` for mean-field constants; a three-legged spider beats the star | `SecondOrderDip.dip_mixedDiffBound`, `SecondOrderDip.dip_witness`, `SecondOrderDip.stars_do_not_combine` **[V]**; sandwich, asymptotics, spider **[P]**, verified by a reviewer with linear programmes over the whole class | workstream E (D found the dips independently); the `Θ(n²)` law is **known** for approximate modularity (Chierichetti–Dasgupta–Kumar 2020); the covering sandwich, the non-combination of stars and the spider were not found |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -1224,7 +1228,9 @@ from exponential worst-case cost, with the exponent at the zero residual in ever
 regime (G11); (v) the extension beyond the cube (G12): the right family of perturbations
 (generalised dips), the instance-wise threshold as the value of a single-site game with a
 second reference measure, and the hint-free threshold of a product class as the smallest
-oscillation of a tilted site pressure.
+oscillation of a tilted site pressure; (vi) the normal form (G13), which shows that the known
+part was never a separate ingredient, and the covering sandwich for dense second-order classes
+(G14), which closes the "way out" of §11.7 for constants of order one.
 Each rests on textbook tools (type covering, Hölder, telescoping, linear-programming duality);
 the proofs are short.  The second referee's verdict on G1–G10 — "a coherent note, not a
 theorem-driven paper" — is reproduced in §12 together with what a publication would still
@@ -1531,6 +1537,9 @@ on random instances (benchmark B9) best-first search uses about `3.0` evaluation
 smallest cover of `2.0`–`2.4`, exceeding `N_cov + 1` in `3`–`13 %` of the runs, while the shrunk
 covers it is compared with have `8`–`10` points; on the hub family it evaluates every leaf
 (`17` evaluations against a certificate of `2`).  Harness XI.4 (with the hub family), `DEAD.6`.
+A second bound, with the radius attached to the centre and valid for every admissible
+residual, and line instances on which the search is unboundedly worse than the smallest
+certificate, are in §11.11.
 
 ### 11.6 Finite temperature
 
@@ -1753,7 +1762,9 @@ measured excitation energies): `n(k−1)+1` evaluations determine the additive p
 remainder is a pairwise function, and certification returns to the pairwise kernel, whose own
 cost is governed by the proof-complexity results of §6.  Away from that regime the star is
 re-centred at the incumbent — a trust-region scheme without a guarantee of termination by
-itself (blueprint §6.6).
+itself (blueprint §6.6).  What dense constants cost, exactly, is the subject of §11.12: no set
+of evaluations escapes the quadratic law, the price is exponential unless the excitation
+energies are of the order of `c·n`, and the star is not the best choice of `n+1` evaluations.
 
 ### 11.8 A partition-function kernel with decomposition rules
 
@@ -2267,23 +2278,36 @@ flat `k`-state site (`π` uniform, `u = βc`)
 is `0.02914` (boxes of pairs) against `0.02841` (dips); for `k = 8`: `0.0309` against `0.0194`; three
 states suffice (energies `(0,0,2)`, `β = c = 1`: `0.0290` against `0.0247`); for flat sites with `k`
 even the ratio tends to `k²/(4(k−1))` as `u → 0` (each term is `≈ u²θ(1−θ)/8`, `θ = m/k`).  **So the conjecture of the previous revision — single dips are
-extremal at the exponential scale on product landscapes — is false** (independent workstream
-A; `DEAD_ENDS.md` D38; harness `DEAD.16`, XII.9, XII.11; benchmark B11, which also gives exact
+extremal at the exponential scale on product landscapes — fails in general for sites with three
+or more states** (independent workstream A; `DEAD_ENDS.md` D38; harness `DEAD.16`, XII.9, XII.11; benchmark B11, which also gives exact
 binomial tails at `n = 20000`).  The flat three-state site is not a counterexample, and
 numerically the gap closes as `β → ∞`: at zero temperature a sensitive perturbation contains a
 sensitive single dip, which is why the zero-temperature theory is a covering theory.
 
-*Is `R^gen_β` the exponent?*  Workstream A (`workstreams/A_REPORT.md`, Theorem A) claims that it
-is: for identical sites, an additive instance, `ε_n/n → ε₁` and `ln(1/ε_n) = o(n)`, the sampler
+*`R^gen_β` is the exponent* **[P; proof checked by an independent referee, not machine-checked]**
+(workstream A, Theorem A; `reviews/R4_referee_report.md`).  For identical sites, an additive
+instance, `ε_n/n → ε₁` and `ln(1/ε_n) = o(n)`, the sampler
 `½πⁿ + ½·(uniform mixture over the type classes)` hits every sensitive set with probability
-`e^{−nR^gen − o(n)}`, by the method of inherently typical subsets (Ahlswede–Yang–Zhang) and a
-collapse of the auxiliary-variable optimisation to the matrix game above; it also shows that no
-product sampler attains the exponent on biased sites.  **This is a paper proof that has not yet
-been refereed**; an independent review is in progress, and until it is done the statement is
-a claim.  Its consequence for two-state sites would be that single dips *are* extremal there,
-i.e. that `R^rand_β` is the exact randomised exponent of the examples of Theorem 11.24.  What we
-have verified ourselves: the single-letter values (harness XII.11, benchmark B11) and the
-lower bound.
+`e^{−nR^gen − o(n)}`; with the hedged spot-check of Theorem 11.22(e) the least expected number of
+evaluations at the instance is therefore `exp(nR^gen_β(ε₁) + o(n))` — with the instance as a
+hint, or after `n(k−1)+1` further evaluations on a star.  The proof is the method of inherently
+typical subsets (a variant of the lemma of Ahlswede–Yang–Zhang, proved in the workstream
+report) and of Ahlswede–Zhang and Yu for the isoperimetric exponent of two fixed product
+measures, with the reference law chosen after the set; the referee re-derived every step,
+found no gap (two terse passages around Sion's theorem, repaired in its report), and confirmed
+the two finite-`n` identities and the single-letter optimisation with independent code.  What
+is new is not the isoperimetric statement — used as a black box with a reference law that
+depends on the measure exponent of the set, the fixed-measure theorem gives a bound that
+coincides numerically with `R^gen_β` on the biased binary examples the referee computed — but its
+evaluation as a matrix game over the Lipschitz vertices (which uses that for `t ≤ β` a maximum
+over the Lipschitz polytope is attained at a vertex), the lower bound for every `n`, and the
+application.  Consequences: single dips *are* extremal at the exponential scale for two-state
+sites, so the values of `R^rand_β` quoted after Theorem 11.24 are exact exponents; no product
+sampler attains the exponent on a biased site (`0.1655` against `0.1541` for `e/c = 1/2`, `β = 4`);
+on flat sites the crossover below which boxes beat dips is `u_c(k) = ln C(k−1, 2)`, and the ratio
+of the exponents tends to `(k+1)/4` for odd `k`.  The statement needs every one of its
+hypotheses: identical sites, an additive instance, an accuracy that is not exponentially small,
+a fixed error probability, and the hedge.
 
 **Theorem 11.28 (the two-reference sandwich, and thresholds beyond the cube) [V core; P].**
 (a) **[V]** *Tensorisation with two measures* (`twoMeasureBound_prod`, `twoMeasureBound_pow`).
@@ -2442,6 +2466,159 @@ threshold and accuracy diagram of Theorem 11.25 (the corner of the Holzmüller�
 which the dimension grows and no approximation of the residual is affordable).  The proofs are
 short.
 
+### 11.11 A normal form: the known part is the gradient part of an asymmetric envelope
+
+Found by workstream C and confirmed in full by its independent reviewer (`workstreams/C_REPORT.md`,
+Theorem C1; `reviews/R_C_review.md`: all parts re-derived, exhaustive exact tests on 5100
+instances and 216 300 evaluated sets).
+
+**Theorem 11.29 (normal form) [V] (`NormalForm.lean`).**  For a potential `φ` let
+`d^φ(a,y) = d(a,y) + φ(a) − φ(y)` be the *reduced cost* of the envelope (Johnson reweighting).
+(a) *Gauge.*  `d^φ` is an envelope, `g` is admissible for `d` iff `φ + g` is admissible for `d^φ`,
+and the slack and both McShane envelopes are gauge covariant (`reduce_isEnvelope`,
+`admissible_reduce_iff`, `slack_reduce`, `lowerEnv_reduce`, `upperEnv_reduce`).
+(b) *Regularisation.*  Let `f^d(y) = min_x [f(x) + d(x,y)]` be the Pasch–Hausdorff envelope of
+the known part (§2.3).  Then `min(f + g') = min(f^d + g')` for **every** admissible `g'`
+(`inf_add_phEnv_eq`), and `σ := d^{f^d} ≥ 0` is a quasi-metric (`reduce_phEnv_nonneg`).
+(c) *Certificates.*  Put `E^d = f^d + g`.  For every evaluated set `A` the certified lower bound
+of `(d, f, g)` is the certified lower bound of the instance `(σ, 0, E^d)` without known part, and
+its value upper bound `min(f + U_A)` is both the value upper bound and the *incumbent*
+`min_A E^d` of that instance (`certLB_normalForm`, `valueUB_normalForm`, `certUB_normalForm`).
+Hence
+
+    A is a value ε-certificate of (d, f, g)   ⟺   A is a point ε-certificate of (σ, 0, E^d)
+
+(`isValueCertificate_iff_normalForm`), and in normal form value and point certificates coincide
+(`isValueCertificate_normalForm_iff`).
+(d) *Centre form.*  With `gap^d = E^d − E*`: `s(a,y) − gap^d(y) = σ(a,y) − gap^d(a)`
+(`client_eq_centre`), so the covering relation can be read with the radius attached to the
+evaluated point, `σ(a,y) ≤ gap^d(a) + ε`; and `gap^d` is 1-Lipschitz for the slack
+(`gap_slack_lipschitz`), which the gap of the original instance is not.
+
+So an instance with a known part *is* an instance without one, in an envelope whose
+antisymmetric part is the gradient of the regularised known part: for symmetric `d`,
+`σ(a,y) − σ(y,a) = 2(f^d(a) − f^d(y))`.  In the framework of this report, whose envelopes are not
+assumed symmetric, "`f ≡ 0`" is without loss of generality for minima and for certificates (not
+for free energies: `ln Z` is not invariant under the regularisation).  The mathematics is
+elementary — Johnson's reweighting and the adjointness `min(f⊗d + g) = min(f + d⊗g)` of the
+min-plus product, with `d⊗g = g` on the class; the reviewer judged the packaging new for this
+problem.  Harness XI.14 (all evaluated sets of random instances, including asymmetric envelopes
+and known parts that are far from Lipschitz).
+
+**Proposition 11.30 (best-first search in centre form) [P; separation lemma V].**  (Workstream C,
+Theorem C4, with the scope found by its reviewer.)  Suppose the reduced envelope is
+quasi-symmetric, `σ(x,y) ≤ ρ σ(y,x)` for all `x, y` — which forces `f = f^d` (no state is dominated
+in the known part) and, for symmetric `d`, `f` Lipschitz with constant `(ρ−1)/(ρ+1) < 1`.  Then
+for **every** admissible residual, also at `κ = 1`, where Theorem 11.11 says nothing, best-first
+search makes at most `|C|` evaluations for every set `C` such that
+
+    ∀y ∃c ∈ C:   σ(c, y) ≤ θ (gap^d(c) + ε),        θ = 1/(2ρ+3)
+
+(two evaluated points cannot share a centre: `not_cocovered_centre`).  For `f ≡ 0` and symmetric
+`d` these are the balls `B(c, (gap(c) + ε)/5)`; this case is the packing argument known for
+Piyavskii–Shubert search (Bouttier et al.; Bachoc et al.), and for `κ ≥ 1/3` it implies Theorem
+11.11 without its `+1`.  The constant is nearly tight (violations at `1.2θ` under adversarial
+tie-breaking, none found at `1.1θ`).  The hypothesis fails as soon as one state is dominated in
+the known part — one sharp site of a product, one dead-end-elimination pair — and then only
+Theorem 11.11 is available.
+
+*What search cannot do, even on the line* (`DEAD_ENDS.md` D39; harness `DEAD.17`).  With `f ≡ 0`
+on an interval, Hansen–Jaumard–Lu's theorem bounds Piyavskii–Shubert search by `4n_B + 1`.  With
+a known part there is no such bound.  Points `x* = −D`, a hub `c = 0`, a grid to the right of the
+hub, `f(x*) = 0`, `f(0) = G`, `f(t) = G + (1−η)t`, zero residual: `{x*, c}` is a certificate, and
+best-first search makes `4, 5, 6, 6, 7, 8` evaluations for `η = 0.2, …, 0.00625` and `11` at
+`η = 1/1280` — the lower bound is lowest at the far end, and the search halves its distance to
+the hub at each step.  With the extremal residual `g = −|x|` (and one further point, so that the
+conclusion does not depend on the starting rule) it makes `9, 16, 29, 55, 107, 212` evaluations
+against a certificate of three points, about `1.3/η`.  These growth laws are computed, not
+proved.  In the Dechter–Pearl classification of best-first strategies the situation is that of
+an admissible but inconsistent heuristic: best-first search started at a centre of the reduced
+envelope, with the value stopping rule, is not strictly dominated by any sequential correct
+algorithm (their "type 3"), no algorithm is optimal in the stronger "type 2" sense, and
+neither notion bounds the number of evaluations (workstream C, Theorem C3; the plain
+best-first search of Theorem 11.11 *can* be strictly dominated).
+
+*Prior art for §§11.2–11.5 found by this workstream.*  Hetland (2020), "Optimal metric search is
+equivalent to the minimum dominating set problem": for metric range search — symmetric `d`, no
+known part, exact queries — it has the dominating-set characterisation of the smallest query
+set, the 0/1/2-distance gadget of Theorem 11.10 with `(1−ε) ln n` inapproximability, and an
+informal adversary argument for Theorem 11.23(a).  Not there: the exchange lemma and the `+1`
+of Theorem 11.5, the accuracy `ε`, a known part, asymmetric envelopes, and everything at finite
+temperature.  The lower McShane envelope is the landmark (ALT) heuristic of Goldberg–Harrelson
+and best-first search is AESA (Vidal) with the maximum in place of the sum.
+
+### 11.12 Dense second-order classes: a quadratic law, and its price
+
+§11.7 showed that under a second-order envelope one star of evaluations reduces certification
+to a pairwise problem, and that with dense constants the remainder is quadratic in the Hamming
+distance (D32); §12 asked whether the cost is then exponential.  It is.  Found by workstream E
+and confirmed by its reviewer (`workstreams/E_REPORT.md`; `reviews/R_E_review.md`: every theorem
+re-derived, linear programmes over the whole class for `n ≤ 6`, 40 050 850 simplices
+re-enumerated for `n = 6`); workstream D found the same droplets independently.
+
+Let `X = {0,1}ⁿ` (the statements hold for `k`-state sites), let the class consist of the residuals
+whose mixed second differences are bounded by a dense constant `c`, and for an evaluated set
+`A` let `w_A(y)` be the largest value at `y` of a class member that vanishes on `A`: the
+uncertainty that remains at `y`.
+
+**Theorem 11.31 (second-order dips; stars do not combine) [V] (`SecondOrderDip.lean`).**
+(a) The function `b_{y,r}(x) = c·C(r − d_H(x,y), 2)₊` belongs to the class, equals `c·C(r, 2)` at `y`
+and vanishes outside the Hamming ball `B(y, r−2)` (`dip_mixedDiffBound`, `dip_center`,
+`dip_eq_zero`).  Hence for **every** evaluated set and every `y`
+
+    w_A(y)  ≥  c·C(d_H(y, A) + 1, 2)
+
+(`dip_witness`): every unevaluated point keeps an uncertainty of at least `c`, and the
+uncertainty grows quadratically with the distance to the evaluated set, whatever was evaluated.
+(b) If `A` is a union of stars with centres `A₀`, then `w_A(y) = c·C(d_H(y, A₀), 2)` exactly
+(`star_upper`, `stars_do_not_combine`): several stars give the best single-star bound and
+nothing more — information from different stars combines by a minimum, as in the first-order
+class.
+
+**Theorem 11.32 (the cost of dense second-order classes) [P; counts verified numerically].**
+Let the true residual be additive, `f` arbitrary, and let `N₂` be the least number of evaluations
+that certify the minimum within `ε`.  With `ρ₋(y) = max{d : c·C(d+1, 2) ≤ gap(y) + ε}`,
+`ρ₊ = ρ₋ + 1`, and `K_∓` the least size of a code that covers every `y` within Hamming distance
+`ρ_∓(y)`:
+
+    K₋  ≤  N₂  ≤  (n+1) K₊ + 1  ≤  (n+1) K₋ + 1
+
+(lower bound: Theorem 11.31(a); upper bound: stars at the code points and one minimiser), and
+every randomised algorithm pays `(1 − 2δ)` times the fractional packing bound of the balls
+`B(y, ρ₋(y))` (Theorem 11.22(c) applied to the dips).  So the covering radius
+`(2·gap/c)^{1/2}` conjectured in §12 is exactly right, and no choice of evaluation set — covering
+arrays, random sets, codes — escapes the quadratic law.  For `f = e|x|` and zero residual:
+(i) *Constants of order one* (`e/c` fixed): `log₂ N₂ = n − Θ(√n log n)`.  The exponent is full;
+second-order information saves only a factor `2^{Θ(√n log n)}`.
+(ii) *Mean-field constants* `c = γ/n`, `λ = e/γ`, `ε = o(n)`:
+
+    lim n⁻¹ ln N₂ = R₂(λ) := max { h(ω) − h(√(2λω)) : √(2λω) ≤ min(ω, 1−ω) },
+
+positive iff `λ < 1/4` (`0.295, 0.078, 0.007` at `λ = 0.02, 0.1, 0.2`) — the rate–distortion
+formula of Theorem 11.9 with a square-root budget; for `λ ≥ 1/4` two opposite stars (`2n+2`
+evaluations) certify.  For bounded mixed differences of order `m` the same holds with
+`(m! λω)^{1/m}` and the threshold `λ ≥ 2^{1−m}/m!`; `m = 1` is Theorem 11.9.
+(iii) *Which `n+1` evaluations?*  Not the star: a balanced three-legged *spider* (three nested
+chains from the reference configuration) certifies iff `e ≥ c·n/3`, the star only for
+`e ≥ c(n−1)/2`; `n/3` is optimal among tree-shaped simplices, and conjecturally among all
+(exhaustive for `n ≤ 6`).
+(iv) *Recovery.*  With polynomially many evaluations the residual is known in sup norm only to
+within `(1 − o(1))·c·n²/8`: a factor four better than one star (two opposite stars), and no more.
+(v) *Sparse constants.*  The class is finite-dimensional, spanned by the monomials of the
+cliques of the coupling graph: the cost is at most the number of cliques and at least
+exponential in the clique number, and one star certifies under a maximum-density condition
+that is weaker than the row-sum condition of §11.7.
+
+Limits of these statements (reviewer): `N₂` is a certificate size, which equals the cost of the
+best instance-tailored algorithm only up to `+1`; the randomised statement is the fractional
+bound, not an exponent; the asymptotics (i), (ii) are paper proofs by type covering, checked by
+exact layer counts up to `n = 2000`.  Prior art: for a one-sided local second-order class
+("approximate modularity") Chierichetti–Dasgupta–Kumar have the `Θ(εn²)` law with the same
+quadratic witness; the covering sandwich, the non-combination of stars and the spider were not
+found there (their reviewer read that literature through summaries only).  Harness XI.15;
+whether second-order structure changes the picture for free energies is the subject of
+workstream D (a transition at the Curie–Weiss coupling `βcn = 4`), which is under review.
+
 ---
 
 ## 12. Strongest unresolved questions, and what a publication would need
@@ -2477,13 +2654,13 @@ short.
    (a) instances that are only approximately additive — the cover computed from the
    interpolant must be robust to the pair remainder;
    (b) **the randomised exponent at finite temperature.**  On the cube at the zero residual
-   it is known in every accuracy regime (Theorem 11.25).  At other additive instances it lies
-   between `R^gen_β(ε₁)` (Theorem 11.27, every `n`) and `min(R_β, U_β)`.  Workstream A claims
-   that `R^gen_β` is attained, by a universal sampler and the method of inherently typical
-   subsets; that proof needs the independent review that is under way and, for a
-   publication, a careful write-up and a reading of the isoperimetric literature for two
-   product measures (Ahlswede–Zhang, Yu).  Sites of several types, non-additive instances
-   and interacting known parts are open;
+   it is known in every accuracy regime (Theorem 11.25).  At additive instances of identical
+   sites it is `R^gen_β(ε₁)` (Theorem 11.27: lower bound for every `n`; upper bound by a paper
+   proof that an independent referee checked).  For a publication the proof needs a careful
+   write-up and a machine check of at least its single-letter part; the relation to the
+   fixed-measure isoperimetric theorem (is the black-box bound always equal to the game
+   value?) is open, as are sites of several types, exponentially small accuracies beyond the
+   cube, non-additive instances and interacting known parts;
    (c) **thresholds.**  Settled for identical independent sites: at additive instances
    (Theorem 11.28(c)) and, without a hint, for the whole class and every alphabet (Theorem
    11.28(d): the smallest oscillation of the tilted site pressure; closed form for two-state
@@ -2502,22 +2679,27 @@ short.
    stochastic log-partition estimation outside the optimisation regime;
    (e) for `f ≡ 0` in doubling spaces, does the resource-augmented bound of Theorem 11.11
    convert into `≤ K·N* + 1` without the `log(1/ε)` of Bachoc et al. (`prior_art/L4`, sketched,
-   unverified)?  With a known part it does not (D30).  For asymmetric envelopes Theorem 11.11
-   needs a quasi-symmetry constant of the slack, which can be arbitrarily bad, and its
-   constants `θ`, `ε/6` are probably not tight.
+   unverified)?  With a known part it does not (D30), and the search itself is unboundedly
+   worse than the smallest certificate even on the line (§11.11, D39).  For asymmetric
+   envelopes Theorem 11.11 needs a quasi-symmetry constant of the slack, which can be
+   arbitrarily bad, and its constants `θ`, `ε/6` are probably not tight; the centre-form bound
+   of Proposition 11.30 covers `κ = 1` but not dominated states.  Is there a search rule with a
+   guarantee against the certificate size on product landscapes (the exponent of best-first
+   search there is only bracketed, workstream C)?
 3. **Complexity classification of the exact criteria** (referee, Q4.1(iv)).  For pairwise `E₀`
    and site-additive `d`, "is configuration `x` possibly optimal" is a pairwise minimisation;
    "is state `r` of site `i` possibly optimal" is an `∃∀` question — is it `Σ₂ᵖ`-hard, and
    polynomial on chains?  On succinct product spaces even *verifying* a certificate is
    coNP-hard in general (covering radius); the kernels avoid this only through explicit
    branch-and-bound certificates.
-4. **Second-order classes.**  Lower bounds on the number of evaluations under dense constants:
-   the whole radius-2 ball leaves quadratic uncertainty (§11.7), so covering arrays of strength
-   two — conjectured to be the right object in the previous version — are not sufficient; is
-   the cost exponential, as the covering radius `(2·gap/c)^{1/2}` suggests?  Re-centring of stars
-   with a termination guarantee; a box-restricted class (constants valid on the current domains
-   only); certified constants `c_ij` for one concrete residual — without which the interface is
-   hypothetical.
+4. **Second-order classes.**  The question of the previous version — is the cost under dense
+   constants exponential, as the covering radius `(2·gap/c)^{1/2}` suggests? — is answered in
+   §11.12: yes, with a covering sandwich, and polynomially many evaluations suffice only when
+   the excitation energy is at least a quarter of `c·n`.  Open: the simplex conjecture (is the
+   three-legged spider the best `n+1` evaluations?); the window `n/4 ≲ e/c < n/3`; the cost for
+   sparse constants beyond the clique bounds; re-centring with a termination guarantee; a
+   box-restricted class; certified constants `c_ij` for one concrete residual — without which
+   the interface is hypothetical.
 5. **Dependent references.**  The exact worst-case free-energy gap for a Markov-chain
    reference: additivity fails in general (D25) but no binary counterexample is known; a
    two-sided bracket from transfer matrices (best additive two-level residual below,
@@ -2640,4 +2822,10 @@ Anchored decompositions: Rabitz & Aliş (1999); Kuo, Sloan, Wasilkowski, Woźnia
 Griebel & Holtz (2010).  Query complexity and isoperimetry (§11.10): Aaronson (2003, randomised
 certificate complexity); Tal (2013); Gilmer, Saks, Srinivasan (2016); Kulkarni & Tal (2016,
 fractional block sensitivity); Nemirovski & Yudin (1983); Harper (1966); Ge, Lee, Lu (2020);
-Chatterjee & Diaconis (2018).
+Chatterjee & Diaconis (2018); Grossman, Komargodski, Naor (2020, instance complexity);
+Holzmüller & Bach (2025); Ahlswede, Yang, Zhang (1997, inherently typical subsets); Ahlswede &
+Zhang (1999); Yu (2024, isoperimetric exponents of product measures).  Search and normal form
+(§11.11): Hetland (2020); Dechter & Pearl (1985); Goldberg & Harrelson (2005); Vidal (1986);
+Johnson (1977).  Second-order classes (§11.12): Chierichetti, Dasgupta, Kumar (2020, approximate
+modularity); Feige, Feldman, Talgam-Cohen (2017).  Verification status of these additions:
+`reviews/R4_referee_report.md`, `R_C_review.md`, `R_E_review.md`.
