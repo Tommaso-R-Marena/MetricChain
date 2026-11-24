@@ -3194,6 +3194,52 @@ def qc_boltzmann_rate(gap, s, t):
     return math.log(float(np.sum(np.exp(-t * gap)))) - math.log(float(np.max(np.sum(np.exp(-t * s), axis=1))))
 
 
+def qc_cube_erosions(n):
+    """For every subset D of the n-cube (bit mask over its 2^n vertices) the sizes of its erosions
+    D_t = {x : dist(x, D^c) > t}, t = 0..n (D_0 = D).  Returns (masks, sizes[len(masks), n + 1])."""
+    N = 2 ** n
+    masks = np.arange(2 ** N, dtype=np.uint64)
+    pc = np.array([bin(i).count("1") for i in range(2 ** N)], dtype=np.int64)
+    sizes = np.zeros((2 ** N, n + 1), dtype=np.int64)
+    cur = masks.copy()
+    for t in range(n + 1):
+        sizes[:, t] = pc[cur.astype(np.int64)]
+        nxt = cur.copy()
+        for i in range(n):
+            m1 = sum(1 << v for v in range(N) if v >> i & 1)
+            m0 = (2 ** N - 1) ^ m1
+            sh = np.uint64(1 << i)
+            nxt &= ((cur & np.uint64(m0)) << sh) | ((cur & np.uint64(m1)) >> sh)   # bit v <- bit of the neighbour v ^ 2^i
+        cur = nxt
+    return masks, sizes
+
+
+def qc_cube_log_excess(n, u):
+    """(logex, logball): logex[k] = ln(e^{Delta_k} - 1), Delta_k the effect on ln Z of the dip of depth c(k+1) at the
+    zero residual of the uniform n-cube, e^{Delta_k} - 1 = 2^{-n} sum_{j <= k} C(n, j)(e^{u(k+1-j)} - 1); logball[k] =
+    ln |B(k)|.  Log domain, so that exponentially small accuracies can be compared."""
+    logc = [math.lgamma(n + 1) - math.lgamma(j + 1) - math.lgamma(n - j + 1) for j in range(n + 1)]
+
+    def lse(terms):
+        m = max(terms)
+        return m + math.log(sum(math.exp(t - m) for t in terms))
+
+    def lexpm1(z):
+        return z + math.log1p(-math.exp(-z)) if z > 30.0 else math.log(math.expm1(z))
+
+    logex = [lse([logc[j] + lexpm1(u * (k + 1 - j)) for j in range(k + 1)]) - n * math.log(2) for k in range(n + 1)]
+    logball = [lse(logc[: k + 1]) for k in range(n + 1)]
+    return logex, logball
+
+
+def qc_cube_kstar(logex, log_target):
+    """Least k with ln(e^{Delta_k} - 1) > log_target, i.e. the smallest ball whose dip is sensitive (len(logex) if none)."""
+    for k, v in enumerate(logex):
+        if v > log_target:
+            return k
+    return len(logex)
+
+
 @conjecture("XII.1 Dips: a dip of depth c at y is admissible, differs from g exactly on the open slack ball {a : s(a,y) < c}, lowers the minimum by at least eps' at depth gap(y)+eps', and multiplies Z by E_pi exp(beta (c - s(.,y))_+) >= exp(beta c - softgap(y)), with 0 <= softgap(y) <= -ln pi(y)")
 def t_dips(rng, trials):
     stats = dict(dips=0)
@@ -3339,6 +3385,27 @@ def t_thermal_query(rng, trials):
             return False, dict(reason="expected evaluations below (1 - 2 delta) * thermal packing", delta=float(delta),
                                packing=pack, cost=cost)
         stats["mixtures"] += 1
+    # The factor 1 - 2 delta (not 1 - delta) is the right one: on the uniform metric the mixture of full evaluation
+    # with two blind guesses -- ln Z of the instance, and the common value of ln Z on the dips -- attains the bound.
+    for n in (4, 5, 6):
+        beta, eps = 1.0, 0.2
+        d = np.ones((n, n)) - np.eye(n)
+        soft = math.log(n) - math.log(1 + (n - 1) * math.exp(-beta))
+        c = (soft + eps) / beta + 1e-7
+        if not c < 1:
+            raise RuntimeError("sanity: the thermal detection balls of the uniform metric should be singletons")
+        lnZ, lnZ_dip = math.log(n), math.log(n - 1 + math.exp(beta * c))
+        if not lnZ_dip - lnZ > eps:
+            raise RuntimeError("sanity: the dip is not sensitive")
+        pack = qc_frac_packing(d < c)
+        lam = float(rng.uniform(0.1, 0.9))
+        blind = [((1 - lam) / 2, lnZ), ((1 - lam) / 2, lnZ_dip)]
+        delta_tight = max(sum(p for p, o in blind if abs(o - lnZ) > eps / 2), sum(p for p, o in blind if abs(o - lnZ_dip) > eps / 2))
+        cost_tight = lam * n
+        if (1 - 2 * delta_tight) * pack > cost_tight + 1e-7 or abs((1 - 2 * delta_tight) * pack - cost_tight) > 1e-7:
+            return False, dict(reason="the blind mixture on the uniform metric should attain (1 - 2 delta) * thermal packing",
+                               lhs=(1 - 2 * delta_tight) * pack, cost=cost_tight)
+        stats["tight"] = stats.get("tight", 0) + 1
     return True, stats
 
 
@@ -3389,27 +3456,39 @@ def t_spot_check(rng, trials):
     return True, stats
 
 
-@conjecture("XII.5 Uniform cube at finite temperature: among sets D of the size of a Hamming ball, the ball maximises the largest effect E exp(beta c dist(x, D^c)) of a perturbation supported in D (n = 3: all sets; n = 4: all sets of ball size)")
+@conjecture("XII.5 Uniform cube at finite temperature (Harper step; all supports for n = 3, 4): a perturbation supported on at most |B(k)| points raises Z by at most as much as the dip on the Hamming ball B(k); and for every size m and every t the erosion {x : dist(x, D^c) > t} is largest for the complement of an initial segment of the simplicial order")
 def t_cube_blocks(rng, trials):
     stats = dict(sets=0)
     for n in (3, 4):
         N = 2 ** n
-        dist = np.array([[bin(a ^ b).count("1") for b in range(N)] for a in range(N)])
+        masks, sizes = qc_cube_erosions(n)
+        proper = masks < np.uint64(2 ** N - 1)             # D^c nonempty
+        card = sizes[:, 0]
+        # initial segments of the simplicial order: by weight, then lexicographically by the positions of the ones
+        order = sorted(range(N), key=lambda v: (bin(v).count("1"), tuple(i for i in range(n) if v >> i & 1)))
+        for m in range(1, N):
+            seg = sum(1 << v for v in order[: N - m])      # D^c = initial segment of size N - m
+            D = (2 ** N - 1) ^ seg
+            best = sizes[proper & (card == m)].max(axis=0)
+            if np.any(best > sizes[D]):
+                return False, dict(reason="some set has a larger erosion than the complement of a simplicial initial segment",
+                                   n=n, size=m, best=best.tolist(), simplicial=sizes[D].tolist())
         for u in (0.5, 1.5):
-            for r in range(n):
-                size = sum(math.comb(n, k) for k in range(r + 1))
-                ball = [x for x in range(N) if dist[0, x] <= r]
-                comp = [x for x in range(N) if dist[0, x] > r]
-                ball_effect = (len(comp) + float(np.exp(u * dist[np.ix_(ball, comp)].min(axis=1)).sum())) / N
-                best = 0.0
-                for D in itertools.combinations(range(N), size):
-                    Dl = list(D)
-                    C = [x for x in range(N) if x not in D]
-                    best = max(best, (len(C) + float(np.exp(u * dist[np.ix_(Dl, C)].min(axis=1)).sum())) / N)
-                    stats["sets"] += 1
-                if best > ball_effect + 1e-9:
-                    return False, dict(reason="a non-ball set has a larger effect than the ball of the same size", n=n,
-                                       radius=r, ball=ball_effect, best=best)
+            layer = np.array([math.exp(u * (t + 1)) - math.exp(u * t) for t in range(n + 1)])
+            excess = sizes @ layer                         # sum over x in D of (e^{u dist(x, D^c)} - 1)
+            for k in range(n):
+                size = sum(math.comb(n, j) for j in range(k + 1))
+                ball = sum(1 << v for v in range(N) if bin(v).count("1") <= k)
+                ball_excess = float(excess[ball])
+                closed = sum(math.comb(n, j) * (math.exp(u * (k + 1 - j)) - 1) for j in range(k + 1))
+                if abs(ball_excess - closed) > 1e-9 * max(1.0, closed):
+                    return False, dict(reason="closed form of the effect of the dip on a ball is wrong", n=n, k=k)
+                sel = proper & (card <= size)
+                worst = float(excess[sel].max())
+                stats["sets"] += int(sel.sum())
+                if worst > ball_excess + 1e-9:
+                    return False, dict(reason="a set no larger than the ball has a larger effect than the ball", n=n,
+                                       radius=k, ball=ball_excess, best=worst)
     return True, stats
 
 
@@ -3457,6 +3536,165 @@ def t_soft_gap_sampling(rng, trials):
                 return False, dict(reason="an alternative with a smaller partition function differs on too little Gibbs weight")
     if stats["sets"] == 0:
         return False, dict(reason="coverage: no sensitive set")
+    return True, stats
+
+
+@conjecture("XII.7 Hedged spot-check and pair detection (minimum): with the output E* - eps/2 + eta, every admissible residual whose minimum is farther than eps/2 from that output differs from the hint on a closed slack ball {a : s(a,y) <= gap(y) + eps - eta} or on all eta-minimisers; mixtures of hedged hint-verifying and blind strategies obey (1 - 2 delta) * packing <= expected evaluations, and detect every pair of residuals whose minima differ by more than eps with probability >= 1 - 2 delta")
+def t_hedged(rng, trials):
+    stats = dict(outside_window=0, lower=0, higher=0, mixtures=0, pairs=0, tight_pairs=0)
+    for trial in range(trials):
+        uniform = trial % 5 == 0
+        if uniform:
+            n = int(rng.integers(3, 8))
+            d, f, g, eps = np.ones((n, n)) - np.eye(n), np.zeros(n), np.zeros(n), 0.2
+        else:
+            n, d, kappa, f, g, eps = cg_instance(rng)
+            eps = max(eps, 0.1)
+        eta = float(rng.choice([0.1, 0.25, 0.5, 0.9])) * eps
+        E = f + g
+        Emin = float(E.min())
+        gap = E - Emin
+        s = cg_slack(d, g)
+        hedge = Emin - eps / 2 + eta
+        # (a) the window: what a hedged spot-check has to detect
+        balls = [np.array([s[a, y] <= gap[y] + eps - eta + 1e-12 for a in range(n)]) for y in range(n)]
+        nearmin = gap <= eta + 1e-12
+        q = rng.dirichlet(np.ones(n))
+        p = min([float(q[b].sum()) for b in balls] + [float(q[nearmin].sum())])
+        for alt in range(12):
+            kind = alt % 4
+            if kind == 0:
+                y = int(rng.integers(n))
+                gp = qc_dip(d, g, y, gap[y] + eps - eta + float(rng.uniform(0.001, 1.0)) * (eta if alt % 8 == 0 else 1.0))
+            elif kind == 1:                               # bumps at all eta-minimisers
+                c = float(rng.uniform(0.0, 1.5))
+                gp = g.copy()
+                for x in np.nonzero(nearmin)[0]:
+                    gp = np.maximum(gp, g[x] + c - d[x, :])
+            elif kind == 2:
+                gp = cg_lipschitz(rng, d, 1.0) + float(rng.normal(0, 1.0))
+            else:
+                gp = np.minimum(g, cg_lipschitz(rng, d, 1.0) + float(rng.normal(0, 1.0)))
+            if not qc_admissible(d, gp):
+                raise RuntimeError("sanity: generated alternative is not admissible")
+            val = float((f + gp).min())
+            if abs(val - hedge) > eps / 2 + 1e-9:
+                D = np.abs(gp - g) > 1e-10
+                if val < Emin and not any(bool(np.all(D[b])) for b in balls):
+                    return False, dict(reason="an alternative below the hedged window does not differ on a whole closed ball",
+                                       value=val - Emin, eps=eps, eta=eta)
+                if val > Emin and not bool(np.all(D[nearmin])):
+                    return False, dict(reason="an alternative above the hedged window agrees with the hint at an eta-minimiser",
+                                       value=val - Emin, eps=eps, eta=eta)
+                qD = float(q[D].sum())
+                if qD < p - 1e-9:
+                    return False, dict(reason="an alternative outside the hedged window differs from the hint on too small a set",
+                                       q_of_difference_set=qD, p=p, value=val - Emin, eps=eps, eta=eta)
+                stats["outside_window"] += 1
+                stats["lower" if val < Emin else "higher"] += 1
+        # (b) mixtures of hedged hint-verifying strategies and blind guesses, against the instance and its dips
+        epsp = eps + float(rng.choice([0.05, 0.3]))
+        B = s < (gap[None, :] + epsp)
+        pack = qc_frac_packing(B)
+        dips = [qc_dip(d, g, y, gap[y] + epsp) for y in range(n)]
+        sees = np.array([[abs(dips[y][a] - g[a]) > 1e-10 for y in range(n)] for a in range(n)])
+        dipmin = np.array([float((f + dips[y]).min()) for y in range(n)])
+        strategies = []                                   # (probability, evaluated set or None, output if nothing is seen)
+        if uniform:
+            lam = float(rng.uniform(0.1, 0.9))
+            strategies = [(lam, list(range(n)), hedge), ((1 - lam) / 2, None, Emin), ((1 - lam) / 2, None, Emin - epsp)]
+        else:
+            k = int(rng.integers(1, 5))
+            wts = rng.dirichlet(np.ones(k + 2))
+            for j in range(k):
+                A = sorted(rng.choice(n, size=int(rng.integers(1, n + 1)), replace=False).tolist())
+                out = float(rng.choice([Emin, hedge, Emin - eps / 2, Emin + eps / 2, Emin - epsp / 2]))
+                strategies.append((float(wts[j]), A, out))
+            strategies.append((float(wts[k]), None, float(rng.choice([Emin, hedge]))))
+            strategies.append((float(wts[k + 1]), None, float(rng.choice(dipmin))))
+
+        def error_on(target, y):
+            """Probability of an output farther than eps/2 from `target`; y is None for the instance itself."""
+            err = 0.0
+            for pr, A, out in strategies:
+                if A is None or y is None or not any(sees[a, y] for a in A):
+                    err += pr * (abs(out - target) > eps / 2 + 1e-12)   # nothing seen: the fixed output
+            return err
+
+        errs = [error_on(Emin, None)] + [error_on(dipmin[y], y) for y in range(n)]
+        delta = max(errs)
+        cost = sum(pr * len(A) for pr, A, out in strategies if A is not None)
+        if (1 - 2 * delta) * pack > cost + 1e-7:
+            return False, dict(reason="hedged mixture: expected evaluations below (1 - 2 delta) * packing", delta=delta,
+                               packing=pack, cost=cost)
+        stats["mixtures"] += 1
+        # (c) pairs: two residuals (the instance or dips) whose minima differ by more than eps
+        values = [Emin] + dipmin.tolist()
+        seen_by = [np.zeros(len(strategies), dtype=bool)] + [
+            np.array([A is not None and any(sees[a, y] for a in A) for pr, A, out in strategies]) for y in range(n)]
+        probs = np.array([pr for pr, A, out in strategies])
+        for i in range(n + 1):
+            for j in range(i + 1, n + 1):
+                if abs(values[i] - values[j]) > eps + 1e-9:
+                    detect = float(probs[seen_by[i] | seen_by[j]].sum())
+                    if detect < 1 - 2 * delta - 1e-9:
+                        return False, dict(reason="a distinguishable pair is detected with probability below 1 - 2 delta",
+                                           detection=detect, delta=delta)
+                    stats["pairs"] += 1
+                    stats["tight_pairs"] += abs(detect - (1 - 2 * delta)) < 1e-9 and delta > 0.01
+    if stats["lower"] == 0 or stats["higher"] == 0 or stats["tight_pairs"] == 0:
+        return False, dict(reason="coverage: alternatives of one sign only, or no tight pair", **stats)
+    return True, stats
+
+
+@conjecture("XII.8 Cube accuracy diagram at the zero residual (exact ball counts): with k*(eps) the least radius whose dip is sensitive and eta = min(1, eps/2), the radii of the lower bound and of the hedged spot-check differ by at most 1 + ceil(1.46/u) (1 + ceil(1.32/u) for eps < 2), |B(k* - 1)|(e^u - 1) <= 2^n (e^eps - 1), and the exponents are ln 2 - h((Lambda_1 - lam)/u) for eps = e^{-lam n}, lam <= lam_c, and min(lam, ln 2) beyond")
+def t_cube_diagram(rng, trials):
+    stats = dict(brackets=0, max_log_gap=0.0, exponents=0)
+    hb = lambda x: 0.0 if x <= 0 or x >= 1 else -x * math.log(x) - (1 - x) * math.log(1 - x)
+    for n in (8, 20, 60, 200):
+        for u in (0.3, 1.0, 2.5):
+            logex, logball = qc_cube_log_excess(n, u)
+            top = n * math.log(math.cosh(u / 2))           # the threshold accuracy
+            grid = [10.0 ** e for e in range(-200, 0, 7)] + [0.3, 1.0, 1.9, 2.0, 2.5, 4.0] + \
+                   [x * top for x in (0.1, 0.3, 0.6, 0.9, 0.99)]
+            for eps in grid:
+                eta = min(1.0, eps / 2)
+                lt = lambda z: math.log(z) if z < 1e-8 else math.log(math.expm1(z))     # ln(e^z - 1)
+                k2 = qc_cube_kstar(logex, lt(eps))                                      # lower bound: 2^n / |B(k2)|
+                k1 = qc_cube_kstar(logex, lt(eps - eta)) - 1                            # spot-check: 2^n / |B(k1)|
+                if k2 > n:
+                    continue                                                            # no sensitive dip on a proper ball
+                steps = 1 + math.ceil((1.4587 if eps >= 2 else 1.3133) / u)
+                if k2 - k1 > steps:
+                    return False, dict(reason="the two radii of the bracket are farther apart than claimed", n=n, u=u,
+                                       eps=eps, k_lower=k2, k_upper=k1)
+                if k2 >= 1 and logball[k2 - 1] + math.log(math.expm1(u)) > n * math.log(2) + lt(eps) + 1e-9:
+                    return False, dict(reason="|B(k* - 1)|(e^u - 1) exceeds 2^n (e^eps - 1)", n=n, u=u, eps=eps)
+                log_lb = n * math.log(2) - logball[k2]
+                log_ub = min(n * math.log(2), max(n * math.log(2) - (logball[k1] if k1 >= 0 else 0.0),
+                                                  -math.log(-math.expm1(-eta))))
+                gap_ = log_ub - log_lb
+                if gap_ < -1e-9:
+                    return False, dict(reason="upper bound below lower bound", n=n, u=u, eps=eps)
+                bound = max(steps * math.log(n + 1), math.log(10.2 * (n + 1) / math.expm1(u)))
+                if gap_ > bound + 1e-9:
+                    return False, dict(reason="the hedged bracket does not close up to the claimed polynomial factor", n=n,
+                                       u=u, eps=eps, log_gap=gap_, bound=bound)
+                stats["brackets"] += 1
+                stats["max_log_gap"] = max(stats["max_log_gap"], gap_)
+    # exponents in the exponentially small regimes
+    n, u = 600, 1.0
+    logex, logball = qc_cube_log_excess(n, u)
+    lam1 = math.log(2.0 / (1.0 + math.exp(-u)))
+    lam_c = math.log(2) - hb(1.0 / (1.0 + math.exp(u)))
+    for lam in (0.02, 0.05, 0.1, 0.3, 0.6, 0.75):
+        k = qc_cube_kstar(logex, -lam * n)
+        exact = (n * math.log(2) - logball[min(k, n)]) / n
+        pred = (math.log(2) - hb((lam1 - lam) / u)) if lam <= lam_c else min(lam, math.log(2))
+        if abs(exact - pred) > 0.02:
+            return False, dict(reason="exponent of the accuracy diagram differs from the prediction", lam=lam, exact=exact,
+                               predicted=pred)
+        stats["exponents"] += 1
     return True, stats
 
 
@@ -3586,6 +3824,74 @@ def t_dead_single_dips(rng, trials):
     if fc_all > fc_dip + 1e-6:
         return False, dict(reason="unions of shallow dips are sensitive although no local single dip is",
                            fractional_hitting_all=fc_all, fractional_hitting_single_dips=fc_dip)
+    return True, {}
+
+
+@conjecture("DEAD.15 On the cube the soft-gap bound of Theorem 11.25(a) is attained at the zero residual up to a polynomial factor (n^10) for every accuracy eps = o(n), in particular for eps = 0", expect_fail=True)
+def t_dead_cube_tiny_accuracy(rng, trials):
+    """Refuted (third referee, C1; `cube_exact_randomized`).  At eps = 0 the dip of depth c at a single point is
+    sensitive, so every algorithm makes (1 - 2 delta) 2^n evaluations; the soft-gap bound is at most 2^n / |B(k)| with
+    k = floor(n Lambda_1 / u), smaller by e^{n h(rho_0)}.  The same error as in DEAD.10 (Theorem 11.15)."""
+    eps = 0.0
+    n_small, u = 10, 1.0
+    N = 2 ** n_small
+    dist0 = np.array([bin(x).count("1") for x in range(N)])
+    one_point = math.log(float(np.exp(u * np.maximum(0.0, 1 - dist0)).sum())) - n_small * math.log(2)   # dip of depth c at 0
+    single_dip_sensitive = one_point > eps
+    n = 200
+    logex, logball = qc_cube_log_excess(n, u)
+    lam1 = math.log(2.0 / (1.0 + math.exp(-u)))
+    k_soft = int(math.floor((n * lam1 + eps) / u))                                # the soft-gap radius: u (k+1) > n Lambda_1 + eps
+    k_exact = qc_cube_kstar(logex, math.log(math.expm1(eps)) if eps > 0 else float("-inf"))
+    log_ratio = logball[k_soft] - logball[min(k_exact, n)]                        # exact-dip bound / soft-gap bound
+    if single_dip_sensitive and k_exact == 0 and log_ratio > 10 * math.log(n):
+        return False, dict(reason="at eps = 0 the exact-dip bound 2^n exceeds the soft-gap bound by more than n^10",
+                           n=n, log_ratio=log_ratio, soft_gap_radius=k_soft)
+    if not single_dip_sensitive and log_ratio > 10 * math.log(n):
+        return False, dict(reason="the exact-dip bound exceeds the soft-gap bound by more than n^10", log_ratio=log_ratio)
+    return True, {}
+
+
+def qc_flat_box_log_hit(n, k, m, u, eps):
+    """Flat k-state site (uniform Gibbs measure, envelope c * Hamming, u = beta c), n sites.  For the dips centred at a
+    box prod B_i of m-subsets, h(x) = c (R - #{i : x_i not in B_i})_+, returns (ln(1 / P(a uniform sample lies in the
+    support)), R) for the least sensitive radius R, i.e. the least R with ln E e^{beta h} > eps.  Exact binomial tails
+    in the log domain.  The class of all such boxes is invariant under a transitive group, so the uniform sampler is
+    optimal against it and the first number is the logarithm of its fractional hitting number."""
+    p = 1 - m / k
+    logpmf = [math.lgamma(n + 1) - math.lgamma(j + 1) - math.lgamma(n - j + 1) + j * math.log(p) + (n - j) * math.log(1 - p)
+              for j in range(n + 1)]
+    lse = lambda a, b: max(a, b) + math.log1p(math.exp(-abs(a - b)))
+    log_s, log_cdf = float("-inf"), float("-inf")          # S_R = sum_{j<R} pmf(j) e^{u (R-j)},  cdf_R = P(Bin < R)
+    for R in range(1, n + 2):
+        log_s = u + lse(log_s, logpmf[R - 1])
+        log_cdf = lse(log_cdf, logpmf[R - 1])
+        tail = -math.expm1(log_cdf) if log_cdf < 0 else 0.0
+        effect = lse(log_s, math.log(tail)) if tail > 0 else log_s
+        if effect > eps:
+            return -log_cdf, R
+    return 0.0, n + 1
+
+
+@conjecture("DEAD.16 On product landscapes single dips are extremal at the exponential scale for ln Z: hitting every sensitive single dip costs as much, up to e^{o(n)}, as hitting every sensitive admissible perturbation", expect_fail=True)
+def t_dead_dips_extremal_on_products(rng, trials):
+    """Refuted (workstream A; recomputed here).  Flat k-state sites, zero residual, u = beta c = 1, eps = 1: the dips
+    centred at boxes of m-subsets are admissible and sensitive, and under the (optimal) uniform sampler they are
+    exponentially harder to hit than single dips: exponents D(rho_m || 1 - m/k), 0.0309 (m = 3) against 0.0194 (m = 1)
+    for k = 8, and 0.02914 (m = 2) against 0.02841 for k = 4.  (For two-state sites the conjecture is supported by a
+    paper proof of the same workstream; on the uniform cube it is Harper's theorem, XII.5.)"""
+    u, eps = 1.0, 1.0
+    dip8, _ = qc_flat_box_log_hit(1000, 8, 1, u, eps)
+    box8, _ = qc_flat_box_log_hit(1000, 8, 3, u, eps)
+    dip4, _ = qc_flat_box_log_hit(20000, 4, 1, u, eps)
+    box4, _ = qc_flat_box_log_hit(20000, 4, 2, u, eps)
+    kl = lambda a, b: a * math.log(a / b) + (1 - a) * math.log((1 - a) / (1 - b))
+    rho = lambda k, m: -math.log(m / k + (1 - m / k) * math.exp(-u)) / u
+    limits = (kl(rho(8, 1), 7 / 8), kl(rho(8, 3), 5 / 8), kl(rho(4, 1), 3 / 4), kl(rho(4, 2), 1 / 2))
+    if box8 - dip8 > 8 and box4 - dip4 > 8 and limits[1] > limits[0] + 0.01 and limits[3] > limits[2] + 0.0005:
+        return False, dict(reason="dips centred at boxes are exponentially harder to hit than single dips",
+                           log_ratio_8_states_n1000=box8 - dip8, log_ratio_4_states_n20000=box4 - dip4,
+                           exponents_8=(limits[0], limits[1]), exponents_4=(limits[2], limits[3]))
     return True, {}
 
 

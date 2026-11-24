@@ -484,6 +484,103 @@ def cube_hitting_exponent(n, u, eps):
     return (n * math.log(2) - logsum(logc[: hi + 1])) / n
 
 
+def cube_regime_exponent(n, u, log_excess):
+    """(1/n) ln (2^n / |B(k*)|), k* the least radius such that the dip supported on the Hamming ball B(k) has excess
+    E[e^{u (k+1-H)_+} - 1] > exp(log_excess) (uniform cube; H the distance to the centre).  Exact, in the log domain,
+    so that exponentially small accuracies eps = e^{-lambda n} (log_excess = -lambda n) can be used."""
+    logc = [math.lgamma(n + 1) - math.lgamma(k + 1) - math.lgamma(n - k + 1) for k in range(n + 1)]
+
+    def logsum(terms):
+        m = max(terms)
+        return m + math.log(sum(math.exp(x - m) for x in terms))
+
+    def log_expm1(z):
+        return z + math.log1p(-math.exp(-z)) if z > 30.0 else math.log(math.expm1(z))
+
+    def log_excess_of(k):
+        return logsum([logc[j] + log_expm1(u * (k + 1 - j)) for j in range(k + 1)]) - n * math.log(2)
+
+    lo, hi = -1, n
+    while hi - lo > 1:
+        mid = (lo + hi) // 2
+        if log_excess_of(mid) > log_excess:
+            hi = mid
+        else:
+            lo = mid
+    return (n * math.log(2) - logsum(logc[: hi + 1])) / n
+
+
+def cube_regime_prediction(u, lam):
+    """Exponent of the randomised cost at the zero residual for accuracy eps = e^{-lam n} (lam = 0: eps of order one):
+    ln 2 - h((Lambda1 - lam)/u) for lam <= lam_c = ln 2 - h(1/(1+e^u)), and min(lam, ln 2) beyond."""
+    hb = lambda x: 0.0 if x <= 0 or x >= 1 else -x * math.log(x) - (1 - x) * math.log(1 - x)
+    lam1 = math.log(2.0 / (1.0 + math.exp(-u)))
+    lam_c = math.log(2) - hb(1.0 / (1.0 + math.exp(u)))
+    return (math.log(2) - hb((lam1 - lam) / u)) if lam <= lam_c else min(lam, math.log(2))
+
+
+def cube_dip_tables(n, u):
+    """(logex, logball) for the uniform n-cube at the zero residual: logex[k] = ln(e^{Delta_k} - 1), Delta_k the effect
+    on ln Z of the dip of depth c(k+1) (supported on the Hamming ball B(k)); logball[k] = ln |B(k)|."""
+    logc = [math.lgamma(n + 1) - math.lgamma(k + 1) - math.lgamma(n - k + 1) for k in range(n + 1)]
+
+    def logsum(terms):
+        m = max(terms)
+        return m + math.log(sum(math.exp(x - m) for x in terms))
+
+    def log_expm1(z):
+        return z + math.log1p(-math.exp(-z)) if z > 30.0 else math.log(math.expm1(z))
+
+    logex, logball, acc = [], [], None
+    for k in range(n + 1):
+        logex.append(logsum([logc[j] + log_expm1(u * (k + 1 - j)) for j in range(k + 1)]) - n * math.log(2))
+        acc = logc[k] if acc is None else logsum([acc, logc[k]])
+        logball.append(acc)
+    return logex, logball
+
+
+def cube_bracket(n, tables, eps, eta, log_eps=None):
+    """(ln LB, ln UB) of Theorem 11.25(c) without the factors (1 - 2 delta) and ln(1/delta): LB = 2^n / |B(k*(eps))|,
+    UB = min(2^n, max(2^n / |B(k*(eps - eta) - 1)|, 1 / (1 - e^{-eta}))); eta = eps/2 is the unhedged spot-check.
+    For accuracies too small for floating point pass log_eps = ln(eps) (then eta = eps/2 is used)."""
+    logex, logball = tables
+    lt = lambda z: math.log(z) if z < 1e-8 else math.log(math.expm1(z))
+    if log_eps is not None:
+        target_lb, target_ub, log_inv_p = log_eps, log_eps - math.log(2), -(log_eps - math.log(2))
+    else:
+        target_lb, target_ub, log_inv_p = lt(eps), lt(eps - eta), -math.log(-math.expm1(-eta))
+
+    def kstar(target):
+        lo, hi = -1, n + 1                                 # logex is increasing; k* in 0..n+1
+        while hi - lo > 1:
+            mid = (lo + hi) // 2
+            if mid <= n and logex[mid] > target:
+                hi = mid
+            else:
+                lo = mid
+        return hi
+
+    k2, k1 = kstar(target_lb), kstar(target_ub) - 1
+    log_lb = n * math.log(2) - logball[min(k2, n)]
+    log_ub = min(n * math.log(2), max(n * math.log(2) - (logball[min(k1, n)] if k1 >= 0 else 0.0), log_inv_p))
+    return log_lb, log_ub
+
+
+def site_threshold(e, c, beta, gamma, grid=20001):
+    """(eps1_crit, W1) for a two-state site with known part (0, e), envelope constant c and additive residual (0, gamma):
+    eps1_crit = max_P min_a E_P[beta s(a, .) - Lambda_1] (vanishing point of the randomised lower bound) and
+    W1 = largest Jensen gap ln E_pi exp(-beta (h - E_pi h)) over admissible changes h of the residual."""
+    w1 = math.exp(-beta * (e + gamma))
+    pi0, pi1 = 1.0 / (1.0 + w1), w1 / (1.0 + w1)
+    s01, s10 = c + gamma, c - gamma                        # s(0,1), s(1,0)
+    lam0 = -math.log(pi0 + pi1 * math.exp(-beta * s10))
+    lam1 = -math.log(pi1 + pi0 * math.exp(-beta * s01))
+    q = np.linspace(0.0, 1.0, grid)
+    crit = float(np.max(np.minimum(beta * q * s01, beta * (1 - q) * s10) - (1 - q) * lam0 - q * lam1))
+    jensen = lambda t: math.log(pi0 * math.exp(beta * pi1 * t) + pi1 * math.exp(-beta * pi0 * t))   # h(1) - h(0) = t
+    return crit, max(jensen(c - gamma), jensen(-c - gamma))
+
+
 def bench_query_complexity(rng, quick):
     section("B10. Query complexity of every algorithm: three exponents for one site, and the threshold on the cube")
     rows = []
@@ -500,6 +597,10 @@ def bench_query_complexity(rng, quick):
             print(f"{beta:6.2f} | {H:7.4f} | {Rb:22.4f} | {Rr:28.4f} | {U:23.4f} | {crit:9.4f}")
             if Rr > min(Rb, U) + 1e-3:
                 raise RuntimeError("randomised lower bound exceeds an upper bound")
+            pex = math.exp(-beta * e) / (1.0 + math.exp(-beta * e))
+            closed = 0.5 * math.log(1.0 + 2.0 * pex * (1.0 - pex) * (math.cosh(beta) - 1.0))
+            if abs(crit - closed) > 1e-6 * max(1.0, closed):
+                raise RuntimeError("critical accuracy differs from 0.5 ln(1 + 2p(1-p)(cosh(beta c) - 1))")
     print("\nuniform cube (e = 0; the deterministic exponent is ln 2 = 0.6931 for every beta):")
     print(f"{'u=beta*c':>8} | {'ln2 - h(rho0)':>13} | {'LP value':>9} | {'U = ln(2/(1+e^-u))':>18} | {'threshold ln cosh(u/2)':>22} | {'game value':>10} | "
           + " | ".join(f"n={n}" for n in ((100, 400) if quick else (100, 400, 1600))) + "   [(1/n) ln(2^n/|B(r*)|), eps = 0.5]")
@@ -512,6 +613,78 @@ def bench_query_complexity(rng, quick):
                          game=crit, finite_n=vals))
         print(f"{u:8.3f} | {math.log(2) - hb(rho0):13.5f} | {Rr:9.5f} | {U:18.5f} | {math.log(math.cosh(u / 2)):22.5f} | {crit:10.5f} | "
               + " | ".join(f"{v:.5f}" for v in vals))
+    print("\naccuracy regimes on the cube at the zero residual, u = 1 (exact ball counts against the predicted exponent;")
+    print("eps = e^{-lambda n}; for exponentially small accuracies the soft-gap exponent ln2 - h(rho0) = 0.0291 is NOT attained):")
+    nn = 800 if quick else 3200
+    print(f"{'lambda':>7} | {'predicted':>9} | n={nn}")
+    for lam in (0.0, 0.02, 0.05, 0.1, 0.3, 0.6, 0.8):
+        log_excess = math.log(math.expm1(0.5)) if lam == 0.0 else -lam * nn
+        val = cube_regime_exponent(nn, 1.0, log_excess)
+        pred = cube_regime_prediction(1.0, lam)
+        rows.append(dict(lam=lam, predicted=pred, n=nn, exact=val))
+        print(f"{lam:7.2f} | {pred:9.4f} | {val:.4f}")
+        if abs(val - pred) > (0.03 if quick else 0.012):
+            raise RuntimeError("cube accuracy-regime exponent differs from the prediction")
+    hb0 = lambda x: 0.0 if x <= 0 or x >= 1 else -x * math.log(x) - (1 - x) * math.log(1 - x)
+    lam1 = math.log(2.0 / (1.0 + math.exp(-1.0)))
+    tables = {n: cube_dip_tables(n, 1.0) for n in ((200, 800) if quick else (200, 800, 3200))}
+    print(f"\nextensive accuracies eps = n eps1, u = 1 (threshold ln cosh(1/2) = {math.log(math.cosh(0.5)):.4f}); "
+          f"exponent of the lower bound against ln2 - h((Lambda1 + eps1)/u):")
+    print(f"{'eps1':>6} | {'predicted':>9} | n={nn}")
+    tb = cube_dip_tables(nn, 1.0)
+    for eps1 in (0.02, 0.048, 0.08, 0.11):
+        lb, _ = cube_bracket(nn, tb, nn * eps1, 1.0)
+        pred = math.log(2) - hb0(lam1 + eps1)
+        rows.append(dict(eps1=eps1, predicted=pred, n=nn, exact=lb / nn))
+        print(f"{eps1:6.3f} | {pred:9.4f} | {lb / nn:.4f}")
+        if abs(lb / nn - pred) > (0.03 if quick else 0.012):
+            raise RuntimeError("extensive-accuracy exponent differs from the prediction")
+    print("\nupper bound / lower bound at the zero residual, u = 1: ln UB - ln LB (without ln(1/delta) and 1 - 2 delta)")
+    print("  unhedged spot-check (must detect at level eps/2)  |  hedged spot-check (output ln Z(0) + eps/2 - 1)")
+    cols = [("eps=2", lambda n: 2.0), ("ln n", lambda n: math.log(n)), ("sqrt n", lambda n: math.sqrt(n)),
+            ("0.02n", lambda n: 0.02 * n), ("0.06n", lambda n: 0.06 * n), ("0.10n", lambda n: 0.10 * n)]
+    print(f"{'n':>6} | " + " ".join(f"{name:>7}" for name, _ in cols) + "  |  " + " ".join(f"{name:>7}" for name, _ in cols))
+    for n, tb in tables.items():
+        un, he = [], []
+        for name, fn in cols:
+            eps = fn(n)
+            lb, ub = cube_bracket(n, tb, eps, eps / 2)
+            lb2, ub2 = cube_bracket(n, tb, eps, 1.0)
+            un.append(ub - lb)
+            he.append(ub2 - lb2)
+        rows.append(dict(n=n, unhedged=un, hedged=he))
+        print(f"{n:6d} | " + " ".join(f"{v:7.1f}" for v in un) + "  |  " + " ".join(f"{v:7.1f}" for v in he))
+        if max(he) > 2.5 or min(un + he) < -1e-9:
+            raise RuntimeError("hedged bracket on the cube does not close within the expected constant")
+    print("\nwhole accuracy range, eta = min(1, eps/2): largest ln UB - ln LB over eps from e^{-0.69 n} to the threshold")
+    for n, tb in tables.items():
+        top = n * math.log(math.cosh(0.5))
+        gaps = []
+        for lam in np.linspace(0.69, 0.02, 60):            # eps = e^{-lam n}, in the log domain
+            lb, ub = cube_bracket(n, tb, None, None, log_eps=-float(lam) * n)
+            gaps.append(ub - lb)
+        for eps in np.linspace(0.05, 0.999 * top, 60):
+            lb, ub = cube_bracket(n, tb, float(eps), min(1.0, float(eps) / 2))
+            gaps.append(ub - lb)
+        rows.append(dict(n=n, max_log_gap=max(gaps)))
+        print(f"   n = {n:5d}:  max = {max(gaps):.2f}   (ln(n+1) = {math.log(n + 1):.2f})")
+        if max(gaps) > 2 * math.log(n + 1) + 2.5 or min(gaps) < -1e-9:
+            raise RuntimeError("bracket of Theorem 11.25(c) does not close up to a polynomial factor")
+    print("\nthreshold of the randomised lower bound at additive instances (site e/c = 1/2, beta = 1; residual difference gamma):")
+    print(f"{'gamma':>7} | {'eps1_crit(gamma)':>16} | {'Jensen width W1(gamma)':>22}")
+    best = (-1.0, 0.0)
+    for gamma in np.linspace(-0.99, 0.99, 199 if quick else 1981):
+        crit, w1 = site_threshold(0.5, 1.0, 1.0, float(gamma))
+        if crit > w1 + 1e-6:
+            raise RuntimeError("eps1_crit exceeds the Jensen width of the sandwich")
+        best = max(best, (crit, float(gamma)))
+    for gamma in (-0.9, -0.5, best[1], 0.0, 0.5, 0.9):
+        crit, w1 = site_threshold(0.5, 1.0, 1.0, gamma)
+        rows.append(dict(gamma=gamma, eps1_crit=crit, W1=w1))
+        print(f"{gamma:7.3f} | {crit:16.5f} | {w1:22.5f}" + ("   <- largest eps1_crit" if gamma == best[1] else ""))
+    crit0, _ = site_threshold(0.5, 1.0, 1.0, 0.0)
+    if not (abs(crit0 - 0.11367) < 2e-4 and crit0 < best[0] < crit0 + 1e-3):
+        raise RuntimeError("instance dependence of eps1_crit is not as documented")
     return rows
 
 

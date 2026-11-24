@@ -62,6 +62,12 @@ function, or any other functional.
 * `binary_randomized_exponential` — on the binary product landscape of
   `binary_certificate_exponential`, every randomised algorithm makes at least
   `(1 - 2δ) (6/5)^n` evaluations in expectation.
+* `lower_alternative_differs_on_ball`, `higher_alternative_differs_on_minimisers`,
+  `min_spotCheck_correct` — conversely, an alternative with a different minimum differs from
+  the instance on a whole closed slack ball or on all near-minimisers, so spot-checking with a
+  fractional cover as sampling distribution is correct.  This unhedged converse works at level
+  `ε / 2` while the lower bound is at level `ε`; the hedged version
+  (`min_hedgedSpotCheck_correct` in `QueryRefinements.lean`) closes the gap between the levels.
 
 ## The free energy
 
@@ -79,8 +85,13 @@ function, or any other functional.
   evaluations in expectation, for every `ε` below `m (log 16 - 4 log (32/17)) ≈ 0.24 m`.
 * `cube_thermal_randomized_bound` — the same for all `n`, `β`, `c`, radii and Chernoff
   parameters; it is exponential in `n` whenever `ε / n < log cosh (βc / 2)`, the largest Jensen
-  gap of the class per site — above that accuracy polynomially many random evaluations suffice
-  (`SampledSandwich.lean`), so this accuracy is a sharp threshold.
+  gap of the class per site.  Above that accuracy a bounded number of random evaluations
+  suffices on every instance (a paper proof with the exact two-point constant, theory report
+  Theorem 11.25(b); the machine-checked sandwich of `SampledSandwich.lean` has the larger width
+  `β² ∑ c² / 8`).  So this accuracy is a sharp threshold for the worst case over instances: the
+  lower bound is proved at the zero residual, and other instances of the same class can be
+  cheap at every accuracy.  For exponentially small accuracies the soft-gap bound is not tight;
+  see `cube_exact_dip_randomized` in `QueryRefinements.lean`.
 -/
 
 namespace MetricChain
@@ -93,7 +104,15 @@ variable {X : Type*}
 
 /-- A deterministic adaptive query algorithm, abstractly: for every residual a finite set of
 queried points and an output, such that residuals agreeing with `g` on the points queried on `g`
-are treated exactly like `g`. -/
+are treated exactly like `g`.
+
+Every decision tree (adaptive evaluation procedure) defines such an object, but the converse
+fails: the consistency axiom says only that the partial assignments `g|Q(g)` partition the
+function space, and there are such partitions that no query order realises
+(`Referee3.pathoAlg_not_a_tree` in `QueryRefinements.lean`).  The class is therefore strictly
+larger than the class of algorithms, which only strengthens the lower bounds proved for it; the
+upper bounds (`certificateAlgorithm`, `spotCheck`, `hedgedSpotCheck`) are genuine two-round
+procedures. -/
 structure QueryAlgorithm (X : Type*) where
   /-- The points at which the algorithm evaluates the residual. -/
   queries : (X → ℝ) → Finset X
@@ -1210,10 +1229,13 @@ open Classical in
 `q`-probability at least `p`, and let `(1 - p)^N ≤ δ`.  Then the spot-check algorithm with `N`
 independent sample points drawn from `q` is within `ε / 2` of `Φ` with probability at least
 `1 - δ` on every member of the class — and on the hint itself it makes at most `N` evaluations
-(`spotCheck_card_le`).  Together with `expected_queries_ge_packing` this determines the
-randomised query complexity at an instance, among algorithms correct on the whole class, up to
-the factor `log (1/δ)` and the change from `ε` to `ε / 2`: it is the fractional hitting number
-of the difference sets of the distinguishable alternatives. -/
+(`spotCheck_card_le`; as soon as one sample disagrees it evaluates everything).  Together with
+`expected_queries_ge_packing` this brackets the randomised query complexity at an instance,
+among algorithms correct on the whole class, between fractional hitting numbers of the
+difference sets of the alternatives distinguishable at level `ε` (lower bound) and at level
+`ε / 2` (this algorithm), up to the factors `1 - 2δ` and `log (1/δ)`.  The change of level is
+not harmless (it costs a factor `exp (Θ(ε))` on the cube); `hedgedSpotCheck_correct` in
+`QueryRefinements.lean` removes it. -/
 theorem spotCheck_correct (g₀ : X → ℝ) (N : ℕ) (q : X → ℝ) (hq : ∀ x, 0 ≤ q x)
     (hq1 : ∑ x, q x = 1) {ε δ p : ℝ} (hε : 0 ≤ ε) (hp1 : p ≤ 1)
     (hp : ∀ g, G g → ε / 2 < |Φ g - Φ g₀| → p ≤ ∑ x ∈ univ.filter (fun x => g x ≠ g₀ x), q x)
@@ -1295,5 +1317,77 @@ theorem spotCheck_correct (g₀ : X → ℝ) (N : ℕ) (q : X → ℝ) (hq : ∀
     linarith
 
 end SpotCheck
+
+/-! ### Spot-checking the minimum -/
+
+section MinSpotCheck
+
+variable {X : Type*} [Fintype X] [Nonempty X]
+
+/-- **An alternative with a smaller minimum differs from the instance on a whole closed slack
+ball.**  If `g'` is admissible and `min (f + g') < min (f + g) - η`, then for a minimiser `y` of
+`f + g'` every point `a` within slack `gap y + η` of `y` has `g' a < g a`. -/
+theorem lower_alternative_differs_on_ball {d : X → X → ℝ} (f : X → ℝ) {g g' : X → ℝ}
+    (hg' : Admissible d g') {η : ℝ}
+    (hlt : (univ.inf' univ_nonempty fun x => f x + g' x) <
+      (univ.inf' univ_nonempty fun x => f x + g x) - η) :
+    ∃ y, ∀ a, slack d g a y ≤ f y + g y - (univ.inf' univ_nonempty fun x => f x + g x) + η →
+      g' a < g a := by
+  obtain ⟨y, -, hy⟩ := Finset.exists_mem_eq_inf' univ_nonempty (fun x => f x + g' x)
+  refine ⟨y, fun a ha => ?_⟩
+  have h1 := hg' a y
+  have hs : slack d g a y = d a y - g a + g y := rfl
+  linarith
+
+/-- **An alternative with a larger minimum differs from the instance at every near-minimiser.**
+If `min (f + g') > min (f + g) + η`, then `g' x > g x` at every `x` with `gap x ≤ η`. -/
+theorem higher_alternative_differs_on_minimisers (f : X → ℝ) {g g' : X → ℝ} {η : ℝ}
+    (hgt : (univ.inf' univ_nonempty fun x => f x + g x) + η <
+      univ.inf' univ_nonempty fun x => f x + g' x) (x : X)
+    (hx : f x + g x - (univ.inf' univ_nonempty fun x => f x + g x) ≤ η) : g x < g' x := by
+  have h1 : (univ.inf' univ_nonempty fun x => f x + g' x) ≤ f x + g' x :=
+    Finset.inf'_le (fun x => f x + g' x) (mem_univ x)
+  linarith
+
+open Classical in
+/-- **Spot-checking the minimum.**  Let `g₀` be the hint and `q` a probability vector such that
+every closed slack ball `{a : s(a, y) ≤ gap y + ε/2}` and the set of `ε/2`-minimisers have
+`q`-probability at least `p`.  If `(1 - p)^N ≤ δ`, the spot-check with `N` independent samples
+of `q` returns `min (f + g)` within `ε / 2` with probability at least `1 - δ` on every admissible
+residual `g`, and makes at most `N` evaluations on the hint.  With `q` an optimal fractional
+cover of the balls at level `ε / 2` this is `N ≈ log (1/δ) · (N_frac(ε/2) + 1)`, against the lower
+bound `(1 - 2δ) N_frac(ε)` of `expected_queries_ge`.  The two levels differ: `N_frac(ε/2)` can
+exceed even the integral covering number at level `ε` without bound (uniform metric, `ε = 1.5 d`),
+so this unhedged converse does not show that randomisation gains the integrality gap.  The
+hedged version `min_hedgedSpotCheck_correct` (`QueryRefinements.lean`) removes the loss. -/
+theorem min_spotCheck_correct {d : X → X → ℝ} (f g₀ : X → ℝ) (N : ℕ) (q : X → ℝ)
+    (hq : ∀ x, 0 ≤ q x) (hq1 : ∑ x, q x = 1) {ε δ p : ℝ} (hε : 0 ≤ ε) (hp1 : p ≤ 1)
+    (hball : ∀ y, p ≤ ∑ a ∈ univ.filter (fun a => slack d g₀ a y ≤
+      f y + g₀ y - (univ.inf' univ_nonempty fun x => f x + g₀ x) + ε / 2), q a)
+    (hmin : p ≤ ∑ x ∈ univ.filter (fun x =>
+      f x + g₀ x - (univ.inf' univ_nonempty fun x => f x + g₀ x) ≤ ε / 2), q x)
+    (hN : (1 - p) ^ N ≤ δ) (g : X → ℝ) (hg : Admissible d g) :
+    1 - δ ≤ ∑ a ∈ univ.filter (fun a : Fin N → X =>
+      |(spotCheck (fun g => univ.inf' univ_nonempty fun x => f x + g x) g₀ a).output g -
+        univ.inf' univ_nonempty fun x => f x + g x| ≤ ε / 2), ∏ k, q (a k) := by
+  refine spotCheck_correct (G := Admissible d)
+    (Φ := fun g => univ.inf' univ_nonempty fun x => f x + g x) g₀ N q hq hq1 hε hp1
+    (fun g hg hfar => ?_) hN g hg
+  rcases lt_abs.mp hfar with hup | hdown
+  · -- the alternative has a larger minimum: it differs at every near-minimiser
+    refine le_trans hmin (Finset.sum_le_sum_of_subset_of_nonneg ?_ fun x _ _ => hq x)
+    intro x hx
+    refine Finset.mem_filter.mpr ⟨mem_univ x, ?_⟩
+    have h := higher_alternative_differs_on_minimisers f (g := g₀) (g' := g) (η := ε / 2)
+      (by linarith) x (Finset.mem_filter.mp hx).2
+    exact ne_of_gt h
+  · -- the alternative has a smaller minimum: it differs on a closed slack ball
+    obtain ⟨y, hy⟩ := lower_alternative_differs_on_ball (d := d) f (g := g₀) (g' := g) hg
+      (η := ε / 2) (by linarith)
+    refine le_trans (hball y) (Finset.sum_le_sum_of_subset_of_nonneg ?_ fun x _ _ => hq x)
+    intro a ha
+    exact Finset.mem_filter.mpr ⟨mem_univ a, ne_of_lt (hy a (Finset.mem_filter.mp ha).2)⟩
+
+end MinSpotCheck
 
 end MetricChain

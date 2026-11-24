@@ -555,8 +555,10 @@ residuals.
   differences: `n(k−1)+1` evaluations give an exact pairwise reduction, `secondOrder_remainder`,
   `verify_sound_secondOrder`) — but only under weak second-order coupling (D32); linear
   information (one reference average pins `ln Z` to `β²Σc_i²/8`, Theorem 3.1) and random
-  evaluations (Theorem 11.21) — but only down to the accuracy of the sandwich: below it every
-  randomised algorithm is exponential as well (Theorem 11.25); extensive accuracy.
+  evaluations (Theorem 11.21) — but not at every accuracy: on the uniform cube class, below
+  `n ln cosh(βc/2)` (which is smaller than the width `β²Σc_i²/8` of the sandwich), every
+  randomised algorithm is exponential as well in the worst case, namely at the zero residual
+  (Theorem 11.25; D37 for what this does not say); extensive accuracy.
 * *Not a property of one certificate format.*  The bounds hold for every algorithm that
   evaluates the residual, deterministic or randomised (theory report §11.10;
   `instance_query_complexity`, `expected_queries_ge_exp_weights_min`,
@@ -676,6 +678,108 @@ number `4`), whereas no single dip supported on one point is sensitive, and the 
 
 *What survives.*  The dip bound is a valid lower bound (Theorems 11.22–11.24).  On the uniform
 cube Hamming balls *are* extremal (Harper's theorem; harness XII.5), which gives the matching
-upper bound of Theorem 11.25(c).  For product spaces extremality at the exponential scale is a
-conjecture (theory report §12, item 2(b)).
+upper bound of Theorem 11.25(c).  For product spaces extremality at the exponential scale was
+conjectured; it fails for sites with three or more states (D38).
 
+## D35. "On the cube the soft-gap bound is attained up to a polynomial factor for every accuracy `ε = o(n)`" — FALSE for exponentially small accuracies  **[Lean] [harness: DEAD.15, XII.8]**
+
+*Claim (theory report at f1a6015, Theorem 11.25(c) and the sentence "with exponent
+`ln 2 − h(ρ(ε₁))` … for `ε₁ = 0`").*  For `ε = o(n)` the lower bound
+`(1−2δ) exp(n(ln 2 − h(ρ₀)))`, `ρ₀ = ln(2/(1+e^{−u}))/u`, is attained at the zero residual up to a
+polynomial factor.
+
+*Refutation (third referee, C1).*  For `ε = 0` — and for every `ε` below
+`ln(1 + 2^{−n}(e^u − 1))`, the effect of a dip supported on one point — every randomised algorithm
+makes at least `(1 − 2δ) 2ⁿ` evaluations on the zero residual (`cube_small_accuracy_randomized`,
+`cube_exact_randomized`).  The claimed bound is smaller by `e^{n h(ρ₀)}`.  The text's own count
+`2ⁿ/|B(r*)|` was right; its identification with the soft-gap exponent was not: the soft gap
+replaces `(c − s)₊` by `c − s`, a relaxation that is far from the exact dip criterion when
+`e^ε − 1` is small.
+
+*This is the second occurrence of the same error* (D29: Theorem 11.15 claimed for all
+`ε = o(n)`).  An asymptotic exponent statement of this theory needs two conditions on the
+accuracy, `ε_n = o(n)` **and** `ln(1/ε_n) = o(n)`, or an explicit treatment of the exponentially
+small regime.
+
+*What is true.*  The exponent at the zero residual in every accuracy regime (theory report
+Theorem 11.25(d)): `ln 2 − h((Λ₁ + ε₁)/u)` at accuracy `nε₁`; `ln 2 − h(Λ₁/u)` for accuracies that are
+neither extensive nor exponentially small; `ln 2 − h((Λ₁ − λ)/u)` for `ε = e^{−λn}`, `λ ≤ λ_c`; `λ` for
+`λ_c ≤ λ ≤ ln 2` (cost of order `1/ε`); `ln 2` beyond.  Lower bounds from the exact effect of a dip
+on a Hamming ball (`cube_exact_dip_randomized`), upper bounds from the hedged spot-check and
+Harper's theorem; benchmark B10 compares exact ball counts with the formulas at `n = 3200`.
+
+## D36. "The spot-check determines the randomised complexity up to constants; randomisation gains exactly the integrality gap" — NOT with the unhedged spot-check  **[Lean] [harness: XII.7] [benchmark B10]**
+
+*Claims (theory report at f1a6015 and the following uncommitted draft).*  (i) The randomised
+query complexity at an instance is the fractional hitting number of the distinguishable
+alternatives "up to the factors `1 − 2δ`, `ln(1/δ)` and the change from `ε` to `ε/2`".  (ii) At zero
+temperature the spot-check with a fractional cover shows that randomisation gains exactly the
+integrality gap of the covering problem.
+
+*What is wrong (third referee, M1).*  The spot-check that returns the hint's value has to
+detect alternatives at level `ε/2`; the lower bound counts alternatives at level `ε`.  The
+change of level is not a constant: on the cube it costs `e^{Θ(ε)}` (measured `e^{13}` at `ε = √n`,
+`e^{30}` at `ε = 0.06n`, `n = 3200`; reproduced in benchmark B10), and at zero temperature
+`N_frac(ε/2)` can exceed even the integral covering number at level `ε` without bound (uniform
+metric, `ε = 1.5 d`: `1` against `|X|`).
+
+*Repair.*  Hedge the output (`hedgedSpotCheck_correct`): returning `Φ(g) + ε/2 − η` instead of
+`Φ(g)`, only alternatives that raise `Φ` by more than `ε − η` or lower it by more than `η` have
+to be detected.  For the minimum (`min_hedgedSpotCheck_correct`) this gives the bracket
+`(1−2δ) N_frac(ε) ≤ E|Q| ≤ ⌈ln(1/δ)(N_frac(ε⁻) + 1)⌉`, and (ii) becomes true; on the cube the two
+sides of Theorem 11.25(c) then agree within a constant for `ε ≥ 2`.  The general lower bound of
+the right shape is the pair version (`prob_query_ne_pair`), the fractional relaxation of a value
+certificate.
+
+## D37. Statements of scope that were too wide: "the best algorithm", "the cube class", "below the accuracy of the sandwich"  **[harness: XII.3 (factor), XII.8]**
+
+Recorded together because they are the same kind of slip (third referee, M2–M4).
+
+* *"The size of the smallest certificate is exactly the number of evaluations of the best
+  algorithm that is correct on the whole class"* (README at f1a6015).  The theorem
+  (`instance_query_complexity`) is instance by instance: for each residual there is an
+  algorithm, built from that residual, that is correct everywhere and cheap there.  No single
+  algorithm achieves this on all instances: on the hub family every randomised decision tree
+  pays `((1−2δ)²/8) min(M, N)` on some instance whose certificate has two points (theory report
+  Theorem 11.23(iii)).
+* *"Randomisation gains at most `1 − 2δ` against each covering bound."*  Proved against the
+  fractional (LP-dual) covering bounds, not against the integral covering number.
+* *"On the cube class … exponentially many for every sampling distribution" / "a sharp
+  threshold on the cube class".*  The lower bound is at the zero residual.  The residual `c|x|`
+  of the same class is determined by its values at `0…0` and `1…1`, so with that hint two
+  evaluations suffice at every accuracy.  The threshold is a worst-case statement.
+* *"Below the accuracy of the sandwich every randomised algorithm is exponential."*  The
+  theorem concerns the uniform cube and the accuracy `n ln cosh(βc/2)`, which is strictly below
+  the width `β²Σc_i²/8` of Theorem 11.21 (`0.120` against `0.125` per site at `u = 1`); in between a
+  bounded number of evaluations suffices.  For other product references the exponential
+  regime was proved below `ε₁^crit` only.
+* *"Every randomised algorithm."*  The formal statements cover finite mixtures of
+  `QueryAlgorithm`s — a class strictly larger than decision trees (`Referee3.pathoAlg_not_a_tree`),
+  which strengthens lower bounds; continuum mixtures follow by the same pointwise argument but
+  are not formalised.
+
+## D38. "On product landscapes single dips are extremal at the exponential scale" — FALSE for sites with three or more states  **[harness: DEAD.16]**
+
+*Conjecture (theory report at 6344bf9, "What is not proved", and §12 item 2(b)).*  At an
+additive instance of a product landscape the randomised exponent of `ln Z` is the dip exponent
+`R^rand_β(ε₁)`, and its vanishing point `ε₁^crit` is the boundary between polynomial and
+exponential cost.
+
+*Refutation (independent workstream A, `workstreams/A_REPORT.md`; the example re-derived by
+hand and recomputed in the harness).*  For any `Φ` with `Φ(x) − Φ(y) ≤ s(x,y)` the *generalised
+dip* `(r − Φ)₊` is admissible and raises `ln Z` by at least `βr − Λ(Φ)`, `Λ(Φ) = −ln E_π e^{−βΦ}`.
+With `Φ` additive over the sites and each site function the indicator-type vertex
+`c·1[a ∉ B_i]`, this is a dip centred at the box `∏ B_i` — a union of equally deep single dips,
+the mechanism of D34.  Flat four-state site, `u = βc = 1`, `ε = o(n)`: the boxes of pairs give the
+exponent `D(ρ₂‖½) = 0.02914`, `ρ₂ = −ln(½ + ½e^{−1})`, the single dips `D(ρ₁‖¾) = 0.02841`,
+`ρ₁ = −ln(¼ + ¾e^{−1})` (the uniform sampler is optimal by symmetry; exact binomial tails at
+`n = 20000`: a factor `e^{14.8}`).  Flat eight-state site: `0.0309` against `0.0194`.  Three states
+suffice (energies `(0,0,2)`, `β = c = 1`: `0.0290` against `0.0247`), and there the threshold of the
+lower bound is `0.1197`, not `ε₁^crit = 0.0947` (both recomputed for this revision): between the
+two values the cost is exponential, where the conjecture predicted polynomial.
+
+*What survives.*  The conjecture holds on the uniform cube (Harper) and, by a paper proof of
+the same workstream that has not yet been refereed, for every two-state site (the Lipschitz
+polytope of a two-point space is a segment whose endpoints are the two distance functions).
+The gap closes as `β → ∞`: at zero temperature a sensitive perturbation contains a sensitive
+single dip, which is why the zero-temperature theory is a covering theory.

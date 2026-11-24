@@ -148,7 +148,23 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XII.4 M2: the block of near-minimisers replaced by the whole space (upward alternatives ignored)
                   exit=1  1 TEST(S) MISBEHAVED
-[         caught] XII.5 M1: an initial segment in binary order claimed optimal instead of the Hamming ball
+[         caught] XII.3 M3: factor (1 - delta) instead of (1 - 2 delta) on the uniform metric with blind guesses
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.5 M1: initial segments in binary order claimed to have the largest erosions (instead of the simplicial order)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.5 M2: sets one point larger than the ball claimed to have at most the effect of the ball
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.7 M1: the set of eta-minimisers replaced by the whole space (upward alternatives ignored)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.7 M2: hedged window with closed balls of radius gap + eps (the hedge eta dropped from the radius)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.7 M3: hedged mixtures with the factor (1 - delta)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.7 M4: pairs claimed to be detected with probability 1 - delta
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.8 M1: the two radii of the bracket claimed to differ by at most 2 for every u
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.8 M2: exponent formula without the volume regime (ln 2 - h((Lambda_1 - lam)/u) for every lam)
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XII.6 M1: dip weights without the factor (1 + eta)
                   exit=1  1 TEST(S) MISBEHAVED
@@ -160,7 +176,15 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.11 M1: known part f = 0 on the dyadic line (the shrunk covers are then small) -> must be flagged UNEXPECTEDLY SURVIVED
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.12 M1: two identical site types (per-site maximisation is then exact) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.13 M1: the zero function in place of the class member that vanishes on the ball -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.15 M1: accuracy eps = 1 instead of 0 (the soft-gap bound is then attained up to a polynomial) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.16 M1: low temperature u = 3.5 (above the crossover: single dips are then the hardest to hit) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.14 M1: a deeper perturbation scale (beta = 3: single local dips are sensitive) -> must be flagged UNEXPECTEDLY SURVIVED
                   exit=1  1 TEST(S) MISBEHAVED
 
-82 mutations: 81 caught, 1 expected pass, 0 not as expected
+94 mutations: 93 caught, 1 expected pass, 0 not as expected

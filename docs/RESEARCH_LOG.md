@@ -373,6 +373,8 @@ reduction.
   strategy and replaces the witness-size bound.
 * The way out is the *order* of the envelope, not its size: bounded mixed differences make a
   linear number of evaluations sufficient and the reduction to the pairwise kernel lossless.
+  [Later correction, cycles 8–9: true under weak second-order coupling only; with dense
+  constants the remainder is quadratic in the distance, D32.]
 * Correlated references: the exact worst-case gap is a transport–entropy conjugate for every
   reference, but its extremal residual is not additive (D25); the planned "transfer-matrix
   formula" does not exist in the naive form.
@@ -507,7 +509,7 @@ certificate format, with one matching pair (the threshold of Theorem 11.25) and 
 identity (certificate size = instance-wise complexity).  The proofs remain short and the tools
 standard; the honest classification is unchanged in kind — a note, plus a formalisation.
 
-### Resume here (state at the end of cycle 8)
+### State at the end of cycle 8 (superseded by the list at the end of cycle 9)
 
 Verified state: every module under `proofs/` (36 files) builds with zero warnings and is walked
 by the axiom audit; the harness (69 registered tests: 55 that must survive, 14 documented
@@ -543,4 +545,113 @@ In priority order:
    best-first constants and the `f ≡ 0` doubling conjecture; dependent references (D25);
    `cut`/`elim` nodes in the JSON format; verified interval evaluation of realistic energy
    terms; realizability certificates for incomplete distance data.
+
+## Cycle 9 — third referee report; the accuracy diagram; the dip conjecture refuted
+
+*Trigger.*  The third independent referee (`reviews/R3_referee_report.md`) reported on §11.10 as
+of f1a6015 and on the faithfulness of the R2 corrections, and the first two of six independent
+workstreams reported (`workstreams/`).
+
+**Referee findings and what was done.**  No machine-checked statement was false; all 22 R2 items
+were found applied.
+* *Critical:* Theorem 11.25(c) — "for `ε = o(n)` the soft-gap bound is attained up to a polynomial
+  factor" — is false for exponentially small accuracies (at `ε = 0` every randomised algorithm
+  makes `(1−2δ)2ⁿ` evaluations on the zero residual).  **This is the same error as R2-C1,
+  committed a second time in a new theorem** (D35).  Lesson recorded: an asymptotic exponent in
+  this theory needs `ε_n = o(n)` *and* `ln(1/ε_n) = o(n)`, or an explicit treatment of the
+  exponentially small regime; the harness now has a test at `ε → 0` for both theorems
+  (`DEAD.10`, `DEAD.15`).
+* *Major:* the unhedged spot-check loses `e^{Θ(ε)}` against the lower bound, so the converse was
+  not tight and the exponent at extensive accuracy was claimed without proof (D36; repaired by
+  the referee's hedged spot-check); three statements of scope that were too wide — "the best
+  algorithm" without "instance by instance", "the cube class" where only the zero residual was
+  meant, "the accuracy of the sandwich" for the cube threshold (D37); the closest prior art
+  (Holzmüller–Bach §2.2; instance complexity) was missing (`prior_art/L7` rewritten).
+* *Minor (16):* all applied.  Among them: the abstract `QueryAlgorithm` is strictly more general
+  than decision trees (docstring; `Referee3.pathoAlg_not_a_tree`); the degenerate witnesses are
+  complemented by a genuinely randomised one on which the packing bound is attained
+  (`Referee3.packing_factor_attained`); the hub-family claim for randomised algorithms now has
+  the referee's proof; harness weaknesses (`XII.3` could not tell `1 − 2δ` from `1 − δ`; `XII.5`
+  did not enumerate all sets; no hedged strategies; `DEAD.12`, `DEAD.13` without mutation).
+* All of the referee's numbers that enter the documents were recomputed with own code before
+  the documents were changed (regime table at `n = 3200`; hedged against unhedged spot-check;
+  `ε₁^crit` at the zero residual and at the worst additive instance).
+
+**New mathematics.**
+* `QueryRefinements.lean` (the referee's lemmas, plus own additions): pair detection
+  (`exists_query_ne_pair`, `prob_query_ne_pair`), the hedged spot-check
+  (`hedgedSpotCheck_correct`), its form for the minimum (`min_hedgedSpotCheck_correct`), the
+  exact-dip bound (`thermal_exact_dip_randomized`, `cube_exact_dip_randomized`).
+* *Zero temperature:* `(1−2δ) N_frac(ε) ≤ min E|Q(g)| ≤ ⌈ln(1/δ)(N_frac(ε⁻) + 1)⌉` — randomisation
+  is worth the integrality gap of the covering problem and no more (Theorem 11.23(c)).
+* *The accuracy diagram on the cube* (Theorem 11.25(c,d)): at the zero residual the randomised
+  cost is determined up to a polynomial factor for every `n` and every `ε > 0` (lower bound:
+  exact dip on a Hamming ball; upper bound: hedged spot-check with uniform samples and Harper's
+  theorem), with exponents `ln 2 − h((Λ₁+ε₁)/u)`, `ln 2 − h(Λ₁/u)`, `ln 2 − h((Λ₁−λ)/u)`, `λ`, `ln 2`
+  in the five regimes.  This carries out the first of the five routes the referee named for
+  turning Theorem 11.25 into a contribution.
+* *Hint-free algorithms on the cube class:* a provable upper end, `ln cosh u` (plain Monte
+  Carlo with Chebyshev), replaces the heuristic `u²/8`.
+
+**Workstreams (first two reports).**
+* **A (isoperimetric conjecture): the conjecture is false for sites with three or more
+  states.**  Generalised dips `(r − Φ)₊`, `Φ` any slack-Lipschitz function, are admissible; on
+  the flat four-state site the dips centred at boxes of pairs give the exponent `0.02914`
+  against `0.02841` for single dips.  Re-derived by hand, recomputed exactly (`DEAD.16`), D38.
+  The report also contains a threshold theorem (two-measure tensorisation; bounded cost above
+  `min_Q max_Φ[βE_QΦ − Λ(Φ)]` for every `n`) whose proof was checked and whose three example
+  values were recomputed by an independent LP, and a paper proof that the game over Lipschitz
+  vertices is the exact exponent (inherently typical subsets) — not verified.
+* **C (representations):** a normal form that absorbs the known part into an asymmetric
+  envelope, a second best-first bound, the Dechter–Pearl classification of best-first search,
+  the negative result that best-first search is unboundedly worse than a two-point certificate
+  on the line with a known part, and prior art we had missed (Hetland 2020: optimal metric
+  search is equivalent to minimum dominating set).  Delivered; not yet verified.
+
+**Falsification before the documents.**  Harness: `XII.5` now enumerates all supports of the 3-
+and 4-cube (271 766 set checks; Harper's nestedness for every erosion depth); `XII.7` (hedged
+window, hedged mixtures, pairs, with tight instances); `XII.8` (the two radii of the bracket,
+the closing inequality, exponents at `n = 600`); `DEAD.15`, `DEAD.16`; 12 new mutations, all
+caught — one (the hedge dropped from the radius) only after the test was sharpened.
+
+**Assessment.**  The referee's verdict stands (a note; §12).  What changed in substance: one
+statement of the cluster is now complete — the cube at the zero residual, all accuracy regimes,
+matching sides; and the direction beyond the cube has moved from a false conjecture to a
+candidate theorem with a verified lower half.
+
+### Resume here (state at the end of cycle 9, first checkpoint)
+
+Verified state: every module under `proofs/` (37 files) builds with zero warnings and is walked
+by the axiom audit; the harness (73 registered tests: 57 that must survive, 16 documented
+refutations) and its mutation tests (94 mutations: 93 caught, one expected pass) pass;
+`scripts/audit_all.sh` exits 0.
+In priority order:
+
+1. **Integrate workstream A.**  (a) Move the machine-checked core of its scratch file into
+   `proofs/Frontiers/` (generalised dips; the two ingredients of the every-`n` lower bound; the
+   two-measure tensorisation and the hitting bound) and connect it to
+   `expected_queries_ge_packing` and `hedgedSpotCheck_correct`; (b) state the results as
+   theorems of §11.10 (generalised lower bound **[V]**; instance-wise threshold **[V core + P]**;
+   exact exponent **[P, unrefereed]**); (c) harness tests for generalised dips and the
+   tensorisation on small products; (d) an independent referee for its Theorem A(ii)
+   (Lemma 3(c), Proposition 4, Lemma 5, Steps 1–7) — until then it is a claim.
+2. **Verify and integrate workstream C**: the normal form `(σ, 0, E^d)`; the second best-first
+   bound (valid at `κ = 1`); the negative result on the line with a known part; position
+   Theorems 11.5, 11.10, 11.23(a) against Hetland (2020) and AESA.
+3. **Workstreams B, D, E, G** when they report: verify before integrating.
+4. **Hint-free algorithms** on the cube class: exponent between `ln 2 − h(Λ₁/u)` and `ln cosh u`;
+   needs a multi-instance lower bound.  The worst-case threshold of a general product class
+   without a hint.
+5. **Beyond product landscapes**: a pairwise chain as known part (workstream B).
+6. **Probabilistic certificate kernel**: a checker for hedged spot-check transcripts with
+   verifier-side randomness; above the threshold the detection probability is certified by a
+   single-site computation.
+7. **Second-order classes** (workstream E): lower bounds under dense constants; one residual
+   with certified constants; `STARCERT` with a termination guarantee.
+8. Carried over: the exponent of Theorem 11.15 for exponentially small accuracies (the cube
+   diagram suggests the shape of the answer); an approximate, representation-independent
+   version of the partition-kernel separation; best-first constants and the `f ≡ 0` doubling
+   conjecture; dependent references (D25); `cut`/`elim` nodes in the JSON format; verified
+   interval evaluation of realistic energy terms; realizability certificates for incomplete
+   distance data.
 

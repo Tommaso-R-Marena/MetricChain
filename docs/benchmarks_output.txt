@@ -140,3 +140,42 @@ u=beta*c | ln2 - h(rho0) |  LP value | U = ln(2/(1+e^-u)) | threshold ln cosh(u/
    1.000 |       0.02914 |   0.02913 |            0.37989 |                0.12011 |    0.12011 | 0.05113 | 0.03604 | 0.03123
    2.000 |       0.09728 |   0.09724 |            0.56622 |                0.43378 |    0.43378 | 0.11977 | 0.10441 | 0.09992
    2.773 |       0.15614 |   0.15610 |            0.63252 |                0.75377 |    0.75377 | 0.18650 | 0.16366 | 0.15903
+
+accuracy regimes on the cube at the zero residual, u = 1 (exact ball counts against the predicted exponent;
+eps = e^{-lambda n}; for exponentially small accuracies the soft-gap exponent ln2 - h(rho0) = 0.0291 is NOT attained):
+ lambda | predicted | n=3200
+   0.00 |    0.0291 | 0.0303
+   0.02 |    0.0398 | 0.0410
+   0.05 |    0.0590 | 0.0603
+   0.10 |    0.1003 | 0.1016
+   0.30 |    0.3000 | 0.3003
+   0.60 |    0.6000 | 0.5997
+   0.80 |    0.6931 | 0.6931
+
+extensive accuracies eps = n eps1, u = 1 (threshold ln cosh(1/2) = 0.1201); exponent of the lower bound against ln2 - h((Lambda1 + eps1)/u):
+  eps1 | predicted | n=3200
+ 0.020 |    0.0202 | 0.0212
+ 0.048 |    0.0104 | 0.0114
+ 0.080 |    0.0032 | 0.0040
+ 0.110 |    0.0002 | 0.0006
+
+upper bound / lower bound at the zero residual, u = 1: ln UB - ln LB (without ln(1/delta) and 1 - 2 delta)
+  unhedged spot-check (must detect at level eps/2)  |  hedged spot-check (output ln Z(0) + eps/2 - 1)
+     n |   eps=2    ln n  sqrt n   0.02n   0.06n   0.10n  |    eps=2    ln n  sqrt n   0.02n   0.06n   0.10n
+   200 |     1.0     1.8     2.6     1.5     2.6     2.9  |      1.0     0.9     0.5     1.0     0.7     0.4
+   800 |     1.0     1.9     5.9     4.0     8.1     8.6  |      1.0     0.9     0.7     0.8     0.5     0.2
+  3200 |     1.0     2.4    13.1    14.2    29.9    30.4  |      1.0     1.0     0.8     0.8     0.5     0.2
+
+whole accuracy range, eta = min(1, eps/2): largest ln UB - ln LB over eps from e^{-0.69 n} to the threshold
+   n =   200:  max = 7.58   (ln(n+1) = 5.30)
+   n =   800:  max = 9.96   (ln(n+1) = 6.69)
+   n =  3200:  max = 7.38   (ln(n+1) = 8.07)
+
+threshold of the randomised lower bound at additive instances (site e/c = 1/2, beta = 1; residual difference gamma):
+  gamma | eps1_crit(gamma) | Jensen width W1(gamma)
+ -0.900 |          0.02243 |                0.42590
+ -0.500 |          0.08776 |                0.25827
+ -0.037 |          0.11383 |                0.11389   <- largest eps1_crit
+  0.000 |          0.11367 |                0.12246
+  0.500 |          0.08132 |                0.25740
+  0.900 |          0.01963 |                0.37781

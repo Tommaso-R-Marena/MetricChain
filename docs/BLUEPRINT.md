@@ -493,8 +493,10 @@ information:
 * *linear information* — a reference average of the residual and the sandwich of §6.4;
 * *structure* — a second-order envelope with weak coupling (below);
 * *accuracy* — an extensive tolerance;
-* *a probabilistic guarantee* — Steps 4 and 5; but note the floor: below the accuracy of the
-  sandwich every randomised procedure is exponential as well (theory report Theorem 11.25).
+* *a probabilistic guarantee* — Steps 4 and 5; but note the floor: randomisation does not help
+  at every accuracy.  On the uniform cube class, below `n ln cosh(βc/2)` every randomised
+  procedure is exponential in the worst case, i.e. for the zero model (theory report
+  Theorem 11.25); for a model `ĝ` at hand, compute the single-site threshold of §6.6 Step 5.
 
 **Step 3 — second-order envelopes.**  If the residual comes with certified bounds `c_ij` on its
 mixed second differences, `n(k−1)+1` evaluations on the star of a reference configuration `x₀`
@@ -565,29 +567,44 @@ fit) together with the value `Φ(E₀ + ĝ)` it implies.  The verifier draws `N`
 distribution `q` of its own choice, evaluates the residual there and compares:
 
 ```
-SPOT-CHECK(model ĝ, residual oracle g, sampling distribution q, N):
+SPOT-CHECK(model ĝ, residual oracle g, sampling distribution q, N, hedge η ∈ (0, ε)):
   the VERIFIER draws a⁽¹⁾ … a⁽ᴺ⁾ independently from q
-  if g(a⁽ᵏ⁾) = ĝ(a⁽ᵏ⁾) for all k:  accept Φ(E₀ + ĝ)
+  if g(a⁽ᵏ⁾) = ĝ(a⁽ᵏ⁾) for all k:  accept o = Φ(E₀ + ĝ) − ε/2 + η   (minimum)
+                                           o = Φ(E₀ + ĝ) + ε/2 − η   (ln Z)
   else:                             reject (fall back to a deterministic procedure)
 ```
 
-Guarantee (`spotCheck_correct`): if every admissible residual whose value of `Φ` differs from
-the model's by more than `ε/2` differs from `ĝ` on a set of `q`-probability at least `p`, the
-accepted value is within `ε/2` except with probability `(1 − p)^N`.  The work is in `p`.  For
-the minimum, `p` is the least `q`-mass of the closed slack balls `{a : s(a,y) ≤ gap(y) + ε/2}`
-and of the set of `ε/2`-minimisers, all computable from `ĝ` (harness XII.4); no choice of `q`
-makes `N` smaller than `(1 − 2δ)` times the fractional covering number (`expected_queries_ge`),
-so on non-sharp product landscapes spot-checking is exponential too.  For free energies a
+Guarantee (`hedgedSpotCheck_correct`): if every admissible residual whose value of `Φ` is
+farther than `ε/2` from the accepted number `o` differs from `ĝ` on a set of `q`-probability at
+least `p`, the accepted value is within `ε/2` except with probability `(1 − p)^N`.  The hedge
+matters: without it (`o = Φ(E₀ + ĝ)`, `spotCheck_correct`) all alternatives at distance `ε/2` must
+be detected, with it only those that move `Φ` by more than `ε − η` in the cheap direction or by
+more than `η` in the other; the difference is a factor `e^{Θ(ε)}` in `N` for free energies and can
+be unbounded for the minimum (`DEAD_ENDS.md` D36).  The work is in `p`.  For the minimum
+(`min_hedgedSpotCheck_correct`), `p` is the least `q`-mass of the closed slack balls
+`{a : s(a,y) ≤ gap(y) + ε − η}` and of the set of `η`-minimisers, all computable from `ĝ`
+(harness XII.4, XII.7); no choice of `q` makes `N` smaller than `(1 − 2δ)` times the fractional
+covering number (`expected_queries_ge`), so on non-sharp product landscapes spot-checking is
+exponential too.  For free energies a
 sampling distribution with a guarantee is available in closed form (`thermalSampler`,
 `thermal_spotCheck_correct`): draw half of the samples from the Gibbs measure `π̂` of the model
 and half with probability proportional to `π̂(z)·(e^{ε/2} e^{Λ(z)} − 1)`, where the soft gap
 `Λ(z) = ln Z(E₀+ĝ) − ln Z(E₀ + ĝ(z) + d(·,z))` is a ratio of two partition functions of the
 model (for a chain-structured `E₀` and an additive `ĝ`, two transfer-matrix computations per
 `z`); then `N = ⌈2 ln(1/δ) E_π̂[e^{Λ}] / (1 − e^{−ε/2})⌉` samples suffice.  The number
-`E_π̂[e^{Λ}]` is exponential in general — on the cube `(2/(1+e^{−βc}))ⁿ`, still exponentially
-smaller than the `2ⁿ` of every deterministic procedure (`cube_deterministic_lower_bound`) —
-and no sampling distribution avoids an exponential number below the accuracy
-`n ln cosh(βc/2)` (`cube_thermal_randomized_bound`).  Exact equality of values
+`E_π̂[e^{Λ}]` is exponential in general — for the zero model on the cube `(2/(1+e^{−βc}))ⁿ`, still
+exponentially smaller than the `2ⁿ` of every deterministic procedure there
+(`cube_deterministic_lower_bound`).  This sampler is not optimal: for the zero model on the
+cube uniform samples with the hedged output need only `2ⁿ/|B(k)|` of them, `k` the largest radius
+whose dip changes `ln Z` by at most `ε − η` (theory report Theorem 11.25(c)), and for that model
+no sampling distribution avoids an exponential number below the accuracy `n ln cosh(βc/2)`
+(`cube_thermal_randomized_bound`, `cube_exact_dip_randomized`).  This is a statement about the
+worst model, not about every model: `ĝ = c|x|` is determined by two evaluations.  For an
+additive model, compute before sampling the single-site quantity
+`γ(Q) = max_Φ [β E_Q Φ − Λ(Φ)]` (maximum over the vertices of the Lipschitz polytope of the
+site): if the accuracy per site exceeds `min_Q γ(Q)`, a bounded number of samples from
+`½π̂ + ½Q*ⁿ` suffices, whatever `n` (theory report §11.10, "the threshold of an instance";
+paper proof, machine-checked core pending).  Exact equality of values
 is assumed; with numerical tolerances the comparison and the envelope must be widened
 consistently.  No kernel for such transcripts is implemented here.
 
@@ -714,7 +731,7 @@ against a "bound" of `0.0076`; `reviews/R1`, item 10)
 | smallest certificate | NP-hard to find (contains minimum dominating set); best-first search is competitive only with covers at radii shrunk by `(1−κ)/(4(1+κ))` | `domCertificate_min_card`, `bestFirst_card_le`; `DEAD_ENDS.md` D26 |
 | second-order envelope + star data | the pairwise sandwich is the exact envelope; nothing tighter exists with the same evaluations; its half-width is quadratic in the Hamming distance, so with dense constants even the whole radius-2 ball does not certify | `secondOrder_envelope_exact`; `DEAD_ENDS.md` D32 |
 | partition kernel without decomposition rules | certificates with an *exact lower end* need one leaf per configuration on instances that are rigid *in the given representation* (`k^n` on chains, against one leaf with elimination); nothing is proved for approximate enclosures, and a gauge-trivial instance satisfies the hypothesis | `zverify2_elementary_exact_leaves`, `cut_rule_separation`, `chain_separation`, `ferroChain_separation`, `gauge_trivial_separation` |
-| every algorithm that evaluates the residual, deterministic or randomised | the instance-wise deterministic cost equals the size of a value certificate; a randomised algorithm with error probability `δ` pays `(1 − 2δ)` times every covering lower bound; for `ln Z` on the cube class, exponentially many evaluations below the accuracy `n ln cosh(βc/2)` | `instance_query_complexity`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `thermal_expected_queries_ge`, `cube_thermal_randomized_bound` |
+| every algorithm that evaluates the residual, deterministic or randomised | the instance-wise deterministic cost equals the size of a value certificate; a randomised algorithm with error probability `δ` pays `(1 − 2δ)` times every fractional covering bound; for `ln Z` on the cube class, exponentially many evaluations at the zero residual below the accuracy `n ln cosh(βc/2)` (a worst-case statement), and `(1 − 2δ) 2ⁿ` for exact answers | `instance_query_complexity`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `thermal_expected_queries_ge`, `cube_thermal_randomized_bound`, `cube_exact_dip_randomized`, `cube_exact_randomized` |
 | pure dual certificates | incomplete: the frustrated triangle has LP bound 0, optimum 1 | `triangle_no_leaf_certificate` |
 | certificates without `sum` | exactly `2^m` leaves on `m` independent frustrated triangles; `2m` with `sum`; the gap persists in total description length (at most `147 m³` against at least `2^m`, hence smaller for `m ≥ 21`) | `sumFree_exponential`, `sumFree_tight`, `sum_linear`, `sum_rule_separation_dataSize` |
 | free-energy sandwich | product reference: constant `1/8` is optimal and the worst residual is additive two-level; the `Σ c_i²` width is false for correlated references; gap is extensive | `mcdiarmid_no_better_constant`, `exists_two_level_worst_residual`, `DEAD_ENDS.md` D14 |
@@ -793,7 +810,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 36 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 94 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  The audit script runs it, and starts with a self-test in which
@@ -802,4 +819,4 @@ it as the executable reading of the schema and as a regression oracle for faster
 
 Synthetic stress tests and tightness benchmarks: `experiments/falsify_conjectures.py`
 (counterexample search for every theorem) and `experiments/separation_benchmarks.py`
-(B1–B7; numbers quoted in the theory report).
+(B1–B10; numbers quoted in the theory report).

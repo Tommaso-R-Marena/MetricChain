@@ -33,6 +33,7 @@ import proofs.Frontiers.PartitionProduct
 import proofs.Frontiers.RefereeLemmas
 import proofs.Frontiers.QueryLowerBound
 import proofs.Frontiers.SoftGapBounds
+import proofs.Frontiers.QueryRefinements
 import proofs.AuditCommand
 
 /-!
@@ -287,6 +288,7 @@ import proofs.AuditCommand
 #print axioms MetricChain.cube_thermal_randomized_exponential
 #print axioms MetricChain.cube_thermal_randomized_bound
 #print axioms MetricChain.spotCheck_correct
+#print axioms MetricChain.min_spotCheck_correct
 
 -- Soft-gap bounds: randomised upper bound, product form, deterministic against randomised
 #print axioms MetricChain.softGap_le_add_slack
@@ -297,6 +299,18 @@ import proofs.AuditCommand
 #print axioms MetricChain.cube_dipWeight_sum
 #print axioms MetricChain.softGap_hamEnv_additive
 #print axioms MetricChain.thermal_product_randomized
+
+-- Refinements after the third referee report: pair detection, hedged spot-check, tiny accuracies
+#print axioms MetricChain.exists_query_ne_pair
+#print axioms MetricChain.prob_query_ne_pair
+#print axioms MetricChain.hedgedSpotCheck_correct
+#print axioms MetricChain.min_hedgedSpotCheck_correct
+#print axioms MetricChain.cube_small_accuracy_randomized
+#print axioms MetricChain.cube_exact_randomized
+#print axioms MetricChain.thermal_exact_dip_randomized
+#print axioms MetricChain.cube_exact_dip_randomized
+#print axioms MetricChain.Referee3.pathoAlg_not_a_tree
+#print axioms MetricChain.Referee3.packing_factor_attained
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp
@@ -1009,6 +1023,111 @@ theorem cube_deterministic_witness (n : ℕ) (β c : ℝ) :
         Real.log (∑ x, Real.exp (-β * ((0 : ℝ) + g x)))| ≤ 0 / 2 := by
   intro g _
   simp [fullQueryAlgorithm]
+
+/-- **Witness for `min_spotCheck_correct`.**  Two states, discrete envelope of oscillation `1`,
+zero known part, hint `0`, exact accuracy (`ε = 0`), the uniform sampling distribution: every
+closed slack ball and the set of minimisers have probability at least `1/2`, so the hypotheses
+hold with `p = 1/2`, `N = 1`, `δ = 1/2` — one uniform sample returns the exact minimum of every
+admissible residual with probability at least `1/2`. -/
+theorem min_spotCheck_witness (g : Bool → ℝ) (hg : Admissible (discreteEnvelope 1) g) :
+    1 - (1 / 2 : ℝ) ≤ ∑ _a ∈ univ.filter (fun a : Fin 1 → Bool =>
+      |(spotCheck (fun g : Bool → ℝ => univ.inf' univ_nonempty fun x => (0 : ℝ) + g x)
+          (fun _ => 0) a).output g - univ.inf' univ_nonempty fun x => (0 : ℝ) + g x| ≤ 0 / 2),
+        ∏ _k : Fin 1, (1 / 2 : ℝ) := by
+  have hinf : (univ.inf' univ_nonempty fun _ : Bool => (0 : ℝ) + 0) = 0 := by simp
+  refine min_spotCheck_correct (d := discreteEnvelope 1) (ε := 0) (δ := 1 / 2) (p := 1 / 2)
+    (fun _ : Bool => (0 : ℝ)) (fun _ => 0) 1
+    (fun _ => 1 / 2) (fun _ => by norm_num) (by simp) (le_refl 0) (by norm_num)
+    (fun y => ?_) ?_ (by norm_num) g hg
+  · -- every closed ball contains its centre
+    rw [hinf]
+    have hmem : y ∈ univ.filter (fun a : Bool =>
+        slack (discreteEnvelope 1) (fun _ : Bool => (0 : ℝ)) a y ≤ 0 + 0 - 0 + 0 / 2) := by
+      refine Finset.mem_filter.mpr ⟨mem_univ y, ?_⟩
+      simp [slack, discreteEnvelope]
+    calc (1 / 2 : ℝ) = ∑ a ∈ ({y} : Finset Bool), (1 / 2 : ℝ) := by simp
+      _ ≤ _ := Finset.sum_le_sum_of_subset_of_nonneg (Finset.singleton_subset_iff.mpr hmem)
+          fun _ _ _ => by norm_num
+  · -- every state is a minimiser of the zero energy
+    rw [hinf]
+    simp
+    norm_num
+
+/-- **Witness for `min_hedgedSpotCheck_correct`.**  Two states, discrete envelope of oscillation
+`1`, zero known part, hint `0`, accuracy `ε = 2` and hedge `η = 1` (so the accepted number is the
+hint's minimum itself), the uniform sampling distribution: every closed slack ball of radius
+`gap + ε - η` and the set of `η`-minimisers have probability at least `1/2`, so the hypotheses
+hold with `p = 1/2`, `N = 1`, `δ = 1/2`. -/
+theorem min_hedgedSpotCheck_witness (g : Bool → ℝ) (hg : Admissible (discreteEnvelope 1) g) :
+    1 - (1 / 2 : ℝ) ≤ ∑ _a ∈ univ.filter (fun a : Fin 1 → Bool =>
+      |(hedgedSpotCheck (fun g : Bool → ℝ => univ.inf' univ_nonempty fun x => (0 : ℝ) + g x)
+          (fun _ => 0) ((univ.inf' univ_nonempty fun _ : Bool => (0 : ℝ) + 0) - 2 / 2 + 1)
+          a).output g - univ.inf' univ_nonempty fun x => (0 : ℝ) + g x| ≤ 2 / 2),
+        ∏ _k : Fin 1, (1 / 2 : ℝ) := by
+  have hinf : (univ.inf' univ_nonempty fun _ : Bool => (0 : ℝ) + 0) = 0 := by simp
+  refine min_hedgedSpotCheck_correct (d := discreteEnvelope 1) (ε := 2) (η := 1) (δ := 1 / 2)
+    (p := 1 / 2) (fun _ : Bool => (0 : ℝ)) (fun _ => 0) 1
+    (fun _ => 1 / 2) (fun _ => by norm_num) (by simp) (by norm_num) (by norm_num)
+    (fun y => ?_) ?_ (by norm_num) g hg
+  · -- every closed ball contains its centre
+    rw [hinf]
+    have hmem : y ∈ univ.filter (fun a : Bool =>
+        slack (discreteEnvelope 1) (fun _ : Bool => (0 : ℝ)) a y ≤ 0 + 0 - 0 + (2 - 1)) := by
+      refine Finset.mem_filter.mpr ⟨mem_univ y, ?_⟩
+      simp [slack, discreteEnvelope]
+    calc (1 / 2 : ℝ) = ∑ a ∈ ({y} : Finset Bool), (1 / 2 : ℝ) := by simp
+      _ ≤ _ := Finset.sum_le_sum_of_subset_of_nonneg (Finset.singleton_subset_iff.mpr hmem)
+          fun _ _ _ => by norm_num
+  · -- every state is a minimiser of the zero energy
+    rw [hinf]
+    simp
+    norm_num
+
+open Classical in
+/-- **Witness for `cube_exact_dip_randomized` (and `thermal_exact_dip_randomized`).**  For every
+`n`, `β > 0`, `c > 0` the hypotheses hold with radius `r = c`, ball size `B = 1` and accuracy
+`ε = 0`: the dip of depth `c` at a point differs from the zero residual at that point only and
+raises `log Z`.  Hence every randomised algorithm that returns `log Z` exactly with probability
+`1 - δ` on the class makes at least `(1 - 2δ) 2^n` evaluations on the zero residual — the
+statement `cube_exact_randomized`, obtained here from the general exact-dip bound. -/
+theorem cube_exact_dip_witness (n : ℕ) {Ω : Type*} [Fintype Ω]
+    (alg : Ω → QueryAlgorithm (Fin n → Bool)) (P : Ω → ℝ) (hP : ∀ ω, 0 ≤ P ω)
+    (hP1 : ∑ ω, P ω = 1) {β c δ : ℝ} (hβ : 0 < β) (hc : 0 < c)
+    (hcorr : ∀ g, Admissible (hamEnv fun _ : Fin n => c) g →
+      1 - δ ≤ ∑ ω ∈ univ.filter (fun ω => |(alg ω).output g -
+        Real.log (∑ x, Real.exp (-β * ((0 : ℝ) + g x)))| ≤ (0 : ℝ) / 2), P ω) :
+    (1 - 2 * δ) * 2 ^ n ≤ (∑ ω, P ω * ((alg ω).queries fun _ => 0).card) * 1 := by
+  have hd : IsEnvelope (hamEnv (σ := fun _ : Fin n => Bool) fun _ => c) :=
+    hamEnv_isEnvelope fun _ => hc.le
+  refine cube_exact_dip_randomized n alg P hP hP1 (r := c) hc.le (fun y => ?_) (fun a => ?_) hcorr
+  · have hone : ∀ x : Fin n → Bool,
+        (1 : ℝ) ≤ Real.exp (β * max 0 (c - hamEnv (fun _ : Fin n => c) x y)) := by
+      intro x
+      have h0 : (0 : ℝ) ≤ β * max 0 (c - hamEnv (fun _ : Fin n => c) x y) :=
+        mul_nonneg hβ.le (le_max_left _ _)
+      calc (1 : ℝ) = Real.exp 0 := Real.exp_zero.symm
+        _ ≤ _ := Real.exp_le_exp.mpr h0
+    have hy : (1 : ℝ) < Real.exp (β * max 0 (c - hamEnv (fun _ : Fin n => c) y y)) := by
+      rw [hd.self y, sub_zero, max_eq_right hc.le]
+      exact Real.one_lt_exp_iff.mpr (mul_pos hβ hc)
+    have hlt : ∑ _x : Fin n → Bool, (1 : ℝ) <
+        ∑ x : Fin n → Bool, Real.exp (β * max 0 (c - hamEnv (fun _ : Fin n => c) x y)) :=
+      Finset.sum_lt_sum (fun x _ => hone x) ⟨y, mem_univ y, hy⟩
+    have hcard : ∑ _x : Fin n → Bool, (1 : ℝ) = (2 : ℝ) ^ n := by simp
+    rw [hcard] at hlt
+    have hlog := Real.log_lt_log (by positivity) hlt
+    linarith
+  · have hsub : (univ.filter fun y : Fin n → Bool => hamEnv (fun _ : Fin n => c) a y < c) ⊆
+        {a} := by
+      intro y hy
+      have hlt := (Finset.mem_filter.mp hy).2
+      by_contra hne
+      have hne' : a ≠ y := fun h => hne (by rw [Finset.mem_singleton]; exact h.symm)
+      have := hamEnv_ge_of_ne hc.le hne'
+      linarith
+    have hcard := Finset.card_le_card hsub
+    rw [Finset.card_singleton] at hcard
+    exact_mod_cast hcard
 
 end MetricChain.NonVacuity
 

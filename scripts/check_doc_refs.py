@@ -68,6 +68,7 @@ for f in (root / "proofs").rglob("*.lean"):
             full.add(f"{current}.{fm.group(1)}")
 
 IGNORE = {
+    "U_b", "Δ_k", "g_j", "B_i", "φ_B", "σ_φ", "K_t",
     "lower_bound", "native_decide", "metricchain-cert", "audit_all", "falsify_conjectures",
     "separation_benchmarks", "lake_env", "check_doc_refs", "L1_pruning_certificates",
     "L2_relaxations_partition", "L3_realizability_geometry", "prior_art", "e_lo", "e_hi",

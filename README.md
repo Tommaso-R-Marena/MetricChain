@@ -18,7 +18,8 @@ evaluation only.
 | how the program evolved and what is open | [`docs/RESEARCH_LOG.md`](docs/RESEARCH_LOG.md) |
 | what turned out false, weaker, or already known | [`docs/DEAD_ENDS.md`](docs/DEAD_ENDS.md) |
 | the literature checks behind the novelty assessments | [`docs/prior_art/`](docs/prior_art) |
-| the independent referee reports (first and second phase) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`docs/reviews/R2_referee_report.md`](docs/reviews/R2_referee_report.md) |
+| the independent referee reports (three so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`docs/reviews/R2_referee_report.md`](docs/reviews/R2_referee_report.md), [`docs/reviews/R3_referee_report.md`](docs/reviews/R3_referee_report.md) |
+| reports of independent exploratory workstreams (as delivered; not part of the theory report unless it says so) | [`docs/workstreams/`](docs/workstreams) |
 
 ## Layout
 
@@ -37,8 +38,10 @@ proofs/Frontiers/       envelope duality, dominance calculus, free-energy sandwi
                         thermal robustness), second- and higher-order envelopes, the sampled
                         free-energy sandwich, the partition kernel with cut and elimination
                         rules, the lemmas of the second referee, query-complexity bounds
-                        for every algorithm, deterministic or randomised, and two-sided
-                        soft-gap bounds for randomised free-energy estimation
+                        for every algorithm, deterministic or randomised, two-sided
+                        soft-gap bounds for randomised free-energy estimation, and the
+                        refinements after the third referee report (pair detection, hedged
+                        spot-check, exact-dip bounds on the cube)
 proofs/CertificateAlgebra.lean   executable verification kernels + Master Soundness Theorems
 proofs/AuditCommand.lean         the axiom walk (by defining module)
 proofs/AxiomAudit.lean           axiom audit of every project constant + non-vacuity witnesses
@@ -90,31 +93,45 @@ claims as overstated; the corrections are in the report and in `docs/DEAD_ENDS.m
 
 **Theory, second phase (theory report §§10–12).**  *What can residual evaluations certify, and
 at what cost?*  Certificates are coverings in a slack quasi-metric with radii equal to the
-points' own optimality gaps, and the size of the smallest one is exactly the number of
-evaluations of the best algorithm that is correct on the whole class.  With only a first-order
-envelope, on product landscapes one evaluation suffices iff every site is sharp; otherwise the
-number is exponential in the number of non-sharp sites, with an exact exponent (a
-rate–distortion function).  At finite temperature, for accuracies that are not exponentially
-small, the same formula holds with the energy gap replaced by the free-energy gap of a
-macrostate (a corollary of a known source-coding theorem on exponential moments of distortion),
-and the count is at least the exponential of the entropy.  These bounds hold for every
-algorithm: at zero temperature randomisation gains at most a factor `1 − 2δ` against each
-covering bound; for free energies it provably lowers the exponent (machine-checked on the cube:
-about `(2/(1+e^{−βc}))ⁿ` random evaluations against almost `2ⁿ` deterministic ones) but not to
-zero — every algorithm must reach within a *soft-gap* radius of every state, the same soft gaps
-bound the randomised cost from above, and on the cube class there is a sharp accuracy
-threshold, `n ln cosh(βc/2)`, above which a bounded number of random evaluations suffices and
-below which every algorithm needs exponentially many.  Minimal
-certificates are NP-hard to find and best-first search is competitive only with covers at
-shrunk radii.  Under weak second-order coupling, `n(k−1)+1` evaluations give an exact reduction
-to the pairwise kernel.  The one-shot lower bounds (for certificates and for all algorithms),
-the search guarantee and the second-order reduction are machine-checked; the matching upper
-bounds are paper proofs (type covering, Harper's theorem), for which the single-letter
-identities and, for two-state sites, exact counts were checked numerically.  A second
-independent referee found one paper theorem false as stated and four overstatements — all
-corrected, `docs/DEAD_ENDS.md` D29–D33 — and judged the cluster "a coherent note, not a
-theorem-driven paper"; the tools are standard and the proofs short, and §12 of the report says
-what a publication would still need.
+points' own optimality gaps.  The size of the smallest one equals, instance by instance, the
+number of evaluations of the best deterministic algorithm that is correct on the whole class
+*and may be tailored to that instance*; no single algorithm achieves it on all instances.  With
+only a first-order envelope, on product landscapes one evaluation suffices iff every site is
+sharp; otherwise the number is exponential in the number of non-sharp sites, with an exact
+exponent (a rate–distortion function).  At finite temperature, for accuracies that are neither
+extensive nor exponentially small, the same formula holds with the energy gap replaced by the
+free-energy gap of a macrostate (a corollary of a known source-coding theorem on exponential
+moments of distortion), and the count is at least the exponential of the entropy.  These bounds
+hold for every algorithm (formally: every finite mixture of deterministic query algorithms).
+At zero temperature randomisation gains at most a factor `1 − 2δ` against each fractional
+(LP-dual) covering bound, and a hedged spot-check of a hint attains these bounds up to
+`ln(1/δ)`: randomisation is worth the integrality gap and no more.  For free energies it
+provably lowers the exponent — machine-checked at the zero residual of the cube, with the
+instance as a hint: about `(2/(1+e^{−βc}))ⁿ` random evaluations against almost `2ⁿ` deterministic
+ones — but not to zero: every algorithm must reach within a *soft-gap* radius of every state,
+and the same soft gaps bound the randomised cost from above.  On the uniform cube class the
+accuracy `n ln cosh(βc/2)` is a sharp threshold for the worst case over instances: above it a
+bounded number of random evaluations suffices on every instance, below it every algorithm
+needs exponentially many on the zero residual, where the exponent is now determined in every
+accuracy regime, down to exponentially small accuracies (lower bounds machine-checked; upper
+bounds by Harper's theorem).  Minimal certificates are NP-hard to find and best-first search is
+competitive only with covers at shrunk radii.  Under weak second-order coupling, `n(k−1)+1`
+evaluations give an exact reduction to the pairwise kernel.  The one-shot lower bounds (for
+certificates and for all algorithms), the search guarantee and the second-order reduction are
+machine-checked; the matching upper bounds are paper proofs (type covering, Harper's theorem),
+for which the single-letter identities and exact counts were checked numerically.
+
+**Independent review.**  The second referee found one paper theorem false as stated and four
+overstatements (`docs/DEAD_ENDS.md` D29–D33) and judged the cluster "a coherent note, not a
+theorem-driven paper"; the tools are standard and the proofs short.  The third referee, on the
+query-complexity section, found no machine-checked statement false, the same error a second
+time (an exponent claimed for all accuracies `ε = o(n)` that fails for exponentially small
+ones), a converse that was not tight, and four statements of scope that were too wide
+(D35–D37); all are corrected, and the verdict stands.  An independent workstream then refuted
+the conjecture this README's previous version relied on for finite-temperature exponents
+beyond the cube: single dips are not the extremal perturbations on product landscapes with
+three or more states per site (D38).  §12 of the report says what a publication would still
+need.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
