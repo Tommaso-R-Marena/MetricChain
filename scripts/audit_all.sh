@@ -4,6 +4,7 @@
 #   2. forbidden-token scan of proofs/                    — no sorry / admit / axiom / native_decide ...
 #   3. axiom audit (proofs/AxiomAudit.lean)               — only propext, Classical.choice, Quot.sound
 #   4. Python falsification harness + separation benchmarks
+#   5. every Lean declaration cited in docs/*.md exists in proofs/
 # Usage: scripts/audit_all.sh [--full]     (--full runs the long falsification pass)
 set -uo pipefail
 cd "$(dirname "$0")/.."
@@ -63,6 +64,9 @@ fi
 if [ -f experiments/separation_benchmarks.py ]; then
   python3 experiments/separation_benchmarks.py --quick >/dev/null 2>&1 || fail "separation benchmarks"
   echo "separation benchmarks: ok"
+fi
+if [ -d docs ] && ls docs/*.md >/dev/null 2>&1; then
+  python3 scripts/check_doc_refs.py || fail "docs cite Lean declarations that do not exist"
 fi
 echo
 echo "AUDIT PASSED"

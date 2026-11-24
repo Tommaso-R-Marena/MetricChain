@@ -679,7 +679,7 @@ def t_trace_obstruction(rng, trials):
     return True, dict(min_ratio_opt_over_bound=worst_ratio, max_gain_over_strain_bound=gain)
 
 
-@conjecture("IV.3 Sharpness of the trace-enhanced bound on vertex-transitive (circulant) inputs")
+@conjecture("IV.3 Trace-enhanced bound is attained when the top-r eigenspace is symmetry-invariant (regular polygons, r = 2)")
 def t_trace_sharp(rng, trials):
     worst = 0.0
     for it in range(max(4, trials // 40)):
@@ -1128,6 +1128,19 @@ def t_dead_strain_tight(rng, trials):
         if lb / strain > 4.0:
             return False, dict(reason="trace term dominates: strain bound is loose by a factor growing with L",
                                L=L, ratio=float(lb / strain))
+    return True, {}
+
+
+@conjecture("DEAD.4 Trace-enhanced bound is attained on EVERY vertex-transitive input", expect_fail=True)
+def t_dead_vertex_transitive(rng, trials):
+    # regular simplex on L = 5 points, target dimension r = 3: bound L(L-1-r)/(r+1) = 1.25,
+    # but the top-3 eigenspace is not invariant under the symmetry group and the optimum is ~1.3043
+    L, r = 5, 3
+    Dhat = np.ones((L, L)) - np.eye(L)
+    lb, _ = trace_bound_sq(Dhat, r)
+    best = sstress_min(Dhat, r, rng, restarts=40)
+    if best > lb * (1 + 1e-3):
+        return False, dict(reason="bound is strict on the regular simplex L=5, r=3", bound=float(lb), optimum=float(best))
     return True, {}
 
 

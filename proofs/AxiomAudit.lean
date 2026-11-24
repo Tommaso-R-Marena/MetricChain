@@ -4,6 +4,7 @@ import proofs.Core.Rounding
 import proofs.Frontiers.EnvelopeDuality
 import proofs.Frontiers.Dominance
 import proofs.Frontiers.HolderDecomposition
+import proofs.Frontiers.FreeEnergySandwich
 import proofs.Frontiers.HoffmanWielandt
 import proofs.Frontiers.Realizability
 import proofs.Frontiers.Holonomy
@@ -12,6 +13,7 @@ import proofs.Frontiers.InvariantEnvelope
 import proofs.Frontiers.PartitionCertificate
 import proofs.Frontiers.VoxelEnclosure
 import proofs.CertificateAlgebra
+import proofs.Frontiers.ProofComplexity
 
 /-!
 # Axiom audit and non-vacuity witnesses
@@ -78,6 +80,12 @@ elab "#audit_axioms " ns:ident : command => do
 
 -- Partition functions (Direction D)
 #print axioms MetricChain.freeEnergy_holder
+#print axioms MetricChain.gibbs_bogoliubov
+#print axioms MetricChain.hoeffding_upper
+#print axioms MetricChain.partition_ratio_sandwich
+#print axioms MetricChain.bounded_differences_sandwich
+#print axioms MetricChain.exists_two_level_worst_residual
+#print axioms MetricChain.mcdiarmid_no_better_constant
 #print axioms MetricChain.zverify_sound
 #print axioms MetricChain.Z_encloses_partitionFn
 #print axioms MetricChain.voxel_boltzmann_bounds
@@ -105,6 +113,12 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.certified_gap
 #print axioms MetricChain.triangle_verified
 #print axioms MetricChain.triangleResidual_gap
+#print axioms MetricChain.leaf_two_config
+#print axioms MetricChain.triangle_no_leaf_certificate
+#print axioms MetricChain.sumFree_exponential
+#print axioms MetricChain.sumFree_tight
+#print axioms MetricChain.sum_linear
+#print axioms MetricChain.sum_rule_separation
 
 /-! ### Non-vacuity witnesses -/
 
