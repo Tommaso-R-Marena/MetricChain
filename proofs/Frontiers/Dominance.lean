@@ -72,6 +72,56 @@ theorem partition_prune_bracket {β γ : ℝ} (hβ : 0 ≤ β) (E : Ω → ℝ) 
   · linarith
   · linarith
 
+/-- **Many-to-one dominance transport.**  If `T` maps `A` into `S`, lowers the energy by at least
+`γ`, and every fibre of `T` in `A` has at most `m` elements, then `Z(A) ≤ m · e^{-βγ} · Z(S)`. -/
+theorem partition_transport_fibers {β γ : ℝ} (hβ : 0 ≤ β) (E : Ω → ℝ) {A S : Finset Ω} (T : Ω → Ω)
+    (m : ℕ) (hfib : ∀ s ∈ S, (A.filter fun x => T x = s).card ≤ m)
+    (hmaps : ∀ x ∈ A, T x ∈ S) (hdom : ∀ x ∈ A, E (T x) + γ ≤ E x) :
+    partitionFn β E A ≤ m * (Real.exp (-β * γ) * partitionFn β E S) := by
+  unfold partitionFn
+  calc ∑ x ∈ A, Real.exp (-β * E x)
+      ≤ ∑ x ∈ A, Real.exp (-β * γ) * Real.exp (-β * E (T x)) := by
+        refine Finset.sum_le_sum fun x hx => ?_
+        rw [← Real.exp_add]
+        apply Real.exp_le_exp.mpr
+        have := mul_le_mul_of_nonneg_left (hdom x hx) hβ
+        linarith
+    _ = ∑ s ∈ S, ∑ x ∈ A.filter (fun x => T x = s),
+          Real.exp (-β * γ) * Real.exp (-β * E (T x)) :=
+        (Finset.sum_fiberwise_of_maps_to hmaps _).symm
+    _ = ∑ s ∈ S, ((A.filter fun x => T x = s).card : ℝ) *
+          (Real.exp (-β * γ) * Real.exp (-β * E s)) := by
+        apply Finset.sum_congr rfl
+        intro s _
+        have h : ∀ x ∈ A.filter (fun x => T x = s),
+            Real.exp (-β * γ) * Real.exp (-β * E (T x)) =
+              Real.exp (-β * γ) * Real.exp (-β * E s) := by
+          intro x hx
+          rw [(Finset.mem_filter.mp hx).2]
+        rw [Finset.sum_congr rfl h, Finset.sum_const, nsmul_eq_mul]
+    _ ≤ ∑ s ∈ S, (m : ℝ) * (Real.exp (-β * γ) * Real.exp (-β * E s)) := by
+        apply Finset.sum_le_sum
+        intro s hs
+        apply mul_le_mul_of_nonneg_right _ (by positivity)
+        exact_mod_cast hfib s hs
+    _ = m * (Real.exp (-β * γ) * ∑ s ∈ S, Real.exp (-β * E s)) := by
+        rw [← Finset.mul_sum, ← Finset.mul_sum]
+
+/-- **Thermal pruning bracket, many-to-one form.**  Removing a set `A` whose configurations are
+mapped at most `m`-to-one into the survivors `S` with margin `γ` changes the partition function
+by a factor between `1` and `1 + m · exp(-β γ)`. -/
+theorem partition_prune_bracket_fibers {β γ : ℝ} (hβ : 0 ≤ β) (E : Ω → ℝ) {A S : Finset Ω}
+    (T : Ω → Ω) (m : ℕ) (hfib : ∀ s ∈ S, (A.filter fun x => T x = s).card ≤ m)
+    (hmaps : ∀ x ∈ A, T x ∈ S) (hdom : ∀ x ∈ A, E (T x) + γ ≤ E x) (hdisj : Disjoint A S) :
+    partitionFn β E S ≤ partitionFn β E (A ∪ S) ∧
+      partitionFn β E (A ∪ S) ≤ (1 + m * Real.exp (-β * γ)) * partitionFn β E S := by
+  rw [partitionFn_union β E hdisj]
+  have h1 := partition_transport_fibers hβ E T m hfib hmaps hdom
+  have h2 := partitionFn_nonneg β E A
+  constructor
+  · linarith
+  · nlinarith
+
 /-- **Free-energy form of thermal pruning.**  Pruning with margin `γ` raises the free energy by
 at most `(1/β) log(1 + exp(-β γ))` and never lowers it. -/
 theorem freeEnergy_prune_bracket {β γ : ℝ} (hβ : 0 < β) (E : Ω → ℝ) {A S : Finset Ω} (T : Ω → Ω)

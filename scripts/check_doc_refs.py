@@ -27,7 +27,10 @@ IGNORE = {
     "vol_lo", "vol_hi", "t_hol", "c_min", "c_k", "c_i", "x_i", "I_red", "E_min", "E_lo", "E_hi",
     "residual_oracle", "eps_prune", "eps_leaf", "D_site", "I_a", "I_q", "L_q", "q_j", "d_c",
     "u_i", "p_ij", "m_ij", "h_i", "J_ij", "lo_ij", "hi_ij", "W_ij", "w_i", "ρ_max",
-    "D_i", "A_i", "P_ij", "Pat_ij", "base_i", "m_k",
+    "D_i", "A_i", "P_ij", "Pat_ij", "base_i", "m_k", "U_ij", "anchor_semantics",
+    # names of JSON conformance vectors (experiments/certs/*.json)
+    "residual_inconsistent_reject", "residual_lower_semantics", "residual_negative_c_reject",
+    "partition_negative_reject",
 }
 tok_re = re.compile(r"`([A-Za-z][A-Za-z0-9_.'₀-₉]*)`")
 missing = {}

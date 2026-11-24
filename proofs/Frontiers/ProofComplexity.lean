@@ -42,7 +42,11 @@ leaves, whereas `2 * m` leaves suffice with `sum`.
   peeling certificate (split off one triangle with `sum`, branch once, two dual leaves) is
   accepted for the bound `m` and visits `2 * m` leaves for `m ≥ 1` (for `m = 0` there are no
   sites and one trivial leaf is needed, `peelCert_visited_le`); its size is `4 * m - 1`.
-* `sum_rule_separation` — for `m ≥ 3` the certificate with `sum` beats every sum-free one.
+* `sum_rule_separation` — for `m ≥ 3` the certificate with `sum` visits fewer leaves than every
+  sum-free one; `sum_rule_separation_size` — the same for the node count (`m ≥ 4`);
+  `sum_rule_separation_dataSize` — and for the full description length `Cert.dataSize`, in which
+  every `sum` node is charged for the two sub-instances it embeds: below `147 m³` with `sum`,
+  at least `2 ^ m` without (`m ≥ 21`).
 
 ## Proof of the lower bound
 
@@ -1267,6 +1271,112 @@ theorem sum_rule_separation (m : ℕ) (hm : 3 ≤ m) :
   have h1 := sumFree_exponential m c' hc' hv'
   have h2 := two_mul_lt_two_pow_of_three_le m hm
   omega
+
+theorem four_mul_le_two_pow_of_four_le (m : ℕ) (hm : 4 ≤ m) : 4 * m ≤ 2 ^ m := by
+  induction m, hm using Nat.le_induction with
+  | base => norm_num
+  | succ k hk ih =>
+    rw [pow_succ]
+    omega
+
+/-- **Exponential separation in node count.**  For `m ≥ 4` the peeling certificate has
+`4 m - 1` nodes, strictly fewer than every accepted sum-free certificate for the same bound
+(at least `2 ^ m` nodes). -/
+theorem sum_rule_separation_size (m : ℕ) (hm : 4 ≤ m) :
+    ∃ c : Cert (m * 3) 2, verify c (triangles m) (fullDom (m * 3) 2) (m : ℚ) = true ∧
+      c.size + 1 = 4 * m ∧
+      ∀ c' : Cert (m * 3) 2, c'.SumFree →
+        verify c' (triangles m) (fullDom (m * 3) 2) (m : ℚ) = true → c.size < c'.size := by
+  have hsz := peelCert_size m m (by omega) le_rfl
+  refine ⟨peelCert m m, peelCert_verified m, hsz, fun c' hc' hv' => ?_⟩
+  have h1 := sumFree_size_exponential m c' hc' hv'
+  have h2 := four_mul_le_two_pow_of_four_le m hm
+  omega
+
+/-! #### Description length: `sum` nodes charged for the sub-instances they embed
+
+`Cert.visited` counts leaves and `Cert.size` counts nodes, but a `sum` node also stores two
+complete sub-instances.  `Cert.dataSize` charges every node for the rational table entries it
+stores; the separation survives: polynomial (`< 147 m³`) with `sum`, at least `2 ^ m` without. -/
+
+/-- **Description length** of a certificate: one unit per node plus the number of rational table
+entries the node stores (a `leaf` stores `u`, `p` and the messages; a `prune` its link bounds; a
+`sum` node stores two complete sub-instances). -/
+def Cert.dataSize : Cert n k → ℕ
+  | .leaf _ _ _ => 1 + n + n * n + n * n * k
+  | .branch _ ch => 1 + ∑ a, (ch a).dataSize
+  | .prune _ _ _ _ rest => 1 + n + rest.dataSize
+  | .sum _ _ _ _ c₁ c₂ => 1 + 2 * (n * k + n * n * k * k) + c₁.dataSize + c₂.dataSize
+
+/-- The node count is a lower bound on the description length. -/
+theorem Cert.size_le_dataSize (c : Cert n k) : c.size ≤ c.dataSize := by
+  induction c with
+  | leaf u p m => simp only [Cert.size, Cert.dataSize]; omega
+  | branch i ch ih =>
+    simp only [Cert.size, Cert.dataSize]
+    have := Finset.sum_le_sum fun a (_ : a ∈ (univ : Finset (Fin k))) => ih a
+    omega
+  | prune i r t ℓ rest ih => simp only [Cert.size, Cert.dataSize]; omega
+  | sum I₁ I₂ L₁ L₂ c₁ c₂ ih₁ ih₂ => simp only [Cert.size, Cert.dataSize]; omega
+
+/-- Description length of the two-leaf certificate of one triangle of `triangles m`. -/
+def blockCost (m : ℕ) : ℕ := 1 + 2 * (1 + m * 3 + m * 3 * (m * 3) + m * 3 * (m * 3) * 2)
+
+/-- Description length added by one `sum` node of a certificate for `triangles m`. -/
+def sumCost (m : ℕ) : ℕ := 1 + 2 * (m * 3 * 2 + m * 3 * (m * 3) * 2 * 2)
+
+theorem blockCert_dataSize {m : ℕ} (q : Fin m) : (blockCert q).dataSize = blockCost m := by
+  simp [blockCert, blockLeaf, Cert.dataSize, blockCost]
+
+/-- Description length of the peeling certificate: `k` two-leaf blocks and `k - 1` `sum` nodes,
+each of polynomial size. -/
+theorem peelCert_dataSize (m k : ℕ) (h1 : 1 ≤ k) (hk : k ≤ m) :
+    (peelCert m k).dataSize + sumCost m = k * (blockCost m + sumCost m) := by
+  induction k with
+  | zero => omega
+  | succ k ih =>
+    have hkm : k < m := hk
+    simp only [peelCert, hkm, dif_pos]
+    by_cases hk0 : k = 0
+    · subst hk0
+      simp [blockCert_dataSize]
+    · simp only [hk0, if_false, Cert.dataSize, blockCert_dataSize]
+      have h2 := ih (by omega) (by omega)
+      have hs : 1 + 2 * (m * 3 * 2 + m * 3 * (m * 3) * 2 * 2) = sumCost m := rfl
+      rw [hs, Nat.succ_mul]
+      generalize k * (blockCost m + sumCost m) = T at h2 ⊢
+      omega
+
+theorem poly_lt_two_pow (m : ℕ) (hm : 21 ≤ m) : 147 * m ^ 3 < 2 ^ m := by
+  induction m, hm using Nat.le_induction with
+  | base => norm_num
+  | succ k hk ih =>
+    rw [pow_succ 2 k]
+    have h1 : 147 * (k + 1) ^ 3 ≤ 2 * (147 * k ^ 3) := by
+      have : (k + 1) ^ 3 ≤ 2 * k ^ 3 := by nlinarith [sq_nonneg (k : ℤ), hk]
+      omega
+    omega
+
+/-- **Exponential separation in description length.**  For `m ≥ 21` the peeling certificate —
+`sum` nodes with their embedded sub-instances included — has description length below `147 m³`,
+whereas every accepted sum-free certificate for the same bound has description length at least
+`2 ^ m`. -/
+theorem sum_rule_separation_dataSize (m : ℕ) (hm : 21 ≤ m) :
+    ∃ c : Cert (m * 3) 2, verify c (triangles m) (fullDom (m * 3) 2) (m : ℚ) = true ∧
+      c.dataSize ≤ 147 * m ^ 3 ∧
+      ∀ c' : Cert (m * 3) 2, c'.SumFree →
+        verify c' (triangles m) (fullDom (m * 3) 2) (m : ℚ) = true →
+        2 ^ m ≤ c'.dataSize ∧ c.dataSize < c'.dataSize := by
+  have hsz := peelCert_dataSize m m (by omega) le_rfl
+  have hle : (peelCert m m).dataSize ≤ 147 * m ^ 3 := by
+    have h3 : m * (blockCost m + sumCost m) ≤ 147 * m ^ 3 := by
+      unfold blockCost sumCost
+      nlinarith [hm, Nat.zero_le m, Nat.mul_le_mul hm hm]
+    omega
+  refine ⟨peelCert m m, peelCert_verified m, hle, fun c' hc' hv' => ?_⟩
+  have h1 := (sumFree_size_exponential m c' hc' hv').trans c'.size_le_dataSize
+  have h2 := poly_lt_two_pow m hm
+  exact ⟨h1, by omega⟩
 
 /-! #### The case `m = 1`: the triangle example of `CertificateAlgebra.lean` -/
 

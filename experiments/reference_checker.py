@@ -4,11 +4,21 @@ Reference implementation of the MetricChain certificate checkers (format `metric
 docs/BLUEPRINT.md §4-§5) in exact rational arithmetic.
 
 This file is NOT part of the trusted base: the trusted checkers are the Lean definitions
-`verify`, `verifyR`, `zverify` with their soundness theorems.  It exists so that an implementation
-team has (a) an executable reading of the JSON schema, (b) the conformance vectors that the Lean
-kernel evaluates (`triangle_verified`, `triangle_rejects`, `biased_verified`,
-`triangleResidual_verified`, `triangleZ_exact`, `triangleZ_coarse`), and (c) a fuzzer that checks
-soundness against brute force on random instances and random (mostly invalid) certificates.
+`verify`, `verifyRTop` / `verifyRLowerTop`, `zverifyTop` with their soundness theorems.  It exists
+so that an implementation team has (a) an executable reading of the JSON schema, (b) the
+conformance vectors that the Lean kernel evaluates (`triangle_verified`, `triangle_rejects`,
+`biased_verified`, `triangleResidual_verifiedTop`, `inconsistentResidual_rejected`,
+`inconsistentResidual_lowerTop`, `negativeEnvelope_rejected`, `triangleZ_exactTop`,
+`triangleZ_coarse`, `negativeW_rejected`), and (c) a fuzzer that checks soundness against brute
+force on random instances and random (mostly invalid) certificates.
+
+Side conditions checked at file level (they are part of the top-level Lean kernels):
+  * residual, `anchor_semantics = "exact"` (default): `c >= 0` and pairwise compatibility of the
+    anchor values with the envelope (Lean `RProblem.Consistent`, which is exactly non-emptiness of
+    the residual class, `RProblem.consistent_iff_nonempty`);
+  * residual, `anchor_semantics = "lower"` (values are certified lower bounds, e.g. rounded-down
+    floats): `c >= 0` only (Lean `verifyRLowerTop`); no upper bound is reported;
+  * partition: all factors nonnegative (Lean `zverifyTop`).
 
 Usage:
     python3 experiments/reference_checker.py --selftest [--quick]
@@ -176,6 +186,17 @@ def anchored(I: Tables, c, x) -> Tables:
     return A
 
 
+def residual_consistent(c, anchors) -> bool:
+    """Lean `RProblem.Consistent`: c >= 0 and v_a - v_b <= sum_i c_i [a_i != b_i] for all anchor pairs."""
+    if any(ci < 0 for ci in c):
+        return False
+    for xa, va in anchors:
+        for xb, vb in anchors:
+            if va - vb > sum((c[i] for i in range(len(c)) if xa[i] != xb[i]), Q(0)):
+                return False
+    return True
+
+
 def verify_residual(node, I: Tables, c, anchors, D, L: Q) -> bool:
     kind = node["node"]
     if kind == "anchor":
@@ -298,9 +319,16 @@ def check_file(doc) -> dict:
         c = [q(v) for v in inst["c"]]
         anchors = [(a["x"], q(a["value"])) for a in inst["anchors"]]
         L = q(doc["claim"]["lower_bound"])
+        semantics = inst.get("anchor_semantics", "exact")
+        if semantics not in ("exact", "lower"):
+            raise ValueError(f"unknown anchor_semantics {semantics!r}")
+        if any(ci < 0 for ci in c):
+            return dict(accepted=False, reason="negative envelope constant")
+        if semantics == "exact" and not residual_consistent(c, anchors):
+            return dict(accepted=False, reason="inconsistent residual data (empty residual class)")
         ok = verify_residual(doc["certificate"], I, c, anchors, D, L)
         out = dict(accepted=ok, lower_bound=str(L))
-        if ok:
+        if ok and semantics == "exact":
             inbox = [energy(I, x) + v for x, v in anchors if all(x[i] in D[i] for i in range(n))]
             if inbox:
                 out["upper_bound"] = str(min(inbox))
@@ -309,6 +337,8 @@ def check_file(doc) -> dict:
         I = Tables(n, k, inst["w"], inst.get("W", {}), 1)
         nonneg = all(v >= 0 for row in I.one for v in row) and all(v >= 0 for t in I.two.values() for row in t for v in row)
         r = zverify(doc["certificate"], I, D) if nonneg else None
+        if not nonneg:
+            return dict(accepted=False, reason="negative factor")
         if r is None:
             return dict(accepted=False)
         claim = doc.get("claim", {})
@@ -364,6 +394,27 @@ def conformance_docs():
         instance=dict(tri, c=["1/4"] * 3, anchors=[dict(x=anc, value="-1/8")]),
         claim=dict(lower_bound="1/8"),
         certificate={"node": "anchor", "index": 0, "cert": exhaustive(anchored(Itri, [Q(1, 4)] * 3, anc))})
+    # inconsistent residual data (Lean: inconsistentResidual): anchors at Hamming distance 1, values 0 and 10
+    anc2 = [1, 1, 0]
+    bad = dict(tri, c=["1/4"] * 3, anchors=[dict(x=anc, value="0"), dict(x=anc2, value="10")])
+    bad_cert = {"node": "anchor", "index": 1, "cert": exhaustive(anchored(Itri, [Q(1, 4)] * 3, anc2))}
+    docs["residual_inconsistent_reject"] = dict(
+        format="metricchain-cert/1", kind="residual", n=3, k=2, domains=full, instance=bad,
+        claim=dict(lower_bound="41/4"), certificate=bad_cert)
+    docs["residual_lower_semantics"] = dict(
+        format="metricchain-cert/1", kind="residual", n=3, k=2, domains=full,
+        instance=dict(bad, anchor_semantics="lower"), claim=dict(lower_bound="41/4"), certificate=bad_cert)
+    docs["residual_negative_c_reject"] = dict(
+        format="metricchain-cert/1", kind="residual", n=3, k=2, domains=full,
+        instance=dict(tri, c=["-10", "1/4", "1/4"], anchors=[dict(x=anc, value="0")], anchor_semantics="lower"),
+        claim=dict(lower_bound="-100"),
+        certificate={"node": "anchor", "index": 0,
+                     "cert": exhaustive(anchored(Itri, [Q(-10), Q(1, 4), Q(1, 4)], anc))})
+    # negative factor (Lean: negativeW): two sites, one state each
+    docs["partition_negative_reject"] = dict(
+        format="metricchain-cert/1", kind="partition", n=2, k=1, domains=[[0]] * 2,
+        instance={"w": [["-1"], ["1"]], "W": {"0,1": [["2"]], "1,0": [["2"]]}}, claim={},
+        certificate={"node": "leaf", "lo": {"0,1": "1", "1,0": "1"}, "hi": {"0,1": "3", "1,0": "3"}})
     wtri = {"w": [["1", "1"]] * 3, "W": triangle_J("1/2", "1")}
     Iw = Tables(3, 2, wtri["w"], wtri["W"], 1)
 
@@ -389,6 +440,10 @@ EXPECTED = {
     "triangle_min_reject": dict(accepted=False),
     "biased_dee": dict(accepted=True, certified_gap="0"),
     "triangle_residual": dict(accepted=True, lower_bound="1/8", upper_bound="7/8"),
+    "residual_inconsistent_reject": dict(accepted=False),
+    "residual_lower_semantics": dict(accepted=True, lower_bound="41/4", upper_bound=None),
+    "residual_negative_c_reject": dict(accepted=False),
+    "partition_negative_reject": dict(accepted=False),
     "triangle_partition_exact": dict(accepted=True, lo="13/4", hi="13/4"),
     "triangle_partition_coarse": dict(accepted=True, lo="1", hi="8"),
 }
@@ -401,7 +456,8 @@ EXPECTED = {
 def fuzz(seed, rounds):
     import random
     rnd = random.Random(seed)
-    stats = dict(min_accepted=0, min_rejected=0, res_accepted=0, z_accepted=0, z_rejected=0)
+    stats = dict(min_accepted=0, min_rejected=0, res_accepted=0, res_lower_accepted=0, res_inconsistent=0,
+                 z_accepted=0, z_rejected=0)
 
     def rq(lo=-3, hi=3, den=4):
         return Q(rnd.randint(lo * den, hi * den), den)
@@ -471,11 +527,31 @@ def fuzz(seed, rounds):
         I = Ia  # exact_leaf / rand_cert close over I
         rc["cert"] = rand_cert(D, rnd.randint(0, n))
         I = saveI
+        if not residual_consistent(c, anchors):
+            return False, dict(reason="exact anchors of an admissible residual judged inconsistent"), stats
         for L in (true_res - 2, true_res - Q(1, 4), true_res, true_res + Q(1, 4)):
             if verify_residual(rc, I, c, anchors, D, L):
                 stats["res_accepted"] += 1
                 if L > true_res:
                     return False, dict(reason="UNSOUND accept (residual)", L=str(L), true=str(true_res)), stats
+        # lower-bound semantics: publish rounded-down anchor values; soundness w.r.t. the same true residual
+        low = [(x, v - Q(rnd.randint(0, 3), 8)) for x, v in anchors]
+        for L in (true_res - 2, true_res - Q(1, 2), true_res, true_res + Q(1, 4)):
+            if verify_residual(rc, I, c, low, D, L):
+                stats["res_lower_accepted"] += 1
+                if L > true_res:
+                    return False, dict(reason="UNSOUND accept (residual, lower semantics)", L=str(L),
+                                       true=str(true_res)), stats
+        # corrupted anchor data: whenever the data are inconsistent, brute force confirms that no residual
+        # with bounded differences c interpolates them (checked through the McShane criterion on the anchors
+        # themselves: consistency is necessary for any interpolant).
+        if len(anchors) == 2:
+            (xa, va), (xb, vb) = anchors
+            dab = sum((c[i] for i in range(n) if xa[i] != xb[i]), Q(0))
+            corrupt = [(xa, vb + dab + Q(1, 4)), (xb, vb)]
+            if residual_consistent(c, corrupt):
+                return False, dict(reason="corrupted anchors judged consistent"), stats
+            stats["res_inconsistent"] += 1
 
         # partition
         w = [[Q(rnd.randint(0, 8), 4) for _ in range(k)] for _ in range(n)]
@@ -533,7 +609,8 @@ def selftest(quick):
     passed, info, stats = fuzz(seed=11, rounds=150 if quick else 1500)
     ok &= passed
     print(f"[{'ok' if passed else 'FAIL'}] soundness fuzz vs brute force: {stats} {info}")
-    if stats["min_accepted"] == 0 or stats["z_accepted"] == 0 or stats["res_accepted"] == 0:
+    if (stats["min_accepted"] == 0 or stats["z_accepted"] == 0 or stats["res_accepted"] == 0
+            or stats["res_lower_accepted"] == 0 or stats["res_inconsistent"] == 0):
         ok = False
         print("[FAIL] fuzzer never produced an accepted certificate (test would be vacuous)")
     return ok

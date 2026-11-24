@@ -2,7 +2,8 @@
 # MetricChain single-command audit:
 #   1. lake build (all modules under proofs/)            — must succeed, no "sorry" warnings
 #   2. forbidden-token scan of proofs/                    — no sorry / admit / axiom / native_decide ...
-#   3. axiom audit (proofs/AxiomAudit.lean)               — only propext, Classical.choice, Quot.sound
+#   3. axiom audit (proofs/AxiomAudit.lean)               — only propext, Classical.choice, Quot.sound;
+#      every module under proofs/ must be imported there
 #   4. Python falsification harness + separation benchmarks
 #   5. every Lean declaration cited in docs/*.md exists in proofs/
 # Usage: scripts/audit_all.sh [--full]     (--full runs the long falsification pass)
@@ -28,6 +29,13 @@ echo "none"
 echo "   Lean files: $(find proofs -name '*.lean' | wc -l), lines: $(cat $(find proofs -name '*.lean') | wc -l)"
 
 echo "== [3/4] axiom audit =="
+# The automatic audit only sees what AxiomAudit.lean imports: every module must be imported.
+MISSING=""
+for f in $(find proofs -name '*.lean' ! -name 'AxiomAudit.lean' | sort); do
+  m=$(echo "${f%.lean}" | tr '/' '.')
+  grep -q "^import $m\$" proofs/AxiomAudit.lean || MISSING="$MISSING $m"
+done
+[ -z "$MISSING" ] || fail "modules not imported by proofs/AxiomAudit.lean:$MISSING"
 AX_LOG=$(mktemp)
 if ! lake env lean proofs/AxiomAudit.lean >"$AX_LOG" 2>&1; then tail -n 30 "$AX_LOG"; fail "AxiomAudit.lean did not compile"; fi
 grep "AXIOM AUDIT OK" "$AX_LOG" || { tail -n 20 "$AX_LOG"; fail "automatic axiom audit did not report OK"; }
@@ -71,6 +79,11 @@ if [ -f experiments/reference_checker.py ]; then
   python3 experiments/reference_checker.py --selftest --quick >/dev/null 2>&1 \
     || fail "reference checker: conformance vectors or soundness fuzz"
   echo "reference checker (conformance vectors + soundness fuzz): ok"
+  CERT_TMP=$(mktemp -d)
+  python3 experiments/reference_checker.py --dump "$CERT_TMP" >/dev/null 2>&1 \
+    && diff -rq "$CERT_TMP" experiments/certs >/dev/null 2>&1 \
+    || fail "experiments/certs/ is out of date (regenerate with reference_checker.py --dump experiments/certs)"
+  echo "stored conformance vectors match the reference checker: ok"
 fi
 if [ -d docs ] && ls docs/*.md >/dev/null 2>&1; then
   python3 scripts/check_doc_refs.py || fail "docs cite Lean declarations that do not exist"

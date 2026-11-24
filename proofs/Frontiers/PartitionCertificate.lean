@@ -17,7 +17,9 @@ enclosures of the true factors (from `Core/Rounding.lean`) give a lower instance
 instance; `Z_encloses_partitionFn` shows that their exact rational partition sums bracket the real
 partition function, so `lo(I⁻) ≤ Z_true ≤ hi(I⁺)`.
 
-Certificate constructors (the same algebra as in the tropical kernel):
+Certificate constructors (the `leaf` / `branch` / `prune` rules mirror those of the tropical
+kernel; the tropical decomposition rule `sum` has no two-sided counterpart here — its one-sided
+analogue is the Hölder bound `partitionFn_holder`, which is a theorem but not a kernel rule):
 
 * `leaf lo hi` — factorised bound: pair factors are replaced by certified constants, the
   remaining product measure sums exactly (`∏ i, ∑ a, w i a`);
@@ -26,7 +28,8 @@ Certificate constructors (the same algebra as in the tropical kernel):
   weight of state `r` is at most `ρ = q₀ ∏ q j` times that of `t` in every context, deleting `r`
   changes the partition function by a factor in `[1, 1 + ρ]`.
 
-`zverify_sound` is the Master Soundness Theorem of this kernel.
+`zverify_sound` is the Master Soundness Theorem of this kernel; it needs nonnegative factors, which
+the top-level entry point `zverifyTop` checks itself (`zverifyTop_sound` has no side condition).
 -/
 
 namespace MetricChain
@@ -436,6 +439,32 @@ theorem zverify_sound {I : WInstance n k} (hI : I.Nonneg) :
       · calc I.Z D ≤ (1 + q₀ * ∏ j ∈ univ.erase i, q j) * I.Z (D.remove i r) := h2.2
           _ ≤ (1 + q₀ * ∏ j ∈ univ.erase i, q j) * h' := mul_le_mul_of_nonneg_left h1.2 hρ0
 
+/-! ### Top-level kernel: the nonnegativity side condition is checked, not assumed -/
+
+instance (I : WInstance n k) : Decidable I.Nonneg := by
+  unfold WInstance.Nonneg
+  infer_instance
+
+/-- **Top-level partition kernel**: reject instances with a negative factor, then run `zverify`. -/
+def zverifyTop (c : ZCert n k) (I : WInstance n k) (D : Dom n k) : Option (ℚ × ℚ) :=
+  if I.Nonneg then zverify c I D else none
+
+/-- **Master Soundness Theorem of the top-level partition kernel** — no side condition is left to
+the caller: whatever the instance and the certificate, a returned interval contains the exact
+rational partition sum over the box. -/
+theorem zverifyTop_sound (c : ZCert n k) (I : WInstance n k) (D : Dom n k) (lo hi : ℚ)
+    (hv : zverifyTop c I D = some (lo, hi)) : lo ≤ I.Z D ∧ I.Z D ≤ hi := by
+  unfold zverifyTop at hv
+  split_ifs at hv with hI
+  exact zverify_sound hI c D lo hi hv
+
+/-- Acceptance by the top-level kernel means: nonnegative factors and acceptance by `zverify`. -/
+theorem zverifyTop_eq_some {c : ZCert n k} {I : WInstance n k} {D : Dom n k} {r : ℚ × ℚ}
+    (hv : zverifyTop c I D = some r) : I.Nonneg ∧ zverify c I D = some r := by
+  unfold zverifyTop at hv
+  split_ifs at hv with hI
+  exact ⟨hI, hv⟩
+
 /-! ### From rational weight instances to the real partition function -/
 
 /-- **Enclosure theorem.**  If the rational factors of `Ilo` and `Ihi` bracket the true Boltzmann
@@ -516,5 +545,27 @@ theorem triangleZ_coarse :
     zverify (.leaf (fun i j => if i < j then 1 / 2 else 1) (fun _ _ => 1)) triangleW
       (fullDom 3 2) = some (1, 8) := by
   decide +kernel
+
+/-- The top-level kernel (nonnegativity check included) returns the same exact value. -/
+theorem triangleZ_exactTop :
+    zverifyTop triangleZCert triangleW (fullDom 3 2) = some (13 / 4, 13 / 4) := by
+  decide +kernel
+
+/-- An instance with a negative one-body factor (two sites, one state each). -/
+def negativeW : WInstance 2 1 where
+  w := fun i _ => if i = 0 then -1 else 1
+  W := fun _ _ _ _ => 2
+
+/-- On it the bare rule checker returns the "interval" `(-1, -9)`, which does not contain the
+partition sum `-4`: the hypothesis `Nonneg` of `zverify_sound` cannot be dropped … -/
+theorem negativeW_unguarded :
+    zverify (.leaf (fun _ _ => 1) (fun _ _ => 3)) negativeW (fullDom 2 1) = some (-1, -9) ∧
+      negativeW.Z (fullDom 2 1) = -4 := by
+  decide +kernel
+
+/-- … and the top-level kernel rejects the instance for every certificate. -/
+theorem negativeW_rejected (c : ZCert 2 1) : zverifyTop c negativeW (fullDom 2 1) = none := by
+  have h : ¬ negativeW.Nonneg := by decide +kernel
+  simp [zverifyTop, h]
 
 end MetricChain

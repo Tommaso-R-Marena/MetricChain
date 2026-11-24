@@ -22,9 +22,11 @@ Main results (all are exact characterisations, valid for every envelope):
 * `robust_certified_iff` — a configuration is optimal for *every* admissible residual iff it is
   a `d`-sharp minimum of `f`: `∀ y, d x y ≤ f y - f x`.
 * `lowerEnv`, `upperEnv` — the McShane envelopes of the anchor data are admissible, interpolate
-  the data and bracket every admissible residual; hence the set of possible values of any monotone
-  functional (minimum energy, partition function at every temperature) is *exactly* the interval
-  between its values at the two envelopes (`robust_min_bracket`, `robust_partition_bracket`).
+  the data and bracket every admissible residual, so the minimum energy and the partition function
+  (at every `β ≥ 0`) lie between their values at the two envelopes (`robust_min_bracket`,
+  `robust_partition_bracket`); conversely every value in between is attained by an admissible
+  residual matching the data (`robust_min_interval_exact`, `robust_partition_interval_exact`), so
+  the set of possible values is *exactly* that interval.
 * `anchor_necessary`, `anchor_card_lower_bound` — witness-size lower bound: if the true residual is
   `κ`-Lipschitz for the envelope (`κ ≤ 1`), every configuration whose energy gap is below
   `(1 - κ)·σ - ε` (with `σ` the envelope separation) *must* be evaluated by any `ε`-certificate.
@@ -184,11 +186,11 @@ theorem upperEnv_eq_of_mem {d : X → X → ℝ} (hd : IsEnvelope d) (A : Finset
 
 /-! ### The exact robust interval (zero and finite temperature) -/
 
-/-- **Exact robust interval, zero temperature.**  For every admissible residual compatible with
-the anchor data, the minimum energy over a finite configuration set lies between the minima
-computed with the two McShane envelopes.  Both endpoints are attained by admissible residuals
-(`lowerEnv_admissible`, `upperEnv_admissible`, `lowerEnv_eq_of_mem`, `upperEnv_eq_of_mem`), so
-no certificate based on the same information can report a tighter interval. -/
+/-- **Robust interval, zero temperature (bracket).**  For every admissible residual compatible
+with the anchor data, the minimum energy over a finite configuration set lies between the minima
+computed with the two McShane envelopes.  For consistent data both endpoints and every value in
+between are attained by admissible residuals (`robust_min_interval_exact`), so no certificate
+based on the same information can report a tighter interval. -/
 theorem robust_min_bracket {d : X → X → ℝ} {g : X → ℝ} (hg : Admissible d g) (A : Finset X)
     (hA : A.Nonempty) (v : X → ℝ) (hv : ∀ a ∈ A, g a = v a) (f : X → ℝ) (S : Finset X)
     (hS : S.Nonempty) :
@@ -206,8 +208,9 @@ theorem robust_min_bracket {d : X → X → ℝ} {g : X → ℝ} (hg : Admissibl
     have h2 := le_upperEnv hg A hA v hv y
     linarith
 
-/-- **Exact robust interval, finite temperature.**  The partition function of `f + g` is bracketed
-by the partition functions of `f` plus the two McShane envelopes, at every `β ≥ 0`. -/
+/-- **Robust interval, finite temperature (bracket).**  The partition function of `f + g` is
+bracketed by the partition functions of `f` plus the two McShane envelopes, at every `β ≥ 0`;
+every value in between is attained (`robust_partition_interval_exact`). -/
 theorem robust_partition_bracket {d : X → X → ℝ} {g : X → ℝ} (hg : Admissible d g)
     (A : Finset X) (hA : A.Nonempty) (v : X → ℝ) (hv : ∀ a ∈ A, g a = v a) (f : X → ℝ)
     (S : Finset X) {β : ℝ} (hβ : 0 ≤ β) :
@@ -223,6 +226,95 @@ theorem robust_partition_bracket {d : X → X → ℝ} {g : X → ℝ} (hg : Adm
     intro y _
     have := lowerEnv_le hg A hA v hv y
     linarith
+
+/-! ### The robust interval is exact: every intermediate value is attained -/
+
+/-- Convex combinations of admissible residuals are admissible. -/
+theorem Admissible.convex {d : X → X → ℝ} {g₁ g₂ : X → ℝ} (h₁ : Admissible d g₁)
+    (h₂ : Admissible d g₂) {t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 1) :
+    Admissible d (fun x => (1 - t) * g₁ x + t * g₂ x) := by
+  intro x y
+  have e1 := mul_le_mul_of_nonneg_left (h₁ x y) (sub_nonneg.mpr ht1)
+  have e2 := mul_le_mul_of_nonneg_left (h₂ x y) ht0
+  show (1 - t) * g₁ x + t * g₂ x - ((1 - t) * g₁ y + t * g₂ y) ≤ d x y
+  nlinarith
+
+/-- The convex interpolation between the two McShane envelopes is admissible and matches
+consistent anchor data. -/
+theorem interpEnv_admissible_and_interpolates {d : X → X → ℝ} (hd : IsEnvelope d) (A : Finset X)
+    (hA : A.Nonempty) (v : X → ℝ) (hv : ∀ a ∈ A, ∀ b ∈ A, v a - v b ≤ d a b) {t : ℝ}
+    (ht0 : 0 ≤ t) (ht1 : t ≤ 1) :
+    Admissible d (fun x => (1 - t) * lowerEnv d A hA v x + t * upperEnv d A hA v x) ∧
+      ∀ a ∈ A, (1 - t) * lowerEnv d A hA v a + t * upperEnv d A hA v a = v a := by
+  refine ⟨(lowerEnv_admissible hd A hA v).convex (upperEnv_admissible hd A hA v) ht0 ht1, ?_⟩
+  intro a ha
+  rw [lowerEnv_eq_of_mem hd A hA v hv ha, upperEnv_eq_of_mem hd A hA v hv ha]
+  ring
+
+/-- **The robust interval is exact (zero temperature).**  For consistent anchor data, every value
+between the minimum energies computed with the two McShane envelopes is the minimum energy of
+`f + g` for some admissible residual `g` that matches the data on the anchors.  Together with
+`robust_min_bracket`: the set of possible optimal values is exactly this interval. -/
+theorem robust_min_interval_exact {d : X → X → ℝ} (hd : IsEnvelope d) (A : Finset X)
+    (hA : A.Nonempty) (v : X → ℝ) (hv : ∀ a ∈ A, ∀ b ∈ A, v a - v b ≤ d a b) (f : X → ℝ)
+    (S : Finset X) (hS : S.Nonempty) (τ : ℝ)
+    (hτ : τ ∈ Set.Icc (S.inf' hS fun y => f y + lowerEnv d A hA v y)
+      (S.inf' hS fun y => f y + upperEnv d A hA v y)) :
+    ∃ g, Admissible d g ∧ (∀ a ∈ A, g a = v a) ∧ S.inf' hS (fun y => f y + g y) = τ := by
+  let F : ℝ → ℝ := fun t =>
+    S.inf' hS fun y => f y + ((1 - t) * lowerEnv d A hA v y + t * upperEnv d A hA v y)
+  have hcont : Continuous F := by
+    apply Continuous.finset_inf'_apply
+    intro y _
+    fun_prop
+  have h0 : F 0 = S.inf' hS fun y => f y + lowerEnv d A hA v y := by
+    show (S.inf' hS fun y => f y + ((1 - 0) * lowerEnv d A hA v y + 0 * upperEnv d A hA v y)) = _
+    congr 1
+    funext y
+    ring
+  have h1 : F 1 = S.inf' hS fun y => f y + upperEnv d A hA v y := by
+    show (S.inf' hS fun y => f y + ((1 - 1) * lowerEnv d A hA v y + 1 * upperEnv d A hA v y)) = _
+    congr 1
+    funext y
+    ring
+  have hmem : τ ∈ Set.Icc (F 0) (F 1) := by rw [h0, h1]; exact hτ
+  obtain ⟨t, ht, hFt⟩ := intermediate_value_Icc (zero_le_one' ℝ) hcont.continuousOn hmem
+  obtain ⟨hadm, hint⟩ := interpEnv_admissible_and_interpolates hd A hA v hv ht.1 ht.2
+  exact ⟨_, hadm, hint, hFt⟩
+
+/-- **The robust interval is exact (finite temperature).**  For consistent anchor data and any
+`β`, every value between the partition functions computed with the upper and the lower McShane
+envelope is the partition function of `f + g` for some admissible residual `g` that matches the
+data on the anchors. -/
+theorem robust_partition_interval_exact {d : X → X → ℝ} (hd : IsEnvelope d) (A : Finset X)
+    (hA : A.Nonempty) (v : X → ℝ) (hv : ∀ a ∈ A, ∀ b ∈ A, v a - v b ≤ d a b) (f : X → ℝ)
+    (S : Finset X) (β : ℝ) (τ : ℝ)
+    (hτ : τ ∈ Set.Icc (partitionFn β (fun y => f y + upperEnv d A hA v y) S)
+      (partitionFn β (fun y => f y + lowerEnv d A hA v y) S)) :
+    ∃ g, Admissible d g ∧ (∀ a ∈ A, g a = v a) ∧ partitionFn β (fun y => f y + g y) S = τ := by
+  let F : ℝ → ℝ := fun t =>
+    partitionFn β (fun y => f y + ((1 - t) * lowerEnv d A hA v y + t * upperEnv d A hA v y)) S
+  have hcont : Continuous F := by
+    show Continuous fun t => partitionFn β
+      (fun y => f y + ((1 - t) * lowerEnv d A hA v y + t * upperEnv d A hA v y)) S
+    unfold partitionFn
+    fun_prop
+  have h0 : F 0 = partitionFn β (fun y => f y + lowerEnv d A hA v y) S := by
+    show partitionFn β
+      (fun y => f y + ((1 - 0) * lowerEnv d A hA v y + 0 * upperEnv d A hA v y)) S = _
+    congr 1
+    funext y
+    ring
+  have h1 : F 1 = partitionFn β (fun y => f y + upperEnv d A hA v y) S := by
+    show partitionFn β
+      (fun y => f y + ((1 - 1) * lowerEnv d A hA v y + 1 * upperEnv d A hA v y)) S = _
+    congr 1
+    funext y
+    ring
+  have hmem : τ ∈ Set.Icc (F 1) (F 0) := by rw [h0, h1]; exact hτ
+  obtain ⟨t, ht, hFt⟩ := intermediate_value_Icc' (zero_le_one' ℝ) hcont.continuousOn hmem
+  obtain ⟨hadm, hint⟩ := interpEnv_admissible_and_interpolates hd A hA v hv ht.1 ht.2
+  exact ⟨_, hadm, hint, hFt⟩
 
 /-! ### The query model: exact pruning criterion given evaluated anchors -/
 

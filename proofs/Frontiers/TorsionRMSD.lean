@@ -617,6 +617,49 @@ theorem IsTorsionMove.rigidWithinIn {u : P ≃ᵢ AxisSpace} {B : Finset ι} {δ
   let ⟨ψ, hψ⟩ := h.exists_axisRot
   ⟨_, hG ψ, hψ⟩
 
+/-- Exact coaxial form with the superposition restricted to a submonoid `G` of motions containing
+the rotations about the torsion axis (e.g. the proper rigid motions). -/
+theorem IsTorsionMove.rigidWithinIn_exact {u : P ≃ᵢ AxisSpace} {B : Finset ι} {δ : ℝ}
+    {X Y : ι → P} (h : IsTorsionMove u B δ X Y) (G : Submonoid (P ≃ᵢ P))
+    (hG : ∀ ψ : ℝ, u.trans ((axisRot ψ).trans u.symm) ∈ G) :
+    RigidWithinIn G X Y
+      (Real.sqrt (2 * (axialInertia u Bᶜ X + axialInertia u B X) -
+        2 * Real.sqrt ((axialInertia u Bᶜ X + axialInertia u B X) ^ 2 -
+          4 * axialInertia u Bᶜ X * axialInertia u B X * Real.sin (δ / 2) ^ 2))) := by
+  obtain ⟨ψ, hψ⟩ := exists_coaxial_angle (axialInertia u Bᶜ X) (axialInertia u B X) δ
+  have hsum := (h.sum_dist_sq ψ).trans hψ
+  refine ⟨u.trans ((axisRot (-ψ)).trans u.symm), hG (-ψ), ?_⟩
+  have hnn : 0 ≤ 2 * (axialInertia u Bᶜ X + axialInertia u B X) -
+      2 * Real.sqrt ((axialInertia u Bᶜ X + axialInertia u B X) ^ 2 -
+        4 * axialInertia u Bᶜ X * axialInertia u B X * Real.sin (δ / 2) ^ 2) := by
+    rw [← hsum]
+    exact sum_nonneg fun i _ => sq_nonneg _
+  rw [Real.sq_sqrt hnn, sum_dist_sq_chart, hsum]
+
+/-- `min` form with the superposition restricted to a submonoid `G` of motions containing the
+rotations about the torsion axis. -/
+theorem IsTorsionMove.rigidWithinIn_min {u : P ≃ᵢ AxisSpace} {B : Finset ι} {δ : ℝ}
+    {X Y : ι → P} (h : IsTorsionMove u B δ X Y) (G : Submonoid (P ≃ᵢ P))
+    (hG : ∀ ψ : ℝ, u.trans ((axisRot ψ).trans u.symm) ∈ G) :
+    RigidWithinIn G X Y
+      (2 * Real.sqrt (min (axialInertia u Bᶜ X) (axialInertia u B X)) * |Real.sin (δ / 2)|) := by
+  refine (h.rigidWithinIn_exact G hG).mono ?_
+  have hmin : 0 ≤ min (axialInertia u Bᶜ X) (axialInertia u B X) :=
+    le_min (axialInertia_nonneg u _ X) (axialInertia_nonneg u _ X)
+  rw [abs_of_nonneg (Real.sqrt_nonneg _), abs_of_nonneg (by positivity)]
+  calc Real.sqrt (2 * (axialInertia u Bᶜ X + axialInertia u B X) -
+        2 * Real.sqrt ((axialInertia u Bᶜ X + axialInertia u B X) ^ 2 -
+          4 * axialInertia u Bᶜ X * axialInertia u B X * Real.sin (δ / 2) ^ 2))
+      ≤ Real.sqrt (4 * min (axialInertia u Bᶜ X) (axialInertia u B X) *
+          Real.sin (δ / 2) ^ 2) := Real.sqrt_le_sqrt (coaxial_cost_le_min _ _ _)
+    _ = 2 * Real.sqrt (min (axialInertia u Bᶜ X) (axialInertia u B X)) *
+          |Real.sin (δ / 2)| := by
+        have hrew : 4 * min (axialInertia u Bᶜ X) (axialInertia u B X) * Real.sin (δ / 2) ^ 2 =
+            (2 * |Real.sin (δ / 2)|) ^ 2 * min (axialInertia u Bᶜ X) (axialInertia u B X) := by
+          rw [mul_pow, sq_abs]; ring
+        rw [hrew, Real.sqrt_mul (sq_nonneg _), Real.sqrt_sq (by positivity)]
+        ring
+
 /-- **(T3, chain rule)** A sequence of single-torsion moves `X 0 → X 1 → ⋯ → X m` (move `k` about
 the axis of the chart `u k`, rotating the atoms `B k` by `δ k`) displaces the configuration, up to
 rigid superposition, by at most `∑ k < m, 2 √(2 I_k) |sin (δ_k / 2)|`, where `I_k` is the reduced

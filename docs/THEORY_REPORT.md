@@ -27,9 +27,11 @@ output is stored in `benchmarks_output.txt`.
 2. **Certification is separated from search.**  All guarantees are statements about
    *certificates* checked by small verified kernels with exact rational arithmetic (§6); solvers
    are untrusted.
-3. **Two semirings, one certificate algebra.**  The same rules (reparameterise, branch, dominate,
-   decompose) are sound for minimum energies (`(min,+)`) and for partition functions (`(+,×)`),
-   with dominance acquiring the temperature-dependent factor `1 + e^{−βγ}` (§3.1, §6).
+3. **Two semirings, parallel certificate rules.**  The leaf (reparameterise / factorise), branch
+   and dominate rules exist both for minimum energies (`(min,+)`) and for partition functions
+   (`(+,×)`), with dominance acquiring the temperature-dependent factor `1 + e^{−βγ}` (§3.1, §6).
+   The decomposition rule is a kernel rule only in `(min,+)`: at finite temperature its analogue
+   is one-sided (Hölder, §3.5) and is a theorem here, not a rule of the partition kernel.
 4. **Weight-domain and rational-atlas semantics.**  Partition-function certificates live in the
    domain of rational Boltzmann factors; torsion circles are covered by four rational charts
    `t ↦ ((1−t²)/(1+t²), 2t/(1+t²))`, `|t| ≤ 1/2`, so checkers need no transcendental functions (§5).
@@ -41,23 +43,23 @@ output is stored in `benchmarks_output.txt`.
 | A1 | **Contact-set theorem**: `x` can be optimal for some admissible residual ⇔ `E₀(x) ≤ E₀(y) + d(y,x) ∀y` | `robust_minimizer_iff` **[V]** | elementary (McShane/Lipschitz duality); formulation for dominance pruning with a black-box residual: no match found |
 | A2 | **Sharp-minimum theorem**: `x` optimal for every admissible residual ⇔ `d(x,y) ≤ E₀(y) − E₀(x) ∀y` | `robust_certified_iff` **[V]** | as A1 |
 | A3 | **Query-model theorem**: with evaluated anchors, `x` can be optimal ⇔ contact ∧ `E₀(x)+L(x) ≤ E₀(y)+U(y) ∀y` (`L, U` McShane envelopes) | `robust_minimizer_with_anchors_iff` **[V]** | optimality statement for pruning intervals not found in the literature (iMinDEE's pruning interval is the special case of a one-sided bound and one evaluated conformation) |
-| A4 | **Exact robust interval** for `min(E₀+Δ)` and for `Z_β(E₀+Δ)`, all β | `robust_min_bracket`, `robust_partition_bracket` **[V]** | elementary; not found stated |
+| A4 | **Exact robust interval** for `min(E₀+Δ)` and for `Z_β(E₀+Δ)`: bracket between the two McShane envelopes (every `β ≥ 0`), and every value in between is attained by an admissible residual | `robust_min_bracket`, `robust_partition_bracket`, `robust_min_interval_exact`, `robust_partition_interval_exact` **[V]** | elementary; not found stated |
 | A5 | **Witness-size lower bound**: an ε-certificate must evaluate the residual on every state with gap `< (1−κ)σ − ε` | `anchor_necessary`, `anchor_card_lower_bound` **[V]** | discrete counterpart of certified Lipschitz optimisation bounds; not found for structured discrete landscapes |
 | A6 | Energy window is the exact limit with global bounds only | `energy_window_exact` **[V]** | known in spirit (energy-window DEE); exactness statement makes the "bottleneck" information-theoretic |
 | A7 | Local differential envelopes ⇒ global envelope; differential DEE is sound | `admissible_of_single_site`, `differential_dee_sound` **[V]** | MinDEE range terms are a special case; general form not found |
 | A8 | Goldstein = exact dominance margin; gauge invariant; = gauge-optimal Desmet | `goldstein_isLeast`, `goldstein_gauge_invariant`, `desmet_optimalGauge` **[V]** | **known/folklore** (Shekhovtsov 2014/2016); negative answer to the seeded "dual-reparameterised pruning" conjecture |
-| D1 | **Dominance transport / thermal DEE**: `Z(A) ≤ e^{−βγ} Z(S)`; pruning changes `ln Z` by `≤ ln(1+e^{−βγ})` | `partition_transport`, `freeEnergy_prune_bracket`, `thermal_dee` **[V]** | inequality folklore; as a certificate rule for partition functions: no match found |
-| D2 | **Free-energy sandwich** `−β⟨Δ⟩₀ ≤ ln(Z/Z₀) ≤ −β⟨Δ⟩₀ + β² Σc_i²/8`; the worst residual in the bounded-difference class is additive and two-level; `1/8` is optimal | `bounded_differences_sandwich`, `exists_two_level_worst_residual`, `mcdiarmid_no_better_constant` **[V]** | inequality known in spirit (Jensen + McDiarmid; Rio 2013 for the sharp function); the attainment statement is implicit in the literature and is stated and machine-checked here |
-| D3 | **Partition-function kernel** with leaf/branch/thermal-prune rules; enclosure of the real `Z` | `zverify_sound`, `Z_encloses_partitionFn` **[V]** | verified checkers exist for exact model counting only; this rule set: no match found |
-| D4 | **Voxel enclosure**: continuous Boltzmann integrals → rational kernel, with the volume (entropy) factor; separable (second-order) envelopes factor an `M`-dimensional voxel integral into `M` one-dimensional ones | `voxel_boltzmann_bounds`, `certified_voxel_partition`, `separable_voxel_bounds` **[V]** | `K*`-family algorithms use minimised voxel energies; rigorous voxel-integral bounds: no match found |
+| D1 | **Dominance transport / thermal DEE**: `Z(A) ≤ e^{−βγ} Z(S)`; pruning changes `ln Z` by `≤ ln(1+e^{−βγ})` (`ln(1+m e^{−βγ})` for an `m`-to-one map) | `partition_transport`, `freeEnergy_prune_bracket`, `partition_prune_bracket_fibers`, `thermal_dee` **[V]** | inequality folklore; as a certificate rule for partition functions: no match found |
+| D2 | **Free-energy sandwich** `−β⟨Δ⟩₀ ≤ ln(Z/Z₀) ≤ −β⟨Δ⟩₀ + β² Σc_i²/8` **for a product reference** (for an arbitrary reference only the Hoeffding form `β²(b−a)²/8`, `b−a ≤ Σc_i`, holds: `DEAD_ENDS.md` D14); the worst residual in the bounded-difference class is additive and two-level; `1/8` is optimal | `bounded_differences_sandwich`, `bounded_differences_sandwich_any_reference`, `correlated_reference_counterexample`, `exists_two_level_worst_residual`, `mcdiarmid_no_better_constant` **[V]** | inequality known in spirit (Jensen + McDiarmid; Rio 2013 for the sharp function); the attainment statement is implicit in the literature and is stated and machine-checked here |
+| D3 | **Partition-function kernel** with leaf/branch/thermal-prune rules; enclosure of the real `Z`, end to end from interval energy tables | `zverify_sound`, `zverifyTop_sound`, `Z_encloses_partitionFn`, `certified_partition_of_intervals` **[V]** | verified checkers exist for exact model counting only; this rule set: no match found |
+| D4 | **Voxel enclosure**: continuous Boltzmann integrals → rational kernel, with the volume (entropy) factor, end to end for pairwise torsion energies on product voxels (table enclosures + outward-rounded factors + accepted certificates ⇒ two-sided bound on the integral); separable (second-order) envelopes factor an `M`-dimensional voxel integral into `M` one-dimensional ones | `voxel_boltzmann_bounds`, `pairwise_voxel_weight_bounds`, `certified_torsion_partition`, `separable_voxel_bounds` **[V]** | `K*`-family algorithms bound a sum of minimised voxel energies; rigorous voxel-*integral* bounds inside a provable design algorithm: no match found (rigorous enclosures of integrals as such are standard verified numerics) |
 | D5 | Hölder decomposition with temperature rescaling | `partitionFn_holder`, `freeEnergy_holder` **[V]** | **known** (weighted mini-bucket) |
 | C1 | Hoffman–Wielandt and von Neumann trace inequality (real symmetric) | `hoffman_wielandt` **[V]** | **classical** (1953); formalization |
 | C2 | Trace-enhanced spectral obstruction: `min_X ‖D̂ − Δ(X)‖²_F ≥ 4 Σ_{k>r} λ_k² + (4/(r+1)) (Σ_{k>r} λ_k)²` | `rank_psd_trace_obstruction`, `sstress_lower_bound` **[V]** | **known** with these constants (Sonthalia et al. 2021; K-identity in Tsang–Pereira 2016); machine-checked here down to Hoffman–Wielandt (we know of no earlier formalization) |
 | C3 | Cycle-holonomy obstruction; SE(3) translation holonomy with lever arms | `norm_holProd_le_sum`, `norm_holTrans_le` **[V]** | triangle bound **known** (Lerman–Shi 2022, Lemma 1); a sharp non-abelian Hodge-type bound is open |
-| C4 | **Finite-angle torsion → RMSD**: exact coaxial cost `2S − 2√(S² − 4 I_A I_B sin²(φ/2)) ≤ 4 min(I_A,I_B) sin²(φ/2)`; chain rule; envelope for invariant Lipschitz residuals | `exists_coaxial_angle`, `coaxial_cost_le_min`, `rigidWithin_torsion_chain`, `residual_torsion_chain` **[V]** | small-angle content classical (Pitzer–Gwinn; Eckart); finite-angle closed form and chained bound: no match found |
+| C4 | **Finite-angle torsion → RMSD**: exact coaxial cost `2S − 2√(S² − 4 I_A I_B sin²(φ/2)) ≤ 4 min(I_A,I_B) sin²(φ/2)`; chain rule; envelope for Lipschitz residuals invariant under a group of motions containing the axis rotations (`SE(3)` or `E(3)`), down to membership in the kernel's residual class | `exists_coaxial_angle`, `coaxial_cost_le_min`, `rigidWithin_torsion_chain`, `residual_torsion_chain_in`, `residual_torsion_move_uniform`, `verifyR_sound_invariant` **[V]** | small-angle content classical (Pitzer–Gwinn; Eckart); finite-angle closed form and chained bound: no match found |
 | B1 | Outward rounding, rational intervals, certified `exp`, rational circle atlas | `Core/Rounding.lean` **[V]** | infrastructure; verified interval libraries exist (LeanCert, girving/interval) |
-| E1 | **Master Soundness Theorems** for the tropical, residual and sum–product kernels | `verify_sound`, `verifyR_sound`, `certified_gap`, `zverify_sound` **[V]** | no verified checker for this problem class found |
-| E2 | Exponential separation: sum-free certificates need exactly `2^m` leaves on `m` frustrated triangles, `2m` suffice with `sum`; LP gap of the triangle | `sumFree_exponential`, `sumFree_tight`, `sum_linear`, `sum_rule_separation`, `triangle_no_leaf_certificate` **[V]** | **known phenomenon** (Basu et al. 2023; Jeroslow 1974); formalized for this kernel incl. DEE steps |
+| E1 | **Master Soundness Theorems** for the tropical, residual and sum–product kernels, with every side condition (consistency of the residual data, nonnegative factors) checked by the top-level kernels | `verify_sound`, `verifyRTop_sound`, `verifyRLowerTop_sound`, `certified_gap`, `zverifyTop_sound` **[V]** | no *native* verified checker for cost-function-network / MAP / DEE certificates found; such runs can in principle be encoded as pseudo-Boolean proofs and checked with existing verified checkers, so the gap concerns native witnesses and their checking cost (`prior_art/L1` §C4(ii)) |
+| E2 | Exponential separation: sum-free certificates need exactly `2^m` visited leaves on `m` frustrated triangles, `2m` suffice with `sum`; the separation persists for node counts and for the full description length (`sum` nodes charged for the sub-instances they embed: `< 147 m³` against `≥ 2^m`); LP gap of the triangle | `sumFree_exponential`, `sumFree_tight`, `sum_linear`, `sum_rule_separation`, `sum_rule_separation_size`, `sum_rule_separation_dataSize`, `triangle_no_leaf_certificate` **[V]** | **known phenomenon** (Basu et al. 2023; Jeroslow 1974); formalized for this kernel incl. DEE steps |
 
 The honest reading of the last column: the *mathematical* content of most individual statements
 is elementary, classical, or — as three independent literature checks established — already in
@@ -157,6 +159,9 @@ where dual methods do matter:
   if the difference energy is a constant plus a sum of functions each depending on one block of
   sites, the exact margin over a product domain is the constant plus the sum of the block minima
   (`isLeast_sum_of_block_separable`, `exact_margin_of_block_separable` **[V]**; harness I.4).
+  The verified statement is the abstract one — block-separability of the difference energy is its
+  hypothesis; that a model with 3-body terms has this form, with blocks the connected components
+  of the link graph, is immediate but is not formalized (no 3-body model is defined in Lean) **[P]**.
   Goldstein is the case of singleton blocks; chain-local terms `T_{i−1,i,i+1}` give one block of
   at most four sites (a path), so exact dominance stays cheap for chain molecules; in general the
   cost is exponential only in the treewidth of the link graph.  Without restriction exact
@@ -207,8 +212,12 @@ are admissible, interpolate `v`, and satisfy `L ≤ g ≤ U` for every admissibl
     min_S (f + L) ≤ min_S (f + g) ≤ min_S (f + U),
     Z_β(f + U; S) ≤ Z_β(f + g; S) ≤ Z_β(f + L; S),
 
-and both ends are attained inside the class: **no certificate using the same information can
-report a tighter interval** (`robust_min_bracket`, `robust_partition_bracket`).
+(`robust_min_bracket`, `robust_partition_bracket`).  Conversely, for consistent data every value
+of the first interval is `min_S (f + g)` and every value of the second is `Z_β(f + g; S)` for
+some admissible `g` agreeing with `v` — take `g = (1−λ)L + λU` and apply the intermediate value
+theorem in `λ` (`robust_min_interval_exact`, `robust_partition_interval_exact`).  The set of
+possible values is therefore *exactly* the interval: **no certificate using the same information
+can report a tighter one**.
 
 With the site-additive envelope and one anchor `a`, `f + L = v(a) + [E₀ − Σ_i δ_i(a_i, ·)]` is
 again a pairwise model: *the residual's envelope is absorbed into the one-body tables*.  This is
@@ -305,9 +314,11 @@ Theorem 2.1 on a product box (`thermal_dee` **[V]**): if `t ∈ D_i`, `t ≠ r` 
 partition function of the box by a factor in `[(1+e^{−βγ})^{-1}, 1]`.  In the weight domain the
 same rule is checked factor by factor (`PruneZOK`, `zprune_sound` **[V]**): if
 `w_i(r) ≤ q₀ w_i(t)` and `W_ij(r,s) W_ji(s,r) ≤ q_j W_ij(t,s) W_ji(s,t)` for all `s ∈ D_j`, then
-`Z ≤ (1 + q₀ ∏_j q_j) Z'`.  Rounds compose multiplicatively, so a pruning schedule with margins
-`γ_k` certifies `0 ≤ ln Z − ln Z_pruned ≤ Σ_k ln(1 + m_k e^{−βγ_k})` (`m_k` states mapped to one
-survivor in round `k`).
+`Z ≤ (1 + q₀ ∏_j q_j) Z'`.  If the dominance map is at most `m`-to-one instead of injective the
+factor becomes `1 + m e^{−βγ}` (`partition_prune_bracket_fibers` **[V]**).  Rounds compose
+multiplicatively, so a pruning schedule with margins `γ_k` certifies
+`0 ≤ ln Z − ln Z_pruned ≤ Σ_k ln(1 + m_k e^{−βγ_k})` (`m_k` states mapped to one survivor in
+round `k`).
 
 *Observables.*  The same margin controls ensemble averages: if the pruned set carries at most
 the fraction `ρ` of the survivors' weight, every observable bounded by `B` changes its Boltzmann
@@ -317,7 +328,10 @@ pruning therefore gives certified ensemble properties, not only free energies.
 
 ### 3.2 The free-energy sandwich
 
-Let `μ₀ ∝ e^{−βE₀}` be the reference ensemble and `⟨·⟩₀` its expectation.
+Let `μ₀` be a reference ensemble with expectation `⟨·⟩₀` and `Z/Z₀ = ⟨e^{−βΔ}⟩₀`.  Parts (a), (b)
+hold for an arbitrary reference (in particular `μ₀ ∝ e^{−βE₀}` with pairwise `E₀`); parts (c)–(e)
+require a **product** reference `μ₀ = ⊗_i μ_i` (independent sites, e.g. a mean-field or
+one-body reference).
 
 **Theorem 3.1 [V] (`FreeEnergySandwich.lean`).**
 (a) (Gibbs–Bogoliubov) `ln(Z/Z₀) ≥ −β⟨Δ⟩₀` (`gibbs_bogoliubov`, `partition_ratio_sandwich`).
@@ -337,18 +351,30 @@ is a convex maximisation over a cube, attained at a vertex — `convexOn_centere
 (`log_cosh_bounds`), and for every `K < 1/8` the bound with `K` in place of `1/8` is false
 (`mcdiarmid_no_better_constant`).
 
-So one reference expectation plus the envelope constants pin `ln Z` in an interval of width
-`β² Σ c_i²/8`, quadratically smaller than the trivial `β Σ c_i` when `β c_i < 8`; and the worst
-non-decomposable residual is a fully decomposable one — the exact supremum of the gap over the
-class is `Σ_i max_{A_i} ln(p_i e^{βc_i(1−p_i)} + (1−p_i) e^{−βc_i p_i})`, `p_i = μ_i(A_i)`.
+So for a product reference one reference expectation plus the envelope constants pin `ln Z` in
+an interval of width `β² Σ c_i²/8`, quadratically smaller than the trivial `β Σ c_i` when
+`β c_i < 8`; and the worst non-decomposable residual is a fully decomposable one — the exact
+supremum of the gap over the class is
+`Σ_i max_{A_i} ln(p_i e^{βc_i(1−p_i)} + (1−p_i) e^{−βc_i p_i})`, `p_i = μ_i(A_i)`.
+
+*The product hypothesis cannot be dropped [V].*  For a correlated reference the width
+`β² Σ c_i²/8` is false: two perfectly correlated binary sites (`μ₀` uniform on `{00, 11}`),
+`Δ = x₁ + x₂`, `c = (1,1)`, `β = 1` give the gap `ln cosh 1 ≈ 0.434 > 0.25`
+(`correlated_reference_counterexample`; harness `DEAD.5`; `DEAD_ENDS.md` D14).  What survives for
+an arbitrary reference is (b) with the full range `b − a ≤ Σ_i c_i`, i.e. the width
+`β² (Σ_i c_i)²/8` (`bounded_differences_sandwich_any_reference`,
+`kl_reference_target_le_any_reference` **[V]**; harness III.6) — linear instead of square-root
+accumulation over sites; intermediate widths for weakly dependent references are quoted below
+as [K].
 
 *The gap is a relative entropy [V] (`EnsembleDivergence.lean`).*  With `μ₀` the reference
 ensemble and `μ ∝ μ₀ e^{−βΔ}` the target ensemble, `ln(Z/Z₀) + β⟨Δ⟩₀ = KL(μ₀ ‖ μ)` exactly
 (`kl_reference_target_eq_gap`).  Therefore `0 ≤ KL(μ₀ ‖ μ) ≤ β²(b−a)²/8`, and
 `≤ β² Σ_i c_i²/8` for product references (`kl_reference_target_le_hoeffding`,
-`kl_reference_target_le_bounded_differences`): the envelope constants certify how well *any
-sampler of the reference ensemble* approximates the target ensemble, and by Pinsker's inequality
-**[K]** every observable bounded by `B` shifts by at most `B β (Σ_i c_i²)^{1/2}/2`.
+`kl_reference_target_le_bounded_differences`): the envelope constants certify how well a sampler
+of the reference ensemble approximates the target ensemble, and by Pinsker's inequality **[K]**
+every observable bounded by `B` shifts by at most `B β (Σ_i c_i²)^{1/2}/2` for a product
+reference (`B β (b−a)/2` in general).
 
 *Sharper and more general forms [K].*  The exact extremal function is Rio's
 `ℓ(t) = sup_r [ln(1 + r(e^t − 1)) − tr] ≤ t²/8` (Rio 2013, Lemma 4.1): the gap is at most
@@ -374,7 +400,8 @@ oscillations make the gap second order in the cell width.
 
 ### 3.3 Exact interval with evaluated anchors
 
-Theorem 2.5 at finite temperature: `Z_β(E₀+U) ≤ Z ≤ Z_β(E₀+L)`, attained.  With one anchor and
+Theorem 2.5 at finite temperature: `Z_β(E₀+U) ≤ Z ≤ Z_β(E₀+L)`, with every value in between
+attained (`robust_partition_interval_exact`).  With one anchor and
 the site-additive envelope both ends are partition functions of pairwise models with modified
 one-body tables (two transfer-matrix computations when `E₀` is a chain).
 
@@ -383,12 +410,21 @@ one-body tables (two transfer-matrix computations when `E₀` is a chain).
 *Weight domain.*  A `WInstance` stores rational Boltzmann factors.  If two instances bracket the
 true factors, their exact rational partition sums bracket the real partition function
 (`Z_encloses_partitionFn` **[V]**).  The brackets come from the certified rational enclosure of
-`exp` (`exp_enclosure`, `contains_boltzmann` **[V]**, §5).
+`exp` (`exp_enclosure`, `contains_boltzmann` **[V]**, §5), and this step is itself part of the
+verified pipeline: the two instances are *computed* from rational interval tables enclosing the
+energies (`WInstance.lowerOfIntervals`, `WInstance.upperOfIntervals`), and
+`certified_partition_of_intervals` **[V]** concludes `lo ≤ Z_real ≤ hi` from two accepted
+certificates with no hypothesis about Boltzmann factors.  Kernel-evaluated instance
+(`triangle_real_partition_enclosure`): the frustrated triangle at `β = 1` has
+`Z = 2e^{−3} + 6e^{−1} ∈ [2.3068, 2.3069]`, proved in Lean from the integer energy tables alone.
 
 *Kernel.*  `zverify` returns a rational interval for `Z` over a box from a certificate built
 from three rules — factorised leaf (pair factors replaced by certified constants, the remaining
 product measure summed exactly as `∏_i Σ_a w_i(a)`), branch (additivity over the states of a
-site), thermal prune — and `zverify_sound` **[V]** proves `lo ≤ Z ≤ hi`.
+site), thermal prune — and `zverify_sound` **[V]** proves `lo ≤ Z ≤ hi` for instances with
+nonnegative factors.  The top-level entry point `zverifyTop` checks nonnegativity itself, so
+`zverifyTop_sound` **[V]** has no side condition; `negativeW_unguarded` exhibits a negative-factor
+instance on which the bare rule checker returns an interval that misses `Z`.
 
 *Voxels.*  For a measurable voxel `V` of finite volume with `E_lo ≤ E ≤ E_hi` on `V`,
 
@@ -396,10 +432,39 @@ site), thermal prune — and `zverify_sound` **[V]** proves `lo ≤ Z ≤ hi`.
 
 and over a finite family of disjoint voxels indexed by the configurations of a box, rational
 instances whose weights bracket the voxel integrals have partition sums that bracket the
-continuous integral (`Z_encloses_voxel_integral`, `certified_voxel_partition` **[V]**).  The
-factor `vol(V)` is the conformational entropy of the voxel, which the minimised-energy surrogate
-`e^{−βE_min}` used by the `K*` family omits; with it the same enumeration yields a two-sided
-bound on the *integral*.
+continuous integral (`Z_encloses_voxel_integral`, `certified_voxel_partition` **[V]**; these two
+statements take the bracketing of each voxel integral as a hypothesis).  The factor `vol(V)` is
+the conformational entropy of the voxel, which the minimised-energy surrogate `e^{−βE_min}` used
+by the `K*` family omits; with it the same enumeration yields a two-sided bound on the
+*integral*.
+
+*Closing the pipeline [V] (`VoxelBridge.lean`).*  The bracketing hypothesis is discharged for the
+case the kernels are built for.  Let the torsion coordinates carry a product measure `⊗_i ν_i`,
+let site `i` have measurable cells `s_i(a)` of finite measure, pairwise disjoint in `a`, and let
+the energy be pairwise, `E(θ) = Σ_i u_i(θ_i) + Σ_{i≠j} U_ij(θ_i, θ_j)`.  If real tables
+`M^lo ≤ M^hi` enclose `u_i` and `U_ij` on the cells, and two rational weight instances satisfy,
+entry by entry,
+
+    w^lo_i(a) ≤ ν_i(s_i(a)) e^{−β h^hi_i(a)},   W^lo_ij(a,b) ≤ e^{−β J^hi_ij(a,b)},
+    ν_i(s_i(a)) e^{−β h^lo_i(a)} ≤ w^hi_i(a),   e^{−β J^lo_ij(a,b)} ≤ W^hi_ij(a,b)
+
+(what `contains_boltzmann` and outward rounding deliver), then each configuration's weights
+bracket the Boltzmann integral over its product voxel (`pairwise_voxel_weight_bounds`), and two
+accepted certificates give
+
+    lo(I^lo)  ≤  ∫_{⋃_x V_x} e^{−βE} d(⊗ν)  ≤  hi(I^hi)        (`certified_torsion_partition`),
+
+with no hypothesis about voxel integrals; over the full box the domain of integration is the
+whole product `∏_i ⋃_a s_i(a)` (`certified_torsion_partition_full`).  What remains are
+measurability of the cells and energy terms, the table enclosures of `u_i`, `U_ij` on the cells
+(the output of interval evaluation, an input here), and the displayed entrywise inequalities.
+For cells that are arcs with rational chart endpoints the latter are computable: the angular
+measure `2(arctan t₂ − arctan t₁)` has the rational enclosure `(t₂−t₁)·2/(1+T²) ≤ · ≤ 2(t₂−t₁)`
+for `|t| ≤ T` (`two_arctan_sub_bounds`), and `chartArc_onebody_brackets` combines it with the
+certified exponential.  Three kernel-evaluated instances are in `VoxelBridge.lean`
+(`exact_witness`, `pair_witness`, and `chart_witness`: the torsion potential `cos θ` on two
+chart arcs, with all tables, volume bounds and Boltzmann brackets computed by the interval
+layer).
 
 *Second order: separable envelopes [V] + Taylor step [P].*  If on a product voxel `∏_i s_i` the
 energy is bracketed by separable functions, `Σ_i φ_i(x_i) ≤ E(x) ≤ Σ_i ψ_i(x_i)`, then
@@ -597,12 +662,22 @@ re-superposition) the certificate is ≈ 2–2.5× tighter on idealised chains (
 worst-case (`ℓ¹`) bound and overestimates independent random errors by `≈ √m` (`DEAD_ENDS.md`
 D10).
 
-**Corollary 4.7 (envelope of an invariant residual) [V] (`InvariantEnvelope.lean`).**  If a
-residual `Δ` is invariant under rigid motions and `Λ`-Lipschitz in the `ℓ²` configuration
-distance, then `|Δ(X) − Δ(Y)| ≤ Λ c` whenever `RigidWithin X Y c`; in particular one torsion
-move changes it by at most `Λ · 2√(2 I_red)|sin(δ/2)|` (`residual_torsion_move`,
-`residual_torsion_chain`).  This turns an equivariant architecture with a Cartesian Lipschitz
-certificate into the bounded-difference envelope required in §2 and §6.
+**Corollary 4.7 (envelope of an invariant residual) [V] (`InvariantEnvelope.lean`).**  Let `G` be
+a group of rigid motions and let the residual `Δ` be `G`-invariant and `Λ`-Lipschitz in the `ℓ²`
+configuration distance.  Then `|Δ(X) − Δ(Y)| ≤ Λ c` whenever some motion of `G` superposes `Y`
+onto `X` within `c` (`invariant_lipschitz_of_rigidWithinIn`).  If `G` contains the rotations
+about the torsion axis — true for the proper motions `SE(3)`, so chirality-sensitive residuals
+are covered, and a fortiori for all isometries `E(3)` — one torsion move changes the residual by
+at most `Λ · 2√(2 I_red)|sin(δ/2)|` (`residual_torsion_move_in`, `residual_torsion_chain_in`;
+`residual_torsion_move`, `residual_torsion_chain` are the `E(3)` case).  `I_red` is the reduced
+inertia at the current conformation; with a conformation-independent bound `I_red ≤ Ī_i` for
+torsion `i` the constant is the uniform `c_i = Λ · 2√(2 Ī_i)` (`residual_torsion_move_uniform`),
+and then `Δ ∘ emb` lies in the residual class of the certificate kernel for any published
+constants `≥ c_i` and anchor values `≤ Δ` (`residualLowerClass_of_invariant_lipschitz`), so an
+accepted residual certificate bounds `E + Δ ∘ emb` (`verifyR_sound_invariant`).  This turns an
+invariant architecture with a Cartesian Lipschitz certificate and an inertia bound into the
+bounded-difference envelope required in §2 and §6.  (The bound `Ī_i` is a modelling input: e.g.
+the axial inertia of the lighter side of the torsion, bounded over the conformations considered.)
 
 *Prior art.*  The small-angle content is classical: the reduced moment of inertia of internal
 rotation (Pitzer–Gwinn 1942), optimal superposition and the Eckart conditions (Kudin–Dymarsky
@@ -672,17 +747,35 @@ minorant to the kernel above.  If `verifyR c P D L = true` then for **every** re
 those bounded differences and anchor values, `L ≤ E(x) + g(x)` on the box; with an anchor in the
 box the true optimum lies in `[L, E(a) + v]`.
 
+*Side conditions are checked, not assumed.*  `verifyR` checks rules only; if the published data
+are unsatisfiable — a negative constant, or two anchors whose values differ by more than the
+envelope allows — its soundness theorem holds vacuously (`inconsistentResidual_unguarded`: the
+bound `41/4` is accepted on a problem whose pairwise minimum is `1`).  The decidable predicate
+`RProblem.Consistent` (`c ≥ 0` and `v_a − v_b ≤ Σ_i c_i[a_i ≠ b_i]` for all anchor pairs) is
+*exactly* non-emptiness of the residual class (`RProblem.consistent_iff_nonempty` **[V]**, McShane
+extension), and the top-level kernel `verifyRTop` rejects inconsistent data
+(`verifyRTop_sound` **[V]**: the class is non-empty *and* the bound holds for every member).  For
+lower bounds the anchor values need only be lower bounds on the residual (`ResidualLowerClass`,
+`verifyR_sound_lower` **[V]**), so rounded-down floating-point evaluations may be published;
+under this reading pairwise compatibility is not required (rounding could even violate it) and
+`c ≥ 0` is the only side condition (`verifyRLowerTop_sound` **[V]**).  An upper bound on the
+optimum then needs a separately certified upper value at some configuration
+(`certified_gap_interval` **[V]**).
+
 **Real-valued energies [V] (`verify_sound_real`, `verifyR_sound_real`).**  If the published
 rational instance is a termwise *lower* instance of a real pairwise model (every table entry
 rounded down, §5), an accepted certificate bounds the true real energy — with or without the
-unknown residual.  This is the minimisation counterpart of `Z_encloses_partitionFn` and closes the
-outward-rounding loop: floats may be used everywhere upstream of the certificate.
+unknown residual.  This is the minimisation counterpart of `Z_encloses_partitionFn`: floating
+point may be used upstream of the certificate provided the published tables are rounded down
+and, for residual problems, the published constants are rounded up and the anchor values down
+(lower-bound semantics above).
 
-**Partition-function kernel [V] (`zverify_sound`, §3.4).**
+**Partition-function kernel [V] (`zverify_sound`, `zverifyTop_sound`, §3.4).**
 
 All three kernels are evaluated on concrete instances by `decide +kernel` (Lean's trusted kernel,
 no compiler in the trusted base, no extra axioms): `triangle_verified`, `triangle_rejects`,
-`biased_verified`, `triangleResidual_verified`, `triangleZ_exact`.
+`biased_verified`, `triangleResidual_verifiedTop`, `inconsistentResidual_rejected`,
+`negativeEnvelope_rejected`, `triangleZ_exactTop`, `negativeW_rejected`.
 
 ### 6.2 Verification cost and witness size
 
@@ -709,9 +802,13 @@ for the bound `m` visits at least `2^m` leaves — including certificates that u
 Approximation does not help much: certifying any bound `L ≥ m − d` still needs `2^{m−d}` leaves
 (`sumFree_gap_exponential`), and the exact sum-free complexity of the bound `K ≤ m` is `2^K`
 (`sumFree_complexity`).
-(d) With `sum`, `2m` leaves suffice for every `m ≥ 1` (`sum_linear`), hence for `m ≥ 3` there is
-an accepted certificate strictly smaller than every accepted sum-free certificate
-(`sum_rule_separation`).
+(d) With `sum`, `2m` visited leaves suffice for every `m ≥ 1` (`sum_linear`), hence for `m ≥ 3`
+there is an accepted certificate that visits fewer leaves than every accepted sum-free
+certificate (`sum_rule_separation`).  Leaves are not the whole cost — a `sum` node stores two
+sub-instances — so the separation is also proved for the node count (`4m − 1` against `≥ 2^m`,
+`m ≥ 4`: `sum_rule_separation_size`) and for the description length `Cert.dataSize`, which
+charges every node for all rational table entries it stores: below `147 m³` with `sum`, at least
+`2^m` without, for `m ≥ 21` (`sum_rule_separation_dataSize`).
 
 *Proof idea of (c).*  Call a block *untouched* while all its sites have both states.  For a
 domain with a witness of block energy `≤ 1` everywhere, (a) with `x'` the complement of `x` on
@@ -750,7 +847,8 @@ We prove no new expressivity or mixing theorem; the following are consequences o
    above uses `Δ_θ` only via `d` and anchors.  Theorem 2.7 turns the looseness `1−κ` of a
    certified envelope into a lower bound on the number of network evaluations any certificate
    needs: the number of states in an energy shell of width `(1−κ) c_min`.  Theorem 3.1 turns the
-   same constants into a free-energy uncertainty `β² Σ c_i²/8` that is sharp.  Design rule:
+   same constants into a free-energy uncertainty that is sharp: `β² Σ c_i²/8` relative to a
+   product (independent-site) reference, and `β² (Σ c_i)²/8` relative to an arbitrary one.  Design rule:
    *put steep, structured physics (sterics, electrostatics) in the explicit part and constrain
    the residual to have small certified per-site variation*; unbounded Lipschitz constants are
    incompatible with certification, not merely inconvenient.
@@ -763,8 +861,10 @@ We prove no new expressivity or mixing theorem; the following are consequences o
    data (§4.3) are not.  This is the realizability-side counterpart of the known incompleteness
    of distance-only invariant networks.
 4. **Sampling.**  (a) A sampler of the reference ensemble is a certified approximate sampler of
-   the target: `KL(reference ‖ target) ≤ β² Σ c_i²/8`, exactly the sandwich gap
-   (`kl_reference_target_eq_gap` **[V]**), with the constant `1/8` optimal.  (b) Thermal dominance
+   the target: `KL(reference ‖ target)` is exactly the sandwich gap
+   (`kl_reference_target_eq_gap` **[V]**), hence at most `β² Σ c_i²/8` when the reference is a
+   product measure (constant `1/8` optimal) and at most `β² (b−a)²/8 ≤ β² (Σ c_i)²/8` for any
+   reference, e.g. a tree-structured or autoregressive sampler.  (b) Thermal dominance
    bounds the change of every bounded observable under pruning by `2B e^{−βγ}`
    (`boltzmannAvg_dominance_error` **[V]**), and the robust partition bracket controls ensemble
    weights deterministically.  (c) The T₁ equivalence (§3.2) identifies the property of a
@@ -780,9 +880,16 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   are themselves optimisation problems; the theorems say what a certificate must and may contain,
   not how to find it.
 * **Finite configuration spaces.**  §§2–3 are stated for finite sets; continuous variables enter
-  through voxel enclosures (zeroth order and the separable-envelope step formalized; the Taylor
-  step that produces second-order envelopes from Hessian bounds is on paper).
-* **Extensivity** of the free-energy sandwich (§3.2).
+  through voxel enclosures (zeroth order formalized end to end for pairwise energies on product
+  voxels, and the separable-envelope step formalized; the Taylor step that produces second-order
+  envelopes from Hessian bounds is on paper, and voxel enclosures of the *tables* themselves —
+  interval evaluation of the energy terms over cells — are an input).
+* **Extensivity** of the free-energy sandwich (§3.2), and its **product-reference hypothesis**:
+  the `Σ c_i²` width is proved (and true) only for independent-site references; for correlated
+  references the formalized bound is the Hoeffding width `(Σ c_i)²`.
+* **Envelope constants are inputs.**  The certificates are sound *given* bounded-difference
+  constants (and, for Corollary 4.7, a Lipschitz constant and inertia bounds).  Certifying such
+  constants for a concrete learned residual is not part of this development.
 * **Worst-case geometry bounds** (Theorem 4.6 is `ℓ¹`; Theorem 4.3 is tight only for symmetric
   inputs and within `√((L+2)/2)` in general).
 * **No claim of practical performance.**  All experiments are synthetic and small; they check
@@ -803,21 +910,23 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 |---|---|
 | `proofs/Core/Basic.lean` | `partitionFn`, `freeEnergy`, `partitionFn_anti`, `freeEnergy_mono` |
 | `proofs/Core/Rounding.lean` | `roundDown_le`, `le_roundUp`, `roundUp_sub_roundDown_le`, `QInterval.contains_add/mul/sq/inv/outward`, `exp_enclosure`, `contains_exp`, `contains_boltzmann`, `circle_rational_atlas`, `contains_circParam` |
-| `proofs/Frontiers/EnvelopeDuality.lean` | `robust_minimizer_iff`, `robust_certified_iff`, `lowerEnv_admissible`, `upperEnv_admissible`, `robust_min_bracket`, `robust_partition_bracket`, `robust_minimizer_with_anchors_iff`, `anchor_necessary`, `anchor_card_lower_bound`, `admissible_of_single_site`, `differential_dee_sound`, `energy_window_exact` |
-| `proofs/Frontiers/Dominance.lean` | `partition_transport`, `partition_prune_bracket`, `freeEnergy_prune_bracket`, `min_transport`, `thermal_dee`, `boltzmannAvg_dominance_error`, `isLeast_sum_of_block_separable`, `exact_margin_of_block_separable`, `PairModel.energy_update`, `goldstein_isLeast`, `goldstein_gauge_invariant`, `exactMargin_reparam`, `desmet_reparam_le`, `desmet_optimalGauge` |
+| `proofs/Frontiers/EnvelopeDuality.lean` | `robust_minimizer_iff`, `robust_certified_iff`, `lowerEnv_admissible`, `upperEnv_admissible`, `robust_min_bracket`, `robust_partition_bracket`, `robust_min_interval_exact`, `robust_partition_interval_exact`, `robust_minimizer_with_anchors_iff`, `anchor_necessary`, `anchor_card_lower_bound`, `admissible_of_single_site`, `differential_dee_sound`, `energy_window_exact` |
+| `proofs/Frontiers/Dominance.lean` | `partition_transport`, `partition_prune_bracket`, `partition_transport_fibers`, `partition_prune_bracket_fibers`, `freeEnergy_prune_bracket`, `min_transport`, `thermal_dee`, `boltzmannAvg_dominance_error`, `isLeast_sum_of_block_separable`, `exact_margin_of_block_separable`, `PairModel.energy_update`, `goldstein_isLeast`, `goldstein_gauge_invariant`, `exactMargin_reparam`, `desmet_reparam_le`, `desmet_optimalGauge` |
 | `proofs/Frontiers/FreeEnergySandwich.lean` | `gibbs_bogoliubov`, `hoeffding_upper`, `free_energy_sandwich`, `partition_ratio_sandwich`, `bounded_differences_sandwich`, `additive_extremal`, `exists_two_level_worst_residual`, `balanced_additive_gap`, `log_cosh_bounds`, `mcdiarmid_no_better_constant` |
-| `proofs/Frontiers/EnsembleDivergence.lean` | `klFin`, `tilt`, `kl_reference_target_eq_gap`, `kl_reference_target_le_hoeffding`, `kl_reference_target_le_bounded_differences` |
+| `proofs/Frontiers/EnsembleDivergence.lean` | `klFin`, `tilt`, `kl_reference_target_eq_gap`, `kl_reference_target_le_hoeffding`, `kl_reference_target_le_bounded_differences`, `bounded_differences_sandwich_any_reference`, `kl_reference_target_le_any_reference`, `correlated_reference_counterexample` |
 | `proofs/Frontiers/HolderDecomposition.lean` | `partitionFn_holder`, `freeEnergy_holder` |
-| `proofs/Frontiers/PartitionCertificate.lean` | `zverify`, `zverify_sound`, `zprune_sound`, `Z_encloses_partitionFn`, `triangleZ_exact` |
+| `proofs/Frontiers/PartitionCertificate.lean` | `zverify`, `zverify_sound`, `zverifyTop`, `zverifyTop_sound`, `zprune_sound`, `Z_encloses_partitionFn`, `triangleZ_exact`, `negativeW_rejected` |
+| `proofs/Frontiers/IntervalInstance.lean` | `WInstance.lowerOfIntervals`, `WInstance.upperOfIntervals`, `Z_encloses_partitionFn_of_intervals`, `certified_partition_of_intervals`, `triangle_real_partition_enclosure` |
 | `proofs/Frontiers/VoxelEnclosure.lean` | `voxel_boltzmann_bounds`, `voxel_riemann_enclosure`, `Z_encloses_voxel_integral`, `certified_voxel_partition` |
+| `proofs/Frontiers/VoxelBridge.lean` | `pairwise_voxel_weight_bounds`, `certified_torsion_partition`, `two_arctan_sub_bounds` |
 | `proofs/Frontiers/SeparableVoxel.lean` | `setIntegral_pi_prod`, `separable_voxel_bounds`, `separable_voxel_ratio` |
 | `proofs/Frontiers/HoffmanWielandt.lean` | `trace_mul_le_sum_sorted_eigenvalues`, `hoffman_wielandt` |
 | `proofs/Frontiers/Realizability.lean` | `K_identity`, `K_lower_bound`, `rank_psd_trace_obstruction`, `sstress_lower_bound`, `simplex_sstress_lower_bound`, `simplex_not_realizable` |
 | `proofs/Frontiers/Holonomy.lean` | `norm_mul_div_mul_le`, `norm_holProd_le_sum`, `norm_holProd_sq_le`, `norm_holTrans_le`, `exists_assignment_attaining_holonomy` |
 | `proofs/Frontiers/TorsionRMSD.lean` | `RigidWithin`, `rigidWithin_chain`, `coaxial_cost_eq`, `exists_coaxial_angle`, `coaxial_cost_le_min`, `reduced_le_coaxial_cost`, `IsTorsionMove.rigidWithin`, `rigidWithin_torsion_chain` |
-| `proofs/Frontiers/InvariantEnvelope.lean` | `invariant_lipschitz_of_rigidWithin`, `residual_torsion_move`, `residual_torsion_chain` |
-| `proofs/Frontiers/ProofComplexity.lean` | `leaf_two_config`, `triangle_no_leaf_certificate`, `triangles_energy_opt`, `sumFree_exponential`, `sumFree_gap_exponential`, `sumFree_complexity`, `sumFree_tight`, `sum_linear`, `sum_rule_separation` |
-| `proofs/CertificateAlgebra.lean` | `verify`, `verify_sound`, `verifyR`, `verifyR_sound`, `certified_gap`, `verify_sound_real`, `verifyR_sound_real`, kernel-evaluated examples |
+| `proofs/Frontiers/InvariantEnvelope.lean` | `RigidInvariantIn`, `invariant_lipschitz_of_rigidWithinIn`, `residual_torsion_move_in`, `residual_torsion_chain_in`, `residual_torsion_move_uniform`, `residualLowerClass_of_invariant_lipschitz`, `verifyR_sound_invariant` (and the `E(3)` versions `residual_torsion_move`, `residual_torsion_chain`) |
+| `proofs/Frontiers/ProofComplexity.lean` | `leaf_two_config`, `triangle_no_leaf_certificate`, `triangles_energy_opt`, `sumFree_exponential`, `sumFree_gap_exponential`, `sumFree_complexity`, `sumFree_tight`, `sum_linear`, `sum_rule_separation`, `sum_rule_separation_size`, `sum_rule_separation_dataSize` |
+| `proofs/CertificateAlgebra.lean` | `verify`, `verify_sound`, `verifyR`, `verifyR_sound`, `verifyR_sound_lower`, `RProblem.Consistent`, `RProblem.consistent_iff_nonempty`, `verifyRTop`, `verifyRTop_sound`, `verifyRLowerTop`, `verifyRLowerTop_sound`, `certified_gap`, `certified_gap_interval`, `verify_sound_real`, `verifyR_sound_real`, kernel-evaluated examples |
 | `proofs/AxiomAudit.lean` | `#audit_axioms MetricChain`, non-vacuity witnesses |
 
 ---

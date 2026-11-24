@@ -1,8 +1,10 @@
 # MetricChain
 
-Machine-verified theory and certificate kernels for fixed-sequence articulated chain molecules:
-certified conformational energy minimisation, certified partition functions, realizability and
-geometric stability — with every guarantee checked in Lean 4 + Mathlib.
+Theory and certificate kernels for fixed-sequence articulated chain molecules: certified
+conformational energy minimisation, certified partition functions, realizability and geometric
+stability.  The theorems marked **[V]** in the theory report — including the soundness theorems
+of the three certificate kernels — are machine-checked in Lean 4 + Mathlib; statements marked
+**[P]** (paper proof) or **[K]** (cited) are not, and the report says which is which.
 
 Scope: mathematics, statistical physics, general-purpose certified computation and synthetic
 evaluation only.
@@ -24,8 +26,9 @@ lakefile.lean, lean-toolchain, lake-manifest.json   Lean 4.31.0 + Mathlib v4.31.
 proofs/Core/            partition-function vocabulary; outward rounding, rational intervals,
                         certified exp, rational atlas of the circle
 proofs/Frontiers/       envelope duality, dominance calculus, free-energy sandwich, Hölder
-                        decomposition, partition-function kernel, voxel enclosures,
-                        Hoffman–Wielandt, realizability, holonomy, torsion-to-RMSD,
+                        decomposition, partition-function kernel, voxel enclosures and the
+                        voxel bridge, Hoffman–Wielandt, realizability, holonomy,
+                        torsion-to-RMSD, invariant-residual envelopes,
                         proof complexity of certificates
 proofs/CertificateAlgebra.lean   executable verification kernels + Master Soundness Theorems
 proofs/AxiomAudit.lean           automatic axiom audit of every declaration + non-vacuity witnesses
@@ -59,5 +62,12 @@ anchors, and two-sided bounds on partition functions including thermal dead-end 
 voxel enclosures of continuous integrals — together with the theory that says what such
 certificates can and cannot achieve: exact characterisations of robust optimality (contact-set,
 sharp-minimum and query-model theorems), a witness-size lower bound, the necessity of the
-decomposition rule (exponential separation), and sharp free-energy sandwiches.  Several classical
-or recently published results are formalized along the way and are labelled as such.
+decomposition rule (exponential separation), and sharp free-energy sandwiches for product
+references.  Several classical or recently published results are formalized along the way and
+are labelled as such; an independent adversarial audit of the whole development and the
+corrections it triggered are recorded in `docs/DEAD_ENDS.md` (D14–D18).
+
+What is *not* established: the guarantees are relative to published inputs (rational tables,
+envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
+interval evaluation of force-field terms over voxels, and any claim of practical solver
+performance are outside the development.

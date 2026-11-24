@@ -205,3 +205,111 @@ stay nonnegative.
 
 These remain in the development as machine-checked building blocks and are labelled as such in
 `docs/THEORY_REPORT.md`.
+
+---
+
+# Findings of the independent adversarial audit (session 1, after the second formalization batch)
+
+An independent reviewer compared every documented claim with the Lean statement behind it and
+looked for vacuous or circular theorems.  No forbidden construct and no vacuous headline theorem
+was found, but the following claims were wrong or stronger than what had been proved.  Each entry
+states what was claimed, what was actually true, and the repair.
+
+## D14. "The bounded-difference free-energy sandwich holds for a pairwise / tree-structured reference" — FALSE  **[Lean] [harness: DEAD.5, III.6]**
+
+*Claim (theory report §0.2/§3.2/§7 and blueprint §6.4, as first written).*  For the reference
+ensemble `μ₀ ∝ e^{−βE₀}` and a residual with bounded differences `c`,
+`ln(Z/Z₀) + β⟨Δ⟩₀ ≤ β² Σ_i c_i²/8`, and `KL(reference ‖ target)` obeys the same bound for any
+sampler of the reference.
+
+*What was proved.*  `bounded_differences_sandwich` and
+`kl_reference_target_le_bounded_differences` assume a **product** reference `∏_i p_i(x_i)`; the
+documentation dropped the hypothesis.
+
+*Counterexample.*  Two binary sites, `μ₀` uniform on `{00, 11}` (perfectly correlated),
+`Δ = x₁ + x₂`, `c = (1, 1)`, `β = 1`: the gap is `ln cosh 1 ≈ 0.434 > 0.25 = β² Σ c_i²/8`.
+Correlation lets single-site variations add coherently.
+
+*Repair.*  Product reference stated wherever the `Σ c_i²` width is used; the counterexample is
+now a Lean theorem (`correlated_reference_counterexample`); for an arbitrary reference the
+verified statement is the Hoeffding width `β²(Σ_i c_i)²/8`
+(`bounded_differences_sandwich_any_reference`, harness III.6); widths for weakly dependent
+references are quoted as known results and are not formalized.
+
+*Lesson.*  A documented theorem must be read back against its Lean hypotheses line by line; the
+phrase "the reference ensemble" silently generalised a statement about independent sites.
+
+## D15. Kernel soundness theorems that were vacuous on bad inputs  **[Lean]**
+
+*Residual kernel.*  `verifyR_sound` quantifies over the residual class of the published data.  The
+kernel checked neither `c ≥ 0` nor compatibility of the anchor values, so for unsatisfiable data
+the theorem was vacuously true and the kernel accepted absurd bounds: anchors `(0,1,0) ↦ 0` and
+`(1,1,0) ↦ 10` with `c = 1/4` certify `L = 41/4` on a problem whose pairwise minimum is `1`
+(`inconsistentResidual_unguarded`).
+
+*Partition kernel.*  `zverify_sound` assumed nonnegative factors, which `zverify` did not check;
+with a negative one-body factor the returned "interval" `(−1, −9)` misses `Z = −4`
+(`negativeW_unguarded`).
+
+*Repair.*  `RProblem.Consistent` is decidable and is *exactly* non-emptiness of the residual
+class (`RProblem.consistent_iff_nonempty`); the top-level kernels `verifyRTop`, `zverifyTop` check
+the side conditions, and `verifyRTop_sound`, `zverifyTop_sound` have no hypothesis left for the
+caller.  The Python reference checker and the conformance vectors were extended accordingly.
+
+*A second-order correction found while repairing.*  Soundness of lower bounds needs only
+`value ≤ Δ(anchor)` (`ResidualLowerClass`), which is what a producer with floating-point
+evaluations can guarantee.  Under that reading the pairwise compatibility check would be *wrong*
+(rounding can violate it for a legitimate producer) and is unnecessary (the class is non-empty as
+soon as `c ≥ 0`).  Hence two entry points with two semantics (`verifyRTop`, `verifyRLowerTop`)
+rather than one.
+
+*Lesson.*  "Sound for every member of the class" must come with "the class is non-empty", and
+every hypothesis of a soundness theorem must be either checked by the kernel or discharged by
+another theorem.
+
+## D16. "SE(3)-invariant residual" was formalized as E(3)-invariance  **[Lean]**
+
+`RigidInvariant` quantifies over all isometries, reflections included, although the blueprint
+recommends chirality-sensitive (pseudoscalar) features, which are not reflection-invariant; and
+the uniform constant promised by the docstring ("exactly the constants required by
+`ResidualClass`") did not exist as a theorem.  Repair: invariance is parametrised by a submonoid
+`G` of motions (`RigidInvariantIn`); the torsion bounds hold whenever `G` contains the rotations
+about the torsion axis, which is true for the proper motions (`residual_torsion_move_in`,
+`residual_torsion_move_min_in`); `residual_torsion_move_uniform`,
+`residualLowerClass_of_rigidWithinIn` and `verifyR_sound_invariant` carry the statement down to
+the kernel's residual class, with a concrete non-degenerate witness in `AxiomAudit.lean`.
+
+## D17. "Two semirings, one certificate algebra — the same rules" — OVERSTATED
+
+The partition kernel has leaf, branch and thermal-prune rules but no decomposition rule: the
+tropical `sum` rule (`min(E₁+E₂) ≥ min E₁ + min E₂`) has only a one-sided finite-temperature
+analogue (Hölder), which is proved as a theorem but is not a rule of `zverify`.  The claim was
+reworded; a two-sided product rule for independent sub-instances (tree elimination) is listed as
+a natural extension.
+
+## D18. The voxel pipeline assumed its key hypothesis; smaller overstatements  **[Lean]**
+
+* `certified_voxel_partition` took as a hypothesis that the rational weights bracket each voxel
+  integral, and nothing derived it.  Closed by `VoxelBridge.lean`
+  (`pairwise_voxel_weight_bounds`, `certified_torsion_partition`) for pairwise energies on
+  product voxels.
+* "Exactly the interval" for the robust optimum / partition function was proved only as a
+  bracket plus attainment of the endpoints.  Now a theorem: every intermediate value is attained
+  (`robust_min_interval_exact`, `robust_partition_interval_exact`).
+* The separation "with `sum` strictly smaller than every sum-free certificate" was measured in
+  visited leaves, ignoring that a `sum` node stores two sub-instances.  Now also proved for the
+  node count and for the full description length (`sum_rule_separation_size`,
+  `sum_rule_separation_dataSize`).
+* The many-to-one pruning factor `1 + m e^{−βγ}` was asserted in the report but only the
+  injective case was proved; now `partition_prune_bracket_fibers`.
+* The exact-dominance factorisation "over the components of the link graph" is verified in its
+  abstract block-separable form only; the 3-body model itself is not defined in Lean.  The
+  documents now say so.
+* A non-vacuity witness for the witness-size bound concluded `|filter| ≤ |univ|`; replaced by one
+  that forces both states into every exact certificate.
+* Three harness tests could not fail (same quadrature on both sides of X.1; a dead membership
+  check in II.4; `m ≤ 2` without the prune rule in VII.1); rewritten with independent
+  computations and built-in power checks.
+* Novelty wording: "no verified checker for this problem class" now carries the reviewer's
+  caveat (pseudo-Boolean encodings with existing verified checkers), and the voxel claim is
+  scoped to "inside a provable design algorithm".

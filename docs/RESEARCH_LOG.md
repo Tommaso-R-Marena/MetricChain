@@ -88,21 +88,22 @@ Verified modules and headline statements:
 |---|---|---|
 | `Core/Basic` | partition function / free energy vocabulary | **[V]** |
 | `Core/Rounding` | dyadic outward rounding, rational intervals (`+ − × ⁄ sq inv hull`), certified `exp` enclosure with argument reduction, Boltzmann-factor intervals, rational atlas of the circle | **[V]** |
-| `Frontiers/EnvelopeDuality` | contact-set theorem, sharp-minimum theorem, McShane brackets (min energy and `Z` at all β), query-model theorem, witness-size lower bound, local-to-global envelope lemma, differential DEE, energy-window exactness | **[V]** |
+| `Frontiers/EnvelopeDuality` | contact-set theorem, sharp-minimum theorem, McShane brackets (min energy and `Z` at all β ≥ 0) and exactness of the bracketed interval (cycle 5), query-model theorem, witness-size lower bound, local-to-global envelope lemma, differential DEE, energy-window exactness | **[V]** |
 | `Frontiers/Dominance` | dominance transport lemma, thermal DEE, Goldstein exactness, gauge invariance, Desmet gauge optimum | **[V]** |
 | `Frontiers/HoffmanWielandt` | von Neumann trace inequality and Hoffman–Wielandt for real symmetric matrices (via Birkhoff + rearrangement) | **[V]** |
 | `Frontiers/Realizability` | K-identity, rank-constrained PSD approximation with trace penalty, s-stress lower bound, simplex certificates | **[V]** |
 | `Frontiers/PartitionCertificate` | sum–product kernel `zverify` with thermal DEE, soundness, enclosure of the real partition function | **[V]** |
-| `Frontiers/VoxelEnclosure` | Boltzmann voxel bounds with volume factor; assembly theorem from continuous integrals to the rational kernel | **[V]** |
+| `Frontiers/VoxelEnclosure` | Boltzmann voxel bounds with volume factor; assembly theorem from continuous integrals to the rational kernel (given that weights bracket the voxel integrals) | **[V]** |
+| `Frontiers/VoxelBridge` (cycle 5) | derivation of that bracketing from voxel-table enclosures of a pairwise energy and product volumes; end-to-end certified torsion partition integral; rational enclosure of chart-arc measures | **[V]** |
 | `Frontiers/SeparableVoxel` | separable envelopes ⇒ product of one-dimensional Boltzmann integrals; relative-width bound | **[V]** |
 | `Frontiers/HolderDecomposition` | finite-temperature dual decomposition | **[V]** |
 | `Frontiers/EnsembleDivergence` | sandwich gap = relative entropy of target w.r.t. reference; certified sampler error | **[V]** |
 | `Frontiers/FreeEnergySandwich` | Gibbs–Bogoliubov + Hoeffding/McDiarmid sandwich; the worst bounded-difference residual is additive and two-level; `1/8` optimal | **[V]** |
 | `Frontiers/Holonomy` | cycle-holonomy obstruction (conjugation-invariant norms), SE(3) translation holonomy with lever arms | **[V]** |
 | `Frontiers/TorsionRMSD` | rigid-superposition chain rule, exact coaxial cost, two-sided reduced-inertia bounds, torsion-move chain | **[V]** |
-| `Frontiers/InvariantEnvelope` | invariant Lipschitz residual ⇒ torsion-space envelope | **[V]** |
+| `Frontiers/InvariantEnvelope` | Lipschitz residual invariant under a group of motions (SE(3) or E(3)) ⇒ torsion-space envelope ⇒ membership in the kernel's residual class (cycle 5) | **[V]** |
 | `Frontiers/ProofComplexity` | two-configuration weak duality, LP gap of the frustrated triangle, exact `2^m` bound for sum-free certificates, `2m` with `sum`, separation theorem | **[V]** |
-| `CertificateAlgebra` | `(min,+)` kernel `verify`, residual kernel `verifyR`, Master Soundness Theorems, kernel-evaluated examples | **[V]** |
+| `CertificateAlgebra` | `(min,+)` kernel `verify`, residual kernel `verifyR` with top-level entry points `verifyRTop` / `verifyRLowerTop` (consistency of the data checked; cycle 5), Master Soundness Theorems, kernel-evaluated examples | **[V]** |
 | `AxiomAudit` | automatic audit of every declaration + non-vacuity witnesses | **[V]** |
 
 Engineering lessons recorded in `DEAD_ENDS.md` D6 (leaf rule), D7 (`decide +kernel`).
@@ -115,8 +116,9 @@ Driven by the open items listed below and by the reviewers' "how to sharpen" not
   into `M` one-dimensional integrals, with a relative-width bound; this is the certificate form of
   second-order (Gaussian) voxel quadrature.
 * `isLeast_sum_of_block_separable`, `exact_margin_of_block_separable` **[V]** — exact dominance
-  with many-body terms factorises over the connected components of the link graph (tractable half
-  of the link-graph dichotomy).
+  factorises over blocks whenever the difference energy is block-separable (the abstract form of
+  "factorises over the connected components of the link graph"; the 3-body model itself is not
+  defined in Lean, so the link-graph reading is on paper).
 * `boltzmannAvg_dominance_error` **[V]** — thermal pruning with margin `γ` changes any observable
   bounded by `B` by at most `2B e^{−βγ}`: certified ensemble averages, not only free energies.
 * `verify_sound_real`, `verifyR_sound_real` **[V]** — certificates accepted for an outward-rounded
@@ -130,6 +132,35 @@ Driven by the open items listed below and by the reviewers' "how to sharpen" not
   soundness fuzzing against brute force.
 * Process incident and repair: `DEAD_ENDS.md` D13.
 
+### Cycle 5 — independent adversarial audit and repairs
+
+An independent reviewer (fresh context, instructed to refute) audited the whole repository at the
+end of cycle 4: every documented claim against its Lean statement, every headline theorem for
+vacuity or circularity, every harness test for power.  Outcome: **no forbidden construct, no
+vacuous headline theorem, no critical error; five major and six minor discrepancies between what
+the documents said and what had been proved**, plus three harness tests that could not fail.  All
+were repaired in this cycle; the record of what was wrong is `DEAD_ENDS.md` D14–D18.
+
+| finding | repair |
+|---|---|
+| bounded-difference sandwich documented for arbitrary references; proved (and true) only for product references | documents corrected; counterexample kept as harness test `DEAD.5`; the general-reference Hoeffding width tested as `III.6` |
+| residual kernel sound only vacuously on inconsistent data; partition kernel's `Nonneg` hypothesis unchecked | `RProblem.Consistent` with `RProblem.consistent_iff_nonempty`; top-level kernels `verifyRTop`, `verifyRLowerTop`, `zverifyTop` whose soundness theorems have no side condition; kernel-evaluated rejections; reference checker and conformance vectors extended |
+| voxel pipeline assumed that weights bracket voxel integrals | `VoxelBridge.lean`: `pairwise_voxel_weight_bounds`, `certified_torsion_partition` (pairwise energies, product voxels, product measures), rational enclosure of chart-arc measures, three concrete witnesses |
+| "SE(3)-invariant" formalized as invariance under all isometries; no uniform constant | invariance parametrised by a group of motions (`RigidInvariantIn`); `residual_torsion_move_min_in`, `residual_torsion_move_uniform`, `residualLowerClass_of_rigidWithinIn`, `verifyR_sound_invariant`; non-degenerate witness |
+| "two semirings, one algebra, same rules" | reworded: decomposition is a rule of the tropical kernel only |
+| robust interval "exact" proved only as a bracket | `robust_min_interval_exact`, `robust_partition_interval_exact` (intermediate value theorem along the segment between the McShane envelopes) |
+| separation measured in visited leaves only | `sum_rule_separation_size` (nodes), `sum_rule_separation_dataSize` (description length with embedded sub-instances) |
+| many-to-one thermal pruning asserted, injective case proved | `partition_transport_fibers`, `partition_prune_bracket_fibers` |
+| the Boltzmann-factor brackets of `Z_encloses_partitionFn` were hypotheses never derived from the certified exponential | `IntervalInstance.lean`: instances computed from interval energy tables, `certified_partition_of_intervals`, and a kernel-evaluated real enclosure `Z_triangle(β=1) ∈ [2.3068, 2.3069]` |
+| trivial non-vacuity witness; anchors required to be exact rationals | new witness forcing every exact certificate to evaluate both states; `ResidualLowerClass`, `verifyR_sound_lower`, `certified_gap_interval` |
+| harness tests X.1, II.4, VII.1 could not fail | rewritten with independent computations, exhaustive certificate enumeration, the prune rule, and built-in power checks; new tests II.7, II.8, III.6, DEAD.5 |
+
+The audit also changed one design decision rather than only wording: lower bounds need anchor
+values that are *lower bounds* on the residual, so a producer with floating-point evaluations
+should publish rounded-down values — and for those the pairwise consistency check is neither
+sound to demand nor needed.  The residual kernel therefore has two entry points with two stated
+semantics.
+
 ### Portfolio reassessment (end of session 1)
 
 * **Strongest discovery so far.**  The *envelope duality* cluster: under any envelope the set of
@@ -140,9 +171,10 @@ Driven by the open items listed below and by the reviewers' "how to sharpen" not
   witness-size lower bound).  Individually elementary, together they *close* the question the
   charter posed for Direction A and give a principled interface for neural residuals: the
   architecture must export an envelope, and the price of a loose envelope is quantified.
-* **Second.**  A two-semiring certificate algebra with verified kernels (tropical, residual and
+* **Second.**  Verified certificate kernels in two semirings (tropical, residual and
   sum–product) covering reparameterisation bounds, branching, DEE, differential DEE under a
-  residual, thermal DEE, dual decomposition and voxel enclosures of continuous integrals — with
+  residual, thermal DEE, dual decomposition (tropical kernel only) and voxel enclosures of
+  continuous integrals — with
   *thermal dominance* (a temperature-aware, multiplicative pruning guarantee for partition
   functions) and the *voxel enclosure with volume factor* as rules that the provable-design
   literature does not have.
@@ -159,9 +191,12 @@ Driven by the open items listed below and by the reviewers' "how to sharpen" not
 * **Fundamental limitation that remains.**  (a) Every exact criterion we proved is itself a hard
   combinatorial problem (contact-set membership is an MRF minimisation); we certify, we do not
   solve.  (b) The free-energy sandwich is extensive in the number of sites; it certifies free
-  energies only when `β c_i ≪ M^{-1/2}` or after localisation.  (c) Continuous integration is
-  certified to zeroth order per voxel and, given separable envelopes, to second order; the
-  Taylor/Hessian step producing those envelopes is specified on paper only.  (d) Nothing here bounds mixing times of samplers.
+  energies only when `β c_i ≪ M^{-1/2}` or after localisation; and its `Σ c_i²` form needs a
+  product reference.  (c) Continuous integration is certified to zeroth order per voxel (end to
+  end for pairwise energies on product voxels) and, given separable envelopes, to second order;
+  the Taylor/Hessian step producing those envelopes is specified on paper only.  (d) Nothing
+  here bounds mixing times of samplers.  (e) Every guarantee is relative to published envelope
+  constants; certifying such constants for a concrete network is not addressed.
 * **Could a different representation overcome it?**  For (b): replace the product reference by a
   tree reference and Hoeffding by a variance-aware (Bennett) bound with exactly computed
   conditional variances — the transfer matrix makes those computable.  For (c): the rational
@@ -170,15 +205,17 @@ Driven by the open items listed below and by the reviewers' "how to sharpen" not
   `resolution^M`.
 * **Can several discoveries be unified?**  Yes, and partly done: the envelope is the common
   object behind differential DEE (β = ∞), the robust partition bracket (finite β) and the T₁
-  transport inequality (uniform second-order sandwich).  The kernel rules are the same in the
-  tropical and the sum–product semiring.
+  transport inequality (uniform second-order sandwich).  The leaf / branch / dominate rules are
+  parallel in the tropical and the sum–product semiring; decomposition is not (`DEAD_ENDS.md`
+  D17).
 * **Is continued investigation justified?  Highest-leverage next steps.**
   1. Variance-aware sandwich for tree references (new mathematics, formalizable).
   2. Second-order voxel certificates with the product-of-1-D structure; a verified checker.
   3. Size lower bounds for AND/OR (decomposition-aware) certificates on weakly coupled chains —
      the disjoint case is known, the coupled case is open.
   4. The hardness half of the link-graph dichotomy for exact dominance with 3-body terms (the
-     tractable half — factorisation over link-graph components — is now verified).
+     tractable half is verified in its abstract block-separable form; a Lean model with 3-body
+     terms and its link graph is still to be written).
   5. Connecting the kernel to LeanCert-style continuous leaves (interval evaluation of the
      rational torus energy) to obtain one end-to-end verified mixed discrete–continuous checker.
   6. Realizability certificates for the data predictors actually emit: weighted or incomplete
