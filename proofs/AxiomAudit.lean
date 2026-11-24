@@ -32,6 +32,7 @@ import proofs.Frontiers.SampledSandwich
 import proofs.Frontiers.PartitionProduct
 import proofs.Frontiers.RefereeLemmas
 import proofs.Frontiers.QueryLowerBound
+import proofs.Frontiers.SoftGapBounds
 import proofs.AuditCommand
 
 /-!
@@ -286,6 +287,16 @@ import proofs.AuditCommand
 #print axioms MetricChain.cube_thermal_randomized_exponential
 #print axioms MetricChain.cube_thermal_randomized_bound
 #print axioms MetricChain.spotCheck_correct
+
+-- Soft-gap bounds: randomised upper bound, product form, deterministic against randomised
+#print axioms MetricChain.softGap_le_add_slack
+#print axioms MetricChain.detection_weight_ge
+#print axioms MetricChain.thermal_spotCheck_correct
+#print axioms MetricChain.exists_thermal_spotCheck_sample_size
+#print axioms MetricChain.cube_deterministic_lower_bound
+#print axioms MetricChain.cube_dipWeight_sum
+#print axioms MetricChain.softGap_hamEnv_additive
+#print axioms MetricChain.thermal_product_randomized
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp
@@ -973,6 +984,31 @@ theorem spotCheck_witness (g : Bool → ℝ) (hg : Admissible (discreteEnvelope 
     · linarith
   rw [Finset.filter_true_of_mem fun x _ => hne x]
   simp
+
+/-- **Witness for `detection_weight_ge`.**  Two states, discrete envelope of oscillation `1`,
+zero known part, `β = 1`, instance `g = 0` and alternative `g' = -1` (a constant shift, hence
+admissible): `Z(g') = e · Z(g)`, so the hypothesis holds with `η = e - 1 > 0`. -/
+theorem detection_weight_witness :
+    Admissible (discreteEnvelope 1) (fun _ : Bool => (0 : ℝ)) ∧
+      Admissible (discreteEnvelope 1) (fun _ : Bool => (-1 : ℝ)) ∧ 0 ≤ Real.exp 1 - 1 ∧
+      (1 + (Real.exp 1 - 1)) * ∑ _x : Bool, Real.exp (-1 * ((0 : ℝ) + 0)) ≤
+        ∑ _x : Bool, Real.exp (-1 * ((0 : ℝ) + -1)) := by
+  refine ⟨admissible_of_bounds (lo := 0) _ fun _ => by norm_num,
+    admissible_of_bounds (lo := -1) _ fun _ => by norm_num, ?_, ?_⟩
+  · have := Real.add_one_le_exp (1 : ℝ)
+    linarith
+  · simp
+    linarith
+
+/-- **Witness for `cube_deterministic_lower_bound`.**  For every `n`, `β` and `c` the algorithm
+that evaluates everything is exactly correct (`ε = 0`), so the hypothesis is satisfiable. -/
+theorem cube_deterministic_witness (n : ℕ) (β c : ℝ) :
+    ∀ g, Admissible (hamEnv fun _ : Fin n => c) g →
+      |(fullQueryAlgorithm fun g : (Fin n → Bool) → ℝ =>
+          Real.log (∑ x, Real.exp (-β * ((0 : ℝ) + g x)))).output g -
+        Real.log (∑ x, Real.exp (-β * ((0 : ℝ) + g x)))| ≤ 0 / 2 := by
+  intro g _
+  simp [fullQueryAlgorithm]
 
 end MetricChain.NonVacuity
 

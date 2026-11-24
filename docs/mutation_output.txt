@@ -150,6 +150,12 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XII.5 M1: an initial segment in binary order claimed optimal instead of the Hamming ball
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.6 M1: dip weights without the factor (1 + eta)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.6 M2: soft gap computed from the transposed slack
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.6 M3: Gibbs weight of the difference set claimed to be at least 2 (Z - Z')
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.10 M1: accuracy eps = 0.5 instead of 0 (certificates then exist) -> must be flagged UNEXPECTEDLY SURVIVED
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.11 M1: known part f = 0 on the dyadic line (the shrunk covers are then small) -> must be flagged UNEXPECTEDLY SURVIVED
@@ -157,4 +163,4 @@
 [         caught] DEAD.14 M1: a deeper perturbation scale (beta = 3: single local dips are sensitive) -> must be flagged UNEXPECTEDLY SURVIVED
                   exit=1  1 TEST(S) MISBEHAVED
 
-79 mutations: 78 caught, 1 expected pass, 0 not as expected
+82 mutations: 81 caught, 1 expected pass, 0 not as expected

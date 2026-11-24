@@ -36,8 +36,9 @@ proofs/Frontiers/       envelope duality, dominance calculus, free-energy sandwi
                         exponential-weights converses, product rates, best-first search,
                         thermal robustness), second- and higher-order envelopes, the sampled
                         free-energy sandwich, the partition kernel with cut and elimination
-                        rules, the lemmas of the second referee, and query-complexity bounds
-                        for every algorithm, deterministic or randomised
+                        rules, the lemmas of the second referee, query-complexity bounds
+                        for every algorithm, deterministic or randomised, and two-sided
+                        soft-gap bounds for randomised free-energy estimation
 proofs/CertificateAlgebra.lean   executable verification kernels + Master Soundness Theorems
 proofs/AuditCommand.lean         the axiom walk (by defining module)
 proofs/AxiomAudit.lean           axiom audit of every project constant + non-vacuity witnesses
@@ -98,9 +99,12 @@ small, the same formula holds with the energy gap replaced by the free-energy ga
 macrostate (a corollary of a known source-coding theorem on exponential moments of distortion),
 and the count is at least the exponential of the entropy.  These bounds hold for every
 algorithm: at zero temperature randomisation gains at most a factor `1 − 2δ` against each
-covering bound; for free energies it lowers the exponent but not to zero — on the cube class
-there is a sharp accuracy threshold, `n ln cosh(βc/2)`, above which a bounded number of random
-evaluations suffices and below which every algorithm needs exponentially many.  Minimal
+covering bound; for free energies it provably lowers the exponent (machine-checked on the cube:
+about `(2/(1+e^{−βc}))ⁿ` random evaluations against almost `2ⁿ` deterministic ones) but not to
+zero — every algorithm must reach within a *soft-gap* radius of every state, the same soft gaps
+bound the randomised cost from above, and on the cube class there is a sharp accuracy
+threshold, `n ln cosh(βc/2)`, above which a bounded number of random evaluations suffices and
+below which every algorithm needs exponentially many.  Minimal
 certificates are NP-hard to find and best-first search is competitive only with covers at
 shrunk radii.  Under weak second-order coupling, `n(k−1)+1` evaluations give an exact reduction
 to the pairwise kernel.  The one-shot lower bounds (for certificates and for all algorithms),

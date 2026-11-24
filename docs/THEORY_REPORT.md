@@ -1143,6 +1143,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/PartitionProduct.lean` | `ZCert2`, `zverify2`, `zverify2_sound`, `zverify2Top_sound`, `WInstance.Z_cut`, `WInstance.Z_cut_eq`, `WInstance.Z_elim1`, `WInstance.Z_elim2`, `chainCert`, `zverify2Top_chainCert`, `zverify2_elementary_exact_leaves`, `cut_rule_separation`, `elimination_separation`, `chain_separation`, `ferroChain_separation`, kernel-evaluated instances (`twoTriangles_cut_exact`, `chain_elim_exact`, `tree_elim_exact`, `ring_elim_exact`) |
 | `proofs/Frontiers/RefereeLemmas.lean` | `config_exchange`, `value_exchange`, `card_exchange_le`, `exact_free_energy_certificate_eq_univ`, `gaugeW`, `gauge_trivial_separation` (lemmas of the second referee) |
 | `proofs/Frontiers/QueryLowerBound.lean` | `QueryAlgorithm`, `exists_query_ne`, `prob_query_ne_ge`, `card_queries_ge_packing`, `expected_queries_ge_packing`, `dip`, `dip_eq_sub`, `queries_cover_of_sensitive`, `expected_queries_ge_of_radius`, `expected_queries_ge_exp_weights`, `queries_strict_cover`, `queries_isValueCertificate`, `certificateAlgorithm_correct`, `instance_query_complexity`, `expected_queries_ge`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `softGap`, `sum_exp_dip`, `log_sum_exp_dip_ge`, `thermal_queries_strict_cover`, `thermal_queries_bracket`, `thermal_expected_queries_ge`, `cube_thermal_randomized_bound`, `cube_thermal_randomized_exponential`, `spotCheck`, `spotCheck_correct` |
+| `proofs/Frontiers/SoftGapBounds.lean` | `softGap_le_add_slack`, `detection_weight_ge`, `gibbs_weight_ne_ge`, `dipWeight`, `thermalSampler`, `thermal_spotCheck_correct`, `exists_thermal_spotCheck_sample_size`, `sum_dipWeight_eq`, `cube_deterministic_lower_bound`, `cube_dipWeight_sum`, `softGap_hamEnv_additive`, `thermal_product_randomized` |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -1181,7 +1182,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G8 | **Second-order envelopes**: with bounded mixed differences, `n(k−1)+1` evaluations on a star give an exact pairwise sandwich; the extremal extensions are pairwise models; certified-minimiser criterion; order `m` in general.  The remainder is quadratic in the Hamming distance, so this is a way out only under weak second-order coupling (D32) | `secondOrder_remainder`, `pairwise_sandwich`, `verify_sound_secondOrder`, `secondOrder_envelope_exact`, `secondOrder_certified_minimizer_iff`, `higherOrder_remainder`, `higherOrder_remainder_sharp` **[V]** | anchored (cut-HDMR) decomposition **known**; as a certified uncertainty class with an exact reduction to the pairwise kernel: no match found |
 | G10 | **Sampled free-energy sandwich**: `N` independent samples of a product reference pin `ln(Z/Z₀)` to `±\|β\|η + β²Σc_i²/8` outside an event of probability `2e^{−2Nη²/Σc_i²}` — polynomially many random evaluations where deterministic certification needs exponentially many | `sample_mean_two_sided`, `sampled_free_energy_sandwich`, `sampled_free_energy_sandwich_of_sample_size` **[V]** | standard concentration (Chernoff bound for a sub-Gaussian mean); stated as the constructive counterpart of G7 |
 | G9 | **Compositional partition kernel**: cut rule and elimination rule (exact on every chain, with one leaf), with exponential separations from the elementary rules for every chain length — for certificates whose lower end is exact, and relative to the given representation of the instance (D33) | `zverify2_sound`, `WInstance.Z_cut`, `cut_rule_separation`, `WInstance.Z_elim1`, `WInstance.Z_elim2`, `zverify2Top_chainCert`, `chain_separation`, `ferroChain_separation` **[V]** | repair of the kernel; variable elimination is classical; the separation is the formal counterpart of E2 at finite temperature |
-| G11 | **Query complexity of every algorithm**: sensitive alternatives must be detected (any class, any functional; deterministic and randomised), with a spot-check converse; for the minimum, the instance-wise deterministic complexity *equals* the size of a value certificate, and every randomised algorithm pays `(1−2δ)` times each covering lower bound; for `ln Z`, a soft-gap radius, a third (randomised) exponent, and a sharp accuracy threshold on the cube | `exists_query_ne`, `prob_query_ne_ge`, `expected_queries_ge_packing`, `spotCheck_correct`, `instance_query_complexity`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `thermal_queries_strict_cover`, `thermal_queries_bracket`, `thermal_expected_queries_ge`, `cube_thermal_randomized_bound` **[V]**; single-letter forms and upper bounds **[P]** | method **known** (radius of information; fractional block sensitivity as a bound on randomised query complexity); the instance-wise randomised bound with gap radii, the soft gap and the threshold: no match found |
+| G11 | **Query complexity of every algorithm**: sensitive alternatives must be detected (any class, any functional; deterministic and randomised), with a spot-check converse; for the minimum, the instance-wise deterministic complexity *equals* the size of a value certificate, and every randomised algorithm pays `(1−2δ)` times each covering lower bound; for `ln Z`, a soft-gap radius for every algorithm and an upper bound for randomised ones in the same quantity, a third (randomised) exponent bracketed from both sides, a machine-checked exponential gap between deterministic and randomised cost on the cube, and a sharp accuracy threshold there | `exists_query_ne`, `prob_query_ne_ge`, `expected_queries_ge_packing`, `spotCheck_correct`, `instance_query_complexity`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `thermal_queries_strict_cover`, `thermal_queries_bracket`, `thermal_expected_queries_ge`, `thermal_product_randomized`, `cube_thermal_randomized_bound`, `detection_weight_ge`, `thermal_spotCheck_correct`, `cube_deterministic_lower_bound` **[V]**; single-letter forms and the attainment on the cube **[P]** | method **known** (radius of information; fractional block sensitivity as a bound on randomised query complexity); the instance-wise randomised bound with gap radii, the soft gap and the threshold: no match found |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -1887,8 +1888,9 @@ every randomised algorithm with the extra factor `1 − 2δ` (on a finite space 
 `E|Q| ≥ (1 − 2δ)(6/5)ⁿ 2^{−ε}`.  The proof uses correctness on the instance and on one dip per
 point only; under that hypothesis the factor `1 − 2δ` is attained (uniform metric: a mixture of
 full evaluation and two blind guesses; harness XII.2).  For correctness on the whole class it
-is not optimal in general: `k` alternatives with pairwise distinguishable values and a common
-detection set are missed with probability at most `kδ/(k−1)` by the same argument **[P]**.
+is not optimal in general: if `k` residuals (the instance among them) have pairwise
+distinguishable values and agree outside a common set, that set is missed with probability at
+most `kδ/(k−1)`, by the same argument **[P]**.
 
 *Consequences.*  (i) Randomisation gains at most the integrality gap of the covering problem,
 `E|Q| ≥ (1−2δ) N_frac ≥ (1−2δ) N_cov/(1 + ln |X|)`; at zero temperature it does not change the
@@ -1940,7 +1942,7 @@ distortion budgets for a macrostate (type) `P`, and three exponents `max_P R(P; 
 |---|---|---|---|
 | minimum, all algorithms | `E_P[gap]` | `R*` | lower bound **[V]** for every `n`, also randomised; upper bound **[P]** |
 | `ln Z`, deterministic | `KL(P‖π)/β = F[P] − F` | `R_β` | lower bound **[V]**, for every deterministic algorithm; upper bound **[P]** (Merhav) |
-| `ln Z`, randomised, accuracy `nε₁` | `(E_P[Λ₁] + ε₁)/β` | `R^rand_β(ε₁)` | lower bound **[V]** one-shot, **[P]** single-letter; upper bound open in general |
+| `ln Z`, randomised, accuracy `nε₁` | `(E_P[Λ₁] + ε₁)/β` | `R^rand_β(ε₁)` | lower bound **[V]** for every product landscape (`thermal_product_randomized`, with `softGap_hamEnv_additive`), **[P]** single-letter; upper bound `min(R_β, U_β)` **[V]** (Theorem 11.26); exact value open |
 
 The deterministic budget carries an entropy credit, `KL(P‖π) = E_P[−ln π] − H(P)`, because a
 deterministic algorithm must exclude dips at *all* points of a type class at once (the lower
@@ -1980,14 +1982,54 @@ So on this class the accuracy `n ln cosh(βc/2)` — the largest Jensen gap of t
 sharp threshold.  Above it, a bounded number of random evaluations suffices; below it every
 algorithm, randomised or not, needs exponentially many, with exponent `ln 2 − h(ρ(ε₁))` at the
 zero residual (for `ε₁ = 0`: `0.0077, 0.029, 0.097, 0.156` at `u = 0.5, 1, 2, ln 16`), while a
-deterministic algorithm needs `2^{n(1−o(1))}` evaluations at every temperature.  For small `u`
+deterministic algorithm needs `2^{n(1−o(1))}` evaluations at every temperature
+(`cube_deterministic_lower_bound`).  For small `u`
 the exponent is `≈ u²/32`; importance sampling from the uniform reference needs about
 `e^{KL(π‖uniform)} ≈ e^{nu²/8}` samples at the additive worst case (Chatterjee–Diaconis 2018)
 **[K]**, so for algorithms without a hint the exponent on this class lies between these two
 values to leading order, and is open.  Benchmark B10 compares the closed form with the linear
 program and with exact ball counts up to `n = 1600`.
 
-*What is not proved.*  Single dips are not the extremal perturbations on general instances:
+**Theorem 11.26 (soft-gap sampling: an upper bound in the same quantity) [V].**  Let `β ≥ 0`.
+(a) The soft gap is Lipschitz for `β` times the slack, `Λ(x) ≤ Λ(z) + β s(z,x)`
+(`softGap_le_add_slack`): `Λ/β` is itself the profile of an admissible perturbation.
+(b) *Detection weights.*  Let `w(z) = e^{−βE(z)} ((1+η) e^{Λ(z)} − 1)`.  Every admissible `g'` with
+`Z(f+g') ≥ (1+η) Z(f+g)` differs from `g` on a set of weight at least `ηZ`
+(`detection_weight_ge`).  Proof: if `e^{β(g−g')} ≤ (1+η) e^{Λ}` everywhere, compare term by term.
+Otherwise some point `x₀` carries a dip deeper than its soft gap allows; `g'` then differs from
+`g` on the whole slack ball of that depth around `x₀`, on which, by (a), the weights dominate
+`e^{−βE(z)} ((1+η) e^{Λ(x₀) − βs(z,x₀)} − 1)`, and these sum to exactly `ηZ`.  An admissible `g'`
+with a smaller partition function differs from `g` on Gibbs weight at least `Z − Z(f+g')`
+(`gibbs_weight_ne_ge`).
+(c) Hence the spot-check of Theorem 11.22(d) with the sampling distribution
+`q = ½ π + ½ w/W` (`thermalSampler`), `η = e^{ε/2} − 1`, `W = Σ_z w(z)`, is `(ε/2, δ)`-correct for
+`ln Z` on the whole admissible class as soon as `(1 − p)^N ≤ δ`,
+`p = ½ min(ηZ/W, 1 − e^{−ε/2})` (`thermal_spotCheck_correct`).  Since
+`W = (1+η) Z E_π e^{Λ} − Z` (`sum_dipWeight_eq`), `N = ⌈2 ln(1/δ) E_π[e^{Λ}] / (1 − e^{−ε/2})⌉`
+samples suffice.
+
+Together with Theorem 11.24, the number of evaluations at an instance — of algorithms that are
+correct on the whole class — is bracketed by two functionals of the soft gap:
+
+    (1 − 2δ) · Pack{ slack balls of radius (Λ(y) + ε)/β }  ≤  E|Q(g)|  ≤  ⌈ 2 ln(1/δ) E_π[e^{Λ}] / (1 − e^{−ε/2}) ⌉ .
+
+On a product landscape `E_π e^{Λ} = ∏_i Σ_b π_i(b) e^{Λ_i(b)}`, so at an additive instance the
+randomised exponent lies between `R^rand_β` and `min(R_β, U_β)`,
+`U_β = ln Σ_b π(b) / Σ_a π(a) e^{−βs(a,b)}`.  For the site of Theorem 11.9 (`e/c = 1/2`):
+`U_β = 0.216, 0.365, 0.521` against the deterministic `R_β = 0.686, 0.666, 0.605` at
+`β = 0.5, 1, 2` — there **randomisation provably lowers the exponent**; at `β = 4` the bound
+(`0.630`) exceeds the deterministic exponent (`0.482`) and says nothing, and as `β → ∞` it does
+not tend to `R*` (for this site it tends to `ln 2`).  On the cube class the separation holds at
+every temperature and is machine-checked on both sides: every deterministic algorithm makes at
+least `e^{−tε/β} 2ⁿ (1+e^{−tc})^{−n}` evaluations on the zero residual, for every `t ≥ 0`
+(`cube_deterministic_lower_bound`; almost `2ⁿ` for bounded `ε`), while the spot-check needs
+about `(2/(1+e^{−βc}))ⁿ` (`cube_dipWeight_sum`).  The upper bound is crude — it charges every
+point of the support with the deepest dip that point could carry alone — and on the cube it is
+far from the true exponent `ln 2 − h(ρ₀)` of Theorem 11.25(c); closing the gap is the
+isoperimetric question of §12.  Harness XII.6; benchmark B10.
+
+*What is not proved.*  The randomised exponent at additive instances is bracketed,
+`R^rand_β ≤ · ≤ min(R_β, U_β)`, not determined.  Single dips are not the extremal perturbations on general instances:
 unions of shallow dips, none of which is sensitive alone, can change `ln Z` (`DEAD_ENDS.md` D34:
 on the uniform metric with `n = 8` the fractional hitting number of all sensitive sets is `4`
 while the dip bound gives `1`).  On product spaces we *conjecture* that dips are extremal at
@@ -2045,9 +2087,11 @@ threshold of Theorem 11.25.  The proofs are short.
    (Theorem 11.23).  Open:
    (a) instances that are only approximately additive — the cover computed from the
    interpolant must be robust to the pair remainder;
-   (b) **the randomised exponent at finite temperature**: is `R^rand_β(ε₁)` attained at additive
-   instances, i.e. are single dips extremal at the exponential scale on product spaces?  This
-   is an asymptotic isoperimetric inequality for the slack quasi-metric; it holds for the
+   (b) **the randomised exponent at finite temperature**: it lies between `R^rand_β(ε₁)` and
+   `min(R_β, U_β)` (Theorems 11.24, 11.26).  Is the lower end attained at additive instances,
+   i.e. are single dips extremal at the exponential scale on product spaces?  This is an
+   asymptotic isoperimetric inequality for the slack quasi-metric with two measures (the
+   blow-up of a set of Gibbs measure `e^{−βr}` by the slack radius `r`); it holds for the
    uniform cube (Harper) and fails for general finite instances (`DEAD_ENDS.md` D34);
    (c) the threshold accuracy beyond the cube: is the game value `ε₁^crit` the boundary between
    polynomial and exponential cost, and what is the cost between it and the passive width of

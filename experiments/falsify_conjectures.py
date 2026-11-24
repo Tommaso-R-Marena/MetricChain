@@ -3413,6 +3413,53 @@ def t_cube_blocks(rng, trials):
     return True, stats
 
 
+@conjecture("XII.6 Soft-gap sampling: every admissible alternative with Z' >= (1 + eta) Z differs from g on a set of weight >= eta Z for the weights exp(-beta E)((1 + eta) e^Lambda - 1); the soft gap Lambda is beta*slack-Lipschitz; alternatives with a smaller Z differ on Gibbs weight >= Z - Z'")
+def t_soft_gap_sampling(rng, trials):
+    stats = dict(sets=0, random_alternatives=0, min_ratio=float("inf"))
+    for _ in range(max(15, trials // 3)):
+        n, d, kappa, f, g, _ = cg_instance(rng, nmax=8, kappas=(0.0, 0.3, 0.7))
+        beta = float(rng.choice([0.3, 1.0, 2.0, 5.0]))
+        eta = float(rng.choice([0.05, 0.3, 1.0, 5.0]))
+        E = f + g
+        w = np.exp(-beta * (E - E.min()))
+        Z = float(w.sum())
+        s = cg_slack(d, g)
+        Lam = np.array([math.log(Z) - math.log(float((w * np.exp(-beta * s[:, y])).sum())) for y in range(n)])
+        if np.any(Lam[:, None] > Lam[None, :] + beta * s.T + 1e-9):      # Lam[x] <= Lam[z] + beta s[z, x]
+            return False, dict(reason="soft gap is not beta*slack-Lipschitz")
+        W = w * ((1 + eta) * np.exp(Lam) - 1)
+        # (a) the extremal alternative of every set D: g - h_D, h_D(y) = min over x outside D of s(x, y)
+        for mask in range(1, 2 ** n - 1):
+            D = [y for y in range(n) if mask >> y & 1]
+            C = [x for x in range(n) if not mask >> x & 1]
+            h = np.zeros(n)
+            h[D] = s[np.ix_(C, D)].min(axis=0)
+            if float((w * np.exp(beta * h)).sum()) >= (1 + eta) * Z:
+                differs = h > 1e-12
+                ratio = float(W[differs].sum()) / (eta * Z)
+                stats["sets"] += 1
+                stats["min_ratio"] = min(stats["min_ratio"], ratio)
+                if ratio < 1 - 1e-9:
+                    return False, dict(reason="a sensitive set has dip weight below eta Z", ratio=ratio)
+        # (b) random admissible alternatives of either sign
+        for alt in range(10):
+            gp = cg_lipschitz(rng, d, 1.0) + float(rng.normal(0, 1.5))
+            if alt % 2:
+                gp = np.minimum(g, gp)
+            if not qc_admissible(d, gp):
+                raise RuntimeError("sanity: generated alternative is not admissible")
+            Zp = float(np.exp(-beta * (f + gp - E.min())).sum())
+            differs = np.abs(gp - g) > 1e-10
+            stats["random_alternatives"] += 1
+            if Zp >= (1 + eta) * Z and float(W[differs].sum()) < eta * Z * (1 - 1e-9):
+                return False, dict(reason="an alternative with a larger partition function carries too little dip weight")
+            if float(w[differs].sum()) < (Z - Zp) * (1 - 1e-9) - 1e-12:
+                return False, dict(reason="an alternative with a smaller partition function differs on too little Gibbs weight")
+    if stats["sets"] == 0:
+        return False, dict(reason="coverage: no sensitive set")
+    return True, stats
+
+
 @conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
 def t_dead_exact_free_energy(rng, trials):
     """Refuted (second referee, C1): with positive slack off the diagonal, an exact certificate of ln Z is the whole

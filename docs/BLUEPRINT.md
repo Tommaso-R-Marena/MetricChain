@@ -577,9 +577,17 @@ accepted value is within `ε/2` except with probability `(1 − p)^N`.  The work
 the minimum, `p` is the least `q`-mass of the closed slack balls `{a : s(a,y) ≤ gap(y) + ε/2}`
 and of the set of `ε/2`-minimisers, all computable from `ĝ` (harness XII.4); no choice of `q`
 makes `N` smaller than `(1 − 2δ)` times the fractional covering number (`expected_queries_ge`),
-so on non-sharp product landscapes spot-checking is exponential too.  For free energies `p` is
-an isoperimetric quantity; on the cube class with accuracy below `n ln cosh(βc/2)` it is
-exponentially small for every `q` (`cube_thermal_randomized_bound`).  Exact equality of values
+so on non-sharp product landscapes spot-checking is exponential too.  For free energies a
+sampling distribution with a guarantee is available in closed form (`thermalSampler`,
+`thermal_spotCheck_correct`): draw half of the samples from the Gibbs measure `π̂` of the model
+and half with probability proportional to `π̂(z)·(e^{ε/2} e^{Λ(z)} − 1)`, where the soft gap
+`Λ(z) = ln Z(E₀+ĝ) − ln Z(E₀ + ĝ(z) + d(·,z))` is a ratio of two partition functions of the
+model (for a chain-structured `E₀` and an additive `ĝ`, two transfer-matrix computations per
+`z`); then `N = ⌈2 ln(1/δ) E_π̂[e^{Λ}] / (1 − e^{−ε/2})⌉` samples suffice.  The number
+`E_π̂[e^{Λ}]` is exponential in general — on the cube `(2/(1+e^{−βc}))ⁿ`, still exponentially
+smaller than the `2ⁿ` of every deterministic procedure (`cube_deterministic_lower_bound`) —
+and no sampling distribution avoids an exponential number below the accuracy
+`n ln cosh(βc/2)` (`cube_thermal_randomized_bound`).  Exact equality of values
 is assumed; with numerical tolerances the comparison and the envelope must be widened
 consistently.  No kernel for such transcripts is implemented here.
 

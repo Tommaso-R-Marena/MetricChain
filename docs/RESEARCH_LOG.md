@@ -475,12 +475,25 @@ certificate.
   random evaluations from exponentially many for every algorithm
   (`cube_thermal_randomized_bound`; upper bounds on paper, Harper's theorem for attainment).
 
+* *An upper bound in the same quantity* (`SoftGapBounds.lean`, Theorem 11.26, found while the
+  cycle's audit was running).  The soft gap is `βs`-Lipschitz, and every alternative with
+  `Z' ≥ (1+η)Z` differs from the instance on dip weight at least `ηZ`; hence sampling from
+  `½π + ½·(dip weights)` detects every distinguishable alternative, and
+  `N ≈ 2 ln(1/δ) E_π[e^{Λ}]/(1 − e^{−ε/2})` evaluations suffice.  Lower and upper bounds on the
+  randomised cost are now two functionals of one quantity; on the cube this gives a
+  machine-checked exponential gap between deterministic (`≈ 2ⁿ`) and randomised
+  (`≲ (2/(1+e^{−βc}))ⁿ`) cost.  The bound is crude (exponent `U_β`); the exact randomised
+  exponent remains open.  Product form of the lower bound: `thermal_product_randomized`.
+
 **Falsification before formalisation.**  Explored numerically first: all sensitive blocks
 against single dips on small spaces (dips are *not* extremal in general — D34, kept as
 `DEAD.14`); the isoperimetric claim on the 4-cube; the predicted exponent against exact ball
 counts up to `n = 1600`; the consistency `R^rand_β ≤ R_β` of the three single-letter formulas
-(benchmark B10).  Harness cluster XII (5 tests) and `DEAD.10`–`DEAD.14`; 12 new mutations, all
-caught.
+(benchmark B10); the detection-weight lemma on 27 005 sensitive sets of random instances before
+it was formalised (it compiled on the first attempt, and its hypothesis `g' ≤ g` turned out to
+be unused); a probe of the conjecture on biased cubes with `n ≤ 4` (ratio between all sensitive
+sets and single dips between 1 and 2, no trend).  Harness cluster XII (6 tests) and
+`DEAD.10`–`DEAD.14`; 15 new mutations, all caught.
 
 **Literature (`prior_art/L7`).**  Four searches: fractional block sensitivity / randomised
 certificate complexity (confirmed as the known method); randomised lower bounds for Lipschitz
@@ -496,21 +509,26 @@ standard; the honest classification is unchanged in kind — a note, plus a form
 
 ### Resume here (state at the end of cycle 8)
 
-Verified state: every module under `proofs/` (35 files) builds with zero warnings and is walked
-by the axiom audit; the harness (68 registered tests: 54 that must survive, 14 documented
-refutations) and its mutation tests (79 mutations: 78 caught, one expected pass) pass;
+Verified state: every module under `proofs/` (36 files) builds with zero warnings and is walked
+by the axiom audit; the harness (69 registered tests: 55 that must survive, 14 documented
+refutations) and its mutation tests (82 mutations: 81 caught, one expected pass) pass;
 `scripts/audit_all.sh` exits 0.
 In priority order:
 
-1. **The randomised exponent at finite temperature** (theory report §12, item 2(b)): prove or
-   refute that single dips are extremal at the exponential scale on product spaces — an
-   asymptotic isoperimetric inequality for the slack quasi-metric (Harper for the uniform cube;
-   Ahlswede–Zhang / Alon–Boppana–Spencer-type results for general product spaces are the place
-   to look).  This would turn the third row of the table of Theorem 11.24 into an equality and
-   make the threshold general.
-2. **A third reading.**  §11.10 has not been refereed.  Commission an independent review of
-   `QueryLowerBound.lean` against the prose (the model of algorithms, the factor `1 − 2δ`, the
-   `ε` versus `ε/2` conventions, the [P] parts of Theorem 11.25) before building on it.
+1. **The randomised exponent at finite temperature** (theory report §12, item 2(b)): it is
+   bracketed, `R^rand_β ≤ · ≤ min(R_β, U_β)`.  Prove or refute that single dips are extremal at
+   the exponential scale on product spaces — an asymptotic isoperimetric inequality with two
+   measures (Harper for the uniform cube; Ahlswede–Zhang / Alon–Boppana–Spencer-type results
+   are the place to look).  This would turn the third row of the table of Theorem 11.24 into
+   an equality and make the threshold general.
+2. **Reviews.**  A third independent referee is reading §11.10 (as of f1a6015) and the
+   faithfulness of the R2 corrections; act on its report first.  Theorem 11.26 and
+   `SoftGapBounds.lean` were added after that review started and have not been refereed.
+   Six independent workstreams were launched at the end of this cycle (isoperimetric
+   conjecture; chain-structured known parts; alternative representations — reduced costs, A*,
+   weak KAM, tropical; free-energy estimation in statistical mechanics and general
+   observables; lower bounds for second-order classes; envelopes from chain geometry); their
+   reports are to be verified independently before anything is integrated.
 3. **Beyond product landscapes.**  A pairwise chain as known part: the transfer-matrix form of
    the lower bounds (zero temperature: theory report §12 item 1(c); the soft gap of a chain is
    a ratio of transfer-matrix partition functions).

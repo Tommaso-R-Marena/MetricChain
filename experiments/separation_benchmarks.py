@@ -457,7 +457,8 @@ def randomized_rate(e, c, beta, eps1=0.0, grid=801):
     M = beta * slack - lam[None, :]
     res = linprog([0, 0, -1], A_ub=np.hstack([-M, np.ones((2, 1))]), b_ub=np.zeros(2), A_eq=[[1, 1, 0]], b_eq=[1],
                   bounds=[(0, None), (0, None), (None, None)], method="highs")
-    return rate, float(-res.fun)
+    upper = math.log(float(np.sum(pi * np.exp(lam))))          # U_beta = ln E_pi e^{Lambda}: soft-gap sampling
+    return rate, float(-res.fun), upper
 
 
 def cube_hitting_exponent(n, u, eps):
@@ -490,25 +491,26 @@ def bench_query_complexity(rng, quick):
     for e in (0.5, 2.0):
         print(f"two-state site, excitation e = {e}, envelope constant c = 1, zero residual; "
               f"zero-temperature exponent R* = {binary_rstar(e) if e < 1 else 0.0:.4f}")
-        print(f"{'beta':>6} | {'H(pi)':>7} | {'R_beta (certificates)':>21} | {'R^rand_beta (all algorithms, >=)':>32} | {'eps1_crit':>9}")
+        print(f"{'beta':>6} | {'H(pi)':>7} | {'R_beta (deterministic)':>22} | {'R^rand_beta (randomised, >=)':>28} | "
+              f"{'U_beta (randomised, <=)':>23} | {'eps1_crit':>9}")
         for beta in ((0.5, 1.0, 4.0, 40.0) if quick else (0.25, 0.5, 1.0, 2.0, 4.0, 10.0, 40.0)):
             Rb, H = thermal_rate(e, 1.0, beta, rng)
-            Rr, crit = randomized_rate(e, 1.0, beta, grid=grid)
-            rows.append(dict(e=e, beta=beta, entropy=H, R_beta=Rb, R_rand=Rr, eps1_crit=crit))
-            print(f"{beta:6.2f} | {H:7.4f} | {Rb:21.4f} | {Rr:32.4f} | {crit:9.4f}")
-            if Rr > Rb + 1e-3:
-                raise RuntimeError("randomised lower bound exceeds the deterministic exponent")
+            Rr, crit, U = randomized_rate(e, 1.0, beta, grid=grid)
+            rows.append(dict(e=e, beta=beta, entropy=H, R_beta=Rb, R_rand=Rr, U_beta=U, eps1_crit=crit))
+            print(f"{beta:6.2f} | {H:7.4f} | {Rb:22.4f} | {Rr:28.4f} | {U:23.4f} | {crit:9.4f}")
+            if Rr > min(Rb, U) + 1e-3:
+                raise RuntimeError("randomised lower bound exceeds an upper bound")
     print("\nuniform cube (e = 0; the deterministic exponent is ln 2 = 0.6931 for every beta):")
-    print(f"{'u=beta*c':>8} | {'ln2 - h(rho0)':>13} | {'LP value':>9} | {'threshold ln cosh(u/2)':>22} | {'game value':>10} | "
+    print(f"{'u=beta*c':>8} | {'ln2 - h(rho0)':>13} | {'LP value':>9} | {'U = ln(2/(1+e^-u))':>18} | {'threshold ln cosh(u/2)':>22} | {'game value':>10} | "
           + " | ".join(f"n={n}" for n in ((100, 400) if quick else (100, 400, 1600))) + "   [(1/n) ln(2^n/|B(r*)|), eps = 0.5]")
     hb = lambda x: -x * math.log(x) - (1 - x) * math.log(1 - x)
     for u in (0.5, 1.0, 2.0, math.log(16.0)):
         rho0 = math.log(2.0 / (1.0 + math.exp(-u))) / u
-        Rr, crit = randomized_rate(0.0, 1.0, u, grid=grid)
+        Rr, crit, U = randomized_rate(0.0, 1.0, u, grid=grid)
         vals = [cube_hitting_exponent(n, u, 0.5) for n in ((100, 400) if quick else (100, 400, 1600))]
-        rows.append(dict(u=u, closed_form=math.log(2) - hb(rho0), lp=Rr, threshold=math.log(math.cosh(u / 2)), game=crit,
-                         finite_n=vals))
-        print(f"{u:8.3f} | {math.log(2) - hb(rho0):13.5f} | {Rr:9.5f} | {math.log(math.cosh(u / 2)):22.5f} | {crit:10.5f} | "
+        rows.append(dict(u=u, closed_form=math.log(2) - hb(rho0), lp=Rr, upper=U, threshold=math.log(math.cosh(u / 2)),
+                         game=crit, finite_n=vals))
+        print(f"{u:8.3f} | {math.log(2) - hb(rho0):13.5f} | {Rr:9.5f} | {U:18.5f} | {math.log(math.cosh(u / 2)):22.5f} | {crit:10.5f} | "
               + " | ".join(f"{v:.5f}" for v in vals))
     return rows
 
