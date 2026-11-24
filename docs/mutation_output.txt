@@ -172,6 +172,26 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XII.6 M3: Gibbs weight of the difference set claimed to be at least 2 (Z - Z')
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.9 M1: radius of a generalised dip without its soft gap
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.9 M2: supports of the generalised dips claimed at half the radius
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.10 M1: constant gamma(Q) computed from the distance functions (single dips) only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.10 M2: hitting bound four times larger
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.11 M1: closed form of the flat sites with single dips only (m = 1)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.12 M1: sandwich with the untilted reference (theta = 0) and the width n eps*
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.12 M2: slack of the instance theta M with the wrong orientation
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.13 M1: lower end of the one-reference sandwich replaced by the Gibbs variational value at a class member (psi = 0)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.13 M2: upper end computed from the distance functions only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.13 M3: hint-free width claimed to equal the instance threshold of the zero residual
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.10 M1: accuracy eps = 0.5 instead of 0 (certificates then exist) -> must be flagged UNEXPECTEDLY SURVIVED
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.11 M1: known part f = 0 on the dyadic line (the shrunk covers are then small) -> must be flagged UNEXPECTEDLY SURVIVED
@@ -187,4 +207,4 @@
 [         caught] DEAD.14 M1: a deeper perturbation scale (beta = 3: single local dips are sensitive) -> must be flagged UNEXPECTEDLY SURVIVED
                   exit=1  1 TEST(S) MISBEHAVED
 
-94 mutations: 93 caught, 1 expected pass, 0 not as expected
+104 mutations: 103 caught, 1 expected pass, 0 not as expected

@@ -619,7 +619,101 @@ statement of the cluster is now complete — the cube at the zero residual, all 
 matching sides; and the direction beyond the cube has moved from a false conjecture to a
 candidate theorem with a verified lower half.
 
-### Resume here (state at the end of cycle 9, first checkpoint)
+### Cycle 9, second checkpoint — workstream results verified and integrated (A, and B's threshold)
+
+*Capability note.*  Modal compute was offered for this phase.  The client and credentials are
+present in the environment, but the client's gRPC transport cannot connect through the
+session's network proxy (which documents gRPC as unsupported); no job was run, nothing was
+worked around, and all computations of this cycle are local.
+
+**Integrated after independent verification** (theory report Theorems 11.27–11.28;
+`GeneralisedDips.lean`; harness XII.9–XII.12 with seven mutations; benchmark B11).
+* *Generalised dips* (workstream A, Lemma 1 and Proposition 2; found independently by D).  For
+  every slack-Lipschitz `Φ` the residual `g − (r − Φ)₊` is admissible and raises `ln Z` by at
+  least `βr − Λ(Φ)`; every randomised algorithm pays the packing price of every such family —
+  now a machine-checked theorem on arbitrary instances (`genDip_expected_queries_ge`), with
+  single dips as a special case.  On product landscapes: the single-letter bound `R^gen_β`, a
+  game over the vertices of the Lipschitz polytope of a site.  Recomputed with own code for
+  flat 3-, 4-, 8-state sites and the sites `(0,0,2)`, `(0,2,2)`; the closed form for flat sites
+  agrees with the linear program.
+* *The two-reference sandwich* (workstream A, Theorem B).  `ln E_{πⁿ}e^{βh} ≤ βE_{Qⁿ}h + nγ(Q)`
+  tensorises (machine-checked, from the workstream's scratch file), so above
+  `ε₁^thr = min_Q γ(Q)` per site a bounded number of samples of `½πⁿ + ½Q*ⁿ` suffices at an
+  additive instance, and below it the cost is exponential: a sharp threshold for every
+  alphabet and every `n`.  The dip value `ε₁^crit` is the truth only for two-state sites.
+* *The hint-free threshold of two-state classes* (workstream B, Theorem B.12).  The largest
+  chord gap of the pressure `P(θ) = ln(1 + e^{−β(e+θ)})` over `[−c, c]`: attained from above by a
+  sandwich whose reference is tilted to the slope `θ*` (no hint needed), from below by the dip
+  bound at the instance `θ*M`.  This generalises the cube threshold of Theorem 11.25 to biased
+  sites and answers the question left open in the first checkpoint for two-state sites.
+  Proof checked; the sandwich tested exhaustively-in-kind on cubes with `n ≤ 4`.
+* *The hint-free threshold of every product class* (synthesis of A and B, found while
+  integrating them; own result of this cycle).  The reverse of A's two-measure bound
+  tensorises as well (`twoMeasureLower_pow`), so every admissible residual on `Sⁿ` satisfies
+  `n m(Q) ≤ ln Z(f+g) + βE_{Qⁿ}g ≤ n M(Q)` for one reference law `Q` and no reference instance,
+  `m`, `M` the extreme values of the tilted site pressure `F_Q` over the class.  By the minimax
+  theorem `min_Q (M − m) = sup_γ ε₁^thr(γ)`: the hint-free worst-case threshold is settled for
+  every alphabet (Theorem 11.28(d); harness XII.13, with the identity checked on three-state
+  sites to six digits before the Lean proof was written).  This corrects a negative remark of
+  workstream D ("mean-based hint-free procedures cannot beat the passive width"), which holds
+  only if the lower bound is taken under the Gibbs law of the known part.
+
+**Delivered, under independent review, not integrated** (five reviewers running; reports in
+`workstreams/`).
+* A: the matching upper bound `R^gen_β` (inherently typical subsets).
+* B: chains as known parts — droplet criterion (`c ≤ τ`; Ising `τ = 2h`), exact exponent
+  `sup_ν R_ν(e(ν))` over stationary processes, the window `2h < c ≤ 2(J+h)` on which the
+  transfer-matrix bound of blueprint §6.6 is zero although certification is exponential,
+  the soft gap of a chain as a pinned free energy, Conjecture B.13.
+* C: the normal form (a known part is the gradient part of an asymmetric envelope), a second
+  best-first bound valid at `κ = 1`, Dechter–Pearl type-3 optimality, best-first search
+  unboundedly worse than a two-point certificate on the line with a known part, Hetland (2020).
+* D: second-order classes have a phase transition at the Curie–Weiss coupling `βc₂n = 4`
+  (polynomial below by Dobrushin uniqueness, exponential above); threshold
+  `Σ ln(sinh b_i/b_i)` on the torus; Boltzmann averages are far harder than `ln Z`.
+* E: dense second-order constants — the dip `c·C(r − d_H, 2)₊`, "stars do not combine", the
+  sandwich `K₋ ≤ N₂ ≤ (n+1)K₊ + 1`, a mean-field transition at `e/γ = 1/4`, and a three-legged
+  spider that beats the star.
+* G (chain geometry; delivered last): the lever-arm law `c_i = Θ(Λ b m_i^{3/2})` of the verified
+  torsion-to-RMSD constants; the weighted-Hamming format is hopeless for long chains; the RMSD
+  envelope used directly gives `ln N_cov = Θ̃(√(λN))` — the exponential price comes from the
+  `ℓ¹` chain rule, not from RMSD; a zipper bound for contact residuals.  A sixth reviewer is
+  reading it.
+
+### Resume here (state at the end of cycle 9, second checkpoint)
+
+Verified state: every module under `proofs/` (38 files) builds with zero warnings and is walked
+by the axiom audit; the harness (78 registered tests: 62 that must survive, 16 documented
+refutations) and its mutation tests (104 mutations: 103 caught, one expected pass) pass;
+`scripts/audit_all.sh` exits 0.
+In priority order:
+
+1. **Act on the six reviews** (A's proofs; B, C, D, E, G) as they arrive: integrate what is
+   confirmed, record what is refuted in `DEAD_ENDS.md`, leave the rest marked as claims.
+   Candidates for theorems of the report, if confirmed: the normal form (C1), the second
+   best-first bound (C4), the droplet criterion and the vacuous window for chains (B.1, B.5),
+   the second-order dip and its consequences (E, Theorems A–C; D's phase transition), the
+   torus threshold (D).  The scratch Lean files `NormalForm.lean`, `StarsDoNotCombine.lean`,
+   `SecondOrderDip.lean`, `ComparisonDip.lean`, `SetDip.lean`, `RefMeasure.lean` type-check
+   according to their authors; move the confirmed ones into `proofs/Frontiers/`.
+2. **The exact exponent beyond the cube** (A's Theorem A(ii)): if the review confirms the
+   proof, state it as a theorem **[P]**; a machine-checked version would need type classes and
+   is a project of its own.
+3. **Below the class threshold**: the exponent of hint-free algorithms (on the cube between
+   `ln 2 − h(Λ₁/u)` and `ln cosh u`); sites of several types; non-additive instances.
+4. **Blueprint consequences**: replace the transfer-matrix planning bound of §6.6 on its
+   vacuous window (B.5); the spot-check with a second reference; second-order design rules
+   (spider instead of star, density instead of row sums) if E is confirmed.
+5. **Compute**: if a gRPC-capable route to Modal becomes available, the natural first jobs are
+   exact fractional hitting numbers over all sensitive sets for `n = 7, 8` (orbit LP with
+   constraint generation; tests the exact-exponent claim at finite size) and exact covering
+   numbers of chains beyond 16 sites (tests B.2).
+6. Carried over: probabilistic certificate kernel; `STARCERT` with a termination guarantee; the
+   exponent of Theorem 11.15 for exponentially small accuracies; representation-independent
+   partition-kernel separation; dependent references; JSON `cut`/`elim` nodes; interval
+   evaluation of realistic energy terms; realizability with incomplete distance data.
+
+### State at the first checkpoint of cycle 9 (superseded by the list above)
 
 Verified state: every module under `proofs/` (37 files) builds with zero warnings and is walked
 by the axiom audit; the harness (73 registered tests: 57 that must survive, 16 documented

@@ -34,6 +34,7 @@ import proofs.Frontiers.RefereeLemmas
 import proofs.Frontiers.QueryLowerBound
 import proofs.Frontiers.SoftGapBounds
 import proofs.Frontiers.QueryRefinements
+import proofs.Frontiers.GeneralisedDips
 import proofs.AuditCommand
 
 /-!
@@ -311,6 +312,23 @@ import proofs.AuditCommand
 #print axioms MetricChain.cube_exact_dip_randomized
 #print axioms MetricChain.Referee3.pathoAlg_not_a_tree
 #print axioms MetricChain.Referee3.packing_factor_attained
+
+-- Generalised dips and the two-measure sandwich (after workstream A)
+#print axioms MetricChain.genDip_admissible
+#print axioms MetricChain.log_sum_exp_genDip_ge
+#print axioms MetricChain.genDip_expected_queries_ge
+#print axioms MetricChain.genDip_expected_queries_ge_exp_weights
+#print axioms MetricChain.genDip_recovers_dips
+#print axioms MetricChain.twoMeasureBound_prod
+#print axioms MetricChain.twoMeasureBound_pow
+#print axioms MetricChain.mass_ge_of_twoMeasureBound
+#print axioms MetricChain.product_mass_ge
+#print axioms MetricChain.sumSig_lipschitz
+#print axioms MetricChain.genDip_product_effect
+#print axioms MetricChain.detect_weight_le
+#print axioms MetricChain.twoMeasureLower_prod
+#print axioms MetricChain.twoMeasureLower_pow
+#print axioms MetricChain.product_sandwich
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp
@@ -1128,6 +1146,69 @@ theorem cube_exact_dip_witness (n : ℕ) {Ω : Type*} [Fintype Ω]
     have hcard := Finset.card_le_card hsub
     rw [Finset.card_singleton] at hcard
     exact_mod_cast hcard
+
+/-- **Witness for `TwoMeasureBound`, `twoMeasureBound_pow` and `product_mass_ge`.**  One two-state
+site with the uniform Gibbs law, the uniform reference, the discrete slack of oscillation `1`
+and `β = 1` satisfies the two-measure bound with the (crude) constant `γ = 1`; hence `n` such
+sites satisfy it with constant `n` (`twoMeasureBound_pow_witness`). -/
+theorem twoMeasureBound_witness :
+    TwoMeasureBound (fun _ : Bool => (1 / 2 : ℝ)) (fun _ => 1 / 2)
+      (fun a b => if a = b then 0 else 1) 1 1 := by
+  intro h hh
+  have h01 := hh false true
+  have h10 := hh true false
+  simp only [Bool.false_eq_true, Bool.true_eq_false, if_false] at h01 h10
+  rw [Fintype.sum_bool, Fintype.sum_bool]
+  have e1 : Real.exp (1 * h true) ≤ Real.exp (1 * (1 / 2 * h true + 1 / 2 * h false) + 1) :=
+    Real.exp_le_exp.mpr (by linarith)
+  have e2 : Real.exp (1 * h false) ≤ Real.exp (1 * (1 / 2 * h true + 1 / 2 * h false) + 1) :=
+    Real.exp_le_exp.mpr (by linarith)
+  linarith
+
+/-- The two-measure bound of `twoMeasureBound_witness` on `n` sites. -/
+theorem twoMeasureBound_pow_witness (n : ℕ) :
+    TwoMeasureBound (prodW (fun _ : Bool => (1 / 2 : ℝ)) n) (prodW (fun _ : Bool => (1 / 2 : ℝ)) n)
+      (sumS (fun a b : Bool => if a = b then (0 : ℝ) else 1) n) 1 (n * 1) :=
+  twoMeasureBound_pow _ _ _ 1 1 (fun _ => by norm_num) (fun _ => by norm_num) (by simp)
+    (fun a => by simp) twoMeasureBound_witness n
+
+/-- **Witness for `TwoMeasureLower` and `product_sandwich`.**  For the site of
+`twoMeasureBound_witness` the reverse bound holds with constant `m = 0` (Jensen: the arithmetic
+mean of two exponentials is at least the exponential of the mean), so `n` such sites satisfy the
+two-sided sandwich `exp (E_{Qⁿ} h) ≤ ∑ πⁿ e^h ≤ exp (E_{Qⁿ} h + n)`. -/
+theorem twoMeasureLower_witness :
+    TwoMeasureLower (fun _ : Bool => (1 / 2 : ℝ)) (fun _ => 1 / 2)
+      (fun a b => if a = b then 0 else 1) 1 0 := by
+  intro h _
+  rw [Fintype.sum_bool, Fintype.sum_bool]
+  have key : Real.exp (1 * (1 / 2 * h true + 1 / 2 * h false) + 0) ≤
+      1 / 2 * Real.exp (1 * h true) + 1 / 2 * Real.exp (1 * h false) := by
+    have hx := Real.add_one_le_exp (1 * h true - (1 * (1 / 2 * h true + 1 / 2 * h false) + 0))
+    have hy := Real.add_one_le_exp (1 * h false - (1 * (1 / 2 * h true + 1 / 2 * h false) + 0))
+    have hpos := Real.exp_pos (1 * (1 / 2 * h true + 1 / 2 * h false) + 0)
+    have e1 : Real.exp (1 * h true) = Real.exp (1 * (1 / 2 * h true + 1 / 2 * h false) + 0) *
+        Real.exp (1 * h true - (1 * (1 / 2 * h true + 1 / 2 * h false) + 0)) := by
+      rw [← Real.exp_add]
+      congr 1
+      ring
+    have e2 : Real.exp (1 * h false) = Real.exp (1 * (1 / 2 * h true + 1 / 2 * h false) + 0) *
+        Real.exp (1 * h false - (1 * (1 / 2 * h true + 1 / 2 * h false) + 0)) := by
+      rw [← Real.exp_add]
+      congr 1
+      ring
+    rw [e1, e2]
+    nlinarith
+  exact key
+
+/-- The two-sided sandwich of `product_sandwich` on `n` copies of the witness site. -/
+theorem product_sandwich_witness (n : ℕ) (h : Pw Bool n → ℝ)
+    (hadm : ∀ a b, h b - h a ≤ sumS (fun a b : Bool => if a = b then (0 : ℝ) else 1) n a b) :
+    Real.exp (1 * ∑ x, prodW (fun _ : Bool => (1 / 2 : ℝ)) n x * h x + n * 0) ≤
+        ∑ x, prodW (fun _ : Bool => (1 / 2 : ℝ)) n x * Real.exp (1 * h x) ∧
+      ∑ x, prodW (fun _ : Bool => (1 / 2 : ℝ)) n x * Real.exp (1 * h x) ≤
+        Real.exp (1 * ∑ x, prodW (fun _ : Bool => (1 / 2 : ℝ)) n x * h x + n * 1) :=
+  product_sandwich _ _ _ 1 0 1 (fun _ => by norm_num) (fun _ => by norm_num) (by simp)
+    (fun a => by simp) twoMeasureLower_witness twoMeasureBound_witness n h hadm
 
 end MetricChain.NonVacuity
 

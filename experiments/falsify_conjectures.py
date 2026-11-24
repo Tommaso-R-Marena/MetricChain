@@ -3698,6 +3698,396 @@ def t_cube_diagram(rng, trials):
     return True, stats
 
 
+def qc_lip_vertices(s, tol=1e-9):
+    """Vertices of the Lipschitz polytope {phi : phi[a] - phi[b] <= s[a, b]} of a quasi-metric s on k points,
+    normalised by phi[0] = 0 (brute force over the k-1 tight constraints; k <= 5)."""
+    s = np.asarray(s, dtype=float)
+    k = len(s)
+    pairs = [(a, b) for a in range(k) for b in range(k) if a != b]
+    verts = []
+    for comb in itertools.combinations(pairs, k - 1):
+        A = np.zeros((k, k))
+        rhs = np.zeros(k)
+        A[0, 0] = 1.0
+        for i, (a, b) in enumerate(comb):
+            A[i + 1, a], A[i + 1, b], rhs[i + 1] = 1.0, -1.0, s[a, b]
+        if abs(np.linalg.det(A)) < 1e-9:
+            continue
+        phi = np.linalg.solve(A, rhs)
+        if all(phi[a] - phi[b] <= s[a, b] + tol for a, b in pairs) and not any(np.allclose(phi, v, atol=1e-7) for v in verts):
+            verts.append(phi)
+    return verts
+
+
+def qc_soft(pi, phi, beta):
+    """Lambda(phi) = -ln E_pi exp(-beta phi)."""
+    return -math.log(float(np.sum(pi * np.exp(-beta * np.asarray(phi)))))
+
+
+def qc_game_min_col_max_row(K):
+    """min over mixed columns M of max over rows a of sum_j M_j K[a, j]  (value of the matrix game)."""
+    from scipy.optimize import linprog
+    na, nj = K.shape
+    c = np.r_[np.zeros(nj), 1.0]
+    A = np.c_[K, -np.ones(na)]
+    res = linprog(c, A_ub=A, b_ub=np.zeros(na), A_eq=[np.r_[np.ones(nj), 0.0]], b_eq=[1.0],
+                  bounds=[(0, None)] * nj + [(None, None)], method="highs")
+    if res.status != 0:
+        raise RuntimeError("game LP failed")
+    return float(res.fun)
+
+
+def qc_site_exponent(pi, cols, beta, eps1, tmax_factor=1.5, grid=301):
+    """max over t in [0, tmax_factor * beta] of -ln val(K_t) - t eps1 / beta, K_t[a, phi] = exp(-t (phi[a] - Lambda(phi)/beta)):
+    the single-letter lower bound on the randomised exponent for the family `cols` of slack-Lipschitz site functions."""
+    sig = np.array([np.asarray(phi) - qc_soft(pi, phi, beta) / beta for phi in cols]).T      # [a, phi]
+    best, tbest = 0.0, 0.0
+    for t in np.linspace(0.0, tmax_factor * beta, grid)[1:]:
+        val = -math.log(qc_game_min_col_max_row(np.exp(-t * sig))) - t * eps1 / beta
+        if val > best:
+            best, tbest = val, float(t)
+    return best, tbest
+
+
+def qc_site_threshold(pi, cols, beta):
+    """min over reference laws Q of max over the site functions phi in `cols` of beta E_Q phi - Lambda(phi); returns (value, Q)."""
+    from scipy.optimize import linprog
+    k = len(pi)
+    M = np.array([[beta * phi[a] - qc_soft(pi, phi, beta) for phi in cols] for a in range(k)])      # [a, phi]
+    c = np.r_[np.zeros(k), 1.0]
+    A = np.c_[M.T, -np.ones(len(cols))]
+    res = linprog(c, A_ub=A, b_ub=np.zeros(len(cols)), A_eq=[np.r_[np.ones(k), 0.0]], b_eq=[1.0],
+                  bounds=[(0, None)] * k + [(None, None)], method="highs")
+    if res.status != 0:
+        raise RuntimeError("threshold LP failed")
+    return float(res.fun), res.x[:k]
+
+
+@conjecture("XII.9 Generalised dips: for every centre function Phi that is Lipschitz for the slack (Phi(x) - Phi(y) <= s(x,y)) the residual g - (r - Phi)_+ is admissible, differs from g only on {Phi < r}, and raises ln Z by at least beta r - Lambda(Phi), Lambda(Phi) = -ln E_pi e^{-beta Phi}; hence every certificate of ln Z meets {Phi < r} whenever beta r > Lambda(Phi) + eps")
+def t_generalised_dips(rng, trials):
+    stats = dict(dips=0, certificates=0)
+    for _ in range(max(12, trials // 4)):
+        n, d, kappa, f, g, _ = cg_instance(rng, nmax=7, kappas=(0.0, 0.3, 0.7))
+        beta = float(rng.choice([0.5, 1.5, 4.0]))
+        eps = float(rng.choice([0.1, 0.5, 1.5]))
+        E = f + g
+        Emin = float(E.min())
+        s = cg_slack(d, g)
+        w = np.exp(-beta * (E - Emin))
+        Z = float(w.sum())
+        supports = []
+        for j in range(6):
+            if j % 2 == 0:                                # inf-convolution: Phi(x) = min_y [a_y + s(x, y)]
+                Phi = (rng.uniform(0.0, 1.5, size=n)[None, :] + s).min(axis=1)
+            else:                                         # slack distance to a random set of centres
+                B = rng.random(n) < 0.4
+                B[int(rng.integers(n))] = True
+                Phi = s[:, B].min(axis=1)
+            if np.any(Phi[:, None] - Phi[None, :] > s + 1e-9):
+                raise RuntimeError("sanity: centre function is not Lipschitz for the slack")
+            lam = math.log(Z) - math.log(float((w * np.exp(-beta * Phi)).sum()))
+            r = (lam + eps) / beta + 1e-7                 # a radius with beta r > Lambda(Phi) + eps
+            gp = g - np.maximum(0.0, r - Phi)
+            if not qc_admissible(d, gp):
+                return False, dict(reason="a generalised dip is not admissible")
+            if np.any((np.abs(gp - g) > 1e-12) & ~(Phi < r)):
+                return False, dict(reason="a generalised dip differs from g outside {Phi < r}")
+            effect = math.log(float(np.exp(-beta * (f + gp - Emin)).sum()) / Z)
+            if effect < beta * r - lam - 1e-9 or effect <= eps:
+                return False, dict(reason="a generalised dip beyond its soft-gap radius is not sensitive", effect=effect,
+                                   eps=eps)
+            supports.append(Phi < r)
+            stats["dips"] += 1
+        for mask in range(1, 2 ** n):
+            A = [a for a in range(n) if mask >> a & 1]
+            _, _, _, L, U = cg_bounds(d, f, g, A)
+            width = math.log(float(np.exp(-beta * (f + L - Emin)).sum())) - math.log(float(np.exp(-beta * (f + U - Emin)).sum()))
+            if width <= eps:
+                stats["certificates"] += 1
+                if not all(any(D[a] for a in A) for D in supports):
+                    return False, dict(reason="a certificate of ln Z misses the support of a sensitive generalised dip",
+                                       size=len(A))
+    if stats["certificates"] == 0:
+        return False, dict(reason="coverage: no certificate")
+    return True, stats
+
+
+@conjecture("XII.10 Two-reference sandwich: with gamma(Q) = max over the vertices of the Lipschitz polytope of a site of [beta E_Q phi - Lambda(phi)], every admissible profile h on S^n has ln E_{pi^n} e^{beta h} <= beta E_{Q^n} h + n gamma(Q), with equality for an additive profile; hence Q^n(D) >= (ln E e^{beta h_D} - n gamma(Q)) / (n beta s_max) for every proper subset D")
+def t_two_measure(rng, trials):
+    stats = dict(profiles=0, vertex_profiles=0, sets=0)
+    for trial in range(max(10, trials // 6)):
+        k = 2 if trial % 2 == 0 else 3
+        n = int(rng.integers(2, 5 if k == 2 else 4))
+        beta = float(rng.choice([0.5, 1.0, 2.5]))
+        phi_site = rng.uniform(0.0, 2.0, size=k)          # known part of one site
+        gam = rng.uniform(-0.4, 0.4, size=k)              # additive residual of one site (admissible for c = 1)
+        if trial == 1:
+            phi_site, gam, beta = np.array([0.0, 0.0, 2.0]), np.zeros(3), 1.0    # a site on which non-dip vertices matter
+        s1 = (1 - np.eye(k)) - gam[:, None] + gam[None, :]
+        pi = np.exp(-beta * (phi_site + gam))
+        pi /= pi.sum()
+        Q = rng.dirichlet(np.ones(k)) if trial != 1 else np.array([0.47, 0.47, 0.06])
+        V = qc_lip_vertices(s1)
+        G = V                                             # the family that defines gamma(Q)
+        gamma = max(beta * float(Q @ v) - qc_soft(pi, v, beta) for v in G)
+        Xa = np.array(list(itertools.product(range(k), repeat=n)))
+        N = len(Xa)
+        piN, QN = np.prod(pi[Xa], axis=1), np.prod(Q[Xa], axis=1)
+        sN = sum(s1[Xa[:, i][:, None], Xa[:, i][None, :]] for i in range(n))      # sN[x, y]
+        smax = float(s1.max())
+
+        def sides(h):
+            return math.log(float(piN @ np.exp(beta * h))), beta * float(QN @ h) + n * gamma
+
+        for _ in range(6):                                # random admissible profiles (inf-convolutions)
+            a = rng.uniform(0.0, 3.0 * n, size=N) * (rng.random(N) < 0.5) + float(rng.uniform(-2, 2))
+            h = (a[:, None] + sN).min(axis=0)
+            if np.any(h[None, :] - h[:, None] > sN + 1e-9):
+                raise RuntimeError("sanity: profile is not admissible")
+            lhs, rhs = sides(h)
+            if lhs > rhs + 1e-9:
+                return False, dict(reason="two-measure bound violated by an admissible profile", lhs=lhs, rhs=rhs)
+            stats["profiles"] += 1
+        worst = -float("inf")
+        for v in V:                                       # additive profiles from every vertex of the site polytope
+            lhs, rhs = sides(-v[Xa].sum(axis=1))
+            if lhs > rhs + 1e-8:
+                return False, dict(reason="two-measure bound violated by an additive vertex profile", lhs=lhs, rhs=rhs, k=k)
+            worst = max(worst, lhs - rhs)
+            stats["vertex_profiles"] += 1
+        if worst < -1e-8:
+            return False, dict(reason="the constant n gamma(Q) is not attained by an additive profile", slack=worst)
+        for _ in range(40):                               # sets: the largest profile vanishing off D, and the hitting bound
+            D = rng.random(N) < float(rng.uniform(0.05, 0.9))
+            if D.all() or not D.any():
+                continue
+            hD = sN[~D, :].min(axis=0)
+            lhs, rhs = sides(hD)
+            if lhs > rhs + 1e-9:
+                return False, dict(reason="two-measure bound violated by the extremal profile of a set")
+            if float(QN[D].sum()) < (lhs - n * gamma) / (n * beta * smax) - 1e-9:
+                return False, dict(reason="a set has smaller Q^n-mass than the hitting bound")
+            stats["sets"] += 1
+    return True, stats
+
+
+@conjecture("XII.11 Single-letter lower bounds for ln Z on product landscapes: the game over all vertices of the Lipschitz polytope of a site dominates the game over its distance functions (R^gen >= R^rand), with equality for two-state sites; on flat k-state sites it equals max_m D(rho_m || 1 - m/k)_+ and exceeds the dip exponent for k = 4, u = 1; the optimal t is at most beta; and R^gen is positive below and zero above the threshold min_Q max_phi [beta E_Q phi - Lambda(phi)]")
+def t_single_letter(rng, trials):
+    stats = dict(binary=0, flat=0, ternary=0, strict=0)
+    kl = lambda a, b: a * math.log(a / b) + (1 - a) * math.log((1 - a) / (1 - b))
+    for _ in range(3):                                    # two-state sites: the polytope is a segment
+        s1 = np.array([[0.0, float(rng.uniform(0.3, 2.0))], [float(rng.uniform(0.3, 2.0)), 0.0]])
+        pi = rng.dirichlet(np.ones(2) * 3)
+        beta = float(rng.choice([0.5, 1.0, 3.0]))
+        V = qc_lip_vertices(s1)
+        dist = [s1[:, b] for b in range(2)]
+        if len(V) != 2:
+            return False, dict(reason="the Lipschitz polytope of a two-point space should be a segment")
+        rg, _ = qc_site_exponent(pi, V, beta, 0.0, grid=121)
+        rr, _ = qc_site_exponent(pi, dist, beta, 0.0, grid=121)
+        if abs(rg - rr) > 1e-7:
+            return False, dict(reason="two-state site: vertex game differs from the dip game", gen=rg, dips=rr)
+        stats["binary"] += 1
+    for k, u in ((3, 1.0), (4, 0.5), (4, 1.0), (4, 2.0)):  # flat sites (c = 1, beta = u)
+        s1 = np.ones((k, k)) - np.eye(k)
+        pi = np.ones(k) / k
+        V = qc_lip_vertices(s1)
+        if len(V) != 2 ** k - 2:
+            return False, dict(reason="Hamming site: expected one vertex per proper nonempty subset", k=k, found=len(V))
+        rg, tg = qc_site_exponent(pi, V, u, 0.0, grid=241)
+        rr, _ = qc_site_exponent(pi, [s1[:, b] for b in range(k)], u, 0.0, grid=241)
+        closed = 0.0
+        for m in range(1, k):
+            rho = -math.log(m / k + (1 - m / k) * math.exp(-u)) / u
+            if rho < 1 - m / k:
+                closed = max(closed, kl(rho, 1 - m / k))
+        if abs(rg - closed) > 2e-5 or rg < rr - 1e-7 or tg > u + 1e-9:
+            return False, dict(reason="flat site: vertex game differs from the closed form, or t* > beta", k=k, u=u, game=rg,
+                               closed=closed, t_star=tg)
+        if (k, u) == (4, 1.0):
+            if not (rg > rr + 5e-4 and abs(rg - 0.02914) < 2e-5 and abs(rr - 0.02841) < 2e-5):
+                return False, dict(reason="flat four-state site: boxes of pairs should beat single dips (0.02914 > 0.02841)",
+                                   gen=rg, dips=rr)
+            stats["strict"] += 1
+        stats["flat"] += 1
+    for _ in range(max(2, trials // 30)):                 # random three-state sites with an additive residual
+        gam = rng.uniform(-0.4, 0.4, size=3)
+        s1 = (1 - np.eye(3)) - gam[:, None] + gam[None, :]
+        beta = float(rng.choice([0.7, 1.5]))
+        pi = np.exp(-beta * (rng.uniform(0.0, 2.0, size=3) + gam))
+        pi /= pi.sum()
+        V = qc_lip_vertices(s1)
+        dist = [s1[:, b] for b in range(3)]
+        thr, _ = qc_site_threshold(pi, V, beta)
+        rg, tg = qc_site_exponent(pi, V, beta, 0.0, grid=121)
+        rr, _ = qc_site_exponent(pi, dist, beta, 0.0, grid=121)
+        below, _ = qc_site_exponent(pi, V, beta, 0.6 * thr, grid=121)
+        above, _ = qc_site_exponent(pi, V, beta, 1.05 * thr + 0.005, grid=121)
+        if rg < rr - 1e-7 or tg > beta + 1e-9 or not below > 1e-7 or above > 1e-9:
+            return False, dict(reason="three-state site: ordering, range of t, or threshold of the vertex game is wrong",
+                               gen=rg, dips=rr, t_star=tg, below=below, above=above, threshold=thr)
+        stats["ternary"] += 1
+        stats["strict"] += rg > rr + 1e-5
+    return True, stats
+
+
+@conjecture("XII.12 Identical two-state sites without a hint: with P(theta) = ln(1 + e^{-beta(e + theta)}) the dip threshold at the additive instance theta*M is the chord gap G(theta) of P over [-c, c]; max_theta G = min_theta max(D(c; theta), D(-c; theta)) =: eps*; and with the reference tilted to theta* every c-Lipschitz residual g on {0,1}^n satisfies 0 <= ln Z(f + g) - [ln Z(f + theta* M) - beta E_{pi_theta*}(g - theta* M)] <= n eps*, with equality for g = c M and g = -c M")
+def t_hint_free_threshold(rng, trials):
+    stats = dict(instances=0, residuals=0)
+    c = 1.0
+    for trial in range(max(8, trials // 8)):
+        e = 0.0 if trial == 0 else float(rng.uniform(-1.5, 1.5))
+        beta = float(rng.choice([0.5, 1.0, 2.0, 4.0]))
+        P = lambda th: math.log1p(math.exp(-beta * (e + th)))
+        p1 = lambda th: 1.0 / (1.0 + math.exp(beta * (e + th)))          # probability of the excited state; P' = -beta p1
+        G = lambda th: ((c + th) * P(c) + (c - th) * P(-c)) / (2 * c) - P(th)
+        Dv = lambda tp, th: P(tp) - P(th) + (tp - th) * beta * p1(th)
+        q = (P(-c) - P(c)) / (2 * c * beta)               # tangent parallel to the chord: p1(theta*) = q
+        th_star = -e - math.log(q / (1 - q)) / beta
+        eps_star = G(th_star)
+        thetas = np.linspace(-c, c, 2001)
+        if (max(G(t) for t in thetas) > eps_star + 1e-10 or min(max(Dv(c, t), Dv(-c, t)) for t in thetas) < eps_star - 1e-10
+                or abs(Dv(c, th_star) - eps_star) > 1e-10 or abs(Dv(-c, th_star) - eps_star) > 1e-10):
+            return False, dict(reason="chord gap and Bregman widths do not meet at theta*", e=e, beta=beta)
+        if trial == 0 and (abs(th_star) > 1e-12 or abs(eps_star - math.log(math.cosh(beta * c / 2))) > 1e-12):
+            return False, dict(reason="uniform cube: threshold should be ln cosh(u/2) at theta* = 0")
+        for th in rng.uniform(-0.95 * c, 0.95 * c, size=4):               # the dip game at the instance theta M
+            pi = np.array([1 - p1(th), p1(th)])
+            s1 = np.array([[0.0, c + th], [c - th, 0.0]])                 # s(0,1) = c + theta, s(1,0) = c - theta
+            crit, _ = qc_site_threshold(pi, [s1[:, 0], s1[:, 1]], beta)
+            if abs(crit - G(float(th))) > 1e-7:
+                return False, dict(reason="dip threshold at theta M differs from the chord gap", game=crit, chord=G(float(th)))
+        n = int(rng.integers(2, 5))
+        Xa = np.array(list(itertools.product((0, 1), repeat=n)))
+        M = Xa.sum(axis=1).astype(float)
+        dH = (Xa[:, None, :] != Xa[None, :, :]).sum(axis=2).astype(float)
+        f = e * M
+        ref = th_star                                     # slope of the reference instance
+        wT = np.exp(-beta * (f + ref * M))
+        lnZref = math.log(float(wT.sum()))
+        piT = wT / wT.sum()
+        cands = [c * M, -c * M] + [c * (Xa @ sg) for sg in rng.choice([-1.0, 1.0], size=(3, n))]
+        for _ in range(8):
+            a = rng.uniform(-2.0, 2.0, size=len(Xa))
+            lo = (a[None, :] + c * dH).min(axis=1)        # c-Lipschitz for the Hamming distance
+            cands += [lo, -lo]
+        for j, g in enumerate(cands):
+            if np.any(np.abs(g[:, None] - g[None, :]) > c * dH + 1e-9):
+                raise RuntimeError("sanity: residual is not c-Lipschitz")
+            low = lnZref - beta * float(piT @ (g - ref * M))
+            val = math.log(float(np.exp(-beta * (f + g)).sum()))
+            if val < low - 1e-9 or val > low + n * eps_star + 1e-9:
+                return False, dict(reason="tilted sandwich violated", excess=val - low, width=n * eps_star, e=e, beta=beta)
+            if j < 2 and abs(val - low - n * eps_star) > 1e-8:
+                return False, dict(reason="the additive extremes should attain the width n eps*", excess=val - low,
+                                   width=n * eps_star)
+            stats["residuals"] += 1
+        stats["instances"] += 1
+    return True, stats
+
+
+def qc_tilted_pressure(Q, psi, f1, beta):
+    """F_Q(psi) = ln sum_a exp(-beta (f1(a) + psi(a))) + beta E_Q psi  (invariant under adding a constant to psi)."""
+    return math.log(float(np.sum(np.exp(-beta * (f1 + psi))))) + beta * float(Q @ psi)
+
+
+def qc_min_tilted_pressure(Q, d1, f1, beta):
+    """min of the convex function F_Q over the Lipschitz polytope {psi(a) - psi(b) <= d1[a, b]} (normalised psi(0) = 0)."""
+    from scipy.optimize import minimize
+    k = len(f1)
+    cons = [{"type": "ineq", "fun": (lambda z, a=a, b=b: d1[a, b] - (np.r_[0.0, z][a] - np.r_[0.0, z][b]))}
+            for a in range(k) for b in range(k) if a != b]
+    free = -np.log(np.maximum(Q, 1e-12)) / beta - f1       # unconstrained minimiser: the law of f1 + psi is Q
+    best = float("inf")
+    for start in (np.zeros(k - 1), np.clip(free[1:] - free[0], -5.0, 5.0)):
+        res = minimize(lambda z: qc_tilted_pressure(Q, np.r_[0.0, z], f1, beta), start, constraints=cons, method="SLSQP",
+                       options=dict(ftol=1e-13, maxiter=500))
+        if np.all([c["fun"](res.x) >= -1e-9 for c in cons]):
+            best = min(best, float(res.fun))
+    return best
+
+
+@conjecture("XII.13 One reference law, no hint, any alphabet: with F_Q(psi) = ln sum_a e^{-beta(f1 + psi)} + beta E_Q psi, m(Q) and M(Q) its least and largest value over the Lipschitz polytope of a site, every admissible residual g on S^n satisfies n m(Q) <= ln Z(f + g) + beta E_{Q^n} g <= n M(Q), with both ends attained by additive residuals; and min_Q [M(Q) - m(Q)] equals the supremum over additive instances of the instance threshold min_Q max_psi [F_Q(psi) - F_Q(gamma)] (for two-state sites: the chord gap of the pressure)")
+def t_one_reference_sandwich(rng, trials):
+    from scipy.optimize import minimize
+    stats = dict(residuals=0, sites=0, minimax=0)
+    for trial in range(max(6, trials // 10)):             # (a) the sandwich on small products, random quasi-metric site envelopes
+        k = 2 if trial % 2 == 0 else 3
+        n = int(rng.integers(2, 5 if k == 2 else 4))
+        beta = float(rng.choice([0.5, 1.0, 2.5]))
+        f1 = np.r_[0.0, rng.uniform(-1.0, 2.0, size=k - 1)]
+        d1 = rng.uniform(0.3, 1.5, size=(k, k))
+        np.fill_diagonal(d1, 0.0)
+        for _ in range(k):                                # shortest paths: a quasi-metric
+            d1 = np.array([[min(d1[a, b], min(d1[a, c] + d1[c, b] for c in range(k))) for b in range(k)] for a in range(k)])
+        Q = rng.dirichlet(np.ones(k))
+        if trial == 1:                                    # a site on which a vertex that is not a distance function is extremal
+            f1, d1, beta, Q = np.array([0.0, 0.0, 2.0]), np.ones((3, 3)) - np.eye(3), 1.0, np.array([0.48, 0.48, 0.04])
+        V = qc_lip_vertices(d1)
+        Mq = max(qc_tilted_pressure(Q, v, f1, beta) for v in V)
+        mq = qc_min_tilted_pressure(Q, d1, f1, beta)
+        Xa = np.array(list(itertools.product(range(k), repeat=n)))
+        fN, QN = f1[Xa].sum(axis=1), np.prod(Q[Xa], axis=1)
+        dN = sum(d1[Xa[:, i][:, None], Xa[:, i][None, :]] for i in range(n))
+        cands = [v[Xa].sum(axis=1) for v in V]
+        for _ in range(8):
+            a = rng.uniform(-3.0, 3.0, size=len(Xa))
+            cands += [(a[None, :] + dN).min(axis=1), -(a[:, None] + dN).min(axis=0)]
+        hi = lo = None
+        for g in cands:
+            if np.any(g[:, None] - g[None, :] > dN + 1e-9):
+                raise RuntimeError("sanity: residual is not admissible")
+            val = math.log(float(np.exp(-beta * (fN + g)).sum())) + beta * float(QN @ g)
+            if val > n * Mq + 1e-8 or val < n * mq - 1e-6:
+                return False, dict(reason="one-reference sandwich violated", value=val, lower=n * mq, upper=n * Mq, k=k, n=n)
+            hi = val if hi is None else max(hi, val)
+            lo = val if lo is None else min(lo, val)
+            stats["residuals"] += 1
+        if abs(hi - n * Mq) > 1e-8:
+            return False, dict(reason="the upper end n M(Q) is not attained by an additive vertex residual", gap=n * Mq - hi)
+        stats["sites"] += 1
+
+    def width(d1, f1, beta, V):                           # min over Q of M(Q) - m(Q)  (convex in Q)
+        obj = lambda z: (lambda Q: max(qc_tilted_pressure(Q, v, f1, beta) for v in V) - qc_min_tilted_pressure(Q, d1, f1, beta))(
+            np.exp(z - z.max()) / np.exp(z - z.max()).sum())
+        return min(float(minimize(obj, z0, method="Nelder-Mead", options=dict(xatol=1e-8, fatol=1e-11, maxiter=3000)).fun)
+                   for z0 in (np.zeros(len(f1)), -beta * f1))
+
+    for e, beta in ((0.0, 1.0), (0.5, 1.0), (-1.0, 2.0)):  # (b) two-state sites: the chord gap of the pressure
+        P = lambda th: math.log1p(math.exp(-beta * (e + th)))
+        q = (P(-1.0) - P(1.0)) / (2 * beta)
+        th = -e - math.log(q / (1 - q)) / beta
+        chord = ((1 + th) * P(1.0) + (1 - th) * P(-1.0)) / 2 - P(th)
+        d1 = np.ones((2, 2)) - np.eye(2)
+        w = width(d1, np.array([0.0, e]), beta, qc_lip_vertices(d1))
+        if abs(w - chord) > 1e-6:
+            return False, dict(reason="two-state site: min_Q [M - m] differs from the chord gap", width=w, chord=chord)
+    d1 = np.ones((3, 3)) - np.eye(3)                      # (c) three-state sites: the minimax identity
+    V = qc_lip_vertices(d1)
+    for f1, beta in ((np.array([0.0, 0.0, 2.0]), 1.0), (np.r_[0.0, rng.uniform(-1.5, 2.0, size=2)], float(rng.choice([0.7, 1.5])))):
+        w = width(d1, f1, beta, V)
+        p = lambda psi: math.log(float(np.sum(np.exp(-beta * (f1 + psi)))))
+
+        def thr(gam):                                     # instance threshold at the additive instance gam: an LP in Q
+            from scipy.optimize import linprog
+            res = linprog(np.r_[np.zeros(3), 1.0], A_ub=np.array([np.r_[beta * (v - gam), -1.0] for v in V]),
+                          b_ub=np.array([-(p(v) - p(gam)) for v in V]), A_eq=[np.r_[np.ones(3), 0.0]], b_eq=[1.0],
+                          bounds=[(0, None)] * 3 + [(None, None)], method="highs")
+            return float(res.fun)
+
+        best = max(((thr(np.array([0.0, g1, g2])), g1, g2) for g1 in np.linspace(-1, 1, 21) for g2 in np.linspace(-1, 1, 21)
+                    if abs(g1 - g2) <= 1 + 1e-12))
+        inside = lambda z: abs(z[0]) <= 1 and abs(z[1]) <= 1 and abs(z[0] - z[1]) <= 1
+        res = minimize(lambda z: -thr(np.array([0.0, z[0], z[1]])) if inside(z) else 1.0, best[1:], method="Nelder-Mead",
+                       options=dict(xatol=1e-7, fatol=1e-11))
+        sup_thr = max(best[0], -float(res.fun))
+        if abs(w - sup_thr) > 2e-5 or thr(np.zeros(3)) > w + 1e-7:
+            return False, dict(reason="hint-free width differs from the supremum of the instance thresholds", width=w,
+                               sup_threshold=sup_thr, threshold_at_zero=thr(np.zeros(3)))
+        stats["minimax"] += 1
+    return True, stats
+
+
 @conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
 def t_dead_exact_free_energy(rng, trials):
     """Refuted (second referee, C1): with positive slack off the diagonal, an exact certificate of ln Z is the whole

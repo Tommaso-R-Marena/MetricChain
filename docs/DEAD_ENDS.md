@@ -783,3 +783,10 @@ the same workstream that has not yet been refereed, for every two-state site (th
 polytope of a two-point space is a segment whose endpoints are the two distance functions).
 The gap closes as `β → ∞`: at zero temperature a sensitive perturbation contains a sensitive
 single dip, which is why the zero-temperature theory is a covering theory.
+
+*What replaces it* (theory report Theorems 11.27–11.28; `GeneralisedDips.lean`; harness
+XII.9–XII.12).  The lower bound with all slack-Lipschitz centre functions, machine-checked on
+every instance; on product landscapes the single-letter bound `R^gen_β`, a game over the vertices
+of the Lipschitz polytope of a site; and the threshold `min_Q max_Φ[βE_QΦ − Λ(Φ)]`, which is
+sharp at every additive instance.  Whether `R^gen_β` is the exact exponent is claimed by the
+workstream and under independent review.

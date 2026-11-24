@@ -179,3 +179,40 @@ threshold of the randomised lower bound at additive instances (site e/c = 1/2, b
   0.000 |          0.11367 |                0.12246
   0.500 |          0.08132 |                0.25740
   0.900 |          0.01963 |                0.37781
+
+====================================================================================================
+B11. Beyond the cube: generalised dips, instance thresholds, and the hint-free threshold of two-state sites
+====================================================================================================
+single-letter lower bounds on the randomised exponent of ln Z (eps = o(n)) and thresholds; Hamming envelope c = 1, zero residual
+       site (energies), beta | R^rand (single dips) | R^gen (all vertices) | eps1_crit (dips) | eps1_thr (all)
+       two-state (0, 0.5), 1 |              0.02753 |              0.02753 |          0.11367 |        0.11367
+             flat 3-state, 1 |              0.03065 |              0.03065 |          0.11950 |        0.11950
+             flat 4-state, 1 |              0.02840 |              0.02914 |          0.10737 |        0.12011
+           flat 4-state, 0.5 |              0.00655 |              0.00767 |          0.02530 |        0.03093
+      three-state (0,0,2), 1 |              0.02467 |              0.02903 |          0.09472 |        0.11969
+      three-state (0,2,2), 1 |              0.01640 |              0.02011 |          0.06383 |        0.08364
+             flat 8-state, 1 |              0.01936 |              0.03093 |          0.06957 |        0.12235
+             flat 8-state, 2 |              0.09941 |              0.11986 |          0.33703 |        0.47257
+
+exact finite-n hitting numbers on flat k-state sites, u = 1, eps = 1 (uniform sampler, binomial tails): ln N for dips centred
+at boxes of m-subsets; m = 1 are the single dips
+   k = 4, n = 20000: m=1: 572.1, m=2: 586.8
+   k = 8, n = 1000: m=1: 22.2, m=2: 30.9, m=3: 33.5, m=4: 31.8
+
+hint-free threshold of identical two-state sites (c = 1): largest chord gap of P(theta) = ln(1 + e^{-beta(e+theta)}) over [-c, c]
+    e  beta |   theta* | eps* = G(theta*) | G(0) (zero residual) | untilted width | ln cosh(beta c/2)
+ 0.00  1.00 |  -0.0000 |          0.12011 |              0.12011 |        0.12011 |           0.12011
+ 0.50  1.00 |  -0.0372 |          0.11383 |              0.11367 |        0.12246 |           0.12011
+ 1.00  1.00 |  -0.0709 |          0.09728 |              0.09678 |        0.11094 |           0.12011
+ 2.00  1.00 |  -0.1195 |          0.05479 |              0.05400 |        0.06713 |           0.12011
+ 0.50  4.00 |  -0.2457 |          1.01703 |              0.93777 |        1.52319 |           1.32500
+-1.00  2.00 |   0.2027 |          0.23925 |              0.22872 |        0.32781 |           0.43378
+
+hint-free threshold of a class of identical sites, any alphabet: eps* = min_Q [max F_Q - min F_Q] (c = 1, beta = 1)
+       site (energies) | eps1_thr at the zero residual | eps* (class, no hint) | passive width at zero | Q*
+              (0, 0.5) |                       0.11367 |               0.11383 |               0.12246 | [0.6137 0.3863]
+             (0, 0, 2) |                       0.11969 |               0.11988 |               0.12208 | [0.4707 0.4707 0.0586]
+             (0, 2, 2) |                       0.08364 |               0.08432 |               0.09889 | [0.7717 0.1141 0.1141]
+             (0, 1, 3) |                       0.10177 |               0.10218 |               0.11500 | [0.6922 0.2711 0.0367]
+          flat 3-state |                       0.11950 |               0.11950 |               0.11950 | [0.3333 0.3333 0.3333]
+          flat 4-state |                       0.12011 |               0.12011 |               0.12011 | [0.25 0.25 0.25 0.25]

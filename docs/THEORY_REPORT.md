@@ -1091,7 +1091,10 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   to one instance (a hint); no algorithm attains them on all instances.  Thresholds are
   worst-case statements over the instances of a class.  At finite temperature, beyond the
   uniform cube, single dips are not the extremal perturbations when sites have three or more
-  states (D38), so the dip exponent `R^rand_β` and its threshold `ε₁^crit` are lower bounds only.
+  states (D38), so the dip exponent `R^rand_β` and its threshold `ε₁^crit` are lower bounds only;
+  the generalised exponent `R^gen_β` of Theorem 11.27 is a lower bound whose tightness is claimed
+  but not refereed; the thresholds of Theorem 11.28 are proved for identical sites at additive
+  instances.
   "Every randomised algorithm" means every finite mixture of the abstract deterministic
   algorithms of `QueryLowerBound.lean`.
 * **Evaluations are counted, not computation.**  §11 counts residual evaluations; by §11.10 the
@@ -1115,9 +1118,11 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   attainment in Theorem 11.18 for non-zero ball data, the learn-then-cover remark, the
   single-letter and upper-bound parts of Theorems 11.24–11.25 (Harper's theorem is cited; the
   step that uses it is checked exhaustively for `n ≤ 4`), the hub-family bound for randomised
-  algorithms, the Chebyshev bound for hint-free Monte Carlo, and the two-reference sandwich
-  with its threshold (a paper proof of workstream A; its Lean core is not yet in the
-  repository).
+  algorithms, the Chebyshev bound for hint-free Monte Carlo, and, in Theorems 11.27–11.28, the
+  assembly of the product lower bound from its two machine-checked ingredients, the
+  identification of the best constant `γ(Q)` with a maximum over vertices, the algorithmic
+  reading of the hitting bound and of the one-reference sandwich, the minimax identity, and
+  the closed form for two-state sites.
 * **Certified numerics outside Lean.**  Eigenvalue enclosures needed to *evaluate* the spectral
   bound of §4.1 on data are standard verified numerics but are not part of the development.
 
@@ -1162,6 +1167,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/QueryLowerBound.lean` | `QueryAlgorithm`, `exists_query_ne`, `prob_query_ne_ge`, `card_queries_ge_packing`, `expected_queries_ge_packing`, `dip`, `dip_eq_sub`, `queries_cover_of_sensitive`, `expected_queries_ge_of_radius`, `expected_queries_ge_exp_weights`, `queries_strict_cover`, `queries_isValueCertificate`, `certificateAlgorithm_correct`, `instance_query_complexity`, `expected_queries_ge`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `min_spotCheck_correct`, `softGap`, `sum_exp_dip`, `log_sum_exp_dip_ge`, `thermal_queries_strict_cover`, `thermal_queries_bracket`, `thermal_expected_queries_ge`, `cube_thermal_randomized_bound`, `cube_thermal_randomized_exponential`, `spotCheck`, `spotCheck_correct` |
 | `proofs/Frontiers/SoftGapBounds.lean` | `softGap_le_add_slack`, `detection_weight_ge`, `gibbs_weight_ne_ge`, `dipWeight`, `thermalSampler`, `thermal_spotCheck_correct`, `exists_thermal_spotCheck_sample_size`, `sum_dipWeight_eq`, `cube_deterministic_lower_bound`, `cube_dipWeight_sum`, `softGap_hamEnv_additive`, `thermal_product_randomized` |
 | `proofs/Frontiers/QueryRefinements.lean` | `exists_query_ne_pair`, `prob_query_ne_pair`, `hedgedSpotCheck`, `hedgedSpotCheck_correct`, `hedged_window_up`, `min_hedgedSpotCheck_correct`, `cube_one_point_dip`, `cube_small_accuracy_randomized`, `cube_exact_randomized`, `thermal_exact_dip_randomized`, `cube_exact_dip_randomized`, `Referee3.pathoAlg_not_a_tree`, `Referee3.packing_factor_attained` (lemmas of the third referee, and the exact-dip bounds) |
+| `proofs/Frontiers/GeneralisedDips.lean` | `genDip`, `genDip_admissible`, `genDip_ne_imp_lt`, `dip_eq_genDip`, `slack_lipschitz`, `softGapOf`, `softGap_eq_softGapOf`, `sum_exp_genDip`, `log_sum_exp_genDip_ge`, `genDip_sensitive`, `genDip_expected_queries_ge`, `genDip_expected_queries_ge_exp_weights`, `genDip_recovers_dips`, `TwoMeasureBound`, `twoMeasureBound_prod`, `twoMeasureBound_pow`, `mass_ge_of_twoMeasureBound`, `product_mass_ge`, `sumSig_lipschitz`, `genDip_product_effect`, `detect_weight_le`, `TwoMeasureLower`, `twoMeasureLower_prod`, `twoMeasureLower_pow`, `product_sandwich` (generalised dips; the two-measure sandwich and its mirror image; after workstream A) |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -1201,6 +1207,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G10 | **Sampled free-energy sandwich**: `N` independent samples of a product reference pin `ln(Z/Z₀)` to `±\|β\|η + β²Σc_i²/8` outside an event of probability `2e^{−2Nη²/Σc_i²}` — polynomially many random evaluations where deterministic certification needs exponentially many | `sample_mean_two_sided`, `sampled_free_energy_sandwich`, `sampled_free_energy_sandwich_of_sample_size` **[V]** | standard concentration (Chernoff bound for a sub-Gaussian mean); stated as the constructive counterpart of G7 |
 | G9 | **Compositional partition kernel**: cut rule and elimination rule (exact on every chain, with one leaf), with exponential separations from the elementary rules for every chain length — for certificates whose lower end is exact, and relative to the given representation of the instance (D33) | `zverify2_sound`, `WInstance.Z_cut`, `cut_rule_separation`, `WInstance.Z_elim1`, `WInstance.Z_elim2`, `zverify2Top_chainCert`, `chain_separation`, `ferroChain_separation` **[V]** | repair of the kernel; variable elimination is classical; the separation is the formal counterpart of E2 at finite temperature |
 | G11 | **Query complexity of every algorithm**: sensitive alternatives must be detected (any class, any functional; deterministic and randomised), with a hedged spot-check converse; for the minimum, the instance-wise deterministic complexity *equals* the size of a value certificate, and every randomised algorithm (finite mixture) pays `(1−2δ)` times each fractional covering bound — attained by the hedged spot-check up to `ln(1/δ)`; for `ln Z`, a soft-gap radius for every algorithm and an upper bound for randomised ones in the same quantity, a lower bound on the randomised exponent with an upper bound in the same quantity, a machine-checked exponential gap between deterministic and randomised cost at the zero residual of the cube, and there a sharp worst-case accuracy threshold and the exponent in every accuracy regime | `exists_query_ne`, `prob_query_ne_ge`, `expected_queries_ge_packing`, `spotCheck_correct`, `instance_query_complexity`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `thermal_queries_strict_cover`, `thermal_queries_bracket`, `thermal_expected_queries_ge`, `thermal_product_randomized`, `cube_thermal_randomized_bound`, `detection_weight_ge`, `thermal_spotCheck_correct`, `cube_deterministic_lower_bound`, `exists_query_ne_pair`, `hedgedSpotCheck_correct`, `min_hedgedSpotCheck_correct`, `thermal_exact_dip_randomized`, `cube_exact_dip_randomized` **[V]**; single-letter forms and the upper bounds on the cube **[P + K]** | method **known** (radius of information; instance complexity; fractional block sensitivity as a bound on randomised query complexity); that randomisation helps for `ln Z` only above an accuracy scale is **known** for smoothness classes (Holzmüller–Bach 2025, §2.2); the instance-wise randomised bound with gap radii, the soft gap, and the exact threshold and accuracy diagram on the cube: not found |
+| G12 | **Beyond the cube at finite temperature**: every slack-Lipschitz function is the centre of an admissible perturbation that must be detected (generalised dips), with a single-letter lower bound on product landscapes that is a game over the vertices of the Lipschitz polytope of a site — single dips are not extremal for three or more states; a two-reference sandwich that tensorises, the sharp accuracy threshold of every additive instance, and the worst-case threshold of the whole class without a hint, for every alphabet (the smallest oscillation of the tilted site pressure; for two-state sites the largest chord gap of the pressure) | `genDip_admissible`, `log_sum_exp_genDip_ge`, `genDip_expected_queries_ge_exp_weights`, `twoMeasureBound_pow`, `twoMeasureLower_pow`, `product_sandwich`, `product_mass_ge`, `detect_weight_le` **[V]**; product assembly, thresholds, the minimax identity and the algorithmic reading **[P]**; the matching upper bound of the exponent: claimed by workstream A, **not refereed** | found by independent workstreams (A, B; D confirms) and, for the hint-free threshold of general alphabets, in their synthesis; tools **known** (Chernoff and packing; tensorisation of exponential-moment inequalities; for the claimed upper bound: inherently typical subsets, Ahlswede–Yang–Zhang; isoperimetric exponents of two product measures, Ahlswede–Zhang, Yu — not read by us); the statements themselves were not found |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -1214,7 +1221,10 @@ statement that these exponents are query complexities — they bound every algor
 randomised ones — together with the randomised finite-temperature theory: the soft gap, a
 lower bound on a third exponent, and, on the cube, an accuracy threshold that separates bounded
 from exponential worst-case cost, with the exponent at the zero residual in every accuracy
-regime (G11).
+regime (G11); (v) the extension beyond the cube (G12): the right family of perturbations
+(generalised dips), the instance-wise threshold as the value of a single-site game with a
+second reference measure, and the hint-free threshold of a product class as the smallest
+oscillation of a tilted site pressure.
 Each rests on textbook tools (type covering, Hölder, telescoping, linear-programming duality);
 the proofs are short.  The second referee's verdict on G1–G10 — "a coherent note, not a
 theorem-driven paper" — is reproduced in §12 together with what a publication would still
@@ -2057,7 +2067,10 @@ which a bounded number of random evaluations suffices on every instance (Theorem
 zero residual is not the worst additive instance in general (for `e/c = 1/2`, `β = 1`:
 `0.11367` there, `0.11383` at the additive residual with site difference `−0.037c`; benchmark
 B10), and at additive residuals of extreme slope the threshold tends to `0` — those instances
-are determined by few evaluations.
+are determined by few evaluations.  For two-state sites `ε₁^crit` is the true threshold of the
+instance, and its largest value over additive instances is the hint-free threshold of the
+class; for sites with three or more states the dip bound is not the last word, and the
+threshold is larger (Theorems 11.27–11.28).
 
 **Theorem 11.25 (the cube: a sharp threshold, and the accuracy diagram at the zero residual) [V lower bounds; P + K upper bounds].**
 Let `X = {0,1}ⁿ`, `f ≡ 0`, `d = c ·` Hamming distance, `u = βc > 0`, and consider algorithms that are
@@ -2203,58 +2216,205 @@ every admissible `g`), and on additive instances the cost is `n(k−1) + 1 + N`.
 instances the exponential gap between randomised and deterministic cost holds for algorithms
 that are given nothing but the known part and the envelope.
 
-*What is not proved, and what turned out false.*  Outside the cube at the zero residual the
-theorems above bracket the randomised exponent at additive instances,
-`R^rand_β ≤ · ≤ min(R_β, U_β)`; they do not determine it.  Single dips are not the extremal
-perturbations on general instances: unions of shallow dips, none of which is sensitive alone,
-can change `ln Z` (`DEAD_ENDS.md` D34: on the uniform metric with `n = 8` the fractional hitting
-number of all sensitive sets is `4` while the dip bound gives `1`).  The previous version
-conjectured that on product spaces dips are nevertheless extremal at the exponential scale — an
-asymptotic isoperimetric statement which for the uniform cube is Harper's theorem.  **The
-conjecture is false for sites with three or more states** (independent workstream A,
-`workstreams/A_REPORT.md`; `DEAD_ENDS.md` D38; harness `DEAD.16`).  A *generalised dip*
-`(r − Φ)₊`, with `Φ` any function such that `Φ(x) − Φ(y) ≤ s(x,y)`, is an admissible lowering of
-the residual and raises `ln Z` by at least `βr − Λ(Φ)`, `Λ(Φ) = −ln E_π e^{−βΦ}`; single dips are
-the case `Φ = s(·,y)`.  On the flat four-state site (`π` uniform, Hamming envelope, `u = 1`,
-`ε = o(n)`) the dips centred at boxes of pairs have to be hit as well, which costs
-`exp(n D(ρ₂‖½))`, `ρ₂ = −ln(½ + ½e^{−1})`: exponent `0.02914`, against `0.02841` for single dips
-(`D(ρ₁‖¾)`, `ρ₁ = −ln(¼ + ¾e^{−1})`; both by hand: binomial tails under the uniform sampler,
-which is optimal by symmetry).  For flat `k`-state sites the ratio of the two exponents grows
-like `k²/(4(k−1))` at high temperature.  The workstream report contains more: a single-letter
-lower bound valid for every site and every `n` (a matrix game over the vertices of the site's
-Lipschitz polytope, `R^gen_β ≥ R^rand_β`, with equality for two-state sites, whose polytope is a
-segment); a paper proof, not yet refereed, that `R^gen_β` is the exact randomised exponent at
-additive instances — so that dips *are* extremal for two-state sites; and a threshold theorem
-(next paragraph).  The lower bound and the threshold inequality were re-derived by hand for
-this revision; their machine-checked core, harness tests and an independent review are the
-next checkpoint.  Until then `R^rand_β` and `ε₁^crit` are to be read as bounds.
+**Theorem 11.27 (generalised dips: what an algorithm must detect at finite temperature) [V; product form: P with machine-checked ingredients] (`GeneralisedDips.lean`).**
+Single dips are not the only perturbations that have to be excluded.  Let `β ≥ 0` and let
+`Φ : X → ℝ` be Lipschitz for the slack of the instance, `Φ(x) − Φ(y) ≤ s(x,y)` for all `x, y`.
+(a) **[V]** For every `r` the residual `g − (r − Φ)₊` is admissible (`genDip_admissible`), differs
+from `g` only on `{Φ < r}`, and
 
-*The threshold of an instance.*  The bound `R^rand_β(ε₁)` vanishes at
-`ε₁^crit(g) = max_P min_a E_P[β s(a,·) − Λ₁]` (the value of a zero-sum game).  As Theorem 11.25
-shows, a statement of this kind identifies a threshold only (i) at a given instance, (ii) for
-accuracies that are not exponentially small, and (iii) together with a hedged converse.
-`ε₁^crit(g)` never exceeds the exact passive width `W₁(g)` of the sandwich, the largest Jensen gap
-`max_h ln E_π e^{−β(h − E_π h)}` over admissible changes `h` of the residual at one site (a theorem:
-`Λ(b) ≥ β E_π s(·,b) − W₁` by the sandwich applied to `g` and `U_b`, and a minimum over `a` is at
-most the `π`-average); for `e/c = 1/2`, `β = 1` it is `0.11367` at the zero residual and at most
-`0.1139` over additive instances, against `W₁ = 0.12246` at the zero residual (benchmark B10).
-The previous version asked whether accuracies between the two are reachable with polynomially
-many evaluations.  At additive instances they are **[P]** (workstream A, Theorem B; proof
-checked for this revision): for every reference law `Q` of one site and every admissible change
-`h` of the residual on `n` sites,
+    ln Z(f + g − (r − Φ)₊) − ln Z(f+g)  =  ln E_π e^{β(r − Φ)₊}  ≥  βr − Λ(Φ),        Λ(Φ) = −ln E_π e^{−βΦ}
 
-    ln E_{πⁿ} e^{βh}  ≤  β E_{Qⁿ} h + n γ(Q),        γ(Q) = max_Φ [β E_Q Φ − Λ(Φ)]
+(`sum_exp_genDip`, `log_sum_exp_genDip_ge`).  The slack distances `Φ = s(·,y)` are of this kind and
+give the dips and the soft gap `Λ(y)` of Theorem 11.24 (`dip_eq_genDip`, `softGap_eq_softGapOf`).
+Every other `Φ` is a lower envelope `min_y [Φ(y) + s(·,y)]` of shifted distances, so a
+generalised dip is a union of single dips with centre-dependent depths — the perturbations of
+`DEAD_ENDS.md` D34.
+(b) **[V]** Hence, for every finite family `(Φ_j, r_j)` with `β r_j > Λ(Φ_j) + ε`, all weights `w ≥ 0`
+and all `t ≥ 0`, a randomised algorithm that is `(ε/2, δ)`-correct for `ln Z` on the admissible
+class satisfies
 
-(for `n = 1` this is the definition of `γ`, and it tensorises by conditioning on the last
-coordinate), so a set that supports a change of `ln Z` by more than `nε₁` has `Qⁿ`-probability at
-least `(ε₁ − γ(Q))/(β s_max)` — independent of `n`.  With `Q = π` this is the passive sandwich,
-`γ(π) = W₁`; minimising over `Q` gives the threshold `ε₁^thr = min_Q γ(Q)`, which equals `ε₁^crit`
-for two-state sites and exceeds it in general (`0.1197` against `0.0947` for the three-state
-site with energies `(0,0,2)`, `β = c = 1`).  Above `ε₁^thr` a bounded number of samples of
-`½πⁿ + ½Q*ⁿ` suffices at the instance; below it the lower bound of the workstream is exponential.
-The model of randomness (finite mixtures of deterministic algorithms) and of correctness
-(probability `1 − δ` on every instance, not on average) are those of the theorems.  Harness
-XII.1–XII.8.
+    (1 − 2δ) Σ_j w_j  ≤  E|Q(g)| · max_a Σ_j w_j e^{−t(Φ_j(a) − r_j)}
+
+(`genDip_expected_queries_ge_exp_weights`; packing form `genDip_expected_queries_ge`; for
+`Φ_j = s(·,j)` this is Theorem 11.24(b), `genDip_recovers_dips`).
+(c) **[P; ingredients V]** *Product landscapes.*  Let `X = Sⁿ` with identical sites, single-site
+Gibbs law `π` and slack `s₁`, at an additive instance.  For a site function `φ` with
+`φ(a) − φ(b) ≤ s₁(a,b)` put `σ_φ = φ − Λ(φ)/β`, so that `E_π e^{−βσ_φ} = 1`.  Let `M` be a probability
+vector on finitely many such functions, draw a centre `φ⃗ ∼ M^{⊗n}` and take
+`Φ(x) = Σ_i σ_{φ_i}(x_i)`.  It is Lipschitz for the product slack and `Λ(Φ) = 0`, so every radius
+`r > ε/β` is sensitive (`sumSig_lipschitz`, `genDip_product_effect`), and by Markov's inequality a
+fixed point lies in the supports of centres of total weight at most `e^{tr} ρ_t(M)ⁿ`,
+`ρ_t(M) = max_a Σ_φ M(φ) e^{−tσ_φ(a)}` (`detect_weight_le`).  With (b): for every `n`, `t ≥ 0`, `M`,
+
+    E|Q(g)|  ≥  (1 − 2δ) e^{−tε/β} ρ_t(M)^{−n},
+    n⁻¹ ln E|Q(g)|  ≥  R^gen_β(ε₁) := max_{t ≥ 0} [ −ln val(K_t) − tε₁/β ],        K_t(a, φ) = e^{−tσ_φ(a)},
+
+where `ε = nε₁` and `val` is the value of the matrix game in which the adversary mixes over the
+vertices `φ` of the Lipschitz polytope `{φ : φ(a) − φ(b) ≤ s₁(a,b)}/ℝ` of the site and the
+sampler chooses a letter.  With the adversary restricted to the distance functions `s₁(·,b)`
+this is `R^rand_β` of Theorem 11.24.  (The Lean file proves the two ingredients for `n`-fold
+products encoded as nested pairs; their combination with (b) is the paper step.)
+
+*Consequences.*  (i) For a **two-state site** the polytope is a segment whose endpoints are the
+two distance functions: `R^gen_β = R^rand_β`.  (ii) For **three or more states** the polytope has
+further vertices — for the Hamming envelope one for every proper nonempty subset `B` of states,
+`c·1[a ∉ B]`, whose generalised dip is *centred at the box* `∏ B_i` — and they can win.  On the
+flat `k`-state site (`π` uniform, `u = βc`)
+
+    R^gen_β(ε₁) = max_{1 ≤ m < k} D(ρ_m ‖ 1 − m/k)₊,        ρ_m = [ε₁ − ln(m/k + (1 − m/k)e^{−u})]/u
+
+(`D` the binary relative entropy; `m = 1` are the single dips): for `k = 4`, `u = 1`, `ε₁ = 0` it
+is `0.02914` (boxes of pairs) against `0.02841` (dips); for `k = 8`: `0.0309` against `0.0194`; three
+states suffice (energies `(0,0,2)`, `β = c = 1`: `0.0290` against `0.0247`); for flat sites with `k`
+even the ratio tends to `k²/(4(k−1))` as `u → 0` (each term is `≈ u²θ(1−θ)/8`, `θ = m/k`).  **So the conjecture of the previous revision — single dips are
+extremal at the exponential scale on product landscapes — is false** (independent workstream
+A; `DEAD_ENDS.md` D38; harness `DEAD.16`, XII.9, XII.11; benchmark B11, which also gives exact
+binomial tails at `n = 20000`).  The flat three-state site is not a counterexample, and
+numerically the gap closes as `β → ∞`: at zero temperature a sensitive perturbation contains a
+sensitive single dip, which is why the zero-temperature theory is a covering theory.
+
+*Is `R^gen_β` the exponent?*  Workstream A (`workstreams/A_REPORT.md`, Theorem A) claims that it
+is: for identical sites, an additive instance, `ε_n/n → ε₁` and `ln(1/ε_n) = o(n)`, the sampler
+`½πⁿ + ½·(uniform mixture over the type classes)` hits every sensitive set with probability
+`e^{−nR^gen − o(n)}`, by the method of inherently typical subsets (Ahlswede–Yang–Zhang) and a
+collapse of the auxiliary-variable optimisation to the matrix game above; it also shows that no
+product sampler attains the exponent on biased sites.  **This is a paper proof that has not yet
+been refereed**; an independent review is in progress, and until it is done the statement is
+a claim.  Its consequence for two-state sites would be that single dips *are* extremal there,
+i.e. that `R^rand_β` is the exact randomised exponent of the examples of Theorem 11.24.  What we
+have verified ourselves: the single-letter values (harness XII.11, benchmark B11) and the
+lower bound.
+
+**Theorem 11.28 (the two-reference sandwich, and thresholds beyond the cube) [V core; P].**
+(a) **[V]** *Tensorisation with two measures* (`twoMeasureBound_prod`, `twoMeasureBound_pow`).
+Suppose that for one site, a reference law `Q` and a constant `γ`, every profile `h` with
+`h(b) − h(a) ≤ s₁(a,b)` satisfies `E_π e^{βh} ≤ exp(β E_Q h + γ)`.  Then on `n` sites every profile
+with `h(y) − h(x) ≤ Σ_i s₁(x_i, y_i)` satisfies
+
+    ln E_{πⁿ} e^{βh}  ≤  β E_{Qⁿ} h + nγ
+
+(condition on the last coordinate and apply the hypothesis to the `Q`-averaged profile).  The
+least constant of a site is `γ(Q) = max_φ [β E_Q φ − Λ(φ)]`, the maximum over its Lipschitz
+polytope, attained at a vertex because the functional is convex **[P]**.  In terms of
+residuals: for every admissible `g'`,
+`β E_{πⁿ}[g − g'] ≤ ln Z(f+g') − ln Z(f+g) ≤ β E_{Qⁿ}[g − g'] + nγ(Q)`.  With `Q = π` this is the
+passive sandwich with its exact constant, the Jensen width `W₁ = γ(π)` (Theorem 11.21 has the
+bound `β²c²/8` for it).
+(b) **[V]** *Hitting* (`mass_ge_of_twoMeasureBound`, `product_mass_ge`).  A set `D` that supports a
+profile `0 ≤ h ≤ H` with `ln E_{πⁿ} e^{βh} ≥ ε` has `Qⁿ(D) ≥ (ε − nγ)/(βH)`.  With `H = n s_max` and
+`ε = nε₁`: at least `(ε₁ − γ)/(β s_max)`, whatever `n`.
+(c) **[P]** *The threshold of an additive instance, for every alphabet and every `n`.*  Let
+`ε₁^thr = min_Q γ(Q)`, attained at `Q*`.  If `ε₁ > ε₁^thr`, the hedged spot-check of Theorem 11.22(e)
+with samples from `½πⁿ + ½Q*ⁿ` and output `ln Z(g) + ε/2 − η` is `(ε/2, δ)`-correct on the whole
+class with
+
+    N = ⌈ ln(1/δ) / p ⌉,        p = ½ min( (ε₁ − η/n − ε₁^thr)/(β s_max), 1 − e^{−η} )
+
+samples — a number that does not grow with `n` (an alternative `g'` that raises `ln Z` by more
+than `ε − η` either differs from `g` everywhere or, by (b) applied to the positive part of
+`g − g'`, which is again an admissible profile and is bounded by `n s_max`, on a set of
+`Q*ⁿ`-mass at least `(ε₁ − η/n − ε₁^thr)/(β s_max)`; one that lowers it by more than `η` differs on
+Gibbs mass at least `1 − e^{−η}`).  If `ε₁ < ε₁^thr`, every algorithm makes at least `(1 − 2δ) e^{nR^gen_β(ε₁)}`
+evaluations and `R^gen_β(ε₁) > 0` (Theorem 11.27(c): `−ln val(K_t)/t → ε₁^thr/β` as `t ↓ 0`).  On
+additive instances the hint can be learned from a star, as in "Without a hint" above.  The
+dip value `ε₁^crit = max_P min_a E_P[βs₁(a,·) − Λ₁]` of the previous revision is the same game
+restricted to distance functions: `ε₁^crit ≤ ε₁^thr ≤ W₁`, with `ε₁^crit = ε₁^thr` for two-state sites
+and, e.g., `0.0947 < 0.1197` for the three-state site `(0,0,2)`, `0.1074 < 0.1201` for the flat
+four-state site (`β = c = 1`).  Between the two values the previous revision's conjecture
+predicted polynomial cost; the cost is exponential.
+(d) **[V inequality; P]** *No hint, any alphabet: one reference law.*  For a site with known part
+`f₁` and envelope `d₁` let `𝓛 = {ψ : ψ(a) − ψ(b) ≤ d₁(a,b)}` be its admissible site functions and,
+for a law `Q` on the site,
+
+    F_Q(ψ) = ln Σ_a e^{−β(f₁(a) + ψ(a))} + β E_Q ψ        (the tilted site pressure: convex in ψ, affine in Q),
+    M(Q) = max_𝓛 F_Q,        m(Q) = min_𝓛 F_Q.
+
+Then **every** admissible residual `g` on `Sⁿ`, additive or not, satisfies
+
+    n m(Q)  ≤  ln Z(f+g) + β E_{Qⁿ} g  ≤  n M(Q)
+
+(`product_sandwich`: the upper bound is (a) with the envelope `d₁` in place of the slack, the
+weights `e^{−βf₁}` in place of `π`, and `h = −g`; the lower bound is its mirror image, which
+tensorises by the same argument, `twoMeasureLower_pow`).  No
+reference instance occurs.  So an algorithm that samples `Qⁿ`, estimates the mean of `g`
+(bounded differences; Hoeffding) and returns the midpoint is `(ε/2, δ)`-correct on the whole
+class with a number of evaluations independent of `n` as soon as `ε₁ > M(Q) − m(Q)`
+(`N ≥ 2β² d_max² ln(2/δ) / (n (ε₁ − M(Q) + m(Q))²)` samples).  Let
+
+    ε₁* = min_Q [ M(Q) − m(Q) ]
+
+(the smallest oscillation of the tilted site pressure over the class; a convex minimisation).
+Conversely, with `ψ = φ + γ` the threshold of (c) at the additive instance `γ` reads
+`ε₁^thr(γ) = min_Q [M(Q) − F_Q(γ)]`, and since `M(Q) − F_Q(γ)` is convex in `Q` and concave in `γ` on
+compact convex sets, the minimax theorem gives
+
+    sup_{γ ∈ 𝓛} ε₁^thr(γ)  =  min_Q [ M(Q) − m(Q) ]  =  ε₁*.
+
+Hence below `ε₁*` every algorithm, with or without a hint, needs exponentially many evaluations
+at some additive instance, and above it a bounded number suffices on every instance without
+any hint: **`ε₁*` is the worst-case accuracy threshold of the class, for every alphabet.**  It
+never exceeds the passive width at a reference instance (for `Q = π_γ`, `γ ∈ 𝓛`, the Gibbs
+variational principle gives `m(Q) = F_Q(γ)`, and `M(Q) − m(Q)` is the Jensen width `W₁(γ)`), and
+equals the smallest of them when the optimal `Q*` is the Gibbs law of a member of the class.
+Three-state site `(0,0,2)`, `β = c = 1`: `ε₁^thr(0) = 0.11969 < ε₁* = 0.11988 < W₁(0) = 0.12208`
+(harness XII.13, which also tests the sandwich on small products with random quasi-metric
+envelopes and the minimax identity; benchmark B11).  The lower end `n m(Q)` is what makes one
+reference law enough: pairing the Jensen bound under `π` with the upper bound under `Q` would
+cost a transport term `β(E_π − E_Q)g`, which is why a second reference seemed useless without a
+hint (a remark of workstream D that this statement corrects).
+*Two remarks on scope* **[P]**.  (i) Nothing in the sandwich and in the minimax identity uses
+the product structure: on any finite instance class, with `F_Q(ψ) = ln Z(f+ψ) + βE_Qψ` on the
+whole space, `min_Q [max F_Q − min F_Q] = sup_γ min_Q max_ψ [F_Q(ψ) − F_Q(γ)]`, and above that width
+(plus a margin `Δ`) `O(β² D² ln(1/δ)/Δ²)` samples of the optimal reference suffice, `D` the
+diameter of the envelope.  What the product structure adds is that the optimal reference is a
+product law, that the width is `n` times a single-site quantity, and that the cost below the
+threshold is exponential.  (ii) For sites of finitely many types the sandwich tensorises site
+by site, and the lower bound of Theorem 11.27(c) holds with a common `t` and the product of the
+site constants; since every `−ln val(K_t^{(j)})` is linear at `t = 0`, the threshold of the class
+is the average `Σ_j λ_j ε₁*^{(j)}` of the site thresholds over the type frequencies `λ_j` (unlike
+the exponents, which do not add up site by site, D31).  The Lean file treats identical sites.
+(iii) Dividing by `β` and letting `β → ∞` gives the same sandwich for the minimum:
+`n m₀(Q) ≤ E_{Qⁿ} g − min(f+g) ≤ n M₀(Q)` with the extreme values of `E_Q ψ − min(f₁ + ψ)` over the
+class.  For a two-state site with excitation energy `e` the smallest width is
+`(c² − e²)₊/(2c)` per site: it vanishes exactly when the site is sharp (`e ≥ c`), which is the
+dichotomy of Theorem 11.8 seen from the side of extensive accuracies, and `ε₁*/β` tends to this
+value (`0.254, 0.361, 0.374` at `β = 4, 40, 400` for `e/c = 1/2`, limit `0.375`).
+(e) **[P]** *Two-state sites: the largest chord gap of the pressure* (workstream B, Theorem B.12;
+proof checked for this revision).  Let `f = e·M` on `{0,1}ⁿ` (`M` the number of excited sites)
+with the class of `c`-Hamming-Lipschitz residuals, and let `P(θ) = ln(1 + e^{−β(e+θ)})` be the
+pressure of the additive instance `θM`, `|θ| ≤ c`.  Then (d) is explicit:
+
+    ε₁^thr(θM) = G(θ) := [(c+θ) P(c) + (c−θ) P(−c)]/(2c) − P(θ)        (the chord gap of `P` over `[−c, c]`),
+    ε₁* = max_θ G(θ) = G(θ*),        P′(θ*) = [P(c) − P(−c)]/(2c),
+
+the optimal reference is the Gibbs law `π_{θ*}` of the tilted instance, and the sandwich is
+`0 ≤ ln Z(f+g) − [ln Z(f + θ*M) − β E_{π_{θ*}}(g − θ*M)] ≤ n ε₁*` (the Jensen gap of one site is convex
+in the increment of `g − θ*M`, which lies in `[−c − θ*, c − θ*]`, and its two endpoint values are
+the Bregman divergences `P(±c) − P(θ*) ∓ (c ∓ θ*)P′(θ*)`, both equal to `G(θ*)` because the tangent
+at `θ*` is parallel to the chord).  For `e = 0` this is Theorem 11.25 (`θ* = 0`,
+`ε₁* = ln cosh(u/2)`).  For `e ≠ 0` the hardest instance is not the zero residual and the best
+reference is not the Gibbs measure of the known part: for `e/c = 1/2`, `β = 1`, `G(0) = 0.11367`,
+the untilted width is `0.12246`, and `ε₁* = 0.11383` at `θ* = −0.037c` (harness XII.12; benchmark
+B11).
+
+So the picture of Theorem 11.25 extends beyond the cube, to every product landscape of
+identical sites.  At an additive instance there is a sharp accuracy threshold, the value
+`ε₁^thr` of a single-site game, between bounded and exponential cost for algorithms that know
+the instance or can learn it.  For the class as a whole, and for algorithms that are given
+nothing, the threshold is `ε₁* = sup_γ ε₁^thr(γ)`, the smallest oscillation of the tilted site
+pressure; on the uniform cube both are `ln cosh(βc/2)`, the largest Jensen gap, and in general
+`ε₁*` lies strictly below the passive width of the known part.  What the thresholds do not give
+is the cost below them (Theorem 11.27 and the claim after it), and nothing is said here about
+sites of several types or known parts with interactions.
+
+*What is not proved.*  The exact randomised exponent beyond the cube at the zero residual
+(Theorem 11.27 gives the lower bound `R^gen_β`; the matching upper bound is the unrefereed claim
+above; the bracket `R^gen_β ≤ · ≤ min(R_β, U_β)` is what is established).  Thresholds and
+exponents are statements about one instance; they need accuracies that are not exponentially
+small and a hedged converse (Theorem 11.25).  Sites of several types, non-additive instances
+and interacting known parts are not covered.  The model of randomness (finite mixtures of
+deterministic algorithms) and of correctness (probability `1 − δ` on every instance, not on
+average) are those of the theorems.  Harness XII.1–XII.12.
 
 *Prior art* (`prior_art/L7`; the third referee's reading of the primary sources is recorded
 there).  For deterministic certified algorithms on `ℝ^d` the necessity half of Theorem 11.23(a)
@@ -2317,19 +2477,21 @@ short.
    (a) instances that are only approximately additive — the cover computed from the
    interpolant must be robust to the pair remainder;
    (b) **the randomised exponent at finite temperature.**  On the cube at the zero residual
-   it is known in every accuracy regime (Theorem 11.25).  At other additive instances the
-   theorems of §11.10 bracket it between `R^rand_β(ε₁)` and `min(R_β, U_β)`.  The conjecture of the
-   previous version — single dips are extremal at the exponential scale on product spaces — is
-   false for sites with three or more states (D38); workstream A proposes the exact value, a
-   game over the vertices of the Lipschitz polytope of the site, with a lower bound for every
-   `n` and a paper proof of the matching upper bound (inherently typical subsets,
-   Ahlswede–Yang–Zhang).  That proof needs an independent review and, for a publication, a
-   careful write-up; sites of several types and interacting known parts are open;
-   (c) **thresholds.**  The instance-wise threshold at additive instances is settled by the
-   two-reference sandwich (§11.10, "the threshold of an instance") once its machine-checked
-   core is integrated.  Open: the worst-case threshold of a product class for algorithms
-   *without* a hint — on the cube it is the largest Jensen gap `n ln cosh(βc/2)`; in general it
-   lies between `sup_g ε₁^thr(g)` and the hint-free passive width;
+   it is known in every accuracy regime (Theorem 11.25).  At other additive instances it lies
+   between `R^gen_β(ε₁)` (Theorem 11.27, every `n`) and `min(R_β, U_β)`.  Workstream A claims
+   that `R^gen_β` is attained, by a universal sampler and the method of inherently typical
+   subsets; that proof needs the independent review that is under way and, for a
+   publication, a careful write-up and a reading of the isoperimetric literature for two
+   product measures (Ahlswede–Zhang, Yu).  Sites of several types, non-additive instances
+   and interacting known parts are open;
+   (c) **thresholds.**  Settled for identical independent sites: at additive instances
+   (Theorem 11.28(c)) and, without a hint, for the whole class and every alphabet (Theorem
+   11.28(d): the smallest oscillation of the tilted site pressure; closed form for two-state
+   sites in (e); finitely many site types by averaging).  Open: the cost of non-additive
+   instances below the class threshold; chains as known parts — the one-reference sandwich
+   and the minimax identity hold there too, but the width is no longer a single-site
+   quantity (workstream B gives a lower threshold by a transfer-matrix formula and a
+   conjecture for the upper half);
    (d) **algorithms without a hint** on the cube class: the worst-case exponent lies between
    `ln 2 − h(Λ₁/u) ≈ u²/32` (every algorithm; attained with a hint at the zero residual, and
    without a hint at additive instances by learn-then-verify) and `ln cosh u ≈ u²/2` (plain Monte
@@ -2410,9 +2572,11 @@ message for the certified-optimisation audience, where the randomised case is na
 Theorem 11.25 was, as submitted, too thin (one class, one instance, part (c) wrong at one end
 and unproved at the other); the referee named five ways to make it a contribution.  This
 revision carries out the first — the complete accuracy diagram at the zero residual with a
-hedged converse, lower bounds machine-checked.  Workstream A addresses the third and the fourth
-(thresholds and exponents beyond the cube: the conjecture refuted, a candidate for the exact
-exponent, the instance-wise threshold); these are not yet refereed.  The second (hint-free
+hedged converse, lower bounds machine-checked.  Workstreams A and B address the third and the
+fourth (Theorems 11.27–11.28: the conjecture refuted, the right family of perturbations, the
+instance-wise threshold for every alphabet, the hint-free threshold of two-state classes;
+verified here except for the matching upper bound of the exponent, which is not yet
+refereed).  The second (hint-free
 algorithms) and the fifth (the bridge to smoothness classes) are open (item 2(d)).  The referee
 also found the same error for the second time — an asymptotic statement claimed for all
 `ε = o(n)` although it fails for exponentially small accuracies (R2-C1 in Theorem 11.15, R3-C1 in

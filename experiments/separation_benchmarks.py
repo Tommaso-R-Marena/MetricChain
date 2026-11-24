@@ -688,6 +688,154 @@ def bench_query_complexity(rng, quick):
     return rows
 
 
+def game_value(K):
+    """min over mixed columns of max over rows of sum_j M_j K[a, j] (matrix game, LP)."""
+    from scipy.optimize import linprog
+    na, nj = K.shape
+    res = linprog(np.r_[np.zeros(nj), 1.0], A_ub=np.c_[K, -np.ones(na)], b_ub=np.zeros(na),
+                  A_eq=[np.r_[np.ones(nj), 0.0]], b_eq=[1.0], bounds=[(0, None)] * nj + [(None, None)], method="highs")
+    if res.status != 0:
+        raise RuntimeError("game LP failed")
+    return float(res.fun)
+
+
+def site_exponent(pi, cols, beta, eps1=0.0, grid=401):
+    """Single-letter lower bound max_{0 <= t <= 1.5 beta} [-ln val(K_t) - t eps1/beta], K_t[a, phi] = exp(-t (phi[a] - Lambda(phi)/beta)),
+    for the family `cols` of slack-Lipschitz site functions (theory report Theorem 11.27)."""
+    lam = [-math.log(float(np.sum(pi * np.exp(-beta * phi)))) for phi in cols]
+    sig = np.array([phi - l / beta for phi, l in zip(cols, lam)]).T
+    best = 0.0
+    for t in np.linspace(0.0, 1.5 * beta, grid)[1:]:
+        best = max(best, -math.log(game_value(np.exp(-t * sig))) - t * eps1 / beta)
+    return best
+
+
+def site_game_threshold(pi, cols, beta):
+    """min_Q max_phi [beta E_Q phi - Lambda(phi)] over the site functions `cols` (theory report Theorem 11.28)."""
+    M = np.array([[beta * phi[a] + math.log(float(np.sum(pi * np.exp(-beta * phi)))) for a in range(len(pi))] for phi in cols])
+    return game_value(M)                                  # rows: site functions (maximiser); columns: letters (mixed by Q)
+
+
+def hamming_vertices(k, c=1.0):
+    """Vertices of the Lipschitz polytope of c * (uniform metric) on k points: c * 1[a not in B], B a proper nonempty subset."""
+    return [c * np.array([0.0 if a in B else 1.0 for a in range(k)]) for r in range(1, k) for B in itertools.combinations(range(k), r)]
+
+
+def class_threshold(f1, beta, c=1.0):
+    """(eps*, Q*): the hint-free worst-case threshold min_Q [max F_Q - min F_Q] of a class of identical sites with known part
+    f1 and envelope c * (uniform metric); F_Q(psi) = ln sum exp(-beta (f1 + psi)) + beta E_Q psi (theory report 11.28(d))."""
+    from scipy.optimize import minimize
+    k = len(f1)
+    V = hamming_vertices(k, c)
+    FQ = lambda Q, psi: math.log(float(np.sum(np.exp(-beta * (f1 + psi))))) + beta * float(Q @ psi)
+    cons = [{"type": "ineq", "fun": (lambda z, a=a, b=b: c - (np.r_[0.0, z][a] - np.r_[0.0, z][b]))}
+            for a in range(k) for b in range(k) if a != b]
+
+    def m_of(Q):
+        free = -np.log(np.maximum(Q, 1e-12)) / beta - f1
+        best = float("inf")
+        for start in (np.zeros(k - 1), np.clip(free[1:] - free[0], -5.0, 5.0)):
+            res = minimize(lambda z: FQ(Q, np.r_[0.0, z]), start, constraints=cons, method="SLSQP", options=dict(ftol=1e-13, maxiter=500))
+            if np.all([cc["fun"](res.x) >= -1e-9 for cc in cons]):
+                best = min(best, float(res.fun))
+        return best
+
+    def obj(z):
+        Q = np.exp(z - z.max())
+        Q /= Q.sum()
+        return max(FQ(Q, v) for v in V) - m_of(Q)
+
+    best = min((minimize(obj, z0, method="Nelder-Mead", options=dict(xatol=1e-9, fatol=1e-12, maxiter=4000)) for z0 in (np.zeros(k), -beta * f1)),
+               key=lambda r: r.fun)
+    Q = np.exp(best.x - best.x.max())
+    return float(best.fun), Q / Q.sum()
+
+
+def bench_generalised_dips(rng, quick):
+    section("B11. Beyond the cube: generalised dips, instance thresholds, and the hint-free threshold of two-state sites")
+    rows = []
+    print("single-letter lower bounds on the randomised exponent of ln Z (eps = o(n)) and thresholds; Hamming envelope c = 1, zero residual")
+    print(f"{'site (energies), beta':>28} | {'R^rand (single dips)':>20} | {'R^gen (all vertices)':>20} | {'eps1_crit (dips)':>16} | {'eps1_thr (all)':>14}")
+    sites = [("two-state (0, 0.5), 1", [0.0, 0.5], 1.0), ("flat 3-state, 1", [0.0] * 3, 1.0), ("flat 4-state, 1", [0.0] * 4, 1.0),
+             ("flat 4-state, 0.5", [0.0] * 4, 0.5), ("three-state (0,0,2), 1", [0.0, 0.0, 2.0], 1.0),
+             ("three-state (0,2,2), 1", [0.0, 2.0, 2.0], 1.0)]
+    if not quick:
+        sites += [("flat 8-state, 1", [0.0] * 8, 1.0), ("flat 8-state, 2", [0.0] * 8, 2.0)]
+    grid = 201 if quick else 401
+    for name, energies, beta in sites:
+        E = np.array(energies)
+        k = len(E)
+        pi = np.exp(-beta * E)
+        pi /= pi.sum()
+        V = hamming_vertices(k)
+        dips = [v for v in V if v.sum() == k - 1]         # B a singleton
+        rr, rg = site_exponent(pi, dips, beta, grid=grid), site_exponent(pi, V, beta, grid=grid)
+        crit, thr = site_game_threshold(pi, dips, beta), site_game_threshold(pi, V, beta)
+        rows.append(dict(site=name, R_rand=rr, R_gen=rg, eps1_crit=crit, eps1_thr=thr))
+        print(f"{name:>28} | {rr:20.5f} | {rg:20.5f} | {crit:16.5f} | {thr:14.5f}")
+        if rg < rr - 1e-7 or thr < crit - 1e-9 or (k == 2 and (abs(rg - rr) > 1e-7 or abs(thr - crit) > 1e-9)):
+            raise RuntimeError("generalised-dip exponent or threshold below the dip value, or different for a two-state site")
+    by = {r["site"]: r for r in rows}
+    if not (abs(by["flat 4-state, 1"]["R_gen"] - 0.02914) < 3e-5 and abs(by["flat 4-state, 1"]["R_rand"] - 0.02841) < 3e-5
+            and abs(by["three-state (0,0,2), 1"]["eps1_thr"] - 0.1197) < 2e-4 and abs(by["three-state (0,0,2), 1"]["eps1_crit"] - 0.0947) < 2e-4):
+        raise RuntimeError("documented values of the generalised-dip bounds are not reproduced")
+    print("\nexact finite-n hitting numbers on flat k-state sites, u = 1, eps = 1 (uniform sampler, binomial tails): ln N for dips centred")
+    print("at boxes of m-subsets; m = 1 are the single dips")
+    for k, ms, n in ((4, (1, 2), 2000 if quick else 20000), (8, (1, 2, 3, 4), 1000)):
+        vals = []
+        for m in ms:
+            pth = 1 - m / k
+            logpmf = [math.lgamma(n + 1) - math.lgamma(j + 1) - math.lgamma(n - j + 1) + j * math.log(pth) + (n - j) * math.log(1 - pth)
+                      for j in range(n + 1)]
+            lse = lambda a, b: max(a, b) + math.log1p(math.exp(-abs(a - b)))
+            log_s, log_cdf, out = float("-inf"), float("-inf"), 0.0
+            for R in range(1, n + 2):
+                log_s = 1.0 + lse(log_s, logpmf[R - 1])
+                log_cdf = lse(log_cdf, logpmf[R - 1])
+                tail = -math.expm1(log_cdf) if log_cdf < 0 else 0.0
+                if (lse(log_s, math.log(tail)) if tail > 0 else log_s) > 1.0:
+                    out = -log_cdf
+                    break
+            vals.append(out)
+        rows.append(dict(k=k, n=n, log_hitting=vals))
+        print(f"   k = {k}, n = {n}: " + ", ".join(f"m={m}: {v:.1f}" for m, v in zip(ms, vals)))
+        if max(vals[1:]) <= vals[0]:
+            raise RuntimeError("boxes should be harder to hit than single dips on flat sites at u = 1")
+    print("\nhint-free threshold of identical two-state sites (c = 1): largest chord gap of P(theta) = ln(1 + e^{-beta(e+theta)}) over [-c, c]")
+    print(f"{'e':>5} {'beta':>5} | {'theta*':>8} | {'eps* = G(theta*)':>16} | {'G(0) (zero residual)':>20} | {'untilted width':>14} | {'ln cosh(beta c/2)':>17}")
+    for e, beta in ((0.0, 1.0), (0.5, 1.0), (1.0, 1.0), (2.0, 1.0), (0.5, 4.0), (-1.0, 2.0)):
+        P = lambda th: math.log1p(math.exp(-beta * (e + th)))
+        p1 = lambda th: 1.0 / (1.0 + math.exp(beta * (e + th)))
+        G = lambda th: ((1 + th) * P(1.0) + (1 - th) * P(-1.0)) / 2 - P(th)
+        Dv = lambda tp, th: P(tp) - P(th) + (tp - th) * beta * p1(th)
+        q = (P(-1.0) - P(1.0)) / (2 * beta)
+        th_star = -e - math.log(q / (1 - q)) / beta
+        eps_star, untilted = G(th_star), max(Dv(1.0, 0.0), Dv(-1.0, 0.0))
+        rows.append(dict(e=e, beta=beta, theta_star=th_star, eps_star=eps_star, G0=G(0.0), untilted=untilted))
+        print(f"{e:5.2f} {beta:5.2f} | {th_star:8.4f} | {eps_star:16.5f} | {G(0.0):20.5f} | {untilted:14.5f} | {math.log(math.cosh(beta / 2)):17.5f}")
+        if not (G(0.0) <= eps_star + 1e-12 <= untilted + 1e-9 and abs(Dv(1.0, th_star) - eps_star) < 1e-10):
+            raise RuntimeError("ordering G(0) <= eps* <= untilted width violated")
+        if e in (0.5, 2.0) and beta == 1.0 and abs(class_threshold(np.array([0.0, e]), beta)[0] - eps_star) > 1e-6:
+            raise RuntimeError("two-state site: min_Q [M(Q) - m(Q)] differs from the chord gap")
+    print("\nhint-free threshold of a class of identical sites, any alphabet: eps* = min_Q [max F_Q - min F_Q] (c = 1, beta = 1)")
+    print(f"{'site (energies)':>22} | {'eps1_thr at the zero residual':>29} | {'eps* (class, no hint)':>21} | {'passive width at zero':>21} | Q*")
+    for name, energies in (("(0, 0.5)", [0.0, 0.5]), ("(0, 0, 2)", [0.0, 0.0, 2.0]), ("(0, 2, 2)", [0.0, 2.0, 2.0]), ("(0, 1, 3)", [0.0, 1.0, 3.0]),
+                           ("flat 3-state", [0.0] * 3), ("flat 4-state", [0.0] * 4)):
+        f1 = np.array(energies)
+        k = len(f1)
+        pi = np.exp(-f1)
+        pi /= pi.sum()
+        V = hamming_vertices(k)
+        thr0 = site_game_threshold(pi, V, 1.0)
+        passive = max(float(pi @ v) + math.log(float(np.sum(pi * np.exp(-v)))) for v in V)
+        es, Qs = class_threshold(f1, 1.0)
+        rows.append(dict(site=name, thr_zero=thr0, eps_star=es, passive_zero=passive, Q_star=Qs.tolist()))
+        print(f"{name:>22} | {thr0:29.5f} | {es:21.5f} | {passive:21.5f} | {np.round(Qs, 4)}")
+        if not (thr0 <= es + 1e-6 <= passive + 2e-6):
+            raise RuntimeError("ordering eps1_thr(0) <= eps* <= passive width violated")
+    return rows
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true")
@@ -706,6 +854,7 @@ def main():
         "B8_exponent": bench_exponent(rng, args.quick),
         "B9_best_first": bench_best_first(rng, args.quick),
         "B10_query_complexity": bench_query_complexity(rng, args.quick),
+        "B11_generalised_dips": bench_generalised_dips(rng, args.quick),
     }
     if args.json:
         os.makedirs(os.path.dirname(os.path.abspath(args.json)), exist_ok=True)

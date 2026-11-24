@@ -603,8 +603,17 @@ worst model, not about every model: `ĝ = c|x|` is determined by two evaluations
 additive model, compute before sampling the single-site quantity
 `γ(Q) = max_Φ [β E_Q Φ − Λ(Φ)]` (maximum over the vertices of the Lipschitz polytope of the
 site): if the accuracy per site exceeds `min_Q γ(Q)`, a bounded number of samples from
-`½π̂ + ½Q*ⁿ` suffices, whatever `n` (theory report §11.10, "the threshold of an instance";
-paper proof, machine-checked core pending).  Exact equality of values
+`½π̂ + ½Q*ⁿ` suffices, whatever `n` (theory report Theorem 11.28; the tensorisation and the
+hitting bound are machine-checked, `twoMeasureBound_pow`, `product_mass_ge`); below that
+accuracy the cost is exponential in `n` (`genDip_expected_queries_ge`).  With no model at all,
+for a class of identical sites: choose the reference law `Q*` that minimises the oscillation
+`M(Q) − m(Q)` of the tilted site pressure `F_Q(ψ) = ln Σ_a e^{−β(f₁+ψ)} + βE_Qψ` over the admissible
+site functions (a convex problem in one site), sample `Q*ⁿ`, and return the midpoint of
+`[n m(Q*), n M(Q*)] − β·(sample mean of g)`; the accuracy `n(M − m)` is reached with a bounded
+number of samples on every instance (`product_sandwich`), and no algorithm does better in the
+worst case (Theorem 11.28(d)).  For two-state sites `Q*` is the Gibbs law tilted to the slope
+at which the tangent of the pressure is parallel to its chord over `[−c, c]` (Theorem
+11.28(e)).  Exact equality of values
 is assumed; with numerical tolerances the comparison and the envelope must be widened
 consistently.  No kernel for such transcripts is implemented here.
 
@@ -732,6 +741,7 @@ against a "bound" of `0.0076`; `reviews/R1`, item 10)
 | second-order envelope + star data | the pairwise sandwich is the exact envelope; nothing tighter exists with the same evaluations; its half-width is quadratic in the Hamming distance, so with dense constants even the whole radius-2 ball does not certify | `secondOrder_envelope_exact`; `DEAD_ENDS.md` D32 |
 | partition kernel without decomposition rules | certificates with an *exact lower end* need one leaf per configuration on instances that are rigid *in the given representation* (`k^n` on chains, against one leaf with elimination); nothing is proved for approximate enclosures, and a gauge-trivial instance satisfies the hypothesis | `zverify2_elementary_exact_leaves`, `cut_rule_separation`, `chain_separation`, `ferroChain_separation`, `gauge_trivial_separation` |
 | every algorithm that evaluates the residual, deterministic or randomised | the instance-wise deterministic cost equals the size of a value certificate; a randomised algorithm with error probability `δ` pays `(1 − 2δ)` times every fractional covering bound; for `ln Z` on the cube class, exponentially many evaluations at the zero residual below the accuracy `n ln cosh(βc/2)` (a worst-case statement), and `(1 − 2δ) 2ⁿ` for exact answers | `instance_query_complexity`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `thermal_expected_queries_ge`, `cube_thermal_randomized_bound`, `cube_exact_dip_randomized`, `cube_exact_randomized` |
+| free energies on product landscapes beyond the cube | every slack-Lipschitz centre function gives a perturbation that must be detected; at an additive instance the cost is bounded above the single-site game value `min_Q max_Φ[βE_QΦ − Λ(Φ)]` per site and exponential below it; single dips underestimate both when sites have three or more states | `genDip_expected_queries_ge`, `twoMeasureBound_pow`, `product_mass_ge`; `DEAD_ENDS.md` D38 |
 | pure dual certificates | incomplete: the frustrated triangle has LP bound 0, optimum 1 | `triangle_no_leaf_certificate` |
 | certificates without `sum` | exactly `2^m` leaves on `m` independent frustrated triangles; `2m` with `sum`; the gap persists in total description length (at most `147 m³` against at least `2^m`, hence smaller for `m ≥ 21`) | `sumFree_exponential`, `sumFree_tight`, `sum_linear`, `sum_rule_separation_dataSize` |
 | free-energy sandwich | product reference: constant `1/8` is optimal and the worst residual is additive two-level; the `Σ c_i²` width is false for correlated references; gap is extensive | `mcdiarmid_no_better_constant`, `exists_two_level_worst_residual`, `DEAD_ENDS.md` D14 |
@@ -810,7 +820,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 94 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 104 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  The audit script runs it, and starts with a self-test in which
@@ -819,4 +829,4 @@ it as the executable reading of the schema and as a regression oracle for faster
 
 Synthetic stress tests and tightness benchmarks: `experiments/falsify_conjectures.py`
 (counterexample search for every theorem) and `experiments/separation_benchmarks.py`
-(B1–B10; numbers quoted in the theory report).
+(B1–B11; numbers quoted in the theory report).

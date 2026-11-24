@@ -39,9 +39,10 @@ proofs/Frontiers/       envelope duality, dominance calculus, free-energy sandwi
                         free-energy sandwich, the partition kernel with cut and elimination
                         rules, the lemmas of the second referee, query-complexity bounds
                         for every algorithm, deterministic or randomised, two-sided
-                        soft-gap bounds for randomised free-energy estimation, and the
+                        soft-gap bounds for randomised free-energy estimation, the
                         refinements after the third referee report (pair detection, hedged
-                        spot-check, exact-dip bounds on the cube)
+                        spot-check, exact-dip bounds on the cube), and generalised dips with
+                        the two-measure sandwich (thresholds beyond the cube)
 proofs/CertificateAlgebra.lean   executable verification kernels + Master Soundness Theorems
 proofs/AuditCommand.lean         the axiom walk (by defining module)
 proofs/AxiomAudit.lean           axiom audit of every project constant + non-vacuity witnesses
@@ -114,7 +115,15 @@ accuracy `n ln cosh(βc/2)` is a sharp threshold for the worst case over instanc
 bounded number of random evaluations suffices on every instance, below it every algorithm
 needs exponentially many on the zero residual, where the exponent is now determined in every
 accuracy regime, down to exponentially small accuracies (lower bounds machine-checked; upper
-bounds by Harper's theorem).  Minimal certificates are NP-hard to find and best-first search is
+bounds by Harper's theorem).  Beyond the cube, every slack-Lipschitz function is the centre of
+a perturbation that must be detected (generalised dips; single dips are not enough when sites
+have three or more states), every additive instance of a product landscape has a sharp
+accuracy threshold — the value of a single-site game with a second reference measure — and the
+threshold of the whole class, for algorithms that are given nothing, is the smallest
+oscillation of a tilted site pressure, for every alphabet (for two-state sites: the largest
+chord gap of the pressure).  The lower bounds and both tensorisations are machine-checked;
+the rest are paper proofs.
+Minimal certificates are NP-hard to find and best-first search is
 competitive only with covers at shrunk radii.  Under weak second-order coupling, `n(k−1)+1`
 evaluations give an exact reduction to the pairwise kernel.  The one-shot lower bounds (for
 certificates and for all algorithms), the search guarantee and the second-order reduction are
@@ -127,11 +136,15 @@ theorem-driven paper"; the tools are standard and the proofs short.  The third r
 query-complexity section, found no machine-checked statement false, the same error a second
 time (an exponent claimed for all accuracies `ε = o(n)` that fails for exponentially small
 ones), a converse that was not tight, and four statements of scope that were too wide
-(D35–D37); all are corrected, and the verdict stands.  An independent workstream then refuted
+(D35–D37); all are corrected, and the verdict stands.  Independent workstreams then refuted
 the conjecture this README's previous version relied on for finite-temperature exponents
-beyond the cube: single dips are not the extremal perturbations on product landscapes with
-three or more states per site (D38).  §12 of the report says what a publication would still
-need.
+beyond the cube — single dips are not the extremal perturbations on product landscapes with
+three or more states per site (D38) — and supplied what replaces it (theory report Theorems
+11.27–11.28).  Their further results (an exact exponent claimed for every alphabet; chains as
+known parts; a normal form that absorbs the known part into the envelope; second-order
+classes; continuous spaces) are preserved in `docs/workstreams/` as delivered and are being
+reviewed independently; they are not part of the theory report until verified.  §12 of the
+report says what a publication would still need.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
