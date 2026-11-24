@@ -224,6 +224,88 @@ theorem robust_partition_bracket {d : X → X → ℝ} {g : X → ℝ} (hg : Adm
     have := lowerEnv_le hg A hA v hv y
     linarith
 
+/-! ### The query model: exact pruning criterion given evaluated anchors -/
+
+/-- For consistent anchor data the lower envelope lies below the upper envelope. -/
+theorem lowerEnv_le_upperEnv {d : X → X → ℝ} (hd : IsEnvelope d) (A : Finset X) (hA : A.Nonempty)
+    (v : X → ℝ) (hv : ∀ a ∈ A, ∀ b ∈ A, v a - v b ≤ d a b) (y : X) :
+    lowerEnv d A hA v y ≤ upperEnv d A hA v y := by
+  unfold lowerEnv upperEnv
+  apply Finset.sup'_le
+  intro a ha
+  apply Finset.le_inf'
+  intro b hb
+  have h1 := hv a ha b hb
+  have h2 := hd.triangle a y b
+  linarith
+
+/-- **Query-model contact theorem (optimal pruning with evaluated anchors).**  Suppose the
+residual has been evaluated on the anchors `A` (consistent data `v`).  A configuration `x` can be
+a minimiser of `f + g` for *some* admissible residual `g` that agrees with the data iff
+
+1. `f x ≤ f y + d y x` for all `y` (the contact-set condition), and
+2. `f x + lowerEnv x ≤ f y + upperEnv y` for all `y` (its optimistic value does not exceed the
+   pessimistic value of any competitor; for an anchor `y` this is "lower bound ≤ incumbent").
+
+Hence the *exact* set of configurations that may be discarded after the given evaluations is the
+set violating 1 or 2: no pruning rule using the same information can discard more, and any rule
+discarding less is not optimal.  With one anchor and the discrete envelope this is the
+pruning-interval rule of minimised dead-end elimination. -/
+theorem robust_minimizer_with_anchors_iff {d : X → X → ℝ} (hd : IsEnvelope d) (A : Finset X)
+    (hA : A.Nonempty) (v : X → ℝ) (hv : ∀ a ∈ A, ∀ b ∈ A, v a - v b ≤ d a b) (f : X → ℝ)
+    (x : X) :
+    (∃ g, Admissible d g ∧ (∀ a ∈ A, g a = v a) ∧ ∀ y, f x + g x ≤ f y + g y) ↔
+      (∀ y, f x ≤ f y + d y x) ∧
+        ∀ y, f x + lowerEnv d A hA v x ≤ f y + upperEnv d A hA v y := by
+  constructor
+  · rintro ⟨g, hg, hgv, hmin⟩
+    refine ⟨fun y => ?_, fun y => ?_⟩
+    · have h1 := hmin y
+      have h2 := hg y x
+      linarith
+    · have h1 := hmin y
+      have h2 := lowerEnv_le hg A hA v hgv x
+      have h3 := le_upperEnv hg A hA v hgv y
+      linarith
+  · rintro ⟨h1, h2⟩
+    set γ := lowerEnv d A hA v x with hγ
+    refine ⟨fun y => min (upperEnv d A hA v y) (γ + d y x), ?_, ?_, ?_⟩
+    · -- admissible: a minimum of two admissible functions
+      intro y z
+      have e1 := upperEnv_admissible hd A hA v y z
+      have e2 := hd.triangle y z x
+      have e3 : min (upperEnv d A hA v y) (γ + d y x) ≤ upperEnv d A hA v z + d y z :=
+        le_trans (min_le_left _ _) (by linarith)
+      have e4 : min (upperEnv d A hA v y) (γ + d y x) ≤ γ + d z x + d y z :=
+        le_trans (min_le_right _ _) (by linarith)
+      have e5 : min (upperEnv d A hA v y) (γ + d y x) ≤
+          min (upperEnv d A hA v z) (γ + d z x) + d y z := by
+        rw [← min_add_add_right]
+        exact le_min e3 e4
+      linarith
+    · -- agrees with the anchor data
+      intro a ha
+      have e1 := upperEnv_eq_of_mem hd A hA v hv ha
+      have e2 : v a - d a x ≤ γ := Finset.le_sup' (fun b => v b - d b x) ha
+      show min (upperEnv d A hA v a) (γ + d a x) = v a
+      rw [e1]
+      exact min_eq_left (by linarith)
+    · -- `x` is optimal
+      intro y
+      have e1 := lowerEnv_le_upperEnv hd A hA v hv x
+      have e2 := hd.self x
+      have hx : min (upperEnv d A hA v x) (γ + d x x) = γ := by
+        rw [e2, add_zero]
+        exact min_eq_right e1
+      show f x + min (upperEnv d A hA v x) (γ + d x x) ≤
+        f y + min (upperEnv d A hA v y) (γ + d y x)
+      rw [hx]
+      have e3 := h1 y
+      have e4 := h2 y
+      have e5 : f x + γ ≤ f y + (γ + d y x) := by linarith
+      rw [← min_add_add_left]
+      exact le_min e4 e5
+
 /-! ### Witness-size lower bound -/
 
 /-- **Anchors are necessary.**  Let the true residual `g` be `κ`-Lipschitz for the envelope with

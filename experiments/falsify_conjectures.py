@@ -367,6 +367,45 @@ def t_robust_interval(rng, trials):
     return True, {}
 
 
+@conjecture("II.6 Query-model contact theorem: x optimal for some admissible g matching anchors <=> (contact) & (lower(x) <= upper(y))")
+def t_query_model(rng, trials):
+    for _ in range(trials):
+        n, k = int(rng.integers(2, 4)), int(rng.integers(2, 4))
+        configs = all_configs(n, k)
+        c = rng.uniform(0.1, 2.0, size=n)
+        f = {x: float(rng.normal(0, 1.0)) for x in configs}
+        g = random_lipschitz(rng, configs, c)
+        anchors = [configs[a] for a in rng.choice(len(configs), size=int(rng.integers(1, 4)), replace=False)]
+        lo = {y: max(g[a] - weighted_hamming(c, a, y) for a in anchors) for y in configs}
+        hi = {y: min(g[a] + weighted_hamming(c, a, y) for a in anchors) for y in configs}
+        pred = {x for x in configs
+                if all(f[x] <= f[y] + weighted_hamming(c, y, x) + 1e-12 for y in configs)
+                and all(f[x] + lo[x] <= f[y] + hi[y] + 1e-12 for y in configs)}
+        # necessity: the true residual's minimisers must be predicted
+        best = min(f[y] + g[y] for y in configs)
+        for x in configs:
+            if f[x] + g[x] <= best + 1e-12 and x not in pred:
+                return False, dict(reason="a true minimiser violates the criterion", x=x)
+        # sufficiency: explicit extremal residual makes every predicted x optimal
+        for x in pred:
+            gx = {y: min(hi[y], lo[x] + weighted_hamming(c, y, x)) for y in configs}
+            if not check_bd(gx, configs, c, n, k):
+                return False, dict(reason="extremal residual not admissible")
+            if any(abs(gx[a] - g[a]) > 1e-9 for a in anchors):
+                return False, dict(reason="extremal residual does not match anchors")
+            if any(f[x] + gx[x] > f[y] + gx[y] + 1e-9 for y in configs):
+                return False, dict(reason="predicted x not optimal under extremal residual")
+        # randomized necessity: other admissible residuals consistent with the anchors
+        for _ in range(10):
+            lam = rng.uniform(0, 1)
+            g2 = {y: lam * lo[y] + (1 - lam) * hi[y] for y in configs}  # convex combination stays admissible
+            b2 = min(f[y] + g2[y] for y in configs)
+            for x in configs:
+                if f[x] + g2[x] <= b2 + 1e-12 and x not in pred:
+                    return False, dict(reason="minimiser of an admissible consistent residual not predicted")
+    return True, {}
+
+
 # ----------------------------------------------------------------------------------------------
 # Cluster II — free-energy sandwiches
 # ----------------------------------------------------------------------------------------------

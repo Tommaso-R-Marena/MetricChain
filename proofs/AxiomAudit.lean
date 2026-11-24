@@ -1,7 +1,16 @@
 import Mathlib
 import proofs.Core.Basic
+import proofs.Core.Rounding
 import proofs.Frontiers.EnvelopeDuality
 import proofs.Frontiers.Dominance
+import proofs.Frontiers.HolderDecomposition
+import proofs.Frontiers.HoffmanWielandt
+import proofs.Frontiers.Realizability
+import proofs.Frontiers.Holonomy
+import proofs.Frontiers.TorsionRMSD
+import proofs.Frontiers.InvariantEnvelope
+import proofs.Frontiers.PartitionCertificate
+import proofs.Frontiers.VoxelEnclosure
 import proofs.CertificateAlgebra
 
 /-!
@@ -40,11 +49,19 @@ elab "#audit_axioms " ns:ident : command => do
 
 /-! ### Headline theorems -/
 
+-- Core: outward rounding, rational intervals, certified exp, rational circle atlas
+#print axioms MetricChain.roundUp_sub_roundDown_le
+#print axioms MetricChain.QInterval.contains_mul
+#print axioms MetricChain.exp_enclosure
+#print axioms MetricChain.QInterval.contains_boltzmann
+#print axioms MetricChain.circle_rational_atlas
+
 -- Envelope duality (Direction A): exact characterisations under non-decomposable residuals
 #print axioms MetricChain.robust_minimizer_iff
 #print axioms MetricChain.robust_certified_iff
 #print axioms MetricChain.robust_min_bracket
 #print axioms MetricChain.robust_partition_bracket
+#print axioms MetricChain.robust_minimizer_with_anchors_iff
 #print axioms MetricChain.anchor_card_lower_bound
 #print axioms MetricChain.admissible_of_single_site
 #print axioms MetricChain.differential_dee_sound
@@ -58,6 +75,29 @@ elab "#audit_axioms " ns:ident : command => do
 #print axioms MetricChain.PairModel.goldstein_gauge_invariant
 #print axioms MetricChain.PairModel.desmet_reparam_le
 #print axioms MetricChain.PairModel.desmet_optimalGauge
+
+-- Partition functions (Direction D)
+#print axioms MetricChain.freeEnergy_holder
+#print axioms MetricChain.zverify_sound
+#print axioms MetricChain.Z_encloses_partitionFn
+#print axioms MetricChain.voxel_boltzmann_bounds
+#print axioms MetricChain.certified_voxel_partition
+#print axioms MetricChain.triangleZ_exact
+
+-- Realizability and geometric stability (Direction C)
+#print axioms MetricChain.hoffman_wielandt
+#print axioms MetricChain.rank_psd_trace_obstruction
+#print axioms MetricChain.K_identity
+#print axioms MetricChain.sstress_lower_bound
+#print axioms MetricChain.simplex_sstress_lower_bound
+#print axioms MetricChain.simplex_not_realizable
+#print axioms MetricChain.norm_holProd_le_sum
+#print axioms MetricChain.norm_holTrans_le
+#print axioms MetricChain.rigidWithin_chain
+#print axioms MetricChain.exists_coaxial_angle
+#print axioms MetricChain.IsTorsionMove.rigidWithin
+#print axioms MetricChain.rigidWithin_torsion_chain
+#print axioms MetricChain.residual_torsion_chain
 
 -- Certificate algebra (Direction E): Master Soundness Theorems and kernel-evaluated examples
 #print axioms MetricChain.verify_sound
