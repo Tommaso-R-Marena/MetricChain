@@ -1149,7 +1149,7 @@ lower bounds on certificate size* — and that is what the second phase pursued 
 | G4 | **Dichotomy and exact exponent on product landscapes**: one evaluation suffices iff every site is sharp; otherwise the minimal certificate grows like `exp(n R*)`, `R* = max_P R(P; s − gap, 0)` | `product_single_certificate_iff`, `product_exp_weights`, `binary_certificate_exponential` **[V]** (lower bound, every `n`); upper bound **[P]** (type covering) | **no match found**; an application of the type covering lemma |
 | G5 | **Hardness**: minimal exact certificates contain minimum dominating sets | `domCertificate_card`, `domCertificate_min_card` **[V]** | immediate; known in spirit (k-center) |
 | G6 | **Best-first search with resource augmentation**: at most `\|C\| + 1` evaluations for every cover `C` at radii `θ(gap + ε/6)`, `θ = (1−κ)/(4(1+κ))`; augmentation is necessary | `bestFirst_card_le`, `bestFirst_certifies`, `bestFirst_card_le_sharp` **[V]** | **partially known** (dimension one without augmentation; `ℝ^d` with doubling constants); the dimension-free metric form was not found |
-| G7 | **Finite temperature**: thermal contact interval; free-energy certificates are quantizers of the Gibbs ensemble in exponential slack distortion; entropy bound; Hölder exponential-weights converse; exact exponent `R_β = max_Q R(Q; s, (F[Q] − F))` | `gibbsProb_range_eq`, `mean_slack_le`, `card_ge_entropy`, `thermal_exp_weights`, `thermal_product_exp_weights`, `thermal_binary_exponential` **[V]**; exponent formula **[P]** | contact interval and fixed-`β` duality **known in spirit**; the exponent formula is a corollary of Merhav's (2011) theorem on exponential moments of distortion; the identification of certificate size with it, and the one-shot converses: no match found |
+| G7 | **Finite temperature**: thermal contact interval; free-energy certificates are quantizers of the Gibbs ensemble in exponential slack distortion; entropy bound; Hölder exponential-weights converse; exact exponent `R_β = max_Q R(Q; s, (F[Q] − F))` for accuracies that are not exponentially small | `gibbsProb_range_eq`, `mean_slack_le`, `card_ge_entropy`, `thermal_exp_weights`, `thermal_product_exp_weights`, `thermal_binary_exponential` **[V]**; exponent formula **[P]** | contact interval and fixed-`β` duality **known in spirit**; the exponent formula is a corollary of Merhav's (2011) theorem on exponential moments of distortion; the identification of certificate size with it, and the one-shot converses: no match found |
 | G8 | **Second-order envelopes**: with bounded mixed differences, `n(k−1)+1` evaluations on a star give an exact pairwise sandwich; the extremal extensions are pairwise models; certified-minimiser criterion; order `m` in general | `secondOrder_remainder`, `pairwise_sandwich`, `verify_sound_secondOrder`, `secondOrder_envelope_exact`, `secondOrder_certified_minimizer_iff`, `higherOrder_remainder`, `higherOrder_remainder_sharp` **[V]** | anchored (cut-HDMR) decomposition **known**; as a certified uncertainty class with an exact reduction to the pairwise kernel: no match found |
 | G10 | **Sampled free-energy sandwich**: `N` independent samples of a product reference pin `ln(Z/Z₀)` to `±\|β\|η + β²Σc_i²/8` outside an event of probability `2e^{−2Nη²/Σc_i²}` — polynomially many random evaluations where deterministic certification needs exponentially many | `sample_mean_two_sided`, `sampled_free_energy_sandwich`, `sampled_free_energy_sandwich_of_sample_size` **[V]** | standard concentration (Chernoff bound for a sub-Gaussian mean); stated as the constructive counterpart of G7 |
 | G9 | **Compositional partition kernel**: cut rule and elimination rule (exact on every chain, with one leaf), with exponential separations from the elementary rules for every chain length | `zverify2_sound`, `WInstance.Z_cut`, `cut_rule_separation`, `WInstance.Z_elim1`, `WInstance.Z_elim2`, `zverify2Top_chainCert`, `chain_separation`, `ferroChain_separation` **[V]** | repair of the kernel; variable elimination is classical; the separation is the formal counterpart of E2 at finite temperature |
@@ -1486,8 +1486,9 @@ Wasserstein-matrix constants — and the extremal residual is then no longer add
 
 **Theorem 11.15 (exact exponent at finite temperature) [V lower bound; P upper bound].**  For
 `n` identical independent sites with single-site Gibbs measure `π`, slack `s` (positive off the
-diagonal: `κ < 1`, `c > 0`) and accuracy `ε = o(n)`, the least number of evaluations in a
-certificate of `ln Z` satisfies
+diagonal: `κ < 1`, `c > 0`) and accuracies `ε_n` that are neither extensive nor exponentially
+small — `ε_n = o(n)` **and** `ln(1/ε_n) = o(n)`, e.g. `ε_n ≥ n^{−m}` — the least number of
+evaluations in a certificate of `ln Z` to within `ε_n` satisfies
 
     n⁻¹ ln N_Z → R_β = max_Q R(Q; s, KL(Q‖π)/β)
                = max_{t ≥ 0, v ≥ 0} { ((β+t)/β) ln Σ_s π(s)^{t/(β+t)} v(s)^{β/(β+t)} − ln max_a Σ_s v(s) e^{−t s(a,s)} }.
@@ -1507,14 +1508,28 @@ this exponential rate.
 valid for every `n`; the maximum over `p` and `v` equals `max_Q R(Q; s, KL(Q‖π)/β)` by the dual
 formula for `R(Q, D)` and the Gibbs variational principle in `Q` (the distortion level
 `KL(Q‖π)/β` is linear in `ln π` and `ln Q`).  Upper bound: cover every type class `T_Q` at the
-per-site distortion `D_Q = max(0, KL(Q‖π)/β − (k+1) ln(n+1)/(nβ))` (type covering; for the types
-within `O(n⁻¹ ln n)` of `π` this means evaluating the type class itself, at rate
-`H(Q) = H(π) + o(1) ≤ R_β + o(1)`).  Then every `y ∈ T_Q` has `e^{β s(A,y)} ≤ e^{nβD_Q}`, and since
-`π(T_Q) ≤ e^{−n KL(Q‖π)}` and there are at most `(n+1)^k` types,
-`Z(f+L_A)/Z = Σ_Q π(T_Q) E[e^{βs} | T_Q] ≤ 1 + (n+1)^{−1}`; the lower end
-`Z(f+U_A)/Z = E_π e^{−βs(Y,A)}` is at least the `π`-mass of the evaluated typical classes, which
-tends to one.  The rate is `max_Q R(Q; s, D_Q) + o(1) = R_β + o(1)` by continuity of the
-rate–distortion function. ∎  The single-letter identity and the lower bound were checked
+per-site distortion `D_Q = max(0, KL(Q‖π)/β − a_n)`,
+`a_n = [(k+1) ln(n+1) + ln(4/ε_n)]/(nβ)` (type covering, which is uniform in the type and in the
+level; a class with `D_Q = 0` is evaluated entirely, because the slack is positive off the
+diagonal).  Here `a_n → 0` is exactly the hypothesis `ln(1/ε_n) = o(n)`.  Every `y ∈ T_Q` has
+`e^{β s(A,y)} ≤ e^{nβD_Q}`, `π(T_Q) ≤ e^{−n KL(Q‖π)}`, and there are at most `(n+1)^k` types, so
+the classes with `D_Q > 0` contribute at most `(n+1)^k e^{−nβ a_n} ≤ ε_n/4` to
+`Z(f+L_A)/Z = Σ_Q π(T_Q) E[e^{βs} | T_Q]` and have total mass at most `ε_n/4`; hence
+`Z(f+L_A)/Z ≤ 1 + ε_n/4` and `Z(f+U_A)/Z = E_π e^{−βs(Y,A)} ≥ π(A) ≥ 1 − ε_n/4`, and the two ends
+differ by at most `ε_n` in logarithm (for `ε_n ≤ 1`).  The rate is
+`max_Q R(Q; s, D_Q) + o(1) = R_β + o(1)` by continuity of the rate–distortion function. ∎
+
+*The restriction on the accuracy is necessary* (second referee report, C1; `DEAD_ENDS.md` D29).
+For `ε = 0` every certificate of `ln Z` is the whole space, `N_Z(0) = kⁿ`
+(`exact_free_energy_certificate_eq_univ`), whereas `R_β < ln k` unless `π` is uniform.  More
+generally a two-sided certificate forces `π(Aᶜ) ≤ ε/(1 − e^{−β s_min})`, so for `ε_n = e^{−λn}`
+the evaluated set contains at least half of every type class with `KL(Q‖π) < λ` and the exponent
+is at least `max{H(Q) : KL(Q‖π) < λ}`, which reaches `ln k` once `λ > KL(uniform‖π)`.  The
+construction above with `a_n → λ/β` gives the upper bound
+`max_Q R(Q; s, (KL(Q‖π) − λ)₊/β)` in that regime; whether it is attained is open.  (Theorem 11.9
+has no such restriction: `ε = 0` is allowed there.)
+
+The single-letter identity and the lower bound were checked
 numerically (the two sides agree to `10⁻³` on a grid; `R_β = 0.666, 0.482, 0.216` at
 `β = 1, 4, 40` for `e/c = 1/2`, approaching `R* = 0.188`, benchmark B8; harness XI.8 tests the
 one-shot converse on every evaluated set of small instances).  For the sharp site of the

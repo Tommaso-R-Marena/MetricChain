@@ -544,3 +544,24 @@ residuals.
   `n(k−1)+1` evaluations give an exact pairwise reduction, `secondOrder_remainder`,
   `verify_sound_secondOrder`); linear information (one reference average pins `ln Z` to
   `β²Σc_i²/8`, Theorem 3.1); extensive accuracy.
+
+## D29. "The finite-temperature exponent holds for every accuracy `ε = o(n)`" — FALSE for exponentially small accuracies  **[Lean]**
+
+*Claim (theory report Theorem 11.15 up to ee2053f).*  For `n` identical sites and accuracy
+`ε = o(n)`, the least number of evaluations in a certificate of `ln Z` grows like `exp(n R_β)`,
+`R_β = max_Q R(Q; s, KL(Q‖π)/β)`.
+
+*Refutation (second referee, C1).*  For `ε = 0` every certificate of `ln Z` is the whole space:
+if the optimistic and the pessimistic partition functions coincide then the two McShane
+envelopes coincide pointwise, so every point has slack distance zero from the evaluated set
+(`exact_free_energy_certificate_eq_univ`; witness `exact_free_energy_certificate_witness`).
+Hence `N_Z(0) = kⁿ`, while `R_β < ln k` unless `π` is uniform (`0.666, 0.482, 0.216 < ln 2` in
+the report's own example).  For `ε_n = e^{−λn}` the exponent is at least
+`max{H(Q) : KL(Q‖π) < λ}`.  The proof given in the report only reached accuracy about `2/n`.
+
+*Correct statement.*  The theorem holds for accuracies that are neither extensive nor
+exponentially small: `ε_n = o(n)` and `ln(1/ε_n) = o(n)` (the covering level in the proof is
+lowered by `a_n = [(k+1) ln(n+1) + ln(4/ε_n)]/(nβ)`).  For exponentially small accuracies the
+construction gives the upper bound `max_Q R(Q; s, (KL(Q‖π) − λ)₊/β)`; a matching lower bound
+is open.  The zero-temperature theorem (11.9) is not affected.
+

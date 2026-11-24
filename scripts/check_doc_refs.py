@@ -81,6 +81,7 @@ IGNORE = {
     "n_B", "n_P", "L_A", "U_A", "g_star", "L_μ", "R_β", "S_C", "L4_certified_optimisation_and_recovery",
     "L5_polytropes_interval_uncertainty", "L6_transport_entropy_and_information_limits", "R1_referee_report",
     "e_ν", "p_E", "δ_ν", "p_gap", "p_slack", "D_Q", "R2_referee_report",
+    "ε_n", "a_n", "s_min", "T_Q", "T_P", "N_Z", "R_β", "c_y", "r_y", "λ_β", "Λ_β", "N_frac", "U_y", "q_a",
     # names of JSON conformance vectors (experiments/certs/*.json)
     "residual_inconsistent_reject", "residual_lower_only", "residual_negative_c_reject",
     "partition_negative_reject", "residual_interval", "residual_interval_inconsistent_reject",

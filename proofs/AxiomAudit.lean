@@ -30,6 +30,7 @@ import proofs.Frontiers.SecondOrderEnvelope
 import proofs.Frontiers.HigherOrderEnvelope
 import proofs.Frontiers.SampledSandwich
 import proofs.Frontiers.PartitionProduct
+import proofs.Frontiers.RefereeLemmas
 import proofs.AuditCommand
 
 /-!
@@ -259,6 +260,12 @@ import proofs.AuditCommand
 #print axioms MetricChain.zverify2Top_chainCert
 #print axioms MetricChain.chain_separation
 #print axioms MetricChain.ferroChain_separation
+
+-- Lemmas of the second referee: the certificate notions coincide; limitations
+#print axioms MetricChain.config_exchange
+#print axioms MetricChain.value_exchange
+#print axioms MetricChain.exact_free_energy_certificate_eq_univ
+#print axioms MetricChain.gauge_trivial_separation
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp
@@ -825,6 +832,34 @@ theorem config_certificate_skips_forced_point :
     cases a
     · simp [Covers, slack, discreteEnvelope]
     · exact absurd rfl ha
+
+/-- **Witness for `exact_free_energy_certificate_eq_univ`.**  Two states, discrete envelope of
+oscillation `1`, zero known part and zero residual, `β = 1`.  The slack is positive off the
+diagonal and the full evaluation satisfies the hypothesis (both envelopes coincide with the
+residual), so the hypotheses are jointly satisfiable; the theorem says that no smaller evaluated
+set satisfies it. -/
+theorem exact_free_energy_certificate_witness :
+    (∀ a y : Bool, a ≠ y → 0 < slack (discreteEnvelope 1) (fun _ : Bool => (0 : ℝ)) a y) ∧
+      (∑ y : Bool, Real.exp (-1 * ((0 : ℝ) +
+          lowerEnv (discreteEnvelope 1) univ univ_nonempty (fun _ => 0) y)) ≤
+        ∑ y : Bool, Real.exp (-1 * ((0 : ℝ) +
+          upperEnv (discreteEnvelope 1) univ univ_nonempty (fun _ => 0) y))) ∧
+      ∀ (A : Finset Bool) (hA : A.Nonempty),
+        (∑ y, Real.exp (-1 * ((0 : ℝ) + lowerEnv (discreteEnvelope 1) A hA (fun _ => 0) y)) ≤
+          ∑ y, Real.exp (-1 * ((0 : ℝ) + upperEnv (discreteEnvelope 1) A hA (fun _ => 0) y))) →
+        A = univ := by
+  have hd : IsEnvelope (discreteEnvelope (X := Bool) 1) := discreteEnvelope_isEnvelope zero_le_one
+  have hadm : Admissible (discreteEnvelope 1) (fun _ : Bool => (0 : ℝ)) :=
+    admissible_of_bounds (lo := 0) _ fun _ => by norm_num
+  have hpos : ∀ a y : Bool, a ≠ y →
+      0 < slack (discreteEnvelope 1) (fun _ : Bool => (0 : ℝ)) a y := by
+    intro a y hne
+    simp [slack, discreteEnvelope, hne]
+  refine ⟨hpos, ?_, fun A hA h => ?_⟩
+  · refine Finset.sum_le_sum fun y _ => ?_
+    rw [lowerEnv_eq_of_mem hd univ univ_nonempty _ (fun a _ b _ => hadm a b) (mem_univ y),
+      upperEnv_eq_of_mem hd univ univ_nonempty _ (fun a _ b _ => hadm a b) (mem_univ y)]
+  · exact exact_free_energy_certificate_eq_univ hadm (fun _ => 0) A hA one_pos hpos h
 
 end MetricChain.NonVacuity
 
