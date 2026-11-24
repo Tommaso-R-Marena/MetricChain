@@ -1,38 +1,44 @@
 MetricChain falsification harness — seed=20261124, trials/test=400
-[                survived] I.1 Goldstein value = exact dominance margin (pairwise, product domains)  (0.1s) 
-[                survived] I.2 Goldstein is gauge-invariant; Desmet(gauge) <= Goldstein with equality at explicit gauge  (0.2s) max_slack_of_random_gauge=14.22
-[                survived] I.3 Thermal dominance transport: Z_{i=r} <= exp(-beta*gamma) Z_{i=t}; ln Z error <= ln(1+e^{-beta gamma})  (0.2s) 
-[                survived] I.3b Split (context-dependent) dominance map is injective and transports weight  (0.5s) 
-[                survived] I.5 Thermal pruning changes any Boltzmann average of |f| <= B by at most 2 B exp(-beta*gamma)  (0.2s) max_fraction_of_bound=0.5231
-[                survived] I.4 Exact dominance with chain-local 3-body terms factorises over the blocks of the link graph  (0.8s) 
-[                survived] II.1 Robust minimizers = contact set of the Pasch-Hausdorff envelope (class BD(c))  (5.5s) 
-[                survived] II.2 Robust certification <=> d_c-sharp minimum (x* optimal for ALL residuals in BD(c))  (2.0s) 
-[                survived] II.3 McShane envelopes are admissible, interpolate, and bracket every admissible residual  (0.3s) 
-[                survived] II.4 Witness-size lower bound: every state with gap < (1-kappa) c_min - eps must be an anchor  (0.2s) min_ratio_cert_over_bound=1
+[                survived] I.1 Goldstein value = exact dominance margin (pairwise, product domains)  (0.0s) 
+[                survived] I.2 Goldstein is gauge-invariant; Desmet(gauge) <= Goldstein with equality at explicit gauge  (0.1s) max_slack_of_random_gauge=14.22
+[                survived] I.3 Thermal dominance transport: Z_{i=r} <= exp(-beta*gamma) Z_{i=t}; ln Z error <= ln(1+e^{-beta gamma})  (0.1s) 
+[                survived] I.3b Split (context-dependent) dominance map is injective and transports weight  (0.2s) 
+[                survived] I.5 Thermal pruning changes any Boltzmann average of |f| <= B by at most 2 B exp(-beta*gamma)  (0.1s) max_fraction_of_bound=0.5231
+[                survived] I.4 Exact dominance with chain-local 3-body terms factorises over the blocks of the link graph  (0.5s) 
+[                survived] I.6 Many-to-one thermal transport: Z(A) <= m e^{-beta*gamma} Z(S) for an m-to-one energy-lowering map; Z(A u S) <= (1 + m e^{-beta*gamma}) Z(S)  (0.0s) max_fraction_of_bound=1, multi_fibre_instances=247, injective_formula_violated=86
+[                survived] II.1 Robust minimizers = contact set of the Pasch-Hausdorff envelope (class BD(c))  (4.7s) 
+[                survived] II.2 Robust certification <=> d_c-sharp minimum (x* optimal for ALL residuals in BD(c))  (1.2s) 
+[                survived] II.3 McShane envelopes are admissible, interpolate, and bracket every admissible residual  (0.2s) 
+[                survived] II.4 Witness-size lower bound: every state with gap < (1-kappa) sigma - eps must be an anchor of every eps-certificate  (0.5s) min_cert_over_forced=1, min_cert_over_forced_uniform=1, largest_forced_set_met_with_equality=9, instances=400, asymmetric_cost_instances=100, valid_certificates=30034, forced_nonempty=18405, forced_nonempty_uniform=12609, wrong_eps_sign_caught=6538, kappa_zero_caught=8381
 [                survived] II.5 Exact robust interval: F_beta(E0 + g) lies in [F(E0+lo), F(E0+hi)] incl. beta=inf  (0.2s) 
 [                survived] II.6 Query-model contact theorem: x optimal for some admissible g matching anchors <=> (contact) & (lower(x) <= upper(y))  (0.6s) 
+[                survived] II.7 Residual data are consistent <=> the anchored bounded-difference class is non-empty (McShane witness / LP infeasibility)  (1.2s) consistent=247, inconsistent=153, by_negative_c=47, by_anchor_pair=114, by_duplicate_anchor=42, consistent_no_anchor=80, consistent_duplicate=25, consistent_tight_pair=64
+[                survived] II.8 The robust interval is exact: every value between the envelope optima is attained by an admissible residual (convex combination of the McShane envelopes)  (1.7s) targets_attained=4000, nondegenerate_intervals=335, max_abs_error_minimum=8.882e-16, max_rel_error_partition=7.179e-15
 [                survived] III.1 Gibbs-Bogoliubov + Hoeffding sandwich: 0 <= ln<e^{-b(D-<D>)}> <= b^2 osc^2 / 8  (0.0s) max_fraction_of_bound_attained=0.9952
 [                survived] III.2 McDiarmid sandwich for product references: ln<e^{-b(D-<D>)}> <= b^2 sum c_i^2 / 8  (0.2s) max_fraction_of_bound_attained=0.9967
-[                survived] III.3 Exact extremality: sup over BD(c) of ln<e^{g-<g>}> (product ref) is attained by ADDITIVE two-level g  (30.4s) max_gap_between_bound_and_local_search=0.0685
+[                survived] III.3 Exact extremality: sup over BD(c) of ln<e^{g-<g>}> (product ref) is attained by ADDITIVE two-level g  (29.3s) max_gap_between_bound_and_local_search=0.0685
 [                survived] III.5 Sandwich gap = KL(reference || target): ln<e^{-b D}> + b<D> = sum w ln(w / tilt)  (0.0s) max_abs_diff=7.105e-15
 [                survived] III.4 Hoelder/TRW temperature-rescaled decomposition: F_b(E1+E2) >= F_{b/rho}(E1) + F_{b/(1-rho)}(E2)  (0.0s) 
+[                survived] III.6 Hoeffding sandwich for arbitrary (correlated) references uses the full range: ln<e^{β(g-<g>)}> ≤ β² (Σ c_i)² / 8  (0.2s) max_fraction_of_bound_attained=1, max_ratio_against_sum_of_squares=3.658, references=antipodal:40 atoms:134 gibbs:112 markov:114
 [                survived] IV.1 K-identity: ||K(E)||_F^2 = 4||E||^2 + 2L||diag E||^2 + 2(tr E)^2 for centered symmetric E  (0.0s) 
-[                survived] IV.2 Trace-enhanced spectral obstruction: min_X ||Dhat-Delta(X)||^2 >= 4 sum_{k>r} lam_k^2 + 4/(r+1) tau^2  (8.3s) min_ratio_opt_over_bound=1.008, max_gain_over_strain_bound=2.5
+[                survived] IV.2 Trace-enhanced spectral obstruction: min_X ||Dhat-Delta(X)||^2 >= 4 sum_{k>r} lam_k^2 + 4/(r+1) tau^2  (8.7s) min_ratio_opt_over_bound=1.008, max_gain_over_strain_bound=2.5
 [                survived] IV.3 Trace-enhanced bound is attained when the top-r eigenspace is symmetry-invariant (regular polygons, r = 2)  (0.9s) max_relative_gap=3.749e-13
 [                survived] IV.4 dRMSD <= sqrt(2) RMSD: sum_ij (D_ij(X)-D_ij(Y))^2 <= 2L * Kabsch(X,Y)  (0.0s) max_ratio=1
 [                survived] IV.5 Procrustes-Gram stability: Kabsch_O(3)(X,Y) <= ||Delta(X)-Delta(Y)||^2 / (8(sqrt2-1) sigma_3(X)^2)  (0.0s) max_ratio=0.1798
 [                survived] V.1 Single-torsion Kabsch cost <= 2S - 2 sqrt(S^2 - 4 I_A I_B sin^2(phi/2)) <= 8 I_red sin^2(phi/2)  (0.1s) max_ratio_true_over_bound=0.9826
 [                survived] V.2 Chained reduced-inertia bound: sqrt(Kabsch(theta,theta')) <= sum_k sqrt(coaxial cost_k) along single-torsion path  (0.2s) max_ratio_true_over_bound=0.7159
 [                survived] VI.1 Cycle-holonomy lower bound (bi-invariant metric): sum_k d(ghat_k, x_k^-1 x_{k+1}) >= d(hol, 1)  (0.3s) min_ratio=1.007
-[                survived] VI.2 SE(3) translation holonomy: |t_hol| <= sum_k eps_k + sum_l rho_l * sum_{k>l} |that_k|  (0.3s) 
-[                survived] VII.1 Tree-like branch-and-bound with LP-dual leaves needs >= 2^n leaves on n frustrated triangles  (0.7s) n=1=2, n=2=4
+[                survived] VI.2 SE(3) translation holonomy: |t_hol| <= sum_k eps_k + sum_l rho_l * sum_{k>l} |that_k|  (0.2s) 
+[                survived] VII.1 Tree-like branch-and-bound with LP-dual leaves and dead-end elimination needs exactly 2^m leaves on m frustrated triangles (2m with decomposition)  (5.0s) sum_free=m=1:2 m=2:4 m=3:8 m=4:16 m=5:32, sum_free_with_prune=m=1:2 m=2:4 m=3:8 m=4:16 m=5:32, with_decomposition=m=1:2 m=2:4 m=3:6 m=4:8 m=5:10, exhaustive_searches_equal_to_2_pow_K=52, joint_boxes_validated=412, valid_eliminations_per_triangle=30, unsound_prune_mutation=m=1:1 m=2:1 m=3:1 m=4:1 m=5:1
+[                survived] VII.2 Description length: the peeling certificate with `sum` has dataSize < 147 m^3, and 147 m^3 < 2^m for m >= 21 (sum nodes charged for embedded sub-instances)  (0.0s) actual_crossover_m=20, bound_crossover_m=21
 [                survived] VIII.1 Rational exp enclosure (Taylor + certified remainder + repeated squaring) brackets exp(q)  (0.1s) max_relative_width=3.022e-05
 [                survived] VIII.2 Rational torus atlas: every unit vector is rot(q*90deg) of ((1-t^2)/(1+t^2), 2t/(1+t^2)) with |t| <= 1/2  (0.0s) 
-[                survived] IX.1 Lipschitz oracle lower bound (1-D): n value queries leave certified gap >= Lam/(2n) on the circle  (0.0s) 
-[                survived] X.1 Separable voxel envelope: prod_i int exp(-b psi_i) <= int_box exp(-b E) <= prod_i int exp(-b phi_i)  (0.0s) max_ratio_upper_over_lower=230.4
+[                survived] IX.1 Lipschitz oracle lower bound (1-D): n value queries leave certified gap >= Lam/(2n) on the circle  (0.1s) 
+[                survived] X.1 Separable voxel envelope: prod_i int exp(-b psi_i) <= int_box exp(-b E) <= prod_i int exp(-b phi_i)  (2.7s) instances=200, sandwiches_checked=400, max_ratio_upper_over_lower=5.149e+06, smallest_relative_margin=2.577e-06, max_relative_quadrature_tol=4.908e-11, max_integrator_disagreement=1.358e-14, separable_case_relative_error=1.154e-16, invalid_offset_kappa_4d_caught=55, invalid_taylor_no_enclosure_caught=200, invalid_taylor_quarter_enclosure_caught=8
 [ REFUTED (as documented)] DEAD.1 Dual reparameterization can strictly improve Goldstein pruning for pairwise models  (0.1s) reason=no reparameterization ever changed the Goldstein value (it is a gauge invariant)
 [ REFUTED (as documented)] DEAD.2 Compression-only rank obstruction: ||QAQ||^2 + tr(QA)^2/(r+1) >= tail bound for every corank-r projector Q  (0.0s) reason=compression argument is lossy when the spectrum has mixed signs, lhs=9.157, rhs=21.99
 [ REFUTED (as documented)] DEAD.3 Strain bound alone is within O(1) of the optimal s-stress under uniform bias  (0.0s) reason=trace term dominates: strain bound is loose by a factor growing with L, L=20, ratio=5
-[ REFUTED (as documented)] DEAD.4 Trace-enhanced bound is attained on EVERY vertex-transitive input  (1.4s) reason=bound is strict on the regular simplex L=5, r=3, bound=1.25, optimum=1.304
+[ REFUTED (as documented)] DEAD.4 Trace-enhanced bound is attained on EVERY vertex-transitive input  (1.1s) reason=bound is strict on the regular simplex L=5, r=3, bound=1.25, optimum=1.304
+[ REFUTED (as documented)] DEAD.5 Bounded-difference (McDiarmid) free-energy sandwich holds for correlated (non-product) references  (0.0s) reason=random correlated reference violates the bounded-difference bound, ratio=1.233, lhs=0.06147, rhs=0.04983, n=4, k=2, beta=0.3085, reference=markov, found_at_trial=2
 
 ALL TESTS BEHAVE AS EXPECTED

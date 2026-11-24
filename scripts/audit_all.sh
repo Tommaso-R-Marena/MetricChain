@@ -66,9 +66,9 @@ PY
 
 echo "== [4/4] Python falsification harness and benchmarks =="
 if [ "$FULL" = 1 ]; then
-  python3 experiments/falsify_conjectures.py 2>/dev/null | tail -n 40 || fail "falsification harness"
+  python3 experiments/falsify_conjectures.py 2>/dev/null | tail -n 80 || fail "falsification harness"
 else
-  python3 experiments/falsify_conjectures.py --quick 2>/dev/null | tail -n 40 || fail "falsification harness"
+  python3 experiments/falsify_conjectures.py --quick 2>/dev/null | tail -n 80 || fail "falsification harness"
 fi
 [ "${PIPESTATUS[0]}" = 0 ] || fail "falsification harness reported a misbehaving test"
 if [ -f experiments/separation_benchmarks.py ]; then

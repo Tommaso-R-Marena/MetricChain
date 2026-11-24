@@ -308,6 +308,50 @@ def t_block_separable(rng, trials):
 # Cluster I' — metric-envelope duality for non-decomposable residuals
 # ----------------------------------------------------------------------------------------------
 
+@conjecture("I.6 Many-to-one thermal transport: Z(A) <= m e^{-beta*gamma} Z(S) for an m-to-one energy-lowering map; Z(A u S) <= (1 + m e^{-beta*gamma}) Z(S)")
+def t_transport_fibers(rng, trials):
+    """Lean: partition_transport_fibers, partition_prune_bracket_fibers.  Power check: the injective
+    formula (m replaced by 1) must be violated on instances with a non-injective map."""
+    worst = 0.0
+    injective_formula_violations = 0
+    multi_fibre_instances = 0
+    for trial in range(trials):
+        N = int(rng.integers(3, 12))
+        E = rng.normal(0.0, 1.5, size=N)
+        beta = float(rng.uniform(0.0, 3.0))
+        nS = int(rng.integers(1, N))
+        perm = rng.permutation(N)
+        S, A = perm[:nS].tolist(), perm[nS:].tolist()
+        T = {x: S[int(rng.integers(nS))] for x in A}
+        if trial == 0:  # planted: three degenerate states mapped to one survivor
+            E = np.array([0.0, 0.0, 0.0, 0.0])
+            S, A, T, beta = [0], [1, 2, 3], {1: 0, 2: 0, 3: 0}, 1.0
+        gamma = min(E[x] - E[T[x]] for x in A)  # largest admissible margin (may be negative)
+        if rng.random() < 0.5:
+            gamma -= float(rng.uniform(0.0, 1.0))  # any smaller margin is admissible as well
+        fibres = {}
+        for x in A:
+            fibres[T[x]] = fibres.get(T[x], 0) + 1
+        m = max(fibres.values())
+        ZA = sum(math.exp(-beta * E[x]) for x in A)
+        ZS = sum(math.exp(-beta * E[x]) for x in S)
+        bound = m * math.exp(-beta * gamma) * ZS
+        if ZA > bound * (1 + 1e-12):
+            return False, dict(reason="transport bound violated", ZA=ZA, bound=bound, m=m)
+        if not (ZS <= (ZA + ZS) * (1 + 1e-12) and ZA + ZS <= (1 + m * math.exp(-beta * gamma)) * ZS * (1 + 1e-12)):
+            return False, dict(reason="pruning bracket violated", ZA=ZA, ZS=ZS, m=m)
+        worst = max(worst, ZA / bound)
+        if m > 1:
+            multi_fibre_instances += 1
+            if ZA > math.exp(-beta * gamma) * ZS * (1 + 1e-9):
+                injective_formula_violations += 1
+    if multi_fibre_instances == 0 or injective_formula_violations == 0:
+        return False, dict(reason="test has no power: the injective formula was never violated",
+                           multi_fibre_instances=multi_fibre_instances)
+    return True, dict(max_fraction_of_bound=worst, multi_fibre_instances=multi_fibre_instances,
+                      injective_formula_violated=injective_formula_violations)
+
+
 @conjecture("II.1 Robust minimizers = contact set of the Pasch-Hausdorff envelope (class BD(c))")
 def t_contact_set(rng, trials):
     for _ in range(trials):
@@ -450,8 +494,8 @@ def t_witness_lower_bound(rng, trials):
       * the nominal kappa and the smallest admissible kappa (the exact Lipschitz constant of g).
     Power: the same enumeration must refute two mutated thresholds, (1 - kappa) sigma + eps (sign of
     eps flipped) and sigma - eps (kappa replaced by 0 although the true kappa is positive)."""
-    st = dict(instances=0, valid_certificates=0, forced_nonempty=0, forced_nonempty_uniform=0,
-              wrong_eps_sign_caught=0, kappa_zero_caught=0)
+    st = dict(instances=0, asymmetric_cost_instances=0, valid_certificates=0, forced_nonempty=0,
+              forced_nonempty_uniform=0, wrong_eps_sign_caught=0, kappa_zero_caught=0)
     tight = tight_u = math.inf
     largest_tight = 0
     masks = {}
@@ -501,6 +545,7 @@ def t_witness_lower_bound(rng, trials):
                                            anchors=[configs[a] for a in range(N) if Mk[A, a]], y=configs[y],
                                            gap=float(gap[A, y]), threshold=(1 - kap) * sg - eps)
         st["instances"] += 1
+        st["asymmetric_cost_instances"] += not np.allclose(D, D.T)
         nv = int(valid.sum())
         st["valid_certificates"] += nv
         forced = forced_sets(kappa_eff, gap_global, sigma)               # per-y forced sets (subsets of A)
@@ -1421,16 +1466,11 @@ def triangles_instance(nt):
     return n, edges
 
 
-def lp_bound(n, edges, domains, free_pairs=()):
-    """Local-polytope LP lower bound for cost sum_{(i,j) in edges} [x_i == x_j] on restricted domains (binary).
-
-    `free_pairs`: further pairs of sites that carry pairwise marginals at zero cost.  The dual leaf of the
-    certificate kernel (`LeafOK`) has messages on EVERY pair of sites; by LP duality its best bound on a
-    box is this LP with `free_pairs` = all non-edges (and that equals the LP on the edges alone)."""
+def lp_bound(n, edges, domains):
+    """Local-polytope LP lower bound for cost sum_{(i,j)} [x_i == x_j] on restricted domains (binary)."""
     from scipy.optimize import linprog
     # variables: mu_i(a) for a in {0,1}; mu_ij(a,b)
-    pairs = list(edges) + list(free_pairs)
-    nv = 2 * n + 4 * len(pairs)
+    nv = 2 * n + 4 * len(edges)
     cost = np.zeros(nv)
     Aeq, beq = [], []
     bounds = []
@@ -1441,12 +1481,12 @@ def lp_bound(n, edges, domains, free_pairs=()):
         row[2 * i] = row[2 * i + 1] = 1
         Aeq.append(row)
         beq.append(1)
-    for e, (i, j) in enumerate(pairs):
+    for e, (i, j) in enumerate(edges):
         base = 2 * n + 4 * e
         for a in range(2):
             for b in range(2):
                 bounds.append((0, 1))
-                if a == b and e < len(edges):
+                if a == b:
                     cost[base + 2 * a + b] = 1.0
         for a in range(2):
             row = np.zeros(nv)
@@ -1462,6 +1502,50 @@ def lp_bound(n, edges, domains, free_pairs=()):
             beq.append(0)
     res = linprog(cost, A_eq=np.array(Aeq), b_eq=np.array(beq), bounds=bounds, method="highs")
     return res.fun
+
+
+def leaf_rule_best_bound(h, J, domains):
+    """Largest bound L that the kernel's dual-leaf rule `LeafOK I D L u p m` (CertificateAlgebra.lean) accepts
+    on the box D for SOME claimed values (u, p) and messages m, i.e. the LP
+        maximise   sum_i u_i + sum_{i != j} p_ij
+        subject to u_i <= h_i(a) + sum_{j != i} m_ij(a)                       for all i, a in D_i,
+                   2 p_ij <= J_ij(a, b) + J_ji(b, a) - m_ij(a) - m_ji(b)       for all i != j, a in D_i, b in D_j
+    (messages on every ordered pair of sites, exactly as in the Lean definition)."""
+    from scipy.optimize import linprog
+    n, k = h.shape
+    pairs = [(i, j) for i in range(n) for j in range(n) if i != j]
+    pos = {pr: q for q, pr in enumerate(pairs)}
+    nv = n + len(pairs) * (1 + k)                     # u_i | p_ij | m_ij(a)
+
+    def P(i, j):
+        return n + pos[i, j]
+
+    def M(i, j, a):
+        return n + len(pairs) + pos[i, j] * k + a
+
+    rows, rhs = [], []
+    for i in range(n):
+        for a in domains[i]:
+            row = np.zeros(nv)
+            row[i] = 1.0
+            for j in range(n):
+                if j != i:
+                    row[M(i, j, a)] = -1.0
+            rows.append(row)
+            rhs.append(h[i][a])
+    for i, j in pairs:
+        for a in domains[i]:
+            for b in domains[j]:
+                row = np.zeros(nv)
+                row[P(i, j)] = 2.0
+                row[M(i, j, a)] += 1.0
+                row[M(j, i, b)] += 1.0
+                rows.append(row)
+                rhs.append(J[i][j][a][b] + J[j][i][b][a])
+    cost = np.zeros(nv)
+    cost[: n + len(pairs)] = -1.0
+    res = linprog(cost, A_ub=np.array(rows), b_ub=np.array(rhs), bounds=[(None, None)] * nv, method="highs")
+    return -res.fun
 
 
 def triangles_tables(nt):
@@ -1481,14 +1565,16 @@ def _box(dom):
 
 
 def triangle_block_tables():
-    """Per-triangle tables over the 27 domain states of ONE frustrated triangle:
-    leaf[state]        best bound of a dual leaf (`LeafOK`) = local-polytope LP on the box;
+    """Per-triangle tables over the 27 domain states of ONE frustrated triangle, computed from the rules
+    of the certificate kernel:
+    leaf[state]        best bound of a dual leaf on the box (`LeafOK`, see `leaf_rule_best_bound`);
     prune[state, i, r] dead-end elimination of state r at site i (dominator t = 1 - r) passes `PruneOK`
-                       with margin 0 on the box and removes something (site i still has both states)."""
+                       with margin 0 on the box (best link bounds = Goldstein margin >= 0) and removes
+                       something (site i still has both states)."""
     n, edges, h, J = triangles_tables(1)
     leaf, prune = {}, {}
     for state in itertools.product(range(3), repeat=3):
-        leaf[state] = lp_bound(n, edges, _box(state))
+        leaf[state] = leaf_rule_best_bound(h, J, _box(state))
         for i in range(3):
             for r in range(2):
                 prune[state, i, r] = state[i] == 2 and goldstein(h, J, i, r, 1 - r, _box(state)) >= -1e-9
@@ -1502,7 +1588,8 @@ def bnb_min_leaves_joint(nt, target, use_prune, lp_cache, block_leaf=None):
     decomposition and no symmetry is used.  (With `block_leaf` the joint LP solve is replaced by the sum
     of the per-triangle LP bounds; the boxes and the dominance checks stay joint.)
     Rules, as in `verify` / `Cert.visited`:
-      leaf    closes the box at cost 1 iff the LP (dual) bound of the box is >= target;
+      leaf    closes the box at cost 1 iff the best dual-leaf bound of the box (= its local-polytope LP,
+              `lp_bound`; the equality with `leaf_rule_best_bound` is checked in VII.1) is >= target;
       branch  on a site with both states: both children are visited, costs add up;
       prune   state r of a site with both states, dominated by t = 1 - r with Goldstein margin >= 0 over the
               current box: ONE child (r removed), which must certify the same target; no leaf is charged.
@@ -1579,20 +1666,20 @@ def t_bnb_lower_bound(rng, trials):
     per-triangle states for m <= 4 (m <= 5 in the full run)."""
     full = trials > 100
     leaf, prune = triangle_block_tables()
-    # (0) per-triangle decomposition of the leaf bound and of the dominance check, on random joint boxes
+    # (0) on random joint boxes: best bound of the kernel's leaf rule = local-polytope LP = sum of the
+    #     per-triangle leaf bounds, and the dominance check only involves the triangle of the pruned site
     n_boxes = max(12, trials // 4)
     for b in range(n_boxes):
         nt = 2 + b % 2
         n, edges, h, J = triangles_tables(nt)
         dom = tuple(int(v) for v in rng.choice(3, size=n, p=[0.2, 0.2, 0.6]))
         blocks = [dom[3 * q: 3 * q + 3] for q in range(nt)]
-        non_edges = [(i, j) for i in range(n) for j in range(i + 1, n) if (i, j) not in edges]
-        lp_edges = lp_bound(n, edges, _box(dom))
-        lp_kernel = lp_bound(n, edges, _box(dom), free_pairs=non_edges)
+        lp_primal = lp_bound(n, edges, _box(dom))                    # local-polytope LP on the edges
+        lp_kernel = leaf_rule_best_bound(h, J, _box(dom))             # the kernel's leaf rule on the joint instance
         lp_blocks = sum(leaf[s] for s in blocks)
-        if abs(lp_edges - lp_blocks) > 1e-7 or abs(lp_kernel - lp_blocks) > 1e-7:
-            return False, dict(reason="leaf bound does not decompose over the triangles", box=dom, lp_edges=lp_edges,
-                               lp_all_pairs=lp_kernel, sum_of_blocks=lp_blocks)
+        if abs(lp_primal - lp_blocks) > 1e-7 or abs(lp_kernel - lp_blocks) > 1e-7:
+            return False, dict(reason="leaf bound does not decompose over the triangles", box=dom, lp_primal=lp_primal,
+                               leaf_rule=lp_kernel, sum_of_blocks=lp_blocks)
         for i in range(n):
             for r in range(2):
                 joint_ok = dom[i] == 2 and goldstein(h, J, i, r, 1 - r, _box(dom)) >= -1e-9
@@ -1670,6 +1757,62 @@ def exp_bounds(q: Fraction, n: int = 8):
     lo = max(Fraction(0), T - err)
     hi = T + err
     return lo ** (2 ** k), hi ** (2 ** k)
+
+
+@conjecture("VII.2 Description length: the peeling certificate with `sum` has dataSize < 147 m^3, and 147 m^3 < 2^m for m >= 21 (sum nodes charged for embedded sub-instances)")
+def t_description_length(rng, trials):
+    """Lean: Cert.dataSize, peelCert_dataSize, sum_rule_separation_dataSize.  The certificate tree is
+    rebuilt here and measured with the Lean definition of dataSize, independently of the closed form."""
+    def data_size(node, n, k):
+        kind = node[0]
+        if kind == "leaf":
+            return 1 + n + n * n + n * n * k
+        if kind == "branch":
+            return 1 + sum(data_size(c, n, k) for c in node[1])
+        if kind == "prune":
+            return 1 + n + data_size(node[1], n, k)
+        if kind == "sum":
+            return 1 + 2 * (n * k + n * n * k * k) + data_size(node[1], n, k) + data_size(node[2], n, k)
+        raise ValueError(kind)
+
+    def size(node):
+        kind = node[0]
+        if kind == "leaf":
+            return 1
+        if kind == "branch":
+            return 1 + sum(size(c) for c in node[1])
+        if kind == "prune":
+            return 1 + size(node[1])
+        return 1 + size(node[1]) + size(node[2])
+
+    block = ("branch", [("leaf",), ("leaf",)])
+
+    def peel(j):
+        return block if j == 1 else ("sum", block, peel(j - 1))
+
+    threshold = None
+    for m in range(1, 41):
+        n, k = 3 * m, 2
+        cert = peel(m)
+        ds = data_size(cert, n, k)
+        block_cost = 1 + 2 * (1 + n + n * n + n * n * 2)
+        sum_cost = 1 + 2 * (n * 2 + n * n * 2 * 2)
+        if ds + sum_cost != m * (block_cost + sum_cost):
+            return False, dict(reason="closed form of peelCert_dataSize is wrong", m=m, ds=ds)
+        if size(cert) + 1 != 4 * m:
+            return False, dict(reason="node count of the peeling certificate is not 4m - 1", m=m)
+        if ds > 147 * m ** 3:
+            return False, dict(reason="dataSize exceeds 147 m^3", m=m, ds=ds)
+        if m >= 21 and not 147 * m ** 3 < 2 ** m:
+            return False, dict(reason="147 m^3 < 2^m fails", m=m)
+        if m >= 4 and not 4 * m <= 2 ** m:
+            return False, dict(reason="4 m <= 2^m fails", m=m)
+        if threshold is None and ds < 2 ** m and m > 4:
+            threshold = m
+    # the stated threshold 21 is where the *bound* 147 m^3 drops below 2^m; the actual crossover is earlier
+    if not (147 * 20 ** 3 >= 2 ** 20):
+        return False, dict(reason="threshold m >= 21 for the constant 147 is not sharp any more")
+    return True, dict(actual_crossover_m=threshold, bound_crossover_m=21)
 
 
 @conjecture("VIII.1 Rational exp enclosure (Taylor + certified remainder + repeated squaring) brackets exp(q)")

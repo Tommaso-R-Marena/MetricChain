@@ -153,7 +153,7 @@ were repaired in this cycle; the record of what was wrong is `DEAD_ENDS.md` D14�
 | many-to-one thermal pruning asserted, injective case proved | `partition_transport_fibers`, `partition_prune_bracket_fibers` |
 | the Boltzmann-factor brackets of `Z_encloses_partitionFn` were hypotheses never derived from the certified exponential | `IntervalInstance.lean`: instances computed from interval energy tables, `certified_partition_of_intervals`, and a kernel-evaluated real enclosure `Z_triangle(β=1) ∈ [2.3068, 2.3069]` |
 | trivial non-vacuity witness; anchors required to be exact rationals | new witness forcing every exact certificate to evaluate both states; `ResidualLowerClass`, `verifyR_sound_lower`, `certified_gap_interval` |
-| harness tests X.1, II.4, VII.1 could not fail | rewritten with independent computations, exhaustive certificate enumeration, the prune rule, and built-in power checks; new tests II.7, II.8, III.6, DEAD.5 |
+| harness tests X.1, II.4, VII.1 could not fail | rewritten with independent computations, exhaustive certificate enumeration, the prune rule, and built-in power checks (each test now fails if a deliberately wrong variant of the claim is never caught); 33 mutations of the rewritten tests were run on scratch copies — 32 caught, the remaining one an expected pass; new tests I.6, II.7, II.8, III.6, VII.2, DEAD.5 (41 tests in total) |
 
 The audit also changed one design decision rather than only wording: lower bounds need anchor
 values that are *lower bounds* on the residual, so a producer with floating-point evaluations

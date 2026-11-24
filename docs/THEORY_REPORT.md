@@ -315,7 +315,7 @@ partition function of the box by a factor in `[(1+e^{−βγ})^{-1}, 1]`.  In th
 same rule is checked factor by factor (`PruneZOK`, `zprune_sound` **[V]**): if
 `w_i(r) ≤ q₀ w_i(t)` and `W_ij(r,s) W_ji(s,r) ≤ q_j W_ij(t,s) W_ji(s,t)` for all `s ∈ D_j`, then
 `Z ≤ (1 + q₀ ∏_j q_j) Z'`.  If the dominance map is at most `m`-to-one instead of injective the
-factor becomes `1 + m e^{−βγ}` (`partition_prune_bracket_fibers` **[V]**).  Rounds compose
+factor becomes `1 + m e^{−βγ}` (`partition_prune_bracket_fibers` **[V]**; harness I.6).  Rounds compose
 multiplicatively, so a pruning schedule with margins `γ_k` certifies
 `0 ≤ ln Z − ln Z_pruned ≤ Σ_k ln(1 + m_k e^{−βγ_k})` (`m_k` states mapped to one survivor in
 round `k`).
@@ -812,7 +812,9 @@ certificate (`sum_rule_separation`).  Leaves are not the whole cost — a `sum` 
 sub-instances — so the separation is also proved for the node count (`4m − 1` against `≥ 2^m`,
 `m ≥ 4`: `sum_rule_separation_size`) and for the description length `Cert.dataSize`, which
 charges every node for all rational table entries it stores: below `147 m³` with `sum`, at least
-`2^m` without, for `m ≥ 21` (`sum_rule_separation_dataSize`).
+`2^m` without, for `m ≥ 21` (`sum_rule_separation_dataSize`; harness VII.1 searches all
+sum-free certificates with and without the prune rule up to `m = 5`, VII.2 recomputes the
+description lengths).
 
 *Proof idea of (c).*  Call a block *untouched* while all its sites have both states.  For a
 domain with a witness of block energy `≤ 1` everywhere, (a) with `x'` the complement of `x` on
