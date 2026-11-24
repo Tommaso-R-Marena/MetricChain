@@ -400,7 +400,7 @@ reduction.
   foundation; its first theorem, the sampled sandwich, is machine-checked (Theorem 11.21); the
   kernel itself was not started.
 
-### Resume here (state at the end of cycle 7)
+### State at the end of cycle 7 (superseded by the list at the end of cycle 8)
 
 Verified state: every module under `proofs/` builds with zero warnings and is walked by the axiom
 audit; the harness (58 registered tests: 49 that must survive, 9 documented refutations) and its
@@ -428,3 +428,101 @@ authorised subsequent session should take up:
 7. Items carried over from session 1 that remain open: lower bounds for decomposition-aware
    certificates on connected frustrated families; verified interval evaluation of realistic
    energy terms over voxels; realizability certificates for incomplete distance data.
+
+## Cycle 8 — second referee report; from certificates to algorithms
+
+*Trigger.*  The second independent referee (`reviews/R2_referee_report.md`) reported on the
+second phase, and the directive for this phase asked for matching upper and lower complexity
+bounds, converses and a unified framework.
+
+**Referee findings and what was done.**  No machine-checked statement was false.
+* *Critical:* Theorem 11.15 (exponent of free-energy certificates) was false as stated for
+  exponentially small accuracies (at `ε = 0` every certificate is the whole space).  Corrected
+  (hypothesis `ln(1/ε_n) = o(n)`, proof level `a_n`), counterexample machine-checked
+  (`exact_free_energy_certificate_eq_univ`), D29.  Committed separately as e8ceeab after a full
+  audit.
+* *Major:* the doubling remark after Theorem 11.11 (false with a known part: D30); the planning
+  formula of blueprint §6.6 (per-site maximisation and Boltzmann weights: D31); "second-order
+  envelopes: the way out" (remainder quadratic in the distance; `STARCERT` could loop: D32); the
+  scope of the partition-kernel separation (exact endpoint; representation-dependent rigidity:
+  D33).  All four re-computed independently before the documents were changed
+  (`DEAD.11`–`DEAD.13`, and the gauge instance in Lean).
+* *Minor (17):* all applied; the most substantial is that Theorem 11.5 was true but not sharp —
+  point, value and configuration certificates have the same minimal size (the referee's
+  exchange lemmas, now in `RefereeLemmas.lean`).
+* The referee's verdict on the cluster — "a coherent note, not a theorem-driven paper" — is
+  recorded in theory report §12 and accepted.
+
+**New mathematics (theory report §11.10; `QueryLowerBound.lean`, 1212 lines).**  The referee's
+two constructive requests were an algorithmic statement and a probabilistic notion of
+certificate.
+* *General principle (any class, any functional).*  An `ε/2`-correct deterministic algorithm
+  queries a point where every `ε`-distinguishable alternative differs from the instance; a
+  randomised one with error probability `δ` does so with probability `1 − 2δ`; hence packing
+  lower bounds on (expected) evaluations; conversely, spot-checking a hint is sound.  This is
+  the fractional-block-sensitivity bound of Boolean query complexity and the
+  radius-of-information argument, transplanted.
+* *Minimum.*  Instance-wise deterministic complexity **equals** value-certificate size
+  (`instance_query_complexity`); every randomised algorithm pays `(1 − 2δ)` times each covering
+  bound (`binary_randomized_exponential`: `(1−2δ)(6/5)ⁿ`).  Learn-then-cover reaches the exponent
+  `R*` on additive instances without knowing the residual — this answers the "Algorithms"
+  question left open at the end of cycle 7.
+* *Free energy.*  A dip of depth `c` at `y` multiplies `Z` by `E_π e^{β(c − s(Y,y))₊} ≥
+  e^{βc − Λ(y)}` with the *soft gap* `Λ(y) = ln Z(f+g) − ln Z(f+U_y)`; so every algorithm must
+  reach within slack `(Λ(y) + ε)/β` of every `y`.  Three budgets for a macrostate: energy gap
+  (zero temperature), free-energy gap (deterministic), soft gap (randomised).
+* *Threshold.*  On the cube class the accuracy `n ln cosh(βc/2)` separates a bounded number of
+  random evaluations from exponentially many for every algorithm
+  (`cube_thermal_randomized_bound`; upper bounds on paper, Harper's theorem for attainment).
+
+**Falsification before formalisation.**  Explored numerically first: all sensitive blocks
+against single dips on small spaces (dips are *not* extremal in general — D34, kept as
+`DEAD.14`); the isoperimetric claim on the 4-cube; the predicted exponent against exact ball
+counts up to `n = 1600`; the consistency `R^rand_β ≤ R_β` of the three single-letter formulas
+(benchmark B10).  Harness cluster XII (5 tests) and `DEAD.10`–`DEAD.14`; 12 new mutations, all
+caught.
+
+**Literature (`prior_art/L7`).**  Four searches: fractional block sensitivity / randomised
+certificate complexity (confirmed as the known method); randomised lower bounds for Lipschitz
+optimisation (classical worst-case statements not re-verified; no instance-wise randomised
+statement found); Bachoc–Cesari–Gerchinovitz (deterministic certified algorithms); query lower
+bounds for normalising constants (Ge–Lee–Lu 2020: hidden-perturbation technique, log-concave
+setting).
+
+**Assessment.**  The cluster is now a query-complexity theory rather than a theory of one
+certificate format, with one matching pair (the threshold of Theorem 11.25) and one exact
+identity (certificate size = instance-wise complexity).  The proofs remain short and the tools
+standard; the honest classification is unchanged in kind — a note, plus a formalisation.
+
+### Resume here (state at the end of cycle 8)
+
+Verified state: every module under `proofs/` (35 files) builds with zero warnings and is walked
+by the axiom audit; the harness (68 registered tests: 54 that must survive, 14 documented
+refutations) and its mutation tests (79 mutations: 78 caught, one expected pass) pass;
+`scripts/audit_all.sh` exits 0.
+In priority order:
+
+1. **The randomised exponent at finite temperature** (theory report §12, item 2(b)): prove or
+   refute that single dips are extremal at the exponential scale on product spaces — an
+   asymptotic isoperimetric inequality for the slack quasi-metric (Harper for the uniform cube;
+   Ahlswede–Zhang / Alon–Boppana–Spencer-type results for general product spaces are the place
+   to look).  This would turn the third row of the table of Theorem 11.24 into an equality and
+   make the threshold general.
+2. **A third reading.**  §11.10 has not been refereed.  Commission an independent review of
+   `QueryLowerBound.lean` against the prose (the model of algorithms, the factor `1 − 2δ`, the
+   `ε` versus `ε/2` conventions, the [P] parts of Theorem 11.25) before building on it.
+3. **Beyond product landscapes.**  A pairwise chain as known part: the transfer-matrix form of
+   the lower bounds (zero temperature: theory report §12 item 1(c); the soft gap of a chain is
+   a ratio of transfer-matrix partition functions).
+4. **Algorithms without a hint** on non-additive instances; the exponent on the cube class
+   between `u²/32` and `u²/8`.
+5. **Probabilistic certificate kernel**: a checker for spot-check transcripts with verifier-side
+   randomness; certified detection probabilities.
+6. **Second-order classes**: lower bounds under dense constants; one residual with certified
+   constants; `STARCERT` with a termination guarantee.
+7. Carried over: the exponent of Theorem 11.15 for exponentially small accuracies; an
+   approximate, representation-independent version of the partition-kernel separation;
+   best-first constants and the `f ≡ 0` doubling conjecture; dependent references (D25);
+   `cut`/`elim` nodes in the JSON format; verified interval evaluation of realistic energy
+   terms; realizability certificates for incomplete distance data.
+

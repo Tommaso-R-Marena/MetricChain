@@ -431,6 +431,14 @@ configuration certificate becomes a point certificate after evaluating the candi
 the shell bound holds for configuration certificates up to the candidate and the states it
 covers itself.
 
+*Sharpening (second referee, m2; `RefereeLemmas.lean`).*  The sizes do not differ at all once an
+evaluation is made: exchanging one anchor turns a value certificate, and a configuration
+certificate with at least one evaluation, into a point certificate of at most the same size
+(`value_exchange`, `config_exchange`), so `N_value = N_point` and `N_point = max(1, N_config)`.
+A configuration certificate may still consist of *different* points and skip a state that every
+point certificate contains (`config_certificate_skips_forced_point`) — the refutation above
+stands; what it saves in number is at most the one evaluation needed when none is necessary.
+
 ## D22. The partition-function kernel had no sub-exponential exact certificates on chains — LIMITATION, repaired  **[Lean]**
 
 *Finding (referee, item 4).*  With the rules leaf / branch / thermal prune, an exact enclosure of
@@ -442,8 +450,11 @@ for the stated application to chain molecules.
 *Repair.*  A *cut* rule (bracket `Λ·Z_S·Z_{Sᶜ} ≤ Z ≤ Υ·Z_S·Z_{Sᶜ}` from bounds on the cut factors,
 exact for independent subsystems; `zverify2_sound`) with a machine-checked separation from
 cut-free certificates (`cut_rule_separation`), and an *elimination* rule that sums out a site
-with at most two neighbours (theory report §11.8).  Lower bounds for connected families and a
-comparison with proof systems for model counting remain open.
+with at most two neighbours (theory report §11.8).  For certificates built from the elementary
+rules whose lower end is exact, a lower bound on a connected family is proved
+(`chain_separation`; see D33 for its scope); lower bounds for certificates that use
+decomposition rules, for approximate enclosures, and a comparison with proof systems for model
+counting remain open.
 
 ## D23. Withdrawn sentences (referee, items 5–13)
 
@@ -540,10 +551,16 @@ residuals.
 * *Finite temperature.*  Every certificate of `ln Z` to within `ε` needs at least
   `exp(H(π) − tε/β) / max_a Σ_y e^{−t·slack}` evaluations (`card_ge_entropy`): exponentially many
   in the entropy of the Gibbs ensemble, even for sharp landscapes.
-* *Ways out that work.*  Higher-order structure of the residual (bounded mixed differences:
-  `n(k−1)+1` evaluations give an exact pairwise reduction, `secondOrder_remainder`,
-  `verify_sound_secondOrder`); linear information (one reference average pins `ln Z` to
-  `β²Σc_i²/8`, Theorem 3.1); extensive accuracy.
+* *Ways out, and their limits.*  Higher-order structure of the residual (bounded mixed
+  differences: `n(k−1)+1` evaluations give an exact pairwise reduction, `secondOrder_remainder`,
+  `verify_sound_secondOrder`) — but only under weak second-order coupling (D32); linear
+  information (one reference average pins `ln Z` to `β²Σc_i²/8`, Theorem 3.1) and random
+  evaluations (Theorem 11.21) — but only down to the accuracy of the sandwich: below it every
+  randomised algorithm is exponential as well (Theorem 11.25); extensive accuracy.
+* *Not a property of one certificate format.*  The bounds hold for every algorithm that
+  evaluates the residual, deterministic or randomised (theory report §11.10;
+  `instance_query_complexity`, `expected_queries_ge_exp_weights_min`,
+  `binary_randomized_exponential`).
 
 ## D29. "The finite-temperature exponent holds for every accuracy `ε = o(n)`" — FALSE for exponentially small accuracies  **[Lean]**
 
@@ -564,4 +581,101 @@ exponentially small: `ε_n = o(n)` and `ln(1/ε_n) = o(n)` (the covering level i
 lowered by `a_n = [(k+1) ln(n+1) + ln(4/ε_n)]/(nβ)`).  For exponentially small accuracies the
 construction gives the upper bound `max_Q R(Q; s, (KL(Q‖π) − λ)₊/β)`; a matching lower bound
 is open.  The zero-temperature theorem (11.9) is not affected.
+
+## D30. "In a doubling space the shrunk covers of the best-first bound are within a constant factor of the smallest certificate" — FALSE with a known part  **[harness: DEAD.11]**
+
+*Claim (theory report, remark after Theorem 11.11, up to ee2053f).*  "In a doubling space the
+shrinkage converts into a constant factor."
+
+*Refutation (second referee, M1; re-computed independently).*  `X = {0} ∪ {2^{−i} : 1 ≤ i ≤ m}` on
+the line, `d(x,y) = |x − y|`, `f(x) = x`, `g ≡ 0`, `ε = 2^{−m−3}`.  The point `0` covers every `y`
+at radius `gap(y) + ε` (`N_cov = N_point = 1`); at the shrunk radius `¼(gap(y) + ε/6) < y/2` every
+point is covered only by itself, so every shrunk cover has `m + 1` points (`m = 4, 8, 12`:
+ratio `5, 9, 13`).  Best-first search itself uses at most two evaluations here: the theorem is
+not violated, its comparison class is just unboundedly weaker than `N_cov`.
+
+*What remains.*  For `f ≡ 0` (gaps are then Lipschitz for the envelope) the conversion is a
+conjecture (theory report §12, item 2(e)).
+
+## D31. "The exponent of the product-landscape theorem is obtained with Boltzmann weights, site by site" — FALSE  **[harness: DEAD.12]**
+
+*Claim (blueprint §6.6 Step 2, up to ee2053f; theory report, "Reading" after Theorem 11.9 and
+§12 item 1).*  "The count is … about `exp(Σ_i r_i)` with
+`r_i = max_t [ln Z_i^{gap}(t) − ln Z_i^{slack}(t)]`"; "Boltzmann weights … (two-state sites:
+always)".
+
+*Refutation (second referee, M2; re-computed independently).*  Three separate errors.
+(1) *One slope for all sites.*  Two-state types `(e, c) = (0.5, 1)` and `(5, 10)`, zero residual:
+the per-site maxima add up to `0.3765` per pair, the common-slope value — the true exponent — is
+`0.2329`.  The blueprint's number was not even a lower bound.
+(2) *Boltzmann weights are not optimal for three states.*  Gaps `(0, 0.5, 3)`, `c = 1`:
+`R* = 0.1882` (optimal weights put nothing on the third state), Boltzmann weights give `0.1066`.
+(3) *Nor for two states with a residual.*  `φ = (0, 0.677)`, `γ = (0, 0.644)`, `c = 1`:
+`R* = 0.0252`, the Boltzmann bound is `≤ 0` for every `t`.
+
+*Correct statement.*  The exponent is `max_t Σ_i max_v r_i(t; v)` — one linear program per site
+and slope; the Boltzmann form is a valid lower bound, tight for two-state sites with zero
+residual.
+
+## D32. "Second-order envelopes are the way out" — OVERSTATED: the remainder is quadratic in the distance  **[harness: DEAD.13]**
+
+*Claim (theory report §11.7 title and "resulting picture", README, D28, up to ee2053f).*  With
+bounded mixed second differences `n(k−1)+1` evaluations reduce certification to the pairwise
+kernel — presented as the general way out of the exponential price.
+
+*What was omitted (second referee, M3; re-computed independently).*  Theorems 11.16–11.17 are
+correct, but the half-width of the star envelope is `Σ_{i<j changed} c_ij`, quadratic in the
+Hamming distance, and more evaluations of the same kind do not remove it.  For `n` two-state
+sites with `c_ij = c`: the function `−c·C(|x| − 1, 2)` is in the class (all mixed differences in
+`{0, −c}`), vanishes on the whole Hamming ball of radius 2 and equals `−c(n−1)(n−2)/2` at the
+far corner; and for a set `S` of `w ≤ (n+2)/3` sites the function
+`−c·C(a,2)·C(n−w−b,2)/C(n−w,2)` (`a`, `b` the numbers of changed sites inside and outside `S`)
+is in the class, vanishes on the stars of both corners and equals `−c·C(w,2)` at the indicator
+of `S`.  So with `f(x) = e|x|` neither the radius-2 ball (`n ≥ 2e/c + 3`) nor two opposite stars
+(`n ≥ 6e/c + 6`) certify the minimiser.  The loop `STARCERT` of the blueprint could run forever
+on such an instance; it now has a fallback.
+
+*Correct statement.*  A way out *under weak coupling*: a star certifies iff the second-order
+sharp-minimum condition holds; sufficient is the row-sum condition
+`½ Σ_{j≠i} c_ij ≤` measured single-site excitation energies.  Lower bounds for dense constants
+are open.
+
+## D33. "Exponential separation of the partition kernel on every chain" — NARROWER than described  **[Lean]**
+
+*Claim (theory report §10 row G9, §11.8; blueprint §9, up to ee2053f).*  Certificates without
+decomposition rules need `k^{m+1}` leaves on positive rigid chains, against one leaf with
+elimination.
+
+*Scope (second referee, M4).*  The theorems are true, with two reservations.  (1) *Exact lower
+endpoint only*: a certificate whose lower end is `(1 − 10⁻⁹)Z` is outside them, and approximate
+enclosures are the normal case at finite temperature.  (2) *`WInstance.Rigid` is a property of
+the representation*: it asks that one of the two **ordered** factors of a pair distinguishes the
+states of a site.  The instance `W₀₁(a,b) = 2^{a+2b}`, `W₁₀(b,a) = 2^{−(a+2b)}`, `w ≡ 1` on two
+two-state sites is positive and rigid, every configuration has weight one (two independent
+uniform sites), and the theorem demands four leaves for it (`gauge_trivial_separation`).  What
+is measured there is that the leaf rule bounds the two orientations of a pair separately.
+
+*What remains.*  For the ferromagnetic chain the interaction is genuine and the statement is as
+intended (`ferroChain_separation`).  A representation-independent notion of rigidity (through
+the symmetrised factor `W_ij(a,b)·W_ji(b,a)`, after absorbing rank-one parts) and an approximate
+version of the separation are open.
+
+## D34. "At finite temperature single dips are the extremal perturbations on every instance" — FALSE  **[harness: DEAD.14]**
+
+*Conjecture (own, cycle 8, while looking for a matching upper bound to Theorem 11.24).*  The
+fractional hitting number of the supports of all perturbations that change `ln Z` by more than
+`ε` equals that of the single-dip balls; so the dip bound would be the exact randomised query
+complexity at every instance.
+
+*Refutation.*  Uniform metric on `n = 8` points, `f = g = 0`, `β = 1`, `ε = 0.3`.  A set `D`
+supports an admissible perturbation of effect `ln(1 + |D|(e^β − 1)/n)`, which exceeds `ε` iff
+`|D| ≥ 2`: two shallow dips at different points add up.  Every correct randomised algorithm
+must therefore hit every pair, i.e. needs about `n/2 = 4` evaluations (fractional hitting
+number `4`), whereas no single dip supported on one point is sensitive, and the dip bound gives
+`1`.  On random small instances the ratio between the two numbers was up to `2.7`.
+
+*What survives.*  The dip bound is a valid lower bound (Theorems 11.22–11.24).  On the uniform
+cube Hamming balls *are* extremal (Harper's theorem; harness XII.5), which gives the matching
+upper bound of Theorem 11.25(c).  For product spaces extremality at the exponential scale is a
+conjecture (theory report §12, item 2(b)).
 

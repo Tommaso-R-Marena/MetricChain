@@ -275,6 +275,45 @@ MUTS["XI"] = [
        "    ncov = cg_min_cover(cg_slack(d, g) <= 0.25 * ((f - f.min())[None, :] + 0.1 / 6) + 1e-12)")], "DEAD.6"),
 ]
 
+MUTS["XII"] = [
+    ("XII.1 M1: dip built from the transposed envelope (d(y, a) instead of d(a, y))",
+     [("    return np.minimum(g, g[y] - c + d[:, y])", "    return np.minimum(g, g[y] - c + d[y, :])")], "XII.1"),
+    ("XII.1 M2: effect of a dip claimed to be at least beta c (soft gap dropped)",
+     [("                if math.log(ratio) < beta * c - soft - 1e-9:", "                if math.log(ratio) < beta * c - 1e-9:")],
+     "XII.1"),
+    ("XII.2 M1: factor (1 - delta) instead of (1 - 2 delta)",
+     [("        if (1 - 2 * delta) * pack > cost + 1e-7:\n            return False, dict(reason=\"expected evaluations below (1 - 2 delta) * packing\"",
+       "        if (1 - delta) * pack > cost + 1e-7:\n            return False, dict(reason=\"expected evaluations below (1 - 2 delta) * packing\"")],
+     "XII.2"),
+    ("XII.2 M2: detection balls of half the radius (a larger packing is claimed)",
+     [("        B = s < (gap[None, :] + epsp)                     # the detection relation claimed by the theorem",
+       "        B = s < 0.5 * (gap[None, :] + epsp)")], "XII.2"),
+    ("XII.3 M1: thermal detection radius without the soft gap",
+     [("        c = (soft + eps) / beta + 1e-7                    # a depth with beta c > softgap + eps",
+       "        c = eps / beta + 1e-7 + 0 * soft")], "XII.3"),
+    ("XII.3 M2: thermal detection balls of half the radius in the packing",
+     [("        B = s < c[None, :]                                # the detection relation claimed by the theorem",
+       "        B = s < 0.5 * c[None, :]")], "XII.3"),
+    ("XII.4 M1: closed balls of radius gap + eps instead of gap + eps/2",
+     [("        balls = [np.array([s[a, y] <= gap[y] + eps / 2 + 1e-12 for a in range(n)]) for y in range(n)]",
+       "        balls = [np.array([s[a, y] <= gap[y] + eps + 1e-12 for a in range(n)]) for y in range(n)]")], "XII.4"),
+    ("XII.4 M2: the block of near-minimisers replaced by the whole space (upward alternatives ignored)",
+     [("        p = min([float(q[b].sum()) for b in balls] + [float(q[nearmin].sum())])",
+       "        p = min([float(q[b].sum()) for b in balls if b.sum() > 1] + [1.0])")], "XII.4"),
+    ("XII.5 M1: an initial segment in binary order claimed optimal instead of the Hamming ball",
+     [("                ball = [x for x in range(N) if dist[0, x] <= r]\n                comp = [x for x in range(N) if dist[0, x] > r]",
+       "                ball = list(range(size))\n                comp = list(range(size, N))")], "XII.5"),
+    ("DEAD.10 M1: accuracy eps = 0.5 instead of 0 (certificates then exist) -> must be flagged UNEXPECTEDLY SURVIVED",
+     [("            if width <= 1e-12:\n                found_proper = True", "            if width <= 0.5:\n                found_proper = True")],
+     "DEAD.10"),
+    ("DEAD.11 M1: known part f = 0 on the dyadic line (the shrunk covers are then small) -> must be flagged UNEXPECTEDLY SURVIVED",
+     [("        gap = X - X.min()\n        ncov = cg_min_cover(d <= gap[None, :] + eps)", "        gap = 0 * X\n        ncov = cg_min_cover(d <= gap[None, :] + eps)")],
+     "DEAD.11"),
+    ("DEAD.14 M1: a deeper perturbation scale (beta = 3: single local dips are sensitive) -> must be flagged UNEXPECTEDLY SURVIVED",
+     [("    n, beta, eps = 8, 1.0, 0.3\n    d = np.ones((n, n)) - np.eye(n)\n    blocks = []", "    n, beta, eps = 8, 3.0, 0.3\n    d = np.ones((n, n)) - np.eye(n)\n    blocks = []")],
+     "DEAD.14"),
+]
+
 which = sys.argv[1:] or list(MUTS)
 for key in which:
     for item in MUTS[key]:

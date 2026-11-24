@@ -427,6 +427,92 @@ def bench_best_first(rng, quick):
     return rows
 
 
+# ----------------------------------------------------------------------------------------------
+# B10. Query complexity of every algorithm.  Three single-letter exponents for one site — zero temperature (R*, all
+#      algorithms), finite temperature deterministic (R_beta, certificates), finite temperature randomised (lower
+#      bound R^rand_beta, distortion budget = soft gap) — and the accuracy threshold on the uniform cube.
+# ----------------------------------------------------------------------------------------------
+def lp_rate(rho, t):
+    """max over weights v >= 0 of ln(sum v) subject to sum_s v(s) exp(-t rho(a, s)) <= 1 for every a."""
+    from scipy.optimize import linprog
+    A = np.exp(-t * np.asarray(rho, dtype=float))
+    col = A.max(axis=0)
+    res = linprog(-1.0 / col, A_ub=A / col, b_ub=np.ones(len(A)), bounds=(0, None), method="highs")
+    if res.status != 0 or -res.fun <= 0:
+        return float("-inf")
+    return math.log(-res.fun)
+
+
+def randomized_rate(e, c, beta, eps1=0.0, grid=801):
+    """R^rand_beta(eps1) = max_t max_v [ln sum v - ln max_a sum_s v(s) exp(-t (s(a,s) - (lam(s) + eps1)/beta))],
+    lam(s) = -ln sum_a pi(a) exp(-beta s(a, s)) the soft gap of the letter s; and the critical accuracy per site
+    eps1_crit = max_P min_a E_P[beta s(a, .) - lam] (value of a zero-sum game)."""
+    from scipy.optimize import linprog
+    E = np.array([0.0, e])
+    pi = np.exp(-beta * E)
+    pi /= pi.sum()
+    slack = np.array([[0.0, c], [c, 0.0]])
+    lam = -np.log(np.exp(-beta * slack).T @ pi)
+    rate = max(0.0, max(lp_rate(slack - ((lam + eps1) / beta)[None, :], t) for t in np.linspace(0.0, 40.0, grid)))
+    M = beta * slack - lam[None, :]
+    res = linprog([0, 0, -1], A_ub=np.hstack([-M, np.ones((2, 1))]), b_ub=np.zeros(2), A_eq=[[1, 1, 0]], b_eq=[1],
+                  bounds=[(0, None), (0, None), (None, None)], method="highs")
+    return rate, float(-res.fun)
+
+
+def cube_hitting_exponent(n, u, eps):
+    """(1/n) ln (2^n / |B(r*)|), r* the least radius whose Hamming ball supports a perturbation of ln Z by more
+    than eps on the uniform cube (c-Lipschitz class, u = beta c): the randomised query complexity at g = 0 up to
+    factors polynomial in n (Harper's isoperimetric theorem)."""
+    logc = [math.lgamma(n + 1) - math.lgamma(k + 1) - math.lgamma(n - k + 1) for k in range(n + 1)]
+
+    def logsum(terms):
+        m = max(terms)
+        return m + math.log(sum(math.exp(x - m) for x in terms))
+
+    def effect(r):
+        return logsum([logc[k] + (u * (r + 1 - k) if k <= r else 0.0) for k in range(n + 1)]) - n * math.log(2)
+
+    lo, hi = -1, n
+    while hi - lo > 1:
+        mid = (lo + hi) // 2
+        if effect(mid) > eps:
+            hi = mid
+        else:
+            lo = mid
+    return (n * math.log(2) - logsum(logc[: hi + 1])) / n
+
+
+def bench_query_complexity(rng, quick):
+    section("B10. Query complexity of every algorithm: three exponents for one site, and the threshold on the cube")
+    rows = []
+    grid = 401 if quick else 801
+    for e in (0.5, 2.0):
+        print(f"two-state site, excitation e = {e}, envelope constant c = 1, zero residual; "
+              f"zero-temperature exponent R* = {binary_rstar(e) if e < 1 else 0.0:.4f}")
+        print(f"{'beta':>6} | {'H(pi)':>7} | {'R_beta (certificates)':>21} | {'R^rand_beta (all algorithms, >=)':>32} | {'eps1_crit':>9}")
+        for beta in ((0.5, 1.0, 4.0, 40.0) if quick else (0.25, 0.5, 1.0, 2.0, 4.0, 10.0, 40.0)):
+            Rb, H = thermal_rate(e, 1.0, beta, rng)
+            Rr, crit = randomized_rate(e, 1.0, beta, grid=grid)
+            rows.append(dict(e=e, beta=beta, entropy=H, R_beta=Rb, R_rand=Rr, eps1_crit=crit))
+            print(f"{beta:6.2f} | {H:7.4f} | {Rb:21.4f} | {Rr:32.4f} | {crit:9.4f}")
+            if Rr > Rb + 1e-3:
+                raise RuntimeError("randomised lower bound exceeds the deterministic exponent")
+    print("\nuniform cube (e = 0; the deterministic exponent is ln 2 = 0.6931 for every beta):")
+    print(f"{'u=beta*c':>8} | {'ln2 - h(rho0)':>13} | {'LP value':>9} | {'threshold ln cosh(u/2)':>22} | {'game value':>10} | "
+          + " | ".join(f"n={n}" for n in ((100, 400) if quick else (100, 400, 1600))) + "   [(1/n) ln(2^n/|B(r*)|), eps = 0.5]")
+    hb = lambda x: -x * math.log(x) - (1 - x) * math.log(1 - x)
+    for u in (0.5, 1.0, 2.0, math.log(16.0)):
+        rho0 = math.log(2.0 / (1.0 + math.exp(-u))) / u
+        Rr, crit = randomized_rate(0.0, 1.0, u, grid=grid)
+        vals = [cube_hitting_exponent(n, u, 0.5) for n in ((100, 400) if quick else (100, 400, 1600))]
+        rows.append(dict(u=u, closed_form=math.log(2) - hb(rho0), lp=Rr, threshold=math.log(math.cosh(u / 2)), game=crit,
+                         finite_n=vals))
+        print(f"{u:8.3f} | {math.log(2) - hb(rho0):13.5f} | {Rr:9.5f} | {math.log(math.cosh(u / 2)):22.5f} | {crit:10.5f} | "
+              + " | ".join(f"{v:.5f}" for v in vals))
+    return rows
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true")
@@ -444,6 +530,7 @@ def main():
         "B7_torsion": bench_torsion(rng, args.quick),
         "B8_exponent": bench_exponent(rng, args.quick),
         "B9_best_first": bench_best_first(rng, args.quick),
+        "B10_query_complexity": bench_query_complexity(rng, args.quick),
     }
     if args.json:
         os.makedirs(os.path.dirname(os.path.abspath(args.json)), exist_ok=True)

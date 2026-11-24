@@ -10,7 +10,7 @@ data.  Every theorem marked **[V]** is machine-checked in Lean 4 + Mathlib (`pro
 here on paper only; **[K]** marks known results that are cited.  The falsification status of every
 claim is in `experiments/falsify_conjectures.py`; refuted or repaired claims are in
 `DEAD_ENDS.md`.  Literature checks with search logs are in `prior_art/`.  All benchmark numbers
-quoted below (B1–B9) are from one run of `experiments/separation_benchmarks.py` (seed 7), whose
+quoted below (B1–B10) are from one run of `experiments/separation_benchmarks.py` (seed 7), whose
 output is stored in `benchmarks_output.txt`.
 
 ---
@@ -74,8 +74,9 @@ models and non-decomposable residuals; (ii) temperature-aware dominance and voxe
 *certificate rules* (D1, D3, D4); (iii) finite-angle torsion-to-RMSD certificates and the
 resulting envelope for SE(3)-invariant residuals (C4); and (iv) a machine-checked certificate
 algebra and library covering all of it, including formalizations (to our knowledge new in Lean)
-of several known results.  The results of the second research phase (§§10–12; rows G1–G9 of §10), which
-were developed in response to that assessment, are classified separately there.
+of several known results.  The results of the second research phase (§§10–12; rows G1–G11 of §10), which
+were developed in response to that assessment and were themselves reviewed by a second independent
+referee (`reviews/R2`), are classified separately there.
 
 ---
 
@@ -353,18 +354,21 @@ is false for certificates of an ε-optimal *configuration*: for `X = {0,1}`, `d 
 residual with no evaluation at all.  States separated from the candidate by the white-box part
 alone cost nothing.  The true statements are:
 
-* *value certificates* (`min(E₀+U) − min(E₀+L) ≤ ε`): `A` contains every `y` with
+* *value certificates* (`min(E₀+U) − min(E₀+L) ≤ ε`) **[V]**: `A` contains every `y` with
   `(E₀+Δ)(y) − min(E₀+Δ) < (1−κ)σ − ε`;
-* *configuration certificates* for `x̂` (every consistent residual makes `x̂` ε-optimal): `A`
-  contains every `y ≠ x̂` with `E₀(y) − E₀(x̂) < d(x̂,y) − ε` **and**
+* *configuration certificates* for `x̂` (every consistent residual makes `x̂` ε-optimal) **[P]**:
+  `A` contains every `y ≠ x̂` with `E₀(y) − E₀(x̂) < d(x̂,y) − ε` **and**
   `(E₀+Δ)(y) − (E₀+Δ)(x̂) < (1−κ)σ − ε`.
 
+Here "`y` is `σ`-separated" means `d(a,y) ≥ σ` for the anchors `a ≠ y` — distances *from* the
+anchors *to* `y`; for asymmetric envelopes the transposed reading is false (second referee, m9).
 Moreover the theorem is only the first layer (radii below the separation `σ`) of a covering
 statement which has a converse.  Both points are the subject of §11: the three certificate
-notions are characterised exactly as covering conditions in a *slack quasi-metric* and differ by
-at most one evaluation (Theorems 11.3–11.5), and the single forced-point count above is replaced
-by linear-programming and rate–distortion bounds with a matching upper bound for product
-landscapes (Theorems 11.6–11.9).
+notions are characterised exactly as covering conditions in a *slack quasi-metric* and have the
+same minimal size, the covering number or one more (Theorems 11.3–11.5), and the single
+forced-point count above is replaced by linear-programming and rate–distortion bounds with a
+matching upper bound for product landscapes (Theorems 11.6–11.9).  By §11.10 the same bounds
+hold for every algorithm, not only for certificates of these formats.
 
 The mechanism of Theorem 2.7 is the `(1 − Lip f/L)` adversary of Bachoc, Cesari and Gerchinovitz
 (NeurIPS 2021, Thm 2), at the finest scale; the notion of a minimal certificate goes back to
@@ -517,7 +521,8 @@ certificates for `n ≤ 5` confirms that with half as many leaves the best achie
 `hi/lo` is still `≥ 1.22`).  With these three rules alone the pipeline "certified partition
 functions for chain molecules" has no sub-exponential certificates.  The repair — two further
 verified rules, a *cut* rule for (nearly) independent subsystems and an *elimination* rule that
-sums out a site with at most two neighbours and is exact on trees, chains and all interaction
+sums out a site with at most two neighbours — exact on every chain (machine-checked), on the
+tree and ring instances evaluated by the kernel, and by a paper argument on all interaction
 graphs of treewidth at most two — is in §11.8.
 
 *Voxels.*  For a measurable voxel `V` of finite volume with `E_lo ≤ E ≤ E_hi` on `V`,
@@ -1069,23 +1074,33 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   constants for a concrete learned residual is not part of this development.
 * **Worst-case geometry bounds** (Theorem 4.6 is `ℓ¹`; Theorem 4.3 is tight only for symmetric
   inputs, and within `√((L+2)/2)` only when the trace-shifted solution is positive semidefinite).
-* **The exponent theorems of §11 are half formal.**  The lower bounds (Theorems 11.8, 11.13 and
-  their product forms) are machine-checked for every system size; the matching upper bounds
-  (Theorems 11.9, 11.15) are paper proofs through the type covering lemma, for independent sites
-  of finitely many types, and were checked numerically only.
-* **Certificate size is not algorithmic cost.**  §11 counts residual evaluations.  Finding a
-  small certificate is NP-hard (Theorem 11.10), no search procedure is instance-optimal
-  (`DEAD_ENDS.md` D26), and checking a certificate on a product space is itself a pairwise
-  optimisation problem, handled by the branch-and-bound certificates of §6.
-* **Second-order envelopes are an interface without an instance.**  No concrete residual with
-  certified mixed-difference constants is provided.
+* **The exponent theorems of §11 are half formal.**  The lower bounds (Theorems 11.8, 11.13,
+  11.23, 11.24 and their product forms) are machine-checked for every system size; the matching
+  upper bounds (Theorems 11.9, 11.15, 11.25(b,c)) are paper proofs through the type covering
+  lemma or Harper's theorem, for independent sites of finitely many types; numerically, the
+  single-letter identities and, for two-state sites, exact layer and ball counts were checked,
+  not achievability at finite size in general.  Theorem 11.15 needs accuracies that are not
+  exponentially small (`DEAD_ENDS.md` D29).
+* **Evaluations are counted, not computation.**  §11 counts residual evaluations; by §11.10 the
+  lower bounds hold for every algorithm, also randomised.  Finding a small certificate is
+  NP-hard (Theorem 11.10), no search procedure is instance-optimal (`DEAD_ENDS.md` D26), and
+  *checking* a certificate with anchors `A` on a product space is a `min_y max_{a ∈ A}` problem
+  over pairwise models — coNP-hard in general (covering radius) and, in the non-sharp regime,
+  over an exponentially large `A`; the kernels avoid this only through explicit
+  branch-and-bound certificates (§6).
+* **Second-order envelopes are an interface without an instance, and help only under weak
+  coupling.**  No concrete residual with certified mixed-difference constants is provided, and
+  the remainder of the star envelope grows with the square of the Hamming distance: with dense
+  constants the exponential covering problem returns (§11.7; `DEAD_ENDS.md` D32).
 * **No claim of practical performance.**  All experiments are synthetic and small; they check
   tightness and scaling of bounds, not solver speed.
 * **Unformalized statements** are marked [P] or [K]: the hardness half of the link-graph
   dichotomy, the Taylor step and the complexity count for second-order voxels,
   dependent-reference sandwiches and Rio's sharp function, the Procrustes–Gram corollary, the
   converse (Donsker–Varadhan) half of Theorem 11.14, the upper bounds of Theorems 11.9 and
-  11.15, and the complexity-theoretic reading of Theorem 11.10.
+  11.15, the complexity-theoretic reading of Theorem 11.10, the elimination rule beyond chains,
+  attainment in Theorem 11.18 for non-zero ball data, the learn-then-cover remark and the
+  single-letter and upper-bound parts of Theorems 11.24–11.25.
 * **Certified numerics outside Lean.**  Eigenvalue enclosures needed to *evaluate* the spectral
   bound of §4.1 on data are standard verified numerics but are not part of the development.
 
@@ -1126,6 +1141,8 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/HigherOrderEnvelope.lean` | `mixedDiff`, `HigherDiffBound`, `anchoredInterp`, `anchored_decomposition`, `higherOrder_remainder`, `higherOrder_remainder_of_vanish`, `higherRemainder_higherDiffBound`, `higherOrder_remainder_sharp`, `secondOrder_remainder_of_higherOrder`, `higherOrder_witness` |
 | `proofs/Frontiers/SampledSandwich.lean` | `sampleWeight`, `empMean`, `sample_mgf`, `sample_mean_two_sided`, `sandwich_of_mean_estimate`, `sampled_free_energy_sandwich`, `sampled_free_energy_sandwich_good`, `sampled_free_energy_sandwich_of_sample_size` |
 | `proofs/Frontiers/PartitionProduct.lean` | `ZCert2`, `zverify2`, `zverify2_sound`, `zverify2Top_sound`, `WInstance.Z_cut`, `WInstance.Z_cut_eq`, `WInstance.Z_elim1`, `WInstance.Z_elim2`, `chainCert`, `zverify2Top_chainCert`, `zverify2_elementary_exact_leaves`, `cut_rule_separation`, `elimination_separation`, `chain_separation`, `ferroChain_separation`, kernel-evaluated instances (`twoTriangles_cut_exact`, `chain_elim_exact`, `tree_elim_exact`, `ring_elim_exact`) |
+| `proofs/Frontiers/RefereeLemmas.lean` | `config_exchange`, `value_exchange`, `card_exchange_le`, `exact_free_energy_certificate_eq_univ`, `gaugeW`, `gauge_trivial_separation` (lemmas of the second referee) |
+| `proofs/Frontiers/QueryLowerBound.lean` | `QueryAlgorithm`, `exists_query_ne`, `prob_query_ne_ge`, `card_queries_ge_packing`, `expected_queries_ge_packing`, `dip`, `dip_eq_sub`, `queries_cover_of_sensitive`, `expected_queries_ge_of_radius`, `expected_queries_ge_exp_weights`, `queries_strict_cover`, `queries_isValueCertificate`, `certificateAlgorithm_correct`, `instance_query_complexity`, `expected_queries_ge`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `softGap`, `sum_exp_dip`, `log_sum_exp_dip_ge`, `thermal_queries_strict_cover`, `thermal_queries_bracket`, `thermal_expected_queries_ge`, `cube_thermal_randomized_bound`, `cube_thermal_randomized_exponential`, `spotCheck`, `spotCheck_correct` |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -1141,18 +1158,30 @@ partition-function kernel was too weak for chains.**  The corrections are in pla
 named the one route to a mathematical contribution in the envelope cluster — *matching upper and
 lower bounds on certificate size* — and that is what the second phase pursued (§11).
 
+The second phase was then reviewed by a second independent referee (`reviews/R2_referee_report.md`).
+Again no machine-checked statement was false; **one paper theorem was false as stated**
+(Theorem 11.15, for exponentially small accuracies), four claims were overstated (the doubling
+remark after Theorem 11.11, the planning formula of the blueprint, "second-order envelopes: the
+way out", the scope of the partition-kernel separation), and Theorem 11.5 was true but not
+sharp.  All of this is corrected below (marked "second referee") and recorded as
+`DEAD_ENDS.md` D29–D33; the referee's four machine-checked lemmas are part of the development
+(`RefereeLemmas.lean`).  The referee's two requests that went beyond corrections — an
+algorithmic statement, and a probabilistic notion of certificate — are the subject of §11.10
+(row G11).
+
 | # | Result of the second phase | Lean | Classification after `prior_art/L4`–`L6` |
 |---|---|---|---|
-| G1 | **Certificates are coverings in the slack quasi-metric** `s(a,y) = d(a,y) − g(a) + g(y)`: `LB(A) = min_y [E(y) − s(A,y)]`; `A` certifies ⇔ every `y` lies within slack radius `E(y) − UB(A) + ε`; point, value and configuration certificates differ by at most one evaluation | `isCertificate_iff_cover`, `cover_of_certificate`, `certificate_of_cover`, `cover_of_isValueCertificate`, `isCertificate_insert_of_isConfigCertificate` **[V]** | **reformulation** of a known notion (minimal certificates / proof sets / `τ`: Hansen–Jaumard–Lu 1991, Baran–Demaine 2004, Bachoc et al. 2021); the slack form with a known part and an asymmetric envelope was not found |
-| G2 | **Conditional envelope** `D_A(x,y) = min(d(x,y), U(x) − L(y))`: exact supremum of `g(x) − g(y)` over consistent residuals; anchored sharp-minimum theorem; worst-case regret | `condEnv_isGreatest`, `robust_certified_with_anchors_iff`, `worst_case_regret_isGreatest` **[V]** | **known** (minimal simple temporal network; LIPO); stated for completeness |
+| G1 | **Certificates are coverings in the slack quasi-metric** `s(a,y) = d(a,y) − g(a) + g(y)`: `LB(A) = min_y [E(y) − s(A,y)]`; `A` certifies ⇔ every `y` lies within slack radius `E(y) − UB(A) + ε`; point, value and configuration certificates have the same minimal size, `N_cov` or `N_cov + 1` | `isCertificate_iff_cover`, `cover_of_certificate`, `certificate_of_cover`, `cover_of_isValueCertificate`, `value_exchange`, `config_exchange` **[V]** | **reformulation** of a known notion (minimal certificates / proof sets / `τ`: Hansen–Jaumard–Lu 1991, Baran–Demaine 2004, Bachoc et al. 2021); the slack form with a known part and an asymmetric envelope was not found |
+| G2 | **Conditional envelope** `D_A(x,y) = min(d(x,y), U(x) − L(y))`: exact supremum of `g(x) − g(y)` over consistent residuals; anchored sharp-minimum theorem; worst-case regret | `condEnv_isGreatest`, `robust_certified_with_anchors_iff`, `worst_case_regret_isGreatest` **[V]** | **known** (minimal simple temporal network); stated for completeness |
 | G3 | **Dual lower bounds** on certificate size: LP weights, forced points, fooling sets, volume, and the exponential-weights bound `e^{−tε} Σ_y v(y) ≤ \|A\| · max_a Σ_y v(y) e^{−t(s(a,y) − gap(y))}` | `card_ge_of_weights`, `card_ge_of_fooling`, `card_ge_sum_inv`, `card_ge_exp_weights`, `partition_bound` **[V]** | tools **known** (covering LP; Csiszár's dual bound on rate–distortion); the use for certificate size: no match found |
 | G4 | **Dichotomy and exact exponent on product landscapes**: one evaluation suffices iff every site is sharp; otherwise the minimal certificate grows like `exp(n R*)`, `R* = max_P R(P; s − gap, 0)` | `product_single_certificate_iff`, `product_exp_weights`, `binary_certificate_exponential` **[V]** (lower bound, every `n`); upper bound **[P]** (type covering) | **no match found**; an application of the type covering lemma |
 | G5 | **Hardness**: minimal exact certificates contain minimum dominating sets | `domCertificate_card`, `domCertificate_min_card` **[V]** | immediate; known in spirit (k-center) |
-| G6 | **Best-first search with resource augmentation**: at most `\|C\| + 1` evaluations for every cover `C` at radii `θ(gap + ε/6)`, `θ = (1−κ)/(4(1+κ))`; augmentation is necessary | `bestFirst_card_le`, `bestFirst_certifies`, `bestFirst_card_le_sharp` **[V]** | **partially known** (dimension one without augmentation; `ℝ^d` with doubling constants); the dimension-free metric form was not found |
+| G6 | **Best-first search with resource augmentation**: at most `\|C\| + 1` evaluations for every cover `C` at radii `θ(gap + ε/6)`, `θ = (1−κ)/(4(1+κ))`; the `+1` is attained | `bestFirst_card_le`, `bestFirst_certifies`, `bestFirst_card_le_sharp` **[V]**; that some augmentation is necessary is shown by the hub family (harness `DEAD.6`), not by a theorem; the constants are not claimed tight | **partially known** (dimension one without augmentation; `ℝ^d` with doubling constants); the dimension-free metric form was not found.  With a known part the comparison class can be unboundedly larger than `N_cov` even on the line (D30) |
 | G7 | **Finite temperature**: thermal contact interval; free-energy certificates are quantizers of the Gibbs ensemble in exponential slack distortion; entropy bound; Hölder exponential-weights converse; exact exponent `R_β = max_Q R(Q; s, (F[Q] − F))` for accuracies that are not exponentially small | `gibbsProb_range_eq`, `mean_slack_le`, `card_ge_entropy`, `thermal_exp_weights`, `thermal_product_exp_weights`, `thermal_binary_exponential` **[V]**; exponent formula **[P]** | contact interval and fixed-`β` duality **known in spirit**; the exponent formula is a corollary of Merhav's (2011) theorem on exponential moments of distortion; the identification of certificate size with it, and the one-shot converses: no match found |
-| G8 | **Second-order envelopes**: with bounded mixed differences, `n(k−1)+1` evaluations on a star give an exact pairwise sandwich; the extremal extensions are pairwise models; certified-minimiser criterion; order `m` in general | `secondOrder_remainder`, `pairwise_sandwich`, `verify_sound_secondOrder`, `secondOrder_envelope_exact`, `secondOrder_certified_minimizer_iff`, `higherOrder_remainder`, `higherOrder_remainder_sharp` **[V]** | anchored (cut-HDMR) decomposition **known**; as a certified uncertainty class with an exact reduction to the pairwise kernel: no match found |
+| G8 | **Second-order envelopes**: with bounded mixed differences, `n(k−1)+1` evaluations on a star give an exact pairwise sandwich; the extremal extensions are pairwise models; certified-minimiser criterion; order `m` in general.  The remainder is quadratic in the Hamming distance, so this is a way out only under weak second-order coupling (D32) | `secondOrder_remainder`, `pairwise_sandwich`, `verify_sound_secondOrder`, `secondOrder_envelope_exact`, `secondOrder_certified_minimizer_iff`, `higherOrder_remainder`, `higherOrder_remainder_sharp` **[V]** | anchored (cut-HDMR) decomposition **known**; as a certified uncertainty class with an exact reduction to the pairwise kernel: no match found |
 | G10 | **Sampled free-energy sandwich**: `N` independent samples of a product reference pin `ln(Z/Z₀)` to `±\|β\|η + β²Σc_i²/8` outside an event of probability `2e^{−2Nη²/Σc_i²}` — polynomially many random evaluations where deterministic certification needs exponentially many | `sample_mean_two_sided`, `sampled_free_energy_sandwich`, `sampled_free_energy_sandwich_of_sample_size` **[V]** | standard concentration (Chernoff bound for a sub-Gaussian mean); stated as the constructive counterpart of G7 |
-| G9 | **Compositional partition kernel**: cut rule and elimination rule (exact on every chain, with one leaf), with exponential separations from the elementary rules for every chain length | `zverify2_sound`, `WInstance.Z_cut`, `cut_rule_separation`, `WInstance.Z_elim1`, `WInstance.Z_elim2`, `zverify2Top_chainCert`, `chain_separation`, `ferroChain_separation` **[V]** | repair of the kernel; variable elimination is classical; the separation is the formal counterpart of E2 at finite temperature |
+| G9 | **Compositional partition kernel**: cut rule and elimination rule (exact on every chain, with one leaf), with exponential separations from the elementary rules for every chain length — for certificates whose lower end is exact, and relative to the given representation of the instance (D33) | `zverify2_sound`, `WInstance.Z_cut`, `cut_rule_separation`, `WInstance.Z_elim1`, `WInstance.Z_elim2`, `zverify2Top_chainCert`, `chain_separation`, `ferroChain_separation` **[V]** | repair of the kernel; variable elimination is classical; the separation is the formal counterpart of E2 at finite temperature |
+| G11 | **Query complexity of every algorithm**: sensitive alternatives must be detected (any class, any functional; deterministic and randomised), with a spot-check converse; for the minimum, the instance-wise deterministic complexity *equals* the size of a value certificate, and every randomised algorithm pays `(1−2δ)` times each covering lower bound; for `ln Z`, a soft-gap radius, a third (randomised) exponent, and a sharp accuracy threshold on the cube | `exists_query_ne`, `prob_query_ne_ge`, `expected_queries_ge_packing`, `spotCheck_correct`, `instance_query_complexity`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `thermal_queries_strict_cover`, `thermal_queries_bracket`, `thermal_expected_queries_ge`, `cube_thermal_randomized_bound` **[V]**; single-letter forms and upper bounds **[P]** | method **known** (radius of information; fractional block sensitivity as a bound on randomised query complexity); the instance-wise randomised bound with gap radii, the soft gap and the threshold: no match found |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -1161,9 +1190,14 @@ exponent, its dichotomy (G4), and the finite-temperature counterpart in which th
 replaced by the free-energy gap of a macrostate (G7) — the exponent formulas themselves are
 applications of the type covering lemma and, at finite temperature, of a known theorem of
 source coding; (ii) the dimension-free form of the best-first bound (G6); (iii) second-order
-envelope classes as a certified interface with a lossless pairwise reduction (G8).  Each rests
-on textbook tools (type covering, Hölder, telescoping); the proofs are short.  §12 says what a
-publication would still need.
+envelope classes as a certified interface with a lossless pairwise reduction (G8); (iv) the
+statement that these exponents are query complexities — they bound every algorithm, also
+randomised ones — together with the randomised finite-temperature theory: the soft gap, a third
+exponent, and an accuracy threshold that separates polynomial from exponential cost (G11).
+Each rests on textbook tools (type covering, Hölder, telescoping, linear-programming duality);
+the proofs are short.  The second referee's verdict on G1–G10 — "a coherent note, not a
+theorem-driven paper" — is reproduced in §12 together with what a publication would still
+need.
 
 ---
 
@@ -1218,8 +1252,10 @@ every consistent admissible `g` iff `D_A(x,y) ≤ f(y) − f(x)` for all `y`
 optimal is `max_y [f(x) − f(y) + D_A(x,y)]` (`worst_case_regret_isGreatest`).
 
 This is the minimal-network theorem for simple temporal networks (Dechter–Meiri–Pearl 1991) with
-one extra node; for `f ≡ 0` the first statement is the "potential maximizers" lemma of LIPO.  It
-is the exact criterion the referee asked for in §2.4.
+one extra node.  (The "potential maximizers" lemma of LIPO — *some* consistent function is
+optimised at `x` — is, for `f ≡ 0`, the query-model contact theorem of §2.3, Theorem 2.6; the
+statement here quantifies over *all* consistent residuals.)  It is the exact criterion the
+referee asked for in §2.4.
 
 ### 11.2 Slack, and three notions of certificate
 
@@ -1251,19 +1287,28 @@ where `N_cov(ε)` is the least number of centres such that every `y` is within s
 `gap(y) + ε` of a centre — a covering problem in which **each point carries its own radius, its
 optimality gap**.
 
-**Theorem 11.5 (three notions) [V] (`CertificateNotions.lean`).**  A *value certificate*
-(`min(f+U_A) − min(f+L_A) ≤ ε`) and a *configuration certificate* for a candidate `x`
-(`D_A(x,y) ≤ f(y) − f(x) + ε` for all `y`; equivalently every consistent residual makes `x`
-`ε`-optimal, `isConfigCertificate_iff`) satisfy: point ⟹ value ⟹ covering
-(`isValueCertificate_of_isCertificate`, `cover_of_isValueCertificate`); point ⟹ configuration
-(`isConfigCertificate_of_isCertificate`); configuration ⟹ point after evaluating the candidate
-(`isCertificate_insert_of_isConfigCertificate`).  Therefore
+**Theorem 11.5 (three notions, one number) [V] (`CertificateNotions.lean`,
+`RefereeLemmas.lean`).**  A *value certificate* (`min(f+U_A) − min(f+L_A) ≤ ε`) and a
+*configuration certificate* for a candidate `x` (`D_A(x,y) ≤ f(y) − f(x) + ε` for all `y`;
+equivalently every consistent residual makes `x` `ε`-optimal, `isConfigCertificate_iff`)
+satisfy: point ⟹ value ⟹ covering (`isValueCertificate_of_isCertificate`,
+`cover_of_isValueCertificate`); point ⟹ configuration (`isConfigCertificate_of_isCertificate`);
+and conversely, by exchanging one evaluated point, a value certificate, and a configuration
+certificate with at least one evaluation, yield a point certificate of at most the same size
+(`value_exchange`, `config_exchange`, `card_exchange_le`: replace the anchor that attains the
+upper envelope at the minimiser of `f + U_A`, respectively at the candidate, by that point).
+Therefore
 
-    N_cov ≤ N_value ≤ N_point ≤ N_cov + 1,        N_config ≤ N_point ≤ N_config + 1.
+    N_cov ≤ N_value = N_point ≤ N_cov + 1,        N_point = max(1, N_config).
 
-This settles the first major point of the referee report: the witness-size bound of §2.4 is a
-statement about point and value certificates; a configuration certificate may save exactly the
-evaluation of the candidate (and nothing else).  Harness XI.1, XI.6.
+The exchange lemmas are due to the second referee (`reviews/R2`, Appendix A); the previous
+version of this theorem stated `N_value ≤ N_point` and `N_point ≤ N_config + 1` only.  This
+settles the first major point of the first referee report: the witness-size bound of §2.4 is a
+statement about point and value certificates; a configuration certificate saves an evaluation
+only when none is needed at all (`N_config = 0`: the candidate is optimal for every admissible
+residual, Theorem 2.4), although it may *consist* of different points — it can skip a state that
+every point certificate evaluates (`config_certificate_skips_forced_point`, `DEAD_ENDS.md` D21).
+Harness XI.1, XI.6.
 
 *Prior art.*  The minimal certificate is the "best possible algorithm" `n_B` of
 Hansen–Jaumard–Lu (1991), the "proof set" of Baran–Demaine (2004) and the quantity `τ` of
@@ -1341,7 +1386,8 @@ evaluations, while the full enumeration is one (`binary_full_certificate`).
 for identical sites `n⁻¹ ln N_cov → R* = max_P R(P; ρ, 0)`, the largest rate–distortion function
 over single-site sources `P` at distortion level zero.  Moreover `R* = 0` iff the site is sharp,
 and then `N_cov = 1`: **the number of evaluations is either one or exponential in the number of
-non-sharp sites** (between `exp(Σ_{non-sharp} r_i)` and `∏_{non-sharp} k_i`).  For identical
+non-sharp sites** (between `exp(Σ_{non-sharp} r_i(t; v_i) − tε)` for any common `t` and
+`∏_{non-sharp} k_i`; with a bounded number of non-sharp sites it is bounded).  For identical
 sites and zero residual the qualitative dichotomy is machine-checked
 (`homogeneous_certificate_dichotomy`: either the single evaluation certifies for every `n`, or
 some `ρ > 1` has `ρⁿ ≤ |A|` for every exact certificate).  For two-state
@@ -1353,17 +1399,26 @@ sites with excitation energy `e < c` and zero residual, with `ρ = e/c`,
 `max_P R(P; ρ, 0)` by the dual formula
 `max_P R(P, D) = max_{t ≥ 0, w ≥ 0 : Σ_s w(s) e^{−tρ(a,s)} ≤ 1 ∀a} [ln Σ_s w(s) − tD]`
 (Csiszár's dual form of `R(P,D)` and Gibbs' inequality in `P`); for a product of unequal sites
-the maximum over joint sources is attained at product sources with a common slope `t`, because a
-source with memory has a rate–distortion function no larger than the memoryless source with the
-same marginals.  Upper bound: the type covering lemma (Csiszár–Körner, Lemma 9.1; Csiszár 1998,
-Lemma VI.1) covers every type class `T_P` at distortion zero by `exp(n R(P; ρ, 0) + o(n))`
-centres; there are polynomially many types; the credit distortion is reduced to a nonnegative
-one by subtracting `min_a ρ(a,s)`, which shifts the level by a type-dependent amount
-(`prior_art/L6` T8).  Dichotomy: `r_i(t; v)` is concave in `t`, vanishes at `t = 0`, and its
+product weights with a common slope `t` are the best dual weights, because a source with memory
+has a rate–distortion function no larger than the memoryless source with the same marginals.
+Upper bound, identical sites: the type covering lemma (Csiszár–Körner, Lemma 9.1; Csiszár 1998,
+Lemma VI.1), which is uniform in the type and in the distortion level, covers every type class
+`T_P` at distortion zero by `exp(n R(P; ρ, 0) + o(n))` centres; there are polynomially many
+types; the substitution `w ↦ w e^{−t·gap}` turns the credit distortion into the nonnegative
+distortion `s` at the type-dependent level `E_P[gap]` (`prior_art/L6` T8); `R(P, D)` is
+continuous at `D = 0` because every letter reproduces itself at zero slack.  Upper bound, sites
+of finitely many types `j` with fractions `λ_j` (argument supplied by the second referee): for a
+joint type `(P_j)` cover each `T_{P_j}` at a level `D_j` and take the product; among the
+allocations with `Σ_j λ_j D_j = Σ_j λ_j E_{P_j}[gap_j]` the least total rate
+`Σ_j λ_j R_j(P_j, D_j)` is attained, by convexity in each `D_j`, at a common slope `t` and equals
+`max_t Σ_j λ_j [F_j(P_j, t) − t E_{P_j} gap_j]`, `F_j` the dual function of type `j`; maximising
+over the joint type gives `max_t Σ_i max_v r_i(t; v)`.  Dichotomy: `r_i(t; v)` is concave in `t`, vanishes at `t = 0`, and its
 derivative there is `min_a Σ_s v(s) ρ_i(a,s)`; so `max_v r_i > 0` for small `t` iff the zero-sum
 game with payoff `ρ_i(a,s)` has positive value, and since the ground state is covered only by
 itself the value is `≤ 0` iff the ground state covers every state, i.e. iff the site is sharp
-(`ρ_i(x*_i, s) = c_i − (φ_i(s) − φ_i(x*_i))`; the residual drops out).  The binary formula is the
+(`ρ_i(x*_i, s) = c_i − (φ_i(s) − φ_i(x*_i))`; the residual drops out).  The hypothesis `κ < 1` is
+needed here: for `φ = (0,0)`, `γ = (0,c)` the site is not sharp, yet the second letter covers
+both at zero slack, `R* = 0` and `N_cov = 1 < N_point = 2`.  The binary formula is the
 rate–distortion function of a Bernoulli source with Hamming distortion, in primal and dual
 form. ∎
 
@@ -1376,12 +1431,21 @@ exact integer layer counts, `max_μ L_μ ≤ N_frac ≤ (n+1) max_μ L_μ`,
 dichotomy by exact linear programming on small products.
 
 *Reading.*  With only a first-order envelope, pointwise evaluations of the residual are either
-unnecessary (all sites sharp: the white-box model already decides) or exponentially many are
-needed.  The exponent is a free-energy difference: with Boltzmann weights,
-`r_i(t) = ln Z_i^{gap}(t) − ln Z_i^{slack}(t)` compares the single-site partition function of the
-landscape with that of a slack ball, at a common inverse temperature `t` chosen by the
-adversary.  For interacting known parts the one-shot bound of Theorem 11.6(c) gives the same
-estimate with `Σ_y e^{−t·gap(y)}` computed by a transfer matrix (blueprint §6.6).
+unnecessary (all sites sharp: the white-box model already decides) or exponentially many in the
+number of non-sharp sites are needed (machine-checked for identical sites with zero residual
+and `ε = 0`; in general by the paper proof above).  With Boltzmann weights `v_i = e^{−t·gap_i}`
+the bound is a free-energy difference, `r_i(t) = ln Z_i^{gap}(t) − ln Z_i^{slack}(t)`: the
+single-site partition function of the landscape against that of a slack ball, at a common
+inverse temperature `t`.  Two cautions (second referee, M2; `DEAD_ENDS.md` D31; harness
+`DEAD.12`).  *The slope `t` is common to all sites*: maximising site by site overshoots — for
+the two-state types `(e, c) = (0.5, 1)` and `(5, 10)` the per-site maxima add up to `0.3765` per
+pair, the true exponent is `0.2329`.  *Boltzmann weights are optimal for two-state sites with
+zero residual, and only a lower bound otherwise*: a three-state site with gaps `(0, 0.5, 3)`,
+`c = 1` has `R* = 0.1882` (the optimal weights ignore the third state) against `0.1066`, and the
+two-state site `φ = (0, 0.677)`, `γ = (0, 0.644)` has `R* = 0.0252` while the Boltzmann bound is
+vacuous.  In general `max_v r_i(t; v)` is one linear program per site and `t`.  For interacting
+known parts the one-shot bound of Theorem 11.6(c) gives the Boltzmann estimate with
+`Σ_y e^{−t·gap(y)}` computed by a transfer matrix (blueprint §6.6).
 
 ### 11.5 Hardness, and what search can achieve
 
@@ -1412,14 +1476,24 @@ evaluations, for **every** set `C` that covers each `y` within slack radius
 `θ (gap(y) + ε/6)`, `θ = (1−κ)/(4(1+κ))` (`bestFirst_card_le`, `bestFirst_certifies`).  The
 evaluated points are separated: for `1 ≤ j < k`, `gap_k − gap_j + ε < s(y_j,y_k)`,
 `gap_k ≤ s(y_j,y_k)`, `gap_j − gap_k ≤ s(y_k,y_j)` (`bestFirst_sep_a/b/c`), so two of them never
-share a centre of a shrunk cover (`not_cocovered`).  The bound is attained
-(`bestFirst_card_le_sharp`).
+share a centre of a shrunk cover (`not_cocovered`).  The `+1` is needed
+(`bestFirst_card_le_sharp`, a two-point instance with `|C| = 1`); the constants `θ` and `ε/6` are
+not claimed to be tight (the second referee found no violation with radii `2θ(gap + ε/6)` in
+900 instances, and violations at `3θ`).
 
-No doubling assumption is made; in a doubling space the shrinkage converts into a constant
-factor (and into the factor `(1 − Lip f/L)^d` of Bachoc et al.).  The theorem is the case
+No doubling assumption is made — and none would help: **the comparison class can be unboundedly
+larger than `N_cov`, even on the line** (second referee, M1; `DEAD_ENDS.md` D30; harness
+`DEAD.11`).  For `X = {0} ∪ {2^{−i} : i ≤ m}`, `f(x) = x`, `g ≡ 0`, `ε = 2^{−m−3}` the point `0`
+alone is a certificate (`N_cov = 1`), every cover at the shrunk radii has `m + 1` points, and
+best-first search uses at most two evaluations.  The previous version's remark that in a
+doubling space the shrinkage costs only a constant factor is false when the known part is not
+constant; for `f ≡ 0`, where gaps are Lipschitz, it remains a conjecture (§12).  The theorem is
+the case
 `ρ = (1+κ)/(1−κ)` of `bestFirst_card_le_of_quasiSymm`, which needs only an envelope (possibly
 asymmetric) whose slack is `ρ`-quasi-symmetric, `s(x,y) ≤ ρ s(y,x)`, with `θρ ≤ 1/4`.  Known special cases: dimension
-one without augmentation (`n_P ≤ 2 n_B + 1`, Hansen–Jaumard–Lu 1991); `ℝ^d` up to `log(1/ε)` and
+one without augmentation (Hansen–Jaumard–Lu 1991: `n_P ≤ 2 n_B + 1` for bounding the value and
+`n_PY ≤ 4 n_B + 1` for value and point, the counterpart of the point certificates used here);
+`ℝ^d` up to `log(1/ε)` and
 `exp(d)` factors (Bachoc et al. 2021); the proof is an adaptation of the 2-approximation for
 priority k-centre (Plesník 1987) (`prior_art/L4`, C7).  The theorem is a worst-case statement:
 on random instances (benchmark B9) best-first search uses about `3.0` evaluations against a
@@ -1500,9 +1574,10 @@ accuracy the number of evaluations is exponential in the thermodynamic entropy e
 site is sharp.  Example (`thermal_binary_exponential`): two-state sites with excitation energy
 `2`, envelope constants `1` — one evaluation certifies the ground state exactly
 (`thermal_binary_sharp`) — at `β = ln 2`: every certificate of `ln Z` to within `ε` has at least
-`e^{−ε} (6/5)ⁿ` evaluations, with equality for the single evaluation of the ground state at
-`ε = n ln(6/5)` (`thermal_binary_single_tight`): accuracy can be traded for evaluations only at
-this exponential rate.
+`e^{−ε} (6/5)ⁿ` evaluations.  (The hypothesis actually used, `Z(f+L_A) ≤ e^ε Z`, holds with
+equality for the single evaluation of the ground state at `ε = n ln(6/5)`,
+`thermal_binary_single_tight`; it involves the true `Z` and is not computable from the
+evaluations — as a two-sided certificate that single evaluation has width `n ln(4/3)`.)
 
 *Proof.*  Lower bound: Theorem 11.13(c) with product weights (`thermal_product_exp_weights`),
 valid for every `n`; the maximum over `p` and `v` equals `max_Q R(Q; s, KL(Q‖π)/β)` by the dual
@@ -1556,11 +1631,15 @@ evaluations estimate it to `±(Σc_i² ln(2/δ)/(2N))^{1/2}` with confidence `1�
 the size of the state space **[K]**.  Deterministic point-wise certification to an extensive accuracy
 `ε = nε₁` still costs exponentially many evaluations whenever `ε₁` is below a threshold — by
 Theorem 11.13(b), `n⁻¹ ln |A| ≥ H(π) − ln(1 + (k−1)e^{−t(1−κ)c}) − tε₁/β` for every `t` — which
-includes the accuracy `β²c²/8` per site of the sandwich when `βc` is small.  The exponential
-price is the price of *deterministic pointwise* information under a first-order envelope, not
-of the problem; Theorem 11.21 (§11.9) is the machine-checked randomised statement.
+includes the accuracy `β²c²/8` per site of the sandwich when `βc` is small and the Gibbs entropy
+is not (for a cold sharp site, `e^{−βe} ≲ βc/8`, the single evaluation of the ground state
+already reaches that accuracy).  So at the accuracy of the sandwich the exponential price is
+the price of *deterministic* information; Theorem 11.21 (§11.9) is the machine-checked
+randomised statement.  Below that accuracy randomisation no longer rescues: Theorem 11.25
+(§11.10) shows that every algorithm then needs exponentially many evaluations, with a smaller
+exponent.
 
-### 11.7 Second-order envelopes: the way out
+### 11.7 Second-order envelopes: a way out under weak coupling
 
 A residual class with bounded *mixed* differences,
 
@@ -1601,7 +1680,11 @@ many-body expansion at `x₀`, which uses `g` on the Hamming ball of radius `m�
 there, `anchoredInterp_eq_of_card_lt`, by the Möbius identity `anchored_decomposition`)
 satisfies `|g(x) − I_{m−1}g(x)| ≤ Σ_{T ⊆ changed sites, |T| = m} c_T` (`higherOrder_remainder`),
 and for nonnegative constants the bound is attained at every configuration by a member of the
-class with the same ball data (`higherOrder_remainder_sharp`).  For `m = 2` it is Theorem 11.16
+class with the same ball data.  (Machine-checked for zero ball data, where the member is the
+remainder function itself, `higherOrder_remainder_sharp`, and for `m = 2` with arbitrary data,
+`secondOrder_lower_attained`; for `m ≥ 3` with arbitrary data it is **[P]** — the interpolant has
+no differences of order `m` — and was confirmed by linear programming for `m = 3`.)  For `m = 2`
+it is Theorem 11.16
 (`secondOrder_remainder_of_higherOrder`); a three-site instance of order three is
 `higherOrder_witness`.  *Proof.*  `h = g − I_{m−1}g`
 vanishes on the ball and has the same order-`m` differences.  Induct on `m` and on the number
@@ -1612,14 +1695,32 @@ remainder estimates are classical (Kuo–Sloan–Wasilkowski–Woźniakowski 201
 its use as a certified residual class with an exact reduction to a kernel was not found
 (`prior_art/L5`, P9).
 
+*Limitation: the remainder is quadratic in the distance* (second referee, M3; `DEAD_ENDS.md`
+D32; harness `DEAD.13`).  The half-width of the star envelope, `Σ_{i<j changed} c_ij`, grows with
+the square of the Hamming distance from the centre, and further evaluations of the same kind do
+not remove this.  For `n` two-state sites with dense constants `c_ij = c`, the function
+`−c·C(|x| − 1, 2)` belongs to the class, vanishes on the *whole Hamming ball of radius 2* around
+`x₀ = 0` and equals `−c(w−1)(w−2)/2` at weight `w`; so with `f(x) = e|x|` and zero true residual
+not even the `1 + n + C(n,2)` evaluations of that ball certify the minimiser once
+`n ≥ 2e/c + 3`, and two stars at opposite corners do not once `n ≥ 6e/c + 6` (an explicit
+member vanishing on both is given in the referee report).  A star certifies exactly when the
+second-order sharp-minimum condition of Theorem 11.17 holds; for an additive known part a
+sufficient condition is the **row-sum condition**
+`½ Σ_{j ≠ i} c_ij ≤` (measured single-site excitation energy at site `i`, for every state)
+**[P]** — then `Σ_{i ∈ S} Δ_i ≥ ½ Σ_{i ∈ S} Σ_{j ∈ S, j ≠ i} c_ij = Σ_{i<j ∈ S} c_ij` for every set
+`S` of changed sites.  With non-sparse constants, star-type data lead back to a covering
+problem, now with radius of order `(2·gap/c)^{1/2}`; whether other evaluation sets do better is
+open.
+
 *The resulting picture.*  First-order envelope: uncertainty is a distance to the evaluated set,
 information is tropical (a minimum over evaluations), certification is covering, the price is
-exponential unless the known part is sharp (Theorems 11.4, 11.9, 11.15).  Second-order envelope:
-`n(k−1)+1` evaluations determine the additive part exactly, the remainder is a pairwise
-function, and certification returns to the pairwise kernel, whose own cost is governed by the
-proof-complexity results of §6.  The remainder grows with the square of the Hamming distance
-from the centre of the star, so in practice the star is re-centred at the incumbent — a
-trust-region scheme (blueprint §6.6).
+exponential unless the known part is sharp (Theorems 11.4, 11.9, 11.15) — for every algorithm
+(§11.10).  Second-order envelope with weak coupling (row sums of the constants below the
+measured excitation energies): `n(k−1)+1` evaluations determine the additive part exactly, the
+remainder is a pairwise function, and certification returns to the pairwise kernel, whose own
+cost is governed by the proof-complexity results of §6.  Away from that regime the star is
+re-centred at the incumbent — a trust-region scheme without a guarantee of termination by
+itself (blueprint §6.6).
 
 ### 11.8 A partition-function kernel with decomposition rules
 
@@ -1649,11 +1750,22 @@ the kernel-evaluated case of six sites).  Trees and cycles reduce in the same wa
 (`tree_elim_exact`, `ring_elim_exact`); in general the rule is exact on every interaction graph
 reducible by removing sites of degree at most two (treewidth at most two) **[P]**.
 
-`chain_separation` is the finite-temperature counterpart of the tropical separation of §6.3
-— and, unlike that one, it is proved on a *connected* family.  The tropical kernel's `sum` rule
-and these two rules are the same idea in two semirings; what remains open is a lower bound for
-certificates that *do* use decomposition rules on frustrated connected families, and a
-comparison with proof systems for model counting.  Harness XI.12.
+`chain_separation` is the finite-temperature counterpart of the tropical separation of §6.3,
+proved on a *connected* family, with two reservations (second referee, M4; `DEAD_ENDS.md` D33).
+*It concerns exact lower endpoints only*: a certificate whose lower end is `(1 − 10⁻⁹) Z` is
+outside the theorem, although approximate enclosures are the normal case at finite
+temperature; a robust version is open.  *Its hypothesis `WInstance.Rigid` is a property of the
+representation, not of the model*: it asks that one of the two ordered factors `W_ij`, `W_ji`
+distinguishes the states of a site, and the instance with `W₀₁(a,b) = 2^{a+2b}`,
+`W₁₀(b,a) = 2^{−(a+2b)}` — two independent uniform sites, every configuration of weight one —
+satisfies it, so that the theorem requires four leaves for it (`gauge_trivial_separation`).
+What is measured in such a case is that the leaf rule bounds the two orientations of a pair
+separately; a normalisation of the instance would remove it.  For the ferromagnetic chain the
+interaction is genuine and the statement is as intended.  The tropical kernel's `sum` rule and
+these two rules are the same idea in two semirings; what remains open is a lower bound for
+certificates that *do* use decomposition rules on frustrated connected families, an
+approximate version of the separation, and a comparison with proof systems for model counting.
+Harness XI.12.
 
 ### 11.9 Probabilistic certificates: the sampled sandwich
 
@@ -1677,8 +1789,10 @@ all numbers of sites, all product references and all residuals with `Σ c_i² �
 (`exists_sampled_sandwich_sample_size`): the number of evaluations does not depend on the
 number of states.  The proof is the Chernoff bound for
 the sum of `N` independent copies, each sub-Gaussian by the tensorisation lemma behind
-Theorem 3.1(c); probabilities are finite sums over sample tuples.  Harness XI.13 (exact
-enumeration of sample tuples).
+Theorem 3.1(c); probabilities are finite sums over sample tuples.  The statement presupposes
+exact sampling from the product reference, exact evaluation of `Δ`, and a known `Z₀`; the floor
+`β²C/8` of the width is not reduced by more samples.  Harness XI.13 (exact enumeration of
+sample tuples).
 
 *The contrast, on one instance.*  Take the landscape of `thermal_binary_exponential`: `n`
 two-state sites, excitation energy `2`, envelope constants `1`, `β = ln 2`, the known part as
@@ -1689,8 +1803,213 @@ the (product) reference.  A deterministic certificate of `ln Z` to within `ε` n
 So the exponential price of §11.6 is the price of *deterministic pointwise* certification under
 a first-order envelope: a probabilistic guarantee from a reference average costs polynomially
 many evaluations.  The verified kernels do not check randomness; a kernel for such
-probabilistic certificates (sampled averages with verified concentration bounds) is the natural
-next foundation and is not built here.
+probabilistic certificates (sampled averages with verified concentration bounds) is not built
+here.  §11.10 supplies its two foundations: a soundness theorem for spot-checked hints, and the
+limit of what any randomised procedure can achieve — below the accuracy of the sandwich, an
+exponential number of evaluations again.
+
+### 11.10 Algorithms, not certificates: query complexity
+
+Sections 11.2–11.9 bound the size of a certificate of a given format.  The first referee asked
+whether such bounds constrain every *algorithm*; the second asked for an algorithmic statement
+and for a probabilistic notion of certificate (`reviews/R2`, §4, items 3 and 7).  This section
+answers both.
+
+*Model.*  A deterministic algorithm chooses evaluation points adaptively and returns a number.
+Abstractly (`QueryAlgorithm`): for every residual a finite set of queried points and an output,
+such that a residual which agrees with `g` on the points queried on `g` yields the same queries
+and the same output — the only property of decision trees that is used.  A randomised algorithm
+is a finite probability space of deterministic ones.  An algorithm is *`ε/2`-correct* for a
+functional `Φ` on a class if its output is within `ε/2` of `Φ` on every member (so `ε` is a
+width, as for certificates), and *`(ε/2, δ)`-correct* if this holds with probability at least
+`1 − δ` on every member.
+
+**Theorem 11.22 (sensitive alternatives must be detected) [V] (`QueryLowerBound.lean`).**  Let
+`Φ` be any functional and `G` any class of residuals.
+(a) If a deterministic algorithm is `ε/2`-correct on `G`, then on every instance `g ∈ G` it
+queries a point where `g'` differs from `g`, for every `g' ∈ G` with `|Φ(g') − Φ(g)| > ε`
+(`exists_query_ne`).
+(b) If a randomised algorithm is `(ε/2, δ)`-correct on `G`, every such `g'` is detected with
+probability at least `1 − 2δ` (`prob_query_ne_ge`).
+(c) Hence, for alternatives `g_j` of this kind and weights `w_j ≥ 0` such that every point
+detects alternatives of total weight at most `B`,
+
+    Σ_j w_j ≤ B · |Q(g)|   (deterministic),        (1 − 2δ) Σ_j w_j ≤ B · E|Q(g)|   (randomised)
+
+(`card_queries_ge_packing`, `expected_queries_ge_packing`).
+(d) Conversely, the algorithm that is given `g` as a hint, evaluates the residual at `N`
+independent points drawn from a distribution `q`, returns `Φ(g)` if all values agree with the
+hint and evaluates everything otherwise, is `(ε/2, δ)`-correct on `G`, provided every `g' ∈ G`
+with `|Φ(g') − Φ(g)| > ε/2` differs from `g` on a set of `q`-probability at least `p` and
+`(1−p)^N ≤ δ`; on `g` itself it makes at most `N` evaluations (`spotCheck_correct`,
+`spotCheck_card_le`).
+
+So the randomised query complexity *at an instance*, among algorithms that are correct on the
+whole class, is the fractional hitting number of the difference sets of the distinguishable
+alternatives — up to the factors `1 − 2δ` and `ln(1/δ)` and the change from `ε` to `ε/2` — and
+the deterministic one is the integral hitting number.  These are the counterparts, for
+real-valued classes, of two notions of Boolean query complexity: certificate complexity, and
+fractional block sensitivity (equal to fractional certificate complexity), which bounds
+randomised decision-tree complexity from below (Aaronson 2003; Tal 2013;
+Gilmer–Saks–Srinivasan 2016; Kulkarni–Tal 2016).  For deterministic algorithms (a) is the
+radius-of-information argument of optimal recovery.  The method is known; what follows is what
+it gives for the envelope class.
+
+*Dips.*  The alternatives used below are single **dips**,
+`dip_{y,c}(a) = min(g(a), g(y) − c + d(a,y))`.  A dip is admissible (`dip_admissible`), lowers
+`g` at `a` by exactly `(c − s(a,y))₊` (`dip_eq_sub`) — so it differs from `g` exactly on the
+open slack ball `{a : s(a,y) < c}` — and by `c` at its centre.  If a dip of depth `r(y)` at `y`
+changes `Φ` by more than `ε`, the queries must reach within slack `r(y)` of `y`
+(`queries_cover_of_sensitive`), and the packing bounds hold for the balls of radii `r(y)`, also
+in exponential-weights form (`expected_queries_ge_of_radius`, `expected_queries_ge_exp_weights`).
+
+**Theorem 11.23 (the minimum: every algorithm pays the covering price) [V].**
+(a) *Deterministic, exact.*  On an admissible instance `g` there is an algorithm, `ε/2`-correct
+for `min(f+g')` on **every** admissible residual `g'`, that makes exactly `k` evaluations on `g`,
+iff `g` has a value `ε`-certificate with `k` points (`instance_query_complexity`).  The queried
+set of a correct algorithm is a value certificate (`queries_isValueCertificate`: both McShane
+envelopes of the evaluated values are admissible and receive the same output); conversely
+"evaluate `A`; if the values agree with those of `g` return the midpoint of the certified
+interval, otherwise evaluate everything" is correct (`certificateAlgorithm_correct`).  With
+Theorem 11.5, the best instance-wise number of evaluations is `N_value = N_point`, which is
+`N_cov` or `N_cov + 1`.
+(b) *Randomised.*  A dip of depth `gap(y) + ε'`, `ε' > ε`, lowers the minimum by at least `ε'`
+(`inf_dip_le`).  Hence if a randomised algorithm is `(ε/2, δ)`-correct on the admissible class,
+then on every instance and for all `t ≥ 0`, `v ≥ 0`, `ε' > ε`,
+
+    (1 − 2δ) e^{−tε'} Σ_y v(y)  ≤  E|Q(g)| · max_a Σ_y v(y) e^{−t(s(a,y) − gap(y))}
+
+(`expected_queries_ge_exp_weights_min`; weights form `expected_queries_ge`).  All lower bounds of
+§§11.3–11.4 are of this form, so each of them holds for the expected number of evaluations of
+every randomised algorithm with the extra factor `1 − 2δ` (on a finite space the open relation
+`s < gap + ε'` for `ε'` slightly above `ε` is the closed relation `s ≤ gap + ε` of §11.3).  Example
+(`binary_randomized_exponential`): on the binary landscape of Theorem 11.8,
+`E|Q| ≥ (1 − 2δ)(6/5)ⁿ 2^{−ε}`.  The proof uses correctness on the instance and on one dip per
+point only; under that hypothesis the factor `1 − 2δ` is attained (uniform metric: a mixture of
+full evaluation and two blind guesses; harness XII.2).  For correctness on the whole class it
+is not optimal in general: `k` alternatives with pairwise distinguishable values and a common
+detection set are missed with probability at most `kδ/(k−1)` by the same argument **[P]**.
+
+*Consequences.*  (i) Randomisation gains at most the integrality gap of the covering problem,
+`E|Q| ≥ (1−2δ) N_frac ≥ (1−2δ) N_cov/(1 + ln |X|)`; at zero temperature it does not change the
+exponent `R*` of Theorem 11.9.  (ii) The question left open in the previous version of §12 —
+can a procedure reach the exponent `R*` without knowing the residual? — has a simple answer on
+additive instances **[P]**.  *Learn-then-cover*: evaluate a star (`n(k−1)+1` evaluations), form
+the additive interpolant, compute a small cover for it (a type-covering code, or the greedy
+cover, which loses a factor `1 + n ln k`), evaluate the cover and check the certificate; if the
+check fails, fall back to any correct procedure.  This is correct on the whole first-order
+class, and on an additive instance the interpolant *is* the residual (`starPart_eq_of_additive`),
+so it uses `exp(nR* + o(n))` evaluations there; by (b) no algorithm, randomised or not, uses
+fewer than `(1−2δ) exp(nR* − o(n))`.  So `R*` is the exponent of the query complexity on
+additive instances, not only of a certificate size.  (iii) What no algorithm can do is stay
+within a constant factor of `N_cov` on *all* instances (the hub family of §11.5; it defeats
+randomised algorithms too, since the good hub is one of `M` and each evaluation tests one).
+
+**Theorem 11.24 (the free energy: soft gaps) [V].**  For `β ≥ 0` define the **soft gap**
+
+    Λ(y) = ln Z(f+g) − ln Z(f+U_y),        U_y(x) = g(y) + d(x,y)
+
+(`softGap`): `β` times the free-energy excess of the most pessimistic landscape consistent with
+the single value `g(y)`; `0 ≤ Λ(y) ≤ −ln π(y)` (`softGap_nonneg`, `softGap_le`).  A dip of depth
+`c` at `y` multiplies `Z` by exactly `E_π e^{β(c − s(Y,y))₊}` (`sum_exp_dip`), which is at least
+`e^{βc − Λ(y)}` (`log_sum_exp_dip_ge`).  Therefore:
+(a) the queries of every deterministic algorithm that is `ε/2`-correct for `ln Z` reach within
+slack `c` of every `y`, for every `c` with `βc > Λ(y) + ε` (`thermal_queries_strict_cover`);
+(b) for every randomised `(ε/2, δ)`-correct algorithm, all radii `r(y)` with
+`β r(y) > Λ(y) + ε`, all `t ≥ 0` and all `v ≥ 0`,
+
+    (1 − 2δ) Σ_y v(y)  ≤  E|Q(g)| · max_a Σ_y v(y) e^{−t(s(a,y) − r(y))}
+
+(`thermal_expected_queries_ge`);
+(c) the queries of a deterministic `ε/2`-correct algorithm (`β > 0`) form a free-energy
+certificate: the partition functions of the two McShane envelopes of the evaluated values agree
+within `e^ε` (`thermal_queries_bracket`), so every bound of §11.6 on such certificates
+(Theorems 11.13 and 11.15: the entropy bound, the Hölder converse, the exponent `R_β`) is a
+bound on the number of evaluations of every deterministic algorithm.
+
+As `β → ∞` with `ε/β` fixed, `Λ(y)/β → min_x [gap(x) + s(x,y)]`, which is `gap(y)` when the known
+part is admissible (and gives an equivalent family of covering constraints otherwise), and (b)
+becomes Theorem 11.23(b): the zero-temperature covering theory is the limit of the *randomised*
+finite-temperature theory.
+
+On a product landscape both sides of (b) factorise (the soft gap of a configuration is the sum
+of the single-site soft gaps `Λ₁(b) = −ln Σ_a π(a) e^{−β s(a,b)}`), so there are three
+distortion budgets for a macrostate (type) `P`, and three exponents `max_P R(P; s, budget)`:
+
+| problem | budget of `P` | exponent | status |
+|---|---|---|---|
+| minimum, all algorithms | `E_P[gap]` | `R*` | lower bound **[V]** for every `n`, also randomised; upper bound **[P]** |
+| `ln Z`, deterministic | `KL(P‖π)/β = F[P] − F` | `R_β` | lower bound **[V]**, for every deterministic algorithm; upper bound **[P]** (Merhav) |
+| `ln Z`, randomised, accuracy `nε₁` | `(E_P[Λ₁] + ε₁)/β` | `R^rand_β(ε₁)` | lower bound **[V]** one-shot, **[P]** single-letter; upper bound open in general |
+
+The deterministic budget carries an entropy credit, `KL(P‖π) = E_P[−ln π] − H(P)`, because a
+deterministic algorithm must exclude dips at *all* points of a type class at once (the lower
+envelope dips everywhere simultaneously), whereas a randomised one only has to detect each
+fixed perturbation with constant probability.  Numerically (benchmark B10) `R^rand_β ≤ R_β`,
+both tend to `R*` as `β → ∞`, and `R^rand_β → 0` as `β → 0`; for the site of Theorem 11.9
+(`e/c = 1/2`): `0.0275` against `0.666` at `β = 1`, `0.154` against `0.482` at `β = 4`, `0.1882`
+against `0.216` at `β = 40`.  A sharp site (`R* = 0`) still has `R^rand_β > 0` at intermediate
+temperatures (`0.013` at `β = 1` for `e/c = 2`).
+
+**Theorem 11.25 (a sharp accuracy threshold on the cube) [V lower bound; P + K upper bounds].**
+Let `X = {0,1}ⁿ`, `f ≡ 0`, `d = c ·` Hamming distance, `u = βc`, and consider algorithms that are
+`(ε/2, δ)`-correct for `ln Z` on the whole class, `ε = nε₁`.
+(a) **[V]** (`cube_thermal_randomized_bound`, for all `n`, `β`, `c`, `R` and `t ≥ 0`).  If
+`ε + n ln(2/(1+e^{−u})) < βR`, then on the zero residual
+`E|Q| ≥ (1 − 2δ) 2ⁿ e^{−tR} (1+e^{−tc})^{−n}`.  With `R = ρnc` and the best `t`,
+
+    n⁻¹ ln E|Q|  ≥  ln 2 − h(ρ(ε₁)) − o(1),        ρ(ε₁) = [ln(2/(1+e^{−u})) + ε₁]/u,
+
+which is positive iff `ε₁ < ln cosh(u/2)`.  A closed instance
+(`cube_thermal_randomized_exponential`): `n = 4m`, `u = ln 16`, `ε < 0.2425 m`:
+`E|Q| ≥ (1 − 2δ)(27/16)^m`.
+(b) **[P]**  If `ε₁ > ln cosh(u/2)`, a number of random evaluations independent of the number of
+states suffices on every instance: with `m̂` the empirical mean of `g` over uniform samples,
+`ln Z ∈ [n ln 2 − βm̂ − βη, n ln 2 − βm̂ + βη + n ln cosh(u/2)]` outside an event of probability
+`2e^{−2Nη²/(nc²)}` — the sandwich of Theorem 11.21 with the exact constant of the two-point
+reference (each martingale difference is a symmetric two-point variable of half-width at most
+`c/2`, so `0 ≤ ln E e^{−β(g − Eg)} ≤ n ln cosh(u/2)`).
+(c) **[P + K]**  For `ε = o(n)` the bound (a) is attained at `g ≡ 0` up to a factor polynomial
+in `n`: by symmetry the uniform distribution is an optimal sampling distribution, and by
+Harper's vertex-isoperimetric theorem a Hamming ball maximises `E e^{βh}` among the supports of
+admissible perturbations `h` of a given size (harness XII.5), so the spot-check of Theorem
+11.22(d) needs `O(n ln(1/δ) · 2ⁿ/|B(r*)|)` samples, `r*` the least radius whose ball supports a
+perturbation of `ln Z` by more than `ε/2`.
+
+So on this class the accuracy `n ln cosh(βc/2)` — the largest Jensen gap of the class — is a
+sharp threshold.  Above it, a bounded number of random evaluations suffices; below it every
+algorithm, randomised or not, needs exponentially many, with exponent `ln 2 − h(ρ(ε₁))` at the
+zero residual (for `ε₁ = 0`: `0.0077, 0.029, 0.097, 0.156` at `u = 0.5, 1, 2, ln 16`), while a
+deterministic algorithm needs `2^{n(1−o(1))}` evaluations at every temperature.  For small `u`
+the exponent is `≈ u²/32`; importance sampling from the uniform reference needs about
+`e^{KL(π‖uniform)} ≈ e^{nu²/8}` samples at the additive worst case (Chatterjee–Diaconis 2018)
+**[K]**, so for algorithms without a hint the exponent on this class lies between these two
+values to leading order, and is open.  Benchmark B10 compares the closed form with the linear
+program and with exact ball counts up to `n = 1600`.
+
+*What is not proved.*  Single dips are not the extremal perturbations on general instances:
+unions of shallow dips, none of which is sensitive alone, can change `ln Z` (`DEAD_ENDS.md` D34:
+on the uniform metric with `n = 8` the fractional hitting number of all sensitive sets is `4`
+while the dip bound gives `1`).  On product spaces we *conjecture* that dips are extremal at
+the exponential scale — an asymptotic isoperimetric statement for the slack quasi-metric, which
+for the uniform cube is Harper's theorem.  It would make `R^rand_β(ε₁)` the exact randomised
+exponent at additive instances and its vanishing point
+`ε₁^crit = max_P min_a E_P[β s(a,·) − Λ₁]` (the value of a zero-sum game) the threshold.  In
+general `ε₁^crit` is below the passive width of the sandwich (`0.1137` against `0.1225` for
+`e/c = 1/2`, `β = 1`); whether accuracies in between are reachable with polynomially many
+evaluations is open.  The model of randomness (finitely many deterministic algorithms) and of
+correctness (probability `1 − δ` on every instance, not on average) are those of the theorems.
+Harness XII.1–XII.5.
+
+*Prior art* (`prior_art/L7`).  For deterministic certified algorithms on `ℝ^d` the necessity half
+of Theorem 11.23(a) is the lower bound of Bachoc–Cesari–Gerchinovitz (2021), and the sufficiency
+half is the "best possible algorithm" of Hansen–Jaumard–Lu (1991).  That randomisation does not
+improve worst-case rates for global optimisation over Lipschitz classes is classical
+(Nemirovski–Yudin 1983; Novak 1988) **[K, cited from memory, not re-verified]**.  Lower bounds
+for estimating normalising constants through hidden local perturbations appear in Ge–Lee–Lu
+(2020) for log-concave densities (polynomial in the dimension).  We did not find the
+instance-wise randomised bound with gap radii, the soft-gap radius, the three budgets or the
+threshold of Theorem 11.25.  The proofs are short.
 
 ---
 
@@ -1704,58 +2023,99 @@ next foundation and is not built here.
    For a chain with pairwise `E₀`, Hamming envelope `c` and zero residual the partition-function
    bound gives, by the Gibbs variational principle,
    `n⁻¹ ln N ≥ max_t [p_E(t) − ln(1+(k−1)e^{−tc})] = sup_ν [h(ν) − h_b(δ_ν) − δ_ν ln(k−1)]`,
-   `δ_ν = e_ν/c`, the supremum over stationary measures `ν` with entropy rate `h(ν)` and mean
+   `δ_ν = e_ν/c`, the supremum over stationary measures `ν` with `δ_ν ≤ (k−1)/k` (the constraint
+   `t ≥ 0`; without it the right-hand side can exceed the left), entropy rate `h(ν)` and mean
    excitation energy `e_ν` per site, `p_E` the pressure (computable from the transfer matrix).
    This is the *Shannon lower bound* of the rate–distortion function of the process `ν` at
-   distortion `δ_ν`, and we expect the true exponent to be `sup_ν R_ν(δ_ν)` (type covering for
-   processes) — equal to the bound when the optimal `ν` is below its critical distortion, as
-   for binary symmetric Markov sources (Gray 1970), and strictly larger otherwise.  None of this
-   is proved here; for independent sites the same remark explains when the Boltzmann choice of
-   weights in Theorem 11.8 is optimal (two-state sites: always) and when general weights are
-   needed.  (d) a careful comparison with the source-coding literature on exponential moments
+   distortion `δ_ν`, and we expect the true exponent to be `sup_ν R_ν(δ_ν)` — equal to the bound
+   when the optimal `ν` is below its critical distortion, as for binary symmetric Markov sources
+   (Gray 1970), and strictly larger otherwise.  None of this is proved here, and it is further
+   from proof than it sounds: type covering for Markov types with a distortion budget fixed by
+   the pair marginal is not an off-the-shelf lemma (second referee).  For independent sites the
+   same remark explains when the Boltzmann choice of weights in Theorem 11.8 is optimal
+   (two-state sites with zero residual: always) and when general weights are needed.
+   (c') the exponent of Theorem 11.15 for exponentially small accuracies `ε_n = e^{−λn}`: between
+   `max(R_β, max{H(Q) : KL(Q‖π) < λ})` and `max_Q R(Q; s, (KL(Q‖π) − λ)₊/β)`.
+   (d) a careful comparison with the source-coding literature on exponential moments
    of distortion and on guessing (Merhav 2011; Arikan–Merhav 1998): Theorem 11.15 is a
    corollary of the former, read here only in part; whether the zero-temperature statement with
    its credit distortion and the dichotomy also appear there in some form is not settled.
-2. **Algorithms.**  On product landscapes plain enumeration after differential dead-end
-   elimination (fix every white-box-sharp site, enumerate the others) uses
-   `∏_{non-sharp} k_i` evaluations, which is polynomial in `N_cov ≥ exp(Σ_{non-sharp} r_i)` but
-   with an instance-dependent exponent.  Can a procedure reach the optimal exponent `R*`
-   without knowing the residual?  A natural candidate is *learn-then-cover*: evaluate a star,
-   compute the slack and the gaps under the working hypothesis that the residual is additive,
-   evaluate a type-covering code for them, and check the certificate (which is valid for the
-   whole first-order class whether or not the hypothesis was right).  Not analysed.  Does the
-   resource-augmented bound of Theorem 11.11 convert, in doubling
-   spaces and for `f ≡ 0`, into `≤ K·N* + 1` without the `log(1/ε)` of Bachoc et al.
-   (`prior_art/L4`, sketched, unverified)?  For asymmetric envelopes Theorem 11.11 needs a
-   quasi-symmetry constant of the slack, which can be arbitrarily bad.
+2. **Algorithms.**  On additive instances the exponent `R*` is reached without knowing the
+   residual (learn-then-cover), and no algorithm, randomised or not, does better
+   (Theorem 11.23).  Open:
+   (a) instances that are only approximately additive — the cover computed from the
+   interpolant must be robust to the pair remainder;
+   (b) **the randomised exponent at finite temperature**: is `R^rand_β(ε₁)` attained at additive
+   instances, i.e. are single dips extremal at the exponential scale on product spaces?  This
+   is an asymptotic isoperimetric inequality for the slack quasi-metric; it holds for the
+   uniform cube (Harper) and fails for general finite instances (`DEAD_ENDS.md` D34);
+   (c) the threshold accuracy beyond the cube: is the game value `ε₁^crit` the boundary between
+   polynomial and exponential cost, and what is the cost between it and the passive width of
+   the sandwich?
+   (d) algorithms without a hint on the cube class: for small `u = βc` the exponent lies between
+   `≈ u²/32` (every algorithm) and `≈ u²/8` (importance sampling);
+   (e) for `f ≡ 0` in doubling spaces, does the resource-augmented bound of Theorem 11.11
+   convert into `≤ K·N* + 1` without the `log(1/ε)` of Bachoc et al. (`prior_art/L4`, sketched,
+   unverified)?  With a known part it does not (D30).  For asymmetric envelopes Theorem 11.11
+   needs a quasi-symmetry constant of the slack, which can be arbitrarily bad, and its
+   constants `θ`, `ε/6` are probably not tight.
 3. **Complexity classification of the exact criteria** (referee, Q4.1(iv)).  For pairwise `E₀`
    and site-additive `d`, "is configuration `x` possibly optimal" is a pairwise minimisation;
    "is state `r` of site `i` possibly optimal" is an `∃∀` question — is it `Σ₂ᵖ`-hard, and
    polynomial on chains?  On succinct product spaces even *verifying* a certificate is
    coNP-hard in general (covering radius); the kernels avoid this only through explicit
    branch-and-bound certificates.
-4. **Second-order classes.**  Lower bounds on the number of evaluations (covering arrays of
-   strength two appear to be the right object); optimal choice and re-centring of stars; a
-   box-restricted class (constants valid on the current domains only); certified constants
-   `c_ij` for one concrete residual — without which the interface is hypothetical.
+4. **Second-order classes.**  Lower bounds on the number of evaluations under dense constants:
+   the whole radius-2 ball leaves quadratic uncertainty (§11.7), so covering arrays of strength
+   two — conjectured to be the right object in the previous version — are not sufficient; is
+   the cost exponential, as the covering radius `(2·gap/c)^{1/2}` suggests?  Re-centring of stars
+   with a termination guarantee; a box-restricted class (constants valid on the current domains
+   only); certified constants `c_ij` for one concrete residual — without which the interface is
+   hypothetical.
 5. **Dependent references.**  The exact worst-case free-energy gap for a Markov-chain
    reference: additivity fails in general (D25) but no binary counterexample is known; a
    two-sided bracket from transfer matrices (best additive two-level residual below,
    Wasserstein-matrix bound above) is unwritten.
 6. **Proof complexity of the extended kernels.**  Lower bounds for connected families
-   (triangles coupled along a chain) for cut-free and for decomposition-aware certificates;
-   comparison with MICE/CPOG for model counting and with pseudo-Boolean proof logging.
+   (triangles coupled along a chain) for cut-free and for decomposition-aware certificates; an
+   approximate version of the partition-kernel separation and a representation-independent
+   notion of rigidity (§11.8); comparison with MICE/CPOG for model counting and with
+   pseudo-Boolean proof logging.
 7. **Engineering** (referee, Q2): a certificate producer and experiments at realistic sizes; a
    compiled checker with a refinement proof (kernel evaluation by `decide +kernel` does not
    scale); certified envelope constants for a real residual.
 
+8. **Probabilistic certificates.**  A kernel that checks a spot-check transcript against
+   verifier-side randomness, with `spotCheck_correct` as its soundness theorem.  The detection
+   probability `p` must itself be certified: for the minimum it is a minimum over closed slack
+   balls and the set of near-minimisers (harness XII.4); for free energies it is an
+   isoperimetric quantity (item 2(b)).
+
 As it stands, the second phase contains one cluster with the shape of a research contribution —
-*the complexity of certifying ground states and free energies under envelope uncertainty*:
-exact covering characterisation, dichotomy and exact exponents at zero and finite temperature
-with a common variational formula, hardness, a resource-augmented guarantee for best-first
-search, and the second-order way out, with the one-shot halves machine-checked.  Its tools are
-standard and its proofs are short; whether it is a publishable note depends on items 1(a)–(d)
-and on a specialist's reading of the source-coding literature.
+*the query complexity of certifying ground states and free energies under envelope
+uncertainty*: an exact covering characterisation (certificate size = instance-wise deterministic
+complexity), a dichotomy and exponents at zero and finite temperature with one variational
+formula and three budgets, lower bounds for every randomised algorithm, an accuracy threshold
+on the cube, hardness, a resource-augmented guarantee for best-first search, and second-order
+classes — with every one-shot lower bound machine-checked.
+
+*The second referee's assessment* of this cluster without §11.10 (`reviews/R2`, §4), which we
+accept: "a coherent note, not a theorem-driven paper".  It is not publishable as mathematics or
+information theory, because after the reformulation each step is a short application of a
+standard tool (type covering, Merhav's theorem, Chernoff and Hölder, the dominating-set
+reduction, a packing argument, a discrete Taylor remainder); it could be a short note for the
+certified-optimisation audience, or a formalisation paper.  Of the seven things the referee
+found missing, this revision supplies four: the corrected statement of Theorem 11.15 and the
+missing step of Theorem 11.9; the positioning (the exponents are corollaries); an algorithmic
+statement (lower bounds for all algorithms; learn-then-cover on additive instances); and a
+probabilistic notion with matching limits (spot-checked hints; Theorems 11.24–11.25).  Still
+missing: a step beyond product landscapes (a pairwise chain as known part); a regime in which
+best-first search is provably within a constant of `N_cov`, or tight constants; a lower bound
+and one certified instance for second-order classes; and, new, the exact randomised exponent
+(item 2(b)).  Whether §11.10 changes the verdict needs a reading by a specialist in
+information-based complexity: Theorem 11.25 is a matching pair (a threshold) rather than a
+one-sided bound, but its proof is as short as the others and its setting, the uniform cube, is
+special.
 
 ---
 
@@ -1764,8 +2124,9 @@ and on a specialist's reading of the source-coding literature.
 Full bibliographic details, DOIs and verification status of each citation are in
 `prior_art/L1_pruning_certificates.md`, `L2_relaxations_partition.md`,
 `L3_realizability_geometry.md` and, for §§10–12, `L4_certified_optimisation_and_recovery.md`,
-`L5_polytropes_interval_uncertainty.md`, `L6_transport_entropy_and_information_limits.md`
-(each with its search log and a list of sources that could not be read in full).  Principal
+`L5_polytropes_interval_uncertainty.md`, `L6_transport_entropy_and_information_limits.md`,
+`L7_query_complexity.md` (each with its search log and a list of sources that could not be read
+in full).  Principal
 sources:
 
 *Pruning and certificates.*  Desmet, De Maeyer, Hazes, Lasters (1992); Goldstein (1994); Leach &
@@ -1810,4 +2171,7 @@ Marton (1996); Bobkov, Houdré, Tetali (2006); Alon, Boppana, Spencer (1998); Go
 (2007; 2010); Djellout, Guillin, Wu (2004); Paulin (2015).  Robust Bayes and ratio classes:
 DeRobertis & Hartigan (1981); Wasserman (1992); Walley (1997); Kairouz, Oh, Viswanath (2016).
 Anchored decompositions: Rabitz & Aliş (1999); Kuo, Sloan, Wasilkowski, Woźniakowski (2010);
-Griebel & Holtz (2010).
+Griebel & Holtz (2010).  Query complexity and isoperimetry (§11.10): Aaronson (2003, randomised
+certificate complexity); Tal (2013); Gilmer, Saks, Srinivasan (2016); Kulkarni & Tal (2016,
+fractional block sensitivity); Nemirovski & Yudin (1983); Harper (1966); Ge, Lee, Lu (2020);
+Chatterjee & Diaconis (2018).

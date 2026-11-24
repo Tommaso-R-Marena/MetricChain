@@ -31,6 +31,7 @@ import proofs.Frontiers.HigherOrderEnvelope
 import proofs.Frontiers.SampledSandwich
 import proofs.Frontiers.PartitionProduct
 import proofs.Frontiers.RefereeLemmas
+import proofs.Frontiers.QueryLowerBound
 import proofs.AuditCommand
 
 /-!
@@ -266,6 +267,25 @@ import proofs.AuditCommand
 #print axioms MetricChain.value_exchange
 #print axioms MetricChain.exact_free_energy_certificate_eq_univ
 #print axioms MetricChain.gauge_trivial_separation
+
+-- Query complexity: every algorithm, deterministic or randomised
+#print axioms MetricChain.exists_query_ne
+#print axioms MetricChain.prob_query_ne_ge
+#print axioms MetricChain.expected_queries_ge_packing
+#print axioms MetricChain.queries_strict_cover
+#print axioms MetricChain.queries_isValueCertificate
+#print axioms MetricChain.certificateAlgorithm_correct
+#print axioms MetricChain.instance_query_complexity
+#print axioms MetricChain.expected_queries_ge
+#print axioms MetricChain.expected_queries_ge_exp_weights_min
+#print axioms MetricChain.binary_randomized_exponential
+#print axioms MetricChain.log_sum_exp_dip_ge
+#print axioms MetricChain.thermal_queries_strict_cover
+#print axioms MetricChain.thermal_queries_bracket
+#print axioms MetricChain.thermal_expected_queries_ge
+#print axioms MetricChain.cube_thermal_randomized_exponential
+#print axioms MetricChain.cube_thermal_randomized_bound
+#print axioms MetricChain.spotCheck_correct
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp
@@ -860,6 +880,99 @@ theorem exact_free_energy_certificate_witness :
     rw [lowerEnv_eq_of_mem hd univ univ_nonempty _ (fun a _ b _ => hadm a b) (mem_univ y),
       upperEnv_eq_of_mem hd univ univ_nonempty _ (fun a _ b _ => hadm a b) (mem_univ y)]
   · exact exact_free_energy_certificate_eq_univ hadm (fun _ => 0) A hA one_pos hpos h
+
+/-- **Witness for the deterministic query bounds (`queries_strict_cover`,
+`instance_query_complexity`).**  Two states, discrete envelope of oscillation `1`, zero known
+part.  (i) The algorithm that evaluates everything is exactly correct (`ε = 0`), so the
+hypothesis is satisfiable.  (ii) Every exactly correct algorithm evaluates both states of the
+zero residual: each state is within slack `1/2` of a queried point, and distinct states have
+slack `1`. -/
+theorem query_lower_bound_two_state :
+    (∀ g : Bool → ℝ, Admissible (discreteEnvelope 1) g →
+      |(fullQueryAlgorithm fun g : Bool → ℝ => univ.inf' univ_nonempty fun x => (0 : ℝ) + g x).output g -
+        univ.inf' univ_nonempty fun x => (0 : ℝ) + g x| ≤ 0 / 2) ∧
+      ∀ alg : QueryAlgorithm Bool,
+        (∀ g : Bool → ℝ, Admissible (discreteEnvelope 1) g →
+          |alg.output g - univ.inf' univ_nonempty fun x => (0 : ℝ) + g x| ≤ 0 / 2) →
+        alg.queries (fun _ => 0) = univ := by
+  have hd : IsEnvelope (discreteEnvelope (X := Bool) 1) := discreteEnvelope_isEnvelope zero_le_one
+  have hadm : Admissible (discreteEnvelope 1) (fun _ : Bool => (0 : ℝ)) :=
+    admissible_of_bounds (lo := 0) _ fun _ => by norm_num
+  refine ⟨fun g _ => by simp [fullQueryAlgorithm], fun alg hcorr => ?_⟩
+  rw [Finset.eq_univ_iff_forall]
+  intro y
+  obtain ⟨a, ha, hlt⟩ := queries_strict_cover hd (fun _ : Bool => (0 : ℝ)) alg hcorr hadm
+    (ε' := 1 / 2) (by norm_num) y
+  have hinf : (univ.inf' univ_nonempty fun _ : Bool => (0 : ℝ) + 0) = 0 := by simp
+  rw [hinf] at hlt
+  by_cases hay : a = y
+  · rw [← hay]
+    exact ha
+  · exfalso
+    simp [slack, discreteEnvelope, hay] at hlt
+    linarith
+
+/-- **Witness for `binary_randomized_exponential`.**  For every `n` the hypotheses are
+satisfiable with error probability `δ = 0` and accuracy `ε = 0`: the one-point probability space
+carrying the algorithm that evaluates everything. -/
+theorem binary_randomized_witness (n : ℕ) :
+    ∀ g, Admissible (hamEnv fun _ : Fin n => (2 : ℝ)) g →
+      1 - (0 : ℝ) ≤ ∑ _ω ∈ (univ : Finset Unit).filter (fun _ => |(fullQueryAlgorithm
+          fun g : (Fin n → Bool) → ℝ =>
+            univ.inf' univ_nonempty fun x => (∑ i, if x i then (1 : ℝ) else 0) + g x).output g -
+        univ.inf' univ_nonempty fun x => (∑ i, if x i then (1 : ℝ) else 0) + g x| ≤ 0 / 2),
+        (1 : ℝ) := by
+  intro g _
+  simp [fullQueryAlgorithm]
+
+/-- **Witness for `cube_thermal_randomized_exponential`** at `m = 1`: the accuracy condition
+holds for `ε = 0` (indeed `4 log (32/17) < log 16`), and the algorithm that evaluates everything
+satisfies the correctness hypothesis with `δ = 0`. -/
+theorem cube_thermal_randomized_witness :
+    (0 : ℝ) + 4 * (1 : ℕ) * Real.log (32 / 17) < (1 : ℕ) * Real.log 16 ∧
+      ∀ g, Admissible (hamEnv fun _ : Fin (4 * 1) => (1 : ℝ)) g →
+        1 - (0 : ℝ) ≤ ∑ _ω ∈ (univ : Finset Unit).filter (fun _ => |(fullQueryAlgorithm
+            fun g : (Fin (4 * 1) → Bool) → ℝ =>
+              Real.log (∑ x, Real.exp (-Real.log 16 * ((0 : ℝ) + g x)))).output g -
+          Real.log (∑ x, Real.exp (-Real.log 16 * ((0 : ℝ) + g x)))| ≤ 0 / 2), (1 : ℝ) := by
+  constructor
+  · have h : Real.log ((32 / 17 : ℝ) ^ 4) < Real.log 16 :=
+      Real.log_lt_log (by positivity) (by norm_num)
+    rw [Real.log_pow] at h
+    push_cast at h ⊢
+    linarith
+  · intro g _
+    simp [fullQueryAlgorithm]
+
+/-- **Witness for `spotCheck_correct`.**  Two states, discrete envelope of oscillation `1`, the
+minimum functional, hint `0`, the uniform sampling distribution, accuracy `ε / 2 = 1`.  Every
+admissible residual whose minimum differs from `0` by more than `1` differs from the hint at
+both states, so the hypotheses hold with `p = 1`, `N = 1`, `δ = 0`: one random evaluation
+decides the minimum to within `1` with certainty. -/
+theorem spotCheck_witness (g : Bool → ℝ) (hg : Admissible (discreteEnvelope 1) g) :
+    1 - (0 : ℝ) ≤ ∑ _a ∈ univ.filter (fun a : Fin 1 → Bool =>
+      |(spotCheck (fun g : Bool → ℝ => univ.inf' univ_nonempty fun x => g x) (fun _ => 0)
+          a).output g - univ.inf' univ_nonempty fun x => g x| ≤ 2 / 2), ∏ _k : Fin 1, (1 / 2 : ℝ) := by
+  refine spotCheck_correct (G := Admissible (discreteEnvelope 1))
+    (Φ := fun g : Bool → ℝ => univ.inf' univ_nonempty fun x => g x) (fun _ => 0) 1
+    (fun _ => 1 / 2) (fun _ => by norm_num) (by simp) (by norm_num) (le_refl 1)
+    (fun g hg hfar => ?_) (by norm_num) g hg
+  have hinf : (univ.inf' univ_nonempty fun _ : Bool => (0 : ℝ)) = 0 := by simp
+  rw [hinf, sub_zero] at hfar
+  obtain ⟨x₀, _, hx₀⟩ := Finset.exists_mem_eq_inf' univ_nonempty (fun x : Bool => g x)
+  have hne : ∀ x : Bool, g x ≠ 0 := by
+    intro x hx
+    have hmx : (univ.inf' univ_nonempty fun x => g x) ≤ g x :=
+      Finset.inf'_le (fun x => g x) (mem_univ x)
+    have hd1 : discreteEnvelope (1 : ℝ) x x₀ ≤ 1 := by
+      unfold discreteEnvelope
+      split_ifs <;> norm_num
+    have hadm := hg x x₀
+    rcases lt_abs.mp hfar with hpos | hneg
+    · linarith
+    · linarith
+  rw [Finset.filter_true_of_mem fun x _ => hne x]
+  simp
 
 end MetricChain.NonVacuity
 

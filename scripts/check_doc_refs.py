@@ -82,6 +82,7 @@ IGNORE = {
     "L5_polytropes_interval_uncertainty", "L6_transport_entropy_and_information_limits", "R1_referee_report",
     "e_ν", "p_E", "δ_ν", "p_gap", "p_slack", "D_Q", "R2_referee_report",
     "ε_n", "a_n", "s_min", "T_Q", "T_P", "N_Z", "R_β", "c_y", "r_y", "λ_β", "Λ_β", "N_frac", "U_y", "q_a",
+    "D_j", "F_j", "W_ji", "W_ij", "g_j", "λ_j", "P_j", "w_j", "R_j", "gap_j", "x_i", "A_j",
     # names of JSON conformance vectors (experiments/certs/*.json)
     "residual_inconsistent_reject", "residual_lower_only", "residual_negative_c_reject",
     "partition_negative_reject", "residual_interval", "residual_interval_inconsistent_reject",

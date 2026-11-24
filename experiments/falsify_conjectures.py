@@ -3134,6 +3134,415 @@ def t_dead_additive_extremal_dependent(rng, trials):
 
 
 # ----------------------------------------------------------------------------------------------
+# Cluster XII — query complexity of every algorithm (cycle 8): dips, sensitive blocks, deterministic
+# and randomised lower bounds, spot-checking; refutations found by the second referee (DEAD.10-13)
+# ----------------------------------------------------------------------------------------------
+
+def qc_dip(d, g, y, c):
+    """The residual g with a dip of depth c at y: a -> min(g(a), g(y) - c + d(a, y))."""
+    return np.minimum(g, g[y] - c + d[:, y])
+
+
+def qc_admissible(d, g, tol=1e-9):
+    return bool(np.all(g[:, None] - g[None, :] <= d + tol))
+
+
+def qc_frac_packing(B):
+    """Largest total weight w >= 0 with sum_{y : B[a, y]} w(y) <= 1 for every point a (B[a, y]: a detects y)."""
+    from scipy.optimize import linprog
+    n, m = B.shape
+    res = linprog(-np.ones(m), A_ub=B.astype(float), b_ub=np.ones(n), bounds=(0, None), method="highs")
+    return float(-res.fun)
+
+
+def qc_greedy_cover(sees):
+    """Greedy set of points a such that every column y has some chosen a with sees[a, y]."""
+    n, m = sees.shape
+    uncovered, A = set(range(m)), []
+    while uncovered:
+        a = max(range(n), key=lambda a: sum(1 for y in uncovered if sees[a, y]))
+        if not any(sees[a, y] for y in uncovered):
+            raise RuntimeError("sanity: some dip is seen from nowhere")
+        A.append(a)
+        uncovered -= {y for y in uncovered if sees[a, y]}
+    return sorted(A)
+
+
+def qc_lp_rate(rho, t):
+    """max over weights v >= 0 of ln(sum v) subject to sum_s v(s) exp(-t rho(a, s)) <= 1 for every a."""
+    from scipy.optimize import linprog
+    rho = np.asarray(rho, dtype=float)
+    A = np.exp(-t * rho)
+    col = A.max(axis=0)
+    res = linprog(-1.0 / col, A_ub=A / col, b_ub=np.ones(len(rho)), bounds=(0, None), method="highs")
+    if res.status != 0 or -res.fun <= 0:
+        return float("-inf")
+    return math.log(-res.fun)
+
+
+def qc_site(phi, gam, c):
+    """Single site with known part phi, residual gam, discrete envelope constant c: (gap, slack, credit distortion)."""
+    phi, gam = np.asarray(phi, dtype=float), np.asarray(gam, dtype=float)
+    E = phi + gam
+    gap = E - E.min()
+    k = len(phi)
+    s = c * (1 - np.eye(k)) - gam[:, None] + gam[None, :]
+    return gap, s, s - gap[None, :]
+
+
+def qc_boltzmann_rate(gap, s, t):
+    return math.log(float(np.sum(np.exp(-t * gap)))) - math.log(float(np.max(np.sum(np.exp(-t * s), axis=1))))
+
+
+@conjecture("XII.1 Dips: a dip of depth c at y is admissible, differs from g exactly on the open slack ball {a : s(a,y) < c}, lowers the minimum by at least eps' at depth gap(y)+eps', and multiplies Z by E_pi exp(beta (c - s(.,y))_+) >= exp(beta c - softgap(y)), with 0 <= softgap(y) <= -ln pi(y)")
+def t_dips(rng, trials):
+    stats = dict(dips=0)
+    for _ in range(trials):
+        n, d, kappa, f, g, eps = cg_instance(rng)
+        E = f + g
+        Emin = float(E.min())
+        gap = E - Emin
+        s = cg_slack(d, g)
+        beta = float(rng.choice([0.3, 1.0, 3.0]))
+        w = np.exp(-beta * (E - Emin))
+        Z = float(w.sum())
+        pi = w / Z
+        for y in range(n):
+            soft = math.log(Z) - math.log(float(np.exp(-beta * (E - Emin + s[:, y])).sum()))
+            if soft < -1e-9 or soft > -math.log(pi[y]) + 1e-9:
+                return False, dict(reason="soft gap outside [0, -ln pi(y)]", soft=soft, bound=-math.log(pi[y]))
+            for c in (float(rng.uniform(0.0, 3.0)), float(gap[y] + 0.25)):
+                gd = qc_dip(d, g, y, c)
+                if not qc_admissible(d, gd):
+                    return False, dict(reason="dip is not admissible")
+                if np.max(np.abs(gd - (g - np.maximum(0.0, c - s[:, y])))) > 1e-9:
+                    return False, dict(reason="dip is not g minus the positive part of c - slack")
+                differs = np.abs(gd - g) > 1e-10
+                if np.any(differs & (s[:, y] >= c)) or np.any(~differs & (s[:, y] < c - 1e-9)):
+                    return False, dict(reason="difference set of the dip is not the open slack ball")
+                ratio = float(np.exp(-beta * (f + gd - Emin)).sum()) / Z
+                exact = float(np.sum(pi * np.exp(beta * np.maximum(0.0, c - s[:, y]))))
+                if abs(ratio - exact) > 1e-9 * max(1.0, exact):
+                    return False, dict(reason="partition function of the dip is not E_pi exp(beta (c - s)_+)")
+                if math.log(ratio) < beta * c - soft - 1e-9:
+                    return False, dict(reason="effect of the dip is below beta c - softgap", effect=math.log(ratio),
+                                       bound=beta * c - soft)
+                stats["dips"] += 1
+            if float((f + qc_dip(d, g, y, gap[y] + 0.25)).min()) > Emin - 0.25 + 1e-9:
+                return False, dict(reason="a dip of depth gap + eps' does not lower the minimum by eps'")
+    return True, stats
+
+
+@conjecture("XII.2 Randomised lower bound (minimum): for mixtures of hint-verifying and blind strategies with error probability delta on the instance and on every dip, (1 - 2 delta) * (fractional packing of the open slack balls of radius gap + eps') <= expected number of evaluations; attained on the uniform metric")
+def t_randomized_min(rng, trials):
+    """The proof of `expected_queries_ge` uses correctness on the instance and on its dips only; delta is computed on
+    exactly these residuals (so the inequality tested is the one the proof establishes, and it is stronger than the
+    theorem, whose delta is a maximum over the whole class)."""
+    stats = dict(nontrivial=0, tight=0)
+    for trial in range(trials):
+        uniform = trial % 5 == 0
+        if uniform:
+            n = int(rng.integers(3, 8))
+            d, f, g, eps = np.ones((n, n)) - np.eye(n), np.zeros(n), np.zeros(n), 0.2
+        else:
+            n, d, kappa, f, g, eps = cg_instance(rng)
+        E = f + g
+        Emin = float(E.min())
+        gap = E - Emin
+        s = cg_slack(d, g)
+        epsp = eps + float(rng.choice([0.05, 0.3]))
+        B = s < (gap[None, :] + epsp)                     # the detection relation claimed by the theorem
+        pack = qc_frac_packing(B)
+        dips = [qc_dip(d, g, y, gap[y] + epsp) for y in range(n)]
+        sees = np.array([[abs(dips[y][a] - g[a]) > 1e-10 for y in range(n)] for a in range(n)])   # what a query reveals
+        dipmin = np.array([float((f + dips[y]).min()) for y in range(n)])
+        strategies = []                                   # (probability, evaluated set or None, blind output)
+        if uniform:
+            lam = float(rng.uniform(0.1, 0.9))
+            strategies = [(lam, list(range(n)), None), ((1 - lam) / 2, None, Emin), ((1 - lam) / 2, None, Emin - epsp)]
+        elif trial % 5 in (1, 2):
+            strategies = [(1.0, qc_greedy_cover(sees), None)]   # a deterministic algorithm that sees every dip
+        else:
+            k = int(rng.integers(1, 5))
+            wts = rng.dirichlet(np.ones(k + 2))
+            for j in range(k):
+                if rng.random() < 0.5:
+                    A = list(range(n))
+                else:
+                    A = sorted(rng.choice(n, size=int(rng.integers(1, n + 1)), replace=False).tolist())
+                strategies.append((float(wts[j]), A, None))
+            strategies.append((float(wts[k]), None, Emin))
+            strategies.append((float(wts[k + 1]), None, float(rng.choice(dipmin))))
+
+        def error_on(target, y):
+            """Probability of an output farther than eps/2 from `target`; y is None for the instance itself."""
+            err = 0.0
+            for p, A, out in strategies:
+                if A is None:
+                    err += p * (abs(out - target) > eps / 2 + 1e-12)
+                elif y is not None and not any(sees[a, y] for a in A):
+                    err += p * (abs(Emin - target) > eps / 2 + 1e-12)   # undetected: returns the hint's minimum
+            return err
+
+        delta = max([error_on(Emin, None)] + [error_on(dipmin[y], y) for y in range(n)])
+        cost = sum(p * len(A) for p, A, out in strategies if A is not None)
+        if (1 - 2 * delta) * pack > cost + 1e-7:
+            return False, dict(reason="expected evaluations below (1 - 2 delta) * packing", delta=delta, packing=pack,
+                               cost=cost)
+        stats["nontrivial"] += delta < 0.5
+        if uniform:
+            if abs((1 - 2 * delta) * pack - cost) > 1e-7:
+                return False, dict(reason="the blind mixture on the uniform metric should attain the bound",
+                                   lhs=(1 - 2 * delta) * pack, cost=cost)
+            stats["tight"] += 1
+    if stats["tight"] == 0 or stats["nontrivial"] == 0:
+        return False, dict(reason="coverage: no tight or no nontrivial instance", **stats)
+    return True, stats
+
+
+@conjecture("XII.3 Free energy: every evaluated set whose two envelope partition functions agree within e^eps reaches within slack c of every y whenever beta c > softgap(y) + eps; and (1 - 2 delta) * (packing of these thermal detection balls) <= expected evaluations of hint-verifying mixtures")
+def t_thermal_query(rng, trials):
+    stats = dict(certificates=0, mixtures=0)
+    for _ in range(max(12, trials // 4)):
+        n, d, kappa, f, g, _ = cg_instance(rng, nmax=7, kappas=(0.0, 0.3, 0.7))
+        beta = float(rng.choice([0.5, 1.5, 4.0]))
+        eps = float(rng.choice([0.1, 0.5, 1.5]))
+        E = f + g
+        Emin = float(E.min())
+        s = cg_slack(d, g)
+        Z = float(np.exp(-beta * (E - Emin)).sum())
+        soft = np.array([math.log(Z) - math.log(float(np.exp(-beta * (E - Emin + s[:, y])).sum())) for y in range(n)])
+        c = (soft + eps) / beta + 1e-7                    # a depth with beta c > softgap + eps
+        for y in range(n):
+            effect = math.log(float(np.exp(-beta * (f + qc_dip(d, g, y, c[y]) - Emin)).sum()) / Z)
+            if effect <= eps:
+                return False, dict(reason="a dip beyond the soft-gap radius is not sensitive", effect=effect, eps=eps)
+        B = s < c[None, :]                                # the detection relation claimed by the theorem
+        dips = [qc_dip(d, g, y, c[y]) for y in range(n)]
+        sees = np.array([[abs(dips[y][a] - g[a]) > 1e-10 for y in range(n)] for a in range(n)])
+        for mask in range(1, 2 ** n):
+            A = [a for a in range(n) if mask >> a & 1]
+            _, _, _, L, U = cg_bounds(d, f, g, A)
+            width = math.log(float(np.exp(-beta * (f + L - Emin)).sum())) - math.log(float(np.exp(-beta * (f + U - Emin)).sum()))
+            if width <= eps:
+                stats["certificates"] += 1
+                if not all(any(B[a, y] for a in A) for y in range(n)):
+                    return False, dict(reason="a certificate of ln Z misses a thermal detection ball", size=len(A))
+        pack = qc_frac_packing(B)
+        k = int(rng.integers(1, 5))
+        wts = rng.dirichlet(np.ones(k))
+        sets = [qc_greedy_cover(sees) if rng.random() < 0.5 else
+                sorted(rng.choice(n, size=int(rng.integers(1, n + 1)), replace=False).tolist()) for _ in range(k)]
+        delta = max(sum(p for p, A in zip(wts, sets) if not any(sees[a, y] for a in A)) for y in range(n))
+        cost = float(sum(p * len(A) for p, A in zip(wts, sets)))
+        if (1 - 2 * delta) * pack > cost + 1e-7:
+            return False, dict(reason="expected evaluations below (1 - 2 delta) * thermal packing", delta=float(delta),
+                               packing=pack, cost=cost)
+        stats["mixtures"] += 1
+    return True, stats
+
+
+@conjecture("XII.4 Spot-checking a hint (minimum): every admissible residual whose minimum differs from the hint's by more than eps/2 differs from the hint on a whole closed slack ball {a : s(a,y) <= gap(y) + eps/2} or on all eps/2-minimisers; hence N samples from q miss it with probability at most (1 - p)^N")
+def t_spot_check(rng, trials):
+    stats = dict(distinguishable=0, lower=0, higher=0)
+    for _ in range(trials):
+        n, d, kappa, f, g, eps = cg_instance(rng)
+        eps = max(eps, 0.1)
+        E = f + g
+        Emin = float(E.min())
+        gap = E - Emin
+        s = cg_slack(d, g)
+        balls = [np.array([s[a, y] <= gap[y] + eps / 2 + 1e-12 for a in range(n)]) for y in range(n)]
+        nearmin = gap <= eps / 2 + 1e-12
+        q = rng.dirichlet(np.ones(n))
+        p = min([float(q[b].sum()) for b in balls] + [float(q[nearmin].sum())])
+        N = int(rng.integers(1, 6))
+        for alt in range(12):
+            kind = alt % 4
+            if kind == 0:
+                y = int(rng.integers(n))
+                gp = qc_dip(d, g, y, gap[y] + eps / 2 + float(rng.uniform(0.01, 1.0)))
+            elif kind == 1:                               # bumps at all near-minimisers
+                c = float(rng.uniform(0.0, 1.5))
+                gp = g.copy()
+                for x in np.nonzero(nearmin)[0]:
+                    gp = np.maximum(gp, g[x] + c - d[x, :])
+            elif kind == 2:
+                gp = cg_lipschitz(rng, d, 1.0) + float(rng.normal(0, 1.0))
+            else:
+                gp = np.minimum(g, cg_lipschitz(rng, d, 1.0) + float(rng.normal(0, 1.0)))
+            if not qc_admissible(d, gp):
+                raise RuntimeError("sanity: generated alternative is not admissible")
+            dev = float((f + gp).min()) - Emin
+            if abs(dev) > eps / 2 + 1e-9:
+                D = np.abs(gp - g) > 1e-10
+                qD = float(q[D].sum())
+                if qD < p - 1e-9:
+                    return False, dict(reason="a distinguishable alternative differs from the hint on too small a set",
+                                       q_of_difference_set=qD, p=p, deviation=dev)
+                if (1 - qD) ** N > (1 - p) ** N + 1e-12:
+                    return False, dict(reason="miss probability exceeds (1 - p)^N")
+                stats["distinguishable"] += 1
+                stats["lower" if dev < 0 else "higher"] += 1
+    if stats["lower"] == 0 or stats["higher"] == 0:
+        return False, dict(reason="coverage: alternatives of one sign only", **stats)
+    return True, stats
+
+
+@conjecture("XII.5 Uniform cube at finite temperature: among sets D of the size of a Hamming ball, the ball maximises the largest effect E exp(beta c dist(x, D^c)) of a perturbation supported in D (n = 3: all sets; n = 4: all sets of ball size)")
+def t_cube_blocks(rng, trials):
+    stats = dict(sets=0)
+    for n in (3, 4):
+        N = 2 ** n
+        dist = np.array([[bin(a ^ b).count("1") for b in range(N)] for a in range(N)])
+        for u in (0.5, 1.5):
+            for r in range(n):
+                size = sum(math.comb(n, k) for k in range(r + 1))
+                ball = [x for x in range(N) if dist[0, x] <= r]
+                comp = [x for x in range(N) if dist[0, x] > r]
+                ball_effect = (len(comp) + float(np.exp(u * dist[np.ix_(ball, comp)].min(axis=1)).sum())) / N
+                best = 0.0
+                for D in itertools.combinations(range(N), size):
+                    Dl = list(D)
+                    C = [x for x in range(N) if x not in D]
+                    best = max(best, (len(C) + float(np.exp(u * dist[np.ix_(Dl, C)].min(axis=1)).sum())) / N)
+                    stats["sets"] += 1
+                if best > ball_effect + 1e-9:
+                    return False, dict(reason="a non-ball set has a larger effect than the ball of the same size", n=n,
+                                       radius=r, ball=ball_effect, best=best)
+    return True, stats
+
+
+@conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
+def t_dead_exact_free_energy(rng, trials):
+    """Refuted (second referee, C1): with positive slack off the diagonal, an exact certificate of ln Z is the whole
+    space, so Theorem 11.15 cannot hold for arbitrarily small accuracies (`exact_free_energy_certificate_eq_univ`)."""
+    found_proper = False
+    for _ in range(6):
+        n, d, kappa, f, g, _ = cg_instance(rng, nmax=6, kappas=(0.0, 0.3, 0.7))
+        beta = float(rng.choice([0.5, 2.0]))
+        Emin = float((f + g).min())
+        for mask in range(1, 2 ** n - 1):
+            A = [a for a in range(n) if mask >> a & 1]
+            _, _, _, L, U = cg_bounds(d, f, g, A)
+            width = math.log(float(np.exp(-beta * (f + L - Emin)).sum())) - math.log(float(np.exp(-beta * (f + U - Emin)).sum()))
+            if width <= 1e-12:
+                found_proper = True
+    if not found_proper:
+        return False, dict(reason="no proper subset certifies ln Z exactly: N_Z(0) = |X|")
+    return True, {}
+
+
+@conjecture("DEAD.11 In a doubling space the covers at shrunk radii theta (gap + eps/6) are within a constant factor of N_cov, also with a known part f", expect_fail=True)
+def t_dead_doubling(rng, trials):
+    """Refuted (second referee, M1): X = {0} + {2^-i : i <= m} on the line, f(x) = x, g = 0, eps = 2^(-m-3): the point 0
+    covers everything at radius gap + eps, but at the shrunk radius (theta = 1/4) every point is covered only by itself."""
+    ratios = []
+    for m in (4, 8, 12):
+        X = np.array([0.0] + [2.0 ** (-i) for i in range(1, m + 1)])
+        eps = 2.0 ** (-m - 3)
+        d = np.abs(X[:, None] - X[None, :])
+        gap = X - X.min()
+        ncov = cg_min_cover(d <= gap[None, :] + eps)
+        shrunk = d <= 0.25 * (gap[None, :] + eps / 6)
+        forced = int(sum(1 for y in range(len(X)) if shrunk[:, y].sum() == 1))
+        ratios.append(forced / ncov)
+    if ratios[-1] > ratios[0] + 1 and ratios[-1] >= 10:
+        return False, dict(reason="shrunk covers are unboundedly larger than N_cov on a subset of the line",
+                           ratio_m4=ratios[0], ratio_m8=ratios[1], ratio_m12=ratios[2])
+    return True, {}
+
+
+@conjecture("DEAD.12 The exponent of Theorem 11.9 is obtained with Boltzmann weights and by maximising over t site by site", expect_fail=True)
+def t_dead_boltzmann_weights(rng, trials):
+    """Refuted (second referee, M2).  (1) Two binary types (e, c) = (0.5, 1) and (5, 10): per-site maxima add up to
+    0.3765 per pair, the common-slope value is 0.2329.  (2) Three states with gaps (0, 0.5, 3), c = 1: optimal weights
+    give 0.1882, Boltzmann weights 0.1066.  (3) A binary site with residual: optimal 0.0252, Boltzmann <= 0."""
+    ts = np.linspace(0.0, 6.0, 601)
+    _, _, rA = qc_site([0, 0.5], [0, 0], 1.0)
+    _, _, rB = qc_site([0, 5.0], [0, 0], 10.0)
+    valsA = np.array([qc_lp_rate(rA, t) for t in ts])
+    valsB = np.array([qc_lp_rate(rB, t) for t in ts])
+    per_site, common = float(valsA.max() + valsB.max()), float((valsA + valsB).max())
+    ts2 = np.linspace(0.0, 20.0, 801)
+    gap3, s3, r3 = qc_site([0, 0.5, 3.0], [0, 0, 0], 1.0)
+    opt3 = max(qc_lp_rate(r3, t) for t in ts2)
+    boltz3 = max(qc_boltzmann_rate(gap3, s3, t) for t in ts2)
+    gap2, s2, r2 = qc_site([0, 0.677], [0, 0.644], 1.0)
+    opt2 = max(qc_lp_rate(r2, t) for t in ts2)
+    boltz2 = max(qc_boltzmann_rate(gap2, s2, t) for t in ts2)
+    if per_site > common + 0.1 and opt3 > boltz3 + 0.05 and opt2 > 0.02 and boltz2 < 1e-9:
+        return False, dict(reason="per-site maximisation overshoots; Boltzmann weights are not optimal",
+                           per_site_maxima=per_site, common_slope=common, three_state_optimal=float(opt3),
+                           three_state_boltzmann=float(boltz3), residual_optimal=float(opt2),
+                           residual_boltzmann=float(boltz2))
+    return True, {}
+
+
+@conjecture("DEAD.13 Under a second-order class with dense constants c_ij = c, evaluating the whole Hamming ball of radius 2 (or two opposite stars) determines the residual up to O(c)", expect_fail=True)
+def t_dead_dense_second_order(rng, trials):
+    """Refuted (second referee, M3): the remainder of the star envelope is quadratic in the Hamming distance.  The
+    function -c C(|x| - 1, 2) has all mixed second differences in {0, -c}, vanishes on the ball of radius 2 and equals
+    -c (n-1)(n-2)/2 at the far corner; a second explicit member vanishes on two opposite stars."""
+    def worst_mixed(n, fn):
+        worst = 0.0
+        for x in itertools.product((0, 1), repeat=n):
+            for i in range(n):
+                for j in range(i + 1, n):
+                    if x[i] == 0 and x[j] == 0:
+                        xi, xj, xij = list(x), list(x), list(x)
+                        xi[i] = 1
+                        xj[j] = 1
+                        xij[i] = xij[j] = 1
+                        worst = max(worst, abs(fn(tuple(xij)) - fn(tuple(xi)) - fn(tuple(xj)) + fn(x)))
+        return worst
+
+    n = 7
+    ball_member = lambda x: -float(math.comb(sum(x) - 1, 2)) if sum(x) >= 1 else 0.0
+    on_ball = max(abs(ball_member(x)) for x in itertools.product((0, 1), repeat=n) if sum(x) <= 2)
+    far = ball_member((1,) * n)
+    w = (n + 2) // 3
+    def two_star(x):
+        a, b = sum(x[:w]), sum(x[w:])
+        return -math.comb(a, 2) * math.comb(n - w - b, 2) / math.comb(n - w, 2)
+    on_stars = max(abs(two_star(x)) for x in itertools.product((0, 1), repeat=n) if sum(x) <= 1 or sum(x) >= n - 1)
+    at_S = two_star(tuple(1 if i < w else 0 for i in range(n)))
+    if (worst_mixed(n, ball_member) <= 1 + 1e-12 and on_ball == 0 and far <= -(n - 1) * (n - 2) / 2 + 1e-9
+            and worst_mixed(n, two_star) <= 1 + 1e-12 and on_stars == 0 and at_S <= -math.comb(w, 2) + 1e-9):
+        return False, dict(reason="class members vanish on the evaluated sets and are far below zero elsewhere", n=n,
+                           ball_member_far_corner=far, two_star_member_at_S=at_S)
+    return True, {}
+
+
+@conjecture("DEAD.14 At finite temperature single dips are the extremal perturbations on every instance: the fractional hitting number of all sensitive sets equals that of the single-dip balls", expect_fail=True)
+def t_dead_single_dips(rng, trials):
+    """Refuted (own exploration, cycle 8).  Uniform metric on n = 8 points, f = g = 0, beta = 1, eps = 0.3: a set D
+    supports a perturbation that changes ln Z by more than eps iff |D| >= 2 (two shallow dips add up), so every correct
+    randomised algorithm needs about n/2 evaluations, whereas the only sensitive single dips have depth > 1 and are seen
+    from everywhere.  (On the uniform cube balls are extremal: XII.5.)"""
+    from scipy.optimize import linprog
+    n, beta, eps = 8, 1.0, 0.3
+    d = np.ones((n, n)) - np.eye(n)
+    blocks = []
+    for mask in range(1, 2 ** n - 1):
+        D = [x for x in range(n) if mask >> x & 1]
+        C = [x for x in range(n) if not mask >> x & 1]
+        h = d[np.ix_(D, C)].min(axis=1)                    # largest admissible perturbation supported in D
+        if math.log((len(C) + float(np.exp(beta * h).sum())) / n) > eps:
+            blocks.append(mask)
+    minimal = [m for m in blocks if not any((m & o) == o and o != m for o in blocks)]
+    A = np.array([[-(m >> a & 1) for a in range(n)] for m in minimal], dtype=float)
+    fc_all = float(linprog(np.ones(n), A_ub=A, b_ub=-np.ones(len(minimal)), bounds=(0, None), method="highs").fun)
+    # single dips: depth c <= 1 is supported on one point; its effect ln(1 + (e^{beta c} - 1)/n) never exceeds eps here
+    single_point_sensitive = math.log(1 + (math.exp(beta) - 1) / n) > eps
+    fc_dip = float(n) if single_point_sensitive else 1.0   # otherwise only full-support dips: one evaluation hits them
+    if fc_all > fc_dip + 1e-6:
+        return False, dict(reason="unions of shallow dips are sensitive although no local single dip is",
+                           fractional_hitting_all=fc_all, fractional_hitting_single_dips=fc_dip)
+    return True, {}
+
+
+# ----------------------------------------------------------------------------------------------
 # Driver
 # ----------------------------------------------------------------------------------------------
 

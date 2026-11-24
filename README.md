@@ -18,7 +18,7 @@ evaluation only.
 | how the program evolved and what is open | [`docs/RESEARCH_LOG.md`](docs/RESEARCH_LOG.md) |
 | what turned out false, weaker, or already known | [`docs/DEAD_ENDS.md`](docs/DEAD_ENDS.md) |
 | the literature checks behind the novelty assessments | [`docs/prior_art/`](docs/prior_art) |
-| the independent referee report on the first phase | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md) |
+| the independent referee reports (first and second phase) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`docs/reviews/R2_referee_report.md`](docs/reviews/R2_referee_report.md) |
 
 ## Layout
 
@@ -34,8 +34,10 @@ proofs/Frontiers/       envelope duality, dominance calculus, free-energy sandwi
                         second phase: certification geometry (slack coverings, certificate
                         notions, conditional envelope, complexity on product landscapes,
                         exponential-weights converses, product rates, best-first search,
-                        thermal robustness), second-order envelopes, and the partition
-                        kernel with cut and elimination rules
+                        thermal robustness), second- and higher-order envelopes, the sampled
+                        free-energy sandwich, the partition kernel with cut and elimination
+                        rules, the lemmas of the second referee, and query-complexity bounds
+                        for every algorithm, deterministic or randomised
 proofs/CertificateAlgebra.lean   executable verification kernels + Master Soundness Theorems
 proofs/AuditCommand.lean         the axiom walk (by defining module)
 proofs/AxiomAudit.lean           axiom audit of every project constant + non-vacuity witnesses
@@ -74,8 +76,9 @@ on minimum energies (reparameterisation bounds, branching, dead-end elimination,
 decomposition), the same under an unknown non-decomposable residual known only through an
 envelope and evaluated anchors, and two-sided bounds on partition functions (factorised leaves,
 branching, thermal dead-end elimination, and — since the second phase — cut and elimination
-rules, which make it exact on chains, trees and interaction graphs of treewidth at most two),
-with voxel enclosures of continuous integrals.
+rules: exact on every chain (machine-checked) and on tree and ring instances, and by a paper
+argument on interaction graphs of treewidth at most two), with voxel enclosures of continuous
+integrals.
 
 **Theory, first phase.**  Exact characterisations of robust optimality under an envelope
 (contact-set, sharp-minimum and query-model theorems), the necessity of decomposition rules
@@ -84,20 +87,30 @@ certificates.  An independent referee report (`docs/reviews/`) found no machine-
 false but classified this mathematics as elementary or classical in substance, and four prose
 claims as overstated; the corrections are in the report and in `docs/DEAD_ENDS.md` (D21–D27).
 
-**Theory, second phase (theory report §§10–12).**  *What can residual evaluations certify?*
-Certificates are coverings in a slack quasi-metric with radii equal to the points' own
-optimality gaps; with only a first-order envelope, on product landscapes one evaluation suffices
-iff every site is sharp and otherwise exponentially many are needed, with an exact exponent
-(a rate–distortion function); at finite temperature, for accuracies that are not exponentially
+**Theory, second phase (theory report §§10–12).**  *What can residual evaluations certify, and
+at what cost?*  Certificates are coverings in a slack quasi-metric with radii equal to the
+points' own optimality gaps, and the size of the smallest one is exactly the number of
+evaluations of the best algorithm that is correct on the whole class.  With only a first-order
+envelope, on product landscapes one evaluation suffices iff every site is sharp; otherwise the
+number is exponential in the number of non-sharp sites, with an exact exponent (a
+rate–distortion function).  At finite temperature, for accuracies that are not exponentially
 small, the same formula holds with the energy gap replaced by the free-energy gap of a
 macrostate (a corollary of a known source-coding theorem on exponential moments of distortion),
-and the count is at least the exponential of the entropy; minimal certificates are NP-hard to find and best-first search is competitive only
-with covers at shrunk radii.  The way out is the order of the envelope: with bounded mixed
-second differences, `n(k−1)+1` evaluations give an exact reduction to the pairwise kernel.  The
-one-shot lower bounds, the search guarantee and the second-order reduction are machine-checked;
-the matching upper bounds of the two exponent theorems are paper proofs (type covering) checked
-numerically.  The tools are standard and the proofs short; §12 of the report says what a
-publication would still need.
+and the count is at least the exponential of the entropy.  These bounds hold for every
+algorithm: at zero temperature randomisation gains at most a factor `1 − 2δ` against each
+covering bound; for free energies it lowers the exponent but not to zero — on the cube class
+there is a sharp accuracy threshold, `n ln cosh(βc/2)`, above which a bounded number of random
+evaluations suffices and below which every algorithm needs exponentially many.  Minimal
+certificates are NP-hard to find and best-first search is competitive only with covers at
+shrunk radii.  Under weak second-order coupling, `n(k−1)+1` evaluations give an exact reduction
+to the pairwise kernel.  The one-shot lower bounds (for certificates and for all algorithms),
+the search guarantee and the second-order reduction are machine-checked; the matching upper
+bounds are paper proofs (type covering, Harper's theorem), for which the single-letter
+identities and, for two-state sites, exact counts were checked numerically.  A second
+independent referee found one paper theorem false as stated and four overstatements — all
+corrected, `docs/DEAD_ENDS.md` D29–D33 — and judged the cluster "a coherent note, not a
+theorem-driven paper"; the tools are standard and the proofs short, and §12 of the report says
+what a publication would still need.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

@@ -125,7 +125,10 @@ A certificate is *elementary* if it uses neither `cut` nor `elim1`/`elim2`
 (`ZCert2.Elementary`).  On an instance with positive factors in which every site has a partner
 whose pair factors tell its states apart (`WInstance.Rigid`), an elementary certificate whose
 lower endpoint is exact has at least as many leaves as the box has configurations
-(`zverify2_elementary_exact_leaves`).
+(`zverify2_elementary_exact_leaves`).  Two limits of this statement: it concerns *exact* lower
+endpoints only (nothing is proved about certificates whose lower end is slightly below `Z`),
+and `Rigid` depends on how the weights are split into ordered pair factors (see its
+docstring).
 
 * **Cut versus elementary** (`cut_rule_separation`).  Two disjoint frustrated triangles on six
   binary sites, `Z = (13/4)² = 169/16`: the cut certificate enumerates each triangle separately
@@ -1152,7 +1155,13 @@ theorem WInstance.weight_pos {I : WInstance n k} (hI : I.Pos) (x : Config n k) :
     (Finset.prod_pos fun i _ => Finset.prod_pos fun j _ => hI.2 i j (x i) (x j))
 
 /-- Every site `i` has a partner site `j` whose pair factors (in one of the two orientations)
-tell any two states of `i` apart, whatever the state of `j`. -/
+tell any two states of `i` apart, whatever the state of `j`.
+
+This is a property of the *representation* of the instance, not of the model it defines: the
+two ordered factors `W i j` and `W j i` are examined separately, so an instance in which they
+compensate each other (every configuration of weight one) can be rigid — see
+`gauge_trivial_separation` in `RefereeLemmas.lean`.  The separation theorems that assume
+`Rigid` are therefore statements about what the leaf rule can do with the given tables. -/
 def WInstance.Rigid (I : WInstance n k) : Prop :=
   ∀ i, ∃ j, j ≠ i ∧ ∀ a a' b, a ≠ a' →
     I.W i j a b ≠ I.W i j a' b ∨ I.W j i b a ≠ I.W j i b a'

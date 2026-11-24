@@ -459,7 +459,12 @@ bound `exp (-ε) * (6/5) ^ n` equals `1 = |A|`.
 So the threshold of `thermal_binary_exponential` is sharp.  For an extensive accuracy
 `ε = n * ε₁` that theorem gives at least `exp (n * (log (6/5) - ε₁))` evaluations, exponentially
 many when `ε₁ < log (6/5)`; when `ε₁ ≥ log (6/5)` the single evaluation of the ground state
-suffices. -/
+satisfies its hypothesis.
+
+That hypothesis — the optimistic partition function is within `exp ε` of the *true* one — is
+not computable from the evaluations.  As a two-sided certificate (optimistic against
+pessimistic envelope, `(3/2) ^ n` against `(9/8) ^ n`) the single evaluation of the ground state
+has width `n * log (4/3)`. -/
 theorem thermal_binary_single_tight (n : ℕ) :
     ∑ y : Fin n → Bool, Real.exp (-Real.log 2 * ((∑ i, if y i then (2 : ℝ) else 0) +
         lowerEnv (hamEnv fun _ : Fin n => (1 : ℝ)) {fun _ => false} (singleton_nonempty _)

@@ -132,5 +132,29 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.6 M1: comparison with covers at the shrunk radii (the true statement XI.4) -> must be flagged UNEXPECTEDLY SURVIVED
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.1 M1: dip built from the transposed envelope (d(y, a) instead of d(a, y))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.1 M2: effect of a dip claimed to be at least beta c (soft gap dropped)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.2 M1: factor (1 - delta) instead of (1 - 2 delta)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.2 M2: detection balls of half the radius (a larger packing is claimed)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.3 M1: thermal detection radius without the soft gap
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.3 M2: thermal detection balls of half the radius in the packing
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.4 M1: closed balls of radius gap + eps instead of gap + eps/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.4 M2: the block of near-minimisers replaced by the whole space (upward alternatives ignored)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.5 M1: an initial segment in binary order claimed optimal instead of the Hamming ball
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.10 M1: accuracy eps = 0.5 instead of 0 (certificates then exist) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.11 M1: known part f = 0 on the dyadic line (the shrunk covers are then small) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.14 M1: a deeper perturbation scale (beta = 3: single local dips are sensitive) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
 
-67 mutations: 66 caught, 1 expected pass, 0 not as expected
+79 mutations: 78 caught, 1 expected pass, 0 not as expected

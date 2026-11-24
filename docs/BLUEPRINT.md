@@ -415,9 +415,10 @@ two-state chain; theory report §3.4, limitation).  The extended certificate typ
 * `elim1 i j p rest`, `elim2 i j l p rest` — sum out a site `i` that interacts only with `j`
   (resp. `j` and `l`) into a one-body factor of `j` (resp. a pair factor between `j` and `l`);
   exact.  A chain is certified by `n − 1` eliminations and one leaf — the transfer-matrix
-  computation as a certificate (`chainCert`, `zverify2Top_chainCert`); trees, cycles and every
-  interaction graph of treewidth at most two reduce in the same way (always eliminate a site of
-  degree at most two).
+  computation as a certificate (`chainCert`, `zverify2Top_chainCert`, machine-checked for every
+  chain); trees, cycles and every interaction graph of treewidth at most two reduce in the same
+  way (always eliminate a site of degree at most two) — machine-checked on the tree and ring
+  instances evaluated by the kernel, a paper argument in general.
 
 Producer order: eliminate while some site has at most two neighbours on the current box; cut
 when the graph splits; branch (conditioning) to create sites of low degree; prune thermally; a
@@ -475,23 +476,33 @@ already made, the test is the same with the conditional envelope
 
 (`partition_bound_hamming`).  The numerator is a partition function of the landscape at inverse
 temperature `t`; for planning, bound `gap(y) ≤ E₀(y) − E₀(x̂) + κ·d(y, x̂) + (UB − LB)` and compute
-`Σ_y e^{−t(E₀(y) − E₀(x̂) + κ d(y,x̂))}` — a pairwise partition function with shifted one-body
-tables — by elimination (§6.3).  `κ` (the true variation of the residual relative to the
-published constants) is a planning parameter, not something the kernel knows.  On independent
-sites the bound is exponentially tight: the count is one if every site is sharp and otherwise
-about `exp(Σ_i r_i)` with `r_i = max_t [ln Z_i^{gap}(t) − ln Z_i^{slack}(t)]` (theory report
-Theorem 11.9).  For free energies the corresponding floor is
+`e^{−t(UB−LB)} Σ_y e^{−t(E₀(y) − E₀(x̂) + κ d(y,x̂))}` — a pairwise partition function with shifted
+one-body tables — by elimination (§6.3).  `κ` (the true variation of the residual relative to
+the published constants) is a planning parameter, not something the kernel knows.  This is a
+*lower bound* on the cost, valid for every algorithm (also randomised ones, with the factor
+`1 − 2δ`: theory report §11.10).  On independent sites the exact exponent is
+`max_t Σ_i max_v r_i(t; v)` (theory report Theorem 11.9): **one** slope `t` for all sites —
+maximising site by site overshoots — and, for each site and `t`, the best weights `v` from a
+small linear program; the Boltzmann weights used in the displayed bound are optimal only for
+two-state sites with zero residual (`DEAD_ENDS.md` D31).  The count is one if every site is
+sharp.  For free energies the corresponding deterministic floor is
 `exp(H(π) − tε/β) / ∏_i (1 + (k_i−1) e^{−t(1−κ)c_i})` (`card_ge_entropy`): at least the
 exponential of the entropy.  If the estimate is beyond budget, do **not** run §6.2; change the
 information:
 
 * *linear information* — a reference average of the residual and the sandwich of §6.4;
-* *structure* — a second-order envelope (below);
-* *accuracy* — an extensive tolerance.
+* *structure* — a second-order envelope with weak coupling (below);
+* *accuracy* — an extensive tolerance;
+* *a probabilistic guarantee* — Steps 4 and 5; but note the floor: below the accuracy of the
+  sandwich every randomised procedure is exponential as well (theory report Theorem 11.25).
 
 **Step 3 — second-order envelopes.**  If the residual comes with certified bounds `c_ij` on its
 mixed second differences, `n(k−1)+1` evaluations on the star of a reference configuration `x₀`
-reduce the problem, without loss, to the pairwise kernel:
+reduce the problem, without loss, to the pairwise kernel.  *Check the row-sum condition first*:
+if `½ Σ_{j≠i} c_ij` is below the measured single-site excitation energies at every site, the
+star at the minimiser certifies it.  With dense constants it does not, and no star-type data
+will (the envelope's half-width grows with the square of the Hamming distance; theory report
+§11.7, `DEAD_ENDS.md` D32) — the loop below then needs its fallback.
 
 ```
 STARCERT(E0, residual oracle g, constants c_ij (symmetric, ≥ 0), eps):
@@ -505,9 +516,16 @@ STARCERT(E0, residual oracle g, constants c_ij (symmetric, ≥ 0), eps):
                                              # consistent with the star data
     evaluate g(y);  UB ← min(UB, E(y))
     if UB − (L + g(x0)) ≤ eps:  return (argmin, cert)
-    x0 ← best evaluated configuration        # re-centre: the remainder grows like the number
+    x0' ← best evaluated configuration       # re-centre: the remainder grows like the number
                                              # of changed pairs, so stay near the incumbent
+    if x0' = x0:                             # no progress: the same star would be evaluated again
+        return FALLBACK                      # branch on a site (two smaller boxes, each with its
+                                             # own star), or use first-order anchors (§6.2)
+    x0 ← x0'
 ```
+
+Without the fallback the loop does not terminate when the minimiser `y` of the lower model is
+not better than `x0` and the gap exceeds `eps` (second referee, M3).
 
 Guarantee: `L + g(x₀) ≤ E₀(x) + g(x)` for all `x` in the box (`verify_sound_secondOrder`); the
 two pairwise models `E₀ + g_star ∓ Σ_{i<j changed} c_ij` are the exact lower and upper envelopes
@@ -538,7 +556,32 @@ convince chooses the sample points, so the samples must be drawn by the verifier
 committed seed); the verified kernels of this repository do not implement such a protocol.
 (ii) The width `β²C/8` is extensive, as in §6.4; the statement is useful when `β c_i` is small or
 after localisation.  For comparison, a deterministic certificate of the same accuracy from
-pointwise evaluations needs exponentially many of them (theory report §11.6, §11.9).
+pointwise evaluations needs exponentially many of them (theory report §11.6, §11.9).  The
+guarantee presupposes exact sampling from `p`, exact evaluation of `Δ` and a known `Z₀`.
+
+**Step 5 — spot-checking a claimed residual model (any functional).**  A producer may publish a
+*model* `ĝ` of the residual (for instance the additive interpolant of a star, or a pairwise
+fit) together with the value `Φ(E₀ + ĝ)` it implies.  The verifier draws `N` points from a
+distribution `q` of its own choice, evaluates the residual there and compares:
+
+```
+SPOT-CHECK(model ĝ, residual oracle g, sampling distribution q, N):
+  the VERIFIER draws a⁽¹⁾ … a⁽ᴺ⁾ independently from q
+  if g(a⁽ᵏ⁾) = ĝ(a⁽ᵏ⁾) for all k:  accept Φ(E₀ + ĝ)
+  else:                             reject (fall back to a deterministic procedure)
+```
+
+Guarantee (`spotCheck_correct`): if every admissible residual whose value of `Φ` differs from
+the model's by more than `ε/2` differs from `ĝ` on a set of `q`-probability at least `p`, the
+accepted value is within `ε/2` except with probability `(1 − p)^N`.  The work is in `p`.  For
+the minimum, `p` is the least `q`-mass of the closed slack balls `{a : s(a,y) ≤ gap(y) + ε/2}`
+and of the set of `ε/2`-minimisers, all computable from `ĝ` (harness XII.4); no choice of `q`
+makes `N` smaller than `(1 − 2δ)` times the fractional covering number (`expected_queries_ge`),
+so on non-sharp product landscapes spot-checking is exponential too.  For free energies `p` is
+an isoperimetric quantity; on the cube class with accuracy below `n ln cosh(βc/2)` it is
+exponentially small for every `q` (`cube_thermal_randomized_bound`).  Exact equality of values
+is assumed; with numerical tolerances the comparison and the envelope must be widened
+consistently.  No kernel for such transcripts is implemented here.
 
 ---
 
@@ -658,11 +701,12 @@ against a "bound" of `0.0076`; `reviews/R1`, item 10)
 | global bounds on the residual | exactly the energy window can be optimal; nothing inside it may be pruned | `energy_window_exact` |
 | envelope + anchors | the set of possible values of `min(E₀+Δ)` and of `Z` is exactly the interval between the values at `E₀+L` and `E₀+U`; no tighter certificate exists | `robust_min_bracket`, `robust_partition_bracket`, `robust_min_interval_exact`, `robust_partition_interval_exact` |
 | residual evaluations (incumbent = evaluated anchor) | at least the number of states with gap `< (1−κ)σ − ε`; in general the evaluated set must cover every `y` within slack radius `gap(y) + ε`, with LP-dual and rate–distortion lower bounds | `anchor_card_lower_bound`; `isCertificate_iff_cover`, `card_ge_of_weights`, `partition_bound` |
-| first-order envelope + pointwise evaluations, independent sites | one evaluation if every site is sharp, otherwise exponentially many (at least `(6/5)ⁿ` already for two-state sites with `c = 2e` and zero residual) | `product_single_certificate_iff`, `product_partition_bound`, `binary_certificate_exponential` |
+| first-order envelope + pointwise evaluations, independent sites | one evaluation if every site is sharp, otherwise exponentially many in the number of non-sharp sites (at least `(6/5)ⁿ` already for two-state sites with `c = 2e` and zero residual; machine-checked for identical sites with zero residual) | `product_single_certificate_iff`, `product_partition_bound`, `binary_certificate_exponential` |
 | free-energy certificates from pointwise evaluations | at least `exp(entropy − tε/β)` divided by a slack-ball partition sum, even for sharp landscapes | `card_ge_entropy`, `thermal_exp_weights` |
 | smallest certificate | NP-hard to find (contains minimum dominating set); best-first search is competitive only with covers at radii shrunk by `(1−κ)/(4(1+κ))` | `domCertificate_min_card`, `bestFirst_card_le`; `DEAD_ENDS.md` D26 |
-| second-order envelope + star data | the pairwise sandwich is the exact envelope; nothing tighter exists with the same evaluations | `secondOrder_envelope_exact` |
-| partition kernel without decomposition rules | exact certificates need one leaf per configuration on rigid instances (`k^n` on chains, against one leaf with elimination) | `zverify2_elementary_exact_leaves`, `cut_rule_separation`, `chain_separation`, `ferroChain_separation` |
+| second-order envelope + star data | the pairwise sandwich is the exact envelope; nothing tighter exists with the same evaluations; its half-width is quadratic in the Hamming distance, so with dense constants even the whole radius-2 ball does not certify | `secondOrder_envelope_exact`; `DEAD_ENDS.md` D32 |
+| partition kernel without decomposition rules | certificates with an *exact lower end* need one leaf per configuration on instances that are rigid *in the given representation* (`k^n` on chains, against one leaf with elimination); nothing is proved for approximate enclosures, and a gauge-trivial instance satisfies the hypothesis | `zverify2_elementary_exact_leaves`, `cut_rule_separation`, `chain_separation`, `ferroChain_separation`, `gauge_trivial_separation` |
+| every algorithm that evaluates the residual, deterministic or randomised | the instance-wise deterministic cost equals the size of a value certificate; a randomised algorithm with error probability `δ` pays `(1 − 2δ)` times every covering lower bound; for `ln Z` on the cube class, exponentially many evaluations below the accuracy `n ln cosh(βc/2)` | `instance_query_complexity`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `thermal_expected_queries_ge`, `cube_thermal_randomized_bound` |
 | pure dual certificates | incomplete: the frustrated triangle has LP bound 0, optimum 1 | `triangle_no_leaf_certificate` |
 | certificates without `sum` | exactly `2^m` leaves on `m` independent frustrated triangles; `2m` with `sum`; the gap persists in total description length (at most `147 m³` against at least `2^m`, hence smaller for `m ≥ 21`) | `sumFree_exponential`, `sumFree_tight`, `sum_linear`, `sum_rule_separation_dataSize` |
 | free-energy sandwich | product reference: constant `1/8` is optimal and the worst residual is additive two-level; the `Σ c_i²` width is false for correlated references; gap is extensive | `mcdiarmid_no_better_constant`, `exists_two_level_worst_residual`, `DEAD_ENDS.md` D14 |
