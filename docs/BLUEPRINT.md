@@ -36,6 +36,14 @@ boundaries · 10 task mapping · 11 conformance tests.
   outside `[0, k)` (in domains, anchors, witnesses or certificate nodes), a table has the wrong
   shape, or a domain repeats a state — *before* interpreting it (`validate` in the reference
   checker; conformance vectors `residual_bad_anchor_reject`, `partition_bad_domain_reject`).
+* **The file format is strict, so that a file has one reading.**  A rational is a JSON integer or
+  a string `-?digits` or `-?digits/digits` in canonical ASCII form (no `+`, spaces, leading
+  zeros, decimals or exponents; nonzero denominator).  Table keys are `"i,j"` and `"j"` with
+  canonical naturals.  Unknown fields and duplicate keys are errors (a duplicate would silently
+  shadow a table; an unknown field may be a misspelt or obsolete one whose intent would be
+  ignored — vector `residual_unknown_field_reject`).  A checker must never crash on a file: every
+  malformed, ambiguous or over-sized input is a *rejection*, and the command-line status is
+  zero only for an accepted certificate.
 * Guarantees are relative to the *published instance* (tables of rationals) and, for residual
   problems, to the *published envelope and anchor values*.  The correspondence between the
   published tables and a physical force field is the producer's obligation and is discharged by
@@ -454,7 +462,7 @@ superposition distance is a pseudo-metric, hence an envelope.  For a torsion mov
 superposition used in the proofs is a rotation about the torsion axis, so the reduced-inertia
 bounds (theory report, Theorem 4.6) hold for every group `G` that contains those rotations.  The
 verified statements are for such an abstract `G` (with a worked instance for a residual that is
-not reflection-invariant, `chiral_residual_torsion_bound`); that the proper motions `SE(3)` form
+not reflection-invariant, `signed_offset_residual_torsion_bound`); that the proper motions `SE(3)` form
 such a group is immediate but `SE(3)` is not defined in the Lean development.  Consequently:
 changing torsion `k` by `δ` costs at most `2√(min(I_A,I_B)) |sin(δ/2)| ≤ 2√(2 I_red,k) |sin(δ/2)|`,
 so
@@ -466,7 +474,8 @@ looser `Λ · 2√(2 Ī_k)` with `Ī_k ≥ I_red` is `residual_torsion_move_unif
 `Ī_k = min(N_A, N_B)·ρ_max²` with `ρ_max` a bound on lever arms if nothing better is known).
 Publishing constants `≥ c_k` (rounded up) and interval anchor data containing `Δ_θ` (lower
 values rounded down, upper values rounded up) puts `Δ_θ` in the class for which the residual
-kernel is sound (`residualLowerClass_of_rigidWithinIn`, `verifyR_sound_invariant`).  Voxel-level constants follow
+kernel is sound (`residualIntervalClass_of_rigidWithinIn`, `verifyITop_sound_invariant`; a
+worked instance is `interval_invariant_instance`).  Voxel-level constants follow
 by replacing `|sin(δ/2)|` with its maximum over the pair of voxels.  The Lipschitz constant `Λ`
 and the inertia bounds are the producer's obligations; they are hypotheses of the verified
 statements, not conclusions.
@@ -608,8 +617,11 @@ A re-implemented checker must reproduce the following kernel-evaluated facts
 
 **Reference implementation.**  `experiments/reference_checker.py` implements the three checkers
 of §4–§5 on this JSON format in exact rational arithmetic (it is *not* trusted; the Lean kernels
-are).  `--selftest` reproduces vectors 1–4b above — also stored as files in `experiments/certs/` —
-and fuzzes random, mostly invalid certificates against brute force: an accepted certificate must
+are).  `--selftest` reproduces vectors 1–4b above — also stored as files in `experiments/certs/`,
+together with two format vectors (`residual_unknown_field_reject`,
+`min_noncanonical_rational_reject`) — runs 53 malformed, ambiguous or hostile inputs that must be
+rejected without an exception (alias keys, non-canonical numbers, duplicate keys, wrong types,
+30000-fold nesting), and fuzzes random, mostly invalid certificates against brute force: an accepted certificate must
 never claim a bound above the true minimum (also with rounded-down anchor values), nor an
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.

@@ -14,13 +14,39 @@ import sys
 root = pathlib.Path(__file__).resolve().parent.parent
 decl_re = re.compile(
     r"^\s*(?:@\[[^\]]*\]\s*)?(?:private\s+|protected\s+|noncomputable\s+)*"
-    r"(?:theorem|lemma|def|abbrev|structure|inductive|instance|class)\s+([^\s:({\[]+)", re.M)
-declared = set()
+    r"(?:theorem|lemma|def|abbrev|structure|inductive|instance|class)\s+([^\s:({\[]+)")
+ns_re = re.compile(r"^namespace\s+(\S+)")
+sec_re = re.compile(r"^section(?:\s+(\S+))?")
+end_re = re.compile(r"^end(?:\s+(\S+))?")
+ROOT_NS = "MetricChain."
+
+# `full` holds fully qualified names (namespaces tracked, the root namespace stripped);
+# `last` holds last components, for unqualified citations.
+full, last = set(), set()
 for f in (root / "proofs").rglob("*.lean"):
-    for m in decl_re.finditer(f.read_text()):
-        name = m.group(1)
-        declared.add(name)
-        declared.add(name.split(".")[-1])
+    stack = []          # entries: ("ns", name) or ("sec", name-or-None)
+    for line in f.read_text().splitlines():
+        m = ns_re.match(line)
+        if m:
+            stack.append(("ns", m.group(1)))
+            continue
+        m = sec_re.match(line)
+        if m:
+            stack.append(("sec", m.group(1)))
+            continue
+        m = end_re.match(line)
+        if m and stack:
+            stack.pop()
+            continue
+        m = decl_re.match(line)
+        if m:
+            name = m.group(1)
+            qual = ".".join([n for kind, n in stack if kind == "ns"] + [name])
+            if qual.startswith(ROOT_NS):
+                qual = qual[len(ROOT_NS):]
+            full.add(qual)
+            last.add(name.split(".")[-1])
+declared = full | last
 
 # structure fields: `structure Name ... where` followed by indented `field : type` lines
 struct_re = re.compile(r"^structure\s+([^\s:({\[]+)")
@@ -39,7 +65,7 @@ for f in (root / "proofs").rglob("*.lean"):
             continue
         fm = field_re.match(line)
         if fm:
-            declared.add(f"{current}.{fm.group(1)}")
+            full.add(f"{current}.{fm.group(1)}")
 
 IGNORE = {
     "lower_bound", "native_decide", "metricchain-cert", "audit_all", "falsify_conjectures",
@@ -55,23 +81,37 @@ IGNORE = {
     "partition_negative_reject", "residual_interval", "residual_interval_inconsistent_reject",
     "residual_bad_anchor_reject", "partition_bad_domain_reject", "triangle_residual",
     "triangle_min", "triangle_min_reject", "biased_dee", "triangle_partition_exact",
-    "triangle_partition_coarse",
+    "triangle_partition_coarse", "residual_unknown_field_reject", "min_noncanonical_rational_reject",
+    # a field of an earlier schema draft and a deliberately bogus example name, quoted in DEAD_ENDS
+    "anchor_semantics", "Anything.existing_name",
     # qualified names that are not declarations of this development
-    "Classical.choice", "Quot.sound", "Lean.ofReduceBool", "Real.exp", "Finset.sup",
+    "Classical.choice", "Quot.sound", "Lean.ofReduceBool", "Real.exp", "Finset.sup", "Rat.add",
+    # Greek-letter mathematical notation
+    "Δ_θ", "Δ_res", "ε_k", "ρ_l", "ρ_k", "ψ_i", "δ_i", "δ_k", "Λ_i", "γ_k", "λ_k",
 }
-tok_re = re.compile(r"`([A-Za-z][A-Za-z0-9_.'₀-₉]*)`")
-qualified_re = re.compile(r"^[A-Z][A-Za-z0-9]*\.[A-Za-z_][A-Za-z0-9_.']*$")
+tok_re = re.compile(r"`([A-Za-zΑ-Ωα-ω][A-Za-zΑ-Ωα-ω0-9_.'₀-₉]*)`")
+qualified_re = re.compile(r"^[A-Z][A-Za-z0-9]*\.[A-Za-zΑ-Ωα-ω_][A-Za-zΑ-Ωα-ω0-9_.']*$")
+camel_re = re.compile(r"^[a-z]+[A-Z][A-Za-z0-9]*$")       # lowerCamelCase: `verifyITop`, `boxFinset`
+
+
+def is_declared(tok):
+    if "." in tok:
+        # a qualified citation must match a fully qualified declaration (or a suffix of one at a
+        # component boundary); matching only the last component is not enough
+        return tok in full or any(d.endswith("." + tok) for d in full)
+    return tok in last or tok in full
+
+
 missing = {}
 for doc in sorted((root / "docs").glob("*.md")) + [root / "README.md"]:
     for tok in tok_re.findall(doc.read_text()):
-        looks_like_decl = "_" in tok or qualified_re.match(tok)
+        looks_like_decl = "_" in tok or qualified_re.match(tok) or camel_re.match(tok)
         if not looks_like_decl or tok in IGNORE or tok.endswith((".lean", ".py", ".sh", ".md", ".txt", ".json")):
             continue
-        last = tok.split(".")[-1]
-        if tok not in declared and last not in declared:
+        if not is_declared(tok):
             missing.setdefault(doc.name, set()).add(tok)
 if missing:
     for doc, toks in missing.items():
         print(f"{doc}: cited but not declared in proofs/: {sorted(toks)}")
     sys.exit(1)
-print(f"doc references OK ({len(declared)} declarations indexed)")
+print(f"doc references OK ({len(full)} declarations indexed)")

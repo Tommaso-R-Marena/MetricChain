@@ -722,25 +722,25 @@ section Examples
 
 /-- One static and one moving atom, both at unit distance from the axis, torsion angle `φ = π`:
 `I_A = I_B = 1`, `S = 2`.  The exact coaxial cost `2 S - 2 √(S² - 4 I_A I_B sin²(φ/2))` is `4`. -/
-example :
+theorem torsion_check_1 :
     2 * ((1 : ℝ) + 1) -
       2 * Real.sqrt (((1 : ℝ) + 1) ^ 2 - 4 * 1 * 1 * Real.sin (Real.pi / 2) ^ 2) = 4 := by
   rw [Real.sin_pi_div_two]
   norm_num
 
 /-- … and the reduced-inertia bound `8 (I_A I_B / S) sin²(φ/2)` is also `4`: (T2-iii) is sharp. -/
-example : 8 * ((1 : ℝ) * 1 / (1 + 1)) * Real.sin (Real.pi / 2) ^ 2 = 4 := by
+theorem torsion_check_2 : 8 * ((1 : ℝ) * 1 / (1 + 1)) * Real.sin (Real.pi / 2) ^ 2 = 4 := by
   rw [Real.sin_pi_div_two]
   norm_num
 
 /-- In that configuration every coaxial superposition angle costs exactly `4`. -/
-example (ψ : ℝ) :
+theorem torsion_check_3 (ψ : ℝ) :
     2 * (1 : ℝ) * (1 - Real.cos ψ) + 2 * 1 * (1 - Real.cos (Real.pi - ψ)) = 4 := by
   rw [Real.cos_pi_sub]
   ring
 
 /-- (T2) instantiated with concrete families: static atom at `1`, moving atom at `1`, `φ = π`. -/
-example :
+theorem torsion_check_4 :
     ∃ ψ : ℝ,
       ∑ _i : Fin 1, ‖Complex.exp (-(ψ) * Complex.I) * (1 : ℂ) - 1‖ ^ 2 +
         ∑ _j : Fin 1, ‖Complex.exp ((Real.pi - ψ) * Complex.I) * (1 : ℂ) - 1‖ ^ 2 ≤ 4 := by
@@ -752,7 +752,7 @@ example :
 
 /-- (T3) instantiated: two atoms at unit distance from the axis, the second one rotated by `π`.
 The hypotheses of `IsTorsionMove` are satisfiable and the conclusion reads `RigidWithin X Y 2`. -/
-example :
+theorem torsion_check_5 :
     ∃ X Y : Fin 2 → AxisSpace,
       IsTorsionMove (IsometryEquiv.refl AxisSpace) {1} Real.pi X Y ∧ RigidWithin X Y 2 := by
   let X : Fin 2 → AxisSpace := fun _ => WithLp.toLp 2 ((1 : ℂ), (0 : ℝ))

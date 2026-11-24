@@ -35,22 +35,40 @@ import argparse
 import itertools
 import json
 import os
+import re
 import sys
 from fractions import Fraction as Q
+
+if hasattr(sys, "set_int_max_str_digits"):
+    sys.set_int_max_str_digits(0)   # exact rationals may be long; lengths are bounded in `q`
+sys.setrecursionlimit(20000)        # certificates are trees; excessive depth is caught and rejected
 
 # ----------------------------------------------------------------------------------------------
 # Parsing
 # ----------------------------------------------------------------------------------------------
 
 
+# A rational is a JSON integer or a string in canonical ASCII form `-?digits` or `-?digits/digits`
+# (no sign `+`, no spaces, no leading zeros, no decimals or exponents, nonzero denominator).
+_RAT = re.compile(r"-?(0|[1-9][0-9]*)(/[1-9][0-9]*)?\Z")
+_NAT = re.compile(r"(0|[1-9][0-9]*)\Z")
+_PAIR = re.compile(r"(0|[1-9][0-9]*),(0|[1-9][0-9]*)\Z")
+MAX_RATIONAL_CHARS = 100_000
+
+
 def q(v) -> Q:
     if isinstance(v, Q):
         return v
+    if isinstance(v, bool):
+        raise TypeError("rationals must be integers or strings 'p/q', got a boolean")
     if isinstance(v, int):
         return Q(v)
-    if isinstance(v, str):
-        return Q(v)
-    raise TypeError(f"rationals must be integers or strings 'p/q', got {v!r}")
+    if isinstance(v, str) and len(v) <= MAX_RATIONAL_CHARS and _RAT.match(v):
+        if "/" in v:
+            num, den = v.split("/")
+            return Q(int(num), int(den))
+        return Q(int(v))
+    raise TypeError(f"rationals must be integers or canonical strings 'p/q', got {str(v)[:40]!r}")
 
 
 class Tables:
@@ -111,21 +129,35 @@ def _state(v, k, what):
 
 
 def _pair_key(key, n, what):
-    try:
-        i, j = (int(t) for t in key.split(",")) if isinstance(key, str) else key
-    except Exception as exc:  # noqa: BLE001
-        raise Malformed(f"{what}: bad pair key {key!r}") from exc
-    _need(_is_int(i) and _is_int(j) and 0 <= i < n and 0 <= j < n and i != j,
+    _need(isinstance(key, str) and _PAIR.match(key) is not None,
+          f"{what}: pair key {key!r} is not of the canonical form 'i,j'")
+    i, j = (int(t) for t in key.split(","))
+    _need(0 <= i < n and 0 <= j < n and i != j,
           f"{what}: pair key {key!r} is not an ordered pair of distinct sites")
     return i, j
 
 
+def _nat_key(key, what):
+    _need(isinstance(key, str) and _NAT.match(key) is not None,
+          f"{what}: key {key!r} is not a canonical natural number")
+    return int(key)
+
+
 def _site_key(key, n, what):
-    try:
-        j = int(key)
-    except Exception as exc:  # noqa: BLE001
-        raise Malformed(f"{what}: bad site key {key!r}") from exc
-    _site(j, n, what)
+    _site(_nat_key(key, what), n, what)
+
+
+def _obj(d, what):
+    """An optional JSON object: absent (None) or a dict; anything else is malformed."""
+    if d is None:
+        return {}
+    _need(isinstance(d, dict), f"{what}: must be an object")
+    return d
+
+
+def _only(d, allowed, what):
+    extra = sorted(set(d) - set(allowed))
+    _need(not extra, f"{what}: unknown field(s) {extra}")
 
 
 def _tables(one, two, n, k, what):
@@ -134,8 +166,7 @@ def _tables(one, two, n, k, what):
         _need(isinstance(row, list) and len(row) == k, f"{what}: one-body rows must have {k} entries")
         for v in row:
             _rat(v, what)
-    _need(isinstance(two or {}, dict), f"{what}: two-body tables must be an object")
-    for key, tab in (two or {}).items():
+    for key, tab in _obj(two, f"{what}: two-body tables").items():
         _pair_key(key, n, what)
         _need(isinstance(tab, list) and len(tab) == k
               and all(isinstance(r, list) and len(r) == k for r in tab),
@@ -146,8 +177,7 @@ def _tables(one, two, n, k, what):
 
 
 def _pair_scalars(d, n, what):
-    _need(isinstance(d or {}, dict), f"{what}: must be an object")
-    for key, v in (d or {}).items():
+    for key, v in _obj(d, what).items():
         _pair_key(key, n, what)
         _rat(v, what)
 
@@ -157,11 +187,7 @@ def _branch(node, n, k, rec, what):
     ch = node.get("children")
     _need(isinstance(ch, dict), f"{what}: children must be an object")
     for key, sub in ch.items():
-        try:
-            a = int(key)
-        except Exception as exc:  # noqa: BLE001
-            raise Malformed(f"{what}: bad child key {key!r}") from exc
-        _state(a, k, what)
+        _state(_nat_key(key, what), k, what)
         rec(sub)
 
 
@@ -169,34 +195,38 @@ def _validate_min(node, n, k):
     _need(isinstance(node, dict), "certificate node must be an object")
     kind = node.get("node")
     if kind == "leaf":
+        _only(node, ("node", "u", "p", "m"), "leaf")
         u = node.get("u")
         _need(isinstance(u, list) and len(u) == n, f"leaf: u must have {n} entries")
         for v in u:
             _rat(v, "leaf u")
         _pair_scalars(node.get("p"), n, "leaf p")
-        _need(isinstance(node.get("m") or {}, dict), "leaf m must be an object")
-        for key, row in (node.get("m") or {}).items():
+        for key, row in _obj(node.get("m"), "leaf m").items():
             _pair_key(key, n, "leaf m")
             _need(isinstance(row, list) and len(row) == k, f"leaf m: rows must have {k} entries")
             for v in row:
                 _rat(v, "leaf m")
     elif kind == "branch":
+        _only(node, ("node", "site", "children"), "branch")
         _branch(node, n, k, lambda sub: _validate_min(sub, n, k), "branch")
     elif kind == "prune":
+        _only(node, ("node", "site", "remove", "dominator", "ell", "rest"), "prune")
         _site(node.get("site"), n, "prune")
         _state(node.get("remove"), k, "prune remove")
         _state(node.get("dominator"), k, "prune dominator")
-        _need(isinstance(node.get("ell") or {}, dict), "prune ell must be an object")
-        for key, v in (node.get("ell") or {}).items():
+        for key, v in _obj(node.get("ell"), "prune ell").items():
             _site_key(key, n, "prune ell")
             _rat(v, "prune ell")
         _validate_min(node.get("rest"), n, k)
     elif kind == "sum":
+        _only(node, ("node", "parts"), "sum")
         parts = node.get("parts")
         _need(isinstance(parts, list) and len(parts) == 2, "sum: exactly two parts")
         for pt in parts:
             _need(isinstance(pt, dict) and isinstance(pt.get("instance"), dict), "sum: part needs an instance")
-            _tables(pt["instance"].get("h"), pt["instance"].get("J", {}), n, k, "sum part")
+            _only(pt, ("instance", "bound", "certificate"), "sum part")
+            _only(pt["instance"], ("h", "J"), "sum part instance")
+            _tables(pt["instance"].get("h"), pt["instance"].get("J"), n, k, "sum part")
             _rat(pt.get("bound"), "sum bound")
             _validate_min(pt.get("certificate"), n, k)
     else:
@@ -207,15 +237,18 @@ def _validate_residual(node, n, k):
     _need(isinstance(node, dict), "certificate node must be an object")
     kind = node.get("node")
     if kind == "anchor":
+        _only(node, ("node", "index", "cert"), "anchor node")
         _need(_is_int(node.get("index")) and node["index"] >= 0, "anchor: index must be a natural number")
         _validate_min(node.get("cert"), n, k)
     elif kind == "branch":
+        _only(node, ("node", "site", "children"), "branch")
         _branch(node, n, k, lambda sub: _validate_residual(sub, n, k), "branch")
     elif kind == "prune":
+        _only(node, ("node", "site", "remove", "dominator", "ell", "rest"), "prune")
         _site(node.get("site"), n, "prune")
         _state(node.get("remove"), k, "prune remove")
         _state(node.get("dominator"), k, "prune dominator")
-        for key, v in (node.get("ell") or {}).items():
+        for key, v in _obj(node.get("ell"), "prune ell").items():
             _site_key(key, n, "prune ell")
             _rat(v, "prune ell")
         _validate_residual(node.get("rest"), n, k)
@@ -227,16 +260,19 @@ def _validate_partition(node, n, k):
     _need(isinstance(node, dict), "certificate node must be an object")
     kind = node.get("node")
     if kind == "leaf":
+        _only(node, ("node", "lo", "hi"), "leaf")
         _pair_scalars(node.get("lo"), n, "leaf lo")
         _pair_scalars(node.get("hi"), n, "leaf hi")
     elif kind == "branch":
+        _only(node, ("node", "site", "children"), "branch")
         _branch(node, n, k, lambda sub: _validate_partition(sub, n, k), "branch")
     elif kind == "prune":
+        _only(node, ("node", "site", "remove", "dominator", "q0", "q", "rest"), "prune")
         _site(node.get("site"), n, "prune")
         _state(node.get("remove"), k, "prune remove")
         _state(node.get("dominator"), k, "prune dominator")
         _rat(node.get("q0"), "prune q0")
-        for key, v in (node.get("q") or {}).items():
+        for key, v in _obj(node.get("q"), "prune q").items():
             _site_key(key, n, "prune q")
             _rat(v, "prune q")
         _validate_partition(node.get("rest"), n, k)
@@ -247,6 +283,7 @@ def _validate_partition(node, n, k):
 def validate(doc):
     """Raise `Malformed` unless every index of the file is in range and every table has its shape."""
     _need(isinstance(doc, dict) and doc.get("format") == "metricchain-cert/1", "unknown format")
+    _only(doc, ("format", "kind", "n", "k", "domains", "instance", "claim", "certificate"), "file")
     n, k, kind = doc.get("n"), doc.get("k"), doc.get("kind")
     _need(_is_int(n) and n >= 0 and _is_int(k) and k >= 0, "n and k must be natural numbers")
     D = doc.get("domains")
@@ -260,7 +297,9 @@ def validate(doc):
     _need(isinstance(inst, dict), "instance must be an object")
     _need(isinstance(doc.get("claim", {}), dict), "claim must be an object")
     if kind == "min":
-        _tables(inst.get("h"), inst.get("J", {}), n, k, "instance")
+        _only(inst, ("h", "J"), "instance")
+        _only(doc.get("claim", {}), ("lower_bound", "witness"), "claim")
+        _tables(inst.get("h"), inst.get("J"), n, k, "instance")
         _rat(doc.get("claim", {}).get("lower_bound"), "claim.lower_bound")
         w = doc.get("claim", {}).get("witness")
         if w is not None:
@@ -269,7 +308,9 @@ def validate(doc):
                 _state(a, k, "witness")
         _validate_min(doc.get("certificate"), n, k)
     elif kind == "residual":
-        _tables(inst.get("h"), inst.get("J", {}), n, k, "instance")
+        _only(inst, ("h", "J", "c", "anchors"), "instance")
+        _only(doc.get("claim", {}), ("lower_bound",), "claim")
+        _tables(inst.get("h"), inst.get("J"), n, k, "instance")
         c = inst.get("c")
         _need(isinstance(c, list) and len(c) == n, f"c must have {n} entries")
         for v in c:
@@ -281,6 +322,7 @@ def validate(doc):
             _need(isinstance(x, list) and len(x) == n, "anchor: x must assign a state to every site")
             for v in x:
                 _state(v, k, "anchor")
+            _only(a, ("x", "lo", "hi", "value"), "anchor")
             if "value" in a:
                 _need("lo" not in a and "hi" not in a, "anchor: give either value or lo/hi, not both")
                 _rat(a["value"], "anchor value")
@@ -292,7 +334,9 @@ def validate(doc):
         _rat(doc.get("claim", {}).get("lower_bound"), "claim.lower_bound")
         _validate_residual(doc.get("certificate"), n, k)
     elif kind == "partition":
-        _tables(inst.get("w"), inst.get("W", {}), n, k, "instance")
+        _only(inst, ("w", "W"), "instance")
+        _only(doc.get("claim", {}), ("lo", "hi"), "claim")
+        _tables(inst.get("w"), inst.get("W"), n, k, "instance")
         for key in ("lo", "hi"):
             if key in doc.get("claim", {}):
                 _rat(doc["claim"][key], f"claim.{key}")
@@ -533,10 +577,44 @@ def zverify(node, I: Tables, D):
 # ----------------------------------------------------------------------------------------------
 
 def check_file(doc) -> dict:
+    """Never raises: every malformed, ambiguous or over-sized input is a rejection."""
     try:
         validate(doc)
+        return _check_validated(doc)
     except Malformed as exc:
         return dict(accepted=False, reason=f"malformed input: {exc}")
+    except RecursionError:
+        return dict(accepted=False, reason="malformed input: certificate nested too deeply for this implementation")
+    except Exception as exc:  # noqa: BLE001  (a rejection is always sound)
+        return dict(accepted=False, reason=f"rejected: {type(exc).__name__} while checking")
+
+
+def load_strict(text: str):
+    """Parse JSON, rejecting duplicate keys (a duplicate would silently shadow a table)."""
+    def no_duplicates(pairs):
+        out = {}
+        for key, v in pairs:
+            if key in out:
+                raise Malformed(f"duplicate key {key!r}")
+            out[key] = v
+        return out
+    return json.loads(text, object_pairs_hook=no_duplicates)
+
+
+def check_text(text: str) -> dict:
+    """Check a certificate file given as text.  Never raises."""
+    try:
+        doc = load_strict(text)
+    except Malformed as exc:
+        return dict(accepted=False, reason=f"malformed input: {exc}")
+    except RecursionError:
+        return dict(accepted=False, reason="malformed input: nested too deeply for this implementation")
+    except Exception as exc:  # noqa: BLE001
+        return dict(accepted=False, reason=f"malformed input: not valid JSON ({type(exc).__name__})")
+    return check_file(doc)
+
+
+def _check_validated(doc) -> dict:
     n, k, D = doc["n"], doc["k"], [list(d) for d in doc["domains"]]
     inst = doc["instance"]
     kind = doc["kind"]
@@ -676,6 +754,15 @@ def conformance_docs():
         format="metricchain-cert/1", kind="partition", n=2, k=1, domains=[[0]] * 2,
         instance={"w": [["-1"], ["1"]], "W": {"0,1": [["2"]], "1,0": [["2"]]}}, claim={},
         certificate={"node": "leaf", "lo": {"0,1": "1", "1,0": "1"}, "hi": {"0,1": "3", "1,0": "3"}})
+    # a field that the schema does not know (here: the anchor-semantics switch of an earlier draft)
+    docs["residual_unknown_field_reject"] = dict(
+        format="metricchain-cert/1", kind="residual", n=3, k=2, domains=full,
+        instance=dict(tri, c=["1/4"] * 3, anchors=[dict(x=anc, value="-1/8")], anchor_semantics="lower"),
+        claim=dict(lower_bound="1/8"),
+        certificate={"node": "anchor", "index": 0, "cert": exhaustive(anchored(Itri, [Q(1, 4)] * 3, anc))})
+    # a rational that is not in canonical form ("1.0" instead of "1")
+    docs["min_noncanonical_rational_reject"] = dict(
+        docs["triangle_min"], instance={"h": [["0", "0"]] * 3, "J": triangle_J("1.0", "0")})
     # malformed: a negative state in a domain (Python would silently index from the end)
     docs["partition_bad_domain_reject"] = dict(
         format="metricchain-cert/1", kind="partition", n=1, k=1, domains=[[0, -1]],
@@ -710,6 +797,8 @@ EXPECTED = {
     "residual_interval": dict(accepted=True, lower_bound="7/64", upper_bound="57/64"),
     "residual_interval_inconsistent_reject": dict(accepted=False),
     "residual_bad_anchor_reject": dict(accepted=False),
+    "residual_unknown_field_reject": dict(accepted=False),
+    "min_noncanonical_rational_reject": dict(accepted=False),
     "residual_negative_c_reject": dict(accepted=False),
     "partition_negative_reject": dict(accepted=False),
     "partition_bad_domain_reject": dict(accepted=False),
@@ -874,8 +963,88 @@ def fuzz(seed, rounds):
     return True, {}, stats
 
 
+def robustness_probes():
+    """Malformed, ambiguous or hostile inputs.  Each must be rejected without raising."""
+    import copy
+    base = json.loads(json.dumps(conformance_docs()["triangle_min"]))
+    assert check_file(base)["accepted"]
+    probes = []
+
+    def mutate(label, fn):
+        d = copy.deepcopy(base)
+        fn(d)
+        probes.append((label, d, None))
+
+    def setp(path, value):
+        def fn(d):
+            cur = d
+            for key in path[:-1]:
+                cur = cur[key]
+            cur[path[-1]] = value
+        return fn
+
+    def alias(key):
+        def fn(d):
+            d["instance"]["J"][key] = [["9", "9"], ["9", "9"]]
+        return fn
+
+    for key in (" 0,1", "+0,1", "00,1", "0_0,1", "\uff10,1", "0,1 ", "0, 1", "1,1", "0,7", "-1,0"):
+        mutate(f"alias or out-of-range pair key {key!r}", alias(key))
+    for bad in ("0.5", "1e0", " 1 ", "+1", "01", "1/0", "1/-2", "", "abc", True, 0.5, None, [], {}):
+        mutate(f"non-canonical rational {bad!r}", setp(("instance", "h", 0, 0), bad))
+    for bad in ([], 0, "", "x", 3.5, True):
+        mutate(f"J given as {bad!r}", setp(("instance", "J"), bad))
+    mutate("unknown top-level field", setp(("comment",), "hello"))
+    mutate("unknown instance field", setp(("instance", "anchor_semantics"), "lower"))
+    mutate("unknown claim field", setp(("claim", "upper_bound"), "3"))
+    mutate("boolean n", setp(("n",), True))
+    mutate("float k", setp(("k",), 2.0))
+    mutate("string site", setp(("certificate", "site"), "0"))
+    mutate("boolean site", setp(("certificate", "site"), False))
+    mutate("huge site", setp(("certificate", "site"), 10 ** 30))
+    mutate("child key with sign", lambda d: d["certificate"]["children"].__setitem__("+1", d["certificate"]["children"]["1"]))
+    mutate("leaf messages given as a list", setp(("certificate", "children", "0", "m"), []))
+    mutate("leaf with an unknown field", setp(("certificate", "children", "0", "extra"), 1))
+    mutate("certificate is a list", setp(("certificate",), []))
+    mutate("domains repeat a state", setp(("domains", 0), [0, 0]))
+    mutate("domains contain a boolean", setp(("domains", 0), [False, True]))
+    mutate("rational with 200000 digits", setp(("claim", "lower_bound"), "1" * 200000))
+    mutate("exponent notation with a huge exponent", setp(("claim", "lower_bound"), "1e100000000"))
+    mutate("prune with ell given as a list", setp(("certificate",), {
+        "node": "prune", "site": 0, "remove": 0, "dominator": 1, "ell": [], "rest": base["certificate"]}))
+    deep = base["certificate"]["children"]["0"]
+    for _ in range(30000):
+        deep = {"node": "branch", "site": 0, "children": {"0": deep, "1": deep}}
+    mutate("certificate nested 30000 levels deep", setp(("certificate",), deep))
+    probes.append(("document is a list", [], None))
+    probes.append(("document is a number", 7, None))
+    text = json.dumps(base)
+    probes.append(("duplicate key in the JSON text", None,
+                   text.replace('"n": 3', '"n": 3, "n": 3', 1)))
+    probes.append(("not JSON at all", None, "{this is not json"))
+    probes.append(("JSON text nested 100000 levels deep", None, "[" * 100000 + "]" * 100000))
+    return probes
+
+
 def selftest(quick):
     ok = True
+    bad = []
+    probes = robustness_probes()
+    for label, doc, text in probes:
+        try:
+            out = check_text(text) if text is not None else check_file(doc)
+            if out.get("accepted") is not False:
+                bad.append(f"{label}: accepted")
+        except BaseException as exc:  # noqa: BLE001
+            bad.append(f"{label}: raised {type(exc).__name__}")
+    # a long but well-formed rational is handled exactly
+    big = json.loads(json.dumps(conformance_docs()["triangle_min"]))
+    big["claim"]["lower_bound"] = "-" + "9" * 5000
+    if check_file(big).get("accepted") is not True:
+        bad.append("a valid 5000-digit bound was not accepted")
+    ok &= not bad
+    print(f"[{'ok' if not bad else 'FAIL'}] robustness: {len(probes)} malformed or ambiguous inputs rejected "
+          f"without exception{'' if not bad else ' -- ' + '; '.join(bad)}")
     for name, doc in conformance_docs().items():
         doc = json.loads(json.dumps(doc))  # exercise the JSON round trip
         out = check_file(doc)
@@ -910,8 +1079,9 @@ def main():
         return 0 if selftest(args.quick) else 1
     if args.cert:
         with open(args.cert) as fh:
-            print(json.dumps(check_file(json.load(fh)), indent=1))
-        return 0
+            out = check_text(fh.read())
+        print(json.dumps(out, indent=1))
+        return 0 if out.get("accepted") else 1   # exit status 0 only for an accepted certificate
     ap.print_help()
     return 2
 

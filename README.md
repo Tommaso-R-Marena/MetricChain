@@ -31,7 +31,8 @@ proofs/Frontiers/       envelope duality, dominance calculus, free-energy sandwi
                         torsion-to-RMSD, invariant-residual envelopes,
                         proof complexity of certificates
 proofs/CertificateAlgebra.lean   executable verification kernels + Master Soundness Theorems
-proofs/AxiomAudit.lean           automatic axiom audit of every declaration + non-vacuity witnesses
+proofs/AuditCommand.lean         the axiom walk (by defining module)
+proofs/AxiomAudit.lean           axiom audit of every project constant + non-vacuity witnesses
 experiments/            adversarial counterexample harness and its mutation tests, separation
                         benchmarks, reference JSON certificate checker + conformance
                         vectors (certs/)
@@ -50,10 +51,11 @@ Requirements: the pinned Lean toolchain (via `elan`, or the release archive unpa
 `~/.lean/`; see `scripts/lean_env.sh`), `lake exe cache get` for the Mathlib cache, and Python 3
 with `numpy`, `scipy`, `mpmath`.
 
-The audit fails if any file under `proofs/` contains `sorry`/`admit`/`native_decide`/a user axiom
-or produces Lean's incomplete-proof warning, if a module is not imported by the axiom audit, if
-any declaration in the `MetricChain` namespace (the non-vacuity witnesses included) depends on an
-axiom other than `propext`, `Classical.choice`, `Quot.sound`, if a registered conjecture is
+The audit fails if any file under `proofs/` contains `sorry`/`admit`/native evaluation/an
+anonymous `example` or produces Lean's incomplete-proof warning, if a module is not imported by
+the axiom audit, if any constant defined in a project module — whatever its namespace or
+visibility, the non-vacuity witnesses included — depends on an axiom other than `propext`,
+`Classical.choice`, `Quot.sound`, if a registered conjecture is
 falsified (or a documented dead end unexpectedly survives), if a mutation of the harness goes
 undetected, if the stored conformance vectors differ from the reference checker's, or if the
 documentation cites a Lean declaration that does not exist.  The script first checks itself:
@@ -71,7 +73,7 @@ sharp-minimum and query-model theorems), a witness-size lower bound, the necessi
 decomposition rule (exponential separation), and sharp free-energy sandwiches for product
 references.  Several classical or recently published results are formalized along the way and
 are labelled as such; an independent adversarial audit of the whole development, a re-audit of
-the repairs, and the corrections both triggered are recorded in `docs/DEAD_ENDS.md` (D14–D19).
+the repairs, and the corrections they triggered are recorded in `docs/DEAD_ENDS.md` (D14–D20).
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

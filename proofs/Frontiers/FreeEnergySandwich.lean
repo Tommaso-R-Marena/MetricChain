@@ -1281,7 +1281,7 @@ section Examples
 site marginals, and the interaction `g x = [x 0 ∧ x 1]`, which has bounded differences
 `c = (1, 1)`.  The hypotheses of `mcdiarmid_mgf` are jointly satisfiable and the conclusion is
 the explicit bound `exp (1/4)`. -/
-example :
+theorem sandwich_check_1 :
     ∑ x : Fin 2 → Bool, (∏ _i : Fin 2, (1 / 2 : ℝ)) *
         Real.exp ((if x 0 && x 1 then (1 : ℝ) else 0) -
           ∑ y : Fin 2 → Bool, (∏ _i : Fin 2, (1 / 2 : ℝ)) *
@@ -1303,7 +1303,7 @@ example :
   exact h
 
 /-- The same instance in the `Δ`, `β` form: the two-sided bounded-differences sandwich. -/
-example (β : ℝ) :
+theorem sandwich_check_2 (β : ℝ) :
     -β * ∑ x : Fin 2 → Bool, (∏ _i : Fin 2, (1 / 2 : ℝ)) * (if x 0 && x 1 then (1 : ℝ) else 0) ≤
         Real.log (∑ x : Fin 2 → Bool, (∏ _i : Fin 2, (1 / 2 : ℝ)) *
           Real.exp (-β * (if x 0 && x 1 then (1 : ℝ) else 0))) ∧
@@ -1328,7 +1328,7 @@ example (β : ℝ) :
 
 /-- Non-vacuity of T3: the two-level system with uniform reference and `Δ ∈ {0, 1}`:
 `-β/2 ≤ log ((1 + exp (-β)) / 2) ≤ -β/2 + β²/8`. -/
-example (β : ℝ) :
+theorem sandwich_check_3 (β : ℝ) :
     -β / 2 ≤ Real.log ((1 + Real.exp (-β)) / 2) ∧
       Real.log ((1 + Real.exp (-β)) / 2) ≤ -β / 2 + β ^ 2 / 8 := by
   have h := free_energy_sandwich (Ω := Bool) (fun _ => 1 / 2) (fun b => if b then 1 else 0)
@@ -1351,7 +1351,7 @@ example (β : ℝ) :
 `Bool`, the site `true` with `2` states and the site `false` with `3` states, uniform site
 marginals, and the non-decomposable "equal labels" interaction
 `g x = [(x true : ℕ) = (x false : ℕ)]`, which has bounded differences `c = (1, 1)`. -/
-example (β : ℝ) :
+theorem sandwich_check_4 (β : ℝ) :
     Real.log (∑ x : ∀ b : Bool, Fin (if b then 2 else 3),
         (∏ b : Bool, (1 / (if b then 2 else 3) : ℝ)) *
           Real.exp (-β * (if (x true : ℕ) = (x false : ℕ) then (1 : ℝ) else 0))) ≤

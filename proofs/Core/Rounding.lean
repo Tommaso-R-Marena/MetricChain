@@ -860,60 +860,60 @@ section Examples
 /-! ### Rounding -/
 
 unseal Rat.mul Rat.inv Rat.add Rat.sub in
-example : roundDown 4 (1 / 3) = 5 / 16 := by decide
+theorem rounding_check_1 : roundDown 4 (1 / 3) = 5 / 16 := by decide
 
 unseal Rat.mul Rat.inv Rat.add Rat.sub in
-example : roundUp 4 (1 / 3) = 3 / 8 := by decide
+theorem rounding_check_2 : roundUp 4 (1 / 3) = 3 / 8 := by decide
 
-example : roundDown 4 (1 / 3) = 5 / 16 := by norm_num [roundDown]
-example : roundUp 4 (1 / 3) = 3 / 8 := by norm_num [roundUp]
-example : roundDown 4 (-1 / 3) = -3 / 8 := by decide +kernel
-example : roundUp 4 (-1 / 3) = -5 / 16 := by decide +kernel
+theorem rounding_check_3 : roundDown 4 (1 / 3) = 5 / 16 := by norm_num [roundDown]
+theorem rounding_check_4 : roundUp 4 (1 / 3) = 3 / 8 := by norm_num [roundUp]
+theorem rounding_check_5 : roundDown 4 (-1 / 3) = -3 / 8 := by decide +kernel
+theorem rounding_check_6 : roundUp 4 (-1 / 3) = -5 / 16 := by decide +kernel
 
 /-- The one-grid-step bound `roundUp_sub_roundDown_le` is attained. -/
-example : roundUp 10 (1 / 3) - roundDown 10 (1 / 3) = 1 / 2 ^ 10 := by decide +kernel
+theorem rounding_check_7 : roundUp 10 (1 / 3) - roundDown 10 (1 / 3) = 1 / 2 ^ 10 := by decide +kernel
 
 /-! ### Interval arithmetic -/
 
 unseal Rat.mul Rat.inv Rat.add Rat.sub in
-example : QInterval.mul ⟨-1, 2⟩ ⟨3, 4⟩ = ⟨-4, 8⟩ := by decide
+theorem rounding_check_8 : QInterval.mul ⟨-1, 2⟩ ⟨3, 4⟩ = ⟨-4, 8⟩ := by decide
 
-example : QInterval.mul ⟨-1, 2⟩ ⟨3, 4⟩ = ⟨-4, 8⟩ := by norm_num [QInterval.mul]
-example : QInterval.sq ⟨-1 / 3, 2⟩ = ⟨0, 4⟩ := by decide +kernel
-example : QInterval.inv ⟨1 / 3, 2⟩ = ⟨1 / 2, 3⟩ := by norm_num [QInterval.inv]
-example : (QInterval.mul ⟨-1 / 3, 2⟩ ⟨4 / 7, 3⟩).outward 5 = ⟨-1, 6⟩ := by decide +kernel
-example : QInterval.outward 4 ⟨1 / 3, 2 / 3⟩ = ⟨5 / 16, 11 / 16⟩ := by
+theorem rounding_check_9 : QInterval.mul ⟨-1, 2⟩ ⟨3, 4⟩ = ⟨-4, 8⟩ := by norm_num [QInterval.mul]
+theorem rounding_check_10 : QInterval.sq ⟨-1 / 3, 2⟩ = ⟨0, 4⟩ := by decide +kernel
+theorem rounding_check_11 : QInterval.inv ⟨1 / 3, 2⟩ = ⟨1 / 2, 3⟩ := by norm_num [QInterval.inv]
+theorem rounding_check_12 : (QInterval.mul ⟨-1 / 3, 2⟩ ⟨4 / 7, 3⟩).outward 5 = ⟨-1, 6⟩ := by decide +kernel
+theorem rounding_check_13 : QInterval.outward 4 ⟨1 / 3, 2 / 3⟩ = ⟨5 / 16, 11 / 16⟩ := by
   norm_num [QInterval.outward, roundDown, roundUp]
-example : QInterval.sum (Finset.range 4) (fun i => ⟨i, i + 1 / 2⟩) = ⟨6, 8⟩ := by decide +kernel
+theorem rounding_check_14 : QInterval.sum (Finset.range 4) (fun i => ⟨i, i + 1 / 2⟩) = ⟨6, 8⟩ := by decide +kernel
 
 /-- Soundness used on genuinely irrational data: `3 ≤ √2 · π ≤ 8`. -/
-example : (QInterval.mul ⟨1, 2⟩ ⟨3, 4⟩).Contains (Real.sqrt 2 * Real.pi) :=
+theorem rounding_check_15 : (QInterval.mul ⟨1, 2⟩ ⟨3, 4⟩).Contains (Real.sqrt 2 * Real.pi) :=
   QInterval.contains_mul (I := ⟨1, 2⟩) (J := ⟨3, 4⟩)
     ⟨by norm_num, by norm_num [Real.sqrt_le_iff]⟩
     ⟨by simpa using Real.pi_gt_three.le, by simpa using Real.pi_le_four⟩
 
 /-! ### Exponential -/
 
-example : expLo 8 1 1 = 1681189712449 / 618475290624 := by decide +kernel
-example : expHi 8 1 1 = 2059457942325001 / 757632231014400 := by decide +kernel
+theorem rounding_check_16 : expLo 8 1 1 = 1681189712449 / 618475290624 := by decide +kernel
+theorem rounding_check_17 : expHi 8 1 1 = 2059457942325001 / 757632231014400 := by decide +kernel
 
-example : (expLo 8 1 1 : ℚ) ≤ 2718281828 / 1000000000 ∧
+theorem rounding_check_18 : (expLo 8 1 1 : ℚ) ≤ 2718281828 / 1000000000 ∧
     2718281829 / 1000000000 ≤ expHi 8 1 1 := by decide +kernel
 
-example : (expLo 8 1 1 : ℚ) ≤ 2718281828 / 1000000000 ∧
+theorem rounding_check_19 : (expLo 8 1 1 : ℚ) ≤ 2718281828 / 1000000000 ∧
     2718281829 / 1000000000 ≤ expHi 8 1 1 := by
   norm_num [expLo, expHi, expTaylor, expErr, Finset.sum_range_succ, Nat.factorial]
 
 /-- Eight Taylor terms and one halving already enclose `e` to within `10⁻⁶`. -/
-example : expHi 8 1 1 - expLo 8 1 1 ≤ 1 / 10 ^ 6 := by decide +kernel
+theorem rounding_check_20 : expHi 8 1 1 - expLo 8 1 1 ≤ 1 / 10 ^ 6 := by decide +kernel
 
 /-- An instance of `exp_enclosure`. -/
-example : ((expLo 8 1 1 : ℚ) : ℝ) ≤ Real.exp 1 ∧ Real.exp 1 ≤ ((expHi 8 1 1 : ℚ) : ℝ) := by
+theorem rounding_check_21 : ((expLo 8 1 1 : ℚ) : ℝ) ≤ Real.exp 1 ∧ Real.exp 1 ≤ ((expHi 8 1 1 : ℚ) : ℝ) := by
   simpa using exp_enclosure 8 1 (by norm_num) 1 (by norm_num)
 
 /-- A numerical statement about the real number `e`, proved from `exp_enclosure` and two rational
 comparisons checked by the kernel. -/
-example : (2.7182 : ℝ) ≤ Real.exp 1 ∧ Real.exp 1 ≤ 2.7183 := by
+theorem rounding_check_22 : (2.7182 : ℝ) ≤ Real.exp 1 ∧ Real.exp 1 ≤ 2.7183 := by
   have hlo := le_exp_of_le_expLo (n := 8) (k := 1) (q := 1) (a := 27182 / 10000)
     (by norm_num) (by norm_num) (by decide +kernel)
   have hhi := exp_le_of_expHi_le (n := 8) (k := 1) (q := 1) (b := 27183 / 10000)
@@ -923,11 +923,11 @@ example : (2.7182 : ℝ) ≤ Real.exp 1 ∧ Real.exp 1 ≤ 2.7183 := by
 
 /-- Twelve Taylor terms, one halving and outward rounding to 30 fractional bits: the enclosure
 of `e` is a single grid cell of width `2⁻³⁰`. -/
-example : ((QInterval.point 1).exp 12 1).outward 30
+theorem rounding_check_23 : ((QInterval.point 1).exp 12 1).outward 30
     = ⟨2918732888 / 2 ^ 30, 2918732889 / 2 ^ 30⟩ := by decide +kernel
 
 /-- A certified enclosure of `log 2`, checked through the rational `exp` bounds. -/
-example : (0.693 : ℝ) ≤ Real.log 2 ∧ Real.log 2 ≤ 0.694 := by
+theorem rounding_check_24 : (0.693 : ℝ) ≤ Real.log 2 ∧ Real.log 2 ≤ 0.694 := by
   have hlo := le_log_of_expHi_le (n := 8) (k := 0) (a := 693 / 1000) (z := 2)
     (by norm_num) (by norm_num)
     (by exact_mod_cast (by decide +kernel : expHi 8 0 (693 / 1000) ≤ 2))
@@ -939,7 +939,7 @@ example : (0.693 : ℝ) ≤ Real.log 2 ∧ Real.log 2 ≤ 0.694 := by
 
 /-- A Boltzmann factor: for an energy `e ∈ [1, 3/2]` and `β = 2`, `exp (-β e) ∈ [0.0497, 0.1354]`
 (the true range is `[exp (-3), exp (-2)] ≈ [0.04979, 0.13534]`). -/
-example (e : ℝ) (he : (⟨1, 3 / 2⟩ : QInterval).Contains e) :
+theorem rounding_check_25 (e : ℝ) (he : (⟨1, 3 / 2⟩ : QInterval).Contains e) :
     (0.0497 : ℝ) ≤ Real.exp (-2 * e) ∧ Real.exp (-2 * e) ≤ 0.1354 := by
   have h := QInterval.contains_boltzmann (n := 12) (k := 2) (by norm_num) 2
     (by norm_num) (by norm_num) he
@@ -950,7 +950,7 @@ example (e : ℝ) (he : (⟨1, 3 / 2⟩ : QInterval).Contains e) :
 
 /-- A two-level partition function `Z = ∑ᵢ exp (-β Eᵢ)` with `β = 2`, `E₀ = 0` and an
 interval-valued energy `E₁ ∈ [1, 3/2]`: `1.0497 ≤ Z ≤ 1.1354`. -/
-example (E : Fin 2 → ℝ) (h0 : (QInterval.point 0).Contains (E 0))
+theorem rounding_check_26 (E : Fin 2 → ℝ) (h0 : (QInterval.point 0).Contains (E 0))
     (h1 : (⟨1, 3 / 2⟩ : QInterval).Contains (E 1)) :
     (1.0497 : ℝ) ≤ ∑ i, Real.exp (-2 * E i) ∧ ∑ i, Real.exp (-2 * E i) ≤ 1.1354 := by
   have h := QInterval.contains_boltzmann_sum (n := 12) (k := 2) (by norm_num) 2
@@ -964,26 +964,26 @@ example (E : Fin 2 → ℝ) (h0 : (QInterval.point 0).Contains (E 0))
   exact ⟨hlo, hhi⟩
 
 /-- The same Boltzmann enclosure, outward-rounded to 20 fractional bits. -/
-example : (((⟨1, 3 / 2⟩ : QInterval).scale (-2)).exp 12 2).outward 20
+theorem rounding_check_27 : (((⟨1, 3 / 2⟩ : QInterval).scale (-2)).exp 12 2).outward 20
     = ⟨52205 / 1048576, 70955 / 524288⟩ := by decide +kernel
 
 /-! ### Circle atlas -/
 
-example : circParamQ (1 / 2) = (3 / 5, 4 / 5) := by norm_num [circParamQ]
+theorem rounding_check_28 : circParamQ (1 / 2) = (3 / 5, 4 / 5) := by norm_num [circParamQ]
 
-example : (⟨1 / 4, 1 / 2⟩ : QInterval).circParam = (⟨3 / 5, 15 / 17⟩, ⟨8 / 17, 4 / 5⟩) := by
+theorem rounding_check_29 : (⟨1 / 4, 1 / 2⟩ : QInterval).circParam = (⟨3 / 5, 15 / 17⟩, ⟨8 / 17, 4 / 5⟩) := by
   decide +kernel
 
-example : QInterval.circChart 1 ⟨1 / 4, 1 / 2⟩ = (⟨-4 / 5, -8 / 17⟩, ⟨3 / 5, 15 / 17⟩) := by
+theorem rounding_check_30 : QInterval.circChart 1 ⟨1 / 4, 1 / 2⟩ = (⟨-4 / 5, -8 / 17⟩, ⟨3 / 5, 15 / 17⟩) := by
   decide +kernel
 
 /-- Outside `[-1, 1]` the generic branch is used; the result still lies in `[-1, 1]²`. -/
-example : (⟨-2, 3⟩ : QInterval).circParam = (⟨-4 / 5, 1⟩, ⟨-1, 1⟩) := by decide +kernel
+theorem rounding_check_31 : (⟨-2, 3⟩ : QInterval).circParam = (⟨-4 / 5, 1⟩, ⟨-1, 1⟩) := by decide +kernel
 
-example : quarterTurn 1 (circParam (1 / 3)) = (-3 / 5, 4 / 5) := by norm_num [circParam]
+theorem rounding_check_32 : quarterTurn 1 (circParam (1 / 3)) = (-3 / 5, 4 / 5) := by norm_num [circParam]
 
 /-- An instance of `circle_rational_atlas`. -/
-example : ∃ q : Fin 4, ∃ t : ℝ, |t| ≤ 1 / 2 ∧ quarterTurn q (circParam t) = (-4 / 5, 3 / 5) :=
+theorem rounding_check_33 : ∃ q : Fin 4, ∃ t : ℝ, |t| ≤ 1 / 2 ∧ quarterTurn q (circParam t) = (-4 / 5, 3 / 5) :=
   circle_rational_atlas _ _ (by norm_num)
 
 end Examples

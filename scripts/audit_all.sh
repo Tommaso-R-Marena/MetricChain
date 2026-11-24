@@ -3,8 +3,9 @@
 #   1. lake build (all modules under proofs/)            — must succeed, no "sorry" warnings
 #   0. self-test: planted violations must be detected by the checks below
 #   2. forbidden-token scan of proofs/ (all files)        — no sorry / admit / axiom / native_decide ...
-#   3. axiom audit (proofs/AxiomAudit.lean)               — only propext, Classical.choice, Quot.sound;
-#      every module under proofs/ must be imported there
+#   3. axiom audit (proofs/AxiomAudit.lean)               — only propext, Classical.choice, Quot.sound,
+#      for every constant defined in a project module (walk by defining module, not by name);
+#      every module under proofs/ must be imported there and the walk must be the last command
 #   4. Python falsification harness (+ mutation tests of the harness) + separation benchmarks
 #      + reference checker (conformance vectors, fuzz)
 #   5. every Lean declaration cited in docs/*.md exists in proofs/
@@ -15,9 +16,13 @@ source scripts/lean_env.sh || exit 1
 FULL=0; [ "${1:-}" = "--full" ] && FULL=1
 fail() { echo "AUDIT FAILED: $*" >&2; exit 1; }
 
-# Forbidden constructs.  `sorry` is forbidden as a substring (this also covers `sorryAx`), in every
-# file including AxiomAudit.lean; `stop` is the debugging tactic that closes goals without proof.
-FORBIDDEN='sorry|(^|[^A-Za-z_.])admit($|[^A-Za-z_])|native_decide|^[[:space:]]*(private |protected )?axiom[[:space:]]|implemented_by|^[[:space:]]*unsafe[[:space:]]|ofReduceBool|^[[:space:]]*stop([[:space:]]|$)'
+# Forbidden constructs, in every file under proofs/ including AxiomAudit.lean.
+#  * `sorry` as a substring (this also covers `sorryAx`); `admit`, also as `.admit`;
+#  * native evaluation in any spelling (`native_decide`, `decide +native`, `bv_decide`, `ofReduceBool`);
+#  * `stop`, the debugging tactic that closes goals without proof; `#guard_msgs`, which can hide warnings;
+#  * anonymous `example`s: they are invisible to the axiom walk, so every checked statement must be a
+#    named declaration (the walk then covers it whatever its namespace or visibility).
+FORBIDDEN='sorry|(^|[^A-Za-z_])admit($|[^A-Za-z_])|native_decide|\+native|bv_decide|ofReduceBool|^[[:space:]]*(private |protected )?axiom[[:space:]]|implemented_by|^[[:space:]]*unsafe[[:space:]]|(^|[^A-Za-z_.])stop($|[^A-Za-z_])|#guard_msgs|^[[:space:]]*example([[:space:]]|:|$)'
 # Lean's warning for an incomplete proof (the quoting style has changed between versions).
 SORRY_WARNING='declaration uses .?sorry.?'
 
@@ -27,12 +32,16 @@ printf 'example : (1 : Nat) = 2 := sorry\n' > "$ST/Planted.lean"
 lean "$ST/Planted.lean" > "$ST/out" 2>&1
 grep -qE "$SORRY_WARNING" "$ST/out" \
   || fail "self-test: the incomplete-proof warning of this Lean version is not recognised"
-for planted in 'theorem t : 1 = 2 := sorry' '  exact sorryAx _' 'example : 1 = 2 := by admit' \
-               'theorem t : 1 = 2 := by native_decide' 'axiom bad : 1 = 2' '  stop'; do
+for planted in 'theorem t : 1 = 2 := sorry' '  exact sorryAx _' 'theorem t : 1 = 2 := by admit' \
+               'theorem t : 1 = 2 := by native_decide' 'axiom bad : 1 = 2' '  stop' '  simp; stop' \
+               'theorem t : 1 = 2 := by decide +native' 'theorem t : False := by bv_decide' \
+               '#guard_msgs (drop warning) in' '  (← getMainGoal).admit' 'example : 1 = 1 := rfl' \
+               '  example (n : Nat) : n = n := rfl'; do
   printf '%s\n' "$planted" | grep -qE "$FORBIDDEN" || fail "self-test: token scan misses: $planted"
 done
 for harmless in 'theorem admits_nothing : True := trivial' '#print axioms MetricChain.verify_sound' \
-                '  -- the proof stops here'; do
+                '  -- the proof stops here' 'examples below evaluate them' \
+                'theorem nonstop_flow : True := trivial'; do
   printf '%s\n' "$harmless" | grep -qE "$FORBIDDEN" && fail "self-test: token scan flags: $harmless"
 done
 echo "ok"
@@ -43,6 +52,24 @@ if ! lake build >"$BUILD_LOG" 2>&1; then tail -n 40 "$BUILD_LOG"; fail "lake bui
 tail -n 1 "$BUILD_LOG"
 if grep -qE "$SORRY_WARNING" "$BUILD_LOG"; then grep -nE "$SORRY_WARNING" "$BUILD_LOG" | head; fail "incomplete proof in build"; fi
 if grep -q "^error" "$BUILD_LOG"; then grep -n "^error" "$BUILD_LOG" | head; fail "errors in build log"; fi
+
+# Self-test of the axiom walk (needs the built AuditCommand module): planted axioms outside the
+# project namespace, used by a public and by a private theorem, must make the walk fail.
+cat > "$ST/PlantedWalk.lean" <<'LEAN'
+import proofs.AuditCommand
+/-- trust me -/ axiom AuditEvasion.cheat : False
+theorem AuditEvasion.two_eq_three : (2 : Nat) = 3 := AuditEvasion.cheat.elim
+private theorem hidden_three_eq_four : (3 : Nat) = 4 := AuditEvasion.cheat.elim
+#audit_axioms proofs
+LEAN
+if lake env lean "$ST/PlantedWalk.lean" > "$ST/walk.out" 2>&1; then fail "self-test: the axiom walk accepted planted axioms"; fi
+grep -q "AXIOM AUDIT FAILED" "$ST/walk.out" || fail "self-test: the axiom walk did not report the planted axioms"
+grep -q "two_eq_three" "$ST/walk.out" && grep -q "hidden_three_eq_four" "$ST/walk.out" \
+  || fail "self-test: the axiom walk missed a planted declaration (public or private)"
+printf 'import proofs.AuditCommand\ntheorem Clean.one_eq_one : (1 : Nat) = 1 := rfl\n#audit_axioms proofs\n' > "$ST/CleanWalk.lean"
+lake env lean "$ST/CleanWalk.lean" > "$ST/clean.out" 2>&1 && grep -q "AXIOM AUDIT OK" "$ST/clean.out" \
+  || fail "self-test: the axiom walk rejected a clean file"
+echo "axiom-walk self-test: ok"
 
 echo "== [2/4] forbidden tokens in proofs/ =="
 if grep -rnE "$FORBIDDEN" proofs/ --include='*.lean'; then
@@ -59,6 +86,9 @@ for f in $(find proofs -name '*.lean' ! -name 'AxiomAudit.lean' | sort); do
   grep -q "^import $m\$" proofs/AxiomAudit.lean || MISSING="$MISSING $m"
 done
 [ -z "$MISSING" ] || fail "modules not imported by proofs/AxiomAudit.lean:$MISSING"
+# ... and nothing may follow the audit command in that file.
+[ "$(grep -v '^[[:space:]]*$' proofs/AxiomAudit.lean | tail -n 1)" = "#audit_axioms proofs" ] \
+  || fail "the last command of proofs/AxiomAudit.lean must be '#audit_axioms proofs'"
 AX_LOG=$(mktemp)
 if ! lake env lean proofs/AxiomAudit.lean >"$AX_LOG" 2>&1; then tail -n 30 "$AX_LOG"; fail "AxiomAudit.lean did not compile"; fi
 if grep -qE "$SORRY_WARNING" "$AX_LOG"; then grep -nE "$SORRY_WARNING" "$AX_LOG" | head; fail "incomplete proof in AxiomAudit.lean"; fi

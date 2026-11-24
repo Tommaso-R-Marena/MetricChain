@@ -468,7 +468,7 @@ theorem opNorm_holProd_sub_id_le (ghat x : ℕ → (V ≃ₗᵢ[ℝ] V)) (m : �
 
 /-- The isometry group of the plane is not commutative (complex conjugation and the quarter turn
 do not commute), so `chordal_holProd_le` is an instance of H1 that is not covered by H3. -/
-example : ∃ g h : ℂ ≃ₗᵢ[ℝ] ℂ, g * h ≠ h * g := by
+theorem holonomy_check_1 : ∃ g h : ℂ ≃ₗᵢ[ℝ] ℂ, g * h ≠ h * g := by
   refine ⟨Complex.conjLIE, rotation (Circle.exp (Real.pi / 2)), fun hcomm => ?_⟩
   have h1 := congrArg (fun f : ℂ ≃ₗᵢ[ℝ] ℂ => (f 1).im) hcomm
   simp [rotation_apply, Circle.coe_exp] at h1
@@ -563,7 +563,7 @@ theorem turnAngle_holProd_le (ghat x : ℕ → (V ≃ₗᵢ[ℝ] V)) (m : ℕ) (
 
 /-- The angular seminorm is not trivial: the point reflection of the line turns every non-zero
 vector by `π`. -/
-example : turnAngle (LinearIsometryEquiv.neg ℝ : ℝ ≃ₗᵢ[ℝ] ℝ) = Real.pi := by
+theorem holonomy_check_2 : turnAngle (LinearIsometryEquiv.neg ℝ : ℝ ≃ₗᵢ[ℝ] ℝ) = Real.pi := by
   refine le_antisymm
     (turnAngle_le _ Real.pi_pos.le fun v _ => InnerProductGeometry.angle_le_pi _ _) ?_
   have h := angle_le_turnAngle (LinearIsometryEquiv.neg ℝ : ℝ ≃ₗᵢ[ℝ] ℝ) (v := 1) one_ne_zero
@@ -578,7 +578,7 @@ section Examples
 /-- H1 in the concrete commutative group `Multiplicative ℝ`: three edges each measuring the
 increment `1` around a triangle, all vertex frames trivial.  The hypotheses hold, the holonomy has
 norm `3`, and the total edge error is `3`: the bound is attained with non-zero holonomy. -/
-example :
+theorem holonomy_check_3 :
     ∃ ghat x : ℕ → Multiplicative ℝ,
       (∀ g y : Multiplicative ℝ, ‖g * y * g⁻¹‖ = ‖y‖) ∧ x 3 = x 0 ∧
       ‖holProd ghat 3‖ = 3 ∧ ∑ k ∈ range 3, ‖ghat k / ((x k)⁻¹ * x (k + 1))‖ = 3 := by
@@ -591,7 +591,7 @@ example :
   · simp
 
 /-- The conclusion of H1 for that instance, obtained from the theorem itself. -/
-example :
+theorem holonomy_check_4 :
     ‖holProd (fun _ => Multiplicative.ofAdd (1 : ℝ)) 3‖ ≤
       ∑ _k ∈ range 3, ‖Multiplicative.ofAdd (1 : ℝ) / ((1 : Multiplicative ℝ)⁻¹ * 1)‖ :=
   norm_holProd_le_sum (fun g y => by rw [mul_comm g y, mul_inv_cancel_right])
@@ -599,7 +599,7 @@ example :
 
 /-- H2 on the line: trivial rotations, all frames at the origin, three measured translations `1`.
 The hypotheses hold with `ρ = 0`, the translation holonomy has norm `3` and equals the bound. -/
-example :
+theorem holonomy_check_5 :
     ‖holTrans (fun _ => LinearIsometryEquiv.refl ℝ ℝ) (fun _ => (1 : ℝ)) 3‖ = 3 ∧
       (∑ _k ∈ range 3, ‖(1 : ℝ) - (LinearIsometryEquiv.refl ℝ ℝ).symm ((0 : ℝ) - 0)‖ +
         ∑ k ∈ range 3, (∑ _l ∈ range k, (0 : ℝ)) * ‖(1 : ℝ)‖) = 3 := by

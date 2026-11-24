@@ -198,7 +198,7 @@ theorem rank_psd_trace_obstruction (A G : Matrix n n ℝ) (hA : A.IsHermitian) (
     _ ≤ _ := by linarith
 
 /-- The hypotheses of `rank_psd_trace_obstruction` are satisfiable. -/
-example : ∃ (A G : Matrix (Fin 2) (Fin 2) ℝ) (r : ℕ), A.IsHermitian ∧ G.PosSemidef ∧ G.rank ≤ r :=
+theorem realizability_check_1 : ∃ (A G : Matrix (Fin 2) (Fin 2) ℝ) (r : ℕ), A.IsHermitian ∧ G.PosSemidef ∧ G.rank ≤ r :=
   ⟨1, 0, 0, Matrix.isHermitian_one, Matrix.PosSemidef.zero, by simp⟩
 
 end Tail
@@ -600,7 +600,7 @@ theorem simplexSqDist_diag (L : ℕ) (i : Fin L) : simplexSqDist L i i = 0 := by
 
 /-- The hypotheses of `sstress_lower_bound` are satisfiable (see
 `equilateral_triangle_sstress_lower_bound` below for a quantitative instance). -/
-example : (simplexSqDist 3).IsSymm ∧ ∀ i, simplexSqDist 3 i i = 0 :=
+theorem realizability_check_2 : (simplexSqDist 3).IsSymm ∧ ∀ i, simplexSqDist 3 i i = 0 :=
   ⟨simplexSqDist_isSymm 3, simplexSqDist_diag 3⟩
 
 /-- The equilateral triangle as an explicit matrix. -/

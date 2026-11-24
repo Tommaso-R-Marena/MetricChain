@@ -23,7 +23,8 @@ Conventions: **[V]** = machine-verified in `proofs/` (zero `sorry`, standard axi
   are rationals; solvers may use floats but must round outward before emitting a certificate).
   A dyadic outward-rounding model with proved error envelope lives in `Core/Rounding.lean`.
 * Decision: the automatic axiom audit walks *every* declaration in the namespace instead of a
-  hand-picked list (`#audit_axioms MetricChain`).
+  hand-picked list (`#audit_axioms MetricChain`; changed in cycle 6 to a walk over every constant
+  defined in a project module, `#audit_axioms proofs`).
 
 ### Cycle 1 — exploration and falsification (before any Lean)
 
@@ -180,6 +181,14 @@ tooling and five minor ones (`DEAD_ENDS.md` D19).  Repairs of this cycle:
   group smaller than all isometries and a residual that is not reflection-invariant; the
   identification of that group with `SE(3)` is explicitly a paper step;
 * voxels: executable volume brackets that converge under subdivision.
+
+A last focused check of this round confirmed all of the above and left three minor points, also
+repaired (`DEAD_ENDS.md` D20): the axiom walk now goes by defining module instead of by name and
+anonymous `example`s are forbidden; the reference checker has a strict single-reading format and
+never raises; the doc-reference check tracks namespaces.  Three review rounds in total: 5 major +
+6 minor, then 1 major (tooling) + 5 minor, then 3 minor; no theorem was found false, vacuous or
+circular in any round, and every finding concerned either a document claiming more than its Lean
+statement, a kernel side condition, or the audit tooling itself.
 
 ### Portfolio reassessment (end of session 1)
 
