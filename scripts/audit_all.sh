@@ -49,7 +49,9 @@ if bad:
 if len(entries) + len(clean) == 0:
     print("AUDIT FAILED: no #print axioms output found", file=sys.stderr)
     sys.exit(1)
-if "error" in text:
+# Lean diagnostics look like `path:line:col: error: ...` or `error(lean.xyz): ...`; a plain
+# substring test would trip on declaration names such as `boltzmannAvg_prune_error`.
+if re.search(r":\d+:\d+: error|(^|\n)error[:(]", text):
     print("AUDIT FAILED: errors in AxiomAudit output", file=sys.stderr)
     sys.exit(1)
 PY
