@@ -1157,18 +1157,40 @@ def t_atlas(rng, trials):
 
 @conjecture("IX.1 Lipschitz oracle lower bound (1-D): n value queries leave certified gap >= Lam/(2n) on the circle")
 def t_oracle_lower_bound(rng, trials):
+    """Continuous analogue of `anchor_card_lower_bound` (classical, not formalized): two
+    Lam-Lipschitz functions on the circle agree on all n queries yet their minima differ by
+    Lam * (largest gap) / 2 >= Lam / (2n), so no certificate from these queries can be tighter."""
+    grid = np.linspace(0.0, 1.0, 4001, endpoint=False)
+
+    def circ_dist(a, b):
+        d = np.abs(a - b) % 1.0
+        return np.minimum(d, 1.0 - d)
+
     for _ in range(trials):
         n = int(rng.integers(1, 12))
         lam = float(rng.uniform(0.2, 5.0))
         pts = np.sort(rng.uniform(0, 1, size=n))
         gaps = np.diff(np.r_[pts, pts[0] + 1.0])
-        big = float(gaps.max())
-        # adversary: f=0 vs tent of depth lam*big/2 centred in the largest gap; both lam-Lipschitz, equal at all queries
+        j = int(np.argmax(gaps))
+        big = float(gaps[j])
         if big < 1.0 / n - 1e-12:
             return False, dict(reason="pigeonhole violated")
-        depth = lam * big / 2
-        if depth < lam / (2 * n) - 1e-12:
-            return False, dict(depth=depth)
+        centre = (pts[j] + big / 2) % 1.0
+        f0 = np.zeros_like(grid)
+        f1 = -np.maximum(0.0, lam * (big / 2 - circ_dist(grid, centre)))  # tent inside the largest gap
+        # (i) both functions are Lam-Lipschitz on the grid (finite-difference check with wrap-around)
+        step = grid[1] - grid[0]
+        slope = np.abs(np.diff(np.r_[f1, f1[0]])) / step
+        if slope.max() > lam * (1 + 1e-6):
+            return False, dict(reason="adversary is not Lam-Lipschitz", slope=float(slope.max()), lam=lam)
+        # (ii) they agree at every query point
+        at_queries = -np.maximum(0.0, lam * (big / 2 - circ_dist(pts, centre)))
+        if np.abs(at_queries).max() > 1e-9:
+            return False, dict(reason="adversary differs from f0 at a query", val=float(np.abs(at_queries).max()))
+        # (iii) their minima differ by at least Lam/(2n)
+        depth = float(f0.min() - f1.min())
+        if depth < lam / (2 * n) - lam * step:
+            return False, dict(depth=depth, required=lam / (2 * n))
     return True, {}
 
 
