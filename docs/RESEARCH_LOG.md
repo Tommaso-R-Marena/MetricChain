@@ -152,7 +152,8 @@ Driven by the open items listed below and by the reviewers' "how to sharpen" not
   envelope — which closes the loop between Direction C (geometry) and Direction A (envelopes).
 * **Withdrawn.**  The trace-enhanced spectral obstruction for 3-D realizability was ranked second
   until the third literature check found it in print (NeurIPS 2021).  It stays as a
-  machine-checked certificate (first formal proof, including Hoffman–Wielandt), not as a result.
+  machine-checked certificate (formal proof including Hoffman–Wielandt; we know of no earlier
+  formalization), not as a result.
   The episode is recorded in `DEAD_ENDS.md` D12 together with the false sharpness claim that
   accompanied it.
 * **Fundamental limitation that remains.**  (a) Every exact criterion we proved is itself a hard

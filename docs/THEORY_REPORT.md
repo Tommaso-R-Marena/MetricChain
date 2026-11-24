@@ -52,7 +52,7 @@ output is stored in `benchmarks_output.txt`.
 | D4 | **Voxel enclosure**: continuous Boltzmann integrals → rational kernel, with the volume (entropy) factor; separable (second-order) envelopes factor an `M`-dimensional voxel integral into `M` one-dimensional ones | `voxel_boltzmann_bounds`, `certified_voxel_partition`, `separable_voxel_bounds` **[V]** | `K*`-family algorithms use minimised voxel energies; rigorous voxel-integral bounds: no match found |
 | D5 | Hölder decomposition with temperature rescaling | `partitionFn_holder`, `freeEnergy_holder` **[V]** | **known** (weighted mini-bucket) |
 | C1 | Hoffman–Wielandt and von Neumann trace inequality (real symmetric) | `hoffman_wielandt` **[V]** | **classical** (1953); formalization |
-| C2 | Trace-enhanced spectral obstruction: `min_X ‖D̂ − Δ(X)‖²_F ≥ 4 Σ_{k>r} λ_k² + (4/(r+1)) (Σ_{k>r} λ_k)²` | `rank_psd_trace_obstruction`, `sstress_lower_bound` **[V]** | **known** with these constants (Sonthalia et al. 2021; K-identity in Tsang–Pereira 2016); first machine-checked proof, down to Hoffman–Wielandt |
+| C2 | Trace-enhanced spectral obstruction: `min_X ‖D̂ − Δ(X)‖²_F ≥ 4 Σ_{k>r} λ_k² + (4/(r+1)) (Σ_{k>r} λ_k)²` | `rank_psd_trace_obstruction`, `sstress_lower_bound` **[V]** | **known** with these constants (Sonthalia et al. 2021; K-identity in Tsang–Pereira 2016); machine-checked here down to Hoffman–Wielandt (we know of no earlier formalization) |
 | C3 | Cycle-holonomy obstruction; SE(3) translation holonomy with lever arms | `norm_holProd_le_sum`, `norm_holTrans_le` **[V]** | triangle bound **known** (Lerman–Shi 2022, Lemma 1); a sharp non-abelian Hodge-type bound is open |
 | C4 | **Finite-angle torsion → RMSD**: exact coaxial cost `2S − 2√(S² − 4 I_A I_B sin²(φ/2)) ≤ 4 min(I_A,I_B) sin²(φ/2)`; chain rule; envelope for invariant Lipschitz residuals | `exists_coaxial_angle`, `coaxial_cost_le_min`, `rigidWithin_torsion_chain`, `residual_torsion_chain` **[V]** | small-angle content classical (Pitzer–Gwinn; Eckart); finite-angle closed form and chained bound: no match found |
 | B1 | Outward rounding, rational intervals, certified `exp`, rational circle atlas | `Core/Rounding.lean` **[V]** | infrastructure; verified interval libraries exist (LeanCert, girving/interval) |
@@ -65,8 +65,8 @@ print (A8, D2, D5, C1, C2, E2).  What the program contributes is (i) the envelop
 the exact, closed characterisations A1–A5 that it makes possible; (ii) temperature-aware dominance
 and voxel enclosures as *certificate rules* (D1, D3, D4); (iii) finite-angle torsion-to-RMSD
 certificates and the resulting envelope for SE(3)-invariant residuals (C4); and (iv) a
-machine-checked certificate algebra and library covering all of it, including first
-formalizations of several known results.
+machine-checked certificate algebra and library covering all of it, including formalizations
+(to our knowledge new in Lean) of several known results.
 
 ---
 
@@ -109,7 +109,7 @@ injective, `E(Tx) + γ ≤ E(x)` on `A`, `β ≥ 0`.  Then `Z_β(A) ≤ e^{−β
 `A ∩ S = ∅`,
 
     Z_β(S) ≤ Z_β(A ∪ S) ≤ (1 + e^{−βγ}) Z_β(S),
-    F_β(S) − β^{-1} ln(1 + e^{−βγ}) ≤ F_β(A ∪ S) ≤ F_β(S),
+    F_β(S) − β^{-1} ln(1 + e^{−βγ}) ≤ F_β(A ∪ S) ≤ F_β(S)        (β > 0, S ≠ ∅),
 
 and for `γ ≥ 0` every `x ∈ A ∪ S` has a `y ∈ S` with `E(y) ≤ E(x)`.
 
@@ -481,7 +481,7 @@ multidimensional scaling go wrong?* (NeurIPS 2021), restated in Deng et al. (Neu
 Thm 6); Sonthalia et al. also compute the sign-constrained relaxation exactly in `O(n³)`, which
 is at least as strong as the closed form.  We had derived it independently before the literature
 check (`prior_art/L3` §C10) and **claim no novelty for the inequality**.  What is contributed is
-the machine-checked proof — including the Hoffman–Wielandt inequality and the von Neumann trace
+a machine-checked proof — including the Hoffman–Wielandt inequality and the von Neumann trace
 inequality for real symmetric matrices, formalized from Birkhoff's theorem and the rearrangement
 inequality (`HoffmanWielandt.lean` **[V]**) — and its use as a realizability *certificate* for
 predicted distance matrices (blueprint §8.1).  A proof by compression to `range(G)` does not work

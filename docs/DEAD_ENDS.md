@@ -173,7 +173,7 @@ gated on the script's own exit code.
 scratch and logged as a discovery.  The third literature check located it, constants included, in
 Sonthalia, Van Buskirk, Raichel, Gilbert (NeurIPS 2021, Prop. 1 with their relaxation
 inequality), and the K-identity in Tsang–Pereira (2016).  The claim was withdrawn; what remains is
-the first machine-checked proof.
+a machine-checked proof (we know of no earlier formalization).
 
 *Equality.*  It was also claimed that the bound is attained whenever `D̂` is invariant under a
 transitive group ("vertex-transitive inputs").  The harness test supporting it used regular
