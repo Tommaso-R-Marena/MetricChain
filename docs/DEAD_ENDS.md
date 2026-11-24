@@ -154,6 +154,19 @@ version would need a probabilistic statement and is left open.
 
 ---
 
+## D13. Audit script: substring error detection and a lost exit code  **[engineering]**
+
+The audit script flagged "errors in AxiomAudit output" whenever the output contained the substring
+`error` — which the valid theorem names `boltzmannAvg_prune_error` and
+`boltzmannAvg_dominance_error` do.  One commit was pushed while the script reported this failure,
+because its output had been piped through a filter and the pipeline's exit status was that of the
+filter.  The content of that commit was sound (build and axiom audit passed), but the incident
+violated the "audit passes at every checkpoint" rule.  Repairs: the script now matches Lean's
+diagnostic format (`path:line:col: error` / `error(...)`) instead of a substring, and commits are
+gated on the script's own exit code.
+
+---
+
 ## D12. "The trace-enhanced spectral bound is new" and "it is tight on vertex-transitive inputs" — both WRONG  **[harness: DEAD.4]**
 
 *Novelty.*  The bound `min_X ‖D̂ − Δ(X)‖² ≥ 4 Σ_{k>r} λ_k² + (4/(r+1)) τ²` was derived here from

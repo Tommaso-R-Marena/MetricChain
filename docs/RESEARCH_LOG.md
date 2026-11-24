@@ -106,6 +106,27 @@ Verified modules and headline statements:
 
 Engineering lessons recorded in `DEAD_ENDS.md` D6 (leaf rule), D7 (`decide +kernel`).
 
+### Cycle 4 — second batch (after the first full audit)
+
+Driven by the open items listed below and by the reviewers' "how to sharpen" notes:
+
+* `SeparableVoxel` **[V]** — separable envelopes factor an `M`-dimensional Boltzmann voxel integral
+  into `M` one-dimensional integrals, with a relative-width bound; this is the certificate form of
+  second-order (Gaussian) voxel quadrature.
+* `isLeast_sum_of_block_separable`, `exact_margin_of_block_separable` **[V]** — exact dominance
+  with many-body terms factorises over the connected components of the link graph (tractable half
+  of the link-graph dichotomy).
+* `boltzmannAvg_dominance_error` **[V]** — thermal pruning with margin `γ` changes any observable
+  bounded by `B` by at most `2B e^{−βγ}`: certified ensemble averages, not only free energies.
+* `verify_sound_real`, `verifyR_sound_real` **[V]** — certificates accepted for an outward-rounded
+  rational lower instance bound the true real-valued energy.
+* `sumFree_gap_exponential`, `sumFree_complexity` **[V]** — approximate sum-free certificates
+  (within `d` of the optimum) still need `2^{m−d}` leaves; exact complexity `2^K` for bound `K`.
+* `experiments/reference_checker.py` — untrusted reference implementation of the three checkers
+  on the JSON format, six conformance vectors identical to the kernel-evaluated Lean examples,
+  soundness fuzzing against brute force.
+* Process incident and repair: `DEAD_ENDS.md` D13.
+
 ### Portfolio reassessment (end of session 1)
 
 * **Strongest discovery so far.**  The *envelope duality* cluster: under any envelope the set of
