@@ -1,0 +1,143 @@
+import Mathlib
+import proofs.Core.Basic
+import proofs.Frontiers.EnvelopeDuality
+import proofs.Frontiers.Dominance
+import proofs.CertificateAlgebra
+
+/-!
+# Axiom audit and non-vacuity witnesses
+
+* `#audit_axioms` walks **every** declaration in the `MetricChain` namespace and fails (throws)
+  if any of them depends on an axiom other than `propext`, `Classical.choice`, `Quot.sound`.
+  In particular `sorryAx`, `Lean.ofReduceBool` (native evaluation) and user axioms are rejected.
+* The explicit `#print axioms` lines below list the headline theorems for human inspection;
+  `scripts/audit_all.sh` parses them as a second, independent check.
+* The `example`s at the end are non-vacuity witnesses: concrete instantiations showing that the
+  hypotheses of each headline theorem are jointly satisfiable on non-trivial instances.
+-/
+
+open Lean Elab Command in
+/-- Audit every declaration below the given namespace: only the three standard axioms are allowed. -/
+elab "#audit_axioms " ns:ident : command => do
+  let env ← getEnv
+  let pfx := ns.getId
+  let allowed : List Name := [``propext, ``Classical.choice, ``Quot.sound]
+  let mut count : Nat := 0
+  let mut bad : Array (Name × Array Name) := #[]
+  for (name, _) in env.constants.toList do
+    if pfx.isPrefixOf name then
+      count := count + 1
+      let axs ← Lean.collectAxioms name
+      let extra := axs.filter fun a => !allowed.contains a
+      unless extra.isEmpty do
+        bad := bad.push (name, extra)
+  if bad.isEmpty then
+    logInfo m!"AXIOM AUDIT OK: {count} declarations under `{pfx}` use only propext / Classical.choice / Quot.sound"
+  else
+    throwError "AXIOM AUDIT FAILED: {bad}"
+
+#audit_axioms MetricChain
+
+/-! ### Headline theorems -/
+
+-- Envelope duality (Direction A): exact characterisations under non-decomposable residuals
+#print axioms MetricChain.robust_minimizer_iff
+#print axioms MetricChain.robust_certified_iff
+#print axioms MetricChain.robust_min_bracket
+#print axioms MetricChain.robust_partition_bracket
+#print axioms MetricChain.anchor_card_lower_bound
+#print axioms MetricChain.admissible_of_single_site
+#print axioms MetricChain.differential_dee_sound
+#print axioms MetricChain.energy_window_exact
+
+-- Dominance calculus (Directions A + D)
+#print axioms MetricChain.partition_transport
+#print axioms MetricChain.freeEnergy_prune_bracket
+#print axioms MetricChain.thermal_dee
+#print axioms MetricChain.PairModel.goldstein_isLeast
+#print axioms MetricChain.PairModel.goldstein_gauge_invariant
+#print axioms MetricChain.PairModel.desmet_reparam_le
+#print axioms MetricChain.PairModel.desmet_optimalGauge
+
+-- Certificate algebra (Direction E): Master Soundness Theorems and kernel-evaluated examples
+#print axioms MetricChain.verify_sound
+#print axioms MetricChain.verifyR_sound
+#print axioms MetricChain.certified_gap
+#print axioms MetricChain.triangle_verified
+#print axioms MetricChain.triangleResidual_gap
+
+/-! ### Non-vacuity witnesses -/
+
+namespace MetricChain.NonVacuity
+
+open Finset
+
+/-- The discrete envelope on `Bool` with oscillation `1` is an envelope, and the zero residual is
+admissible for it: the hypotheses of the envelope-duality theorems are satisfiable. -/
+example : IsEnvelope (discreteEnvelope (X := Bool) 1) ∧ Admissible (discreteEnvelope (X := Bool) 1) fun _ => 0 :=
+  ⟨discreteEnvelope_isEnvelope (by norm_num), fun x y => by unfold discreteEnvelope; split_ifs <;> norm_num⟩
+
+/-- `robust_minimizer_iff` is not vacuous in either direction: with `f true = 0`, `f false = 2`
+and oscillation `1`, `true` is robustly optimal-for-some-residual and `false` is not. -/
+example :
+    (∃ g, Admissible (discreteEnvelope (X := Bool) 1) g ∧
+        ∀ y, (fun b : Bool => if b then (0 : ℝ) else 2) true + g true ≤
+          (fun b : Bool => if b then (0 : ℝ) else 2) y + g y) ∧
+      ¬ (∃ g, Admissible (discreteEnvelope (X := Bool) 1) g ∧
+        ∀ y, (fun b : Bool => if b then (0 : ℝ) else 2) false + g false ≤
+          (fun b : Bool => if b then (0 : ℝ) else 2) y + g y) := by
+  constructor
+  · exact (energy_window_exact (ω := 1) (by norm_num)
+      (fun b : Bool => if b then (0 : ℝ) else 2) true).mpr (fun y => by cases y <;> norm_num)
+  · intro h
+    have := (energy_window_exact (ω := 1) (by norm_num)
+      (fun b : Bool => if b then (0 : ℝ) else 2) false).mp h true
+    norm_num at this
+
+/-- `anchor_card_lower_bound` has satisfiable hypotheses and a non-trivial conclusion: on two
+states at envelope distance `1` with zero white-box energy and zero residual (`κ = 0`), an exact
+certificate (`ε = 0`) with both states as anchors exists, and the theorem forces `2 ≤ |A|`. -/
+example :
+    (Finset.univ.filter fun _ : Bool => (0 : ℝ) + 0 - 0 < (1 - 0) * 1 - 0).card ≤
+      (Finset.univ : Finset Bool).card := by
+  classical
+  have hne : (Finset.univ : Finset Bool).Nonempty := ⟨true, Finset.mem_univ _⟩
+  refine anchor_card_lower_bound (d := discreteEnvelope (X := Bool) 1) (fun _ => 0) (fun _ => 0)
+    (κ := 0) (by norm_num) ?_ Finset.univ hne (ε := 0) (Estar := 0) (σ := 1) ?_ ?_ ?_
+  · intro x y
+    unfold discreteEnvelope
+    split_ifs <;> norm_num
+  · intro a _
+    norm_num
+  · intro y
+    have h1 : (0 : ℝ) - discreteEnvelope (X := Bool) 1 y y ≤
+        lowerEnv (discreteEnvelope (X := Bool) 1) Finset.univ hne (fun _ => 0) y :=
+      Finset.le_sup' (fun a => (0 : ℝ) - discreteEnvelope (X := Bool) 1 a y) (Finset.mem_univ y)
+    have h2 : (Finset.univ : Finset Bool).inf' hne (fun a => (0 : ℝ) + 0) ≤ (0 : ℝ) + 0 :=
+      Finset.inf'_le (fun _ => (0 : ℝ) + 0) (Finset.mem_univ y)
+    simp only [discreteEnvelope, if_true] at h1
+    linarith
+  · intro a y hay
+    unfold discreteEnvelope
+    simp [hay]
+
+/-- The dominance transport lemma applies to a concrete two-state system: state `false`
+(energy `3`) is dominated by `true` (energy `1`) with margin `2`. -/
+example : partitionFn 1 (fun b : Bool => if b then (1 : ℝ) else 3) {false} ≤
+    Real.exp (-1 * 2) * partitionFn 1 (fun b : Bool => if b then (1 : ℝ) else 3) {true} := by
+  apply partition_transport (by norm_num) _ (fun _ => true)
+  · intro x hx y hy _
+    simp only [Finset.coe_singleton, Set.mem_singleton_iff] at hx hy
+    rw [hx, hy]
+  · intro x _
+    simp
+  · intro x hx
+    simp only [Finset.mem_singleton] at hx
+    subst hx
+    norm_num
+
+/-- The kernel's master theorem is exercised on a concrete instance with a tight bound. -/
+example : (∀ x : Config 3 2, 1 ≤ triangle.energy x) ∧ triangle.energy ![0, 1, 0] = 1 :=
+  ⟨triangle_lower_bound, triangle_optimum⟩
+
+end MetricChain.NonVacuity

@@ -1,0 +1,416 @@
+import Mathlib
+import proofs.Core.Basic
+
+/-!
+# Dominance calculus: transport, thermal pruning, and gauge invariance
+
+* `partition_transport` — **dominance transport lemma.**  If an injective map `T` sends a set of
+  configurations `A` into a set `S` while lowering the energy by at least `γ`, then
+  `Z(A) ≤ exp(-β γ) · Z(S)` at every inverse temperature `β ≥ 0`.  Dead-end elimination
+  (uniform dominator), split DEE (context-dependent dominator), pair elimination and
+  symmetry-based dominance are all instances: only injectivity of `T` matters.
+* `partition_prune_bracket`, `freeEnergy_prune_bracket` — pruning a dominated set changes the
+  partition function by a factor in `[1, 1 + exp(-β γ)]`, i.e. the free energy by at most
+  `(1/β) log(1 + exp(-β γ))`; at `β → ∞` this is the classical statement that dominance pruning
+  preserves the optimum (`min_transport`).
+* `PairModel.energy_update`, `PairModel.goldstein_isLeast` — for pairwise models the energy
+  difference of two states of a site is *separable* in the neighbours, hence Goldstein's criterion
+  computes the **exact** dominance margin over product domains.
+* `PairModel.energy_reparam`, `PairModel.goldstein_gauge_invariant` — the exact margin is a gauge
+  invariant: no reparameterisation (LP-dual message passing, soft arc consistency) can change it.
+* `PairModel.desmet_le_exactMargin`, `PairModel.desmet_optimalGauge` — the original
+  Desmet bounds criterion is gauge dependent, never exceeds the exact margin, and attains it at an
+  explicit gauge.  Hence "dual-reparameterised pruning" cannot beat Goldstein for pairwise models;
+  it only matters for higher-order terms or non-product domains.
+-/
+
+namespace MetricChain
+
+open Finset
+
+/-! ### Dominance transport -/
+
+section Transport
+
+variable {Ω : Type*} [DecidableEq Ω]
+
+/-- **Dominance transport lemma.** -/
+theorem partition_transport {β γ : ℝ} (hβ : 0 ≤ β) (E : Ω → ℝ) {A S : Finset Ω} (T : Ω → Ω)
+    (hinj : Set.InjOn T A) (hmaps : ∀ x ∈ A, T x ∈ S) (hdom : ∀ x ∈ A, E (T x) + γ ≤ E x) :
+    partitionFn β E A ≤ Real.exp (-β * γ) * partitionFn β E S := by
+  unfold partitionFn
+  calc ∑ x ∈ A, Real.exp (-β * E x)
+      ≤ ∑ x ∈ A, Real.exp (-β * γ) * Real.exp (-β * E (T x)) := by
+        refine Finset.sum_le_sum fun x hx => ?_
+        rw [← Real.exp_add]
+        apply Real.exp_le_exp.mpr
+        have := mul_le_mul_of_nonneg_left (hdom x hx) hβ
+        linarith
+    _ = Real.exp (-β * γ) * ∑ x ∈ A, Real.exp (-β * E (T x)) := by rw [Finset.mul_sum]
+    _ = Real.exp (-β * γ) * ∑ y ∈ A.image T, Real.exp (-β * E y) := by
+        rw [Finset.sum_image hinj]
+    _ ≤ Real.exp (-β * γ) * ∑ y ∈ S, Real.exp (-β * E y) := by
+        apply mul_le_mul_of_nonneg_left _ (Real.exp_pos _).le
+        apply Finset.sum_le_sum_of_subset_of_nonneg
+        · intro y hy
+          obtain ⟨x, hx, rfl⟩ := Finset.mem_image.mp hy
+          exact hmaps x hx
+        · intro _ _ _
+          exact (Real.exp_pos _).le
+
+/-- **Thermal pruning bracket.**  Removing a dominated set `A` (margin `γ`, dominance map into
+the survivors `S`) changes the partition function by a factor between `1` and `1 + exp(-β γ)`. -/
+theorem partition_prune_bracket {β γ : ℝ} (hβ : 0 ≤ β) (E : Ω → ℝ) {A S : Finset Ω} (T : Ω → Ω)
+    (hinj : Set.InjOn T A) (hmaps : ∀ x ∈ A, T x ∈ S) (hdom : ∀ x ∈ A, E (T x) + γ ≤ E x)
+    (hdisj : Disjoint A S) :
+    partitionFn β E S ≤ partitionFn β E (A ∪ S) ∧
+      partitionFn β E (A ∪ S) ≤ (1 + Real.exp (-β * γ)) * partitionFn β E S := by
+  rw [partitionFn_union β E hdisj]
+  have h1 := partition_transport hβ E T hinj hmaps hdom
+  have h2 := partitionFn_nonneg β E A
+  constructor
+  · linarith
+  · linarith
+
+/-- **Free-energy form of thermal pruning.**  Pruning with margin `γ` raises the free energy by
+at most `(1/β) log(1 + exp(-β γ))` and never lowers it. -/
+theorem freeEnergy_prune_bracket {β γ : ℝ} (hβ : 0 < β) (E : Ω → ℝ) {A S : Finset Ω} (T : Ω → Ω)
+    (hinj : Set.InjOn T A) (hmaps : ∀ x ∈ A, T x ∈ S) (hdom : ∀ x ∈ A, E (T x) + γ ≤ E x)
+    (hdisj : Disjoint A S) (hS : S.Nonempty) :
+    freeEnergy β E S - (1 / β) * Real.log (1 + Real.exp (-β * γ)) ≤ freeEnergy β E (A ∪ S) ∧
+      freeEnergy β E (A ∪ S) ≤ freeEnergy β E S := by
+  obtain ⟨hlo, hhi⟩ := partition_prune_bracket hβ.le E T hinj hmaps hdom hdisj
+  have hZS := partitionFn_pos β E hS
+  have hZU : 0 < partitionFn β E (A ∪ S) := lt_of_lt_of_le hZS hlo
+  have hpos : 0 < 1 + Real.exp (-β * γ) := by positivity
+  have hinv : 0 < 1 / β := by positivity
+  unfold freeEnergy
+  constructor
+  · have h1 := Real.log_le_log hZU hhi
+    rw [Real.log_mul hpos.ne' hZS.ne'] at h1
+    nlinarith
+  · have h1 := Real.log_le_log hZS hlo
+    nlinarith
+
+/-- **Zero-temperature limit.**  With a nonnegative margin, every pruned configuration is matched
+by a survivor of no larger energy, so pruning preserves the optimal value. -/
+theorem min_transport {γ : ℝ} (hγ : 0 ≤ γ) (E : Ω → ℝ) {A S : Finset Ω} (T : Ω → Ω)
+    (hmaps : ∀ x ∈ A, T x ∈ S) (hdom : ∀ x ∈ A, E (T x) + γ ≤ E x) :
+    ∀ x ∈ A ∪ S, ∃ y ∈ S, E y ≤ E x := by
+  intro x hx
+  rcases Finset.mem_union.mp hx with hA | hS
+  · exact ⟨T x, hmaps x hA, by have := hdom x hA; linarith⟩
+  · exact ⟨x, hS, le_rfl⟩
+
+end Transport
+
+/-! ### Site-level dominance on product domains -/
+
+section SiteDominance
+
+variable {ι : Type*} [Fintype ι] [DecidableEq ι] {σ : ι → Type*} [∀ i, DecidableEq (σ i)]
+
+omit [Fintype ι] in
+/-- Replacing the state of site `i` by `t` is injective on configurations with `x i = r`
+(this also holds for context-dependent dominators; see `update_dep_injOn`). -/
+theorem update_injOn (i : ι) (r t : σ i) (B : Finset (∀ i, σ i)) :
+    Set.InjOn (fun x : ∀ i, σ i => Function.update x i t) (B.filter fun x => x i = r) := by
+  intro x hx y hy hxy
+  have hx' : x i = r := (Finset.mem_filter.mp hx).2
+  have hy' : y i = r := (Finset.mem_filter.mp hy).2
+  funext j
+  by_cases hj : j = i
+  · subst hj
+    rw [hx', hy']
+  · have := congrFun hxy j
+    simpa [Function.update_of_ne hj] using this
+
+omit [Fintype ι] in
+/-- Split dead-end elimination: the dominator may depend on the configuration (e.g. on the state
+of a splitting site); the transport map is still injective on `{x | x i = r}`. -/
+theorem update_dep_injOn (i : ι) (r : σ i) (t : (∀ i, σ i) → σ i) (B : Finset (∀ i, σ i)) :
+    Set.InjOn (fun x : ∀ i, σ i => Function.update x i (t x)) (B.filter fun x => x i = r) := by
+  intro x hx y hy hxy
+  have hx' : x i = r := (Finset.mem_filter.mp hx).2
+  have hy' : y i = r := (Finset.mem_filter.mp hy).2
+  funext j
+  by_cases hj : j = i
+  · subst hj
+    rw [hx', hy']
+  · have := congrFun hxy j
+    simpa [Function.update_of_ne hj] using this
+
+/-- **Thermal dead-end elimination on a product domain.**  If state `r` of site `i` is dominated
+by `t ≠ r` with margin `γ` on the box `∏ D`, then deleting `r` changes the partition function of
+the box by a factor in `[1, 1 + exp(-β γ)]`. -/
+theorem thermal_dee {β γ : ℝ} (hβ : 0 ≤ β) (E : (∀ i, σ i) → ℝ) (D : ∀ i, Finset (σ i)) (i : ι)
+    (r t : σ i) (ht : t ∈ D i) (htr : t ≠ r)
+    (hdom : ∀ x ∈ Fintype.piFinset D, x i = r → E (Function.update x i t) + γ ≤ E x) :
+    partitionFn β E ((Fintype.piFinset D).filter fun x => x i ≠ r) ≤
+        partitionFn β E (Fintype.piFinset D) ∧
+      partitionFn β E (Fintype.piFinset D) ≤
+        (1 + Real.exp (-β * γ)) * partitionFn β E ((Fintype.piFinset D).filter fun x => x i ≠ r) := by
+  classical
+  set B := Fintype.piFinset D
+  set A := B.filter fun x => x i = r
+  set S := B.filter fun x => x i ≠ r
+  have hunion : A ∪ S = B := Finset.filter_union_filter_not_eq (fun x => x i = r) B
+  have hdisj : Disjoint A S := Finset.disjoint_filter_filter_not B B (fun x => x i = r)
+  have hmaps : ∀ x ∈ A, Function.update x i t ∈ S := by
+    intro x hx
+    have hxB : x ∈ B := (Finset.mem_filter.mp hx).1
+    refine Finset.mem_filter.mpr ⟨?_, by simpa using htr⟩
+    rw [Fintype.mem_piFinset] at hxB ⊢
+    intro j
+    by_cases hj : j = i
+    · subst hj
+      simpa using ht
+    · rw [Function.update_of_ne hj]
+      exact hxB j
+  have hdom' : ∀ x ∈ A, E (Function.update x i t) + γ ≤ E x := fun x hx =>
+    hdom x (Finset.mem_filter.mp hx).1 (Finset.mem_filter.mp hx).2
+  have := partition_prune_bracket hβ E (fun x => Function.update x i t) (update_injOn i r t B)
+    hmaps hdom' hdisj
+  rwa [hunion] at this
+
+end SiteDominance
+
+/-! ### Pairwise models: separability, exactness of Goldstein, gauge invariance -/
+
+/-- A pairwise energy model with scalars `R` over sites `ι` with state spaces `σ i`.  The pair
+table `J i j` is used for every ordered pair `i ≠ j`.  (`R = ℝ` for the theory, `R = ℚ` for the
+executable certificate kernel.) -/
+structure PairModel (R : Type*) (ι : Type*) (σ : ι → Type*) where
+  /-- one-body terms -/
+  h : ∀ i, σ i → R
+  /-- two-body terms on ordered pairs -/
+  J : ∀ i j, σ i → σ j → R
+
+namespace PairModel
+
+variable {R : Type*} [CommRing R] {ι : Type*} [Fintype ι] [DecidableEq ι] {σ : ι → Type*}
+
+/-- Total energy of a configuration. -/
+def energy (M : PairModel R ι σ) (x : ∀ i, σ i) : R :=
+  ∑ i, M.h i (x i) + ∑ i, ∑ j ∈ univ.erase i, M.J i j (x i) (x j)
+
+/-- Local energy of state `a` at site `i` in context `x` (everything that involves site `i`). -/
+def localE (M : PairModel R ι σ) (i : ι) (a : σ i) (x : ∀ i, σ i) : R :=
+  M.h i a + ∑ j ∈ univ.erase i, (M.J i j a (x j) + M.J j i (x j) a)
+
+/-- The part of the energy that does not involve site `i`. -/
+def base (M : PairModel R ι σ) (i : ι) (x : ∀ i, σ i) : R :=
+  ∑ k ∈ univ.erase i, M.h k (x k) +
+    ∑ k ∈ univ.erase i, ∑ j ∈ (univ.erase k).erase i, M.J k j (x k) (x j)
+
+/-- **Separability.**  The energy of `x[i ↦ a]` splits as a context-only part plus the local
+energy of `a`; consequently energy *differences* at a site are sums of one-neighbour terms. -/
+theorem energy_update (M : PairModel R ι σ) (x : ∀ i, σ i) (i : ι) (a : σ i) :
+    M.energy (Function.update x i a) = M.base i x + M.localE i a x := by
+  unfold energy base localE
+  have hmem : i ∈ (univ : Finset ι) := mem_univ i
+  rw [← Finset.add_sum_erase _ _ hmem, ← Finset.add_sum_erase univ
+    (fun k => ∑ j ∈ univ.erase k, M.J k j (Function.update x i a k) (Function.update x i a j)) hmem]
+  have h1 : ∑ k ∈ univ.erase i, M.h k (Function.update x i a k) = ∑ k ∈ univ.erase i, M.h k (x k) := by
+    apply Finset.sum_congr rfl
+    intro k hk
+    rw [Function.update_of_ne (Finset.ne_of_mem_erase hk)]
+  have h2 : ∑ j ∈ univ.erase i, M.J i j a (Function.update x i a j) =
+      ∑ j ∈ univ.erase i, M.J i j a (x j) := by
+    apply Finset.sum_congr rfl
+    intro j hj
+    rw [Function.update_of_ne (Finset.ne_of_mem_erase hj)]
+  have h3 : ∑ k ∈ univ.erase i, ∑ j ∈ univ.erase k,
+        M.J k j (Function.update x i a k) (Function.update x i a j) =
+      ∑ k ∈ univ.erase i, (M.J k i (x k) a + ∑ j ∈ (univ.erase k).erase i, M.J k j (x k) (x j)) := by
+    apply Finset.sum_congr rfl
+    intro k hk
+    have hki : k ≠ i := Finset.ne_of_mem_erase hk
+    have hik : i ∈ univ.erase k := Finset.mem_erase.mpr ⟨fun h => hki h.symm, mem_univ i⟩
+    rw [← Finset.add_sum_erase _ _ hik, Function.update_of_ne hki, Function.update_self]
+    congr 1
+    apply Finset.sum_congr rfl
+    intro j hj
+    rw [Function.update_of_ne (Finset.ne_of_mem_erase hj)]
+  rw [Function.update_self, h1, h2, h3, Finset.sum_add_distrib, Finset.sum_add_distrib]
+  ring
+
+/-- Energy difference between two states of a site: context-separable. -/
+theorem energy_update_sub (M : PairModel R ι σ) (x : ∀ i, σ i) (i : ι) (r t : σ i) :
+    M.energy (Function.update x i r) - M.energy (Function.update x i t) =
+      M.localE i r x - M.localE i t x := by
+  rw [energy_update, energy_update]
+  ring
+
+/-- One-neighbour link term of the Goldstein criterion. -/
+def link (M : PairModel R ι σ) (i : ι) (r t : σ i) (j : ι) (s : σ j) : R :=
+  M.J i j r s + M.J j i s r - M.J i j t s - M.J j i s t
+
+theorem localE_sub (M : PairModel R ι σ) (x : ∀ i, σ i) (i : ι) (r t : σ i) :
+    M.localE i r x - M.localE i t x =
+      M.h i r - M.h i t + ∑ j ∈ univ.erase i, M.link i r t j (x j) := by
+  unfold localE link
+  rw [add_sub_add_comm, ← Finset.sum_sub_distrib]
+  congr 1
+  apply Finset.sum_congr rfl
+  intro j _
+  ring
+
+/-- Reparameterisation (gauge transformation): move the message `msg i j` from the pair table
+`J i j` into the unary table of `i`. -/
+def reparam (M : PairModel R ι σ) (msg : ∀ i : ι, ι → σ i → R) : PairModel R ι σ where
+  h i a := M.h i a + ∑ j ∈ univ.erase i, msg i j a
+  J i j a b := M.J i j a b - msg i j a
+
+/-- Reparameterisation leaves the energy function unchanged. -/
+theorem energy_reparam (M : PairModel R ι σ) (msg : ∀ i : ι, ι → σ i → R) (x : ∀ i, σ i) :
+    (M.reparam msg).energy x = M.energy x := by
+  unfold energy reparam
+  simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+  ring
+
+/-- **Goldstein's criterion is exact.**  Over a product domain `∏ D`, the minimum of the energy
+difference `E(x[i ↦ r]) - E(x[i ↦ t])` over all contexts equals
+`h i r - h i t + ∑_{j ≠ i} min_{s ∈ D j} link`: if `m j` is the least value of the link term on
+`D j`, the Goldstein value is the *least element* of the set of energy differences. -/
+theorem goldstein_isLeast (M : PairModel ℝ ι σ) (i : ι) (r t : σ i) (D : ∀ j, Set (σ j))
+    (x₀ : ∀ j, σ j) (hx₀ : ∀ j, x₀ j ∈ D j) (m : ι → ℝ)
+    (hm : ∀ j ∈ univ.erase i, IsLeast (M.link i r t j '' D j) (m j)) :
+    IsLeast ((fun x => M.energy (Function.update x i r) - M.energy (Function.update x i t)) ''
+        {x | ∀ j, x j ∈ D j})
+      (M.h i r - M.h i t + ∑ j ∈ univ.erase i, m j) := by
+  classical
+  constructor
+  · -- attained: pick a minimiser at each neighbour
+    have hex : ∀ j, ∃ s, s ∈ D j ∧ (j ∈ univ.erase i → M.link i r t j s = m j) := by
+      intro j
+      by_cases hj : j ∈ univ.erase i
+      · obtain ⟨s, hs, hsm⟩ := (hm j hj).1
+        exact ⟨s, hs, fun _ => hsm⟩
+      · exact ⟨x₀ j, hx₀ j, fun h => absurd h hj⟩
+    choose s hsD hsm using hex
+    refine ⟨s, hsD, ?_⟩
+    simp only
+    rw [energy_update_sub, localE_sub]
+    congr 1
+    exact Finset.sum_congr rfl fun j hj => hsm j hj
+  · rintro _ ⟨x, hx, rfl⟩
+    simp only
+    rw [energy_update_sub, localE_sub]
+    have : ∑ j ∈ univ.erase i, m j ≤ ∑ j ∈ univ.erase i, M.link i r t j (x j) :=
+      Finset.sum_le_sum fun j hj => (hm j hj).2 ⟨x j, hx j, rfl⟩
+    linarith
+
+/-- **Gauge invariance of the Goldstein value.**  Whatever messages are applied, the Goldstein
+value computed from the reparameterised tables is the same number. -/
+theorem goldstein_gauge_invariant (M : PairModel ℝ ι σ) (msg : ∀ i : ι, ι → σ i → ℝ) (i : ι) (r t : σ i)
+    (D : ∀ j, Set (σ j)) (x₀ : ∀ j, σ j) (hx₀ : ∀ j, x₀ j ∈ D j) (m m' : ι → ℝ)
+    (hm : ∀ j ∈ univ.erase i, IsLeast (M.link i r t j '' D j) (m j))
+    (hm' : ∀ j ∈ univ.erase i, IsLeast ((M.reparam msg).link i r t j '' D j) (m' j)) :
+    (M.reparam msg).h i r - (M.reparam msg).h i t + ∑ j ∈ univ.erase i, m' j =
+      M.h i r - M.h i t + ∑ j ∈ univ.erase i, m j := by
+  have h1 := goldstein_isLeast M i r t D x₀ hx₀ m hm
+  have h2 := goldstein_isLeast (M.reparam msg) i r t D x₀ hx₀ m' hm'
+  simp only [energy_reparam] at h2
+  exact h2.unique h1
+
+/-- Exact dominance margin of `r` against `t` at site `i` over a finite set of contexts. -/
+noncomputable def exactMargin (M : PairModel ℝ ι σ) (i : ι) (r t : σ i) (B : Finset (∀ j, σ j))
+    (hB : B.Nonempty) : ℝ :=
+  B.inf' hB fun x => M.localE i r x - M.localE i t x
+
+/-- Desmet's original bounds criterion: best case of `r` minus worst case of `t`. -/
+noncomputable def desmet (M : PairModel ℝ ι σ) (i : ι) (r t : σ i) (B : Finset (∀ j, σ j))
+    (hB : B.Nonempty) : ℝ :=
+  B.inf' hB (fun x => M.localE i r x) - B.sup' hB (fun x => M.localE i t x)
+
+/-- The exact margin is the minimum of the true energy differences. -/
+theorem exactMargin_eq (M : PairModel ℝ ι σ) (i : ι) (r t : σ i) (B : Finset (∀ j, σ j))
+    (hB : B.Nonempty) :
+    M.exactMargin i r t B hB =
+      B.inf' hB fun x => M.energy (Function.update x i r) - M.energy (Function.update x i t) := by
+  unfold exactMargin
+  congr 1
+  funext x
+  rw [energy_update_sub]
+
+/-- The exact margin is a gauge invariant. -/
+theorem exactMargin_reparam (M : PairModel ℝ ι σ) (msg : ∀ i : ι, ι → σ i → ℝ) (i : ι) (r t : σ i)
+    (B : Finset (∀ j, σ j)) (hB : B.Nonempty) :
+    (M.reparam msg).exactMargin i r t B hB = M.exactMargin i r t B hB := by
+  rw [exactMargin_eq, exactMargin_eq]
+  simp only [energy_reparam]
+
+/-- Desmet's criterion never exceeds the exact margin, in any gauge. -/
+theorem desmet_le_exactMargin (M : PairModel ℝ ι σ) (i : ι) (r t : σ i) (B : Finset (∀ j, σ j))
+    (hB : B.Nonempty) : M.desmet i r t B hB ≤ M.exactMargin i r t B hB := by
+  unfold desmet exactMargin
+  apply Finset.le_inf'
+  intro x hx
+  have h1 := Finset.inf'_le (fun x => M.localE i r x) hx
+  have h2 := Finset.le_sup' (fun x => M.localE i t x) hx
+  linarith
+
+/-- In every gauge Desmet's criterion is bounded by the (gauge-invariant) exact margin. -/
+theorem desmet_reparam_le (M : PairModel ℝ ι σ) (msg : ∀ i : ι, ι → σ i → ℝ) (i : ι) (r t : σ i)
+    (B : Finset (∀ j, σ j)) (hB : B.Nonempty) :
+    (M.reparam msg).desmet i r t B hB ≤ M.exactMargin i r t B hB := by
+  rw [← exactMargin_reparam M msg i r t B hB]
+  exact desmet_le_exactMargin _ i r t B hB
+
+/-- The gauge that makes the local energy of `t` at site `i` context independent. -/
+def optimalGauge (M : PairModel ℝ ι σ) (i : ι) (t : σ i) : ∀ a : ι, ι → σ a → ℝ :=
+  fun a b s => if b = i ∧ a ≠ i then M.J i a t s + M.J a i s t else 0
+
+theorem localE_optimalGauge (M : PairModel ℝ ι σ) (i : ι) (t : σ i) (x : ∀ j, σ j) :
+    (M.reparam (M.optimalGauge i t)).localE i t x = M.h i t := by
+  have hh : (M.reparam (M.optimalGauge i t)).h i t = M.h i t := by
+    show M.h i t + ∑ j ∈ univ.erase i, M.optimalGauge i t i j t = M.h i t
+    have h0 : ∑ j ∈ univ.erase i, M.optimalGauge i t i j t = 0 := by
+      apply Finset.sum_eq_zero
+      intro j _
+      simp [optimalGauge]
+    rw [h0, add_zero]
+  have hs : ∑ j ∈ univ.erase i, ((M.reparam (M.optimalGauge i t)).J i j t (x j) +
+      (M.reparam (M.optimalGauge i t)).J j i (x j) t) = 0 := by
+    apply Finset.sum_eq_zero
+    intro j hj
+    have hji : j ≠ i := Finset.ne_of_mem_erase hj
+    have e1 : M.optimalGauge i t i j t = 0 := by simp [optimalGauge]
+    have e2 : M.optimalGauge i t j i (x j) = M.J i j t (x j) + M.J j i (x j) t := by
+      simp [optimalGauge, hji]
+    show M.J i j t (x j) - M.optimalGauge i t i j t +
+      (M.J j i (x j) t - M.optimalGauge i t j i (x j)) = 0
+    rw [e1, e2]
+    ring
+  show (M.reparam (M.optimalGauge i t)).h i t + ∑ j ∈ univ.erase i,
+    ((M.reparam (M.optimalGauge i t)).J i j t (x j) +
+      (M.reparam (M.optimalGauge i t)).J j i (x j) t) = M.h i t
+  rw [hh, hs, add_zero]
+
+/-- **Goldstein is the gauge-optimal Desmet criterion.**  At the explicit gauge `optimalGauge`
+Desmet's criterion equals the exact (Goldstein) margin. -/
+theorem desmet_optimalGauge (M : PairModel ℝ ι σ) (i : ι) (r t : σ i) (B : Finset (∀ j, σ j))
+    (hB : B.Nonempty) :
+    (M.reparam (M.optimalGauge i t)).desmet i r t B hB = M.exactMargin i r t B hB := by
+  rw [← exactMargin_reparam M (M.optimalGauge i t) i r t B hB]
+  unfold desmet exactMargin
+  simp only [localE_optimalGauge]
+  rw [Finset.sup'_const]
+  apply le_antisymm
+  · apply Finset.le_inf'
+    intro x hx
+    have := Finset.inf'_le (fun x => (M.reparam (M.optimalGauge i t)).localE i r x) hx
+    linarith
+  · have h : B.inf' hB (fun x => (M.reparam (M.optimalGauge i t)).localE i r x - M.h i t) + M.h i t ≤
+        B.inf' hB fun x => (M.reparam (M.optimalGauge i t)).localE i r x := by
+      apply Finset.le_inf'
+      intro x hx
+      have := Finset.inf'_le
+        (fun x => (M.reparam (M.optimalGauge i t)).localE i r x - M.h i t) hx
+      linarith
+    linarith
+
+end PairModel
+
+end MetricChain

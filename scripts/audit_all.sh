@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+# MetricChain single-command audit:
+#   1. lake build (all modules under proofs/)            — must succeed, no "sorry" warnings
+#   2. forbidden-token scan of proofs/                    — no sorry / admit / axiom / native_decide ...
+#   3. axiom audit (proofs/AxiomAudit.lean)               — only propext, Classical.choice, Quot.sound
+#   4. Python falsification harness + separation benchmarks
+# Usage: scripts/audit_all.sh [--full]     (--full runs the long falsification pass)
+set -uo pipefail
+cd "$(dirname "$0")/.."
+source scripts/lean_env.sh || exit 1
+FULL=0; [ "${1:-}" = "--full" ] && FULL=1
+fail() { echo "AUDIT FAILED: $*" >&2; exit 1; }
+
+echo "== [1/4] lake build =="
+BUILD_LOG=$(mktemp)
+if ! lake build >"$BUILD_LOG" 2>&1; then tail -n 40 "$BUILD_LOG"; fail "lake build"; fi
+tail -n 1 "$BUILD_LOG"
+if grep -q "declaration uses 'sorry'" "$BUILD_LOG"; then grep -n "sorry" "$BUILD_LOG" | head; fail "sorry in build"; fi
+if grep -q "^error" "$BUILD_LOG"; then grep -n "^error" "$BUILD_LOG" | head; fail "errors in build log"; fi
+
+echo "== [2/4] forbidden tokens in proofs/ =="
+if grep -rnE '(^|[^A-Za-z_.])(sorry|admit)($|[^A-Za-z_])|native_decide|^[[:space:]]*(private |protected )?axiom[[:space:]]|implemented_by|^[[:space:]]*unsafe[[:space:]]|ofReduceBool' proofs/ --include='*.lean' \
+     | grep -v 'proofs/AxiomAudit.lean'; then
+  fail "forbidden token found"
+fi
+echo "none"
+echo "   Lean files: $(find proofs -name '*.lean' | wc -l), lines: $(cat $(find proofs -name '*.lean') | wc -l)"
+
+echo "== [3/4] axiom audit =="
+AX_LOG=$(mktemp)
+if ! lake env lean proofs/AxiomAudit.lean >"$AX_LOG" 2>&1; then tail -n 30 "$AX_LOG"; fail "AxiomAudit.lean did not compile"; fi
+grep "AXIOM AUDIT OK" "$AX_LOG" || { tail -n 20 "$AX_LOG"; fail "automatic axiom audit did not report OK"; }
+python3 - "$AX_LOG" <<'PY' || exit 1
+import re, sys
+text = open(sys.argv[1]).read()
+allowed = {"propext", "Classical.choice", "Quot.sound"}
+entries = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text, flags=re.S)
+clean = re.findall(r"'([^']+)' does not depend on any axioms", text)
+bad = []
+for name, axs in entries:
+    used = {a.strip() for a in axs.replace("\n", " ").split(",") if a.strip()}
+    if not used <= allowed:
+        bad.append((name, sorted(used - allowed)))
+print(f"   headline theorems checked: {len(entries) + len(clean)}")
+if bad:
+    print("AUDIT FAILED: non-standard axioms:", bad, file=sys.stderr)
+    sys.exit(1)
+if len(entries) + len(clean) == 0:
+    print("AUDIT FAILED: no #print axioms output found", file=sys.stderr)
+    sys.exit(1)
+if "error" in text:
+    print("AUDIT FAILED: errors in AxiomAudit output", file=sys.stderr)
+    sys.exit(1)
+PY
+
+echo "== [4/4] Python falsification harness and benchmarks =="
+if [ "$FULL" = 1 ]; then
+  python3 experiments/falsify_conjectures.py 2>/dev/null | tail -n 40 || fail "falsification harness"
+else
+  python3 experiments/falsify_conjectures.py --quick 2>/dev/null | tail -n 40 || fail "falsification harness"
+fi
+[ "${PIPESTATUS[0]}" = 0 ] || fail "falsification harness reported a misbehaving test"
+if [ -f experiments/separation_benchmarks.py ]; then
+  python3 experiments/separation_benchmarks.py --quick >/dev/null 2>&1 || fail "separation benchmarks"
+  echo "separation benchmarks: ok"
+fi
+echo
+echo "AUDIT PASSED"
