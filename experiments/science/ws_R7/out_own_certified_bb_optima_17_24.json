@@ -176,5 +176,21 @@
   "complete": true,
   "smaller_cover_found": false,
   "seconds": 37.7
+ },
+ {
+  "n": 22,
+  "key": "L=1,eps=1/4*N",
+  "target": 26,
+  "reduced": [
+   2094,
+   1137
+  ],
+  "nodes": 520,
+  "pruned_by_certified_bound": 483,
+  "pruned_infeasible": 0,
+  "max_depth": 10,
+  "complete": false,
+  "smaller_cover_found": false,
+  "seconds": 240.2
  }
 ]

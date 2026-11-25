@@ -660,3 +660,29 @@ profile and the gauche count, and its support function is the ground-state energ
   would name: the count is not machine-checked; `h` is a limit of families of growing
   depth with no rate; three levels have never been executed beyond toy size.
 
+### Cycle 27 — the engineering branch, reviewed and replicated (checkpoint 33)
+
+* **Workstream R7 reported.**  The first review by this division of the engineering
+  branch beyond its class tables.  Verdict: nothing published there is wrong.  With code
+  written from the model definitions the reviewer reproduced the lattice class tables to
+  22 torsions, the off-lattice chain to 14, the covers that are stated as exact, and the
+  Harper closed form; it verified all 288 stored covers as certificates and certified
+  254 of the 263 stored optima without relying on a solver's search.
+* **What the record does not support:** "two solvers agree on every cover" (the driver
+  stops at the first proof; the stored rows 1–18 were written by other code — verified by
+  the coordinator on their branch); "certified" for ten lower bracket ends that are
+  solver bounds; "the excess decays like `1/√n`"; "7 095 840 mean runs" as a tail
+  statement.
+* **A statement nobody had:** the off-lattice chain with a rational-degree bond angle is
+  exactly decidable — every squared distance is a polynomial with rational coefficients
+  in `cos θ` — so the "exact ties" the engineering division found are identities, its
+  published numbers are exact, and at the next size (13 torsions) a float comparison
+  with a tolerance meets 253 exact ties in one cell.  The remedy is exact arithmetic
+  over `ℚ[cos θ]`; requested before the next size is computed.
+* **Coordinator's checks:** M1 on the engineering branch (`git show`); the Harper table
+  re-run and compared (52 rows).  Housekeeping: compiled binaries of the workstream
+  removed from version control; the workstream's copy of engineering files stays local.
+* **Upstream moved while this was prepared:** theory `658b77f` (fourteenth checkpoint)
+  applies five of our reviews and answers them (THY-RES-0007, THY-MSG-0013) — read in
+  full before this checkpoint, answered at the next.
+

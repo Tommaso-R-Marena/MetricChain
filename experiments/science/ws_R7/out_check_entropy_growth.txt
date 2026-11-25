@@ -1,0 +1,20 @@
+L=1,eps=1/2*N (radius rho = 0.5)
+  5->6: classes growth 2.000; constant-sigma prediction 1.83; finite-size form 1.79; measured 1.67
+  6->7: classes growth 2.267; constant-sigma prediction 2.01; finite-size form 1.70; measured 1.40
+  7->8: classes growth 2.140; constant-sigma prediction 1.78; finite-size form 1.15; measured 1.62
+  8->9: classes growth 2.196; constant-sigma prediction 1.75; finite-size form 1.20; measured 1.26
+  9->10: classes growth 2.128; constant-sigma prediction 1.64; finite-size form 1.26; measured 1.40
+  10->11: classes growth 2.138; constant-sigma prediction 1.62; finite-size form 1.31; measured [1.42, 1.50]
+  11->12: classes growth 2.110; constant-sigma prediction 1.57; finite-size form 1.27; measured [1.21, 1.60]
+  12->13: classes growth 2.120; constant-sigma prediction 1.55; finite-size form 1.25; measured 
+  13->14: classes growth 2.107; constant-sigma prediction 1.52; finite-size form 1.28; measured 
+L=1,eps=1/4*N (radius rho = 0.25)
+  5->6: classes growth 2.000; constant-sigma prediction 1.96; finite-size form 1.87; measured 1.53
+  6->7: classes growth 2.267; constant-sigma prediction 2.19; finite-size form 2.00; measured 1.52
+  7->8: classes growth 2.140; constant-sigma prediction 1.96; finite-size form 1.37; measured 1.34
+  8->9: classes growth 2.196; constant-sigma prediction 1.99; finite-size form 1.76; measured 1.46
+  9->10: classes growth 2.128; constant-sigma prediction 1.89; finite-size form 1.65; measured [1.38, 1.43]
+  10->11: classes growth 2.138; constant-sigma prediction 1.88; finite-size form 1.64; measured [1.37, 1.50]
+  11->12: classes growth 2.110; constant-sigma prediction 1.82; finite-size form 1.53; measured [1.40, 1.69]
+  12->13: classes growth 2.120; constant-sigma prediction 1.80; finite-size form 1.49; measured 
+  13->14: classes growth 2.107; constant-sigma prediction 1.77; finite-size form 1.49; measured 

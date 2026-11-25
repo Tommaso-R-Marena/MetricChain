@@ -63,7 +63,42 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
 (3, 9, 27, 79, 233, 683, 2 005, 5 849, 17 107, 49 833 conformations; 2, 4, 7, 13, 22, 37, 57,
 90, 129, 190 classes).  At `n = 12` a derived quantity agrees: the identified interval of
 §11.2 of `INFERENCE_LIMITS.md` computed from our enumeration (width 0.527) and from their table
-(0.5265).  Beyond `n = 12` we have used their tables without replicating them.
+(0.5265).  Beyond `n = 12` the coordinator has used their tables without replicating them.
+
+**Extended by workstreams** (independent enumerators each): R2 — walk class tables for
+4–23 beads; **R7 — the class tables for 1–22 torsions at `a2f6dc7`, identical** (21 and 22
+were computed remotely only on the engineering side); for 23–24 torsions the total
+numbers of conformations equal the published series of self-avoiding walks on the
+diamond lattice, the class decomposition was not examined.  See §1.3.
+
+### 1.3 The engineering division's results at `a2f6dc7` — replication by workstream R7 (SCI-REV-0008)
+
+| item | what was done | result |
+|---|---|---|
+| off-lattice ("generic") chain: conformations and profile classes, 5–14 torsions | own enumerator from the model definition | identical |
+| off-lattice covers: 72 cells at 5–10 torsions, the 6 exact cells at 11; tie analysis; 60 entropy numbers | own cover code | identical; at 12 torsions and for the open brackets: consistency of own bounds only |
+| lattice class tables, 1–22 torsions | own enumerator (C) | identical |
+| the 288 published lattice covers | verified as covers on the unreduced instances | all valid |
+| the 263 lattice cells published as optima | own lower bounds with exact certificates | **254 certified without any solver's search** (241 by an exact LP-duality certificate, 13 by a branch and bound with an exact certificate at every pruned node); 9 rest on HiGHS's search |
+| Harper closed form for the uniform-cube hitting numbers | re-derived; own code; exhaustive over all subsets for `n ≤ 4`, including the programme over all minimal sensitive sets | all 52 stored rows identical |
+| single-flip constants up to 14 torsions | own code | identical; 15–16 not examined |
+| adversarial test of Algorithm 2L⁺ (X-005) | the engineering code re-run at reduced size (a re-run, not a replication); the reduction to tail functions re-derived and checked exhaustively on small cubes | two cells bit-identical; maximisers for `n ≤ 2000`; reduction correct as stated |
+
+*Kind of check:* an independent replication with code written before the corresponding
+engineering implementation was read, on one core, no computation above 15 minutes; no
+remote job was re-run.  *By the coordinator:* finding M1 verified on the engineering
+branch (`git show a2f6dc7:…`: the keys of the stored rows 1–18 against 19–24; the loop
+over solvers in `covering_number_P` stops at the first proof of optimality); the
+reviewer's `own_harper.py table 14` re-run and compared row by row with the stored
+`harper_fc_table.json` (52 rows, no difference); Propositions G1, G2 of the report
+(squared distances of the off-lattice chain are polynomials in `c = −cos θ` with rational
+coefficients of degree at most `q − p − 1`; `cos 69°` has degree 16, so for at most 14
+torsions an equality is an identity) re-derived — conjugation by `diag(1, −1, −1)` removes
+odd powers of `sin θ`, the mirror image removes `√3`; the examples `5 + 4c` (trans) and
+`2 + 4c + 3c²` (gauche) for the 1–4 pair checked by hand.  **Not examined by anyone here:** the class
+decomposition at 23–24 torsions; CP-SAT's proofs; nine HiGHS-only optima; single-flip
+constants at 15–16 torsions and the envelope test; X-001; ENG-RES-0006 §2; the
+correctness of the mean-run evaluator (the algorithm's cost proof is SCI-REV-0007).
 
 ## 2. Reviews
 
@@ -73,6 +108,8 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
 | SCI-REV-0002 | theory report §11.22 (limit shape) | workstream R2 | **published.**  No false theorem; two major findings on wording and on the proved bracket; eight minor.  Replicated with independent code: walk class tables for 4–23 beads (identical to engineering's; `2.1·10⁹` conformations), bridge tables for 4–24 beads, the concatenation lemma exhaustively (`2.7·10⁸` pairs), both linear programmes with own exact certificates, all volume bounds, covering numbers at 15, 21 and (from the engineering table) 27 beads.  Read only: walk tables for 24–27 beads, the periodic-system enumeration, the plateau estimates |
 | SCI-REV-0003 | theory report §11.24 (rounds of adaptivity) | workstream R4 | **published.**  No critical finding; one major (Theorem 11.84(ii) false as stated: cost bounded on the good event only; one-line repair), nine minor.  Replicated with code written before the authors' code was opened: `θ₂*`, `T^{(2)}(0)`, `h` at nine slopes; the exact twins table in every printed digit and one more row; the asymptotic gap; Lemma 11.85 end to end on whole cubes.  Own harness for Claims A/B (350 runs).  Read only: Theorems 11.56, 11.58, 11.51; the recursion for `r ≥ 3`; not examined: Proposition 11.88(e) |
 | SCI-REV-0005 | theory report §11.26, Theorems 11.99, 11.101 | workstream R5 | **published.**  Theorem 11.99 proved (three independent numerical routes on 56 site/slope pairs to `10⁻¹²`); 11.101(a) proved; 11.101(b) proved with two gaps in the written proof, closed.  All reference numbers replicated to the published rounding (one slope jump differs in its second digit); `RenyiCentre.lean` compiled.  Read, not re-derived: Theorem 11.52's accounting.  Not replicated: exact joint-type sums for `n ≤ 480`.  Nothing simulated by anyone |
+| SCI-REV-0007 | theory report §§11.18–11.19 (the cost of the nested adaptive algorithm) | workstream R6 | **published.**  No critical or major finding; Theorems 11.52, 11.54, 11.56, Proposition 11.57, Theorem 11.58 proved (an accounting written before reading the authors' reproduces theirs constant by constant); the sample-cap remark of `40c5bd7` proved with one uncovered pass closed; eight minor points.  Replicated: an own implementation, 4 075 literal runs (847 with invalid inner answers), the engineering division's published costs to every digit.  New: an every-`n` two-level cost and a certified finite-`n` separation; numpy's binomial bias.  Coordinator's checks: see the re-runs below. |
+| SCI-REV-0008 | the engineering division's experiments X-002 … X-006 and their record at `a2f6dc7` | workstream R7 | **published.**  No wrong number; two major findings (the two-solver validation cannot be regenerated; floating point at its limit at 13 torsions of the off-lattice chain — exact arithmetic over `ℚ[cos θ]` proposed), minor findings on the wording of "certified", of the `1/√n` decay and of the count of mean runs, and on provenance.  Replication: §1.3. |
 | — | our own `INFERENCE_LIMITS.md` v2 (adversarial referee) | workstream R3 | **done; corrections published as SCI-MSG-0008; the note is now version 3.**  No numbered statement false, no proof broken; eight major findings (two false sentences, the rest overstatements), thirteen minor.  Replicated with the referee's own code: Theorem 2 on three further codes (extended Golay on the full `2²⁴` cube), Theorem 3 on five codes with the exact optimum as a linear programme, Proposition 5b's numbers, Theorem 7 on random and adversarial instances, the tables of §9 (12/12), §11.1 (27/27), §11.2 (22/22), §11.4 (16/16), the engineering class tables for `n ≤ 9`.  Not re-run: the author's own scripts; the compact-decile row of §11.4.  The referee's own statements R1–R6 are **[P]**, unrefereed |
 
 * **Theory report §11.28 (ratios of macrostate weights; at `dcdfea6`) — independent review

@@ -21,8 +21,143 @@ Three kinds of evidence are kept apart throughout:
 Labels of COMMON rule 6: **[V]** machine-checked, **[P]** paper proof given here, **[K]** known and cited,
 **[N]** numerical evidence only, **[C]** conjecture, **[H]** heuristic.  Nothing here was machine-checked.
 
-*(This file is being written section by section while computations run; sections 1, 3.2–3.6 and 4–7
-are appended as their results arrive.)*
+Contents: 1 verdicts (one paragraph, verdict table, classified findings) · 2 precise statements with
+proofs · 3 numerics (3.1 generic chain, 3.2 lattice covers as certificates, 3.3 Harper closed form,
+3.4 tail-function reduction, 3.5 statistics of X-005/X-006, 3.6 the record, 3.7 a control on non-ball
+level sets) · 4 prior art and search log · 5 not settled · 6 next steps · 7 requests.
+
+---
+
+## 1. Verdicts
+
+**In one paragraph.**  I found **no wrong number** in the engineering division's results.  Every
+quantity I recomputed with my own code — the generic chain (conformations and profile classes for
+5–14 torsions, the covering numbers of 5–11 torsions, the tie analysis, 60 entropy numbers), the
+lattice class tables for 1–22 torsions, the single-flip constants up to 14 torsions, the closed form
+for the uniform-cube hitting numbers (all 52 stored rows) — is identical to theirs, and their stored
+outputs regenerate bit for bit wherever I re-ran their code at reduced size.  All 288 published
+lattice covers are valid certificates; of the 263 cells published as optima, **254 are certified
+here without trusting any solver's search** (241 by an exact LP-duality certificate, 13 more by my
+own branch and bound with an exact certificate at every pruned node) and 9 remain optima by
+HiGHS's branch and bound only; the other 25 cells are brackets.  The findings are about what the record
+supports, not about values: (i) the sentence "two solvers agree on every cover / proved by HiGHS and
+CP-SAT independently" rests on stored rows that no committed code produces — the committed driver
+never runs the second solver on a cell the first one closes — and I could not reproduce a CP-SAT proof
+with the one core I may use; (ii) ten lattice bracket ends and most generic ones are called
+"certified" but are solver bounds, one to three above what is certified; (iii) "the excess decays
+about like `1/√n`" is not what the X-005 data show (it decays faster; the exponent ½ is neither
+established nor excluded), the search budget was cut at the two largest sizes without saying so, and
+the `7·10⁶` "mean runs" are objective evaluations of an optimiser at the expectation level; (iv) the
+off-lattice chain is *not* generic in the sense a floating-point treatment needs — its squared
+distances are rational polynomials in `cos θ`, the "exact ties" are identities, and at 13 torsions
+(the division's next size) one cell has 253 of them.  On the positive side the same structure shows
+that the published off-lattice numbers are exact (covering numbers for `n ≤ 12`, class tables and
+entropy numbers for `n ≤ 14`); the Harper reduction of ENG-RES-0008 §5
+is correct as stated (re-derived, checked exhaustively on small cubes, and tested on a family with
+non-ball level sets that the division had not tried: no claim violated, no worse instance); and the
+total conformation counts of all 24 lattice tables, including the four produced on Modal, equal the
+published series of diamond-lattice self-avoiding walks.
+
+### 1.1 Verdict table
+
+"Replicated" = own code written before reading theirs; "re-run" = their code executed here;
+"read" = read, and where stated recomputed from their stored files with my own code.
+
+| # | claim (source) | verdict | how | difference |
+|---|---|---|---|---|
+| 1 | generic chain: conformations and profile classes, `n = 5…14` (ENG-RES-0007 §3, -0009 §2) | **replicated** | `own_gen.py` | none |
+| 2 | generic chain: 12-cell cover table, `n = 5…10` (72 cells incl. two open brackets) | **replicated** | `own_cover_table.py` | none (same two brackets, same ends) |
+| 3 | generic chain: cover table, `n = 11` | 6 exact cells **replicated**; 6 brackets **consistent** | MILP (`L = 1/5`); own LP certificate + greedy (`L = 1`) | none in the values; 5 of the 6 lower ends are solver bounds, not certified ones |
+| 4 | generic chain: cover table, `n = 12` | **consistency only**: my bounds agree with all 12 cells and my LP certificate equals 5 of the 6 published exact values; no cover of the published sizes constructed | own LP certificate + greedy | none |
+| 5 | generic chain: "nearest tie"; five exact ties at `n = 11`, none elsewhere; classes `≥ 0.035` apart; hard-core margins | **replicated**, and explained | `own_ties*.py`; 60-digit re-evaluation | none |
+| 6 | generic chain: distance entropy `σ(ρ)`, `n = 5…14`; pairs per bead | **replicated** | `own_entropy.py` | none (3 printed decimals) |
+| 7 | generic-chain results carry the label "[X\*]" (floating point) | **strengthened**: exact (covers `n ≤ 12`; classes and entropy `n ≤ 14`) | Propositions G1–G3 | — |
+| 8 | lattice class tables, `n = 1…22` (the tables of `n = 21, 22` were produced on Modal, job M-002) | **replicated** | `own_dia.c` | none (per class: count, fewest / most gauche) |
+| 9 | lattice class tables, `n = 23, 24` (Modal job M-002) | totals **checked against the literature** (OEIS A001394 / 12, as for every `n ≤ 24`); classes **not examined** | `check_saw_counts_oeis.py` | none in the totals |
+| 10 | the 288 lattice covers are covers of the stated sizes | **replicated** (certificates checked exactly) | `own_lattice_cert.py primal` | none |
+| 11 | the 263 single lattice covering numbers are optima | **254 certified solver-independently**; 9 **not** (HiGHS only; one of them re-solved by HiGHS in my own formulation) | exact LP certificate (241); `own_certified_bb.py` (13) | none |
+| 12 | "all 24 published covering numbers reproduced" | **replicated**, and certified | they are among the 241 | none |
+| 13 | "two solvers agree on every cover"; "by HiGHS and CP-SAT independently for `n ≤ 18`" | **not reproducible from the repository; not confirmed** | re-run of the committed driver at `n = 14`: CP-SAT never called; CP-SAT with one worker on three cells: no proof | sentence vs record (finding M1) |
+| 14 | lattice brackets, `n ≥ 19`: "`[certified lower bound, verified cover]`" | upper ends **replicated** (25 / 25); 15 certified lower ends **replicated**; 10 lower ends are solver bounds | `own_lattice_cert.py dual` | wording (finding m1) |
+| 15 | lattice entropy table (ENG-RES-0002 §4), 50 cells | lower sides **replicated** where LP-certified (33 single values; all 10 bracket ends); upper sides **not checkable** (covers not stored); 7 values rest on branch and bound | `own_lattice_nets.py` | none |
+| 16 | single-flip constants `c^{sf}` | `n = 3, 5, 8…14` **replicated**; `n = 15, 16` and the envelope-validity test **not examined** | `own_flip.c` | none |
+| 17 | every trans/gauche pattern is realised (two-line proof) | **read**: proof correct | — | — |
+| 18 | finite-size table and prose numbers of ENG-RES-0002, -0007 §2, -0009 §1 | **read**, recomputed from their stored tables | `check_eng_res_0002_prose.py` | three last-digit roundings |
+| 19 | uniform-cube hitting numbers: closed form and table (ENG-RES-0006 §1) | **re-derived and replicated** (52 / 52 rows); their script **re-run**, byte-identical | `own_harper.py` | none |
+| 20 | ENG-RES-0006 §2 (pricing as closure plus one budget row) | **not examined** (stated there as unimplemented analysis) | — | — |
+| 21 | X-005: the generated tables of ENG-RES-0008 follow from the stored results | **re-run** (`make_tables --verify`); trend table rebuilt with own code | `x005_refit.py` | none |
+| 22 | X-005: the stored search results are regenerated by the stated command | **re-run**: two cells bit-identical; all stored maximisers with `n ≤ 2000` re-evaluated | `rerun_engineering.sh … search`, `… recheck` | none |
+| 23 | X-005: "no claim violated in 7 095 840 mean runs" | **read**: count and extremes agree with the stored files; what it means: Statement S1 | `check_record_numbers.py` | headline wording (m3) |
+| 24 | X-005: "the excess decays about like `1/√n`" (digest) | **discrepancy with the data** (decays faster; Statement S2) | refit | finding m2 |
+| 25 | X-005: "the flat instance is not the worst one" | **read + re-run**: the instances are in the class and the stored maximisers reproduce; correctness of the evaluator **not examined** (workstream R6) | — | none |
+| 26 | X-005 §5: reduction of outer landscapes to tail functions (Harper) | **re-derived** [P] and checked numerically; scope note T(e); extra control on non-ball level sets **re-run** | `own_tail.py`, `rerun_eng_partial_shell.py` | none (correct as stated) |
+| 27 | X-006: 585 000 literal runs without failure; "below `5.1·10⁻⁶` at 95 %, pooled" | **read**, recounted from the stored file; not re-run | `x006_recount.py` | none |
+| 28 | X-001 (replication of the theory audit) | **not examined** | — | — |
+| 29 | the tables of ENG-RES-0002, -0007, -0008, -0009 are generated from the artifacts | **re-run** (`make_tables --verify`, four documents) | | none |
+| 30 | `python -m pytest tests/eng -q` | **re-run**: 128 passed | | — |
+
+### 1.2 Findings, classified
+
+**Critical** (a published result is wrong): **none found.**
+
+**Major**
+
+* **M1 — the two-solver validation cannot be regenerated, and what is stored does not show two
+  proofs.**  *Where:* `docs/engineering/EXPERIMENT_REGISTER.md`, X-002, validation (vi);
+  `docs/collaboration/responses/engineering/ENG-RES-0002.md` §1 ("Exactness"), §2 (note under the cover
+  table), "Assumptions and limitations"; `docs/engineering/DEPENDENCY_MAP.md` ("minimum covers are
+  optimal"); `src/metricchain_eng/chains/profile_cover.py`, `covering_number_P` (the loop over solvers);
+  `experiments/eng/chain_cover/results/lattice_Sc12.json`, rows `n = 1…18`.  *What:* §3.2 (d).  *Effect
+  on the numbers:* none that I could find — 254 of the 263 values are certified here without any
+  solver's search, and the sampled others agree with HiGHS in my own formulation.  *Effect on the
+  claim:* "proved by two independent solvers" is, on the evidence in the repository, "proved by HiGHS;
+  a second solver once found covers of the same size".
+* **M2 — the floating-point treatment of the off-lattice chain is at its limit at the next size.**
+  *Where:* `src/metricchain_eng/chains/generic_chain.py` (`ROUND_DECIMALS = 8`, `TOL = 1e-9`);
+  ENG-RES-0007 §3–§4; the plan in `docs/engineering/RESEARCH_LOG.md` ("covers of the generic chain at 13
+  and 14 torsions").  *What:* §2.1, §3.1 — exact ties are identities and become frequent (253 in one
+  cell at 13 torsions), the nearest non-tie is `2·10⁻⁸` at 14 torsions, and the entropy table of
+  ENG-RES-0009 already contains 305 exact ties (`n = 9, 10, 12, 13, 14`) that are reported nowhere —
+  decided correctly only because the comparison carries a tolerance.  This is **not** a defect
+  of any published number (those are exact, Corollary G3); it is a defect waiting in the announced
+  continuation, with a clean remedy (request R7-ENG-3).
+
+**Minor**
+
+* **m1 — "certified lower bound" is said of bounds that are not.**  ENG-RES-0002 §2, ENG-RES-0007 §3,
+  `docs/engineering/DEAD_ENDS.md` ED-3, the docstring of `generic_analysis`: ten lattice bracket ends
+  (§3.2 (c)) and five of the six generic ones at each of 11 and 12 torsions are `max(certified, solver)`;
+  `results/generic_Sc16.json` does not keep the two apart.  (For the entropy brackets the wording is
+  accurate: all ten lower ends equal the certified bound.)
+* **m2 — digest item 1** (`docs/collaboration/ENGINEERING_TO_THEORY.md`): "the excess decays about like
+  `1/√n`"; see Statement S2.  The response itself (ENG-RES-0008 §3) is worded correctly.
+* **m3 — ENG-RES-0008 does not state** the tolerance of "violation" (`10⁻⁷`), the search budgets per
+  size (reduced at `n = 64 000` and `128 000`), or that the convergence control covers `u = 1`,
+  `n ≤ 16 000` only; its headline number counts the objective evaluations of 2 624 searches.
+* **m4 — provenance.**  `results/generic_Sc16_ties.json` has no generating script; the generic cover
+  table has no stored covers and only a Modal entry point; stored result files carry no job id or
+  commit (except the class tables for `n ≥ 21`); the ledger names a commit only for M-008 … M-011;
+  ENG-RES-0007 cites ED-3 for job M-006.
+* **m5 — three numbers computed from rounded table entries** (6.1 for 6.15; 0.014 for 0.0134; "rises
+  by 0.2–0.3" of which one is 0.15).
+* **m6 (for the theory division)** — the remark after Theorem 11.56 that adopts ENG-RES-0008 §5 drops
+  the restriction to instances with a common fibre offset (T(e)); request R7-THY-1.
+
+### 1.3 What is missing, and what a hostile referee would attack first (brief, item 6)
+
+Claims with **no control or negative test** on the engineering branch: (a) the class *decomposition*
+at 23–24 torsions — produced once, remotely, by one code; the 64-way merge is tested by equality with
+a local run at `n = 14` only (now also: independent replications at `n = 21` and `22`, and the
+literature totals for all sizes); (b) the upper ends of the entropy brackets and of all generic brackets — the
+covers are not stored; (c) in X-005: instances that are not of product form (one scalar offset serves
+all fibres), level sets that are not balls (now: the cylinders of §3.7), other design parameters than
+the one set used, and the search at the two largest sizes (smallest budget, no convergence control);
+(d) in X-006: real inner brackets (stated by the division itself).
+**I would attack, in this order:** (1) X-005 beyond product instances — an instance whose fibres sit
+at different places of their trivial brackets is in the class, is outside the Harper reduction, and
+nobody has evaluated one; (2) the two largest sizes of X-005, which carry "no persistent margin";
+(3) the 9 lattice optima that only HiGHS vouches for (`n = 16…19`, `ε ∈ {0, 1, N/20, N/10}`, and `(22, N/4)`);
+(4) the class tables at 23–24 torsions.
 
 ---
 
@@ -40,7 +175,8 @@ word and all beads `p < q`, the squared distance `s_pq = |x_q − x_p|²` is a p
 *Proof.*  `s_pq = (q − p) + 2 Σ_{p ≤ k < l ≤ q−1} b_k·b_l`.  In the frame attached to bond `k`, `b_l` has
 coordinates `T_{k+1}⋯T_l e₁` with `T_j = R_x(φ_j)R_z(π − θ)` (`R_z`: rotation by the angle between
 consecutive bonds, entries `c, ±s, 0, 1` with `s = sin θ`; `R_x`: rotation by a torsion, entries
-`1, 0, cos φ ∈ {−1, ½}, ± sin φ ∈ {0, ±√3/2}`).  So `b_k·b_l` is the `(1,1)` entry of a product of `l − k`
+`1, 0, ±cos φ, ±sin φ` with `cos φ ∈ {−1, ½}`, `sin φ ∈ {0, ±√3/2}`, whatever the convention for the
+origin of the torsion angle).  So `b_k·b_l` is the `(1,1)` entry of a product of `l − k`
 such matrices: a polynomial of total degree `≤ l − k` in `(c, s)` with coefficients in `ℚ(√3)`.
 (i) *It is even in `s`.*  With `P = diag(1, −1, −1)`: `P R_z(α) P = R_z(−α)`, `P R_x(φ) P = R_x(φ)`,
 `Pe₁ = e₁`; so replacing `s` by `−s` conjugates the product by `P` and leaves the `(1,1)` entry
@@ -77,10 +213,12 @@ this model can meet — equal profiles (class identity), a pair exactly at the h
 cutoff, a profile distance exactly equal to a rational threshold `(gmin + ε)/L` — is a polynomial
 identity in `c`, valid for an open interval of bond angles; it is not an accident of `111°`, and it is
 reproduced by floating point to rounding error (`~10⁻¹³`).  Every *strict inequality* has the margin
-measured in §3.1 (cover relation: `≥ 2.9·10⁻⁸` for `n ≤ 12`; distinct distance values: `≥ 5.4·10⁻⁶`; hard
-core: `≥ 0.020`; cutoff: `≥ 0.035`), five orders of magnitude above rounding error.  **So the
-floating-point results of the engineering division for the generic chain (label [X\*] there) are the
-exact ones for `n ≤ 12`** — the margins are **[N]**, the dichotomy "identity or margin" is **[P]**.
+measured in §3.1 (cover relation: `≥ 2.9·10⁻⁸` for `n ≤ 12`; distinct distance values: `≥ 5.4·10⁻⁶` for
+`n ≤ 12`, `≥ 8.6·10⁻⁷` for `n ≤ 14`; hard core: `≥ 0.020` for `n ≤ 13`, `≥ 0.006` at `n = 14`; cutoff:
+`≥ 0.011`), five orders of magnitude above rounding error.  **So the floating-point results of the
+engineering division for the generic chain (label [X\*] there) are the exact ones: the cover relation
+and the covering numbers for `n ≤ 12`, the class tables and the entropy numbers for `n ≤ 14`** — the
+margins are **[N]**, the dichotomy "identity or margin" is **[P]**.
 
 **Proposition G4 (the five "exact ties" of ENG-RES-0007 §3) [P for one pair, by explicit polynomials;
 N for all five: 60 digits at 111° and 30 digits at seven bond angles].**  At `n = 11` the five pairs
@@ -122,12 +260,12 @@ Checked: §3.3 (brute force over all subsets for `n ≤ 4`, including an LP that
 
 ### 2.3 The reduction of outer landscapes to tail functions (ENG-RES-0008 §5): re-derivation, scope, and one addition
 
-Let `g` be `u`-Lipschitz on `Q_m` (Hamming metric), `W = e^{−g}`, `m(t) = |{W > t}|`, and `∂(k)` the size of
-the closed neighbourhood of the initial segment `I_k` of the simplicial order.
+Let `g` be `u`-Lipschitz on the cube `Q_d` (Hamming metric), `W = e^{−g}`, `m(t) = |{W > t}|`, and `∂(k)` the
+size of the closed neighbourhood of the initial segment `I_k` of the simplicial order.
 
 **Proposition T [P + K (Harper); re-derived; checked numerically in exact integer arithmetic, §3.4].**
 (a) `m` is nonincreasing and right-continuous and `m(te^{−u}) ≥ ∂(m(t))` for all `t > 0`.
-(b) Conversely, every nonincreasing right-continuous `m` with values in `{0,…,2^m}`, equal to `2^m` below
+(b) Conversely, every nonincreasing right-continuous `m` with values in `{0,…,2^d}`, equal to `2^d` below
 a positive threshold and to `0` above another, with `m(te^{−u}) ≥ ∂(m(t))` for all `t`, is the tail
 function of a `u`-Lipschitz `g` whose super-level sets `{W > t}` are initial segments.
 (c) The tail functions whose level sets are balls are those of monotone radial profiles with
@@ -143,16 +281,19 @@ threshold, `{W > t} = S_t` by right-continuity.  For neighbours `x, y` and `t < 
 `r(t) := max{r : |B(r)| ≤ m(t)}` (for `m(t) ≥ 1`) and `m_rad(t) := |B(r(t))|` (`0` if `m(t) = 0`).  Then
 `m_rad` is the tail function of a monotone radial profile with increments in `[0, u]`, and
 
-    m_rad(t)  ≤  m(t)  <  |B(r(t)+1)|  ≤  (m + 1)·m_rad(t).
+    m_rad(t)  ≤  m(t)  <  |B(r(t)+1)|  ≤  (d + 1)·m_rad(t).
 
 *Proof.*  `∂` is nondecreasing (initial segments are nested), so
-`m(te^{−u}) ≥ ∂(m(t)) ≥ ∂(|B(r(t))|) = |B(r(t)+1)|`, i.e. `r(te^{−u}) ≥ r(t) + 1` whenever `r(t) < m`: the
+`m(te^{−u}) ≥ ∂(m(t)) ≥ ∂(|B(r(t))|) = |B(r(t)+1)|`, i.e. `r(te^{−u}) ≥ r(t) + 1` whenever `r(t) < d`: the
 radius grows by at least one per factor `e^{−u}`, which is the condition "increments `≤ u`" for the
-radial profile `F(d) = −ln sup{t : r(t) ≥ d}`.  `|B(r+1)|/|B(r)| ≤ 1 + C(m, r+1)/C(m, r) ≤ m + 1`.  ∎
-So every tail probability of every `u`-Lipschitz landscape is within a factor `m + 1` of that of a
+radial profile `F(ρ) = −ln sup{t : r(t) ≥ ρ}` (and `{W_rad > t} = B(r(t))` by right-continuity).
+`|B(r+1)|/|B(r)| ≤ 1 + C(d, r+1)/C(d, r) ≤ d + 1`.  ∎
+So every tail probability of every `u`-Lipschitz landscape is within a factor `d + 1` of that of a
 monotone radial one: negligible at the exponential scale, but **not** small compared with the
-differences the engineering tables resolve (`ln(n_o+1)/(na) ≈ 0.06` at `n = 1000`, `u = 1`, against
-"`0.002·na`").  No instance with a partial shell was evaluated by the engineering search (§5, §7).
+differences the engineering tables resolve — a factor `n_o + 1` is `ln(n_o+1)/(na) ≈ 0.06` in the units
+of those tables at `n = 1000`, `u = 1`, against the "`0.002·na`" quoted for general versus monotone
+profiles.  The engineering search evaluated no instance with a partial shell; I ran one family
+(§3.7): it changes the cost by up to `0.075·na`, in the favourable direction.
 
 **Scope T(e) (what the outer loop reads) [P, from the text of the algorithm].**  Step 1 of Algorithm 2L⁺
 (theory `docs/workstreams/K_REPORT.md` §2.2) gives a new outer point `a` the trivial bracket
@@ -207,10 +348,13 @@ show.
 
 ## 3. Numerics: what was done, at which sizes, with what result, and how to re-run it
 
-All runs: one core (`OMP_NUM_THREADS=1`), this machine (shared; load average 7–8 on 4 cores during the
-work), Python 3.13, NumPy 2.5.3, SciPy 1.18.1 (HiGHS), mpmath 1.3.0, gcc 13.3; OR-Tools 9.15.6755
+All runs: one core (`OMP_NUM_THREADS=1`), one computation at a time (two short overlaps of two of my
+own jobs occurred, of about 4 s and about 1 min; see `NOTES.md`), this machine (shared; load average
+between 2 and 8 on 4 cores during the work), no single computation above 15 minutes or 2 GB (longest:
+the `n = 22` lattice enumeration, 867 s), Python 3.13, NumPy 2.5.3, SciPy 1.18.1 (HiGHS), mpmath 1.3.0, gcc 13.3; OR-Tools 9.15.6755
 installed into a private directory outside the shared environment (for CP-SAT only).  No remote
-resource was used and no Modal job was re-run.  From `experiments/science/ws_R7/`:
+resource was used and no Modal job was re-run (the web was used for two literature searches and one
+page fetch, §4 and §3.2 (a)).  From `experiments/science/ws_R7/`:
 
 ### 3.1 X-004 — the generic (off-lattice) chain (ENG-RES-0007 §3, ENG-RES-0009 §2): REPLICATED, no difference
 
@@ -231,17 +375,18 @@ reductions before the integer programme) and agrees in every number:
 | profile classes | `n = 5…14` | 30, 60, 136, 291, 639, 1 360, 2 908, 6 137, 13 012, 27 421 | identical | REPLICATED |
 | cover table, 12 cells per `n` | `n = 5…9` (60 cells) | all proved optima | identical in all 60 (in 40 my LP certificate alone proves the optimum) | REPLICATED |
 | cover table | `n = 10` (12 cells) | 319, 223, 255, `[209,211]`, `[119,123]`, 60 ; 13, 8, 10, 8, 5, 3 | identical, including the two open brackets with the same ends (240 s per cell on one core) | REPLICATED |
-| cover table | `n = 11, 12` | 12 exact cells, 12 brackets | see below | (see below) |
+| cover table | `n = 11` | 6 exact cells, 6 brackets | 6 exact cells identical; brackets consistent with my bounds | exact cells REPLICATED |
+| cover table | `n = 12` | 6 exact cells, 6 brackets | bounds only: consistent; no cover constructed | consistency only |
 | "nearest tie" column | `n = 5…12` | 5.2e-4, 2.7e-4, 1.2e-4, 1.8e-5, 4.5e-6, 3.2e-7, (ties), 2.9e-8 | 5.211e-4, 2.711e-4, 1.155e-4, 1.824e-5, 4.473e-6, 3.248e-7, (5 ties; nearest non-tie 1.273e-7), 2.929e-8 | REPLICATED |
 | exact ties | `n = 5…12` | 5 at `n = 11` (`L = 1`, `ε = N/2`), none elsewhere | the same 5, none elsewhere | REPLICATED, and explained (§2.1) |
 | hard-core margins at `n = 10` | | 0.078 above, 0.020 below | 0.078462, 0.020008 | REPLICATED |
 | "classes never closer than 0.035" | `n ≤ 12` | 0.035 | 0.0353 (and 0.0075, 0.0072 at `n = 13, 14`) | REPLICATED |
-| pairs within the cutoff per bead (three statistics) | `n = 5…12` | e.g. 2.58 / 2.46 / 4.23 at `n = 10` | identical | REPLICATED |
+| pairs within the cutoff per bead (three statistics) | `n = 5…14` | e.g. 2.58 / 2.46 / 4.23 at `n = 10` | identical | REPLICATED |
 | distance entropy `σ(ρ)`, six radii | `n = 5…14` (60 numbers) | table of ENG-RES-0009 §2 | identical to the three printed decimals | REPLICATED |
 
 Two things I expected to be weak points and that are not: (i) the column "max" of pairs per bead
-equals (number of pairs)/N at every size — it is real (the conformation `(t g⁺g⁺)^k` keeps all pairs
-within the cutoff up to 17 beads); (ii) the class key "round to 8 decimals" could split a class if a
+equals (number of pairs)/N at every size — it is real (conformations of the type `(t g⁺g⁺)^k` keep all
+pairs within the cutoff up to 17 beads); (ii) the class key "round to 8 decimals" could split a class if a
 value sat on a rounding boundary — my boundary-free clustering gives the same counts at every size.
 
 *Ties and exactness.*  `own_ties.py 5 12`: the five ties at `n = 11`, re-evaluated at 60 digits from the
@@ -260,18 +405,51 @@ identities (G2), not accidents.  Integer-valued profile distances (`own_integer_
 | nearest non-tie over the six `L = 1` cells | 1.6e-3 | 4.5e-6 | 1.5e-5 | 2.4e-6 | 2.5e-6 | 5.0e-7 | **2.1e-8** |
 
 ("—": the accuracy is not an integer at that size, so no tie is possible; at `ε = 0` and `ε = 1`, which
-are integers at every size, there is no tie for any `n ≤ 14`.)  **At 13 torsions — the
-next size on the engineering division's list — 253 comparisons of one cell sit exactly on the
-threshold, and at 14 torsions the nearest non-tie is within a factor 20 of the tolerance.**  The
-floating-point treatment is at its limit there; §7 asks for exact arithmetic in `ℚ[c]`.
+are integers at every size, there is no tie for any `n ≤ 14`.)  **At 13 torsions — the next size on
+the engineering division's list — 253 comparisons of one cell sit exactly on the threshold, and at 14
+torsions the nearest non-tie is within a factor 20 of the tolerance.**  The floating-point treatment
+is at its limit there; §7 asks for exact arithmetic in `ℚ[c]`.
 
-*Covers at `n = 11, 12`.*  (pending — filled in below if the runs complete.)
+The same identities sit in the **entropy table** of ENG-RES-0009 §2, whose comparisons are `D ≤ ρN`
+(`own_entropy_ties.py`): unordered pairs of classes with `D = ρN` exactly — `n = 9`: 3 (`ρ = 1.25`,
+`D = 15`); `n = 10`: 8 (`ρ = 1`, `D = 13`); `n = 12`: 48 (`ρ = 1`, `D = 15`); `n = 13`: 13 (`ρ = ¼`, `D = 4`)
+and 13 (`ρ = 1`, `D = 16`); `n = 14`: 220 (`ρ = 1`, `D = 17`); none at `n ≤ 8` and `n = 11`.  The nearest
+non-tie is `≥ 3.4·10⁻⁸` at every size.  Both programmes count the ties as "within" (tolerance `10⁻⁹`),
+which is the exact answer, so the published `σ` are exact; but ENG-RES-0009 says only that "the tie
+analysis of ENG-RES-0007 §3 applies", and that analysis ("five exact ties at `n = 11`, none
+elsewhere") is about the cover relation — the 305 ties of the entropy table are not reported
+anywhere.
+
+*Covers at `n = 11, 12`.*  `n = 11` (2 908 classes): the six `L = 1/5` cells, by HiGHS in my formulation
+(five of them already by my LP certificate alone): `16, 10, 11, 10, 6, 4` — identical.  For the six
+`L = 1` cells I computed bounds only (tolerance-free LP certificate; greedy cover):
+`[471, 523] [338, 388] [378, 432] [307, 361] [167, 208] [85, 105]` against the published
+`[474, 484] [339, 350] [379, 392] [308, 319] [168, 179] [85, 90]` — consistent in all six, and in five of
+them the published lower end exceeds the LP certificate (by 3, 1, 1, 1, 1): it is the HiGHS bound at
+the 90 s limit, not "the certified lower bound" (the stored file has a single field `lower`).
+`n = 12` (6 137 classes), bounds only: `L = 1`: `[755, 861] [551, 642] [603, 697] [483, 569] [250, 318]
+[109, 143]` against `[757, 788] [552, 595] [605, 645] [484, 526] [251, 284] [109, 136]` — consistent; lower
+ends above the certificate by 2, 1, 2, 1, 1, 0.  `L = 1/5`: my certificates `20, 13, 15, 11, 6, 4` against
+the published exact values `21, 13, 15, 11, 6, 4`: the lower side is certified in five cells; I did not
+construct covers of the published sizes (my greedy covers have `26, 18, 20, 15, 7, 5`; the
+engineering covers are not stored), so **the `n = 12` row is checked for consistency, not replicated.**
+The per-cell "nearest tie" values of both sizes agree with the stored ones to all printed digits.
+
+*A remark on the growth test of ENG-RES-0009 §2* (`check_entropy_growth.py`, from the stored numbers).
+The prediction "growth of classes divided by `e^σ`" assumes `σ` independent of `n`; with the form that
+does not, `g_n·exp(nσ_n − (n+1)σ_{n+1})`, the predicted ratios at `ε = N/2` are
+`1.79, 1.70, 1.15, 1.20, 1.26, 1.31, 1.27` (`n = 5→6 … 11→12`) against the measured
+`1.67, 1.40, 1.62, 1.26, 1.40, [1.42, 1.50], [1.21, 1.60]` — scattered on both sides, no systematic
+over-prediction; at `ε = N/4` it still over-predicts (by 10–30 %).  This is the finite-size correction
+the message itself asks for; it removes most of the "over-prediction by 10–50 %" at `ε = N/2`. **[N]**
 
 Re-run: `python3 own_gen.py 11`; `python3 own_cover_table.py 5 9 300`; `python3 own_cover_table.py 10 10 240`;
-`python3 own_entropy.py 5 12`; `python3 own_entropy.py 13 14` (77 s for `n = 14`); `python3 own_stats.py 5 12`;
+`python3 own_cover_table.py 11 11 200 "1.0:0,1.0:1,1.0:N/20,1.0:N/10,1.0:N/4,1.0:N/2,0.2:0,0.2:1,0.2:N/20,0.2:N/10,0.2:N/4,0.2:N/2" 0`
+(fifth argument 0 = bounds only for the `L = 1` cells); `python3 own_cover_table.py 12 12 0`;
+`python3 own_entropy.py 5 12`; `python3 own_entropy.py 13 14` (77 s for `n = 14`); `python3 own_stats.py 5 14`;
 `python3 own_hardcore.py 2 12`; `python3 own_ties.py 5 12`; `python3 own_ties_structure.py`;
 `python3 own_ties_detail.py`; `python3 own_integer_distances.py 5 12`; `python3 own_integer_distances_big.py 13 14`;
-`python3 own_angle_robust.py 5 12` (build the kernel first: `gcc -O3 -march=native -fPIC -shared -o l1kern.so l1kern.c -lm`).
+`python3 own_angle_robust.py 5 12`; `python3 own_entropy_ties.py 5 14` (build the kernel first: `gcc -O3 -march=native -fPIC -shared -o l1kern.so l1kern.c -lm`).
 Outputs: `out_own_cover_n5_9.txt`, `out_own_cover_table_*.{txt,json}`, `out_own_entropy_*.json`,
 `out_own_ties_*.{txt,json}`, `out_own_integer_distances*.{txt,json}`, `out_own_angle_robust.txt`.
 
@@ -286,10 +464,19 @@ Own code: `own_lattice_cert.py` (exact primal check; tolerance-free dual bound),
 
 **(a) Class tables** (`experiments/eng/chain_cover/data/dia_Sc12_n*.txt`; per class: pair counts, number of
 conformations, fewest and most gauche torsions).  My enumerator gives **identical tables for
-`n = 1 … 20`** (with the mirror reduction; without it for `n ≤ 9`), e.g. `n = 20`: 2 139 332 335
-conformations, 2 328 classes (253 s here).  This re-does, with a third implementation, what workstream
-R2 did up to 23 beads.  The tables for `n = 21 … 24` (Modal job M-002) — see the end of this
-subsection.
+`n = 1 … 22`** (with the mirror reduction; without it for `n ≤ 9`): e.g. `n = 20`: 2 139 332 335
+conformations, 2 328 classes; **`n = 21`: 6 204 141 457 conformations, 2 753 classes (278 s on one
+core); `n = 22`: 17 973 153 955 conformations, 3 319 classes (867 s)** — the first two of the four
+tables that were produced on Modal (job M-002) and that nobody outside the engineering division had
+replicated (workstream R2 reached 23 beads, `n = 20`).  `n = 23, 24` would take about 40 minutes and
+two hours of one core with my enumerator (in prefix chunks); I did not run them.
+**An external control the engineering register does not use:** the total number of conformations of
+*every* table, `n = 1…24`, equals `c_{n+2}/12`, where `c_k` is the published number of `k`-step
+self-avoiding walks on the diamond lattice (OEIS A001394; the enumerators fix the first two bonds,
+`4·3 = 12` choices) — e.g. `n = 24`: `1 810 062 340 812 / 12 = 150 838 528 401`
+(`check_saw_counts_oeis.py`; b-file read `[full text, through a page-fetching tool]`).  This validates
+the totals of the Modal tables for `n = 23, 24` as well; their split into classes remains
+unreplicated.
 
 **(b) Primal certificates.**  `results/lattice_Sc12.json` stores for each of the 288 cells
 (`n = 1…24` × 12 settings) the cover itself (`centres_hist`).  With my own profile distance
@@ -305,7 +492,7 @@ load in exact integer arithmetic on the *unreduced* matrix; it is valid whatever
 | | cells | what proves the published lower end |
 |---|---|---|
 | published single number, my certified bound equals it | **241** | stored cover (checked) + exact LP certificate: **an optimum with no reliance on any branch and bound** |
-| published single number, LP certificate 1 or 2 below | 22 | branch and bound only: 18 cells at `n = 14…18` (`L = 1`, `ε ∈ {0, 1, N/20, N/10}`) and 4 cells at `n ≥ 19`: `(19, N/10)` 35, `(19, N/4)` 22, `(20, N/4)` 24, `(22, N/4)` 26 |
+| published single number, LP certificate 1 or 2 below | 22 | a solver's branch and bound: 18 cells at `n = 14…18` (`L = 1`, `ε ∈ {0, 1, N/20, N/10}`) and 4 cells at `n ≥ 19`: `(19, N/10)` 35, `(19, N/4)` 22, `(20, N/4)` 24, `(22, N/4)` 26.  (13 of the 22 are closed by my certified branch and bound: (h) below) |
 | published bracket `[a, b]` | 25 | `b`: stored cover (checked, 25/25).  `a`: equals my certified bound in 15 cells; in **10 cells it is one above it** and is the HiGHS branch-and-bound bound after 300 s |
 
 For `n ≥ 19` my certified bound equals the stored `lower_certified` in all 72 cells, and my LP value
@@ -345,8 +532,8 @@ per solver, only the size it found, not whether it proved it.
 
 **(e) Single-flip constants** (ENG-RES-0002 §6, `results/lattice_Sc12_flip.json`).  Own brute force
 (every self-avoiding conformation, every torsion, both other states; gauche states defined by the
-sign of a triple product): `c^{sf}` **identical for `n = 3, 5, 8, 9, 10, 11, 12, 13`**
-(`n = 13`: `53 89 98 113 132 132 130 | sym`, 44 s).  Not replicated: `n = 14, 15, 16` and the exhaustive
+sign of a triple product): `c^{sf}` **identical for `n = 3, 5, 8, 9, 10, 11, 12, 13, 14`**
+(`n = 14`: `57 92 109 118 137 154 147 | sym`, 52 s).  Not replicated: `n = 15, 16` and the exhaustive
 test that `c^{sf}` is a valid Hamming envelope (their mode B).  The derived table of ENG-RES-0009 §1
 (36 pairs `(n, j)`, bounds of Proposition 11.74, no violation; least excess 21 … 73; largest ratio
 0.136 … 0.286) follows from the stored constants (recomputed).
@@ -360,14 +547,57 @@ rounding: `166/27 = 6.15`, printed as 6.1.)  The two-line proof that every trans
 realised (restrict even bonds to `{a₀, a₂}` and odd bonds to `{a₁, a₃}`: every bond then has
 `y`-component `+1`) is correct **[P, checked by reading]**.
 
-**(g) Entropy brackets** (ENG-RES-0002 §4) and **class tables for `n = 21, 22`**: (pending — see the end
-of §3.2 below if completed.)
+**(g) Entropy brackets** (ENG-RES-0002 §4; internal covering numbers at closed radius `δN`; 50 cells,
+`n ∈ {8, 10, 12, 13, 14, 16, 18, 20, 22, 24}` × five radii; `own_lattice_nets.py`).  No inconsistency
+in any cell (my certified bound never exceeds a published upper end; my greedy cover is never below a
+published lower end).  Of the 40 published single values, my tolerance-free LP bound equals 33 — the
+lower side is certified; **the upper side (a cover of that size exists) cannot be checked, because the
+net covers are not stored** — and 7 rest on branch and bound (`n = 10`, `δ = ¼`: 43 against 40;
+`n = 12`, `δ = ¼`: 65 / 60; `n = 13`: 20 / 19 and 55 / 52; `n = 14`: 25 / 24 and 72 / 66).  In all ten
+brackets the published lower end **equals** my certified bound (25, 98, 29, 104, 33, 146, 38, 141,
+41, 186): for the entropy table "certified lower bound" is accurate.
 
-Re-run: `gcc -O3 -march=native -o own_dia own_dia.c && python3 own_dia_compare.py 1 20`;
+**(h) A solver-independent proof for cells that rest on branch and bound.**  `own_certified_bb.py`: a
+branch and bound in which every pruned node carries an exact-integer LP-dual certificate (the
+floating-point dual vector is only a hint; node bound `|F₁| + ⌈Σw / max load⌉` in integer arithmetic;
+branching on an uncovered class, children partition the covers; exact dominance reductions done with
+my own code; self-test against brute force on 300 random instances, with "target = optimum" exhausted
+and "target = optimum + 1" refuted in every one).  Applied to the 22 cells of (c) with a limit of 240 s
+per distinct instance (`own_certified_bb_all.py optima 240`):
+
+| cell(s) | published | LP certificate | certified branch and bound |
+|---|---|---|---|
+| `n = 14`: `ε = 1`, `N/10` (one instance) | 25 | 24 | **proved `≥ 25`**: 598 nodes, 3.7 s |
+| `n = 15`: `ε = 0`, `N/20` | 33 | 32 | **proved `≥ 33`**: 99 nodes, 1.6 s |
+| `n = 15`: `ε = 1`, `N/10` | 27 | 26 | **proved `≥ 27`**: 12 nodes, 0.2 s |
+| `n = 16`: `ε = 1`, `N/10` | 30 | 29 | **proved `≥ 30`**: 8 nodes, 0.3 s |
+| `n = 17`: `ε = 1`, `N/20` | 34 | 33 | **proved `≥ 34`**: 493 nodes, 34 s |
+| `n = 17`: `N/10` | 28 | 27 | **proved `≥ 28`**: 225 nodes, 15 s |
+| `n = 19`: `N/4` | 22 | 21 | **proved `≥ 22`**: 8 nodes, 1.2 s |
+| `n = 20`: `N/4` | 24 | 23 | **proved `≥ 24`**: 207 nodes, 38 s |
+| `n = 16`: `ε = 0`, `N/20` | 38 | 36 | not finished in 240 s (11 226 nodes) |
+| `n = 17`: `ε = 0` | 43 | 41 | not finished (4 800 nodes) |
+| `n = 18`: `ε = 0` | 48 | 46 | not finished (2 874 nodes) |
+| `n = 18`: `ε = 1`, `N/20` | 39 | 37 | not finished (3 001 nodes) |
+| `n = 18`: `N/10` | 31 | 29 | not finished (2 702 nodes) |
+| `n = 19`: `N/10` | 35 | 34 | not finished (2 278 nodes) |
+| `n = 22`: `N/4` | 26 | 25 | not finished (520 nodes) |
+
+Together with the stored covers this makes **254 of the 263 published single covering numbers optima
+that are certified without any solver's search** (241 by the LP certificate alone, 13 by this branch
+and bound).  The 9 cells that did not finish (LP gap 2, or the largest instances) are vouched for by
+HiGHS only; a better branching rule or more time would very probably close them — I did not try.
+
+Re-run: `gcc -O3 -march=native -o own_dia own_dia.c && python3 own_dia_compare.py 1 22` (about 25 min in all);
 `python3 own_lattice_cert.py primal`; `python3 own_lattice_cert.py dual 1 18` and `… dual 19 24` (13 min);
 `PYTHONPATH=<ortools> python3 own_lattice_opt.py 120 "14:L=1,eps=1" "15:L=1,eps=0" "16:L=1,eps=0"`;
 `PYTHONPATH=<ortools> python3 rerun_eng_two_solvers.py <work tree> 240 "14:L=1,eps=1" …`;
-`gcc -O3 -march=native -o own_flip own_flip.c && ./own_flip -n 13`; `python3 check_eng_res_0002_prose.py`.
+`gcc -O3 -march=native -o own_flip own_flip.c && ./own_flip -n 14`; `python3 check_eng_res_0002_prose.py`;
+`python3 own_lattice_nets.py 0 8 10 12 13 14 16 18 20 22 24`; `python3 test_own_certified_bb.py`;
+`python3 own_certified_bb_all.py optima 240 14 16` and `… 17 24` (35 min); `python3 check_saw_counts_oeis.py`.
+Outputs: `out_own_dia_compare_*.txt`, `out_own_lattice_primal.json`, `out_own_lattice_dual_*.{txt,json}`,
+`out_own_lattice_opt_batch1.txt`, `out_rerun_eng_two_solvers.{txt,json}`, `out_rerun_lattice_solvers.txt`,
+`out_own_flip_*.txt`, `out_own_lattice_nets.{txt,json}`, `out_own_certified_bb_*.{txt,json}`.
 
 ### 3.3 X-003 — exact fractional hitting numbers on the uniform cube (ENG-RES-0006 §1): RE-DERIVED and REPLICATED, no difference
 
@@ -429,13 +659,13 @@ from the stored result files with my own code (`x005_refit.py`, `x006_recount.py
   (These are deterministic numbers, not noisy samples: the "errors" are search sub-optimality and the
   grids of `φ` and of the ladder, so the misfits are descriptive, and a formal goodness-of-fit test
   would be meaningless.)  Reading: Statement S2 of §2.4.
-* **The search budget is not uniform in `n`, and the message does not say so.**  From the stored
-  records: 4000 (monotone) / 2000 (general) evaluations per search for `n ≤ 32 000`, 2500 / 1250 at
-  `n = 64 000`, 1500 / 750 at `n = 128 000` (`run_search.tasks`: "reduced at the two largest sizes so that
-  a task stays near a quarter of an hour").  The gain of the search over the best of its 63 structured
+* **The search budget is not uniform in `n`, and the message does not say so** (the code and the
+  stored records do).  4000 (monotone) / 2000 (general) evaluations per search for `n ≤ 32 000`,
+  2500 / 1250 at `n = 64 000`, 1500 / 750 at `n = 128 000` (`run_search.tasks`: "reduced at the two largest
+  sizes so that a task stays near a quarter of an hour").  The gain of the search over the best of its 63 structured
   starting points falls from `0.11·na` (`n = 250`) to `0.003·na` (`n = 128 000`), and its median over the
   searches of a size is exactly `0` for every `n ≥ 1400`.  The convergence control (five times the
-  budget, two more seeds) covers four cells, all at `u = 1`, `n ∈ {1000, 16 000}`.  So at the two largest
+  budget at `n = 1000`, three times at `n = 16 000`, two more seeds) covers four cells, all at `u = 1`.  So at the two largest
   sizes — the ones that carry "no persistent margin" and "still falling at `n = 128 000`" — the number
   called "worst instance found" is in effect "the worst of 63 hand-made instances", obtained with the
   smallest budget and without a convergence control.  That the hand-made instances are near-optimal
@@ -451,7 +681,8 @@ from the stored result files with my own code (`x005_refit.py`, `x006_recount.py
   essentially deterministic, which is what licenses the mean run as a proxy *there* (`n_o ≤ 300`,
   `n_i = 6`, oracle inner brackets) and nowhere else.
 * **"The flat instance is not the worst one"** is a constructive claim: one instance with a larger
-  mean-run cost at the same `φ` suffices, and the stored file contains one for 464 of the 468 cells.
+  mean-run cost at the same `φ` suffices, and the stored file contains one for every one of the 468
+  cells (by more than `0.001·na` in 419 of them; largest excess `1.10·na`; recounted).
   I checked that the instances are members of the class (radial outer profile with slopes in `[0, u]`
   resp. `[−u, u]`; inner offset within `[−n_iΛ₁, n_i(u − Λ₁)]`, the exact range of
   `ln E e^{−F_i} + F_i(ref)` over `u`-Lipschitz `F_i`; product form) and that the stored maximisers
@@ -536,7 +767,9 @@ segments with a partial shell), whose law of `W` is the radial law of the `(n_o 
 | `u = 2`, `n = 1000`, `φ = 0.50` | 0.7726 / 0.7723 | **0.7728** | 0.7723 |
 | `u = 1`, `n = 4000`, `φ = 0.50` | 0.6941 / 0.6941 | 0.6939 | 0.6926 |
 
-(entries: `ln(cost)/(na)`.)  In 158 508 mean runs **no claim of the theorem is violated** (largest
+(entries: `ln(cost)/(na)`; my `k = 0` re-run uses the monotone family and budget 2000 only, whence the
+last-digit differences from the stored values, which come from both families at budget 4000 / 2000.)
+In 158 508 mean runs (135 864 of them on cylinders) **no claim of the theorem is violated** (largest
 `ln cost − ln C_max = −10.75`), and non-ball level sets of this type exceed the radial worst case in one
 cell only, by `0.0002·na`.  So the reading of ENG-RES-0008 §5 survives a control it did not have.  Two
 qualifications: the cost is *not* insensitive to the shell structure at the `0.002·na` level quoted
@@ -582,32 +815,33 @@ No other search was made; in particular I did not search for prior art on any en
 
 ## 5. What I did not settle
 
-1. **Whether CP-SAT proves the 18 lattice optima of `n = 14…18` on its own.**  With one worker it does
-   not get near them (§3.2 (d)); the configuration that produced the stored record (8 workers, 4 cores,
-   no time limit, uncommitted code) is out of my reach under the one-core rule.  The optima themselves
-   are confirmed by HiGHS in three settings on the three cells I sampled; the other 19
-   branch-and-bound cells (15 at `n ≤ 18`, 4 at `n ≥ 19`) were not re-solved.
-2. **The ten bracket lower ends that are solver bounds** (lattice, `n = 19…23`) and the corresponding
-   generic ones: neither certified nor refuted.
-3. **Class tables `n = 22, 23, 24`** (Modal job M-002; `1.8·10¹⁰ … 1.5·10¹¹` conformations): not
-   replicated — see the end of §3.2 for how far my enumerator got; everything stated about covers at
-   those sizes is relative to the stored tables.
-4. **Single-flip constants `n = 14, 15, 16`** and the exhaustive validity of `c^{sf}` as a Hamming
-   envelope (ENG-RES-0002 §6, mode B of `dia_flip.c`): not replicated; `dia_flip.c` was not read.
-5. **Generic covers at `n = 12`** and the open brackets at `n = 10, 11, 12`: see §3.1; none of the
-   open brackets was closed by me, and the generic upper ends cannot be checked because the covers
-   are not stored.
-6. **The 253 exact ties at `n = 13`** were identified by the gap between `10⁻⁹` and the nearest non-tie
-   (`5·10⁻⁷`), not re-evaluated one by one at high precision; by G2 they are identities if they are
-   ties at all.
-7. **X-005: the correctness of the evaluator** (is the mean run the algorithm of Theorem 11.56; is its
-   cost formula the number of evaluations) — workstream R6.  **X-006** was recounted from its stored
-   file, not re-run.  Fibre offsets `t₀(a)` that vary with the outer point (non-product instances),
-   partial shells other than cylinders, and the search at `n ≥ 64 000` with a convergence control:
-   not examined by anybody.
-8. **X-001** (replication of the theory audit), ENG-RES-0006 §2 (the pricing reformulation, stated
-   there as unimplemented analysis), ENG-MSG-0003 §5 (the tie pitfall of literal runs), and the
-   entropy *traversal* numbers `m(δ)`: not examined.
+1. **Nine lattice optima are still vouched for by HiGHS alone** (`n = 16`: `ε = 0, N/20`; `n = 17`: `ε = 0`;
+   `n = 18`: `ε = 0, 1, N/20, N/10`; `n = 19`: `N/10`; `n = 22`: `N/4`): my certified branch and bound did not
+   finish on them in 240 s.  One of them (`n = 16`, `ε = 0`) I re-solved with HiGHS in my own
+   formulation and with their function (38 in both).
+2. **Whether CP-SAT proves any lattice optimum on its own.**  With one worker it does not get near
+   (§3.2 (d)); the configuration behind the stored record (8 workers, 4 cores, no time limit,
+   uncommitted code) is out of my reach under the one-core rule.
+3. **The ten bracket lower ends that are solver bounds** (lattice, `n = 19…23`) and the corresponding
+   generic ones (`n = 11, 12`): neither certified nor refuted.  None of the open brackets was closed.
+4. **Class tables beyond my enumeration** (`n = 23, 24`): the totals agree with the published
+   self-avoiding-walk counts, the split into classes is unreplicated; everything stated about covers
+   at those sizes is relative to the stored tables.
+5. **Single-flip constants `n = 15, 16`** and the exhaustive validity of `c^{sf}` as a Hamming envelope
+   (ENG-RES-0002 §6; mode B of `dia_flip.c`): not replicated; `dia_flip.c` was not read.
+6. **Generic covers at `n = 12`**: consistency of bounds only (§3.1); the upper ends of all generic
+   brackets and the covers behind the exact values cannot be checked, because they are not stored.
+7. **The 253 exact ties at `n = 13`** (and the 4 at `ε = N/4`) were identified by the gap between `10⁻⁹`
+   and the nearest non-tie (`5·10⁻⁷`), not re-evaluated one by one at high precision; by G2 they are
+   identities if they are ties at all.
+8. **X-005: the correctness of the evaluator** (is the mean run the algorithm of Theorem 11.56; is its
+   cost formula the number of evaluations) — workstream R6; my re-runs and my control of §3.7 inherit
+   it.  **X-006** was recounted from its stored file, not re-run.  Fibre offsets that vary with the
+   outer point (non-product instances), partial shells other than cylinders, other design parameters,
+   and a convergence control at `n ≥ 64 000`: examined by nobody.
+9. **X-001** (replication of the theory audit), ENG-RES-0006 §2 (the pricing reformulation, stated
+   there as unimplemented analysis), ENG-MSG-0003 §5 (the tie pitfall of literal runs), the
+   farthest-point traversal numbers `m(δ)`, and the upper sides of the entropy table: not examined.
 
 ---
 
@@ -622,9 +856,11 @@ No other search was made; in particular I did not search for prior art on any en
    14 (nearest non-tie `2·10⁻⁸`).  Cost: small — the float code already decides everything correctly
    up to 12 torsions.
 2. **Certify the optima that rest on branch and bound.**  A branch and bound whose every pruned node
-   carries an exact-integer LP-dual certificate (prototype: `own_certified_bb.py`, see §3.2) makes an
-   optimum independent of any solver's tolerances and leaves a tree that a third party can check in
-   linear time.  Apply it to the 22 cells and to the ten solver-trusted bracket ends.
+   carries an exact-integer LP-dual certificate (prototype: `own_certified_bb.py`, §3.2 (h): it closes
+   13 of the 22 cells in seconds) makes an optimum independent of any solver's tolerances and leaves a
+   tree that a third party can check in linear time.  Finish the nine remaining cells (a stronger
+   branching rule or cover cuts will be needed at LP gap 2), then the ten solver-trusted bracket ends
+   and the seven entropy values of §3.2 (g).
 3. **Attack X-005 where its family ends**: (a) product structure — instances whose fibre offset
    `t₀(a)` is anti-correlated with `W(a)` (low fibres at the bottom of their trivial bracket, high ones
    at the top), which the reduction of ENG-RES-0008 §5 does not cover and which need the pair law
@@ -646,14 +882,16 @@ optimality, and re-running `analyse_table` at `a2f6dc7` for `n = 14` never calls
 either (a) add an option `independent=True` that runs every solver to its own conclusion and stores,
 per solver, `size`, `proved`, `bound`, wall time and the number of workers, regenerate the rows
 `n = 1…18` with the committed code and state the commit in the ledger; or (b) withdraw the two
-sentences and say "HiGHS; cross-checked by the solver-independent certificate in 198 of 216 cells".
+sentences and say "HiGHS; cross-checked by a solver-independent certificate in 198 of the 216 cells"
+(209 with the certified branch and bound of §3.2 (h)).
 *Validation:* `git show <commit>:…/lattice_Sc12.json` has the same keys in every row; a third party
 running the stated command obtains the stored `solvers` field.  *Resources:* minutes on 4 cores.
 
-**R7-ENG-2 (wording; trivial).**  In ENG-RES-0002 §2, ENG-RES-0007 §3 and `DEAD_ENDS.md` ED-2/ED-3 a
+**R7-ENG-2 (wording; trivial).**  In ENG-RES-0002 §2, ENG-RES-0007 §3 and `DEAD_ENDS.md` ED-3 a
 bracket is described as `[certified lower bound, verified cover]`.  In 10 of the 25 lattice brackets
-and (at least) 5 of the 6 generic brackets at 11 torsions the lower end is the MILP solver's bound at
-the time limit, one to three above the certified one.  *Request:* print both
+and in 5 of the 6 generic brackets at each of 11 and 12 torsions the lower end is the MILP solver's
+bound at the time limit, one to three above the certified one.  (For the entropy brackets of
+ENG-RES-0002 §4 the description is accurate.)  *Request:* print both
 (`[certified | solver, cover]`), store both in `generic_Sc16.json` (it has a single `lower`), and store
 the covers of the generic chain as the lattice file does (`centres` as torsion words or class keys),
 so that the upper ends are checkable certificates.
@@ -679,12 +917,18 @@ searches in 468 cells.  Replace "the excess decays about like `1/√n`" in the d
 shows (effective exponent 0.63–0.76; compatible with `A/√n + B/n`; exponent ½ not established).  Run
 the convergence control (5× budget, two more seeds) at `n ∈ {64 000, 128 000}`, `φ ∈ {0.50, 0.55}`,
 `u ∈ {½, 1, 2}` — 12 cells; *expected output:* change of the worst case `≤ 0.001·na` or a new
-maximiser; *resource estimate:* about 12 × 5 × (the present task time at those sizes) ≈ 100
-core-hours; *stopping condition:* one pass.  And evaluate at least one family with non-ball level sets
+maximiser; *resource estimate:* with budgets 12 000 / 6 000 and two seeds, from the stored task times
+(about 900 s and 1 160 s per cell at the present budgets): roughly 45 core-hours; *stopping condition:*
+one pass.  And evaluate at least one family with non-ball level sets
 (the cylinders of §3.7 cost nothing to add) so that "up to partial shells" is a tested statement.
 
-**R7-ENG-5 (optional).**  Certified branch and bound for the 22 cells of §3.2 (c) and the ten bracket
-ends; store the certificate.
+**R7-ENG-5 (certify what the solver only asserts).**  For the lattice cells whose optimum rests on a
+MILP solver's search (§3.2 (c), (h)) and for the ten bracket ends that are solver bounds, run a branch
+and bound whose pruned nodes carry exact-integer dual certificates (prototype `own_certified_bb.py`:
+13 cells closed in 0.2–38 s each on one core) and store the tree — fixed-in / fixed-out sets and the
+integer weight vector of every leaf — so that a third party can check optimality in linear time.
+*Stopping condition:* the cells of this report that did not finish in 240 s (LP gap 2 at
+`n = 16…18`; `(19, N/10)`); a strong-branching rule or cover cuts will be needed there.
 
 ### To the theory division
 
@@ -699,6 +943,6 @@ function of the tail function …".  Proposition T(d) of §2.3 here quantifies "
 probability is within a factor `n_o + 1` of a monotone radial one.
 
 **R7-THY-2.**  Where the theory report quotes "in `7 095 840` mean runs no claim of Theorem 11.56 was
-violated" (Proposition 11.57, remark (1) at `40c5bd7`), add that these are objective evaluations of an
+violated" (at `40c5bd7`: §11.19, Remarks (1) after the table "The picture for the cube class"), add that these are objective evaluations of an
 optimiser at the expectation level (§2.4, S1) and that "the excess … decreases with `n`, consistently
 with the `O(√n)` correction" is an upper-bound statement: the measured decay is faster (S2).

@@ -433,6 +433,28 @@ was done.
    What remains weak: nothing in the count is machine-checked; the exponent `h` is a
    limit with no rate; three levels have never been executed beyond toy size.
 
+32. **Review and replication of the engineering branch: every number stands; four
+   findings about the record** ([SCI-REV-0008](messages/science/SCI-REV-0008.md);
+   `docs/science/workstreams/R7_REPORT.md`).  At `a2f6dc7`.  Recomputed with code written
+   from the model definitions and identical: the lattice class tables for 1–22 torsions,
+   the off-lattice chain (classes for 5–14 torsions, covers for 5–10 and the exact cells
+   at 11, sixty entropy numbers), the Harper closed form for the uniform cube (re-derived;
+   all 52 stored rows — re-run by the coordinator).  All 288 published lattice covers are
+   valid certificates, and **254 of the 263 published optima are certified here without
+   trusting any solver's search** (exact LP duality; a branch and bound with an exact
+   certificate at every pruned node).  **Findings:** (M1) "two solvers agree on every
+   cover" cannot be regenerated — the committed driver stops at the first solver that
+   proves optimality, and the stored rows for 1–18 torsions were not written by it
+   (verified by the coordinator on the engineering branch); (M2) the off-lattice chain is
+   exactly decidable — squared distances are rational polynomials in `cos θ` — so the
+   published numbers are exact, but at 13 torsions, the announced next size, one cell
+   has 253 exact ties: floating point with a tolerance is at its limit there; ten
+   "certified" lower ends of open brackets are solver bounds; "the excess decays like
+   `1/√n`" is not what the data show (effective exponent 0.63–0.76); the "7 095 840 mean
+   runs" are objective evaluations of 2 624 optimiser searches.  Not examined: the class
+   decomposition at 23–24 torsions, CP-SAT's proofs, nine optima that rest on HiGHS,
+   X-001.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -474,6 +496,7 @@ was done.
 | [SCI-RES-0006](responses/science/SCI-RES-0006.md) | checkpoint 30 | response to THY-RES-0006 §5.2 (§11.29); answer to our SCI-REQ-0001 Q2(a) | theory (copy engineering) | workstream F: compensation lemma; Theorems A, B (class exponents unchanged with a one-body oracle and a field, every `n`); instance-wise bracket; `k = 2`; tolerances; comparison with Proposition 11.109; requests F-T1…F-T3 | completed for the class |
 | [SCI-MSG-0015](messages/science/SCI-MSG-0015.md) | checkpoint 31 | measurement | theory and engineering | workstream P2: class constants of GBn2 against ff14SB in rotamer variables on a fixed backbone; which interface has a real instance; a prediction of SCI-RES-0002 refuted for charged side chains; requests P2-T1…T4, P2-E1, P2-E2 | completed |
 | [SCI-REV-0007](messages/science/SCI-REV-0007.md) | checkpoint 32 | independent review and replication | theory (copy engineering) | workstream R6: the cost of the nested adaptive algorithm (theory report §§11.18–11.19) stands; eight minor points; a certified finite-`n` separation; a sampler bias; requests R6-T1…T5, R6-E1…E3 | completed |
+| [SCI-REV-0008](messages/science/SCI-REV-0008.md) | checkpoint 33 | independent review and replication | engineering (copy theory §5) | workstream R7: the engineering results at `a2f6dc7` — class tables, covers, Harper closed form replicated; 254 of 263 optima certified without a solver's search; M1 (two-solver validation not regenerable), M2 (floating point at its limit at 13 torsions; exact arithmetic over `ℚ[cos θ]`); wording of "certified", of the `1/√n` decay and of the mean runs; requests R7-ENG-1…5, R7-THY-1, -2 | completed |
 
 ## Responses and requests received
 

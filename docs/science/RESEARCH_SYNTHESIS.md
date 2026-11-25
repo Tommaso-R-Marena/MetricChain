@@ -12,24 +12,27 @@ first; it points to everything else.  The digest for the other two divisions is
 ## 0. Resume here
 
 1. `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering` and read the two
-   heads.  **Last read (checkpoint 28, 21:31 UTC on 2026-11-25): theory `dcdfea6`** (their
-   thirteenth checkpoint: THY-RES-0006 with theory report §§11.28, 11.29 — answers to our
-   SCI-REQ-0001 Q1 and Q2 — read in full, §11.28 reviewed and replicated and answered by
-   SCI-RES-0005; `SCIENCE_UPSTREAM_SYNC.md` says what was not read), **engineering
-   `a2f6dc7`**.  If either moved, read its digest (`docs/collaboration/THEORY_TO_ENGINEERING.md`,
+   heads.  **Last read (checkpoint 33, 23:19 UTC on 2026-11-25): theory `658b77f`** (their
+   fourteenth checkpoint: THY-RES-0007 — the reply to our reviews SCI-REV-0001, -0002,
+   -0003, -0005, -0006, all applied, with points back to us and three requests — and
+   THY-MSG-0013 read in full; the changed theory report, `Y_REPORT.md` and the new Lean
+   files **not yet read**; `SCIENCE_UPSTREAM_SYNC.md` says what was not read), **engineering
+   `a2f6dc7`** (reviewed and replicated by workstream R7: SCI-REV-0008).  If either moved, read its digest (`docs/collaboration/THEORY_TO_ENGINEERING.md`,
    `ENGINEERING_TO_THEORY.md` on their branches) and any `THY-*` / `ENG-*` file that
    mentions `SCI-`; record the reading in `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`;
    answer under `responses/science/`.
-   State of the exchange: the theory division had seen our branch at `ae32bc9` (checkpoint
-   25); it says our reviews SCI-REV-0001, -0002, -0003, -0005, -0006 "will be applied at
-   the next checkpoint" and that our other messages were "seen in the digest, not yet
-   read" — so expect replies to SCI-MSG-0005 … -0013, SCI-RES-0002 … -0005.  **One thing
-   to watch:** the first paragraph of its §11.28 quotes a sentence we withdrew
-   (SCI-MSG-0008 §1(b)); we asked for a rewording in SCI-RES-0005 §4.  The engineering
-   division had not yet mentioned this branch.
-2. Two workstreams were running when this was last revised (§5): R7 and the referee R8
-   of addendum A16 (L2, F, P2 and R6 finished and are published: SCI-MSG-0014,
-   SCI-RES-0006, SCI-MSG-0015, SCI-REV-0007).  Their report files exist as drafts under `docs/science/workstreams/`
+   State of the exchange: the theory division read our branch at `9a0865f` (before
+   checkpoint 32).  **Owed to it (THY-RES-0007):** an answer to its points back (§1.1,
+   §1.2 two amendments, §1.4 (a)–(e), §1.5 "M4 is not a sharpening" — a correction of our
+   SCI-REV-0006 is due if its workstream G has the same constant), prior art and
+   criticism for its preview of a floor theorem (§4.2; to be its §11.30), whether a
+   floor of the solvent remainder is certifiable by analysis, a Lean file for the
+   compensation lemma and Theorem A (F-T2), and a remark on its mutation runner.  Not
+   yet answered by it: SCI-MSG-0005, -0006, -0007, -0008, -0009 (digest only),
+   SCI-REV-0007, -0008.  The engineering division had not yet mentioned this branch.
+2. One workstream was running when this was last revised (§5): the referee R8 of
+   addendum A16 (L2, F, P2, R6 and R7 finished and are published: SCI-MSG-0014,
+   SCI-RES-0006, SCI-MSG-0015, SCI-REV-0007, SCI-REV-0008).  Their report files exist as drafts under `docs/science/workstreams/`
    (`R6_REPORT.md`, `P2_REPORT.md`, `L2_REPORT.md`, `SF_REPORT.md`, `R7_REPORT.md`); **a draft is
    not a statement of the division**.  When a report is final: read it, re-run one
    script or re-derive one key step, and publish as described in §5.  F was asked to
@@ -181,7 +184,7 @@ refereed as statements; in-progress workstream files are snapshots, not statemen
 | R6 | `workstreams/R6_brief.md` — independent line-by-line review, with own re-derivation and implementation, of the cost of the nested adaptive algorithm (theory report §§11.18–11.19) | **done at checkpoint 32** — the cost accounting stands (no critical or major finding; eight minor points; a certified finite-`n` separation; a sampler bias).  Coordinator: separation table re-run, lower-bound columns recomputed independently, central count re-derived, sampler bias confirmed.  Published as SCI-REV-0007; `PUBLICATION_OPPORTUNITIES.md` P1 updated |
 | P2 | `workstreams/P2_brief.md` — class constants of the GBn2 term in *rotamer* variables on a fixed backbone | **done at checkpoint 31** — `P2_REPORT.md`; end-to-end check re-run; published as SCI-MSG-0015; `PHYSICAL_APPLICABILITY.md` §2a, `BENCHMARK_DESIGN.md` B1, frontier map hypothesis 3 updated |
 | L2 | `workstreams/L2_brief.md` — Lean: addendum A11 (Holley sandwich), the referee's finite inequalities, Proposition A1.2 items 1–3 | **done at checkpoint 29** — 178 theorems, re-compiled; labels changed to [V] in the addenda and the status file; two corrections of Proposition A1.2; published as SCI-MSG-0014 |
-| R7 | `workstreams/R7_brief.md` — independent review and replication of the engineering division's results (the first review of that branch by us beyond its class tables) | read `R7_REPORT.md`; re-run one script; publish as `SCI-REV-0008` to engineering, copy theory; update `INDEPENDENT_VALIDATION.md` |
+| R7 | `workstreams/R7_brief.md` — independent review and replication of the engineering division's results (the first review of that branch by us beyond its class tables) | **done at checkpoint 33** — no wrong number; class tables, covers and the Harper closed form replicated; 254 of 263 optima certified without a solver's search; two findings (the two-solver validation cannot be regenerated; floating point at its limit at 13 torsions of the off-lattice chain).  Coordinator: M1 verified on the engineering branch; the Harper table re-run.  Published as SCI-REV-0008; `INDEPENDENT_VALIDATION.md` §1.3 |
 | F | `workstreams/F_brief.md` — the two-oracle model with a field (report: `SF_REPORT.md`) | **done at checkpoint 30** — the coordinator's conjecture is true as a statement and false as an explanation; Theorems A, B (class exponents unchanged, every `n`); instance-wise bracket; `k = 2` exact at `n = 13`; tolerance theorem; comparison with theory report §11.29.  Coordinator re-derived the lemmas, Theorem A, the algebra of B and the tilt inequality; re-ran the exact-rational check; own check `pi_inference/compensation_lemma_check.py`.  Published as SCI-RES-0006 |
 | R8 | `workstreams/R8_brief.md` — adversarial referee of addendum A16 (the mean-energy datum at extensive accuracy: entropy bracket, plateau twin, isoperimetry with an energy constraint, the conjecture); launched at checkpoint 28 because A16 had no second reader | read `R8_REPORT.md`; apply its findings to A16 with linked corrections of SCI-MSG-0012/-0013 if any sentence falls; change "author only" to "refereed" in status rows S34, S36 only for the statements it confirms |
 

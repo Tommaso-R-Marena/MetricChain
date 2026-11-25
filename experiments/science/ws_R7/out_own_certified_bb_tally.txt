@@ -1,0 +1,23 @@
+cells attempted: 22 | certified by exact branch and bound: 13 | not finished: 9
+  PROVED >= 25 n = 14 L=1,eps=1 nodes 598 s 3.7 
+  PROVED >= 25 n = 14 L=1,eps=1/10*N nodes 598 s 3.7 L=1,eps=1
+  PROVED >= 33 n = 15 L=1,eps=0 nodes 99 s 1.6 
+  PROVED >= 27 n = 15 L=1,eps=1 nodes 12 s 0.2 
+  PROVED >= 33 n = 15 L=1,eps=1/20*N nodes 99 s 1.6 L=1,eps=0
+  PROVED >= 27 n = 15 L=1,eps=1/10*N nodes 12 s 0.2 L=1,eps=1
+  PROVED >= 30 n = 16 L=1,eps=1 nodes 8 s 0.3 
+  PROVED >= 30 n = 16 L=1,eps=1/10*N nodes 8 s 0.3 L=1,eps=1
+  PROVED >= 34 n = 17 L=1,eps=1 nodes 493 s 33.7 
+  PROVED >= 34 n = 17 L=1,eps=1/20*N nodes 493 s 33.7 L=1,eps=1
+  PROVED >= 28 n = 17 L=1,eps=1/10*N nodes 225 s 14.8 
+  PROVED >= 22 n = 19 L=1,eps=1/4*N nodes 8 s 1.2 
+  PROVED >= 24 n = 20 L=1,eps=1/4*N nodes 207 s 37.7 
+  open   target 38 n = 16 L=1,eps=0 nodes 11226 
+  open   target 38 n = 16 L=1,eps=1/20*N nodes 11226 L=1,eps=0
+  open   target 43 n = 17 L=1,eps=0 nodes 4800 
+  open   target 48 n = 18 L=1,eps=0 nodes 2874 
+  open   target 39 n = 18 L=1,eps=1 nodes 3001 
+  open   target 39 n = 18 L=1,eps=1/20*N nodes 3001 L=1,eps=1
+  open   target 31 n = 18 L=1,eps=1/10*N nodes 2702 
+  open   target 35 n = 19 L=1,eps=1/10*N nodes 2278 
+  open   target 26 n = 22 L=1,eps=1/4*N nodes 520 

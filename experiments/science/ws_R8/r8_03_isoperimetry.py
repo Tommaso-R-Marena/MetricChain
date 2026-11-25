@@ -19,7 +19,7 @@ Parts
     upper bounds that decrease to the optimum; a feasible point on the segment to t = 1 gives a
     lower bound.  All supports of Q_3; all supports of Q_4 up to the 384 symmetries; random
     supports in Q_5, Q_6.  No assumption on the form of the optimiser.
- C  exhaustive grid: every u-Lipschitz function on Q_3 with values in (u/4)Z and on Q_4 with
+ C  exhaustive grid: every u-Lipschitz function on Q_3 with values in (u/6)Z and on Q_4 with
     values in (u/2)Z that vanishes at one vertex (WLOG vertex 0), hills and dips alike:
        U_g <= 0  =>  Z_g <= Zpl(#{g != 0}, U_g);        U_g >= 0  =>  Z_g <= 2^n.
  D  random general members with dips and hills on random supports, n = 5..10.
@@ -155,66 +155,98 @@ def part_A(quick):
 
 
 # ---------------------------------------------------------------- part B
-def solve_convex(cube, D, U0, u, target=None, maxit=300, rtol=1e-8):
-    """max sum t  s.t. t=1 off D, class cone, phi(t) <= 0.  Returns (UB, LB, iterations).
-    UB: value of an outer (cutting-plane) LP relaxation -- a rigorous upper bound on the optimum
-    up to the LP tolerance.  LB: value of a feasible member.  The cuts are gradient cuts of the
-    convex constraint; the first ones are taken at clipped-level profiles on D (any point gives
-    a valid cut, so this assumes nothing about the optimiser).
+def solve_convex(cube, D, U0, u, target=None, maxit=60, rtol=1e-8):
+    """max sum t  s.t. t=1 off D, class cone, phi(t) <= 0  (a convex programme).
+    Returns (UB, LB, number of LPs).
+      UB  value of an outer LP relaxation (gradient cuts of the convex constraint): a rigorous
+          upper bound on the optimum up to the LP tolerance (1e-10), whatever the cut points are;
+      LB  value of a feasible member (checked: class constraints and phi <= 0).
+    Method: a few Kelley iterations, then a local solver (SLSQP in the variables s = ln t; the
+    problem is convex in t, so every KKT point is the global optimum) to get a near-optimal
+    member, a cut at that member, and Kelley iterations until UB - LB <= rtol*UB.  No assumption
+    on the form of the optimiser is made anywhere: the SLSQP start is the last LP vertex.
     If target is given, stops as soon as UB <= target (1 + rtol)."""
+    from scipy.optimize import minimize
     idx = np.where(D)[0]
     pos = {int(v): k for k, v in enumerate(idx)}
     m = len(idx)
     r = cube.rho(D).astype(float)
-    A = []; b = []
+    A = []; b = []          # t(p) - e^u t(q) <= rhs      (LP, in t)
+    G = []; hvec = []       # s(p) - s(q) <= u            (SLSQP, in s = ln t)
     for (x, y) in cube.edges:
-        for (p, q) in ((x, y), (y, x)):          # t(p) - e^u t(q) <= 0
-            row = np.zeros(m); rhs = 0.0
-            if p in pos: row[pos[p]] += 1.0
-            else: rhs -= 1.0
-            if q in pos: row[pos[q]] -= math.exp(u)
-            else: rhs += math.exp(u)
+        for (p, q) in ((x, y), (y, x)):
             if p in pos or q in pos:
-                A.append(row); b.append(rhs)
-    A = np.array(A); b = np.array(b)
+                row = np.zeros(m); rhs = 0.0; grow = np.zeros(m)
+                if p in pos: row[pos[p]] += 1.0; grow[pos[p]] += 1.0
+                else: rhs -= 1.0
+                if q in pos: row[pos[q]] -= math.exp(u); grow[pos[q]] -= 1.0
+                else: rhs += math.exp(u)
+                A.append(row); b.append(rhs); G.append(grow); hvec.append(u)
+    A = np.array(A); b = np.array(b); G = np.array(G); hvec = np.array(hvec)
     bounds = [(math.exp(-u * r[v]), math.exp(u * r[v])) for v in idx]
     noff = cube.N - m
     cuts_A = []; cuts_b = []
+    phi_of = lambda t: float((t * np.log(t)).sum() + U0 * (t.sum() + noff))
     def add_cut(t):
-        phi = float((t * np.log(t)).sum() + U0 * (t.sum() + noff))
+        ph = phi_of(t)
         grad = np.log(t) + 1.0 + U0
-        cuts_A.append(grad[None, :]); cuts_b.append(float(grad @ t - phi))
-        return phi
-    rD = r[idx]
-    for c in np.linspace(0.0, u * rD.max(), 9)[1:]:
-        add_cut(np.exp(np.minimum(c, u * rD)))
-    UB = np.inf; LB = cube.N * 1.0       # t = 1 is feasible since U0 <= 0
-    for it in range(maxit):
-        AA = np.vstack([A] + cuts_A)
-        bb = np.concatenate([b, np.array(cuts_b)])
-        res = linprog(-np.ones(m), A_ub=AA, b_ub=bb, bounds=bounds, method="highs", options=HOPT)
+        cuts_A.append(grad[None, :]); cuts_b.append(float(grad @ t - ph))
+        return ph
+    def pullback(sv):
+        """largest lam in [0,1] with lam*sv feasible (class constraints scale; phi by bisection)"""
+        mx = float(np.max(G @ sv)) if len(G) else 0.0
+        lam1 = min(1.0, u / mx) if mx > u else 1.0
+        if phi_of(np.exp(lam1 * sv)) <= 0:
+            return lam1 * sv
+        lo, hi = 0.0, lam1
+        for _ in range(80):
+            mid = 0.5 * (lo + hi)
+            if phi_of(np.exp(mid * sv)) <= 0: lo = mid
+            else: hi = mid
+        return lo * sv
+    state = {"UB": np.inf, "LB": cube.N * 1.0, "nlp": 0}
+    def lp():
+        res = linprog(-np.ones(m), A_ub=np.vstack([A] + cuts_A) if cuts_A else A,
+                      b_ub=np.concatenate([b, np.array(cuts_b)]) if cuts_b else b,
+                      bounds=bounds, method="highs", options=HOPT)
         if res.status != 0:
             raise RuntimeError(res.message)
+        state["nlp"] += 1
+        state["UB"] = min(state["UB"], -res.fun + noff)
         t = res.x
-        UB = min(UB, -res.fun + noff)
-        phi = add_cut(t)
-        if phi <= 0:
-            LB = max(LB, t.sum() + noff)
-        else:
-            lo, hi = 0.0, 1.0
-            for _ in range(60):
-                mid = 0.5 * (lo + hi)
-                tm = 1 + mid * (t - 1)
-                if (tm * np.log(tm)).sum() + U0 * (tm.sum() + noff) <= 0: lo = mid
-                else: hi = mid
-            tf = 1 + lo * (t - 1)
-            LB = max(LB, tf.sum() + noff)
+        ph = add_cut(t)
+        sf = pullback(np.log(t))
+        tf = np.exp(sf)
+        if tf.sum() + noff > state["LB"]:
+            state["LB"] = tf.sum() + noff
+        if ph > 0:
             add_cut(tf)
-        if target is not None and UB <= target * (1 + rtol):
-            return UB, LB, it + 1
-        if UB - LB <= rtol * max(1.0, UB) or phi <= 1e-11:
-            return UB, LB, it + 1
-    return UB, LB, maxit
+        return t, sf
+    def done():
+        if target is not None and state["UB"] <= target * (1 + rtol):
+            return True
+        return state["UB"] - state["LB"] <= rtol * max(1.0, state["UB"])
+    sf = None
+    for it in range(4):
+        t, sf = lp()
+        if done():
+            return state["UB"], state["LB"], state["nlp"]
+    # local solver from the last feasible point
+    cons = [{"type": "ineq", "fun": lambda sv: hvec - G @ sv, "jac": lambda sv: -G},
+            {"type": "ineq", "fun": lambda sv: -phi_of(np.exp(sv)),
+             "jac": lambda sv: -(np.exp(sv) * (sv + 1.0 + U0))}]
+    res = minimize(lambda sv: -np.exp(sv).sum(), sf, jac=lambda sv: -np.exp(sv), constraints=cons,
+                   method="SLSQP", options={"maxiter": 400, "ftol": 1e-15})
+    sp = pullback(res.x)
+    tp = np.exp(sp)
+    if tp.sum() + noff > state["LB"]:
+        state["LB"] = tp.sum() + noff
+    add_cut(tp)
+    for it in range(maxit):
+        t, sf = lp()
+        if done():
+            break
+    return state["UB"], state["LB"], state["nlp"]
 
 
 def canon_supports(cube):
@@ -383,41 +415,63 @@ def zpl_batch(cube, N, U0s, u):
 def part_C(quick):
     print("== C: exhaustive grid of general members (dips and hills), vanishing at vertex 0 ==")
     ok = True
-    for (n, q) in (((3, 4), (4, 2)) if not quick else ((3, 2), (4, 1))):
+    plan = (((3, 6, (0.6, 1.0, 2.5)), (4, 2, (1.0, 2.5))) if not quick else ((3, 2, (0.6, 1.0, 2.5)), (4, 1, (1.0, 2.5))))
+    for (n, q, us) in plan:
         cube = Cube(n)
         half = cube.N // 2 + (2 if n == 4 else 0)
         order, posn, P = grid_partial(cube, q, half)
-        us = (0.6, 1.0, 2.5)
-        stat = {u: dict(ntest=0, nviol=0, worst=-np.inf, att=0, pos=0) for u in us}
+        stat = {u: dict(ntest=0, nviol=0, worst=-np.inf, att=0, pos=0, flagged=0) for u in us}
+        # screening tables: for every support size N, the plateau on D* at K levels
+        K = 3001
+        tabs = {}
+        for u in us:
+            for N in range(1, cube.N):
+                r = cube.rho(cube.final_segment(N)).astype(float)
+                cs = np.linspace(0.0, u * r.max(), K)
+                gl = -np.minimum(cs[:, None], u * r[None, :])
+                wl = np.exp(-gl)
+                Zl = wl.sum(axis=1); Ul = (wl * gl).sum(axis=1) / Zl
+                tabs[(u, N)] = (Ul, Zl)          # Ul decreasing, Zl increasing in the level
         total = 0
-        chunk = 4000
+        chunk = 1500 if n == 4 else 400
         cols = [posn[v] for v in range(cube.N)]
-        for a in range(0, len(P), chunk):
-            F = extend(cube, q, order, posn, P[a:a + chunk], half, cube.N)[:, cols]
+        for a0 in range(0, len(P), chunk):
+            F = extend(cube, q, order, posn, P[a0:a0 + chunk], half, cube.N)[:, cols]
             total += len(F)
             Nsup = (F != 0).sum(axis=1)
             for u in us:
-                g = F.astype(float) * (u / q)
+                g = F.astype(np.float64) * (u / q)
                 w = np.exp(-g)
                 Z = w.sum(axis=1)
                 U = (w * g).sum(axis=1) / Z
+                del w, g
                 st = stat[u]
                 pos = U > 0
                 st["pos"] += int(pos.sum())
                 st["nviol"] += int((Z[pos] > cube.N * (1 + 1e-12)).sum()); st["ntest"] += int(pos.sum())
                 for N in range(1, cube.N):
-                    sel = (~pos) & (Nsup == N)
-                    if not sel.any(): continue
-                    Zpl = zpl_batch(cube, N, U[sel], u)
-                    rel = (Z[sel] - Zpl) / Zpl
-                    st["worst"] = max(st["worst"], float(rel.max()))
-                    st["nviol"] += int((rel > 1e-9).sum()); st["ntest"] += int(sel.sum())
-                    st["att"] += int((np.abs(rel) < 1e-9).sum())
+                    sel = np.where((~pos) & (Nsup == N))[0]
+                    if len(sel) == 0: continue
+                    Ul, Zl = tabs[(u, N)]
+                    # largest table level whose mean energy is still >= U_g : an under-estimate of Zpl
+                    k = np.searchsorted(-Ul, -U[sel], side="right") - 1
+                    k = np.clip(k, 0, K - 1)
+                    Zlow = Zl[k]
+                    st["ntest"] += len(sel)
+                    fl = sel[Z[sel] > Zlow * (1 - 1e-12)]
+                    st["flagged"] += len(fl)
+                    if len(fl):
+                        Zpl = zpl_batch(cube, N, U[fl], u)
+                        rel = (Z[fl] - Zpl) / Zpl
+                        st["worst"] = max(st["worst"], float(rel.max()))
+                        st["nviol"] += int((rel > 1e-9).sum())
+                        st["att"] += int((np.abs(rel) < 1e-9).sum())
         print(f"  Q_{n}, values in (u/{q})Z: {total} functions")
         for u in us:
             st = stat[u]
-            print(f"     u={u}: tested {st['ntest']}; violations {st['nviol']}; largest (Z_g - Zpl)/Zpl = {st['worst']:+.2e}; "
-                  f"members attaining the bound: {st['att']}; with U_g > 0: {st['pos']}")
+            print(f"     u={u}: tested {st['ntest']}; violations {st['nviol']}; passed the screen {st['ntest']-st['flagged']}, "
+                  f"resolved exactly {st['flagged']}: largest (Z_g - Zpl)/Zpl = {st['worst']:+.2e}; "
+                  f"members attaining the bound: {st['att']}; with U_g > 0: {st['pos']}", flush=True)
             ok &= st["nviol"] == 0
     return ok
 
