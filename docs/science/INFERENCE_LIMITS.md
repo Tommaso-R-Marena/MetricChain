@@ -704,6 +704,7 @@ closed.
 | A14 | the robust range of the helix content of a Zimm–Bragg chain | [N], exact transfer matrices; reading [H] |
 | A15 | what a scattering curve of finite range and precision determines, model-free (11–15 beads) | [N], exact linear programmes |
 | A16 | a thermodynamic datum at extensive accuracy: the entropy bracket (the datum alone gives `ln Z` within `n·KL(σ_u‖½)/2`); the window in which it removes an exponential cost; the plateau twin (a lower bound below that accuracy); a conjecture for the exact exponent | [P], author only; exact sums to `n = 2000` |
+| A17 | certifying `ln Z` against a model that can be sampled: the theory division's floor theorem is the end `p = ∞` of a family — an a-priori bound `κ` on a Rényi divergence of order `p > 1` of the true ensemble from the model costs `e^{κ}/ε^{p/(p−1)}` with a hint; a Kullback–Leibler bound `e^{Θ(κ/ε)}`; moments of the remainder energy certify nothing; first-order constants on a product reference give `D_2 ≤ Σc_i²/2` | [P], author only; numerical checks of every lemma; prior art not yet searched |
 
 **The theorem within reach (referee's §9) — written as one statement in addendum A12, and
 sent as SCI-MSG-0011; its limit at extensive accuracy is addendum A16:** *oracle

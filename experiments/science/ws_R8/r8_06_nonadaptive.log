@@ -46,3 +46,26 @@
      raised cones (B)        :  45 instances, smallest needed unexplored radius  183  (exponent 0.0075)
      flat + plateau basin    :  40 instances, smallest needed unexplored radius  192  (exponent 0.0037)
      soft cones v<u          :   3 instances, smallest needed unexplored radius  185  (exponent 0.0065)
+     two-slope cones         :   5 instances, smallest needed unexplored radius  194  (exponent 0.0031)
+     worst family: raised cones (B) at r = 183;  guess rho3 n = 183.9
+  n=400 u=2.0 eps1=0.4a=0.1311: guess: unexplored radius rho3 n = 133.0 (exponent 0.0572); no datum: 125.1 (0.0719)
+     cone                    :   1 instances, smallest needed unexplored radius  199  (exponent 0.0018)
+     truncated cones (A)     :  39 instances, smallest needed unexplored radius  131  (exponent 0.0670)
+     raised cones (B)        :  75 instances, smallest needed unexplored radius  133  (exponent 0.0634)
+     flat + plateau basin    :  40 instances, smallest needed unexplored radius  141  (exponent 0.0502)
+     soft cones v<u          :   3 instances, smallest needed unexplored radius  136  (exponent 0.0583)
+     two-slope cones         :   5 instances, smallest needed unexplored radius  145  (exponent 0.0442)
+     worst family: truncated cones (A) at r = 131;  guess rho3 n = 133.0
+  n=300 u=4.0 eps1=0.4a=0.2412: guess: unexplored radius rho3 n = 62.5 (exponent 0.1815); no datum: 50.9 (0.2379)
+     cone                    :   1 instances, smallest needed unexplored radius  149  (exponent 0.0025)
+     truncated cones (A)     :  49 instances, smallest needed unexplored radius   62  (exponent 0.1922)
+     raised cones (B)        : 100 instances, smallest needed unexplored radius   66  (exponent 0.1748)
+     flat + plateau basin    :  40 instances, smallest needed unexplored radius   63  (exponent 0.1878)
+     soft cones v<u          :   3 instances, smallest needed unexplored radius   83  (exponent 0.1117)
+     two-slope cones         :   5 instances, smallest needed unexplored radius   72  (exponent 0.1506)
+     worst family: truncated cones (A) at r = 62;  guess rho3 n = 62.5
+SUMMARY pair exists with equal energies and gap > eps: True   time 1730s
+
+real	28m50.540s
+user	28m36.712s
+sys	0m0.292s

@@ -40,6 +40,7 @@ where a script is named.  Revised after workstreams P (a real force field) and K
 | H8 | tractable cuts (boxes, counting statistics, small decision trees) certify a useful fraction of barrier heights on chains | science (workstream K) |
 | H9 | with a mean-energy datum, uniform sampling plus the datum's bracket certifies `ln Z` at the cost `2ⁿ/|B(n,R(ε))|` on landscapes that are flat outside a small set, and nothing hidden there does better than a plateau twin | science (addendum A16: Lemma A16.5, Theorem A16.6; author only until workstream R8 reports) |
 | H10 | the robust range of a free-energy difference between two macrostates is certified by a transport plan from one macrostate to the other, checkable site by site for one-coordinate macrostates | theory (theory report §11.28, Theorems 11.105, 11.107; reviewed and replicated by us for 11.105, 11.106) |
+| H11 | a surrogate energy certifies `ln Z` by reweighting at a cost set by a divergence of the **true ensemble from the surrogate** (`e^{D_p}/ε^{p/(p−1)}`; floor = `D_∞`), not by its root-mean-square error and not by the variational gap `D_1(surrogate‖truth)`; consequently a surrogate fitted variationally can be accurate by every test drawn from itself and uncertifiable | science (addendum A17: **[P]**, author only) with theory (box classes, THY-RES-0007 §4, to be its §11.30) |
 
 ## 2. The benchmarks
 
@@ -179,6 +180,36 @@ is exhaustive only to `n ≈ 5` and by enumeration of the cube to `n ≈ 24`.
 *What success would not show:* anything about known parts, about a datum with a
 tolerance, or about an instrument (the datum is a mean *residual* energy).
 
+### B10 — which divergence does a fitted surrogate control?  (tests H11; proposed at checkpoint 34; the planted control (ii) run by the coordinator, the real instances (i) not run)
+
+*Object.*  For a true energy `g` and surrogates `ĝ` whose Gibbs measure can be sampled
+exactly (exact enumeration at small size makes every quantity below computable without
+sampling error): the four numbers `E_π|g − ĝ|²` (root-mean-square error under the
+surrogate), `D_1(π‖π_g)` (the variational gap), `D_2(π_g‖π)` and `D_∞(π_g‖π)` (what addendum
+A17 says certification costs).
+*Instances.*  (i) The enumerated rotamer instances of workstream P2 with `g` = ff14SB +
+GBn2 and three surrogates of the same pairwise form fitted to it by least squares under
+the surrogate's own measure, by the variational principle (minimal `D_1(π‖π_g)` within
+the family), and by maximum likelihood on samples of the truth (minimal `D_1(π_g‖π)`).
+(ii) A planted control: a pairwise surrogate plus a narrow basin of depth `d` and
+probability `q` under the truth.
+*Prediction (refutable).*  The three fits are close in the first two numbers and can
+differ by orders of magnitude in `e^{D_2}` and `e^{D_∞}`; on the planted control the
+variational and least-squares fits ignore the basin (`D_∞ ≈ d`), the likelihood fit does
+not; the number of evaluations at which a valid bracket for `ln Z` (Chebyshev with the
+true `‖Y‖₂`, or the spot check of the theory division for the floor) reaches width `ε`
+follows `e^{D_2}/ε²`, resp. `e^{D_∞}/ε`, and not the root-mean-square error.
+*Refutation criteria.*  A family of instances on which the root-mean-square error or the
+variational gap predicts the certified cost within a constant factor across fits would
+refute the practical content of H11 (not the theorems).
+*Baselines.*  Exact `ln Z` by enumeration; uncertified error bars (standard error of the
+reweighting estimator), to show how often they are wrong when `D_2` is large.
+*Sizes.*  P2's instances: `10²–10⁶` states, seconds each.  Nothing needs remote compute.
+*What success would not show:* that any of the divergences can be bounded a priori for
+a real system — that is workstream P3's question; and nothing about surrogates that
+cannot be sampled exactly.
+
+
 ### B8 — certified kinetics  (tests a new hypothesis H8: tractable cuts certify a useful fraction of barriers on chains)
 
 *Instances.*  Rotational-isomeric chains on the diamond lattice (exact merge trees up to
@@ -232,4 +263,5 @@ definitions against the reference checker (their E-1); replication on independen
 | B8 | cut families on tiny systems (≤ 5 849 states) and one 200-site chain | `workstreams/SK_REPORT.md`; `experiments/science/ws_K/` |
 | B9 (H9), the coordinator's own checks only | all 65 534 supports of `Q_4` and 8 000 random supports of `Q_5`, `Q_6` (clipped-level profiles); 1 398 random members; ten exact plateau twins to `n = 2000`; **no adversarial search, no second implementation yet** (workstream R8 is asked for a brute force over general members) | `experiments/science/pi_inference/energy_isoperimetry_check.py`, `plateau_twin_check.py` |
 | H10 | independent linear programmes for Theorems 11.105, 11.106 (400 + 24 instances) | `experiments/science/pi_inference/ratio_duality_replication.py`; SCI-RES-0005 |
+| B10 (H11), planted control only | additive bulk plus a narrow basin on the 12-cube; product surrogates fitted variationally, by least squares, by likelihood; exact sums: the ranking by root-mean-square error and by variational gap is the reverse of the ranking by `D_2`, `D_∞` of the truth from the surrogate (4 parameter pairs) | `experiments/science/pi_inference/surrogate_direction_check.py` (+ log, JSON); addendum A17 |
 | B2, B5 | nothing yet | — |

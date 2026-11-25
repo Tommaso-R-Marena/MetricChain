@@ -1,0 +1,41 @@
+V6       E   gbn2: atoms 108, sites  6, states/site 3; clash>0.5: 60/60; |tab-direct| 2.1e-12; |tab-OpenMM(Reference)| all 3.3e-12, clash-free 3.3e-12; |tab-P2 block| 2.4e-12; E range [-37.64, -35.96] (self [-645.0, -638.8]) kcal/mol; 0.6s
+      pruned product at tau=0.6: mine [3, 3, 3, 3, 3, 3]  P2 [3, 3, 3, 3, 3, 3]  OK
+      pruned product at tau=0.7: mine [3, 3, 3, 3, 3, 3]  P2 [3, 3, 3, 3, 3, 3]  OK
+V5       P2  gbn2: atoms  92, sites  5, states/site 3; clash>0.5: 60/60; |tab-direct| 1.7e-12; |tab-OpenMM(Reference)| all 2.4e-12, clash-free 2.4e-12; |tab-P2 block| 1.5e-12; E range [-36.51, -34.00] (self [-551.1, -536.6]) kcal/mol; 0.5s
+      pruned product at tau=0.6: mine [3, 3, 3, 3, 3]  P2 [3, 3, 3, 3, 3]  OK
+      pruned product at tau=0.7: mine [3, 3, 3, 3, 3]  P2 [3, 3, 3, 3, 3]  OK
+S4       H   gbn2: atoms  56, sites  4, states/site 9; clash>0.5: 60/60; |tab-direct| 7.9e-13; |tab-OpenMM(Reference)| all 2.8e-12, clash-free 2.8e-12; |tab-P2 block| 1.2e-12; E range [-66.19, -43.70] (self [-610.9, -567.7]) kcal/mol; 0.3s
+      pruned product at tau=0.6: mine [9, 9, 9, 9]  P2 [9, 9, 9, 9]  OK
+      pruned product at tau=0.7: mine [9, 9, 6, 6]  P2 [9, 9, 6, 6]  OK
+S5       E   gbn2: atoms  67, sites  5, states/site 9; clash>0.5: 60/60; |tab-direct| 1.6e-12; |tab-OpenMM(Reference)| all 3.0e-12, clash-free 3.0e-12; |tab-P2 block| 2.0e-12; E range [-71.37, -60.87] (self [-800.2, -786.0]) kcal/mol; 0.3s
+      pruned product at tau=0.6: mine [9, 9, 9, 9, 9]  P2 [9, 9, 9, 9, 9]  OK
+      pruned product at tau=0.7: mine [9, 9, 9, 9, 9]  P2 [9, 9, 9, 9, 9]  OK
+L5       E   gbn2: atoms 107, sites  5, states/site 9; clash>0.5: 30/60; |tab-direct| 1.9e-12; |tab-OpenMM(Reference)| all 4.0e-12, clash-free nan; |tab-P2 block| 1.9e-12; E range [-32.56, -26.98] (self [-632.3, -565.5]) kcal/mol; 0.6s
+      pruned product at tau=0.6: mine [2, 2, 2, 2, 2]  P2 [2, 2, 2, 2, 2]  OK
+      pruned product at tau=0.7: mine [0, 0, 0, 0, 0]  P2 EMPTY  OK
+L6       H   gbn2: atoms 126, sites  6, states/site 9; clash>0.5: 30/60; |tab-direct| 2.0e-12; |tab-OpenMM(Reference)| all 3.0e-12, clash-free nan; |tab-P2 block| 4.6e-12; E range [-38.30, -29.72] (self [-634.9, -422.9]) kcal/mol; 0.8s
+      pruned product at tau=0.6: mine [2, 2, 2, 2, 2, 2]  P2 [2, 2, 2, 2, 2, 2]  OK
+      pruned product at tau=0.7: mine [0, 0, 0, 0, 0, 0]  P2 EMPTY  OK
+F3       P2  gbn2: atoms  72, sites  3, states/site 9; clash>0.5: 49/60; |tab-direct| 7.2e-13; |tab-OpenMM(Reference)| all 1.7e-12, clash-free 1.7e-12; |tab-P2 block| 7.7e-13; E range [-35.63, -28.61] (self [-367.7, -334.8]) kcal/mol; 0.4s
+      pruned product at tau=0.6: mine [6, 5, 6]  P2 [6, 5, 6]  OK
+      pruned product at tau=0.7: mine [2, 2, 2]  P2 [2, 2, 2]  OK
+F4       E   gbn2: atoms  92, sites  4, states/site 9; clash>0.5: 47/60; |tab-direct| 9.9e-13; |tab-OpenMM(Reference)| all 2.5e-12, clash-free 2.5e-12; |tab-P2 block| 1.1e-12; E range [-40.91, -35.04] (self [-449.5, -418.2]) kcal/mol; 0.5s
+      pruned product at tau=0.6: mine [4, 3, 3, 4]  P2 [4, 3, 3, 4]  OK
+      pruned product at tau=0.7: mine [2, 1, 1, 2]  P2 [2, 1, 1, 2]  OK
+K3       P2  gbn2: atoms  78, sites  3, states/site 81; clash>0.5: 33/60; |tab-direct| 4.5e-13; |tab-OpenMM(Reference)| all 1.7e-12, clash-free 9.7e-13; |tab-P2 block| 7.4e-13; E range [-337.59, -257.01] (self [-515.5, -269.7]) kcal/mol; 2.7s
+      pruned product at tau=0.6: mine [30, 30, 31]  P2 [30, 30, 31]  OK
+      pruned product at tau=0.7: mine [21, 21, 21]  P2 [21, 21, 21]  OK
+K2       E   gbn2: atoms  56, sites  2, states/site 81; clash>0.5: 33/60; |tab-direct| 4.0e-13; |tab-OpenMM(Reference)| all 1.1e-12, clash-free 1.1e-12; |tab-P2 block| 4.0e-13; E range [-199.26, -107.41] (self [-384.8, -241.9]) kcal/mol; 1.1s
+      pruned product at tau=0.6: mine [31, 31]  P2 [31, 31]  OK
+      pruned product at tau=0.7: mine [21, 21]  P2 [21, 21]  OK
+LKSE:5   E   gbn2: atoms  98, sites  5, states/site 9; clash>0.5: 32/60; |tab-direct| 2.8e-12; |tab-OpenMM(Reference)| all 3.5e-12, clash-free 2.1e-12; |tab-P2 block| 3.1e-12; E range [-155.83, -63.39] (self [-863.8, -733.2]) kcal/mol; 0.7s
+      pruned product at tau=0.6: mine [2, 27, 9, 15, 2]  P2 [2, 27, 9, 15, 2]  OK
+      pruned product at tau=0.7: mine [0, 18, 9, 10, 0]  P2 EMPTY  OK
+LKSE:7   H   gbn2: atoms 131, sites  7, states/site 9; clash>0.5: 30/60; |tab-direct| 2.0e-12; |tab-OpenMM(Reference)| all 7.4e-12, clash-free nan; |tab-P2 block| 2.8e-12; E range [-275.06, -110.35] (self [-985.3, -642.1]) kcal/mol; 2.0s
+V12      P2  gbn2: atoms 204, sites 12, states/site 3; clash>0.5: 60/60; |tab-direct| 5.7e-12; |tab-OpenMM(Reference)| all 8.5e-12, clash-free 8.5e-12; |tab-P2 block| 6.3e-12; E range [-70.45, -66.46] (self [-1166.3, -1141.9]) kcal/mol; 1.6s
+      pruned product at tau=0.6: mine [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]  P2 [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]  OK
+      pruned product at tau=0.7: mine [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]  P2 [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]  OK
+L16      H   gbn2: atoms 316, sites 16, states/site 9; clash>0.5: 30/60; |tab-direct| 5.8e-12; |tab-OpenMM(Reference)| all 1.8e-11, clash-free nan; |tab-P2 block| 1.6e-11; E range [-39.38, -20.23] (self [-1368.5, -857.4]) kcal/mol; 4.0s
+      pruned product at tau=0.6: mine [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]  P2 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]  OK
+      pruned product at tau=0.7: mine [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  P2 EMPTY  OK
+worst deviations (kcal/mol): {'direct': '5.8e-12', 'openmm': '1.8e-11', 'p2': '1.6e-11'}

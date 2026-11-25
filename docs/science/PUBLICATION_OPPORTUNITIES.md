@@ -205,3 +205,17 @@ exponent irrelevant; constants in the limit shape.
   P1.  P2's originality settled as "reformulation" (SCI-RES-0003); a paper on P1 must be
   positioned against the confirmation phase of sequential design and feedback coding —
   the first objection an information theorist will raise.
+* *Checkpoint 34:* **the theory division applied five of our reviews** (its fourteenth
+  checkpoint) — the pattern "no theorem false; headlines narrowed" is now in its text,
+  with one of our own items withdrawn (a lever-arm constant we called sharper was
+  theirs).  A second-round review of the revised sections is running (R9).  **A new
+  candidate, small:** the certification cost of a free energy against a sampleable
+  model as a function of *which divergence between truth and model is bounded a priori*
+  (the theory division's floor theorem at one end, our addendum A17 for the family).
+  Its value is conceptual — it says what a "certified surrogate" must mean, and that a
+  root-mean-square error is not it — and it is probably a recombination of known
+  estimation bounds (classification pending, A3).  It becomes a result with physical
+  content only if a floor or a chi-square bound can be *proved* for a real energy term
+  (P3).  Judged by the standard of §1: not a paper on its own; a section of P1's paper
+  or of a methods note with the P2/P3 measurements.
+

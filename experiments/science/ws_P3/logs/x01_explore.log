@@ -1,0 +1,94 @@
+S3 on E, tau 0.7: atoms 45, sites 3, domain [9, 9, 9] = 729 assignments
+   enumerated in 0.3s; ranges: total 11.084, self 13.183, cross 14.774 kcal/mol
+   anchor x0 = argmin E = (4, 4, 4)
+order 1: 3 subsets;  total: max 4.8065e+00 sum 1.3243e+01 | self: max 5.4164e+00 sum 1.4556e+01 | cross: max 6.8553e+00 sum 1.7700e+01 | at anchor context: max 4.1669e+00 sum 1.1655e+01 | anchored term: min -3.4515e+00 max 1.0991e+00; sum of negative parts 8.9237e+00, of positive parts 2.7309e+00
+order 2: 3 subsets;  total: max 2.4260e+00 sum 5.0402e+00 | self: max 1.1976e+00 sum 1.4294e+00 | cross: max 2.8864e+00 sum 5.5026e+00 | at anchor context: max 2.4258e+00 sum 5.0393e+00 | anchored term: min -1.0664e+00 max 1.3594e+00; sum of negative parts 2.0956e+00, of positive parts 2.9912e+00
+order 3: 1 subsets;  total: max 4.0259e-03 sum 4.0259e-03 | self: max 5.8753e-03 sum 5.8753e-03 | cross: max 4.8894e-03 sum 4.8894e-03 | at anchor context: max 4.0259e-03 sum 4.0259e-03 | anchored term: min -1.4593e-03 max 2.3906e-03; sum of negative parts 1.4593e-03, of positive parts 2.3906e-03
+      T=(0, 1, 2): c_T total 4.0259e-03 self 5.8753e-03 cross 4.8894e-03  at anchor ctx 4.0259e-03  anchored d_T in [-1.4593e-03, 2.3906e-03]
+remainder g - I_2 g at the anchor: min -1.4593e-03 max 2.3906e-03 kcal/mol
+   total time 0.3s
+
+S4 on E, tau 0.7: atoms 56, sites 4, domain [9, 9, 9, 9] = 6561 assignments
+   enumerated in 1.8s; ranges: total 15.234, self 18.505, cross 20.411 kcal/mol
+   anchor x0 = argmin E = (4, 4, 4, 4)
+order 1: 4 subsets;  total: max 4.9024e+00 sum 1.8553e+01 | self: max 5.4449e+00 sum 2.1175e+01 | cross: max 6.8912e+00 sum 2.5918e+01 | at anchor context: max 4.1579e+00 sum 1.5679e+01 | anchored term: min -3.5841e+00 max 1.1331e+00; sum of negative parts 1.2291e+01, of positive parts 3.3877e+00
+order 2: 6 subsets;  total: max 2.4241e+00 sum 9.1006e+00 | self: max 1.2013e+00 sum 2.7655e+00 | cross: max 2.8866e+00 sum 1.0030e+01 | at anchor context: max 2.4237e+00 sum 9.0983e+00 | anchored term: min -1.0650e+00 max 1.3590e+00; sum of negative parts 3.7590e+00, of positive parts 5.4136e+00
+order 3: 4 subsets;  total: max 4.2419e-03 sum 9.5589e-03 | self: max 5.8643e-03 sum 1.3826e-02 | cross: max 4.8875e-03 sum 1.1820e-02 | at anchor context: max 4.1013e-03 sum 9.3915e-03 | anchored term: min -1.4684e-03 max 2.4656e-03; sum of negative parts 3.3823e-03, of positive parts 5.5899e-03
+      T=(0, 1, 2): c_T total 4.2419e-03 self 5.8605e-03 cross 4.8875e-03  at anchor ctx 4.1013e-03  anchored d_T in [-1.4654e-03, 2.4177e-03]
+      T=(1, 2, 3): c_T total 4.0794e-03 self 5.8643e-03 cross 4.8465e-03  at anchor ctx 4.0767e-03  anchored d_T in [-1.4684e-03, 2.4656e-03]
+      T=(0, 2, 3): c_T total 7.2623e-04 self 1.0926e-03 cross 1.1120e-03  at anchor ctx 7.2623e-04  anchored d_T in [-2.8046e-04, 2.3542e-04]
+      T=(0, 1, 3): c_T total 5.1140e-04 self 1.0083e-03 cross 9.7364e-04  at anchor ctx 4.8732e-04  anchored d_T in [-1.6808e-04, 4.7123e-04]
+order 4: 1 subsets;  total: max 2.4523e-04 sum 2.4523e-04 | self: max 5.1538e-05 sum 5.1538e-05 | cross: max 2.8208e-04 sum 2.8208e-04 | at anchor context: max 2.4523e-04 sum 2.4523e-04 | anchored term: min -8.4740e-05 max 9.7784e-05; sum of negative parts 8.4740e-05, of positive parts 9.7784e-05
+remainder g - I_2 g at the anchor: min -2.5513e-03 max 2.9686e-03 kcal/mol
+remainder g - I_3 g at the anchor: min -8.4740e-05 max 9.7784e-05 kcal/mol
+   total time 1.8s
+
+S4 on H, tau 0.7: atoms 56, sites 4, domain [9, 9, 6, 6] = 2916 assignments
+   enumerated in 0.6s; ranges: total 27.703, self 36.520, cross 34.960 kcal/mol
+   anchor x0 = argmin E = (7, 7, 4, 2)
+order 1: 4 subsets;  total: max 9.7977e+00 sum 3.3090e+01 | self: max 1.1922e+01 sum 4.2138e+01 | cross: max 1.3714e+01 sum 4.0355e+01 | at anchor context: max 7.6029e+00 sum 2.6435e+01 | anchored term: min -6.6035e+00 max 6.0974e+00; sum of negative parts 1.9013e+01, of positive parts 7.4220e+00
+order 2: 6 subsets;  total: max 2.8044e+00 sum 9.5603e+00 | self: max 2.8250e+00 sum 5.7612e+00 | cross: max 3.4208e+00 sum 1.0776e+01 | at anchor context: max 2.8039e+00 sum 9.5565e+00 | anchored term: min -2.2497e+00 max 1.8467e+00; sum of negative parts 4.5024e+00, of positive parts 6.1129e+00
+order 3: 4 subsets;  total: max 5.2363e-02 sum 8.2214e-02 | self: max 2.1887e-02 sum 2.5550e-02 | cross: max 4.5938e-02 sum 7.5022e-02 | at anchor context: max 5.2340e-02 sum 8.2015e-02 | anchored term: min -1.6060e-02 max 4.6752e-02; sum of negative parts 2.8740e-02, of positive parts 5.3077e-02
+      T=(0, 1, 2): c_T total 5.2363e-02 self 2.1887e-02 cross 4.5938e-02  at anchor ctx 5.2340e-02  anchored d_T in [-5.5876e-03, 4.6752e-02]
+      T=(1, 2, 3): c_T total 2.0193e-02 self 2.0770e-03 cross 1.9850e-02  at anchor ctx 2.0193e-02  anchored d_T in [-1.6060e-02, 3.2284e-03]
+      T=(0, 1, 3): c_T total 7.2700e-03 self 1.3043e-03 cross 6.7604e-03  at anchor ctx 7.2030e-03  anchored d_T in [-6.3480e-03, 1.6514e-03]
+      T=(0, 2, 3): c_T total 2.3879e-03 self 2.8195e-04 cross 2.4731e-03  at anchor ctx 2.2789e-03  anchored d_T in [-7.4372e-04, 1.4445e-03]
+order 4: 1 subsets;  total: max 2.3093e-04 sum 2.3093e-04 | self: max 6.7436e-05 sum 6.7436e-05 | cross: max 2.3260e-04 sum 2.3260e-04 | at anchor context: max 2.3093e-04 sum 2.3093e-04 | anchored term: min -7.8747e-05 max 1.3175e-04; sum of negative parts 7.8747e-05, of positive parts 1.3175e-04
+remainder g - I_2 g at the anchor: min -1.6060e-02 max 4.6752e-02 kcal/mol
+remainder g - I_3 g at the anchor: min -7.8747e-05 max 1.3175e-04 kcal/mol
+   total time 0.6s
+
+V6 on E, tau 0.7: atoms 108, sites 6, domain [3, 3, 3, 3, 3, 3] = 729 assignments
+   enumerated in 0.8s; ranges: total 2.156, self 6.378, cross 5.475 kcal/mol
+   anchor x0 = argmin E = (1, 1, 1, 1, 1, 1)
+order 1: 6 subsets;  total: max 4.3823e-01 sum 2.4388e+00 | self: max 2.7932e+00 sum 8.9521e+00 | cross: max 2.4234e+00 sum 7.8340e+00 | at anchor context: max 4.2650e-01 sum 2.2036e+00 | anchored term: min 0.0000e+00 max 4.2650e-01; sum of negative parts -0.0000e+00, of positive parts 2.2036e+00
+order 2: 15 subsets;  total: max 1.1468e-01 sum 7.5962e-01 | self: max 5.5393e-01 sum 4.0507e+00 | cross: max 5.0600e-01 sum 3.3518e+00 | at anchor context: max 1.1205e-01 sum 7.3525e-01 | anchored term: min -1.0167e-01 max 4.4838e-02; sum of negative parts 5.0275e-01, of positive parts 2.2653e-01
+order 3: 20 subsets;  total: max 5.8497e-03 sum 3.0746e-02 | self: max 1.9597e-02 sum 8.6463e-02 | cross: max 1.6893e-02 sum 7.4607e-02 | at anchor context: max 5.7259e-03 sum 2.7345e-02 | anchored term: min -3.0939e-03 max 2.1720e-03; sum of negative parts 1.4605e-02, of positive parts 1.0489e-02
+      T=(2, 3, 4): c_T total 5.8497e-03 self 1.8836e-02 cross 1.6483e-02  at anchor ctx 5.5185e-03  anchored d_T in [-3.0939e-03, 2.0467e-03]
+      T=(0, 1, 2): c_T total 5.8008e-03 self 1.9317e-02 cross 1.6893e-02  at anchor ctx 5.7259e-03  anchored d_T in [-3.0373e-03, 2.1337e-03]
+      T=(1, 2, 3): c_T total 5.7657e-03 self 1.8804e-02 cross 1.6495e-02  at anchor ctx 5.3761e-03  anchored d_T in [-3.0890e-03, 2.1124e-03]
+      T=(3, 4, 5): c_T total 5.7476e-03 self 1.9597e-02 cross 1.6849e-02  at anchor ctx 5.4151e-03  anchored d_T in [-2.4677e-03, 2.1720e-03]
+      T=(0, 1, 3): c_T total 1.3597e-03 self 1.5715e-03 cross 1.1580e-03  at anchor ctx 7.9218e-04  anchored d_T in [-4.1632e-04, 2.1675e-04]
+      T=(2, 3, 5): c_T total 1.3403e-03 self 1.5332e-03 cross 1.1171e-03  at anchor ctx 7.2289e-04  anchored d_T in [-4.6343e-04, 1.7457e-04]
+order 4: 15 subsets;  total: max 5.4783e-04 sum 2.1630e-03 | self: max 6.9981e-04 sum 2.4041e-03 | cross: max 7.5643e-04 sum 2.7994e-03 | at anchor context: max 5.4743e-04 sum 2.1378e-03 | anchored term: min -1.9652e-04 max 2.6547e-04; sum of negative parts 7.5786e-04, of positive parts 1.0439e-03
+order 5: 6 subsets;  total: max 1.3589e-05 sum 4.3466e-05 | self: max 2.9910e-06 sum 6.8893e-06 | cross: max 1.2956e-05 sum 4.2523e-05 | at anchor context: max 1.3472e-05 sum 4.3013e-05 | anchored term: min -1.0170e-05 max 3.4081e-06; sum of negative parts 2.7937e-05, of positive parts 1.0146e-05
+remainder g - I_2 g at the anchor: min -4.0827e-03 max 4.8964e-03 kcal/mol
+remainder g - I_3 g at the anchor: min -3.3414e-04 max 5.2460e-04 kcal/mol
+   total time 0.9s
+
+L6 on H, tau 0.6: atoms 126, sites 6, domain [2, 2, 2, 2, 2, 2] = 64 assignments
+   enumerated in 0.3s; ranges: total 2.670, self 44.045, cross 43.945 kcal/mol
+   anchor x0 = argmin E = (1, 1, 1, 1, 1, 1)
+order 1: 6 subsets;  total: max 1.0766e+00 sum 3.7987e+00 | self: max 1.4698e+01 sum 5.3110e+01 | cross: max 1.4799e+01 sum 5.3515e+01 | at anchor context: max 8.5002e-01 sum 2.8476e+00 | anchored term: min -8.5002e-01 max 0.0000e+00; sum of negative parts 2.8476e+00, of positive parts 0.0000e+00
+order 2: 15 subsets;  total: max 3.6868e-01 sum 1.3874e+00 | self: max 2.6475e+00 sum 9.7902e+00 | cross: max 2.9871e+00 sum 1.0556e+01 | at anchor context: max 3.1096e-01 sum 1.1436e+00 | anchored term: min -8.6102e-02 max 3.1096e-01; sum of negative parts 4.8648e-01, of positive parts 6.5714e-01
+order 3: 20 subsets;  total: max 5.5861e-02 sum 2.6782e-01 | self: max 1.5127e-01 sum 5.9715e-01 | cross: max 1.6007e-01 sum 6.8350e-01 | at anchor context: max 5.1812e-02 sum 1.6475e-01 | anchored term: min -1.4437e-02 max 5.1812e-02; sum of negative parts 4.7852e-02, of positive parts 1.1690e-01
+      T=(0, 4, 5): c_T total 5.5861e-02 self 2.3771e-02 cross 3.2577e-02  at anchor ctx 5.1812e-02  anchored d_T in [0.0000e+00, 5.1812e-02]
+      T=(0, 1, 5): c_T total 3.5170e-02 self 1.6244e-02 cross 1.9243e-02  at anchor ctx 1.4437e-02  anchored d_T in [-1.4437e-02, 0.0000e+00]
+      T=(0, 1, 4): c_T total 3.1459e-02 self 6.1131e-02 cross 9.2589e-02  at anchor ctx 2.0052e-03  anchored d_T in [-2.0052e-03, 0.0000e+00]
+      T=(1, 4, 5): c_T total 3.1260e-02 self 1.5092e-01 cross 1.4674e-01  at anchor ctx 2.8955e-02  anchored d_T in [0.0000e+00, 2.8955e-02]
+      T=(2, 4, 5): c_T total 1.3671e-02 self 2.2447e-02 cross 1.7405e-02  at anchor ctx 9.0089e-03  anchored d_T in [-9.0089e-03, 0.0000e+00]
+      T=(1, 2, 4): c_T total 1.3585e-02 self 1.4455e-02 cross 9.3768e-03  at anchor ctx 1.3585e-02  anchored d_T in [0.0000e+00, 1.3585e-02]
+order 4: 15 subsets;  total: max 2.0571e-02 sum 6.0705e-02 | self: max 2.2018e-03 sum 6.9588e-03 | cross: max 2.0677e-02 sum 6.4404e-02 | at anchor context: max 2.0571e-02 sum 5.0705e-02 | anchored term: min -2.0571e-02 max 4.0493e-03; sum of negative parts 4.1523e-02, of positive parts 9.1825e-03
+order 5: 6 subsets;  total: max 2.0272e-03 sum 4.1843e-03 | self: max 2.0156e-04 sum 6.5948e-04 | cross: max 2.2166e-03 sum 4.3413e-03 | at anchor context: max 1.9059e-03 sum 3.5774e-03 | anchored term: min -7.3903e-04 max 1.9059e-03; sum of negative parts 7.3903e-04, of positive parts 2.8384e-03
+remainder g - I_2 g at the anchor: min -1.9232e-02 max 5.6866e-02 kcal/mol
+remainder g - I_3 g at the anchor: min -3.0119e-02 max 4.0493e-03 kcal/mol
+   total time 0.3s
+
+L8 on H, tau 0.6: atoms 164, sites 8, domain [2, 2, 2, 2, 2, 2, 2, 2] = 256 assignments
+   enumerated in 0.8s; ranges: total 3.436, self 62.025, cross 61.383 kcal/mol
+   anchor x0 = argmin E = (1, 1, 1, 1, 1, 1, 1, 1)
+order 1: 8 subsets;  total: max 9.6995e-01 sum 5.3253e+00 | self: max 1.4848e+01 sum 7.8173e+01 | cross: max 1.4548e+01 sum 7.8683e+01 | at anchor context: max 7.8802e-01 sum 3.9792e+00 | anchored term: min -7.8802e-01 max 4.6283e-01; sum of negative parts 3.3994e+00, of positive parts 5.7985e-01
+order 2: 28 subsets;  total: max 4.9879e-01 sum 3.0282e+00 | self: max 2.6249e+00 sum 1.7860e+01 | cross: max 3.0935e+00 sum 1.9189e+01 | at anchor context: max 3.7289e-01 sum 1.8448e+00 | anchored term: min -1.1935e-01 max 3.7289e-01; sum of negative parts 8.4306e-01, of positive parts 1.0017e+00
+order 3: 56 subsets;  total: max 6.8894e-02 sum 1.2328e+00 | self: max 1.5181e-01 sum 1.2603e+00 | cross: max 1.8719e-01 sum 1.7497e+00 | at anchor context: max 6.2362e-02 sum 7.4929e-01 | anchored term: min -2.6553e-02 max 6.2362e-02; sum of negative parts 2.0610e-01, of positive parts 5.4319e-01
+      T=(0, 4, 5): c_T total 6.8894e-02 self 2.2534e-02 cross 4.7332e-02  at anchor ctx 6.2362e-02  anchored d_T in [0.0000e+00, 6.2362e-02]
+      T=(1, 5, 6): c_T total 6.4643e-02 self 2.3215e-02 cross 4.1869e-02  at anchor ctx 5.8455e-02  anchored d_T in [0.0000e+00, 5.8455e-02]
+      T=(2, 6, 7): c_T total 5.9693e-02 self 2.3547e-02 cross 3.6374e-02  at anchor ctx 5.4795e-02  anchored d_T in [0.0000e+00, 5.4795e-02]
+      T=(3, 4, 7): c_T total 5.2229e-02 self 5.7873e-02 cross 3.7226e-02  at anchor ctx 4.3379e-02  anchored d_T in [0.0000e+00, 4.3379e-02]
+      T=(3, 6, 7): c_T total 4.8842e-02 self 1.5181e-01 cross 1.3394e-01  at anchor ctx 4.1395e-02  anchored d_T in [0.0000e+00, 4.1395e-02]
+      T=(2, 5, 6): c_T total 4.6531e-02 self 1.5093e-01 cross 1.3065e-01  at anchor ctx 4.1375e-02  anchored d_T in [0.0000e+00, 4.1375e-02]
+order 4: 70 subsets;  total: max 2.1494e-02 sum 2.8632e-01 | self: max 1.7806e-03 sum 1.6066e-02 | cross: max 2.2057e-02 sum 2.9105e-01 | at anchor context: max 2.0839e-02 sum 2.3553e-01 | anchored term: min -2.0839e-02 max 7.2604e-03; sum of negative parts 1.6287e-01, of positive parts 7.2663e-02
+order 5: 56 subsets;  total: max 2.2441e-03 sum 2.9192e-02 | self: max 2.3342e-04 sum 2.9783e-03 | cross: max 2.4550e-03 sum 2.8845e-02 | at anchor context: max 2.0437e-03 sum 2.2790e-02 | anchored term: min -1.0702e-03 max 2.0437e-03; sum of negative parts 1.1668e-02, of positive parts 1.1122e-02
+remainder g - I_2 g at the anchor: min -6.7461e-02 max 2.4891e-01 kcal/mol
+remainder g - I_3 g at the anchor: min -8.8174e-02 max 1.2178e-02 kcal/mol
+   total time 0.9s
+

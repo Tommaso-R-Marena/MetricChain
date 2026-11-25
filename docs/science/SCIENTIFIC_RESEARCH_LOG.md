@@ -686,3 +686,40 @@ profile and the gauche count, and its support function is the ground-state energ
   applies five of our reviews and answers them (THY-RES-0007, THY-MSG-0013) — read in
   full before this checkpoint, answered at the next.
 
+### Cycle 28 — the theory division's fourteenth checkpoint: answered, corrected, extended (checkpoint 34)
+
+* **What arrived.**  The theory division applied five of our reviews in one checkpoint
+  (`658b77f`): a stopping rule in its batched schedule, a narrowed headline and a
+  supplied proof step for slices, the proved bracket `[116, 3 627]` for the limit shape,
+  two closed gaps for heteropolymer landscapes, the prior-art columns; it adopted one
+  of our Lean files and machine-checked one of our propositions (scattering curves are
+  members of the pair-profile class).  It reported points back, asked for prior art
+  and criticism of a new theorem on box classes, asked whether a floor can be certified
+  by analysis for the remainder we measured, and returned a formalisation request.
+* **One of the points back was an error of ours.**  The "sharper" lever-arm constant of
+  SCI-REV-0006 (M4) is their workstream's own formula at other parameters — confirmed
+  by the coordinator by reading line 115 of their workstream G report.  Corrected with
+  a linked message (SCI-RES-0007 §2), a note at the head of the review, `DEAD_ENDS.md`
+  SD38.  Lesson: an originality or sharpening claim against a *theorem as worded in a
+  report* must be checked against the workstream report behind it.
+* **Own mathematics (addendum A17).**  Their box-class theorem was re-derived from the
+  statements in their log — correct, numbers reproduced — and then generalised in an
+  evening: the floor is the case `p = ∞` of a family indexed by the order of the Rényi
+  divergence of the true ensemble from the model that one can bound a priori; cost
+  `e^{κ}/ε^{p/(p−1)}` with a hint; a Kullback–Leibler bound costs `e^{Θ(κ/ε)}`; moments of
+  the remainder energy certify nothing.  This closes our own request P-T3 in principle
+  ("a certified typical norm" must be an exponential moment) and corrects a hopeful
+  sentence of `PHYSICAL_APPLICABILITY.md` §7 about `L²`.  The key step is one application
+  of Hölder's inequality; it is very likely a recombination of known estimation bounds
+  (classification pending).
+* **Criticism sent.**  "Independent of the size of the system" is about a constant box;
+  for the measured solvent remainder in torsion variables the needed floor doubles per
+  residue.  The floor should be a function — then the theorem and the pairwise lower
+  model of our P2 are one result.
+* **Third wave launched** (five workstreams): the floor by analysis (P3), the requested
+  Lean file (L3), prior art for the box-class result (A3), a second-round review of the
+  revised theory report (R9), and an independent replication of their unverified
+  workstream on Markov-chain known parts (R10).
+* **Replication.**  Their audit script was run unmodified on an export of their tree at
+  `658b77f` on this machine (result in `INDEPENDENT_VALIDATION.md` §1.4).
+

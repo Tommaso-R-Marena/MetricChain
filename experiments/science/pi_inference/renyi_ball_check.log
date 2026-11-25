@@ -1,0 +1,44 @@
+(1) p=1.25: min over cases of pi(D)/bound = 1.227317  (must be >= 1)
+(1) p=1.5: min over cases of pi(D)/bound = 1.057166  (must be >= 1)
+(1) p=2.0: min over cases of pi(D)/bound = 1.008335  (must be >= 1)
+(1) p=3.0: min over cases of pi(D)/bound = 1.000401  (must be >= 1)
+(1) p=6.0: min over cases of pi(D)/bound = 1.000002  (must be >= 1)
+(1) p=inf: min over cases of pi(D)/bound = 1.000003  (must be >= 1)
+(2) p=1.5 B=3.0 eps=0.1: q_low=1.454e-04, |D|/N=1.500e-04, ||Y'||_p=2.449749 <= B, ln mu'=0.1010 > eps, disjoint alternatives k=6666, upper bound ln(1/0.05)/q* = 9.386e+04
+(2) p=1.5 B=10.0 eps=0.3: q_low=5.874e-05, |D|/N=6.000e-05, ||Y'||_p=9.222374 <= B, ln mu'=0.3018 > eps, disjoint alternatives k=16666, upper bound ln(1/0.05)/q* = 1.721e+05
+(2) p=1.5 B=1.5 eps=0.05: q_low=1.078e-03, |D|/N=1.080e-03, ||Y'||_p=1.229736 <= B, ln mu'=0.0500 > eps, disjoint alternatives k=925, upper bound ln(1/0.05)/q* = 8.716e+04
+(2) p=2.0 B=3.0 eps=0.1: q_low=2.765e-03, |D|/N=2.770e-03, ||Y'||_p=2.282657 <= B, ln mu'=0.1001 > eps, disjoint alternatives k=361, upper bound ln(1/0.05)/q* = 2.977e+03
+(2) p=2.0 B=10.0 eps=0.3: q_low=1.511e-03, |D|/N=1.520e-03, ||Y'||_p=9.094051 <= B, ln mu'=0.3008 > eps, disjoint alternatives k=657, upper bound ln(1/0.05)/q* = 4.460e+03
+(2) p=2.0 B=1.5 eps=0.05: q_low=1.051e-02, |D|/N=1.052e-02, ||Y'||_p=1.162999 <= B, ln mu'=0.0500 > eps, disjoint alternatives k=95, upper bound ln(1/0.05)/q* = 2.834e+03
+(2) p=4.0 B=3.0 eps=0.1: q_low=1.970e-02, |D|/N=1.971e-02, ||Y'||_p=2.392783 <= B, ln mu'=0.1000 > eps, disjoint alternatives k=50, upper bound ln(1/0.05)/q* = 2.983e+02
+(2) p=4.0 B=10.0 eps=0.3: q_low=1.317e-02, |D|/N=1.317e-02, ||Y'||_p=9.339066 <= B, ln mu'=0.3000 > eps, disjoint alternatives k=75, upper bound ln(1/0.05)/q* = 3.906e+02
+(2) p=4.0 B=1.5 eps=0.05: q_low=4.800e-02, |D|/N=4.800e-02, ||Y'||_p=1.163131 <= B, ln mu'=0.0500 > eps, disjoint alternatives k=20, upper bound ln(1/0.05)/q* = 2.887e+02
+(3) KL ball D_1(pi_g||pi) <= kappa at the centre (hint r = 0)
+    kappa=0.5 eps=0.1: smallest mass of a hiding set (exact two-level) q=1.9478e-04; formula eta*exp(-(kappa+eps)/s)=1.9216e-04; detection bound exp(-(kappa+ln2)/s)=3.5877e-06; ratio q/det = 54.289 (>= 1)
+      random alternatives in the ball with |ln mu'|>eps: 62, violating the detection bound: 0
+    kappa=1.0 eps=0.1: smallest mass of a hiding set (exact two-level) q=1.0043e-06; formula eta*exp(-(kappa+eps)/s)=1.0042e-06; detection bound exp(-(kappa+ln2)/s)=1.8748e-08; ratio q/det = 53.567 (>= 1)
+      random alternatives in the ball with |ln mu'|>eps: 157, violating the detection bound: 0
+    kappa=1.0 eps=0.3: smallest mass of a hiding set (exact two-level) q=2.4183e-03; formula eta*exp(-(kappa+eps)/s)=2.3204e-03; detection bound exp(-(kappa+ln2)/s)=1.4551e-03; ratio q/det = 1.662 (>= 1)
+      random alternatives in the ball with |ln mu'|>eps: 53, violating the detection bound: 0
+    kappa=3.0 eps=0.5: smallest mass of a hiding set (exact two-level) q=8.9022e-05; formula eta*exp(-(kappa+eps)/s)=8.8902e-05; detection bound exp(-(kappa+ln2)/s)=8.3881e-05; ratio q/det = 1.061 (>= 1)
+      random alternatives in the ball with |ln mu'|>eps: 836, violating the detection bound: 0
+(4) class E_pi r^2 <= sigma^2: a dip on one state
+    sigma=0.1, mass q=1e-06: allowed depth 100 k_BT, ln mu changes by 86.2
+    sigma=0.1, mass q=1e-09: allowed depth 3.16e+03 k_BT, ln mu changes by 679
+    sigma=0.01, mass q=1e-12: allowed depth 1e+04 k_BT, ln mu changes by 672
+(5) D_2(pi_g||pi) <= sum_i c_i^2 / 2 for members of the cube class, uniform product measure
+    600 random members x 3 orders: violations 0; largest D_p / bound = 0.6653
+    additive instance u=0.2, n=12: D_2 = 0.118616 = n ln(1+tanh^2(u/2)) = 0.118616  (bound n u^2/2 = 0.2400)
+    additive instance u=1.0, n=12: D_2 = 2.322622 = n ln(1+tanh^2(u/2)) = 2.322622  (bound n u^2/2 = 6.0000)
+    additive instance u=2.0, n=12: D_2 = 5.489293 = n ln(1+tanh^2(u/2)) = 5.489293  (bound n u^2/2 = 24.0000)
+(6) Chebyshev bracket mu in [muhat - B2/sqrt(N delta), muhat + B2/sqrt(N delta)], B2 = ||Y||_2
+    lognormal(sigma=1.8): mu=4.968, ||Y||_2=21.515, D_2=2.931; miss rate 0.0063 <= delta=0.1;  half-width/mu = 0.306
+(7) statements (a), (b), (e) of the theory division's box-class preview, independently
+    (a) ln E e^Y - E Y <= L(w): 20 000 laws, largest ratio 1.000000; two-point optimum = L(w); L(w) <= w^2/8
+    (b) q* = (e^eps - 1)/(e^rho- - e^(eps - rho+) + e^eps - 1): the bracket off Q has width exactly eps at pi(Q^c) = q*
+    (e) spot check at the centre of a constant box: rho=3, eps=0.2, delta=0.05 -> 1088 (theirs: 1088); rho=3.7, eps=0.1 -> 4610 (theirs: about 5e3); rho=15.6 -> 6.961e+08 (theirs: about 7e8); e^(0.0291391 n) exceeds 1088 from n = 240
+ALL CHECKS PASSED
+
+real	0m2.498s
+user	0m3.503s
+sys	0m0.024s

@@ -1015,3 +1015,266 @@ deep and as wide as the visible one changes nothing measurable); at an accuracy 
 `a(u)` nats per site it is the whole answer; in between, the hidden state has to be as
 deep and exponentially wider, which makes it easier to find than without the datum —
 if the conjecture holds, at every accuracy.
+
+---
+
+## A17. Certifying a free energy against a model that can be sampled: which a-priori bound suffices, and what it costs (criticism and extension of the theory division's box-class result, THY-RES-0007 §4; our own request P-T3 of SCI-RES-0002)
+
+*Added at checkpoint 34.  Everything in this addendum is the coordinator's; it has been
+read by nobody else.  Labels as elsewhere: **[P]** proved here (with the check named),
+**[P-sketch]**, **[K]**, **[N]**, **[H]**.  Prior art has **not** been searched by the
+coordinator; a workstream (A3) is doing that, and every reference below is from memory
+and marked so.  Script: `experiments/science/pi_inference/renyi_ball_check.py` (two
+seconds; log and JSON next to it).*
+
+**Why.**  We asked the theory division (P-T3) for "a certified typical-norm remainder
+for `ln Z`": our force-field pilot had found a solvent term close to a tractable class
+in root mean square and far from it in supremum norm.  Its answer, previewed in
+THY-RES-0007 §4 (to be its §11.30), is a theorem for **box classes**: if `lo ≤ g − ĝ ≤ hi`
+pointwise and the Gibbs measure `π` of the known function `ĝ` can be sampled exactly,
+then with a hint `Θ((Z(lo)/Z(g) − 1)/ε)` evaluations certify `ln Z(g)` within `ε` — the
+Boltzmann factor of the free-energy distance to the *floor* — independently of the
+size of the system; and "what must be certified is the floor, and nothing else can
+replace it".  It asked for criticism.  This addendum (0) re-derives the preview,
+(1)–(4) shows that the floor is the end point of a family — **any a-priori bound on a
+Rényi divergence of order `p > 1` between the true ensemble and the model replaces it,
+at a price in the accuracy exponent; a Kullback–Leibler bound does too, at an
+exponential price in `1/ε`; no bound on moments of the remainder energy itself does** —
+which is the precise answer to what "typical norm" must mean, and (5) says where such
+bounds come from for the classes of the programme.
+
+**Setting.**  `X` finite; `ĝ` known, `π ∝ e^{−ĝ}`, `Z₀ = Σ e^{−ĝ}` known; exact samples of `π`
+are free.  The true energy is `g = ĝ + r`; `Y := e^{−r} > 0` is the Boltzmann factor of
+the remainder; `μ := E_π Y = Z(g)/Z₀`; `π_g = πY/μ` the true ensemble.  Target: `ln μ`.  An
+evaluation at `x` returns `r(x)`; cost = number of evaluations.  Units `β = 1`.
+`‖Y‖_p := (E_π Y^p)^{1/p}`, `‖Y‖_∞ = e^{−min r}`.  Rényi divergence of order `p`:
+`D_p(π_g‖π) = (p − 1)^{−1} ln E_π (dπ_g/dπ)^p = (p/(p−1))·ln(‖Y‖_p/μ)`; `D_1` is the
+Kullback–Leibler divergence, `D_∞ = ln max(Y/μ)`.  "With a hint" as in the theory report:
+the algorithm is handed a candidate `r̃`, must be correct on the whole class, and its
+cost is counted at instances where the hint is right.  Accuracy: an alternative counts
+as different if `|ln μ′ − ln μ| > ε`; write `s_ε := 1 − e^{−ε}`, `η_ε := e^ε − 1`.
+
+### (0) The preview re-derived
+
+**[P, independent; three numbers re-computed.]**  (a) `−E_π r ≤ ln μ ≤ −E_π r + L(w)` for a
+remainder of oscillation `w`, `L(w) = ln((e^w − 1)/w) − 1 + w/(e^w − 1) ≤ w²/8`: the left side
+is Jensen; for the right side `ln E e^Y − E Y` is convex in the law, so its maximum over
+laws on an interval is at a two-point law on the end points, and maximising
+`ln(1 − t + te^w) − tw` over `t` gives `t = 1/w − 1/(e^w − 1)` and the value `L(w)` (20 000 random
+laws: no violation; the optimum attains it).  (b) On a box, unevaluated points are
+unconstrained, so after evaluating `Q` the range of `Z` is from "ceiling off `Q`" to "floor
+off `Q`"; at the centre of a constant box `[−ρ₋, ρ₊]` the bracket has width `ε` exactly when
+`π(Qᶜ) = q* = η_ε/(e^{ρ₋} − e^{ε−ρ₊} + η_ε)` (checked).  (c)–(e) A member that differs from the
+hint on `D` raises `Z` by at most the dip weight of `D` and lowers it by at most the bump
+weight; sampling in proportion to those weights detects every alternative with
+`|Δ ln Z| > η` with probability `p = min{1, ½ min(η_η Z/U, s_η Z/V)}` per sample, `U = Z(lo) − Z`,
+`V = Z − Z(hi)`; disjoint sets of dip weight above `η_ε Z` give the lower bound.  Their
+numbers: `1088` evaluations at `ρ = 3`, `ε = 0.2`, `δ = 0.05` (ours: `1088`); "about `5·10³`" at a
+floor of `3.7` and "about `7·10⁸`" at `15.6` for `ε = 0.1` (ours: `4 610`, `6.96·10⁸`); below
+`e^{0.0291n}` from `n ≈ 240` (ours: `240`).  **No error found.**  Two remarks on scope are in
+"Reading" below.
+
+### (1) Rényi balls: the floor is the case `p = ∞`
+
+For `1 < p ≤ ∞` and `B > 0` let `𝓑_p(B) := {r : ‖e^{−r}‖_{L^p(π)} ≤ B}`.  The box with floor
+`−ρ₋` (any ceiling) is inside `𝓑_∞(e^{ρ₋})`.
+
+**Lemma A17.1 (detection) [P; 18 000 extremal alternatives, six orders: smallest ratio
+`1.000002`].**  If `r, r′ ∈ 𝓑_p(B)` differ exactly on `D`, then
+
+    π(D)  ≥  ( |μ − μ′| / B )^{p/(p−1)}        (exponent 1 for p = ∞).
+
+*Proof.*  `μ − μ′ = E_π (Y − Y′)1_D`, and since both are non-negative,
+`|μ − μ′| ≤ max(E_π Y1_D, E_π Y′1_D) ≤ B·π(D)^{1−1/p}` by Hölder's inequality.  ∎
+
+**Proposition A17.2 (certification with a hint) [P].**  Let the hint `r̃ ∈ 𝓑_p(B)`, `μ̃ = E_π e^{−r̃}`,
+`B₀ = ‖e^{−r̃}‖_p`.
+(i) *Algorithm.*  Draw `N = ⌈ln(1/δ)/q*⌉` points from `π`, `q* := (s_ε μ̃/B)^{p/(p−1)}`; evaluate; if
+`r = r̃` at all of them return `ln μ̃`, otherwise report that the hint is refuted.  For
+every `r ∈ 𝓑_p(B)`: if `|ln μ − ln μ̃| > ε` the hint is refuted with probability `≥ 1 − δ`; if
+`r = r̃` the output is exact.
+(ii) *Lower bound.*  If `B₀ < B` and no state has `π`-mass above
+`q_low := (η_ε μ̃/(B − B₀))^{p/(p−1)}`, every randomised algorithm that returns `ln μ` within `ε/2`
+with probability `≥ 1 − δ` on `𝓑_p(B)` makes at `r̃` at least `(1 − 2δ)·⌊1/(2q_low)⌋` evaluations
+in expectation, with or without the hint.
+*Proof.*  (i) `|ln μ − ln μ̃| > ε` implies `|μ − μ̃| > s_ε μ̃` in both directions; Lemma A17.1 gives
+`π({r ≠ r̃}) > q*`; each sample lands there with at least that probability.  (ii) For a
+set `D` of mass `q > q_low` put `Y′ = Ỹ + a1_D`, `a = (B − B₀)q^{−1/p}`: by Minkowski's inequality
+`‖Y′‖_p ≤ B₀ + aq^{1/p} = B`, and `μ′ − μ̃ = (B − B₀)q^{1−1/p} > η_ε μ̃`, i.e. `ln μ′ − ln μ̃ > ε`.  Greedy
+grouping of states gives `⌊1/(2q_low)⌋` disjoint sets of mass in `(q_low, 2q_low]`; an
+algorithm that is right at `r̃` and at each alternative must touch each set with
+probability `≥ 1 − 2δ` when run on `r̃` (the packing argument of the theory report,
+machine-checked there as `expected_queries_ge_packing`).  ∎
+
+*In divergence form.*  `B/μ̃ = e^{((p−1)/p)κ}` where `κ` is the bound that the class puts on
+`D_p(π_g‖π)` at the hint.  So, for `B − B₀ ≥ B/2` and `ε ≤ 1`,
+
+    certification cost with a hint  =  Θ( e^{κ} / ε^{p/(p−1)} ),      κ = the a-priori bound on D_p(π_g ‖ π),
+
+with constants depending on `δ` only.  **`p = ∞`: `e^{κ}/ε` — the theory division's theorem**
+(`κ = ρ₋ + ln(Z₀/Z)`, `e^{κ} = Z(lo)/Z`); `p = 2`: `(1 + χ²)/ε²`, with `χ²` the bound on the
+chi-square divergence of the true ensemble from the model.
+
+**Proposition A17.3 (without a hint) [P for the upper bounds; P-sketch for the lower
+bound].**  (i) For `p ≥ 2` the plain estimator `μ̂ = N^{−1}Σ Y(x_i)`, `x_i ∼ π`, satisfies
+`|μ̂ − μ| ≤ ‖Y‖₂/√(Nδ)` with probability `≥ 1 − δ` (Chebyshev), and
+`‖Y‖₂² ≤ μ^{(p−2)/(p−1)}B^{p/(p−1)} ≤ B²` (log-convexity of norms); so
+`[μ̂ − B/√(Nδ), μ̂ + B/√(Nδ)]` **is a certificate valid for every member and every `N`**
+(simulation on a log-normal instance: miss rate `0.006` at `δ = 0.1`), and relative
+accuracy `ε` needs about `e^{κ}/(δ s_ε²)` evaluations (`‖Y‖₂²/μ² ≤ (B/μ)^{p/(p−1)} = e^{κ}`).  (ii) For `1 < p < 2` the median of block means gives accuracy
+`ε` with `O(ln(1/δ)·e^{κ}/ε^{p/(p−1)})` evaluations (von Bahr–Esseen moment inequality and
+the usual median argument; standard — **[from memory]**).  (iii) In the worst case over
+the class the variance term is needed without a hint: for instances `Y = 1 + a1_S` with
+`S` a random set of mass `q` the mean can only be learned by estimating `q`, which costs
+`σ²/(εμ)²`.  Hence
+
+    without a hint:  Θ( e^{κ} / ε^{max(2, p/(p−1))} ) in the worst case;
+    the hint saves the factor ε^{−(p−2)/(p−1)} for p > 2 and nothing for p ≤ 2.
+
+For `p = ∞` these are the two terms `σ²/(εμ)²` and `1/(εμ)` of the optimal stopping-rule
+theorem for `[0,1]`-valued variables (Dagum, Karp, Luby and Ross — **[from memory —
+unverified; workstream A3 is reading it]**) applied to `X = e^{−(r − lo)}` under the floor
+measure, whose mean is `Z(g)/Z(lo)`.  *If that reading is right, the hinted cost of the
+box-class theorem is the second term of a known bound and the new content is the
+query model, the hint, and the deterministic count.*
+
+### (2) A Kullback–Leibler bound: possible, at an exponential price in the accuracy
+
+**Proposition A17.4 [P at the centre; exact two-level alternatives and 1 108 random
+alternatives].**  Let the class be `{r : D_1(π_g‖π) ≤ κ}` and the hint the centre `r̃ = 0`.
+(i) Every alternative with `|ln μ′| > ε` differs from the hint on a set of mass at least
+`exp(−(κ + ln 2)/s_ε)`.  (ii) There are alternatives with `ln μ′ > ε` on every set of mass
+above `≈ η_ε·exp(−(κ + ε)/s_ε)`.  So the cost is `exp(Θ(κ/ε))` for small `ε`: finite, and
+exponential in `1/ε`.
+*Proof.*  (i) Upward: `π′(D) = 1 − π(Dᶜ)/μ′ ≥ s_ε`, and by the data-processing inequality
+`κ ≥ kl(π′(D)‖π(D)) ≥ s_ε ln(1/π(D)) − ln 2`.  Downward: `π′(Dᶜ) = π(Dᶜ)/μ′ ≤ 1` forces
+`π(D) ≥ s_ε`.  (ii) `Y′ = 1 + a1_D`, `aπ(D) = η_ε`: `D_1 = −ε + (π(D) + η_ε)e^{−ε} ln(1 + η_ε/π(D))`.  ∎
+The Rényi family degenerates consistently: `ε^{−p/(p−1)} → ∞` as `p → 1` at fixed `κ`.
+
+### (3) What does not suffice
+
+**Proposition A17.5 [P; trivial once stated].**  (i) A bound on `‖Y‖₁` (`p = 1`) is a bound on
+`μ` itself and nothing more: alternatives exist on every single state, and a certificate
+must evaluate all of them.  (ii) **A bound on any polynomial moment of the remainder
+energy under the model — its mean, its root mean square, `E_π|r|^k ≤ M` — does not bound
+the cost by anything smaller than the number of states**: a dip of depth `d` on a state
+of mass `q` costs `q d^k` of the moment budget and changes `μ` by `q(e^d − 1)`, which is
+unbounded as `q → 0` at fixed budget (`σ = 0.1 k_BT` in root mean square allows a dip of
+`100 k_BT` on a state of mass `10⁻⁶`, a change of `ln μ` by `86`).
+So the answer to our own request P-T3 is: **a "typical norm" that certifies must be an
+exponential moment of the remainder under the model — a Rényi or Kullback–Leibler
+bound on the true ensemble relative to the model — and the root-mean-square remainder
+that fits report is not one.**
+
+### (4) The table
+
+Cost of certifying `ln Z` within `ε` (model samples free; `κ` the a-priori bound on the
+divergence named; constants depend on `δ`):
+
+| what is bounded a priori | with a hint | without a hint (worst case) |
+|---|---|---|
+| a pointwise floor — `D_∞(π_g‖π) ≤ κ` | `e^{κ}/ε` (theory division) | `e^{κ}/ε²` |
+| a Rényi divergence of order `p ≥ 2` | `e^{κ}/ε^{p/(p−1)}` | `e^{κ}/ε²` |
+| a Rényi divergence of order `1 < p ≤ 2` | `e^{κ}/ε^{p/(p−1)}` | the same order |
+| the Kullback–Leibler divergence `D_1(π_g‖π)` | `e^{Θ(κ/ε)}` | at least that |
+| mean, variance or any polynomial moment of `g − ĝ` under the model | the number of states | the number of states |
+
+**The direction matters [P, trivial; reading H].**  Every row is a divergence of the
+*true ensemble from the model*, `D(π_g‖π)`.  The variational (Gibbs–Bogoliubov) principle
+minimises the opposite one, `D_1(π‖π_g) = ln μ + E_π r`, which is the gap of the *cheap* side
+of the bracket.  A model chosen variationally is optimal for the side that costs a mean
+and can be arbitrarily bad for the side that costs `e^{κ}`: it may ignore a basin of the
+true ensemble altogether (`D_p(π_g‖π) = ∞`).  *A planted control* [N, exact sums;
+`experiments/science/pi_inference/surrogate_direction_check.py`]: an additive bulk plus a
+basin of depth `14–30 k_BT` on a Hamming ball of radius 1 of the 12-cube (true weight of
+the basin `0.05–0.74`), product surrogates fitted variationally, by least squares under
+the uniform measure, and by likelihood (the true marginals):
+
+| fit | RMS error under its own measure (`k_BT`) | `D_1(π‖π_g)` | `D_2(π_g‖π)` | `D_∞(π_g‖π)` |
+|---|---|---|---|---|
+| variational | `5·10⁻⁶ – 4·10⁻³` | `0.05 – 1.3` | `11.4 – 28.3` | `13.9 – 29.7` |
+| least squares | `0.10 – 0.14` | `0.06 – 1.3` | `10.8 – 26.7` | `13.3 – 28.0` |
+| likelihood | `0.46 – 5.9` | `0.15 – 11.7` | `8.3 – 13.3` | `10.8 – 16.3` |
+
+The ranking by either measure of fit quality is the reverse of the ranking by certified
+cost (`e^{D_2}/ε²`, `e^{D_∞}/ε`).  In this control no product surrogate is *useful* — every
+cost exceeds enumeration of `2¹²` states; the point is the ordering, and that the first
+two columns do not see the basin at all.
+
+### (5) Where a divergence bound comes from: first-order classes on product measures
+
+**Proposition A17.6 [P; 600 random members of the cube class by enumeration, three
+orders: no violation, largest ratio `0.67`].**  Let `π` be a product measure on a product
+space and let `r` have one-site oscillations `c_i` (changing coordinate `i` changes `r` by
+at most `c_i`); `K := Σ_i c_i²`.  Then for every `p > 1`
+
+    D_p(π_g ‖ π)  ≤  p²K / (8(p − 1)),        in particular   D_2 ≤ K/2,
+
+so plain sampling from `π` certifies `ln Z` within `ε` with at most `e^{K/2}/(δ s_ε²)`
+evaluations, by the bracket of A17.3(i) with `B = exp(−E_π r + K/4)` (`E_π r` itself is a mean
+of a function with bounded differences and costs `O(K ln(1/δ)/ε²)` more).
+*Proof.*  McDiarmid's bound on the moment generating function (Hoeffding's lemma along
+the martingale of coordinates **[K, standard]**): `E_π e^{−p(r − E_π r)} ≤ e^{p²K/8}`; and
+`μ ≥ e^{−E_π r}`.  ∎
+*Sharpness.*  At the additive instance `r = u|x|` on the uniform cube
+`D_2 = n ln(1 + tanh²(u/2)) ≈ K/4` (exact; checked at `n = 12`), so the bound loses a factor
+two in the exponent there.
+*What it says and does not say.*  At a fixed slope per site `K = nu²` and the cost is
+`e^{nu²/2}` — exponential, with a worse exponent than the optimal non-adaptive sampler
+of the theory report (`a(u) ≈ u²/8` at small `u`): **nothing new about the exponents.**  What
+it adds is the regime the fixed-slope asymptotics never see: **if the first-order
+constants are square-summable, `Σ_i c_i² ≤ K` independently of the size, certification by
+plain reweighting is polynomial — `e^{K/2}/ε²` evaluations — with no hint, no adaptivity
+and a certificate that is two lines long.**  A remainder made of many weak site terms
+(`c_i ≈ 0.1 k_BT` on 200 sites: `K = 2`, a factor `e`) is of this kind; a remainder with `c_i ≈ 1 k_BT`
+is not beyond about 30 sites (`e^{15} ≈ 3·10⁶`).  For a known part with interactions `π` is
+not a product; the same bound with a constant depending on the mixing of `π` is known
+for Gibbs measures in the uniqueness regime (**[from memory — unverified]**), and is
+exactly the theory division's open request P2-T3 in another form.
+
+### Reading (kept apart from the statements)
+
+1. **"Independent of the size of the system" is true of a constant box and moves the
+   size into the floor [M for the numbers, from our pilot].**  For the one real remainder
+   we have measured against a pair-additive class in backbone torsions (workstream P,
+   `SP_REPORT.md` Statement 5(c)), the largest absolute remainder — an upper bound on the
+   needed floor — is `0.5, 1.0, 2.3, 4.8 kcal/mol` at 2–5 residues and `9.3` at 8 residues on
+   a coarser grid: `0.8, 1.7, 3.9, 8.1, 15.6 k_BT`.  It roughly doubles per residue at these
+   sizes.  The two illustrations in THY-RES-0007 (`5·10³` evaluations "whatever the chain
+   length" at `3.7 k_BT`; `7·10⁸` at `15.6`) are the same remainder at four and at eight
+   residues.  With an extensive floor `ρ₋ = nρ₁` the cost is `e^{nρ₁}/ε`: the exponential has
+   been renamed, not removed.  What the theorem does give is the right *coordinate*: the
+   cost is exponential in the free-energy gap to the floor, in `k_BT`, not in the number
+   of variables.
+2. **The floor should be a function, and then it is a lower model [H].**  Nothing in
+   the theorem needs `lo` constant: with a computable lower model `m ≤ g` whose Gibbs
+   measure can be sampled, the cost is `(Z(m)/Z(g) − 1)/ε = (e^{F(g) − F(m)} − 1)/ε`.  The
+   pairwise lower model of third order (our P2, Statement 5(d); the theory division's
+   accepted item P2-T1) is such an `m` — provided its constants are *certified*, which
+   so far they are only by enumeration (workstream P3 is trying analysis), and provided
+   `π_m` can be sampled exactly, which for a pairwise model on a general graph it cannot
+   (it can on a chain or a graph of small tree-width).
+3. **In rotamer variables the picture is better than in torsions [M, from P2].**  There
+   the remainder beyond pairwise has third-order constants of `0.003–0.2 kcal/mol` for
+   neutral side chains; for apolar ones a floor of a few `k_BT` at tens of residues is
+   conceivable.  Whether analysis can certify it is P3's question.
+4. **Which row of the table a real remainder is in is an empirical and analytical
+   question nobody has asked.**  Floors (row 1) need worst-case analysis of the energy
+   function; row 2 at `p = 2` needs a bound on a chi-square divergence, which A17.6 reduces
+   to one-site oscillations when the reference is a product measure.  For orders of
+   magnitude only: the measured first-order constants of the solvent term in rotamer
+   variables (P2: largest `c_i` `0.44–0.84 kcal/mol` for valine, `5–10` for serine, i.e.
+   `0.7–1.4` and `8–17 k_BT` at 300 K) would give `K ≈ n·(0.7…1.4)²` for valine — tens of
+   residues within reach of plain certified reweighting — and `K ≈ n·(8…17)²` for serine,
+   which is hopeless.  **These are not certificates, for two reasons:** the constants were
+   measured by enumeration, and the known part of that measurement is pairwise, not a
+   product measure, so A17.6 does not apply to it as it stands (with a product reference
+   the pair terms of the known part enter the oscillations as well).
+
+### What is not done
+
+No second reader.  No prior-art search by the coordinator (A3).  The lower bound of
+A17.3(iii) is a sketch.  A17.4 is proved at the centre only.  The instance-optimal
+sampler for `p < ∞` (the analogue of the dip-weighted sampler of the box) was not looked
+for.  A17.6 for non-product references is a pointer, not a statement.  Nothing here has
+been compared with a measurement.

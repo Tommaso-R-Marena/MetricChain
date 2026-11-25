@@ -115,3 +115,62 @@ here, root file deleted, `git status` checked: nothing else of mine is outside
   literature (Gavinsky–Pudlák, arXiv 1907.04640, abstract); the entropy bound is the chain rule
   (also Theorem 2(d) of `INFERENCE_LIMITS.md`: the lower end of A16.1 is already there).
   Nothing found for the energy-constrained isoperimetric lemma.  Log in the report.
+
+## Step 4 — Lean, repairs, replication of the coordinator's numbers
+
+* `A16Core.lean` (checked with `lake env lean`, 8 s, exit 0, no warning, axioms
+  [propext, Classical.choice, Quot.sound]; log `A16Core.check.log`): the algebraic core of
+  Lemma A16.5 — `constraint_iff`, `sum_le_sum_f`, `f_le_max`, `f_mono_below`, `f_anti_above`,
+  `F_mono`, `F_eq_plateau`, `sum_le_sum_F`, `plateau_optimal`.  Compiled at the first attempt.
+  Not formalised: the Harper step, existence/uniqueness of the level, membership of the plateau.
+* `r8_07_deepend.py` (1 s; log): the deep-end chain (i)–(v) of A16.3 with exact sums, eight cases
+  including close centres; sufficient condition "overlap fraction < 1/r₂"; from Hoeffding this
+  holds for n ≥ 6100 (u = 1), 1400 (u = 2), 450 (u = 4), 33 350 (u = 0.5) — exact sums show it
+  far earlier.  Tolerant test for A16.6 (ii): k₀ = 5 … 234 at the sizes tried.
+* `r8_08_matching.py` (73 s; log): the link twin ↔ G(R):  G(r₂−1) − (U″−U₀)₊ ≤ gap(r₂) ≤ G(r₂)
+  in twelve cases; gap(r₂) − G(r₂−1) = e^{−gap}(1 − |U₀|2ⁿ/W) to three digits where it is above
+  rounding (3.264e-4 vs 3.263e-4; 2.209e-2 vs 2.184e-2).  d ln Zpl/dU ∈ [−1, 0] (finite differences).
+* `r8_09_replicate_examples.py`: first example of A16(b) reproduced exactly (r₂ = 899,
+  κ* = 244.57, gap 100.036 = G(r₂−1), no-datum radius 860).  Second example (n = 600, u = 4,
+  "r₂ = 190 against 147"): with ρ₁ = ρ₀ + 0.01 I get r₂ = 178; the addendum does not state ρ₁
+  for it.  Looked into the coordinator's JSON: that case used ρ₁ = ρ₀ + 0.03 (r₁ = 120).
+* **Found while looking for that parameter:** the committed log
+  `experiments/science/pi_inference/plateau_twin_check.log` ends in an `AssertionError`
+  (line 190 of the script: the series check at u = 8, truncated at 4000 terms, is off by 3.7e-4;
+  with 400 000 terms 7.5e-15) and contains none of the ten twin cases; the JSON was written 52 s
+  before the last modification of the script.  A byte-identical copy of the script run inside
+  my directory (`coordinator_script_copy/`, so that nothing is written elsewhere) aborts at the
+  same assertion after 0.6 s.  The mathematics is not affected; the reproduction line of
+  SCI-MSG-0012 is.
+* `r8_10_replicate_json.py` (76 s; log): all ten twins of the coordinator's JSON reproduced with my
+  code — r₁, r₂ identical, κ* and gap to 1e-4.
+* `r8_11_tilt_exact.py` (19 s; log): explicit pairs with exact sums on NON-flat visible landscapes
+  (soft basin of slope 0.5u, 0.7u with the twin far away / on the rim; global tilts 0.4u, 0.6u):
+  the twin exists (U′ = U exactly, gap > ε) in all five cases; exact hit-probability exponents
+  0.0495, 0.0370, 0.0316 against 0.0708–0.0786 for the plateau twin on the flat background at
+  the same (n, u, ε); on the global tilts the exponent is 0.0000 — one query far uphill (weight
+  578 resp. 596 of 600) meets the difference set.  The rate machinery of script 05 agrees with the
+  exact exponents up to the finite-n prefactor (+0.004).
+* `r8_06_nonadaptive.py` part 2 finished after 28 min 50 s (longer than the 20-minute guideline —
+  my estimate "2 minutes" was wrong; docstring corrected, `part1` option added).  Datum-assisted
+  bracket on six radial families, four (n, u, ε₁): largest sample needed (smallest unexplored
+  radius) 155 / 183 / 131 / 62 against the guess's ρ₃n = 157.5 / 183.9 / 133.0 / 62.5 and the
+  no-datum radius 155.1 / 175.6 / 125.1 / 50.9; worst families: raised cones (first two),
+  truncated cones (last two).  In the first case the three radii are within finite-size error of
+  one another.
+* Report written in pieces (sections 1–2 first), then 3–9.
+
+## Step 5 — report
+
+* Report written to `docs/science/workstreams/R8_REPORT.md` in pieces (header, verdicts, table;
+  §2.1–2.3; §2.4–2.6; §3–4; §5–6; §7; §8–9), then re-read from the top.
+* **A slip of my own caught on re-reading (R8.3).**  My first write-up of step (2) was
+  "Z′ ≥ Z″ + (W − V − ω) > Z″", which needs the overlap weight ω to be below W − V — false for
+  large gaps (at n = 1500, u = 1, gap 75 the twin's weight inside V is about e^{34}·Z₀: the
+  fraction e^{−41} of an excess e^{75}·Z₀).  The correct step is trivial: g′ = min(g₀, T) ≤ T = g″
+  pointwise, so Z′ ≥ Z″ with no hypothesis.  The numerical check (`r8_08`) tested the final
+  inequality G(r₂−1) − (U″−U₀)₊ ≤ gap, which is right, so it did not catch the wrong
+  intermediate line.  Statement, constant ((u r₂ + 1) instead of u r₂) and the docstring of
+  `r8_08_matching.py` corrected.
+* Also corrected on re-reading: "samples avoid V" ↔ "meet V" in F1; the count of searches; the
+  description of the greedy descent in §2.1 (it reaches the minimum in five of six cases).

@@ -238,6 +238,25 @@ measure of the known part — would, for `ln Z`, replace the sup-norm floor by t
 remainder; whether such a bound can be *certified* is the question put to the theory
 division as T-3 of SCI-RES-0002.
 
+**Answered in principle at checkpoint 34 (the theory division's box-class result,
+THY-RES-0007 §4, and our addendum A17) — and the sentence above was too hopeful about
+`L²`.**  What certifies `ln Z` by sampling from the known part is an a-priori bound on a
+divergence of the *true ensemble from the model*: a pointwise floor of the remainder
+(cost `e^{floor}/ε` with a hint), a Rényi divergence of order `p > 1` (`e^{κ}/ε^{p/(p−1)}`; at
+`p = 2` a chi-square bound, `(1 + χ²)/ε²`), or a Kullback–Leibler divergence (`e^{Θ(κ/ε)}`).  **An
+`L²` bound on the remainder energy — the root-mean-square error that every fit reports —
+certifies nothing**: a budget of `0.1 k_BT` allows an undetected dip of `100 k_BT` on a state
+of probability `10⁻⁶`.  The physical reading [H]: a fitted surrogate is certified by
+knowing that *the truth has no basin the surrogate misses*, in an exponential-moment
+sense; knowing that the surrogate is accurate where *it* puts its weight (which is what
+a variational fit optimises and what a test set drawn from the surrogate measures) is
+the cheap half and is not enough.  For the one real remainder measured against a
+pair-additive class (GBn2, backbone torsions) the needed floor grows from `0.8` to
+`15.6 k_BT` between two and eight residues — "independent of the size of the system" is
+a statement about the theorem's coordinate, not about that remainder.  Whether a floor
+can be *proved* for the solvent term in rotamer variables, where the many-body part is
+small, is workstream P3.
+
 ## 8. Provenance, replication, limitations
 
 * **Replicated by the coordinator (same machine, the workstream's scripts):** the

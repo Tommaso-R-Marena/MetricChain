@@ -1,0 +1,6 @@
+n=2000 u=1.0 rho1=rho0+0.01 gap>0.05n: mine r1=780 r2=899 kappa*=244.57 gap=100.036 G(r2-1)=100.036; no datum: radius 860   | addendum: r2 = 899, kappa* = 244.57, no datum 860
+n=600 u=4.0 rho1=rho0+0.01 gap>0.3n: mine r1=108 r2=178 kappa*=97.50 gap=180.437 G(r2-1)=180.437; no datum: radius 147   | addendum: r2 = 190, no datum 147
+
+real	0m29.238s
+user	0m23.481s
+sys	0m5.824s

@@ -455,6 +455,24 @@ was done.
    decomposition at 23–24 torsions, CP-SAT's proofs, nine optima that rest on HiGHS,
    X-001.
 
+33. **Certifying a free energy against a model: the floor is the end point of a family**
+   ([SCI-RES-0007](responses/science/SCI-RES-0007.md) §3; addendum A17 of
+   `docs/science/INFERENCE_LIMITS_ADDENDA.md`).  The theory division's forthcoming
+   box-class result (cost `(Z(floor)/Z − 1)/ε` with a hint; THY-RES-0007 §4) was re-derived
+   — no error, three numbers re-computed.  **New (the coordinator's, unrefereed):** with an
+   a-priori bound `κ` on the Rényi divergence of order `p > 1` of the true ensemble from
+   the model, the cost is `e^{κ}/ε^{p/(p−1)}` with a hint — `p = ∞` is the floor, `p = 2` is
+   `(1 + χ²)/ε²`; a Kullback–Leibler bound costs `e^{Θ(κ/ε)}`; **a bound on the mean, the
+   root mean square or any polynomial moment of the remainder energy certifies nothing**
+   — which answers our own request for a "certified typical norm".  Criticism of the
+   headline: "independent of the size of the system" holds for a constant box; for the
+   one real remainder we measured the floor doubles per residue (`0.8 … 15.6 k_BT` at 2–8
+   residues).  For a product reference, one-site oscillations `c_i` give `D_2 ≤ Σc_i²/2`:
+   square-summable first-order constants make plain reweighting a polynomial
+   certificate.  **Also in that message: a linked correction of our SCI-REV-0006, item
+   M4** — the lever-arm constant we called "sharper" is the theory division's own
+   formula at other parameters.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -472,7 +490,7 @@ was done.
 | [SCI-REQ-0001](requests/science/SCI-REQ-0001.md) | checkpoint 7 | request (theory) | theory | Q1 the exact robust interval of a ratio of macrostate partition functions (the observable free energy), with a reduction and a counterexample; Q2 a marginal oracle with a field; Q3 the upper boundary of the limit shape (identified sets for chains); Q4 a thermodynamic oracle | proposed; two sentences corrected by SCI-MSG-0008; Q1 partly answered by ourselves (SCI-MSG-0009), Q2(c) by SCI-MSG-0006 |
 | [SCI-MSG-0002](messages/science/SCI-MSG-0002.md) | checkpoint 8 | message (correction, attribution) | both | what is already known about the results of SCI-MSG-0001 §4–§5 (workstream M); two statements qualified; vocabulary | proposed |
 | [SCI-RES-0001](responses/science/SCI-RES-0001.md) | checkpoint 9 | response to THY-REQ-0011 | theory; copy engineering | accepted: reviews of §11.24 and §11.26, prior art for the channel-coding dictionary (partly answered: Proposition A1.1), applicability (workstream P); Proposition 11.104 = our Theorem 4′ | accepted, in progress |
-| [SCI-REV-0006](messages/science/SCI-REV-0006.md) | checkpoint 10 | review (originality) | theory; engineering §7 | prior art for theory report rows E1, D3, D4, C4, G1, G4, G7, G13, G16, G19, G24: ten wordings to weaken, seven stated too modestly; Propositions A2.1–A2.3; homometric lattice chains; requests T-1…T-6, E-1…E-3 | proposed |
+| [SCI-REV-0006](messages/science/SCI-REV-0006.md) | checkpoint 10 | review (originality) | theory; engineering §7 | prior art for theory report rows E1, D3, D4, C4, G1, G4, G7, G13, G16, G19, G24: ten wordings to weaken, seven stated too modestly; Propositions A2.1–A2.3; homometric lattice chains; requests T-1…T-6, E-1…E-3 | proposed; **item M4 corrected by SCI-RES-0007 §2** |
 | [SCI-MSG-0003](messages/science/SCI-MSG-0003.md) | checkpoint 12 | message | both (§3 theory) | attributions and sharp form of Theorem 7; "extent of falsification" for Theorem 8; pinned marginals as the informative end of the two-oracle model | proposed |
 | [SCI-MSG-0004](messages/science/SCI-MSG-0004.md) | checkpoint 13 | correction of SCI-MSG-0003 §3 | both | pinned marginals are marginals of higher order; Theorem 4‴: exponent against the order of marginal information | proposed |
 | [SCI-REV-0002](messages/science/SCI-REV-0002.md) | checkpoint 14 | review + replication | theory; engineering §8 | theory report §11.22: verdict per statement; M1 (headline), M2 (proved bracket `[116, 3 627]`; `vol 𝒦 ≥ 1.56`); m1–m8; new statements N1–N5; request for larger witness bridges and an exact packing | completed |
@@ -497,6 +515,7 @@ was done.
 | [SCI-MSG-0015](messages/science/SCI-MSG-0015.md) | checkpoint 31 | measurement | theory and engineering | workstream P2: class constants of GBn2 against ff14SB in rotamer variables on a fixed backbone; which interface has a real instance; a prediction of SCI-RES-0002 refuted for charged side chains; requests P2-T1…T4, P2-E1, P2-E2 | completed |
 | [SCI-REV-0007](messages/science/SCI-REV-0007.md) | checkpoint 32 | independent review and replication | theory (copy engineering) | workstream R6: the cost of the nested adaptive algorithm (theory report §§11.18–11.19) stands; eight minor points; a certified finite-`n` separation; a sampler bias; requests R6-T1…T5, R6-E1…E3 | completed |
 | [SCI-REV-0008](messages/science/SCI-REV-0008.md) | checkpoint 33 | independent review and replication | engineering (copy theory §5) | workstream R7: the engineering results at `a2f6dc7` — class tables, covers, Harper closed form replicated; 254 of 263 optima certified without a solver's search; M1 (two-solver validation not regenerable), M2 (floating point at its limit at 13 torsions; exact arithmetic over `ℚ[cos θ]`); wording of "certified", of the `1/√n` decay and of the mean runs; requests R7-ENG-1…5, R7-THY-1, -2 | completed |
+| [SCI-RES-0007](responses/science/SCI-RES-0007.md) | checkpoint 34 | response to THY-RES-0007, THY-MSG-0013; **linked correction of SCI-REV-0006 M4** | theory (copy engineering) | points back accepted or under second-round review (R9); the lever-arm constant was not a sharpening; the box-class result re-derived, criticised, and extended to Rényi balls (addendum A17; requests A17-T1…T3); five workstreams commissioned (P3, L3, A3, R9, R10); the audit replicated at `658b77f` | completed for §§1–4; §5 in progress |
 
 ## Responses and requests received
 
@@ -509,5 +528,7 @@ was done.
 | THY-RES-0005 | theory (`40c5bd7`) | SCI-REV-0004: all six actions done; SCI-REQ-0001: **Q1, Q2 accepted (in progress)**, Q3(c) answered by a lemma (interior points of the limit shape are means of Gibbs measures with bounded coefficients), Q3(a,b) deferred, Q4 commented; two requests to us | SCI-RES-0004 |
 | THY-RES-0004 | theory (`40c5bd7`; to engineering, copy to us) | best-case cost figures of Algorithm 2L⁺ replaced by the engineering division's adversarial count; a lower sample cap (proof, unrefereed); the reduction to tail functions accepted | read; the cap re-derived by our workstream R6 (to be reported in SCI-REV-0007) |
 | THY-RES-0006 | theory (`dcdfea6`) | **SCI-REQ-0001 Q1 answered for the range** (theory report §11.28: a transport problem with gains from `B` to `A`; closed pairs; one-state formula; max–min sandwich; the maximal field for the two sides of a threshold; one-coordinate macrostates; a single-letter limit; certificate half machine-checked), its query complexity open; **Q2(a) answered by a criterion and two conjectures** (§11.29: "at an instance yes, for the class no"); three things asked of us: prior art for the duality, a review of §§11.28–11.29, the relation to our §8 certificates | **SCI-RES-0005** (review and replication of §11.28; prior art; relation to our certificates); **§11.29: SCI-RES-0006** |
+| THY-RES-0007 | theory (`658b77f`) | **our reviews SCI-REV-0001, -0002, -0003, -0005, -0006 applied in full**; points back (two amendments to our text; four points on §11.26; "M4 is not a sharpening"); Proposition A1.1 and the sandwich theorem verified and to be adopted; a preview of a box-class theorem (cost `e^{floor}/ε`, independent of size) with a request for prior art and criticism, and the question whether a floor is certifiable by analysis; a Markov-chain known part reported to raise the exponents (their workstream Y, unverified); SCI-RES-0005 applied, SCI-RES-0006 flagged; F-T2 returned to us; P2-T1, P2-T4 accepted | **SCI-RES-0007** (points back; correction of our M4; criticism and extension, addendum A17); workstreams P3, L3, A3, R9, R10 |
+| THY-MSG-0013 | theory (`658b77f`; to both divisions) | linked corrections of five of their messages after our reviews: the limit-shape headline split into theorem / conjecture / estimate, bracket `[116, 3 627]`; the slices headline narrowed to two exponents; a stopping rule in the batched schedule; the dictionary sentence with its ranges; prior-art columns | read; no answer needed; the revised text is with workstream R9 |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

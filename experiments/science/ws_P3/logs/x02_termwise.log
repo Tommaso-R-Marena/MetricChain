@@ -1,0 +1,41 @@
+S3 on E, tau 0.7: atoms 45, sites 3, domain [9, 9, 9]; setup 0.4s
+order 3 (1 subsets, 0.2s): sums over subsets: exact total 4.0259e-03, exact self 5.8753e-03, exact cross 4.8894e-03 | bound self 1.0921e-02 (x1.9), bound cross 3.9809e-01 (x81.4); bound total / exact total = 101.6
+      T=(0, 1, 2): exact total 4.026e-03 self 5.875e-03 cross 4.889e-03 | bound self 1.092e-02 (x1.9) cross 3.981e-01 (x81.4) | (self+cross bound)/exact total = 101.6
+
+S4 on E, tau 0.7: atoms 56, sites 4, domain [9, 9, 9, 9]; setup 1.9s
+order 3 (4 subsets, 0.4s): sums over subsets: exact total 9.5589e-03, exact self 1.3826e-02, exact cross 1.1820e-02 | bound self 2.5403e-02 (x1.8), bound cross 9.5158e-01 (x80.5); bound total / exact total = 102.2
+      T=(0, 1, 2): exact total 4.242e-03 self 5.861e-03 cross 4.887e-03 | bound self 1.099e-02 (x1.9) cross 4.118e-01 (x84.3) | (self+cross bound)/exact total = 99.7
+      T=(1, 2, 3): exact total 4.079e-03 self 5.864e-03 cross 4.847e-03 | bound self 1.100e-02 (x1.9) cross 4.116e-01 (x84.9) | (self+cross bound)/exact total = 103.6
+      T=(0, 2, 3): exact total 7.262e-04 self 1.093e-03 cross 1.112e-03 | bound self 1.697e-03 (x1.6) cross 6.437e-02 (x57.9) | (self+cross bound)/exact total = 91.0
+      T=(0, 1, 3): exact total 5.114e-04 self 1.008e-03 cross 9.736e-04 | bound self 1.715e-03 (x1.7) cross 6.377e-02 (x65.5) | (self+cross bound)/exact total = 128.1
+order 4 (1 subsets, 0.1s): sums over subsets: exact total 2.4523e-04, exact self 5.1538e-05, exact cross 2.8208e-04 | bound self 1.1790e-04 (x2.3), bound cross 9.5597e-03 (x33.9); bound total / exact total = 39.5
+      T=(0, 1, 2, 3): exact total 2.452e-04 self 5.154e-05 cross 2.821e-04 | bound self 1.179e-04 (x2.3) cross 9.560e-03 (x33.9) | (self+cross bound)/exact total = 39.5
+
+V6 on E, tau 0.7: atoms 108, sites 6, domain [3, 3, 3, 3, 3, 3]; setup 0.9s
+order 3 (20 subsets, 0.4s): sums over subsets: exact total 3.0746e-02, exact self 8.6463e-02, exact cross 7.4607e-02 | bound self 2.8344e-01 (x3.3), bound cross 1.4124e+01 (x189.3); bound total / exact total = 468.6
+      T=(2, 3, 4): exact total 5.850e-03 self 1.884e-02 cross 1.648e-02 | bound self 6.005e-02 (x3.2) cross 2.685e+00 (x162.9) | (self+cross bound)/exact total = 469.2
+      T=(0, 1, 2): exact total 5.801e-03 self 1.932e-02 cross 1.689e-02 | bound self 5.916e-02 (x3.1) cross 2.534e+00 (x150.0) | (self+cross bound)/exact total = 447.0
+      T=(1, 2, 3): exact total 5.766e-03 self 1.880e-02 cross 1.649e-02 | bound self 5.999e-02 (x3.2) cross 2.686e+00 (x162.8) | (self+cross bound)/exact total = 476.2
+      T=(3, 4, 5): exact total 5.748e-03 self 1.960e-02 cross 1.685e-02 | bound self 5.961e-02 (x3.0) cross 2.524e+00 (x149.8) | (self+cross bound)/exact total = 449.5
+      T=(0, 1, 3): exact total 1.360e-03 self 1.572e-03 cross 1.158e-03 | bound self 6.366e-03 (x4.1) cross 4.923e-01 (x425.1) | (self+cross bound)/exact total = 366.7
+order 4 (15 subsets, 0.2s): sums over subsets: exact total 2.1630e-03, exact self 2.4041e-03, exact cross 2.7994e-03 | bound self 6.0072e-03 (x2.5), bound cross 5.2927e-01 (x189.1); bound total / exact total = 247.5
+      T=(1, 2, 3, 4): exact total 5.478e-04 self 6.998e-04 cross 7.495e-04 | bound self 1.756e-03 (x2.5) cross 1.387e-01 (x185.1) | (self+cross bound)/exact total = 256.4
+      T=(2, 3, 4, 5): exact total 5.384e-04 self 6.979e-04 cross 7.564e-04 | bound self 1.746e-03 (x2.5) cross 1.349e-01 (x178.3) | (self+cross bound)/exact total = 253.8
+      T=(0, 1, 2, 3): exact total 5.311e-04 self 6.998e-04 cross 7.333e-04 | bound self 1.747e-03 (x2.5) cross 1.351e-01 (x184.2) | (self+cross bound)/exact total = 257.7
+      T=(1, 2, 3, 5): exact total 1.081e-04 self 6.176e-05 cross 1.244e-04 | bound self 1.588e-04 (x2.6) cross 2.154e-02 (x173.2) | (self+cross bound)/exact total = 200.8
+      T=(0, 1, 2, 4): exact total 1.046e-04 self 6.109e-05 cross 1.192e-04 | bound self 1.575e-04 (x2.6) cross 2.101e-02 (x176.3) | (self+cross bound)/exact total = 202.3
+
+L6 on H, tau 0.6: atoms 126, sites 6, domain [2, 2, 2, 2, 2, 2]; setup 0.3s
+order 3 (20 subsets, 0.3s): sums over subsets: exact total 2.6782e-01, exact self 5.9715e-01, exact cross 6.8350e-01 | bound self 1.0840e+00 (x1.8), bound cross 1.2664e+02 (x185.3); bound total / exact total = 476.9
+      T=(0, 4, 5): exact total 5.586e-02 self 2.377e-02 cross 3.258e-02 | bound self 4.143e-02 (x1.7) cross 6.452e+00 (x198.1) | (self+cross bound)/exact total = 116.2
+      T=(0, 1, 5): exact total 3.517e-02 self 1.624e-02 cross 1.924e-02 | bound self 3.411e-02 (x2.1) cross 5.150e+00 (x267.6) | (self+cross bound)/exact total = 147.4
+      T=(0, 1, 4): exact total 3.146e-02 self 6.113e-02 cross 9.259e-02 | bound self 1.549e-01 (x2.5) cross 1.475e+01 (x159.3) | (self+cross bound)/exact total = 473.8
+      T=(1, 4, 5): exact total 3.126e-02 self 1.509e-01 cross 1.467e-01 | bound self 1.981e-01 (x1.3) cross 1.758e+01 (x119.8) | (self+cross bound)/exact total = 568.9
+      T=(2, 4, 5): exact total 1.367e-02 self 2.245e-02 cross 1.740e-02 | bound self 3.315e-02 (x1.5) cross 4.760e+00 (x273.5) | (self+cross bound)/exact total = 350.6
+order 4 (15 subsets, 0.1s): sums over subsets: exact total 6.0705e-02, exact self 6.9588e-03, exact cross 6.4404e-02 | bound self 4.8206e-02 (x6.9), bound cross 1.2511e+01 (x194.3); bound total / exact total = 206.9
+      T=(0, 1, 4, 5): exact total 2.057e-02 self 3.062e-04 cross 2.068e-02 | bound self 5.707e-03 (x18.6) cross 1.801e+00 (x87.1) | (self+cross bound)/exact total = 87.8
+      T=(0, 1, 3, 4): exact total 7.032e-03 self 2.202e-03 cross 9.233e-03 | bound self 1.212e-02 (x5.5) cross 1.894e+00 (x205.2) | (self+cross bound)/exact total = 271.1
+      T=(1, 3, 4, 5): exact total 4.696e-03 self 2.731e-04 cross 4.730e-03 | bound self 1.996e-03 (x7.3) cross 9.634e-01 (x203.7) | (self+cross bound)/exact total = 205.6
+      T=(1, 2, 4, 5): exact total 4.434e-03 self 1.467e-03 cross 5.701e-03 | bound self 1.237e-02 (x8.4) cross 1.991e+00 (x349.2) | (self+cross bound)/exact total = 451.7
+      T=(0, 1, 2, 4): exact total 4.305e-03 self 3.909e-04 cross 4.495e-03 | bound self 1.935e-03 (x4.9) cross 7.193e-01 (x160.0) | (self+cross bound)/exact total = 167.6
+

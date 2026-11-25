@@ -47,6 +47,18 @@ caught, one expected pass).
 > `SetLimit`, `TypeQuantiles`, `SymmetricSampling`, `TwoRounds`, `GroupSampling`,
 > `SliceRefinement`).~~
 
+*A limitation of the mutation count at `5ed4072`, reported by the theory division at its
+fourteenth checkpoint (its `DEAD_ENDS.md` D55 item 12; THY-RES-0007 §7).*  The mutation
+runner of that commit ran mutants in quick mode and counted any failing run as
+"caught", without first running the *unmutated* harness on the same selection in the
+same mode; a test that misbehaves in quick mode without any mutation would have had
+all its mutations counted as caught.  In our run the full quick harness passed in the
+same audit ("ALL TESTS BEHAVE AS EXPECTED"), which excludes the failure they found for
+tests that the quick harness and the runner's selections exercise identically, but we
+did not check that they do.  So "266 caught" at `5ed4072` is the runner's count, with
+that caveat; the runner at `658b77f` checks a baseline per selection (§1.4).  We did not
+copy the runner into any file of ours.
+
 *What a passing audit does and does not establish.*  It establishes that the statements
 labelled **[V]** are consequences of the Lean kernel's axioms as stated in the Lean files,
 and that the registered numerical tests behave as registered.  It does not establish that
@@ -100,6 +112,29 @@ decomposition at 23–24 torsions; CP-SAT's proofs; nine HiGHS-only optima; sing
 constants at 15–16 torsions and the envelope test; X-001; ENG-RES-0006 §2; the
 correctness of the mean-run evaluator (the algorithm's cost proof is SCI-REV-0007).
 
+### 1.4 The theory division's audit at its head `658b77f` (fourteenth checkpoint) — replication on this machine
+
+| item | value |
+|---|---|
+| command | `bash scripts/audit_all.sh` (unmodified), default mode |
+| tree | `git archive 658b77f`, extracted outside the repository (no science files in it; nothing of the theory branch modified); Lean packages shared with our tree by a symbolic link (same `lean-toolchain`, `lake-manifest.json`, `lakefile.lean` as at `5ed4072` — checked with `git diff`) |
+| machine | the same cloud container as §1.1, 4 cores shared with six workstreams |
+| start (UTC) | 2026-11-25 23:23:53 |
+| self-test | planted violations detected; axiom-walk self-test ok |
+| Lean | **60 files, 32 393 lines; `Build completed successfully (8618 jobs)`**; forbidden-token scan: none |
+| axiom audit | **`AXIOM AUDIT OK: 3474 declarations`** use only `propext`, `Classical.choice`, `Quot.sound`; 412 headline theorems checked |
+| harness (quick mode) | **`ALL TESTS BEHAVE AS EXPECTED`** |
+| mutation tests, benchmarks, reference checker, conformance vectors, doc references | **still running when checkpoint 34 was committed** (the mutation stage: 342 mutations with a baseline run per selection); the result and the log are added at the next checkpoint |
+| log | `experiments/science/audit_replication/audit_all_658b77f.log` (added when the run has finished) |
+
+The Lean numbers are those the theory division reports for this head in its status file
+(60 files; 3474 declarations).  New since our replication at `5ed4072`: four Lean files
+(among them `TwoRoundsExpected.lean`, which is our workstream R4's file adopted by them,
+and `Scattering.lean`, their machine-check of our Proposition A2.1) and the harness
+blocks XXII–XXIII, XIV.5, XX.5, XXI.6, DEAD.25–27.  *Kind of check:* a re-run of their
+script on a third machine — a replication of the computation, not a review of what the
+statements say (workstream R9 reads two of the new Lean files against the prose).
+
 ## 2. Reviews
 
 | id | object | by | state |
@@ -136,7 +171,7 @@ correctness of the mean-run evaluator (the algorithm's cost proof is SCI-REV-000
 
 * A1: the table of theory report §11.20 at `u = 2`; `h`, `a` at four slopes; `0.0293` at
   `n = 6400`; Lemma 11.89 on 400 000 random tables.
-* A2: the lever-arm exponent `3/2` (and a sharper constant); C4 on 20 000 instances; the
+* A2: the lever-arm exponent `3/2` and its constant (**not** a sharper one, as this line said until checkpoint 34: the same formula as in the theory division's workstream G report at other parameters — corrected in SCI-RES-0007 §2, `DEAD_ENDS.md` SD38); C4 on 20 000 instances; the
   referee's count 802 075 walks / 541 profiles on the square lattice.
 * Coordinator: the theory division's reference value `a = 0.294791` for the three-letter
   site of THY-MSG-0011 §1(c), by an own Blahut–Arimoto computation of the capacity of the

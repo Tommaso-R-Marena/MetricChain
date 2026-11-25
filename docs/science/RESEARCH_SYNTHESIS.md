@@ -12,32 +12,36 @@ first; it points to everything else.  The digest for the other two divisions is
 ## 0. Resume here
 
 1. `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering` and read the two
-   heads.  **Last read (checkpoint 33, 23:19 UTC on 2026-11-25): theory `658b77f`** (their
-   fourteenth checkpoint: THY-RES-0007 — the reply to our reviews SCI-REV-0001, -0002,
-   -0003, -0005, -0006, all applied, with points back to us and three requests — and
-   THY-MSG-0013 read in full; the changed theory report, `Y_REPORT.md` and the new Lean
-   files **not yet read**; `SCIENCE_UPSTREAM_SYNC.md` says what was not read), **engineering
-   `a2f6dc7`** (reviewed and replicated by workstream R7: SCI-REV-0008).  If either moved, read its digest (`docs/collaboration/THEORY_TO_ENGINEERING.md`,
-   `ENGINEERING_TO_THEORY.md` on their branches) and any `THY-*` / `ENG-*` file that
-   mentions `SCI-`; record the reading in `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`;
-   answer under `responses/science/`.
-   State of the exchange: the theory division read our branch at `9a0865f` (before
-   checkpoint 32).  **Owed to it (THY-RES-0007):** an answer to its points back (§1.1,
-   §1.2 two amendments, §1.4 (a)–(e), §1.5 "M4 is not a sharpening" — a correction of our
-   SCI-REV-0006 is due if its workstream G has the same constant), prior art and
-   criticism for its preview of a floor theorem (§4.2; to be its §11.30), whether a
-   floor of the solvent remainder is certifiable by analysis, a Lean file for the
-   compensation lemma and Theorem A (F-T2), and a remark on its mutation runner.  Not
-   yet answered by it: SCI-MSG-0005, -0006, -0007, -0008, -0009 (digest only),
-   SCI-REV-0007, -0008.  The engineering division had not yet mentioned this branch.
-2. One workstream was running when this was last revised (§5): the referee R8 of
-   addendum A16 (L2, F, P2, R6 and R7 finished and are published: SCI-MSG-0014,
-   SCI-RES-0006, SCI-MSG-0015, SCI-REV-0007, SCI-REV-0008).  Their report files exist as drafts under `docs/science/workstreams/`
-   (`R6_REPORT.md`, `P2_REPORT.md`, `L2_REPORT.md`, `SF_REPORT.md`, `R7_REPORT.md`); **a draft is
-   not a statement of the division**.  When a report is final: read it, re-run one
-   script or re-derive one key step, and publish as described in §5.  F was asked to
-   position its report against theory report §11.29; R7's working copy of engineering
-   files (`experiments/science/ws_R7/eng_copy/`) is deliberately git-ignored.
+   heads.  **Last read (checkpoint 34, 2026-11-25 late evening UTC): theory `658b77f`** (their
+   fourteenth checkpoint: our reviews SCI-REV-0001, -0002, -0003, -0005, -0006 applied;
+   THY-RES-0007, THY-MSG-0013, their status file and the resume section of their research
+   log read in full and **answered by SCI-RES-0007**; their audit replicated here at that
+   commit, `INDEPENDENT_VALIDATION.md` §1.4; the revised sections of their report and their
+   unverified workstream Y are being read by our workstreams R9 and R10, **not by the
+   coordinator**), **engineering `a2f6dc7`** (reviewed and replicated: SCI-REV-0008).  If
+   either moved, read its digest (`docs/collaboration/THEORY_TO_ENGINEERING.md`,
+   `ENGINEERING_TO_THEORY.md` on their branches) and any `THY-*` / `ENG-*` file that mentions
+   `SCI-`; record the reading in `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`; answer under
+   `responses/science/`.
+   State of the exchange: the theory division read our branch at `9a0865f` (before our
+   checkpoint 32).  **Expect from it:** its §11.30 (box classes — we asked it to look at
+   A17-T1 first), its re-derivation of our SCI-RES-0006 and an answer to F-T1, replies to
+   SCI-REV-0007, -0008, SCI-RES-0007, and to SCI-MSG-0005 … -0009 (so far "digest only").
+   **Owed by us to it:** the prior art for its box-class result (A3), whether a floor is
+   certifiable by analysis (P3), the Lean file for the compensation lemma and Theorem A
+   (L3), the second-round review (R9).  The engineering division had not yet mentioned
+   this branch.
+2. **Six workstreams were running when this was last revised (§5):** the referee R8 of
+   addendum A16, and the third wave P3, L3, A3, R9, R10 (briefs in
+   `docs/science/workstreams/*_brief.md`).  Earlier ones are finished and published.  Report
+   files of running workstreams exist as drafts under `docs/science/workstreams/`; **a draft
+   is not a statement of the division**.  When a report is final: read it, re-run one
+   script or re-derive one key step, and publish as described in §5.  Read-only exports
+   used by the third wave (outside the repository, in the session's scratch directory,
+   **lost with the container** — re-create with `git archive <commit> | tar -x -C <dir>`):
+   the theory tree at `658b77f`.  R7's working copy of engineering files
+   (`experiments/science/ws_R7/eng_copy/`) is deliberately git-ignored
+   (`ws_R7/make_eng_copy.sh` re-creates it).
 3. Then take the top item of §7.
 
 Rules that bind the division (from the research owner's charter; none may be relaxed
@@ -177,7 +181,7 @@ statement it reads; when a workstream finalises a report after a message was dra
 it, diff the message against the report's change list; summary tables and headings are
 refereed as statements; in-progress workstream files are snapshots, not statements.
 
-## 5. Running when this was written (second wave)
+## 5. Running when this was written (second and third wave)
 
 | id | brief | on completion |
 |---|---|---|
@@ -187,6 +191,11 @@ refereed as statements; in-progress workstream files are snapshots, not statemen
 | R7 | `workstreams/R7_brief.md` — independent review and replication of the engineering division's results (the first review of that branch by us beyond its class tables) | **done at checkpoint 33** — no wrong number; class tables, covers and the Harper closed form replicated; 254 of 263 optima certified without a solver's search; two findings (the two-solver validation cannot be regenerated; floating point at its limit at 13 torsions of the off-lattice chain).  Coordinator: M1 verified on the engineering branch; the Harper table re-run.  Published as SCI-REV-0008; `INDEPENDENT_VALIDATION.md` §1.3 |
 | F | `workstreams/F_brief.md` — the two-oracle model with a field (report: `SF_REPORT.md`) | **done at checkpoint 30** — the coordinator's conjecture is true as a statement and false as an explanation; Theorems A, B (class exponents unchanged, every `n`); instance-wise bracket; `k = 2` exact at `n = 13`; tolerance theorem; comparison with theory report §11.29.  Coordinator re-derived the lemmas, Theorem A, the algebra of B and the tilt inequality; re-ran the exact-rational check; own check `pi_inference/compensation_lemma_check.py`.  Published as SCI-RES-0006 |
 | R8 | `workstreams/R8_brief.md` — adversarial referee of addendum A16 (the mean-energy datum at extensive accuracy: entropy bracket, plateau twin, isoperimetry with an energy constraint, the conjecture); launched at checkpoint 28 because A16 had no second reader | read `R8_REPORT.md`; apply its findings to A16 with linked corrections of SCI-MSG-0012/-0013 if any sentence falls; change "author only" to "refereed" in status rows S34, S36 only for the statements it confirms |
+| P3 | `workstreams/P3_brief.md` — a floor by analysis: certified third-order constants of the GBn2 term in rotamer variables without enumeration; tightness against P2; the theory division's cost number `Z(m)/Z(g) − 1`; one certified `ln Z` beyond enumeration size if feasible | read `P3_REPORT.md`; re-run one check against OpenMM; publish as a message to theory and engineering (it answers THY-RES-0007 §4.2); update `PHYSICAL_APPLICABILITY.md` §2a, §7, `BENCHMARK_DESIGN.md`, `OPEN_PROBLEMS.md` D5′ |
+| L3 | `workstreams/L3_brief.md` — Lean: the compensation lemma and Theorem A of workstream F (the theory division's request F-T2); the algebraic core of Lemma A16.5; items of Proposition A1.1 | re-compile every file with `lake env lean`; read the headline statements against `SF_REPORT.md`; publish as a verification message to theory (they will adopt the file); change [P] to [V] in status row S38 only for what is formal |
+| A3 | `workstreams/A3_brief.md` — prior art, full text where accessible, for the box-class result and for addendum A17 | read `A3_REPORT.md`; check three citations yourself (bibliographic data and the quoted statement); publish to theory (answers THY-RES-0007 §6.1); fill the row of `PRIOR_ART_MATRIX.md`; correct A17's "from memory" sentences |
+| R9 | `workstreams/R9_brief.md` — second-round review of the theory report at `658b77f` against our five reviews; the theory division's amendments; statements written while applying the reviews; the exact-semigroup sketch for bridges | read `R9_REPORT.md`; re-derive one finding; publish as `SCI-REV-0009` to theory; if it finds further errors of ours, linked corrections |
+| R10 | `workstreams/R10_brief.md` — independent review and replication of the theory division's workstream Y (a Markov-chain known part raises the exponents?) | read `R10_REPORT.md`; re-run one of its scripts; publish as `SCI-REV-0010` to theory; update `PHYSICAL_APPLICABILITY.md` (product-measure exponents optimistic for interacting chains?) and the frontier map |
 
 Workstream files under `experiments/science/ws_*/` and `*_REPORT.md` are committed as
 snapshots while a workstream runs; they are statements of the division only once the

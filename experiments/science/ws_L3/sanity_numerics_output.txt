@@ -1,0 +1,21 @@
+S1 Lemma 3(i)  [7 groups, non-product invariant reference weights]: worst |marg - dens| = 2.22e-16
+S2 Lemma 3(ii) [287 cases]: worst |marg(w0,w1) - c_Delta| = 1.06e-14; worst error of the mass-ratio formula = 2.34e-13
+S1' transitive set that is not a group (n=5, rotations without the identity): worst = 0.00e+00
+S3 Lemma 0 (window) [200 random class members, n <= 5]: worst violation = 1.11e-16
+S4 Lemma 2 (abstract; 20000 random pairs of probability vectors): worst violation of R-1 <= E <= R: 2.66e-15; of |c - c0| <= 1/(R-1): -3.64e-02
+S5 Theorem A, every finite ingredient, 184 parameter sets over 7 site groups (Z2..Z6, Z2xZ2, S3): all assertions passed
+    sample rows (group, p, u, gamma, k, r, b, beta, gap, max count, n*max plain count, |T_k|):
+    Z2, 0.3, 1, 0.2, 1, 1.838, 0.4941, 34.48, 1.512, 2, 4, 2
+    Z4, 0.1, 2, -0.7, 1, 2.37, 0.5677, 74.35, 1.983, 4, 16, 4
+    Z5, 0.1, 2, -0.7, 3, 1.957, 0.6814, 44.02, 1.553, 10, 50, 10
+    Z6, 0.1, 2, -0.7, 1, 2.742, 1.389, 115.1, 1.968, 6, 36, 6
+    Z2xZ2, 0.3, 1, 0.2, 1, 2.444, 0.2571, 74.89, 2.237, 4, 16, 4
+    S3, 0.3, 1, 0.2, 4, 2.186, 1.39, 54.6, 1.463, 15, 90, 15
+    S3, 0.7, 3, 3, 4, 1.538, 2.01, 48.3, 0.9327, 15, 90, 15
+Traceback (most recent call last):
+  File "/home/user/MetricChain/experiments/science/ws_L3/sanity_numerics.py", line 330, in <module>
+    check_a16()
+    ~~~~~~~~~^^
+  File "/home/user/MetricChain/experiments/science/ws_L3/sanity_numerics.py", line 296, in check_a16
+    sstar = math.exp(1 / eta - 1 - U0)
+OverflowError: math range error

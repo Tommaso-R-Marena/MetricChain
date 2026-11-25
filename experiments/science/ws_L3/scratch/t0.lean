@@ -1,0 +1,24 @@
+import Mathlib
+#check @Fintype.prod_sum
+#check @Finset.prod_univ_sum
+#check @Equiv.extendSubtype
+#check @Equiv.extendSubtype_apply_of_mem
+#check @Equiv.extendSubtype_mem
+#check @Equiv.extendSubtype_not_mem
+#check @Equiv.prod_comp
+#check @Equiv.sum_comp
+#check @Fintype.sum_equiv
+#check @Equiv.arrowCongr
+#check @hammingDist
+#check @Fintype.equivOfCardEq
+#check @Fintype.card_subtype
+#check @Finset.exists_subset_card_eq
+#check @Finset.sum_comm
+#check @Finset.sup'_le
+#check @Finset.le_sup'
+#check @Finset.exists_mem_eq_sup'
+example (n : ℕ) [NeZero n] : AddCommGroup (Fin n) := inferInstance
+#check @Equiv.addRight
+#check @Equiv.piCongrLeft'
+#check @Function.update_idem
+#check @hammingDist_eq_zero

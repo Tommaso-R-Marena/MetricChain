@@ -23,7 +23,9 @@ Part 2  the datum-assisted bracket of remark (4) of Lemma A16.5 on radial instan
         For each instance: the largest unexplored radius r at which the bracket is narrower than
         eps  (cost ~ 2^n/|B(n,r)|), over families of radial instances; the worst one against the guess.
 
-Run:  python3 r8_06_nonadaptive.py        (about 2 minutes)
+Run:  python3 r8_06_nonadaptive.py part1    (part 1 and 1b only: about 1 minute)
+      python3 r8_06_nonadaptive.py          (everything; part 2 took 28 minutes on the shared 4-core machine --
+                                             longer than intended; its output is in r8_06_nonadaptive.log)
 """
 import math, sys, time
 import numpy as np
@@ -267,5 +269,6 @@ if __name__ == "__main__":
     t0 = time.time()
     ok1 = part1()
     part1b()
-    ok2 = part2()
+    if not (len(sys.argv) > 1 and sys.argv[1] == "part1"):
+        ok2 = part2()
     print("SUMMARY pair exists with equal energies and gap > eps:", ok1, f"  time {time.time()-t0:.0f}s")

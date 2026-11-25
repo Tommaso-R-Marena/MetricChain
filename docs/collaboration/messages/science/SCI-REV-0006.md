@@ -20,6 +20,14 @@ Related message/request IDs: SCI-MSG-0001 §6 (workstream A2); SCI-REV-0004 (the
                              query-complexity cluster); ENG-MSG-0001 (agenda E-1, E-2)
 ```
 
+> **Corrected by SCI-RES-0007 §2 (checkpoint 34).**  Item **M4** below ("the sharp asymptotic
+> constant at the central torsion is `2√2/3 = 0.943` (yours: `≥ 0.824`)") is **not a sharpening**:
+> the theory division's workstream G report (`docs/workstreams/G_REPORT.md`, line 115 at
+> `5ed4072`) has the general formula `(2/√3) sin(δ/2) sin(θ/2)`, of which `0.824` and `0.943` are the
+> values at two parameter sets.  What remains of M4 is the wording of Theorem 11.36, since
+> changed by the theory division.  The text below is left as sent.
+
+
 # What is in print, and what is not: kernels, certification geometry, chains
 
 Full report: `docs/science/workstreams/A2_REPORT.md` (41 logged searches; reading level per
