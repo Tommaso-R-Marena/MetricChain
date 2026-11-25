@@ -1,4 +1,7 @@
-"""N7: certified finite-n lower bounds WITH the oracle AT THE ZERO RESIDUAL (and other additive bases), exact type sums.
+"""N7 (first, slow version; superseded by t07b_annular_fast.py.  NOTE: the bisection range for the lift, eps + 60,
+is too small for annular dips at n >= 800 (their lift is n(e + D(core||pi))); this script was stopped after n = 400
+and its two rows agree with t07b.)
+Certified finite-n lower bounds WITH the oracle AT THE ZERO RESIDUAL (and other additive bases), exact type sums.
 
 Alternatives: zero residual + lambda*Delta_A + (1-lambda)*Delta_B, where Delta_A, Delta_B are the cyclically
 symmetrised excesses of two *annular* dips with the same centre s (type k) around the shells

@@ -3182,3 +3182,108 @@
     c_ij  : max 0.019 kcal/mol = 0.03 kT; max by separation 1..: 0.019 0.009 0.009 0.002 0.001 0.001 0.001 0.000 0.000 0.000 0.000
     half row sums (1/2) sum_j c_ij = [0.02 0.03 0.04 0.04 0.04 0.04 0.04 0.04 0.04 0.04 0.03 0.02];  Dobrushin-type sums = [0.02 0.03 0.03 0.03 0.03 0.03 0.03 0.03 0.03 0.03 0.03 0.02] (max 0.03)
     c_ijk : max 7.958e-13 kcal/mol; sum over the 220 triples 1.368e-10; max by span k-i = 2..: 7.11e-13 7.96e-13 7.96e-13 7.67e-13 7.39e-13 7.39e-13 7.39e-13 7.11e-13 6.54e-13 5.68e-13
+    fits  : one-site LS rms 0.016 max 0.063 | two-site LS rms 0.0000 max 0.0000  [531441 points, 631 parameters]
+    (23.3s)
+--- [Xp] ff15ipq-ff14SB: range 16.85, std 1.99 kcal/mol
+    c_i   = [1.45 1.41 1.41 1.41 1.41 1.41 1.42 1.41 1.41 1.41 1.42 1.33]   max 1.45 kcal/mol = 2.4 kT;  rms single flip = [1.02 0.99 0.99 1.   1.   1.   1.   1.   1.   1.   1.   0.94]
+    c_ij  : max 0.004 kcal/mol = 0.01 kT; max by separation 1..: 0.004 0.001 0.001 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+    half row sums (1/2) sum_j c_ij = [0.   0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.  ];  Dobrushin-type sums = [0.   0.   0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.   0.  ] (max 0.01)
+    c_ijk : max 6.537e-13 kcal/mol; sum over the 220 triples 1.086e-10; max by span k-i = 2..: 5.68e-13 5.97e-13 6.25e-13 6.25e-13 6.54e-13 5.97e-13 5.97e-13 5.68e-13 5.40e-13 4.83e-13
+    fits  : one-site LS rms 0.003 max 0.021 | two-site LS rms 0.0000 max 0.0000  [531441 points, 631 parameters]
+    (17.5s)
+--- [Xp] ff99SB-ff14SB: range 14.56, std 1.79 kcal/mol
+    c_i   = [1.21 1.21 1.21 1.21 1.21 1.21 1.21 1.21 1.21 1.21 1.21 1.21]   max 1.21 kcal/mol = 2.0 kT;  rms single flip = [0.89 0.89 0.89 0.89 0.89 0.89 0.89 0.89 0.89 0.89 0.89 0.89]
+    c_ij  : max 0.000 kcal/mol = 0.00 kT; max by separation 1..: 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+    half row sums (1/2) sum_j c_ij = [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.];  Dobrushin-type sums = [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] (max 0.00)
+    c_ijk : max 7.674e-13 kcal/mol; sum over the 220 triples 1.152e-10; max by span k-i = 2..: 5.97e-13 6.25e-13 6.54e-13 7.67e-13 7.11e-13 6.54e-13 6.54e-13 5.97e-13 5.40e-13 4.83e-13
+    fits  : one-site LS rms 0.000 max 0.000 | two-site LS rms 0.0000 max 0.0000  [531441 points, 631 parameters]
+    (20.7s)
+--- [Xp] f: range 23.72, std 2.86 kcal/mol
+    c_i   = [1.98 2.03 2.08 2.1  2.1  2.1  2.1  2.1  2.11 2.11 2.14 2.28]   max 2.28 kcal/mol = 3.8 kT;  rms single flip = [1.41 1.38 1.41 1.42 1.42 1.42 1.42 1.42 1.42 1.42 1.45 1.55]
+    c_ij  : max 0.135 kcal/mol = 0.23 kT; max by separation 1..: 0.135 0.016 0.013 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+    half row sums (1/2) sum_j c_ij = [0.08 0.15 0.16 0.16 0.16 0.16 0.16 0.16 0.16 0.16 0.15 0.08];  Dobrushin-type sums = [0.07 0.13 0.13 0.14 0.14 0.14 0.14 0.14 0.14 0.13 0.13 0.07] (max 0.14)
+    c_ijk : max 6.537e-13 kcal/mol; sum over the 220 triples 9.973e-11; max by span k-i = 2..: 5.40e-13 5.68e-13 5.97e-13 6.25e-13 6.54e-13 6.25e-13 4.83e-13 5.40e-13 4.83e-13 4.26e-13
+    (4.3s)
+=== interfaces on the pruned product domain X', residual GB: argmin f = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), argmin E = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) (same: True; E(argmin f) - min E = 0.000 kcal/mol)
+    first order, centre argmin_f: single-site excitation energies (of f) = [1.2  0.98 0.98 0.98 0.98 0.98 0.98 0.98 0.98 0.96 0.96 1.23]; sharp sites (gap >= c_i): 12 of 12; ratios gap/c = [1.43 1.25 1.31 1.33 1.33 1.33 1.33 1.33 1.34 1.4  1.69 2.82]
+    first order, centre argmin_E: single-site excitation energies (of E) = [0.99 0.89 0.9  0.89 0.89 0.89 0.89 0.89 0.89 0.9  0.93 1.64]; sharp sites (gap >= c_i): 12 of 12; ratios gap/c = [1.18 1.14 1.19 1.21 1.21 1.21 1.21 1.22 1.23 1.31 1.64 3.75]
+    first order: lambda* = 1.2528 (one evaluation certifies the minimum iff >= 1); one evaluation at argmin f certifies to within eps = 0.00 kcal/mol;  sum ln cosh(beta c_i/2) = 2.01 nats, exact Jensen gap = 0.133 nats
+    second order, star at argmin_E (25 evaluations): measured |g - g_star| max 0.511 rms 0.144 (bound sum c_ij: max 2.163);
+        single-site excitation energies of E at the centre (min over states) = [0.99 0.89 0.9  0.89 0.89 0.89 0.89 0.89 0.89 0.9  0.93 1.64];  half row sums = [0.1  0.17 0.19 0.21 0.21 0.21 0.21 0.21 0.21 0.19 0.16 0.09];  row-sum condition (theory report 11.7) holds: True; pairwise-known-part version: margin 0.732 kcal/mol
+        exact criterion of Thm 11.17 (enumeration of the lower pairwise model): the star certifies min E to within eps* = 0.0000 kcal/mol = 0.000 kT  -> EXACT CERTIFICATE;
+        free energy: ln Z in [336.627, 336.840], true 336.722; bracket width 0.213 nats = 0.127 kcal/mol
+    second order, star at argmin_f (25 evaluations): measured |g - g_star| max 0.511 rms 0.144 (bound sum c_ij: max 2.163);
+        single-site excitation energies of E at the centre (min over states) = [0.99 0.89 0.9  0.89 0.89 0.89 0.89 0.89 0.89 0.9  0.93 1.64];  half row sums = [0.1  0.17 0.19 0.21 0.21 0.21 0.21 0.21 0.21 0.19 0.16 0.09];  row-sum condition (theory report 11.7) holds: True; pairwise-known-part version: margin 0.732 kcal/mol
+        exact criterion of Thm 11.17 (enumeration of the lower pairwise model): the star certifies min E to within eps* = 0.0000 kcal/mol = 0.000 kT  -> EXACT CERTIFICATE;
+        free energy: ln Z in [336.627, 336.840], true 336.722; bracket width 0.213 nats = 0.127 kcal/mol
+=== interfaces on the pruned product domain X', residual coul+GB: argmin f = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), argmin E = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) (same: True; E(argmin f) - min E = 0.000 kcal/mol)
+    first order, centre argmin_f: single-site excitation energies (of f) = [1.2  0.98 0.98 0.98 0.98 0.98 0.98 0.98 0.98 0.96 0.96 1.23]; sharp sites (gap >= c_i): 1 of 12; ratios gap/c = [0.8  0.69 0.7  0.71 0.71 0.71 0.71 0.71 0.71 0.72 0.79 1.29]
+    first order, centre argmin_E: single-site excitation energies (of E) = [1.01 0.9  0.91 0.9  0.9  0.9  0.9  0.9  0.91 0.91 0.95 1.42]; sharp sites (gap >= c_i): 1 of 12; ratios gap/c = [0.68 0.63 0.65 0.65 0.65 0.65 0.65 0.66 0.66 0.68 0.78 1.49]
+    first order: lambda* = 0.6864 (one evaluation certifies the minimum iff >= 1); one evaluation at argmin f certifies to within eps = 2.85 kcal/mol;  sum ln cosh(beta c_i/2) = 6.41 nats, exact Jensen gap = 0.403 nats
+    second order, star at argmin_E (25 evaluations): measured |g - g_star| max 0.491 rms 0.138 (bound sum c_ij: max 2.149);
+        single-site excitation energies of E at the centre (min over states) = [1.01 0.9  0.91 0.9  0.9  0.9  0.9  0.9  0.91 0.91 0.95 1.42];  half row sums = [0.1  0.17 0.19 0.21 0.21 0.21 0.21 0.21 0.21 0.19 0.15 0.09];  row-sum condition (theory report 11.7) holds: True; pairwise-known-part version: margin 0.749 kcal/mol
+        exact criterion of Thm 11.17 (enumeration of the lower pairwise model): the star certifies min E to within eps* = 0.0000 kcal/mol = 0.000 kT  -> EXACT CERTIFICATE;
+        free energy: ln Z in [838.641, 838.829], true 838.724; bracket width 0.188 nats = 0.112 kcal/mol
+    second order, star at argmin_f (25 evaluations): measured |g - g_star| max 0.491 rms 0.138 (bound sum c_ij: max 2.149);
+        single-site excitation energies of E at the centre (min over states) = [1.01 0.9  0.91 0.9  0.9  0.9  0.9  0.9  0.91 0.91 0.95 1.42];  half row sums = [0.1  0.17 0.19 0.21 0.21 0.21 0.21 0.21 0.21 0.19 0.15 0.09];  row-sum condition (theory report 11.7) holds: True; pairwise-known-part version: margin 0.749 kcal/mol
+        exact criterion of Thm 11.17 (enumeration of the lower pairwise model): the star certifies min E to within eps* = 0.0000 kcal/mol = 0.000 kT  -> EXACT CERTIFICATE;
+        free energy: ln Z in [838.641, 838.829], true 838.724; bracket width 0.188 nats = 0.112 kcal/mol
+=== interfaces on the pruned product domain X', residual ff03-ff14SB: argmin f = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), argmin E = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) (same: True; E(argmin f) - min E = 0.000 kcal/mol)
+    first order, centre argmin_f: single-site excitation energies (of f) = [1.2  0.98 0.98 0.98 0.98 0.98 0.98 0.98 0.98 0.96 0.96 1.23]; sharp sites (gap >= c_i): 3 of 12; ratios gap/c = [1.14 0.98 1.   0.98 0.98 0.99 0.98 0.98 0.98 0.96 0.98 2.01]
+    first order, centre argmin_E: single-site excitation energies (of E) = [0.18 0.03 0.06 0.03 0.04 0.04 0.03 0.03 0.03 0.01 0.02 0.64]; sharp sites (gap >= c_i): 1 of 12; ratios gap/c = [0.17 0.03 0.06 0.03 0.04 0.04 0.03 0.03 0.03 0.01 0.02 1.05]
+    first order: lambda* = 0.9592 (one evaluation certifies the minimum iff >= 1); one evaluation at argmin f certifies to within eps = 0.10 kcal/mol;  sum ln cosh(beta c_i/2) = 3.59 nats, exact Jensen gap = 2.289 nats
+    second order, star at argmin_E (25 evaluations): measured |g - g_star| max 0.214 rms 0.071 (bound sum c_ij: max 0.415);
+        single-site excitation energies of E at the centre (min over states) = [0.18 0.03 0.06 0.03 0.04 0.04 0.03 0.03 0.03 0.01 0.02 0.64];  half row sums = [0.02 0.03 0.04 0.04 0.04 0.04 0.04 0.04 0.04 0.04 0.03 0.02];  row-sum condition (theory report 11.7) holds: False; pairwise-known-part version: margin -0.014 kcal/mol
+        exact criterion of Thm 11.17 (enumeration of the lower pairwise model): the star certifies min E to within eps* = 0.0000 kcal/mol = 0.000 kT  -> EXACT CERTIFICATE;
+        free energy: ln Z in [-134.270, -134.002], true -134.076; bracket width 0.268 nats = 0.160 kcal/mol
+    second order, star at argmin_f (25 evaluations): measured |g - g_star| max 0.214 rms 0.071 (bound sum c_ij: max 0.415);
+        single-site excitation energies of E at the centre (min over states) = [0.18 0.03 0.06 0.03 0.04 0.04 0.03 0.03 0.03 0.01 0.02 0.64];  half row sums = [0.02 0.03 0.04 0.04 0.04 0.04 0.04 0.04 0.04 0.04 0.03 0.02];  row-sum condition (theory report 11.7) holds: False; pairwise-known-part version: margin -0.014 kcal/mol
+        exact criterion of Thm 11.17 (enumeration of the lower pairwise model): the star certifies min E to within eps* = 0.0000 kcal/mol = 0.000 kT  -> EXACT CERTIFICATE;
+        free energy: ln Z in [-134.270, -134.002], true -134.076; bracket width 0.268 nats = 0.160 kcal/mol
+=== interfaces on the pruned product domain X', residual ff15ipq-ff14SB: argmin f = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), argmin E = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) (same: True; E(argmin f) - min E = 0.000 kcal/mol)
+    first order, centre argmin_f: single-site excitation energies (of f) = [1.2  0.98 0.98 0.98 0.98 0.98 0.98 0.98 0.98 0.96 0.96 1.23]; sharp sites (gap >= c_i): 0 of 12; ratios gap/c = [0.83 0.7  0.7  0.69 0.69 0.69 0.69 0.69 0.69 0.68 0.68 0.92]
+    first order, centre argmin_E: single-site excitation energies (of E) = [0.43 0.19 0.21 0.2  0.2  0.2  0.2  0.2  0.2  0.17 0.18 0.48]; sharp sites (gap >= c_i): 0 of 12; ratios gap/c = [0.3  0.14 0.15 0.14 0.14 0.14 0.14 0.14 0.14 0.12 0.13 0.36]
+    first order: lambda* = 0.6763 (one evaluation certifies the minimum iff >= 1); one evaluation at argmin f certifies to within eps = 3.29 kcal/mol;  sum ln cosh(beta c_i/2) = 6.94 nats, exact Jensen gap = 1.737 nats
+    second order, star at argmin_E (25 evaluations): measured |g - g_star| max 0.045 rms 0.007 (bound sum c_ij: max 0.074);
+        single-site excitation energies of E at the centre (min over states) = [0.43 0.19 0.21 0.2  0.2  0.2  0.2  0.2  0.2  0.17 0.18 0.48];  half row sums = [0.   0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.  ];  row-sum condition (theory report 11.7) holds: True; pairwise-known-part version: margin 0.171 kcal/mol
+        exact criterion of Thm 11.17 (enumeration of the lower pairwise model): the star certifies min E to within eps* = 0.0000 kcal/mol = 0.000 kT  -> EXACT CERTIFICATE;
+        free energy: ln Z in [341.401, 341.434], true 341.427; bracket width 0.033 nats = 0.020 kcal/mol
+    second order, star at argmin_f (25 evaluations): measured |g - g_star| max 0.045 rms 0.007 (bound sum c_ij: max 0.074);
+        single-site excitation energies of E at the centre (min over states) = [0.43 0.19 0.21 0.2  0.2  0.2  0.2  0.2  0.2  0.17 0.18 0.48];  half row sums = [0.   0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.  ];  row-sum condition (theory report 11.7) holds: True; pairwise-known-part version: margin 0.171 kcal/mol
+        exact criterion of Thm 11.17 (enumeration of the lower pairwise model): the star certifies min E to within eps* = 0.0000 kcal/mol = 0.000 kT  -> EXACT CERTIFICATE;
+        free energy: ln Z in [341.401, 341.434], true 341.427; bracket width 0.033 nats = 0.020 kcal/mol
+=== interfaces on the pruned product domain X', residual ff99SB-ff14SB: argmin f = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), argmin E = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) (same: True; E(argmin f) - min E = 0.000 kcal/mol)
+    first order, centre argmin_f: single-site excitation energies (of f) = [1.2  0.98 0.98 0.98 0.98 0.98 0.98 0.98 0.98 0.96 0.96 1.23]; sharp sites (gap >= c_i): 1 of 12; ratios gap/c = [0.99 0.81 0.81 0.8  0.8  0.8  0.8  0.8  0.8  0.79 0.79 1.01]
+    first order, centre argmin_E: single-site excitation energies (of E) = [0.28 0.06 0.07 0.06 0.06 0.06 0.06 0.06 0.06 0.04 0.04 0.31]; sharp sites (gap >= c_i): 0 of 12; ratios gap/c = [0.23 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.04 0.04 0.26]
+    first order: lambda* = 0.7895 (one evaluation certifies the minimum iff >= 1); one evaluation at argmin f certifies to within eps = 1.32 kcal/mol;  sum ln cosh(beta c_i/2) = 5.37 nats, exact Jensen gap = 2.278 nats
+    second order, star at argmin_E (25 evaluations): measured |g - g_star| max 0.000 rms 0.000 (bound sum c_ij: max 0.000);
+        single-site excitation energies of E at the centre (min over states) = [0.28 0.06 0.07 0.06 0.06 0.06 0.06 0.06 0.06 0.04 0.04 0.31];  half row sums = [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.];  row-sum condition (theory report 11.7) holds: True; pairwise-known-part version: margin 0.043 kcal/mol
+        exact criterion of Thm 11.17 (enumeration of the lower pairwise model): the star certifies min E to within eps* = 0.0000 kcal/mol = 0.000 kT  -> EXACT CERTIFICATE;
+        free energy: ln Z in [270.231, 270.231], true 270.231; bracket width 0.000 nats = 0.000 kcal/mol
+    second order, star at argmin_f (25 evaluations): measured |g - g_star| max 0.000 rms 0.000 (bound sum c_ij: max 0.000);
+        single-site excitation energies of E at the centre (min over states) = [0.28 0.06 0.07 0.06 0.06 0.06 0.06 0.06 0.06 0.04 0.04 0.31];  half row sums = [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.];  row-sum condition (theory report 11.7) holds: True; pairwise-known-part version: margin 0.043 kcal/mol
+        exact criterion of Thm 11.17 (enumeration of the lower pairwise model): the star certifies min E to within eps* = 0.0000 kcal/mol = 0.000 kT  -> EXACT CERTIFICATE;
+        free energy: ln Z in [270.231, 270.231], true 270.231; bracket width 0.000 nats = 0.000 kcal/mol
+   [109s] -> out/an_fb_V12_P2_R3_t0.60_tau0.70.json
+
+################ fb_V12_P2_R3_t0.60  tau = 0.6: VVVVVVVVVVVV on P2, grid R3; states per site [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+   raw product X: 531441 assignments; pair-clash-free X_tau: 531441 (100.0 %); pruned clash-free product X' : states per site [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3] = 531441 assignments; kT = 0.5962 kcal/mol
+--- [Xp] GB: range 6.74, std 0.86 kcal/mol
+    c_i   = [0.84 0.78 0.75 0.74 0.73 0.73 0.73 0.73 0.73 0.69 0.57 0.44]   max 0.84 kcal/mol = 1.4 kT;  rms single flip = [0.54 0.5  0.46 0.43 0.43 0.43 0.43 0.43 0.43 0.41 0.34 0.3 ]
+    c_ij  : max 0.124 kcal/mol = 0.21 kT; max by separation 1..: 0.124 0.045 0.040 0.003 0.001 0.000 0.000 0.000 0.000 0.000 0.000
+    half row sums (1/2) sum_j c_ij = [0.1  0.17 0.19 0.21 0.21 0.21 0.21 0.21 0.21 0.19 0.16 0.09];  Dobrushin-type sums = [0.09 0.14 0.16 0.18 0.18 0.18 0.18 0.18 0.18 0.16 0.13 0.08] (max 0.18)
+    c_ijk : max 6.391e-03 kcal/mol; sum over the 220 triples 1.633e-01; max by span k-i = 2..: 6.39e-03 4.94e-03 1.22e-03 1.07e-04 2.56e-05 1.01e-05 4.01e-06 2.23e-06 1.22e-06 6.09e-07
+    fits  : one-site LS rms 0.083 max 0.331 | two-site LS rms 0.0023 max 0.0130  [531441 points, 631 parameters]
+    (19.1s)
+--- [Xp] coul+GB: range 14.33, std 1.90 kcal/mol
+    c_i   = [1.49 1.42 1.4  1.38 1.38 1.38 1.38 1.38 1.37 1.33 1.22 0.95]   max 1.49 kcal/mol = 2.5 kT;  rms single flip = [1.07 1.03 0.99 0.96 0.96 0.96 0.96 0.96 0.96 0.94 0.88 0.65]
+    c_ij  : max 0.123 kcal/mol = 0.21 kT; max by separation 1..: 0.123 0.045 0.040 0.003 0.001 0.000 0.000 0.000 0.000 0.000 0.000
+    half row sums (1/2) sum_j c_ij = [0.1  0.17 0.19 0.21 0.21 0.21 0.21 0.21 0.21 0.19 0.15 0.09];  Dobrushin-type sums = [0.08 0.14 0.16 0.17 0.18 0.18 0.18 0.18 0.18 0.16 0.13 0.08] (max 0.18)
+    c_ijk : max 6.391e-03 kcal/mol; sum over the 220 triples 1.633e-01; max by span k-i = 2..: 6.39e-03 4.94e-03 1.22e-03 1.07e-04 2.56e-05 1.01e-05 4.01e-06 2.23e-06 1.22e-06 6.09e-07
+    fits  : one-site LS rms 0.082 max 0.329 | two-site LS rms 0.0023 max 0.0130  [531441 points, 631 parameters]
+    (17.5s)
+--- [Xp] ff03-ff14SB: range 11.22, std 1.35 kcal/mol
+    c_i   = [1.05 0.99 0.98 1.   0.99 0.99 0.99 0.99 1.   1.   0.98 0.61]   max 1.05 kcal/mol = 1.8 kT;  rms single flip = [0.75 0.68 0.68 0.69 0.68 0.68 0.69 0.68 0.69 0.69 0.69 0.42]
+    c_ij  : max 0.019 kcal/mol = 0.03 kT; max by separation 1..: 0.019 0.009 0.009 0.002 0.001 0.001 0.001 0.000 0.000 0.000 0.000
+    half row sums (1/2) sum_j c_ij = [0.02 0.03 0.04 0.04 0.04 0.04 0.04 0.04 0.04 0.04 0.03 0.02];  Dobrushin-type sums = [0.02 0.03 0.03 0.03 0.03 0.03 0.03 0.03 0.03 0.03 0.03 0.02] (max 0.03)
+    c_ijk : max 7.958e-13 kcal/mol; sum over the 220 triples 1.368e-10; max by span k-i = 2..: 7.11e-13 7.96e-13 7.96e-13 7.67e-13 7.39e-13 7.39e-13 7.39e-13 7.11e-13 6.54e-13 5.68e-13

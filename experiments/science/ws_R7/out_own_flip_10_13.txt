@@ -7,3 +7,6 @@ real	0m2.843s
 n=12 conformations=422825 valid single-flip ordered pairs=9293528
 c_sf: 52 85 92 108 114 114 114 114 108 92 85 52
 real	0m10.390s
+n=13 conformations=1231221 valid single-flip ordered pairs=29174970
+c_sf: 53 89 98 113 132 132 130 132 132 113 98 89 53
+real	0m43.794s

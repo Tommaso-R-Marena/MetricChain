@@ -47,8 +47,8 @@ def pair(B, shA, shB, eps, target):
         den = EA * abs(target - cA) + EB * abs(cB - target)
         lam = EB * abs(cB - target) / den if den > 0 else 0.5
         return (np.log1p(lam * EA + (1 - lam) * EB), lam, cA, cB, DA | DB)
-    lo, hi = 0.0, eps + 40.0
-    for _ in range(40):
+    lo, hi = 0.0, float(B.u * B.n)      # the lift of an annular dip is n(e + D(core||pi)), not eps + O(1)
+    for _ in range(48):
         mid = (lo + hi) / 2; R = build(mid)
         if R is None: lo = mid
         elif R[0] == 'nb':

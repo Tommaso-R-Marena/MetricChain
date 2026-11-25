@@ -44,17 +44,21 @@ that are equidistributed through a bijection.
 
 * `r6_2_signs` — under (i) and (ii): `U′_{+1} < U₀ < U′_{-1}`;
 * `r6_2_root` — there is `s* ∈ (-1, 1)` with `U′_{s*} = U₀`,
-  `log Z′_{s*} - log Z₀ ≥ log (1 + e^{-u} (1 - 1/r₁))`, and `g′_{s*} = g₀` where `d' > r₁`.
+  `log Z′_{s*} - log Z₀ ≥ log (1 + e^{-u} (1 - 1/r₁))`, and `g′_{s*} = g₀` where `d' > r₁`;
+  `r6_2_root_sharp` — the same with `1 - 3/(4 r₁)`.
 
 ## The binary cube — `BinaryCube` section
 
 * `r6_2_binary_cube` — Lemma R6.2 on `Fin n → ZMod 2` with `2ⁿ` and
   `W = ∑_j C(n,j) [j < r₁] e^{u (r₁ - j)}`;
 * `r6_2_nonvacuous` — its two hypotheses hold for `n = 4`, `r₁ = 2`, `u = 6`, antipodal centres;
+* `r6_2_cosets` — Lemma R6.2 for the distances to two translates `a₀ + C`, `a′ + C` of a finite
+  set (the algebra of Corollary R6′);
 * `pair_sum_binary`, `rho_eq_inv_cosh`, `r5_2_binary_cube` — R5(2) with the referee's `D_R` and
   `γ = ½ (|C| - 1) cosh(u/2)^{-δ}` for any set of centres with pairwise distances `≥ δ`.
 
-Not proved here: R5(1), (3), (4); Lemma R6.3 (Hoeffding); Theorem R6; Corollary R6′.
+Not proved here: R5(1), (3), (4); Lemma R6.3 (Hoeffding); Theorem R6; the overlap bound and the
+query bound of Corollary R6′.
 -/
 
 set_option autoImplicit false
@@ -803,22 +807,23 @@ theorem sign_minus_arith {u r a N W V A Z q E D ω : ℝ}
   have hpos : 0 < u * (a * W) := mul_pos hu (mul_pos ha hW)
   nlinarith
 
-/-- The gain in the partition function at `s = -1`. -/
+/-- The gain in the partition function at `s = -1`, with the constant `3/4` (the referee states
+`1 - 1/r₁`; the second reading in addendum A12 notes `1 - 3/(4 r₁)`). -/
 theorem gain_arith {r a N W V Z ω : ℝ} (hr : 1 ≤ r) (ha : 0 < a) (ha1 : a ≤ 1)
     (hV : 0 ≤ V) (hVN : V ≤ N) (hω : 0 ≤ ω) (hZ : Z = N + W - V)
     (hi : 8 * r * N ≤ a * W) (hii : 2 * (r + 1) * ω ≤ a * W) :
-    a * (1 - 1 / r) * Z ≤ a * W - V - ω := by
+    a * (1 - 3 / (4 * r)) * Z ≤ a * W - V - ω := by
   have hr0 : 0 < r := by linarith
   have hN : 0 ≤ N := by linarith
-  have e : a * (1 - 1 / r) * Z = a * (r - 1) * Z / r := by
+  have e : a * (1 - 3 / (4 * r)) * Z = a * (4 * r - 3) * Z / (4 * r) := by
     field_simp
-  rw [e, div_le_iff₀ hr0, hZ]
-  have f1 : a * (r - 1) * N ≤ r * N := by
-    have h1 : a * (r - 1) ≤ r := by nlinarith
+  rw [e, div_le_iff₀ (by linarith), hZ]
+  have f1 : a * (4 * r - 3) * N ≤ 4 * r * N := by
+    have h1 : a * (4 * r - 3) ≤ 4 * r := by nlinarith
     exact mul_le_mul_of_nonneg_right h1 hN
   have f2 : r * V ≤ r * N := mul_le_mul_of_nonneg_left hVN hr0.le
   have f3 : r * ω ≤ (r + 1) * ω := by nlinarith
-  have f4 : 0 ≤ a * (r - 1) * V := mul_nonneg (mul_nonneg ha.le (by linarith)) hV
+  have f4 : 0 ≤ a * (4 * r - 3) * V := mul_nonneg (mul_nonneg ha.le (by linarith)) hV
   nlinarith
 
 /-- `ω` is monotone: a deeper twin has a larger overlap weight. -/
@@ -854,7 +859,7 @@ theorem r6_2_core (d₀ d' : X → ℕ) (σ : X ≃ X) (hσ : ∀ x, d' (σ x) =
     meanEn (twinMin (basin u r₁ d₀) (basin u ((r₁ : ℝ) + 1) d')) < meanEn (basin u r₁ d₀) ∧
       meanEn (basin u r₁ d₀) <
         meanEn (twinMin (basin u r₁ d₀) (basin u ((r₁ : ℝ) - 1) d')) ∧
-      Real.exp (-u) * (1 - 1 / (r₁ : ℝ)) * partSum (basin u r₁ d₀) ≤
+      Real.exp (-u) * (1 - 3 / (4 * (r₁ : ℝ))) * partSum (basin u r₁ d₀) ≤
         excessMass (basin u r₁ d₀) (basin u ((r₁ : ℝ) - 1) d') := by
   have hr' : (1 : ℝ) ≤ r₁ := by exact_mod_cast hr
   have ha : 0 < Real.exp (-u) := Real.exp_pos _
@@ -963,17 +968,17 @@ theorem r6_2_signs (d₀ d' : X → ℕ) (σ : X ≃ X) (hσ : ∀ x, d' (σ x) 
         meanEn (twinMin (basin u r₁ d₀) (basin u ((r₁ : ℝ) - 1) d')) :=
   ⟨(r6_2_core d₀ d' σ hσ hu hr hi hii).1, (r6_2_core d₀ d' σ hσ hu hr hi hii).2.1⟩
 
-/-- **Lemma R6.2 (the exact root).**  Under the same hypotheses there is `s* ∈ (-1, 1)` with
-`U′_{s*} = U₀` exactly, `log Z′_{s*} - log Z₀ ≥ log (1 + e^{-u} (1 - 1/r₁))`, and
-`g′_{s*} = g₀` at every point with `d' > r₁` (outside the ball `B(a′, r₁)`). -/
-theorem r6_2_root (d₀ d' : X → ℕ) (σ : X ≃ X) (hσ : ∀ x, d' (σ x) = d₀ x) {u : ℝ}
+/-- **Lemma R6.2 (the exact root), with the sharper gain.**  Under the same hypotheses there is
+`s* ∈ (-1, 1)` with `U′_{s*} = U₀` exactly, `log Z′_{s*} - log Z₀ ≥ log (1 + e^{-u} (1 - 3/(4 r₁)))`,
+and `g′_{s*} = g₀` at every point with `d' > r₁` (outside the ball `B(a′, r₁)`). -/
+theorem r6_2_root_sharp (d₀ d' : X → ℕ) (σ : X ≃ X) (hσ : ∀ x, d' (σ x) = d₀ x) {u : ℝ}
     (hu : 0 < u) {r₁ : ℕ} (hr : 1 ≤ r₁)
     (hi : 8 * (r₁ : ℝ) * Real.exp u * Fintype.card X ≤ basinW u r₁ d₀)
     (hii : overlapW (basin u r₁ d₀) (basin u ((r₁ : ℝ) + 1) d') ≤
       Real.exp (-u) * basinW u r₁ d₀ / (2 * ((r₁ : ℝ) + 1))) :
     ∃ s : ℝ, -1 < s ∧ s < 1 ∧
       meanEn (twinMin (basin u r₁ d₀) (basin u ((r₁ : ℝ) + s) d')) = meanEn (basin u r₁ d₀) ∧
-      Real.log (1 + Real.exp (-u) * (1 - 1 / (r₁ : ℝ))) ≤
+      Real.log (1 + Real.exp (-u) * (1 - 3 / (4 * (r₁ : ℝ)))) ≤
         Real.log (partSum (twinMin (basin u r₁ d₀) (basin u ((r₁ : ℝ) + s) d'))) -
           Real.log (partSum (basin u r₁ d₀)) ∧
       ∀ x, r₁ < d' x →
@@ -1014,13 +1019,13 @@ theorem r6_2_root (d₀ d' : X → ℕ) (σ : X ≃ X) (hσ : ∀ x, d' (σ x) =
         partSum (twinMin (basin u r₁ d₀) (basin u ((r₁ : ℝ) + s) d')) :=
       partSum_twinMin_mono (fun x => basin_anti hu.le (by linarith) d' x)
     rw [partSum_twinMin] at hmono
-    have h1r : 1 / (r₁ : ℝ) ≤ 1 := by
+    have h1r : 3 / (4 * (r₁ : ℝ)) ≤ 1 := by
       rw [div_le_one (by linarith)]
-      exact hr'
-    have hpos1 : 0 < 1 + Real.exp (-u) * (1 - 1 / (r₁ : ℝ)) := by
+      linarith
+    have hpos1 : 0 < 1 + Real.exp (-u) * (1 - 3 / (4 * (r₁ : ℝ))) := by
       have := mul_nonneg (Real.exp_pos (-u)).le (sub_nonneg.2 h1r)
       linarith
-    have hlow : (1 + Real.exp (-u) * (1 - 1 / (r₁ : ℝ))) * partSum (basin u r₁ d₀) ≤
+    have hlow : (1 + Real.exp (-u) * (1 - 3 / (4 * (r₁ : ℝ)))) * partSum (basin u r₁ d₀) ≤
         partSum (twinMin (basin u r₁ d₀) (basin u ((r₁ : ℝ) + s) d')) := by
       linarith
     have hlog := Real.log_le_log (mul_pos hpos1 hZpos) hlow
@@ -1035,6 +1040,36 @@ theorem r6_2_root (d₀ d' : X → ℕ) (σ : X ≃ X) (hσ : ∀ x, d' (σ x) =
     show min (basin u r₁ d₀ x) (basin u ((r₁ : ℝ) + s) d' x) = basin u r₁ d₀ x
     rw [hT0]
     exact min_eq_left (basin_nonpos hu.le _ _ x)
+
+/-- **Lemma R6.2 (the exact root)**, with the gain as the referee states it:
+`log Z′_{s*} - log Z₀ ≥ log (1 + e^{-u} (1 - 1/r₁))`. -/
+theorem r6_2_root (d₀ d' : X → ℕ) (σ : X ≃ X) (hσ : ∀ x, d' (σ x) = d₀ x) {u : ℝ}
+    (hu : 0 < u) {r₁ : ℕ} (hr : 1 ≤ r₁)
+    (hi : 8 * (r₁ : ℝ) * Real.exp u * Fintype.card X ≤ basinW u r₁ d₀)
+    (hii : overlapW (basin u r₁ d₀) (basin u ((r₁ : ℝ) + 1) d') ≤
+      Real.exp (-u) * basinW u r₁ d₀ / (2 * ((r₁ : ℝ) + 1))) :
+    ∃ s : ℝ, -1 < s ∧ s < 1 ∧
+      meanEn (twinMin (basin u r₁ d₀) (basin u ((r₁ : ℝ) + s) d')) = meanEn (basin u r₁ d₀) ∧
+      Real.log (1 + Real.exp (-u) * (1 - 1 / (r₁ : ℝ))) ≤
+        Real.log (partSum (twinMin (basin u r₁ d₀) (basin u ((r₁ : ℝ) + s) d'))) -
+          Real.log (partSum (basin u r₁ d₀)) ∧
+      ∀ x, r₁ < d' x →
+        twinMin (basin u r₁ d₀) (basin u ((r₁ : ℝ) + s) d') x = basin u r₁ d₀ x := by
+  obtain ⟨s, hs1, hs2, hU, hgain, hloc⟩ := r6_2_root_sharp d₀ d' σ hσ hu hr hi hii
+  refine ⟨s, hs1, hs2, hU, le_trans ?_ hgain, hloc⟩
+  have hr' : (1 : ℝ) ≤ r₁ := by exact_mod_cast hr
+  have h1 : 3 / (4 * (r₁ : ℝ)) ≤ 1 / (r₁ : ℝ) := by
+    rw [div_le_div_iff₀ (by linarith) (by linarith)]
+    linarith
+  have h2 : 1 / (r₁ : ℝ) ≤ 1 := by
+    rw [div_le_one (by linarith)]
+    exact hr'
+  have ha := Real.exp_pos (-u)
+  apply Real.log_le_log
+  · have := mul_nonneg ha.le (sub_nonneg.2 h2)
+    linarith
+  · have := mul_le_mul_of_nonneg_left (sub_le_sub_left h1 1) ha.le
+    linarith
 
 end Signs
 
@@ -1130,6 +1165,62 @@ theorem r6_2_binary_cube (n : ℕ) (a₀ a' : Fin n → ZMod 2) {u : ℝ} (hu : 
       (fun x : Fin n → ZMod 2 => hammingDist x a') ((Equiv.addRight (a' - a₀)) x) =
         (fun x : Fin n → ZMod 2 => hammingDist x a₀) x :=
     fun x => hammingDist_translate n a₀ a' x
+  exact ⟨r6_2_signs _ _ (Equiv.addRight (a' - a₀)) hσ hu hr hi hii,
+    r6_2_root _ _ (Equiv.addRight (a' - a₀)) hσ hu hr hi hii⟩
+
+/-! #### Corollary R6′, the algebra: distances to translates of a finite set
+
+`d₀ = d_H(·, a₀ + C)`, `d' = d_H(·, a′ + C)` for a non-empty finite `C ⊂ F₂ⁿ` (in the report: a
+linear code).  The two profiles are equidistributed through the translation by `a′ - a₀`, so
+Lemma R6.2 applies with `W^C = ∑_{d₀ < r₁} e^{u (r₁ - d₀)}`. -/
+
+/-- The Hamming distance to the translate `a + C`. -/
+def cosetDist {n : ℕ} (C : Finset (Fin n → ZMod 2)) (hC : C.Nonempty)
+    (a x : Fin n → ZMod 2) : ℕ :=
+  C.inf' hC (fun c => hammingDist x (a + c))
+
+theorem cosetDist_translate {n : ℕ} (C : Finset (Fin n → ZMod 2)) (hC : C.Nonempty)
+    (a₀ a' x : Fin n → ZMod 2) :
+    cosetDist C hC a' (x + (a' - a₀)) = cosetDist C hC a₀ x := by
+  unfold cosetDist
+  congr 1
+  funext c
+  rw [hammingDist_eq_hammingNorm, hammingDist_eq_hammingNorm]
+  congr 1
+  abel
+
+/-- **Corollary R6′, step (3)**: Lemma R6.2 for the symmetrised basin and twin (distances to
+`a₀ + C` and `a′ + C`), under (i) `8 r₁ e^u 2ⁿ ≤ W^C` and (ii) `ω^C_{+1} ≤ e^{-u} W^C/(2 (r₁+1))`. -/
+theorem r6_2_cosets {n : ℕ} (C : Finset (Fin n → ZMod 2)) (hC : C.Nonempty)
+    (a₀ a' : Fin n → ZMod 2) {u : ℝ} (hu : 0 < u) {r₁ : ℕ} (hr : 1 ≤ r₁)
+    (hi : 8 * (r₁ : ℝ) * Real.exp u * 2 ^ n ≤ basinW u r₁ (cosetDist C hC a₀))
+    (hii : overlapW (basin u r₁ (cosetDist C hC a₀))
+        (basin u ((r₁ : ℝ) + 1) (cosetDist C hC a')) ≤
+      Real.exp (-u) * basinW u r₁ (cosetDist C hC a₀) / (2 * ((r₁ : ℝ) + 1))) :
+    (meanEn (twinMin (basin u r₁ (cosetDist C hC a₀))
+          (basin u ((r₁ : ℝ) + 1) (cosetDist C hC a'))) <
+        meanEn (basin u r₁ (cosetDist C hC a₀)) ∧
+      meanEn (basin u r₁ (cosetDist C hC a₀)) <
+        meanEn (twinMin (basin u r₁ (cosetDist C hC a₀))
+          (basin u ((r₁ : ℝ) - 1) (cosetDist C hC a')))) ∧
+    ∃ s : ℝ, -1 < s ∧ s < 1 ∧
+      meanEn (twinMin (basin u r₁ (cosetDist C hC a₀))
+          (basin u ((r₁ : ℝ) + s) (cosetDist C hC a'))) =
+        meanEn (basin u r₁ (cosetDist C hC a₀)) ∧
+      Real.log (1 + Real.exp (-u) * (1 - 1 / (r₁ : ℝ))) ≤
+        Real.log (partSum (twinMin (basin u r₁ (cosetDist C hC a₀))
+          (basin u ((r₁ : ℝ) + s) (cosetDist C hC a')))) -
+          Real.log (partSum (basin u r₁ (cosetDist C hC a₀))) ∧
+      ∀ x : Fin n → ZMod 2, r₁ < cosetDist C hC a' x →
+        twinMin (basin u r₁ (cosetDist C hC a₀))
+          (basin u ((r₁ : ℝ) + s) (cosetDist C hC a')) x =
+        basin u r₁ (cosetDist C hC a₀) x := by
+  have hcard : (Fintype.card (Fin n → ZMod 2) : ℝ) = 2 ^ n := by
+    simp [ZMod.card]
+  rw [← hcard] at hi
+  have hσ : ∀ x : Fin n → ZMod 2,
+      cosetDist C hC a' ((Equiv.addRight (a' - a₀)) x) = cosetDist C hC a₀ x :=
+    fun x => cosetDist_translate C hC a₀ a' x
   exact ⟨r6_2_signs _ _ (Equiv.addRight (a' - a₀)) hσ hu hr hi hii,
     r6_2_root _ _ (Equiv.addRight (a' - a₀)) hσ hu hr hi hii⟩
 
@@ -1394,3 +1485,6 @@ end
 #print axioms ScienceL2.pair_sum_binary
 #print axioms ScienceL2.rho_eq_inv_cosh
 #print axioms ScienceL2.r5_2_binary_cube
+#print axioms ScienceL2.r6_2_root_sharp
+#print axioms ScienceL2.cosetDist_translate
+#print axioms ScienceL2.r6_2_cosets

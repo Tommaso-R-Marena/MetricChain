@@ -1,0 +1,1 @@
+n=18 own: conformations=254325043 classes=1594; engineering table: conformations=254325043 classes=1594; identical=True (30.4s)

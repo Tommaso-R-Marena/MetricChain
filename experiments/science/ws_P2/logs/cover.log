@@ -95,3 +95,9 @@ validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) 
 cover at eps = 0.000 kcal/mol: forced points 15721, volume bound 2786.2, partition bound 623.6 => N_cov >= 15721;  greedy cover 15725  (of M = 20718; mean set size 10.3, max 74; sparse path)  [93s]
 cover at eps = 0.596 kcal/mol: forced points 15547, volume bound 2620.0, partition bound 587.6 => N_cov >= 15547;  greedy cover 15553  (of M = 20718; mean set size 10.8, max 75; sparse path)  [84s]
 cover at eps = 2.000 kcal/mol: forced points 15120, volume bound 2269.4, partition bound 510.6 => N_cov >= 15120;  greedy cover 15130  (of M = 20718; mean set size 11.9, max 79; sparse path)  [90s]
+=== fb_S5_H_R3_t0.60 tau=0.7 residual GB on Xtau: 17496 assignments, states/site [9, 9, 6, 6, 6]
+c_i = [9.038 8.903 7.869 6.957 7.837] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 1361, volume bound 579.2, partition bound 41.8 => N_cov >= 1361;  greedy cover 2172  (of M = 17496; mean set size 21.5, max 237; sparse path)  [55s]
+cover at eps = 0.596 kcal/mol: forced points 911, volume bound 375.9, partition bound 32.9 => N_cov >= 911;  greedy cover 1687  (of M = 17496; mean set size 27.0, max 279; sparse path)  [61s]
+cover at eps = 2.000 kcal/mol: forced points 267, volume bound 152.2, partition bound 18.8 => N_cov >= 267;  greedy cover 927  (of M = 17496; mean set size 45.2, max 430; sparse path)  [80s]
