@@ -1,1 +1,2 @@
 Part B: packings among explicit bridges with exactly N beads (lamellae + all-trans tail)
+  N=2000: 4774 distinct (h,g) among lamellae+tail; pairwise-uncoverable subsets found: (1,1/2): 32, (1,1/4): 68, (1/5,1/2): 6, (1/5,1/4): 11

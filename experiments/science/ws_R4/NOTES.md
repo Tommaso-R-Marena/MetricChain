@@ -98,3 +98,21 @@ Paper check, line by line:
   => exponent max{phi a + (1-phi) theta_na(xi), min(phi a,(1-phi)xi) + (1-phi) a}.  OK.
 * Looseness: "Theorems 11.54 and 11.58 hold ... independently of n" — the o(n) in those theorems needs the number of
   levels -> infinity; what holds with n-independent rounds is: for every eta there is r(eta) with tau^(r) <= h+3 eta.
+
+## Step 5 — small cubes and an end-to-end test of Lemma 11.85 (small_cube.py -> out_small_cube.txt, 15 s)
+Part A (7 configurations, n = 12..16, u in {0.5,1,2,3}): psi_D, psi_S as functions on all 2^n points with a random
+centre: largest edge difference EXACTLY u; ln A by enumeration = type sum to 10 digits; equal on V2; = g1 on W1;
+fraction of points outside W1 / V2 = p1 / p2 (h1,h2 of the Lean lemma hold with equality by translation
+invariance x -> x xor s).  One configuration (8,6,T=4.5) is degenerate (W2 = everything, twins identical).
+Part B: posterior-greedy two-round distinguisher (a REAL two-round algorithm; batch 2 chosen greedily on the
+posterior after batch 1), exact count over ALL centres: 144 tests, 0 violations of (#distinguished)/2^n <= M1 p1 + M2 p2;
+largest fraction/bound = 0.777 (the bound is nearly attained by a real algorithm at these sizes);
+two rounds beat one blind batch of the same total size (e.g. 0.361 vs 0.219 at (6,6), 4+4 points).
+
+## Step 6 — Lean (lean/AxiomCheck.lean -> lean/out_AxiomCheck.txt; source file elaborated from scratch)
+* `lake env lean proofs/Frontiers/TwoRounds.lean`: exit 0, no output (no error, no warning, no sorry). sha256 0113907b...
+* axioms of output_eq_of_virtual, card_distinguished_le, prob_output_ne_ge, two_round_bound, two_round_witness:
+  [propext, Classical.choice, Quot.sound] only.
+* Statement read: X arbitrary type, S1,S2 finite, deterministic TwoRound = (first, second, output + 2 congruences);
+  randomness = finite Omega with weights P >= 0 summing to 1; hM1: forall omega; hM2: forall omega AND forall f : X -> R
+  (all functions, not only class members); conclusion 1 - 2 delta <= M1 p1 + M2 p2.

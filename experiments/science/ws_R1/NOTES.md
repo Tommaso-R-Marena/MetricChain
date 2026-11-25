@@ -158,3 +158,12 @@ HONEST STATUS re (ii) at the time of the message: I had NOT found the k=4 error.
  the uniform four-letter site is a product of two uniform bits, so it contains the binary cube as a quotient and is at least as hard
  as the binary cube for every u.  So R_4(0)=0.006552 (u=.5) cannot be "the uniform 4-ary cube's exponent" (≥ 0.007673).  This is
  a confirmation obtained AFTER being told, from a tool I had built before; not an independent discovery.
+
+## Step 9 — full multi-block run finished (`out_thm_1190a_blocks.txt`, 613 s) + X=0 check (`thm_1190a_x0_check.py`)
+150 random profiles: duality gap ≤ 1.8e-16; KKT vs SLSQP ≤ 7e-14.  11 configurations (κ,u, r/n, accuracy), k=3,4,5, 12 starts each:
+best k-block value = two-block supremum to all 9 printed digits, incl. negative accuracies e = −0.03, −0.05, −0.1
+(values .041619952, .059049667, .121444088) and n at X = .02, .05.  Single flagged cell: n at X=0 exactly, excess 5e-9 —
+shown to be the degenerate accuracy: at X = 1e-8, 1e-6, 1e-4 the excess is ≤ 1.5e-13, and the "offending" profile evaluated at
+X = 1e-12 gives .094079262253 < two-block .094079262572.  (N^κ has a square-root cusp at X=0: N(1e-12) = N(0) − 5.8e-7.)
+The best 3-block profile has two equal block densities (.143090, .143090, .552343; weights .1397+.4769, .3834) = a two-block
+profile with m = .383 = my m_N for κ=.3.   ⇒ 11.90(a) REPLICATED numerically (R: e≥0 and e<0; N: X≥0).

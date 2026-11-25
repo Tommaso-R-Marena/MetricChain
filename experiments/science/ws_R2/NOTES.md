@@ -270,3 +270,9 @@ Tested: all classes N<=27, 400 random walks, ten verified bridges: hold (far fro
 Finite-N volume bounds with K1 rows (site constants) + the two extra rows (53, 65):
   N>=100: 4650 / 30352 / 110 / 486;  N>=1000: 3728 / 23978 / 94 / 402;  N>=1e4: 3636 / 23342 / 92 / 393;
   N>=1e5: 3627 / 23279 / 92 / 392.
+
+* `r2_rigorous_packing.py finite`: variant using ONLY finite verified walks (ten bridges + my lamellae
+  151x1x160 and 31x31x32) + rod + helix + Theorem 11.69: >= 100 at (1,1/2), >= 7 at (1/5,1/2).
+* `r2_lamella.lamella_np` (vectorised builder, identical coordinates to lamella() on 11 test cases);
+  `r2_packing.py B` now uses it, with vectorised lattice/bridge checks; N=27,250,1000,2000 give the same
+  numbers as before (3/18/26/32 ...).  The slow first 5000-bead run was killed by me.

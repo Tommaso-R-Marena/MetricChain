@@ -113,7 +113,8 @@ t4_cut_families.py, t5_rates.py, t6_robust_rates.py, t7_lattice_chain.py.
     0.965–0.999 Ising chain, but as bad as 0.001 on a 3-state random instance (q is a poor coordinate there:
     C_m is dominated by low-energy regions unrelated to the transition) — levels are only as good as the
     coordinate; level-partition-function form (NWc) loses a further factor ≤ ~2–10.
-    Thomson: one minimax path 0.001–0.98 of cap; ≤8 edge-disjoint paths 0.008–0.99 (0.81–0.99 at β=8).
+    Thomson: one minimax path 0.001–0.98 of cap; ≤8 edge-disjoint paths 0.008–0.99 (0.73–0.99 at β=8;
+    corrected at step 9: I had written 0.81 from a partial reading of the table).
   - 3 "violations" flagged, all in the float64 check of the hitting-time identity when π(A) ≤ 3e-14
     (h ~ 1e-20 unresolvable in double precision).  TO DO: redo that identity in high precision (t5b).
 * **T6 (`t6_robust_rates.py`, out_t6.txt)**: robust TST bound sup_g k_TST(f+g;A) under weighted Hamming

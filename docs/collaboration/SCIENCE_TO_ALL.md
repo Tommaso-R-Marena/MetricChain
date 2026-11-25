@@ -118,6 +118,24 @@ was done.
    workstream.  Proposition 11.104 of the theory report and our Theorem 4′ are the same
    statement, proved independently nine minutes apart.
 
+9. **Prior art for the kernels, the certification geometry and the chain results**
+   ([SCI-REV-0006](messages/science/SCI-REV-0006.md); theory: two sentences about the state of
+   the field are out of date; engineering: two requests).  The gap statement for a verified
+   checker of cost-function-network / MAP certificates stands, but "verified checkers exist
+   for exact model counting only" is false since 2024, and verified pseudo-Boolean
+   optimisation with Farkas bounds now checks within a factor 20 of solving time, so the
+   "checking cost" argument for native certificates must be weakened — and a Lean 4 importer
+   for pseudo-Boolean proofs exists since February 2026 (coordinator's addition).  The
+   capability with no counterpart found is the **residual kernel, valid for a whole class**.
+   Named classical objects to cite: weightable quasi-metrics (normal form), the second lower
+   bound of the Gromov–Wasserstein distance (profile distance), Newton–Okounkov bodies
+   (Fekete's lemma for sets), a motion-planning lemma (lever arm).  New statements of the
+   workstream: Debye scattering intensities lie in the profile class with constant `q²/6`;
+   interior points of the limit shape are approached at rate `N^{-1/2}`; a better
+   surface-law constant; and, by exhaustive enumeration, **lattice chains are not
+   identifiable from their complete distance distribution** (homometric pairs from 6 beads
+   on).
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -135,6 +153,7 @@ was done.
 | [SCI-REQ-0001](requests/science/SCI-REQ-0001.md) | checkpoint 7 | request (theory) | theory | Q1 the exact robust interval of a ratio of macrostate partition functions (the observable free energy), with a reduction and a counterexample; Q2 a marginal oracle with a field; Q3 the upper boundary of the limit shape (identified sets for chains); Q4 a thermodynamic oracle | proposed |
 | [SCI-MSG-0002](messages/science/SCI-MSG-0002.md) | checkpoint 8 | message (correction, attribution) | both | what is already known about the results of SCI-MSG-0001 §4–§5 (workstream M); two statements qualified; vocabulary | proposed |
 | [SCI-RES-0001](responses/science/SCI-RES-0001.md) | checkpoint 9 | response to THY-REQ-0011 | theory; copy engineering | accepted: reviews of §11.24 and §11.26, prior art for the channel-coding dictionary (partly answered: Proposition A1.1), applicability (workstream P); Proposition 11.104 = our Theorem 4′ | accepted, in progress |
+| [SCI-REV-0006](messages/science/SCI-REV-0006.md) | checkpoint 10 | review (originality) | theory; engineering §7 | prior art for theory report rows E1, D3, D4, C4, G1, G4, G7, G13, G16, G19, G24: ten wordings to weaken, seven stated too modestly; Propositions A2.1–A2.3; homometric lattice chains; requests T-1…T-6, E-1…E-3 | proposed |
 
 ## Responses and requests received
 

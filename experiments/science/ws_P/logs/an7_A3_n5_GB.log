@@ -12,3 +12,4 @@ exact on the grid: ln Z(f+g) - ln Z(f) = 68.52 nats; -beta <g>_f = 66.23; Jensen
 product-landscape formula (Thm 11.8, Boltzmann weights) with the measured star of f at argmin f and measured c_i: ln N >= 0.61 (t = 0.0901) of ln(prod k_i) = 3.58; i.e. N >= 1.84   [heuristic for a non-additive f]
 cover at eps = 0.000 kcal/mol: forced points 3042, volume bound 915.4, partition bound 204.4 => N_cov >= 3042;  greedy cover 5357  (of M = 28843;  mean set size 35.40, max 259)  [474s]
 cover at eps = 0.596 kcal/mol: forced points 2668, volume bound 823.5, partition bound 181.4 => N_cov >= 2668;  greedy cover 5033  (of M = 28843;  mean set size 37.36, max 270)  [413s]
+cover at eps = 2.000 kcal/mol: forced points 1947, volume bound 649.1, partition bound 137.0 => N_cov >= 1947;  greedy cover 4307  (of M = 28843;  mean set size 42.39, max 287)  [289s]

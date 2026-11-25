@@ -1,0 +1,15 @@
+=== A3 n=5 residual ff19SB-ff14SB: 28843 clash-free conformations; kT = 0.5962 kcal/mol
+c_i (single-flip, kcal/mol): [1.54 2.59 1.54 2.59 1.54 2.59 1.54 2.59 1.54 2.59]
+argmin f: states [1 0 1 0 1 0 1 0 1 0], f = min;  argmin E: states [1 0 1 0 1 0 1 0 1 0];  same conformation: True;  E(argmin f) - min E = 0.000 kcal/mol = 0.00 kT
+site gaps of the KNOWN part at argmin f (kcal/mol):   [12.66   inf   inf   inf   inf 18.84   inf 12.61   inf  7.06]
+site gaps of the TRUE energy at argmin E (kcal/mol):  [14.06   inf   inf   inf   inf 19.24   inf 13.01   inf  7.45]
+single-flip sharpness at argmin f: 4 of 10 sites have a clash-free single-flip neighbour; of these 4 are sharp (gap of f >= c_i);   ratios e_i/c_i: [8.229   inf   inf   inf   inf 7.275   inf 4.869   inf 2.725]
+single-flip sharpness at argmin E (gaps of the known part f there: [12.66   inf   inf   inf   inf 18.84   inf 12.61   inf  7.06]): 4 sites with a neighbour, 4 sharp
+validity of d = sum c_i[x_i != y_i] on the clash-free domain: max |g(x)-g(y)|/d(x,y) = 1.0000  (envelope valid as measured)
+Theorem 11.7 (one evaluation certifies iff d(x0,y) <= f(y)-f(x0) for all y): min margin = -19.75 kcal/mol -> NO;  conformations violating: 1802 of 28842
+cost-to-distance ratio lambda* = min_y (f(y)-f(x0))/d(x0,y) = 0.0429  (the constants would have to be 23 times smaller for one evaluation to certify); attained at Hamming distance 10, f(y)-f(x0) = 0.89 kcal/mol
+beta*c_i: [2.6 4.3 2.6 4.3 2.6 4.3 2.6 4.3 2.6 4.3]
+sum_i ln cosh(beta c_i/2) = 10.8 nats = 6.4 kcal/mol;   beta^2 sum c_i^2/8 = 16 nats;   range of g on the domain = 11.8 kcal/mol = 20 kT
+exact on the grid: ln Z(f+g) - ln Z(f) = 57.01 nats; -beta <g>_f = 55.81; Jensen gap = 1.206 nats (the class bound above is 11); Gibbs weight of argmin E: 0.991; entropy H(pi_E) = 0.08 nats
+product-landscape formula (Thm 11.8, Boltzmann weights) with the measured star of f at argmin f and measured c_i: ln N >= 0.00 (t = 0) of ln(prod k_i) = 3.58; i.e. N >= 1   [heuristic for a non-additive f]
+Killed

@@ -333,7 +333,10 @@ which is the hypothesis of Theorem 11.71(b) for the points `Q_k*`. ∎  Results:
 | `(⅕, ¼)` | 14 | **≥ 19** |
 
 (Greedy packings on grids; each is re-verified by the stand-alone checker
-`r2_rigorous_packing_verify.py` from the stored weights.  They are not optimal.)
+`r2_rigorous_packing_verify.py` from the stored weights.  They are not optimal.  Variant that does
+not use the limit statement of Proposition 11.72(d) at all — row of stems and crystal replaced by my
+verified lamellae with 48 174 and 60 548 beads, so that only finite verified walks, the rod, the
+helix and Theorem 11.69 enter: **≥ 100** at `(1, ½)`, `≥ 7` at `(⅕, ½)`; `r2_rigorous_packing.py finite`.)
 
 Hence `116 ≤ liminf_N N^P_cov(N/2) ≤ limsup ≤ 3 626` for all walks at `L = e = 1` (`3 626` is the floor of
 the volume ratio `3 626.5`), and likewise `116 ≤ N_∞(½) ≤ 3 626` for the limit object of bridges.  The proof uses Lemma 11.68, the abstract theorem (convexity, `β/M`), Proposition

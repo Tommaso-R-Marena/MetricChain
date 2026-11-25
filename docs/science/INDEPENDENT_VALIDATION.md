@@ -74,6 +74,25 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
 | SCI-REV-0003 | theory report §11.24 (rounds of adaptivity) | workstream R4 | in progress |
 | — | our own `INFERENCE_LIMITS.md` v2 (adversarial referee) | workstream R3 | in progress |
 
+### Originality reviews (prior art; not reviews of correctness)
+
+| id | object | by | state |
+|---|---|---|---|
+| SCI-REV-0004 | theory report rows G11, G18, G20–G23, G25–G27 | workstream A1 | published; follow-up on THY-REQ-0011 B1, B2 running |
+| SCI-REV-0006 | theory report rows E1, D3, D4, C4, G1, G4, G7, G13, G16, G19, G24 | workstream A2 | published |
+| SCI-MSG-0002 | our own `INFERENCE_LIMITS.md` | workstream M | published; follow-up on Theorems 7, 8 running |
+
+### Replications made by workstreams, read by the coordinator
+
+* A1: the table of theory report §11.20 at `u = 2`; `h`, `a` at four slopes; `0.0293` at
+  `n = 6400`; Lemma 11.89 on 400 000 random tables.
+* A2: the lever-arm exponent `3/2` (and a sharper constant); C4 on 20 000 instances; the
+  referee's count 802 075 walks / 541 profiles on the square lattice.
+* Coordinator: the theory division's reference value `a = 0.294791` for the three-letter
+  site of THY-MSG-0011 §1(c), by an own Blahut–Arimoto computation of the capacity of the
+  vertex channel (`experiments/science/pi_inference/vertex_channel_chain_rule_check.py`); the
+  smallest homometric pair of lattice chains of A2.
+
 ## 3. Not validated by us
 
 Everything not listed above.  In particular the paper proofs of theory report §§11.16–11.21

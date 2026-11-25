@@ -463,16 +463,28 @@ end Trap
 end MetricChain.Kinetics
 
 /-! ### Axiom audit (printed when the file is checked) -/
+#print axioms MetricChain.Kinetics.exists_exit
 #print axioms MetricChain.Kinetics.cut_sound
-#print axioms MetricChain.Kinetics.robust_cut_sound
-#print axioms MetricChain.Kinetics.robust_path_sound
+#print axioms MetricChain.Kinetics.pinned_bounds
 #print axioms MetricChain.Kinetics.neg_cone_admissible
 #print axioms MetricChain.Kinetics.cone_admissible
+#print axioms MetricChain.Kinetics.robust_cut_sound
+#print axioms MetricChain.Kinetics.robust_path_sound
+#print axioms MetricChain.Kinetics.neg_cone_pinned
+#print axioms MetricChain.Kinetics.cone_pinned
+#print axioms MetricChain.Kinetics.mem_wallBox_of_exit
 #print axioms MetricChain.Kinetics.box_cut_barrier
 #print axioms MetricChain.Kinetics.box_cut_barrier_residual
 #print axioms MetricChain.Kinetics.certified_trap_height
+#print axioms MetricChain.Kinetics.ferro_wall_verified
+#print axioms MetricChain.Kinetics.ferro_wall_rejects
 #print axioms MetricChain.Kinetics.ferro_barrier
+#print axioms MetricChain.Kinetics.ferro_start
+#print axioms MetricChain.Kinetics.ferro_wall_attained
+#print axioms MetricChain.Kinetics.ferroResidual_wall_verified
 #print axioms MetricChain.Kinetics.ferroResidual_trap
+#print axioms MetricChain.Kinetics.surv_nonneg
+#print axioms MetricChain.Kinetics.surv_le_one
 #print axioms MetricChain.Kinetics.trap_survival
 #print axioms MetricChain.Kinetics.trap_certificate
 #print axioms MetricChain.Kinetics.trap_certificate_weighted

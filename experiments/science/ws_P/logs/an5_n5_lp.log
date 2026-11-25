@@ -27,3 +27,4 @@ OBC2-GBn2       std   0.82 | train RMS  0.177 max   1.33 | held-out RMS  0.188 m
 lj              std   7.52 | train RMS  1.274 max   8.25 | held-out RMS  1.338 max   9.47 | L_s  2.816 L_r  14.79 | C n=3: 1.03/9.14 C n=4: 1.19/8.76 C n=6: 1.61/9.07 C n=8: 9.08/51.51 A3 n=4: 1.48/6.60 A3 n=5: 1.63/6.28 A2 n=8: 12.07/49.44
 --- typing 'amber': 36 pair types, 1101 parameters
 GB              std   5.47 | train RMS  0.227 max   1.95 | held-out RMS  0.256 max   2.19 | L_s  0.893 L_r   4.42 | C n=3: 0.19/1.18 C n=4: 0.22/3.40 C n=6: 0.63/10.21 C n=8: 4.80/44.35 A3 n=4: 0.29/1.90 A3 n=5: 0.32/3.54 A2 n=8: 5.54/41.86
+      LP L=None: no solution in time

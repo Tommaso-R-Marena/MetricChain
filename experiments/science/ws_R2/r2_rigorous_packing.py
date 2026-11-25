@@ -19,7 +19,20 @@ from scipy.optimize import linprog
 from scipy.spatial import ConvexHull, Delaunay
 HERE=os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0,HERE)
 from r2_lattice import norm_c
-V=[((Fr(0),Fr(0),Fr(0),Fr(0)),Fr(0)),((Fr(1,2),Fr(2),Fr(3,2),Fr(0)),Fr(0)),((Fr(1),Fr(5),Fr(6),Fr(0)),Fr(0)),((Fr(0),Fr(0),Fr(1),Fr(1)),Fr(0))]
+FINITE_ONLY = (len(sys.argv)>1 and sys.argv[1]=="finite")
+if not FINITE_ONLY:
+    V=[((Fr(0),Fr(0),Fr(0),Fr(0)),Fr(0)),((Fr(1,2),Fr(2),Fr(3,2),Fr(0)),Fr(0)),((Fr(1),Fr(5),Fr(6),Fr(0)),Fr(0)),((Fr(0),Fr(0),Fr(1),Fr(1)),Fr(0))]
+else:
+    # variant that does not use the limit statement of Prop 11.72(d): the row of stems and the crystal are
+    # replaced by two of my own verified finite lamellae (r2_lamella.py; out/lamella.txt) with their delta
+    #   one row 151x1x160: N=48174;  crystal 31x31x32: N=60548   (recomputed below from coordinates)
+    from r2_lamella import lamella_np, measure_np
+    V=[((Fr(0),Fr(0),Fr(0),Fr(0)),Fr(0))]
+    for (M_,Q_,l_) in ((151,1,160),(31,31,32)):
+        x_=lamella_np(M_,Q_,l_); n_=len(x_); hg_=measure_np(x_)
+        assert x_[1:,1].min()>x_[0,1] and x_[:,1].max()==x_[-1,1]
+        V.append((tuple(Fr(int(c),n_) for c in hg_),Fr(168,n_+3)))
+    V.append(((Fr(0),Fr(0),Fr(1),Fr(1)),Fr(0)))
 J=json.load(open(f"{HERE}/out/witness_points_W64.json"))+[["big",166199,[1717,376013,687789,131710]]]
 for n,N,q in J: V.append((tuple(Fr(c,N) for c in q),Fr(168,N+3)))
 Q=np.array([[float(c) for c in q] for q,_ in V]); DL=np.array([float(d) for _,d in V])
@@ -61,6 +74,7 @@ def run(L,eps1,step,g0=60,norders=24,seed=0,tag=''):
         for b in range(G0+1-a):
             pts.append((tuple((a*V1[k]+b*V2[k])/G0 for k in range(4)),Fr(0)))
             lams.append([Fr(G0-a-b,G0),Fr(a,G0),Fr(b,G0)]+[Fr(0)]*(len(V)-3))
+            pts[-1]=(pts[-1][0], Fr(a,G0)*V[1][1]+Fr(b,G0)*V[2][1])
     n=len(pts)
     P=np.array([[float(c) for c in q] for q,_ in pts]); D=np.array([float(d) for _,d in pts])
     Pu=P[:,:3]@U.T
@@ -95,6 +109,10 @@ def run(L,eps1,step,g0=60,norders=24,seed=0,tag=''):
     return len(best),ok,n,nT0
 if __name__=="__main__":
     print(f"{len(V)} proved points of K^br (4 exact, {len(V)-4} verified finite bridges); largest delta = {float(max(d for _,d in V)):.5f}")
-    for name,L,e1,step,g0,tag in [("(1,1/2)",Fr(1),Fr(1,2),0.14,90,"L1_e12"),("(1,1/4)",Fr(1),Fr(1,4),0.11,180,"L1_e14"),("(1/5,1/2)",Fr(1,5),Fr(1,2),0.35,28,"L15_e12"),("(1/5,1/4)",Fr(1,5),Fr(1,4),0.25,56,"L15_e14")]:
+    cases=[("(1,1/2)",Fr(1),Fr(1,2),0.14,90,"L1_e12"),("(1,1/4)",Fr(1),Fr(1,4),0.11,180,"L1_e14"),("(1/5,1/2)",Fr(1,5),Fr(1,2),0.35,28,"L15_e12"),("(1/5,1/4)",Fr(1,5),Fr(1,4),0.25,56,"L15_e14")]
+    if FINITE_ONLY:
+        print("VARIANT 'finite': only the rod and the helix are exact; row of stems and crystal are verified finite lamellae")
+        cases=[(n_,L_,e_,st_,g_,"") for (n_,L_,e_,st_,g_,t_) in cases if n_ in ("(1,1/2)","(1/5,1/2)")]
+    for name,L,e1,step,g0,tag in cases:
         k,ok,n,nT0=run(L,e1,step,g0=g0,tag=tag)
         print(f"  {name}: packing of {k} points (of {n} candidates; {nT0} with g=0) satisfying the hypothesis of Theorem 11.71(b) with the uncertainty margin; exact verification: {ok}",flush=True)

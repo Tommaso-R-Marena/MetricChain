@@ -1,0 +1,69 @@
+TwoRound : Type u_1 → Type u_1
+structure MetricChain.TwoRounds.TwoRound.{u_1} (X : Type u_1) : Type u_1
+number of parameters: 1
+fields:
+  MetricChain.TwoRounds.TwoRound.first : Finset X
+  MetricChain.TwoRounds.TwoRound.second : (X → ℝ) → Finset X
+  MetricChain.TwoRounds.TwoRound.output : (X → ℝ) → ℝ
+  MetricChain.TwoRounds.TwoRound.second_congr : ∀ (g g' : X → ℝ),
+      (∀ x ∈ self.first, g x = g' x) → self.second g = self.second g'
+  MetricChain.TwoRounds.TwoRound.output_congr : ∀ (g g' : X → ℝ),
+      (∀ x ∈ self.first, g x = g' x) → (∀ x ∈ self.second g, g x = g' x) → self.output g = self.output g'
+constructor:
+  MetricChain.TwoRounds.TwoRound.mk.{u_1} {X : Type u_1} (first : Finset X) (second : (X → ℝ) → Finset X)
+    (output : (X → ℝ) → ℝ) (second_congr : ∀ (g g' : X → ℝ), (∀ x ∈ first, g x = g' x) → second g = second g')
+    (output_congr : ∀ (g g' : X → ℝ), (∀ x ∈ first, g x = g' x) → (∀ x ∈ second g, g x = g' x) → output g = output g') :
+    TwoRound X
+@TwoRound.output_eq_of_virtual : ∀ {X : Type u_1} (A : TwoRound X) {g g' v : X → ℝ},
+  (∀ x ∈ A.first, g x = v x) → (∀ x ∈ A.first, g' x = v x) → (∀ x ∈ A.second v, g x = g' x) → A.output g = A.output g'
+@card_distinguished_le : ∀ {X : Type u_1} {S₁ : Type u_2} {S₂ : Type u_3} [inst : Fintype S₁] [inst_1 : Fintype S₂]
+  (A : TwoRound X) (g g' : S₁ → S₂ → X → ℝ) (v : S₁ → X → ℝ) (W₁ W₂ : S₁ → S₂ → Set X),
+  (∀ (s₁ : S₁) (s₂ : S₂), ∀ x ∈ W₁ s₁ s₂, g s₁ s₂ x = v s₁ x ∧ g' s₁ s₂ x = v s₁ x) →
+    (∀ (s₁ : S₁) (s₂ : S₂), ∀ x ∈ W₂ s₁ s₂, g s₁ s₂ x = g' s₁ s₂ x) →
+      ∀ {p₁ p₂ M₂ : ℝ},
+        0 ≤ p₂ →
+          (∀ (x : X), ↑{s | x ∉ W₁ s.1 s.2}.card ≤ p₁ * (↑(Fintype.card S₁) * ↑(Fintype.card S₂))) →
+            (∀ (x : X) (s₁ : S₁), ↑{s₂ | x ∉ W₂ s₁ s₂}.card ≤ p₂ * ↑(Fintype.card S₂)) →
+              (∀ (s₁ : S₁), ↑(A.second (v s₁)).card ≤ M₂) →
+                ↑{s | A.output (g s.1 s.2) ≠ A.output (g' s.1 s.2)}.card ≤
+                  (↑A.first.card * p₁ + M₂ * p₂) * (↑(Fintype.card S₁) * ↑(Fintype.card S₂))
+@prob_output_ne_ge : ∀ {X : Type u_1} {Ω : Type u_2} [inst : Fintype Ω] (out : Ω → (X → ℝ) → ℝ) (P : Ω → ℝ),
+  (∀ (ω : Ω), 0 ≤ P ω) →
+    ∑ ω, P ω = 1 →
+      ∀ {Φ : (X → ℝ) → ℝ} {ε δ : ℝ} {g g' : X → ℝ},
+        1 - δ ≤ ∑ ω with |out ω g - Φ g| ≤ ε / 2, P ω →
+          1 - δ ≤ ∑ ω with |out ω g' - Φ g'| ≤ ε / 2, P ω →
+            ε < |Φ g - Φ g'| → 1 - 2 * δ ≤ ∑ ω with out ω g ≠ out ω g', P ω
+@two_round_bound : ∀ {X : Type u_1} {S₁ : Type u_2} {S₂ : Type u_3} {Ω : Type u_4} [inst : Fintype S₁]
+  [inst_1 : Fintype S₂] [Nonempty S₁] [Nonempty S₂] [inst_4 : Fintype Ω] {G : (X → ℝ) → Prop} {Φ : (X → ℝ) → ℝ}
+  (alg : Ω → TwoRound X) (P : Ω → ℝ),
+  (∀ (ω : Ω), 0 ≤ P ω) →
+    ∑ ω, P ω = 1 →
+      ∀ {ε δ : ℝ},
+        (∀ (f : X → ℝ), G f → 1 - δ ≤ ∑ ω with |(alg ω).output f - Φ f| ≤ ε / 2, P ω) →
+          ∀ (g g' : S₁ → S₂ → X → ℝ) (v : S₁ → X → ℝ) (W₁ W₂ : S₁ → S₂ → Set X),
+            (∀ (s₁ : S₁) (s₂ : S₂), G (g s₁ s₂)) →
+              (∀ (s₁ : S₁) (s₂ : S₂), G (g' s₁ s₂)) →
+                (∀ (s₁ : S₁) (s₂ : S₂), ε < |Φ (g s₁ s₂) - Φ (g' s₁ s₂)|) →
+                  (∀ (s₁ : S₁) (s₂ : S₂), ∀ x ∈ W₁ s₁ s₂, g s₁ s₂ x = v s₁ x ∧ g' s₁ s₂ x = v s₁ x) →
+                    (∀ (s₁ : S₁) (s₂ : S₂), ∀ x ∈ W₂ s₁ s₂, g s₁ s₂ x = g' s₁ s₂ x) →
+                      ∀ {p₁ p₂ M₁ M₂ : ℝ},
+                        0 ≤ p₁ →
+                          0 ≤ p₂ →
+                            (∀ (x : X), ↑{s | x ∉ W₁ s.1 s.2}.card ≤ p₁ * (↑(Fintype.card S₁) * ↑(Fintype.card S₂))) →
+                              (∀ (x : X) (s₁ : S₁), ↑{s₂ | x ∉ W₂ s₁ s₂}.card ≤ p₂ * ↑(Fintype.card S₂)) →
+                                (∀ (ω : Ω), ↑(alg ω).first.card ≤ M₁) →
+                                  (∀ (ω : Ω) (f : X → ℝ), ↑((alg ω).second f).card ≤ M₂) → 1 - 2 * δ ≤ M₁ * p₁ + M₂ * p₂
+@two_round_witness : ∀ {N : ℕ} [NeZero N] {Ω : Type u_1} [inst : Fintype Ω] (alg : Ω → TwoRound (Fin N)) (P : Ω → ℝ),
+  (∀ (ω : Ω), 0 ≤ P ω) →
+    ∑ ω, P ω = 1 →
+      ∀ {δ : ℝ},
+        (∀ (f : Fin N → ℝ), 1 - δ ≤ ∑ ω with |(alg ω).output f - ∑ x, f x| ≤ 1 / 4, P ω) →
+          ∀ {M₁ M₂ : ℝ},
+            (∀ (ω : Ω), ↑(alg ω).first.card ≤ M₁) →
+              (∀ (ω : Ω) (f : Fin N → ℝ), ↑((alg ω).second f).card ≤ M₂) → (1 - 2 * δ) * ↑N ≤ M₁ + M₂
+'MetricChain.TwoRounds.TwoRound.output_eq_of_virtual' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.TwoRounds.card_distinguished_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.TwoRounds.prob_output_ne_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.TwoRounds.two_round_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.TwoRounds.two_round_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
