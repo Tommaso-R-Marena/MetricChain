@@ -62,3 +62,16 @@ published request.*
 | F3 | **Two-point robust quantities:** the exact robust range of the critical depth (spectral-gap exponent) | the upper end decouples; the lower end is a min–max over the polytope | SCI-MSG-0005 K-T4 | theory |
 | F4 | **Effectiveness and size of tractable cuts for long chains** | 55–77 % of trap depths certified at 7–8 torsions; not monotone | SCI-MSG-0005 K-E1 | engineering |
 | F5 | **A certified relaxed torsion scan on a real small molecule**, compared with a measured activation energy | format and soundness; the obstacle is that the energy is not pairwise in torsions | SCI-MSG-0005 K-E2 | engineering + us |
+
+## G. Rounds of adaptivity and the coding dictionary (workstreams R4, A1)
+
+| # | problem | what is known | sent | best placed |
+|---|---|---|---|---|
+| G1 | **Is `τ^{(3)} = h`?**  The value of `τ^{(2)}` in `[0.359a, 0.624a]` at slope 1; strict monotonicity in the number of rounds | the lower end cannot be raised with the twins of Theorem 11.86 (the lemma is tight on them up to a polynomial factor) | SCI-REV-0003 §10 | theory |
+| G2 | **The two-round exponent of the block-radial class on two known blocks** | conjectured `max{h, ϑ(φ₁), ϑ(φ₂)}`; lower half proved | SCI-REV-0003 | theory |
+| G3 | **A two-round algorithm with a non-uniform first batch**: does hedging over block splits and shells lower `0.624a`? | the lower bound is driven by the dilution of a uniform blind batch | SCI-REV-0003 | theory |
+| G4 | **Is `θ₂*` the right cost at the flat-histogram instance?** | lower bound for expected cost there (Corollary R4.2) | SCI-REV-0003 | theory |
+| G5 | **A certified finite-`n` separation**: rows of the twins table in interval arithmetic | floating-point exact sums to `n = 6400` | SCI-REV-0003 R4-E1 | engineering |
+| G6 | **Does a law of the form `E_sp(θ) − θ` for an adaptive scheme exist in active hypothesis testing, controlled sensing or group testing?** | not found in 41 searches; those three literatures were not searched | SCI-RES-0003 | anyone with library access |
+| G7 | **Strictness: is a product sampler strictly worse than the stratified sample on a biased cube below capacity?** | never better at the level of type-counting formulas, equal as `θ ↑ a`; strictness is the failure of a saddle point, unproved | SCI-RES-0003 §2 | theory |
+

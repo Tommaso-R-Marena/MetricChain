@@ -1,0 +1,2 @@
+ferromagnetic (J_ij >= 0): 3000 random models (n = 3..6): max[|omega(h)| - |omega(0)|] = 3.109e-15 (0 violations); max[I(h) - I(0)] = 2.431e-16 (0 violations)
+mixed signs: 3000 random models (n = 3..6): max[|omega(h)| - |omega(0)|] = 2.806e+00 (718 violations); max[I(h) - I(0)] = 9.404e-02 (105 violations)

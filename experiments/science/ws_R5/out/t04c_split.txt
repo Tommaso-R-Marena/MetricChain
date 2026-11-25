@@ -1,0 +1,2 @@
+bitangent of F*_tri: t in (0.37313, 0.38292), slope e_c = 0.056860; chain mix2 has its common slope inside for e near 0.043306
+max over e of [R^split(e) - R^(e)] = 7.95e-07 at e = 0.043306 (R^ = 0.031257, relative 2.5e-05)   [theirs: 8e-7, relative 2.5e-5]

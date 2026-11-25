@@ -195,3 +195,39 @@ profile with m = .383 = my m_N for κ=.3.   ⇒ 11.90(a) REPLICATED numerically 
   (S3) laws ((1−d)/2,(1−d)/2,d), u=.5: h = .007425 (d=1/3), .007610 (.1), .007673 (.01, .001, .0001) ✓; a_2(.3)=.011125, a_3(.3)=.010582 ✓.
   (S4) h_k = h_{k+1} at e^u = k(k−1), k=2..5 (1e-10) ✓.
   (S5) 171-law grid: uniform hardest for h at u=1 (.030654 vs .030572) and u=2 (.117699 vs .117413) ✓; u=.5 running.
+
+## Step 11 — Corollary 11.91 with all exits (`corollary_1191_checks.py`), first run + a FALSE ALARM of mine
+First run: (C2) field p=.3,u=1: sup over binary centres of r_mu(0) with exits of every type = .025034 at (m,a,b)=(.5006,.5381,.1362)
+(type .3374); the vertex-channel formula of Thm 11.99 (W) gives h = .025034 as well (independent route — also a two-letter cross-check
+of W's formula); slice bound .029139 ✓ = the numbers of "What the corollary does not say".
+(C3) CW βJ=1.5 barrier shell x=.29803: r_mu(0) = .0251012 ✓ (neighbours .0249241, .0250572, [.0251012], .0250593, .0249352); I(½)=.1152 ✓.
+(C4) equality (ii): antiferro βJ=−2 and ferro βJ=.8, B=0: |r_mu(e) − R_unif(e)| ≤ 1.3e-12 with exits of every type allowed ✓.
+(C1) "FAIL": max[r_mu(e) − r^κ_mu(e+(I−λ)(κ))] = 1.9e-6, and a "sharper" solver gave 1.2e-4 in one case.  NOT a counterexample:
+my inner solvers returned MI(μ) when no grid point was feasible (profiles with a ≈ b, budget ~1e-3 < grid spacing).  Shown in
+`corollary_1191_c1_false_alarm.py`: thinning the slice exit to the contact type gives a feasible exit with MI .000798 < .000921,
+and the corrected solver finds .000733.  Solver rewritten (quadrant-wise SLSQP from the profile itself + zooms); rerun in background,
+with a new block (C5): the junction of Prop 11.81(b) at u = 1 and u = 3.
+LESSON (same as the authors' D49/D51): an inner minimum that is too large makes the outer comparison lie; here it produced a
+false refutation rather than a false confirmation.
+
+## Step 12 — a new observation on three letters (after the correction notice; conditional on Thm 11.99's formulas)
+`remark_v2_sites.py` (S5) at u=.5: grid maximum of h over 171 three-letter laws = .007675 at (.05,.45,.5) > h_2 = .007673.
+`remark_v2_extra.py` (duality brackets 1e-9): h(.05,.45,.5) ∈ [.007675166, .007675167]; h(.02,.48,.5) = .007674567;
+h(.1,.4,.5) = .007673370; h(.001,.4995,.4995) = .007672975 — all ABOVE the two-letter cube h_2 = .007672866; h(.02,.49,.49) = .007672224
+and h(.05,.475,.475) = .007660173 below.  So at u = .5 (inside the range u ≤ .5194 where the 5ed4072 remark called
+"the supremum … is attained on a sub-alphabet, uniformly weighted" true) some three-letter product laws are harder than the binary
+cube also at VANISHING accuracy (the theory division's own counterexample, (.05,.5,.45) at u=1, is for the threshold E).
+Excess 2.3e-6 (0.03 %) — small, but with a certified bracket.  Local search for the maximiser running.
+
+## Step 13 — further checks (all own code)
+- `ising_pair_generalisation.py`: generalisation candidate.  Ferromagnetic Ising models, n=3..6, 3000 random (J≥0, arbitrary fields):
+  the log odds ratio of a pair marginal is maximal at zero field (0 violations, max excess 3e-15) ⇒ with Lemma 11.89 the pair mutual
+  information is maximal at zero field (0 violations).  Mixed-sign couplings: 718 and 105 violations.  n=3 is elementary:
+  ω = 4J_uv + ln[(cosh2h_w + cosh2(J_uw+J_vw))/(cosh2h_w + cosh2(J_uw−J_vw))].  Status [C]+[N]; related [K, abstract]: Ding–Song–Sun.
+- `thm_1192_1193_enum.py`: Thm 11.92(a): ln A_t u-Lipschitz (slack 7e-16), d_t ≥ J_t − V_n(t) (−9e-16), equality at H (2e-15), n=6,8, 120 cases;
+  (b): 3600 runs of optimistic refinement (n=8,12,20; random/low/high/alternating valid brackets): 0 violations of validity and of
+  "refined only if d_t ≤ x_{l−1}"; width ≤ x_m + ln(n+1); #refinements ≤ Σ_t #{l: x_{l−1} ≥ d_t}.
+  Lemma 11.93 (n=10,k=4,n_o=5, all 252 O): (i) 4e-16, (ii) 2e-16; Markov ✓; hypergeometric window mass ≤ δ''/2 in 9 cases ✓.
+- `corollary_1191_checks.py` rerun: (C1) PASS: max[r_mu − r^κ_mu] = 1.6e-16, max[r^κ_mu − R^κ] = 1e-17, max[R^κ − R_unif] = −1.7e-7 (142 profiles).
+- `remark_v2_extra.py`: local search at u=.5: π = (.04502, .45679, .49819), h ∈ [.007675293, .007675294] (h_2 = .007672866).
+- final full rerun of `thm_1190.py` started (thresholds after bug fixes).

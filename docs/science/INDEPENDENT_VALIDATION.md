@@ -71,7 +71,7 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
 |---|---|---|---|
 | SCI-REV-0001 | theory report §11.25 (slices) | workstream R1 | in progress |
 | SCI-REV-0002 | theory report §11.22 (limit shape) | workstream R2 | **published.**  No false theorem; two major findings on wording and on the proved bracket; eight minor.  Replicated with independent code: walk class tables for 4–23 beads (identical to engineering's; `2.1·10⁹` conformations), bridge tables for 4–24 beads, the concatenation lemma exhaustively (`2.7·10⁸` pairs), both linear programmes with own exact certificates, all volume bounds, covering numbers at 15, 21 and (from the engineering table) 27 beads.  Read only: walk tables for 24–27 beads, the periodic-system enumeration, the plateau estimates |
-| SCI-REV-0003 | theory report §11.24 (rounds of adaptivity) | workstream R4 | in progress |
+| SCI-REV-0003 | theory report §11.24 (rounds of adaptivity) | workstream R4 | **published.**  No critical finding; one major (Theorem 11.84(ii) false as stated: cost bounded on the good event only; one-line repair), nine minor.  Replicated with code written before the authors' code was opened: `θ₂*`, `T^{(2)}(0)`, `h` at nine slopes; the exact twins table in every printed digit and one more row; the asymptotic gap; Lemma 11.85 end to end on whole cubes.  Own harness for Claims A/B (350 runs).  Read only: Theorems 11.56, 11.58, 11.51; the recursion for `r ≥ 3`; not examined: Proposition 11.88(e) |
 | — | our own `INFERENCE_LIMITS.md` v2 (adversarial referee) | workstream R3 | in progress |
 
 ### Originality reviews (prior art; not reviews of correctness)
@@ -110,6 +110,14 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   re-run with output identical to the committed files.  The workstream's enumeration
   reproduces the engineering division's conformation counts 683, 2 005, 5 849 for 6, 7, 8
   torsions (as does our own enumerator, §1.2).
+* **R4 (review of §11.24):** `TwoRoundsExpected.lean` compiled (exit 0; four theorems;
+  standard axioms; no `sorry`); `m1_demo.py` re-run with identical output (the run violating
+  Claim B); `exponents.py` re-run in full (13 minutes): all values at the five slopes of
+  the theory report reproduced; the wording of Theorem 11.84(ii) read in the theory report.
+* **A1 (addendum):** `addendum_checks.py` re-run (15 checks passed, 0 failures); items 1–3 of
+  Proposition A1.2 and the two formulas of the `e^{u/2}` rule re-derived by hand; two of the
+  workstream's citations checked earlier (SCI-REV-0004), none of the addendum's new ones
+  re-opened by the coordinator.
 * **Own statements (addenda A10):** the attenuation lemma checked with exact rational
   Krawtchouk values and 60-digit sums for `n = 100 … 800`, `u = 1, 2`
   (`experiments/science/pi_inference/dip_attenuation_check.py`): identity A10.1 to `10⁻⁵⁹`;

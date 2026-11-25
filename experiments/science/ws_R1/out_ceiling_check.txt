@@ -1,0 +1,6 @@
+(U1) 4000 random Potts pairs (q = 2..6): max I/(s^2/8) = 0.995805 (<= 1)
+(U2) 60 random sites (q = 2..4, u in .25..3): max F*(t)/(t(1-t)u^2/8) = 0.996629; max E/(u^2/8) = 0.997076; max a/(u^2/8) = 0.991985 (all <= 1)
+     two-letter cube against the ceiling u^2/32:  u=0.1: h_2/(u^2/32) = 0.9993, u=0.25: h_2/(u^2/32) = 0.9955, u=0.5: h_2/(u^2/32) = 0.9821, u=1.0: h_2/(u^2/32) = 0.9325, u=2.0: h_2/(u^2/32) = 0.7782
+     three-letter cube:                           u=0.1: h_3/(u^2/32) = 0.9033, u=0.25: h_3/(u^2/32) = 0.9230, u=0.5: h_3/(u^2/32) = 0.9504, u=1.0: h_3/(u^2/32) = 0.9809, u=2.0: h_3/(u^2/32) = 0.9416
+(U3) pair identity on slices: |N^kappa(e + R^kappa(e)) - R^kappa(e)| <= 1.87e-16 (kappa,u) in (.3,1),(.5,1),(.2,2); e in 0,.01,.03
+SUMMARY: ALL PASS

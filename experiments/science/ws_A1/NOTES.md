@@ -300,3 +300,50 @@ Shorter proof than the report's 35 lines: monotone margin flows + "ln(1+ax)/x de
   that file at 19:08 UTC; A1.2 was written 18:53–18:58.  Independent derivations; recorded in report §9.3
   ("Note on independence").  A1.2 = written-out form + enumeration check (items 1–3) + constants (items 4–5).
 - Final message drafted outside the repository (scratchpad); two parts: addendum (<= 350 words), main (short).
+
+### Step 23 (19:20–19:35 UTC) — ERROR OF MINE FOUND while drafting the final message; addendum §9.2(d) corrected
+- While compressing B1 into the final message I re-read Sahai's abstract (arXiv:cs/0610139, downloaded earlier) to
+  check the sentence "feedback does not beat E_sp".  The abstract says: fixed-length block codes, symmetric channels;
+  "To beat the bound, the problem must be changed" — variable-length codes "can do better", and fixed delay too.
+  So my §9.1(iv)/§9.2(d) ("the adaptive half has no counterpart at all", "not in print in any form") was WRONG as
+  written: I had quoted the half of the abstract that suited the sentence.
+- Sources retrieved from arXiv and read (full text of the stated parts):
+  * Berlin, Nakiboğlu, Rimoldi, Telatar, IEEE-IT 55 (2009), arXiv:cs/0610145: abstract, §I.  Burnashev 1976:
+    E_B(R) = C_1(1 - R/C), C_1 = max D(p(.|x)||p(.|x')) (eq. (4)); Yamamoto–Itoh 1979: communication + confirmation
+    phase; confirmation = binary hypothesis test; "implicit in any scheme" with the largest exponent.
+  * Naghshvar & Javidi, Ann. Statist. 41 (2013), arXiv:1203.4626: abstract, §2.2.  Chernoff 1959 as described there:
+    "find the most likely true hypothesis, and then select an action that can discriminate this hypothesis the best";
+    "the scheme of Chernoff, if specialized to channel coding with feedback, coincides with the second phase of
+    Burnashev's scheme".
+  * Kaspi, Shayevitz, Javidi, arXiv:1611.08959: abstract, §I, §IV to Prop. 2.  Noisy search = channel coding with
+    feedback (Burnashev–Zigangirov 1974); non-adaptive search <-> non-feedback coding (random coding / sphere packing);
+    adaptive: Burnashev exponent "exceeds the sphere packing bound at all rates below capacity"; "Non Adaptive Search
+    with Validation" (Forney; Yamamoto–Itoh): probe the estimated location, binary hypothesis test; a few phases suffice.
+  * Nakiboğlu & Zheng, arXiv:0903.4386: abstract, part of §I (Haroutunian's bound, footnote 1).
+  * abstracts: Chung–Sadler–Zheng–Hero 1606.09233; Zhou–Hero 1909.12954, 2105.00265 (noisy twenty questions).
+- Conclusion for B1, adaptive half: the PRINCIPLE (identify, then validate; validation sets the exponent) is in print
+  (Chernoff 1959; Burnashev 1976; Yamamoto–Itoh 1979) and has been stated for query problems (noisy search).  The LAW
+  differs (Burnashev's line C_1(1 - R/C) vs E_sp(theta) - theta), and the problem differs (noisy answers, time, error
+  probability vs exact answers, class of landscapes, normalising constant, budgets e^{n theta}).  Not found: the
+  formula with an algorithm for this problem.  Classification of claim 1 unchanged ((6)); precedents added to §4.1.
+- Second slip corrected: §9.1(ii) said "the mass it misses has the exponent min{D(V||W|P): I <= theta}"; it is the
+  Gibbs mass of what the sample SEES (cube: shells rho >= rho_theta, mass ~ e^{-n KL(rho_theta||p_u)}; my E5 simulates
+  this).  The theory report's own sentence in Thm 11.99 ("removes the rest, whose Gibbs mass is ...") has the same
+  ambiguity -> request T7a.
+- Numerics: addendum_checks.py Q4 + Q4m added (C_1 = u tanh(u/2); e(0+) = ln cosh(u/2); zero at h < a; strictly convex;
+  mutation: the chord is not e).  Re-run: 15 PASS lines, failures 0 (5 s).
+- Searches 36–41 logged in report §9.5 (four arXiv-interface queries, two web searches).  Request T7 rewritten.
+- Lesson: the compression into 350 words was the check that caught it; an abstract must be read to its end.
+
+### Step 24 (19:40 UTC) — final verification before the handback
+- Six fast scripts re-run into the scratchpad: all exit 0, outputs byte-identical to the stored .out files
+  (10 + 5 + 15 + 5 + 8 + 15 PASS lines, 0 FAIL).  rounds_numbers_check (3 PASS) and rounds_refine (prints values, no
+  pass/fail check) not re-run; their stored outputs are from Step 16.  Report §3 now says "seven checking scripts".
+- Quotes used in §9 re-checked against the downloaded texts: Nakiboğlu Def. 13; Tomamichel–Hayashi (3), (51)–(55);
+  Merhav 0708.0850 ("these distances are not populated by codewords"; F_g); Merhav 0711.2501 (E_2 = E_1 + T);
+  Forney's notes (1.2)–(1.4); van Erven–Harremoës (Csiszár; "radius"); Sahai; Berlin et al.; Naghshvar–Javidi;
+  Kaspi–Shayevitz–Javidi.  All verbatim.
+- git status (read-only, --no-optional-locks): my changes are only docs/science/workstreams/A1_REPORT.md and
+  experiments/science/ws_A1/*; other modified files belong to other workstreams.
+- Report: 1268 lines.  §9.5 search log now runs to 41 entries (35 web searches + 4 arXiv-interface queries + 2 web).
+- Handback: Part A (addendum, 350 words) + Part B (main summary, short).

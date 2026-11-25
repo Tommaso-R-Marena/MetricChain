@@ -78,10 +78,14 @@ adaption gain disappears; (5) the two headline numbers of G26 were re-computed (
 recorded (§2.2); (7) search log: 25 queries; seven scripts; (8) **§9 is an addendum** written on a
 later request: questions B1 and B2 of the theory division's THY-REQ-0011 (the channel-coding
 dictionary of their new Theorem 11.99), with Proposition A1.2 — the generalisation of Proposition
-A1.1 to their heteropolymer setting — ten more searches and an eighth script.
+A1.1 to their heteropolymer setting — twelve more web searches, four queries to the arXiv
+interface, and an eighth script.
 *State at 19:10 UTC:* (1) has since been taken up by the coordinator (`SCI-RES-0001` §2), and
 `SCI-REV-0004` already has the wording of (3); **only (2) still affects `SCI-REV-0004` as it stands**
 (the sentence "answers, on a model class, the question Mathé and Novak leave open").
+(9) *19:20 UTC:* §9.2(d) corrected and extended — the adaptive half of B1 has precedents as a
+principle (Chernoff's sequential design; Burnashev's and Yamamoto–Itoh's confirmation phase; noisy
+search as channel coding), which also belong to §4.1 for claim 1; classification unchanged.
 
 ---
 
@@ -378,7 +382,7 @@ one core, except the two round-hierarchy scripts (3 minutes and about 15 minutes
 | `capacity_check.py` → `.out` (3 s) | C1 capacity = information radius for the cone channel, six `(p, u)`; C2 uniform cube; C3 plain MC from `π`; C4 exact finite-`n` KL of a cone against the flat histogram; C5 mutation | equality to `10⁻⁸`; `a(0.1, 2) = 0.16374`, `r* = 0.1975`; flat histogram: `0.1752, 0.1675, 0.1649` at `n = 200, 800, 3200` `→ 0.1637`; **replicates the table of §11.20 exactly** (§2.3(c)) |
 | `chain_rule_check.py` → `.out` (5 s) | Proposition A1.1 by exact enumeration, `n = 8…14`, seven `(n, p, u)`, 16 families of Lipschitz functions each (cones, flattened cones, dips, minima/maxima of cones, McShane regularisations of random functions at four roughness scales, wells, block-radial, additive): A2 conditional means in `[a₀, a₁]`; A3 `KL ≤ na`; A4 exact upper tail against `exp(−s²/(2nu²))`; A5 Monte Carlo for item 4; A6 `a(p,u) ≤ a(½,u)`; A7 three mutations | 112 instances: largest excursion of a conditional mean `4·10⁻¹⁵`; `max KL/(na) = 1.000000`, attained at a constant cone; tail bound never violated; item 4: measured `0.227` against the bound `0.471` in the tightest case; mutations detected (a `3u`-Lipschitz function leaves the interval; proposal `π` gives `1.28·na`) |
 | `rounds_numbers_check.py` → `.out` (3 min), `rounds_refine.py` → `.out` (finer grid, ≈ 15 min) | the two headline numbers of the round hierarchy, re-computed from the formulas *as printed* in Theorems 11.84(b) and 11.86 (this replicates the evaluation of the formulas, not their proofs) | upper value `T^{(2)}(0)/a = 0.6196, 0.6243, 0.6412, 0.6646` at `u = 0.5, 1, 2, 3` (report: `0.620, 0.624, 0.641, 0.665`), `0.6181` at `u = 0.02` (golden ratio `0.618`); lower value `θ₂*/a = 0.3493, 0.3592, 0.3940, 0.4396` (report: `0.349, 0.359, 0.394, 0.440`), `θ₂*/h = 1.379, 1.368, 1.328, 1.277` (report: `1.38, 1.37, 1.33, 1.28`), best `φ₁ = 0.640, 0.606, 0.560` at `u = 1, 2, 3` (report: `0.64, 0.61, 0.56`); at `u = 2` the supremum sits on the constraint `θ < φ₂a`, which a grid of step `0.01` in `φ₁` misses by `0.002` |
-| `addendum_checks.py` → `.out` (8 s) — for §9 | Q1 the dictionary of Theorem 11.99 on the cube from the textbook formulas (Rényi capacity of the BSC; Nakiboğlu's definition of `E_sp`; Merhav's glassy free energy; `E_sp − θ`); Q2 the `k`-ary symmetric channel behind Proposition 11.103(e): `F*_k = (1−t)C_t`, cutoff-rate optimum, reflection identity at `e^u = k(k−1)`, integer optima for `k ≤ 12`, capacity optimum, the report's `h_k` values; Q3 Proposition A1.2 by exact enumeration (two site types, 2–3 letters, asymmetric envelopes) | all pass: Q1 `10⁻¹²`; reflection identity `4·10⁻¹⁶` (and fails by `4·10⁻³` off the crossing); `h_2, h_3, h_4` reproduced to six digits; `a₂ = a₃` at `u = 0.51937`; 36 instances: conditional laws in the window to `5·10⁻¹⁵`, `max KL/(Σa) = 1.000000` with equality at additive vertex instances; a non-admissible `ψ` leaves the window |
+| `addendum_checks.py` → `.out` (8 s) — for §9 | Q1 the dictionary of Theorem 11.99 on the cube from the textbook formulas (Rényi capacity of the BSC; Nakiboğlu's definition of `E_sp`; Merhav's glassy free energy; `E_sp − θ`); Q2 the `k`-ary symmetric channel behind Proposition 11.103(e): `F*_k = (1−t)C_t`, cutoff-rate optimum, reflection identity at `e^u = k(k−1)`, integer optima for `k ≤ 12`, capacity optimum, the report's `h_k` values; Q3 Proposition A1.2 by exact enumeration (two site types, 2–3 letters, asymmetric envelopes); Q4 the adaptive law `E_sp(θ) − θ` on the cube against Burnashev's line `C_1(1 − R/C)` for the same channel (§9.2(d)), with a mutation | all pass: Q1 `10⁻¹²`; reflection identity `4·10⁻¹⁶` (and fails by `4·10⁻³` off the crossing); `h_2, h_3, h_4` reproduced to six digits; `a₂ = a₃` at `u = 0.51937`; 36 instances: conditional laws in the window to `5·10⁻¹⁵`, `max KL/(Σa) = 1.000000` with equality at additive vertex instances; a non-admissible `ψ` leaves the window; Q4: `C_1 = u·tanh(u/2)` (`1.5232` at `u = 2`), `e(0⁺) = ln cosh(u/2)` (`0.4338`), zero at `h = 0.09728 < a = 0.32781`, strictly convex (`e(h/2) = 0.1244` against the chord's `0.2169`) |
 
 Re-run: `cd experiments/science/ws_A1 && python3 <script>`; the seven checking scripts exit
 non-zero on a failed check (`rounds_refine.py` has no pass/fail check: it only prints the refined
@@ -434,6 +438,14 @@ different regime: noisy observations, `δ → 0`, instance-wise.  The theory rep
 evaluations, fixed `δ`, dimension `→ ∞`, worst case over the class (and the instance-wise version is
 stated there as open, remark (4) of §11.18).  The pattern "query complexity ≤ learning +
 verification" of §11.10 is Karnin's explore–verify and should cite it.
+*Added with the addendum (§9.2(d), where the sources and what was read of them are given):*
+Chernoff's scheme is now cited from a description I read (Naghshvar & Javidi 2013, §2.2); the same
+principle is the *confirmation phase* of variable-length coding with feedback (Burnashev 1976;
+Yamamoto–Itoh 1979, through Berlin et al. 2009), and for noisy *search* the pair "non-adaptive
+queries: no-feedback exponents; adaptive queries: Burnashev's exponent, by search plus validation"
+is stated explicitly (Kaspi–Shayevitz–Javidi).  These are precedents for the motto in a third
+regime (noisy answers, time as resource, error probability); none has the class, the exact
+answers or the law `θ_ad = θ_hint` at budgets exponential in the dimension.
 
 (c) **Adaption in information-based complexity** — Krieg, Novak, Ullrich 2025 `[full text: §1,
 §6.1, §6.3]`; Heinrich 2024 `[abstract]` (gap `n^{1/4}` for scalar mean computation); Kunsch, Novak,
@@ -796,7 +808,11 @@ not of the usual nested kind.
    explicit at least on a sub-class, and an every-`n` statement somewhere (radial class).
 2. The positioning of §2.4 (cone, relative error, gain = cardinality) and the four anchors
    (Mathé–Novak; Krieg–Novak–Ullrich/Novak; Suárez–Silbey–Oppenheim; Chatterjee–Diaconis); the
-   verification-versus-identification literature (Karnin; Garivier–Kaufmann) for the motto.
+   verification-versus-identification literature (Karnin; Garivier–Kaufmann) for the motto; and
+   — added with the addendum — the *confirmation phase* of sequential design and of coding with
+   feedback (Chernoff 1959; Burnashev 1976; Yamamoto–Itoh 1979) and its use in noisy search, where
+   "non-adaptive queries: sphere packing; adaptive queries: beyond it" is already said (§9.2(d)).
+   The theorem survives this comparison (other problem, other law), but only if the paper makes it.
 3. Honest scope: exact evaluations, fixed `δ`, one Lipschitz constant, exponents only, an algorithm
    nobody would run.  The referee will ask for at least one of: product reference measures (the
    field case is there), larger alphabets, or a continuous analogue; the theory report itself says
@@ -821,7 +837,9 @@ optimality and with the sampling-oracle counting literature of 2018–2026.
 (read-only checkout; §11.26 of its `docs/THEORY_REPORT.md`, lines 6138–6420, and
 `docs/collaboration/requests/theory/THY-REQ-0011.md`, both read in full; `W_REPORT.md` not read).*
 Labels and reading levels as in the header.  New script: `experiments/science/ws_A1/addendum_checks.py`
-(8 s; all checks pass).
+(5 s; all checks pass).  *Revised at 19:20 UTC:* the paragraph on feedback in §9.2(d) was wrong as
+first written ("the adaptive half has no counterpart at all") and has been replaced; request T7 was
+rewritten and T7a added.
 
 ### 9.1 What is asked, and the short answers
 
@@ -845,7 +863,10 @@ adaptive half has a counterpart as a *principle* but not as a *formula* (§9.2(d
 19:20 UTC — the first version of this addendum said "no counterpart at all", which was wrong): for
 block codes of fixed length feedback does not beat the sphere-packing exponent; where it does
 (variable length: Burnashev; fixed delay: Sahai), the principle is "identify tentatively, then pay
-for the confirmation only" — Chernoff's sequential design — and the law is a different one.
+for the confirmation only" — Chernoff's sequential design — and the law is a different one.  For
+one query problem, noisy search, "a fixed set of queries is bound by the no-feedback exponents;
+adaptive queries attain Burnashev's exponent, which exceeds the sphere-packing bound" is stated in
+so many words (Kaspi–Shayevitz–Javidi).
 
 **B2.**  *"A site with many equivalent states behaves like one with about `e^{u/2}` states".* — It has
 an exact counterpart that I can prove but did not find in print: **the alphabet size that maximises
@@ -938,7 +959,7 @@ guessing: Arikan's exponent `max_Q[ρH_Q − D(Q‖P)] = ρH_{1/(1+ρ)}` and gue
 Merhav & Cohen, arXiv:1811.04363, which I read: abstract, introduction]`; randomised i.i.d. guessing
 attains the guessing exponent (ibid.) — the analogue of "sample from the Rényi centre".
 
-In channel coding proper the picture has three parts.  *(The first version of this addendum had
+In channel coding proper the picture has four parts.  *(The first version of this addendum had
 only the first and concluded "not in print in any form"; that was too strong and is corrected here.)*
 
 1. *Fixed block length: feedback does not beat `E_sp`.*  "The reliability function of the discrete
@@ -952,11 +973,11 @@ only the first and concluded "not in print in any form"; that was too strong and
    Telatar, IEEE-IT 55 (2009) 3074–3080, arXiv:cs/0610145, of which I read the abstract and §I]`:
    the reliability function of variable-length block codes with feedback is
    `E_B(R) = C_1(1 − R/C)`, `C_1 = max_{x,x'} D(p(·|x)‖p(·|x'))` (their eq. (4)).  The Yamamoto–Itoh
-   scheme alternates "a communication and a confirmation phase"; in the confirmation phase "the
+   scheme (IEEE-IT 25 (1979) `[not accessed]`) alternates "a communication and a confirmation phase"; in the confirmation phase "the
    decoder performs a binary hypothesis test"; and the authors' converse "suggests that a
    communication and a confirmation phase are implicit in any scheme for which the probability of
    error decreases with the largest possible exponent".  In the sequential design of experiments
-   the same principle is Chernoff's (1959) `[not accessed; as described in Naghshvar & Javidi, Ann.
+   the same principle is Chernoff's (Ann. Math. Statist. 30 (1959)) `[not accessed; as described in Naghshvar & Javidi, Ann.
    Statist. 41 (2013) 2703–2738, arXiv:1203.4626, of which I read the abstract and §2.2]`: "at each
    time t, find the most likely true hypothesis, and then select an action that can discriminate
    this hypothesis the best from each and every element in the set corresponding to the
@@ -966,9 +987,9 @@ only the first and concluded "not in print in any form"; that was too strong and
    pay only for the verification of what was identified — in print since 1959 and, on the coding
    side, since 1976.  (It is the precedent named in §4.1 for claim 1; there I had Chernoff "not
    accessed" and Karnin's verification-based bandit algorithms as the source read.)  What differs
-   is the law.  In coding the resource is time, additive in `n`: the two phases share the block and
+   is the law.  **[H]** In coding the resource is time, additive in `n`: the two phases share the block and
    the exponent is linear in the rate.  Here the resource is a number of evaluations, exponential
-   in `n`: the two phases add as `e^{nθ₁} + e^{nθ₂}` and share nothing.  On the cube
+   in `n`: the two phases add as `e^{nθ₁} + e^{nθ₂}` and share nothing.  **[N]** On the cube
    (`addendum_checks.py`, Q4): the adaptive rate `E_sp(θ) − θ = uρ_θ − Λ₁` falls from `ln cosh(u/2)` at
    `θ = 0⁺` to zero at the fixed point `h < a` and is strictly convex; Burnashev's line for the same
    channel `BSC(p_u)` falls from `C_1 = u·tanh(u/2)` to zero at the capacity `a`.  (They are different
@@ -978,20 +999,49 @@ only the first and concluded "not in print in any form"; that was too strong and
    fixed-delay setting also presents such an opportunity for generic channels", with a "focusing
    bound") `[abstract]` — again another law.
 
-Closest in *form* to the question — adaptive against non-adaptive **search**, treated as channel
-coding — is Kaspi, Shayevitz, Javidi, *Searching with measurement dependent noise*
-(arXiv:1408.4073, arXiv:1611.08959 `[abstracts]`): "measurement dependent noise incurs a
-multiplicative gap in the targeting rate between adaptive and non-adaptive search strategies", and
-the adaptive strategy "attains the optimal rate-reliability tradeoff".  That is a statement about
-rates; the reliability law there is of Burnashev's kind as far as the abstract shows.
+4. *Search as coding: both halves side by side, in print, for another query problem.*  The
+   statement closest *in form* to B1 that I found is in the noisy-search literature.  Kaspi,
+   Shayevitz, Javidi, *Searching with measurement dependent noise* (arXiv:1611.08959, 2016
+   `[full text: abstract, §I, §IV up to Proposition 2]`), on the model of Burnashev and Zigangirov
+   (Probl. Peredachi Inf. 10 (1974)) `[not accessed]`: a target is located by queries with noisy answers, and "this search
+   problem is equivalent to the problem of channel coding with noiseless feedback over a Binary
+   Symmetric Channel (BSC) with crossover probability p, where the message corresponds to the
+   target"; "given the relations between non-adaptive search and non-feedback channel coding,
+   standard random coding exponents results … indicate" the non-adaptive trade-off; adaptive
+   strategies "are also asymptotically better if a certain exponential decay of the error
+   probability is desired, which directly corresponds to the fact that the Burnashev exponent …
+   exceeds the sphere packing bound … at all rates below capacity"; and the gain is obtained by
+   what their §IV-A calls "Non Adaptive Search with Validation": after the search phase "the agent continues to probe the
+   estimated target location" and "is faced with a binary hypothesis test".  So **"a fixed set of
+   queries is bound by the no-feedback exponents (sphere packing); adaptive queries beat them by
+   identifying first and validating at the identified place" is in print for a query problem** —
+   target search with noisy answers, with time as the resource and the error probability as the
+   criterion.  It is not the theory division's problem (exact answers, a class of landscapes, a
+   normalising constant, budgets exponential in `n`), and its adaptive law is Burnashev's line, not
+   `E_sp(θ) − θ`.  The same paper notes that "adaptive schemes with very few phases, where each phase
+   employs a non-adaptive strategy but depends on the outcome of the previous phase (hence overall
+   adaptive) are enough to achieve the optimal rate-reliability tradeoff" — to be set against
+   claim 6 (§4.6), where two rounds are *not* enough.  The same dictionary organises the "noisy
+   twenty questions" literature `[abstracts only]`: Chung, Sadler, Zheng, Hero (arXiv:1606.09233):
+   "When the queries are designed non-adaptively as a single block and the noisy responses are
+   modeled as the output of a binary symmetric channel the 20 questions problem can be mapped to an
+   equivalent problem of channel coding with unequal error protection"; Zhou & Hero
+   (arXiv:1909.12954): limits of "optimal non-adaptive query procedures", "inspired by the
+   relationship between the 20 questions problem and the channel coding problem", with a bound on
+   "the benefit of adaptive querying"; Zhou & Hero (arXiv:2105.00265): an adaptive procedure "based
+   on the variable length feedback code".
 
-The roles are transposed throughout: in coding the adaptive party chooses channel *inputs*; here it
-chooses *outputs* to look at.  So the half of B1 that is **not in print, as far as I found**, is the
-*formula with an algorithm*: a procedure that realises the second exponent `E_sp(θ) − θ` of the
-likelihood-ratio test on a whole class without knowing the hypothesis.  The *principle* behind it
-is Chernoff's and Burnashev's, and a write-up should say so.
+In coding the adaptive party chooses channel *inputs*; in the theory division's problem it chooses
+*outputs* to look at.  So the half of B1 that is **not in print, as far as I found**, is the
+*formula with an algorithm* for *this* problem: a procedure that realises the second exponent
+`E_sp(θ) − θ` of the likelihood-ratio test on a whole Lipschitz class without knowing the hypothesis.
+The *principle* behind it — identify, then validate; the validation sets the exponent — is
+Chernoff's, Burnashev's and Yamamoto–Itoh's, and it has been stated for query problems.  A write-up
+must say so: a referee from information theory will read "adaptivity replaces the hint" as the
+confirmation phase.  This adds precedents to §4.1 and does not change the classification of
+claim 1 (the exact exponents on the class, and the nested algorithm, were not found).
 
-**(e) Where it was not found** (searches 26–35 of §9.5).  Importance sampling: the Stein-lemma end
+**(e) Where it was not found** (searches 26–35 and 39–41 of §9.5).  Importance sampling: the Stein-lemma end
 only (Chatterjee–Diaconis: sample size `e^{KL}`; the same rule of thumb in an appendix of
 arXiv:2312.15256 `[search snippet]`); necessary sample sizes through `f`-divergences (Sanz-Alonso,
 arXiv:1608.08814 `[abstract]`); no Hoeffding curve, no Rényi radius, no sphere packing.  Information-based complexity: nothing
@@ -1007,6 +1057,9 @@ exponent: (3)/(4); adaptive exponent: (6)) are what is or is not new.  Two conse
 the non-adaptive lower bound should be *presented* as the sphere-packing argument (with the
 citation), and the formula `E_sp(θ) − θ` should be introduced as the second exponent of the
 Neyman–Pearson test, so that the new statement stands out: an adaptive algorithm attains it.
+A third: the adaptive theorem has to be *positioned* against the confirmation-phase principle
+(Chernoff; Burnashev; Yamamoto–Itoh; noisy search — (d) above), with the difference of the laws
+stated; otherwise that is the first thing an information theorist will object.
 
 ### 9.3 How Theorem 11.99 relates to §2.3 and Proposition A1.1 of this report
 
@@ -1136,6 +1189,25 @@ optimal alphabet size OR "number of signals" maximize cutoff rate … "Massey" "
 Arıkan cs/0508034 (snippet).  35. X `"sums of random exponentials" OR "exponential functionals" …
 "Rényi" OR "sphere packing" OR "Hoeffding trade-off" … importance sampling exponent …` → Forney's BSC
 notes; nothing on sampling.
+*Added at 19:20 UTC, for §9.2(d) (not web searches: direct retrievals from arXiv by identifier or
+title, of papers I knew of, to replace statements from memory by statements read).*  36. A
+`id_list=cs/0610145, 0903.4386, cs/0610106, cs/0612097` → abstracts; full text of the first two.
+37. A `id_list=1203.4626` (Naghshvar–Javidi) → abstract and full text.  38. A `ti:"Searching with
+Measurement Dependent Noise"` → arXiv:1408.4073, arXiv:1611.08959; full text of the second.  39. A
+`all:"adaptivity gain" AND all:"error exponent" AND all:search` → **0 results**.  (A = arXiv API.)
+40. S `"non-adaptive" "adaptive" query strategies error exponent "sphere packing" "Burnashev" noisy
+"20 questions" OR "twenty questions" resolution "benefit of adaptivity" exponent` → the noisy
+twenty-questions papers (arXiv:1606.09233, 1909.12954, 2105.00265; abstracts then fetched); the
+search tool reported that the results "don't mention sphere packing explicitly".  41. S `adaptive
+versus non-adaptive evaluations estimating integral OR "normalizing constant" OR "partition
+function" "error exponent" "sequential design" verification … Chernoff "sphere packing" exponent
+"exponentially many" queries` → only the sampling-oracle papers of §4.1(e)/§4.6 (Harris–Kolmogorov,
+arXiv:2505.18324 `[search snippet]`; arXiv:2604.01263; arXiv:2609.20337) — **nothing** on error
+exponents or sequential design for normalising constants.
+What was *not* searched: the active-hypothesis-testing and controlled-sensing literature beyond
+Naghshvar–Javidi, and group testing — the places, with noisy twenty questions (one search, abstracts
+only), where a law of the form `E_sp(θ) − θ` for an adaptive scheme would be most likely to exist if
+it does.
 
 | source | read | used for |
 |---|---|---|
@@ -1150,11 +1222,21 @@ notes; nothing on sampling.
 | Merhav & Cohen, arXiv:1811.04363 | abstract, introduction | B1 (d) |
 | Yagli & Cuff, arXiv:1801.00714v8; He, Pradhan, Winter, arXiv:2409.18307v4 | `[abstract]`, first page | B1 (c) |
 | Sahai, arXiv:cs/0610139; Sanz-Alonso, arXiv:1608.08814; Masrani et al., arXiv:2107.00745 | `[abstract]` | B1 (d), (e) |
+| Berlin, Nakiboğlu, Rimoldi, Telatar, IEEE-IT 55 (2009) 3074–3080; arXiv:cs/0610145v3 | `[full text]` abstract, §I (to the description of the Yamamoto–Itoh scheme) | B1 (d)2: Burnashev's exponent, communication and confirmation phases |
+| Naghshvar & Javidi, Ann. Statist. 41 (2013) 2703–2738; arXiv:1203.4626v4 | `[full text]` abstract, §2.2 | B1 (d)2: Chernoff's scheme as described there; its relation to Burnashev's second phase |
+| Kaspi, Shayevitz, Javidi, arXiv:1611.08959v1 (and the abstract of arXiv:1408.4073v1) | `[full text]` abstract, §I, §IV up to Proposition 2 | B1 (d)4: search as coding; non-adaptive against adaptive; few phases |
+| Nakiboğlu & Zheng, IEEE-IT 58 (2012) 24–49; arXiv:0903.4386v4 | `[abstract]`; §I in part (the survey of exponents with feedback, footnote 1 on Haroutunian's bound) | B1 (d)1, background |
+| Gopala, Nam, El Gamal, arXiv:cs/0610106; Nakiboğlu & Gallager, IEEE-IT 54 (2008), arXiv:cs/0612097 | `[abstract]` | not used beyond background |
+| Chung, Sadler, Zheng, Hero, arXiv:1606.09233v2; Zhou & Hero, arXiv:1909.12954v4 and arXiv:2105.00265v1 | `[abstract]` | B1 (d)4: noisy twenty questions as channel coding |
 | Dytso, Yagli, Poor, Shamai, arXiv:1901.03264v4 | `[abstract]` | B2 |
 
 *Not accessed:* Csiszár 1995; Shannon–Gallager–Berlekamp 1967; Forney 1968; Arikan 1996;
 Arikan–Merhav 1998; Mézard–Montanari 2009; Smith 1971; Wozencraft–Jacobs; Massey 1974; Hoeffding
-1965; Blahut 1974; `W_REPORT.md` of the theory division (only §11.26 of the theory report was read).
+1965; Blahut 1974; Burnashev 1976; Burnashev–Zigangirov 1974; Yamamoto–Itoh 1979 (all three
+cited through the papers that describe them); Chernoff 1959 (Project Euclid returned an empty page;
+cited through Naghshvar–Javidi); Haroutunian's bound for block codes with feedback (known to me
+only through footnote 1 of Nakiboğlu–Zheng); `W_REPORT.md` of the theory division (only §11.26 of
+the theory report was read).
 
 ### 9.6 Requests that follow (additions to §7)
 
@@ -1162,10 +1244,22 @@ Arikan–Merhav 1998; Mézard–Montanari 2009; Smith 1971; Wozencraft–Jacobs;
   mechanism is the glassy phase of the random code ensemble (Merhav 2009; Mézard–Montanari), the
   Hoeffding trade-off against product alternatives (Tomamichel–Hayashi 2018) and, on the cube, the
   Jarzynski bias curve (Suárez–Silbey–Oppenheim 2012); the non-adaptive lower bound is the
-  sphere-packing argument with the sampling law as auxiliary output law; what is not in print is
-  that an adaptive algorithm attains `E_sp(θ) − θ`.*  Say explicitly that feedback does **not** beat
-  `E_sp` in channel coding (Nakiboğlu; Sahai), so the adaptive theorem is not a transposition of a
-  coding theorem.
+  sphere-packing argument with the sampling law as auxiliary output law; what was not found in print is
+  that an adaptive algorithm attains `E_sp(θ) − θ`.*  For the adaptive half say three things
+  (§9.2(d)): for block codes of fixed length feedback does **not** beat `E_sp` (Nakiboğlu; Sahai);
+  where feedback does beat it (variable length: Burnashev; Yamamoto–Itoh), the principle is the
+  one of this theorem — identify, then confirm, and the confirmation sets the exponent (Chernoff
+  1959) — and it has been stated for a query problem (noisy search: Kaspi–Shayevitz–Javidi); the
+  law there is Burnashev's line `C_1(1 − R/C)`, here `E_sp(θ) − θ`, because budgets that are
+  exponential in `n` add without sharing.  *(This item replaces the first version of T7, which said
+  only "feedback does not beat `E_sp`".)*
+- T7a. A sentence to repair in the paragraph "Why the sphere-packing exponent appears" of Theorem
+  11.99: "truncating the cone removes the rest, whose Gibbs mass is `exp(−n·min{D(V‖W|M) : I(M,V) ≤ θ})`"
+  reads as if the *removed* outputs had that mass.  The minimum is over the conditional types the
+  sample *sees* (`I ≤ θ`), so `e^{−nE_sp(θ)}` is the Gibbs mass of what is seen — of what is left
+  after the truncation; below capacity the removed part carries almost all of the mass.  (On the
+  cube: seen shells `ρ ≥ ρ_θ`, mass `≐ e^{−n·KL(ρ_θ‖p_u)}`; `exponent_checks.py`, E5, simulates exactly
+  this deficit.)
 - T8. Check Proposition A1.2 and, if it stands, move "upper bounds at bounded accuracy" from "not
   done" to done for non-adaptive algorithms; state the sampler as "the product of the Shannon
   centres".

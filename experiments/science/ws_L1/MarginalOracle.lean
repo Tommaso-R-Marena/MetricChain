@@ -35,6 +35,13 @@ the theory division's bounds apply to that restricted class.
 
 * `theorem4_adaptive_marginal_oracle` — **Theorem 4**.
 * `theorem4'_nonadaptive_marginal_oracle` — **Theorem 4′**.
+* `theorem4_binary_cube`, `theorem4'_binary_cube` — the same on `Fin n → ZMod 2`, with `2ⁿ`.
+* `theorem4_one_body_marginals`, `theorem4'_one_body_marginals` — an explicit, hypothesis-free
+  instance: with the repetition code `{0ⁿ, 1ⁿ}` (dual distance `≥ 2`,
+  `repetition_dual_distance`), free knowledge of all one-site marginals costs at most a factor
+  `2` in either bound.
+* `queryAlgorithm_output_const_of_no_queries` — why a new model is needed: a `QueryAlgorithm`
+  that makes no query has a constant output.
 * supporting facts: `distToCoset_lipschitz` (a distance to a set is 1-Lipschitz),
   `distToCoset_add_mem` (invariance under the code), `card_centres_near` (every point lies in
   the difference sets of at most `|C| · |ball|` centres), `marginalOracle_of_invariant` (the
@@ -947,6 +954,141 @@ theorem theorem4'_binary_cube {n : ℕ} (C : Finset (Fin n → ZMod 2))
 
 end BinaryCube
 
+/-! ### An explicit instance: one-body marginals (`k = 1`) and the repetition code
+
+The repetition code `{0ⁿ, 1ⁿ}` has dual distance at least `2`, so free knowledge of all
+one-site marginals lowers the two bounds by at most the factor `2`, for every `n`. -/
+
+section OneBody
+
+/-- A query algorithm (in the theory division's sense) that makes no query has a constant
+output.  Hence `QueryAlgorithm` cannot model an algorithm that uses side information depending
+on the residual — the reason for indexing by the oracle's answer in this file. -/
+theorem queryAlgorithm_output_const_of_no_queries {X : Type*}
+    (alg : MetricChain.QueryAlgorithm X) (h : ∀ g, alg.queries g = ∅) (g g' : X → ℝ) :
+    alg.output g' = alg.output g :=
+  (alg.consistent g g' (by
+    intro a ha
+    rw [h g] at ha
+    simp at ha)).2
+
+/-- The repetition code `{0ⁿ, 1ⁿ}` over `F₂` has no dual word of weight `1`. -/
+theorem repetition_dual_distance {n : ℕ} (u : Fin n → ZMod 2) (hu : u ≠ 0)
+    (horth : ∀ a ∈ ({0, fun _ => 1} : Finset (Fin n → ZMod 2)), ∑ i, u i * a i = 0) :
+    1 < hammingNorm u := by
+  have hsum : ∑ i, u i = 0 := by
+    have h := horth (fun _ => 1) (by simp)
+    simpa using h
+  by_contra hle
+  have hpos : 0 < hammingNorm u :=
+    Nat.pos_of_ne_zero fun h0 => hu (hammingNorm_eq_zero.mp h0)
+  have h1 : hammingNorm u = 1 := by omega
+  unfold hammingNorm at h1
+  obtain ⟨j, hj⟩ := Finset.card_eq_one.mp h1
+  have hzero : ∀ i ∈ (univ : Finset (Fin n)), i ≠ j → u i = 0 := by
+    intro i _ hij
+    by_contra hne
+    have hmem : i ∈ ({j} : Finset (Fin n)) := by
+      rw [← hj]
+      exact Finset.mem_filter.mpr ⟨Finset.mem_univ i, hne⟩
+    exact hij (Finset.mem_singleton.mp hmem)
+  have hsum' : ∑ i, u i = u j :=
+    Finset.sum_eq_single j hzero fun hnot => absurd (Finset.mem_univ j) hnot
+  have hjne : u j ≠ 0 := by
+    have hmem : j ∈ ({j} : Finset (Fin n)) := Finset.mem_singleton_self j
+    rw [← hj] at hmem
+    exact (Finset.mem_filter.mp hmem).2
+  exact hjne (hsum'.symm.trans hsum)
+
+/-- The repetition code is closed under addition. -/
+theorem repetition_add_mem {n : ℕ} :
+    ∀ a ∈ ({0, fun _ => 1} : Finset (Fin n → ZMod 2)),
+      ∀ b ∈ ({0, fun _ => 1} : Finset (Fin n → ZMod 2)),
+        a + b ∈ ({0, fun _ => 1} : Finset (Fin n → ZMod 2)) := by
+  intro a ha b hb
+  have h11 : ((fun _ => 1 : Fin n → ZMod 2) + fun _ => 1) = 0 := by
+    funext i
+    show (1 : ZMod 2) + 1 = 0
+    decide
+  rw [Finset.mem_insert, Finset.mem_singleton] at ha hb ⊢
+  rcases ha with rfl | rfl <;> rcases hb with rfl | rfl
+  · left
+    rw [add_zero]
+  · right
+    rw [zero_add]
+  · right
+    rw [add_zero]
+  · left
+    exact h11
+
+open Classical in
+/-- **Theorem 4 with one-body marginals.**  On the binary cube, an adaptive algorithm that is
+given every one-site marginal of `μ_g` exactly still needs, at the zero residual,
+`(1 - 2δ) · 2ⁿ ≤ E[number of evaluations] · 2 · V(n, r)`:
+half of the bound without the oracle. -/
+theorem theorem4_one_body_marginals {n : ℕ} {β c : ℝ} (hβ : 0 ≤ β) (hc : 0 ≤ c) (r : ℝ)
+    {ε δ : ℝ} {Ω : Type*} [Fintype Ω]
+    (alg : Ω → (Finset (Fin n) → (Fin n → ZMod 2) → ℝ) →
+      MetricChain.QueryAlgorithm (Fin n → ZMod 2))
+    (P : Ω → ℝ) (hP : ∀ ω, 0 ≤ P ω) (hP1 : ∑ ω, P ω = 1)
+    (hcorr : ∀ g : (Fin n → ZMod 2) → ℝ, HammingLip c g →
+      1 - δ ≤ ∑ ω ∈ univ.filter (fun ω =>
+        |(alg ω (marginalOracle β 1 g)).output g - logZ β g| ≤ ε / 2), P ω)
+    (hsens : ε < logZ β (dipAt c r (0 : Fin n → ZMod 2)) -
+      logZ β (0 : (Fin n → ZMod 2) → ℝ)) :
+    (1 - 2 * δ) * 2 ^ n ≤
+      (∑ ω, P ω * ((alg ω (marginalOracle β 1 0)).queries 0).card) *
+        (2 * ((univ.filter fun y : Fin n → ZMod 2 => (hammingNorm y : ℝ) < r).card : ℝ)) := by
+  have h := theorem4_binary_cube ({0, fun _ => 1} : Finset (Fin n → ZMod 2)) (by simp)
+    repetition_add_mem 1 (fun u hu horth => repetition_dual_distance u hu horth) hβ hc r alg P
+    hP hP1 hcorr hsens
+  refine h.trans ?_
+  have hcard : ((({0, fun _ => 1} : Finset (Fin n → ZMod 2)).card : ℕ) : ℝ) ≤ 2 := by
+    exact_mod_cast Finset.card_le_two
+  have hE : 0 ≤ ∑ ω, P ω * (((alg ω (marginalOracle β 1 0)).queries 0).card : ℝ) :=
+    Finset.sum_nonneg fun ω _ => mul_nonneg (hP ω) (Nat.cast_nonneg _)
+  have hV : (0 : ℝ) ≤
+      ((univ.filter fun y : Fin n → ZMod 2 => (hammingNorm y : ℝ) < r).card : ℝ) :=
+    Nat.cast_nonneg _
+  exact mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_right hcard hV) hE
+
+open Classical in
+/-- **Theorem 4′ with one-body marginals.**  On the binary cube, an algorithm whose query set
+depends only on its seed and on the one-site marginals of `μ_g` needs
+`(1 - 2δ) · 2ⁿ ≤ E[number of evaluations] · 2 · |B(R - 1)|` whenever `ε < D_R - log 2`. -/
+theorem theorem4'_one_body_marginals {n : ℕ} {β c : ℝ} (hβ : 0 ≤ β) (hc : 0 ≤ c) (R : ℝ)
+    {ε δ : ℝ} {Ω : Type*} [Fintype Ω]
+    (alg : Ω → (Finset (Fin n) → (Fin n → ZMod 2) → ℝ) →
+      MetricChain.QueryAlgorithm (Fin n → ZMod 2))
+    (Q : Ω → (Finset (Fin n) → (Fin n → ZMod 2) → ℝ) → Finset (Fin n → ZMod 2))
+    (hna : ∀ ω o g, (alg ω o).queries g = Q ω o)
+    (P : Ω → ℝ) (hP : ∀ ω, 0 ≤ P ω) (hP1 : ∑ ω, P ω = 1)
+    (hcorr : ∀ g : (Fin n → ZMod 2) → ℝ, HammingLip c g →
+      1 - δ ≤ ∑ ω ∈ univ.filter (fun ω =>
+        |(alg ω (marginalOracle β 1 g)).output g - logZ β g| ≤ ε / 2), P ω)
+    (hsens : ε < Real.log (pSum (β * c) (fun x : Fin n → ZMod 2 => (hammingNorm x : ℝ)) /
+        pSum (β * c) (fun x : Fin n → ZMod 2 => max (hammingNorm x : ℝ) R)) - Real.log 2) :
+    (1 - 2 * δ) * 2 ^ n ≤
+      (∑ ω, P ω * (Q ω (marginalOracle β 1 0)).card) *
+        (2 * ((univ.filter fun y : Fin n → ZMod 2 => (hammingNorm y : ℝ) < R).card : ℝ)) := by
+  have hcard : ((({0, fun _ => 1} : Finset (Fin n → ZMod 2)).card : ℕ) : ℝ) ≤ 2 := by
+    exact_mod_cast Finset.card_le_two
+  have hcardpos : (0 : ℝ) < ((({0, fun _ => 1} : Finset (Fin n → ZMod 2)).card : ℕ) : ℝ) := by
+    exact_mod_cast Finset.card_pos.mpr ⟨0, by simp⟩
+  have hlog := Real.log_le_log hcardpos hcard
+  have h := theorem4'_binary_cube ({0, fun _ => 1} : Finset (Fin n → ZMod 2)) (by simp)
+    repetition_add_mem 1 (fun u hu horth => repetition_dual_distance u hu horth) hβ hc R alg Q
+    hna P hP hP1 hcorr (by linarith)
+  refine h.trans ?_
+  have hE : 0 ≤ ∑ ω, P ω * ((Q ω (marginalOracle β 1 0)).card : ℝ) :=
+    Finset.sum_nonneg fun ω _ => mul_nonneg (hP ω) (Nat.cast_nonneg _)
+  have hV : (0 : ℝ) ≤
+      ((univ.filter fun y : Fin n → ZMod 2 => (hammingNorm y : ℝ) < R).card : ℝ) :=
+    Nat.cast_nonneg _
+  exact mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_right hcard hV) hE
+
+end OneBody
+
 end ScienceL1
 
 end
@@ -958,3 +1100,7 @@ end
 #print axioms ScienceL1.theorem4'_nonadaptive_marginal_oracle
 #print axioms ScienceL1.theorem4_binary_cube
 #print axioms ScienceL1.theorem4'_binary_cube
+#print axioms ScienceL1.queryAlgorithm_output_const_of_no_queries
+#print axioms ScienceL1.repetition_dual_distance
+#print axioms ScienceL1.theorem4_one_body_marginals
+#print axioms ScienceL1.theorem4'_one_body_marginals

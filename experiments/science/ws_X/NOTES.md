@@ -209,3 +209,83 @@ Tool: web search (results = titles+snippets), page fetch for 3 URLs.  Levels: [a
   grows with n at extensive accuracy, at least for additive features.
 * N5b (vectorised additive toy, same seeds as n5_compare part II): the two implementations
   agree (ln N_W >= 12.73 / 26.41 at n = 100 / 200, kappa = .5, e = 0).
+
+### ~19:15 (approximate) — report drafted (all seven sections); corrections after cross-checking against outputs
+* Cross-checked every number in SX_REPORT §3 against the JSON/log outputs.  Corrected: instance
+  count of N9 (1280, not 1360); "0.6-2.3" -> "0.4-2.3" for cover ratios; M = n + C(n,2) (no
+  constant in that prior); z_t ~ 5-6.5 (not 4-5); width ratios 20-80 (not 50-80); the
+  deterministic bound of Prop 11 (factor 4).
+* n9b_example.py: explicit triangle with 0 < tau_LP < tau: h=(-1,-1/2,-1), J01=J12=-1, J02=+1:
+  tau = 3/2 (checked by hand: flip sites 0,1, gap 3), tau_LP = 1/3.  4-cycle+chord: tau=2,
+  tau_LP=2/3.  n9_lp_funnel.py wrapped in main() (so it can be imported) and rerun.
+* N1 rerun after the pinv fix: dense-vs-coset now 3e-9 (variance) / 7e-8 (mean); structural 2.7e-14.
+
+### ~19:22 (approximate) — Proposition 5' upgraded from numerics to a proof (high-temperature phase)
+* For zero-diagonal symmetric J with ||J||_F = F < 1 and s uniform on {+-1}^n:
+     ln E exp(s^T J s/2) <= -1/2 ln det(I-J) <= phi(F) := -1/2 ln(1-F) - F/2.
+  Step 1: replace s_i by Gaussians one at a time (exponent is linear in each s_i since the
+  diagonal vanishes; cosh a <= exp(a^2/2)).  Step 2: tr J = 0 so the Gaussian value is
+  sum phi(lambda_i); phi(l) = l^2 psi(l), psi(l) = int_0^1 u/(2(1-l u)) du increasing; lambda_max <= F.
+  The Curie-Weiss matrix attains phi(beta J) asymptotically => U = phi(beta J) + o(1) for beta J < 1.
+* n12_gauss_comparison.py: 2752 random J (7 families, n=3..10, F in (0.05,0.98)): no violation;
+  smallest slack 4.8e-6 at a Curie-Weiss matrix.  Also consistent with N10 (0.0575 <= 0.0616;
+  0.328 <= 0.485 at n=12).
+* With a non-uniform reference the first-order term beta*B_A*sqrt(pihat K_A pihat) of Theorem 5
+  is extensive (quadrature error against the Gibbs measure): noted in the report, not pursued.
+
+### ~19:25 (approximate) — state before the last additions
+Report: docs/science/workstreams/SX_REPORT.md (sections 1-7 complete).
+Files in this directory (script -> outputs; all re-runnable with OMP_NUM_THREADS=1 python3 <script>):
+  cube.py                  library (FWHT, spectra, linear designs, BCH rows, posteriors)
+  n1_coset_formula.py      -> n1_coset_formula.json/.log   Lemma 2, Theorem 3(a),(b)
+  n3_ball_lnz.py           -> n3_ball_lnz.json/.log        Theorem 1, Theorem 5
+  n4_bayes.py              -> n4_bayes.json/.log           Theorem 6, Proposition 7 (N4 + N8)
+  n5_compare.py            -> n5_compare.json/.log         both paradigms, part I (brute force) + II
+  n5b_additive.py          -> n5b_additive.json/.log       additive toy to n = 1000 (vectorised)
+  n6_misspec.py            -> n6_misspec.json/.log         wrong priors, dips, conformal, Lebesgue
+  n7_exponent.py           -> n7_exponent.json             Theorem 3(c),(d), Corollary 4(c)
+  n9_lp_funnel.py          -> n9_lp_funnel.json/.log       Theorem 9
+  n9b_example.py           -> n9b_example.json             explicit triangle 0 < tau_LP < tau
+  n10_extras.py            -> n10_extras.json/.log         Proposition 5' (CW), dip norms
+  n11_site_mc.py           -> n11_site_mc.json/.log        Proposition 11
+  n12_gauss_comparison.py  -> n12_gauss_comparison.json    Proposition 5'(a)
+  n5_compare_quick.json    leftover of a quick test run (not used in the report)
+Not done: no Lean (nothing machine-checked by me); no computation on a chain; no full-text
+reading of any paper (abstracts/snippets only) — all stated in the report.
+Things that went wrong on the way (kept for the record): BLAS thread oversubscription (two
+timeouts); pinv cutoff; a "failed" expectation bound that was Monte Carlo noise; a local maximum
+mistaken for a mismatch in Theorem 5; a factor 2 in Proposition 11; an instance miscount (1360).
+
+### ~19:28 (approximate) — Corollary 4' added (position-dependent weights, direction 2)
+* Theorem 3(c) holds for any leader set L (not only the M heaviest modes):
+  max P_A^2 <= 4[ sum_{U not in L} v_U + sigma^2 |L| / N0 ].  With L = frequencies that fit in a
+  window of w consecutive sites (|L| <= n 2^{w-1} + 1): N <= 256 (B sigma/eps)^2 (n 2^{w-1}+1)
+  evaluations certify min and ln Z over the ball, for arbitrary position-dependent weights,
+  provided the non-local variance tau_w <= eps/(12 B).  Linear in the chain length.
+  No new numerics (Theorem 3 was tested on arbitrary non-isotropic spectra in N1/N7).
+* Also fixed the estimator in Prop 11 (the constant g(x0) was missing) and the wording of 8(c).
+
+### ~19:30 (approximate) — Proposition 4'' and N13: the lever arm in one set of coordinates
+* Insight: Theorem 3 counts MODES, not orders; linear bijections of F_2^n permute characters.
+  Directed chain with bond vectors u_k and flip variables x_i: u_k u_l = chi_{(k,l]}(x) (interval
+  character, order l-k).  Energies quadratic in positions (R_g^2, elastic networks) have orders
+  up to n and lever-arm per-flip constants, but only n(n+1)/2 modes.  With rotations: squared
+  distances are sums over (k,l) of <b, F_k^T F_l b>, so energies quadratic in Cartesian
+  coordinates are linear in 9 n(n+1)/2 interval features.  (Earlier note "(i) no relabelling
+  helps" was too strong: true for site-wise relabelling only — corrected in the report.)
+* n13_lever_arm.py (noisy R_g^2 residual, f = 0.5*#flips, eps=.25, kappa=1 oracle constants,
+  medians of 3): c_i = 1.6-2.2 at the ends, 4.5-6.7 in the middle.
+  W best-first: 42, 65, 136, 257, 508, 862, 1719 for n=6..12 (42% of the cube at n=12);
+  W greedy cover 36..614 (n=6..11); fractional cover 36, 41, 103, 179 (n=6..9).
+  H (B=||g||): 8, 8, 19, 21, 21, 23, 41;  H (B=2||g||) = M = 21..78;  B: 21..72.  All valid.
+  => the lever arm defeats the first-order format even with oracle-tight constants, not the
+  spectral class.  Contact terms remain high-dimensional in frames as well (collective event).
+
+### 19:32 (real clock, checked with date) — closing
+Inventory additions since the last list: n12_gauss_comparison.py/.json (Prop 5'(a)),
+n13_lever_arm.py/.json (Prop 4''), n9b_example.py/.json.  Report sections: 1 verdicts;
+2.0-2.9 statements (Thm 1, Lemma 2, Thm 3, Cor 4, Thm 5, Prop 5', Thm 6, Prop 7, Prop 8, Thm 9,
+Cor 4', Prop 4'', Prop 10, Prop 11, user table); 3.1-3.9 numerics; 4 prior art (mapping table,
+positioning table, search log); 5 not settled; 6 next steps; 7 requests (X-REQ-T1..T4, E1, E2).
+Only files written: this directory and docs/science/workstreams/SX_REPORT.md.  No git state change.
+Note: section headers carry approximate times except where marked as checked with date.

@@ -1,0 +1,3 @@
+path  zero-residual threshold (limit, LP) = 0.394664   theirs 0.394664   diff -1.3e-07;   finite differences F(0,t)/t at t = 1e-2, 1e-3, 1e-4: 0.388859, 0.394081, 0.394606
+tri   zero-residual threshold (limit, LP) = 0.283427   theirs 0.283427   diff -3.6e-07;   finite differences F(0,t)/t at t = 1e-2, 1e-3, 1e-4: 0.280135, 0.283097, 0.283394
+asym  zero-residual threshold (limit, LP) = 0.155521   theirs 0.155521   diff +3.5e-07;   finite differences F(0,t)/t at t = 1e-2, 1e-3, 1e-4: 0.153484, 0.155317, 0.155501

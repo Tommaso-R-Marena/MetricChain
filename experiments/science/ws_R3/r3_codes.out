@@ -36,9 +36,12 @@
   m=4 t=1: length 16, |C_ext|=2^5 (<= 2*16^1=2^5), dual distance=4 (> k=3: True); note's bound (2n)^ceil(k/2) = 1024; Rao M_t = 17
   m=4 t=2: length 16, |C_ext|=2^9 (<= 2*16^2=2^9), dual distance=6 (> k=5: True); note's bound (2n)^ceil(k/2) = 32768; Rao M_t = 137
   m=4 t=3: length 16, |C_ext|=2^11 (<= 2*16^3=2^13), dual distance=8 (> k=7: True); note's bound (2n)^ceil(k/2) = 1048576; Rao M_t = 697
-  m=5 t=1: length 32, |C_ext|=2^6 (<= 2*32^1=2^6), dual distance=None (> k=3: True); note's bound (2n)^ceil(k/2) = 4096; Rao M_t = 33
+  m=5 t=1: length 32, |C_ext|=2^6 (<= 2*32^1=2^6), dual distance=4 (> k=3: True); note's bound (2n)^ceil(k/2) = 4096; Rao M_t = 33
   m=5 t=2: length 32, |C_ext|=2^11 (<= 2*32^2=2^11), dual distance=6 (> k=5: True); note's bound (2n)^ceil(k/2) = 262144; Rao M_t = 529
   m=5 t=3: length 32, |C_ext|=2^16 (<= 2*32^3=2^16), dual distance=8 (> k=7: True); note's bound (2n)^ceil(k/2) = 16777216; Rao M_t = 5489
+  m=6 t=1: length 64, |C_ext|=2^7 (<= 2*64^1=2^7), dual distance=4 (> k=3: True); note's bound (2n)^ceil(k/2) = 16384; Rao M_t = 65
+  m=6 t=2: length 64, |C_ext|=2^13 (<= 2*64^2=2^13), dual distance=6 (> k=5: True); note's bound (2n)^ceil(k/2) = 2097152; Rao M_t = 2081
+  m=6 t=3: length 64, |C_ext|=2^19 (<= 2*64^3=2^19), dual distance=8 (> k=7: True); note's bound (2n)^ceil(k/2) = 268435456; Rao M_t = 43745
 == Codes used later
   Golay24: dim 12 min weight 8 dual dim 12 dual min weight 8 -> k = 7; (2n)^4 = 5308416 ; M_3 = 2325
   dual of BCH(15,t=2): dim 8 min weight 4 dual distance 5 -> k = 4; (2n)^2 = 900 ; M_2 = 121

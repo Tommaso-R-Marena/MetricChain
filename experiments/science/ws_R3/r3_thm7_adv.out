@@ -8,3 +8,4 @@
    w=10.0: TV = 0.9866142982, tanh(w/4) = 0.9866142982; J = 9.8661429815, w tanh(w/4) = 9.8661429815; note's example (uniform mu0): TV = 0.499955
 (c) adversarial ascent (Nelder-Mead, many restarts): can features make max-ent refinement worse than tanh(w/4)?
    w=0.5: best TV found = 0.124353; tanh(w/4) = 0.124353; note's w/4 = 0.1250 | best KL(mu|nu) = 0.03114, best KL(nu|mu) = 0.03114; no-feature sup: 0.03114, 0.03114; J bound w tanh(w/4) = 0.06218; note's w^2/4 = 0.0625
+   w=2.0: best TV found = 0.462117; tanh(w/4) = 0.462117; note's w/4 = 0.5000 | best KL(mu|nu) = inf, best KL(nu|mu) = 0.47447; no-feature sup: 0.47447, 0.47447; J bound w tanh(w/4) = 0.92423; note's w^2/4 = 1.0000

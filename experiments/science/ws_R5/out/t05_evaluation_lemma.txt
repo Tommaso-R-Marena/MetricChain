@@ -1,0 +1,29 @@
+== chain asym: E = 0.191059 ==
+   generalised-dip profile at e = 0.0E: R^(e) = 0.045407479; primal V(mu*, e+alpha; v) = 0.045407479; V - R^ = -4.31e-14   (t* = 0.4820, labels per type [2])
+   generalised-dip profile at e = 0.3E: R^(e) = 0.022108007; primal V(mu*, e+alpha; v) = 0.022108007; V - R^ = -4.48e-15   (t* = 0.3323, labels per type [2])
+   generalised-dip profile at e = 0.6E: R^(e) = 0.007201719; primal V(mu*, e+alpha; v) = 0.007201719; V - R^ = -1.31e-14   (t* = 0.1885, labels per type [2])
+   52 (profile, budget) pairs from 14 random profiles (solver failures: 0): max [V(mu,B;v) - R^(B-alpha)] = -1.801e-03   (claim: <= 0)
+   perturbed optimal profiles at e = 0.3E: max [V - R^] = -8.005e-04
+   [18 s]
+== chain tri: E = 0.284907 ==
+   generalised-dip profile at e = 0.0E: R^(e) = 0.066728814; primal V(mu*, e+alpha; v) = 0.066728814; V - R^ = -1.63e-14   (t* = 0.4856, labels per type [3])
+   generalised-dip profile at e = 0.3E: R^(e) = 0.032076870; primal V(mu*, e+alpha; v) = 0.032076870; V - R^ = -2.41e-14   (t* = 0.3243, labels per type [3])
+   generalised-dip profile at e = 0.6E: R^(e) = 0.010432395; primal V(mu*, e+alpha; v) = 0.010432395; V - R^ = -1.36e-14   (t* = 0.1832, labels per type [3])
+   44 (profile, budget) pairs from 14 random profiles (solver failures: 0): max [V(mu,B;v) - R^(B-alpha)] = -2.610e-03   (claim: <= 0)
+   perturbed optimal profiles at e = 0.3E: max [V - R^] = -9.379e-04
+   [43 s]
+== chain mix: E = 0.251877 ==
+   generalised-dip profile at e = 0.0E: R^(e) = 0.057275398; primal V(mu*, e+alpha; v) = 0.057275398; V - R^ = -7.12e-15   (t* = 0.4665, labels per type [2, 2])
+   generalised-dip profile at e = 0.3E: R^(e) = 0.027759420; primal V(mu*, e+alpha; v) = 0.027759420; V - R^ = -3.95e-15   (t* = 0.3173, labels per type [2, 2])
+   generalised-dip profile at e = 0.6E: R^(e) = 0.009040437; primal V(mu*, e+alpha; v) = 0.009040437; V - R^ = -5.14e-15   (t* = 0.1793, labels per type [2, 2])
+   46 (profile, budget) pairs from 14 random profiles (solver failures: 0): max [V(mu,B;v) - R^(B-alpha)] = -2.266e-03   (claim: <= 0)
+   perturbed optimal profiles at e = 0.3E: max [V - R^] = -5.530e-04
+   [146 s]
+== chain asym+tri (0.3/0.7): E = 0.256752 ==
+   generalised-dip profile at e = 0.0E: R^(e) = 0.060331862; primal V(mu*, e+alpha; v) = 0.060331862; V - R^ = -2.85e-15   (t* = 0.4848, labels per type [2, 3])
+   generalised-dip profile at e = 0.3E: R^(e) = 0.029083263; primal V(mu*, e+alpha; v) = 0.029083263; V - R^ = -2.14e-14   (t* = 0.3260, labels per type [2, 3])
+   generalised-dip profile at e = 0.6E: R^(e) = 0.009461843; primal V(mu*, e+alpha; v) = 0.009461843; V - R^ = -2.28e-15   (t* = 0.1844, labels per type [2, 3])
+   49 (profile, budget) pairs from 14 random profiles (solver failures: 0): max [V(mu,B;v) - R^(B-alpha)] = -2.367e-03   (claim: <= 0)
+   perturbed optimal profiles at e = 0.3E: max [V - R^] = -7.274e-04
+   [336 s]
+exit=0

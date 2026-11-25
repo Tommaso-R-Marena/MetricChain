@@ -20,7 +20,7 @@ Lipschitz polytope, in which information from evaluations combines by a minimum 
 — not from the worst-case quantifier.  Replace the polytope by an *ellipsoid* (the ball of a
 reproducing-kernel Hilbert space; equivalently, in its Bayesian reading, a Gaussian prior) and
 information combines linearly; the uncertainty left at a configuration after evaluating a set
-`A` is `B·P_A(x)`, a number that does not depend on the data, and for kernels on the cube
+`A` is at most `B·P_A(x)`, a bound that does not depend on the data, and for kernels on the cube
 `{0,1}ⁿ` whose Walsh ("ANOVA") spectrum is concentrated on bounded interaction orders it can be
 made small with polynomially many evaluations, with a deterministic guarantee.  I prove a
 two-sided statement (Theorem 3, Corollary 4): the number of evaluations needed to certify
@@ -30,10 +30,11 @@ the interaction-order quantiles of the spectrum are bounded, and otherwise it is
 with exponent the binary entropy of the order quantile — for the brief's product covariance
 `σ²ρ^{d_H}` with fixed `ρ` the exponent is `h((1−ρ)/2)`, and the polynomial regime is
 `ρ = 1 − O(1/n)`.  For `ln Z` the exact interval of values consistent with the data is a
-variational formula (Theorem 5), and `ln Z` is strictly cheaper than the minimum: the worst
-member of an order-2 ellipsoid is a Curie–Weiss ferromagnet and contributes `O(1)` to `ln Z`
-below its critical temperature although it contributes `Θ(n)` to the minimum.  The Bayesian
-twin (Theorem 6) has the same designs, a band `z_δ·P_A` instead of `B·P_A`, and one genuinely
+variational formula (Theorem 5), and `ln Z` is strictly cheaper than the minimum: over an
+order-2 ellipsoid with a uniform reference the unknown pair part changes `ln Z` by at most
+`−½ln(1−βJ) − βJ/2 + o(1)` below the critical temperature `βJ = 1` of its worst member, a
+Curie–Weiss ferromagnet (Proposition 5′, proved by Gaussian domination), although it changes
+the minimum by `Θ(n)`.  The Bayesian twin (Theorem 6) has the same designs, a band `z_δ·P_A` instead of `B·P_A`, and one genuinely
 probabilistic gain: unlearnable high-order components *self-average* in `ln Z`, so the clean
 conjecture "polynomial iff the spectrum decays" is **false** for the value of `ln Z` under a
 prior (Proposition 7: a white-noise component of fixed variance costs `O(n)` evaluations in
@@ -43,8 +44,8 @@ paradigm (1 evaluation against about `n`; numerics §3.3), and at the sizes that
 enumerated (`n ≤ 12`) with oracle-tight envelope constants the two paradigms are within a
 small factor of each other (the smallest envelope covers are 0.4–2.3 times the kernel counts
 up to `n = 11`; best-first search up to 6 times at `n = 12`) — the separation is asymptotic,
-or needs a safety factor on the constants, which every certified envelope has; (ii) no paradigm can be cheap on a benign subclass *and* remain valid
-on the first-order class: that is exactly what the theory division's instance-wise lower
+or needs a safety factor on the constants, which every certified envelope has; (ii) no
+paradigm can be cheap on a benign subclass *and* remain valid on the first-order class: that is exactly what the theory division's instance-wise lower
 bounds say when read in the other direction (Proposition 8(c), "no free hedging"), so the
 assumption that replaces the envelope cannot be verified from polynomially many evaluations
 — it has to come from physics; (iii) a Bayesian certificate fails silently on a dip (coverage
@@ -57,11 +58,21 @@ down by `√(M/N)`.  For interacting known parts (direction 3) I define the **LP
 funnel slope `τ` (theory division), and the proof of that fact is a polynomial-size dual
 certificate, checkable by the existing kernel, exactly when the envelope is below `τ_LP`;
 `τ_LP = τ` on trees and for ferromagnetic binary known parts, and fails to equal `τ` in
-15–95 % of the frustrated instances tried, depending on the strength of the fields.  A small
+15–95 % of the frustrated instances tried, depending on the strength of the fields.  For
+chains: residuals that are local along the sequence, with arbitrary position-dependent
+weights, cost a number of evaluations *linear* in the chain length (Corollary 4′); the lever
+arm is a property of the first-order format, not of the residual — an energy that is
+quadratic in the positions has per-torsion constants that grow along the chain and
+interaction order equal to the chain length, yet only `O(n²)` Walsh modes (interval modes;
+with rotations, `9n(n+1)/2` features), and on a toy chain with oracle-tight constants the
+envelope format evaluates 42 % of the cube at `n = 12` where the ball needs 41–78 points
+(Proposition 4″, §3.9); short-range contacts need type-shared, body-ordered features instead
+of coordinates (Proposition 10).  A small
 by-product fills a cell of the theory division's summary table: in an *additive* class
 randomisation reduces the cost at extensive accuracy from `Θ(n)` to a number independent of
-`n` (Proposition 11, Monte Carlo over sites).  **Recommendation: combine** — keep the envelope/sharpness
-machinery for the part of the landscape where the known part dominates, replace the
+`n` (Proposition 11, Monte Carlo over sites).  **Recommendation: combine** — keep the
+envelope/sharpness machinery for the part of the landscape where the known part dominates,
+replace the
 first-order class for the remainder by a linear-information class (ellipsoid or Gaussian
 prior over body-ordered, type-shared features — the form machine-learned interatomic
 potentials already have), bound what is outside the class in the supremum norm (an accuracy
@@ -240,7 +251,8 @@ tolerance `θ`.  Then for fixed `θ = ε/(Bσ) ∈ (0,1)`
     Σ_{j < m_θ} C(n,j)  <  comp(ε)  ≤  (2n)^{m_{θ/4}},
 
 so `comp` is bounded by a polynomial in `n` for every fixed `θ` **iff** `sup_n m_θ(n) < ∞` for
-every `θ`; the degree is between `m_θ − 1` and `m_{θ/4}`.
+every `θ`; the degree is between `m_θ − 1` and `m_{θ/4}`.  (Here and in (c) the lower bounds
+are for `f ≡ 0`; the upper bounds hold for every `f`.)
 (c) *Exponent.*  If `m_θ(n)/n → α ≤ ½` for every fixed `θ` (the order distribution
 concentrates), then `n⁻¹ ln comp(ε) → h(α) = −α ln α − (1−α) ln(1−α)`.  For the product
 covariance `σ²ρ^{d_H}` with fixed `ρ ∈ (0,1)`:
@@ -310,27 +322,53 @@ local maxima, a delocalised one (`π` near `π̂`) and a localised one (`π` nea
 ellipsoid's analogue of a dip); the numerical search of §3.1 found both.  `L_A` is a convex
 problem.
 
-**Proposition 5′ (the worst member of an order-2 ellipsoid is a ferromagnet) [lower bound P;
-that it is the supremum N, §3.6].**  On the cube with `f ≡ 0`, let the main effects be known
-and the remaining class be `{g = Σ_{i<j} ĝ_ij χ_iχ_j : Σ ĝ_ij²/v₂ ≤ B²}` with extensive scaling
-`σ₂² = C(n,2)v₂ = n s₂`, `B = b√n`.  The Curie–Weiss member `r = −t Σ_{i<j} χ_iχ_j`,
-`t = 2b√s₂/(n−1)`, has norm `B`, so with `J = 2b√s₂`
+**Proposition 5′ (the worst member of an order-2 ellipsoid is a ferromagnet) [(a), (b) P; (a)
+tested on 2 752 random instances, §3.6; extremality above the transition N].**  On the cube
+with `f ≡ 0` and uniform reference, let the main effects be known (and zero) and the remaining
+class be `{g = Σ_{i<j} ĝ_ij χ_iχ_j : Σ ĝ_ij²/v₂ ≤ B²}` with extensive scaling `σ₂² = C(n,2)v₂ = n s₂`,
+`B = b√n`; put `J = 2b√s₂`, `F = βJ (n/(n−1))^{1/2}` and `φ(F) = −½ ln(1−F) − F/2`.  With
+`s_i = χ_i(x)`, every member has `−βg = ½ sᵀ𝐉s` for a symmetric zero-diagonal matrix `𝐉` with
+`‖𝐉‖_F ≤ F`, and `U = sup_𝐉 ln E_unif exp(½ sᵀ𝐉s)`.
+(a) *Upper bound in the high-temperature phase of the class.*  If `F < 1`, then for every such
+`𝐉`:   `ln E_unif exp(½ sᵀ𝐉s) ≤ −½ ln det(I − 𝐉) ≤ φ(‖𝐉‖_F)`;   hence `U ≤ φ(F)`.
+(b) *The Curie–Weiss member* `𝐉 = (βJ/(n−1))(𝟙𝟙ᵀ − I)` has norm `F` and
 
-    U  ≥  ln E_unif exp( (βJ/(n−1)) Σ_{i<j} s_i s_j )  =  { −½ ln(1−βJ) − βJ/2 + o(1),          βJ < 1,
-                                                          { n·max_m [βJ m²/2 − I(m)] + O(ln n),  βJ > 1,
+    ln E_unif exp( (βJ/(n−1)) Σ_{i<j} s_i s_j )  =  { φ(βJ) + o(1),                           βJ < 1,
+                                                    { n·max_m [βJ m²/2 − I(m)] + O(ln n),     βJ > 1,
 
-`I(m) = ½(1+m)ln(1+m) + ½(1−m)ln(1−m)`, whereas the uncertainty of the *minimum* from the same
-class is `B·P = n b√s₂` at every temperature.  Numerically (`n = 8, 10, 12`, seven values of `β`)
-no member found by ascent from random, localised and Curie–Weiss starts exceeds the
-Curie–Weiss value in the fourth decimal.  *Proof of the inequality.*  `‖r‖² = t² C(n,2)/v₂ = B²`;
-the right-hand side is the Curie–Weiss free energy (Hubbard–Stratonovich). ∎
+`I(m) = ½(1+m)ln(1+m) + ½(1−m)ln(1−m)`.
+The lower end is exact (`L = 0`: the pair functions have mean zero under the uniform measure,
+so `ln E e^{−βg} ≥ 0` by Jensen).  So for `βJ < 1` the width of the consistent interval is
+`U = φ(βJ) + o(1)` — a constant, attained asymptotically by the ferromagnet — whereas the
+uncertainty of the *minimum* from the same class is
+`B·P = n b√s₂` at every temperature; for `βJ > 1`, `U` is extensive, and numerically
+(`n = 8, 10, 12`, seven values of `β`) no member found by ascent from random, localised and
+Curie–Weiss starts exceeds the Curie–Weiss value in the fourth decimal.
 
-So below the critical temperature of the *worst member of the class*, `n + 1` evaluations
-(the main effects) determine `ln Z` to `O(1)` although an extensive pair component is unknown;
-above it the `≍ n²` pair coefficients must be learned — still polynomial.  The theory
-division's Theorem 11.33 has the same transition for its second-order class (bounded mixed
-differences, critical coupling `βc₂n = 4`), with the opposite conclusion above it
-(exponential): in their class a droplet can hide, in an ellipsoid of bounded order it cannot.
+*Proof.*  (a) `½ sᵀ𝐉s = Σ_{i<j} 𝐉_ij s_i s_j` is linear in each `s_i` separately because the diagonal
+vanishes.  Replace the `s_i` by independent standard Gaussians `γ_i` one at a time: conditionally
+on the other variables the exponent is `a·s_i + const`, and `E e^{a s_i} = cosh a ≤ e^{a²/2} = E e^{aγ_i}`.
+After `n` steps `E exp(½ sᵀ𝐉s) ≤ E exp(½ γᵀ𝐉γ) = det(I − 𝐉)^{−1/2}` (finite because
+`λ_max(𝐉) ≤ ‖𝐉‖_F < 1`).  With the eigenvalues `λ_i` of `𝐉` and `Σ λ_i = tr 𝐉 = 0`:
+`−½ ln det(I − 𝐉) = Σ_i φ(λ_i)`; and `φ(λ) = λ² ψ(λ)` with `ψ(λ) = ∫₀¹ u/(2(1−λu)) du` increasing, so
+`Σ φ(λ_i) ≤ ψ(λ_max) Σ λ_i² ≤ ψ(F) F² = φ(F)`.  (b) `‖𝐉‖_F² = n(n−1)(βJ/(n−1))² = F²`; the value
+is the Curie–Weiss free energy (Hubbard–Stratonovich; for `βJ < 1` the limit is
+`E exp(βJ(χ²₁ − 1)/2)`). ∎
+
+*With a field the picture changes at first order.*  If `π̂` is not uniform, Theorem 5 has the
+term `β B_A (π̂ᵀK_Aπ̂)^{1/2}`: `β` times the worst-case error, over the ball, of *quadrature* of
+the residual against the current Gibbs measure.  For the order-2 ball and a product measure
+with magnetisations `m_i` it is `≈ (F/2)·Σ_i m_i²`, extensive.  So a design for `ln Z` should be a
+quadrature design for `π̂` (Bayesian quadrature in the sense of O'Hagan, with the prior on the
+energy rather than on the integrand), not a sup-norm design; I did not pursue this.
+
+So for a uniform reference, below the critical temperature of the *worst member of the class*
+the whole unknown pair component — extensive in the supremum norm — changes `ln Z` by a
+bounded amount and need not be evaluated at all; above it the `≍ n²` pair coefficients must
+be learned — still polynomial.  The theory division's Theorem 11.33 has the same transition
+for its second-order class (bounded mixed differences, critical coupling `βc₂n = 4`), with the
+opposite conclusion above it (exponential): in their class a droplet can hide, in an
+ellipsoid of bounded order it cannot.
 
 ### 2.4 The Bayesian twin: what a certificate is under a prior
 
@@ -449,9 +487,10 @@ bound of `𝒢₁` at `g`.  With `𝒢₁` the first-order class and `g` the zer
 at least `(1−2δ)` times the fractional covering bound for the minimum (Theorem 11.23(b)) and
 exponentially many below the accuracy threshold for `ln Z` (Theorem 11.25) — whatever the
 algorithm knows or assumes about `𝒢₀`.  Equivalently: a procedure that uses fewer evaluations
-at `g` is wrong, with probability more than `δ`, on some member of `𝒢₁` that it cannot
-distinguish from `g`; "assume the benign class, and fall back if the data contradict it" is
-not available, because the contradiction itself costs exponentially many evaluations to see.
+at `g` is wrong with probability more than `δ` on `g` itself or on one of the dips around `g`,
+which it does not tell apart from `g`; "assume the benign class, and fall back if the data
+contradict it" is not available, because the contradiction itself costs exponentially many
+evaluations to see.
 
 *Proof.*  (a) `ĝ_A[g] = ĝ_A[g₀] + Σ_a λ_a h(a)`; Theorem 1(a) for `g₀`.  (b), (c): the cited
 theorems are stated instance by instance for algorithms correct on the class; (c) is their
@@ -500,9 +539,11 @@ graph; more generally for every family of pair terms that is closed under change
 unaries and for which the relaxation is tight (balanced signed graphs after a gauge
 transformation; multi-label submodular terms).  In these cases the dichotomy "one evaluation
 iff `c ≤ τ`" comes with a polynomial-time decision procedure and a polynomial-size proof.
-(e) *In general `τ_LP < τ`*, and `τ_LP < 0 < τ` occurs: the triangle with fields
-`h = (−½, 0, −½)` and couplings `J₀₁ = J₁₂ = −1`, `J₀₂ = +1` (energy `Σ h_i s_i + Σ J_ij s_i s_j`) has
-a unique ground state, `τ = ½` and `τ_LP = −⅔`.
+(e) *In general `τ_LP < τ`.*  The triangle with couplings `J₀₁ = J₁₂ = −1`, `J₀₂ = +1` (energy
+`Σ h_i s_i + Σ J_ij s_i s_j`, `c_i = 1`) and fields `h = (−1, −½, −1)` has a unique ground state,
+`τ = 3/2` and `τ_LP = 1/3`: for envelope constants between `1/3` and `3/2` one evaluation
+certifies, but no reparametrisation proves it.  With `h = (−½, 0, −½)`: `τ = ½` and `τ_LP = −⅔`
+(the relaxation is not tight even for `f` itself).
 
 *Proof.*  (a) `LP(f^t) ≤ min f^t ≤ f^t(x*) = f(x*)`; `t ↦ LP(f^t)` is a minimum of affine functions
 of `t`, hence concave, and nonincreasing because `d ≥ 0`; the set where a concave function
@@ -513,7 +554,8 @@ attains every local minimum (complementary slackness).  Applied to `f^t`, whose 
 unaries are `θ̃_i(s) − t c_i[s ≠ x*_i]`.  (c) By (b), `f^1(y) ≥ f(x*)` for all `y`, which is the
 criterion quoted above; weak duality is what the kernel checks.  (d) On trees the relaxation
 is tight for every pairwise model; changing unaries preserves submodularity, for which it is
-tight (min-cut); (e) by exhaustive search over triangles with half-integer fields (§3.7). ∎
+tight (min-cut); (e) by exhaustive search over triangles with half-integer fields (§3.7);
+`τ = 3/2` of the first example is attained by flipping sites 0 and 1 (gap 3), checked by hand. ∎
 
 *Reading and relation to stability notions.*  The funnel condition `τ ≥ 1` says: *`x*` stays
 optimal under every unary perturbation of size `c_i` at site `i`* — indeed under every
@@ -532,6 +574,76 @@ frustrated the proof of sharpness may itself need branching (the kernel's other 
 the numerics for about half of the frustrated instances.
 
 ### 2.7 Chains: where finite-order weights can live (direction 2, last question)
+
+Theorem 3 makes no assumption of isotropy, so it already contains a statement with
+position-dependent weights.  The one that fits a chain in torsion coordinates is locality
+along the sequence:
+
+**Corollary 4′ (position-dependent weights: sequence-local spectra) [P].**  Let `v` be an
+arbitrary spectrum on `𝔽₂ⁿ` (sites ordered along the chain), `𝒲_w = {S : max S − min S < w}` the
+frequencies that fit into a window of `w` consecutive sites (`|𝒲_w| ≤ n2^{w−1} + 1`), and
+`τ_w² = Σ_{S∉𝒲_w} v_S` the variance of everything that is not local at range `w`.  For every power
+of two `N₀` there is a linear design with at most `N₀` points and
+
+    max_x P_A(x)²  ≤  4 [ τ_w² + σ² (n2^{w−1} + 1) / N₀ ].
+
+Hence, if `τ_w ≤ ε/(12B)`, at most `256 (Bσ/ε)² (n2^{w−1} + 1)` evaluations certify `min(f+g)` within
+`ε/2`, and `β⁻¹ ln Z_β` likewise, for every member of `𝔹(K_v, B)` and every known part `f`: **linear in
+the chain length**, whatever the dependence of the weights `v_S` on the position of `S`.  If the
+spectrum is supported on `𝒲_w`, the `≤ (n−w+1)2^w` evaluations of the anchored design (all
+configurations that differ from a reference inside one window) determine `g` exactly.
+
+*Proof.*  The proof of Theorem 3(c) works verbatim with any set `𝓛` of frequencies in place of
+the `M` heaviest ones (order the frequencies with `𝓛` first; the non-leader mass is at most the
+mass of the frequencies that are not first in their coset for *any* order):
+`max_x P_A² ≤ 4[Σ_{U∉𝓛} v_U + σ²|𝓛|/N₀]`.  Take `𝓛 = 𝒲_w`; a nonempty `S ∈ 𝒲_w` is determined by its
+least element and a subset of the next `w − 1` sites.  Then Theorem 1(b) and Theorem 5 with
+`B·max P_A ≤ ε/2`: `16B²τ_w² ≤ ε²/8` and `16B²σ²|𝓛|/N₀ ≤ ε²/8` for the least power of two
+`N₀ ≥ 128(Bσ/ε)²|𝓛|`.  The last sentence is the anchored (cut-HDMR) decomposition. ∎
+
+This covers residuals such as torsion cross-terms between neighbouring residues.
+
+**Proposition 4″ (the invariant is the number of modes, not their order; the lever arm in one
+set of coordinates) [P; the comparison measured in §3.9].**
+(a) A linear bijection of `𝔽₂ⁿ` permutes the Walsh characters.  Hence `T(N)`, `M(η)` and the
+two-sided bound of Theorem 3(d) are invariant under linear changes of coordinates, while the
+interaction order is not: the cost of an ellipsoid class is governed by *how many* modes
+carry the variance, and "bounded order" in Corollary 4(b) is the form this takes for
+isotropic spectra only.
+(b) *A lever arm.*  Let `u₀, …, u_n ∈ {±1}` be the bond vectors of a directed chain on the line and
+`x_i = 1[u_i ≠ u_{i−1}]`, `i = 1…n`, its torsion-like variables.  Then `u_k u_l = χ_{(k,l]}(x)`, the
+character of an interval.  Every energy that is quadratic in the positions `p_j = Σ_{k<j} u_k` —
+a squared radius of gyration, an elastic network, harmonic restraints between arbitrary
+pairs with arbitrary stiffness — is, in the variables `x`, of the form `Σ_{k<l} w_kl χ_{(k,l]}`:
+interaction orders up to `n`, per-flip constants `max_x |g(x) − g(x⊕e_i)|` of order
+`Σ_{k<i≤l} |w_kl|` that grow with the distance of `i` from the chain ends (flipping `x_i` reverses
+every bond vector beyond `i`), and yet at most `n(n+1)/2` modes.  So the first-order format in
+these coordinates has the lever-arm problem of the theory division's D42, and the ball of
+the interval spectrum needs at most `n(n+1)/2 + 1` evaluations (rank), or
+`O(n²(Bσ/ε)²)` by Theorem 3.
+(c) *With rotations.*  For an articulated chain with cumulative frames `F_k` (the product of the
+first `k` torsion rotations) and bond vectors `b_k = F_k b̂`: `p_j − p_i = Σ_{k=i}^{j−1} b_k`, so every
+squared distance is `Σ_{k,l} ⟨b̂, F_kᵀF_l b̂⟩`, and `F_kᵀF_l` is the product of the rotations of the
+torsions in `(k, l]`.  Hence every energy that is quadratic in the Cartesian coordinates is
+*linear* in the `9·n(n+1)/2` features "matrix elements of the relative rotation of frames `k` and
+`l`", each a function of the torsions of one interval; at most that many evaluations determine
+it (theory report Theorem 11.47(c), or Theorem 1 with the corresponding kernel), although its
+interaction order in torsion coordinates is the chain length and its per-torsion constants
+grow with the lever arm.
+
+*Proof.*  (a) `χ_S(Lx) = χ_{LᵀS}(x)`.  (b) `u_l = u_k ∏_{k<m≤l}(−1)^{x_m}`; a quadratic form in the
+positions is a quadratic form in the `u_k`; flipping `x_i` changes the sign of exactly the
+characters with `k < i ≤ l`.  (c) The identity is the law of composition of frames; the count is
+the dimension of the span. ∎
+
+*What this does and does not answer.*  It answers the brief's question about a change of
+variables in the affirmative for one physically meaningful family: in cumulative-frame
+(bond-vector) coordinates squared distances are of interaction order two, and in torsion
+coordinates the same statement reads "the spectrum sits on interval modes", which an
+ellipsoid class handles without any change of variables.  It does **not** make a short-range
+contact term low-dimensional: a contact is a collective event of all bond vectors of the
+loop (a function of their sum being small), of high order in frames as well; for contact
+terms the variables must be features, as discussed next.
 
 **Proposition 10 [the rank statement P and trivial; the rest H, a synthesis of the theory
 division's §§11.14, 11.17 in the language of §2.1].**  Consider a chain with `n` torsions
@@ -556,8 +668,9 @@ that many generic evaluations determine `g`: polynomial in the chain length, for
 term has interaction order of the order of the loop length (theory division, §11.14: "about
 0.6 times the loop length"), and the lever-arm constants grow; so no class with decaying
 product weights *in torsion coordinates* contains tertiary contacts, and no relabelling of
-the torsion product space changes that, because the order of a function is invariant under
-site-wise relabelling.  (ii) The change of variables that works is not a bijection of the
+the *states of each torsion* changes that, because the order of a function is invariant under
+site-wise relabelling (changes of variables that mix sites are another matter: Proposition
+4″).  (ii) For contact terms the change of variables that works is not a bijection of the
 product space but a passage to over-complete **features** (pair distances, local
 environments): there the physically motivated expansion is by body order, with functions
 shared across pairs of the same type, and the weights are indexed by (body order, type,
@@ -593,8 +706,9 @@ additive features none can exist that grows with the system size at extensive ac
 `t_i = min_s(φ_i + γ_i)(s)`, `t′_i = β⁻¹ ln E_s e^{−β(φ_i+γ_i)(s)}`, each confined to an interval of
 length at most `R ≤ 2w`.  The algorithm that draws `k` sites uniformly without replacement,
 evaluates `g` at `x⁰` and at the `k(q−1)` single-site modifications of `x⁰` at those sites
-(`q` states per site), and returns `(n/k)·Σ_{sampled} t_i`, is within `ε₁n` of the truth with
-probability at least `1 − δ` on the whole class as soon as
+(`q` states per site), and returns `g(x⁰) + (n/k)·Σ_{sampled} t_i` (for the free energy:
+`−g(x⁰) + (n/k)·Σ_{sampled} t′_i`), is within `ε₁n` of the truth with probability at least `1 − δ`
+on the whole class as soon as
 
     k  ≥  (R² / 2ε₁²) · ln(2/δ),
 
@@ -784,7 +898,14 @@ covering number; the zero-residual row reproduces the theory division's exponent
 certified envelope has over the truth) and by sharpness; the cost under H by `B/‖g‖` and the
 dimension `M` of the kernel space; under B by `M` and by the prior being right.  W is the
 cheapest of the three when the known part is sharp and its constants are tight; it is the
-only one whose cost is exponential in `n`, at any fixed slack.
+only one whose cost is exponential in `n`, at any fixed slack.  *A caution against reading too
+much into H:* for a spectrum of exact finite order and a radius that contains the residual
+with any margin, H ends up evaluating as many points as there are coefficients — that is the
+theory division's own statement for classes that are linear in features ("rank-many
+evaluations", Theorem 11.47(c)), with an ellipsoid in place of a box.  What the ellipsoid adds
+is not a cheaper finite-dimensional case but a quantitative treatment of what lies outside
+the finite model (the tail `T(M)`, Theorem 3, with a lower bound), the exponent when the order
+is not bounded, and — in its Bayesian reading — a band that does not grow with `√M`.
 
 ### 3.4 Bayesian certificates: coverage and width — `n4_bayes.py`
 
@@ -874,8 +995,13 @@ Curie–Weiss member:
 | 2.4 | 4.82 / 4.82 | 5.85 / 5.85 | 6.88 / 6.88 | 6.19 | 14.4 |
 | 4.0 | 11.15 / 11.15 | 13.77 / 13.77 | 16.38 / 16.38 | 15.69 | 24.0 |
 
-(the high-temperature limit `−½ln(1−βJ) − βJ/2` is `0.055` at `βJ = 0.4`).  No start produced a
-value above the Curie–Weiss member.
+(the high-temperature limit `φ(βJ) = −½ln(1−βJ) − βJ/2` is `0.055` at `βJ = 0.4`).  No start
+produced a value above the Curie–Weiss member, and the two values below the transition are
+below the proven bound `φ(F)` (`0.062` and `0.485` at `n = 12`).  The inequalities of Proposition
+5′(a) were also tested directly (`n12_gauss_comparison.py`): 2 752 zero-diagonal matrices of
+seven kinds (Gaussian, sparse, Curie–Weiss, antiferromagnetic, gauged, cliques, rank one),
+`n = 3…10`, `‖𝐉‖_F ∈ (0.05, 0.98)`: no violation; the smallest slack, `5·10⁻⁶`, is at a Curie–Weiss
+matrix.
 (II) Hilbert norm of the dip `−(3 − d_H(x,0))₊` under the product spectrum with `ρ = 1 − 1/n`
 (`λ = ½`, unit variance): `3.9·10³, 9.3·10⁴, 2.3·10⁶, 6.1·10⁷, 1.7·10⁹` for `n = 8, 10, 12, 14, 16`;
 a typical prior draw has norm `2^{n/2} = 16 … 256`, an additive function of the same depth
@@ -900,7 +1026,10 @@ programme of Theorem 9(b) (HiGHS).  `τ_LP ≤ τ` in all 1 280 instances.
 So the equality cases of Theorem 9(d) are confirmed, and for frustrated known parts the two
 slopes coincide — the short proof exists whenever the funnel does — in 5 % to 85 % of the
 instances, depending on how strongly the fields dominate.  Exhaustive search over triangles with
-half-integer fields in `[−4, 4]` and couplings `±1` gives the example of Theorem 9(e).
+half-integer fields in `[−4, 4]` and couplings `±1` gives the two examples of Theorem 9(e)
+(`n9_lp_funnel.py` for the largest relative gap; `n9b_example.py` for the largest one with
+`τ_LP > 0`; on the 4-cycle with a chord and integer fields the latter search finds
+`τ = 2`, `τ_LP = 2/3`).
 
 ### 3.8 Randomisation in an additive class — `n11_site_mc.py`  (Proposition 11, §2.8)
 
@@ -908,6 +1037,30 @@ half-integer fields in `[−4, 4]` and couplings `±1` gives the example of Theo
 `ln Z`, i.e. 120 and 154 evaluations for `n = 10³, 10⁴, 10⁵`, where a deterministic algorithm with
 the same error bound needs at least `500, 5 000, 50 000`.  Five adversarial coefficient patterns, 2 000 runs each: failure
 frequency at most `0.9 %` (bound `5 %`).
+
+### 3.9 The lever arm in one set of coordinates — `n13_lever_arm.py`  (Proposition 4″)
+
+Directed chain, flip variables `x ∈ {0,1}ⁿ`; residual `g = (1/n) Σ_{k<l} (1 + ½ξ_kl) u_k u_l` (a noisy
+squared-radius-of-gyration term, `ξ` standard normal), known part `f = ½·#flips`, `ε = 0.25`,
+medians of 3 instances.  W uses the smallest valid constants (`κ = 1`); they are `1.6–2.2` at the
+chain ends and `4.5–6.7` in the middle.
+
+| evaluations | n=6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|---|---|---|---|---|---|---|---|
+| W: fractional cover | 36 | 41 | 103 | 179 | – | – | – |
+| W: greedy cover | 36 | 45 | 108 | 190 | 370 | 614 | – |
+| W: best-first search | 42 | 65 | 136 | 257 | 508 | 862 | 1719 |
+| H, `B = ‖g‖` | 8 | 8 | 19 | 21 | 21 | 23 | 41 |
+| H, `B = 2‖g‖` (= `M = n(n+1)/2`) | 21 | 28 | 36 | 45 | 55 | 66 | 78 |
+| B (prior with the generating second moments, mis-centred) | 21 | 27 | 36 | 44 | 51 | 58 | 72 |
+| `2ⁿ` | 64 | 128 | 256 | 512 | 1024 | 2048 | 4096 |
+
+All H and B intervals contained the true minimum (21/21 each).  Here, unlike in §3.3, the
+envelope paradigm is expensive *with oracle-tight constants*: more than half of the cube is
+needed in a fractional cover at `n = 6`, a third at `n = 9`, and the search evaluates 42 % of it
+at `n = 12`; the spectral class needs 41 points, or all 78 coefficients with a factor 2 on the
+radius.  This is the lever arm, and it is the cleanest case I have for the claim that the
+kind of class decides: same residual, same coordinates, same oracle knowledge.
 
 ---
 
@@ -960,12 +1113,14 @@ a physical residual plausibly lives.
 | Cor 4(b) polynomial iff bounded order | Wasilkowski–Woźniakowski, J. Approx. Theory 130 (2004) 57–77 **[snip]**; Novak–Woźniakowski, *Tractability of Multivariate Problems* I–III **[mem]** | the cube/`min` version is a transposition; additive Gaussian-process models in Bayesian optimisation have regret linear in the dimension (Kandasamy–Schneider–Póczos 2015 **[snip]**), second-order models on binary variables are used in BOCS (Baptista–Poloczek 2018 **[snip]**), product ("diffusion") kernels on the Hamming graph in COMBO (Oh et al. 2019 **[snip]**) — no complexity statement with a lower bound surfaced |
 | Cor 4(c) exponent `h((1−ρ)/2)` | — | not found; a two-line computation |
 | Thm 5 interval of `ln Z` over a ball | Donsker–Varadhan; Sion; kernel bounds on log-partition functions of a different kind (Bach, arXiv:2202.08545 **[snip]**); worst-case rates for log-partition estimation over smoothness classes (Holzmüller–Bach, arXiv:2303.03237, cited by the theory report) | not found in this form (one search) |
-| Prop 5′ | Curie–Weiss model (textbook) | the lower bound is textbook; extremality is numerical |
-| Thm 6(i)–(iii) | Gaussian concentration (Borell 1975; Tsirelson–Ibragimov–Sudakov 1976), Poincaré and first-chaos variance bounds (Houdré–Kagan 1995) **[mem]**; Bayesian quadrature (O'Hagan 1991; Rasmussen–Ghahramani 2003; Osborne et al. 2012; Gunter et al. 2014, arXiv:1411.0439 **[snip]**) puts the prior on the integrand, not on the energy | standard tools; the dimension-free interval for `ln Z` under a prior on the energy: not searched beyond the Bayesian-quadrature query |
+| Prop 5′ | Curie–Weiss model (textbook); domination of a Rademacher chaos of order two by the Gaussian one, variable by variable (a standard comparison argument) **[mem]** | (b) textbook; (a) a short argument I did not look for in print; extremality above the transition is numerical |
+| Thm 6(i)–(iii) | Gaussian concentration (Borell 1975; Tsirelson–Ibragimov–Sudakov 1976), Poincaré and first-chaos variance bounds (Houdré–Kagan 1995) **[mem]**; probabilistic numerics, of which a certificate in the sense of §2.4 is an instance (Diaconis 1988; Hennig–Osborne–Girolami 2015; Cockayne et al. 2019) **[mem]**; Bayesian quadrature (O'Hagan 1991; Rasmussen–Ghahramani 2003; Osborne et al. 2012; Gunter et al. 2014, arXiv:1411.0439 **[snip]**) puts the prior on the integrand, not on the energy | standard tools; the dimension-free interval for `ln Z` under a prior on the energy: not searched beyond the Bayesian-quadrature query |
 | Thm 6(iv), Prop 7 | second-moment method for high-temperature free energies (Aizenman–Lebowitz–Ruelle 1987; Talagrand) **[mem]**; random energy model (Derrida 1981) **[mem]** | known physics; the reading as a complexity statement and as a counterexample to "polynomial iff decay": not found |
 | Prop 8(a) | Lebesgue functions (textbook); misspecified kernelised bandits with a sup-norm error `ε` (Bogunovic–Krause, NeurIPS 2021, arXiv:2111.05008 **[snip]**) | known phenomenon |
 | Prop 8(b),(c) | theory report Theorems 11.22–11.25; workstream P, Corollary 15 | corollaries, restated |
 | Thm 9 LP-funnel slope | LP relaxation and its dual (Schlesinger 1976; Werner 2007 **[snip]**); tightness for submodular and balanced models (Kolmogorov–Zabih 2004 **[mem]**; Weller–Rowland–Sontag 2016 **[snip]**); stability (Bilu–Linial 2010; Makarychev–Makarychev–Vijayaraghavan 2014 **[mem]**; Lang–Sontag–Vijayaraghavan 2018 **[abs]**, 2019 **[snip]**); side-chain placement solved by LP (Kingsford–Chazelle–Singh 2005; Yanover–Meltzer–Weiss 2006) **[mem]** | the parametric quantity and its use as a certificate of sharpness under envelope uncertainty: not found (two searches); elementary |
+| Prop 4″ | Walsh characters under linear maps (textbook); the frame recursion of articulated chains (textbook kinematics); polynomial/elastic-network energies as low-rank features — not searched | elementary; not searched |
+| Cor 4′ | finite-order weights (Wasilkowski–Woźniakowski 2004 **[snip]**); anchored decomposition (Kuo–Sloan–Wasilkowski–Woźniakowski 2010 **[mem]**) | an application of Theorem 3; not searched separately |
 | Prop 10 | Gaussian approximation potentials (Bartók–Payne–Kondor–Csányi 2010) **[mem]**; body-ordered approximation with rates (Thomas–Chen–Ortner, Arch. Ration. Mech. Anal. 246 (2022) 1–60 **[snip]**) | synthesis |
 | Prop 11 | Monte Carlo summation; randomised complexity of sums (Heinrich; Mathé) **[mem]** | textbook; its use to fill the cell of the theory division's table is the only point |
 | population calibration | conformal prediction (Vovk–Gammerman–Shafer 2005; Lei et al. 2018) **[mem]** | known; used, not developed |
@@ -999,10 +1154,10 @@ theory.  Everything about those is from memory.
    answer can be dramatically below the deterministic one.
 2. **The exact complexity of `ln Z` over an ellipsoid.**  Theorem 5 gives the consistent
    interval for a given design; I have no design theorem for it (the counterpart of Theorem
-   3), only the bracket between the Gibbs-averaged and the sup-norm bound, and Proposition 5′
-   rests on a numerical maximisation (three sizes).  Whether the Curie–Weiss member is the
-   maximiser of `ln E exp(½ sᵀJs)` over zero-diagonal symmetric `J` of given Frobenius norm is a
-   clean open question.
+   3), only the bracket between the Gibbs-averaged and the sup-norm bound.  Proposition 5′
+   settles the width of the order-2 ball asymptotically for `βJ < 1` and a uniform reference;
+   for `βJ > 1` (is the Curie–Weiss matrix the maximiser of `ln E exp(½ sᵀ𝐉s)` at a given
+   Frobenius norm?), for finite `n`, and for a non-uniform reference it is open.
 3. **Instance-wise exponents.**  Theorem 3 is a worst case over the ball; Theorem 1(d) is
    instance-wise but I did not compute its smallest designs (a gap-weighted design problem)
    beyond running the greedy algorithm.  There is no analogue here of the theory division's
@@ -1068,9 +1223,10 @@ theory.  Everything about those is from memory.
   "for additive features `O(R²ε₁⁻² ln δ⁻¹)` random evaluations suffice at accuracy `ε₁n`"
   (Proposition 11).  Both are short enough to be checked by a referee in an hour.
 * **X-REQ-T3 (a question).**  Is `sup { ln E_unif exp(½ sᵀJs) : J symmetric, zero diagonal,
-  ‖J‖_F ≤ F }` attained at `J ∝ 𝟙𝟙ᵀ − I` up to a gauge transformation?  (Proposition 5′; numerics
-  for `n ≤ 12` say yes.)  A proof would give the exact width of `ln Z` over the order-2 ellipsoid
-  and a second, exactly solvable, relative of Theorem 11.33.
+  ‖J‖_F ≤ F }` attained at `J ∝ 𝟙𝟙ᵀ − I` up to a gauge transformation, for every `n` and every `F`?
+  Proposition 5′ proves it asymptotically for `F < 1` (Gaussian domination); numerics for
+  `n ≤ 12` say yes for `F > 1` as well.  A proof would give the exact width of `ln Z` over the
+  order-2 ellipsoid and an exactly solvable relative of Theorem 11.33.
 * **X-REQ-T4 (wording).**  D28 and the README present the exponential price as a property of
   "point evaluations under a first-order envelope".  Proposition 8(c) suggests adding the
   converse reading explicitly: *no procedure that is correct on a first-order class can be

@@ -272,3 +272,25 @@ profile and the gauche count, and its support function is the ground-state energ
   class constants in rotamer variables on a fixed backbone now ranks second, above all
   further theory on the cube.
 
+### Cycle 10 — two reviews of the theory's newest sections answered (checkpoint 16)
+
+* **Workstream R4 reported** on theory report §11.24.  Read; its Lean strengthening
+  re-compiled; the run that violates Claim B re-run; the exponent script re-run in full
+  (13 minutes, all values reproduced).  Verdict: the two-round lower bound is correct; one
+  displayed claim of the batched upper bound is false as stated (the cost bound holds on
+  the good event only) and is repaired by a stopping rule.  Published as SCI-REV-0003.
+  Before publishing I checked the two citations of its originality paragraph that I had
+  not seen before (arXiv:2408.13045 and arXiv:2611.15849 exist with the titles given; the
+  author of the second was not confirmed and is not named in the message).
+* **Workstream A1 delivered its addendum** on the channel-coding dictionary.  Read; its
+  check script re-run; Proposition A1.2 (items 1–3) and the two formulas of the `e^{u/2}`
+  rule re-derived by hand.  Published as SCI-RES-0003.
+* **A fourth correction of a published sentence of mine:** SCI-REV-0004 said the adaptive
+  upper bound "answers, on a model class, the question Mathé and Novak leave open".  They
+  pose no such question.  The sentence came from an early draft of A1's report, which A1
+  itself later withdrew; I had not re-read the final report against my message.  Corrected
+  by SCI-RES-0003 §4 with a struck-through note at the place.  *Rule:* when a workstream's
+  report is finalised after a message was drawn from it, diff the message against the
+  report's change list before the next checkpoint.
+* With this, THY-REQ-0011 is answered except for A1 (review of §11.26, workstream R5).
+

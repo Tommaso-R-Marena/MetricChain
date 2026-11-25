@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 15 of the science branch (2026-11-25; the commit time is
+*Updated at checkpoint 16 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -32,13 +32,13 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 | id | subject | kind | state |
 |---|---|---|---|
 | PI | **inference limits** — what energy evaluations, ensemble-averaged data and thermodynamic data jointly determine; identified sets with dual certificates; falsification certificates; exact identified sets on the lattice chain | own theory + numerics | version 2: `docs/science/INFERENCE_LIMITS.md` (with its referee R3); later results in `INFERENCE_LIMITS_ADDENDA.md` A1–A10; version 3 after R3 |
-| A1 | prior art, full text: the query-complexity cluster (theory report G11, G18–G23, G25–G27) | originality | **reported** (SCI-REV-0004); follow-up on THY-REQ-0011 B1, B2 running |
+| A1 | prior art, full text: the query-complexity cluster (theory report G11, G18–G23, G25–G27) | originality | **reported, final** (SCI-REV-0004; addendum on THY-REQ-0011 B1, B2: SCI-RES-0003) |
 | A2 | prior art, full text: kernels vs proof logging; certificates as coverings; lever arm; profiles vs scattering / homometry; limit shape | originality | **reported** (`workstreams/A2_REPORT.md`; SCI-REV-0006) |
 | M | prior art for the measurement side | originality | **reported**, with follow-up (`workstreams/SM_REPORT.md`; SCI-MSG-0002, -0003) |
 | R1 | independent review of theory report §11.25 → SCI-REV-0001 | review + replication | running |
 | R2 | independent review of theory report §11.22 → SCI-REV-0002 | review + replication | **reported and published** (`workstreams/R2_REPORT.md`) |
 | R3 | adversarial referee for our own `INFERENCE_LIMITS.md` v2 | review + replication | running |
-| R4 | independent review of theory report §11.24 (rounds) → SCI-REV-0003 | review + replication | running |
+| R4 | independent review of theory report §11.24 (rounds) → SCI-REV-0003 | review + replication | **reported and published** (`workstreams/R4_REPORT.md`) |
 | R5 | independent review of theory report §11.26, Theorems 11.99 and 11.101 (THY-REQ-0011 A1) → SCI-REV-0005 | review + replication | running |
 | P | a real force field against the envelope classes; physical reading of every object of the theory | measurement + analysis | **reported and published** (`workstreams/SP_REPORT.md`; SCI-RES-0002; `docs/science/PHYSICAL_APPLICABILITY.md`) |
 | K | certified kinetics: barriers, exit times, capacities | own theory + Lean | **reported and published** (`workstreams/SK_REPORT.md`; SCI-MSG-0005) |
@@ -81,6 +81,9 @@ the container is reclaimed.)
 | S18 | **certified kinetics:** barrier lower bounds are cuts certified by the min-kernel on wall boxes; escape-rate upper bounds are the same cuts with partition functions; exact robust interval of a barrier height over an envelope class; a trap bound for every stationary local dynamics | cores **[V]** (32 theorems, re-compiled by the coordinator); exactness and covering statements **[P]**; SCI-MSG-0005 |
 | S19 | no transfer matrix for barriers: the barrier threshold on a nearest-neighbour chain is PSPACE-complete (Wrochna's theorem, read as a barrier statement); a linear multiplier on a counting cut never beats the trivial bound | **[K]** + one-line reduction; **[P]** |
 | S20 | review of theory report §11.22: no false theorem; proved bracket `[116, 3 627]`; `vol 𝒦 ≥ 1.56` | SCI-REV-0002 |
+| S21 | review of theory report §11.24: the two-round lower bound is correct; Theorem 11.84(ii) false as stated (cost bounded on the good event only), repaired by a stopping rule; the lower bound holds for expected cost at the flat-histogram instance | SCI-REV-0003; the strengthening **[V]** in abstract form (four theorems, re-compiled by the coordinator) |
+| S22 | heteropolymer landscapes: plain Monte Carlo from the product of the Shannon centres attains the capacity `a` at every bounded accuracy for every `n` (Proposition A1.2) | **[P]**; items 1–3 enumerated on 36 instances and re-derived by the coordinator; SCI-RES-0003 |
+| S23 | the `e^{u/2}` rule: the alphabet size maximising the cutoff rate of the `k`-ary symmetric channel at likelihood ratio `e^u` is `k = e^{u/2} + 1`; reflection identity at `e^u = k(k−1)` | **[P]**, re-derived by the coordinator; not found in print in two searches |
 
 ## Outstanding requests
 
@@ -97,14 +100,17 @@ the container is reclaimed.)
 | SCI-RES-0002 (P-E1…P-E3) | engineering | **the same constants in rotamer variables on a fixed backbone** (decisive for the second-order interface); the pilot's grids as a fourth case of ENG-RES-0003; exact covers of the real instances | P-E1 high | proposed |
 | SCI-MSG-0005 (K-T1…K-T4) | theory | formalise the tree cut checker; Z-kernel over polynomial weights; exactness of the robust barrier interval; critical depth | K-T1 medium | proposed |
 | SCI-MSG-0005 (K-E1…K-E3) | engineering | effectiveness of tractable cuts against chain length; certified relaxed scans; cut search around found paths | medium | proposed |
+| SCI-REV-0003 (corrective actions 1–6) | theory | stopping rule in Theorem 11.84 (M1); wording m1–m9; adopt the expected-cost form | high for M1 | proposed |
+| SCI-REV-0003 (R4-E1, R4-E2) | engineering | certified rows of the twins table (interval arithmetic); the two-round algorithm at finite `n` | medium | proposed |
+| SCI-RES-0003 (A1-T7…A1-T9) | theory | wording of the dictionary's originality; a sentence of Theorem 11.99; check Proposition A1.2; the reflection identity | normal | proposed |
 
 ## Requests received
 
 | id | from | subject | decision | state |
 |---|---|---|---|---|
 | THY-REQ-0011 A1 | theory | review of theory report §11.26 (Theorems 11.99, 11.101) | accepted | workstream R5 running → SCI-REV-0005 |
-| THY-REQ-0011 A2 | theory | review of §11.24 (Theorem 11.86) | accepted | workstream R4 running since 18:15 UTC → SCI-REV-0003 |
-| THY-REQ-0011 B1, B2 | theory | prior art: channel-coding dictionary; "`e^{u/2}` states" | accepted | B1 partly answered (SCI-RES-0001 §2); follow-up with workstream A1 |
+| THY-REQ-0011 A2 | theory | review of §11.24 (Theorem 11.86) | accepted | **answered: SCI-REV-0003** |
+| THY-REQ-0011 B1, B2 | theory | prior art: channel-coding dictionary; "`e^{u/2}` states" | accepted | **answered: SCI-RES-0003** |
 | THY-REQ-0011 C1 | theory | applicability of per-site envelopes; what would falsify the relevance of the exponents | accepted | **answered: SCI-RES-0002** (a pilot with measurements) |
 
 ## Known limitations of our own work

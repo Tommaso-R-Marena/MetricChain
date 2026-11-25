@@ -1,6 +1,12 @@
 # Workstream L1 — notes (machine-checking the science division's core statements)
 
-Chronological log; updated after every step.  All times UTC, 2026-11-25.
+Chronological log; updated after every step.  2026-11-25 (UTC).
+
+**Correction (19:29 UTC, read from `date`):** the clock times in the section headers below from
+"18:40" to "22:15" were my estimates and are wrong — the whole of that work happened between 18:27
+and 19:29 UTC (file modification times: IdentifiedSets 18:41, Separation 18:48, OrthogonalArray 18:54,
+MaxEntStability ~19:00 and 19:22, MarginalOracle 19:10–19:28, PerturbationBracket 19:22, BasinBound 19:26).
+The headers are kept as step labels, marked `(est.)`; times from here on are read from `date`.
 
 ## 18:27 start
 
@@ -21,7 +27,7 @@ Chronological log; updated after every step.  All times UTC, 2026-11-25.
 4. `MaxEntStability.lean` — Theorem 7 algebraic core; Pinsker search in Mathlib.
 5. optional: Theorem 3 / Theorem 2(d).
 
-## 18:40 environment probe
+## step 18:40 (est.) environment probe
 
 * `lake env lean` on a file that only imports Mathlib and runs `#check`s: 26 s wall.
 * Mathlib at `fabf563a` (2026-06-15, "bump toolchain to v4.31.0").
@@ -36,7 +42,7 @@ Chronological log; updated after every step.  All times UTC, 2026-11-25.
   the brief) does not exist under that name; `Real.hasSum_log_one_add_inv` exists (gives
   `log(1+1/a) ≥ 2/(2a+1)`), `hammingDist_eq_hammingNorm : hammingDist x y = hammingNorm (-x + y)`.
 
-## 18:55 Target 1 DONE — `IdentifiedSets.lean` (checks, 38 s, no errors)
+## step 18:55 (est.) Target 1 DONE — `IdentifiedSets.lean` (checks, 38 s, no errors)
 
 All of §8 soundness + Theorem 8(b) inequality + 8(c):
 `modelFree_certificate_sound_support` (note's form, arbitrary data set D + support-function bound),
@@ -59,7 +65,7 @@ Observations while formalising (for the report):
   compactness argument but NOT formalised.
 * Model-free soundness needs neither convexity nor compactness of D.
 
-## 19:15 Target 2 DONE — `Separation.lean` (checks, 48 s)
+## step 19:15 (est.) Target 2 DONE — `Separation.lean` (checks, 48 s)
 
 Abstract: `exp_sub_exp_max_antitone`, `pSum_sub_flat_mono` (A₁−F₁ ≤ A−F), `separation_ratio`
 (F ≤ m·F₁ ⟹ 1 + (A₁/F₁ − 1)/m ≤ A/F; needs only u ≥ 0, m > 0 is derived), `separation_log`
@@ -77,7 +83,7 @@ Not done: closed forms A₁ = (1+e^{−u})^n, F₁ = Σ_j C(n,j) e^{−u max(j,R
 (after the check I replaced a `first | (field_simp; ring) | field_simp` by `field_simp` to silence a
 linter warning; to be re-checked in the final pass)
 
-## 19:40 Target 3 DONE — `OrthogonalArray.lean` (checks, 21–63 s)
+## step 19:40 (est.) Target 3 DONE — `OrthogonalArray.lean` (checks, 21–63 s)
 
 Lemma 1 proved for any finite field F (in particular ZMod 2), C : Submodule F (ι → F):
 `restrict_surjective_of_dual` (projection to S onto if no non-zero dual word supported on S),
@@ -95,7 +101,7 @@ Notes: * μ ≥ 0 is NOT needed (total mass 1 + invariance suffice).
   `exact` fails with identical-looking types, `convert h using 3` closes it.
 * `AddSubgroup.toZModSubmodule` exists in Mathlib (subgroup ≃ subspace over ZMod n); not used.
 
-## 19:45 Target 4 plan — `MaxEntStability.lean`
+## step 19:45 (est.) Target 4 plan — `MaxEntStability.lean`
 
 KEY OBSERVATION: Theorem 7 needs only the *symmetrised* Pinsker `J ≥ 4 TV²`, and that has a
 direct elementary proof without Pinsker:
@@ -107,7 +113,7 @@ SECOND OBSERVATION: the brief's "purely algebraic step" (4T² ≤ J, J ≤ ωT �
 is FALSE as literally stated: T = J = 0, ω = −1.  It needs ω ≥ 0 (then T ≥ 0 is not needed).
 Harmless for the note (ω = β·osc(r) ≥ 0).
 
-## 20:10 Target 4 DONE — `MaxEntStability.lean` (checks first time, 33 s, no warnings)
+## step 20:10 (est.) Target 4 DONE — `MaxEntStability.lean` (checks first time, 33 s, no warnings)
 
 ALL of Theorem 7 (i)–(v) machine-checked, NO Pinsker hypothesis:
 `symmKL_eq_of_logRatio` (algebraic core of (i)), `two_mul_sub_div_add_le_log_sub`,
@@ -124,7 +130,7 @@ hi − lo with lo ≤ r ≤ hi; β ≥ 0 explicit.
 
 Re-checked after edits: IdentifiedSets.lean (30 s), Separation.lean (21 s): clean, no warnings.
 
-## 20:15 Decision on extras (targets 1–4 complete)
+## step 20:15 (est.) Decision on extras (targets 1–4 complete)
 
 Order: (E1) assemble Theorems 4 and 4′ as real query lower bounds with the marginal oracle
 modelled explicitly (needs an oracle-aware algorithm structure: the theory division's
@@ -133,7 +139,7 @@ modelled explicitly (needs an oracle-aware algorithm structure: the theory divis
 (E5) Theorem 5 bracket + width identity; (E8) Theorem 7′ closing step; (E2) Pinsker proper;
 (E3) Theorem 3.
 
-## 21:00 Extra E1 DONE — `MarginalOracle.lean`: Theorems 4 and 4′ assembled in full
+## step 21:00 (est.) Extra E1 DONE — `MarginalOracle.lean`: Theorems 4 and 4′ assembled in full
 
 (878 → ~960 lines; checks in 15–26 s; clean after adding `omit`s.)
 Model: an oracle-assisted algorithm = family `alg ω o : MetricChain.QueryAlgorithm (ι → F)` of the
@@ -157,3 +163,41 @@ Declarations: `distToCoset_lipschitz`, `distToCoset_add_mem`, `card_centres_near
 closed under +).  `#print axioms`: `[propext, Classical.choice, Quot.sound]` for all.
 The file repeats the proofs of Lemma 1 and of the separation inequality verbatim (files here do
 not import each other).
+
+## step 21:40 (est.) Extras E8 and E5 DONE
+
+* `MaxEntStability.lean` extended (checks, 20 s, clean): `transport_le_coupling` (weak
+  Kantorovich–Rubinstein), `transport_closing` (K ≤ aW, W² ≤ 2mK, a, m ≥ 0 ⟹ W ≤ 2ma, K ≤ 2ma²),
+  `theorem7'_of_transportEntropy`, `theorem7'_observable` — Theorem 7′ of the addenda (A2) WITH
+  THE TRANSPORT–ENTROPY INEQUALITY AS AN EXPLICIT HYPOTHESIS on one coupling (m = κn).  Marton's
+  inequality (κ = 1/4 for products) not formalised.  Axioms: standard three.
+* `PerturbationBracket.lean` (new; checks first time, 14 s): Theorem 5, first display —
+  `kl_model_true`, `kl_true_model`, `theorem5_bracket` (−βE_{μ₀}g ≤ ln(Z_g/Z_0) ≤ −βE_{μ_g}g and
+  width = KL(μ₀‖μ_g)+KL(μ_g‖μ₀); any real β, any g), `zRatio_eq_partition_ratio`.  Axioms: std.
+* First full version of `docs/science/workstreams/L1_REPORT.md` written (to be extended).
+
+## step 21:45 (est.) Extra E3 plan — `BasinBound.lean` (Theorem 3)
+
+General alphabet A with a "sign" s : A → ℝ, Σ_b s b = 0, s² = 1 (A = Bool: s = ±1).
+chi s T x = Π_{i∈T} s (x i).  Steps: (A) chi_T·chi_T' = chi_{T∆T'}; (B) uniform marginal on T,
+T ≠ ∅ ⟹ E_μ chi_T = 0 (fibre decomposition + Π Σ = Σ Π); (C) E_μ f² = M_t for
+f = Σ_{|T|≤t} chi_T(a) chi_T, when 2t ≤ k; (D) Markov ⟹ m·μ(B) ≤ M_t if m ≤ f² on B;
+point mass μ(a) ≤ 1/M_t.  Not planned: Krawtchouk identification f = F_t(d_H(·,a)), asymptotics.
+
+## step 22:10 (est.) Extra E3 DONE — `BasinBound.lean` (Theorem 3 core; checks first time, 15 s)
+
+`chi`, `chi_mul_chi` (χ_T χ_T' = χ_{T∆T'}), `sum_mul_chi_eq_zero` (uniform marginal on T ≠ ∅ ⟹
+E_μ χ_T = 0), `sum_mul_sq_eq_card` (E_μ f² = M_t when 2t ≤ k), `basin_bound` (Markov form:
+m ≤ f² on B ⟹ m·μ(B) ≤ M_t), `point_mass_le` (μ({a}) ≤ 1/M_t), `card_subsets_le`
+(M_t = Σ_{j≤t} C(n,j)), `theorem3_bool`, `theorem3_point_mass_bool` ({0,1}ⁿ = ι → Bool).
+Axioms: standard three.  General alphabet with a balanced sign s (Σ s = 0, s² = 1).
+NOT formalised: f(x) = F_t(d_H(x,a)) (Krawtchouk), so the "ball" is an arbitrary set B with a
+lower bound m of f² on it; asymptotics.
+
+## step 22:15 (est.) `MarginalOracle.lean` extended (clean, 14 s)
+
+* `queryAlgorithm_output_const_of_no_queries`: a theory-division `QueryAlgorithm` with no queries
+  has constant output — formal form of the model gap.
+* `repetition_dual_distance`, `repetition_add_mem`, `theorem4_one_body_marginals`,
+  `theorem4'_one_body_marginals`: explicit hypothesis-free instance (k = 1, C = {0ⁿ,1ⁿ}):
+  all one-site marginals for free cost at most a factor 2 in both bounds.  Axioms: std.

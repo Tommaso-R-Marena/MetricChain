@@ -1,0 +1,12 @@
+{
+ "instances": 2752,
+ "smallest_slack": 4.849428375912346e-06,
+ "closest": [
+  "curie-weiss",
+  10,
+  0.05512428527988979,
+  0.000783947407904273,
+  0.0007887968362801853
+ ],
+ "smallest_slack_gauss_minus_rademacher": 1.7350028451608435e-07
+}

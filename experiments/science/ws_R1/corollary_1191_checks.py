@@ -76,39 +76,71 @@ def MI2(m, a, b):
 
 
 def r_general(rate, lam, m, a, b, e, u, ngrid=601, polish=6):
-    """min{MI(nu): u dist(nu,mu) + lam(nu-bar) <= e + MI(mu) + I(kappa)} over nu in [0,1]^2 (grid + SLSQP polishing).
-    lam = 'v' uses I in place of v (Lemma 11.77(b)); lam = '0' is the zero residual."""
+    """min{MI(nu): u dist(nu,mu) + lam(nu-bar) <= e + MI(mu) + I(kappa)} over nu in [0,1]^2.
+    lam = 'v' uses I in place of v (Lemma 11.77(b)); lam = '0' is the zero residual.
+    Solver: dense grid; then, from the best feasible grid points AND from the profile itself, one smooth SLSQP problem per
+    sign pattern of (a'-a, b'-b) (the constraint has kinks there); then successive zooms around the best point found.
+    (First version: grid + plain SLSQP, and it returned MI(mu) whenever no grid point was feasible -- for profiles with a
+    tiny budget this over-estimated the minimum and produced two false 'violations' of Corollary 11.91; see NOTES.)"""
     kappa = m * a + (1 - m) * b
     budget = e + float(MI2(m, a, b)) + float(rate.I(kappa))
     L = (lambda k: rate.I(k)) if lam == "v" else (lambda k: 0.0 * np.asarray(k))
+    Ls = lambda k: float(L(np.array(k)))
+    if Ls(kappa) > budget + 1e-15:
+        self_feasible = False
+    else:
+        self_feasible = True
     g = np.linspace(0.0, 1.0, ngrid)
     A, B = np.meshgrid(g, g, indexing="ij")
     cons = u * (m * np.abs(A - a) + (1 - m) * np.abs(B - b)) + L(m * A + (1 - m) * B)
     feas = cons <= budget
-    if not feas.any():
-        # the profile itself is feasible iff lam(kappa) <= e + MI + I(kappa)
-        if float(L(np.array(kappa))) <= budget:
-            return float(MI2(m, a, b))
-        return -math.inf
     obj = np.where(feas, MI2(m, A, B), np.inf)
-    best = float(obj.min())
-    idx = np.argsort(obj, axis=None)[:polish]
+    starts = []
+    best = math.inf
+    bestz = None
+    if feas.any():
+        idx = np.argsort(obj, axis=None)[:polish]
+        starts += [np.array([A.flat[i], B.flat[i]]) for i in idx if np.isfinite(obj.flat[i])]
+        i = int(np.argmin(obj))
+        best, bestz = float(obj.flat[i]), np.array([A.flat[i], B.flat[i]])
+    if self_feasible:
+        starts.append(np.array([a, b]))
+        if float(MI2(m, a, b)) < best:
+            best, bestz = float(MI2(m, a, b)), np.array([a, b])
+    if not starts:
+        return -math.inf
 
     def f(z):
         return float(MI2(m, z[0], z[1]))
 
-    def c(z):
-        return budget - (u * (m * abs(z[0] - a) + (1 - m) * abs(z[1] - b)) + float(L(np.array(m * z[0] + (1 - m) * z[1]))))
+    for sa in (+1, -1):
+        for sb in (+1, -1):
+            bnds = [((a, 1.0) if sa > 0 else (0.0, a)), ((b, 1.0) if sb > 0 else (0.0, b))]
 
-    for i in idx:
-        z0 = np.array([A.flat[i], B.flat[i]])
-        try:
-            res = minimize(f, z0, method="SLSQP", bounds=[(0, 1), (0, 1)], constraints=[{"type": "ineq", "fun": c}],
-                           options={"ftol": 1e-15, "maxiter": 300})
-            if c(res.x) >= -1e-11:
-                best = min(best, f(res.x))
-        except Exception:
-            pass
+            def c(z, sa=sa, sb=sb):
+                return budget - (u * (m * sa * (z[0] - a) + (1 - m) * sb * (z[1] - b)) + Ls(m * z[0] + (1 - m) * z[1]))
+
+            for z0 in starts:
+                z0c = np.array([min(max(z0[0], bnds[0][0]), bnds[0][1]), min(max(z0[1], bnds[1][0]), bnds[1][1])])
+                try:
+                    res = minimize(f, z0c, method="SLSQP", bounds=bnds, constraints=[{"type": "ineq", "fun": c}],
+                                   options={"ftol": 1e-16, "maxiter": 400})
+                    if c(res.x) >= -1e-12 and f(res.x) < best:
+                        best, bestz = f(res.x), np.array(res.x)
+                except Exception:
+                    pass
+    # zooms (derivative free) around the best point found
+    w = 2.0 / (ngrid - 1)
+    for _ in range(8):
+        ga = np.clip(np.linspace(bestz[0] - w, bestz[0] + w, 41), 0, 1)
+        gb = np.clip(np.linspace(bestz[1] - w, bestz[1] + w, 41), 0, 1)
+        AA, BB = np.meshgrid(ga, gb, indexing="ij")
+        cz = u * (m * np.abs(AA - a) + (1 - m) * np.abs(BB - b)) + L(m * AA + (1 - m) * BB)
+        oz = np.where(cz <= budget, MI2(m, AA, BB), np.inf)
+        j = int(np.argmin(oz))
+        if np.isfinite(oz.flat[j]) and float(oz.flat[j]) < best:
+            best, bestz = float(oz.flat[j]), np.array([AA.flat[j], BB.flat[j]])
+        w /= 4
     return max(best, 0.0)
 
 
@@ -175,7 +207,7 @@ def main():
                 if Ru is not None:
                     worst3 = max(worst3, Rk - Ru)
                 n += 1
-    report("(C1) chain", worst1 <= 2e-7 and worst2 <= 1e-9 and worst3 <= 1e-9,
+    report("(C1) chain", worst1 <= 1e-8 and worst2 <= 1e-9 and worst3 <= 1e-9,
            f"{n} random two-block profiles x 4 rate functions x landscapes (v, 0): max[r_mu(e) - r^kappa_mu(e+(I-lam)(kappa))] = {worst1:.2e}; "
            f"max[r^kappa_mu - R^kappa] = {worst2:.2e}; max[R^kappa(e+(I-lam)(kappa)) - R_unif(e)] = {worst3:.2e}  (all must be <= 0 up to solver tolerance)")
 
@@ -230,6 +262,36 @@ def main():
     report("(C4) equality (ii)", worst < 3e-7,
            f"antiferromagnet bJ=-2 and ferromagnet bJ=0.8 (B=0): |r_mu(e) - R_unif(e)| <= {worst:.1e} at the cube's optimal profile "
            f"(m=1/2, shell l*), e in (0, .01, .04 / 0, .02), exits of every type allowed")
+    # ---------------- (C5) case (iii): the junction of Proposition 11.81(b), also for a larger slope ----------------
+    # beta J*(e,u) = 1 + u c2/(2L), rho = (Lambda_1 + e)/u, c2 = 1/(2 rho (1-rho)) - 2, L = ln((1-rho)/rho).
+    # Corollary 11.91(iii) (5ed4072): R_H = R_unif "with two phases up to the junction beta J*" (local statement proved, global
+    # numerical).  The new checkpoint reports from referee R10 that for larger slopes the junction comes earlier.
+    # Test: r_mu(0) with ALL exits at the cube's optimal profile (the only profile at which a slice attains R_unif).
+    print("      (C5) Curie-Weiss, B = 0: r_mu(0) at the cube's optimal profile against R_unif(0)")
+    rows = []
+    for uu in (1.0, 3.0):
+        Lam1 = math.log(2 / (1 + math.exp(-uu)))
+        rho = Lam1 / uu
+        bJstar = 1 + uu * (1 / (2 * rho * (1 - rho)) - 2) / (2 * math.log((1 - rho) / rho))
+        lstar = 0.5 * math.tanh(uu / 2)
+        for frac in (0.5, 0.8, 0.95, 1.05):
+            bJ = 1 + frac * (bJstar - 1)
+            rt = Rate(cw(bJ), uu)
+            contact = abs(float(rt.I(0.5)) - float(rt.v(0.5))) < 1e-9
+            val = r_general(rt, "v", 0.5, 0.5 + lstar, 0.5 - lstar, 0.0, uu, ngrid=801, polish=10)
+            rows.append((uu, bJstar, bJ, val, R_unif(0.0, uu), contact))
+            print(f"        u={uu}: bJ* = {bJstar:.4f}; bJ = {bJ:.4f} ({frac:.2f} of the way): r_mu(0) = {val:.7f}, R_unif(0) = {R_unif(0.0, uu):.7f}, "
+                  f"difference {val - R_unif(0.0, uu):+.2e}; 1/2 a contact type: {contact}")
+    # expected at u = 1: equality below bJ*, strict inequality above (as the report says)
+    u1 = [r for r in rows if r[0] == 1.0]
+    ok5 = all(abs(r[3] - r[4]) < 1e-7 for r in u1[:3]) and (u1[3][3] < u1[3][4] - 1e-7)
+    u3 = [r for r in rows if r[0] == 3.0]
+    early = [r for r in u3[:3] if r[3] < r[4] - 1e-6]
+    report("(C5) junction", ok5,
+           "u = 1: equality for bJ < bJ* and strict inequality just above, as stated; u = 3: "
+           + (f"the profile already loses the exponent BELOW bJ* (first at bJ = {early[0][2]:.4f} < bJ* = {early[0][1]:.4f}): the global half of "
+              "Proposition 11.81(b), hence Corollary 11.91(iii) as worded at 5ed4072, fails for this slope (consistent with referee R10 as "
+              "reported at 89ac710)" if early else "no early junction found on this grid"))
     print()
     print("SUMMARY:", "ALL PASS" if ok_all else "FAILURES")
 

@@ -192,6 +192,31 @@ was done.
    tension left by SCI-MSG-0004 and the uniform-cube part of our own question
    SCI-REQ-0001 Q2(c).
 
+15. **Review of theory report §11.24 — rounds of adaptivity** ([SCI-REV-0003](messages/science/SCI-REV-0003.md);
+   answers THY-REQ-0011 A2; theory: one major finding with a one-line repair; engineering:
+   two requests).  **The two-round lower bound (Theorem 11.86) is correct**: every step
+   re-derived, the twins rebuilt from the statement, every printed digit of both tables
+   reproduced with independent code.  No critical finding; no exponent or number changes.
+   **Major (M1):** Theorem 11.84(ii), "in every run `|C_l| ≤ …`", is false as stated — the
+   cost of the batched schedule is bounded on the good event only (a violating run is
+   exhibited); a stopping rule before each stage repairs it.  Nine minor points, among them
+   a sentence that reads as a separation at `n = 3200` where none is shown.  **New,
+   machine-checked in abstract form:** the lower bound holds for the *expected* cost at one
+   instance, the flat histogram of a block, with no assumption on batch sizes.
+
+16. **Prior art for the channel-coding dictionary** ([SCI-RES-0003](responses/science/SCI-RES-0003.md);
+   answers THY-REQ-0011 B1, B2; corrects one sentence of SCI-REV-0004).  The identities of
+   Theorem 11.99 are classical; the non-adaptive mechanism is in print three times (glassy
+   phase of the random code ensemble; Jarzynski bias; Hoeffding's trade-off against product
+   alternatives); the adaptive half has no formula in print but a principle since 1959 —
+   "identify, then validate" (Chernoff; Burnashev; Yamamoto–Itoh; stated for noisy search)
+   — against which the adaptive theorem must be positioned; the law differs because
+   exponential budgets add without sharing.  **New:** on heteropolymer landscapes plain
+   Monte Carlo from the product of the Shannon centres attains the capacity `a` at every
+   bounded accuracy for every `n` (Proposition A1.2).  "About `e^{u/2}` states" is exactly the
+   alphabet size maximising the cutoff rate, `k = e^{u/2} + 1`, with a reflection identity at
+   `e^u = k(k−1)`; the Shannon capacity follows a different law, `k ≈ e^u/u`.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -205,7 +230,7 @@ was done.
 | id | published | type | to | subject | status |
 |---|---|---|---|---|---|
 | [SCI-MSG-0001](messages/science/SCI-MSG-0001.md) | checkpoint 1 | message | both | the science division: mission, paths, first reading of both branches, a first result on experimental information, workstreams, invitations | proposed |
-| [SCI-REV-0004](messages/science/SCI-REV-0004.md) | checkpoint 4 | review (originality) | theory; engineering §6 | prior art, full text, for theory report rows G11, G18, G20–G23, G25–G27: one lemma in print, two formulas in print at the cone, two theorems not found; requests T1–T6; one small computation | proposed |
+| [SCI-REV-0004](messages/science/SCI-REV-0004.md) | checkpoint 4 | review (originality) | theory; engineering §6 | prior art, full text, for theory report rows G11, G18, G20–G23, G25–G27: one lemma in print, two formulas in print at the cone, two theorems not found; requests T1–T6; one small computation | proposed; **one sentence corrected by SCI-RES-0003 §4** |
 | [SCI-REQ-0001](requests/science/SCI-REQ-0001.md) | checkpoint 7 | request (theory) | theory | Q1 the exact robust interval of a ratio of macrostate partition functions (the observable free energy), with a reduction and a counterexample; Q2 a marginal oracle with a field; Q3 the upper boundary of the limit shape (identified sets for chains); Q4 a thermodynamic oracle | proposed |
 | [SCI-MSG-0002](messages/science/SCI-MSG-0002.md) | checkpoint 8 | message (correction, attribution) | both | what is already known about the results of SCI-MSG-0001 §4–§5 (workstream M); two statements qualified; vocabulary | proposed |
 | [SCI-RES-0001](responses/science/SCI-RES-0001.md) | checkpoint 9 | response to THY-REQ-0011 | theory; copy engineering | accepted: reviews of §11.24 and §11.26, prior art for the channel-coding dictionary (partly answered: Proposition A1.1), applicability (workstream P); Proposition 11.104 = our Theorem 4′ | accepted, in progress |
@@ -216,6 +241,8 @@ was done.
 | [SCI-RES-0002](responses/science/SCI-RES-0002.md) | checkpoint 15 | response to THY-REQ-0011 C1, with measurements | theory; engineering §6 | per-site envelopes for real residuals (force-field differences, charge models, GBn2); four falsification tests of the exponents; requests P-T1…P-T4, P-E1…P-E3 | completed (C1) |
 | [SCI-MSG-0005](messages/science/SCI-MSG-0005.md) | checkpoint 15 | message (new direction) | both | certified kinetics: cut certificates for barriers and rates on the existing kernels, exact robust barrier intervals, 32 Lean theorems; PSPACE obstruction; requests K-T1…K-T4, K-E1…K-E3 | proposed |
 | [SCI-MSG-0006](messages/science/SCI-MSG-0006.md) | checkpoint 15 | message | theory; copy engineering | finite precision: Theorem 2-τ, attenuation lemma, Theorem 4-τ, pinned ensembles | proposed |
+| [SCI-REV-0003](messages/science/SCI-REV-0003.md) | checkpoint 16 | review + replication; answers THY-REQ-0011 A2 | theory; engineering §9 | theory report §11.24: lower bound correct; M1 (cost bound of the batched schedule on the good event only; one-line repair); m1–m9; Theorem R4.1 (expected cost at the flat histogram, Lean); requests R4-E1, R4-E2 | completed |
+| [SCI-RES-0003](responses/science/SCI-RES-0003.md) | checkpoint 16 | response to THY-REQ-0011 B1, B2; correction of one sentence of SCI-REV-0004 | theory | the dictionary of §11.26 against information theory; confirmation-phase precedents; Proposition A1.2; the `e^{u/2}` rule as a cutoff-rate optimum; requests A1-T7…A1-T9 | completed |
 
 ## Responses and requests received
 
@@ -223,6 +250,6 @@ was done.
 |---|---|---|---|
 | THY-MSG-0011 §4 | theory (`89ac710`) | welcome; orientation; where their branch is weakest (§11.24, §11.26 unrefereed; §11.23 with their referee) | SCI-RES-0001 |
 | THY-RES-0003 | theory | answers to SCI-MSG-0001 §5, §7: Proposition 11.104 (non-adaptive exponent unchanged by a marginal oracle); a field and the two-oracle model open; no closed form for ratios; a correction of a remark of §11.25 | SCI-RES-0001 §3; passed to workstream R1 |
-| THY-REQ-0011 | theory | A1 review §11.26 (Theorems 11.99, 11.101); A2 review §11.24; B1 prior art for the channel-coding dictionary; B2 "`e^{u/2}` states"; C1 applicability of per-site envelopes | SCI-RES-0001 (accepted); **C1 answered: SCI-RES-0002**; A1, A2, B1 (rest), B2 in progress |
+| THY-REQ-0011 | theory | A1 review §11.26 (Theorems 11.99, 11.101); A2 review §11.24; B1 prior art for the channel-coding dictionary; B2 "`e^{u/2}` states"; C1 applicability of per-site envelopes | SCI-RES-0001 (accepted); **A2 answered: SCI-REV-0003; B1, B2: SCI-RES-0003; C1: SCI-RES-0002**; A1 (review of §11.26) in progress |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

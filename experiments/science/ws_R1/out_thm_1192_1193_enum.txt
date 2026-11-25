@@ -1,0 +1,5 @@
+(a) max over cases of [max_t |ln A_(t+1) - ln A_t| - u] = 7.22e-16 (<= 0);  min[d_t - (J_t - V_n(t))] = -8.88e-16 (>= 0);  equality at the flat-histogram instance: 1.8e-15
+(b) 3600 runs of optimistic refinement (4 bracket placements): violations of validity or of 'refined only if d_t <= x_(l-1)': 0; max[width - (x_m + ln(n+1))] = 8.88e-16 (<= 0); number of refinements <= sum_t #{l: x_(l-1) >= d_t}: True
+Lemma 11.93 (n=10, k=4, n_o=5, all 252 sets O, 4 random Lipschitz psi): (i) |sum_j H(j)A_(k;j)(O) - A_k|/A_k <= 4.1e-16 for every O; (ii) |E_O A_(k;j)(O) - A_k|/A_k <= 1.8e-16 for every j; Markov statement holds: True
+Lemma 11.93 (ii), last sentence: hypergeometric mass outside the window <= delta''/2 in 9 cases: True
+SUMMARY: ALL PASS

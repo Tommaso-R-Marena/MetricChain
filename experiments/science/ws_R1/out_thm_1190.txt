@@ -1,7 +1,6 @@
       l_of_s closed form vs bisection on F'(l)=s: 2.04e-14
 [PASS] defs: m=kappa=1/2: |Psi - ln cosh(s/2)|, |V - R_unif|, |N - theta_na^cube| <= 1.39e-15; Psi (primal root) vs Psi (dual formula with Lambda_kappa), 300 random (m,kappa,s): <= 9.99e-16
-[FAIL] 11.90(b): 40 centres (m,kappa,u): |V_brute - V_closed| <= 1.24e-01 (e>=0); |V_brute - V_game| <= 1.26e-01 (incl. 112 negative accuracies); |N_brute - N_closed| <= 5.82e-01; |N_closed - N_game| <= 2.03e-06 (X>0)
-      worst V case: (0.8306001966581732, 0.16588370410506592, 4.0, 0.0, np.float64(0.14390417951182014), 0.020107311886541072)
+[PASS] 11.90(b): 24 centres (m,kappa,u): |V_brute - V_closed| <= 1.23e-16 (e>=0); |V_brute - V_game| <= 2.82e-09 (incl. 70 negative accuracies); |N_brute - N_closed| <= 6.12e-08; |N_closed - N_game| <= 8.00e-07 (X>0); negative half of the ray = shells of the antipodal centre 1-m: |V_brute(l<=0) - V_(1-m,kappa)| <= 1.97e-16
 [PASS] 11.90(c) grid: 270400 points (u in .25,1,3,8; m,kappa on a 52x52 grid incl. 0.499/0.501; t in (0,1)): min over (m,kappa)!=(1/2,1/2) of F*_c - F*_(m,kappa) = 6.158e-10 at (u,m,kappa,t)=(0.25, 0.499, 0.5, 0.02) (>0); = 0 to 1e-13 at m=kappa=1/2
       near equality (u=1, t=0.5): gap/(dm^2+dk^2) along directions
         direction 0.000 rad: 0.143899, 0.143914, 0.143914
@@ -31,4 +30,4 @@
 [PASS] table: all six rows of the u=1 table reproduced to the digits printed; best centre type strictly between kappa and 1/2 for kappa<1/2; all values <= the cube's
 [PASS] sup_m domination: max(R^kappa - R_unif) = 7.63e-17, max(N^kappa - theta_na^cube) = 3.05e-16; equality at kappa=1/2 to 1e-9; smallest strict gap for kappa != 1/2 on the grid: 2.982e-07
 
-SUMMARY: FAILURES: 11.90(b)
+SUMMARY: ALL PASS

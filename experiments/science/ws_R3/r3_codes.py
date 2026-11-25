@@ -254,13 +254,13 @@ def main():
           f"max of ln|C| - ceil(k/2) ln(2n) = {worst:.3f} (<= 0 means the bound holds)")
 
     print("== Odd k: extended-BCH duals have dual distance >= 2t+2 > k = 2t+1 and size <= 2 (2^m)^t")
-    for m in (3, 4, 5):
+    for m in (3, 4, 5, 6):
         for t in (1, 2, 3):
             if 2 * t + 2 > (1 << m):
                 continue
             C, n = bch_ext_dual(m, t)
             D = dual_basis(C, n)
-            dd = min_weight(D) if len(D) <= 22 else None
+            dd = dual_distance(rref(C), D, n)          # exact (MacWilliams when the dual is large)
             k = 2 * t + 1
             print(f"  m={m} t={t}: length {n}, |C_ext|=2^{len(C)} (<= 2*{n}^{t}=2^{1 + m * t}), dual distance={dd} "
                   f"(> k={k}: {dd is None or dd > k}); note's bound (2n)^ceil(k/2) = {(2 * n) ** (t + 1)}; "

@@ -125,8 +125,11 @@ No critical finding: nothing here says a theorem is false.
 One result: **the exact exponents of adaptive and of non-adaptive randomised algorithms
 for the normalising constant over the log-Lipschitz cone of the Hamming cube**
 (Theorems 11.44/11.45 with 11.54/11.58), neither half alone.  What a referee cannot wave
-away is the matching adaptive *upper* bound without log-concavity and without a sampler: it
-answers, on a model class, the question Mathé and Novak leave open.  Possibly a second: the
+away is the matching adaptive *upper* bound without log-concavity and without a sampler: ~~it
+answers, on a model class, the question Mathé and Novak leave open~~ *[corrected by
+SCI-RES-0003 §4, checkpoint 16: neither Mathé–Novak 2007 nor the Novak–Rudolf survey poses
+that question; read instead "it treats a case — no log-concavity, no sampler — that their
+methods do not cover"]*.  Possibly a second: the
 two-round separation, if it survives external refereeing (our workstream R4 is reviewing
 §11.24).  A paper would have to add: a self-contained proof of the nested algorithm's cost
 with the `o(n)` explicit at least on a sub-class and an every-`n` statement somewhere (the

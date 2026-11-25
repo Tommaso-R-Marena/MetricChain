@@ -170,3 +170,15 @@ Started 2026-11-25 18:12 UTC.  Rules read (COMMON.md, R3_brief.md).  I write onl
   measure.  calorimetric_twin_exact.py uses r1 = round(rho1 n) and n in {400, 1000}; the n = 5000
   numbers come from the disjoint idealisation (calorimetric_twin_check.py).
   envelope_identified.py labels gauche states by chirality (correct internal coordinate).
+* [step 9, ~19:20 UTC] §11.1 complete: all 27 entries of the 13-bead table (3 data types x 3
+  targets x 3 truths) reproduced to two decimals with my enumerator and dual LP, using the
+  author's definitions (read after my code was written) of the compact decile
+  (R_g^2 <= 10%-quantile over conformations; athermal population 0.1009 at 13 beads) and of the
+  full histogram (57 distinct squared distances, pairs with q-p >= 3).
+  `r3_thm5.py`: bracket of Theorem 5 on 450 random class members (n=10): 0 violations,
+  |width - J| < 4e-14; sampled lower end fails in 0.01% of 9e4 trials at delta = 0.1.
+* Prior-art spot checks (web search, snippets/abstracts only): Schmidt-Siegel-Srinivasan, SIAM J.
+  Discrete Math. 1995 (moment tail bounds under k-wise independence); Wegner, J. Math. Phys. 12
+  (1971) 2259-2272 (Ising gauge models: phase transition without local order parameter);
+  Kolchinsky-Tracey, Entropy 19 (2017) 361 (pairwise-distance lower bound on mixture entropy
+  with Chernoff alpha-divergences).

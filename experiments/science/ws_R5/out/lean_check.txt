@@ -1,0 +1,5 @@
+'MetricChain.RenyiCentre.scale_le_inv_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.RenyiCentre.exists_ratio_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.RenyiCentre.eq_of_forall_ratio_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.RenyiCentre.softmin_admissible' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit=0

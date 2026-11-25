@@ -1,0 +1,7 @@
+triangle site: branches cross at t_c = 0.377987; F*(t_c) = 0.063536823; max(FL,FR) - F* at 5 points around t_c: [2.2e-15, -9.6e-16, 4.2e-17, 2.2e-16, -4.2e-17]
+   slope of the left branch 0.054049, of the right branch 0.059631: jump +0.005582   [theirs +0.0052]
+   corner of R^ at e_c = 0.056860 = 0.1996 E; the maximiser jumps from t = 0.3829 to t = 0.3731  (slopes of R^: -0.383 -> -0.373)   [theirs: 0.1996 E, -0.383 -> -0.373]
+   chain mix2: max over e of [best split R^split - R^] = 0.00e+00   [theirs 8e-7]
+
+uniform four-letter Hamming site, u = 1: max_t |F*(t) - max(F_2(t), F_4(t))| = 3.8e-15; F_2 = F_4 at t = 0.6458  [D52 item 3: switch from pairs to singletons at t = 0.65]
+   F_2 > F_4 for t < 0.646: True;  for t > 0.646: False
