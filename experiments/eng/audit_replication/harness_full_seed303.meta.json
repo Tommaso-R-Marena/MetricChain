@@ -1,0 +1,18 @@
+{
+ "seed": 303,
+ "quick": false,
+ "returncode": 0,
+ "seconds": 195.3,
+ "stderr_tail": "",
+ "survived": 79,
+ "refuted_as_documented": 17,
+ "verdict_lines": 96,
+ "last_line": "ALL TESTS BEHAVE AS EXPECTED",
+ "platform": {
+  "python": "3.12.10",
+  "machine": "x86_64",
+  "system": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
+  "numpy": "2.5.5",
+  "scipy": "1.18.1"
+ }
+}

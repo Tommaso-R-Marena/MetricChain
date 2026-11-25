@@ -1,0 +1,13 @@
+{
+ "n_torsions": 24,
+ "s_cut": 12,
+ "splits": 64,
+ "split_k": 8,
+ "conformations": 150838528401,
+ "classes": 4532,
+ "core_seconds": 7327.5,
+ "max_piece_seconds": 157.4,
+ "wall_seconds": 158.0,
+ "gauche_patterns_total": 16777216,
+ "gauche_patterns_realised": 16777216
+}

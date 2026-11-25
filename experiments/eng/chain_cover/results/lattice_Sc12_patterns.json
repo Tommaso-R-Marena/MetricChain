@@ -1,0 +1,126 @@
+{
+ "model": "diamond lattice, self-avoiding",
+ "question": "trans/gauche patterns realised by some self-avoiding conformation",
+ "rows": {
+  "1": {
+   "total": 2,
+   "realised": 2,
+   "source": "local run of dia_enum -b"
+  },
+  "2": {
+   "total": 4,
+   "realised": 4,
+   "source": "local run of dia_enum -b"
+  },
+  "3": {
+   "total": 8,
+   "realised": 8,
+   "source": "local run of dia_enum -b"
+  },
+  "4": {
+   "total": 16,
+   "realised": 16,
+   "source": "local run of dia_enum -b"
+  },
+  "5": {
+   "total": 32,
+   "realised": 32,
+   "source": "local run of dia_enum -b"
+  },
+  "6": {
+   "total": 64,
+   "realised": 64,
+   "source": "local run of dia_enum -b"
+  },
+  "7": {
+   "total": 128,
+   "realised": 128,
+   "source": "local run of dia_enum -b"
+  },
+  "8": {
+   "total": 256,
+   "realised": 256,
+   "source": "local run of dia_enum -b"
+  },
+  "9": {
+   "total": 512,
+   "realised": 512,
+   "source": "local run of dia_enum -b"
+  },
+  "10": {
+   "total": 1024,
+   "realised": 1024,
+   "source": "local run of dia_enum -b"
+  },
+  "11": {
+   "total": 2048,
+   "realised": 2048,
+   "source": "local run of dia_enum -b"
+  },
+  "12": {
+   "total": 4096,
+   "realised": 4096,
+   "source": "local run of dia_enum -b"
+  },
+  "13": {
+   "total": 8192,
+   "realised": 8192,
+   "source": "local run of dia_enum -b"
+  },
+  "14": {
+   "total": 16384,
+   "realised": 16384,
+   "source": "local run of dia_enum -b"
+  },
+  "15": {
+   "total": 32768,
+   "realised": 32768,
+   "source": "local run of dia_enum -b"
+  },
+  "16": {
+   "total": 65536,
+   "realised": 65536,
+   "source": "local run of dia_enum -b"
+  },
+  "17": {
+   "total": 131072,
+   "realised": 131072,
+   "source": "local run of dia_enum -b"
+  },
+  "18": {
+   "total": 262144,
+   "realised": 262144,
+   "source": "local run of dia_enum -b"
+  },
+  "19": {
+   "total": 524288,
+   "realised": 524288,
+   "source": "local run of dia_enum -b"
+  },
+  "20": {
+   "total": 1048576,
+   "realised": 1048576,
+   "source": "local run of dia_enum -b"
+  },
+  "21": {
+   "total": 2097152,
+   "realised": 2097152,
+   "source": "Modal job M-002 (64 prefix splits, bitmaps merged by OR)"
+  },
+  "22": {
+   "total": 4194304,
+   "realised": 4194304,
+   "source": "Modal job M-002 (64 prefix splits, bitmaps merged by OR)"
+  },
+  "23": {
+   "total": 8388608,
+   "realised": 8388608,
+   "source": "Modal job M-002 (64 prefix splits, bitmaps merged by OR)"
+  },
+  "24": {
+   "total": 16777216,
+   "realised": 16777216,
+   "source": "Modal job M-002 (64 prefix splits, bitmaps merged by OR)"
+  }
+ }
+}

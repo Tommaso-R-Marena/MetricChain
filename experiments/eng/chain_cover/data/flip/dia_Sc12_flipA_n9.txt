@@ -1,0 +1,12 @@
+# dia_flip n_torsions=9 n_beads=12 s_cut=12 mode=A split_k=0 split_W=1 split_w=0
+# conformations=17107
+# columns: torsion | c_sf (max ||N^x - N^x'||_1 over single flips) | flips inside the domain | flips leaving it
+0 36 33358 856
+1 63 32430 1784
+2 69 31654 2560
+3 76 30898 3316
+4 76 31150 3064
+5 76 30898 3316
+6 69 31654 2560
+7 63 32430 1784
+8 36 33358 856

@@ -1,0 +1,2 @@
+# pattern bitmaps are all-ones and regenerable (dia_enum -b); the counts are in results/lattice_Sc12_patterns.json
+chain_cover/data/*.bin
