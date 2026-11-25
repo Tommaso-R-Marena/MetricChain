@@ -67,8 +67,10 @@ original theorem · **(7)** plausibly original capability · **(9)** unresolved.
 ## D. What would survive a hostile referee (our judgment, with its limits)
 
 1. **G20/G21 with G18** — the pair of exact exponents; its non-trivial half is the adaptive
-   upper bound, whose cost proof nobody outside the theory division has re-derived
-   (workstream R6 is doing so).  It must be positioned against the confirmation phase.
+   upper bound, whose cost proof **has now been re-derived outside the theory division
+   (workstream R6, SCI-REV-0007: it stands; eight minor points; a certified finite-`n`
+   separation from non-adaptive algorithms from `n = 1400` on at `u = 1`)**.  It must be
+   positioned against the confirmation phase.
 2. **G26** — the two-round separation, reviewed by us (SCI-REV-0003): stands, conditional
    on item 1 for its reading.
 3. **The residual kernel** as a capability (class-wide certificates), if its advantage over

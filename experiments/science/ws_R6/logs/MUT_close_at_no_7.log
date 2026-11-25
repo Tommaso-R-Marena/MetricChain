@@ -1,0 +1,37 @@
+MUT_close_at_no seed 7 time 0s
+{
+ "runs": 48,
+ "harness_limit": 0,
+ "closed": 0,
+ "abort": 0,
+ "Gfail": 0,
+ "det_viol": 0,
+ "good_viol": 48,
+ "pop": 0,
+ "neg": 0,
+ "runs_with_neg": 0,
+ "close_pop": 0,
+ "close_unpop": 0,
+ "close_tail0": 0,
+ "invalid_bracket_any": 0,
+ "maxratio": {
+  "M_over_Mbar": 7.201622435584209e-05,
+  "M_over_Mdag": 0.181640625,
+  "M_over_capnew": 0.0,
+  "lnq_over_lnCmax": 0.18439587901325832,
+  "q_over_Cvi": 6.509159390769094e-11,
+  "calls_over_bound": 0.0,
+  "used_over_cnt": 1.7613681462008075e-05,
+  "count_ineq": 8.028508220464252e-14
+ }
+}
+VIOLATION {"Kov": null, "L_ext": 5, "b": 2.0, "delta": 0.05, "eta": "1/3", "etap": 0.3333333333333333, "kind": "2L+", "lam": 0.3333333333333333, "n": 80, "n_o": 40, "nu1": 652.3876388301709, "theta": 0.3333333333333333, "u": 1.0} two_plateaus random 1469265226 [] ["('i: no closure', 'closed_L>U', None)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 0.5, "delta": 0.05, "eta": "1/2", "etap": 1.0, "kind": "2L+", "lam": 1.0, "n": 200, "n_o": 100, "nu1": 1477.8112197861299, "theta": 1.0, "u": 2.0} grid_rw exact 1665772335 [] ["('i: no closure', 'closed_L>U', None)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 0.5, "delta": 0.05, "eta": "1/2", "etap": 1.0, "kind": "2L+", "lam": 0.5, "n": 160, "n_o": 80, "nu1": 1.0, "theta": 0.5, "u": 2.0} staircase bottom 119253154 [] ["('i: no closure', 'closed_L>U', None)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 3.0, "delta": 0.05, "eta": "1/2", "etap": 1.0, "kind": "2L+", "lam": 1.0, "n": 40, "n_o": 8, "nu1": 1.0, "theta": 30.0, "u": 1.0} grid_rw center 1073283950 [] ["('i: no closure', 'closed_L>U', None)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 0.5, "delta": 0.05, "eta": "1/2", "etap": 0.5, "kind": "2L+", "lam": 0.5, "n": 120, "n_o": 60, "nu1": 4820.52886156504, "theta": 0.5, "u": 3.0} alternating top 1711693564 [] ["('i: no closure', 'closed_L>U', None)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 2.0, "delta": 0.05, "eta": "1/3", "etap": 0.3333333333333333, "kind": "2L+", "lam": 0.3333333333333333, "n": 300, "n_o": 120, "nu1": 1957.1629164905123, "theta": 0.3333333333333333, "u": 1.0} dip_crit bottom 1875941739 [] ["('i: no closure', 'closed_L>U', None)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 2.0, "delta": 0.05, "eta": "1/3", "etap": 0.3333333333333333, "kind": "2L+", "lam": 0.3333333333333333, "n": 80, "n_o": 40, "nu1": 652.3876388301709, "theta": 0.3333333333333333, "u": 1.0} cone_half adv_lo 1753345572 [] ["('i: no closure', 'closed_L>U', None)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 0.5, "delta": 0.05, "eta": "1/2", "etap": 1.0, "kind": "2L+", "lam": 1.0, "n": 200, "n_o": 100, "nu1": 1477.8112197861299, "theta": 1.0, "u": 2.0} dip_crit adv_hi 597914449 [] ["('i: no closure', 'closed_L>U', None)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 0.5, "delta": 0.05, "eta": "1/2", "etap": 1.0, "kind": "2L+", "lam": 0.5, "n": 160, "n_o": 80, "nu1": 1.0, "theta": 0.5, "u": 2.0} rw_lazy bottom 2126996169 [] ["('i: no closure', 'closed_L>U', None)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 3.0, "delta": 0.05, "eta": "1/2", "etap": 1.0, "kind": "2L+", "lam": 1.0, "n": 40, "n_o": 8, "nu1": 1.0, "theta": 30.0, "u": 1.0} rw_uniform exact 1094029749 [] ["('i: no closure', 'closed_L>U', None)"]

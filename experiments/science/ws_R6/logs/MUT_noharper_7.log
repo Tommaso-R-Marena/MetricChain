@@ -1,0 +1,28 @@
+MUT_noharper seed 7 time 18s
+{
+ "runs": 48,
+ "harness_limit": 1,
+ "closed": 47,
+ "abort": 0,
+ "Gfail": 0,
+ "det_viol": 1,
+ "good_viol": 0,
+ "pop": 26318,
+ "neg": 140,
+ "runs_with_neg": 14,
+ "close_pop": 3,
+ "close_unpop": 44,
+ "close_tail0": 2,
+ "invalid_bracket_any": 0,
+ "maxratio": {
+  "M_over_Mbar": 0.0020930458255747405,
+  "M_over_Mdag": 28.52522148126575,
+  "M_over_capnew": 3.1217726981679514,
+  "lnq_over_lnCmax": 0.8328434583687238,
+  "q_over_Cvi": 0.00037393037575073545,
+  "calls_over_bound": 0.17384361001942308,
+  "used_over_cnt": 0.27414373692674227,
+  "count_ineq": 0.6109009494003166
+ }
+}
+VIOLATION {"Kov": null, "L_ext": 5, "b": 2.0, "delta": 0.05, "eta": "1/3", "etap": 0.3333333333333333, "kind": "2L+", "lam": 0.3333333333333333, "n": 300, "n_o": 120, "nu1": 1957.1629164905123, "theta": 0.3333333333333333, "u": 1.0} cone adv_lo 2078394913 ["('iii: level left with q <= pi-dagger', 809, 'populated')", "('iii: level left with q <= pi-dagger', 810, 'populated')", "('iii: level left with q <= pi-dagger', 811, 'populated')", "('cap40c5bd7: M >= 2max(e^lam Mdag, Mddag)', 812, 22095785671786496, 1.5608863490839757)", "('iii: level left with q <= pi-dagger', 812, 'populated')", "('cap40c5bd7: M >= 2max(e^lam Mdag, Mddag)', 813, 22095785671786496, 1.5608863490839757)"] []

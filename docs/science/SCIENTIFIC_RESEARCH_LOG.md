@@ -633,3 +633,30 @@ profile and the gauche count, and its support function is the ground-state energ
   buried environment and an a-priori bound on the third-order constants.  Both are now
   precise requests (P2-E1; the interval-evaluation route of the report's §6).
 
+### Cycle 26 — the nested algorithm's cost proof, reviewed from outside (checkpoint 32)
+
+* **Workstream R6 reported** on the check we had ranked first since checkpoint 16.  The
+  reviewer wrote its own accounting of Theorem 11.52 and of the key quantities of
+  Theorem 11.56 before reading the authors' proofs; the constants coincide in every
+  term.  The five accountings that the theory division had retracted (its D45) do not
+  recur.  An implementation written from the specification ran 4 075 literal runs —
+  including, for the first time, runs with invalid inner answers, which show that the
+  abort rule is needed and works — and reproduces the engineering division's published
+  numbers to every digit.
+* **Minor points:** four gaps in the text of §11.18; one uncovered pass in the proof of
+  the sample-cap remark that the theory division published this afternoon (closed, and
+  it uses a hypothesis an erratum had called unused); two observations on harnesses.
+* **Two things nobody had:** an explicit every-`n` cost for two levels with base
+  brackets, and with it a certified finite-`n` separation from every non-adaptive
+  algorithm (`n = 1400` at `u = 1`); and the discovery that numpy's binomial sampler is
+  biased at block sizes of `10¹⁷` and more — in the reviewer's own first pass, and by
+  inspection in the engineering division's sampler.
+* **Coordinator's checks:** separation table re-run; both lower-bound columns
+  recomputed with independent code (identical; one overflow in the coordinator's first
+  version, fixed); the central count and the corner inequality re-derived; the bias
+  confirmed with a Poisson control.
+* **What it does to the publication assessment:** P1 is no longer provisional on the
+  point an outsider could check.  Its weaknesses are now exactly the ones a referee
+  would name: the count is not machine-checked; `h` is a limit of families of growing
+  depth with no rate; three levels have never been executed beyond toy size.
+

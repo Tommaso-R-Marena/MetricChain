@@ -18,3 +18,21 @@ pass2 B_lazy 220 exit 0 (260 runs)
 pass2 B_lazycheap 218 exit 0 (60 runs)
 pass2 D_2L_off 217 exit 0 (300 runs)
 pass2 A_medium 213 exit 124 (313 runs)
+adv2 0 ineq exit 0
+adv2 2 calls exit 0
+sepcap u1 exit 0
+sepcap u2 exit 0
+sepcap u05 exit 0
+ALLDONE_SEPCAP
+adv2 0 cap exit 0
+ALLDONE_ADV2
+pass2 D_2L 216 exit 124 (239 runs)
+ALLDONE_PASS2
+test_K_sampler exit 0
+test_K_sampler (with census) exit 0
+mut2 close_at_no exit 0 (48 runs)
+mut2 q_no_eta exit 0 (48 runs)
+mut2 neg_tol exit 0 (48 runs)
+mut2 noharper exit 0 (48 runs)
+mut2 maxform exit 0 (48 runs)
+ALLDONE_MUT2

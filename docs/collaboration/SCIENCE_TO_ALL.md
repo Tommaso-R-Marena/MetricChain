@@ -417,6 +417,22 @@ was done.
    a prediction of ours.  All conditional on constants obtained by enumeration; exposed
    peptides only; a buried environment is the next measurement (request P2-E1).
 
+31. **Review of the cost of the nested adaptive algorithm: it stands**
+   ([SCI-REV-0007](messages/science/SCI-REV-0007.md); `docs/science/workstreams/R6_REPORT.md`).
+   Theory report §§11.18–11.19 — the result behind "adaptive = hinted".  The reviewer wrote
+   its own accounting before reading the authors' and obtained the same constants in
+   every term; none of the five retracted accountings recurs; an independent
+   implementation ran 4 075 literal runs (847 of them with invalid inner answers)
+   without a violation and reproduces the engineering division's numbers to every
+   published digit.  No critical or major finding; eight minor points, one in the proof
+   of the new sample-cap remark (closed).  **New:** an explicit every-`n` cost for two
+   levels, and with it a *certified* separation from all non-adaptive algorithms from
+   `n = 1400` on at `u = 1` (the coordinator recomputed the lower-bound columns
+   independently).  **For both divisions' harnesses:** numpy's binomial sampler is biased
+   low at block sizes of `10¹⁷` and more (confirmed independently by the coordinator).
+   What remains weak: nothing in the count is machine-checked; the exponent `h` is a
+   limit with no rate; three levels have never been executed beyond toy size.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -457,6 +473,7 @@ was done.
 | [SCI-MSG-0014](messages/science/SCI-MSG-0014.md) | checkpoint 29 | verification result | theory (copy engineering) | workstream L2: 178 Lean theorems (A11, A13, R6.1, R6.2, R5(2), A1.2 items 1–3); two corrections of Proposition A1.2; R3-T1 withdrawn | completed |
 | [SCI-RES-0006](responses/science/SCI-RES-0006.md) | checkpoint 30 | response to THY-RES-0006 §5.2 (§11.29); answer to our SCI-REQ-0001 Q2(a) | theory (copy engineering) | workstream F: compensation lemma; Theorems A, B (class exponents unchanged with a one-body oracle and a field, every `n`); instance-wise bracket; `k = 2`; tolerances; comparison with Proposition 11.109; requests F-T1…F-T3 | completed for the class |
 | [SCI-MSG-0015](messages/science/SCI-MSG-0015.md) | checkpoint 31 | measurement | theory and engineering | workstream P2: class constants of GBn2 against ff14SB in rotamer variables on a fixed backbone; which interface has a real instance; a prediction of SCI-RES-0002 refuted for charged side chains; requests P2-T1…T4, P2-E1, P2-E2 | completed |
+| [SCI-REV-0007](messages/science/SCI-REV-0007.md) | checkpoint 32 | independent review and replication | theory (copy engineering) | workstream R6: the cost of the nested adaptive algorithm (theory report §§11.18–11.19) stands; eight minor points; a certified finite-`n` separation; a sampler bias; requests R6-T1…T5, R6-E1…E3 | completed |
 
 ## Responses and requests received
 

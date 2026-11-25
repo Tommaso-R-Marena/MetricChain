@@ -69,7 +69,8 @@ def sub(pattern, repl):
 sub(r"violated no claim in \*\*" + N + r" literal runs\*\*", f"violated no claim in **{total:,} literal runs**")
 sub(r"simulated inner oracle — " + N + r" with the constants of the theorems", f"simulated inner oracle — {thm_valid:,} with the constants of the theorems")
 sub(r"every bracket was valid\), " + N + r" with `K` reduced", f"every bracket was valid), {redK:,} with `K` reduced")
-sub(r"for the first time, \*\*" + N + r" runs with invalid inner answers\*\*", f"for the first time, **{invalid:,} runs with invalid inner answers**")
+sub(r"for the first time for this algorithm, \*\*" + N + r" runs with invalid inner answers\*\*",
+    f"for the first time for this algorithm, **{invalid:,} runs with invalid inner answers**")
 sub(r"with a dear last rung " + N + r" of " + N + r" such", f"with a dear last rung {lazy_cost} of {lazy_runs} such")
 sub(r"and " + N + r" runs of two searches for a counterexample", f"and {adv_total + cs_runs:,} runs of two searches for a counterexample")
 sub(r"own derivation before reading; " + N + r" own runs of 2L \|", f"own derivation before reading; {runs_2l:,} own runs of 2L |")
@@ -79,6 +80,6 @@ sub(r"in the valid 2L⁺ campaigns " + N + r" of " + N + r" closures happen at a
     f"in the valid 2L⁺ campaigns {close_pop_A} of {closed_A} closures happen at a populated pass")
 sub(r"rung costs growing by `e\^\{80\}`, " + N + r" of my " + N + r" runs stop on the query", f"rung costs growing by `e^{{80}}`, {lazy_cost} of my {lazy_runs} runs stop on the query")
 sub(r"unless it is stopped, in " + N + r" of " + N + r" runs\.", f"unless it is stopped, in {lazy_cost} of {lazy_runs} runs.")
-sub(r"\(my runs reach `[\d.]+` of it, §3\.2;", f"(my runs reach `{count_max:.2f}` of it, §3.2;")
+sub(r"\(my runs reach `[\d.]+` of it,", f"(my runs reach `{count_max:.2f}` of it,")
 open(REPORT, "w").write(s)
 print(json.dumps(H, indent=1))

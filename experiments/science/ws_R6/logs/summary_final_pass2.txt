@@ -1,0 +1,55 @@
+| campaign | algorithm | `K` | cells | inner behaviour | runs completed (discarded) | closed / `L>U` / aborted | levels left populated / negligible | good event failed | **violations: every-run claims / good-event claims** | invalid final bracket (of these on the good event) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `A_small` | 2L⁺ | theorem | 8 cells, `n_o ∈ {10,…,40}`: Theorem-K2 parameters at `x ∈ {1, 2, 4}`, two general cells, one Corollary-K1.b cell | valid (10 behaviours) | 1664 (0) | 1664 / 0 / 0 | 340984 / 180 | 0 | **0 / 0** | 0 (0) |
+| `A_ties` | 2L⁺ | theorem | 5 cells, `n_o ∈ {24, 32, 100, 120}`, dyadic `λ`, `un/λ ∈ ℕ`, flat fibres, profiles on the level grid | valid (6 behaviours: ends of brackets exactly at `W`, mixtures, the two adversaries) | 465 (35) | 465 / 0 / 0 | 167890 / 1960 | 0 | **0 / 0** | 0 (0) |
+| `A_medium` | 2L⁺ | theorem | 12 cells, `n_o ∈ {60,…,1000}`, `u ∈ {½, 1, 2, 3}`: eight bounded-regime cells and four Corollary-K1.b (extensive) cells | valid (10 behaviours) | 302 (11) | 302 / 0 / 0 | 343787 / 1674 | 0 | **0 / 0** | 0 (0) |
+| `D_2L` | 2L (Thm 11.52) | theorem (`K = ⌈24 ln(2^{n+6}n³/δ)⌉`) | 8 cells, `n ∈ {40,…,3000}`, `n_o ∈ {12,…,1500}` | valid (10 behaviours) | 239 (0) | 239 / 0 / 0 | 257477 / 475 | 0 | **0 / 0** | 0 (0) |
+| `B_reducedK` | 2L⁺ | `K ∈ {8, 20, 50}` | 5 cells (each with the three values of `K`), `n_o ∈ {40,…,400}` | valid (10 behaviours) | 396 (4) | 396 / 0 / 0 | 281688 / 1929 | 101 | **0 / 0** | 0 (0) |
+| `B_invalid` | 2L⁺ | theorem (one cell `K = 20`) | 7 cells, `n_o ∈ {12,…,400}` | **invalid** (9 behaviours: above `W`, below `W`, too wide, trivial, LAZY, mixtures) | 390 (10) | 218 / 18 / 154 | 208784 / 6268 | 390 | **0 / 0** | 117 (0) |
+| `B_lazy` | 2L⁺ | theorem | 6 cells, `n_o ∈ {40,…,400}`, two models of the rung costs (see below) | **invalid** (LAZY: every refined point reaches the last rung) | 319 (1) | 177 / 0 / 142 | 237262 / 1463 | 319 | **0 / 0** | 0 (0) |
+| `D_2L_off` | 2L (Thm 11.52) | theorem and `K ∈ {10, 30}` | 5 cells, `n ∈ {60, 600, 1200}` | valid and **invalid** | 300 (0) | 256 / 0 / 44 | 308890 / 458 | 144 | **0 / 0** | 44 (0) |
+
+TOTAL: {'G_failed': 954, 'abort': 340, 'abort_cost': 142, 'abort_unclassified': 198, 'close_pop': 563, 'close_r_le_rdag': 961, 'close_tail0': 393, 'close_unpop': 3154, 'closed': 3717, 'closed_LgtU': 18, 'det_viol': 0, 'discarded': 61, 'good_viol': 0, 'invalid_final': 161, 'invalid_final_on_G': 0, 'neg': 14407, 'pop': 2146762, 'q_gt_Cmax': 0, 'runs': 4075, 'runs_big_blocks': 223, 'runs_neg': 714}
+runs with the constants of the theorems and a valid oracle: 2670 | off the good event by design: 1405 | with invalid inner answers (B_invalid, B_lazy): 709
+largest ratios, campaigns A (valid, theorem constants): {'M_over_Mbar': 0.0015, 'M_over_Mdag': 2.0721, 'M_over_capnew': 0.8434, 'calls_over_bound': 0.206, 'count_ineq': 0.869, 'lnq_over_lnCmax': 0.8305, 'q_over_Cvi': 0.0015, 'used_over_cnt': 0.3441}
+largest ratios, campaign D (2L): {'M_over_Mbar': 0.0003, 'M_over_Mdag': 3.0252, 'M_over_capnew': 0.5564, 'calls_over_bound': 0.02, 'count_ineq': 0.1902, 'lnq_over_lnCmax': 0.7239, 'used_over_cnt': 0.0878}
+largest ratios, campaigns B: {'M_over_Mbar': 0.0009, 'M_over_Mdag': 2.0721, 'M_over_capnew': 0.8434, 'calls_over_bound': 0.1443, 'count_ineq': 0.6989, 'lnq_over_lnCmax': 1.0, 'q_over_Cvi': 0.994, 'used_over_cnt': 0.2741}
+  A_small     closures: at a populated pass 243, unpopulated 1421, empty tail 360, at a radius <= r-dagger 652; runs with negligible levels 14; aborts: cost 0, unclassified 0; max ln M 29.7; q>C_max: 0
+  A_ties      closures: at a populated pass 21, unpopulated 444, empty tail 0, at a radius <= r-dagger 14; runs with negligible levels 151; aborts: cost 0, unclassified 0; max ln M 57.8; q>C_max: 0
+  A_medium    closures: at a populated pass 49, unpopulated 253, empty tail 2, at a radius <= r-dagger 31; runs with negligible levels 108; aborts: cost 0, unclassified 0; max ln M 54.3; q>C_max: 0
+  D_2L        closures: at a populated pass 82, unpopulated 157, empty tail 0, at a radius <= r-dagger 85; runs with negligible levels 48; aborts: cost 0, unclassified 0; max ln M 50.9; q>C_max: 0
+  B_reducedK  closures: at a populated pass 33, unpopulated 363, empty tail 10, at a radius <= r-dagger 34; runs with negligible levels 131; aborts: cost 0, unclassified 0; max ln M 57.5; q>C_max: 0
+  B_invalid   closures: at a populated pass 24, unpopulated 194, empty tail 19, at a radius <= r-dagger 33; runs with negligible levels 132; aborts: cost 0, unclassified 154; max ln M 54.9; q>C_max: 0
+  B_lazy      closures: at a populated pass 28, unpopulated 149, empty tail 2, at a radius <= r-dagger 31; runs with negligible levels 84; aborts: cost 142, unclassified 0; max ln M 54.3; q>C_max: 0
+  D_2L_off    closures: at a populated pass 83, unpopulated 173, empty tail 0, at a radius <= r-dagger 81; runs with negligible levels 46; aborts: cost 0, unclassified 44; max ln M 41.8; q>C_max: 0
+census of the cells that have completed runs (to be compared with the descriptions in the table):
+  A_small     {'cells': 8, 'n': [24, 40, 48, 60, 64, 80], 'n_o': [10, 12, 24, 30, 32, 40], 'u': [0.5, 1.0, 2.0], 'Kov': ['None'], 'runs_per_cell': [208, 208, 208, 208, 208, 208, 208, 208], 'behaviours': 10, 'profiles': 17}
+  A_ties      {'cells': 5, 'n': [48, 64, 200, 300], 'n_o': [24, 32, 100, 120], 'u': [1.0, 2.0], 'Kov': ['None'], 'runs_per_cell': [82, 83, 100, 100, 100], 'behaviours': 6, 'profiles': 6}
+  A_medium    {'cells': 12, 'n': [120, 160, 200, 300, 500, 600, 1000, 1200, 2000], 'n_o': [60, 80, 100, 120, 250, 300, 400, 500, 1000], 'u': [0.5, 1.0, 2.0, 3.0], 'Kov': ['None'], 'runs_per_cell': [20, 21, 26, 26, 26, 26, 26, 26, 26, 26, 26, 27], 'behaviours': 10, 'profiles': 17}
+  D_2L        {'cells': 8, 'n': [40, 60, 600, 1000, 1200, 2000, 3000], 'n_o': [12, 30, 300, 400, 500, 1000, 1500], 'u': [0.5, 1.0, 2.0], 'Kov': ['None'], 'runs_per_cell': [29, 30, 30, 30, 30, 30, 30, 30], 'behaviours': 10, 'profiles': 17}
+  B_reducedK  {'cells': 15, 'n': [80, 120, 160, 200, 1200], 'n_o': [40, 60, 80, 100, 400], 'u': [1.0, 2.0, 3.0], 'Kov': ['20', '50', '8'], 'runs_per_cell': [24, 25, 26, 26, 26, 26, 27, 27, 27, 27, 27, 27, 27, 27, 27], 'behaviours': 10, 'profiles': 17}
+  B_invalid   {'cells': 7, 'n': [24, 80, 120, 160, 200, 1200], 'n_o': [12, 40, 60, 80, 100, 400], 'u': [1.0, 2.0, 3.0], 'Kov': ['20', 'None'], 'runs_per_cell': [52, 52, 57, 57, 57, 57, 58], 'behaviours': 9, 'profiles': 17}
+  B_lazy      {'cells': 12, 'n': [80, 120, 160, 200, 300, 1200], 'n_o': [40, 60, 80, 100, 120, 400], 'u': [1.0, 2.0, 3.0], 'Kov': ['None'], 'runs_per_cell': [9, 10, 10, 10, 10, 10, 43, 43, 43, 43, 44, 44], 'behaviours': 2, 'profiles': 9}
+  D_2L_off    {'cells': 5, 'n': [60, 600, 1200], 'n_o': [30, 300, 400], 'u': [1.0, 2.0], 'Kov': ['10', '30', 'None'], 'runs_per_cell': [60, 60, 60, 60, 60], 'behaviours': 19, 'profiles': 17}
+B_reducedK by (K override, oracle):
+    (20, 'valid') {'runs': 133, 'Gfail': 33, 'det': 0, 'good': 0, 'abort': 0, 'invalid_final': 0, 'invalid_final_on_G': 0}
+    (50, 'valid') {'runs': 128, 'Gfail': 3, 'det': 0, 'good': 0, 'abort': 0, 'invalid_final': 0, 'invalid_final_on_G': 0}
+    (8, 'valid') {'runs': 135, 'Gfail': 65, 'det': 0, 'good': 0, 'abort': 0, 'invalid_final': 0, 'invalid_final_on_G': 0}
+D_2L_off by (K override, oracle):
+    (10, 'invalid') {'runs': 51, 'Gfail': 51, 'det': 0, 'good': 0, 'abort': 11, 'invalid_final': 17, 'invalid_final_on_G': 0}
+    (10, 'valid') {'runs': 69, 'Gfail': 6, 'det': 0, 'good': 0, 'abort': 0, 'invalid_final': 0, 'invalid_final_on_G': 0}
+    (30, 'invalid') {'runs': 32, 'Gfail': 32, 'det': 0, 'good': 0, 'abort': 12, 'invalid_final': 11, 'invalid_final_on_G': 0}
+    (30, 'valid') {'runs': 28, 'Gfail': 0, 'det': 0, 'good': 0, 'abort': 0, 'invalid_final': 0, 'invalid_final_on_G': 0}
+    (None, 'invalid') {'runs': 55, 'Gfail': 55, 'det': 0, 'good': 0, 'abort': 21, 'invalid_final': 16, 'invalid_final_on_G': 0}
+    (None, 'valid') {'runs': 65, 'Gfail': 0, 'det': 0, 'good': 0, 'abort': 0, 'invalid_final': 0, 'invalid_final_on_G': 0}
+B_lazy split: {'steep_runs': 260, 'steep_abort_cost': 142, 'steep_q_gt_Cmax': 0, 'steep_max_lnq_minus_lnCmax': -0.006006691095535643, 'cheap_runs': 59, 'cheap_abort_cost': 0, 'cheap_max_q_over_Cvi': 0.020972500244140664}
+e2e, K divided by 1 : {'runs': 129, 'closed': 129, 'abort': 0, 'real_brackets': 9786461, 'inner_calls': 12363569, 'rungs_real': 224, 'rungs': 270, 'invalid_inner': 0, 'runs_with_invalid_inner': 0, 'G_failed': 0, 'det_viol': 0, 'good_viol': 0, 'invalid_final': 0, 'invalid_final_on_G': 0, 'too_wide_final': 0, 'max_q_over_Cmax': 0.006040175941347989, 'neg': 0, 'points': 9352668, 'max_width_excess': -0.13950228054812053}
+e2e, K divided by 16 : {'runs': 400, 'closed': 400, 'abort': 0, 'real_brackets': 1844727, 'inner_calls': 2444604, 'rungs_real': 667, 'rungs': 802, 'invalid_inner': 0, 'runs_with_invalid_inner': 0, 'G_failed': 31, 'det_viol': 0, 'good_viol': 0, 'invalid_final': 0, 'invalid_final_on_G': 0, 'too_wide_final': 0, 'max_q_over_Cmax': 0.023282922451070522, 'neg': 0, 'points': 1769956, 'max_width_excess': -0.13541254327051833}
+three levels: {'outer_runs': 19, 'outer_closed': 19, 'outer_invalid': 0, 'outer_too_wide': 0, 'outer_det': 0, 'outer_good': 0, 'middle_runs': 1152, 'middle_closed': 1152, 'middle_invalid': 0, 'middle_too_wide': 0, 'middle_det': 0, 'middle_good': 0, 'bottom_brackets': 80363188, 'bottom_invalid': 0, 'runs_with_real_bottom': 12, 'sizes': [(3, 3, 3), (3, 3, 4), (3, 4, 3), (4, 3, 3)], 'max_lnq_minus_lnCmax': -5.412525865520813}
+adversarial search:
+   n=48 n_o=24 u=0.5 lam=0.5 | objective cap   |  594 literal runs attempted, all completed | best 0.1812 | violations 0
+   n=80 n_o=40 u=1 lam=0.3333333333333333 | objective ineq  |   23 literal runs attempted, all completed | best 0.5711 | violations 0
+   n=160 n_o=80 u=2 lam=0.5 | objective calls |  122 literal runs attempted, 122 completed | best 0.2030 | violations 0
+   n=200 n_o=100 u=2 lam=1.0 | objective cap   |   66 literal runs attempted, 61 completed | best 0.0000 | violations 0
+   n=200 n_o=100 u=2 lam=1.0 | objective ineq  |  178 literal runs attempted, 176 completed | best 0.4478 | violations 0
+capcorner: {'runs': 4500, 'degenerate': 4151, 'rdag_ge1_degenerate': 1801, 'pass_at_Mdd': 2361, 'pass_at_Mdd_unpop': 2266, 'pass_at_Mdd_unpop_notclosed': 1255, 'cap_viol': 0, 'det_viol': 0, 'good_viol': 0, 'sample_eq_2Mdd': 1133, 'closed': 4209, 'abort': 291, 'rge1_unpop_at_Mdd': 193, 'rge1_notclosed_after_pop': 0, 'rge1_notclosed_after_neg': 0, 'max_M_over_cap': 0.5}

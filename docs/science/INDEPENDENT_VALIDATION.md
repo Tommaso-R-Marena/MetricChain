@@ -147,6 +147,23 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   sources; no error or warning line).  Statements read against the note: not yet done line
   by line by the coordinator — the workstream's own discrepancy list (four items) is in
   `L1_REPORT.md`.
+* **R6 (review of the cost of the nested adaptive algorithm, theory report §§11.18–11.19):**
+  by the coordinator — `separation.py 1.0 1000,1350,1400` re-run (identical: `ln C_max` =
+  126.3, 150.8, 154.0 against `ln LB_na` = 110.9, 149.0, 155.0); **the two lower-bound
+  columns of the separation table recomputed with independent code**
+  (`experiments/science/pi_inference/nonadaptive_lb_crosscheck.py`: ten numbers at five
+  `(u, n)`, identical to the report's); the central count re-derived (`M·p(s_je^{−x}) ≤
+  [4KJe·s_j/(ℓe^b)]·[4e^{b+1}ℓ/s_{i+1}] = 16KJe²e^{j−i−1} < 16KJe²e^x` — the two factors `e^b`
+  cancel) and the corner inequality `E_1 ≥ (n_o+2)E_0` of the cap remark; the reviewer's
+  two Lean files compiled (they print the axioms of eleven statements of the theory
+  division: all `[propext, Classical.choice, Quot.sound]`); **the sampler bias confirmed
+  independently** (`numpy_binomial_bias_check.py`: mean 91.26 for 92 at `n = 2⁶¹`, `z = −47`;
+  a Poisson control is unbiased).  **Not done by the coordinator:** the re-derivation of
+  the whole proof (the reviewer's), the 4 075 literal runs and the campaigns (not
+  re-run), the `C_max` column (it reproduces the engineering division's published
+  values according to the reviewer).  *Kind of check:* an independent review with an
+  independent derivation, and an independent replication of the numerics, by one
+  reviewer.
 * **P2 (class constants in rotamer variables on a fixed backbone):**
   `verify_openmm_direct_sc.py` re-run by the coordinator (9 s, OpenMM 8.6.1; Ser₃ on the
   strand, 729 assignments, OpenMM's own `CustomGBForce` and force groups, explicit loops,
@@ -234,8 +251,7 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
 
 ## 3. Not validated by us
 
-Everything not listed above.  In particular the paper proofs of theory report §§11.16–11.21
-and 11.23 (refereed by the theory division's own referees R5–R10; §§11.18–11.19 are under
-review by our workstream R6) have not
+Everything not listed above.  In particular the paper proofs of theory report §§11.16–11.17,
+11.20–11.21 and 11.23 (refereed by the theory division's own referees R5–R10) have not
 been reviewed by this division; statements of ours that lean on them say so
 (`docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`, "Dependencies").

@@ -321,3 +321,92 @@ has no block above 2^43 points, is kept).  e2e / three / capcorner / capsearch (
   explicit cubes) -- unaffected.  adversarial.py: cells 4 (n_o = 24) and 5 (n_o = 40, Mbar = 3.5e13) unaffected; cells 0 (n_o = 100) and
   2 (n_o = 80), 199 runs, can contain such blocks -> to be re-run with the corrected sampler after the second pass.
 - Second pass so far (22:07): B_reducedK 400 runs, A_ties 500 runs, B_invalid 400 runs completed (machine load now ~6, was 10-15).
+
+### Step 26 (SECOND PASS finished; report regenerated from it)  [22:00 - 22:21 machine time]
+run_pass2.sh (corrected sampler; seeds 212-220; machine load ~6): A_ties 500 runs requested (465 completed, 35 beyond the 2^83 limit),
+A_medium 313 before its time limit (302 + 11 discarded), D_2L 239 (time limit; all 8 cells, 29-30 runs each), B_reducedK 400 (396 + 4),
+B_invalid 400 (390 + 10), B_lazy 260 (steep costs) + B_lazycheap 60 (59 + 1), D_2L_off 300.  With A_small (1664, unchanged):
+  4075 literal runs = 2735 with theorem constants and valid answers (2L+ 2431; 2L 239 + 65 of D_2L_off)
+                    + 493 with K reduced and valid answers (396 + 97) + 847 with invalid answers (390 + 319 + 138);
+  0 violations of an every-run claim, 0 violations of a good-event claim on a run where the events hold;
+  the events of the proof failed in NO run with theorem constants and valid answers (as in pass 1);
+  reduced K: events failed in 65/135 (K=8), 33/133 (K=20), 3/128 (K=50) runs; 2L: 6/69 (K=10), 0/28 (K=30);
+  B_lazy steep: 142 of 260 runs stopped by the query budget, none above C_max (max ln q - ln C_max = -0.0060); cheap: 0 of 59;
+  223 runs of the second pass drew more than 1e16 outer points (pass 1: 173).
+  maxima (valid, 2L+): count inequality 0.869, sampled count 0.344 of cnt, calls 0.206, largest sample 2.07 M-dagger = 0.843 of the cap;
+  2L: largest sample 3.03 M-dagger = 0.556 of 2e M-dagger.
+The outcome of the two passes is the same; the report's tables are pass 2 (pass 1: data/pass1/, summary_all_pass1.json).
+Census of cells per campaign (make_section3.py now prints it) compared with the table descriptions; three descriptions corrected
+(A_ties: 6 behaviours incl. the two adversaries; B_reducedK: 5 cells x 3 values of K; A_medium: the pass-1 remark on 12 extra runs removed).
+
+Adversarial search, second pass (run_adv2.sh, corrected sampler, 210 s each): cell 0 (n_o=100) ineq: 176 completed of 178, best 0.448;
+cell 2 (n_o=80) calls: 122 of 122, best 0.203; cell 0 cap: 61 of 66, best 0.000 (uninformative: M-dagger = 4.7e27 > 2^83).  No violation.
+adversarial.py now records completed/discarded runs (before, the "evaluations" of cells 0 and 2 included discarded attempts; the first-pass
+records of these cells are archived in data/pass1/adversarial_pass1.jsonl and not counted).  Total now 976 completed runs (983 attempted).
+
+### Step 27 (the finite-n separation WITH the lowered cap of 40c5bd7: separation_cap.py)
+The tables of Step 17 already contained ln C_max with M-bar replaced by 2 max{e^lam M-dagger, M-ddagger} (column lnCmax_cap), but only
+for phi <= 0.60 (0.45-0.55 at the refinement sizes), and I had not looked at where the crossover moves.  New scan, phi in {0.50,...,0.70}:
+  u=1:   n=1275: ln C_max^cap 140.56 (phi .55) vs ln LB_na 140.50 (above);  n=1300: 142.95 vs 144.00 (BELOW)
+  u=2:   n= 475: 156.38 vs 155.60 (above);                                   n= 500: 162.53 vs 163.78 (BELOW)
+  u=1/2: n=4000: 121.16 vs 120.61 (above);                                   n=4150: 124.08 vs 124.99 (BELOW)
+and below at every larger size of both grids.  Best phi with the cap: 0.55 (0.60 is worse); without the cap 0.50 stays best on the wider grid.
+In this design Delta = ceil(lam/u) = 1 <= r-dagger in every cell (flag rdag_ge_Delta in the data), so only the main branch of the cap proof is used.
+Budget used: C_max^cap = 1 + 2 Mcap + sum_l min{2 Mcap, (J+1) cnt(x_{l-1})} C_l, Mcap = 2 max{e^lam M-dagger, M-ddagger}, K, m_max, delta' unchanged
+(valid: every sample is K or < Mcap, so the good-event cost is below it; the abort rule enforces it otherwise).
+So: crossover 1400 / 540 / 4700 for Theorem 11.56 as at 5ed4072; 1300 / 500 / 4150 with the cap remark of 40c5bd7 (first grid size at which the
+inequality holds; upper bounds for the least n).  Also corrected in the report: "at 1380 the two agree to the first decimal" -> above by 0.05;
+the drop of ln C_max with the cap is 0..12.6 at fixed phi (not "0.1..11"); "calls per level up to 0.38" (flat instance) -> 0.40 (three runs).
+
+### Step 28 (report regenerated)
+make_section3.py -> logs/summary_final_pass2.txt, data/summary_all.json; fill_report.py (in place: 3.2, 3.4, 3.6-3.8); finalize2.py (new,
+re-runnable: section 1, verdict table, m6, 2.5, R6-E2, section 8 from data/summary_all.json -> data/headline_counts.json).
+Backup of the report before this regeneration: logs/R6_REPORT_before_pass2_fill.md.
+
+### Step 29 (after all runs: whom does the sampler bias concern?  three sampling routines read; one tested)
+Until now I had read no code of the authors, their referees or the engineering division.  With all my runs finished, I read ONLY the
+sampling routines, to make finding m8 definite:
+- engineering division, src/metricchain_eng/twolevel/simulate.py (git show origin/research/ubuntu-engineering:..., commit a2f6dc7), lines 22-131:
+  `stable_multinomial(rng, size, lpmf)` = sequential `rng.binomial(left, pc)` over the shells d = 0, 1, ... (lpmf = shell law in the order of d),
+  so the first shells are drawn with left ~ block size: same construction as my first-pass sampler => same defect whenever a block has >= 1e16
+  points.  Their job M-011: design b=.5, lam=.5, eta=1/4, eta'=theta=.1, n_i=6, (u,n_o) in {(1/2,300),(1,120),(2,48)}; my Params2LP (one-rung ladder
+  assumed) gives M-dagger = 2.8e12, 4.5e16, 3.4e17 (K = 910..937; they report 953..979, so their ladder or constants differ slightly).
+  So blocks >= 1e16 can occur in two of their three cells.  [H: inspection; NOT run.]
+- workstream K, experiments/workstreams/K/stable_multinomial.py (whole file): binary splitting over cells sorted by probability; nodes with
+  n p <= 30 and p < 1e-6 by own inversion, every other node by rng.binomial.  A node is in the biased regime iff its count >= 1e16 and its
+  expected left count is in ~[60, 1e4].  test_K_sampler.py (read-only import with python3 -B; no bytecode written; `git status` shows no change
+  outside my directory and my report): on the law of that file's self-test (shells of Q_200) NO node is in the window at block sizes
+  2^50, 2^59, 2^61, 2^62 (right-spine expected left counts at 2^61: 0.014, 1.2e13, 5.5e16, ...), and tail counts with means 8..4000 show no
+  bias (4000 repetitions, 2 seeds, all |z| <= 1.9).  For the laws of K_REPORT 6.8: not checked.
+  => my first guess ("K's sampler is probably affected") was WRONG for its self-test law; the report says only what was measured.
+- referee R8, experiments/reviews/R8/r8_pops.py lines 280-330: binom_safe: inversion for mean < 40, numpy for p >= 1e-7, Poisson for p < 1e-7:
+  outside the biased regime by construction.
+Report: m8 rewritten with these three findings; R6-T5 and R6-E3 rewritten; section 0 / 3 / 3.7 now say exactly what was read and when.
+
+### Step 30 (negative controls re-run with the corrected sampler; R4 acknowledged; small corrections)
+- run_mut2.sh: the five mutation campaigns again (seed 7, corrected sampler): detection counts identical to the first pass
+  (mut_summary.py, new: 24/47 with (iv) in 8; 1/47; 26/47; 48/48; 26/48 with one invalid final bracket).  New observation recorded in the
+  report: in the single run that detects "no Harper term", the cap of 40c5bd7 is violated as well (its proof uses the Harper term).
+  First-pass files: data/pass1/MUT_*_7.jsonl, data/pass1/mut_summary.json.
+- Read (in part: summary and finding M1) docs/science/workstreams/R4_REPORT.md, which the brief names: R4 found the cost bound of the BATCHED
+  variant (Thm 11.84(ii)) false off the good event (no stopping rule) and exhibited a violating run.  My sentence "nobody had tested invalid
+  inner answers" was therefore too broad; now: "for Algorithms 2L/2L+ this had not been tested ... R4 exhibited the analogous failure for the
+  batched variant".  m1 now cites R7 M1 / R4 M1 as the same family.  A1_REPORT section 8 read (asks for an every-n statement: section 2.9).
+- Labels: [C] added to the legend (two conjectures marked: persistence of the separation for all larger n; the 1/k^2 rate, theirs).
+- Report header: engineering branch read at a2f6dc7; scope sentence (model-relative mathematics, no physical claim).
+- Corollary R6.2: the lower bound is on the expected size of the query set of a non-adaptive algorithm that is correct on the class
+  (not "on some instance"); bracket ratio e^x <-> accuracy x/2 stated.
+
+### Step 31 (final state)  [about 22:45 machine time]
+- Verdict table aligned with the brief's categories: 11.52 "proved with gaps that I close (m1-m3)", 11.54 "proved with a gap that I close (m4)",
+  11.53 machine-checked (statement compared, proof not read), 11.55 / 11.56 / 11.57 / 11.58 proved, cap remark (40c5bd7) proved with a gap
+  that I close (m7), 11.51 not examined.  No critical, no major finding.
+- One more search (for m8): no existing report of the numpy behaviour found in one query (not a claim that it is unreported); logged in section 4.
+- test_binomial sentence in section 3.1 made exact (nine cases, |z| <= 1.2; 46 shells, largest |z| 2.45).
+- All numbers of the report regenerated a last time (make_section3.py, fill_report.py, finalize2.py, mut_summary.py); data/headline_counts.json:
+  4075 literal simulated-oracle runs (2735 theorem constants + valid; 493 reduced K; 847 invalid answers), 142 of 260 lazy runs stopped by the
+  budget, 529 two-level and 19 three-level runs with real brackets, 4500 capcorner runs, 976 + 1609 search runs, 5 x 48 negative controls.
+- git status: nothing changed outside experiments/science/ws_R6/ and docs/science/workstreams/R6_REPORT.md by me (the other entries belong to
+  the workstreams R7 and R8 running in parallel).  No state-changing git command, no lake build, nothing delegated.
+What is NOT done (see report sections 0 and 5): Lean proofs line by line; Theorem 11.51; three levels beyond toy size; a rate / explicit o(n);
+whether the numpy bias touched K's section-6.8 runs or the engineering division's M-011 (inspection only).

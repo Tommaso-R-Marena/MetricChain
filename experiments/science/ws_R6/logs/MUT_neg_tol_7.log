@@ -1,0 +1,37 @@
+MUT_neg_tol seed 7 time 38s
+{
+ "runs": 48,
+ "harness_limit": 1,
+ "closed": 47,
+ "abort": 0,
+ "Gfail": 0,
+ "det_viol": 8,
+ "good_viol": 24,
+ "pop": 26305,
+ "neg": 105,
+ "runs_with_neg": 13,
+ "close_pop": 4,
+ "close_unpop": 43,
+ "close_tail0": 2,
+ "invalid_bracket_any": 0,
+ "maxratio": {
+  "M_over_Mbar": 0.0005761297948467367,
+  "M_over_Mdag": 1.453125,
+  "M_over_capnew": 0.3032653298563167,
+  "lnq_over_lnCmax": 0.8231915687488787,
+  "q_over_Cvi": 0.00037393037575073545,
+  "calls_over_bound": 0.347683096637331,
+  "used_over_cnt": 0.46357828340563195,
+  "count_ineq": 7.907417076399809
+ }
+}
+VIOLATION {"Kov": null, "L_ext": 5, "b": 2.0, "delta": 0.05, "eta": "1/3", "etap": 0.3333333333333333, "kind": "2L+", "lam": 0.3333333333333333, "n": 80, "n_o": 40, "nu1": 652.3876388301709, "theta": 0.3333333333333333, "u": 1.0} two_plateaus random 1469265226 [] ["('v: count inequality', 153, 0.25, 1.1211544680238588)", "('v: count inequality', 154, 0.25, 1.5646971060148822)", "('v: count inequality', 155, 0.25, 2.183710722650616)", "('v: count inequality', 155, 1.0, 1.0315119062420615)", "('v: count inequality', 156, 0.25, 3.047613817324923)", "('v: count inequality', 156, 1.0, 1.4395908329756584)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 3.0, "delta": 0.05, "eta": "1/2", "etap": 1.0, "kind": "2L+", "lam": 1.0, "n": 40, "n_o": 8, "nu1": 1.0, "theta": 30.0, "u": 1.0} grid_rw center 1073283950 ["('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 28)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 29)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 30)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 31)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 32)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 33)"] ["('v: count inequality', 28, 0.25, 2.3321892833246918)", "('v: count inequality', 28, 1.0, 1.1016482121036222)", "('v: count inequality', 29, 0.25, 6.339547749388433)", "('v: count inequality', 29, 1.0, 2.9945903163156724)", "('v: count inequality', 30, 0.25, 7.10748881715839)", "('v: count inequality', 30, 1.0, 3.3573399912064206)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 2.0, "delta": 0.05, "eta": "1/3", "etap": 0.3333333333333333, "kind": "2L+", "lam": 0.3333333333333333, "n": 300, "n_o": 120, "nu1": 1957.1629164905123, "theta": 0.3333333333333333, "u": 1.0} dip_crit bottom 1875941739 [] ["('v: count inequality', 562, 0.25, 1.0227557827772085)", "('v: count inequality', 563, 0.25, 1.4273706782725217)", "('v: count inequality', 564, 0.25, 1.9920562538006905)", "('v: count inequality', 565, 0.25, 2.7801384592746925)", "('v: count inequality', 565, 1.0, 1.3132444201503024)", "('v: count inequality', 566, 0.25, 3.7447839394981344)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 2.0, "delta": 0.05, "eta": "1/3", "etap": 0.3333333333333333, "kind": "2L+", "lam": 0.3333333333333333, "n": 80, "n_o": 40, "nu1": 652.3876388301709, "theta": 0.3333333333333333, "u": 1.0} cone_half adv_lo 1753345572 [] ["('v: count inequality', 153, 0.25, 1.1211544680238588)", "('v: count inequality', 154, 0.25, 1.5646971060148822)", "('v: count inequality', 155, 0.25, 2.183710722650616)", "('v: count inequality', 155, 1.0, 1.0315119062420615)", "('v: count inequality', 156, 0.25, 3.047613817324923)", "('v: count inequality', 156, 1.0, 1.4395908329756584)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 3.0, "delta": 0.05, "eta": "1/2", "etap": 1.0, "kind": "2L+", "lam": 1.0, "n": 40, "n_o": 8, "nu1": 1.0, "theta": 30.0, "u": 1.0} rw_uniform exact 1094029749 ["('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 28)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 29)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 30)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 31)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 32)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 33)"] ["('v: count inequality', 28, 0.25, 2.3321892833246918)", "('v: count inequality', 28, 1.0, 1.1016482121036222)", "('v: count inequality', 29, 0.25, 6.339547749388433)", "('v: count inequality', 29, 1.0, 2.9945903163156724)", "('v: count inequality', 30, 0.25, 7.10748881715839)", "('v: count inequality', 30, 1.0, 3.3573399912064206)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 2.0, "delta": 0.05, "eta": "1/3", "etap": 0.3333333333333333, "kind": "2L+", "lam": 0.3333333333333333, "n": 80, "n_o": 40, "nu1": 652.3876388301709, "theta": 0.3333333333333333, "u": 1.0} rw_down random 732347575 [] ["('v: count inequality', 153, 0.25, 1.1211544680238588)", "('v: count inequality', 154, 0.25, 1.5646971060148822)", "('v: count inequality', 155, 0.25, 2.183710722650616)", "('v: count inequality', 155, 1.0, 1.0315119062420615)", "('v: count inequality', 156, 0.25, 3.047613817324923)", "('v: count inequality', 156, 1.0, 1.4395908329756584)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 2.0, "delta": 0.05, "eta": "1/3", "etap": 0.3333333333333333, "kind": "2L+", "lam": 0.3333333333333333, "n": 300, "n_o": 120, "nu1": 1957.1629164905123, "theta": 0.3333333333333333, "u": 1.0} platcone adv_lo 1083509135 [] ["('v: count inequality', 562, 0.25, 1.0227557827772085)", "('v: count inequality', 563, 0.25, 1.4273706782725217)", "('v: count inequality', 564, 0.25, 1.9920562538006905)", "('v: count inequality', 565, 0.25, 2.7801384592746925)", "('v: count inequality', 565, 1.0, 1.3132444201503024)", "('v: count inequality', 566, 0.25, 3.7447839394981344)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 2.0, "delta": 0.05, "eta": "1/3", "etap": 0.3333333333333333, "kind": "2L+", "lam": 0.3333333333333333, "n": 300, "n_o": 120, "nu1": 1957.1629164905123, "theta": 0.3333333333333333, "u": 1.0} rw_pm top 94364743 [] ["('v: count inequality', 562, 0.25, 1.0227557827772085)", "('v: count inequality', 563, 0.25, 1.4273706782725217)", "('v: count inequality', 564, 0.25, 1.9920562538006905)", "('v: count inequality', 565, 0.25, 2.7801384592746925)", "('v: count inequality', 565, 1.0, 1.3132444201503024)", "('v: count inequality', 566, 0.25, 3.7447839394981344)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 3.0, "delta": 0.05, "eta": "1/2", "etap": 1.0, "kind": "2L+", "lam": 1.0, "n": 40, "n_o": 8, "nu1": 1.0, "theta": 30.0, "u": 1.0} platcone center 303992514 ["('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 28)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 29)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 30)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 31)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 32)", "('iv: M_j^neg > (1+eta)e^lam nu0 Mdag', 33)"] ["('v: count inequality', 28, 0.25, 2.250198253832808)", "('v: count inequality', 28, 1.0, 1.0629183921468544)", "('v: count inequality', 29, 0.25, 5.423284988734636)", "('v: count inequality', 29, 1.0, 2.5617784346606727)", "('v: count inequality', 30, 0.25, 4.525471395300069)", "('v: count inequality', 30, 1.0, 2.137681322525963)"]
+VIOLATION {"Kov": null, "L_ext": 5, "b": 2.0, "delta": 0.05, "eta": "1/3", "etap": 0.3333333333333333, "kind": "2L+", "lam": 0.3333333333333333, "n": 80, "n_o": 40, "nu1": 652.3876388301709, "theta": 0.3333333333333333, "u": 1.0} alternating mix_tb 1768373432 [] ["('v: count inequality', 153, 0.25, 1.1211544680238588)", "('v: count inequality', 154, 0.25, 1.5646971060148822)", "('v: count inequality', 155, 0.25, 2.183710722650616)", "('v: count inequality', 155, 1.0, 1.0315119062420615)", "('v: count inequality', 156, 0.25, 3.047613817324923)", "('v: count inequality', 156, 1.0, 1.4395908329756584)"]

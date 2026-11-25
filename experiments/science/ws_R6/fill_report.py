@@ -45,8 +45,14 @@ if os.path.exists(_p1):
     P1 = dict(runs=sum(_s1[n]["S"].get("runs", 0) for n in _names), det=sum(_s1[n]["S"].get("det_viol", 0) for n in _names),
               good=sum(_s1[n]["S"].get("good_viol", 0) for n in _names), big=173)
     assert all(_s1[n]["S"].get("G_failed", 0) == 0 for n in ("A_ties", "A_medium", "D_2L"))
+big2 = sum(g(n, "runs_big_blocks") for n in all_names)
+assert g("A_small", "runs_big_blocks") == 0
 byK = S.get("B_reducedK_byK", {})
 byK2 = S.get("D_2L_off_byK", {})
+off_thm_valid = sum(v["runs"] for k, v in byK2.items() if k.startswith("(None") and "'valid'" in k)
+off_redK = sum(v["runs"] for k, v in byK2.items() if not k.startswith("(None") and "'valid'" in k)
+off_invalid = sum(v["runs"] for k, v in byK2.items() if "'invalid'" in k)
+assert all(v.get("Gfail", 0) == 0 for k, v in byK2.items() if k.startswith("(None") and "'valid'" in k)
 
 
 def bk(d, key, field):
@@ -78,9 +84,11 @@ sec_b = f"""### 3.2 Literal runs with a simulated inner oracle (`campaign.py`; d
 
 *Two passes.*  The table is the **second pass**.  A first pass of the same campaigns ({P1.get('runs', 0)} runs, in
 `data/pass1/`) used numpy's binomial sampler directly; I then found that sampler to be biased by up to
-`0.84 %` for blocks of more than `10^16` points (m8 in §2.7), which had affected {P1.get('big', 0)} of those runs.  The
-sampler was corrected (`r6lib.big_binomial`, `test_binomial.py`) and every campaign that can contain such
-blocks was run again with new seeds; `A_small` (no block above `2^43` points) is the same in both passes.
+`0.84 %` for blocks of more than `10^16` points (m8 in §2.7), which can have affected the {P1.get('big', 0)} of those runs
+that drew more than `10^16` outer points.  The sampler was corrected (`r6lib.big_binomial`,
+`test_binomial.py`) and every campaign that can contain such blocks was run again with new seeds
+({big2} runs of the second pass drew more than `10^16` points); `A_small` (largest sample `e^{{{mx('A_small', 'lnM'):.1f}}}`
+points) is the same in both passes.
 The first pass had the same outcome: {P1.get('det', 0)} violations of an every-run claim and {P1.get('good', 0)} of a good-event claim
 in {P1.get('runs', 0)} runs, the events of the proof never failed with the theorem's constants and valid answers.
 The logical content of the tests does not depend on the sampler (the every-run claims, and "the
@@ -108,8 +116,10 @@ Reading.
   {bk(byK, "(8, 'valid')", 'Gfail')} of {bk(byK, "(8, 'valid')", 'runs')} runs at `K = 8`, {bk(byK, "(20, 'valid')", 'Gfail')} of {bk(byK, "(20, 'valid')", 'runs')} at `K = 20`, {bk(byK, "(50, 'valid')", 'Gfail')} of {bk(byK, "(50, 'valid')", 'runs')} at `K = 50`;
   **on every run on which they hold no claim is violated**; the every-run claims hold in all {g('B_reducedK', 'runs')} runs;
   {g('B_reducedK', 'invalid_final')} final brackets were invalid ({g('B_reducedK', 'invalid_final_on_G')} on a run on which the events hold).
-* **Invalid inner answers** (`B_invalid`, `B_lazy`: {inv_runs} runs; nobody had tested this — in every earlier harness
-  (V1) holds by construction).  The statements that Theorem 11.56 makes "for every run, on or off the
+* **Invalid inner answers** (`B_invalid`, `B_lazy`: {inv_runs} runs).  For Algorithms 2L and 2L⁺ this had not been tested:
+  in the harnesses of workstream K, of R8 and of the engineering division (V1) holds by construction, as far as
+  their reports say; the science division's R4 exhibited the analogous failure for the *batched* variant of
+  §11.24, which had no stopping rule (`R4_REPORT.md`, M1; read in part).  The statements that Theorem 11.56 makes "for every run, on or off the
   good event" — closing radius above `r†` at every level left, `M ≤ max(K, 2M_j^neg)`, `M_j^neg ≤ (1+η)e^λν₀M†`,
   `M ≤ M̄`, the cap of `40c5bd7`, the width of every pair returned through the closure test, queries
   `≤ C_max` — **held in all {inv_runs} runs**.  As allowed off the good event, {g('B_invalid', 'invalid_final')} final brackets were
@@ -120,9 +130,10 @@ Reading.
   `e^{{80l}}` — the regime of the theorems, where the last rung dominates — **{LZ.get('steep_abort_cost', 0)} of {LZ.get('steep_runs', 0)} runs stop on the
   query budget**: without the rule their cost would exceed `C_max`.  With the test made *before* the inner
   call the number of queries is `≤ C_max` in every run (runs above `C_max`: {LZ.get('steep_q_gt_Cmax', 0)}; largest
-  `ln(queries) − ln(C_max) = {(LZ.get('steep_max_lnq_minus_lnCmax') or 0):.4f}`).  This is the first execution of the branch that
+  `ln(queries) − ln(C_max) = {('%.4f' % (LZ.get('steep_max_lnq_minus_lnCmax') or 0)).replace('-', '−')}`).  This is the first execution of the branch that
   makes "the cost bound holds always" true (R7's M1).
-* **Algorithm 2L off the good event** (`D_2L_off`, {g('D_2L_off', 'runs')} runs with reduced `K` and/or invalid answers): the
+* **Algorithm 2L off the good event** (`D_2L_off`, {g('D_2L_off', 'runs')} runs: {off_redK} with `K` reduced and valid answers, {off_invalid} with
+  invalid answers, and {off_thm_valid} with the theorem's `K` and valid answers, in which the events never failed): the
   every-run statements of Theorem 11.52 (`r > r†` at every level left, `M ≤ 8Je²M†`, `M < 2eM†`, the width,
   the completed cost display) held in all runs; {g('D_2L_off', 'invalid_final')} final brackets were invalid, {g('D_2L_off', 'invalid_final_on_G')} of them on a
   run on which the events hold; {g('D_2L_off', 'good_viol')} violations of a good-event claim on such runs.
@@ -149,8 +160,9 @@ _unin = [i + 1 for i, r in enumerate(adv) if r["objective"] == "cap" and r["best
 ORD = {1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth", 6: "sixth"}
 adv_note = ""
 if _unin:
-    adv_note = ("(In the " + " and the ".join(ORD[i] for i in _unin) + " row no run with a sample above `K` completed: samples near `M†` exceed my sampler in that\n"
-                "cell, so the row is uninformative.)  ")
+    adv_note = ("(In the " + " and the ".join(ORD[i] for i in _unin) + " row the largest sample of a completed run is below `0.0005` of the cap: in that cell `M†`\n"
+                "exceeds the `2^83` points my sampler can draw, so a run that approaches the cap cannot be simulated and the\n"
+                "row is uninformative.)  ")
 ADV1 = []
 _a1 = os.path.join(HERE, "data", "pass1", "adversarial_pass1.jsonl")
 if os.path.exists(_a1):
@@ -219,7 +231,8 @@ harness `3.7·M†` (91 % of the cap) at the same `n_o`, `u`, `λ` (its other pa
 
 ### 3.7 Overlap with ENG-RES-0008
 
-Read after my implementation was written; their code was neither run nor read.  *Same:* the algorithm
+Read after my implementation was written; their code was not run, and of it I read only one sampling
+routine, after all my runs were finished (m8 in §2.7).  *Same:* the algorithm
 (K_REPORT §2.2 with errata m1, m10), radial product instances with a reference shell and one inner
 offset, the inner behaviours "bottom", "top", "random", the reduced-`K` experiment, the checks (iii)–(vi).
 *Their side only:* expectation-level ("mean") runs with a search over instances at `n` up to `128 000`
@@ -240,14 +253,19 @@ the theorem's `K` and no violation.
                                                  # A_ties 500 212, A_medium 500 213, D_2L 240 216, B_reducedK 400 214,
                                                  # B_invalid 400 215, B_lazy 260 220, B_lazycheap 60 218, D_2L_off 300 217
                                                  # (first pass, seeds 2, 12-20: data/pass1/)
-    python3 campaign.py MUT_neg_tol 48 7 2       # mutations: MUT_noharper, MUT_maxform, MUT_close_at_no, MUT_q_no_eta
+    python3 campaign.py MUT_neg_tol 48 7 2       # mutations: MUT_noharper, MUT_maxform, MUT_close_at_no, MUT_q_no_eta;
+                                                 # then python3 mut_summary.py
     python3 capcorner.py 1500 41                 # seeds 41, 42, 43
     python3 e2e.py 600 21 1 ; python3 e2e.py 400 22 16 ; python3 three.py 40 61 6
-    python3 adversarial.py <cell 0..6> <ineq|count|calls|cap|mbar|cost> <evaluations> <seed> ; python3 capsearch.py 71 200
+    python3 adversarial.py <cell 0..6> <ineq|count|calls|cap|mbar|cost> <evaluations> <seed>
+                                                 # run: cell 5 ineq, seed 99 (a test of 23 runs); 4 cap 2000 32; second pass
+                                                 # (corrected sampler, 210 s each): 0 ineq 400 231; 2 calls 400 233; 0 cap 400 234
+    python3 capsearch.py 71 200
     python3 everyn.py 1.0 0.5 4000,16000 ; python3 separation.py 1.0 250,...,8000 ; python3 flat_exact.py 1.0 1000 0.80
+    python3 separation_cap.py 1.0 1150,1200,1250,1275,1300      # likewise 2.0 400,...,500 and 0.5 3700,...,4300
     python3 check_tail_lemmas.py ; python3 check_K4cd.py ; python3 tau2.py ; python3 crosscheck_lb.py
     python3 test_binomial.py ; python3 numpy_binomial_bias.py
-    python3 make_section3.py                     # every number of section 3.2, 3.4, 3.6 from the data files
+    python3 make_section3.py ; python3 fill_report.py ; python3 finalize2.py   # every run count of the report from the data files
     cd /home/user/MetricChain && lake env lean /home/user/MetricChain/experiments/science/ws_R6/lean/R6Axioms.lean    # and R6Axioms2.lean
 
 Campaigns are stopped by a time limit when the machine is loaded; the run counts above are those of the

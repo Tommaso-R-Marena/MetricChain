@@ -1,1 +1,23 @@
-{"total": 3686, "valid_theorem": 2618, "reducedK": 264, "invalid": 804}
+{
+ "total": 4075,
+ "theorem_constants_valid": 2735,
+ "of_which_2LP": 2431,
+ "of_which_2L": 304,
+ "reduced_K": 493,
+ "invalid_answers": 847,
+ "runs_2L": 539,
+ "runs_2LP": 3536,
+ "lazy_steep_abort_cost": 142,
+ "lazy_steep_runs": 260,
+ "e2e_runs": 529,
+ "adversarial": 976,
+ "capsearch": 1609,
+ "close_pop_A": 313,
+ "closed_A": 2431,
+ "count_ineq_max_A": 0.8690337323776656,
+ "D_2L_off": {
+  "theorem_valid": 65,
+  "reduced_K": 97,
+  "invalid": 138
+ }
+}

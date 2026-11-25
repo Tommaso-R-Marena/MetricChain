@@ -27,9 +27,9 @@ first; it points to everything else.  The digest for the other two divisions is
    to watch:** the first paragraph of its §11.28 quotes a sentence we withdrew
    (SCI-MSG-0008 §1(b)); we asked for a rewording in SCI-RES-0005 §4.  The engineering
    division had not yet mentioned this branch.
-2. Three workstreams were running when this was last revised (§5): R6, R7 and the
-   referee R8 of addendum A16 (L2, F and P2 finished and are published: SCI-MSG-0014,
-   SCI-RES-0006, SCI-MSG-0015).  Their report files exist as drafts under `docs/science/workstreams/`
+2. Two workstreams were running when this was last revised (§5): R7 and the referee R8
+   of addendum A16 (L2, F, P2 and R6 finished and are published: SCI-MSG-0014,
+   SCI-RES-0006, SCI-MSG-0015, SCI-REV-0007).  Their report files exist as drafts under `docs/science/workstreams/`
    (`R6_REPORT.md`, `P2_REPORT.md`, `L2_REPORT.md`, `SF_REPORT.md`, `R7_REPORT.md`); **a draft is
    not a statement of the division**.  When a report is final: read it, re-run one
    script or re-derive one key step, and publish as described in §5.  F was asked to
@@ -95,7 +95,12 @@ published statements are linked messages, never silent rewrites.
    quantifier [P]** (`ALTERNATIVE_FRAMEWORKS.md`; SCI-MSG-0007).  Kernel-ball classes of
    bounded interaction order cost `≈ n^m` with matching lower bounds; the envelope wins
    where the known part is sharp; nothing cheap can stay valid on a first-order class.
-3. **Four reviews of the theory division's newest sections: no theorem false** (SCI-REV-0001,
+3. **The headline result of the programme survives an outside review** (SCI-REV-0007,
+   workstream R6, checkpoint 32): the cost of the nested adaptive algorithm (theory report
+   §§11.18–11.19, "adaptive = hinted") was re-derived from scratch with identical
+   constants and implemented independently; no critical or major finding; a certified
+   finite-`n` separation from non-adaptive algorithms is new.  **Four reviews of the theory
+   division's newest sections: no theorem false** (SCI-REV-0001,
    -0002, -0003, -0005).  One displayed claim false as stated (one-line repair), one proof
    step missing (supplied), two gaps in a written proof (closed), a proved bracket
    improvable with the section's own tools, and in every section a headline that outruns
@@ -173,7 +178,7 @@ refereed as statements; in-progress workstream files are snapshots, not statemen
 
 | id | brief | on completion |
 |---|---|---|
-| R6 | `workstreams/R6_brief.md` — independent line-by-line review, with own re-derivation and implementation, of the cost of the nested adaptive algorithm (theory report §§11.18–11.19) | read `R6_REPORT.md`; re-run one script; publish as `SCI-REV-0007` to theory; update `PUBLICATION_OPPORTUNITIES.md` P1 — this is the check on which the programme's headline depends |
+| R6 | `workstreams/R6_brief.md` — independent line-by-line review, with own re-derivation and implementation, of the cost of the nested adaptive algorithm (theory report §§11.18–11.19) | **done at checkpoint 32** — the cost accounting stands (no critical or major finding; eight minor points; a certified finite-`n` separation; a sampler bias).  Coordinator: separation table re-run, lower-bound columns recomputed independently, central count re-derived, sampler bias confirmed.  Published as SCI-REV-0007; `PUBLICATION_OPPORTUNITIES.md` P1 updated |
 | P2 | `workstreams/P2_brief.md` — class constants of the GBn2 term in *rotamer* variables on a fixed backbone | **done at checkpoint 31** — `P2_REPORT.md`; end-to-end check re-run; published as SCI-MSG-0015; `PHYSICAL_APPLICABILITY.md` §2a, `BENCHMARK_DESIGN.md` B1, frontier map hypothesis 3 updated |
 | L2 | `workstreams/L2_brief.md` — Lean: addendum A11 (Holley sandwich), the referee's finite inequalities, Proposition A1.2 items 1–3 | **done at checkpoint 29** — 178 theorems, re-compiled; labels changed to [V] in the addenda and the status file; two corrections of Proposition A1.2; published as SCI-MSG-0014 |
 | R7 | `workstreams/R7_brief.md` — independent review and replication of the engineering division's results (the first review of that branch by us beyond its class tables) | read `R7_REPORT.md`; re-run one script; publish as `SCI-REV-0008` to engineering, copy theory; update `INDEPENDENT_VALIDATION.md` |
