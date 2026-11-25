@@ -20,6 +20,7 @@ runs in seconds to a few minutes; not part of `scripts/audit_all.sh`).
 | `s_check5.py LP_EXACT_TXT` (`out_s_check5.txt`) | the eleven dual certificates of Proposition 11.72(b) in exact rational arithmetic with own code (multipliers read from `experiments/workstreams/S/out/lp_exact.txt`) | §11.22 |
 | `s_check6.py S_CODE WITNESS W` (`out_s_check6.txt`) | the explicit bridge with 166 199 beads behind "`γ` is not identically zero": built by the workstream's builder, checked and counted with own code | §11.22 (Proposition 11.72(e)) |
 | `s_check7.py` (`out_s_check7.txt`) | own exact dual certificates (integer multipliers) for the chain-marked cluster programme: the twelve rows of `𝒦₂` and the three lower bounds for the gauche density of Proposition 11.72(c) | §11.22 |
+| `meanfield/` (own README) | exploration, not a result: type-level exponents for known parts that are functions of the type (Curie–Weiss), the pair identity with cone formulas, dip exponents from their definition, cones around shells | research log (entry after the seventh checkpoint of cycle 10); `docs/workstreams/T_brief.md` |
 
 `DATA` is the directory of the other division's class tables
 (`git archive origin/research/ubuntu-engineering experiments/eng/chain_cover/data | tar -x -C <dir>`,

@@ -1222,6 +1222,36 @@ THY-REQ-0008 (ground states for the seven open vertices; walks against bridges a
 `10²`–`10³` beads; the plateau by exact set cover; off-lattice distance entropy).  The other
 division's branch was unchanged at `db56d05` at every fetch of this checkpoint.
 
+### After the seventh checkpoint: known parts that are functions of the type — exploration, and workstream T (2026-11-25)
+
+The first item of the list below was started at once.  A type-level exploration by the
+coordinator (`experiments/coordinator_checks/meanfield/`, coarse grids, no proofs — not a
+result) for known parts `f(x) = n·φ(|x|/n)` (Curie–Weiss):
+
+* Theorem 11.61(a), (b) use only the permutation symmetry of the reference measure
+  (checked against the proof in `F_REPORT.md`): for *every* known part that is a function
+  of the type the type-stratified (flat-histogram) sample is optimal among non-adaptive
+  algorithms up to a polynomial factor, for every `n`.  To be stated as a corollary once
+  the workstream has confirmed it.
+* Convex rate function (one phase): the cone formulas of §11.20 with `KL(·‖p)` replaced by
+  the rate function `I` of the type satisfy the pair identity with the flat-histogram
+  reference and fail it with the zero residual, as with a field; the dip exponent of the
+  reference computed from its definition agrees with the formula.
+* **Two phases (`βJ = 1.5`, `u = 1`): single cones are not extremal.**  The dip exponent of the
+  flat-histogram instance from its definition is `≈ 0.026` at accuracy zero, against `0.011`
+  from the cone formula and `0.009` for the best additive instance; the cone-based
+  non-adaptive exponent violates the pair identity with it by a factor ten, and cones
+  around *shells* (a sphere of configurations in the barrier type class, at the radius of
+  the uniform-cube Gibbs shell) restore it within the grid error.  If this stands, at
+  phase coexistence the hardest instance is the multicanonical one, not an additive one.
+
+Workstream T (`workstreams/T_brief.md`) was commissioned to establish what is true:
+every-`n` type-level statements, the convex case step by step against the proofs of
+workstream F, the two-phase case with accurate numerics and rigorous lower bounds, the
+status of the isoperimetric statement when the reference is not a maximum of additive
+instances, prior art on optimality of the multicanonical ensemble.  Its output will be in
+the session's scratch directory (`ws/T/`) until integrated.
+
 ### Resume here (cycle 10, seventh checkpoint)
 
 Verified state: every module under `proofs/` (49 files) builds with zero warnings and is walked
@@ -1233,8 +1263,8 @@ Machine-checked: §11.21.  **Checked by the coordinator with independent code, n
 referee:** §11.22.  **Not refereed:** the revised Theorem 11.44, Proposition 11.50.  **Not
 checked by anyone:** the two-level algorithms at scale with real inner brackets on non-flat
 instances, or with four levels (THY-REQ-0001); the nested algorithm with a field end to
-end; Theorem 11.63 on sets without symmetry for `n > 6`.  Nothing is running.  In priority
-order:
+end; Theorem 11.63 on sets without symmetry for `n > 6`.  Running: workstream T (item 1 below;
+see the entry above).  In priority order:
 
 1. **Known parts with interactions** — the largest open item of the query-complexity
    theory (§12 item 2(d)(v)).  The natural first case, not yet attempted: a known part that
