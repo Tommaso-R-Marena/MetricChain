@@ -636,7 +636,12 @@ until the interval is narrow enough.  The cost is the best possible with a hint 
 residual is flat, and at worst `e^{n·min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}}` — which no procedure that
 fixes its sample points in advance can beat (Theorem 11.45), so a producer should spend a few
 adaptive evaluations first: a point and its neighbours detect a cone, and then two more
-evaluations determine it.  Exact equality of values
+evaluations determine it.  (In the worst case over the class adaptive procedures can do as
+well as procedures with a hint, exponent `KL((Λ₁+ε₁)/u ‖ ½)` — theory report §11.18 — but the
+nested algorithm that shows this is not something to run: at every size that can be
+simulated it needs more evaluations than the two-sample bracket above.  What carries over
+to practice is its idea: certify how *few* configurations lie above a level before spending
+accuracy on them.)  Exact equality of values
 is assumed; with numerical tolerances the comparison and the envelope must be widened
 consistently.  No kernel for such transcripts is implemented here.
 
@@ -919,7 +924,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 147 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 164 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  The audit script runs it, and starts with a self-test in which
@@ -928,4 +933,4 @@ it as the executable reading of the schema and as a regression oracle for faster
 
 Synthetic stress tests and tightness benchmarks: `experiments/falsify_conjectures.py`
 (counterexample search for every theorem) and `experiments/separation_benchmarks.py`
-(B1–B12; numbers quoted in the theory report).
+(B1–B13; numbers quoted in the theory report).

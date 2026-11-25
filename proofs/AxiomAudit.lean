@@ -41,6 +41,7 @@ import proofs.Frontiers.SoftGapIndependence
 import proofs.Frontiers.NonAdaptive
 import proofs.Frontiers.LinearClass
 import proofs.Frontiers.LinearKernel
+import proofs.Frontiers.HintRecursion
 import proofs.AuditCommand
 
 /-!
@@ -370,6 +371,19 @@ import proofs.AuditCommand
 #print axioms MetricChain.contactTriangle_verified
 #print axioms MetricChain.contactTriangle_bound
 #print axioms MetricChain.contactTriangle_class_nonempty
+#print axioms MetricChain.HintRecursion.superSolution_le_hint
+#print axioms MetricChain.HintRecursion.iterates_lt_hint_add
+#print axioms MetricChain.HintRecursion.step_from_hint_le
+#print axioms MetricChain.HintRecursion.klBin_shift
+#print axioms MetricChain.HintRecursion.gaussPair
+#print axioms MetricChain.HintRecursion.gauss_hint_superSolution
+#print axioms MetricChain.LayerCake.level_mul_exceed_le_mean
+#print axioms MetricChain.LayerCake.mean_le_layer_cake
+#print axioms MetricChain.LayerCake.mean_le_upper
+#print axioms MetricChain.LayerCake.upper_le_width
+#print axioms MetricChain.LayerCake.fibre_sum_le
+#print axioms MetricChain.LayerCake.close_points_bound
+#print axioms MetricChain.LayerCake.negligibility_threshold_le
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp
@@ -1374,6 +1388,46 @@ theorem pairRes_envelope_tight_witness :
   · have hk0 : k = 0 := by omega
     subst hk0
     simp
+
+/-- **Witness for `superSolution_le_hint` and `iterates_lt_hint_add` (the recursion of theory
+report §11.18).**  In the small-slope limit the hinted exponent, continued by zero, is a
+positive nonincreasing bounded function with `T ≤ R[T]` (`gauss_hint_superSolution`), so the
+hypotheses of both theorems are satisfied by something other than zero, and the conclusion
+`T ≤ θh` holds with equality: the bound is attained. -/
+theorem hintRecursion_witness {g : ℝ} (hg : 0 < g) (hg1 : g < 1) :
+    HintRecursion.gaussHintClip g ≤ HintRecursion.gaussHint g ∧
+      HintRecursion.gaussHintClip g = HintRecursion.gaussHint g ∧
+      0 < HintRecursion.gaussHintClip g ∧
+      ∀ η : ℝ, 0 < η → ∃ k : ℕ, (fun (_ : ℕ) => HintRecursion.gaussHintClip) k g
+        < HintRecursion.gaussHint g + η := by
+  have hanti : ∀ x y : ℝ, 0 < x → x ≤ y →
+      HintRecursion.gaussHintClip y ≤ HintRecursion.gaussHintClip x := by
+    intro x y _ hxy
+    unfold HintRecursion.gaussHintClip
+    have h1 : min x 1 ≤ min y 1 := min_le_min hxy le_rfl
+    have h2 : min y 1 ≤ 1 := min_le_right _ _
+    nlinarith
+  have hbdd : ∀ x : ℝ, 0 < x → HintRecursion.gaussHintClip x ≤ 1 := by
+    intro x hx
+    unfold HintRecursion.gaussHintClip
+    have h1 : 0 ≤ min x 1 := le_min hx.le zero_le_one
+    have h2 : min x 1 ≤ 1 := min_le_right _ _
+    nlinarith
+  have hnn : ∀ x : ℝ, 0 < x → 0 ≤ HintRecursion.gaussHintClip x := by
+    intro x _
+    unfold HintRecursion.gaussHintClip
+    positivity
+  refine ⟨HintRecursion.superSolution_le_hint HintRecursion.gaussPair
+      HintRecursion.gauss_hint_superSolution hanti hbdd g hg hg1,
+    HintRecursion.gaussHintClip_eq hg1.le, ?_, ?_⟩
+  · unfold HintRecursion.gaussHintClip
+    rw [min_eq_left hg1.le]
+    have : 0 < 1 - g := by linarith
+    positivity
+  · intro η hη
+    exact HintRecursion.iterates_lt_hint_add HintRecursion.gaussPair
+      (fun _ => HintRecursion.gaussHintClip) (fun _ => HintRecursion.gauss_hint_superSolution)
+      (fun _ _ _ => le_rfl) (fun _ => hanti) hbdd (fun _ => hnn) hg hg1 hη
 
 end MetricChain.NonVacuity
 

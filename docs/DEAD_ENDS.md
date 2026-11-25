@@ -978,3 +978,64 @@ a reader: three of the four sentences were contradicted by statements a few page
 them.  And weak numbers are errors too — "at least half" where the truth is "all" hid the
 one-line reason.
 
+## D45. Adaptive algorithms without a hint: five wrong accountings, one gap in the algorithm, and the lower bounds that are not there (cycle 10; workstream H, harness XV.3)
+
+The result of theory report §11.18 — adaptive algorithms without a hint reach the hinted
+exponent — came out of more wrong arguments than any other in this project.  All of them
+concern the same step: *how many sampled points need which inner accuracy*.
+
+1. **The coordinator's multilevel scheme with a single threshold** (brief of workstream H, step
+   3): "an outer sample whose fibre average is `t e^{−G}` needs only a one-sided inner bound at
+   gap `G`", from which the recursion `T_{k+1} = a·T_k/(a − h + T_k)` was derived.  **False as an
+   accounting.**  One-sided certificates "`Z_a ≤ t`" bound `Σ_a min(Z_a, t)` only by `M·t`, whereas
+   the main term can be as small as `K·t`; what a single-threshold bracket needs are gaps
+   measured from a tolerance on the *estimate*, and then Markov's inequality gives no bound
+   on the number of samples at small gap.  Counterexample ("trap", found independently by the
+   coordinator and by the workstream): a flat bulk with a bump of radius just above the
+   critical one in the outer coordinates, with flattened cones as inner landscapes whose
+   plateaus are tuned to the required gap; the single-threshold scheme pays
+   `φ θ_na(ε₁/φ) + (1 − φ) θ_na(≈ 2ε₁/(1 − φ))`, which tends to `a` as `ε₁ → 0`: no gain.  The repair is a
+   *ladder* of levels with exceedance probabilities in place of strata (the layer cake).
+2. **Three recursions of the workstream before the right one** (its report, §2.8; outputs kept
+   in its directory).  v1 counted the samples within gap `γ` of a level as `e^{n(γ − g₁)}` — the
+   negligibility tolerance does not reduce that count.  v2 and v4 forgot that the first
+   negligible level above a bulk already needs `e^{nβ}` samples.  v2 and v4 produce levels
+   *below* the hinted exponent and are thereby refuted by the lower bound of Theorem 11.25(a);
+   v1 passes that test by luck.  The same mistake as v1 is mutation XV.2 M4 of the harness.
+   **The test "no level of a recursion may lie below `θ_hint`" is a necessary condition that
+   every accounting must pass**; for the correct recursion it is a theorem (`R[θ_hint] = θ_hint`,
+   Theorem 11.53(b)).
+3. **The coordinator's accounting with the tail lemma at every level** ("CLOSE"): evaluated by
+   the workstream (`0.58`–`0.60 θ_na` at two levels), **not proved**; it would need two-sided inner
+   accuracy on the samples that carry each stratum.  Instance by instance it is incomparable
+   with the layer-cake scheme.  Not used.
+4. **The closure test as first written** (workstream report §2.6 and the first draft of
+   Theorem 11.52): the radius `r` is the least one with `|B(n_o, r)| ≥ 2^{n_o} q`, and the tail
+   lemma was applied at that radius also when it is `n_o`.  But the tail lemma needs a point
+   outside the super-level set; while every sampled fibre lies above the level (`q = 1`) the
+   "ball" is the whole cube and the bound is false.  With a small outer block and a large
+   accuracy the algorithm then closes at the lowest level with an upper end below the mean
+   (first instance of harness XV.3 in its first run; mutation XV.3 M3).  Fix: no closure at
+   `r = n_o`.  The parameter choices used in the convergence proof were not affected, the
+   statement of the theorem for arbitrary parameters was.
+5. **Lower bounds above the hinted exponent — none.**  Seven families tried by the workstream
+   (decoy cones; a rough background from a random code; a low plateau with a hidden dip;
+   populations of flattened cones with rare exceptions; graph-type non-product instances;
+   long thin valleys; stability versions of Harper's theorem as an algorithmic tool) all cost
+   at most `e^{nθ_hint}` to resolve, and now a theorem says that nothing else is possible.
+   Long valleys of the Aldous type carry no mass under the constraint that the oscillation
+   is at most `un`; known stability theorems for Harper's inequality (Keevash–Long;
+   Przykucki–Roberts) need a slack `1 + O(1/n)` where this problem has `e^{Θ(n)}`.
+6. **A numerical trap.**  The recursion iterated on a grid with a conservative (one-sided)
+   interpolation stalls 0.5–2 % above `θ_hint` at every accuracy, which reads like a limit
+   strictly above the hinted exponent.  With piecewise-linear interpolation the residual
+   falls to `0.35 %` of `a` after 14 levels and keeps falling; the limit is `θ_hint` by Theorem
+   11.53(d).
+
+*Lesson.*  For a nested randomised algorithm the validity of the output was never in doubt
+after the first day; its cost was wrong five times.  Three things helped, in this order: a
+necessary condition from an independent lower bound; writing the count as one inequality
+with explicit constants, in which a cancellation becomes visible (`close_points_bound`); and
+running the logic at small size with a simulated inner oracle, which found the one gap that
+all readers had missed.
+

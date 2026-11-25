@@ -86,3 +86,27 @@ class-wide upper bound was not found; Theorem 11.44 is a routine combination.  T
 entry of this file "whether the threshold of Theorem 11.25 … [is] known in the literature on
 Monte-Carlo integration of exponential functionals" remains open for a specialist.
 
+## Addendum (cycle 10, second part): adaptive algorithms without a hint (theory report §11.18)
+
+Searches by workstream H (25 Nov 2026); **[A]** = abstract or search-engine summary only,
+**[S]** = machine summary of the full text, **[M]** = from memory, not re-checked.  Nobody in
+this project has read any of these sources in full.
+
+| topic | found | read | bearing on §11.18 |
+|---|---|---|---|
+| adaption versus non-adaption in information-based complexity | Novak, *On the power of adaption*; Novak, arXiv:2307.06787; Krieg–Novak–Ullrich, arXiv:2406.07108 | [A] | for linear problems on convex symmetric classes adaption does not help deterministically (Bakhvalov; Gal–Micchelli [M]) |
+| randomised setting | Heinrich, *Randomized complexity of parametric integration and the role of adaption I* (J. Complexity 2024); Heinrich, arXiv:2401.14100; Kunsch–Novak–Wnuk, arXiv:2308.01705; Kunsch–Wnuk, arXiv:2410.23067 | [A] | adaption helps by polynomial factors in the number of evaluations (`n^{1/8}`, `n^{1/4}`, up to order `n` for vector-valued approximation); the present problem is nonlinear and the gain is exponential in the dimension |
+| the method of the non-adaptive lower bound | Mathé–Novak (2007) | [S] (see the first addendum) | their adaptive upper bound uses log-concavity |
+| normalising constants | Holzmüller–Bach, JMLR 26 (2025); Ge–Lee–Lu, STOC 2020 | [A] | smoothness classes on `[0,1]^d`, log-concave densities; not the exponential regime of a Lipschitz class in growing dimension |
+| stability of Harper's inequality | Keevash–Long, arXiv:1807.09618; Przykucki–Roberts, arXiv:1808.02572 | [S] of the main theorems | stability at slack `1 + c/n`, resp. radius `≤ log n/(3 log log n)`: unusable here |
+| nested simulation | Broadie–Du–Moallemi, Management Science 57 (2011); Giles–Haji-Ali, arXiv:1802.05016 | [A] | adaptive allocation of inner samples to outer scenarios near a threshold, mean-square analysis; the algorithmic relative of Theorem 11.52 |
+| nested sampling, multilevel splitting, product estimators | Skilling (2006); Kahn–Harris; Cérou–Guyader; Huber–Schott | [M] | the layer-cake / level-set idea with a constrained sampler or mixing, which the query model does not provide |
+| local search on the cube | Aldous (1983); Aaronson (2004); Zhang (2006) | [M] | hard instances are long level paths, which carry no mass under the oscillation constraint |
+
+*Not found* (abstracts only — "not found", not "new"): a certified (worst-case, one-sided)
+version of nested estimation; the use of an isoperimetric tail lemma to close a ladder of
+levels; a recursion for worst-case exponents; a statement that adaption recovers exactly
+the value of a-priori information (a hint) at the exponential scale.  The identity
+`KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁` is an exponential change of measure and is certainly not new;
+its use as the fixed-point equation of a recursion over levels was not found.
+

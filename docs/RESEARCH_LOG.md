@@ -843,40 +843,90 @@ Commit `36ec238` was sent to two referees while the workstreams were running.
 * `DEAD_ENDS.md` D43 records the six overstated sentences.  The lesson of cycles 8 and 9
   repeated itself: the proofs survived, the sentences around them did not.
 
-### Resume here (cycle 10, second checkpoint)
+### Cycle 10, third checkpoint — adaptivity replaces the hint (theory report §11.18)
 
-Verified state: every module under `proofs/` (44 files) builds with zero warnings and is walked
-by the axiom audit (2931 declarations); the harness (92 registered tests: 75 that must survive,
-17 documented refutations) and its mutation tests (147 mutations: 146 caught, one expected
+The open question of the first two checkpoints — the exponent of adaptive algorithms without
+a hint, somewhere between `θ_hint` and `θ_na` — is answered: **it is `θ_hint`.**
+
+* **Workstream H** (`workstreams/H_REPORT.md`) confirmed the four statements of §11.16, proved
+  that on radial instances an adaptive algorithm has the hinted exponent (Theorem 11.51),
+  refuted the coordinator's accounting of a multilevel scheme (step 3 of its brief; the
+  "trap" instance), and replaced it by a two-level **layer-cake** algorithm with a proof that
+  its exponent is `T_2 < θ_na` (about `θ_na/2` at small accuracy; Theorem 11.52).  It iterated the
+  resulting recursion numerically, saw it approach `θ_hint` to within 0–2 %, and conjectured
+  equality.
+* **The coordinator** (while the second checkpoint was being audited): the identity
+  `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁`, i.e. `θ_na(e + θ_hint(e)) = θ_hint(e)` — a non-adaptive sample of
+  `e^{nθ}` points certifies the hinted accuracy of that many points *plus `θ`* — makes `θ_hint` a
+  fixed point of the recursion operator `R` (outer fraction `g/(g + θ_hint(g))`: outer and inner
+  samples of the hinted sizes), and three choices of parameters show that every nonincreasing
+  bounded `T ≤ R[T]` lies below `θ_hint`; hence `T_k → θ_hint` (Theorem 11.53; `HintRecursion.lean`,
+  abstract in the pair of exponent functions, with the small-slope limit as a witness in
+  which the bound is attained).  The 0–2 % residual of the numerics was the conservative
+  interpolation of the grid.  The two-level theorem was restated relative to an arbitrary
+  inner bracket procedure, so that the induction over levels is a theorem (11.54).
+* **A gap in the algorithm, found by the harness.**  The logic test XV.3 (outer loop with a
+  simulated inner oracle) failed on its first instance: the closure test applied the tail
+  lemma at the radius of the whole cube, where it is false.  Repaired (no closure at
+  `r = n_o`); the same gap is in the workstream's report.  `DEAD_ENDS.md` D45 records it together
+  with the five wrong accountings that preceded the right one.
+* **Machine-checked:** the analysis of the recursion (`superSolution_le_hint`,
+  `iterates_lt_hint_add`, `step_from_hint_le`, `klBin_shift`, `gauss_hint_superSolution`), and the
+  deterministic core of the bracket (`LayerCake.mean_le_upper`, `upper_le_width`,
+  `level_mul_exceed_le_mean`, `fibre_sum_le`, `close_points_bound`,
+  `negligibility_threshold_le`).  **Not machine-checked:** the number of evaluations of the
+  algorithm — the content of Theorem 11.52.
+* **Harness:** XV.1 (identity, properties, fixed point), XV.2 (recursion: monotone, never
+  below `θ_hint`, second level `≈ a/2`, contraction, approach), XV.3 (logic of the two-level
+  algorithm: validity, width, sample sizes, the count of points close to a level, populated
+  and negligible levels), XV.4 (radial algorithm); 17 mutations, among them the original
+  closure gap and a superseded accounting.  Benchmark B13: the levels `T_k`, the fixed point,
+  and an estimate of when the algorithm would pay — between `n = 2000` and `n = 5000` at `u = 1`,
+  beyond `e^{70}` evaluations.
+* **Referee R7**: commissioned on the draft of §11.18 (brief: break the accounting of Theorem
+  11.52; check the Lean file and the chain of quantifiers of Theorem 11.54; evaluate the cost
+  of the algorithm in expectation at large `n`).  **Still running at this checkpoint** — the
+  report is to be copied to `reviews/R7_referee_report.md` and acted upon first thing.
+
+### Resume here (cycle 10, third checkpoint)
+
+Verified state: every module under `proofs/` (45 files) builds with zero warnings and is walked
+by the axiom audit (3016 declarations); the harness (96 registered tests: 79 that must survive,
+17 documented refutations) and its mutation tests (164 mutations: 163 caught, one expected
 pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 at commit
-`36ec238`, corrected here; **not refereed**: the revised Theorem 11.44 and Lemma 11.43(c) (the
-referee's own suggestion, re-derived here), Proposition 11.50 and the Lean additions listed
-above.  In priority order:
+`36ec238` (corrected).  **Not refereed**: §11.18 (review in progress), the revised Theorem 11.44
+and Lemma 11.43(c), Proposition 11.50.  In priority order:
 
-1. **Workstream H has delivered** (`workstreams/H_REPORT.md`, arrived while this checkpoint
-   was being closed; *not reviewed, not in the theory report yet*).  Its claims: the four
-   statements of §11.16 confirmed; on radial instances the adaptive exponent is exactly
-   `θ_hint` (H1); a two-level "layer-cake" algorithm — uniform outer sample, brackets on the
-   fibres refined only as far as a one-sided test against a ladder of levels requires, the
-   tail lemma once at the top — is correct on the whole class with an exponent `T_2 < θ_na`
-   (H2, about `θ_na/2` at small accuracy); `k` levels give a recursion `T_k` (H3, a sketch)
-   that numerically approaches `θ_hint` (H4, a conjecture).  The coordinator's accounting of
-   the multilevel idea (step 3 of the brief) is wrong and is refuted by the "trap" instance.
-   **Next:** (i) referee H2; (ii) write H3 as a theorem with an explicit oracle interface;
-   (iii) the coordinator has a proof that every nonincreasing super-solution of the
-   recursion is at most `θ_hint` — from the identity `θ_hint(e) = θ_na(e + θ_hint(e))`, i.e.
-   `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁` — so that `T_k → θ_hint`; it compiles in Lean in scratch
-   (`HintRecursion.lean`) and must be integrated, tested in the harness and refereed.  If
-   (i)–(iii) hold, **the adaptive exponent without a hint equals the hinted one**, and the
-   whole price of having no hint is paid by non-adaptive algorithms only.
-2. **Have the revised §11.16 read once more** (Theorem 11.44 with the two-sided tail lemma is
-   the referee's suggestion re-derived here; it has not been read by anyone else).
-3. **Chains** (theory report §12 item 9): the size at which chain-length independence sets in
-   and a limit theorem; an upper bound for "pair-additive plus a small remainder"; randomised
-   algorithms for linear classes; the cost of checking in the profile format; a JSON schema
-   and reference checker for the linear kernel; an honest test on one physically motivated
-   residual.
-4. The list of the previous checkpoint, below, is otherwise unchanged.
+0. **Integrate the report of referee R7 on §11.18** (if this session ends first: the brief is
+   in the cycle-10 entry above; re-commission with the same brief on the committed text).
+
+1. **Adaptive algorithms at a bounded accuracy.**  Theorem 11.54 is for `ε = ε₁n`.  At `ε = O(1)`
+   the non-adaptive exponent is `a`, the hinted one `h`.  A version of the two-level algorithm
+   with tolerances of order one seems possible — the lower end must then be a layer-cake
+   *sum* over the populated levels instead of their maximum (the maximum loses a factor of
+   the number of levels), and the closure must cope with `Γ̃(r) ≈ (e^u − 1)n/r` at small radii —
+   and its recursion at vanishing accuracy rate is `τ_{k+1} = min_φ max((1−φ)τ_k, φa + (1−φ)T_k(φa/(1−φ)))`,
+   which tends to `h`.  Conjecture: the adaptive exponent at fixed accuracy `ε` tends to `h` as
+   `ε → ∞`, and is `h` already for `ε` above a constant.  Not started.
+2. **Other spaces.**  The convergence theorem is abstract (`HintPair`): it applies wherever a
+   two-level construction gives the same recursion and the identity "non-adaptive accuracy =
+   hinted accuracy + exponent of the sample" holds.  For product reference measures and
+   larger alphabets the tail lemma is available at the exponential scale (the asymptotic
+   isoperimetric problem of Ahlswede–Zhang, the blowing-up lemma — from memory, not read);
+   this would cover a known part `f ≠ 0` and `k`-state sites.  *Not* Gaussian space, although
+   the small-slope limit of the exponents suggests it: there blocks of coordinates are not
+   cheaper (Euclidean Lipschitz constant) and half-space dips are detected by a few
+   evaluations far from the bulk, so that even the hinted lower bound fails (a claim to the
+   contrary was in a draft of §11.18 for an hour and was removed before any checkpoint).
+3. **A machine-checked count** for Theorem 11.52, or at least a mechanised statement of the
+   cost summation; and a quantified `o(n)`.
+4. **Have the revised §11.16 read once more** (Theorem 11.44 with the two-sided tail lemma).
+5. **Chains** (theory report §12 item 9): unchanged from the second checkpoint — the size at
+   which chain-length independence sets in and a limit theorem; an upper bound for
+   "pair-additive plus a small remainder" (no lower bound above two evaluations is proved
+   for the sum class); randomised algorithms for linear classes; the cost of checking in the
+   profile format; a JSON schema and reference checker for the linear kernel.
+6. The list of the earlier checkpoints, below, is otherwise unchanged.
 
 ### State at the end of cycle 9 (superseded in part by the list above)
 

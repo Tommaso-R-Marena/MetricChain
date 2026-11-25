@@ -986,6 +986,132 @@ def bench_without_hint(rng, quick):
     return out
 
 
+class LevelCube:
+    """Balls and tail sums of the n-cube in logarithms: ln|B(n,r)|, ln E_r(n), ln Gamma~(r) = ln(E_r/|B(r-1)|)."""
+    def __init__(self, n, u):
+        self.n, self.u = n, u
+        j = np.arange(n + 1)
+        lb = np.array([math.lgamma(n + 1) - math.lgamma(k + 1) - math.lgamma(n - k + 1) for k in j])
+        self.logball = np.logaddexp.accumulate(lb)
+        logE = np.empty(n + 1)
+        logE[0] = math.log(math.expm1(u))
+        for r in range(1, n + 1):                                   # E_r = e^u E_{r-1} + (e^u - 1) |B(r)|
+            logE[r] = np.logaddexp(u + logE[r - 1], math.log(math.expm1(u)) + self.logball[r])
+        self.logE = logE
+        self.maxgam = np.maximum.accumulate(np.concatenate([[math.log(math.expm1(u))], logE[1:] - self.logball[:-1]]))
+
+    def radius(self, logq):
+        """least r with |B(n, r)| >= 2^n q"""
+        return int(np.searchsorted(self.logball, self.n * math.log(2) + logq - 1e-12))
+
+    def bracket_cost(self, x, K):
+        """ln(evaluations) of the two-sample bracket of Proposition 11.46 with certified log-width at most x"""
+        ok = np.nonzero(np.logaddexp(math.log(3), math.log(12) + self.maxgam) <= x)[0]
+        if len(ok) == 0:
+            return math.inf
+        logm = (self.n + 1) * math.log(2) + math.log(K) - self.logball[int(ok[-1])]
+        return math.log(2) + max(logm, math.log(2 * K))
+
+
+def two_level_flat_cost(n, u, phi, b, G, delta=0.05):
+    """ln(evaluations) of the two-level algorithm of Theorem 11.52 at the flat instance, with the constants of the
+    proof and expectations in place of counts (all fibre averages are equal; an estimate, not a bound)."""
+    n_o = max(1, int(round(phi * n)))
+    n_i = n - n_o
+    logn = (n + 6) * math.log(2) + 3 * math.log(n) - math.log(delta)
+    K, Kin = math.ceil(24 * logn), math.ceil(24 * (logn + 2 * math.log(2)))
+    J = math.ceil(2 * u * n + b + n_o * math.log(2) + 10)
+    outer, inner = LevelCube(n_o, u), LevelCube(n_i, u)
+    logs = [math.log(K * max(b, 1.0)) + inner.bracket_cost(b, Kin)]   # the levels within b of the bulk
+    x = 1
+    while x <= 5 * u * n + 50:                                       # levels at height x above the last populated one
+        logMneg = math.log(4 * K * J) + 2 + (x - 1)
+        logM, closed = math.log(K), False
+        while logM <= logMneg + math.log(2):
+            logq = math.log(2 * K) - logM
+            if n_o * math.log(2) + logq < 0:
+                closed = True
+                break
+            r = outer.radius(logq)
+            if r < n_o and x + outer.logE[r] - n_o * math.log(2) <= G - b - math.log(2):
+                closed = True
+                break
+            logM += math.log(2)
+        logs.append(logM + inner.bracket_cost(max(x, b), Kin))
+        if closed:
+            mx = max(logs)
+            if not math.isfinite(mx):                               # some inner accuracy cannot be certified at this size
+                return math.inf, None
+            return mx + math.log(sum(math.exp(t - mx) for t in logs)), G + math.log(4 * math.e * J + 3)
+        x += 1
+    return math.inf, None
+
+
+def bench_adaptive_levels(rng, quick):
+    section("B13. Adaptive algorithms without a hint: the level recursion approaches the hinted exponent")
+    out = dict(levels=[], fixed_point=[])
+    depth = 7 if quick else 14
+    marks = (0.0, 0.05, 0.25, 0.5, 0.75)
+    print("T_k / theta_na at accuracy n*eps1 (eps1 as a fraction of the threshold; 0.00 stands for 1e-4);")
+    print("T_1 = theta_na (non-adaptive), T_{k+1} = min(T_k, R[T_k]) (k nested levels, Theorem 11.52); last row: theta_hint / theta_na")
+    for u in (0.5, 1.0, 2.0):
+        r = fc.LvRecursion(u) if quick else fc.LvRecursion(u, G=240, P=80, B=24, C=64)
+        idx = [int(np.argmin(np.abs(r.g - max(m, 1e-4) * r.estar))) for m in marks]
+        na = np.array([fc.na_theta_na(u, float(x)) for x in r.g])
+        print(f"\nu = {u}:  a = theta_na(0+) = {r.a:.5f},  h = theta_hint(0+) = {r.h:.5f},  h/a = {r.h / r.a:.4f}")
+        print(f"{'levels':>10} | " + " | ".join(f"{m:6.2f}" for m in marks) + " | max (T_k - theta_hint)/a")
+        for k in range(2, depth + 1):
+            r.step()
+            if np.any(r.T < r.hint - 2e-4 * r.a):
+                raise RuntimeError("a level of the recursion is below the hinted exponent")
+            exc = float(np.max(r.T - r.hint)) / r.a
+            out["levels"].append(dict(u=u, k=k, ratios=[float(r.T[i] / na[i]) for i in idx], excess=exc))
+            if k in (2, 3, 4, 5, 7, 10, 14):
+                print(f"{k:10d} | " + " | ".join(f"{r.T[i] / na[i]:6.3f}" for i in idx) + f" | {exc:8.4f}")
+        print(f"{'hint':>10} | " + " | ".join(f"{r.hint[i] / na[i]:6.3f}" for i in idx) + " |")
+        if exc > (0.03 if quick else 0.012):
+            raise RuntimeError("the recursion does not approach the hinted exponent")
+    lv = {(d["u"], d["k"]): d for d in out["levels"]}
+    if not (0.47 < lv[(1.0, 2)]["ratios"][0] < 0.53 and lv[(1.0, 3)]["ratios"][0] < 0.40 and lv[(1.0, 4)]["ratios"][0] < 0.34):
+        raise RuntimeError("documented values of the second to fourth level are not reproduced")
+    print("\nthe fixed point (Theorem 11.53(b)): outer fraction phi* = g/(g + theta_hint(g)); the outer sample has exponent phi* theta_hint(g),")
+    print("each inner bracket (1 - phi*) theta_hint(g), at inner accuracy rate g;  identity theta_na(g + theta_hint(g)) = theta_hint(g):")
+    print(f"{'u':>5} | {'g/eps*':>6} | {'phi*':>6} | {'theta_hint(g)':>13} | {'theta_na(g + theta_hint(g))':>27} | {'theta_na(g)':>11}")
+    for u in (0.5, 1.0, 2.0):
+        _, _, estar, a, h = fc.lv_consts(u)
+        for frac in (0.05, 0.25, 0.5, 0.75):
+            g = frac * estar
+            th = fc.na_theta_hint(u, g)
+            lhs = fc.na_theta_na(u, g + th)
+            out["fixed_point"].append(dict(u=u, frac=frac, phi=g / (g + th), hint=th, shifted=lhs))
+            print(f"{u:5.1f} | {frac:6.2f} | {g / (g + th):6.3f} | {th:13.6f} | {lhs:27.6f} | {fc.na_theta_na(u, g):11.6f}")
+            if abs(lhs - th) > 1e-9:
+                raise RuntimeError("identity theta_na(g + theta_hint(g)) = theta_hint(g) fails")
+    print("\nwhen would it pay?  flat instance, u = 1, accuracy rate eps*/4, delta = 0.05; ln(evaluations) of the two-level")
+    print("algorithm with the constants of the proof (expectations in place of counts; best of a few (phi, b)) against the")
+    print("two-sample bracket at the same certified width:")
+    print(f"{'n':>7} | {'two-level':>10} | {'two-sample bracket':>18} | {'phi':>4} | {'width/n':>8}")
+    u = 1.0
+    estar = math.log(math.cosh(u / 2))
+    out["crossover"] = []
+    for n in ((1000, 5000) if quick else (500, 1000, 2000, 5000, 10000, 20000)):
+        G = 0.25 * estar * n
+        best = (math.inf, 0.0, G + math.log(4 * math.e * math.ceil(2 * u * n + 10) + 3))
+        for phi in ((0.7, 0.8) if quick else (0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)):
+            for bfrac in ((0.1, 0.2, 0.4) if quick else (0.02, 0.05, 0.1, 0.2, 0.4)):
+                c, width = two_level_flat_cost(n, u, phi, bfrac * G, G)
+                if c < best[0]:
+                    best = (c, phi, width)
+        c, phi, width = best
+        mc = LevelCube(n, u).bracket_cost(width, 24 * math.log(4 / 0.05))
+        out["crossover"].append(dict(n=n, two_level=c, bracket=mc, phi=phi, width=width))
+        print(f"{n:7d} | {c:10.1f} | {mc:18.1f} | {phi:4.1f} | {width / n:8.4f}")
+    cr = {d["n"]: d for d in out["crossover"]}
+    if not (cr[1000]["two_level"] > cr[1000]["bracket"] and cr[5000]["two_level"] < cr[5000]["bracket"]):
+        raise RuntimeError("documented crossover between n = 1000 and n = 5000 is not reproduced")
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true")
@@ -1006,6 +1132,7 @@ def main():
         "B10_query_complexity": bench_query_complexity(rng, args.quick),
         "B11_generalised_dips": bench_generalised_dips(rng, args.quick),
         "B12_without_hint": bench_without_hint(rng, args.quick),
+        "B13_adaptive_levels": bench_adaptive_levels(rng, args.quick),
     }
     if args.json:
         os.makedirs(os.path.dirname(os.path.abspath(args.json)), exist_ok=True)

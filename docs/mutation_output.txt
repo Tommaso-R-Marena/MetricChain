@@ -292,5 +292,39 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIV.2 M3: span bracket claimed to equal McShane's bound
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.1 M1: identity between the relative entropies with the wrong sign of Lambda1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.1 M2: fixed point claimed at the outer fraction g/(g + 2 theta_hint)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.1 M3: inner accuracy not rescaled to the inner dimension
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.1 M4: identity theta_hint(e) = theta_na(e) claimed (without the shift by theta_hint)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.2 M1: outer exponent without the tolerance (theta_na at g/phi instead of (g - beta)/phi)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.2 M2: every sampled point charged at the finest accuracy (count of close points ignored)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.2 M3: inner accuracy not rescaled in the recursion
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.2 M4: close points counted as e^{gamma - beta} (a superseded accounting)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.3 M1: negligibility threshold without the tolerance e^b
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.3 M2: lower end without the tolerance e^{-b}
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.3 M3: closure attempted while every sampled fibre is above the level (tail lemma on the whole cube)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.3 M4: upper end with the level itself in place of the next level
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.3 M5: 'high' without a tolerance (classification cannot end)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.3 M6: certified exceedance probability without the factor 2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.4 M1: second branch with one of the two observed values only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.4 M2: caps bounded at radius r - 3
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.4 M3: centre taken to be the sampled point itself
+                  exit=1  1 TEST(S) MISBEHAVED
 
-147 mutations: 146 caught, 1 expected pass, 0 not as expected
+164 mutations: 163 caught, 1 expected pass, 0 not as expected

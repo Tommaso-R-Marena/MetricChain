@@ -4961,6 +4961,458 @@ def t_profiles_on_chains(rng, trials):
         return False, dict(reason="every walk has its own profile: the fibres of the pseudometric were expected to be large")
     return True, stats
 
+# ---------------------------------------------------------------------------------------------------------------
+# XV. Adaptive algorithms without a hint (theory report 11.18): the level recursion and the two-level bracket
+# ---------------------------------------------------------------------------------------------------------------
+
+def lv_consts(u):
+    """(p_u, Lambda1, eps*, a, h) of theory report 11.16 / 11.18."""
+    pu = 1 / (1 + math.exp(u))
+    lam = math.log(2 / (1 + math.exp(-u)))
+    return pu, lam, math.log(math.cosh(u / 2)), na_kl(pu, 0.5), na_kl(lam / u, 0.5)
+
+
+def lv_bracket_value(u, T, g, phi, beta, ngam=400):
+    """sup over gamma >= beta of min(gamma, mu) + (1 - phi) T(gamma/(1 - phi)), mu = phi theta_na((g - beta)/phi),
+    for a nonincreasing function T (the supremum is over [beta, max(beta, mu)])."""
+    mu = phi * na_theta_na(u, (g - beta) / phi)
+    top = max(beta, mu)
+    gam = np.unique(np.concatenate([[beta, top], np.linspace(beta, top, ngam)]))
+    return max(min(x, mu) + (1 - phi) * T(x / (1 - phi)) for x in gam), mu
+
+
+@conjecture("XV.1 The identity behind the adaptive exponent (theory report 11.18): KL(rho||p_u) = KL(rho||1/2) + u rho - Lambda1, hence theta_hint(e) = theta_na(e + theta_hint(e)) on [0, eps*) and theta_na(h) = h with 0 < h < a; e + theta_hint(e) is nondecreasing, theta_hint lies above its tangent at 0, whose slope is above -1, theta_na is nonincreasing, at most a and vanishes continuously at eps*; and one step of the level recursion from theta_hint reproduces theta_hint at phi = g/(g + theta_hint(g)), beta -> 0, and is never below it for other parameters (theta_hint is a fixed point)")
+def t_hint_identity(rng, trials):
+    stats = dict(identities=0, steps=0, closest=math.inf, largest_slope=0.0)
+    for _ in range(max(6, trials // 10)):
+        u = float(rng.choice([0.1, 0.3, 1.0, 2.0, 4.0, 8.0]) * rng.uniform(0.8, 1.25))
+        pu, lam, estar, a, h = lv_consts(u)
+        hint = lambda e: na_theta_hint(u, e)
+        # (a) the identity between the two relative entropies
+        for rho in rng.uniform(1e-3, 1 - 1e-3, size=20):
+            if abs(na_kl(rho, pu) - (na_kl(rho, 0.5) + u * rho - lam)) > 1e-12:
+                return False, dict(reason="KL(rho||p_u) != KL(rho||1/2) + u rho - Lambda1", u=u, rho=float(rho))
+        # (11.18.1) and the properties used by the convergence theorem
+        if abs(na_theta_na(u, h) - h) > 1e-10 or not (0 < h < a) or abs(na_theta_na(u, 1e-16 * a) - a) > 1e-6 * a:
+            return False, dict(reason="theta_na(h) != h or the order 0 < h < a = theta_na(0+) fails", u=u)
+        es = np.concatenate([[0.0], np.sort(rng.uniform(0, 1, size=40))[:-1] * estar, [estar * (1 - 1e-9)]])
+        prev_s, prev_na = -math.inf, math.inf
+        slope0 = math.log((1 - lam / u) / (lam / u)) / u           # -theta_hint'(0)
+        stats["largest_slope"] = max(stats["largest_slope"], slope0)
+        if not slope0 < 1:
+            return False, dict(reason="slope of theta_hint at 0 is not above -1", u=u)
+        for e in es:
+            th = hint(e)
+            if abs(na_theta_na(u, e + th) - th) > 1e-10:
+                return False, dict(reason="theta_na(e + theta_hint(e)) != theta_hint(e)", u=u, e=float(e))
+            if e + th < prev_s - 1e-12 or th < h - slope0 * e - 1e-12 or th < -1e-15:
+                return False, dict(reason="e + theta_hint(e) not nondecreasing, or theta_hint below its tangent at 0", u=u, e=float(e))
+            na = na_theta_na(u, e)
+            if na > a + 1e-12 or na > prev_na + 1e-12 or na < th - 1e-12:
+                return False, dict(reason="theta_na not within [theta_hint, a] or not nonincreasing", u=u, e=float(e))
+            prev_s, prev_na = e + th, na
+            stats["identities"] += 1
+        for x in (estar * (1 - 1e-6), estar, 1.5 * estar):        # continuity of theta_na at and beyond the threshold
+            if na_theta_na(u, x) > 1e-5 * a:
+                return False, dict(reason="theta_na does not vanish continuously at eps*", u=u)
+        # (b) one step from theta_hint: equality at phi* with beta -> 0, never below for other parameters
+        for _ in range(8):
+            g = float(rng.uniform(0.02, 0.98)) * estar
+            th = hint(g)
+            val, mu = lv_bracket_value(u, hint, g, g / (g + th), 1e-9 * g)
+            if abs(val - th) > 1e-7 * a or abs(mu - th * g / (g + th)) > 1e-7 * a:
+                return False, dict(reason="the step with phi = g/(g + theta_hint) does not reproduce theta_hint", u=u, g=g, value=val, hint=th)
+            phi = float(rng.uniform(0.01, 0.99))
+            beta = g * float(rng.choice([1e-6, 1e-3, 0.05, 0.3, 0.7, 0.99]))
+            val, _ = lv_bracket_value(u, hint, g, phi, beta, ngam=120)
+            if val < th - 1e-9 * a:
+                return False, dict(reason="a step from theta_hint goes below theta_hint", u=u, g=g, phi=phi, beta=beta, value=val, hint=th)
+            stats["closest"] = min(stats["closest"], (val - th) / a)
+            stats["steps"] += 1
+    return True, stats
+
+
+class LvRecursion:
+    """T_1 = theta_na, T_{k+1} = min(T_k, R[T_k]) on a grid of accuracies (piecewise-linear interpolation)."""
+    def __init__(self, u, G=120, P=48, B=18, C=48):
+        self.u = u
+        self.pu, self.lam, self.estar, self.a, self.h = lv_consts(u)
+        self.g = np.unique(np.concatenate([np.geomspace(1e-4, 0.05, G // 3), np.linspace(0.05, 1.0, 2 * G // 3)])) * self.estar
+        self.nax = np.concatenate([[0.0], np.geomspace(1e-9, 1.0, 3000) * self.estar])
+        self.nay = np.array([self.a] + [na_theta_na(u, x) for x in self.nax[1:]])
+        self.T = np.interp(self.g, self.nax, self.nay)
+        self.hint = np.array([na_theta_hint(u, x) for x in self.g])
+        self.P, self.B, self.C = P, B, C
+        self.levels = 1
+    def th_na(self, x):
+        return np.interp(x, self.nax, self.nay, right=0.0)
+    def Tv(self, x):
+        out = np.interp(x, self.g, self.T, left=self.T[0], right=0.0)
+        return np.where(x >= self.estar, 0.0, out)
+    def step_value(self, g, phi, beta):
+        """the bracket of (11.18.2) for arrays phi[P,1], beta[1,B]; returns the array of values [P,B]"""
+        mu = phi * self.th_na((g - beta) / phi)
+        top = np.maximum(mu, beta)
+        frac = np.concatenate([np.linspace(0, 1, self.C), np.geomspace(1e-5, 1, 16)])[None, None, :]
+        gam = beta[..., None] + (top - beta)[..., None] * frac
+        val = np.minimum(gam, mu[..., None]) + (1 - phi)[..., None] * self.Tv(gam / (1 - phi)[..., None])
+        return val.max(axis=2)
+    def step(self):
+        new = self.T.copy()
+        for i, g in enumerate(self.g):
+            phis = list(np.linspace(0.01, 0.99, self.P))
+            th = self.hint[i]
+            if th > 0:
+                phis.append(g / (g + th))
+            if g < self.h:
+                phis.append(g / self.h)
+            phi = np.array(phis)[:, None]
+            beta = (g * np.geomspace(1e-5, 0.999, self.B))[None, :]
+            new[i] = min(new[i], float(self.step_value(g, phi, beta).min()))
+        self.T = np.minimum.accumulate(new)
+        self.levels += 1
+
+
+@conjecture("XV.2 Level recursion T_1 = theta_na, T_{k+1} = min(T_k, R[T_k]), R[T](g) = inf_{phi, beta} sup_{gamma >= beta} [min(gamma, phi theta_na((g - beta)/phi)) + (1 - phi) T(gamma/(1 - phi))]: the levels are nonincreasing in k and in the accuracy and never below theta_hint; the second level at vanishing accuracy is min_phi max((1 - phi) a, phi a + (1 - phi) theta_na(phi a/(1 - phi))), about a/2, and improves on theta_na by at least 10% up to half the threshold; step (iii) of the convergence proof, D_{k+1}(g) <= (1 - phi*(g)) max_{x <= g} D_k(x), holds; and after six levels the excess over theta_hint is below 3.5% of a (below 2% after nine)")
+def t_level_recursion(rng, trials):
+    stats = dict(runs=0, T2_over_a=0.0, worst_excess_after=0.0, levels=0)
+    us = [1.0] if trials < 100 else [0.5, 1.0, 2.0]
+    depth = 6 if trials < 100 else 9
+    for u in us:
+        r = LvRecursion(u)
+        a, h, estar = r.a, r.h, r.estar
+        # closed form of the second level at vanishing accuracy: min over phi of max((1-phi) a, phi a + (1-phi) theta_na(phi a/(1-phi)))
+        phis = np.linspace(0.01, 0.99, 981)
+        closed = min(max((1 - p) * a, p * a + (1 - p) * na_theta_na(u, p * a / (1 - p))) for p in phis)
+        prev = r.T.copy()
+        for k in range(2, depth + 1):
+            r.step()
+            if np.any(r.T > prev + 1e-12) or np.any(np.diff(r.T) > 1e-12):
+                return False, dict(reason="the levels are not nonincreasing in k and in the accuracy", u=u, k=k)
+            if np.any(r.T < r.hint - 2e-4 * a):
+                return False, dict(reason="a level of the recursion is below the hinted exponent", u=u, k=k, deficit=float(np.max(r.hint - r.T)) / a)
+            if k == 2:
+                t2 = float(r.T[0])
+                stats["T2_over_a"] = t2 / a
+                if abs(t2 - closed) > 0.02 * a or not (t2 < 0.56 * a):
+                    return False, dict(reason="second level at small accuracy is not the closed form (about a/2)", u=u, T2=t2 / a, closed=closed / a)
+                # adaptivity helps: strictly below theta_na for accuracies up to half the threshold
+                mask = r.g <= 0.5 * estar
+                if np.any(r.T[mask] > 0.9 * prev[mask]):
+                    return False, dict(reason="the second level does not improve on theta_na by 10% below eps*/2", u=u)
+            # the contraction used in the proof, step (iii): D_{k+1}(g) <= (1 - phi*(g)) max_{x <= g} D_k(x) (up to interpolation error)
+            D_prev = np.maximum.accumulate(prev - r.hint)
+            fac = r.hint / (r.g + r.hint + 1e-300)
+            if np.any((r.T - r.hint) > fac * D_prev + 3e-3 * a):
+                return False, dict(reason="step (iii) of the convergence proof fails numerically", u=u, k=k)
+            prev = r.T.copy()
+        excess = float(np.max(r.T - r.hint)) / a
+        stats["worst_excess_after"] = max(stats["worst_excess_after"], excess)
+        stats["levels"] = depth
+        if excess > (0.035 if depth == 6 else 0.02):
+            return False, dict(reason="the recursion does not approach the hinted exponent", u=u, excess=excess, depth=depth)
+        stats["runs"] += 1
+    return True, stats
+
+
+def lv_ball_tables(n, u):
+    """|B(n, r)| for r = -1..n (index r + 1) and E_r(n) = sum_{j <= r} C(n, j) (e^{u (r + 1 - j)} - 1) for r = 0..n."""
+    binom = [math.comb(n, j) for j in range(n + 1)]
+    ball = [0] + list(np.cumsum(binom))
+    E = [sum(binom[j] * (math.exp(u * (r + 1 - j)) - 1) for j in range(r + 1)) for r in range(n + 1)]
+    return ball, E
+
+
+def lv_two_level(rng, vals, probs, s0, n_o, n, u, b, G, K, mode, step=0.5):
+    """Outer loop of the two-level algorithm of Theorem 11.52.  The fibre average of a uniform outer point takes the
+    value vals[t] with probability probs[t] (all 2^{n_o} points with equal weights, or the shells of a radial outer
+    landscape).  The inner procedure is simulated: a call at accuracy x returns a bracket [L, U], U = L e^x, around the
+    true value, placed at random (mode 0), with the value at its top (1) or at its bottom (2).  Returns a record."""
+    ball, E = lv_ball_tables(n_o, u)
+    No = 2 ** n_o
+    J = math.ceil(2 * u * n + b + n_o * math.log(2) + 10)
+    xs = np.array(list(np.arange(2 * u * (n - n_o), b, -step)) + [b * (1 - 1e-9)])   # ladder of inner accuracies, ending below b
+    cdf = np.cumsum(probs)
+    Wl = np.zeros(0); L = np.zeros(0); U = np.zeros(0); acc = np.zeros(0, dtype=np.int64)
+    ell = s0
+    levels = []                                                      # (s_j, M_j, q_j, populated, ell at entry)
+    for j in range(J + 1):
+        s = s0 * math.exp(j)
+        ell_in = ell
+        Mneg = 2 * K * J * math.e * s / (ell_in * math.exp(b))
+        M = K
+        while True:
+            if len(Wl) < M:                                           # extend the list of independent uniform outer points
+                extra = M - len(Wl)
+                Wl = np.concatenate([Wl, vals[np.minimum(np.searchsorted(cdf, rng.uniform(size=extra)), len(vals) - 1)]])
+                L = np.concatenate([L, np.zeros(extra)]); U = np.concatenate([U, np.full(extra, np.inf)])
+                acc = np.concatenate([acc, np.full(extra, -1, dtype=np.int64)])
+            while True:                                               # classify the first M points at this level
+                und = np.nonzero((U[:M] > s) & (L[:M] <= s * math.exp(-b)))[0]
+                if len(und) == 0:
+                    break
+                if np.any(acc[und] >= len(xs) - 1):
+                    return dict(error="classification does not end at the last accuracy of the ladder")
+                acc[und] += 1
+                x = xs[acc[und]]
+                t = rng.uniform(size=len(und)) if mode == 0 else (np.ones(len(und)) if mode == 1 else np.zeros(len(und)))
+                L[und] = np.maximum(L[und], Wl[und] * np.exp(-t * x))
+                U[und] = np.minimum(U[und], Wl[und] * np.exp((1 - t) * x))
+            N = int((U[:M] > s).sum())                                # the points that are not low are high
+            q = min(1.0, 2 * max(N, K) / M)
+            if N >= K:
+                ell = max(ell, s * math.exp(-b) * N / (2 * M))
+            if No * q < 1:
+                tail, r = 0.0, -1
+            else:
+                r = next(rr for rr in range(n_o + 1) if ball[rr + 1] >= No * q)
+                # the tail lemma needs a point outside the super-level set: no closure while the ball is the whole cube
+                tail = s * E[r] / No if r < n_o else math.inf
+            if tail <= math.exp(G) * ell:
+                upper = s0 + sum(lv[0] * math.e * lv[2] for lv in levels) + tail
+                return dict(ell=ell, upper=upper, levels=levels, last=(s, M, q, r, tail), J=J, Wl=Wl)
+            if N >= K or M >= Mneg:
+                levels.append((s, M, q, N >= K, ell_in))
+                break
+            M *= 2
+    return dict(error="no closure within J levels")
+
+
+def lv_check_run(run, vals, probs, s0, n_o, n, u, b, G, K, stats):
+    """The statements of the proof of Theorem 11.52 on one run: validity, width, sample sizes, counts."""
+    A = float((vals * probs).sum())
+    J, ell, upper = run["J"], run["ell"], run["upper"]
+    if not (ell <= A * (1 + 1e-12) and A <= upper * (1 + 1e-12)):
+        return dict(reason="the bracket of the two-level algorithm does not contain the mean", ell=ell, A=A, upper=upper, b=b)
+    width = math.log(upper / ell)
+    if width > G + math.log(4 * math.e * J + 3) + 1e-9:
+        return dict(reason="the bracket is wider than g n + ln(4 e J + 3)", width=width, bound=G + math.log(4 * math.e * J + 3))
+    stats["widest"] = max(stats["widest"], width - G)
+    ball, E = lv_ball_tables(n_o, u)
+    gam = [math.exp(u) - 1] + [E[r] / ball[r] for r in range(1, n_o + 1)]              # Gamma~(r) = E_r / |B(r - 1)|
+    rdag = -1
+    while rdag + 1 <= n_o - 1 and gam[rdag + 1] <= math.exp(G - b) / 4:
+        rdag += 1
+    Mdag = 2 * K * 2 ** n_o / ball[rdag + 1] if rdag >= 0 else math.inf     # no bound on the samples if even Gamma~(0) is too large
+    exceed = lambda thr: float(probs[vals > thr].sum())
+    Wl = run["Wl"]
+    seq = run["levels"] + [(run["last"][0], run["last"][1], run["last"][2], None, ell)]
+    for jj, (s, M, q, pop, ell_in) in enumerate(seq):
+        if exceed(s) > q + 1e-12:
+            return dict(reason="a certified exceedance probability is too small", level=jj, p=exceed(s), q=q)
+        if M > 8 * J * math.e ** 2 * Mdag:
+            return dict(reason="a sample is larger than 8 J e^2 M_dagger", level=jj, M=M, Mdag=Mdag)
+        if rdag >= 0:
+            stats["largest_M"] = max(stats["largest_M"], M / (8 * J * math.e ** 2 * Mdag))
+        Mneg = 2 * K * J * math.e * s / (ell_in * math.exp(b))
+        if M > max(K, 2 * Mneg):
+            return dict(reason="a sample is larger than twice the negligibility threshold", level=jj)
+        for i, (si, Mi, qi, popi, _) in enumerate(run["levels"][:jj]):
+            if si * qi > 4 * math.exp(b) * ell_in * (1 + 1e-12):
+                return dict(reason="an earlier level violates s_i q_i <= 4 e^b ell", level=jj, earlier=i)
+        x, checks = b, 0
+        while s * math.exp(-x) >= s0 * (1 - 1e-12):
+            bound = 8 * K * J * math.e ** 2 * math.exp(x)
+            lhs = Mneg * exceed(s * math.exp(-x))
+            if lhs > bound * (1 + 1e-9):
+                return dict(reason="the count of points close to a level exceeds 8 K J e^2 e^x", level=jj, x=x, lhs=lhs, bound=bound)
+            stats["tightest_count"] = max(stats["tightest_count"], lhs / bound)
+            if checks < 6 and jj >= len(seq) - 5:
+                cnt = int((Wl[:M] > s * math.exp(-x)).sum())
+                if cnt > 4 * bound + 4 * K:
+                    return dict(reason="more sampled points close to a level than 32 K J e^2 e^x + 4K", level=jj, x=x, count=cnt)
+                checks += 1
+            x += 1.0
+        if pop is not None:
+            stats["populated" if pop else "negligible"] += 1
+    stats["most_levels"] = max(stats["most_levels"], len(seq))
+    stats["runs"] += 1
+    return None
+
+
+def lv_radial_instance(rng, n_o, u, kind):
+    """Fibre averages that depend on the outer distance d to a centre: (values over d = 0..n_o, binomial probabilities)."""
+    d = np.arange(n_o + 1)
+    if kind == 0:
+        F = np.zeros(n_o + 1)                                         # flat
+    elif kind == 1:
+        F = -u * np.maximum(int(rng.integers(2, 5)) - d, 0)           # flat bulk with a bump
+    elif kind == 2:
+        F = u * d.astype(float)                                       # cone
+    else:
+        F = u * np.minimum(d, int(rng.integers(1, n_o // 2))).astype(float)   # flattened cone
+    probs = np.array([math.comb(n_o, int(k)) for k in d], dtype=float) / 2.0 ** n_o
+    return np.exp(-F + float(rng.uniform(-2, 2))), probs
+
+
+@conjecture("XV.3 Two-level bracket of Theorem 11.52, outer loop with a simulated inner procedure (valid brackets of the requested accuracy, placed adversarially): on arbitrary Lipschitz functions of a small cube and on steep radial outer landscapes the bracket contains the mean and is at most G + ln(4eJ + 3) wide; every certified exceedance probability is valid; no sample exceeds 8 J e^2 M_dagger or twice the negligibility threshold; earlier levels satisfy s_i q_i <= 4 e^b ell; the count of points within a factor e^x of a level obeys M_neg p(s e^{-x}) <= 8 K J e^2 e^x; levels are left as populated and as negligible; and the closure test is not applied while the ball of the tail lemma is the whole cube")
+def t_two_level_logic(rng, trials):
+    stats = dict(runs=0, widest=0.0, tightest_count=0.0, most_levels=0, largest_M=0.0, populated=0, negligible=0)
+    # (i) arbitrary Lipschitz functions on a small cube, all fibre averages enumerated
+    n_o, n_i, u = 6, 4, 1.0
+    n = n_o + n_i
+    D = na_cube(n)
+    for rep in range(max(6, trials // 10)):
+        kind = rep % 6
+        psi = na_rand_lipschitz(rng, n, u, D, kind) if kind < 5 else u * D[int(rng.integers(2 ** n))].astype(float)
+        psi = psi + float(rng.uniform(-3, 3))
+        vals = np.exp(-psi).reshape(2 ** n_o, 2 ** n_i).mean(axis=1)   # the outer coordinates are the high bits
+        probs = np.full(2 ** n_o, 2.0 ** -n_o)
+        s0 = math.exp(-float(psi[int(rng.integers(2 ** n))]) - u * n)  # one query at a reference point
+        if not (s0 <= vals.min() * (1 + 1e-12) and vals.max() <= s0 * math.exp(2 * u * n) * (1 + 1e-12)):
+            return False, dict(reason="the reference level is not below all fibre averages")
+        b = float(rng.choice([1.0, 2.0, 4.0]))
+        G = b + math.log(4 * (math.exp(u) - 1)) + float(rng.choice([0.5, 2.0, 4.0]))
+        K = math.ceil(24 * math.log(2 ** (n + 6) * n ** 3 / 0.05))
+        run = lv_two_level(rng, vals, probs, s0, n_o, n, u, b, G, K, mode=rep % 3)
+        if "error" in run:
+            return False, dict(reason=run["error"], kind=kind)
+        bad = lv_check_run(run, vals, probs, s0, n_o, n, u, b, G, K, stats)
+        if bad:
+            return False, dict(bad, kind=kind, part=1)
+    # (ii) radial outer landscapes with a steep slope and an accuracy so small that the first level above the bulk
+    # cannot be closed before it is declared negligible (K below the value of the proof: the events of the proof
+    # still hold with overwhelming probability, and the run is fixed by the seed)
+    n_o, n_i, u, K = 12, 2, 4.0, 200
+    n = n_o + n_i
+    ball, E = lv_ball_tables(n_o, u)
+    for rep in range(2 if trials < 100 else 8):
+        vals, probs = lv_radial_instance(rng, n_o, u, (0, 1, 0, 1, 2, 3, 2, 3)[rep])
+        b = float(rng.choice([2.0, 4.0]))
+        # a reference level well below the bulk, as at large n; on the flat landscape the bulk sits at e^{0.9} times a level
+        s0 = float(vals.min()) * math.exp(-b - (3.9 if rep % 2 == 0 and rep < 4 else float(rng.uniform(3, 4))))
+        J = math.ceil(2 * u * n + b + n_o * math.log(2) + 10)
+        r_neg = next(rr for rr in range(n_o + 1) if ball[rr + 1] >= 2 ** n_o / (2 * J * math.e ** 2))
+        G = b + math.log(2 * math.e * E[r_neg] / 2 ** n_o) - 0.3
+        if G <= b:
+            return False, dict(reason="parameters of the test: no accuracy between the tolerance and the closure threshold")
+        run = lv_two_level(rng, vals, probs, s0, n_o, n, u, b, G, K, mode=1 + rep % 2)
+        if "error" in run:
+            return False, dict(reason=run["error"], kind=rep, part=2)
+        bad = lv_check_run(run, vals, probs, s0, n_o, n, u, b, G, K, stats)
+        if bad:
+            return False, dict(bad, kind=rep, part=2)
+    if stats["negligible"] == 0 or stats["populated"] == 0:
+        return False, dict(reason="the test has no power", **stats)
+    return True, stats
+
+
+def lv_radial_profile(rng, n, u, kind):
+    """A radial profile f(0..n) with |f(j+1) - f(j)| <= u: 0 random walk, 1 two-periodic in the middle with steep caps,
+    2 the alternating profile, 3 flat with a dip, 4 cone flattened at a random radius, 5 two-periodic with random caps."""
+    if kind == 0:
+        f = np.concatenate([[0.0], np.cumsum(rng.uniform(-u, u, size=n))])
+    elif kind in (1, 5):
+        amp = float(rng.uniform(0, u))
+        f = np.array([amp * (j % 2) for j in range(n + 1)], dtype=float)
+        w = int(rng.integers(1, n // 3))
+        for j in range(w - 1, -1, -1):                                # caps: as steep as allowed (1) or random (5)
+            f[j] = f[j + 1] - (u if kind == 1 else float(rng.uniform(-u, u)))
+            f[n - j] = f[n - j - 1] - (u if kind == 1 else float(rng.uniform(-u, u)))
+    elif kind == 2:
+        f = np.array([(u / 2) * (-1) ** j for j in range(n + 1)])
+    elif kind == 3:
+        R = int(rng.integers(1, n // 3))
+        f = -u * np.maximum(R - np.arange(n + 1), 0).astype(float)
+    else:
+        f = u * np.minimum(np.arange(n + 1), int(rng.integers(0, n + 1))).astype(float)
+    return f + float(rng.uniform(-2, 2))
+
+
+def lv_radial_algorithm(rng, n, f, s, M):
+    """The algorithm of Theorem 11.51 on psi(x) = f(dist(x, s)), x in {0..2^n - 1}: returns (branch, value, queries, sample)."""
+    psi = lambda x: f[bin(x ^ s).count("1")]
+    xs = [int(v) for v in rng.integers(0, 2 ** n, size=M)]
+    queries = 0
+    for x in xs:
+        nb = [psi(x ^ (1 << i)) for i in range(n)]
+        queries += n + 1
+        vals = sorted(set(nb))
+        if len(vals) >= 2:
+            if len(vals) > 2:
+                return "error", None, queries, xs
+            c = x
+            for i in range(n):                                        # flip the coordinates of one of the two value classes
+                if nb[i] == vals[0]:
+                    c ^= 1 << i
+            F, y = [psi(c)], c                                        # a monotone path from c to its antipode
+            for i in range(n):
+                y ^= 1 << i
+                F.append(psi(y))
+            queries += n + 1
+            logs = [math.lgamma(n + 1) - math.lgamma(k + 1) - math.lgamma(n - k + 1) - F[k] for k in range(n + 1)]
+            mx = max(logs)
+            return "exact", mx + math.log(sum(math.exp(t - mx) for t in logs)) - n * math.log(2), queries, xs
+    alpha, beta = psi(xs[0]), psi(xs[0] ^ 1)
+    return "bracket", math.log((math.exp(-alpha) + math.exp(-beta)) / 2), queries, xs
+
+
+def lv_radial_bracket(n, u, r, binom, ball):
+    """[1 - 4B/2^n, 1 + 4 E_{r-2}(n)/2^n + 8B/2^n], B = |B(n, r-2)|: the bracket of A/A_0 in the proof of Theorem 11.51."""
+    B = float(ball[r - 2])
+    E = sum(binom[j] * (math.exp(u * (r - 1 - j)) - 1) for j in range(r - 1))            # E_{r-2}(n)
+    return 1 - 4 * B / 2 ** n, 1 + 4 * E / 2 ** n + 8 * B / 2 ** n
+
+
+@conjecture("XV.4 Radial instances psi = f(dist(., s)) (Theorem 11.51): two distinct neighbour values at a sampled point reveal the centre or its antipode, a monotone path then gives ln A exactly with at most (n+1) M + 2n + 1 evaluations; otherwise, if every shell r..n-r was sampled and the first point lies in [r-1, n-r+1], the profile is two-periodic there and A/A_0 lies in [1 - 4B/2^n, 1 + 4 (e^{Delta_{r-2}} - 1) + 8B/2^n], B = |B(n, r-2)|; the alternating profile is never resolved by neighbour values")
+def t_radial_adaptive(rng, trials):
+    stats = dict(exact=0, brackets=0, good=0, tightest_upper=0.0, widest=0.0)
+    n = 16
+    binom = [math.comb(n, j) for j in range(n + 1)]
+    ball = np.cumsum(binom)
+    for rep in range(max(12, trials // 3)):
+        u = float(rng.choice([0.5, 1.0, 2.0]))
+        kind = rep % 6
+        f = lv_radial_profile(rng, n, u, kind)
+        if np.max(np.abs(np.diff(f))) > u + 1e-12:
+            return False, dict(reason="the test profile is not Lipschitz")
+        s = int(rng.integers(0, 2 ** n))
+        M = int(rng.choice([4, 16, 64, 256]))
+        logA = math.log(sum(binom[j] * math.exp(-f[j]) for j in range(n + 1))) - n * math.log(2)
+        branch, val, queries, xs = lv_radial_algorithm(rng, n, f, s, M)
+        if branch == "error" or queries > (n + 1) * M + 2 * n + 1:
+            return False, dict(reason="more than two neighbour values at a point of a radial function, or too many queries", kind=kind)
+        if branch == "exact":
+            if abs(val - logA) > 1e-9:
+                return False, dict(reason="the exact branch of the radial algorithm is wrong", kind=kind, value=val, truth=logA)
+            stats["exact"] += 1
+            continue
+        stats["brackets"] += 1
+        # the bracket of the proof holds whenever every shell r..n-r was sampled and the first point lies in [r-1, n-r+1]
+        dist = [bin(x ^ s).count("1") for x in xs]
+        seen = set(dist)
+        r = next((rr for rr in range(2, n // 2 + 1) if all(j in seen for j in range(rr, n - rr + 1))), None)
+        if r is None or not (r - 1 <= dist[0] <= n - r + 1):
+            continue
+        stats["good"] += 1
+        lo, hi = lv_radial_bracket(n, u, r, binom, ball)
+        ratio = math.exp(logA - val)
+        if not (lo * (1 - 1e-12) <= ratio <= hi * (1 + 1e-12)):
+            return False, dict(reason="the bracket of the radial algorithm fails on its good event", kind=kind, ratio=ratio, lo=lo, hi=hi, r=r)
+        stats["tightest_upper"] = max(stats["tightest_upper"], (ratio - 1) / (hi - 1))
+        stats["widest"] = max(stats["widest"], math.log(hi / max(lo, 1e-300)) if lo > 0 else math.inf)
+    if stats["exact"] == 0 or stats["good"] == 0:
+        return False, dict(reason="the test has no power", **stats)
+    # the bound on the caps is within a constant of the truth: a constant middle part with the steepest caps
+    for r in range(2, 7):
+        for u in (1.0, 3.0):
+            f = np.zeros(n + 1)
+            for j in range(r - 2, -1, -1):
+                f[j] = f[j + 1] - u
+                f[n - j] = f[n - j - 1] - u
+            ratio = sum(binom[j] * math.exp(-f[j]) for j in range(n + 1)) / 2 ** n      # A / A_0 with A_0 = 1
+            lo, hi = lv_radial_bracket(n, u, r, binom, ball)
+            if not (lo <= ratio <= hi):
+                return False, dict(reason="the bracket of the radial algorithm fails for the steepest caps", r=r, u=u, ratio=ratio, hi=hi)
+            stats["tightest_upper"] = max(stats["tightest_upper"], (ratio - 1) / (hi - 1))
+    if stats["tightest_upper"] < 0.3:
+        return False, dict(reason="the bound on the caps is never within a factor 3 of the truth", **stats)
+    # the alternating profile is never resolved by neighbours: the second branch is needed
+    f = np.array([(1.0 / 2) * (-1) ** j for j in range(n + 1)])
+    if lv_radial_algorithm(rng, n, f, 5, 64)[0] != "bracket":
+        return False, dict(reason="the alternating profile was resolved by neighbour values")
+    return True, stats
+
 
 @conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
 def t_dead_exact_free_energy(rng, trials):
