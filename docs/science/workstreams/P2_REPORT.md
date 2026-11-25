@@ -210,8 +210,8 @@ rigorous lower bound from `an_long.py` (true GB difference at a pair of assignme
 | LKSE, E, .60 | 0.61 | 14.45 | 15.76 | 64.66 [67.97] | 65.84 [69.15] | 63.19 [76.86] | ≥ 72.8 | | | |
 | LKSE, P2, .60 | 0.29 | 16.10 | 24.18 | 58.96 | 64.07 | 74.02 | ≥ 71.7 | | | |
 
-(Exact enumerations: Val and Leu at every `n` up to 12 resp. 16, of which the table shows a
-selection; all values are in `out/tables.md`, Table B.  Poly-Val on the helix is trivial: only
+(Exact enumerations: Val at `n` = 1–8, 10, 12 and Leu at `n` = 1–8, 10, 12, 14, 16, of which the
+table shows a selection; all values are in `out/tables.md`, Table B.  Poly-Val on the helix is trivial: only
 the first two residues have more than one state.  The lower bounds were validated where the
 exact value exists: Lys₄/H `[34.723 55.665 49.606 36.787]` against exact
 `[34.72 55.66 49.61 36.79]`.)
@@ -315,9 +315,10 @@ On the non-product `X_τ` the values are the same or somewhat larger (LKSE:6/H: 
 
 *Reading.*  For the neutral peptides the solvent term is within `0.002–0.2` kcal/mol of the
 pairwise class **in supremum norm over the whole enumerated domain** (`βη_sup ≤ 0.35`; `≤ 0.05`
-for Ser, Val and Leu on strand and PPII), and `Σ c_ijk` grows about linearly with the chain (Ser/E: 0.004,
-0.010, 0.016, 0.022 for `n = 3…6`, i.e. 0.006 kcal/mol per residue; Ser/H at τ = 0.70: 0.07
-per residue).  For charged side chains the typical remainder is as small (RMS ≤ 0.04) but
+for Ser, Val and Leu on strand and PPII), and `Σ c_ijk` grows about linearly with the chain
+(Ser/E: 0.004, 0.010, 0.016, 0.022 for `n = 3…6`, i.e. 0.006 kcal/mol per residue; Ser/H at
+τ = 0.70: 0.05, 0.08, 0.15, 0.23, i.e. 0.06–0.08 per residue; for Leu on the helix the sum
+over the 560 triples of the 16-mer is 7.4 although no single `c_ijk` exceeds 0.09).  For charged side chains the typical remainder is as small (RMS ≤ 0.04) but
 its maximum reaches 1.3–2.4 kcal/mol (`2–4 k_BT`) in the states where an ammonium group
 comes close to other groups.  This is the opposite of P's finding in backbone torsions (all
 torsion pairs: RMS 2.10, max 13.4 kcal/mol at five residues).  The one-site (additive) class
@@ -332,9 +333,9 @@ All on `X′`, by enumeration of the lower models; energies kcal/mol, free energ
 poly-Leu on E (`λ* = 18`) and on H for every `n ≤ 16` except `n = 5` (`λ* = 1.16–2.4`; 0.88 at
 `n = 5`; 15 of 16 sites sharp at `n = 16`); poly-Phe on E at `n = 3`.  It fails in every other
 instance: poly-Leu on P2 (`λ* = 0.45–0.75`), Phe at the relaxed threshold (0.01–0.7), Ser
-(`λ* = 0.007–0.17`, no site sharp), Lys (`4·10⁻⁴–0.04`), LKSE (0.005–0.16 for `n ≥ 3`).  Smallest certificates in the per-site format on `X_τ` (lower bound = forced
-points / volume / partition bound, upper bound = greedy cover; `an_cover.py`, the same
-computation as P's):
+(`λ* = 0.007–0.17`, no site sharp), Lys (`4·10⁻⁴–0.04`), LKSE (0.005–0.16 for `n ≥ 3`).
+Smallest certificates in the per-site format on `X_τ` (lower bound = forced points / volume /
+partition bound, upper bound = greedy cover; `an_cover.py`, the same computation as P's):
 
 | instance (`X_τ` size) | ε = 0 | ε = k_BT | ε = 2 kcal/mol |
 |---|---|---|---|
@@ -364,7 +365,7 @@ computation as P's):
 | Val₁₂, P2 (.70) | 531 441 | 25 | holds | 0.51 (2.16) | **0** | 0.21 |
 | Leu₁₆, E (.60) | 65 536 | 17 | holds | 2.64 (2.83) | **0** | < 10⁻³ |
 | Leu₁₆, P2 (.60) | 65 536 | 17 | holds | 0.82 (4.36) | **0** (while `λ* = 0.45`) | 0.008 |
-| Leu₁₆, H (.60) | 65 536 | 17 | fails at 2–3 sites | 1.27 (13.6) | **0** | 0.015 |
+| Leu₁₆, H (.60) | 65 536 | 17 | fails at one site | 1.27 (13.6) | **0** | 0.015 |
 | Phe₈, E (.60) | 1 728 | 15 | holds at `n = 8` | 0.88 (3.26) | **0** (every `n ≤ 8`) | 0.03 (0.13–0.16 at `n = 5–7`) |
 | Phe₁₀, H (.60) | 19 200 | 20 | fails | 1.70 (4.97) | 0.06 (0–0.43 over `n`) | 0.34 |
 | Phe₇, P2 (.60) | 112 500 | 31 | fails | 2.43 (9.58) | 1.52 | 2.05 |
