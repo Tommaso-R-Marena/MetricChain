@@ -1,0 +1,29 @@
+  ks=[2, 2, 2, 2] trial 0: N_low brute 4 vs Menger 4;  N_up brute 3 vs shortest optimal path 3
+  ks=[2, 2, 2, 2] trial 1: N_low brute 4 vs Menger 4;  N_up brute 5 vs shortest optimal path 5
+  ks=[2, 2, 2, 2] trial 2: N_low brute 4 vs Menger 4;  N_up brute 4 vs shortest optimal path 4
+  ks=[2, 2, 2, 2] trial 3: N_low brute 6 vs Menger 6;  N_up brute 5 vs shortest optimal path 5
+  ks=[2, 2, 2, 2] trial 4: N_low brute 4 vs Menger 4;  N_up brute 7 vs shortest optimal path 7
+  ks=[2, 2, 2, 2] trial 5: N_low brute 7 vs Menger 7;  N_up brute 5 vs shortest optimal path 5
+  ks=[2, 2, 2, 2] trial 6: N_low brute 6 vs Menger 6;  N_up brute 6 vs shortest optimal path 6
+  ks=[2, 2, 2, 2] trial 7: N_low brute 4 vs Menger 4;  N_up brute 3 vs shortest optimal path 3
+  ks=[2, 3, 3] trial 0: N_low brute 5 vs Menger 5;  N_up brute 3 vs shortest optimal path 3
+  ks=[2, 3, 3] trial 1: N_low brute 5 vs Menger 5;  N_up brute 3 vs shortest optimal path 3
+  ks=[2, 3, 3] trial 2: N_low brute 8 vs Menger 8;  N_up brute 4 vs shortest optimal path 4
+  ks=[2, 3, 3] trial 3: N_low brute 5 vs Menger 5;  N_up brute 3 vs shortest optimal path 3
+  ks=[2, 3, 3] trial 4: N_low brute 5 vs Menger 5;  N_up brute 4 vs shortest optimal path 4
+  ks=[2, 3, 3] trial 5: N_low brute 5 vs Menger 5;  N_up brute 5 vs shortest optimal path 5
+  ks=[2, 3, 3] trial 6: N_low brute 5 vs Menger 5;  N_up brute 3 vs shortest optimal path 3
+  ks=[2, 3, 3] trial 7: N_low brute 5 vs Menger 5;  N_up brute 3 vs shortest optimal path 3
+  ks=[4, 4] trial 0: N_low brute 8 vs Menger 8;  N_up brute 5 vs shortest optimal path 5
+  ks=[4, 4] trial 1: N_low brute 6 vs Menger 6;  N_up brute 3 vs shortest optimal path 3
+  ks=[4, 4] trial 2: N_low brute None vs Menger 10;  N_up brute 5 vs shortest optimal path 5
+  ks=[4, 4] trial 3: N_low brute 6 vs Menger 6;  N_up brute 4 vs shortest optimal path 4
+  ks=[4, 4] trial 4: N_low brute 8 vs Menger 8;  N_up brute 3 vs shortest optimal path 3
+  ks=[4, 4] trial 5: N_low brute 6 vs Menger 6;  N_up brute 3 vs shortest optimal path 3
+  ks=[4, 4] trial 6: N_low brute 6 vs Menger 6;  N_up brute 5 vs shortest optimal path 5
+  ks=[4, 4] trial 7: N_low brute 6 vs Menger 6;  N_up brute 6 vs shortest optimal path 6
+T3b summary: 24 instances; N_low = Menger number in 23; N_up = path length in 24
+
+real	1m7.243s
+user	0m25.435s
+sys	0m0.058s

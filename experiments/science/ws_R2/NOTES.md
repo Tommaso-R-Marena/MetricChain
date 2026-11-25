@@ -18,7 +18,7 @@ Running log, newest at the bottom.  Labels as in COMMON.md rule 6.
   5. Check Lean hypotheses vs what the lattice lemmas deliver.
   6. Scientific reading; originality paragraph.
 
-## 17:55 — first reading done (§11.22 lines 4692–5083, §11.17 lines 3203–3526, S_REPORT whole)
+## Step 2 (shortly after the start; the two clock times I first wrote here were guesses and are removed) — first reading done (§11.22 lines 4692–5083, §11.17 lines 3203–3526, S_REPORT whole)
 
 Statements under review (numbering of the theory report): Lemma 11.67, Lemma 11.68, Theorem 11.69,
 Lemma 11.70, Theorem 11.71 (a)(b)(c), Proposition 11.72 (a)–(e), Proposition 11.73,
@@ -45,7 +45,7 @@ Things to test / questions raised so far:
  Q4. 11.72(c) is a limit statement without finite-N constants; 3 627 depends on it (3 719 without).
  Q5. "reached at 10^3–10^5 beads" has no theorem behind it.
 
-## 18:10 — read DEAD_ENDS D46/D48, SetLimit.lean, CoverStability.lean, ENG-REQ-0001, ENG-RES-0002
+## Step 3 — read DEAD_ENDS D46/D48, SetLimit.lean, CoverStability.lean, ENG-REQ-0001, ENG-RES-0002
 
 Lean hypotheses vs use (review by reading; Lean not run yet):
 * `SuperAdditive Q β β' R` quantifies `add`, `succ`, `bound` over ALL M : ℕ, and
@@ -276,3 +276,22 @@ Finite-N volume bounds with K1 rows (site constants) + the two extra rows (53, 6
 * `r2_lamella.lamella_np` (vectorised builder, identical coordinates to lamella() on 11 test cases);
   `r2_packing.py B` now uses it, with vectorised lattice/bridge checks; N=27,250,1000,2000 give the same
   numbers as before (3/18/26/32 ...).  The slow first 5000-bead run was killed by me.
+
+* `r2_packing.py B 2000 5000` (fast builder, 5.5 CPU-min): N=5000: 15 110 distinct (h,g);
+  35 / 82 / 6 / 11 (report 35 / 77 / 6 / 12).  Full table mine/claimed in R2_REPORT §6.1:
+  22 cells equal, 8 higher, 2 one lower ((1,1/4) at 250: 30 vs 31; (1/5,1/4) at 5000: 11 vs 12).
+* Report completed (placeholders removed).
+
+## Final state
+
+* Report: docs/science/workstreams/R2_REPORT.md (verdict table §1; findings §4: no critical, M1 headline,
+  M2 bracket/inner volume; m1–m8 minor; new statements N1–N5 in §3.10; reproduction table §6).
+* Verdict summary: 11.67 proved; 11.68 proved (exhaustive N<=13); 11.69 proved (Lean link needs Q_M={0},
+  M<=5); 11.70 proved; 11.71 (a) proved but only off an unidentified countable set, (b) proved, (c)
+  bounds replicated, plateau estimate is an estimate; 11.72 (a)-(e) proved, "how much is known" weaker
+  than advertised; 11.73 proved; 11.74 proved; 11.75 conjecture, (i)-(iv) proved.
+* New: N1 helix point (0,0,1;1) in K^br; N2 vol >= 1.563; N3 liminf >= 116 / 451 / 8 / 19 (>= 100 with
+  finite objects only); N4 d_H >= 1/2 for N <= 43 512; N5 finite-N constants for the marked programme
+  and N^P_cov(N/2) <= 3728 (N>=1000), <= 3627 (N>=1e5).
+* Not done: walks N = 24..27; periodic systems / inner model / plateau estimates; off-lattice; Thm 11.37.
+* bin/ and __pycache__ removed (rebuild lines in README.md).

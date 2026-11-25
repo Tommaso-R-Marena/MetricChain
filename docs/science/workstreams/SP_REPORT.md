@@ -200,7 +200,9 @@ cover (Theorem 11.6(a) [V]), upper bound = greedy cover:
 |---|---|---|---|---|
 | `g_GB`, 3 | 508 | [94, 139] | [85, 130] | [61, 112] |
 | `g_GB`, 4 | 3 844 | [447, 782] | [378, 717] | [261, 609] |
-| `g_GB`, 5 | 28 843 | [3 042, 5 357] | PENDING5a | PENDING5b |
+| `g_GB`, 5 | 28 843 | [3 042, 5 357] | [2 668, 5 033] | [1 947, 4 307] |
+| `g_19`, 5 | 28 843 | [2, 3] | [2, 3] | [2, 3] |
+| `g_03`, 5 | 28 843 | [2, 28] | [2, 22] | [2, 10] |
 | `g_99`, 4 | 3 844 | 1 | 1 | 1 |
 | `g_19`, 4 | 3 844 | [2, 11] | [2, 8] | [2, 4] |
 | `g_03`, 4 | 3 844 | [2, 12] | [2, 9] | [2, 7] |
@@ -419,8 +421,8 @@ this workstream; nothing else).
   (`n = 1…9`).  **Without the filter the numbers are meaningless** from `n = 4` (overlapping
   atoms: `c_i(g_99) = 329 kcal/mol` from a fourth-decimal charge difference at `r → 0`).
   Sensitivity: `out/an1_constants.json` has every constant for `τ ∈ {0, 0.6, 0.7, 0.8}`; between
-  0.6 and 0.7 the constants of `g_GB` change by less than 3 % at `n ≤ 5`; at 0.8 only 2–16 % of
-  the grid survives (the basin states themselves score 0.72–0.86) and I do not use it.
+  0.6 and 0.7 the constants of `g_GB` change by less than 3 % at `n ≤ 5`; at 0.8 only 2–31 % of
+  the A3 grid survives for `n ≥ 2` (the basin states themselves score 0.72–0.86) and I do not use it.
 * **Off-grid ensemble C** (`sample_continuous.py`).  Each residue's `(φ, ψ)` uniform on the
   clash-free 42 % of the dipeptide map (5° cells plus jitter), conformations with a non-local
   clash rejected (acceptance 95 % at `n = 2`, 54 % at `n = 8`).  It is *not* a Boltzmann ensemble;
@@ -533,14 +535,13 @@ out; least squares with a `10⁻⁹` ridge; 44 knots: 0.25 Å spacing to 6 Å, 0
 | | Amber types (1 268) | 0.43 / 3.94 | 0.74 / 4.5 | 0.20 / 2.5 | 0.26 / 2.0 | 0.22 / 3.0 |
 
 Transfer with the constant refitted (Amber types, `g_GB`): trained at `n = 8` → `n = 3, 4, 5, 6`
-of ensemble C: RMS 0.25, 0.29, 0.33, 0.36 (max 2.6–4.4); → A3 grid `n = 5` (6 000 conformations):
-0.49 / 3.0; → **all** 35 478 clash-free conformations of the A2 grid at `n = 8`: 0.57 / **8.8**.
+of ensemble C: RMS 0.25, 0.29, 0.33, 0.36 (max 2.6–4.4); → 6 000 random clash-free conformations
+of the A3 grid at `n = 5`: 0.49 / 3.0; → 6 000 of the A2 grid at `n = 8`: 0.57 / **8.8**.
 Trained at `n = 5` → `n = 8`: RMS 4.8 — but the exactly pair-additive Coulomb control fails
 the same way (8.4): distances beyond 22 Å were never seen in training; this is extrapolation
 in the distance variable, not a many-body effect.  Three observations: (1) the remainder grows
-with the chain (RMS 0.26 → 0.43 from five to eight residues); (2) the maximum over an
-exhaustively enumerated domain (8.8) is more than twice the maximum over a random held-out
-sample of the same chain (3.9); (3) the Coulomb control is no better than `g_GB`, so with
+with the chain (RMS 0.26 → 0.43 from five to eight residues); (2) on grid conformations, which include the most compact states of the chain, the maximum
+(8.8) is more than twice that on held-out conformations of the broad ensemble (3.9); (3) the Coulomb control is no better than `g_GB`, so with
 typed pairs the remainder is dominated by the typing and the piecewise-linear resolution.
 
 *How far is `g_GB` from an exactly pair-additive function?* (`an11_manybody.py`.)  To remove the
@@ -558,16 +559,16 @@ upper bound on the distance of `g_GB` to that class (kcal/mol, RMS / max, consta
 | 4 | 0.30 / 4.1 | 0.39 / 2.3 | 0.31 / 2.3 | 4.4 |
 | 5 | 0.34 / 3.5 | 0.48 / 4.8 | 0.37 / 4.1 | 5.2 |
 | 6 | 0.43 / 5.4 | 0.56 / 8.8 (40 000 sampled) | 0.43 / 6.3 | 5.8 |
-| 8 | 0.52 / 6.1 | — | MB_A2_8 | 7.2 |
+| 8 | 0.52 / 6.1 | — | 0.47 / 9.3 (all 35 478) | 7.2 |
 
 So: (a) freezing the Born radii — the textbook "pairwise GB" — is useless here (RMS 5 kcal/mol
 although the radii fluctuate by only 4 % on average, 11 % at most), because the cross terms of
 bonded neighbours act as self-energies and respond to the radii at first order; (b) with the
 first-order response included, `g_GB` is within 0.1–0.5 kcal/mol RMS of an exactly
 pair-additive function, growing roughly linearly with the chain; (c) the supremum of the
-remainder is 0.5–9 kcal/mol (`1–15 k_BT`) and grows faster than the RMS.  This is the cleanest
+remainder is 0.2–9 kcal/mol (up to `16 k_BT`) and grows faster than the RMS.  This is the cleanest
 answer the pilot has to "is `βη` small compared with 1": **in RMS yes for these sizes
-(`βη_RMS = 0.2–0.9`), in sup norm no beyond the dipeptide (`βη_sup = 1.5–15`).**
+(`βη_RMS = 0.2–0.9`), in sup norm no from three residues on (`βη_sup = 2–16`).**
 
 *Slope bound.*  The fitted radial functions have slopes up to `L_s = 0.6–0.9 kcal/mol/Å²`
 (`L_r = 3.7–4.4 kcal/mol/Å`) for `g_GB`, at short range; for a `q_pq_q/r` tail the slope in
@@ -602,8 +603,8 @@ most 0.64 kcal/mol per residue.  A torsion refit that is exactly in the cheapest
 
 Covers (`an7_sharpness.py`): Statement 6(b).  Lower bounds are forced points, the volume bound
 `Σ_y 1/M(y)` and the partition-function bound of Theorem 11.6(c) (the first is by far the
-strongest: 3 042 against 915 and 204 at `n = 5`); upper bounds are greedy covers.  Additional
-rows: FFDIFF_N5.  A2, `n = 8`, `g_GB` (35 478 conformations): COVER_A2_8.
+strongest: 3 042 against 915 and 204 at `n = 5`); upper bounds are greedy covers.  The covers of the force-field differences at `n = 5` are dense (a single centre covers up to
+28 828 of the 28 843 conformations) and were computed by a greedy cover over a candidate pool.  A2, `n = 8`, `g_GB` (35 478 conformations): COVER_A2_8.
 
 Exact free-energy quantities on the grids, `g_GB`: `ln Z(f+g) − ln Z(f)` = 48.4, 58.9, 68.5
 nats (`n = 3, 4, 5`), of which first-order perturbation `−β⟨g⟩_f` gives 46.3, 56.4, 66.2; Jensen
@@ -621,3 +622,219 @@ the one case in this report where an envelope constant of a real residual could 
 *certified*, for every chain length.
 
 ---
+## 4. Prior art, with a search log
+
+Reading levels: `[full text]`, `[abstract]`, `[search snippet]`, `[from memory — unverified]`.
+I searched PubMed (through the bio-research connector) on 2026-11-25 with the queries
+"generalized Born pairwise decomposable protein design", "LUTE local unpruned tuple expansion
+protein design", "Nguyen Roe Simmerling generalized Born neck model protein simulations 2013",
+"ff14SB improving accuracy protein side chain backbone parameters ff99SB", "ff19SB
+amino-acid-specific protein backbone parameters trained against quantum mechanics energy
+surfaces", "residue-pairwise generalized Born scheme protein design Archontis Simonson", and
+read the abstracts returned.  No other database was searched; I did not open any full text.
+This is a thin search: enough to place the measurements, not enough to claim novelty.
+
+*The models used.*
+* Nguyen, Roe, Simmerling, "Improved Generalized Born Solvent Model Parameters for Protein
+  Simulations", J. Chem. Theory Comput. 9 (2013) 2020–2034,
+  [doi:10.1021/ct3010485](https://doi.org/10.1021/ct3010485) `[abstract]` — GB-Neck2, the
+  model called GBn2 in OpenMM.
+* Maier, Martinez, Kasavajhala, Wickstrom, Hauser, Simmerling, "ff14SB: Improving the Accuracy
+  of Protein Side Chain and Backbone Parameters from ff99SB", J. Chem. Theory Comput. 11 (2015)
+  3696–3713, [doi:10.1021/acs.jctc.5b00255](https://doi.org/10.1021/acs.jctc.5b00255)
+  `[abstract]`.  The abstract says the backbone change is "a physically motivated adjustment
+  to the φ rotational profile that compensates for lack of ff99SB QM training data in the
+  β-ppII transition region" — which is exactly what Statement 3(a) measures: for alanine the
+  difference is a function of φ alone (range 1.115 kcal/mol), and its largest effect on the
+  A3 grid is on the β/PPII gap.  **[K]** for the nature of the change; the numbers are mine.
+* Tian, Kasavajhala, Belfon, Raguette, Huang, Migues, Bickel, Wang, Pincay, Wu, Simmerling,
+  "ff19SB: Amino-Acid-Specific Protein Backbone Parameters Trained against Quantum Mechanics
+  Energy Surfaces in Solution", J. Chem. Theory Comput. 16 (2020) 528–552,
+  [doi:10.1021/acs.jctc.9b00591](https://doi.org/10.1021/acs.jctc.9b00591) `[abstract]` —
+  "coupled φ/ψ parameters" (CMAP), recommended with OPC water; Statement 3(b) is the
+  class-theoretic reading of "coupled φ/ψ".
+* ff99SB (Hornak et al. 2006), ff03 (Duan et al. 2003), ff15ipq (Debiec et al. 2016), OBC
+  (Onufriev, Bashford, Case 2004), OpenMM (Eastman et al. 2017): `[from memory — unverified]`;
+  I used the parameter files shipped with OpenMM 8.6.1 and did not check them against the
+  papers.
+
+*What is known about the non-pairwise character of GB.*
+* Archontis, Simonson, "A residue-pairwise generalized Born scheme suitable for protein design
+  calculations", J. Phys. Chem. B 109 (2005) 22667–22673,
+  [doi:10.1021/jp055282+](https://doi.org/10.1021/jp055282+) `[abstract]`: the interaction
+  energy of two residues "depends on the whole protein structure" but is "accurately fitted by
+  a parabolic function" of the product of their residue Born radii, with coefficients that
+  depend only on the pair.  This is the same mechanism as the surrogate of §3.4 (a low-order
+  expansion in the Born radii makes GB pairwise); mine is first order, per atom, and is used
+  only to *measure* the distance to the pair-additive class.  That GB is not pairwise and that
+  an expansion in Born radii repairs most of it is therefore **[K]**; the sizes of the
+  remainder for these peptides, and in particular their sup-norm values, are **[N]**.
+* Gaillard, "Improved Physics-Based Single-Position Protein Sequence Redesign with a
+  Residue-Pairwise Generalized Born Model", J. Phys. Chem. B 129 (2025) 10699–10710,
+  [doi:10.1021/acs.jpcb.5c03662](https://doi.org/10.1021/acs.jpcb.5c03662) `[abstract]`:
+  mentions "errors due to the pairwise decomposition of the solvation terms" and a
+  "fluctuating dielectric boundary" approach "allowing an exact decomposition of the GB term".
+  I cite it only as evidence that the pairwise approximation of GB is an active, known issue;
+  its application (sequence redesign) is outside the scope of this programme and nothing of
+  it is used here.
+* Hallen, Jou, Donald, "LUTE (Local Unpruned Tuple Expansion): Accurate Continuously Flexible
+  Protein Design with General Energy Functions and Rigid Rotamer-Like Efficiency", J. Comput.
+  Biol. 24 (2017) 536–546, [doi:10.1089/cmb.2016.0136](https://doi.org/10.1089/cmb.2016.0136)
+  `[abstract]`: represents "general, possibly nonpairwise energy functions to an arbitrary
+  level of accuracy using a discrete energy matrix" by fitting low-order tuple expansions.
+  This is the closest prior art to Statement 5(a) in *method* (least-squares expansions of a
+  non-pairwise energy in discrete conformational variables), in a different setting (side
+  chains on a fixed or locally flexible backbone, where the variables are rotamers).  I could
+  not read which residuals they report; the comparison "tuple expansions are accurate in
+  rotamer variables on a fixed backbone but not in backbone torsion variables" is my
+  conjecture **[C]** from row 2 of the table in §2.B, not a documented fact.
+
+*What I did not find and did not search for properly:* measurements of sup-norm
+bounded-difference constants of a solvation term per torsion; the lever-arm growth of such
+constants; certified (interval) bounds for GB energies over conformational cells.  Absence in
+six PubMed queries means nothing.  The theory division's own prior-art files
+(`docs/prior_art/L1…L8`) cover the mathematics; I did not re-read them.
+
+---
+
+## 5. What I did not settle
+
+1. **Asymptotics of the constants.**  Six (three-state) or nine (two-state) residues exactly,
+   local-search lower bounds beyond.  Linear growth, slower growth and saturation are all
+   compatible with the two-state data; the three-state data are linear up to six residues.
+   Whether a real (continuous, relaxed) chain behaves like the three-state grid — because it
+   has turn conformations — is a physical argument, not a measurement.
+2. **Upper bounds.**  Every constant in this report is a maximum over a finite set.  No
+   constant for the continuous torsion space was bounded from above; the scans (Statement 8)
+   only show that the continuous constants are not smaller.
+3. **Rigid geometry.**  Relaxing bond angles (or minimising the hard degrees of freedom at
+   each grid point) would change `f`, the clash-free domain and probably the constants; not
+   done.  The helix becoming the minimum at five residues, and the 0.4–0.9 kcal/mol
+   differences between helix, β and PPII, are properties of this rigid model.
+4. **Side chains.**  Alanine only.  Fixed-backbone side-chain placement — the setting in which
+   the known part *is* pairwise (row 2) — was not measured at all; the conjecture that `g_GB`
+   has small `c_ij` in rotamer variables there is untested here.
+5. **Explicit solvent, Poisson–Boltzmann, quantum chemistry, learned potentials** as residuals:
+   not done.  GBn2 is itself a pairwise-descreening approximation of a dielectric-boundary
+   problem; a Poisson–Boltzmann residual may be further from the pair-additive class.
+6. **The best approximation in the profile class.**  I report least-squares and (for element
+   types) Chebyshev fits on samples and one explicit pair-specific surrogate.  The true
+   sup-norm distance of `g_GB` to the pair-additive class on a full domain is bracketed only
+   from above (≤ 4.8 kcal/mol on the A3 pentapeptide grid, ≤ 9.3 on the A2 octapeptide grid);
+   a lower bound would need a dual certificate (a signed measure on conformations annihilating
+   all pair functions), which I did not compute.
+7. **Certificate sizes in the span format on the real instance.**  The theory's alternative to
+   the per-torsion format (Theorems 11.47–11.48 with a sup-norm remainder) was not run as a
+   certificate; only its inputs (`η`, `L`, rank) were measured.
+8. **Free energies.**  Only grid sums at 300 K; no continuous integral, no basin free energy.
+9. **The domain.**  All sup-norm numbers depend on the clash threshold through the most
+   compact conformations; I report one threshold (0.70) with a sensitivity check at 0.60.
+10. The local-search lower bounds for 16 and 20 residues used few starts in a space of
+    `2³²`–`2⁴⁰` conformations and are weak.
+
+---
+
+## 6. The three most promising next steps
+
+1. **Measure the same constants where the theory's known part exists: fixed-backbone
+   side-chain placement.**  Take a small folded peptide or mini-protein of fixed sequence
+   and fixed backbone, a standard rotamer library, ff14SB pairwise tables as `f` and GBn2 as
+   `g`; enumerate or sample; measure `c_i`, `c_ij`, sharpness and the cover.  There the site
+   variables move only their own atoms, so no lever arm exists, the constants are bounded by
+   the solvation of one side chain, and the row-sum condition of §11.7 has a chance.  This is
+   the experiment that decides whether the second-order interface (Theorems 11.16–11.17) has
+   a real instance.  (Fixed sequence, no design.)
+2. **Replace "typed pair functions fitted on a sample" by a provable class for GB.**  The
+   structure found in §3.4 — `g_GB = Σ_{p<q} e(r_pq) + Σ_p w_p I_p(x) + remainder`, with `I_p` an
+   explicit pair sum and the remainder second order in the Born-radius fluctuations — suggests
+   a class in which the *features are known* (`I_p` and the frozen-radius pair terms are
+   computable, not fitted) and only a remainder with an *analytic* bound is uncertain:
+   `|remainder| ≤ ½ Σ_p K_p (δ(1/B_p))²` with `K_p` from the explicit second derivatives of the
+   GB formula.  An interval-arithmetic bound on that remainder over a conformational cell would
+   be the first certified envelope for a real many-body term.
+3. **Collective sharpness.**  The measured landscapes are decided by cooperative basins
+   (helix, β, PPII within 0.4–2.7 kcal/mol; single-site excitations excluded in the helix).
+   The right resolution statement for chains is therefore Theorem 11.39 (droplets), not
+   site-wise sharpness.  Measure, for the real `f` and each residual, the droplet ratio `λ*`
+   as a function of chain length and compare with a transfer-matrix (helix–coil-type) model
+   whose parameters are fitted to the grid energies; this would turn "the minimiser is not
+   model-robust" into a quantitative statement about which basins a given model uncertainty
+   can and cannot order.
+
+---
+
+## 7. Requests
+
+### To the theory division
+
+**T-1 (envelopes with a domain).**  All measured constants are suprema over a domain, and
+they are dominated by its most compact and most extended members.  The theorems are stated
+for a fixed `X`.  Please state the monotonicity explicitly — if `X′ ⊂ X` then `c_i(X′) ≤ c_i(X)`
+and a certificate over `X′` plus a certified exclusion of `X ∖ X′` (by the known part alone)
+is a certificate over `X` — and say what the exclusion step costs when it must itself use the
+envelope (`E ≥ f − (residual range)`).  Measured input: on the pentapeptide grid the range of
+`g_GB` is 55.6 kcal/mol and that of `f` 118 kcal/mol; a window of 20 kcal/mol in `f` contains
+PENDING_WINDOW.
+
+**T-2 (a class with known features and a quadratic remainder).**  Is there a version of
+Theorem 11.47(d) for `g = θ⁰·F + ρ` where `F` is known, `θ⁰` is *known* (not in a box), and
+`|ρ(x)| ≤ Σ_p K_p u_p(x)²` with known nonnegative functions `u_p` (here: the deviation of the
+inverse Born radius from its reference)?  Then the uncertainty at `x` is a computable function
+of `x`, not a constant `η`, and it vanishes at the reference state.  What is the certificate
+cost?  (This is the form the GB residual actually has, §3.4.)
+
+**T-3 (sup norm versus typical error).**  The measured residual is within `0.4 k_BT` RMS of the
+profile class and `4–15 k_BT` in sup norm, and its exact Jensen gap is 2.3 nats where the
+first-order class allows 178.  Is there a theorem in which the remainder is bounded in
+`L²(π_f)` or in an exponential moment under the Gibbs measure of the known part, for `ln Z`
+(not for the minimum)?  By the Gibbs variational principle `|ln Z(f+g) − ln Z(f+ĝ)| ≤
+ln E_π e^{β|g−ĝ|}`; with a certified exponential-moment bound instead of a sup bound the
+accuracy floor would be the *typical* remainder.  What must be certified, and can it be
+estimated by sampling with a guarantee?
+
+**T-4 (droplet criterion for long-range known parts).**  Theorem 11.39 is for
+nearest-neighbour chains.  The real known part has `c_ij(f)` decaying slowly (12 kcal/mol at
+separation seven).  Is `λ* = min_y gap(y)/d(x̂, y)` still the exact criterion (it is, by Theorem
+11.7), and is there a transfer-matrix-like bound for it under a decay assumption on the
+couplings?
+
+### To the engineering division
+
+**E-1 (specification: constants of a solvation residual in rotamer variables on a fixed
+backbone).**
+*Motivation.*  §6 item 1: the one setting in which the theory's known part is exact.
+*Formulation.*  Fixed sequence and fixed backbone coordinates of a small public structure
+(any capped peptide of 10–20 residues with side chains; sequence taken as is); rotamers from a
+public library, 3–9 per residue; `f` = ff14SB intra- and inter-residue energies (pairwise
+tables); `g` = GBn2 polarisation energy of the whole molecule (OpenMM `implicit/gbn2.xml`,
+`sasaMethod=None`); domain = clash-free assignments (threshold 0.70 on `r/(R_p+R_q)`).
+*Inputs.*  `pepbuild.py` and `fastff.py` of this workstream can be extended (side-chain
+Z-matrices); `fastff.py` reproduces OpenMM to `5·10⁻¹²` kcal/mol.
+*Outputs.*  `c_i`, `c_ij` (matrix and row sums), single-site excitation energies of `f` at its
+minimiser, number of sharp sites, `λ*`, smallest cover brackets for `ε ∈ {0, k_BT, 2 kcal/mol}`,
+low-order fit remainders (RMS and Chebyshev), all with units.
+*Validation.*  Reproduce the alanine numbers of this report first (e.g. A3, `n = 4`:
+`c = 17.27 13.35 22.88 20.05 22.90 20.49 16.29 12.77`; cover at `ε = 0` in [447, 782]).
+*Stopping conditions.*  Stop if the row-sum condition fails at every site by more than a
+factor 3 at 8 residues (then the second-order interface has no instance here either), or as
+soon as one instance satisfies it (then certify that instance end to end).
+*Resources.*  `10⁵–10⁶` conformations × 1 ms: CPU-minutes to an hour; covers by integer
+programming as in ENG-RES-0002.
+
+**E-2 (extend THY-REQ-0003 with the real residual).**  Your accepted design asks "which class"
+for synthetic and learned residuals on lattice chains.  The data of this workstream
+(`data/grid_*.npz`: every energy component for up to 531 441 conformations, with states and
+clash scores) can be dropped into the same pipeline as a fourth case, "a real implicit-solvent
+term off-lattice".  Two things your design should take from the pilot: (a) a sup-norm
+remainder fitted on a sample is not a bound — the unconstrained Chebyshev fit had held-out
+maximum 10.2 kcal/mol at training `η = 1.06`, and on an exhaustively enumerated domain the
+maximum was more than twice that of a random held-out sample; report maxima over *enumerated*
+domains only; (b) one pair type is useless for electrostatics — the type set must at least
+separate the signs of the partial charges (Amber types: 36 pairs), and the slope bound must
+depend on distance.
+
+**E-3 (exact covers for the real instances).**  The cover brackets of Statement 6(b) come
+from forced points and a greedy heuristic.  Your integer-programming cover code with certified
+dual bounds (ENG-RES-0002) would close them: instances `an7_*.json` list the inputs; the
+largest has 28 843 points with mean set size 35 (sparse).  Expected outcome: the exact
+certificate size of a real solvation residual in the per-torsion format for 3, 4, 5 residues.

@@ -7,7 +7,7 @@ Started 2026-11-25 18:12 UTC.  Rules read (COMMON.md, R3_brief.md).  I write onl
 
 * 18:12 — created directory; read COMMON.md and R3_brief.md.  Next: read the note itself
   (statements first; attempt proofs independently before reading the author's proofs).
-* 18:25 — read the note (v2, 544 lines), SCI-MSG-0001, SCIENCE_TO_ALL, experiments/science/README,
+* (18:1x–18:2x) — read the note (v2, 544 lines), SCI-MSG-0001, SCIENCE_TO_ALL, experiments/science/README,
   theory report §11.6 (Thm 11.12 + remark), §11.10 (11.22–11.26), §11.16 (11.43–11.46),
   §11.18 (11.51–11.54), §11.19 (11.55–11.58 statements + table), §11.22 (11.67–11.75).
   Author's scripts NOT yet opened (own code first).
@@ -56,7 +56,7 @@ Started 2026-11-25 18:12 UTC.  Rules read (COMMON.md, R3_brief.md).  I write onl
 
 ## Numerics log
 
-* 18:40 `r3_codes.py` (own GF(2)/BCH code; output `r3_codes.out`).  For every n <= 31, every
+* [step 1] `r3_codes.py` (own GF(2)/BCH code; output `r3_codes.out`).  For every n <= 31, every
   k <= n, two coordinate choices (first n; random n-subset of 2^m-1): dual of BCH(t=ceil(k/2))
   punctured to n coordinates has EXACT dual distance > k (brute force / MacWilliams) and
   |C| <= (2n)^ceil(k/2); 0 failures; max of ln|C| - ceil(k/2) ln 2n is exactly 0 (n = 2^(m-1)).
@@ -65,7 +65,7 @@ Started 2026-11-25 18:12 UTC.  Rules read (COMMON.md, R3_brief.md).  I write onl
   |C| <= 2 (2n)^((k-1)/2).  Puncturing can destroy the MINIMUM distance of C itself
   (simplex[15,4,8] on 8 well-chosen coordinates has a word of weight 1) - harmless for the
   note (d_min(C) is never used), relevant for any sharpening.
-* 18:55 `r3_thm2.py` (output `r3_thm2.out`): Theorem 2 replicated exactly on codes the author did
+* [step 2] `r3_thm2.py` (output `r3_thm2.out`): Theorem 2 replicated exactly on codes the author did
   not use: [15,8,4] = dual of BCH(15,2) (k=4) and extended Golay [24,12,8] (k=7), b in
   {0.5,1,2,4} resp. {1,2,4}; both nu_{C,b} and the variant exp(-b d(x,C)); full-cube
   Walsh-Hadamard transform: every Fourier coefficient of order 1..k is 0 (exactly), order k+1
@@ -83,7 +83,7 @@ Started 2026-11-25 18:12 UTC.  Rules read (COMMON.md, R3_brief.md).  I write onl
   <= M_t/min F_t^2 + kappa^(r+1) by Theorem 3 applied to pi.  Hence
   S >= n h(sigma) + t ln n - ln t! - o(1): Theorem 2 is sharp (even k: up to O_k(1)) within
   mixtures of polarised basins.  Full cone class: open.
-* 19:20 `r3_thm3.py` (output `r3_thm3.out`).  Theorem 3 replicated and placed: (i) exact-integer
+* [step 3] `r3_thm3.py` (output `r3_thm3.out`).  Theorem 3 replicated and placed: (i) exact-integer
   identities E_unif F_t^2 = M_t, deg = 2t, F_t(d) = K_t^(n-1)(d-1) hold; E_mu f^2 = M_t checked on
   a 4-wise uniform measure that is NOT invariant under a single code (mixture of cosets of two
   permuted [15,8] codes): 1e-14.  (ii) EXACT optimum (Krawtchouk LP in the distance
@@ -100,7 +100,7 @@ Started 2026-11-25 18:12 UTC.  Rules read (COMMON.md, R3_brief.md).  I write onl
   optimum at r=0 while the note's bound gives 1/2325 (Rao's odd-strength bound 2 M_t(n-1) is
   what is tight); RM(1,m) attains 1/(2n) for k=3 against 1/(n+1): "attained up to constants" is
   true for odd k only with the extended code, not with the note's (2n)^ceil(k/2) code.
-* 19:35 `r3_prop5b.py` (output `r3_prop5b.out`).  Prop 5b: own exact sums over the joint law of
+* [step 4] `r3_prop5b.py` (output `r3_prop5b.out`).  Prop 5b: own exact sums over the joint law of
   the two distances (log domain; root of D_s - U0 E_s).  With INTEGER r1 = round(rho1 n) the
   note's numbers are reproduced: n=1000: s* = -0.00490, ln Z'-ln Z0 = 0.6907; n=5000:
   s* = -0.0393, 0.6737; independent of the distance of the hidden centre (0.3n, 0.45n, 0.5n) to

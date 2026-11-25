@@ -1,5 +1,6 @@
 'MetricChain.Kinetics.exists_exit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MetricChain.Kinetics.cut_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Kinetics.level_cut_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MetricChain.Kinetics.pinned_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MetricChain.Kinetics.neg_cone_admissible' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MetricChain.Kinetics.cone_admissible' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -23,8 +24,11 @@
 'MetricChain.Kinetics.trap_survival' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MetricChain.Kinetics.trap_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MetricChain.Kinetics.trap_certificate_weighted' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Kinetics.singleSite_symm' does not depend on any axioms
+'MetricChain.Kinetics.wallBox_pairwiseDisjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Kinetics.box_trap_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
 
-real	0m26.712s
-user	0m7.507s
-sys	0m1.550s
+real	0m28.942s
+user	0m7.928s
+sys	0m1.490s
 exit: 0

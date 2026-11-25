@@ -1,0 +1,23 @@
+# R4 own harness for Theorem 11.84 (Claims A, B); u=1.0, seed=20261125
+run   1: n_o=8 n_i=4 L=2 K=6 eta'=100.0 theta=1.0 lam=0.5 extensive walk     one     M_max=98304 J=61 status=closed level=35 good=True |C_l|=[1967] N_l=[746837] seq.calls(l>=2)=20 violA=False
+run   2: n_o=11 n_i=4 L=2 K=6 eta'=100.0 theta=10.0 lam=1.0 bounded   flat     one     M_max=786432 J=40 status=closed level=15 good=True |C_l|=[470] N_l=[214809] seq.calls(l>=2)=6 violA=False
+run   3: n_o=10 n_i=3 L=4 K=6 eta'=20.0 theta=10.0 lam=0.5 extensive flat     zero    M_max=393216 J=67 status=closed level=25 good=True |C_l|=[7888, 4784, 4784] N_l=[1354477, 870532, 840742] seq.calls(l>=2)=144 violA=False
+run   4: n_o=9 n_i=3 L=3 K=6 eta'=100.0 theta=1.0 lam=1.0 bounded   cone     zero    M_max=393216 J=32 status=closed level=21 good=False |C_l|=[1581, 747] N_l=[166651, 71481] seq.calls(l>=2)=238 violA=False
+run   5: n_o=9 n_i=3 L=2 K=16 eta'=20.0 theta=10.0 lam=0.5 extensive flat     uniform M_max=524288 J=62 status=closed level=26 good=True |C_l|=[29884] N_l=[5068278] seq.calls(l>=2)=106 violA=False
+run   6: n_o=9 n_i=3 L=3 K=6 eta'=100.0 theta=10.0 lam=1.0 bounded   walk     one     M_max=196608 J=31 status=closed level=14 good=True |C_l|=[127, 0] N_l=[44764, 30378] seq.calls(l>=2)=7 violA=False
+run   7: n_o=11 n_i=5 L=2 K=6 eta'=100.0 theta=3.0 lam=0.5 bounded   flat     one     M_max=393216 J=81 status=closed level=34 good=True |C_l|=[484] N_l=[123612] seq.calls(l>=2)=6 violA=False
+run   8: n_o=11 n_i=5 L=2 K=6 eta'=100.0 theta=3.0 lam=0.5 bounded   flathist one     M_max=393216 J=81 status=closed level=36 good=True |C_l|=[633] N_l=[72376] seq.calls(l>=2)=21 violA=False
+run   9: n_o=10 n_i=5 L=4 K=6 eta'=100.0 theta=10.0 lam=0.5 bounded   walk     one     M_max=196608 J=75 status=closed level=35 good=True |C_l|=[527, 287, 0] N_l=[83778, 45445, 34559] seq.calls(l>=2)=32 violA=False
+run  10: n_o=10 n_i=4 L=4 K=6 eta'=100.0 theta=10.0 lam=1.0 extensive cone     mixed   M_max=393216 J=36 status=closed level=22 good=False |C_l|=[23520, 3251, 1646] N_l=[6856344, 1708350, 1642124] seq.calls(l>=2)=254 violA=False
+run  11: n_o=10 n_i=6 L=4 K=6 eta'=100.0 theta=10.0 lam=0.5 bounded   cone     uniform M_max=196608 J=79 status=closed level=33 good=False |C_l|=[1084, 414, 88] N_l=[125669, 66895, 53304] seq.calls(l>=2)=36 violA=False
+run  12: n_o=8 n_i=3 L=3 K=16 eta'=100.0 theta=10.0 lam=1.0 extensive dip      one     M_max=262144 J=30 status=closed level=10 good=False |C_l|=[0, 0] N_l=[3126420, 2863266] seq.calls(l>=2)=0 violA=False
+run  20: n_o=11 n_i=6 L=4 K=6 eta'=100.0 theta=1.0 lam=0.5 bounded   flathist zero    M_max=786432 J=84 status=closed level=48 good=False |C_l|=[654, 317, 228] N_l=[116463, 51599, 43367] seq.calls(l>=2)=225 violA=False
+run  40: n_o=9 n_i=3 L=4 K=6 eta'=100.0 theta=3.0 lam=1.0 bounded   dip      mixed   M_max=196608 J=31 status=closed level=14 good=False |C_l|=[1086, 312, 0] N_l=[153924, 77026, 38697] seq.calls(l>=2)=107 violA=False
+run  60: n_o=10 n_i=6 L=4 K=6 eta'=100.0 theta=3.0 lam=1.0 bounded   flat     zero    M_max=393216 J=40 status=closed level=18 good=True |C_l|=[293, 293, 0] N_l=[43703, 30189, 26742] seq.calls(l>=2)=96 violA=False
+run  80: n_o=11 n_i=5 L=3 K=6 eta'=100.0 theta=10.0 lam=1.0 bounded   trunc    uniform M_max=786432 J=41 status=closed level=22 good=True |C_l|=[643, 116] N_l=[85845, 46719] seq.calls(l>=2)=51 violA=False
+run 100: n_o=6 n_i=4 L=3 K=16 eta'=1.0 theta=10.0 lam=1.0 extensive cone     mixed   M_max=262144 J=27 status=closed level=15 good=True |C_l|=[173100, 79289] N_l=[887844045, 302387702] seq.calls(l>=2)=79 violA=False
+run 120: n_o=8 n_i=5 L=3 K=6 eta'=20.0 theta=10.0 lam=0.5 extensive flathist uniform M_max=3072 J=67 status=closed level=29 good=True |C_l|=[2116, 451] N_l=[5141987, 493176] seq.calls(l>=2)=71 violA=False
+run 140: n_o=11 n_i=6 L=2 K=6 eta'=100.0 theta=3.0 lam=0.5 bounded   flathist mixed   M_max=393216 J=87 status=closed level=37 good=False |C_l|=[1630] N_l=[268002] seq.calls(l>=2)=33 violA=False
+# summary: {'runs': 150, 'closed': 150, 'good': 112, 'A_viol_good': 0, 'A_viol_bad': 0, 'B_viol': 0, 'S_viol': 0, 'width_viol': 0, 'mutL_viol': 29, 'mutL_runs': 150, 'mut2_viol': 8, 'mut2_runs': 150, 'neg_levels': 283, 'pop_levels': 3811, 'calls_ge2': 21343, 'skipped': 18, 'aborts': 0, 'B_nontrivial': 174}
+# rungs with N_l < M_max (Claim B not implied by |C_l| <= M_max): 174, largest |C_l|/N_l among them = 0.0270
+# largest |C_l|/N_l = 0.0270;  |C_l|/M_max: median 0.0021, min 0.00000, max 1.0000

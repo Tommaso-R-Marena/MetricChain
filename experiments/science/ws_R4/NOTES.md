@@ -145,3 +145,37 @@ Meaning for Thm 11.86: v s1 = g1(d(x^1,s1)) is in L_u, so every (eps/2,delta)-co
 least (1-2 delta) e^{n theta}/(n+1)^2 evaluations IN EXPECTATION AT THE FLAT-HISTOGRAM INSTANCE of the first block
 (averaged over its centre) — the exact analogue of Thm 11.25(a) "at the zero function".  Closes the workstream's
 "extension to expected batch sizes: only the Markov remark".
+
+## Step 10 — other slopes (out_exponents_other.txt) : MY VALUES
+  u     theta2*/a  theta2*/h  phi1*   T2(0)/a   h/a
+  ->0   0.346035   1.38414    0.654   0.618034  0.25
+  0.5   0.34947    1.38006    0.6505  0.61964   0.25323
+  1     0.35939    1.36834    0.6406  0.62432   0.26265
+  2     0.39408    1.32795    0.6059  0.64124   0.29676
+  3     0.43965    1.27770    0.5604  0.66462   0.34409
+report: 0.346/0.349/0.359/0.394/0.440; 1.38/1.38/1.37/1.33/1.28; 0.65/0.65/0.64/0.61/0.56; 0.618/0.620/0.624/0.641/0.665.  ALL REPRODUCED.
+Xi(h,phi1) > 0 and theta -> Xi decreasing at every slope and phi1 in {0.1,0.3,0.5,0.64}.
+
+## Step 11 — own harness for Theorem 11.84 (batched_sim.py), written before reading the workstream's harness
+Own implementation of Algorithm 2L+ (K_REPORT §2.2, literally) with simulated inner oracle and of B2L+ (candidate
+sets C_l from stored brackets, lambda_j, M-hat_j).  Checks per run: (S) sanity of my 2L+ (valid bracket on good
+event, width <= x_out always), (A) Claim A on the good event G' = V2&V3&V3', (B) Claim B always, two mutations.
+Two regimes: "extensive" (rungs a fraction of x_0; N_l >> M_max, Claim B vacuous) and "bounded" (small rungs,
+n_o = 9..11, K = 6, eta' = 100: N_l < M_max, Claim B is a real constraint).
+Test runs (seeds 1, 2; 18 runs): no violation of S, A, B; lambda-mutation detected in 4/18.
+Full runs launched: 150 (u=1), 100 (u=3), 100 (u=0.5)  -> out_batched_sim_u*.txt
+
+## Step 12 — Prop. 11.88(a) by exact counting (cond_cover_check.py -> out_cond_cover.txt)
+7 pairs (sigma,kappa), n = 200/800/3200: dual and primal exponents bracket H(sigma)-H(kappa) and converge
+(e.g. (0.45,0.38), n=3200: 0.02377 <= 0.02407 <= 0.02500, the workstream's numbers exactly); best t/n -> t*.
+For sigma <= kappa the cost is 0 (the known point itself hits).
+
+## Step 13 — originality (one paragraph; A1 did the deep search: docs/science/workstreams/A1_REPORT.md §4.6)
+Two web searches + two abstract pages (via the page-summarising tool; no verbatim abstract):
+* Zhou, Wang, Sugiyama, "The adaptive complexity of parallelized log-concave sampling", arXiv:2408.13045 (ICLR 2025)
+  [abstract, summarised]: rounds with poly many queries per round; lower bounds via "hardness potentials" with a
+  chain-like structure and random partitions (Nemirovski type).
+* Dogariu, "Sharp Lower Bounds for Parallel Log-Concave Sampling", arXiv:2611.15849 (11 Nov 2026) [abstract,
+  summarised]: Omega_kappa(log d) rounds at poly(d) width; depth-width trade-off for centred Gaussians
+  (ceil(c log d) rounds <-> width d^{1-c/c*}).  Sampling, continuous, polynomial scale.
+Neither is about estimating a normalising constant over a Lipschitz class on the cube with exponential budgets.

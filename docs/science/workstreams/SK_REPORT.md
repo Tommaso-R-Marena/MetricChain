@@ -15,9 +15,9 @@ is claimed nowhere: all numerics are my own code testing my own statements.
 on the energy over the boxes of its wall; an upper bound on an escape rate is the same cut with the wall
 *minimum* replaced by the wall *partition function* and the basin minimum by the basin partition function.
 Both are exactly what the verified `(min,+)` and `(+,×)` kernels output, so soundness of "certified
-kinetics" needs **no new kernel** — I machine-checked the composition (25 Lean theorems in one file on
-top of `verify_sound` / `verifyR_sound`, including two kernel-evaluated instances and a discrete-time
-kinetic-trap theorem that needs only stationarity, not reversibility).  Under an envelope class the
+kinetics" needs **no new kernel** — I machine-checked the composition (29 Lean theorems in one file on
+top of `verify_sound`, `verifyR_sound` and `zverifyTop_sound`, including two kernel-evaluated instances
+and a discrete-time kinetic-trap theorem that needs only stationarity, not reversibility).  Under an envelope class the
 barrier height above a state has an **exact** robust interval, attained at the two cone residuals
 `−d(a,·)` and `d(·,a)` (the coordinator's sketch 2 is true, with anchors too, and it is the same
 one-line lemma that gives Theorems 2.3, 2.4 and 11.12 of the theory report); in the query model a
@@ -47,7 +47,7 @@ incomplete capability**: it certifies the direction that path-finding methods ca
 | 1. which cuts stay decomposable | boxes (wall = `n` boxes) **[V]**; counting cuts with an exact counter — never with a linear multiplier, unreliably with a quadratic penalty **[P, N]**; coordinate cuts only on restricted site graphs **[P, N]** (Prop. K2, K3) |
 | 2. robust interval for the height above `a` | true, exact, with anchors via the conditional envelope `D_A` **[P, N; both ends' soundness V]** (Thm K6); saddle energy in `[B_{f+L}, B_{f+U}]` exactly **[P, N]** |
 | 2. query complexity; persistence | certificates are coverings of a separator and of a path **[P, N]** (Thm K7); position-dependent stability of the persistence of one minimum **[P, N]** (Cor. K6.2, K6.4) |
-| 3(i) exit time from boundary/basin partition functions | true **[K]**; stronger: discrete-time survival bound for any stationary local kernel **[V]** (Thm K10) |
+| 3(i) exit time from boundary/basin partition functions | true **[K]**; stronger: discrete-time survival bound for any stationary local kernel **[V]**, composed with the Z-kernel for box cuts **[V]** (Thm K10, §2.8) |
 | 3(ii) gap ≤ `Q/(π(A)π(Aᶜ))` | true **[K, N]** |
 | 3(iii) Dirichlet / Thomson as two-sided certificates | true **[K, N]**; Dirichlet side = cuts and level partition functions (kernel-checkable), Thomson side = mixtures of explicit paths (no partition function) (Prop. K11, K12) |
 | 3(iv) envelope uncertainty of rates | exact for a single gateway, LP in general, closed-form sound bounds, factor `e^{β·d(basin,wall)}` **[P, N]** (Thm K14) |
@@ -115,7 +115,8 @@ of `k` torsion voxels this is the **certified relaxed scan**
 (c) *Counting cuts.*  Let `q = Σ_i q_i(x_i)` be integer valued and change by at most `Δ` per move.
 For `S = {q < r}`: `∂⁺S ⊆ {r ≤ q < r + Δ}`.  For `q_I(x) = #{i ∈ I : x_i ≠ a_i}` the wall is exactly
 the level set `{q_I = r}`; `r = 1` is the box cut that fixes the sites of `I`, `I` = all sites is a
-Hamming sphere.  Hence `B(a,b) ≥ max_{1 ≤ r ≤ q_I(b)} min_{q_I = r} E`.  The level minima of a
+Hamming sphere.  Hence `B(a,b) ≥ max_{1 ≤ r ≤ q_I(b)} min_{q_I = r} E` (soundness of a level cut for
+any statistic that increases by at most one per move: **[V] `level_cut_sound`**).  The level minima of a
 chain-structured (path-width `w`) pairwise energy are computed exactly by a transfer matrix that carries
 the counter, `O(n k^{w+1} R)` operations for all `R` levels at once (script T10; this is the chain
 kernel run over tropical polynomials).  A statistic that is itself pairwise ("number of native
@@ -499,8 +500,14 @@ the inside leaves into `Lo`, checks the adjacency condition (2) of §2.5 and out
 
 **Soundness statement.**  If the checker outputs `U/Lo`, then for every stochastic kernel that is
 stationary for the Boltzmann weights and moves one site per step,
-`P_{π_A}(τ > T) ≥ 1 − T·U/Lo` for all `T` (**[V]** `trap_certificate_weighted` + `zverifyTop_sound` +
-`certified_partition_of_intervals`; the glue is not formalised), and for reversible continuous-time
+`P_{π_A}(τ > T) ≥ 1 − T·U/Lo` for all `T`.  Machine-checked for box cuts and a model given in the weight
+domain — **[V] `box_trap_certificate`**: if `zverifyTop` returns `(loA, ·)` on the box `D` and
+`(·, hi i)` on its `i`-th wall box, then for every stochastic kernel that is stationary for the weights
+of the instance and moves at most one site per step, the survival probability in `D` after `T` steps,
+started from the stationary law restricted to `D`, is at least `1 − T·(Σ_i hi i)/loA`.  Not formalised:
+the tree format, the weights `κ`, and the passage from a rational instance to real Boltzmann factors
+(lower instance on the basin, upper instance on the wall, as in `certified_partition_of_intervals`).
+For reversible continuous-time
 dynamics with rates at most one per neighbour `λ_A ≤ U′/Lo` and `P_{π_A}(τ > t) ≥ e^{−tU′/Lo}` **[K]**,
 where `U′` is the wall sum weighted by `deg_A(y)` instead of `κ(y)`.
 Robust version: anchored upper/lower instances as in Theorem K14(b).  Level certificates (K11) need the
@@ -583,21 +590,24 @@ arithmetic except where stated.  Random instances: pairwise tables with Gaussian
 | `t11_cut_size.py` | greedy number of wall boxes of exact cut certificates | as T4, T7 | median `≤ 1.6 n`, max `3.2 n` boxes |
 | `t12_product_flow.py` | random-order (product) flow and its `Z⁻` bound against exact capacities | `N = 256`, 13 cases | no violation; exact when lumpable; useless at low temperature on rugged landscapes |
 | `t13_penalty_lp.py` | linear multiplier, quadratic penalty (integer and pairwise-LP leaf) against exact level minima | binary `n = 10`, 8 + 23 traps | linear: below trivial always; quadratic integer → exact; quadratic LP leaf: mean `0.42`, exact `30 %`, nothing `48 %`; collapses for large `μ` |
-| `KineticsCertificates.lean` | 25 theorems (listed below) | — | `lake env lean`: exit 0, no warnings; `#print axioms` of all 25: `[propext, Classical.choice, Quot.sound]` (`out_lean.txt`) |
+| `KineticsCertificates.lean` | 29 theorems (listed below) | — | `lake env lean`: exit 0, no warnings; `#print axioms` of all 29: `[propext, Classical.choice, Quot.sound]` for 28, no axioms for `singleSite_symm` (`out_lean.txt`) |
 
 **Machine-checked statements** (`experiments/science/ws_K/KineticsCertificates.lean`; imports
-`proofs.CertificateAlgebra`; not part of the library; re-check with
+`proofs.CertificateAlgebra` and `proofs.Frontiers.PartitionCertificate`; not part of the library;
+re-check with
 `export PATH="$HOME/.lean/lean-4.31.0-linux/bin:$PATH"; cd /home/user/MetricChain; lake env lean experiments/science/ws_K/KineticsCertificates.lean`):
-`exists_exit`, `cut_sound`, `pinned_bounds`, `neg_cone_admissible`, `cone_admissible`,
+`exists_exit`, `cut_sound`, `level_cut_sound`, `pinned_bounds`, `neg_cone_admissible`, `cone_admissible`,
 `robust_cut_sound`, `robust_path_sound`, `neg_cone_pinned`, `cone_pinned`, `mem_wallBox_of_exit`,
 `box_cut_barrier`, `box_cut_barrier_residual`, `certified_trap_height`, `ferro_wall_verified`,
 `ferro_wall_rejects`, `ferro_barrier`, `ferro_start`, `ferro_wall_attained`,
 `ferroResidual_wall_verified`, `ferroResidual_trap` (the `ferro*_verified`, `_rejects`, `_start`,
 `_attained` facts by `decide +kernel`, i.e. the checker is run inside Lean's kernel), `surv_nonneg`,
-`surv_le_one`, `trap_survival`, `trap_certificate`, `trap_certificate_weighted`.
+`surv_le_one`, `trap_survival`, `trap_certificate`, `trap_certificate_weighted`, `singleSite_symm`,
+`wallBox_pairwiseDisjoint`, `box_trap_certificate`.
 What is **not** machine-checked: the exactness (attainment and interval) part of K6 beyond the two
-admissibility lemmas, K7, K8, the decision-tree checker of §2.5, the composition of K10 with the
-Z-kernel, and every reversible/spectral statement.
+admissibility lemmas, K7, K8, the decision-tree checkers of §2.5 and §2.8, the passage from rational
+weight instances to real Boltzmann factors in the rate certificate, and every reversible/spectral
+statement.
 
 **Caveats.**  (i) Every landscape is tiny (at most 5849 states, plus one 200-site chain treated by
 dynamic programming); the fractions in T4, T7, T11 are not monotone in `n` and must not be
@@ -678,7 +688,7 @@ gaps by canonical paths as certificates.
 | K5–K6 (pinned extremal lemma; exact robust interval for barrier height, depth, saddle energy; with anchors) | **possibly new** in this form; elementary; subsumes Thm 2.3, 2.4, 11.12 of the theory report; the interval-valued-field literature (mandatory critical points) is the closest prior art I found and I could not read it |
 | K7 (barrier certificates are coverings of a separator and of a path) and K7.1 | **possibly new**; the analogue of the covering theorem for minima |
 | K14 (robust TST bounds: exact single gateway, transport-plan bounds, sensitivity factor) | **possibly new combination** (linear-fractional programming over the weight cone is standard; cf. imprecise Markov chains) |
-| machine-checked composition with `verify_sound` / `verifyR_sound`; `trap_survival` | **new artefacts** |
+| machine-checked composition with `verify_sound` / `verifyR_sound` / `zverifyTop_sound`; `trap_survival` | **new artefacts** |
 
 ---
 

@@ -26,9 +26,9 @@ tables for 4 to 24 beads.  All computer-assisted *bounds* were replicated with i
 both linear programmes were re-formulated from scratch and every row was certified with **my own**
 exact dual certificates; the volume bounds (`26 437`, `3 719`, `3 627` and the seventeen others of
 S_REPORT §7.1) come out to the digit; I found my own packings of 51, 158, 7, 15 points in `T₀`
-(claimed 50, 157, 7, 14) and my own lamella families give the finite-`N` lower bounds `26` at 1 000 beads and `32` at 2 000
-(claimed 26, 31).  The machine-checked abstract theorems say what the report says they say, but
-their hypotheses are **not literally** what Lemma 11.68 delivers (index range, normalisation); the
+(claimed 50, 157, 7, 14) and my own lamella families give the finite-`N` lower bounds `26`, `32`, `35` at
+1 000, 2 000, 5 000 beads (claimed 26, 31, 35).  The machine-checked abstract theorems say what the
+report says they say, but their hypotheses are **not literally** what Lemma 11.68 delivers (index range, normalisation); the
 gap is bookkeeping and I give the patch.  What does **not** survive as written is the *practical
 headline*: "the plateau lies between 50 and 3 627 evaluations … and is reached at `10³`–`10⁵` beads"
 (and "the plateau is real, it is in the hundreds").  The bracket is a theorem about `liminf` and
@@ -38,7 +38,9 @@ and the second has no theorem behind it in either direction.  In the other direc
 *understates* what its own tools prove: with the explicit bridges that the authors built (I
 regenerated and verified them with my code) and the convexity theorem, the lower bound for the
 `liminf` at `(L, ε₁) = (1, ½)` is **at least 116**, not 50, and the body of profile densities has
-volume **at least 1.56** (proved), where the report's "2.2" rests on an unproved sketch.
+volume **at least 1.56** (proved), where the report's "2.2" rests on an unproved sketch; and the
+limit statements of the marked programme have finite forms (`N^P_cov(N/2) ≤ 3 627` for every walk with
+at least `10⁵` beads, `≤ 3 728` from 1 000 beads on).
 
 **Per statement.**
 
@@ -339,8 +341,15 @@ verified lamellae with 48 174 and 60 548 beads, so that only finite verified wal
 helix and Theorem 11.69 enter: **≥ 100** at `(1, ½)`, `≥ 7` at `(⅕, ½)`; `r2_rigorous_packing.py finite`.)
 
 Hence `116 ≤ liminf_N N^P_cov(N/2) ≤ limsup ≤ 3 626` for all walks at `L = e = 1` (`3 626` is the floor of
-the volume ratio `3 626.5`), and likewise `116 ≤ N_∞(½) ≤ 3 626` for the limit object of bridges.  The proof uses Lemma 11.68, the abstract theorem (convexity, `β/M`), Proposition
-11.72(d), fact N1 and the ten verified bridges; nothing about periodic systems or routing.
+the volume ratio `3 626.5`), and likewise `116 ≤ N_∞(½) ≤ 3 626` for the limit object of bridges.  The
+proof uses Lemma 11.68, the abstract theorem (convexity, `β/M`), Proposition 11.72(d), fact N1 and
+the ten verified bridges; nothing about periodic systems or routing.
+
+**N4 [P] (when the shape is resolved).**  From Proposition 11.73 and `(1,5,6;0) ∈ K^{br}`:
+`d_H(𝒟_N^{br}, K^{br}) ≥ 17.6N^{-1/3} − 17/N ≥ ε₁/L = ½` for every `N ≤ 43 512` (and `≥ ¼` for every
+`N ≤ 3.4·10⁵`).  So for all chains shorter than `4·10⁴` beads the finite profile set misses a part of
+the limit body by more than one covering radius.  This is a statement about the shape, not about
+the covering number (covering numbers with internal centres are not monotone under inclusion).
 
 **N5 [P, computer-assisted, exact] (finite-`N` constants for the marked programme — listed as "not
 done" in §11.22).**  For a walk with `N` beads let `ν` count the oriented bonds per marked
@@ -367,12 +376,6 @@ the volume count becomes a bound for every chain of at least `N` beads (`out/vol
 | `N^P_cov(N/4) ≤`, `L = ⅕` | 486 | 402 | 393 | 392 | 392 |
 
 So "`limsup ≤ 3 627`" holds in the finite form "`≤ 3 627` for every walk with at least `10⁵` beads".
-
-**N4 [P] (when the shape is resolved).**  From Proposition 11.73 and `(1,5,6;0) ∈ K^{br}`:
-`d_H(𝒟_N^{br}, K^{br}) ≥ 17.6N^{-1/3} − 17/N ≥ ε₁/L = ½` for every `N ≤ 43 512` (and `≥ ¼` for every
-`N ≤ 3.4·10⁵`).  So for all chains shorter than `4·10⁴` beads the finite profile set misses a part of
-the limit body by more than one covering radius.  This is a statement about the shape, not about
-the covering number (covering numbers with internal centres are not monotone under inclusion).
 
 ---
 
@@ -487,12 +490,12 @@ beads".**
 | part | status |
 |---|---|
 | every limit point of `N^P_cov(N/2)`, all walks, lies in `[50, 3 627]` | **theorem** [P, computer-assisted; replicated]; improved here to `[116, 3 626]` |
-| `N^P_cov(N/2) ≤ 26 437` for every `N` | **theorem** [P; replicated] |
+| `N^P_cov(N/2) ≤ 26 437` for every `N` | **theorem** [P; replicated]; sharper finite forms in N5 (`≤ 3 728` from 1 000 beads, `≤ 3 627` from `10⁵` beads) |
 | there is a plateau (the sizes converge) — bridges | **theorem only off a countable unidentified set of accuracies**; open at `ε₁ = ½` |
 | there is a plateau — all walks (the chains that were enumerated) | **conjecture-dependent** (Conjecture 11.75, epigraph form) and subject to the same exceptional set |
 | the plateau is "in the hundreds" / "150–350" | **estimate** [N]; the inner model behind it uses an unproved sketch |
 | not reached at enumerable sizes | **theorem** in the sense: the values at enumerable sizes (13 at 23 beads from my own table; 15 at 27 beads, re-solved by me from the engineering table) are below every limit point (≥ 116) |
-| at least 26 / 32 / 35 evaluations at `10³` / `2·10³` / `5·10³` beads | **theorem** [P, exact counts; replicated at `10³` and `2·10³`] |
+| at least 26 / 32 / 35 evaluations at `10³` / `2·10³` / `5·10³` beads | **theorem** [P, exact counts; replicated with my own family] |
 | "reached at `10³`–`10⁵` beads" | **estimate** [H]; no theorem in either direction.  Proved in the neighbourhood of this claim: N4 (the shape is not within one covering radius of its limit before `4·10⁴` beads) |
 
 **Is the model representative of anything?**  It is one lattice (the tetrahedral lattice with
@@ -549,7 +552,7 @@ exponential in `L·S_c·M/ε₁` is a heuristic [H], consistent with geometric g
 | `26 437`, `191 833`, `392`, `2 195` (bulk box) | **replicated** (`26 437.00`, `191 833.00`, `392.20`, `2 194.60`) | `out/volumes.txt` |
 | `3 627`, `23 272`, `93`, `393` (`𝒦₂`); `3 719 …` (`𝒦₁`); `4 673 …`, `3 809 …` (`𝒦₁^{(N)}`) | **replicated** (`3 626.50`, `23 272.00`, `92.50`, `392.80`; `3 719.33 …`; `4 673.16 …`; `3 809.31 …`) | `out/volumes.txt` |
 | packings in `T₀`: 50 (52), 157 (162), 7, 14 | **replicated**: 51, 158, 7, 15 (exact rational check) | `r2_packing.py A`, `r2_packing_fine.py` |
-| "proved at `N`": 3, 6, 10, 17, 22, 26, 31, 35 at 27 … 5 000 beads (`(1, ½)`) | **replicated to 2 000**: 3, 6, 10, 18, 22, 26, 32 (5 000: see below); other three rows likewise | `r2_packing.py B` |
+| "proved at `N`": 3, 6, 10, 17, 22, 26, 31, 35 at 27 … 5 000 beads (`(1, ½)`) and the other three rows | **replicated** with an independent family: 3, 6, 10, 18, 22, 26, 32, 35; full table in §6.1 (of the 32 cells 22 are equal, eight higher and two one lower than claimed) | `r2_packing.py B`, `out/packing_finiteN*.txt` |
 | lamellae (densities, `k ≈ 2.5`) | **replicated** (own construction) | `r2_lamella.py` |
 | the 166 199-bead bridge | **regenerated with the authors' builder, verified with my code** (exact match) | `r2_verify_witness.py` |
 | the nine finite bridges at box 64 | same (all nine identical) | `out/witness_nine_W64.txt` |
@@ -562,11 +565,21 @@ exponential in `L·S_c·M/ε₁` is a heuristic [H], consistent with geometric g
 | off-lattice estimates (S_REPORT §7.3) | **read only** | — |
 | Lean: the eight cited declarations, their statements and axioms | **checked** (standard axioms only) | `R2Axioms.lean`, `out/lean_axioms.txt` |
 
-Pending entries are completed in §6.1.
+### 6.1 Finite-`N` lower bounds, cell by cell
 
-### 6.1 Late results
+Explicit bridges with exactly `N` beads (my lamellae `M × Q × ℓ`, `M, Q` odd, prolonged by an all-trans
+tail; up to 15 110 distinct `(h, g)` at `N = 5 000`), every walk checked from coordinates, the packing
+condition `L‖h_i − h_j‖_c > g_i + g_j + 2ε₁N` verified in exact integers.  Mine / claimed:
 
-(filled in at the end of the review; see the end of this file)
+| `N` | 27 | 60 | 120 | 250 | 500 | 1 000 | 2 000 | 5 000 |
+|---|---|---|---|---|---|---|---|---|
+| `(1, ½)` | 3 / 3 | 6 / 6 | 10 / 10 | 18 / 17 | 22 / 22 | 26 / 26 | 32 / 31 | 35 / 35 |
+| `(1, ¼)` | 4 / 4 | 11 / 11 | 19 / 19 | 30 / 31 | 44 / 43 | 55 / 53 | 68 / 64 | 82 / 77 |
+| `(⅕, ½)` | 1 / 1 | 2 / 2 | 3 / 3 | 4 / 4 | 5 / 5 | 5 / 5 | 6 / 6 | 6 / 6 |
+| `(⅕, ¼)` | 2 / 2 | 3 / 3 | 5 / 5 | 6 / 6 | 8 / 8 | 10 / 9 | 11 / 10 | 11 / 12 |
+
+Every entry is a valid lower bound for `N^P_cov(ε₁N)` at that `N`; the two cells where my greedy
+packing is one below the claim (`(1, ¼)` at 250; `(⅕, ¼)` at 5 000) are not replicated, the rest is.
 
 ### 6.2 How to re-run (from `experiments/science/ws_R2/`)
 
@@ -577,7 +590,8 @@ for N in $(seq 3 24); do bin/r2_enum bridge $N > out/bridge_N$N.txt; done    # 1
 python3 cmp_tables.py 4 23 ; python3 r2_lemma67.py 12 3000 ; python3 r2_tables.py
 bin/r2_concat 13 ; bin/r2_concat 16 8 ; bin/r2_concat 8 16 ; python3 r2_concat_bounds.py
 python3 r2_bridge_tables.py ; python3 r2_walk_vs_bridge.py
-python3 r2_lp_site.py ; python3 r2_lp_marked.py ; python3 r2_volumes.py ; python3 r2_finite_sets.py
+python3 r2_lp_site.py ; python3 r2_lp_marked.py ; python3 r2_lp_marked_finite.py ; python3 r2_volumes.py
+python3 r2_finite_sets.py ; python3 r2_outer_on_witnesses.py
 python3 r2_lamella.py ; python3 r2_rodpairs.py ; python3 r2_packing.py A ; python3 r2_packing_fine.py
 python3 r2_packing.py B 27 60 120 250 500 1000 2000 5000
 python3 r2_cover.py walk 21 1 1 1 2 ; python3 r2_cover.py bridge 21 1 1 1 2
@@ -587,8 +601,9 @@ python3 r2_inner_volume.py ; python3 r2_rigorous_packing.py ; python3 r2_rigorou
 export PATH="$HOME/.lean/lean-4.31.0-linux/bin:$PATH"; (cd /home/user/MetricChain && lake env lean experiments/science/ws_R2/R2Axioms.lean)
 ```
 
-No random seeds matter for the verdicts (random tests use fixed seeds).  Largest memory: 1.4 GB
-(`r2_packing.py B 5000`, `r2_cover.py eng 27`).
+No random seeds matter for the verdicts (random tests use fixed seeds).  Largest memory: about
+1.1 GB (`r2_cover.py eng 27`); longest runs: `r2_enum walk 23` (323 s), `r2_enum bridge 24` (about 500 s
+unloaded), `r2_packing.py B 5000` (330 s CPU), `r2_cover.py eng 27 1 1 1 2` (695 s).
 
 ---
 
@@ -709,9 +724,3 @@ bridges of up to `3·10⁵` beads (minutes each), integer programmes with about 
 (conflict graph of bounded degree).  (iii) Independently of (ii): class tables of **bridges** for
 `N = 25 … 27` with the full set of gauche counts per class (the authors and I have them to 24), to
 extend the walk-versus-bridge comparison to the sizes of your walk tables.
-
----
-
-## 13. Late results (completing §6)
-
-(see below)

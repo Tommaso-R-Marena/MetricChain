@@ -20,6 +20,13 @@ Lemma K5, Theorem K6 and its Corollary K6.1, Theorem K10).
   box `D` certifies a barrier for every walk of single-site moves leaving `D`.
 * `box_cut_barrier_residual`, `certified_trap_height` — the same on top of `verifyR_sound`, for
   every residual of the bounded-difference class with the published anchors.
+* `level_cut_sound` — counting cuts: a statistic that increases by at most one per move.
+* `ferro_barrier`, `ferroResidual_trap` — kernel-evaluated instances (`decide +kernel`).
+* `trap_survival`, `trap_certificate`, `trap_certificate_weighted` — discrete-time kinetic trap for
+  every stochastic kernel with given stationary weights (no reversibility).
+* `box_trap_certificate` — composition with `zverifyTop_sound`: intervals returned by the partition
+  kernel on a box and on its wall boxes bound the survival probability of every stationary
+  single-site dynamics.
 
 This file is in the science division's directory and is not part of the `MetricChain` library.
 Check with:  `lake env lean experiments/science/ws_K/KineticsCertificates.lean`

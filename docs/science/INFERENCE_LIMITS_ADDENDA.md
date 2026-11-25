@@ -238,3 +238,52 @@ measurable for large `K` (the event has exponentially small probability); restra
 pinning `K − 1` degrees of freedom prepares the conditional ensemble and makes a one-body
 measurement carry order-`K` information.  That is the sense in which perturbed ensembles
 are the informative experiments.
+
+## A9. Finite precision: what A7 was trying to say, stated correctly
+
+Model: every measured number carries an absolute error of at most `τ > 0`.  Correlation
+functions are the expectations of the characters `χ_T(x) = (−1)^{Σ_{i∈T} x_i}`.
+
+**Theorem 2-τ (correlations of every order) [P; exact enumeration,
+`finite_precision_check.py`].**  For the mixture `ν_{C,b}` of Theorem 2,
+
+    E_ν χ_T = tanh(b/2)^{|T|}   if T is a word of C^⊥,        E_ν χ_T = 0   otherwise.
+
+Hence, if the dual distance of `C` is at least `k_τ := ⌈ln(1/τ)/ln coth(b/2)⌉`, **every
+correlation function of `ν_{C,b}`, of every order up to `n`, is within `τ` of the uniform
+ensemble's**, while `S(ν_{C,b}) ≤ n·h(σ(b)) + ln|C|` with `|C| ≤ (2n)^{⌈k_τ/2⌉}`.
+*Proof.*  `X = Y ⊕ E` with `Y` uniform on `C` and `E` i.i.d. Bernoulli(`1 − σ(b)`):
+`E χ_T(X) = E χ_T(Y)·E χ_T(E) = [T ∈ C^⊥]·(2σ(b) − 1)^{|T|}`.  ∎
+
+For `b = 1` and `τ = 1 %`: `k_τ = 6`, `|C| ≤ (2n)³`.  Thermal noise attenuates a correlation of
+order `j` by `tanh(b/2)^j`; beyond the order `k_τ` nothing is left to measure, whatever the
+ensemble hides there.
+
+**The same for the query lower bound [exact formula P, enumerated; the asymptotic step a
+sketch].**  For the `C`-symmetrised dip of Theorem 4 with disjoint balls, `E_μ χ_T = 0` unless
+`T ∈ C^⊥`, and then, with `j = |T|` and `κ_j(d) = K_j(d)/C(n,j)`,
+
+    E_μ χ_T = χ_T(a) · Z⁻¹ · |C|·2^{−n} Σ_{d<r} C(n,d)(e^{u(r−d)} − 1)·κ_j(d).
+
+The excess mass sits on the shell `d ≈ n/(1+e^{u})` and `κ_j(d) → (1 − 2d/n)^j` for fixed `j`, so
+`|E_μ χ_T| ≤ (1 + o(1))·tanh(u/2)^{j}`: with correlations of *every* order known to absolute
+precision `τ`, the lower bound of Theorem 4 is divided by at most `(2n)^{⌈k_τ/2⌉}` for all large
+`n` — **`h_hint` is unchanged by finite-precision correlation data of any order [P sketch]**.
+(Compare A8: with *exact* marginals of order `αn` the exponent does drop.  The drop needs
+probabilities of size `2^{−αn}` to be known to relative accuracy.)
+
+**Proposition 4″-τ (pinned ensembles) [P; 200 random instances, largest error 0.36 of the
+bound].**  If the one-body marginals of the `n` successively pinned ensembles of A7 are each
+known to absolute precision `τ`, then in the class of constant `u`
+
+    | ln Z_g − ( −β(f+g)(x*) − Σ_i ln m̂_i ) |  ≤  n·τ·(1 + e^{u}) + O(n τ²),
+
+because every conditional probability is at least `1/(1+e^{u})`.
+
+**Reading (kept apart from the statements, and not yet sent to the other divisions).**
+With finite precision the distinction that A7 mis-stated becomes true: measurements on
+the unperturbed ensemble, of any order, are worth a polynomial factor; `n` one-body
+measurements on pinned ensembles, each no more precise, determine `ln Z` to `O(nτ)`.  Pinning
+converts absolute precision on a conditional ensemble into relative precision on an
+exponentially small probability of the unperturbed one.  That, and not the order of the
+observable, is what a perturbed ensemble buys.

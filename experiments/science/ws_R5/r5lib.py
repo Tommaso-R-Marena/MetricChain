@@ -164,74 +164,96 @@ def radius_at(site, Q, t):
     return max(renyi_div_scaled(site.W[k], Q, t) for k in range(len(site.W)))
 
 
-def _eg_primal(site, t, M0, iters=4000):
-    """Exponentiated-gradient ascent on G_t(M): M[phi] *= exp(eta * ((1-t)D_t(pi_phi||Q_M) - G)).  Robust fallback."""
-    M = M0.copy()
-    eta = 2.0
-    best = (G_primal(site, M, t), M.copy())
+def _dv(site, M, t):
+    """vector of (1-t) D_t(pi_phi || Q_M) and the value G_t(M)."""
+    Q = centre_of(site, M, t)
+    dv = -logsumexp(t * site.logW + (1 - t) * np.log(Q)[None, :], axis=1)
+    return dv, G_primal(site, M, t)
+
+
+def _grad_negG(site, M, t):
+    """gradient of -G_t(M) with respect to M:  exp(G - (1-t)D_t(pi_phi||Q_M))   (derived by hand, see NOTES)."""
+    dv, g = _dv(site, M, t)
+    return np.exp(g - dv)
+
+
+def _eg_primal(site, t, M0, iters=20000, tol=1e-13):
+    """Exponentiated-gradient ascent on G_t(M) with backtracking; stops when the duality gap max_phi dv - G < tol."""
+    M = np.maximum(M0, 1e-15)
+    M /= M.sum()
+    eta = 1.0
+    dv, g = _dv(site, M, t)
     for it in range(iters):
-        Q = centre_of(site, M, t)
-        dv = np.array([renyi_div_scaled(site.W[k], Q, t) for k in range(len(M))])
-        g = G_primal(site, M, t)
-        Mn = M * np.exp(eta * (dv - g) / max(t, 1e-3))
-        Mn /= Mn.sum()
-        gn = G_primal(site, Mn, t)
-        if gn >= g - 1e-16:
-            M = Mn
-            if gn > best[0]:
-                best = (gn, M.copy())
-        else:
-            eta *= 0.5
-            if eta < 1e-8:
+        if dv.max() - g < tol:
+            break
+        while True:
+            Mn = M * np.exp(eta * (dv - dv.max()))
+            Mn /= Mn.sum()
+            gn = G_primal(site, Mn, t)
+            if gn >= g or eta < 1e-12:
                 break
-    return best
+            eta *= 0.5
+        M = Mn
+        dv, g = _dv(site, M, t)
+        eta *= 1.3
+    return g, M
 
 
-def renyi_primal(site, t, M0=None):
-    """max_M G_t(M) by SLSQP on the convex function sum_a s_a^(1/t) (in log form), polished by EG if the
-    duality gap is not closed.  Returns (lower bound G_t(M), M, upper bound from the centre Q_M)."""
+def renyi_primal(site, t, M0=None, tol=1e-12):
+    """max_M G_t(M): SLSQP with the analytic gradient, then exponentiated-gradient polishing until the duality
+    gap  max_phi (1-t)D_t(pi_phi||Q_M) - G_t(M)  is below tol.
+    Returns (certified lower bound G_t(M), M, certified upper bound)."""
     nv = len(site.V)
     if M0 is None:
         M0 = np.full(nv, 1.0 / nv)
-    cons = [dict(type="eq", fun=lambda M: M.sum() - 1.0)]
+    cons = [dict(type="eq", fun=lambda M: M.sum() - 1.0, jac=lambda M: np.ones(nv))]
     f = lambda M: -G_primal(site, np.maximum(M, 1e-300), t)
-    best = None
-    for start in (M0, np.full(nv, 1.0 / nv)):
-        res = minimize(f, start, method="SLSQP", bounds=[(0, 1)] * nv, constraints=cons,
-                       options=dict(ftol=1e-15, maxiter=500))
-        M = np.maximum(res.x, 0)
-        M /= M.sum()
-        lo = G_primal(site, M, t)
-        hi = radius_at(site, centre_of(site, M, t), t)
-        if best is None or lo > best[0]:
-            best = (lo, M, hi)
-        if hi - lo < 1e-10:
-            break
-    if best[2] - best[0] > 1e-10:
-        lo, M = _eg_primal(site, t, np.maximum(best[1], 1e-12) / np.maximum(best[1], 1e-12).sum())
-        hi = radius_at(site, centre_of(site, M, t), t)
-        if lo > best[0]:
-            best = (lo, M, hi)
-    return best
+    jac = lambda M: _grad_negG(site, np.maximum(M, 1e-300), t)
+    res = minimize(f, M0, jac=jac, method="SLSQP", bounds=[(0, 1)] * nv, constraints=cons,
+                   options=dict(ftol=1e-16, maxiter=500))
+    M = np.maximum(res.x, 0)
+    M /= M.sum()
+    lo = G_primal(site, M, t)
+    hi = radius_at(site, centre_of(site, M, t), t)
+    if hi - lo > tol:
+        lo2, M2 = _eg_primal(site, t, M, tol=tol)
+        if lo2 >= lo:
+            lo, M = lo2, M2
+            hi = radius_at(site, centre_of(site, M, t), t)
+    return lo, M, hi
 
 
 def renyi_dual(site, t, Q0=None):
-    """min_Q max_phi (1-t) D_t(pi_phi||Q) as an epigraph programme in (ln Q, z), solved by SLSQP.
-    A programme different from renyi_primal (no M anywhere).  Returns (value, Q)."""
+    """min_Q max_phi (1-t) D_t(pi_phi||Q) as an epigraph programme in (Q, z), solved by SLSQP with analytic
+    Jacobians.  A programme different from renyi_primal (no M anywhere).  Returns (value, Q)."""
     q = site.q
+    nv = len(site.W)
     if Q0 is None:
         Q0 = site.W.mean(axis=0)
     x0 = np.concatenate([Q0, [radius_at(site, Q0, t)]])
+    Wt = site.W ** t
 
     def cons_fun(x):
         Q = np.maximum(x[:q], 1e-300)
-        return np.array([x[q] - renyi_div_scaled(site.W[k], Q, t) for k in range(len(site.W))])
+        c = Wt @ Q ** (1 - t)
+        return x[q] + np.log(c)
 
-    res = minimize(lambda x: x[q], x0, method="SLSQP",
+    def cons_jac(x):
+        Q = np.maximum(x[:q], 1e-300)
+        c = Wt @ Q ** (1 - t)
+        J = np.zeros((nv, q + 1))
+        J[:, :q] = (1 - t) * Wt * Q[None, :] ** (-t) / c[:, None]
+        J[:, q] = 1.0
+        return J
+
+    e = np.zeros(q + 1)
+    e[q] = 1.0
+    s1 = np.concatenate([np.ones(q), [0.0]])
+    res = minimize(lambda x: x[q], x0, jac=lambda x: e, method="SLSQP",
                    bounds=[(1e-12, 1)] * q + [(None, None)],
-                   constraints=[dict(type="eq", fun=lambda x: x[:q].sum() - 1.0),
-                                dict(type="ineq", fun=cons_fun)],
-                   options=dict(ftol=1e-15, maxiter=1000))
+                   constraints=[dict(type="eq", fun=lambda x: x[:q].sum() - 1.0, jac=lambda x: s1),
+                                dict(type="ineq", fun=cons_fun, jac=cons_jac)],
+                   options=dict(ftol=1e-16, maxiter=1000))
     Q = np.maximum(res.x[:q], 1e-300)
     Q /= Q.sum()
     return radius_at(site, Q, t), Q

@@ -1,0 +1,12 @@
+# R4 own harness for Theorem 11.84 (Claims A, B); u=3.0, seed=7
+run   1: n_o=10 n_i=3 L=4 K=6 eta'=100.0 theta=1.0 lam=1.0 bounded   flathist one     M_max=786432 J=86 status=closed level=45 good=True |C_l|=[786, 448, 111] N_l=[218283, 146327, 97563] seq.calls(l>=2)=44 violA=False
+run   2: n_o=11 n_i=5 L=2 K=6 eta'=100.0 theta=10.0 lam=0.5 bounded   trunc    mixed   M_max=786432 J=210 status=closed level=103 good=True |C_l|=[840] N_l=[482495] seq.calls(l>=2)=78 violA=False
+run   3: n_o=6 n_i=5 L=3 K=16 eta'=20.0 theta=10.0 lam=1.0 extensive dip      zero    M_max=524288 J=74 status=closed level=46 good=True |C_l|=[524288, 524288] N_l=[1282489985815372, 581855854744] seq.calls(l>=2)=8192 violA=False
+run   4: n_o=6 n_i=5 L=4 K=6 eta'=20.0 theta=10.0 lam=1.0 extensive walk     uniform M_max=196608 J=77 status=closed level=51 good=True |C_l|=[122193, 68337, 18459] N_l=[1101097399492166, 10403216616, 825091760] seq.calls(l>=2)=45 violA=False
+run   5: n_o=10 n_i=5 L=2 K=6 eta'=100.0 theta=10.0 lam=0.5 bounded   flathist mixed   M_max=393216 J=195 status=closed level=96 good=False |C_l|=[249] N_l=[171529] seq.calls(l>=2)=18 violA=False
+run   6: n_o=9 n_i=5 L=2 K=6 eta'=100.0 theta=3.0 lam=0.5 bounded   trunc    mixed   M_max=196608 J=183 status=closed level=96 good=True |C_l|=[1426] N_l=[530835] seq.calls(l>=2)=108 violA=False
+run   7: n_o=6 n_i=4 L=3 K=10 eta'=100.0 theta=10.0 lam=1.0 extensive cone     mixed   M_max=81920 J=68 status=closed level=51 good=True |C_l|=[28702, 4647] N_l=[976339225, 12476698] seq.calls(l>=2)=599 violA=False
+run   8: n_o=11 n_i=6 L=4 K=6 eta'=100.0 theta=3.0 lam=0.5 bounded   flat     mixed   M_max=786432 J=220 status=closed level=108 good=True |C_l|=[939, 124, 36] N_l=[433134, 202746, 172247] seq.calls(l>=2)=111 violA=False
+run   9: n_o=10 n_i=4 L=3 K=6 eta'=100.0 theta=10.0 lam=0.5 bounded   trunc    zero    M_max=393216 J=184 status=closed level=117 good=False |C_l|=[828, 571] N_l=[574186, 351330] seq.calls(l>=2)=131 violA=False
+run  10: n_o=10 n_i=5 L=2 K=6 eta'=100.0 theta=10.0 lam=1.0 bounded   dip      one     M_max=786432 J=98 status=closed level=50 good=True |C_l|=[502] N_l=[360320] seq.calls(l>=2)=6 violA=False
+run  11: n_o=11 n_i=6 L=4 K=6 eta'=100.0 theta=1.0 lam=0.5 bounded   dip      one     M_max=786432 J=220 status=closed level=128 good=True |C_l|=[906, 545, 0] N_l=[364975, 222158, 145334] seq.calls(l>=2)=28 violA=False
