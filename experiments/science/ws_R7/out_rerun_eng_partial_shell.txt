@@ -38,3 +38,9 @@ u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k= 1: worst ln(cost)/(na) = 0.6934  (sto
 u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k= 2: worst ln(cost)/(na) = 0.6937  (stored worst, radial: 0.6941; C_max 0.7228); max ln cost - ln C_max = -12.89; instances violating a claim: 0 of 3774
 u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k= 4: worst ln(cost)/(na) = 0.6927  (stored worst, radial: 0.6941; C_max 0.7228); max ln cost - ln C_max = -13.35; instances violating a claim: 0 of 3774
 u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k= 8: worst ln(cost)/(na) = 0.6929  (stored worst, radial: 0.6941; C_max 0.7228); max ln cost - ln C_max = -13.26; instances violating a claim: 0 of 3774
+u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k=16: worst ln(cost)/(na) = 0.6926  (stored worst, radial: 0.6941; C_max 0.7228); max ln cost - ln C_max = -13.38; instances violating a claim: 0 of 3774
+u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k=32: worst ln(cost)/(na) = 0.6939  (stored worst, radial: 0.6941; C_max 0.7228); max ln cost - ln C_max = -12.80; instances violating a claim: 0 of 3774
+
+real	6m24.882s
+user	5m52.447s
+sys	0m0.101s

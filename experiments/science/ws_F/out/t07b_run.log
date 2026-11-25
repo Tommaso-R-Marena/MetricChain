@@ -8,3 +8,4 @@
 
 === zero residual, p=0.3 u=1.0 e=0.030819: R_0=0.012089 | forced-type plain dips 0.005667 | V (shells, single-letter) 0.011301 at (m,v0,v1)=(0.464,0.1362,0.4894) | U (tilt) 0.011558
     n | ln LB/n | ln LB | centre type k, shells, mixing weight, excess densities | (V - lnLB/n) n/ln n
+  400 | -0.000266 | -0.11 | k=186, shells (91, 27)&(92,27), lam=0.905, c=(0.29990,0.30194) | 0.772

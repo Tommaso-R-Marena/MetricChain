@@ -387,11 +387,11 @@ minimiser from the pairwise kernel applied to `L`, and `ln Z` to within 0.008 (r
 nats — **and it fails for every polar or charged instance with more than two residues**, the
 certified accuracy degrading linearly in the chain length (the "quadratic law" of theory
 report §11.7 seen on a real instance: the envelope half-width `W` is a sum over pairs).
-The plain row-sum condition is neither necessary (Leu₁₆/H) nor — for a known part that is
-pairwise rather than additive — the right sufficient condition, but it predicts the outcome
-in all instances except the marginal ones.  Overall the star is an exact certificate in 110
-of the 179 instance analyses with at least two sites; in all of these the Dobrushin-type
-sums are below 1 (0.003–0.96).  The converse fails in 12 instances (Ser₂ on helix and PPII;
+Overall the star is an exact certificate in 110 of the 179 instance analyses with at least
+two sites.  The plain row-sum condition (a theorem only for an additive known part; request
+T-2) holds in 97 of them and in no instance where the star fails; it is violated in the
+other 13 exact ones (e.g. Leu₁₆/H), so it is sufficient in practice and not necessary.  In
+all 110 the Dobrushin-type sums are below 1 (0.003–0.96).  The converse fails in 12 instances (Ser₂ on helix and PPII;
 Phe on the helix and Phe₂ on PPII, where the star is off by 0.06–0.43 kcal/mol).
 
 (c) **Third order: the Hamming-2 ball.**  `N_ball = 1 + Σ(k_i − 1) + Σ_{i<j}(k_i − 1)(k_j − 1)`
@@ -429,8 +429,8 @@ column of (c)].**  The lower model of (c) contains three-site terms, so the theo
 kernel does not apply to it.  But every triple inside the changed set `S` is counted three
 times in `Σ_{i∈S} γ_i` with `γ_i := ⅓ Σ_{T ∋ i} c_T`, hence
 `|g − I₂g| ≤ Σ_{T ⊆ S} c_T ≤ Σ_{i∈S} γ_i`, and `L₃ = f + I₂g − Σ_i γ_i[x_i ≠ x₀_i]` is a
-*pairwise* lower model (`U₃` likewise): Theorem 11.18 with a one-body penalty, to which
-`pairwise_sandwich`-type soundness and the kernel apply unchanged.  A sufficient "third-order
+*pairwise* lower model (`U₃` likewise): Theorem 11.18 with a one-body penalty, so the
+pairwise kernel can be applied to it (the corresponding soundness lemma is request T-1).  A sufficient "third-order
 row-sum condition" is `γ_i ≤` single-site excitation energy.  Measured: it holds, and `L₃`
 certifies exactly, for Ser₆ on all three backbones at τ = 0.70 (`γ_i ≤ 0.011` on E, ≤ 0.06 on
 H, against excitations 0.13–1.2), for Val₈, Leu₈, Lys₄/H and Lys₄/P2 at 0.70; with the
@@ -456,9 +456,10 @@ class bound.*  `ln Z(f+g) − ln Z(f) + β⟨g⟩_f` on `X′`, next to `Σ_i ln
 Ser₆/H 4.4 / 36.7; Val₁₂/E 0.02 / 0.7; Leu₁₆/H 0.17 / 2.9; Leu₁₆/P2 1.44 / 6.5; Phe₁₀/H
 0.15 / 4.4; Lys₄/H 4.6 / 145.5; Lys₄/P2 4.3 / 167; LKSE:6/H 25.7 / 113.5; LKSE:6/P2
 24.6 / 176.6 nats.  As in P's pilot the class allows far more than the function does — by a
-factor 4–40 here against 30–80 there; the heteropolymer is the first instance in the
-programme where the residual genuinely reweights the ensemble (Jensen gap 11–26 nats at five
-and six residues; the minimiser of `f` lies 5–17 kcal/mol above the minimum of `E`).
+factor 4–40 here against 30–80 there; the heteropolymer has by far the largest Jensen gaps
+measured in either workstream (11–26 nats at five and six residues): there the residual
+genuinely reweights the ensemble, and the minimiser of `f` lies 5–17 kcal/mol above the
+minimum of `E`.
 (c) *Low-order fits*: Statement 4.  The one-site class is a poor model of `g_GB` (RMS
 0.1–5, max 0.3–42 kcal/mol); the two-site class is a good one in RMS *and*, for neutral
 side chains, in supremum norm.  The gap between "typical" and "worst case" that dominated

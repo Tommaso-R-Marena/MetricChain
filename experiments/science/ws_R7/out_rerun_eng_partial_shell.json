@@ -298,5 +298,65 @@
     "seconds": 10.1
    }
   }
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.5,
+  "n_o": 2000,
+  "stored_worst": 0.6941146553308702,
+  "lCmax": 0.7227804057633662,
+  "budget": 2000,
+  "cyl": {
+   "0": {
+    "worst": 0.6941146553308702,
+    "violations": 0,
+    "n_eval": 3774,
+    "max_cost_minus_cap": -12.721180282026694,
+    "seconds": 21.9
+   },
+   "1": {
+    "worst": 0.6933604801817707,
+    "violations": 0,
+    "n_eval": 3774,
+    "max_cost_minus_cap": -13.055865329205687,
+    "seconds": 23.6
+   },
+   "2": {
+    "worst": 0.6937321854249476,
+    "violations": 0,
+    "n_eval": 3774,
+    "max_cost_minus_cap": -12.89091135664654,
+    "seconds": 23.8
+   },
+   "4": {
+    "worst": 0.6926967348744713,
+    "violations": 0,
+    "n_eval": 3774,
+    "max_cost_minus_cap": -13.350419756984877,
+    "seconds": 23.8
+   },
+   "8": {
+    "worst": 0.6928923366467479,
+    "violations": 0,
+    "n_eval": 3774,
+    "max_cost_minus_cap": -13.263616328814578,
+    "seconds": 23.2
+   },
+   "16": {
+    "worst": 0.6926397696584916,
+    "violations": 0,
+    "n_eval": 3774,
+    "max_cost_minus_cap": -13.37569956900262,
+    "seconds": 23.8
+   },
+   "32": {
+    "worst": 0.693929380605965,
+    "violations": 0,
+    "n_eval": 3774,
+    "max_cost_minus_cap": -12.803400811462097,
+    "seconds": 23.7
+   }
+  }
  }
 ]
