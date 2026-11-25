@@ -555,8 +555,11 @@ accuracy is still `h`.
 
 **What the theorem does not cover** — unchanged: any known part without the translation
 symmetry of the uniform cube (workstream F is on the field case); the thermodynamic
-oracle at extensive accuracy; exact marginals of order proportional to `n` (addendum A8:
-there the exponent does drop); samples from the ensemble (addendum A10, remark 1).
+oracle at extensive accuracy (**addendum A16, added at checkpoint 26: there the
+invariance fails** — beyond `a(u)` nats per site the datum alone gives the answer, and
+below it the exponent is bracketed by a new "plateau twin"); exact marginals of order
+proportional to `n` (addendum A8: there the exponent does drop); samples from the
+ensemble (addendum A10, remark 1).
 
 ## A13. The sandwich of A11 on ordered alphabets (written out; replaces remark (1) of A11)
 
@@ -714,3 +717,189 @@ narrow several-fold (`INFERENCE_LIMITS.md` §11.4).  That a scattering curve car
 small-angle literature; cited through workstream M's search log, not read by us); the
 exact identified sets as functions of `K` and `τ` are computations, not theorems.
 
+
+## A16. A thermodynamic datum at extensive accuracy: the entropy bracket and the plateau twin (our own question R3-T3 of SCI-MSG-0008; `INFERENCE_LIMITS.md` §5, "Open (i)")
+
+*Added at checkpoint 26.  Everything here is the coordinator's; nothing has been read by a
+second party.  Scripts: `experiments/science/pi_inference/plateau_twin_check.py` (30 s),
+`terrace_twin_explore.py` (1 min).*
+
+*Setting and conventions.*  Cube `Q_n`, zero known part, class `|g(x) − g(y)| ≤ c·d_H(x,y)`,
+`u = βc`; units `β = 1` in proofs.  `σ = σ_u = 1/(1+e^u)`, `h` the binary entropy,
+`a(u) = ln 2 − h(σ_u) = KL(σ_u‖½)` (the non-adaptive exponent at bounded accuracy),
+`ρ₀ = ln(2/(1+e^{−u}))/u`.  The datum is `U = E_{μ_g} g`, exact.  An algorithm is *`ε`-accurate*
+if it returns `ln Z_g` within `ε/2` with probability at least `1 − δ` on the whole class (the
+convention of the theory report's Theorem 11.25 and of the referee's Theorem R6);
+`θ(ε₁)` denotes an exponent at `ε = ε₁n`.  Without the datum the adaptive exponent is
+`θ_hint(ε₁) = KL(ρ₀ + ε₁/u ‖ ½) = ln 2 − h(ρ₀ + ε₁/u)` for `0 < ε₁ < ln cosh(u/2)` (theory report
+Theorems 11.25(a) and 11.54; `ρ₀ = Λ₁/u` in its notation) and `h = θ_hint(0)` at bounded
+accuracy (its Theorem 11.58); beyond the threshold `n ln cosh(u/2)` of its §11.10 the
+exponent is zero.  With the datum, the exponent at bounded accuracy is still `h`
+(addendum A12(c)).  What the datum is worth at extensive accuracy was open.
+
+**The identity behind everything [K].**  `ln Z_g = S(μ_g) − βU_g`, `S` the Gibbs entropy.  Given
+the datum, computing `ln Z` *is* computing the entropy of the ensemble; and two members
+of the class with the same datum differ in `ln Z` by exactly the difference of their
+entropies.
+
+### A16.1 The datum alone
+
+**Proposition A16.1 (entropy bracket) [P; checked by enumeration on 400 random members of the
+class, `n ≤ 11`].**  For every `g` of the class, `n·h(σ_u) ≤ S(μ_g) ≤ n ln 2`, that is
+
+    n·h(σ_u) − βU  ≤  ln Z_g  ≤  n ln 2 − βU,          width  n·a(u).
+
+Both ends are attained (the cone `c·d_H(·, b)`; the zero residual).  So **with the datum
+and no evaluation at all, the midpoint is within `n·a(u)/2` of `ln Z_g`, with certainty.**
+For a product reference `Bern(p)ⁿ` the same argument gives
+`−βU − n·max{KL(a₀‖p), KL(a₁‖p)} ≤ ln(Z_g/Z_0) ≤ −βU`, `a₀, a₁` the letter laws of the two
+extreme cones.
+*Proof.*  The upper end is `S ≤ n ln 2` (and is the upper end of Theorem 5).  Lower end: by
+the chain rule `S(μ_g) = Σ_i E[h(p_i)]`, `p_i` the conditional probability of `x_i = 1` given
+the earlier coordinates; the ratio of the two partial sums that define `p_i` lies in
+`[e^{−u}, e^{u}]`, so `p_i ∈ [σ_u, 1 − σ_u]` and `h(p_i) ≥ h(σ_u)`.  (This is steps 1–2 of
+Proposition A1.1 with `r = ½`: `KL(μ_g‖uniform) ≤ n·a`.)  ∎
+
+**Corollary A16.2 (where the datum removes an exponential cost) [P, given theory report
+Theorem 11.25].**  The two "free" accuracies are the two relative entropies between a
+fair coin and the coin `σ_u`:
+
+    without the datum:  ln cosh(u/2) = KL(½‖σ_u)        with the datum:  a(u) = KL(σ_u‖½),
+
+    KL(½‖σ_u) − KL(σ_u‖½)  =  Σ_{k≥2} tanh(u/2)^{2k}·(k−1)/(k(2k−1))  >  0      (u > 0).
+
+For `a(u) ≤ ε₁ < ln cosh(u/2)`: with the datum an `ε₁n`-accurate answer costs **no
+evaluation**; without it every `ε₁n`-accurate algorithm needs
+`(1 − 2δ)·2ⁿ/|B(n, r−1)| = exp(n[ln 2 − h(ρ₀ + ε₁/u)] − o(n))` evaluations at the zero residual.
+*Proof.*  A16.1 and Theorem 11.25(a) (the dip of radius `r` raises `ln Z` by more than `ε₁n` as
+soon as `r/n > ρ₀ + ε₁/u`, and this radius is below `n/2` exactly when `ε₁ < u/2 − uρ₀ =
+ln cosh(u/2)`).  The identity `ln cosh(u/2) = KL(½‖σ_u)`: `σ(1−σ) = 1/(4cosh²(u/2))`.  The series:
+with `σ = (1−t)/2`, `t = tanh(u/2)`: `KL(½‖σ) = Σ_k t^{2k}/(2k)` and
+`KL(σ‖½) = Σ_k t^{2k}/(2k(2k−1))`.  ∎
+
+| `u` | `a(u)` (free with the datum) | `ln cosh(u/2)` (free without) | exponent without the datum at `ε₁ = a(u)` |
+|---|---|---|---|
+| 0.5 | 0.03030 | 0.03093 | `3·10⁻⁶` |
+| 1 | 0.11094 | 0.12011 | 0.00017 |
+| 2 | 0.32781 | 0.43378 | 0.0056 |
+| 4 | 0.60305 | 1.32500 | 0.0667 |
+
+For weak residuals the window is of relative width `O(u²)` and the exponent in it is
+tiny: the datum buys almost nothing.  For strong residuals (`u ≥ 2`) it is wide: at `u = 4`
+an accuracy of `±0.3n` nats is free with the datum and costs `e^{0.067n}` evaluations
+without.  **So the oracle invariance of addendum A12 is a statement about bounded
+accuracy; for the thermodynamic datum it fails at coarse extensive accuracy, and the
+failure is exactly an entropy bound.**
+
+### A16.2 Below `a(u)`: the plateau twin
+
+At extensive accuracy the equal-depth twin of Proposition 5b gives only
+`θ ≥ h − ε₁` (it takes `e^{ε₁n}` equal twins to raise `ln Z` by `ε₁n`).  By the identity, a
+twin must have the mean energy of the visible state and an entropy larger by `ε₁n`: it
+must be *as deep and wider*.
+
+**Proposition A16.3 (plateau twin) [P — an adaptation of the referee's Lemmas R6.1–R6.3, which
+the coordinator has re-derived (A12); exact sums with overlapping supports at
+`n = 600 … 2000`, ten cases].**  Let `ρ₀ < ρ₁ < ρ̄ < ½`, `r₁ = ⌈ρ₁n⌉`, `g₀ = −u(r₁ − d_H(x,a₀))₊` (a
+visible basin that dominates), `S₀ = S(μ_{g₀})`, `U₀ = U_{g₀}`.  For an integer `r₁ < r₂ ≤ ρ̄n`, a
+centre `a′` with `|d_H(a₀,a′) − n/2| ≤ √(n ln n)` and a real `κ ∈ (0, r₂]` let
+
+    T_κ(x) = −u·min(κ, (r₂ − d_H(x,a′))₊),        g′_κ = min(g₀, T_κ)
+
+(a truncated cone: a plateau of depth `uκ` and radius `r₂ − κ`, with walls of slope `u`).
+Then for all large `n`:
+(a) there is `κ* ∈ ((|U₀| − 1)/u, r₂)` with `U_{g′_{κ*}} = U₀` **exactly**;
+(b) `ln Z_{g′_{κ*}} − ln Z_{g₀} ≥ ln|B(n, ⌊r₂ − (|U₀| − 1)/u⌋)| − S₀ − 1 − o(1)`;
+(c) `g′_{κ*} = g₀` outside `B(a′, r₂ − 1)`.
+Hence an algorithm with evaluations and the exact datum that is `ε`-accurate for an `ε`
+below the right-hand side of (b) needs at `g₀`
+
+    E[#evaluations]  ≥  (1 − 2δ)(1 − 2/n²)·2ⁿ/|B(n, r₂ − 1)|.
+
+Here `S₀ = n·h(σ_u) + o(1)` and `|U₀| = u(r₁ − σ_u n) + o(1)`, so with
+`σ₂(ε₁) := h⁻¹(h(σ_u) + ε₁)` and `ρ₁ ↓ ρ₀`:
+
+    θ_U(ε₁)  ≥  ln 2 − h( ρ₀ − σ_u + σ₂(ε₁) ),        for  ε₁ < ε₁ᶜ := h(½ − ρ₀ + σ_u) − h(σ_u).
+
+*Proof.*  (1) *Excess identity* (R6.1, valid for any two functions): with
+`E = Σ(e^{−g′} − e^{−g₀})₊` and `m` the mean over the excess mass of the *effective energy*
+`ĝ = g′ − t/(e^t − 1)`, `t = g₀ − g′ > 0`: `Z′ = Z₀ + E` and `U′ − U₀ = (E/(Z₀+E))(m − U₀)`.
+(2) *The shallow end.*  `0 < t/(e^t−1) < 1` and `g′ = T_κ ≥ −uκ` on the excess, so
+`m(κ) ≥ −uκ − 1` for every `κ`, with no assumption on the overlap; hence `m(κ) > U₀` for
+`κ < (|U₀| − 1)/u`.  (3) *The deep end.*  At `κ = r₂` the twin is a full cone of radius
+`r₂ ≥ r₁ + 1`; the algebra of R6.2 at `s = +1` (every weight of the basin multiplied by
+`e^{u(r₂−r₁)}` and every depth increased by `u(r₂−r₁)`), with the cone's mass beyond `r₁`
+exponentially small and the overlap bounded as in R6.3 with `r₂` in the denominator, gives
+`m(r₂) < U₀`.  `κ ↦ m(κ)` is continuous: (a).  (4) `E` is non-decreasing in `κ`; at
+`κ_lo = (|U₀| − 1)/u` the plateau alone contributes `|B(n, ⌊r₂ − κ_lo⌋)|(e^{|U₀|−1} − 1)` minus the
+overlap, and `Z₀ = e^{S₀ + |U₀|}`: (b).  (c) is the definition.  The counting is that of
+Theorem R6.  ∎
+
+*Exact checks* (`plateau_twin_check.py`; the root is computed through the excess
+identity — the difference `U′ − U₀` itself cancels to nothing in floating point, which
+cost one false "no root"): in all ten cases the root exists and lies above `κ_lo`; the gap
+is above the bound of (b) by one to three and a half nats; the plateau edge `(r₂ − κ*)/n`
+agrees with `σ₂(gap/n)` and `r₂/n` with `ρ₁ − σ_u + σ₂` to a few sites; centres at distance
+`0.45n`, `0.5n`, `0.55n` give identical numbers.  Examples: `n = 2000`, `u = 1`, `ρ₁ = ρ₀ + 0.01`,
+gap `0.050n`: `r₂ = 899`, `κ* = 244.57`, against the radius `860` of the smallest dip that
+does the same without the datum; `n = 600`, `u = 4`, gap `0.30n`: `r₂ = 190` against `147`.
+
+**Exponents per site** (`h − ε₁`: equal twins; plateau: A16.3; last column: no datum):
+
+| `u` | `ε₁` | equal twins | **plateau twin (lower bound with the datum)** | `θ_hint(ε₁)` (upper bound with it; exact without) |
+|---|---|---|---|---|
+| 1 | `0.1a = 0.0111` | 0.0180 | **0.0238** | 0.0240 |
+| 1 | `0.5a = 0.0555` | void | **0.0059** | 0.0084 |
+| 2 | `0.25a = 0.0820` | 0.0153 | **0.0600** | 0.0632 |
+| 2 | `0.5a = 0.164` | void | **0.0263** | 0.0369 |
+| 4 | `0.25a = 0.151` | 0.0885 | **0.1715** | 0.1840 |
+| 4 | `0.5a = 0.302` | void | **0.0969** | 0.1374 |
+| 4 | `0.75a = 0.452` | void | **0.0275** | 0.0985 |
+
+The gap between the two last columns is of second order in `ε₁` (it is the curvature of
+`h` at `σ_u`: `σ₂ − σ_u ≥ ε₁/u`, with equality to first order) and grows to a factor of
+several near `a(u)`.  For `ε₁ᶜ ≤ ε₁ < a(u)` the plateau would have to cover more than half the
+cube and the bound is void (`ε₁ᶜ = 0.086, 0.273, 0.557` against `a = 0.111, 0.328, 0.603` at
+`u = 1, 2, 4`).
+
+### A16.3 What is known, and a conjecture
+
+    bounded accuracy:            θ_U = h                               (A12(c); the datum is worth nothing)
+    0 < ε₁ < ε₁ᶜ:                ln 2 − h(ρ₀ − σ_u + σ₂(ε₁))  ≤  θ_U(ε₁)  ≤  ln 2 − h(ρ₀ + ε₁/u)
+    ε₁ᶜ ≤ ε₁ < a(u):             0  ≤  θ_U(ε₁)  ≤  ln 2 − h(ρ₀ + ε₁/u)
+    a(u) ≤ ε₁ < ln cosh(u/2):    θ_U = 0  <  θ_hint(ε₁)                (A16.2; the datum is worth everything)
+
+**Conjecture A16.4 [C].**  `θ_U(ε₁) = ln 2 − h(min{½, ρ₀ − σ_u + σ₂(ε₁)})` for every `ε₁ ≥ 0`: the
+plateau twin is the best hiding place, and the datum lowers the exponent at *every*
+extensive accuracy.
+*Evidence.*  (i) Among dips with radial profiles in a flat region, for a mask with
+entropy `s₁` and energy `−ue₁` per site, a twin needs a shell of entropy `s₁ + ε₁` at depth `e₁`,
+hence a support of radius at least `h⁻¹(s₁+ε₁) + e₁`; mixtures of two shells of equal free
+energy are worse (the shallower shell alone already needs a larger support); and over
+masks (`s₁ ≥ h(σ_u)`, `s₁ + ue₁ ≥ ln 2`) the minimum is at the cone basin at threshold
+dominance — the construction of A16.3.  (ii) Hiding the twin on a visible, just
+sub-dominant terrace instead of the flat background (less digging, fewer places) is
+never better: maximum at the flat background in twelve cases
+(`terrace_twin_explore.py`; exponential-scale formulas, a valid lower bound within the
+family).  (iii) On the wall of the visible basin, which is maximally steep, a dip must
+contain with each of its points everything farther out, and its depth at a point is at
+most `2u` times the number of that point's own flips that must be undone to leave the
+dip; the simple dips there have depth `O(1)`.  We found no construction on a slope that
+helps, and have no proof that none exists.  *What a proof needs:* a
+tail lemma with an energy constraint — the largest excess of a modification supported
+on a set of given measure **whose excess has a prescribed mean energy** — for an
+arbitrary reference instance; equivalently, the largest entropy gain at fixed mean
+energy.  The unconstrained lemma is the theory report's Lemma 11.62.
+
+*Not done.*  The upper bound; the plateau twin against the marginal oracle (symmetrise
+by a code as in Corollary R6′ — expected to go through, not written); a field; a
+tolerance on the datum (as in the referee's remark, any tolerance makes the exact root
+unnecessary); a Lean check of the three finite inequalities used.
+
+*Reading [H].*  A calorimetric mean energy turns a free-energy question into an entropy
+question, and the class — a bound on how much one flip can change the energy — bounds
+how ordered an ensemble can be.  At bounded accuracy that is no help (a hidden state as
+deep and as wide as the visible one changes nothing measurable); at an accuracy of
+`a(u)` nats per site it is the whole answer; in between, the hidden state has to be as
+deep and exponentially wider, which makes it easier to find than without the datum —
+if the conjecture holds, at every accuracy.

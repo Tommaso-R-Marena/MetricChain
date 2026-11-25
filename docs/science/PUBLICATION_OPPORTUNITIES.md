@@ -144,6 +144,15 @@ exponent irrelevant; constants in the limit shape.
   attack first; the mathematics underneath held everywhere we looked.  What nobody has
   re-derived remains the cost of the nested adaptive algorithm (Theorems 11.52, 11.56) —
   still the single most valuable check.
+* *Checkpoint 26:* **P7's statement becomes two-sided** (addendum A16; author only).  For
+  local data the invariance stands at every accuracy examined; for a mean-energy datum
+  it is a bounded-accuracy statement: `ln Z = S − βU` turns the problem into an entropy
+  problem, the class confines the entropy to `[n·h(σ_u), n ln 2]`, and so the datum is worth
+  nothing at bounded accuracy, everything beyond `KL(σ_u‖½)` nats per site (where the cost
+  without it is still exponential up to `KL(½‖σ_u)`), and — if Conjecture A16.4 holds —
+  something at every extensive accuracy in between.  "What a kind of data is worth, as a
+  function of the accuracy asked" is a better theorem than invariance alone; it needs a
+  second reader and the upper bound of the conjecture before it is claimed.
 * *Checkpoint 18:* **P7 has been refereed and partly machine-checked** (R3: no false
   theorem; eight overstated or false sentences corrected in SCI-MSG-0008; L1: 78 Lean
   theorems for the short cores).  The referee names the statement P7 should become — the

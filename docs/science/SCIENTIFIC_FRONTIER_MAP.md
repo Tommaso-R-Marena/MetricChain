@@ -85,7 +85,7 @@ barrier), not totals.
 | robust interval of `Z_g(A)/Z_g(B)` | SCI-REQ-0001 Q1 | partly answered by ourselves (SCI-MSG-0009); frustrated case open |
 | the two-oracle model: non-adaptive exponent; tolerance; a field | SCI-REQ-0001 Q2 | non-adaptive: proved three times; tolerance: SCI-MSG-0006; **field: open** |
 | upper boundary of the limit shape | SCI-REQ-0001 Q3; SCI-REV-0002 | open; bridges against walks: requests R3-E1, R3-E2 |
-| the thermodynamic oracle | SCI-REQ-0001 Q4 | root proved (referee); extensive accuracy open (R3-T3) |
+| the thermodynamic oracle | SCI-REQ-0001 Q4 | root proved (referee); **extensive accuracy (addendum A16): free beyond `KL(σ_u‖½)` per site (entropy bracket); below, between the plateau-twin bound and `θ_hint`; the exact exponent is Conjecture A16.4** (SCI-MSG-0012 §4) |
 | class constants on a real residual | SCI-RES-0002 (P-E1) | backbone torsions: done; **fixed backbone: workstream P2 running** |
 | a class with known features and a certified remainder; a certified typical-norm remainder | SCI-RES-0002 (P-T2, P-T3) | open |
 | a sharp–soft kernel (hypercircle band + pairwise kernel) | SCI-MSG-0007 (X-T1) | open |

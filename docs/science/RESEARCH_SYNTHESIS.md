@@ -46,7 +46,7 @@ published statements are linked messages, never silent rewrites.
 | `docs/collaboration/responses/science/SCI-RES-0001…0003` | answers to the theory division's THY-REQ-0011 (answered in full) |
 | `docs/collaboration/status/science.md` | investigations, findings S1–S30 with status, outstanding requests |
 | `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md` | what was read upstream, at which commit, how deeply; dependencies; sync log |
-| `docs/science/INFERENCE_LIMITS.md` (v3) and `INFERENCE_LIMITS_ADDENDA.md` (A1–A15) | our own mathematics: what evaluations, averaged data and thermodynamic data determine |
+| `docs/science/INFERENCE_LIMITS.md` (v3) and `INFERENCE_LIMITS_ADDENDA.md` (A1–A16) | our own mathematics: what evaluations, averaged data and thermodynamic data determine |
 | `docs/science/PHYSICAL_APPLICABILITY.md` | what the mathematics means for molecules; the measured class constants |
 | `docs/science/ALTERNATIVE_FRAMEWORKS.md` | polytope against ellipsoid; four models of ignorance |
 | `docs/science/SCIENTIFIC_FRONTIER_MAP.md` (v4) | twelve limitations of the science, their kind, where the programme stands |
@@ -97,6 +97,12 @@ published statements are linked messages, never silent rewrites.
    4‴); pinned ensembles determine `ln Z`; a mean-energy datum changes the hardest
    instance, not the exponent at bounded accuracy (hidden twin; root proved by our
    referee).  *All on the cube with zero known part; the field case is open.*
+   **And where a datum does help (addendum A16, checkpoint 26; author only):** with a
+   mean-energy datum `ln Z = S − βU`, and the class confines the entropy to
+   `[n·h(σ_u), n ln 2]` — so the datum alone gives `ln Z` within `n·KL(σ_u‖½)/2`, which removes
+   an exponential cost for accuracies between `KL(σ_u‖½)` and `KL(½‖σ_u) = ln cosh(u/2)` per
+   site; below, a "plateau twin" bounds what the datum can do (Conjecture A16.4: it is
+   the exponent).  SCI-MSG-0012.
 6. **Observable free-energy differences have a closed-form robust range in one setting
    [P]** (addendum A11; SCI-MSG-0009): binary sites, submodular known part, monotone
    macrostates — sandwich between two uniform fields (Holley); common uncertainty
@@ -164,10 +170,11 @@ against pseudo-Boolean proofs), R3-E1 (bridge tables).
 
 1. **Publish R6, P2, L2** (§5).  R6 and P2 are the two results that could most change the
    publication assessment and the frontier map.
-2. **The oracle-invariance theorem** is assembled as one statement in addendum A12, with
-   a table of who read what; the coordinator's second reading of the referee's R6 is
-   done (no gap).  Still owed: Corollary R6′ written out; L2's machine checks; then send
-   it to the theory division as one message (it was not yet sent as one statement).
+2. **The oracle-invariance theorem** is assembled in addendum A12 and was sent as
+   SCI-MSG-0011 (Corollary R6′ written out).  Its limit at extensive accuracy is addendum
+   A16 (SCI-MSG-0012).  Still owed: L2's machine checks; **a second reader for A16**; the
+   upper bound of Conjecture A16.4 (a tail lemma with an energy constraint — asked of
+   the theory division; a good task for a workstream of ours if they do not take it).
 3. **The field case** (SCI-REQ-0001 Q2): without it "local data are worth nothing" is a
    statement about a symmetric model.  Start numerically: small cubes with a field, exact
    linear programmes for the adversary under a one-body marginal oracle.

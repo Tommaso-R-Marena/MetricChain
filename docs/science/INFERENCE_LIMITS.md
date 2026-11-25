@@ -283,7 +283,12 @@ over the joint law of the two distances, overlapping supports included): `u = 1`
 root as soon as the visible basin dominates by a factor of order `n` (`W ≥ 8r₁e^u·2ⁿ` suffices,
 referee's R6.2); at `u = 1`, `ρ₁ = ρ₀ + 0.01` this is `n ≥ 400`, and there is none for `n ≤ 300`.
 The statement is for accuracies `ε < ½(ln Z_{g′} − ln Z_{g₀}) ≈ ½ ln 2`; at extensive accuracy
-equal-depth twins fall short of `θ_hint(ε₁)` and the question is open.  With any tolerance
+equal-depth twins fall short of `θ_hint(ε₁)` ~~and the question is open~~ — **partly settled
+in addendum A16 (checkpoint 26):** the datum alone gives `ln Z` within `n·KL(σ_u‖½)/2` (an
+entropy bracket), which removes an exponential cost for accuracies between `KL(σ_u‖½)` and
+`ln cosh(u/2) = KL(½‖σ_u)` per site; below, a twin that is as deep and exponentially wider (a
+"plateau twin") gives a lower bound close to `θ_hint(ε₁)`; the exact exponent there is a
+conjecture.  With any tolerance
 on the datum the twin with `s = 0` already does: the exact root is the price of the exact
 oracle, not of the phenomenon (referee's remark).  The referee's Corollary R6′ extends the
 statement to both oracles together (`k`-body marginals and the mean energy).
@@ -295,9 +300,9 @@ marginals; at maximal polarisation that is impossible (the product measure with
 single-site probabilities `σ(u)` is the only member of the class with those one-body
 marginals), below it we expect designs around `a₀` to supply twins **[C]**.
 
-*Open.*  (i) ~~A proof of the root~~ (referee's R6; a second full reading and a machine
-check of its three finite inequalities are still owed), and the exponent at extensive
-accuracies.  (ii) **Physical status of
+*Open.*  (i) ~~A proof of the root~~ (referee's R6; second reading done, addendum A12; a
+machine check of its three finite inequalities is with workstream L2), and the exponent
+at extensive accuracies below `KL(σ_u‖½)` per site (bracketed in addendum A16).  (ii) **Physical status of
 the oracle [H]:** `E_{μ_g} g = E_{μ_g}(f+g) − E_{μ_g} f` is a calorimetric mean energy minus the
 model energy averaged over the true ensemble; the second term is determined by `m`-body
 marginals when `f` has interaction order `m`.  Neither is cleanly measurable for a solvated
@@ -606,8 +611,11 @@ model, class, measurement, certificate — could be closed on public fixed-seque
 2. **Theorem 4 with a field, or any known part without a large translation symmetry.**
    Open, and the most important limitation of §§2–4 (SCI-REQ-0001 Q2).
 3. The thermodynamic oracle I3 (§5): the root of the hidden twin is proved by the referee
-   (R6; a second full reading owed); **open: the exponent at extensive accuracy** (lower
-   bound `ln 2 − h(ρ₀) − ε₁` from equal twins, upper bound `θ_hint(ε₁)`), and the instance-wise
+   (R6; second reading done, A12).  **At extensive accuracy (addendum A16):** settled for
+   `ε₁ ≥ a(u) = KL(σ_u‖½)` (the datum alone suffices; without it the cost is exponential up to
+   `ln cosh(u/2) = KL(½‖σ_u)`); for `ε₁ < a(u)` the exponent lies between the plateau-twin
+   bound `ln 2 − h(ρ₀ − σ_u + h⁻¹(h(σ_u)+ε₁))` and `θ_hint(ε₁)` — **open: which** (Conjecture A16.4:
+   the lower one), i.e. a tail lemma with an energy constraint; and the instance-wise
    complexity with the datum.
 4. The exchange rate between I1 and I2 in classes between linear and first-order.  Known
    now: exact marginals of order `αn` — exponent in `[h_hint − h(α), (1−α)h_hint]` (A8); every
@@ -672,8 +680,14 @@ closed.
 | A9 | Theorem 2-τ (exact) and Proposition 4″-τ (pinned ensembles with tolerance) | [P] |
 | A10 | attenuation lemma; Theorem 4-τ: every order at tolerance `τ ≥ e^{−o(n/ln n)}` leaves `h_hint` unchanged | [P]; exact rational checks to `n = 800` |
 | A11 | robust macrostate ratios attained at two fields (binary sites, submodular known part, monotone macrostates); cancellation of common uncertainty | [P] by Holley's inequality; 900 exact linear programmes and two controls |
+| A12 | the oracle-invariance theorem assembled, parts (a)–(d), with who read what; the hidden-twin proof re-derived; the corollary with both oracles written out | [P]; cores machine-checked (L1) |
+| A13 | the sandwich of A11 on ordered alphabets (step fields); exact when the envelope is additive along the order | [P]; 360 exact linear programmes |
+| A14 | the robust range of the helix content of a Zimm–Bragg chain | [N], exact transfer matrices; reading [H] |
+| A15 | what a scattering curve of finite range and precision determines, model-free (11–15 beads) | [N], exact linear programmes |
+| A16 | a thermodynamic datum at extensive accuracy: the entropy bracket (the datum alone gives `ln Z` within `n·KL(σ_u‖½)/2`); the window in which it removes an exponential cost; the plateau twin (a lower bound below that accuracy); a conjecture for the exact exponent | [P], author only; exact sums to `n = 2000` |
 
-**The theorem within reach (referee's §9), not yet written as one statement:** *oracle
+**The theorem within reach (referee's §9) — written as one statement in addendum A12, and
+sent as SCI-MSG-0011; its limit at extensive accuracy is addendum A16:** *oracle
 invariance of the complexity diagram of the cube class* — free exact `k`-body marginals
 (`k ln n = o(n)`) change neither the adaptive nor the non-adaptive exponent, and with the
 mean residual energy given as well the adaptive exponent at bounded accuracy is still `h`,

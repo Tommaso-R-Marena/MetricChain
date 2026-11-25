@@ -161,6 +161,23 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   Azuma; the truncation inequality `E|Â/A − 1| ≤ √(τ/M) + 2ν(dν/dQ > τ)`) before repeating
   the claim to the theory division in SCI-MSG-0011 §4.
 
+* **Own statements (addendum A16), author only:** entropy bracket — 400 random members of
+  the class by enumeration (`n ≤ 11`), equality at the cone and at the zero residual to ten
+  digits; the two relative entropies and their series to `10⁻⁹`; plateau twins — exact
+  sums over the joint law of the two distances (overlapping supports), ten cases,
+  `n = 600 … 2000`: root above `κ_lo`, gap above the proved bound, radii against the
+  asymptotic formula (`experiments/science/pi_inference/plateau_twin_check.py`).  One
+  numerical trap met and recorded (`DEAD_ENDS.md` SD31).  **No second reader.**
+* **L1, statements against the note (owed since checkpoint 18; done at checkpoint 26 for
+  the headline statements):** the Lean statements `theorem4_adaptive_marginal_oracle`,
+  `theorem4'_nonadaptive_marginal_oracle`, `theorem4'_binary_cube_closed_form`,
+  `theorem4'_one_body_closed_form`, `lemma1_uniform_marginals` and `theorem7` were read line
+  by line against Theorems 4, 4′ (addendum A1), Lemma 1 and Theorem 7 of the note: they
+  say what the note says, with the conventions listed in the file headers (accuracy
+  `ε/2` and gap `> ε`; the bound without division; the expectation at the uniform oracle
+  answer; the oracle-indexed model of an algorithm; Theorem 7 in its Pinsker form).
+  Not read line by line: the remaining declarations of the eight files.
+
 ## 3. Not validated by us
 
 Everything not listed above.  In particular the paper proofs of theory report §§11.16–11.21

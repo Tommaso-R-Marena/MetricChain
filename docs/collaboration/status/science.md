@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 25 of the science branch (2026-11-25; the commit time is
+*Updated at checkpoint 26 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -74,7 +74,7 @@ the container is reclaimed.)
 | S6 | the pair-distance-profile class of theory report §11.17 is the class identified by (partial) pair-distance distributions, i.e. by scattering data | **[K]** (exponential families; Henderson) — a translation, not a theorem of ours |
 | S7 | the residual maximising a ratio of macrostate partition functions over an envelope class is not constant on the macrostate (three-point example) | **[P]** |
 | S8 | the verified `(min,+)` and `(+,×)` kernels are dual-feasibility checkers for identified sets of ensemble averages (model-free; KL ball); for envelope classes the dual object is a flow with gains | soundness **[P]**, duality **[K]** |
-| S9 | **at bounded accuracy** a mean-energy oracle does not lower the worst-case exponent: a visible basin can have a hidden twin with exactly the same mean energy and `ln Z` larger by `≈ ln 2`; extensive accuracy open (restricted, SCI-MSG-0008) | mechanism **[P]**; the root **[P]** by the referee (R6), **second full reading by the coordinator done at checkpoint 21 — no gap** (addendum A12); **[N]** before |
+| S9 | **at bounded accuracy** a mean-energy oracle does not lower the worst-case exponent: a visible basin can have a hidden twin with exactly the same mean energy and `ln Z` larger by `≈ ln 2`; at extensive accuracy see S34 | mechanism **[P]**; the root **[P]** by the referee (R6), **second full reading by the coordinator done at checkpoint 21 — no gap** (addendum A12); **[N]** before |
 | S10 | data certify a *lower* bound on the envelope constant and on `KL(truth‖model)`; on the lattice chain the three-shell profile certifies `0.87–0.96` of the strength of a missing contact attraction | soundness **[P]**; numbers **[N]**, exact LPs, 8–9 beads |
 | S11 | lattice chain, model-free: an exact averaged three-shell profile leaves the mean gauche fraction undetermined over `0.65` of its range at 27 beads (from the engineering tables), widening with length; a complete pair-distance histogram leaves `0.33` at 15 beads | **[N]**, exact LPs |
 | S12 | the limit shape of theory report §11.22 is the asymptotic model-free identified set of (mean profile, mean gauche fraction); its upper boundary is not computed | **[P]** given theory Theorem 11.69 (bridges); walks under Conjecture 11.75 |
@@ -95,6 +95,7 @@ the container is reclaimed.)
 | S29 | review of theory report §11.25: sound; the headline covers two of three exponents; Theorem 11.90(a) needed a step at negative accuracies (supplied); Lemma 11.89 has a four-line proof and a stronger pointwise form; for any alphabet and site law with Hamming envelope `u`: `h ≤ u²/32` | SCI-REV-0001; the new statements **[P]**, the reviewer's |
 | S30 | review of theory report §11.26: Theorem 11.99 proved; 11.101(a) proved; 11.101(b) proved with two gaps in the written proof, closed | SCI-REV-0005 |
 | S28 | robust range of an observable free-energy difference: for binary sites, a submodular known part and monotone macrostates the Gibbs measure over the whole envelope class is sandwiched in stochastic order between two uniform fields; extremal residuals additive; common uncertainty cancels exactly | **[P]** (Holley's inequality **[K]**); 900 exact linear programmes, two controls; SCI-MSG-0009 |
+| S34 | **a mean-energy datum at extensive accuracy** (addendum A16): (a) entropy bracket — for every member of the cube class `n·h(σ_u) ≤ S(μ_g) ≤ n ln 2`, so the datum alone gives `ln Z` within `n·KL(σ_u‖½)/2`; (b) for accuracies between `KL(σ_u‖½)` and `ln cosh(u/2) = KL(½‖σ_u)` per site the datum removes an exponential cost (exponent `0.067` at `u = 4`, `1.7·10⁻⁴` at `u = 1`); (c) below, a "plateau twin" (as deep, exponentially wider) gives `θ_U(ε₁) ≥ ln 2 − h(ρ₀ − σ_u + h⁻¹(h(σ_u)+ε₁))`, which supersedes `h − ε₁`; (d) conjecture: that is the exponent.  **The oracle invariance of S33(c) is a bounded-accuracy statement** | (a), (b), (c) **[P]**, author only; exact sums with overlapping supports to `n = 2000`, 400 random members by enumeration; (d) **[C]**; SCI-MSG-0012 |
 | S32 | model-free identified sets from a Debye scattering curve at `K` Shannon channels with a relative tolerance (11–15 beads): `R_g²` is fixed and little else; precision matters more than range; a compact-state population is bounded above only; under one instrument the unidentified part of the gauche fraction grows with the chain (three sizes) | **[N]**, exact linear programmes; addendum A15; SCI-MSG-0011 |
 | S33 | the oracle-invariance theorem assembled (addendum A12): parts (a)–(d) with the second reading of the hidden-twin proof and the corollary with both oracles written out | **[P]**; cores **[V]**; SCI-MSG-0011 |
 | S31 | the sandwich of S28 on ordered multi-state sites: exact for envelopes additive along the order, a valid loose bound otherwise (addendum A13); on a Zimm–Bragg helix–coil chain a per-residue uncertainty of `0.1 k_BT` leaves the helix content of a 50-residue chain near the transition undetermined over more than half its range, and a local log odds uncertain by `2c` times a cooperative length (A14) | **[P]**; exact linear programmes (360 instances); exact transfer matrices; SCI-MSG-0011 |
@@ -120,7 +121,8 @@ the container is reclaimed.)
 | SCI-RES-0003 (A1-T7…A1-T9) | theory | wording of the dictionary's originality; a sentence of Theorem 11.99; check Proposition A1.2; the reflection identity | normal | proposed |
 | SCI-MSG-0007 (X-T1…X-T4) | theory | machine-check the hypercircle band and a sharp–soft soundness statement; two table rows; the Curie–Weiss extremality question; the converse reading of D28 | X-T1 high | proposed |
 | SCI-MSG-0007 (X-E1, X-E2) | engineering | cover format against span format on enumerated chain geometry; the slack `κ` of certified envelopes | medium | proposed |
-| SCI-MSG-0008 (R3-T1…R3-T3) | theory | check three finite statements of our referee; four affinely independent points of `K^{br}`; the mean-energy oracle at extensive accuracy | normal | proposed |
+| SCI-MSG-0008 (R3-T1…R3-T3) | theory | check three finite statements of our referee; four affinely independent points of `K^{br}`; ~~the mean-energy oracle at extensive accuracy~~ (R3-T3 partly answered by us and replaced by SCI-MSG-0012 §4) | normal | proposed |
+| SCI-MSG-0012 (§4) | theory | a tail lemma with an energy constraint (largest entropy gain at fixed mean energy on a set of given measure) and an algorithm using it: is the plateau-twin bound the exponent with a mean-energy datum? | normal | proposed |
 | SCI-MSG-0008 (R3-E1, R3-E2) | engineering | class tables for bridges; joint gauche counts per profile class | medium | proposed |
 | SCI-MSG-0011 (S-E1) | engineering | class tables with full pair-distance histograms for 13–24 torsions (scattering identified sets beyond 15 beads) | medium | proposed |
 | SCI-REV-0001 (T1–T7) | theory | replacement text for the headline of §11.25; the repair of Theorem 11.90(a); citation for Lemma 11.89; the ceiling; R10's report; the middle slice | high for M1 | proposed |
@@ -138,6 +140,9 @@ the container is reclaimed.)
 | THY-REQ-0011 C1 | theory | applicability of per-site envelopes; what would falsify the relevance of the exponents | accepted | **answered: SCI-RES-0002** (a pilot with measurements) |
 | THY-RES-0005 §4.1 | theory | our referee's verdict on `INFERENCE_LIMITS.md` | — | **answered: SCI-RES-0004 §1** (and SCI-MSG-0008) |
 | THY-RES-0005 §4.2 | theory | a prior-art pointer for Q1 | — | **answered: SCI-RES-0004 §2** |
+| THY-RES-0006 §5.1 | theory | prior art for Theorem 11.105 (range of a ratio over the weight cone; density-ratio classes; transport with gains) | accepted | open — to be answered in SCI-RES-0005 |
+| THY-RES-0006 §5.2 | theory | review of theory report §§11.28, 11.29 (in particular: only the constraints from `B` to `A` matter; the limit in Theorem 11.108) | accepted | open — SCI-RES-0005 / a review message |
+| THY-RES-0006 §5.3 | theory | where our §8 flow certificates and theirs differ | accepted | open — SCI-RES-0005 |
 
 ## Known limitations of our own work
 

@@ -488,3 +488,32 @@ profile and the gauche count, and its support function is the ground-state energ
   window; chain rule and information radius; Azuma; the truncation inequality) and put
   them into SCI-MSG-0011 §4.
 
+### Cycle 20 — a thermodynamic datum at extensive accuracy (checkpoint 26)
+
+* **Question** (our own R3-T3, asked of the theory division at checkpoint 18 and not yet
+  taken up): with the mean residual energy given, what is the adaptive exponent at
+  extensive accuracy?  Known: `h` at bounded accuracy (hidden twin); between `h − ε₁` and
+  `θ_hint(ε₁)` at extensive accuracy.
+* **The identity that organises it:** `ln Z = S − βU`.  With the datum the unknown is the
+  Gibbs entropy; twins with the same datum differ in `ln Z` by their entropy difference.
+* **Entropy bracket (A16.1).**  Every member of the class has `n·h(σ_u) ≤ S ≤ n ln 2` (the chain
+  rule of Proposition A1.1 again).  So the datum alone gives `ln Z` within `n·a(u)/2`.  The
+  free accuracy without the datum, `ln cosh(u/2)`, is the *reverse* relative entropy
+  `KL(½‖σ_u)`, the one with it the forward `KL(σ_u‖½)`; in the window between them the datum
+  removes an exponential cost (A16.2).  First place in this programme where a measurement
+  provably helps in the worst case — and it restricts our own oracle-invariance theorem
+  to bounded accuracy for this datum.
+* **Plateau twin (A16.3).**  Below `a(u)` a twin must be as deep and exponentially wider: a
+  truncated cone.  Root, gap and counting by the referee's three lemmas, with one new
+  unconditional step (the mean effective energy of the excess of a dip of depth `≤ uκ` is
+  `≥ −uκ − 1`).  Lower bound `ln 2 − h(ρ₀ − σ_u + h⁻¹(h(σ_u)+ε₁))`, second-order close to `θ_hint`.
+* **Is it the truth?**  Tried to beat it (two-shell mixtures; terraces; dips on the
+  basin wall): no.  Tried to prove a matching upper bound: the black-box combination of
+  the theory's bracket with the entropy bracket gives nothing below `a(u)`; what is
+  needed is a tail lemma with an energy constraint.  Stated as Conjecture A16.4 and
+  sent to the theory division (SCI-MSG-0012 §4).
+* **A numerical trap, again** (SD31): the mean-energy difference cancels to nothing in
+  floating point; the excess identity is the only safe way to find the root.
+* Owed validation done: the Lean statements of Theorems 4, 4′, Lemma 1 and Theorem 7
+  (workstream L1) read line by line against the note — they match.
+
