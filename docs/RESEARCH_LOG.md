@@ -1262,7 +1262,17 @@ limit (`SuperAdditive.dist_limit_le`), the limit is convex (`SuperAdditive.conve
 for client sets in `V × ℝ` the covering numbers of the finite sets are sandwiched by those
 of the limit at shifted accuracies (`SuperAdditive.cover_sandwich`).  So the abstract parts
 of Theorems 11.69 and 11.71(a) are machine-checked; what remains on paper there is the
-lattice input (Lemmas 11.67, 11.68).  51 Lean files, 3326 audited declarations.
+lattice input (Lemmas 11.67, 11.68).
+
+**`TypeQuantiles.lean`** (23 declarations): Theorem 11.61(a) by Mathlib's local LYM
+inequality — in a type class the density of `{w > e^u τ}` is at most the density of `{w > τ}`
+in either adjacent class (`upperDensity_succ_le`, `upperDensity_pred_le`), so admissible
+thresholds propagate with the factor `e^u` (`admissible_succ`, `admissible_pred`) and the
+weight truncated at type-dependent levels stays in the class (`truncate_lipschitz_insert`,
+`truncate_lipschitz_erase`, `truncate_ne_iff`).  The statement does not mention the reference
+measure: it is the reason why a sample that is uniform on type classes is the right fixed
+sample for *every* known part that is a function of the type.  52 Lean files, 3349 audited
+declarations.
 
 Workstream T (`workstreams/T_brief.md`) was commissioned to establish what is true:
 every-`n` type-level statements, the convex case step by step against the proofs of
@@ -1282,8 +1292,8 @@ the session's scratch directory (`ws/U/`) until integrated.
 
 ### Resume here (cycle 10, seventh checkpoint)
 
-Verified state: every module under `proofs/` (51 files) builds with zero warnings and is walked
-by the axiom audit (3326 declarations); the harness (110 registered tests: 92 that must survive,
+Verified state: every module under `proofs/` (52 files) builds with zero warnings and is walked
+by the axiom audit (3349 declarations); the harness (110 registered tests: 92 that must survive,
 18 documented refutations) and its mutation tests (207 mutations: 206 caught, one expected
 pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 (R5, R6,
 R_P), §11.18 (R7), §11.19 (R8: "proved"), §11.20 (R9: proved; two gaps closed).

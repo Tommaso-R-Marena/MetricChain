@@ -48,6 +48,7 @@ import proofs.Frontiers.FieldShift
 import proofs.Frontiers.GamePair
 import proofs.Frontiers.CoverStability
 import proofs.Frontiers.SetLimit
+import proofs.Frontiers.TypeQuantiles
 import proofs.AuditCommand
 
 /-!
@@ -443,6 +444,14 @@ import proofs.AuditCommand
 #print axioms MetricChain.SetLimit.SuperAdditive.cover_sandwich
 #print axioms MetricChain.SetLimit.superAdditive_example
 #print axioms MetricChain.SetLimit.one_mem_limit_example
+#print axioms MetricChain.TypeQuantiles.upperDensity_succ_le
+#print axioms MetricChain.TypeQuantiles.upperDensity_pred_le
+#print axioms MetricChain.TypeQuantiles.admissible_succ
+#print axioms MetricChain.TypeQuantiles.admissible_pred
+#print axioms MetricChain.TypeQuantiles.truncate_lipschitz_insert
+#print axioms MetricChain.TypeQuantiles.truncate_lipschitz_erase
+#print axioms MetricChain.TypeQuantiles.truncate_ne_iff
+#print axioms MetricChain.TypeQuantiles.witness_admissible
 #print axioms MetricChain.GamePair.exactRec_congr
 #print axioms MetricChain.GamePair.HintShape.pair
 #print axioms MetricChain.GamePair.HintShape.exists_pair
