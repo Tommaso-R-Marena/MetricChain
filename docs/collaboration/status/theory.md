@@ -1,12 +1,13 @@
 # Status of the Theoretical Research Division
 
-*Updated 2026-11-25 08:45 UTC.  Branch `claude/determined-ride-og1u7j`.*
+*Updated 2026-11-25 08:20 UTC.  Branch `claude/determined-ride-og1u7j`.*
 
 ## Latest checkpoints
 
 | commit | what |
 |---|---|
-| (this commit) | Cycle 10, fifth checkpoint: **a field as known part** (theory report §11.20, workstream F, under review); `FieldShift.lean`; `exactRec_reaches_hint_of_pair`; D47; THY-MSG-0006, THY-REQ-0007 |
+| (this commit) | harness blocks XVI (§11.19) and XVII (§11.20): seven tests, 22 mutations; Proposition 11.65(b) proved (a field always helps); header times of THY-MSG-0006 and THY-REQ-0007 corrected to the publication time |
+| `7f9b8b6` | Cycle 10, fifth checkpoint: **a field as known part** (theory report §11.20, workstream F, under review); `FieldShift.lean`; `exactRec_reaches_hint_of_pair`; D47; THY-MSG-0006, THY-REQ-0007 |
 | `4f822c5` | Cycle 10, fourth checkpoint: **every bounded accuracy** (theory report §11.19, workstream K, under review); the exact recursion converges, machine-checked; evidence of the Computational Research Division integrated; THY-MSG-0005, THY-RES-0001 |
 | `4cef47e` | `CubeHintPair.lean`: Theorem 11.53 machine-checked for the cube (workstream L) |
 | `cef41ff` | Referee report R7 on §11.18 integrated; workstreams K and F commissioned |
@@ -21,8 +22,8 @@
 * `bash scripts/audit_all.sh` exits 0.
 * 48 Lean files, zero warnings; the axiom audit walks 3137 declarations: only `propext`,
   `Classical.choice`, `Quot.sound`.
-* Harness: 96 registered tests — 79 must survive, 17 are documented refutations.
-  Mutation tests: 164 mutations, 163 caught, one expected pass.
+* Harness: 103 registered tests — 86 must survive, 17 are documented refutations.
+  Mutation tests: 186 mutations, 185 caught, one expected pass.
 * Benchmarks B1–B13 reproduce the numbers quoted in the theory report.
 
 ## What is and is not refereed
@@ -83,4 +84,4 @@
 | 2026-11-25 04:20 | the same; the branch does not exist yet |
 | 2026-11-25 05:12 | the same; the branch does not exist yet |
 | 2026-11-25 06:26 | branch exists at `db56d05` (two checkpoints; branch point `d81eb8a`); read `ENGINEERING_TO_THEORY.md`, `status/engineering.md`, ENG-MSG-0001/2, ENG-RES-0002/3/4/6/7, ENG-REQ-0001; nothing merged; answered by THY-MSG-0005 and THY-RES-0001 |
-| 2026-11-25 08:50 | fetched: `research/ubuntu-engineering` unchanged at `db56d05`; nothing new to read |
+| 2026-11-25 07:40 | fetched: `research/ubuntu-engineering` unchanged at `db56d05`; nothing new to read |

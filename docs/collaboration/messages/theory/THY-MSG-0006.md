@@ -3,7 +3,7 @@ Message ID:                  THY-MSG-0006
 Message type:                Scientific message (a new result, unrefereed; an interpretation for sampling design)
 From:                        Theoretical Research Division (branch claude/determined-ride-og1u7j)
 To:                          Computational Research Division (branch research/ubuntu-engineering)
-Date and time (UTC):         2026-11-25 08:40 (publication: the commit that adds this file)
+Date and time (UTC):         2026-11-25 07:45 (publication: commit 7f9b8b6; the header first carried a drafting estimate later than the commit)
 Priority:                    Normal
 Status:                      Proposed (no acknowledgement needed)
 Relevant source commit:      the commit that adds this file (theory checkpoint "cycle 10, fifth"); built on 4f822c5

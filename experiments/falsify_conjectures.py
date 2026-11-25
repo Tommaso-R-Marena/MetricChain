@@ -5414,6 +5414,523 @@ def t_radial_adaptive(rng, trials):
     return True, stats
 
 
+# ----------------------------------------------------------------------------------------------
+# XVI. Every bounded accuracy: the two-sided ratio, the level at accuracy zero, Algorithm 2L+ (theory report 11.19)
+# ----------------------------------------------------------------------------------------------
+
+def ba_exact_tables(m, u, rmax):
+    """Exact tables on Q_m: binom, ball[r + 1] = |B(m, r)| (python integers), E_r(m) for r <= rmax, and T_m(k)."""
+    binom = [math.comb(m, j) for j in range(m + 1)]
+    ball = [0] + list(itertools.accumulate(binom))
+    E = [math.fsum(binom[j] * (math.exp(u * (r + 1 - j)) - 1) for j in range(r + 1)) for r in range(rmax + 1)]
+    T = lambda k: math.fsum(binom[j] * math.exp(-u * max(j - k, 0)) for j in range(m + 1))
+    return binom, ball, E, T
+
+
+def ba_kappa(ball, c_eta, r):
+    """kappa(r): the largest k >= 0 with |B(m, k)| <= max{1, c_eta |B(m, r - 1)|} (c_eta a Fraction: exact)."""
+    target = max(Fraction(1), c_eta * ball[r])
+    k = 0
+    while ball[k + 2] <= target:
+        k += 1
+    return k
+
+
+@conjecture("XVI.1 Lemma 11.55 on exact tables of Q_m: the one-sided ratio Gamma~(r) = E_r/|B(r-1)| is at most 2 e^u m for r <= p_u (m+1) and is never small (at least e^u (e^u - 1) for 1 <= r <= m/2); kappa(r) >= r - 1 - m_0, m_0 = ceil(ln(1/c_eta)/u); and the two-sided ratio Gamma''(r) = E_r/T_m(kappa(r)) is at most 2 e^{u (m_0 + 2)} P(Bin(m, p_u) <= r) for r <= p_u m, hence exponentially small in (p_u m - r)^2/m")
+def t_two_sided_ratio(rng, trials):
+    stats = dict(cases=0, largest_a=0.0, largest_b=0.0, smallest_one_sided=math.inf)
+    for m in ((20, 57, 150) if trials < 100 else (20, 57, 150, 400)):
+        for u in (0.5, 1.0, 2.0):
+            pu = 1 / (1 + math.exp(u))
+            binom, ball, E, T = ba_exact_tables(m, u, m // 2)
+            binle = list(itertools.accumulate(binom[j] * pu ** j * (1 - pu) ** (m - j) for j in range(m + 1)))
+            gam1 = [math.exp(u) - 1] + [E[r] / ball[r] for r in range(1, m // 2 + 1)]
+            for r in range(0, int(pu * (m + 1)) + 1):
+                stats["largest_a"] = max(stats["largest_a"], gam1[r] / (2 * math.exp(u) * m))
+                if gam1[r] > 2 * math.exp(u) * m * (1 + 1e-12):
+                    return False, dict(reason="Gamma~(r) > 2 e^u m at a radius below p_u (m+1)", m=m, u=u, r=r)
+            low = min(gam1[1:])
+            stats["smallest_one_sided"] = min(stats["smallest_one_sided"], low / (math.exp(u) * (math.exp(u) - 1)))
+            if low < math.exp(u) * (math.exp(u) - 1):
+                return False, dict(reason="the one-sided ratio is small somewhere", m=m, u=u, value=low)
+            for eta in (0.25, 0.5):
+                c_eta = Fraction(1 - Fraction(eta)) / (1 + Fraction(eta))
+                m0 = math.ceil(math.log(1 / float(c_eta)) / u)
+                for r in range(1, min(int(pu * (m + 1)) + 1, m // 2) + 1):
+                    if ba_kappa(ball, c_eta, r) < r - 1 - m0:
+                        return False, dict(reason="kappa(r) < r - 1 - m_0", m=m, u=u, eta=eta, r=r)
+                for r in range(0, int(pu * m) + 1):
+                    gam2 = E[r] / T(ba_kappa(ball, c_eta, r))
+                    bound = 2 * math.exp(u * (m0 + 2)) * binle[r]
+                    stats["largest_b"] = max(stats["largest_b"], gam2 / bound)
+                    if gam2 > bound * (1 + 1e-9):
+                        return False, dict(reason="Gamma''(r) exceeds 2 e^{u(m_0+2)} P(Bin(m, p_u) <= r)", m=m, u=u, eta=eta, r=r,
+                                           ratio=gam2 / bound)
+                    stats["cases"] += 1
+    return True, stats
+
+
+@conjecture("XVI.2 The level recursion at accuracy zero (Proposition 11.57): the bracket sup_{gamma >= 0} [min(gamma, phi a) + (1 - phi) T(gamma/(1 - phi))] built on T = theta_hint is at least h for every outer fraction phi (no level undercuts the lower bound), and so is the two-rung bound max{phi a + (1 - phi) T(xi), (1 - phi)(xi + h)}; the first level from the non-adaptive exponent, min_phi max((1 - phi) a, phi a + (1 - phi) theta_na(phi a/(1 - phi))), lies between max(h, a/2) and a, and below 0.51 a for slopes u <= 2.5 (it is 0.58 a at u = 4.5); and the iteration t -> max{phi a + (1 - phi)(h + eta), (1 - phi)(xi + t)} with phi = min(1/2, eta/a), xi = min(eps*/2, phi eta), started at a, stays below eta + max(h + eta, (1 - phi)^m a) and is below h + 2 eta after ln(a/h)/phi + 1 steps")
+def t_level_at_zero(rng, trials):
+    stats = dict(checks=0, closest=math.inf, tau2_over_a=0.0, steps=0)
+    for _ in range(max(6, trials // 10)):
+        u = float(rng.choice([0.3, 1.0, 2.0, 4.0]) * rng.uniform(0.8, 1.25))
+        pu, lam, estar, a, h = lv_consts(u)
+        T = lambda x: na_theta_hint(u, x)
+        for _ in range(20):
+            phi = float(rng.uniform(0.005, 0.995))
+            top = phi * a
+            val = max(min(g, top) + (1 - phi) * T(g / (1 - phi)) for g in np.linspace(0.0, top, 200))
+            stats["closest"] = min(stats["closest"], val / h - 1)
+            if val < h * (1 - 1e-12):
+                return False, dict(reason="the bracket at accuracy zero built on theta_hint is below h", u=u, phi=phi, value=val, h=h)
+            xi = float(rng.uniform(0, 1)) * estar
+            two = max(phi * a + (1 - phi) * T(xi), (1 - phi) * (xi + h))
+            if two < h * (1 - 1e-12):
+                return False, dict(reason="the two-rung bound built on theta_hint is below h", u=u, phi=phi, xi=xi)
+            stats["checks"] += 1
+        tau2 = min(max((1 - f) * a, f * a + (1 - f) * na_theta_na(u, f * a / (1 - f))) for f in np.linspace(0.3, 0.7, 801))
+        stats["tau2_over_a"] = max(stats["tau2_over_a"], tau2 / a)
+        if not (max(h, 0.5 * a) - 1e-12 <= tau2 <= (0.51 * a if u <= 2.5 else a)):
+            return False, dict(reason="the first level at accuracy zero is not between max(h, a/2) and 0.51 a (a for steep slopes)", u=u,
+                               tau2_over_a=float(tau2 / a))
+        eta = float(rng.uniform(0.02, 0.5)) * h
+        phi = min(0.5, eta / a)
+        xi = min(estar / 2, phi * eta)
+        t, m = a, 0
+        while t > h + 2 * eta:
+            t = max(phi * a + (1 - phi) * (h + eta), (1 - phi) * (xi + t))
+            m += 1
+            if t > eta + max(h + eta, (1 - phi) ** m * a) + 1e-12:
+                return False, dict(reason="the two-rung iteration leaves its envelope", u=u, eta=eta, m=m)
+            if m > math.log(a / h) / phi + 1:
+                return False, dict(reason="the two-rung iteration does not reach h + 2 eta in time", u=u, eta=eta, m=m)
+        stats["steps"] = max(stats["steps"], m)
+    return True, stats
+
+
+def ba_constants(n_o, n, u, par, nladder):
+    """The constants of Algorithm 2L+ (theory report Theorem 11.56; workstream K, section 2.2)."""
+    lam, eta, etap, theta, nu1, b, delta = (par[k] for k in ("lam", "eta", "etap", "theta", "nu1", "b", "delta"))
+    c_eta = (1 - eta) / (1 + eta)
+    J = math.ceil((2 * u * n + b + n_o * math.log(2)) / lam)
+    nu0 = max((J + 1) * (math.exp(lam) - 1) / etap, nu1) / (1 - eta)
+    binom, ball, E, T = ba_exact_tables(n_o, u, n_o)
+    Tk = [T(k) for k in range(n_o + 1)]
+    gam1 = [math.exp(u) - 1] + [E[r] / ball[r] for r in range(1, n_o + 1)]
+    cfrac = Fraction(1 - Fraction(eta)) / (1 + Fraction(eta))
+    gam2 = [E[r] / Tk[ba_kappa(ball, cfrac, r)] for r in range(n_o)]
+    rdag = -1
+    while rdag + 1 <= n_o - 1 and gam1[rdag + 1] <= theta * (1 - eta) * nu0 and min(gam1[rdag + 1] / c_eta, gam2[rdag + 1]) <= theta:
+        rdag += 1
+    pidag = ball[rdag + 1] / 2 ** n_o if rdag >= 0 else 2.0 ** (-n_o - 1)
+    m_max = math.ceil(math.log2(2 * (1 + eta) * math.exp(lam) * nu0 / ((1 - eta) * pidag)))
+    K = math.ceil(3 * (1 + eta) / eta ** 2 * math.log(2 * (J + 1) * (m_max + 1) * (nladder + 2) / delta))
+    Mdag = K / ((1 - eta) * pidag)
+    return dict(c_eta=c_eta, J=J, nu0=nu0, nu=K * nu0, K=K, m_max=m_max, rdag=rdag, Mdag=Mdag,
+                Mbar=2 * (1 + eta) * math.exp(lam) * nu0 * Mdag, ball=ball, E=E, Tk=Tk)
+
+
+def ba_two_level_plus(rng, vals, probs, lnw_ref, n_o, n, u, par, mode, max_points=4_200_000):
+    """Outer loop of Algorithm 2L+.  The fibre average of a uniform outer point takes the value vals[t] with probability
+    probs[t]; lnw_ref = -psi at the reference point (one query).  The inner procedure is simulated: a call at accuracy x
+    returns a valid bracket of ratio e^x around the true value, placed at random (mode 0), with the value at its top (1)
+    or at its bottom (2).  Returns a record, or a record with the key "error"."""
+    lam, eta, etap, theta, b = (par[k] for k in ("lam", "eta", "etap", "theta", "b"))
+    xs = [2 * u * (n - n_o)]
+    while xs[-1] / 2 > b:
+        xs.append(xs[-1] / 2)
+    xs = np.array(xs[1:] + [b * (1 - 1e-9)])                           # inner accuracies x_1 > ... > x_L <= b
+    C = ba_constants(n_o, n, u, par, len(xs))
+    K, nu, J, ball, E, Tk = C["K"], C["nu"], C["J"], C["ball"], C["E"], C["Tk"]
+    No = 2 ** n_o
+    s0 = math.exp(lnw_ref - u * n)
+    ell = math.exp(lnw_ref) * ((1 + math.exp(-u)) / 2) ** n            # the cone around the reference point
+    Sigma = 0.0
+    cdf = np.cumsum(probs)
+    Wl = np.zeros(0); L = np.zeros(0); U = np.zeros(0); acc = np.zeros(0, dtype=np.int64)
+    levels = []                                                       # dicts: s, M, q, pbar, pop, ell_in, r, Mneg
+    for j in range(J + 1):
+        s = s0 * math.exp(j * lam)
+        ell_in = ell
+        Mneg = nu * s / (ell_in * math.exp(b))
+        M = K
+        while True:
+            if M > max_points or M > K * 2 ** C["m_max"]:
+                return dict(error="sample beyond the cap of the test" if M <= K * 2 ** C["m_max"] else "abort: M > K 2^{m_max}", C=C)
+            if len(Wl) < M:
+                extra = M - len(Wl)
+                Wl = np.concatenate([Wl, vals[np.minimum(np.searchsorted(cdf, rng.uniform(size=extra)), len(vals) - 1)]])
+                L = np.concatenate([L, np.zeros(extra)]); U = np.concatenate([U, np.full(extra, np.inf)])
+                acc = np.concatenate([acc, np.full(extra, -1, dtype=np.int64)])
+            while True:                                               # classify the first M points at this level
+                und = np.nonzero((U[:M] > s) & (L[:M] <= s * math.exp(-b)))[0]
+                if len(und) == 0:
+                    break
+                if np.any(acc[und] >= len(xs) - 1):
+                    return dict(error="classification does not end at the last accuracy of the ladder", C=C)
+                acc[und] += 1
+                x = xs[acc[und]]
+                t = rng.uniform(size=len(und)) if mode == 0 else (np.ones(len(und)) if mode == 1 else np.zeros(len(und)))
+                L[und] = np.maximum(L[und], Wl[und] * np.exp(-t * x))
+                U[und] = np.minimum(U[und], Wl[und] * np.exp((1 - t) * x))
+            N = int((U[:M] > s).sum())                                # the points that are not low are high
+            q = min(1.0, max(N, K) / ((1 - eta) * M))
+            pop = N >= K
+            pbar = N / ((1 + eta) * M) if pop else 0.0
+            if pop:
+                k = 0
+                while ball[k + 2] <= max(1.0, No * pbar):
+                    k += 1
+                ell = max(ell, s * math.exp(-b) * pbar, s * math.exp(-b) * Tk[k] / No)       # Markov, and the Harper term
+            if No * q < 1:
+                tail, r = 0.0, -1
+            else:
+                r = next(rr for rr in range(n_o + 1) if ball[rr + 1] >= No * q)
+                tail = s * E[r] / No if r < n_o else math.inf         # no closure while the ball is the whole cube
+            rec = dict(s=s, M=M, q=q, pbar=pbar, pop=pop, ell_in=ell_in, r=r, Mneg=Mneg)
+            if tail <= theta * math.exp(b) * ell:
+                lower = max(ell, Sigma + (1 - math.exp(-lam)) * math.exp(-b) * s * pbar)
+                upper = s0 + sum((math.exp(lam) - 1) * lv["s"] * lv["q"] for lv in levels) + tail
+                return dict(lower=lower, upper=upper, levels=levels, last=rec, C=C, xs=xs, Wl=Wl, s0=s0)
+            if pop or M >= Mneg:
+                levels.append(rec)
+                Sigma += (1 - math.exp(-lam)) * math.exp(-b) * s * pbar
+                break
+            M *= 2
+    return dict(error="no closure within J levels", C=C)
+
+
+def ba_check_run(run, vals, probs, n_o, n, u, par, stats):
+    """The claims of Theorem 11.56 on one run: validity, width, certificates, closing radius, sample sizes, the count."""
+    lam, eta, etap, theta, b = (par[k] for k in ("lam", "eta", "etap", "theta", "b"))
+    C = run["C"]
+    A = float((vals * probs).sum())
+    if not (run["lower"] <= A * (1 + 1e-12) and A <= run["upper"] * (1 + 1e-12)):
+        return dict(reason="the bracket of Algorithm 2L+ does not contain the mean", lower=run["lower"], A=A, upper=run["upper"])
+    width = math.log(run["upper"] / run["lower"])
+    bound = math.log((2 / (1 + math.exp(u))) ** n + math.exp(b) * (math.exp(lam) * (1 + eta) / (1 - eta) + etap + theta))
+    if width > bound + 1e-9:
+        return dict(reason="the bracket is wider than ln[(2 p_u)^n + e^b (e^lam (1+eta)/(1-eta) + eta' + theta)]", width=width, bound=bound)
+    stats["widest"] = max(stats["widest"], width / bound)
+    exceed = lambda thr: float(probs[vals > thr].sum())
+    for jj, lv in enumerate(run["levels"] + [run["last"]]):
+        left = jj < len(run["levels"])
+        if exceed(lv["s"]) > lv["q"] + 1e-12:
+            return dict(reason="a certified upper bound q on an exceedance probability is too small", level=jj, p=exceed(lv["s"]), q=lv["q"])
+        if lv["pop"] and lv["pbar"] > exceed(lv["s"] * math.exp(-b)) + 1e-12:
+            return dict(reason="a certified lower bound on an exceedance probability is too large", level=jj)
+        if left and lv["r"] <= C["rdag"]:
+            return dict(reason="a level was left although its closing radius is at most r_dagger", level=jj, r=lv["r"], rdag=C["rdag"])
+        if lv["M"] > max(C["K"], 2 * lv["Mneg"]) or lv["M"] > C["Mbar"] * (1 + 1e-12):
+            return dict(reason="a sample is larger than max(K, 2 M_neg) or than M_bar", level=jj, M=lv["M"])
+        if lv["Mneg"] > (1 + eta) * math.exp(lam) * C["nu0"] * C["Mdag"] * (1 + 1e-12):
+            return dict(reason="a negligibility threshold exceeds (1+eta) e^lam nu_0 M_dagger", level=jj)
+        for x in [2 * u * (n - n_o)] + list(run["xs"][:-1]):
+            lhs = lv["Mneg"] * exceed(lv["s"] * math.exp(-x))
+            cap = C["nu"] * math.exp(lam + x) / C["c_eta"]
+            if lhs > cap * (1 + 1e-9):
+                return dict(reason="the count of points close to a level exceeds e^lam nu e^x / c_eta", level=jj, x=x, ratio=lhs / cap)
+            stats["tightest_count"] = max(stats["tightest_count"], lhs / cap)
+        stats["populated" if lv["pop"] else "unpopulated"] += 1
+    stats["runs"] += 1
+    return None
+
+
+def ba_radial(n_o, u, kind):
+    """Radial outer landscapes f(dist(a, 0)) with slopes at most u: 0 flat, 1 cone, 2 'staircase' with
+    e^{-f(d)} |B(n_o, d)| constant wherever the slope allows (many levels carry the same mass)."""
+    binom = [math.comb(n_o, j) for j in range(n_o + 1)]
+    ball = list(itertools.accumulate(binom))
+    if kind == 0:
+        f = np.zeros(n_o + 1)
+    elif kind == 1:
+        f = u * np.arange(n_o + 1, dtype=float)
+    else:
+        f = np.concatenate([[0.0], np.cumsum([min(u, math.log(ball[d + 1] / ball[d])) for d in range(n_o)])])
+    return np.exp(-f), np.array(binom, dtype=float) / 2 ** n_o, float(-f[0])
+
+
+@conjecture("XVI.3 Algorithm 2L+ (Theorem 11.56), outer loop with a simulated inner procedure and the constants of the theorem: on arbitrary Lipschitz functions of a small cube and on radial outer landscapes (flat, cone, staircase) the bracket contains the mean and is at most ln[(2 p_u)^n + e^b (e^lam (1+eta)/(1-eta) + eta' + theta)] wide; every certificate is true; every level that is left has closing radius above r_dagger; samples stay below max(K, 2 M_neg) and M_bar; and the count of points within a factor e^x of a level obeys M_neg p(s e^{-x}) <= e^lam nu e^x / c_eta")
+def t_two_level_plus(rng, trials):
+    stats = dict(runs=0, widest=0.0, tightest_count=0.0, populated=0, unpopulated=0, skipped=0)
+    def one(vals, probs, lnw_ref, n_o, n, u, par, mode, tag):
+        run = ba_two_level_plus(rng, vals, probs, lnw_ref, n_o, n, u, par, mode)
+        if "error" in run:
+            if run["error"].startswith("sample beyond"):
+                stats["skipped"] += 1
+                return None
+            return dict(reason=run["error"], tag=tag)
+        bad = ba_check_run(run, vals, probs, n_o, n, u, par, stats)
+        return dict(bad, tag=tag) if bad else None
+    # (i) arbitrary Lipschitz functions on a small cube, all fibre averages enumerated
+    n_o, n_i = 6, 4
+    n = n_o + n_i
+    D = na_cube(n)
+    for rep in range(max(6, trials // 10)):
+        u = float(rng.choice([0.5, 1.0, 2.0]))
+        kind = rep % 6
+        psi = na_rand_lipschitz(rng, n, u, D, kind) if kind < 5 else u * D[int(rng.integers(2 ** n))].astype(float)
+        psi = psi + float(rng.uniform(-3, 3))
+        vals = np.exp(-psi).reshape(2 ** n_o, 2 ** n_i).mean(axis=1)
+        probs = np.full(2 ** n_o, 2.0 ** -n_o)
+        par = dict(lam=float(rng.choice([0.5, 1.0])), eta=float(rng.choice([0.25, 0.5])), etap=float(rng.choice([0.5, 1.0])),
+                   theta=float(rng.choice([0.5, 2.0, 20.0])), b=float(rng.choice([0.5, 1.0, 3.0])), delta=0.01, nu1=1.0)
+        if rep % 2:
+            par["nu1"] = 2 * math.exp(u) * n_o / par["theta"]
+        bad = one(vals, probs, -float(psi[int(rng.integers(2 ** n))]), n_o, n, u, par, rep % 3, ("cube", kind))
+        if bad:
+            return False, bad
+    # (ii) radial outer landscapes; on the staircase a lower end without the layer-cake sum is too small
+    radial = [(40, 1.0, 0, dict(lam=0.5, eta=0.25, etap=0.5, theta=0.5, b=1.0, delta=0.01, nu1=1.0)),
+              (24, 1.0, 1, dict(lam=0.5, eta=0.25, etap=0.5, theta=2.0, b=0.5, delta=0.01, nu1=1.0)),
+              (24, 1.0, 2, dict(lam=0.125, eta=0.25, etap=0.1, theta=1.0, b=0.25, delta=0.01, nu1=1.0)),
+              (20, 1.0, 1, dict(lam=0.5, eta=0.25, etap=0.5, theta=0.5, b=1.0, delta=0.01, nu1=1.0)),
+              (40, 2.0, 0, dict(lam=1.0, eta=0.5, etap=1.0, theta=2.0, b=3.0, delta=0.01, nu1=1.0)),
+              (28, 1.0, 2, dict(lam=0.25, eta=0.25, etap=0.1, theta=1.0, b=0.5, delta=0.01, nu1=1.0))]
+    for rep, (n_o, u, kind, par) in enumerate(radial[:3] if trials < 100 else radial):
+        vals, probs, lnw_ref = ba_radial(n_o, u, kind)
+        bad = one(vals, probs, lnw_ref, n_o, n_o + 2, u, par, rep % 3, ("radial", n_o, kind))
+        if bad:
+            return False, bad
+    if stats["populated"] == 0 or stats["unpopulated"] == 0 or stats["skipped"] > 0:
+        return False, dict(reason="the test has no power", **stats)
+    return True, stats
+
+
+# ----------------------------------------------------------------------------------------------
+# XVII. With a known part (a field): the p-biased cube (theory report 11.20)
+# ----------------------------------------------------------------------------------------------
+
+def fd_consts(p, u):
+    """(q, Lambda(0), Lambda(1)): soft gaps of the two centre letters at the zero residual."""
+    q = 1 - p
+    return q, -math.log(q + p * math.exp(-u)), -math.log(p + q * math.exp(-u))
+
+
+def fd_game(p, u, g, t):
+    """Closed form of the game function F(gamma, t) of the additive instance gamma |x| (Theorem 11.59(b))."""
+    q, L0, L1 = fd_consts(p, u)
+    return (-t * math.log(q + p * math.exp(-g))
+            + math.log((1 - math.exp(-t * (u + g))) * math.exp(-t * L0) + (1 - math.exp(-t * (u - g))) * math.exp(-t * (L1 + g)))
+            - math.log(1 - math.exp(-2 * t * u)))
+
+
+def fd_game_value(p, u, g, t):
+    """-ln val of K(a, b) = exp(-t [u 1[a != b] - Lambda(b) - gamma a - ln Z_gamma]) computed from the definition: the minimum
+    over mixtures of the two centre letters of the larger row sum (two lines in the mixing weight: an end or the crossing)."""
+    q, L0, L1 = fd_consts(p, u)
+    lz, Lam = math.log(q + p * math.exp(-g)), (L0, L1)
+    K = [[math.exp(-t * (u * (a != b) - Lam[b] - g * a - lz)) for b in (0, 1)] for a in (0, 1)]
+    cands = [0.0, 1.0]
+    den = (K[0][0] - K[0][1]) - (K[1][0] - K[1][1])
+    if den != 0 and 0 <= (K[1][1] - K[0][1]) / den <= 1:
+        cands.append((K[1][1] - K[0][1]) / den)
+    return -math.log(min(max(K[0][0] * w + K[0][1] * (1 - w), K[1][0] * w + K[1][1] * (1 - w)) for w in cands))
+
+
+def fd_fstar(p, u, T, ngam=401):
+    """F*(t) = max over |gamma| <= u of F(gamma, t) on the grid T, F(0, t), and the maximising gamma."""
+    q, L0, L1 = fd_consts(p, u)
+    gam = np.linspace(-u * (1 - 1e-9), u * (1 - 1e-9), ngam)
+    G, TT = np.meshgrid(gam, T, indexing="ij")
+    Fv = (-TT * np.log(q + p * np.exp(-G)) + np.log((1 - np.exp(-TT * (u + G))) * np.exp(-TT * L0)
+          + (1 - np.exp(-TT * (u - G))) * np.exp(-TT * (L1 + G))) - np.log(1 - np.exp(-2 * TT * u)))
+    return Fv.max(axis=0), Fv[ngam // 2], gam[Fv.argmax(axis=0)]
+
+
+def fd_hinted(Fv, T, e):
+    """max over 0 <= t <= 1 of F(t) - t e (the value 0 at t = 0 included)."""
+    return max(0.0, float((Fv - T * e).max()))
+
+
+def fd_theta_na(Fv, T, x):
+    """sup over tau < 1 of (F(tau) - tau x)/(1 - tau): the non-adaptive exponent in terms of the game function."""
+    return max(0.0, float(((Fv - T * x) / (1 - T)).max()))
+
+
+@conjecture("XVII.1 Exponent functions with a field (Theorems 11.59, 11.64, Lemma 11.60): the closed form of the game function F(gamma, t) equals -ln of the 2x2 game value computed from its definition and vanishes at t = 1; the shift identity D(P_{X|S} || pi_s | P_S) = I(S;X) + KL(P_X || pi) + u P(X != S) - Lambda(P_S) holds at every profile; the hinted exponent of the zero residual is max_m [h(m) - h((Lambda_m + e)/u)]_+; at p = 1/2 the largest hinted exponent is KL((Lambda_1 + e)/u || 1/2) and the hardest instance is the zero residual; for p != 1/2 it is strictly larger than the hinted exponent of the zero residual, the class threshold exceeds that of the zero residual, and the hardest additive residual works against the field; and the non-adaptive exponent sup_{tau < 1} (F*(tau) - tau x)/(1 - tau) satisfies theta_na(e + R^max(e)) = R^max(e)")
+def t_field_exponents(rng, trials):
+    stats = dict(games=0, identities=0, pairs=0, smallest_gain=math.inf, largest_gain=0.0)
+    T = np.concatenate([np.linspace(1e-4, 0.99, 2500), np.linspace(0.99, 1 - 1e-7, 1500)[1:]])
+    h2 = lambda z: 0.0 if z <= 0 or z >= 1 else -(z * math.log(z) + (1 - z) * math.log(1 - z))
+    for rep in range(max(6, trials // 10)):
+        p = 0.5 if rep % 3 == 0 else float(rng.uniform(0.04, 0.96))
+        u = float(rng.uniform(0.3, 3.0))
+        q, L0, L1 = fd_consts(p, u)
+        for _ in range(10):                                           # closed form against the definition
+            g, t = float(rng.uniform(-0.95, 0.95)) * u, float(rng.uniform(0.02, 0.99))
+            if abs(fd_game(p, u, g, t) - fd_game_value(p, u, g, t)) > 1e-9 or abs(fd_game(p, u, g, 1.0)) > 1e-9:
+                return False, dict(reason="closed form of the game function != -ln val, or F(gamma, 1) != 0", p=p, u=u, gamma=g, t=t)
+            stats["games"] += 1
+        eta1, eta0 = q * math.exp(-u) / (p + q * math.exp(-u)), p * math.exp(-u) / (q + p * math.exp(-u))
+        for _ in range(10):                                           # the shift identity at a random profile
+            m, x, y = (float(v) for v in rng.uniform(0.02, 0.98, size=3))     # P(S=1), P(X=0|S=1), P(X=1|S=0)
+            kap, rho, Lm = m * (1 - x) + (1 - m) * y, m * x + (1 - m) * y, (1 - m) * L0 + m * L1
+            I = h2(kap) - m * h2(x) - (1 - m) * h2(y)
+            cone = m * na_kl(x, eta1) + (1 - m) * na_kl(y, eta0)
+            if abs(cone - (I + na_kl(kap, p) + u * rho - Lm)) > 1e-10:
+                return False, dict(reason="shift identity with a field fails", p=p, u=u, m=m, x=x, y=y)
+            stats["identities"] += 1
+        Fs, F0, gstar = fd_fstar(p, u, T)
+        E, E0 = float((Fs / T).max()), float((F0 / T).max())
+        ms = np.linspace(1e-4, 1 - 1e-4, 20001)
+        for frac in (0.0, 0.3, 0.6):
+            e = frac * E0
+            r0, rm = fd_hinted(F0, T, e), fd_hinted(Fs, T, e)
+            rho = ((1 - ms) * L0 + ms * L1 + e) / u
+            ok = rho <= np.minimum(ms, 1 - ms)
+            hh = lambda z: -(z * np.log(z) + (1 - z) * np.log1p(-z))
+            ball = float(np.max(np.where(ok, hh(ms) - hh(np.clip(rho, 1e-12, 0.5)), 0.0)))
+            if abs(r0 - ball) > 2e-6 + 1e-4 * r0:
+                return False, dict(reason="hinted exponent at the zero residual != max_m [h(m) - h((Lambda_m + e)/u)]", p=p, u=u, e=e, game=r0, ball=ball)
+            if p == 0.5:
+                lam1 = math.log(2 / (1 + math.exp(-u)))
+                if abs(rm - na_kl((lam1 + e) / u, 0.5)) > 2e-6 or abs(rm - r0) > 1e-9:
+                    return False, dict(reason="at p = 1/2 the exponents are not those of the uniform cube", u=u, e=e)
+            elif frac == 0.0:
+                gain = rm / r0 - 1
+                stats["smallest_gain"], stats["largest_gain"] = min(stats["smallest_gain"], gain), max(stats["largest_gain"], gain)
+                gam0 = float(gstar[int(np.argmax(Fs))])
+                if not (rm > r0 * (1 + 1e-7) and E > E0 and gam0 * (0.5 - p) < 0):
+                    return False, dict(reason="with a field the hardest additive instance is not strictly harder than the zero residual, or its residual does not work against the field", p=p, u=u, R0=r0, Rmax=rm, gamma=gam0)
+        for frac in (0.1, 0.4):                                       # the pair (theta_na, R^max)
+            e = frac * E
+            r = fd_hinted(Fs, T, e)
+            th = fd_theta_na(Fs, T, e + r)
+            if abs(th - r) > 2e-4 * r + 1e-7:
+                return False, dict(reason="theta_na(e + R^max(e)) != R^max(e)", p=p, u=u, e=e, theta_na=th, hinted=r)
+            stats["pairs"] += 1
+    return True, stats
+
+
+@conjecture("XVII.2 Theorem 11.61(a): for every u-Lipschitz weight on the cube the type-wise upper q-quantiles t_kappa (the smallest value of w on the type class above which w has density at most q there) satisfy t_{kappa +- 1} <= e^u t_kappa; hence the truncated function max(psi, -ln t_{|x|}) is u-Lipschitz and differs from psi on a set of density at most q in every type class")
+def t_typewise_quantiles(rng, trials):
+    stats = dict(pairs=0, functions=0, tightest=0.0)
+    for n in ((5, 7) if trials < 100 else (5, 7, 9)):
+        D = na_cube(n)
+        wt = D[0]
+        nbr = [[x ^ (1 << i) for i in range(n)] for x in range(2 ** n)]
+        for rep in range(max(6, trials // 20)):
+            u = float(rng.choice([0.5, 1.0, 2.0]))
+            kind = rep % 6
+            psi = na_rand_lipschitz(rng, n, u, D, kind) if kind < 5 else u * D[int(rng.integers(2 ** n))].astype(float)
+            w = np.exp(-psi)
+            for qq in (0.03, 0.2, 0.6):
+                tk = []
+                for kappa in range(n + 1):
+                    ws = np.sort(w[wt == kappa])
+                    tk.append(float(next(tau for tau in ws if (ws > tau).mean() <= qq)))
+                for kappa in range(n):
+                    ratio = max(tk[kappa + 1] / tk[kappa], tk[kappa] / tk[kappa + 1])
+                    stats["tightest"] = max(stats["tightest"], ratio / math.exp(u))
+                    if ratio > math.exp(u) * (1 + 1e-12):
+                        return False, dict(reason="adjacent type-wise quantiles differ by more than e^u", n=n, u=u, q=qq, kappa=kappa)
+                    stats["pairs"] += 1
+                tr = np.maximum(psi, -np.log(np.array(tk))[wt])
+                if any(abs(tr[x] - tr[y]) > u * (1 + 1e-12) for x in range(2 ** n) for y in nbr[x]):
+                    return False, dict(reason="the function truncated at its type-wise quantiles is not u-Lipschitz", n=n, u=u, q=qq)
+                if any((tr[wt == kappa] > psi[wt == kappa] + 1e-12).mean() > qq + 1e-12 for kappa in range(n + 1)):
+                    return False, dict(reason="the truncation changes more than a fraction q of a type class", n=n, u=u, q=qq)
+            stats["functions"] += 1
+    return True, stats
+
+
+def fd_reference_tables(p, u, n, D):
+    """The flat-histogram reference on Q_n: psi_H = -n v(|x|/n), its Gibbs law mu_H, the slack s_H, and for every nonempty
+    proper subset (bit mask) its measure and its effect Phi_H(D) = sum_{x in D} mu_H(x) (e^{s_H(x -> D^c)} - 1)."""
+    q = 1 - p
+    gam = np.linspace(-u, u, 4001)
+    wt = D[0]
+    v = np.array([float(np.max(-gam * (k / n) - np.log(q + p * np.exp(-gam)))) for k in range(n + 1)])
+    psiH = -n * v[wt]
+    mu = p ** wt * q ** (n - wt) * np.exp(-psiH)
+    mu = mu / mu.sum()
+    slack = u * D + psiH[:, None] - psiH[None, :]
+    N = 2 ** n
+    masks = np.arange(1, 2 ** N - 1, dtype=np.int64)
+    B = ((masks[:, None] >> np.arange(N)) & 1).astype(bool)
+    phi = np.zeros(len(masks))
+    for x in range(N):
+        exit_slack = np.where(~B, slack[x][None, :], np.inf).min(axis=1)
+        phi += np.where(B[:, x], mu[x] * (np.exp(exit_slack) - 1), 0.0)
+    meas = B @ mu
+    order = np.argsort(meas, kind="stable")
+    return psiH, mu, slack, masks, B, phi, meas, meas[order], np.maximum.accumulate(phi[order]), order
+
+
+@conjecture("XVII.3 Lemma 11.62 on the 4-cube with the exact tail function of the flat-histogram reference H (all 65534 subsets): the slack u d(x,y) + psi_H(x) - psi_H(y) is nonnegative; for every u-Lipschitz psi and every level t, E_{mu_H} (w/w_H - t)_+ <= t Xi_H(mu_H(w/w_H > t)); and there is equality at t = 1 for the deepest dip of H on a maximising set")
+def t_reference_tail_lemma(rng, trials):
+    stats = dict(levels=0, tightest=0.0, equalities=0)
+    n = 4
+    D = na_cube(n)
+    for rep in range(2 if trials < 100 else 5):
+        p, u = [(0.1, 2.0), (0.3, 1.0), (0.2, 1.5), (0.7, 1.0), (0.5, 1.0)][rep]
+        psiH, mu, slack, masks, B, phi, meas, meas_sorted, tailmax, order = fd_reference_tables(p, u, n, D)
+        if slack.min() < -1e-12:
+            return False, dict(reason="the slack of the flat-histogram reference is negative", p=p, u=u)
+        Xi = lambda qq: float(tailmax[np.searchsorted(meas_sorted, qq * (1 + 1e-12), side="right") - 1]) if qq >= meas_sorted[0] else 0.0
+        for k in range(max(12, trials // 5)):
+            kind = k % 6
+            psi = na_rand_lipschitz(rng, n, u, D, kind) if kind < 5 else u * D[int(rng.integers(2 ** n))].astype(float)
+            what = np.exp(-psi + psiH)                                # w / w_H
+            for t in np.unique(what)[:-1]:
+                above = what > t
+                qq = float(mu[above].sum())
+                lhs = float((mu[above] * (what[above] - t)).sum())
+                rhs = t * Xi(qq)
+                stats["tightest"] = max(stats["tightest"], lhs / rhs if rhs > 0 else 0.0)
+                if lhs > rhs * (1 + 1e-9) + 1e-15:
+                    return False, dict(reason="tail lemma relative to the flat-histogram reference violated", p=p, u=u, t=float(t), lhs=lhs, rhs=rhs)
+                stats["levels"] += 1
+        for qq in (0.05, 0.2, 0.5):                                   # equality: the deepest dip of H on a maximising set
+            j = int(np.searchsorted(meas_sorted, qq, side="right")) - 1
+            if j < 0:
+                continue
+            best = order[int(np.argmax(phi[order[:j + 1]]))]
+            inside = B[best]
+            dip = np.where(inside, np.max(np.where(~inside[None, :], psiH[None, :] - u * D, -np.inf), axis=1), psiH)
+            what = np.exp(-dip + psiH)
+            lhs = float((mu[inside] * (what[inside] - 1)).sum())
+            if abs(lhs - Xi(float(meas[best]))) > 1e-9 * max(lhs, 1e-12):
+                return False, dict(reason="no equality at the deepest dip of the reference on a maximising set", p=p, u=u, q=qq)
+            stats["equalities"] += 1
+    return True, stats
+
+
+@conjecture("XVII.4 Proposition 11.65(b): a field always helps.  In the cosh form F(gamma, t) = ln[I_theta(theta + gamma)/C(theta + gamma)^t] the ratio is unimodal in gamma on the window; for theta > 0 its maximiser gamma* is negative (the hardest residual works against the field); F*(t; theta) is nonincreasing in theta >= 0; and at the maximiser ln cosh Q - ln cosh P >= (1 - t)[ln cosh((theta+u)/2) - ln cosh((theta-u)/2)] with P = (theta-u)/2 + t(u-gamma*)/2, Q = (theta+u)/2 - t(u+gamma*)/2 (the comparison of interval averages of tanh to which the proof reduces dF*/dtheta <= 0)")
+def t_field_monotone(rng, trials):
+    stats = dict(cases=0, largest_increase=-math.inf, smallest_margin=math.inf)
+    lc = lambda z: np.log(np.cosh(z))
+    for _ in range(max(6, trials // 10)):
+        u, t = float(rng.uniform(0.3, 4.0)), float(rng.uniform(0.03, 0.97))
+        s = np.linspace(-u, u, 40001)[1:-1]
+        prev = None
+        for theta in np.linspace(0.0, 6.0, 25):
+            la, lb = t * np.log(2 * np.cosh((theta - u) / 2)), t * np.log(2 * np.cosh((theta + u) / 2))
+            ph = (np.logaddexp(np.log(np.sinh(t * (u - s) / 2)) + la, np.log(np.sinh(t * (u + s) / 2)) + lb)
+                  - math.log(math.sinh(t * u)) - t * np.log(2 * np.cosh((theta + s) / 2)))
+            d = np.diff(ph)
+            sg = np.sign(d[np.abs(d) > 1e-14])
+            if int((np.diff(sg) != 0).sum()) > 1 or (len(sg) and sg[0] < 0 and sg[-1] > 0):
+                return False, dict(reason="the ratio is not unimodal on the window", u=u, t=t, theta=float(theta))
+            i = int(ph.argmax())
+            if theta > 0.2 and s[i] > 1e-9:
+                return False, dict(reason="the hardest residual does not work against the field", u=u, t=t, theta=float(theta), gamma=float(s[i]))
+            if prev is not None:
+                stats["largest_increase"] = max(stats["largest_increase"], float(ph[i] - prev))
+                if ph[i] > prev + 1e-10:
+                    return False, dict(reason="F*(t; theta) increases with theta", u=u, t=t, theta=float(theta))
+            prev = float(ph[i])
+            P, Q = (theta - u) / 2 + t * (u - s[i]) / 2, (theta + u) / 2 - t * (u + s[i]) / 2
+            margin = float((lc(Q) - lc(P)) - (1 - t) * (lc((theta + u) / 2) - lc((theta - u) / 2)))
+            stats["smallest_margin"] = min(stats["smallest_margin"], margin)
+            if margin < -1e-7:
+                return False, dict(reason="the comparison of interval averages of tanh fails at the maximiser", u=u, t=t, theta=float(theta), margin=margin)
+            stats["cases"] += 1
+    return True, stats
+
+
 @conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
 def t_dead_exact_free_energy(rng, trials):
     """Refuted (second referee, C1): with positive slack off the diagonal, an exact certificate of ln Z is the whole

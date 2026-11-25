@@ -326,5 +326,49 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XV.4 M3: centre taken to be the sampled point itself
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.1 M1: one-sided ratio claimed below e^u m (without the factor 2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.1 M2: kappa(r) >= r - 1 claimed (the offset m_0 forgotten)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.1 M3: the bound of the two-sided ratio claimed for the one-sided ratio
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.2 M1: outer exponent phi h instead of phi a in the bracket at accuracy zero
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.2 M2: the necessary condition claimed for an inner exponent below the hinted one
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.2 M3: two-rung iteration with a rung of size phi a (not small against eta)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.3 M1: lower end without the layer-cake sum (largest single term only)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.3 M2: tail lemma applied while the ball is the whole cube
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.3 M3: certified exceedance probability without the Chernoff factor 1/(1 - eta)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.3 M4: negligibility threshold without the tolerance e^b
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.3 M5: no Harper term in the running lower bound
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.3 M6: lower end without the tolerance e^{-b}
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.1 M1: closed form of the game function with a wrong normalisation
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.1 M2: shift identity of the uniform cube claimed with a field (the term KL(P_X || pi) dropped)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.1 M3: the pair identity claimed with the hinted exponent of the zero residual
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.1 M4: the zero residual claimed to be the hardest instance with a field
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.2 M1: type-wise quantiles claimed Lipschitz with the constant u/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.3 M1: slack of the reference with the wrong orientation
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.3 M2: effect of a dip computed with the Hamming slack u d (the potential of the reference forgotten)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.3 M3: tail function evaluated at half the measure
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.4 M1: field and residual with the same sign in the ratio (mirror image)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.4 M2: interval comparison claimed with the sub-interval at the left end
+                  exit=1  1 TEST(S) MISBEHAVED
 
-164 mutations: 163 caught, 1 expected pass, 0 not as expected
+186 mutations: 185 caught, 1 expected pass, 0 not as expected

@@ -4000,6 +4000,12 @@ instance with a hint there too.  The comparison instance by instance is as open 
 Harper's theorem on the outer sub-cube again, so the remark on other spaces (§11.18, (3))
 is unchanged.
 
+*Falsification harness.*  XVI.1 (Lemma 11.55 on exact tables), XVI.2 (the level at accuracy
+zero: no undercut, the two-rung iteration), XVI.3 (the coordinator's own implementation of
+the outer loop of Algorithm 2L⁺ with the constants of the theorem and a simulated inner
+oracle: validity, width, certificates, closing radius, sample sizes and the count, on small
+cubes and on radial landscapes); twelve mutations, all detected.
+
 *Machine-checked* (`BoundedAccuracy.lean`).  The exact recursion: `exactRec` (definition),
 `stepLE_exact`, `Rstep_anti`, `exactRec_props`, `exactRec_reaches_hint`; the lower barrier
 `exactRec_ge_hint` and the convergence `exactRec_tendsto_hint` (so Theorem 11.53 holds for the
@@ -4279,6 +4285,13 @@ additive instances in place of `[−u, u]` is a **sketch** (report, Proposition 
 site types the exponents do not add (`0.0086` against the average `0.0098` in an example).
 Known parts with interactions: nothing.  Bounded accuracies with a field: nothing (§11.19
 is for the uniform cube).
+
+*Falsification harness.*  XVII.1 (closed form against the game value; shift identity; the
+hinted exponent at the zero residual in both forms; the uniform cube at `p = ½`; the strict
+gain of the hardest additive instance; the pair identity), XVII.2 (type-wise quantiles),
+XVII.3 (Lemma 11.62 with the exact tail function of `H` on the 4-cube, all 65 534 subsets),
+XVII.4 (the steps of the proof of Proposition 11.65(b)); ten mutations, all detected — among
+them the false guesses of D47.
 
 *Machine-checked.*  `FieldShift.lean`: `klBin_tilt`, `cone_rate_eq`, `sphere_rate_eq`, `shift_identity`.
 `BoundedAccuracy.lean`: `exactRec_reaches_hint_of_pair` (the exact recursion built on any

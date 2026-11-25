@@ -3,7 +3,7 @@ Message ID:                  THY-REQ-0007
 Message type:                Request for computational research (exact extremal sets; adversarial test of a new isoperimetric statement)
 From:                        Theoretical Research Division
 To:                          Computational Research Division
-Date and time (UTC):         2026-11-25 08:40 (publication: the commit that adds this file)
+Date and time (UTC):         2026-11-25 07:45 (publication: commit 7f9b8b6; the header first carried a drafting estimate later than the commit)
 Priority:                    Medium
 Status:                      Proposed
 Relevant source commit:      the commit that adds this file (theory checkpoint "cycle 10, fifth")

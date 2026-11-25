@@ -1065,6 +1065,22 @@ odd function that is concave on the positives.  Checked step by step numerically
 referee R9 as an additional item.  Consequence: the uniform cube is the hardest member of
 the family, for adaptive and non-adaptive algorithms alike.
 
+**Added after the checkpoint: the two new sections are behind the falsification gate.**
+Harness blocks XVI (§11.19) and XVII (§11.20), seven tests and 22 mutations, all caught:
+XVI.1 Lemma 11.55 on exact tables; XVI.2 the level at accuracy zero (necessary condition,
+two-rung iteration); XVI.3 an independent implementation of the outer loop of Algorithm 2L⁺
+with the constants of the theorem — validity, width, certificates, closing radius, sample
+sizes, the count — on small cubes and on radial landscapes, where the lower end without
+the layer-cake sum, the missing Harper term, closure at the whole-cube radius, the
+threshold without `e^b` and two wrong tolerances are each detected; XVII.1 the formulas with a
+field (the mutations are the false guesses of D47: the identity with the zero residual, the
+zero residual as hardest instance); XVII.2 type-wise quantiles; XVII.3 the tail lemma
+relative to the flat-histogram reference with the exact tail function on the 4-cube;
+XVII.4 the steps of the proof that a field always helps.  One over-narrow claim of the
+coordinator's was refuted on the way: "the first level at accuracy zero is below `0.52a`" is
+false for steep slopes (`0.58a` at `u = 4.5`); the test states `[max(h, a/2), a]` and `0.51a` for
+`u ≤ 2.5`.  The theory report never contained the narrow claim.
+
 A remark that is interpretation, not theorem: "uniform on every type class of the known
 part's order parameter" is a flat-histogram (multicanonical) ensemble.  In this toy class
 the theory says that such a sample is *minimax-optimal* among fixed samples for certified
@@ -1074,8 +1090,8 @@ model's own Gibbs measure is exponentially worse in the worst case.
 ### Resume here (cycle 10, fifth checkpoint)
 
 Verified state: every module under `proofs/` (48 files) builds with zero warnings and is walked
-by the axiom audit (3137 declarations); the harness (96 registered tests: 79 that must survive,
-17 documented refutations) and its mutation tests (164 mutations: 163 caught, one expected
+by the axiom audit (3137 declarations); the harness (103 registered tests: 86 that must survive,
+17 documented refutations) and its mutation tests (186 mutations: 185 caught, one expected
 pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 (R5, R6,
 R_P), §11.18 (R7).  **Under review at this checkpoint, hence unrefereed:** §11.19 (referee R8;
 `reviews/R8_brief.md`) and §11.20 (referee R9; `reviews/R9_brief.md`); when a report exists it
