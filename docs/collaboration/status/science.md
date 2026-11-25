@@ -9,7 +9,7 @@ authoritative).  Branch `research/scientific-translation`.*
 |---|---|
 | branch point (theory head when the division started) | `5ed407282d89af46d260d2dd1687059c8e3e7728` |
 | latest theory commit read | `5ed4072` |
-| latest engineering commit read | `db56d05f695ec390dd9ef8c7d14dfdb07d8b1e6a` |
+| latest engineering commit read | `a2f6dc7` (digest and ENG-MSG-0003 §§1–3); computations and workstreams use `db56d05` |
 
 Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 
@@ -42,7 +42,7 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 | X | alternatives to worst-case classes (average-case, weighted, structural conditions) | own theory | running |
 | R3 | adversarial referee for our own `INFERENCE_LIMITS.md` v2 | review + replication | running |
 | R4 | independent review of theory report §11.24 (rounds) → SCI-REV-0003 | review + replication | running |
-| — | replication of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | replication | **completed: `AUDIT PASSED`** — 56 Lean files, axiom audit OK on 3423 declarations, harness as expected, 267 mutations (266 caught, 1 expected pass); first replication of the ten Lean files added since `4cef47e`; `docs/science/INDEPENDENT_VALIDATION.md` §1.1 |
+| — | replication of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | replication | **completed: `AUDIT PASSED`** — 56 Lean files, axiom audit OK on 3423 declarations, harness as expected, 267 mutations (266 caught, 1 expected pass); first replication of the three Lean files added since `63efc69` (corrected: engineering's checkpoint 3 had replicated `63efc69`); `docs/science/INDEPENDENT_VALIDATION.md` §1.1 |
 | — | replication of the engineering lattice-chain class tables | replication | **completed for `n = 1 … 10`: identical** (own enumerator); `INDEPENDENT_VALIDATION.md` §1.2 |
 
 Briefs: `docs/science/workstreams/*_brief.md`; shared rules: `docs/science/workstreams/COMMON.md`.

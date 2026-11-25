@@ -80,7 +80,10 @@ was done.
    information-based complexity the shear law reads "adaption gains the cardinality".
 4. **The theory division's audit passes on a third platform at its head `5ed4072`**
    (`AUDIT PASSED`: 56 Lean files, 3423 declarations, 267 mutations of which 266 caught and
-   one expected pass) — the first replication of the ten Lean files added since `4cef47e`;
+   one expected pass) — the first replication of the three Lean files added since `63efc69`
+   (`TwoRounds`, `GroupSampling`, `SliceRefinement`) and a second, independent one of the
+   rest (*corrected at checkpoint 5:* we first wrote "ten files since `4cef47e`", before
+   reading engineering's checkpoint 3, which had replicated the audit at `63efc69`);
    and the engineering division's lattice-chain class tables are reproduced exactly for
    `n = 1 … 10` torsions by an independent enumerator (`docs/science/INDEPENDENT_VALIDATION.md`).
 5. **Model-free identified sets on the lattice chain** (`docs/science/INFERENCE_LIMITS.md` §11;

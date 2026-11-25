@@ -11,8 +11,9 @@ engineering branch is read through `git show` / a detached read-only checkout.
 |---|---|---|
 | branch point of `research/scientific-translation` | `5ed407282d89af46d260d2dd1687059c8e3e7728` (theory, "Cycle 10, tenth checkpoint: slices") | 2026-11-25 17:16:50 UTC |
 | latest theory commit read | `5ed407282d89af46d260d2dd1687059c8e3e7728` | 2026-11-25 17:16:50 UTC |
-| latest engineering commit read | `db56d05f695ec390dd9ef8c7d14dfdb07d8b1e6a` ("[ENG] Checkpoint 2") | 2026-11-25 06:01:47 UTC |
-| engineering's own pin of theory | `d81eb8a` (branch point), `4cef47e` (latest read and audited by them) | — |
+| latest engineering commit read | `a2f6dc7` ("[ENG] Checkpoint 3, addendum"; checkpoint 3 itself is `4b19048`) — digest, ENG-MSG-0003 §§1–3 read by the coordinator; ENG-RES-0008, -0009, -0010 not yet read | 2026-11-25 18:10:23 UTC |
+| engineering commit our computations and workstreams use (class tables, messages) | `db56d05f695ec390dd9ef8c7d14dfdb07d8b1e6a` ("[ENG] Checkpoint 2") | 2026-11-25 06:01:47 UTC |
+| engineering's own pin of theory | `d81eb8a` (branch point); audited by them at `d81eb8a`, `4cef47e`, `63efc69`; `5ed4072` "seen" | — |
 
 ## What was read at each pin, and at what depth
 
@@ -35,3 +36,5 @@ engineering branch is read through `git show` / a detached read-only checkout.
 | 2026-11-25 17:27 | first fetch of all branches: theory head `5ed4072` (17:16:50 UTC), engineering head `db56d05` (06:01:47 UTC); `research/scientific-translation` did not exist; no `main` branch on the remote |
 | 2026-11-25 17:33 | `research/scientific-translation` created at `5ed4072` and pushed (no content of our own yet) |
 | 2026-11-25 17:50 | before checkpoint 1: both upstream heads unchanged |
+| 2026-11-25 17:55, 18:05, 18:12 | before checkpoints 2–4: fetched theory and engineering as named branches; heads reported unchanged (`5ed4072`, `db56d05`) |
+| 2026-11-25 18:20 | theory unchanged at `5ed4072`.  **Engineering advanced to `a2f6dc7`** (nine commits; checkpoint 3 = `4b19048`, 18:09 UTC): Algorithm 2L⁺ under adversarial search — no claim of Theorem 11.56 breaks in more than five million mean runs, the flat instance is not the worst one at finite size, the exponent excess decays about like `1/√n` (ENG-RES-0008); audit of theory `63efc69` replicated (ENG-MSG-0003 §2); off-lattice enumeration to 14 torsions (ENG-RES-0009).  Consequence for us: a correction in `docs/science/INDEPENDENT_VALIDATION.md` §1.1 (which Lean files our audit replicated first).  Nothing merged.  The engineering branch does not mention the science branch (it has not been told of it by us) |

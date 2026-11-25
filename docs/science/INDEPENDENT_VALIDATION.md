@@ -28,11 +28,24 @@ workstreams are entered here when the coordinator has read their reports.
 
 These numbers are the ones the theory division reports for its head in
 `docs/collaboration/status/theory.md` (56 files; 3423 declarations; 267 mutations, 266
-caught, one expected pass).  The engineering division had replicated the audit at `d81eb8a`
-and `4cef47e` (46 files, 3101 declarations); **this is the first replication of the ten Lean
-files and the harness blocks added since** (`BoundedAccuracy`, `FieldShift`, `GamePair`,
-`CoverStability`, `SetLimit`, `TypeQuantiles`, `SymmetricSampling`, `TwoRounds`,
-`GroupSampling`, `SliceRefinement`).
+caught, one expected pass).
+
+> **Correction (2026-11-25 18:35 UTC; the sentence as first published at `3593950` is kept
+> below, struck through).**  When this record was written we had read the engineering
+> branch at `db56d05`, where the audit had been replicated at `d81eb8a` and `4cef47e` (46
+> files, 3101 declarations).  The engineering division's checkpoint 3 (`4b19048`, committed
+> 18:09 UTC, two minutes before our run ended) reports a replication at **`63efc69`** (53
+> files, 3369 declarations, 207 mutations; ENG-MSG-0003 §2).  So ours is the **first
+> replication of the three Lean files added after `63efc69`** — `TwoRounds`, `GroupSampling`,
+> `SliceRefinement` — and of the harness and mutation blocks added with them (128 tests, 267
+> mutations), and an independent *second* replication, on a third platform, of the other
+> seven.
+>
+> ~~The engineering division had replicated the audit at `d81eb8a` and `4cef47e` (46 files,
+> 3101 declarations); this is the first replication of the ten Lean files and the harness
+> blocks added since (`BoundedAccuracy`, `FieldShift`, `GamePair`, `CoverStability`,
+> `SetLimit`, `TypeQuantiles`, `SymmetricSampling`, `TwoRounds`, `GroupSampling`,
+> `SliceRefinement`).~~
 
 *What a passing audit does and does not establish.*  It establishes that the statements
 labelled **[V]** are consequences of the Lean kernel's axioms as stated in the Lean files,
