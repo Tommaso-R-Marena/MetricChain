@@ -1,0 +1,7 @@
+Curie-Weiss bJ=1.5, B=0.0, u=1.0; centre type 1/2; uniform-cube value KL(Lambda_1/u || 1/2) at e=0: 0.029139
+  G=  401: R_H(dip; m=1/2) at e = -0.01, 0, 0.01: 0.03116  0.02541  0.02033   [2s]
+  G=  801: R_H(dip; m=1/2) at e = -0.01, 0, 0.01: 0.03094  0.02530  0.02012   [8s]
+  G= 1601: R_H(dip; m=1/2) at e = -0.01, 0, 0.01: 0.03085  0.02519  0.02003   [29s]
+  e=-0.01: R_H = 0.03085;  theta_na at x = e + R_H: shell 0.03072 (z0 = (0.29, 0.29)), cone 0.00362   [34s]
+  e=+0.00: R_H = 0.02519;  theta_na at x = e + R_H: shell 0.02523 (z0 = (0.30, 0.30)), cone 0.00204   [38s]
+  e=+0.01: R_H = 0.02003;  theta_na at x = e + R_H: shell 0.02000 (z0 = (0.30, 0.30)), cone 0.00086   [42s]

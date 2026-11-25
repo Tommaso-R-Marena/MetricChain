@@ -74,9 +74,24 @@ models and non-decomposable residuals; (ii) temperature-aware dominance and voxe
 *certificate rules* (D1, D3, D4); (iii) finite-angle torsion-to-RMSD certificates and the
 resulting envelope for SE(3)-invariant residuals (C4); and (iv) a machine-checked certificate
 algebra and library covering all of it, including formalizations (to our knowledge new in Lean)
-of several known results.  The results of the second research phase (§§10–12; rows G1–G11 of §10), which
-were developed in response to that assessment and were themselves reviewed by a second independent
-referee (`reviews/R2`), are classified separately there.
+of several known results.  The results of the later research phases (§§10–12; rows G1–G24 of §10), which
+were developed in response to that assessment and were reviewed by further independent
+referees (`reviews/R2` – `R9`), are classified separately there; §0.3 is a map of them.
+
+### 0.3 The later phases at a glance (details, proofs and labels in §§10–12)
+
+| topic | main statements | where | status |
+|---|---|---|---|
+| certification geometry | certificates = coverings by slack balls; exponents on product landscapes at zero and finite temperature; hardness; best-first search | §§11.1–11.9 | machine-checked cores; refereed (R2) |
+| query complexity of all algorithms | lower bounds for every randomised algorithm (dips, generalised dips), thresholds, the accuracy diagram on the cube, the exact exponent with a hint | §11.10 | one-shot lower bounds machine-checked; the rest paper proofs, refereed (R3, R4) |
+| second-order and correlated uncertainty | quadratic law for dense second-order classes; classes that are linear in features; pair-distance profiles for chains and their kernel | §§11.7, 11.12, 11.17 | inequalities and kernel machine-checked; refereed (R6, R_P) |
+| algorithms **without a hint** on the cube | non-adaptive exponent `θ_na` (Monte Carlo is optimal); adaptive exponent = the hinted one, at extensive and at every bounded accuracy | §§11.16, 11.18, 11.19 | recursion and bracket algebra machine-checked; algorithms paper proofs, refereed (R5, R7, R8) |
+| a **known part** (field) | single-letter exponents; the right sample is flat in the order parameter; the hardest instance is additive, not the zero residual; a new asymptotic isoperimetric theorem | §11.20 | paper proofs, refereed (R9); shift identity machine-checked |
+| the common structure | the shear law; every game function yields a pair, and the level recursion converges | §11.21 | machine-checked |
+| **chains in the thermodynamic limit** | a convex limit shape for profile sets of bridges; certificate sizes converge to its covering number; bounds `50 … 3 627` for all walks; rate `N^{-1/3}` | §11.22 | abstract limit theorems machine-checked; lattice lemmas paper proofs checked with independent code; no separate referee; conjecture for unrestricted walks |
+
+What none of this establishes is listed in §8; the strongest open questions are in §12 and,
+in priority order, in `docs/RESEARCH_LOG.md` ("Resume here").
 
 ---
 
