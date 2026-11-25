@@ -17,3 +17,9 @@
         grid maximum of a: 0.122951 at pi = [0.35 0.3  0.35]  ->  uniform law is harder
         grid maximum of E: 0.120196 at pi = [0.05 0.5  0.45]  ->  a grid law is HARDER than the uniform law
    [412 s]
+   u = 0.5: 171 laws.  uniform: h = 0.007425, a = 0.030167, E = 0.029098;  two-letter cube: h_2 = 0.007673, a_2 = 0.030300, E_2 = 0.030930
+        grid maximum of h: 0.007675 at pi = [0.05 0.5  0.45]  ->  a grid law is HARDER than the uniform law
+        grid maximum of a: 0.030322 at pi = [0.5  0.45 0.05]  ->  a grid law is HARDER than the uniform law
+        grid maximum of E: 0.030932 at pi = [0.05 0.45 0.5 ]  ->  a grid law is HARDER than the uniform law
+   [741 s]
+exit=0

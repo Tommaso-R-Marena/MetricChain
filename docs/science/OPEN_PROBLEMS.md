@@ -1,6 +1,6 @@
 # Open problems — science division
 
-*Version 2 (2026-11-25; version 1 at checkpoint 14).  Problems that this division has made precise, with what is known
+*Version 3 (2026-11-25; versions 1 and 2 at checkpoints 14 and 15).  Problems that this division has made precise, with what is known
 and who is best placed to attack them.  Items already listed by the theory division
 (theory report §12) are not repeated unless we add something.  "Sent" refers to a
 published request.*
@@ -12,7 +12,7 @@ published request.*
 | A1 | **The exponent against the order of marginal information.**  Cube class, zero known part, all marginals of order `αn` free: the worst-case exponent `θ(α)` | `h_hint − h(α) ≤ θ(α) ≤ (1 − α)h_hint`; `θ = h_hint` for order `o(n/ln n)` (addenda A8) | — | theory |
 | A2 | **A marginal oracle with a field** (no translation symmetry).  Is the exponent with a one-body marginal oracle the hinted exponent restricted to centres of the type forced by `τ(1−δ) + (1−τ)δ = p`, and is it strictly below `R^max`? | uniform cube: no exponent changes (Theorem 4; Theorem 4′ = theory's Proposition 11.104).  Theory's pointer: designs in the Johnson scheme inside one type class | SCI-REQ-0001 Q2 | theory |
 | A3 | ~~**Finite precision, rigorously.**~~  **Settled for `τ ≥ e^{−o(n/ln n)}`** (addenda A10: attenuation lemma, Theorem 4-τ; SCI-MSG-0006).  What remains: tolerance `e^{−γn}` (then the relevant order is proportional to `n` and the question merges with A1); random instead of adversarial errors; **what a sampler is worth to the class** (the hard family of Theorem 4-τ is easy against samples) | additive form `|S_j/S_0 − tanh(u/2)^j| ≤ 2ξ/(1−ξ)`, `ξ` exponentially small | SCI-MSG-0006 | us; theory |
-| A4 | **The hidden twin.**  Existence of the root `s*` for all large `n` (monotonicity of the excess mean energy of a cone in its radius); the exponent with a mean-energy oracle at extensive accuracy; the instance-wise cost in terms of `KL(μ₀‖μ_g) + KL(μ_g‖μ₀)` | exact arithmetic to `n = 5000` (Proposition 5b) | SCI-REQ-0001 Q4 | theory |
+| A4 | **The hidden twin.**  ~~Existence of the root~~ — **proved by our referee** (R3 report, R6: excess identity, sign lemma, overlap bound; a second full reading and a machine check of three finite inequalities owed).  Open: the exponent with a mean-energy oracle at **extensive** accuracy (between `ln 2 − h(ρ₀) − ε₁` and `θ_hint(ε₁)`); the instance-wise cost | exact sums to `n = 5000`; proof for every `u > 0` and large `n` | SCI-REQ-0001 Q4; SCI-MSG-0008 R3-T1, R3-T3 | theory |
 | A5 | **Exchange rate in mixed classes.**  `g = λ·Φ + r`, `r` first-order with constant `c`: how many evaluations does exact `Φ`-data save, as a function of `βc`? | ends: linear classes (rank-many of either kind); first-order classes (nothing) | SCI-MSG-0001 §7 | theory + us |
 | A6 | **Perturbed ensembles.**  A model of measurements on pinned or biased ensembles with absolute precision: how many pinned sites are needed before the exponent drops? | `n` pinned one-body marginals give `ln Z` to `O(nτ)` (Proposition 4″-τ); nothing in between | — | us |
 
@@ -20,7 +20,7 @@ published request.*
 
 | # | problem | what is known | sent | best placed |
 |---|---|---|---|---|
-| B1 | **The exact robust interval of a ratio of macrostate partition functions** over an envelope class; its extremal residuals; a dual a pairwise kernel can check | reduction to a linear-fractional programme in the weights on one state (Proposition 10); extremal residual not constant on either state; theory: vertices of the Lipschitz polytope, "should separate over sites" on product landscapes | SCI-REQ-0001 Q1 | theory |
+| B1 | **The exact robust interval of a ratio of macrostate partition functions** over an envelope class.  **Solved for binary sites, submodular known parts and monotone macrostates** (addendum A11; SCI-MSG-0009): the extremal residuals are the two uniform fields, and common uncertainty cancels.  Open: frustrated known parts (the field fails in most random instances); non-monotone macrostates; unordered alphabets; the range given evaluations | reduction to a programme on one state (A3); three-point counterexample; the Holley sandwich (A11) | SCI-REQ-0001 Q1; SCI-MSG-0009 | theory; us |
 | B2 | **Query complexity of certifying a ratio** with a hint — the counterpart of theory report Theorem 11.25 for an observable free energy | theory: "sum of the two thresholds (no cancellation)" for uncoupled macrostates | SCI-REQ-0001 Q1(c) | theory |
 | B3 | **Flows with gains.**  Families of dual flows on product spaces for which the certificate inequality of `INFERENCE_LIMITS.md` §8 is checkable by a pairwise kernel | soundness proved; exact programmes to 10 beads; an outer bound through a divergence ball (addenda A4) | SCI-REQ-0001 (frontier map §4) | theory + engineering |
 
@@ -51,7 +51,7 @@ published request.*
 | E1 | **An independent line-by-line check of the cost of the nested adaptive algorithm** (theory report Theorems 11.52, 11.56) | two internal referees; engineering: no violation in `7·10⁶` mean runs | `PUBLICATION_OPPORTUNITIES.md` §1 | outside reader; or us in a later session |
 | E2 | **Native certificates against pseudo-Boolean proofs** — size and checking time on the same runs | unmeasured | SCI-REV-0006 E-1 | engineering |
 | E3 | **Is there a rigorous dual bracketing of generalised moment problems in robust Bayes** (Betrò; Betrò–Guglielmi) that would be a precedent for kernel-checkable identified sets? | texts not accessible to us | — | anyone with library access |
-| E4 | **Machine-checking our own statements** (identified-set soundness, Lemma 1, the separation inequality, the algebraic core of Theorem 7) | workstream L1 running | — | us |
+| E4 | **Machine-checking our own statements.**  Done for the short cores (workstream L1: Lemma 1, Theorem 3 in Markov form, Theorems 4, 4′, 5, 7 in Pinsker form, Propositions 6 and 9, the certificate formats, Pinsker's inequality).  Open: Theorem 2 (needs the entropy chain rule); the Krawtchouk form of Theorem 3; codes for `k ≥ 2`; the sharp Theorem 7; the referee's R5(2), R6.1, R6.2; **A11** (Mathlib has Holley's inequality as a consequence of the four-functions theorem — a short formalisation is plausible); Proposition A1.2 | 78 theorems | SCI-MSG-0008 R3-T1 | us; theory |
 
 ## F. Kinetics (workstream K; `workstreams/SK_REPORT.md` §5)
 

@@ -121,3 +121,45 @@ Next: own code r5lib.py (vertex enumeration, LP game value, Rényi capacity by t
   191 random (profile, budget) pairs incl. negative e: V − R̂ ≤ −1.8e-3 < 0; perturbed optimal profiles: ≤ −5.5e-4.
 * Lean: verbatim copy of RenyiCentre.lean + four `#print axioms` lines, `lake env lean` (no lake build): exit 0, no errors,
   axioms [propext, Classical.choice, Quot.sound] for all four theorems (out/lean_check.txt).
+
+## Step 5 — more replication, report drafted
+* t07_misc.py: (ii) two-letter asymmetric envelope = symmetric + tilted law: 3e-16 (6 sites, one one-sided).
+  (iii) asym: R_0/R̂ = 0.746, 0.580, 0.146, 0 at e/E = 0, .3, .7, .9 ✓ (theirs 0.75, —, 0.15, 0).
+  (iv) Thm 11.101(a) at n = 480 on mix, ε = 37.27: (1−2δ)·4.5e5 (their 1.9e6 is from exact joint-type sums — NOT replicated).
+  (i) grid of 171 laws, Hamming q=3, u=1: uniform beats the grid for h (0.030654 vs 0.030572) and a (0.123284 vs 0.122951);
+      for E the grid maximum 0.120196 at (0.05,0.5,0.45) beats uniform 0.119499 ✓ (their point).
+* t07b_zero_threshold.py: zero-residual thresholds as LIMITS (one LP: min_Q max_φ E_Q ln(π/π_φ)): path 0.394664, tri 0.283427,
+  asym 0.155521 ✓ (theirs to 4e-7).  Finite differences F(0,t)/t at t = 1e-4 are 2–6e-5 low (the slip they record in D52/8).
+* t08_binary_concavity.py 500: 500 random two-letter sites with vertex-law logits up to |14|: F* concave on the grid
+  t = 0.02..0.98 step 0.01 in every case (largest second difference/max F* = −3.5e-6).  [N]; wider than the report's 100 cases.
+* Web searches (4; snippets only): Nakiboğlu arXiv:1608.02424 (capacity = radius; Csiszár for finite alphabets;
+  I_α(p;W) = E_0(ρ,p)/ρ at ρ = 1/α − 1), arXiv:1611.06924; Blahut 1974 IEEE-IT 20(4) 405–417 (exists; "sphere-packing-like
+  bounds"); Yagli–Altuğ–Verdú arXiv:1701.01103 (minimax Rényi redundancy = sup of α-mutual information).
+* Derived for the report: (G2) direct argument for q† without inverse continuity:
+  θ > θ_na^{λ°}(x − 2ω′) + ω′ ⟹ Ξ_H(e^{−n_oθ}) ≤ e^{−n_oθ}e^{n_ox}/4; and |θ_na^{λ′}(x) − θ_na^{λ}(x)| ≤ ‖λ′−λ‖₁ max_j a_j.
+  Hypothesis-testing reading: E_sp(θ) = sup_ρ ρ[C_{1/(1+ρ)} − θ] is a Hoeffding trade-off; e = E_sp − θ = E_V ln(dQ/dP).
+* Report written: docs/science/workstreams/R5_REPORT.md (placeholders for the two last numerical results to be patched).
+
+## Step 6 — grid at small slope: a refinement of Prop. 11.103(d)
+* t07 (i), u = 0.5: grid maxima of h, a, E over the 171 laws are ALL at (0.05, 0.5, 0.45) and exceed the two-letter cube.
+  t07c_rare_third_state.py (certified brackets, gap 1e-15):
+    cube: h₂ = 0.007672866, a₂ = 0.030299862, E₂ = 0.030929804; uniform: 0.007425205, 0.030166900, 0.029097814;
+    (0.05,0.5,0.45): 0.007675166 (+2.3e-6), 0.030321669 (+2.2e-5), 0.030931644 (+1.8e-6);
+    (0.001,0.4995,0.4995): +1.1e-7, +7.8e-7, +1.8e-7; (0.1,0.5,0.4): h +5e-7, a +1.5e-5, E = E₂ exactly.
+  Reading: [P] any Hamming site whose law gives some set A weight ½ has F*(t) ≥ F*_cube(t) (two box vertices ∓u1_A form
+  the BSC(p_u) on the indicator of A; coarse-graining = subclass).  The strict excess is numerical.  The report's sentence
+  "laws close to (½,½,0) have the two-letter values" is the limit; a rare third state is strictly harder than the cube for
+  h and a too.  Not a contradiction of anything stated; an addition to "which site law is hardest" (their 'Not done').
+* Report patched (grid result, concavity result, the addition).  README.md written.
+
+## Step 7 — last checks, final state
+* t09_lemma_Tprime.py: Lemma 11.96 (T′) by exact enumeration, 72 points, site types (A,B,A,B,B), 640 cases: (2), (3), the
+  identity I(X_I;V|U_I,T_I) = α_Ã − α and its bound all hold.
+* Report re-read once; corrections applied (counts of test cases, x > 2ω′ in (G2), wording of the hypothesis-testing
+  reading: the shear law = their shift identity Lemma 11.60 = Neyman–Pearson identity).
+* git status (read-only command): my files are only in experiments/science/ws_R5/ and docs/science/workstreams/R5_REPORT.md.
+* FINAL VERDICTS: 11.99 proved (identity + dictionary algebra; minor wording/range findings).  11.101(a) proved.
+  11.101(b) proved with gaps: M1 (W2(c) not in the theory report), M2 (composition-indexed exponent functions and
+  uniformity — closed in report §4.6); inherited accounting of Thm 11.52; nothing simulated.  0 critical, 2 major, 12 minor.
+* NOT done: exact joint-type sums (n ≤ 480), big brute-force runs, isoperimetric families, simulation of the nested
+  algorithm, proof of two-letter concavity, deep prior-art search (A1's job).

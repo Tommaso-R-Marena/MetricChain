@@ -1,0 +1,4 @@
+640 cases (sets of four kinds x M in 1,2,3,5) on 72 points, site types [0, 1, 0, 1, 1]:
+   violations of (2): 0;  of (3): 0;  of the identity (4): 0;  of the bound in (4): 0
+   smallest slack in (3): alpha - (alpha_A - q_max/M) = 6.575e-01,  alpha_A~ - alpha = -1.110e-16
+[1.0 s]

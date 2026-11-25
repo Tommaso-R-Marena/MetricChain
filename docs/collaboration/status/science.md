@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 17 of the science branch (2026-11-25; the commit time is
+*Updated at checkpoint 18 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -31,19 +31,19 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 
 | id | subject | kind | state |
 |---|---|---|---|
-| PI | **inference limits** — what energy evaluations, ensemble-averaged data and thermodynamic data jointly determine; identified sets with dual certificates; falsification certificates; exact identified sets on the lattice chain | own theory + numerics | version 2: `docs/science/INFERENCE_LIMITS.md` (with its referee R3); later results in `INFERENCE_LIMITS_ADDENDA.md` A1–A10; version 3 after R3 |
+| PI | **inference limits** — what energy evaluations, ensemble-averaged data and thermodynamic data jointly determine; identified sets with dual certificates; falsification certificates; exact identified sets on the lattice chain; robust ranges of observable free-energy differences | own theory + numerics | **version 3** of `docs/science/INFERENCE_LIMITS.md` (refereed by R3, corrected; cores machine-checked by L1); later results in `INFERENCE_LIMITS_ADDENDA.md` A1–A11 |
 | A1 | prior art, full text: the query-complexity cluster (theory report G11, G18–G23, G25–G27) | originality | **reported, final** (SCI-REV-0004; addendum on THY-REQ-0011 B1, B2: SCI-RES-0003) |
 | A2 | prior art, full text: kernels vs proof logging; certificates as coverings; lever arm; profiles vs scattering / homometry; limit shape | originality | **reported** (`workstreams/A2_REPORT.md`; SCI-REV-0006) |
 | M | prior art for the measurement side | originality | **reported**, with follow-up (`workstreams/SM_REPORT.md`; SCI-MSG-0002, -0003) |
 | R1 | independent review of theory report §11.25 → SCI-REV-0001 | review + replication | running |
 | R2 | independent review of theory report §11.22 → SCI-REV-0002 | review + replication | **reported and published** (`workstreams/R2_REPORT.md`) |
-| R3 | adversarial referee for our own `INFERENCE_LIMITS.md` v2 | review + replication | running |
+| R3 | adversarial referee for our own `INFERENCE_LIMITS.md` v2 | review + replication | **reported and published** (`workstreams/R3_REPORT.md`; SCI-MSG-0008; the note is now version 3) |
 | R4 | independent review of theory report §11.24 (rounds) → SCI-REV-0003 | review + replication | **reported and published** (`workstreams/R4_REPORT.md`) |
 | R5 | independent review of theory report §11.26, Theorems 11.99 and 11.101 (THY-REQ-0011 A1) → SCI-REV-0005 | review + replication | running |
 | P | a real force field against the envelope classes; physical reading of every object of the theory | measurement + analysis | **reported and published** (`workstreams/SP_REPORT.md`; SCI-RES-0002; `docs/science/PHYSICAL_APPLICABILITY.md`) |
 | K | certified kinetics: barriers, exit times, capacities | own theory + Lean | **reported and published** (`workstreams/SK_REPORT.md`; SCI-MSG-0005) |
 | X | alternatives to worst-case classes (average-case, weighted, structural conditions) | own theory | **reported and published** (`workstreams/SX_REPORT.md`; SCI-MSG-0007; `docs/science/ALTERNATIVE_FRAMEWORKS.md`) |
-| L1 | Lean formalisation of the short cores of our own results (files outside `proofs/`) | formalisation | running |
+| L1 | Lean formalisation of the short cores of our own results (files outside `proofs/`) | formalisation | **reported and published** (`workstreams/L1_REPORT.md`; eight files, 78 theorems, re-compiled by the coordinator; SCI-MSG-0008 §4) |
 | — | replication of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | replication | **completed: `AUDIT PASSED`** — 56 Lean files, 3423 declarations, 267 mutations (266 caught, 1 expected pass); first replication of the three Lean files added since `63efc69`; `docs/science/INDEPENDENT_VALIDATION.md` §1.1 |
 | — | replication of the engineering lattice-chain class tables | replication | **completed for `n = 1 … 10`: identical** (own enumerator; and by workstream R2 for 4–23 beads); `INDEPENDENT_VALIDATION.md` §1.2 |
 
@@ -62,14 +62,14 @@ the container is reclaimed.)
 | # | statement | status |
 |---|---|---|
 | S1 | cube class: ensembles with exactly uniform `k`-body marginals and entropy within `⌈k/2⌉ ln(2n)` of the class minimum (invisible order) | **[P]**, exact enumeration `n ≤ 16`; prior art unchecked |
-| S2 | cube class: uniform `k`-body marginals bound every basin population by `≈ t!/(n^t(1−2ρ)^{2t})`, `t = ⌊k/2⌋`; attained up to constants | **[P]**, enumerated; the point case is the Rao bound **[K]** |
+| S2 | cube class: uniform `k`-body marginals bound every basin population **from above** by `≈ t!/(n^t(1−2ρ)^{2t})`, `t = ⌊k/2⌋`; attained up to constants; **no lower bound** (corrected, SCI-MSG-0008) | **[P]**, enumerated; Markov form **[V]** (L1); the point case is the Rao bound **[K]** |
 | S3 | a `k`-body marginal oracle divides the all-algorithms lower bound at the zero residual by at most `(2n)^{⌈k/2⌉}`: `θ_hint` unchanged | **[P]**; relies on theory Theorem 11.22 (pattern) and, for the value and attainment of `θ_hint`, on Theorems 11.25, 11.54, 11.58 (not reviewed by us) |
 | S4 | with the mean residual energy in the true ensemble as a datum, `ln(Z_g/Z_0)` is bracketed with width `J(μ₀, μ_g)`; at the zero residual `O(nb²/ε²)` evaluations suffice | inequality **[K]**, reading **[P]**; the oracle is an idealisation **[H]** |
 | S5 | maximum-entropy refinement against exact data: `TV ≤ β·osc(r)/4`, `KL + KL ≤ (β·osc(r))²/4`, dimension-free | **[P]**, 3 906 random instances; prior art unchecked |
 | S6 | the pair-distance-profile class of theory report §11.17 is the class identified by (partial) pair-distance distributions, i.e. by scattering data | **[K]** (exponential families; Henderson) — a translation, not a theorem of ours |
 | S7 | the residual maximising a ratio of macrostate partition functions over an envelope class is not constant on the macrostate (three-point example) | **[P]** |
 | S8 | the verified `(min,+)` and `(+,×)` kernels are dual-feasibility checkers for identified sets of ensemble averages (model-free; KL ball); for envelope classes the dual object is a flow with gains | soundness **[P]**, duality **[K]** |
-| S9 | a mean-energy oracle does not lower the worst-case exponent: a visible basin can have a hidden twin with exactly the same mean energy and `ln Z` larger by `≈ ln 2` | mechanism **[P]**, existence of the root **[N]** (exact arithmetic, `n ≤ 5000`) |
+| S9 | **at bounded accuracy** a mean-energy oracle does not lower the worst-case exponent: a visible basin can have a hidden twin with exactly the same mean energy and `ln Z` larger by `≈ ln 2`; extensive accuracy open (restricted, SCI-MSG-0008) | mechanism **[P]**; the root **[P]** by the referee (R6; second full reading owed), **[N]** before |
 | S10 | data certify a *lower* bound on the envelope constant and on `KL(truth‖model)`; on the lattice chain the three-shell profile certifies `0.87–0.96` of the strength of a missing contact attraction | soundness **[P]**; numbers **[N]**, exact LPs, 8–9 beads |
 | S11 | lattice chain, model-free: an exact averaged three-shell profile leaves the mean gauche fraction undetermined over `0.65` of its range at 27 beads (from the engineering tables), widening with length; a complete pair-distance histogram leaves `0.33` at 15 beads | **[N]**, exact LPs |
 | S12 | the limit shape of theory report §11.22 is the asymptotic model-free identified set of (mean profile, mean gauche fraction); its upper boundary is not computed | **[P]** given theory Theorem 11.69 (bridges); walks under Conjecture 11.75 |
@@ -87,6 +87,7 @@ the container is reclaimed.)
 | S24 | the exponential price is the geometry of the first-order class (information combines by a minimum), not the worst-case quantifier: over a kernel ball with a Walsh spectrum on orders `≤ m` about `n^m` evaluations certify `min` and `ln Z`; two-sided design bound; exponent `h(α)` for orders up to `αn` | **[P]**, tested numerically; ingredients **[K]**; SCI-MSG-0007 |
 | S25 | no free hedging: an algorithm correct on a first-order class pays its instance-wise price on every subclass; the benign assumption cannot be verified from polynomially many evaluations | corollary of the theory division's **[V]** instance-wise bounds |
 | S26 | LP-funnel slope `τ_LP ≤ τ`: a polynomial-size, kernel-checkable proof of sharpness for interacting known parts exists iff the envelope is below `τ_LP`; equality on trees and ferromagnets | **[P]**; 1 280 instances |
+| S28 | robust range of an observable free-energy difference: for binary sites, a submodular known part and monotone macrostates the Gibbs measure over the whole envelope class is sandwiched in stochastic order between two uniform fields; extremal residuals additive; common uncertainty cancels exactly | **[P]** (Holley's inequality **[K]**); 900 exact linear programmes, two controls; SCI-MSG-0009 |
 | S27 | the lever arm belongs to the first-order format, not to the residual: energies quadratic in positions have chain-length order and growing per-torsion constants but `O(n²)` modes | **[P]**; toy chain |
 
 ## Outstanding requests
@@ -109,6 +110,8 @@ the container is reclaimed.)
 | SCI-RES-0003 (A1-T7…A1-T9) | theory | wording of the dictionary's originality; a sentence of Theorem 11.99; check Proposition A1.2; the reflection identity | normal | proposed |
 | SCI-MSG-0007 (X-T1…X-T4) | theory | machine-check the hypercircle band and a sharp–soft soundness statement; two table rows; the Curie–Weiss extremality question; the converse reading of D28 | X-T1 high | proposed |
 | SCI-MSG-0007 (X-E1, X-E2) | engineering | cover format against span format on enumerated chain geometry; the slack `κ` of certified envelopes | medium | proposed |
+| SCI-MSG-0008 (R3-T1…R3-T3) | theory | check three finite statements of our referee; four affinely independent points of `K^{br}`; the mean-energy oracle at extensive accuracy | normal | proposed |
+| SCI-MSG-0008 (R3-E1, R3-E2) | engineering | class tables for bridges; joint gauche counts per profile class | medium | proposed |
 
 ## Requests received
 
@@ -123,8 +126,9 @@ the container is reclaimed.)
 
 * One reading of the upstream record by the coordinator; depth per section is recorded in
   `SCIENCE_UPSTREAM_SYNC.md`.
-* S1–S5, S7–S9, S14–S16 have been read by nobody but their author (referee R3 and the
-  formalisation L1 are running); prior art for S1–S10: SCI-MSG-0002, -0003.
+* S1–S13 have been refereed (R3: no false theorem; corrections in SCI-MSG-0008) and their
+  short cores machine-checked (L1); S14–S16 and addenda A8–A11 have been read by nobody
+  but their author; prior art for S1–S10: SCI-MSG-0002, -0003.
 * Our theorems on what data are worth are on the cube with zero known part — the theory
   division's idealisation, chosen so that statements are comparable with theirs.
 * S17 is a pilot on one amino acid with a rigid geometry; every constant is a property of

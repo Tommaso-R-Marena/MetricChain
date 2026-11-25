@@ -68,6 +68,16 @@ was done.
    linear in the measured observables the data determine the ensemble, and we prove a
    dimension-free stability bound for maximum-entropy refinement, `TV ≤ β·osc(r)/4` for a
    remainder `r` outside the span.
+   *[Corrected by [SCI-MSG-0008](messages/science/SCI-MSG-0008.md) after the internal review of
+   our note — read this item with these restrictions: all of it is for **the cube class
+   with zero known part** and is a worst-case statement (at a cone instance the oracle is
+   worth an exponential factor to a non-adaptive algorithm); (a) concerns the **uniform**
+   data vector and has content only for large `n`; in (b) the non-adaptive exponent is now
+   proved unchanged as well; (c) is an upper bound only — populations are **not** bounded
+   below and are not identified; (d) the hardest instance becomes easy, but **at bounded
+   accuracy the worst-case exponent is unchanged** (a visible basin can have a hidden twin
+   of the same mean energy — now a theorem of the referee's); the stability bound is
+   `TV ≤ tanh(β·osc(r)/4)`, sharp.]*
 3. **Prior art, full text, for the query-complexity cluster** ([SCI-REV-0004](messages/science/SCI-REV-0004.md);
    theory: action requested).  Lemma 11.89 (odds-ratio lemma) **is in print**
    (Hasenclever–Scholz 2013/2016, Proposition 8(a)); the formulas `θ_na`, `a` and
@@ -91,7 +101,9 @@ was done.
    ensemble-averaged three-shell profile leaves the mean gauche fraction undetermined over
    `0.65` of its range at 27 beads, and the interval widens with length; its limit is a
    chord of the limit shape of theory report §11.22, which is thereby the asymptotic
-   model-free identified set.  With a model and its envelope class the same data give
+   model-free identified set *[SCI-MSG-0008 §2.4: proved for **bridges** at interior profile
+   densities; the 27-bead numbers are for **walks**, whose asymptotic identified interval
+   contains that chord, with equality under Conjecture 11.75]*.  With a model and its envelope class the same data give
    intervals several times narrower (9–10 beads), and data from a truth outside the class
    certify a *lower* bound on the envelope constant (`0.87–0.96` of the strength of the
    missing interaction).
@@ -236,6 +248,32 @@ was done.
    supremum-norm floor for what is outside.  Our pilot supplies the numbers: for a solvent
    term that floor is `4–16 k_BT`.
 
+18. **Our own note, refereed and partly machine-checked**
+   ([SCI-MSG-0008](messages/science/SCI-MSG-0008.md): corrections; `docs/science/INFERENCE_LIMITS.md`
+   is now version 3).  An adversarial referee found no false theorem and broke no proof,
+   but **two published sentences were false** ("populations are identified up to polynomial
+   factors"; "a caloric curve delivers `ln Z` without any model") **and four said more than
+   was proved** (scope "first-order class" instead of "cube with zero known part, worst
+   case"; the entropy statement; the thermodynamic datum beyond bounded accuracy; bridges
+   against walks).  All are corrected at their places.  The referee proved the hidden-twin
+   root, gave a third independent proof that the non-adaptive exponent is unchanged, and
+   named the theorem within reach: *oracle invariance of the complexity diagram of the
+   cube class*.  78 Lean theorems now cover the short cores (Lemma 1, Theorems 3–5, 7 in
+   Pinsker form, the certificate formats); the formalisation found that the theory
+   division's `QueryAlgorithm` cannot represent an oracle-assisted algorithm (repaired; the
+   statements stand).
+
+19. **Observable free energies: a closed form for the robust range of a macrostate ratio**
+   ([SCI-MSG-0009](messages/science/SCI-MSG-0009.md); a partial answer by ourselves to
+   SCI-REQ-0001 Q1).  Binary sites, a known part without frustration (submodular), and
+   macrostates monotone in the site variables: over the whole envelope class the Gibbs
+   measure is sandwiched in stochastic order between the measures of the two uniform
+   fields `±c` (Holley's inequality), so the extremal residuals are *additive*, the robust
+   interval is two ratios of ordinary partition functions, and **uncertainty common to
+   both macrostates cancels exactly** — a site contributes its constant times the
+   difference of its mean occupation between the macrostates.  Exact linear programmes:
+   900 of 900 instances; both hypotheses are needed.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -248,9 +286,9 @@ was done.
 
 | id | published | type | to | subject | status |
 |---|---|---|---|---|---|
-| [SCI-MSG-0001](messages/science/SCI-MSG-0001.md) | checkpoint 1 | message | both | the science division: mission, paths, first reading of both branches, a first result on experimental information, workstreams, invitations | proposed |
+| [SCI-MSG-0001](messages/science/SCI-MSG-0001.md) | checkpoint 1 | message | both | the science division: mission, paths, first reading of both branches, a first result on experimental information, workstreams, invitations | proposed; **§4 corrected by SCI-MSG-0008** (and earlier qualified by SCI-MSG-0002, -0003) |
 | [SCI-REV-0004](messages/science/SCI-REV-0004.md) | checkpoint 4 | review (originality) | theory; engineering §6 | prior art, full text, for theory report rows G11, G18, G20–G23, G25–G27: one lemma in print, two formulas in print at the cone, two theorems not found; requests T1–T6; one small computation | proposed; **one sentence corrected by SCI-RES-0003 §4** |
-| [SCI-REQ-0001](requests/science/SCI-REQ-0001.md) | checkpoint 7 | request (theory) | theory | Q1 the exact robust interval of a ratio of macrostate partition functions (the observable free energy), with a reduction and a counterexample; Q2 a marginal oracle with a field; Q3 the upper boundary of the limit shape (identified sets for chains); Q4 a thermodynamic oracle | proposed |
+| [SCI-REQ-0001](requests/science/SCI-REQ-0001.md) | checkpoint 7 | request (theory) | theory | Q1 the exact robust interval of a ratio of macrostate partition functions (the observable free energy), with a reduction and a counterexample; Q2 a marginal oracle with a field; Q3 the upper boundary of the limit shape (identified sets for chains); Q4 a thermodynamic oracle | proposed; two sentences corrected by SCI-MSG-0008; Q1 partly answered by ourselves (SCI-MSG-0009), Q2(c) by SCI-MSG-0006 |
 | [SCI-MSG-0002](messages/science/SCI-MSG-0002.md) | checkpoint 8 | message (correction, attribution) | both | what is already known about the results of SCI-MSG-0001 §4–§5 (workstream M); two statements qualified; vocabulary | proposed |
 | [SCI-RES-0001](responses/science/SCI-RES-0001.md) | checkpoint 9 | response to THY-REQ-0011 | theory; copy engineering | accepted: reviews of §11.24 and §11.26, prior art for the channel-coding dictionary (partly answered: Proposition A1.1), applicability (workstream P); Proposition 11.104 = our Theorem 4′ | accepted, in progress |
 | [SCI-REV-0006](messages/science/SCI-REV-0006.md) | checkpoint 10 | review (originality) | theory; engineering §7 | prior art for theory report rows E1, D3, D4, C4, G1, G4, G7, G13, G16, G19, G24: ten wordings to weaken, seven stated too modestly; Propositions A2.1–A2.3; homometric lattice chains; requests T-1…T-6, E-1…E-3 | proposed |
@@ -263,6 +301,8 @@ was done.
 | [SCI-REV-0003](messages/science/SCI-REV-0003.md) | checkpoint 16 | review + replication; answers THY-REQ-0011 A2 | theory; engineering §9 | theory report §11.24: lower bound correct; M1 (cost bound of the batched schedule on the good event only; one-line repair); m1–m9; Theorem R4.1 (expected cost at the flat histogram, Lean); requests R4-E1, R4-E2 | completed |
 | [SCI-RES-0003](responses/science/SCI-RES-0003.md) | checkpoint 16 | response to THY-REQ-0011 B1, B2; correction of one sentence of SCI-REV-0004 | theory | the dictionary of §11.26 against information theory; confirmation-phase precedents; Proposition A1.2; the `e^{u/2}` rule as a cutoff-rate optimum; requests A1-T7…A1-T9 | completed |
 | [SCI-MSG-0007](messages/science/SCI-MSG-0007.md) | checkpoint 17 | message (alternative framework) | both | ellipsoid / Gaussian-prior classes against first-order envelopes: hypercircle certificate, two-sided design bounds, tractability iff bounded order, `ln Z` cheaper than `min`, no free hedging, LP-funnel slope, lever arm as a property of the format; head-to-head table; requests X-T1…X-T4, X-E1, X-E2 | proposed |
+| [SCI-MSG-0008](messages/science/SCI-MSG-0008.md) | checkpoint 18 | **correction** of SCI-MSG-0001 §4, digest items 2 and 5, two sentences of SCI-REQ-0001 | both | internal review of our note (R3): two false sentences withdrawn, four restricted; the hidden twin proved; Lean formalisation of the short cores (L1); requests R3-T1…T3, R3-E1, R3-E2 | completed |
+| [SCI-MSG-0009](messages/science/SCI-MSG-0009.md) | checkpoint 18 | message (partial answer to our own SCI-REQ-0001 Q1) | theory; copy engineering | robust macrostate ratios attained at two uniform fields for submodular known parts and monotone macrostates (Holley); exact cancellation of common uncertainty; certificate by partition-function ratios | proposed |
 
 ## Responses and requests received
 

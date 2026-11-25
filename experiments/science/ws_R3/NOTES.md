@@ -182,3 +182,25 @@ Started 2026-11-25 18:12 UTC.  Rules read (COMMON.md, R3_brief.md).  I write onl
   (1971) 2259-2272 (Ising gauge models: phase transition without local order parameter);
   Kolchinsky-Tracey, Entropy 19 (2017) 361 (pairwise-distance lower bound on mixture entropy
   with Chernoff alpha-divergences).
+* [step 10, ~19:25–19:40 UTC] Background runs finished: `r3_thm2.py big` ([31,10,12], k=4, exact on
+  2^21 cosets: S = 21.4201 / 18.0444 / 9.7244 at b = 1/2/4, inside (c)); `r3_extensions.py big`
+  (R5 and R2 on [31,10,12]: all inequalities hold).  Adversarial ascent for Theorem 7:
+  unguarded run (`r3_thm7_adv.out`) reached tanh(w/4) exactly at w = 0.5, 2, 4 and was then
+  stopped; two KL(mu|nu) searches in it returned inf = underflow of nu (artefact; the guarded
+  script `r3_thm7_kl.py` rejects such instances): w = 2, 8: best TV = tanh(w/4), best
+  J = w tanh(w/4), one-sided KLs = their no-feature suprema (0.47447, 4.92291).
+  `r3_r5_gamma.py`: the two intermediate inequalities of R5(2) on Golay at u = 4, 5, 6 (gamma < 1).
+  `r3_codes.py` now checks extended-BCH duals exactly for m = 3..6.
+* Proofs written into the report (§4): R1 (tanh form of Thm 7 + two-cell lemma), R2 (mixture
+  lower bound), R3 (odd k), R4 (variant satisfies (c): Voronoi cell is a down-set, Harris),
+  R5 (theta_na with the oracle), R6 (Prop 5b: excess identity, sign lemma at s = +-1 under
+  dominance W >= 8 r1 e^u 2^n and small overlap, Hoeffding overlap lemma), R6' (joint oracle via
+  C-symmetrised basin and twin).  Disjoint-twin formula |U'_0 - U0| = |U0| 2^n/(2 Z0 - 2^n)
+  checked numerically (u=3, n=120: 2.2459724e-3 both sides).
+* Report written: docs/science/workstreams/R3_REPORT.md (sections 1-9).  Final state of the
+  verdicts: no numbered statement false; 8 major findings (M1-M8: overstatements in the §0
+  table, two false sentences, [N] root, bridges vs walks, physics of §10, generality in the
+  collaboration files, "kernel-checkable", theta_na left as conjecture); 13 minor.
+* Not done / left open: lower bound of R2 in the full class; I3 at extensive accuracy; known
+  parts without symmetry; int(K) nonempty; author's scripts not executed; compact-decile row
+  of §11.4; §11.1 at sizes other than 13 beads.

@@ -71,8 +71,10 @@ because the state `A` is not homogeneous).
 
 ### Scientific implications
 
-The total `ln Z` is not what experiments compare with: a caloric curve determines it without
-any model (our Proposition 9), and `ln Z(f+g) − ln Z(f)` is not an observable.  The observable
+The total `ln Z` is not what experiments compare with: ~~a caloric curve determines it without
+any model (our Proposition 9)~~ *[withdrawn, SCI-MSG-0008 §1(b): Proposition 9 needs the
+caloric curve down to `β = 0` on the model's configuration space, which no experiment
+provides]*, and `ln Z(f+g) − ln Z(f)` is not an observable.  The observable
 free energies are `−β⁻¹ ln[Z(A)/Z(B)]`.  A robust theory of them is the one extension of your
 framework that changes what it can be used for.
 
@@ -127,6 +129,9 @@ to the chord `[γ(p), γ⁺(p)]`, `γ⁺(p) = max{g : (p,g) ∈ K^{br}}`.
 
 ### Known partial results
 
+*[SCI-MSG-0008 §2.4: the limit statement above is proved for bridges at interior profile
+densities; the numbers that follow are for walks, whose asymptotic interval contains the
+chord of `K^{br}`, with equality under Conjecture 11.75.]*
 From the engineering tables (all walks, `db56d05`), the chord at the *athermal mean profile*:
 `0.139, 0.294, 0.415, 0.474, 0.527, 0.556, 0.580, 0.607, 0.621, 0.644, 0.654` at
 `7, 9, …, 27` beads (`[0.201, 0.855]` at 27 beads; athermal value `≈ 0.64`).  Increasing at every

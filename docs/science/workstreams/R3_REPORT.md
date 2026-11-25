@@ -20,7 +20,7 @@ written before I opened the author's scripts (one exception, stated in §5: the 
 **No numbered statement of the note is false, and I could not break any proof.**  Lemma 1, the
 BCH bound `|C| ≤ (2n)^{⌈k/2⌉}` (all `n ≤ 31`, all `k ≤ n`, exact), Theorems 2, 3, 4, 5, 7, 8,
 Propositions 6 and 9 and the three certificate formats of §8 are **proved** as stated; every
-number I tried to reproduce (Theorem 2 on two new codes, Theorem 3 with an exact linear programme,
+number I tried to reproduce (Theorem 2 on three new codes, Theorem 3 with an exact linear programme,
 Proposition 5b, all of §9, §11.1, §11.2 and two rows of §11.4) **reproduces**.  The defects are of
 three other kinds.  (i) **Sentences that say more than the theorems**: the summary table of §0 and
 four "Reading"/bold sentences overstate quantifiers, scope or physics (Major findings M1–M7; two of
@@ -51,7 +51,7 @@ mean residual energy is given as well.
 | statement | verdict | reviewed | replicated | remarks |
 |---|---|---|---|---|
 | Lemma 1 | **proved** | yes | yes (Fourier, all subsets, 3 codes) | textbook |
-| "Codes": `|C| ≤ (2n)^{⌈k/2⌉}` | **proved**; weaker than available for odd `k` | yes | yes, exact dual distances, `n ≤ 31`, all `k` | R3: `2(2n)^{⌊k/2⌋}` |
+| "Codes": `\|C\| ≤ (2n)^{⌈k/2⌉}` | **proved**; weaker than available for odd `k` | yes | yes, exact dual distances, `n ≤ 31`, all `k` | R3: `2(2n)^{⌊k/2⌋}` |
 | Theorem 2 (a)–(e) | **proved**; (e) can be vacuous; price not optimal | yes | yes: `[15,8,4]` (`k=4`), Golay (`k=7`), `[31,10,12]` (`k=4`, see §5) | M1, R2, R4 |
 | Theorem 3 | **proved**; the "Reading" after it contains a false sentence | yes | yes + exact LP optimum | M2, m1, m2 |
 | Theorem 4 | **proved** | yes | ingredients, exact, 3 codes | m3; R5 completes it |
@@ -115,8 +115,8 @@ marginals are `P(x_i = a_i) = σ(b)`, the ensemble is `P_a` and the entropy is k
 note itself uses this fact in the "Reading" after Proposition 5b).
 
 *Caveat 2 (when is there any hidden order?).*  The statement has content only if
-`n·(ln 2 − h(σ(b))) > ln|C|`; otherwise the upper end of (c) exceeds `n ln 2` and (e) is an empty
-interval.  This is not a remote corner.  Golay, `b = 1`: `S(ν) = 16.6341`, `n ln 2 = 16.6355` — the
+`n·(ln 2 − h(σ(b))) > ln|C|`; otherwise the upper end of (c) exceeds `n ln 2`, and (e) — which is
+stated with `⌈k/2⌉ ln(2n) ≥ ln|C|` — is an empty interval a fortiori.  This is not a remote corner.  Golay, `b = 1`: `S(ν) = 16.6341`, `n ln 2 = 16.6355` — the
 "ordered" ensemble is uniform to `0.0014` nats, and the upper end of (c) is `22.29`.  Golay, `b = 2`:
 upper end `17.09 > 16.64`.  By the same arithmetic **9 of the author's 16 numerical cases** (`b = 0.5`
 and `b = 1` on all four codes; `b = 2` on `RM(1,3)`) test an inequality that is implied by
@@ -526,9 +526,9 @@ against the note's `t ln 2n`: `22.33 / 22.33 / 24.41` at `n = 10⁵`, `t = 2`, `
 
 **Proposition R3 [P; K for the BCH bound].**  For all `n` and `k` there is a linear code of length
 `n`, dual distance `> k` and `|C| ≤ 2·(2n)^{⌊k/2⌋}`.
-*Proof.*  Even `k`: the note's code.  Odd `k = 2t+1`: the extended BCH code of length `2^m`
-(`m = ⌈log₂ n⌉`, designed distance `2t+1`, overall parity bit) has minimum distance `≥ 2t+2`; its
-dual has at most `2·2^{mt} < 2(2n)^t` words; restrict to `n` coordinates.  ∎  (Dual distances
+*Proof.*  Even `k`: the note's code.  Odd `k = 2t+1 < n` (for `k ≥ n` take `C = F₂ⁿ`): the extended
+BCH code of length `2^m` (`m = ⌈log₂ n⌉`, designed distance `2t+1`, overall parity bit) has minimum
+distance `≥ 2t+2`; its dual has at most `2·2^{mt} < 2(2n)^t` words; restrict to `n` coordinates.  ∎  (Dual distances
 computed exactly for `m = 3…6`, `t = 1, 2, 3`: `4, 6 or 8, 8`.)  By Rao's bound no code can do better
 than `M_{⌊k/2⌋} ≈ n^{⌊k/2⌋}/⌊k/2⌋!`.
 
@@ -561,7 +561,7 @@ they differ exactly on `U_a = {d_H(·, a+C) < R}`, and `|U_a| ≤ |C|·|B(n, R�
 marginals makes at least `(1 − 2δ)·2ⁿ/(|C|·|B(n, R−1)|)` evaluations in expectation on every
 instance with uniform `k`-body marginals (in particular at `g ≡ 0`), whenever
 `D_R + ln(1−γ) > ε`.
-(4) For `k ln n = o(n)` there are such codes with `|C| ≤ 4n^{k+2}` and `d_min ≥ n/4` for all large
+(4) For `k ln n = o(n)` there are such codes with `|C| ≤ 8n^{k+2}` and `d_min ≥ n/4` for all large
 `n`.  Therefore the non-adaptive exponent with the oracle is `θ_na(ε₁)` at extensive accuracies
 `0 < ε₁ < ln cosh(u/2)` and `a = KL(p_u‖½)` at accuracies with `ln(1/ε) = o(n)` — the values without
 the oracle.
@@ -582,7 +582,10 @@ bounds: plain Monte Carlo ignores the oracle (Theorem 11.44).  ∎
 *Checked* (`r3_extensions.py`, part A; exact, on the cosets of five codes — simplex `[15,4,8]`,
 `RM(1,4)`, `[15,8,4]`, Golay, `[31,10,12]` — `u = 0.5, 1, 2`, all `R` up to the covering radius `+1`):
 `drop_C ≥ D_R` in every case (e.g. Golay, `u = 2`, `R = 3`: `0.853 ≥ 0.522`; `[31,10,12]`, `u = 1`,
-`R = 6`: `0.416 ≥ 0.096`), and `|U_a| = |C|·|B(R−1)|` while the balls are disjoint.
+`R = 6`: `0.416 ≥ 0.096`), and `|U_a| = |C|·|B(R−1)|` while the balls are disjoint.  The two
+intermediate inequalities of (2) in a regime where `γ < 1` (`r3_r5_gamma.py`; Golay, `u = 4, 5, 6`,
+`γ = 0.051, 0.0010, 2·10^{−5}`): `Z(cone^C)/(|C|·Z(cone)) = 0.99930, 0.99998, 1.00000 ≥ 1 − γ`, and
+`Z(flat^C) ≤ |C|·Z(flat)` for `R = 1…5`.
 
 ### R6.  Proposition 5b is a theorem, and it survives the marginal oracle
 
@@ -653,7 +656,8 @@ cosets of the Golay code (`n = 24`, `k = 7`), `u = 5`, `r₁ = 3`, twin around a
 `≤ 7` uniform for both instances.
 
 *Remark (tolerance).*  If the datum has any tolerance `τ_U ≥ |U′_0 − U₀|` — and `|U′_0 − U₀|` is
-exponentially small — the twin with `s = 0` already does, and no root is needed.  The exact root
+exponentially small (for disjoint twins it is exactly `|U₀|·2ⁿ/(2Z₀ − 2ⁿ)`) — the twin with `s = 0`
+already does, and no root is needed.  The exact root
 is the price of the exact oracle, not of the phenomenon.
 
 ---
@@ -667,15 +671,16 @@ said.
 
 | script (command) | what | size | result | time |
 |---|---|---|---|---|
-| `r3_codes.py` | own GF(2) algebra, BCH codes from `GF(2^m)`, duals, punctured codes, exact dual distances (brute force / MacWilliams, integers) | all `n ≤ 31`, `k ≤ n`, 2 coordinate sets | bound `|C| ≤ (2n)^{⌈k/2⌉}` and dual distance `> k`: **0 failures**; extended-BCH duals `m = 3…6`, `t = 1, 2, 3`: sizes `≤ 2(2^m)^t`, dual distance `2t+2` or more; puncturing example with `d_min = 1` | 5 s |
+| `r3_codes.py` | own GF(2) algebra, BCH codes from `GF(2^m)`, duals, punctured codes, exact dual distances (brute force / MacWilliams, integers) | all `n ≤ 31`, `k ≤ n`, 2 coordinate sets | bound `\|C\| ≤ (2n)^{⌈k/2⌉}` and dual distance `> k`: **0 failures**; extended-BCH duals `m = 3…6`, `t = 1, 2, 3`: sizes `≤ 2(2^m)^t`, dual distance `2t+2` or more; puncturing example with `d_min = 1` | 5 s |
 | `r3_thm2.py` | Theorem 2 on `[15,8,4]` (`k=4`) and Golay `[24,12,8]` (`k=7`): `ν_{C,b}` and the variant; all Fourier coefficients (full WHT), all flip ratios, entropies, path (e); (d) on random members | `2^{15}`, `2^{24}` states; 3 200 members `n ≤ 10` | all of (a)–(e) confirmed; first visible order is exactly `k+1` | 4 min |
-| `r3_thm2.py big` | the same on `[31,10,12]` (`k = 4`) through the coset table (no full cube: uniformity follows from the exact dual distance 5 and `E_νχ_T = τ^{|T|}[T ∈ C^⊥]`) | `2^{21}` cosets × `2^{10}` words | `b = 1, 2, 4`: `S = 21.4201, 18.0444, 9.7244` inside `[18.05, 24.98]`, `[11.33, 18.26]`, `[2.79, 9.72]`; hidden order `n ln 2 − S = 0.07, 3.44, 11.76` nats | +1 min |
+| `r3_thm2.py big` | the same on `[31,10,12]` (`k = 4`) through the coset table (no full cube: uniformity follows from the exact dual distance 5 and `E_νχ_T = τ^{\|T\|}[T ∈ C^⊥]`) | `2^{21}` cosets × `2^{10}` words | `b = 1, 2, 4`: `S = 21.4201, 18.0444, 9.7244` inside `[18.05, 24.98]`, `[11.33, 18.26]`, `[2.79, 9.72]`; hidden order `n ln 2 − S = 0.07, 3.44, 11.76` nats | +1 min |
 | `r3_thm3.py` | Theorem 3: identities (integers); **exact LP optimum** vs bound vs attained on 5 codes; all centres on 2 codes; asymptotics `n ≤ 10⁵`; LP/bound for `n ≤ 400`; moment bound | LPs with `n+1` variables | see §2 | 6 s |
 | `r3_extensions.py` (`big` adds `[31,10,12]`) | Theorem 4's ingredients on 3 codes (C); R5 on 4 (+1) codes (A); R2 on 3 (+1) codes and 4 non-code laws, asymptotics (B, B′, B″) | up to `2^{24}` states, `2^{21}` cosets | all inequalities hold | 1.5 min (+2 min) |
+| `r3_r5_gamma.py` | the two inequalities behind R5(2) where `γ < 1` | Golay, `u = 3…6`, `R = 1…5` | hold | 5 s |
 | `r3_thm5.py` | Theorem 5 bracket, identity, sampled lower end | 450 members, `9·10⁴` sample sets | 0 violations; failure rate `10^{−4}` at `δ = 0.1` | 10 s |
 | `r3_prop5b.py` | Proposition 5b: the note's cases; root structure in `n`; disjoint twins (`u = 2.6, 3, 4`); joint oracle on Golay | `n ≤ 5000` (`6.25·10⁶` terms) | note's `s*` and `ln Z′ − ln Z₀` reproduced with integer `r₁`; root from `n = 400`; R6 checks | 1 min |
 | `r3_prop5b_overlap.py` | R6.2, R6.3 with overlapping supports | `n = 2000, 4000`; `u = 0.5, 1, 2` | signs at `s = ±1`, Hoeffding bound | 45 s |
-| `r3_thm7.py` (`adv` for the ascent), `r3_thm7_kl.py` (guarded ascent) | Theorem 7 and R1: lemma on `2·10⁵` pairs; 4 000 random instances; extremal family; adversarial ascent (Nelder–Mead restarts) on `TV`, `J` and the two one-sided divergences | `|X| < 40`; ascent `|X| ≤ 5`, `≤ 2` features, `βω ∈ {0.5, 2, 4, 8}` | largest `TV/tanh(βω/4)` over random instances `0.99999`; extremal family exact; ascent reaches `tanh(βω/4)` and `βω·tanh(βω/4)` to six digits and never more; the one-sided divergences never exceed their no-feature suprema (`0.4745` at `βω = 2`, `4.9229` at `βω = 8`) **[N]** | 1 min; ascent 8 min per `βω` |
+| `r3_thm7.py` (`adv` for the ascent), `r3_thm7_kl.py` (guarded ascent) | Theorem 7 and R1: lemma on `2·10⁵` pairs; 4 000 random instances; extremal family; adversarial ascent (Nelder–Mead restarts) on `TV`, `J` and the two one-sided divergences | `\|X\| < 40`; ascent `\|X\| ≤ 5`, `≤ 2` features, `βω ∈ {0.5, 2, 4, 8}` | largest `TV/tanh(βω/4)` over random instances `0.99999`; extremal family exact; ascent reaches `tanh(βω/4)` and `βω·tanh(βω/4)` to six digits and never more; the one-sided divergences never exceed their no-feature suprema (`0.4745` at `βω = 2`, `4.9229` at `βω = 8`) **[N]** | 1 min; ascent 8 min per `βω` |
 | `r3_chain.py tables 9` | own enumerator of the diamond-lattice chain vs the engineering tables | `n = 1…9` torsions (17 107 conformations) | class tables identical (classes, counts, `gmin`, `#gmin`, `gmax`) | 10 s |
 | `r3_chain.py sec112` | §11.2 from the engineering tables, **dual** LP (4 multipliers) | `N = 7…27` beads, up to 4 532 classes | all 22 ends agree with the note to `≤ 10^{−3}` | 3 s |
 | `r3_chain.py sec111` | §11.1, dual LP on the un-aggregated conformations | 13 beads, 49 833 conformations, up to 57 features | all 27 entries agree to two decimals | 2 min |
@@ -687,7 +692,7 @@ said.
 | claim in the note | status |
 |---|---|
 | §2 check ("all sixteen cases") | not re-run on the same four codes; the same statement confirmed on three *other* codes, for `ν_{C,b}` itself and for the variant |
-| §3 check ("attained/bound up to 0.995", simplex `[15,4]`) | not re-run; consistent with the LP (`|C| = M_1 = 16` is tight); my largest ratio at all centres: `0.61` (`[15,8,4]`), `0.57` (Golay) |
+| §3 check ("attained/bound up to 0.995", simplex `[15,4]`) | not re-run; consistent with the LP (`\|C\| = M_1 = 16` is tight); my largest ratio at all centres: `0.61` (`[15,8,4]`), `0.57` (Golay) |
 | Proposition 5b numbers | **reproduced** (with `r₁ = round(ρ₁n)`); the criterion "`ln B₀ ≲ 2`" **not confirmed** |
 | Theorem 7: "3 906 random instances, largest ratios 0.99989" | compatible: my 4 000 instances give `0.99994` |
 | §9 table | **reproduced** (12/12) |
@@ -709,9 +714,9 @@ reported above is with torsion-angle states.
 
 | statement | assessment |
 |---|---|
-| Lemma 1 | **Textbook.**  A linear code is an orthogonal array of strength `d^⊥ − 1` (Bose–Bush; Delsarte) **[K: from memory]**.  In physics language it is the gauge-invariance argument: a measure invariant under a group of local transformations gives zero expectation to every observable that is not invariant (Wegner's Ising gauge models, "phase transitions without local order parameters", J. Math. Phys. 12 (1971) 2259 **[K: search snippet]**).  "Order invisible to all local observables" is, in that literature, the definition of a gauge/topological phase; the note should say so. |
+| Lemma 1 | **Textbook.**  A linear code is an orthogonal array of strength `d^⊥ − 1` (Bose–Bush; Delsarte) **[K: from memory]**.  In physics language it is the gauge-invariance argument: a measure invariant under a group of local transformations gives zero expectation to every observable that is not invariant (Wegner's Ising gauge models, "phase transitions without local order parameters", J. Math. Phys. 12 (1971) 2259 **[K: search snippet]**).  "Order invisible to all local observables" is, in that literature, the hallmark of a phase without a local order parameter; the note should say so. |
 | "Codes" | **Textbook** (dual BCH codes as small `k`-wise independent sample spaces: Alon–Babai–Itai 1986 **[K: from memory]**). |
-| Theorem 2 (a), (b) | **Textbook object in new clothes**: `ν_{C,b}` is the law of a noisy codeword (`X = Z ⊕ N`); its `k`-wise uniformity is the Fourier one-liner `E χ_T = τ^{|T|}[T ∈ C^⊥]`, the basis of statistical-query lower bounds for parities with noise **[K: from memory]**.  (c) is the mixture bound, (d) a two-line chain-rule argument.  What is specific to the note is the *question* (does a bounded-difference class help?) and the answer "no"; that is an observation, correctly disclaimed as assembled from textbook parts. |
+| Theorem 2 (a), (b) | **Textbook object in new clothes**: `ν_{C,b}` is the law of a noisy codeword (`X = Z ⊕ N`); its `k`-wise uniformity is the Fourier one-liner `E χ_T = τ^{\|T\|}[T ∈ C^⊥]`, the basis of statistical-query lower bounds for parities with noise **[K: from memory]**.  (c) is the mixture bound, (d) a two-line chain-rule argument.  What is specific to the note is the *question* (does a bounded-difference class help?) and the answer "no"; that is an observation, correctly disclaimed as assembled from textbook parts. |
 | Theorem 3 | **Textbook method, slightly better constant.**  `r = 0`: Rao's bound.  `r > 0`: the moment method for sums of `k`-wise independent signs (Schmidt–Siegel–Srinivasan, SIAM J. Discrete Math. 1995; Bellare–Rompel) **[K: search snippet]** with the reproducing kernel in place of the `2t`-th power — constant `t!` instead of `(2t−1)!!`; equivalently one dual point of a Delsarte-type linear programme.  The reading (basin populations; "maximum occurrence") is the note's own. |
 | Theorem 4 | **Short; apparently not written down** for this query model.  The technique — hide the alternative from low-order statistics by symmetrising it over a code — is the standard device of statistical-query lower bounds. |
 | Theorem 5 | **Textbook** (Gibbs–Bogoliubov in both directions; the width as a sum of relative entropies is the dissipation identity of free-energy perturbation) **[K: from memory]**.  The Corollary is a correct and, I think, useful observation. |
@@ -900,7 +905,8 @@ worst-case exponent with such an oracle stays positive … is open" is supersede
 9. **The exact optimum of Theorem 3 within the class** (finite `b`): I computed it over all
    measures only.
 10. The adversarial ascent for Theorem 7 was limited to `|X| ≤ 5`, two features and
-    `βω ≤ 8` (`r3_thm7_adv.out`, `r3_thm7_kl.out`).  In the unguarded run two searches on
+    `βω ≤ 8` (`r3_thm7_adv.out`: `βω = 0.5, 2, 4`, then stopped to free the shared machine;
+    `r3_thm7_kl.out`: `βω = 2, 8`).  In the unguarded run two searches on
     `KL(μ‖ν)` returned `inf`: an underflow of `ν` in floating point, not a counterexample
     (`KL(μ‖ν) ≤ J ≤ βω·tanh(βω/4)` is proved); the guarded script rejects such instances.  A side
     observation **[N]**: with features the one-sided divergences never exceeded their no-feature
@@ -930,7 +936,7 @@ place.  The result that these observations are pieces of is:
 > not the exponent.
 
 Status of the parts: (a) lower bound = Theorem 4 of the note (reviewed here: proved); upper
-bound = theory report Theorems 11.54, 11.58.  (b) = R5 (lower bound; mine, [P], checked on four
+bound = theory report Theorems 11.54, 11.58.  (b) = R5 (lower bound; mine, [P], checked on five
 codes) + Theorem 11.44.  (c) = R6, R6′ (mine, [P], checked numerically) + Theorem 11.58 + the
 Corollary of Theorem 5.  What has to be done to make it a result: a second reading of R5 and R6;
 the overlap count of R6′ written out; a machine check of the three finite inequalities (R5(2),

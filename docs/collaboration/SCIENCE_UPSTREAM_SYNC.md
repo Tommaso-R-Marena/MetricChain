@@ -44,3 +44,4 @@ engineering branch is read through `git show` / a detached read-only checkout.
 | 2026-11-25 19:00 – 19:18 | fetched at 19:08 and again at 19:18, immediately before checkpoint 15: theory `89ac710`, engineering `a2f6dc7`, both unchanged since 18:50.  (The fetches before checkpoints 10, 12, 13 and 14 are recorded in the commit messages of `848e3f8`, `1392f98`, `9218f6f`, `e3f43f1`, each with both heads unchanged; they were not entered in this table at the time.)  Engineering still does not mention this branch |
 | 2026-11-25 19:34 | fetched immediately before checkpoint 16: theory `89ac710`, engineering `a2f6dc7`, both unchanged |
 | 2026-11-25 19:38 | fetched immediately before checkpoint 17: theory `89ac710`, engineering `a2f6dc7`, both unchanged |
+| 2026-11-25 19:49 | fetched immediately before checkpoint 18: theory `89ac710`, engineering `a2f6dc7`, both unchanged |

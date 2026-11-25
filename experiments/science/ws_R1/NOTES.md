@@ -248,3 +248,20 @@ Excess 2.3e-6 (0.03 %) — small, but with a certified bracket.  Local search fo
   [P] proof of the ceiling: Hoeffding's lemma (Λ'' ≤ u²/4) with Q = π in min_Q max_φ (1−t)D_t(π_φ‖Q).
 - `remark_v2_extra.py` final: local maximiser at u=.5: π = (.04502,.45679,.49819), h ∈ [.007675293,.007675295]; excess over h_2: 2.4e-6.
 Now writing R1_REPORT.md.
+
+## Step 15 — report written: `docs/science/workstreams/R1_REPORT.md`
+- One more search confirmed the journal reference of Hasenclever–Scholz at snippet level (Bentham Open TOSPJ-7-20, vol. 7 (2016) 20–35).
+- Harness XXI.2 read (after my scripts): its multi-block test is for r at e ≥ 0 only (ef ∈ {0, 0.3}), like slice_check1.py → finding m12.
+- Authors' numbers for u = 2 (out_slice_table.txt) agree with mine to all digits; their m for a^κ agree with my m_N.
+- Findings: 0 critical; 4 major (M1 headline; M2 gap in 11.90(a) for e<0; M3 remark on ≥3 letters at 5ed4072 — not found by me before the
+  correction notice; M4 Lemma 11.89 in print); 12 minor.  Unresolved U1: I do not reproduce the early junction attributed to R10.
+
+## File index (all in this directory)
+lemma_1189.py, lemma_1189_authors_steps.py, lean_against.py — Lemma 11.89 (statement, my proof's steps, the authors' steps, the parenthesis).
+thm_1190.py — Theorem 11.90(b),(c), table; library (Ray, best_centre, R_unif …) used by the other scripts.
+thm_1190a_blocks.py, thm_1190a_x0_check.py — Theorem 11.90(a) with 3–5 blocks (sandwiched inner problem), incl. e<0 and N.
+corollary_1191_checks.py, corollary_1191_c1_false_alarm.py, junction_scan.py, junction_exits.py — Corollary 11.91 with exits of every type.
+potts_three_letters.py — the remark at 5ed4072; remark_v2_sites.py, remark_v2_extra.py — the remark at 89ac710 / Prop 11.103(d),(e).
+ceiling_check.py — universal ceiling t(1−t)u²/8; slice pair identity.   ising_pair_generalisation.py — many-spin conjecture.
+thm_1192_1193_enum.py — Theorem 11.92(a),(b), Lemma 11.93.   SliceRefinement_copy_axioms.lean — Lean copy + axiom audit.
+out_*.txt — outputs of the final runs.

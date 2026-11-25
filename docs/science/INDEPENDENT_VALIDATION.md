@@ -72,7 +72,7 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
 | SCI-REV-0001 | theory report §11.25 (slices) | workstream R1 | in progress |
 | SCI-REV-0002 | theory report §11.22 (limit shape) | workstream R2 | **published.**  No false theorem; two major findings on wording and on the proved bracket; eight minor.  Replicated with independent code: walk class tables for 4–23 beads (identical to engineering's; `2.1·10⁹` conformations), bridge tables for 4–24 beads, the concatenation lemma exhaustively (`2.7·10⁸` pairs), both linear programmes with own exact certificates, all volume bounds, covering numbers at 15, 21 and (from the engineering table) 27 beads.  Read only: walk tables for 24–27 beads, the periodic-system enumeration, the plateau estimates |
 | SCI-REV-0003 | theory report §11.24 (rounds of adaptivity) | workstream R4 | **published.**  No critical finding; one major (Theorem 11.84(ii) false as stated: cost bounded on the good event only; one-line repair), nine minor.  Replicated with code written before the authors' code was opened: `θ₂*`, `T^{(2)}(0)`, `h` at nine slopes; the exact twins table in every printed digit and one more row; the asymptotic gap; Lemma 11.85 end to end on whole cubes.  Own harness for Claims A/B (350 runs).  Read only: Theorems 11.56, 11.58, 11.51; the recursion for `r ≥ 3`; not examined: Proposition 11.88(e) |
-| — | our own `INFERENCE_LIMITS.md` v2 (adversarial referee) | workstream R3 | in progress |
+| — | our own `INFERENCE_LIMITS.md` v2 (adversarial referee) | workstream R3 | **done; corrections published as SCI-MSG-0008; the note is now version 3.**  No numbered statement false, no proof broken; eight major findings (two false sentences, the rest overstatements), thirteen minor.  Replicated with the referee's own code: Theorem 2 on three further codes (extended Golay on the full `2²⁴` cube), Theorem 3 on five codes with the exact optimum as a linear programme, Proposition 5b's numbers, Theorem 7 on random and adversarial instances, the tables of §9 (12/12), §11.1 (27/27), §11.2 (22/22), §11.4 (16/16), the engineering class tables for `n ≤ 9`.  Not re-run: the author's own scripts; the compact-decile row of §11.4.  The referee's own statements R1–R6 are **[P]**, unrefereed |
 
 ### Originality reviews (prior art; not reviews of correctness)
 
@@ -123,6 +123,19 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   designs; `sup P_A² ≤ 4·NL` in every printed case); the arguments of Theorem 3(a),(b),
   Proposition 5′(a) and Proposition 8(c) re-derived by hand.  The comparison tables and
   every other statement of `SX_REPORT.md` were read, not re-run.
+* **L1 (Lean formalisation of our note):** all eight files compiled by the coordinator with
+  `lake env lean` (exit 0 each; 78 `#print axioms` lines, every one
+  `[propext, Classical.choice, Quot.sound]`; no `sorry`, `admit` or `native_decide` in the
+  sources; no error or warning line).  Statements read against the note: not yet done line
+  by line by the coordinator — the workstream's own discrepancy list (four items) is in
+  `L1_REPORT.md`.
+* **R3 (referee of our note):** the excess identity R6.1 re-derived by the coordinator;
+  the estimates R6.2, R6.3 read, not re-derived.
+* **Own statement A11 (robust macrostate ratios):** exact linear programmes over the weight
+  cone, 900 instances with the hypotheses (field optimal to `5·10⁻¹⁴`), 300 + 298 control
+  instances with one hypothesis dropped (field not optimal in most);
+  `experiments/science/pi_inference/monotone_ratio_check.py`.  A numerical trap is
+  recorded there: default solver tolerances gave three spurious deviations of `10⁻⁶ … 10⁻⁵`.
 * **Own statements (addenda A10):** the attenuation lemma checked with exact rational
   Krawtchouk values and 60-digit sums for `n = 100 … 800`, `u = 1, 2`
   (`experiments/science/pi_inference/dip_attenuation_check.py`): identity A10.1 to `10⁻⁵⁹`;

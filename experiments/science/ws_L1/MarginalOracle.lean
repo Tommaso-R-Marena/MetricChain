@@ -40,6 +40,10 @@ the theory division's bounds apply to that restricted class.
   instance: with the repetition code `{0ⁿ, 1ⁿ}` (dual distance `≥ 2`,
   `repetition_dual_distance`), free knowledge of all one-site marginals costs at most a factor
   `2` in either bound.
+* `sum_hammingNorm_binary`, `pSum_weight_binary`, `pSum_flat_binary` — the closed forms
+  `∑_x φ(wt x) = ∑_j C(n,j) φ(j)`, `A₁ = (1 + e^{-u})ⁿ`, `F₁ = ∑_j C(n,j) e^{-u max (j,R)}` on
+  `F₂ⁿ`; `theorem4'_binary_cube_closed_form`, `theorem4'_one_body_closed_form` — Theorem 4′ with
+  the note's `D_R = n log (1 + e^{-u}) - log ∑_j C(n,j) e^{-u max (j,R)}`.
 * `queryAlgorithm_output_const_of_no_queries` — why a new model is needed: a `QueryAlgorithm`
   that makes no query has a constant output.
 * supporting facts: `distToCoset_lipschitz` (a distance to a set is 1-Lipschitz),
@@ -60,8 +64,9 @@ verbatim, because the files of this directory do not import each other.
   Theorem 4 says accuracy `ε` and gap `> 2ε`).
 * The bound is stated without division:
   `(1 - 2δ) |F|^n ≤ E[#queries] · |C| · |{y : wt y < r}|`.
-* In Theorem 4′, `D_R` appears as `log (A₁ / F₁)` with `A₁ = ∑ exp (-βc · wt)`,
-  `F₁ = ∑ exp (-βc · max (wt, R))`; the closed forms of the note are not formalised.
+* In the general Theorem 4′, `D_R` appears as `log (A₁ / F₁)` with `A₁ = ∑ exp (-βc · wt)`,
+  `F₁ = ∑ exp (-βc · max (wt, R))`; on the binary cube the closed forms of the note are proved
+  (`theorem4'_binary_cube_closed_form`).
 * The expected number of queries is that of the run with the uniform oracle answer (the answer
   at the zero residual).
 -/
@@ -1089,6 +1094,111 @@ theorem theorem4'_one_body_marginals {n : ℕ} {β c : ℝ} (hβ : 0 ≤ β) (hc
 
 end OneBody
 
+/-! ### Closed forms on the binary cube: the note's `D_R` -/
+
+section ClosedForms
+
+/-- Configurations of the binary cube correspond to their supports. -/
+def supportEquiv (n : ℕ) : (Fin n → ZMod 2) ≃ Finset (Fin n) where
+  toFun x := univ.filter fun i => x i ≠ 0
+  invFun T := fun i => if i ∈ T then 1 else 0
+  left_inv x := by
+    funext i
+    by_cases h : x i = 0
+    · simp [h]
+    · have h1 : x i = 1 := (by decide : ∀ a : ZMod 2, a ≠ 0 → a = 1) (x i) h
+      simp [h1]
+  right_inv T := by
+    ext i
+    simp
+
+/-- **Sums of functions of the Hamming weight**: `∑_x φ(wt x) = ∑_j C(n, j) φ(j)` on `F₂ⁿ`. -/
+theorem sum_hammingNorm_binary (n : ℕ) (φ : ℕ → ℝ) :
+    ∑ x : Fin n → ZMod 2, φ (hammingNorm x) =
+      ∑ j ∈ Finset.range (n + 1), (n.choose j : ℝ) * φ j := by
+  have h1 : ∑ x : Fin n → ZMod 2, φ (hammingNorm x) = ∑ T : Finset (Fin n), φ T.card :=
+    Fintype.sum_equiv (supportEquiv n) _ _ fun x => rfl
+  rw [h1, ← Finset.powerset_univ, Finset.sum_powerset_apply_card]
+  simp
+
+/-- `A₁ = ∑_x exp (-u · wt x) = (1 + exp (-u))ⁿ`. -/
+theorem pSum_weight_binary (n : ℕ) (u : ℝ) :
+    pSum u (fun x : Fin n → ZMod 2 => (hammingNorm x : ℝ)) = (1 + Real.exp (-u)) ^ n := by
+  have h := sum_hammingNorm_binary n (fun j => Real.exp (-u * (j : ℝ)))
+  have h' : pSum u (fun x : Fin n → ZMod 2 => (hammingNorm x : ℝ)) =
+      ∑ j ∈ Finset.range (n + 1), (n.choose j : ℝ) * Real.exp (-u * (j : ℝ)) := h
+  rw [h', add_comm (1 : ℝ) (Real.exp (-u)), add_pow]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [one_pow, mul_one, ← Real.exp_nat_mul, mul_comm]
+  congr 2
+  ring
+
+/-- `F₁ = ∑_x exp (-u · max (wt x, R)) = ∑_j C(n, j) exp (-u · max (j, R))`. -/
+theorem pSum_flat_binary (n : ℕ) (u R : ℝ) :
+    pSum u (fun x : Fin n → ZMod 2 => max (hammingNorm x : ℝ) R) =
+      ∑ j ∈ Finset.range (n + 1), (n.choose j : ℝ) * Real.exp (-u * max (j : ℝ) R) :=
+  sum_hammingNorm_binary n (fun j => Real.exp (-u * max (j : ℝ) R))
+
+open Classical in
+/-- **Theorem 4′ on the binary cube with the note's `D_R`.**  With `u = β c` and
+`D_R = n log (1 + e^{-u}) - log ∑_j C(n, j) e^{-u max (j, R)}`: if `ε < D_R - log |C|`, then
+`(1 - 2δ) · 2ⁿ ≤ E[number of evaluations] · |C| · |B(R - 1)|`. -/
+theorem theorem4'_binary_cube_closed_form {n : ℕ} (C : Finset (Fin n → ZMod 2))
+    (h0 : (0 : Fin n → ZMod 2) ∈ C) (hadd : ∀ a ∈ C, ∀ b ∈ C, a + b ∈ C) (k : ℕ)
+    (hdist : ∀ u : Fin n → ZMod 2, u ≠ 0 → (∀ a ∈ C, ∑ i, u i * a i = 0) → k < hammingNorm u)
+    {β c : ℝ} (hβ : 0 ≤ β) (hc : 0 ≤ c) (R : ℝ) {ε δ : ℝ} {Ω : Type*} [Fintype Ω]
+    (alg : Ω → (Finset (Fin n) → (Fin n → ZMod 2) → ℝ) →
+      MetricChain.QueryAlgorithm (Fin n → ZMod 2))
+    (Q : Ω → (Finset (Fin n) → (Fin n → ZMod 2) → ℝ) → Finset (Fin n → ZMod 2))
+    (hna : ∀ ω o g, (alg ω o).queries g = Q ω o)
+    (P : Ω → ℝ) (hP : ∀ ω, 0 ≤ P ω) (hP1 : ∑ ω, P ω = 1)
+    (hcorr : ∀ g : (Fin n → ZMod 2) → ℝ, HammingLip c g →
+      1 - δ ≤ ∑ ω ∈ univ.filter (fun ω =>
+        |(alg ω (marginalOracle β k g)).output g - logZ β g| ≤ ε / 2), P ω)
+    (hsens : ε < n * Real.log (1 + Real.exp (-(β * c))) -
+        Real.log (∑ j ∈ Finset.range (n + 1),
+          (n.choose j : ℝ) * Real.exp (-(β * c) * max (j : ℝ) R)) -
+      Real.log C.card) :
+    (1 - 2 * δ) * 2 ^ n ≤
+      (∑ ω, P ω * (Q ω (marginalOracle β k 0)).card) *
+        (C.card * ((univ.filter fun y : Fin n → ZMod 2 => (hammingNorm y : ℝ) < R).card : ℝ)) := by
+  refine theorem4'_binary_cube C h0 hadd k hdist hβ hc R alg Q hna P hP hP1 hcorr ?_
+  have hApos := pSum_pos (β * c) (fun x : Fin n → ZMod 2 => (hammingNorm x : ℝ))
+  have hFpos := pSum_pos (β * c) (fun x : Fin n → ZMod 2 => max (hammingNorm x : ℝ) R)
+  rw [Real.log_div hApos.ne' hFpos.ne', pSum_weight_binary, pSum_flat_binary, Real.log_pow]
+  exact hsens
+
+open Classical in
+/-- **Theorem 4′ for one-body marginals, fully explicit.**  On the binary cube, an algorithm
+whose query set depends only on its seed and on the one-site marginals of `μ_g`, and which is
+`(ε/2, δ)`-correct for `log Z` on the class, needs
+`(1 - 2δ) · 2ⁿ ≤ E[number of evaluations] · 2 · #{y : wt y < R}` whenever
+`ε < n log (1 + e^{-βc}) - log ∑_j C(n, j) e^{-βc · max (j, R)} - log 2`. -/
+theorem theorem4'_one_body_closed_form {n : ℕ} {β c : ℝ} (hβ : 0 ≤ β) (hc : 0 ≤ c) (R : ℝ)
+    {ε δ : ℝ} {Ω : Type*} [Fintype Ω]
+    (alg : Ω → (Finset (Fin n) → (Fin n → ZMod 2) → ℝ) →
+      MetricChain.QueryAlgorithm (Fin n → ZMod 2))
+    (Q : Ω → (Finset (Fin n) → (Fin n → ZMod 2) → ℝ) → Finset (Fin n → ZMod 2))
+    (hna : ∀ ω o g, (alg ω o).queries g = Q ω o)
+    (P : Ω → ℝ) (hP : ∀ ω, 0 ≤ P ω) (hP1 : ∑ ω, P ω = 1)
+    (hcorr : ∀ g : (Fin n → ZMod 2) → ℝ, HammingLip c g →
+      1 - δ ≤ ∑ ω ∈ univ.filter (fun ω =>
+        |(alg ω (marginalOracle β 1 g)).output g - logZ β g| ≤ ε / 2), P ω)
+    (hsens : ε < n * Real.log (1 + Real.exp (-(β * c))) -
+        Real.log (∑ j ∈ Finset.range (n + 1),
+          (n.choose j : ℝ) * Real.exp (-(β * c) * max (j : ℝ) R)) -
+      Real.log 2) :
+    (1 - 2 * δ) * 2 ^ n ≤
+      (∑ ω, P ω * (Q ω (marginalOracle β 1 0)).card) *
+        (2 * ((univ.filter fun y : Fin n → ZMod 2 => (hammingNorm y : ℝ) < R).card : ℝ)) := by
+  refine theorem4'_one_body_marginals hβ hc R alg Q hna P hP hP1 hcorr ?_
+  have hApos := pSum_pos (β * c) (fun x : Fin n → ZMod 2 => (hammingNorm x : ℝ))
+  have hFpos := pSum_pos (β * c) (fun x : Fin n → ZMod 2 => max (hammingNorm x : ℝ) R)
+  rw [Real.log_div hApos.ne' hFpos.ne', pSum_weight_binary, pSum_flat_binary, Real.log_pow]
+  exact hsens
+
+end ClosedForms
+
 end ScienceL1
 
 end
@@ -1104,3 +1214,7 @@ end
 #print axioms ScienceL1.repetition_dual_distance
 #print axioms ScienceL1.theorem4_one_body_marginals
 #print axioms ScienceL1.theorem4'_one_body_marginals
+#print axioms ScienceL1.sum_hammingNorm_binary
+#print axioms ScienceL1.pSum_weight_binary
+#print axioms ScienceL1.theorem4'_binary_cube_closed_form
+#print axioms ScienceL1.theorem4'_one_body_closed_form

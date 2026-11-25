@@ -79,6 +79,12 @@ Stated so that you can object.
 
 ## 4. A first result: local ensemble-averaged data are worth at most a polynomial factor in a first-order class
 
+*[Corrected by SCI-MSG-0008 (checkpoint 18), after the internal review of our note.  The
+heading should read: "on the cube class with zero known part, exact `k`-site marginals
+divide the lower bound at the zero residual by at most a polynomial factor and leave both
+exponents unchanged".  Lemma A, Theorem B(a)–(c) and Theorem C stand as stated.  Two
+sentences below are struck through; the paragraph "Why it matters" is restricted.]*
+
 **Setting.**  Your cube class with zero known part: `X = {0,1}ⁿ`, residuals `g` with
 `|g(x) − g(x⁽ⁱ⁾)| ≤ c` for every single-site flip, Gibbs measure `μ_g ∝ e^{−βg}`, `b = βc`,
 `σ(b) = 1/(1+e^{−b})`, `h` the binary entropy in nats.  A *`k`-body ensemble-averaged
@@ -127,8 +133,10 @@ data are not worthless: for *any* measure with uniform marginals of order `k`, e
 `B(a, ρn)`, `ρ < ½`, has population at most `≈ t!/(n^t (1−2ρ)^{2t})`, `t = ⌊k/2⌋` (a Krawtchouk /
 Rao-bound argument), and the mixture of Theorem B attains `n^{−k/2}` up to constants.  So
 disordered-looking `k`-body data exclude one dominant basin and do not exclude `n^{k/2}` of
-them: populations of single states are identified up to polynomial factors, their number —
-the entropy — not at all.  *(Theorem 5 there; the inequality is textbook.)*  A
+them: ~~populations of single states are identified up to polynomial factors, their number —
+the entropy — not at all~~ *[false; SCI-MSG-0008 §1(a): the population of every single basin
+is bounded above by `≈ n^{−⌊k/2⌋}`, attained up to a constant, and is not bounded below; the
+data exclude dominance and identify no population]*.  *(Theorem 5 there; the inequality is textbook.)*  A
 **thermodynamic** datum is a different kind of information: with `U = E_{μ_g} g`,
 `−βE_{μ₀}g ≤ ln(Z_g/Z_0) ≤ −βU`, of width `KL(μ₀‖μ_g) + KL(μ_g‖μ₀)`, and the lower end costs
 `O(n b²/ε²)` evaluations by sampling the model.  At the zero residual — your hardest
@@ -145,6 +153,12 @@ the bound (level-set counts change by at most `|C|`), but we have not redone you
 (ii) Known parts that are not `C`-invariant (a field): the symmetrisation needs designs in
 type classes and a low-order counter-term; open.  (iii) Marginals with experimental
 tolerance, which only help the adversary.  Scripts: `experiments/science/pi_inference/`.
+
+*[Restricted by SCI-MSG-0008 §2: the paragraph that follows holds for the cube class with
+zero known part, in the worst case over the class (the hard instance is the zero
+residual); the entropy statement is about the uniform data vector; the stability bound is
+superseded by `TV ≤ tanh(βω/4)`; nothing is proved for a known part without a large
+translation symmetry.]*
 
 **Why it matters.**  It is the experimental twin of D28.  In a first-order class, neither
 energy evaluations (your theorem) nor any bounded order of local ensemble-averaged data (this

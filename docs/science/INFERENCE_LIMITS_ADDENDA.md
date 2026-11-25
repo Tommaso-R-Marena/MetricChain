@@ -373,3 +373,107 @@ The crossover — tolerance `e^{−γn}` — is open (`k_τ` becomes proportiona
 question merges with `θ(α)` of A8).  (3) The statement is about the worst case of the
 class.  For Theorem 2-τ (entropy) the corresponding statement is exact (A9).
 
+## A11. Observable free energies: for monotone macrostates the robust interval is attained at two fields (answers SCI-REQ-0001 Q1(a),(b) in one setting; supersedes the pessimism of A3)
+
+A3 reduced the robust ratio of two macrostate partition functions to a linear-fractional
+programme and showed by a three-point example that the extremal residual need not be
+constant on a macrostate.  Here is a setting — binary sites, a known part without
+frustration, macrostates that are monotone in the site variables — in which the programme
+has a closed-form solution, the extremal residuals are *additive*, and the answer is
+computable by the existing partition-function certificates.
+
+**Setting.**  `X = {0,1}ⁿ` with the coordinatewise order, `x ∨ y`, `x ∧ y` the coordinatewise
+maximum and minimum.  Envelope with separate constants for raising and lowering a site,
+
+    d(x, y) = Σ_{i : x_i = 1, y_i = 0} c_i^↑ + Σ_{i : x_i = 0, y_i = 1} c_i^↓ ,        g admissible  ⇔  g(x) − g(y) ≤ d(x, y),
+
+(`c_i^↑ = c_i^↓ = c_i` is the weighted Hamming envelope).  Known part `f` **submodular**:
+`f(x ∨ y) + f(x ∧ y) ≤ f(x) + f(y)` — every additive `f`; every pairwise `f` whose couplings
+`J_ij x_i x_j` have `J_ij ≤ 0` (no frustration: a ferromagnet in lattice-gas variables, a
+helix–coil model with cooperative nearest-neighbour terms).  `μ_e ∝ e^{−βe}`.  Fields
+`h^↑(x) = Σ_i c_i^↑ x_i`, `h^↓(x) = Σ_i c_i^↓ x_i`; both `h^↑` and `−h^↓` are admissible.
+
+**Theorem A11 (sandwich in stochastic order) [P; the tool is Holley's inequality [K]; exact
+linear programmes on 900 instances, `monotone_ratio_check.py`].**  For every admissible `g`
+
+    μ_{f + h^↑}  ≼  μ_{f + g}  ≼  μ_{f − h^↓} ,
+
+i.e. `E_{f+h^↑} φ ≤ E_{f+g} φ ≤ E_{f−h^↓} φ` for every increasing `φ : X → ℝ`; both ends are
+attained in the class, and every value in between is attained (the class is convex in
+the weights).
+
+*Proof.*  Holley's inequality: for strictly positive probability measures on a finite
+distributive lattice, `μ₂(x ∨ y)·μ₁(x ∧ y) ≥ μ₁(x)·μ₂(y)` for all `x, y` implies `μ₁ ≼ μ₂`.
+*Lower end:* `μ₁ = μ_{f+h^↑}`, `μ₂ = μ_{f+g}`.  The condition reads
+
+    [f(x∨y) + f(x∧y) − f(x) − f(y)] + [g(x∨y) − g(y)]  ≤  h^↑(x) − h^↑(x∧y).
+
+The first bracket is `≤ 0` (submodularity).  `x ∨ y` differs from `y` exactly on
+`{i : x_i = 1, y_i = 0}`, where it is raised, so `g(x∨y) − g(y) ≤ d(x∨y, y) = Σ_{x_i=1, y_i=0} c_i^↑`, and
+this is `h^↑(x) − h^↑(x∧y)`.  *Upper end:* `μ₁ = μ_{f+g}`, `μ₂ = μ_{f−h^↓}`; the condition reads
+`[f(x∨y) + f(x∧y) − f(x) − f(y)] + [g(x∧y) − g(x)] ≤ h^↓(x∨y) − h^↓(y)`, and
+`g(x∧y) − g(x) ≤ d(x∧y, x) = Σ_{x_i=1, y_i=0} c_i^↓ = h^↓(x∨y) − h^↓(y)`.  The normalising constants cancel
+in Holley's condition. ∎
+
+**Corollary A11.1 (macrostates).**  Let `B` be an up-set (`x ∈ B`, `x ≤ x′ ⇒ x′ ∈ B`) and
+`A = X ∖ B`, both non-empty.  Over the admissible class the ratio `Z_{f+g}(A)/Z_{f+g}(B)` fills
+exactly the interval
+
+    [ Z_{f − h^↓}(A)/Z_{f − h^↓}(B) ,   Z_{f + h^↑}(A)/Z_{f + h^↑}(B) ] :
+
+**the two extremal residuals are the uniform fields, the same for every monotone
+macrostate.**  (`φ = 1_B` in the theorem; the odds are monotone in the probability.)
+The special case `f ≡ 0`, `φ = |x|/n` is the half-width `½ tanh(u/2)` of the theory report's
+Theorem 11.35.
+
+**Corollary A11.2 (width; cancellation; locality).**  For `c^↑ = c^↓ = c`, `h = Σ c_i x_i`:
+
+    ln R⁺ − ln R⁻  =  β ∫_{−1}^{1} Σ_i c_i ( ⟨x_i⟩_{B,t} − ⟨x_i⟩_{A,t} ) dt ,
+
+`⟨·⟩_{S,t}` the mean in `μ_{f + t·h}( · | S)`; every summand is nonnegative (FKG).  **A site
+contributes its constant times the difference of its mean occupation between the two
+macrostates**: uncertainty that is common to both macrostates cancels exactly, and what
+remains is carried by the sites that are correlated with the macrostate under the known
+part.  *Proof.*  `∂_t ln[Z_{f+th}(A)/Z_{f+th}(B)] = −β(⟨h⟩_{A,t} − ⟨h⟩_{B,t})`. ∎
+Example (ferromagnetic chains, macrostate "site 1 occupied", random fields and couplings):
+width `0.78, 2.01, 1.48` for `n = 6, 10, 14` where `2βΣ_i c_i = 6.9, 12.7, 12.4`; the site
+contributions decay along the chain (`0.27, 0.11, 0.005, 0.003, 0, 0` at `n = 6`).
+Compare `ln Z` itself, whose a-priori width over the class is extensive.
+
+**Corollary A11.3 (certificate).**  For pairwise `f` each end is a ratio of partition
+functions of a pairwise model with shifted one-body terms.  If the macrostate is a box
+(`B = {x_i = 1 for i ∈ I}`; `Z(A) = Z − Z(B)`) these are outputs of a partition-function
+certificate as it stands; for a counting threshold `B = {Σ_{i∈I} x_i ≥ r}` the level partition
+functions are needed (a kernel over polynomial weights; request K-T2 of SCI-MSG-0005).
+No flow with gains is needed in this setting.
+
+**The hypotheses are needed [N, exact linear programmes].**  With a frustrated pairwise `f`
+(random signs) and up-sets `B` the field fails to be optimal in 74, 99 and 122 of 150
+random instances at `n = 3, 4, 5`, by a factor up to `e^{1.9}` in the ratio.  With a
+ferromagnetic `f` and a non-monotone `B` it fails in 134 of 148 and 146 of 150 (`n = 3, 4`).
+With both hypotheses it is optimal in 900 of 900 (to `5·10⁻¹⁴` in the logarithm).  *A
+numerical trap recorded:* with default solver tolerances and unscaled weights three of the
+900 instances showed deviations of `10⁻⁶ … 10⁻⁵`; in scaled variables with tolerances `10⁻¹⁰`
+they vanish (`10⁻¹⁵`).
+
+*Remarks.*  (1) *Ordered alphabets.*  The proof works on a product of finite chains
+whenever each site's envelope is additive along its order (`d_i(s,t) = Σ_{r=t}^{s−1} c_i^↑(r)` for
+`s > t`); then the extremal residuals are the additive functions that saturate it.  For
+the discrete envelope `c_i[s ≠ t]` on three or more unordered states no additive function
+saturates the envelope and the argument fails.  (2) *Symmetry.*  When a group preserves
+`f`, `d`, `A` and `B`, averaging the weights over the group changes neither `Z(A)` nor `Z(B)` and
+stays in the class; so extremal residuals can be taken invariant in the weights.  On the
+uniform cube with threshold macrostates this alone gives the field.  (3) *What is not
+covered.*  Evaluations: with anchors the consistent class is no longer invariant and the
+extremes are not fields; the theory division's "no cancellation" (their §11.13) is a
+statement about the *cost* of certifying a difference for uncoupled macrostates, not
+about its range.  Frustrated known parts; non-monotone macrostates; unordered alphabets
+(rotamers) — there the linear-fractional programme of A3 is what remains.  (4) *Prior
+art.*  Holley's inequality (1974) and the monotonicity of Gibbs measures in a field are
+textbook.  That an *arbitrary* perturbation with bounded single-site differences is
+sandwiched between the two fields is a two-line application which one search did not
+find stated; we expect it to be folklore in statistical mechanics.  Its use — the exact
+robust range of an observable free-energy difference over an uncertainty class, with
+cancellation — was not found in the theory branch (which states that it has no closed
+form for ratios, THY-RES-0003) nor in that search.
+

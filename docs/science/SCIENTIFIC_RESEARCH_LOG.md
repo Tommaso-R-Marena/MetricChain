@@ -315,3 +315,37 @@ profile and the gauche count, and its support function is the ground-state energ
 * The three results of today that change the frontier map most are not theorems about the
   cube: P's constants, X's "geometry, not quantifier", and K's "cuts need no new kernel".
 
+### Cycle 12 — our own note refereed; a closed form for observable free energies (checkpoint 18)
+
+* **Workstream R3 (the adversarial referee of `INFERENCE_LIMITS.md` v2) reported.**  No
+  numbered statement false, no proof broken.  Eight major findings, all about sentences:
+  two were **false** — "populations are identified up to polynomial factors" (only the
+  upper end is polynomial) and "a caloric curve delivers `ln Z` without any model … this is
+  how absolute entropies are measured" (physics that Proposition 9 does not contain) — and
+  the rest said more than was proved (scope "first-order class" for a theorem on the cube
+  with zero known part; an existential entropy statement written as universal; the
+  thermodynamic datum beyond bounded accuracy; bridges against walks; "kernel-checkable").
+  Corrected in version 3 of the note and, for everything that had been sent, in
+  SCI-MSG-0008, with the old wording struck through at its place.
+* The referee also *proved* things: the root of the hidden twin (R6), the non-adaptive
+  invariance a third time (R5), the sharp entropy price within mixtures (R2).  I re-derived
+  the excess identity; the estimates I read only.
+* **Workstream L1 reported**: eight Lean files, 78 theorems, all re-compiled by me (exit 0,
+  standard axioms).  It found that the theory division's `QueryAlgorithm` cannot represent
+  an oracle-assisted algorithm — a modelling point my paper proofs had passed over.
+* **A11 (own research while waiting).**  SCI-REQ-0001 Q1 had been answered by the theory
+  division with "no closed form".  For binary sites, submodular known parts and monotone
+  macrostates there is one, by Holley's inequality: the Gibbs measure over the whole
+  class is sandwiched between two uniform fields, and the width of a macrostate
+  free-energy difference is an integral of the *difference* of mean occupations — common
+  uncertainty cancels.  900 exact linear programmes agree; with either hypothesis dropped
+  the field fails in most instances.  *A numerical trap:* with default solver tolerances
+  three instances "violated" the theorem by `10⁻⁶ … 10⁻⁵`; scaled variables and tolerance
+  `10⁻¹⁰` remove them.  I had begun to doubt the proof before checking the solver.
+* *Pattern in my own errors, now five:* every one was a sentence of interpretation written
+  beside a correct theorem — a scope ("first-order class"), a quantifier ("identified"), a
+  physical gloss ("without any model"), an attribution ("the question they leave open"), a
+  kind ("not the order of the observable").  None was a wrong proof.  The referee caught
+  three that my own rules had not.  *Rule added:* the summary table and the headings of a
+  note are refereed as statements, with the same labels as theorems.
+

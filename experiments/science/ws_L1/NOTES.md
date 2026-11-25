@@ -243,3 +243,24 @@ These are sanity checks of statement fidelity, not evidence for the theorems (wh
 `git status` / `git log` (read-only) show that the files of this directory and `L1_REPORT.md` were
 committed by the coordinator's periodic checkpoints (`[SCI] Checkpoint 14–16`, 19:00–19:34 UTC).
 I ran no git command that changes state.
+
+## 19:40–19:44 UTC Closed forms + final state
+
+* `MarginalOracle.lean` (now 1220 lines, 15 headline declarations): `supportEquiv`,
+  `sum_hammingNorm_binary` (Σ_x φ(wt x) = Σ_j C(n,j) φ(j) on F₂ⁿ), `pSum_weight_binary`
+  (A₁ = (1+e^{−u})ⁿ), `pSum_flat_binary`, `theorem4'_binary_cube_closed_form` (Theorem 4′ with the
+  note's D_R), `theorem4'_one_body_closed_form` (fully explicit, no code hypothesis).  One fix
+  (`add_comm` rewrote `n + 1`; made the instance explicit).
+* SECOND FINAL CHECK (`check_log.txt`, 19:42:26–19:43:21 UTC): 8 files, all exit code 0, no
+  warning; 78 `#print axioms` lines, all `[propext, Classical.choice, Quot.sound]`
+  (IdentifiedSets 14, Separation 7, OrthogonalArray 7, MaxEntStability 16, MarginalOracle 15,
+  PerturbationBracket 8, BasinBound 8, Pinsker 3).  3910 lines of Lean.  Forbidden-token scan: 0.
+  (This supersedes the first final check of 19:36–19:37, which had 74 declarations.)
+* Report `docs/science/workstreams/L1_REPORT.md` updated to this state.
+
+## Summary of what is NOT done (see report §5)
+
+Theorem 2 (all parts, incl. the entropy bound (d)); Krawtchouk form of Theorem 3; codes for
+k ≥ 2 (only numerics on the [7,3] simplex code); completeness/duality; strict b_min > b;
+Csiszár (I-projection has exponential form); Marton (κ = 1/4); sampled Theorem 5; Prop. 5b;
+ln Z = −∫U; Prop. 10, A4; all asymptotics.
