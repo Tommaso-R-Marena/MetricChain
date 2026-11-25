@@ -558,7 +558,8 @@ class with all one-body marginals equal to `1.6·10⁻¹⁵`; without compensati
 (B) Exact sums, `(0.3, 1, ε₁ = 0.25E)`, `θ_na = 0.024324`: with the oracle `−ln(nq)/n = 0.010781, 0.016693, 0.019706, 0.021837,
 0.023026` at `n = 100, 200, 400, 800, 1600` (deficit `≈ 0.29·ln n/n`); without the oracle the same pairs give
 `0.0569, 0.0432, 0.0349, 0.0303, 0.0277` (from above).  `b/A_t = 0.07 … 0.09`: the compensator carries a tenth of the
-mass of the *truncated* cone.  (Three further parameter sets were queued; what was computed is in `out/t06_run.log`.)
+mass of the *truncated* cone.  (Three further parameter sets were queued and not run; the enumeration part (A) and
+this table are in `out/t06_run.log`.)
 
 ### 3.9 Ingredients of Theorem τ (`t15_tolerance_check.py`; `n = 12`, exhaustive)
 
@@ -625,8 +626,10 @@ The theory division's §11.29 (`dcdfea6`) is treated in §8.
 2. **The finite-`n` certificates with shells** (§3.6) are for one parameter set and `n ≤ 1600`, with a coarse scan;
    the single-letter value `V` rests on a proof sketch (Proposition D(b)) plus those sums.  Rows for `n = 3200` and
    for two more parameter sets were still running when the report was closed (`out/t07b_run.log`) and are not
-   quoted.  The same holds for the last rows of `t05` (`n = 3200` for the later parameter sets) and of `t06`
-   (`n = 3200`; three more parameter sets): what was computed is in `out/t05_run.log`, `out/t06_run.log`.
+   quoted.  `t05` and `t06` were stopped by me when the report was closed, to free the shared machine, before
+   their last rows (`t05`: three of six parameter sets complete to `n = 3200`, the fourth to `n = 800`; `t06`: the first
+   of four parameter sets, to `n = 1600`): what was computed is in `out/t05_run.log`, `out/t06_run.log`; the files
+   `out/t05_typesums_adaptive.txt`, `out/t06_nonadaptive.txt` therefore do not exist.
 3. **`U` at bounded accuracy** (`e = 0`) needs the isoperimetric statement for an additive reference at negative `e`,
    which I did not read; at `e = 0` only the trivial `λ = 0` is covered by the black box as stated.
 4. **`k = 2`** is a proposition with a proof sketch for the asymptotics (Proposition E(iv)): the uniform estimate of

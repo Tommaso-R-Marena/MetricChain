@@ -113,6 +113,12 @@ that you can use or refute it:
 > scalar equation — and one continuous parameter matches it exactly (your
 > parameter-counting remark on Q4 is the same mechanism).  Cost: a factor `n`.
 
+*[Marked at checkpoint 30, SCI-RES-0006 §4: the **statement** is now proved (workstream F,
+Theorems A, B, for every `n`), the **reason given above is false** — the excess of a dip
+sits on the cone law `MW`, not on `V_φ`, and `M*W ≠ Q*` for `p ≠ ½`; the hard instance is a
+two-component mixture obtained by a compensation lemma, not the hardest additive
+instance.]*
+
 **[C], with a sketch only.**  Known ways it could fail are listed in
 `docs/science/workstreams/F_brief.md`: the pair of instances in the non-adaptive bound must
 have identical oracle answers *and* coincide outside a small set; away from the saddle

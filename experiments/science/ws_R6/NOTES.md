@@ -271,3 +271,17 @@ Crossover cells: u=1 n=1400: R = 381 (R/n = .2721, p_u = .2689), ln LB_na = 155.
 - three.py seed 61: 17 outer runs, 1104 middle runs, 76 289 716 real bottom brackets (two-sample brackets at the bottom in 10 of 17 runs),
   everything valid, no claim violated at the middle or outer level.  With the test run (seed 5): 19 outer, 1152 middle, 80.4M bottom brackets.
 - e2e.py seed 22, K divided by 16: 400 runs, 1 844 727 real brackets, none invalid; events of the proof failed in 31 runs; no invalid final bracket.
+
+### Step 23 (final data, report filled)
+Queue finished (ALLDONE3).  Final counts (make_section3.py -> logs/summary_final.txt, data/summary_all.json, data/headline_counts.json):
+ simulated-oracle campaigns: 3686 literal runs = 2618 with theorem constants and valid answers (2L+ 2424, 2L 137+57) + 264 with K reduced
+ + 804 with invalid answers; 0 violations of an every-run claim; 0 violations of a good-event claim on a run where the events hold;
+ good event never failed with theorem constants; 67 runs discarded (sampler limit 2^83).
+ B_lazy with steep rung costs: 260 runs, 149 stopped by the query budget, 0 above C_max (max ln q - ln C_max = -0.0003).
+ D_2L (rerun with fixed checker, 137 runs): n up to 3000, 143 031 populated / 298 negligible levels, largest sample e^50.9 = 3.03 M-dagger.
+ e2e: 129 + 400 runs; three levels: 19 outer / 1152 middle / 80 363 188 bottom brackets; capcorner 4500; adversarial 816; capsearch 1609.
+fill_report.py and finalize_report.py applied to the report (backup of the pre-fill text: logs/R6_REPORT_before_fill.md); the headline
+categories in section 1 were then corrected by hand from data/headline_counts.json (D_2L_off contains 57 runs with theorem constants and
+valid answers, 63 with reduced K, 90 with invalid answers).
+Corrected a wrong sentence of my draft: a two-sample bracket is cheaper than enumeration from ~30-40 fibre coordinates (u=1) / 80-150 (u=2)
+(computed with everyn.k0_cost), not "several hundred"; one bracket then costs e^17..e^26 evaluations or more.

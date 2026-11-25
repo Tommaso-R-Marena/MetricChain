@@ -144,6 +144,16 @@ exponent irrelevant; constants in the limit shape.
   attack first; the mathematics underneath held everywhere we looked.  What nobody has
   re-derived remains the cost of the nested adaptive algorithm (Theorems 11.52, 11.56) —
   still the single most valuable check.
+* *Checkpoint 30:* **P7 has its field case** (workstream F; SCI-RES-0006).  With a field a
+  free exact one-body oracle changes neither class exponent, for every `n` (compensation
+  lemma; two-component hard instance), and at an instance it helps by a bracketed
+  amount.  The limitation "until the field case is settled, 'local data are worth
+  nothing' is a statement about a symmetric model" (below) is lifted for one-body data;
+  it stands for higher orders with a field (order 2: exact at `n = 13`, sketch beyond),
+  and the result has one author, one partial second reader and no machine check.  The
+  theory division's Proposition 11.109 (criterion; two conjectures) appeared the same
+  afternoon; ours proves its conjecture (f) and corrects two numbers of (e) — a joint
+  statement is the natural form.
 * *Checkpoint 26:* **P7's statement becomes two-sided** (addendum A16; author only).  For
   local data the invariance stands at every accuracy examined; for a mean-energy datum
   it is a bounded-accuracy statement: `ln Z = S − βU` turns the problem into an entropy

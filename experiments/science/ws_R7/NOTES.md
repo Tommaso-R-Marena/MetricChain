@@ -301,3 +301,19 @@ they have been corrected to approximate real times.  From here on times are read
 * `own_dia_compare.py 18 20`: class tables identical for n = 18 (254 325 043 / 1594), 19 (738 087 517 / 1911),
   20 (2 139 332 335 / 2328); 253 s wall for n = 20.  So own enumerator = their tables for n = 1..20.
 * queued: generic covers n = 11 (running), 12; nets; their tests / recheck / run_search; lattice n = 21 (and 22 in chunks).
+
+### 21:40-21:52 — generic covers n = 11 (own); RE-RUNS of engineering code at reduced size
+* `own_cover_table.py 11 11 200 <all cells> 0` (out_own_cover_table_11.txt): L=1/5 cells, MILP: 16, 10, 11, 10, 6, 4 = theirs
+  (five also certified by my LP bound alone).  L=1 cells, bounds only [my tolerance-free LP bound, my greedy cover]:
+  [471,523] [338,388] [378,432] [307,361] [167,208] [85,105]  vs published [474,484] [339,350] [379,392] [308,319] [168,179] [85,90]:
+  consistent everywhere; BUT in 5 of the 6 the published lower end is 1-3 above the LP certificate, i.e. it is the HiGHS
+  branch-and-bound bound at the 90 s limit, not "the certified lower bound" (the stored file keeps only one "lower").
+* RE-RUN `analyse_generic(n)`, n = 5..9 (the function the Modal entry point maps; rerun_logs/generic_cover.log): counts,
+  margins, all 12 cover cells (lower, upper, exact), reduced sizes: identical to the stored rows; nearest_tie to 4.5e-14.
+* RE-RUN `generic_entropy.py --nmin 5 --nmax 11`: rows 5..11 regenerated identical to stored (all fields but timings).
+* RE-RUN `recheck.py --nmax 2000` (rerun_logs/recheck_nmax2000.log): cost: 1008 searches + 504 flat values reproduce the
+  stored values exactly without the tie rule (max change 0.0), with it by <= 1.5e-5; claims (240 + 120) and converge (16 + 8):
+  0.0 with the tie rule; 0 violations under either convention.
+* RE-RUN `run_search.py --u 1 --n 1000 --phi 0.5 0.8` (the stated local command; rerun_logs/run_search.log): flat 1.0405 /
+  worst 1.0466 and flat 0.7013 / worst 1.3382; all eight search optima equal the stored ones to the last bit (same numbers
+  of evaluations 4002/4002/1950/1950).  54 s here.

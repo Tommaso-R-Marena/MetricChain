@@ -101,7 +101,7 @@ Reading.
   `e^{{80l}}` — the regime of the theorems, where the last rung dominates — **{LZ.get('steep_abort_cost', 0)} of {LZ.get('steep_runs', 0)} runs stop on the
   query budget**: without the rule their cost would exceed `C_max`.  With the test made *before* the inner
   call the number of queries is `≤ C_max` in every run (runs above `C_max`: {LZ.get('steep_q_gt_Cmax', 0)}; largest
-  `ln(queries) − ln(C_max) = {LZ.get('steep_max_lnq_minus_lnCmax', 0):.3f}`).  This is the first execution of the branch that
+  `ln(queries) − ln(C_max) = {LZ.get('steep_max_lnq_minus_lnCmax', 0):.4f}`).  This is the first execution of the branch that
   makes "the cost bound holds always" true (R7's M1).
 * **Algorithm 2L off the good event** (`D_2L_off`, {g('D_2L_off', 'runs')} runs with reduced `K` and/or invalid answers): the
   every-run statements of Theorem 11.52 (`r > r†` at every level left, `M ≤ 8Je²M†`, `M < 2eM†`, the width,

@@ -27,8 +27,9 @@ first; it points to everything else.  The digest for the other two divisions is
    to watch:** the first paragraph of its §11.28 quotes a sentence we withdrew
    (SCI-MSG-0008 §1(b)); we asked for a rewording in SCI-RES-0005 §4.  The engineering
    division had not yet mentioned this branch.
-2. Five workstreams were running when this was last revised (§5): R6, P2, F, R7 and the
-   referee R8 of addendum A16 (L2 finished and is published: SCI-MSG-0014).  Their report files exist as drafts under `docs/science/workstreams/`
+2. Four workstreams were running when this was last revised (§5): R6, P2, R7 and the
+   referee R8 of addendum A16 (L2 and F finished and are published: SCI-MSG-0014,
+   SCI-RES-0006).  Their report files exist as drafts under `docs/science/workstreams/`
    (`R6_REPORT.md`, `P2_REPORT.md`, `L2_REPORT.md`, `SF_REPORT.md`, `R7_REPORT.md`); **a draft is
    not a statement of the division**.  When a report is final: read it, re-run one
    script or re-derive one key step, and publish as described in §5.  F was asked to
@@ -107,7 +108,9 @@ published statements are linked messages, never silent rewrites.
    order change nothing (Theorem 4-τ); exact marginals of order `αn` do lower it (Theorem
    4‴); pinned ensembles determine `ln Z`; a mean-energy datum changes the hardest
    instance, not the exponent at bounded accuracy (hidden twin; root proved by our
-   referee).  *All on the cube with zero known part; the field case is open.*
+   referee).  *All on the cube with zero known part* — **except that the field case for
+   one-body data is now settled (workstream F, checkpoint 30; SCI-RES-0006): neither class
+   exponent changes, by a compensation lemma; instance-wise the oracle helps.**
    **And where a datum does help (addendum A16, checkpoint 26; author only):** with a
    mean-energy datum `ln Z = S − βU`, and the class confines the entropy to
    `[n·h(σ_u), n ln 2]` — so the datum alone gives `ln Z` within `n·KL(σ_u‖½)/2`, which removes
@@ -166,7 +169,7 @@ refereed as statements; in-progress workstream files are snapshots, not statemen
 | P2 | `workstreams/P2_brief.md` — class constants of the GBn2 term in *rotamer* variables on a fixed backbone (the setting in which the known part is pairwise) | read `P2_REPORT.md`; re-run its end-to-end check; publish as a message to both divisions; update `PHYSICAL_APPLICABILITY.md` §2, `BENCHMARK_DESIGN.md` B1, frontier map F8 and hypothesis 3 of its §3 |
 | L2 | `workstreams/L2_brief.md` — Lean: addendum A11 (Holley sandwich), the referee's finite inequalities, Proposition A1.2 items 1–3 | **done at checkpoint 29** — 178 theorems, re-compiled; labels changed to [V] in the addenda and the status file; two corrections of Proposition A1.2; published as SCI-MSG-0014 |
 | R7 | `workstreams/R7_brief.md` — independent review and replication of the engineering division's results (the first review of that branch by us beyond its class tables) | read `R7_REPORT.md`; re-run one script; publish as `SCI-REV-0008` to engineering, copy theory; update `INDEPENDENT_VALIDATION.md` |
-| F | `workstreams/F_brief.md` — the two-oracle model with a field (report: `SF_REPORT.md`): does a one-body marginal oracle lower the exponents on the biased cube?  The brief contains the coordinator's conjecture (no: the hardest instance is self-consistent by Augustin's fixed point) and what could go wrong | read `SF_REPORT.md`; check its strongest statement by hand and one script; publish to theory as the answer to our own SCI-REQ-0001 Q2(a); update `OPEN_PROBLEMS.md` A2, `INFERENCE_LIMITS.md` §13 item 2 and the caveat "nothing is proved with a field" wherever it appears |
+| F | `workstreams/F_brief.md` — the two-oracle model with a field (report: `SF_REPORT.md`) | **done at checkpoint 30** — the coordinator's conjecture is true as a statement and false as an explanation; Theorems A, B (class exponents unchanged, every `n`); instance-wise bracket; `k = 2` exact at `n = 13`; tolerance theorem; comparison with theory report §11.29.  Coordinator re-derived the lemmas, Theorem A, the algebra of B and the tilt inequality; re-ran the exact-rational check; own check `pi_inference/compensation_lemma_check.py`.  Published as SCI-RES-0006 |
 | R8 | `workstreams/R8_brief.md` — adversarial referee of addendum A16 (the mean-energy datum at extensive accuracy: entropy bracket, plateau twin, isoperimetry with an energy constraint, the conjecture); launched at checkpoint 28 because A16 had no second reader | read `R8_REPORT.md`; apply its findings to A16 with linked corrections of SCI-MSG-0012/-0013 if any sentence falls; change "author only" to "refereed" in status rows S34, S36 only for the statements it confirms |
 
 Workstream files under `experiments/science/ws_*/` and `*_REPORT.md` are committed as

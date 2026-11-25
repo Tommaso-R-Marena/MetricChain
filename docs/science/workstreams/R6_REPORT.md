@@ -34,9 +34,12 @@ git command; no `lake build`; nothing delegated.
   their referees or the engineering division was opened; I have still not read any of them):
   Algorithm 2L and Algorithm 2L⁺ with every constant of the theorems, a run-by-run checker of every
   claim, and an explicit evaluator of the cost bound for every `n` (§3).
-* **Not done**: three nested levels with real inner brackets; a run with real inner brackets at sizes
-  where sampling is cheaper than enumeration (impossible with the constants of the theorems below
-  `n ≈ 10³`, see §5); Theorem 11.51; a second reading of the lower bound's asymptotics.
+* **Done only at toy size**: runs with real inner brackets — two levels on cubes of 12–13 coordinates
+  (529 runs), three nested levels on cubes of 9–10 coordinates (19 outer runs); they test the logic of
+  the nesting, not the cost (§3.4, §5).
+* **Not done**: a run with real inner brackets at sizes where sampling is cheaper than enumeration
+  (not feasible with the constants of the theorems: §5); Theorem 11.51; a second reading of the lower
+  bound's asymptotics; the Lean proofs line by line.
 
 ## 1. Verdicts in one paragraph
 
@@ -45,14 +48,19 @@ Theorems 11.52, 11.54, 11.56, Proposition 11.57 and Theorem 11.58: an accounting
 reproduces the published one constant by constant (the closing radius, `M ≤ 8Je²M†` resp. `M̄`, the
 count `16KJe²e^x` resp. `c_η⁻¹e^λνe^x` in which the two factors `e^b` cancel, the per-rung call
 bound); the five wrong accountings of `DEAD_ENDS.md` D45 are not repeated in another guise (§2.5); an
-independent implementation violated no claim in **5 930 literal runs** with the constants of the theorems
-— including, for the first time, **1 020 runs with invalid inner answers** (the statements "for every run,
-on or off the good event" hold there, and the abort rule keeps the cost below `C_max`), the algorithm
-of Theorem 11.52 itself at sizes where levels are left as negligible, and 1 200 runs with real
-two-sample inner brackets (§3) — and it reproduces to every published digit numbers of the engineering
-division that I had not seen when I wrote it (§3.3).  **What I add:** (i) seven minor findings, each
-with its repair (§2.7); the only one that touches a proof is an uncovered pass in the new cap remark of
-`40c5bd7`, which I close (§2.8); (ii) an **every-`n` statement with no `o(n)`**: the two-level algorithm
+independent implementation violated no claim in **3,686 literal runs** of Algorithms 2L⁺ and 2L with a
+simulated inner oracle — 2,618 with the constants of the theorems and valid inner answers (the events
+of the proof never failed, every bracket was valid), 264 with `K` reduced (events fail, claims hold
+whenever they hold), and, for the first time, **804 runs with invalid inner answers** (the statements
+"for every run, on or off the good event" hold in all of them; with a dear last rung 149 of 260 such
+runs would exceed `C_max` without the abort rule, and none does with it) — nor in 529 two-level and
+19 three-level runs with real inner brackets at toy size, nor in 4,500 runs aimed at the degenerate
+branch of the new cap remark and 2,425 runs of two searches for a counterexample (§3); and it
+reproduces to every published digit numbers of the engineering division that I had not seen when I
+wrote it (§3.3).  **What I add:** (i) seven minor
+points, each with its repair (§2.7): four gaps in the text of §11.18, an uncovered pass in the proof of
+the new cap remark of `40c5bd7`, which I close (§2.8), and two observations; (ii) an **every-`n` statement
+with no `o(n)`**: the two-level algorithm
 with base brackets has an explicit worst-case cost bound for every `n` on the whole class, and at
 `u = 1`, accuracy `0.872`, `δ = 0.05` that bound is **below the lower bound for all non-adaptive
 algorithms from `n = 1400` on** (`n = 540` for `u = 2`, `n = 4700` for `u = ½`; §2.9) — a finite-`n`,
@@ -65,11 +73,11 @@ enumerate.
 
 | statement (commit `5ed4072` unless stated) | verdict | basis |
 |---|---|---|
-| Theorem 11.52 (one more level; Algorithm 2L) | **proved** (four minor gaps, all closed: m1–m4) | own derivation before reading; 2 400+ own runs of 2L |
+| Theorem 11.52 (one more level; Algorithm 2L) | **proved** (four minor gaps, all closed: m1–m4) | own derivation before reading; 347 own runs of 2L |
 | Theorem 11.53 (recursion → hinted exponent) | **[V]**: statement read against the paper, compiled, axioms printed | `lean/R6Axioms.lean`; the Lean *proof* not read |
 | Theorem 11.54 (extensive accuracies) | **proved**, given 11.25(a) [V], 11.53 [V], 11.44/Prop. 11.46 or K0 [P], Harper, Chernoff [K] | assembly re-derived in both forms (left limits; Proposition E) |
 | Lemma 11.55 = K.4 | **proved**, given the binomial median [K] | re-derived; exact tables `m ≤ 4000` |
-| Theorem 11.56 = K1 (Algorithm 2L⁺) | **proved** | Steps 4–7 derived before reading, 1–3, 8, 9 after; 3 500+ own runs |
+| Theorem 11.56 = K1 (Algorithm 2L⁺) | **proved** | Steps 4–7 derived before reading, 1–3, 8, 9 after; 3,339 own simulated-oracle runs, 529 with real inner brackets |
 | Remark after 11.56, "cap `2max{e^λM†, M‡}`" (**`40c5bd7`**) | **proved with a gap that I close** (m7) | re-derived; checked in every run |
 | Proposition 11.57(a) = K0 | **proved** | re-derived; cost reproduced numerically for `d ≤ 16 000` |
 | Proposition 11.57(b) = K2, (c) | **proved** (in the corrected form `T′(ξ) = min(T(ξ), T′(0))`) | re-derived, including accuracy arithmetic and (E0′) |
@@ -77,6 +85,11 @@ enumerate.
 | Theorem 11.51 (radial class) | not examined | — |
 
 ## 2. Precise statements, proofs, findings
+
+Labels: **[V]** machine-checked (the Lean declaration is named), **[P]** paper proof (theirs, re-derived by
+me, or mine; I say which), **[K]** known and cited (with the reading level in §4), **[N]** numerical evidence
+(everything in §3 unless a declaration is named), **[H]** heuristic.  "Re-derived" means: written out by me
+independently; "replicated" means: re-computed with my own code.
 
 Notation (theory report §11.16/§11.18): `Q_n` the cube; `L_u(Q_n)` the functions with
 `|ψ(x) − ψ(y)| ≤ u·d_H(x,y)`; `w = e^{−ψ}`, `A = 2^{−n}Σ_x w(x)`; `p_u = 1/(1+e^u)`,
@@ -403,8 +416,9 @@ Minor (each with location, what is missing, and the repair; "closed" = I give th
   mutation "no Harper term" is detected in 1 of 47 runs only (R8: 2–15 %), i.e. most instances never
   exercise the one step that distinguishes Theorem 11.56 from Theorem 11.52 at a bounded accuracy
   (a populated level whose closing radius is just above `r†`).  A harness that reports "no violation"
-  should report how many populated passes had `min{Γ̃/c_η, Γ″} ≤ θ` decided by `Γ″`.  (In my campaigns:
-  §3.2.)
+  should report how many populated passes had `min{Γ̃/c_η, Γ″} ≤ θ` decided by `Γ″`.  (My own records
+  do not: in the valid 2L⁺ campaigns 315 of 2424 closures happen at a populated pass, and I did
+  not log which of the two terms decided them.)
 * **m7 — the cap remark of `40c5bd7` has one uncovered pass** — see §2.8.  Closed.
 
 ### 2.8 The remark "the sample-size cap can be lowered" (commit `40c5bd7`) — proved, with one pass added
@@ -538,8 +552,9 @@ restricted to it would be weaker than Theorem R6.1 in the only direction that ma
 
 ## 3. Numerics
 
-Everything here is my own code (`experiments/science/ws_R6/`); no script of the authors, of their
-referees or of the engineering division was run or read.  Python 3.13, numpy 2.5.3, mpmath 1.3.0,
+Everything in this section is **[N]** — independent *replication* with my own code
+(`experiments/science/ws_R6/`); no script of the authors, of their referees or of the engineering
+division was run or read.  Python 3.13, numpy 2.5.3, mpmath 1.3.0,
 at most two processes, every job under ten minutes.  The machine was shared and heavily loaded
 (load average 10–15 on 4 cores), so several campaigns were cut by their time limit: the numbers
 below are the runs that completed, and every number in the tables is produced from the data files by
@@ -590,7 +605,66 @@ below are the runs that completed, and every number in the tables is produced fr
 | tail lemma at `r = n_o` | the returned pair has `L > U` | 48 of 48 |
 | `q` without `1/(1−η)` | certificate `p(s_j) ≤ q` false | 26 of 48 (one invalid final bracket) |
 
-<!--SECTION3B-->
+### 3.2 Literal runs with a simulated inner oracle (`campaign.py`; data `data/<campaign>_<seed>.jsonl`)
+
+| campaign | algorithm | `K` | cells | inner behaviour | runs completed (discarded) | closed / `L>U` / aborted | levels left populated / negligible | good event failed | **violations: every-run claims / good-event claims** | invalid final bracket (of these on the good event) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `A_small` | 2L⁺ | theorem | 8 cells, `n_o ∈ {10,…,40}`: Theorem-K2 parameters at `x ∈ {1, 2, 4}`, two general cells, one Corollary-K1.b cell | valid (10 behaviours) | 1664 (0) | 1664 / 0 / 0 | 340984 / 180 | 0 | **0 / 0** | 0 (0) |
+| `A_ties` | 2L⁺ | theorem | 5 cells, `n_o ∈ {24, 32, 100, 120}`, dyadic `λ`, `un/λ ∈ ℕ`, flat fibres, profiles on the level grid | valid (ends of brackets exactly at `W`) | 451 (49) | 451 / 0 / 0 | 159838 / 1819 | 0 | **0 / 0** | 0 (0) |
+| `A_medium` | 2L⁺ | theorem | 12 cells, `n_o ∈ {60,…,1000}`, `u ∈ {½, 1, 2, 3}`: eight bounded-regime cells and four Corollary-K1.b (extensive) cells (12 of the runs are on three earlier extensive cells whose outer sample is trivial) | valid (10 behaviours) | 309 (11) | 309 / 0 / 0 | 339785 / 1517 | 0 | **0 / 0** | 0 (0) |
+| `D_2L` | 2L (Thm 11.52) | theorem (`K = ⌈24 ln(2^{n+6}n³/δ)⌉`) | 8 cells, `n ∈ {40,…,3000}`, `n_o ∈ {12,…,1500}` | valid (10 behaviours) | 137 (0) | 137 / 0 / 0 | 143031 / 298 | 0 | **0 / 0** | 0 (0) |
+| `B_reducedK` | 2L⁺ | `K ∈ {8, 20, 50}` | 5 cells, `n_o ∈ {40,…,400}` | valid | 201 (1) | 201 / 0 / 0 | 138210 / 1443 | 51 | **0 / 0** | 0 (0) |
+| `B_invalid` | 2L⁺ | theorem (one cell `K = 20`) | 7 cells, `n_o ∈ {12,…,400}` | **invalid** (above `W`, below `W`, too wide, trivial, mixtures) | 395 (5) | 195 / 21 / 179 | 213534 / 8066 | 395 | **0 / 0** | 159 (0) |
+| `B_lazy` | 2L⁺ | theorem | 6 cells, `n_o ∈ {40,…,400}` | **invalid** (LAZY: every refined point reaches the last rung) | 319 (1) | 170 / 0 / 149 | 234570 / 1690 | 319 | **0 / 0** | 0 (0) |
+| `D_2L_off` | 2L (Thm 11.52) | theorem and `K ∈ {10, 30}` | 5 cells, `n ∈ {60, 600, 1200}` | valid and **invalid** | 210 (0) | 183 / 0 / 27 | 213063 / 357 | 99 | **0 / 0** | 30 (0) |
+
+Reading.
+
+* **With the constants of the theorems and valid inner answers** (2424 runs of Algorithm 2L⁺, 137 of
+  Algorithm 2L; 60 further runs of 2L⁺ were discarded because a block would have exceeded `2^83` points): every run
+  closed; the events of the proof held at every pass of every run; no claim was violated; every final bracket
+  contains `A`.  Branches exercised in the 2L⁺ runs: 840607 levels left as populated and 3516 as negligible;
+  closures at a populated pass 315, at an unpopulated one 2109 (366 with an empty tail,
+  715 at a radius `≤ r†`); largest sample `e^{57.8}` points.  In the 2L runs: 143031
+  populated and 298 negligible levels, largest sample `e^{50.9}`.
+* **How close the bounds come** (valid runs, 2L⁺): the count inequality `M_j^neg p(s_je^{−x}) ≤ c_η⁻¹e^λνe^x` reaches
+  `0.869` of its right-hand side; the sampled count `0.299` of `cnt(x)`; the calls per level and
+  rung `0.288` of `min{M̄, cnt}`; the largest sample is `2.07·M†`, i.e. `0.843` of the cap of
+  `40c5bd7` and `0.0015` of `M̄`; `ln(queries)/ln(C_max) ≤ 0.843`.  For 2L: largest sample
+  `3.03·M†` (`0.556` of `2eM†`), sampled count `0.0849` of `32KJe²e^x + 4K`,
+  `2M_j^neg p(s_je^{−x})` at most `0.184` of `16KJe²e^x`.
+  The count is the tight claim, as R7, R8 and the engineering division found; the cap `M̄` is loose by the factor `ν₀`.
+* **`K` reduced** (`B_reducedK`: `K` replaced by 8, 20 or 50 — the theorem's values are in the hundreds or thousands): the
+  events of the proof failed in
+  38 of 70 runs at `K = 8`, 13 of 66 at `K = 20`, 0 of 65 at `K = 50`;
+  **on every run on which they hold no claim is violated**; the every-run claims hold in all 201 runs;
+  0 final brackets were invalid (0 on a run on which the events hold).
+* **Invalid inner answers** (`B_invalid`, `B_lazy`: 714 runs; nobody had tested this — in every earlier harness
+  (V1) holds by construction).  The statements that Theorem 11.56 makes "for every run, on or off the
+  good event" — closing radius above `r†` at every level left, `M ≤ max(K, 2M_j^neg)`, `M_j^neg ≤ (1+η)e^λν₀M†`,
+  `M ≤ M̄`, the cap of `40c5bd7`, the width of every pair returned through the closure test, queries
+  `≤ C_max` — **held in all 714 runs**.  As allowed off the good event, 159 final brackets were
+  invalid, 21 returned pairs had `L > U` (erratum m1 of `K_REPORT.md`: return the trivial bracket), and
+  179 runs aborted with a point unclassified at the last rung.
+* **The abort rule is not decorative.**  With the behaviour LAZY and rung costs `10^l` (59 runs) no run
+  needs it (0 aborts; queries at most `0.021` of the bound of claim (vi)); with rung costs
+  `e^{80l}` — the regime of the theorems, where the last rung dominates — **149 of 260 runs stop on the
+  query budget**: without the rule their cost would exceed `C_max`.  With the test made *before* the inner
+  call the number of queries is `≤ C_max` in every run (runs above `C_max`: 0; largest
+  `ln(queries) − ln(C_max) = −0.0003`).  This is the first execution of the branch that
+  makes "the cost bound holds always" true (R7's M1).
+* **Algorithm 2L off the good event** (`D_2L_off`, 210 runs with reduced `K` and/or invalid answers): the
+  every-run statements of Theorem 11.52 (`r > r†` at every level left, `M ≤ 8Je²M†`, `M < 2eM†`, the width,
+  the completed cost display) held in all runs; 30 final brackets were invalid, 0 of them on a
+  run on which the events hold; 0 violations of a good-event claim on such runs.
+* **The cap remark of `40c5bd7` in its degenerate branch** (`capcorner.py`, 4500 runs, `n_o ∈ 3..12`, `λ = 1 > u`,
+  `η = ½`): the cap was never reached (largest sample `0.50` of it); for `r† ≥ 1` all
+  193 unpopulated passes with `M = M‡` exactly closed; for `r† ∈ {0, −1}` that pass failed to
+  close 1255 times and the sample reached exactly `2M‡` in 1133 runs (§2.8).
+
+In total: **3686 literal runs in the campaigns of the table, 0 violations of an every-run claim, 0
+violations of a good-event claim on a run where the events hold.**
+
 
 ### 3.3 Reproduction of published numbers (which I had not seen when the code was written)
 
@@ -633,7 +707,38 @@ logic and of the cost accounting with an implementation I have not read.
 accuracies; Proposition 11.57(c) on 999 values of `φ`: the bracket with `T = θ_hint` exceeds `h` by at
 least `7.6·10⁻⁶` (never below).
 
-<!--SECTION3C-->
+### 3.4 Real inner brackets: two levels and three levels (`e2e.py`, `three.py`)
+
+*Two levels.*  Explicit `u`-Lipschitz functions on `Q_{n_o} × Q_{n_i}`, `(n_o, n_i) ∈ {(6,6), (7,6), (6,7), (7,5), (8,5), (5,7)}`
+(five random constructions: lower and upper McShane envelopes of random data, additive functions, radial
+walks, inf-convolutions of noise), `u ∈ {½, 1, 2}`; every outer point is individual; the inner procedure of every rung is the two-sample
+bracket of Proposition 11.57(a) on the fibre with fresh randomness (two samples drawn as exact
+multinomial counts over the fibre) and the constants of the proposition for `δ′ = δ/(4LM̄)`; all constants
+of Theorem 11.56 from the formulas; `L ∈ {1, 2, 3}`.
+**129 runs, 9,786,461 real inner brackets** (224 of 270 rungs by a two-sample bracket,
+the rest by enumeration): 0 inner brackets invalid or wider than promised; 0 final brackets
+invalid; 0 wider than `x_out`; 0 aborts; violations of every-run / good-event claims:
+0 / 0; queries at most `0.006·C_max`.
+With `K` (outer and inner) divided by 16 — off the theorems, an attempt to provoke real failures of (V1): 400 runs,
+1,844,727 real brackets, 0 of them invalid or too wide (in 0 runs); the events of
+the proof failed in 31 runs; 0 invalid final brackets, 0 of them on a run where the
+events hold; violations of every-run / good-event claims: 0 / 0.
+
+*Three levels.*  `Q_n = Q_{n_o} × (Q_{n_o′} × Q_{n_i′})`, `(n_o, n_o′, n_i′) ∈ {(3,3,3), (3,3,4), (3,4,3), (4,3,3)}`, `u ∈ {½, 1}`:
+outer Algorithm 2L⁺; on every fibre a middle Algorithm 2L⁺ whose *certified* accuracy is at most the
+outer rung's and whose failure probability is the outer `δ′`; at the bottom two-sample brackets;
+all constants from the theorems; the declared cost of a middle call is the middle `C_max`.  (For run
+time an outer point draws its bracket from a pool of independent middle runs on its fibre, as in
+R8.)  **19 outer runs, 1152 middle runs, 80,363,188 real bottom brackets** (in 12 of the
+outer runs the bottom rung is a two-sample bracket, in the others no radius qualifies and the fibre is enumerated):
+invalid or too wide brackets: 0 at the bottom, 0 (invalid) and 0 (too wide) in the middle, 0 and 0 at
+the top; violations of an every-run or a good-event claim of Theorem 11.56: 0 and 0 at the middle level,
+0 and 0 at the outer level; the outer number of queries stays a factor `e^{5.4}` below its `C_max`.
+
+*What these runs are worth.*  The cubes have 12–13 (two levels) and 9–10 (three levels) coordinates;
+at these sizes an inner bracket costs more than enumerating its fibre, and the runs test the logic of
+the nesting and the interface "bracket procedure" with real, independent randomness — not the cost.
+
 
 ### 3.5 The inputs, by brute force
 
@@ -648,9 +753,68 @@ least `7.6·10⁻⁶` (never below).
   of `η`): largest ratios `0.886`, `0.854`, `0.264`; (c) in 401 cases (`m ≤ 4000`): `min(r† − r₊) = 2`; (d)
   in 290 cases: `max(lhs − rhs) = −7.6`; the binomial median `P(Bin(m, p_u) ≥ ⌊mp_u⌋) ≥ ½` in 27 cases
   (`m ≤ 4000`): smallest value `0.508`.
-* Lean: `lean/R6Axioms.lean` (§2.6).
+* Lean: `lean/R6Axioms.lean`, `lean/R6Axioms2.lean` (§2.6).
 
-<!--SECTION3D-->
+### 3.6 Adversarial search (`adversarial.py`)
+
+Hill climbing with restarts over the radial profile (one increment in `[−u, u]` per shell), the position
+of the reference point, the inner offset and the inner behaviour, with literal runs, one objective at a
+time; every run is also checked for every claim.
+
+| cell | objective (a ratio that the theorem bounds by 1) | literal runs | largest value found | violations |
+|---|---|---|---|---|
+| `n = 80`, `n_o = 40`, `u = 1`, `λ = 0.333` | count inequality (v) | 23 | 0.571 | 0 |
+| `n = 48`, `n_o = 24`, `u = 0.5`, `λ = 0.5` | sample / cap of `40c5bd7` | 594 | 0.181 | 0 |
+| `n = 200`, `n_o = 100`, `u = 2`, `λ = 1` | count inequality (v) | 74 | 0.461 | 0 |
+| `n = 200`, `n_o = 100`, `u = 2`, `λ = 1` | sample / cap of `40c5bd7` | 67 | 0.000 | 0 |
+| `n = 160`, `n_o = 80`, `u = 2`, `λ = 0.5` | calls per level / bound (vi) | 58 | 0.144 | 0 |
+
+(In the fourth row no run with a sample above `K` completed: samples near `M†` exceed my sampler in that
+cell, so the row is uninformative.)  816 runs, 0 violations.  With these budgets (about 200 s per search on a loaded machine) the hill
+climbing does **not** get closer to any bound than the structured instances of the campaigns do (count
+inequality `0.869`, sample `0.843` of the cap there); it is a weak search and I report it as such.
+A structured sweep aimed at the cap (`capsearch.py`: the cell of the theory division's own example,
+`n_o = 24`, `u = λ = ½`, and neighbours; landscapes "plateau, then cone" with every plateau radius, cones,
+"cone, then flat"; 1609 literal runs, 0 violations) reaches a sample of `2.46·M†` where the cap is
+`4.06·M†` and `M̄ = 847·M†`: `0.61` of the cap (samples move in factors of two, so the
+next step would exceed it).  For comparison: the engineering division's search in expectation reports
+`0.95` for the count and `1.8·M†` for the sample; K's runs report samples up to `4.5·M†`; the theory division's
+harness `3.7·M†` (91 % of the cap) at the same `n_o`, `u`, `λ` (its other parameters are not stated).
+
+### 3.7 Overlap with ENG-RES-0008
+
+Read after my implementation was written; their code was neither run nor read.  *Same:* the algorithm
+(K_REPORT §2.2 with errata m1, m10), radial product instances with a reference shell and one inner
+offset, the inner behaviours "bottom", "top", "random", the reduced-`K` experiment, the checks (iii)–(vi).
+*Their side only:* expectation-level ("mean") runs with a search over instances at `n` up to `128 000`
+(7 095 840 runs) and the worst-instance cost tables; 585 000 literal runs at three sizes
+(`(u, n_o) ∈ {(½, 300), (1, 120), (2, 48)}`) with one design.  *My side only:* invalid inner answers and the
+abort rule; Algorithm 2L of Theorem 11.52 and the extensive regime (their "not started"); ties on the
+level grid; the cap remark of `40c5bd7`, including its degenerate branch; behaviours mixed within a run and
+the two adversaries; real inner brackets and three levels; the comparison of `C_max` with the
+non-adaptive *lower* bound (§2.9).  *Where we overlap the numbers agree:* `C_max`, the plain bracket, the
+hinted lower bound and the flat-instance trajectory (§3.3), to every published digit.  My literal runs
+with their profile families (flat, cones, plateau-then-cone, dips around the critical radius, the
+staircase, the 2-periodic profile, random walks) show, like theirs, no failure of the good event with
+the theorem's `K` and no violation.
+
+### 3.8 How to re-run (from `experiments/science/ws_R6/`; `OMP_NUM_THREADS=1`)
+
+    python3 campaign.py A_small 1600 11 2        # likewise A_ties 500 12, A_medium 500 13 (and 44 2), D_2L 240 16,
+                                                 # B_reducedK 400 14, B_invalid 400 15, B_lazy 60 19 and 200 20
+                                                 # (seed 18 was run with rung costs 10^l), D_2L_off 300 17, A_small 64 1
+    python3 campaign.py MUT_neg_tol 48 7 2       # mutations: MUT_noharper, MUT_maxform, MUT_close_at_no, MUT_q_no_eta
+    python3 capcorner.py 1500 41                 # seeds 41, 42, 43
+    python3 e2e.py 600 21 1 ; python3 e2e.py 400 22 16 ; python3 three.py 40 61 6
+    python3 adversarial.py <cell 0..6> <ineq|count|calls|cap|mbar|cost> <evaluations> <seed> ; python3 capsearch.py 71 200
+    python3 everyn.py 1.0 0.5 4000,16000 ; python3 separation.py 1.0 250,...,8000 ; python3 flat_exact.py 1.0 1000 0.80
+    python3 check_tail_lemmas.py ; python3 check_K4cd.py ; python3 tau2.py ; python3 crosscheck_lb.py
+    python3 make_section3.py                     # every number of section 3.2, 3.4, 3.6 from the data files
+    cd /home/user/MetricChain && lake env lean /home/user/MetricChain/experiments/science/ws_R6/lean/R6Axioms.lean    # and R6Axioms2.lean
+
+Campaigns are stopped by a time limit when the machine is loaded; the run counts above are those of the
+data files in `data/`.  `NOTES.md` records what was run in which order, including what was discarded.
+
 
 
 ## 4. Prior art, with a search log
@@ -677,12 +841,15 @@ programme's own theorems; I did not search for it and make no novelty claim.
 
 ## 5. What I did not settle
 
-1. **Three or more nested levels, end to end.**  My runs with real inner brackets are two-level, on
-   cubes of 12–13 coordinates, where 2L⁺ can only be tested for logic (an inner bracket costs more than
-   enumerating its fibre).  With the constants of the theorems a two-sample bracket is cheaper than
-   enumeration only for fibres of several hundred coordinates, and a level above it needs
-   `e^{n_oa}` outer points: there is no size at which the nested algorithm can be *executed* with real
-   randomness at every level.  Referee R8's three-level runs on `Q_9, Q_10` have the same limitation.
+1. **Three or more nested levels, end to end.**  My runs with real inner brackets are on cubes of
+   12–13 coordinates (two levels) and 9–10 coordinates (three levels, 19 outer runs), where the
+   algorithm can only be tested for logic (an inner bracket costs more than enumerating its fibre).
+   With the constants of the theorems a two-sample bracket becomes cheaper than enumeration at about
+   30–40 fibre coordinates for `u = 1` and 80–150 for `u = 2` (computed with `everyn.k0_cost` for
+   accuracies `0.5` and `2`), where a single bracket already costs `e^{17}`–`e^{26}` (`u = 1`) evaluations
+   or more, and a level above it needs `e^{n_oa}` outer points: there is no size at which the nested
+   algorithm can be *executed* with real randomness at every level and with sampling cheaper than
+   enumeration.  Referee R8's three-level runs on `Q_9, Q_10` have the same limitation.
    The composition is therefore certified only by the interface "bracket procedure" (which I checked)
    and by the exact flat-instance computation of R8 (which I did not repeat for three levels).
 2. **A rate.**  No explicit `o(n)` for Theorems 11.54/11.58, and no explicit `n₀(η)` (§2.6, §2.9).
@@ -759,7 +926,7 @@ programme's own theorems; I did not search for it and make no novelty claim.
   `u`.  *Resources:* seconds per cell at `n ≤ 5000`.
 * **R6-E2 (the abort rule).**  Your literal runs report "aborted: 0".  With an invalid inner
   behaviour that returns the rung-0 bracket at every rung but the last (so that every refined point
-  reaches the dearest rung) and rung costs growing by `e^{80}`, 33 of my 60 runs stop on the query
+  reaches the dearest rung) and rung costs growing by `e^{80}`, 149 of my 260 runs stop on the query
   budget, and the cost stays below `C_max` only because the test precedes the call.  A harness for
   the "bracket procedure" interface should contain such a behaviour; it is the only test of the
   sentence "the cost bound holds always".
@@ -788,12 +955,13 @@ In this order.
    (separation from non-adaptive algorithms from `n = 1400` on at `u = 1`), and it is about two levels
    and exponent `≈ a/2`, not about `h`.
 3. **"Nobody has run it."**  With the constants of the theorems an inner two-sample bracket is cheaper
-   than enumeration only for several hundred coordinates, so every end-to-end run with real inner
-   randomness (workstream K, R8, mine) is at sizes where the levels enumerate; every large-size run
-   uses a simulated oracle or expectations.  What links the levels is one definition ("bracket
+   than enumeration only from 30–40 coordinates on (`u = 1`), where one bracket costs more than `10⁷`
+   evaluations, so every end-to-end run with real inner randomness (workstream K, R8, mine) is at sizes
+   where sampling is dearer than enumeration; every large-size run uses a simulated oracle or
+   expectations.  What links the levels is one definition ("bracket
    procedure": cost bound in every run, validity and width with probability `1 − δ′`), and the proof
    uses nothing else — but a referee will note that the composition of three levels has been
-   exercised only on `Q_9`, `Q_10` (R8) and at the flat instance.
+   exercised only on `Q_9`, `Q_10` (R8; here: 19 outer runs, §3.4) and at the flat instance (R8).
 4. **"Worst case against one instance."**  The lower bound is at the zero function; the algorithm's
    own worst instance is not the zero function (engineering division, ENG-RES-0008), and the cost
    table that the theory report quoted until `40c5bd7` was a best case.  This is now corrected in the
@@ -804,7 +972,7 @@ In this order.
 6. **The abort rule.**  A referee who reads Theorem 11.52 as printed (abort *after* the budget is
    exceeded) gets `bound + one inner call`; and one who suspects that the rule is decorative should be
    shown §3.2: with an invalid inner behaviour and a dear last rung the run *does* exceed the budget
-   unless it is stopped, in 33 of 60 runs.
+   unless it is stopped, in 149 of 260 runs.
 
 What a hostile referee would **not** find: an error in the validity of the bracket (it was never in
 doubt), a wrong constant in the count, a tolerance entering the wrong place (the one thing that went

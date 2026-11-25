@@ -614,7 +614,15 @@ model, class, measurement, certificate — could be closed on public fixed-seque
 1. ~~`θ_na` with a `k`-body marginal oracle~~ — unchanged (addendum A1; theory report
    Proposition 11.104; referee's R5).
 2. **Theorem 4 with a field, or any known part without a large translation symmetry.**
-   Open, and the most important limitation of §§2–4 (SCI-REQ-0001 Q2).
+   ~~Open, and the most important limitation of §§2–4~~ **Settled for one-body data with a
+   field (checkpoint 30; workstream F, `workstreams/SF_REPORT.md`; SCI-RES-0006):** neither
+   class exponent changes, for every `n` — the hard instance is a two-component mixture
+   built by a compensation lemma (add a multiple of an extreme additive instance to both
+   members of a pair); at an additive instance the oracle strictly helps for `p ≠ ½`, and
+   the instance-wise exponent is bracketed between explicit matched alternatives and a
+   tilt inequality.  Open: the exact instance-wise exponent; exact marginals of order
+   `≥ 3` with a field (order 2: an exact construction at `n = 13` and a sketch); known
+   parts with interactions; chains.
 3. The thermodynamic oracle I3 (§5): the root of the hidden twin is proved by the referee
    (R6; second reading done, A12).  **At extensive accuracy (addendum A16):** settled for
    `ε₁ ≥ a(u) = KL(σ_u‖½)` (the datum alone suffices; without it the cost is exponential up to

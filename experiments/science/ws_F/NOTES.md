@@ -241,3 +241,5 @@ H5. k ≥ 2: k-transitive group ⇒ k-body matching ⇔ matching the first k fac
   10: base and alternative in class; one-body marginals IDENTICAL as fractions at every site; separation identity
   exact.  (No solver anywhere in this workstream; the only numerics are closed forms, finite sums and 1-D/2-D
   bounded minimisations for the single-letter quantities.)
+* 21:50 — stopped `t05` and `t06` myself (shared machine); their logs `out/t05_run.log`, `out/t06_run.log` are the
+  record (no final `.txt` for these two).  `t07b` left running until its own timeout (light, one core): `out/t07b_run.log`.

@@ -8,3 +8,6 @@ D_2L_off 17 exit 124 (210 runs)
 e2e 21 K1 exit 124
 e2e 22 K16 exit 0
 ALLDONE
+D_2L 16 (rerun) exit 124 (137 runs)
+B_lazy 20 exit 0 (200 runs)
+ALLDONE3

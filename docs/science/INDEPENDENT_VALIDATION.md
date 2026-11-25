@@ -147,6 +147,21 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   sources; no error or warning line).  Statements read against the note: not yet done line
   by line by the coordinator — the workstream's own discrepancy list (four items) is in
   `L1_REPORT.md`.
+* **F (local data with a field; also a review of theory report §11.29 at `dcdfea6`):**
+  re-derived by the coordinator — Lemma 0 (window), Lemma 1 (indistinguishability with an
+  oracle), Lemma 2 (the excess of a dip is the cone law, within `1/(e^r − 1)`), Lemma 3
+  (compensation), every step of the proof of Theorem A, the algebra of Theorem B, and
+  the tilt inequality of Proposition C(a).  Re-run: `t16_exact_rational.py` in a scratch
+  copy — output identical to the committed file (base and alternative have identical
+  one-body marginals as fractions).  Own check, nothing imported from the workstream:
+  `experiments/science/pi_inference/compensation_lemma_check.py` — twelve random cases,
+  `n ≤ 10`: both members in the class, all marginals equal to `3·10⁻¹⁵`, the gap formula
+  exact, and without the compensator the marginals differ by `0.03 … 0.37`.  **Not checked
+  by the coordinator:** the identification with the theory division's `R^max`, `θ_na`
+  (read); Propositions C(b), D, E; Theorem τ; all tables, including the corrections of
+  the theory division's numbers.  This is an *independent derivation* of the theory
+  division's Proposition 11.109 (a)–(d) and a proof of its conjecture (f); it is not a
+  replication of their numerics (their scripts were not run).
 * **L2 (second Lean wave: A11, A13, R6.1, R6.2, R5(2), A1.2 items 1–3):** all three files
   compiled by the coordinator with `lake env lean` (exit 0 each; 65 + 70 + 43 = 178
   `#print axioms` lines, every one `[propext, Classical.choice, Quot.sound]`; no error or

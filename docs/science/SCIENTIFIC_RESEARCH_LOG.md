@@ -585,3 +585,30 @@ profile and the gauche count, and its support function is the ground-state energ
 * **Lesson (again):** a formalisation is the cheapest referee for hypotheses — both times
   (L1, L2) it found the hypothesis that the paper proof used and the statement omitted.
 
+### Cycle 24 — the field case is settled for one-body data; our explanation was wrong (checkpoint 30)
+
+* **Workstream F reported.**  Statement of the coordinator's conjecture: true.  Reason:
+  false.  The excess mass of a dip sits on the cone law, not on Augustin's tilted type
+  (that is the rim), and the capacity-achieving output law is not the Rényi centre for
+  `p ≠ ½`.  With additive bases the matching constraint binds and loses 13–100 % of the
+  exponent.
+* **What makes it true: compensation.**  The class is a convex cone in the weights; add
+  `b` times an extreme additive instance to *both* members of a pair; the excess is
+  untouched and one linear equation fixes `b`.  Theorem A (adaptive, every `n`, every
+  accuracy) and Theorem B (non-adaptive) follow.  The coordinator re-derived the four
+  lemmas and Theorem A, re-ran the exact-rational enumeration, and wrote an independent
+  check.
+* **Instance-wise** the oracle helps (zero residual with a field): a tilt inequality gives
+  an upper bound through the theory division's hinted theorem at shifted fields; dips
+  around shells give a lower bound; the two differ by 1–8 %.
+* **Against the theory division's Proposition 11.109** (published the same afternoon,
+  read by the workstream only after its own results were logged): (a)–(d) agree; (f) is
+  now a theorem; (e) holds in direction, its formula over-counts (a maximiser outside
+  the window), two numbers corrected.  Sent as SCI-RES-0006.
+* **Lessons.**  (1) A conjecture sent with a mechanism should label the mechanism as
+  separately falsifiable — we sent "true because X" and X was wrong (SD36).  (2) Three
+  times today the decisive step was to make a problem *linear or convex in the weights*
+  `e^{−g}`: Holley's sandwich (A11), the energy constraint (A16.5), compensation here.
+  The class is a convex cone in the weights, and the data are linear functionals of
+  them up to normalisation; that is the structure to look for first.
+

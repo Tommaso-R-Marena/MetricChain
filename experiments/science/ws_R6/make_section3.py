@@ -19,7 +19,7 @@ def load(pat):
 DESC = {
     "A_small": ("2L⁺", "theorem", "8 cells, `n_o ∈ {10,…,40}`: Theorem-K2 parameters at `x ∈ {1, 2, 4}`, two general cells, one Corollary-K1.b cell", "valid (10 behaviours)"),
     "A_ties": ("2L⁺", "theorem", "5 cells, `n_o ∈ {24, 32, 100, 120}`, dyadic `λ`, `un/λ ∈ ℕ`, flat fibres, profiles on the level grid", "valid (ends of brackets exactly at `W`)"),
-    "A_medium": ("2L⁺", "theorem", "11 cells, `n_o ∈ {60,…,1000}`, `u ∈ {½, 1, 2, 3}`: bounded regime and four Corollary-K1.b (extensive) cells", "valid (10 behaviours)"),
+    "A_medium": ("2L⁺", "theorem", "12 cells, `n_o ∈ {60,…,1000}`, `u ∈ {½, 1, 2, 3}`: eight bounded-regime cells and four Corollary-K1.b (extensive) cells (12 of the runs are on three earlier extensive cells whose outer sample is trivial)", "valid (10 behaviours)"),
     "B_reducedK": ("2L⁺", "`K ∈ {8, 20, 50}`", "5 cells, `n_o ∈ {40,…,400}`", "valid"),
     "B_invalid": ("2L⁺", "theorem (one cell `K = 20`)", "7 cells, `n_o ∈ {12,…,400}`", "**invalid** (above `W`, below `W`, too wide, trivial, mixtures)"),
     "B_lazy": ("2L⁺", "theorem", "6 cells, `n_o ∈ {40,…,400}`", "**invalid** (LAZY: every refined point reaches the last rung)"),

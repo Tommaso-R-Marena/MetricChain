@@ -564,7 +564,12 @@ exact `k`-body marginals and the exact mean residual energy — the exponent at 
 accuracy is still `h`.
 
 **What the theorem does not cover** — unchanged: any known part without the translation
-symmetry of the uniform cube (workstream F is on the field case); the thermodynamic
+symmetry of the uniform cube (**the field case for one-body data is settled, checkpoint
+30:** workstream F, `workstreams/SF_REPORT.md`, Theorems A and B — with a field a free exact
+one-body oracle changes neither class exponent, for every `n`, by a compensation lemma;
+at an additive instance it does help, and the instance-wise exponent is bracketed;
+two-body data with a field: an exact construction at `n = 13` and a sketch; SCI-RES-0006);
+the thermodynamic
 oracle at extensive accuracy (**addendum A16, added at checkpoint 26: there the
 invariance fails** — beyond `a(u)` nats per site the datum alone gives the answer, and
 below it the exponent is bracketed by a new "plateau twin"); exact marginals of order

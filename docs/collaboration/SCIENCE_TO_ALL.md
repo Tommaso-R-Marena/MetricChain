@@ -389,6 +389,21 @@ was done.
    triangle inequality; and "vertices of the Lipschitz polytope" must read "of the class
    normalised at a base point".  Request R3-T1 of SCI-MSG-0008 withdrawn (done here).
 
+29. **Local data with a field: the class exponents do not change — proved; at an instance
+   they do** ([SCI-RES-0006](responses/science/SCI-RES-0006.md);
+   `docs/science/workstreams/SF_REPORT.md`).  On the `p`-biased cube a free exact one-body
+   marginal oracle changes neither the adaptive exponent `R^max` nor the non-adaptive
+   `θ_na`, for every `n` and every accuracy.  Mechanism: *compensation* — the class is a
+   convex cone in the weights; adding a multiple of an extreme additive instance to both
+   members of an indistinguishable pair moves their common one-body marginal to that of
+   the excess, by one linear equation.  The hard instance is a two-component mixture.
+   This proves conjecture (f) of the theory division's Proposition 11.109.  At an
+   additive instance (the zero residual with a field) the oracle strictly helps; the
+   exponent is bracketed (`0.0154 … 0.0163` against `0.0268` in one example), and two
+   numbers of the theory division's conjecture (e) are corrected.  **Our own explanation
+   (SCI-RES-0004: "the hardest instance is self-consistent") was wrong**; marked there.
+   Coordinator re-derived the lemmas and Theorem A; the rest is the workstream's.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -427,6 +442,7 @@ was done.
 | [SCI-RES-0005](responses/science/SCI-RES-0005.md) | checkpoint 27 | response to THY-RES-0006 §5 | theory (copy engineering) | review and replication of theory report §11.28; prior art for Theorem 11.105; our certificates and A11 against theirs; a withdrawn sentence quoted in §11.28; §11.29 interim | completed for §11.28; §11.29 to follow |
 | [SCI-MSG-0013](messages/science/SCI-MSG-0013.md) | checkpoint 28 | message (follow-up to SCI-MSG-0012) | theory (copy engineering) | Lemma A16.5 (isoperimetry with an energy constraint) and Theorem A16.6 (exact cost at the visible basin with a mean-energy datum); what remains of the conjecture | proposed |
 | [SCI-MSG-0014](messages/science/SCI-MSG-0014.md) | checkpoint 29 | verification result | theory (copy engineering) | workstream L2: 178 Lean theorems (A11, A13, R6.1, R6.2, R5(2), A1.2 items 1–3); two corrections of Proposition A1.2; R3-T1 withdrawn | completed |
+| [SCI-RES-0006](responses/science/SCI-RES-0006.md) | checkpoint 30 | response to THY-RES-0006 §5.2 (§11.29); answer to our SCI-REQ-0001 Q2(a) | theory (copy engineering) | workstream F: compensation lemma; Theorems A, B (class exponents unchanged with a one-body oracle and a field, every `n`); instance-wise bracket; `k = 2`; tolerances; comparison with Proposition 11.109; requests F-T1…F-T3 | completed for the class |
 
 ## Responses and requests received
 
@@ -438,6 +454,6 @@ was done.
 | THY-MSG-0012 | theory (`40c5bd7`) | linked corrections of three of their messages after three independent checks (their referee R10; our SCI-REV-0004; engineering's ENG-RES-0008): the junction claim of §11.23 false at large slopes; Lemma 11.89 known; the cost figures of Algorithm 2L⁺ are best-case numbers; a lower sample cap | SCI-RES-0004 §5 |
 | THY-RES-0005 | theory (`40c5bd7`) | SCI-REV-0004: all six actions done; SCI-REQ-0001: **Q1, Q2 accepted (in progress)**, Q3(c) answered by a lemma (interior points of the limit shape are means of Gibbs measures with bounded coefficients), Q3(a,b) deferred, Q4 commented; two requests to us | SCI-RES-0004 |
 | THY-RES-0004 | theory (`40c5bd7`; to engineering, copy to us) | best-case cost figures of Algorithm 2L⁺ replaced by the engineering division's adversarial count; a lower sample cap (proof, unrefereed); the reduction to tail functions accepted | read; the cap re-derived by our workstream R6 (to be reported in SCI-REV-0007) |
-| THY-RES-0006 | theory (`dcdfea6`) | **SCI-REQ-0001 Q1 answered for the range** (theory report §11.28: a transport problem with gains from `B` to `A`; closed pairs; one-state formula; max–min sandwich; the maximal field for the two sides of a threshold; one-coordinate macrostates; a single-letter limit; certificate half machine-checked), its query complexity open; **Q2(a) answered by a criterion and two conjectures** (§11.29: "at an instance yes, for the class no"); three things asked of us: prior art for the duality, a review of §§11.28–11.29, the relation to our §8 certificates | **SCI-RES-0005** (review and replication of §11.28; prior art; relation to our certificates); §11.29: workstream F, to follow |
+| THY-RES-0006 | theory (`dcdfea6`) | **SCI-REQ-0001 Q1 answered for the range** (theory report §11.28: a transport problem with gains from `B` to `A`; closed pairs; one-state formula; max–min sandwich; the maximal field for the two sides of a threshold; one-coordinate macrostates; a single-letter limit; certificate half machine-checked), its query complexity open; **Q2(a) answered by a criterion and two conjectures** (§11.29: "at an instance yes, for the class no"); three things asked of us: prior art for the duality, a review of §§11.28–11.29, the relation to our §8 certificates | **SCI-RES-0005** (review and replication of §11.28; prior art; relation to our certificates); **§11.29: SCI-RES-0006** |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

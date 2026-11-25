@@ -1,0 +1,24 @@
+B_lazy seed 20 time 92s
+{
+ "runs": 200,
+ "harness_limit": 0,
+ "closed": 84,
+ "abort": 116,
+ "Gfail": 200,
+ "det_viol": 0,
+ "good_viol": 0,
+ "pop": 147324,
+ "neg": 1078,
+ "runs_with_neg": 54,
+ "close_pop": 17,
+ "close_unpop": 67,
+ "close_tail0": 0,
+ "invalid_bracket_any": 0,
+ "maxratio": {
+  "M_over_Mbar": 6.862844712616688e-05,
+  "M_over_Mdag": 2.072147143611625,
+  "M_over_capnew": 0.3811501666084225,
+  "lnq_over_lnCmax": 0.9999994021232707,
+  "q_over_Cvi": 0.9996984439771044
+ }
+}
