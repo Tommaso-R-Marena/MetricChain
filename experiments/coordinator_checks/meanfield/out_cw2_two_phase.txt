@@ -1,0 +1,11 @@
+bJ=1.5 bB=0.0 u=1.0 e=0.0: R_H formula = 0.01109 (m=0.50), R_H dip definition = 0.02545 (m=0.50)   [3s]
+    additive gamma = -0.80: R = 0.00164 (m = 0.94)   [6s]
+    additive gamma = -0.60: R = 0.00354 (m = 0.8599999999999999)   [9s]
+    additive gamma = -0.40: R = 0.00529 (m = 0.7799999999999998)   [12s]
+    additive gamma = -0.20: R = 0.00686 (m = 0.7)   [15s]
+    additive gamma = +0.00: R = 0.00872 (m = 0.41999999999999993)   [18s]
+    additive gamma = +0.20: R = 0.00686 (m = 0.7)   [21s]
+    additive gamma = +0.40: R = 0.00529 (m = 0.7799999999999998)   [24s]
+    additive gamma = +0.60: R = 0.00354 (m = 0.8599999999999999)   [27s]
+    additive gamma = +0.80: R = 0.00164 (m = 0.94)   [30s]
+  max over additive instances: 0.00872 at gamma = +0.00, centre type 0.41999999999999993

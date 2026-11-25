@@ -1,0 +1,4 @@
+bJ=1.5 bB=0.0 u=1.0 G=161
+ e = +0.0000: R_H(dip) = 0.02612 (m=0.50)  R_H(formula) = 0.01097 | at x = e + R_H(dip) = 0.02612: theta_na cone = 0.00208, shell = 0.02498 (m=0.50, z0=(0.70,0.70)) | cone at e + R_H(formula): 0.01097   [1s]
+ e = +0.0100: R_H(dip) = 0.02088 (m=0.50)  R_H(formula) = 0.00624 | at x = e + R_H(dip) = 0.03088: theta_na cone = 0.00092, shell = 0.01976 (m=0.50, z0=(0.70,0.70)) | cone at e + R_H(formula): 0.00624   [3s]
+ e = -0.0100: R_H(dip) = 0.03123 (m=0.50)  R_H(formula) = 0.01650 | at x = e + R_H(dip) = 0.02123: theta_na cone = 0.00372, shell = 0.03080 (m=0.50, z0=(0.30,0.30)) | cone at e + R_H(formula): 0.01650   [4s]
