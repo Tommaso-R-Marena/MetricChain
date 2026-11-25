@@ -1,0 +1,127 @@
+# Inference limits — addenda (material for version 3)
+
+*Science division, coordinator's thread.  2026-11-25.  These statements were obtained after
+the copy of `INFERENCE_LIMITS.md` (version 2) went to our own referee (workstream R3); they
+are kept apart so that the referee's copy does not change under review, and will be merged
+with the referee's corrections.  **They have been read by nobody but their author.**
+Labels and notation as in `INFERENCE_LIMITS.md`.*
+
+---
+
+## A1. The non-adaptive exponent is unchanged by a marginal oracle as well (closes §13, item 1)
+
+**Theorem 4′ [P; uses theory report Theorem 11.45(a), which is machine-checked].**  Cube
+class, zero known part, `u = βc`.  Let `C` be a linear code of dual distance `> k`, and let
+`D_R = n ln(1 + e^{−u}) − ln Σ_j C(n,j) e^{−u·max(j,R)}` be the drop of `ln Z` when a cone is
+flattened at radius `R` (theory report Theorem 11.45(b)).  Consider randomised algorithms
+whose set of evaluated points does not depend on the values of `g` but may depend on **all
+marginals of `μ_g` on at most `k` sites, given exactly and for free**, and which are
+`(ε/2, δ)`-correct for `ln Z` on the class.  If `ε < D_R − ln|C|`, such an algorithm evaluates at
+least `(1 − 2δ)·2ⁿ/(|C|·|B(R−1)|)` points in expectation.
+
+*Proof.*  For a centre `s` put `d_C(x) = d_H(x, s + C)`, `cone^C_s = c·d_C`,
+`flat^C_s = c·max(d_C, R)`.  Both are in the class (a distance to a set is 1-Lipschitz) and
+invariant under translation by `C`, so by Lemma 1 their Gibbs measures have uniform `k`-body
+marginals: on this family the oracle always returns the same answer, and the algorithm
+restricted to the family is non-adaptive in the sense of Theorem 11.45(a).  The two members
+of a pair differ exactly on `{d_C < R}`, a union of `|C|` balls, so every point lies in the
+difference sets of at most `|C|·|B(R−1)|` centres.  It remains to bound the separation.  With
+`A = Z(cone^C_s)`, `F = Z(flat^C_s)`, and `A₁ = (1 + e^{−u})ⁿ`, `F₁` the same for `C = {0}`:
+`t ↦ (e^{−ut} − e^{−uR})₊` is non-increasing and `d_C ≤ d_H(·, s)`, so `A − F ≥ A₁ − F₁`; and
+`e^{−u·max(d_C, R)} = max_{a∈C} e^{−u·max(d_H(·, s+a), R)}` gives `F ≤ |C|·F₁`.  Hence
+`A/F ≥ 1 + (e^{D_R} − 1)/|C| ≥ e^{D_R}/|C|`, that is, `ln A − ln F ≥ D_R − ln|C| > ε`.  Apply Theorem
+11.45(a) with unit weights on the `2ⁿ` centres.  ∎
+
+**Corollary.**  Since `ln|C| ≤ ⌈k/2⌉ ln(2n) = o(n)` and `n⁻¹D_{ρn} → KL(ρ‖p_u)`, the exponent of
+non-adaptive algorithms with the oracle is `θ_na(ε₁)` at extensive accuracies and
+`KL(p_u‖½)` at every bounded accuracy — the values without the oracle (theory report Theorem
+11.45(c)).  Together with Theorem 4: **on the cube class with zero known part, neither the
+adaptive nor the non-adaptive exponent is changed by free, exact knowledge of all `k`-body
+marginals, for every `k = o(n/ln n)`.**
+
+**With a field the answer may be different [C].**  For a `p`-biased reference there is no
+translation symmetry.  A family of dips leaves the `k`-body marginals untouched only if its
+*excess mass* has the marginals of the reference, which forces the type of the centres
+(`τ(1−δ) + (1−τ)δ = p`, `δ` the typical distance inside a dip) and needs centres drawn from a
+`k`-wise independent `τ`-biased law.  An additive counter-term cannot be used to restore the
+marginals, because it would differ from the instance at every point.  So with a field a
+one-body marginal oracle restricts the adversary to dips of one centre type, and the
+exponent with the oracle should be the hinted exponent *restricted to that type* — possibly
+strictly smaller than `R^max` of theory report Theorem 11.64.  If so, local data are worthless
+on the uniform cube only because of its symmetry.  This is a precise question for the
+theory division.
+
+## A2. Extensive stability of maximum-entropy refinement (§6, open item (i))
+
+**Theorem 7′ [P; uses Marton's transport inequality, K].**  In the setting of Theorem 7 let
+`X = ∏_{i≤n} X_i`, let the refined ensemble `ν` be a product measure (for instance: the features
+are single-site), and let the remainder `r` have single-site bounded differences `c`.  Then
+
+    KL(μ‖ν) ≤ n(βc)²/2,        W₁(μ, ν) ≤ nβc/2,
+    |E_μψ − E_νψ| ≤ a·nβc/2   for every ψ with single-site bounded differences a,
+
+`W₁` the transport distance for the Hamming metric.  More generally, if `ν` satisfies
+`W₁(μ′, ν) ≤ (2κn·KL(μ′‖ν))^{1/2}` for all `μ′` (a transport–entropy inequality with constant `κ`;
+`κ = ¼` for product measures), then `KL(μ‖ν) ≤ 2κn(βc)²` and `W₁(μ,ν) ≤ 2κnβc`.
+
+*Proof.*  By Theorem 7(i), `KL(μ‖ν) ≤ KL(μ‖ν) + KL(ν‖μ) = β(E_νr − E_μr) ≤ βc·W₁(μ,ν)`
+(Kantorovich–Rubinstein: `r` is `c`-Lipschitz for the Hamming metric), and
+`W₁ ≤ (2κn·KL(μ‖ν))^{1/2}`; solve for `KL`.  ∎
+
+So the *per-site* error of the refinement for extensive Lipschitz observables is at most
+`2κ·βc`, whatever the size of the system: linear in the strength of the unmeasured part of
+the energy.  The transport constant `κ` is a property of the refined model `ν`, which the
+analyst knows.  *Numerical check* (`extensive_stability_check.py`; cubes of 6–10 sites, 900
+instances, remainders of four kinds): largest `KL/(n(βc)²/2) = 0.12`, largest ratio for
+observables `0.24` — the bound holds with room; Theorem 2 gives `≈ n(βc)²/8` from below, so
+the constant is within a factor four of best possible **[N]**.
+
+## A3. Ratios of macrostate partition functions: a reduction (§7; §13, item 6)
+
+**Proposition 10 [P].**  Let `A, B ⊂ X` be disjoint and `d` an envelope.  Then
+
+    sup_{g admissible} Z_g(A)/Z_g(B)  =  sup_{v admissible on B}  Z_{f + L[v]}(A) / Z_{f+v}(B),
+    L[v](x) = max_{y∈B} ( v(y) − d(y, x) ),
+
+and in the weights `w = e^{−βv}` on `B` the right-hand side is a linear-fractional programme
+(maximise the concave piecewise-linear `Σ_{x∈A} μ₀(x)·min_{y∈B} e^{βd(y,x)} w(y)` subject to
+`Σ_B μ₀w = 1` and `w(y) ≤ e^{βd(y′,y)} w(y′)`).
+
+*Proof.*  Points outside `A ∪ B` do not enter the ratio, and every admissible function on
+`A ∪ B` extends (McShane).  For fixed `v = g|_B`, the admissible `g` on `A` are bounded below by
+`L[v]` (from `v(y) − g(x) ≤ d(y,x)`), and `L[v]` together with `v` is admissible on `A ∪ B` by the
+triangle inequality; the ratio is decreasing in `g|_A`.  ∎
+
+*Special cases.*  `B = {y}`: `sup = Σ_{x∈A} e^{−β(f(x) − f(y) − d(y,x))}` — the odds form of theory
+report Theorem 11.12.  In general `v` is not constant at the optimum: the part of `B` that is
+far from `A` is raised (the three-point example of §7 is the mirror image).  The structure
+of the extremal `v` on product spaces — and whether the programme decomposes over sites
+for macrostates defined by one coordinate or by a counting statistic — is open and is the
+content of our request to the theory division.
+
+## A4. Three ways to compute identified sets under a model, an envelope class and data
+
+For `sup{E_μψ : μ = μ_g, g in the class of constant b, E_μΦ ∈ D}` on a product space:
+
+1. **Exact** — the linear-fractional programme in the weights (§11.4): `|X|` variables,
+   single-site constraints; done up to 10 beads.
+2. **Outer bound, kernel-checkable [P]** — for a *product* reference the class is contained
+   in the divergence ball `KL(μ‖μ₀) ≤ ρ_b := Σ_i K_i(b)`, where `K_i(b)` is the largest
+   divergence of a single-site tilt in the class (`ln 2 − h(σ(b))` for a uniform binary
+   site), and this is exact: by the chain rule every conditional law of `x_i` given
+   `x_{<i}` lies in the single-site class, and the product of the single-site maximisers is
+   in the class.  Then the Donsker–Varadhan certificate of §8 applies with `ρ = ρ_b`: an
+   upper bound from two certified partition functions.  It is an *outer* bound; how loose
+   it is has not been measured (for a reference that is not a product measure, such as a
+   self-avoiding chain, `ρ_b` must be replaced by `n` times the largest single-site
+   divergence over all conditional references).
+3. **Exact for additive targets and single-site data on a product reference [P]** — the
+   conditional law of each site lies in its single-site class, so
+   `sup E_μ Σ_iψ_i = Σ_i sup_{single-site class} Eψ_i`, attained by a product tilt; with data on
+   single-site features the Lagrangian relaxation is exact and the identified set is a
+   `K`-dimensional convex minimisation of a sum of single-site suprema.  (For the mean
+   magnetisation without data this is the half-width `½ tanh(u/2)` of theory report Theorem
+   11.35.)
+
+For targets and features that are pairwise in the site variables only 1 and 2 are
+available; a tractable exact dual is the open problem of §8 ("flows with gains").
