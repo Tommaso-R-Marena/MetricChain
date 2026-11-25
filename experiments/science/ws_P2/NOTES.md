@@ -338,3 +338,38 @@ constructions on folded proteins; mine are exact maxima on small exposed model p
   eps 0.14-0.19; free-energy bracket <= 0.19 nats except Lys/.60 (0.5-1.1 nats).
 * ff03 - ff14SB: exactly pairwise (c_ijk ~ 1e-13); star exact for Leu, Phe, LKSE:4-5; fails for
   Lys (eps* 0.5-11.6).  ff99SB - ff14SB: additive (c_ij = 0), zero for Lys.
+
+## Step 8 — mechanism, long chains, covers (21:36 UTC)
+
+* `an_mech.py` (log `logs/mech.log`, JSON `out/mech_*.json`), on X':
+  - Ser5/E (tau .70): GB c_ij max 2.42, half row 3.73; GBfrozen (radii frozen at argmin f; exactly
+    pairwise) c_ij 2.74; GBfluct = GB - GBfrozen: c_i 1.33, c_ij 0.35, half row 0.42, c_ijk 0.0043.
+    Born radii vary by <= 14 % (mean 4 %).  coul+GB: c_ij 0.69; coul+GBfrozen 0.36.
+  - Ser5/H (.70): GBfluct c_i 3.7, c_ij 1.76, half row 1.69 (radii vary up to 44 %); (.60): c_ij 2.4,
+    half row 3.2 (radii up to 145 %).
+  - Leu12/H (.60): GB c_ij 0.52 but GBfrozen c_ij 0.024: for the apolar side chain the pair
+    coupling is ENTIRELY Born-radius mediated (GBfluct c_ij 0.53); self and cross parts have
+    ranges 91 and 89 kcal/mol that cancel to 3.95.
+  - Phe8/H (.60): GBfrozen c_ij 0.35, GBfluct 0.50.
+  - Lys3/H (.70): GB c_i 51.5, c_ij 17.7; GBfrozen c_ij 21.6 (charge-charge cross terms);
+    GBfluct c_i 13.1, c_ij 6.1; coul+GBfrozen: c_i 2.2, c_ij 1.25; coul+GB c_ij 6.9.
+    (.60): GBfluct c_ij 61 (radii vary up to 227 %) — compact states.
+  - LKSE:5/H (.60): GBfrozen c_ij 10.7, GBfluct 8.8, coul+GBfrozen 4.6.
+  => the pair part of g_GB = (direct screening cross terms, pairwise by construction, ~ minus the
+     vacuum Coulomb interaction) + (Born-radius response, which appears already at second order
+     in the sites because two side chains descreen the same atoms).  Third order is small.
+* `an_long.py` (log `logs/long.log`, JSON `out/long_*.json`), X', lower bounds for GB:
+  max_i c_i(GB) >=  Lys/H (.70): 55.7 (n=4, = exact), 85.5 (8), 110.1 (12), 123.6 (16), 137.9 (24)
+  -> still growing at 24 residues (end residues largest; interior ~75-85);
+  Ser/E: 5.18 (12), 5.25 (24); Ser/H: 9.84 (12), 9.98 (24); Leu/H (.60): 1.15 (24), 1.14 (32);
+  LKSE/H (.60): 60.0 (8), 60.0 (12).  Exact for pair-additive residuals: ff03-ff14SB max c_i
+  Lys/H 9.2, 9.5, 8.7, 8.6, 9.0 (n = 4..24) saturated; Ser 4.8-5.2; Leu 0.85.
+  c_ij(GB) lower bounds by separation, Lys16/H: 17.6 7.2 18.9 17.6 2.8 2.9 7.9 3.2 0.9 1.8 2.2 1.0
+  0.6 1.0 0.9 (helical periodicity, slow decay); Ser24/E: 1.31 2.42 0.33 0.19 0.07 0.05 0.03 0.02 0.01.
+  Third-order lower bounds for central triples: Lys 0.57, Ser/E 0.004, Ser/H 0.019, Leu 0.036.
+* `an_cover.py` (log `logs/cover.log`): first-order (per-site) certificates of min E on X_tau,
+  [lower, greedy upper] at eps = 0:  GB: Ser4/E [53, 156] of 6561; Ser4/H [455, 582] of 2916;
+  Ser5/H [1361, 2172] of 17 496; Lys3/H (.70) [2128, 2128] of 2352; Lys3/H (.60) [15 721, 15 725] of
+  20 718; LKSE:4/H [78, 754] of 7254; LKSE:5/H [68, 800] of 14 508; Phe8/H [2, 4] of 14 014;
+  Leu12/H, Leu14/H, Val8/E: 1 (one evaluation certifies).  ff03: Ser4/E [7, 85]; Ser4/H [2, 24];
+  Lys3/H [28, 30]; LKSE:4/H [2, 8]; Leu12/H 1; Val8/E 1.  Envelope validity kappa_max = 1.0000 in all.

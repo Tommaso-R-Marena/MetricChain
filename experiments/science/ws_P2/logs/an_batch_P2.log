@@ -2553,3 +2553,21 @@
       [26.54  0.   27.14 31.99]
       [32.05 27.14  0.   27.41]
       [39.04 31.99 27.41  0.  ]
+    c_ijk : max 1.021e+01 kcal/mol; sum over the 4 triples 1.340e+01; max by span k-i = 2..: 5.72e-01 1.02e+01
+    fits  : one-site LS rms 6.048 max 39.810 | two-site LS rms 0.1164 max 7.8033  [783000 points, 5430 parameters]
+    (747.2s)
+--- [Xp] coul+GB: range 119.94, std 6.09 kcal/mol
+    c_i   = [70.19 67.   60.08 56.44]   max 70.19 kcal/mol = 117.7 kT;  rms single flip = [4.99 5.45 5.36 4.51]
+    c_ij  : max 61.323 kcal/mol = 102.86 kT; max by separation 1..: 61.323 30.186 28.486
+    half row sums (1/2) sum_j c_ij = [55.17 71.96 63.27 56.13];  Dobrushin-type sums = [3. 3. 3. 3.] (max 3.00)
+    fits  : one-site LS rms 3.602 max 88.974 | two-site LS rms 0.1164 max 7.8033  [783000 points, 5430 parameters]
+    (34.1s)
+--- [Xp] ff03-ff14SB: range 16.65, std 1.92 kcal/mol
+    c_i   = [6.91 9.95 6.88 8.68]   max 9.95 kcal/mol = 16.7 kT;  rms single flip = [1.08 1.61 1.26 1.73]
+    c_ij  : max 4.911 kcal/mol = 8.24 kT; max by separation 1..: 4.911 3.886 3.849
+    half row sums (1/2) sum_j c_ij = [6.32 6.85 6.85 6.32];  Dobrushin-type sums = [2.82 2.86 2.86 2.82] (max 2.86)
+    matrix c_ij:
+      [0.   4.91 3.89 3.85]
+      [4.91 0.   4.91 3.89]
+      [3.89 4.91 0.   4.91]
+      [3.85 3.89 4.91 0.  ]

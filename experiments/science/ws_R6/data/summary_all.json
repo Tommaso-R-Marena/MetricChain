@@ -231,25 +231,25 @@
  },
  "D_2L_off": {
   "S": {
-   "runs": 193,
+   "runs": 210,
    "discarded": 0,
-   "closed": 169,
+   "closed": 183,
    "closed_LgtU": 0,
-   "abort": 24,
+   "abort": 27,
    "abort_cost": 0,
-   "abort_unclassified": 24,
-   "G_failed": 89,
+   "abort_unclassified": 27,
+   "G_failed": 99,
    "det_viol": 0,
    "good_viol": 0,
-   "pop": 196084,
-   "neg": 312,
-   "runs_neg": 30,
-   "close_pop": 53,
-   "close_unpop": 116,
+   "pop": 213063,
+   "neg": 357,
+   "runs_neg": 34,
+   "close_pop": 57,
+   "close_unpop": 126,
    "close_tail0": 0,
-   "invalid_final": 26,
+   "invalid_final": 30,
    "invalid_final_on_G": 0,
-   "close_r_le_rdag": 54,
+   "close_r_le_rdag": 59,
    "q_gt_Cmax": 0
   },
   "max": {
@@ -294,16 +294,16 @@
  },
  "D_2L_off_byK": {
   "(10, 'invalid')": {
-   "runs": 39,
-   "Gfail": 39,
+   "runs": 42,
+   "Gfail": 42,
    "det": 0,
    "good": 0,
-   "abort": 7,
-   "invalid_final": 16,
+   "abort": 8,
+   "invalid_final": 17,
    "invalid_final_on_G": 0
   },
   "(10, 'valid')": {
-   "runs": 39,
+   "runs": 43,
    "Gfail": 7,
    "det": 0,
    "good": 0,
@@ -312,7 +312,7 @@
    "invalid_final_on_G": 0
   },
   "(30, 'valid')": {
-   "runs": 19,
+   "runs": 20,
    "Gfail": 2,
    "det": 0,
    "good": 0,
@@ -321,7 +321,7 @@
    "invalid_final_on_G": 0
   },
   "(None, 'valid')": {
-   "runs": 55,
+   "runs": 57,
    "Gfail": 0,
    "det": 0,
    "good": 0,
@@ -330,40 +330,82 @@
    "invalid_final_on_G": 0
   },
   "(None, 'invalid')": {
-   "runs": 21,
-   "Gfail": 21,
+   "runs": 26,
+   "Gfail": 26,
    "det": 0,
    "good": 0,
-   "abort": 9,
-   "invalid_final": 5,
+   "abort": 10,
+   "invalid_final": 7,
    "invalid_final_on_G": 0
   },
   "(30, 'invalid')": {
-   "runs": 20,
-   "Gfail": 20,
+   "runs": 22,
+   "Gfail": 22,
    "det": 0,
    "good": 0,
-   "abort": 8,
-   "invalid_final": 5,
+   "abort": 9,
+   "invalid_final": 6,
    "invalid_final_on_G": 0
   }
  },
+ "e2e_K1": {
+  "runs": 129,
+  "closed": 129,
+  "abort": 0,
+  "real_brackets": 9786461,
+  "inner_calls": 12363569,
+  "rungs_real": 224,
+  "rungs": 270,
+  "invalid_inner": 0,
+  "runs_with_invalid_inner": 0,
+  "G_failed": 0,
+  "det_viol": 0,
+  "good_viol": 0,
+  "invalid_final": 0,
+  "invalid_final_on_G": 0,
+  "too_wide_final": 0,
+  "max_q_over_Cmax": 0.006040175941347989,
+  "neg": 0,
+  "points": 9352668,
+  "max_width_excess": -0.13950228054812053
+ },
+ "e2e_K16": {
+  "runs": 36,
+  "closed": 36,
+  "abort": 0,
+  "real_brackets": 190365,
+  "inner_calls": 207264,
+  "rungs_real": 65,
+  "rungs": 74,
+  "invalid_inner": 0,
+  "runs_with_invalid_inner": 0,
+  "G_failed": 2,
+  "det_viol": 0,
+  "good_viol": 0,
+  "invalid_final": 0,
+  "invalid_final_on_G": 0,
+  "too_wide_final": 0,
+  "max_q_over_Cmax": 0.00623005950799849,
+  "neg": 0,
+  "points": 125356,
+  "max_width_excess": -0.13692459805358126
+ },
  "three": {
-  "outer_runs": 2,
-  "outer_closed": 2,
+  "outer_runs": 5,
+  "outer_closed": 5,
   "outer_invalid": 0,
   "outer_too_wide": 0,
   "outer_det": 0,
   "outer_good": 0,
-  "middle_runs": 48,
-  "middle_closed": 48,
+  "middle_runs": 192,
+  "middle_closed": 192,
   "middle_invalid": 0,
   "middle_too_wide": 0,
   "middle_det": 0,
   "middle_good": 0,
-  "bottom_brackets": 4073472,
+  "bottom_brackets": 14251858,
   "bottom_invalid": 0,
-  "runs_with_real_bottom": 2,
+  "runs_with_real_bottom": 5,
   "sizes": [
    [
     3,
@@ -376,7 +418,7 @@
     4
    ]
   ],
-  "max_lnq_minus_lnCmax": -6.174665917567701
+  "max_lnq_minus_lnCmax": -6.041134524943182
  },
  "adversarial": [
   {

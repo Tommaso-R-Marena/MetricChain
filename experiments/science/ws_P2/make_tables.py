@@ -118,3 +118,20 @@ for resid in ("GB", "coul+GB", "ff03-ff14SB", "ff15ipq-ff14SB"):
                     print(f"| {res} | {bb} | {tau} | {n} | {r['size_pruned']} | {ifc['sharp_argmin_E']}/{n} | {fmt(ifc['lambda_star'], 3)} | {fmt(ifc['lncosh'], 1)} | {fmt(ifc['jensen'])} | "
                           f"{s['nstar']} | {'yes' if s['rowsum_plain_ok'] else 'no'} | {fmt(max(s['half_rowsum']))} / {fmt(min(s['min_excitation']))} | {fmt(s['eps_star'])} | {fmt(s['bracket'])} | "
                           f"{b.get('nball', '—')} | {fmt(b.get('eps'), 4)} | {fmt(b.get('bracket'), 4)} |")
+
+print("\n## Table E — decay of c_ij(g_GB) with sequence separation and with CB-CB distance (max over pairs at that separation; X')\n")
+print("| system | separation: CB-CB distance (A) -> max c_ij (kcal/mol) |")
+print("|---|---|")
+for (res, n, bb, tau) in (("S", 6, "E", "0.70"), ("S", 6, "H", "0.70"), ("S", 6, "P2", "0.70"), ("V", 12, "E", "0.70"), ("V", 12, "P2", "0.70"),
+                           ("L", 16, "H", "0.60"), ("L", 16, "E", "0.60"), ("F", 10, "H", "0.60"), ("K", 4, "H", "0.70"), ("K", 4, "E", "0.70"),
+                           ("LKSE", 6, "H", "0.60")):
+    r = J.get((res, n, bb, tau))
+    if not r or "Xp|GB" not in r or "C" not in r["Xp|GB"]:
+        continue
+    C = np.array(r["Xp|GB"]["C"]); D = np.array(r["cb_dist"])
+    cells = []
+    for s in range(1, n):
+        v = [(C[i, i + s], D[i, i + s]) for i in range(n - s)]
+        k = int(np.argmax([x[0] for x in v]))
+        cells.append(f"{s}: {np.mean([x[1] for x in v]):.1f} -> {fmt(v[k][0], 3)}")
+    print(f"| {res}{n} on {bb}, tau {tau} | " + "; ".join(cells) + " |")
