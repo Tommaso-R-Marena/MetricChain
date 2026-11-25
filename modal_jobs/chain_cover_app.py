@@ -64,3 +64,34 @@ def main(nmin: int = 1, nmax: int = 24, cut: int = 12, solvers: str = "highs,cps
     for row in analyse.map(texts, kwargs=kwargs, order_outputs=False):
         merge_rows(out, [row], cut)          # written after every row, so a failure loses nothing
         print(format_row(row), flush=True)
+
+
+@app.function(image=image, cpu=8.0, memory=24576, timeout=7200, max_containers=6, retries=0)
+def analyse_generic_chain(n: int, cover_time_limit: float) -> dict:
+    """Generic (off-lattice) chain: enumerate inside the container and bracket the covering numbers."""
+    sys.path.insert(0, "/root/src")
+    from metricchain_eng.chains.generic_analysis import analyse_generic
+
+    return analyse_generic(n, cover_time_limit=cover_time_limit)
+
+
+@app.local_entrypoint()
+def generic(nmin: int = 5, nmax: int = 12, cover_time_limit: float = 300.0):
+    """modal run modal_jobs/chain_cover_app.py::generic --nmin 5 --nmax 12"""
+    import json
+
+    out = ROOT / "experiments" / "eng" / "chain_cover" / "results" / "generic_Sc16.json"
+    out.parent.mkdir(exist_ok=True)
+    rows = json.loads(out.read_text())["rows"] if out.exists() else {}
+    for row in analyse_generic_chain.map(list(range(nmin, nmax + 1)), kwargs={"cover_time_limit": cover_time_limit},
+                                         order_outputs=False):
+        rows[str(row["n_torsions"])] = row
+        out.write_text(json.dumps({"model": "generic chain: bond 1, angle 111 deg, torsions 180/+60/-60, hard core s >= 3 for q-p >= 3",
+                                   "s_cut": 16, "known_part": "#gauche (e = 1)", "residual": "zero",
+                                   "rows": dict(sorted(rows.items(), key=lambda kv: int(kv[0])))}, indent=1) + "\n")
+        c = row["cover"]
+        cell = lambda k: str(c[k]["upper"]) if c[k]["exact"] else f"[{c[k]['lower']},{c[k]['upper']}]"
+        print(f"n={row['n_torsions']:2d} conf={row['conformations']} classes={row['classes']} | L=1: "
+              + " ".join(f"{k.split('eps=')[1]}:{cell(k)}" for k in c if k.startswith("L=1,"))
+              + " | L=1/5: " + " ".join(f"{k.split('eps=')[1]}:{cell(k)}" for k in c if k.startswith("L=1/5,"))
+              + f" | {row['seconds']}s", flush=True)

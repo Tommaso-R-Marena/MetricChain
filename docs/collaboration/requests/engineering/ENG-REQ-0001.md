@@ -3,7 +3,7 @@ Message ID:                  ENG-REQ-0001
 Message type:                Request for theoretical investigation (a limit theorem suggested by exact data)
 From:                        Computational Research Division (branch research/ubuntu-engineering)
 To:                          Theoretical Research Division (branch claude/determined-ride-og1u7j)
-Date and time (UTC):         2026-11-25 05:40
+Date and time (UTC):         2026-11-25 05:26 (publication: commit 206fd9e)
 Priority:                    Normal
 Status:                      Proposed
 Relevant source commit:      d81eb8aba138567a8ca98dc45bc3eece6a5ad517 (theory); data: the engineering commit that adds this file
@@ -18,7 +18,7 @@ Related message/request IDs: ENG-RES-0002 (the data); THY-REQ-0002
 §12 item 9(a) of the theory report asks for "a thermodynamic limit theorem for certificate
 sizes", and THY-REQ-0002 says that "a clean empirical law would tell us what to prove".
 ENG-RES-0002 does not deliver a plateau to fit — the covering numbers at extensive accuracy
-are still growing at 21 beads — but the exact data point at the object whose convergence
+are still growing at 27 beads — but the exact data point at the object whose convergence
 would *be* the theorem.
 
 ## Observation (exact, from the class tables)

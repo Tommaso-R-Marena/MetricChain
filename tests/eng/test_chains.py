@@ -208,3 +208,64 @@ def test_l1_distance_is_the_integral_of_the_profile_difference(dia_enum):
         for c in range(0, tab.n_classes, 3):
             integral = sum(abs(profile(tab.hist[a], s) - profile(tab.hist[c], s)) for s in range(s_cut))
             assert integral == int(D[a, c])                      # unit cells [s, s+1), s = 0 .. S_c - 1
+
+
+# ----------------------------------------------------------------------------- generic (off-lattice) chain
+
+GEN_PUBLISHED = {5: (99, 30), 6: (239, 60), 7: (577, 136), 8: (1393, 291)}        # P_REPORT 3.2 / 3.3
+GEN_PUBLISHED_COVER = {5: (27, 9, 5), 6: (48, 15, 5), 7: (92, 21, 6)}             # (L=1,eps=0), (L=1,eps=N/2), (L=1/5,eps=0)
+
+
+def test_generic_chain_geometry():
+    from metricchain_eng.chains.generic_chain import enumerate_generic
+
+    one = enumerate_generic(1)                       # one torsion: the 1-4 squared distances
+    vals = sorted(round(float(v[0]), 3) for v in one.below)
+    assert vals == [3.819, 6.433]                    # gauche, trans (P_REPORT section 0)
+    assert one.n_conformations == 3 and one.n_classes == 2
+
+
+@pytest.mark.parametrize("n", sorted(GEN_PUBLISHED))
+def test_generic_chain_published_counts(n):
+    from metricchain_eng.chains.generic_chain import enumerate_generic
+
+    tab = enumerate_generic(n)
+    assert (tab.n_conformations, tab.n_classes) == GEN_PUBLISHED[n]
+    assert tab.min_core_margin > 1e-3 and tab.min_rejected_margin > 1e-3      # hard-core decisions are not marginal
+    # mirror reduction is exact
+    full = enumerate_generic(n, mirror=False)
+    assert full.n_conformations == tab.n_conformations and full.n_classes == tab.n_classes
+    assert [int(c) for c in full.count] == [int(c) for c in tab.count]
+
+
+@pytest.mark.parametrize("n", sorted(GEN_PUBLISHED_COVER))
+def test_generic_chain_published_covers(n):
+    from metricchain_eng.chains.generic_analysis import cover_bracket
+    from metricchain_eng.chains.generic_chain import TOL, enumerate_generic
+
+    tab = enumerate_generic(n)
+    D = tab.l1_matrix()
+    g = tab.gmin[None, :].astype(float)
+    got = []
+    for L, eps in ((1.0, 0.0), (1.0, tab.n_beads / 2), (0.2, 0.0)):
+        cell = cover_bracket(g + eps - L * D >= -TOL, time_limit=60)
+        assert cell["exact"]
+        got.append(cell["upper"])
+    assert tuple(got) == GEN_PUBLISHED_COVER[n]
+
+
+def test_generic_profile_distance_is_a_wasserstein_distance():
+    """||sort(s~^x) - sort(s~^y)||_1 equals the integral of |N^x - N^y| over [0, S_c)."""
+    from metricchain_eng.chains.generic_chain import enumerate_generic
+
+    tab = enumerate_generic(5)
+    D = tab.l1_matrix()
+    rng = np.random.default_rng(0)
+    for _ in range(40):
+        a, c = rng.integers(0, tab.n_classes, size=2)
+        pts = np.sort(np.concatenate([tab.below[a], tab.below[c], [0.0, tab.s_cut]]))
+        mid = (pts[1:] + pts[:-1]) / 2
+        Na = np.searchsorted(tab.below[a], mid, side="right")
+        Nc = np.searchsorted(tab.below[c], mid, side="right")
+        integral = float((np.abs(Na - Nc) * np.diff(pts)).sum())
+        assert abs(integral - D[a, c]) < 1e-9

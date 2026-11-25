@@ -20,6 +20,7 @@ commit that adds or last changes the files named).  Costs are in
 | Random seeds | harness: default `20261124` (inside the audit) and `101`, `202`, `303`; benchmarks: the script's own seed 7 |
 | Outputs | `experiments/eng/audit_replication/` |
 | Validation | the audit script's self-test (planted violations must be detected) ran and passed |
+| Later checkpoint | the same audit (`--full`) was repeated on a read-only worktree of the theory head `4cef47e` (46 Lean files, 3101 declarations): `AUDIT PASSED`; log `audit_all_full_4cef47e.log`; reported in ENG-MSG-0002 |
 | Result, interpretation, limitations | ENG-RES-0005 |
 
 ## X-002  Lattice chains: exact covering numbers in the profile format, 1–24 torsions
@@ -29,13 +30,13 @@ commit that adds or last changes the files named).  Costs are in
 | Scientific purpose | Does the chain-length independence of certificate sizes at extensive accuracy (theory report Proposition 11.49(a)) become visible at sizes that can be enumerated?  Entropy of profile sets; realisability of trans/gauche patterns.  (THY-REQ-0002, questions 1, 2, 3(a), lattice part) |
 | Source commit | `d81eb8a`; definitions from `docs/workstreams/P_REPORT.md` §§0, 2.2, 3.2, 3.3 and theory report §11.17 |
 | Mathematical dependencies | `isCertificate_iff_cover` [V]; `pairRes_sub_le` [V]; Proposition 11.49(a) [P, refereed] — see `docs/engineering/DEPENDENCY_MAP.md` |
-| Execution environment | enumeration `n ≤ 20`: local, single core, `cc -O3 -march=native`; `n = 21…24`: Modal, 64 single-core containers per length, `cc -O3` (job M-002).  Covers: Modal, 4 cores per length (job M-004), HiGHS (SciPy 1.18.1) and CP-SAT (OR-Tools 9.15.6755) |
+| Execution environment | enumeration `n ≤ 20`: local, single core, `cc -O3 -march=native`; `n = 21…24`: Modal, 64 single-core containers per length, `cc -O3` (job M-002).  Covers: Modal, 4 cores per length (jobs M-004 for `n ≤ 18`, M-005 for `n = 19…24`), HiGHS (SciPy 1.18.1) and, for `n ≤ 18`, CP-SAT (OR-Tools 9.15.6755).  Single-flip constants and the envelope test: local, single core (`build/dia_flip`; 456 s for mode A at `n = 16`) |
 | Inputs | none external: the diamond-lattice chain model is generated from its definition (tetrahedral angle, torsions 180°/±60°, self-avoidance, pairs with `q − p ≥ 3`, cutoff `S_c = 12`); known part `#gauche`; zero residual |
-| Configuration | `L ∈ {1, 1/5}`; `ε ∈ {0, 1, N/20, N/10, N/4, N/2}`; entropy radii `δN`, `δ ∈ {4, 2, 1, 1/2, 1/4}`; net time limit 60 s per radius |
+| Configuration | `L ∈ {1, 1/5}`; `ε ∈ {0, 1, N/20, N/10, N/4, N/2}`; entropy radii `δN`, `δ ∈ {4, 2, 1, 1/2, 1/4}`; net time limit 60 s per radius; for `n ≥ 19` 300 s per cover programme and rigorous brackets where not proved |
 | Random seeds | none (exhaustive, deterministic) |
 | Outputs | class tables `experiments/eng/chain_cover/data/dia_Sc12_n*.txt` (the complete enumeration result: every profile class with its number of conformations, fewest and most gauche torsions); `results/lattice_Sc12.json`, `results/lattice_Sc12_flip.json`, `results/lattice_Sc12_patterns.json`; `data/flip/` |
 | Validation | (i) class tables equal an independent internal-coordinate construction for `n ≤ 7`; (ii) conformation and class counts equal the published sequences for `n = 5…13`; (iii) all 24 published covering numbers reproduced; (iv) mirror reduction and prefix splitting verified to be exact; (v) the Modal-merged table at `n = 14` equals the local one; (vi) two solvers agree on every cover; (vii) negative control: no pair inside the cutoff ⇒ one class, covering number 1.  `python -m pytest tests/eng -q` (69 tests); `python experiments/eng/chain_cover/run_lattice.py --check` |
-| Result, interpretation, limitations | ENG-RES-0002 |
+| Result, interpretation, limitations | ENG-RES-0002 (updated in place for `n = 20…24`; change note in ENG-RES-0007) |
 
 ## X-003  Exact hitting numbers on the uniform cube (closed form via Harper's theorem)
 
@@ -50,3 +51,18 @@ commit that adds or last changes the files named).  Costs are in
 | Outputs | `experiments/eng/fc_uniform_cube/harper_fc_table.json` |
 | Validation | brute force over all `2^{2ⁿ} − 2` proper nonempty subsets for `n = 2, 3, 4`; consistency with the ratio 2 at `n = 3, 6` reported in `A_REPORT.md` §3 |
 | Result, interpretation, limitations | ENG-RES-0006 |
+
+## X-004  Generic (off-lattice) chain: covering numbers in the profile format, 5–12 torsions
+
+| field | value |
+|---|---|
+| Scientific purpose | THY-REQ-0002 question 1 for the model "gen": does the growth of the profile-format covering numbers level off at extensive accuracy? |
+| Source commit | `d81eb8a`; definitions from `docs/workstreams/P_REPORT.md` §§0, 2.1 (Proposition 2), 3.3 |
+| Mathematical dependencies | as X-002; in addition the identity `‖N^x − N^y‖₁ = ‖sort(s̃^x) − sort(s̃^y)‖_{ℓ¹}` (P_REPORT Proposition 2, [P]), checked numerically in `tests/eng/test_chains.py` |
+| Execution environment | enumeration and covers on Modal, 8 cores and 24 GiB per chain length (jobs M-006 for `n ≤ 9`, M-007 for `n = 10…12`); tie analysis local |
+| Inputs | none external: bond length 1, bond angle 111°, torsions 180°/±60°, hard core `s ≥ 3` for `q − p ≥ 3`, cutoff 16, known part `#gauche`, zero residual |
+| Configuration | `L ∈ {1, 1/5}`; `ε ∈ {0, 1, N/20, N/10, N/4, N/2}`; classes = sorted truncated squared distances rounded to 8 decimals; cover relation with tolerance `10⁻⁹`; HiGHS 300 s per programme (`n ≤ 9`), 90 s (`n = 10…12`) |
+| Random seeds | none |
+| Outputs | `experiments/eng/chain_cover/results/generic_Sc16.json`, `generic_Sc16_ties.json` |
+| Validation | 1–4 distances, conformation and class counts (`n = 5…10`, `n = 12`), and 16 covering numbers of P_REPORT §3.3 reproduced; two published brackets at `n = 10` closed; mirror reduction exact; tie analysis (five exact ties at `n = 11`, none elsewhere; nearest non-tie ≥ `2.9·10⁻⁸`) |
+| Result, interpretation, limitations | ENG-RES-0007 |

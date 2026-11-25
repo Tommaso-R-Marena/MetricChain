@@ -20,6 +20,14 @@ says what connects the two in each case — or that nothing does yet.
 | minimum covers are optimal | — | — | — | two independent solvers (HiGHS, CP-SAT) on an instance reduced by exact dominance rules; reductions and solvers checked against brute force on random instances; label **[X\*]** |
 | chain-length independence at extensive accuracy (what the data are compared with) | theory report Proposition 11.49(a); P_REPORT Theorem 7 | [P], refereed (R6), reviewed (R_P); bound numerically vacuous | z-condition | none needed: the computation tests the *visibility* of the statement at finite size, not the statement |
 
+## Generic chain (ENG-RES-0007; `src/metricchain_eng/chains/generic_chain.py`, `generic_analysis.py`)
+
+| engineering claim | rests on | status upstream | hypotheses the computation must meet | what connects program and statement |
+|---|---|---|---|---|
+| the profile distance of two off-lattice conformations is the `ℓ¹` distance of their sorted truncated squared distances | P_REPORT Proposition 2 (one-dimensional Wasserstein distance) | [P], reviewed | same number of pairs of each type (fixed sequence) | unit test: the sorted-vector formula equals the integral of `|N^x − N^y|` on random pairs of classes |
+| covers on classes with radii `gmin + ε` | as for the lattice chain | engineering argument | zero residual; known part a function of `#gauche` | 16 published covering numbers reproduced |
+| the cover relation is decided correctly in floating point | — | — | — | tie analysis: no comparison within `2.9·10⁻⁸` of equality except five exact ties at `n = 11` (reported, counted as covered); rounding error of a distance ≈ `10⁻¹³`; label **[X\*]** |
+
 ## Uniform-cube hitting numbers (ENG-RES-0006; `experiments/eng/fc_uniform_cube/`)
 
 | engineering claim | rests on | status upstream | hypotheses | connection |

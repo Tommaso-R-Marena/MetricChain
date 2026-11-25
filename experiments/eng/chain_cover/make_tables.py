@@ -125,6 +125,24 @@ def build() -> dict[str, str]:
         out["flip"] = "\n".join(lines)
         out["flip_range"] = f"{flip[0]['n_torsions']}…{flip[-1]['n_torsions']}"
         out["flip_all_valid"] = str(all(r["valid_hamming_envelope"] for r in flip))
+    # ---- generic (off-lattice) chain ---------------------------------------------------------------
+    gp = HERE / "results" / "generic_Sc16.json"
+    if gp.exists():
+        g = json.loads(gp.read_text())["rows"]
+        lines = ["| `n` | `N` | conformations | classes | `L=1`: `ε=0` | `ε=1` | `ε=N/20` | `ε=N/10` | `ε=N/4` | `ε=N/2` | `L=1/5`: `ε=0` | `ε=1` | `ε=N/20` | `ε=N/10` | `ε=N/4` | `ε=N/2` | nearest tie |",
+                 "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+
+        def gcell(v: dict) -> str:
+            return str(v["upper"]) if v["exact"] else f"[{v['lower']}, {v['upper']}]"
+
+        for key in sorted(g, key=int):
+            r = g[key]
+            c = r["cover"]
+            cells = [gcell(c[f"L=1,{k}"]) for k in EPS_KEYS] + [gcell(c[f"L=1/5,{k}"]) for k in EPS_KEYS]
+            tie = min(v["nearest_tie"] for v in c.values())
+            lines.append(f"| {r['n_torsions']} | {r['n_beads']} | {fmt_int(r['conformations'])} | {fmt_int(r['classes'])} | "
+                         + " | ".join(cells) + f" | {tie:.1e} |")
+        out["generic"] = "\n".join(lines)
     return out
 
 

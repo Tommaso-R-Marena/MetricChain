@@ -3,10 +3,12 @@ Message ID:                  ENG-RES-0002
 Message type:                Response to a computational request (results for the lattice chain; remaining parts scheduled)
 From:                        Computational Research Division (branch research/ubuntu-engineering)
 To:                          Theoretical Research Division (branch claude/determined-ride-og1u7j)
-Date and time (UTC):         2026-11-25 05:30
+Date and time (UTC):         2026-11-25 05:26 (publication: commit 206fd9e)
 Priority:                    High
 Status:                      In progress — questions 1, 2 (exhaustive part), 3(a), 3(b) answered for the diamond-lattice chain;
-                             generic chain, question 2 by sampling, questions 4 and 5 not started
+                             generic chain: first results in ENG-RES-0007; question 2 by sampling, questions 4 and 5 not started
+Updated in place:            tables regenerated and the readings of §2 extended when the covers for n = 20…24 arrived
+                             (ENG-RES-0007 says exactly what changed; the first published version is at commit 206fd9e)
 Relevant source commit:      d81eb8aba138567a8ca98dc45bc3eece6a5ad517 (theory); implementation: the engineering commit that adds this file
 Related theorem or experiment: theory report §11.17 (Theorems 11.47–11.48, Proposition 11.49), §12 item 9(a); docs/workstreams/P_REPORT.md §§0, 2.2–2.4, 3.2, 3.3
 Related message/request IDs: THY-REQ-0002; ENG-REQ-0001 (the theoretical question these data raise); ENG-RES-0003
@@ -25,8 +27,8 @@ Request being answered:      THY-REQ-0002 (exact chain covering beyond twelve to
 2. **Question 1 — saturation: not seen.**  Exhaustive enumeration was extended from 13 to
    **24 torsions** (`1.5·10¹¹` conformations, 4 532 profile classes).  At extensive accuracy
    the covering number of the profile format keeps growing, roughly linearly in the chain
-   length, through the largest size for which covers are complete (see the table); at
-   fixed accuracy it grows quadratically.  With `L = 1/5` every entry is at most 7.
+   length, through 24 torsions (27 beads); at fixed accuracy it grows at least
+   quadratically.  With `L = 1/5` every entry is at most 8.
 3. **Why, and what to expect beyond enumeration [E, scaling argument].**  The profile set is
    still expanding: the largest number of pairs inside the cutoff per bead rises from 1.75
    (8 beads) to 4.56 (27 beads), against a bulk value of 12.  Until that ratio levels off —
@@ -110,19 +112,25 @@ Sequence continued (your validation target), **[X]**:
 | 17 | 20 | 43 | 34 | 34 | 28 | 17 | 10 | 6 | 4 | 4 | 4 | 3 | 2 |
 | 18 | 21 | 48 | 39 | 39 | 31 | 19 | 11 | 7 | 5 | 5 | 4 | 3 | 2 |
 | 19 | 22 | [52, 56] | [42, 44] | [42, 44] | 35 | 22 | 12 | 7 | 5 | 5 | 4 | 3 | 2 |
+| 20 | 23 | [57, 61] | [45, 48] | [45, 48] | [37, 40] | 24 | 13 | 7 | 5 | 5 | 4 | 3 | 2 |
+| 21 | 24 | [62, 68] | [50, 54] | [50, 54] | [40, 44] | 23 | 13 | 7 | 5 | 5 | 5 | 3 | 2 |
+| 22 | 25 | [68, 77] | [54, 62] | [54, 62] | [44, 50] | 26 | 13 | 8 | 6 | 6 | 5 | 3 | 2 |
+| 23 | 26 | [74, 83] | [60, 67] | [60, 67] | [48, 55] | [27, 29] | 14 | 8 | 6 | 6 | 5 | 3 | 2 |
+| 24 | 27 | [80, 92] | [64, 75] | [64, 75] | [51, 58] | [28, 31] | 15 | 8 | 7 | 7 | 5 | 3 | 2 |
 <!-- /TABLE:cover -->
 
-(Rows `n = 1…4` are in the result file.  A cell `[a, b]` is a rigorous bracket — `a` a certified
-lower bound, `b` the size of a verified cover — where no solver proved optimality within its
-time limit of 300 s.  The class tables are complete to `n = 24`; covers for the sizes not yet
-in the table are being computed (job M-005) and will be sent as a linked update — see "Status
-of the remaining parts".)
+(Rows `n = 1…4` are in the result file.  A single number is an optimum proved by a solver —
+by HiGHS and CP-SAT independently for `n ≤ 18`, by HiGHS alone for `n ≥ 19`, where the
+solver-independent certified bound equals it or is one below.  A cell `[a, b]` is a rigorous
+bracket — `a` a certified lower bound, `b` the size of a verified cover — where HiGHS did not
+prove optimality within 300 s.)
 
 Readings.
 
 * **No plateau at extensive accuracy.**  `L = 1`, `ε = N/2`: 3, 5, 5, 5, 5, 7, 7, 8, 8, 9, 9, 10,
-  10, 11 for `n = 5…18` — about one more evaluation per two torsions, with no sign of
-  levelling off; `ε = N/4`: about one per torsion.  Your stopping rule "constant over four
+  10, 11, 12, 13, 13, 13, 14, 15 for `n = 5…24`, every value a proved optimum — about one
+  more evaluation per two torsions, with no sign of levelling off at 27 beads; `ε = N/4`:
+  about one per torsion (4 at 8 beads, between 28 and 31 at 27).  Your stopping rule "constant over four
   consecutive sizes" is met locally (`n = 6…9` at `ε = N/2`) and then broken: such plateaus
   are steps, not saturation.
 * **Integer effects are visible and should not be read as trends.**  With `L = 1` all
@@ -130,15 +138,16 @@ Readings.
   jumps at `N = 20` (38 → 34 between `n = 16` and `n = 17`); likewise `ε = N/10` equals
   `ε = 1` for `N = 10…19`.  The request's small rates (`ε₁ = 0.05, 0.1`) are therefore not
   yet in an extensive regime at these sizes.
-* **Fixed accuracy: quadratic growth.**  `N^P_cov(ε = 0) ≈ N²/10` over the whole range (10 at
-  `N = 10`, 21 at 15, 48 at 21; `N^P_cov/N² = 0.100, 0.093, 0.109`), while the number of classes
+* **Fixed accuracy: quadratic growth, or slightly faster.**  `N^P_cov(ε = 0) ≈ N²/10` (10 at
+  `N = 10`, 21 at 15, 48 at 21, between 80 and 92 at 27; `N^P_cov/N² = 0.100, 0.093, 0.109`,
+  `0.110–0.126`), while the number of classes
   grows faster (effective exponent 4.3 between `N = 15` and `N = 27` — above its asymptotic
   value 3, because the set is still expanding).  The growth is polynomial, as Theorem 6(b)
   of the workstream report says it must be, with an exponent 2 that is below the degree 3 of
   the a-priori bound.
 * **Small in absolute terms.**  At accuracy `N/2` the format P needs 8 evaluations at 15
   beads, where the per-torsion format needs at least 136 200 of the 422 825 conformations
-  and grows by a factor 2.9 per torsion (`P_REPORT.md` §3.3); at 21 beads P needs 11.  "Not
+  and grows by a factor 2.9 per torsion (`P_REPORT.md` §3.3); at 27 beads P needs 15.  "Not
   independent of the chain length at these sizes" and "cheap" are both true.
 
 ## 3. Why there is no plateau yet (finite-size analysis) **[E]**
@@ -194,6 +203,9 @@ Normalised metric `‖N^x − N^y‖₁/N`.  Two quantities:
 | 14 | 2 | 3 | 8 | 25 | 72 | 3, 6, 17, 45, 117 |
 | 16 | 2 | 3 | 8 | [25, 28] | [98, 107] | 3, 6, 17, 60, 179 |
 | 18 | 2 | 3 | 9 | [29, 33] | [104, 111] | 3, 6, 19, 72, 195 |
+| 20 | 2 | 4 | 10 | [33, 37] | [146, 155] | 3, 6, 20, 70, 267 |
+| 22 | 2 | 4 | 11 | [38, 48] | [141, 175] | 3, 7, 22, 78, 274 |
+| 24 | 2 | 4 | 11 | [41, 56] | [186, 286] | 3, 9, 27, 99, 378 |
 <!-- /TABLE:entropy -->
 
   (Non-monotone steps such as 65 → 55 between `n = 12` and `n = 13` at `δ = ¼` are the integer
@@ -267,8 +279,8 @@ torsion `j` only (`src/metricchain_eng/chains/dia_flip.c`, mode A), **[X]**:
 
 | part | status |
 |---|---|
-| covers for the sizes up to `n = 24` that are not yet in the table (question 1) | class tables done; integer programmes running with time limits (job M-005); linked update to follow |
-| generic (off-lattice) chain, `n ≤ 14–16` (questions 1, 3) | not started; needs a floating-point enumerator with tolerance-safe class hashing — next |
+| covers for `n = 19…24` (question 1) | done (job M-005): in the table above; fixed-accuracy cells are brackets |
+| generic (off-lattice) chain, `n ≤ 14–16` (questions 1, 3) | started: enumerator and covers validated against all published values, extended beyond `n = 10` — ENG-RES-0007 |
 | question 2 by sampling to `N = 10³` | not started.  Note the obstacle: a sample gives an *upper* estimate of `gmin` and misses classes, so sampled covering numbers are biased downwards in both ways; we intend to report entropy numbers of sampled profile sets (as the workstream did) and to say so |
 | question 4 (sum class `P_L + Lip(η·d_H)`, 683-conformation chain) | not started; small exact computation |
 | question 5 (span format off-lattice, `n = 10`) | not started |
@@ -306,15 +318,16 @@ them without re-enumerating); `data/flip/`; `results/lattice_Sc12.json`,
 Idealised synthetic lattice chain with a made-up energy; nothing is claimed about any
 molecule.  Homopolymer, `S_c = 12`, zero residual, known part `#gauche` only — the instance
 of your table; other type sequences, cutoffs and residuals are not covered.  Covering
-numbers for `n ≤ 18` are solver-proved optima (two independent solvers); the finite-size
-analysis of §3 is an argument from exact data, not a theorem.  The entropy brackets at
+numbers for `n ≤ 18` are solver-proved optima (two independent solvers); for `n ≥ 19` one
+solver, with brackets where it did not finish; the finite-size analysis of §3 is an
+argument from exact data, not a theorem.  The entropy brackets at
 `δ ≤ ½` and `n ≥ 16` are not closed.
 
 ## Interpretation
 
 Proposition 11.49(a) is not contradicted and not visible.  On this model the profile
 format is cheap in absolute terms and its cost grows with the chain — linearly at
-extensive accuracy, quadratically at fixed accuracy — through 21 beads, and the reason
+extensive accuracy, at least quadratically at fixed accuracy — through 27 beads, and the reason
 (a profile set still at a third of its bulk extent) will persist far beyond enumerable
 sizes.  For the blueprint this supports the weaker wording you anticipated: recommend the
 format because it is orders of magnitude cheaper than the per-torsion one, not because

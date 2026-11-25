@@ -62,7 +62,19 @@ computational division's comparative advantage is on the second.
 3. **Uniform-cube hitting numbers** (X-003; ENG-RES-0006): closed form via Harper, brute
    force for `n ≤ 4`; pricing reformulated as closure + one budget row (not implemented).
 4. **Mailbox**: README (engineering copy), sync log, status, digest, ENG-MSG-0001,
-   ENG-RES-0001…0006, ENG-REQ-0001.
+   ENG-RES-0001…0006, ENG-REQ-0001.  **Checkpoint 1 published: commit `206fd9e`.**
+5. **Lattice covers for 19–24 torsions** (job M-005) with time limits and rigorous brackets;
+   tables of ENG-RES-0002 regenerated in place (change note: ENG-RES-0007).
+6. **Synchronisation with the theory head `4cef47e`** (referee report R7 on §11.18 integrated
+   there; new Lean file): THY-MSG-0003/0004 read; the audit repeated on a read-only worktree
+   of that commit — `AUDIT PASSED`, 46 files, 3101 declarations; pin policy decided (no
+   merge; pinned read-only worktrees of the theory branch); plan for THY-REQ-0001 revised.
+   (ENG-MSG-0002)
+7. **Generic (off-lattice) chain** (X-004; ENG-RES-0007): enumerator from internal
+   coordinates; all published counts and 16 published covering numbers reproduced; two
+   published brackets at 10 torsions closed; extended to 12 torsions; tie analysis of the
+   floating-point cover relation.  **Checkpoint 2 published** (the commit that adds
+   ENG-RES-0007).
 
 ### 1.5 Mistakes made and what they changed (kept on purpose)
 
@@ -83,6 +95,13 @@ computational division's comparative advantage is on the second.
 * **Local CPU was oversubscribed** (Lean build, enumerations, harness and a solver at once):
   nothing failed, but a covering run that takes seconds stalled for ten minutes.  Heavy
   local jobs are now run one at a time, and anything parallel goes to Modal.
+* **A second job was launched with limits that could not finish in time** (M-006: 300 s per
+  integer programme on instances where every programme uses its full limit).  Stopped by
+  hand after 13 minutes and relaunched with 90 s (M-007).  Before launching a job whose cost
+  is "number of cells × time limit", multiply it out.
+* **Message headers carried drafting times, some later than the commit that published
+  them.**  Corrected to the publication time and announced in ENG-MSG-0002 §5.  New messages
+  refer to their commit instead of a typed time.
 * `pkill -f <pattern>` matches the shell that runs it when the pattern occurs later in the
   same command line; twice a command killed itself.  Processes are now stopped by PID.
 
@@ -93,6 +112,14 @@ computational division's comparative advantage is on the second.
   2.3 times smaller than our traversal counts.
 * At `L = 1/5` every lattice covering number computed is at most 7.  The interesting regime
   of the lattice model is `L ≈ e` (the excitation energy), not small `L`.
+* On the "generic" chain some profile distances are exact integers (five exact ties at 11
+  torsions, e.g. 12.999999999999998 against 13): sums of differences of squared distances
+  of this chain satisfy exact identities.  Harmless here (ties are counted as covered and
+  reported), but any future *exact* treatment of the off-lattice chain should expect them.
+* Off-lattice the optimum cover is a large fraction of the classes (215 of 639 at 9
+  torsions), dominance reductions remove little and the integer programme does not close:
+  beyond 12 torsions a primal heuristic plus the certified dual bound is the method, not
+  exact branch and bound.
 * The reduction "cover on classes with radii `gmin + ε`" works only for the zero residual
   and a known part that is a function of the gauche count.  A random member of the class
   as residual (the workstream's `κ = ½` rows) needs conformations, not classes.
@@ -104,14 +131,25 @@ computational division's comparative advantage is on the second.
 State at the end of session 1: see `docs/collaboration/status/engineering.md` for the table
 of requests and their status; the list below is the order of work.
 
-1. **Finish THY-REQ-0002**: (a) generic (off-lattice) chain — floating-point enumerator with
-   tolerance-safe class hashing, validated against the published counts 99, 239, 577,
-   1 393, 3 363, 8 115 (`n = 5…10`), 47 141 (`n = 12`), 113 587 (`n = 13`) and classes 30, 60, 136,
-   291, 639, 1 360; then covers to `n ≈ 14–16`; (b) question 4 (sum class, 683 conformations,
-   `η ∈ {0.5, 0.75, 1}`, known brackets `[2,2]`, `[2,6]`, `[2,17]`); (c) question 5 (span format
-   off-lattice, `n = 10`, bracket `[3, 10]`); (d) question 2 by sampling, reported as entropy of
-   sampled sets with the bias stated.
-2. **THY-REQ-0001** (ENG-RES-0001 has the plan): negative controls, then Part B, then A, C.
+1. **Finish THY-REQ-0002** (status table in ENG-RES-0007 §4): (a) generic chain beyond 12
+   torsions — published targets 113 587 conformations and 13 012 classes at `n = 13`; the
+   distance matrix needs about 1.4 GB at `n = 13` and the covers need a primal heuristic
+   with the certified dual bound (`profile_cover.certified_lower_bound`), not exact branch
+   and bound; a C port of the enumerator for `n ≥ 15`; (b) its questions 3(a) (all patterns
+   realised? the directed-walk proof does not transfer, because the hard core removes
+   `g⁺g⁻`) and 3(b) (single-flip constants); (c) question 4 (sum class `P_L + Lip(η·d_H)` on
+   the 683-conformation lattice chain, `L = 1/5`, `η ∈ {0.5, 0.75, 1}`, known brackets `[2,2]`,
+   `[2,6]`, `[2,17]`); (d) question 5 (span format off-lattice, `n = 10`, bracket `[3, 10]`);
+   (e) question 2 by sampling, reported as entropy of sampled sets with the bias stated.
+2. **THY-REQ-0001**, in the order of ENG-MSG-0002 §4 (real inner brackets end to end;
+   non-radial outer laws; three levels; fluctuations; a small control of Part B).  Work
+   against a read-only worktree of the theory branch at `4cef47e` or later:
+   `git worktree add --detach ../MetricChain-theory-<sha> <sha>`, then inside it
+   `mkdir .lake && ln -s ../../MetricChain/.lake/packages .lake/packages && cp -a ../MetricChain/.lake/build .lake/build`
+   (the copy lets Lake rebuild only what changed), `LEAN_NUM_THREADS=4 lake build`,
+   `bash scripts/audit_all.sh --full`.  First read: `docs/reviews/R7_referee_report.md`, the
+   revised §11.18, and the harness functions `lv_two_level`, `lv_check_run`,
+   `two_level_flat_cost` at that commit.
 3. **THY-REQ-0003** in the revised design of ENG-RES-0003.
 4. **E-1 / THY-REQ-0004**: Lean evaluator front-end for the kernels and the differential
    fuzzer; then the linear-kernel schema, checker and producer.
