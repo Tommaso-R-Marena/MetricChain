@@ -416,19 +416,24 @@ proved for bridges off a countable, unidentified set of accuracies and is a conj
 walks **[C]**; our estimate of the limit is a few hundred and of the chain length at which it is
 approached `10³`–`10⁵` beads or more **[N/H]**."
 
-**M2.  The section understates its own lower bound and overstates how much of the body is known.**
-*Where:* Theorem 11.71(c), column "lower bound for the liminf"; Proposition 11.72, "How much of the
-body is known".
+**M2.  The proved bracket is not the one in the table: the lower bound more than doubles with the
+section's own tools, while the inner volume "2.2" and "five vertices settled" are not proved.**
+*Where:* Theorem 11.71(c), column "lower bound for the liminf" (and every place that quotes "50");
+Proposition 11.72, paragraph "How much of the body is known" (line 4949: "So `2.2 ≲ vol 𝒦 ≤ 3.125` … with
+five vertices settled").
 *What:* the lower bounds use only the triangle `T₀`, although the explicit bridges that the
 workstream built — together with Theorem 11.69, which is exactly the tool that turns one finite
-bridge into a point of `K^{br}` — prove much more (N2, N3).  Conversely "`2.2 ≲ vol 𝒦`", "five
-vertices settled" and the table's "estimate of the plateau" rest on the routing lemma that is
-missing (the report says so in a parenthesis and then drops the qualification).  Proved: three
-vertices (`(0,0,0)`, `(½,2,3/2)`, `(1,5,6)`), `vol 𝒦 ≥ 1.56`.
+bridge into a point of `K^{br}` — prove much more (N2, N3): `≥ 116`, `451`, `8`, `19` instead of `50`, `157`,
+`7`, `14`.  Conversely "`2.2 ≲ vol 𝒦`", "five vertices settled" and the "estimate of the plateau" rest on
+the routing lemma that is missing; the paragraph is labelled [N] and says "a sketch otherwise", but
+the two vertices `(0,3,4)`, `(½,4,9/2)` are then counted as settled and the figure `2.2` is carried into
+the summaries (§8 of the theory report: "partly a sketch").  Proved: three vertices, `vol 𝒦 ≥ 1.56`.
 *Why it matters:* the bracket for the limit points is the quantitative content of the section; the
-correct proved bracket is `[116, 3 627]` at `(1, ½)`, a factor 31 instead of 73.
+proved bracket at `(1, ½)` is `[116, 3 627]`, a factor 31 instead of 73, and the value at 27 beads is a
+factor 8 (not 3.3) below every limit point.
 *Suggested correction:* replace the column by the bounds of N3 (or better ones: larger boxes and a
-better packing will raise them), and write "`1.56 ≤ vol 𝒦 ≤ 3.125` proved; `≈ 2.2` expected".
+better packing will raise them), write "`1.56 ≤ vol 𝒦 ≤ 3.125` proved; `≈ 2.2` expected [N]" and "three
+vertices proved, two supported by finite bridges within 10 %".
 
 ### Minor
 

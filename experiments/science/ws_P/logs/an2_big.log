@@ -1,0 +1,84 @@
+
+================ A3 n = 5: 10 torsion sites, clash-free (tau=0.7) 28843 of 59049
+--- GB: first-order c_i max 27.48;  second-order c_ij: max 28.84 kcal/mol = 48.4 kT
+    max c_ij by separation |i-j| = 1..: 28.84 28.76 24.88 19.16 17.02 11.46 10.43 6.04 8.05
+    mean c_ij by separation:           22.67 20.71 16.69 13.00 13.14 9.07 8.39 5.57 8.05
+    half row sums (1/2) sum_j c_ij: [54.81 57.42 76.12 79.34 80.96 87.96 76.13 89.1  52.43 56.63]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 9.00 (Theorem 11.33(a) needs < 1)
+--- coul+GB: first-order c_i max 15.52;  second-order c_ij: max 14.44 kcal/mol = 24.2 kT
+    max c_ij by separation |i-j| = 1..: 14.44 12.73 10.77 11.77 9.32 8.76 9.61 4.80 3.75
+    mean c_ij by separation:           12.12 9.14 8.95 8.23 7.53 6.54 7.47 4.61 3.75
+    half row sums (1/2) sum_j c_ij: [33.71 36.75 37.09 46.98 34.44 47.09 43.28 48.09 34.   32.07]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 8.99 (Theorem 11.33(a) needs < 1)
+--- ff03-ff14SB: first-order c_i max 4.64;  second-order c_ij: max 3.22 kcal/mol = 5.4 kT
+    max c_ij by separation |i-j| = 1..: 3.22 2.70 2.28 2.05 1.92 1.34 1.31 0.95 0.68
+    mean c_ij by separation:           2.43 2.02 1.65 1.48 1.44 1.03 1.09 0.74 0.68
+    half row sums (1/2) sum_j c_ij: [5.54 5.49 8.   7.88 8.71 9.24 8.84 9.01 7.87 4.64]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 6.00 (Theorem 11.33(a) needs < 1)
+--- ff15ipq-ff14SB: first-order c_i max 5.00;  second-order c_ij: max 5.55 kcal/mol = 9.3 kT
+    max c_ij by separation |i-j| = 1..: 5.55 4.96 4.15 2.57 2.68 2.52 2.05 1.23 1.63
+    mean c_ij by separation:           4.40 3.85 3.06 2.23 2.19 1.97 1.70 1.21 1.63
+    half row sums (1/2) sum_j c_ij: [ 8.66 10.69 13.63 15.19 14.75 16.44 15.62 15.   10.82 12.43]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 7.81 (Theorem 11.33(a) needs < 1)
+--- ff19SB-ff14SB: first-order c_i max 2.59;  second-order c_ij: max 2.48 kcal/mol = 4.2 kT
+    max c_ij by separation |i-j| = 1..: 2.48 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+    mean c_ij by separation:           1.38 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+    half row sums (1/2) sum_j c_ij: [1.24 1.24 1.24 1.24 1.24 1.24 1.24 1.24 1.24 1.24]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 0.78 (Theorem 11.33(a) needs < 1)
+--- ff99SB-ff14SB: first-order c_i max 0.64;  second-order c_ij: max 0.00 kcal/mol = 0.0 kT
+    max c_ij by separation |i-j| = 1..: 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+    mean c_ij by separation:           0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+    half row sums (1/2) sum_j c_ij: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 0.00 (Theorem 11.33(a) needs < 1)
+--- OBC2-GBn2: first-order c_i max 5.78;  second-order c_ij: max 5.22 kcal/mol = 8.8 kT
+    max c_ij by separation |i-j| = 1..: 5.22 5.16 4.20 4.27 3.01 3.00 2.35 1.81 1.02
+    mean c_ij by separation:           3.96 3.03 2.73 2.31 2.25 1.76 1.90 1.34 1.02
+    half row sums (1/2) sum_j c_ij: [ 7.38 12.25  8.54 15.88 11.06 15.6  13.69 15.74 10.44 10.02]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 7.77 (Theorem 11.33(a) needs < 1)
+--- f: first-order c_i max 42.31;  second-order c_ij: max 34.75 kcal/mol = 58.3 kT
+    max c_ij by separation |i-j| = 1..: 34.24 34.75 29.77 23.61 20.60 15.02 16.70 14.43 13.03
+    mean c_ij by separation:           27.98 24.29 22.46 16.90 16.88 13.00 14.98 13.79 13.03
+    half row sums (1/2) sum_j c_ij: [ 79.48  78.76  96.66 101.36  96.26 113.12  93.37 110.07  80.41  77.25]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 9.00 (Theorem 11.33(a) needs < 1)
+
+================ A2 n = 8: 16 torsion sites, clash-free (tau=0.7) 35478 of 65536
+--- GB: first-order c_i max 18.35;  second-order c_ij: max 16.15 kcal/mol = 27.1 kT
+    max c_ij by separation |i-j| = 1..: 16.15 15.96 10.73 13.83 10.76 13.12 8.81 7.82 7.80 6.85 9.27 7.92 10.82 8.22 6.82
+    mean c_ij by separation:           10.89 12.33 8.09 7.08 6.79 7.24 6.33 6.12 5.80 5.58 6.28 5.17 6.64 5.64 6.82
+    half row sums (1/2) sum_j c_ij: [44.9  48.53 59.05 67.51 66.69 62.84 63.84 59.99 61.27 63.09 63.72 64.08 55.73 55.41 36.61 70.  ]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 14.96 (Theorem 11.33(a) needs < 1)
+--- coul+GB: first-order c_i max 15.46;  second-order c_ij: max 11.78 kcal/mol = 19.8 kT
+    max c_ij by separation |i-j| = 1..: 9.89 11.78 7.79 9.43 7.51 5.82 6.69 5.62 5.24 5.49 4.91 3.43 4.84 3.69 3.78
+    mean c_ij by separation:           5.06 6.13 4.90 4.81 4.87 4.07 4.32 4.00 3.73 3.82 3.59 2.70 3.27 3.34 3.78
+    half row sums (1/2) sum_j c_ij: [33.54 22.92 28.32 35.59 35.49 37.69 35.47 32.47 38.04 43.69 36.28 42.18 29.97 43.78 27.61 23.29]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 14.53 (Theorem 11.33(a) needs < 1)
+--- ff03-ff14SB: first-order c_i max 2.18;  second-order c_ij: max 2.60 kcal/mol = 4.4 kT
+    max c_ij by separation |i-j| = 1..: 2.60 1.39 1.32 1.07 1.10 1.21 1.04 1.53 1.02 0.70 0.87 0.61 0.70 0.70 0.39
+    mean c_ij by separation:           1.30 1.06 1.04 0.81 0.85 0.85 0.77 0.79 0.71 0.62 0.62 0.58 0.55 0.61 0.39
+    half row sums (1/2) sum_j c_ij: [5.17 5.42 5.81 7.04 7.86 6.67 7.56 6.2  7.88 7.57 7.2  7.07 7.32 6.49 5.63 5.15]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 6.14 (Theorem 11.33(a) needs < 1)
+--- ff15ipq-ff14SB: first-order c_i max 5.59;  second-order c_ij: max 3.99 kcal/mol = 6.7 kT
+    max c_ij by separation |i-j| = 1..: 3.42 3.99 2.75 3.43 2.10 3.24 2.14 2.10 2.20 2.07 1.96 1.93 2.06 2.35 1.33
+    mean c_ij by separation:           2.21 2.57 1.72 1.67 1.59 1.74 1.57 1.42 1.45 1.40 1.43 1.18 1.28 1.63 1.33
+    half row sums (1/2) sum_j c_ij: [ 8.7  13.33 11.26 14.03 12.01 13.87 13.33 13.52 14.06 14.05 13.48 15.52 12.51 13.56  9.21 18.12]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 11.20 (Theorem 11.33(a) needs < 1)
+--- ff19SB-ff14SB: first-order c_i max 1.40;  second-order c_ij: max 1.39 kcal/mol = 2.3 kT
+    max c_ij by separation |i-j| = 1..: 1.39 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+    mean c_ij by separation:           0.74 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+    half row sums (1/2) sum_j c_ij: [0.69 0.69 0.69 0.69 0.69 0.69 0.69 0.69 0.69 0.69 0.69 0.69 0.69 0.69 0.69 0.69]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 0.52 (Theorem 11.33(a) needs < 1)
+--- ff99SB-ff14SB: first-order c_i max 0.64;  second-order c_ij: max 0.00 kcal/mol = 0.0 kT
+    max c_ij by separation |i-j| = 1..: 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+    mean c_ij by separation:           0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+    half row sums (1/2) sum_j c_ij: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 0.00 (Theorem 11.33(a) needs < 1)
+--- OBC2-GBn2: first-order c_i max 2.39;  second-order c_ij: max 1.85 kcal/mol = 3.1 kT
+    max c_ij by separation |i-j| = 1..: 1.46 1.85 1.41 1.25 1.53 1.31 1.16 1.27 1.08 1.22 1.25 0.59 1.20 0.42 0.42
+    mean c_ij by separation:           1.05 1.24 0.91 0.85 0.96 0.84 0.87 0.78 0.62 0.78 0.64 0.45 0.69 0.36 0.42
+    half row sums (1/2) sum_j c_ij: [6.67 4.66 3.63 7.39 6.77 8.5  6.75 6.64 7.13 6.47 6.74 8.27 5.69 8.38 5.79 5.75]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 6.48 (Theorem 11.33(a) needs < 1)
+--- f: first-order c_i max 26.23;  second-order c_ij: max 20.23 kcal/mol = 33.9 kT
+    max c_ij by separation |i-j| = 1..: 16.97 19.11 17.59 17.42 17.36 20.23 11.81 17.68 15.58 15.41 14.70 9.50 14.63 11.12 9.58
+    mean c_ij by separation:           11.95 13.46 11.87 10.73 11.92 11.31 9.91 10.99 8.69 11.21 9.71 7.51 11.44 7.96 9.58
+    half row sums (1/2) sum_j c_ij: [ 86.59  64.17  74.4   87.78 107.04  81.97  80.06  87.86  85.15  84.19  91.24  88.84  73.89  93.2   59.89  92.23]
+    Dobrushin-type row sums sum_j tanh(beta c_ij/4): max 15.00 (Theorem 11.33(a) needs < 1)

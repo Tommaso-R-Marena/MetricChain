@@ -2,7 +2,7 @@
 (conformal) recalibration can and cannot repair.
 
 Toy: X = {0,1}^10, f = 0.5|x|, target min(f+g).  ASSUMED prior: isotropic, sigma_1^2 = n*0.04,
-sigma_2^2 = n*0.02 (orders 1,2).  Design: dual BCH, m = 1 (N = 16 evaluations): main effects are
+sigma_2^2 = n*0.02 (orders 1,2) plus a constant of variance 1.  Design: dual BCH, m = 1 (N = 16 evaluations): main effects are
 learned, the pair part is the unlearned tail.  Certificate: the 95% posterior interval of
 min(f+g) under the assumed prior (posterior sampling, 400 samples) — exact up to Monte Carlo.
 
@@ -12,7 +12,7 @@ Truths:
   (c) an order-3 component (variance n*0.02) that the prior does not contain;
   (d) heavy tails: Walsh coefficients ~ Student t_3 scaled to the assumed variances;
   (e) dips: in a fraction 0.2 of the instances a first-order dip  -(D - c d_H(x,y))_+  of depth
-      D = 3, slope c = 1 (radius 2: 56 of 1024 configurations) at a uniformly random centre.
+      D = 2, slope c = 1 (11 of 1024 configurations) centred at one of the 30 lowest states.
 For each: coverage of the nominal interval; a goodness-of-fit check the user can run on the
 SAME 16 evaluations (y^T K_AA^{-1} y ~ chi^2_15); a check with 32 extra random evaluations
 (standardised residuals); split-conformal recalibration (300 calibration instances with known
@@ -35,7 +35,7 @@ n = 10
 size = 1 << n
 w = cb.weights(n)
 f = 0.5 * w.astype(float)
-v_assumed = cb.iso_spectrum(n, [0.0, n * 0.04, n * 0.02])
+v_assumed = cb.iso_spectrum(n, [1.0, n * 0.04, n * 0.02])
 rows = cb.bch_rows(n, 1)
 post = LinearPosterior(v_assumed, rows, n)
 A = cb.span(rows, n)
@@ -45,6 +45,8 @@ rankA = int(np.linalg.matrix_rank(KAA))
 res = np.stack([post.posterior_residual() for _ in range(400)])
 ALPHA = 0.05
 idx = np.arange(size)
+NOT_A = np.setdiff1d(idx, A)
+assert post.P[NOT_A].min() > 1e-6
 
 
 def truth_sampler(kind):
@@ -52,10 +54,10 @@ def truth_sampler(kind):
         v = v_assumed
         return cb.fwht(rng.standard_normal(size) * np.sqrt(v)), False
     if kind == "b":
-        v = cb.iso_spectrum(n, [0.0, n * 0.04, n * 0.08])
+        v = cb.iso_spectrum(n, [1.0, n * 0.04, n * 0.08])
         return cb.fwht(rng.standard_normal(size) * np.sqrt(v)), False
     if kind == "c":
-        v = cb.iso_spectrum(n, [0.0, n * 0.04, n * 0.02, n * 0.02])
+        v = cb.iso_spectrum(n, [1.0, n * 0.04, n * 0.02, n * 0.02])
         return cb.fwht(rng.standard_normal(size) * np.sqrt(v)), False
     if kind == "d":
         t = stats.t.rvs(3, size=size, random_state=rng) / math.sqrt(3.0)   # unit variance
@@ -63,9 +65,10 @@ def truth_sampler(kind):
     if kind == "e":
         g = cb.fwht(rng.standard_normal(size) * np.sqrt(v_assumed))
         if rng.random() < 0.2:
-            y = int(rng.integers(size))
+            low = np.argsort(f + g)[:30]                    # a low-lying state the model mispredicts
+            y = int(low[rng.integers(30)])
             dist = cb.popcount((idx ^ y).astype(np.uint64))
-            g = g - np.maximum(3.0 - 1.0 * dist, 0.0)
+            g = g - np.maximum(2.0 - 1.0 * dist, 0.0)       # depth 2, slope 1: 11 of 1024 points
             return g, True
         return g, False
     raise ValueError(kind)
@@ -81,8 +84,8 @@ def analyse(g):
     y = g[A]
     chi2 = float(y @ KAA_pinv @ y)
     p_fit = float(stats.chi2.sf(chi2, rankA))              # upper tail: data too rough for the prior
-    extra = rng.choice(size, 32, replace=False)
-    zres = (g[extra] - mean[extra]) / np.maximum(post.P[extra], 1e-12)
+    extra = rng.choice(NOT_A, 32, replace=False)           # extra evaluations off the design
+    zres = (g[extra] - mean[extra]) / post.P[extra]
     zstat = float(np.mean(zres ** 2))                      # ~ 1 under the assumed prior
     return truth, centre, half, p_fit, zstat
 

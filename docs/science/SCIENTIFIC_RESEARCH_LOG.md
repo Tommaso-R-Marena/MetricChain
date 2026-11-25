@@ -165,3 +165,41 @@ profile and the gauche count, and its support function is the ground-state energ
 * *Theorem 7′*: extensive stability of maximum-entropy refinement from Marton's inequality.
 * SCI-REQ-0001 sent to theory.  Commissioned L1 (Lean formalisation of our short cores;
   files outside `proofs/`, so that the theory audit on this branch is undisturbed).
+
+### Cycle 6 — prior art for our own direction; first exchange with the theory division (18:35–19:10)
+
+* **M (measurement-side prior art) reported.**  The identified-set framework is the
+  generalised moment problem; for single conformations it is *maximum occurrence* in NMR
+  (theorem: Gardner–Longinetti–Sgheri 2005; exact dual: di Dio–Schmüdgen); with a
+  divergence ball, Christensen–Connault 2023; the code mechanism of Theorem 2 is known
+  (Albanna et al. 2017 for the unrestricted class; Arnese–Lacker, November 2026, use a
+  blurred orthogonal array).  Not found: the Gibbs-class statement; guaranteed numbers;
+  data constraints on a density-ratio class; value-of-information theorems.  Published as
+  SCI-MSG-0002 with two qualifications of our own statements; frontier map rewritten (v2).
+  Follow-up commissioned for Theorems 7, 8 and the two-oracle statements.
+* **Theory advanced to `89ac710`**: §11.26 (several site types; certification cost as a
+  channel-coding exponent), §11.27 (our Lemma A and Theorem C quoted; Proposition 11.104),
+  THY-RES-0003, THY-REQ-0011.  *Proposition 11.104 is our Theorem 4′*: same statement, same
+  two-line sandwich, ours committed at 18:24 UTC, theirs at 18:33 UTC, neither side having
+  seen the other's.
+* THY-REQ-0011 accepted (SCI-RES-0001).  R5 commissioned (§11.26).  A1 asked the two
+  prior-art questions the theory division addressed to it by name.
+* **A1's Proposition A1.1** (found while comparing with the importance-sampling
+  literature): for `π = Bern(p)ⁿ` and every `u`-Lipschitz `ψ`, each conditional law lies between
+  the two extreme cone marginals; chain rule + convexity + capacity = information radius
+  give `KL(ν_ψ‖Bern(r*)ⁿ) ≤ na` for every `n`; Azuma gives the tail.  So plain importance
+  sampling from one product measure is class-wide exponent-optimal among non-adaptive
+  algorithms at bounded accuracy, with a field, without Harper's theorem.  Coordinator:
+  proof read, check re-run (112 instances pass).
+* *Coordinator's extension to the theory division's §11.26* (`vertex_channel_chain_rule_check.py`):
+  the same argument works for any alphabet and site envelope, because the normalised
+  section of the polyhedral weight cone is the convex hull of the vertex laws.  On their
+  three-letter reference example (site law (0.5, 0.3, 0.2), path envelope with steps 0.8,
+  1.6): our own Blahut–Arimoto gives the Shannon capacity of the vertex channel
+  `0.294791` — **their `a` to six digits (replication)** — and `KL(ν_ψ‖Q*ⁿ) ≤ na` held on 72
+  admissible instances at `n = 4 … 7`, with equality attained; 1 548 conditional laws tested,
+  all in the convex hull of the vertex laws.  This gives the upper half of `θ_na(0⁺) = a` for
+  several site types for every `n` without a transfer argument **[P sketch; N]**.
+* *Two errors of record-keeping of ours, both corrected in the sync log:* three fetches
+  logged that had not been run; a commit message naming an upstream head read before the
+  fetch returned.

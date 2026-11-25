@@ -83,3 +83,34 @@ Started 2026-11-25 18:12 UTC.  Rules read (COMMON.md, R3_brief.md).  I write onl
   <= M_t/min F_t^2 + kappa^(r+1) by Theorem 3 applied to pi.  Hence
   S >= n h(sigma) + t ln n - ln t! - o(1): Theorem 2 is sharp (even k: up to O_k(1)) within
   mixtures of polarised basins.  Full cone class: open.
+* 19:20 `r3_thm3.py` (output `r3_thm3.out`).  Theorem 3 replicated and placed: (i) exact-integer
+  identities E_unif F_t^2 = M_t, deg = 2t, F_t(d) = K_t^(n-1)(d-1) hold; E_mu f^2 = M_t checked on
+  a 4-wise uniform measure that is NOT invariant under a single code (mixture of cosets of two
+  permuted [15,8] codes): 1e-14.  (ii) EXACT optimum (Krawtchouk LP in the distance
+  distribution; own formulation) vs the bound vs attained, on [15,8,4] k=4, Golay24 k=7,
+  [31,10,12] k=4, [31,15,8] k=6, RM(1,5) k=3: attained <= LP <= bound in every row; all centres
+  (all cosets) for [15,8] and Golay.  (iii) bound * n^t (1-2rho)^{2t}/t! -> 1 (n = 1e2..1e5) -
+  the asymptotic claim is right; at finite n the hypothesis F_t > 0 on [0,r] fails close to n/2
+  (first non-positive radius is n/2 - 4, -8, -11 for t = 2,3,4 at n=100) and the constant is far
+  from 1 there (t=2, rho=0.45, n=100: 20.9x).  (iv) LP/bound -> 1 as n grows (0.98-0.995 at
+  n=400): among ALL k-wise uniform measures the bound is asymptotically exact (Christoffel-function
+  reading: f = reproducing kernel of polynomials of degree <= t).  (v) the plain 2t-th moment
+  bound is weaker at small r by (2t-1)!!/t! but BETTER than Theorem 3 near the first root
+  (Golay r=8: moment 0.727 vs Thm-3 5.27; exact LP 0.186).  (vi) odd k: Golay attains 1/4096 = LP
+  optimum at r=0 while the note's bound gives 1/2325 (Rao's odd-strength bound 2 M_t(n-1) is
+  what is tight); RM(1,m) attains 1/(2n) for k=3 against 1/(n+1): "attained up to constants" is
+  true for odd k only with the extended code, not with the note's (2n)^ceil(k/2) code.
+* 19:35 `r3_prop5b.py` (output `r3_prop5b.out`).  Prop 5b: own exact sums over the joint law of
+  the two distances (log domain; root of D_s - U0 E_s).  With INTEGER r1 = round(rho1 n) the
+  note's numbers are reproduced: n=1000: s* = -0.00490, ln Z'-ln Z0 = 0.6907; n=5000:
+  s* = -0.0393, 0.6737; independent of the distance of the hidden centre (0.3n, 0.45n, 0.5n) to
+  all digits shown; equal mean energies to 1e-16 relative.  (With real r1 = rho1 n: -0.00549,
+  -0.0256.)  "cost exponent 0.0281" is the asymptotic ln 2 - h(rho1); the finite-n value
+  ln 2 - ln V(n, r1+1)/n is 0.0289.  s -> U'(s) - U0 is monotone (81-point grid), root unique.
+  Root exists iff roughly B0 > |U0| (n >= 400 at rho1 = rho0+0.01, i.e. ln B0 >= 4): the note's
+  "ln B0 <~ 2" is not the right criterion (it is ln B0 <~ ln(|U0|) ~ ln n).
+  Referee's disjoint-support lemma verified (u = 2.6, 3, 4): U'(0) < U0 always; U'(-1) > U0
+  whenever W/2^n > e^u r1; then root in (-1,0) and ln Z'-ln Z0 -> ln 2.
+  JOINT ORACLE example, exact on the cosets of the Golay code (n=24, k=7): visible
+  g0 = -u(r1 - d(x,C))_+, twin around a deep hole a'+C; u=5, r1=3: s* = -0.005574, U' = U0 to
+  machine precision, ln Z' - ln Z0 = 0.678, all marginals of order <= 7 uniform for both.

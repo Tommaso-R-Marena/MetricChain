@@ -189,7 +189,7 @@ def posterior_direct(v: np.ndarray, A, y=None, jitter: float = 0.0):
     allx = np.arange(N)
     KA = kernel_matrix(v, A, A)
     KxA = kernel_matrix(v, allx, A)
-    KAinv = np.linalg.pinv(KA + jitter * np.eye(len(A)), hermitian=True)
+    KAinv = np.linalg.pinv(KA + jitter * np.eye(len(A)), rcond=1e-10, hermitian=True)
     W = KxA @ KAinv                       # prediction weights lambda_a(x)
     var = fwht(v)[0] - np.einsum("xa,xa->x", W, KxA)
     mean = None if y is None else W @ np.asarray(y)
@@ -202,7 +202,7 @@ def posterior_cov_direct(v: np.ndarray, A) -> np.ndarray:
     K = kernel_matrix(v, allx, allx)
     KA = kernel_matrix(v, A, A)
     KxA = K[:, np.asarray(A)]
-    return K - KxA @ np.linalg.pinv(KA, hermitian=True) @ KxA.T
+    return K - KxA @ np.linalg.pinv(KA, rcond=1e-10, hermitian=True) @ KxA.T
 
 
 # ----------------------------------------------------------------------------- posterior, cosets

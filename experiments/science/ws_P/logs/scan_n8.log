@@ -9,3 +9,9 @@
   scan n=8 site 9/16  69s
   scan n=8 site 10/16  76s
   scan n=8 site 11/16  82s
+  scan n=8 site 12/16  88s
+  scan n=8 site 13/16  94s
+  scan n=8 site 14/16  99s
+  scan n=8 site 15/16  105s
+  scan n=8 site 16/16  111s
+scan n=8: 80 base conformations x 16 torsions x 36 angles; 111s
