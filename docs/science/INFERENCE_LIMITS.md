@@ -1,0 +1,352 @@
+# Inference limits: what models, energy evaluations and measurements jointly determine
+
+*Science division, coordinator's research thread.  Version 1 (checkpoint 1, 2026-11-25).
+Theory commit referred to: `5ed4072`.  Scripts: `experiments/science/pi_inference/`.*
+
+Labels: **[V]** machine-checked · **[P]** paper proof given here · **[K]** known, cited ·
+**[N]** numerical only · **[C]** conjecture · **[H]** heuristic / physical argument.
+Prior art for this file is under investigation (workstream M); until that reports, **no
+statement here is claimed to be new** — the ingredients (orthogonal arrays, I-projections,
+Pinsker's inequality, the Gibbs–Bogoliubov inequality) are textbook.
+
+---
+
+## 0. The question
+
+The theory division's query model has one kind of information about the unknown residual
+`g`: its value at chosen configurations.  A scientist has others.  We ask what each kind
+determines.
+
+Throughout: `X` a finite configuration space, `f` the known part, `μ₀ ∝ e^{−βf}` its Gibbs
+measure, `μ_g ∝ μ₀ e^{−βg}` the true ensemble, `Z_g = Σ_x e^{−β(f+g)(x)}`.
+
+| symbol | kind of information | idealisation of |
+|---|---|---|
+| **I1** | evaluations `g(a)` at chosen `a` | an expensive energy computation at a conformation (the theory division's "anchor") |
+| **I2(Φ)** | expectations `E_{μ_g} φ`, `φ ∈ Φ` known functions | ensemble-averaged structural measurements; `Φ_k` = all functions of at most `k` coordinates = all marginals on at most `k` sites |
+| **I3** | `U = E_{μ_g} g`, the mean of the *unknown* function in the true ensemble | a thermodynamic (calorimetric) measurement of the mean energy relative to the model's |
+
+Targets: `ln(Z_g/Z_0)` (the theory division's), the entropy `S(μ_g)`, populations `μ_g(A)`,
+averages `E_{μ_g} ψ`.  Classes for `g`: the **first-order class** `g(x) − g(y) ≤ d(x,y)`
+(on the cube `{0,1}ⁿ` with `d = c·d_H`: single-flip differences at most `c`; `b := βc`), and
+**linear classes** `g ∈ span{φ_1, …, φ_K}`.
+
+Summary of this file, for the cube class with zero known part unless said otherwise:
+
+| information | what it certifies | status |
+|---|---|---|
+| I2(`Φ_k`) | **nothing about the entropy** beyond the a-priori range of the class, up to `⌈k/2⌉ ln(2n)` (Theorem 2) | [P], enumerated |
+| I2(`Φ_k`) | **an upper bound `≈ t!/(n^t (1−2ρ)^{2t})`, `t = ⌊k/2⌋`, on the population of every basin** of radius `ρn` when the marginals are uniform (Theorem 3); attained up to constants | [P], enumerated |
+| I1 + I2(`Φ_k`) | the lower bound for all algorithms at the zero residual is divided by at most `(2n)^{⌈k/2⌉}`: **`θ_hint` unchanged** (Theorem 4) | [P] |
+| I3 (+ polynomially many I1) | a bracket of `ln(Z_g/Z_0)` of width `J(μ₀, μ_g) + ε`; **at the zero residual — the hardest instance for I1 alone — the cost is `O(n b²/ε²)`** (Theorem 5) | [P]; the inequality is [K] |
+| I2(Φ), `g ∈ span Φ` | everything (exponential-family identifiability; maximum-entropy refinement is exact) (Proposition 6) | [K] |
+| I2(Φ), `g ∈ span Φ + r` | maximum-entropy refinement within `TV ≤ β·osc(r)/4`, dimension-free (Theorem 7) | [P], 3 900 random instances |
+
+---
+
+## 1. Invariance under a code
+
+**Lemma 1 [P].**  Let `C ⊆ F₂ⁿ` be a linear code whose dual `C^⊥` has minimum distance at least
+`k + 1`.  Every probability measure `μ` on `F₂ⁿ` with `μ(x + a) = μ(x)` for all `a ∈ C` has uniform
+marginals on every set `S` of at most `k` coordinates.
+
+*Proof.*  `μ = Σ_{cosets} μ(e + C)·Unif(e + C)`, so it suffices to treat `Unif(e + C)`, and by
+translation `Unif(C)`.  The projection `π_S : C → F₂^S` is linear.  If it were not onto there
+would be `u ≠ 0` in `F₂^S` orthogonal to `π_S(C)`; padded with zeros, `u` is a non-zero word of
+`C^⊥` of weight at most `|S| ≤ k`, a contradiction.  A linear surjection has fibres of equal
+size.  ∎
+
+(This is the statement that a linear code is an orthogonal array of strength `d^⊥ − 1`.)
+
+**Codes.**  For `n′ = 2^m − 1` and `t ≥ 1` the binary primitive BCH code of designed distance
+`2t + 1` has dimension at least `n′ − mt` and minimum distance at least `2t + 1` **[K]**; its dual
+`C` has `|C| ≤ 2^{mt} = (n′+1)^t` and dual distance at least `2t + 1`.  Restricting `C` to any `n ≤ n′`
+coordinates keeps the orthogonal-array property (a marginal of a marginal).  With
+`m = ⌈log₂(n+1)⌉` and `t = ⌈k/2⌉`: **for every `n` and `k` there is a linear code `C` of length `n`,
+dual distance `> k`, and `|C| ≤ (2n)^{⌈k/2⌉}`.**
+
+## 2. Entropy is not identified by local ensemble data in a first-order class
+
+**Theorem 2 (invisible order) [P].**  Cube class, zero known part, `b = βc > 0`,
+`σ(b) = 1/(1 + e^{−b})`, `h` the binary entropy (nats).  Let `C` be as in Lemma 1 and
+
+    ν_{C,b} = |C|⁻¹ Σ_{a ∈ C} P_a,        P_a = ⊗_i Bernoulli(x_i = a_i with probability σ(b)).
+
+(a) `ν_{C,b} = μ_g` for some `g` of the class.
+(b) Every marginal of `ν_{C,b}` on at most `k` coordinates is uniform.
+(c) `n·h(σ(b)) ≤ S(ν_{C,b}) ≤ n·h(σ(b)) + ln|C|`.
+(d) Every member of the class has `S(μ_g) ≥ n·h(σ(b))`.
+(e) Consequently the set of entropies of class members all of whose `k`-body marginals are
+    uniform contains `[n·h(σ(b)) + ⌈k/2⌉ ln(2n), n ln 2]`, while the whole class has entropies in
+    `[n·h(σ(b)), n ln 2]`.
+
+*Proof.*  (a) In the weights `w = dμ/d(uniform)` the class is the cone
+`{w > 0 : w(x⁽ⁱ⁾) ≤ e^{b} w(x) for all x, i}` (theory report, remark after Theorem 11.12;
+`admissible_iff_weights`).  A cone is convex; each `P_a` has `w(x⁽ⁱ⁾)/w(x) ∈ {e^{b}, e^{−b}}`.
+(b) `ν_{C,b}(x + a′) = ν_{C,b}(x)` for `a′ ∈ C` because `P_a(x + a′) = P_{a+a′}(x)`; apply Lemma 1.
+(c) Upper end: the entropy of a mixture is at most the entropy of the mixing law plus the
+mean entropy of the components, and `S(P_a) = n·h(σ(b))`.  Lower end: (d).
+(d) For `μ_g` in the class the conditional odds of `x_i` given all other coordinates are
+`w(x^{i=1})/w(x^{i=0}) ∈ [e^{−b}, e^{b}]`, so the conditional law has entropy at least `h(σ(b))`, and
+`S = Σ_i H(x_i | x_1 … x_{i−1}) ≥ Σ_i H(x_i | x_{−i}) ≥ n·h(σ(b))`.
+(e) `b′ ↦ S(ν_{C,b′})` is continuous on `[0, b]`, equals `n ln 2` at `b′ = 0`, and `ν_{C,b′}` is in the
+class and has uniform `k`-body marginals for every `b′ ≤ b`.  ∎
+
+*Numerical check* (`code_cone_check.py`, exact enumeration): simplex codes `[7,3]`, `[15,4]`
+(`k = 2`) and Reed–Muller codes `RM(1,3)`, `RM(1,4)` (`k = 3`), `b ∈ {0.5, 1, 2, 4}`, for the
+variant `μ ∝ e^{−b·d_H(x,C)}`: all marginals of order `≤ k` uniform to `10⁻¹³`, order `k + 1` not
+(deviations `10⁻³`–`10⁻¹`), entropies between the two ends of (c) in all sixteen cases.
+
+**Reading.**  `ν_{C,b}` is an equal mixture of polynomially many basins, each as ordered as
+the class permits.  Every per-site and every `k`-site ensemble-averaged measurement returns
+exactly what the uniform ensemble would.  Entropy per site is `h(σ(b))` instead of `ln 2`: for
+`b = 2` (single-flip energy differences of at most `2 k_BT`), `0.365` against `0.693` nats.  The
+order becomes visible only in an observable of order `d^⊥ ≥ k + 1` (a parity along a
+minimum-weight word of `C^⊥`), or in a non-local one.
+
+**What the class assumption does and does not do.**  Without any class the statement is
+classical (there are `k`-wise independent distributions on `n^{O(k)}` points).  The content of
+Theorem 2 is that the *physical-looking* constraint "flipping one site changes the energy
+by at most `c`" does not help at all: the gap between the two ends is the whole a-priori
+range.  The constraint that does help is the interaction **order** of the energy (§5).
+
+## 3. What local data do certify: basin populations
+
+**Theorem 3 (basin bound) [P].**  Let `μ` be *any* probability measure on `{0,1}ⁿ` with uniform
+marginals on every set of at most `k` coordinates, and `t = ⌊k/2⌋`.  With the Krawtchouk
+polynomials `K_j(d) = Σ_i (−1)^i C(d,i) C(n−d, j−i)`, let `F_t(d) = Σ_{j ≤ t} K_j(d)` and
+`M_t = F_t(0) = Σ_{j ≤ t} C(n,j)`.  For every centre `a` and radius `r` with `F_t > 0` on `[0, r]`,
+
+    μ( B(a, r) )  ≤  M_t / min_{d ≤ r} F_t(d)².
+
+In particular `μ({a}) ≤ 1/M_t`, and for `r = ρn`, `ρ < ½`, `t` fixed, `n → ∞`:
+`μ(B(a, ρn)) ≤ (1 + o(1))·t! / (n^t (1 − 2ρ)^{2t})`.
+
+*Proof.*  With `χ_T(x) = (−1)^{Σ_{i∈T} x_i}` put `f(x) = Σ_{|T| ≤ t} χ_T(a) χ_T(x)`.  For `|T|, |T′| ≤ t`
+the product `χ_T χ_{T′} = χ_{T △ T′}` depends on at most `2t ≤ k` coordinates, so
+`E_μ χ_T χ_{T′} = [T = T′]`, whence `E_μ f² = M_t`.  Also `f(x) = F_t(d_H(x, a))`.  Markov:
+`μ(B)·min_B f² ≤ E_μ f² = M_t`.  For the asymptotics, `K_j(d)/C(n,j) → (1 − 2d/n)^j`.  ∎
+
+(The case `r = 0` is the weighted form of Rao's bound for orthogonal arrays **[K]**.)
+
+**Attainment.**  For `ρ > 1 − σ(b)` the mixture `ν_{C,b}` of Theorem 2 gives
+`ν(B(a, ρn)) ≥ (1 − o(1))/|C| ≥ (1 − o(1))·(2n)^{−⌈k/2⌉}` for `a ∈ C`.  So for even `k` the largest
+basin population compatible with disordered-looking `k`-body data is `n^{−k/2}` up to a
+constant factor depending on `k` and `ρ`.  *Numerical check* (`basin_bound_check.py`): identity
+`E_μ f² = M_t` and the inequality on `C`-invariant measures (exponential weights and random
+coset weights), all centres tried and all radii; attained/bound up to `0.995` (simplex code
+`[15,4]`, where `|C| = M_1 = 16`).
+
+**Reading.**  Disordered-looking local data *do* exclude one dominant folded basin, with a
+bound that improves polynomially with the order of the data, and *do not* exclude a
+mixture of `n^{k/2}` basins.  Populations of individual states are identified up to
+polynomial factors; the number of populated states — the entropy — is not identified at
+all.  The largest weight a conformation can have in any ensemble reproducing averaged data
+is the quantity computed numerically as "maximum occurrence" in the NMR literature
+(to be compared in detail: workstream M); Theorem 3 is an analytic instance.
+
+## 4. Two oracles: evaluations and local data
+
+**Theorem 4 (a marginal oracle is worth at most a polynomial factor at the zero residual)
+[P].**  Cube class, zero known part.  Consider a randomised algorithm that evaluates `g`
+adaptively, *is given all marginals of `μ_g` on at most `k` sites exactly*, and outputs `ln Z_g`
+within `ε` with probability at least `1 − δ` for every `g` of the class.  Suppose that for
+some radius `r` the dip `g_a(x) = −c·(r − d_H(x, a))₊` has `ln Z_{g_a} − ln Z_0 > 2ε` (this does not
+depend on `a`).  Then at `g ≡ 0`
+
+    E[number of evaluations]  ≥  (1 − 2δ) · 2ⁿ / ( |C| · V(n, r) ),
+
+`V(n, r) = |{x : d_H(x, 0) < r}|`, for every linear code `C` of dual distance `> k`; in particular
+with `|C| ≤ (2n)^{⌈k/2⌉}`.
+
+*Proof.*  Put `g_a^C(x) = −c·(r − d_H(x, a + C))₊`.  (i) It is in the class: the distance to a set
+is 1-Lipschitz.  (ii) It is invariant under translation by `C`, hence so is `μ_{g_a^C}`, and by
+Lemma 1 its `k`-body marginals are uniform — the oracle's answers at `g ≡ 0`.  (iii)
+`g_a^C ≤ g_a ≤ 0`, so `ln Z_{g_a^C} ≥ ln Z_{g_a} > ln Z_0 + 2ε`.  (iv) `g_a^C` vanishes outside
+`U_a = {x : d_H(x, a + C) < r}`, and `|U_a| ≤ |C|·V(n, r)`.  Run the algorithm at `g ≡ 0` and let `Q` be
+the random set of evaluated points.  On `{Q ∩ U_a = ∅}` the run is identical at `g_a^C`; both
+outputs cannot be within `ε` of targets more than `2ε` apart, so `P(Q ∩ U_a ≠ ∅) ≥ 1 − 2δ` for
+every `a`.  For `a` uniform and independent of the run, `P(x ∈ U_a) = |U_0|/2ⁿ` for each fixed `x`, so
+`1 − 2δ ≤ E|Q|·|C|·V(n,r)/2ⁿ`.  ∎
+
+This is the indistinguishability argument of the theory division's Theorem 11.22 with a
+symmetrised alternative.  Since `|C| = e^{o(n)}` whenever `k = o(n/ln n)`, **the exponential
+rate of the lower bound for all algorithms at the zero residual — `θ_hint`, which is the
+worst-case exponent of adaptive algorithms by theory report Theorems 11.54 and 11.58 — is
+the same with and without free access to all `k`-body ensemble data.**
+
+*Not proved here.*  (i) The non-adaptive exponent `θ_na`: its hard instances (Theorem 11.45)
+are cones with a hidden centre, which one-body marginals reveal; `C`-symmetrised cones
+`x ↦ φ(d_H(x, a + C))` are `C`-invariant and their level sets have sizes within a factor `|C|` of
+the originals, so we expect `θ_na` to be unchanged as well **[C]**.  (ii) A known part that
+is not `C`-invariant (a field; any chain).  (iii) Tolerances on the marginals only help
+the adversary.
+
+## 5. A thermodynamic datum is a different kind of information
+
+**Theorem 5 (two-sided perturbation bracket) [K for the inequalities; P for the reading].**
+For every `g` (no class needed), with `U = E_{μ_g} g`:
+
+    −β E_{μ₀} g  ≤  ln(Z_g/Z_0)  ≤  −β U,
+    width = β(E_{μ₀} g − E_{μ_g} g) = KL(μ₀‖μ_g) + KL(μ_g‖μ₀) =: J(μ₀, μ_g).
+
+If moreover `μ₀` is a product measure and `g` has single-site bounded differences `c_i`, then
+`N` independent samples `x_1 … x_N` of `μ₀` give, with probability at least `1 − δ`,
+
+    −β( N⁻¹ Σ_s g(x_s) + (Σ_i c_i² · ln(1/δ) / (2N))^{1/2} )  ≤  ln(Z_g/Z_0)  ≤  −β U.
+
+*Proof.*  `Z_g/Z_0 = E_{μ₀} e^{−βg} ≥ e^{−βE_{μ₀}g}` and `Z_0/Z_g = E_{μ_g} e^{βg} ≥ e^{βU}` (Jensen; the
+Gibbs–Bogoliubov inequality in both directions, standard in free-energy perturbation).  The
+width identity: `KL(μ₀‖μ_g) = βE_{μ₀}g + ln(Z_g/Z_0)` and `KL(μ_g‖μ₀) = −βU − ln(Z_g/Z_0)`.  The
+sampled form: McDiarmid's inequality for the mean of `N` i.i.d. copies of a function with
+bounded differences (sub-Gaussian with variance proxy `Σc_i²/4`).  ∎
+
+**Corollary (the hardest instance for evaluations alone is the easiest with a thermodynamic
+datum) [P].**  Cube class, zero known part, at `g ≡ 0`: the oracle returns `U = 0`, all sampled
+values are `0`, and `N = n b² ln(1/δ)/(2ε²)` evaluations certify `−ε ≤ ln(Z_g/Z_0) ≤ 0` with
+probability `1 − δ`.  Without the datum every algorithm needs `e^{nθ_hint − o(n)}` evaluations
+there for accuracies below the threshold `n ln cosh(b/2)` (theory report Theorem 11.25).
+
+*Why.*  The exponential cost at the zero residual is the cost of excluding hidden
+low-energy regions.  A hidden region that matters for `Z` is populated, and a populated
+low-energy region lowers the mean energy: `U = 0` together with `ln(Z_g/Z_0) ≤ −βU` excludes
+every dip at once.  Local structural data cannot do this (Theorem 4) because a symmetrised
+family of dips leaves every `k`-body marginal untouched.
+
+**Instance dependence.**  The bracket's width is `J(μ₀, μ_g) = β² ∫₀¹ Var_{μ_{sg}}(g) ds`: the
+certificate is tight exactly when the model is good, and both ends are *measured*, so the
+width is known a posteriori.  For a generic member of the class `J` is extensive; the
+a-priori product-reference sandwich of theory report §3.2 has width `β²Σc_i²/8`.
+
+*Open.*  (i) The worst-case exponent with the I3 oracle.  We expect it to remain positive:
+two hidden dips of different shape with the same `U` but different `ln Z` (flattened cones:
+two parameters, one constraint) must be told apart by evaluations **[C]**; the hard
+instances are then not the zero residual but residuals with hidden structure, and the
+relevant instance parameter is `J` rather than a covering number.  (ii) **Physical status of
+the oracle [H]:** `E_{μ_g} g = E_{μ_g}(f+g) − E_{μ_g} f` is a calorimetric mean energy minus the
+model energy averaged over the true ensemble; the second term is determined by `m`-body
+marginals when `f` has interaction order `m`.  Neither is cleanly measurable for a solvated
+macromolecule; temperature-dependent calorimetry (`∂ ln Z/∂β = −E_{μ}(f+g)`) is the realistic
+form.  The theorem is about kinds of information, not about an instrument.
+
+## 6. The positive side: when local data determine everything
+
+**Proposition 6 (exponential-family identifiability) [K].**  Let `Φ = (φ_1, …, φ_K)` be functions on
+`X`, `μ₀` of full support, `g = λ·Φ`.  Then `μ_g` is the unique minimiser of `KL(·‖μ₀)` among measures
+with the same `Φ`-means (the I-projection; Csiszár 1975 **[from memory — to be verified by
+workstream M]**), hence `μ_g` is determined by `μ₀` and `E_{μ_g}Φ`; and
+`ln(Z_g/Z_0) = −β λ·E_{μ_g}Φ − KL(μ_g‖μ₀)` is determined as well when the constant function is not
+in the class.  In particular, **in a linear class, exact I2(Φ) data replace all evaluations
+of `g`**: zero queries of type I1 are needed for any Boltzmann average, where the theory
+division's Proposition on linear classes needs rank-many evaluations (theory report §11.17).
+
+For energies of interaction order at most `m` this says that the marginals on `m` sites
+determine the ensemble, and the maximum-entropy refinement of the model is exact.
+
+**The pair-distance-profile class is the class identified by scattering.**  The class of
+theory report §11.17 — pair-additive residuals `g(x) = Σ_{pairs} u_{type}(r_{ij}(x))` with unknown
+radial functions — is the linear span of the pair-distance histogram features (per pair of
+types).  Their ensemble averages are the (partial) pair-distance distribution functions,
+which is what small-angle scattering measures up to a linear transform **[K]** (the Debye
+formula; resolution and form factors aside).  So within that class a complete scattering
+measurement determines the ensemble (the finite-chain form of Henderson's theorem **[K]**),
+and the class designed for cheap *computation* is at the same time the class of complete
+*measurement*.
+
+**Theorem 7 (stability of maximum-entropy refinement) [P].**  Let `X` be finite, `μ₀` of full
+support, `μ ∝ μ₀ exp(−β(λ·Φ + r))` with `r` bounded, `ω = osc(r) = max r − min r`, and let `ν` be the I-projection of `μ₀` on
+`{E Φ = E_μ Φ}` (the maximum-entropy refinement of the model against exact data).  Then
+
+    (i)   KL(μ‖ν) + KL(ν‖μ) = β (E_ν r − E_μ r);
+    (ii)  TV(μ, ν) ≤ βω/4;
+    (iii) KL(μ‖ν) + KL(ν‖μ) ≤ (βω)²/4;
+    (iv)  |E_μ ψ − E_ν ψ| ≤ osc(ψ)·βω/4 for every bounded ψ;
+    (v)   0 ≤ KL(μ‖μ₀) − KL(ν‖μ₀) = KL(μ‖ν) ≤ (βω)²/4,
+
+independently of `|X|`, of the number and nature of the features, and of `μ₀`.
+
+*Proof.*  `ν ∝ μ₀ e^{−βλ′·Φ}` for some `λ′`, so `ln(dμ/dν) = β(λ′ − λ)·Φ − βr + const`.  Then
+`KL(μ‖ν) + KL(ν‖μ) = (E_μ − E_ν) ln(dμ/dν) = β(λ′−λ)·(E_μΦ − E_νΦ) − β(E_μ r − E_ν r)`, and the first
+term vanishes because the means agree: (i).  `|E_ν r − E_μ r| ≤ ω·TV(μ,ν)`, and Pinsker's
+inequality gives `KL(μ‖ν) + KL(ν‖μ) ≥ 4·TV²`; so `4TV² ≤ βω·TV`: (ii), then (iii), (iv).  (v) is
+the Pythagorean identity for I-projections on linear families.  ∎
+
+Sharp to first order: two points, no feature, `μ = (1, e^{−βω})/(1 + e^{−βω})`, `ν` uniform,
+`TV = tanh(βω/2)/2 = βω/4 − O((βω)³)`.  *Numerical check* (`maxent_stability_check.py`): 3 906
+random instances (`|X| ≤ 39`, up to 6 features, `βω ∈ {0.05, …, 8}`), largest ratios
+`TV/(βω/4) = 0.99989`, `J/((βω)²/4) = 0.99989`; identity (i) and Pythagoras to `10⁻⁷`.
+
+**Reading.**  Maximum-entropy refinement is exactly as good as the span of the measured
+observables is rich: its error is controlled by the part of the true correction *outside*
+that span, not by the size of the system or of the correction itself.  Theorem 2 shows the
+other side: a remainder with bounded differences `c` per site has `ω` up to `nc`, and then
+nothing is controlled.
+
+*Open.*  (i) An extensive version: if `ν` satisfies a transport–entropy inequality
+`W₁(μ,ν) ≤ (2κ n KL(μ‖ν))^{1/2}` in the Hamming metric and `r` has bounded differences `c`, then
+(i) gives `KL(μ‖ν) ≤ 2κ n (βc)²` — a per-site bound whose order `(βc)²` Theorem 2 shows to be
+attained (`ln 2 − h(σ(b)) ≈ b²/8`) **[P sketch]**.  (ii) Local observables under a mixing
+condition: is `|E_μψ − E_νψ|` bounded independently of `n` for `ψ` depending on `O(1)` sites when
+`r` is a sum of local terms? **[C]**  (iii) Data with tolerance `τ`: (i) acquires the term
+`β(λ′−λ)·(E_μΦ − E_νΦ)`, which is not dimension-free.
+
+## 7. Free-energy differences between macrostates: a caution
+
+The observable free energies are differences, `ln[Z_g(A)/Z_g(B)]`, not `ln(Z_g/Z_0)`.  The
+theory division's exact robust interval for `Z_g` (`robust_partition_interval_exact`) rests on
+monotonicity in `g`; a ratio is not monotone.  **The residual that maximises `Z_g(A)/Z_g(B)`
+over an envelope class is in general not constant on `A`** **[P]**: `X = {x₁, x₂, y}`,
+`A = {x₁, x₂}`, `B = {y}`, `d(x₁, y) = 1`, `d(x₂, y) = d(x₁, x₂) = 10` (symmetric; the triangle
+inequality holds).  With `g ≡ 0` on `A` the best is `g(y) = 1`.  But `g(x₁) = 0`, `g(x₂) = −9`,
+`g(y) = 1` is admissible and multiplies the weight of `x₂` by `e^{9β}`.  In the weights the
+problem is a linear-fractional programme over the cone (theory report, remark after
+Theorem 11.12), so it has an exact dual; a closed form of the kind of Theorem 11.12 for
+ratios of macrostates is, as far as we have read, not in the theory report.
+
+## 8. Certified identified sets (framework; soundness only)
+
+For data `E_μ Φ ∈ D` (`D` compact convex, e.g. a box of error bars) and a target `ψ`, the
+*identified set* is the range of `E_μψ` over all ensembles consistent with what is known.
+Three versions, each with a certificate whose soundness is one line:
+
+* **Model-free [K: generalised moment problem].**  For every `λ`,
+  `sup{E_μψ : E_μΦ ∈ D} ≤ h_D(λ) + max_x [ψ(x) − λ·Φ(x)]`, with equality at the infimum over `λ`
+  (linear-programming duality; `h_D` the support function).  **The certificate is `λ` together
+  with a certified upper bound on a maximum over `X`** — for `ψ, Φ` pairwise in the site
+  variables, exactly what the verified `(min,+)` kernel checks.  The bound uses no energy
+  model at all: it is a physical, not a model-relative, guarantee, as far as the forward
+  models `Φ` and the error bars are.
+* **Model within a divergence ball [K: Donsker–Varadhan].**  For every `λ` and `η > 0`,
+  `sup{E_μψ : KL(μ‖μ₀) ≤ ρ, E_μΦ ∈ D} ≤ h_D(λ) + ηρ + η ln E_{μ₀} exp((ψ − λ·Φ)/η)`.  **The certificate
+  is `(λ, η)` with a certified upper bound on a tilted partition function and a lower bound on
+  `Z_0`** — two certificates of the verified `(+,×)` kernel.
+* **Model within an envelope class [P].**  With `κ(x,y) = e^{βd(x,y)}`, data
+  `m_k⁻ ≤ E_μφ_k ≤ m_k⁺`, multipliers `λ^± ≥ 0`, `Λ(z) = Σ_k λ_k⁺(φ_k(z) − m_k⁺) − λ_k⁻(φ_k(z) − m_k⁻)`,
+  and a non-negative "flow" `F` on ordered pairs: if for every `z`
+
+      (ψ(z) − t − Λ(z))·μ₀(z)  ≤  Σ_x F(x,z) − Σ_y κ(z,y) F(z,y),
+
+  then `E_{μ_g}ψ ≤ t` for every admissible `g` consistent with the data.  (Multiply by
+  `w(z) = e^{−βg(z)}` and sum: the right-hand side becomes `Σ F(x,y)(w(y) − κ(x,y)w(x)) ≤ 0`, and
+  `Σ Λ μ₀ w ≤ 0` by the data.)  The dual object is a **flow with gains** — where minima over
+  an envelope class dualise to shortest paths and transport, Boltzmann averages dualise to
+  generalised flows.  *Open:* families of flows on product spaces for which the inequality
+  can be checked by a pairwise kernel.
+
+Nothing in this section is deep; what is new to the programme is that its kernels are
+dual-feasibility checkers for inference from *measurements*, and that the first version
+needs no energy model.
+
+## 9. Open problems arising here
+
+1. `θ_na` with a `k`-body marginal oracle (§4, remark (i)).
+2. Theorem 4 with a field, or any known part without a large translation symmetry.
+3. The worst-case and instance-wise complexity with the thermodynamic oracle I3 (§5).
+4. The exchange rate between I1 and I2 in classes between linear and first-order: for
+   `g = λ·Φ + r` with `r` in a first-order class of constant `c`, how many evaluations does exact
+   `Φ`-data save, as a function of `βc`?
+5. Extensive and local versions of Theorem 7 (§6, open items).
+6. An exact formula or an efficient dual for robust ratios of macrostate partition
+   functions (§7), and tractable flow families (§8).
+7. Everything above for alphabets of size `k > 2` and for chains: Lemma 1 has an analogue
+   for any abelian group code, but a chain's known part has no such symmetry.
