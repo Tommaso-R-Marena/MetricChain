@@ -110,3 +110,20 @@ the value of a-priori information (a hint) at the exponential scale.  The identi
 `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁` is an exponential change of measure and is certainly not new;
 its use as the fixed-point equation of a recursion over levels was not found.
 
+**Additions by referee R7** (`reviews/R7_referee_report.md`, §6; the referee read no full text):
+
+| source | what it says, as far as read | read how |
+|---|---|---|
+| Mathé & Novak, *Simple Monte Carlo and the Metropolis algorithm*, J. Complexity 2007 (arXiv math/0611285) | "adaptive methods are much better than nonadaptive ones … the curse of dimension (for nonadaptive methods) can be broken by adaption", for integration against an unknown density that is log-concave with Lipschitz logarithm, by a Metropolis ball walk | abstract (quoted sentences); the body as described in R5 |
+| Novak, *On the power of adaption*, J. Complexity 1996 | survey; the power of adaption depends critically on the a-priori knowledge | tool summary of the author's page |
+| Sikorski (1982), zero finding; Traub–Wasilkowski–Woźniakowski | adaption exponentially better than non-adaption for a nonlinear problem; no gain for linear problems on convex balanced classes | search summary |
+| Kunsch–Novak–Wnuk (arXiv 2308.01705) | gap `n^{1/2}(log n)^{−1/2}`; `√(log m)` against `log log m` in the dimension | abstract excerpts |
+| nested sampling (Skilling 2006; Chopin–Robert; Fowlie et al. 2022), adaptive multilevel splitting (Cérou–Guyader et al.), Jerrum–Valiant–Vazirani 1986, Huber–Schott | error estimates asymptotic or heuristic, with a constrained sampler; counting through a split of coordinates / nested level sets with a sampler | search summaries, memory |
+
+Consequence for the classification of Theorem 11.54: **the qualitative phenomenon — adaption
+removes an exponential barrier of non-adaptive randomised methods for an
+unnormalised-density problem — is known** (Mathé–Novak, for a log-concave class, with a
+Markov chain).  Not found: exact exponents on a Hamming–Lipschitz class without concavity,
+their coincidence with the hinted exponent, a certified one-sided nested algorithm without
+a sampler, the recursion.
+

@@ -18,7 +18,7 @@ evaluation only.
 | how the program evolved and what is open | [`docs/RESEARCH_LOG.md`](docs/RESEARCH_LOG.md) |
 | what turned out false, weaker, or already known | [`docs/DEAD_ENDS.md`](docs/DEAD_ENDS.md) |
 | the literature checks behind the novelty assessments | [`docs/prior_art/`](docs/prior_art) |
-| the independent referee reports on the theory report (six so far; a seventh, on §11.18, in progress) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md), [`R5`](docs/reviews/R5_referee_report.md), [`R6`](docs/reviews/R6_referee_report.md) |
+| the independent referee reports on the theory report (seven so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md), [`R5`](docs/reviews/R5_referee_report.md), [`R6`](docs/reviews/R6_referee_report.md), [`R7`](docs/reviews/R7_referee_report.md) |
 | the independent reviews of the workstream reports | [`docs/reviews/`](docs/reviews) (`R_B_review.md`, `R_C_review.md`, `R_D_review.md`, `R_E_review.md`, `R_G_review.md`, `R_P_review.md`) |
 | collaboration with the Computational Research Division (branch `research/ubuntu-engineering`): protocol, status, messages and computational requests | [`docs/collaboration/`](docs/collaboration/README.md), digest in [`THEORY_TO_ENGINEERING.md`](docs/collaboration/THEORY_TO_ENGINEERING.md) |
 | reports of independent exploratory workstreams (as delivered; not part of the theory report unless it says so) | [`docs/workstreams/`](docs/workstreams) |
@@ -161,8 +161,8 @@ for the original goal is negative: the verified per-torsion constants grow with 
 to the chain end, so the weighted-Hamming route cannot certify long chains (D42).  §12 of the
 report says what a publication would still need.
 
-**Cycle 10 (refereed: `docs/reviews/R5_referee_report.md`, `R6_referee_report.md`; the
-workstream on chains reviewed in `R_P_review.md`; the third addition is under review).**  Three
+**Cycle 10 (refereed: `docs/reviews/R5_referee_report.md`, `R6_referee_report.md`,
+`R7_referee_report.md`; the workstream on chains reviewed in `R_P_review.md`).**  Three
 additions, theory report §§11.16–11.18; no referee found a false theorem in the first two,
 all found sentences that said more than was proved and some numbers that said less
 (`docs/DEAD_ENDS.md` D43, D44), and the text below is the corrected one.  (i) *Without a hint on the cube.*  For every member of the class, the Gibbs
@@ -193,9 +193,10 @@ the one D42 was about (functionals of pair-distance statistics; no chirality, no
 sequence-specific terms), with an existence bound that is numerically vacuous, and with a
 remainder outside the class costing an accuracy floor if it is bounded in the supremum norm
 and the old exponential price if it is only bounded in a per-torsion first-order envelope.
-(iii) *Adaptivity replaces the hint* (theory report §11.18; **independent review in progress
-at this checkpoint — until it is integrated, treat the paper proofs of this item as
-unrefereed**).  On the cube
+(iii) *Adaptivity replaces the hint* (theory report §11.18; refereed in
+`docs/reviews/R7_referee_report.md`: "proved with gaps", the gaps — an abort rule, the induction
+over levels, prior art — now written into the text; the referee found no error in the cost
+accounting beyond one closure rule, which the harness had found as well).  On the cube
 class, adaptive randomised algorithms without a hint have, in the worst case, exactly the
 exponent `KL((Λ₁+ε₁)/u ‖ ½)` that Theorem 11.25 gives for algorithms with a hint, while
 non-adaptive ones have the larger exponent of (i): at the exponential scale a hint is worth
@@ -207,9 +208,13 @@ requires, and the tail lemma once at the top.  One level maps an exponent functi
 `R`, and every other solution of `T ≤ R[T]` lies below it, so the iteration from the
 non-adaptive exponent converges to it (machine-checked for an abstract pair of exponent
 functions, together with the validity and the width of the bracket; the count of
-evaluations of the algorithm is a paper proof).  This is a statement about exponents: at
-the sizes that can be simulated the algorithm is worse than plain Monte Carlo, and five
-wrong accountings and one gap in the algorithm preceded the proof (`docs/DEAD_ENDS.md` D45).
+evaluations of the algorithm is a paper proof, re-derived by the referee and supported by an
+evaluation in expectation up to `n = 10⁶`).  This is a statement about exponents: at the sizes
+that can be simulated the algorithm is worse than plain Monte Carlo, and five wrong
+accountings and one gap in the algorithm preceded the proof (`docs/DEAD_ENDS.md` D45).  That
+adaption can break an exponential barrier of non-adaptive methods is known for a
+log-concave class (Mathé–Novak 2007); the exact exponent on this class and its coincidence
+with the hinted one were not found in print.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

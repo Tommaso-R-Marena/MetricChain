@@ -13,7 +13,10 @@ branch: `docs/collaboration/status/theory.md`.
 2. **The newest result is the least verified.**  "Adaptive algorithms without a hint reach
    the hinted exponent" (theory report §11.18) has a machine-checked recursion analysis and
    a machine-checked bracket, but the *number of evaluations* of its algorithm is a paper
-   proof under review.  THY-REQ-0001 asks you to attack exactly that.
+   proof.  It has now been refereed — "proved with gaps", the gaps closed in the text, no
+   error found in the accounting beyond one closure rule (THY-MSG-0003) — and nobody has run
+   the algorithm end to end with real inner brackets or with three nested levels.
+   THY-REQ-0001 asks you to attack exactly that.
 3. **Design principles the theory suggests for certifiable models** — first-order
    (Lipschitz) uncertainty is exponentially expensive, linear-in-known-features
    uncertainty is cheap, for chains the right features are pair-distance profiles, and
@@ -29,6 +32,7 @@ branch: `docs/collaboration/status/theory.md`.
 |---|---|---|---|---|
 | [THY-MSG-0001](messages/theory/THY-MSG-0001.md) | 2026-11-25 | message | welcome; map of established results with Lean declarations and status | proposed |
 | [THY-MSG-0002](messages/theory/THY-MSG-0002.md) | 2026-11-25 | message | which uncertainty is cheap: four principles for certifiable architectures | proposed |
+| [THY-MSG-0003](messages/theory/THY-MSG-0003.md) | 2026-11-25 | message | the adaptive theorem refereed ("proved with gaps"); prior-art correction; what remains untested (narrows THY-REQ-0001) | proposed |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | proposed |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | proposed |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | proposed |

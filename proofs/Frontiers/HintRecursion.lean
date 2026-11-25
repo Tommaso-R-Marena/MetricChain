@@ -166,14 +166,15 @@ theorem StepLE.at_hint_fraction (hp : HintPair θna θh a h E) {T T' : ℝ → �
   have h3 := mul_le_mul_of_nonneg_left h2 h1.le
   nlinarith
 
-/-- **No super-solution above the hinted exponent.**  A nonincreasing bounded `T` with
-`T ≤ R[T]` satisfies `T ≤ θh` on `(0, E)`. -/
+/-- **No super-solution above the hinted exponent.**  A nonincreasing `T` that is bounded
+above and satisfies `T ≤ R[T]` lies below `θh` on `(0, E)`. -/
 theorem superSolution_le_hint (hp : HintPair θna θh a h E) {T : ℝ → ℝ}
     (hs : StepLE θna T T) (hanti : ∀ x y, 0 < x → x ≤ y → T y ≤ T x)
-    (hbdd : ∀ x, 0 < x → T x ≤ a) : ∀ g, 0 < g → g < E → T g ≤ θh g := by
+    (hbdd : ∃ C, ∀ x, 0 < x → T x ≤ C) : ∀ g, 0 < g → g < E → T g ≤ θh g := by
   -- the supremum of `T`
+  obtain ⟨C, hC⟩ := hbdd
   have hne : (T '' Ioi (0 : ℝ)).Nonempty := ⟨T 1, 1, by simp, rfl⟩
-  have hbd : BddAbove (T '' Ioi (0 : ℝ)) := ⟨a, by rintro _ ⟨x, hx, rfl⟩; exact hbdd x hx⟩
+  have hbd : BddAbove (T '' Ioi (0 : ℝ)) := ⟨C, by rintro _ ⟨x, hx, rfl⟩; exact hC x hx⟩
   obtain ⟨τ, hTτ, hτle⟩ : ∃ τ : ℝ, (∀ x, 0 < x → T x ≤ τ) ∧ ∀ B, (∀ x, 0 < x → T x ≤ B) → τ ≤ B :=
     ⟨sSup (T '' Ioi (0 : ℝ)), fun x hx => le_csSup hbd ⟨x, hx, rfl⟩,
       fun B hB => csSup_le hne (by rintro _ ⟨x, hx, rfl⟩; exact hB x hx)⟩
@@ -320,14 +321,15 @@ theorem step_from_hint_le (hp : HintPair θna θh a h E) {T' : ℝ → ℝ} (hs 
 
 /-- **The level recursion converges to the hinted exponent.**  If every `T (k+1)` is at most
 the two-level bound built on `T k` and at most `T k`, and the `T k` are nonincreasing,
-nonnegative and bounded, then for every accuracy `g ∈ (0, E)` and every `η > 0` some level
-has `T k g < θh g + η`. -/
+nonnegative and the first is bounded above, then for every accuracy `g ∈ (0, E)` and every
+`η > 0` some level has `T k g < θh g + η`. -/
 theorem iterates_lt_hint_add (hp : HintPair θna θh a h E) (T : ℕ → ℝ → ℝ)
     (hstep : ∀ k, StepLE θna (T k) (T (k + 1)))
     (hmono : ∀ k x, 0 < x → T (k + 1) x ≤ T k x)
     (hanti : ∀ k x y, 0 < x → x ≤ y → T k y ≤ T k x)
-    (hbdd : ∀ x, 0 < x → T 0 x ≤ a) (hnn : ∀ k x, 0 < x → 0 ≤ T k x)
+    (hbdd : ∃ C, ∀ x, 0 < x → T 0 x ≤ C) (hnn : ∀ k x, 0 < x → 0 ≤ T k x)
     {g : ℝ} (hg : 0 < g) (hgE : g < E) {η : ℝ} (hη : 0 < η) : ∃ k, T k g < θh g + η := by
+  obtain ⟨C, hC⟩ := hbdd
   have hmono' : ∀ k k', k ≤ k' → ∀ x, 0 < x → T k' x ≤ T k x := by
     intro k k' hkk'
     induction hkk' with
@@ -338,7 +340,8 @@ theorem iterates_lt_hint_add (hp : HintPair θna θh a h E) (T : ℕ → ℝ →
   have hinf_le : ∀ k x, 0 < x → (⨅ k, T k x) ≤ T k x := fun k x hx => ciInf_le (hbelow x hx) k
   have hinf_anti : ∀ x y, 0 < x → x ≤ y → (⨅ k, T k y) ≤ ⨅ k, T k x := fun x y hx hxy =>
     le_ciInf fun k => (hinf_le k y (lt_of_lt_of_le hx hxy)).trans (hanti k x y hx hxy)
-  have hinf_bdd : ∀ x, 0 < x → (⨅ k, T k x) ≤ a := fun x hx => (hinf_le 0 x hx).trans (hbdd x hx)
+  have hinf_bdd : ∃ C, ∀ x, 0 < x → (⨅ k, T k x) ≤ C :=
+    ⟨C, fun x hx => (hinf_le 0 x hx).trans (hC x hx)⟩
   have hsup : StepLE θna (fun x => ⨅ k, T k x) (fun x => ⨅ k, T k x) := by
     intro g φ β B hβ hβg hφ0 hφ1 hB
     show (⨅ k, T k g) ≤ B

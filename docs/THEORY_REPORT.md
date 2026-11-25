@@ -1249,7 +1249,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 
 | G18 | **Without a hint on the cube**: the exponent of non-adaptive algorithms is `min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}` at extensive accuracies and `KL(p_u‖½)` at every fixed accuracy — plain Monte Carlo attains it on the whole class (tail lemmas: above a threshold the mass is at most the excess of a dip on a ball of the size of the super-level set, below it at least that of a cone around such a ball), and no non-adaptive algorithm does better (cones against cones with a flattened bottom); two independent samples give a certified bracket that needs no hint at the zero residual for `ε > 2`; an adaptive algorithm that is correct on the class needs `n + 3` evaluations on a cone (for adaptive algorithms see G20) | `nonadaptive_expected_queries_ge`, `cube_nonadaptive_bound` (conditional on two finite sums), `weight_le_of_outside`, `sum_le_truncated_add_tail`, `weight_ge_of_inside`, `sum_truncated_ge` **[V]**; Harper's theorem **[K]**; the reductions to it, the closed forms, all exponents and the probabilistic statements **[P]** | cycle 10, refereed (`reviews/R5`); the sample size `e^{KL(π‖uniform)}` at one instance is **known** (Chatterjee–Diaconis 2018) and the *method* of the non-adaptive lower bound — hidden cone centres, Bakhvalov averaging, defeated by adaption — is **known** (Mathé–Novak 2007, for log-concave densities with a Lipschitz logarithm); the exponent on the cube for `ln Z` and the matching class-wide upper bound were not found |
 | G19 | **Correlated uncertainty**: for residuals that are linear in known features with coefficients in a box, the envelope is a pulled-back weighted `ℓ¹` distance, every linear combination of evaluations brackets the value at a new point by the unexplained part of its feature vector (worst case over the data: the `ℓ¹` distance to the span, against the distance to the nearest point for the first-order class of the same envelope), and rank-many evaluations determine everything; pair-additive residuals with unknown Lipschitz radial functions are linear in cumulative pair-count profiles, their envelope is a transport distance between pair-distance distributions, sharpness is stochastic dominance, and at extensive accuracy certificates in this format exist whose size does not depend on the chain length; a kernel certifies minima for all coefficient vectors consistent with evaluated anchors | `linRes_sub_le`, `linRes_sub_attained`, `linRes_span_upper`, `linRes_span_lower`, `linRes_span_exact`, `sumClass_span_upper`, `sumClass_span_lower`, `pairRes_eq_cum`, `pairRes_sub_le`, `pairRes_span_upper`, `pairRes_span_upper_enclosure`, `pairRes_sharp`, `verifyLTop_sound`, `contactTriangle_bound` **[V]**; exactness (duality), the transport form, the entropy bound and everything about chain length **[P]** | cycle 10, refereed (`reviews/R6`) except the kernel; the linear theory is **known** (optimal recovery: Smolyak, Micchelli–Rivlin; set-membership estimation; robust linear programming), the features are those of linear contact potentials (Maiorov–Crippen 1992; Tobi et al. 2000), the distance is **known** as a descriptor distance (Osada et al. 2002; bag of bonds), the entropy of monotone functions is classical; its reading as the exact envelope of a residual class next to a known part, and the consequences for certificates, were not found; **none of it is deep** |
-| G20 | **Adaptivity replaces the hint**: on the cube class the worst-case exponent of adaptive randomised algorithms without a hint is the hinted exponent `θ_hint(ε₁) = KL((Λ₁+ε₁)/u‖½)`, strictly below the non-adaptive `θ_na`.  A two-level "layer-cake" algorithm — uniform outer sample, brackets of the fibre averages refined only as far as a one-sided test against a ladder of levels requires, the tail lemma once at the top — turns bracket procedures with exponent function `T` into ones with `R[T]`; by the identity `θ_na(e + θ_hint(e)) = θ_hint(e)` (that is, `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁`) the hinted exponent is a fixed point of `R`, every nonincreasing `T ≤ R[T]` lies below it, and the iteration from `θ_na` converges to it; on radial instances a direct adaptive algorithm has the hinted exponent | `superSolution_le_hint`, `iterates_lt_hint_add`, `step_from_hint_le`, `klBin_shift`, `gauss_hint_superSolution`, `LayerCake.mean_le_upper`, `LayerCake.upper_le_width`, `LayerCake.close_points_bound` **[V]** (analysis of the recursion for an abstract pair of exponent functions; validity and width of the bracket; the two algebraic inequalities behind the cost); the algorithm's number of evaluations, the induction over levels and all asymptotics **[P]** | cycle 10; **review in progress at this checkpoint**; the two-level algorithm and the recursion are due to workstream H, the oracle-relative form, the identity and the convergence proof to the coordinator; relatives of the algorithm are nested sampling, multilevel splitting and nested simulation, adaption with polynomial gains is known in information-based complexity (Heinrich; Kunsch–Novak–Wnuk) — a certified version with a worst-case exponent, and the statement that adaption recovers the value of a hint exactly, were **not found** (abstracts only) |
+| G20 | **Adaptivity replaces the hint**: on the cube class the worst-case exponent of adaptive randomised algorithms without a hint is the hinted exponent `θ_hint(ε₁) = KL((Λ₁+ε₁)/u‖½)`, strictly below the non-adaptive `θ_na`.  A two-level "layer-cake" algorithm — uniform outer sample, brackets of the fibre averages refined only as far as a one-sided test against a ladder of levels requires, the tail lemma once at the top — turns bracket procedures with exponent function `T` into ones with `R[T]`; by the identity `θ_na(e + θ_hint(e)) = θ_hint(e)` (that is, `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁`) the hinted exponent is a fixed point of `R`, every nonincreasing `T ≤ R[T]` lies below it, and the iteration from `θ_na` converges to it; on radial instances a direct adaptive algorithm has the hinted exponent | `superSolution_le_hint`, `iterates_lt_hint_add`, `step_from_hint_le`, `klBin_shift`, `gauss_hint_superSolution`, `LayerCake.mean_le_upper`, `LayerCake.upper_le_width`, `LayerCake.close_points_bound` **[V]** (analysis of the recursion for an abstract pair of exponent functions; validity and width of the bracket; the two algebraic inequalities behind the cost); the algorithm's number of evaluations, the induction over levels and all asymptotics **[P]** | cycle 10, refereed (`reviews/R7`: "proved with gaps", the gaps written into the text; no error found in the cost accounting beyond one closure rule); the two-level algorithm and the recursion are due to workstream H, the oracle-relative form, the identity and the convergence proof to the coordinator; relatives of the algorithm are nested sampling, multilevel splitting and nested simulation, adaption with polynomial gains is known in information-based complexity (Heinrich; Kunsch–Novak–Wnuk) — a certified version with a worst-case exponent, and the statement that adaption recovers the value of a hint exactly, were **not found** (abstracts only) |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -1281,9 +1281,12 @@ combination of truncation, an isoperimetric tail bound and Chernoff for the uppe
 uncertainty is cheap: the correlated kind; (xi) the exponent of adaptive algorithms without
 a hint (G20), which is the one statement of this report that is a sharp complexity theorem
 with matching bounds for all algorithms of a natural model, and whose proof is not short —
-its upper bound is a nested algorithm with a delicate count, tested by a simulation of its
-logic, machine-checked only in its deterministic parts, and under independent review at
-this checkpoint.
+its upper bound is a nested algorithm with a delicate count, read line by line by a referee,
+tested by a simulation of its logic and by an evaluation in expectation up to `n = 10⁶`, and
+machine-checked only in its deterministic parts.  The qualitative phenomenon (adaption
+removes an exponential barrier of non-adaptive methods) is known for a log-concave class
+(Mathé–Novak 2007); the exact exponent and its coincidence with the hinted one were not
+found.
 Each rests on textbook tools (type covering, Hölder, telescoping, linear-programming duality);
 the proofs are short.  The second referee's verdict on G1–G10 — "a coherent note, not a
 theorem-driven paper" — is reproduced in §12 together with what a publication would still
@@ -3350,8 +3353,12 @@ oracle-relative form of Theorem 11.52, the identity (11.18.1) and the convergenc
 the coordinator's.  **Paper proofs throughout, except the analysis of the recursion and the
 deterministic core of the bracket (validity of the two ends, width), which are
 machine-checked; the count of evaluations — the content of the theorem — is not.**
-**An independent referee was reading this section when this checkpoint was made; until its
-report (`reviews/R7_referee_report.md`) is integrated, every paper proof below is unrefereed.**
+An independent referee read the draft (`reviews/R7_referee_report.md`): verdict on Theorem
+11.54 "proved with gaps" — the statement is believed true, could not be broken, and no error
+was found in the accounting of Theorem 11.52 beyond the closure gap; the gaps (an abort rule;
+the induction over levels, which needs left limits in the accuracy and a ladder defined
+relative to the inner dimension; prior art) are written into the text below, following the
+referee.  What the referee did and did not check is listed at the end of the section.
 The workstream
 derived three wrong recursions before the right one, the coordinator's own first accounting
 of a multilevel scheme was wrong as well, and the algorithm as first written here and in
@@ -3378,10 +3385,13 @@ point has two distinct neighbour values, flipping one of the two value classes g
 its antipode; one monotone path from there (`n + 1` queries) reveals `f`, and `ln A` is computed
 exactly.  Otherwise, with probability at least `1 − δ/2` every shell `r ≤ j ≤ n − r` contains a
 sampled point (`r` the least radius with `M·C(n,r)/2ⁿ ≥ ln(2n/δ)`), so `f(j−1) = f(j+1)` there: `f`
-is 2-periodic on `[r−1, n−r+1]` with the two observed values, the alternating sum of binomial
+is 2-periodic on `[r−1, n−r+1]` with the two observed values — the value at the first sampled
+point and the common value of its neighbours, provided that point lies in that range, which
+fails with probability `2B/2ⁿ`, `B = |B(n, r−2)|`; so the bound is stated for `4|B(n, r_ε − 2)|/2ⁿ ≤ δ`,
+which holds for fixed `δ`, extensive accuracy and `n` large.  The alternating sum of binomial
 coefficients over that range is negligible, and the two caps are bounded through the
 Lipschitz condition from their rims, which gives `A` up to the factor
-`[1 − 4B/2ⁿ, 1 + 4(e^{Δ_{r−2}} − 1) + 8B/2ⁿ]`, `B = |B(n, r−2)|`.  The lower bound is Theorem 11.25(a)
+`[1 − 4B/2ⁿ, 1 + 4(e^{Δ_{r−2}} − 1) + 8B/2ⁿ]`.  The lower bound is Theorem 11.25(a)
 at the zero function, whose competitors are dips.  ∎
 The algorithm trusts the promise of radiality and is not an algorithm for `L_u`; the theorem
 says where the hardness of Theorem 11.45 comes from (an unknown centre that a non-adaptive
@@ -3391,8 +3401,9 @@ that the second branch is needed: no order of neighbours reveals the centre.
 **Bracket procedures.**  A *bracket procedure* for dimension `d` with accuracy `x`, failure
 probability `δ′` and cost `C` is a randomised adaptive algorithm that makes at most `C` queries
 to any `ψ ∈ L_u` on `Q_d` and returns `L ≤ U` with `L ≤ A(ψ) ≤ U` and `U ≤ e^x L`, except with
-probability `δ′`.  A family of bracket procedures — one for every `d`, `x > 0`, `δ′ > 0`, with a
-cost `C(d, x, δ′)` that is nonincreasing in `x` — has the *exponent function* `T` if
+probability `δ′`; the bound `C` on the number of queries holds always, not only on a good
+event.  A family of bracket procedures — one for every `d`, `x > 0`, `δ′ > 0`, with a cost
+`C(d, x, δ′)` that is nonincreasing in `x` and in `δ′` — has the *exponent function* `T` if
 `limsup_d d^{−1} ln C(d, ξd, e^{−cd}) ≤ T(ξ)` for every `ξ > 0` and `c > 0`.  Two families are at hand:
 one query gives a bracket of accuracy `2ud` (the oscillation of `ψ` is at most `ud`); and the
 two-sample bracket of Proposition 11.46 is a family with exponent function `θ_na` (`0` from
@@ -3403,7 +3414,7 @@ of accuracy `ε` is a correct output.
 Let a family of bracket procedures have the nonincreasing exponent function `T`, and let
 `0 < φ < 1`, `0 < β < g`, `η₀ > 0`.  Then there is a family with accuracy `gn + O(log n)` in
 dimension `n` whose cost is, for every member of `L_u` and every failure probability `e^{−cn}`,
-at most `exp(n(τ + 2η₀) + o(n))`,
+at most `exp(n(τ + η₀) + o(n))`,
 
     τ  =  sup_{γ ≥ β} [ min(γ, φ·θ_na((g − β)/φ))  +  (1 − φ)·T(γ/(1 − φ)) ].                     (11.18.2)
 
@@ -3425,14 +3436,16 @@ levels `s₀ ≤ s₁ ≤ … ≤ s_j`
 
     A  ≤  s₀ + Σ_{i<j} s_{i+1} p(s_i) + E(W − s_j)₊        (`mean_le_layer_cake`).
 
-Parameters: `b = βn`, `G = gn`, levels `s_j = s₀ e^{j}`, `K = ⌈24 ln(2^{n+6} n³/δ)⌉`,
-`J = ⌈2un + b + n_o ln 2 + 10⌉`, and a finite decreasing ladder of inner accuracies
-`x₀ = 2un_i > x₁ > … > x_last ≤ b` with steps at most `η₀n`.  One query at a reference point gives
+Parameters: `G = gn`, levels `s_j = s₀ e^{j}`, `K = ⌈24 ln(2^{n+6} n³/δ)⌉`, a finite decreasing ladder
+of inner accuracies with **fixed rates relative to the inner dimension**, `x_l = ξ_l n_i`,
+`ξ₀ = 2u > ξ₁ > … > ξ_last = β/(1−φ)` with steps at most `η₀`, the tolerance `b := x_last` (`= βn + O(1)`), and
+`J = ⌈2un + b + n_o ln 2 + 10⌉`.  One query at a reference point gives
 `s₀ ≤ min W` with `max W ≤ s₀e^{2un}`.  A list `a₁, a₂, …` of independent uniform outer points is
 kept; each carries a bracket of its fibre average that is only ever refined (by calling the
 inner procedure at the next accuracy of the ladder and intersecting).  To *classify* a point
 at level `j` means to refine its bracket `[L, U]` until `U ≤ s_j` ("low") or `L > s_j e^{−b}` ("high");
-this ends at the latest at accuracy `x_last ≤ b`.  The algorithm keeps a certified lower bound
+this ends at the latest at accuracy `x_last = b` (if both hold, either label will do).  The
+algorithm keeps a certified lower bound
 `ℓ ≤ A` (initially `s₀`) and runs through the levels `j = 0, 1, …`:
 
 * `M := K`; repeat: classify `a₁, …, a_M`; let `N` be the number of high points and
@@ -3443,13 +3456,21 @@ this ends at the latest at accuracy `x_last ≤ b`.  The algorithm keeps a certi
   which level `i` was left.
 * Otherwise, if `N ≥ K` (the level is *populated*) or `M ≥ M_j^neg := 2KJe·s_j/(ℓe^b)` (the level
   is *negligible*), go to the next level; else double `M`.
+* *Abort.*  If the number of queries exceeds the bound of the cost proof below, or level
+  `J + 1` is reached, or a point is not classified at `x_last` (an inner bracket wider than
+  promised), stop and return the trivial bracket `[s₀, s₀e^{2un}]`.  On the good event none of
+  this happens, so the failure probability is unchanged and the cost bound holds always.
 
 *Proof.*  Good event: (V1) every inner bracket is valid; (V2) for every level `j` and every `M`
 of the doubling sequence, if `M p(s_j) ≥ 2K` then at least `M p(s_j)/2` of `a₁..a_M` have `W > s_j`;
 (V3) for all `j`, `M` and all `x ∈ b + ℕ`: at most `max(2M p(s_j e^{−x}), K/2)` of `a₁..a_M` have
 `W > s_j e^{−x}`.  The levels depend only on the reference point, so (V2), (V3) are Chernoff
-bounds for independent samples at `O(n³)` fixed thresholds, and the choice of `K` and of the
-inner failure probability `δ/(2^{n+6}n³)` makes the total failure probability at most `δ`.
+bounds for independent samples at `O(n³)` fixed thresholds (failure `e^{−K/4}` and `e^{−K/12}` each).
+The inner calls are chosen adaptively, but the set of *potential* calls is deterministic —
+`M ≤ 4K·2^{n_o}` always, since beyond `2K·2^{n_o}` points a level is populated or its tail is zero —
+and each potential call can be given its own randomness in advance; with the inner failure
+probability `δ/(2^{n+6}n³)` and the choice of `K` the total failure probability is at most `δ`
+for `n ≥ n₀(η₀)`.
 
 *Validity.*  By (V1) a point with `W > s_j` is classified high, and a high point has
 `W > s_j e^{−b}`.  Hence `N ≥ #{W > s_j}` and (V2) gives `p(s_j) ≤ q`; if `N ≥ K`, (V3) with `x = b`
@@ -3485,21 +3506,24 @@ level `j` have `W > s_j e^{−x}`.  In words: the lower levels have certified th
 high, so by Markov's inequality few of the points sampled at level `j` can lie within a
 factor `e^x` of it.
 
-*Cost.*  A point with `W(a) = s_j e^{−G_a}` is classified at level `j` as soon as the inner
-accuracy is at most `max(G_a, b)`: if the accuracy `x_l ≤ G_a` then `U ≤ W e^{x_l} ≤ s_j`; if
-`x_l ≤ b` and `U > s_j` then `L > s_j e^{−b}`.  The ladder reaches such an accuracy after at most
-`O(1/η₀)` calls, the last of which has accuracy at least `max(G_a, b) − η₀n` (or `x_last`).
-Grouping the points by `x ≤ max(G_a, b) < x + η₀n`:
+*Cost.*  A point with `W(a) = s_j e^{−G_a}`, `G_a ≥ 0`, is classified at level `j` at the first rung
+`x_l ≤ max(G_a, b)` of the ladder: if `x_l ≤ G_a` then `U ≤ W e^{x_l} ≤ s_j`; if `x_l ≤ b` and `U > s_j` then
+`L > s_j e^{−b}`.  A point above the level is classified at the first rung below `b + |G_a|`.  So the
+points whose last rung at level `j` is `l ≥ 1` have `W > s_j e^{−x_{l−1}}`; by the count above their
+number is at most `min(8Je² M†, 32KJe³ e^{x_{l−1}} + 4K)` (one factor `e` for rounding `x_{l−1}` up
+into `b + ℕ`), and each costs at most `(l+1)·C(n_i, x_l, δ′)`, the cost being nonincreasing in the
+accuracy.  Hence
 
-    #queries  ≤  Σ_{j ≤ J} Σ_x  min( 8Je² M† ,  32KJe² e^{x + η₀n} + 4K ) · O(1/η₀) · C(n_i, max(x − η₀n, x_last), δ′),
+    #queries  ≤  Σ_{j ≤ J} Σ_l  min( 8Je² M† ,  32KJe³ e^{x_{l−1}} + 4K ) · (l+1) · C(n_i, ξ_l n_i, δ′),
 
-a sum of polynomially many terms whose largest has the exponent
-`max_{γ ≥ β} [min(γ + η₀, φ θ_na((g−β)/φ)) + (1 − φ) T(max(γ − η₀, β)/(1−φ))] ≤ τ + 2η₀` (the inner dimension is
-`n_i = (1−φ)n + O(1)`, the inner accuracy `γn = (γ/(1−φ)) n_i`; only finitely many inner accuracies
-occur, so the pointwise definition of the exponent function suffices, and `T` nonincreasing
-turns the rounding of accuracies into the additive `2η₀`).  The bound holds on the good event;
-a run that exceeds it is stopped and counted as a failure, so that the cost is bounded
-always, as the definition of a bracket procedure requires.  ∎
+a sum of polynomially many terms; only the finitely many rates `ξ_l` occur, so the pointwise
+definition of the exponent function suffices, and with `γ_l := (1−φ)ξ_l ≥ β` and `x_{l−1}/n ≤ γ_l + η₀ + o(1)`
+the largest term has the exponent
+`max_l [min(φ θ_na((g−β)/φ), γ_l + η₀) + (1−φ) T(γ_l/(1−φ))] ≤ τ + η₀`.  The bound holds on the good
+event, and by the abort rule always.  It is attained up to `o(n)` by an outer landscape that
+is flat and inner landscapes on which the inner procedure is at its worst (for `T = θ_na`:
+`ψ(a,b) = u·d(b, s)`, or with centres that move with `a`) — `τ` is the exponent of this algorithm
+and not only a bound for it (referee).  ∎
 
 *What the algorithm does.*  It never estimates a mean of heavy-tailed values.  Level by
 level it certifies that few fibres exceed the level — a one-sided statement, whose cost per
@@ -3530,7 +3554,7 @@ least `φ KL(ρ_o‖½) + (1−φ) KL(ρ_i‖½) ≥ KL(ρ̄‖½) ≥ θ_hint(g
 **no level of the recursion goes below the hinted exponent** — as it must not, by the lower
 bound of Theorem 11.25(a); a wrong accounting of the algorithm typically violates this
 (two of the workstream's superseded recursions did).
-(c) *No fixed point above it.*  Let `T` be nonincreasing and bounded with `T ≤ R[T]`.  Then
+(c) *No fixed point above it.*  Let `T` be nonincreasing and bounded above with `T ≤ R[T]`.  Then
 `T ≤ θ_hint` on `(0, ε*)` (`superSolution_le_hint`).
 (d) *Convergence.*  Let `T₁ = θ_na` and `T_{k+1} = min(T_k, R[T_k])`.  Then for every `g ∈ (0, ε*)`
 and `η > 0` there is a `k` with `T_k(g) < θ_hint(g) + η` (`iterates_lt_hint_add`).
@@ -3571,19 +3595,42 @@ the same exponent as with a hint at the hardest instance, while non-adaptive alg
 `exp(n·θ_na(ε₁) + o(n))` with `θ_na > θ_hint`.  *At the exponential scale a hint is worth nothing
 to an adaptive algorithm, and everything that it is worth is lost by a non-adaptive one.*
 *Proof.*  Lower bound: Theorem 11.25(a) at the zero function (an algorithm without a hint is
-an algorithm with one).  Upper bound: the two-sample brackets have the exponent function
-`T₁ = θ_na`; by Theorem 11.52 and induction, for every `k` and `η > 0` there is a family with
-exponent function at most `T_k + η` (finitely many parameter values at each level; `R[T + η] ≤
-R[T] + η`); by Theorem 11.53(d) some `T_k(g)` is within `η` of `θ_hint(g)` for a `g < ε₁` with
-`θ_hint(g) ≤ θ_hint(ε₁) + η`; and the midpoint of a bracket of accuracy `gn + O(log n) ≤ ε₁n` is a
-correct output.  ∎
+an algorithm with one); it bounds the expected number of evaluations at one instance, hence
+the worst case, with the same convention for the accuracy.  Upper bound.  Fix `η > 0`; choose
+`g < ε₁` with `θ_hint(g) ≤ θ_hint(ε₁) + η`, then `k` with `T_k(g) < θ_hint(g) + η` (Theorem 11.53(d)), then the
+parameters of the `k − 1` levels, then let `n → ∞`.  *Base:* the two-sample brackets form a family
+with exponent function `T₁ = θ_na` (`K = 24 ln(4/δ′) = O(d)`; cost `e^{dθ_na(ξ)+o(d)}` for `ξ < ε*` and `e^{o(d)}`
+from `ε*` on).  *Assembly:* for a family with nonincreasing exponent function `T` and a tuple
+`(φ, β, g, η₀)`, Theorem 11.52 gives procedures of accuracy `gd + ln(4eJ + 3)` in every dimension `d`;
+enumerate a countable dense set of tuples and let the new procedure for `(d, x, δ′)` be the
+cheapest among the old one and the first `d` tuples whose accuracy is at most `x`.  Its cost
+is nonincreasing in `x` and `δ′`, and for fixed `ξ` every tuple with `g < ξ` is eventually admissible,
+so the new family has the exponent function `T′ ≤ min(T, R[T])(·⁻) + η₀`, with a **left limit**
+in the accuracy — nothing shows that the `T_k` are continuous.  *Shift:* if `T̃ ≤ T(·⁻) + η′` then
+`R[T̃](g) ≤ R[T](g − ε) + ε + η′` for `0 < ε < g` (replace `β` by `β + ε` and `γ` by `γ − ε`; the outer exponent
+is unchanged).  *Induction:* if the level-`k` family has `T̃_k ≤ T_k(·⁻) + η_k`, the level-`(k+1)` family
+has `T̃_{k+1} ≤ T_{k+1}(·⁻) + η_k + 2η₀`.  So at accuracy `ε₁n` the level-`k` family costs
+`exp(n(T_k(g) + kη′) + o(n))` for every `g < ε₁`, which suffices because `θ_hint` is continuous; and
+the midpoint of a bracket of accuracy at most `ε₁n` is a correct output.  The `o(n)` at level
+`k + 1` consists of polynomial factors and of the finitely many `o(n_i)` of level `k`; the
+failure probability handed down is `δ/(2^{n+6}n³)` per level, still `e^{−O(kn)}` at the bottom.  (The
+induction in this form is the referee's.)  ∎
 
 *What this does and does not say.*
 (1) It is a statement about exponents, with `o(n)` terms that come from `k` nested levels,
-each with its own ladder and union bounds; `k → ∞` as the exponent approaches `θ_hint`.  At
-`n = 32` the two-level algorithm was simulated by the workstream: all 32 brackets were valid,
-and on every instance it needed far more evaluations than plain Monte Carlo for a wider
-bracket.  **Nothing here is an algorithm one would run.**  With the constants of the proof
+each with its own ladder and union bounds; `k → ∞` as the exponent approaches `θ_hint`.  An
+earlier variant of the two-level algorithm was simulated by the workstream at `n = 32`: of 32
+runs, 12 closed within the budget, with valid brackets, and on the three instances where
+the comparison was made it needed far more evaluations than plain Monte Carlo for a wider
+bracket.  The referee evaluated the corrected algorithm in expectation with exact binomial
+arithmetic on 30 radial outer profiles and by adversarial search over profiles: the excess
+of `n^{−1} ln(cost)` over `τ` falls from `0.029` at `n = 10³` to `0.0002` at `n = 10⁶`, never above the
+explicit finite-`n` bound of the proof; and simulated the outer loop with adversarial inner
+oracles in about 17 000 runs without a violation (with the closure rule of the first draft,
+2 940 of 2 940 runs in the affected parameter range return a false bracket).  At small
+sizes no level is ever left as negligible — that branch needs roughly `n_o h ≳ ln(2Je²)` — so a
+small simulation must say which branches it exercised (harness XV.3 reaches it with a steep
+slope and reports the counts).  **Nothing here is an algorithm one would run.**  With the constants of the proof
 (and expectations in place of counts) the two-level algorithm overtakes the two-sample
 bracket of Proposition 11.46 on the zero function, at `u = 1` and the accuracy rate `ε*/4`,
 between `n = 2000` and `n = 5000` — where either needs more than `e^{70}` evaluations (benchmark
@@ -3627,9 +3674,32 @@ nested simulation with adaptive allocation — estimate the same layer-cake deco
 with a constrained sampler or with mean-square criteria.  What was not found in print
 (abstracts only): a certified one-sided version, the use of an isoperimetric tail lemma to
 close the ladder, and a recursion for worst-case exponents.  In information-based complexity
-adaption is known not to help for linear problems on convex symmetric classes, and to help
-by polynomial factors in some randomised settings (Heinrich 2024; Kunsch–Novak–Wnuk 2024);
-the problem here is nonlinear and the gain is exponential.  See `prior_art/L7_query_complexity.md`.
+adaption is known not to help for linear problems on convex symmetric classes and to help
+by polynomial factors in some randomised linear settings (Heinrich 2024; Kunsch–Novak–Wnuk
+2024).  **That adaption can remove an exponential barrier of non-adaptive randomised methods
+is not new**: Mathé–Novak (2007) — whose method gives the lower bound of §11.16 — show it for
+integration against an unknown log-concave density with Lipschitz logarithm, by a
+Metropolis walk ("the curse of dimension (for nonadaptive methods) can be broken by
+adaption"), and zero finding (Sikorski 1982) is the textbook example for a nonlinear
+problem.  What was not found: the exact exponents on a Hamming–Lipschitz class without
+concavity and without a Markov chain, their coincidence with the hinted exponent, and the
+recursion.  All of this is at the level of abstracts and search summaries; see
+`prior_art/L7_query_complexity.md`.
+
+*What the referee checked* (`reviews/R7_referee_report.md`).  Re-derived every line of Theorem
+11.52 (good event and its probability, validity, width, termination, sample sizes, the
+count, the cost sum); found the closure gap independently; closed the abort rule and the
+induction on paper; compiled the Lean file and printed its axioms; verified by hand that
+the functions of the cube satisfy the hypotheses of the abstract theorem, and the "≥" half
+of Theorem 11.53(b); iterated the recursion with own code to 64 levels (the excess over
+`θ_hint` halves with the grid spacing: a discretisation artefact); ran the radial algorithm on
+full cubes.  *Not checked:* the algorithm end to end with real inner brackets, or with
+three nested levels; non-radial outer landscapes in the evaluation of the cost (the referee
+argues that only the law of the fibre averages matters); the uniformity of the `o(n)` terms
+through `k` levels other than on paper; Theorems 11.25(a), 11.44, 11.45 and Proposition 11.46
+beyond their statements; prior art beyond abstracts.  **The number of evaluations of the
+algorithm therefore rests on a paper proof read by two parties and on numerical evidence
+up to `n = 10⁶`, not on a machine check.**
 
 ---
 

@@ -1418,7 +1418,7 @@ theorem hintRecursion_witness {g : ℝ} (hg : 0 < g) (hg1 : g < 1) :
     unfold HintRecursion.gaussHintClip
     positivity
   refine ⟨HintRecursion.superSolution_le_hint HintRecursion.gaussPair
-      HintRecursion.gauss_hint_superSolution hanti hbdd g hg hg1,
+      HintRecursion.gauss_hint_superSolution hanti ⟨1, hbdd⟩ g hg hg1,
     HintRecursion.gaussHintClip_eq hg1.le, ?_, ?_⟩
   · unfold HintRecursion.gaussHintClip
     rw [min_eq_left hg1.le]
@@ -1427,7 +1427,7 @@ theorem hintRecursion_witness {g : ℝ} (hg : 0 < g) (hg1 : g < 1) :
   · intro η hη
     exact HintRecursion.iterates_lt_hint_add HintRecursion.gaussPair
       (fun _ => HintRecursion.gaussHintClip) (fun _ => HintRecursion.gauss_hint_superSolution)
-      (fun _ _ _ => le_rfl) (fun _ => hanti) hbdd (fun _ => hnn) hg hg1 hη
+      (fun _ _ _ => le_rfl) (fun _ => hanti) ⟨1, hbdd⟩ (fun _ => hnn) hg hg1 hη
 
 end MetricChain.NonVacuity
 

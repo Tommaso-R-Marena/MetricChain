@@ -1015,9 +1015,13 @@ concern the same step: *how many sampled points need which inner accuracy*.
    outside the super-level set; while every sampled fibre lies above the level (`q = 1`) the
    "ball" is the whole cube and the bound is false.  With a small outer block and a large
    accuracy the algorithm then closes at the lowest level with an upper end below the mean
-   (first instance of harness XV.3 in its first run; mutation XV.3 M3).  Fix: no closure at
-   `r = n_o`.  The parameter choices used in the convergence proof were not affected, the
-   statement of the theorem for arbitrary parameters was.
+   (first instance of harness XV.3 in its first run; mutation XV.3 M3; found independently by
+   the referee, who shows that the algorithm as drafted returns a false bracket with
+   probability one whenever `φ(u − Λ₁) ≲ g`: 2 940 of 2 940 simulated runs).  Fix: no closure at
+   `r = n_o`.  Two of the three parameter choices of the convergence proof lie outside the
+   affected range; the third (a fixed outer fraction and *every* accuracy) does not, so the
+   convergence proof needs the corrected theorem — the coordinator's first note to the
+   referee said otherwise and was wrong.
 5. **Lower bounds above the hinted exponent — none.**  Seven families tried by the workstream
    (decoy cones; a rough background from a random code; a low plateau with a hidden dip;
    populations of flattened cones with rare exceptions; graph-type non-product instances;

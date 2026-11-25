@@ -883,10 +883,22 @@ a hint, somewhere between `θ_hint` and `θ_na` — is answered: **it is `θ_hin
   closure gap and a superseded accounting.  Benchmark B13: the levels `T_k`, the fixed point,
   and an estimate of when the algorithm would pay — between `n = 2000` and `n = 5000` at `u = 1`,
   beyond `e^{70}` evaluations.
-* **Referee R7**: commissioned on the draft of §11.18 (brief: break the accounting of Theorem
-  11.52; check the Lean file and the chain of quantifiers of Theorem 11.54; evaluate the cost
-  of the algorithm in expectation at large `n`).  **Still running at this checkpoint** — the
-  report is to be copied to `reviews/R7_referee_report.md` and acted upon first thing.
+* **Referee R7** (`reviews/R7_referee_report.md`; arrived after the interim commit `d81eb8a`).
+  Verdict on Theorem 11.54: **proved with gaps**; "I believe the statement is true, I could not
+  break it".  Critical as drafted: the closure gap (found independently; with the drafted
+  rule a false bracket with probability one in part of the parameter range).  Major: the
+  cost bound must hold always, not only on the good event (an abort rule); the induction
+  over levels was one parenthesis and needs left limits in the accuracy, a ladder in units
+  of the inner dimension, and monotonicity in the failure probability (the referee carried
+  it out); the label of Theorem 11.53 (machine-checked for an abstract pair only); prior art
+  (Mathé–Novak 2007: adaption breaks an exponential non-adaptive barrier for a log-concave
+  class).  **No error in the accounting of Theorem 11.52 beyond the closure rule.**  The
+  referee's numerics: cost in expectation on 30 radial outer profiles plus adversarial
+  search, `n = 10³ … 10⁶` — excess over `τ` from `0.029` down to `0.0002`, never above the explicit
+  bound of the proof; about 17 000 simulated runs of the outer loop, no violation; recursion
+  to 64 levels, residual halving with the grid; Lean compiled, axioms printed.  All
+  corrections are in the text; the boundedness hypothesis of the two Lean theorems was
+  generalised as the referee suggested.
 
 ### Collaboration hub established (2026-11-25)
 
@@ -914,11 +926,15 @@ Verified state: every module under `proofs/` (45 files) builds with zero warning
 by the axiom audit (3016 declarations); the harness (96 registered tests: 79 that must survive,
 17 documented refutations) and its mutation tests (164 mutations: 163 caught, one expected
 pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 at commit
-`36ec238` (corrected).  **Not refereed**: §11.18 (review in progress), the revised Theorem 11.44
-and Lemma 11.43(c), Proposition 11.50.  In priority order:
+`36ec238` (corrected), §11.18 in draft (R7, corrected).  **Not refereed**: the revised Theorem
+11.44 and Lemma 11.43(c), Proposition 11.50; **not checked by anyone**: the two-level algorithm
+end to end with real inner brackets, and three nested levels (THY-REQ-0001 asks the
+Computational Research Division for the first).  Two independent workstreams were
+commissioned on 2026-11-25 and were running when this was written: K (bounded accuracy;
+`workstreams/K_brief.md`) and F (known part; `workstreams/F_brief.md`) — their reports, if any, are
+in the scratch directory of the session and must be copied to `docs/workstreams/` and reviewed
+before use.  In priority order:
 
-0. **Integrate the report of referee R7 on §11.18** (if this session ends first: the brief is
-   in the cycle-10 entry above; re-commission with the same brief on the committed text).
 
 1. **Adaptive algorithms at a bounded accuracy.**  Theorem 11.54 is for `ε = ε₁n`.  At `ε = O(1)`
    the non-adaptive exponent is `a`, the hinted one `h`.  A version of the two-level algorithm
