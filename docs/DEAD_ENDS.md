@@ -1557,3 +1557,45 @@ re-computation of "every headline number" with independent solvers — had passe
    in two cells).  Reading a draft is not a breach of the referee's independence — nothing
    was sent to the referee — but a citation of an unfinished report should say that it is
    one; it did not.
+
+## D54. Ratios of macrostates and local data with a field: four wrong first guesses of the coordinator (cycle 10, thirteenth checkpoint; theory report §§11.28, 11.29, and the remark after Theorem 11.56)
+
+1. **"The extremal residual of a ratio is constant on each macrostate"** — the first guess
+   for the uncertainty of a free-energy difference: shift the two states against each
+   other by their distance, `R⁺ = e^{d(B,A)}·w(A)/w(B)`.  False already for three states (the
+   Scientific Discovery Division's example: `e + e^{10}` against `2e`), and false for the two
+   halves of the cube, where the extremal residual is the maximal field (`2.8` times the
+   constant shift on `Q_6`).  Harness DEAD.26.
+2. **"The signed distance to the interface is the extremal residual."**  The natural
+   second guess for a threshold macrostate — `−d(B, x)` on `A` and `+d(x, A)` on `B` — is not
+   admissible: across the interface it jumps by twice the envelope.  The closure
+   equations of Theorem 11.105(b) have the maximal field as their only symmetric solution;
+   the "distance from the other side" enters *alternately* (lowest extension to `A`,
+   highest to `B`), not symmetrically.
+3. **A sign change that was not one** (Proposition 11.109).  To match the oracle's answers
+   at a null and at its dips, the first argument swept the additive instances `γ|x|` from
+   `γ = +u` to `γ = −u`: at the two ends no instance of the class has a smaller or a larger
+   one-body marginal, so the mismatch "must" have opposite signs there.  It is exactly
+   zero at both ends — an instance with no slack in one direction has no dips — and for
+   some families of dips (small balls around centres of type `½`) it has one sign in
+   between.  The brute-force scan on `Q_10` showed it before anything was written.  What
+   survives is a criterion, and the two consequences are labelled conjectures.
+   *Lesson:* an extremal instance is extremal because nothing can be done to it; do not
+   use it as the end of a homotopy of perturbations.
+4. **"Every sample of Algorithm 2L⁺ is below `2e^λM†`."**  The coordinator's first answer to
+   the engineering division's question, derived from the constants of Theorem 11.52 and
+   transferred to Algorithm 2L⁺ without re-reading its closure test.  In 2L⁺ the closing
+   radius `r†` is defined through the two-sided ratio, and after a populated level the
+   closure of an unpopulated pass needs the radius to drop by `⌈λ/u⌉` — the cap is
+   `2·max{e^λM†, M‡}`.  The simulation found a sample of `3.69·M†` at `λ = ½`, above `2e^{1/2} = 3.30`
+   (harness XVI.4, mutation M1).  *Lesson:* D52 item 7 and D53 item 1 a third time — a
+   constant was carried from the setting in which it was derived to a neighbouring one.
+5. **Two convergence tests that tested the lattice.**  The first check of the
+   exponential-scale formula used thresholds off the lattice of types (`1.1`, `0.6`): the
+   lattice sets then differ from the continuum sets by `O(1/n)` in a way that is not
+   monotone in `n`, and a test "the gap decreases" failed on a true statement.  With
+   thresholds on the lattice the gap is `−0.27/n`.  And the exploration of the
+   type-restricted dip exponent at the zero residual (for Proposition 11.109(e)) was
+   launched as a nested grid with an inner solver in the loop and ran into its time limit;
+   a version reduced by a factor of twenty needed fifteen minutes for one row of eight
+   numbers — the coarse numbers quoted in Proposition 11.109(e).

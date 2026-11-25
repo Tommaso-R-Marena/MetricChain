@@ -1,6 +1,6 @@
 # Status of the Theoretical Research Division
 
-*Updated 2026-11-25 (twelfth checkpoint of cycle 10; see the commit time).  Branch `claude/determined-ride-og1u7j`.*
+*Updated 2026-11-25 (thirteenth checkpoint of cycle 10; see the commit time).  Branch `claude/determined-ride-og1u7j`.*
 
 ## The three divisions (research owner's directive of 2026-11-25)
 
@@ -18,7 +18,8 @@ allocation is shared by the three divisions.
 
 | commit | what |
 |---|---|
-| (this commit) | Cycle 10, twelfth checkpoint: **three independent checks applied** — referee R10 on the mean-field section (no critical finding; the junction claim of Proposition 11.81(b) false at large slopes and rewritten, the interval of Proposition 11.82(e) corrected to the proved `[0.00184, 0.00338]`, fifteen minor findings; the referee's completion makes Proposition 11.81(c) a proof: ferromagnets have an adaptive algorithm with at most the uniform cube's exponent); the Scientific Discovery Division's originality review SCI-REV-0004 (Lemma 11.89 is **known**: Hasenclever–Scholz 2013; the formulas of G11/G18 are in print at the cone instance; product samplers tie with the flat histogram at vanishing accuracy; "linear on a convex non-symmetric cone", not "non-linear"); the Computational Research Division's adversarial count ENG-RES-0008 (our cost figures for Algorithm 2L⁺ were best-case numbers; corrected).  New: the sample-size cap of Algorithm 2L⁺ lowered to a constant multiple of `M†` (remark after Theorem 11.56, harness XVI.4); harness DEAD.25, XVII.5; D53; THY-MSG-0012, THY-RES-0004, THY-RES-0005 |
+| (this commit) | Cycle 10, thirteenth checkpoint: **observable free energies** (theory report §11.28, the coordinator's paper proofs, unrefereed, prior art not searched; SCI-REQ-0001 Q1): the robust range of a ratio `Z(A)/Z(B)` of two macrostate weights is a transport problem with gains from `B` to `A` — weak duality, the max–min sandwich and closed pairs machine-checked (`MacroRatio.lean`); closed forms for one state, for the two sides of a threshold on the cube (the maximal field), for one-coordinate macrostates, and a max–min of transport costs and rate functions at the exponential scale; **a one-body marginal oracle with a field** (§11.29; SCI-REQ-0001 Q2): a matching criterion, proved, and two conjectures (the oracle helps at an instance, not for the class); harness block XXIII (five tests), DEAD.26, twenty mutations; D54; THY-RES-0006 |
+| `40c5bd7` | Cycle 10, twelfth checkpoint: **three independent checks applied** — referee R10 on the mean-field section (no critical finding; the junction claim of Proposition 11.81(b) false at large slopes and rewritten, the interval of Proposition 11.82(e) corrected to the proved `[0.00184, 0.00338]`, fifteen minor findings; the referee's completion makes Proposition 11.81(c) a proof: ferromagnets have an adaptive algorithm with at most the uniform cube's exponent); the Scientific Discovery Division's originality review SCI-REV-0004 (Lemma 11.89 is **known**: Hasenclever–Scholz 2013; the formulas of G11/G18 are in print at the cone instance; product samplers tie with the flat histogram at vanishing accuracy; "linear on a convex non-symmetric cone", not "non-linear"); the Computational Research Division's adversarial count ENG-RES-0008 (our cost figures for Algorithm 2L⁺ were best-case numbers; corrected).  New: the sample-size cap of Algorithm 2L⁺ lowered to a constant multiple of `M†` (remark after Theorem 11.56, harness XVI.4); harness DEAD.25, XVII.5; D53; THY-MSG-0012, THY-RES-0004, THY-RES-0005 |
 | `89ac710` | Cycle 10, eleventh checkpoint: **heteropolymer product landscapes** (theory report §11.26, workstream W, unrefereed): several site types, any alphabets, asymmetric envelopes; the site function is a Rényi capacity and the non-adaptive exponent an inverse sphere-packing exponent (Theorem 11.99; two steps machine-checked, `RenyiCentre.lean`); the adaptive exponent by transfer; exponents of site types do not add; with three or more letters the site function need not be concave and the uniform site law need not be the hardest (Proposition 11.103; a remark of §11.25 corrected, D52); **the third division read and answered** (THY-RES-0003; Proposition 11.104: local ensemble-averaged data do not change the non-adaptive exponent, with its Lemma A); harness block XXII; THY-MSG-0011, THY-REQ-0011 |
 | `5ed4072` | Cycle 10, tenth checkpoint: **slices** (theory report §11.25, the coordinator's own section, unrefereed): among pairs of binary variables with a given odds ratio the mutual information is largest at uniform marginals (Lemma 11.89); on every type class binary centres suffice and the game function is dominated by the uniform cube's (Theorem 11.90); hence **no known part that is a function of the type is harder than the uniform cube, and an interaction without a field — antiferromagnets included — changes no exponent** (Corollary 11.91; settles an open item of §11.23); algorithms reduce to type classes (Theorem 11.92; deterministic core in `SliceRefinement.lean`); the adaptive exponent of a type class is Conjecture 11.94; workstream V ended without a report (D51); harness block XXI; THY-MSG-0010 |
 | `e4351b9` | Cycle 10, ninth checkpoint: **a known part with interactions — mean-field models** (theory report §11.23, workstream T, unrefereed; referee R10 at work) and **rounds of adaptivity** (§11.24, workstream U, unrefereed); `TwoRounds.lean` (the two-round indistinguishability lemma, machine-checked); `GroupSampling.lean` (the every-`n` lower bounds for an arbitrary symmetry group with an invariant envelope, machine-checked); harness blocks XIX, XX and four documented refutations; D49, D50; workstream V commissioned (the adaptive exponent for exchangeable known parts); THY-MSG-0009, THY-REQ-0009 |
@@ -44,10 +45,10 @@ allocation is shared by the three divisions.
 ## Verified state at the head of the branch
 
 * `bash scripts/audit_all.sh` exits 0.
-* 57 Lean files, zero warnings; the axiom audit walks 3432 declarations: only `propext`,
+* 58 Lean files, zero warnings; the axiom audit walks 3442 declarations: only `propext`,
   `Classical.choice`, `Quot.sound`.
-* Harness: 138 registered tests — 113 must survive, 25 are documented refutations.
-  Mutation tests: 302 mutations, 301 caught, one expected pass.
+* Harness: 144 registered tests — 118 must survive, 26 are documented refutations.
+  Mutation tests: 322 mutations, 321 caught, one expected pass.
 * Replicated by the Scientific Discovery Division on a third machine at `5ed4072` (Lean
   part: 3423 declarations, identical; SCI status file at `9c4bf96`).
 * Benchmarks B1–B13 reproduce the numbers quoted in the theory report.
@@ -69,25 +70,24 @@ allocation is shared by the three divisions.
 | §11.25 (slices; every function-of-type known part against the uniform cube) | the coordinator's paper proofs (odds-ratio lemma; binary centres suffice on a type class, by duality; closed forms; domination; reduction of algorithms to type classes; random splits); every step checked numerically with code that shares nothing with the proofs (`experiments/coordinator_checks/slices/`), harness XXI.1–4 with 21 mutations; the deterministic core of the reduction machine-checked (`SliceRefinement.lean`); **not refereed**; Corollary 11.91 is an inequality between exponents only through Theorems 11.78, 11.79 of §11.23 (refereed by R10: proved); the adaptive exponent of a type class is a conjecture; **under independent review by the Scientific Discovery Division (SCI-REV-0001, announced)**; the remark on more than two letters corrected at the eleventh checkpoint |
 | §11.26 (heteropolymer product landscapes; the channel-coding dictionary) | paper proofs by workstream W — lower bounds for every `n` from machine-checked statements, upper bounds by transfer of Theorems 11.78(b), 11.52, 11.54, 11.64; the coordinator re-derived Theorem 11.99 and re-computed every number of the worked example with an own implementation (`experiments/coordinator_checks/sites_W/`); two steps of Theorem 11.99 machine-checked (`RenyiCentre.lean`); **not refereed**; one conjecture of the report refuted, one remark of the coordinator corrected (D52) |
 | §11.27 (a marginal oracle; Proposition 11.104) | the coordinator's short paper proof, using Lemma A of the Scientific Discovery Division (read, not reviewed); exact enumeration at `n = 7` (harness XXII.4); not refereed |
+| §11.28 (observable free energies: the robust range of a ratio of macrostate weights) | the coordinator's paper proofs, written in answer to SCI-REQ-0001 Q1; the certificate half machine-checked (`MacroRatio.lean`: weak duality, one state, both halves of the sandwich, closed pairs); strong duality is linear-programming duality; every statement checked numerically (`experiments/coordinator_checks/ratios/`, harness XXIII.1–4, DEAD.26); **not refereed; prior art not searched** (asked of the Scientific Discovery Division) |
+| §11.29 (a one-body marginal oracle with a field; Proposition 11.109) | the criterion (a)–(d): the coordinator's paper proof, brute force on `Q_10` (harness XXIII.5); the consequences (e), (f): **conjectures**; not refereed |
 
 ## Active investigations
 
-1. **SCI-REQ-0001, Q1: the robust interval of a ratio of macrostate weights** (the
-   observable free energies) — accepted and in progress: an exact dual description (a
-   bipartite transport plan with gains), closed forms for macrostates that are unions of
-   type classes, the single-site reduction; with a harness block and a machine-checked
-   soundness statement, at the next checkpoint.
-2. **SCI-REQ-0001, Q2: a one-body marginal oracle with a field** — in progress: class
-   exponent against instance exponent.
-3. Workstream Y (known parts with interactions along the chain; `docs/workstreams/Y_brief.md`):
+1. Workstream Y (known parts with interactions along the chain; `docs/workstreams/Y_brief.md`):
    running.
-4. Open, in the order we would take them: Conjecture 11.94 (adaptive algorithms on one
-   type class); a referee for §11.24 and §11.26 (asked of the Scientific Discovery
-   Division: THY-REQ-0011), for the completion of Proposition 11.81(c) and for the remark
-   on sample sizes after Theorem 11.56; the junction `min{βJ*, βJ_w}` of Proposition 11.81(b);
-   whether the product proposal with the capacity-achieving marginal is exponent-optimal
-   on the whole class at bounded accuracy (Theorem 11.61); which site law is the hardest
-   beyond two letters.
+2. Open, in the order we would take them: **the number of evaluations needed to certify a
+   ratio of macrostate weights** (§12 item 11(a) — the counterpart of the whole
+   query-complexity theory for the observable free energies); the exact range for a
+   pairwise known part; Conjecture 11.94 (adaptive algorithms on one type class); the
+   two conjectures of Proposition 11.109 (a concentration statement for the excess mass
+   of the hard dips; an algorithm that uses the oracle); a referee for §§11.24, 11.26,
+   11.28 (asked of the Scientific Discovery Division: THY-REQ-0011, THY-RES-0006 §5), for
+   the completion of Proposition 11.81(c) and for the remark on sample sizes after
+   Theorem 11.56; the junction `min{βJ*, βJ_w}` of Proposition 11.81(b); whether the product
+   proposal with the capacity-achieving marginal is exponent-optimal on the whole class
+   at bounded accuracy (Theorem 11.61); which site law is the hardest beyond two letters.
 
 ## Open requests to the Computational Research Division
 
@@ -129,8 +129,9 @@ allocation is shared by the three divisions.
 | SCI-MSG-0001 §7(b), (c) | a field as known part; the two-oracle model | THY-RES-0003 §2 | pointers only; open |
 | SCI-MSG-0001 §5 | exact robust interval for a ratio of macrostate partition functions | THY-RES-0003 §3 | answered then: none beyond Theorem 11.12; **taken up as SCI-REQ-0001 Q1** |
 | SCI-REV-0004 | originality of the query-complexity cluster: one lemma published, two formulas in print at one instance, one comparison an equality at vanishing accuracy, one explanation inaccurate, citations | THY-RES-0005 §1; THY-MSG-0012 §§2, 4 | **all six recommended actions done**; its classification reproduced in theory report §10 |
-| SCI-REQ-0001 | Q1 ratios of macrostates; Q2 two oracles with a field; Q3 upper boundary of the limit shape; Q4 a thermodynamic oracle | THY-RES-0005 §§2–3 | Q1, Q2 accepted, in progress; Q3(c) answered (a lemma); Q3(a), (b) deferred; Q4 commented |
-| SCI-REV-0001, -0002, -0003 (announced) | independent reviews of §11.25, §11.22 and §11.24 | — | awaited |
+| SCI-REQ-0001 | Q1 ratios of macrostates; Q2 two oracles with a field; Q3 upper boundary of the limit shape; Q4 a thermodynamic oracle | THY-RES-0005 §§2–3; **THY-RES-0006**; theory report §§11.28, 11.29 | **Q1 answered for the range** (duality; closed forms; certificate), its query complexity open; **Q2(a) answered by a criterion and two conjectures**; Q3(c) answered (a lemma); Q3(a), (b) deferred; Q4 commented |
+| SCI-REV-0001, -0002, -0003, -0005, -0006 | independent reviews of §11.25, §11.22, §11.24, §11.26 and of the prior art for kernels, geometry and chains | — | **published (seen at `ae32bc9`); to be applied at the next checkpoint** |
+| SCI-RES-0002, SCI-MSG-0005, -0007 and others | measured residual classes; certified kinetics; alternative frameworks — each with requests to theory | — | seen in the digest; not yet read |
 | replication of the audit at `5ed4072` | Lean part identical (3423 declarations) | recorded above | Python part running on their side |
 
 ## Computational evidence received (quoted on this branch with its origin)
@@ -163,3 +164,5 @@ allocation is shared by the three divisions.
 | 2026-11-25 17:57 | fetched: `research/scientific-translation` exists at `9c4bf96` (branch point: our `5ed4072`); read `SCIENCE_TO_ALL.md`, `status/science.md`, SCI-MSG-0001, outline of `docs/science/INFERENCE_LIMITS.md`; nothing merged; answered by THY-RES-0003, THY-MSG-0011 §4, THY-REQ-0011; engineering unchanged at `db56d05` |
 | 2026-11-25 18:33 | fetched after the push of the eleventh checkpoint (`89ac710`): engineering at `a2f6dc7` (checkpoint 3: ENG-MSG-0003, ENG-RES-0008, -0009, -0010), science at `ece8732` (SCI-REV-0004, SCI-REQ-0001); read; nothing merged |
 | 2026-11-25 19:10 | fetched: engineering unchanged at `a2f6dc7`; science at `d7f6d47` (a snapshot of running workstreams, marked unreviewed — not read as results); answered by THY-MSG-0012, THY-RES-0004, THY-RES-0005 with the twelfth checkpoint |
+| 2026-11-25 20:10 | twelfth checkpoint pushed (`40c5bd7`) |
+| 2026-11-25 20:33 | fetched before the thirteenth checkpoint: engineering unchanged at `a2f6dc7`; science at `ae32bc9` — **new and not yet read in full**: SCI-REV-0001 (§11.25), -0002 (§11.22), -0003 (§11.24), -0005 (§11.26), -0006 (prior art for kernels, geometry, chains), SCI-RES-0001…-0004, SCI-MSG-0002…-0011; its digest says: no false theorem in four sections; one displayed claim false as stated (Theorem 11.84(ii): the bound on the batches holds on the good event only), one missing proof step (Theorem 11.90(a) at negative accuracies), two gaps in the proof of Theorem 11.101(b), the proved bracket of §11.22 is `[116, 3 627]`, and a headline sentence in every section says more than its theorems.  **These are applied at the next checkpoint; until then read §§11.22, 11.24, 11.25, 11.26 with them** |

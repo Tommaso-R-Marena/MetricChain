@@ -602,5 +602,45 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXII.4 M4: the single cone claimed invisible to one-body data as well
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.1 M1: the gain of a plan taken in the other direction (e^{d(y,z)})
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.1 M2: the second extension taken as a maximum as well
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.1 M3: the sandwich claimed without the cardinalities (R+ = M)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.1 M4: one state against a macrostate with the distance in the other direction
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.1 M5: the full programme claimed to have a smaller value than the bipartite one by a per cent
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.2 M1: the field of the other sign claimed extremal for separated macrostates
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.2 M2: a band claimed to be served by the better of the two fields
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.2 M3: distances between type classes halved
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.3 M1: the single-site programme with marginal weights claimed exact for pairwise known parts
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.3 M2: the conditional bound taken over the best configuration of the other sites instead of the worst
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.4 M1: the transport cost between type classes taken in the other direction
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.4 M2: the upper half of the sandwich claimed without the number of classes
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.4 M3: the best cone claimed to approach the continuum value from below
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.4 M4: the rate function entering with the wrong sign for the macrostate that is favoured
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.5 M1: the dip not symmetrised over the cyclic shifts (a single ball)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.5 M2: the shift of the mean type claimed to be Phi times the mismatch (no normalisation)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.5 M3: the window of one-body marginals claimed with half the slope
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.5 M4: every family of dips claimed to be matched by some additive null
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.26 M1: the constant shift replaced by the true values (the refutation must disappear)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.26 M2: all three distances of the example equal (the shift is then exact; the refutation must disappear)
+                  exit=1  1 TEST(S) MISBEHAVED
 
-302 mutations: 301 caught, 1 expected pass, 0 not as expected
+322 mutations: 321 caught, 1 expected pass, 0 not as expected

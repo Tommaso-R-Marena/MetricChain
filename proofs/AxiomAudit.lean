@@ -54,6 +54,7 @@ import proofs.Frontiers.TwoRounds
 import proofs.Frontiers.GroupSampling
 import proofs.Frontiers.SliceRefinement
 import proofs.Frontiers.RenyiCentre
+import proofs.Frontiers.MacroRatio
 import proofs.AuditCommand
 
 /-!
@@ -491,6 +492,15 @@ import proofs.AuditCommand
 #print axioms MetricChain.RenyiCentre.exists_ratio_le
 #print axioms MetricChain.RenyiCentre.eq_of_forall_ratio_ge
 #print axioms MetricChain.RenyiCentre.softmin_admissible
+#print axioms MetricChain.MacroRatio.macro_le_of_plan
+#print axioms MetricChain.MacroRatio.macro_single_le
+#print axioms MetricChain.MacroRatio.macro_le_card_mul
+#print axioms MetricChain.MacroRatio.cone_admissible
+#print axioms MetricChain.MacroRatio.macro_cone_ge
+#print axioms MetricChain.MacroRatio.closed_pair_within_A
+#print axioms MetricChain.MacroRatio.closed_pair_within_B
+#print axioms MetricChain.MacroRatio.closed_pair_cross
+#print axioms MetricChain.MacroRatio.two_point_witness
 #print axioms MetricChain.GamePair.exactRec_congr
 #print axioms MetricChain.GamePair.HintShape.pair
 #print axioms MetricChain.GamePair.HintShape.exists_pair

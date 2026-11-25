@@ -94,6 +94,8 @@ referees (`reviews/R2` – `R9`), are classified separately there; §0.3 is a ma
 | **slices** (every known part that is a function of the type, against the uniform cube) | among pairs of binary variables with a given odds ratio the mutual information is largest at uniform marginals; hence inside every type class binary centres suffice and the game function is dominated by the cube's, with equality for the class `½`: **no function-of-type known part is harder than the uniform cube, and an interaction without a field — antiferromagnets included — changes no exponent** (two letters; with three or more letters the comparison fails at small slopes: a known part that removes letters can make the problem harder); algorithms reduce to type classes (`n + 1` terms, each with a constant known part) | §11.25 | the coordinator's paper proofs, every step checked numerically; deterministic core of the reduction machine-checked; **not refereed**; the reading as exponents rests on §11.23; the adaptive exponent of a single type class is a conjecture |
 | **heteropolymer product landscapes** (a fixed sequence of site types, any alphabets, single-site known parts, envelopes that need not be symmetric) | the sketch of §11.20 is a chain of theorems: joint-type-stratified sampling is optimal among fixed samples for every `n`; the three exponents are `R̂(e) = max_t[Σ_jλ_jF*_j(t) − te]` (hinted at the hardest instance = adaptive without a hint), `θ_na = R̂∘S^{−1}`, with one common slope for all site types; **the site function is a Rényi capacity, `F*_j(t) = (1−t)C_t`, of the channel "vertex of the site's Lipschitz polytope ↦ its Gibbs law", so a fixed sample of `e^{nθ}` points certifies the accuracy rate `E_sp(θ)` (the sphere-packing exponent) and adaptivity gains exactly `θ`**; exponents of site types do not add; with three or more letters `F*` need not be concave and the uniform site law need not be the hardest | §11.26 | the every-`n` lower bounds and two elementary steps of the Rényi form machine-checked; paper proofs by a workstream, the upper bounds by transfer of Theorems 11.78(b), 11.52, 11.54, 11.64; every number re-computed by the coordinator with an own implementation; **not refereed**; nothing of the nested algorithm simulated |
 | evaluations **together with local ensemble-averaged data** (a question of the Scientific Discovery Division) | on the cube class, free knowledge of all `k`-body marginals of the Gibbs measure changes neither the adaptive exponent (their theorem) nor the non-adaptive one (ours), for `k = o(n/ln n)` | §11.27 | a short paper proof using their orthogonal-array lemma; exact enumeration at `n = 7`; not refereed; zero known part only |
+| **observable free energies**: the range of a ratio `Z(A)/Z(B)` of two macrostate weights over the residual class (a question of the Scientific Discovery Division) | an exact dual: a transport plan with gains from `B` to `A` certifies the ratio, and only the constraints from `B` to `A` matter; closed forms — one state; the two sides of a threshold on the cube (the extremal residual is the maximal field; `±n·ln cosh(u/2)` for the two halves); one-coordinate macrostates on product spaces; a max–min formula with transport costs at the exponential scale | §11.28 | the certificate half machine-checked (`MacroRatio.lean`); strong duality and the reductions on paper, checked numerically (harness XXIII); not refereed; the range only — nothing on the number of evaluations; prior art not searched |
+| a **one-body marginal oracle with a field** (the second question of that division) | a criterion: the oracle cannot tell a symmetrised dip from its null iff the excess mass has the null's mean type; so at a given instance (the zero residual) most dips become visible, while for the class the exponent is expected to survive — the adversary moves the instance | §11.29 | the criterion and the lower bound it gives: paper proofs, brute force on `Q_10` (harness XXIII.5); the two consequences are conjectures (a concentration statement and an algorithm are missing); not refereed |
 
 What none of this establishes is listed in §8; the strongest open questions are in §12 and,
 in priority order, in `docs/RESEARCH_LOG.md` ("Resume here").
@@ -1187,6 +1189,16 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   not been redone on products of type classes), and it does not close the gap between
   the single-letter lower bound and the bound from type classes when exits that change
   the type matter (a field; two phases beyond the junction).
+* **For observable free energies — differences between macrostates — only the range is
+  understood, not the cost of narrowing it** (§11.28; the coordinator's paper proofs,
+  **unrefereed**, prior art **not searched**).  The duality is exact on every finite space
+  with a quasi-metric envelope, but the programme has as many variables as the two
+  macrostates have states; closed forms exist for one state, for thresholds of the order
+  parameter on the cube, for one-coordinate macrostates with independent sites, and at
+  the exponential scale for macrostates defined by the type.  For a pairwise known part
+  only a bracket with a site-local certificate is proved; for macrostates defined by a
+  counting statistic (a number of contacts) nothing beyond the general duality.  The
+  query complexity of certifying a ratio is open.
 * **For more than two letters and several site types the theory is a workstream's paper
   proof by transfer** (§11.26; **unrefereed**).  The lower bounds hold for every `n` and rest
   on machine-checked statements; the upper bounds re-use the proofs of Theorems 11.78(b),
@@ -1303,6 +1315,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/GroupSampling.lean` | `gdens`, `gdens_mono`, `gdens_smul`, `gdens_mul_card_orbit`, `lowDens_shift`, `regLevel`, `regLevel_admissible`, `regLevel_lowDens_le`, `regLevel_smul`, `truncate_admissible`, `truncate_gdens_le`, `group_nonadaptive_queries_ge`, `group_queries_ge`, `group_witness` (a finite group acting on the configurations with an invariant, possibly asymmetric envelope: the fraction of group elements sending a point into a set is its density in the orbit; for an admissible residual the low sets of two orbits satisfy the normalised matching inequality with the shift `d(a, b)`; levels of orbit density at most `q` regularise to invariant admissible levels; the truncated residual is admissible and differs on orbit density at most `q`; two members of an invariant class that differ on orbit density at most `q` force `(1 − 2δ)/q` non-adaptive evaluations, and `(1 − 2δ)/q` evaluations of every algorithm at an invariant instance; the remark after Theorem 11.76; §11.23) |
 | `proofs/Frontiers/SliceRefinement.lean` | `sum_mem_bracket`, `bracket_width`, `argmax_deficit_le`, `deficit_ge`, `mean_le_of_biregular` (reduction of algorithms to type classes for an exchangeable reference measure, Theorem 11.92: if every class carries a bracket and the class with the largest weighted upper end is always the one refined, the output bracket contains the sum and is at most `card` times as wide as the bracket of that class; that class is within its own bracket width of the largest term, so a class is refined only if its deficit is at most its bracket; Lipschitz class means bound the deficits from below by the gap between the weights and their Lipschitz minorant; and the double counting in a biregular bipartite graph that makes the class means Lipschitz — not formalised: that adjacent type classes of the cube form such a graph, the probabilistic validity of the brackets, the count of evaluations; §11.25) |
 | `proofs/Frontiers/RenyiCentre.lean` | `scale_le_inv_sum`, `exists_ratio_le`, `eq_of_forall_ratio_ge`, `softmin_admissible` (the two elementary steps of Theorem 11.99: for a probability vector `P` and a positive vector `m` some ratio `P(a)/m(a)` is at most `1/Σm`, with equality in every coordinate only for `P = m/Σm` — so against a mixture of vertices no additive instance beats the one whose Gibbs law is the normalised power mean, the Rényi centre; and the class `{γ : γ(a) − γ(b) ≤ d(a,b)}` is closed under soft minima, for envelopes that need not be symmetric — so that instance is in the class; not formalised: the minimax theorem for the matrix game and the identification with the Rényi capacity; §11.26) |
+| `proofs/Frontiers/MacroRatio.lean` | `macro_le_of_plan`, `macro_single_le`, `macro_le_card_mul`, `cone_admissible`, `macro_cone_ge`, `closed_pair_within_A`, `closed_pair_within_B`, `closed_pair_cross`, `two_point_witness` (the certificate half of Theorem 11.105: a transport plan with gains from `B` to `A` bounds `Z_g(A) ≤ λ·Z_g(B)` for every residual that is admissible from `B` to `A`; one state against a macrostate; both halves of the max–min sandwich; a pair closed under the two extensions is admissible in all four directions, so only the constraints from `B` to `A` matter) | §11.28 |
 | `proofs/Frontiers/GamePair.lean` | `HintShape`, `shiftInv`, `partner`, `HintShape.pair`, `HintShape.exists_pair`, `HintShape.superSolution`, `HintShape.Rstep_hint`, `HintShape.exactRec_reaches`, `HintShape.exactRec_tendsto`, `exactRec_congr`, `GameFunction`, `hinted`, `critical`, `GameFunction.hintShape_critical`, `GameFunction.pair`, `GameFunction.exactRec_reaches`, `GameFunction.exactRec_tendsto`, `GameFunction.not_forall_shift_eq`, `GameFunction.critical_eq_neg_L`, `toyGame_gameFunction`, `hinted_toyGame`, `partner_toyGame`, `gauss_exactRec_tendsto` (every game function yields a `HintPair`, and its exact level recursion converges to the hinted exponent; workstream M; §11.21) |
 | `proofs/Frontiers/CoverStability.lean` | `Covers`, `HasCover`, `hasCover_mono`, `hasCover_of_close`, `hasCover_sandwich`, `upper`, `hasCover_upper_iff`, `twoPoints`, `hasCover_limit_point`, `not_hasCover_shifted`, `hasCover_shifted_of_close`, `approx_multiple`, `approx_extend`, `approx_nested`, `approx_nested_example` (covering numbers with position-dependent radii and internal centres are stable under perturbations of the client set, with the slack `(2L + e)η`; only the lower boundary matters; no convergence at a jump; the approximate-nestedness estimate behind Fekete's lemma for sets; §11.22) |
 | `proofs/Frontiers/SetLimit.lean` | `lowerLimit`, `ApproxNested`, `isClosed_lowerLimit`, `mem_lowerLimit_of_tendsto`, `hausdorff_limit`, `scaled`, `SuperAdditive`, `SuperAdditive.approxNested`, `SuperAdditive.combination`, `SuperAdditive.hausdorff_limit`, `SuperAdditive.dist_limit_le`, `SuperAdditive.convex_limit`, `SuperAdditive.cover_sandwich`, `superAdditive_example`, `one_mem_limit_example` (Fekete's lemma for sets: the normalised sets of a family that is super-additive up to a bounded error converge in the Hausdorff sense to a compact convex set, with the one-sided rate `β/M`; the covering numbers of the finite sets are sandwiched by those of the limit at shifted accuracies; §11.22) |
@@ -1364,6 +1377,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G27 | **Slices: every known part that is a function of the type against the uniform cube.**  Among pairs of binary variables with a given odds ratio the mutual information is largest when both marginals are uniform (equivalently, among binary channels with a given odds ratio the symmetric one has the largest capacity).  For the uniform measure on one type class: binary centres suffice, the exponent functions have closed forms, and the game function of every centre on every type class is dominated pointwise by the uniform cube's, with equality only for the class `½` and the centre type `½`.  Hence for every exchangeable known part and every symmetric instance the hinted exponent, the lower bound for all algorithms from symmetric instances and the non-adaptive exponent are at most the uniform cube's, with equality for every interaction without a field up to the junction (antiferromagnets included).  Algorithms reduce to type classes: the class means are Lipschitz in the type, and optimistic refinement over the `n + 1` classes refines a class only as far as its deficit requires; with a random split a type class splits into type classes of the same density | `sum_mem_bracket`, `bracket_width`, `argmax_deficit_le`, `deficit_ge`, `mean_le_of_biregular` **[V]** (the deterministic core of the reduction and the double counting behind the Lipschitz property of the class means); the odds-ratio lemma, binary sufficiency (duality), the closed forms, the domination, the random-partition lemma **[P]**; the reading of the inequalities as exponents: given Theorems 11.78, 11.79 **[P, unrefereed]**; the adaptive exponent of a type class **[C]** | cycle 10, the coordinator (after a workstream on the adaptive question ended without a report); every step of the proofs checked numerically with independent code, harness XXI.1–4 with 21 mutations; **not refereed**; prior art: capacity of the binary asymmetric channel (textbook), bounds through the Bhattacharyya parameter — the comparison at a fixed odds ratio is **known**: Hasenclever–Scholz 2013 (arXiv:1302.6161), Proposition 8(a), found by the Scientific Discovery Division (SCI-REV-0004); the applications (binary sufficiency on a type class, domination by the cube, the reduction of algorithms) were not found in print by that division |
 | G28 | **Heteropolymer product landscapes** — a fixed sequence of site types, any alphabets, single-site known parts, site envelopes that need not be symmetric.  By the symmetry of the sequence alone, for every `n`: the joint-type-stratified sample is optimal among fixed samples up to a polynomial factor and the flat-histogram instance is the hardest invariant one; the quotient envelope is the transport cost.  Single-letter theorem with labelled profiles and transport costs, for every known part that is a function of the joint type.  For product known parts: the flat-histogram instance is as hard as the hardest additive instance; labels are vertices of the sites' Lipschitz polytopes; the game functions of the site types add at one common slope; `F*_j(t) = (1−t)C_t`, the Rényi capacity of the vertex channel, the hardest instance being the Rényi centre; hence `θ_na` is the inverse sphere-packing exponent, `a` the Shannon capacity, and adaptivity (or a hint) gains exactly the rate.  The adaptive exponent without a hint is the hinted exponent of the hardest additive instance.  Exponents of site types do not add; for three or more letters `F*` need not be concave and the uniform site law need not be the hardest; uniform sites group their letters, the hardest number of groups at slope `u` being about `e^{u/2}` | `group_nonadaptive_queries_ge`, `group_queries_ge`, `lowDens_shift`, `truncate_admissible` **[V]** (every-`n` lower bounds for any symmetry group), Theorems 11.22, 11.27 **[V]** (the lower bound at additive instances), `exists_ratio_le`, `eq_of_forall_ratio_ge`, `softmin_admissible` **[V]** (the Rényi centre); `GameFunction` ⇒ pair and recursion **[V]**; everything else **[P]** — the upper bounds by transfer of Theorems 11.78(b), 11.52, 11.54, 11.64; numbers **[N]** with duality certificates; the grouping statement and the hardest-law statements **[N]** except the exact crossings | cycle 10, workstream W; re-computed by the coordinator with an own implementation (largest deviation `5·10⁻⁷`); one conjecture of the workstream refuted by the coordinator (the uniform law is not the hardest at small slopes), one remark of the coordinator corrected by the workstream's controls (uniform sites with four letters); **not refereed**; prior art: Rényi capacity and centre (Csiszár; Nakiboğlu), sphere-packing exponent (Csiszár–Körner), parallel channels (Gallager) — search summaries only; the identification of certification complexity with these exponents was not found |
 | G29 | **Local ensemble-averaged data do not change the exponents of the cube class** (with the Scientific Discovery Division): besides evaluations, let the algorithm know all marginals of the Gibbs measure on at most `k` sites.  Their Theorem C: the hinted (= adaptive) exponent is unchanged.  Proposition 11.104: so is the non-adaptive exponent — cones symmetrised over a linear code with dual distance `k + 1` have exactly uniform `k`-body marginals, cost a factor `|C| ≤ (2n)^{⌈k/2⌉}` in the count and `ln|C|` in the accuracy | `group_nonadaptive_queries_ge` **[V]** (the two-point argument for any transitive group); the proposition **[P]**; exact enumeration at `n = 7` **[N]**; their Lemma A **[K]** (orthogonal arrays), their Theorem C not reviewed by us | cycle 10, the coordinator, answering SCI-MSG-0001 §7(a); not refereed; zero known part and exact marginals only |
+| G30 | **Observable free energies: the robust range of a ratio of two macrostate weights** (a question of the Scientific Discovery Division).  `R⁺(A,B) = sup_g Z_g(A)/Z_g(B)` over the admissible residuals of a finite space with a quasi-metric envelope equals the least `λ` for which a transport plan with gains ships the weight of `A` from `λ` times the weight of `B`; only the constraints from `B` to `A` matter, and extremal residuals are pairs closed under the lowest extension to `A` and the highest to `B`.  Closed forms: one state (Theorem 11.12); the two sides of a threshold on the cube with any exchangeable known part (the maximal field; `±n·ln cosh(u/2)` for the two halves of the uniform cube); a macrostate defined by one coordinate (the single-site programme, exact for additive known parts, two-sided bounds with a site-local certificate for pairwise ones); at the exponential scale `max_{P∈𝒜}min_{Q∈ℬ}[W_d(Q,P) + I(Q) − I(P)]`, exact up to the logarithm of the number of type classes for every `n` | `macro_le_of_plan`, `macro_single_le`, `macro_le_card_mul`, `macro_cone_ge`, `closed_pair_cross` **[V]** (weak duality, the sandwich, closed pairs); strong duality (linear programming), the symmetric reduction, the one-coordinate bounds and the limit **[P]**; all checked numerically, harness XXIII.1–4 with 14 mutations, DEAD.26 **[N]** | cycle 10, the coordinator, answering SCI-REQ-0001 Q1; not refereed; **prior art not searched** — the setting is that of density-ratio classes in robust Bayesian analysis (DeRobertis–Hartigan; Wasserman) and of transportation with gains, and the duality is likely to be known there; the range only, not the number of evaluations |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -1441,7 +1455,13 @@ normalising constant over a Lipschitz class with a fixed sample is a covering pr
 the outputs of a channel whose input the sampler does not know, and adaptivity is worth
 exactly the sampling rate.  It also showed that three of our two-letter statements
 (concavity, "a field always helps", "the uniform law is the hardest") are two-letter
-statements.
+statements;
+(xx) observable free energies (G30): linear-programming duality for a linear-fractional
+programme over a cone given by pairwise ratio bounds; the proofs are a few lines each.
+What it buys is a change of target — from the total `ln Z`, which no experiment measures,
+to differences between macrostates — and a certificate format for it.  The duality is
+very likely known in the language of density-ratio classes or of generalised flows;
+we have not searched.
 Each rests on textbook tools (type covering, Hölder, telescoping, linear-programming duality);
 the proofs are short.  The second referee's verdict on G1–G10 — "a coherent note, not a
 theorem-driven paper" — is reproduced in §12 together with what a publication would still
@@ -6846,6 +6866,317 @@ follow-up question — what a one-body oracle is worth *with a field*, where tra
 are not symmetries — is its SCI-REQ-0001, Q2, and is being worked on.
 
 
+### 11.28 Observable free energies: the robust range of a ratio of macrostate weights (a question of the Scientific Discovery Division)
+
+Everything from §11.6 on is about the total `ln Z`.  The Scientific Discovery Division
+objected (SCI-MSG-0001 §5; SCI-REQ-0001, Q1) that this is not what an experiment compares
+with: the total `ln Z` is fixed by a caloric curve without any model, `ln Z(f+g) − ln Z(f)` is
+not an observable, and the observable free energies are *differences between macrostates*,
+`−ln[Z(A)/Z(B)]`.  It asked for the exact range of such a ratio over the residual class,
+for its extremal residuals, and for a certificate.  This section answers that question
+for the *range* (what a certificate can assert); the number of evaluations needed to
+narrow it is not treated.  The division contributed the first reduction (its addendum
+A3: the residual on `A` is a lower extension from `B`) and a three-point example in which
+the extremal residual is constant on neither macrostate; our earlier answer to it
+(THY-RES-0003 §3: "we have no closed form") is superseded.
+
+**Status of this section.**  The coordinator's paper proofs, written in answer to the
+request; **not refereed**.  Machine-checked (`proofs/Frontiers/MacroRatio.lean`): the
+certificate half of Theorem 11.105 — weak duality, the plan for a single state, both
+halves of the max–min sandwich, and the admissibility of closed pairs.  Strong duality is
+linear-programming duality **[P]**.  Every statement was checked numerically before it
+was written (`experiments/coordinator_checks/ratios/`; harness block XXIII).  Prior art
+has not been searched by us: the range of a ratio of two linear functionals over a cone
+given by pairwise ratio bounds is the setting of density-ratio classes in robust Bayesian
+analysis (DeRobertis–Hartigan 1981; Wasserman 1992, both already cited for §11.2), and the
+dual is a transportation problem with gains (generalised flows); the question has been
+put to the Scientific Discovery Division (THY-RES-0005 §4).  "Not searched", not "new".
+
+**Setting.**  `X` finite, weights `w = e^{−f} > 0`, an envelope `d ≥ 0` with `d(x,x) = 0` and the
+triangle inequality, not necessarily symmetric; residuals are admissible if
+`g(x) − g(y) ≤ d(x,y)`.  `A, B ⊂ X` are disjoint and non-empty, `Z_g(S) := Σ_{x∈S} w(x)e^{−g(x)}`, and
+
+    R⁺(A, B) := sup{ Z_g(A)/Z_g(B) : g admissible }.
+
+The free-energy difference `ΔF_g := −ln[Z_g(A)/Z_g(B)]` ranges exactly over the interval
+`[−ln R⁺(A,B), ln R⁺(B,A)]` (the admissible residuals form a convex set).
+
+**Theorem 11.105 (duality for the robust ratio) [(c) weak duality, (d) upper bound, (e), and
+the admissibility in (b): [V] `macro_le_of_plan`, `macro_single_le`, `macro_le_card_mul`,
+`macro_cone_ge`, `closed_pair_within_A`, `closed_pair_within_B`, `closed_pair_cross`; the rest P].**
+(a) *Only the constraints from `B` to `A` matter.*
+
+    R⁺(A, B) = max{ Σ_{y∈A} w(y)t(y) / Σ_{z∈B} w(z)t(z) :  t > 0 on A ∪ B,  t(y) ≤ e^{d(z,y)} t(z) for all z ∈ B, y ∈ A }
+
+(`t = e^{−g}`): the constraints inside `A`, inside `B`, from `A` to `B`, and all constraints
+through states outside `A ∪ B` can be dropped.
+(b) *Closed pairs.*  Call `g` on `A ∪ B` *closed* if `g(y) = max_{z∈B}[g(z) − d(z,y)]` on `A` (the lowest
+values that `g|_B` allows) and `g(z) = min_{y∈A}[g(y) + d(z,y)]` on `B` (the highest that `g|_A`
+allows).  From any residual that satisfies the constraints of (a), the lowest extension
+to `A` followed by the highest extension to `B` produces a closed pair with a ratio at
+least as large; a closed pair is admissible on `A ∪ B` in all four directions; the maximum
+in (a) is attained at a closed pair.
+(c) *Transport with gains.*
+
+    R⁺(A, B) = min{ λ :  ∃ ψ ≥ 0 on B × A,   Σ_{y∈A} e^{d(z,y)} ψ(z,y) ≤ λ·w(z)  (z ∈ B),   Σ_{z∈B} ψ(z,y) ≥ w(y)  (y ∈ A) }.
+
+Read `ψ(z,y)` as mass delivered at `y` from `z`; delivering it costs `e^{d(z,y)}ψ(z,y)` at `z`; `λ` is
+the factor by which the weight of `B` must be scaled to cover `A`.  **Every feasible pair
+`(ψ, λ)` is a certificate: `Z_g(A) ≤ λ·Z_g(B)` for every admissible `g`** (three lines; **[V]**).
+(d) *One state.*  `R⁺({y}, B) = w(y)/Σ_{z∈B} w(z)e^{−d(z,y)}` (Theorem 11.12 is the case `B = X∖{y}`), and
+`R⁺(A, {z}) = Σ_{y∈A} w(y)e^{d(z,y)}/w(z)`.
+(e) *Max–min sandwich.*  With `M := max_{y∈A} min_{z∈B} e^{d(z,y)}·w(y)/w(z)`:
+
+    M/|B|  ≤  R⁺(A, B)  ≤  |A|·M ;
+
+the lower bound is attained by the **cone** `g = d(·, y)` around a maximising state `y ∈ A`,
+the upper bound by the plan in which every state of `A` is served by its best state of `B`.
+
+*Proof.*  (c), weak duality: for admissible `g`,
+`Z_g(A) ≤ Σ_yΣ_z ψ(z,y)e^{−g(y)} ≤ Σ_zΣ_y ψ(z,y)e^{d(z,y)}e^{−g(z)} ≤ λΣ_z w(z)e^{−g(z)}`, using
+`e^{−g(y)} ≤ e^{d(z,y)}e^{−g(z)}`; only the constraints from `B` to `A` were used.  Strong duality:
+normalise `Σ_B w t = 1` (Charnes–Cooper); the programme of (a) is linear, feasible (`t`
+constant) and bounded, and its dual is the programme of (c).
+(b) Let `g` satisfy the constraints of (a).  Its lowest extension `g′` to `A` is `≤ g` on `A`
+(the constraints say `g(y) ≥ g(z) − d(z,y)`), so the numerator does not decrease; the
+highest extension `g″` to `B` of `g′|_A` is `≥ g` on `B`, so the denominator does not increase; and
+`g′|_A` is still the lowest extension of `g″|_B` (it is compatible with `g″|_B`, and `g″ ≥ g` on `B`).
+So `(g′|_A, g″|_B)` is closed.  A closed pair is admissible inside `A` (a maximum of the
+functions `y ↦ g(z) − d(z,y)`, each of which is, by the triangle inequality), inside `B`
+(a minimum of the functions `z ↦ g(y) + d(z,y)`), and from `A` to `B`: with `z′` attaining the
+maximum for `y` and `y′` attaining the minimum for `z`,
+`g(y) − g(z) = [g(z′) − g(y′)] − d(z′,y) − d(z,y′) ≤ d(z′,y′) − d(z′,y) − d(z,y′) ≤ d(y,z)`.
+(a) A closed pair extends from `A ∪ B` to an admissible residual on `X` (McShane:
+`g(x) := min_{v∈A∪B}[g(v) + d(x,v)]`), so the relaxed maximum is attained by an admissible
+residual; the reverse inequality is trivial.  (d) For one state the plan
+`ψ(z,y) = λw(z)e^{−d(z,y)}` is feasible with the stated `λ`, and the cone `g = d(·, y)` attains it;
+the second formula is the lowest extension from the single state `z`.
+(e) Lower bound: the cone `g = d(·, y)` is admissible, `Z_g(A) ≥ w(y)`, and
+`Z_g(B) = Σ_z w(z)e^{−d(z,y)} ≤ |B|·max_z w(z)e^{−d(z,y)}`.  Upper bound: the plan
+`ψ(z,y) = w(y)·1[z = z(y)]`, `z(y)` a minimiser, has `λ = max_z Σ_{y: z(y)=z} e^{d(z,y)}w(y)/w(z) ≤ |A|·M`.  ∎
+
+*Remarks.*  (1) The division's reduction is the first half of (b); its three-point
+example (`A = {x₁, x₂}`, `B = {y}`, `d(x₁,y) = 1`, `d(x₂,y) = d(x₁,x₂) = 10`) is the second formula of (d):
+the extremal residual is `g(x_i) = g(y) − d(y, x_i)`, which differs by `9` between the two
+states of `A`.  (2) The extremal residuals are cones in the simplest cases only; in
+general they are closed pairs — "distance functions between the two macrostates,
+alternately from one and from the other" — and the programme has to be solved.  (3) The
+sandwich (e) loses the *entropy of the macrostates* (`ln|A|`, `ln|B|`) and nothing else; it
+is the reason why at the exponential scale the answer is a max–min (Theorem 11.108).
+
+**Theorem 11.106 (symmetry; the two sides of a threshold) [P].**  Let a finite group act on
+`X` preserving `w`, `d`, `A` and `B`.  Then an optimal residual can be chosen invariant, and
+`R⁺(A,B)` is the value of the same programme on the orbit space, with the orbit weights and
+the distances `δ(O, O′) = min{d(x,y) : x ∈ O, y ∈ O′}`; Theorem 11.105(e) holds with `|A|`, `|B|`
+the numbers of orbits.  In particular, on the cube with an exchangeable reference
+measure (weights `W_j = π(T_j)` of the type classes — any known part that is a function of
+the type), the envelope `u·`Hamming and macrostates that are unions of type classes, the
+programme lives on the `n + 1` types with the distances `u|j − k|`.
+*If every type of `B` lies below every type of `A`* — the two sides of a threshold of the
+order parameter, with or without a gap between them — **the extremal residual is the
+maximal field** `g = −u|x|`, the only closed invariant pair:
+
+    R⁺(A, B) = Σ_{j∈A} W_j e^{uj} / Σ_{k∈B} W_k e^{uk},        n⁻¹ ln R⁺ → max_{κ∈𝒜}[uκ − I(κ)] − max_{κ∈ℬ}[uκ − I(κ)].
+
+So the robust interval of the free-energy difference between the two sides of a
+threshold is spanned by the two extreme fields `∓u`; for the two halves of the uniform
+cube it is `±n·ln cosh(u/2)·(1 + o(1))` — the threshold constant of §11.10 once more.  *For
+a band between two parts of `B`* no field is extremal; in the examples the optimum is a
+cone around a type class of the band.
+*Proof.*  In the weights `t` the constraints are linear and the objective is a ratio of
+two linear functionals; after normalisation the set of optimal `t` is convex and
+invariant, so the average of an optimal `t` over the group is optimal and invariant.  For
+invariant `t` the binding constraint between two orbits is the one with the least
+distance.  Threshold case: put `G(k) := g(k) + uk` on the types of `B` and `H(j) := g(j) + uj` on those
+of `A`; the two closure equations read `H(j) = max_kG(k)` for all `j` and `G(k) = min_jH(j)` for all
+`k`, so `g + u·`type is constant on `A ∪ B`.  ∎
+
+**Theorem 11.107 (a macrostate defined by one coordinate) [P].**  Let `X = Π_i S_i` with a
+site-additive envelope `d = Σ_i d_i` and let `A = {x_i ∈ A_i}`, `B = {x_i ∈ B_i}` for one site `i`.
+(a) *Additive known part.*  `R⁺(A,B)` is the value of the single-site programme of site `i`
+with its own weights: the other sites drop out, and the extremal residual depends on
+`x_i` only.
+(b) *Pairwise (or any) known part.*  With `R_i⁺[v]` the single-site value for weights `v` on
+`S_i`,
+
+    R_i⁺[ marginal weights of x_i ]   ≤   R⁺(A, B)   ≤   max_r R_i⁺[ w(·, r) ],
+
+`r` running over the configurations of the other sites.  The upper bound is certified by
+a plan that moves the one coordinate only, `ψ((b,r),(a,r)) = ψ_r(b,a)` — **a certificate that a
+pairwise kernel can check site by site, because `w(a,r)/w(b,r)` depends on `r` through the
+neighbours of `i` only**.  Both inequalities are strict in general.
+*Proof.*  Lower bound: residuals that depend on `x_i` only are admissible iff they are
+`d_i`-admissible, and for them the ratio is the single-site ratio with the marginal
+weights.  Upper bound: for each `r` take an optimal single-site plan for the weights
+`w(·, r)`; the union over `r` is feasible for Theorem 11.105(c) with `λ = max_rλ_r`.  For an
+additive known part the conditional weights are proportional to the marginal ones.  ∎
+Plans that move a block of sites around `i`, conditional on the boundary of the block,
+give a decreasing sequence of certified upper bounds; the exact value for a pairwise
+known part on a tree is a natural next question (the programme has exponentially many
+variables, the certificate need not).
+
+**Theorem 11.108 (the exponential scale) [P].**  Let the reference measure be exchangeable
+on `Sⁿ` (a product measure `π^{⊗n}`, or any known part that is a function of the type), the
+envelope site-additive with one site quasi-metric `d₁`, and `A_n`, `B_n` unions of type
+classes.  The distance between two type classes is `n·W_{d₁}(Q, P)`, the transport cost between
+their types (the transportation polytope with integer marginals has integer vertices).
+For every `n`, with `W_P` the weight of the class of type `P`,
+
+    M_n − ln|ℬ_n|  ≤  ln R⁺(A_n, B_n)  ≤  M_n + ln|𝒜_n|,        M_n := max_{P∈𝒜_n} min_{Q∈ℬ_n} [ n·W_{d₁}(Q, P) + ln W_P − ln W_Q ],
+
+`|𝒜_n|, |ℬ_n| ≤ (n+1)^{|S|−1}` the numbers of type classes.  Hence, if the types have the rate
+function `I` (`KL(·‖π)` for a product measure; the rate function of §11.23 for a mean-field
+known part) and `𝒜`, `ℬ` are the closures of their interiors,
+
+    lim n⁻¹ ln R⁺(A_n, B_n)  =  max_{P∈𝒜} min_{Q∈ℬ} [ W_{d₁}(Q, P) + I(Q) − I(P) ],
+
+**attained by a cone around the type class of the maximising `P`**: the perturbation that
+favours `A` most lowers the energy towards the most favourable macroscopic configuration
+of `A`, and `B` answers from the configuration from which that is cheapest to reach.
+*Proof.*  Theorem 11.106 for the symmetric group and Theorem 11.105(e) on the orbit
+space.  ∎
+*Numbers.*  Three letters with the law `(0.5, 0.3, 0.2)`, an asymmetric site envelope,
+`𝒜 = {mean of h ≥ 1.25}`, `ℬ = {mean of h ≤ 0.5}` for `h = (0, 1, 2)`: the continuum value is `0.4142`
+(at `P* = (0.20, 0.35, 0.45)`, `Q* ≈ (0.60, 0.29, 0.10)`); `M_n/n = 0.4210, 0.4062, 0.4081, 0.4114, 0.4124`
+at `n = 12, 24, 48, 96, 144`; the bracket [best cone, best-source plan] for `n⁻¹ln R⁺` is
+`[0.4742, 0.5471]` at `n = 12` (exact value by the linear programme: `0.4838`), `[0.4298, 0.4490]`
+at `n = 96`, `[0.4256, 0.4400]` at `n = 144` — both ends above the limit by `0.33·ln n/n` and
+`0.75·ln n/n`.  Cube, band macrostate (`𝒜 = [0.45, 0.55]` between `ℬ = [0, 0.3] ∪ [0.7, 1]`, uniform
+measure, `u = 1`): limit `0.2823`; at `n = 50` the exact value `0.2767` is that of the best
+cone around a type class.
+
+*What this section does not do.*  (i) The **number of evaluations** needed to certify
+`ln[Z(A)/Z(B)]` to a given accuracy — the counterpart of §§11.10–11.19 — is open.  Two remarks
+for whoever takes it up.  First, by McShane's lemma the residuals restricted to a
+macrostate are exactly the admissible functions on it, and lowering `ln Z_g(A)` by `ε` needs
+a change on a constant fraction of the Gibbs measure of `A`, which sampling finds; so the
+hard alternatives are again dips, in one of the two macrostates, and their effect is
+measured against that macrostate's own weight — a rare macrostate is sensitive to small
+dips.  Second, **a macrostate is not a world of its own**: a dip in `A` must be admissible
+against the states outside `A` as well, which act as exits — at the interface a dip has
+no depth at all — and a dip that straddles the interface raises both weights and may
+change the ratio by nothing (centred on the interface of the two halves of the uniform
+cube it does).  So the answer is not "the earlier theory on each macrostate with a wall
+around it"; that only bounds the sensitivity from above.  For macrostates that are far
+apart the coupling disappears (§11.13: the two thresholds add).  (ii) The exact value for a pairwise known part and a
+macrostate defined by a counting statistic (a number of contacts): Theorem 11.107(b)
+brackets one coordinate only.  (iii) Macrostates that overlap or are defined softly (by
+a weight function) are a ratio of two linear functionals as well and have the same
+duality with `w` replaced by the two weight functions; not written out.  (iv) Nothing
+here is about chains with geometric envelopes; the theorem is as general as its
+hypotheses (a finite space, a quasi-metric envelope).
+
+*Harness.*  Block XXIII: XXIII.1 (Theorem 11.105 on random finite spaces with asymmetric
+envelopes: the full programme, the bipartite one and the dual agree; closed pairs;
+weak duality; one state; the sandwich), XXIII.2 (Theorem 11.106: the programme on `Q_n`
+against the programme on types; the maximal field for separated macrostates; a band),
+XXIII.3 (Theorem 11.107: exact for additive known parts, strict two-sided bounds for
+pairwise ones), XXIII.4 (Theorem 11.108: transport distances between type classes, the
+every-`n` sandwich, the bracket by cone and plan, the continuum value); and the
+documented refutation DEAD.26 (the extremal residual is not constant on the two
+macrostates, and the signed distance to the interface is not admissible).
+
+
+### 11.29 Local data with a known part: the instance decides (the second question of the Scientific Discovery Division)
+
+§11.27 showed that on the uniform cube free knowledge of all `k`-body marginals of the
+Gibbs measure changes no exponent, and the proof used the translations of the cube.
+The Scientific Discovery Division asked (SCI-REQ-0001, Q2) what happens with a field,
+where there is no such symmetry: *is the exponent with a one-body marginal oracle the
+hinted exponent restricted to dips whose excess mass has the one-body marginals of the
+reference, and is it strictly below `R^max` of Theorem 11.64?*  Its concern: "on the uniform
+cube local data are worthless only because of its symmetry".  What we can prove is a
+criterion; what it suggests is that **both halves of the question have the answer the
+division proposed for the first — at a given instance — and the opposite answer for the
+class.**  (a)–(d) below are proved; (e) and (f) are conjectures with their arguments.
+
+**Proposition 11.109 (a one-body marginal oracle with a field) [(a)–(d) P; (e), (f) C;
+coordinator; not refereed; harness XXIII.5].**  Cube `Q_n`, reference `π = Bernoulli(p)^{⊗n}`,
+class `L_u`; besides evaluations of `ψ` the algorithm is given all one-body marginals
+`μ_ψ(x_i = 1)` of `μ_ψ ∝ πe^{−ψ}`, exactly and for free.
+(a) *The window.*  For every `ψ ∈ L_u` and every site, `μ_ψ(x_i = 1) ∈ [p₋, p₊]`, `logit p_± = logit p ± u`;
+all sites are at the upper (lower) end only for the field `ψ = −u|x| + const` (`+u|x| + const`).
+(b) *Invariant instances show one number.*  If `ψ` is invariant under a group of
+permutations of the coordinates that is transitive on the sites — the cyclic shift
+suffices — all its one-body marginals equal the mean type `κ̄(ψ) := E_{μ_ψ}|x|/n`.
+(c) *The matching criterion.*  Let `ψ₀` be symmetric, `D′ ⊊ Q_n` invariant under the cyclic
+shift, `ψ₁` the deepest dip of `ψ₀` on `D′`, `Φ := A(ψ₁)/A(ψ₀) − 1 > 0` and `ν ∝ π(e^{−ψ₁} − e^{−ψ₀})` the
+normalised excess measure.  Then
+
+    κ̄(ψ₁) − κ̄(ψ₀)  =  Φ/(1 + Φ) · [ type(ν) − κ̄(ψ₀) ],
+
+so the oracle answers identically at `ψ₀`, at `ψ₁` and at the image of `ψ₁` under every
+permutation of the coordinates **iff the excess mass of the dip has the mean type of the
+null**.
+(d) *The lower bound that survives.*  If the criterion holds and `ε < ln(1 + Φ)`, every
+`(ε/2, δ)`-correct algorithm with the oracle — adaptive or not, with any hint — makes at
+least `(1 − 2δ)/maxdens(D′)` evaluations at `ψ₀`.  For `D′` the union of the `n` cyclic shifts of
+a set `D`: `maxdens(D′) ≤ n·maxdens(D)` and `Φ⁺_{ψ₀}(D′) ≥ Φ⁺_{ψ₀}(D)`.
+(e) **[C]** *At a given instance the oracle helps.*  At the zero residual (`κ̄ = p`) the dips
+that survive are those whose excess mass has the type `p` — for a dip around a centre of
+type `m` with its Gibbs shell inside, `m(1 − η₁) + (1 − m)η₀ = p` with the two flip
+probabilities of the cone, which is the division's condition — and the exponent with the
+oracle is `ρ_e(p) := sup{r_μ(e) : μ̄ = p}` instead of `R_0(e) = sup_κ ρ_e(κ)`: strictly smaller
+whenever the best dips of the zero residual sit at another type.  (**[N]**, a coarse
+search over two-block profiles at `p = ¼`, `u = 1`, `e = 0.02`: `ρ_e(κ)` is unimodal in the type, with
+`0.0134` at `κ ≈ 0.29` and `0.0129` at `κ = p` — the oracle would lower the exponent of the zero
+residual by about `3.5 %` there: real, and small.)
+(f) **[C]** *For the class it does not.*  The adversary also chooses the instance.  Take
+the flat-histogram instance with a logarithmic well at the type `t₀` of the excess mass
+of its hardest dips — the landscape `max{V − c·ln n, V(t₀) − u|t − t₀|}`, which is `u`-Lipschitz,
+lies below the rate function and within `c·ln n` of the flat one: its Gibbs measure sits at
+`t₀`, its dips are as sensitive as those of `H` up to a polynomial factor, and the criterion
+of (c) can be met.  So **`R^max(ε₁)` is unchanged by a one-body oracle at every accuracy
+`ε ≫ ln n`.**
+*Proof.*  (a) `μ_ψ(x_i = 1)/μ_ψ(x_i = 0) = [p/(1−p)]·Σ_r π(r)e^{−ψ(1,r)}/Σ_r π(r)e^{−ψ(0,r)}` and
+`e^{−ψ(1,r)} ∈ e^{±u}e^{−ψ(0,r)}` for every `r`.  (b) The marginals are permuted by the group and
+their average is the mean type.  (c) `πe^{−ψ₁} = πe^{−ψ₀} + A(ψ₀)Φ·ν`, so
+`μ_{ψ₁} = (μ_{ψ₀} + Φν)/(1 + Φ)`; both `ψ₀` and `ψ₁` are invariant under the cyclic shift, so (b)
+applies to both, and the image of `ψ₁` under a permutation `τ` is invariant under the
+conjugate shift and has the same mean type.  (d) Theorem 11.22(c) for the alternatives
+`ψ₁∘τ`, `τ` a uniform permutation: a fixed point lies in `τD′` with probability
+`dens_{|x|}(D′)`, and outside that event the values *and the oracle's answers* coincide with
+those of the null.  The union: a point lies in at most `n` shifts, and the slack out of
+the union is at least the slack out of each shift (the argument of Theorem
+11.79(d)).  ∎
+*What is missing for (e) and (f)*, and why they are labelled conjectures.  The criterion
+is an equation between two numbers.  One free real parameter of the adversary — the
+depth of a second, compensating family of dips on the other side, or the position of
+the well — meets it by continuity *provided the type of the excess mass is known to lie
+strictly between the values the parameter can reach*.  For the hard dips this needs a
+concentration statement: the excess mass of the sets of Theorem 11.78(a) sits on the
+classes of the optimal profile, i.e. the optimal profile is unique.  We have not proved
+that.  And (e) needs an algorithm that uses the oracle, which we do not have; without it
+(e) is a statement about which lower bounds survive.
+*A trap on the way* (recorded because the first version of the argument fell into it):
+along the additive instances `γ|x|`, `|γ| ≤ u`, the mean type sweeps the whole window, and at
+the two ends no instance of the class has a larger or a smaller marginal — which looks
+like a sign change of the mismatch for free.  It is not: at `γ = ±u` the instance has no
+slack in one direction, the deepest dip on every set is the instance itself, and the
+mismatch is exactly zero at both ends without changing sign in between.
+*Brute force* (`Q_10`, `p = ¼`, `u = 1`; harness XXIII.5).  The identity of (c) holds to `10⁻¹²`.
+For the cyclic union of the balls of radius 2 around the shifts of a centre of type
+`3/10`, the mismatch along the additive instances changes sign at `γ = −0.0187`: there the
+oracle's answers at null and alternative agree to `10⁻¹⁵` in every coordinate while `ln A`
+differs by `1.136` (at `γ = 0`, where the excess type is `0.2520` against `p = 0.25`: `1.165`).  For
+balls of radius 1 around centres of type `5/10` the excess type (`0.41`–`0.48`) is above the
+mean type of every additive instance and there is no root: these dips are visible to
+the oracle at every such instance.  At this size the symmetrised sets fill whole type
+classes, so the illustration is about the oracle's answers, not about exponents.
+*For `k`-body marginals with a field* the same route needs a family of permutations that
+is `k`-wise uniform and of polynomial size (they exist: Kuperberg–Lovett–Peled 2017, cited
+from memory, not opened) and `k` matching conditions instead of one — the first `k` factorial
+moments of the type under the excess measure and under the null; open.
+
+*What this says about the division's concern.*  With a field, local averaged data are
+still worthless against the worst instance of the class, but for a different reason
+than on the uniform cube: not because symmetric hiding places exist for every dip, but
+because the class contains an instance whose own averages already equal those of its
+hardest perturbations.  At an instance that the user believes in — the known part
+itself, `ψ = 0` — the data do exclude most dips.  The meaningful statement about
+measurements is therefore instance-wise, as the division suspected.
+
+
 ## 12. Strongest unresolved questions, and what a publication would need
 
 1. **The exponent theorems (11.9, 11.15).**  The lower bounds are machine-checked for every `n`;
@@ -7101,6 +7432,21 @@ are not symmetries — is its SCI-REQ-0001, Q2, and is being worked on.
    then a row-sum condition); `k`-state sites; the continuous analogue and its relation to the
    smoothness classes of Holzmüller–Bach.  **Observables other than `ln Z`** (Theorem 11.35):
    close the interval between `H/√2` and `H` for the magnetisation at weak coupling.
+11. **Observable free energies** (§11.28; the question of the Scientific Discovery
+   Division that we rank first among the new ones).  The *range* of a ratio of two
+   macrostate weights is settled as a duality; open are, in order: (a) **the number of
+   evaluations** needed to certify `ln[Z(A)/Z(B)]` to a given accuracy — with a hint, the
+   counterpart of Theorem 11.25; without one, of Theorems 11.45 and 11.54 — where the
+   sensitive alternatives are no longer dips on small sets alone: a perturbation that
+   moves weight between the two macrostates matters at first order, and the constraints
+   from `B` to `A` couple the two partition functions; (b) the exact range for a pairwise
+   known part (on a tree by dynamic programming?) and for macrostates defined by a
+   counting statistic; (c) the range and the cost for chains with geometric envelopes
+   (§11.17), where macrostates are sets of conformations and the envelope is a profile
+   distance; (d) prior art: density-ratio classes of robust Bayesian analysis and
+   transportation with gains — whether Theorem 11.105 is a known theorem in one of these
+   languages (asked of the Scientific Discovery Division); (e) soft macrostates (weight
+   functions) and more than two of them.
 
 As it stands, the second phase contains one cluster with the shape of a research contribution —
 *the query complexity of certifying ground states and free energies under envelope

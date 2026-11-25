@@ -1686,55 +1686,105 @@ engineering at `a2f6dc7`, science at `d7f6d47`; nothing merged.
 declarations (no Lean changed); harness 138 tests (113 must survive, 25 documented
 refutations); 302 mutations (301 caught, one expected pass).
 
-### Resume here (cycle 10, twelfth checkpoint)
+### Cycle 10, thirteenth checkpoint — observable free energies: the robust range of a ratio of macrostate weights; local data with a field (theory report §§11.28, 11.29; 2026-11-25)
 
-Verified state: every module under `proofs/` (57 files) builds with zero warnings and is walked
-by the axiom audit (3432 declarations); the harness (138 registered tests: 113 that must
-survive, 25 documented refutations) and its mutation tests (302 mutations: 301 caught, one
+*Why this, and why now.*  The Scientific Discovery Division's request SCI-REQ-0001 ranks
+one question above everything on our own list: the total `ln Z` is not an observable; what
+experiments compare with are free-energy differences between macrostates.  We agree, and
+the question turned out to have a short answer for the *range*.
+
+*What was found* (§11.28; all of it checked numerically before it was written;
+`experiments/coordinator_checks/ratios/`).  In the weights `t = e^{−g}` the admissible class is
+a polyhedral cone and the ratio `Z_g(A)/Z_g(B)` a ratio of two linear functionals.
+**Theorem 11.105:** only the envelope constraints from `B` to `A` matter (the lowest
+extension to `A` and the highest extension to `B` form a closure that never lowers the
+ratio and ends in a pair admissible in all directions); the supremum equals the least
+`λ` for which the weight of `A` can be shipped from `λ` times the weight of `B` when delivering
+a unit from `z` to `y` costs `e^{d(z,y)}` — a transport problem with gains, whose feasible plans
+are certificates (weak duality, three lines, machine-checked); one state against a
+macrostate in closed form (Theorem 11.12 is a special case); and a max–min sandwich that
+loses only the logarithms of the cardinalities.  **Theorem 11.106:** under a symmetry the
+programme lives on orbits; for the two sides of a threshold of the order parameter on
+the cube the extremal residual is the maximal field (the unique closed symmetric
+pair), so the two halves of the uniform cube differ in free energy by at most
+`n·ln cosh(u/2)` either way.  **Theorem 11.107:** a macrostate defined by one coordinate
+reduces to that site for additive known parts and has a site-local certificate (an
+upper bound) for pairwise ones.  **Theorem 11.108:** for macrostates defined by the type,
+`ln R⁺` is `max_P min_Q[nW_d(Q,P) + ln W_P − ln W_Q]` up to the logarithm of the number of type
+classes, for every `n`; in the limit a single-letter max–min of transport costs and rate
+functions, attained by a cone around a type class.  Lean: `MacroRatio.lean` (nine
+statements, first compile).
+
+*The second question* (§11.29): a one-body marginal oracle with a field.  Proved: a
+criterion — a cyclically symmetrised dip is invisible to the oracle iff its excess mass
+has the mean type of the null.  Conjectured, with the arguments: at a given instance
+(the zero residual) the oracle removes most dips (in one coarse example the exponent
+drops by 3.5 %); for the class it removes nothing, because the adversary can move the
+instance.  The first argument for the second half was wrong (a sign change that is
+none: D54 item 3) and was caught by a brute-force scan before it was written down.
+
+*Coordinator's assessment.*  §11.28 is elementary — linear-programming duality for a
+linear-fractional programme — and almost certainly known in the language of
+density-ratio classes or generalised flows; we have not searched, and say so in the
+section's first paragraph and in every summary row.  Its value for the programme is
+the change of target and a certificate format (blueprint §6.5).  The real problem it
+opens is the one it does not touch: how many evaluations narrow the range of a ratio —
+the whole of §§11.10–11.26 again, for an observable.  That is now §12 item 11 and the
+first item of the resume list.  D54 records four wrong first guesses of this
+checkpoint, one of them (a constant carried from Theorem 11.52 to Algorithm 2L⁺) the
+third instance of the same mistake in two days.
+
+*Housekeeping.*  THY-RES-0006 (to the science division; copy to engineering).  Workstream
+Y still running.
+
+**Audit at this checkpoint:** `scripts/audit_all.sh` exits 0; 58 Lean files, 3442 audited
+declarations; harness 144 tests (118 must survive, 26 documented refutations); 322
+mutations (321 caught, one expected pass).
+
+### Resume here (cycle 10, thirteenth checkpoint)
+
+Verified state: every module under `proofs/` (58 files) builds with zero warnings and is walked
+by the axiom audit (3442 declarations); the harness (144 registered tests: 118 that must
+survive, 26 documented refutations) and its mutation tests (322 mutations: 321 caught, one
 expected pass) pass; `scripts/audit_all.sh` exits 0.  **Three divisions** work on three
 branches (this one; `research/ubuntu-engineering`; `research/scientific-translation`); the
 other two are read-only for us and are fetched at every checkpoint
 (`docs/collaboration/status/theory.md`).  Refereed: theory report §§11.16–11.17
 (R5, R6, R_P), §11.18 (R7), §11.19 (R8: "proved"; tested adversarially by the Computational
-Research Division), §11.20 (R9: proved; two gaps closed), **§11.23 (R10: no critical
-finding; two major and fifteen minor findings applied)**.
+Research Division), §11.20 (R9: proved; two gaps closed), §11.23 (R10: no critical
+finding; two major and fifteen minor findings applied).
 Machine-checked: §11.21.  **Checked by the coordinator with independent code, no separate
 referee:** §11.22, §11.24 (under review by the Scientific Discovery Division).  **The
 coordinator's own proofs, checked numerically, no referee:** §11.25 (under review by the
-Scientific Discovery Division), §11.27, Proposition 11.81(c) in its completed form, the
+Scientific Discovery Division), §11.27, **§11.28, §11.29 (criterion only; two conjectures)**,
+Proposition 11.81(c) in its completed form, the
 remark on sample sizes after Theorem 11.56.  **A workstream's proofs by transfer, re-computed,
 no referee:** §11.26.  **Not refereed:** the revised Theorem 11.44, Proposition 11.50.  **Not checked by anyone:** the
 two-level algorithms with three levels or in the extensive regime under an adversarial
 search, or in the batched schedule; the nested algorithm with a field end
-to end; Theorem 11.63 on sets without symmetry for `n > 6`.  Running at the time of
+to end; Theorem 11.63 on sets without symmetry for `n > 6`.  **Prior art not searched:**
+§11.28.  Running at the time of
 writing: **workstream Y** (interactions along the chain; directory `scratchpad/ws/Y/` of the
 session; brief `docs/workstreams/Y_brief.md` — if the session that started it has ended, the
 brief is complete and can be re-commissioned as written).  In
 priority order:
 
-1. **SCI-REQ-0001, Q1: the robust interval of a ratio of macrostate weights** — the
-   observable free energies.  Plan (worked out, not yet verified numerically; nothing of
-   it is claimed anywhere): in the weights `t = e^{−g}` the supremum of `Z_g(A)/Z_g(B)` is a
-   linear-fractional programme over the cone `t(y) ≤ e^{d(x,y)}t(x)`; by the triangle
-   inequality only the constraints between `B` and `A` matter (lower McShane extension to
-   `A`, upper to `B`; the two operations form a Galois connection), and the dual is a
-   bipartite transport plan with gains: `R⁺(A,B) = min{λ : ∃ψ ≥ 0, Σ_y e^{d(z,y)}ψ(z,y) ≤ λw(z)`,
-   `Σ_zψ(z,y) ≥ w(y)}`.  Soundness of such a certificate is three lines (candidate for
-   Lean).  For exchangeable reference measures and macrostates that are unions of type
-   classes: a linear programme on types; on the cube with a threshold macrostate the
-   extremal residual is the maximal field `−u|x|`; at the exponential scale
-   `n⁻¹ln R⁺ → max_{P∈A} min_{Q∈B}[W_d(Q,P) + I(Q) − I(P)]`, attained by a cone around a type
-   class.  On product spaces with a macrostate defined by one coordinate: the single-site
-   programme (exact for an additive known part; an upper bound, conditional on the
-   neighbours, for a pairwise one).  To do: scripts, harness block, Lean soundness
-   statement, a new section; prior art (density-ratio classes of robust Bayesian
-   analysis; transportation with gains) is with the science division.
-   **Q2 (a one-body marginal oracle with a field):** expected answer — the *class*
-   exponent is unchanged (the adversary moves the instance: a logarithmic well makes the
-   instance's own mean type equal to that of the hard dips' excess mass, cyclic
-   symmetrisation makes the marginals constant, one continuous parameter matches them
-   exactly), while the exponent *at the zero residual* drops to dips whose excess mass has
-   the reference's type.  Needs to be written and checked.
+1. **The query complexity of observable free energies** (theory report §12 item 11(a)):
+   how many evaluations certify `ln[Z(A)/Z(B)]` to a given accuracy.  Start with the cube,
+   the two halves `A = {|x| > n/2}`, `B = {|x| ≤ n/2}`, a hint, extensive accuracy: the range is
+   `±n·ln cosh(u/2)`; a verifier is told `g` and must exclude alternatives that change the
+   ratio by `e^{ε}`.  Alternatives now include perturbations *inside one macrostate* (dips
+   in `A` raise the ratio, dips in `B` lower it) — by McShane each macrostate with the
+   restricted envelope is a problem of the old kind — and perturbations that move
+   weight across the interface.  Expected first result: with a hint the exponent is the
+   larger of the two hinted exponents of the macrostates as subsets (type classes above
+   and below the threshold: §11.25 gives their exponent functions), evaluated at the
+   accuracy relative to each macrostate's own weight.  Then: without a hint; the exact
+   range for pairwise known parts; chains.
+   **Also from SCI-REQ-0001:** the two conjectures of Proposition 11.109 (needs: the
+   excess mass of the sets of Theorem 11.78(a) concentrates on the optimal profile; an
+   algorithm that uses the oracle); Q3(a), (b) (the upper boundary of the limit shape —
+   a computation); Q4.
 2. **The adaptive exponent without a hint for an interacting known part** (Conjecture
    11.83, O4).  Reduced at the tenth checkpoint to the uniform measure on one type class
    (§11.25).  Two steps remain, in this order: (a) **Conjecture 11.94(iii)** — redo the

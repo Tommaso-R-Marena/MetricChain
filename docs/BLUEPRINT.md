@@ -457,6 +457,30 @@ To certify `Z^{(0)} > max_k Z^{(k)}` keep an interval per state and refine the s
 interval overlaps the leader's lower end most; stop when intervals separate.  Each interval is a
 `partition` certificate; the comparison itself needs no further proof object.
 
+**Two macrostates of one system with an unknown residual** — the free-energy difference
+`−ln[Z(A)/Z(B)]` that an experiment measures.  Do not subtract two brackets of `ln Z`: the
+residual is the same in both, and the two brackets cannot both be extreme.  The exact
+range has a dual description (theory report §11.28, Theorem 11.105; `macro_le_of_plan` in
+`proofs/Frontiers/MacroRatio.lean`), and the dual object is a certificate:
+
+```
+plan     ψ(z, y) ≥ 0   for z ∈ B, y ∈ A        (mass delivered at y from z)
+check    Σ_{y∈A} e^{d(z,y)} ψ(z, y) ≤ λ · w(z)   for every z ∈ B      (round the left side up)
+         Σ_{z∈B} ψ(z, y)          ≥ w(y)        for every y ∈ A      (round the left side down)
+claim    Z_g(A) ≤ λ · Z_g(B)   for every residual with g(z) − g(y) ≤ d(z, y)
+```
+
+Only the envelope constants from `B` to `A` enter.  The plan is as large as the two
+macrostates, so it is usable as it stands for small ones only.  For a macrostate defined
+by one coordinate of a product space the plan can be taken site-local — it moves that
+coordinate and nothing else — and then the check is one small plan per configuration of
+the neighbours of the site (Theorem 11.107: exact for independent sites, an upper bound
+for pairwise known parts).  For macrostates defined by the composition (the two sides of
+a threshold of an order parameter) no plan is needed: the extreme residuals are the two
+strongest uniform fields the envelope allows, and the range is the difference of two
+free energies in those fields (Theorem 11.106).  This format is **not** part of the JSON
+schema or of the verified kernel; it is a design note.
+
 ### 6.6 What a residual certificate will cost, and the second-order alternative
 
 The loop of §6.2 is the right loop for a first-order envelope, but theory report §11 shows that

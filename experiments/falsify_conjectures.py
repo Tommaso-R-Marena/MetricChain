@@ -8121,6 +8121,387 @@ def t_slice_integral_potts(rng, trials):
     return True, stats
 
 
+# ----------------------------------------------------------------------------------------------
+# XXIII. Robust ratios of macrostate weights: the observable free energies (theory report 11.28; SCI-REQ-0001, Q1)
+# ----------------------------------------------------------------------------------------------
+
+def mr_closure(D):
+    """Shortest-path closure of a matrix of nonnegative costs: a quasi-metric (triangle inequality, zero diagonal)."""
+    D = D.copy()
+    for k in range(len(D)):
+        D = np.minimum(D, D[:, [k]] + D[[k], :])
+    np.fill_diagonal(D, 0.0)
+    return D
+
+
+def mr_lp_full(w, D, A, B):
+    """R+(A, B) = max sum_A w t subject to sum_B w t = 1 and t(y) <= e^{d(x,y)} t(x) for ALL ordered pairs x != y."""
+    from scipy.optimize import linprog
+    from scipy.sparse import coo_matrix
+    n = len(w)
+    rows, cols, vals = [], [], []
+    r = 0
+    for x in range(n):
+        for y in range(n):
+            if x != y:
+                rows += [r, r]; cols += [y, x]; vals += [1.0, -math.exp(D[x, y])]; r += 1
+    Aub = coo_matrix((vals, (rows, cols)), shape=(r, n)).tocsr()
+    c = np.zeros(n); c[A] = -w[A]
+    Aeq = np.zeros((1, n)); Aeq[0, B] = w[B]
+    res = linprog(c, A_ub=Aub, b_ub=np.zeros(r), A_eq=Aeq, b_eq=[1.0], bounds=[(0, None)] * n, method="highs")
+    return -res.fun, res.x
+
+
+def mr_lp_bip(w, D, A, B):
+    """The same with the constraints from B to A only (variables on A u B); returns the value and t (nan elsewhere)."""
+    from scipy.optimize import linprog
+    from scipy.sparse import coo_matrix
+    idx = list(B) + list(A)
+    pos = {v: i for i, v in enumerate(idx)}
+    rows, cols, vals = [], [], []
+    r = 0
+    for z in B:
+        for y in A:
+            rows += [r, r]; cols += [pos[y], pos[z]]; vals += [1.0, -math.exp(D[z, y])]; r += 1
+    Aub = coo_matrix((vals, (rows, cols)), shape=(r, len(idx))).tocsr()
+    c = np.zeros(len(idx)); Aeq = np.zeros((1, len(idx)))
+    for y in A:
+        c[pos[y]] = -w[y]
+    for z in B:
+        Aeq[0, pos[z]] = w[z]
+    res = linprog(c, A_ub=Aub, b_ub=np.zeros(r), A_eq=Aeq, b_eq=[1.0], bounds=[(0, None)] * len(idx), method="highs")
+    t = np.full(len(w), np.nan); t[idx] = res.x
+    return -res.fun, t
+
+
+def mr_lp_dual(w, D, A, B):
+    """Transport with gains: min lam s.t. sum_{y in A} e^{d(z,y)} psi(z,y) <= lam w(z), sum_{z in B} psi(z,y) >= w(y), psi >= 0."""
+    from scipy.optimize import linprog
+    from scipy.sparse import coo_matrix
+    nb, na = len(B), len(A)
+    nv = nb * na + 1
+    c = np.zeros(nv); c[-1] = 1.0
+    rows, cols, vals, rhs = [], [], [], []
+    r = 0
+    for i, z in enumerate(B):
+        for j, y in enumerate(A):
+            rows.append(r); cols.append(i * na + j); vals.append(math.exp(D[z, y]))
+        rows.append(r); cols.append(nv - 1); vals.append(-w[z]); rhs.append(0.0); r += 1
+    for j, y in enumerate(A):
+        for i in range(nb):
+            rows.append(r); cols.append(i * na + j); vals.append(-1.0)
+        rhs.append(-w[y]); r += 1
+    Aub = coo_matrix((vals, (rows, cols)), shape=(r, nv)).tocsr()
+    res = linprog(c, A_ub=Aub, b_ub=np.array(rhs), bounds=[(0, None)] * nv, method="highs")
+    return res.fun, res.x[:-1].reshape(nb, na)
+
+
+def mr_ratio(w, g, A, B):
+    return float((w[A] * np.exp(-g[A])).sum() / (w[B] * np.exp(-g[B])).sum())
+
+
+@conjecture("XXIII.1 Theorem 11.105 (the robust ratio of two macrostate weights R+(A,B) = sup_g Z_g(A)/Z_g(B) over admissible residuals, on random finite spaces with asymmetric envelopes): (a) only the constraints from B to A matter -- the programme with all constraints of the space has the value of the bipartite one; (b) the lowest extension to A followed by the highest extension to B of an optimal residual is optimal, is a fixed point of the two extensions, and is admissible in all four directions; (c) strong duality with transport plans with gains, and weak duality against random admissible residuals; (d) one state against a macrostate in closed form (Theorem 11.12 for B = the rest); (e) the max-min sandwich M/|B| <= R+ <= |A| M with M = max_{y in A} min_{z in B} e^{d(z,y)} w(y)/w(z)")
+def t_ratio_duality(rng, trials):
+    stats = dict(cases=0, worst_gap=0.0, worst_adm=0.0, tight_lower=math.inf, tight_upper=math.inf)
+    for rep in range(max(40, trials // 3)):
+        n = int(rng.integers(5, 10))
+        D = rng.uniform(0.1, 3.0, size=(n, n))
+        if rep % 3 == 0:
+            D = (D + D.T) / 2
+        D = mr_closure(D)
+        w = np.exp(rng.normal(0, 1.5, size=n))
+        perm = rng.permutation(n)
+        na = int(rng.integers(1, n - 1)); nb = int(rng.integers(1, n - na + 1))
+        A = sorted(perm[:na].tolist()); B = sorted(perm[na:na + nb].tolist())
+        vf, _ = mr_lp_full(w, D, A, B)
+        vb, tb = mr_lp_bip(w, D, A, B)
+        vd, psi = mr_lp_dual(w, D, A, B)
+        if abs(vf - vb) > 1e-9 * vb:
+            return False, dict(reason="the constraints inside A, inside B, from A to B or through other states change the value", full=vf, bipartite=vb)
+        if abs(vd - vb) > 1e-9 * vb:
+            return False, dict(reason="strong duality with transport plans with gains", primal=vb, dual=vd)
+        if (psi < -1e-12).any() or any(sum(math.exp(D[z, y]) * psi[i, j] for j, y in enumerate(A)) > vd * w[z] * (1 + 1e-9) for i, z in enumerate(B)) \
+                or any(psi[:, j].sum() < w[y] * (1 - 1e-9) for j, y in enumerate(A)):
+            return False, dict(reason="the dual solution is not a feasible plan")
+        idx = A + B
+        g = np.zeros(n)
+        g[idx] = -np.log(np.maximum(tb[idx], 1e-300))
+        g1 = g.copy()
+        for y in A:
+            g1[y] = max(g[z] - D[z, y] for z in B)                  # the lowest admissible values on A
+        g2 = g1.copy()
+        for z in B:
+            g2[z] = min(g1[y] + D[z, y] for y in A)                 # the highest admissible values on B
+        back = max(abs(max(g2[z] - D[z, y] for z in B) - g2[y]) for y in A)
+        adm = max(g2[x] - g2[y] - D[x, y] for x in idx for y in idx)
+        if abs(mr_ratio(w, g2, A, B) - vb) > 1e-9 * vb or back > 1e-9 or adm > 1e-9:
+            return False, dict(reason="the closed pair is optimal, a fixed point and admissible in all directions", ratio=mr_ratio(w, g2, A, B), value=vb, fixed_point=back, admissibility=adm)
+        stats["worst_adm"] = max(stats["worst_adm"], adm)
+        for _ in range(4):
+            c = rng.normal(0, 2, size=n)
+            gg = np.array([min(c[y] + D[x, y] for y in range(n)) for x in range(n)])       # an admissible residual
+            if mr_ratio(w, gg, A, B) > vd * (1 + 1e-9):
+                return False, dict(reason="weak duality: an admissible residual exceeds the value of a plan")
+        if na == 1:
+            closed = w[A[0]] / sum(w[z] * math.exp(-D[z, A[0]]) for z in B)
+            if abs(closed - vb) > 1e-9 * vb:
+                return False, dict(reason="one state against a macrostate: w(y)/sum_B w(z) e^{-d(z,y)}", closed=closed, value=vb)
+        M = max(min(math.exp(D[z, y]) * w[y] / w[z] for z in B) for y in A)
+        if not (M / len(B) <= vb * (1 + 1e-9) and vb <= len(A) * M * (1 + 1e-9)):
+            return False, dict(reason="max-min sandwich", M=M, value=vb, A=len(A), B=len(B))
+        stats["tight_lower"] = min(stats["tight_lower"], vb / (M / len(B)))
+        stats["tight_upper"] = min(stats["tight_upper"], len(A) * M / vb)
+        stats["worst_gap"] = max(stats["worst_gap"], abs(vf - vb) / vb, abs(vd - vb) / vb)
+        stats["cases"] += 1
+    return True, stats
+
+
+def mr_cw_logweights(n, bJ, bB):
+    """ln pi(T_j) for the Curie-Weiss known part on Q_n."""
+    j = np.arange(n + 1)
+    m = (2 * j - n) / n
+    lw = np.array([math.lgamma(n + 1) - math.lgamma(k + 1) - math.lgamma(n - k + 1) for k in j]) + n * (bJ / 2 * m ** 2 + bB * m)
+    return lw - lw.max()
+
+
+@conjecture("XXIII.2 Theorem 11.106 (symmetric reduction on the cube, any exchangeable known part, envelope u * Hamming, macrostates that are unions of type classes): the programme on all of Q_n has the value of the programme on types with the distances u|j - k|; for separated macrostates (every type of B below every type of A) the extremal residual is the maximal field, R+ = sum_A W_j e^{uj} / sum_B W_k e^{uk}, and it is the only closed symmetric pair; for a band between two parts of B the value exceeds both fields and equals that of the best cone around a type class of the band (in the examples)")
+def t_ratio_types(rng, trials):
+    stats = dict(cases=0, worst=0.0, band_gain_over_fields=math.inf)
+    for n in ((5, 6) if trials < 100 else (5, 6, 7)):
+        pts = np.array(list(itertools.product((0, 1), repeat=n)))
+        wt = pts.sum(axis=1)
+        H = (pts[:, None, :] != pts[None, :, :]).sum(axis=2).astype(float)
+        for (bJ, bB, u) in ((0.0, 0.0, 1.0), (1.5, 0.0, 0.7), (0.8, 0.3, 1.3), (-1.0, 0.2, 0.5)):
+            lw = mr_cw_logweights(n, bJ, bB)
+            W = np.exp(lw)
+            wfull = W[wt] / np.array([math.comb(n, int(k)) for k in wt])
+            Dt = u * np.abs(np.subtract.outer(np.arange(n + 1), np.arange(n + 1))).astype(float)
+            for (At, Bt) in (([k for k in range(n + 1) if k > n // 2], [k for k in range(n + 1) if k <= n // 2]), ([n - 1, n], [0, 1]),
+                             ([n // 2, n // 2 + 1], [0, n]), ([2, 3], [0, 1, n - 1, n])):
+                A = [i for i in range(len(pts)) if wt[i] in At]; B = [i for i in range(len(pts)) if wt[i] in Bt]
+                vfull, _ = mr_lp_bip(wfull, u * H, A, B)
+                vtype, _ = mr_lp_bip(W, Dt, At, Bt)
+                if abs(vfull - vtype) > 1e-9 * vtype:
+                    return False, dict(reason="the programme on Q_n differs from the programme on types", n=n, full=vfull, types=vtype)
+                fields = [sum(W[j] * math.exp(s * u * j) for j in At) / sum(W[k] * math.exp(s * u * k) for k in Bt) for s in (1, -1)]
+                cones = max(sum(W[j] * math.exp(-u * abs(j - c)) for j in At) / sum(W[k] * math.exp(-u * abs(k - c)) for k in Bt) for c in At)
+                if max(Bt) < min(At):
+                    if abs(fields[0] - vtype) > 1e-9 * vtype:
+                        return False, dict(reason="separated macrostates: the maximal field is extremal", n=n, field=fields[0], value=vtype)
+                else:
+                    if vtype < max(fields) * (1 + 1e-6) or abs(cones - vtype) > 1e-8 * vtype:
+                        return False, dict(reason="a band: the value exceeds both fields and is attained by a cone around a type class", n=n, fields=fields, cone=cones, value=vtype)
+                    stats["band_gain_over_fields"] = min(stats["band_gain_over_fields"], vtype / max(fields))
+                stats["worst"] = max(stats["worst"], abs(vfull - vtype) / vtype)
+                stats["cases"] += 1
+    return True, stats
+
+
+@conjecture("XXIII.3 Theorem 11.107 (one-coordinate macrostates on product spaces with a site-additive envelope): for an additive known part R+ is the value of the single-site programme of that site; for a pairwise known part the single-site value with the marginal weights is a lower bound and the largest single-site value with the weights conditional on the other coordinates is an upper bound (a plan that moves the one coordinate only), and both inequalities are strict in general")
+def t_ratio_one_coordinate(rng, trials):
+    stats = dict(cases=0, worst_additive=0.0, strict_lower=0, strict_upper=0, largest_upper_gap=0.0)
+    for rep in range(max(20, trials // 8)):
+        qs = [int(rng.integers(2, 4)) for _ in range(3)]
+        Ds = [mr_closure(rng.uniform(0.2, 2.0, size=(q, q))) for q in qs]
+        pts = list(itertools.product(*[range(q) for q in qs]))
+        D = np.array([[sum(Ds[i][x[i], y[i]] for i in range(3)) for y in pts] for x in pts])
+        site = int(rng.integers(3))
+        q = qs[site]
+        perm = rng.permutation(q)
+        na = int(rng.integers(1, q))
+        Ai, Bi = sorted(perm[:na].tolist()), sorted(perm[na:].tolist())
+        A = [k for k, x in enumerate(pts) if x[site] in Ai]; B = [k for k, x in enumerate(pts) if x[site] in Bi]
+        f1 = [rng.normal(0, 1, size=qq) for qq in qs]
+        pair = {(i, j): rng.normal(0, 1.0, size=(qs[i], qs[j])) for i in range(3) for j in range(i + 1, 3)}
+        rest = sorted({tuple(x[j] for j in range(3) if j != site) for x in pts})
+        for kind in ("additive", "pairwise"):
+            lw = np.array([sum(f1[i][x[i]] for i in range(3)) + (sum(pair[ij][x[ij[0]], x[ij[1]]] for ij in pair) if kind == "pairwise" else 0.0) for x in pts])
+            w = np.exp(lw)
+            v, _ = mr_lp_bip(w, D, A, B)
+            marg = np.array([sum(w[k] for k, x in enumerate(pts) if x[site] == a) for a in range(q)])
+            lo = mr_lp_bip(marg, Ds[site], Ai, Bi)[0]
+            hi = 0.0
+            for r in rest:
+                ws = np.zeros(q)
+                for k, x in enumerate(pts):
+                    if tuple(x[j] for j in range(3) if j != site) == r:
+                        ws[x[site]] = w[k]
+                hi = max(hi, mr_lp_bip(ws, Ds[site], Ai, Bi)[0])
+            if kind == "additive":
+                if abs(lo - v) > 1e-9 * v or abs(hi - v) > 1e-9 * v:
+                    return False, dict(reason="additive known part: the single-site programme is exact", value=v, single_site=lo, conditional=hi)
+                stats["worst_additive"] = max(stats["worst_additive"], abs(lo - v) / v)
+            else:
+                if lo > v * (1 + 1e-9) or v > hi * (1 + 1e-9):
+                    return False, dict(reason="pairwise known part: marginal <= R+ <= largest conditional", marginal=lo, value=v, conditional=hi)
+                stats["strict_lower"] += v > lo * (1 + 1e-6); stats["strict_upper"] += hi > v * (1 + 1e-6)
+                stats["largest_upper_gap"] = max(stats["largest_upper_gap"], hi / v)
+        stats["cases"] += 1
+    if stats["strict_lower"] < stats["cases"] // 2 or stats["strict_upper"] < stats["cases"] // 2:
+        return False, dict(reason="the test has no power: the two bounds were expected to be strict in most cases", **stats)
+    return True, stats
+
+
+def mr_lip_vertices(Dq):
+    """Vertices of {phi : phi(b) - phi(a) <= Dq[a, b], phi(0) = 0}: the transport cost is W(P -> Q) = max_phi phi . (Q - P)."""
+    q = len(Dq)
+    cons = [(a, b) for a in range(q) for b in range(q) if a != b]
+    V = []
+    for S in itertools.combinations(cons, q - 1):
+        M = np.zeros((q, q)); rhs = np.zeros(q)
+        for r, (a, b) in enumerate(S):
+            M[r, b] += 1; M[r, a] -= 1; rhs[r] = Dq[a, b]
+        M[q - 1, 0] = 1
+        if abs(np.linalg.det(M)) < 1e-12:
+            continue
+        phi = np.linalg.solve(M, rhs)
+        if all(phi[b] - phi[a] <= Dq[a, b] + 1e-9 for a, b in cons) and not any(np.allclose(phi, v) for v in V):
+            V.append(phi)
+    return np.array(V)
+
+
+@conjecture("XXIII.4 Theorem 11.108 (the exponential scale; three letters with the law (0.5, 0.3, 0.2), an asymmetric site envelope, macrostates {mean of h >= 1.25} and {mean of h <= 0.5} for h = (0, 1, 2)): the distance between two type classes is the transport cost between their types; for every n, M_n - ln|B-classes| <= ln R+ <= M_n + ln|A-classes| with M_n = max_{P in A} min_{Q in B} [n W(Q,P) + ln W_P - ln W_Q]; the best cone around a type class and the plan 'every class of A is served by its best class of B' bracket ln R+ (the exact value lies between them at n = 12); M_n/n is within 0.6/n of the continuum value max_P min_Q [W(Q,P) + KL(Q||pi) - KL(P||pi)] = 0.4142, and both ends of the bracket are within ln(n)/n above it")
+def t_ratio_exponential_scale(rng, trials):
+    from scipy.optimize import linprog
+    from scipy.special import logsumexp
+    Dq = mr_closure(np.array([[0, 1.0, 1.6], [0.7, 0, 1.2], [1.5, 0.9, 0]]))
+    V = mr_lip_vertices(Dq)
+    pi = np.array([0.5, 0.3, 0.2]); hfun = np.array([0.0, 1.0, 2.0])
+    # the transport cost by the vertices against the transport programme
+    for _ in range(20):
+        P, Q = rng.dirichlet(np.ones(3)), rng.dirichlet(np.ones(3))
+        Aeq = np.zeros((6, 9))
+        for a in range(3):
+            for b in range(3):
+                Aeq[a, a * 3 + b] = 1; Aeq[3 + b, a * 3 + b] = 1
+        res = linprog(Dq.reshape(-1), A_eq=Aeq, b_eq=np.concatenate([P, Q]), bounds=[(0, None)] * 9, method="highs")
+        if abs(res.fun - float((V @ (Q - P)).max())) > 1e-9:
+            return False, dict(reason="transport cost by the vertices of the Lipschitz polytope")
+    # the continuum value on a grid of the simplex
+    m = 120
+    grid = np.array([(i / m, j / m, 1 - (i + j) / m) for i in range(m + 1) for j in range(m + 1 - i)])
+    I = np.where(grid > 0, grid * np.log(np.maximum(grid, 1e-300) / pi), 0.0).sum(axis=1)
+    hv = grid @ hfun
+    PA, IA, QB, IB = grid[hv >= 1.25 - 1e-12], I[hv >= 1.25 - 1e-12], grid[hv <= 0.5 + 1e-12], I[hv <= 0.5 + 1e-12]
+    cont = max(float(((V[None, :, :] * (P[None, None, :] - QB[:, None, :])).sum(axis=2).max(axis=1) + IB).min() - iP) for P, iP in zip(PA, IA))
+    if abs(cont - 0.41441) > 3e-4:
+        return False, dict(reason="continuum value (grid of mesh 1/120)", value=cont)
+    out = {}
+    for n in ((12, 24, 48) if trials < 100 else (12, 24, 48, 96)):
+        T = np.array([c for c in itertools.product(range(n + 1), repeat=3) if sum(c) == n])
+        lw = np.array([math.lgamma(n + 1) - sum(math.lgamma(k + 1) for k in c) for c in T]) + (T * np.log(pi)).sum(axis=1)
+        hv = T @ hfun / n
+        At, Bt = np.nonzero(hv >= 1.25 - 1e-12)[0], np.nonzero(hv <= 0.5 + 1e-12)[0]
+        TA, TB = T[At].astype(float), T[Bt].astype(float)
+        Wm = lambda Xs, Ys: np.concatenate([np.max(np.einsum("vk,xyk->xyv", V, Ys[None, :, :] - Xs[i:i + 200, None, :]), axis=2) for i in range(0, len(Xs), 200)])
+        DBA, DAA = Wm(TB, TA), Wm(TA, TA)
+        lower = float((logsumexp(lw[At][:, None] - DAA, axis=0) - logsumexp(lw[Bt][:, None] - DBA, axis=0)).max())
+        score = DBA - lw[Bt][:, None]
+        src = score.argmin(axis=0)
+        load = np.full(len(Bt), -np.inf)
+        for z, c in zip(src, DBA[src, np.arange(len(At))] + lw[At] - lw[Bt][src]):
+            load[z] = np.logaddexp(load[z], c)
+        upper = float(load.max())
+        Mn = float((score.min(axis=0) + lw[At]).max())
+        if not (lower <= upper + 1e-9 and Mn - math.log(len(Bt)) <= lower + 1e-9 and upper <= Mn + math.log(len(At)) + 1e-9):
+            return False, dict(reason="cone <= plan, and both within ln(number of classes) of the max-min", n=n, lower=lower, upper=upper, M_n=Mn)
+        if n == 12:
+            full = np.zeros((len(T), len(T)))
+            full[np.ix_(Bt, At)] = DBA
+            v, _ = mr_lp_bip(np.exp(lw - lw.max()), full, At.tolist(), Bt.tolist())
+            if not (lower - 1e-7 <= math.log(v) <= upper + 1e-7):
+                return False, dict(reason="the exact value is not between the cone and the plan", n=n, lower=lower, exact=math.log(v), upper=upper)
+            out["exact_12"] = math.log(v) / n
+        if abs(Mn / n - cont) > 0.6 / n + 5e-4:
+            return False, dict(reason="the max-min on types is not within 0.6/n of the continuum value", n=n, M_n_over_n=Mn / n, continuum=cont)
+        if not (cont - 5e-4 <= lower / n and upper / n <= cont + math.log(n) / n):
+            return False, dict(reason="the bracket is not within ln(n)/n above the continuum value", n=n, lower=lower / n, upper=upper / n, continuum=cont)
+        out[n] = (round(lower / n, 5), round(upper / n, 5), round(Mn / n, 5))
+    return True, dict(continuum=cont, brackets=out)
+
+
+@conjecture("XXIII.5 Proposition 11.109 (a one-body marginal oracle with a field; brute force on Q_10 and Q_8): (a) every one-body marginal of the Gibbs measure of a u-Lipschitz residual lies in the window [p-, p+], logit p+- = logit p +- u; (b) an instance that is invariant under the cyclic shift has all one-body marginals equal to its mean type; (c) for a symmetric null and its deepest dip on a cyclically invariant set, mean type(dip) - mean type(null) = Phi/(1 + Phi) (type of the excess measure - mean type(null)), so the oracle cannot tell them apart iff the excess measure has the null's mean type; along the additive instances gamma|x| the mismatch of the family 'balls of radius 2 around centres of type 3/10' changes sign near gamma = 0, and at the root all marginals of null and alternative agree to 1e-10 while ln A differs by more than 1.1; the family 'radius 1 around centres of type 5/10' has its excess type above every null type and no root")
+def t_oracle_field(rng, trials):
+    # (a) the window, on random Lipschitz residuals
+    n8 = 8
+    D8 = na_cube(n8)
+    pts8 = np.array(list(itertools.product((0, 1), repeat=n8)))
+    worst = 0.0
+    for rep in range(max(6, trials // 20)):
+        u = float(rng.choice([0.5, 1.0, 2.0])); p = float(rng.uniform(0.1, 0.9))
+        psi = na_rand_lipschitz(rng, n8, u, D8, rep % 5)
+        lw = pts8.sum(axis=1) * math.log(p) + (n8 - pts8.sum(axis=1)) * math.log(1 - p) - psi
+        w = np.exp(lw - lw.max())
+        marg = (w[:, None] * pts8).sum(axis=0) / w.sum()
+        lo, hi = p * math.exp(-u) / (p * math.exp(-u) + 1 - p), p * math.exp(u) / (p * math.exp(u) + 1 - p)
+        if marg.min() < lo - 1e-12 or marg.max() > hi + 1e-12:
+            return False, dict(reason="a one-body marginal outside the window", marginals=marg.tolist(), window=(lo, hi))
+        worst = max(worst, float(max((marg.max() - lo) / (hi - lo), 0)))
+    # (b), (c) on Q_10
+    n, p, u = 10, 0.25, 1.0
+    pts = np.array(list(itertools.product((0, 1), repeat=n)), dtype=np.int8)
+    wt = pts.sum(axis=1)
+    H = (pts[:, None, :] != pts[None, :, :]).sum(axis=2).astype(float)
+    logpi = wt * math.log(p) + (n - wt) * math.log(1 - p)
+
+    def family(m, rho, symmetrise=True):
+        centre = np.array([1] * m + [0] * (n - m), dtype=np.int8)
+        Dset = np.zeros(len(pts), dtype=bool)
+        for c in (range(n) if symmetrise else range(1)):
+            Dset |= (pts != np.roll(centre, c)).sum(axis=1) <= rho
+        return Dset
+
+    def pair(Dset, gamma):
+        psi = gamma * wt.astype(float)
+        alt = psi.copy()
+        alt[Dset] = (psi[~Dset][None, :] - u * H[np.ix_(Dset, ~Dset)]).max(axis=1)          # the deepest dip on the set
+        out = []
+        for f in (psi, alt):
+            lw = logpi - f
+            w = np.exp(lw - lw.max())
+            out.append((lw.max() + math.log(w.sum()), (w[:, None] * pts).sum(axis=0) / w.sum()))
+        exc = np.exp(logpi - alt) - np.exp(logpi - psi)
+        texc = float((exc * wt).sum() / exc.sum() / n) if exc.sum() > 0 else float("nan")
+        return out, texc
+
+    D2 = family(3, 2)
+    for gamma in (-0.6, -0.2, 0.3):
+        (null, alt), texc = pair(D2, gamma)
+        if np.ptp(null[1]) > 1e-12 or np.ptp(alt[1]) > 1e-10:
+            return False, dict(reason="a cyclically invariant instance has unequal one-body marginals", spread=float(np.ptp(alt[1])))
+        Phi = math.exp(alt[0] - null[0]) - 1
+        lhs = float(alt[1].mean() - null[1].mean())
+        rhs = Phi / (1 + Phi) * (texc - float(null[1].mean()))
+        if abs(lhs - rhs) > 1e-12:
+            return False, dict(reason="mean type(dip) - mean type(null) = Phi/(1+Phi) (excess type - null type)", lhs=lhs, rhs=rhs)
+    F = lambda g, Dset: (lambda r: float(r[0][1][1].mean() - r[0][0][1].mean()))(pair(Dset, g))
+    lo_g, hi_g = -0.1, 0.0
+    if not (F(lo_g, D2) < 0 < F(hi_g, D2)):
+        return False, dict(reason="the mismatch of the family (3/10, radius 2) does not change sign between gamma = -0.1 and 0", values=(F(lo_g, D2), F(hi_g, D2)))
+    for _ in range(50):
+        mid = 0.5 * (lo_g + hi_g)
+        if F(mid, D2) > 0:
+            hi_g = mid
+        else:
+            lo_g = mid
+    (null, alt), _ = pair(D2, 0.5 * (lo_g + hi_g))
+    gap, sens = float(np.abs(alt[1] - null[1]).max()), alt[0] - null[0]
+    if gap > 1e-10 or sens < 1.1:
+        return False, dict(reason="at the root the oracle's answers coincide and the dip is still sensitive", marginal_gap=gap, sensitivity=sens)
+    dens = max(float(D2[wt == k].mean()) for k in range(n + 1))
+    # the dip is in the class
+    psi = 0.5 * (lo_g + hi_g) * wt.astype(float)
+    altv = psi.copy(); altv[D2] = (psi[~D2][None, :] - u * H[np.ix_(D2, ~D2)]).max(axis=1)
+    if np.abs(altv[:, None] - altv[None, :])[H == 1].max() > u + 1e-12:
+        return False, dict(reason="the deepest dip is not u-Lipschitz")
+    # a family whose excess type is matched by no additive null
+    D1 = family(5, 1)
+    vals = [F(g, D1) for g in np.linspace(-0.95, 0.95, 20)]
+    if min(vals) <= 0:
+        return False, dict(reason="the family (5/10, radius 1) was expected to have its excess type above every null type", values=vals)
+    return True, dict(root_gamma=0.5 * (lo_g + hi_g), marginal_gap_at_root=gap, sensitivity_at_root=sens, maxdens_of_the_symmetrised_set=dens, unmatched_family_min_mismatch=min(vals), window_use=worst)
+
+
 @conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
 def t_dead_exact_free_energy(rng, trials):
     """Refuted (second referee, C1): with positive slack off the diagonal, an exact certificate of ln Z is the whole
@@ -8531,6 +8912,29 @@ def t_dead_junction_large_slope(rng, trials):
         return False, dict(reason="at u = 8, e = 0 and beta J = 8.263 < beta J* = 8.337 the barrier I(1/2) = 3.438 exceeds the uniform cube's threshold E_unif = 3.307, the constant exit at a well is feasible for the uniform cube's shell, its value is 0, and the best symmetric shell has 0.367 against R_unif = 0.3985; at u = 1, 2 the value is the uniform cube's",
                            bstar=bstar, coupling=bJ, far_exit=far, budget=budget, barrier=barrier, E_unif=E_unif, value_at_uniform_shell=val, best_symmetric_shell=best, R_unif=Ru)
     return True, dict(bstar=bstar, coupling=bJ, far_exit=far, budget=budget, value_at_uniform_shell=val, best_symmetric_shell=best, R_unif=Ru, controls=ctrl)
+
+
+@conjecture("DEAD.26 The extremal residual of a ratio of two macrostate weights is constant on each macrostate (the two states are shifted against each other by their distance), so R+(A,B) = e^{d(B,A)} w(A)/w(B) with d(B,A) the least distance from B to A -- the first guess for 'the uncertainty of a free-energy difference'", expect_fail=True)
+def t_dead_ratio_constant_shift(rng, trials):
+    # the three-point example of the Scientific Discovery Division: A = {x1, x2}, B = {y}, d(x1,y) = 1, d(x2,y) = d(x1,x2) = 10
+    D = np.array([[0, 10.0, 1.0], [10.0, 0, 10.0], [1.0, 10.0, 0]])
+    w = np.ones(3)
+    v, t = mr_lp_bip(w, D, [0, 1], [2])
+    shift = math.exp(1.0) * 2 / 1
+    g = -np.log(t)
+    # the two halves of the cube Q_6, uniform measure, u = 1: the extremal residual is the maximal field
+    n, u = 6, 1.0
+    W = np.array([math.comb(n, j) for j in range(n + 1)], dtype=float)
+    At, Bt = [4, 5, 6], [0, 1, 2, 3]
+    Dt = u * np.abs(np.subtract.outer(np.arange(n + 1), np.arange(n + 1))).astype(float)
+    vt, _ = mr_lp_bip(W, Dt, At, Bt)
+    shift_t = math.exp(u) * W[At].sum() / W[Bt].sum()
+    # control: for single states the shift is exact
+    vc, _ = mr_lp_bip(w, D, [0], [2])
+    if abs(vc - math.e) < 1e-9 and v > 100 * shift and abs((g[1] - g[0]) + 9.0) < 1e-6 and vt > 1.5 * shift_t:
+        return False, dict(reason="three states: R+ = e + e^10 against the constant shift 2e, and the extremal residual differs by 9 between the two states of A; the two halves of Q_6: the maximal field gives 2.8 times the constant shift; for single states the shift is exact",
+                           three_points=v, constant_shift=shift, g_difference=float(g[1] - g[0]), cube_halves=vt, cube_constant_shift=shift_t)
+    return True, dict(three_points=v, constant_shift=shift, cube_halves=vt, cube_constant_shift=shift_t, single_states=vc)
 
 
 def main():

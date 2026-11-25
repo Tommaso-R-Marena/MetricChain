@@ -1,0 +1,7 @@
+cases 300
+  full_vs_bip  4.624e-15
+  bip_vs_dual  4.281e-16
+  closed       8.882e-16
+  single       4.196e-16
+  weak         4.441e-16
+  adm          5.551e-16

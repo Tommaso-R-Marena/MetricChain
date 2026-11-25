@@ -373,6 +373,21 @@ of the Scientific Discovery Division, which proved the adaptive case).  On the c
 knowing all `k`-body marginals of the true ensemble exactly changes neither the adaptive
 nor the non-adaptive exponent, for every fixed `k`: the hard instances can be symmetrised
 over a code so that no `k`-body statistic sees them.
+(xiii) *Observable free energies* (theory report §11.28; a question of the Scientific
+Discovery Division; **the coordinator's paper proofs, the certificate half machine-checked,
+not refereed, prior art not searched**).  Everything above is about the total `ln Z`, which
+no experiment compares with; what is measured are free-energy differences between
+macrostates, `−ln[Z(A)/Z(B)]`.  Their exact range over the residual class has a dual
+description: the largest ratio is the least factor by which the weight of `B` must be
+scaled so that it can be *shipped* to `A`, when delivering a unit from a state `z` to a state
+`y` costs `e^{d(z,y)}` units — and any such shipping plan is a certificate (`MacroRatio.lean`).
+Only the envelope constraints from `B` to `A` matter.  Closed forms: for the two sides of
+a threshold of an order parameter the extremal perturbation is the strongest uniform
+field, so the free-energy difference between the two halves of the cube is uncertain by
+`±n·ln cosh(u/2)`; a macrostate defined by one coordinate reduces to that site for
+independent sites and has a site-by-site certificate for pairwise known parts; and at
+large sizes the range is a max–min of transport costs and rate functions.  Nothing is
+said yet about how many evaluations narrow the range.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

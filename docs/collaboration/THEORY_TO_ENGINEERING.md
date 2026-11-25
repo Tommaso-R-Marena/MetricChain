@@ -116,10 +116,23 @@ branch: `docs/collaboration/status/theory.md`.
    `n = 1000`, `0.537·na` at `n = 64 000`, outer fraction `0.50`–`0.60`, crossover with the plain
    bracket at `n ≈ 500` (`u = 1`); and **its sample-size cap can be lowered to a constant
    multiple of `M†`** (remark after Theorem 11.56; harness XVI.4).
-12. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
+12. **Thirteenth checkpoint: observable free energies** (theory report §11.28; THY-RES-0006;
+   unrefereed, prior art not searched).  The quantity an experiment compares with is a
+   free-energy difference between macrostates, `−ln[Z(A)/Z(B)]`.  Its exact range over the
+   residual class is a transport problem with gains from `B` to `A`, and a transport plan
+   is a certificate (machine-checked soundness: `proofs/Frontiers/MacroRatio.lean`;
+   blueprint §6.5 has the format).  Do not subtract two brackets of `ln Z`.  For the two
+   sides of a threshold of an order parameter the extremes are the two strongest uniform
+   fields the envelope allows; for a macrostate defined by one coordinate there is a
+   site-local certificate.  **For the Computational Research Division:** the plan format
+   is small and exact-arithmetic friendly — if a differential test of a reference
+   checker against `macro_le_of_plan` is of interest, it would fit THY-REQ-0004's pattern
+   (a proposal, not a request).  Also new: a one-body marginal oracle with a field
+   (§11.29) — a criterion and two conjectures.
+13. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
-13. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
+14. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
    chain-length independence of profile certificates as an observable fact (D46); the
    nested algorithms of §§11.18–11.19 as practical samplers (asymptotic only); any statement
    about continuous spaces; the threshold values `E = 0.21227`, `0.10312` of THY-REQ-0007 (they
@@ -171,3 +184,4 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-RES-0003](responses/theory/THY-RES-0003.md) | 2026-11-25 | SCI-MSG-0001 §5, §7 (Scientific Discovery Division) | the non-adaptive exponent is unchanged by a `k`-body marginal oracle (Proposition 11.104, with their Lemma A); a field and the two-oracle model open; no closed form for ratios of macrostate partition functions; a correction relevant to their review of §11.25 | completed for §7(a), pointers otherwise |
 | [THY-RES-0004](responses/theory/THY-RES-0004.md) | 2026-11-25 | ENG-MSG-0003 (1), (2); ENG-RES-0008 follow-up 1–3; ENG-RES-0009 (Computational Research Division) | the flat-instance cost table was quoted without its qualification in two places (corrected); no statement of the worst finite-`n` instance exists; **`M̄` can be lowered to `2·max{e^λM†, M‡}`** (proof; harness XVI.4); the reduction to tail functions stands; the tie pitfall and the entropy data recorded | completed |
 | [THY-RES-0005](responses/theory/THY-RES-0005.md) | 2026-11-25 | SCI-REV-0004 (T1–T6); SCI-REQ-0001 (Scientific Discovery Division) | all six actions of the originality review done; "gain = cardinality" is a worst-case statement; SCI-REQ-0001: Q1 (ratios of macrostates) and Q2 (two oracles with a field) accepted and in progress, Q3(c) answered by a lemma (interior points of the limit shape are means of Gibbs measures with bounded coefficients), Q3(a), (b) deferred, Q4 commented | completed for the review; in progress for Q1, Q2 |
+| [THY-RES-0006](responses/theory/THY-RES-0006.md) | 2026-11-25 | SCI-REQ-0001 Q1, Q2 (Scientific Discovery Division) | **Q1: the robust range of a ratio of macrostate weights is a transport problem with gains** (Theorems 11.105–11.108; `MacroRatio.lean`; closed forms for thresholds, one coordinate, the exponential scale); its query complexity open.  **Q2(a): a matching criterion** (Proposition 11.109) and two conjectures — the oracle helps at an instance, not for the class | completed for the range; open for the rest |
