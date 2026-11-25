@@ -128,7 +128,7 @@ def tasks(job: str) -> list[dict]:
     if job == "cost":
         for u in US:
             for n in NS_COST:
-                bud = {128000: (2000, 1000), 64000: (3000, 1500)}.get(n, (4000, 2000))
+                bud = {128000: (1500, 750), 64000: (2500, 1250)}.get(n, (4000, 2000))
                 for phi in PHIS:
                     out.append(dict(u=u, n=n, phi=phi, budget=bud[0], budget_general=bud[1], seed=1, objectives=("cost",)))
     elif job == "claims":
@@ -151,9 +151,10 @@ def tasks(job: str) -> list[dict]:
 
 
 def estimated_core_seconds(task: dict) -> float:
-    """Measured on the development machine: one mean run takes about 1.33 microseconds per unit of n."""
+    """One mean run takes about 1.33 microseconds per unit of n on the development machine and about twice
+    that on a Modal core (measured by the smoke test of job M-008); the figure returned is for Modal."""
     n_obj = len(task["objectives"])
-    return n_obj * 2 * (task["budget"] + task["budget_general"] + 126) * 1.33e-6 * task["n"]
+    return n_obj * 2 * (task["budget"] + task["budget_general"] + 126) * 2.66e-6 * task["n"]
 
 
 def grid(name: str) -> list[tuple]:
