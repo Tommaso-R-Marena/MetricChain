@@ -141,7 +141,8 @@ def tasks(job: str) -> list[dict]:
         for n in (1000, 16000):
             for phi in (0.5, 0.65):
                 for seed in (2, 3):
-                    out.append(dict(u=1.0, n=n, phi=phi, budget=20000, budget_general=10000, seed=seed, objectives=("cost",)))
+                    bud = (20000, 10000) if n <= 1000 else (12000, 6000)
+                    out.append(dict(u=1.0, n=n, phi=phi, budget=bud[0], budget_general=bud[1], seed=seed, objectives=("cost",)))
     elif job == "smoke":
         out.append(dict(u=1.0, n=250, phi=0.5, budget=300, budget_general=150, seed=1, objectives=("cost",)))
         out.append(dict(u=2.0, n=500, phi=0.65, budget=300, budget_general=150, seed=1, objectives=("count",)))
