@@ -1,0 +1,11 @@
+# u = 1.0, n = 64000: number of evaluations at psi = 0, in units ln(cost)/(n a)
+phi_1 = 0.20: two levels 0.8309 | three levels 0.4184 | hinted lower bound 0.2633 | C_max(3 levels) 0.4226 | 3 levels: valid True, width 0.778 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 30 of 40 (accuracies 0.5 ... 3.55e+03); deepest rung reached by an outer point: 39   [99 s]
+phi_1 = 0.28: two levels 0.7499 | three levels 0.3793 | hinted lower bound 0.2633 | C_max(3 levels) 0.4101 | 3 levels: valid True, width 0.783 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 30 of 40 (accuracies 0.5 ... 3.28e+03); deepest rung reached by an outer point: 39   [186 s]
+phi_1 = 0.36: two levels 0.6689 | three levels 0.4037 | hinted lower bound 0.2633 | C_max(3 levels) 0.4513 | 3 levels: valid True, width 0.783 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 30 of 40 (accuracies 0.5 ... 3.02e+03); deepest rung reached by an outer point: 39   [262 s]
+
+real	4m22.397s
+user	4m18.775s
+sys	0m0.275s

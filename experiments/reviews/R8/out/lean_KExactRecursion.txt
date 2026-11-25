@@ -1,0 +1,6 @@
+'WorkstreamK.exactRec_reaches_hint' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+real	0m5.701s
+user	0m4.550s
+sys	0m1.455s
+exit=0

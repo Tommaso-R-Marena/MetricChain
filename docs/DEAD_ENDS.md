@@ -1092,6 +1092,22 @@ Four corrections, none of which invalidates a theorem, all of which changed sent
    always; "independent of the chain length" describes a regime nobody will reach by
    enumeration.  All four places were reworded.
 
+5. **Two false side remarks in the workstream's report, found by the referee (R8, m5, m6).**
+   "`Γ̃` is never below `4e^u(e^u−1)`" — repeated in item 1(a) above — is false at `r = 0`
+   (`Γ̃(0) = e^u − 1`) and, by a fraction of a per cent, at finite `n` (`18.672 < 18.683` at
+   `n = 12 800`, `u = 1`); the true statement is `min_{r≥1} Γ̃(r) = 4e^u(e^u−1)(1 − o(1))`, and at
+   `r = 0` the test of the sketch holds from `G − b ≥ ln(4(e^u−1))` on, for a useless sample of
+   `2^{n_o}K` points — "empty window" should read "no useful window".  And "numpy's binomial
+   sampler returns 0 for `p < 10^{-16}` whatever `n`" is false for the current generator
+   interface (only the legacy sampler fails, and only for means below 30); the statement
+   about the multinomial sampler is true.  The second remark had been passed on to the
+   other division in THY-MSG-0005 and is corrected in THY-MSG-0007.
+6. **An over-narrow claim of the coordinator's, refuted by its own harness test.**  A first
+   version of harness test XVI.2 asserted that the first level at accuracy zero is below
+   `0.52a`; it is `0.58a` at `u = 4.5` (the value `0.5006a` quoted everywhere is for `u = 1`).  The
+   test now states `[max(h, a/2), a]`, and `0.51a` for `u ≤ 2.5`.  The claim was never in the
+   theory report.
+
 *Lesson.*  (1) and (2): a mechanism that is plausible at the level of exponents can fail at
 the level of constants in a way that changes the exponent — tabulate the ratio before
 building on it.  (3) and (4): an existence bound and a heuristic estimator together

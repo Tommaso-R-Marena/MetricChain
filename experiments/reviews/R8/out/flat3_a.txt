@@ -1,0 +1,31 @@
+# u = 1.0, n = 1000: number of evaluations at psi = 0, in units ln(cost)/(n a)
+phi_1 = 0.30: two levels 1.2054 | three levels 0.9842 | hinted lower bound 0.2857 | C_max(3 levels) 1.1309 | 3 levels: valid True, width 0.783 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 20 of 40 (accuracies 0.5 ... 21.7); deepest rung reached by an outer point: 38   [1 s]
+phi_1 = 0.50: two levels 0.9839 | three levels 0.8645 | hinted lower bound 0.2857 | C_max(3 levels) 1.1213 | 3 levels: valid True, width 0.774 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 18 of 40 (accuracies 0.5 ... 12.6); deepest rung reached by an outer point: 37   [2 s]
+phi_1 = 0.70: two levels 0.7510 | three levels 0.7323 | hinted lower bound 0.2857 | C_max(3 levels) 1.3781 | 3 levels: valid True, width 0.785 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 16 of 40 (accuracies 0.5 ... 7.14); deepest rung reached by an outer point: 38   [3 s]
+phi_1 = 0.80: two levels 0.7123 | three levels 0.7123 | hinted lower bound 0.2857 | C_max(3 levels) 1.4948 | 3 levels: valid True, width 0.782 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 6 of 40 (accuracies 2.25 ... 5.19); deepest rung reached by an outer point: 34   [3 s]
+
+real	0m3.644s
+user	0m3.655s
+sys	0m0.036s
+# u = 1.0, n = 4000: number of evaluations at psi = 0, in units ln(cost)/(n a)
+phi_1 = 0.30: two levels 0.8800 | three levels 0.5279 | hinted lower bound 0.2707 | C_max(3 levels) 0.5868 | 3 levels: valid True, width 0.779 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 25 of 40 (accuracies 0.5 ... 134); deepest rung reached by an outer point: 39   [5 s]
+phi_1 = 0.40: two levels 0.7724 | three levels 0.4780 | hinted lower bound 0.2707 | C_max(3 levels) 0.6331 | 3 levels: valid True, width 0.781 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 24 of 40 (accuracies 0.5 ... 97.4); deepest rung reached by an outer point: 38   [10 s]
+phi_1 = 0.50: two levels 0.6670 | three levels 0.4602 | hinted lower bound 0.2707 | C_max(3 levels) 0.7261 | 3 levels: valid True, width 0.783 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 24 of 40 (accuracies 0.5 ... 87.7); deepest rung reached by an outer point: 39   [13 s]
+phi_1 = 0.65: two levels 0.5519 | three levels 0.5519 | hinted lower bound 0.2707 | C_max(3 levels) 0.8934 | 3 levels: valid True, width 0.783 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 22 of 40 (accuracies 0.5 ... 46.4); deepest rung reached by an outer point: 38   [16 s]
+# u = 1.0, n = 16000: number of evaluations at psi = 0, in units ln(cost)/(n a)
+phi_1 = 0.25: two levels 0.8226 | three levels 0.4094 | hinted lower bound 0.2649 | C_max(3 levels) 0.4397 | 3 levels: valid True, width 0.783 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 28 of 40 (accuracies 0.5 ... 722); deepest rung reached by an outer point: 38   [19 s]
+phi_1 = 0.35: two levels 0.7201 | three levels 0.4053 | hinted lower bound 0.2649 | C_max(3 levels) 0.4791 | 3 levels: valid True, width 0.783 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 28 of 40 (accuracies 0.5 ... 656); deepest rung reached by an outer point: 39   [37 s]
+phi_1 = 0.45: two levels 0.6167 | three levels 0.4345 | hinted lower bound 0.2649 | C_max(3 levels) 0.5500 | 3 levels: valid True, width 0.782 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 28 of 40 (accuracies 0.5 ... 586); deepest rung reached by an outer point: 39   [52 s]
+phi_1 = 0.55: two levels 0.5126 | three levels 0.4959 | hinted lower bound 0.2649 | C_max(3 levels) 0.6428 | 3 levels: valid True, width 0.782 <= x_out 0.872: True, cost >= LB: True, cost <= C_max: True
+     rungs served by the middle 2L+: 27 of 40 (accuracies 0.5 ... 396); deepest rung reached by an outer point: 39   [65 s]

@@ -1,0 +1,19 @@
+(a) Proposition K0, u = 1, delta' = e^{-d}: ln(cost)/(d a)   [cost = min(2M, 2^d)]
+      d      x=1      x=0.01    x=d^-2   x=exp(-sqrt d)  x=exp(-d^0.8)
+    1000   1.3862   1.7020   2.1944    2.9422         6.2477
+   10000   1.0926   1.1693   1.3135    1.8321            nan
+  100000   1.0257   1.0473   1.0952    1.3995            nan
+ 1000000   1.0077   1.0143   1.0305       nan            nan
+    (exp(-d^0.8) underflows for d >= 10^4: nan; there ln(1/x)/d is still 0.16 at d = 10^5)
+(b) Theorem K2 with a small target accuracy x, at psi = 0, u = 1:
+      n     x      phi   ln(cost)/(na)  hinted LB/(na)  ln(C_max)/(na)  width<=x  valid  cost>=LB  cost<=C_max  levels J   K
+   4000   0.87   0.65      0.5519         0.2707          0.8934       True     True    True      True         49014  30891   [1 s]
+   4000   0.20   0.65      0.5580         0.2729          0.9207       True     True    True      True        588137  296773   [3 s]
+   4000   0.20   0.80      0.6830         0.2729          1.0873       True     True    True      True        613091  299168   [6 s]
+   4000   0.05   0.65      0.5895         0.2740          0.9506       True     True    True      True       2352530  4935158   [17 s]
+   4000   0.05   0.80      0.6894         0.2740          1.1220       True     True    True      True       2452344  4973036   [29 s]
+  16000   0.87   0.55      0.5126         0.2649          0.6428       True     True    True      True        190501  33982   [30 s]
+  16000   0.20   0.55      0.5333         0.2655          0.6528       True     True    True      True       2285988  323555   [41 s]
+  16000   0.20   0.65      0.5794         0.2655          0.7593       True     True    True      True       2352530  325567   [52 s]
+  16000   0.05   0.55      0.5469         0.2658          0.6648       True     True    True      True       9143933  5356619   [96 s]
+  16000   0.05   0.65      0.5810         0.2658          0.7719       True     True    True      True       9410102  5388093   [148 s]

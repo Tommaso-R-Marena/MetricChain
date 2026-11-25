@@ -1,0 +1,60 @@
+u = 0.50: a = 0.030300, h = 0.007673, h/a = 0.2532, eps* = 0.030930
+  closed form: tau_2/a = min_phi max((1-phi)a, phi a + (1-phi) theta_na(phi a/(1-phi)))/a = 0.50003 at phi = 0.5000
+  u=0.50 linear k= 2  tau_k/a = 0.5001   (tau_k - h)/a = 0.2469   tau_k - T_k(gmin) = 6.67e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.2462  minimising phi at 0: 0.4999
+  u=0.50 linear k= 3  tau_k/a = 0.3568   (tau_k - h)/a = 0.1036   tau_k - T_k(gmin) = 2.94e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.1033  minimising phi at 0: 0.2868
+  u=0.50 linear k= 4  tau_k/a = 0.3037   (tau_k - h)/a = 0.0505   tau_k - T_k(gmin) = 2.23e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0503  minimising phi at 0: 0.1489
+  u=0.50 linear k= 5  tau_k/a = 0.2813   (tau_k - h)/a = 0.0281   tau_k - T_k(gmin) = 1.39e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0280  minimising phi at 0: 0.0737
+  u=0.50 linear k= 6  tau_k/a = 0.2710   (tau_k - h)/a = 0.0178   tau_k - T_k(gmin) = 1.06e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0177  minimising phi at 0: 0.0367
+  u=0.50 linear k= 7  tau_k/a = 0.2658   (tau_k - h)/a = 0.0125   tau_k - T_k(gmin) = 5.88e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0125  minimising phi at 0: 0.0195
+  u=0.50 linear k= 8  tau_k/a = 0.2627   (tau_k - h)/a = 0.0095   tau_k - T_k(gmin) = 4.30e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0094  minimising phi at 0: 0.0117
+  linear: tau_k/a (k=2..8) = 0.5001 0.3568 0.3037 0.2813 0.2710 0.2658 0.2627
+     report (linear), k=2..6: [0.5001, 0.3568, 0.3037, 0.2814, 0.2711] ;  nonincreasing in k and g: True ;  never below theta_hint / h: True   [15 s]
+  u=0.50 step   k= 2  tau_k/a = 0.5004   (tau_k - h)/a = 0.2471   tau_k - T_k(gmin) = 9.71e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.2462  minimising phi at 0: 0.4996
+  u=0.50 step   k= 3  tau_k/a = 0.3597   (tau_k - h)/a = 0.1064   tau_k - T_k(gmin) = 1.57e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.1064  minimising phi at 0: 0.2813
+  u=0.50 step   k= 4  tau_k/a = 0.3080   (tau_k - h)/a = 0.0548   tau_k - T_k(gmin) = 2.07e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0548  minimising phi at 0: 0.1436
+  u=0.50 step   k= 5  tau_k/a = 0.2865   (tau_k - h)/a = 0.0332   tau_k - T_k(gmin) = 8.00e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0332  minimising phi at 0: 0.0717
+  u=0.50 step   k= 6  tau_k/a = 0.2765   (tau_k - h)/a = 0.0233   tau_k - T_k(gmin) = 1.53e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0231  minimising phi at 0: 0.0347
+  u=0.50 step   k= 7  tau_k/a = 0.2713   (tau_k - h)/a = 0.0181   tau_k - T_k(gmin) = 9.72e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0180  minimising phi at 0: 0.0205
+  u=0.50 step   k= 8  tau_k/a = 0.2683   (tau_k - h)/a = 0.0150   tau_k - T_k(gmin) = 5.80e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0150  minimising phi at 0: 0.0120
+  step: tau_k/a (k=2..8) = 0.5004 0.3597 0.3080 0.2865 0.2765 0.2713 0.2683
+     report (linear), k=2..6: [0.5001, 0.3568, 0.3037, 0.2814, 0.2711] ;  nonincreasing in k and g: True ;  never below theta_hint / h: True   [16 s]
+u = 1.00: a = 0.110944, h = 0.029139, h/a = 0.2626, eps* = 0.120115
+  closed form: tau_2/a = min_phi max((1-phi)a, phi a + (1-phi) theta_na(phi a/(1-phi)))/a = 0.50041 at phi = 0.4996
+  u=1.00 linear k= 2  tau_k/a = 0.5005   (tau_k - h)/a = 0.2378   tau_k - T_k(gmin) = 8.68e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.2370  minimising phi at 0: 0.4996
+  u=1.00 linear k= 3  tau_k/a = 0.3613   (tau_k - h)/a = 0.0987   tau_k - T_k(gmin) = 2.01e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0985  minimising phi at 0: 0.2780
+  u=1.00 linear k= 4  tau_k/a = 0.3108   (tau_k - h)/a = 0.0482   tau_k - T_k(gmin) = 1.74e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0480  minimising phi at 0: 0.1399
+  u=1.00 linear k= 5  tau_k/a = 0.2898   (tau_k - h)/a = 0.0272   tau_k - T_k(gmin) = 1.49e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0271  minimising phi at 0: 0.0674
+  u=1.00 linear k= 6  tau_k/a = 0.2802   (tau_k - h)/a = 0.0176   tau_k - T_k(gmin) = 8.04e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0175  minimising phi at 0: 0.0332
+  u=1.00 linear k= 7  tau_k/a = 0.2753   (tau_k - h)/a = 0.0126   tau_k - T_k(gmin) = -2.03e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0126  minimising phi at 0: 0.0180
+  u=1.00 linear k= 8  tau_k/a = 0.2723   (tau_k - h)/a = 0.0096   tau_k - T_k(gmin) = 6.18e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0095  minimising phi at 0: 0.0112
+  linear: tau_k/a (k=2..8) = 0.5005 0.3613 0.3108 0.2898 0.2802 0.2753 0.2723
+     report (linear), k=2..6: [0.5006, 0.3613, 0.3108, 0.2898, 0.2803] ;  nonincreasing in k and g: True ;  never below theta_hint / h: True   [16 s]
+  u=1.00 step   k= 2  tau_k/a = 0.5015   (tau_k - h)/a = 0.2388   tau_k - T_k(gmin) = -6.03e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.2389  minimising phi at 0: 0.4986
+  u=1.00 step   k= 3  tau_k/a = 0.3639   (tau_k - h)/a = 0.1012   tau_k - T_k(gmin) = -7.01e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.1013  minimising phi at 0: 0.2745
+  u=1.00 step   k= 4  tau_k/a = 0.3156   (tau_k - h)/a = 0.0529   tau_k - T_k(gmin) = 2.75e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0526  minimising phi at 0: 0.1332
+  u=1.00 step   k= 5  tau_k/a = 0.2951   (tau_k - h)/a = 0.0324   tau_k - T_k(gmin) = -3.49e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0328  minimising phi at 0: 0.0655
+  u=1.00 step   k= 6  tau_k/a = 0.2859   (tau_k - h)/a = 0.0233   tau_k - T_k(gmin) = 1.30e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0232  minimising phi at 0: 0.0340
+  u=1.00 step   k= 7  tau_k/a = 0.2808   (tau_k - h)/a = 0.0181   tau_k - T_k(gmin) = 1.15e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0180  minimising phi at 0: 0.0200
+  u=1.00 step   k= 8  tau_k/a = 0.2778   (tau_k - h)/a = 0.0151   tau_k - T_k(gmin) = 5.53e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0151  minimising phi at 0: 0.0110
+  step: tau_k/a (k=2..8) = 0.5015 0.3639 0.3156 0.2951 0.2859 0.2808 0.2778
+     report (linear), k=2..6: [0.5006, 0.3613, 0.3108, 0.2898, 0.2803] ;  nonincreasing in k and g: True ;  never below theta_hint / h: True   [18 s]
+u = 2.00: a = 0.327813, h = 0.097281, h/a = 0.2968, eps* = 0.433781
+  closed form: tau_2/a = min_phi max((1-phi)a, phi a + (1-phi) theta_na(phi a/(1-phi)))/a = 0.50562 at phi = 0.4944
+  u=2.00 linear k= 2  tau_k/a = 0.5057   (tau_k - h)/a = 0.2089   tau_k - T_k(gmin) = 8.39e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.2081  minimising phi at 0: 0.4944
+  u=2.00 linear k= 3  tau_k/a = 0.3814   (tau_k - h)/a = 0.0847   tau_k - T_k(gmin) = 2.94e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0844  minimising phi at 0: 0.2458
+  u=2.00 linear k= 4  tau_k/a = 0.3394   (tau_k - h)/a = 0.0426   tau_k - T_k(gmin) = 2.12e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0424  minimising phi at 0: 0.1104
+  u=2.00 linear k= 5  tau_k/a = 0.3225   (tau_k - h)/a = 0.0258   tau_k - T_k(gmin) = 1.34e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0256  minimising phi at 0: 0.0497
+  u=2.00 linear k= 6  tau_k/a = 0.3145   (tau_k - h)/a = 0.0177   tau_k - T_k(gmin) = 9.20e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0176  minimising phi at 0: 0.0250
+  u=2.00 linear k= 7  tau_k/a = 0.3099   (tau_k - h)/a = 0.0131   tau_k - T_k(gmin) = 6.95e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0130  minimising phi at 0: 0.0147
+  u=2.00 linear k= 8  tau_k/a = 0.3069   (tau_k - h)/a = 0.0101   tau_k - T_k(gmin) = 5.32e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0101  minimising phi at 0: 0.0097
+  linear: tau_k/a (k=2..8) = 0.5057 0.3814 0.3394 0.3225 0.3145 0.3099 0.3069
+     report (linear), k=2..6: [0.5056, 0.3814, 0.3393, 0.3225, 0.3145] ;  nonincreasing in k and g: True ;  never below theta_hint / h: True   [18 s]
+  u=2.00 step   k= 2  tau_k/a = 0.5075   (tau_k - h)/a = 0.2107   tau_k - T_k(gmin) = 2.93e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.2104  minimising phi at 0: 0.4959
+  u=2.00 step   k= 3  tau_k/a = 0.3857   (tau_k - h)/a = 0.0890   tau_k - T_k(gmin) = 1.45e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0888  minimising phi at 0: 0.2401
+  u=2.00 step   k= 4  tau_k/a = 0.3451   (tau_k - h)/a = 0.0483   tau_k - T_k(gmin) = 1.52e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0482  minimising phi at 0: 0.1054
+  u=2.00 step   k= 5  tau_k/a = 0.3287   (tau_k - h)/a = 0.0320   tau_k - T_k(gmin) = 1.28e-04 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0318  minimising phi at 0: 0.0482
+  u=2.00 step   k= 6  tau_k/a = 0.3205   (tau_k - h)/a = 0.0237   tau_k - T_k(gmin) = 7.93e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0236  minimising phi at 0: 0.0285
+  u=2.00 step   k= 7  tau_k/a = 0.3155   (tau_k - h)/a = 0.0187   tau_k - T_k(gmin) = 7.39e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0187  minimising phi at 0: 0.0167
+  u=2.00 step   k= 8  tau_k/a = 0.3125   (tau_k - h)/a = 0.0158   tau_k - T_k(gmin) = 7.46e-05 a   min(T_k - theta_hint)/a = +0.00e+00  max(T_k - theta_hint)/a = 0.0157  minimising phi at 0: 0.0115
+  step: tau_k/a (k=2..8) = 0.5075 0.3857 0.3451 0.3287 0.3205 0.3155 0.3125
+     report (linear), k=2..6: [0.5056, 0.3814, 0.3393, 0.3225, 0.3145] ;  nonincreasing in k and g: True ;  never below theta_hint / h: True   [19 s]

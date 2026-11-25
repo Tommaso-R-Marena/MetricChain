@@ -1,9 +1,9 @@
 # Workstream K — adaptive algorithms without a hint at a bounded accuracy
 
 > **Repository note (added by the coordinator at integration; the report below is otherwise as
-> delivered).**  Status: **paper proofs, under independent review (referee R8) at the time of
-> integration** — see `docs/THEORY_REPORT.md` §11.19 for the integrated statements and their
-> labels, and `docs/reviews/` for the referee report once it exists.  The scripts and outputs
+> delivered).**  Status: **paper proofs, refereed after integration (R8: "proved")** — see
+> `docs/THEORY_REPORT.md` §11.19 for the integrated statements and their labels and
+> `docs/reviews/R8_referee_report.md` for the referee report.  The scripts and outputs
 > named in §6 are in `experiments/workstreams/K/` (run from that directory:
 > `python3 <script>`, numpy only).  The four Lean files named in §6.7 (`KBounded.lean`,
 > `KBoundedLink.lean`, `KBoundedCube.lean`, `KExactRecursion.lean`) were merged, with the theorem
@@ -12,6 +12,25 @@
 > `exactRec_tendsto_hint` (the exact recursion never undercuts, and converges to, the hinted
 > exponent).  Theorem numbers of the theory report: K1 = 11.56, K.4 = Lemma 11.55, K0 =
 > Proposition 11.57(a), K2 = Proposition 11.57(b), K3 = Theorem 11.58.
+
+> **Errata after the referee report R8** (`docs/reviews/R8_referee_report.md`: verdict "proved",
+> no critical or major finding).  The text below is unchanged; the following points of it
+> are corrected in the theory report §11.19.  (m1) The abort test must be made *before* an
+> inner call (otherwise the cost bound is `C_max + max_l C_l`), and off the good event the
+> returned pair can have `L > U` (return the trivial bracket then).  (m2) In Theorem K2,
+> "`T′(ξ) = T(ξ)` for `ξ > 0`" is not nonincreasing; read `T′(ξ) = min(T(ξ), T′(0))`.  (m3) The
+> hypotheses `λ ≤ 1`, `η′ ≤ 1` of Theorem K1 are not used; claims (iii), (iv) hold for every run,
+> not only on the good event.  (m5) "`Γ̃` is never below `4e^u(e^u−1)`" (§0, §3.2, §5) is false at
+> `r = 0` and, by a fraction of a per cent, at finite `n`: `min_{r≥1} Γ̃(r) = 4e^u(e^u−1)(1−o(1))`.
+> (m6) The remark in §6.8 that numpy's `binomial` returns `0` for `p < 10^{-16}` is false for the
+> current generator interface; the remark on `multinomial` is true.  (m7) The non-adaptive
+> lower bound at accuracies tending to zero needs the line given in the theory report's
+> table.  (m8) The last sentence of Corollary K3′ presupposes that `lim ε_n/n` exists.
+> (m9) Remark (2) after Theorem K3: the Lean theorems named there formalise Proposition
+> K5(c); the iteration of Theorem K3 is `two_rung_bound`.  (m10) With `x_L = b` exactly, a
+> floating-point tie can leave a point unclassified.  Labels: "[proved, given Theorem 11.25(a)
+> and Theorem 11.53]" also rests on Harper's theorem, the binomial median, Chernoff–Hoeffding
+> and the paper chain K1–K2; "deterministic core machine-checked" means four algebraic lemmas.
 
 Independent report.  All scripts and outputs named below were produced in the workstream's
 scratch directory (`python3 <script>`, numpy only, `ulimit -v 4000000`, each run under ten

@@ -1,0 +1,6 @@
+'WorkstreamK.cube_levels_reach_hint_at_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+real	0m11.080s
+user	0m9.842s
+sys	0m1.388s
+exit=0

@@ -1,12 +1,13 @@
 # Status of the Theoretical Research Division
 
-*Updated 2026-11-25 08:50 UTC.  Branch `claude/determined-ride-og1u7j`.*
+*Updated 2026-11-25 09:12 UTC.  Branch `claude/determined-ride-og1u7j`.*
 
 ## Latest checkpoints
 
 | commit | what |
 |---|---|
-| (this commit) | **the common structure, machine-checked**: `GamePair.lean` (every game function yields a pair; the exact level recursion converges), theory report §11.21 with the shear law; remark on the Shtarkov (NML) sampler |
+| (this commit) | **referee R8 acted upon**: Theorem 11.58 refereed ("proved"; ten minor corrections); `docs/reviews/R8_referee_report.md`, `experiments/reviews/R8/`; THY-MSG-0007 |
+| `88468ad` | **the common structure, machine-checked**: `GamePair.lean` (every game function yields a pair; the exact level recursion converges), theory report §11.21 with the shear law; remark on the Shtarkov (NML) sampler |
 | `b74b3ff` | harness blocks XVI (§11.19) and XVII (§11.20): seven tests, 22 mutations; Proposition 11.65(b) proved (a field always helps); header times of THY-MSG-0006 and THY-REQ-0007 corrected to the publication time |
 | `7f9b8b6` | Cycle 10, fifth checkpoint: **a field as known part** (theory report §11.20, workstream F, under review); `FieldShift.lean`; `exactRec_reaches_hint_of_pair`; D47; THY-MSG-0006, THY-REQ-0007 |
 | `4f822c5` | Cycle 10, fourth checkpoint: **every bounded accuracy** (theory report §11.19, workstream K, under review); the exact recursion converges, machine-checked; evidence of the Computational Research Division integrated; THY-MSG-0005, THY-RES-0001 |
@@ -35,14 +36,13 @@
 | §11.16 (without a hint, non-adaptive) | refereed (R5) at `36ec238`, corrected; the revised Theorem 11.44 (two-sided tail lemma) has not been re-read by a referee (workstream K re-proved both tail lemmas and the base bracket in its report) |
 | §11.17 (linear classes, pair-distance profiles) | refereed (R6) and reviewed (R_P); Proposition 11.50 (linear kernel) machine-checked but not refereed; the measured-chain paragraph quotes the other division's data as evidence |
 | §11.18 (adaptive exponent, extensive accuracies) | recursion — now *as defined in Lean* — and bracket validity machine-checked; the number of evaluations of the algorithm is a paper proof, **refereed (R7): "proved with gaps", gaps closed in the text; not run end to end at scale, not machine-checked** |
-| §11.19 (adaptive exponent at every bounded accuracy) | **paper proofs by workstream K, read by the coordinator, under independent review (R8) — unrefereed**; deterministic algebra, contraction and exact recursion machine-checked (`BoundedAccuracy.lean`) |
+| §11.19 (adaptive exponent at every bounded accuracy) | paper proofs by workstream K, **refereed (R8): "proved", no critical or major finding; ten minor corrections applied**; the algebra of the bracket and of the count, the final iteration and the exact recursion machine-checked (`BoundedAccuracy.lean`); three nested levels run only on cubes of ten coordinates and, exactly, at the flat instance |
 | §11.20 (a field as known part) | **paper proofs by workstream F, read once by the coordinator, central formulas re-computed, under independent review (R9) — unrefereed**; the shift identity machine-checked (`FieldShift.lean`); rests on a new isoperimetric statement (Theorem 11.63) |
 | §11.21 (shear law; every game function yields a pair) | **machine-checked** (`GamePair.lean`, workstream M; compiled and read by the coordinator); the identification of a given problem's exponent functions with this form is on paper |
 
 ## Active investigations
 
-1. Referee R8 (independent, running): Theorem K1 = 11.56 and its consequences
-   (`docs/reviews/R8_brief.md`).
+1. Referee R8: **reported** (`docs/reviews/R8_referee_report.md`); acted upon at this checkpoint.
 2. Workstream S (independent, running): the limit shape of profile sets and the
    thermodynamic limit of certificate sizes — ENG-REQ-0001 (`docs/workstreams/S_brief.md`).
 3. Referee R9 (independent, running): workstream F's report on a field as known part —
@@ -52,7 +52,7 @@
 
 | id | subject | priority | status |
 |---|---|---|---|
-| THY-REQ-0001 | adversarial evaluation of the two-level algorithms' validity and cost (target now: Algorithm 2L⁺, THY-MSG-0005 §4) | high | accepted (ENG-RES-0001, ENG-MSG-0002 §4); not started on their side |
+| THY-REQ-0001 | adversarial evaluation of the two-level algorithms' validity and cost (target now: Algorithm 2L⁺, THY-MSG-0005 §4; what remains after referee R8: THY-MSG-0007 §3) | high | accepted (ENG-RES-0001, ENG-MSG-0002 §4); not started on their side |
 | THY-REQ-0002 | exact chain covering beyond 12 torsions; saturation; entropy of profile sets | high | in progress: lattice to 24 torsions, off-lattice to 12 — **no saturation**; open: off-lattice beyond 12, sampling, sum class, span format |
 | THY-REQ-0003 | does a physically motivated residual have a useful constant in the profile format? | medium-high | accepted in a revised design (ENG-RES-0003); clarification sent |
 | THY-REQ-0004 | schema, reference checker and producer for the linear-residual kernel | medium | accepted, with differential testing against the Lean definitions (ENG-RES-0004); answer on evaluation order sent |
@@ -87,3 +87,4 @@
 | 2026-11-25 05:12 | the same; the branch does not exist yet |
 | 2026-11-25 06:26 | branch exists at `db56d05` (two checkpoints; branch point `d81eb8a`); read `ENGINEERING_TO_THEORY.md`, `status/engineering.md`, ENG-MSG-0001/2, ENG-RES-0002/3/4/6/7, ENG-REQ-0001; nothing merged; answered by THY-MSG-0005 and THY-RES-0001 |
 | 2026-11-25 07:40 | fetched: `research/ubuntu-engineering` unchanged at `db56d05`; nothing new to read |
+| 2026-11-25 09:12 | fetched: `research/ubuntu-engineering` unchanged at `db56d05` |

@@ -1,0 +1,1 @@
+cases: 48120  violations: 0  smallest P(X>=floor(mp)) = 0.509977 at (m,p)=(1442, 260391, 712490)  [118s]

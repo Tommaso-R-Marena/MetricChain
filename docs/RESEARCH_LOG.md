@@ -1102,23 +1102,62 @@ the theory says that such a sample is *minimax-optimal* among fixed samples for 
 estimation of `ln Z` when the residual is only known to be Lipschitz — and that sampling the
 model's own Gibbs measure is exponentially worse in the worst case.
 
-### Resume here (cycle 10, fifth checkpoint)
+### Cycle 10, sixth checkpoint — referee R8: the bounded-accuracy theorem stands (2026-11-25)
+
+**Referee report R8** (`reviews/R8_referee_report.md`; scripts and outputs in
+`experiments/reviews/R8/`).  Verdict on Theorem K3 = 11.58: **proved**.  The referee re-derived
+the whole chain K1 → K.4 → K0 → K1.b → E → K2 → K3 line by line; **no critical and no major
+finding**; ten minor ones, all acted upon:
+
+* m1 the abort test must precede an inner call, and off the good event a pair with `L > U`
+  can be returned — both written into Theorem 11.56;
+* m2 "`T′ = T` on `(0, ∞)`" in the level at bounded accuracy is not nonincreasing — now
+  `min(T(ξ), T′(0))` in Proposition 11.57(b);
+* m3 two hypotheses of Theorem K1 are unused, and the closing-radius and sample-size claims
+  hold for every run, not only on the good event — stated in Theorem 11.56;
+* m5, m6 two false side remarks of the workstream ("never below `4e^u(e^u−1)`"; numpy's
+  binomial) — corrected in Lemma 11.55(a) and in the numerics paragraph, D46 item 5, and
+  towards the other division (THY-MSG-0007), which had been told the numpy remark;
+* m7–m9 one missing line for the non-adaptive row, a limit that need not exist, and which
+  Lean theorem formalises which paper statement — corrected;
+* m10 a floating-point tie — recorded for implementers;
+* labels: "deterministic core machine-checked" now reads "the algebra of the width and of
+  the count"; Theorem 11.58 names Harper, the binomial median and Chernoff–Hoeffding as
+  cited inputs.
+
+What the referee added to the evidence: an own implementation of Algorithm 2L⁺ (15 000
+runs, no violation; mutations detected); **three nested levels with real inner brackets**
+for the first time (`Q_9`, `Q_10`: valid, within width); the **exact cost of three levels at
+the flat instance**, `ln(cost)/(na) = 0.379` at `n = 64 000` against `0.514` for two levels
+(limits `0.361`, `0.500`; lower bound `0.263`).  Prior art added: adaptive inner sampling by
+distance to a threshold in nested simulation; extremal Lipschitz functions via Harper.
+Not checked by anyone: non-radial outer landscapes beyond nine outer coordinates; three
+levels at large size on a non-flat instance; four levels; the frequency of the good event
+from below.
+
+**Workstream M and the common structure** (theory report §11.21) and **harness blocks XVI,
+XVII** are described under the fifth checkpoint above.
+
+### Resume here (cycle 10, sixth checkpoint)
 
 Verified state: every module under `proofs/` (49 files) builds with zero warnings and is walked
 by the axiom audit (3255 declarations); the harness (103 registered tests: 86 that must survive,
 17 documented refutations) and its mutation tests (186 mutations: 185 caught, one expected
 pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 (R5, R6,
-R_P), §11.18 (R7).  **Under review at this checkpoint, hence unrefereed:** §11.19 (referee R8;
-`reviews/R8_brief.md`) and §11.20 (referee R9; `reviews/R9_brief.md`); when a report exists it
-will be `reviews/R8_referee_report.md`, `reviews/R9_referee_report.md`.  **Not refereed:** the
+R_P), §11.18 (R7), §11.19 (R8: "proved").  Machine-checked: §11.21.  **Under review at this
+checkpoint, hence unrefereed:** §11.20 (referee R9; `reviews/R9_brief.md`; when the report
+exists it will be `reviews/R9_referee_report.md`), including the coordinator's proof of
+Proposition 11.65(b).  **Not refereed:** the
 revised Theorem 11.44, Proposition 11.50.  **Not checked by anyone:** the two-level algorithms
-with three nested levels or at scale with real inner brackets (THY-REQ-0001).  Running, with
-outputs in the session's scratch directory until integrated: referees R8 and R9;
-workstream S (limit shape of profile sets; `workstreams/S_brief.md`).  In priority order:
+at scale with real inner brackets on non-flat instances, or with four levels (THY-REQ-0001;
+three levels were run by referee R8 on cubes of ten coordinates and, exactly, at the flat
+instance).  Running, with outputs in the session's scratch directory until integrated:
+referee R9; workstream S (limit shape of profile sets; `workstreams/S_brief.md`).  In
+priority order:
 
-1. **Act on R8 and R9** when they report: corrections into §§11.19, 11.20 and the repository
-   notes of `K_REPORT.md`, `F_REPORT.md`; a D-entry for anything withdrawn; linked THY-MSGs to
-   the other division (it has been told that both results are under review).
+1. **Act on R9** when it reports: corrections into §11.20 and the repository note of
+   `F_REPORT.md`; a D-entry for anything withdrawn; a linked THY-MSG to the other division
+   (it has been told that the result is under review).
 2. **Workstream S / ENG-REQ-0001**: complete THY-RES-0001 (linked update) with the bridge
    theorem, the status of the buried-end problem, computable brackets for the plateau.
 3. **Synchronise with `research/ubuntu-engineering`** at every checkpoint (read-only; never

@@ -18,7 +18,7 @@ evaluation only.
 | how the program evolved and what is open | [`docs/RESEARCH_LOG.md`](docs/RESEARCH_LOG.md) |
 | what turned out false, weaker, or already known | [`docs/DEAD_ENDS.md`](docs/DEAD_ENDS.md) |
 | the literature checks behind the novelty assessments | [`docs/prior_art/`](docs/prior_art) |
-| the independent referee reports on the theory report (seven so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md), [`R5`](docs/reviews/R5_referee_report.md), [`R6`](docs/reviews/R6_referee_report.md), [`R7`](docs/reviews/R7_referee_report.md) |
+| the independent referee reports on the theory report (eight so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md), [`R5`](docs/reviews/R5_referee_report.md), [`R6`](docs/reviews/R6_referee_report.md), [`R7`](docs/reviews/R7_referee_report.md), [`R8`](docs/reviews/R8_referee_report.md) |
 | the independent reviews of the workstream reports | [`docs/reviews/`](docs/reviews) (`R_B_review.md`, `R_C_review.md`, `R_D_review.md`, `R_E_review.md`, `R_G_review.md`, `R_P_review.md`) |
 | collaboration with the Computational Research Division (branch `research/ubuntu-engineering`): protocol, status, messages and computational requests | [`docs/collaboration/`](docs/collaboration/README.md), digest in [`THEORY_TO_ENGINEERING.md`](docs/collaboration/THEORY_TO_ENGINEERING.md) |
 | reports of independent exploratory workstreams (as delivered; not part of the theory report unless it says so) | [`docs/workstreams/`](docs/workstreams) |
@@ -221,7 +221,10 @@ adaption can break an exponential barrier of non-adaptive methods is known for a
 log-concave class (Mathé–Novak 2007); the exact exponent on this class and its coincidence
 with the hinted one were not found in print.
 (iv) *Every bounded accuracy* (theory report §11.19; workstream K, `docs/workstreams/K_REPORT.md`;
-**a paper proof under independent review at this checkpoint — unrefereed**).  The same holds
+**a paper proof, refereed** — `docs/reviews/R8_referee_report.md`: "proved", no critical or major
+finding, ten minor points corrected; the referee also ran three nested levels with real
+inner brackets on small cubes and computed the exact three-level cost at the flat
+instance).  The same holds
 at every fixed accuracy and down to accuracies `e^{-o(n)}`: adaptive algorithms without a hint
 have the exponent `h = KL(Λ₁/u ‖ ½)` of algorithms with a hint, non-adaptive ones the larger
 `KL(p_u ‖ ½)`.  The two-level algorithm is modified so that a level costs an arbitrarily small
@@ -264,8 +267,10 @@ performance are outside the development.  The complexity results are exponents o
 classes (product landscapes; for algorithms without a hint only the cube, with a zero known
 part or a field), with paper proofs wherever the theory report does not name a Lean declaration; the
 newest of them — the adaptive exponent — has a machine-checked recursion and bracket but a
-paper proof for the number of evaluations, its extensions to bounded accuracies and to a
-field as known part were still under review when this was written, and its algorithms are
+paper proof for the number of evaluations, its extension to bounded accuracies is refereed
+but has been run with three nested levels only at toy sizes and at the flat instance, its
+extension to a field as known part was still under review when this was written, and its
+algorithms are
 not practical at any size that can be simulated.  The chain-length independence of profile certificates is a bound, not an
 observation: at every enumerated size the certificates grow.  `docs/THEORY_REPORT.md` §8 lists the limitations, §10 ends with a
 one-table summary of what each kind of knowledge about the residual costs, and

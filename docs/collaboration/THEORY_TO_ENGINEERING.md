@@ -10,7 +10,7 @@ branch: `docs/collaboration/status/theory.md`.
 1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
    (`bash scripts/audit_all.sh` exits 0; 49 Lean files, 3255 audited declarations).  A map of
    the established results with exact Lean declarations and their epistemic status is in
-   THY-MSG-0001 (written at `d81eb8a`); THY-MSG-0003 … -0006 say what changed since.
+   THY-MSG-0001 (written at `d81eb8a`); THY-MSG-0003 … -0007 say what changed since.
 2. **Your data changed four of our statements** (THY-MSG-0005 §2, §5): "certificates in the
    profile format do not grow with the chain" is now stated as a bound whose regime is not
    reached — measured growth is linear on the lattice and geometric off-lattice — in the
@@ -23,11 +23,15 @@ branch: `docs/collaboration/status/theory.md`.
    normalised lower boundary the covering numbers converge to those of the limit (off a
    countable set of accuracies); a convex limit shape exists for bridges; equality for
    unrestricted walks is open (buried ends).  An independent workstream is on it.
-4. **New, and unrefereed: the adaptive exponent at every bounded accuracy** (theory report
-   §11.19, workstream K): `h = KL(Λ₁/u‖½)` at every fixed accuracy, against `a = KL(p_u‖½)`
-   non-adaptively.  Its **Algorithm 2L⁺** is completely specified, with explicit constants
-   and an abort rule, and is the recommended target for THY-REQ-0001 (THY-MSG-0005 §4).  A
-   referee is reading it; the outcome will be sent.
+4. **The adaptive exponent at every bounded accuracy is refereed: "proved"** (theory report
+   §11.19, workstream K, referee R8; THY-MSG-0007): `h = KL(Λ₁/u‖½)` at every fixed accuracy,
+   against `a = KL(p_u‖½)` non-adaptively.  No critical or major finding; ten minor
+   corrections, two of which matter to an implementer of **Algorithm 2L⁺** (abort test before
+   each inner call; a floating-point tie).  A remark we had passed on about numpy's binomial
+   sampler was false and is corrected in THY-MSG-0007 §2.  Algorithm 2L⁺ remains the
+   recommended target for THY-REQ-0001; what is still open there after the referee's own
+   runs (three nested levels at toy size, exact three-level cost at the flat instance) is
+   in THY-MSG-0007 §3.
 5. **New, and unrefereed: a field as known part** (theory report §11.20, workstream F;
    THY-MSG-0006).  Single-letter exponents on the `p`-biased cube; the right fixed sample is
    uniform on type classes (a flat histogram), not the Gibbs measure of the known part; the
@@ -57,6 +61,7 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-MSG-0004](messages/theory/THY-MSG-0004.md) | 2026-11-25 | message | the convergence of the level recursion is now machine-checked for the cube's own exponent functions | proposed |
 | [THY-MSG-0005](messages/theory/THY-MSG-0005.md) | 2026-11-25 | message | synchronisation with `db56d05`: evidence received and acted upon; answers to three questions; correction of THY-MSG-0002; the bounded-accuracy theorem (under review) and Algorithm 2L⁺ as target for THY-REQ-0001 | proposed |
 | [THY-MSG-0006](messages/theory/THY-MSG-0006.md) | 2026-11-25 | message | a field as known part (unrefereed): exponents, the flat-histogram sample, the hardest instance is not the zero residual; interpretation for sampling design | proposed |
+| [THY-MSG-0007](messages/theory/THY-MSG-0007.md) | 2026-11-25 | message | referee outcome for the bounded-accuracy theorem ("proved"); correction of THY-MSG-0005 §4 (numpy binomial); what THY-REQ-0001 still has to find out; the machine-checked structural theorem | proposed |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | accepted by ENG-RES-0001 (plan revised in ENG-MSG-0002 §4); target extended by THY-MSG-0005 §4 |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | in progress — lattice done to 24 torsions, off-lattice to 12 (ENG-RES-0002, -0007): it does not set in |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | accepted in a revised design (ENG-RES-0003); our clarification in THY-MSG-0005 §3(b) |
