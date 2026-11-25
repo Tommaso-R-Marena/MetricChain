@@ -217,6 +217,14 @@ class Params2L:
         self.Mbar = 8 * self.J * mp.e ** 2 * self.Mdag            # "every M that is used is at most 8Je^2 M-dagger"
         self.cap_new = 2 * mp.e * self.Mdag                       # remark of 40c5bd7 for the constants of 11.52
         self.width_bound = mp.log(1 + 4 * self.J * mp.e ** (self.b + 1) + mp.e ** self.b + mp.e ** self.G)
+        # displayed cost bound of 11.52: sum_{j<=J} sum_l min(8Je^2 Mdag, 32KJe^3 e^{x_{l-1}} + 4K)(l+1) C_l ;
+        # the l = 0 term (one query per point) and the reference query are added here (finding m-e of my notes)
+        if self.Mdag != mp.inf:
+            self.Cmax = 1 + (self.J + 1) * (self.Mbar + sum(
+                min(self.Mbar, 32 * self.K * self.J * mp.e ** 3 * mp.e ** self.xs[l - 1] + 4 * self.K) * (l + 1) * self.costs[l]
+                for l in range(1, self.L + 1)))
+        else:
+            self.Cmax = mp.inf
 
     def cnt(self, x):
         """count of 11.52: at most 32 K J e^2 e^x + 4K points used at level j have W > s_j e^{-x} (x in b + N)."""
@@ -418,6 +426,7 @@ class Run:
         self.strat = np.zeros(0, dtype=np.int64)
         self.extra = []
         self.nblocks = 0
+        self.block_end = []
         self.points_drawn = 0
         self.calls = [0] * (P.L + 1)                 # total inner calls per rung
         self.inner_queries = mp.mpf(0)
@@ -457,6 +466,7 @@ class Run:
             if "extra" in d:
                 self.extra.extend(d["extra"])
             self.nblocks += 1
+            self.block_end.append(len(self.cnt))
             self.points_drawn += size
 
     def _sum_cnt(self, mask):
@@ -471,25 +481,27 @@ class Run:
         return tot
 
     def _classify(self, j, t, rec):
-        """classify all units of blocks <= t at level j; returns N (#high points)."""
+        """classify all units of blocks <= t at level j; returns N (#high points).  Units of blocks <= t are a prefix."""
         lns = self.ln_s(j)
-        act = self.blk <= t
+        hi = self.block_end[t]
         P = self.P
+        lnU = self.lnU[:hi]
+        lnL = self.lnL[:hi]
+        rung = self.rung[:hi]
         while True:
-            need = act & (self.lnU > lns) & (self.lnL <= lns - self.b_f)
+            need = (lnU > lns) & (lnL <= lns - self.b_f)
             if not need.any():
                 break
-            if (need & (self.rung >= P.L)).any():
+            if (need & (rung >= P.L)).any():
                 raise Abort("unclassified at the last rung")
             idx = np.nonzero(need)[0]
-            # all units move one rung; group by target rung for the cost test
-            newr = self.rung[idx] + 1
+            newr = rung[idx] + 1
             for l in np.unique(newr):
                 sel = idx[newr == l]
                 npts = self._sum_cnt_idx(sel)
                 if not getattr(self.oracle, "charges", False):
                     add = npts * P.costs[int(l)]
-                    if self.abort_on_cost and hasattr(P, "Cmax") and self.queries() + add > P.Cmax:
+                    if self.abort_on_cost and self.queries() + add > P.Cmax:
                         raise Abort("query budget C_max")
                     self.inner_queries += add
                 self.calls[int(l)] += npts
@@ -498,20 +510,25 @@ class Run:
                 self.lnL[sel] = np.maximum(self.lnL[sel], lnLp)
                 self.lnU[sel] = np.minimum(self.lnU[sel], lnUp)
                 self.rung[sel] = l
-        high = act & ~(self.lnU <= lns)
-        return self._sum_cnt(high)
+        high = np.nonzero(~(lnU <= lns))[0]
+        return self._sum_cnt_idx(high)
 
     def _sum_cnt_idx(self, idx):
+        if len(idx) == 0:
+            return 0
         tot = 0
         b = self.blk[idx]
         c = self.cnt[idx]
+        if b[0] == b[-1] and (len(b) < 3 or (b == b[0]).all()):
+            return int(c.sum())
         for tb in np.unique(b):
             tot += int(c[b == tb].sum())
         return tot
 
     def count_above(self, t, lnthr):
         """#points among the first K 2^t with true W > e^lnthr (for the checks)."""
-        return self._sum_cnt((self.blk <= t) & (self.lnW > lnthr))
+        hi = self.block_end[t]
+        return self._sum_cnt_idx(np.nonzero(self.lnW[:hi] > lnthr)[0])
 
     # -- the algorithm
     def run(self):

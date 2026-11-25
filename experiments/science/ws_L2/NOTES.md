@@ -53,7 +53,7 @@ No formal statement falsified.
 
 Next: `Sandwich.lean` (A11).
 
-## 20:22 UTC — priority 1 DONE: `Sandwich.lean` (checks, 8 s, exit 0, no warning, no sorry)
+## 20:17 UTC — priority 1 DONE: `Sandwich.lean` (checks, 8 s, exit 0, no warning, no sorry)
 
 34 headline declarations, all `[propext, Classical.choice, Quot.sound]`.
 

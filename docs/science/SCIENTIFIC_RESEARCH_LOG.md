@@ -454,4 +454,8 @@ profile and the gauche count, and its support function is the ground-state energ
 * The theory division's lemma on Q3(c) (interior points of the limit shape are means of
   Gibbs measures with bounded coefficients) checked — three lines — and recorded in §11.3
   of our note with attribution.
+* **Workstream R7 launched**: until now our validation of the engineering division was
+  limited to its class tables.  R7 reviews and replicates its off-lattice chain results,
+  its exact covers as certificates, the Harper closed form, and the statistics behind
+  its adversarial test of Algorithm 2L⁺ (the algorithm itself is R6's).
 

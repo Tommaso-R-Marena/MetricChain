@@ -1,0 +1,27 @@
+(a) anlib against brute force, random grids with random masks
+   shape (3, 2, 4), 19 of 24 points in the domain: max deviation order 1: 0.0e+00, order 2: 0.0e+00, order 3: 0.0e+00
+   shape (2, 3, 2, 3), 25 of 36 points in the domain: max deviation order 1: 0.0e+00, order 2: 4.4e-16, order 3: 6.7e-16
+(b)-(e) synthetic residuals
+   shape (3, 4, 5, 3), exactly pairwise                     on full product          : max c_ijk = 5.77e-15; two-site fit remainder rms 1.05e-15 max 3.55e-15 sup-optimal 0.00e+00; one-site rms 1.98e+00; std 3.54; star remainder max 9.67e+00 <= bound max 2.83e+01: True; anchored order-2 remainder max 4.44e-15 <= sum c_ijk bound max 2.01e-14: True
+   shape (3, 4, 5, 3), exactly pairwise                     on random 75 % sub-domain: max c_ijk = 2.66e-15; two-site fit remainder rms 2.60e-12 max 6.72e-12 sup-optimal 0.00e+00; one-site rms 1.94e+00; std 3.51
+   shape (3, 4, 5, 3), iid random                           on full product          : max c_ijk = 3.09e+01; two-site fit remainder rms 2.65e+00 max 6.99e+00 sup-optimal 4.52e+00; one-site rms 3.16e+00; std 3.31; star remainder max 2.21e+01 <= bound max 1.19e+02: True; anchored order-2 remainder max 4.42e+01 <= sum c_ijk bound max 1.09e+02: True
+   shape (3, 4, 5, 3), iid random                           on random 75 % sub-domain: max c_ijk = 2.87e+01; two-site fit remainder rms 2.61e+00 max 7.42e+00 sup-optimal 4.13e+00; one-site rms 3.24e+00; std 3.49
+   shape (3, 4, 5, 3), pairwise + 0.37*[x0=1][x1=0][x2=2]   on full product          : max c_ijk = 3.70e-01; two-site fit remainder rms 3.02e-02 max 1.48e-01 sup-optimal 4.63e-02; one-site rms 1.98e+00; std 3.54; star remainder max 9.67e+00 <= bound max 2.83e+01: True; anchored order-2 remainder max 3.70e-01 <= sum c_ijk bound max 3.70e-01: True
+   shape (3, 4, 5, 3), pairwise + 0.37*[x0=1][x1=0][x2=2]   on random 75 % sub-domain: max c_ijk = 3.70e-01; two-site fit remainder rms 3.17e-02 max 1.32e-01 sup-optimal 4.63e-02; one-site rms 1.94e+00; std 3.51
+   shape (9, 9, 9), exactly pairwise                     on full product          : max c_ijk = 3.55e-15; two-site fit remainder rms 6.11e-16 max 2.66e-15 sup-optimal 0.00e+00; one-site rms 1.52e+00; std 2.48; star remainder max 1.09e+01 <= bound max 1.96e+01: True; anchored order-2 remainder max 3.55e-15 <= sum c_ijk bound max 3.55e-15: True
+   shape (9, 9, 9), exactly pairwise                     on random 75 % sub-domain: max c_ijk = 3.11e-15; two-site fit remainder rms 4.33e-12 max 3.22e-11 sup-optimal 0.00e+00; one-site rms 1.52e+00; std 2.50
+   shape (9, 9, 9), iid random                           on full product          : max c_ijk = 2.82e+01; two-site fit remainder rms 2.11e+00 max 6.77e+00 sup-optimal 3.62e+00; one-site rms 2.44e+00; std 2.49; star remainder max 1.68e+01 <= bound max 5.57e+01: True; anchored order-2 remainder max 2.25e+01 <= sum c_ijk bound max 2.82e+01: True
+   shape (9, 9, 9), iid random                           on random 75 % sub-domain: max c_ijk = 2.40e+01; two-site fit remainder rms 2.01e+00 max 5.99e+00 sup-optimal 3.39e+00; one-site rms 2.45e+00; std 2.49
+   shape (9, 9, 9), pairwise + 0.37*[x0=1][x1=0][x2=2]   on full product          : max c_ijk = 3.70e-01; two-site fit remainder rms 1.15e-02 max 2.60e-01 sup-optimal 4.63e-02; one-site rms 1.52e+00; std 2.48; star remainder max 1.09e+01 <= bound max 1.96e+01: True; anchored order-2 remainder max 3.70e-01 <= sum c_ijk bound max 3.70e-01: True
+   shape (9, 9, 9), pairwise + 0.37*[x0=1][x1=0][x2=2]   on random 75 % sub-domain: max c_ijk = 3.70e-01; two-site fit remainder rms 1.16e-02 max 1.99e-01 sup-optimal 4.62e-02; one-site rms 1.52e+00; std 2.50
+   shape (3, 3, 3, 3, 3, 3, 3), exactly pairwise                     on full product          : max c_ijk = 1.78e-14; two-site fit remainder rms 1.29e-14 max 4.26e-14 sup-optimal 0.00e+00; one-site rms 2.98e+00; std 4.57; star remainder max 1.90e+01 <= bound max 6.86e+01: True; anchored order-2 remainder max 3.06e-14 <= sum c_ijk bound max 4.70e-13: True
+   shape (3, 3, 3, 3, 3, 3, 3), exactly pairwise                     on random 75 % sub-domain: max c_ijk = 1.60e-14; two-site fit remainder rms 8.16e-13 max 3.00e-12 sup-optimal 0.00e+00; one-site rms 2.97e+00; std 4.58
+   shape (3, 3, 3, 3, 3, 3, 3), iid random                           on full product          : max c_ijk = 5.18e+01; two-site fit remainder rms 4.55e+00 max 1.54e+01 sup-optimal 1.09e+01; one-site rms 4.66e+00; std 4.67; star remainder max 7.38e+01 <= bound max 7.02e+02: True; anchored order-2 remainder max 2.61e+02 <= sum c_ijk bound max 1.62e+03: True
+   shape (3, 3, 3, 3, 3, 3, 3), iid random                           on random 75 % sub-domain: max c_ijk = 4.78e+01; two-site fit remainder rms 4.50e+00 max 1.52e+01 sup-optimal 1.03e+01; one-site rms 4.65e+00; std 4.67
+   shape (3, 3, 3, 3, 3, 3, 3), pairwise + 0.37*[x0=1][x1=0][x2=2]   on full product          : max c_ijk = 3.70e-01; two-site fit remainder rms 3.88e-02 max 1.10e-01 sup-optimal 4.63e-02; one-site rms 2.99e+00; std 4.58; star remainder max 1.90e+01 <= bound max 6.90e+01: True; anchored order-2 remainder max 3.70e-01 <= sum c_ijk bound max 3.70e-01: True
+   shape (3, 3, 3, 3, 3, 3, 3), pairwise + 0.37*[x0=1][x1=0][x2=2]   on random 75 % sub-domain: max c_ijk = 3.70e-01; two-site fit remainder rms 3.81e-02 max 1.28e-01 sup-optimal 4.63e-02; one-site rms 2.97e+00; std 4.59
+all controls passed
+
+real	0m2.186s
+user	0m2.058s
+sys	0m0.119s
