@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 19 of the science branch (2026-11-25; the commit time is
+*Updated at checkpoint 20 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -44,6 +44,9 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 | K | certified kinetics: barriers, exit times, capacities | own theory + Lean | **reported and published** (`workstreams/SK_REPORT.md`; SCI-MSG-0005) |
 | X | alternatives to worst-case classes (average-case, weighted, structural conditions) | own theory | **reported and published** (`workstreams/SX_REPORT.md`; SCI-MSG-0007; `docs/science/ALTERNATIVE_FRAMEWORKS.md`) |
 | L1 | Lean formalisation of the short cores of our own results (files outside `proofs/`) | formalisation | **reported and published** (`workstreams/L1_REPORT.md`; eight files, 78 theorems, re-compiled by the coordinator; SCI-MSG-0008 §4) |
+| R6 | **second wave:** independent line-by-line review, with own re-derivation and implementation, of the cost of the nested adaptive algorithm (theory report §§11.18–11.19) → SCI-REV-0007 | review + replication | running (launched after checkpoint 19) |
+| P2 | **second wave:** class constants of the GBn2 term in rotamer variables on a fixed backbone | measurement | running |
+| L2 | **second wave:** Lean — addendum A11, the referee's finite inequalities, Proposition A1.2 | formalisation | running |
 | — | replication of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | replication | **completed: `AUDIT PASSED`** — 56 Lean files, 3423 declarations, 267 mutations (266 caught, 1 expected pass); first replication of the three Lean files added since `63efc69`; `docs/science/INDEPENDENT_VALIDATION.md` §1.1 |
 | — | replication of the engineering lattice-chain class tables | replication | **completed for `n = 1 … 10`: identical** (own enumerator; and by workstream R2 for 4–23 beads); `INDEPENDENT_VALIDATION.md` §1.2 |
 

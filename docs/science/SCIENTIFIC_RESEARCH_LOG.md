@@ -369,3 +369,18 @@ profile and the gauche count, and its support function is the ground-state energ
   written (summaries composed after the theorems, by the same author, under time
   pressure) rather than of one division.
 
+### Cycle 14 — second wave launched; synthesis and handoff written (checkpoint 20)
+
+* With all first-wave reports published, three second-wave workstreams were launched on
+  the items today's evidence ranks highest: **R6**, an independent re-derivation of the
+  cost of the nested adaptive algorithm (the proof under the programme's headline, never
+  re-derived outside the theory division); **P2**, the class constants of a solvent term
+  in rotamer variables on a fixed backbone (decides whether the theory's second-order
+  interface has a real instance); **L2**, Lean checks of A11, the referee's finite
+  inequalities and Proposition A1.2.
+* Written: frontier map version 4 (the three working hypotheses of version 1 confronted
+  with the evidence); `RESEARCH_SYNTHESIS.md` (the one file a successor should read
+  first); `DEAD_ENDS.md` (thirty entries: ten false or overstated sentences of ours, four
+  errors of record-keeping, four vacuous checks, twelve negative results);
+  SCI-MSG-0010, a ranked list of everything we have asked of the other divisions.
+

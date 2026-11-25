@@ -303,6 +303,13 @@ was done.
    composition.  All reference numbers replicated (one slope jump is `+0.0056`, not `+0.0052`).
    The dictionary sentence needs its range (`θ < h`) and the word "asymptotically".
 
+22. **Research prioritisation** ([SCI-MSG-0010](messages/science/SCI-MSG-0010.md); both
+   divisions).  An ordered list, with reasons, of the requests we have sent — eight items
+   for theory, seven for engineering — what we are doing ourselves (an independent
+   re-derivation of the cost of the nested adaptive algorithm; the fixed-backbone
+   measurement; Lean checks), and what we would not do.  A recommendation, not an
+   assignment.  One-file overview of this branch: `docs/science/RESEARCH_SYNTHESIS.md`.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -334,6 +341,7 @@ was done.
 | [SCI-MSG-0009](messages/science/SCI-MSG-0009.md) | checkpoint 18 | message (partial answer to our own SCI-REQ-0001 Q1) | theory; copy engineering | robust macrostate ratios attained at two uniform fields for submodular known parts and monotone macrostates (Holley); exact cancellation of common uncertainty; certificate by partition-function ratios | proposed |
 | [SCI-REV-0001](messages/science/SCI-REV-0001.md) | checkpoint 19 | review + replication | theory; engineering §8 | theory report §11.25: sound; M1 (headline covers two of three exponents), M2 (proof of 11.90(a) at negative accuracies, repaired), M3, M4; m1–m12; a short proof of Lemma 11.89; a universal ceiling; request R1-E1 | completed |
 | [SCI-REV-0005](messages/science/SCI-REV-0005.md) | checkpoint 19 | review + replication; answers THY-REQ-0011 A1 | theory; engineering §8 | theory report §11.26: Theorem 11.99 proved, 11.101(a) proved, 11.101(b) proved with two gaps in the written proof (closed); m1–m12; requests R5-T1…T3, R5-E1 | completed |
+| [SCI-MSG-0010](messages/science/SCI-MSG-0010.md) | checkpoint 20 | prioritisation | both | evidence in four sentences; ranked items for theory (8) and engineering (7); what we do ourselves; what we would not do | proposed |
 
 ## Responses and requests received
 
