@@ -1,0 +1,22 @@
+T8 d=2: 9 local minima found; a = [1.008 3.428] E=-1.0513;  b = [5.197 1.334] E=-1.0513
+   reference bracket of B_cont from k=720: [1.0894, 1.1863]  (height above a: [2.1407, 2.2376])
+   k     B_lo(face)  B_hi(face)  contains ref?  B_lo(complete)  trivial=max(E_lo(a),E_lo(b))  scan bounds per torsion (E_lo)
+   6     -4.1399     7.4840      True           -4.1399         -5.5845                       -5.2566  -5.0394
+   12    -1.6528     4.1592      True           -2.5180         -3.7157                       -1.7573  -2.7572
+   24    -0.2982     2.6077      True           -1.7052         -2.4130                       -0.2982  -1.5055
+   48    0.4119      1.8649      True           -1.0716         -1.7671                       0.4119  -0.8392
+   96    0.7754      1.5019      True           -0.7429         -1.4141                       0.7754  -0.4804
+   192   0.9562      1.3194      True           nan             -1.2321                       0.9562  -0.2987
+   all brackets nested around the reference: True
+T8 d=3: 26 local minima found; a = [3.176 5.612 3.028] E=-2.2984;  b = [5.125 1.425 5.201] E=-2.2581
+   reference bracket of B_cont from k=96: [-0.3667, 0.8113]  (height above a: [1.9317, 3.1098])
+   k     B_lo(face)  B_hi(face)  contains ref?  B_lo(complete)  trivial=max(E_lo(a),E_lo(b))  scan bounds per torsion (E_lo)
+   6     -8.1244     10.7251     True           -8.1244         -9.4902                       -9.4902  -9.2965  -9.2965
+   12    -4.2426     5.1821      True           -5.1567         -6.5416                       -4.7864  -5.7525  -4.8039
+   24    -2.0720     2.6404      True           -3.2110         -4.5646                       -2.3105  -3.8411  -2.4934
+   48    -0.9419     1.4143      True           nan             -3.4093                       -1.0353  -2.5685  -1.3330
+   all brackets nested around the reference: True
+
+real	0m21.067s
+user	0m4.897s
+sys	0m0.136s

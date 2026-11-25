@@ -1,0 +1,18 @@
+[C4] trials=20000: max rel. deviation formula vs direct minimisation/complex form = 7.03e-06
+[C4] Kabsch cost > coaxial cost in 0 cases; Kabsch/coaxial ratio in [0.0000, 0.998264]
+[C4] violations of 4 I_red sin^2 <= C <= 4 min(I_A,I_B) sin^2: 0
+[G16] conformations: regular helices, all torsions = tau (tau = 180 deg is all-trans); N atoms, n = N-3 torsions
+[G16] central torsion i = n/2, m = min(i, n+1-i); ratio = 2 sqrt(2 I_red) / (b m^{3/2}); ratio_min = 2 sqrt(min(I_A,I_B)) / (b m^{3/2})
+[G16] N=   43 m=  20: sup ratio = 0.6431 at tau=90, sup ratio_min = 0.6215 at tau=90
+[G16] N=   83 m=  40: sup ratio = 0.6101 at tau=90, sup ratio_min = 0.5991 at tau=90
+[G16] N=  163 m=  80: sup ratio = 0.5937 at tau=90, sup ratio_min = 0.5882 at tau=90
+[G16] N=  323 m= 160: sup ratio = 0.5855 at tau=90, sup ratio_min = 0.5828 at tau=90
+[G16] N=  643 m= 320: sup ratio = 0.5814 at tau=90, sup ratio_min = 0.5801 at tau=90
+[G16] N= 1283 m= 640: sup ratio = 0.5794 at tau=90, sup ratio_min = 0.5787 at tau=90
+[G16] all-trans, N=2003: 2 sqrt(min(I_A,I_B)) at distance m from the end, m=[10, 20, 40, 80, 160, 320, 640]:
+[G16]   values/m^1.5 = 0.6254 0.5850 0.5647 0.5545 0.5494 0.5469 0.5456 ; fitted exponent = 1.4705
+[G16] random rotamer coils (phantom, N=403, m=200, 200 samples): 2 sqrt(min I)/m^1.5 median 0.0825, max 0.2035;  2 sqrt(min I)/m median 1.167  (typical coils scale like m, extended ones like m^1.5)
+
+real	1m6.938s
+user	0m16.820s
+sys	0m1.601s

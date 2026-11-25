@@ -1,0 +1,51 @@
+T6: robust TST bounds under a weighted Hamming envelope
+    columns: beta | k_nom | (1/beta)ln(K/k_nom) for K = K_exact, K_gate, K_a, k(g_tilt) | d(a,y*) (envelope distance a -> dominant gateway) | max sampled ratio k(g)/K_exact | max lambda_A(g)/k(g)
+  binary n=8 chain+, c~0.15, inst 0: H_f=1.80, |A|=8, |wall|=39, crossing edges=46, sum c=1.06
+    beta=1 k_nom=7.131e-01 | exact 0.149  gate 0.283  pin-a 0.384  tilt 0.085 | d(a,y*)=0.429 | 1.0000 | 0.793
+    beta=2 k_nom=1.256e-01 | exact 0.189  gate 0.265  pin-a 0.305  tilt 0.084 | d(a,y*)=0.429 | 1.0000 | 0.728
+    beta=4 k_nom=3.469e-03 | exact 0.241  gate 0.285  pin-a 0.278  tilt 0.084 | d(a,y*)=0.429 | 0.9848 | 0.787
+  binary n=8 chain+, c~0.15, inst 1: H_f=2.41, |A|=11, |wall|=48, crossing edges=62, sum c=1.16
+    beta=1 k_nom=5.967e-01 | exact 0.196  gate 0.387  pin-a 0.507  tilt 0.097 | d(a,y*)=0.445 | 1.0000 | 0.820
+    beta=2 k_nom=6.652e-02 | exact 0.254  gate 0.359  pin-a 0.428  tilt 0.096 | d(a,y*)=0.445 | 1.0000 | 0.871
+    beta=4 k_nom=5.723e-04 | exact 0.327  gate 0.350  pin-a 0.366  tilt 0.096 | d(a,y*)=0.445 | 1.0000 | 0.965
+  binary n=8 chain+, c~0.15, inst 2: H_f=0.07, |A|=2, |wall|=14, crossing edges=14, sum c=1.18
+    beta=1 k_nom=3.240e+00 | exact 0.133  gate 0.202  pin-a 0.216  tilt 0.074 | d(a,y*)=0.286 | 1.0000 | 0.985
+    beta=2 k_nom=2.280e+00 | exact 0.124  gate 0.200  pin-a 0.205  tilt 0.073 | d(a,y*)=0.286 | 1.0000 | 0.986
+    beta=4 k_nom=1.508e+00 | exact 0.112  gate 0.197  pin-a 0.191  tilt 0.072 | d(a,y*)=0.286 | 1.0000 | 0.987
+  binary n=8 chain+, c~0.4, inst 0: H_f=1.12, |A|=8, |wall|=38, crossing edges=44, sum c=3.33
+    beta=1 k_nom=6.768e-01 | exact 0.518  gate 1.015  pin-a 1.531  tilt 0.199 | d(a,y*)=0.928 | 1.0000 | 0.915
+    beta=2 k_nom=1.627e-01 | exact 0.634  gate 1.028  pin-a 1.448  tilt 0.182 | d(a,y*)=1.642 | 1.0000 | 0.857
+    beta=4 k_nom=1.403e-02 | exact 0.771  gate 1.145  pin-a 1.334  tilt 0.151 | d(a,y*)=1.642 | 1.0000 | 0.982
+  binary n=8 chain+, c~0.4, inst 1: H_f=0.15, |A|=1, |wall|=8, crossing edges=8, sum c=3.57
+    beta=1 k_nom=3.353e+00 | exact 0.253  gate 0.482  pin-a 0.253  tilt 0.195 | d(a,y*)=0.570 | 1.0000 | 1.000
+    beta=2 k_nom=2.244e+00 | exact 0.220  gate 0.508  pin-a 0.220  tilt 0.184 | d(a,y*)=0.570 | 1.0000 | 1.000
+    beta=4 k_nom=1.391e+00 | exact 0.198  gate 0.528  pin-a 0.198  tilt 0.176 | d(a,y*)=0.570 | 1.0000 | 1.000
+  binary n=8 chain+, c~0.4, inst 2: H_f=0.02, |A|=1, |wall|=8, crossing edges=8, sum c=3.16
+    beta=1 k_nom=2.697e+00 | exact 0.258  gate 0.386  pin-a 0.258  tilt 0.164 | d(a,y*)=0.406 | 1.0000 | 1.000
+    beta=2 k_nom=1.663e+00 | exact 0.188  gate 0.387  pin-a 0.188  tilt 0.122 | d(a,y*)=0.406 | 1.0000 | 1.000
+    beta=4 k_nom=1.103e+00 | exact 0.103  gate 0.398  pin-a 0.103  tilt 0.065 | d(a,y*)=0.406 | 1.0000 | 1.000
+  3-state n=5 chain+, c~0.15, inst 0: H_f=0.61, |A|=3, |wall|=23, crossing edges=26, sum c=0.80
+    beta=1 k_nom=2.848e+00 | exact 0.168  gate 0.274  pin-a 0.373  tilt 0.119 | d(a,y*)=0.350 | 1.0000 | 0.895
+    beta=2 k_nom=1.328e+00 | exact 0.194  gate 0.273  pin-a 0.369  tilt 0.119 | d(a,y*)=0.350 | 1.0000 | 0.844
+    beta=4 k_nom=3.578e-01 | exact 0.235  gate 0.282  pin-a 0.357  tilt 0.119 | d(a,y*)=0.350 | 1.0000 | 0.796
+  3-state n=5 chain+, c~0.15, inst 1: H_f=0.77, |A|=6, |wall|=39, crossing edges=48, sum c=0.87
+    beta=1 k_nom=1.721e+00 | exact 0.191  gate 0.396  pin-a 0.576  tilt 0.119 | d(a,y*)=0.380 | 0.9982 | 0.855
+    beta=2 k_nom=5.375e-01 | exact 0.211  gate 0.392  pin-a 0.592  tilt 0.119 | d(a,y*)=0.380 | 0.9999 | 0.880
+    beta=4 k_nom=8.428e-02 | exact 0.249  gate 0.375  pin-a 0.585  tilt 0.119 | d(a,y*)=0.372 | 0.8801 | 0.843
+  3-state n=5 chain+, c~0.15, inst 2: H_f=1.10, |A|=2, |wall|=17, crossing edges=18, sum c=0.53
+    beta=1 k_nom=1.314e+00 | exact 0.103  gate 0.148  pin-a 0.192  tilt 0.075 | d(a,y*)=0.125 | 0.9887 | 0.986
+    beta=2 k_nom=3.143e-01 | exact 0.105  gate 0.141  pin-a 0.178  tilt 0.075 | d(a,y*)=0.125 | 0.9444 | 0.991
+    beta=4 k_nom=2.746e-02 | exact 0.105  gate 0.134  pin-a 0.165  tilt 0.075 | d(a,y*)=0.125 | 0.8926 | 0.999
+  3-state n=5 chain+, c~0.4, inst 0: H_f=0.02, |A|=1, |wall|=10, crossing edges=10, sum c=1.82
+    beta=1 k_nom=4.244e+00 | exact 0.248  gate 0.367  pin-a 0.248  tilt 0.214 | d(a,y*)=0.385 | 1.0000 | 1.000
+    beta=2 k_nom=2.754e+00 | exact 0.207  gate 0.369  pin-a 0.207  tilt 0.185 | d(a,y*)=0.385 | 1.0000 | 1.000
+    beta=4 k_nom=1.760e+00 | exact 0.159  gate 0.372  pin-a 0.159  tilt 0.150 | d(a,y*)=0.385 | 1.0000 | 1.000
+  3-state n=5 chain+, c~0.4, inst 1: H_f=1.18, |A|=7, |wall|=43, crossing edges=54, sum c=1.65
+    beta=1 k_nom=1.046e+00 | exact 0.349  gate 0.761  pin-a 1.314  tilt 0.232 | d(a,y*)=0.894 | 0.8894 | 0.927
+    beta=2 k_nom=2.387e-01 | exact 0.519  gate 0.743  pin-a 1.155  tilt 0.232 | d(a,y*)=0.894 | 0.7123 | 0.942
+    beta=4 k_nom=2.195e-02 | exact 0.722  gate 0.806  pin-a 1.010  tilt 0.232 | d(a,y*)=0.894 | 0.6986 | 0.982
+T6 summary: 33 (instance, beta) cases, violations: 0
+
+real	0m6.104s
+user	0m1.756s
+sys	0m0.085s

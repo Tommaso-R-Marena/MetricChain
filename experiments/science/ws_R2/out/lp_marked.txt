@@ -1,0 +1,38 @@
+340 configurations (incl. the empty one), 47 orbits of non-empty configurations, 13 star relations (transposition w<->u1)
+Part 1: on 25 random self-avoiding walks (8..60 beads): at most 16 oriented bonds have a chain end as a centre; mu(v)=1 and the formulas for e3,e8,e11 and g/N = 2mu(...) hold exactly; the symmetrised measure is invariant under the 12 cluster symmetries and its marked-star marginal under all 24 permutations
+
+Part 2: LP values (HiGHS): max of c.p over the marked relaxation (claimed b), and the old row (-4,2,-1)
+  c=  (-1, 0, 0): max c.p = 0.000000000   claimed 0
+  c=  (4, -1, 0): max c.p = 0.000000000   claimed 0
+  c=  (6, -1, 0): max c.p = 1.000000000   claimed 1
+  c=  (-2, 1, 0): max c.p = 3.000000000   claimed 3
+  c= (-1, 1, -1): max c.p = 0.000000000   claimed 0
+  c= (-1, 2, -1): max c.p = 3.000000000   claimed 3
+  c= (-3, 2, -1): max c.p = 2.000000000   claimed 2
+  c= (-3, 4, -3): max c.p = 2.000000000   claimed 2
+  c=  (3, 4, -3): max c.p = 5.000000000   claimed 5
+  c=  (6, -2, 1): max c.p = 2.000000000   claimed 2
+  c=  (0, -1, 2): max c.p = 7.000000000   claimed 7
+  c=  (-3, 0, 2): max c.p = 9.000000000   claimed 9
+  c= (-4, 2, -1): max c.p = 2.000000000   claimed 2
+       q >= 2p11-5p3-8: max of (c.p - q) = 8.000000000   claimed 8
+        q >= 2p11-p8-7: max of (c.p - q) = 7.000000000   claimed 7
+     q >= p11+p8-4p3-7: max of (c.p - q) = 7.000000000   claimed 7
+
+Part 3: own exact certificates (all orbits, rational arithmetic)
+  c=  (-1, 0, 0) b=0: certified exactly (denominator 1; 2 nonzero multipliers; max over orbits = 0)
+  c=  (4, -1, 0) b=0: certified exactly (denominator 1; 3 nonzero multipliers; max over orbits = 0)
+  c=  (6, -1, 0) b=1: certified exactly (denominator 1; 3 nonzero multipliers; max over orbits = 0)
+  c=  (-2, 1, 0) b=3: certified exactly (denominator 1; 5 nonzero multipliers; max over orbits = 0)
+  c= (-1, 1, -1) b=0: certified exactly (denominator 1; 5 nonzero multipliers; max over orbits = 0)
+  c= (-1, 2, -1) b=3: certified exactly (denominator 1; 4 nonzero multipliers; max over orbits = 0)
+  c= (-3, 2, -1) b=2: certified exactly (denominator 1; 6 nonzero multipliers; max over orbits = 0)
+  c= (-3, 4, -3) b=2: certified exactly (denominator 1; 6 nonzero multipliers; max over orbits = 0)
+  c=  (3, 4, -3) b=5: certified exactly (denominator 1; 3 nonzero multipliers; max over orbits = 0)
+  c=  (6, -2, 1) b=2: certified exactly (denominator 1; 5 nonzero multipliers; max over orbits = 0)
+  c=  (0, -1, 2) b=7: certified exactly (denominator 1; 6 nonzero multipliers; max over orbits = 0)
+  c=  (-3, 0, 2) b=9: certified exactly (denominator 1; 6 nonzero multipliers; max over orbits = 0)
+       q >= 2p11-5p3-8: certified exactly (denominator 1; 6 nonzero multipliers; max over orbits = 0)
+        q >= 2p11-p8-7: certified exactly (denominator 1; 6 nonzero multipliers; max over orbits = 0)
+     q >= p11+p8-4p3-7: certified exactly (denominator 1; 6 nonzero multipliers; max over orbits = 0)
+  all certified: True

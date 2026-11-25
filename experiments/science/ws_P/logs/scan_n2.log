@@ -1,0 +1,5 @@
+  scan n=2 site 1/4  3s
+  scan n=2 site 2/4  6s
+  scan n=2 site 3/4  8s
+  scan n=2 site 4/4  11s
+scan n=2: 200 base conformations x 4 torsions x 36 angles; 11s

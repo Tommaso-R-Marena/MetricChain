@@ -1,0 +1,51 @@
+[PASS] A.grid: 9938940 tables, s in [1e-4, 12]; violations 0; max I/K = 1.000000000001380 at (s,p,q,I,K)=(0.0001, 0.5, 0.5, 1.2500000055152313e-09, 1.2500000055135058e-09); min(K-I) = -1.110e-15
+      s=0.1: I/K at (p,q)=(.5,.49),(.5,.51),(.49,.49),(.49,.51): 0.999598499, 0.999598499, 0.999250572, 0.999143751
+      s=1.0: I/K at (p,q)=(.5,.49),(.5,.51),(.49,.49),(.49,.51): 0.999430350, 0.999430350, 0.999523650, 0.998199580
+      s=4.0: I/K at (p,q)=(.5,.49),(.5,.51),(.49,.49),(.49,.51): 0.987336353, 0.987336353, 0.999698706, 0.958011299
+[PASS] B.random(mp, 60 digits): max (I-K)/K per regime: generic: -0.000294462 (n=3333); odds->1 (J small): -0.0074888 (n=3333); odds->inf (J big): -0.00239547 (n=3333); marginals->0: -0.999712 (n=3333); near-uniform: -1.50139e-21 (n=3333); compensating h: -4.43821e-7 (n=3333)
+      s->0, (p,q)=(0.5,0.5)                    value                    1.0   reference 1.0
+      s->0, (p,q)=(0.3,0.6)                    value         0.806399999991   reference 0.8064
+      s->0, (p,q)=(0.01,0.5)                   value                 0.0396   reference 0.0396
+      s->0, (p,q)=(0.2,0.2)                    value          0.40960000002   reference 0.4096
+      s=200, (p,q)=(0.5,0.5)                   value          0.69314718056   reference 0.69314718056
+      s=200, (p,q)=(0.3,0.6)                   value         0.194975993719   reference 0.69314718056
+      s=200, (p,q)=(0.3,0.3)                   value         0.610864302055   reference 0.69314718056
+      s=200, (p,q)=(0.01,0.5)                  value       0.00698197771498   reference 0.69314718056
+      s=0.5, (p,q)=(0.001,0.5)                 value      0.000110869077495   reference 0.0302998619808
+      s=0.5, (p,q)=(0.001,0.001)               value       9.93645612241e-7   reference 0.0302998619808
+      s=0.5, (p,q)=(0.001,0.999)               value        2.6417532412e-7   reference 0.0302998619808
+      s=0.5, (p,q)=(1.0e-10,0.5)               value      1.10944071664e-11   reference 0.0302998619808
+      s=0.5, (p,q)=(1.0e-10,1.0e-10)           value      9.99999999361e-21   reference 0.0302998619808
+      s=0.5, (p,q)=(1.0e-10,1.0)               value      2.64241117651e-21   reference 0.0302998619808
+      s=0.5, (p,q)=(1.0e-30,0.5)               value      1.10944071672e-31   reference 0.0302998619808
+      s=0.5, (p,q)=(1.0e-30,1.0e-30)           value      9.93047372953e-61   reference 0.0302998619808
+      s=0.5, (p,q)=(1.0e-30,1.0)               value      1.96272457726e-61   reference 0.0302998619808
+      s=2.0, (p,q)=(0.001,0.5)                 value       0.00060338104734   reference 0.327813325473
+      s=2.0, (p,q)=(0.001,0.001)               value      0.000146763865574   reference 0.327813325473
+      s=2.0, (p,q)=(0.001,0.999)               value       9.09242482951e-7   reference 0.327813325473
+      s=2.0, (p,q)=(1.0e-10,0.5)               value      6.03052412827e-11   reference 0.327813325473
+      s=2.0, (p,q)=(1.0e-10,1.0e-10)           value      1.64794448046e-18   reference 0.327813325473
+      s=2.0, (p,q)=(1.0e-10,1.0)               value      9.08421805638e-21   reference 0.327813325473
+      s=2.0, (p,q)=(1.0e-30,0.5)               value      6.03052412794e-31   reference 0.327813325473
+      s=2.0, (p,q)=(1.0e-30,1.0e-30)           value      1.64869806838e-58   reference 0.327813325473
+      s=2.0, (p,q)=(1.0e-30,1.0)               value      8.78866184015e-61   reference 0.327813325473
+      s=8.0, (p,q)=(0.001,0.5)                 value      0.000693645764212   reference 0.690128973143
+      s=8.0, (p,q)=(0.001,0.001)               value       0.00771735598595   reference 0.690128973143
+      s=8.0, (p,q)=(0.001,0.999)               value       1.00099925124e-6   reference 0.690128973143
+      s=8.0, (p,q)=(1.0e-10,0.5)               value      6.93145267512e-11   reference 0.690128973143
+      s=8.0, (p,q)=(1.0e-10,1.0e-10)           value      1.33047421931e-12   reference 0.690128973143
+      s=8.0, (p,q)=(1.0e-10,1.0)               value      9.99998087002e-21   reference 0.690128973143
+      s=8.0, (p,q)=(1.0e-30,0.5)               value      6.93145267462e-31   reference 0.690128973143
+      s=8.0, (p,q)=(1.0e-30,1.0e-30)           value      1.33291658836e-52   reference 0.690128973143
+      s=8.0, (p,q)=(1.0e-30,1.0)               value      9.88757991714e-61   reference 0.690128973143
+[PASS] B.limits: odds->1 ratio = 16 p(1-p) q(1-q) <= 1 (checked to 1e-8); odds->inf and marginals->0 sequences all below K
+[PASS] C.channel: 2688 asymmetric channels; max (C-K)/K = 1.844e-11; |C_numeric - C_closed| <= 4.40e-13; 'input leans against bias' held in all cases: False
+[PASS] P.proof-steps: |dI/dJ - J dm/dJ| <= 3.89e-62; |dm/dJ - 16/sum(1/T)| <= 2.21e-60; min[sum(1/T) - 16cosh^2 J] = 0.15 (>=0); closed form of sum(1/T) rel.err <= 3.39e-61; |int_0^J J'm' - I| <= 5.49e-61
+      J=0.05: I_h1h1 = -0.0024958392, I_h1h2 = -8.3166919e-5, det = 6.2222967e-6
+      J=0.5: I_h1h1 = -0.21355227, I_h1h2 = -0.068893291, det = 0.040858285
+      J=1.0: I_h1h1 = -0.58002566, I_h1h2 = -0.34161981, det = 0.21972567
+      J=2.0: I_h1h1 = -0.92934918, I_h1h2 = -0.82272593, det = 0.18681193
+      J=4.0: I_h1h1 = -0.99865905, I_h1h2 = -0.9939655, det = 0.0093524875
+[PASS] E.equality: I(uniform) = K to rel. 9.73e-56; Hessian in (h1,h2) at uniform negative definite: True
+
+SUMMARY: ALL PASS

@@ -1,0 +1,29 @@
+site (0, 0, 0) (A): shell d2=3: 4 sites, by relative height {-1: 2, 1: 2}
+site (0, 0, 0) (A): shell d2=8: 12 sites, by relative height {-2: 4, 0: 4, 2: 4}
+site (0, 0, 0) (A): shell d2=11: 12 sites, by relative height {-3: 2, -1: 4, 1: 4, 3: 2}
+   up-bonds [(1, 1, 1), (-1, 1, -1)]  down-bonds [(1, -1, -1), (-1, -1, 1)]
+site (1, 1, 1) (B): shell d2=3: 4 sites, by relative height {-1: 2, 1: 2}
+site (1, 1, 1) (B): shell d2=8: 12 sites, by relative height {-2: 4, 0: 4, 2: 4}
+site (1, 1, 1) (B): shell d2=11: 12 sites, by relative height {-3: 2, -1: 4, 1: 4, 3: 2}
+   up-bonds [(-1, 1, 1), (1, 1, -1)]  down-bonds [(-1, -1, -1), (1, -1, 1)]
+squared distances from an A site below 20: [3, 8, 11, 16, 19]
+largest height difference at squared distance < 12: 3
+
+P=(0, 0, 0) c1=(1, 1, 1) b=(-1, 1, 1): pairs linker–S1 (d=3,8,11) = 2,8,10; linker–S2 = 1,5,4; |l1-Q|^2=19  => delta <= (1,9,14), norm <= 60
+     appending k=1..5 beads: (d3,d8,d11 bounds, norm incl. one gauche) = [(1, 3, 6, 28), (1, 6, 8, 42), (1, 6, 10, 44), (1, 6, 10, 44), (1, 6, 10, 44)]
+P=(0, 0, 0) c1=(1, 1, 1) b=(1, 1, -1): pairs linker–S1 (d=3,8,11) = 2,8,10; linker–S2 = 1,5,4; |l1-Q|^2=19  => delta <= (1,9,14), norm <= 60
+     appending k=1..5 beads: (d3,d8,d11 bounds, norm incl. one gauche) = [(1, 3, 6, 28), (1, 6, 8, 42), (1, 6, 10, 44), (1, 6, 10, 44), (1, 6, 10, 44)]
+P=(0, 0, 0) c1=(-1, 1, -1) b=(-1, 1, 1): pairs linker–S1 (d=3,8,11) = 2,8,10; linker–S2 = 1,5,4; |l1-Q|^2=19  => delta <= (1,9,14), norm <= 60
+     appending k=1..5 beads: (d3,d8,d11 bounds, norm incl. one gauche) = [(1, 3, 6, 28), (1, 6, 8, 42), (1, 6, 10, 44), (1, 6, 10, 44), (1, 6, 10, 44)]
+P=(0, 0, 0) c1=(-1, 1, -1) b=(1, 1, -1): pairs linker–S1 (d=3,8,11) = 2,8,10; linker–S2 = 1,5,4; |l1-Q|^2=19  => delta <= (1,9,14), norm <= 60
+     appending k=1..5 beads: (d3,d8,d11 bounds, norm incl. one gauche) = [(1, 3, 6, 28), (1, 6, 8, 42), (1, 6, 10, 44), (1, 6, 10, 44), (1, 6, 10, 44)]
+P=(1, 1, 1) c1=(-1, 1, 1) b=(1, 1, 1): pairs linker–S1 (d=3,8,11) = 2,8,10; linker–S2 = 1,5,4; |l1-Q|^2=19  => delta <= (1,9,14), norm <= 60
+     appending k=1..5 beads: (d3,d8,d11 bounds, norm incl. one gauche) = [(1, 3, 6, 28), (1, 6, 8, 42), (1, 6, 10, 44), (1, 6, 10, 44), (1, 6, 10, 44)]
+P=(1, 1, 1) c1=(-1, 1, 1) b=(-1, 1, -1): pairs linker–S1 (d=3,8,11) = 2,8,10; linker–S2 = 1,5,4; |l1-Q|^2=19  => delta <= (1,9,14), norm <= 60
+     appending k=1..5 beads: (d3,d8,d11 bounds, norm incl. one gauche) = [(1, 3, 6, 28), (1, 6, 8, 42), (1, 6, 10, 44), (1, 6, 10, 44), (1, 6, 10, 44)]
+P=(1, 1, 1) c1=(1, 1, -1) b=(1, 1, 1): pairs linker–S1 (d=3,8,11) = 2,8,10; linker–S2 = 1,5,4; |l1-Q|^2=19  => delta <= (1,9,14), norm <= 60
+     appending k=1..5 beads: (d3,d8,d11 bounds, norm incl. one gauche) = [(1, 3, 6, 28), (1, 6, 8, 42), (1, 6, 10, 44), (1, 6, 10, 44), (1, 6, 10, 44)]
+P=(1, 1, 1) c1=(1, 1, -1) b=(-1, 1, -1): pairs linker–S1 (d=3,8,11) = 2,8,10; linker–S2 = 1,5,4; |l1-Q|^2=19  => delta <= (1,9,14), norm <= 60
+     appending k=1..5 beads: (d3,d8,d11 bounds, norm incl. one gauche) = [(1, 3, 6, 28), (1, 6, 8, 42), (1, 6, 10, 44), (1, 6, 10, 44), (1, 6, 10, 44)]
+
+worst case over the 8 pairs: (1, 9, 14)  (lemma: (1, 9, 14), beta = 60; one bead: (1,3,6), beta' = 28)

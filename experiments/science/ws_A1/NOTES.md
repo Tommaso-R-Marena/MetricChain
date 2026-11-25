@@ -214,3 +214,9 @@ Shorter proof than the report's 35 lines: monotone margin flows + "ln(1+ax)/x de
   [Error of mine: first version had a 1.5u-Lipschitz "block-radial" test function; the script's own Lipschitz check flagged it and item (i) failed by 0.24 on it. Fixed.]
 - Limitation: does NOT give the extensive-accuracy exponent θ_na(ε₁) (needs lower tail of log-density uniformly; adversarial adapted κ_i; e.g. κ ≡ ½ freezes the walk). Thought about a control/tilting argument (would need: κ ≡ p_u extremal for the lower-tail control problem) — not done; listed as next step.
 - Report updated (§2.5 new, §2.3, §2.6, §3, §5, §6, §7, verdict (vi)).
+
+### Step 15 (18:21 UTC) — Novak–Rudolf survey; search for Prop A1.1
+- **Novak & Rudolf, "Computation of expectations by Markov chain Monte Carlo methods", arXiv:1311.1899v2** [full text of §3 (unknown densities, Thms 3–5) and §4 (open problems) read]: Thm 4 = Mathé–Novak Thm 1 (lower bound for all randomized algorithms on F_{C,d}); Thm 5: explicit non-asymptotic bound for the lazy Metropolis ball walk on log-concave, α-log-Lipschitz densities on B^d ("polynomially tractable"); open problems: constants, L_p, MCQMC — nothing about dropping log-concavity. → corrected my §8 wording ("leaves open" → "does not reach").
+- Rudolf's thesis arXiv:1108.3201 downloaded, not read.
+- S24 (extended) for Prop A1.1-like statements → nothing.
+- Thought about extending Prop A1.1 to extensive accuracy: reduces to a stochastic control problem for the likelihood-ratio martingale with adapted two-point increments (κ_i ∈ [a0,a1]); constant control (cone) conjecturally extremal; freezing strategies do not improve the exponent in the cases I worked by hand (partial freezing: α x*(θ/α) increasing in α). The adapted relaxation is weaker than the Lipschitz condition (which must hold in every coordinate order), so tightness is unclear. Left as next step 2 in the report.

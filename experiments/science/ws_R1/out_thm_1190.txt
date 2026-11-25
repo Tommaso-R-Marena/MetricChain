@@ -1,0 +1,34 @@
+      l_of_s closed form vs bisection on F'(l)=s: 2.04e-14
+[PASS] defs: m=kappa=1/2: |Psi - ln cosh(s/2)|, |V - R_unif|, |N - theta_na^cube| <= 1.39e-15; Psi (primal root) vs Psi (dual formula with Lambda_kappa), 300 random (m,kappa,s): <= 9.99e-16
+[FAIL] 11.90(b): 40 centres (m,kappa,u): |V_brute - V_closed| <= 1.24e-01 (e>=0); |V_brute - V_game| <= 1.26e-01 (incl. 112 negative accuracies); |N_brute - N_closed| <= 5.82e-01; |N_closed - N_game| <= 2.03e-06 (X>0)
+      worst V case: (0.8306001966581732, 0.16588370410506592, 4.0, 0.0, np.float64(0.14390417951182014), 0.020107311886541072)
+[PASS] 11.90(c) grid: 270400 points (u in .25,1,3,8; m,kappa on a 52x52 grid incl. 0.499/0.501; t in (0,1)): min over (m,kappa)!=(1/2,1/2) of F*_c - F*_(m,kappa) = 6.158e-10 at (u,m,kappa,t)=(0.25, 0.499, 0.5, 0.02) (>0); = 0 to 1e-13 at m=kappa=1/2
+      near equality (u=1, t=0.5): gap/(dm^2+dk^2) along directions
+        direction 0.000 rad: 0.143899, 0.143914, 0.143914
+        direction 0.393 rad: 0.096889, 0.096888, 0.096888
+        direction 0.785 rad: 0.077408, 0.077409, 0.077409
+        direction 1.178 rad: 0.096889, 0.096888, 0.096888
+        direction 1.571 rad: 0.143899, 0.143914, 0.143914
+        direction 1.963 rad: 0.190878, 0.190940, 0.190941
+        direction 2.356 rad: 0.210329, 0.210419, 0.210420
+        direction 2.749 rad: 0.190878, 0.190940, 0.190941
+[PASS] 11.90(c) equality case: gap is quadratic and positive in every direction around m=kappa=1/2 (ratios above converge to positive constants)
+[PASS] curvature domination: 4000 random (m,kappa,s): max[Psi''_(m,kappa)(s) - Psi_c''(s)] = -1.394e-05 (<= 0); identity Psi'' = dl/ds = 4/sum(1/T) to rel. 1.2e-07
+      u = 1.0:  kappa   R^kappa(0)   best m    N^kappa(0+)  best m(N)   R_unif(0)=0.029139 theta_na^cube(0+)=0.110944
+                0.50   0.029139   0.500    0.110944   0.500    claimed 0.029139 0.500 0.110944  ok
+                0.45   0.028856   0.477    0.109898   0.471    claimed 0.028856 0.477 0.109898  ok
+                0.40   0.028005   0.454    0.106755   0.442    claimed 0.028005 0.454 0.106755  ok
+                0.30   0.024588   0.408    0.094080   0.383    claimed 0.024588 0.408 0.094080  ok
+                0.20   0.018842   0.362    0.072574   0.325    claimed 0.018842 0.362 0.072574  ok
+                0.10   0.010688   0.316    0.041588   0.266    claimed 0.010688 0.316 0.041588  ok
+      u = 2.0:  kappa   R^kappa(0)   best m    N^kappa(0+)  best m(N)   R_unif(0)=0.097281 theta_na^cube(0+)=0.327813
+                0.50   0.097281   0.500    0.327813   0.500
+                0.45   0.096389   0.462    0.325037   0.457
+                0.40   0.093707   0.425    0.316667   0.413
+                0.30   0.082861   0.349    0.282567   0.326
+                0.20   0.064328   0.274    0.223249   0.239
+                0.10   0.037269   0.197    0.133574   0.150
+[PASS] table: all six rows of the u=1 table reproduced to the digits printed; best centre type strictly between kappa and 1/2 for kappa<1/2; all values <= the cube's
+[PASS] sup_m domination: max(R^kappa - R_unif) = 7.63e-17, max(N^kappa - theta_na^cube) = 3.05e-16; equality at kappa=1/2 to 1e-9; smallest strict gap for kappa != 1/2 on the grid: 2.982e-07
+
+SUMMARY: FAILURES: 11.90(b)

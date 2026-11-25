@@ -46,8 +46,14 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 | — | replication of the engineering lattice-chain class tables | replication | **completed for `n = 1 … 10`: identical** (own enumerator); `INDEPENDENT_VALIDATION.md` §1.2 |
 
 Briefs: `docs/science/workstreams/*_brief.md`; shared rules: `docs/science/workstreams/COMMON.md`.
-Workstream reports are published only after the coordinator has read them; until then
-they are not on the branch.
+**What counts as published.**  The working directories of running workstreams
+(`experiments/science/ws_*/`) and their report files (`docs/science/workstreams/*_REPORT.md`) are
+committed as *recoverable snapshots* while the work is in progress: they may change, and
+the coordinator has not read them.  A workstream's findings are a statement of this
+division only once the digest (`SCIENCE_TO_ALL.md`), a `SCI-*` message or
+`docs/science/INDEPENDENT_VALIDATION.md` cites them.  (Until checkpoint 7 this file said that
+unread reports are not on the branch; that policy was changed so that nothing is lost if
+the container is reclaimed.)
 
 ## Findings so far (each with its status)
 

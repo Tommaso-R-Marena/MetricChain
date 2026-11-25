@@ -1,0 +1,12 @@
+=== A3 n=5 residual GB: 28843 clash-free conformations; kT = 0.5962 kcal/mol
+c_i (single-flip, kcal/mol): [18.82 16.95 25.89 22.04 27.48 25.21 25.56 22.63 19.79 15.98]
+argmin f: states [1 0 1 0 1 0 1 0 1 0], f = min;  argmin E: states [1 2 1 2 1 2 1 2 1 2];  same conformation: False;  E(argmin f) - min E = 0.461 kcal/mol = 0.77 kT
+site gaps of the KNOWN part at argmin f (kcal/mol):   [12.66   inf   inf   inf   inf 18.84   inf 12.61   inf  7.06]
+site gaps of the TRUE energy at argmin E (kcal/mol):  [0.58 1.5  0.63 1.45 0.61 1.49 0.61 1.55 0.48 1.54]
+sharp sites (gap of f at argmin f >= c_i): 6 of 10;   ratios e_i/c_i: [0.673   inf   inf   inf   inf 0.748   inf 0.557   inf 0.442]
+validity of d = sum c_i[x_i != y_i] on the clash-free domain: max |g(x)-g(y)|/d(x,y) = 1.0000  (envelope valid as measured)
+Theorem 11.7 (one evaluation certifies iff d(x0,y) <= f(y)-f(x0) for all y): min margin = -219.46 kcal/mol -> NO;  conformations violating: 28842 of 28842
+beta*c_i: [31.6 28.4 43.4 37.  46.1 42.3 42.9 38.  33.2 26.8]
+sum_i ln cosh(beta c_i/2) = 177.9 nats = 106.0 kcal/mol;   beta^2 sum c_i^2/8 = 1759 nats;   range of g on the domain = 55.6 kcal/mol = 93 kT
+exact on the grid: ln Z(f+g) - ln Z(f) = 68.52 nats; -beta <g>_f = 66.23; Jensen gap = 2.295 nats (the class bound above is 178); Gibbs weight of argmin E: 0.127; entropy H(pi_E) = 4.06 nats
+product-landscape formula (Thm 11.8, Boltzmann weights) with the measured star of f at argmin f and measured c_i: ln N >= 0.61 (t = 0.0901) of ln(prod k_i) = 3.58; i.e. N >= 1.84   [heuristic for a non-additive f]

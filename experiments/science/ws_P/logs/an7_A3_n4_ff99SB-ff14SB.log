@@ -1,0 +1,16 @@
+=== A3 n=4 residual ff99SB-ff14SB: 3844 clash-free conformations; kT = 0.5962 kcal/mol
+c_i (single-flip, kcal/mol): [0.64 0.   0.64 0.   0.64 0.   0.64 0.  ]
+argmin f: states [0 2 0 2 0 2 0 2], f = min;  argmin E: states [0 2 0 2 0 2 0 2];  same conformation: True;  E(argmin f) - min E = 0.000 kcal/mol = 0.00 kT
+site gaps of the KNOWN part at argmin f (kcal/mol):   [1.35 4.72 0.76 4.67 0.73 4.8  1.25 5.28]
+site gaps of the TRUE energy at argmin E (kcal/mol):  [1.99 4.72 1.41 4.67 1.37 4.8  1.89 5.28]
+sharp sites (gap of f at argmin f >= c_i): 8 of 8;   ratios e_i/c_i: [2.09200000e+00 8.16868747e+06 1.18600000e+00 8.09321800e+06
+ 1.13300000e+00 8.30908890e+06 1.93900000e+00 9.15371067e+06]
+validity of d = sum c_i[x_i != y_i] on the clash-free domain: max |g(x)-g(y)|/d(x,y) = 1.0000  (envelope valid as measured)
+Theorem 11.7 (one evaluation certifies iff d(x0,y) <= f(y)-f(x0) for all y): min margin = -0.06 kcal/mol -> NO;  conformations violating: 1 of 3843
+beta*c_i: [1.1 0.  1.1 0.  1.1 0.  1.1 0. ]
+sum_i ln cosh(beta c_i/2) = 0.6 nats = 0.3 kcal/mol;   beta^2 sum c_i^2/8 = 1 nats;   range of g on the domain = 2.6 kcal/mol = 4 kT
+exact on the grid: ln Z(f+g) - ln Z(f) = 1.78 nats; -beta <g>_f = 1.46; Jensen gap = 0.321 nats (the class bound above is 1); Gibbs weight of argmin E: 0.751; entropy H(pi_E) = 1.05 nats
+product-landscape formula (Thm 11.8, Boltzmann weights) with the measured star of f at argmin f and measured c_i: ln N >= 0.00 (t = 0) of ln(prod k_i) = 8.79; i.e. N >= 1   [heuristic for a non-additive f]
+cover at eps = 0.000 kcal/mol: forced points 0, volume bound 1.0, partition bound 0.3 => N_cov >= 1;  greedy cover 1  (of M = 3844;  mean set size 3842.41, max 3844)  [11s]
+cover at eps = 0.596 kcal/mol: forced points 0, volume bound 1.0, partition bound 0.3 => N_cov >= 1;  greedy cover 1  (of M = 3844;  mean set size 3843.96, max 3844)  [9s]
+cover at eps = 2.000 kcal/mol: forced points 0, volume bound 1.0, partition bound 0.3 => N_cov >= 1;  greedy cover 1  (of M = 3844;  mean set size 3844.00, max 3844)  [7s]

@@ -1,0 +1,5 @@
+  8192/531441  7s  worst spot-check dev 5.93e-05
+  172032/531441  248s  worst spot-check dev 1.14e-04
+  335872/531441  573s  worst spot-check dev 1.14e-04
+  499712/531441  872s  worst spot-check dev 1.14e-04
+n=6 A3: 531441 conformations in 922.3s; worst spot-check deviation fast vs OpenMM CPU platform: 1.14e-04 kcal/mol

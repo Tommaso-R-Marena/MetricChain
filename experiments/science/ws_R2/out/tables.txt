@@ -1,0 +1,130 @@
+(A) own enumeration vs engineering class tables
+  N= 4: classes     2  conformations              3  identical=True
+  N= 5: classes     4  conformations              9  identical=True
+  N= 6: classes     7  conformations             27  identical=True
+  N= 7: classes    13  conformations             79  identical=True
+  N= 8: classes    22  conformations            233  identical=True
+  N= 9: classes    37  conformations            683  identical=True
+  N=10: classes    57  conformations           2005  identical=True
+  N=11: classes    90  conformations           5849  identical=True
+  N=12: classes   129  conformations          17107  identical=True
+  N=13: classes   190  conformations          49833  identical=True
+  N=14: classes   258  conformations         145379  identical=True
+  N=15: classes   356  conformations         422825  identical=True
+  N=16: classes   479  conformations        1231221  identical=True
+  N=17: classes   641  conformations        3576871  identical=True
+  N=18: classes   818  conformations       10401207  identical=True
+  N=19: classes  1037  conformations       30188971  identical=True
+  N=20: classes  1281  conformations       87689311  identical=True
+  N=21: classes  1594  conformations      254325043  identical=True
+  N=22: classes  1911  conformations      738087517  identical=True
+  N=23: classes     0  conformations              0  identical=False
+
+(B) Prop 11.72(a) on every class (min slack over classes; must be >= 0)
+  N= 4 (eng): h8-(4h3-2)>=2   h8-(6h3-N-4)>=8   (2h3+3N+3)-h8>=15
+  N= 5 (eng): h8-(4h3-2)>=2   h8-(6h3-N-4)>=9   (2h3+3N+3)-h8>=17
+  N= 6 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=6   (2h3+3N+3)-h8>=20
+  N= 7 (eng): h8-(4h3-2)>=1   h8-(6h3-N-4)>=8   (2h3+3N+3)-h8>=21
+  N= 8 (eng): h8-(4h3-2)>=1   h8-(6h3-N-4)>=9   (2h3+3N+3)-h8>=24
+  N= 9 (eng): h8-(4h3-2)>=1   h8-(6h3-N-4)>=8   (2h3+3N+3)-h8>=26
+  N=10 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=8   (2h3+3N+3)-h8>=27
+  N=11 (eng): h8-(4h3-2)>=1   h8-(6h3-N-4)>=10   (2h3+3N+3)-h8>=29
+  N=12 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=9   (2h3+3N+3)-h8>=32
+  N=13 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=8   (2h3+3N+3)-h8>=33
+  N=14 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=6   (2h3+3N+3)-h8>=35
+  N=15 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=8   (2h3+3N+3)-h8>=36
+  N=16 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=9   (2h3+3N+3)-h8>=37
+  N=17 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=8   (2h3+3N+3)-h8>=39
+  N=18 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=9   (2h3+3N+3)-h8>=41
+  N=19 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=10   (2h3+3N+3)-h8>=42
+  N=20 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=10   (2h3+3N+3)-h8>=44
+  N=21 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=8   (2h3+3N+3)-h8>=45
+  N=22 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=8   (2h3+3N+3)-h8>=47
+  N=23 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=9   (2h3+3N+3)-h8>=48
+  N=24 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=9   (2h3+3N+3)-h8>=50
+  N=25 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=8   (2h3+3N+3)-h8>=51
+  N=26 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=6   (2h3+3N+3)-h8>=52
+  N=27 (eng): h8-(4h3-2)>=0   h8-(6h3-N-4)>=8   (2h3+3N+3)-h8>=53
+  all hold: True
+
+(C) Prop 11.72(b) walk form c.h <= bN + 4M + c3 + 2c8: max over classes of c.h - bN, against the constant
+  N   (-1, 0, 0)  (4, -1, 0)  (6, -1, 0)  (-2, 1, 0) (-1, 1, -1) (-1, 2, -1) (-4, 2, -1)  (3, 4, -3)  (6, -2, 1)  (0, -1, 2)  (-3, 0, 2)
+  const          1          22          28           8          13          19          24          35          26           2           9
+   4             0           0          -4         -12           0         -12          -8         -20          -7         -26         -34
+   5             0           0          -5         -14           0         -15         -10         -25          -8         -31         -41
+   6             0           2          -2         -17           0         -18         -12         -28          -7         -35         -46
+   7             0           1          -4         -18           0         -19         -14         -29          -9         -39         -51
+   8             0           1          -5         -21           0         -21         -16         -33         -10         -44         -58
+   9             0           1          -4         -23           0         -23         -16         -37         -10         -48         -63
+  10             0           2          -4         -24           0         -26         -19         -38         -11         -52         -67
+  11             0           1          -6         -26           0         -27         -19         -39         -13         -56         -73
+  12             0           2          -5         -29           0         -29         -21         -43         -12         -60         -78
+  13             0           2          -4         -30           0         -31         -22         -43         -13         -64         -83
+  14             0           2          -2         -32           0         -32         -24         -46         -13         -68         -89
+  15             0           2          -4         -33           0         -34         -26         -49         -15         -71         -93
+  16             0           2          -5         -34           0         -36         -27         -48         -16         -74         -95
+  17             0           2          -4         -36           0         -37         -26         -52         -16         -75         -96
+  18             0           2          -5         -38           0         -38         -30         -56         -17         -79        -102
+  19             0           2          -6         -39           0         -39         -30         -53         -18         -83        -108
+  20             0           2          -6         -41           0         -41         -33         -57         -18         -86        -112
+  21             0           2          -4         -42           0         -42         -33         -60         -19         -90        -117
+  22             0           2          -4         -44           0         -43         -36         -58         -19         -92        -121
+  23             0           2          -5         -45           0         -44         -35         -61         -20         -95        -123
+  24             0           2          -5         -47           0         -46         -38         -58         -20        -100        -128
+  25             0           2          -4         -48           0         -47         -38         -62         -20        -103        -130
+  26             0           2          -2         -49           0         -48         -41         -64         -20        -106        -135
+  27             0           2          -4         -50           0         -49         -40         -63         -22        -109        -140
+  all hold: True
+
+(D) rows of Prop 11.72(c) (limit statements): max over classes of c.h - bN; and max of (gauche functional - gmin)
+  N= 4: (-3,2,-1;2):   -8   (-3,4,-3;2):   -8   gauche bounds minus gmin: [-31, -27, -28]
+  N= 5: (-3,2,-1;2):  -10   (-3,4,-3;2):  -10   gauche bounds minus gmin: [-38, -33, -34]
+  N= 6: (-3,2,-1;2):  -12   (-3,4,-3;2):  -12   gauche bounds minus gmin: [-43, -38, -40]
+  N= 7: (-3,2,-1;2):  -14   (-3,4,-3;2):  -14   gauche bounds minus gmin: [-48, -43, -44]
+  N= 8: (-3,2,-1;2):  -15   (-3,4,-3;2):  -15   gauche bounds minus gmin: [-54, -48, -51]
+  N= 9: (-3,2,-1;2):  -16   (-3,4,-3;2):  -16   gauche bounds minus gmin: [-59, -53, -56]
+  N=10: (-3,2,-1;2):  -18   (-3,4,-3;2):  -18   gauche bounds minus gmin: [-64, -58, -60]
+  N=11: (-3,2,-1;2):  -19   (-3,4,-3;2):  -18   gauche bounds minus gmin: [-69, -63, -65]
+  N=12: (-3,2,-1;2):  -21   (-3,4,-3;2):  -19   gauche bounds minus gmin: [-74, -67, -70]
+  N=13: (-3,2,-1;2):  -22   (-3,4,-3;2):  -20   gauche bounds minus gmin: [-80, -73, -74]
+  N=14: (-3,2,-1;2):  -24   (-3,4,-3;2):  -22   gauche bounds minus gmin: [-85, -77, -79]
+  N=15: (-3,2,-1;2):  -25   (-3,4,-3;2):  -22   gauche bounds minus gmin: [-87, -81, -83]
+  N=16: (-3,2,-1;2):  -27   (-3,4,-3;2):  -23   gauche bounds minus gmin: [-93, -85, -85]
+  N=17: (-3,2,-1;2):  -26   (-3,4,-3;2):  -24   gauche bounds minus gmin: [-94, -88, -90]
+  N=18: (-3,2,-1;2):  -29   (-3,4,-3;2):  -26   gauche bounds minus gmin: [-100, -92, -94]
+  N=19: (-3,2,-1;2):  -29   (-3,4,-3;2):  -26   gauche bounds minus gmin: [-103, -97, -97]
+  N=20: (-3,2,-1;2):  -32   (-3,4,-3;2):  -27   gauche bounds minus gmin: [-108, -100, -102]
+  N=21: (-3,2,-1;2):  -32   (-3,4,-3;2):  -27   gauche bounds minus gmin: [-112, -104, -106]
+  N=22: (-3,2,-1;2):  -34   (-3,4,-3;2):  -28   gauche bounds minus gmin: [-115, -109, -110]
+  N=23: (-3,2,-1;2):  -34   (-3,4,-3;2):  -28   gauche bounds minus gmin: [-116, -112, -112]
+  N=24: (-3,2,-1;2):  -36   (-3,4,-3;2):  -28   gauche bounds minus gmin: [-121, -116, -118]
+  N=25: (-3,2,-1;2):  -36   (-3,4,-3;2):  -29   gauche bounds minus gmin: [-126, -120, -121]
+  N=26: (-3,2,-1;2):  -38   (-3,4,-3;2):  -30   gauche bounds minus gmin: [-130, -124, -124]
+  N=27: (-3,2,-1;2):  -38   (-3,4,-3;2):  -30   gauche bounds minus gmin: [-133, -127, -128]
+
+(E) Prop 11.73
+  N= 4: max||N^x||_1=   1 ( 0.250/bead =  0.7% of 35)  bound   112.7  k_N=1.576   max pairs/bead=0.25  max e3=3 (<= 6.41)  max e8=2 (<= 16.44)
+  N= 5: max||N^x||_1=   6 ( 1.200/bead =  3.4% of 35)  bound   140.5  k_N=1.651   max pairs/bead=0.60  max e3=4 (<= 8.16)  max e8=4 (<= 21.23)
+  N= 6: max||N^x||_1=  20 ( 3.333/bead =  9.5% of 35)  bound   168.9  k_N=1.644   max pairs/bead=1.00  max e3=6 (<= 9.92)  max e8=6 (<= 26.09)
+  N= 7: max||N^x||_1=  26 ( 3.714/bead = 10.6% of 35)  bound   197.6  k_N=1.710   max pairs/bead=1.29  max e3=7 (<= 11.69)  max e8=8 (<= 31.02)
+  N= 8: max||N^x||_1=  37 ( 4.625/bead = 13.2% of 35)  bound   226.6  k_N=1.736   max pairs/bead=1.75  max e3=8 (<= 13.48)  max e8=11 (<= 36.00)
+  N= 9: max||N^x||_1=  56 ( 6.222/bead = 17.8% of 35)  bound   255.8  k_N=1.710   max pairs/bead=2.11  max e3=10 (<= 15.27)  max e8=14 (<= 41.02)
+  N=10: max||N^x||_1=  62 ( 6.200/bead = 17.7% of 35)  bound   285.3  k_N=1.773   max pairs/bead=2.20  max e3=11 (<= 17.08)  max e8=16 (<= 46.08)
+  N=11: max||N^x||_1=  73 ( 6.636/bead = 19.0% of 35)  bound   314.9  k_N=1.802   max pairs/bead=2.45  max e3=12 (<= 18.88)  max e8=19 (<= 51.16)
+  N=12: max||N^x||_1=  92 ( 7.667/bead = 21.9% of 35)  bound   344.7  k_N=1.788   max pairs/bead=2.67  max e3=14 (<= 20.70)  max e8=22 (<= 56.28)
+  N=13: max||N^x||_1= 115 ( 8.846/bead = 25.3% of 35)  bound   374.7  k_N=1.757   max pairs/bead=2.92  max e3=16 (<= 22.52)  max e8=26 (<= 61.41)
+  N=14: max||N^x||_1= 138 ( 9.857/bead = 28.2% of 35)  bound   404.8  k_N=1.731   max pairs/bead=3.14  max e3=18 (<= 24.34)  max e8=30 (<= 66.57)
+  N=15: max||N^x||_1= 144 ( 9.600/bead = 27.4% of 35)  bound   435.0  k_N=1.790   max pairs/bead=3.13  max e3=19 (<= 26.17)  max e8=32 (<= 71.75)
+  N=16: max||N^x||_1= 155 ( 9.688/bead = 27.7% of 35)  bound   465.2  k_N=1.822   max pairs/bead=3.25  max e3=20 (<= 28.00)  max e8=35 (<= 76.95)
+  N=17: max||N^x||_1= 178 (10.471/bead = 29.9% of 35)  bound   495.6  k_N=1.802   max pairs/bead=3.41  max e3=22 (<= 29.84)  max e8=39 (<= 82.17)
+  N=18: max||N^x||_1= 190 (10.556/bead = 30.2% of 35)  bound   526.1  k_N=1.830   max pairs/bead=3.56  max e3=23 (<= 31.67)  max e8=42 (<= 87.40)
+  N=19: max||N^x||_1= 201 (10.579/bead = 30.2% of 35)  bound   556.7  k_N=1.862   max pairs/bead=3.68  max e3=24 (<= 33.51)  max e8=45 (<= 92.64)
+  N=20: max||N^x||_1= 221 (11.050/bead = 31.6% of 35)  bound   587.3  k_N=1.857   max pairs/bead=3.90  max e3=26 (<= 35.36)  max e8=48 (<= 97.90)
+  N=21: max||N^x||_1= 244 (11.619/bead = 33.2% of 35)  bound   618.0  k_N=1.843   max pairs/bead=4.00  max e3=28 (<= 37.20)  max e8=52 (<= 103.17)
+  N=22: max||N^x||_1= 267 (12.136/bead = 34.7% of 35)  bound   648.8  k_N=1.830   max pairs/bead=4.09  max e3=30 (<= 39.05)  max e8=56 (<= 108.45)
+  N=23: max||N^x||_1= 285 (12.391/bead = 35.4% of 35)  bound   679.7  k_N=1.837   max pairs/bead=4.17  max e3=31 (<= 40.91)  max e8=60 (<= 113.74)
+  N=24: max||N^x||_1= 308 (12.833/bead = 36.7% of 35)  bound   710.6  k_N=1.827   max pairs/bead=4.25  max e3=33 (<= 42.76)  max e8=64 (<= 119.04)
+  N=25: max||N^x||_1= 331 (13.240/bead = 37.8% of 35)  bound   741.5  k_N=1.818   max pairs/bead=4.32  max e3=35 (<= 44.61)  max e8=68 (<= 124.35)
+  N=26: max||N^x||_1= 354 (13.615/bead = 38.9% of 35)  bound   772.5  k_N=1.810   max pairs/bead=4.42  max e3=37 (<= 46.47)  max e8=72 (<= 129.67)
+  N=27: max||N^x||_1= 366 (13.556/bead = 38.7% of 35)  bound   803.6  k_N=1.838   max pairs/bead=4.56  max e3=38 (<= 48.33)  max e8=75 (<= 135.00)
+  all hold: True

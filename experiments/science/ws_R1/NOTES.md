@@ -1,0 +1,108 @@
+# Workstream R1 — notes (SCI-REV-0001, review of theory report §11.25 "slices")
+
+Running log, appended after every step. Newest at the bottom.
+
+## Step 0 (start)
+- Read `docs/science/workstreams/COMMON.md` and `R1_brief.md`.
+- Repository at theory head `5ed4072`; my writable locations: `experiments/science/ws_R1/`, `docs/science/workstreams/R1_REPORT.md`.
+- Section under review: `docs/THEORY_REPORT.md` §11.25 starts at line 5792 (file is 569 kB).
+- Plan: (1) read §11.25 statements only, restate; (2) attempt own proofs + own numerics BEFORE reading
+  their proofs / their check scripts; (3) read their proofs and compare; (4) read Lean file; (5) headline audit
+  (README vs Cor 11.91; dependence on 11.78/11.79); (6) originality search for Lemma 11.89; (7) report.
+
+## Step 1 — read §11.25 (lines 5792–6103), statements listed
+Numbered statements: Lemma 11.89 (odds ratio), Theorem 11.90 (a)(b)(c) + table of numbers, Remark (softly pinned type),
+Corollary 11.91 (+ (i),(ii),(iii)) + "what the corollary does not say", Remark (q>=3 letters), Theorem 11.92 (a)(b)(c),
+Lemma 11.93 (i)(ii), Conjecture 11.94 (i)-(iii).
+(I saw the authors' proof of 11.89 while reading the section top; I then derived my own proof by a different route — below —
+before studying theirs in detail.)
+
+### Own proof of Lemma 11.89 (different route from the authors') — to be checked numerically
+Ising coordinates: T(b,x) ∝ exp(J b x + h1 b + h2 x), b,x=±1, log odds ratio = 4J = 2s, J = s/2.
+1. Fix the marginals (p,q) and move along the fibre of tables with these marginals, parametrised by J'∈[0,J].
+   dI/dJ' = Σ Ṫ ln T (marginal terms vanish) = J'·dm/dJ', m := E[BX].  So I_{p,q}(J) = ∫_0^J J' m'(J') dJ'.
+2. Tables with fixed marginals: T = T0 + c·(bx); m = m0 + 4c; d(4J)/dc = Σ 1/T  ⇒  dm/dJ = 16 / Σ_{bx} 1/T_{bx}.
+3. Σ 1/T = Z(J,h)·Z(−J,h) = 4[A² + B² + 2cosh(2J)·AB], A = cosh(h1+h2) ≥ 1, B = cosh(h1−h2) ≥ 1
+   ≥ 16 cosh²J, equality iff h1=h2=0.  (Equivalently AM–GM: (ΣT)(Σ1/T) ≥ 4(ψ^{1/4}+ψ^{-1/4})², ψ = odds ratio.)
+   ⇒ dm/dJ' ≤ sech²J'.
+4. I_{p,q}(J) ≤ ∫_0^J J' sech²J' dJ' = J tanh J − ln cosh J = K(J) = K(s/2).  Equality iff uniform marginals (or J=0). ∎
+Reformulation: "among 2x2 tables with given odds ratio the harmonic mean of the four cells is largest for the
+symmetric table" + the thermodynamic-integration identity dI = J dm at fixed marginals.
+Generalisation: for P_s ∝ a_b c_x exp(s w(b,x)), I(s) = ∫_0^s s' ρ(s') ds' with ρ = residual variance of w after
+projecting out additive functions a(b)+c(x) in L²(P_{s'}) (Schur complement of Fisher information) along the
+fixed-marginal fibre.  For k≥3 the maximiser of ρ changes with s' ⇒ no single extremal table (consistent with the
+authors' remark that the comparison fails for q≥3).  TODO: verify numerically; see if a clean k-letter bound follows.
+
+## Step 2 — own numerics for Lemma 11.89 (`lemma_1189.py` → `out_lemma_1189.txt`; `lean_against.py`)
+- A.grid: 9 938 940 tables ((p,q) on a 407×407 grid incl. 1e-9, 1e-6, 0.499, 0.5, 0.501; 60 values of s∈[1e-4,12]),
+  float64: zero violations beyond rounding (max I/K = 1+1.4e-12 at the uniform table; min(K−I) = −1.1e-15).
+  Grid maximiser is the uniform table for every s.  (First version had a cancellation bug in the Plackett
+  discriminant for large odds ratios; rewritten as a sum of non-negative terms.)
+- B.random (mpmath, 60 digits, Ising coordinates, 6 regimes × 3333 trials): max (I−K)/K: generic −2.9e-4;
+  odds→1 −7.5e-3; odds→∞ −2.4e-3; marginals→0 −0.9997; near-uniform −1.5e-21; lines where cells coincide −4.4e-7.
+  No violation.
+- B.limits: s→0 ratio I/K → 16 p(1−p)q(1−q) (matches to 1e-8); s=200 at fixed marginals (700 digits): I → maximal-coupling MI ≤ ln2;
+  marginals 1e-3…1e-30 at s = 0.5, 2, 8: all below K.
+- C.channel: 2688 asymmetric binary channels at fixed odds ratio: capacity (golden section and textbook closed form agree
+  to 4e-13) ≤ K(s/2); max (C−K)/K = 1.8e-11 (rounding, at the symmetric channel).
+- P.proof-steps (referee's proof): dI/dJ = J dm/dJ (err 4e-62), dm/dJ = 16/Σ(1/T) (2e-60), Σ(1/T) − 16cosh²J ≥ 0.15 > 0 on
+  300 random non-uniform tables, closed form Σ1/T = 4[A²+B²+2cosh(2J)AB] (3e-61), quadrature ∫J'm' = I (5e-61).  ⇒ my proof stands.
+- E.equality: I(uniform)=K to 1e-55; Hessian of I in (h1,h2) at h=0 negative definite for J = .05…4 (strict local max).
+- `lean_against.py`: the parenthesis "(the capacity-achieving input of an asymmetric channel leans against the channel's bias)":
+  TRUE for the joint-law field (−h2 < h1* < 0 in all 30 cases, as the authors' step (5) says), but the INPUT MARGINAL leans
+  the other way: for h2>0, E[B] > 0 in all 30 cases (the optimal input favours the more reliable symbol, as for the Z-channel).
+  ⇒ minor finding (wording): "leans against" is true only in the Ising-field coordinate, not for P(B).
+VERDICT so far: Lemma 11.89 TRUE; I have an independent 4-line proof (thermodynamic integration + AM–GM).
+
+## Step 3 — read §11.23 (definitions, Thms 11.76–11.80, Prop 11.81–11.82, Conj 11.83) and README item (x)
+Definitions: block profiles μ (fractions λ_j, densities μ_j), MI(μ)=h(μ̄)−Σλ_j h(μ_j), dist=Σλ_j|ν_j−μ_j|, α=MI+I(μ̄);
+r_μ(e)=min{MI(ν): u·dist+λ(ν̄) ≤ e+α(μ)}, R_λ=sup_μ r_μ; n_μ(X)=min{MI(ν): MI(ν)+u·dist+v(ν̄)−α(μ) ≤ X}, N=sup_μ n_μ.
+Paper re-derivation (mine) of Thm 11.90:
+ (b) on a two-block ray everything is 1-dimensional: r = F((ℓ−(e+F(ℓ))/u)_+), maximised at F'(ℓ*)=u ⇒ F((Ψ(u)−e)_+/u);
+     game form by Legendre duality with multiplier s=tu ≤ u; N: Lagrangian with τ=η/(1+η).  ✓ (my derivation agrees.)
+     Edge: for e < −F(ℓ_max) no shell is feasible, "game form for all real e" then compares −e with sup over empty set.
+ (c) the ray of a centre (m,κ) IS the fixed-marginal fibre of 2×2 tables (block marginal m, letter marginal κ), and
+     Ψ''_{m,κ}(s) = dℓ/ds = 4/Σ(1/T) ≤ ¼ sech²(s/2) = Ψ_c''(s)  (my AM–GM step).  So D=Ψ_c−Ψ_{m,κ} is CONVEX with D(0)=D'(0)=0,
+     which gives D(tu) ≤ tD(u) at once — stronger than, and independent of, Lemma 11.89 (curvature domination).
+ (a) Lagrangian linear in the law ρ of block densities ✓ for e ≥ 0.  GAP for e<0: feasibility E_ρKL ≥ −e is a second linear
+     constraint ⇒ extreme points have up to THREE atoms; the text's "mixture of two-point laws" ignores this.  Fix: three-atom
+     vertices have zero budget ⇒ value −e, which two-block shells attain for −e ≤ h(κ).  So (a) survives; proof needs the patch.
+ Strictness claim "strict inequality for κ≠½ wherever the right side is positive": false for e ≤ −K(u/2) in the game form
+     (both sides = −e); fine for e > −K(u/2).
+Corollary 11.91: inequalities r_μ(e) ≤ r^κ_μ(e+(I−λ)(κ)) ✓ (restriction of exits; feasibility same condition ✓).
+ Reading as exponents: all three "never exceed the cube" readings need Thm 11.78(b) (isoperimetry, unrefereed) —
+ hinted exponent of symmetric instances; non-adaptive exponent via 11.79(c) (which uses 11.78(b)).
+ NOT covered: (1) adaptive algorithms without a hint over the class (cube: R_unif by §11.19; here only θ* ∈ [R_H, θ_na], θ_na ≤ θ_na^cube > R_unif);
+              (2) hinted cost at NON-symmetric instances (O4 conjecture: H hardest among all instances).
+ README (x) bold headline: "no known part that depends … only through one order parameter … makes certification harder than no
+ known part at all, and an interaction without a field changes no exponent" — unqualified; the open items are listed afterwards
+ but the bold sentence is broader than Cor 11.91.  "changes no exponent": the adaptive-no-hint exponent IS an exponent of the
+ theory (R_unif on the cube) and is not known for any interacting known part.
+ Unconditional direction: R_H ≥ R_unif for symmetric convex I (so at least as hard) via Thm 11.78(a) lower bound (every n).
+ TODO: check GameFunction hypotheses for sup_m F*_{m,κ} (sup of concave functions need not be concave) — Conj 11.94(ii).
+
+## Step 4 — own numerics for Theorem 11.90 (`thm_1190.py`; outputs `out_thm_1190.txt`, `out_thm_1190_closed.txt`)
+(machine heavily loaded by other workstreams: load average 12–17 on 4 cores; one run killed at the 10-min limit; grids reduced.)
+- defs: m=κ=½ reproduces the cube (Ψ=ln cosh(s/2), V=R_unif, N=θ_na^cube) to 1.4e-15; Ψ by table closed form vs the dual
+  formula min{mΛ_κ(θ1)+(1−m)Λ_κ(θ2): θ1−θ2=2s}: 1e-15 on 300 random (m,κ,s).
+- 11.90(b), 24 centres (m,κ,u), brute force = scan of shells with exits unrestricted on the ray, no duality:
+  |V_brute − V_closed| ≤ 1.2e-16 (e ≥ 0); |V_brute − V_game| ≤ 2.8e-9 incl. 70 negative accuracies (down to e < −F(ℓ*), value −e);
+  |N_brute − N_closed| ≤ 6.1e-8; |N_closed − N_game| ≤ 8e-7.   ⇒ (b) REPLICATED.
+  Two bugs of MINE on the way (recorded honestly): (1) I first scanned the whole ray incl. ℓ<0 and got V_brute ≫ V_closed
+  (0.1439 vs 0.0201 at m=.83, κ=.166, u=4): the half ℓ<0 belongs to the antipodal centre 1−m — checked: V_brute(ℓ≤0) = V_{1−m,κ}
+  to 2e-16.  The statement "(b) for a centre of type m, the suprema over its shells" is correct only with "shells" = ℓ ≥ 0;
+  the text's "the profiles of type κ form one ray" hides that the block structure (m,1−m) carries two centres. Harmless for sup_m.
+  (2) for X=0 my root finder returned the shell itself as end of the feasible interval (φ(ℓ)=0) ⇒ N_brute = F(ℓ_hi); fixed by
+  bracketing from a minimiser of φ.
+- 11.90(c): 270 400 grid points (u ∈ {.25,1,3,8}, 52×52 (m,κ) incl. .499/.501, 25 t): min gap F*_c − F*_{m,κ} = 6.2e-10 > 0
+  (at u=.25, m=.499, κ=.5, t=.02); exactly 0 (1e-13) at m=κ=½.  Near equality the gap is quadratic, positive definite:
+  gap/(dm²+dκ²) → 0.1439 (direction m), 0.1439 (κ), 0.0774 (m=κ diagonal), 0.2104 (anti-diagonal) at u=1, t=.5.
+- curvature domination (my strengthening): Ψ''_{m,κ}(s) ≤ Ψ_c''(s) on 4000 random (m,κ,s): max diff −1.4e-5 < 0; identity
+  Ψ'' = dℓ/ds = 4/Σ(1/T) to 1e-7 (finite differences).
+- TABLE (u=1, e=0): all six rows reproduced to the printed digits:
+  κ=.5: .029139 (m=.500) .110944 | .45: .028856 (.477) .109898 | .4: .028005 (.454) .106755 | .3: .024588 (.408) .094080 |
+  .2: .018842 (.362) .072574 | .1: .010688 (.316) .041588.   Best centre type strictly between κ and ½ ✓.
+  Extra (not in the text): the best centre for N^κ(0+) differs from the one for R^κ(0): m_N = .471,.442,.383,.325,.266.
+  u=2: R^κ(0) = .097281,.096389,.093707,.082861,.064328,.037269; N^κ(0+) = .327813,.325037,.316667,.282567,.223249,.133574.
+- sup_m domination on a grid (u ∈ {.5,1,2}, 8 κ, 5 accuracies): R^κ ≤ R_unif, N^κ ≤ θ_na^cube, equality at κ=½ (1e-9), smallest
+  strict gap 3.0e-7 (κ=.49).

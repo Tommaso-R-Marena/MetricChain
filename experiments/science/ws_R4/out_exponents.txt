@@ -1,0 +1,10 @@
+# R4 own computation; exponents of section 11.24
+# small-slope limit (units a = 1; h = 1/4)
+gauss: theta2*/a = 0.346035  theta2*/h = 1.38414  best phi1 = 0.6540   T2(0)/a = 0.618034 (golden ratio conj. = 0.618034) at xi/a = 0.38193
+   gauss Xi(h, phi1=0.1) = +0.01707
+   gauss Xi(h, phi1=0.3) = +0.05400
+   gauss Xi(h, phi1=0.5) = +0.09583
+   gauss Xi(h, phi1=0.65) = +0.13183
+
+#   u      a          h          h/a      theta2*    theta2*/a  theta2*/h  phi1*    T2(0)     T2(0)/a  phi_ub  xi_ub
+ 0.250 0.00775189 0.00194427 0.25081  0.00268914 0.34690   1.38311   0.6531  0.00479406 0.61844  0.5529  0.00297

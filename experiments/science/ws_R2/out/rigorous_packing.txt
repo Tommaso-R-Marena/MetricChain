@@ -1,0 +1,2 @@
+14 proved points of K^br (4 exact, 10 verified finite bridges); largest delta = 0.01395
+  (1,1/2): packing of 116 points (of 13056 candidates; 32 with g=0) satisfying the hypothesis of Theorem 11.71(b) with the uncertainty margin; exact verification: True

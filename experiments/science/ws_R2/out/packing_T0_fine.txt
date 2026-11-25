@@ -1,0 +1,4 @@
+  (1,1/2): 51 points (grid G=90); pairwise ||.||_c > 1 verified exactly: True
+  (1,1/4): 158 points (grid G=180); pairwise ||.||_c > 1/2 verified exactly: True
+  (1/5,1/2): 7 points (grid G=14); pairwise ||.||_c > 5 verified exactly: True
+  (1/5,1/4): 15 points (grid G=120); pairwise ||.||_c > 5/2 verified exactly: True

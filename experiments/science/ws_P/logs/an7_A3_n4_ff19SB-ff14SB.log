@@ -1,0 +1,15 @@
+=== A3 n=4 residual ff19SB-ff14SB: 3844 clash-free conformations; kT = 0.5962 kcal/mol
+c_i (single-flip, kcal/mol): [1.54 2.59 1.54 2.59 1.54 2.59 1.54 2.59]
+argmin f: states [0 2 0 2 0 2 0 2], f = min;  argmin E: states [0 2 0 2 0 2 0 2];  same conformation: True;  E(argmin f) - min E = 0.000 kcal/mol = 0.00 kT
+site gaps of the KNOWN part at argmin f (kcal/mol):   [1.35 4.72 0.76 4.67 0.73 4.8  1.25 5.28]
+site gaps of the TRUE energy at argmin E (kcal/mol):  [1.33 3.87 0.75 3.83 0.71 3.95 1.23 4.44]
+sharp sites (gap of f at argmin f >= c_i): 4 of 8;   ratios e_i/c_i: [0.875 1.821 0.496 1.804 0.474 1.852 0.811 2.04 ]
+validity of d = sum c_i[x_i != y_i] on the clash-free domain: max |g(x)-g(y)|/d(x,y) = 1.0000  (envelope valid as measured)
+Theorem 11.7 (one evaluation certifies iff d(x0,y) <= f(y)-f(x0) for all y): min margin = -13.43 kcal/mol -> NO;  conformations violating: 165 of 3843
+beta*c_i: [2.6 4.3 2.6 4.3 2.6 4.3 2.6 4.3]
+sum_i ln cosh(beta c_i/2) = 8.6 nats = 5.2 kcal/mol;   beta^2 sum c_i^2/8 = 13 nats;   range of g on the domain = 9.5 kcal/mol = 16 kT
+exact on the grid: ln Z(f+g) - ln Z(f) = 42.68 nats; -beta <g>_f = 42.60; Jensen gap = 0.077 nats (the class bound above is 9); Gibbs weight of argmin E: 0.387; entropy H(pi_E) = 2.26 nats
+product-landscape formula (Thm 11.8, Boltzmann weights) with the measured star of f at argmin f and measured c_i: ln N >= 0.19 (t = 2.42) of ln(prod k_i) = 8.79; i.e. N >= 1.2   [heuristic for a non-additive f]
+cover at eps = 0.000 kcal/mol: forced points 1, volume bound 1.0, partition bound 0.4 => N_cov >= 2;  greedy cover 11  (of M = 3844;  mean set size 3423.77, max 3780)  [8s]
+cover at eps = 0.596 kcal/mol: forced points 1, volume bound 1.0, partition bound 0.4 => N_cov >= 2;  greedy cover 8  (of M = 3844;  mean set size 3474.33, max 3805)  [9s]
+cover at eps = 2.000 kcal/mol: forced points 0, volume bound 1.0, partition bound 0.4 => N_cov >= 2;  greedy cover 4  (of M = 3844;  mean set size 3578.29, max 3835)  [8s]

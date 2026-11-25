@@ -1,0 +1,7 @@
+# Regenerable numerical data and compiled binaries of the workstreams are not tracked;
+# every workstream report says how to regenerate them.
+ws_*/**/*.npz
+ws_*/**/*.npy
+ws_*/bin/
+ws_*/**/*.o
+ws_*/**/*.so

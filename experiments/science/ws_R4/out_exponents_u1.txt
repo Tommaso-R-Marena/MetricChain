@@ -1,0 +1,2 @@
+# R4 own computation; exponents of section 11.24
+# small-slope limit (units a = 1; h = 1/4)

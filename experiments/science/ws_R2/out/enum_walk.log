@@ -1,0 +1,12 @@
+walk N=18 total=10401207 classes=818
+N=18 seconds=1.560574566
+walk N=19 total=30188971 classes=1037
+N=19 seconds=4.182164943
+walk N=20 total=87689311 classes=1281
+N=20 seconds=12.383681721
+walk N=21 total=254325043 classes=1594
+N=21 seconds=36.050370708
+walk N=22 total=738087517 classes=1911
+N=22 seconds=104.325313759
+walk N=23 total=2139332335 classes=2328
+N=23 seconds=323.407602338

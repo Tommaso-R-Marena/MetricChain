@@ -299,8 +299,8 @@ conditional means act as an adversary who can freeze the walk (`κ ≡ ½` is th
 did not find a chain-rule argument that replaces the tail lemma.  Nothing is claimed for reference
 measures that are not products (the conditional odds of an interacting `π` do not factor).
 *Novelty.*  New relative to the theory report (which has neither the capacity reading of `a` nor a
-class-wide KL bound); mathematically it is two textbook steps and I did not search the literature
-for it separately.
+class-wide KL bound); mathematically it is two textbook steps; one extended search (§4.9, no. 24)
+found nothing, which is not evidence of novelty for a statement this elementary.
 
 ### 2.6 Statements in the theory report that this workstream corrects or sharpens
 
@@ -597,6 +597,7 @@ lower bound adapted to a Lipschitz class, and Harper's theorem for tightness.
 21. S `Plackett distribution "mutual information" "cross-product ratio" OR "odds ratio" marginals uniform maximum copula …` → 1302.6161 and 2203.08089 again.
 22. S `Novak "Optimal recovery and n-widths for convex classes of functions" Journal of Approximation Theory 80 1995 adaption gain order n function values example abstract` → index entries only; full text not found.
 23. S `channel capacity equals information radius "min_Q max_x D(W(·|x)||Q)" … "redundancy-capacity theorem"` → arXiv:1206.2459 (opened), lecture notes.
+24. X `importance sampling hypercube "log-Lipschitz" OR "bounded log-ratio" OR "bounded influence" density conditional probabilities bounded chain rule "Kullback" product measure worst case over class sample size exp(KL) Hamming` → **nothing relevant** to Proposition A1.1 (Chatterjee–Diaconis follow-ups only).
 
 ### 4.10 Sources and what was read
 
@@ -613,6 +614,7 @@ lower bound adapted to a Lipschitz class, and Harper's theorem for tightness.
 | Krieg, Novak, Ullrich, Forum Math. Sigma 13 (2025) e152; arXiv:2406.07108v2 | `[full text]` §1, §2 (start), §6.1, §6.3 | claims 1, 4 |
 | Novak, arXiv:2307.06787 | Remark 1 + keyword search | claim 1 |
 | Heinrich, arXiv:2401.14100; Kunsch–Novak–Wnuk, arXiv:2308.01705; Kunsch–Wnuk, arXiv:2410.23067; Kunsch–Novak–Rudolf, arXiv:1805.08637 | `[abstract]` (from the PDF) | claim 1 |
+| Novak & Rudolf, *Computation of expectations by MCMC methods*, arXiv:1311.1899v2 | `[full text]` §3 (unknown densities: Thms 3–5) and §4 (open problems) | claim 1: restates Mathé–Novak with an explicit non-asymptotic bound for the log-concave class; the open problems do not mention non-log-concave log-Lipschitz densities |
 | Guo, Liu, Yang, Yin, Zhang, arXiv:2609.20337 | `[full text]` abstract, §1, Thms 1.2–1.4, Table 1 | claims 1, 6 |
 | Harris, Kolmogorov, Liu, Yin, Zhang, arXiv:2604.01263v2 | `[abstract]` + pp. 1–2 | claims 1, 6 |
 | Chen & Nannicini, arXiv:2404.02414 | §1.3 (existing lower bounds) | context |
@@ -657,8 +659,8 @@ Agarwal–Agarwal–Assadi–Khanna 2017; the statistical-query literature (not 
    sphere-covering (rate–distortion) exponent at the radius where a dip in a *flat* landscape starts
    to matter.  I did not find the pair of radii (`p_u` and `Λ₁/u`) side by side in print.
 5. **First source of the capacity phrasing of Lemma 11.89** and of the cosh bound on the Laplace
-   functional of Hamming-Lipschitz functions; and whether Proposition A1.1 (§2.5) is in print —
-   I did not search for it separately.
+   functional of Hamming-Lipschitz functions; and whether Proposition A1.1 (§2.5) is in print
+   (one search).
 6. **G25 second half, G26 lower bound, Theorem 11.90**: not examined.
 7. The statistical-query lower-bound literature and the Canetti–Even–Goldreich line were not opened;
    I expect them to be about unstructured classes, like Mathé–Novak's `F_C`, but that is from memory.
@@ -732,9 +734,10 @@ algorithms for the normalising constant over the log-Lipschitz cone of the Hammi
 (Theorems 11.44/11.45 and 11.54/11.58 together).  Neither half alone is enough: the non-adaptive
 half is a known formula with a known lower-bound method, and the adaptive lower bound is the easy
 direction.  What a referee cannot wave away is the **matching adaptive upper bound without
-log-concavity and without a sampler** — the nested algorithm — because it answers, on a model class,
-the question Mathé and Novak's paper leaves open (what adaption can do when the density is only
-log-Lipschitz).  A second result, if its proof survives external refereeing: *two rounds are
+log-concavity and without a sampler** — the nested algorithm — because it treats, on a model class,
+a case that the Mathé–Novak line does not reach: what adaption can do when the density is only
+log-Lipschitz (their adaptive method, and its explicit version in the Novak–Rudolf survey, need
+log-concavity; neither paper poses the non-log-concave question).  A second result, if its proof survives external refereeing: *two rounds are
 strictly between* (Theorem 11.86), because round hierarchies for estimation problems with a natural
 class are rare and the separating instance is not of the usual nested kind.
 
