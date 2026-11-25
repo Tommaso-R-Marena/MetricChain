@@ -414,6 +414,57 @@ MUTS["XII"] = [
      "DEAD.14"),
 ]
 
+MUTS["XIII"] = [
+    ("XIII.1 M1: Harper bound with the ball of radius r - 1",
+     [("                    rhs = t * exc[r]\n", "                    rhs = t * exc[max(r - 1, 0)]\n")], "XIII.1"),
+    ("XIII.1 M2: pointwise tail bound with half the slope",
+     [("                    if (w[above] > t * np.exp(u * dist) * (1 + 1e-9)).any():",
+       "                    if (w[above] > t * np.exp(0.5 * u * dist) * (1 + 1e-9)).any():")], "XIII.1"),
+    ("XIII.2 M1: Monte Carlo claimed to stay above 0.9 A (no isoperimetric allowance)",
+     [("            fail = float((est < A / (2 * (1 + G))).mean())", "            fail = float((est < 0.9 * A).mean())")], "XIII.2"),
+    ("XIII.2 M2: exponent of Gamma_n claimed to be KL(rho || 1/2)",
+     [("        if abs(val - na_kl(rho, pu)) > 0.01:", "        if abs(val - na_kl(rho, 0.5)) > 0.01:")], "XIII.2"),
+    ("XIII.2 M3: truncated mean claimed to be at least 1.5 t* q",
+     [("                    if trunc < tstar * q * (1 - 1e-12) or A > trunc * (1 + G) * (1 + 1e-9):",
+       "                    if trunc < tstar * q * 1.5 or A > trunc * (1 + G) * (1 + 1e-9):")], "XIII.2"),
+    ("XIII.3 M1: difference set claimed to be the closed ball",
+     [("                if not (diff == (D[s] < R)).all():", "                if not (diff == (D[s] <= R)).all():")], "XIII.3"),
+    ("XIII.3 M2: counting bound with the ball of radius R - 2",
+     [("                ball = sum(math.comb(n, j) for j in range(R))", "                ball = sum(math.comb(n, j) for j in range(R - 1))")],
+     "XIII.3"),
+    ("XIII.3 M3: centre read off with the wrong sign",
+     [("                    rec |= (bit if cone[x0 ^ (1 << i)] > cone[x0] else 1 - bit) << i",
+       "                    rec |= (bit if cone[x0 ^ (1 << i)] < cone[x0] else 1 - bit) << i")], "XIII.3"),
+    ("XIII.3 M4: closed form of the drop with the floor at R - 1",
+     [("                closed = n * math.log1p(math.exp(-u)) - math.log(sum(math.comb(n, j) * math.exp(-u * max(j, R)) for j in range(n + 1)))",
+       "                closed = n * math.log1p(math.exp(-u)) - math.log(sum(math.comb(n, j) * math.exp(-u * max(j, R - 1)) for j in range(n + 1)))")],
+     "XIII.3"),
+    ("XIII.4 M1: order of the two exponents reversed",
+     [("            if not 0 < a < b:", "            if not 0 < b < a:")], "XIII.4"),
+    ("XIII.4 M2: finite-n bounds compared with the hinted exponent",
+     [("        th = na_theta_na(u, frac * math.log(math.cosh(u / 2)))", "        th = na_theta_hint(u, frac * math.log(math.cosh(u / 2)))")],
+     "XIII.4"),
+]
+
+MUTS["XIV"] = [
+    ("XIV.1 M1: dual of the span bracket without the centre of the box",
+     [("    c = np.concatenate([v, theta0 + w, -theta0 + w])", "    c = np.concatenate([v, w, w])")], "XIV.1"),
+    ("XIV.1 M2: feature envelope with half the weights",
+     [("            env = float((w * np.abs(F[x] - F[y])).sum())", "            env = float((0.5 * w * np.abs(F[x] - F[y])).sum())")], "XIV.1"),
+    ("XIV.1 M3: value claimed to be determined at every configuration",
+     [("            in_span = np.linalg.matrix_rank(np.vstack([F[A], F[y]])) == rankA", "            in_span = True")], "XIV.1"),
+    ("XIV.1 M4: remainder transported in the wrong direction",
+     [("        transport = lambda co, pts, y: sum(max(l, 0.0) * Dm[y, a] + max(-l, 0.0) * Dm[a, y] for l, a in zip(co, pts))",
+       "        transport = lambda co, pts, y: sum(max(l, 0.0) * Dm[a, y] + max(-l, 0.0) * Dm[y, a] for l, a in zip(co, pts))")], "XIV.1"),
+    ("XIV.2 M1: profile envelope with the pair counts instead of the cumulative counts",
+     [("            env = float(L * (Delta * np.abs(cum[x] - cum[y])).sum())", "            env = float(L * (Delta * np.abs(cnt[x] - cnt[y])).sum())")],
+     "XIV.2"),
+    ("XIV.2 M2: summation by parts with the radial function shifted by one cell",
+     [("        g = cnt @ phi[:m]", "        g = cnt @ phi[1:]")], "XIV.2"),
+    ("XIV.2 M3: span bracket claimed to equal McShane's bound",
+     [("            if dual.fun > mcshane + 1e-7:", "            if abs(dual.fun - mcshane) > 1e-7:")], "XIV.2"),
+]
+
 which = sys.argv[1:] or list(MUTS)
 for key in which:
     for item in MUTS[key]:

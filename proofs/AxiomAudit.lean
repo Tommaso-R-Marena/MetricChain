@@ -38,6 +38,8 @@ import proofs.Frontiers.GeneralisedDips
 import proofs.Frontiers.NormalForm
 import proofs.Frontiers.SecondOrderDip
 import proofs.Frontiers.SoftGapIndependence
+import proofs.Frontiers.NonAdaptive
+import proofs.Frontiers.LinearClass
 import proofs.AuditCommand
 
 /-!
@@ -349,6 +351,15 @@ import proofs.AuditCommand
 #print axioms MetricChain.sum_gibbs_exp_softGap_indep
 #print axioms MetricChain.sum_dipWeight_indep
 #print axioms MetricChain.spotCheck_const_le_cover
+#print axioms MetricChain.nonadaptive_expected_queries_ge
+#print axioms MetricChain.cube_nonadaptive_bound
+#print axioms MetricChain.sum_le_truncated_add_tail
+#print axioms MetricChain.linRes_sub_attained
+#print axioms MetricChain.linRes_span_upper
+#print axioms MetricChain.linRes_span_exact
+#print axioms MetricChain.sumClass_span_upper
+#print axioms MetricChain.pairRes_sub_le
+#print axioms MetricChain.pairRes_span_upper
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp
@@ -1229,6 +1240,130 @@ theorem product_sandwich_witness (n : ℕ) (h : Pw Bool n → ℝ)
         Real.exp (1 * ∑ x, prodW (fun _ : Bool => (1 / 2 : ℝ)) n x * h x + n * 1) :=
   product_sandwich _ _ _ 1 0 1 (fun _ => by norm_num) (fun _ => by norm_num) (by simp)
     (fun a => by simp) twoMeasureLower_witness twoMeasureBound_witness n h hadm
+
+/-- **Witness for `cube_nonadaptive_bound` (and `nonadaptive_expected_queries_ge`).**  For every
+`n`, `β > 0`, `c > 0` the hypotheses hold with floor level `R = c`, ball size `B = 1` and accuracy
+`ε = 0`: raising a cone to the level `c` changes it at its centre only and lowers `log Z`.
+Hence every randomised non-adaptive algorithm that returns `log Z` exactly with probability
+`1 - δ` on the class evaluates at least `(1 - 2δ) 2^n` points in expectation. -/
+theorem cube_nonadaptive_witness (n : ℕ) {Ω : Type*} [Fintype Ω]
+    (alg : Ω → QueryAlgorithm (Fin n → Bool)) (P : Ω → ℝ) (hP : ∀ ω, 0 ≤ P ω)
+    (hP1 : ∑ ω, P ω = 1) {β c δ : ℝ} (hβ : 0 < β) (hc : 0 < c)
+    (Q : Ω → Finset (Fin n → Bool)) (hna : ∀ ω g, (alg ω).queries g = Q ω)
+    (hcorr : ∀ g, Admissible (hamEnv fun _ : Fin n => c) g →
+      1 - δ ≤ ∑ ω ∈ univ.filter (fun ω => |(alg ω).output g -
+        Real.log (∑ x, Real.exp (-β * ((0 : ℝ) + g x)))| ≤ (0 : ℝ) / 2), P ω) :
+    (1 - 2 * δ) * 2 ^ n ≤ (∑ ω, P ω * (Q ω).card) * 1 := by
+  have hd : IsEnvelope (hamEnv (σ := fun _ : Fin n => Bool) fun _ => c) :=
+    hamEnv_isEnvelope fun _ => hc.le
+  refine cube_nonadaptive_bound n alg P hP hP1 (R := c) hc.le Q hna (fun s => ?_) (fun a => ?_)
+    hcorr
+  · have hle : ∀ x : Fin n → Bool,
+        Real.exp (-β * ((0 : ℝ) + max (hamEnv (fun _ : Fin n => c) x s) c)) ≤
+          Real.exp (-β * ((0 : ℝ) + hamEnv (fun _ : Fin n => c) x s)) := by
+      intro x
+      refine Real.exp_le_exp.mpr ?_
+      have := le_max_left (hamEnv (fun _ : Fin n => c) x s) c
+      nlinarith
+    have hs : Real.exp (-β * ((0 : ℝ) + max (hamEnv (fun _ : Fin n => c) s s) c)) <
+        Real.exp (-β * ((0 : ℝ) + hamEnv (fun _ : Fin n => c) s s)) := by
+      refine Real.exp_lt_exp.mpr ?_
+      rw [hd.self s, max_eq_right hc.le]
+      nlinarith
+    have hlt : ∑ x : Fin n → Bool,
+        Real.exp (-β * ((0 : ℝ) + max (hamEnv (fun _ : Fin n => c) x s) c)) <
+        ∑ x : Fin n → Bool, Real.exp (-β * ((0 : ℝ) + hamEnv (fun _ : Fin n => c) x s)) :=
+      Finset.sum_lt_sum (fun x _ => hle x) ⟨s, mem_univ s, hs⟩
+    have hpos : 0 < ∑ x : Fin n → Bool,
+        Real.exp (-β * ((0 : ℝ) + max (hamEnv (fun _ : Fin n => c) x s) c)) :=
+      Finset.sum_pos (fun x _ => Real.exp_pos _) ⟨s, mem_univ s⟩
+    have hlog := Real.log_lt_log hpos hlt
+    linarith
+  · have hsub : (univ.filter fun s : Fin n → Bool => hamEnv (fun _ : Fin n => c) a s < c) ⊆
+        {a} := by
+      intro s hs
+      have hlt := (Finset.mem_filter.mp hs).2
+      by_contra hne
+      have hne' : a ≠ s := fun h => hne (by rw [Finset.mem_singleton]; exact h.symm)
+      have := hamEnv_ge_of_ne hc.le hne'
+      linarith
+    have hcard := Finset.card_le_card hsub
+    rw [Finset.card_singleton] at hcard
+    exact_mod_cast hcard
+
+/-- **Witness for `sum_le_truncated_add_tail`.**  Two states, discrete envelope of oscillation
+`1`, the residual `(1, 0)`, `β = 1`, threshold `t = 1/2`: the state of weight `1` lies above the
+threshold, the state of weight `e⁻¹` below it, and the lemma gives
+`1 + e⁻¹ ≤ (1/2 + e⁻¹) + (1/2)(e - 1)`. -/
+theorem tail_lemma_witness :
+    (1 : ℝ) + Real.exp (-1) ≤ (1 / 2 + Real.exp (-1)) + 1 / 2 * (Real.exp 1 - 1) := by
+  have he : (2 : ℝ) ≤ Real.exp 1 := by
+    have := Real.add_one_le_exp (1 : ℝ)
+    linarith
+  have hinv : Real.exp (-1) ≤ 1 / 2 := by
+    rw [Real.exp_neg]
+    rw [inv_le_comm₀ (Real.exp_pos 1) (by norm_num)]
+    simpa using he
+  have hadm : Admissible (fun a b : Bool => if a = b then (0 : ℝ) else 1)
+      (fun b : Bool => if b then (0 : ℝ) else 1) := by
+    intro x y
+    cases x <;> cases y <;> simp
+  have key := sum_le_truncated_add_tail (X := Bool) hadm (β := 1) (t := 1 / 2) zero_le_one
+    (fun _ => (1 : ℝ)) (fun x hx => by
+      refine ⟨false, ?_, ?_⟩
+      · simpa using hinv
+      · cases x <;> simp)
+  have hfilter : (univ.filter fun x : Bool =>
+      (1 / 2 : ℝ) < Real.exp (-1 * (if x then (0 : ℝ) else 1))) = {true} := by
+    ext x
+    cases x
+    · simp only [Finset.mem_filter, Finset.mem_univ, true_and, Bool.false_eq_true, if_false,
+        Finset.mem_singleton, iff_false, not_lt]
+      simpa using hinv
+    · simp
+      norm_num
+  rw [hfilter] at key
+  simp only [Fintype.sum_bool, if_true, Bool.false_eq_true, if_false, Finset.sum_singleton] at key
+  have h1 : min (Real.exp (-1 * (0 : ℝ))) (1 / 2 : ℝ) = 1 / 2 := by
+    rw [mul_zero, Real.exp_zero]
+    exact min_eq_right (by norm_num)
+  have h2 : min (Real.exp (-1 * (1 : ℝ))) (1 / 2 : ℝ) = Real.exp (-1) := by
+    rw [mul_one]
+    exact min_eq_left hinv
+  rw [h1, h2] at key
+  simp only [mul_zero, Real.exp_zero, mul_one] at key
+  linarith
+
+/-- **Witness for `linRes_span_exact` (and the span bracket).**  Three configurations with the
+feature vectors `(1,0)`, `(0,1)`, `(1,1)`: the third is the sum of the first two, so two
+evaluations determine the third value for every coefficient vector. -/
+theorem linRes_span_witness (θ : Fin 2 → ℝ) :
+    linRes (fun (x : Fin 3) (α : Fin 2) =>
+        if x = 2 then (1 : ℝ) else if (x : ℕ) = (α : ℕ) then 1 else 0) θ 2 =
+      ∑ k : Fin 2, (1 : ℝ) * linRes (fun (x : Fin 3) (α : Fin 2) =>
+        if x = 2 then (1 : ℝ) else if (x : ℕ) = (α : ℕ) then 1 else 0) θ
+          (if k = 0 then 0 else 1) := by
+  refine linRes_span_exact _ θ (fun k : Fin 2 => if k = 0 then (0 : Fin 3) else 1)
+    (fun _ => 1) 2 (fun α => ?_)
+  fin_cases α <;> simp [Fin.sum_univ_two]
+
+/-- **Witness for `pairRes_sub_le` (tightness of the profile envelope).**  Two configurations,
+one grid cell: one has a pair inside the cutoff, the other has none, and the radial function
+with increment `1` realises the full envelope distance `1`. -/
+theorem pairRes_envelope_tight_witness :
+    pairRes (fun k => if k = 0 then (1 : ℝ) else 0)
+        (fun (x : Bool) (_ : ℕ) => if x then (1 : ℝ) else 0) 1 true -
+      pairRes (fun k => if k = 0 then (1 : ℝ) else 0)
+        (fun (x : Bool) (_ : ℕ) => if x then (1 : ℝ) else 0) 1 false =
+      profEnv 1 (fun _ => 1) (fun (x : Bool) (_ : ℕ) => if x then (1 : ℝ) else 0) 1 true false ∧
+    Admissible (profEnv 1 (fun _ => 1) (fun (x : Bool) (_ : ℕ) => if x then (1 : ℝ) else 0) 1)
+      (pairRes (fun k => if k = 0 then (1 : ℝ) else 0)
+        (fun (x : Bool) (_ : ℕ) => if x then (1 : ℝ) else 0) 1) := by
+  refine ⟨?_, pairRes_admissible (by simp) (fun k hk => ?_) _⟩
+  · simp [pairRes, profEnv, cumCount]
+  · have hk0 : k = 0 := by omega
+    subst hk0
+    simp
 
 end MetricChain.NonVacuity
 

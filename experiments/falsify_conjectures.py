@@ -4267,6 +4267,402 @@ def t_droplets_and_circle(rng, trials):
     return True, stats
 
 
+# ----------------------------------------------------------------------------------------------
+# XIII. Algorithms without a hint on the cube (theory report 11.16)
+# ----------------------------------------------------------------------------------------------
+
+def na_cube(n):
+    """Hamming distance matrix of the n-cube (vertices = integers, bits = coordinates)."""
+    N = 2 ** n
+    idx = np.arange(N)
+    pop = np.array([bin(x).count("1") for x in range(N)])
+    return pop[idx[:, None] ^ idx[None, :]]
+
+
+def na_rand_lipschitz(rng, n, u, D, kind):
+    """A u-Lipschitz function on the n-cube: 0 upper envelope of random data, 1 lower envelope, 2 a convex
+    combination of both, 3 a truncated cone on a flat background, 4 the Lipschitz regularisation of noise."""
+    N = D.shape[0]
+    m = int(rng.integers(1, 9))
+    idx = rng.choice(N, size=min(m, N), replace=False)
+    scale = u * n * float(rng.choice([0.2, 0.5, 1.0, 2.0]))
+    v = rng.uniform(0, scale, size=len(idx))
+    if kind == 0:
+        return (v[:, None] + u * D[idx, :]).min(0)
+    if kind == 1:
+        return (v[:, None] - u * D[idx, :]).max(0)
+    if kind == 2:
+        a = (v[:, None] + u * D[idx, :]).min(0)
+        b = (v[::-1][:, None] - u * D[idx, :]).max(0)
+        lam = float(rng.uniform())
+        return lam * a + (1 - lam) * b
+    if kind == 3:
+        return u * np.minimum(D[int(rng.integers(N))], int(rng.integers(0, n + 1))).astype(float)
+    z = rng.normal(0, u * n * 0.3, size=N)
+    return (z[:, None] + u * D).min(0)
+
+
+def na_kl(a, b):
+    r = 0.0
+    if a > 0:
+        r += a * math.log(a / b)
+    if a < 1:
+        r += (1 - a) * math.log((1 - a) / (1 - b))
+    return r
+
+
+def na_theta_na(u, e1):
+    """min{KL(rho || 1/2) : KL(rho || p_u) <= e1}: the exponent of non-adaptive algorithms."""
+    pu = 1 / (1 + math.exp(u))
+    if e1 >= na_kl(0.5, pu):
+        return 0.0
+    lo, hi = pu, 0.5
+    for _ in range(200):
+        mid = (lo + hi) / 2
+        lo, hi = (mid, hi) if na_kl(mid, pu) <= e1 else (lo, mid)
+    return na_kl(lo, 0.5)
+
+
+def na_theta_hint(u, e1):
+    rho = (math.log(2 / (1 + math.exp(-u))) + e1) / u
+    return na_kl(rho, 0.5) if rho < 0.5 else 0.0
+
+
+def na_log_gamma(logex, logball, n, r):
+    """ln Gamma_n(r), Gamma_n(r) = sum_{j<=r} C(n,j)(e^{u(r+1-j)} - 1) / |B(n, r-1)|  (Gamma_n(0) = 0)."""
+    if r == 0:
+        return -math.inf
+    return logex[r] + n * math.log(2) - logball[r - 1]
+
+
+@conjecture("XIII.1 Tail lemma on the cube: for every u-Lipschitz psi, w = e^{-psi}, and every threshold t, w(x) <= t e^{u dist(x, {w <= t})} above the threshold, and sum_{w > t} (w - t) <= t sum_{j <= r} C(n,j)(e^{u(r+1-j)} - 1) whenever |{w > t}| <= |B(n,r)| (Harper); truncated cones attain equality")
+def t_tail_lemma_cube(rng, trials):
+    stats = dict(checks=0, tight=0, worst=0.0)
+    for n in (4, 6, 8):
+        N = 2 ** n
+        D = na_cube(n)
+        for u in (0.4, 1.0, 2.2):
+            logex, logball = qc_cube_log_excess(n, u)
+            exc = [N * math.exp(v) for v in logex]
+            balls = [math.exp(v) for v in logball]
+            for tr in range(max(5, trials // 12)):
+                psi = na_rand_lipschitz(rng, n, u, D, tr % 5)
+                if not (np.abs(psi[:, None] - psi[None, :]) <= u * D + 1e-9).all():
+                    return False, dict(reason="generator is not Lipschitz")
+                w = np.exp(-(psi - psi.min()))
+                for t in np.unique(w)[:-1]:
+                    above = w > t
+                    m = int(above.sum())
+                    dist = D[np.ix_(above, ~above)].min(axis=1)
+                    if (w[above] > t * np.exp(u * dist) * (1 + 1e-9)).any():
+                        return False, dict(reason="pointwise tail bound violated", n=n, u=u)
+                    r = next(k for k in range(n + 1) if balls[k] >= m - 1e-9)
+                    lhs = float((w[above] - t).sum())
+                    mid = float(t * (np.exp(u * dist) - 1).sum())
+                    rhs = t * exc[r]
+                    if lhs > mid * (1 + 1e-9) or mid > rhs * (1 + 1e-9):
+                        return False, dict(reason="tail lemma violated", n=n, u=u, size=m, radius=r, lhs=lhs, geometric=mid, ball=rhs)
+                    stats["checks"] += 1
+                    stats["tight"] += lhs >= rhs * (1 - 1e-9)
+                    stats["worst"] = max(stats["worst"], lhs / rhs)
+    if stats["tight"] == 0:
+        return False, dict(reason="no instance attains the ball bound: the test has no power")
+    return True, stats
+
+
+@conjecture("XIII.2 Monte Carlo on the whole class: with t* the upper q-quantile of w under the uniform measure and r the least radius with |B(n,r)| >= 2^n q, E[w] <= E[min(w,t*)] (1 + Gamma_n(r)), Gamma_n(r) = sum_{j<=r} C(n,j)(e^{u(r+1-j)}-1)/|B(n,r-1)|; hence K/q uniform samples give ln Ahat - ln A >= -ln(2(1+Gamma_n(r))) outside an event of probability e^{-K/8}; and n^{-1} ln Gamma_n(rho n) -> KL(rho || p_u) above p_u")
+def t_monte_carlo_whole_class(rng, trials):
+    stats = dict(deterministic=0, simulated=0, min_margin=math.inf)
+    for n in (5, 7, 9):
+        N = 2 ** n
+        D = na_cube(n)
+        for u in (0.5, 1.3):
+            logex, logball = qc_cube_log_excess(n, u)
+            for tr in range(max(5, trials // 12)):
+                psi = na_rand_lipschitz(rng, n, u, D, tr % 5)
+                w = np.sort(np.exp(-(psi - psi.min())))[::-1]
+                A = float(w.mean())
+                for m in sorted({1, 2, 3, n + 1, N // 8, N // 3, N // 2, N - 1}):
+                    if not 1 <= m <= N:
+                        continue
+                    q = m / N
+                    tstar = float(w[m - 1])                       # sup{t : |{w >= t}| >= 2^n q}
+                    r = next(k for k in range(n + 1) if math.exp(logball[k]) >= m - 1e-9)
+                    G = math.exp(na_log_gamma(logex, logball, n, r)) if r > 0 else 0.0
+                    trunc = float(np.minimum(w, tstar).mean())
+                    if trunc < tstar * q * (1 - 1e-12) or A > trunc * (1 + G) * (1 + 1e-9):
+                        return False, dict(reason="truncated mean does not control the mean", n=n, u=u, m=m, A=A, truncated=trunc, Gamma=G)
+                    stats["deterministic"] += 1
+                    stats["min_margin"] = min(stats["min_margin"], trunc * (1 + G) / A)
+    # the probabilistic statement, simulated at cones (the worst instances) and at a random instance
+    n, u, K = 12, 1.0, 8 * math.log(10.0)
+    N = 2 ** n
+    pop = np.array([bin(x).count("1") for x in range(N)])
+    logex, logball = qc_cube_log_excess(n, u)
+    D12 = None
+    for inst in range(3):
+        if inst < 2:
+            w = np.exp(-u * pop.astype(float)) if inst == 0 else np.exp(-u * np.minimum(pop, 4).astype(float))
+        else:
+            D12 = na_cube(n)
+            psi = na_rand_lipschitz(rng, n, u, D12, 0)
+            w = np.exp(-(psi - psi.min()))
+        A = float(w.mean())
+        for M in (60, 400, 2000):
+            r = next(k for k in range(n + 1) if math.exp(logball[k]) >= N * K / M - 1e-9)
+            G = math.exp(na_log_gamma(logex, logball, n, r)) if r > 0 else 0.0
+            reps = 300
+            est = w[rng.integers(0, N, size=(reps, M))].mean(axis=1)
+            fail = float((est < A / (2 * (1 + G))).mean())
+            if fail > math.exp(-K / 8):
+                return False, dict(reason="Monte Carlo falls below the certified lower end too often", instance=inst, M=M, failure=fail)
+            stats["simulated"] += 1
+    n, u = 2000, 1.0
+    pu = 1 / (1 + math.exp(u))
+    logex, logball = qc_cube_log_excess(n, u)
+    for rho in (0.30, 0.38, 0.45):
+        val = na_log_gamma(logex, logball, n, int(rho * n)) / n
+        if abs(val - na_kl(rho, pu)) > 0.01:
+            return False, dict(reason="exponent of Gamma_n differs from KL(rho || p_u)", rho=rho, value=val, kl=na_kl(rho, pu))
+    return True, stats
+
+
+@conjecture("XIII.3 Non-adaptive lower bound: the flattened cone max(u d(.,s), uR) is u-Lipschitz, differs from the cone exactly on the open ball {d(.,s) < R} and lowers ln Z by ln[(1+e^{-u})^n / sum_j C(n,j) e^{-u max(j,R)}]; a query set that misses that ball cannot separate the two (both lie between the McShane envelopes of the answers); every query set Q meets the balls of at most |Q| |B(n,R-1)| centres; and a point with its n neighbours determines the centre of a cone")
+def t_nonadaptive_lower_bound(rng, trials):
+    stats = dict(pairs=0, query_sets=0, centres=0)
+    for n in (3, 5, 7, 8):
+        N = 2 ** n
+        D = na_cube(n)
+        for u in (0.6, 1.5):
+            for R in range(1, n + 1):
+                s = int(rng.integers(N))
+                cone = u * D[s].astype(float)
+                flat = np.maximum(cone, u * R)
+                if not (np.abs(flat[:, None] - flat[None, :]) <= u * D + 1e-9).all():
+                    return False, dict(reason="flattened cone is not Lipschitz")
+                diff = flat != cone
+                if not (diff == (D[s] < R)).all():
+                    return False, dict(reason="difference set is not the open ball", n=n, R=R)
+                drop = math.log(float(np.exp(-cone).sum())) - math.log(float(np.exp(-flat).sum()))
+                closed = n * math.log1p(math.exp(-u)) - math.log(sum(math.comb(n, j) * math.exp(-u * max(j, R)) for j in range(n + 1)))
+                if abs(drop - closed) > 1e-9:
+                    return False, dict(reason="closed form of the drop of ln Z is wrong", brute=drop, closed=closed)
+                ball = sum(math.comb(n, j) for j in range(R))
+                for _ in range(4):
+                    Q = rng.choice(N, size=int(rng.integers(1, min(N, 12) + 1)), replace=False)
+                    hit = int((D[np.ix_(Q, np.arange(N))] < R).any(axis=0).sum())      # centres whose ball Q meets
+                    if hit > len(Q) * ball:
+                        return False, dict(reason="a query set meets too many balls")
+                    if not (D[s][Q] < R).any():
+                        up = (cone[Q][:, None] + u * D[Q, :]).min(axis=0)
+                        lo = (cone[Q][:, None] - u * D[Q, :]).max(axis=0)
+                        if (flat > up + 1e-9).any() or (flat < lo - 1e-9).any() or (flat[Q] != cone[Q]).any():
+                            return False, dict(reason="flattened cone is excluded by answers outside its ball")
+                        width = math.log(float(np.exp(-lo).sum())) - math.log(float(np.exp(-up).sum()))
+                        if width < drop - 1e-9:
+                            return False, dict(reason="bracket narrower than the drop although the ball was missed")
+                    stats["query_sets"] += 1
+                stats["pairs"] += 1
+            for _ in range(5):
+                s, x0 = int(rng.integers(N)), int(rng.integers(N))
+                cone = u * D[s].astype(float)
+                rec = 0
+                for i in range(n):
+                    bit = x0 >> i & 1
+                    rec |= (bit if cone[x0 ^ (1 << i)] > cone[x0] else 1 - bit) << i
+                if rec != s:
+                    return False, dict(reason="centre of a cone not recovered from n + 1 evaluations")
+                stats["centres"] += 1
+    return True, stats
+
+
+@conjecture("XIII.4 Exponents without a hint on the cube: theta_na(eps1) = min{KL(rho||1/2) : KL(rho||p_u) <= eps1} is strictly above the hinted exponent KL((Lambda1+eps1)/u || 1/2) for 0 < eps1 < ln cosh(u/2) = KL(1/2||p_u), both vanish there, theta_na(0+) = KL(p_u||1/2); and at finite n the non-adaptive lower bound and the Monte Carlo upper bound are ordered and approach theta_na")
+def t_exponents_without_hint(rng, trials):
+    stats = dict(pairs=0, finite=0, max_gap=0.0)
+    for u in (0.3, 0.5, 1.0, 2.0, math.log(16.0)):
+        pu = 1 / (1 + math.exp(u))
+        thr = math.log(math.cosh(u / 2))
+        if abs(na_kl(0.5, pu) - thr) > 1e-12 or abs(na_theta_na(u, 0.0) - na_kl(pu, 0.5)) > 1e-7:
+            return False, dict(reason="threshold or zero-accuracy value is wrong", u=u)
+        for frac in (0.02, 0.1, 0.3, 0.5, 0.7, 0.9, 0.98):
+            a, b = na_theta_hint(u, frac * thr), na_theta_na(u, frac * thr)
+            if not 0 < a < b:
+                return False, dict(reason="hinted exponent is not strictly below the non-adaptive one", u=u, frac=frac, hinted=a, nonadaptive=b)
+            stats["pairs"] += 1
+        if na_theta_na(u, thr * (1 + 1e-12)) != 0.0 or na_theta_hint(u, thr * (1 + 1e-12)) != 0.0 or na_theta_na(u, thr * (1 - 1e-6)) > 1e-9:
+            return False, dict(reason="exponents do not vanish at the threshold", u=u)
+    n = 1600 if trials < 200 else 6400
+    d1 = d2 = dq = 0.05
+    for u, frac in ((1.0, 0.25), (2.0, 0.5)):
+        eps = n * frac * math.log(math.cosh(u / 2))
+        logc = [math.lgamma(n + 1) - math.lgamma(j + 1) - math.lgamma(n - j + 1) for j in range(n + 1)]
+        logex, logball = qc_cube_log_excess(n, u)
+        lz_cone = n * math.log1p(math.exp(-u))
+
+        def lz_flat(R):
+            terms = [logc[j] - u * max(j, R) for j in range(n + 1)]
+            mx = max(terms)
+            return mx + math.log(sum(math.exp(t - mx) for t in terms))
+
+        Rstar = next(R for R in range(1, n + 1) if lz_cone - lz_flat(R) > eps)
+        lower = (math.log(1 - 2 * dq) + n * math.log(2) - logball[Rstar - 1]) / n
+        budget, r0, worst = eps - math.log(2 / d2), None, -math.inf
+        for r in range(1, n + 1):
+            g = na_log_gamma(logex, logball, n, r)
+            worst = max(worst, g + math.log1p(math.exp(-g)) if g > 0 else math.log1p(math.exp(g)))
+            if worst > budget:
+                break
+            r0 = r
+        if r0 is None:
+            return False, dict(reason="Monte Carlo bound is void at this size", n=n, u=u)
+        upper = (math.log(8 * math.log(1 / d1)) + n * math.log(2) - logball[r0]) / n
+        th = na_theta_na(u, frac * math.log(math.cosh(u / 2)))
+        tol = 0.012 if n == 1600 else 0.004
+        if not (lower <= upper + 1e-12 and abs(lower - th) < tol and abs(upper - th) < tol):
+            return False, dict(reason="finite-n bounds are not ordered or far from the exponent", n=n, u=u, lower=lower, upper=upper, theta_na=th)
+        stats["finite"] += 1
+        stats["max_gap"] = max(stats["max_gap"], upper - lower)
+    return True, stats
+
+
+# ----------------------------------------------------------------------------------------------
+# XIV. Correlated uncertainty: classes that are linear in features (theory report 11.17)
+# ----------------------------------------------------------------------------------------------
+
+def lc_span_bracket(F, theta0, w, A, v, y):
+    """Primal and dual value of sup{ theta.F[y] : |theta - theta0| <= w, F[A] theta = v } (linear programs).
+    Dual (Smolyak): min_lam [ lam.v + theta0.r + w.|r| ],  r = F[y] - F[A]^T lam."""
+    from scipy.optimize import linprog
+    p = F.shape[1]
+    prim = linprog(-F[y], A_eq=F[A], b_eq=v, bounds=list(zip(theta0 - w, theta0 + w)), method="highs")
+    k = len(A)
+    # variables: lam (k, free), rp (p) >= 0, rm (p) >= 0;  rp - rm + F[A]^T lam = F[y]
+    c = np.concatenate([v, theta0 + w, -theta0 + w])
+    Aeq = np.hstack([F[A].T, np.eye(p), -np.eye(p)])
+    dual = linprog(c, A_eq=Aeq, b_eq=F[y], bounds=[(None, None)] * k + [(0, None)] * (2 * p), method="highs")
+    return (-prim.fun if prim.status == 0 else None), (dual.fun if dual.status == 0 else None)
+
+
+@conjecture("XIV.1 Linear classes g = theta.F, |theta - theta0| <= w: without evaluations sup (g(x) - g(y)) = centre + sum_a w_a |F_a(x) - F_a(y)| (attained); after evaluations on A the largest consistent value at y is min_lam [lam.v + theta0.r + w.|r|], r = F(y) - sum_i lam_i F(x_i) (linear-programming duality: primal = dual, every lam gives a valid bound); the value is determined exactly when F(y) lies in the span of the evaluated feature vectors; and with a first-order remainder the bracket gains the transport term sum_i (lam_i^+ d(y,x_i) + lam_i^- d(x_i,y)) for coefficients summing to one")
+def t_linear_class_span_bracket(rng, trials):
+    stats = dict(pairs=0, brackets=0, exact=0, nontrivial=0, remainder=0)
+    for _ in range(max(8, trials // 6)):
+        N, p = int(rng.integers(5, 12)), int(rng.integers(2, 6))
+        F = rng.integers(-2, 4, size=(N, p)).astype(float)
+        theta0 = rng.normal(0, 1, size=p)
+        w = rng.uniform(0.0, 1.5, size=p) * (rng.uniform(size=p) < 0.85)
+        for _ in range(4):
+            x, y = int(rng.integers(N)), int(rng.integers(N))
+            env = float((w * np.abs(F[x] - F[y])).sum())
+            best = theta0 + w * np.where(F[x] - F[y] >= 0, 1.0, -1.0)
+            if abs((best - theta0) @ (F[x] - F[y]) - env) > 1e-9:
+                return False, dict(reason="feature envelope is not attained by the sign choice")
+            for _ in range(5):
+                th = theta0 + w * rng.uniform(-1, 1, size=p)
+                if (th - theta0) @ (F[x] - F[y]) > env + 1e-9:
+                    return False, dict(reason="a member of the class exceeds the feature envelope")
+            stats["pairs"] += 1
+        truth = theta0 + w * rng.uniform(-1, 1, size=p)
+        k = int(rng.integers(1, min(N, p + 2)))
+        A = [int(a) for a in rng.choice(N, size=k, replace=False)]
+        v = F[A] @ truth
+        rankA = np.linalg.matrix_rank(F[A])
+        for y in range(N):
+            up, dual = lc_span_bracket(F, theta0, w, A, v, y)
+            lo_neg, _ = lc_span_bracket(-F, theta0, w, A, -v, y)       # sup of -g(y) over the same coefficients
+            if up is None or dual is None or lo_neg is None:
+                return False, dict(reason="linear program failed on a feasible instance")
+            if abs(up - dual) > 1e-6 * (1 + abs(up)):
+                return False, dict(reason="span bracket (dual) differs from the largest consistent value (primal)", primal=up, dual=dual)
+            val = float(F[y] @ truth)
+            if val > up + 1e-7 or val < -lo_neg - 1e-7:
+                return False, dict(reason="true value outside the bracket")
+            lam = rng.normal(0, 1, size=k)                           # any coefficients give a valid bound
+            r = F[y] - F[A].T @ lam
+            if val > lam @ v + theta0 @ r + w @ np.abs(r) + 1e-7 or val < lam @ v + theta0 @ r - w @ np.abs(r) - 1e-7:
+                return False, dict(reason="a linear combination of evaluations gives an invalid bound")
+            in_span = np.linalg.matrix_rank(np.vstack([F[A], F[y]])) == rankA
+            if in_span:
+                if up + lo_neg > 1e-6:
+                    return False, dict(reason="value not determined although the feature vector is in the span", width=up + lo_neg)
+                stats["exact"] += 1
+            stats["nontrivial"] += up + lo_neg > 1e-6
+            stats["brackets"] += 1
+        # linear part plus a first-order remainder: the remainder is transported with the absolute coefficients
+        Dm = rng.uniform(0.2, 2.0, size=(N, N))
+        np.fill_diagonal(Dm, 0.0)
+        for mid in range(N):
+            Dm = np.minimum(Dm, Dm[:, [mid]] + Dm[[mid], :])
+        rho = (rng.uniform(0, 1, size=N)[None, :] + Dm).min(axis=1)          # admissible: rho(x) - rho(y) <= Dm[x, y]
+        lam = rng.normal(0, 1, size=k)
+        lam += (1 - lam.sum()) / k
+        transport = lambda co, pts, y: sum(max(l, 0.0) * Dm[y, a] + max(-l, 0.0) * Dm[a, y] for l, a in zip(co, pts))
+        for y in range(N):
+            r = F[y] - F[A].T @ lam
+            if F[y] @ truth + rho[y] > lam @ (v + rho[A]) + theta0 @ r + w @ np.abs(r) + transport(lam, A, y) + 1e-7:
+                return False, dict(reason="span bracket with a first-order remainder is violated")
+            a = A[0]                                                    # one evaluated point: the bound is attained
+            ext = theta0 + w * np.where(F[y] - F[a] >= 0, 1.0, -1.0)
+            r1 = F[y] - F[a]
+            lhs = F[y] @ ext + Dm[y, a]                                 # remainder rho = Dm[., a], rho(a) = 0
+            rhs = F[a] @ ext + theta0 @ r1 + w @ np.abs(r1) + transport([1.0], [a], y)
+            if abs(lhs - rhs) > 1e-9:
+                return False, dict(reason="one-point bracket with a remainder is not attained", lhs=lhs, rhs=rhs)
+        stats["remainder"] += 1
+    if stats["exact"] == 0 or stats["nontrivial"] == 0:
+        return False, dict(reason="the test has no power (no exact or no open bracket)")
+    return True, stats
+
+
+@conjecture("XIV.2 Pair-additive residuals g(x) = sum_k phi(s_k) cnt_k(x) with phi = 0 at the cutoff and |phi(s_k) - phi(s_{k+1})| <= L (s_{k+1} - s_k): g(x) = sum_k (phi_k - phi_{k+1}) N_k(x) with N the cumulative pair counts; sup (g(x) - g(y)) = L sum_k Delta_k |N_k(x) - N_k(y)| (a transport distance between pair-distance distributions, attained); and after evaluations the largest consistent value at y is min_lam [lam.v + L sum_k Delta_k |N_k(y) - sum_i lam_i N_k(x_i)|]")
+def t_pair_additive_profiles(rng, trials):
+    from scipy.optimize import linprog
+    stats = dict(identities=0, envelopes=0, brackets=0, open_brackets=0)
+    for _ in range(max(8, trials // 6)):
+        N, m = int(rng.integers(4, 10)), int(rng.integers(2, 8))
+        L = float(rng.uniform(0.3, 2.0))
+        grid = np.sort(rng.uniform(0.5, 6.0, size=m + 1))            # s_0 < ... < s_m = cutoff
+        Delta = np.diff(grid)
+        cnt = rng.integers(0, 5, size=(N, m)).astype(float)          # pairs at s_0..s_{m-1}
+        cum = np.cumsum(cnt, axis=1)
+        incr = L * Delta * rng.uniform(-1, 1, size=m)                # phi_k - phi_{k+1}
+        phi = np.concatenate([np.cumsum(incr[::-1])[::-1], [0.0]])   # phi_m = 0
+        g = cnt @ phi[:m]
+        if np.abs(g - cum @ incr).max() > 1e-9:
+            return False, dict(reason="summation by parts fails")
+        stats["identities"] += 1
+        for _ in range(4):
+            x, y = int(rng.integers(N)), int(rng.integers(N))
+            env = float(L * (Delta * np.abs(cum[x] - cum[y])).sum())
+            if g[x] - g[y] > env + 1e-9:
+                return False, dict(reason="pair-additive residual exceeds the profile envelope")
+            ext = L * Delta * np.where(cum[x] - cum[y] >= 0, 1.0, -1.0)
+            if abs(ext @ (cum[x] - cum[y]) - env) > 1e-9:
+                return False, dict(reason="profile envelope is not attained")
+            stats["envelopes"] += 1
+        k = int(rng.integers(1, min(N, m + 1)))
+        A = [int(a) for a in rng.choice(N, size=k, replace=False)]
+        v = g[A]
+        for y in range(N):
+            # primal: maximise incr'.cum[y] over |incr'_k| <= L Delta_k with cum[A] incr' = v
+            prim = linprog(-cum[y], A_eq=cum[A], b_eq=v, bounds=list(zip(-L * Delta, L * Delta)), method="highs")
+            c = np.concatenate([v, L * Delta, L * Delta])
+            Aeq = np.hstack([cum[A].T, np.eye(m), -np.eye(m)])
+            dual = linprog(c, A_eq=Aeq, b_eq=cum[y], bounds=[(None, None)] * k + [(0, None)] * (2 * m), method="highs")
+            if prim.status != 0 or dual.status != 0:
+                return False, dict(reason="linear program failed on a feasible instance")
+            if abs(-prim.fun - dual.fun) > 1e-6 * (1 + abs(dual.fun)) or g[y] > dual.fun + 1e-7:
+                return False, dict(reason="profile span bracket differs from the largest consistent value", primal=-prim.fun, dual=dual.fun)
+            mcshane = min(v[i] + L * (Delta * np.abs(cum[y] - cum[a])).sum() for i, a in enumerate(A))
+            if dual.fun > mcshane + 1e-7:
+                return False, dict(reason="span bracket worse than McShane")
+            stats["open_brackets"] += dual.fun < mcshane - 1e-6
+            stats["brackets"] += 1
+    if stats["open_brackets"] == 0:
+        return False, dict(reason="linear combinations never improved on McShane: the test has no power")
+    return True, stats
+
+
 @conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
 def t_dead_exact_free_energy(rng, trials):
     """Refuted (second referee, C1): with positive slack off the diagonal, an exact certificate of ln Z is the whole

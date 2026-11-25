@@ -226,5 +226,41 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.14 M1: a deeper perturbation scale (beta = 3: single local dips are sensitive) -> must be flagged UNEXPECTEDLY SURVIVED
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.1 M1: Harper bound with the ball of radius r - 1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.1 M2: pointwise tail bound with half the slope
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.2 M1: Monte Carlo claimed to stay above 0.9 A (no isoperimetric allowance)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.2 M2: exponent of Gamma_n claimed to be KL(rho || 1/2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.2 M3: truncated mean claimed to be at least 1.5 t* q
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.3 M1: difference set claimed to be the closed ball
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.3 M2: counting bound with the ball of radius R - 2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.3 M3: centre read off with the wrong sign
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.3 M4: closed form of the drop with the floor at R - 1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.4 M1: order of the two exponents reversed
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.4 M2: finite-n bounds compared with the hinted exponent
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.1 M1: dual of the span bracket without the centre of the box
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.1 M2: feature envelope with half the weights
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.1 M3: value claimed to be determined at every configuration
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.1 M4: remainder transported in the wrong direction
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.2 M1: profile envelope with the pair counts instead of the cumulative counts
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.2 M2: summation by parts with the radial function shifted by one cell
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.2 M3: span bracket claimed to equal McShane's bound
+                  exit=1  1 TEST(S) MISBEHAVED
 
-114 mutations: 113 caught, 1 expected pass, 0 not as expected
+132 mutations: 131 caught, 1 expected pass, 0 not as expected

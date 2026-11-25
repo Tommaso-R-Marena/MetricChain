@@ -70,6 +70,7 @@ for f in (root / "proofs").rglob("*.lean"):
 IGNORE = {
     "U_b", "Δ_k", "g_j", "B_i", "φ_B", "σ_φ", "K_t", "F_Q", "π_γ", "c_i", "m_i", "N_cov",
     "ε_set", "f_CW", "b_i", "L_i", "Δ_s", "C_{k,γ}", "u_c", "ρ_∓", "R_ν", "τ_n", "J_ij", "h_i",
+    "p_u", "Δ_r", "θ_hint", "θ_na", "g_s", "D_R", "Γ_n", "d_P", "N_ab", "φ_ab", "s_pq", "x_i", "λ_i", "S_c", "d_F",
     "lower_bound", "native_decide", "metricchain-cert", "audit_all", "falsify_conjectures",
     "separation_benchmarks", "lake_env", "check_doc_refs", "L1_pruning_certificates",
     "L2_relaxations_partition", "L3_realizability_geometry", "prior_art", "e_lo", "e_hi",

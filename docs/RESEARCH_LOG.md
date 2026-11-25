@@ -746,12 +746,70 @@ by local search was false; the violating set had relative volume below `10⁻⁴
 non-violations are not evidence without an estimate of the power of the search.  (iii) The
 most consequential finding of the cycle for the original goal is negative (D42).
 
-### Resume here (state at the end of cycle 9, second checkpoint)
+## Cycle 10 — without a hint; correlated uncertainty; chains again
 
-Verified state (fourth checkpoint): every module under `proofs/` (41 files) builds with zero
-warnings and is walked by the axiom audit (2793 declarations); the harness (83 registered
-tests: 66 that must survive, 17 documented refutations) and its mutation tests (114
-mutations: 113 caught, one expected pass) pass; `scripts/audit_all.sh` exits 0.
+Checkpoint `59e6761` closed cycle 9.  Two questions of its resume list were taken up at once,
+each by the coordinator and, independently, by a workstream told to break the coordinator's
+claims first (`workstreams/H_brief.md`, `P_brief.md`).
+
+### Cycle 10, first checkpoint
+
+* **Algorithms without a hint on the cube** (theory report §11.16; `NonAdaptive.lean`;
+  harness XIII.1–4; benchmark B12).  A *tail lemma*: above a threshold a Gibbs weight of an
+  admissible residual is at most the threshold times `e^{β·(envelope distance to the
+  sub-level set)}`; with Harper's theorem the mass above a threshold is at most the excess of
+  a dip on a ball of the size of the super-level set.  Consequences: plain Monte Carlo is
+  accurate on the **whole** class with exponent `θ_na = min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}` (this
+  turns the Chatterjee–Diaconis sample size at one instance into a theorem on the class and
+  replaces the Chebyshev bound `ln cosh u`); a machine-checked lower bound for **non-adaptive**
+  algorithms with the same exponent (cones against cones with a flattened bottom); a
+  certified bracket from the same samples, which costs at the zero residual what the best
+  hinted algorithm costs.  So the non-adaptive exponent is exact, and the open question of
+  §12 item 2(d) is reduced to adaptivity.
+* **A candidate adaptive algorithm** (not a theorem).  The tail lemma holds on every subcube,
+  and the partition functions of the subcubes of a coordinate block form a Lipschitz
+  landscape on the remaining cube.  A multilevel scheme (outer samples, inner brackets,
+  accuracy in proportion to share, a ladder of thresholds) costs about `e^{nθ_na/2}` at two
+  levels on the instances tried by hand; a first accounting suggested the hinted exponent as
+  the fixed point of the recursion, a second look found an instance (a slightly supercritical
+  bump on a flat bulk) on which the naive scheme gains nothing.  Handed to workstream H.
+* **Correlated uncertainty** (theory report §11.17; `LinearClass.lean`; harness XIV.1–2).
+  Classes that are linear in features with coefficients in a box: the envelope is a
+  pulled-back weighted `ℓ¹` distance, the bracket after evaluations is the `ℓ¹` distance to the
+  *span* of the evaluated feature vectors (McShane: to the nearest one), and rank-many
+  evaluations determine everything.  Pair-additive residuals with unknown Lipschitz radial
+  functions are linear in the cumulative pair-count profiles; their envelope is a transport
+  distance between pair-distance distributions, and its first-order class has certificates
+  whose size does not depend on the chain length at extensive accuracy.  This is the
+  constructive counterpart of D42 — for a smaller class.
+* **Modal** remains unreachable from this session (the client needs gRPC, which the session
+  proxy does not carry); nothing was run there and nothing was worked around.
+
+### Resume here (cycle 10, first checkpoint)
+
+Verified state: every module under `proofs/` (43 files) builds with zero warnings and is walked
+by the axiom audit (2835 declarations); the harness (89 registered tests: 72 that must survive,
+17 documented refutations) and its mutation tests (132 mutations: 131 caught, one expected
+pass) pass; `scripts/audit_all.sh` exits 0.  **Sections 11.16 and 11.17 of the theory report
+are not yet refereed**; workstreams H and P were still running when this checkpoint was
+written.  In priority order:
+
+1. **Integrate workstreams H and P** when they report (their reports go to
+   `docs/workstreams/`), then commission independent reviews of §§11.16–11.17.
+2. **The adaptive exponent without a hint** (theory report §12 item 2(d)): prove that some
+   adaptive scheme beats `θ_na` on the whole class, or find a prior on which none does.
+3. **Chains**: a kernel rule for span brackets over pair-distance profiles (exact in squared
+   distances on the rational torus); profiles for three-body terms; lower bounds for the
+   profile class; an honest test of whether a physically motivated residual has a useful
+   Lipschitz constant in this format.
+4. The list of the previous checkpoint, below, is otherwise unchanged.
+
+### State at the end of cycle 9 (superseded in part by the list above)
+
+Verified state (fourth checkpoint of cycle 9): every module under `proofs/` (41 files) builds
+with zero warnings and is walked by the axiom audit (2793 declarations); the harness (83
+registered tests: 66 that must survive, 17 documented refutations) and its mutation tests
+(114 mutations: 113 caught, one expected pass) pass; `scripts/audit_all.sh` exits 0.
 In priority order:
 
 1. **Envelopes for chains** (theory report §12 item 9): the per-torsion route does not

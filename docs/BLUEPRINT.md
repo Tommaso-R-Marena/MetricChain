@@ -688,6 +688,34 @@ expressed in windowed local frames (bounded constants); envelopes in a contact-m
 chain rule, costs a stretched exponential `exp(Θ̃(√N))` at the zero residual instead of an
 exponential — a bound on certificate sizes, not yet a kernel.
 
+**A format that does not grow: pair-distance profiles** (theory report §11.17; `LinearClass.lean`;
+not yet refereed).  If the residual is *pair-additive with unknown radial functions* —
+`g(x) = Σ_{p<q} φ_{type(p,q)}(s_pq(x))`, `s` the squared distance, each `φ` `L`-Lipschitz and zero
+beyond a cutoff `S_c` — the exporter publishes, instead of per-torsion constants: the pair
+types, the cutoff, and `L`.  The envelope is then
+
+    d_P(x, y) = L Σ_types ∫_0^{S_c} |N^x(s) − N^y(s)| ds,
+
+`N^x(s)` the number of pairs of that type with squared distance at most `s` (a step function
+with rational breakpoints when the geometry is rational, so `d_P` is computed exactly).  Two
+checkable rules follow.  *Nearest profile* (McShane): `|g(y) − g(x_i)| ≤ d_P(y, x_i)`.  *Span*:
+for any rational coefficients `λ_i`,
+
+    | g(y) − Σ_i λ_i g(x_i) |  ≤  L Σ_types ∫_0^{S_c} | N^y(s) − Σ_i λ_i N^{x_i}(s) | ds
+
+(`pairRes_span_upper`, `pairRes_span_lower`): the producer searches for good coefficients by
+linear programming, the checker evaluates one integral of a step function.  Planning numbers
+(Proposition 11.49): with at most `z` beads within the cutoff of any bead, certificates at an
+accuracy of `ε₁` per bead have at most `exp(5.6·(number of pair types)²·z L S_c/ε₁)` evaluated
+conformations, whatever the chain length; if the squared distances below the cutoff take `G`
+values (lattice or rational-torus geometries), `(number of pair types)·G` evaluations
+determine the residual exactly.  What this does **not** cover: residuals with pair-specific
+terms (every pair its own type: no gain), many-body terms (profiles over triangles are
+needed), and a remainder outside the class — with a first-order remainder of envelope `d` the
+span rule gains the term `Σ_i (λ_i⁺ d(y,x_i) + λ_i⁻ d(x_i,y))` and requires `Σ λ_i = 1`
+(`sumClass_span_upper`), so large coefficients of both signs are not free.  To bound a whole
+voxel of conformations, replace `N^y` by its interval enclosure over the voxel.
+
 **From bound propagation to an envelope.**  Alternatively run interval or linear bound
 propagation through the network with site `i` ranging over its domain and the other sites over
 theirs, obtaining `δ_i(a,b)` directly; close the tables; export `c_i = max_{a,b} δ_i(a,b)`.
@@ -846,7 +874,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 114 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 132 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  The audit script runs it, and starts with a self-test in which
@@ -855,4 +883,4 @@ it as the executable reading of the schema and as a regression oracle for faster
 
 Synthetic stress tests and tightness benchmarks: `experiments/falsify_conjectures.py`
 (counterexample search for every theorem) and `experiments/separation_benchmarks.py`
-(B1–B11; numbers quoted in the theory report).
+(B1–B12; numbers quoted in the theory report).

@@ -160,6 +160,23 @@ for the original goal is negative: the verified per-torsion constants grow with 
 to the chain end, so the weighted-Hamming route cannot certify long chains (D42).  §12 of the
 report says what a publication would still need.
 
+**Since the last review (cycle 10; not yet refereed).**  Two additions, theory report
+§§11.16–11.17.  (i) *Without a hint on the cube.*  Above any threshold, the Gibbs mass of a
+member of the class is at most the excess of a dip on a ball of the size of the super-level
+set (a tail lemma; machine-checked up to Harper's theorem).  Hence plain Monte Carlo is
+accurate on the whole class with the exponent `min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}`, no non-adaptive
+algorithm does better (machine-checked lower bound), and the same samples give a certified
+bracket that needs no hint at the zero residual.  Whether adaptive algorithms without a hint
+reach the hinted exponent is open.  (ii) *Correlated uncertainty.*  A residual that is linear
+in known features with coefficients in a box is determined by rank-many evaluations; its
+bracket after evaluations is a weighted `ℓ¹` distance to the *span* of the evaluated feature
+vectors, where a first-order class has the distance to the nearest one (machine-checked;
+exactness is linear-programming duality).  Pair-additive residuals with unknown Lipschitz
+radial functions are of this kind, with the cumulative pair-count profiles as features; their
+envelope is a transport distance between pair-distance distributions, and certificates in
+that format do not grow with the chain length at extensive accuracy — the constructive
+counterpart of D42, for a smaller class of residuals.
+
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
 interval evaluation of force-field terms over voxels, and any claim of practical solver

@@ -31,3 +31,14 @@ What was verified and integrated, what was refuted, and what remains unverified 
 `COMMON.md` is the shared context given to every stream.  Scripts and raw outputs of the streams
 were produced in a session scratch directory; the ones needed to reproduce an integrated claim
 are copied next to the harness when the claim is integrated.
+
+## Cycle 10
+
+Two further workstreams were started after checkpoint `59e6761`, each on a question that the
+coordinator was working on at the same time, with the instruction to try to break the
+coordinator's claims first.
+
+| stream | question | brief | report |
+|---|---|---|---|
+| H | Algorithms without a hint on the cube: verify the Monte Carlo and non-adaptive results of theory report §11.16; is adaptivity enough to reach the hinted exponent? | `H_brief.md` | pending |
+| P | Chains: envelopes from pair-distance profiles (theory report §11.17); verification on synthetic chains, lower bounds, prior art. | `P_brief.md` | pending |

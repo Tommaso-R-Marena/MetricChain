@@ -836,6 +836,116 @@ def bench_generalised_dips(rng, quick):
     return rows
 
 
+def kl2(a, b):
+    r = 0.0
+    if a > 0:
+        r += a * math.log(a / b)
+    if a < 1:
+        r += (1 - a) * math.log((1 - a) / (1 - b))
+    return r
+
+
+def theta_nonadaptive(u, e1):
+    """min{KL(rho || 1/2) : KL(rho || p_u) <= e1}: exponent of non-adaptive algorithms (Theorems 11.44-11.45)."""
+    pu = 1 / (1 + math.exp(u))
+    if e1 >= kl2(0.5, pu):
+        return 0.0
+    lo, hi = pu, 0.5
+    for _ in range(200):
+        mid = (lo + hi) / 2
+        lo, hi = (mid, hi) if kl2(mid, pu) <= e1 else (lo, mid)
+    return kl2(lo, 0.5)
+
+
+def theta_hinted(u, e1):
+    rho = (math.log(2 / (1 + math.exp(-u))) + e1) / u
+    return kl2(rho, 0.5) if rho < 0.5 else 0.0
+
+
+def nonadaptive_bounds(n, u, eps, delta=0.05):
+    """(R*, ln lower bound, r0, ln upper bound): the non-adaptive lower bound (1 - 2 delta) 2^n / |B(R* - 1)|, R* the least
+    floor radius whose flattening lowers ln Z by more than eps (Theorem 11.45), and the Monte Carlo sample size
+    8 ln(1/delta) 2^n / |B(r0)|, r0 the largest radius with ln(2 (1 + Gamma_n(r))) + ln(1/delta) <= eps for all r <= r0
+    (Theorem 11.44)."""
+    logc = [math.lgamma(n + 1) - math.lgamma(j + 1) - math.lgamma(n - j + 1) for j in range(n + 1)]
+    logex, logball = cube_dip_tables(n, u)
+    lz_cone = n * math.log1p(math.exp(-u))
+
+    def lz_flat(R):
+        terms = [logc[j] - u * max(j, R) for j in range(n + 1)]
+        mx = max(terms)
+        return mx + math.log(sum(math.exp(t - mx) for t in terms))
+
+    Rstar = next((R for R in range(1, n + 1) if lz_cone - lz_flat(R) > eps), None)
+    lower = math.log(1 - 2 * delta) + n * math.log(2) - logball[Rstar - 1] if Rstar else 0.0
+    budget, r0, worst = eps - math.log(2 / delta), None, -math.inf
+    for r in range(1, n + 1):
+        g = logex[r] + n * math.log(2) - logball[r - 1]
+        worst = max(worst, g + math.log1p(math.exp(-g)) if g > 0 else math.log1p(math.exp(g)))
+        if worst > budget:
+            break
+        r0 = r
+    upper = math.log(8 * math.log(1 / delta)) + n * math.log(2) - (logball[r0] if r0 is not None else 0.0)
+    return Rstar, lower, r0, upper
+
+
+def bench_without_hint(rng, quick):
+    section("B12. Without a hint on the cube: Monte Carlo is optimal among non-adaptive algorithms")
+    out = dict(exponents=[], finite=[], simulation=[])
+    print("exponents at accuracy n*eps1 (eps1 as a fraction of the threshold ln cosh(u/2)):")
+    print(f"{'u':>7} | {'eps1/thr':>8} | {'with a hint (zero residual)':>27} | {'non-adaptive = Monte Carlo':>26} | {'ratio':>6} | {'Chebyshev bound ln cosh u':>25}")
+    for u in (0.5, 1.0, 2.0, math.log(16.0)):
+        thr = math.log(math.cosh(u / 2))
+        for frac in (0.0, 0.1, 0.25, 0.5, 0.75, 0.9):
+            a, b = theta_hinted(u, frac * thr), theta_nonadaptive(u, frac * thr)
+            out["exponents"].append(dict(u=u, frac=frac, hinted=a, nonadaptive=b))
+            print(f"{u:7.4f} | {frac:8.2f} | {a:27.5f} | {b:26.5f} | {b / a:6.3f} | {math.log(math.cosh(u)):25.5f}")
+            if not a < b:
+                raise RuntimeError("hinted exponent is not below the non-adaptive exponent")
+    ex = {(round(r["u"], 4), r["frac"]): r for r in out["exponents"]}
+    if not (abs(ex[(1.0, 0.0)]["hinted"] - 0.02914) < 2e-5 and abs(ex[(1.0, 0.0)]["nonadaptive"] - 0.11094) < 2e-5
+            and abs(ex[(0.5, 0.0)]["nonadaptive"] - 0.03030) < 2e-5 and abs(ex[(2.0, 0.0)]["nonadaptive"] - 0.32781) < 2e-5):
+        raise RuntimeError("documented exponents are not reproduced")
+    print("\nfinite n (delta = 0.05): ln(evaluations)/n for the non-adaptive lower bound and for the Monte Carlo sample size")
+    print(f"{'u':>5} | {'eps1':>7} | {'n':>5} | {'R*':>5} | {'lower':>8} | {'r0':>5} | {'upper':>8} | {'limit':>8}")
+    for u, frac in ((1.0, 0.25), (2.0, 0.5)):
+        e1 = frac * math.log(math.cosh(u / 2))
+        for n in (100, 400, 1600) if quick else (100, 400, 1600, 6400):
+            Rs, lo, r0, up = nonadaptive_bounds(n, u, n * e1)
+            th = theta_nonadaptive(u, e1)
+            out["finite"].append(dict(u=u, eps1=e1, n=n, Rstar=Rs, lower=lo / n, r0=r0, upper=up / n, limit=th))
+            print(f"{u:5.1f} | {e1:7.4f} | {n:5d} | {Rs:5d} | {lo / n:8.5f} | {str(r0):>5} | {up / n:8.5f} | {th:8.5f}")
+            if lo > up + 1e-9:
+                raise RuntimeError("lower bound above upper bound")
+    print("\nMonte Carlo at a cone (n = 60, u = 1; 400 repetitions; weights sampled exactly through the binomial law of the distance):")
+    print(f"{'M':>8} | {'median ln(Ahat/A)':>18} | {'1% quantile':>12} | {'certified lower end -ln(2(1+Gamma))':>36} | {'fraction below':>14}")
+    n, u, K = 60, 1.0, 8 * math.log(20.0)
+    logex, logball = cube_dip_tables(n, u)
+    lnA = n * math.log((1 + math.exp(-u)) / 2)
+    for M in (10 ** 3, 10 ** 4) if quick else (10 ** 3, 10 ** 4, 10 ** 5, 10 ** 6):
+        r = next(k for k in range(n + 1) if logball[k] >= n * math.log(2) + math.log(K / M) - 1e-12)
+        lg = (logex[r] + n * math.log(2) - logball[r - 1]) if r > 0 else -math.inf
+        cert = -(math.log(2) + (math.log1p(math.exp(lg)) if lg < 30 else lg))
+        reps = 400 if M <= 10 ** 5 else 100
+        vals = np.empty(reps)
+        for i in range(reps):
+            dist = rng.binomial(n, 0.5, size=M)
+            vals[i] = math.log(float(np.exp(-u * dist).mean())) - lnA
+        below = float((vals < cert).mean())
+        out["simulation"].append(dict(M=M, median=float(np.median(vals)), q01=float(np.quantile(vals, 0.01)), certified=cert, below=below))
+        print(f"{M:8d} | {np.median(vals):18.3f} | {np.quantile(vals, 0.01):12.3f} | {cert:36.3f} | {below:14.3f}")
+        if below > math.exp(-K / 8):
+            raise RuntimeError("Monte Carlo falls below the certified lower end too often")
+    print("\nadaptive against non-adaptive on the pair (cone, cone with flattened bottom), delta = 0.05:")
+    print(f"{'n':>5} | {'u':>4} | {'eps':>8} | {'adaptive evaluations':>20} | {'non-adaptive lower bound':>24}")
+    for n in (60, 200, 1000):
+        e1 = 0.25 * math.log(math.cosh(0.5))
+        Rs, lo, _, _ = nonadaptive_bounds(n, 1.0, n * e1)
+        print(f"{n:5d} | {1.0:4.1f} | {n * e1:8.2f} | {n + 2:20d} | {'e^%.1f' % lo:>24}")
+        out["finite"].append(dict(n=n, adaptive=n + 2, nonadaptive_ln=lo))
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true")
@@ -855,6 +965,7 @@ def main():
         "B9_best_first": bench_best_first(rng, args.quick),
         "B10_query_complexity": bench_query_complexity(rng, args.quick),
         "B11_generalised_dips": bench_generalised_dips(rng, args.quick),
+        "B12_without_hint": bench_without_hint(rng, args.quick),
     }
     if args.json:
         os.makedirs(os.path.dirname(os.path.abspath(args.json)), exist_ok=True)
