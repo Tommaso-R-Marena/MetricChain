@@ -1053,6 +1053,18 @@ What the coordinator did with it:
 * **Told the other division** (THY-MSG-0006; THY-REQ-0007): the exact tail function of the
   flat-histogram reference is the closure-plus-budget problem of their ENG-RES-0006 §2.
 
+**Added after the checkpoint (coordinator): a field always helps — proved.**  The workstream
+observed numerically that both exponents decrease with `|θ|` and proved `γ*θ < 0` to first
+order.  Proposition 11.65(b) now has a proof for every `t`: the ratio `ρ = I_θ/C^t` of the cosh
+form satisfies `ρ″ + t·tanh(x/2)ρ′ + (t(1−t)/4)sech²(x/2)ρ = 0` with boundary values 1 on the
+window `[θ−u, θ+u]`, so it is unimodal; the derivative at `γ = 0` has the sign of `−θ`; and by the
+envelope theorem `dF*/dθ ≤ 0` reduces to "the average of `tanh` over a sub-interval that is
+centred to the right is at least its average over the whole interval", which holds for an
+odd function that is concave on the positives.  Checked step by step numerically
+(`experiments/coordinator_checks/field_monotone_proof_check.py`: 1220 cases) and handed to
+referee R9 as an additional item.  Consequence: the uniform cube is the hardest member of
+the family, for adaptive and non-adaptive algorithms alike.
+
 A remark that is interpretation, not theorem: "uniform on every type class of the known
 part's order parameter" is a flat-histogram (multicanonical) ensemble.  In this toy class
 the theory says that such a sample is *minimax-optimal* among fixed samples for certified

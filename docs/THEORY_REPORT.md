@@ -4098,8 +4098,7 @@ so the hinted exponent at `g = 0` is that of Hamming balls around centres of an 
 (d) If `p ≠ ½`, then `∂F/∂γ(0,t) ≠ 0` for every `0 < t < 1` (sign of `p − ½`), hence `F* > F(0,·)` on
 `(0,1)`, the class threshold `E` exceeds the threshold `E_0` of `g = 0`, and
 **`R^max(e) > R_0(e)` for every `0 ≤ e < E`**: the hardest instance with a hint is an additive
-instance `γ*|x|` whose residual partly cancels the field (`γ*θ < 0` to first order, and in
-every computation).  For `p = ½` all three functions are those of §§11.16–11.18.
+instance `γ*|x|` whose residual partly cancels the field (`γ*θ < 0`: Proposition 11.65(b)).  For `p = ½` all three functions are those of §§11.16–11.18.
 
 **Lemma 11.60 (the shift identity with a field) [V] (`shift_identity`, `klBin_tilt`, `cone_rate_eq`,
 `sphere_rate_eq`; workstream F, Theorem F3).**  For every joint law of `(S, X)`,
@@ -4193,12 +4192,48 @@ the exact recursion from the base exponent then comes within any `η` of `R^max`
 So **"adaptive = hinted" persists with a known part, in the form: the worst case without a
 hint equals the hardest case with a hint** — and the hardest case is not the zero residual.
 
-**Proposition 11.65 (instance-optimality in the field) [P; (b) numerical; workstream F, Theorem
-F10].**  (a) *Not in the worst case:* for `θ ≠ 0` the worst-case exponent `R^max(ε₁)` of adaptive
+**Proposition 11.65 (instance-optimality in the field; a field always helps) [P; (a), (c):
+workstream F, Theorem F10; (b): the coordinator, after the workstream's numerical
+observation].**  (a) *Not in the worst case:* for `θ ≠ 0` the worst-case exponent `R^max(ε₁)` of adaptive
 algorithms without a hint is strictly larger than the hinted exponent `R_0(ε₁)` of the
 instance `(f, g = 0)`; between `E_0` and `E` the instance `g = 0` is cheap with a hint while the
-class is exponentially hard.  (b) Both exponents decrease with `|θ|` in every computation
-(`F*(t; θ)` nonincreasing in `|θ|` on a grid of 121 fields; no proof).  (c) *Yes at symmetric
+class is exponentially hard.  (b) *A field always helps, and the hardest residual always
+works against it.*  For every `0 < t < 1` the function `θ ↦ F*(t; θ)` is even and strictly
+decreasing on `[0, ∞)`, and its maximiser has `γ*·θ < 0` for `θ ≠ 0`.  Hence `R^max(e; θ)`, the class
+threshold `E(θ)`, `θ_na(x; θ)` and `a(θ)` are nonincreasing in `|θ|`: the uniform cube is the
+hardest case, for adaptive and for non-adaptive algorithms.  (The workstream had this as a
+numerical observation on a grid of 121 fields, and `γ*θ < 0` to first order.)
+*Proof of (b)* (every step checked numerically: `experiments/coordinator_checks/field_monotone_proof_check.py`).
+Write `x = θ + γ` for the total field and, in the cosh form of Theorem 11.59(b),
+`F(γ,t) = ln ρ_θ(θ+γ)` with `ρ_θ = I_θ/C^t`, where `I_θ` solves `I″ = (t/2)²I` on the window `[θ−u, θ+u]` and
+equals `C^t` at its ends.  (i) Since `(C^t)″ = (t/4)C^t[1 − (1−t)tanh²(x/2)]`, the ratio satisfies
+
+    ρ″ + t·tanh(x/2)·ρ′ + (t(1−t)/4)·sech²(x/2)·ρ = 0,        ρ = 1 at both ends,   ρ > 0.
+
+At a critical point `ρ″ < 0`, so every critical point is a strict local maximum: there is
+exactly one, `x* = θ + γ*`, and `F*(t; θ) = ln ρ_θ(x*)`.  (ii) Let `A_u ∈ (0, 1)` be the average of `tanh`
+over `[(θ−u)/2, (θ+u)/2]`, `θ > 0`.  Then `∂_γF(0,t) = (t/2)[tanh(tuA_u/2)/tanh(tu/2) − tanh(θ/2)]`; the
+quotient is increasing in `t` (convexity of `sinh`) and equals `tanh(θ/2)` at `t = 1`, so the
+derivative is negative for `t < 1`, and by (i) `γ* < 0`.  (iii) `γ*` is a nondegenerate interior
+maximum, so by the envelope theorem `dF*/dθ` is the partial derivative in `θ` at `γ*`; inserting
+the first-order condition and `cosh a ± sinh a·tanh b = cosh(a ± b)/cosh b`, the inequality
+`dF*/dθ ≤ 0` becomes
+
+    ln cosh Q − ln cosh P  ≥  (1−t)·[ ln cosh((θ+u)/2) − ln cosh((θ−u)/2) ],
+    P = (θ−u)/2 + t(u−γ*)/2,     Q = (θ+u)/2 − t(u+γ*)/2,
+
+that is: *the average of `tanh` over `[P, Q]` is at least its average over
+`[(θ−u)/2, (θ+u)/2]`*.  The first interval lies inside the second, has length `(1−t)u`, and its
+centre `(θ − tγ*)/2` is to the right of `θ/2` because `γ* < 0`.  (iv) For an odd increasing
+function `f` that is concave on `[0, ∞)` and `c ≥ 0`, the average of `f` over `[c−r, c+r]` is
+nonincreasing in `r` (for `r ≤ c` by concavity; for `r > c` it is `(2r)^{-1}∫_{r−c}^{r+c} f`, whose
+derivative has the sign of `r[f(r+c) − f(r−c)] − ∫_{r−c}^{r+c} f ≤ (r−c)f(r+c) − (r+c)f(r−c) ≤ 0`,
+by the trapezoid bound for a concave function and because `f(x)/x` is nonincreasing).  So a
+sub-interval with the same centre has at least the average of the whole interval, and
+moving it to the right increases its average.  The statements about `R^max`, `E`, `θ_na` and `a`
+follow because each is a pointwise nondecreasing functional of `F*`
+(`θ_na(x) = sup_{τ<1}(F*(τ) − τx)/(1 − τ)`).  ∎
+(c) *Yes at symmetric
 instances:* the type-stratified two-sample bracket (per type class: threshold at the `K`-th
 largest weight of one sample, truncated mean over a second, tail by Lemma 11.62 with a
 maximum over sets of bounded type-wise density) is valid on all of `L_u`, and with doubling
@@ -4353,7 +4388,7 @@ reference instance; a nested hint-free algorithm with a known part; the exponent
    (which gives the worse exponents of plain sampling from the Gibbs measure of the known
    part — the guess of the earlier checkpoints was wrong in this respect, D47).  Open there:
    an explicit finite-`n` bound for the tail function of the reference; bounded accuracies;
-   a proof that both exponents decrease with the field; instance-optimality beyond symmetric
+   instance-optimality beyond symmetric
    instances; larger alphabets and sites of several types (a sketch); known parts with
    interactions (nothing).  For Euclidean Lipschitz functions on Gaussian space
    neither the lower bound (half-spaces are detected from far away) nor the algorithm (blocks
