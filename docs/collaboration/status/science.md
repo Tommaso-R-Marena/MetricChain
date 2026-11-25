@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 1 of the science branch (2026-11-25, about 17:55 UTC; the commit time is
+*Updated at checkpoint 3 of the science branch (2026-11-25, about 18:20 UTC; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -31,7 +31,7 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 
 | id | subject | kind | state |
 |---|---|---|---|
-| PI | **inference limits** — what energy evaluations, local ensemble-averaged data and thermodynamic data jointly determine; identified sets with kernel-checkable dual certificates | own theory | version 1 published: `docs/science/INFERENCE_LIMITS.md` (seven statements with proofs, three numerical checks) |
+| PI | **inference limits** — what energy evaluations, local ensemble-averaged data and thermodynamic data jointly determine; identified sets with kernel-checkable dual certificates; falsification certificates; exact identified sets on the lattice chain | own theory + numerics | version 2 published: `docs/science/INFERENCE_LIMITS.md` |
 | A1 | prior art, full text: the query-complexity cluster (theory report G11, G18–G23, G25–G27) | originality | running |
 | A2 | prior art, full text: kernels vs proof logging; certificates as coverings; lever arm; profiles vs scattering / homometry; the limit shape vs rotation sets | originality | running |
 | R1 | independent review of theory report §11.25 → SCI-REV-0001 | review + replication | running |
@@ -40,7 +40,10 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 | K | certified kinetics: barriers, exit times, capacities (`(min,max)` and Dirichlet/Thomson certificates) | own theory | running |
 | M | prior art for the measurement side | originality | running |
 | X | alternatives to worst-case classes (average-case, weighted, structural conditions) | own theory | running |
-| — | replication of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | replication | Lean part done: build passes, forbidden-token scan clean, **axiom audit OK, 3423 declarations, 386 headline theorems** (identical to the theory division's status file); Python harness running |
+| R3 | adversarial referee for our own `INFERENCE_LIMITS.md` v2 | review + replication | running |
+| R4 | independent review of theory report §11.24 (rounds) → SCI-REV-0003 | review + replication | running |
+| — | replication of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | replication | **completed: `AUDIT PASSED`** — 56 Lean files, axiom audit OK on 3423 declarations, harness as expected, 267 mutations (266 caught, 1 expected pass); first replication of the ten Lean files added since `4cef47e`; `docs/science/INDEPENDENT_VALIDATION.md` §1.1 |
+| — | replication of the engineering lattice-chain class tables | replication | **completed for `n = 1 … 10`: identical** (own enumerator); `INDEPENDENT_VALIDATION.md` §1.2 |
 
 Briefs: `docs/science/workstreams/*_brief.md`; shared rules: `docs/science/workstreams/COMMON.md`.
 Workstream reports are published only after the coordinator has read them; until then
@@ -58,6 +61,11 @@ they are not on the branch.
 | S6 | the pair-distance-profile class of theory report §11.17 is the class identified by (partial) pair-distance distributions, i.e. by scattering data | **[K]** (exponential families; Henderson) — a translation, not a theorem of ours |
 | S7 | the residual maximising a ratio of macrostate partition functions over an envelope class is not constant on the macrostate (three-point example) | **[P]** |
 | S8 | the verified `(min,+)` and `(+,×)` kernels are dual-feasibility checkers for identified sets of ensemble averages (model-free; KL ball); for envelope classes the dual object is a flow with gains | soundness **[P]**, duality **[K]** |
+| S9 | a mean-energy oracle does not lower the worst-case exponent: a visible basin can have a hidden twin with exactly the same mean energy and `ln Z` larger by `≈ ln 2` | mechanism **[P]**, existence of the root **[N]** (exact arithmetic, `n ≤ 5000`) |
+| S10 | data certify a *lower* bound on the envelope constant and on `KL(truth‖model)`; on the lattice chain the three-shell profile certifies `0.87–0.96` of the strength of a missing contact attraction | soundness **[P]**; numbers **[N]**, exact LPs, 8–9 beads |
+| S11 | lattice chain, model-free: an exact averaged three-shell profile leaves the mean gauche fraction undetermined over `0.65` of its range at 27 beads (from the engineering tables), widening with length; a complete pair-distance histogram leaves `0.33` at 15 beads | **[N]**, exact LPs |
+| S12 | the limit shape of theory report §11.22 is the asymptotic model-free identified set of (mean profile, mean gauche fraction); its upper boundary is not computed | **[P]** given theory Theorem 11.69 (bridges); walks under Conjecture 11.75 |
+| S13 | model + envelope class + data together give intervals several times narrower than each alone (9 beads) | **[N]**, exact LPs |
 
 ## Outstanding requests
 
