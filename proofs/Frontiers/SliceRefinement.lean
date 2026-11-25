@@ -150,4 +150,14 @@ theorem mean_le_of_biregular {α β : Type*} [DecidableEq α] [DecidableEq β] (
     exact hmain
   exact le_of_mul_le_mul_left h6 ha'
 
+/-- **Any term gives a lower end.**  The procedure of Theorem 11.92(b) returns the lower end `max_t p t * L t`, while
+`sum_mem_bracket` states the lower end of the class that maximises the weighted upper ends; every term is a valid lower
+end.  (Stated by the Scientific Discovery Division in its review SCI-REV-0001, finding m7, so that the machine-checked
+statement matches the text.) -/
+theorem lower_end_any {ι : Type*} [Fintype ι] (p A L : ι → ℝ) (hp : ∀ t, 0 ≤ p t) (hA : ∀ t, 0 ≤ A t)
+    (hL : ∀ t, L t ≤ A t) (j : ι) : p j * L j ≤ ∑ t, p t * A t :=
+  calc p j * L j ≤ p j * A j := mul_le_mul_of_nonneg_left (hL j) (hp j)
+    _ ≤ ∑ t, p t * A t :=
+      Finset.single_le_sum (f := fun t => p t * A t) (fun t _ => mul_nonneg (hp t) (hA t)) (Finset.mem_univ j)
+
 end MetricChain.SliceRefinement

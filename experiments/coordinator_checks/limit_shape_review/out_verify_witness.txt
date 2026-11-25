@@ -1,0 +1,14 @@
+_0_0_1__coplanar_W64               N =  12041  walk True  bridge True  (h3,h8,h11,g) = (67, 939, 12182, 1329)  two counts agree True  (h,g)/N = (0.0056, 0.0780, 1.0117; 0.1104)  168/(N+3) = 0.01395  [0.4 s]
+_0_12_5_22_5__g_4_5_W128           N = 166199  walk True  bridge True  (h3,h8,h11,g) = (1717, 376013, 687789, 131710)  two counts agree True  (h,g)/N = (0.0103, 2.2624, 4.1383; 0.7925)  168/(N+3) = 0.00101  [2.1 s]
+_0_12_5_22_5__g_4_5_W64            N =  21235  walk True  bridge True  (h3,h8,h11,g) = (606, 45769, 82876, 16567)  two counts agree True  (h,g)/N = (0.0285, 2.1554, 3.9028; 0.7802)  168/(N+3) = 0.00791  [0.3 s]
+_0_1_2_9_4__g_1_W64                N =  12767  walk True  bridge True  (h3,h8,h11,g) = (128, 6369, 26941, 12379)  two counts agree True  (h,g)/N = (0.0100, 0.4989, 2.1102; 0.9696)  168/(N+3) = 0.01316  [0.1 s]
+_0_1_3__checkerboard_W64           N =  17796  walk True  bridge True  (h3,h8,h11,g) = (660, 18651, 50084, 2192)  two counts agree True  (h,g)/N = (0.0371, 1.0480, 2.8143; 0.1232)  168/(N+3) = 0.00944  [0.2 s]
+_0_3_4__W3_W64                     N =  22351  walk True  bridge True  (h3,h8,h11,g) = (382, 60150, 83122, 2349)  two counts agree True  (h,g)/N = (0.0171, 2.6912, 3.7189; 0.1051)  168/(N+3) = 0.00752  [0.2 s]
+_1_2_2_5_2__W64                    N =  17245  walk True  bridge True  (h3,h8,h11,g) = (7778, 31236, 39648, 1565)  two counts agree True  (h,g)/N = (0.4510, 1.8113, 2.2991; 0.0908)  168/(N+3) = 0.00974  [0.2 s]
+_1_2_4_9_2__W64                    N =  27144  walk True  bridge True  (h3,h8,h11,g) = (12436, 98046, 113574, 2722)  two counts agree True  (h,g)/N = (0.4581, 3.6121, 4.1841; 0.1003)  168/(N+3) = 0.00619  [0.3 s]
+_1_3_5_3_3__g_2_3_W64              N =  16238  walk True  bridge True  (h3,h8,h11,g) = (5001, 25514, 45530, 10743)  two counts agree True  (h,g)/N = (0.3080, 1.5713, 2.8039; 0.6616)  168/(N+3) = 0.01034  [0.1 s]
+_1_5_6__full_W64                   N =  33988  walk True  bridge True  (h3,h8,h11,g) = (30825, 155368, 187735, 3006)  two counts agree True  (h,g)/N = (0.9069, 4.5713, 5.5236; 0.0884)  168/(N+3) = 0.00494  [0.4 s]
+
+real	0m4.282s
+user	0m4.858s
+sys	0m0.094s

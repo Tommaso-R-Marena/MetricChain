@@ -1,0 +1,9 @@
+p = 0.30, t = 0.431; cube value per site 0.028727; Lyapunov limit of the tilted Markov family: max_c G_inf = 0.038693
+n= 6: optimal site-wise law F = [0.2391332, 0.2391334] (per site 0.039856) | best tilted Markov 0.2343569 at c=1.40 (per site 0.039059) | support(>1e-6) 8 labels, P(label flip at the middle bond) = 0.2851 | centre: I(x_{m-1};x_{m+1}|x_m) = 2.13e-03 | 1 s
+n= 8: optimal site-wise law F = [0.3214667, 0.3214667] (per site 0.040183)  increment (F_n - F_{n-2})/2 = 0.041167 | best tilted Markov 0.3092753 at c=1.10 (per site 0.038659) | support(>1e-6) 12 labels, P(label flip at the middle bond) = 0.1405 | centre: I(x_{m-1};x_{m+1}|x_m) = 6.87e-04 | 5 s
+n=10: optimal site-wise law F = [0.4024336, 0.4024336] (per site 0.040243)  increment (F_n - F_{n-2})/2 = 0.040483 | best tilted Markov 0.3854915 at c=1.00 (per site 0.038549) | support(>1e-6) 18 labels, P(label flip at the middle bond) = 0.1050 | centre: I(x_{m-1};x_{m+1}|x_m) = 1.33e-03 | 273 s
+n=12: optimal site-wise law F = [0.4839402, 0.4839747] (per site 0.040328)  increment (F_n - F_{n-2})/2 = 0.040753 | best tilted Markov 0.4622122 at c=0.95 (per site 0.038518) | support(>1e-6) 40 labels, P(label flip at the middle bond) = 0.0852 | centre: I(x_{m-1};x_{m+1}|x_m) = 2.02e-03 | 404 s
+
+real	6m44.627s
+user	12m46.627s
+sys	0m0.992s

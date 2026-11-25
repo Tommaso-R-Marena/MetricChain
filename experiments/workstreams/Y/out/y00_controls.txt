@@ -1,0 +1,26 @@
+closed forms (cube, u=1): h=0.029139 a=0.110944 E=0.120115
+cube, one site               |V|=   2  h=[0.0291391, 0.0291391] at t*=0.4900 | SLSQP 0.0291391 | game-LP at centre 0.0291391 | a=[0.1109441, 0.1109441] | E=[0.1201145, 0.1201145]
+block of 2 independent sites |V|=   6  h=[0.0291391, 0.0291391] at t*=0.4900 | SLSQP 0.0291391 | game-LP at centre 0.0291391 | a=[0.1109441, 0.1109441] | E=[0.1201145, 0.1201145]
+    weight of the 2 non-additive vertices in the optimal M for h: 3.317e-11 (the solver's M; any M with the same value is optimal)
+    weight of the 2 non-additive vertices in the optimal M for a: 9.001e-12 (the solver's M; any M with the same value is optimal)
+    weight of the 2 non-additive vertices in the optimal M for E: 2.006e-12 (the solver's M; any M with the same value is optimal)
+  same, additive labels only |V|=   4  h=[0.0291391, 0.0291391] at t*=0.4900 | SLSQP 0.0291391 | game-LP at centre 0.0291391 | a=[0.1109441, 0.1109441] | E=[0.1201145, 0.1201145]
+  same, non-additive only    |V|=   2  h=[0.0145696, 0.0145696] at t*=0.4900 | SLSQP 0.0145696 | game-LP at centre 0.0145696 | a=[0.0554720, 0.0554720] | E=[0.0600573, 0.0600573]
+block of 3 independent sites |V|=  38  h=[0.0291391, 0.0291391] at t*=0.4900 | SLSQP 0.0291391 | game-LP at centre 0.0291391 | a=[0.1109441, 0.1109441] | E=[0.1201145, 0.1201145]
+    weight of the 30 non-additive vertices in the optimal M for h: 3.289e-11 (the solver's M; any M with the same value is optimal)
+    weight of the 30 non-additive vertices in the optimal M for a: 9.047e-12 (the solver's M; any M with the same value is optimal)
+    weight of the 30 non-additive vertices in the optimal M for E: 6.267e-12 (the solver's M; any M with the same value is optimal)
+  same, additive labels only |V|=   8  h=[0.0291391, 0.0291391] at t*=0.4900 | SLSQP 0.0291391 | game-LP at centre 0.0291391 | a=[0.1109441, 0.1109441] | E=[0.1201145, 0.1201145]
+  same, non-additive only    |V|=  30  h=[0.0194261, 0.0194261] at t*=0.4900 | SLSQP 0.0194261 | game-LP at centre 0.0194261 | a=[0.0763123, 0.0763123] | E=[0.0800763, 0.0800763]
+L=1: 2 height functions; all are vertices: True
+L=2: 6 height functions; all are vertices: True
+L=3: 38 height functions; all are vertices: True
+L=4: 990 height functions; all are vertices: True
+weights [1.0, 1.7] : trees 8 wv_lib 8 same set: True
+weights [1.847, 1.847] : trees 6 wv_lib 6 same set: True
+weights [0.6, 1.0] : trees 8 wv_lib 8 same set: True
+weights [1.847, 1.0, 1.847] : 120 vertices (tree enumeration); all pass the vertex test: True
+weights [0.677, 1.0, 0.677] : 96 vertices (tree enumeration); all pass the vertex test: True
+weights [1.0, 1.0, 1.526] : 96 vertices (tree enumeration); all pass the vertex test: True
+field control bin (0.7,0.3)  |V|=   2  h=[0.0250335, 0.0250335] at t*=0.4901 | SLSQP 0.0250335 | game-LP at centre 0.0250335 | a=[0.0953005, 0.0953005] | E=[0.1031310, 0.1031310]
+all controls passed; 108.5 s

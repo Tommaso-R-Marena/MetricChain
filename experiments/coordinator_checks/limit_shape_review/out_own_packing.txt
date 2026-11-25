@@ -1,0 +1,8 @@
+(L, eps1) = (1, 1/2): step 0.14, T0 grid 90: 13180 candidates (8980 from the 3-d grid); own greedy packing: 106 points (46 in T0); exact pairwise verification: True; smallest margin 5.65e-05; 24 s
+(L, eps1) = (1/5, 1/2): step 0.35, T0 grid 28: 1032 candidates (583 from the 3-d grid); own greedy packing: 8 points (7 in T0); exact pairwise verification: True; smallest margin 4.54e-03; 2 s
+(L, eps1) = (1/5, 1/4): step 0.25, T0 grid 56: 3260 candidates (1593 from the 3-d grid); own greedy packing: 19 points (11 in T0); exact pairwise verification: True; smallest margin 2.14e-03; 4 s
+(L, eps1) = (1, 1/4): step 0.11, T0 grid 180: 34898 candidates (18413 from the 3-d grid); own greedy packing: 413 points (146 in T0); exact pairwise verification: True; smallest margin 8.42e-05; 56 s
+
+real	0m56.691s
+user	0m56.234s
+sys	0m0.399s

@@ -1,0 +1,14 @@
+p = 0.30, u = 1, grid G=101, C=11;  cube h = 0.029139, a = 0.110944
+  t=0.35: F_inf(t) <= 0.041514 at qt=0.2286 (unconverged end of the bracket: 0.041514);  /(1-t): 0.063868;  qt=p gives 0.046910   [6 s]
+  t=0.40: F_inf(t) <= 0.042184 at qt=0.2314 (unconverged end of the bracket: 0.042162);  /(1-t): 0.070307;  qt=p gives 0.048463   [11 s]
+  t=0.45: F_inf(t) <= 0.042011 at qt=0.2348 (unconverged end of the bracket: 0.042011);  /(1-t): 0.076384;  qt=p gives 0.048913   [17 s]
+  t=0.50: F_inf(t) <= 0.041086 at qt=0.2375 (unconverged end of the bracket: 0.041053);  /(1-t): 0.082173;  qt=p gives 0.048331   [22 s]
+  h <= 0.042233 at t=0.405, qt=0.2324   (ratio to the cube 1.449)   [75 s]
+     the same point (t, qt) on the grid G=201, C=21: [0.042233, 0.044640]   [81 s]
+  a <= 0.129691 at qt=0.2623 (unconverged end 0.129509; ratio to the cube 1.169)   [87 s]
+  E <= 0.2324005 (relaxed growth of max KL(pi||pi_phi); E_F = 0.2324005)
+87.0 s
+
+real	1m27.570s
+user	1m24.603s
+sys	0m2.459s

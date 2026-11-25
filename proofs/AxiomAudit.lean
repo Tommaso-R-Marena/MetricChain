@@ -51,10 +51,12 @@ import proofs.Frontiers.SetLimit
 import proofs.Frontiers.TypeQuantiles
 import proofs.Frontiers.SymmetricSampling
 import proofs.Frontiers.TwoRounds
+import proofs.Frontiers.TwoRoundsExpected
 import proofs.Frontiers.GroupSampling
 import proofs.Frontiers.SliceRefinement
 import proofs.Frontiers.RenyiCentre
 import proofs.Frontiers.MacroRatio
+import proofs.Frontiers.Scattering
 import proofs.AuditCommand
 
 /-!
@@ -488,6 +490,7 @@ import proofs.AuditCommand
 #print axioms MetricChain.SliceRefinement.argmax_deficit_le
 #print axioms MetricChain.SliceRefinement.deficit_ge
 #print axioms MetricChain.SliceRefinement.mean_le_of_biregular
+#print axioms MetricChain.SliceRefinement.lower_end_any
 #print axioms MetricChain.RenyiCentre.scale_le_inv_sum
 #print axioms MetricChain.RenyiCentre.exists_ratio_le
 #print axioms MetricChain.RenyiCentre.eq_of_forall_ratio_ge
@@ -501,6 +504,18 @@ import proofs.AuditCommand
 #print axioms MetricChain.MacroRatio.closed_pair_within_B
 #print axioms MetricChain.MacroRatio.closed_pair_cross
 #print axioms MetricChain.MacroRatio.two_point_witness
+#print axioms MetricChain.TwoRounds.R4.card_distinguished_le_sum
+#print axioms MetricChain.TwoRounds.R4.two_round_expected_bound
+#print axioms MetricChain.TwoRounds.R4.two_round_expected_cost
+#print axioms MetricChain.TwoRounds.R4.two_round_bound_of_class
+#print axioms MetricChain.Scattering.le_add_cube
+#print axioms MetricChain.Scattering.sub_cube_le
+#print axioms MetricChain.Scattering.abs_sinc_sub_le
+#print axioms MetricChain.Scattering.sinc_sqrt_lipschitz
+#print axioms MetricChain.Scattering.debye_sum_sub_le
+#print axioms MetricChain.Scattering.debye_sub_le
+#print axioms MetricChain.Scattering.debye_eq_of_matching
+#print axioms MetricChain.Scattering.one_sub_sinc_le
 #print axioms MetricChain.GamePair.exactRec_congr
 #print axioms MetricChain.GamePair.HintShape.pair
 #print axioms MetricChain.GamePair.HintShape.exists_pair

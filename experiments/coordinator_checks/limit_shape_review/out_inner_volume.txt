@@ -1,0 +1,17 @@
+exact points only: volume of the hull = 1/12  (vertices: 4 )
+hull C of the 14 points: 18 Qhull triangles -> 18 distinct supporting planes (each exact, all 14 points on the inner side);
+   exact vertex enumeration of the intersection of these halfspaces: 11 vertices, all among the 14 points  => the facet list is complete
+   Euler check (simplicial): triangles = 2*vertices - 4: 18 = 18: True
+   points of the list that are not vertices of C (indices): [4, 6, 13]
+   vol C = 7519845747305846809757542831/4608578267404509405329382060 = 1.631706
+delta = 42/3011 = 0.013949;  eroded polytope: 30 vertices;  vol(C eroded) = 1.563226
+   exact value as a fraction has numerator/denominator of 286/286 digits;  vol >= 1.56: True;  >= 1.563: True
+   certificate: (vertex of E) + delta*(vertex of the unit ball of ||.||_c) lies in C for all 180 combinations: True
+   float cross-check (Qhull volume of the eroded vertices): 1.5632256123672519 ; of C: 1.6317062032974707
+   per cent of the bulk box [0,1]x[0,5]x[0,6] (volume 30): 5.21 (inner), 10.42 (outer, K_2)
+   W3 woodpile -> (0,3,4): nearest verified bridge density (0.0171,2.6912,3.7189); ||diff||_c = 1.534 = 9.6 % of ||vertex||_c = 16; coordinatewise relative deviations p8: 10.3 %, p11: 7.0 %
+   crossed rods -> (1/2,4,9/2): nearest verified bridge density (0.4581,3.6121,4.1841); ||diff||_c = 2.244 = 9.0 % of ||vertex||_c = 25; coordinatewise relative deviations p8: 9.7 %, p11: 7.0 %
+
+real	0m0.690s
+user	0m0.871s
+sys	0m0.055s

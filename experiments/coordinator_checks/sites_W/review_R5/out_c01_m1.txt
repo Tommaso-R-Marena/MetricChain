@@ -1,0 +1,11 @@
+(i),(ii)  v by two programmes, the distance-to-the-window formula, and the window step
+   cases 120  |primal - dual| <= 6.6e-15;  |(I - v) - KL(P || pi_gamma*)| <= 2.8e-16;  window violation of P'' <= 1.2e-07;  |v(P'') - (v(P) - W(P'',P))|, |v(P'') - I(P'')| <= 2.1e-14;  max[(I - v) - chi2(P||Q)] = -3.0e-04 (must be <= 0)
+   time 4.1 s
+(iii) evaluation lemma  V(mu, B; v) <= Rhat(B - alpha(mu))  [a pass means: a feasible exit profile with MI <= Rhat + 1e-7 was found]
+   asym               e = 0.3E: Rhat = 0.022108007 (t* = 0.3323);  V at the generalised-dip profile = 0.022108007  (diff -2.9e-16)
+   tri                e = 0.3E: Rhat = 0.032076870 (t* = 0.3243);  V at the generalised-dip profile = 0.032076870  (diff 4.1e-16)
+   mix(bin,path)      e = 0.3E: Rhat = 0.027759420 (t* = 0.3173);  V at the generalised-dip profile = 0.027759420  (diff -1.4e-15)
+   asym/tri 0.3/0.7   e = 0.3E: Rhat = 0.029083263 (t* = 0.3260);  V at the generalised-dip profile = 0.029083263  (diff -3.5e-16)
+   random (profile, budget) pairs: 48, with V > Rhat + 1e-7: 0;  max(V - Rhat) = 2.27e-16
+time 82.9 s
+   of these with Rhat > 1e-6: 45 (negative accuracy B - alpha < 0 in 22); there V - Rhat ranges in [-3.55e-01, -5.58e-06]

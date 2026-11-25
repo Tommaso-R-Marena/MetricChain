@@ -1,0 +1,8 @@
+path  t = 0.20: Renyi value 0.061946069924, dual bound 0.061946069924 | blind search with default tolerances 0.061946072621 (excess over the dual bound +2.70e-09) | certified upper bound of F at the point found 0.061946063599 (excess -6.32e-09)
+path  t = 0.46: Renyi value 0.089589014471, dual bound 0.089589014471 | blind search with default tolerances 0.089589016923 (excess over the dual bound +2.45e-09) | certified upper bound of F at the point found 0.089588999714 (excess -1.48e-08)
+asym  t = 0.20: Renyi value 0.030102224118, dual bound 0.030102225116 | blind search with default tolerances 0.030102226308 (excess over the dual bound +1.19e-09) | certified upper bound of F at the point found 0.030102223930 (excess -1.19e-09)
+asym  t = 0.46: Renyi value 0.045316832036, dual bound 0.045316832036 | blind search with default tolerances 0.045316835536 (excess over the dual bound +3.50e-09) | certified upper bound of F at the point found 0.045316831803 (excess -2.34e-10)
+asym  t = 0.80: Renyi value 0.027594616704, dual bound 0.027594616704 | blind search with default tolerances 0.027594618930 (excess over the dual bound +2.23e-09) | certified upper bound of F at the point found 0.027594616683 (excess -2.16e-11)
+tri   t = 0.46: Renyi value 0.066549518533, dual bound 0.066549518533 | blind search with default tolerances 0.066549518533 (excess over the dual bound -1.11e-16) | certified upper bound of F at the point found 0.066549518533 (excess -3.61e-16)
+largest excess of the blind search over the certified dual bound: default tolerances +3.50e-09; re-evaluated with a certified bound -3.61e-16
+time 14.7 s

@@ -1,0 +1,4 @@
+u = 1: a = 0.110944, h/a = 0.26265, eps* = 0.120115, k(p_u) = 0.0e+00
+value at the printed witness (phi, xi1/a, xi2/a) = (0.512, 0.631, 0.107): 0.54026 a
+best in a box of +-0.004 around it: 0.54020 a at (phi, xi1/a, xi2/a) = (0.5122, 0.6320, 0.1074)
+two rounds for comparison, T2(0)/a = 0.62432 (reviewer), 0.6243 (ours); three rounds: every admissible ladder is an upper bound

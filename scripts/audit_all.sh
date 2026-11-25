@@ -126,7 +126,7 @@ else
 fi
 [ "${PIPESTATUS[0]}" = 0 ] || fail "falsification harness reported a misbehaving test"
 if [ -f experiments/mutation_tests.py ]; then
-  python3 experiments/mutation_tests.py 2>/dev/null | tail -n 1 || fail "mutation tests"
+  python3 experiments/mutation_tests.py 2>/dev/null | tail -n 2 || fail "mutation tests"
   [ "${PIPESTATUS[0]}" = 0 ] || fail "a mutation of the harness was not caught (or the mutation list is stale)"
 fi
 if [ -f experiments/separation_benchmarks.py ]; then

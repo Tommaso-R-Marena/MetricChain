@@ -1,0 +1,13 @@
+(0,3,4) W3 | box 64 | strands 635, linker sites 904, not linked 0 | N = 22351 | file wit/_0_3_4__W3_W64.npy | 6.9 s
+(0,1,3) checkerboard | box 64 | strands 480, linker sites 1405, not linked 0 | N = 17796 | file wit/_0_1_3__checkerboard_W64.npy | 1.8 s
+(0,0,1) coplanar | box 64 | strands 320, linker sites 1147, not linked 0 | N = 12041 | file wit/_0_0_1__coplanar_W64.npy | 10.2 s
+(1/2,2,5/2) | box 64 | strands 496, linker sites 825, not linked 0 | N = 17245 | file wit/_1_2_2_5_2__W64.npy | 4.9 s
+(1/2,4,9/2) | box 64 | strands 756, linker sites 1545, not linked 0 | N = 27144 | file wit/_1_2_4_9_2__W64.npy | 6.5 s
+(1,5,6) full | box 64 | strands 976, linker sites 1211, not linked 0 | N = 33988 | file wit/_1_5_6__full_W64.npy | 4.3 s
+(0,12/5,22/5) g=4/5 | box 64 | strands 357, linker sites 1713, not linked 0 | N = 21235 | file wit/_0_12_5_22_5__g_4_5_W64.npy | 11.5 s
+(1/3,5/3,3) g=2/3 | box 64 | strands 310, linker sites 986, not linked 0 | N = 16238 | file wit/_1_3_5_3_3__g_2_3_W64.npy | 3.2 s
+(0,1/2,9/4) g=1 | box 64 | strands 189, linker sites 625, not linked 0 | N = 12767 | file wit/_0_1_2_9_4__g_1_W64.npy | 7.8 s
+
+real	0m57.094s
+user	0m56.343s
+sys	0m0.150s

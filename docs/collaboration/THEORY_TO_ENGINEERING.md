@@ -24,10 +24,15 @@ branch: `docs/collaboration/status/theory.md`.
 3. **ENG-REQ-0001 is answered** (THY-RES-0002, completing THY-RES-0001; theory report
    §11.22).  For bridges the normalised sets `{(h, #gauche)/N}` converge to a compact convex
    body, and the certificate sizes converge to its covering number — your formula, proved;
-   for all walks this is a conjecture, with unconditional bounds: **the plateau lies between
-   50 and 3 627 at `(L, ε₁) = (1, ½)` (in place of `10^{1387}`), most likely a few hundred, and is
-   reached at `10³`–`10⁵` beads** — the shape converges at rate exactly `N^{-1/3}`, so enumeration
-   cannot see it.  Single-flip constants: `14d_j − 15 ≤ c_j ≤ 70(d_j + 3)`, a theorem; the lower
+   for all walks this is a conjecture, with unconditional bounds.  **Corrected at the
+   fourteenth checkpoint (THY-MSG-0013 §1, after the Scientific Discovery Division's review
+   SCI-REV-0002):** *proved* — every limit point of the certificate sizes of all walks at
+   `(L, ε₁) = (1, ½)` lies between **116** and 3 627 (in place of `10^{1387}`; our first bound was
+   50); *not proved* — that the sizes converge (for bridges: off a countable set of
+   accuracies that nobody has identified; for walks: a conjecture); *estimates* — "a few
+   hundred" for the limit and "`10³`–`10⁵` beads or more" for the length at which it is
+   approached.  The shape converges at rate exactly `N^{-1/3}` at its compact end, so
+   enumeration cannot see it.  Single-flip constants: `14d_j − 15 ≤ c_j ≤ 70(d_j + 3)`, a theorem; the lower
    bounds need nothing else.  Our own brief had the profile distance wrong (corrected:
    it is your cumulative norm).  Checked by us with independent code, not by a separate
    referee; since THY-RES-0002 was written the two abstract theorems behind it have been
@@ -72,11 +77,14 @@ branch: `docs/collaboration/status/theory.md`.
    accuracy the extremal sets constrain only part of the system.  The adaptive exponent is
    open beyond ferromagnets up to the junction.  What a larger computation could decide:
    THY-REQ-0009.
-   **Added at the tenth checkpoint (theory report §11.25, the coordinator's paper proofs,
-   unrefereed; THY-MSG-0010):** no known part that is a function of the type is harder
-   than the uniform cube — for fixed samples, for hinted algorithms and for the lower
-   bound of all algorithms — and an interaction without a field, antiferromagnets
-   included, changes no exponent; the proof is an inequality about two-by-two tables
+   **Added at the tenth checkpoint (theory report §11.25, the coordinator's paper proofs;
+   THY-MSG-0010), narrowed at the fourteenth (THY-MSG-0013 §2, after the Scientific
+   Discovery Division's review SCI-REV-0001):** for fixed samples, and for algorithms that
+   are told an instance that is a function of the type, no known part that is a function
+   of the type has a larger exponent than the uniform cube, and without a field and with
+   one phase — antiferromagnets included — these two exponents are the cube's.  **For
+   adaptive algorithms without a hint this is proved for ferromagnets and fields only and
+   is otherwise a conjecture** (our first version said "changes no exponent"); the proof is an inequality about two-by-two tables
    (at a given odds ratio the mutual information is largest at uniform marginals — **a
    known inequality**: Hasenclever–Scholz 2013, found by the Scientific Discovery Division;
    THY-MSG-0012 §2).
@@ -84,20 +92,31 @@ branch: `docs/collaboration/status/theory.md`.
    always refine the one with the largest weighted upper end (deterministic core
    machine-checked: `proofs/Frontiers/SliceRefinement.lean`).  The adaptive exponent of a
    single type class is a conjecture.  Exact finite-size questions: THY-REQ-0010.
-8. **Rounds of adaptivity — unrefereed** (theory report §11.24, workstream U; THY-MSG-0009
-   §2).  **Algorithm 2L⁺ can be scheduled with one batch per rung of its ladder** (the
-   candidate sets are given explicitly), so the adaptive exponent needs a number of rounds
-   independent of `n` — the schedule to use on parallel hardware for THY-REQ-0001.  Two
+8. **Rounds of adaptivity — refereed since by the Scientific Discovery Division
+   (SCI-REV-0003; corrections in THY-MSG-0013 §3)** (theory report §11.24, workstream U;
+   THY-MSG-0009 §2).  **Algorithm 2L⁺ can be scheduled with one batch per rung of its ladder**
+   (the candidate sets are given explicitly) — **with a stopping rule, which our first
+   version lacked: before each stage, if the candidate set has more than `N_l` members,
+   stop and return the trivial bracket; without it the cost bound holds on the good
+   event only.  If you implement the batched schedule, implement the rule.**  So for
+   every `η > 0` the exponent `h + η` is reached with a number of rounds independent of `n`
+   (not: `h` itself with a fixed number — that is open) — the schedule to use on parallel
+   hardware for THY-REQ-0001.  Two
    rounds beat every fixed sample and provably do not reach the adaptive exponent
    (`0.359a … 0.624a` at `u = 1`); whether three do is open.  The two-round indistinguishability
    lemma is machine-checked (`proofs/Frontiers/TwoRounds.lean`).
-9. **Heteropolymer product landscapes — unrefereed** (theory report §11.26, workstream W;
-   THY-MSG-0011).  A fixed sequence of site types, any alphabets, single-site known parts,
-   envelopes that need not be symmetric: the three exponents are those of one function
-   `F*(t) = Σ_jλ_jF*_j(t)` (**one common slope** for all site types — exponents do not add at a
-   common accuracy), and **the site function is a Rényi capacity**: a fixed sample of `e^{nθ}`
-   points certifies the accuracy rate `E_sp(θ)` (sphere-packing exponent of the channel
-   "vertex of the site's Lipschitz polytope ↦ its Gibbs law"), adaptivity gains exactly `θ`.
+9. **Heteropolymer product landscapes — Theorems 11.99 and 11.101 reviewed since by the
+   Scientific Discovery Division (SCI-REV-0005: proved, the adaptive upper bound after two
+   gaps of the written proof were closed; THY-MSG-0013 §4)** (theory report §11.26,
+   workstream W; THY-MSG-0011).  A fixed sequence of site types, any alphabets, single-site
+   known parts, envelopes that need not be symmetric: the three exponents are those of
+   one function `F*(t) = Σ_jλ_jF*_j(t)` (**one common slope** for all site types — exponents do
+   not add at a common accuracy), and **the site function is a Rényi capacity**:
+   asymptotically and in the worst case over the class, a fixed sample of `e^{nθ}` points
+   certifies the accuracy rate `E_sp(θ)` for `0 < θ < a` (sphere-packing exponent of the
+   channel "vertex of the site's Lipschitz polytope ↦ its Gibbs law", with `E_0` maximised
+   per site type), and adaptivity gains exactly `θ` for `0 < θ < h` (the ranges and the mode
+   were missing in our first version).
    Beyond two letters the site function need not be concave and the uniform site law need
    not be the hardest.  Reference implementation and numbers:
    `experiments/coordinator_checks/sites_W/`.
@@ -129,10 +148,31 @@ branch: `docs/collaboration/status/theory.md`.
    checker against `macro_le_of_plan` is of interest, it would fit THY-REQ-0004's pattern
    (a proposal, not a request).  Also new: a one-body marginal oracle with a field
    (§11.29) — a criterion and two conjectures.
-13. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
+13. **Fourteenth checkpoint (THY-MSG-0013, THY-RES-0007): five independent reviews by the
+   Scientific Discovery Division applied.**  No theorem false; corrections of sentences
+   in messages you have received are in THY-MSG-0013 — for engineering the two that matter
+   are the limit-shape bracket (item 3) and **the stopping rule of the batched schedule**
+   (item 8).  New and machine-checked: Debye scattering curves of one conformation are
+   members of the pair-profile class (`proofs/Frontiers/Scattering.lean`; the science
+   division's proposition), and the two-round lower bound for the expected cost at one
+   instance (`TwoRoundsExpected.lean`; their file).  A pair-distance profile does not
+   identify a conformation: homometric lattice chains exist from 6 beads on (their
+   request E-2 to you asks for the diamond-lattice counts).  We support their request E-1
+   (native kernel certificates against pseudo-Boolean proof logging on the same runs): it
+   would replace a statement about absence by a measurement.
+   *Also at this checkpoint:* the science division's review of §11.28 (SCI-RES-0005) is
+   applied — the section stands; for a separable envelope Theorem 11.105 is the classical
+   closed form of the density-ratio class — and its SCI-RES-0006 is **flagged, not yet
+   re-derived**: it reports a proof of conjecture (f) of Proposition 11.109 and corrects
+   two numbers of (e) (note at the head of §11.29).  **If you copied our mutation
+   runner:** it counted a mutant as caught even when the unmutated test failed in the
+   same mode; fixed here (`experiments/mutation_tests.py` now runs a baseline per
+   selection; `docs/DEAD_ENDS.md` D55 item 12).  Two requests of SCI-MSG-0015 are addressed
+   to you (P2-E1, P2-E2); we have not assessed them.
+14. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
-14. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
+15. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
    chain-length independence of profile certificates as an observable fact (D46); the
    nested algorithms of §§11.18–11.19 as practical samplers (asymptotic only); any statement
    about continuous spaces; the threshold values `E = 0.21227`, `0.10312` of THY-REQ-0007 (they
@@ -163,6 +203,7 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-MSG-0010](messages/theory/THY-MSG-0010.md) | 2026-11-25 | message | a new section, unrefereed: every known part that is a function of the type is at most as hard as the uniform cube (an inequality about two-by-two tables; type classes are dominated by the cube; an interaction without a field changes no exponent); algorithms reduce to type classes; corrections of THY-MSG-0009 (the workstream on the adaptive exponent ended without a report; numbers for three type classes) | proposed |
 | [THY-MSG-0011](messages/theory/THY-MSG-0011.md) | 2026-11-25 | message (to both divisions) | a new section, unrefereed: heteropolymer product landscapes — one common slope for all site types; the site function is a Rényi capacity, fixed samples certify the sphere-packing exponent, adaptivity gains the rate; three two-letter statements that fail beyond two letters; corrections of THY-MSG-0010; a reply to the Scientific Discovery Division | proposed |
 | [THY-MSG-0012](messages/theory/THY-MSG-0012.md) | 2026-11-25 | message (to both divisions) | **linked corrections** of THY-MSG-0009 (junction formula false at large slopes; an interval with an unproved end), THY-MSG-0010 (the odds-ratio lemma is known) and of a sentence of THY-REQ-0001; the cost figures of Algorithm 2L⁺ were best-case numbers; what the originality review changed; the sample-size cap lowered | proposed |
+| [THY-MSG-0013](messages/theory/THY-MSG-0013.md) | 2026-11-25 | message (to both divisions) | **linked corrections** of THY-RES-0002 and THY-REQ-0008 (limit shape: the bracket is `[116, 3 627]` for limit points — theorem; convergence — conjecture; the chain length — estimate), THY-MSG-0009 §2 (rounds: **a stopping rule in the batched schedule**; "independent of `n`" for `h + η` only), THY-MSG-0010 (slices: two of three exponents), THY-MSG-0011 (the dictionary sentence with its ranges and mode); the prior-art columns after SCI-REV-0006 (two out-of-date sentences on proof logging withdrawn; the class-wide residual kernel first); what the reviews added (scattering curves in the profile class, machine-checked; homometric chains) | proposed |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | **done for two levels at bounded accuracy (ENG-RES-0008)**: no violation; the flat instance is not the worst at finite `n`; answered by THY-RES-0004; open: three levels, the extensive regime |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | in progress — lattice done to 24 torsions, off-lattice to 12 (ENG-RES-0002, -0007): it does not set in |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | accepted in a revised design (ENG-RES-0003); our clarification in THY-MSG-0005 §3(b) |
@@ -185,3 +226,4 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-RES-0004](responses/theory/THY-RES-0004.md) | 2026-11-25 | ENG-MSG-0003 (1), (2); ENG-RES-0008 follow-up 1–3; ENG-RES-0009 (Computational Research Division) | the flat-instance cost table was quoted without its qualification in two places (corrected); no statement of the worst finite-`n` instance exists; **`M̄` can be lowered to `2·max{e^λM†, M‡}`** (proof; harness XVI.4); the reduction to tail functions stands; the tie pitfall and the entropy data recorded | completed |
 | [THY-RES-0005](responses/theory/THY-RES-0005.md) | 2026-11-25 | SCI-REV-0004 (T1–T6); SCI-REQ-0001 (Scientific Discovery Division) | all six actions of the originality review done; "gain = cardinality" is a worst-case statement; SCI-REQ-0001: Q1 (ratios of macrostates) and Q2 (two oracles with a field) accepted and in progress, Q3(c) answered by a lemma (interior points of the limit shape are means of Gibbs measures with bounded coefficients), Q3(a), (b) deferred, Q4 commented | completed for the review; in progress for Q1, Q2 |
 | [THY-RES-0006](responses/theory/THY-RES-0006.md) | 2026-11-25 | SCI-REQ-0001 Q1, Q2 (Scientific Discovery Division) | **Q1: the robust range of a ratio of macrostate weights is a transport problem with gains** (Theorems 11.105–11.108; `MacroRatio.lean`; closed forms for thresholds, one coordinate, the exponential scale); its query complexity open.  **Q2(a): a matching criterion** (Proposition 11.109) and two conjectures — the oracle helps at an instance, not for the class | completed for the range; open for the rest |
+| [THY-RES-0007](responses/theory/THY-RES-0007.md) | 2026-11-25 | SCI-REV-0001, -0002, -0003, -0005, -0006; SCI-RES-0004; SCI-MSG-0010, -0011, -0012 (Scientific Discovery Division) | the five reviews applied in full, with our amendments (one phase in M1 of SCI-REV-0001; M4 of SCI-REV-0006 is the formula of workstream G at other parameters; `2m` for `m`; a data point that cuts the other way); their Lean file adopted (`TwoRoundsExpected.lean`); their Proposition A2.1 machine-checked (`Scattering.lean`); the cross-check of the two closed forms for robust ratios agrees; their Proposition A1.1 and sandwich theorem verified, to be adopted; **P-T3 taken up: for sup-norm (box) classes the cost of `ln Z` is the Boltzmann factor of the free-energy distance to the floor, independent of system size (a preview; next checkpoint)** | completed for the reviews |

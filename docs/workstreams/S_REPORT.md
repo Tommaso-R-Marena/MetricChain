@@ -19,6 +19,52 @@
 > (`docs/workstreams/S_brief.md`, erratum at its head; `docs/DEAD_ENDS.md` D48).  The answer sent
 > to the other division on the basis of this report is
 > `docs/collaboration/responses/theory/THY-RES-0002.md`.
+>
+> **Errata after the independent review SCI-REV-0002 of the Scientific Discovery Division and
+> after its review of prior art SCI-REV-0006 (the text below is unchanged; read it with
+> these; the corrected statements are in `docs/THEORY_REPORT.md` §11.22).**  Verdict of the
+> review: no statement labelled as proved was found false.
+> *Major.*  (M1) §0, §7.2 and §9 join three levels in "the plateau is between 50 and 3 627 and
+> is reached at `10³`–`10⁵` beads".  *Theorem:* every limit point of `N^P_cov(N/2)` over all walks
+> lies in the proved bracket; `≤ 26 437` at every length; `≥ 26` at 1 000 beads.
+> *Conjecture-dependent:* that the sizes converge needs Conjecture 5.2′ for walks and, also
+> for bridges, that `ε₁ = ½` is not a jump of `N_∞` — which is unknown.  *Estimate:* "150–350",
+> "hundreds", "`10³`–`10⁵` beads": no theorem bounds the chain length in either direction, and the
+> argument of §7.2 ("half of the proved plateau is reached at `N ≈ 10³`, 70 % at `5·10³`") compares
+> finite-size lower bounds from one family with the limit bound from the same family; with
+> the bound of (M2) the same numbers are 22 % and 30 %.
+> (M2) Proposition 7.2 and the tables of §0 and §7: the lower bounds 50, 157, 7, 14 for the
+> liminf, from `T₀` alone, are superseded by **116, 451, 8, 19** — packings in the hull of four
+> exact points (rod, row of stems, crystal, and the helix of (N1)) and of the ten explicit
+> bridges of §4.2, with the margin `max(L, e)(d_k + d_l)`, `d = Σλ_i·168/(N_i + 3)`, by Theorem 3.4 and
+> convexity.  (The sentence after the table of §4.2 already says that each of these bridges
+> is within `168/(N+3)` of `K^{br}`; it was not used for the packings.)  §4.3: "`2.2234 ≤ vol 𝒦` if
+> Proposition 4.4 holds" stands as written; *proved* is `1.56 ≤ vol 𝒦 ≤ 3.125` (erosion of the
+> hull of the same points).  Where five vertices are counted as attained, read: three
+> proved, two approached within 10 % by finite bridges.
+> *Minor.*  (m1) Lemma 3.3 is stated from an index `M₀`, the Lean theorems from `M = 1`: the
+> application needs `Q_M := {0}` for `M ≤ 5` (appending at most five beads costs at most
+> `(1, 6, 10; 1)`, norm `44 ≤ β`).  (m2) The accuracies of the tables are not known to be
+> non-exceptional.  (m3) Lemma 3.1, numerical check: `δ₃ = 1` is attained from 12 beads on;
+> exhaustive maxima `(1, 6, 8, 1)` for `N₁, N₂ ≤ 13` and `(1, 6, 9, 1)` for `N₁ ≤ 16`, `N₂ ≤ 8`.  (m5) The
+> volume ratios are `3 626.5`, `92.5`, `392.8`, `2 194.6`; the tables round to the nearest integer, the
+> floors are valid.  (m7) §5.4, reading (2): the covering numbers of bridges equal those of
+> walks *zero* to three beads shorter (8 and 12 beads in the table of that section); "two
+> thirds of the directions" (§0, §5.2, §9) is for the measure on directions used there.
+> §3.3, "the argument gives **no** rate for how fast they fill it": true at the boundary, not
+> in the interior — under the same hypotheses interior points of the limit are approached
+> at rate `N^{-1/2}` (SCI-REV-0006, Proposition A2.2; theory report, Proposition 11.69a).
+> *Statements added by the reviews.*  (N1) The all-gauche `4₁` helix is a bridge for every `N`
+> with `h = (0, 0, N − 3)`, `g = N − 3`: `(0, 0, 1; 1) ∈ K^{br}`, a fourth exact point, so `𝒦` has interior
+> points (the table of §4.2 has helices only as a filling of the full lattice).
+> (N4) `d_H(𝒟_N^{br}, K^{br}) ≥ ½` for every `N ≤ 43 512`.  (N5) Finite-`N` constants for Theorem 4.2′
+> (the reviewer's; not re-derived by us).  Proposition 4.5: the bound on `e₈` follows, with
+> `3.665` in place of `3`, from Bezdek's theorem on contact numbers of lattice sphere packings
+> (2012); for walks `‖N^x‖₁ ≤ 35N − 24.1N^{2/3} + 29.4`, i.e. `k ≥ 0.689` in place of `0.50`.
+> *Prior art* (§10).  Lemma 3.3 is a known special case: a set-valued Fekete lemma in exact
+> form is Permuter–Weissman, arXiv:0708.0271, Lemma 23 and Corollary 24, and for exact
+> semigroups of lattice points the limit is a Newton–Okounkov body (Kaveh–Khovanskii 2012);
+> both read by the Scientific Discovery Division, not by us.
 
 Directory: `scratchpad/ws/S/` (scripts `code/`, outputs `out/`, this report; nothing in the repository was
 modified, no git state changed; the other division's branch was read through `git show` / `git archive` only, and

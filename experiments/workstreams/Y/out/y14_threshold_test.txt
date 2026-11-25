@@ -1,0 +1,21 @@
+n= 8 p=0.30: ln z_n = 1.706216;  best local maximum found: 1.706216 (from 'uniform field');  excess over ln z_n: -4.44e-16   [0 s]
+n= 8 p=0.20: ln z_n = 2.190296;  best local maximum found: 2.190296 (from 'random 2');  excess over ln z_n: +0.00e+00   [0 s]
+n= 8 p=0.10: ln z_n = 2.731971;  best local maximum found: 2.731971 (from 'uniform field');  excess over ln z_n: -4.44e-16   [1 s]
+n= 8 p=0.05: ln z_n = 3.016958;  best local maximum found: 3.016958 (from 'random 0');  excess over ln z_n: +8.88e-16   [1 s]
+n=10 p=0.30: ln z_n = 2.171015;  best local maximum found: 2.171015 (from 'uniform field');  excess over ln z_n: +0.00e+00   [2 s]
+      uniform field: 2.17101->2.17101 | -|m| type: 0.98699->0.98699 | +|m| type: 0.69425->0.69425 | -dist to ground states: 0.69425->0.69425 | one domain wall: 1.83812->1.83812 | bond field: 0.25043->0.54516 | random 0: 0.59739->1.56774 | random 1: 0.39197->0.62097 | random 2: 0.44131->2.17101 | random 3: 0.41765->0.57229 | random 4: 0.42181->2.17101 | random 5: 0.44132->1.52350
+n=10 p=0.20: ln z_n = 2.811793;  best local maximum found: 2.811793 (from 'random 2');  excess over ln z_n: +1.33e-15   [4 s]
+      uniform field: 2.81179->2.81179 | -|m| type: 1.11977->1.11977 | +|m| type: 0.96615->0.96615 | -dist to ground states: 0.96615->0.96615 | one domain wall: 2.10113->2.10113 | bond field: 0.19792->0.75051 | random 0: 0.35318->2.10113 | random 1: 0.38480->2.12877 | random 2: 0.60559->2.81179 | random 3: 0.52601->2.10113 | random 4: 0.40697->1.51993 | random 5: 0.40962->2.81179
+n=10 p=0.10: ln z_n = 3.535263;  best local maximum found: 3.535263 (from 'random 2');  excess over ln z_n: +8.88e-16   [5 s]
+      uniform field: 3.53526->3.53526 | -|m| type: 0.97022->0.97022 | +|m| type: 1.39472->1.39472 | -dist to ground states: 1.39472->1.39472 | one domain wall: 2.12536->2.12536 | bond field: 0.11569->1.39472 | random 0: 0.23482->2.12536 | random 1: 0.38034->2.43715 | random 2: 0.25544->3.53526 | random 3: 0.38993->3.53526 | random 4: 1.06931->2.22919 | random 5: 0.34440->3.53526
+n=10 p=0.05: ln z_n = 3.917364;  best local maximum found: 3.917364 (from 'random 0');  excess over ln z_n: +2.22e-15   [6 s]
+      uniform field: 3.91736->3.91736 | -|m| type: 0.64332->0.64332 | +|m| type: 1.59509->1.59509 | -dist to ground states: 1.59509->1.59509 | one domain wall: 1.83716->1.83716 | bond field: 0.06229->1.59508 | random 0: 0.25066->3.91736 | random 1: 0.62310->3.91736 | random 2: 0.20994->1.55634 | random 3: 0.26717->3.91736 | random 4: 0.25511->2.06866 | random 5: 0.14641->3.91736
+n=12 p=0.30: ln z_n = 2.635816;  best local maximum found: 2.635816 (from 'uniform field');  excess over ln z_n: +4.44e-16   [23 s]
+n=12 p=0.20: ln z_n = 3.433322;  best local maximum found: 3.433322 (from 'uniform field');  excess over ln z_n: +0.00e+00   [34 s]
+n=12 p=0.10: ln z_n = 4.338683;  best local maximum found: 4.338683 (from 'uniform field');  excess over ln z_n: -8.88e-16   [39 s]
+n=12 p=0.05: ln z_n = 4.817961;  best local maximum found: 4.817961 (from 'uniform field');  excess over ln z_n: +1.78e-15   [43 s]
+43.1 s
+
+real	0m43.547s
+user	0m43.127s
+sys	0m0.422s

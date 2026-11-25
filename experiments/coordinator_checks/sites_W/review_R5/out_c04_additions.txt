@@ -1,0 +1,39 @@
+(A) the ceiling  F*(t) <= t(1-t) D^2/8,  D = max d  (Hamming envelope: D = u);  h <= D^2/32, E <= D^2/8, a <= D^2/8
+   40 sites (cube, uniform 3 and 4 letters, (0.05,0.5,0.45), the four example sites, 12 random asymmetric): largest F*/ceiling = 0.999562, h/(D^2/32) = 0.999271, E/(D^2/8) = 0.999584, a/(D^2/8) = 0.998826   (all must be <= 1)
+      cube u=0.1      max_t F*/ceiling = 0.99956   h/(u^2/32) = 0.99927   E/(u^2/8) = 0.99958   a/(u^2/8) = 0.99875
+      unif3 u=0.1     max_t F*/ceiling = 0.90741   h/(u^2/32) = 0.90326   E/(u^2/8) = 0.89851   a/(u^2/8) = 0.90787
+      cube u=0.3      max_t F*/ceiling = 0.99608   h/(u^2/32) = 0.99348   E/(u^2/8) = 0.99627   a/(u^2/8) = 0.98886
+      unif3 u=0.3     max_t F*/ceiling = 0.93954   h/(u^2/32) = 0.92908   E/(u^2/8) = 0.91608   a/(u^2/8) = 0.94063
+      cube u=0.5      max_t F*/ceiling = 0.98922   h/(u^2/32) = 0.98213   E/(u^2/8) = 0.98975   a/(u^2/8) = 0.96960
+      unif3 u=0.5     max_t F*/ceiling = 0.96405   h/(u^2/32) = 0.95043   E/(u^2/8) = 0.93113   a/(u^2/8) = 0.96534
+      cube u=1        max_t F*/ceiling = 0.95886   h/(u^2/32) = 0.93245   E/(u^2/8) = 0.96092   a/(u^2/8) = 0.88755
+      unif3 u=1       max_t F*/ceiling = 0.98682   h/(u^2/32) = 0.98092   E/(u^2/8) = 0.95599   a/(u^2/8) = 0.98628
+      cube u=2        max_t F*/ceiling = 0.86061   h/(u^2/32) = 0.77825   E/(u^2/8) = 0.86756   a/(u^2/8) = 0.65563
+      unif3 u=2       max_t F*/ceiling = 0.95468   h/(u^2/32) = 0.94159   E/(u^2/8) = 0.94853   a/(u^2/8) = 0.86608
+      cube u=3        max_t F*/ceiling = 0.74783   h/(u^2/32) = 0.61451   E/(u^2/8) = 0.76039   a/(u^2/8) = 0.44647
+      unif3 u=3       max_t F*/ceiling = 0.88469   h/(u^2/32) = 0.81546   E/(u^2/8) = 0.88561   a/(u^2/8) = 0.65068
+(B) u = 0.5, three letters, Hamming: the data point of SCI-REV-0001 section 5 and the table of R5_REPORT 6.3   [own | harness helpers]
+      two-letter cube (closed form)        h = 0.0076728665  a = 0.0302998620  E = 0.0309298036
+      uniform (1/3,1/3,1/3)          h = 0.0074252048  a = 0.0301669002 [bracket 9.9e-16]  E = 0.0290978141   | harness: h = 0.0074252048 a = 0.0301669002 E = 0.0290978141   | h - h_cube = -2.477e-04 (-3.2278 %), a - a_cube = -1.330e-04, E - E_cube = -1.832e-03
+      (0.05, 0.5, 0.45)              h = 0.0076751658  a = 0.0303216688 [bracket 9.9e-16]  E = 0.0309316435   | harness: h = 0.0076751658 a = 0.0302712219 E = 0.0309316435   | h - h_cube = +2.299e-06 (+0.0300 %), a - a_cube = +2.181e-05, E - E_cube = +1.840e-06
+      (0.04502, 0.45679, 0.49819)    h = 0.0076752931  a = 0.0303217149 [bracket 1.0e-15]  E = 0.0309319819   | harness: h = 0.0076752931 a = 0.0302720628 E = 0.0309319819   | h - h_cube = +2.427e-06 (+0.0316 %), a - a_cube = +2.185e-05, E - E_cube = +2.178e-06
+      (0.001, 0.4995, 0.4995)        h = 0.0076729747  a = 0.0303006413 [bracket 4.4e-11]  E = 0.0309299818   | harness: h = 0.0076729747 a = 0.0303001482 E = 0.0309299818   | h - h_cube = +1.082e-07 (+0.0014 %), a - a_cube = +7.793e-07, E - E_cube = +1.782e-07
+      (0.02, 0.49, 0.49)             h = 0.0076722238  a = 0.0303043559 [bracket 1.0e-15]  E = 0.0309220469   | harness: h = 0.0076722238 a = 0.0303043549 E = 0.0309220469   | h - h_cube = -6.427e-07 (-0.0084 %), a - a_cube = +4.494e-06, E - E_cube = -7.757e-06
+      data point: t* = 0.497507, primal value F*(t*) = 0.007675293102 (a certified lower bound of h), dual bound at t* = 0.007675293670; cube h = 0.007672866478  ->  h - h_cube >= 2.427e-06
+      upper bound of h from the dual values on a grid of step 5e-4 around t*: 0.007675293670 (plus second-order grid error ~ |F''| step^2/8 ~ 1e-9)
+(C) 'a site law that gives some set of letters the weight 1/2 is at least as hard as the cube' (Hamming envelope): F*(t) - F*_cube(t) >= 0
+   200 (law, slope) pairs, alphabets of 3-5 letters, u in {0.3, 0.5, 1, 2}: smallest F* - F*_cube = -1.84e-16 (must be >= 0 up to solver error); strictly larger in 186
+      two box vertices -/+ u 1_A, pi(A) = 1/2, t = 0.2: max_M G_t = 0.009559771888, cube F* = 0.009559771888
+      two box vertices -/+ u 1_A, pi(A) = 1/2, t = 0.5: max_M G_t = 0.014784459304, cube F* = 0.014784459304
+      two box vertices -/+ u 1_A, pi(A) = 1/2, t = 0.8: max_M G_t = 0.009332847876, cube F* = 0.009332847876
+(D) m1: the cube with u = 1 as a binary symmetric channel: E_sp(theta) - theta beyond h
+      h = 0.029139, a = 0.110944, E = 0.120115;  E_sp(h) - h = 1.94e-16 (fixed point)
+      theta = 0.014570 (= 0.131 a = 0.500 h): E_sp = 0.049541 [Gallager form 0.049541], E_sp - theta = +0.034971
+      theta = 0.029139 (= 0.263 a = 1.000 h): E_sp = 0.029139 [Gallager form 0.029139], E_sp - theta = +0.000000
+      theta = 0.033283 (= 0.300 a = 1.142 h): E_sp = 0.025116 [Gallager form 0.025116], E_sp - theta = -0.008167
+      theta = 0.055472 (= 0.500 a = 1.904 h): E_sp = 0.010604 [Gallager form 0.010604], E_sp - theta = -0.044868
+      theta = 0.099850 (= 0.900 a = 3.427 h): E_sp = 0.000329 [Gallager form 0.000329], E_sp - theta = -0.099521
+(E) m4: at a fixed label law M, Gallager's sup_rho [E_0(rho, M) - rho theta] against the Csiszar-Koerner (Augustin) form sup_rho rho [I^A - theta]; path site
+   8 random M: Gallager(M) <= CK(M) <= E_sp violated 0 times; largest CK(M) - Gallager(M) = 1.79e-03
+   at the optimal M* of t = 0.4: Sibson = 0.146982328392, Augustin = 0.146982328392 (equal at the capacity-achieving law)
+time 58.4 s

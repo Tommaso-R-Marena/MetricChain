@@ -10,9 +10,13 @@ Exactly one mutation is expected to pass: `DEAD.5 M2` restricts the search for a
 product references, where none exists, so the test must fall back to its explicit two-site
 counterexample and still behave as documented.
 
-The run fails (exit code 1) if a mutation is not caught, if the expected pass does not pass, or if a
-mutation pattern no longer occurs in the harness (the mutation list is then stale and must be
-updated together with the test).
+Before the first mutation of a test is run, the UNMUTATED harness is run on the same selection in the
+same mode (once per selection): a mutation of a test that misbehaves without any mutation would be
+"caught" for the wrong reason, so such a baseline failure fails the run.
+
+The run fails (exit code 1) if a mutation is not caught, if the expected pass does not pass, if a
+baseline run misbehaves, or if a mutation pattern no longer occurs in the harness (the mutation list
+is then stale and must be updated together with the test).
 
 Usage:
     python3 experiments/mutation_tests.py            # all groups
@@ -31,7 +35,27 @@ EXPECTED_PASS = ("DEAD.5 M2",)
 RESULTS = dict(caught=0, expected_pass=0, bad=0)
 
 
+BASELINE = {}
+
+
+def baseline_ok(only, extra):
+    """The unmutated harness must behave as expected on this selection, in this mode (cached)."""
+    key = (only, tuple(extra))
+    if key not in BASELINE:
+        out = subprocess.run([sys.executable, SRC, "--only", only, *extra], capture_output=True, text=True)
+        BASELINE[key] = out.returncode == 0
+        if out.returncode != 0:
+            print(f"!! BASELINE FAILS for --only {only!r} {' '.join(extra)}: the unmutated harness misbehaves, "
+                  f"so no mutation of this selection can count as caught")
+            print(out.stdout[-1200:])
+    return BASELINE[key]
+
+
 def run(label, edits, only, extra=("--quick",)):
+    if not baseline_ok(only, extra):
+        print(f"[{'NOT AS EXPECTED':>15}] {label}\n                  baseline of --only {only!r} misbehaves")
+        RESULTS["bad"] += 1
+        return
     s = base
     for old, new in edits:
         if s.count(old) < 1:
@@ -501,6 +525,21 @@ MUTS["XIV"] = [
     ("XIV.2 M3: span bracket claimed to equal McShane's bound",
      [("            if dual.fun > mcshane + 1e-7:", "            if abs(dual.fun - mcshane) > 1e-7:")], "XIV.2"),
 ]
+# XIV.5 (scattering curves in the pair-profile class; homometry) — added with the fourteenth checkpoint
+MUTS["XIV"] += [
+    ("XIV.5 M1: scattering bound with the constant q^2/4 instead of q^2/3",
+     [("            if lhs > q * q / 3 * W * (1 + 1e-9) + 1e-9:", "            if lhs > q * q / 4 * W * (1 + 1e-9) + 1e-9:")], "XIV.5"),
+    ("XIV.5 M2: |sin t - t cos t| claimed to be at most t^3/3.5",
+     [("    ratio = np.abs(np.sin(ts) - ts * np.cos(ts)) / (ts ** 3 / 3)", "    ratio = np.abs(np.sin(ts) - ts * np.cos(ts)) / (ts ** 3 / 3.5)")], "XIV.5"),
+    ("XIV.5 M3: Lipschitz constant q^2/8 in the squared distance",
+     [("q * q / 6 * abs(s1 - s2) + 1e-12:", "q * q / 8 * abs(s1 - s2) + 1e-12:")], "XIV.5"),
+    ("XIV.5 M4: Debye formula with the pair sum counted three times",
+     [("        return n + 2 * float(sinc(q * np.sqrt(s)).sum())", "        return n + 3 * float(sinc(q * np.sqrt(s)).sum())")], "XIV.5"),
+    ("XIV.5 M5: another 6-bead walk claimed to be homometric to the first",
+     [("    B = [(0, 0), (0, 1), (1, 1), (1, 2), (1, 3), (2, 3)]", "    B = [(0, 0), (0, 1), (1, 1), (1, 2), (2, 2), (2, 3)]")], "XIV.5"),
+    ("XIV.5 M6: a homometric pair claimed to exist already with 5 beads",
+     [("    expect = {4: (5, 4, 4, 0), 5: (None, None, None, 0), 6: (36, 18, 17, 1)}", "    expect = {4: (5, 4, 4, 0), 5: (None, None, None, 1), 6: (36, 18, 17, 1)}")], "XIV.5"),
+]
 
 MUTS["XV"] = [
     ('XV.1 M1: identity between the relative entropies with the wrong sign of Lambda1',
@@ -821,6 +860,19 @@ MUTS["XX"] = [
     ('DEAD.25 M2: the same test at u = 2, where the junction is at beta J* (the refutation must disappear)',
      [('def t_dead_junction_large_slope(rng, trials):\n    u, e = 8.0, 0.0', 'def t_dead_junction_large_slope(rng, trials):\n    u, e = 2.0, 0.0')], 'DEAD.25'),
 ]
+# XX.5 and DEAD.27 (Theorem 11.84 after the review SCI-REV-0003: Claim B and the stopping rule) — fourteenth checkpoint
+MUTS["XX"] += [
+    ("XX.5 M1: only the first K positions claimed to be candidates",
+     [("        N = K + (J + 1) * max(K, 4 * (1 + eta) / c_eta * math.exp(lam) * nu * math.exp(x))\n        kind = rep % 5",
+       "        N = K\n        kind = rep % 5")], "XX.5"),
+    ("XX.5 M2: sample sizes of the levels from the trivial lower bound instead of the empirical one",
+     [("    lam_j = np.maximum(ell0, c_eta / (1 + eta) * math.exp(-b) * best_prev)", "    lam_j = np.full(len(s), float(ell0))")], "XX.5"),
+    ("XX.5 M3: trivial brackets claimed to leave the candidate set small",
+     [("        if int(wide.sum()) != expect:", "        if int(wide.sum()) > N:")], "XX.5"),
+    ("DEAD.27 M1: the refutation run with honest brackets of the promised ratio (the count then holds)",
+     [("    wide, _ = rd_candidate_set(np.ones(Mmax), np.full(Mmax, float(s[-1]) * math.exp(lam)), s, K, m_max, nu, c_eta, eta, b, 1.0)\n    if wide.sum() > N:",
+       "    wide, _ = rd_candidate_set(np.ones(Mmax), np.full(Mmax, math.exp(x)), s, K, m_max, nu, c_eta, eta, b, 1.0)\n    if wide.sum() > N:")], "DEAD.27"),
+]
 
 MUTS["XXI"] = [
     ('XXI.1 M1: symmetric table taken at a smaller odds ratio (0.9 s)',
@@ -872,6 +924,17 @@ MUTS["XXI"] = [
      [('        for O in combinations(range(n), no):', '        for O in [tuple((s0 + i) % n for i in range(no)) for s0 in range(n)]:')], 'XXI.4'),
     ('XXI.4 M6: a slice refined only while its deficit is below half its bracket',
      [('                if d[k] > width + 1e-12:', '                if d[k] > 0.5 * width + 1e-12:')], 'XXI.4'),
+]
+# XXI.6 (Theorem 11.90(a) at negative accuracies, after the review SCI-REV-0001) — fourteenth checkpoint
+MUTS["XXI"] += [
+    ("XXI.6 M1: mutual information of a profile claimed to be at most 0.9 h(kappa)",
+     [("            if MI > hbin(k) + 1e-9:", "            if MI > 0.9 * hbin(k) + 1e-9:")], "XXI.6"),
+    ("XXI.6 M2: a profile with zero budget claimed to have the value 0",
+     [("                if abs(val - (-e)) > 1e-6:\n                    return False, dict(reason=\"a profile with zero budget", "                if abs(val) > 1e-6:\n                    return False, dict(reason=\"a profile with zero budget")], "XXI.6"),
+    ("XXI.6 M3: every two-point component of a feasible law claimed to be feasible (the step of the first proof)",
+     [("                if not MIn < -e:", "                if MIn < -e:")], "XXI.6"),
+    ("XXI.6 M4: values at a negative accuracy claimed to be at most the supremum at accuracy zero",
+     [("        bound = max(R2, -e)", "        bound = sl_best(k, u, 0.0)[0]")], "XXI.6"),
 ]
 
 MUTS["XXI"] += [
@@ -926,6 +989,22 @@ MUTS["XXII"] = [
     ('DEAD.24 M1: the three-letter counterexamples replaced by the uniform law itself',
      [('    E_field, E_unif = st_E(st_site([0.05, 0.5, 0.45], st_hamming(3, 1.0))), st_E(st_site([1 / 3] * 3, st_hamming(3, 1.0)))\n    h_near = st_R([(1.0, st_site([0.02, 0.49, 0.49], st_hamming(3, 0.5)))], 0.0)[0]',
        '    E_field, E_unif = st_E(st_site([1 / 3] * 3, st_hamming(3, 1.0))), st_E(st_site([1 / 3] * 3, st_hamming(3, 1.0)))\n    h_near = st_R([(1.0, st_site([1 / 3] * 3, st_hamming(3, 0.5)))], 0.0)[0]')], 'DEAD.24'),
+]
+# XXII.5 (corrections of theory report 11.26 after the reviews SCI-REV-0005 and SCI-REV-0001 section 5) — fourteenth checkpoint
+MUTS["XXII"] += [
+    ("XXII.5 M1: ceiling t(1-t)u^2/9 instead of t(1-t)u^2/8",
+     [("            if val > t * (1 - t) * u * u / 8 + 1e-9:", "            if val > t * (1 - t) * u * u / 9 + 1e-9:")], "XXII.5"),
+    ("XXII.5 M2: weight 0.35 on a set of letters claimed to suffice for the comparison with the cube",
+     [("        pi = np.concatenate([0.5 * w[:k] / w[:k].sum(), 0.5 * w[k:] / w[k:].sum()])",
+       "        pi = np.concatenate([0.35 * w[:k] / w[:k].sum(), 0.65 * w[k:] / w[k:].sum()])")], "XXII.5"),
+    ("XXII.5 M3: the law (0.02, 0.49, 0.49) claimed to be above the cube in h (the first version: 'close to two letters means the two-letter values' or more)",
+     [("    if not (vals[\"near\"][0] < hc - 3e-7 and vals[\"near\"][1] < Ec - 3e-6):", "    if not (vals[\"near\"][0] >= hc):")], "XXII.5"),
+    ("XXII.5 M4: the two-letter cube claimed to be the supremum of h at u = 0.5",
+     [("    if not (vals[\"rare\"][0] > hc + 1e-6 and vals[\"rare\"][1] > Ec + 1e-6 and abs(vals[\"rare\"][0] - 0.0076752) < 2e-7):", "    if not (vals[\"rare\"][0] <= hc):")], "XXII.5"),
+    ("XXII.5 M5: slope jump +0.0052 at the kink (the workstream's printed value, a second difference on a grid)",
+     [("    if not abs(jump - 0.00558) < 1.2e-4:", "    if not abs(jump - 0.0052) < 1.2e-4:")], "XXII.5"),
+    ("XXII.5 M6: Lipschitz constant of theta_na in the composition a tenth of max a_j",
+     [("            bound = 2 * abs(l1 - l2) * max(amax[s1], amax[s2])", "            bound = 0.2 * abs(l1 - l2) * max(amax[s1], amax[s2])")], "XXII.5"),
 ]
 
 MUTS["XXII"] += [
@@ -990,4 +1069,6 @@ for key in which:
 total = sum(RESULTS.values())
 print(f"\n{total} mutations: {RESULTS['caught']} caught, {RESULTS['expected_pass']} expected pass, "
       f"{RESULTS['bad']} not as expected")
+print(f"{len(BASELINE)} baseline runs of the unmutated harness (one per selection): "
+      f"{sum(BASELINE.values())} behave as expected, {len(BASELINE) - sum(BASELINE.values())} misbehave")
 sys.exit(1 if RESULTS["bad"] else 0)

@@ -1,0 +1,5 @@
+kappa=0.5, u=1.0, e=-0.15: max(R2, -e) = 0.150000000000;  sup_(t,xi)[LP - te] = 0.149999999806 at t = 1.194, xi = 0.000;  LP - max(R2, -e) = -1.94e-10;  3 atoms, budget e + MI = +1.00e-09
+kappa=0.3, u=1.0, e=-0.2: max(R2, -e) = 0.200000000000;  sup_(t,xi)[LP - te] = 0.199999999428 at t = 1.572, xi = -0.175;  LP - max(R2, -e) = -5.72e-10;  3 atoms, budget e + MI = +9.99e-10
+kappa=0.2, u=0.5, e=-0.02: max(R2, -e) = 0.020000000000;  sup_(t,xi)[LP - te] = 0.019999999986 at t = 1.014, xi = 0.000;  LP - max(R2, -e) = -1.44e-11;  3 atoms, budget e + MI = +1.00e-09
+kappa=0.1, u=1.0, e=-0.05: max(R2, -e) = 0.050000000000;  sup_(t,xi)[LP - te] = 0.049999999892 at t = 1.108, xi = -0.190;  LP - max(R2, -e) = -1.08e-10;  3 atoms, budget e + MI = +1.00e-09
+kappa=0.3, u=1.0, e=-0.55: max(R2, -e) = 0.550000000000;  sup_(t,xi)[LP - te] = 0.549999996611 at t = 4.389, xi = -0.351;  LP - max(R2, -e) = -3.39e-09;  3 atoms, budget e + MI = +1.00e-09

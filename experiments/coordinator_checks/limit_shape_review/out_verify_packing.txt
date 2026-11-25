@@ -1,0 +1,9 @@
+vertex list: the reviewer's 14 rows coincide exactly with my 4 exact points + 10 verified bridges; largest delta = 0.013948854201262038
+(L, eps1) = (1, 1/2): 116 points (claimed 116); weights valid; pairwise condition holds exactly: True; smallest margin lhs - rhs = 0.001006; points with g = 0 and d = 0 (in T0): 32
+(L, eps1) = (1, 1/4): 451 points (claimed 451); weights valid; pairwise condition holds exactly: True; smallest margin lhs - rhs = 0.000138; points with g = 0 and d = 0 (in T0): 98
+(L, eps1) = (1/5, 1/2): 8 points (claimed 8); weights valid; pairwise condition holds exactly: True; smallest margin lhs - rhs = 0.019935; points with g = 0 and d = 0 (in T0): 6
+(L, eps1) = (1/5, 1/4): 19 points (claimed 19); weights valid; pairwise condition holds exactly: True; smallest margin lhs - rhs = 0.000325; points with g = 0 and d = 0 (in T0): 8
+
+real	0m4.042s
+user	0m4.019s
+sys	0m0.008s

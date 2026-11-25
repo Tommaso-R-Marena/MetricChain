@@ -685,9 +685,12 @@ procedure can also be made instance-dependent without losing validity (theory re
 always refine the level set whose weighted upper end is largest, and stop when that one
 has the target width — the result is a valid bracket for `Z` up to the logarithm of the
 number of level sets, and a level set is refined only as far as its distance from the
-largest term requires.  And no known part of this kind makes the worst case harder than
-it is without a known part (§11.25, unrefereed; a two-state statement — with three or
-more states per site a known part that removes states can make things worse).  *With
+largest term requires.  And for a fixed sample, and for a procedure that is given the
+instance when it is a function of the order parameter, no known part of this kind makes
+the worst case harder than it is without a known part (§11.25, reviewed by the Scientific
+Discovery Division; for adaptive procedures without a hint this is proved for
+ferromagnets and fields only and is otherwise a conjecture; a two-state statement — with
+three or more states per site a known part that removes states can make things worse).  *With
 several kinds of sites* (theory report §11.26, unrefereed): stratify by the composition
 of every kind of site; do not split an accuracy budget between the kinds at a common
 accuracy — their costs combine through a common slope, and a kind that is beyond its own
@@ -989,10 +992,13 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 302 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 342 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
-`docs/mutation_output.txt`).  The audit script runs it, and starts with a self-test in which
+`docs/mutation_output.txt`).  Before the first mutant of a test it runs the unmutated test in
+the same mode and fails if that baseline misbehaves (a mutant of a failing test would be
+"caught" for the wrong reason — this happened once, `docs/DEAD_ENDS.md` D55 item 12).  The
+audit script runs it, and starts with a self-test in which
 planted violations (an incomplete proof, forbidden tokens) must be detected.  Use
 it as the executable reading of the schema and as a regression oracle for faster checkers.
 

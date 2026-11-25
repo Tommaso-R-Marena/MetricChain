@@ -21,3 +21,20 @@ exits, which is biased upward, and the outer maximum then selects the bias.  The
 multi-block solver and a direct evaluation on a grid of shells agree on `0.028005`, `0.024588`, `0.018842`.
 The qualitative statement (every slice other than `½` is strictly below the cube) is unaffected and is now
 a theorem.
+
+**Added with the fourteenth checkpoint (review SCI-REV-0001 of the Scientific Discovery Division).**
+The review found (its m12) that the scripts above test profiles with more than two blocks for the
+hinted function `r` at accuracies `e ≥ 0` only — not at `e < 0`, where the first proof of Theorem 11.90(a)
+had a gap, and not for the non-adaptive function `n` — and that item (e) of `slice_check1.py` evaluates
+`N^κ` at `X = 10⁻⁹`, where the square-root cusp at zero costs two units in the fifth digit (`0.110924`
+for `0.110944`).  The three scripts below were written, from the statements of the report, by the
+assistant who checked the review for the coordinator; the coordinator re-ran them with identical
+output (timing lines apart).
+
+| file | what it checks | run time |
+|---|---|---|
+| `m2_check.py` (`m2_check.py 1`, `m2_check.py 2`) → `out_m2_check_part1.txt`, `out_m2_check_part2.txt` | Theorem 11.90(a) at negative accuracies, three independent computations: (A) the two-block supremum; (B) **all** laws on a grid of 1201 block densities, any number of blocks — for fixed multipliers the dual function is linear in the law, so the supremum over feasible laws is a linear programme with three constraints; (C) explicit profiles with three to five blocks, random and by Nelder–Mead.  Nine `(κ, u, e < 0)` and a control at `e = 0`: no excess over two blocks; the optimum is a two-atom law, or a three-atom law with zero budget and the value `−e` | 2 × 2 min |
+| `m2_check_margin.py` → `out_m2_check_margin.txt` | the same linear programme with the feasibility tolerance tightened: the largest excess is `−1.4·10⁻¹¹` | 2 min |
+| `minor_checks.py` → `out_minor_checks.txt` | the reviewer's four-line proof (thermodynamic integration on the fibre, `S ≥ 16cosh²(ω/4)` on 20 000 random tables, the curvature form `Ψ″ = 4/S`), and the minor findings m1–m6, m11, m12: the optimal input of an asymmetric channel (field against the channel, distribution towards the more reliable symbol), the closed form over shells `ℓ ≥ 0` only, the game form at negative accuracies, the two forms of the cube's function, the centre types for `N^κ(0⁺)` and the cusp, the non-adaptive function for profiles with any number of blocks | 70 s |
+
+In the harness the negative accuracies are covered by XXI.6.

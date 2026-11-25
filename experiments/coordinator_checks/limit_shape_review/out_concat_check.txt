@@ -1,0 +1,23 @@
+(1) appending k beads in the linker zigzag, all bridges with 3..11 beads, every admissible c1: 52420 extended walks,
+    each a self-avoiding bridge; cost vector from coordinates = linker/S1 count.  componentwise maxima (d3,d8,d11,dg | largest norm), minima:
+      k = 1: max (0, 2, 3, 1) | 9   min (0, 0, 0, 0)   (proved bounds: (1, 3, 6, 1) | 28)
+      k = 2: max (0, 2, 3, 1) | 11   min (0, 0, 0, 0)   (proved bounds: (1, 6, 8, 1) | 42)
+      k = 3: max (0, 2, 3, 1) | 11   min (0, 0, 0, 0)   (proved bounds: (1, 6, 10, 1) | 44)
+      k = 4: max (0, 2, 3, 1) | 11   min (0, 0, 0, 0)   (proved bounds: (1, 6, 10, 1) | 44)
+      k = 5: max (0, 2, 3, 1) | 11   min (0, 0, 0, 0)   (proved bounds: (1, 6, 10, 1) | 44)
+    time 6.2 s
+(2a) real concatenations: all 38416 ordered pairs with 3 <= N1, N2 <= 7 and 3000 random pairs with N1, N2 <= 11 (seed 20261125):
+     48065 concatenations (both c1 where free); in every case exactly one height-preserving signed permutation, a self-avoiding bridge with N1+N2+3 beads,
+     error vector = A(x1,c1) + B(x2), inside [0,1]x[0,9]x[0,14], delta_g = [b' down].  maxima (0, 2, 4, 1), largest norm 13
+     time 7.9 s
+(2b) decomposition, all bridges from the origin with 3..13 beads (65848 bridges; 4335959104 ordered pairs, x4 with the other sublattice/orientation conventions):
+     A-part (linker against x1): componentwise maxima (1, 4, 5, 1), largest norm 30;  B-part (linker against x2): (0, 2, 3, 0), largest norm 11
+     => over all pairs: componentwise maxima (1, 6, 8, 1), largest norm 41   (reviewer, N <= 13: (1, 6, 8, 1), norm 41)
+     delta_3 = 1 first occurs at N1 = 12; number of (x1, c1) with delta_3 = 1 per N1: {12: 16, 13: 96}
+     smallest example: x1 = [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 2, 4), (3, 3, 5), (4, 2, 6), (5, 1, 5), (6, 2, 4), (5, 3, 3), (4, 2, 2), (3, 3, 1)], c1 = (-1, 1, 1)
+     bridges per N: {3: 4, 4: 8, 5: 20, 6: 48, 7: 116, 8: 312, 9: 804, 10: 2144, 11: 5732, 12: 15296, 13: 41364}
+     time 2.6 s
+
+real	0m16.849s
+user	0m16.874s
+sys	0m0.019s

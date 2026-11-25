@@ -1,0 +1,37 @@
+(A) two-block supremum (semi-analytic, sup over 499 centre types + golden section) and brute force over shells at the best centre
+(B) LP over all laws on a grid of 1201 densities, sup over (t, xi): value, multipliers, atoms of the optimal law, its MI
+(C) explicit profiles with 3-5 blocks: random feasible profiles and Nelder-Mead over 3-block profiles
+
+kappa=0.5, u=1.0, e=-0.05  (h(kappa) = 0.693147, -e = 0.05)
+   (A) R2 = 0.0590496666 at m = 0.50000; brute force over shells of that centre: 0.0590496666;  max(R2, -e) = 0.0590496666;  cube game form 0.0590496666
+   (B) sup_(t,xi) [LP - te] = 0.0590495752 at t = 0.7087, xi = -0.0000 (1406 grid LPs + polishing);  LP - R2 = -9.14e-08;
+       optimal law: 2 atoms (0.2692: 0.5000), (0.7308: 0.5000);  its MI = 0.11071896 (budget e + MI = +6.07e-02)
+   (C) random 3-5-block profiles: max (r_upper - R2) = -3.243e-03; largest inner bracket width 6.2e-17;  Nelder-Mead over 3 blocks: best - R2 = +9.714e-17
+       [29 s]
+kappa=0.5, u=1.0, e=-0.15  (h(kappa) = 0.693147, -e = 0.15)
+   (A) R2 = 0.1500000000 at m = 0.18800; brute force over shells of that centre: 0.1499930279;  max(R2, -e) = 0.1500000000;  cube game form 0.1500000000
+   (B) sup_(t,xi) [LP - te] = 0.1500000001 at t = 20.1895, xi = 1.9863 (1406 grid LPs + polishing);  LP - R2 = +1.33e-10;
+       optimal law: 3 atoms (0.0025: 0.1520), (0.5517: 0.7727), (0.9742: 0.0753);  its MI = 0.15000000 (budget e + MI = -8.13e-12)
+   (C) random 3-5-block profiles: max (r_upper - R2) = -9.522e-03; largest inner bracket width 6.9e-17;  Nelder-Mead over 3 blocks: best - R2 = +1.943e-16
+       [30 s]
+kappa=0.3, u=1.0, e=-0.03  (h(kappa) = 0.610864, -e = 0.03)
+   (A) R2 = 0.0416199521 at m = 0.40013; brute force over shells of that centre: 0.0416199521;  max(R2, -e) = 0.0416199521;  cube game form 0.0457714546
+   (B) sup_(t,xi) [LP - te] = 0.0416199480 at t = 0.6450, xi = -0.0525 (1406 grid LPs + polishing);  LP - R2 = -4.09e-09;
+       optimal law: 2 atoms (0.1383: 0.6000), (0.5425: 0.4000);  its MI = 0.09389632 (budget e + MI = +6.39e-02)
+   (C) random 3-5-block profiles: max (r_upper - R2) = -2.086e-03; largest inner bracket width 1.1e-16;  Nelder-Mead over 3 blocks: best - R2 = +2.012e-16
+       [32 s]
+kappa=0.3, u=1.0, e=-0.2  (h(kappa) = 0.610864, -e = 0.2)
+   (A) R2 = 0.2000000000 at m = 0.14400; brute force over shells of that centre: 0.1999945419;  max(R2, -e) = 0.2000000000;  cube game form 0.2000000000
+   (B) sup_(t,xi) [LP - te] = 0.2000000000 at t = 9.3188, xi = 6.3409 (1406 grid LPs + polishing);  LP - R2 = +2.54e-11;
+       optimal law: 3 atoms (0.0550: 0.5210), (0.2817: 0.1239), (0.6658: 0.3551);  its MI = 0.20000000 (budget e + MI = +3.22e-12)
+   (C) random 3-5-block profiles: max (r_upper - R2) = -1.409e-03; largest inner bracket width 5.6e-17;  Nelder-Mead over 3 blocks: best - R2 = +5.551e-17
+       [30 s]
+kappa=0.3, u=2.0, e=-0.1  (h(kappa) = 0.610864, -e = 0.1)
+   (A) R2 = 0.1372275645 at m = 0.34127; brute force over shells of that centre: 0.1372275645;  max(R2, -e) = 0.1372275645;  cube game form 0.1501407069
+   (B) sup_(t,xi) [LP - te] = 0.1372274219 at t = 0.6226, xi = -0.1581 (1406 grid LPs + polishing);  LP - R2 = -1.43e-07;
+       optimal law: 2 atoms (0.0575: 0.6589), (0.7683: 0.3411);  its MI = 0.28123774 (budget e + MI = +1.81e-01)
+   (C) random 3-5-block profiles: max (r_upper - R2) = -1.819e-04; largest inner bracket width 6.9e-17;  Nelder-Mead over 3 blocks: best - R2 = +1.665e-16
+       [33 s]
+
+SUMMARY: largest (LP sup - R2) = +1.333e-10;  largest random multi-block excess = -1.819e-04;  largest Nelder-Mead excess = +2.012e-16;  largest inner bracket width = 1.1e-16
+total 154 s

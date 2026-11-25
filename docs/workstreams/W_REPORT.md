@@ -1,8 +1,11 @@
 # Workstream W — the heteropolymer product landscape: several site types, larger alphabets, general single-site known parts and site envelopes; exponents without a hint
 
 > **Repository note (added by the coordinator at integration; the report below is otherwise as
-> delivered).**  Status: **paper proofs by one author, not refereed; checked and re-computed in
-> part by the coordinator.**  *Re-computed with an own implementation written from the
+> delivered).**  Status: **paper proofs by one author; reviewed after integration by the
+> Scientific Discovery Division (SCI-REV-0005: Theorem W3(c) with Remark W3.1 and Proposition
+> W4.0 proved; Theorem W4 proved with two gaps in the written proof, both closed — see the
+> errata below); checked and re-computed in part by the coordinator.**  *Re-computed with
+> an own implementation written from the
 > statements* (`experiments/coordinator_checks/sites_W/`): the vertices of the four Lipschitz
 > polytopes; Theorem W3(c) — the Rényi form against the linear-programming value of the game
 > at the Rényi centre and against a blind search over `γ`, with the dual bound (12 cases);
@@ -29,6 +32,59 @@
 > W6.1 = Proposition 11.102; Propositions W7.1–W7.3 = Proposition 11.103.  Scripts and outputs:
 > `experiments/workstreams/W/` (the report's `code/`, `out/`; "`scratchpad/ws/W/`" in the text is
 > the session directory in which the report was written).
+>
+> **Errata after the independent review SCI-REV-0005** (Scientific Discovery Division,
+> workstream R5; its report is `docs/science/workstreams/R5_REPORT.md` on the branch
+> `research/scientific-translation`; no critical finding; every reference number replicated,
+> largest deviation `5·10⁻⁷`).  The text below is unchanged; read it with these.  The
+> integrated corrections, with what was re-derived and re-computed for each, are in the
+> theory report §11.26.  Line numbers in the review refer to this file before this block
+> was inserted.
+> *Major (gaps in what is written; closed; no exponent changes).*
+> (M1) Theorem W2(c) — the isoperimetric statement in the form the nested algorithm needs,
+> uniform in the composition — was stated and proved in this report only.  It is now
+> Theorem 11.97(c) of the theory report, with the dependence of `ω_n` on
+> `(m, q_max, D_max, π_min)` explicit.  In its proof here the modulus `ω′(δ₂)` of `I − v` comes from
+> uniform continuity and has no rate; the bound
+> `(I − v)(P) = Σ_jλ_j·min_{γ∈L_j}KL(P_j‖π_γ) ≤ Σ_jλ_j·χ²(P_j‖Q_j)` for `Q` in the window gives one.
+> (M2) Theorem W4, proof, (i) "the exponent of `M†`" and (iii): "exponent function … defined
+> along sequences of compositions tending to `λ`" is not defined, and the bound on `M†` is
+> claimed "uniformly over the compositions of the outer block" because `R̂` is continuous in
+> `λ`, while the quantity that enters is `θ_na`; the restriction to compact sets of `θ` is not
+> needed.  The definition, a direct argument and the bound
+> `|θ_na^{λ′}(x) − θ_na^λ(x)| ≤ ‖λ′ − λ‖₁·max_ja_j` are in the theory report, Theorem 11.101 (the
+> reviewer's closure, re-derived).
+> *Minor.*  (m1) Remark W3.1: "a fixed sample certifies `E_sp(θ)`" is for `0 < θ < a`; "an adaptive
+> algorithm, or one with a hint, certifies `E_sp(θ) − θ`" only for `0 < θ < h` (beyond, the
+> expression is `≤ 0`), asymptotically, in the worst case over the class and, with a hint,
+> at the hardest instance; `max_{ρ≥0}` in the formula for `R^max` is a supremum.  (m5) Proof of
+> Theorem W2(b), Step 4: "all of them are within `nδ₁·max(D_max,1)` of their means" does not
+> give the next inequality when `D_max > 1`; read: the cost within `nδ₁D_max` and every letter
+> count within `nδ₁` — which is what Hoeffding's inequality gives with the stated
+> probability.  (m6) Lemma T′ is stated for `ρ_j` of full support and applied with
+> `ρ = ⊗_iP_{τ(i)}`, `P` a joint type that may miss letters: restrict the alphabets to the
+> supports.  (m7) Theorem W4, (ii)–(iii): with the base family "complete enumeration" the
+> recursion does not start at `θ_na`; the machine-checked statement that applies is
+> `iterates_lt_hint_add` (any bounded start) with the `HintPair` of `GameFunction.pair`, not the
+> convergence statement of Theorem 11.66(c) (`GameFunction.exactRec_tendsto`).
+> (m8) Proposition W3.2(c): the slope jump of `F*` at the label switch of the triangle site
+> is **`+0.0056`** (the slopes of the two branches at `t_c = 0.377987` are `0.054049` and `0.059631`),
+> not `+0.0052`; the printed number is a second difference on a grid of step `5·10⁻⁴`
+> (`w08_misc.py`), lowered by the curvature of the branches.  `t_c`, the weights, the corner
+> `0.1996·E` and the slopes `−0.383 → −0.373` of `R^max` are right.  (m9) Theorem W4: the `o(n)` is
+> uniform over chains with compositions near `λ` (this is what the closure of (M2) gives);
+> `λ_j > 0` is assumed and does not seem to be used.  (m11) Theorem W3(c), "the labels that
+> carry weight are exactly at Rényi distance `C_t` from it": one direction only — labels in
+> the support of `M*` are at distance `C_t` from the centre; a vertex at that distance need
+> not carry weight, and `M*` need not be unique (`s*` and the centre are).  (m12) Numerical
+> hygiene: game values from a linear programme solved with default tolerances bias a
+> blind maximisation over `γ` upwards by `1–3.5·10⁻⁹`; not an error of a statement (the
+> checks are at `5·10⁻⁷`).  (m2, m3, m4, m10 concern the theory report's rendering only.)
+> *Additions of the reviews* (theory report, Proposition 11.103(d), (f)), to be read with
+> §8, Proposition W7.3 and §11, item 8: at `u = 0.5` the three-letter law `(0.05, 0.5, 0.45)` is
+> harder than the two-letter cube in `h`, `a` and `E`; every site law that gives some set of
+> letters the weight `½` is at least as hard as the cube (Hamming envelope); and
+> `F*(t) ≤ t(1−t)u²/8` for every site whose envelope is at most `u`.
 
 Independent report (25 Nov 2026).  Directory: `scratchpad/ws/W/` (`W_report.md`, scripts `code/`, outputs `out/`).
 The repository was read at commit `e4351b9` with the working tree as found (modified files of others); nothing in it

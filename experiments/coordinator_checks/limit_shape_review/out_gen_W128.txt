@@ -1,0 +1,5 @@
+(0,12/5,22/5) g=4/5 | box 128 | strands 1481, linker sites 6325, not linked 0 | N = 166199 | file wit/_0_12_5_22_5__g_4_5_W128.npy | 30.7 s
+
+real	0m30.871s
+user	0m30.719s
+sys	0m0.140s

@@ -95,7 +95,12 @@ envelope and evaluated anchors, and two-sided bounds on partition functions (fac
 branching, thermal dead-end elimination, and — since the second phase — cut and elimination
 rules: exact on every chain (machine-checked) and on tree and ring instances, and by a paper
 argument on interaction graphs of treewidth at most two), with voxel enclosures of continuous
-integrals.
+integrals.  What distinguishes the second kernel from proof logging as practised (one
+certificate, one instance) is its quantifier: an accepted certificate bounds the energy for
+*every* residual of the class, and the kernel itself checks that the class is not empty.  For
+the first kernel the ingredients have verified checkers in the pseudo-Boolean setting, and
+whether the native format is cheaper has not been measured (theory report §6.4, rewritten
+after the Scientific Discovery Division's review of prior art, SCI-REV-0006).
 
 **Theory, first phase.**  Exact characterisations of robust optimality under an envelope
 (contact-set, sharp-minimum and query-model theorems), the necessity of decomposition rules
@@ -164,8 +169,11 @@ second-order classes, second-order classes at finite temperature, the torus of a
 Boltzmann averages, chains as known parts, and what the theory predicts for chain geometry
 (theory report §§11.10–11.15) — is integrated with the reviewers' scope; one conjecture of a
 workstream was refuted by its reviewer (D41).  The finding with the most direct consequence
-for the original goal is negative: the verified per-torsion constants grow with the distance
-to the chain end, so the weighted-Hamming route cannot certify long chains (D42).  §12 of the
+for the original goal is negative: the verified per-torsion constants are square roots of
+moments of inertia of the lighter arm and therefore grow like the power 3/2 of the distance
+to the chain end (per-joint lever-arm bounds of this kind are standard in robot motion
+planning; new is the consequence), so the weighted-Hamming route cannot certify long chains
+(D42).  §12 of the
 report says what a publication would still need.
 
 **Cycle 10 (refereed: `docs/reviews/R5_referee_report.md`, `R6_referee_report.md`,
@@ -283,15 +291,23 @@ which the convergence theorem applies, and the exact level recursion converges t
 reference instance with the matching isoperimetric exponent, and fibres — is listed there.
 (vii) *Chains in the thermodynamic limit* (theory report §11.22; workstream S,
 `docs/workstreams/S_REPORT.md`; **paper proofs with computer-assisted parts, checked by the
-coordinator with independent code, no separate referee**).  The Computational Research
+coordinator with independent code and reviewed by the Scientific Discovery Division —
+SCI-REV-0002: no false theorem; the headline below reworded, the lower bound raised**).  The
+Computational Research
 Division measured that certificates in the profile format grow with the chain at every
 size that can be enumerated and asked what the limit is.  For the lattice chain: the
 normalised sets of (pair-count profile, number of gauche torsions) of *bridges* converge to
-a compact convex **limit shape**; the certificate sizes converge to a covering number of
-it; for unrestricted walks this is a conjecture with unconditional bounds — **the plateau
-is between 50 and 3 627 evaluations at `(L, ε₁) = (1, ½)`, where the earlier existence bound
-gave `10^{1387}`**, most likely a few hundred, and it is reached only at `10³`–`10⁵` beads,
-because the shape converges with a surface correction of exact order `N^{-1/3}`.  The
+a compact convex **limit shape**, and their certificate sizes converge to a covering number
+of it off a countable, unidentified set of accuracies.  In the three parts the review asked
+for: **for every limit point of the certificate sizes of all walks at `(L, ε₁) = (1, ½)`:
+between 116 and 3 627 [P, computer-assisted], where the earlier existence bound gave
+`10^{1387}`**; that the sizes converge is proved for bridges off that set of accuracies and
+is a conjecture for all walks [C]; our estimate of the limit is a few hundred and of the
+chain length at which it is approached `10³`–`10⁵` beads or more [N, an estimate] — the shape
+converges with a surface correction of exact order `N^{-1/3}` at its compact end, but no
+theorem says when the certificate sizes are near their limit points.  (The first version
+of this paragraph said "the plateau is between 50 and 3 627 evaluations … and it is reached
+only at `10³`–`10⁵` beads".)  The
 coordinator's brief for this workstream had the profile distance wrong (D48).  Machine-checked:
 the two abstract theorems behind it — Fekete's lemma for sets and the stability of covering
 numbers (`SetLimit.lean`, `CoverStability.lean`); the lattice lemmas that feed them are paper
@@ -322,31 +338,59 @@ shallow barrier is invisible to every exponent.  Open: what adaptive algorithms 
 phases beyond small accuracies.
 (ix) *Rounds of adaptivity* (theory report §11.24; workstream U,
 `docs/workstreams/U_REPORT.md`; **paper proofs, checked against the proof they build on and
-re-computed by the coordinator; unrefereed**).  How much adaptivity does the adaptive
-exponent need?  A number of rounds that does not depend on the system size suffices (the
-nested algorithms can be re-scheduled: a ladder with `L` rungs is `L` rounds); two rounds
-already beat every fixed sample; and two rounds provably do **not** reach the adaptive
-exponent — at slope 1 their exponent lies between `0.359a` and `0.624a`, where a fixed
-sample costs `a` and full adaptivity `0.263a`.  The hard instances are not nested basins,
-as the coordinator had expected (D50), but a flat histogram in one block of coordinates
-that dilutes the first batch.  Whether three rounds suffice is open.  Machine-checked: the
-indistinguishability lemma behind the lower bound, for two rounds (`TwoRounds.lean`).
+re-computed by the coordinator; refereed by the Scientific Discovery Division with
+independent code (SCI-REV-0003): no critical finding; one major correction — the cost
+bound of the re-scheduled algorithm held on the good event only, and a stopping rule was
+added — and nine minor ones, all applied**).  How much adaptivity does the adaptive
+exponent need?  *Theorem (paper proof, on top of the refereed nested algorithms):* for
+every `η > 0` a number of rounds that does not depend on the system size comes within `η` of
+the adaptive exponent (the nested algorithms can be re-scheduled: a ladder with `L` rungs
+is `L` rounds); whether a fixed number of rounds reaches it is open.  *Theorem (paper
+proof):* two rounds already beat every fixed sample.  *Theorem (paper proof; the
+indistinguishability lemma behind it machine-checked for two rounds and finite mixtures,
+`TwoRounds.lean`; its application re-derived by the referee):* two rounds provably do
+**not** reach the adaptive exponent — at every fixed accuracy, for randomised two-batch
+algorithms that are correct on the whole Lipschitz class of the uniform cube,
+asymptotically in the system size; and, by the referee's strengthening (machine-checked;
+its file is now in this repository), already for the expected cost at one instance, the
+flat histogram of a block of coordinates.  *Numbers (values of the proved formulas at
+slope 1):* the two-round exponent is at least `0.359a` and at most `0.624a` — a `liminf` and a
+`limsup`: the limit is not shown to exist — where a fixed sample costs `a` and full
+adaptivity `0.263a` (item (iv)).  *Not a theorem and not shown:* a separation at any finite
+size — at the sizes computed, the known adaptive algorithms cost more than the two-round
+lower bound.  The hard instances are not nested basins, as the coordinator had expected
+(D50), but a flat histogram in one block of coordinates that dilutes the first batch.
+Whether three rounds suffice is open.  All of it is relative to the model: exact
+evaluations of a residual known only to be Hamming–Lipschitz, uniform reference measure,
+worst case over the class.
 (x) *One value of the order parameter at a time* (theory report §11.25; **the coordinator's
-paper proofs, every step checked numerically; not refereed**).  Inside a level set of the
+paper proofs, checked numerically; reviewed by the Scientific Discovery Division
+(SCI-REV-0001): the mathematics is sound, the headline below was too broad and has been
+narrowed, and one proof step was missing and has been supplied**).  Inside a level set of the
 order parameter the known part is a constant, and there are only `n + 1` level sets.  Two
 consequences.  First, an elementary inequality — among pairs of binary variables with a
 given odds ratio the mutual information is largest when both marginals are uniform; it
 is **known** (Hasenclever and Scholz 2013, found for us by the Scientific Discovery
 Division; our first version said "may be folklore") —
 shows that on every level set sets around one centre are extremal and the exponents are
-at most the uniform cube's, with equality at half filling.  Hence **no known part that
-depends on the configuration only through one order parameter — ferromagnetic or
-antiferromagnetic, with any number of phases — makes certification harder than no known
-part at all, and an interaction without a field changes no exponent** (this settles what
-(viii) had left numerical).  This is a statement about two-letter alphabets: with three
+at most the uniform cube's, with equality at half filling.  Hence, **for fixed samples, and
+for algorithms that are told the instance when the instance is a function of the order
+parameter, no known part that depends on the configuration only through one order
+parameter — ferromagnetic or antiferromagnetic, with any number of phases — has a larger
+exponent than no known part at all, and without a field and with one phase these two
+exponents are exactly the uniform cube's** (this settles what (viii) had left numerical).
+For adaptive algorithms without a hint — the third exponent, the small one on the cube —
+the comparison is proved for ferromagnets and for fields only ((viii), (v)); otherwise it
+is a conjecture: an antiferromagnet without a field is proved to be at least as hard as
+the cube, and at most as hard as the cube is for fixed samples.  (Our first version said
+"makes certification harder than no known part at all … changes no exponent" without
+these restrictions; pointed out by the Scientific Discovery Division in its review
+SCI-REV-0001.)  This is a statement about two-letter alphabets: with three
 or more letters it fails at small slopes — a known part that removes letters can make
-the problem harder (numerical; the mutual information of a Potts pair is largest on a
-sub-alphabet).  Second, algorithms reduce to level sets: keep a bracket per
+the problem harder (numerical, given §11.26: below the slope `ln 2` the two-letter site has
+the larger exponent at vanishing accuracy; which known part is the hardest is open — not
+always a uniformly weighted sub-alphabet, by an example of the Scientific Discovery
+Division).  Second, algorithms reduce to level sets: keep a bracket per
 level set and always refine the one with the largest weighted upper end; a level set is
 then examined only as closely as its distance from the maximum requires (deterministic
 core machine-checked, `SliceRefinement.lean`).  Still open: the adaptive exponent on a
@@ -354,19 +398,34 @@ single level set (conjectured to be the hinted one, as on the cube), and the exa
 adaptive exponent when perturbations that change the order parameter matter.
 (xi) *Heteropolymer product landscapes* (theory report §11.26; workstream W,
 `docs/workstreams/W_REPORT.md`; **paper proofs — the upper bounds by transfer of the
-two-letter proofs — re-computed by the coordinator with an own implementation; not
-refereed**).  The setting the certificate formats were built for: a fixed sequence of
+two-letter proofs — re-computed by the coordinator with an own implementation; the two
+main theorems reviewed by the Scientific Discovery Division with independent
+replication (SCI-REV-0005): nothing false; two gaps in the written proof of the adaptive
+upper bound — the isoperimetric statement it rests on was stated in the workstream's
+report only, and a uniformity over compositions was asserted, not proved — both closed
+in the theory report; its twelve minor findings corrected; the nested algorithm has
+never been simulated**).  The setting the certificate formats were built for: a fixed
+sequence of
 site types, any number of states per site, single-site known parts, envelopes that need
 not be symmetric.  All three exponents come from one function, and the kinds of sites
 combine through a common *slope*, not at a common accuracy (their exponents do not add).
 **The single-site ingredient is a classical object: a Rényi capacity of the channel that
-sends an extreme allowed perturbation of the site to the site law it produces.  A fixed
+sends an extreme allowed perturbation of the site to the site law it produces.
+Asymptotically, at extensive accuracy and in the worst case over the class, a fixed
 sample of `e^{nθ}` evaluations certifies the accuracy rate given by the sphere-packing
-exponent of that channel at rate `θ`; adaptivity, or a hint, gains exactly `θ`.**  Three
+exponent of that channel at rate `θ`; adaptivity — or a hint, at the hardest instance —
+gains exactly `θ`, for rates `θ` below the fixed point `h` of that exponent** (beyond it an
+adaptive algorithm reaches every extensive accuracy; the range and the mode were missing
+in our first version — a correction of the review).  Three
 things that hold for two states fail beyond: the site function need not be concave, a
 field does not always help, and the uniform site law is not always the hardest — a
 uniform site with many equivalent states behaves, at vanishing accuracy, like one with
-about `e^{u/2}` states.  Machine-checked here: the every-`n` lower bounds and the two
+about `e^{u/2}` states; and at small slopes a three-state site with one rare state is
+harder than the two-state cube (by `0.03 %` at slope `0.5`; found by the reviewers), although
+no site law exceeds a universal ceiling — `u²/32` at vanishing accuracy, for slope `u` —
+which the two-state cube attains to leading order.  Machine-checked here: the general
+inequalities behind the every-`n` lower bounds (the product step for several kinds of
+sites is on paper) and the two
 elementary steps behind "the hardest instance is the Rényi centre" (`RenyiCentre.lean`).
 (xii) *Evaluations together with local experimental data* (theory report §11.27; a question
 of the Scientific Discovery Division, which proved the adaptive case).  On the cube class,
@@ -397,7 +456,8 @@ classes (product landscapes; for algorithms without a hint only the cube, with a
 part, a field, or — with an adaptive algorithm only for ferromagnets, and exact only up
 to the junction with the uniform cube — a mean-field known
 part, where the comparison with the uniform cube of item (x) is the coordinator's own
-unrefereed proof), with paper proofs wherever the theory report does not name a Lean declaration; the
+proof, reviewed by another division, and covers fixed samples and hinted algorithms
+only), with paper proofs wherever the theory report does not name a Lean declaration; the
 newest of them — the adaptive exponent — has a machine-checked recursion and bracket but a
 paper proof for the number of evaluations, its extension to bounded accuracies is refereed
 but has been run with three nested levels only at toy sizes and at the flat instance, its
@@ -406,7 +466,9 @@ simulated end to end, and its
 algorithms are
 not practical at any size that can be simulated.  The chain-length independence of profile certificates is a bound, not an
 observation: at every enumerated size the certificates grow; the limit theorem of §11.22 is
-proved for bridges only, is a conjecture for unrestricted walks, concerns one synthetic
-lattice model, and has not been read by a separate referee.  `docs/THEORY_REPORT.md` §8 lists the limitations, §10 ends with a
+proved for bridges only and only off an unidentified countable set of accuracies, is a
+conjecture for unrestricted walks, concerns one synthetic lattice model, and has been
+reviewed by one other division (SCI-REV-0002: no false theorem; its headline reworded).
+`docs/THEORY_REPORT.md` §8 lists the limitations, §10 ends with a
 one-table summary of what each kind of knowledge about the residual costs, and
 `docs/DEAD_ENDS.md` records every claim that was made and withdrawn.

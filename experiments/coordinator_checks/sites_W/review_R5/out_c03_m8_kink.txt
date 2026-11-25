@@ -1,0 +1,27 @@
+vertices (g[0] = 0) and their kind:
+    [ 0. -1. -2.] anti-dip at 0
+    [ 0.  -1.   0.5] dip at 1
+    [ 0.  -0.5 -2. ] dip at 2
+    [ 0.   1.  -0.5] anti-dip at 1
+    [0. 1. 2.] dip at 0
+    [0.  0.5 2. ] anti-dip at 2
+branch A = {dip at 2, anti-dip at 2, dip at 0} -> vertex indices [2, 5, 4] ; branch B = three dips -> (2, 0, 1) indices [2, 4, 1]
+(1) t_c = 0.377987320;  G^A = 0.063536822818, G^B = 0.063536822818, unrestricted F* = 0.063536822818 (dual bound 0.063536822819)
+    weights at t_c:  A (dip 2, anti-dip 2, dip 0) = [0.5055 0.4302 0.0644];   B (dip 2, dip 0, dip 1) = [0.4662 0.3899 0.144 ]
+    branch slopes by the envelope theorem:  dG^A/dt = 0.054049491,  dG^B/dt = 0.059631123;   SLOPE JUMP = +0.005581631
+    central differences, h = 1e-03:  A 0.054049538, B 0.059631146, jump +0.005581607
+    central differences, h = 1e-04:  A 0.054049492, B 0.059631123, jump +0.005581631
+    central differences, h = 1e-05:  A 0.054049491, B 0.059631123, jump +0.005581631
+    t = 0.373987: G^A = 0.063316000136, G^B = 0.063293797228, F* = 0.063316000136 [dual 0.063316000139]  -> F* - max(G^A, G^B) = -1.4e-17, larger branch: A
+    t = 0.377487: G^A = 0.063509725852, G^B = 0.063506936948, F* = 0.063509725852 [dual 0.063509727413]  -> F* - max(G^A, G^B) = 2.8e-17, larger branch: A
+    t = 0.378487: G^A = 0.063563775356, G^B = 0.063566568076, F* = 0.063566568076 [dual 0.063566569012]  -> F* - max(G^A, G^B) = 1.1e-16, larger branch: B
+    t = 0.381987: G^A = 0.063748402088, G^B = 0.063770849185, F* = 0.063770849185 [dual 0.063770852438]  -> F* - max(G^A, G^B) = 1.4e-16, larger branch: B
+(2) one-sided quotients of the unrestricted F* at t_c (h, left slope, right slope, jump), and Richardson (2 q(h) - q(2h)):
+    h = 4e-03: left 0.05520567, right 0.05850659, jump +0.00330092
+    h = 2e-03: left 0.05462739, right 0.05906876, jump +0.00444137   | Richardson: left 0.05404912, right 0.05963094, jump +0.00558182
+    h = 1e-03: left 0.05433840, right 0.05934992, jump +0.00501152   | Richardson: left 0.05404940, right 0.05963108, jump +0.00558168
+    h = 5e-04: left 0.05419393, right 0.05949052, jump +0.00529658   | Richardson: left 0.05404947, right 0.05963111, jump +0.00558164
+(3) workstream's formula ((F[k+1]-F[k]) - (F[k]-F[k-1]))*2000 at t_k = 0.3780: +0.00516   (w08_misc.txt prints +0.00516; W_REPORT rounds to +0.0052)
+    curvatures of the branches at t_c: A -0.5777, B -0.5625;  predicted second-difference estimate J(1 - |t_c - t_k|/h) + F''h (h = 5e-4): +0.00516
+corner of Rhat: e_c = 0.056860 = 0.1996 E (E = 0.284907); Rhat(e_c) = 0.0420514; maximisers t = 0.3731 (branch A) and 0.3829 (branch B): slope of Rhat jumps from -0.3829 to -0.3731
+time 20.2 s

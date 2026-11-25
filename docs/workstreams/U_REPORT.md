@@ -1,7 +1,9 @@
 # Workstream U — rounds of adaptivity: what does a bounded number of rounds cost?
 
 > **Repository note (added by the coordinator at integration; the report below is otherwise as
-> delivered).**  Status: **paper proofs by one author, unrefereed; checked and re-computed in
+> delivered).**  Status: **paper proofs by one author, refereed after integration (Scientific
+> Discovery Division, SCI-REV-0003: no critical finding, one major, nine minor — see the
+> errata below); before that checked and re-computed in
 > part by the coordinator** — Theorem U1 line by line against the proof of Theorem 11.56
 > (`docs/workstreams/K_REPORT.md` §2), Lemma U2 (re-derived; the coupling is stated in the theory
 > report through a "virtual run", which avoids conditioning on the events `E_t`), Theorem U3
@@ -18,6 +20,44 @@
 > `experiments/workstreams/U/` (`code/`, `out/`; the report's `scratchpad/ws/U/` is that directory).
 > The coordinator's observations (i)–(iii) that the report comments on are in
 > `docs/workstreams/U_brief.md`; (iii) — nested basins — was wrong (`docs/DEAD_ENDS.md` D50).
+
+> **Errata after the review SCI-REV-0003** (Scientific Discovery Division, branch
+> `research/scientific-translation`, `docs/science/workstreams/R4_REPORT.md`: an independent
+> review with own code; no critical finding, one major, nine minor; the two-round lower bound
+> "proved", Theorem U1 "proved" once its stopping rule stands before the stage).  The text
+> below is unchanged; the following points of it are corrected in the theory report §11.24.
+> **(M1) Theorem U1(i), "at most `C_B` evaluations in every run", is not proved by the text as
+> written.**  Claim B bounds `|C_l|` under its proviso only ("otherwise B2L⁺ has stopped"),
+> and the rule "a stored bracket of rung `l−1` has ratio above `e^{x_{l−1}}` → trivial bracket"
+> is listed under *Output* (§1.2), that is after the evaluations it is meant to prevent.
+> If the brackets of rung `l−1` are wider than promised — an inner procedure may return its
+> trivial bracket with probability `δ′` — then `C_l` can be all of `C_{l−1}` (the division's
+> run: `|C_2| = 393 216 = M_max` against `N_2 = 79 931`).  Read: "*before stage `l`*: if
+> `|C_l| > N_l` (or if a stored bracket of rung `l−1` has ratio above `e^{x_{l−1}}`), stop and
+> return the trivial bracket".  On `𝒢′` the rule never fires, so (ii) is unchanged, and (i)
+> then holds in every run; no exponent changes.  (m7) Proof of Claim B, "`M* = K` is
+> impossible here (it would force `i ≤ 2ν s_j/(λ_je^b) < K/2`)": the reason is
+> `K < i ≤ min{M_max, 2ν s_j/(λ_je^b)}`, whence `M* ≥ 2K`; the conclusion stands.  (m1) The
+> sentence that closes §1.2 ("every exponent statement derived from Theorem 11.56 … holds
+> for the batched algorithm") is true for a fixed choice of the levels; for Theorems 11.54
+> and 11.58 it gives `h + 3η` with `r(η)` rounds (Corollary U1.3), not the exponent itself with
+> a fixed number of rounds.  (m3) Lemma U2: "batch sizes at most `M_t`" is needed, and to be
+> read, for the runs on the instances `ψ_s` only; and for two rounds no bound is needed at
+> all: the division's Theorem R4.1 (machine-checked; `proofs/Frontiers/TwoRoundsExpected.lean`) gives
+> `1 − 2δ ≤ E|B₁|·p₁ + E|B₂|·p₂` with the second batch taken on the flat histogram of the first
+> block, a member of the class, so the two-round bound of Theorem U3 holds for the expected
+> cost at that instance, and the Markov remark of the notation paragraph and of §8 is
+> superseded.  (m4) "A third batch can" (§0) and "A third round reads it off" (§2.3) are the
+> **[sketch]** of Proposition U10(b), for an algorithm that knows the two blocks; for
+> algorithms correct on `L_u` three rounds are only known to cost at most
+> `T^{(3)}(0) = 0.541a`.  (m5) The finite-`n` sentences of §0 and §2.2 ("two rounds need
+> `e^{0.0382n}` evaluations, the hinted lower bound is `e^{0.0294n}`") compare two lower
+> bounds; no separation from adaptive algorithms is shown at any finite size.  (m9) The
+> values `T^{(r)}(0)` for `r ≥ 4`, and with them "`τ^{(48)} < τ^{(2)}`" (Corollary U4(c)), have no
+> stored witness: `out/ub_rounds_*.txt` keeps the value and one parameter for each `r`, not
+> the ladders and the allocation of rounds.  Not errata of this report: m2 and m6 (the
+> restriction `r_l ≤ r − 1` and the `limsup`/`liminf` convention are here and were lost in the
+> theory report) and m8 (about the Lean file).
 
 Independent report.  Directory `scratchpad/ws/U/` (this file, `code/`, `out/`); nothing in the repository was
 modified, no state-changing git command was run, nothing was delegated.  The repository was read at commit `caf1dc5`

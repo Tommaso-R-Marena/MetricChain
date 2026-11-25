@@ -292,6 +292,18 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIV.2 M3: span bracket claimed to equal McShane's bound
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.5 M1: scattering bound with the constant q^2/4 instead of q^2/3
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.5 M2: |sin t - t cos t| claimed to be at most t^3/3.5
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.5 M3: Lipschitz constant q^2/8 in the squared distance
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.5 M4: Debye formula with the pair sum counted three times
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.5 M5: another 6-bead walk claimed to be homometric to the first
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.5 M6: a homometric pair claimed to exist already with 5 beads
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XV.1 M1: identity between the relative entropies with the wrong sign of Lambda1
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XV.1 M2: fixed point claimed at the outer fraction g/(g + 2 theta_hint)
@@ -508,6 +520,14 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.25 M2: the same test at u = 2, where the junction is at beta J* (the refutation must disappear)
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.5 M1: only the first K positions claimed to be candidates
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.5 M2: sample sizes of the levels from the trivial lower bound instead of the empirical one
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.5 M3: trivial brackets claimed to leave the candidate set small
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.27 M1: the refutation run with honest brackets of the promised ratio (the count then holds)
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXI.1 M1: symmetric table taken at a smaller odds ratio (0.9 s)
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXI.1 M2: kernel inequality with the weight Y in place of 1 - Y
@@ -549,6 +569,14 @@
 [         caught] XXI.4 M5: outer blocks restricted to cyclic windows (not exchangeable: the mean over partitions is not the slice mean)
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXI.4 M6: a slice refined only while its deficit is below half its bracket
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.6 M1: mutual information of a profile claimed to be at most 0.9 h(kappa)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.6 M2: a profile with zero budget claimed to have the value 0
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.6 M3: every two-point component of a feasible law claimed to be feasible (the step of the first proof)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.6 M4: values at a negative accuracy claimed to be at most the supremum at accuracy zero
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXI.5 M1: integrand I(s)/s in place of I(s)/s^2
                   exit=1  1 TEST(S) MISBEHAVED
@@ -593,6 +621,18 @@
 [         caught] DEAD.23 M1: concavity tested away from the label switch (the documented refutation must not be reproduced there)
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.24 M1: the three-letter counterexamples replaced by the uniform law itself
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.5 M1: ceiling t(1-t)u^2/9 instead of t(1-t)u^2/8
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.5 M2: weight 0.35 on a set of letters claimed to suffice for the comparison with the cube
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.5 M3: the law (0.02, 0.49, 0.49) claimed to be above the cube in h (the first version: 'close to two letters means the two-letter values' or more)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.5 M4: the two-letter cube claimed to be the supremum of h at u = 0.5
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.5 M5: slope jump +0.0052 at the kink (the workstream's printed value, a second difference on a grid)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.5 M6: Lipschitz constant of theta_na in the composition a tenth of max a_j
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXII.4 M1: a code whose dual has minimum distance two (the repetition code): pair marginals are not uniform
                   exit=1  1 TEST(S) MISBEHAVED
@@ -643,4 +683,5 @@
 [         caught] DEAD.26 M2: all three distances of the example equal (the shift is then exact; the refutation must disappear)
                   exit=1  1 TEST(S) MISBEHAVED
 
-322 mutations: 321 caught, 1 expected pass, 0 not as expected
+342 mutations: 341 caught, 1 expected pass, 0 not as expected
+115 baseline runs of the unmutated harness (one per selection): 115 behave as expected, 0 misbehave

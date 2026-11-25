@@ -1599,3 +1599,123 @@ re-computation of "every headline number" with independent solvers — had passe
    launched as a nested grid with an inner solver in the loop and ran into its time limit;
    a version reduced by a factor of twenty needed fifteen minutes for one row of eight
    numbers — the coarse numbers quoted in Proposition 11.109(e).
+
+## D55. What five reviews by another division found in sections that our own checks had passed: a bound "in every run" that held on the good event, a headline for three exponents with a corollary for two, a duality step tested only where it was true, a "plateau" that was a bracket, and classical objects under new names (cycle 10, fourteenth checkpoint; Scientific Discovery Division, SCI-REV-0001, -0002, -0003, -0005, -0006 on theory report §§11.25, 11.22, 11.24, 11.26 and on the prior-art columns)
+
+No theorem was found false.  What was found is listed here as lessons, because each item
+had passed the coordinator's own check and, in three cases, an earlier referee's.
+
+1. **"In every run" for a bound proved on the good event — for the third time**
+   (Theorem 11.84(ii)).  The candidate sets of the batched schedule were claimed to have at
+   most `N_l` members "in every run (deterministic)".  The count uses
+   `L_i ≥ U_ie^{−x_{l−1}}`, which holds only if the inner procedure of the previous rung returned
+   a bracket of the promised ratio; a bracket procedure may return its trivial bracket
+   with probability `δ′`, and then every outer point is a candidate (`2.2·10¹²` against
+   `N_2 = 4.4·10⁹` with the constants of the theorem).  The same gap had been found by referee
+   R7 in Theorem 11.52 and by referee R8 in Theorem 11.56; the coordinator's check of Theorem
+   11.84 "line by line against the proof of Theorem 11.56" followed both claims on the good
+   event and never asked what an inner procedure may return off it.  *Repair:* a stopping
+   rule checked before any evaluation of the stage.  *Lesson:* a cost bound of a randomised
+   procedure is a statement about every run; for each sub-procedure ask what it may return
+   when it fails, and put the test that protects the budget before the spending.  Harness
+   XX.5, DEAD.27.
+2. **A headline about "exponents" where the corollary lists two of three** (§11.25).  "No
+   known part that is a function of the type is harder than the uniform cube … an
+   interaction without a field changes no exponent."  Corollary 11.91 covers the hinted
+   exponent of symmetric instances and the non-adaptive exponent; the exponent of adaptive
+   algorithms without a hint — the one that is small on the cube — is covered for
+   ferromagnets and fields only, and is otherwise Conjecture 11.94.  The sentence was
+   repeated in the title, in §0, §8, §10, §12, the README and three messages.  *Lesson:* this
+   report has three exponents; a headline must say which, for which algorithms, at which
+   instances.
+3. **A duality step tested numerically only where it was true** (Theorem 11.90(a)).  "Every
+   law with mean `κ` is a mixture of two-point laws with mean `κ`, so two blocks suffice."
+   At negative accuracies feasibility is a *second* linear constraint on the law, the
+   two-point components of a feasible law can be infeasible, and the chain of equalities,
+   read literally, gives `+∞`.  The statement is true (vertices of the feasible polytope
+   have at most three atoms, and three atoms mean zero budget), but our scripts and the
+   harness tested profiles with more than two blocks at `e ≥ 0` only — while the
+   non-adaptive half of Corollary 11.91 uses the function near `e = −K(u/2) < 0` — and the
+   status line said "every step checked numerically".  *Lesson:* test a formula on the
+   whole range on which it is used; "every step checked" must name the ranges.  Harness
+   XXI.6.
+4. **"The plateau is real, it is in the hundreds"** (§11.22).  One sentence joined a theorem
+   (every limit point of the certificate sizes lies in a bracket), a conjecture
+   (convergence: proved for bridges off a countable set of accuracies that nobody has
+   identified, conjectured for walks) and an estimate (the value; the chain length at
+   which it is approached).  The same paragraph counted a sketch as a proof ("five
+   vertices settled", "`2.2 ≲ vol 𝒦`").  And the lower end of the bracket, 50, used one
+   triangle of the body although the section's own tools — explicit bridges, the one-sided
+   rate, convexity — give 116: the reviewer raised our bound with our lemmas.  *Lessons:*
+   three labels, three sentences; and before a bound is published, ask what the tools
+   already in the section give.
+5. **A negative remark is a claim too.**  "Nothing in this argument says how fast they fill
+   it" (after Theorem 11.69) is true at the boundary and false in the interior, where the
+   same three hypotheses give the rate `M^{-1/2}` (now Proposition 11.69a).
+6. **Sentences about the state of a field age.**  "Verified checkers exist for exact model
+   counting only" was false from 2024 on; "the 43-times figure is the number to beat" was
+   obsolete from 2025 on; both stood in the summary table and in `prior_art/L1`.  *Lesson:*
+   date such sentences, say who read what, and prefer "not found in these searches on
+   this date" to "does not exist".
+7. **Classical objects under new names.**  The reduced envelope of the normal form is a
+   weightable quasi-metric; the profile distance is the Wasserstein distance between global
+   distance distributions, a lower bound of the Gromov–Wasserstein distance, whose zero
+   set is homometry; the limit of a super-additive family of sets is, for exact semigroups,
+   a Newton–Okounkov body; the lever-arm "law" is the growth of a moment of inertia and its
+   weighted-`ℓ¹` bound a published certificate in robot motion planning; the
+   finite-temperature formula is an example in Merhav's paper, not a theorem.  None of
+   these names was in our eight prior-art files.  *Lesson:* a reformulation is recognised
+   by someone who knows the neighbouring field; an independent prior-art review belongs at
+   the start of a write-up, not after thirteen checkpoints.
+8. **Stated too modestly, twice.**  The property that distinguishes the residual kernel — one
+   certificate for a whole class of residuals — was listed as one kernel among three.  And
+   the sharp lever-arm constant was in workstream G all along, but Theorem 11.36 said
+   "`c_i ≥ 0.824…`" and "lower constant numerical", so that the reviewer derived the same
+   formula again and reported it as an improvement.  A tag that does not say which constant
+   is numerical hides the theorem next to it.
+9. **A pair-distance profile does not identify a conformation** — and the theorem usually
+   quoted for the opposite (generic reconstructibility from the distribution of distances)
+   excludes chains by its own genericity condition, because bond lengths coincide.  We had
+   written "large fibres" and quoted a count; the reviewer separated three sources (labels,
+   homometry, truncation) and found non-congruent lattice chains with identical complete
+   distance multisets from 6 beads on (harness XIV.5).
+10. **"Re-computed" without a script.**  When the corrections were applied, a dozen new
+    sentences cited computations that existed only in scratch directories.  They are now
+    in the repository (`experiments/coordinator_checks/rounds_U/`, `slices/`,
+    `limit_shape_review/`), re-run by the coordinator with identical output.
+11. **In the heteropolymer section (§11.26; SCI-REV-0005 and SCI-REV-0001 §5).**  (i) The
+    isoperimetric statement that the nested algorithm needs — for the measure `μ_H`, with
+    an error term uniform over compositions — was stated and proved in the workstream's
+    report only; our text referred to "Theorem 11.97 in the form for `μ_H`", which did not
+    exist in it (now Theorem 11.97(c)).  (ii) "Families of procedures are indexed by
+    compositions" was the whole of our account of a level induction whose inner blocks
+    have a different composition at every level; the workstream's argument for the
+    uniformity cited the continuity of the wrong function (now written out, with a
+    Lipschitz bound, in Theorem 11.101).  (iii) "Site laws close to `(½, ½, 0)` have the
+    two-letter values": false in both directions — at `u = 0.5` the law `(0.05, 0.5, 0.45)`
+    is above the two-letter cube by `0.03 %` and `(0.02, 0.49, 0.49)` below it; what is a
+    theorem is the comparison for laws with weight exactly `½` on a set of letters, and the
+    ceiling `u²/32`.  (iv) "Machine-checked: the every-`n` lower bounds" — machine-checked are
+    the general inequalities behind them; the product step for several site types is on
+    paper.  (v) A number (`+0.0052`) taken from a second difference on a grid of step
+    `5·10⁻⁴` and reported as a slope jump (it is `+0.0056`).  (vi) A Lean theorem cited for a
+    recursion with another start (`exactRec_tendsto` starts at `θ_na`; the level induction
+    starts from complete enumeration, which is `iterates_lt_hint_add`).  (vii) The
+    dictionary sentence "a fixed sample of `e^{nθ}` points certifies `E_sp(θ)`; adaptivity gains
+    exactly `θ`" without its ranges (`θ < a`; `θ < h`), its mode (asymptotic, worst case) and
+    the convention for `E_0` (maximised per site type).  Harness XXII.5.
+12. **A mutation "caught" for the wrong reason, and a test that failed only in the mode
+    the audit runs** (found when this checkpoint's own audit failed).  The new test XXI.6
+    carried a coverage guard ("at least 60 cases") that the full run met (93) and the
+    quick run of the audit did not (56): the test *misbehaved in quick mode without any
+    mutation*.  The mutation runner ran every mutant in quick mode and counted exit
+    code 1 as "caught" — so all four mutations of XXI.6 were reported as caught, and one
+    of them (**the bound `MI ≤ h(κ)` weakened to `0.9·h(κ)`**) was in fact not caught by
+    anything: no sampled profile came near the bound.  Three repairs: the guard now
+    counts what the quick run delivers; the test checks the bound where it is attained
+    (the pure profile, blocks of density 1 and 0, has `MI = h(κ)` exactly); and the
+    mutation runner now runs the **unmutated** harness on the same selection, in the same
+    mode, before the first mutant of a selection, and fails if that baseline misbehaves.
+    *Lesson:* "the mutant fails" is evidence only relative to "the original passes *under
+    the same conditions*"; and a new test must be run in every mode in which it will be
+    run later, before its mutations are written.

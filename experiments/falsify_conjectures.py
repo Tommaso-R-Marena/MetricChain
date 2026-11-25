@@ -4961,6 +4961,116 @@ def t_profiles_on_chains(rng, trials):
         return False, dict(reason="every walk has its own profile: the fibres of the pseudometric were expected to be large")
     return True, stats
 
+def lc_site_canon(sites):
+    """Canonical form of a finite set of lattice points under the 8 symmetries of the square lattice and translations."""
+    best = None
+    for sx, sy, sw in itertools.product((1, -1), (1, -1), (0, 1)):
+        pts = [((y if sw else x) * sx, (x if sw else y) * sy) for x, y in sites]
+        mx, my = min(p[0] for p in pts), min(p[1] for p in pts)
+        key = tuple(sorted((p[0] - mx, p[1] - my) for p in pts))
+        if best is None or key < best:
+            best = key
+    return best
+
+
+def lc_sqdist_multiset(sites):
+    return tuple(sorted((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2 for p, q in itertools.combinations(sites, 2)))
+
+
+@conjecture("XIV.5 Scattering curves of one conformation are members of the pair-profile class (theory report Theorem 11.48(d); statement of the science division, SCI-REV-0006, Proposition A2.1; Scattering.lean): |sin t - t cos t| <= t^3/3 with the constant attained as t -> 0, hence s -> sinc(q sqrt s) is (q^2/6)-Lipschitz, and for two chains with equally many beads |I_x(q) - I_y(q)| <= (q^2/3) sum_k |s^x_(k) - s^y_(k)| (sorted squared distances of all pairs; the sorted matching is the best one), I_x(q) = N + 2 sum_pairs sinc(q r) the Debye intensity; the bound is attained in the limit q -> 0 against a straight rod.  Homometry: the 6-bead walks through (0,0),(0,1),(0,2),(1,2),(1,3),(2,3) and through (0,0),(0,1),(1,1),(1,2),(1,3),(2,3) have the squared distances 1^5 2^3 4 5^3 8 10 13, are not congruent and have identical curves; with 4 or 5 beads there is no such pair, with 6 beads exactly one (36 walk classes, 18 site sets, 17 distance multisets)")
+def t_debye_profile_class(rng, trials):
+    def sinc(t):
+        t = np.asarray(t, dtype=float)
+        small = np.abs(t) < 1e-9
+        return np.where(small, 1.0, np.sin(t) / np.where(small, 1.0, t))
+
+    stats = dict(pairs=0, worst_ratio=0.0, rod_ratio=0.0)
+    # (1) the scalar inequality behind the Lipschitz constant, and its sharpness at the origin
+    ts = np.linspace(1e-3, 300.0, 600001)
+    ratio = np.abs(np.sin(ts) - ts * np.cos(ts)) / (ts ** 3 / 3)
+    if ratio.max() > 1 + 1e-9:
+        return False, dict(reason="|sin t - t cos t| exceeds t^3/3", worst=float(ratio.max()))
+    if ratio[0] < 1 - 1e-5:
+        return False, dict(reason="the constant 1/3 is not approached at the origin", value=float(ratio[0]))
+    # (2) the Lipschitz constant q^2/6 in the squared distance, and its sharpness
+    for _ in range(max(300, trials)):
+        q = float(rng.uniform(0.01, 8.0))
+        s1, s2 = (float(v) for v in rng.uniform(0.0, 60.0, size=2))
+        if abs(float(sinc(q * math.sqrt(s1))) - float(sinc(q * math.sqrt(s2)))) > q * q / 6 * abs(s1 - s2) + 1e-12:
+            return False, dict(reason="s -> sinc(q sqrt s) is not (q^2/6)-Lipschitz", q=q, s1=s1, s2=s2)
+    if (1 - float(sinc(1e-2))) / (1e-4 / 6) < 1 - 1e-4:
+        return False, dict(reason="the Lipschitz constant q^2/6 is not approached")
+
+    def chain(n):
+        v = rng.normal(size=(n - 1, 3))
+        v /= np.linalg.norm(v, axis=1)[:, None]
+        return np.vstack([np.zeros(3), np.cumsum(v, axis=0)])
+
+    def sq(P):
+        d = P[:, None, :] - P[None, :, :]
+        iu = np.triu_indices(len(P), 1)
+        return np.sort((d ** 2).sum(-1)[iu])
+
+    def debye(n, s, q):
+        return n + 2 * float(sinc(q * np.sqrt(s)).sum())
+
+    # (3) freely jointed chains: the bound, and the sorted matching against a random matching
+    for _ in range(max(150, trials)):
+        n = int(rng.integers(4, 26))
+        sx, sy = sq(chain(n)), sq(chain(n))
+        W = float(np.abs(sx - sy).sum())
+        if float(np.abs(sx - sy[rng.permutation(len(sy))]).sum()) < W - 1e-9:
+            return False, dict(reason="a matching beats the sorted matching")
+        for q in (0.02, 0.1, 0.5, 1.5, 4.0):
+            lhs = abs(debye(n, sx, q) - debye(n, sy, q))
+            if lhs > q * q / 3 * W * (1 + 1e-9) + 1e-9:
+                return False, dict(reason="scattering bound violated", n=n, q=q, lhs=lhs, rhs=q * q / 3 * W)
+            stats["worst_ratio"] = max(stats["worst_ratio"], lhs / (q * q / 3 * W))
+            stats["pairs"] += 1
+        # sharpness: a straight rod dominates every chain distance by distance, so the bound is attained as q -> 0
+        rod = np.zeros((n, 3))
+        rod[:, 0] = np.arange(n)
+        sr = sq(rod)
+        Wr = float(np.abs(sr - sy).sum())
+        stats["rod_ratio"] = max(stats["rod_ratio"], abs(debye(n, sr, 0.01) - debye(n, sy, 0.01)) / (0.01 ** 2 / 3 * Wr))
+    if stats["rod_ratio"] < 0.999:
+        return False, dict(reason="the bound is not attained in the Guinier regime against a rod", ratio=stats["rod_ratio"])
+    # (4) the smallest homometric pair of lattice chains
+    A = [(0, 0), (0, 1), (0, 2), (1, 2), (1, 3), (2, 3)]
+    B = [(0, 0), (0, 1), (1, 1), (1, 2), (1, 3), (2, 3)]
+    for wk in (A, B):
+        if len(set(wk)) != 6 or any(abs(wk[i][0] - wk[i + 1][0]) + abs(wk[i][1] - wk[i + 1][1]) != 1 for i in range(5)):
+            return False, dict(reason="not a self-avoiding walk")
+    if lc_sqdist_multiset(A) != (1, 1, 1, 1, 1, 2, 2, 2, 4, 5, 5, 5, 8, 10, 13) or lc_sqdist_multiset(A) != lc_sqdist_multiset(B):
+        return False, dict(reason="the two walks do not have the stated common multiset of squared distances")
+    if lc_site_canon(A) == lc_site_canon(B):
+        return False, dict(reason="the two site sets are congruent")
+    DA = [[(p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2 for q in A] for p in A]
+    DB = [[(p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2 for q in B] for p in B]
+    if any(all(DA[i][j] == DB[pm[i]][pm[j]] for i in range(6) for j in range(i + 1, 6)) for pm in itertools.permutations(range(6))):
+        return False, dict(reason="the two site sets are isometric under some bijection")
+    sA, sB = np.array(lc_sqdist_multiset(A), dtype=float), np.array(lc_sqdist_multiset(B), dtype=float)
+    if max(abs(debye(6, sA, q) - debye(6, sB, q)) for q in np.linspace(0.01, 20, 500)) > 1e-12:
+        return False, dict(reason="homometric walks with different scattering curves")
+    # (5) exhaustive: no homometric pair with 4 or 5 beads, exactly one group with 6
+    expect = {4: (5, 4, 4, 0), 5: (None, None, None, 0), 6: (36, 18, 17, 1)}       # 4 beads: I, L, S, O tetrominoes
+    for n in (4, 5, 6):
+        walks = lc_square_lattice_walks(n)
+        classes = {min(tuple(wk), tuple((x, -y) for x, y in wk)) for wk in walks}       # first step fixed: only the mirror remains
+        sets = {lc_site_canon(wk) for wk in walks}
+        by_ms = {}
+        for st in sets:
+            by_ms.setdefault(lc_sqdist_multiset(st), []).append(st)
+        groups = sum(1 for v in by_ms.values() if len(v) > 1)
+        got = (len(classes), len(sets), len(by_ms), groups)
+        stats[f"n{n}"] = got
+        if groups != expect[n][3] or (expect[n][0] is not None and got != expect[n]):
+            return False, dict(reason="count of walk classes / site sets / distance multisets / homometric groups", n=n, got=got, expected=expect[n])
+        if n == 6 and {st for v in by_ms.values() if len(v) > 1 for st in v} != {lc_site_canon(A), lc_site_canon(B)}:
+            return False, dict(reason="the homometric group with 6 beads is not the stated pair")
+    return True, stats
+
+
 # ---------------------------------------------------------------------------------------------------------------
 # XV. Adaptive algorithms without a hint (theory report 11.18): the level recursion and the two-level bracket
 # ---------------------------------------------------------------------------------------------------------------
@@ -7377,8 +7487,90 @@ def t_rounds_covering_shadows(rng, trials):
     return True, stats
 
 
+def rd_candidate_set(L, U, s, K, m_max, nu, c_eta, eta, b, ell0):
+    """Candidate set of the batched schedule (theory report Theorem 11.84): member i (1-based position i + 1) iff for
+    some level j: i + 1 <= Mhat_j, U_i > s_j, L_i <= s_j e^{-b}, with lambda_j and Mhat_j computed from the stored lower
+    ends as in the theorem.  Returns the boolean membership vector and the vector Mhat."""
+    passes = np.array([K * 2 ** m for m in range(m_max + 1)])
+    cum = np.cumsum(L[None, :] > s[:, None], axis=1)
+    NL = cum[:, passes - 1]                                                  # N_L(i', M): levels x passes
+    dens = np.where(NL >= K, s[:, None] * NL / passes[None, :], 0.0).max(axis=1)
+    best_prev = np.concatenate([[0.0], np.maximum.accumulate(dens)[:-1]])    # max over i' < j
+    lam_j = np.maximum(ell0, c_eta / (1 + eta) * math.exp(-b) * best_prev)
+    Mhat = np.maximum(K, 2 * nu * s / (lam_j * math.exp(b)))
+    pos = np.arange(1, len(L) + 1)
+    member = np.zeros(len(L), dtype=bool)
+    for j in range(len(s)):
+        member |= (pos <= Mhat[j]) & (U > s[j]) & (L <= s[j] * math.exp(-b))
+    return member, Mhat
+
+
+@conjecture("XX.5 Theorem 11.84, Claim B and the stopping rule (after the Scientific Discovery Division's finding M1, SCI-REV-0003): for arbitrary stored brackets [L_i, U_i] of ratio at most e^x — in adversarial orders and distributions, valid or not — the candidate set of the next stage has at most N = K + (J+1) max(K, 4(1+eta) c_eta^{-1} e^lambda nu e^x) members; with wider brackets the count fails (all stored brackets trivial: the candidate set is everything), and then the rule 'stop if |C| > N' fires before any evaluation, so that the stage never runs on more than N fibres")
+def t_rounds_candidate_set(rng, trials):
+    stats = dict(cases=0, worst_fill=0.0, wide_cases=0)
+    for rep in range(max(40, trials // 8)):
+        lam = float(rng.choice([0.25, 0.5, 1.0]))
+        eta = float(rng.choice([0.25, 0.5]))
+        c_eta = (1 - eta) / (1 + eta)
+        J = int(rng.integers(12, 40))
+        K = int(rng.integers(4, 12))
+        m_max = int(rng.integers(11, 15))
+        nu = K * float(rng.uniform(1.0, 3.0))
+        x = float(rng.uniform(0.3, 2.0))
+        b = float(rng.uniform(0.1, 1.0)) * x
+        s = np.exp(lam * np.arange(J + 1))                                    # s_0 = ell_0 = 1
+        Mmax = K * 2 ** m_max
+        N = K + (J + 1) * max(K, 4 * (1 + eta) / c_eta * math.exp(lam) * nu * math.exp(x))
+        kind = rep % 5
+        if kind == 0:
+            lnL = rng.uniform(0, lam * J, size=Mmax)
+        elif kind == 1:                                                       # concentrated just above one level
+            lnL = lam * int(rng.integers(1, J)) + rng.uniform(-x, x, size=Mmax)
+        elif kind == 2:                                                       # heavy lower tail, a few large values
+            lnL = lam * J * rng.random(Mmax) ** 6
+        elif kind == 3:                                                       # sorted: large values first
+            lnL = -np.sort(-rng.uniform(0, lam * J, size=Mmax))
+        else:                                                                 # sorted: large values last
+            lnL = np.sort(lam * J * rng.random(Mmax) ** 3)
+        lnL = np.clip(lnL, 0.0, lam * J)
+        L = np.exp(lnL)
+        U = L * np.exp(x * rng.random(Mmax) ** float(rng.choice([0.2, 1.0, 5.0])))
+        member, _ = rd_candidate_set(L, U, s, K, m_max, nu, c_eta, eta, b, 1.0)
+        if member.sum() > N:
+            return False, dict(reason="Claim B violated: brackets of ratio at most e^x, but more than N candidates", candidates=int(member.sum()), N=N, kind=kind)
+        stats["cases"] += 1
+        stats["worst_fill"] = max(stats["worst_fill"], float(member.sum()) / N)
+        # the same positions with trivial brackets: everything is a candidate; the rule fires whenever N < M_max
+        Lw, Uw = np.ones(Mmax), np.full(Mmax, float(s[-1]) * math.exp(lam))
+        wide, Mhat = rd_candidate_set(Lw, Uw, s, K, m_max, nu, c_eta, eta, b, 1.0)
+        expect = min(Mmax, int(Mhat.max()))
+        if int(wide.sum()) != expect:
+            return False, dict(reason="with trivial brackets the candidate set is not the first max_j Mhat_j positions", got=int(wide.sum()), expected=expect)
+        if N < Mmax and expect == Mmax:
+            stats["wide_cases"] += 1                                          # here 'in every run' fails and the rule fires
+    if stats["wide_cases"] == 0:
+        return False, dict(reason="no case in which trivial brackets exceed N: the stopping rule was not exercised")
+    # the case in which the empirical lower bounds lambda_j are what keeps the set small: all stored brackets equal,
+    # of ratio e^x, straddling one high level (the flat instance with an honest inner procedure)
+    lam, eta, J, K, m_max, x, b, nu = 0.5, 0.5, 30, 6, 14, 1.0, 0.5, 6.0
+    c_eta = (1 - eta) / (1 + eta)
+    s = np.exp(lam * np.arange(J + 1))
+    Mmax = K * 2 ** m_max
+    N = K + (J + 1) * max(K, 4 * (1 + eta) / c_eta * math.exp(lam) * nu * math.exp(x))
+    for jstar in (8, 15, 22, 29):
+        for alpha in (0.05, 0.5, 0.95):
+            Lb = float(s[jstar]) * math.exp(-b - alpha * (x - b))
+            same, Mhat = rd_candidate_set(np.full(Mmax, Lb), np.full(Mmax, Lb * math.exp(x)), s, K, m_max, nu, c_eta, eta, b, 1.0)
+            if same.sum() > N:
+                return False, dict(reason="equal honest brackets: more than N candidates", candidates=int(same.sum()), N=round(N), level=jstar)
+            stats["flat_max"] = max(stats.get("flat_max", 0), int(same.sum()))
+    if not 0 < stats["flat_max"] < Mmax:
+        return False, dict(reason="flat case: the candidate set is empty or everything", flat_max=stats["flat_max"])
+    return True, stats
+
+
 # -----------------------------------------------------------------------------------------------------------------
-# XXI. Slices: no known part that is a function of the type is harder than the uniform cube (theory report 11.25)
+# XXI. Slices: for fixed samples and with a hint, no function-of-type known part is harder than the uniform cube (11.25)
 # -----------------------------------------------------------------------------------------------------------------
 def sl_kl(a, b):
     """KL(Bernoulli(a) || Bernoulli(b)), vectorised in a, with 0 ln 0 = 0."""
@@ -7584,6 +7776,90 @@ def t_slice_binary(rng, trials):
                     return False, dict(reason="a profile with more than two blocks beats every binary centre on the slice", k=k, u=u, e=e, lam=lam.tolist(), mu=mu.tolist(), value=val, binary=sb)
         if k != 0.5 and abs(mb0 - k) < 0.02:
             return False, dict(reason="the best centre of an off-centre slice lies in the slice", k=k, m=mb0)
+    return True, stats
+
+
+@conjecture("XXI.6 Theorem 11.90(a) at negative accuracies (the case that the first proof did not cover; repair of the Scientific Discovery Division, SCI-REV-0001, M2): on the slice of density kappa a profile is feasible at e < 0 iff MI(mu) >= -e, and MI <= h(kappa) for every profile, with equality for the pure profile (blocks of density 1 and 0); the supremum over two-block profiles is at least -e (the shell with F = -e of the centre m = kappa); every feasible profile with three to five blocks — random ones, ones on the boundary MI = -e (zero budget, value -e) and mixtures of a wide and a narrow two-point law, whose narrow component is infeasible although the mixture is feasible — has a value at most the two-block supremum")
+def t_slice_negative_accuracy(rng, trials):
+    stats = dict(cases=0, worst=-1.0, boundary=0, mixtures=0)
+    hbin = lambda k: -k * math.log(k) - (1 - k) * math.log(1 - k)
+    for (k, u, ef) in ((0.5, 1.0, 0.25), (0.3, 1.0, 0.3), (0.3, 1.0, 0.9), (0.2, 0.5, 0.05), (0.7, 2.0, 0.5), (0.1, 1.0, 0.15)):
+        e = -ef * hbin(k)
+        # two-block supremum: all centre types and all feasible shells l >= 0, value F((l - (e + F(l))/u)_+)
+        R2, at = -1.0, None
+        for m in np.linspace(0.02, 0.98, 97):
+            ls = np.linspace(0.0, sl_hi(m, k) * (1 - 1e-9), 1201)
+            Fl = m * sl_kl(k + ls / (2 * m), k) + (1 - m) * sl_kl(k - ls / (2 * (1 - m)), k)
+            ok = Fl >= -e
+            if not ok.any():
+                continue
+            x = np.maximum(ls[ok] - (e + Fl[ok]) / u, 0.0)
+            vals = m * sl_kl(k + x / (2 * m), k) + (1 - m) * sl_kl(k - x / (2 * (1 - m)), k)
+            if float(vals.max()) > R2:
+                R2, at = float(vals.max()), float(m)
+        # the shell with F = -e of the centre m = kappa has the value -e exactly (so the two-block supremum is at least -e;
+        # the grid value R2 can miss it by the grid error, because the value falls steeply beyond that shell)
+        lo, hi = 0.0, sl_hi(k, k) * (1 - 1e-12)
+        if sl_F(k, k, hi) < -e:
+            return False, dict(reason="the ray of the centre m = kappa does not reach F = -e", k=k, e=e)
+        for _ in range(80):
+            mid = 0.5 * (lo + hi)
+            lo, hi = (mid, hi) if sl_F(k, k, mid) < -e else (lo, mid)
+        own = sl_r([k, 1 - k], [k + hi / (2 * k), k - hi / (2 * (1 - k))], k, u, e)
+        if abs(own - (-e)) > 1e-6:
+            return False, dict(reason="the shell with F = -e of the centre m = kappa does not have the value -e", k=k, e=e, value=own)
+        bound = max(R2, -e)
+        # the bound MI <= h(kappa) is attained by the pure profile (blocks of density 1 and 0 with weights kappa and
+        # 1 - kappa), so the constant cannot be lowered; the pure profile and two neighbours go through the same check
+        pure = [(np.array([k, 1 - k]), np.array([1 - s * (1 - k), s * k])) for s in (0.0, 1e-3, 0.05)]
+        if abs(float(np.dot(pure[0][0], sl_kl(pure[0][1], k))) - hbin(k)) > 1e-12:
+            return False, dict(reason="the pure profile does not have MI = h(kappa)", k=k)
+        for rep in range(-len(pure), max(30, trials // 8)):
+            if rep < 0:
+                lam, mu = pure[rep]
+            else:
+                kb = int(rng.integers(3, 6))
+                lam = rng.dirichlet(np.ones(kb) * float(rng.choice([0.5, 1, 3])))
+                mu = rng.beta(0.3, 0.3, size=kb)                             # spread-out block densities
+                t = float(np.dot(lam, mu))
+                mu = mu * k / t if t > k else 1 - (1 - mu) * (1 - k) / (1 - t)
+            MI = float(np.dot(lam, sl_kl(mu, k)))
+            if MI > hbin(k) + 1e-9:
+                return False, dict(reason="a profile with MI above h(kappa)", MI=MI, h=hbin(k))
+            if rep < 0:
+                continue
+            if MI < -e:
+                continue                                                      # infeasible at this accuracy
+            mode = rep % 3
+            if mode == 1:                                                     # contract towards kappa until MI = -e: zero budget
+                a, b = 0.0, 1.0
+                for _ in range(80):
+                    mid = 0.5 * (a + b)
+                    a, b = (mid, b) if float(np.dot(lam, sl_kl(k + mid * (mu - k), k))) < -e else (a, mid)
+                mu = k + b * (mu - k)
+                val = sl_r(lam, mu, k, u, e)
+                if abs(val - (-e)) > 1e-6:
+                    return False, dict(reason="a profile with zero budget does not have the value -e", value=val, e=e)
+                stats["boundary"] += 1
+            elif mode == 2:                                                   # half a wide two-point law, half a narrow one
+                wide = np.array([k + 0.98 * (1 - k), k - 0.98 * k])
+                wlam = np.array([k, 1 - k])
+                narrow = np.array([k + 0.02 * (1 - k), k - 0.02 * k])
+                lam, mu = np.concatenate([0.5 * wlam, 0.5 * wlam]), np.concatenate([wide, narrow])
+                MIw, MIn = float(np.dot(wlam, sl_kl(wide, k))), float(np.dot(wlam, sl_kl(narrow, k)))
+                if not (0.5 * (MIw + MIn) >= -e):
+                    continue
+                if not MIn < -e:
+                    return False, dict(reason="test construction: the narrow component is feasible")
+                stats["mixtures"] += 1
+            val = sl_r(lam, mu, k, u, e)
+            stats["worst"] = max(stats["worst"], val - bound)
+            if val > bound + 2e-3:
+                return False, dict(reason="a feasible profile with more than two blocks beats the two-block supremum at a negative accuracy",
+                                   k=k, u=u, e=e, value=val, two_block=R2, lam=lam.tolist(), mu=mu.tolist())
+            stats["cases"] += 1
+    if stats["boundary"] < 6 or stats["mixtures"] < 6 or stats["cases"] < 30:      # quick mode: about 17, 21, 56
+        return False, dict(reason="cases not exercised", **stats)
     return True, stats
 
 
@@ -8035,6 +8311,78 @@ def t_sites_hardest_law(rng, trials):
     if abs(E_field - 0.120196) > 2e-6 or abs(E_unif - 0.119499) > 2e-6:
         return False, dict(reason="thresholds of the three-letter site at u = 1", field=E_field, uniform=E_unif)
     return True, dict(stats, h_near=h_near, h_unif=h_unif, a_near=a_near, a_unif=a_unif, E_field=E_field, E_unif=E_unif)
+
+
+@conjecture("XXII.5 Proposition 11.103(d),(f), Proposition 11.100 and Theorem 11.101 after the reviews SCI-REV-0005 and SCI-REV-0001 section 5 of the Scientific Discovery Division: (f) the ceiling F*(t) <= t(1-t)u^2/8, u the largest entry of the envelope, for every site, approached by the two-letter cube at small slopes; (d) for the Hamming envelope a site law that gives some set of letters the weight 1/2 has F*(t) >= F*_cube(t); at u = 0.5 the three-letter law (0.05, 0.5, 0.45) is above the two-letter cube in h and in E, the law (0.02, 0.49, 0.49) below it in both — so neither 'close to two letters means the two-letter values' nor 'the cube is the supremum' holds; the convex kink of F* for the triangle site at t_c = 0.37799 is a slope jump of +0.0056 (not +0.0052); and theta_na is Lipschitz in the composition with constant max_j a_j")
+def t_sites_corrections(rng, trials):
+    stats = dict(ceiling=0.0, half=0.0, lip=0.0)
+    cube = lambda u, t: t * math.log(math.cosh(u / 2)) - math.log(math.cosh(t * u / 2))
+    # (f) the ceiling, on random sites with any envelope
+    for rep in range(max(12, trials // 30)):
+        q = int(rng.integers(2, 5))
+        D = rng.uniform(0.2, 3.0, size=(q, q))
+        if rep % 2 == 0:
+            D = (D + D.T) / 2
+        D = mr_closure(D)
+        site = st_site(rng.dirichlet(np.ones(q) * 2.0), D)
+        u = float(D.max())
+        for t in (0.15, 0.5, 0.85):
+            val = st_renyi(site, t)[0]
+            if val > t * (1 - t) * u * u / 8 + 1e-9:
+                return False, dict(reason="F* exceeds the ceiling t(1-t)u^2/8", t=t, value=val, ceiling=t * (1 - t) * u * u / 8)
+            stats["ceiling"] = max(stats["ceiling"], val / (t * (1 - t) * u * u / 8))
+    small = cube(0.05, 0.5) / (0.25 * 0.05 ** 2 / 8)
+    if not 0.999 < small <= 1.0:
+        return False, dict(reason="the ceiling is not approached by the cube at small slopes", ratio=small)
+    # (d) weight one half on a set of letters: at least the cube (Hamming envelope)
+    for rep in range(max(10, trials // 40)):
+        q = int(rng.integers(3, 5))
+        u = float(rng.uniform(0.3, 2.5))
+        w = rng.dirichlet(np.ones(q))
+        k = int(rng.integers(1, q))                                           # letters 0..k-1 form the set A
+        pi = np.concatenate([0.5 * w[:k] / w[:k].sum(), 0.5 * w[k:] / w[k:].sum()])
+        site = st_site(pi, st_hamming(q, u))
+        for t in (0.2, 0.5, 0.8):
+            excess = st_renyi(site, t)[0] - cube(u, t)
+            if excess < -1e-9:
+                return False, dict(reason="a site law with weight 1/2 on a set of letters is below the cube", pi=pi.tolist(), u=u, t=t, excess=excess)
+            stats["half"] = min(stats["half"], excess) if stats["half"] else excess
+    # the data points at u = 0.5
+    hc, ac, Ec = st_groups(2, 0.5)
+    vals = {}
+    for name, pi in (("rare", [0.05, 0.5, 0.45]), ("near", [0.02, 0.49, 0.49])):
+        site = st_site(pi, st_hamming(3, 0.5))
+        vals[name] = (st_R([(1.0, site)], 0.0)[0], st_E(site))
+    stats["h_cube"], stats["h_rare"], stats["h_near"] = round(hc, 8), round(vals["rare"][0], 8), round(vals["near"][0], 8)
+    if not (abs(hc - 0.0076729) < 2e-7 and abs(Ec - 0.0309298) < 2e-7):
+        return False, dict(reason="reference values of the two-letter cube at u = 0.5", h=hc, E=Ec)
+    if not (vals["rare"][0] > hc + 1e-6 and vals["rare"][1] > Ec + 1e-6 and abs(vals["rare"][0] - 0.0076752) < 2e-7):
+        return False, dict(reason="the law (0.05, 0.5, 0.45) is not above the cube in h and E", values=vals["rare"], cube=(hc, Ec))
+    if not (vals["near"][0] < hc - 3e-7 and vals["near"][1] < Ec - 3e-6):
+        return False, dict(reason="the law (0.02, 0.49, 0.49) is not below the cube in h and E", values=vals["near"], cube=(hc, Ec))
+    # the kink of the triangle site: one-sided slopes at t_c
+    tri = st_site(*ST_SITES["tri"])
+    tc, dl = 0.377987, 5e-5
+    f0, fm, fp = st_renyi(tri, tc)[0], st_renyi(tri, tc - dl)[0], st_renyi(tri, tc + dl)[0]
+    jump = (fp - f0) / dl - (f0 - fm) / dl
+    stats["jump"] = round(jump, 5)
+    if not abs(jump - 0.00558) < 1.2e-4:
+        return False, dict(reason="slope jump of F* at the kink of the triangle site", jump=jump, left=(f0 - fm) / dl, right=(fp - f0) / dl)
+    # theta_na is Lipschitz in the composition
+    sites = {k: st_site(*v) for k, v in ST_SITES.items()}
+    amax = {k: st_a(s) for k, s in sites.items()}
+    for (s1, s2) in (("bin", "path"), ("tri", "asym"), ("bin", "tri")):
+        for _ in range(3):
+            l1, l2 = float(rng.uniform(0.1, 0.9)), float(rng.uniform(0.1, 0.9))
+            x = float(rng.uniform(0.005, 0.05))
+            th1 = st_theta_na([(l1, sites[s1]), (1 - l1, sites[s2])], x, grid=30)
+            th2 = st_theta_na([(l2, sites[s1]), (1 - l2, sites[s2])], x, grid=30)
+            bound = 2 * abs(l1 - l2) * max(amax[s1], amax[s2])
+            if abs(th1 - th2) > bound + 1e-7:
+                return False, dict(reason="theta_na is not Lipschitz in the composition with constant max a_j", diff=abs(th1 - th2), bound=bound)
+            if bound > 0:
+                stats["lip"] = max(stats["lip"], abs(th1 - th2) / bound)
+    return True, stats
 
 
 @conjecture("XXII.4 Proposition 11.104 (local ensemble-averaged data do not change the non-adaptive exponent; with Lemma A of the Scientific Discovery Division): for a linear code C whose dual has minimum distance at least k + 1 (here the [7,3] simplex code, k = 2), a centre a and the C-symmetrised cone psi_C = u d(., a + C): the Gibbs measures of psi_C and of its truncation max(psi_C, u r) have exactly uniform marginals on every set of at most k coordinates (so a k-body marginal oracle answers identically on both), while the single cone does not; A(psi_C)/A(psi_C^tr) - 1 >= (A(cone)/A(cone^tr) - 1)/|C| and the two functions differ on at most |C| |B(r-1)| points; hence a non-adaptive algorithm with that oracle needs (1 - 2 delta)/(|C| q) evaluations at the accuracy of the single cone minus ln |C|")
@@ -8935,6 +9283,19 @@ def t_dead_ratio_constant_shift(rng, trials):
         return False, dict(reason="three states: R+ = e + e^10 against the constant shift 2e, and the extremal residual differs by 9 between the two states of A; the two halves of Q_6: the maximal field gives 2.8 times the constant shift; for single states the shift is exact",
                            three_points=v, constant_shift=shift, g_difference=float(g[1] - g[0]), cube_halves=vt, cube_constant_shift=shift_t)
     return True, dict(three_points=v, constant_shift=shift, cube_halves=vt, cube_constant_shift=shift_t, single_states=vc)
+
+
+@conjecture("DEAD.27 (documented refutation, D55) 'In every run the candidate sets of the batched schedule have at most N_l members' (the first version of Theorem 11.84(ii)) — false without the stopping rule: if the calls of the previous rung return their trivial brackets, which a bracket procedure may do with probability delta', every outer point is a candidate (finding M1 of SCI-REV-0003); true on the good event, and in every run once the schedule stops when the set is larger", expect_fail=True)
+def t_dead_candidates_every_run(rng, trials):
+    lam, eta, J, K, m_max, x = 0.5, 0.5, 30, 6, 14, 1.0
+    c_eta, nu, b = (1 - eta) / (1 + eta), 6.0, 0.5
+    s = np.exp(lam * np.arange(J + 1))
+    Mmax = K * 2 ** m_max
+    N = K + (J + 1) * max(K, 4 * (1 + eta) / c_eta * math.exp(lam) * nu * math.exp(x))
+    wide, _ = rd_candidate_set(np.ones(Mmax), np.full(Mmax, float(s[-1]) * math.exp(lam)), s, K, m_max, nu, c_eta, eta, b, 1.0)
+    if wide.sum() > N:
+        return False, dict(reason="more than N candidates in a run in which the previous rung returned trivial brackets", candidates=int(wide.sum()), N=round(N), M_max=Mmax)
+    return True, {}
 
 
 def main():

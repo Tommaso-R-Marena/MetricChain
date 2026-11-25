@@ -1,0 +1,20 @@
+capacities a_j  harness: {'bin': 0.095301, 'path': 0.294791, 'tri': 0.247541, 'asym': 0.166046}  own (lower, upper): {'bin': (0.095300502, 0.095300502), 'path': (0.294791205, 0.294791205), 'tri': (0.247540849, 0.247540849), 'asym': (0.16604588, 0.16604588)}
+(a) Lipschitz bound in the composition
+   mix  (bin, path)               lam = (0.5, 0.5), lam' = (0.45, 0.55): ||.||_1 = 0.100, bound = 0.029479; max_x |diff|: harness 0.008343, own 0.008343  -> ok
+   mix  (bin, path)               lam = (0.5, 0.5), lam' = (0.55, 0.45): ||.||_1 = 0.100, bound = 0.029479; max_x |diff|: harness 0.008303, own 0.008303  -> ok
+   mix  (bin, path)               lam = (0.5, 0.5), lam' = (0.3, 0.7): ||.||_1 = 0.400, bound = 0.117916; max_x |diff|: harness 0.033584, own 0.033584  -> ok
+   mix  (bin, path)               lam = (0.5, 0.5), lam' = (0.52, 0.48): ||.||_1 = 0.040, bound = 0.011792; max_x |diff|: harness 0.003326, own 0.003326  -> ok
+   mix2 (bin, tri)                lam = (0.4, 0.6), lam' = (0.35, 0.65): ||.||_1 = 0.100, bound = 0.024754; max_x |diff|: harness 0.006035, own 0.006035  -> ok
+   mix2 (bin, tri)                lam = (0.4, 0.6), lam' = (0.45, 0.55): ||.||_1 = 0.100, bound = 0.024754; max_x |diff|: harness 0.006002, own 0.006002  -> ok
+   mix2 (bin, tri)                lam = (0.4, 0.6), lam' = (0.6, 0.4): ||.||_1 = 0.400, bound = 0.099016; max_x |diff|: harness 0.023793, own 0.023793  -> ok
+   mix2 (bin, tri)                lam = (0.4, 0.6), lam' = (0.41, 0.59): ||.||_1 = 0.020, bound = 0.004951; max_x |diff|: harness 0.001203, own 0.001203  -> ok
+   three types (bin, path, asym)  lam = (0.3, 0.3, 0.4), lam' = (0.25, 0.35, 0.4): ||.||_1 = 0.100, bound = 0.029479; max_x |diff|: harness 0.008408, own 0.008408  -> ok
+   three types (bin, path, asym)  lam = (0.3, 0.3, 0.4), lam' = (0.3, 0.2, 0.5): ||.||_1 = 0.200, bound = 0.058958; max_x |diff|: harness 0.011144, own 0.011144  -> ok
+   three types (bin, path, asym)  lam = (0.3, 0.3, 0.4), lam' = (0.34, 0.33, 0.33): ||.||_1 = 0.140, bound = 0.041271; max_x |diff|: harness 0.001109, own 0.001109  -> ok
+   largest |diff| / bound: harness helpers 0.2852, own code 0.2852 (must be <= 1)
+   60 random pairs of compositions of four site types (own code), x in [0.002, 0.3]: violations 0, largest |diff|/bound = 0.2640
+(b) the implication used in (G2):  theta <= Rhat(x - theta - w) + w   =>   theta <= theta_na(x - 2w) + w
+   40 random (x, w): largest [theta_max - (theta_na(x - 2w) + w)] = 2.78e-16 (must be <= 0 up to solver error)
+(c) compositions of the blocks: inner block n_j - floor(phi n_j), outer block floor(phi n_j)
+   ||lam_inner - lam||_1 (1-phi) n / (2m) <= 0.7907;  the same divided by m instead of 2m: 1.5815 (reviewer's constant m fails if > 1);  ||lam_outer - lam||_1 (phi n - m)/(2m) <= 0.7951
+time 544.0 s
