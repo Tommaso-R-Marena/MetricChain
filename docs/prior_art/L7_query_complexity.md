@@ -127,3 +127,13 @@ Markov chain).  Not found: exact exponents on a Hamming–Lipschitz class withou
 their coincidence with the hinted exponent, a certified one-sided nested algorithm without
 a sampler, the recursion.
 
+
+**Addendum at the fifth checkpoint of cycle 10** (coordinator; three generic searches on
+2026-11-25, *search-engine summaries only — nothing below was opened or read*; recorded so
+that a later reader knows what was and was not looked at for §§11.19–11.20):
+
+| what was searched | what came back | bearing |
+|---|---|---|
+| query complexity of normalising constants for Lipschitz potentials, adaptive against non-adaptive, exponential in the dimension | (i) the *sampling-oracle* line for Gibbs partition functions — cooling schedules, where a query is a sample at a chosen temperature (Štefankovič–Vempala–Vigoda; Kolmogorov; a 2026 preprint "Optimal simulated annealing for partition function estimation", arXiv 2609.20337; another 2026 preprint with separate lower bounds for adaptive and for non-adaptive schedules, arXiv 2604.01263); (ii) quantum lower bounds (Chen–Nannicini, arXiv 2404.02414); (iii) Ge–Lee–Lu 2020 for strongly log-concave integrals | **a different model**: polynomial sample complexity with access to exact Gibbs samplers, where adaptivity of the *schedule* matters by logarithmic factors.  The present results are for value queries to the energy on a worst-case Lipschitz class, where the complexity is exponential and adaptivity changes the exponent.  The adaptive / non-adaptive distinction in that literature should be cited next to Mathé–Novak when §§11.16–11.20 are written up |
+| flat-histogram / multicanonical sampling as a minimax-optimal proposal for worst-case estimation of a partition function | descriptions of the multicanonical ensemble (Berg–Neuhaus), Wang–Landau and stochastic-approximation variants (Liang), a 2024 preprint on optimal parameters (Shakirov, arXiv 2402.05653); one summary quotes "there is no rigorous theory for the convergence of the algorithms" | **not found**: a statement that a flat histogram in an order parameter is minimax-optimal among fixed samples for certified estimation over an uncertainty class (Theorem 11.61 in its toy setting).  One search; "not found at this depth", not "new" |
+| isoperimetry for a type-uniform mixture on the cube; inherently typical subsets; two measures | only the edge-isoperimetric line of Kahn–Park and Durcik–Ivanisvili–Roos(–Xie) | nothing on the statement of Theorem 11.63; the relevant literature (Ahlswede–Zhang; Yu, arXiv:2205.07596) is the one the workstream and referee R9 were pointed to |
