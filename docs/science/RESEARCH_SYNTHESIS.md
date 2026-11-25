@@ -139,6 +139,7 @@ refereed as statements; in-progress workstream files are snapshots, not statemen
 | R6 | `workstreams/R6_brief.md` — independent line-by-line review, with own re-derivation and implementation, of the cost of the nested adaptive algorithm (theory report §§11.18–11.19) | read `R6_REPORT.md`; re-run one script; publish as `SCI-REV-0007` to theory; update `PUBLICATION_OPPORTUNITIES.md` P1 — this is the check on which the programme's headline depends |
 | P2 | `workstreams/P2_brief.md` — class constants of the GBn2 term in *rotamer* variables on a fixed backbone (the setting in which the known part is pairwise) | read `P2_REPORT.md`; re-run its end-to-end check; publish as a message to both divisions; update `PHYSICAL_APPLICABILITY.md` §2, `BENCHMARK_DESIGN.md` B1, frontier map F8 and hypothesis 3 of its §3 |
 | L2 | `workstreams/L2_brief.md` — Lean: addendum A11 (Holley sandwich), the referee's finite inequalities, Proposition A1.2 items 1–3 | re-compile every file (`lake env lean`, never `lake build`); change the labels of A11 etc. to [V] where the Lean statement covers the paper statement; record discrepancies |
+| F | `workstreams/F_brief.md` — the two-oracle model with a field (report: `SF_REPORT.md`): does a one-body marginal oracle lower the exponents on the biased cube?  The brief contains the coordinator's conjecture (no: the hardest instance is self-consistent by Augustin's fixed point) and what could go wrong | read `SF_REPORT.md`; check its strongest statement by hand and one script; publish to theory as the answer to our own SCI-REQ-0001 Q2(a); update `OPEN_PROBLEMS.md` A2, `INFERENCE_LIMITS.md` §13 item 2 and the caveat "nothing is proved with a field" wherever it appears |
 
 Workstream files under `experiments/science/ws_*/` and `*_REPORT.md` are committed as
 snapshots while a workstream runs; they are statements of the division only once the
@@ -158,10 +159,10 @@ against pseudo-Boolean proofs), R3-E1 (bridge tables).
 
 1. **Publish R6, P2, L2** (§5).  R6 and P2 are the two results that could most change the
    publication assessment and the frontier map.
-2. **Write the oracle-invariance theorem as one statement with one proof**
-   (`R3_REPORT.md` §9): Theorem 4, addendum A1, the referee's R5, R6, R6′, with a second
-   full reading of R6.2 and L2's machine checks.  It is the form in which our
-   measurement-side results belong next to the theory division's P1.
+2. **The oracle-invariance theorem** is assembled as one statement in addendum A12, with
+   a table of who read what; the coordinator's second reading of the referee's R6 is
+   done (no gap).  Still owed: Corollary R6′ written out; L2's machine checks; then send
+   it to the theory division as one message (it was not yet sent as one statement).
 3. **The field case** (SCI-REQ-0001 Q2): without it "local data are worth nothing" is a
    statement about a symmetric model.  Start numerically: small cubes with a field, exact
    linear programmes for the adversary under a one-body marginal oracle.

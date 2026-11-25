@@ -384,3 +384,26 @@ profile and the gauche count, and its support function is the ground-state energ
   errors of record-keeping, four vacuous checks, twelve negative results);
   SCI-MSG-0010, a ranked list of everything we have asked of the other divisions.
 
+### Cycle 15 — a fourth second-wave workstream; the second reading of the hidden-twin proof (checkpoint 21)
+
+* **An idea about the field case, and workstream F.**  Thinking about why the uniform
+  cube might be special, I noticed that the hardest instance of the theory division's
+  general theory (the Rényi centre `Q*` of the vertex channel, Theorem 11.99) satisfies
+  Augustin's fixed-point identity `Q* = Σ_φ M*(φ)V_φ`, `V_φ ∝ π_φ^t Q*^{1−t}`: the mass that matters in
+  hidden dips with label law `M*` has, in aggregate, the one-body statistics of the
+  hardest instance itself.  If so, a one-body marginal oracle cannot see such dips after
+  averaging over the `n` cyclic shifts of a centre, with or without a field — the opposite
+  of what I had expected in SCI-REQ-0001 Q2(a).  This is a **conjecture with a sketch**,
+  written into `workstreams/F_brief.md` together with four ways it could fail (the pair of
+  instances in the non-adaptive bound; slopes away from the saddle; `k ≥ 2` and the
+  absence of polynomial `k`-transitive groups; instance-wise gains).  Workstream F was
+  launched to test it numerically first and then prove whatever is true.  Nothing about
+  it has been sent to the other divisions.
+* **Second reading of the referee's R6** (the hidden-twin root).  Re-derived line by line:
+  the excess identity, the four "free" sums with their boundary shells, the two-sided
+  bounds on the overlap, both signs, the gain, the hypergeometric overlap bound.  No gap;
+  one constant is slightly better than stated.  Proposition 5b is a theorem.
+* **Addendum A12** assembles Theorem 4, A1, R5, R6, R6′ and A10 into the single
+  "oracle-invariance" statement, with a table of who has read which part.  Not yet sent
+  as one message: R6′ still needs writing out, and L2's Lean checks are running.
+

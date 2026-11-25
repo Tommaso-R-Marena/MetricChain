@@ -477,3 +477,62 @@ robust range of an observable free-energy difference over an uncertainty class, 
 cancellation — was not found in the theory branch (which states that it has no closed
 form for ratios, THY-RES-0003) nor in that search.
 
+## A12. The oracle-invariance theorem, assembled (the statement our referee called "within reach")
+
+This section proves nothing new.  It puts Theorem 4, addendum A1 and the referee's R5,
+R6, R6′ (`workstreams/R3_REPORT.md` §4) into one statement, and records which parts have
+been read by whom.
+
+**Theorem A12 (oracle invariance of the complexity diagram of the cube class).**
+Cube class `{0,1}ⁿ`, zero known part, `u = βc > 0`; algorithms that return `ln Z` within `ε/2`
+with probability `1 − δ` for every member of the class.  Give every algorithm, free and
+exact, all marginals of `μ_g` on at most `k` sites, with `k ln n = o(n)`.
+
+(a) *Adaptive algorithms.*  The worst-case number of evaluations is
+`exp(n·θ_hint(ε₁) + o(n))` at extensive accuracies `0 < ε₁ < ln cosh(u/2)` and `exp(n·h + o(n))` when
+`ln(1/ε) = o(n)`, `ε = o(n)` — the values without the oracle.
+(b) *Non-adaptive algorithms* (evaluation points chosen from the oracle's answer and
+private randomness).  It is `exp(n·θ_na(ε₁) + o(n))`, respectively `exp(n·a + o(n))` — the values
+without the oracle.
+(c) *With the mean residual energy `E_{μ_g} g` given exactly as well*, the adaptive exponent
+at every fixed accuracy `ε < ln(1 + e^{−u})` is still `h`; yet at the zero residual the cost is
+`O(n u²/ε²)`.
+(d) *With error bars instead of exact marginals*: (a) holds for correlations of **every**
+order known to absolute precision `τ ≥ exp(−o(n/ln n))` (addendum A10).
+
+*In words:* the exponents are those of the class, not of the oracle.  Local ensemble data
+of bounded order change neither; a calorimetric datum changes the hardest instance, not
+the exponent.
+
+| part | lower bound | upper bound | read / checked by |
+|---|---|---|---|
+| (a) | Theorem 4 (symmetrisation of a dip over a code of dual distance `> k`) | theory report Theorems 11.54, 11.58 (paper proofs; under review by our workstream R6) | author; referee R3 ("proved"); **[V]** given the code (L1: `theorem4_adaptive_marginal_oracle`; the code itself for `k = 1` only) |
+| (b) | addendum A1 = theory report Proposition 11.104 = referee's R5 (symmetrised cones; R5(2): the drop of `ln Z` is at least `D_R + ln(1−γ)`, `γ = ½(#C − 1)·cosh(u/2)^{−d_min}`) | theory report Theorem 11.44 (plain Monte Carlo ignores the oracle) | three independent derivations; **[V]** given the code (L1: `theorem4'_nonadaptive_marginal_oracle`) |
+| (c) | referee's R6: excess identity R6.1, sign lemma R6.2, overlap bound R6.3 | theory report Theorem 11.58; Corollary of Theorem 5 for the zero residual | referee (author of the proof); **second full reading by the coordinator at checkpoint 21: R6.1, R6.2, R6.3 and the assembly re-derived line by line, no gap found** (notes below); numerics by both; Lean for R6.1, R6.2 requested of workstream L2 |
+| (c) with both oracles | referee's Corollary R6′ (cosets of a code in place of the two centres) | as (c) | referee; *read, not re-derived* by the coordinator — the overlap count is one sentence there and needs writing out |
+| (d) | addendum A10 | as (a) | author only |
+
+*Notes of the second reading of R6 (coordinator).*  R6.1: with `g′ = min(g₀, T)`,
+`Z′ = Σ max(e^{−g₀}, e^{−T}) = Z₀ + E` and `U′Z′ = U₀Z₀ + D`, so `U′ − U₀ = (D − U₀E)/(Z₀ + E)`.  R6.2:
+the "free" sums (as if the visible basin were absent) are `E^f_{+1} = e^uW⁺ − |B(n,r₁)|`,
+`D^f_{+1} = −e^u(A′ + uW⁺)`, `E^f_{−1} = e^{−u}W − V`, `D^f_{−1} = −e^{−u}(A′ − uW)` (checked term by
+term, including the boundary shells `d = r₁` and `d = r₁ − 1`); on the overlap each true
+summand lies between the free one and zero because `t ↦ te^{−t}` is increasing for `t < 1`;
+hence `E^f − ω ≤ E ≤ E^f`, `D^f ≤ D ≤ D^f + u(r₁+1)ω`.  At `s = +1`:
+`D + (A′/Z₀)E ≤ −e^uA′(1 − W⁺/Z₀) − ue^uW⁺ + u(r₁+1)ω < 0`, using `W⁺ ≤ Z₀` (`C(n,r₁)` is one term of
+`2ⁿ − V`) and hypothesis (ii).  At `s = −1`:
+`D + (A′/Z₀)E ≥ u[e^{−u}W − r₁(e^{−u}2ⁿ + V + ω)] > 0`, using `A′ ≤ ur₁W`, `Z₀ ≥ W`, hypothesis (i)
+(`r₁e^{−u}2ⁿ ≤ e^{−u}W/8`, `r₁V ≤ e^{−u}W/8`) and (ii) with `ω_{−1} ≤ ω_{+1}` (`r₁ω ≤ e^{−u}W/2`): the
+bracket is at least `e^{−u}W/4`.  Continuity in `s` gives the root.  The gain:
+`E_{s*}/Z₀ ≥ (e^{−u}W − V − ω)/(2ⁿ + W) ≥ e^{−u}(1 − 3/(4r₁))`, slightly better than stated.  R6.3:
+for `x` uniform on a sphere of radius `j ≤ r₁` about `a′`, `d(x, a₀) = D + j − 2i` with `i`
+hypergeometric of mean `jD/n`; the event `d(x,a₀) < r₁` needs `i` to exceed its mean by at
+least `(n/2 − r₁ − 2Δ)/2`; Hoeffding's inequality for sampling without replacement gives the
+bound.  Hypotheses (i), (ii) hold for large `n` when `ρ₀ < ρ₁ < ½` and the two centres are at
+distance `n/2 ± √(n ln n)`, which a random centre satisfies with probability `1 − 2/n²`.
+
+**What the theorem does not cover** — unchanged: any known part without the translation
+symmetry of the uniform cube (workstream F is on the field case); the thermodynamic
+oracle at extensive accuracy; exact marginals of order proportional to `n` (addendum A8:
+there the exponent does drop); samples from the ensemble (addendum A10, remark 1).
+

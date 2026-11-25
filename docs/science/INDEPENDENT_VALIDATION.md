@@ -135,8 +135,10 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   sources; no error or warning line).  Statements read against the note: not yet done line
   by line by the coordinator — the workstream's own discrepancy list (four items) is in
   `L1_REPORT.md`.
-* **R3 (referee of our note):** the excess identity R6.1 re-derived by the coordinator;
-  the estimates R6.2, R6.3 read, not re-derived.
+* **R3 (referee of our note):** R6.1, R6.2, R6.3 and their assembly into Theorem R6
+  re-derived line by line by the coordinator (checkpoint 21; notes in addendum A12): no
+  gap; the gain is slightly better than stated (`1 − 3/(4r₁)` in place of `1 − 1/r₁`).
+  Corollary R6′ (both oracles) read, not re-derived.
 * **Own statement A11 (robust macrostate ratios):** exact linear programmes over the weight
   cone, 900 instances with the hypotheses (field optimal to `5·10⁻¹⁴`), 300 + 298 control
   instances with one hypothesis dropped (field not optimal in most);

@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 20 of the science branch (2026-11-25; the commit time is
+*Updated at checkpoint 21 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -47,6 +47,7 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 | R6 | **second wave:** independent line-by-line review, with own re-derivation and implementation, of the cost of the nested adaptive algorithm (theory report §§11.18–11.19) → SCI-REV-0007 | review + replication | running (launched after checkpoint 19) |
 | P2 | **second wave:** class constants of the GBn2 term in rotamer variables on a fixed backbone | measurement | running |
 | L2 | **second wave:** Lean — addendum A11, the referee's finite inequalities, Proposition A1.2 | formalisation | running |
+| F | **second wave:** the two-oracle model with a field — does a one-body marginal oracle lower the exponents on the `p`-biased cube?  (coordinator's conjecture: no, because the hardest instance is self-consistent — Augustin's fixed point for the Rényi centre) | own theory + numerics | running (launched after checkpoint 20) |
 | — | replication of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | replication | **completed: `AUDIT PASSED`** — 56 Lean files, 3423 declarations, 267 mutations (266 caught, 1 expected pass); first replication of the three Lean files added since `63efc69`; `docs/science/INDEPENDENT_VALIDATION.md` §1.1 |
 | — | replication of the engineering lattice-chain class tables | replication | **completed for `n = 1 … 10`: identical** (own enumerator; and by workstream R2 for 4–23 beads); `INDEPENDENT_VALIDATION.md` §1.2 |
 
@@ -72,7 +73,7 @@ the container is reclaimed.)
 | S6 | the pair-distance-profile class of theory report §11.17 is the class identified by (partial) pair-distance distributions, i.e. by scattering data | **[K]** (exponential families; Henderson) — a translation, not a theorem of ours |
 | S7 | the residual maximising a ratio of macrostate partition functions over an envelope class is not constant on the macrostate (three-point example) | **[P]** |
 | S8 | the verified `(min,+)` and `(+,×)` kernels are dual-feasibility checkers for identified sets of ensemble averages (model-free; KL ball); for envelope classes the dual object is a flow with gains | soundness **[P]**, duality **[K]** |
-| S9 | **at bounded accuracy** a mean-energy oracle does not lower the worst-case exponent: a visible basin can have a hidden twin with exactly the same mean energy and `ln Z` larger by `≈ ln 2`; extensive accuracy open (restricted, SCI-MSG-0008) | mechanism **[P]**; the root **[P]** by the referee (R6; second full reading owed), **[N]** before |
+| S9 | **at bounded accuracy** a mean-energy oracle does not lower the worst-case exponent: a visible basin can have a hidden twin with exactly the same mean energy and `ln Z` larger by `≈ ln 2`; extensive accuracy open (restricted, SCI-MSG-0008) | mechanism **[P]**; the root **[P]** by the referee (R6), **second full reading by the coordinator done at checkpoint 21 — no gap** (addendum A12); **[N]** before |
 | S10 | data certify a *lower* bound on the envelope constant and on `KL(truth‖model)`; on the lattice chain the three-shell profile certifies `0.87–0.96` of the strength of a missing contact attraction | soundness **[P]**; numbers **[N]**, exact LPs, 8–9 beads |
 | S11 | lattice chain, model-free: an exact averaged three-shell profile leaves the mean gauche fraction undetermined over `0.65` of its range at 27 beads (from the engineering tables), widening with length; a complete pair-distance histogram leaves `0.33` at 15 beads | **[N]**, exact LPs |
 | S12 | the limit shape of theory report §11.22 is the asymptotic model-free identified set of (mean profile, mean gauche fraction); its upper boundary is not computed | **[P]** given theory Theorem 11.69 (bridges); walks under Conjecture 11.75 |

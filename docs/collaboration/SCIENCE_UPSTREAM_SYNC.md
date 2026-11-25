@@ -47,3 +47,4 @@ engineering branch is read through `git show` / a detached read-only checkout.
 | 2026-11-25 19:49 | fetched immediately before checkpoint 18: theory `89ac710`, engineering `a2f6dc7`, both unchanged |
 | 2026-11-25 19:56 | fetched immediately before checkpoint 19: theory `89ac710`, engineering `a2f6dc7`, both unchanged |
 | 2026-11-25 20:03 | fetched immediately before checkpoint 20: theory `89ac710`, engineering `a2f6dc7`, both unchanged |
+| 2026-11-25 20:09 | fetched immediately before checkpoint 21: theory `40c5bd7`, engineering `a2f6dc7` — **changed; see the next entry** |
