@@ -51,3 +51,36 @@ torsions) — the stopping rule of THY-REQ-0002 — and then resumes growing.  W
 distances and gaps, covering numbers are step functions of the accuracy; a plateau over a
 handful of sizes is not evidence of saturation.  The request's small accuracy rates
 (`N/20`, `N/10`) coincide with fixed accuracies 0 and 1 for all `N < 20`.
+
+## ED-5  Plain floating-point comparisons of weights with levels — a literal run aborts on the good event
+
+The levels of Algorithm 2L⁺ are `s_j = s₀e^{jλ}` with `s₀ = e^{−ψ₀−un}`; the weight of the
+reference shell is `s₀e^{un}` when its fibre is flat.  With `un/λ` an integer the two coincide
+*exactly*, and `ln s_j = (−ψ₀ − un) + jλ` computed in floating point is off by rounding.  A
+literal implementation then finds a point with "`U > s_j`" and "`L ≤ s_je^{−b}`" at the last rung
+and aborts (step 3 of the algorithm), on a run on which the good event holds.  This is the
+pitfall referee R8 recorded as m10; the cause is structural, not a coincidence of the test
+instance.  Remedy in this branch: logarithms within `10⁻⁹` are equal (`tables.TIE`), and a point
+at the last rung is classified by its upper end alone.  Consequence for controls: two
+published rows of the workstream's radial table are decided by rounding
+(`experiments/eng/twolevel/controls.py` shows both conventions).
+
+## ED-6  Describing the worst instances by classifying what the optimiser returns — uninformative
+
+Differential evolution returns profiles whose relevant part (a cone up to some radius, a
+flat continuation) is overlaid with irregular slopes where the profile does not matter; a
+classifier of the returned profiles labelled 404 of 468 maximisers "other".  What works:
+evaluate a small labelled set of structured instances on their own and report which one is
+best and how much the search gains over it (`seed_analysis.py`).
+
+## ED-7  Part A of THY-REQ-0001 with real inner brackets at `n_o, n_i ∈ [20, 60]` and `10⁴` runs per instance — not run
+
+Every sampled outer point receives at least one real inner bracket (its trivial bracket
+straddles the levels below it), so a run costs about one simulated bracket per outer point:
+`10⁶`–`10¹¹` brackets per run at these sizes with the theorem's constants, each `O(n_i)` binomial
+draws.  `10⁴` runs on a few dozen instances would be thousands of core-hours for a failure
+frequency that the union bound of the proof puts far below anything `10⁴` runs can resolve.
+Run instead (X-006): the outer loop with real fluctuations and oracle brackets, with `K`
+scaled down until the events of the proof do fail.  Real inner brackets beyond 13
+coordinates remain undone; the honest way to do them is a small outer cube (`n_o ≤ 18`) with
+a large inner one, a few hundred runs per instance.

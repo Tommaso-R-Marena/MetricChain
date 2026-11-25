@@ -21,6 +21,7 @@ import json
 import math
 import sys
 import time
+import zlib
 from pathlib import Path
 
 import numpy as np
@@ -89,9 +90,11 @@ def run_case(case: dict, runs: int, seed: int) -> dict:
     K = max(4, int(round(C.K * case["k_scale"])))
     full = case["k_scale"] == 1.0
     mean = ev.run(Instance(radial_law(F, ev.outer), psi0=psi0, t0=t0), "bottom" if case["oracle"] == "random" else case["oracle"])
-    rng = np.random.default_rng([seed, int(u * 10), n_o, hash(case["profile"]) % 2 ** 31, ORACLES.index(case["oracle"]), K])
+    # zlib.crc32, not hash(): the built-in hash of a string changes from process to process
+    rng = np.random.default_rng([seed, int(u * 10), n_o, zlib.crc32(case["profile"].encode()), ORACLES.index(case["oracle"]), K])
     out = dict(case, K=K, K_theorem=C.K, runs=runs, seed=seed, closed=0, skipped=0, aborted=0, good_event_failed=0, invalid=0,
                invalid_on_good_event=0, width_violations=0, claim_violations_on_good_event=0, violation_examples=[],
+               trivial_returned=0, last_rung_ties=0,
                mean_run_lcost=mean.lcost, mean_run_status=mean.status, lCmax=ev.lCmax)
     lq = []
     for _ in range(runs):
@@ -108,6 +111,8 @@ def run_case(case: dict, runs: int, seed: int) -> dict:
             out["invalid"] += 1
             out["invalid_on_good_event"] += R.good_event
         out["width_violations"] += "width" in R.violations
+        out["trivial_returned"] += R.trivial_returned
+        out["last_rung_ties"] += R.last_rung_ties > 0
         others = [v for v in R.violations if v != "width"]
         if others:
             out["claim_violations_on_good_event"] += 1

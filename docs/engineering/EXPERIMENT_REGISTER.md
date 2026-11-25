@@ -66,3 +66,49 @@ commit that adds or last changes the files named).  Costs are in
 | Outputs | `experiments/eng/chain_cover/results/generic_Sc16.json`, `generic_Sc16_ties.json` |
 | Validation | 1–4 distances, conformation and class counts (`n = 5…10`, `n = 12`), and 16 covering numbers of P_REPORT §3.3 reproduced; two published brackets at `n = 10` closed; mirror reduction exact; tie analysis (five exact ties at `n = 11`, none elsewhere; nearest non-tie ≥ `2.9·10⁻⁸`) |
 | Result, interpretation, limitations | ENG-RES-0007 |
+
+## X-005  Algorithm 2L⁺ on adversarial instances: number of evaluations and every claim of Theorem 11.56 (mean runs)
+
+| field | value |
+|---|---|
+| Scientific purpose | Is there a `u`-Lipschitz instance on which the two-level algorithm of theory report §11.19 needs more evaluations than its theorem claims, or violates one of the theorem's claims?  Which instance is the worst one at finite `n`, and where does the algorithm overtake the plain two-sample bracket on it?  (THY-REQ-0001, Parts B and C, as redirected to Algorithm 2L⁺ by THY-MSG-0005 §4 and THY-MSG-0007 §3) |
+| Source commit | theory `63efc69` — the *text* of `docs/workstreams/K_REPORT.md` §§2.1–2.3, 3.2, 3.4 with the errata of referee R8 listed at its head; audited on the engineering machine (ENG-MSG-0003 §2) |
+| Mathematical dependencies | Theorem 11.56 (= K1) **[P], refereed (R8)**: this is the statement under test, not a dependency.  Used as given: the definitions of the tables `Γ̃, κ, Γ″, r†`; Proposition 11.57(a) (= K0) for the cost of the base family **[P]**; Harper's theorem **[K]** for the reduction of ENG-RES-0008 §5 (an engineering argument, unrefereed) |
+| Execution environment | local: as X-001, plus a C kernel compiled with gcc 15.2.  Remote: Modal, Debian (gVisor), Python 3.12, NumPy 2.5.5, SciPy 1.18.1, gcc of the image; one core and 1 GiB per task |
+| Inputs | none (synthetic instances) |
+| Configuration | design parameters of the theory division's own table: `b = 0.5`, `λ = 0.2`, `η = η′ = θ = 0.05`, `ν₁ = 2e^u n_o/θ`, `δ = 0.05`, ladder `ε*·0.85^i`; cells `u ∈ {½, 1, 2}` × 13 sizes (250 … 128 000) × 12 outer fractions (0.30 … 0.85); per cell: flat instance, then differential evolution over 19 instance parameters for {monotone, general} profiles × {bottom, top} inner behaviour; budgets in `run_search.tasks` |
+| Random seeds | differential evolution: seed 1 (jobs M-008, M-009), seeds 2 and 3 (M-010) |
+| Outputs | `experiments/eng/twolevel/results/x005_cost.jsonl`, `x005_claims.jsonl`, `x005_converge.jsonl`, `x005_seeds.json`, `x005_recheck.json` |
+| Validation | (i) tables against brute force with exact integers; (ii) C kernel against the Python reference on random instances; (iii) 324 + 18 published rows of workstream K reproduced; (iv) a literal sampled implementation (X-006) agrees with the mean run; (v) mutation without the Harper term is detected; (vi) remote results bit-identical to local ones on the cases compared; (vii) every stored maximiser re-evaluated with the final code.  `tests/eng/test_twolevel.py` |
+| Code | `src/metricchain_eng/twolevel/` (`tables.py`, `alg2l.py`, `meanrun.py`, `meanrun_kernel.c`, `ckernel.py`, `adversary.py`); `experiments/eng/twolevel/` (`controls.py`, `run_search.py`, `recheck.py`, `seed_analysis.py`, `make_tables.py`); `modal_jobs/twolevel_app.py` |
+| Result, interpretation, limitations | ENG-RES-0008 |
+
+## X-006  Algorithm 2L⁺ with real fluctuations of the outer sample (literal runs)
+
+| field | value |
+|---|---|
+| Scientific purpose | Does any claim of Theorem 11.56 fail on a run on which the good event (V2)–(V3) holds?  How often do the good event and the validity of the bracket fail as `K` is scaled down from the theorem's value?  (THY-REQ-0001, Part A, outer loop only) |
+| Source commit | as X-005 |
+| Mathematical dependencies | as X-005 |
+| Execution environment | as X-005 (pure Python on the remote side) |
+| Configuration | `(u, n_o, n_i) ∈ {(½, 300, 6), (1, 120, 6), (2, 48, 6)}`; `b = 0.5`, `λ = 0.5`, `η = ¼`, `η′ = θ = 0.1`, `ν₁ = 2e^u n_o/θ`, `δ = 0.05`, inner rates `(0.9, 0.45, 0.2)`; 13 radial landscapes; inner behaviour bottom / top / random (one bracket per (block, shell) group); `K` scaled by 1, ¼, 1/16, 1/64, 1/256 |
+| Random seeds | `numpy.random.default_rng([seed, …case…])` with `seed = 1`; the case enters the seed, so every case has its own stream |
+| Outputs | `experiments/eng/twolevel/results/x006_sampled.jsonl` |
+| Validation | `stable_multinomial` against exact tail masses; agreement of literal runs with the mean run at the theorem's `K` (`tests/eng/test_twolevel.py`) |
+| Code | `src/metricchain_eng/twolevel/simulate.py`; `experiments/eng/twolevel/run_sampled.py`; `modal_jobs/twolevel_app.py::sampled` |
+| Limitation stated up front | inner procedures are oracles: the event (V1) of the proof (validity of real inner brackets) is true by construction and is **not** tested |
+| Result, interpretation, limitations | ENG-RES-0008 §6 (and a linked update when job M-011 is complete) |
+
+## X-007  Off-lattice chain: distance entropy of profile classes, 5–14 torsions; single-flip constants against Proposition 11.74
+
+| field | value |
+|---|---|
+| Scientific purpose | Is the growth of off-lattice certificate sizes per torsion the growth of the number of classes divided by `e^σ` with a size-independent distance entropy `σ`?  Do the exact single-flip constants satisfy the two-sided bound of theory report Proposition 11.74?  (THY-REQ-0008, items 5 and 6) |
+| Source commit | theory `63efc69` (statement of Proposition 11.74; definitions of THY-REQ-0008); chain definitions as X-002 / X-004 (`d81eb8a`) |
+| Mathematical dependencies | Proposition 11.74 **[P]** (statement under test); `P_REPORT.md` Proposition 2 for the profile distance **[P]** |
+| Execution environment | local, single core |
+| Inputs | `experiments/eng/chain_cover/results/lattice_Sc12_flip.json` (X-002); enumeration of the generic chain by `generic_chain.enumerate_generic` (X-004) |
+| Outputs | `experiments/eng/chain_cover/results/generic_Sc16_entropy.json` |
+| Validation | 113 587 conformations and 13 012 classes at 13 torsions, the two numbers published in `P_REPORT.md` |
+| Code | `experiments/eng/chain_cover/generic_entropy.py`; blocks `flip_bounds`, `flip_scaling`, `generic_entropy`, `generic_entropy_growth` of `experiments/eng/chain_cover/make_tables.py` |
+| Result, interpretation, limitations | ENG-RES-0009 |

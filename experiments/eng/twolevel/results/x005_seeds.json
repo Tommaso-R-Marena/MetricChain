@@ -1,0 +1,6554 @@
+[
+ {
+  "u": 0.5,
+  "n": 250,
+  "phi": 0.3,
+  "best_seed_value": 39.14801689055573,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199523,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 39.334940388371805,
+  "gain_of_search": 0.02467648175225776
+ },
+ {
+  "u": 0.5,
+  "n": 250,
+  "phi": 0.35,
+  "best_seed_value": 38.286351872960736,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8616887989262125,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 38.908762525312696,
+  "gain_of_search": 0.08216679702990859
+ },
+ {
+  "u": 0.5,
+  "n": 250,
+  "phi": 0.4,
+  "best_seed_value": 38.4027434840138,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8444781766627648,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 38.406067543548176,
+  "gain_of_search": 0.00043882173938462204
+ },
+ {
+  "u": 0.5,
+  "n": 250,
+  "phi": 0.45,
+  "best_seed_value": 37.54041491964541,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 37.93560544279587,
+  "gain_of_search": 0.052170603734277655
+ },
+ {
+  "u": 0.5,
+  "n": 250,
+  "phi": 0.5,
+  "best_seed_value": 37.20988637466843,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 37.7518294224718,
+  "gain_of_search": 0.07154396256291758
+ },
+ {
+  "u": 0.5,
+  "n": 250,
+  "phi": 0.55,
+  "best_seed_value": 36.79935561204913,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 36.9263359845635,
+  "gain_of_search": 0.01676316183815932
+ },
+ {
+  "u": 0.5,
+  "n": 250,
+  "phi": 0.6,
+  "best_seed_value": 38.08778003776474,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1411867252199523,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 38.08824284282588,
+  "gain_of_search": 6.10966560090529e-05
+ },
+ {
+  "u": 0.5,
+  "n": 250,
+  "phi": 0.65,
+  "best_seed_value": 39.135213948229016,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0410089927046786,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 39.135213948229016,
+  "gain_of_search": 0.0
+ },
+ {
+  "u": 0.5,
+  "n": 250,
+  "phi": 0.7,
+  "best_seed_value": 40.668509178313144,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.6912331021332283,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 40.668535845446094,
+  "gain_of_search": 3.5204296266143546e-06
+ },
+ {
+  "u": 0.5,
+  "n": 250,
+  "phi": 0.75,
+  "best_seed_value": 41.39925734502439,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 41.39931549739818,
+  "gain_of_search": 7.676915997329611e-06
+ },
+ {
+  "u": 0.5,
+  "n": 250,
+  "phi": 0.8,
+  "best_seed_value": 40.53762461394213,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.023076973326832,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 40.537641926524635,
+  "gain_of_search": 2.2854998505452004e-06
+ },
+ {
+  "u": 0.5,
+  "n": 250,
+  "phi": 0.85,
+  "best_seed_value": 41.54173656006159,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0184428510731827,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 41.54173656006159,
+  "gain_of_search": 0.0
+ },
+ {
+  "u": 0.5,
+  "n": 350,
+  "phi": 0.3,
+  "best_seed_value": 42.498905611538596,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 42.71024133050416,
+  "gain_of_search": 0.019928022783896174
+ },
+ {
+  "u": 0.5,
+  "n": 350,
+  "phi": 0.35,
+  "best_seed_value": 42.352955168440495,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.6547792685688253,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 42.35295570962349,
+  "gain_of_search": 5.103116048109569e-08
+ },
+ {
+  "u": 0.5,
+  "n": 350,
+  "phi": 0.4,
+  "best_seed_value": 41.238782355439376,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.6684093676288293,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 41.27766577603142,
+  "gain_of_search": 0.003666534437561468
+ },
+ {
+  "u": 0.5,
+  "n": 350,
+  "phi": 0.45,
+  "best_seed_value": 40.63656053488797,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.6832582940807359,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 41.102738343357665,
+  "gain_of_search": 0.04395850372101367
+ },
+ {
+  "u": 0.5,
+  "n": 350,
+  "phi": 0.5,
+  "best_seed_value": 40.7053893200997,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 40.70611824676992,
+  "gain_of_search": 6.873455828025052e-05
+ },
+ {
+  "u": 0.5,
+  "n": 350,
+  "phi": 0.55,
+  "best_seed_value": 39.09736721617913,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0264049146765541,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 40.08331100112918,
+  "gain_of_search": 0.09297013446802595
+ },
+ {
+  "u": 0.5,
+  "n": 350,
+  "phi": 0.6,
+  "best_seed_value": 40.90093303313656,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0191875300968076,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 40.90093303313656,
+  "gain_of_search": 0.0
+ },
+ {
+  "u": 0.5,
+  "n": 350,
+  "phi": 0.65,
+  "best_seed_value": 42.06877960595741,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0131752454095955,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 42.06877960595741,
+  "gain_of_search": 0.0
+ },
+ {
+  "u": 0.5,
+  "n": 350,
+  "phi": 0.7,
+  "best_seed_value": 43.40099473937264,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0078027866442145,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 43.401020100109434,
+  "gain_of_search": 2.3914052157802775e-06
+ },
+ {
+  "u": 0.5,
+  "n": 350,
+  "phi": 0.75,
+  "best_seed_value": 44.12958760711384,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 44.12960072586825,
+  "gain_of_search": 1.2370404683907926e-06
+ },
+ {
+  "u": 0.5,
+  "n": 350,
+  "phi": 0.8,
+  "best_seed_value": 46.30060853263177,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 46.30060887411516,
+  "gain_of_search": 3.2200372293143614e-08
+ },
+ {
+  "u": 0.5,
+  "n": 350,
+  "phi": 0.85,
+  "best_seed_value": 46.364300322993444,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "top"
+  },
+  "stored_best": 46.364300996875706,
+  "gain_of_search": 6.354411424806867e-08
+ },
+ {
+  "u": 0.5,
+  "n": 500,
+  "phi": 0.3,
+  "best_seed_value": 47.53318805488089,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199523,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 47.897375315569406,
+  "gain_of_search": 0.02403887258098403
+ },
+ {
+  "u": 0.5,
+  "n": 500,
+  "phi": 0.35,
+  "best_seed_value": 46.85736722099811,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 46.90930338053017,
+  "gain_of_search": 0.0034281449575598965
+ },
+ {
+  "u": 0.5,
+  "n": 500,
+  "phi": 0.4,
+  "best_seed_value": 45.85337997153507,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.696123902384171,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 46.04544680832874,
+  "gain_of_search": 0.012677736744516763
+ },
+ {
+  "u": 0.5,
+  "n": 500,
+  "phi": 0.45,
+  "best_seed_value": 44.52345405878436,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 45.24930122279634,
+  "gain_of_search": 0.04791092213375374
+ },
+ {
+  "u": 0.5,
+  "n": 500,
+  "phi": 0.5,
+  "best_seed_value": 44.077750280508,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 44.37543835953006,
+  "gain_of_search": 0.01964946765836945
+ },
+ {
+  "u": 0.5,
+  "n": 500,
+  "phi": 0.55,
+  "best_seed_value": 43.79454272729214,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7220599643209882,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 43.79454272753577,
+  "gain_of_search": 1.6081320330242945e-11
+ },
+ {
+  "u": 0.5,
+  "n": 500,
+  "phi": 0.6,
+  "best_seed_value": 44.31451538227417,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.7227515926393032,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 44.31581116476008,
+  "gain_of_search": 8.553058668893546e-05
+ },
+ {
+  "u": 0.5,
+  "n": 500,
+  "phi": 0.65,
+  "best_seed_value": 45.33460263934439,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 45.335509066266475,
+  "gain_of_search": 5.983043240666564e-05
+ },
+ {
+  "u": 0.5,
+  "n": 500,
+  "phi": 0.7,
+  "best_seed_value": 46.815671380233574,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 46.815753878739514,
+  "gain_of_search": 5.445470741214843e-06
+ },
+ {
+  "u": 0.5,
+  "n": 500,
+  "phi": 0.75,
+  "best_seed_value": 48.44529714102663,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 48.445308311999874,
+  "gain_of_search": 7.373613287210116e-07
+ },
+ {
+  "u": 0.5,
+  "n": 500,
+  "phi": 0.8,
+  "best_seed_value": 50.17055600665308,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 1.0,
+   "oracle": "top"
+  },
+  "stored_best": 50.17055618874657,
+  "gain_of_search": 1.2019427294860643e-08
+ },
+ {
+  "u": 0.5,
+  "n": 500,
+  "phi": 0.85,
+  "best_seed_value": 52.76833921574932,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 52.768339225309994,
+  "gain_of_search": 6.310703500862325e-10
+ },
+ {
+  "u": 0.5,
+  "n": 700,
+  "phi": 0.3,
+  "best_seed_value": 53.4704361571269,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8422107663025667,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 53.4944524492065,
+  "gain_of_search": 0.0011323150153925883
+ },
+ {
+  "u": 0.5,
+  "n": 700,
+  "phi": 0.35,
+  "best_seed_value": 53.045862695474234,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8476632040417431,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 53.045887793633874,
+  "gain_of_search": 1.1833226763023148e-06
+ },
+ {
+  "u": 0.5,
+  "n": 700,
+  "phi": 0.4,
+  "best_seed_value": 51.36611867623584,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 51.812237264675154,
+  "gain_of_search": 0.02103350403389879
+ },
+ {
+  "u": 0.5,
+  "n": 700,
+  "phi": 0.45,
+  "best_seed_value": 50.55620073476401,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7318086301410489,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 50.7292822969077,
+  "gain_of_search": 0.008160412567157504
+ },
+ {
+  "u": 0.5,
+  "n": 700,
+  "phi": 0.5,
+  "best_seed_value": 49.13317448485481,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 49.75018187715466,
+  "gain_of_search": 0.029090532901319934
+ },
+ {
+  "u": 0.5,
+  "n": 700,
+  "phi": 0.55,
+  "best_seed_value": 48.43384637693035,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7410303410519171,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 48.43384637693157,
+  "gain_of_search": 5.762088979071783e-14
+ },
+ {
+  "u": 0.5,
+  "n": 700,
+  "phi": 0.6,
+  "best_seed_value": 49.4392108219505,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 49.44371168450249,
+  "gain_of_search": 0.00021220570739811427
+ },
+ {
+  "u": 0.5,
+  "n": 700,
+  "phi": 0.65,
+  "best_seed_value": 50.36156993861071,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 50.362269564292,
+  "gain_of_search": 3.2985802365166614e-05
+ },
+ {
+  "u": 0.5,
+  "n": 700,
+  "phi": 0.7,
+  "best_seed_value": 51.936072386443826,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 51.936108007681874,
+  "gain_of_search": 1.679462532145926e-06
+ },
+ {
+  "u": 0.5,
+  "n": 700,
+  "phi": 0.75,
+  "best_seed_value": 54.53885343546706,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.756443772145797,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 54.53885345498332,
+  "gain_of_search": 9.201483240731462e-10
+ },
+ {
+  "u": 0.5,
+  "n": 700,
+  "phi": 0.8,
+  "best_seed_value": 56.485789564452574,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 56.48578957715132,
+  "gain_of_search": 5.987178954946105e-10
+ },
+ {
+  "u": 0.5,
+  "n": 700,
+  "phi": 0.85,
+  "best_seed_value": 58.775404516544995,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 58.77540451696141,
+  "gain_of_search": 1.9632978175494294e-11
+ },
+ {
+  "u": 0.5,
+  "n": 1000,
+  "phi": 0.3,
+  "best_seed_value": 62.87765383913824,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7227515926393032,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 62.87765383918298,
+  "gain_of_search": 1.4766693029564253e-12
+ },
+ {
+  "u": 0.5,
+  "n": 1000,
+  "phi": 0.35,
+  "best_seed_value": 60.76976670469867,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 61.387524176587725,
+  "gain_of_search": 0.020388128245640316
+ },
+ {
+  "u": 0.5,
+  "n": 1000,
+  "phi": 0.4,
+  "best_seed_value": 59.646704300157715,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8501841102888646,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 59.70022388210364,
+  "gain_of_search": 0.0017663308822958097
+ },
+ {
+  "u": 0.5,
+  "n": 1000,
+  "phi": 0.45,
+  "best_seed_value": 58.60683335535041,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.853167443410782,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 58.60683339824437,
+  "gain_of_search": 1.4156486466659858e-09
+ },
+ {
+  "u": 0.5,
+  "n": 1000,
+  "phi": 0.5,
+  "best_seed_value": 57.024096093985825,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7531832386451687,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 57.33357326929655,
+  "gain_of_search": 0.010213814686917668
+ },
+ {
+  "u": 0.5,
+  "n": 1000,
+  "phi": 0.55,
+  "best_seed_value": 55.4044443775528,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7594078935100048,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 55.40444437755283,
+  "gain_of_search": 9.38014484965174e-16
+ },
+ {
+  "u": 0.5,
+  "n": 1000,
+  "phi": 0.6,
+  "best_seed_value": 56.28291283964412,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 56.28442134451455,
+  "gain_of_search": 4.978586606720819e-05
+ },
+ {
+  "u": 0.5,
+  "n": 1000,
+  "phi": 0.65,
+  "best_seed_value": 58.47544051561858,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1411867252199523,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 58.47554919963283,
+  "gain_of_search": 3.586947502254708e-06
+ },
+ {
+  "u": 0.5,
+  "n": 1000,
+  "phi": 0.7,
+  "best_seed_value": 60.70207337282856,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 60.70207483213266,
+  "gain_of_search": 4.816207091916964e-08
+ },
+ {
+  "u": 0.5,
+  "n": 1000,
+  "phi": 0.75,
+  "best_seed_value": 62.95465559922138,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 62.954655614833264,
+  "gain_of_search": 5.152459630080815e-10
+ },
+ {
+  "u": 0.5,
+  "n": 1000,
+  "phi": 0.8,
+  "best_seed_value": 65.51614662508447,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 65.51614662550611,
+  "gain_of_search": 1.3915444884458357e-11
+ },
+ {
+  "u": 0.5,
+  "n": 1000,
+  "phi": 0.85,
+  "best_seed_value": 68.01274032174976,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 68.01274032175081,
+  "gain_of_search": 3.470653594371144e-14
+ },
+ {
+  "u": 0.5,
+  "n": 1400,
+  "phi": 0.3,
+  "best_seed_value": 74.08584734892301,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7444884826434928,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 74.25226655187545,
+  "gain_of_search": 0.003923148538669946
+ },
+ {
+  "u": 0.5,
+  "n": 1400,
+  "phi": 0.35,
+  "best_seed_value": 71.87136874159488,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 72.0720073109374,
+  "gain_of_search": 0.004729832231812037
+ },
+ {
+  "u": 0.5,
+  "n": 1400,
+  "phi": 0.4,
+  "best_seed_value": 70.38887394029939,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7621497057718969,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 70.50661666917014,
+  "gain_of_search": 0.0027756545309276137
+ },
+ {
+  "u": 0.5,
+  "n": 1400,
+  "phi": 0.45,
+  "best_seed_value": 68.40131515826185,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7644139651473333,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 68.40131515826187,
+  "gain_of_search": 3.3500517320184785e-16
+ },
+ {
+  "u": 0.5,
+  "n": 1400,
+  "phi": 0.5,
+  "best_seed_value": 65.51856273344926,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 66.53070798041286,
+  "gain_of_search": 0.023860204087636224
+ },
+ {
+  "u": 0.5,
+  "n": 1400,
+  "phi": 0.55,
+  "best_seed_value": 64.7334496486244,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7736356760582015,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 64.7334496486244,
+  "gain_of_search": 0.0
+ },
+ {
+  "u": 0.5,
+  "n": 1400,
+  "phi": 0.6,
+  "best_seed_value": 65.88007638864123,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 65.88050520806921,
+  "gain_of_search": 1.0108943453582828e-05
+ },
+ {
+  "u": 0.5,
+  "n": 1400,
+  "phi": 0.65,
+  "best_seed_value": 69.4303660064861,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 69.43036695576859,
+  "gain_of_search": 2.2378284263936742e-08
+ },
+ {
+  "u": 0.5,
+  "n": 1400,
+  "phi": 0.7,
+  "best_seed_value": 71.68831036248088,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 71.68831036447916,
+  "gain_of_search": 4.710742244012424e-11
+ },
+ {
+  "u": 0.5,
+  "n": 1400,
+  "phi": 0.75,
+  "best_seed_value": 74.6694912137691,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 74.66949121410092,
+  "gain_of_search": 7.822035789089946e-12
+ },
+ {
+  "u": 0.5,
+  "n": 1400,
+  "phi": 0.8,
+  "best_seed_value": 77.63670851807593,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 77.6367085180761,
+  "gain_of_search": 4.0200620784221746e-15
+ },
+ {
+  "u": 0.5,
+  "n": 1400,
+  "phi": 0.85,
+  "best_seed_value": 80.68352712475556,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 80.68352712475571,
+  "gain_of_search": 3.685056905220326e-15
+ },
+ {
+  "u": 0.5,
+  "n": 2000,
+  "phi": 0.3,
+  "best_seed_value": 90.55014399664373,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7645951058973681,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 90.95042422541242,
+  "gain_of_search": 0.006605314390916822
+ },
+ {
+  "u": 0.5,
+  "n": 2000,
+  "phi": 0.35,
+  "best_seed_value": 87.63439749254088,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8524909804882593,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 88.20101947899164,
+  "gain_of_search": 0.009350240387405754
+ },
+ {
+  "u": 0.5,
+  "n": 2000,
+  "phi": 0.4,
+  "best_seed_value": 85.85701620165744,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 85.8570162026624,
+  "gain_of_search": 1.6583392583320552e-11
+ },
+ {
+  "u": 0.5,
+  "n": 2000,
+  "phi": 0.45,
+  "best_seed_value": 82.54448024746334,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.85462205866472,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 82.54612741319549,
+  "gain_of_search": 2.7181076488027235e-05
+ },
+ {
+  "u": 0.5,
+  "n": 2000,
+  "phi": 0.5,
+  "best_seed_value": 79.33888528842147,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8550290792457627,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 79.49403657302383,
+  "gain_of_search": 0.0025602638833942047
+ },
+ {
+  "u": 0.5,
+  "n": 2000,
+  "phi": 0.55,
+  "best_seed_value": 76.27218515333756,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 76.30699134733112,
+  "gain_of_search": 0.0005743622531293228
+ },
+ {
+  "u": 0.5,
+  "n": 2000,
+  "phi": 0.6,
+  "best_seed_value": 80.51447235653065,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 80.51448748758804,
+  "gain_of_search": 2.4968855312086694e-07
+ },
+ {
+  "u": 0.5,
+  "n": 2000,
+  "phi": 0.65,
+  "best_seed_value": 84.06761262062045,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 84.06761271540225,
+  "gain_of_search": 1.5640631745061455e-09
+ },
+ {
+  "u": 0.5,
+  "n": 2000,
+  "phi": 0.7,
+  "best_seed_value": 87.62349568950947,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 87.62349568953323,
+  "gain_of_search": 3.9209005471544277e-13
+ },
+ {
+  "u": 0.5,
+  "n": 2000,
+  "phi": 0.75,
+  "best_seed_value": 91.89656317070052,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 91.89656317070056,
+  "gain_of_search": 7.035108637238805e-16
+ },
+ {
+  "u": 0.5,
+  "n": 2000,
+  "phi": 0.8,
+  "best_seed_value": 96.3316186756379,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 96.33161867563796,
+  "gain_of_search": 9.38014484965174e-16
+ },
+ {
+  "u": 0.5,
+  "n": 2000,
+  "phi": 0.85,
+  "best_seed_value": 100.01758553339289,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 100.01758553339296,
+  "gain_of_search": 1.1725181062064676e-15
+ },
+ {
+  "u": 0.5,
+  "n": 4000,
+  "phi": 0.3,
+  "best_seed_value": 142.77480042640713,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8616887989262124,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 142.77480047221712,
+  "gain_of_search": 3.779719987022319e-10
+ },
+ {
+  "u": 0.5,
+  "n": 4000,
+  "phi": 0.35,
+  "best_seed_value": 136.31236033092665,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7972004409036525,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 136.33404952519192,
+  "gain_of_search": 0.0001789545632174152
+ },
+ {
+  "u": 0.5,
+  "n": 4000,
+  "phi": 0.4,
+  "best_seed_value": 129.22537938649631,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 129.22537938649631,
+  "gain_of_search": 0.0
+ },
+ {
+  "u": 0.5,
+  "n": 4000,
+  "phi": 0.45,
+  "best_seed_value": 122.80804752211537,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8564307215382397,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 122.88894268857493,
+  "gain_of_search": 0.0006674549087955163
+ },
+ {
+  "u": 0.5,
+  "n": 4000,
+  "phi": 0.5,
+  "best_seed_value": 115.73270487391682,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8068190147305064,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 115.82829733744337,
+  "gain_of_search": 0.0007887202884557584
+ },
+ {
+  "u": 0.5,
+  "n": 4000,
+  "phi": 0.55,
+  "best_seed_value": 117.45751228983859,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 1.0,
+   "oracle": "top"
+  },
+  "stored_best": 117.45767535682504,
+  "gain_of_search": 1.345443310508545e-06
+ },
+ {
+  "u": 0.5,
+  "n": 4000,
+  "phi": 0.6,
+  "best_seed_value": 124.47078200760899,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 124.47078200774115,
+  "gain_of_search": 1.0904418387720148e-12
+ },
+ {
+  "u": 0.5,
+  "n": 4000,
+  "phi": 0.65,
+  "best_seed_value": 132.173279794568,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 132.1732797945681,
+  "gain_of_search": 7.035108637238805e-16
+ },
+ {
+  "u": 0.5,
+  "n": 4000,
+  "phi": 0.7,
+  "best_seed_value": 139.19151235300123,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 139.19151235300146,
+  "gain_of_search": 1.876028969930348e-15
+ },
+ {
+  "u": 0.5,
+  "n": 4000,
+  "phi": 0.75,
+  "best_seed_value": 146.91154373095932,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 146.91154373095952,
+  "gain_of_search": 1.6415253486890545e-15
+ },
+ {
+  "u": 0.5,
+  "n": 4000,
+  "phi": 0.8,
+  "best_seed_value": 153.25694088902162,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 153.2569408890219,
+  "gain_of_search": 2.3450362124129352e-15
+ },
+ {
+  "u": 0.5,
+  "n": 4000,
+  "phi": 0.85,
+  "best_seed_value": 160.32624196380786,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 160.326241963808,
+  "gain_of_search": 1.1725181062064676e-15
+ },
+ {
+  "u": 0.5,
+  "n": 8000,
+  "phi": 0.3,
+  "best_seed_value": 237.33610004279825,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8111935638438496,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 237.35366434195987,
+  "gain_of_search": 7.246031010293757e-05
+ },
+ {
+  "u": 0.5,
+  "n": 8000,
+  "phi": 0.35,
+  "best_seed_value": 224.36532835042348,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 224.49468821104062,
+  "gain_of_search": 0.0005336652222180886
+ },
+ {
+  "u": 0.5,
+  "n": 8000,
+  "phi": 0.4,
+  "best_seed_value": 211.33927872809696,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8180882336420534,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 211.33928464720475,
+  "gain_of_search": 2.441887274977066e-08
+ },
+ {
+  "u": 0.5,
+  "n": 8000,
+  "phi": 0.45,
+  "best_seed_value": 197.96454972554963,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 198.070674194447,
+  "gain_of_search": 0.00043780920918362636
+ },
+ {
+  "u": 0.5,
+  "n": 8000,
+  "phi": 0.5,
+  "best_seed_value": 184.59667806133027,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8583125283934134,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 185.04314833320606,
+  "gain_of_search": 0.0018418824488343028
+ },
+ {
+  "u": 0.5,
+  "n": 8000,
+  "phi": 0.55,
+  "best_seed_value": 194.82370482947718,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.8242480483520476,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 194.82370482954255,
+  "gain_of_search": 2.6967916442748753e-13
+ },
+ {
+  "u": 0.5,
+  "n": 8000,
+  "phi": 0.6,
+  "best_seed_value": 208.7676560395779,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1411867252199523,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 208.7676560395781,
+  "gain_of_search": 8.207626743445273e-16
+ },
+ {
+  "u": 0.5,
+  "n": 8000,
+  "phi": 0.65,
+  "best_seed_value": 222.71083221555304,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 222.71083221555338,
+  "gain_of_search": 1.407021727447761e-15
+ },
+ {
+  "u": 0.5,
+  "n": 8000,
+  "phi": 0.7,
+  "best_seed_value": 235.96189976217002,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 235.96189976217025,
+  "gain_of_search": 9.38014484965174e-16
+ },
+ {
+  "u": 0.5,
+  "n": 8000,
+  "phi": 0.75,
+  "best_seed_value": 249.2164213860472,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 249.21642138604759,
+  "gain_of_search": 1.6415253486890545e-15
+ },
+ {
+  "u": 0.5,
+  "n": 8000,
+  "phi": 0.8,
+  "best_seed_value": 263.17299463472375,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 263.17299463472403,
+  "gain_of_search": 1.1725181062064676e-15
+ },
+ {
+  "u": 0.5,
+  "n": 8000,
+  "phi": 0.85,
+  "best_seed_value": 276.4533532195133,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 276.4533532195138,
+  "gain_of_search": 2.1105325911716414e-15
+ },
+ {
+  "u": 0.5,
+  "n": 16000,
+  "phi": 0.3,
+  "best_seed_value": 420.1228965448462,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199523,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 420.37492182095946,
+  "gain_of_search": 0.0005198564853885633
+ },
+ {
+  "u": 0.5,
+  "n": 16000,
+  "phi": 0.35,
+  "best_seed_value": 394.50789969679795,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8285830758472013,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 394.63026340097946,
+  "gain_of_search": 0.0002524015296240972
+ },
+ {
+  "u": 0.5,
+  "n": 16000,
+  "phi": 0.4,
+  "best_seed_value": 369.172184716819,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8305699634491467,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 369.1934630083104,
+  "gain_of_search": 4.389106521530108e-05
+ },
+ {
+  "u": 0.5,
+  "n": 16000,
+  "phi": 0.45,
+  "best_seed_value": 343.18348557916687,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 343.64361261320204,
+  "gain_of_search": 0.0009491112416767194
+ },
+ {
+  "u": 0.5,
+  "n": 16000,
+  "phi": 0.5,
+  "best_seed_value": 317.795953711643,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8339221994544803,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 318.06202792557707,
+  "gain_of_search": 0.00054883544952898
+ },
+ {
+  "u": 0.5,
+  "n": 16000,
+  "phi": 0.55,
+  "best_seed_value": 342.9693119829532,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 342.969311982954,
+  "gain_of_search": 1.7587771593097012e-15
+ },
+ {
+  "u": 0.5,
+  "n": 16000,
+  "phi": 0.6,
+  "best_seed_value": 369.4153762581621,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 369.4153762581629,
+  "gain_of_search": 1.6415253486890545e-15
+ },
+ {
+  "u": 0.5,
+  "n": 16000,
+  "phi": 0.65,
+  "best_seed_value": 396.5286455196387,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 396.5286455196395,
+  "gain_of_search": 1.6415253486890545e-15
+ },
+ {
+  "u": 0.5,
+  "n": 16000,
+  "phi": 0.7,
+  "best_seed_value": 422.25567495007766,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 422.25567495007834,
+  "gain_of_search": 1.407021727447761e-15
+ },
+ {
+  "u": 0.5,
+  "n": 16000,
+  "phi": 0.75,
+  "best_seed_value": 448.67426440947526,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 448.67426440947605,
+  "gain_of_search": 1.6415253486890545e-15
+ },
+ {
+  "u": 0.5,
+  "n": 16000,
+  "phi": 0.8,
+  "best_seed_value": 475.0980160762213,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 475.09801607622194,
+  "gain_of_search": 1.2897699168271143e-15
+ },
+ {
+  "u": 0.5,
+  "n": 16000,
+  "phi": 0.85,
+  "best_seed_value": 501.5311199161411,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 501.53111991614173,
+  "gain_of_search": 1.2897699168271143e-15
+ },
+ {
+  "u": 0.5,
+  "n": 32000,
+  "phi": 0.3,
+  "best_seed_value": 777.9740418410742,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 778.6154647893039,
+  "gain_of_search": 0.0006615365820776506
+ },
+ {
+  "u": 0.5,
+  "n": 32000,
+  "phi": 0.35,
+  "best_seed_value": 727.5598261941401,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.8381608930052973,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 728.0540087540209,
+  "gain_of_search": 0.000509679054184366
+ },
+ {
+  "u": 0.5,
+  "n": 32000,
+  "phi": 0.4,
+  "best_seed_value": 676.8874962694395,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 677.5310604633637,
+  "gain_of_search": 0.0006637449725975416
+ },
+ {
+  "u": 0.5,
+  "n": 32000,
+  "phi": 0.45,
+  "best_seed_value": 626.0062574371711,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 626.9305447058698,
+  "gain_of_search": 0.0009532709147377801
+ },
+ {
+  "u": 0.5,
+  "n": 32000,
+  "phi": 0.5,
+  "best_seed_value": 579.1545803855136,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 579.1756400005219,
+  "gain_of_search": 2.1719998903873354e-05
+ },
+ {
+  "u": 0.5,
+  "n": 32000,
+  "phi": 0.55,
+  "best_seed_value": 631.2294578371411,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 631.2294578371415,
+  "gain_of_search": 3.5175543186194026e-16
+ },
+ {
+  "u": 0.5,
+  "n": 32000,
+  "phi": 0.6,
+  "best_seed_value": 682.608562762155,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 682.6085627621568,
+  "gain_of_search": 1.876028969930348e-15
+ },
+ {
+  "u": 0.5,
+  "n": 32000,
+  "phi": 0.65,
+  "best_seed_value": 733.9839563680789,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 733.9839563680802,
+  "gain_of_search": 1.2897699168271143e-15
+ },
+ {
+  "u": 0.5,
+  "n": 32000,
+  "phi": 0.7,
+  "best_seed_value": 785.3728218781571,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 785.372821878159,
+  "gain_of_search": 1.9932807805509947e-15
+ },
+ {
+  "u": 0.5,
+  "n": 32000,
+  "phi": 0.75,
+  "best_seed_value": 836.7234076264514,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 836.7234076264531,
+  "gain_of_search": 1.7587771593097012e-15
+ },
+ {
+  "u": 0.5,
+  "n": 32000,
+  "phi": 0.8,
+  "best_seed_value": 888.1143482010648,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 888.1143482010667,
+  "gain_of_search": 1.9932807805509947e-15
+ },
+ {
+  "u": 0.5,
+  "n": 32000,
+  "phi": 0.85,
+  "best_seed_value": 939.4909441840157,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 939.4909441840175,
+  "gain_of_search": 1.876028969930348e-15
+ },
+ {
+  "u": 0.5,
+  "n": 64000,
+  "phi": 0.3,
+  "best_seed_value": 1482.9501595450413,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1483.9237997118123,
+  "gain_of_search": 0.0005020857063789379
+ },
+ {
+  "u": 0.5,
+  "n": 64000,
+  "phi": 0.35,
+  "best_seed_value": 1383.302973865903,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 1384.4028066659446,
+  "gain_of_search": 0.0005671605867894668
+ },
+ {
+  "u": 0.5,
+  "n": 64000,
+  "phi": 0.4,
+  "best_seed_value": 1283.3106245582676,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 1284.2130282865,
+  "gain_of_search": 0.00046535057692945035
+ },
+ {
+  "u": 0.5,
+  "n": 64000,
+  "phi": 0.45,
+  "best_seed_value": 1183.2358119329294,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1184.1143470681252,
+  "gain_of_search": 0.0004530420467310253
+ },
+ {
+  "u": 0.5,
+  "n": 64000,
+  "phi": 0.5,
+  "best_seed_value": 1092.0324771698706,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1092.032539254558,
+  "gain_of_search": 3.201576435914926e-08
+ },
+ {
+  "u": 0.5,
+  "n": 64000,
+  "phi": 0.55,
+  "best_seed_value": 1193.3269051050863,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1193.3269051050888,
+  "gain_of_search": 1.2897699168271143e-15
+ },
+ {
+  "u": 0.5,
+  "n": 64000,
+  "phi": 0.6,
+  "best_seed_value": 1295.3076975325705,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 1295.3076975325755,
+  "gain_of_search": 2.5795398336542287e-15
+ },
+ {
+  "u": 0.5,
+  "n": 64000,
+  "phi": 0.65,
+  "best_seed_value": 1396.5900153226592,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1411867252199523,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 1396.5900153226617,
+  "gain_of_search": 1.2897699168271143e-15
+ },
+ {
+  "u": 0.5,
+  "n": 64000,
+  "phi": 0.7,
+  "best_seed_value": 1497.8677425542026,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 1497.8677425542044,
+  "gain_of_search": 9.38014484965174e-16
+ },
+ {
+  "u": 0.5,
+  "n": 64000,
+  "phi": 0.75,
+  "best_seed_value": 1598.4494832666942,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1598.4494832666994,
+  "gain_of_search": 2.6967916442748754e-15
+ },
+ {
+  "u": 0.5,
+  "n": 64000,
+  "phi": 0.8,
+  "best_seed_value": 1699.029892612136,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 1699.029892612138,
+  "gain_of_search": 9.38014484965174e-16
+ },
+ {
+  "u": 0.5,
+  "n": 64000,
+  "phi": 0.85,
+  "best_seed_value": 1799.6299848251017,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1799.629984825103,
+  "gain_of_search": 7.035108637238805e-16
+ },
+ {
+  "u": 0.5,
+  "n": 128000,
+  "phi": 0.3,
+  "best_seed_value": 2877.8757759878067,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1411867252199523,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2879.159009146882,
+  "gain_of_search": 0.00033086814262188945
+ },
+ {
+  "u": 0.5,
+  "n": 128000,
+  "phi": 0.35,
+  "best_seed_value": 2679.844329703508,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2681.050146091762,
+  "gain_of_search": 0.0003109070443692778
+ },
+ {
+  "u": 0.5,
+  "n": 128000,
+  "phi": 0.4,
+  "best_seed_value": 2480.8040362691095,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2482.2470461683574,
+  "gain_of_search": 0.0003720648907586103
+ },
+ {
+  "u": 0.5,
+  "n": 128000,
+  "phi": 0.45,
+  "best_seed_value": 2282.6622402000544,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2283.744112228647,
+  "gain_of_search": 0.00027894929781342866
+ },
+ {
+  "u": 0.5,
+  "n": 128000,
+  "phi": 0.5,
+  "best_seed_value": 2101.2381691255796,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 2101.238169177373,
+  "gain_of_search": 1.3354394970638562e-11
+ },
+ {
+  "u": 0.5,
+  "n": 128000,
+  "phi": 0.55,
+  "best_seed_value": 2301.6545790561977,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1411867252199526,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 2301.654579056199,
+  "gain_of_search": 3.5175543186194026e-16
+ },
+ {
+  "u": 0.5,
+  "n": 128000,
+  "phi": 0.6,
+  "best_seed_value": 2501.3702375924445,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2501.370237592448,
+  "gain_of_search": 9.38014484965174e-16
+ },
+ {
+  "u": 0.5,
+  "n": 128000,
+  "phi": 0.65,
+  "best_seed_value": 2701.7728161628943,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 2701.7728161629034,
+  "gain_of_search": 2.3450362124129352e-15
+ },
+ {
+  "u": 0.5,
+  "n": 128000,
+  "phi": 0.7,
+  "best_seed_value": 2901.477448812519,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2901.4774488125286,
+  "gain_of_search": 2.462288023033582e-15
+ },
+ {
+  "u": 0.5,
+  "n": 128000,
+  "phi": 0.75,
+  "best_seed_value": 3100.485089049747,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 3100.4850890497523,
+  "gain_of_search": 1.407021727447761e-15
+ },
+ {
+  "u": 0.5,
+  "n": 128000,
+  "phi": 0.8,
+  "best_seed_value": 3299.4903757962657,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 3299.4903757962766,
+  "gain_of_search": 2.814043454895522e-15
+ },
+ {
+  "u": 0.5,
+  "n": 128000,
+  "phi": 0.85,
+  "best_seed_value": 3499.188535232102,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 3499.1885352321056,
+  "gain_of_search": 9.38014484965174e-16
+ },
+ {
+  "u": 1.0,
+  "n": 250,
+  "phi": 0.3,
+  "best_seed_value": 65.80465703201662,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 65.80465703201662,
+  "gain_of_search": 0.0
+ },
+ {
+  "u": 1.0,
+  "n": 250,
+  "phi": 0.35,
+  "best_seed_value": 64.68978567790559,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.6453057367463474,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 64.68978638294502,
+  "gain_of_search": 2.541963406709568e-08
+ },
+ {
+  "u": 1.0,
+  "n": 250,
+  "phi": 0.4,
+  "best_seed_value": 62.56697516325247,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.9000000000000001,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 63.604199076290314,
+  "gain_of_search": 0.037396280753310945
+ },
+ {
+  "u": 1.0,
+  "n": 250,
+  "phi": 0.45,
+  "best_seed_value": 61.68800649591126,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7079539132084138,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 61.925523909575716,
+  "gain_of_search": 0.008563500873385891
+ },
+ {
+  "u": 1.0,
+  "n": 250,
+  "phi": 0.5,
+  "best_seed_value": 59.697347978847546,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 60.051964356525,
+  "gain_of_search": 0.012785410606768686
+ },
+ {
+  "u": 1.0,
+  "n": 250,
+  "phi": 0.55,
+  "best_seed_value": 58.24621710757886,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.6476154311859847,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 58.24621710804441,
+  "gain_of_search": 1.6785203531195648e-11
+ },
+ {
+  "u": 1.0,
+  "n": 250,
+  "phi": 0.6,
+  "best_seed_value": 57.71659023202563,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 57.72202593481503,
+  "gain_of_search": 0.0001959799278137996
+ },
+ {
+  "u": 1.0,
+  "n": 250,
+  "phi": 0.65,
+  "best_seed_value": 59.54362829454298,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 59.544008988754285,
+  "gain_of_search": 1.372562609510653e-05
+ },
+ {
+  "u": 1.0,
+  "n": 250,
+  "phi": 0.7,
+  "best_seed_value": 62.02628274943918,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 62.02629036649161,
+  "gain_of_search": 2.746267487922831e-07
+ },
+ {
+  "u": 1.0,
+  "n": 250,
+  "phi": 0.75,
+  "best_seed_value": 63.2276613853975,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 63.227661410205094,
+  "gain_of_search": 8.944181470898141e-10
+ },
+ {
+  "u": 1.0,
+  "n": 250,
+  "phi": 0.8,
+  "best_seed_value": 66.49426639053142,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 66.49426639273187,
+  "gain_of_search": 7.933551900553801e-11
+ },
+ {
+  "u": 1.0,
+  "n": 250,
+  "phi": 0.85,
+  "best_seed_value": 66.6658238193239,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 69.43841254066703,
+  "gain_of_search": 0.09996347455308636
+ },
+ {
+  "u": 1.0,
+  "n": 350,
+  "phi": 0.3,
+  "best_seed_value": 77.24612494042559,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3161860854346585,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 77.93829384517336,
+  "gain_of_search": 0.017825426923108588
+ },
+ {
+  "u": 1.0,
+  "n": 350,
+  "phi": 0.35,
+  "best_seed_value": 74.99373161280585,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 75.52308169421339,
+  "gain_of_search": 0.013632353502372619
+ },
+ {
+  "u": 1.0,
+  "n": 350,
+  "phi": 0.4,
+  "best_seed_value": 73.40259083102735,
+  "best_seed": {
+   "type": "flat",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 73.95546557983435,
+  "gain_of_search": 0.014238184299946884
+ },
+ {
+  "u": 1.0,
+  "n": 350,
+  "phi": 0.45,
+  "best_seed_value": 71.43556131003719,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 71.66376383717618,
+  "gain_of_search": 0.005876900050381595
+ },
+ {
+  "u": 1.0,
+  "n": 350,
+  "phi": 0.5,
+  "best_seed_value": 68.86762353464088,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 68.86762353464088,
+  "gain_of_search": 0.0
+ },
+ {
+  "u": 1.0,
+  "n": 350,
+  "phi": 0.55,
+  "best_seed_value": 66.31873002651585,
+  "best_seed": {
+   "type": "flat",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 66.88027268298657,
+  "gain_of_search": 0.014461408940025473
+ },
+ {
+  "u": 1.0,
+  "n": 350,
+  "phi": 0.6,
+  "best_seed_value": 66.70460956903248,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 66.7057182761837,
+  "gain_of_search": 2.8552537057937487e-05
+ },
+ {
+  "u": 1.0,
+  "n": 350,
+  "phi": 0.65,
+  "best_seed_value": 69.01058429715802,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 69.01060486397598,
+  "gain_of_search": 5.296572963327501e-07
+ },
+ {
+  "u": 1.0,
+  "n": 350,
+  "phi": 0.7,
+  "best_seed_value": 72.06617954820281,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 72.06617997452251,
+  "gain_of_search": 1.09790119573614e-08
+ },
+ {
+  "u": 1.0,
+  "n": 350,
+  "phi": 0.75,
+  "best_seed_value": 75.04346208699141,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 75.04346209071082,
+  "gain_of_search": 9.578589460347145e-11
+ },
+ {
+  "u": 1.0,
+  "n": 350,
+  "phi": 0.8,
+  "best_seed_value": 78.54954037531645,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 78.54954037531822,
+  "gain_of_search": 4.5380548392734724e-14
+ },
+ {
+  "u": 1.0,
+  "n": 350,
+  "phi": 0.85,
+  "best_seed_value": 78.76886085717918,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 81.54144957941898,
+  "gain_of_search": 0.07140248184672522
+ },
+ {
+  "u": 1.0,
+  "n": 500,
+  "phi": 0.3,
+  "best_seed_value": 93.00104913183893,
+  "best_seed": {
+   "type": "flat",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 93.43590899354712,
+  "gain_of_search": 0.007839262705174519
+ },
+ {
+  "u": 1.0,
+  "n": 500,
+  "phi": 0.35,
+  "best_seed_value": 89.64949767215276,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 90.02726040582381,
+  "gain_of_search": 0.006809967003713566
+ },
+ {
+  "u": 1.0,
+  "n": 500,
+  "phi": 0.4,
+  "best_seed_value": 87.39943537444093,
+  "best_seed": {
+   "type": "flat",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 87.83733251970797,
+  "gain_of_search": 0.00789401612305593
+ },
+ {
+  "u": 1.0,
+  "n": 500,
+  "phi": 0.45,
+  "best_seed_value": 84.07762516177576,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7079539132084139,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 84.12094221127028,
+  "gain_of_search": 0.0007808808319689161
+ },
+ {
+  "u": 1.0,
+  "n": 500,
+  "phi": 0.5,
+  "best_seed_value": 80.54875353769305,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 80.92058735935964,
+  "gain_of_search": 0.006703085907407803
+ },
+ {
+  "u": 1.0,
+  "n": 500,
+  "phi": 0.55,
+  "best_seed_value": 77.404632502345,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 77.58117902472162,
+  "gain_of_search": 0.0031826220133511864
+ },
+ {
+  "u": 1.0,
+  "n": 500,
+  "phi": 0.6,
+  "best_seed_value": 79.90429964105702,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 79.90496191077413,
+  "gain_of_search": 1.193880316688974e-05
+ },
+ {
+  "u": 1.0,
+  "n": 500,
+  "phi": 0.65,
+  "best_seed_value": 83.56459901316813,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 83.56460013398065,
+  "gain_of_search": 2.0205000522043278e-08
+ },
+ {
+  "u": 1.0,
+  "n": 500,
+  "phi": 0.7,
+  "best_seed_value": 87.03915391702392,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 87.03915391839098,
+  "gain_of_search": 2.4644053193540377e-11
+ },
+ {
+  "u": 1.0,
+  "n": 500,
+  "phi": 0.75,
+  "best_seed_value": 90.75881469357292,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 90.75881469357337,
+  "gain_of_search": 8.197776483848854e-15
+ },
+ {
+  "u": 1.0,
+  "n": 500,
+  "phi": 0.8,
+  "best_seed_value": 94.26653151228484,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 94.26653151228497,
+  "gain_of_search": 2.30562463608249e-15
+ },
+ {
+  "u": 1.0,
+  "n": 500,
+  "phi": 0.85,
+  "best_seed_value": 95.09651612461528,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 98.56225202741508,
+  "gain_of_search": 0.062477171615885535
+ },
+ {
+  "u": 1.0,
+  "n": 700,
+  "phi": 0.3,
+  "best_seed_value": 113.95075360052888,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 114.17937539769584,
+  "gain_of_search": 0.002943848756044797
+ },
+ {
+  "u": 1.0,
+  "n": 700,
+  "phi": 0.35,
+  "best_seed_value": 108.48871962414269,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 109.38586841786905,
+  "gain_of_search": 0.011552137167698777
+ },
+ {
+  "u": 1.0,
+  "n": 700,
+  "phi": 0.4,
+  "best_seed_value": 104.6153404372325,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 104.9667643732485,
+  "gain_of_search": 0.004525110596211287
+ },
+ {
+  "u": 1.0,
+  "n": 700,
+  "phi": 0.45,
+  "best_seed_value": 100.0029375453402,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7079539132084138,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 100.38115472199236,
+  "gain_of_search": 0.004870113780923326
+ },
+ {
+  "u": 1.0,
+  "n": 700,
+  "phi": 0.5,
+  "best_seed_value": 95.25352409725373,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.6747017086316521,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 95.64651606060393,
+  "gain_of_search": 0.00506036133378502
+ },
+ {
+  "u": 1.0,
+  "n": 700,
+  "phi": 0.55,
+  "best_seed_value": 92.32286792559285,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 92.42193233664881,
+  "gain_of_search": 0.0012756029690486723
+ },
+ {
+  "u": 1.0,
+  "n": 700,
+  "phi": 0.6,
+  "best_seed_value": 96.63181098451876,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 96.63183263213998,
+  "gain_of_search": 2.787456120145269e-07
+ },
+ {
+  "u": 1.0,
+  "n": 700,
+  "phi": 0.65,
+  "best_seed_value": 102.18571971481117,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 102.18571971586853,
+  "gain_of_search": 1.3615079448231561e-11
+ },
+ {
+  "u": 1.0,
+  "n": 700,
+  "phi": 0.7,
+  "best_seed_value": 105.9115752369292,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 105.91157523692945,
+  "gain_of_search": 3.293749480117843e-15
+ },
+ {
+  "u": 1.0,
+  "n": 700,
+  "phi": 0.75,
+  "best_seed_value": 112.27673277229557,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 112.27673277229562,
+  "gain_of_search": 5.489582466863072e-16
+ },
+ {
+  "u": 1.0,
+  "n": 700,
+  "phi": 0.8,
+  "best_seed_value": 116.48405070874914,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 116.4840507087493,
+  "gain_of_search": 2.0128469045164595e-15
+ },
+ {
+  "u": 1.0,
+  "n": 700,
+  "phi": 0.85,
+  "best_seed_value": 118.20668034749129,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 121.67241625029114,
+  "gain_of_search": 0.0446265511542045
+ },
+ {
+  "u": 1.0,
+  "n": 1000,
+  "phi": 0.3,
+  "best_seed_value": 142.50316343362755,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.6696799384168338,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 142.50361554195368,
+  "gain_of_search": 4.075101258833038e-06
+ },
+ {
+  "u": 1.0,
+  "n": 1000,
+  "phi": 0.35,
+  "best_seed_value": 135.42171225152714,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.6747017086316521,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 135.886779234228,
+  "gain_of_search": 0.004191904765104844
+ },
+ {
+  "u": 1.0,
+  "n": 1000,
+  "phi": 0.4,
+  "best_seed_value": 129.40436463134236,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 129.65737979762616,
+  "gain_of_search": 0.002280564995238767
+ },
+ {
+  "u": 1.0,
+  "n": 1000,
+  "phi": 0.45,
+  "best_seed_value": 122.6069823269848,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 123.15983712552423,
+  "gain_of_search": 0.004983184682235853
+ },
+ {
+  "u": 1.0,
+  "n": 1000,
+  "phi": 0.5,
+  "best_seed_value": 115.79769304784956,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 116.11203221053103,
+  "gain_of_search": 0.0028333119376721828
+ },
+ {
+  "u": 1.0,
+  "n": 1000,
+  "phi": 0.55,
+  "best_seed_value": 115.39581648161533,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 115.39942637533403,
+  "gain_of_search": 3.253795957106012e-05
+ },
+ {
+  "u": 1.0,
+  "n": 1000,
+  "phi": 0.6,
+  "best_seed_value": 121.02673573155934,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 121.02673573741573,
+  "gain_of_search": 5.2786891772335935e-11
+ },
+ {
+  "u": 1.0,
+  "n": 1000,
+  "phi": 0.65,
+  "best_seed_value": 128.04628617468487,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 128.04628617468495,
+  "gain_of_search": 7.685415453608301e-16
+ },
+ {
+  "u": 1.0,
+  "n": 1000,
+  "phi": 0.7,
+  "best_seed_value": 135.76539428247125,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 135.7653942824713,
+  "gain_of_search": 5.123610302405534e-16
+ },
+ {
+  "u": 1.0,
+  "n": 1000,
+  "phi": 0.75,
+  "best_seed_value": 141.40831123270388,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 141.408311232704,
+  "gain_of_search": 1.0247220604811068e-15
+ },
+ {
+  "u": 1.0,
+  "n": 1000,
+  "phi": 0.8,
+  "best_seed_value": 148.4654537158284,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 148.46545371582852,
+  "gain_of_search": 1.0247220604811068e-15
+ },
+ {
+  "u": 1.0,
+  "n": 1000,
+  "phi": 0.85,
+  "best_seed_value": 150.0220588024554,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 154.8740890663752,
+  "gain_of_search": 0.043734020131120516
+ },
+ {
+  "u": 1.0,
+  "n": 1400,
+  "phi": 0.3,
+  "best_seed_value": 178.2674438155464,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 178.83850833213148,
+  "gain_of_search": 0.003676656354736622
+ },
+ {
+  "u": 1.0,
+  "n": 1400,
+  "phi": 0.35,
+  "best_seed_value": 170.1073332488017,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 1.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 170.41848651552104,
+  "gain_of_search": 0.0020032826452285185
+ },
+ {
+  "u": 1.0,
+  "n": 1400,
+  "phi": 0.4,
+  "best_seed_value": 160.43442618854954,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 160.74736956098056,
+  "gain_of_search": 0.002014807794050312
+ },
+ {
+  "u": 1.0,
+  "n": 1400,
+  "phi": 0.45,
+  "best_seed_value": 151.44741859810406,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 152.23444691699208,
+  "gain_of_search": 0.005067085392209143
+ },
+ {
+  "u": 1.0,
+  "n": 1400,
+  "phi": 0.5,
+  "best_seed_value": 143.0348541878693,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 143.44785245768958,
+  "gain_of_search": 0.0026589862776102524
+ },
+ {
+  "u": 1.0,
+  "n": 1400,
+  "phi": 0.55,
+  "best_seed_value": 143.98469657507283,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 143.98470687601,
+  "gain_of_search": 6.632001285225372e-08
+ },
+ {
+  "u": 1.0,
+  "n": 1400,
+  "phi": 0.6,
+  "best_seed_value": 153.77538997926285,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 153.7753899792633,
+  "gain_of_search": 2.9277773156603047e-15
+ },
+ {
+  "u": 1.0,
+  "n": 1400,
+  "phi": 0.65,
+  "best_seed_value": 162.17936533091984,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 162.17936533092006,
+  "gain_of_search": 1.4638886578301523e-15
+ },
+ {
+  "u": 1.0,
+  "n": 1400,
+  "phi": 0.7,
+  "best_seed_value": 171.91860878578396,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 171.91860878578427,
+  "gain_of_search": 2.0128469045164595e-15
+ },
+ {
+  "u": 1.0,
+  "n": 1400,
+  "phi": 0.75,
+  "best_seed_value": 180.38432326937507,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3000000000000003,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 180.38432326937533,
+  "gain_of_search": 1.6468747400589214e-15
+ },
+ {
+  "u": 1.0,
+  "n": 1400,
+  "phi": 0.8,
+  "best_seed_value": 190.88900658437748,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 190.8890065843777,
+  "gain_of_search": 1.4638886578301523e-15
+ },
+ {
+  "u": 1.0,
+  "n": 1400,
+  "phi": 0.85,
+  "best_seed_value": 193.11590947023657,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "top"
+  },
+  "stored_best": 199.3542340952762,
+  "gain_of_search": 0.04016389603878346
+ },
+ {
+  "u": 1.0,
+  "n": 2000,
+  "phi": 0.3,
+  "best_seed_value": 231.76810757251076,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 231.76847671615184,
+  "gain_of_search": 1.6636474374795217e-06
+ },
+ {
+  "u": 1.0,
+  "n": 2000,
+  "phi": 0.35,
+  "best_seed_value": 219.94605622978642,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 219.9460875358434,
+  "gain_of_search": 1.4108936375049035e-07
+ },
+ {
+  "u": 1.0,
+  "n": 2000,
+  "phi": 0.4,
+  "best_seed_value": 206.8954138725706,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 206.9274579325496,
+  "gain_of_search": 0.00014441537747873377
+ },
+ {
+  "u": 1.0,
+  "n": 2000,
+  "phi": 0.45,
+  "best_seed_value": 195.06920956876365,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 195.12172923937635,
+  "gain_of_search": 0.0002366943533859872
+ },
+ {
+  "u": 1.0,
+  "n": 2000,
+  "phi": 0.5,
+  "best_seed_value": 182.02069907085848,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7079539132084138,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 182.3765342234452,
+  "gain_of_search": 0.0016036690704825949
+ },
+ {
+  "u": 1.0,
+  "n": 2000,
+  "phi": 0.55,
+  "best_seed_value": 187.8699621321414,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 187.86996213932198,
+  "gain_of_search": 3.236123503102359e-11
+ },
+ {
+  "u": 1.0,
+  "n": 2000,
+  "phi": 0.6,
+  "best_seed_value": 199.73695883172047,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 199.73695883172064,
+  "gain_of_search": 7.685415453608301e-16
+ },
+ {
+  "u": 1.0,
+  "n": 2000,
+  "phi": 0.65,
+  "best_seed_value": 212.99039105029283,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 212.99039105029314,
+  "gain_of_search": 1.4089928331615217e-15
+ },
+ {
+  "u": 1.0,
+  "n": 2000,
+  "phi": 0.7,
+  "best_seed_value": 226.24617142449307,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 226.24617142449318,
+  "gain_of_search": 5.123610302405534e-16
+ },
+ {
+  "u": 1.0,
+  "n": 2000,
+  "phi": 0.75,
+  "best_seed_value": 238.12136620057572,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 238.12136620057595,
+  "gain_of_search": 1.0247220604811068e-15
+ },
+ {
+  "u": 1.0,
+  "n": 2000,
+  "phi": 0.8,
+  "best_seed_value": 251.3899838272137,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 251.38998382721402,
+  "gain_of_search": 1.4089928331615217e-15
+ },
+ {
+  "u": 1.0,
+  "n": 2000,
+  "phi": 0.85,
+  "best_seed_value": 263.2999230479418,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 263.29992304794195,
+  "gain_of_search": 7.685415453608301e-16
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.3,
+  "best_seed_value": 403.97399783446656,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7079539132084138,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 404.6029729060429,
+  "gain_of_search": 0.0014173246530860717
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.35,
+  "best_seed_value": 380.2732644544963,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7079539132084138,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 380.62837072763864,
+  "gain_of_search": 0.0008001920873092042
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.4,
+  "best_seed_value": 355.8131030987944,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7079539132084138,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 356.0293729674638,
+  "gain_of_search": 0.0004873398492831366
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.45,
+  "best_seed_value": 331.42024859967745,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7699995202960289,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 331.93591293390386,
+  "gain_of_search": 0.001161991637895297
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.5,
+  "best_seed_value": 307.3187552589807,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 308.0316242776976,
+  "gain_of_search": 0.0016063702367671592
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.55,
+  "best_seed_value": 325.61505572442786,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 325.61505572442843,
+  "gain_of_search": 1.2809025756013835e-15
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.6,
+  "best_seed_value": 350.6504430203504,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 350.65044302035085,
+  "gain_of_search": 1.0247220604811068e-15
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.65,
+  "best_seed_value": 374.30068867064836,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 374.30068867064915,
+  "gain_of_search": 1.7932636058419367e-15
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.7,
+  "best_seed_value": 399.3367816204838,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 399.3367816204842,
+  "gain_of_search": 8.966318029209683e-16
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.75,
+  "best_seed_value": 423.6787444118004,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 423.67874441180066,
+  "gain_of_search": 6.404512878006917e-16
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.8,
+  "best_seed_value": 448.02958336375656,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 448.0295833637569,
+  "gain_of_search": 7.685415453608301e-16
+ },
+ {
+  "u": 1.0,
+  "n": 4000,
+  "phi": 0.85,
+  "best_seed_value": 471.69763824284297,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 471.6976382428434,
+  "gain_of_search": 1.0247220604811068e-15
+ },
+ {
+  "u": 1.0,
+  "n": 8000,
+  "phi": 0.3,
+  "best_seed_value": 737.4491207260212,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 738.3794438490247,
+  "gain_of_search": 0.0010481893139773313
+ },
+ {
+  "u": 1.0,
+  "n": 8000,
+  "phi": 0.35,
+  "best_seed_value": 690.6731724618589,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 691.3642046429592,
+  "gain_of_search": 0.0007785816883764383
+ },
+ {
+  "u": 1.0,
+  "n": 8000,
+  "phi": 0.4,
+  "best_seed_value": 643.8951348627858,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 644.3797947009532,
+  "gain_of_search": 0.0005460632448229098
+ },
+ {
+  "u": 1.0,
+  "n": 8000,
+  "phi": 0.45,
+  "best_seed_value": 595.5156223317807,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 596.5047634682743,
+  "gain_of_search": 0.0011144592063246335
+ },
+ {
+  "u": 1.0,
+  "n": 8000,
+  "phi": 0.5,
+  "best_seed_value": 548.6684263374775,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 549.5918821170486,
+  "gain_of_search": 0.001040451920567143
+ },
+ {
+  "u": 1.0,
+  "n": 8000,
+  "phi": 0.55,
+  "best_seed_value": 591.6651951870801,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 591.6651951870812,
+  "gain_of_search": 1.152812318041245e-15
+ },
+ {
+  "u": 1.0,
+  "n": 8000,
+  "phi": 0.6,
+  "best_seed_value": 640.2728622763195,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 640.2728622763199,
+  "gain_of_search": 3.8427077268041504e-16
+ },
+ {
+  "u": 1.0,
+  "n": 8000,
+  "phi": 0.65,
+  "best_seed_value": 688.1835223987545,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 688.1835223987558,
+  "gain_of_search": 1.5370830907216602e-15
+ },
+ {
+  "u": 1.0,
+  "n": 8000,
+  "phi": 0.7,
+  "best_seed_value": 735.398808510044,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 735.3988085100456,
+  "gain_of_search": 1.7932636058419367e-15
+ },
+ {
+  "u": 1.0,
+  "n": 8000,
+  "phi": 0.75,
+  "best_seed_value": 783.304841244071,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 783.3048412440722,
+  "gain_of_search": 1.4089928331615217e-15
+ },
+ {
+  "u": 1.0,
+  "n": 8000,
+  "phi": 0.8,
+  "best_seed_value": 830.5197387456739,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 830.5197387456751,
+  "gain_of_search": 1.4089928331615217e-15
+ },
+ {
+  "u": 1.0,
+  "n": 8000,
+  "phi": 0.85,
+  "best_seed_value": 877.0495167729564,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 877.049516772957,
+  "gain_of_search": 6.404512878006917e-16
+ },
+ {
+  "u": 1.0,
+  "n": 16000,
+  "phi": 0.3,
+  "best_seed_value": 1391.8915099537899,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1392.8204415657035,
+  "gain_of_search": 0.000523310753515439
+ },
+ {
+  "u": 1.0,
+  "n": 16000,
+  "phi": 0.35,
+  "best_seed_value": 1300.2567705320635,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1300.934583470888,
+  "gain_of_search": 0.0003818438248947335
+ },
+ {
+  "u": 1.0,
+  "n": 16000,
+  "phi": 0.4,
+  "best_seed_value": 1207.0248717771185,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1208.04206669543,
+  "gain_of_search": 0.0005730336144736561
+ },
+ {
+  "u": 1.0,
+  "n": 16000,
+  "phi": 0.45,
+  "best_seed_value": 1113.7323584058067,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1114.9750580751838,
+  "gain_of_search": 0.0007000710192598865
+ },
+ {
+  "u": 1.0,
+  "n": 16000,
+  "phi": 0.5,
+  "best_seed_value": 1021.014799761582,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1021.8757351044131,
+  "gain_of_search": 0.00048500526541119286
+ },
+ {
+  "u": 1.0,
+  "n": 16000,
+  "phi": 0.55,
+  "best_seed_value": 1112.1348535901577,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1112.13485359016,
+  "gain_of_search": 1.2809025756013835e-15
+ },
+ {
+  "u": 1.0,
+  "n": 16000,
+  "phi": 0.6,
+  "best_seed_value": 1206.4902087922667,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1206.4902087922696,
+  "gain_of_search": 1.6651733482817984e-15
+ },
+ {
+  "u": 1.0,
+  "n": 16000,
+  "phi": 0.65,
+  "best_seed_value": 1299.477199229755,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1299.4771992297585,
+  "gain_of_search": 2.0494441209622136e-15
+ },
+ {
+  "u": 1.0,
+  "n": 16000,
+  "phi": 0.7,
+  "best_seed_value": 1392.413916853475,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1392.4139168534764,
+  "gain_of_search": 7.685415453608301e-16
+ },
+ {
+  "u": 1.0,
+  "n": 16000,
+  "phi": 0.75,
+  "best_seed_value": 1485.3981961706909,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1485.3981961706938,
+  "gain_of_search": 1.6651733482817984e-15
+ },
+ {
+  "u": 1.0,
+  "n": 16000,
+  "phi": 0.8,
+  "best_seed_value": 1578.3574224825263,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1578.3574224825288,
+  "gain_of_search": 1.4089928331615217e-15
+ },
+ {
+  "u": 1.0,
+  "n": 16000,
+  "phi": 0.85,
+  "best_seed_value": 1671.3210647782455,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1671.3210647782487,
+  "gain_of_search": 1.7932636058419367e-15
+ },
+ {
+  "u": 1.0,
+  "n": 32000,
+  "phi": 0.3,
+  "best_seed_value": 2681.8315523588217,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2683.0680158623013,
+  "gain_of_search": 0.0003482789472345019
+ },
+ {
+  "u": 1.0,
+  "n": 32000,
+  "phi": 0.35,
+  "best_seed_value": 2499.04821221039,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 2500.127119130615,
+  "gain_of_search": 0.0003038994400421549
+ },
+ {
+  "u": 1.0,
+  "n": 32000,
+  "phi": 0.4,
+  "best_seed_value": 2315.9653368195272,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2316.9873652471283,
+  "gain_of_search": 0.0002878782784990626
+ },
+ {
+  "u": 1.0,
+  "n": 32000,
+  "phi": 0.45,
+  "best_seed_value": 2131.779724353164,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2132.9073547870466,
+  "gain_of_search": 0.0003176235604827806
+ },
+ {
+  "u": 1.0,
+  "n": 32000,
+  "phi": 0.5,
+  "best_seed_value": 1949.4724099318003,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 1950.9562338347416,
+  "gain_of_search": 0.00041795380562668124
+ },
+ {
+  "u": 1.0,
+  "n": 32000,
+  "phi": 0.55,
+  "best_seed_value": 2133.119302278693,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2133.1193022786956,
+  "gain_of_search": 7.685415453608301e-16
+ },
+ {
+  "u": 1.0,
+  "n": 32000,
+  "phi": 0.6,
+  "best_seed_value": 2318.2780787793217,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2318.278078779328,
+  "gain_of_search": 1.7932636058419367e-15
+ },
+ {
+  "u": 1.0,
+  "n": 32000,
+  "phi": 0.65,
+  "best_seed_value": 2502.0446940068946,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2502.044694006899,
+  "gain_of_search": 1.2809025756013835e-15
+ },
+ {
+  "u": 1.0,
+  "n": 32000,
+  "phi": 0.7,
+  "best_seed_value": 2685.113118524091,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2685.113118524097,
+  "gain_of_search": 1.6651733482817984e-15
+ },
+ {
+  "u": 1.0,
+  "n": 32000,
+  "phi": 0.75,
+  "best_seed_value": 2868.8711770771292,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2868.8711770771347,
+  "gain_of_search": 1.5370830907216602e-15
+ },
+ {
+  "u": 1.0,
+  "n": 32000,
+  "phi": 0.8,
+  "best_seed_value": 3051.9340260889135,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 3051.9340260889253,
+  "gain_of_search": 3.330346696563597e-15
+ },
+ {
+  "u": 1.0,
+  "n": 32000,
+  "phi": 0.85,
+  "best_seed_value": 3235.690084353585,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 3235.6900843535964,
+  "gain_of_search": 3.2022564390034588e-15
+ },
+ {
+  "u": 1.0,
+  "n": 64000,
+  "phi": 0.3,
+  "best_seed_value": 5233.911569697376,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 5235.349535989215,
+  "gain_of_search": 0.00020251846693049828
+ },
+ {
+  "u": 1.0,
+  "n": 64000,
+  "phi": 0.35,
+  "best_seed_value": 4870.981760553213,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 4872.467118687892,
+  "gain_of_search": 0.0002091929789907355
+ },
+ {
+  "u": 1.0,
+  "n": 64000,
+  "phi": 0.4,
+  "best_seed_value": 4507.486165667867,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9000000000000001,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 4508.97729000112,
+  "gain_of_search": 0.0002100050715285216
+ },
+ {
+  "u": 1.0,
+  "n": 64000,
+  "phi": 0.45,
+  "best_seed_value": 4143.236493559345,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 4144.851753248606,
+  "gain_of_search": 0.00022748788884706394
+ },
+ {
+  "u": 1.0,
+  "n": 64000,
+  "phi": 0.5,
+  "best_seed_value": 3784.7943583427077,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 3809.8390806221055,
+  "gain_of_search": 0.0035272167292857166
+ },
+ {
+  "u": 1.0,
+  "n": 64000,
+  "phi": 0.55,
+  "best_seed_value": 4149.484178646496,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 4149.484178646496,
+  "gain_of_search": 0.0
+ },
+ {
+  "u": 1.0,
+  "n": 64000,
+  "phi": 0.6,
+  "best_seed_value": 4514.168778253705,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 4514.168778253722,
+  "gain_of_search": 2.4337148936426285e-15
+ },
+ {
+  "u": 1.0,
+  "n": 64000,
+  "phi": 0.65,
+  "best_seed_value": 4878.153753097851,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 4878.15375309786,
+  "gain_of_search": 1.2809025756013835e-15
+ },
+ {
+  "u": 1.0,
+  "n": 64000,
+  "phi": 0.7,
+  "best_seed_value": 5241.4404337655915,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 5241.440433765604,
+  "gain_of_search": 1.7932636058419367e-15
+ },
+ {
+  "u": 1.0,
+  "n": 64000,
+  "phi": 0.75,
+  "best_seed_value": 5605.416224751419,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 5605.4162247514305,
+  "gain_of_search": 1.6651733482817984e-15
+ },
+ {
+  "u": 1.0,
+  "n": 64000,
+  "phi": 0.8,
+  "best_seed_value": 5968.002641409153,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 5968.0026414091635,
+  "gain_of_search": 1.5370830907216602e-15
+ },
+ {
+  "u": 1.0,
+  "n": 64000,
+  "phi": 0.85,
+  "best_seed_value": 6330.587838122417,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 6330.58783812243,
+  "gain_of_search": 1.7932636058419367e-15
+ },
+ {
+  "u": 1.0,
+  "n": 128000,
+  "phi": 0.3,
+  "best_seed_value": 10301.044956182737,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 10303.203614320586,
+  "gain_of_search": 0.0001520091740624402
+ },
+ {
+  "u": 1.0,
+  "n": 128000,
+  "phi": 0.35,
+  "best_seed_value": 9578.499225609621,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 9580.550710626063,
+  "gain_of_search": 0.00014446221821004168
+ },
+ {
+  "u": 1.0,
+  "n": 128000,
+  "phi": 0.4,
+  "best_seed_value": 8857.090776945462,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9000000000000001,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 8858.979492536426,
+  "gain_of_search": 0.00013300026159181682
+ },
+ {
+  "u": 1.0,
+  "n": 128000,
+  "phi": 0.45,
+  "best_seed_value": 8133.657464637854,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 8135.329270966943,
+  "gain_of_search": 0.00011772586627841595
+ },
+ {
+  "u": 1.0,
+  "n": 128000,
+  "phi": 0.5,
+  "best_seed_value": 7423.123593497034,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 7466.790623226609,
+  "gain_of_search": 0.0030749607853922134
+ },
+ {
+  "u": 1.0,
+  "n": 128000,
+  "phi": 0.55,
+  "best_seed_value": 8143.411448829795,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 8143.4114488298155,
+  "gain_of_search": 1.473037961941591e-15
+ },
+ {
+  "u": 1.0,
+  "n": 128000,
+  "phi": 0.6,
+  "best_seed_value": 8866.453373974346,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 8866.453373974357,
+  "gain_of_search": 7.685415453608301e-16
+ },
+ {
+  "u": 1.0,
+  "n": 128000,
+  "phi": 0.65,
+  "best_seed_value": 9589.488758694197,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3161860854346588,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 9589.488758694228,
+  "gain_of_search": 2.177534378522352e-15
+ },
+ {
+  "u": 1.0,
+  "n": 128000,
+  "phi": 0.7,
+  "best_seed_value": 10311.825541974704,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 10311.825541974718,
+  "gain_of_search": 1.0247220604811068e-15
+ },
+ {
+  "u": 1.0,
+  "n": 128000,
+  "phi": 0.75,
+  "best_seed_value": 11034.157689110405,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 11034.157689110427,
+  "gain_of_search": 1.5370830907216602e-15
+ },
+ {
+  "u": 1.0,
+  "n": 128000,
+  "phi": 0.8,
+  "best_seed_value": 11755.100262611577,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 11755.100262611615,
+  "gain_of_search": 2.6898954087629054e-15
+ },
+ {
+  "u": 1.0,
+  "n": 128000,
+  "phi": 0.85,
+  "best_seed_value": 12476.733761898065,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 12476.733761898111,
+  "gain_of_search": 3.2022564390034588e-15
+ },
+ {
+  "u": 2.0,
+  "n": 250,
+  "phi": 0.3,
+  "best_seed_value": 123.38514181339667,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.454959471898973,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 123.65314364915605,
+  "gain_of_search": 0.0032701762245069712
+ },
+ {
+  "u": 2.0,
+  "n": 250,
+  "phi": 0.35,
+  "best_seed_value": 119.21087697766355,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 119.3200335437498,
+  "gain_of_search": 0.0013319356792935934
+ },
+ {
+  "u": 2.0,
+  "n": 250,
+  "phi": 0.4,
+  "best_seed_value": 113.7545182513031,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 113.97471304029872,
+  "gain_of_search": 0.00268683146029022
+ },
+ {
+  "u": 2.0,
+  "n": 250,
+  "phi": 0.45,
+  "best_seed_value": 109.44282124681453,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.4210486978878039,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 109.58284832336608,
+  "gain_of_search": 0.001708619701162117
+ },
+ {
+  "u": 2.0,
+  "n": 250,
+  "phi": 0.5,
+  "best_seed_value": 103.96475253513647,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.7369783728802382,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 104.32728622106708,
+  "gain_of_search": 0.004423660147528253
+ },
+ {
+  "u": 2.0,
+  "n": 250,
+  "phi": 0.55,
+  "best_seed_value": 99.48918664444696,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 99.96833246306223,
+  "gain_of_search": 0.00584656914631877
+ },
+ {
+  "u": 2.0,
+  "n": 250,
+  "phi": 0.6,
+  "best_seed_value": 101.49267450730996,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 101.49269718878219,
+  "gain_of_search": 2.7676083268851396e-07
+ },
+ {
+  "u": 2.0,
+  "n": 250,
+  "phi": 0.65,
+  "best_seed_value": 106.42139722187306,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 106.4213972227042,
+  "gain_of_search": 1.014157734649411e-11
+ },
+ {
+  "u": 2.0,
+  "n": 250,
+  "phi": 0.7,
+  "best_seed_value": 111.51285536208886,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3000000000000003,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 111.51285536208893,
+  "gain_of_search": 8.670089719329508e-16
+ },
+ {
+  "u": 2.0,
+  "n": 250,
+  "phi": 0.75,
+  "best_seed_value": 116.48366994345302,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 116.48366994345304,
+  "gain_of_search": 1.7340179438659016e-16
+ },
+ {
+  "u": 2.0,
+  "n": 250,
+  "phi": 0.8,
+  "best_seed_value": 116.86232760582415,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 122.40338156910848,
+  "gain_of_search": 0.06761230899071727
+ },
+ {
+  "u": 2.0,
+  "n": 250,
+  "phi": 0.85,
+  "best_seed_value": 116.22323781141837,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 125.37323571266823,
+  "gain_of_search": 0.1116488829495226
+ },
+ {
+  "u": 2.0,
+  "n": 350,
+  "phi": 0.3,
+  "best_seed_value": 153.3704364137825,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 153.6166690686893,
+  "gain_of_search": 0.002146105165638877
+ },
+ {
+  "u": 2.0,
+  "n": 350,
+  "phi": 0.35,
+  "best_seed_value": 145.98235192399383,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 146.6271204341088,
+  "gain_of_search": 0.005619648745300434
+ },
+ {
+  "u": 2.0,
+  "n": 350,
+  "phi": 0.4,
+  "best_seed_value": 139.74393629090505,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 140.42499710760876,
+  "gain_of_search": 0.005935963844418833
+ },
+ {
+  "u": 2.0,
+  "n": 350,
+  "phi": 0.45,
+  "best_seed_value": 132.57374732052858,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 133.24586237286613,
+  "gain_of_search": 0.005857994693153859
+ },
+ {
+  "u": 2.0,
+  "n": 350,
+  "phi": 0.5,
+  "best_seed_value": 124.93590764727558,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.42104869788780397,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 125.0131077292797,
+  "gain_of_search": 0.0006728575250893316
+ },
+ {
+  "u": 2.0,
+  "n": 350,
+  "phi": 0.55,
+  "best_seed_value": 120.20095137812386,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 120.44159239233119,
+  "gain_of_search": 0.0020973697572744224
+ },
+ {
+  "u": 2.0,
+  "n": 350,
+  "phi": 0.6,
+  "best_seed_value": 125.18502984022346,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 125.18503038222056,
+  "gain_of_search": 4.723917581632489e-09
+ },
+ {
+  "u": 2.0,
+  "n": 350,
+  "phi": 0.65,
+  "best_seed_value": 133.69309745974786,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 133.69309745974795,
+  "gain_of_search": 7.431505473711007e-16
+ },
+ {
+  "u": 2.0,
+  "n": 350,
+  "phi": 0.7,
+  "best_seed_value": 141.30781355062393,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 141.3078135506241,
+  "gain_of_search": 1.4863010947422014e-15
+ },
+ {
+  "u": 2.0,
+  "n": 350,
+  "phi": 0.75,
+  "best_seed_value": 147.63688332231632,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 147.6368833223165,
+  "gain_of_search": 1.4863010947422014e-15
+ },
+ {
+  "u": 2.0,
+  "n": 350,
+  "phi": 0.8,
+  "best_seed_value": 153.31172340177855,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 153.31172340177875,
+  "gain_of_search": 1.7340179438659015e-15
+ },
+ {
+  "u": 2.0,
+  "n": 350,
+  "phi": 0.85,
+  "best_seed_value": 150.91180290966767,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 161.1750516308415,
+  "gain_of_search": 0.08945203106827646
+ },
+ {
+  "u": 2.0,
+  "n": 500,
+  "phi": 0.3,
+  "best_seed_value": 193.6617543962714,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 194.27688927745945,
+  "gain_of_search": 0.0037529583661736316
+ },
+ {
+  "u": 2.0,
+  "n": 500,
+  "phi": 0.35,
+  "best_seed_value": 185.65543370304962,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.42104869788780397,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 185.71564818189844,
+  "gain_of_search": 0.00036737053786319035
+ },
+ {
+  "u": 2.0,
+  "n": 500,
+  "phi": 0.4,
+  "best_seed_value": 175.40483468019488,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.7661005734812454,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 176.21489898041844,
+  "gain_of_search": 0.0049422292340030385
+ },
+ {
+  "u": 2.0,
+  "n": 500,
+  "phi": 0.45,
+  "best_seed_value": 165.97136331943176,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 166.2667731462453,
+  "gain_of_search": 0.0018023051771158532
+ },
+ {
+  "u": 2.0,
+  "n": 500,
+  "phi": 0.5,
+  "best_seed_value": 155.68598264929943,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 156.37410499275057,
+  "gain_of_search": 0.004198257300607314
+ },
+ {
+  "u": 2.0,
+  "n": 500,
+  "phi": 0.55,
+  "best_seed_value": 153.09369344118582,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 153.094143947745,
+  "gain_of_search": 2.7485554990195494e-06
+ },
+ {
+  "u": 2.0,
+  "n": 500,
+  "phi": 0.6,
+  "best_seed_value": 163.50270589713946,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 163.50270589714006,
+  "gain_of_search": 3.641437682118393e-15
+ },
+ {
+  "u": 2.0,
+  "n": 500,
+  "phi": 0.65,
+  "best_seed_value": 171.29198309754022,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 171.29198309754037,
+  "gain_of_search": 8.670089719329508e-16
+ },
+ {
+  "u": 2.0,
+  "n": 500,
+  "phi": 0.7,
+  "best_seed_value": 181.69439713471564,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 181.69439713471596,
+  "gain_of_search": 1.9074197382524914e-15
+ },
+ {
+  "u": 2.0,
+  "n": 500,
+  "phi": 0.75,
+  "best_seed_value": 192.27357716825395,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 192.27357716825418,
+  "gain_of_search": 1.3872143550927212e-15
+ },
+ {
+  "u": 2.0,
+  "n": 500,
+  "phi": 0.8,
+  "best_seed_value": 202.6782286713715,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 202.6782286713717,
+  "gain_of_search": 1.2138125607061311e-15
+ },
+ {
+  "u": 2.0,
+  "n": 500,
+  "phi": 0.85,
+  "best_seed_value": 199.46445053182183,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 210.5823423520843,
+  "gain_of_search": 0.06783062771612129
+ },
+ {
+  "u": 2.0,
+  "n": 700,
+  "phi": 0.3,
+  "best_seed_value": 247.8265281991159,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 248.0614013725041,
+  "gain_of_search": 0.0010235493153196503
+ },
+ {
+  "u": 2.0,
+  "n": 700,
+  "phi": 0.35,
+  "best_seed_value": 234.57380949820563,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 234.94304272997323,
+  "gain_of_search": 0.0016090744469328946
+ },
+ {
+  "u": 2.0,
+  "n": 700,
+  "phi": 0.4,
+  "best_seed_value": 222.65150156549507,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 222.77167724293258,
+  "gain_of_search": 0.0005237112888833081
+ },
+ {
+  "u": 2.0,
+  "n": 700,
+  "phi": 0.45,
+  "best_seed_value": 208.90527352627052,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 209.18543304736806,
+  "gain_of_search": 0.001220901824857305
+ },
+ {
+  "u": 2.0,
+  "n": 700,
+  "phi": 0.5,
+  "best_seed_value": 195.27264443199306,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 195.8659865390256,
+  "gain_of_search": 0.002585714233101153
+ },
+ {
+  "u": 2.0,
+  "n": 700,
+  "phi": 0.55,
+  "best_seed_value": 195.57588267753457,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 195.57588300721045,
+  "gain_of_search": 1.436688240341282e-09
+ },
+ {
+  "u": 2.0,
+  "n": 700,
+  "phi": 0.6,
+  "best_seed_value": 209.45199210495718,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 209.4519921049574,
+  "gain_of_search": 9.908673964948008e-16
+ },
+ {
+  "u": 2.0,
+  "n": 700,
+  "phi": 0.65,
+  "best_seed_value": 220.69126365114943,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.7661005734812452,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 220.6912636511496,
+  "gain_of_search": 7.431505473711007e-16
+ },
+ {
+  "u": 2.0,
+  "n": 700,
+  "phi": 0.7,
+  "best_seed_value": 234.6434721330205,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 234.64347213302065,
+  "gain_of_search": 6.192921228092506e-16
+ },
+ {
+  "u": 2.0,
+  "n": 700,
+  "phi": 0.75,
+  "best_seed_value": 249.3003203968956,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 249.30032039689576,
+  "gain_of_search": 7.431505473711007e-16
+ },
+ {
+  "u": 2.0,
+  "n": 700,
+  "phi": 0.8,
+  "best_seed_value": 261.10220881514823,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 261.10220881514834,
+  "gain_of_search": 4.954336982474004e-16
+ },
+ {
+  "u": 2.0,
+  "n": 700,
+  "phi": 0.85,
+  "best_seed_value": 263.9571126458216,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 275.1907493254472,
+  "gain_of_search": 0.04895485068010071
+ },
+ {
+  "u": 2.0,
+  "n": 1000,
+  "phi": 0.3,
+  "best_seed_value": 326.58415491330135,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.4210486978878039,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 327.13948323045673,
+  "gain_of_search": 0.0016940382650844044
+ },
+ {
+  "u": 2.0,
+  "n": 1000,
+  "phi": 0.35,
+  "best_seed_value": 308.98171225744323,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 309.35595598681584,
+  "gain_of_search": 0.001141636719108089
+ },
+ {
+  "u": 2.0,
+  "n": 1000,
+  "phi": 0.4,
+  "best_seed_value": 289.1355861122947,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 289.49689748105254,
+  "gain_of_search": 0.0011021863380227832
+ },
+ {
+  "u": 2.0,
+  "n": 1000,
+  "phi": 0.45,
+  "best_seed_value": 270.86991415377605,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 271.6045335258094,
+  "gain_of_search": 0.00224096860911305
+ },
+ {
+  "u": 2.0,
+  "n": 1000,
+  "phi": 0.5,
+  "best_seed_value": 252.8686942373546,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 253.25272096302902,
+  "gain_of_search": 0.001171479911991462
+ },
+ {
+  "u": 2.0,
+  "n": 1000,
+  "phi": 0.55,
+  "best_seed_value": 256.75268404423264,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 256.7526840444179,
+  "gain_of_search": 5.651164479058973e-13
+ },
+ {
+  "u": 2.0,
+  "n": 1000,
+  "phi": 0.6,
+  "best_seed_value": 275.5567538774484,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 275.5567538774488,
+  "gain_of_search": 1.2138125607061311e-15
+ },
+ {
+  "u": 2.0,
+  "n": 1000,
+  "phi": 0.65,
+  "best_seed_value": 293.6581109212584,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.7661005734812454,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 293.6581109212587,
+  "gain_of_search": 8.670089719329508e-16
+ },
+ {
+  "u": 2.0,
+  "n": 1000,
+  "phi": 0.7,
+  "best_seed_value": 312.452390543066,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3000000000000003,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 312.4523905430664,
+  "gain_of_search": 1.2138125607061311e-15
+ },
+ {
+  "u": 2.0,
+  "n": 1000,
+  "phi": 0.75,
+  "best_seed_value": 330.556855005368,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 330.55685500536833,
+  "gain_of_search": 1.0404107663195408e-15
+ },
+ {
+  "u": 2.0,
+  "n": 1000,
+  "phi": 0.8,
+  "best_seed_value": 349.3609135106691,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 349.3609135106694,
+  "gain_of_search": 8.670089719329508e-16
+ },
+ {
+  "u": 2.0,
+  "n": 1000,
+  "phi": 0.85,
+  "best_seed_value": 356.17654689918805,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 367.4885852414937,
+  "gain_of_search": 0.03450756105168274
+ },
+ {
+  "u": 2.0,
+  "n": 1400,
+  "phi": 0.3,
+  "best_seed_value": 427.7585942019401,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.7661005734812454,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 428.61154606461514,
+  "gain_of_search": 0.0018585313138309875
+ },
+ {
+  "u": 2.0,
+  "n": 1400,
+  "phi": 0.35,
+  "best_seed_value": 403.0424381370216,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 403.655136291064,
+  "gain_of_search": 0.00133503279029499
+ },
+ {
+  "u": 2.0,
+  "n": 1400,
+  "phi": 0.4,
+  "best_seed_value": 377.5058558669285,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 378.02932453866174,
+  "gain_of_search": 0.0011406070621319125
+ },
+ {
+  "u": 2.0,
+  "n": 1400,
+  "phi": 0.45,
+  "best_seed_value": 353.7173271835039,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 354.2326428066608,
+  "gain_of_search": 0.0011228420548139411
+ },
+ {
+  "u": 2.0,
+  "n": 1400,
+  "phi": 0.5,
+  "best_seed_value": 328.54158541172376,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 0.4009427413488723,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 328.8424187581152,
+  "gain_of_search": 0.0006554979465775968
+ },
+ {
+  "u": 2.0,
+  "n": 1400,
+  "phi": 0.55,
+  "best_seed_value": 338.10827752019514,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 338.1082775201954,
+  "gain_of_search": 4.954336982474004e-16
+ },
+ {
+  "u": 2.0,
+  "n": 1400,
+  "phi": 0.6,
+  "best_seed_value": 363.83853102937076,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 363.8385310293712,
+  "gain_of_search": 9.908673964948008e-16
+ },
+ {
+  "u": 2.0,
+  "n": 1400,
+  "phi": 0.65,
+  "best_seed_value": 389.57167502895635,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.7661005734812452,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 389.5716750289567,
+  "gain_of_search": 7.431505473711007e-16
+ },
+ {
+  "u": 2.0,
+  "n": 1400,
+  "phi": 0.7,
+  "best_seed_value": 414.65038614424685,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 414.6503861442473,
+  "gain_of_search": 9.908673964948008e-16
+ },
+ {
+  "u": 2.0,
+  "n": 1400,
+  "phi": 0.75,
+  "best_seed_value": 441.02537602868404,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 441.0253760286845,
+  "gain_of_search": 9.908673964948008e-16
+ },
+ {
+  "u": 2.0,
+  "n": 1400,
+  "phi": 0.8,
+  "best_seed_value": 466.75213018579433,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 466.75213018579456,
+  "gain_of_search": 4.954336982474004e-16
+ },
+ {
+  "u": 2.0,
+  "n": 1400,
+  "phi": 0.85,
+  "best_seed_value": 478.8935987779849,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 490.4188374245789,
+  "gain_of_search": 0.025112808660611788
+ },
+ {
+  "u": 2.0,
+  "n": 2000,
+  "phi": 0.3,
+  "best_seed_value": 578.9815918535736,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 579.6906336676609,
+  "gain_of_search": 0.001081471921656624
+ },
+ {
+  "u": 2.0,
+  "n": 2000,
+  "phi": 0.35,
+  "best_seed_value": 544.3919804567726,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 545.162465145247,
+  "gain_of_search": 0.001175188176629663
+ },
+ {
+  "u": 2.0,
+  "n": 2000,
+  "phi": 0.4,
+  "best_seed_value": 507.8281013962606,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 508.57109360564067,
+  "gain_of_search": 0.0011332550443283722
+ },
+ {
+  "u": 2.0,
+  "n": 2000,
+  "phi": 0.45,
+  "best_seed_value": 473.1956826887964,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 474.26077380015835,
+  "gain_of_search": 0.001624539072391239
+ },
+ {
+  "u": 2.0,
+  "n": 2000,
+  "phi": 0.5,
+  "best_seed_value": 436.57078111805816,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 437.6359427133137,
+  "gain_of_search": 0.0016246465785359004
+ },
+ {
+  "u": 2.0,
+  "n": 2000,
+  "phi": 0.55,
+  "best_seed_value": 459.6986387739054,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 459.6986387739058,
+  "gain_of_search": 6.936071775463606e-16
+ },
+ {
+  "u": 2.0,
+  "n": 2000,
+  "phi": 0.6,
+  "best_seed_value": 493.74933545109013,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 493.7493354510909,
+  "gain_of_search": 1.127111663512836e-15
+ },
+ {
+  "u": 2.0,
+  "n": 2000,
+  "phi": 0.65,
+  "best_seed_value": 530.5692311450953,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 530.569231145096,
+  "gain_of_search": 1.0404107663195408e-15
+ },
+ {
+  "u": 2.0,
+  "n": 2000,
+  "phi": 0.7,
+  "best_seed_value": 565.3070049412394,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 565.3070049412405,
+  "gain_of_search": 1.7340179438659015e-15
+ },
+ {
+  "u": 2.0,
+  "n": 2000,
+  "phi": 0.75,
+  "best_seed_value": 602.1205614575847,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 602.1205614575854,
+  "gain_of_search": 1.0404107663195408e-15
+ },
+ {
+  "u": 2.0,
+  "n": 2000,
+  "phi": 0.8,
+  "best_seed_value": 636.8609162639543,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 636.8609162639546,
+  "gain_of_search": 3.468035887731803e-16
+ },
+ {
+  "u": 2.0,
+  "n": 2000,
+  "phi": 0.85,
+  "best_seed_value": 659.8346171966548,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 671.6116324517143,
+  "gain_of_search": 0.017962990427670886
+ },
+ {
+  "u": 2.0,
+  "n": 4000,
+  "phi": 0.3,
+  "best_seed_value": 1074.5480172274104,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1075.5094058823997,
+  "gain_of_search": 0.0007331830193319359
+ },
+ {
+  "u": 2.0,
+  "n": 4000,
+  "phi": 0.35,
+  "best_seed_value": 1003.1171751398593,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.3000000000000003,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 1004.0279974909167,
+  "gain_of_search": 0.0006946196816007244
+ },
+ {
+  "u": 2.0,
+  "n": 4000,
+  "phi": 0.4,
+  "best_seed_value": 934.1057849317968,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 934.9815156439108,
+  "gain_of_search": 0.0006678577745818381
+ },
+ {
+  "u": 2.0,
+  "n": 4000,
+  "phi": 0.45,
+  "best_seed_value": 864.857480916934,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 865.7276424426309,
+  "gain_of_search": 0.0006636105506403707
+ },
+ {
+  "u": 2.0,
+  "n": 4000,
+  "phi": 0.5,
+  "best_seed_value": 795.788159466491,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 796.6018493118069,
+  "gain_of_search": 0.0006205436006471089
+ },
+ {
+  "u": 2.0,
+  "n": 4000,
+  "phi": 0.55,
+  "best_seed_value": 849.163949778733,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.7661005734812452,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 849.1639497787338,
+  "gain_of_search": 6.069062803530656e-16
+ },
+ {
+  "u": 2.0,
+  "n": 4000,
+  "phi": 0.6,
+  "best_seed_value": 918.5642437773455,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 918.5642437773465,
+  "gain_of_search": 7.803080747396557e-16
+ },
+ {
+  "u": 2.0,
+  "n": 4000,
+  "phi": 0.65,
+  "best_seed_value": 987.9625342018542,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 987.9625342018552,
+  "gain_of_search": 7.803080747396557e-16
+ },
+ {
+  "u": 2.0,
+  "n": 4000,
+  "phi": 0.7,
+  "best_seed_value": 1057.3555341374977,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1057.3555341374995,
+  "gain_of_search": 1.3872143550927212e-15
+ },
+ {
+  "u": 2.0,
+  "n": 4000,
+  "phi": 0.75,
+  "best_seed_value": 1126.0558948245966,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1126.0558948245987,
+  "gain_of_search": 1.5606161494793114e-15
+ },
+ {
+  "u": 2.0,
+  "n": 4000,
+  "phi": 0.8,
+  "best_seed_value": 1195.448187811447,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1195.4481878114477,
+  "gain_of_search": 5.202053831597704e-16
+ },
+ {
+  "u": 2.0,
+  "n": 4000,
+  "phi": 0.85,
+  "best_seed_value": 1252.5309559247705,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1264.844560233448,
+  "gain_of_search": 0.009390713671355537
+ },
+ {
+  "u": 2.0,
+  "n": 8000,
+  "phi": 0.3,
+  "best_seed_value": 2041.95574816747,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2043.0172267767628,
+  "gain_of_search": 0.0004047572683943333
+ },
+ {
+  "u": 2.0,
+  "n": 8000,
+  "phi": 0.35,
+  "best_seed_value": 1903.3578878966232,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1904.4341830945334,
+  "gain_of_search": 0.0004104070496364408
+ },
+ {
+  "u": 2.0,
+  "n": 8000,
+  "phi": 0.4,
+  "best_seed_value": 1766.7364803886994,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 1767.7947923440245,
+  "gain_of_search": 0.0004035497770716257
+ },
+ {
+  "u": 2.0,
+  "n": 8000,
+  "phi": 0.45,
+  "best_seed_value": 1629.9133978556247,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1631.146564197359,
+  "gain_of_search": 0.0004702243037085549
+ },
+ {
+  "u": 2.0,
+  "n": 8000,
+  "phi": 0.5,
+  "best_seed_value": 1491.1814536952224,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1502.9344854767724,
+  "gain_of_search": 0.004481602358827592
+ },
+ {
+  "u": 2.0,
+  "n": 8000,
+  "phi": 0.55,
+  "best_seed_value": 1609.503265507436,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.7661005734812452,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1609.5032673238645,
+  "gain_of_search": 6.926306653412725e-10
+ },
+ {
+  "u": 2.0,
+  "n": 8000,
+  "phi": 0.6,
+  "best_seed_value": 1748.219940910109,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1748.2199409101113,
+  "gain_of_search": 8.670089719329508e-16
+ },
+ {
+  "u": 2.0,
+  "n": 8000,
+  "phi": 0.65,
+  "best_seed_value": 1884.8531539716223,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 1884.8531539716246,
+  "gain_of_search": 8.670089719329508e-16
+ },
+ {
+  "u": 2.0,
+  "n": 8000,
+  "phi": 0.7,
+  "best_seed_value": 2021.482220259074,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2021.4822202590765,
+  "gain_of_search": 9.537098691262457e-16
+ },
+ {
+  "u": 2.0,
+  "n": 8000,
+  "phi": 0.75,
+  "best_seed_value": 2158.1075240910945,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2158.1075240911,
+  "gain_of_search": 2.0808215326390816e-15
+ },
+ {
+  "u": 2.0,
+  "n": 8000,
+  "phi": 0.8,
+  "best_seed_value": 2294.731844863408,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2294.731844863409,
+  "gain_of_search": 5.202053831597704e-16
+ },
+ {
+  "u": 2.0,
+  "n": 8000,
+  "phi": 0.85,
+  "best_seed_value": 2418.455122064196,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2431.3591207153395,
+  "gain_of_search": 0.004920482805471159
+ },
+ {
+  "u": 2.0,
+  "n": 16000,
+  "phi": 0.3,
+  "best_seed_value": 3946.3941358159864,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 3948.3409820632996,
+  "gain_of_search": 0.0003711804280122164
+ },
+ {
+  "u": 2.0,
+  "n": 16000,
+  "phi": 0.35,
+  "best_seed_value": 3675.2007806832535,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 3676.7969385131455,
+  "gain_of_search": 0.0003043191249909964
+ },
+ {
+  "u": 2.0,
+  "n": 16000,
+  "phi": 0.4,
+  "best_seed_value": 3405.904351137712,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.3,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 3407.3672258408114,
+  "gain_of_search": 0.00027890772533988224
+ },
+ {
+  "u": 2.0,
+  "n": 16000,
+  "phi": 0.45,
+  "best_seed_value": 3134.7516710206683,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 3136.0675269133703,
+  "gain_of_search": 0.00025087751748737006
+ },
+ {
+  "u": 2.0,
+  "n": 16000,
+  "phi": 0.5,
+  "best_seed_value": 2873.2922089175827,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 2909.3358399312433,
+  "gain_of_search": 0.006871980982179855
+ },
+ {
+  "u": 2.0,
+  "n": 16000,
+  "phi": 0.55,
+  "best_seed_value": 3110.152107998737,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.7661005734812452,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 3129.0086420448715,
+  "gain_of_search": 0.003595135665043071
+ },
+ {
+  "u": 2.0,
+  "n": 16000,
+  "phi": 0.6,
+  "best_seed_value": 3381.2612689984785,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 3381.261268998481,
+  "gain_of_search": 4.335044859664754e-16
+ },
+ {
+  "u": 2.0,
+  "n": 16000,
+  "phi": 0.65,
+  "best_seed_value": 3652.3651350358405,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 3652.3651350358464,
+  "gain_of_search": 1.127111663512836e-15
+ },
+ {
+  "u": 2.0,
+  "n": 16000,
+  "phi": 0.7,
+  "best_seed_value": 3921.384215448136,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 3921.3842154481417,
+  "gain_of_search": 1.127111663512836e-15
+ },
+ {
+  "u": 2.0,
+  "n": 16000,
+  "phi": 0.75,
+  "best_seed_value": 4192.479251436373,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 4192.479251436383,
+  "gain_of_search": 1.9074197382524914e-15
+ },
+ {
+  "u": 2.0,
+  "n": 16000,
+  "phi": 0.8,
+  "best_seed_value": 4461.492683747325,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 4461.492683747336,
+  "gain_of_search": 2.0808215326390816e-15
+ },
+ {
+  "u": 2.0,
+  "n": 16000,
+  "phi": 0.85,
+  "best_seed_value": 4716.9789339025565,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 4730.506170478567,
+  "gain_of_search": 0.002579066256020601
+ },
+ {
+  "u": 2.0,
+  "n": 32000,
+  "phi": 0.3,
+  "best_seed_value": 7718.760518941122,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 7720.6597999686555,
+  "gain_of_search": 0.0001810558860742395
+ },
+ {
+  "u": 2.0,
+  "n": 32000,
+  "phi": 0.35,
+  "best_seed_value": 7181.672739921731,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 7183.808651058515,
+  "gain_of_search": 0.0002036135136613656
+ },
+ {
+  "u": 2.0,
+  "n": 32000,
+  "phi": 0.4,
+  "best_seed_value": 6644.705915326982,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 6646.727066386218,
+  "gain_of_search": 0.00019267359101417773
+ },
+ {
+  "u": 2.0,
+  "n": 32000,
+  "phi": 0.45,
+  "best_seed_value": 6107.75003036694,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 6109.726043922734,
+  "gain_of_search": 0.0001883706939902406
+ },
+ {
+  "u": 2.0,
+  "n": 32000,
+  "phi": 0.5,
+  "best_seed_value": 5626.774098073308,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 5676.680695073632,
+  "gain_of_search": 0.004757528248771034
+ },
+ {
+  "u": 2.0,
+  "n": 32000,
+  "phi": 0.55,
+  "best_seed_value": 6075.439574063389,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 6110.911940703035,
+  "gain_of_search": 0.003381532632605317
+ },
+ {
+  "u": 2.0,
+  "n": 32000,
+  "phi": 0.6,
+  "best_seed_value": 6614.104200038687,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 6614.104200038709,
+  "gain_of_search": 2.0808215326390816e-15
+ },
+ {
+  "u": 2.0,
+  "n": 32000,
+  "phi": 0.65,
+  "best_seed_value": 7149.989933356183,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 7149.989933356194,
+  "gain_of_search": 1.0404107663195408e-15
+ },
+ {
+  "u": 2.0,
+  "n": 32000,
+  "phi": 0.7,
+  "best_seed_value": 7685.87049373161,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.7661005734812454,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 7685.870493731625,
+  "gain_of_search": 1.4739152522860163e-15
+ },
+ {
+  "u": 2.0,
+  "n": 32000,
+  "phi": 0.75,
+  "best_seed_value": 8219.667250648567,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 8219.667250648617,
+  "gain_of_search": 4.8552502428245245e-15
+ },
+ {
+  "u": 2.0,
+  "n": 32000,
+  "phi": 0.8,
+  "best_seed_value": 8756.233963611368,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 8756.233963611396,
+  "gain_of_search": 2.6010269157988524e-15
+ },
+ {
+  "u": 2.0,
+  "n": 32000,
+  "phi": 0.85,
+  "best_seed_value": 9275.853810633555,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 9290.026620767663,
+  "gain_of_search": 0.0013510747802951317
+ },
+ {
+  "u": 2.0,
+  "n": 64000,
+  "phi": 0.3,
+  "best_seed_value": 15208.860160509992,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 15211.477690107227,
+  "gain_of_search": 0.00012476277435586518
+ },
+ {
+  "u": 2.0,
+  "n": 64000,
+  "phi": 0.35,
+  "best_seed_value": 14142.971399461507,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 14145.318083125529,
+  "gain_of_search": 0.00011185308650117887
+ },
+ {
+  "u": 2.0,
+  "n": 64000,
+  "phi": 0.4,
+  "best_seed_value": 13074.72654137219,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 13077.268442168754,
+  "gain_of_search": 0.0001211579788253561
+ },
+ {
+  "u": 2.0,
+  "n": 64000,
+  "phi": 0.45,
+  "best_seed_value": 12006.311579647307,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 12008.710833881147,
+  "gain_of_search": 0.00011435882708456101
+ },
+ {
+  "u": 2.0,
+  "n": 64000,
+  "phi": 0.5,
+  "best_seed_value": 11090.856540807092,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 11162.250700404766,
+  "gain_of_search": 0.003402954233495391
+ },
+ {
+  "u": 2.0,
+  "n": 64000,
+  "phi": 0.55,
+  "best_seed_value": 11960.274749032953,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 12028.787063103686,
+  "gain_of_search": 0.0032655930194766536
+ },
+ {
+  "u": 2.0,
+  "n": 64000,
+  "phi": 0.6,
+  "best_seed_value": 13026.424730106472,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 13026.424730106497,
+  "gain_of_search": 1.2138125607061311e-15
+ },
+ {
+  "u": 2.0,
+  "n": 64000,
+  "phi": 0.65,
+  "best_seed_value": 14092.5679729347,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 14092.56797293473,
+  "gain_of_search": 1.4739152522860163e-15
+ },
+ {
+  "u": 2.0,
+  "n": 64000,
+  "phi": 0.7,
+  "best_seed_value": 15156.626158919304,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 15156.626158919324,
+  "gain_of_search": 9.537098691262457e-16
+ },
+ {
+  "u": 2.0,
+  "n": 64000,
+  "phi": 0.75,
+  "best_seed_value": 16219.986899885856,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 16219.98689988588,
+  "gain_of_search": 1.127111663512836e-15
+ },
+ {
+  "u": 2.0,
+  "n": 64000,
+  "phi": 0.8,
+  "best_seed_value": 17284.037254970026,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 17284.037254970033,
+  "gain_of_search": 3.468035887731803e-16
+ },
+ {
+  "u": 2.0,
+  "n": 64000,
+  "phi": 0.85,
+  "best_seed_value": 18333.2521014578,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 18348.085522896414,
+  "gain_of_search": 0.0007070249802813216
+ },
+ {
+  "u": 2.0,
+  "n": 128000,
+  "phi": 0.3,
+  "best_seed_value": 30113.607262336034,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 30116.609323730023,
+  "gain_of_search": 7.154561092571325e-05
+ },
+ {
+  "u": 2.0,
+  "n": 128000,
+  "phi": 0.35,
+  "best_seed_value": 27987.075514101314,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.0,
+   "oracle": "bottom"
+  },
+  "stored_best": 27990.61722738269,
+  "gain_of_search": 8.440668167115044e-05
+ },
+ {
+  "u": 2.0,
+  "n": 128000,
+  "phi": 0.4,
+  "best_seed_value": 25862.53305375111,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 25865.53669609667,
+  "gain_of_search": 7.158328841834064e-05
+ },
+ {
+  "u": 2.0,
+  "n": 128000,
+  "phi": 0.45,
+  "best_seed_value": 23733.996877963404,
+  "best_seed": {
+   "type": "plateau then cone",
+   "radius_over_critical": 0.9,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 23737.139923236828,
+  "gain_of_search": 7.490556146005875e-05
+ },
+ {
+  "u": 2.0,
+  "n": 128000,
+  "phi": 0.5,
+  "best_seed_value": 21969.0170894906,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 22072.296019394034,
+  "gain_of_search": 0.0024613601009263416
+ },
+ {
+  "u": 2.0,
+  "n": 128000,
+  "phi": 0.55,
+  "best_seed_value": 23684.661515024472,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 23794.178769552946,
+  "gain_of_search": 0.0026100328587004063
+ },
+ {
+  "u": 2.0,
+  "n": 128000,
+  "phi": 0.6,
+  "best_seed_value": 25782.435317325955,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.7661005734812454,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 25782.435317326013,
+  "gain_of_search": 1.3872143550927212e-15
+ },
+ {
+  "u": 2.0,
+  "n": 128000,
+  "phi": 0.65,
+  "best_seed_value": 27904.241593991355,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 27904.24159399141,
+  "gain_of_search": 1.3005134578994262e-15
+ },
+ {
+  "u": 2.0,
+  "n": 128000,
+  "phi": 0.7,
+  "best_seed_value": 30023.962764690186,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 30023.962764690226,
+  "gain_of_search": 9.537098691262457e-16
+ },
+ {
+  "u": 2.0,
+  "n": 128000,
+  "phi": 0.75,
+  "best_seed_value": 32143.67922517817,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 32143.679225178217,
+  "gain_of_search": 1.127111663512836e-15
+ },
+ {
+  "u": 2.0,
+  "n": 128000,
+  "phi": 0.8,
+  "best_seed_value": 34264.08501290892,
+  "best_seed": {
+   "type": "cone then flat",
+   "radius_over_critical": 1.1,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 34264.0850129091,
+  "gain_of_search": 4.161643065278163e-15
+ },
+ {
+  "u": 2.0,
+  "n": 128000,
+  "phi": 0.85,
+  "best_seed_value": 36366.21146744505,
+  "best_seed": {
+   "type": "cone",
+   "radius_over_critical": 0.0,
+   "reference_fraction": 0.5,
+   "oracle": "bottom"
+  },
+  "stored_best": 36381.71553741979,
+  "gain_of_search": 0.0003694954941291242
+ }
+]

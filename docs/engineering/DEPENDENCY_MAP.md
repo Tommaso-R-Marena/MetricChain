@@ -1,7 +1,8 @@
 # Dependency map: what each engineering result rests on
 
 Every computational claim of the engineering branch is tied here to the exact mathematical
-statements it uses, their epistemic status **at the pinned theory commit `d81eb8a`**, and the
+statements it uses, their epistemic status **at the pinned theory commit** (`d81eb8a` unless a
+section names another), and the
 hypotheses of those statements that the computation has to satisfy.  Labels as in
 `docs/collaboration/README.md` ([V] machine-checked, [P] paper proof, [K] cited, [N]
 numerical, [C] conjecture; [X], [X\*], [R], [S], [E] for engineering results).
@@ -41,8 +42,34 @@ says what connects the two in each case — or that nothing does yet.
 |---|---|---|
 | "the verified state of `d81eb8a` is reproducible on an independent machine" | `scripts/audit_all.sh` at `d81eb8a`, unmodified | the script's own exit status and counts; the harness under three further seeds on a third platform; byte comparison of benchmark output |
 
+## Algorithm 2L⁺ (ENG-RES-0008; `src/metricchain_eng/twolevel/`, `experiments/eng/twolevel/`)
+
+Pinned to the text of `docs/workstreams/K_REPORT.md` at theory commit `63efc69` (statuses as
+of that commit).
+
+| engineering claim | rests on | status upstream | hypotheses the computation must meet | what connects program and statement |
+|---|---|---|---|---|
+| "the run evaluated is a run of Algorithm 2L⁺" | `K_REPORT.md` §2.2 (the algorithm), §2.1 (tables), errata m1, m10 of referee R8 | definition | parameters in the ranges of Theorem 11.56; ladder `x₀ = 2un_i > … > x_L`, `x_L ≤ b` (checked by `Params`) | (i) the mean run reproduces 324 + 18 published rows of the workstream; (ii) a literal, sampled implementation that shares only the tables stops at the same level with the same sample and the same number of evaluations; (iii) Python reference = C kernel on random instances |
+| "no claim of the theorem is violated on the instances searched" | Theorem 11.56 (i)–(vi) — the statement **under test** | [P], refereed (R8: "proved") | mean runs: counts replaced by their means; inner procedures replaced by the behaviours "bottom" / "top" (valid brackets) | every claim is evaluated on every run by the kernel; a mutation (no Harper term) is detected |
+| the number of evaluations `1 + max_j M_j + Σ_l calls_l C_l`, with `calls` from sliding maxima of the sample sizes | step 1 of the algorithm (a point moves to the next rung iff its bracket straddles the level and the tolerance) | definition; the closed form is an engineering derivation (module docstring of `meanrun.py`) | nested brackets; the same trivial-bracket offset for all outer points (product instances) | the literal implementation counts calls one by one and agrees |
+| the inner cost `C_l` | Proposition 11.57(a) (= K0): the two-sample bracket and its sample size | [P], refereed | `η = min(½, tanh(x/4))`, `K = ⌈3(1+η)η⁻² ln(4/δ′)⌉`, `δ′ = δ/(4LM̄)` | the "plain bracket" column of the workstream's table is reproduced |
+| "the worst case approaches the claimed exponent" | `K_REPORT.md` (3.1) (Theorem K2) | [P], refereed | the cell's own `φ` and finite ladder | `alg2l.claimed_exponent`; a fine ladder at the best `φ` gives `τ₂` to 3 % (test) |
+| "for the outer loop, radial instances with ball level sets are the whole class up to partial shells" | Harper's vertex-isoperimetric theorem and nestedness of neighbourhoods of initial segments | [K] for Harper; **the reduction itself is an unrefereed engineering argument** (ENG-RES-0008 §5) | fixed inner behaviour; law of `W` only | none beyond the argument; consistent with the data (general profiles never beat monotone ones by more than `0.002·na`) |
+| hinted lower bound and plain-bracket columns | Theorem 11.25(a) | [V] (one-shot form) | — | reproduce the workstream's columns to the digits printed |
+
+## Off-lattice distance entropy and single-flip bounds (ENG-RES-0009)
+
+| engineering claim | rests on | status upstream | connection |
+|---|---|---|---|
+| "`14d_j − 15 ≤ c_j ≤ 70(d_j + 3)` in all 36 cases" | Proposition 11.74 (statement under test) | [P], no separate referee | exact single-flip constants of X-002 |
+| the distance entropy `σ(ρ)` | definition in THY-REQ-0008 item 5; the profile distance of `P_REPORT.md` Proposition 2 | [P] | enumeration of X-004, extended to 14 torsions; 13 torsions reproduce the published counts |
+
 ## Not yet connected (stated so that nobody assumes otherwise)
 
+* The mean runs of X-005 say nothing about fluctuations of the counts; X-006 addresses the
+  outer loop only and with oracle brackets, so the event (V1) of the proof of Theorem 11.56 —
+  validity of real inner brackets — is tested by no engineering computation.
+* Three nested levels and the extensive regime of §11.18 have not been computed here.
 * No engineering result so far uses the certificate kernels (`verify`, `verifyITop`,
   `zverifyTop`, `verifyLTop`).  The correspondence between the Python reference checker and
   the Lean definitions is established upstream on 16 conformance vectors only; engineering

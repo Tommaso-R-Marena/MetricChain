@@ -1,7 +1,7 @@
 """X-005: re-evaluate every stored maximiser with the current code.
 
-The Modal jobs ran at an earlier commit than the one that introduced the exact tie rule
-(``meanrun.py``, "Ties").  This script decodes the stored best point of every search, evaluates it again
+Job M-008 ("cost") ran at a commit earlier than the one that introduced the exact tie rule
+(``meanrun.py``, "Ties"); jobs M-009 and M-010 ran with it.  This script decodes the stored best point of every search, evaluates it again
 locally -- with the tie rule and without it -- and reports the largest change of ln(cost) and whether any
 claim of Theorem 11.56 is violated under either convention.  It also re-evaluates the flat instance.
 
@@ -34,12 +34,13 @@ def main() -> int:
     ap.add_argument("--nmax", type=int, default=10 ** 9)
     args = ap.parse_args()
     t0 = time.time()
-    out = dict(searches=0, flat=0, max_abs_change_no_tie=0.0, max_abs_change_tie=0.0, max_rel_change_tie=0.0,
-               violations_no_tie=0, violations_tie=0, worst=None)
+    report = {}
     for job in args.jobs:
         path = Path(__file__).resolve().parent / "results" / f"x005_{job}.jsonl"
         if not path.exists():
             continue
+        out = report[job] = dict(searches=0, flat=0, max_abs_change_no_tie=0.0, max_abs_change_tie=0.0, max_rel_change_tie=0.0,
+                                 violations_no_tie=0, violations_tie=0, worst=None)
         for line in path.read_text().splitlines():
             c = json.loads(line)
             if c["n"] > args.nmax:
@@ -76,10 +77,10 @@ def main() -> int:
                         out["max_rel_change_tie"] = max(out["max_rel_change_tie"], d / na)
                     out["violations_tie" if tie else "violations_no_tie"] += bool(R.violations())
                 out["searches"] += 1
-    out["seconds"] = time.time() - t0
-    print(json.dumps(out, indent=1))
-    (Path(__file__).resolve().parent / "results" / "x005_recheck.json").write_text(json.dumps(out, indent=1))
-    return 0 if out["violations_tie"] == 0 and out["violations_no_tie"] == 0 else 1
+    report["seconds"] = time.time() - t0
+    print(json.dumps(report, indent=1))
+    (Path(__file__).resolve().parent / "results" / "x005_recheck.json").write_text(json.dumps(report, indent=1))
+    return 0 if all(v["violations_tie"] == 0 and v["violations_no_tie"] == 0 for v in report.values() if isinstance(v, dict)) else 1
 
 
 if __name__ == "__main__":

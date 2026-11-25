@@ -126,37 +126,136 @@ computational division's comparative advantage is on the second.
 
 ---
 
+## Session 2 — 2026-11-25 (UTC), 14:50 onwards
+
+### 2.1 Authorisation and limits (research owner, this session)
+
+Three statements of the research owner, all recorded in `COMPUTE_LEDGER.md`: (i) the Modal
+allocation is prepaid credit, about $1,995 remaining, a **hard ceiling**, with no obligation
+to use it ("use it as you see fit and when appropriate, not just using compute for the sake
+of using it"); (ii) no platform limit enforces that ceiling (the workspace usage limit is
+higher than the credit), so it is enforced by the ledger; (iii) the workspace allows **100
+concurrent containers** and 10 GPUs, shared with other projects.  Rules derived here: worst
+case of every job computed before launch; at most 50 containers in total; one job at a
+time; stop launching at $1,500 of cumulative workspace usage.
+
+### 2.2 Synchronisation with the theory head `63efc69` (17 commits after `4cef47e`)
+
+Read: THY-MSG-0005…0008, THY-REQ-0007, -0008, THY-RES-0002 (and -0001 in part), the digest
+and status, `K_REPORT.md` §§0–3.4 and §6.  Audit on a read-only worktree: `AUDIT PASSED`
+(53 Lean files, 3369 declarations).  The theory division changed four of its statements on
+the strength of ENG-RES-0002/-0007, answered ENG-REQ-0001 in full (limit shape for bridges;
+plateau between 50 and 3 627, reached at `10³`–`10⁵` beads), redirected THY-REQ-0001 to
+Algorithm 2L⁺, and sent two new requests.  Answers: ENG-MSG-0003, ENG-RES-0008, -0009, -0010.
+
+### 2.3 What was done, in order
+
+1. **An independent evaluator of Algorithm 2L⁺** (X-005), from the text of `K_REPORT.md` §2:
+   cube tables (checked against exact integers), the constants of Theorem 11.56, the base
+   family, the mean run in Python (reference) and C (kernel, about a hundred times faster), and — new —
+   the exact number of evaluations on any instance for two explicit inner behaviours.
+   Controls: 324 rows of the workstream's radial table and 18 rows of its flat-instance
+   table reproduced.
+2. **Adversarial search** (jobs M-008, M-009, M-010): 468 cells `(u, n, φ)`; no claim of the
+   theorem violated; **the flat instance is not the worst one at finite `n`**; the best outer
+   fraction against the worst instance is 0.50–0.60; the crossover with the plain bracket
+   moves; no persistent margin over the claimed exponent.  ENG-RES-0008.
+3. **A reduction** (ENG-RES-0008 §5): by Harper's theorem the laws of `W` on the outer cube
+   are exactly the tail functions with `m(te^{−u}) ≥ ∂(m(t))`; monotone radial profiles are
+   those with ball level sets.  Unrefereed.
+4. **A literal sampled implementation** (X-006) that shares only the tables with the
+   evaluator and agrees with it; job M-011 for statistics with the theorem's `K` and with `K`
+   scaled down.
+5. **A tie pitfall with a structural cause** (ED-5): a literal run aborted on the good
+   event; fixed by an exact tie rule; two published rows of the workstream's table turn out
+   to be decided by rounding.
+6. **THY-REQ-0008, items 5 and 6** (X-007): single-flip constants satisfy Proposition 11.74
+   in all 36 cases; the off-lattice distance entropy still rises at 14 torsions; the
+   off-lattice enumerator reproduces the published counts at 13 torsions (113 587 / 13 012)
+   and gives 273 623 / 27 421 at 14.  ENG-RES-0009.
+
+### 2.4 Mistakes made and what they changed (kept on purpose)
+
+* **Job M-008 was launched with a cap of 100 containers — the whole workspace limit.**  The
+  limit was not known here, but the cap was chosen without asking what else runs on the
+  workspace, and for about 20 minutes nothing else could have started a container.  The
+  research owner pointed it out.  Consequence: rule 5 of the ledger (at most 50 containers,
+  one job at a time).  The job was left to finish because stopping it would have discarded
+  the in-flight work of its largest tasks; that was a judgement call made while the owner
+  was watching, and said so to the owner.
+* **Prose written before the numbers were checked, again.**  The first draft of ENG-RES-0008
+  said the worst case is "20–90 %" above the flat-instance table at `n ≤ 2000` (it is 11–49 %),
+  described the maximisers as a class that a count then showed to be 59 of 468 by the
+  classifier used (ED-6), and misstated the number of test runs; the draft of ENG-RES-0009
+  said two statistics differ "by less than 0.02" (it is up to 0.05) and carried one mistyped
+  table digit, which `make_tables.py --verify` caught.  All were corrected before
+  publication by recomputing each sentence from the artifacts.  The rule of session 1
+  (tables are generated) is not enough: **summary sentences are now generated too** where
+  they carry numbers that later jobs can change (`headline_counts`, `closest`), and every
+  remaining number in prose is checked against a printed table before the message is
+  committed.
+* **The session's working directory moved into the read-only theory worktree** when a
+  command ended there; the harness then described the worktree as the place to work.  No
+  file was changed in it.  Commands that touch the worktree now use `git -C` or a subshell.
+* **Run times were estimated a factor two too high, then a factor two too low**, from one
+  timing at `u = 1`: the number of levels scales with `u`.  Estimates are now per `u`.
+* **The first version of the law of `W` was normalised to `1 − 10⁻¹²`**, which made the lowest
+  levels look "not populated at the first pass"; found because the numbers of populated and
+  negligible levels did not match the published rows while everything else did.
+
+### 2.5 Open observations that are not yet results
+
+* In more than five million instances the sample of the outer loop stayed below `2M†`, far
+  below the theorem's bound `M̄ = 2(1+η)e^λ ν₀ M†`.  Either `M̄` can be lowered by a factor of
+  order `ν₀`, or the instance that needs it has a level set that is not a ball (partial
+  shells) — the search cannot tell.
+* The count (v) of the theorem is tight to 5 % under the inner behaviour that puts the
+  value at the *top* of the bracket, and only to 42 % under "bottom".
+* The best outer fraction against the worst instance is `½` up to the grid, at every size:
+  the two branches of the cost, `(1−φ)a` and `φa`, carry corrections of the same form.
+* Three nested levels: the evaluator can be nested (the inner cost of a rung becomes a
+  mean run on the fibre), but the design of the middle level at each accuracy has to be
+  taken from the referee's script (`experiments/reviews/R8/r8_flat3.py`, not read).
+
+---
+
 ## Resume here
 
-State at the end of session 1: see `docs/collaboration/status/engineering.md` for the table
-of requests and their status; the list below is the order of work.
+State at the end of session 2: see `docs/collaboration/status/engineering.md` for the table
+of requests; the list below is the order of work.
 
-1. **Finish THY-REQ-0002** (status table in ENG-RES-0007 §4): (a) generic chain beyond 12
-   torsions — published targets 113 587 conformations and 13 012 classes at `n = 13`; the
-   distance matrix needs about 1.4 GB at `n = 13` and the covers need a primal heuristic
-   with the certified dual bound (`profile_cover.certified_lower_bound`), not exact branch
-   and bound; a C port of the enumerator for `n ≥ 15`; (b) its questions 3(a) (all patterns
-   realised? the directed-walk proof does not transfer, because the hard core removes
-   `g⁺g⁻`) and 3(b) (single-flip constants); (c) question 4 (sum class `P_L + Lip(η·d_H)` on
-   the 683-conformation lattice chain, `L = 1/5`, `η ∈ {0.5, 0.75, 1}`, known brackets `[2,2]`,
-   `[2,6]`, `[2,17]`); (d) question 5 (span format off-lattice, `n = 10`, bracket `[3, 10]`);
-   (e) question 2 by sampling, reported as entropy of sampled sets with the bias stated.
-2. **THY-REQ-0001**, in the order of ENG-MSG-0002 §4 (real inner brackets end to end;
-   non-radial outer laws; three levels; fluctuations; a small control of Part B).  Work
-   against a read-only worktree of the theory branch at `4cef47e` or later:
-   `git worktree add --detach ../MetricChain-theory-<sha> <sha>`, then inside it
-   `mkdir .lake && ln -s ../../MetricChain/.lake/packages .lake/packages && cp -a ../MetricChain/.lake/build .lake/build`
-   (the copy lets Lake rebuild only what changed), `LEAN_NUM_THREADS=4 lake build`,
-   `bash scripts/audit_all.sh --full`.  First read: `docs/reviews/R7_referee_report.md`, the
-   revised §11.18, and the harness functions `lv_two_level`, `lv_check_run`,
-   `two_level_flat_cost` at that commit.
-3. **THY-REQ-0003** in the revised design of ENG-RES-0003.
-4. **E-1 / THY-REQ-0004**: Lean evaluator front-end for the kernels and the differential
-   fuzzer; then the linear-kernel schema, checker and producer.
-5. **E-2**: producer for `min` certificates and measurements at realistic sizes.
-6. At every session start: `git fetch origin claude/determined-ride-og1u7j`, follow
+1. **THY-REQ-0001, what is left** (ENG-RES-0008 "Decision"): (a) publish the table of job
+   M-011 if it was not in checkpoint 3 (`python experiments/eng/twolevel/make_tables.py`, block
+   `sampled`); (b) **three nested levels on non-flat instances** — read
+   `experiments/reviews/R8/r8_flat3.py` and `docs/reviews/R8_referee_report.md` on a worktree of
+   the theory head for the design of the middle level, then nest `Evaluator` (inner cost of
+   rung `l` = mean run of the two-level algorithm on the fibre at accuracy `x_l`); (c) the
+   extensive regime of §11.18 (`λ = 1`, `η = ½`, `η′ = 1`, `ν₁ = 1`, `θ = e^{Gn−b} − …`): `Params.theta`
+   must become a logarithm first, `θ` overflows a double at `n = 10⁵`; (d) real inner brackets
+   beyond 13 coordinates in the form of `DEAD_ENDS.md` ED-7 (small outer cube, large inner
+   cube, a few hundred runs).
+2. **THY-REQ-0003** in the revised design of ENG-RES-0003, with the remainder
+   `η(1 + ‖λ‖₁)` as confirmed in THY-MSG-0005 §3(b).
+3. **THY-REQ-0002, what is left**: covers of the generic chain at 13 and 14 torsions (class
+   tables exist; primal heuristic + `profile_cover.certified_lower_bound`), its questions
+   3(a), 3(b), questions 4 and 5, sampling for question 2.
+4. **THY-REQ-0008, items 1–4**: an optimiser over lattice walks (pivot, end moves, backbites;
+   by the site-set lemma of THY-RES-0001 the profile depends on the site set only) with a
+   recount from coordinates; walks against bridges; the plateau by set cover; bridge
+   tables for 25–27 beads (the enumerator fixes the first two bonds by symmetry, and the
+   bridge condition singles out one coordinate — read `S_REPORT.md` for the convention
+   before restricting it).
+5. **THY-REQ-0007** as fixed in ENG-RES-0010.
+6. **E-1 / THY-REQ-0004**, then **E-2**.
+7. At every session start: `git fetch origin claude/determined-ride-og1u7j`, follow
    `docs/collaboration/UPSTREAM_SYNC.md`, read new THY-MSG/REQ/RES, update the digest and
-   status.
+   status; read `COMPUTE_LEDGER.md` ("Policy") before any remote job; `modal app list` must
+   show no engineering app running.
+
+Worktree of the theory branch (read only; never end a shell command inside it):
+`git worktree add --detach ../MetricChain-theory-<sha> <sha>`, then
+`mkdir ../MetricChain-theory-<sha>/.lake && ln -s ../../MetricChain/.lake/packages ../MetricChain-theory-<sha>/.lake/packages && cp -a .lake/build ../MetricChain-theory-<sha>/.lake/build`,
+and inside it `LEAN_NUM_THREADS=4 lake build` and `bash scripts/audit_all.sh --full`.
 
 Build and test from a clean clone:
 
@@ -168,4 +267,6 @@ mkdir -p build && cc -O3 -o build/dia_enum src/metricchain_eng/chains/dia_enum.c
 python -m pytest tests/eng -q
 python experiments/eng/chain_cover/run_lattice.py --check
 python experiments/eng/chain_cover/make_tables.py --verify docs/collaboration/responses/engineering/ENG-RES-0002.md
+python experiments/eng/twolevel/controls.py --theory ../MetricChain-theory-63efc69      # needs a checkout of the theory branch
+python experiments/eng/twolevel/make_tables.py --verify docs/collaboration/responses/engineering/ENG-RES-0008.md
 ```

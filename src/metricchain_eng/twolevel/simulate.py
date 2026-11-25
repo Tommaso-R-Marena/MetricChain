@@ -64,6 +64,7 @@ class SimResult:
     lqueries: float = -math.inf                      # ln(number of evaluations)
     good_event: bool = True                         # (V2) and (V3) on the realised sample
     last_rung_ties: int = 0                         # points classified by the tie rule at the last rung
+    trivial_returned: bool = False                  # the closure test returned L > U and the trivial bracket was returned instead
     violations: list = field(default_factory=list)  # claims of Theorem 11.56 violated by this run
     levels: list = field(default_factory=list)      # per level: (kind, M, N, lq)
 
@@ -265,9 +266,12 @@ def simulate(P: Params, outer: CubeTables, C: Constants, F: np.ndarray, psi0: fl
     closed = R.status.startswith("closed")
     if closed:
         R.width = R.lU - R.lL
-        R.valid = R.lL <= lA + 1e-9 and lA <= R.lU + 1e-9
         if R.width > C.x_out + 1e-9:
             v.append("width")                                # holds whenever the algorithm stops through the closure test
+        if R.lL > R.lU:                                      # possible off the good event only: return the trivial bracket (R8, m1)
+            R.lL, R.lU = ls0, ls0 + 2 * u * n
+            R.trivial_returned = True
+        R.valid = R.lL <= lA + 1e-9 and lA <= R.lU + 1e-9
     if R.good_event:
         if not closed and not R.status.startswith("skipped"):
             v.append("(i) " + R.status)

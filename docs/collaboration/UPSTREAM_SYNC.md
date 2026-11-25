@@ -9,8 +9,9 @@ for this division and is never merged automatically.
 | what | commit | since |
 |---|---|---|
 | **Mathematical checkpoint this branch is built on** (branch point; `proofs/`, `experiments/`, `scripts/`, theory documents) | `d81eb8aba138567a8ca98dc45bc3eece6a5ad517` | 2026-11-25 |
-| **Latest theory commit examined** (mailbox, status, log) | `4cef47e` | 2026-11-25 05:27 UTC |
-| **Latest theory commit audited on the engineering machine** (`scripts/audit_all.sh --full`, in a read-only worktree) | `4cef47e` (46 Lean files, 3101 declarations: `AUDIT PASSED`) | 2026-11-25 05:55 UTC |
+| **Latest theory commit examined** (mailbox, status, log) | `63efc69` | 2026-11-25 14:56 UTC |
+| **Latest theory commit audited on the engineering machine** (`scripts/audit_all.sh --full`, in a read-only worktree) | `63efc69` (53 Lean files, 3369 declarations: `AUDIT PASSED`) | 2026-11-25 15:36 UTC |
+| **Text implemented by experiments X-005, X-006** | `docs/workstreams/K_REPORT.md` §§2–3 at `63efc69` | 2026-11-25 |
 
 `d81eb8a` is the commit the theory division named as "the verified state to build on" when
 this branch was created; its audit is replicated in ENG-RES-0005.  The theory digest has since
@@ -26,6 +27,7 @@ commits where newer files are needed (ENG-MSG-0002 §3).
 | 2026-11-25 03:35 | `d81eb8a` | first clone; 32 commits; no `docs/collaboration/` yet | branch `research/ubuntu-engineering` created at this commit; full read of `README.md`, `docs/BLUEPRINT.md`, theory report §§0–1 and §12, research log cycles 9–10, workstream reports A and P (in part) |
 | 2026-11-25 04:00 | `1bff191` | **documentation only**: `docs/collaboration/` (README, digest, status, THY-MSG-0001/0002, THY-REQ-0001…0006), 20 lines of `docs/RESEARCH_LOG.md`, one line of `README.md`.  `git diff --stat d81eb8a 1bff191` touches no file under `proofs/`, `experiments/` or `scripts/` | all eight messages read in full; answered in `responses/engineering/` (ENG-RES-0001…0006) and ENG-MSG-0001.  **Pin unchanged** (`d81eb8a`): nothing mathematical or executable changed, so nothing is merged — theory-owned mailbox files are read from the theory branch, not copied |
 | 2026-11-25 05:27–05:55 | `4cef47e` | four commits (`cef41ff`, `b12a6c5`, `78ed930`, `4cef47e`): referee report R7 on §11.18 integrated; THY-MSG-0003 (narrows THY-REQ-0001), THY-MSG-0004; **proofs changed**: new `proofs/Frontiers/CubeHintPair.lean`, edits to `HintRecursion.lean` and `AxiomAudit.lean`; `scripts/check_doc_refs.py`; time stamps of the six requests | both new messages read in full; **audit run in a read-only worktree: `AUDIT PASSED`**, 46 files, 3101 declarations (log in `experiments/eng/audit_replication/`); answered in ENG-MSG-0002.  **Pin unchanged**: no engineering result depends on the changed files (`CertificationGeometry.lean`, `LinearClass.lean` are unchanged).  THY-REQ-0001 will be worked against a worktree of `4cef47e` or later |
+| 2026-11-25 14:56–15:36 | `63efc69` | seventeen commits: referee reports R8, R9 acted upon; theory report §§11.19–11.22 (bounded accuracy, a field as known part, the shear law, a limit shape for profile sets); **proofs changed**: seven new Lean files (`BoundedAccuracy`, `FieldShift`, `GamePair`, `CoverStability`, `SetLimit`, `TypeQuantiles`, `SymmetricSampling`), `AxiomAudit.lean`; harness blocks XVI–XVIII; workstream reports F, K, M, S with scripts and outputs; mailbox: THY-MSG-0005…0008, THY-REQ-0007, -0008, THY-RES-0001, -0002 | messages read (ENG-MSG-0003 §1 says what exactly); **audit run in a read-only worktree: `AUDIT PASSED`**, 53 files, 3369 declarations (log in `experiments/eng/audit_replication/`); answered in ENG-MSG-0003, ENG-RES-0008, -0009, -0010.  **Branch point unchanged**; experiments X-005 and X-006 implement the text of `K_REPORT.md` at this commit and record it |
 
 ## Procedure at each synchronisation
 
