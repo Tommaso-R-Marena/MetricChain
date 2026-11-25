@@ -64,6 +64,11 @@ A product of finite chains `∀ i, Fin (k i)` (Remark (1) of A11):
   `chainField_admissible`, `neg_chainField_admissible`;
 * `chain_sandwich_mean`, `chain_mean_range_eq_Icc`, `chain_ratio_range_eq_Icc`.
 
+Addendum A13 (arbitrary site quasi-metrics, step fields):
+
+* `siteDist_sup_right_le`, `siteDist_inf_left_le` (the triangle inequality telescoped along the
+  order), `stepField_sandwich_mean`, `stepField_macrostate_ratio`.
+
 Corollary A11.2, the sign only:
 
 * `updown_inter_cross`, `cube_occupation_cross`, `cube_occupation_mono` — for a lower set `A`
@@ -1065,6 +1070,140 @@ theorem chain_ratio_range_eq_Icc {β : ℝ} (hβ : 0 < β)
 
 end Chains
 
+/-! ### Addendum A13: arbitrary site quasi-metrics and the step fields
+
+Sites with levels `0, …, k i - 1`; `ds i s t` a function of two levels with `ds i s s ≤ 0` and
+the triangle inequality on the levels below `k i` (a quasi-metric on the site alphabet);
+`d x y = ∑_i ds i (x i) (y i)`.  Step fields `Γ↑ x = ∑_i ∑_{r < x_i} ds i (r+1) r` and
+`Γ↓ x = ∑_i ∑_{r < x_i} ds i r (r+1)`.  The triangle inequality telescoped along the order gives
+the saturation *inequalities*, hence the sandwich (the bounds are sound; they are attained when
+the envelope is additive along the order, which is the `Chains` section). -/
+
+section StepFields
+
+variable {ι : Type*} [Fintype ι] {k : ι → ℕ}
+
+/-- `d x y = ∑_i ds i (x i) (y i)`. -/
+def siteDist (ds : ι → ℕ → ℕ → ℝ) (x y : ∀ i, Fin (k i)) : ℝ :=
+  ∑ i, ds i (x i : ℕ) (y i : ℕ)
+
+/-- The step field `Γ↑ x = ∑_i ∑_{r < x_i} ds i (r+1) r`. -/
+def stepUp (ds : ι → ℕ → ℕ → ℝ) (x : ∀ i, Fin (k i)) : ℝ :=
+  ∑ i, ∑ r ∈ Finset.range (x i : ℕ), ds i (r + 1) r
+
+/-- The step field `Γ↓ x = ∑_i ∑_{r < x_i} ds i r (r+1)`. -/
+def stepDn (ds : ι → ℕ → ℕ → ℝ) (x : ∀ i, Fin (k i)) : ℝ :=
+  ∑ i, ∑ r ∈ Finset.range (x i : ℕ), ds i r (r + 1)
+
+/-- Triangle inequality telescoped upwards: `dd s t ≤ ∑_{t ≤ r < s} dd (r+1) r`. -/
+theorem le_sum_steps_up {K : ℕ} (dd : ℕ → ℕ → ℝ) (h0 : ∀ s, s < K → dd s s ≤ 0)
+    (htri : ∀ a b c, a < K → b < K → c < K → dd a c ≤ dd a b + dd b c) {t s : ℕ}
+    (hts : t ≤ s) (hs : s < K) : dd s t ≤ ∑ r ∈ Finset.Ico t s, dd (r + 1) r := by
+  induction s, hts using Nat.le_induction with
+  | base => simpa using h0 t hs
+  | succ s hts' ih =>
+    rw [Finset.sum_Ico_succ_top hts']
+    have h1 := ih (by omega)
+    have h2 := htri (s + 1) s t hs (by omega) (by omega)
+    linarith
+
+/-- Triangle inequality telescoped downwards: `dd t s ≤ ∑_{t ≤ r < s} dd r (r+1)`. -/
+theorem le_sum_steps_dn {K : ℕ} (dd : ℕ → ℕ → ℝ) (h0 : ∀ s, s < K → dd s s ≤ 0)
+    (htri : ∀ a b c, a < K → b < K → c < K → dd a c ≤ dd a b + dd b c) {t s : ℕ}
+    (hts : t ≤ s) (hs : s < K) : dd t s ≤ ∑ r ∈ Finset.Ico t s, dd r (r + 1) := by
+  induction s, hts using Nat.le_induction with
+  | base => simpa using h0 t hs
+  | succ s hts' ih =>
+    rw [Finset.sum_Ico_succ_top hts']
+    have h1 := ih (by omega)
+    have h2 := htri t s (s + 1) (by omega) (by omega) hs
+    linarith
+
+/-- `d (x ∨ y, y) ≤ Γ↑ x - Γ↑ (x ∧ y)` for site quasi-metrics. -/
+theorem siteDist_sup_right_le (ds : ι → ℕ → ℕ → ℝ) (h0 : ∀ i s, s < k i → ds i s s ≤ 0)
+    (htri : ∀ i a b c, a < k i → b < k i → c < k i → ds i a c ≤ ds i a b + ds i b c)
+    (x y : ∀ i, Fin (k i)) :
+    siteDist ds (x ⊔ y) y ≤ stepUp ds x - stepUp ds (x ⊓ y) := by
+  unfold siteDist stepUp
+  rw [← Finset.sum_sub_distrib]
+  refine Finset.sum_le_sum (fun i _ => ?_)
+  rcases le_total (x i) (y i) with h | h
+  · have e1 : (x ⊔ y) i = y i := by
+      rw [Pi.sup_apply]
+      exact sup_of_le_right h
+    have e2 : (x ⊓ y) i = x i := by
+      rw [Pi.inf_apply]
+      exact inf_of_le_left h
+    rw [e1, e2, sub_self]
+    exact h0 i _ (y i).isLt
+  · have e1 : (x ⊔ y) i = x i := by
+      rw [Pi.sup_apply]
+      exact sup_of_le_left h
+    have e2 : (x ⊓ y) i = y i := by
+      rw [Pi.inf_apply]
+      exact inf_of_le_right h
+    have hle : (y i : ℕ) ≤ (x i : ℕ) := h
+    rw [e1, e2, ← Finset.sum_Ico_eq_sub _ hle]
+    exact le_sum_steps_up (ds i) (h0 i) (htri i) hle (x i).isLt
+
+/-- `d (x ∧ y, x) ≤ Γ↓ (x ∨ y) - Γ↓ y` for site quasi-metrics. -/
+theorem siteDist_inf_left_le (ds : ι → ℕ → ℕ → ℝ) (h0 : ∀ i s, s < k i → ds i s s ≤ 0)
+    (htri : ∀ i a b c, a < k i → b < k i → c < k i → ds i a c ≤ ds i a b + ds i b c)
+    (x y : ∀ i, Fin (k i)) :
+    siteDist ds (x ⊓ y) x ≤ stepDn ds (x ⊔ y) - stepDn ds y := by
+  unfold siteDist stepDn
+  rw [← Finset.sum_sub_distrib]
+  refine Finset.sum_le_sum (fun i _ => ?_)
+  rcases le_total (x i) (y i) with h | h
+  · have e1 : (x ⊔ y) i = y i := by
+      rw [Pi.sup_apply]
+      exact sup_of_le_right h
+    have e2 : (x ⊓ y) i = x i := by
+      rw [Pi.inf_apply]
+      exact inf_of_le_left h
+    rw [e1, e2, sub_self]
+    exact h0 i _ (x i).isLt
+  · have e1 : (x ⊔ y) i = x i := by
+      rw [Pi.sup_apply]
+      exact sup_of_le_left h
+    have e2 : (x ⊓ y) i = y i := by
+      rw [Pi.inf_apply]
+      exact inf_of_le_right h
+    have hle : (y i : ℕ) ≤ (x i : ℕ) := h
+    rw [e1, e2, ← Finset.sum_Ico_eq_sub _ hle]
+    exact le_sum_steps_dn (ds i) (h0 i) (htri i) hle (x i).isLt
+
+variable [DecidableEq ι]
+
+/-- **Theorem A13** (sandwich on ordered alphabets, arbitrary site quasi-metrics):
+`E_{f+Γ↑} φ ≤ E_{f+g} φ ≤ E_{f-Γ↓} φ` for every monotone `φ`. -/
+theorem stepField_sandwich_mean [∀ i, NeZero (k i)] {β : ℝ} (hβ : 0 ≤ β)
+    {f g : (∀ i, Fin (k i)) → ℝ} {ds : ι → ℕ → ℕ → ℝ} (h0 : ∀ i s, s < k i → ds i s s ≤ 0)
+    (htri : ∀ i a b c, a < k i → b < k i → c < k i → ds i a c ≤ ds i a b + ds i b c)
+    (hf : Submodular f) (hg : Admissible (siteDist ds) g) {φ : (∀ i, Fin (k i)) → ℝ}
+    (hφ : Monotone φ) :
+    gibbsMean β (fun x => f x + stepUp ds x) φ ≤ gibbsMean β (fun x => f x + g x) φ ∧
+      gibbsMean β (fun x => f x + g x) φ ≤ gibbsMean β (fun x => f x - stepDn ds x) φ :=
+  sandwich_mean hβ hf hg (siteDist_sup_right_le ds h0 htri) (siteDist_inf_left_le ds h0 htri) hφ
+
+omit [DecidableEq ι] in
+/-- **Theorem A13, macrostates**: for a lower set `A` and a non-empty upper set `B`,
+`Z_{f-Γ↓}(A)/Z_{f-Γ↓}(B) ≤ Z_{f+g}(A)/Z_{f+g}(B) ≤ Z_{f+Γ↑}(A)/Z_{f+Γ↑}(B)`. -/
+theorem stepField_macrostate_ratio {β : ℝ} (hβ : 0 ≤ β)
+    {f g : (∀ i, Fin (k i)) → ℝ} {ds : ι → ℕ → ℕ → ℝ} (h0 : ∀ i s, s < k i → ds i s s ≤ 0)
+    (htri : ∀ i a b c, a < k i → b < k i → c < k i → ds i a c ≤ ds i a b + ds i b c)
+    (hf : Submodular f) (hg : Admissible (siteDist ds) g) (A B : Finset (∀ i, Fin (k i)))
+    (hA : IsLowerSet (A : Set (∀ i, Fin (k i)))) (hB : IsUpperSet (B : Set (∀ i, Fin (k i))))
+    (hBne : B.Nonempty) :
+    zOn β (fun x => f x - stepDn ds x) A / zOn β (fun x => f x - stepDn ds x) B ≤
+        zOn β (fun x => f x + g x) A / zOn β (fun x => f x + g x) B ∧
+      zOn β (fun x => f x + g x) A / zOn β (fun x => f x + g x) B ≤
+        zOn β (fun x => f x + stepUp ds x) A / zOn β (fun x => f x + stepUp ds x) B :=
+  macrostate_ratio hβ hf hg (siteDist_sup_right_le ds h0 htri)
+    (siteDist_inf_left_le ds h0 htri) A B hA hB hBne
+
+end StepFields
+
 /-! ### Non-vacuity: a two-site instance with strict inequalities
 
 Two sites, known part `f x = -[x₀ ∧ x₁]` (submodular, not additive), `c↑ = c↓ = 1`, residual
@@ -1245,3 +1384,9 @@ end
 #print axioms ScienceL2.field_modular
 #print axioms ScienceL2.cube_occupation_cross
 #print axioms ScienceL2.cube_occupation_mono
+#print axioms ScienceL2.le_sum_steps_up
+#print axioms ScienceL2.le_sum_steps_dn
+#print axioms ScienceL2.siteDist_sup_right_le
+#print axioms ScienceL2.siteDist_inf_left_le
+#print axioms ScienceL2.stepField_sandwich_mean
+#print axioms ScienceL2.stepField_macrostate_ratio

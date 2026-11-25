@@ -272,3 +272,20 @@ they have been corrected to approximate real times.  From here on times are read
   lattice_Sc12_flip.json for n = 3, 5, 8, 9 (e.g. n=8: 35 50 56 58 58 56 50 35).  Larger n queued.
 * Two-solver test (own formulation, unreduced instance; HiGHS via scipy + CP-SAT via private OR-Tools) started on a sample
   of the 22 branch-and-bound cells.
+
+### 21:11-21:32 — the two-solver sentence, tested (three cells where optimality rests on branch and bound)
+* OWN formulation, UNREDUCED instance (own_lattice_opt.py; out_own_lattice_opt_batch1.txt), 120 s per solver, 1 core:
+    n=14 L=1 eps=1 (published 25, LP-certified 24):  HiGHS optimal 25 (12.8 s)   | CP-SAT 1 worker: cover 27, bound 6
+    n=15 L=1 eps=0 (33, 32):                         HiGHS optimal 33 (6.4 s)    | CP-SAT: cover 38, bound 6
+    n=16 L=1 eps=0 (38, 36):                         HiGHS optimal 38 (44.8 s)   | CP-SAT: cover 50, bound 7
+* RE-RUN of THEIR functions on THEIR reduced instances (rerun_eng_two_solvers.py; out_rerun_eng_two_solvers.txt), 240 s, CP-SAT with 1 worker:
+    n=14: reduced 265x175; min_cover_highs proves 25 in 4.8 s; min_cover_cpsat(workers=1): size 27, not proved, bound 7
+    n=15: 450x298; HiGHS proves 33 in 3.8 s; CP-SAT: 39, bound 8
+    n=16: 573x364; HiGHS proves 38 in 20.9 s; CP-SAT: 43, bound 7
+  (wall 12.5 min for 5 min of CPU: the machine is oversubscribed; my process gets ~40 % of a core.)
+* So: the published optima are confirmed by HiGHS in three independent settings (their stored run, my formulation on the
+  unreduced matrix, their function re-run here).  "CP-SAT proves them independently" could NOT be confirmed with one worker:
+  in 240 s it neither finds the optimum nor gets a bound above 8.  Their runs used 8 workers on 4 cores and (job M-004) no time
+  limit, with a code version that is not in the repository; the stored rows record for each solver only the size it found.
+* Idea for an independent, tolerance-free proof of such a cell: a small own branch and bound whose every leaf carries the
+  exact-integer LP-dual certificate (queued, low priority).

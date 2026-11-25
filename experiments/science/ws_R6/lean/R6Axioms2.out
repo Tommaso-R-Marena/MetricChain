@@ -1,0 +1,20 @@
+@cube_nonadaptive_bound : ∀ {Ω : Type u_1} [inst : Fintype Ω] (n : ℕ) (alg : Ω → QueryAlgorithm (Fin n → Bool))
+  (P : Ω → ℝ),
+  (∀ (ω : Ω), 0 ≤ P ω) →
+    ∑ ω, P ω = 1 →
+      ∀ {β c ε δ R : ℝ},
+        0 ≤ c →
+          ∀ (Q : Ω → Finset (Fin n → Bool)),
+            (∀ (ω : Ω) (g : (Fin n → Bool) → ℝ), (alg ω).queries g = Q ω) →
+              (∀ (s : Fin n → Bool),
+                  ε <
+                    Real.log (∑ x, Real.exp (-β * (0 + hamEnv (fun x => c) x s))) -
+                      Real.log (∑ x, Real.exp (-β * (0 + max (hamEnv (fun x => c) x s) R)))) →
+                ∀ {B : ℝ},
+                  (∀ (a : Fin n → Bool), ↑{s | hamEnv (fun x => c) a s < R}.card ≤ B) →
+                    (∀ (g : (Fin n → Bool) → ℝ),
+                        Admissible (hamEnv fun x => c) g →
+                          1 - δ ≤
+                            ∑ ω with |(alg ω).output g - Real.log (∑ x, Real.exp (-β * (0 + g x)))| ≤ ε / 2, P ω) →
+                      (1 - 2 * δ) * 2 ^ n ≤ (∑ ω, P ω * ↑(Q ω).card) * B
+'MetricChain.cube_nonadaptive_bound' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,7 +1,8 @@
 # Research synthesis and handoff — science division
 
 *Scientific Discovery, Translation & Independent Validation Division of MetricChain.
-Branch `research/scientific-translation`.  Written 2026-11-25 at checkpoint 20, for an
+Branch `research/scientific-translation`.  Written 2026-11-25 at checkpoint 20, last
+revised at checkpoint 28, for an
 investigator who has none of the conversation that produced the branch.  Read this file
 first; it points to everything else.  The digest for the other two divisions is
 `docs/collaboration/SCIENCE_TO_ALL.md`; the state table is `docs/collaboration/status/science.md`.*
@@ -11,18 +12,28 @@ first; it points to everything else.  The digest for the other two divisions is
 ## 0. Resume here
 
 1. `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering` and read the two
-   heads.  Last read: theory `40c5bd7` (their twelfth checkpoint, 20:08 UTC on 2026-11-25:
-   THY-MSG-0012 and THY-RES-0005 read, answered by SCI-RES-0004; their R10 report and the
-   changed parts of the theory report *not yet read*), engineering `a2f6dc7`.  If either moved, read its digest
-   (`docs/collaboration/THEORY_TO_ENGINEERING.md`, `ENGINEERING_TO_THEORY.md` on their
-   branches) and any `THY-*` / `ENG-*` file that mentions `SCI-`; record the reading in
-   `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`; answer under `responses/science/`.
-   The theory division has adopted SCI-REV-0004 in full and **accepted Q1 and Q2 of
-   SCI-REQ-0001** (answers promised for their next checkpoint); it had read us only up to
-   the snapshot `d7f6d47`, so its replies to everything from SCI-REV-0002 onwards are still
-   to come.  The engineering division had not yet mentioned this branch.
-2. Three second-wave workstreams were running when this was written (§5).  If their
-   report files exist and are final, read, spot-check and publish them as described there.
+   heads.  **Last read (checkpoint 28, 21:31 UTC on 2026-11-25): theory `dcdfea6`** (their
+   thirteenth checkpoint: THY-RES-0006 with theory report §§11.28, 11.29 — answers to our
+   SCI-REQ-0001 Q1 and Q2 — read in full, §11.28 reviewed and replicated and answered by
+   SCI-RES-0005; `SCIENCE_UPSTREAM_SYNC.md` says what was not read), **engineering
+   `a2f6dc7`**.  If either moved, read its digest (`docs/collaboration/THEORY_TO_ENGINEERING.md`,
+   `ENGINEERING_TO_THEORY.md` on their branches) and any `THY-*` / `ENG-*` file that
+   mentions `SCI-`; record the reading in `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`;
+   answer under `responses/science/`.
+   State of the exchange: the theory division had seen our branch at `ae32bc9` (checkpoint
+   25); it says our reviews SCI-REV-0001, -0002, -0003, -0005, -0006 "will be applied at
+   the next checkpoint" and that our other messages were "seen in the digest, not yet
+   read" — so expect replies to SCI-MSG-0005 … -0013, SCI-RES-0002 … -0005.  **One thing
+   to watch:** the first paragraph of its §11.28 quotes a sentence we withdrew
+   (SCI-MSG-0008 §1(b)); we asked for a rewording in SCI-RES-0005 §4.  The engineering
+   division had not yet mentioned this branch.
+2. Five second-wave workstreams were running when this was written (§5): R6, P2, L2, F,
+   R7.  Their report files exist as drafts under `docs/science/workstreams/`
+   (`R6_REPORT.md`, `P2_REPORT.md`, `L2_REPORT.md`, `SF_REPORT.md`, `R7_REPORT.md`); **a draft is
+   not a statement of the division**.  When a report is final: read it, re-run one
+   script or re-derive one key step, and publish as described in §5.  F was asked to
+   position its report against theory report §11.29; R7's working copy of engineering
+   files (`experiments/science/ws_R7/eng_copy/`) is deliberately git-ignored.
 3. Then take the top item of §7.
 
 Rules that bind the division (from the research owner's charter; none may be relaxed
@@ -40,11 +51,11 @@ published statements are linked messages, never silent rewrites.
 
 | artifact | what it is |
 |---|---|
-| `docs/collaboration/SCIENCE_TO_ALL.md` | digest (22 items) and index of every message sent |
-| `docs/collaboration/messages/science/` | `SCI-MSG-0001…0010` (findings, corrections, prioritisation), `SCI-REV-0001…0006` (reviews) |
+| `docs/collaboration/SCIENCE_TO_ALL.md` | digest (27 items) and index of every message sent |
+| `docs/collaboration/messages/science/` | `SCI-MSG-0001…0013` (findings, corrections, prioritisation), `SCI-REV-0001…0006` (reviews) |
 | `docs/collaboration/requests/science/SCI-REQ-0001.md` | four theoretical questions to the theory division |
-| `docs/collaboration/responses/science/SCI-RES-0001…0003` | answers to the theory division's THY-REQ-0011 (answered in full) |
-| `docs/collaboration/status/science.md` | investigations, findings S1–S30 with status, outstanding requests |
+| `docs/collaboration/responses/science/SCI-RES-0001…0005` | answers to the theory division: THY-REQ-0011 (in full), THY-RES-0005, THY-RES-0006 §5 (§11.29 still owed, with workstream F) |
+| `docs/collaboration/status/science.md` | investigations, findings S1–S36 with status, outstanding requests |
 | `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md` | what was read upstream, at which commit, how deeply; dependencies; sync log |
 | `docs/science/INFERENCE_LIMITS.md` (v3) and `INFERENCE_LIMITS_ADDENDA.md` (A1–A16) | our own mathematics: what evaluations, averaged data and thermodynamic data determine |
 | `docs/science/PHYSICAL_APPLICABILITY.md` | what the mathematics means for molecules; the measured class constants |

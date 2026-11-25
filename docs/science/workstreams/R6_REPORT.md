@@ -333,8 +333,8 @@ applications of the two-rung level, `t_{m+1} ≤ max{φa + (1−φ)(h+η), (1−
 max{h + 2η, (1−φ)t_m + φη}`, so `t_m ≤ η + max{h+η, (1−φ)^m a}`.  **[P; re-derived; the last implication
 is `two_rung_bound` [V].]**
 
-**Which part is Lean, and what exactly it states** (`lean/R6Axioms.lean`: statements printed, compiled
-with `lake env lean`, exit 0; all depend on `[propext, Classical.choice, Quot.sound]` only):
+**Which part is Lean, and what exactly it states** (`lean/R6Axioms.lean`, `lean/R6Axioms2.lean`: statements
+printed, compiled with `lake env lean`, exit 0; all depend on `[propext, Classical.choice, Quot.sound]` only):
 
 | declaration | what it states | what it is in the paper |
 |---|---|---|
@@ -345,6 +345,7 @@ with `lake env lean`, exit 0; all depend on `[propext, Classical.choice, Quot.so
 | `two_rung_bound` | the iteration of Theorem 11.58 for an abstract sequence `t` | last line of the proof |
 | `certified_lower_sum_le_mean`, `populated_part_le`, `close_points_bound'`, `width_le` | four algebraic inequalities | the algebra of Steps 3, 4, 7 of K1 |
 | `cube_exact_dip_randomized` (`QueryRefinements.lean`) | for a finite mixture of consistent deterministic query algorithms that is `(ε/2, δ)`-correct on the class: if the dip of depth `r` moves `ln Z` by more than `ε` and every open ball has `≤ B` points, `(1−2δ)2ⁿ ≤ E[#distinct queries at 0]·B` | Theorem 11.25(a) |
+| `cube_nonadaptive_bound` (`NonAdaptive.lean`; `lean/R6Axioms2.lean`) | the same for mixtures whose query set does not depend on the function: if flattening every cone at level `R` lowers `ln Z` by more than `ε` and every open ball `{c·dist < R}` has `≤ B` points, `(1−2δ)2ⁿ ≤ E|Q|·B` | Theorem 11.45(b); the lower bound of Corollary R6.2 (the two finite sums are evaluated numerically there) |
 
 **Is the paper step from the abstract recursion to the algorithm's exponent filled?**  Yes, on paper:
 Corollary K1.b + Proposition E (extensive levels) and Theorem K2 (bounded level).  **Not** in Lean:

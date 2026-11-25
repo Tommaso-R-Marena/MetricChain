@@ -1,0 +1,9 @@
+n=10 conformations=49833 valid single-flip ordered pairs=924052
+c_sf: 40 68 74 81 98 98 81 74 68 40
+real	0m1.042s
+n=11 conformations=145379 valid single-flip ordered pairs=2949858
+c_sf: 48 73 81 90 104 104 104 90 81 73 48
+real	0m2.843s
+n=12 conformations=422825 valid single-flip ordered pairs=9293528
+c_sf: 52 85 92 108 114 114 114 114 108 92 85 52
+real	0m10.390s

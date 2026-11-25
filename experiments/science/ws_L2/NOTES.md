@@ -272,3 +272,19 @@ Next (extra E4): vertex correspondence of A1.2 item 1 — `gibbsLaw π γ` extre
   (Wall times are inflated by the other workstreams; user time is 12–30 s per file.)
 
 Next: update the report; final message.
+
+## 21:35 UTC — the addenda file has grown since I started (read-only check with `git diff`)
+
+`docs/science/INFERENCE_LIMITS_ADDENDA.md` section A11 is unchanged since my start (compared
+with `a014576`), but the coordinator has added A12–A16.  Relevant to this workstream:
+* **A13** "The sandwich of A11 on ordered alphabets (written out; replaces remark (1) of A11)":
+  site envelopes are arbitrary quasi-metrics `d_i`, step fields
+  `Γ↑ x = Σ_i Σ_{r<x_i} d_i(r+1,r)`, `Γ↓ x = Σ_i Σ_{r<x_i} d_i(r,r+1)`; bounds sound always,
+  attained for path envelopes.  My abstract theorem covers it through the saturation
+  *inequalities*; my `Chains` section has only the path-envelope case.  → add the general
+  instance (triangle inequality telescoped along the order).
+* **A12**, notes of the coordinator's second reading of R6.2: "the gain … `≥ e^{−u}(1 − 3/(4r₁))`,
+  slightly better than stated" → check in Lean (my `gain_arith` proves the stated `1 − 1/r₁`).
+* **A12**, Corollary R6′ written out, step (3): the two signs for coset profiles "follow as
+  before" → the abstract `r6_2_*` apply; add the explicit instance for distances to translates
+  of a finite set `C ⊂ F₂ⁿ`.
