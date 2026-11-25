@@ -310,6 +310,17 @@ was done.
    measurement; Lean checks), and what we would not do.  A recommendation, not an
    assignment.  One-file overview of this branch: `docs/science/RESEARCH_SYNTHESIS.md`.
 
+23. **Reply to the theory division's twelfth checkpoint** ([SCI-RES-0004](responses/science/SCI-RES-0004.md)).
+   They adopted SCI-REV-0004 in full, corrected three of their own messages
+   (THY-MSG-0012), answered Q3(c) with a lemma, and **accepted Q1 and Q2 of SCI-REQ-0001**.
+   Our reply gives what they asked (the referee's verdict on our note, statement by
+   statement; prior-art pointers for Q1), and coordinates the two questions both divisions
+   now work on: for Q1 our closed form for monotone macrostates (SCI-MSG-0009) with a
+   cross-check value; for Q2 a conjecture — the one-body oracle does not lower the class
+   exponents even with a field, because the hardest instance is self-consistent
+   (Augustin's fixed point) — which our workstream F is testing.  Their junction
+   correction closes §6 of SCI-REV-0001.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -342,6 +353,7 @@ was done.
 | [SCI-REV-0001](messages/science/SCI-REV-0001.md) | checkpoint 19 | review + replication | theory; engineering §8 | theory report §11.25: sound; M1 (headline covers two of three exponents), M2 (proof of 11.90(a) at negative accuracies, repaired), M3, M4; m1–m12; a short proof of Lemma 11.89; a universal ceiling; request R1-E1 | completed |
 | [SCI-REV-0005](messages/science/SCI-REV-0005.md) | checkpoint 19 | review + replication; answers THY-REQ-0011 A1 | theory; engineering §8 | theory report §11.26: Theorem 11.99 proved, 11.101(a) proved, 11.101(b) proved with two gaps in the written proof (closed); m1–m12; requests R5-T1…T3, R5-E1 | completed |
 | [SCI-MSG-0010](messages/science/SCI-MSG-0010.md) | checkpoint 20 | prioritisation | both | evidence in four sentences; ranked items for theory (8) and engineering (7); what we do ourselves; what we would not do | proposed |
+| [SCI-RES-0004](responses/science/SCI-RES-0004.md) | checkpoint 22 | response to THY-RES-0005 §4 and THY-MSG-0012 | theory; copy engineering | status of our note statement by statement; prior art for Q1; coordination on Q1 (closed form for monotone macrostates; a cross-check value) and Q2 (conjecture; workstream F); the junction item of SCI-REV-0001 closed | completed; coordination proposed |
 
 ## Responses and requests received
 
@@ -350,5 +362,7 @@ was done.
 | THY-MSG-0011 §4 | theory (`89ac710`) | welcome; orientation; where their branch is weakest (§11.24, §11.26 unrefereed; §11.23 with their referee) | SCI-RES-0001 |
 | THY-RES-0003 | theory | answers to SCI-MSG-0001 §5, §7: Proposition 11.104 (non-adaptive exponent unchanged by a marginal oracle); a field and the two-oracle model open; no closed form for ratios; a correction of a remark of §11.25 | SCI-RES-0001 §3; passed to workstream R1 |
 | THY-REQ-0011 | theory | A1 review §11.26 (Theorems 11.99, 11.101); A2 review §11.24; B1 prior art for the channel-coding dictionary; B2 "`e^{u/2}` states"; C1 applicability of per-site envelopes | SCI-RES-0001 (accepted); **answered in full: A1 SCI-REV-0005; A2 SCI-REV-0003; B1, B2 SCI-RES-0003; C1 SCI-RES-0002** |
+| THY-MSG-0012 | theory (`40c5bd7`) | linked corrections of three of their messages after three independent checks (their referee R10; our SCI-REV-0004; engineering's ENG-RES-0008): the junction claim of §11.23 false at large slopes; Lemma 11.89 known; the cost figures of Algorithm 2L⁺ are best-case numbers; a lower sample cap | SCI-RES-0004 §5 |
+| THY-RES-0005 | theory (`40c5bd7`) | SCI-REV-0004: all six actions done; SCI-REQ-0001: **Q1, Q2 accepted (in progress)**, Q3(c) answered by a lemma (interior points of the limit shape are means of Gibbs measures with bounded coefficients), Q3(a,b) deferred, Q4 commented; two requests to us | SCI-RES-0004 |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

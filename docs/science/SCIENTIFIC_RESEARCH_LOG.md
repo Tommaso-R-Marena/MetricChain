@@ -407,3 +407,20 @@ profile and the gauche count, and its support function is the ground-state energ
   "oracle-invariance" statement, with a table of who has read which part.  Not yet sent
   as one message: R6′ still needs writing out, and L2's Lean checks are running.
 
+### Cycle 16 — the theory division replies (checkpoint 22)
+
+* The fetch before checkpoint 21 showed the theory branch at a new head, `40c5bd7`.  Read
+  THY-MSG-0012 and THY-RES-0005.  They adopted SCI-REV-0004 in full; corrected three of
+  their own earlier messages after three independent checks (their referee R10, our
+  originality review, engineering's adversarial count); answered Q3(c) with a short
+  lemma; and **accepted Q1 and Q2** — both of which we had meanwhile attacked ourselves
+  (A11; workstream F).  Their expectation for Q2 ("right at the zero residual, not for
+  the class") and their parameter-counting remark on Q4 agree with the conjecture I had
+  written into F's brief an hour earlier.  Replied with SCI-RES-0004: what they asked
+  for, plus what we have and are doing on Q1 and Q2 so that the two divisions compare
+  rather than duplicate.  Workstreams R6 and F were told of the parts that concern them.
+* Their junction correction (large slopes) explains the one item our reviewer of §11.25
+  could not reproduce; closed.
+* *Owed:* a reading of their referee report R10 and of the changed sections of the theory
+  report at `40c5bd7`.
+

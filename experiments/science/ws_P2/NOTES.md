@@ -90,3 +90,36 @@ subclass of P's `Peptide`; P's `FastFF` is used unchanged as the validated evalu
 of every pair-additive energy component by anchored decomposition, GB by pre-tabulated
 descreening integrals — a second implementation validated against FastFF and OpenMM);
 `anlib.py` (constants of order 1, 2, 3 on masked non-uniform grids, fits, covers).
+
+## Step 3 — side-chain builder written and validated (control 2) (20:35)
+
+* `scbuild.py`: `SCPeptide(seq)` subclasses P's `Peptide` (imported from `../ws_P`, with
+  `sys.dont_write_bytecode`): topology from the ff14SB residue templates of OpenMM (atom order and
+  bonds read from the XML; only the side-chain internal coordinates are typed by hand, table
+  `SIDECHAIN`); Z-matrix = P's backbone + side chains (chi-driven atoms, siblings at offsets
+  solved from three equilibrium angles, rotors staggered, planar groups at 0/180).
+  Residues: ALA VAL LEU SER LYS PHE GLU.
+* **Found and fixed before any measurement:** OpenMM's ff14SB gives the hydroxyl hydrogen (type
+  HO, epsilon = 0) a placeholder sigma = 1 nm, i.e. "R_min/2" = 5.61 A.  With that value P's clash
+  score marks every serine conformation as a clash (score 0.3-0.5).  Amber's own parameter file has
+  R = 0 for HO [from memory].  Decision: atoms with epsilon = 0 get radius 0 in the clash score
+  (a pair involving HO is then judged by the other atom's radius alone; HO-HO pairs never clash).
+  This is the only deviation from P's clash criterion and it cannot affect P's alanine numbers
+  (no epsilon = 0 atom there).
+* `test_scbuild.py` (log `logs/test_scbuild.log`), systems VVV LLL SSS FFF KKK EEE LKSE LKSELKSE,
+  120 states each (random backbone + random chi; ideal backbones + grid chi; ideal + random chi):
+  - regression: poly-Ala coordinates identical to P's builder (difference 0.0e+00 A, n = 1, 3);
+  - bond lengths: max deviation 7e-15 A over ALL force-field bonds, including the ring-closure
+    bond of Phe (the ring closes exactly at the ff14SB equilibrium values);
+  - bond angles: constant over conformations to 4e-13 deg; 40-136 of the force-field angles are
+    off equilibrium by up to 2.6 deg (5.1 deg in Phe), constant -> angle energy constant
+    (spread <= 5e-14 kcal/mol), bond energy < 1e-25;
+  - phi, psi, chi recovered to 4e-15 rad; chiral volume at CA +2.508 A^3 (L) everywhere;
+  - **FastFF vs OpenMM Reference platform (double precision), clash-free conformations:**
+    worst deviation over all systems: tors 2.8e-14, lj 3.4e-12, coul 5.9e-12, GBn2 1.2e-11,
+    ACE-SA 1.8e-12, OBC2 1.1e-11, ff99SB/ff03/ff15ipq torsions <= 2.1e-14, nonbonded <= 5.0e-12
+    kcal/mol; bond+angle energy of the other force fields constant to <= 1.4e-7 (subtraction
+    noise; first run compared against a clashing reference conformation -> fixed).
+  - net charges: KKK +3, EEE -3, LKSE 0 (exact to 1e-4).
+* Timing: OpenMM Reference 6-28 ms/conf; FastFF 0.35-4.0 ms/conf (146 atoms: 4 ms) -> too slow
+  for 5e5-conformation grids of 100-200 atoms; hence the table-based evaluator below.

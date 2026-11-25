@@ -55,3 +55,27 @@ Good event: (V1) all inner brackets valid (incl. width); (V2) for all j and M in
  Things to compare against their text: the constant in the count; delta' and the union bound over inner calls
  (needs #calls <= something like 2^{n+5} n^3 / L !); the abort rule (must be checked BEFORE an inner call);
  b <= G only for n >= beta/((1-phi)(g-beta)); r* = -1 when e^{G-b}/4 < e^u - 1 (bound void for small n).
+
+### Step 3 (read the proof of Thm 11.52, lines 3654-3724, and compared with my Step-2 accounting)
+Term by term: their M-dagger = 2K/pi* (mine), their "every M <= 8Je^2 M-dagger" = my Mbar = 16e^2KJ/pi* (identical);
+their count 2M_j^neg p(s_j e^-x) <= 16KJe^2 e^x = mine; with V3: 32KJe^2 e^x + 4K (mine: 32e^2KJe^x, the +4K covers M=K);
+rounding x_{l-1} into b+N costs a factor e (same as mine); their cost sum_j sum_l min(8Je^2 M-dagger, 32KJe^3 e^{x_{l-1}}+4K)(l+1)C_l
+is an over-count of mine (they charge (l+1)C_l per point and sum over levels; I charge each rung once per point).  AGREE.
+Small things found while comparing (all minor, to be listed in the report):
+ m-a: the case s_j e^{-x} < s_0 (no level below) is not treated in the count of 11.52 (it is in K_REPORT Step 7); trivial fix.
+ m-b: the abort test "if the number of queries exceeds the bound" must be made before an inner call (R8 m1 says so for 11.56;
+      the text of 11.52 was not changed).
+ m-c: failure budget only "for n >= n_0(eta_0)" -> the assembly "first d tuples whose accuracy is at most x" must also require
+      d >= n_0(tuple), or the tuple's procedure is not a bracket procedure with failure probability delta' at small d.
+ m-d: accuracy bound gn + ln(4eJ+3) needs b <= G, true only for n >= beta/((1-phi)(g-beta)).
+ m-e: l = 0 term / reference query missing in the displayed cost sum (x_{-1} undefined).
+
+### Step 4 (derived the 2L+ analysis from the statement of Thm 11.56 before reading K_REPORT 2.4; then read K_REPORT 1-4)
+Derived on my own from the four changes: width (2p_u)^n + e^b(e^lam(1+eta)/(1-eta) + eta' + theta); closing radius conditions
+[N] Gamma~ <= theta(1-eta)nu0 and [P] min(Gamma~/c_eta, Gamma'') <= theta; Mbar = 2(1+eta)e^lam nu0 K/((1-eta)pi-dagger);
+count M_j^neg p(s_j e^-x) <= c_eta^-1 e^lam nu e^x.  All four agree with K_REPORT Steps 4-7.
+Read K_REPORT lines 1-650 (sections 0-5 start).  Checked line by line: good event and K (V2,V3 Chernoff constants OK;
+number of events (J+1)(m_max+1)(L+2) OK; no circularity J->nu0->r-dagger->pi-dagger->m_max->K->nu,Mbar->delta');
+Steps 1-9; Lemma K.4 (a)-(d); Prop K0; Cor K1.b; Prop E (a),(b); Thm K2 (accuracy arithmetic 5.25 c0 <= x/2 - eps OK); Thm K3 iteration.
+No error found so far.  D45 read (five accountings: single threshold; v1; v2; v4; CLOSE).  H_REPORT read (2.6 = original 2L, 2.8 = the wrong ones).
+NEXT: implement from the spec (K_REPORT 2.2 + theory report 3616-3652) BEFORE reading any implementation; then R7/R8, Lean, ENG-RES-0008.

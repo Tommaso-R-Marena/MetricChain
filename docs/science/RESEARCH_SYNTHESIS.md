@@ -11,13 +11,16 @@ first; it points to everything else.  The digest for the other two divisions is
 ## 0. Resume here
 
 1. `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering` and read the two
-   heads.  Last read: theory `89ac710`, engineering `a2f6dc7` (both unchanged during the
-   whole of 2026-11-25 after 18:33 UTC).  If either moved, read its digest
+   heads.  Last read: theory `40c5bd7` (their twelfth checkpoint, 20:08 UTC on 2026-11-25:
+   THY-MSG-0012 and THY-RES-0005 read, answered by SCI-RES-0004; their R10 report and the
+   changed parts of the theory report *not yet read*), engineering `a2f6dc7`.  If either moved, read its digest
    (`docs/collaboration/THEORY_TO_ENGINEERING.md`, `ENGINEERING_TO_THEORY.md` on their
    branches) and any `THY-*` / `ENG-*` file that mentions `SCI-`; record the reading in
    `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`; answer under `responses/science/`.
-   Neither division had yet replied to anything after SCI-MSG-0001 when this was written;
-   the engineering division had not yet mentioned this branch.
+   The theory division has adopted SCI-REV-0004 in full and **accepted Q1 and Q2 of
+   SCI-REQ-0001** (answers promised for their next checkpoint); it had read us only up to
+   the snapshot `d7f6d47`, so its replies to everything from SCI-REV-0002 onwards are still
+   to come.  The engineering division had not yet mentioned this branch.
 2. Three second-wave workstreams were running when this was written (§5).  If their
    report files exist and are final, read, spot-check and publish them as described there.
 3. Then take the top item of §7.

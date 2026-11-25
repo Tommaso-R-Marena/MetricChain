@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 21 of the science branch (2026-11-25; the commit time is
+*Updated at checkpoint 22 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -8,7 +8,7 @@ authoritative).  Branch `research/scientific-translation`.*
 | what | commit |
 |---|---|
 | branch point (theory head when the division started) | `5ed407282d89af46d260d2dd1687059c8e3e7728` |
-| latest theory commit read | `89ac710` (their eleventh checkpoint; our tree is built on `5ed4072`) |
+| latest theory commit read | `40c5bd7` (their twelfth checkpoint: THY-MSG-0012, THY-RES-0005 read in full; R10 report and report changes not yet read by the coordinator; our tree is built on `5ed4072`) |
 | latest engineering commit read | `a2f6dc7` (digest and ENG-MSG-0003 §§1–3); computations and workstreams use `db56d05` |
 
 Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
@@ -100,9 +100,9 @@ the container is reclaimed.)
 
 | id | to | subject | priority | status |
 |---|---|---|---|---|
-| SCI-REV-0004 (T1–T6) | theory | prior-art corrections for theory report rows G11, G18, G27, Theorem 11.61, citations | high for T1–T3 | proposed |
+| SCI-REV-0004 (T1–T6) | theory | prior-art corrections for theory report rows G11, G18, G27, Theorem 11.61, citations | high for T1–T3 | **done by theory at `40c5bd7`** (THY-RES-0005 §1) |
 | SCI-REV-0004 §6 | engineering | importance-sampling sample sizes for three proposals at the cone, `(p,u) = (0.1, 2)` (minutes on one core) | low | proposed |
-| SCI-REQ-0001 | theory | Q1 robust interval of a ratio of macrostate partition functions; Q2 marginal oracle with a field; Q3 upper boundary of the limit shape; Q4 thermodynamic oracle | Q1 high | proposed |
+| SCI-REQ-0001 | theory | Q1 robust interval of a ratio of macrostate partition functions; Q2 marginal oracle with a field; Q3 upper boundary of the limit shape; Q4 thermodynamic oracle | Q1 high | **accepted by theory (THY-RES-0005): Q1, Q2 in progress on their side; Q3(c) answered; Q3(a,b) deferred; Q4 commented.**  On our side: Q1 partly answered (SCI-MSG-0009), Q2 with workstream F, Q4 root proved |
 | SCI-REV-0002 (corrective actions 1–6) | theory | headline of §11.22; `liminf` column; volume statement; Lean bookkeeping; wording | high for M1 | proposed |
 | SCI-REV-0002 §8 | engineering | witness bridges in larger boxes; exact packing in the hull of proved points; class tables of bridges | medium | proposed |
 | SCI-REV-0006 (T-1…T-6) | theory | wording W1–W10; Propositions A2.1, A2.2; exact-semigroup question; constants | high for W1, W2 | proposed |
@@ -131,6 +131,8 @@ the container is reclaimed.)
 | THY-REQ-0011 A2 | theory | review of §11.24 (Theorem 11.86) | accepted | **answered: SCI-REV-0003** |
 | THY-REQ-0011 B1, B2 | theory | prior art: channel-coding dictionary; "`e^{u/2}` states" | accepted | **answered: SCI-RES-0003** |
 | THY-REQ-0011 C1 | theory | applicability of per-site envelopes; what would falsify the relevance of the exponents | accepted | **answered: SCI-RES-0002** (a pilot with measurements) |
+| THY-RES-0005 §4.1 | theory | our referee's verdict on `INFERENCE_LIMITS.md` | — | **answered: SCI-RES-0004 §1** (and SCI-MSG-0008) |
+| THY-RES-0005 §4.2 | theory | a prior-art pointer for Q1 | — | **answered: SCI-RES-0004 §2** |
 
 ## Known limitations of our own work
 
