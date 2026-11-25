@@ -1,0 +1,14 @@
+$ python3 t10_additive_large.py 0.1 2.0 0.3 1000,4000,16000 both
+p=0.1 u=2.0 eps1=0.063688: R_0=0.019497; hardest additive instance gamma*=-0.56338: R=0.023270, centre type m*=0.5373
+ instance gamma*
+  n=1000: exponent 0.025517 (k/n=0.5370, c/n=0.6847)  excess over the formula: 0.002247 = 0.325 ln(n)/n   [0.6s]
+  n=4000: exponent 0.023996 (k/n=0.5373, c/n=0.6849)  excess over the formula: 0.000726 = 0.350 ln(n)/n   [3.3s]
+  n=16000: exponent 0.023494 (k/n=0.5373, c/n=0.6849)  excess over the formula: 0.000223 = 0.369 ln(n)/n   [27.6s]
+ instance gamma=0 (slack ball = Hamming ball)
+  n=1000: exponent 0.021964 (k/n=0.3990, c/n=0.7189)  excess over the formula: 0.002467 = 0.357 ln(n)/n   [0.6s]
+  n=4000: exponent 0.020257 (k/n=0.3895, c/n=0.7055)  excess over the formula: 0.000760 = 0.367 ln(n)/n   [3.0s]
+  n=16000: exponent 0.019743 (k/n=0.3994, c/n=0.7195)  excess over the formula: 0.000246 = 0.406 ln(n)/n   [23.6s]
+
+real	1m0.941s
+user	1m1.259s
+sys	0m0.087s

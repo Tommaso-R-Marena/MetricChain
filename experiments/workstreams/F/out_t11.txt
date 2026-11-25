@@ -1,0 +1,47 @@
+$ python3 t11_pair.py
+(i) closed form vs game solver, and F(gamma,1) = 0: max abs error 3.1248197389019405e-14
+p=0.5 u=1.0: E=0.120083 (grid of thresholds 0.120114)  h=0.029139  a=0.110919 (max_m I_cone = 0.110944)  e_c=-0.110919
+   (ii) max |R^max - R_max()| = 2.00e-14;  (iii) max |pair - maxmin| = 1.10e-12;  (iv) slope range [-1.000000, 0.000000], min second difference 0.00e+00, S nondecreasing: True, theta_na(h) - h = 0.00e+00
+       x=0.00058 (e=-0.09572): pair 0.0963006 maxmin 0.0963006
+       x=0.00583 (e=-0.06223): pair 0.0680568 maxmin 0.0680568
+       x=0.01748 (e=-0.02561): pair 0.0430946 maxmin 0.0430946
+       x=0.02914 (e=-0.00000): pair 0.0291391 maxmin 0.0291391
+       x=0.05642 (e=+0.04514): pair 0.0112859 maxmin 0.0112859
+       x=0.10189 (e=+0.10118): pair 0.0007174 maxmin 0.0007174
+p=0.3 u=1.0: E=0.103104 (grid of thresholds 0.103131)  h=0.025034  a=0.095279 (max_m I_cone = 0.095301)  e_c=-0.095279
+   (ii) max |R^max - R_max()| = 3.19e-14;  (iii) max |pair - maxmin| = 8.85e-13;  (iv) slope range [-1.000000, 0.000000], min second difference 0.00e+00, S nondecreasing: True, theta_na(h) - h = 3.47e-18
+       x=0.00050 (e=-0.08223): pair 0.0827257 maxmin 0.0827257
+       x=0.00501 (e=-0.05346): pair 0.0584681 maxmin 0.0584681
+       x=0.01502 (e=-0.02200): pair 0.0370242 maxmin 0.0370242
+       x=0.02503 (e=-0.00000): pair 0.0250335 maxmin 0.0250335
+       x=0.04845 (e=+0.03876): pair 0.0096997 maxmin 0.0096997
+       x=0.08749 (e=+0.08687): pair 0.0006169 maxmin 0.0006169
+p=0.1 u=2.0: E=0.212235 (grid of thresholds 0.212294)  h=0.048130  a=0.163711 (max_m I_cone = 0.163738)  e_c=-0.163711
+   (ii) max |R^max - R_max()| = 1.02e-13;  (iii) max |pair - maxmin| = 1.80e-12;  (iv) slope range [-1.000000, 0.000000], min second difference 0.00e+00, S nondecreasing: True, theta_na(h) - h = 0.00e+00
+       x=0.00096 (e=-0.14288): pair 0.1438420 maxmin 0.1438420
+       x=0.00963 (e=-0.09500): pair 0.1046220 maxmin 0.1046220
+       x=0.02888 (e=-0.03993): pair 0.0688064 maxmin 0.0688064
+       x=0.04813 (e=-0.00000): pair 0.0481300 maxmin 0.0481300
+       x=0.09736 (e=+0.07855): pair 0.0188105 maxmin 0.0188105
+       x=0.17941 (e=+0.17820): pair 0.0012185 maxmin 0.0012185
+p=0.05 u=2.0: E=0.124733 (grid of thresholds 0.124768)  h=0.028405  a=0.096942 (max_m I_cone = 0.096958)  e_c=-0.096942
+   (ii) max |R^max - R_max()| = 1.94e-13;  (iii) max |pair - maxmin| = 1.73e-12;  (iv) slope range [-1.000000, 0.000000], min second difference 0.00e+00, S nondecreasing: True, theta_na(h) - h = 0.00e+00
+       x=0.00057 (e=-0.08457): pair 0.0851399 maxmin 0.0851399
+       x=0.00568 (e=-0.05619): pair 0.0618721 maxmin 0.0618721
+       x=0.01704 (e=-0.02361): pair 0.0406486 maxmin 0.0406486
+       x=0.02840 (e=-0.00000): pair 0.0284045 maxmin 0.0284045
+       x=0.05730 (e=+0.04618): pair 0.0111183 maxmin 0.0111183
+       x=0.10547 (e=+0.10475): pair 0.0007216 maxmin 0.0007216
+p=0.2 u=4.0: E=1.170788 (grid of thresholds 1.171218)  h=0.214245  a=0.553453 (max_m I_cone = 0.553492)  e_c=-0.553453
+   (ii) max |R^max - R_max()| = 3.82e-12;  (iii) max |pair - maxmin| = 9.89e-12;  (iv) slope range [-1.000000, 0.000000], min second difference 0.00e+00, S nondecreasing: True, theta_na(h) - h = 0.00e+00
+       x=0.00428 (e=-0.49777): pair 0.5020597 maxmin 0.5020597
+       x=0.04285 (e=-0.34964): pair 0.3924907 maxmin 0.3924907
+       x=0.12855 (e=-0.15418): pair 0.2827254 maxmin 0.2827254
+       x=0.21424 (e=-0.00000): pair 0.2142446 maxmin 0.2142446
+       x=0.50121 (e=+0.41674): pair 0.0844647 maxmin 0.0844647
+       x=0.97948 (e=+0.97384): pair 0.0056363 maxmin 0.0056363
+time 25.623450756072998
+
+real	0m26.020s
+user	0m25.927s
+sys	0m0.435s

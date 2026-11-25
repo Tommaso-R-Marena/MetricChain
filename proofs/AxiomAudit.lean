@@ -44,6 +44,7 @@ import proofs.Frontiers.LinearKernel
 import proofs.Frontiers.HintRecursion
 import proofs.Frontiers.CubeHintPair
 import proofs.Frontiers.BoundedAccuracy
+import proofs.Frontiers.FieldShift
 import proofs.AuditCommand
 
 /-!
@@ -399,6 +400,7 @@ import proofs.AuditCommand
 #print axioms MetricChain.BoundedAccuracy.stepLE_exact
 #print axioms MetricChain.BoundedAccuracy.exactRec_props
 #print axioms MetricChain.BoundedAccuracy.exactRec_reaches_hint
+#print axioms MetricChain.BoundedAccuracy.exactRec_reaches_hint_of_pair
 #print axioms MetricChain.BoundedAccuracy.exactRec_ge_hint
 #print axioms MetricChain.BoundedAccuracy.exactRec_tendsto_hint
 #print axioms MetricChain.BoundedAccuracy.bounded_iterates_lt
@@ -410,6 +412,12 @@ import proofs.AuditCommand
 #print axioms MetricChain.BoundedAccuracy.populated_part_le
 #print axioms MetricChain.BoundedAccuracy.close_points_bound'
 #print axioms MetricChain.BoundedAccuracy.width_le
+
+-- The shift identity with a known field (theory report §11.20)
+#print axioms MetricChain.FieldShift.klBin_tilt
+#print axioms MetricChain.FieldShift.cone_rate_eq
+#print axioms MetricChain.FieldShift.sphere_rate_eq
+#print axioms MetricChain.FieldShift.shift_identity
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp

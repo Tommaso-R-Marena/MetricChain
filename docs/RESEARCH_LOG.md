@@ -1003,44 +1003,100 @@ residual, the non-adaptive exponent and the adaptive exponent as single-letter f
 holding for that pair and failing for the hinted exponent at the zero residual; an
 isoperimetric input proved by types.  Nothing of it is quoted anywhere yet.
 
-### Resume here (cycle 10, fourth checkpoint)
+### Cycle 10, fifth checkpoint — a field as known part (theory report §11.20; 2026-11-25)
 
-Verified state: every module under `proofs/` (47 files) builds with zero warnings and is walked
-by the axiom audit (3131 declarations); the harness (96 registered tests: 79 that must survive,
+**Workstream F delivered** (`workstreams/F_REPORT.md`, 830 lines; scripts and outputs in
+`experiments/workstreams/F/`).  Setting: the `p`-biased cube, i.e. a known part `f = θ|x|`.
+Claims, in the numbering of the theory report:
+
+* Theorem 11.59: closed form of the game function of the additive instances; max–min forms
+  of the hinted exponent `R_0` of the zero residual, of `R^max = max_γ R_γ` and of the
+  non-adaptive exponent `θ_na`; **`R^max > R_0` whenever `p ≠ ½`**.
+* Lemma 11.60 **[V]**: rate of the cone law = `I(S;X) + KL(P_X‖π) +` hinted accuracy at the zero
+  residual.  The extra term is why the identity of §11.18 pairs `θ_na` with `R^max`, not `R_0`.
+* Theorem 11.61: the non-adaptive complexity is characterised from both sides, for every `n`
+  and without isoperimetry, by one extremal function (truncation at type-wise quantiles is
+  itself a member of the class); its exponent is `θ_na`; the right sample is uniform on
+  every type class.
+* Theorem 11.63 (new isoperimetric input): every set that is `e`-sensitive for the
+  flat-histogram instance `H` has type-mixture measure at least `e^{−nR^max(e) − o(n)}`; by types.
+* Theorem 11.64: the worst-case exponent of adaptive algorithms without a hint is `R^max`.
+* Proposition 11.65: not instance-optimal in the worst case; a type-stratified bracket is
+  instance-optimal at every permutation-symmetric instance.
+
+What the coordinator did with it:
+
+* **Read the report once in full** and re-derived the bookkeeping of Theorem F4(a,b,d), of
+  the six steps of Theorem F6 and of F7–F9 (no error found; the single-letter minimax lemma
+  inside F6 was read, not re-derived — it is the referee's first item).
+* **Re-computed with own code** (`experiments/coordinator_checks/f_spot_checks.py`, 22 s): the
+  closed form of `F(γ,t)` against a numerical `2×2` game value (40 random cases, `2.5·10⁻⁷` = grid
+  resolution); `R_0` in game form and ball form (15 cases, equal to six digits); the reduction
+  to `KL((Λ₁+ε₁)/u‖½)` and to `min{KL(ρ‖½) : KL(ρ‖p_u) ≤ x}` at `p = ½`; `R^max > R_0` and `E > E_0` for
+  `p ∈ {0.05, 0.1, 0.3}` with `γ* < 0` (`−0.62` at `p = 0.1`, `u = 2`, as reported); the max–min form of
+  `θ_na` by a brute-force grid against `R^max(S^{-1}(x))` (agreement within the grid error,
+  0.2–1 %) and its clear disagreement with the pair built on `R_0`; the Lipschitz property of
+  type-wise quantiles on 5040 pairs of adjacent type classes of random Lipschitz functions.
+* **Lean:** `proofs/Frontiers/FieldShift.lean` (the workstream's file, with the repository's
+  `klBin`); and `exactRec_reaches_hint_of_pair` in `BoundedAccuracy.lean` — the exact recursion
+  built on *any* nonnegative nonincreasing `θ_na` that forms a `HintPair` with `θ_hint` reaches
+  `θ_hint`; Theorem 11.64 uses it with the pair of the field, whose `HintPair` property is a
+  paper proof (convex analysis).  48 Lean files, 3137 audited declarations.
+* **Integrated as theory report §11.20**, labelled **[P], unrefereed**; G22; §8; §12 item 2(d)(v)
+  rewritten; README; D47 (four guesses about "what carries over" that are false with a
+  field — one of them the coordinator's: that the isoperimetry of a fixed product measure
+  is what is needed).
+* **Commissioned referee R9** (`reviews/R9_brief.md`): Theorem F6 first (the single-letter
+  lemma and every use of Sion's theorem), then F4, the "verbatim" claims of F7, `HintPair`
+  for the new pair, F9's assembly, own numerics, prior art (is F6 a corollary of a known
+  two-measure isoperimetric theorem?).
+* **Told the other division** (THY-MSG-0006; THY-REQ-0007): the exact tail function of the
+  flat-histogram reference is the closure-plus-budget problem of their ENG-RES-0006 §2.
+
+A remark that is interpretation, not theorem: "uniform on every type class of the known
+part's order parameter" is a flat-histogram (multicanonical) ensemble.  In this toy class
+the theory says that such a sample is *minimax-optimal* among fixed samples for certified
+estimation of `ln Z` when the residual is only known to be Lipschitz — and that sampling the
+model's own Gibbs measure is exponentially worse in the worst case.
+
+### Resume here (cycle 10, fifth checkpoint)
+
+Verified state: every module under `proofs/` (48 files) builds with zero warnings and is walked
+by the axiom audit (3137 declarations); the harness (96 registered tests: 79 that must survive,
 17 documented refutations) and its mutation tests (164 mutations: 163 caught, one expected
 pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 (R5, R6,
-R_P), §11.18 (R7).  **Under review at this checkpoint, hence unrefereed:** §11.19 (R8; brief
-in `reviews/R8_brief.md`; when the report exists it will be `reviews/R8_referee_report.md`).
-**Not refereed:** the revised Theorem 11.44, Proposition 11.50.  **Not checked by anyone:**
-the two-level algorithms with three nested levels or at scale with real inner brackets
-(THY-REQ-0001).  Running or just delivered, with outputs in the session's scratch
-directory until integrated: referee R8; workstream S (limit shape); workstream F
-(delivered, unread).  In priority order:
+R_P), §11.18 (R7).  **Under review at this checkpoint, hence unrefereed:** §11.19 (referee R8;
+`reviews/R8_brief.md`) and §11.20 (referee R9; `reviews/R9_brief.md`); when a report exists it
+will be `reviews/R8_referee_report.md`, `reviews/R9_referee_report.md`.  **Not refereed:** the
+revised Theorem 11.44, Proposition 11.50.  **Not checked by anyone:** the two-level algorithms
+with three nested levels or at scale with real inner brackets (THY-REQ-0001).  Running, with
+outputs in the session's scratch directory until integrated: referees R8 and R9;
+workstream S (limit shape of profile sets; `workstreams/S_brief.md`).  In priority order:
 
-1. **Act on R8** when it reports: corrections into §11.19 and `K_REPORT.md`'s repository note,
-   D-entry for anything withdrawn, a linked THY-MSG to the other division (it has been told
-   that the result is under review and that Algorithm 2L⁺ is the suggested target of
-   THY-REQ-0001).
-2. **Read, check and referee workstream F** (known part / biased cube) before quoting it;
-   if it stands it is a new section (§11.20) and the first step beyond the uniform cube —
-   it would also answer item (v) "other spaces" of §12 item 2(d) for product measures.
-3. **Workstream S / ENG-REQ-0001**: complete THY-RES-0001 (linked update) with the bridge
+1. **Act on R8 and R9** when they report: corrections into §§11.19, 11.20 and the repository
+   notes of `K_REPORT.md`, `F_REPORT.md`; a D-entry for anything withdrawn; linked THY-MSGs to
+   the other division (it has been told that both results are under review).
+2. **Workstream S / ENG-REQ-0001**: complete THY-RES-0001 (linked update) with the bridge
    theorem, the status of the buried-end problem, computable brackets for the plateau.
-4. **Synchronise with `research/ubuntu-engineering`** at every checkpoint (read-only; never
-   merge): open on their side are THY-REQ-0001 (not started), -0003, -0004, the rest of
-   -0002; they wait for nothing from us except the full answer to ENG-REQ-0001.
-5. **Below the exponential scale** (§12 item 2(d)(i),(ii)): quantify the `o(n)`; a lower bound
+3. **Synchronise with `research/ubuntu-engineering`** at every checkpoint (read-only; never
+   merge).  Open on their side: THY-REQ-0001 (not started; target now Algorithm 2L⁺),
+   -0003, -0004, the rest of -0002, and the new THY-REQ-0007 (exact tail function of the
+   flat-histogram reference on small cubes).
+4. **Machine-check `HintPair` for the pair of the field** (Theorem 11.64(ii); convex analysis
+   of `R^max(e) = max_{t≤1}[F*(t) − te]`) — the analogue of `CubeHintPair.lean`; and the closed
+   form of the game function.
+5. **Bounded accuracies with a field** (§11.19 is for the uniform cube; its ingredients are
+   Harper in both directions — with a field only exponents of the tail function are known).
+6. **Below the exponential scale** (§12 item 2(d)(i),(ii)): quantify the `o(n)`; a lower bound
    for a bounded number of levels or rounds matching `τ_k`; exponentially small accuracies.
-6. **A machine-checked count** for Theorems 11.52 / 11.56, or at least a mechanised statement
-   of the cost summation.
-7. **Have the revised §11.16 read once more** (Theorem 11.44 with the two-sided tail lemma) —
-   partly covered by workstream K's re-proofs and by R8's brief.
-8. **Chains** (theory report §12 item 9): the limit theorem (item 3 above); an upper bound
+7. **A machine-checked count** for Theorems 11.52 / 11.56.
+8. **Chains** (theory report §12 item 9): the limit theorem (item 2 above); an upper bound
    for "pair-additive plus a small remainder"; randomised algorithms for linear classes; the
    cost of checking in the profile format; whether realistic residuals have a small
-   per-pair constant (THY-REQ-0003 — now the question that decides whether the profile
-   format is useful).
-9. The list of the earlier checkpoints, below, is otherwise unchanged.
+   per-pair constant (THY-REQ-0003).
+9. Larger alphabets, several site types, known parts with interactions (§11.20, remark (3):
+   a sketch for the first two, nothing for the third).
+10. The list of the earlier checkpoints, below, is otherwise unchanged.
 
 ### State at the end of cycle 9 (superseded in part by the list above)
 

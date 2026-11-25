@@ -1,0 +1,4 @@
+p=0.1 u=2.0 x=0.01061: type-uniform sampler theta_na = 0.101969;  plain Monte Carlo from pi_f: 0.272873;  best single product measure Bernoulli(r)^n: 0.104574 at r = 0.1859   [21s]
+p=0.1 u=2.0 x=0.05306: type-uniform sampler theta_na = 0.044008;  plain Monte Carlo from pi_f: 0.142014;  best single product measure Bernoulli(r)^n: 0.046995 at r = 0.1681   [41s]
+p=0.3 u=1.0 x=0.00516: type-uniform sampler theta_na = 0.057990;  plain Monte Carlo from pi_f: 0.076634;  best single product measure Bernoulli(r)^n: 0.058081 at r = 0.3229   [62s]
+p=0.3 u=1.0 x=0.02578: type-uniform sampler theta_na = 0.024330;  plain Monte Carlo from pi_f: 0.034673;  best single product measure Bernoulli(r)^n: 0.024724 at r = 0.3193   [79s]

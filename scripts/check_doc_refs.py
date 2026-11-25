@@ -67,7 +67,7 @@ for f in (root / "proofs").rglob("*.lean"):
         if fm:
             full.add(f"{current}.{fm.group(1)}")
 
-IGNORE = {"p_un", "p_un_o", "C_l", "D_min", "E_r", "Q_12", "Q_14", "Q_m", "d_j", "τ_k", 
+IGNORE = {"E_0", "P_X", "P_S", "Q_4", "R_0", "T_κ", "t_κ", "μ_H", "π_s", "ψ_γ", "ψ_H", "w_H", "s_H", "Ξ_H", "R_γ", "Z_γ", "K_t", "Λ_m", "κ_y", "P_UX", "p_un", "p_un_o", "C_l", "D_min", "E_r", "Q_12", "Q_14", "Q_m", "d_j", "τ_k", 
     "U_b", "Δ_k", "g_j", "B_i", "φ_B", "σ_φ", "K_t", "F_Q", "π_γ", "c_i", "m_i", "N_cov",
     "ε_set", "f_CW", "b_i", "L_i", "Δ_s", "C_{k,γ}", "u_c", "ρ_∓", "R_ν", "τ_n", "J_ij", "h_i",
     "p_u", "Δ_r", "θ_hint", "θ_na", "g_s", "D_R", "Γ_n", "d_P", "N_ab", "φ_ab", "s_pq", "x_i", "λ_i", "S_c", "d_F", "P_L", "L_A", "K_i", "T_n", "N_hi", "N_lo", "T_k", "T_2", "L_u", "Q_d", "Q_i", "Q_n", "Q_o", "R_u", "a₁..a_M", "q_i", "s_i", "x_last", "ρ_i", "ρ_o", "n_o", "n_i", "M_j", "s_j", "ξ_l", "x_l", "γ_l",

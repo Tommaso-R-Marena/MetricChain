@@ -1,0 +1,13 @@
+$ python3 t09_hamming_g0.py 0.1 2.0 0.3 500,1000,2000,4000,8000,16000,32000
+p=0.1 u=2.0 eps1=0.063688: R_0=0.019497, m*=0.3994, rho*=0.3597
+  n=500: exponent 0.023867 (k/n=0.4100, r/n=0.3660)  excess over R_0: 0.004371 = 0.352 ln(n)/n   [0.2s]
+  n=1000: exponent 0.021964 (k/n=0.3990, r/n=0.3590)  excess over R_0: 0.002467 = 0.357 ln(n)/n   [0.5s]
+  n=2000: exponent 0.020949 (k/n=0.3995, r/n=0.3595)  excess over R_0: 0.001452 = 0.382 ln(n)/n   [1.2s]
+  n=4000: exponent 0.020257 (k/n=0.3895, r/n=0.3525)  excess over R_0: 0.000760 = 0.367 ln(n)/n   [2.8s]
+  n=8000: exponent 0.019959 (k/n=0.3994, r/n=0.3596)  excess over R_0: 0.000462 = 0.411 ln(n)/n   [7.6s]
+  n=16000: exponent 0.019743 (k/n=0.3994, r/n=0.3597)  excess over R_0: 0.000246 = 0.406 ln(n)/n   [22.8s]
+  n=32000: exponent 0.019624 (k/n=0.3994, r/n=0.3597)  excess over R_0: 0.000127 = 0.392 ln(n)/n   [72.2s]
+
+real	1m48.043s
+user	1m48.184s
+sys	0m0.068s

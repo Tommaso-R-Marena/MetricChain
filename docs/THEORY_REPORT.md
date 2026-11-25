@@ -1124,7 +1124,11 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   bounded accuracy (§11.19: exponent `h` against `a` non-adaptively) is a paper proof by a
   workstream that was **under independent review, and unrefereed, at this checkpoint**; below
   the exponential scale nothing is known without a hint.  All upper bounds rest on Harper's
-  theorem, which is cited, and on paper reductions to it.
+  theorem, which is cited, and on paper reductions to it.  The one step beyond the uniform
+  cube — a field as known part, §11.20 — is likewise a workstream's paper proof under review,
+  rests on a new asymptotic isoperimetric statement proved by the method of types, gives
+  exponents at extensive accuracies only, and its nested algorithm uses a table of numbers
+  for which no formula is known.
 * **The profile format answers a narrower question than §11.14 asked** (§11.17).  Certificates
   that do not grow with the chain exist for residuals that are functionals of pair-distance
   statistics, at extensive accuracy, and the bound that says so is numerically vacuous —
@@ -1208,7 +1212,8 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/LinearKernel.lean` | `PairInstance.addSmul`, `PairInstance.addSmul_energy`, `LProblem`, `LinResidualClass`, `LCert`, `dataTerm`, `verifyL`, `dataTerm_le_zero`, `verifyL_sound`, `verifyLTop`, `verifyLTop_sound`, `contactTriangle_verified`, `contactTriangle_no_anchor_rejects`, `contactTriangle_bound`, `contactTriangle_class_nonempty` (kernel for residuals linear in pairwise features; §11.17) |
 | `proofs/Frontiers/HintRecursion.lean` | `StepLE`, `HintPair`, `StepLE.of_limit`, `StepLE.of_macro`, `StepLE.at_hint_fraction`, `superSolution_le_hint`, `step_from_hint_le`, `iterates_lt_hint_add`, `klBin_shift`, `gaussPair`, `gauss_hint_superSolution` (the level recursion of adaptive algorithms without a hint converges to the hinted exponent); `LayerCake.level_mul_exceed_le_mean`, `LayerCake.mean_le_layer_cake`, `LayerCake.mean_le_upper`, `LayerCake.upper_le_width`, `LayerCake.fibre_sum_le`, `LayerCake.close_points_bound`, `LayerCake.negligibility_threshold_le` (deterministic core of the two-level bracket; §11.18) |
 | `proofs/Frontiers/CubeHintPair.lean` | `cubeP`, `cubeLam`, `cubeEstar`, `cubeA`, `cubeH`, `cubeHint`, `cubeNa`, `cubeNa_isLeast`, `cubeNa_isLeast_allRadii`, `cubeNa_add_cubeHint`, `cubeHint_lt_cubeNa`, `cubeEstar_eq_log_cosh`, `cubePair`, `cube_superSolution_le_hint`, `cube_iterates_lt_hint_add`, `cubeHintClip`, `cubePairClip`, `cube_step_from_hint_le`, `cube_hint_superSolution`, `cube_hintRecursion_witness` (the exponent functions of the cube satisfy `HintPair`; the hinted exponent is a fixed point of the recursion; workstream L; §11.18) |
-| `proofs/Frontiers/BoundedAccuracy.lean` | `exactRec`, `stepLE_exact`, `Rstep_anti`, `exactRec_props`, `exactRec_reaches_hint`, `exactRec_ge_hint`, `exactRec_tendsto_hint` (the level recursion of §11.18 defined in Lean; it never undercuts and converges to the hinted exponent), `bounded_iterates_lt`, `two_rung_bound`, `levels_reach_hint_at_zero`, `cube_levels_reach_hint_at_zero`, `cube_levels_reach_hint_at_zero_consistent` (the recursion at accuracy zero), `certified_lower_sum_le_mean`, `populated_part_le`, `close_points_bound'`, `width_le` (deterministic algebra of Algorithm 2L⁺; workstream K and the coordinator; §11.19) |
+| `proofs/Frontiers/BoundedAccuracy.lean` | `exactRec`, `stepLE_exact`, `Rstep_anti`, `exactRec_props`, `exactRec_reaches_hint`, `exactRec_reaches_hint_of_pair`, `exactRec_ge_hint`, `exactRec_tendsto_hint` (the level recursion of §11.18 defined in Lean; it never undercuts and converges to the hinted exponent), `bounded_iterates_lt`, `two_rung_bound`, `levels_reach_hint_at_zero`, `cube_levels_reach_hint_at_zero`, `cube_levels_reach_hint_at_zero_consistent` (the recursion at accuracy zero), `certified_lower_sum_le_mean`, `populated_part_le`, `close_points_bound'`, `width_le` (deterministic algebra of Algorithm 2L⁺; workstream K and the coordinator; §11.19) |
+| `proofs/Frontiers/FieldShift.lean` | `klBin_tilt`, `cone_rate_eq`, `sphere_rate_eq`, `shift_identity` (the shift identity with a known field: rate of the cone law = mutual information + `KL(P_X‖π)` + hinted accuracy at the zero residual; workstream F; §11.20) |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -1259,6 +1264,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G19 | **Correlated uncertainty**: for residuals that are linear in known features with coefficients in a box, the envelope is a pulled-back weighted `ℓ¹` distance, every linear combination of evaluations brackets the value at a new point by the unexplained part of its feature vector (worst case over the data: the `ℓ¹` distance to the span, against the distance to the nearest point for the first-order class of the same envelope), and rank-many evaluations determine everything; pair-additive residuals with unknown Lipschitz radial functions are linear in cumulative pair-count profiles, their envelope is a transport distance between pair-distance distributions, sharpness is stochastic dominance, and at extensive accuracy certificates in this format exist whose size does not depend on the chain length; a kernel certifies minima for all coefficient vectors consistent with evaluated anchors | `linRes_sub_le`, `linRes_sub_attained`, `linRes_span_upper`, `linRes_span_lower`, `linRes_span_exact`, `sumClass_span_upper`, `sumClass_span_lower`, `pairRes_eq_cum`, `pairRes_sub_le`, `pairRes_span_upper`, `pairRes_span_upper_enclosure`, `pairRes_sharp`, `verifyLTop_sound`, `contactTriangle_bound` **[V]**; exactness (duality), the transport form, the entropy bound and everything about chain length **[P]** | cycle 10, refereed (`reviews/R6`) except the kernel; the linear theory is **known** (optimal recovery: Smolyak, Micchelli–Rivlin; set-membership estimation; robust linear programming), the features are those of linear contact potentials (Maiorov–Crippen 1992; Tobi et al. 2000), the distance is **known** as a descriptor distance (Osada et al. 2002; bag of bonds), the entropy of monotone functions is classical; its reading as the exact envelope of a residual class next to a known part, and the consequences for certificates, were not found; **none of it is deep** |
 | G20 | **Adaptivity replaces the hint**: on the cube class the worst-case exponent of adaptive randomised algorithms without a hint is the hinted exponent `θ_hint(ε₁) = KL((Λ₁+ε₁)/u‖½)`, strictly below the non-adaptive `θ_na`.  A two-level "layer-cake" algorithm — uniform outer sample, brackets of the fibre averages refined only as far as a one-sided test against a ladder of levels requires, the tail lemma once at the top — turns bracket procedures with exponent function `T` into ones with `R[T]`; by the identity `θ_na(e + θ_hint(e)) = θ_hint(e)` (that is, `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁`) the hinted exponent is a fixed point of `R`, every nonincreasing `T ≤ R[T]` lies below it, and the iteration from `θ_na` converges to it; on radial instances a direct adaptive algorithm has the hinted exponent | `superSolution_le_hint`, `iterates_lt_hint_add`, `step_from_hint_le`, `klBin_shift`, `cubePair`, `cube_iterates_lt_hint_add`, `cube_hint_superSolution`, `LayerCake.mean_le_upper`, `LayerCake.upper_le_width`, `LayerCake.close_points_bound` **[V]** (analysis of the recursion, abstractly and for the exponent functions of the cube; validity and width of the bracket; the two algebraic inequalities behind the cost); the algorithm's number of evaluations, the induction over levels and all asymptotics **[P]** | cycle 10, refereed (`reviews/R7`: "proved with gaps", the gaps written into the text; no error found in the cost accounting beyond one closure rule); the two-level algorithm and the recursion are due to workstream H, the oracle-relative form, the identity and the convergence proof to the coordinator; relatives of the algorithm are nested sampling, multilevel splitting and nested simulation, adaption with polynomial gains is known in information-based complexity (Heinrich; Kunsch–Novak–Wnuk) — a certified version with a worst-case exponent, and the statement that adaption recovers the value of a hint exactly, were **not found** (abstracts only) |
 | G21 | **Every bounded accuracy**: at every fixed accuracy, and down to accuracies `e^{-o(n)}`, the worst-case exponent of adaptive randomised algorithms without a hint on the cube class is `h = KL(Λ₁/u‖½)`, the hinted one, against `a = KL(p_u‖½)` for non-adaptive algorithms.  The two-level algorithm is modified so that a level costs only an arbitrarily small constant of accuracy: layer-cake *sum* as lower end, and the lower isoperimetric bound (Harper, two-sided tail lemma) inside the closure test, which is what certifies a bounded ratio at radii `p_u n_o − O(√n_o)`; the recursion continues to accuracy zero and contracts to `h` | `exactRec_tendsto_hint`, `exactRec_ge_hint`, `bounded_iterates_lt`, `cube_levels_reach_hint_at_zero`, `two_rung_bound`, `certified_lower_sum_le_mean`, `populated_part_le`, `close_points_bound'`, `width_le` **[V]** (the exact recursion; the contraction; the algebra of the bracket and of the count); the algorithm, its events, its cost and the assembly over the levels **[P]** | cycle 10, workstream K; **under independent review (R8) at this checkpoint — unrefereed**; simulated with the constants of the theorem (no violation in 1 719 runs of the outer loop and 84 end-to-end runs), prior art from search summaries only |
+| G22 | **With a known part (a field)**: on the `p`-biased cube the exponent of non-adaptive algorithms without a hint is `θ_na = max_m min{I(S;X) : D(P_{X|S}‖π_s|P_S) ≤ ε₁}`, attained by sampling uniformly on every type class and not by the Gibbs measure of the known part; the worst-case exponent of adaptive algorithms without a hint is `R^max = max_γ R_γ`, the hinted exponent of the hardest *additive* instance, which is strictly above the hinted exponent of the zero residual whenever `p ≠ ½`; the reference instance of the nested algorithm is the lower envelope of the additive instances (flat histogram), and the isoperimetric input is an asymptotic statement for that reference proved by the method of types | `shift_identity`, `klBin_tilt`, `exactRec_reaches_hint_of_pair` **[V]** (the identity between the three rates; convergence of the exact recursion for any pair with the abstract properties); the single-letter formulas, the isoperimetric theorem, the abstract properties of the pair and everything about algorithms **[P]** | cycle 10, workstream F; **under independent review (R9) at this checkpoint — unrefereed**; central formulas re-computed by the coordinator; prior art read as abstracts and machine summaries only (Bollobás–Leader; Ahlswede–Zhang; Yu) |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -1298,7 +1304,12 @@ removes an exponential barrier of non-adaptive methods) is known for a log-conca
 found; (xii) its extension to every bounded accuracy (G21), by a modified algorithm that
 uses the *lower* isoperimetric bound inside the closure test — a paper proof by a
 workstream, simulated with its own constants, and under independent review at this
-checkpoint.
+checkpoint; (xiii) the first step beyond the uniform cube (G22): with a field the exponents
+are again single-letter, "adaptive = hinted" persists as "the worst case without a hint is
+the hardest case with a hint", and three natural guesses about what carries over — the
+hardest instance, the sampler, the isoperimetric theorem needed — are false; a paper proof
+by a workstream resting on a new asymptotic isoperimetric statement, under independent
+review at this checkpoint.
 Each rests on textbook tools (type covering, Hölder, telescoping, linear-programming duality);
 the proofs are short.  The second referee's verdict on G1–G10 — "a coherent note, not a
 theorem-driven paper" — is reproduced in §12 together with what a publication would still
@@ -1312,7 +1323,7 @@ different sections.
 
 | what is known about the residual `g` | certificate / deterministic procedures | randomised, told the instance in advance ("hint": the task is *verification*) | randomised, no hint, sample fixed in advance | randomised, no hint, adaptive (*search*) |
 |---|---|---|---|---|
-| **first-order**: `g(x) − g(y) ≤ d(x,y)`, weighted Hamming `d`, product landscape | a covering by slack balls (`isCertificate_iff_cover`); exponential, `exp(nR*)`, unless every site is sharp (Theorems 11.6–11.9); `2^{n(1−o(1))}` on the cube at the zero residual | `exp(n θ_hint(ε₁))` below an accuracy threshold, a bounded number above it (Theorems 11.25, 11.28); single-letter game value at additive instances (11.27) | cube, zero known part: `exp(n θ_na(ε₁))`, `θ_na > θ_hint` (Theorems 11.44, 11.45) | cube, zero known part: `exp(n θ_hint(ε₁))` — the hint is worth nothing (Theorem 11.54); also at every bounded accuracy, `exp(nh)` against `exp(na)` for a sample fixed in advance (Theorem 11.58, under review) |
+| **first-order**: `g(x) − g(y) ≤ d(x,y)`, weighted Hamming `d`, product landscape | a covering by slack balls (`isCertificate_iff_cover`); exponential, `exp(nR*)`, unless every site is sharp (Theorems 11.6–11.9); `2^{n(1−o(1))}` on the cube at the zero residual | `exp(n θ_hint(ε₁))` below an accuracy threshold, a bounded number above it (Theorems 11.25, 11.28); single-letter game value at additive instances (11.27) | cube, zero known part: `exp(n θ_na(ε₁))`, `θ_na > θ_hint` (Theorems 11.44, 11.45) | cube, zero known part: `exp(n θ_hint(ε₁))` — the hint is worth nothing (Theorem 11.54); also at every bounded accuracy, `exp(nh)` against `exp(na)` for a sample fixed in advance (Theorem 11.58, under review); with a field as known part, `exp(nR^max(ε₁))`, the hinted exponent of the hardest additive instance, against `exp(nθ_na(ε₁))` for the best fixed sample, which is uniform on type classes (Theorems 11.61, 11.64, under review) |
 | **second-order**: mixed differences bounded by `c_ij` | a star of `n + 1` evaluations determines `g` up to `Σ c_ij` over the changed pairs (`secondOrder_remainder`); with dense constants of order one the cost is exponential again (Theorem 11.31, D40) | a transition at finite temperature (Theorem 11.33) | — | — |
 | **linear in `p` known features**, coefficients in a box | `rank ≤ p` evaluations determine `g` everywhere; before that, every linear combination of evaluations gives a bracket (`linRes_span_upper`, `linRes_span_exact`); a kernel for minima (`verifyLTop_sound`) | no lower bound known (a generic evaluation sees every perturbation) | — | — |
 | **pair-additive with `L`-Lipschitz radial functions** (chains) | number of evaluations bounded independently of `N` at extensive accuracy, by a numerically vacuous bound; polynomial on lattices at every accuracy (Proposition 11.49).  **Not what one sees at any size that can be enumerated**: measured growth is linear in `N` on the lattice through 27 beads and geometric off-lattice through 15 beads (§11.17, data of the Computational Research Division) | — | — | — |
@@ -4020,6 +4031,245 @@ found at that depth: a certified bounded-ratio estimator of a mean from *bracket
 with a ladder of levels, or the use of a lower isoperimetric bound to close such a ladder.
 "Not found", not "new".
 
+### 11.20 With a known part: a field changes the hardest instance and the right sampler
+
+§§11.16–11.19 are about the uniform cube: no known part.  The first step beyond it is a
+known part that is a field, `f(x) = θ|x|`, i.e. the `p`-biased product measure
+`π = Bernoulli(p)^{⊗n}`, `θ = ln((1−p)/p)`, as reference.  §12 item 2(d) of the previous
+checkpoints guessed that "product measures should be within reach" through the asymptotic
+isoperimetry of a fixed product measure.  Workstream F (`docs/workstreams/F_REPORT.md`) shows
+that this guess points at the wrong object, and gives the exponents.  **Everything carries
+over with one change that matters: the reference of algorithms without a hint is not the
+instance `g = 0`, and the sampling law is not the Gibbs measure `π` of the known part.**
+
+**Status of this section.**  Paper proofs by workstream F (in full in its report, §3);
+read once by the coordinator, who re-computed the central formulas with own code
+(`experiments/coordinator_checks/f_spot_checks.py`: the closed form of the game function
+against a numerical game value, the hinted exponent at `g = 0` in both forms, the reduction to
+§§11.16–11.18 at `p = ½`, the strict inequality `R^max > R_0`, the max–min form of the
+non-adaptive exponent against the pair formula, the Lipschitz property of type-wise
+quantiles by brute force) and found no discrepancy; **an independent referee (R9) is reading
+them at this commit, and until that report is acted upon Theorems 11.59(b–d), 11.61, 11.63,
+11.64 and Proposition 11.65 are [P], unrefereed.**  The isoperimetric statement, Theorem
+11.63, is new, is the only isoperimetric input, and both upper bounds rest on it.
+Machine-checked: the shift identity (`FieldShift.lean`); the convergence of the exact level
+recursion for *any* pair of exponent functions with the abstract properties
+(`exactRec_reaches_hint_of_pair`), the properties themselves being a paper proof here.
+
+*Setting and notation.*  `q = 1 − p`, `u > 0`, class `L_u` of `u`-Lipschitz residuals `ψ` on `Q_n`,
+`A(ψ) = E_π e^{-ψ}`, target `ln A`, accuracy `ε = ε₁n`.  One site: soft gaps
+`Λ(0) = −ln(q + pe^{-u})`, `Λ(1) = −ln(p + qe^{-u})`, `Λ_m = (1−m)Λ(0) + mΛ(1)`.  A cone `u·d(·, s)` has the
+product Gibbs law `π_s`.  For a centre `s` and a point `x` let `(S, X)` be a pair of letters
+drawn from the empirical law of `(s_i, x_i)`: `m = P(S = 1)` is the type of the centre,
+`P(X ≠ S)` the normalised distance, `P_X` the type of the point.  Additive instances
+`ψ_γ = γ|x|`, `|γ| ≤ u`, `Z_γ = q + pe^{-γ}`.  The *game function* of `ψ_γ` (Theorem 11.27(c) for this
+class) is `F(γ, t) = −ln val(K_t^γ)`, `K_t^γ(a, b) = exp(−t[u·1[a≠b] − Λ(b) − γa − ln Z_γ])`, and
+
+    R_γ(e) = max_{0≤t≤1}[F(γ,t) − te],    R_0 := R_{γ=0},    F*(t) = max_{|γ|≤u} F(γ,t),    R^max(e) = max_{0≤t≤1}[F*(t) − te],
+    E = sup_{0<t≤1} F*(t)/t,    h = R^max(0),    S(e) = e + R^max(e),    θ_na(x) = R^max(S^{-1}(x)),    a = θ_na(0+).
+
+`v(κ) = max_{|γ|≤u}[−γκ − ln Z_γ]` is `KL(κ‖p)` on the window of Gibbs means of the additive
+instances and is continued with slopes `±u` outside.  The **flat-histogram instance**
+
+    ψ_H(x) = min_{|γ|≤u}[γ|x| + n ln Z_γ] = −n·v(|x|/n)
+
+(the lower envelope of the normalised additive instances) is a member of `L_u`; its Gibbs
+law `μ_H` is, up to a factor `n + 1`, uniform over the types of the window and uniform inside
+each type class — the normalised-maximum-likelihood mixture of the tilted product measures.
+
+**Theorem 11.59 (hinted exponents with a field; `g = 0` is not the hardest instance)
+[(a) refereed earlier: Theorem 11.27 and workstream A; (b)–(d) P, workstream F, Theorem F2].**
+(a) For every `n` and `|γ| ≤ u`, every randomised algorithm that is `(ε/2, δ)`-correct on `L_u` —
+with or without a hint, adaptive or not — makes at least `(1 − 2δ)e^{−tε + nF(γ,t)}` evaluations in
+expectation at `ψ_γ`, for every `t ≥ 0`; with a hint `exp(nR_γ(ε₁) + o(n))` suffice there.
+(b) *Closed form.*  With the total field `λ = θ + γ`, `λ_± = θ ± u` and `C(x) = 2cosh(x/2)`:
+
+    F(γ,t) = ln{ [ sinh(t(λ₊−λ)/2)·C(λ₋)^t + sinh(t(λ−λ₋)/2)·C(λ₊)^t ] / sinh(tu) } − t·ln C(λ);
+
+`F(γ,0) = F(γ,1) = 0` and `F(γ,t) ≤ 0` for `t ≥ 1`.
+(c) *Max–min forms*, for `e ≥ 0`:
+
+    R_0(e)   = max_m min{ I(S;X) : u·P(X≠S) − Λ_m ≤ e }  =  max_m [ h(m) − h((Λ_m + e)/u) ]₊ ,
+    R^max(e) = max_m min{ I(S;X) : u·P(X≠S) − Λ_m + v(P_X) ≤ e } ,
+    θ_na(x)  = max_m min{ I(S;X) : D(P_{X|S} ‖ π_s | P_S) ≤ x }            (x > 0),
+
+so the hinted exponent at `g = 0` is that of Hamming balls around centres of an optimal type
+`m* ≠ ½` (a rate–distortion function), and `a = max_m I_{π_s}(S;X)`.
+(d) If `p ≠ ½`, then `∂F/∂γ(0,t) ≠ 0` for every `0 < t < 1` (sign of `p − ½`), hence `F* > F(0,·)` on
+`(0,1)`, the class threshold `E` exceeds the threshold `E_0` of `g = 0`, and
+**`R^max(e) > R_0(e)` for every `0 ≤ e < E`**: the hardest instance with a hint is an additive
+instance `γ*|x|` whose residual partly cancels the field (`γ*θ < 0` to first order, and in
+every computation).  For `p = ½` all three functions are those of §§11.16–11.18.
+
+**Lemma 11.60 (the shift identity with a field) [V] (`shift_identity`, `klBin_tilt`, `cone_rate_eq`,
+`sphere_rate_eq`; workstream F, Theorem F3).**  For every joint law of `(S, X)`,
+
+    D(P_{X|S} ‖ π_s | P_S)  =  I(S;X)  +  KL(P_X ‖ π)  +  u·P(X ≠ S)  −  Λ(P_S).
+
+*Non-adaptive accuracy = exponent of the sample + hinted accuracy at `g = 0` + `KL(P_X‖π)`.*  In
+the uniform case the optimal profile has `P_X = π` and the last term vanishes (the identity
+of §11.18, `klBin_shift`).  With a field it does not: `u·P(X≠S) − Λ(P_S) + KL(P_X‖π)` is the hinted
+accuracy of a *different* instance — a dip of the flat-histogram instance `H` — which is why
+the identity `θ_na(e + θ_hint(e)) = θ_hint(e)` holds with `θ_hint := R^max` and **fails with `R_0`**
+(a level recursion built on the pair `(θ_na, R_0)` falls 3 % of `a` below the lower bound
+after ten levels at `p = 0.1`, `u = 2`: the necessary condition of D45 has power here).
+
+**Theorem 11.61 (non-adaptive algorithms without a hint, with a field) [P; workstream F, Theorem
+F4; (d) given Theorem 11.63].**  For `ψ ∈ L_u` and `0 < q < 1` let `ψ^{tr,q}` be `ψ` truncated at its
+type-wise upper `q`-quantiles (weight `min(w, t_{|x|})`, `t_κ` the smallest value of `w` on the type
+class `T_κ` above which `w` has density at most `q` there), and
+`ε_n^{tr}(q) = sup_{ψ∈L_u} ln[A(ψ)/A(ψ^{tr,q})]`.
+(a) *Type-wise quantiles are Lipschitz:* `t_{κ±1} ≤ e^u t_κ` (couple adjacent type classes by
+flipping one coordinate), so `ψ^{tr,q} ∈ L_u`, and it differs from `ψ` on a set of density at
+most `q` in every type class.
+(b) *One extremal function bounds the complexity from both sides, for every `n`, with no
+isoperimetry.*  If `ε < ε_n^{tr}(q)`, every non-adaptive `(ε/2, δ)`-correct algorithm makes at least
+`(1 − 2δ)/q` evaluations (the pairs `(ψ∘σ, ψ^{tr,q}∘σ)` over random permutations `σ` in Theorem
+11.45(a)); conversely `M` uniform points from *each* type class with importance weights
+`π(T_κ)` are accurate to `ε_n^{tr}(q) + O(1)` once `Mq ≳ log n`.
+(c) `ε_n^{tr}(e^{−nθ}) ≥ n·min{D(P_{X|S}‖π_s|P_S) : I(S;X) ≤ θ + O(log n/n)} − O(log n)` for every centre
+type (cones truncated at type-dependent radii), and (d) `ε_n^{tr}(e^{−nθ}) ≤ n·S((R^max)^{-1}(θ)) + o(n)`.
+Hence **the exponent of non-adaptive algorithms is `θ_na(ε₁)`** for `0 < ε₁ < E`, attained by
+sampling uniformly on every type class — equivalently, importance sampling from `μ_H` —
+and **not** by plain Monte Carlo from `π`, which is exponentially worse (its exponent at
+vanishing accuracy is `n^{-1}max_s KL(π_s‖π)`, up to 2.9 times `a` in the table below), nor by any
+single tilted product measure (worse by a few per cent; a sketch, Proposition F11 of the
+report).
+
+**Lemma 11.62 (tail lemma relative to a reference instance) [P; elementary].**  Let `ψ₀ ∈ L_u`
+with weights `w₀`, Gibbs law `μ₀` and *slack* `s₀(x,y) = u·d(x,y) + ψ₀(x) − ψ₀(y) ≥ 0`.  For `ψ ∈ L_u`
+(or a fibre average) put `ŵ = w/w₀`.  Then `A(ψ) = A(ψ₀)·E_{μ₀}ŵ`, `ŵ(x) ≤ ŵ(y)e^{s₀(x,y)}`, and for
+every level `t` with `μ₀(ŵ > t) ≤ q < 1`
+
+    E_{μ₀}(ŵ − t)₊ ≤ t·Ξ₀(q),        Ξ₀(q) = max{ Σ_{x∈D} μ₀(x)(e^{s₀(x→Dᶜ)} − 1) : D ⊊ Q_n, μ₀(D) ≤ q },
+
+with equality for the deepest dip of the reference on `D`.  For `ψ₀ = 0`, `p = ½` this is Lemma
+11.43(b), and Harper's theorem evaluates `Ξ₀`.  In general `Ξ₀` is a finite maximum over
+subsets for which no closed form is claimed.
+
+**Theorem 11.63 (asymptotic isoperimetry for the flat-histogram reference) [P; workstream F,
+Theorem F6 — new, unrefereed].**  There is `ω_n → 0`, depending on `p, u` only, such that for
+all `n`, all real `e` and all `D ⊊ Q_n`:
+
+    Σ_{x∈D} μ_H(x)·e^{s_H(x→Dᶜ)} ≥ e^{ne}      ⟹      μ_H(D) ≥ exp(−n[R^max(e − ω_n) + ω_n]).
+
+*Every set that is `e`-sensitive for the flat-histogram instance is hit by its Gibbs law — the
+type-uniform mixture — with probability at least `e^{−nR^max(e) − o(n)}`*; equivalently the tail
+function of `H` has the exponent `(R^max)^{-1}`.  So `H` and the hardest additive instance are
+equally hard.
+*Proof idea* (report §3.4).  The method of types, as in Theorem A(ii) of workstream A: an
+inherently typical subset (Ahlswede–Yang–Zhang) of the class of `D` on which the exit budget
+`B(x) = min_{y∉D}[v(κ_y) + u·d(x,y)/n]` is constant; a single-letter lemma — for every law `P_{UX}`
+there is a kernel `X → X′` with `u·P(X′≠X) + v(P_{X′}) ≤ B` and `I(X′;U) ≤ R^max(B − D(P_{X|U}‖π|P_U))`, by
+minimax (the problem with a budget that depends on the type of the exit point collapses to
+the maximum over `γ` of the single-instance problems); the kernel applied letter by letter
+moves the typical subset into `D`; chain rule and data processing against a product measure
+`Qⁿ` with `Q` in the window, where `μ_H ≥ Qⁿe^{−o(n)}`.  ∎
+No finite-`n` extremal statement is available or used; exact vertex isoperimetry in the
+biased cube is known for down-sets only (Bollobás–Leader 1991; abstract), and super-level
+sets of Lipschitz functions are not monotone.
+
+**Theorem 11.64 (adaptive algorithms without a hint, with a field) [P: Theorems 11.59(a), 11.63,
+Lemma 11.62, the two-level theorem relative to a reference, and the convergence theorem;
+workstream F, Theorems F7–F9].**  For every `p ∈ (0,1)`, `u > 0`, `0 < ε₁ < E`, `0 < δ < ½`, the least
+worst-case number of evaluations of a randomised adaptive algorithm without a hint that is
+`(ε₁n/2, δ)`-correct on `L_u` is
+
+    exp( n·R^max(ε₁) + o(n) ),        R^max(ε₁) = max_{|γ|≤u} R_γ(ε₁),
+
+**the hinted exponent of the hardest additive instance `γ*(ε₁)|x|`**, while non-adaptive
+algorithms need `exp(nθ_na(ε₁) + o(n))`, `θ_na(ε₁) = R^max(S^{-1}(ε₁)) > R^max(ε₁)`.
+*Proof.*  Lower bound: Theorem 11.59(a) at `γ*`.  Upper bound: (i) the two-level algorithm of
+Theorem 11.52 *relative to the reference `H`* — outer points sampled from `μ_H` on the outer
+block, brackets and levels for `Ŵ = W/w_H`, closure by Lemma 11.62 with the tail function of
+`H` and never at `q = 1` — turns a family with exponent function `T` into one with `R[T]`,
+`R` the operator of §11.18 built on the present `θ_na` (Theorem 11.63 gives the exponent of
+the tail function); (ii) the pair `(θ_na, R^max)` satisfies `HintPair` (convex analysis of
+`R^max(e) = max_{t≤1}[F*(t) − te]`: convex, nonincreasing, slopes in `[−1, 0]`; `S` an increasing
+homeomorphism; the bound `t ≤ 1` in the game formula is exactly the slope condition); (iii)
+the exact recursion from the base exponent then comes within any `η` of `R^max`
+(`exactRec_reaches_hint_of_pair` **[V]**, given (ii)), and the levels are assembled as in
+§11.19.  ∎
+So **"adaptive = hinted" persists with a known part, in the form: the worst case without a
+hint equals the hardest case with a hint** — and the hardest case is not the zero residual.
+
+**Proposition 11.65 (instance-optimality in the field) [P; (b) numerical; workstream F, Theorem
+F10].**  (a) *Not in the worst case:* for `θ ≠ 0` the worst-case exponent `R^max(ε₁)` of adaptive
+algorithms without a hint is strictly larger than the hinted exponent `R_0(ε₁)` of the
+instance `(f, g = 0)`; between `E_0` and `E` the instance `g = 0` is cheap with a hint while the
+class is exponentially hard.  (b) Both exponents decrease with `|θ|` in every computation
+(`F*(t; θ)` nonincreasing in `|θ|` on a grid of 121 fields; no proof).  (c) *Yes at symmetric
+instances:* the type-stratified two-sample bracket (per type class: threshold at the `K`-th
+largest weight of one sample, truncated mean over a second, tail by Lemma 11.62 with a
+maximum over sets of bounded type-wise density) is valid on all of `L_u`, and with doubling
+and adaptive stopping its cost at every permutation-symmetric instance — in particular at
+`g = 0` and at every additive instance — is within a polynomial factor of the least cost of
+any correct algorithm at that instance at accuracy `ε − ln 3`.  Its two bounds are the same
+combinatorial function, so no isoperimetry is used.  Instance-optimality at non-symmetric
+instances is open, as in §11.18.
+
+*Numbers* (workstream F; the first three rows re-computed by the coordinator at
+`(p, u) = (0.1, 2)` and `(0.3, 1)`).  Exponents at vanishing extensive accuracy, `u = 2`:
+
+| `θ` | `0` | `0.5` | `1` | `2` | `3` |
+|---|---|---|---|---|---|
+| hint at `g = 0`: `R_0(0+)` | `.0973` | `.0929` | `.0811` | `.0487` | `.0230` |
+| adaptive, no hint `=` hint at the hardest instance: `R^max(0+)` | `.0973` | `.0938` | `.0839` | `.0542` | `.0272` |
+| `γ*` | `0` | `−.170` | `−.330` | `−.583` | `−.734` |
+| non-adaptive, type-uniform sample: `a` | `.3278` | `.3162` | `.2836` | `.1841` | `.0928` |
+| plain Monte Carlo from `π` | `.3278` | `.4078` | `.4621` | `.4338` | `.2732` |
+
+Exact binomial sums (certified sensitive sets, so each number is a valid lower bound on a
+cost) approach the formulas like `0.35`–`0.41·ln n/n`: at `p = 0.1`, `u = 2`, `ε₁ = 0.3E`, `n = 64 000`,
+`0.019568` against `R_0 = 0.019497` and `0.023337` against `R^max = 0.023270` — at that size every
+algorithm, with or without a hint, needs `(1−2δ)e^{0.0233n}` evaluations at `γ*|x|`, while
+`e^{0.0196n}·poly` suffice with a hint at `g = 0`.
+
+*Remarks.*  (1) What the field changes, in one sentence: the sampler must be uniform on type
+classes (a mixture of all tilted product measures), the reference instance must be the
+lower envelope `H` of the additive instances, and the hardest instance tilts the field
+towards zero.  Four natural guesses are false (`DEAD_ENDS.md`, D47): that the identity holds
+with the hinted exponent of `g = 0`; that `g = 0` is the hardest instance; that `π` is the right
+sampler; and — the coordinator's — that what is needed is a Harper-type theorem for a fixed
+product measure (the asymptotic isoperimetry of a fixed product measure is the tail lemma
+of plain `π`-sampling and gives the worse exponents).
+(2) The nested algorithm is an algorithm in the query-complexity sense only: it uses the
+numbers `Ξ_H(q)`, finite maxima over subsets of the outer cube, which cost no evaluations
+but for which only the exponent is known.  A finite-`n` bound with the right exponent — a
+weighted Harper-type inequality for the type-uniform measure and the slack of `H` — would
+make it explicit.
+(3) Larger alphabets, an arbitrary single-site known part and sites of several types: the
+same statement with the game function of Theorem 11.27(c) and the Lipschitz polytope of
+additive instances in place of `[−u, u]` is a **sketch** (report, Proposition F12); with several
+site types the exponents do not add (`0.0086` against the average `0.0098` in an example).
+Known parts with interactions: nothing.  Bounded accuracies with a field: nothing (§11.19
+is for the uniform cube).
+
+*Machine-checked.*  `FieldShift.lean`: `klBin_tilt`, `cone_rate_eq`, `sphere_rate_eq`, `shift_identity`.
+`BoundedAccuracy.lean`: `exactRec_reaches_hint_of_pair` (the exact recursion built on any
+nonnegative nonincreasing `θ_na` that forms a `HintPair` with `θ_hint` comes within `η` of
+`θ_hint`).  *Not machine-checked:* `HintPair` for the pair `(θ_na, R^max)`, the formulas of
+Theorem 11.59, everything about algorithms.
+
+*Numerical evidence* (workstream F; scripts and outputs in `experiments/workstreams/F/`,
+`run_all.sh`).  Single-letter formulas against each other to `10⁻¹¹…10⁻¹⁵`; exact binomial sums
+for dips of `g = 0`, of `γ*|x|`, of `H` and for flattened cones up to `n = 4000` (four parameter
+sets) and `n = 64 000`; the single-letter lemma of Theorem 11.63 by direct minimisation over
+kernels for about 1900 laws; Theorem 11.63 on 1829 profile sets of six shapes at `n ≤ 2000`
+and on all 65 534 subsets of `Q_4`; the two-level logic relative to `H` on a small outer block
+with the exact tail function (198 runs valid; closing at `q = 1` and forgetting the weights
+`1/w_H` are detected); the level recursion with the pair `(θ_na, R^max)` never below `R^max` and
+within `0.5 %` of `a` after twelve levels.  *Not tested:* Theorem 11.63 for sets without a
+centre at large `n`; the cost of the nested algorithm.
+
+*Prior art* (read by the workstream as abstracts or machine summaries only).  Exact
+isoperimetry in the `p`-biased cube for down-sets (Bollobás–Leader 1991); the asymptotic
+isoperimetric problem for fixed product measures (Ahlswede–Zhang 1999; Yu, arXiv:2205.07596);
+inherently typical subsets (Ahlswede–Yang–Zhang 1997, through workstream A).  Not found at
+that depth: an isoperimetric statement with the second measure a mixture over types and a
+reference instance; a nested hint-free algorithm with a known part; the exponent
+`max_γ R_γ`.  "Not found", not "new".
+
 ---
 
 ## 12. Strongest unresolved questions, and what a publication would need
@@ -4096,11 +4346,16 @@ with a ladder of levels, or the use of a lower isoperimetric bound to close such
    without a hint that matches the hinted cost at *every* instance up to `e^{o(n)}`, cheap
    instances included?  (iv) **exponentially small accuracies** `ε = e^{-λn}`: the hinted
    exponents of rows 4–6 of Theorem 11.25(d) are not known to be attained without a hint.
-   (v) **other spaces** — the proof needs a tail lemma on the outer block in both directions
-   (an isoperimetric inequality with nested extremal sets), Lipschitz fibre averages, and a
-   distance that is additive over blocks; product measures and larger alphabets with a
-   weighted Hamming distance should be within reach (asymptotic isoperimetry of
-   Ahlswede–Zhang; from memory), whereas for Euclidean Lipschitz functions on Gaussian space
+   (v) **other spaces** — *a field as known part is done at the level of exponents* (§11.20,
+   under review): the tail lemma is taken relative to a reference instance, the reference is
+   the lower envelope of the additive instances, and the isoperimetric input is an
+   asymptotic statement for that reference, not the isoperimetry of a fixed product measure
+   (which gives the worse exponents of plain sampling from the Gibbs measure of the known
+   part — the guess of the earlier checkpoints was wrong in this respect, D47).  Open there:
+   an explicit finite-`n` bound for the tail function of the reference; bounded accuracies;
+   a proof that both exponents decrease with the field; instance-optimality beyond symmetric
+   instances; larger alphabets and sites of several types (a sketch); known parts with
+   interactions (nothing).  For Euclidean Lipschitz functions on Gaussian space
    neither the lower bound (half-spaces are detected from far away) nor the algorithm (blocks
    are not cheaper) transfers, and no exponent is known to us; (vi) **a machine-checked
    count** — the number of evaluations of the two-level algorithms (Theorems 11.52, 11.56) is

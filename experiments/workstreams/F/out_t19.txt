@@ -1,0 +1,9 @@
+(i) largest increase of F*(t; theta) between consecutive fields (grid of 121 fields in [0,6], 4 values of u, 1001 values of t): 4.441e-16  (<= 0 up to the gamma-grid error: nonincreasing)
+(ii) smallest value of F*(t;theta) - F(0,t;theta) over theta > 0, 0 < t < 1: 1.726e-11  (>= 0)
+(iii) u=1.0, fields (0, 1.0) half and half, e = 0.0 E (E = 0.10867 = average of the thresholds 0.10867): R^max = max_t[sum_j lam_j F*_j(t) - t e] = 0.026379;  average of the two exponents at the same e = 0.026379
+(iii) u=1.0, fields (0, 1.0) half and half, e = 0.3 E (E = 0.10867 = average of the thresholds 0.10867): R^max = max_t[sum_j lam_j F*_j(t) - t e] = 0.012866;  average of the two exponents at the same e = 0.012893
+(iii) u=1.0, fields (0, 2.0) half and half, e = 0.0 E (E = 0.08743 = average of the thresholds 0.08743): R^max = max_t[sum_j lam_j F*_j(t) - t e] = 0.021231;  average of the two exponents at the same e = 0.021231
+(iii) u=1.0, fields (0, 2.0) half and half, e = 0.3 E (E = 0.08743 = average of the thresholds 0.08743): R^max = max_t[sum_j lam_j F*_j(t) - t e] = 0.010357;  average of the two exponents at the same e = 0.010668
+(iii) u=1.0, fields (0, 3.0) half and half, e = 0.0 E (E = 0.07227 = average of the thresholds 0.07227): R^max = max_t[sum_j lam_j F*_j(t) - t e] = 0.017547;  average of the two exponents at the same e = 0.017547
+(iii) u=1.0, fields (0, 3.0) half and half, e = 0.3 E (E = 0.07227 = average of the thresholds 0.07227): R^max = max_t[sum_j lam_j F*_j(t) - t e] = 0.008559;  average of the two exponents at the same e = 0.009791
+time 18.06383442878723

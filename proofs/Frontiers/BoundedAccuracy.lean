@@ -141,6 +141,22 @@ theorem exactRec_reaches_hint {u : ℝ} (hu : 0 < u) {g : ℝ} (hg : 0 < g) (hgE
   · exact stepLE_exact hθ (P k).1
   · exact min_le_left _ _
 
+/-- **The exact recursion reaches the hinted exponent for any pair with the abstract
+properties.**  If `θna` is nonnegative and nonincreasing and `(θna, θh)` is a `HintPair`, then the
+exact level recursion built on `θna` comes within any `η` of `θh` at every accuracy rate
+`g ∈ (0, E)`.  (`exactRec_reaches_hint` is the case of the cube; theory report §11.20 uses this
+form for the pair of the biased cube, whose `HintPair` property is a paper proof.) -/
+theorem exactRec_reaches_hint_of_pair {θna θh : ℝ → ℝ} {a h E : ℝ} (hp : HintPair θna θh a h E)
+    (hθ : ∀ x, 0 < x → 0 ≤ θna x) (hθanti : ∀ x y, 0 < x → x ≤ y → θna y ≤ θna x)
+    {g : ℝ} (hg : 0 < g) (hgE : g < E) {η : ℝ} (hη : 0 < η) :
+    ∃ k, exactRec θna k g < θh g + η := by
+  have P := fun k => exactRec_props hθ hθanti hp.na_le k
+  refine iterates_lt_hint_add hp (exactRec θna) (fun k => ?_) (fun k x _ => ?_)
+    (fun k x y hx hxy => (P k).2.2 x y hx hxy) ⟨a, fun x hx => (P 0).2.1 x hx⟩
+    (fun k x hx => (P k).1 x hx) hg hgE hη
+  · exact stepLE_exact hθ (P k).1
+  · exact min_le_left _ _
+
 /-- The admissible set is nonempty as soon as `T` is bounded above. -/
 theorem admissible_nonempty {θna T : ℝ → ℝ} {C : ℝ} (hTC : ∀ x, 0 < x → T x ≤ C) {x : ℝ}
     (hx : 0 < x) : (admissible θna T x).Nonempty := by

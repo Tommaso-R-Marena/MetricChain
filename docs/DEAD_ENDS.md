@@ -1097,3 +1097,50 @@ the level of constants in a way that changes the exponent — tabulate the ratio
 building on it.  (3) and (4): an existence bound and a heuristic estimator together
 produced an expectation ("saturation near 16 beads") that exact computation by an
 independent party removed in one day.
+
+## D47. With a field, four natural guesses about "what carries over" are false (cycle 10; workstream F)
+
+The results of §§11.16–11.18 for the uniform cube suggest four statements for a known part
+`f = θ|x|` (the `p`-biased cube).  All four are false for `θ ≠ 0`; the fourth was the
+coordinator's own, written into §12 item 2(d) of two checkpoints.
+
+1. **"The identity `θ_na(e + θ_hint(e)) = θ_hint(e)` holds with the hinted exponent of the
+   instance `(f, g = 0)`."**  False.  The shift identity with a field has an extra term,
+   `D(P_{X|S}‖π_s|P_S) = I(S;X) + KL(P_X‖π) + u·P(X≠S) − Λ(P_S)` (`shift_identity`), and `KL(P_X‖π)` does
+   not vanish at the optimum.  A level recursion built on the pair `(θ_na, R_0)` falls below
+   the lower bound — by 3.1 % of `a` after ten levels at `p = 0.1`, `u = 2` — which is the
+   necessary condition of D45 doing its work again.  The identity holds with the hinted
+   exponent `R^max` of the hardest additive instance.
+2. **"The zero residual is the hardest instance with a hint."**  False: `R^max(e) > R_0(e)` for
+   every `0 ≤ e < E` when `p ≠ ½` (Theorem 11.59(d)); the hardest residual is additive and
+   partly cancels the field (`γ* = −0.62` at `p = 0.1`, `u = 2`, `e → 0`).  True at `θ = 0` (remark (4)
+   of §11.18).
+3. **"The Gibbs measure of the known part is the right sampling distribution."**  False, for
+   non-adaptive algorithms (plain Monte Carlo from `π` has an exponent up to 2.9 times the
+   non-adaptive exponent `a`) and for the nested scheme (with the reference `ψ₀ = 0` the
+   recursion converges to a strictly larger limit: `0.0884` against `0.0481` at `p = 0.1`, `u = 2`,
+   `e → 0`).  A single tilted product measure is not right either (a few per cent worse; a
+   sketch).  The right sample is uniform on every type class: the Gibbs law of the
+   flat-histogram instance, a mixture of all tilted product measures.
+4. **"What is missing for product measures is a Harper-type theorem — the asymptotic
+   isoperimetry of a fixed product measure (Ahlswede–Zhang) should do"** (theory report §12
+   item 2(d), checkpoints three and four; research log, "Resume here", item 2).  Neither
+   available in the exact form nor what is needed.  Exact vertex isoperimetry in the biased
+   cube is known for down-sets only, and super-level sets of Lipschitz functions are not
+   monotone; the asymptotic isoperimetry of a *fixed* product measure is the tail lemma of
+   plain `π`-sampling and yields the worse exponents of item 3.  The statement that is needed
+   has the measure chosen as a mixture over types *and* a reference instance `H` in the
+   slack (Theorem 11.63), and it is proved by types, not by compression.
+
+Also recorded by the workstream: importance weights `1/π(T_κ)` without regularisation
+correspond to a reference that is not in the class outside the window (its "slack" becomes
+negative and the closure bound picks up exits that the class forbids) — the reference must
+be a member of the class; and the max–min form of `R^max` does not extend to negative
+accuracies, where a solver returned garbage silently until a test compared it with the
+pair.
+
+*Lesson.*  The uniform cube hides three coincidences — the hardest instance is the zero
+residual, the Gibbs measure of the known part is uniform on type classes up to the
+binomial weights that the optimal profile respects, and Harper's theorem is both exact and
+about the right measure.  A statement that is true on the uniform cube "for the obvious
+reason" should be re-derived with a field before it is believed in general.

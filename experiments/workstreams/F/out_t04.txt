@@ -1,0 +1,56 @@
+$ python3 t04_na.py
+uniform case: max-min formula against min{KL(rho||1/2): KL(rho||p_u) <= eps1}
+  u=0.5 eps1=0.00031: maxmin=0.02456833 (m*=0.5000)  report=0.02456833
+  u=0.5 eps1=0.00619: maxmin=0.00930163 (m*=0.5000)  report=0.00930163
+  u=0.5 eps1=0.01546: maxmin=0.00261830 (m*=0.5000)  report=0.00261830
+  u=0.5 eps1=0.02784: maxmin=0.00008057 (m*=0.5000)  report=0.00008057
+  u=1.0 eps1=0.00120: maxmin=0.09023238 (m*=0.5000)  report=0.09023238
+  u=1.0 eps1=0.02402: maxmin=0.03451529 (m*=0.5000)  report=0.03451529
+  u=1.0 eps1=0.06006: maxmin=0.00978897 (m*=0.5000)  report=0.00978897
+  u=1.0 eps1=0.10810: maxmin=0.00030334 (m*=0.5000)  report=0.00030334
+  u=2.0 eps1=0.00434: maxmin=0.26966693 (m*=0.5000)  report=0.26966693
+  u=2.0 eps1=0.08676: maxmin=0.10688111 (m*=0.5000)  report=0.10688111
+  u=2.0 eps1=0.21689: maxmin=0.03106360 (m*=0.5000)  report=0.03106360
+  u=2.0 eps1=0.39040: maxmin=0.00098434 (m*=0.5000)  report=0.00098434
+biased case: identity theta_na(e + theta_H(e)) = theta_H(e); theta_na(e + R_0(e)) vs R_0(e)
+p=0.3 u=1.0: a = theta_na(0+) = max_m I_cone = 0.095301 at m=0.4718;  class threshold E = 0.103131
+   e=0.00000: theta_H=0.02503354  theta_na(e+theta_H)=0.02503354 (m*=0.5006; H had m*=0.5006) | R_0=0.02481374  theta_na(e+R_0)=0.02524568 | theta_na(e)=0.095282 (m*=0.472, kappa*=0.326)
+   e=0.01031: theta_H=0.02024094  theta_na(e+theta_H)=0.02024094 (m*=0.5036; H had m*=0.5036) | R_0=0.02003854  theta_na(e+R_0)=0.02040017 | theta_na(e)=0.045149 (m*=0.490, kappa*=0.322)
+   e=0.03094: theta_H=0.01220876  theta_na(e+theta_H)=0.01220876 (m*=0.5096; H had m*=0.5096) | R_0=0.01204892  theta_na(e+R_0)=0.01229121 | theta_na(e)=0.019941 (m*=0.504, kappa*=0.319)
+   e=0.06188: theta_H=0.00397537  theta_na(e+theta_H)=0.00397537 (m*=0.5186; H had m*=0.5186) | R_0=0.00388745  theta_na(e+R_0)=0.00399643 | theta_na(e)=0.004999 (m*=0.517, kappa*=0.316)
+   e=0.09282: theta_H=0.00024823  theta_na(e+theta_H)=0.00024823 (m*=0.5276; H had m*=0.5276) | R_0=0.00022856  theta_na(e+R_0)=0.00024923 | theta_na(e)=0.000261 (m*=0.528, kappa*=0.314)
+p=0.1 u=1.0: a = theta_na(0+) = max_m I_cone = 0.043863 at m=0.4418;  class threshold E = 0.047398
+   e=0.00000: theta_H=0.01152689  theta_na(e+theta_H)=0.01152689 (m*=0.5012; H had m*=0.5012) | R_0=0.01110636  theta_na(e+R_0)=0.01193859 | theta_na(e)=0.043851 (m*=0.442, kappa*=0.124)
+   e=0.00474: theta_H=0.00932318  theta_na(e+theta_H)=0.00932318 (m*=0.5074; H had m*=0.5074) | R_0=0.00893638  theta_na(e+R_0)=0.00963135 | theta_na(e)=0.020809 (m*=0.480, kappa*=0.120)
+   e=0.01422: theta_H=0.00562764  theta_na(e+theta_H)=0.00562764 (m*=0.5198; H had m*=0.5198) | R_0=0.00532318  theta_na(e+R_0)=0.00578636 | theta_na(e)=0.009201 (m*=0.508, kappa*=0.117)
+   e=0.02844: theta_H=0.00183486  theta_na(e+theta_H)=0.00183486 (m*=0.5383; H had m*=0.5383) | R_0=0.00166892  theta_na(e+R_0)=0.00187498 | theta_na(e)=0.002309 (m*=0.535, kappa*=0.115)
+   e=0.04266: theta_H=0.00011475  theta_na(e+theta_H)=0.00011475 (m*=0.5568; H had m*=0.5568) | R_0=0.00007950  theta_na(e+R_0)=0.00011655 | theta_na(e)=0.000121 (m*=0.557, kappa*=0.113)
+p=0.1 u=2.0: a = theta_na(0+) = max_m I_cone = 0.163738 at m=0.4191;  class threshold E = 0.212294
+   e=0.00000: theta_H=0.04813001  theta_na(e+theta_H)=0.04813001 (m*=0.5065; H had m*=0.5065) | R_0=0.04269203  theta_na(e+R_0)=0.05314426 | theta_na(e)=0.163718 (m*=0.419, kappa*=0.198)
+   e=0.02123: theta_H=0.03877733  theta_na(e+theta_H)=0.03877733 (m*=0.5169; H had m*=0.5169) | R_0=0.03384644  theta_na(e+R_0)=0.04242408 | theta_na(e)=0.080145 (m*=0.477, kappa*=0.180)
+   e=0.06369: theta_H=0.02327038  theta_na(e+theta_H)=0.02327038 (m*=0.5373; H had m*=0.5373) | R_0=0.01949672  theta_na(e+R_0)=0.02507013 | theta_na(e)=0.036246 (m*=0.520, kappa*=0.168)
+   e=0.12738: theta_H=0.00755410  theta_na(e+theta_H)=0.00755410 (m*=0.5675; H had m*=0.5675) | R_0=0.00558011  theta_na(e+R_0)=0.00798960 | theta_na(e)=0.009304 (m*=0.563, kappa*=0.157)
+   e=0.19106: theta_H=0.00047270  theta_na(e+theta_H)=0.00047270 (m*=0.5978; H had m*=0.5978) | R_0=0.00011541  theta_na(e+R_0)=0.00048950 | theta_na(e)=0.000495 (m*=0.598, kappa*=0.149)
+p=0.05 u=2.0: a = theta_na(0+) = max_m I_cone = 0.096958 at m=0.4038;  class threshold E = 0.124767
+   e=0.00000: theta_H=0.02840452  theta_na(e+theta_H)=0.02840452 (m*=0.5075; H had m*=0.5075) | R_0=0.02412807  theta_na(e+R_0)=0.03243344 | theta_na(e)=0.096942 (m*=0.404, kappa*=0.117)
+   e=0.01248: theta_H=0.02289680  theta_na(e+theta_H)=0.02289680 (m*=0.5197; H had m*=0.5197) | R_0=0.01902576  theta_na(e+R_0)=0.02581314 | theta_na(e)=0.047452 (m*=0.472, kappa*=0.104)
+   e=0.03743: theta_H=0.01375564  theta_na(e+theta_H)=0.01375564 (m*=0.5438; H had m*=0.5438) | R_0=0.01080687  theta_na(e+R_0)=0.01518331 | theta_na(e)=0.021475 (m*=0.523, kappa*=0.096)
+   e=0.07486: theta_H=0.00447390  theta_na(e+theta_H)=0.00447390 (m*=0.5793; H had m*=0.5793) | R_0=0.00295123  theta_na(e+R_0)=0.00481425 | theta_na(e)=0.005519 (m*=0.574, kappa*=0.088)
+   e=0.11229: theta_H=0.00028062  theta_na(e+theta_H)=0.00028062 (m*=0.6148; H had m*=0.6148) | R_0=0.00003013  theta_na(e+R_0)=0.00029253 | theta_na(e)=0.000294 (m*=0.614, kappa*=0.082)
+p=0.2 u=4.0: a = theta_na(0+) = max_m I_cone = 0.553492 at m=0.4707;  class threshold E = 1.171218
+   e=0.00000: theta_H=0.21424463  theta_na(e+theta_H)=0.21424463 (m*=0.5119; H had m*=0.5119) | R_0=0.19259781  theta_na(e+R_0)=0.22939691 | theta_na(e)=0.553467 (m*=0.471, kappa*=0.441)
+   e=0.11712: theta_H=0.17041900  theta_na(e+theta_H)=0.17041900 (m*=0.5198; H had m*=0.5198) | R_0=0.15134763  theta_na(e+R_0)=0.18086282 | theta_na(e)=0.294006 (m*=0.500, kappa*=0.403)
+   e=0.35137: theta_H=0.10032080  theta_na(e+theta_H)=0.10032080 (m*=0.5350; H had m*=0.5350) | R_0=0.08632420  theta_na(e+R_0)=0.10517880 | theta_na(e)=0.139401 (m*=0.526, kappa*=0.379)
+   e=0.70273: theta_H=0.03198504  theta_na(e+theta_H)=0.03198504 (m*=0.5572; H had m*=0.5572) | R_0=0.02483981  theta_na(e+R_0)=0.03314065 | theta_na(e)=0.037353 (m*=0.555, kappa*=0.358)
+   e=1.05410: theta_H=0.00198381  theta_na(e+theta_H)=0.00198381 (m*=0.5798; H had m*=0.5798) | R_0=0.00063457  theta_na(e+R_0)=0.00203142 | theta_na(e)=0.002054 (m*=0.580, kappa*=0.340)
+p=0.02 u=3.0: a = theta_na(0+) = max_m I_cone = 0.114827 at m=0.3891;  class threshold E = 0.175563
+   e=0.00000: theta_H=0.03707396  theta_na(e+theta_H)=0.03707396 (m*=0.5174; H had m*=0.5174) | R_0=0.02584333  theta_na(e+R_0)=0.04736247 | theta_na(e)=0.114812 (m*=0.389, kappa*=0.114)
+   e=0.01756: theta_H=0.02976553  theta_na(e+theta_H)=0.02976553 (m*=0.5346; H had m*=0.5346) | R_0=0.01981484  theta_na(e+R_0)=0.03683831 | theta_na(e)=0.057401 (m*=0.477, kappa*=0.093)
+   e=0.05267: theta_H=0.01778871  theta_na(e+theta_H)=0.01778871 (m*=0.5679; H had m*=0.5679) | R_0=0.01051039  theta_na(e+R_0)=0.02102346 | theta_na(e)=0.026520 (m*=0.543, kappa*=0.080)
+   e=0.10534: theta_H=0.00577491  theta_na(e+theta_H)=0.00577491 (m*=0.6164; H had m*=0.6164) | R_0=0.00226813  theta_na(e+R_0)=0.00648971 | theta_na(e)=0.006980 (m*=0.610, kappa*=0.068)
+   e=0.15801: theta_H=0.00036405  theta_na(e+theta_H)=0.00036405 (m*=0.6648; H had m*=0.6648) | R_0=-0.00000000  theta_na(e+R_0)=0.00037994 | theta_na(e)=0.000380 (m*=0.664, kappa*=0.060)
+max |theta_na(e + theta_H(e)) - theta_H(e)| = 2.0789758803374525e-12  time 93.62543320655823
+
+real	1m34.013s
+user	1m33.980s
+sys	0m0.047s

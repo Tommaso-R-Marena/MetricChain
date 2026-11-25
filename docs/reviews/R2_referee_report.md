@@ -377,7 +377,7 @@ evaluations of the same expression and cannot fail except through the code path 
 ## Appendix A. Referee lemmas, machine-checked against `ee2053f`
 
 The scratch files were checked with `lake env lean <file>` from the repository root; they are not part of the
-repository (session scratch directory, `/tmp/claude-0/-home-user-MetricChain/e85f9a34-b5c1-5fe1-b26f-387d1b839ae4/scratchpad/referee2/`: `Referee2.lean`, `Referee2b.lean`, `Referee2c.lean`, and the Python
+repository (session scratch directory, `<session scratch directory>/referee2/`: `Referee2.lean`, `Referee2b.lean`, `Referee2c.lean`, and the Python
 scripts under `scripts/`).  The complete source of the four lemmas is reproduced here so that they can be
 re-checked.  All depend on `propext`, `Classical.choice`, `Quot.sound` only.
 

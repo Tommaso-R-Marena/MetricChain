@@ -233,17 +233,32 @@ undercuts and converges to the hinted exponent, the contraction at accuracy zero
 algebra of the bracket and of the count; simulated with the constants of the theorem without
 a violation (scripts in `experiments/workstreams/K/`).  The coordinator's own sketch of this
 step was wrong in its mechanism (D46).
+(v) *With a known part* (theory report §11.20; workstream F, `docs/workstreams/F_REPORT.md`;
+**paper proofs under independent review at this checkpoint — unrefereed**).  The first step
+beyond the uniform cube: a field as known part, i.e. a `p`-biased product reference measure.
+The exponents are again single-letter, and "adaptive = hinted" persists in the form *the
+worst case without a hint is the hardest case with a hint* — but three things that look
+obvious on the uniform cube are false with a field (D47): the hardest instance is not the
+zero residual but an additive residual that partly cancels the field; the right sample is
+not the Gibbs measure of the known part but uniform on every type class (a flat histogram
+in the magnetisation — plain Monte Carlo from the Gibbs measure is worse by up to a factor
+2.9 in the exponent); and the isoperimetric input is not that of a fixed product measure
+but a new asymptotic statement for a "flat-histogram" reference instance, proved by the
+method of types.  Machine-checked: the identity between the three rates (`FieldShift.lean`)
+and the convergence of the exact recursion for any pair of exponent functions with the
+abstract properties; the central formulas were re-computed by the coordinator
+(`experiments/coordinator_checks/f_spot_checks.py`).
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
 interval evaluation of force-field terms over voxels, and any claim of practical solver
 performance are outside the development.  The complexity results are exponents on idealised
-classes (product landscapes; for algorithms without a hint only the cube with a zero known
-part), with paper proofs wherever the theory report does not name a Lean declaration; the
+classes (product landscapes; for algorithms without a hint only the cube, with a zero known
+part or a field), with paper proofs wherever the theory report does not name a Lean declaration; the
 newest of them — the adaptive exponent — has a machine-checked recursion and bracket but a
-paper proof for the number of evaluations, its extension to bounded accuracies was still
-under review when this was written, and its algorithms are not practical at any size that
-can be simulated.  The chain-length independence of profile certificates is a bound, not an
+paper proof for the number of evaluations, its extensions to bounded accuracies and to a
+field as known part were still under review when this was written, and its algorithms are
+not practical at any size that can be simulated.  The chain-length independence of profile certificates is a bound, not an
 observation: at every enumerated size the certificates grow.  `docs/THEORY_REPORT.md` §8 lists the limitations, §10 ends with a
 one-table summary of what each kind of knowledge about the residual costs, and
 `docs/DEAD_ENDS.md` records every claim that was made and withdrawn.

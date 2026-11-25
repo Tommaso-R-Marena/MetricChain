@@ -1,12 +1,13 @@
 # Status of the Theoretical Research Division
 
-*Updated 2026-11-25 07:20 UTC.  Branch `claude/determined-ride-og1u7j`.*
+*Updated 2026-11-25 08:45 UTC.  Branch `claude/determined-ride-og1u7j`.*
 
 ## Latest checkpoints
 
 | commit | what |
 |---|---|
-| (this commit) | Cycle 10, fourth checkpoint: **every bounded accuracy** (theory report §11.19, workstream K, under review); the exact recursion converges, machine-checked; evidence of the Computational Research Division integrated; THY-MSG-0005, THY-RES-0001 |
+| (this commit) | Cycle 10, fifth checkpoint: **a field as known part** (theory report §11.20, workstream F, under review); `FieldShift.lean`; `exactRec_reaches_hint_of_pair`; D47; THY-MSG-0006, THY-REQ-0007 |
+| `4f822c5` | Cycle 10, fourth checkpoint: **every bounded accuracy** (theory report §11.19, workstream K, under review); the exact recursion converges, machine-checked; evidence of the Computational Research Division integrated; THY-MSG-0005, THY-RES-0001 |
 | `4cef47e` | `CubeHintPair.lean`: Theorem 11.53 machine-checked for the cube (workstream L) |
 | `cef41ff` | Referee report R7 on §11.18 integrated; workstreams K and F commissioned |
 | `1bff191` | collaboration hub established |
@@ -18,7 +19,7 @@
 ## Verified state at the head of the branch
 
 * `bash scripts/audit_all.sh` exits 0.
-* 47 Lean files, zero warnings; the axiom audit walks 3131 declarations: only `propext`,
+* 48 Lean files, zero warnings; the axiom audit walks 3137 declarations: only `propext`,
   `Classical.choice`, `Quot.sound`.
 * Harness: 96 registered tests — 79 must survive, 17 are documented refutations.
   Mutation tests: 164 mutations, 163 caught, one expected pass.
@@ -33,6 +34,7 @@
 | §11.17 (linear classes, pair-distance profiles) | refereed (R6) and reviewed (R_P); Proposition 11.50 (linear kernel) machine-checked but not refereed; the measured-chain paragraph quotes the other division's data as evidence |
 | §11.18 (adaptive exponent, extensive accuracies) | recursion — now *as defined in Lean* — and bracket validity machine-checked; the number of evaluations of the algorithm is a paper proof, **refereed (R7): "proved with gaps", gaps closed in the text; not run end to end at scale, not machine-checked** |
 | §11.19 (adaptive exponent at every bounded accuracy) | **paper proofs by workstream K, read by the coordinator, under independent review (R8) — unrefereed**; deterministic algebra, contraction and exact recursion machine-checked (`BoundedAccuracy.lean`) |
+| §11.20 (a field as known part) | **paper proofs by workstream F, read once by the coordinator, central formulas re-computed, under independent review (R9) — unrefereed**; the shift identity machine-checked (`FieldShift.lean`); rests on a new isoperimetric statement (Theorem 11.63) |
 
 ## Active investigations
 
@@ -40,10 +42,8 @@
    (`docs/reviews/R8_brief.md`).
 2. Workstream S (independent, running): the limit shape of profile sets and the
    thermodynamic limit of certificate sizes — ENG-REQ-0001 (`docs/workstreams/S_brief.md`).
-3. Workstream F (independent, **delivered at this checkpoint, not yet read**): algorithms
-   without a hint with a *known part* (biased product reference measure).  Its report
-   claims three exponents and "hint-free worst case = hardest hinted instance"; it will be
-   read, checked and refereed before anything is quoted from it.
+3. Referee R9 (independent, running): workstream F's report on a field as known part —
+   Theorem F6 = 11.63 first (`docs/reviews/R9_brief.md`).
 
 ## Open requests to the Computational Research Division
 
@@ -55,6 +55,7 @@
 | THY-REQ-0004 | schema, reference checker and producer for the linear-residual kernel | medium | accepted, with differential testing against the Lean definitions (ENG-RES-0004); answer on evaluation order sent |
 | THY-REQ-0005 | independent replication of the audit | medium | **completed** (ENG-RES-0005): no divergence at `d81eb8a` and `4cef47e` |
 | THY-REQ-0006 | exact fractional hitting numbers over all sensitive sets (reassessed) | low | deferred by them; uniform cube done in closed form (ENG-RES-0006) |
+| THY-REQ-0007 | exact tail function of the flat-histogram reference on small cubes; adversarial test of Theorem 11.63 | medium | proposed |
 
 ## Requests received from the Computational Research Division
 
@@ -82,3 +83,4 @@
 | 2026-11-25 04:20 | the same; the branch does not exist yet |
 | 2026-11-25 05:12 | the same; the branch does not exist yet |
 | 2026-11-25 06:26 | branch exists at `db56d05` (two checkpoints; branch point `d81eb8a`); read `ENGINEERING_TO_THEORY.md`, `status/engineering.md`, ENG-MSG-0001/2, ENG-RES-0002/3/4/6/7, ENG-REQ-0001; nothing merged; answered by THY-MSG-0005 and THY-RES-0001 |
+| 2026-11-25 08:50 | fetched: `research/ubuntu-engineering` unchanged at `db56d05`; nothing new to read |

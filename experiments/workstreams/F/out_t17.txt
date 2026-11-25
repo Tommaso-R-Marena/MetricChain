@@ -1,0 +1,21 @@
+$ python3 t17_misc.py
+(a) cosh form vs closed game formula: max abs error 1.3877787807814457e-15
+(b) p=0.1 u=2.0: recursion built on the pair of g = 0 alone: after 10 levels max(R^max - T_10)/a = 0.0312 > 0  (it falls below the lower bound of the hardest additive instance: such an accounting is refuted)
+(c) p=0.1 u=2.0:   e/E      R_0       R^max     theta_h^pi (hinted exponent of g=0 with the sampler pi)
+                  0.00   0.042692  0.048130  0.088379
+                  0.25   0.022690  0.026764  0.061628
+                  0.50   0.009258  0.011824  0.039015
+                  0.75   0.001823  0.002955  0.020956
+(d) p=0.1 u=2.0: T_2(0+)/a = 0.5050   (h/a = 0.2940)
+(b) p=0.3 u=1.0: recursion built on the pair of g = 0 alone: after 10 levels max(R^max - T_10)/a = 0.0020 > 0  (it falls below the lower bound of the hardest additive instance: such an accounting is refuted)
+(c) p=0.3 u=1.0:   e/E      R_0       R^max     theta_h^pi (hinted exponent of g=0 with the sampler pi)
+                  0.00   0.024814  0.025034  0.029952
+                  0.25   0.013856  0.014027  0.018270
+                  0.50   0.006107  0.006219  0.009391
+                  0.75   0.001502  0.001554  0.003389
+(d) p=0.3 u=1.0: T_2(0+)/a = 0.5008   (h/a = 0.2627)
+time 48.54008769989014
+
+real	0m48.949s
+user	0m49.044s
+sys	0m0.086s

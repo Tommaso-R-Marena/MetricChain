@@ -1,0 +1,13 @@
+(i) derivative formula vs central differences: max abs error 3.98e-11; sign of dF/dgamma(0,t) = sign(p - 1/2) in all cases: True
+(ii) max-min form of R_gamma against the game formula, 18 cases with gamma != 0: max abs difference 5.90e-16
+(iii) quantile truncation: 1080 checks on random Lipschitz functions (n = 6, 8, 10), failures: 0
+     p=0.1 u=2.0 n=500 m=0.3 theta=0.02: exact drop/n = 0.07833 >= bound/n = -0.03534   (limit F_m(theta) = 0.06661)
+     p=0.1 u=2.0 n=500 m=0.5 theta=0.05: exact drop/n = 0.05622 >= bound/n = -0.04516   (limit F_m(theta) = 0.04603)
+     p=0.1 u=2.0 n=1000 m=0.5 theta=0.02: exact drop/n = 0.10183 >= bound/n = 0.02268   (limit F_m(theta) = 0.09344)
+     p=0.1 u=2.0 n=2000 m=0.3 theta=0.05: exact drop/n = 0.03488 >= bound/n = 0.00513   (limit F_m(theta) = 0.03224)
+     p=0.3 u=1.0 n=500 m=0.3 theta=0.02: exact drop/n = 0.03112 >= bound/n = -0.05956   (limit F_m(theta) = 0.02222)
+     p=0.3 u=1.0 n=500 m=0.5 theta=0.05: exact drop/n = 0.01411 >= bound/n = -0.06200   (limit F_m(theta) = 0.00806)
+     p=0.3 u=1.0 n=1000 m=0.5 theta=0.02: exact drop/n = 0.03666 >= bound/n = -0.02185   (limit F_m(theta) = 0.03086)
+     p=0.3 u=1.0 n=2000 m=0.3 theta=0.05: exact drop/n = 0.00614 >= bound/n = -0.01718   (limit F_m(theta) = 0.00451)
+(iv) truncated cones: exact drop of ln A is at least the bound of Theorem F4(c) in all 24 cases: True
+time 6s

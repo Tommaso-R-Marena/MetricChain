@@ -1,0 +1,8 @@
+$ python3 t10_additive_large.py 0.1 2.0 0.3 64000 star
+p=0.1 u=2.0 eps1=0.063688: R_0=0.019497; hardest additive instance gamma*=-0.56338: R=0.023270, centre type m*=0.5373
+ instance gamma*
+  n=64000: exponent 0.023337 (k/n=0.5373, c/n=0.6849)  excess over the formula: 0.000067 = 0.385 ln(n)/n   [325.9s]
+
+real	5m28.326s
+user	5m26.400s
+sys	0m0.123s
