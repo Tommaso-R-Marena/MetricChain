@@ -164,6 +164,7 @@ if th:
     print("three levels:", d)
     summary["three"] = d
 adv = load("adversarial.jsonl")
+adv.sort(key=lambda r: (json.loads(r["cell"])["n_o"], r["objective"]))
 print("adversarial search:")
 for r in adv:
     c = json.loads(r["cell"])
