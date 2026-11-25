@@ -29,7 +29,7 @@ import modal
 ROOT = Path(__file__).resolve().parents[1]
 C_SOURCE = ROOT / "src" / "metricchain_eng" / "chains" / "dia_enum.c"
 
-MAX_CONTAINERS = 64
+MAX_CONTAINERS = 50
 TIMEOUT_S = 1800
 
 app = modal.App("metricchain-eng-chain-enum")

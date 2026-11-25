@@ -26,7 +26,8 @@ from pathlib import Path
 import modal
 
 ROOT = Path(__file__).resolve().parents[1]
-MAX_CONTAINERS = 100
+MAX_CONTAINERS = 50          # half of the workspace-wide limit of 100 concurrent containers (COMPUTE_LEDGER, "limits"):
+                             # engineering jobs are run one at a time and never fill the workspace
 TIMEOUT_S = 3600
 USD_PER_CORE_HOUR = 0.0473 + 1.0 * 0.0080        # one core + 1 GiB (rates of 2026-11-25, docs/engineering/COMPUTE_LEDGER.md)
 

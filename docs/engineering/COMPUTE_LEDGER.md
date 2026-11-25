@@ -14,6 +14,7 @@ are listed too, because they are part of what a result cost.
 | The workspace is shared with other projects | **yes**: `modal billing report --for "this month"` shows $32.72 of usage on 2026-11-20 by two apps of other projects, and three deployed apps of other projects exist (0 tasks).  None of this belongs to MetricChain; none of it is touched, and their names are not recorded here |
 | Workspace budget ("usage limit") and spend limit | Not visible from the CLI (dashboard settings; `modal workspace settings list` shows only `default-environment` and `image-builder-version`).  **Stated by the research owner on 2026-11-25 (session 2), from the billing page:** the programme's Modal allocation is prepaid credit, of which about **$1,995 remained** at that time; a workspace usage limit exists but is *higher* than the credit balance, so the platform would not stop work at the credit line |
 | Deadline for expensive work | 2026-11-30 15:00 US Eastern (research owner's cutoff); credits stated to expire 2026-11-30 19:00 Eastern.  Not independently verifiable |
+| Workspace resource limits | **Shown by the research owner on 2026-11-25 (session 2), from the workspace's resource-limits page:** 100 concurrent containers and 10 concurrent GPUs workspace-wide, 5 container creations per second.  Job M-008 was launched with a cap of 100 containers before this was known and held the whole workspace limit for about 25 minutes; the owner pointed it out |
 
 **Instruction of the research owner (2026-11-25, session 2):** the remaining credit is a hard
 ceiling — it must not be exceeded — and there is no obligation to use it: compute is to be
@@ -32,7 +33,11 @@ of session 1).**  Because no platform limit enforces the ceiling, it is enforced
    month (a margin of about a quarter of the credit for other projects on the same
    workspace and for billing lag);
 4. nothing is deployed; apps are ephemeral (`modal run`) and are checked to be stopped at the
-   end of every session.
+   end of every session;
+5. **at most 50 containers in total** are requested by engineering at any time (half of the
+   workspace limit of 100), jobs are run one after another, not side by side, and no GPU is
+   used without a ledger entry that says why — so that other work on the workspace is never
+   starved by ours.
 
 ## Rates (from `modal billing rates`, 2026-11-25)
 
