@@ -509,7 +509,7 @@ the exponent.
 | (a) | Theorem 4 (symmetrisation of a dip over a code of dual distance `> k`) | theory report Theorems 11.54, 11.58 (paper proofs; under review by our workstream R6) | author; referee R3 ("proved"); **[V]** given the code (L1: `theorem4_adaptive_marginal_oracle`; the code itself for `k = 1` only) |
 | (b) | addendum A1 = theory report Proposition 11.104 = referee's R5 (symmetrised cones; R5(2): the drop of `ln Z` is at least `D_R + ln(1−γ)`, `γ = ½(#C − 1)·cosh(u/2)^{−d_min}`) | theory report Theorem 11.44 (plain Monte Carlo ignores the oracle) | three independent derivations; **[V]** given the code (L1: `theorem4'_nonadaptive_marginal_oracle`) |
 | (c) | referee's R6: excess identity R6.1, sign lemma R6.2, overlap bound R6.3 | theory report Theorem 11.58; Corollary of Theorem 5 for the zero residual | referee (author of the proof); **second full reading by the coordinator at checkpoint 21: R6.1, R6.2, R6.3 and the assembly re-derived line by line, no gap found** (notes below); numerics by both; Lean for R6.1, R6.2 requested of workstream L2 |
-| (c) with both oracles | referee's Corollary R6′ (cosets of a code in place of the two centres) | as (c) | referee; *read, not re-derived* by the coordinator — the overlap count is one sentence there and needs writing out |
+| (c) with both oracles | referee's Corollary R6′ (cosets of a code in place of the two centres) | as (c) | referee; **written out and re-derived by the coordinator at checkpoint 25** (notes below) |
 | (d) | addendum A10 | as (a) | author only |
 
 *Notes of the second reading of R6 (coordinator).*  R6.1: with `g′ = min(g₀, T)`,
@@ -530,6 +530,28 @@ hypergeometric of mean `jD/n`; the event `d(x,a₀) < r₁` needs `i` to exceed 
 least `(n/2 − r₁ − 2Δ)/2`; Hoeffding's inequality for sampling without replacement gives the
 bound.  Hypotheses (i), (ii) hold for large `n` when `ρ₀ < ρ₁ < ½` and the two centres are at
 distance `n/2 ± √(n ln n)`, which a random centre satisfies with probability `1 − 2/n²`.
+
+*Corollary R6′ written out (coordinator).*  Let `C` be a linear code of dual distance `> k`,
+`|C| = e^{o(n)}`; `g₀^C(x) = −u(r₁ − d(x, a₀+C))₊`, twin `T_s^C(x) = −u(r₁ + s − d(x, a′+C))₊`,
+`g′_s = min(g₀^C, T_s^C)`.  (1) Both are functions of distances to cosets of `C`, hence
+`C`-invariant, so by Lemma 1 all their `k`-body marginals are uniform: the marginal oracle
+cannot tell them apart.  (2) The excess identity R6.1 holds for any pair of functions.
+(3) With `N_d = #{x : d(x, a₀+C) = d}`, `W^C = Σ_{d<r₁} N_d e^{u(r₁−d)}`, `V^C = Σ_{d<r₁} N_d`,
+`A′^C = Σ_{d<r₁} N_d u(r₁−d)e^{u(r₁−d)} ∈ [uW^C, ur₁W^C]`: the twin at `s = 0` is an exact translate of the
+visible function (`d(x, a′+C) = d(x ⊕ a₀ ⊕ a′, a₀+C)`), so its free sums at `s = ±1` are those of
+R6.2 with `N_d` in place of `C(n,d)`: `E^f_{+1} = e^u(W^C + N_{r₁}) − V^C − N_{r₁}`, `D^f_{+1} = −e^u(A′^C + u(W^C + N_{r₁}))`,
+`E^f_{−1} = e^{−u}W^C − V^C`, `D^f_{−1} = −e^{−u}(A′^C − uW^C)`; and `W^C + N_{r₁} ≤ Z₀ = 2ⁿ − V^C + W^C` because the points
+at distance exactly `r₁` are outside the visible region.  The two signs follow as before
+from (i) `W^C ≥ 8r₁e^u2ⁿ` — true because `W^C ≥ W` — and (ii) `ω^C_{+1} ≤ e^{−u}W^C/(2(r₁+1))`.
+(4) Overlap: `e^{−T^C} ≤ Σ_{c′} e^{−T_{c′}}` and the visible region is a union of `|C|` balls, so
+`ω^C_{+1} ≤ |C|²·max` over pairs of centres `(a₀+c, a′+c′)` of the single-pair overlap, each bounded
+by R6.3 once every word of `a₀ ⊕ a′ ⊕ C` has weight within `Δ` of `n/2`; for a uniform `a′` and
+`Δ = √(n(ln n + ln|C|))` this fails with probability at most `2/n²` (union bound over `C`), and
+`|C|²·exp(−(n/2 − r₁ − 2Δ)²/(2r₁))` is exponentially small because `|C| = e^{o(n)}`.  (5) The two
+instances coincide outside `{d(·, a′+C) ≤ r₁}`, of size at most `|C|·|B(n, r₁)|`; a uniform `a′`
+gives `E[#evaluations] ≥ (1 − 2δ)(1 − o(1))·2ⁿ/(|C|·|B(n, r₁)|)` at `g₀^C`.  So with **both** oracles —
+exact `k`-body marginals and the exact mean residual energy — the exponent at bounded
+accuracy is still `h`.
 
 **What the theorem does not cover** — unchanged: any known part without the translation
 symmetry of the uniform cube (workstream F is on the field case); the thermodynamic
@@ -637,18 +659,30 @@ exact linear programmes]:**
 |---|---|---|---|---|
 | `K = 1` (`q_max R_g = 0.6`), exact | 0.06 | 0.42 | 0.75 | `[0, 0.76]` |
 | `K = 3` (`q_max R_g = 1.9`), exact | 0.00 | 0.38 | 0.74 | `[0, 0.57]` |
-| `K = 12` (`q_max R_g = 7.7`), exact | 0.00 | 0.34 | 0.52 | `[0, 0.53]` |
+| `K = 12` (`q_max R_g = 7.6`), exact | 0.00 | 0.34 | 0.52 | `[0, 0.53]` |
 | full distance histogram, exact (`K → ∞`) | 0 | 0.22 | 0.31 | `[0, 0.50]` |
 | `K = 3`, 1 % | 0.09 (`R_g²` within −6 %, +12 %) | 0.45 | 0.77 | `[0, 0.60]` |
 | `K = 12`, 1 % | 0.08 (−5 %, +11 %) | 0.43 | 0.59 | `[0, 0.56]` |
 | `K = 3`, 5 % | 0.32 | 0.60 | 0.81 | `[0, 0.68]` |
 | `K = 12`, 5 % | 0.30 (−16 %, +43 %) | 0.58 | 0.71 | `[0, 0.65]` |
 
-The 11-bead chain gives the same picture (`K = 12`: 0.00 / 0.31 / 0.36 exact; 0.09 / 0.43 / 0.47 at
-1 %); at 15 beads the first channels give 0.05 → 0.00 for `R_g²`, 0.42 → 0.37 for the end-to-end
-distance and 0.78 for the gauche fraction (`K = 1 … 3`, exact; larger `K` in
-`scattering_identified_n12.log`).  Consistency: the exact-data columns lie between the
-earlier results for `R_g²` alone and for the full histogram (`INFERENCE_LIMITS.md` §11.1).
+**Three chain lengths under the same instrument [N, exact linear programmes;
+`scattering_fixed_instrument.py`, two and a half minutes].**  The same absolute grid of
+eleven points up to `q_max = 1.745` per lattice unit (`q_max·b = 3.0` for the bond length `b`; the
+Shannon grid of the longest chain, slightly oversampled for the shorter ones) and the
+same tolerance; unidentified fractions at exact data / 1 % / 5 %:
+
+| chain (conformations; Shannon channels in range) | `R_g²` | end-to-end `R²` | gauche fraction | compact decile, upper bound |
+|---|---|---|---|---|
+| 11 beads (5 849; 7.9) | 0.00 / 0.08 / 0.29 | 0.32 / 0.43 / 0.57 | 0.47 / 0.58 / 0.70 | 0.48 / 0.52 / 0.61 |
+| 13 beads (49 833; 9.4) | 0.00 / 0.08 / 0.27 | 0.34 / 0.43 / 0.57 | 0.57 / 0.64 / 0.74 | 0.53 / 0.56 / 0.65 |
+| 15 beads (422 825; 11.0) | 0.00 / 0.08 / 0.27 | 0.34 / 0.42 / 0.54 | 0.62 / 0.67 / 0.75 | 0.55 / 0.58 / 0.66 |
+
+With the Shannon grids of each chain the picture is the same (`K = 12`, exact: gauche
+fraction 0.36 / 0.52 / 0.61 at 11 / 13 / 15 beads; end-to-end 0.31 / 0.34 / 0.34; all rows in
+`scattering_identified_n8_10.json`, `scattering_identified_n12.json`).  Consistency: the exact-data
+columns lie between the earlier results for `R_g²` alone and for the full histogram
+(`INFERENCE_LIMITS.md` §11.1).
 
 **What the numbers say.**
 1. A curve fixes `R_g²` and little else: with exact data three channels identify `R_g²` to
@@ -661,6 +695,15 @@ earlier results for `R_g²` alone and for the full histogram (`INFERENCE_LIMITS.
    insensitive.  At 5 % the curve leaves `R_g²` itself uncertain by −16 %, +43 %.
 3. The population of a compact state is bounded above and never below — the scattering
    analogue of Theorem 3: averaged data exclude dominance and identify no population.
+4. **Under one instrument, the local content is determined less and less as the chain
+   grows** (three sizes — a trend, not a law): the unidentified part of the gauche
+   fraction rises from 0.47 to 0.57 to 0.62 with exact data (0.58, 0.64, 0.67 at 1 %),
+   the bound on the compact population drifts upward (0.48, 0.53, 0.55), while the global
+   quantities do not change (`R_g²`: ±8 % at 1 % at every size; end-to-end distance: a third
+   of its range).  The number of Shannon channels in range grows with the chain (7.9, 9.4,
+   11.0) in step with the number of torsions (8, 10, 12), and the unidentified fraction
+   grows all the same.  Whether it tends to one for a local observable is the question
+   the class tables requested of the engineering division (S-E1) would answer.
 
 *Limits.*  Chains of 11–15 beads on a lattice; identical point scatterers; no solvent
 contrast, no hydration shell, no instrument resolution; the tolerance is a hard band at

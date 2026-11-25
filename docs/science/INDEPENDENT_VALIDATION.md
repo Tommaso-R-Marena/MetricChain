@@ -138,7 +138,7 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
 * **R3 (referee of our note):** R6.1, R6.2, R6.3 and their assembly into Theorem R6
   re-derived line by line by the coordinator (checkpoint 21; notes in addendum A12): no
   gap; the gain is slightly better than stated (`1 − 3/(4r₁)` in place of `1 − 1/r₁`).
-  Corollary R6′ (both oracles) read, not re-derived.
+  Corollary R6′ (both oracles) written out and re-derived at checkpoint 25 (addendum A12).
 * **Own statement A11 (robust macrostate ratios):** exact linear programmes over the weight
   cone, 900 instances with the hypotheses (field optimal to `5·10⁻¹⁴`), 300 + 298 control
   instances with one hypothesis dropped (field not optimal in most);
@@ -149,9 +149,22 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   (`experiments/science/pi_inference/dip_attenuation_check.py`): identity A10.1 to `10⁻⁵⁹`;
   the bound of A10.2 holds with a margin of five to ten.
 
+* **Own statements (addenda A13–A15):** A13 — 360 exact linear programmes over ordered
+  alphabets (`ordered_alphabet_ratio_check.py`); A14 — exact transfer matrices
+  (`helix_coil_robust_range.py`); A15 — exact linear programmes for 11, 13 and 15 beads
+  (`pi_chain/scattering_identified.py`, `scattering_fixed_instrument.py`); the 13-bead table
+  of SCI-MSG-0011 compared entry by entry with the stored results at checkpoint 25 (one
+  rounding corrected), and the class counts quoted in request S-E1 (1 346, 11 328, 95 673)
+  with the logs of `identified_sets.py`.  Author's computations; no second implementation.
+* **A1 (Proposition A1.1), second time:** the four steps re-derived by the coordinator at
+  checkpoint 25 (conditional laws in the window; chain rule and information radius;
+  Azuma; the truncation inequality `E|Â/A − 1| ≤ √(τ/M) + 2ν(dν/dQ > τ)`) before repeating
+  the claim to the theory division in SCI-MSG-0011 §4.
+
 ## 3. Not validated by us
 
 Everything not listed above.  In particular the paper proofs of theory report §§11.16–11.21
-and 11.23 (refereed by the theory division's own referees R5–R9, R10 in progress) have not
+and 11.23 (refereed by the theory division's own referees R5–R10; §§11.18–11.19 are under
+review by our workstream R6) have not
 been reviewed by this division; statements of ours that lean on them say so
 (`docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`, "Dependencies").

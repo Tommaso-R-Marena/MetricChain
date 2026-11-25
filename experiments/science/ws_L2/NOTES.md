@@ -99,3 +99,26 @@ What the formalisation showed (for the report):
    cross-multiplied forms follow by `linarith` from the four-functions statement.
 
 Next: `Referee.lean` — R6.1, R5(2), then R6.2.
+
+## 20:25 UTC — priority 2 (a), (b) DONE in `Referee.lean` (checks, 9 s, clean)
+
+* R6.1: `partSum_twinMin` (`Z′ = Z₀ + E`), `enSum_twinMin`, `meanEn_twinMin_sub`
+  (`U′ − U₀ = (D − U₀E)/(Z₀+E)`, no condition), `excess_identity` (referee's form, `E ≠ 0`),
+  `excessMass_eq_zero_iff` (`E = 0 ⇔ g₀ ≤ T` everywhere), `twinMin_eq_of_excessMass_eq_zero`,
+  `meanEn_twinMin_eq_iff` (`U′ = U₀ ⇔ D/E = U₀` for `E ≠ 0`).  Arbitrary finite type, two real
+  functions.  Note for the report: the referee's formula divides by `E`; it is stated for
+  `E ≠ 0`, and the case `E = 0` is the trivial one `g′ = g₀`.
+* R5(2), abstract: `sum_sub_pair_min_le_sup'` (ordered pairs, factor ½),
+  `sum_offDiag_eq_two_mul_sum_lt`, `sum_sub_pair_min_lt_le_sup'` (pairs `i < j`),
+  `sum_sub_pair_min_needs_nonneg` (fails for `(0,0,−1)`), `distTo`, `sum_apply_distTo_le`,
+  `flat_distTo_le` (any real `u`), `flat_distTo_le_card_mul` (`Z(flat^C) ≤ |C|·F₁`),
+  `min_exp_le_exp_half`, `cone_distTo_ge` (`u ≥ 0`), `r5_2_abstract` (the assembled
+  `log Z(cone^C) − log Z(flat^C) ≥ log A₁ − log F₁ + log(1−γ)` from: equal single-cone sums `A₁`,
+  equal flattened sums `F₁`, pair sums `≤ κA₁`, `γ = ½(|C|−1)κ < 1`).
+  Not yet: the cube facts (pair sum `= Z(cone)·cosh(u/2)^{−D}`, translation invariance).
+
+Next: R6.2 (`Signs` section).  Plan: (A) pointwise comparison of the true excess sums with the
+"free" ones (`g₀ ≡ 0`) with the overlap weight `ω` as error; (B) the basin/twin sums for an
+ℕ-valued distance profile, levels `r₁`, `r₁ ± 1`; equidistribution of the two profiles through a
+bijection; (C) two real-arithmetic lemmas for the signs; (D) continuity + intermediate value +
+the bound on `ln Z′ − ln Z₀`.

@@ -13,7 +13,7 @@ Labels: [V] machine-checked, [P] paper proof here, [K] known+cited, [N] numerics
   Next: read INFERENCE_LIMITS.md §§0–4, 13, 14; ADDENDA A1, A8, A10; theory report §11.20,
   §11.26 (thy_ro checkout at 89ac710); R5_REPORT.md §4.1.
 
-* 20:30 — Read: INFERENCE_LIMITS §§0–4, 13, 14; ADDENDA A1, A7–A10; THEORY_REPORT §11.20
+* (between 20:07 and 20:20; clock not read at the time) — Read: INFERENCE_LIMITS §§0–4, 13, 14; ADDENDA A1, A7–A10; THEORY_REPORT §11.20
   (lines 4197–4617), Thm 11.22, 11.27; thy_ro §11.26–11.27 (Thm 11.95–11.104); R5_REPORT §4.1.
 
 ### First analysis (before any numerics) — hypotheses to TEST
@@ -51,3 +51,40 @@ H5. k ≥ 2: k-transitive group ⇒ k-body matching ⇔ matching the first k fac
     `|x|` between excess and (exchangeable) base; needs spread of centre types and a
     mixture base; t-designs (Johnson scheme) instead of orthogonal arrays.  Tolerance version
     via random centre sets.  [later]
+
+* (≈20:20, clock not read; the next clock reading is 20:23) — **Coordinator's note received** (after the entry above was written): the theory
+  division's THY-RES-0005 (commit 40c5bd7; read by me now with `git show origin/...`, §2 Q2 and
+  Q4) accepts SCI-REQ-0001 Q2 and expects "the answer to (a) to distinguish the *class*
+  exponent from the exponent *at an instance* — your formulation 'restricted to centres of
+  that type' is, we think, the right one at the zero residual and not for the class"; and its
+  parameter-counting remark (Q4): "an adversary with as many continuous parameters as there
+  are numbers can generically match them, so such oracles lower *worst-case* exponents only if
+  the matching is impossible for a structural reason".
+  **Provenance record.**  H1–H5 above were written BEFORE this note and before I read
+  THY-RES-0005 (derived between 20:07 and ≈20:20 from the brief and the two theory sections alone).  In
+  particular: (i) excess mass carried by the cone law `MW`, not by `V_φ` (H1, H2) — mine;
+  (ii) the compensation lemma, `b = A_w(c_Δ − c_w)/(p_2 − c_Δ)`, base = two-component mixture (H3)
+  — mine; it is an instance of the parameter-counting principle (one number, one continuous
+  parameter `b`), which I note as the theory division's general remark and as step (3) of the
+  coordinator's sketch; the specific parameter (admixture of a second additive instance to
+  BOTH members of the pair) is not in either; (iii) H4 (oracle helps at additive instances,
+  by Jensen-with-a-tilt) — mine.
+  New task from the coordinator: treat BOTH the class exponent and the instance-wise exponent
+  at the zero residual with a field.
+
+* 20:23 (clock read) — **Derivation (mine, after the note): the tilt bound for instances.**  Let `ψ'∈L_u`
+  have the same one-body marginals as the additive instance `ψ_γ`, `h = ψ_γ − ψ'`.  Jensen under
+  `μ_{ψ'}`: for every real `λ`, `E_{π_γ} e^{h + λ(|x| − n p_γ)} ≥ A(ψ')/A(ψ_γ)`.  Read with the tilted
+  reference `π^{(λ)} = Bern(p^{(λ)})^n`, `logit p^{(λ)} = logit p + λ`:
+      `ln A_{π^{(λ)}}(ψ') − ln A_{π^{(λ)}}(ψ_γ) ≥ ln A_π(ψ') − ln A_π(ψ_γ) − n c_γ(λ)`,
+  `c_γ(λ) = ln(1 − p_γ + p_γ e^λ) − λ p_γ ≥ 0`.  SAME two functions, SAME class, another field.  The
+  universal sampler (uniform on types) does not depend on the field, so the hinted isoperimetry
+  (theory Thm 11.27 "R^gen is the exponent" / 11.59(a)) at field `θ − λ` gives
+      `R^orc_γ(e; θ) ≤ inf_λ R_γ(e − c_γ(λ); θ − λ, u)`,
+  derivative at `λ=0` is `−∂_θ R_γ(e;θ)`: nonzero at the zero residual when `θ≠0` (table of §11.20:
+  `R_0` strictly decreasing in `|θ|`).  ⇒ the oracle strictly lowers the instance exponent at
+  the zero residual with a field; nothing at `θ=0` (consistent with Theorem 4).
+  Dual side: profile `P_{UX}` (annular dips), budget shifts by `−λ(P_X(1) − p_γ)`; so
+  `inf_λ sup_P ≥ sup_{P: P_X(1)=p_γ}`; time-sharing convexity suggests equality.  To test
+  numerically: is the constrained sup attained by plain dips of the forced centre type `m_0`
+  ("restricted to centres of that type"), or do annular/soft-label dips do better?

@@ -459,3 +459,32 @@ profile and the gauche count, and its support function is the ground-state energ
   its exact covers as certificates, the Harper closed form, and the statistics behind
   its adversarial test of Algorithm 2L⁺ (the algorithm itself is R6's).
 
+### Cycle 19 — the oracle-invariance theorem sent; scattering at three sizes; an open item of the theory report closed (checkpoint 25)
+
+* **Corollary R6′ written out** (addendum A12): the hidden twin with both oracles — the
+  instances are functions of distances to cosets of the code, so their `k`-body marginals
+  are uniform; the sign lemma's algebra is unchanged with the code's distance
+  distribution; the overlap costs a factor `|C|²`.  With it every part of the
+  oracle-invariance theorem has been read by at least two parties except (d) (finite
+  precision), which is the author's alone.
+* **SCI-MSG-0011** to both divisions: the theorem with its table of who checked what;
+  A13 and A14 (ordered alphabets; helix–coil); A15 (scattering) with request S-E1 for
+  full-histogram class tables.
+* **A15 completed at 15 beads and extended by a same-instrument comparison** (one absolute
+  `q` grid, three chain lengths): the unidentified part of the gauche fraction grows with
+  the chain (0.47, 0.57, 0.62 with exact data), the global quantities do not move.  A
+  trend at three sizes.  One rounding corrected (`q_max R_g = 7.6`, not 7.7, at 13 beads).
+* **Read at theory `40c5bd7`** (what was still owed): THY-RES-0004 in full (to engineering,
+  copy to us: the best-case cost figures of Algorithm 2L⁺ withdrawn in favour of the
+  engineering division's adversarial count; a new, unrefereed sample-cap claim, which our
+  R6 has re-derived with one corner case); the referee report R10 on the mean-field
+  section — summary, verdict table, all findings, §7 and §8 (not §§3–6, the records of
+  the checks); dead end D53; the prior-art addendum that records our SCI-REV-0004; the
+  changed passages of §§11.16–11.22 of the report.  Everything that quotes us is accurate.
+* **Found while reading:** the report still lists as open "whether `Bernoulli(r*)^{⊗n}` is
+  exponent-optimal on the whole class at bounded accuracy" (§11.20, after Theorem 11.61).
+  Our Proposition A1.1 (SCI-RES-0001 §2) proves it for every `n`; that response is not in
+  their table of received items.  Re-derived the four steps (conditional laws in the
+  window; chain rule and information radius; Azuma; the truncation inequality) and put
+  them into SCI-MSG-0011 §4.
+

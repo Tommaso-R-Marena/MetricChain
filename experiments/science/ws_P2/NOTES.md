@@ -182,3 +182,48 @@ Consequences (decided now, before measuring):
 2. Exact enumeration limits (product of one-site domains): S 9^n (n <= 6); V 3^n (n <= 12);
    F 2^n at 0.70 / 6^n at 0.60; L 2^n at 0.60; K 14^n-21^n at 0.70 (n <= 4-5), 31^n at 0.60
    (n <= 4); LKSE at 0.60: 2*31*9*18 ~ 1e4 per repeat (n <= 6).
+
+## Step 5 — control 3 (synthetic residuals) passed; analysis library; enumerations launched (21:25)
+
+* `anlib.py`: constants of order 1, 2, 3 on masked grids with non-uniform state counts
+  (`mixed`: all state pairs at each involved site, all base points, every evaluation point in the
+  domain), star and anchored order-2 expansions, ANOVA / least-squares / Chebyshev-LP fits.
+* **Control 3** (`test_controls.py`, log `logs/test_controls.log`):
+  - anlib against brute-force loops on random masked grids: identical (<= 7e-16), orders 1, 2, 3;
+  - exactly pairwise synthetic residual: max c_ijk = 3e-15 … 2e-14, two-site fit remainder
+    3e-15 (full grid) / <= 3e-11 (masked, LSQR), Chebyshev remainder 0.0;
+  - iid random residual: c_ijk = 24-52 (function std 2.5-4.7), two-site remainder rms ~0.8-0.97 std;
+  - planted third-order term 0.37*[x0=1][x1=0][x2=2] on top of a pairwise function: c_ijk = 0.3700
+    exactly; Chebyshev two-site remainder 0.0463 = 0.37/8;
+  - Thm 11.16 bound |g - g_star| <= sum c_ij and Thm 11.18 (m = 3) bound |g - I_2 g| <= sum c_ijk hold
+    on all random instances (checks my c_ij, c_ijk and the expansions).
+* Amendment to the design (before any long-chain constant was measured): the secondary grid "R2"
+  (chi1 in {-60, 180}, rest trans) leaves Leu and Phe with <= 1 admissible state, so it is dropped.
+  Long chains are reached instead by (i) the R3 domain itself where it is small (Val 3 states;
+  Leu at 0.60 and Phe at 0.70: 2 states), (ii) grid "T3" = chi1 staggered, further chi trans
+  (3 states) for Ser and Lys.
+* `enum_fb.py` runs launched 21:22 for H, E, P2 in parallel (`run_enum_R3.sh`): homopolymers
+  S, V, F, L, K for n = 1.. until the product exceeds 1.1e6, then LKSE:n.  One-site threshold
+  0.60 (0.70 by restriction).  Logs `logs/enum_R3_<BB>.log`.
+* In the helix the one-site domains depend on the position (contacts with the backbone of
+  residues i-3, i-4): e.g. poly-Val on H at 0.60 has state counts [3, 3, 1, 1, 1, ...] — only
+  the first two residues have any freedom (at 0.70 the helix is empty from n = 4); poly-Phe on H
+  [6, 6, 4, 3, 3, 3, ...].
+
+### First look (Ser4 on E, tau = 0.70, product domain = clash-free domain, 6561 assignments)
+`an_main.py fb_S4_E_R3_t0.60 0.70` — exact numbers, kcal/mol:
+* f: c_ijk = 5e-14 (rounding) -> pairwise, as it must be.  ff03-ff14SB: c_ijk = 5e-14;
+  ff99SB-ff14SB: c_ij = 0.
+* **g_GB: c_i = 4.3-4.9 (8 kT); c_ij up to 2.42 (i,i+2), 1.31 (i,i+1), 0.33 (i,i+3); half row
+  sums 2.0-2.5; but c_ijk <= 0.0042 and the best two-site fit has remainder rms 0.0002 / max
+  0.0015 / Chebyshev 0.0008.**  So g_GB is pairwise in rotamer variables to 1e-3 kcal/mol in SUP
+  norm, with pair couplings that are not weak: excitation energies at the minimum are 1.0-1.1,
+  the row-sum condition fails by a factor ~2, one star certifies only to 4.4 kcal/mol;
+  the Hamming-2 ball (417 evaluations) certifies to < 1e-4 kcal/mol and brackets ln Z to 5e-4 nats.
+* coul+GB (alternative split): c_ij <= 0.68, half row sums 0.39-0.43 < excitations 1.3-1.8:
+  row-sum condition HOLDS, one star (33 evaluations) is an exact certificate; bracket 0.13 nats.
+* ff03-ff14SB: exactly pairwise, half row sums 0.28-0.35 < excitations 0.41-0.93 at argmin E:
+  exact certificate by one star at the true minimiser (which differs from argmin f).
+=> working hypothesis to test on all systems: in rotamer variables the obstacle is not many-body
+   character (third order is tiny) but the size of the PAIR part of the residual; the right
+   interface is order three (Thm 11.18) / "pair part into the model", not the star.

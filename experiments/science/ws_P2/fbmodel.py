@@ -39,6 +39,8 @@ def grid_states(resname, grid):
         return list(itertools.product(STAG, repeat=nchi))
     if grid == "R2":
         return [(c1,) + (180.0,) * (nchi - 1) for c1 in (-60.0, 180.0)]
+    if grid == "T3":              # chi1 staggered, all further chi trans (3 states per site)
+        return [(c1,) + (180.0,) * (nchi - 1) for c1 in STAG]
     if grid == "R3c":             # chi1, chi2 staggered, further chi trans
         return [c + (180.0,) * (nchi - min(nchi, 2)) for c in itertools.product(STAG, repeat=min(nchi, 2))]
     raise ValueError(grid)

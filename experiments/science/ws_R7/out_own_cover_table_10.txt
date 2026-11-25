@@ -1,0 +1,1 @@
+n=10 L=1.0 eps=0: classes=1360 greedy=342 LP=315.4620 certLB=316 MILP primal=319 dual=319.00000000000006 feas=True margin=5.344e-04 status=0 t=21.7s

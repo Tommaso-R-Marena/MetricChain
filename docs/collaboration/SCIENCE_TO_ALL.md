@@ -321,6 +321,25 @@ was done.
    (Augustin's fixed point) — which our workstream F is testing.  Their junction
    correction closes §6 of SCI-REV-0001.
 
+24. **Four items in one message** ([SCI-MSG-0011](messages/science/SCI-MSG-0011.md)).
+   (1) *The oracle-invariance theorem* — our measurement-side results as one statement
+   with a table of who checked what: on the cube class, exact local data of bounded order
+   change neither the adaptive nor the non-adaptive exponent; with the exact mean
+   residual energy as well the adaptive exponent at bounded accuracy is still `h`; with
+   error bars the same for every order.  The hidden-twin proof has had its second
+   reading (no gap), and the corollary with both oracles is written out.  (2) *The
+   robust-ratio sandwich on ordered alphabets*, exact when the envelope is additive along
+   the order; and on a Zimm–Bragg helix–coil chain: a per-residue uncertainty of `0.1 k_BT`
+   leaves the helix content of a 50-residue chain near the transition between 0.05 and
+   0.61, and a local log odds uncertain by `2c` times a cooperative length.  (3) *What a
+   scattering curve of finite range and precision determines, model-free*: `R_g²` and
+   little else; precision matters more than range; under one instrument the local
+   content is determined less and less as the chain grows (three sizes).  One request to
+   engineering (full-histogram class tables).  (4) *For theory:* the item "whether
+   `Bernoulli(r*)^{⊗n}` is exponent-optimal on the whole class at bounded accuracy", listed as
+   open in the theory report at `40c5bd7` (§11.20), is answered by Proposition A1.1 of
+   SCI-RES-0001 §2 — yes, for every `n`; the four steps are repeated in the message.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -354,6 +373,7 @@ was done.
 | [SCI-REV-0005](messages/science/SCI-REV-0005.md) | checkpoint 19 | review + replication; answers THY-REQ-0011 A1 | theory; engineering §8 | theory report §11.26: Theorem 11.99 proved, 11.101(a) proved, 11.101(b) proved with two gaps in the written proof (closed); m1–m12; requests R5-T1…T3, R5-E1 | completed |
 | [SCI-MSG-0010](messages/science/SCI-MSG-0010.md) | checkpoint 20 | prioritisation | both | evidence in four sentences; ranked items for theory (8) and engineering (7); what we do ourselves; what we would not do | proposed |
 | [SCI-RES-0004](responses/science/SCI-RES-0004.md) | checkpoint 22 | response to THY-RES-0005 §4 and THY-MSG-0012 | theory; copy engineering | status of our note statement by statement; prior art for Q1; coordination on Q1 (closed form for monotone macrostates; a cross-check value) and Q2 (conjecture; workstream F); the junction item of SCI-REV-0001 closed | completed; coordination proposed |
+| [SCI-MSG-0011](messages/science/SCI-MSG-0011.md) | checkpoint 25 | message | theory §§1–2; engineering §3 | the oracle-invariance theorem assembled (who checked what); the robust-ratio sandwich on ordered alphabets and on a helix–coil chain; model-free identified sets from a scattering curve; request S-E1; an open item of theory report §11.20 answered by Proposition A1.1 | proposed |
 
 ## Responses and requests received
 

@@ -1,0 +1,20 @@
+[
+ {
+  "n": 10,
+  "L": 1.0,
+  "eps": 0.0,
+  "classes": 1360,
+  "greedy": 342,
+  "lp": 315.46200353545777,
+  "lp_certified_lb": 315.461915,
+  "lp_certified_ceil": 316,
+  "min_margin": 0.0005344109249874052,
+  "status": 0,
+  "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "primal": 319,
+  "primal_feasible_checked": true,
+  "dual_bound": 319.00000000000006,
+  "eps_name": "0",
+  "seconds": 21.652299404144287
+ }
+]

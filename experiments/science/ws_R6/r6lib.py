@@ -279,7 +279,7 @@ class ClassInstance:
 
     def new_block(self, size, rng):
         """multinomial counts of a block of `size` fresh uniform points; sequential binomials."""
-        counts = np.zeros(len(self.lnW), dtype=np.int64)
+        counts = np.zeros(len(self.lnW), dtype=object)
         remaining = int(size)
         rem_p = mp.mpf(1)
         order = np.argsort(-self._probf, kind="stable")
@@ -297,7 +297,7 @@ class ClassInstance:
             rem_p -= self.prob[c]
             if rem_p <= 0:
                 break
-        nz = np.nonzero(counts)[0]
+        nz = np.array([c for c in range(len(counts)) if counts[c] > 0], dtype=np.int64)
         return dict(cls=nz, cnt=counts[nz], lnW=self.lnW[nz],
                     lnL0=self.lnW[nz] + self.kap[nz] - self.u * self.n_i,
                     lnU0=self.lnW[nz] + self.kap[nz] + self.u * self.n_i,
@@ -305,13 +305,26 @@ class ClassInstance:
 
 
 def big_binomial(n, p, rng):
-    """Binomial(n, p) for n < 2^63 (numpy Generator; checked in test_binomial.py for n p from 0.1 to 5000)."""
+    """Binomial(n, p) as a Python int, for any n: chunks of 2^61 (the numpy Generator sampler was checked in
+    test_binomial.py for n up to 2^62 and n p from 0.1 to 5000; a sum of independent binomials with the same p is binomial)."""
     if p <= 0.0 or n == 0:
         return 0
     if p >= 1.0:
         return n
-    assert n < (1 << 62), "block too large for the sampler"
-    return int(rng.binomial(n, p))
+    CH = 1 << 61
+    if n <= CH:
+        return int(rng.binomial(n, p))
+    full, rest = divmod(n, CH)
+    assert full <= (1 << 22), "block too large for the sampler"
+    tot = 0
+    done = 0
+    while done < full:
+        k = min(full - done, 1 << 16)
+        tot += int(rng.binomial(CH, p, size=k).astype(object).sum())
+        done += k
+    if rest:
+        tot += int(rng.binomial(rest, p))
+    return tot
 
 
 # ----------------------------------------------------------------------------------------------
@@ -396,8 +409,9 @@ class Run:
     `charges` (then the oracle adds its real number of queries to run.inner_queries itself).
     """
 
-    def __init__(self, P, inst, oracle, rng, variant="2L+", abort_on_cost=True, max_units=4_000_000):
+    def __init__(self, P, inst, oracle, rng, variant="2L+", abort_on_cost=True, max_units=4_000_000, mutation=None):
         self.P, self.inst, self.oracle, self.rng, self.variant = P, inst, oracle, rng, variant
+        self.mutation = mutation          # None, or one of: neg_tol, noharper, maxform, close_at_no, q_no_eta (2L+ only)
         self.abort_on_cost = abort_on_cost
         self.max_units = max_units
         n = P.n
@@ -415,7 +429,8 @@ class Run:
             self.ln_ell = self.ln_s0
         self.Sigma = mp.mpf(0)            # in units of e^{ln_s0}: all "absolute" quantities are stored as mp multiples of s_0
         # units
-        self.cnt = np.zeros(0, dtype=np.int64)
+        self.cnt_dtype = object if getattr(inst, "big_counts", True) else np.int64
+        self.cnt = np.zeros(0, dtype=self.cnt_dtype)
         self.blk = np.zeros(0, dtype=np.int64)
         self.lnW = np.zeros(0)
         self.lnL = np.zeros(0)
@@ -454,7 +469,7 @@ class Run:
             k = len(d["cnt"])
             if len(self.cnt) + k > self.max_units:
                 raise Abort("harness: too many units")
-            self.cnt = np.concatenate([self.cnt, np.asarray(d["cnt"], dtype=np.int64)])
+            self.cnt = np.concatenate([self.cnt, np.asarray(d["cnt"], dtype=self.cnt_dtype)])
             self.blk = np.concatenate([self.blk, np.full(k, tb, dtype=np.int64)])
             self.lnW = np.concatenate([self.lnW, d["lnW"]])
             self.lnL = np.concatenate([self.lnL, d["lnL0"]])
@@ -468,17 +483,6 @@ class Run:
             self.nblocks += 1
             self.block_end.append(len(self.cnt))
             self.points_drawn += size
-
-    def _sum_cnt(self, mask):
-        """exact integer sum of counts over a mask (blocks are < 2^62 each; sum per block, then Python ints)."""
-        tot = 0
-        if not mask.any():
-            return 0
-        b = self.blk[mask]
-        c = self.cnt[mask]
-        for tb in np.unique(b):
-            tot += int(c[b == tb].sum())
-        return tot
 
     def _classify(self, j, t, rec):
         """classify all units of blocks <= t at level j; returns N (#high points).  Units of blocks <= t are a prefix."""
@@ -516,14 +520,9 @@ class Run:
     def _sum_cnt_idx(self, idx):
         if len(idx) == 0:
             return 0
-        tot = 0
-        b = self.blk[idx]
-        c = self.cnt[idx]
-        if b[0] == b[-1] and (len(b) < 3 or (b == b[0]).all()):
-            return int(c.sum())
-        for tb in np.unique(b):
-            tot += int(c[b == tb].sum())
-        return tot
+        if self.cnt_dtype is object:
+            return int(sum(self.cnt[idx].tolist()))
+        return int(self.cnt[idx].sum())          # explicit points: cnt = 1 each, no overflow
 
     def count_above(self, t, lnthr):
         """#points among the first K 2^t with true W > e^lnthr (for the checks)."""
@@ -561,12 +560,16 @@ class Run:
             t = 0
             rec = dict(j=j, ell_entry=ell, passes=[], calls=[0] * (P.L + 1), status=None,
                        Mneg=P.nu * sj / (ell * e ** P.b), sj=sj)
+            if self.mutation == "neg_tol":
+                rec["Mneg"] = P.nu * sj / ell
             self.levels.append(rec)
             while True:
                 self._ensure_blocks(t)
                 N = self._classify(j, t, rec)
                 # q = min{1, max(N,K)/((1-eta) M)}  (exact Fraction)
                 qF = Fraction(max(N, K), 1) / ((1 - eta) * M)
+                if self.mutation == "q_no_eta":
+                    qF = Fraction(max(N, K), M)
                 if qF > 1:
                     qF = Fraction(1)
                 q = mp.mpf(qF.numerator) / qF.denominator
@@ -580,7 +583,10 @@ class Run:
                     if bound < 1:
                         bound = Fraction(1)
                     kH = tab.largest_ball_le(bound)
-                    ell = max(ell, sj * e ** (-P.b) * plow, sj * e ** (-P.b) * tab.T[kH] / two_m)
+                    if self.mutation == "noharper":
+                        ell = max(ell, sj * e ** (-P.b) * plow)
+                    else:
+                        ell = max(ell, sj * e ** (-P.b) * plow, sj * e ** (-P.b) * tab.T[kH] / two_m)
                 # closure test
                 if qF * two_m < 1:
                     tail = mp.mpf(0)
@@ -588,11 +594,15 @@ class Run:
                 else:
                     r = tab.least_ball_ge(qF * two_m)
                     tail = sj * tab.E[r] / two_m if r <= m - 1 else mp.inf
+                    if self.mutation == "close_at_no" and r == m:
+                        tail = sj * tab.E[r] / two_m
                 closed = tail <= P.theta * e ** P.b * ell
                 rec["passes"].append(dict(M=M, t=t, N=N, q=q, qF=qF, r=r, tail=tail, populated=populated,
                                           plow=plow, kH=kH, ell_after=ell, closed=closed))
                 if closed:
                     Lo = max(ell, Sigma + ((1 - e ** (-P.lam)) * e ** (-P.b) * sj * plow if populated else 0))
+                    if self.mutation == "maxform":
+                        Lo = ell
                     Up = s0 + upper_terms + tail
                     rec["status"] = "closed"
                     self.status = "closed"

@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 24 of the science branch (2026-11-25; the commit time is
+*Updated at checkpoint 25 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -95,7 +95,9 @@ the container is reclaimed.)
 | S29 | review of theory report §11.25: sound; the headline covers two of three exponents; Theorem 11.90(a) needed a step at negative accuracies (supplied); Lemma 11.89 has a four-line proof and a stronger pointwise form; for any alphabet and site law with Hamming envelope `u`: `h ≤ u²/32` | SCI-REV-0001; the new statements **[P]**, the reviewer's |
 | S30 | review of theory report §11.26: Theorem 11.99 proved; 11.101(a) proved; 11.101(b) proved with two gaps in the written proof, closed | SCI-REV-0005 |
 | S28 | robust range of an observable free-energy difference: for binary sites, a submodular known part and monotone macrostates the Gibbs measure over the whole envelope class is sandwiched in stochastic order between two uniform fields; extremal residuals additive; common uncertainty cancels exactly | **[P]** (Holley's inequality **[K]**); 900 exact linear programmes, two controls; SCI-MSG-0009 |
-| S31 | the sandwich of S28 on ordered multi-state sites: exact for envelopes additive along the order, a valid loose bound otherwise (addendum A13); on a Zimm–Bragg helix–coil chain a per-residue uncertainty of `0.1 k_BT` leaves the helix content of a 50-residue chain near the transition undetermined over more than half its range, and a local log odds uncertain by `2c` times a cooperative length (A14) | **[P]**; exact linear programmes (360 instances); exact transfer matrices; not yet sent |
+| S32 | model-free identified sets from a Debye scattering curve at `K` Shannon channels with a relative tolerance (11–15 beads): `R_g²` is fixed and little else; precision matters more than range; a compact-state population is bounded above only; under one instrument the unidentified part of the gauche fraction grows with the chain (three sizes) | **[N]**, exact linear programmes; addendum A15; SCI-MSG-0011 |
+| S33 | the oracle-invariance theorem assembled (addendum A12): parts (a)–(d) with the second reading of the hidden-twin proof and the corollary with both oracles written out | **[P]**; cores **[V]**; SCI-MSG-0011 |
+| S31 | the sandwich of S28 on ordered multi-state sites: exact for envelopes additive along the order, a valid loose bound otherwise (addendum A13); on a Zimm–Bragg helix–coil chain a per-residue uncertainty of `0.1 k_BT` leaves the helix content of a 50-residue chain near the transition undetermined over more than half its range, and a local log odds uncertain by `2c` times a cooperative length (A14) | **[P]**; exact linear programmes (360 instances); exact transfer matrices; SCI-MSG-0011 |
 | S27 | the lever arm belongs to the first-order format, not to the residual: energies quadratic in positions have chain-length order and growing per-torsion constants but `O(n²)` modes | **[P]**; toy chain |
 
 ## Outstanding requests
@@ -120,6 +122,7 @@ the container is reclaimed.)
 | SCI-MSG-0007 (X-E1, X-E2) | engineering | cover format against span format on enumerated chain geometry; the slack `κ` of certified envelopes | medium | proposed |
 | SCI-MSG-0008 (R3-T1…R3-T3) | theory | check three finite statements of our referee; four affinely independent points of `K^{br}`; the mean-energy oracle at extensive accuracy | normal | proposed |
 | SCI-MSG-0008 (R3-E1, R3-E2) | engineering | class tables for bridges; joint gauche counts per profile class | medium | proposed |
+| SCI-MSG-0011 (S-E1) | engineering | class tables with full pair-distance histograms for 13–24 torsions (scattering identified sets beyond 15 beads) | medium | proposed |
 | SCI-REV-0001 (T1–T7) | theory | replacement text for the headline of §11.25; the repair of Theorem 11.90(a); citation for Lemma 11.89; the ceiling; R10's report; the middle slice | high for M1 | proposed |
 | SCI-REV-0001 (R1-E1) | engineering | empirical test of Conjecture 11.94(iii) on the middle slice | medium | proposed |
 | SCI-REV-0005 (R5-T1…T3) | theory | state the isoperimetric input in the theory report; the uniformity argument; concavity for two letters | normal | proposed |

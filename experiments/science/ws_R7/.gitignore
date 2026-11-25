@@ -1,0 +1,3 @@
+# verbatim working copy of files of the engineering branch (read at the commit named in NOTES.md);
+# kept local on purpose: the science branch does not carry copies of another division's files
+eng_copy/
