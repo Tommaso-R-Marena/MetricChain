@@ -440,3 +440,18 @@ profile and the gauche count, and its support function is the ground-state energ
   that a physical chemist would recognise and could test — on a model, not a molecule.
 * Read the parts of the theory division's twelfth checkpoint that quote us: accurate.
 
+### Cycle 18 — scattering data; the prior-art matrix (checkpoint 24)
+
+* **A15 (open problem C4).**  Exact model-free identified sets from a Debye scattering
+  curve given at `K` Shannon channels within a relative tolerance, on 11-, 13- and 15-bead
+  lattice chains.  Because the intensity is an entire function of `q`, exact data on any
+  interval would determine everything; the variable is precision.  Result: a curve fixes
+  `R_g²` and little else; at 1 % precision twelve channels are hardly better than three;
+  a compact-state population is bounded above and never below.  Checked for consistency
+  against the earlier results for `R_g²` alone and for the full histogram.
+* `PRIOR_ART_MATRIX.md`: one index table for the originality class of every claim of the
+  three branches, with pointers to the reports that hold the reading levels.
+* The theory division's lemma on Q3(c) (interior points of the limit shape are means of
+  Gibbs measures with bounded coefficients) checked — three lines — and recorded in §11.3
+  of our note with attribution.
+

@@ -118,8 +118,67 @@ descreening integrals — a second implementation validated against FastFF and O
   - **FastFF vs OpenMM Reference platform (double precision), clash-free conformations:**
     worst deviation over all systems: tors 2.8e-14, lj 3.4e-12, coul 5.9e-12, GBn2 1.2e-11,
     ACE-SA 1.8e-12, OBC2 1.1e-11, ff99SB/ff03/ff15ipq torsions <= 2.1e-14, nonbonded <= 5.0e-12
-    kcal/mol; bond+angle energy of the other force fields constant to <= 1.4e-7 (subtraction
-    noise; first run compared against a clashing reference conformation -> fixed).
+    kcal/mol; bond+angle energy of the other force fields constant to <= 2.6e-13 (the first
+    run compared against a clashing reference conformation and showed 1e-4 of subtraction
+    noise -> test fixed).
   - net charges: KKK +3, EEE -3, LKSE 0 (exact to 1e-4).
 * Timing: OpenMM Reference 6-28 ms/conf; FastFF 0.35-4.0 ms/conf (146 atoms: 4 ms) -> too slow
   for 5e5-conformation grids of 100-200 atoms; hence the table-based evaluator below.
+
+## Step 4 — fixed-backbone table model written and validated (control 2, second half) (21:05)
+
+* `fbmodel.py`: `FBModel(seq, bb, grid)`.  Site = residue; every atom depends on at most one
+  site (asserted when the coordinates of each site's states are built: all other atoms unchanged
+  to 1e-10 A; measured 0.0).  Tables: clash scores (fixed / one-site / two-site), exact one- and
+  two-site tables of every pair-additive component (coul, lj by direct atom-pair sums with the
+  parameter arrays FastFF read from OpenMM; torsions: every torsion term is asserted to involve
+  atoms of at most one site), GBn2 descreening integrals (tables) -> exact Born radii of an
+  assignment by table look-ups; GB energy by a block pair sum (`gb_energy`) or the straightforward
+  all-pairs sum (`gb_energy_simple`).
+* `test_fbmodel.py` (log `logs/test_fbmodel.log`), 12 systems (V4, L3, S3, F3, K3, LKSE, LKSE x 2,
+  L6; backbones H, E, P2, Hp), 200 random assignments each:
+  - assembled coordinates == full internal-coordinate build: difference 0.0 A;
+  - clash(tables) == clash(FastFF) to 6e-16;
+  - **every pair-additive component from the tables == FastFF on the full conformation**:
+    worst over systems, clash-free conformations: tors 8.5e-14, lj 1.1e-12, coul 3.4e-13;
+    ff99SB/ff03/ff15ipq components <= 1.0e-12 kcal/mol; relative deviation on ALL assignments
+    (clashing included) <= 4e-13.  => numerical proof of concept for Q1: the vacuum energy is
+    c0 + sum_i h_i + sum_{i<j} J_ij in residue-rotamer variables (exact test of third-order
+    differences follows on full grids);
+  - GBn2(tables) vs FastFF: <= 4.5e-13 kcal/mol; vs OpenMM's own CustomGBForce on the Reference
+    platform: <= 8.9e-12 kcal/mol; f(tables) vs OpenMM (torsion + nonbonded groups) <= 1.9e-12.
+  - block GB == simple GB to 1.4e-11 (relative 5e-13).
+* Speed: block GB 75 us/conf (78 atoms), 116 us (100 atoms), 275 us (146), 570 us (204),
+  1.3 ms (316 atoms); 24 ns per atom pair (numexpr exp/sqrt, one thread).  f from tables < 2 us.
+* `enum_fb.py`: exact enumeration over the product of one-site-clash-free states; stores gb, tors,
+  lj, coul, the other force fields, and the clash scores s1min / s2min so that tau and the pair
+  filter are applied afterwards.  Each run spot-checks 24 assignments against FastFF (double)
+  and 4 against OpenMM's CPU platform (single precision, deviations ~1.5e-5 as in P).
+
+### Geometry finding that constrains the design (found before any constant was measured)
+
+One-site clash scores of the R3 states (middle residue of a tripeptide; `logs/test_fbmodel.log`
+and the inspection run):
+
+| residue | states | score > 0.70 (H / E / P2) | score > 0.60 | score > 0.80 | best states |
+|---|---|---|---|---|---|
+| Val | 3 | 1 / 3 / 3 | 3 | 0 | chi1 = 180 (0.75); +-60 at 0.66 (H) or 0.72 (E) |
+| Leu | 9 | **0 / 0 / 0** | 2 (1 on Ep) | 0 | (180, 60) 0.645 and (-60, 180) 0.633 — the two rotamers known as dominant ("tp", "mt"); limited by an intra-residue H...H contact HD-HA at 1.82-1.85 A |
+| Ser | 9 | 9 / 9 / 9 | 9 | 9 | all |
+| Phe | 9 | 2 / 2 / 2 | 6 / 5 / 6 | 0 | two at 0.79 |
+| Lys | 81 | 14 / 21 / 21 | 31 | 0 | |
+| Glu | 27 | 8 / 10 / 11 | 18 / 16 / 18 | 0 | |
+
+Fixed-atom (backbone + CB) scores: H 0.804, E 0.783, P2 0.858, Hp 0.806 -> all backbones usable.
+
+Consequences (decided now, before measuring):
+1. At P's threshold tau = 0.70 **Leu has no admissible rotamer** in the rigid ideal geometry, on
+   any backbone; poly-Val on the helix has a single state per site (trivial).  The pre-registered
+   sensitivity threshold 0.60 keeps exactly the two dominant Leu rotamers and all three Val states.
+   I therefore report BOTH thresholds throughout: tau = 0.70 ("P's threshold") where the domain is
+   non-trivial (Ser, Lys, Phe, Glu; Val on E and P2) and tau = 0.60 ("relaxed") for everything,
+   including Leu and the heteropolymer LKSE (whose Leu sites are empty at 0.70).  tau = 0.80 is
+   meaningful only for Ser (every other residue type is empty there).
+2. Exact enumeration limits (product of one-site domains): S 9^n (n <= 6); V 3^n (n <= 12);
+   F 2^n at 0.70 / 6^n at 0.60; L 2^n at 0.60; K 14^n-21^n at 0.70 (n <= 4-5), 31^n at 0.60
+   (n <= 4); LKSE at 0.60: 2*31*9*18 ~ 1e4 per repeat (n <= 6).

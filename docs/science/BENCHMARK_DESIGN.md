@@ -195,6 +195,8 @@ definitions against the reference checker (their E-1); replication on independen
 |---|---|---|
 | B3, lattice chains, truths (a) and one of type (c), exact data, model-free and envelope class | 7–15 beads (model-free), 6–10 beads (envelope class), 27 beads from the engineering tables for one target | `INFERENCE_LIMITS.md` §11; `experiments/science/pi_chain/` |
 | B3, deception instance | exact enumeration, `n ≤ 16`; no baseline run on it yet | `experiments/science/pi_inference/code_cone_check.py` |
+| B3, scattering data of finite range and precision (model-free) | 11, 13 beads in full; 15 beads for the first channels | `INFERENCE_LIMITS_ADDENDA.md` A15; `experiments/science/pi_chain/scattering_identified.py` |
+| robust ranges of monotone macrostates (not in the original list; a planted-truth instance for B3/B5 with an exact answer) | 900 + 360 random instances; a helix–coil chain to 100 residues | addenda A11, A13, A14; `experiments/science/pi_inference/monotone_ratio_check.py`, `ordered_alphabet_ratio_check.py`, `helix_coil_robust_range.py` |
 | B4 | three margins, two data types, 8–10 beads, exact data | `experiments/science/pi_chain/envelope_scaling.py` |
 | B6 | engineering X-005 (theirs) | ENG-RES-0008 |
 | B7 | audit at `5ed4072` | `docs/science/INDEPENDENT_VALIDATION.md` |

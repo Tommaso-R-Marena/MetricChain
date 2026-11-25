@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 23 of the science branch (2026-11-25; the commit time is
+*Updated at checkpoint 24 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins

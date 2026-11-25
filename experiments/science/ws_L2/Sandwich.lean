@@ -266,6 +266,7 @@ theorem macrostate_cross_lower [DecidableEq α] {β : ℝ} (hβ : 0 ≤ β) {f g
   unfold zOn
   linarith
 
+omit [Fintype α] in
 /-- **Corollary A11.1 (inequalities), as ratios**: for a lower set `A` and a non-empty upper
 set `B`, `Z_{f-h↓}(A)/Z_{f-h↓}(B) ≤ Z_{f+g}(A)/Z_{f+g}(B) ≤ Z_{f+h↑}(A)/Z_{f+h↑}(B)`. -/
 theorem macrostate_ratio [DecidableEq α] {β : ℝ} (hβ : 0 ≤ β) {f g hup hdn : α → ℝ}
@@ -559,6 +560,7 @@ theorem cube_sandwich_mean {β : ℝ} (hβ : 0 ≤ β) {f g : (ι → Bool) → 
   sandwich_mean hβ hf hg (fun a b => (envDist_sup_right cup cdn a b).le)
     (fun a b => (envDist_inf_left cup cdn a b).le) hφ
 
+omit [DecidableEq ι] in
 /-- **Corollary A11.1, upper end, cross-multiplied** (lower set `A`, upper set `B`):
 `Z_{f+g}(A) * Z_{f+h↑}(B) ≤ Z_{f+h↑}(A) * Z_{f+g}(B)`. -/
 theorem cube_macrostate_cross_upper {β : ℝ} (hβ : 0 ≤ β) {f g : (ι → Bool) → ℝ}
@@ -569,6 +571,7 @@ theorem cube_macrostate_cross_upper {β : ℝ} (hβ : 0 ≤ β) {f g : (ι → B
       (∑ x ∈ A, Real.exp (-(β * (f x + field cup x)))) * (∑ x ∈ B, Real.exp (-(β * (f x + g x)))) :=
   macrostate_cross_upper hβ hf hg (fun a b => (envDist_sup_right cup cdn a b).le) A B hA hB
 
+omit [DecidableEq ι] in
 /-- **Corollary A11.1, lower end, cross-multiplied** (lower set `A`, upper set `B`):
 `Z_{f-h↓}(A) * Z_{f+g}(B) ≤ Z_{f+g}(A) * Z_{f-h↓}(B)`. -/
 theorem cube_macrostate_cross_lower {β : ℝ} (hβ : 0 ≤ β) {f g : (ι → Bool) → ℝ}
@@ -579,6 +582,7 @@ theorem cube_macrostate_cross_lower {β : ℝ} (hβ : 0 ≤ β) {f g : (ι → B
       (∑ x ∈ A, Real.exp (-(β * (f x + g x)))) * (∑ x ∈ B, Real.exp (-(β * (f x - field cdn x)))) :=
   macrostate_cross_lower hβ hf hg (fun a b => (envDist_inf_left cup cdn a b).le) A B hA hB
 
+omit [DecidableEq ι] in
 /-- **Corollary A11.1 (inequalities)** for a lower set `A` and a non-empty upper set `B`:
 `Z_{f-h↓}(A)/Z_{f-h↓}(B) ≤ Z_{f+g}(A)/Z_{f+g}(B) ≤ Z_{f+h↑}(A)/Z_{f+h↑}(B)`. -/
 theorem cube_macrostate_ratio {β : ℝ} (hβ : 0 ≤ β) {f g : (ι → Bool) → ℝ} {cup cdn : ι → ℝ}
@@ -657,6 +661,7 @@ theorem cube_mean_range_eq_Icc {β : ℝ} (hβ : 0 < β) {f : (ι → Bool) → 
     unfold gibbsMean
     simpa using hgr
 
+omit [DecidableEq ι] in
 /-- **Corollary A11.1, "fills exactly the interval"**: for `0 < β`, a lower set `A` and a
 non-empty upper set `B`, the set of values of `Z_{f+g}(A)/Z_{f+g}(B)` over the admissible class
 is exactly `[Z_{f-h↓}(A)/Z_{f-h↓}(B), Z_{f+h↑}(A)/Z_{f+h↑}(B)]`. -/
@@ -707,6 +712,12 @@ theorem sum_fin_two_bool (F : (Fin 2 → Bool) → ℝ) :
   simp only [Fintype.sum_bool]
   ring
 
+/-- The field on two sites, written out. -/
+theorem field_fin_two (c : Fin 2 → ℝ) (x : Fin 2 → Bool) :
+    field c x = (if x 0 then c 0 else 0) + (if x 1 then c 1 else 0) := by
+  unfold field
+  rw [Fin.sum_univ_two]
+
 /-- The known part of the witness: `-1` if both sites are occupied, `0` otherwise. -/
 def wF (x : Fin 2 → Bool) : ℝ := if x 0 && x 1 then -1 else 0
 
@@ -746,17 +757,29 @@ theorem cube_sandwich_strict_witness :
         gibbsMean 1 (fun x => wF x + (fun _ => (0 : ℝ)) x) wPhi ∧
       gibbsMean 1 (fun x => wF x + (fun _ => (0 : ℝ)) x) wPhi <
         gibbsMean 1 (fun x => wF x - field (fun _ : Fin 2 => (1 : ℝ)) x) wPhi := by
+  have ha : 0 < Real.exp (-1) := Real.exp_pos _
+  have hb : 1 < Real.exp 1 := by
+    have := Real.add_one_lt_exp (show (1 : ℝ) ≠ 0 by norm_num)
+    linarith
+  have hab : Real.exp (-1) * Real.exp 1 = 1 := by
+    rw [← Real.exp_add]
+    norm_num
+  have ha1 : Real.exp (-1) < 1 := by nlinarith [mul_pos ha (sub_pos.2 hb)]
+  have hc : Real.exp (1 + 1 + 1) = Real.exp 1 * Real.exp 1 * Real.exp 1 := by
+    rw [Real.exp_add, Real.exp_add]
+  have hbb : 1 < Real.exp 1 * Real.exp 1 := by nlinarith
+  have hbbb : Real.exp 1 * Real.exp 1 < Real.exp 1 * Real.exp 1 * Real.exp 1 := by nlinarith
   refine ⟨wF_submodular, wPhi_monotone, zero_admissible_one, ?_, ?_⟩
   · unfold gibbsMean
     rw [sum_fin_two_bool, sum_fin_two_bool, sum_fin_two_bool, sum_fin_two_bool]
-    simp [boltz, wF, wPhi, field]
-    trace_state
-    sorry
+    simp [boltz, wF, wPhi, field_fin_two]
+    rw [div_lt_div_iff₀ (by positivity) (by positivity)]
+    nlinarith
   · unfold gibbsMean
     rw [sum_fin_two_bool, sum_fin_two_bool, sum_fin_two_bool, sum_fin_two_bool]
-    simp [boltz, wF, wPhi, field]
-    trace_state
-    sorry
+    simp [boltz, wF, wPhi, field_fin_two]
+    rw [hc, div_lt_div_iff₀ (by positivity) (by positivity)]
+    nlinarith
 
 end Witness
 
@@ -789,3 +812,12 @@ end
 #print axioms ScienceL2.cube_macrostate_cross_lower
 #print axioms ScienceL2.cube_macrostate_ratio
 #print axioms ScienceL2.cube_macrostate_ratio_compl
+#print axioms ScienceL2.exists_convex_ratio
+#print axioms ScienceL2.boltz_mixRes
+#print axioms ScienceL2.mixRes_admissible
+#print axioms ScienceL2.exists_admissible_ratio
+#print axioms ScienceL2.cube_mean_isLeast
+#print axioms ScienceL2.cube_mean_isGreatest
+#print axioms ScienceL2.cube_mean_range_eq_Icc
+#print axioms ScienceL2.cube_ratio_range_eq_Icc
+#print axioms ScienceL2.cube_sandwich_strict_witness

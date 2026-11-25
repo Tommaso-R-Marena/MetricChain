@@ -301,9 +301,10 @@ class FBModel:
         th = np.tanh(g["alpha"][None] * psi - g["beta"][None] * psi ** 2 + g["gamma"][None] * psi ** 3)
         return 1.0 / (1.0 / orr - th / rad)
 
-    def gb_energy(self, st, chunk=512, parts=False):
+    def gb_energy_simple(self, st, chunk=512, parts=False):
         """GBn2 polarisation energy (kcal/mol) at the states st (M, ns).  parts=True returns
-        (total, self-energy part, cross part)."""
+        (total, self-energy part, cross part).  Straightforward version (coordinates assembled,
+        all atom pairs gathered); gb_energy below is the block version used for enumeration."""
         self._gb_tables()
         g = self.F.gb["gbn2"]
         st = np.atleast_2d(st)
@@ -329,6 +330,73 @@ class FBModel:
         if parts:
             return (e_self + e_pair) / KCAL, e_self / KCAL, e_pair / KCAL
         return (e_self + e_pair) / KCAL
+
+    def _gb_blocks(self):
+        """squared distances (nm^2) organised by blocks of atom pairs: fixed-fixed (constant),
+        fixed-site, site-site (same site: square table with zero diagonal), site-site'."""
+        if hasattr(self, "gbB"):
+            return self.gbB
+        self._gb_tables()
+        g = self.F.gb["gbn2"]
+        q = g["charge"]
+        Xf = self.X0[self.fixed] * 0.1
+        nf = len(self.fixed)
+        iu = np.triu_indices(nf, 1)
+        d = Xf[iu[0]] - Xf[iu[1]]
+        B = dict(ffi=iu[0], ffj=iu[1], r2ff=(d * d).sum(1)[None], qqff=(q[self.fixed][iu[0]] * q[self.fixed][iu[1]])[None],
+                 r2fa=[], qqfa=[], r2aa=[], qqaa=[], r2ab={}, qqab={})
+        for i in range(self.ns):
+            Xi = self.XYZ[i] * 0.1
+            B["r2fa"].append(((Xf[None, :, None, :] - Xi[:, None, :, :]) ** 2).sum(-1))            # (k_i, nf, n_i)
+            B["qqfa"].append((q[self.fixed][:, None] * q[self.mov[i]][None, :])[None])
+            B["r2aa"].append(((Xi[:, :, None, :] - Xi[:, None, :, :]) ** 2).sum(-1))                # (k_i, n_i, n_i)
+            B["qqaa"].append((q[self.mov[i]][:, None] * q[self.mov[i]][None, :])[None])
+            for j in range(i + 1, self.ns):
+                Xj = self.XYZ[j] * 0.1
+                B["r2ab"][(i, j)] = ((Xi[:, None, :, None, :] - Xj[None, :, None, :, :]) ** 2).sum(-1)   # (k_i, k_j, n_i, n_j)
+                B["qqab"][(i, j)] = (q[self.mov[i]][:, None] * q[self.mov[j]][None, :])[None]
+        self.gbB = B
+        return B
+
+    def gb_energy(self, st, chunk=1024):
+        """GBn2 polarisation energy (kcal/mol) at the states st (M, ns); block version.
+        E = -pref [ (1/2) sum_p q_p^2/B_p + sum_{p<q} q_p q_q / f_GB(r_pq, B_p B_q) ]; the diagonal
+        term of a same-site square block (r = 0) is exactly the self term q^2/B."""
+        Bk = self._gb_blocks()
+        g = self.F.gb["gbn2"]
+        st = np.atleast_2d(st)
+        M = st.shape[0]
+        q2f = (g["charge"][self.fixed] ** 2)[None]
+        pref = ONE_4PI_EPS0 * (1.0 / self.F.eps_in - 1.0 / self.F.eps_out)
+        out = np.empty(M)
+        expr = "sum(qq / sqrt(r2 + BB * exp(-r2 / (4.0 * BB))), axis=1)"
+        for s in range(0, M, chunk):
+            sub = st[s:s + chunk]
+            C = sub.shape[0]
+            B = self.born_radii(sub)
+            Bf = B[:, self.fixed]
+            e = 0.5 * (q2f / Bf).sum(1)
+            r2, qq = Bk["r2ff"], Bk["qqff"]
+            BB = Bf[:, Bk["ffi"]] * Bf[:, Bk["ffj"]]
+            e += ne.evaluate(expr)
+            Bm = [B[:, m] for m in self.mov]
+            for i in range(self.ns):
+                ni = len(self.mov[i])
+                r2 = Bk["r2fa"][i][sub[:, i]].reshape(C, -1)
+                qq = Bk["qqfa"][i].reshape(1, -1)
+                BB = (Bf[:, :, None] * Bm[i][:, None, :]).reshape(C, -1)
+                e += ne.evaluate(expr)
+                r2 = Bk["r2aa"][i][sub[:, i]].reshape(C, -1)
+                qq = Bk["qqaa"][i].reshape(1, -1)
+                BB = (Bm[i][:, :, None] * Bm[i][:, None, :]).reshape(C, -1)
+                e += 0.5 * ne.evaluate(expr)
+                for j in range(i + 1, self.ns):
+                    r2 = Bk["r2ab"][(i, j)][sub[:, i], sub[:, j]].reshape(C, -1)
+                    qq = Bk["qqab"][(i, j)].reshape(1, -1)
+                    BB = (Bm[i][:, :, None] * Bm[j][:, None, :]).reshape(C, -1)
+                    e += ne.evaluate(expr)
+            out[s:s + chunk] = -pref * e
+        return out / KCAL
 
     # ------------------------------------------------------------------ domains and enumeration
     def domain(self, tau=0.70):

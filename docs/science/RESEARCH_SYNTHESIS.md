@@ -46,7 +46,7 @@ published statements are linked messages, never silent rewrites.
 | `docs/collaboration/responses/science/SCI-RES-0001…0003` | answers to the theory division's THY-REQ-0011 (answered in full) |
 | `docs/collaboration/status/science.md` | investigations, findings S1–S30 with status, outstanding requests |
 | `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md` | what was read upstream, at which commit, how deeply; dependencies; sync log |
-| `docs/science/INFERENCE_LIMITS.md` (v3) and `INFERENCE_LIMITS_ADDENDA.md` (A1–A11) | our own mathematics: what evaluations, averaged data and thermodynamic data determine |
+| `docs/science/INFERENCE_LIMITS.md` (v3) and `INFERENCE_LIMITS_ADDENDA.md` (A1–A15) | our own mathematics: what evaluations, averaged data and thermodynamic data determine |
 | `docs/science/PHYSICAL_APPLICABILITY.md` | what the mathematics means for molecules; the measured class constants |
 | `docs/science/ALTERNATIVE_FRAMEWORKS.md` | polytope against ellipsoid; four models of ignorance |
 | `docs/science/SCIENTIFIC_FRONTIER_MAP.md` (v4) | twelve limitations of the science, their kind, where the programme stands |
@@ -56,6 +56,7 @@ published statements are linked messages, never silent rewrites.
 | `docs/science/INDEPENDENT_VALIDATION.md` | what we replicated, re-ran, reviewed — and what we did not |
 | `docs/science/SCIENTIFIC_RESEARCH_LOG.md` | chronological log, with every error of ours |
 | `docs/science/DEAD_ENDS.md` | our own refuted statements and negative results |
+| `docs/science/PRIOR_ART_MATRIX.md` | one table: every claim of the three branches, its originality class, where the evidence is |
 | `docs/science/workstreams/` | briefs and reports of the independent workstreams (`COMMON.md` has their rules) |
 | `experiments/science/` | all code: `pi_inference/`, `pi_chain/` (coordinator), `ws_*/` (workstreams), `audit_replication/` |
 

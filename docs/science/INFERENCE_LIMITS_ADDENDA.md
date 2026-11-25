@@ -615,3 +615,59 @@ correlated region.  (iii) Far from the transition (`s = 1.5`, `n = 100`) the sam
 determines the helix content to within one or two per cent for `c ≤ 0.1`.  A model, not a
 molecule: no parameter here is fitted to anything.
 
+## A15. What a scattering curve of finite range and finite precision determines, model-free (`OPEN_PROBLEMS.md` C4)
+
+*Setting.*  Diamond-lattice chain of `N` identical point scatterers; Debye intensity
+`I_x(q) = N + 2Σ_{i<j} sin(qr_ij)/(qr_ij)`, a linear functional of the pair-distance histogram
+(workstream A2, Proposition A2.1).  Data: the ensemble-averaged intensity at the first `K`
+Shannon channels `q_k = kπ/D_max` (`D_max` the largest possible distance), each within a relative
+tolerance `τ`.  Question: the exact range of an unmeasured ensemble average over **all**
+ensembles of conformations consistent with the data.  Exact linear programmes
+(`experiments/science/pi_chain/scattering_identified.py`); truth = the athermal ensemble.
+
+*Why precision, not range, is the variable.*  `I(q)` is an entire function of `q`: exact
+knowledge on any interval determines the whole averaged histogram.  What a curve
+determines is therefore a question about its error bars — the same lesson as addenda
+A9, A10.
+
+**Unidentified fraction of the a-priori range, 13-bead chain (49 833 conformations) [N,
+exact linear programmes]:**
+
+| data | `R_g²` | end-to-end `R²` | gauche fraction | population of the most compact decile |
+|---|---|---|---|---|
+| `K = 1` (`q_max R_g = 0.6`), exact | 0.06 | 0.42 | 0.75 | `[0, 0.76]` |
+| `K = 3` (`q_max R_g = 1.9`), exact | 0.00 | 0.38 | 0.74 | `[0, 0.57]` |
+| `K = 12` (`q_max R_g = 7.7`), exact | 0.00 | 0.34 | 0.52 | `[0, 0.53]` |
+| full distance histogram, exact (`K → ∞`) | 0 | 0.22 | 0.31 | `[0, 0.50]` |
+| `K = 3`, 1 % | 0.09 (`R_g²` within −6 %, +12 %) | 0.45 | 0.77 | `[0, 0.60]` |
+| `K = 12`, 1 % | 0.08 (−5 %, +11 %) | 0.43 | 0.59 | `[0, 0.56]` |
+| `K = 3`, 5 % | 0.32 | 0.60 | 0.81 | `[0, 0.68]` |
+| `K = 12`, 5 % | 0.30 (−16 %, +43 %) | 0.58 | 0.71 | `[0, 0.65]` |
+
+The 11-bead chain gives the same picture (`K = 12`: 0.00 / 0.31 / 0.36 exact; 0.09 / 0.43 / 0.47 at
+1 %); at 15 beads the first channels give 0.05 → 0.00 for `R_g²`, 0.42 → 0.37 for the end-to-end
+distance and 0.78 for the gauche fraction (`K = 1 … 3`, exact; larger `K` in
+`scattering_identified_n12.log`).  Consistency: the exact-data columns lie between the
+earlier results for `R_g²` alone and for the full histogram (`INFERENCE_LIMITS.md` §11.1).
+
+**What the numbers say.**
+1. A curve fixes `R_g²` and little else: with exact data three channels identify `R_g²` to
+   better than 1 % of its range, while the end-to-end distance stays undetermined over a
+   third of its range and the population of a compact state anywhere between zero and
+   one half — *whatever the range of `q`*.
+2. **Precision matters more than range.**  At 1 % precision twelve channels are hardly
+   better than three (0.43 against 0.45 for the end-to-end distance); and even `R_g²` is
+   then known only to about ±8 %, because the first channels sit where the curve is
+   insensitive.  At 5 % the curve leaves `R_g²` itself uncertain by −16 %, +43 %.
+3. The population of a compact state is bounded above and never below — the scattering
+   analogue of Theorem 3: averaged data exclude dominance and identify no population.
+
+*Limits.*  Chains of 11–15 beads on a lattice; identical point scatterers; no solvent
+contrast, no hydration shell, no instrument resolution; the tolerance is a hard band at
+`K` points (an adversarial error model, as in A10), not a noise model.  The model-free set
+is the widest one can honestly report; with a model and its envelope class the intervals
+narrow several-fold (`INFERENCE_LIMITS.md` §11.4).  That a scattering curve carries about
+`q_max D_max/π` independent numbers is classical (the Shannon-channel count used in the
+small-angle literature; cited through workstream M's search log, not read by us); the
+exact identified sets as functions of `K` and `τ` are computations, not theorems.
+
