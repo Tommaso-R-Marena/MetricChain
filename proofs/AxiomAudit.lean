@@ -46,6 +46,7 @@ import proofs.Frontiers.CubeHintPair
 import proofs.Frontiers.BoundedAccuracy
 import proofs.Frontiers.FieldShift
 import proofs.Frontiers.GamePair
+import proofs.Frontiers.CoverStability
 import proofs.AuditCommand
 
 /-!
@@ -421,6 +422,15 @@ import proofs.AuditCommand
 #print axioms MetricChain.FieldShift.shift_identity
 
 -- Every game function yields a pair; the exact recursion converges (theory report §11.21)
+#print axioms MetricChain.CoverStability.hasCover_of_close
+#print axioms MetricChain.CoverStability.hasCover_sandwich
+#print axioms MetricChain.CoverStability.hasCover_upper_iff
+#print axioms MetricChain.CoverStability.hasCover_limit_point
+#print axioms MetricChain.CoverStability.not_hasCover_shifted
+#print axioms MetricChain.CoverStability.hasCover_shifted_of_close
+#print axioms MetricChain.CoverStability.approx_multiple
+#print axioms MetricChain.CoverStability.approx_nested
+#print axioms MetricChain.CoverStability.approx_nested_example
 #print axioms MetricChain.GamePair.exactRec_congr
 #print axioms MetricChain.GamePair.HintShape.pair
 #print axioms MetricChain.GamePair.HintShape.exists_pair

@@ -8,7 +8,7 @@ branch: `docs/collaboration/status/theory.md`.
 ## Digest (most important first)
 
 1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
-   (`bash scripts/audit_all.sh` exits 0; 49 Lean files, 3255 audited declarations).  A map of
+   (`bash scripts/audit_all.sh` exits 0; 50 Lean files, 3282 audited declarations).  A map of
    the established results with exact Lean declarations and their epistemic status is in
    THY-MSG-0001 (written at `d81eb8a`); THY-MSG-0003 … -0008 say what changed since.
 2. **Your data changed four of our statements** (THY-MSG-0005 §2, §5): "certificates in the

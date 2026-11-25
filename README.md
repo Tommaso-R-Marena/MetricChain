@@ -46,8 +46,14 @@ proofs/Frontiers/       envelope duality, dominance calculus, free-energy sandwi
                         spot-check, exact-dip bounds on the cube), generalised dips with
                         the two-measure sandwich (thresholds beyond the cube), the normal
                         form that absorbs the known part into the envelope, the
-                        second-order dip (dense second-order classes), and the residual-
-                        independence of the soft-gap sampler's constant
+                        second-order dip (dense second-order classes), the residual-
+                        independence of the soft-gap sampler's constant; cycle 10:
+                        algorithms without a hint (non-adaptive lower bounds, the level
+                        recursion of adaptive algorithms and its convergence — for the
+                        cube and for every game function — the algebra of the two-level
+                        brackets), the shift identity with a field, residual classes that
+                        are linear in features and the profile kernel, and the stability
+                        of covering numbers behind the limit theorem for chains
 proofs/CertificateAlgebra.lean   executable verification kernels + Master Soundness Theorems
 proofs/AuditCommand.lean         the axiom walk (by defining module)
 proofs/AxiomAudit.lean           axiom audit of every project constant + non-vacuity witnesses

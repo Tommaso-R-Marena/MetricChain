@@ -1245,6 +1245,15 @@ result) for known parts `f(x) = n·φ(|x|/n)` (Curie–Weiss):
   the uniform-cube Gibbs shell) restore it within the grid error.  If this stands, at
   phase coexistence the hardest instance is the multicanonical one, not an additive one.
 
+**`CoverStability.lean`** (after the checkpoint; 27 declarations): the stability of covering
+numbers with position-dependent radii and internal centres under perturbations of the
+client set in both directions (`hasCover_of_close`, `hasCover_sandwich`), that only the
+lower boundary matters (`hasCover_upper_iff`), the two-point example in which covering
+numbers do not converge at a jump (`not_hasCover_shifted`, with `hasCover_shifted_of_close`
+as the witness that a shifted accuracy does suffice), and the approximate-nestedness
+estimate behind Fekete's lemma for sets (`approx_nested`, with a witness).  50 Lean files,
+3282 audited declarations.
+
 Workstream T (`workstreams/T_brief.md`) was commissioned to establish what is true:
 every-`n` type-level statements, the convex case step by step against the proofs of
 workstream F, the two-phase case with accurate numerics and rigorous lower bounds, the
@@ -1252,10 +1261,19 @@ status of the isoperimetric statement when the reference is not a maximum of add
 instances, prior art on optimality of the multicanonical ensemble.  Its output will be in
 the session's scratch directory (`ws/T/`) until integrated.
 
+**Workstream U** (`workstreams/U_brief.md`), commissioned in parallel: rounds of adaptivity.
+The algorithms that reach the hinted exponent use a number of rounds that grows with `n`
+(the ladder of a level is processed rung by rung); what is the exponent `τ^{(r)}` of
+algorithms with a bounded number `r` of rounds, between `a` (`r = 1`) and `h`?  Observations
+handed to it, to be verified: pure cones reveal their centre, so the pairs behind the
+non-adaptive lower bound are easy for two rounds; single hidden dips do not separate two
+rounds from many; a separation needs nested structure with hidden centres.  Output in
+the session's scratch directory (`ws/U/`) until integrated.
+
 ### Resume here (cycle 10, seventh checkpoint)
 
-Verified state: every module under `proofs/` (49 files) builds with zero warnings and is walked
-by the axiom audit (3255 declarations); the harness (110 registered tests: 92 that must survive,
+Verified state: every module under `proofs/` (50 files) builds with zero warnings and is walked
+by the axiom audit (3282 declarations); the harness (110 registered tests: 92 that must survive,
 18 documented refutations) and its mutation tests (207 mutations: 206 caught, one expected
 pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 (R5, R6,
 R_P), §11.18 (R7), §11.19 (R8: "proved"), §11.20 (R9: proved; two gaps closed).
@@ -1263,8 +1281,8 @@ Machine-checked: §11.21.  **Checked by the coordinator with independent code, n
 referee:** §11.22.  **Not refereed:** the revised Theorem 11.44, Proposition 11.50.  **Not
 checked by anyone:** the two-level algorithms at scale with real inner brackets on non-flat
 instances, or with four levels (THY-REQ-0001); the nested algorithm with a field end to
-end; Theorem 11.63 on sets without symmetry for `n > 6`.  Running: workstream T (item 1 below;
-see the entry above).  In priority order:
+end; Theorem 11.63 on sets without symmetry for `n > 6`.  Running: workstream T (item 1 below)
+and workstream U (item 6, in the model of rounds); see the entry above.  In priority order:
 
 1. **Known parts with interactions** — the largest open item of the query-complexity
    theory (§12 item 2(d)(v)).  The natural first case, not yet attempted: a known part that
@@ -1287,7 +1305,9 @@ see the entry above).  In priority order:
    sense of `GamePair.lean` (continuity, the two zeros, the two linear bounds; for the field
    also the closed form of Theorem 11.59(b)) and the shear law for their non-adaptive
    exponents — the abstract part is done (§11.21), these identifications are on paper.
-   Also natural Lean targets: Lemma 11.70 and the Fekete lemma for sets of Theorem 11.69.
+   (Done after the checkpoint: Lemma 11.70(a), (b) and the quantitative step of the Fekete
+   lemma for sets, `proofs/Frontiers/CoverStability.lean`; not done: the existence and
+   convexity of the Hausdorff limit.)
 5. **A weighted Harper-type inequality** for the type-uniform measure and the slack of the
    flat-histogram reference (finite `n`, usable error term) — it would make the nested
    algorithm with a field explicit and is the missing ingredient for bounded accuracies

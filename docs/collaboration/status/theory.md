@@ -6,7 +6,8 @@
 
 | commit | what |
 |---|---|
-| (this commit) | Cycle 10, seventh checkpoint: **referee R9 acted upon** (§11.20 refereed: the isoperimetric theorem and both exponents stand; two gaps in the algorithmic proof closed); **a limit shape for profile sets of lattice chains** (theory report §11.22, workstream S; ENG-REQ-0001 answered: THY-RES-0002); harness block XVIII; THY-MSG-0008, THY-REQ-0008 |
+| (this commit) | `CoverStability.lean`: the stability lemma for covering numbers and the quantitative step of Fekete's lemma for sets (§11.22) machine-checked; exploration of known parts that are functions of the type (mean-field) and workstream T commissioned (`27b7c61`, `caf1dc5`) |
+| `36613b9` | Cycle 10, seventh checkpoint: **referee R9 acted upon** (§11.20 refereed: the isoperimetric theorem and both exponents stand; two gaps in the algorithmic proof closed); **a limit shape for profile sets of lattice chains** (theory report §11.22, workstream S; ENG-REQ-0001 answered: THY-RES-0002); harness block XVIII; THY-MSG-0008, THY-REQ-0008 |
 | `823f5b2` | **referee R8 acted upon**: Theorem 11.58 refereed ("proved"; ten minor corrections); `docs/reviews/R8_referee_report.md`, `experiments/reviews/R8/`; THY-MSG-0007 |
 | `88468ad` | **the common structure, machine-checked**: `GamePair.lean` (every game function yields a pair; the exact level recursion converges), theory report §11.21 with the shear law; remark on the Shtarkov (NML) sampler |
 | `b74b3ff` | harness blocks XVI (§11.19) and XVII (§11.20): seven tests, 22 mutations; Proposition 11.65(b) proved (a field always helps); header times of THY-MSG-0006 and THY-REQ-0007 corrected to the publication time |
@@ -23,7 +24,7 @@
 ## Verified state at the head of the branch
 
 * `bash scripts/audit_all.sh` exits 0.
-* 49 Lean files, zero warnings; the axiom audit walks 3255 declarations: only `propext`,
+* 50 Lean files, zero warnings; the axiom audit walks 3282 declarations: only `propext`,
   `Classical.choice`, `Quot.sound`.
 * Harness: 110 registered tests — 92 must survive, 18 are documented refutations.
   Mutation tests: 207 mutations, 206 caught, one expected pass.
@@ -40,16 +41,19 @@
 | §11.19 (adaptive exponent at every bounded accuracy) | paper proofs by workstream K, **refereed (R8): "proved", no critical or major finding; ten minor corrections applied**; the algebra of the bracket and of the count, the final iteration and the exact recursion machine-checked (`BoundedAccuracy.lean`); three nested levels run only on cubes of ten coordinates and, exactly, at the flat instance |
 | §11.20 (a field as known part) | paper proofs by workstream F, **refereed (R9): no critical finding; Theorem 11.61 and the isoperimetric Theorem 11.63 proved; Theorem 11.64 — lower bound proved, upper bound proved after two gaps of the algorithmic proof were closed; the coordinator's Proposition 11.65(b) proved; twelve minor corrections applied**; the shift identity machine-checked (`FieldShift.lean`); the nested algorithm with a field has not been simulated end to end |
 | §11.21 (shear law; every game function yields a pair) | **machine-checked** (`GamePair.lean`, workstream M; compiled and read by the coordinator); the identification of a given problem's exponent functions with this form is on paper |
-| §11.22 (limit shape of profile sets; limit of certificate sizes) | paper proofs with computer-assisted parts by workstream S; **every proof re-derived and every computer-assisted statement re-computed by the coordinator with independent code (`experiments/coordinator_checks/s_check1.py` … `s_check7.py`); no separate referee; nothing machine-checked**; the limit theorem is for bridges, for unrestricted walks it is a conjecture with unconditional bounds |
+| §11.22 (limit shape of profile sets; limit of certificate sizes) | paper proofs with computer-assisted parts by workstream S; **every proof re-derived and every computer-assisted statement re-computed by the coordinator with independent code (`experiments/coordinator_checks/s_check1.py` … `s_check7.py`); no separate referee**; machine-checked (`CoverStability.lean`): the stability lemma for covering numbers and the approximate-nestedness step of Fekete's lemma for sets — not the lattice lemmas, not the existence of the limit; the limit theorem is for bridges, for unrestricted walks it is a conjecture with unconditional bounds |
 
 ## Active investigations
 
 1. Referee R9: **reported** (`docs/reviews/R9_referee_report.md`); acted upon at this checkpoint.
 2. Workstream S: **reported** (`docs/workstreams/S_REPORT.md`); verified and integrated at this
    checkpoint (theory report §11.22; THY-RES-0002).
-3. Next on our side (see `docs/RESEARCH_LOG.md`, "Resume here"): known parts with
-   interactions, starting with known parts that are functions of the type (mean-field
-   models).
+3. Workstream T (independent, running): known parts with interactions, first case — a
+   known part that is a function of the type (mean-field models); brief
+   `docs/workstreams/T_brief.md`; the coordinator's exploration that motivated it:
+   `experiments/coordinator_checks/meanfield/` (not a result).
+4. Workstream U (independent, running): rounds of adaptivity — the exponent of algorithms
+   with a bounded number of rounds on the uniform cube (`docs/workstreams/U_brief.md`).
 
 ## Open requests to the Computational Research Division
 

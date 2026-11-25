@@ -1145,7 +1145,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   `10³`–`10⁵` beads; that unrestricted walks have the same limit is a **conjecture**, the body
   is known only between an inner volume `2.22` (partly a sketch) and an outer volume `3.125`,
   the section has been checked by the coordinator but not by a separate referee, and
-  nothing of it is machine-checked; off-lattice there is only a heuristic estimate.  A
+  only its two soft lemmas are machine-checked; off-lattice there is only a heuristic estimate.  A
   remainder that is only bounded in a first-order envelope is paid at first-order prices (one
   bounded in the supremum norm costs an accuracy floor), chirality and sequence-specific
   terms are outside, the class is far smaller than an RMSD-Lipschitz class, and checking a
@@ -1226,6 +1226,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/BoundedAccuracy.lean` | `exactRec`, `stepLE_exact`, `Rstep_anti`, `exactRec_props`, `exactRec_reaches_hint`, `exactRec_reaches_hint_of_pair`, `exactRec_ge_hint`, `exactRec_tendsto_hint` (the level recursion of §11.18 defined in Lean; it never undercuts and converges to the hinted exponent), `bounded_iterates_lt`, `two_rung_bound`, `levels_reach_hint_at_zero`, `cube_levels_reach_hint_at_zero`, `cube_levels_reach_hint_at_zero_consistent` (the recursion at accuracy zero), `certified_lower_sum_le_mean`, `populated_part_le`, `close_points_bound'`, `width_le` (deterministic algebra of Algorithm 2L⁺; workstream K and the coordinator; §11.19) |
 | `proofs/Frontiers/FieldShift.lean` | `klBin_tilt`, `cone_rate_eq`, `sphere_rate_eq`, `shift_identity` (the shift identity with a known field: rate of the cone law = mutual information + `KL(P_X‖π)` + hinted accuracy at the zero residual; workstream F; §11.20) |
 | `proofs/Frontiers/GamePair.lean` | `HintShape`, `shiftInv`, `partner`, `HintShape.pair`, `HintShape.exists_pair`, `HintShape.superSolution`, `HintShape.Rstep_hint`, `HintShape.exactRec_reaches`, `HintShape.exactRec_tendsto`, `exactRec_congr`, `GameFunction`, `hinted`, `critical`, `GameFunction.hintShape_critical`, `GameFunction.pair`, `GameFunction.exactRec_reaches`, `GameFunction.exactRec_tendsto`, `GameFunction.not_forall_shift_eq`, `GameFunction.critical_eq_neg_L`, `toyGame_gameFunction`, `hinted_toyGame`, `partner_toyGame`, `gauss_exactRec_tendsto` (every game function yields a `HintPair`, and its exact level recursion converges to the hinted exponent; workstream M; §11.21) |
+| `proofs/Frontiers/CoverStability.lean` | `Covers`, `HasCover`, `hasCover_mono`, `hasCover_of_close`, `hasCover_sandwich`, `upper`, `hasCover_upper_iff`, `twoPoints`, `hasCover_limit_point`, `not_hasCover_shifted`, `hasCover_shifted_of_close`, `approx_multiple`, `approx_extend`, `approx_nested`, `approx_nested_example` (covering numbers with position-dependent radii and internal centres are stable under perturbations of the client set, with the slack `(2L + e)η`; only the lower boundary matters; no convergence at a jump; the approximate-nestedness estimate behind Fekete's lemma for sets; §11.22) |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -1278,7 +1279,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G21 | **Every bounded accuracy**: at every fixed accuracy, and down to accuracies `e^{-o(n)}`, the worst-case exponent of adaptive randomised algorithms without a hint on the cube class is `h = KL(Λ₁/u‖½)`, the hinted one, against `a = KL(p_u‖½)` for non-adaptive algorithms.  The two-level algorithm is modified so that a level costs only an arbitrarily small constant of accuracy: layer-cake *sum* as lower end, and the lower isoperimetric bound (Harper, two-sided tail lemma) inside the closure test, which is what certifies a bounded ratio at radii `p_u n_o − O(√n_o)`; the recursion continues to accuracy zero and contracts to `h` | `exactRec_tendsto_hint`, `exactRec_ge_hint`, `bounded_iterates_lt`, `cube_levels_reach_hint_at_zero`, `two_rung_bound`, `certified_lower_sum_le_mean`, `populated_part_le`, `close_points_bound'`, `width_le` **[V]** (the exact recursion; the contraction; the algebra of the bracket and of the count); the algorithm, its events, its cost and the assembly over the levels **[P]** | cycle 10, workstream K; **refereed (`reviews/R8`: "proved", no critical or major finding, ten minor points corrected)**; simulated with the constants of the theorem by the workstream, by the referee (15 000 runs; three nested levels with real inner brackets on small cubes; exact three-level cost at the flat instance) and in the harness (XVI.3); prior art from search summaries only |
 | G22 | **With a known part (a field)**: on the `p`-biased cube the exponent of non-adaptive algorithms without a hint is `θ_na = max_m min{I(S;X) : D(P_{X|S}‖π_s|P_S) ≤ ε₁}`, attained by sampling uniformly on every type class and not by the Gibbs measure of the known part; the worst-case exponent of adaptive algorithms without a hint is `R^max = max_γ R_γ`, the hinted exponent of the hardest *additive* instance, which is strictly above the hinted exponent of the zero residual whenever `p ≠ ½`; the reference instance of the nested algorithm is the lower envelope of the additive instances (flat histogram), and the isoperimetric input is an asymptotic statement for that reference proved by the method of types | `shift_identity`, `klBin_tilt`, `exactRec_reaches_hint_of_pair` **[V]** (the identity between the three rates; convergence of the exact recursion for any pair with the abstract properties); the single-letter formulas, the isoperimetric theorem, the abstract properties of the pair and everything about algorithms **[P]** | cycle 10, workstream F; **refereed (`reviews/R9`): the isoperimetric theorem and the non-adaptive exponent proved; the adaptive exponent — lower bound proved, upper bound proved after two gaps in the written proof of the algorithmic part were closed; no critical finding**; the coordinator's proof that a field always helps (Proposition 11.65(b)) refereed "proved"; central formulas re-computed by the coordinator and, independently, by the referee; prior art: the Ahlswede–Zhang summary read in full by the referee, otherwise abstracts and machine summaries (Bollobás–Leader; Yu) — the isoperimetric statement is not a black-box corollary of the fixed-measure theorem |
 | G23 | **The structure behind G18–G22**: the shear law `x_na(θ) = e_hint(θ) + θ` (a non-adaptive sample of `e^{nθ}` points loses exactly `θ` of accuracy rate), and an abstract theorem: for every game function `F` on `[0,1]` the transform `R(e) = max_{t≤1}[F(t) − te]` and its sheared partner `R ∘ (id + R)^{-1}` form a pair to which the convergence theorem applies, `R` is a fixed point and lower barrier of the level operator, and the exact level recursion converges to `R`; the uniform cube, the biased cube and the toy pair `t(1−t)` are instances | `GameFunction.hintShape_critical`, `GameFunction.pair`, `HintShape.superSolution`, `GameFunction.exactRec_tendsto`, `gauss_exactRec_tendsto` **[V]**; that the exponent functions of a given problem are of this form **[P]** | cycle 10, workstream M (a formalisation task; statement by the coordinator after workstream F's Theorem F8); elementary convex analysis — the value is that the analytic core of two theorems is one machine-checked statement |
-| G24 | **Chains in the thermodynamic limit** (the lattice chain of G19): the normalised sets `{(profile, #gauche)/N}` of bridges converge in the Hausdorff metric to a compact convex body — a limit shape with a convex least-gauche function — by a concatenation lemma with explicit constants and Fekete's lemma for sets, with the one-sided rate `168/(N+3)`; covering numbers with position-dependent radii are stable under Hausdorff convergence of truncated epigraphs, so the certificate sizes of bridges converge to a covering number of the limit shape (off a countable set of accuracies); for all walks: an outer polytope with exact dual certificates (cluster method), the bounds `50 ≤ liminf`, `limsup ≤ 3 627` at `(L, ε₁) = (1, ½)` in place of `10^{1387}`, and `26 437` for every chain length; the shape converges at rate exactly `N^{-1/3}` at its compact end (Loomis–Whitney), so enumeration cannot see the limit; single-flip constants are bounded below linearly | none **[V]**; everything **[P]**, the polytopes and the numbers computer-assisted with exact certificates; equality of the limits for walks and bridges **[C]** | cycle 10, workstream S, in answer to a question of the Computational Research Division (`ENG-REQ-0001`); **checked by the coordinator — every proof re-derived, every computer-assisted statement re-computed with independent code — not by a separate referee**; limits of supermultiplicative models and the cluster method for lattice-gas ground states are **known**; the corresponding free-energy statement for self-attracting walks is open in the literature; the limit shape for this model, the stability lemma and the numbers were not found |
+| G24 | **Chains in the thermodynamic limit** (the lattice chain of G19): the normalised sets `{(profile, #gauche)/N}` of bridges converge in the Hausdorff metric to a compact convex body — a limit shape with a convex least-gauche function — by a concatenation lemma with explicit constants and Fekete's lemma for sets, with the one-sided rate `168/(N+3)`; covering numbers with position-dependent radii are stable under Hausdorff convergence of truncated epigraphs, so the certificate sizes of bridges converge to a covering number of the limit shape (off a countable set of accuracies); for all walks: an outer polytope with exact dual certificates (cluster method), the bounds `50 ≤ liminf`, `limsup ≤ 3 627` at `(L, ε₁) = (1, ½)` in place of `10^{1387}`, and `26 437` for every chain length; the shape converges at rate exactly `N^{-1/3}` at its compact end (Loomis–Whitney), so enumeration cannot see the limit; single-flip constants are bounded below linearly | `hasCover_of_close`, `hasCover_sandwich`, `hasCover_upper_iff`, `not_hasCover_shifted`, `approx_nested` **[V]** (the stability lemma for covering numbers and the approximate-nestedness step of Fekete's lemma for sets); everything about the lattice, the existence and convexity of the limit **[P]**, the polytopes and the numbers computer-assisted with exact certificates; equality of the limits for walks and bridges **[C]** | cycle 10, workstream S, in answer to a question of the Computational Research Division (`ENG-REQ-0001`); **checked by the coordinator — every proof re-derived, every computer-assisted statement re-computed with independent code — not by a separate referee**; limits of supermultiplicative models and the cluster method for lattice-gas ground states are **known**; the corresponding free-energy statement for self-attracting walks is open in the literature; the limit shape for this model, the stability lemma and the numbers were not found |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -4607,8 +4608,11 @@ re-solved, the eleven dual certificates of the site programme verified and fifte
 certificates of the marked programme found, all in exact rational arithmetic; lamellae,
 hairpins, volume bounds, packings and exact covering numbers; the explicit bridge with
 166 199 beads).  No discrepancy was found; two lower bounds were
-slightly improved.  There has been **no separate referee**, and nothing here is
-machine-checked.  The model is the synthetic lattice chain with a made-up known part; the
+slightly improved.  There has been **no separate referee**.  Machine-checked
+(`CoverStability.lean`): the stability lemma for covering numbers in both directions, that
+only the lower boundary matters, the two-point example without convergence at a jump, and
+the quantitative step of Fekete's lemma for sets (approximate nestedness); everything
+about the lattice, the existence of the limit and its convexity are paper proofs.  The model is the synthetic lattice chain with a made-up known part; the
 section is about the mathematics of the limit, not about any real system.
 
 *Setting.*  Diamond lattice with bond vectors `±a₀, …, ±a₃`, `a₀ = (1,1,1)`, `a₁ = (1,−1,−1)`,
@@ -4676,7 +4680,8 @@ the symmetry is unique in every case, the errors lie in the stated intervals, an
 `δ_g = [b′ is a down-bond]`; the observed maxima are `(0, 2, 4, 1)` — the proved constants are worst
 cases that need many beads near the top level.)
 
-**Theorem 11.69 (a limit shape for bridges) [P].**  Let `𝒟_N^{br} ⊂ ℝ⁴` be the set of `(h(x), g(x))/N`
+**Theorem 11.69 (a limit shape for bridges) [P; the estimate between `E_m` and `E_M` V:
+`approx_multiple`, `approx_nested`].**  Let `𝒟_N^{br} ⊂ ℝ⁴` be the set of `(h(x), g(x))/N`
 over bridges with `N` beads.  There is a compact **convex** set `K^{br}` in the box with
 `d_H(𝒟_N^{br}, K^{br}) → 0` (Hausdorff distance), and **every point of `𝒟_N^{br}` lies within `168/(N+3)`
 of `K^{br}`**.  Consequently `𝒦 := {p : (p, g) ∈ K^{br}}` is a compact convex body of profile densities,
@@ -4703,7 +4708,9 @@ The estimate is one-sided: finite sets never stick out of the limit by more than
 and nothing in this argument says how fast they fill it (Proposition 11.73 does).
 
 **Lemma 11.70 (covering numbers are stable under Hausdorff convergence of truncated
-epigraphs) [P; elementary].**  For a compact `F ⊂ V × [0, G]` (`V` a finite-dimensional normed
+epigraphs) [(a), (b) and the example of (d) V: `hasCover_upper_iff`, `hasCover_of_close`,
+`hasCover_sandwich`, `hasCover_limit_point`, `not_hasCover_shifted`; (c) and the limit
+statement of (d) P, elementary].**  For a compact `F ⊂ V × [0, G]` (`V` a finite-dimensional normed
 space) let `N(F, ε)` be the least number of centres `a` among the first components of points of
 `F` such that every `(p, g) ∈ F` has a centre with `L‖a − p‖ ≤ e·g + ε`, and `F^↑` the truncated epigraph
 `{(p, t) : (p, g) ∈ F, g ≤ t ≤ G}`.
@@ -4945,8 +4952,9 @@ conformations with 7 beads.  Not in the harness: the marked programme of Proposi
 doubtful vertices) and hence `N_∞` to better than a factor of ten.  The routing lemma that
 would put every periodic chain system into `K^{br}`.  Rings (a sketch).  Finite-`N` constants
 for the marked programme.  A rate for the whole body (only the compact end is settled).
-Anything off-lattice.  Machine-checking: nothing — the natural targets are Lemma 11.70 and
-the abstract Fekete lemma for sets.
+Anything off-lattice.  Machine-checking beyond the two soft lemmas: the existence of the
+Hausdorff limit and its convexity (a compactness argument on top of `approx_nested`), and
+the lattice lemmas 11.67, 11.68.
 
 *Prior art* (workstream S; search summaries and abstracts except where stated).  Limits
 and concave density functions for supermultiplicative models of walks and polygons
@@ -5136,9 +5144,10 @@ elementary); Proposition 11.74.  "Not found", not "new".
    (a4) A rate for the whole body (only the compact end is settled).  (a5) Anything
    off-lattice: there the profile is a function, the plateau is exponential in
    `L·S_c·M/ε₁`, and only a heuristic estimate exists; a prediction of the measured growth
-   rate per torsion needs the distance-entropy function of the profile classes.  (a6) A
-   machine-checked version of the two soft lemmas (stability of covering numbers; Fekete's
-   lemma for sets).  (b) an upper bound for the class
+   rate per torsion needs the distance-entropy function of the profile classes.  (a6) The
+   stability of covering numbers and the quantitative step of Fekete's lemma for sets are
+   machine-checked (`CoverStability.lean`); the existence and convexity of the Hausdorff
+   limit and the two lattice lemmas are not.  (b) an upper bound for the class
    "pair-additive plus a small first-order remainder" that matches the lower bound "the two
    slacks add", or a proof that the cost is a product; (c) randomised algorithms for linear
    classes — all lower bounds there are for deterministic schemes at the zero residual, and a
