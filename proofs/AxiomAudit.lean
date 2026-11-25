@@ -45,6 +45,7 @@ import proofs.Frontiers.HintRecursion
 import proofs.Frontiers.CubeHintPair
 import proofs.Frontiers.BoundedAccuracy
 import proofs.Frontiers.FieldShift
+import proofs.Frontiers.GamePair
 import proofs.AuditCommand
 
 /-!
@@ -418,6 +419,25 @@ import proofs.AuditCommand
 #print axioms MetricChain.FieldShift.cone_rate_eq
 #print axioms MetricChain.FieldShift.sphere_rate_eq
 #print axioms MetricChain.FieldShift.shift_identity
+
+-- Every game function yields a pair; the exact recursion converges (theory report §11.21)
+#print axioms MetricChain.GamePair.exactRec_congr
+#print axioms MetricChain.GamePair.HintShape.pair
+#print axioms MetricChain.GamePair.HintShape.exists_pair
+#print axioms MetricChain.GamePair.HintShape.exactRec_reaches
+#print axioms MetricChain.GamePair.HintShape.superSolution
+#print axioms MetricChain.GamePair.HintShape.Rstep_hint
+#print axioms MetricChain.GamePair.HintShape.exactRec_tendsto
+#print axioms MetricChain.GamePair.GameFunction.hintShape_critical
+#print axioms MetricChain.GamePair.GameFunction.pair
+#print axioms MetricChain.GamePair.GameFunction.exactRec_reaches
+#print axioms MetricChain.GamePair.GameFunction.exactRec_tendsto
+#print axioms MetricChain.GamePair.GameFunction.not_forall_shift_eq
+#print axioms MetricChain.GamePair.GameFunction.critical_eq_neg_L
+#print axioms MetricChain.GamePair.toyGame_gameFunction
+#print axioms MetricChain.GamePair.hinted_toyGame
+#print axioms MetricChain.GamePair.partner_toyGame
+#print axioms MetricChain.GamePair.gauss_exactRec_tendsto
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp

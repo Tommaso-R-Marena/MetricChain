@@ -1214,6 +1214,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/CubeHintPair.lean` | `cubeP`, `cubeLam`, `cubeEstar`, `cubeA`, `cubeH`, `cubeHint`, `cubeNa`, `cubeNa_isLeast`, `cubeNa_isLeast_allRadii`, `cubeNa_add_cubeHint`, `cubeHint_lt_cubeNa`, `cubeEstar_eq_log_cosh`, `cubePair`, `cube_superSolution_le_hint`, `cube_iterates_lt_hint_add`, `cubeHintClip`, `cubePairClip`, `cube_step_from_hint_le`, `cube_hint_superSolution`, `cube_hintRecursion_witness` (the exponent functions of the cube satisfy `HintPair`; the hinted exponent is a fixed point of the recursion; workstream L; §11.18) |
 | `proofs/Frontiers/BoundedAccuracy.lean` | `exactRec`, `stepLE_exact`, `Rstep_anti`, `exactRec_props`, `exactRec_reaches_hint`, `exactRec_reaches_hint_of_pair`, `exactRec_ge_hint`, `exactRec_tendsto_hint` (the level recursion of §11.18 defined in Lean; it never undercuts and converges to the hinted exponent), `bounded_iterates_lt`, `two_rung_bound`, `levels_reach_hint_at_zero`, `cube_levels_reach_hint_at_zero`, `cube_levels_reach_hint_at_zero_consistent` (the recursion at accuracy zero), `certified_lower_sum_le_mean`, `populated_part_le`, `close_points_bound'`, `width_le` (deterministic algebra of Algorithm 2L⁺; workstream K and the coordinator; §11.19) |
 | `proofs/Frontiers/FieldShift.lean` | `klBin_tilt`, `cone_rate_eq`, `sphere_rate_eq`, `shift_identity` (the shift identity with a known field: rate of the cone law = mutual information + `KL(P_X‖π)` + hinted accuracy at the zero residual; workstream F; §11.20) |
+| `proofs/Frontiers/GamePair.lean` | `HintShape`, `shiftInv`, `partner`, `HintShape.pair`, `HintShape.exists_pair`, `HintShape.superSolution`, `HintShape.Rstep_hint`, `HintShape.exactRec_reaches`, `HintShape.exactRec_tendsto`, `exactRec_congr`, `GameFunction`, `hinted`, `critical`, `GameFunction.hintShape_critical`, `GameFunction.pair`, `GameFunction.exactRec_reaches`, `GameFunction.exactRec_tendsto`, `GameFunction.not_forall_shift_eq`, `GameFunction.critical_eq_neg_L`, `toyGame_gameFunction`, `hinted_toyGame`, `partner_toyGame`, `gauss_exactRec_tendsto` (every game function yields a `HintPair`, and its exact level recursion converges to the hinted exponent; workstream M; §11.21) |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -1265,6 +1266,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G20 | **Adaptivity replaces the hint**: on the cube class the worst-case exponent of adaptive randomised algorithms without a hint is the hinted exponent `θ_hint(ε₁) = KL((Λ₁+ε₁)/u‖½)`, strictly below the non-adaptive `θ_na`.  A two-level "layer-cake" algorithm — uniform outer sample, brackets of the fibre averages refined only as far as a one-sided test against a ladder of levels requires, the tail lemma once at the top — turns bracket procedures with exponent function `T` into ones with `R[T]`; by the identity `θ_na(e + θ_hint(e)) = θ_hint(e)` (that is, `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁`) the hinted exponent is a fixed point of `R`, every nonincreasing `T ≤ R[T]` lies below it, and the iteration from `θ_na` converges to it; on radial instances a direct adaptive algorithm has the hinted exponent | `superSolution_le_hint`, `iterates_lt_hint_add`, `step_from_hint_le`, `klBin_shift`, `cubePair`, `cube_iterates_lt_hint_add`, `cube_hint_superSolution`, `LayerCake.mean_le_upper`, `LayerCake.upper_le_width`, `LayerCake.close_points_bound` **[V]** (analysis of the recursion, abstractly and for the exponent functions of the cube; validity and width of the bracket; the two algebraic inequalities behind the cost); the algorithm's number of evaluations, the induction over levels and all asymptotics **[P]** | cycle 10, refereed (`reviews/R7`: "proved with gaps", the gaps written into the text; no error found in the cost accounting beyond one closure rule); the two-level algorithm and the recursion are due to workstream H, the oracle-relative form, the identity and the convergence proof to the coordinator; relatives of the algorithm are nested sampling, multilevel splitting and nested simulation, adaption with polynomial gains is known in information-based complexity (Heinrich; Kunsch–Novak–Wnuk) — a certified version with a worst-case exponent, and the statement that adaption recovers the value of a hint exactly, were **not found** (abstracts only) |
 | G21 | **Every bounded accuracy**: at every fixed accuracy, and down to accuracies `e^{-o(n)}`, the worst-case exponent of adaptive randomised algorithms without a hint on the cube class is `h = KL(Λ₁/u‖½)`, the hinted one, against `a = KL(p_u‖½)` for non-adaptive algorithms.  The two-level algorithm is modified so that a level costs only an arbitrarily small constant of accuracy: layer-cake *sum* as lower end, and the lower isoperimetric bound (Harper, two-sided tail lemma) inside the closure test, which is what certifies a bounded ratio at radii `p_u n_o − O(√n_o)`; the recursion continues to accuracy zero and contracts to `h` | `exactRec_tendsto_hint`, `exactRec_ge_hint`, `bounded_iterates_lt`, `cube_levels_reach_hint_at_zero`, `two_rung_bound`, `certified_lower_sum_le_mean`, `populated_part_le`, `close_points_bound'`, `width_le` **[V]** (the exact recursion; the contraction; the algebra of the bracket and of the count); the algorithm, its events, its cost and the assembly over the levels **[P]** | cycle 10, workstream K; **under independent review (R8) at this checkpoint — unrefereed**; simulated with the constants of the theorem (no violation in 1 719 runs of the outer loop and 84 end-to-end runs), prior art from search summaries only |
 | G22 | **With a known part (a field)**: on the `p`-biased cube the exponent of non-adaptive algorithms without a hint is `θ_na = max_m min{I(S;X) : D(P_{X|S}‖π_s|P_S) ≤ ε₁}`, attained by sampling uniformly on every type class and not by the Gibbs measure of the known part; the worst-case exponent of adaptive algorithms without a hint is `R^max = max_γ R_γ`, the hinted exponent of the hardest *additive* instance, which is strictly above the hinted exponent of the zero residual whenever `p ≠ ½`; the reference instance of the nested algorithm is the lower envelope of the additive instances (flat histogram), and the isoperimetric input is an asymptotic statement for that reference proved by the method of types | `shift_identity`, `klBin_tilt`, `exactRec_reaches_hint_of_pair` **[V]** (the identity between the three rates; convergence of the exact recursion for any pair with the abstract properties); the single-letter formulas, the isoperimetric theorem, the abstract properties of the pair and everything about algorithms **[P]** | cycle 10, workstream F; **under independent review (R9) at this checkpoint — unrefereed**; central formulas re-computed by the coordinator; prior art read as abstracts and machine summaries only (Bollobás–Leader; Ahlswede–Zhang; Yu) |
+| G23 | **The structure behind G18–G22**: the shear law `x_na(θ) = e_hint(θ) + θ` (a non-adaptive sample of `e^{nθ}` points loses exactly `θ` of accuracy rate), and an abstract theorem: for every game function `F` on `[0,1]` the transform `R(e) = max_{t≤1}[F(t) − te]` and its sheared partner `R ∘ (id + R)^{-1}` form a pair to which the convergence theorem applies, `R` is a fixed point and lower barrier of the level operator, and the exact level recursion converges to `R`; the uniform cube, the biased cube and the toy pair `t(1−t)` are instances | `GameFunction.hintShape_critical`, `GameFunction.pair`, `HintShape.superSolution`, `GameFunction.exactRec_tendsto`, `gauss_exactRec_tendsto` **[V]**; that the exponent functions of a given problem are of this form **[P]** | cycle 10, workstream M (a formalisation task; statement by the coordinator after workstream F's Theorem F8); elementary convex analysis — the value is that the analytic core of two theorems is one machine-checked statement |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -1309,7 +1311,9 @@ are again single-letter, "adaptive = hinted" persists as "the worst case without
 the hardest case with a hint", and three natural guesses about what carries over — the
 hardest instance, the sampler, the isoperimetric theorem needed — are false; a paper proof
 by a workstream resting on a new asymptotic isoperimetric statement, under independent
-review at this checkpoint.
+review at this checkpoint; (xiv) the common analytic core of (xi)–(xiii) as one
+machine-checked statement about game functions (G23), with the shear law as its
+one-sentence form.
 Each rests on textbook tools (type covering, Hölder, telescoping, linear-programming duality);
 the proofs are short.  The second referee's verdict on G1–G10 — "a coherent note, not a
 theorem-driven paper" — is reproduced in §12 together with what a publication would still
@@ -4332,6 +4336,78 @@ inherently typical subsets (Ahlswede–Yang–Zhang 1997, through workstream A).
 that depth: an isoperimetric statement with the second measure a mixture over types and a
 reference instance; a nested hint-free algorithm with a known part; the exponent
 `max_γ R_γ`.  "Not found", not "new".
+
+### 11.21 The structure behind §§11.16–11.20: the shear law, and every game function yields a pair
+
+The uniform cube (§§11.16–11.19) and the biased cube (§11.20) have the same skeleton, and
+the part of it that is pure analysis is now a machine-checked theorem about arbitrary
+"game functions" (workstream M, `docs/workstreams/M_REPORT.md`).
+
+**The shear law.**  Draw the cost exponent `θ` against the accuracy rate.  In both cases the
+curve of algorithms with a hint — which is also that of adaptive algorithms without one —
+and the curve of non-adaptive algorithms are related by
+
+    x_na(θ)  =  e_hint(θ)  +  θ :
+
+*with a budget of `e^{nθ}` evaluations a non-adaptive algorithm certifies an accuracy rate
+that is worse by exactly `θ`.*  Equivalently `θ_na(e + R(e)) = R(e)`, or `R(x − θ_na(x)) = θ_na(x)`:
+the graph of the non-adaptive exponent is the graph of the hinted exponent `R` sheared to
+the right by its own height.  On the uniform cube this is the identity
+`KL(ρ‖p_u) = KL(ρ‖½) + (uρ − Λ₁)` at the radius `ρ` of the ball that a sample of `e^{nKL(ρ‖½)}` points
+does not see; with a field it is Lemma 11.60 read at the flat-histogram reference.  The
+reason is the same in both: a sample of `e^{nθ}` points from the Gibbs law of the reference
+misses sets of measure `e^{−nθ}`; an algorithm that knows where to look (a hint) or learns it
+(adaptivity) pays only for the *effect* of such a set, a non-adaptive one also pays for
+never having seen it, and measure and effect multiply.
+
+**Theorem 11.66 (every game function yields a pair, and its level recursion converges) [V]
+(`GamePair.lean`: `GameFunction.hintShape_critical`, `GameFunction.pair`,
+`GameFunction.exactRec_tendsto`; workstream M).**  Let `F : [0,1] → ℝ` be a *game function*:
+continuous, `F(0) = F(1) = 0`, `F(t) ≤ L(1 − t)`, `F(t) ≤ E·t` with `E = sup_{t>0} F(t)/t > 0`.  Put
+
+    R(e) = max_{0≤t≤1} [F(t) − t·e]        (the hinted exponent),        S(e) = e + R(e)        (the shear).
+
+(a) `R` is convex and nonincreasing with slopes in `[−1, 0]` — the restriction `t ≤ 1` *is* the
+slope condition —, `R(e) ≥ max(0, −e)`, and `R = 0` exactly on `[E, ∞)`.  `S` is nondecreasing,
+vanishes on `(−∞, e_c]` and is strictly increasing on `[e_c, ∞)`, where `e_c < 0` is the largest
+zero of `S`; `R(e_c) = −e_c`, and `e_c = −L` if the constant `L` is sharp.
+(b) The non-adaptive partner `θ_na := R ∘ S^{-1}` is continuous and nonincreasing on `(0, ∞)`,
+`θ_na(x) = min{R(e) : e + R(e) ≤ x}`, `R < θ_na ≤ a := −e_c` on `[0, E)`, `θ_na = 0` from `E` on, and
+`(θ_na, R)` is a `HintPair` with the constants `a`, `h = R(0)`, `E`.
+(c) `R` is a fixed point and a lower barrier of the level operator of §11.18 built on `θ_na`,
+and for **any** function `θ_na` that obeys the shear law wherever `e + R(e) > 0`, the exact level
+recursion `T₁ = θ_na`, `T_{k+1} = min(T_k, R[T_k])` **converges to `R` at every accuracy rate `g > 0`**.
+(d) *Witness.*  `F(t) = t(1 − t)` is a game function with `E = L = 1`; `R(e) = ((1−e)/2)²` on `[−1, 1]`
+and `θ_na(x) = (1 − √x)²` — the toy pair of `HintRecursion.lean` — so nothing above is vacuous
+(`toyGame_gameFunction`, `hinted_toyGame`, `partner_toyGame`, `gauss_exactRec_tendsto`).
+
+*What it buys.*  The convergence of the level recursion — Theorem 11.53, and step (ii)–(iii)
+of Theorem 11.64 — is machine-checked for every problem whose hinted exponent is the
+transform of a game function and whose non-adaptive exponent obeys the shear law.  For the
+uniform cube `F(t) = Λ(tu) − t·Λ(u)`, `Λ(s) = ln(2/(1+e^{-s}))` (`CubeHintPair.lean` does that case by
+hand); for the biased cube `F = F*` of Theorem 11.59, where the game-function properties of
+`F*` and the shear law (Theorem 11.59(c), Lemma 11.60) are paper statements; for identical
+sites with larger alphabets the same would follow from the sketch of §11.20, remark (4).
+*What the formalisation showed on the way.*  The two ends of the game function carry the
+two extreme exponents: `E = sup_{t>0} F(t)/t` is the threshold accuracy (`t → 0`), and
+`a = sup_{t<1} F(t)/(1 − t)` is the non-adaptive exponent at vanishing accuracy (`t → 1`), while
+`h = max_t F(t)` is the adaptive one.  The hypothesis "`θ_na(e + R(e)) = R(e)` wherever the shear
+is nonnegative" would be unsatisfiable (`S ≡ 0` below `e_c`, where `R` varies):
+`GameFunction.not_forall_shift_eq`.  And the monotonicity of the shear is not needed for the
+pair itself.
+
+*What a problem must supply* — a summary of Theorems 11.52/11.56 and 11.64, not a new theorem.
+(I1) A lower bound `e^{nR(ε₁) − o(n)}` for every algorithm at some instance, with `R` the
+transform of a game function (Theorem 11.27: generalised dips).  (I2) A reference instance
+in the class whose Gibbs law can be sampled and whose tail function — the largest effect of
+a dip of the reference on a set of given measure — has the exponent `R^{-1}`: the
+isoperimetric input (Harper's theorem on the uniform cube; Theorem 11.63, by types and
+under review, with a field).  (I3) Fibres: the restriction to a block of coordinates stays
+in the class, and fibre averages are Lipschitz relative to the reference (Lemma 11.62).
+Then non-adaptive algorithms have the exponent `R ∘ S^{-1}` and adaptive ones `R`; the first
+half of that sentence needs (I1), (I2) and a truncation argument, the second (I1)–(I3), the
+nested algorithm, and Theorem 11.66.  The least favourable instance is the reference, and
+the optimal fixed sample is its Gibbs law.
 
 ---
 

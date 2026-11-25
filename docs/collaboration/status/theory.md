@@ -1,12 +1,13 @@
 # Status of the Theoretical Research Division
 
-*Updated 2026-11-25 08:20 UTC.  Branch `claude/determined-ride-og1u7j`.*
+*Updated 2026-11-25 08:50 UTC.  Branch `claude/determined-ride-og1u7j`.*
 
 ## Latest checkpoints
 
 | commit | what |
 |---|---|
-| (this commit) | harness blocks XVI (§11.19) and XVII (§11.20): seven tests, 22 mutations; Proposition 11.65(b) proved (a field always helps); header times of THY-MSG-0006 and THY-REQ-0007 corrected to the publication time |
+| (this commit) | **the common structure, machine-checked**: `GamePair.lean` (every game function yields a pair; the exact level recursion converges), theory report §11.21 with the shear law; remark on the Shtarkov (NML) sampler |
+| `b74b3ff` | harness blocks XVI (§11.19) and XVII (§11.20): seven tests, 22 mutations; Proposition 11.65(b) proved (a field always helps); header times of THY-MSG-0006 and THY-REQ-0007 corrected to the publication time |
 | `7f9b8b6` | Cycle 10, fifth checkpoint: **a field as known part** (theory report §11.20, workstream F, under review); `FieldShift.lean`; `exactRec_reaches_hint_of_pair`; D47; THY-MSG-0006, THY-REQ-0007 |
 | `4f822c5` | Cycle 10, fourth checkpoint: **every bounded accuracy** (theory report §11.19, workstream K, under review); the exact recursion converges, machine-checked; evidence of the Computational Research Division integrated; THY-MSG-0005, THY-RES-0001 |
 | `4cef47e` | `CubeHintPair.lean`: Theorem 11.53 machine-checked for the cube (workstream L) |
@@ -20,7 +21,7 @@
 ## Verified state at the head of the branch
 
 * `bash scripts/audit_all.sh` exits 0.
-* 48 Lean files, zero warnings; the axiom audit walks 3137 declarations: only `propext`,
+* 49 Lean files, zero warnings; the axiom audit walks 3255 declarations: only `propext`,
   `Classical.choice`, `Quot.sound`.
 * Harness: 103 registered tests — 86 must survive, 17 are documented refutations.
   Mutation tests: 186 mutations, 185 caught, one expected pass.
@@ -36,6 +37,7 @@
 | §11.18 (adaptive exponent, extensive accuracies) | recursion — now *as defined in Lean* — and bracket validity machine-checked; the number of evaluations of the algorithm is a paper proof, **refereed (R7): "proved with gaps", gaps closed in the text; not run end to end at scale, not machine-checked** |
 | §11.19 (adaptive exponent at every bounded accuracy) | **paper proofs by workstream K, read by the coordinator, under independent review (R8) — unrefereed**; deterministic algebra, contraction and exact recursion machine-checked (`BoundedAccuracy.lean`) |
 | §11.20 (a field as known part) | **paper proofs by workstream F, read once by the coordinator, central formulas re-computed, under independent review (R9) — unrefereed**; the shift identity machine-checked (`FieldShift.lean`); rests on a new isoperimetric statement (Theorem 11.63) |
+| §11.21 (shear law; every game function yields a pair) | **machine-checked** (`GamePair.lean`, workstream M; compiled and read by the coordinator); the identification of a given problem's exponent functions with this form is on paper |
 
 ## Active investigations
 

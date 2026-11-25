@@ -1081,6 +1081,21 @@ coordinator's was refuted on the way: "the first level at accuracy zero is below
 false for steep slopes (`0.58a` at `u = 4.5`); the test states `[max(h, a/2), a]` and `0.51a` for
 `u ≤ 2.5`.  The theory report never contained the narrow claim.
 
+**Added after the checkpoint: the common structure, machine-checked (theory report §11.21).**
+Workstream M (Lean) delivered `GamePair.lean` (84 declarations; compiled and read by the
+coordinator): for every game function `F` on `[0,1]` — continuous, `F(0) = F(1) = 0`,
+`F ≤ L(1−t)`, `F ≤ Et` sharp — the transform `R(e) = max_{t≤1}[F(t) − te]` and its sheared partner
+`R ∘ (id + R)^{-1}` form a `HintPair`, `R` is a fixed point and lower barrier of the level
+operator, and the exact level recursion built on any function with the shear law
+converges to `R` at every accuracy rate.  The toy pair of `HintRecursion.lean` is the instance
+`F = t(1−t)`.  49 Lean files, 3255 audited declarations.  The report now states the organising
+principle as the **shear law**: in the plane (accuracy rate, cost exponent) the
+non-adaptive curve is the hinted curve sheared by its own height, `x_na(θ) = e_hint(θ) + θ` —
+a non-adaptive sample of `e^{nθ}` points loses exactly `θ` of accuracy rate.  Also added:
+remark (3) of §11.20 — the flat-histogram sampler is the Shtarkov (normalised maximum
+likelihood) distribution of the field-tilted family, hence a universal sampler with
+polynomial regret; conjecture for interacting known parts.
+
 A remark that is interpretation, not theorem: "uniform on every type class of the known
 part's order parameter" is a flat-histogram (multicanonical) ensemble.  In this toy class
 the theory says that such a sample is *minimax-optimal* among fixed samples for certified
@@ -1089,8 +1104,8 @@ model's own Gibbs measure is exponentially worse in the worst case.
 
 ### Resume here (cycle 10, fifth checkpoint)
 
-Verified state: every module under `proofs/` (48 files) builds with zero warnings and is walked
-by the axiom audit (3137 declarations); the harness (103 registered tests: 86 that must survive,
+Verified state: every module under `proofs/` (49 files) builds with zero warnings and is walked
+by the axiom audit (3255 declarations); the harness (103 registered tests: 86 that must survive,
 17 documented refutations) and its mutation tests (186 mutations: 185 caught, one expected
 pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 (R5, R6,
 R_P), §11.18 (R7).  **Under review at this checkpoint, hence unrefereed:** §11.19 (referee R8;
@@ -1110,9 +1125,10 @@ workstream S (limit shape of profile sets; `workstreams/S_brief.md`).  In priori
    merge).  Open on their side: THY-REQ-0001 (not started; target now Algorithm 2L⁺),
    -0003, -0004, the rest of -0002, and the new THY-REQ-0007 (exact tail function of the
    flat-histogram reference on small cubes).
-4. **Machine-check `HintPair` for the pair of the field** (Theorem 11.64(ii); convex analysis
-   of `R^max(e) = max_{t≤1}[F*(t) − te]`) — the analogue of `CubeHintPair.lean`; and the closed
-   form of the game function.
+4. **Machine-check that the game functions of the two problems are game functions** in the
+   sense of `GamePair.lean` (continuity, the two zeros, the two linear bounds; for the field
+   also the closed form of Theorem 11.59(b)) and the shear law for their non-adaptive
+   exponents — the abstract part is done (§11.21), these identifications are on paper.
 5. **Bounded accuracies with a field** (§11.19 is for the uniform cube; its ingredients are
    Harper in both directions — with a field only exponents of the tail function are known).
 6. **Below the exponential scale** (§12 item 2(d)(i),(ii)): quantify the `o(n)`; a lower bound

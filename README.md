@@ -248,6 +248,14 @@ method of types.  Machine-checked: the identity between the three rates (`FieldS
 and the convergence of the exact recursion for any pair of exponent functions with the
 abstract properties; the central formulas were re-computed by the coordinator
 (`experiments/coordinator_checks/f_spot_checks.py`).
+(vi) *The common structure* (theory report §11.21; workstream M; machine-checked).  In both
+cases the non-adaptive curve is the hinted curve sheared by its own height — with a budget
+of `e^{nθ}` evaluations a non-adaptive algorithm certifies an accuracy rate that is worse by
+exactly `θ` — and the analytic core is one theorem about arbitrary game functions `F` on
+`[0,1]`: the transform `R(e) = max_{t≤1}[F(t) − te]` and its sheared partner form a pair to
+which the convergence theorem applies, and the exact level recursion converges to `R`
+(`GamePair.lean`).  What a problem must supply beyond that — a lower bound of this form, a
+reference instance with the matching isoperimetric exponent, and fibres — is listed there.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
