@@ -1,8 +1,9 @@
 # Benchmark design: what would convince, and what would refute
 
-*Science division.  Version 1 (2026-11-25).  A design, not a result: nothing here has been
-run except where a script is named.  It will be revised when workstreams P (a real force
-field), X (alternative models of ignorance) and K (kinetics) have reported.*
+*Science division.  Version 2 (2026-11-25; version 1 at checkpoint 13).  A design, not a
+result: nothing here has been run except where a script is named.  Revised after workstreams
+P (a real force field) and K (kinetics) reported; X (alternative models of ignorance) is
+still running.*
 
 ## 0. Principles
 
@@ -35,6 +36,7 @@ field), X (alternative models of ignorance) and K (kinetics) have reported.*
 | H5 | a model, its uncertainty class and averaged data together give informative certified intervals for structural quantities | science (`INFERENCE_LIMITS.md` §11.4) |
 | H6 | data can certify a non-trivial lower bound on model error that sampling cannot change | science (Theorem 8) |
 | H7 | certified ranges are tighter than, or disagree informatively with, what current ensemble methods report | science |
+| H8 | tractable cuts (boxes, counting statistics, small decision trees) certify a useful fraction of barrier heights on chains | science (workstream K) |
 
 ## 2. The benchmarks
 
@@ -57,7 +59,22 @@ a coefficient of order one per residue, and `β ×` (per-torsion constant) excee
 sites, no cheap class contains the residual and H3 fails for that residual.
 *What success would not establish.*  A small remainder on a torsion grid says nothing about
 conformations outside the grid, and a fitted constant is not a certified one.
-*Status.*  Pilot by workstream P (running); protocol to be shared with engineering's E-3.
+*Status.*  **Pilot run** (workstream P; SCI-RES-0002; `PHYSICAL_APPLICABILITY.md` §2), residuals
+(a) and (b) on capped alanine peptides, exact on torsion grids to six and nine residues.
+*Outcome against the refutation criterion:* **H3 fails for the GBn2 polarisation energy in
+backbone torsions** — `β ×` per-torsion constant is 12–53 at every site and grows with
+length; the sup-norm remainder of the pair-additive class is `2–16 k_BT` and grows — and
+**H3 holds exactly for same-lineage force-field differences** (additive or residue-local,
+remainder zero).  Both controls behaved as required in the workstream's own checks (the
+exactly pair-additive Coulomb energy has the same typed-class remainder as the solvent
+term, so the remainder of the typed class measures the typing).  *Lessons for the full
+benchmark:* (i) report sup norms over enumerated domains only — a sampled maximum was
+exceeded on held-out conformations by factors up to ten; (ii) state the domain: constants
+are dominated by its most compact and most extended members and by the clash threshold
+(up to 15 %); (iii) the decisive missing case is **rotamer variables on a fixed backbone**
+(request P-E1), where the known part is pairwise and no lever arm exists; (iv) add the
+typical-norm metrics next to the sup-norm ones (RMS, and the exact Jensen gap against the
+class bound) — the gap between them is the finding.
 
 ### B2 — certificate cost on real cost-function networks  (tests H1, H2)
 
@@ -135,6 +152,22 @@ bound of Proposition A1.1 (explicit for every `n`); the limit shape against enum
 (prediction from Newton–Okounkov theory: the number of attained profiles grows like
 `vol(𝒦)·N³`; SCI-REV-0006, T-4); the lever-arm constant against chain length.
 
+### B8 — certified kinetics  (tests a new hypothesis H8: tractable cuts certify a useful fraction of barriers on chains)
+
+*Instances.*  Rotational-isomeric chains on the diamond lattice (exact merge trees up to
+the enumeration limit); pairwise models of low treewidth; torsion-voxel models of small
+molecules with nearest-voxel adjacency.  *Methods.*  Box cuts, counting cuts with an exact
+counter, decision-tree cuts (formats of SCI-MSG-0005 §5); baselines: any path-finding
+method (upper bounds only).  *Metrics.*  Certified fraction of each trap depth; number of
+wall boxes; the gap between the best path found and the best cut certified.
+*Negative controls.*  A linear multiplier on a counting constraint must never beat the
+trivial bound (Proposition K3); a cut on the Hamming graph of voxel labels must fail to
+converge to the continuum barrier (K8).  *Refutation.*  H8 fails if the certified fraction
+tends to zero with chain length for every tractable cut family.  *Run so far:* 6–8 torsions
+(`experiments/science/ws_K/t7_chain.py`): 1.00, 0.55, 0.77 — not monotone; request K-E1 asks
+for 6–13.  *What success would not establish.*  Anything about physical rates: discrete
+rates are sampler-relative.
+
 ### B7 — conformance and trust  (not a hypothesis test; a standing regression)
 
 The theory division's audit; the engineering division's differential test of the Lean
@@ -165,4 +198,6 @@ definitions against the reference checker (their E-1); replication on independen
 | B4 | three margins, two data types, 8–10 beads, exact data | `experiments/science/pi_chain/envelope_scaling.py` |
 | B6 | engineering X-005 (theirs) | ENG-RES-0008 |
 | B7 | audit at `5ed4072` | `docs/science/INDEPENDENT_VALIDATION.md` |
-| B1, B2, B5 | nothing yet (B1: pilot running) | — |
+| B1 | pilot: alanine peptides, GBn2 and four force-field differences against ff14SB, exact on grids | `workstreams/SP_REPORT.md`; `experiments/science/ws_P/` |
+| B8 | cut families on tiny systems (≤ 5 849 states) and one 200-site chain | `workstreams/SK_REPORT.md`; `experiments/science/ws_K/` |
+| B2, B5 | nothing yet | — |

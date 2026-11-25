@@ -1,0 +1,16 @@
+§11.1 (13 beads, n=10, 49833 conformations): width of the model-free identified interval / a-priori range
+   own enumeration; dual LP on un-aggregated conformations; note's values in brackets
+   full histogram: 57 distinct squared distances; compact decile: R_g^2 <= 7.4675, athermal population 0.1009
+   data rg2      target gauche : 0.76 / 0.73 / 0.72   [0.76 / 0.73 / 0.72]   match to 0.006: True
+   data rg2      target r2     : 0.41 / 0.45 / 0.37   [0.41 / 0.45 / 0.37]   match to 0.006: True
+   data rg2      target decile : 0.79 / 0.57 / 0.89   [0.79 / 0.57 / 0.89]   match to 0.006: True
+   data profile  target gauche : 0.47 / 0.26 / 0.49   [0.47 / 0.26 / 0.49]   match to 0.006: True
+   data profile  target r2     : 0.59 / 0.73 / 0.50   [0.59 / 0.73 / 0.50]   match to 0.006: True
+   data profile  target decile : 0.70 / 0.29 / 1.00   [0.70 / 0.29 / 1.00]   match to 0.006: True
+   data fullhist target gauche : 0.31 / 0.14 / 0.35   [0.31 / 0.14 / 0.35]   match to 0.006: True
+   data fullhist target r2     : 0.22 / 0.18 / 0.21   [0.22 / 0.18 / 0.21]   match to 0.006: True
+   data fullhist target decile : 0.50 / 0.20 / 0.75   [0.50 / 0.20 / 0.75]   match to 0.006: True
+
+real	1m48.276s
+user	0m59.039s
+sys	0m1.538s

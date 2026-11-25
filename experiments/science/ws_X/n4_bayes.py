@@ -88,7 +88,7 @@ def n4():
             post = LinearPosterior(v, cb.bch_rows(n, m), n)
             smax = float(post.P.max())
             R = 300 if n <= 12 else 120
-            RS = 200 if n <= 12 else 100
+            RS = 400 if n <= 12 else 150
             # posterior residual samples (shared across draws: the posterior covariance does not
             # depend on the data)
             res = np.stack([post.posterior_residual() for _ in range(RS)])
@@ -105,11 +105,11 @@ def n4():
                     pih /= pih.sum()
                     a = math.log(float(np.sum(pih * np.exp(beta ** 2 * post.var / 2))))
                     lo, hi = base - beta * smax * z, base + a + beta * smax * z
-                    cov_a += lo <= truth <= hi
+                    cov_a += lo - 1e-9 <= truth <= hi + 1e-9
                     w_a.append(hi - lo)
                     samp = np.array([cb.logZ(f + mean + r, beta) for r in res])
                     ql, qh = np.quantile(samp, [DELTA / 2, 1 - DELTA / 2])
-                    cov_s += ql <= truth <= qh
+                    cov_s += ql - 1e-9 <= truth <= qh + 1e-9
                     w_s.append(qh - ql)
                     if beta == 0.5:   # the minimum does not depend on beta: do it once
                         tm = float(np.min(f + g))

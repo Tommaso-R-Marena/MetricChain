@@ -21,7 +21,8 @@ Lemma K5, Theorem K6 and its Corollary K6.1, Theorem K10).
 * `box_cut_barrier_residual`, `certified_trap_height` — the same on top of `verifyR_sound`, for
   every residual of the bounded-difference class with the published anchors.
 * `level_cut_sound` — counting cuts: a statistic that increases by at most one per move.
-* `ferro_barrier`, `ferroResidual_trap` — kernel-evaluated instances (`decide +kernel`).
+* `ferro_barrier`, `ferroResidual_trap`, `ferroW_trap` — kernel-evaluated instances
+  (`decide +kernel`): a barrier, a robust barrier height, a kinetic trap.
 * `trap_survival`, `trap_certificate`, `trap_certificate_weighted` — discrete-time kinetic trap for
   every stochastic kernel with given stationary weights (no reversibility).
 * `box_trap_certificate` — composition with `zverifyTop_sound`: intervals returned by the partition

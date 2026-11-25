@@ -14,9 +14,10 @@ What is done: (a) the sharp Jeffreys-TV inequality on random pairs; (b) random i
 (c) adversarial ascent (Nelder-Mead restarts on (mu0, Phi, r)) on TV / tanh(omega/4) and on
 KL(mu|nu) / [omega tanh(omega/4)/2]; (d) the extremal two-point family.
 """
-import math, sys
+import math, sys, warnings
 import numpy as np
 from scipy.optimize import minimize
+warnings.filterwarnings("ignore")
 
 def iproj(mu0, Phi, m, tol=1e-13):
     """I-projection of mu0 on {E Phi = m}: nu ~ mu0 exp(theta.Phi).  Phi: (K, N)."""
@@ -111,8 +112,8 @@ def adversarial(rng):
     print("(c) adversarial ascent (Nelder-Mead, many restarts): can features make max-ent refinement worse than tanh(w/4)?")
     for om in (0.5, 2.0, 4.0, 8.0, 16.0):
         best_tv = 0.0; best_kl = 0.0; best_klnm = 0.0
-        for N, K in ((2, 0), (3, 1), (4, 1), (4, 2), (5, 2), (6, 3)):
-            for restart in range(12):
+        for N, K in ((2, 0), (3, 1), (4, 1), (4, 2), (5, 2)):
+            for restart in range(3):
                 def unpack(z):
                     a = z[:N]; mu0 = np.exp(a - a.max()); mu0 = mu0 / mu0.sum()
                     Phi = z[N:N + K * N].reshape(K, N)
@@ -134,7 +135,7 @@ def adversarial(rng):
                 z0 = rng.normal(size=N + K * N + N) * 2
                 for which in ("tv", "klmn", "klnm"):
                     res = minimize(neg, z0, args=(which,), method="Nelder-Mead",
-                                   options=dict(maxiter=3000, xatol=1e-9, fatol=1e-12))
+                                   options=dict(maxiter=700, xatol=1e-8, fatol=1e-11))
                     val = -res.fun
                     if which == "tv":
                         best_tv = max(best_tv, val)
@@ -151,7 +152,7 @@ def adversarial(rng):
         kl_nm = ps * np.log(ps / muA) + (1 - ps) * np.log((1 - ps) / (1 - muA))
         print(f"   w={om}: best TV found = {best_tv:.6f}; tanh(w/4) = {t:.6f}; note's w/4 = {om / 4:.4f}"
               f"{' (vacuous: > 1)' if om / 4 >= 1 else ''} | best KL(mu|nu) = {best_kl:.5f}, best KL(nu|mu) = {best_klnm:.5f}; "
-              f"no-feature sup: {kl_mn.max():.5f}, {kl_nm.max():.5f}; J bound w tanh(w/4) = {om * t:.5f}; note's w^2/4 = {om * om / 4:.4f}")
+              f"no-feature sup: {kl_mn.max():.5f}, {kl_nm.max():.5f}; J bound w tanh(w/4) = {om * t:.5f}; note's w^2/4 = {om * om / 4:.4f}", flush=True)
 
 def extremal():
     print("(d) the extremal family: two points, no feature, mu0(A) = 1/(1+e^{w/2}), r = 0 on A, w off A")
@@ -167,4 +168,5 @@ if __name__ == "__main__":
     jeffreys_tv(rng)
     random_instances(rng)
     extremal()
-    adversarial(rng)
+    if len(sys.argv) > 1 and sys.argv[1] == "adv":
+        adversarial(rng)

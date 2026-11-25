@@ -1,0 +1,6 @@
+[FAIL] (C1) chain: 142 random two-block profiles x 4 rate functions x landscapes (v, 0): max[r_mu(e) - r^kappa_mu(e+(I-lam)(kappa))] = 1.90e-06; max[r^kappa_mu - R^kappa] = 1.39e-17; max[R^kappa(e+(I-lam)(kappa)) - R_unif(e)] = -1.65e-07  (all must be <= 0 up to solver tolerance)
+[PASS] (C2) field p=0.3, u=1: sup over binary centres of r_mu(0) with all exits (multistart search) = 0.025034 at (m,a,b)=(0.5006,0.5381,0.1362), type 0.3374; vertex-channel formula h = 0.025034; claimed 0.025034; slice bound sup_kappa R^kappa((I-v)(kappa)) = 0.029139 (claimed 0.029139)
+[PASS] (C3) CW bJ=1.5, barrier shell: r_mu(0) at (m; a, b) = (1/2; 1-x, x), x = 0.29803: 0.0251012 (claimed 0.0251012); neighbours: x=0.288: 0.0249241, x=0.293: 0.0250572, x=0.29803: 0.0251012, x=0.303: 0.0250593, x=0.308: 0.0249352; I(1/2) = 0.1152 (claimed barrier 0.1152)
+[PASS] (C4) equality (ii): antiferromagnet bJ=-2 and ferromagnet bJ=0.8 (B=0): |r_mu(e) - R_unif(e)| <= 1.3e-12 at the cube's optimal profile (m=1/2, shell l*), e in (0, .01, .04 / 0, .02), exits of every type allowed
+
+SUMMARY: FAILURES

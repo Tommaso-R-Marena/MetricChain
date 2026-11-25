@@ -1,0 +1,21 @@
+# R4 own harness for Theorem 11.84 (Claims A, B); u=0.5, seed=11
+run   1: n_o=6 n_i=3 L=4 K=10 eta'=20.0 theta=3.0 lam=1.0 extensive flat     mixed   M_max=40960 J=14 status=closed level=5 good=True |C_l|=[290, 143, 0] N_l=[186509, 178579, 31838] seq.calls(l>=2)=78 violA=False
+run   2: n_o=9 n_i=3 L=3 K=16 eta'=1.0 theta=10.0 lam=1.0 extensive cone     uniform M_max=32768 J=19 status=closed level=9 good=True |C_l|=[30472, 738] N_l=[9411935, 2293682] seq.calls(l>=2)=54 violA=False
+run   3: n_o=9 n_i=3 L=3 K=6 eta'=100.0 theta=1.0 lam=0.5 bounded   dip      zero    M_max=98304 J=38 status=closed level=15 good=True |C_l|=[0, 0] N_l=[92037, 61618] seq.calls(l>=2)=0 violA=False
+run   4: n_o=10 n_i=5 L=4 K=6 eta'=100.0 theta=1.0 lam=1.0 bounded   flat     mixed   M_max=393216 J=23 status=closed level=11 good=True |C_l|=[363, 90, 0] N_l=[64718, 26135, 18981] seq.calls(l>=2)=44 violA=False
+run   5: n_o=10 n_i=6 L=2 K=16 eta'=100.0 theta=10.0 lam=0.5 extensive flathist mixed   M_max=512 J=48 status=closed level=18 good=True |C_l|=[512] N_l=[5390018] seq.calls(l>=2)=41 violA=False
+run   6: n_o=10 n_i=6 L=4 K=6 eta'=100.0 theta=3.0 lam=0.5 bounded   trunc    uniform M_max=196608 J=47 status=closed level=18 good=True |C_l|=[699, 337, 49] N_l=[60634, 44930, 25691] seq.calls(l>=2)=30 violA=False
+run   7: n_o=10 n_i=4 L=3 K=6 eta'=100.0 theta=10.0 lam=0.5 bounded   trunc    uniform M_max=192 J=43 status=closed level=17 good=True |C_l|=[191, 66] N_l=[78789, 30081] seq.calls(l>=2)=26 violA=False
+run   8: n_o=7 n_i=6 L=3 K=16 eta'=20.0 theta=3.0 lam=1.0 extensive dip      one     M_max=131072 J=21 status=closed level=8 good=True |C_l|=[139, 139] N_l=[6785749, 2773168] seq.calls(l>=2)=32 violA=False
+run   9: n_o=11 n_i=4 L=2 K=6 eta'=100.0 theta=1.0 lam=1.0 bounded   flat     one     M_max=786432 J=24 status=closed level=11 good=True |C_l|=[0] N_l=[50447] seq.calls(l>=2)=0 violA=False
+run  10: n_o=9 n_i=5 L=2 K=6 eta'=100.0 theta=1.0 lam=1.0 bounded   cone     mixed   M_max=196608 J=22 status=closed level=9 good=False |C_l|=[76] N_l=[68319] seq.calls(l>=2)=11 violA=False
+run  11: n_o=11 n_i=4 L=3 K=6 eta'=100.0 theta=3.0 lam=0.5 bounded   walk     zero    M_max=393216 J=46 status=closed level=16 good=True |C_l|=[211, 17] N_l=[28184, 21253] seq.calls(l>=2)=15 violA=False
+run  12: n_o=9 n_i=5 L=2 K=6 eta'=100.0 theta=3.0 lam=1.0 bounded   flathist mixed   M_max=196608 J=22 status=closed level=9 good=True |C_l|=[460] N_l=[83902] seq.calls(l>=2)=9 violA=False
+run  20: n_o=9 n_i=4 L=3 K=6 eta'=1.0 theta=1.0 lam=0.5 extensive dip      zero    M_max=49152 J=41 status=closed level=17 good=False |C_l|=[16853, 16853] N_l=[4609448, 3044698] seq.calls(l>=2)=126 violA=False
+run  40: n_o=7 n_i=4 L=4 K=10 eta'=20.0 theta=3.0 lam=1.0 extensive walk     uniform M_max=81920 J=17 status=closed level=7 good=True |C_l|=[1730, 871, 490] N_l=[644948, 116187, 102104] seq.calls(l>=2)=179 violA=False
+run  60: n_o=7 n_i=3 L=3 K=6 eta'=100.0 theta=10.0 lam=1.0 extensive trunc    mixed   M_max=384 J=16 status=closed level=5 good=True |C_l|=[180, 77] N_l=[47690, 32676] seq.calls(l>=2)=17 violA=False
+run  80: n_o=8 n_i=6 L=4 K=10 eta'=100.0 theta=10.0 lam=1.0 extensive trunc    uniform M_max=640 J=21 status=closed level=7 good=True |C_l|=[205, 3, 0] N_l=[276111, 91450, 90209] seq.calls(l>=2)=27 violA=False
+run 100: n_o=6 n_i=6 L=4 K=16 eta'=20.0 theta=1.0 lam=1.0 extensive dip      mixed   M_max=65536 J=17 status=closed level=7 good=True |C_l|=[3658, 1815, 339] N_l=[3835739, 1987440, 342702] seq.calls(l>=2)=421 violA=False
+# summary: {'runs': 100, 'closed': 100, 'good': 79, 'A_viol_good': 0, 'A_viol_bad': 0, 'B_viol': 0, 'S_viol': 0, 'width_viol': 0, 'mutL_viol': 4, 'mutL_runs': 100, 'mut2_viol': 0, 'mut2_runs': 100, 'neg_levels': 34, 'pop_levels': 1156, 'calls_ge2': 7045, 'skipped': 0, 'aborts': 0, 'B_nontrivial': 69}
+# rungs with N_l < M_max (Claim B not implied by |C_l| <= M_max): 69, largest |C_l|/N_l among them = 0.0174
+# largest |C_l|/N_l = 0.0174;  |C_l|/M_max: median 0.0071, min 0.00000, max 1.0000

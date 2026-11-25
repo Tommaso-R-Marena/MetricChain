@@ -93,6 +93,28 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   vertex channel (`experiments/science/pi_inference/vertex_channel_chain_rule_check.py`); the
   smallest homometric pair of lattice chains of A2.
 
+### Re-runs by the coordinator of workstream results (same machine; the workstream's own scripts — a re-run, not a second implementation)
+
+* **P (force-field pilot):** `verify_openmm_direct.py` — 508 clash-free conformations of the
+  tripeptide grid and `c_i(g_GB) = 16.09 12.41 18.63 16.43 15.14 11.19 kcal/mol`, computed from
+  OpenMM 8.6.1's own force objects without the workstream's fast evaluator;
+  `an9_torsion_refits.py` — range 1.1147 kcal/mol of ff99SB − ff14SB along φ, independent of ψ
+  to `3·10⁻⁷`; ff19SB − ff14SB: 5.0 kcal/mol on the clash-free part of a 5° map (`c_φ = 3.7`,
+  `c_ψ = 4.4`).  Everything else of `SP_REPORT.md` is the workstream's own measurement, read
+  but not re-run.
+* **K (kinetics):** `KineticsCertificates.lean` compiled with `lake env lean` (exit 0; 32
+  theorems; axioms `propext`, `Classical.choice`, `Quot.sound` for 31, none for one; no
+  `sorry`); the statements of `box_cut_barrier`, `box_cut_barrier_residual`,
+  `certified_trap_height`, `trap_survival`, `trap_certificate`, `box_trap_certificate` read
+  against the report; scripts `t1_cut_duality.py`, `t3_cover.py`, `t9_trap_stationary.py`
+  re-run with output identical to the committed files.  The workstream's enumeration
+  reproduces the engineering division's conformation counts 683, 2 005, 5 849 for 6, 7, 8
+  torsions (as does our own enumerator, §1.2).
+* **Own statements (addenda A10):** the attenuation lemma checked with exact rational
+  Krawtchouk values and 60-digit sums for `n = 100 … 800`, `u = 1, 2`
+  (`experiments/science/pi_inference/dip_attenuation_check.py`): identity A10.1 to `10⁻⁵⁹`;
+  the bound of A10.2 holds with a margin of five to ten.
+
 ## 3. Not validated by us
 
 Everything not listed above.  In particular the paper proofs of theory report §§11.16–11.21

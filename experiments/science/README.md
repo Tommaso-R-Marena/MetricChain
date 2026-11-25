@@ -7,8 +7,11 @@ Nothing here modifies upstream files.
 |---|---|---|
 | `pi_inference/` | checks for `docs/science/INFERENCE_LIMITS.md` §§1–6: `code_cone_check.py` (Theorem 2), `basin_bound_check.py` (Theorem 3), `maxent_stability_check.py` (Theorem 7), `calorimetric_twin_check.py`, `calorimetric_twin_exact.py` (Proposition 5b) | `python3 <script>`; seconds to a few minutes each |
 | `pi_chain/` | diamond-lattice chains: own enumerator `dia_chain.py`; model-free identified sets `identified_sets.py`; the same up to 27 beads from the engineering tables `identified_from_eng_tables.py`; model + envelope class + data `envelope_identified.py`, `envelope_scaling.py` (§§9, 11) | see below |
+| `pi_inference/` (addenda) | checks for `docs/science/INFERENCE_LIMITS_ADDENDA.md`: `symmetrised_cone_check.py` (A1, Theorem 4′), `extensive_stability_check.py` (A2), `stability_sharpened_check.py` (A5), `vertex_channel_chain_rule_check.py` (replication of the theory division's `a = 0.294791`; chain-rule bound for several site types), `finite_precision_check.py` (A9: Theorem 2-τ, pinned ensembles), `dip_attenuation_check.py` (A10: attenuation lemma with exact rational Krawtchouk values, `n ≤ 800`; needs `mpmath`; about a minute) | `python3 pi_inference/<script>.py` |
 | `audit_replication/` | log of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | — |
 | `ws_*/` | working directories of the independent workstreams (published with their reports) | see each report |
+| `ws_P/` | force-field pilot (`docs/science/workstreams/SP_REPORT.md`): needs `pip install openmm numexpr`; `verify_openmm_direct.py` is a four-second end-to-end check; the grid files (`data/`, 161 MB) are not tracked and are rebuilt by `enumerate_grid.py` | `SP_REPORT.md` §3.2 |
+| `ws_K/` | kinetics (`docs/science/workstreams/SK_REPORT.md`): fifteen scripts `t*.py` and `KineticsCertificates.lean` (compile from the repository root with `lake env lean experiments/science/ws_K/KineticsCertificates.lean`; needs the Mathlib cache) | `SK_REPORT.md` §3 |
 
 Requirements: Python 3 with NumPy and SciPy (HiGHS).  `pi_chain/cache/` (enumerations) is not
 tracked and is rebuilt on demand.

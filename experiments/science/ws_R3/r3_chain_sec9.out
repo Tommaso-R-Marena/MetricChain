@@ -2,3 +2,9 @@
   N=8 data=rg2     : b_min = 0.068 / 0.150 / 0.360   [note: 0.068 / 0.150 / 0.360]   match to 0.002: True;  truth's single-flip constant = eps x 1
   N=8 data=profile : b_min = 0.220 / 0.438 / 0.866   [note: 0.220 / 0.438 / 0.866]   match to 0.002: True;  truth's single-flip constant = eps x 1
   N=8 profile, eps=0.5, ALL-PAIRS formulation on conformations only: b_min = 0.438
+  N=9 data=rg2     : b_min = 0.078 / 0.175 / 0.435   [note: 0.079 / 0.176 / 0.436]   match to 0.002: True;  truth's single-flip constant = eps x 2
+  N=9 data=profile : b_min = 0.240 / 0.482 / 0.952   [note: 0.240 / 0.482 / 0.952]   match to 0.002: True;  truth's single-flip constant = eps x 2
+
+real	2m52.259s
+user	1m3.393s
+sys	0m0.884s

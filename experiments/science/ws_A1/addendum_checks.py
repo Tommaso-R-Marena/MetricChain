@@ -18,7 +18,13 @@
      (ii) the vertices of P(L_j) are Gibbs laws of vertices of the Lipschitz polytope, and
           KL(nu_psi || prod_i Q*_{tau(i)}) <= sum_i a_{tau(i)},  a_j = min_Q max_{vertices} KL(. || Q)  (information radius = capacity),
           with equality for an additive instance built from capacity-achieving vertices.
-Run: python3 addendum_checks.py     (about 1 min)
+ Q4  (report sect. 9.2(d))  The adaptive law against Burnashev's law.  On the cube the adaptive / hinted accuracy rate is
+     e(theta) = E_sp(theta) - theta = u rho_theta - Lambda_1.  For the same channel BSC(p_u) the reliability function of
+     variable-length codes with feedback is Burnashev's line E_B(R) = C_1 (1 - R/C), C_1 = max_{x,x'} D(W(.|x)||W(.|x'))
+     (formula (4) of Berlin-Nakiboglu-Rimoldi-Telatar, arXiv:cs/0610145).  Checked: C_1 = u tanh(u/2); e(0+) = ln cosh(u/2);
+     e vanishes at the fixed point h of E_sp (h = KL(Lambda_1/u || 1/2) < a = C); e is strictly convex in theta, hence not a line.
+     (The two are different quantities -- an accuracy rate and an error exponent; the check only shows that the laws differ.)
+Run: python3 addendum_checks.py     (about 10 s)
 """
 import itertools
 import math
@@ -350,6 +356,43 @@ nu = np.exp(lw - lw.max()); nu /= nu.sum()
 m0 = nu.sum(axis=(1, 2))
 bad = max((pi[a] * m0[b]) / (math.exp(d[a, b]) * pi[b] * m0[a]) for a in range(3) for b in range(3) if a != b)
 check("Q3m mutation: a non-admissible psi leaves the window", bad > 1.0 + 1e-6, "ratio %.3f" % bad)
+
+# ------------------------------------------------------------------ Q4  the adaptive law against Burnashev's line
+ok4, rows = True, []
+for u in (0.5, 1.0, 2.0, 3.0):
+    pu = 1 / (1 + math.exp(u))
+    Lam = math.log(2 / (1 + math.exp(-u)))
+    a = kl2(pu, 0.5)
+    C1 = kl2(pu, 1 - pu)                               # the two input letters of BSC(p_u): Bern(p_u) against Bern(1 - p_u)
+    ok4 &= abs(C1 - u * math.tanh(u / 2)) < 1e-12
+
+    def rho_of(th):
+        return brentq(lambda r: kl2(r, 0.5) - th, 1e-14, 0.5, xtol=1e-15)
+
+    def e(th):                                          # E_sp(theta) - theta = u rho_theta - Lambda_1  (checked in Q1)
+        return u * rho_of(th) - Lam
+
+    e0 = u * 0.5 - Lam                                  # theta -> 0+
+    ok4 &= abs(e0 - math.log(math.cosh(u / 2))) < 1e-12 and e0 < C1
+    h = brentq(e, 1e-12, a, xtol=1e-15)                 # E_sp(h) = h  <=>  e(h) = 0
+    ok4 &= abs(kl2(rho_of(h), pu) - h) < 1e-9 and h < a
+    ok4 &= abs(h - kl2(Lam / u, 0.5)) < 1e-9            # the theory report's h = KL(Lambda_1/u || 1/2)
+    ths = np.linspace(0.05 * h, 0.95 * h, 19)
+    ev = np.array([e(t) for t in ths])
+    ok4 &= bool(((ev[2:] - 2 * ev[1:-1] + ev[:-2]) > 0).all())   # strictly convex on (0, h): not a line
+    rows.append("u=%.1f: C_1 = %.4f, e(0+) = %.4f, h = %.5f < a = %.5f, e(h/2) = %.4f against the chord's %.4f"
+                % (u, C1, e0, h, a, e(0.5 * h), 0.5 * e0))
+check("Q4  adaptive law e(theta) = E_sp(theta) - theta on the cube against Burnashev's line C_1(1 - R/C) for BSC(p_u): "
+      "C_1 = u tanh(u/2); e(0+) = ln cosh(u/2); e vanishes at h < a; e strictly convex (not a line)", ok4,
+      "\n      " + "\n      ".join(rows))
+
+# mutation for Q4: a line through (0, e(0+)) and (h, 0) is NOT e  (the convexity check has power)
+u = 2.0
+pu = 1 / (1 + math.exp(u)); Lam = math.log(2 / (1 + math.exp(-u)))
+h = kl2(Lam / u, 0.5); e0 = math.log(math.cosh(u / 2))
+rho_mid = brentq(lambda r: kl2(r, 0.5) - 0.5 * h, 1e-14, 0.5, xtol=1e-15)
+gap = 0.5 * e0 - (u * rho_mid - Lam)
+check("Q4m mutation: the straight line between the two endpoints differs from e at theta = h/2", gap > 1e-3, "chord - e = %.4f at u = 2" % gap)
 
 print("\nfailures: %d" % fails)
 sys.exit(1 if fails else 0)

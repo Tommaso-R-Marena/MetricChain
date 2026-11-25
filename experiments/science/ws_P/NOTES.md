@@ -179,3 +179,64 @@ kcal/mol/rad (median ~4.3); torus formula J = sum ln(sinh b_i/b_i) = 85 nats (n=
 (phi: 0, 0.8, 21.6; psi: 0, 4.8, 5.2 kcal/mol):** 10 residues: 0/20 sharp; product bound
 ln N_cov >= 12.0–12.5 (N >= 10^5.2–10^5.4 of 3^20 = 10^9.5); sum ln cosh = 427–476 nats.
 100 residues: ln N >= 129–171 (10^56–10^74 of 10^95); sum ln cosh = 4.6e3–3.1e4 nats.
+
+## 18:28–19:05 many-body analysis, collective sharpness, covers at n=5, report drafted
+
+* `an10_basins.py`: reference conformations on A3.  argmin f: beta (n<=4), helix (n=5,6);
+  argmin E=f+GB: PPII (n<=5), helix (n=6; PPII only 0.37 kcal/mol above, 9.27 in vacuum).
+  Collective ratio lambda* = min_y (E(y)-E(x*))/d(x*,y): 0.038, 0.031, 0.020, 0.0045, 0.0026
+  (n=2..6).  In the helix 6 of 10 (n=5) and 8 of 12 (n=6) torsions have no clash-free
+  single-flip neighbour; the others are not sharp.  => no torsion sharp anywhere.
+* `an7_sharpness.py` (fixed: memory-safe cover; an earlier version built an 832M-entry sparse
+  matrix for the dense covers of the FF differences and was OOM-killed; lambda* bug at x0 fixed).
+  Covers, lower/upper: GB A3 n=5: eps=0 [3042, 5357], kT [2668, 5033], 2 kcal/mol [1947, 4307] of
+  28 843; GB A2 n=8: [4061, 8041] of 35 478; g_19 n=5: [2, 3]; g_03 n=5: [2, 28]; g_99 n=5: 1.
+  ff99SB vs ff14SB at n=5: the minimiser CHANGES (helix -> all-beta, by 2.33 kcal/mol) although
+  the residual is exactly additive with c = 0.64 kcal/mol per phi.
+* `an11_manybody.py`: explicit exactly pair-additive surrogate of GB (frozen mean Born radii in
+  the cross terms + linear function of the descreening sums, N+1 weights).  g - S, RMS/max
+  kcal/mol: ensemble C held-out n=2..8: 0.10/0.9, 0.21/2.6, 0.30/4.1, 0.34/3.5, 0.43/5.4 (n=6),
+  0.52/6.1 (n=8); all clash-free A3: 0.14/0.5, 0.27/1.0, 0.39/2.3, 0.48/4.8 (n=2..5); all A2 n=8:
+  0.47/9.3.  Naive frozen radii: RMS 2.1 … 7.2 (useless) though radii fluctuate only 2–4 %.
+  First attempt (self term linearised atom by atom, cross term frozen) had RMS 5 kcal/mol:
+  the cross terms of bonded neighbours respond to the Born radii at first order.
+* `an5_profile_transfer.py 8`: Amber-typed profile class trained at n=8: held-out 0.43/3.94;
+  element-typed 1.04/5.74.  Transfers down the chain length (RMS 0.25–0.36), not up.
+  Chebyshev LP with slope bound (elem types, n=5): eta_train 1.06, 1.06, 1.48, 4.0, 8.7 at
+  L_s = inf, 1, 0.3, 0.1, 0.03; held-out maxima 6–21 (sampled sup norms are not bounds).
+  The amber-typed LP run was killed (1101 parameters on 2500 rows: meaningless).
+* `an8_scans.py`: n=8: oscillation along one torsion up to 12–20 kcal/mol, L_i up to 9–27
+  kcal/mol/rad; J = 566 nats.
+* `an9_torsion_refits.py`: g_99(phi) range 1.1147 kcal/mol on the circle (independent of psi to
+  3e-7); g_19 range 14.1 on the torus, 5.0 on its clash-free 41 %.
+* Long chains (local search, lower bounds): A2 n=12 max 19.7; A2 n=16 (9 sites) 19.2;
+  A3 n=10 (8 sites) 35.2; A2 n=20 running.  The search weakens with size (few starts).
+* Clash-threshold sensitivity: tau 0.6 vs 0.7: max c_i unchanged for n<=4, +8–15 % beyond;
+  A3 at tau=0.8 equals A2 exactly (the phi=+60 and psi=+60 states score 0.72–0.73).
+* Energy windows (A3 n=5): within 5 kcal/mol of min f: 52 conformations, g varies by 6.0;
+  within 20: 5378 conformations, max c_i 14.6 (27.5 on the full domain).
+* Prior art: PubMed abstracts only (GB-Neck2; ff14SB; ff19SB; Archontis–Simonson 2005
+  residue-pairwise GB; Gaillard 2025; LUTE 2017).  ff14SB abstract confirms the phi-profile
+  adjustment that Statement 3(a) measures.
+* Report: docs/science/workstreams/SP_REPORT.md sections 1, 2, 2.B, 3, 4–7 written.
+
+## 19:05–19:15 final checks, report complete
+
+* Position dependence corrected in the report: on A3 the profile is a dome; on A2 the phi
+  constants are a dome but the psi constants increase towards the C-terminus (largest constant
+  of A2 n=9 is the LAST psi, 19.0 kcal/mol: cap against a preformed compact structure;
+  dGB = +19.0 compensated by dCoulomb = -24.6).  "Distance to the nearer end" is not the
+  controlling variable.
+* A2 n=20 local search (6 sites, 6 starts): max 14.6 — weaker than exact n=9 (19.0): the search
+  says nothing about growth at that size.  Stated as such.
+* `verify_openmm_direct.py`: c_i(g_GB) on the A3 tripeptide grid computed with OpenMM's own
+  CustomGBForce and a brute-force loop (no fastff, no analysis_lib) = 16.09 12.41 18.63 16.43
+  15.14 11.19, 508 clash-free: identical to the pipeline.
+* Envelope validity ratio = 1.0000 in all 11 an7 runs.
+* Killed: amber-typed Chebyshev LP (meaningless), A2 n=8 cover at eps>0 (not needed).
+* No background process left.  data/ is 161 MB, untracked.
+* Not done (see report §5): side chains, relaxed geometry, PB/QM/learned residuals, upper bounds
+  for continuous constants, certificates in the span format, lower bound on the distance to the
+  pair-additive class.
+
+Final deliverables: `docs/science/workstreams/SP_REPORT.md`; this directory.

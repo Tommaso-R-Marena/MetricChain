@@ -15,8 +15,8 @@ is claimed nowhere: all numerics are my own code testing my own statements.
 on the energy over the boxes of its wall; an upper bound on an escape rate is the same cut with the wall
 *minimum* replaced by the wall *partition function* and the basin minimum by the basin partition function.
 Both are exactly what the verified `(min,+)` and `(+,×)` kernels output, so soundness of "certified
-kinetics" needs **no new kernel** — I machine-checked the composition (29 Lean theorems in one file on
-top of `verify_sound`, `verifyR_sound` and `zverifyTop_sound`, including two kernel-evaluated instances
+kinetics" needs **no new kernel** — I machine-checked the composition (32 Lean theorems in one file on
+top of `verify_sound`, `verifyR_sound` and `zverifyTop_sound`, including three kernel-evaluated instances
 and a discrete-time kinetic-trap theorem that needs only stationarity, not reversibility).  Under an envelope class the
 barrier height above a state has an **exact** robust interval, attained at the two cone residuals
 `−d(a,·)` and `d(·,a)` (the coordinator's sketch 2 is true, with anchors too, and it is the same
@@ -402,7 +402,8 @@ the quasi-stationary law is exponential with rate `λ_A`; the exit time from `π
 monotone with `P_{π_A}(τ > t) ≥ e^{−k_TST t}` and `E_{π_A} τ ≥ 1/k_TST`; and `1/k_TST` is *exactly* the
 mean sojourn in `A` per entrance (Kac).  `k_TST` is the discrete transition-state-theory rate: it counts
 every crossing of the dividing set, recrossings included.  The spectral gap satisfies
-`gap ≤ Q(A,Aᶜ)/(π(A)π(Aᶜ))`.  For Metropolis rates `min(1, e^{−βΔE})` per neighbour and `A` a component
+`gap ≤ Q(A,Aᶜ)/(π(A)π(Aᶜ))` (the easy half of Cheeger's inequality; a certified *lower* bound on the gap
+would need all sets, or a path system, and is not treated).  For Metropolis rates `min(1, e^{−βΔE})` per neighbour and `A` a component
 of a sublevel set, `Z·Q(A,Aᶜ) = Σ_{y∈∂⁺A} deg_A(y) e^{−βE(y)}` exactly; in general this is an upper
 bound for every single-site dynamics with rates at most one per neighbour.
 
@@ -521,7 +522,9 @@ stationary for the Boltzmann weights and moves one site per step,
 domain — **[V] `box_trap_certificate`**: if `zverifyTop` returns `(loA, ·)` on the box `D` and
 `(·, hi i)` on its `i`-th wall box, then for every stochastic kernel that is stationary for the weights
 of the instance and moves at most one site per step, the survival probability in `D` after `T` steps,
-started from the stationary law restricted to `D`, is at least `1 − T·(Σ_i hi i)/loA`.  Not formalised:
+started from the stationary law restricted to `D`, is at least `1 − T·(Σ_i hi i)/loA`; kernel-evaluated
+instance **[V] `ferroW_trap`** (three binary sites, basin weight `1`, three wall boxes of weight `1/32`
+each, computed by `zverifyTop` inside Lean's kernel: survival `≥ 1 − 3T/32`).  Not formalised:
 the tree format, the weights `κ`, and the passage from a rational instance to real Boltzmann factors
 (lower instance on the basin, upper instance on the wall, as in `certified_partition_of_intervals`).
 For reversible continuous-time
@@ -608,7 +611,7 @@ arithmetic except where stated.  Random instances: pairwise tables with Gaussian
 | `t11_cut_size.py` | greedy number of wall boxes of exact cut certificates | as T4, T7 | median `≤ 1.6 n`, max `3.2 n` boxes |
 | `t12_product_flow.py` | random-order (product) flow and its `Z⁻` bound against exact capacities | `N = 256`, 13 cases | no violation; exact when lumpable; useless at low temperature on rugged landscapes |
 | `t13_penalty_lp.py` | linear multiplier, quadratic penalty (integer and pairwise-LP leaf) against exact level minima | binary `n = 10`, 8 + 23 traps | linear: below trivial always; quadratic integer → exact; quadratic LP leaf: mean `0.42`, exact `30 %`, nothing `48 %`; collapses for large `μ` |
-| `KineticsCertificates.lean` | 29 theorems (listed below) | — | `lake env lean`: exit 0, no warnings; `#print axioms` of all 29: `[propext, Classical.choice, Quot.sound]` for 28, no axioms for `singleSite_symm` (`out_lean.txt`) |
+| `KineticsCertificates.lean` | 32 theorems (listed below) | — | `lake env lean`: exit 0, no warnings; `#print axioms` of all 32: `[propext, Classical.choice, Quot.sound]` for 31, no axioms for `singleSite_symm` (`out_lean.txt`) |
 
 **Machine-checked statements** (`experiments/science/ws_K/KineticsCertificates.lean`; imports
 `proofs.CertificateAlgebra` and `proofs.Frontiers.PartitionCertificate`; not part of the library;
@@ -621,7 +624,8 @@ re-check with
 `ferroResidual_wall_verified`, `ferroResidual_trap` (the `ferro*_verified`, `_rejects`, `_start`,
 `_attained` facts by `decide +kernel`, i.e. the checker is run inside Lean's kernel), `surv_nonneg`,
 `surv_le_one`, `trap_survival`, `trap_certificate`, `trap_certificate_weighted`, `singleSite_symm`,
-`wallBox_pairwiseDisjoint`, `box_trap_certificate`.
+`wallBox_pairwiseDisjoint`, `box_trap_certificate`, `ferroW_basin_verified`, `ferroW_wall_verified`
+(both by `decide +kernel`), `ferroW_trap`.
 What is **not** machine-checked: the exactness (attainment and interval) part of K6 beyond the two
 admissibility lemmas, K7, K8, the decision-tree checkers of §2.5 and §2.8, the passage from rational
 weight instances to real Boltzmann factors in the rate certificate, and every reversible/spectral
@@ -667,6 +671,7 @@ statements extracted by the fetch tool, not read raw by me; **[snippet]** = sear
 | free-energy wells | Ben Arous, Gheissari, Jagannath, "Algorithmic thresholds for tensor PCA", arXiv:1808.00921 | [snippet] | exit-time lower bound from the Gibbs measure restricted to a well: the union-bound argument formalised in `trap_survival` |
 | potential theory of metastability | Bovier, Eckhoff, Gayrard, Klein, Commun. Math. Phys. 228 (2002) 219–255; Bovier, den Hollander, *Metastability* (2015) [memory]; Berman–Konsowa principle (den Hollander, Jansen, arXiv:1309.1305) | [snippet] | capacities, Dirichlet and Thomson/Berman–Konsowa principles, mean hitting-time formula (K11, K12); capacity `≍ e^{−β·barrier}` [memory] |
 | Nash-Williams | Lyons, Peres, *Probability on Trees and Networks*, §2.5 | [snippet] | series law of K11 |
+| conductance, canonical paths | Cheeger-type inequalities for chains (Lawler–Sokal 1988; Jerrum–Sinclair 1989); canonical paths / Poincaré inequalities (Diaconis–Stroock 1991; Sinclair 1992) | [memory] | `gap ≤ Q/(π(A)π(Aᶜ))` is the easy half of Cheeger's inequality; the other half needs a lower bound on the bottleneck ratio of *all* sets, or a path system — the uncertified direction here (§5, item 6) |
 | spectral gap and critical depth | Holley, Kusuoka, Stroock, J. Funct. Anal. (1989); Hajek (1988) | [snippet for the citation; statement from memory] | gap `≍ e^{−βm}`; relevant to Remark K6.4 |
 | variational TST | Wigner (1938) [memory]; Vanden-Eijnden, Tal, J. Chem. Phys. (2005) | [snippet] | TST frequency ≥ true frequency (recrossing); §2.9 |
 | caution on VTST bounds | Phys. Rev. E 61, 2457 (2000), "Breakdown of the bounding properties of variational transition state theory and the Rayleigh quotient method" | [title only; abstract not accessible] | I could not read it; it may restrict the scope of item 3 of §2.9 |

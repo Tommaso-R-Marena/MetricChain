@@ -71,7 +71,7 @@ Plan of numerics (each before the corresponding proof):
   Theorem C = Bayesian twin (credible intervals, variance sandwich, second-moment certificate),
   Corollary = no free hedging, Theorem D = LP-funnel slope (direction 3).
 
-### 18:45 — N7 done (n7_exponent.py -> n7_exponent.json); N5 running; N3 running (slow under load ~17)
+### (clock ~18:33) — N7 done (n7_exponent.py -> n7_exponent.json); N5 running; N3 running (slow under load ~17)
 * [N] product covariance sigma^2 rho^{d_H}, fixed rho: two-sided bounds of Theorem A give
   (1/n) ln n_p -> h((1-rho)/2): rho=0.5: [0.567, 0.582] at n=2000 (h=0.5623); rho=0.9: [0.206,
   0.225] (h=0.1985); rho=0.99: [0.035, 0.047] (h=0.0315).  Convergence from above, O(n^{-1/2}).
@@ -88,7 +88,7 @@ Plan of numerics (each before the corresponding proof):
   exponent is small (R*(1/2)=0.188/site): separation is asymptotic, not dramatic at toy sizes.
   => must report honestly; added Part II (additive toy, rigorous product lower bound, n to 1000).
 
-### 19:05 — N3 done (n3_ball_lnz.py -> n3_ball_lnz.json, .log)
+### (clock ~18:40) — N3 done (n3_ball_lnz.py -> n3_ball_lnz.json, .log)
 * LESSON (machine): load average 17 on 4 cores; numpy with multi-threaded BLAS stalls on small
   matrices.  ALWAYS run with OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1.  (First two N3 attempts timed
   out for this reason only.)
@@ -103,7 +103,7 @@ Plan of numerics (each before the corresponding proof):
   searches agree.  This is the ellipsoid's analogue of the dip: at large beta*B the worst member
   for ln Z localises.  (Worth one sentence in the report.)
 
-### 19:25 — literature search log (queries, what was read, reading level)
+### (clock ~18:45) — literature search log (queries, what was read, reading level)
 Tool: web search (results = titles+snippets), page fetch for 3 URLs.  Levels: [abs] abstract read,
 [snip] search snippet only, [mem] from memory — unverified.
  1. "Mitchell Morris Ylvisaker Two-level fractional factorials and Bayesian prediction" ->
@@ -154,7 +154,7 @@ Tool: web search (results = titles+snippets), page fetch for 3 URLs.  Levels: [a
 14. Sloan-Woźniakowski, J. Complexity 14 (1998) 1-33 [snip]; Novak-Woźniakowski, Tractability of
     Multivariate Problems I-III (EMS 2008/2010/2012) [snip, titles only].
 
-### 20:10 — N4/N8, N6, N9, N10 done; N5 part I done, part II running
+### (clock ~18:55) — N4/N8, N6, N9, N10 done; N5 part I done, part II running
 * N5 part I (order-2 residual, eps=.25, medians of 5; n5_compare.log):
   sharp regime (e=2, kappa=1): W = 1 evaluation, H/B ~ n+1  -> the envelope paradigm WINS when the
   known part is sharp.  Non-sharp, oracle-tight constants (kappa=1, e=0): W best-first 19..336
@@ -183,7 +183,7 @@ Tool: web search (results = titles+snippets), page fetch for 3 URLs.  Levels: [a
   evaluations reject 98% (b), 88% (c), 24% of dipped (baseline 11%).
   Lebesgue constants max_x sum_a |lambda_a(x)| = 2.5, 4.28, 2.875, 4.69, 3.25 for (n,m)=(7,1),(7,2),
   (10,1),(10,2),(12,1) (about 0.6-0.9 sqrt(M)); l2 norm of weights = sqrt(M/N) exactly.
-* N9 (n9_lp_funnel.json): tau_LP <= tau in all 1360 instances (0 violations).  Ferromagnets
+* N9 (n9_lp_funnel.json): tau_LP <= tau in all 1280 instances (0 violations; first written as 1360 by a miscount).  Ferromagnets
   (grid 4x4, chain12+6 contacts) and trees: tau_LP = tau in 100%.  Frustrated: grid weak field
   5-25% equal, LP tight at x* in 28-55%; strong field 80-85% equal, 93-100% tight; chain+contacts
   ~50% equal, 74-84% tight.  Triangle h=(-.5,0,-.5), J=(-1,-1,+1): tau=1/2, tau_LP=-2/3.
@@ -192,3 +192,20 @@ Tool: web search (results = titles+snippets), page fetch for 3 URLs.  Levels: [a
   extensive above; sup-norm bound far above.  (II) RKHS norm of a depth-3 dip under the product
   spectrum with lam=.5: 3.9e3 (n=8) -> 1.7e9 (n=16) vs typical draw 16 -> 256 and an additive
   function of the same depth 3.3.
+
+### 19:06 (real clock; earlier headers after 18:20 were estimates and have been corrected)
+* Fixed: posterior_direct used pinv with default cutoff -> garbage for rank-deficient K_AA
+  (showed up as max_var 0.003 where it must be 0).  Now rcond=1e-10.  N1 rerun for cleanliness.
+* N4 rerun with a tolerance in the coverage test and 400 posterior samples.
+* NEW (answers theory report §12 item 9(c) for additive classes): Monte Carlo over SITES.
+  For the additive box class, min(f+g) and ln Z are sums over sites; k random single flips
+  (k+1 evaluations) estimate them within eps1*n with prob 1-delta for
+  k >= (R^2/2 eps1^2) ln(2/delta), independent of n; deterministic algorithms (error <= eps1 n) need
+  n(1 - 4 eps1/R) [first written with 2 instead of 4: wrong by the width/half-width convention].
+  n11_site_mc.py: 120 (min) / 154 (ln Z) evaluations at eps1=0.1 for
+  n = 1e3, 1e4, 1e5 against 500, 5000, 50000; empirical failure <= 0.9% (bound 5%), five
+  adversarial coefficient patterns.  So in the theory division's table the cell
+  "linear in features / randomised: no lower bound known" cannot be filled with anything that
+  grows with n at extensive accuracy, at least for additive features.
+* N5b (vectorised additive toy, same seeds as n5_compare part II): the two implementations
+  agree (ln N_W >= 12.73 / 26.41 at n = 100 / 200, kappa = .5, e = 0).

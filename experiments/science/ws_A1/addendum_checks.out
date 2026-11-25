@@ -11,5 +11,11 @@ PASS Q3i every conditional law of nu_psi lies in the window polytope of its site
 PASS Q3ii KL(nu_psi || product of capacity-achieving site laws) <= sum_i a_tau(i); equality for additive instances on capacity-achieving vertices   max KL/(sum a) = 1.000000; additive vertex instances: min ratio 1.000000
 PASS Q3iii the vertices of the window are Gibbs laws of vertices of the site's Lipschitz polytope (>= q-1 tight constraints)
 PASS Q3m mutation: a non-admissible psi leaves the window   ratio 720.319
+PASS Q4  adaptive law e(theta) = E_sp(theta) - theta on the cube against Burnashev's line C_1(1 - R/C) for BSC(p_u): C_1 = u tanh(u/2); e(0+) = ln cosh(u/2); e vanishes at h < a; e strictly convex (not a line)   
+      u=0.5: C_1 = 0.1225, e(0+) = 0.0309, h = 0.00767 < a = 0.03030, e(h/2) = 0.0090 against the chord's 0.0155
+      u=1.0: C_1 = 0.4621, e(0+) = 0.1201, h = 0.02914 < a = 0.11094, e(h/2) = 0.0350 against the chord's 0.0601
+      u=2.0: C_1 = 1.5232, e(0+) = 0.4338, h = 0.09728 < a = 0.32781, e(h/2) = 0.1244 against the chord's 0.2169
+      u=3.0: C_1 = 2.7154, e(0+) = 0.8554, h = 0.17283 < a = 0.50228, e(h/2) = 0.2410 against the chord's 0.4277
+PASS Q4m mutation: the straight line between the two endpoints differs from e at theta = h/2   chord - e = 0.0925 at u = 2
 
 failures: 0

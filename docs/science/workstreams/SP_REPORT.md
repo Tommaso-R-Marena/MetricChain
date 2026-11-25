@@ -23,9 +23,10 @@ energy relative to the vacuum force field" is **not near the first-order (per-to
 bounded-difference) class in any useful sense**: its exact constants are `c_i = 7–32 kcal/mol
 = 12–53 k_BT`; they grow with chain length (largest constant `≈ 4.8 + 4.5·n` kcal/mol for
 `n = 1…6` residues on the three-state grid; slower, possibly saturating near 20 kcal/mol, on a
-two-state grid without turn states, `n ≤ 9`) and are lower at the chain ends than in the
-interior — the predicted lever-arm effect is present as "growth with length plus an end
-effect", not as a clean power law in the distance to the chain end; **no torsion is sharp in
+two-state grid without turn states, `n ≤ 9`) and on the three-state grid are a third lower at the chain
+ends than in the interior (on the two-state grid this holds for φ but not for ψ) — the
+predicted lever-arm effect is present as "growth with length", not as a law in the distance
+to the nearer chain end; **no torsion is sharp in
 any enumerated instance** (ratio of site gap to constant 0.03–0.47 in the extended basins;
 collective cost-to-distance ratio `λ* = 0.038 … 0.0026` for two to six residues, where one
 evaluation would need `λ* ≥ 1`); the mixed second differences are dense and as large as the
@@ -52,7 +53,7 @@ single-φ terms (`c_i = 0.64 kcal/mol` on the grid, 1.115 on the full circle, in
 length, all `c_ij = 0`; one evaluation certifies), ff19SB − ff14SB is one table per residue
 (`c_i ≤ 2.6 kcal/mol`, `c_ij = 0` beyond the residue; two or three evaluations); a change of
 charge model (ff03, ff15ipq) gives `βc_i ≈ 2–10`, slowly growing, half of the sites sharp in
-the extended basin, certificates of 10–30 evaluations at four and five residues.  Yet even the
+the extended basin, certificates of at most 12–28 evaluations at four and five residues.  Yet even the
 cheapest of these decides the answer: at five residues ff14SB prefers the helix and ff99SB
 the β-strand, 0.64 kcal/mol per residue being enough to reorder two cooperative basins 0.9
 kcal/mol apart.  So the answer to "which class do residuals live in" is: *model-to-model
@@ -104,16 +105,17 @@ and on A2 `max_i c_i = 3.7, 5.7, 9.1, 14.3, 14.6, 16.0, 17.7, 18.4, 19.0` for `n
 (visibly sub-linear from `n = 4`); pooled over sites and lengths
 `c_i = 3.60 + 2.31 m_i + 1.12·(2n)` on A3 (rms residual 2.3), `m_i = min(i, 2n + 1 − i)` the
 distance to the nearer chain end in torsions; a pure power law in `m_i` has exponent 0.45 (A3)
-and 0.36 (A2) and fits worse.  Within one chain the constants are lower for the two torsions
-next to each end and flat in the interior (A3, `n = 6`, by `m`: 18.7, 18.7, 26.8, 28.2, 29.3,
-28.2).  The root-mean-square change under a single-torsion flip does **not** grow (6.4–6.5
+and 0.36 (A2) and fits worse.  Within one chain on A3 the constants are lower for the two torsions
+next to each end and flat in the interior (`n = 6`, by `m`: 18.7, 18.7, 26.8, 28.2, 29.3,
+28.2); on A2 this holds for the φ torsions only (§3.3).  The root-mean-square change under a single-torsion flip does **not** grow (6.4–6.5
 kcal/mol on A3, 3.6–3.7 on A2): the growth is in the extreme pairs, i.e. in what a sup-norm
 envelope must cover.  Lower bounds by local search for longer chains are in §3.3.
 
 *Reading.*  The lever-arm prediction of theory report §11.14 ("for contact-type residuals every
 envelope in torsion-Hamming format has `c_i ≥ u₀⌊(m_i − 1)/2⌋`") is qualitatively confirmed for
-a real residual — constants grow with the length of the chain and are smallest at its ends —
-and quantitatively the scale is `u₀ ≈ 2–5 kcal/mol` per residue, i.e. `β u₀ ≈ 4–8`.  The
+a real residual in one respect — constants grow with the length of the chain — and only
+partly in the other (they are smallest at the ends on A3, not uniformly on A2);
+quantitatively the scale is `u₀ ≈ 2–5 kcal/mol` per residue, i.e. `β u₀ ≈ 4–8`.  The
 regime `u = βc ∼ 1` in which the theory report evaluates its exponents (e.g. `0.029` at
 `u = 1`, Theorem 11.25) is one to two orders of magnitude away from this residual.
 
@@ -121,7 +123,9 @@ regime `u = βc ∼ 1` in which the theory report evaluates its exponents (e.g. 
 dense, with entries of the size of the first-order constants and slow decay in `|i − j|`: at
 `n = 4`, by separation `|i − j| = 1…7`, the largest entries are 23.1, 22.4, 18.9, 12.2, 11.9,
 7.2, 7.0 kcal/mol; half row sums `½Σ_j c_ij` are 37–60 kcal/mol; the Dobrushin-type row sums
-`Σ_j tanh(βc_ij/4)` are ≈ 7 (Theorem 11.33(a) needs `< 1`).  The row-sum condition of theory
+`Σ_j tanh(βc_ij/4)` are ≈ 7 (Theorem 11.33(a) needs `< 1`).  At `n = 5`: largest entry 28.8
+kcal/mol, by separation 28.8, 28.8, 24.9, 19.2, 17.0, 11.5, 10.4, 6.0, 8.1; half row sums 52–89.
+On A2 at `n = 8`: largest entry 16.2, still 6.8 kcal/mol at separation 15; half row sums 37–70.  The row-sum condition of theory
 report §11.7 (`½Σ_j c_ij ≤` single-site excitation energy) fails by one to two orders of
 magnitude.  `g_GB` in torsion coordinates is a *dense second-order class with large constants*,
 the case of Theorem 11.32(i), not the weakly coupled case of Theorems 11.16–11.17.
@@ -171,25 +175,38 @@ Restricting pairs to a window of `w` torsions hardly matters beyond `w = 3` (RMS
 `w = 3` against 2.10 for all pairs): the pair part is local, the remainder is not pairwise.
 (b) *Profile class of theory report §11.17* — `g ≈ c₀ + Σ_{p<q} φ_{τ(p,q)}(s_pq)`, `s = r²`, `φ_τ`
 continuous and piecewise linear in `s` with 44 knots between 1.5 and 40 Å, all atom pairs
-separated by three or more bonds, no cutoff — fitted on 8 000 **off-grid** conformations of
-the pentapeptide (ensemble C, §3.1) and tested on 8 000 others (standard deviation 5.47):
+separated by three or more bonds, no cutoff — fitted on 8 000 **off-grid** conformations
+(ensemble C, §3.1) and tested on 8 000 others (standard deviation of `g_GB`: 5.47 at `n = 5`,
+6.89 at `n = 8`):
 
-| pair types | parameters | held-out RMS | held-out max | largest fitted slope `L_s` |
+| pair types | parameters | held-out RMS / max, `n = 5` | `n = 8` | largest fitted slope `L_s` |
 |---|---|---|---|---|
-| one type | 37 | 5.11 | 25.0 | 0.12 kcal/mol/Å² |
-| element pairs (10 types) | 321 | 0.56 | 3.45 | 0.72 |
-| Amber atom-type pairs (36 types) | 1 101 | **0.26** | **2.19** | 0.89 |
+| one type | 37 | 5.11 / 25.0 | 6.57 / 32.0 | 0.12 kcal/mol/Å² |
+| element pairs (10 types) | 321–365 | 0.56 / 3.45 | 1.04 / 5.74 | 0.72 |
+| Amber atom-type pairs (36 types) | 1 101–1 268 | **0.26 / 2.19** | **0.43 / 3.94** | 0.89 |
 
-The same radial functions, with only the constant refitted, describe the tri- and
-tetrapeptide (RMS 0.19, 0.22) and the A3 grids (`n = 5`: RMS 0.32, max 3.5).  Control: the
-vacuum Coulomb energy — exactly pair-additive, but with pair-specific coefficients — has the
-same remainder in this class (0.30 / 2.1), so at this resolution `g_GB` is as close to the
-*typed* class as an exactly pair-additive function is.  A sup-norm fit with a slope bound
-`|φ′| ≤ L_s` (linear programme, element types, 2 500 training conformations) has training
-remainder `η*(L_s) = 1.06, 1.06, 1.48, 4.0, 8.7` kcal/mol at `L_s = ∞, 1, 0.3, 0.1, 0.03`
-kcal/mol/Å², and held-out maxima of 6–21: **a sup-norm remainder estimated on a sample is not a
-bound** (the unconstrained Chebyshev fit has held-out maximum 10.2 at training `η = 1.06`).
-So `βη_RMS ≈ 0.4`, `βη_sup ≈ 4` at five residues, with `≈ 10³` coefficients.
+The radial functions fitted at eight residues describe the shorter chains with only the
+constant refitted (RMS 0.25–0.36 for `n = 3…6`); those fitted at five residues fail at eight
+(RMS 4.8) because distances beyond 22 Å were never seen — the exactly pair-additive Coulomb
+energy fails the same way.  Control: the vacuum Coulomb energy — exactly pair-additive, but
+with pair-specific coefficients — has the same remainder in the typed class (0.30 / 2.1 and
+0.74 / 4.5), so with typed pairs the remainder is dominated by the typing.  A sup-norm fit
+with a uniform slope bound `|φ′| ≤ L_s` (linear programme, element types, 2 500 training
+conformations, `n = 5`) has training remainder `η*(L_s) = 1.06, 1.06, 1.48, 4.0, 8.7` kcal/mol
+at `L_s = ∞, 1, 0.3, 0.1, 0.03` kcal/mol/Å² and held-out maxima of 6–21 kcal/mol: **a sup-norm
+remainder estimated on a sample is not a bound.**
+(c) *Distance to the exactly pair-additive class* (every atom pair its own radial function).
+The explicit function `S = Σ_{p<q} e_pair(r_pq; B̄_p, B̄_q) + w₀ + Σ_p w_p I_p` of §3.4 — GB cross
+terms with frozen mean Born radii plus a linear function of the pair-additive descreening
+sums `I_p`, `N + 1` fitted weights — is exactly pair-additive, and `g_GB − S` has (RMS / max,
+kcal/mol): on held-out conformations of ensemble C 0.10 / 0.9, 0.21 / 2.6, 0.30 / 4.1,
+0.34 / 3.5, 0.43 / 5.4, 0.52 / 6.1 for `n = 2, 3, 4, 5, 6, 8`; on **all** clash-free
+conformations of the A3 grids 0.14 / 0.5, 0.27 / 1.0, 0.39 / 2.3, 0.48 / 4.8 for `n = 2…5`; on all
+35 478 of the A2 grid at `n = 8` 0.47 / 9.3.  Freezing the Born radii *without* the linear term
+— the naive pairwise GB — leaves RMS 2.1–7.2 kcal/mol, although the radii fluctuate by only
+2–4 % on average.  Hence the sup-norm distance of `g_GB` to the pair-additive class is **at
+most** 0.5, 1.0, 2.3, 4.8 kcal/mol on the A3 domains of two to five residues (I have no lower
+bound), `βη_RMS ≈ 0.2–0.9` and `βη_sup ≲ 1–16`, both growing with the chain.
 
 **Statement 6 [N, exact on the grids] (sharpness; certificates on the real instance).**
 Instance: `X = X_τ` (A3), `f`, `g`, `E = f + g`, envelope `d = Σ_i c_i(g)[x_i ≠ y_i]` with the
@@ -201,11 +218,15 @@ the single-site excitation energies of `f` at its minimiser are 0.7–1.4 (φ) a
 kcal/mol against `c_i = 11–23`: **no site is sharp** (`e_i/c_i = 0.03–0.47`), and the criterion
 of Theorem 11.7 [V] fails for 486 of 507 and 3 824 of 3 843 competitors.  At `n = 5` the
 minimiser of `f` is the α-helix and that of `E` is PPII, 0.46 kcal/mol apart; at `n = 6` the
-helix minimises both, and most single flips out of it are sterically excluded in the rigid
-geometry, so "sharpness of a site" is not the right notion there (see §3.5).
+helix minimises both (PPII is 0.37 kcal/mol above it with GBn2, 9.3 in vacuum), and 8 of 12
+single flips out of it are sterically excluded in the rigid geometry; the remaining ones
+cost 8–20 kcal/mol and are still below their constants.  The collective criterion (Theorem
+11.7 for all competitors at once) is `λ* := min_y (E(y) − E(x*))/d(x*, y) ≥ 1`; measured:
+`λ* = 0.038, 0.031, 0.020, 0.0045, 0.0026` for `n = 2…6` (§3.5).
 (b) Smallest certificates of `min E` in the per-torsion format (set cover with radii
-`gap(y) + ε`, Theorem 11.4 [V]); lower bound = number of conformations that only themselves
-cover (Theorem 11.6(a) [V]), upper bound = greedy cover:
+`gap(y) + ε`, Theorem 11.4 [V]); lower bound = the larger of the number of conformations that
+only themselves cover and the volume bound `Σ_y 1/M(y)` (both Theorem 11.6(a) [V]), upper bound
+= greedy cover:
 
 | residual, `n` | conformations | `ε = 0` | `ε = k_BT` | `ε = 2` kcal/mol |
 |---|---|---|---|---|
@@ -255,12 +276,13 @@ consistent with them: the product formula predicts `N ≥ 15` and `60` at `n = 3
 covers need at least 94 and 447.
 
 **Statement 8 [N] (continuous torsions).**  Along one torsion, with the others fixed at
-off-grid conformations of ensemble C (10° scans; maxima over 150–200 sampled bases, hence lower
-bounds on the suprema): `g_GB` oscillates by up to 13–16 kcal/mol at `n = 2` and 14–24 at
-`n = 5` (median 6.4–6.7); its torsion-space Lipschitz constants reach 9–21 kcal/mol/rad
-(median 4.3).  With these `L_i` the threshold of Theorem 11.34 for the torus,
-`J = Σ_i ln(sinh b_i/b_i)`, `b_i = βL_iπ/2`, is 85 nats at `n = 2` and 295 nats at `n = 5`.
-For `g_03`: oscillation ≤ 5.5 kcal/mol, `L_i ≤ 5.9 kcal/mol/rad`.
+off-grid conformations of ensemble C (10° scans; maxima over 80–200 sampled bases, hence lower
+bounds on the suprema): `g_GB` oscillates by up to 13–16 kcal/mol at `n = 2`, 14–24 at `n = 5`
+and 12–20 at `n = 8` (median 6.2–6.7 at every length); its torsion-space Lipschitz constants
+reach 9–11, 9–21 and 9–27 kcal/mol/rad (median 4.1–4.7).  With these `L_i` the threshold of
+Theorem 11.34 for the torus, `J = Σ_i ln(sinh b_i/b_i)`, `b_i = βL_iπ/2`, is 85, 295 and 566 nats
+at `n = 2, 5, 8`.  For `g_03`: oscillation ≤ 5.5 kcal/mol, `L_i ≤ 5.9 kcal/mol/rad`, `J = 31, 83,
+128` nats.
 
 **Statement 9 [P] (what the measured numbers do and do not license).**  (i) Every number in
 Statements 1–6 is an exact property of a finite domain (a grid with a clash filter) and of the
@@ -290,9 +312,9 @@ One row per mathematical object.  "Pilot" refers to the measurements of §§2–
 | 3 | residual `g = E − f` | continuum-solvent polarisation (GB, PB: many-body through the dielectric boundary); explicit polarisation; quantum-chemical minus force-field energy; a learned correction; backbone-relaxation energy; the difference of two force fields | the split is a *choice*: `g` should be the part that is expensive, non-decomposable, or uncertain | the theory treats `g` as a black box known through class membership and point evaluations; all structure of the functional form (pair-additivity in atoms, locality in space, the anticorrelation of polarisation with Coulomb energy — pilot: `c_i(Coulomb + GB)` is half of `c_i(GB)`) is lost unless it is put into the class | which class, with which constants (this report: Statements 1–5); the split itself can be optimised (screened Coulomb in `f`) |
 | 4 | envelope `d` / class: bounded differences `c_i`; torsion-space Lipschitz constants; mixed differences `c_ij`; profile slope `L` | an a-priori worst-case bound on how much the correction can change when one degree of freedom changes — a *sup-norm* error bar | the bound holds for **all** pairs of configurations of the domain | typicality and correlation: force-field accuracy is quoted as RMS error; pilot: sup/RMS is 4.2 for single flips of `g_GB` at five residues (27.5 against 6.5 kcal/mol) and 8.4 for the profile remainder (2.19 against 0.26); the exact Jensen gap is 2.3 nats where the class allows 178 | an *upper* bound: interval arithmetic over the domain or a proved Lipschitz property of the functional form, plus (for Corollary 4.7) inertia bounds.  None exists for a production force field.  For torsion-refit differences the bound is elementary: `g_99` is a trigonometric polynomial of φ with range 1.115 kcal/mol on the whole circle (§3.6) |
 | 5 | anchors `(a, g(a))` | single-point evaluations of the expensive model at chosen conformations: a GB/PB solve, a quantum-chemical single point, an inference of a learned potential.  No experiment measures `g` at a chosen conformation | the evaluation is exact at exactly that configuration (or comes with an interval: the kernels accept interval anchors) | convergence and discretisation error of the expensive calculation; for voxels a point value is not an enclosure | the number of evaluations is the theory's cost; the search over `f` (NP-hard, theory report §8) is not counted |
-| 6 | `min E` | the global minimum-energy conformation of the *model* on the discretised space | it predicts a structure only if (a) the Gibbs weight of its basin dominates and (b) the model error is below the gap to competing basins — which is the theory's own sharpness condition (Theorems 2.4, 11.7 [V]) | pilot: for the pentapeptide the helix is the minimum in vacuum and PPII with GBn2, 0.46 kcal/mol apart; for the hexapeptide the helix wins in both, by 0.37 kcal/mol over PPII with GBn2 and by 9.3 kcal/mol in vacuum; the uncertainty constants are 16–32 kcal/mol for the solvent term and 1.4–5 kcal/mol between charge models: the minimiser is not a model-robust object for a flexible peptide (7 grid conformations lie within 1 kcal/mol of the minimum, 38 within 2, at `n = 6`) | the gaps of the known part against the constants, site by site or droplet by droplet (Theorem 11.39) |
+| 6 | `min E` | the global minimum-energy conformation of the *model* on the discretised space | it predicts a structure only if (a) the Gibbs weight of its basin dominates and (b) the model error is below the gap to competing basins — which is the theory's own sharpness condition (Theorems 2.4, 11.7 [V]) | pilot: for the pentapeptide the helix is the minimum in vacuum and PPII with GBn2, 0.46 kcal/mol apart; for the hexapeptide the helix wins in both — with GBn2 by 0.37 kcal/mol over PPII, in vacuum by 5.5 kcal/mol over the β-strand; the uncertainty constants are 16–32 kcal/mol for the solvent term and 1.4–5 kcal/mol between charge models: the minimiser is not a model-robust object for a flexible peptide (7 grid conformations lie within 1 kcal/mol of the minimum, 38 within 2, at `n = 6`) | the gaps of the known part against the constants, site by site or droplet by droplet (Theorem 11.39) |
 | 7 | `ln Z_β` | conformational free energies | **observable**: differences between macrostates of one model (populations of basins; binding constants as ratios of partition functions) and between thermodynamic states (temperature, and gas phase → solvent: if `f` is the gas-phase energy and `g` a solvation potential of mean force, `ln Z(f+g) − ln Z(f)` is `−β` times a hydration free energy).  **Not observable**: the absolute `ln Z` of a discretised model (depends on cell volumes and the energy zero), and `ln Z(f+g) − ln Z(f)` when `g` is a model correction (force field → better force field): a model-to-model free energy | in differences, correlated errors cancel physically, but not in a first-order class ("the sum of the two thresholds, no cancellation", theory report §11.13) | the accuracy that matters is ≈ 1 kcal/mol = 1.7 `k_BT` on differences; the class threshold measured here is 43–48 nats per residue |
-| 8 | inverse temperature `β`; the scale `u = βc` | at 300 K, `1 kcal/mol = 1.68 k_BT` | — | the theory report tabulates exponents at `u = 0.5–2.8`, i.e. `c = 0.3–1.7 kcal/mol` | pilot: `βc_i = 15–53` for the solvent term (the theory's zero-temperature regime: `ln cosh(u/2) ≈ u/2 − ln 2`), `2–10` between charge models, `1.1–4.3` between force fields of one lineage |
+| 8 | inverse temperature `β`; the scale `u = βc` | at 300 K, `1 kcal/mol = 1.68 k_BT` | — | the theory report tabulates exponents at `u = 0.5–2.8`, i.e. `c = 0.3–1.7 kcal/mol` | pilot: `βc_i = 12–53` for the solvent term (the theory's zero-temperature regime: `ln cosh(u/2) ≈ u/2 − ln 2`), `2–10` between charge models, `1.1–4.3` between force fields of one lineage |
 | 9 | the hint (an instance handed to an algorithm that must still be correct on the class; §11.10) | a surrogate of the residual: a cheaper solvent model, a fitted pair-additive approximation, a learned potential, or the output of a heuristic search, which expensive evaluations then spot-check | the surrogate is free and correctness is demanded on the class, not on the surrogate | — | pilot: a fitted typed pair model predicts `g_GB` to 0.26 kcal/mol RMS (max 2.2) — a good hint; the theory's price for checking it is set by the class, not by the quality of the hint |
 | 10 | product landscapes (additive `f`, independent sites); the cube | independent degrees of freedom: side chains that do not interact (far apart on a fixed backbone), independent rotors on a stiff scaffold, independent two-state titration or tautomer sites (the cube), the reference system of a mean-field theory | couplings small against site gaps (a Dobrushin-type condition) | cooperativity, excluded volume, phase transitions.  Pilot: a peptide backbone is not product-like — in the helix basin of the hexapeptide 8 of 12 torsions have no clash-free single-flip neighbour at all and the others cost 8–20 kcal/mol, while the collective excitation to PPII (six torsions changed) costs 0.37 kcal/mol in total | the exponents `R*`, `R_β` are properties of this idealisation; for a chain the relevant theorems are 11.39–11.40 (droplets) and the general Theorem 11.6 |
 | 11 | the lattice chain of §11.22 (diamond lattice, trans/gauche, pair counts at three distances, known part `e·#gauche`) | a rotational-isomeric-state homopolymer with excluded volume and a three-shell contact energy: a coarse-grained model of collapse and of stiff attractive chains | questions about scaling and the thermodynamic limit of a homopolymer | chirality, sequence, hydrogen-bond directionality, continuous distances (off-lattice the profile is a function and the number of features grows with the chain) | whether a real residual depends on the conformation through pair-count profiles: pilot — with one pair type, as in the lattice model, not at all (remainder = total variance); with 36 atom-type pairs and ≈ 40 distance bins, to 0.26 kcal/mol RMS |
@@ -351,7 +373,8 @@ spot-check and the nested samplers.  The measured numbers say: for the solvent r
 and the minimiser itself changes between `f` and `f + g` at `n = 3, 4, 5`); for a change of
 charge model about half the torsions are sharp (the ψ torsions, whose second well lies 4.7
 kcal/mol up; the φ torsions, where the β and PPII wells differ by 0.7–1.4 kcal/mol, are not);
-for a same-lineage torsion refit all are.  In the helix basin most single-site excitations are sterically
+for a same-lineage torsion refit all are — site by site; collectively not: at `n = 5` the
+minimiser changes between ff14SB and ff99SB (§3.5).  In the helix basin most single-site excitations are sterically
 excluded and the relevant quantity is collective: the cost-to-distance ratio
 `λ* = min_y (E(y) − E(x*))/d(x*, y)` (the factor by which all constants would have to shrink
 for one evaluation to certify; cf. Theorem 11.39) is 0.038, 0.031, 0.020, 0.0045, 0.0026 for
@@ -371,7 +394,7 @@ and weak coupling unless it is weak in the sense of Theorem 11.33 (`Σ_j tanh(β
 | assumption | `g_99` | `g_19` | `g_03`, `g_ipq` | `g_GB` |
 |---|---|---|---|---|
 | (A1) low order in torsions | exact, order 1 | exact, order 2 inside a residue | approximately: pairs of residues leave RMS 0.12, max 1.4 kcal/mol (`n = 5`) | no: torsion pairs leave RMS 2.1, max 13; residue pairs RMS 1.1, max 9 |
-| (A2) typed pair-additivity in atoms | (trivially) | (no: a torsion term) | yes to RMS 0.11, max 1.3 (36 types, `n = 5`) | in RMS yes (0.26), in sup norm to 2–6 kcal/mol; the remainder grows with the chain (§3.4) |
+| (A2) typed pair-additivity in atoms | yes (at rigid geometry a cosine torsion term is a function of one 1–4 distance) | not tested | yes to RMS 0.11, max 1.3 (36 types, `n = 5`) | in RMS yes (0.26), in sup norm to 2–6 kcal/mol; the remainder grows with the chain (§3.4) |
 | (A3) locality along the chain | yes | yes | no (`c_ij` decays to 0.7 kcal/mol but not to zero) | no (`c_ij = 7` kcal/mol at separation 7) |
 | weak coupling, `Σ_j tanh(βc_ij/4) < 1` | 0 | 0.78 | 4.1 | 7.0 |
 
@@ -436,9 +459,13 @@ this workstream; nothing else).
   fractions: A3 89, 79, 70, 59, 49, 41 % (`n = 1…6`); A2 100, 100, 98, 86, 77, 69, 61, 54, 48 %
   (`n = 1…9`).  **Without the filter the numbers are meaningless** from `n = 4` (overlapping
   atoms: `c_i(g_99) = 329 kcal/mol` from a fourth-decimal charge difference at `r → 0`).
-  Sensitivity: `out/an1_constants.json` has every constant for `τ ∈ {0, 0.6, 0.7, 0.8}`; between
-  0.6 and 0.7 the constants of `g_GB` change by less than 3 % at `n ≤ 5`; at 0.8 only 2–31 % of
-  the A3 grid survives for `n ≥ 2` (the basin states themselves score 0.72–0.86) and I do not use it.
+  Sensitivity (`out/an1_constants.json` has every constant for `τ ∈ {0, 0.6, 0.7, 0.8}`): loosening
+  the threshold to 0.60 leaves `max_i c_i(g_GB)` unchanged for `n ≤ 4` and raises it by 8–15 %
+  beyond (A3 `n = 6`: 35.0 instead of 31.6; A2 `n = 9`: 21.8 instead of 19.0 kcal/mol);
+  tightening to 0.80 removes the states φ = +60° and ψ = +60° of A3 altogether (they score
+  0.72–0.73), so that A3 at 0.80 reproduces the A2 numbers exactly (3.69, 5.69, 7.87, 14.31,
+  14.57, 15.99 for `n = 1…6`).  The difference between the two grids is therefore the presence
+  of the C7eq-like and left-handed states.
 * **Off-grid ensemble C** (`sample_continuous.py`).  Each residue's `(φ, ψ)` uniform on the
   clash-free 42 % of the dipeptide map (5° cells plus jitter), conformations with a non-local
   clash rejected (acceptance 95 % at `n = 2`, 54 % at `n = 8`).  It is *not* a Boltzmann ensemble;
@@ -450,6 +477,7 @@ this workstream; nothing else).
 | script | what | output |
 |---|---|---|
 | `test_build.py`, `validate_fast.py` | geometry and energy validation | stdout |
+| `verify_openmm_direct.py` | end-to-end check without the fast evaluator and without the analysis library: `c_i(g_GB)` on the A3 tripeptide grid from OpenMM's own `CustomGBForce` and a brute-force loop; reproduces 16.09 12.41 18.63 16.43 15.14 11.19 and 508 clash-free conformations | stdout |
 | `enumerate_grid.py n A3|A2` | exact enumeration | `data/grid_*.npz` (all energy components) |
 | `sample_continuous.py ens|scan` | ensemble C; single-torsion scans | `data/cont_n*.npz`, `data/scan_n*.npz` |
 | `an1_constants.py` | `c_i`, residue constants, four clash thresholds | `out/an1_constants.json`, `logs/an1_all.log` |
@@ -465,7 +493,8 @@ this workstream; nothing else).
 | `an11_manybody.py` | distance of `g_GB` to the exactly pair-additive class | `out/an11_manybody.json`, `logs/an11.log` |
 | `long_chain_ci.py` | lower bounds on `c_i` for long chains | `out/long_ci_*.json`, `logs/long_*.log` |
 
-Total compute: about 40 CPU-minutes of enumeration (A3 `n = 6`: 15 min; A2 `n = 9`: 16 min, on
+The grid files (161 MB in `data/`, not under version control) can be regenerated with
+`enumerate_grid.py`.  Total compute: about 40 CPU-minutes of enumeration (A3 `n = 6`: 15 min; A2 `n = 9`: 16 min, on
 a machine with load 15–18) and about as much analysis.
 
 ### 3.3 Constants versus chain length and position (Statements 1, 3, 4)
@@ -488,9 +517,14 @@ Exact, clash-free, kcal/mol.  `max_i c_i` by `n`:
 | `g_ipq` | A2 | 0.93 | 1.53 | 3.46 | 5.00 | 4.96 | 5.20 | 5.51 | 5.59 | 5.62 |
 | known part `f` (for scale) | A3 | 24.8 | 29.7 | 33.3 | 35.7 | 42.3 | 45.1 | | | |
 
-Position dependence of `c_i(g_GB)`, A2, `n = 9`, by distance `m` to the nearer end (mean of the
-two sites): 13.6, 10.8, 16.1, 11.9, 16.8, 14.5, 16.4, 14.4, 15.4 — an end effect on the first
-two torsions and a plateau (with a φ/ψ alternation), not a monotone law.
+Position dependence of `c_i(g_GB)`.  A3, `n = 6`: φ sites 20.1, 27.4, 31.6, 27.2, 31.2, 19.8 and
+ψ sites 17.5, 25.1, 29.3, 27.0, 26.2, 17.4 — both dome-shaped, the two torsions next to each end
+about a third lower.  A2, `n = 9`: φ sites 8.1, 13.6, 16.2, 16.0, 13.3, 12.9, 12.9, 12.0, 9.6
+(dome), but ψ sites 12.0, 11.7, 16.1, 15.8, 17.6, 16.8, 17.4, 18.6, 19.0 — increasing towards the
+C-terminus, the largest constant of the chain being the *last* ψ, which moves only the
+N-methylamide cap.  So "smallest at the ends" is true on A3 and for φ on A2, and false for ψ
+on A2: a cap rotating against a preformed helix changes the polarisation energy as much as an
+interior torsion does.  The distance to the nearer chain end is not the controlling variable.
 
 *Longer chains, lower bounds* (`long_chain_ci.py`: 400 random conformations, then multi-start
 coordinate ascent over the other torsions of the spread of `g` over the states of torsion
@@ -503,10 +537,15 @@ against the exact A3 `n = 5` constants: exact at 6 of 10 sites, within 20 % at t
 | A2, `n = 12` | 24 of 24 | 19.7 kcal/mol = 33 `k_BT` | exact at `n = 9`: 19.0 |
 | A3, `n = 10` | 8 of 20 (6 starts) | 35.2 kcal/mol = 59 `k_BT` | 49.9 |
 | A2, `n = 16` | 9 of 32 (6 starts) | 19.2 kcal/mol = 32 `k_BT` | — |
-| A2, `n = 20` | LONG_A2_20 |
+| A2, `n = 20` | 6 of 40 (6 starts) | 14.6 kcal/mol = 25 `k_BT` | — |
+
+The searches at 10, 16 and 20 residues use few starts in spaces of `3²⁰`–`2⁴⁰` conformations and
+find *less* than the exact values of shorter chains on the same grid (which are themselves
+lower bounds for the longer chain only heuristically): they show that constants of 15–35
+kcal/mol persist, and nothing about growth.
 
 **What this says about the lever arm.**  (1) Constants grow with chain length in every
-enumerated case, and they are smallest at the chain ends.  (2) On the three-state grid, which
+enumerated case; they are smallest at the chain ends on A3 but not for the ψ torsions on A2.  (2) On the three-state grid, which
 contains the left-handed states needed for tight turns, the largest constant grows linearly up
 to six residues and the eight-residue lower bound is compatible with the same line.  (3) On
 the two-state grid (β, PPII, α_R only) the growth slows from four residues on, and nothing
@@ -533,7 +572,7 @@ conformations, `η` = Chebyshev optimum by linear programming; kcal/mol):
 | all residue pairs | 0.58 | 1.52 | 0.90 | 2.67 | 1.13 | 9.1 |
 | residue triples, window 3 | — | — | 0.38 | 1.85 | 0.58 | 7.3 |
 
-(The last rows have 200–2 000 parameters; at `n = 3, 4` they overfit — held-out RMS 1.0–1.5 —
+(The last rows have 200–2 000 parameters; at `n = 3, 4` they overfit — held-out RMS 0.7–1.5 —
 and their `η` is optimistic.)  The remainder of every fixed-order class grows with `n`.  For
 comparison at `n = 5`: `g_03` — single torsions 0.58 / 2.1, residue pairs 0.12 / 1.4;
 Coulomb + `g_GB` — torsion pairs 0.73 / 10.1.
@@ -587,7 +626,7 @@ answer the pilot has to "is `βη` small compared with 1": **in RMS yes for thes
 (`βη_RMS = 0.2–0.9`), in sup norm no from three residues on (`βη_sup = 2–16`).**
 
 *Slope bound.*  The fitted radial functions have slopes up to `L_s = 0.6–0.9 kcal/mol/Å²`
-(`L_r = 3.7–4.4 kcal/mol/Å`) for `g_GB`, at short range; for a `q_pq_q/r` tail the slope in
+(`L_r = 3.7–4.4 kcal/mol/Å`) for `g_GB`, at short range; for a `q_p·q_q/r` tail the slope in
 `s = r²` decays like `r⁻³`.  A uniform bound `L` in `s` up to the largest distance
 (`S_c ≈ 10³ Å²`, no cutoff exists for electrostatics) makes the dimensionless ratio `zLS_c/ε₁`
 of Proposition 11.49 of order `10⁴–10⁵` for `ε₁ ∼ 0.1 kcal/mol` per atom: its bounds are vacuous
@@ -608,8 +647,9 @@ minimum):
 | 6 | helix | helix | 0 / 0 | 5.48 / 3.63 | 9.27 / 0.37 | 0.0026 | 0.14 | 7 / 38 / 512 |
 
 `λ* = min_y (E(y) − E(x*))/d(x*, y)` with `d` the per-torsion envelope of `g_GB`: one evaluation
-certifies iff `λ* ≥ 1`.  Single-flip neighbours of the minimiser exist at every site for
-`n ≤ 4` and at 4 of 10 and 4 of 12 sites in the helix (`n = 5, 6`); none of them is sharp.
+certifies iff `λ* ≥ 1`.  Clash-free single-flip neighbours exist at every site of the β and
+PPII minimisers (`n ≤ 5`) and at 4 of 10 and 4 of 12 sites of the helix (minimiser of `f` at
+`n = 5`, of both at `n = 6`); no site with a neighbour is sharp.
 For the force-field differences at `n = 5` (minimum of `f`: helix): `λ*(f) = 0.275` (`g_99`),
 0.043 (`g_19`), 0.029 (`g_03`), all attained by the all-β conformation, ten torsions and 0.89
 kcal/mol away — and the minimiser does change: **ff99SB puts the all-β conformation 2.33
@@ -845,14 +885,16 @@ for synthetic and learned residuals on lattice chains.  The data of this workstr
 clash scores) can be dropped into the same pipeline as a fourth case, "a real implicit-solvent
 term off-lattice".  Two things your design should take from the pilot: (a) a sup-norm
 remainder fitted on a sample is not a bound — the unconstrained Chebyshev fit had held-out
-maximum 10.2 kcal/mol at training `η = 1.06`, and on an exhaustively enumerated domain the
-maximum was more than twice that of a random held-out sample; report maxima over *enumerated*
-domains only; (b) one pair type is useless for electrostatics — the type set must at least
+maximum 10.2 kcal/mol at training `η = 1.06`, and on exhaustively enumerated grids the
+maximum remainder of the explicit pair-additive surrogate was 1.4–1.5 times that on a random
+held-out sample of the same chain length (4.8 against 3.5, 9.3 against 6.1 kcal/mol); report
+maxima over *enumerated* domains only; (b) one pair type is useless for electrostatics — the type set must at least
 separate the signs of the partial charges (Amber types: 36 pairs), and the slope bound must
 depend on distance.
 
 **E-3 (exact covers for the real instances).**  The cover brackets of Statement 6(b) come
 from forced points and a greedy heuristic.  Your integer-programming cover code with certified
-dual bounds (ENG-RES-0002) would close them: instances `an7_*.json` list the inputs; the
-largest has 28 843 points with mean set size 35 (sparse).  Expected outcome: the exact
+dual bounds (ENG-RES-0002) would close them: the inputs are `data/grid_*.npz` (energies, clash
+scores) and the constants in `out/an7_*.json`; the largest instance has 28 843 points with mean
+set size 35 (sparse).  Expected outcome: the exact
 certificate size of a real solvation residual in the per-torsion format for 3, 4, 5 residues.

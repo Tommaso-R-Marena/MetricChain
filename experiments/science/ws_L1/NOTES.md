@@ -106,3 +106,54 @@ So Theorem 7(ii)–(iii) can be proved with NO Pinsker hypothesis.
 SECOND OBSERVATION: the brief's "purely algebraic step" (4T² ≤ J, J ≤ ωT ⟹ T ≤ ω/4, J ≤ ω²/4)
 is FALSE as literally stated: T = J = 0, ω = −1.  It needs ω ≥ 0 (then T ≥ 0 is not needed).
 Harmless for the note (ω = β·osc(r) ≥ 0).
+
+## 20:10 Target 4 DONE — `MaxEntStability.lean` (checks first time, 33 s, no warnings)
+
+ALL of Theorem 7 (i)–(v) machine-checked, NO Pinsker hypothesis:
+`symmKL_eq_of_logRatio` (algebraic core of (i)), `two_mul_sub_div_add_le_log_sub`,
+`sq_div_add_le_mul_log`, `symm_pinsker` (4 TV² ≤ KL(p‖q)+KL(q‖p), positive probability vectors),
+`abs_sum_sub_le_osc_mul_tv`, `pinsker_closing` (needs 0 ≤ ω), `pinsker_closing_needs_nonneg`
+(counterexample T = J = 0, ω = −1), `pythagoras_expFam`, `theorem7_i_energies`,
+`theorem7_ii_iii_energies`, `theorem7` (note's form, (i)–(v) bundled), `expFam_isIProjection`
+(exponential form with matching moments ⟹ minimiser of KL(·‖μ₀) on the moment class),
+`tv_bounded_perturbation` (no-feature instance; non-vacuity).
+`#print axioms`: 11 × `[propext, Classical.choice, Quot.sound]`.
+Differences from the note: ν is ASSUMED of exponential form with matching Φ-means (that the
+I-projection has this form — Csiszár — is not formalised; the converse is); ω replaced by any
+hi − lo with lo ≤ r ≤ hi; β ≥ 0 explicit.
+
+Re-checked after edits: IdentifiedSets.lean (30 s), Separation.lean (21 s): clean, no warnings.
+
+## 20:15 Decision on extras (targets 1–4 complete)
+
+Order: (E1) assemble Theorems 4 and 4′ as real query lower bounds with the marginal oracle
+modelled explicitly (needs an oracle-aware algorithm structure: the theory division's
+`QueryAlgorithm.consistent` is FALSE for an algorithm that also sees an oracle answer, so their
+`expected_queries_ge_packing` / `nonadaptive_expected_queries_ge` cannot be applied verbatim);
+(E5) Theorem 5 bracket + width identity; (E8) Theorem 7′ closing step; (E2) Pinsker proper;
+(E3) Theorem 3.
+
+## 21:00 Extra E1 DONE — `MarginalOracle.lean`: Theorems 4 and 4′ assembled in full
+
+(878 → ~960 lines; checks in 15–26 s; clean after adding `omit`s.)
+Model: an oracle-assisted algorithm = family `alg ω o : MetricChain.QueryAlgorithm (ι → F)` of the
+theory division's query algorithms indexed by the oracle answer `o`; run on g with
+`o = marginalOracle β k g`.  On a family with common answer o₀ the algorithm is the plain
+`alg ω o₀`, correct on the class restricted to {O = o₀}: so both theorems are COROLLARIES of the
+theory division's `expected_queries_ge_packing` and `nonadaptive_expected_queries_ge`
+(imported read-only; their axioms: standard three).
+Why a new model was needed (finding for the report): the note's proof of Theorem 4′ says "the
+algorithm restricted to the family is non-adaptive in the sense of Theorem 11.45(a)".  As
+machine-checked, 11.45(a) (`nonadaptive_expected_queries_ge`) is about `QueryAlgorithm`, whose
+consistency axiom is FALSE for an algorithm that also sees an oracle answer depending on g, and
+it assumes non-adaptivity for ALL g.  The argument is repaired by indexing by the oracle answer
+and restricting the class to the fibre {O = o₀}; nothing else changes.
+Declarations: `distToCoset_lipschitz`, `distToCoset_add_mem`, `card_centres_near`,
+`HammingLip` (= theory `Admissible` for c·d_H, `hammingLip_iff_admissible` is `Iff.rfl`), `logZ`,
+`gibbs`, `marginalOracle`, `marginalOracle_singleton` (sanity: order ≥ 1 gives one-site marginals),
+`symDip`, `dipAt`, `codeSubmodule`, `marginalOracle_of_invariant`, `marginalOracle_eq_of_invariant`,
+`theorem4_adaptive_marginal_oracle`, `theorem4'_nonadaptive_marginal_oracle` (any finite field),
+`theorem4_binary_cube`, `theorem4'_binary_cube` (F₂ⁿ, with 2^n; over ZMod 2 "linear" = contains 0 and
+closed under +).  `#print axioms`: `[propext, Classical.choice, Quot.sound]` for all.
+The file repeats the proofs of Lemma 1 and of the separation inequality verbatim (files here do
+not import each other).

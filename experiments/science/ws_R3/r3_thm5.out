@@ -1,0 +1,4 @@
+450 instances (n=10): bracket violations 0; max |width - J| = 3.2e-14
+sampled lower end (N=25, delta=0.1): empirical failure rate 0.0001 over 90000 trials (must be <= 0.1)
+corollary: n=1000, b=1.0, eps=0.5: N = 4605.170 evaluations  (extensive accuracy eps = 0.001 n needs less than one sample: a single evaluation suffices)
+corollary: n=1000, b=1.0, eps=50.0: N = 0.461 evaluations  (extensive accuracy eps = 0.050 n needs less than one sample: a single evaluation suffices)

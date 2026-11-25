@@ -40,9 +40,10 @@ prior (Proposition 7: a white-noise component of fixed variance costs `O(n)` eva
 the annealed regime and essentially `2ⁿ` in the frozen one).  **Negative findings, equally
 important:** (i) in the *sharp* regime the envelope paradigm is cheaper than any kernel
 paradigm (1 evaluation against about `n`; numerics §3.3), and at the sizes that can be
-enumerated (`n ≤ 12`) with oracle-tight envelope constants the two paradigms cost about the
-same — the separation is asymptotic, or needs a safety factor on the constants, which every
-certified envelope has; (ii) no paradigm can be cheap on a benign subclass *and* remain valid
+enumerated (`n ≤ 12`) with oracle-tight envelope constants the two paradigms are within a
+small factor of each other (the smallest envelope covers are 0.4–2.3 times the kernel counts
+up to `n = 11`; best-first search up to 6 times at `n = 12`) — the separation is asymptotic,
+or needs a safety factor on the constants, which every certified envelope has; (ii) no paradigm can be cheap on a benign subclass *and* remain valid
 on the first-order class: that is exactly what the theory division's instance-wise lower
 bounds say when read in the other direction (Proposition 8(c), "no free hedging"), so the
 assumption that replaces the envelope cannot be verified from polynomially many evaluations
@@ -55,8 +56,11 @@ down by `√(M/N)`.  For interacting known parts (direction 3) I define the **LP
 `τ_LP ≤ τ` (Theorem 9): one evaluation certifies `min(f+g)` iff the envelope is below the
 funnel slope `τ` (theory division), and the proof of that fact is a polynomial-size dual
 certificate, checkable by the existing kernel, exactly when the envelope is below `τ_LP`;
-`τ_LP = τ` on trees and for ferromagnetic binary known parts, and fails to equal `τ` in about
-half of frustrated instances.  **Recommendation: combine** — keep the envelope/sharpness
+`τ_LP = τ` on trees and for ferromagnetic binary known parts, and fails to equal `τ` in
+15–95 % of the frustrated instances tried, depending on the strength of the fields.  A small
+by-product fills a cell of the theory division's summary table: in an *additive* class
+randomisation reduces the cost at extensive accuracy from `Θ(n)` to a number independent of
+`n` (Proposition 11, Monte Carlo over sites).  **Recommendation: combine** — keep the envelope/sharpness
 machinery for the part of the landscape where the known part dominates, replace the
 first-order class for the remainder by a linear-information class (ellipsoid or Gaussian
 prior over body-ordered, type-shared features — the form machine-learned interatomic
@@ -387,16 +391,18 @@ independent, `w` white noise with unit variance at every configuration (the rand
 model as a tail: spectral mass `τ²` spread evenly over all `2ⁿ` modes).  Let `A` be an orthogonal
 array of strength 2 with `N` points, `s² = Σ_{i=0}^n (N/τ² + 1/v_i)^{−1} ≤ (n+1)τ²/N`.
 (a) *Recovery is exponentially expensive:* for every design with `N` points the average
-posterior variance is at least `τ²(1 − N/2ⁿ)` (Theorem 3(a)); so is certifying the minimum
-within `ε < τ` with the union-bound interval.
+posterior variance is at least `τ²(1 − N/2ⁿ)` (Theorem 3(a), every eigenvalue being at least
+`τ²/2ⁿ`); hence every certificate that goes through the power function (Theorem 1, Theorem
+6(i)–(ii)) has a width of order `τ` unless `N` is a positive fraction of `2ⁿ`.
 (b) *The free energy is not:* for `x, y ∉ A`, `K_A(x,y) = Σ_i σ_i² χ_i(x)χ_i(y) + τ²·1[x = y]` with
 `σ_i² = (N/τ² + 1/v_i)^{−1}`, hence
 
     ρ₂  ≤  (e^{β²s²} − 1)  +  e^{β²(s²+τ²)} · e^{−H₂(π̂)} / (1 − π̂(A))²,       H₂(π̂) = −ln Σ_x π̂(x)².
 
-So `N ≥ 2(n+1)β²τ²/(δη²)` evaluations certify `ℓ_β(g)` within `−ln(1−η)` with probability `1−δ`
-whenever the Rényi entropy of the *known* Gibbs measure satisfies
-`H₂(π̂) ≥ β²τ² + 1 + ln(4/δη²)` — linear in `n` although no tail of the spectrum is small.
+So `N ≥ 4(n+1)β²τ²/(δη²)` evaluations certify `ℓ_β(g)` within `−ln(1−η)` with probability `1−δ`
+whenever `π̂(A) ≤ ½` and the Rényi entropy of the *known* Gibbs measure satisfies
+`H₂(π̂) ≥ β²τ² + ln(32/δη²)` (then `ρ₂ ≤ 0.45·δη²`) — a number of evaluations linear in `n`
+although no tail of the spectrum is small.
 (c) *In the frozen regime nothing short of enumeration helps* **[H + N]**: for the pure
 random energy model (`a ≡ 0`, `f ≡ 0`) with `β > β_c = (2n ln 2)^{1/2}/τ` the unevaluated
 configurations contain the configuration of largest weight with probability `1 − N/2ⁿ`, and
@@ -427,10 +433,11 @@ part of a Bayesian guarantee that rests most heavily on the prior, because it is
 
     | g(x) − ĝ_A[g](x) |  ≤  B P_A(x) + η (1 + Λ_A(x)),
 
-so the minimum is known within `B max P_A + η(1 + max Λ_A)` and `ln Z` within `β` times that;
-and no algorithm can do better than `η` (the class contains the constants `±η`).  For a
-random remainder with independent values of variance `η²` the corresponding term is
-`η (1 + Σ_a λ_a(x)²)^{1/2}`.
+so the minimum is known within `B max P_A + η(1 + max Λ_A)` and `ln Z` within `β` times that.
+A floor of order `η` cannot be removed by more evaluations short of evaluating every
+configuration within `η` of the minimum (the spikes `−η·1_{{x}}` are in the class).  For a
+random remainder with independent values of variance `η²` the corresponding term has
+standard deviation `η (1 + Σ_a λ_a(x)²)^{1/2}`.
 (b) *A first-order remainder costs the first-order price.*  If a class `𝒢` contains the
 first-order class of an envelope `d₀` (in particular `𝒢 = 𝔹(K,B) + Lip(d₀)`), every lower bound
 of the theory division for `Lip(d₀)` holds for `𝒢`: Theorems 11.22–11.25 (`exists_query_ne`,
@@ -478,7 +485,7 @@ for chains the droplet criterion (their Theorems 11.7, 11.39).  The function
 
 `LP` the local-polytope (pairwise) relaxation.
 
-**Theorem 9 (the sharpness certificate) [P; verified numerically on 1 360 instances, §3.7].**
+**Theorem 9 (the sharpness certificate) [P; verified numerically on 1 280 instances, §3.7].**
 (a) `τ_LP ≤ τ`, and `{t : LP(f^t) = f(x*)} = (−∞, τ_LP]`.
 (b) *Dual form.*  `τ_LP` is the value of one linear programme: the largest `t` for which there
 are messages `φ` such that, in the reparametrised model `θ̃ = θ^φ`, every pair term is minimal
@@ -564,6 +571,70 @@ tight-binding site energies converge at rates controlled by the gap and the temp
 has a useful norm in such a class is the question of the sibling workstream P of this
 division; this report only says which *kind* of class makes the evaluation count polynomial.
 
+*The first-order format with decaying constants* **[P, immediate]**.  For completeness, the
+literal analogue of "summable product weights" inside the theory division's own format: if
+`d = Σ_i c_i[x_i ≠ y_i]` and `D(ε) = min{D : Σ_{i>D} c_i ≤ ε/2}` (sites ordered by decreasing `c_i`),
+then evaluating `g` on the `k^{D(ε)}` configurations of the first `D(ε)` sites (the others at a
+reference state) determines `min(f+g)` within `ε/2` for every admissible `g`, because
+`|g(x) − g(x_{≤D}, ref)| ≤ Σ_{i>D} c_i`.  The count is independent of `n` iff `Σ_i c_i < ∞` and
+polynomial in `1/ε` iff the `c_i` decay geometrically.  The lever arm gives the opposite:
+constants that grow along the chain.
+
+### 2.8 Randomisation in a linear class (an answer to theory report §12, item 9(c), for additive features)
+
+The theory division's summary table has, for classes that are linear in features, the entry
+"randomised: no lower bound known (a generic evaluation sees every perturbation)".  For
+additive features none can exist that grows with the system size at extensive accuracy:
+
+**Proposition 11 (Monte Carlo over sites) [P; checked in §3.8].**  Let `X = ∏_i X_i`,
+`f = Σ_i φ_i(x_i)`, and let the class be the additive residuals `g = c₀ + Σ_i γ_i(x_i)` with
+`γ_i(x⁰_i) = 0` and `|γ_i| ≤ w` (the box class with the features `1[x_i = s]`).  Then
+`min(f+g) = g(x⁰) + Σ_i t_i` and `β⁻¹ ln Z_β(f+g) = −g(x⁰) + Σ_i t′_i` (product reference) with site terms
+`t_i = min_s(φ_i + γ_i)(s)`, `t′_i = β⁻¹ ln E_s e^{−β(φ_i+γ_i)(s)}`, each confined to an interval of
+length at most `R ≤ 2w`.  The algorithm that draws `k` sites uniformly without replacement,
+evaluates `g` at `x⁰` and at the `k(q−1)` single-site modifications of `x⁰` at those sites
+(`q` states per site), and returns `(n/k)·Σ_{sampled} t_i`, is within `ε₁n` of the truth with
+probability at least `1 − δ` on the whole class as soon as
+
+    k  ≥  (R² / 2ε₁²) · ln(2/δ),
+
+independently of `n`.  A deterministic algorithm whose error is at most `ε₁n` on the class
+needs, for binary sites and `f = e|x|` (`R = w − e`), at least `n(1 − 4ε₁/R)` evaluations at the
+zero residual.
+
+*Proof.*  Additivity gives `γ_i(s) = g(x⁰ with site i set to s) − g(x⁰)` exactly; Hoeffding's
+inequality for sampling without replacement.  Deterministic bound: at the zero residual the
+coefficient vectors consistent with `N` evaluations form the intersection of the box with a
+subspace of codimension at most `N`; it has a vertex with at least `n − N` coordinates equal
+to `±w`, and that vertex or its negative lowers the minimum by at least `(n−N)(w−e)/2`, which
+must not exceed `2ε₁n` because the algorithm returns the same number for it and for zero. ∎
+
+*Scope.*  This is Monte Carlo summation and nothing more; it needs exact additivity (for
+pair terms the minimum is not a sum over sites), and at a *fixed absolute* accuracy it gives
+`k ≈ n²R²/ε²`, worse than learning all `n` coefficients.  Its point is the accounting: in a
+linear class, at the extensive accuracies for which the theory division's exponents are
+stated, randomisation turns `Θ(n)` into `O(1)` — the opposite of the first-order class, where
+it turns `2^{n(1−o(1))}` into a smaller exponential and has a threshold.
+
+### 2.9 What each guarantee means to a user
+
+| | what is assumed | what is delivered | what can be checked independently | what happens when the assumption fails |
+|---|---|---|---|---|
+| **W** first-order envelope (theory division) | `g(x) − g(y) ≤ d(x,y)` for *all* pairs; the constants | an interval that contains `min`/`ln Z` for every admissible `g`; the check is a machine-verified kernel | the certificate itself; the envelope can be *refuted* by two evaluations, never confirmed by fewer than all pairs | the bound is off by at most the violation times a distance: graceful |
+| **H** ellipsoid (§2.1–2.3) | `‖g‖_K ≤ B`: a spectrum (which interaction orders, how much) and a size | an interval for every member of the ball; `B_A P_A` is a computation | recomputation; the ball can be refuted (`yᵀK_AA⁺y > B²`), not confirmed | a sup-norm remainder `η` costs `η(1 + Λ_A)` (Prop. 8(a)); a dip costs its full depth, undetected |
+| **B** Gaussian prior (§2.4) | `g` is a draw from `GP(0,K)`; hyperparameters | an interval of posterior probability `≥ 1 − δ`; for `ln Z` also contributions that were never observed (self-averaging) | recomputation; goodness of fit on the design data and on held-out points sees wrong scales and missing smooth terms (§3.5), not dips | coverage can fall to near zero on the affected instances, silently |
+| **C** population calibration (split conformal; §3.5) | the new molecule is exchangeable with a calibration set for which the truth is known | marginal coverage `1 − α` over molecules, for any model and any residual | coverage on further known cases | nothing is promised for an individual instance; fails under distribution shift |
+
+A sentence for each.  **W**: "if the constants are right, the answer is right — and for a long
+chain the constants make the computation impossible."  **H**: "if the residual has no
+component outside a stated low-order model larger than `B`, the answer is right, at
+polynomial cost — and whether it has is a physical question."  **B**: "the answer is right
+with probability 95 % *if* residuals of this kind are drawn like this; it is the only
+paradigm that can use what it has not measured."  **C**: "of molecules like the ones we
+checked, 95 % will be inside their intervals."  No row verifies its own assumption from
+polynomially many evaluations, and by Proposition 8(c) no cheaper row could exist that is
+safe against the first row's class.
+
 ---
 
 ## 3. Numerics
@@ -611,3 +682,420 @@ non-leader mass is below the bound `Σ_U v_U min(1, rank(U)/N₀)` of the proof 
 (e.g. `0.0355 ± 0.0005` against `0.0409` at `n = 12`, `ρ = 0.9`, `N₀ = 256`).  A first attempt with
 20 codes per cell exceeded the bound by Monte Carlo noise — the non-leader mass is
 heavy-tailed (a rare code aliases a main effect with the constant).
+
+### 3.3 The same toy problem under both paradigms — `n5_compare.py`, `n5b_additive.py`
+
+**Toy problem.**  `X = {0,1}ⁿ`, known part `f(x) = e·|x|` (ground state `0`, excitation energy `e`
+per site), target `min(f+g)` within the width `ε = 0.25`, `δ = 0.05` where a probability is
+involved.  Three procedures, none of which is given the instance as a hint:
+
+* **W (first-order envelope, worst case).**  Class `{g : |g(x)−g(y)| ≤ Σ_i c_i[x_i≠y_i]}` with
+  `c_i = κ⁻¹·max_x |g(x) − g(x⊕e_i)|`.  `κ = 1` are the *smallest valid* constants — an oracle
+  choice, the best case for W; `κ = ½` is a safety factor 2.  Reported: the fractional covering
+  number (a lower bound for every algorithm up to `1−2δ`), a greedy cover (an upper bound on
+  the smallest certificate), and the number of evaluations of best-first search.
+* **H (ellipsoid, worst case).**  Ball `𝔹(K_v, B)` of the generating spectrum with
+  `B = κ⁻¹‖g‖_v` (again oracle-flavoured).  Algorithm: evaluate the minimiser of
+  `f + ĝ_A − B_A P_A` until `UB_A − LB_A ≤ ε` (Theorem 1).
+* **B (Gaussian prior, `1−δ` credible).**  Same algorithm with the band
+  `z_t P_A`, `z_t = (2 ln(|X| t² π²/3δ))^{1/2}` (valid simultaneously for all steps and points).
+
+**Part I: a residual with pair interactions** (isotropic spectrum on orders 1 and 2,
+`σ₁² = 0.04n`, `σ₂² = 0.02n`; the realised `c_i` are `1.07–1.37` and grow like `√n`; brute force,
+medians over 5 instances; the kernel space has dimension `M = n + C(n,2) = 21, …, 78`).
+
+| κ | e | evaluations | n=6 | n=7 | n=8 | n=9 | n=10 | n=11 | n=12 |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | 0 | W: fractional cover | 10 | 13 | 17 | 28 | – | – | – |
+| 1 | 0 | W: greedy cover | 12 | 16 | 22 | 38 | 77 | 107 | – |
+| 1 | 0 | W: best-first search | 19 | 30 | 35 | 65 | 136 | 174 | 336 |
+| 1 | 0 | H: kernel best-first | 15 | 18 | 21 | 32 | 40 | 47 | 57 |
+| 1 | 0 | B: Bayesian best-first | 20 | 26 | 35 | 39 | 53 | 57 | 70 |
+| 1 | 0.5 | W: greedy cover / best-first | 5 / 14 | 11 / 19 | 16 / 30 | 19 / 34 | 34 / 58 | 44 / 71 | – / 156 |
+| 1 | 0.5 | H / B | 9 / 12 | 15 / 23 | 21 / 30 | 23 / 31 | 34 / 45 | 35 / 45 | 48 / 57 |
+| 1 | 1 | W: greedy cover / best-first | 3 / 4 | 3 / 6 | 6 / 12 | 6 / 13 | 10 / 16 | 15 / 30 | – / 58 |
+| 1 | 1 | H / B | 7 / 8 | 8 / 11 | 10 / 11 | 12 / 11 | 16 / 19 | 23 / 18 | 33 / 31 |
+| 1 | 2 (sharp) | W: cover = best-first | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| 1 | 2 (sharp) | H / B | 1 / 1 | 6 / 8 | 9 / 9 | 10 / 9 | 11 / 11 | 12 / 12 | 13 / 13 |
+| ½ | 0 | W: fractional cover | 38 | 51 | 84 | 157 | – | – | – |
+| ½ | 0 | W: greedy cover | 40 | 57 | 96 | 183 | 357 | 567 | – |
+| ½ | 0 | W: best-first search | 45 | 68 | 118 | 223 | 428 | 763 | 1423 |
+| ½ | 0 | H (= M) / B | 21 / 20 | 28 / 26 | 36 / 35 | 45 / 39 | 55 / 53 | 66 / 57 | 79 / 70 |
+| ½ | 0.5 | W: greedy cover / best-first | 22 / 30 | 42 / 53 | 79 / 98 | 103 / 144 | 184 / 246 | 281 / 393 | – / 848 |
+| ½ | 0.5 | H / B | 21 / 12 | 28 / 23 | 36 / 30 | 45 / 31 | 55 / 45 | 66 / 45 | 79 / 57 |
+| ½ | 1 | W: greedy cover / best-first | 13 / 17 | 21 / 33 | 38 / 45 | 45 / 58 | 70 / 87 | 126 / 157 | – / 381 |
+| ½ | 1 | H / B | 14 / 8 | 24 / 11 | 29 / 11 | 39 / 11 | 49 / 19 | 61 / 18 | 75 / 31 |
+| ½ | 2 | W: greedy cover / best-first | 4 / 5 | 4 / 8 | 8 / 11 | 9 / 13 | 10 / 22 | 14 / 31 | – / 51 |
+| ½ | 2 | H / B | 7 / 1 | 8 / 8 | 9 / 9 | 12 / 9 | 13 / 11 | 29 / 12 | 46 / 13 |
+
+In all 280 runs of H and all 280 runs of B the true minimum was inside the reported interval.
+What the table shows, and what it does not:
+
+1. **Sharp regime (`e = 2 > c`, `κ = 1`): the envelope paradigm wins** — one evaluation (the
+   theory division's Theorem 11.7) against about `n + 1` for H and B.  The ellipsoid with radius
+   `‖g‖` lets a single main effect take the whole budget, so it is *larger* in coordinate
+   directions than the oracle-tight Lipschitz box, and the sharp-site theorem has no
+   counterpart of the same strength.
+2. **Non-sharp regime with oracle-tight constants (`κ = 1`, `e ≤ 1`): no dramatic difference up
+   to `n = 12`.**  The smallest covers of W are 0.4–2.3 times the counts of H; W's search grows
+   by about `×1.6` per site at `e = 0`, H and B like `M ≈ n²/2`.  The envelope's exponent is
+   small (`0.19` nats per site at `e/c = ½`), so the exponential is not visible at sizes that can
+   be enumerated — exactly the caution the theory division attaches to its own exponents.
+3. **With a safety factor 2 on both sides (`κ = ½`) the separation is visible:** W's search
+   grows by `×1.8` per site (1 423 evaluations at `n = 12`, a third of the cube); H ends up
+   evaluating as many points as the kernel space has dimensions (79 for `M = 78`); B stops at 70.  A certified envelope always has `κ < 1`; the verified
+   per-torsion constants of the theory report have `κ` far below `½`.
+4. B needs fewer evaluations than H as `n` grows because its band is `z_t ≈ 5–6.5` standard
+   deviations where H's is `B_A ≈ κ⁻¹√M` (`8.8` and `17.7` at `n = 12`).
+
+**Part II: the additive toy, any `n`.**  `g(x) = Σ_i γ_i x_i`, `γ_i ~ N(0, 0.16)` (the main-effect part
+of the prior above), `c_i = |γ_i|/κ`.  For W the entry is the machine-checked lower bound on the
+size of *every* `ε`-certificate — `ln N ≥ max_t [Σ_i max_v r_i(t; v) − tε]`, theory report Theorem
+11.8 (`product_exp_weights` **[V]**), which bounds every algorithm up to the factor `1 − 2δ`
+(`expected_queries_ge_exp_weights_min` **[V]**) — evaluated by my own code, median of 5 draws.
+For H and B the kernel of additive functions has rank `n + 1`, and `n + 1` evaluations on a
+unisolvent set determine `g`: the cost is `n + 1` at every accuracy.
+
+| `ln N_W ≥` | n=10 | 20 | 50 | 100 | 200 | 500 | 1000 | rate/site |
+|---|---|---|---|---|---|---|---|---|
+| `κ = 0.9`, `e = 0` | 0.0 | 0.0 | 0.5 | 1.3 | 3.4 | 9.4 | 19.6 | 0.020 |
+| `κ = 0.7`, `e = 0` | 0.3 | 0.8 | 2.9 | 6.1 | 13.1 | 33.6 | 68.3 | 0.068 |
+| `κ = 0.5`, `e = 0` | 1.1 | 2.2 | 6.2 | 12.5 | 26.0 | 65.7 | 132.7 | 0.133 |
+| `κ = 0.5`, `e = 0.4` | 0.2 | 1.7 | 5.0 | 10.1 | 20.1 | 48.3 | 107.2 | 0.107 |
+| `κ = 0.25`, `e = 0` | 2.5 | 4.9 | 12.7 | 24.9 | 50.7 | 127.4 | 255.9 | 0.256 |
+| zero residual, `c = 0.4`, `e = 0.2` | 1.0 | 2.8 | 8.3 | 17.7 | 36.4 | 92.4 | 185.8 | 0.186 |
+| `ln N_H = ln N_B = ln(n+1)` | 2.4 | 3.0 | 3.9 | 4.6 | 5.3 | 6.2 | 6.9 | — |
+
+So at `n = 100` the envelope paradigm needs at least `e^{12.5} ≈ 2.7·10⁵` evaluations with a
+safety factor 2 and `e^{24.9} ≈ 6·10¹⁰` with a factor 4, against 101; the crossover (first `n` of
+the grid at which the lower bound exceeds `n+1`) is `n = 500, 100, 50, 10–20` for
+`κ = 0.9, 0.7, 0.5, 0.25`.  With `κ = 1` the bound is zero for every `n` — not a defect of the
+bound: with oracle-tight constants and an additive residual the envelope is saturated between
+`argmax g` and `argmin g`, and two evaluations determine `g` on every geodesic, i.e. everywhere
+(the theory report notes that `κ < 1` is needed in Theorem 11.9).  Checks: `n5_compare.py`
+part II, an independent non-vectorised implementation with a finer grid of slopes and weights,
+gives `12.73` and `26.42` at `n = 100`, `200` (`κ = ½`, `e = 0`) where the table has `12.5` and `26.0` —
+every choice of slope and weights is a valid lower bound, the table has the coarser, lower
+values; on 12 small additive instances the product bound is below the exact fractional
+covering number; the zero-residual row reproduces the theory division's exponent
+`R*(½) = 0.1882` up to the `tε` term and the grid (independent replication of that number).
+
+**What the comparison means.**  The cost under W is governed by `κ` (how much slack the
+certified envelope has over the truth) and by sharpness; the cost under H by `B/‖g‖` and the
+dimension `M` of the kernel space; under B by `M` and by the prior being right.  W is the
+cheapest of the three when the known part is sharp and its constants are tight; it is the
+only one whose cost is exponential in `n`, at any fixed slack.
+
+### 3.4 Bayesian certificates: coverage and width — `n4_bayes.py`
+
+Prior: orders 1–3 with `σ_m² = n·(0.04, 0.02, 0.004)`; `f = 0.5|x|`; linear designs (dual BCH,
+`m = 1`: 8 or 16 points; `m = 2`: 64 or 256 points); 300 prior draws per cell (120 for `n = 15`);
+"sampled" = the 95 % posterior interval from 400 posterior samples (150 for `n = 15`).
+
+| n | design | `max P_A` | `ln Z`, β=½: analytic / sampled width | `ln Z`, β=2 | `min`: analytic / sampled width |
+|---|---|---|---|---|---|
+| 10 | m=1, N=16 | 0.65 | 1.81 / 0.089 | 7.66 / 1.21 | 2.22 / 1.13 |
+| 10 | m=2, N=256 | 0.16 | 0.43 / 0.0064 | 1.74 / 0.20 | 0.56 / 0.35 |
+| 12 | m=2, N=256 | 0.21 | 0.57 / 0.0076 | 2.33 / 0.25 | 0.81 / 0.51 |
+| 15 | m=2, N=256 | 0.30 | 0.81 / 0.0104 | 3.33 / 0.37 | 1.29 / 0.71 |
+
+Coverage: the analytic intervals of Theorem 6(i),(ii) covered in every draw of every cell;
+the sampled intervals covered in `0.925–1.0` of the draws for `ln Z` (mean `0.959`) and
+`0.917–1.0` for the minimum (mean `0.970`) — nominal `0.95`, with Monte Carlo error from a
+posterior sample shared by all draws of a cell.  *Reading:* for the minimum the union-bound
+interval is within a factor 2 of the true posterior width; for `ln Z` at high temperature the
+true posterior is 20–80 times narrower than the sup-norm interval (the unlearned order-3
+tail self-averages; Theorem 6(iii)), and still 6–9 times narrower at `β = 2`.  The widths grow
+with `n` at a fixed design order because the tail variance is extensive: a fixed accuracy
+eventually needs the next order, in agreement with Corollary 4.
+
+**White tail (Proposition 7)**: prior = main effects + white noise of variance `τ² = 1` at every
+configuration, `n = 12`, design `m = 2` (256 points; for this prior it acts as a replicated
+main-effects design), 100 draws:
+
+| β | `β²τ²` | `H₂(ν)` | second-moment width (Thm 6(iv)) | true 95 % posterior spread | sup-norm width (Thm 6(i)) |
+|---|---|---|---|---|---|
+| 0.5 | 0.25 | 8.0 | 0.16 | 0.06 | 2.9 |
+| 1 | 1 | 7.3 | 0.60 | 0.24 | 6.1 |
+| 2 | 4 | 5.7 | vacuous (`ρ₂ = 0.22 > δ`) | 1.1 | 13.2 |
+| 4 | 16 | 3.5 | vacuous | 4.6 | 30.5 |
+
+(coverage of the second-moment interval 100/100 where it is not vacuous; with 16 points
+instead of 256 the widths at `β = ½, 1` are `0.36`, `1.79`.)  At `β = ½` 256 evaluations out of 4 096
+pin `ln Z` to `±0.08` although every unevaluated energy carries an unlearnable unit-variance
+term; no certificate through the power function can be narrower than `2.9`.  At `β = 4` (the
+random energy model's critical value is `β_c = 4.08` here) the posterior spread is `4.6` and
+nothing short of enumeration reduces it.  The cube is small (`H₂ ≤ 8.3` nats); the certificate
+improves exponentially in `n` at fixed `β²τ²` by the bound of Proposition 7(b).
+
+### 3.5 When the assumption fails — `n6_misspec.py`
+
+`n = 10`, `f = 0.5|x|`, target `min(f+g)`; assumed prior: constant + orders 1, 2
+(`σ₁² = 0.4`, `σ₂² = 0.2`); design `m = 1` (16 evaluations); certificate = 95 % posterior interval
+(mean half-width `0.5`).  600 instances per truth; split conformal with 300 calibration
+instances whose true minimum is known (score `|truth − centre|/halfwidth`), tested on the other
+300.  "Fit test": `yᵀK_AA⁻¹y` against `χ²₁₆` on the *same* 16 evaluations; "held-out": mean squared
+standardised residual at 32 further random points (rejection rates at nominal 5 %; the
+held-out test over-rejects, 9 %, because the residuals are correlated).
+
+| truth | coverage of the nominal interval | conformal factor | conformal coverage | fit test rejects | held-out rejects |
+|---|---|---|---|---|---|
+| as assumed | 0.948 | 1.00 | 0.957 | 0.06 | 0.09 |
+| pair variance ×4 | 0.557 | 2.79 | 0.967 | 0.77 | 0.99 |
+| an unmodelled order-3 term (`σ₃² = 0.2`) | 0.770 | 2.01 | 0.960 | 0.29 | 0.89 |
+| Student-`t₃` coefficients, same variances | 0.930 | 1.00 | 0.940 | 0.11 | 0.14 |
+| a dip (depth 2, slope 1: 11 of 1024 configurations) at a low-lying state in 20 % of the instances | 0.795 overall: **0.089 with a dip**, 0.957 without | 2.84 | 0.953 overall: **0.767 with a dip**, 1.00 without | 0.08 (with a dip) | 0.24 (with a dip) |
+
+*Reading.*  A wrong *scale* or a missing *smooth* component is visible in the data and is
+repaired by recalibration.  A dip is neither: on the instances that have one the certificate
+is wrong 91 % of the time by a mean of `1.1` (twice the half-width), the design data carry
+almost no trace of it (8 % rejections against a 6 % baseline), 32 further evaluations see it
+in a quarter of the cases at this size (the dip occupies 1 % of the cube; the fraction is
+exponentially small in `n`), and conformal recalibration reaches its guarantee — marginal
+coverage over the population — by widening every interval 2.8 times while still failing on a
+quarter of the dipped instances.  This is Proposition 8(c) in numbers.
+
+*Amplification of a sup-norm remainder (Proposition 8(a)).*  Largest Lebesgue constant
+`max_x Σ_a |λ_a(x)|` of the designs: `2.5, 4.3, 2.9, 4.7, 3.3` for
+`(n, m) = (7,1), (7,2), (10,1), (10,2), (12,1)` — that is `0.6–0.9·√M` — while the `ℓ²` norm of the
+weights is `(M/N)^{1/2} = 1.0, 0.67, 0.83, 0.47, 0.90` exactly.
+
+### 3.6 The ellipsoid's worst member for `ln Z`, and what a dip costs an ellipsoid — `n10_extras.py`
+
+(I) Proposition 5′, `b = 1`, `s₂ = ¼` (so `βJ = β`): numerical supremum of `ln E exp(−βr)` over the
+order-2 ball (ascent from 12 random, 4 localised and the Curie–Weiss start) against the
+Curie–Weiss member:
+
+| β | n=8: num / CW | n=10 | n=12 | mean-field `n·max_m[…]` (n=12) | sup-norm bound (n=12) |
+|---|---|---|---|---|---|
+| 0.4 | 0.0588 / 0.0588 | 0.0580 / 0.0580 | 0.0575 / 0.0575 | 0 | 2.4 |
+| 0.8 | 0.313 / 0.313 | 0.321 / 0.321 | 0.328 / 0.328 | 0 | 4.8 |
+| 1.2 | 0.925 / 0.925 | 1.012 / 1.012 | 1.092 / 1.092 | 0.29 | 7.2 |
+| 2.4 | 4.82 / 4.82 | 5.85 / 5.85 | 6.88 / 6.88 | 6.19 | 14.4 |
+| 4.0 | 11.15 / 11.15 | 13.77 / 13.77 | 16.38 / 16.38 | 15.69 | 24.0 |
+
+(the high-temperature limit `−½ln(1−βJ) − βJ/2` is `0.055` at `βJ = 0.4`).  No start produced a
+value above the Curie–Weiss member.
+(II) Hilbert norm of the dip `−(3 − d_H(x,0))₊` under the product spectrum with `ρ = 1 − 1/n`
+(`λ = ½`, unit variance): `3.9·10³, 9.3·10⁴, 2.3·10⁶, 6.1·10⁷, 1.7·10⁹` for `n = 8, 10, 12, 14, 16`;
+a typical prior draw has norm `2^{n/2} = 16 … 256`, an additive function of the same depth
+`3.3`.  With `λ = 2`: `18, 112, 743, 5.2·10³, 3.9·10⁴`.
+
+### 3.7 Funnels with interacting known parts — `n9_lp_funnel.py`
+
+Binary pairwise known parts `Σ h_i s_i + Σ J_ij s_i s_j` with Gaussian couplings, a fraction `p` of
+them antiferromagnetic, Gaussian fields of scale `h`; `τ` by enumeration, `τ_LP` by the linear
+programme of Theorem 9(b) (HiGHS).  `τ_LP ≤ τ` in all 1 280 instances.
+
+| family | `p` | field | `τ_LP = τ` | LP tight at `x*` (`τ_LP ≥ 0`) | median `τ` / `τ_LP` |
+|---|---|---|---|---|---|
+| 4×4 grid | 0 | 0.5 and 2 | 100 % | 100 % | 0.13 / 0.13; 0.24 / 0.24 |
+| 4×4 grid | 0.1 | 0.5 | 25 % | 55 % | 0.10 / 0.01 |
+| 4×4 grid | 0.3, 0.5 | 0.5 | 7 %, 5 % | 28 %, 38 % | 0.08 / −0.06; 0.15 / −0.05 |
+| 4×4 grid | 0.1–0.5 | 2 | 80–85 % | 93–100 % | 0.27–0.38 / 0.25–0.37 |
+| chain of 12 with 6 long-range contacts | 0 | 1 | 100 % | 100 % | 0.26 / 0.26 |
+| chain of 12 with 6 long-range contacts | 0.3, 0.5 | 1 | 55 % (46–48 % with unequal `c_i`) | 74–84 % | 0.14–0.18 / 0.06–0.11 |
+| random trees, 14 sites | 0.5 | 1 | 100 % | 100 % | 0.19 / 0.19 |
+
+So the equality cases of Theorem 9(d) are confirmed, and for frustrated known parts the two
+slopes coincide — the short proof exists whenever the funnel does — in 5 % to 85 % of the
+instances, depending on how strongly the fields dominate.  Exhaustive search over triangles with
+half-integer fields in `[−4, 4]` and couplings `±1` gives the example of Theorem 9(e).
+
+### 3.8 Randomisation in an additive class — `n11_site_mc.py`  (Proposition 11, §2.8)
+
+`w = 1`, `e = 0.2`, `β = 1`, `ε₁ = 0.1`, `δ = 0.05`: `k = 119` sampled sites for the minimum, `153` for
+`ln Z`, i.e. 120 and 154 evaluations for `n = 10³, 10⁴, 10⁵`, where a deterministic algorithm with
+the same error bound needs at least `500, 5 000, 50 000`.  Five adversarial coefficient patterns, 2 000 runs each: failure
+frequency at most `0.9 %` (bound `5 %`).
+
+---
+
+## 4. Prior art
+
+Reading levels (rule 5): **[full]** full text read; **[abs]** abstract read; **[snip]** search-result
+snippet only; **[mem]** from memory — unverified.  I had web search and a page-fetch tool; I
+read no paper in full.  "Not found" below means: not found in the searches listed in §4.3; it
+is not a claim of novelty.
+
+### 4.1 Mapping the theory division's classes onto tractability theory (direction 2)
+
+Information-based complexity (IBC) asks for the number `n(ε, d)` of information operations
+needed in the worst case over a class (or on average over a measure) in dimension `d`, and
+calls a problem *polynomially tractable* if `n(ε,d) ≤ C ε^{−p} d^{q}`, *strongly* tractable if
+`q = 0`; it suffers the *curse of dimensionality* if `n` is exponential in `d` for some fixed `ε`.
+On the cube `{0,1}ⁿ` a variable has two values, so smoothness in one variable is empty and the
+only structure is *which interaction orders carry how much* — the weights.
+
+| theory division's result | counterpart in IBC | instance of a known theorem? |
+|---|---|---|
+| First-order class, deterministic, worst case over instances: `2^{n(1−o(1))}` at the zero residual; certificates are coverings (11.4, 11.23(a)) | radius of information; optimisation is as hard as uniform approximation on convex symmetric classes (Wasilkowski 1984; Novak 1988 **[snip]**); covering numbers of Lipschitz classes (Sukharev 1971 **[mem]**) | the worst-case statement **is** an instance (the curse for Lipschitz classes); the instance-wise covering with gap radii belongs to certified Lipschitz optimisation (their own citations), not to IBC |
+| Known part, sharp sites, dichotomy "one or exponential" (11.7–11.9), normal form (11.29) | none: IBC has no instance-dependent known part | **not** an instance |
+| Exact exponents as rate–distortion functions (11.9, 11.15) | IBC gives orders in `ε` and `d`, not exponents with constants | **not** an instance (information theory) |
+| `ln Z`, randomised: threshold, soft gaps, hinted/non-adaptive/adaptive exponents (11.24–11.28, 11.44–11.58) | integration of `e^{−βg}`: a nonlinear functional; Bakhvalov's averaging; adaption helping on a non-symmetric class (Mathé–Novak 2007) — all cited by them | method known; statements **not** instances |
+| Second-order class, dense constants: exponential (11.31–11.32) | curse of dimensionality for classes of fixed smoothness `r ≥ 2`, also when directional derivatives are bounded by `≈ d^{−1/2}` (Hinrichs–Novak–Ullrich–Woźniakowski 2014 **[snip of abstract]**) | the discrete analogue; not literally an instance (other domain, other functional) |
+| Second-order class, weak coupling: a star suffices (11.16–11.17) | anchored (cut-HDMR) decomposition truncated at order one with a remainder bound (Kuo–Sloan–Wasilkowski–Woźniakowski 2010 **[mem]**, cited by them) | **is** an instance of the anchored-decomposition calculus |
+| Linear in `p` features, box (11.47) | optimal recovery in finite dimension (Micchelli–Rivlin) | **is** an instance (they say so) |
+| Pair-additive, Lipschitz radial functions, shared by type (11.48–11.49) | finite-order weights of order 2 in *bead* variables with shared components | tractability **is** an instance in spirit of Wasilkowski–Woźniakowski 2004 **[snip]**; the profile distance is their own packaging |
+| Per-torsion constants growing with the lever arm (11.36–11.37) | *increasing* weights; the known necessary conditions for tractability with product weights are `sup_d Σ_j γ_{d,j} < ∞` (strong) and `Σ_j γ_{d,j} = O(ln d)` (polynomial) (Sloan–Woźniakowski 1998 **[snip for the bibliographic data, mem for the conditions]**) | consistent with the known necessity; in their format the summable case is the remark at the end of §2.7 |
+| — (absent from their table) | weighted Hilbert spaces with decaying or finite-order weights: (strong) polynomial tractability | this report, §§2.1–2.3, for `min` and `ln Z` on the cube |
+
+The one-line version: their *exponential* rows are the discrete counterparts of the curse for
+classes of fixed smoothness in an unweighted supremum norm; their *cheap* rows are
+finite-dimensional linear classes; the *middle* that tractability theory is about — infinite
+or high-dimensional classes with decaying weights — is missing from their table and is where
+a physical residual plausibly lives.
+
+### 4.2 Positioning of the statements of §2
+
+| statement | closest prior art | what I can say |
+|---|---|---|
+| Thm 1(a) band | hypercircle inequality (Golomb–Weinberger 1959; Micchelli–Rivlin 1977) **[mem]**; "posterior variance = worst-case error in the RKHS unit ball" (Kanagawa–Hennig–Sejdinovic–Sriperumbudur 2018, §3.4 **[snip]**) | known |
+| Thm 1(b)–(d) certificate iff power function below gap | regret bounds for GP-UCB over RKHS balls and GP samples through the maximal information gain (Srinivas–Krause–Kakade–Seeger 2010/2012 **[snip]**), expected improvement (Bull 2011 **[snip]**), exponential regret without noise (de Freitas–Smola–Zoghi 2012 **[mem]**); instance-dependent certificates for Lipschitz optimisation (Bachoc–Cesari–Gerchinovitz 2021, via the theory report) | the exact instance-wise "iff" in the form parallel to the theory division's covering theorem: not found; immediate |
+| Lemma 2 aliasing posterior | Mitchell–Morris–Ylvisaker, *Two-level fractional factorials and Bayesian prediction*, Statistica Sinica 5 (1995) 559–573 **[abs]**: stationary Gaussian priors on `{−1,1}^k` conditioned on fractional factorials; Kerr 2001, Joseph 2006 **[snip]** | known in substance |
+| Thm 3(a) lower bound | `n`-th minimal average-case error with arbitrary linear information = eigenvalue tail (Traub–Wasilkowski–Woźniakowski 1988; Ritter 2000) **[mem]** | known |
+| Thm 3(b) BCH/orthogonal-array designs | orthogonal arrays from linear codes (Bose–Ray-Chaudhuri; Hedayat–Sloane–Stufken 1999) **[mem]**; lattice algorithms for approximation, error = mass of the dual lattice minus leaders (Kuo–Sloan–Woźniakowski 2006 **[snip]**) | the `𝔽₂` transposition of known arguments |
+| Thm 3(c),(d) random linear designs, two-sided sup-norm bound | "standard information is as powerful as linear information" (Kuo–Wasilkowski–Woźniakowski 2009; Krieg–Ullrich 2021) **[mem]**; low-degree learning on the cube (Linial–Mansour–Nisan 1993; Kushilevitz–Mansour 1993) **[mem]** | not found in this form |
+| Cor 4(a) | Wasilkowski 1984; Novak 1988 — quoted in D. Krieg's thesis, arXiv:1905.01166 **[snip]** | an instance |
+| Cor 4(b) polynomial iff bounded order | Wasilkowski–Woźniakowski, J. Approx. Theory 130 (2004) 57–77 **[snip]**; Novak–Woźniakowski, *Tractability of Multivariate Problems* I–III **[mem]** | the cube/`min` version is a transposition; additive Gaussian-process models in Bayesian optimisation have regret linear in the dimension (Kandasamy–Schneider–Póczos 2015 **[snip]**), second-order models on binary variables are used in BOCS (Baptista–Poloczek 2018 **[snip]**), product ("diffusion") kernels on the Hamming graph in COMBO (Oh et al. 2019 **[snip]**) — no complexity statement with a lower bound surfaced |
+| Cor 4(c) exponent `h((1−ρ)/2)` | — | not found; a two-line computation |
+| Thm 5 interval of `ln Z` over a ball | Donsker–Varadhan; Sion; kernel bounds on log-partition functions of a different kind (Bach, arXiv:2202.08545 **[snip]**); worst-case rates for log-partition estimation over smoothness classes (Holzmüller–Bach, arXiv:2303.03237, cited by the theory report) | not found in this form (one search) |
+| Prop 5′ | Curie–Weiss model (textbook) | the lower bound is textbook; extremality is numerical |
+| Thm 6(i)–(iii) | Gaussian concentration (Borell 1975; Tsirelson–Ibragimov–Sudakov 1976), Poincaré and first-chaos variance bounds (Houdré–Kagan 1995) **[mem]**; Bayesian quadrature (O'Hagan 1991; Rasmussen–Ghahramani 2003; Osborne et al. 2012; Gunter et al. 2014, arXiv:1411.0439 **[snip]**) puts the prior on the integrand, not on the energy | standard tools; the dimension-free interval for `ln Z` under a prior on the energy: not searched beyond the Bayesian-quadrature query |
+| Thm 6(iv), Prop 7 | second-moment method for high-temperature free energies (Aizenman–Lebowitz–Ruelle 1987; Talagrand) **[mem]**; random energy model (Derrida 1981) **[mem]** | known physics; the reading as a complexity statement and as a counterexample to "polynomial iff decay": not found |
+| Prop 8(a) | Lebesgue functions (textbook); misspecified kernelised bandits with a sup-norm error `ε` (Bogunovic–Krause, NeurIPS 2021, arXiv:2111.05008 **[snip]**) | known phenomenon |
+| Prop 8(b),(c) | theory report Theorems 11.22–11.25; workstream P, Corollary 15 | corollaries, restated |
+| Thm 9 LP-funnel slope | LP relaxation and its dual (Schlesinger 1976; Werner 2007 **[snip]**); tightness for submodular and balanced models (Kolmogorov–Zabih 2004 **[mem]**; Weller–Rowland–Sontag 2016 **[snip]**); stability (Bilu–Linial 2010; Makarychev–Makarychev–Vijayaraghavan 2014 **[mem]**; Lang–Sontag–Vijayaraghavan 2018 **[abs]**, 2019 **[snip]**); side-chain placement solved by LP (Kingsford–Chazelle–Singh 2005; Yanover–Meltzer–Weiss 2006) **[mem]** | the parametric quantity and its use as a certificate of sharpness under envelope uncertainty: not found (two searches); elementary |
+| Prop 10 | Gaussian approximation potentials (Bartók–Payne–Kondor–Csányi 2010) **[mem]**; body-ordered approximation with rates (Thomas–Chen–Ortner, Arch. Ration. Mech. Anal. 246 (2022) 1–60 **[snip]**) | synthesis |
+| Prop 11 | Monte Carlo summation; randomised complexity of sums (Heinrich; Mathé) **[mem]** | textbook; its use to fill the cell of the theory division's table is the only point |
+| population calibration | conformal prediction (Vovk–Gammerman–Shafer 2005; Lei et al. 2018) **[mem]** | known; used, not developed |
+| average-case optimisation | Wasilkowski, Math. Programming 57 (1992) 313–324 **[abs]**: "optimization is easier on average than in the worst case", upper bounds only, the average complexity "is still unknown" | consistent with §5, item 5 |
+
+### 4.3 Search log
+
+Fourteen web searches and four page fetches, all on 2026-11-25; queries and what each returned
+are recorded verbatim in `experiments/science/ws_X/NOTES.md` (entry "literature search log").
+Topics: Mitchell–Morris–Ylvisaker; finite-order weights; lattice rules for approximation;
+optimisation versus approximation in IBC; Bayesian optimisation on the hypercube
+(BOCS/COMBO/Walsh kernels); misspecified Gaussian-process bandits; tightness of LP relaxations
+for balanced models; stable instances of MAP inference; body-ordered approximations; Bayesian
+quadrature for normalising constants; the curse for smooth functions; Gaussian processes
+versus kernel methods; GP-UCB/EGO/additive models; Sloan–Woźniakowski; worst-case
+log-partition over a kernel ball; LP certificates and unary margins.  Pages fetched: the
+Statistica Sinica abstract page of Mitchell–Morris–Ylvisaker; arXiv:1905.01166 (abstract
+page; the relevant passage was seen only in a search snippet); the record of Wasilkowski
+1992; arXiv:1711.02195 (abstract).  Not searched at all: superconcentration; coin-weighing and
+sketching lower bounds; conformal methods for interatomic potentials; energy-landscape
+theory.  Everything about those is from memory.
+
+---
+
+## 5. What I did not settle
+
+1. **Randomised algorithms for ellipsoids beyond the additive case.**  Proposition 11 uses
+   that the target is a sum over sites.  For order-2 classes I have neither a randomised
+   lower bound of order `M` nor an algorithm below it; the dip argument of the theory division
+   has no analogue (a generic evaluation sees every member), and Proposition 11 shows that the
+   answer can be dramatically below the deterministic one.
+2. **The exact complexity of `ln Z` over an ellipsoid.**  Theorem 5 gives the consistent
+   interval for a given design; I have no design theorem for it (the counterpart of Theorem
+   3), only the bracket between the Gibbs-averaged and the sup-norm bound, and Proposition 5′
+   rests on a numerical maximisation (three sizes).  Whether the Curie–Weiss member is the
+   maximiser of `ln E exp(½ sᵀJs)` over zero-diagonal symmetric `J` of given Frobenius norm is a
+   clean open question.
+3. **Instance-wise exponents.**  Theorem 3 is a worst case over the ball; Theorem 1(d) is
+   instance-wise but I did not compute its smallest designs (a gap-weighted design problem)
+   beyond running the greedy algorithm.  There is no analogue here of the theory division's
+   rate–distortion formula.
+4. **The frozen regime** (Proposition 7(c)) is a heuristic with numerics at `n ≤ 12`.
+5. **Average-case complexity of the minimum** under a Gaussian prior on the cube: only upper
+   bounds (the algorithms of §3.3) and the lower bounds inherited from recovery; the true
+   average-case complexity of global optimisation is open even in the classical settings
+   (Wasilkowski 1992 **[abs]**).
+6. **Chains.**  Nothing in this report was computed on a chain.  Proposition 10 is a synthesis
+   of the theory division's §§11.14, 11.17 in the vocabulary of §2.1; whether a real residual
+   has a useful norm or spectrum in such a class is not addressed.
+7. **Multi-label known parts** (rotamers) for Theorem 9: only two-state sites were run; for
+   three or more labels even ferromagnetic Potts terms do not give `τ_LP = τ`.
+8. **The cost of checking.**  Like the theory division I count evaluations of `g`.  Checking a
+   kernel certificate means minimising `f + ĝ_A − B_A P_A` over `X`, a hard problem in general;
+   the bridge to the pairwise kernel after Theorem 1 covers order `≤ 2` with a uniform bound on
+   `P_A` only.
+9. **Who certifies `B`, the spectrum, the prior.**  In §3.3 `B` and the envelope constants were
+   both oracle choices.  Estimating them from data (empirical Bayes) adds an uncertainty that
+   I did not propagate.
+10. **Constants.**  The factor `16σ²/η²` in Theorem 3(d) and the constant 4 (essentially
+    attained) are what the proofs give; I did not look for optimal designs.
+11. **Novelty.**  All reading was at the level of abstracts or snippets; several positioning
+    statements in §4.2 rest on memory.
+
+## 6. The three most promising next steps
+
+1. **A sharp–soft decomposition with a verified kernel.**  Use the envelope machinery where
+   the known part is sharp (Theorem 9 gives the proof object for interacting known parts)
+   and an ellipsoid on the rest: by Theorem 1(d) the design only has to push `B·P_A(x)` below
+   `gap_f(x) + ε`, so sites or droplets with a large known gap need no resolution.  The
+   concrete deliverable is a soundness theorem of the form
+   `min(f+g) ≥ (kernel-certified bound of the pairwise model f + ĝ_A) − B_A·p̄` with a checkable
+   certificate for `max P_A ≤ p̄` (for linear designs on the cube: the non-leader mass, a finite
+   sum).  This would put a polynomial-cost class next to the three existing kernels.
+2. **Measure the three numbers that decide between the paradigms on one real residual:** the
+   slack `κ` of the best certifiable first-order constants, the spectrum of the residual in a
+   body-ordered feature space (how many modes for a given tolerance: `M(η)`), and the size and
+   kind of what is left (supremum norm; any dip-like outliers).  §3.3 says how the costs then
+   compare; without these numbers every interface remains hypothetical, as the theory report
+   says of its own.
+3. **Randomisation for linear-information classes.**  Proposition 11 shows the gain is from
+   `Θ(n)` to `O(1)` in the additive case.  Find the right statement for pair terms: at high
+   temperature `ln Z` has a convergent cluster expansion whose terms can be sampled; for the
+   minimum the natural tool is a sampled lower bound through the LP dual.  Either a
+   polylogarithmic algorithm or a lower bound of order `M` would complete the row of the
+   theory division's table.
+
+## 7. Requests
+
+**To the theory division.**
+
+* **X-REQ-T1 (formalisation).**  Machine-check Theorem 1(a),(b) for a finite index type and a
+  rational positive semidefinite matrix `K`: for `g = K c` with `cᵀKc ≤ B²`, data on `A`, weights
+  `λ(x)` with `K_AA λ(x) = K_{A x}`: `|g(x) − λ(x)ᵀ g_A| ≤ (B² − g_Aᵀ K_AA⁺ g_A)^{1/2} · (K_xx − λ(x)ᵀK_{A x})^{1/2}`,
+  and the kernel statement of §6 item 1.  The squares avoid square roots; a rational
+  certificate `(λ, p̄², B_A²)` suffices.  Expected size: comparable to `LinearClass.lean`.
+* **X-REQ-T2 (table).**  In the summary table of §10 of the theory report, consider (i) a row
+  "Hilbert ball with a Walsh spectrum of bounded order `m`: `≍ n^m` evaluations, deterministic,
+  for `min` and `ln Z`; exponential with exponent `h(α)` for orders up to `αn`" (this report,
+  Corollary 4), and (ii) replacing "no lower bound known" in the row of linear classes by
+  "for additive features `O(R²ε₁⁻² ln δ⁻¹)` random evaluations suffice at accuracy `ε₁n`"
+  (Proposition 11).  Both are short enough to be checked by a referee in an hour.
+* **X-REQ-T3 (a question).**  Is `sup { ln E_unif exp(½ sᵀJs) : J symmetric, zero diagonal,
+  ‖J‖_F ≤ F }` attained at `J ∝ 𝟙𝟙ᵀ − I` up to a gauge transformation?  (Proposition 5′; numerics
+  for `n ≤ 12` say yes.)  A proof would give the exact width of `ln Z` over the order-2 ellipsoid
+  and a second, exactly solvable, relative of Theorem 11.33.
+* **X-REQ-T4 (wording).**  D28 and the README present the exponential price as a property of
+  "point evaluations under a first-order envelope".  Proposition 8(c) suggests adding the
+  converse reading explicitly: *no procedure that is correct on a first-order class can be
+  cheap on any subclass* — so a cheaper paradigm necessarily gives up correctness on the
+  first-order class, and says which members it gives up.
+
+**To the engineering division.**
+
+* **X-REQ-E1 (computation; estimated minutes to an hour on the existing enumeration data).**
+  *Motivation:* compare the cover format with the span/ellipsoid format on real chain
+  geometry.  *Inputs:* the enumerated conformation sets of `ENG-RES-0002`/`0007` (diamond
+  lattice `n = 5…24` torsions; off-lattice `n = 5…12`), their pair-count profiles.
+  *Formulation:* with the feature map `x ↦ Φ(x) = ` (cumulative pair-count profile on the grid of
+  attained squared distances, per pair type) and the kernel `K(x,y) = Φ(x)ᵀ W Φ(y)`, `W` the Gram
+  matrix of a smooth kernel on distances (take `κ(s,s′) = exp(−(s−s′)²/2ℓ²)`, `ℓ ∈ {1, 2, 4}` in
+  lattice units), run the greedy design "add `argmax_x P_A(x)`" and record
+  `N(η) = min{|A| : max_x P_A(x) ≤ η·max_x P_∅(x)}` for `η ∈ {½, ¼, 0.1, 0.01}`, and the
+  eigenvalue tail `M(η)` of the kernel matrix over profile classes.  *Expected output:* a table
+  `N(η)`, `M(η)` against chain length, next to the published cover sizes
+  (`[80, 92]`, `[757, 788]`, …).  *Validation:* `N ≥ M(η)` must hold (Theorem 3(a) holds for any
+  kernel); `P_A` must vanish on `A`; on the lattice with one feature per type `N` must equal the
+  rank reported in the theory report (3).  *Stopping:* largest enumerated size or one hour.
+  *What it decides:* whether, on chain geometry, the number of evaluations in a
+  linear-information class saturates with the chain length where the cover format grows.
+* **X-REQ-E2 (computation).**  On the same data, for the synthetic residuals already used
+  (`L = 1` profile class), report the slack `κ = (realised increment)/(certified constant)` of
+  the per-torsion and profile envelopes at each size.  §3.3 shows that `κ` decides the cost
+  of the envelope paradigm more than anything else; it has not been reported.

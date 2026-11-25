@@ -279,3 +279,24 @@ Shorter proof than the report's 35 lines: monotone margin flows + "ln(1+ax)/x de
 - Answer to B2: exact counterpart = alphabet size maximising the cutoff rate; reflection identity explains the crossings; genre classical (R_0 design criterion; finite-support capacity-achieving inputs; PPM order), exact rule not found.
 - Relation to my §2.3 / Prop. A1.1: §2.3 = special case (t ↑ 1, two letters) of their Thm 11.99; Prop. A1.1 is an addition and generalises (Prop. A1.2) to all of §11.26, supplying its missing bounded-accuracy upper bound for non-adaptive algorithms with a product sampler.
 - Corrections to my own addendum draft before finalising: removed quotation marks around a search-engine paraphrase; "twenty years earlier" → "since 2007–2009"; made explicit that the bounded-accuracy LOWER bound a is taken from the theory report.
+
+### Step 21 (19:01 UTC) — close
+- All eight scripts pass; outputs regenerated (rounds_* outputs from the earlier runs).
+- Report: docs/science/workstreams/A1_REPORT.md, §§1–8 (main) + §9 (addendum B1/B2). Counts: 35 searches; 8 scripts.
+- Wrote only in experiments/science/ws_A1/ and docs/science/workstreams/A1_REPORT.md (downloads in the session scratchpad); no git state change.
+- Handback: two parts (addendum ≤ 350 words as the follow-up asked; main summary ≤ 600 words as the brief asked).
+- Open items handed over: next steps §6; requests T1–T9, E1; unresolved §5.
+
+### Step 22 (19:10 UTC) — before the handback: what the coordinator had already written
+- Read (read-only) docs/collaboration/responses/science/SCI-RES-0001.md §2 and SCIENCE_TO_ALL.md item 8, to see
+  which sentences of SCI-REV-0004 are still out of date.
+  * "A class-wide upper bound for Bern(r*)^n is not proved" (SCI-REV-0004 l. 77): already superseded by the
+    coordinator (SCIENCE_TO_ALL item 8; SCI-RES-0001 §2).
+  * "becomes an equality as eps1 -> 0+" (l. 71-72): already the correct wording.
+  * STILL STALE: l. 129, "answers, on a model class, the question Mathé and Novak leave open" — too strong;
+    neither Mathé–Novak nor the Novak–Rudolf survey poses the non-log-concave question (report §8, §4.10).
+- SCI-RES-0001 §2 contains, as a "coordinator's remark, not written out and not checked numerically", the
+  generalisation of Prop. A1.1 to §11.26 — the same argument as my Prop. A1.2.  My transcript shows I first saw
+  that file at 19:08 UTC; A1.2 was written 18:53–18:58.  Independent derivations; recorded in report §9.3
+  ("Note on independence").  A1.2 = written-out form + enumeration check (items 1–3) + constants (items 4–5).
+- Final message drafted outside the repository (scratchpad); two parts: addendum (<= 350 words), main (short).

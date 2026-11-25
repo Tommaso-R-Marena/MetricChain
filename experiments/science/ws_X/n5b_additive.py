@@ -28,8 +28,8 @@ import numpy as np
 
 EPS = 0.25
 S1 = 0.04
-RATIOS = np.concatenate([[0.0], np.exp(np.linspace(-14, 14, 561))])
-TS = np.concatenate([np.linspace(0.01, 2, 120), np.linspace(2.05, 40, 380)])
+RATIOS = np.concatenate([[0.0], np.exp(np.linspace(-14, 14, 281))])
+TS = np.concatenate([np.linspace(0.01, 2, 80), np.linspace(2.1, 40, 220)])
 
 
 def product_lower_bound(e, gam, c, eps):

@@ -268,7 +268,8 @@ sketch].**  For the `C`-symmetrised dip of Theorem 4 with disjoint balls, `E_μ 
 The excess mass sits on the shell `d ≈ n/(1+e^{u})` and `κ_j(d) → (1 − 2d/n)^j` for fixed `j`, so
 `|E_μ χ_T| ≤ (1 + o(1))·tanh(u/2)^{j}`: with correlations of *every* order known to absolute
 precision `τ`, the lower bound of Theorem 4 is divided by at most `(2n)^{⌈k_τ/2⌉}` for all large
-`n` — **`h_hint` is unchanged by finite-precision correlation data of any order [P sketch]**.
+`n` — **`h_hint` is unchanged by finite-precision correlation data of any order [P sketch;
+proved with explicit constants in A10]**.
 (Compare A8: with *exact* marginals of order `αn` the exponent does drop.  The drop needs
 probabilities of size `2^{−αn}` to be known to relative accuracy.)
 
@@ -287,3 +288,88 @@ measurements on pinned ensembles, each no more precise, determine `ln Z` to `O(n
 converts absolute precision on a conditional ensemble into relative precision on an
 exponentially small probability of the unperturbed one.  That, and not the order of the
 observable, is what a perturbed ensemble buys.
+
+## A10. Finite precision, proved: the attenuation lemma and Theorem 4-τ (closes `OPEN_PROBLEMS.md` A3)
+
+A9 gave the exact formula for the correlation functions of a symmetrised dip and a sketch
+of their size.  Here is the proof, with constants valid for every `n`.
+
+Notation: `z = e^{−u}`, `t = tanh(u/2) = (1−z)/(1+z)`, `p_u = z/(1+z) = 1/(1+e^{u})`;
+`κ_j(d) = K_j(d)/C(n,j)` is the normalised Krawtchouk polynomial, i.e. the average of `χ_T(x)`
+over the sets `T` of size `j` for any `x` of weight `d` (equivalently over the `x` of weight
+`d` for any `T` of size `j`); so `|κ_j(d)| ≤ 1`.  The dip of radius `r` at the origin is the
+weight `w_r(x) = 1 + (e^{u(r−|x|)} − 1)_+` (residual `−u(r − |x|)_+`, admissible), and
+
+    S_j(r) := Σ_x (w_r(x) − 1)·χ_T(x) = Σ_{d<r} C(n,d)(e^{u(r−d)} − 1)·κ_j(d)        (|T| = j),
+
+so that `Z(w_r) = 2ⁿ + S_0` and the dip changes `ln Z` by `Δ_r = ln(1 + 2^{−n}S_0(r))`.
+
+**Lemma A10.1 (full cone) [K — the generating function of the Krawtchouk polynomials].**
+`Σ_{d=0}^{n} C(n,d) z^d κ_j(d) = (1−z)^j (1+z)^{n−j}`.  *Proof.*  `Σ_x z^{|x|}χ_T(x) = ∏_{i∈T}(1−z)·∏_{i∉T}(1+z)`. ∎
+So for the cone weight `e^{−u|x|}` on the whole cube the correlation function of order `j`
+is `t^j` **exactly**: thermal noise at strength `u` attenuates a correlation of order `j` by
+`tanh(u/2)^j`.
+
+**Lemma A10.2 (dips) [P; exact rational Krawtchouk values, `n ≤ 800`, `dip_attenuation_check.py`].**
+Let `A = e^{ur}(1+z)ⁿ`, `V = Σ_{d<r} C(n,d)`, `η = P[Bin(n, p_u) ≥ r]` and `ξ = η + V/A`.  Then for
+every `0 ≤ j ≤ n`
+
+    | S_j(r)/A − t^j |  ≤  ξ ,        and, if ξ < 1,        | S_j(r)/S_0(r) − t^j |  ≤  2ξ/(1 − ξ) =: τ₀(r).
+
+*Proof.*  `S_j = e^{ur}Σ_{d<r}C(n,d)z^dκ_j(d) − Σ_{d<r}C(n,d)κ_j(d)`.  By A10.1 the first sum,
+extended to all `d`, is `A·t^j`; the extension costs at most `e^{ur}Σ_{d≥r}C(n,d)z^d = A·η`
+(because `|κ_j| ≤ 1` and `C(n,d)z^d/(1+z)ⁿ` is the binomial law with parameter `p_u`); the
+second sum is at most `V`.  So `S_j/A = t^j + e_j` with `|e_j| ≤ ξ`, and
+`S_j/S_0 − t^j = (e_j − t^j e_0)/(1 + e_0)`. ∎
+
+Size of `ξ`.  The sensitive radius is `r ≈ ρ₀n` with `uρ₀ + ln(1+z) = ln 2`, i.e.
+`ρ₀ = u⁻¹∫₀^u p_s ds > p_u`: there `A ≈ 2ⁿ`, `η ≤ e^{−n·KL(ρ₀‖p_u)}` and `V/A ≤ e^{−n(ln 2 − h(ρ₀))} = e^{−n·h_hint}`;
+for larger radii (extensive accuracy) both terms are smaller.  Computed: `τ₀ = 1.9·10⁻², 1.3·10⁻³,
+2.7·10⁻⁶, 1.7·10⁻¹¹` at `n = 100, 200, 400, 800` for `u = 1` (the true deviation
+`max_j|S_j/S_0 − t^j|` is five to ten times smaller), and `10⁻⁵ … 10⁻³⁵` for `u = 2`.
+
+**Theorem 4-τ (correlation data of every order, absolute precision `τ`) [P].**
+Cube class with constant `u`, zero known part.  Let the algorithm have, besides
+evaluations, a **correlation oracle with tolerance `τ`**: for the instance `g` it returns
+numbers `m_T`, one for every non-empty `T ⊆ [n]`, subject only to `|m_T − E_{μ_g}χ_T| ≤ τ`.
+Let `r` be a radius with `Δ_r > ε` and `τ > τ₀(r)`, put
+
+    k_τ := ⌈ ln(1/(τ − τ₀)) / ln coth(u/2) ⌉ ,
+
+and let `C` be a linear code of dual distance at least `k_τ`.  Then every algorithm that is
+`(ε/2, δ)`-correct for `ln Z` on the class makes, on the zero residual (with the legal
+oracle answer `m ≡ 0`), at least
+
+    (1 − 2δ) · 2ⁿ / ( |C| · V(n, r−1) )
+
+evaluations in expectation; and `|C| ≤ (2n)^{⌈(k_τ − 1)/2⌉}` is available (duals of BCH
+codes).  Consequently **the worst-case exponent is `h_hint`, unchanged, for every tolerance
+`τ ≥ exp(−o(n/ln n))`**; for `u = 1`, `τ = 1 %` and `n ≥ 200` the lower bound of theory report
+Theorem 11.25(a) is divided by at most `(2n)³`.
+
+*Proof.*  For a centre `a` let `w_a = |C|⁻¹Σ_{c∈C} w_r(· ⊕ a ⊕ c)`: an average of translates
+of an admissible weight, hence admissible (the weight cone is convex and
+translation-invariant), with `Z(w_a) = 2ⁿ + S_0`.  Its Fourier coefficients are
+`Σ_x w_a(x)χ_T(x) = χ_T(a)·[T ∈ C^⊥]·(2ⁿ[T = ∅] + S_{|T|})`, so for `T ≠ ∅`
+
+    | E_{μ_{w_a}} χ_T |  =  [T ∈ C^⊥] · |S_{|T|}| / (2ⁿ + S_0)  ≤  t^{|T|} + τ₀  ≤  t^{k_τ} + τ₀  ≤  τ ,
+
+because the non-zero words of `C^⊥` have weight at least `k_τ` (Lemma A10.2).  The answer
+`m ≡ 0` is therefore legal for the zero residual and for every `w_a`.  The residual `−ln w_a`
+vanishes at `x` unless `d(x, a ⊕ C) < r`; one evaluation meets at most `V(n, r−1)` of the
+`2ⁿ/|C|` cosets `a ⊕ C`; and an algorithm that is correct at `0` and at `w_a` must meet the
+coset of `a` with probability at least `1 − 2δ` when run at `0` (the two values of `ln Z`
+differ by `Δ_r > ε`).  Summing over cosets gives the bound. ∎
+
+*Remarks.*  (1) The tolerance model is the one of published numbers with error bars: the
+oracle may return any value inside the bar.  It is not a model of access to the ensemble:
+a **sample** `x ~ μ_{w_a}` lies in a dip with probability at least `S_0/(2ⁿ + S_0) = 1 − e^{−Δ_r}`,
+and one evaluation at the sample then reveals the dip — against a sampler this family of
+instances is not hard at all **[P for this family; no statement about the class]**.  What
+separates the two is exactly the difference between averages known to absolute precision
+and configurations drawn from the ensemble.  (2) Together with A8: exact marginals of order
+`αn` lower the exponent; marginals of *every* order with tolerance `e^{−o(n/ln n)}` do not.
+The crossover — tolerance `e^{−γn}` — is open (`k_τ` becomes proportional to `n` and the
+question merges with `θ(α)` of A8).  (3) The statement is about the worst case of the
+class.  For Theorem 2-τ (entropy) the corresponding statement is exact (A9).
+

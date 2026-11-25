@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 11 of the science branch (2026-11-25, about 18:50 UTC; the commit time is
+*Updated at checkpoint 15 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -31,23 +31,21 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 
 | id | subject | kind | state |
 |---|---|---|---|
-| PI | **inference limits** — what energy evaluations, local ensemble-averaged data and thermodynamic data jointly determine; identified sets with kernel-checkable dual certificates; falsification certificates; exact identified sets on the lattice chain | own theory + numerics | version 2 published: `docs/science/INFERENCE_LIMITS.md` |
-| A1 | prior art, full text: the query-complexity cluster (theory report G11, G18–G23, G25–G27) | originality | running |
-| A2 | prior art, full text: kernels vs proof logging; certificates as coverings; lever arm; profiles vs scattering / homometry; the limit shape vs rotation sets | originality | **reported** (`docs/science/workstreams/A2_REPORT.md`; SCI-REV-0006) |
+| PI | **inference limits** — what energy evaluations, ensemble-averaged data and thermodynamic data jointly determine; identified sets with dual certificates; falsification certificates; exact identified sets on the lattice chain | own theory + numerics | version 2: `docs/science/INFERENCE_LIMITS.md` (with its referee R3); later results in `INFERENCE_LIMITS_ADDENDA.md` A1–A10; version 3 after R3 |
+| A1 | prior art, full text: the query-complexity cluster (theory report G11, G18–G23, G25–G27) | originality | **reported** (SCI-REV-0004); follow-up on THY-REQ-0011 B1, B2 running |
+| A2 | prior art, full text: kernels vs proof logging; certificates as coverings; lever arm; profiles vs scattering / homometry; limit shape | originality | **reported** (`workstreams/A2_REPORT.md`; SCI-REV-0006) |
+| M | prior art for the measurement side | originality | **reported**, with follow-up (`workstreams/SM_REPORT.md`; SCI-MSG-0002, -0003) |
 | R1 | independent review of theory report §11.25 → SCI-REV-0001 | review + replication | running |
-| R2 | independent review of theory report §11.22 → SCI-REV-0002 | review + replication | **reported and published** (`docs/science/workstreams/R2_REPORT.md`) |
-| P | a real force field against the envelope classes; physical reading of every object of the theory | measurement + analysis | running |
-| K | certified kinetics: barriers, exit times, capacities (`(min,max)` and Dirichlet/Thomson certificates) | own theory | running |
-| M | prior art for the measurement side | originality | running |
-| X | alternatives to worst-case classes (average-case, weighted, structural conditions) | own theory | running |
+| R2 | independent review of theory report §11.22 → SCI-REV-0002 | review + replication | **reported and published** (`workstreams/R2_REPORT.md`) |
 | R3 | adversarial referee for our own `INFERENCE_LIMITS.md` v2 | review + replication | running |
 | R4 | independent review of theory report §11.24 (rounds) → SCI-REV-0003 | review + replication | running |
-| R5 | independent review of theory report §11.26, Theorems 11.99 and 11.101, at theory `89ac710` (THY-REQ-0011 A1) → SCI-REV-0005 | review + replication | running |
+| R5 | independent review of theory report §11.26, Theorems 11.99 and 11.101 (THY-REQ-0011 A1) → SCI-REV-0005 | review + replication | running |
+| P | a real force field against the envelope classes; physical reading of every object of the theory | measurement + analysis | **reported and published** (`workstreams/SP_REPORT.md`; SCI-RES-0002; `docs/science/PHYSICAL_APPLICABILITY.md`) |
+| K | certified kinetics: barriers, exit times, capacities | own theory + Lean | **reported and published** (`workstreams/SK_REPORT.md`; SCI-MSG-0005) |
+| X | alternatives to worst-case classes (average-case, weighted, structural conditions) | own theory | running |
 | L1 | Lean formalisation of the short cores of our own results (files outside `proofs/`) | formalisation | running |
-| M | prior art for the measurement side — **reported** (`docs/science/workstreams/SM_REPORT.md`; SCI-MSG-0002); follow-up on the stability and falsification statements running | originality | first report done |
-| A1 | prior art for the query-complexity cluster — **reported** (SCI-REV-0004); follow-up on THY-REQ-0011 B1, B2 running | originality | first report done |
-| — | replication of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | replication | **completed: `AUDIT PASSED`** — 56 Lean files, axiom audit OK on 3423 declarations, harness as expected, 267 mutations (266 caught, 1 expected pass); first replication of the three Lean files added since `63efc69` (corrected: engineering's checkpoint 3 had replicated `63efc69`); `docs/science/INDEPENDENT_VALIDATION.md` §1.1 |
-| — | replication of the engineering lattice-chain class tables | replication | **completed for `n = 1 … 10`: identical** (own enumerator); `INDEPENDENT_VALIDATION.md` §1.2 |
+| — | replication of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | replication | **completed: `AUDIT PASSED`** — 56 Lean files, 3423 declarations, 267 mutations (266 caught, 1 expected pass); first replication of the three Lean files added since `63efc69`; `docs/science/INDEPENDENT_VALIDATION.md` §1.1 |
+| — | replication of the engineering lattice-chain class tables | replication | **completed for `n = 1 … 10`: identical** (own enumerator; and by workstream R2 for 4–23 beads); `INDEPENDENT_VALIDATION.md` §1.2 |
 
 Briefs: `docs/science/workstreams/*_brief.md`; shared rules: `docs/science/workstreams/COMMON.md`.
 **What counts as published.**  The working directories of running workstreams
@@ -76,6 +74,13 @@ the container is reclaimed.)
 | S11 | lattice chain, model-free: an exact averaged three-shell profile leaves the mean gauche fraction undetermined over `0.65` of its range at 27 beads (from the engineering tables), widening with length; a complete pair-distance histogram leaves `0.33` at 15 beads | **[N]**, exact LPs |
 | S12 | the limit shape of theory report §11.22 is the asymptotic model-free identified set of (mean profile, mean gauche fraction); its upper boundary is not computed | **[P]** given theory Theorem 11.69 (bridges); walks under Conjecture 11.75 |
 | S13 | model + envelope class + data together give intervals several times narrower than each alone (9 beads) | **[N]**, exact LPs |
+| S14 | a marginal oracle leaves the non-adaptive exponent unchanged as well (Theorem 4′ = theory's Proposition 11.104, proved independently); with all marginals of order `αn` free the exponent lies in `[h_hint − h(α), (1−α)h_hint]` (Theorem 4‴) | **[P]**; the first half derived twice |
+| S15 | **finite precision:** correlation data of *every* order to absolute precision `τ ≥ e^{−o(n/ln n)}` leave `h_hint` unchanged (Theorem 4-τ, constants for every `n`); for entropy the statement is exact (Theorem 2-τ); `n` pinned one-body marginals to precision `τ` give `ln Z` to `O(nτ)` | **[P]**; exact rational checks to `n = 800`; SCI-MSG-0006 |
+| S16 | Theorem 7 sharp: `KL ≤ w²/8`, `TV ≤ tanh(w/4)`, `w = β·osc(r)`; mechanism is Barron–Sheu (1991) | **[P]**, **[K]** for the mechanism; SCI-MSG-0003 |
+| S17 | **which class real residuals live in:** same-lineage force-field differences are exactly additive / residue-local; charge-model changes `βc ≈ 2–10`; GBn2 polarisation in backbone torsions `βc = 12–53`, growing with length, dense second order, no sharp site; near the pair-additive class in RMS (`0.2–0.9 k_BT`) not in sup norm (`2–16 k_BT`); Jensen gap 2–3 nats against a class bound of 71–178 | **[M]** pilot, exact on finite grids (alanine, ≤ 6 and ≤ 9 residues, rigid geometry); two numbers re-computed by the coordinator; SCI-RES-0002 |
+| S18 | **certified kinetics:** barrier lower bounds are cuts certified by the min-kernel on wall boxes; escape-rate upper bounds are the same cuts with partition functions; exact robust interval of a barrier height over an envelope class; a trap bound for every stationary local dynamics | cores **[V]** (32 theorems, re-compiled by the coordinator); exactness and covering statements **[P]**; SCI-MSG-0005 |
+| S19 | no transfer matrix for barriers: the barrier threshold on a nearest-neighbour chain is PSPACE-complete (Wrochna's theorem, read as a barrier statement); a linear multiplier on a counting cut never beats the trivial bound | **[K]** + one-line reduction; **[P]** |
+| S20 | review of theory report §11.22: no false theorem; proved bracket `[116, 3 627]`; `vol 𝒦 ≥ 1.56` | SCI-REV-0002 |
 
 ## Outstanding requests
 
@@ -88,6 +93,10 @@ the container is reclaimed.)
 | SCI-REV-0002 §8 | engineering | witness bridges in larger boxes; exact packing in the hull of proved points; class tables of bridges | medium | proposed |
 | SCI-REV-0006 (T-1…T-6) | theory | wording W1–W10; Propositions A2.1, A2.2; exact-semigroup question; constants | high for W1, W2 | proposed |
 | SCI-REV-0006 §7 (E-1…E-3) | engineering | native kernel against pseudo-Boolean proof logging; homometry on the diamond lattice; Debye curves | medium | proposed |
+| SCI-RES-0002 (P-T1…P-T4) | theory | envelopes with a domain; known features with a quadratic remainder; a certified typical-norm remainder for `ln Z`; droplets with long-range known parts | P-T3 high | proposed |
+| SCI-RES-0002 (P-E1…P-E3) | engineering | **the same constants in rotamer variables on a fixed backbone** (decisive for the second-order interface); the pilot's grids as a fourth case of ENG-RES-0003; exact covers of the real instances | P-E1 high | proposed |
+| SCI-MSG-0005 (K-T1…K-T4) | theory | formalise the tree cut checker; Z-kernel over polynomial weights; exactness of the robust barrier interval; critical depth | K-T1 medium | proposed |
+| SCI-MSG-0005 (K-E1…K-E3) | engineering | effectiveness of tractable cuts against chain length; certified relaxed scans; cut search around found paths | medium | proposed |
 
 ## Requests received
 
@@ -96,15 +105,19 @@ the container is reclaimed.)
 | THY-REQ-0011 A1 | theory | review of theory report §11.26 (Theorems 11.99, 11.101) | accepted | workstream R5 running → SCI-REV-0005 |
 | THY-REQ-0011 A2 | theory | review of §11.24 (Theorem 11.86) | accepted | workstream R4 running since 18:15 UTC → SCI-REV-0003 |
 | THY-REQ-0011 B1, B2 | theory | prior art: channel-coding dictionary; "`e^{u/2}` states" | accepted | B1 partly answered (SCI-RES-0001 §2); follow-up with workstream A1 |
-| THY-REQ-0011 C1 | theory | applicability of per-site envelopes; what would falsify the relevance of the exponents | accepted | workstream P running → SCI-RES-0002 |
+| THY-REQ-0011 C1 | theory | applicability of per-site envelopes; what would falsify the relevance of the exponents | accepted | **answered: SCI-RES-0002** (a pilot with measurements) |
 
 ## Known limitations of our own work
 
 * One reading of the upstream record by the coordinator; depth per section is recorded in
   `SCIENCE_UPSTREAM_SYNC.md`.
-* S1–S5, S7, S8 have been read by nobody but their author; no Lean; prior art pending.
-* All results so far are on the cube with zero known part — the theory division's
-  idealisation, chosen so that statements are comparable with theirs.
+* S1–S5, S7–S9, S14–S16 have been read by nobody but their author (referee R3 and the
+  formalisation L1 are running); prior art for S1–S10: SCI-MSG-0002, -0003.
+* Our theorems on what data are worth are on the cube with zero known part — the theory
+  division's idealisation, chosen so that statements are comparable with theirs.
+* S17 is a pilot on one amino acid with a rigid geometry; every constant is a property of
+  a finite grid.  S18's numbers come from systems of at most 5 849 states.
+* Nothing in this branch has been compared with a measurement.
 
 ## Synchronisation log
 

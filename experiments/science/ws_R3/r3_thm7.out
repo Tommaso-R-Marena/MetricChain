@@ -6,10 +6,3 @@
    w=1.0: TV = 0.2449186624, tanh(w/4) = 0.2449186624; J = 0.2449186624, w tanh(w/4) = 0.2449186624; note's example (uniform mu0): TV = 0.231059
    w=4.0: TV = 0.7615941560, tanh(w/4) = 0.7615941560; J = 3.0463766238, w tanh(w/4) = 3.0463766238; note's example (uniform mu0): TV = 0.482014
    w=10.0: TV = 0.9866142982, tanh(w/4) = 0.9866142982; J = 9.8661429815, w tanh(w/4) = 9.8661429815; note's example (uniform mu0): TV = 0.499955
-(c) adversarial ascent (Nelder-Mead, many restarts): can features make max-ent refinement worse than tanh(w/4)?
-/home/user/MetricChain/experiments/science/ws_R3/r3_thm7.py:52: RuntimeWarning: divide by zero encountered in log
-  return float(np.sum(p * (np.log(p) - np.log(q))))
-/home/user/MetricChain/experiments/science/ws_R3/r3_thm7.py:52: RuntimeWarning: invalid value encountered in multiply
-  return float(np.sum(p * (np.log(p) - np.log(q))))
-/usr/local/lib/python3.13/site-packages/scipy/optimize/_optimize.py:870: RuntimeWarning: invalid value encountered in subtract
-  np.max(np.abs(fsim[0] - fsim[1:])) <= fatol):

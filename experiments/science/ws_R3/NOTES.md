@@ -114,3 +114,59 @@ Started 2026-11-25 18:12 UTC.  Rules read (COMMON.md, R3_brief.md).  I write onl
   JOINT ORACLE example, exact on the cosets of the Golay code (n=24, k=7): visible
   g0 = -u(r1 - d(x,C))_+, twin around a deep hole a'+C; u=5, r1=3: s* = -0.005574, U' = U0 to
   machine precision, ln Z' - ln Z0 = 0.678, all marginals of order <= 7 uniform for both.
+* [step 5, ~18:56 UTC] `r3_thm7.py` (output `r3_thm7.out`; adversarial part (c) slow, running).
+  (a) J >= 2 TV ln((1+TV)/(1-TV)) on 2e5 random pairs: min ratio 1.000000.  (b) 4000 random
+  instances: identity (i) and Pythagoras (v) to 3e-9; max TV/(w/4) = 0.99994, max TV/tanh(w/4)
+  = 0.99999 (never above 1).  (d) two points, no feature, mu0(A) = 1/(1+e^{w/2}) attains
+  TV = tanh(w/4) and J = w tanh(w/4) EXACTLY for w = 0.1, 1, 4, 10 (the note's uniform example
+  gives only tanh(w/2)/2).  => Theorem 7 (ii),(iii) are right but not sharp; sharp forms are
+  TV <= tanh(beta w/4), J <= beta w tanh(beta w/4) [P: referee], and the note's bound is vacuous
+  for beta w >= 4.
+* [step 6] `r3_chain.py` (own enumerator, bond-index walk with alternating sign; outputs
+  `r3_chain_*.out`).  (i) class tables identical to the engineering tables for n = 1..9 torsions
+  (all classes, counts, gmin, #gmin, gmax) [n = 10 enumerated in sec111: 49833 conformations].
+  (ii) §11.2: all 22 interval ends for N = 7..27 reproduced to 1e-3 from the engineering tables
+  with a DUAL LP (multipliers; 4 variables) - independent of the author's primal LP.
+  (iii) §9 table: all 12 b_min values reproduced (|diff| <= 1e-3, the author's bisection returns
+  the upper end) - neighbour formulation on all 3^n patterns AND, at 8 beads, an all-pairs
+  formulation on conformations only (0.438 both ways).  Truth's single-flip constant eps x 1
+  (8 beads), eps x 2 (9 beads): confirmed.
+  LESSON: my first run labelled the two gauche states by absolute bond index instead of
+  chirality; that is not a torsion angle, the "one-flip" metric differs, and b_min from the
+  profile came out 0.215/0.425/0.835 instead of 0.220/0.438/0.866.  With internal coordinates
+  (sign of the triple product) everything agrees.  So b_min depends on the definition of the
+  elementary move - the note should say that the envelope is per torsion ANGLE state.
+  (iv) §11.4 (9 beads): gauche-fraction and R^2 rows reproduced exactly (4 columns each).
+  (v) §11.1 (13 beads): rows "R_g^2" and "three-shell profile" x targets gauche fraction and
+  end-to-end R^2 x three truths = 12 numbers reproduced to two decimals with a dual LP on the
+  un-aggregated 49833 conformations.  Not replicated: the compact-decile column and the
+  full-histogram row.
+* [step 7, ~19:10 UTC] `r3_extensions.py` (output `r3_extensions.out`).
+  (C) Theorem 4's ingredients verified exactly on simplex[15,4,8] (k=2), [15,8,4] (k=4), Golay
+  (k=7), r = 2,3,4: g_a^C in the class (max flip ratio = e^u), all Fourier coefficients of order
+  1..k zero, |U_a| <= |C| V(n,r), ln Z(g_a^C) >= ln Z(g_a).
+  (A) theta_na with the oracle: for the C-symmetrised cone / flattened cone the drop of ln Z is
+  >= D_R in every case computed (4 codes, u = 0.5, 1, 2, all R up to the covering radius+1), and
+  the general inequality drop_C >= D_R + ln(1 - gamma), gamma = (|C|-1)/2 cosh(u/2)^(-d_min),
+  follows from  Z(flat_C) <= |C| Z(flat),  Z(cone_C) >= |C| Z(cone)(1 - gamma)  [P, referee].
+  With Theorem 11.45(a) applied to the sub-class of C-invariant members (on which the oracle is
+  constant) this gives: the non-adaptive exponent theta_na is unchanged by the k-body oracle.
+  (B) Mixtures: Delta := S(nu_pi) - n h(sigma) >= -ln E kappa^{d(Z,Z')} >= -ln min_r[M_t/min F_t^2
+  + kappa^(r+1)] verified on 3 codes x 3 values of b and on 4 non-code 4-wise uniform mixing laws
+  (n = 15); the last expression tends to t ln n - ln t! (n = 1e5, t=2, b=2: 22.33 vs 22.33; upper
+  bound of the note t ln 2n = 24.41).  So within mixtures of polarised basins the entropy price
+  of hiding from k-body data is (k/2) ln n + O_k(1) for even k.
+* [step 8] `r3_prop5b_overlap.py` (output `r3_prop5b_overlap.out`): the overlap lemma for a full
+  proof of Prop 5b at every u: omega/W_twin <= Hoeffding bound exp(-2 lam^2/r1) (verified, with
+  huge margin); under dominance W/2^n >= 2 e^u r1 and small overlap, U'(+1) < U0 < U'(-1)
+  (numerically U'(+-1) - U0 = -c sigma, +c(1-sigma) to 3 digits), root exists, ln Z'-ln Z0 = ln 2.
+  u_0 with rho_0(u_0) = 1/4 is 2.4375 (above it twins can be taken disjoint and no overlap lemma
+  is needed).
+* Read the author's scripts AFTER the above.  code_cone_check.py tests the VARIANT
+  exp(-b d(x,C)) only (asserts k-wise uniformity and the lower end; the upper end of (c) is
+  printed, not asserted, and is not proved in the note for the variant - it is true: the Voronoi
+  cell of a codeword is a down-set, Harris' inequality gives E[d | cell] <= E d).
+  basin_bound_check.py tests t = 1 only (RM(1,3), RM(1,4), simplex[15,4]) with 3 centres per
+  measure.  calorimetric_twin_exact.py uses r1 = round(rho1 n) and n in {400, 1000}; the n = 5000
+  numbers come from the disjoint idealisation (calorimetric_twin_check.py).
+  envelope_identified.py labels gauche states by chirality (correct internal coordinate).

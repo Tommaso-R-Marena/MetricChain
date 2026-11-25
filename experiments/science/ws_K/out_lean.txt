@@ -27,8 +27,11 @@
 'MetricChain.Kinetics.singleSite_symm' does not depend on any axioms
 'MetricChain.Kinetics.wallBox_pairwiseDisjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MetricChain.Kinetics.box_trap_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Kinetics.ferroW_basin_verified' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Kinetics.ferroW_wall_verified' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Kinetics.ferroW_trap' depends on axioms: [propext, Classical.choice, Quot.sound]
 
-real	0m28.942s
-user	0m7.928s
-sys	0m1.490s
+real	0m23.833s
+user	0m8.232s
+sys	0m1.621s
 exit: 0

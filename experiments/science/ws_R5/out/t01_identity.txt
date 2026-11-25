@@ -22,27 +22,37 @@ asym q=3 #vertices=5
  [ 0.   0.5  1. ]]
 
 == identity F*(t): route1 (LP game, blind search over gamma) | route2 primal | route3 dual | LP at centre ==
-bin   t=0.1  blind=0.0092420174  primal=0.0092420174  dual=0.0092420174  LP@centre=0.0092420174  gap=6.1e-11  centre_in_L=True  primal-blind=+6.42e-17
-bin   t=0.3  blind=0.0213256315  primal=0.0213256315  dual=0.0213256315  LP@centre=0.0213256315  gap=2.2e-11  centre_in_L=True  primal-blind=+3.47e-18
+bin   t=0.1  blind=0.0092420174  primal=0.0092420174  dual=0.0092420174  LP@centre=0.0092420174  gap=-1.1e-16  centre_in_L=True  primal-blind=+8.15e-17
+bin   t=0.3  blind=0.0213256315  primal=0.0213256315  dual=0.0213256315  LP@centre=0.0213256315  gap=8.0e-17  centre_in_L=True  primal-blind=-1.32e-16
 bin   t=0.5  blind=0.0250235863  primal=0.0250235863  dual=0.0250235863  LP@centre=0.0250235863  gap=5.6e-17  centre_in_L=True  primal-blind=-7.98e-17
-bin   t=0.7  blind=0.0206543463  primal=0.0206543463  dual=0.0206543463  LP@centre=0.0206543463  gap=4.6e-10  centre_in_L=True  primal-blind=-4.16e-17
-bin   t=0.9  blind=0.0086733080  primal=0.0086733080  dual=0.0086733080  LP@centre=0.0086733080  gap=1.5e-10  centre_in_L=True  primal-blind=-3.30e-17
-path  t=0.1  blind=0.0355314407  primal=0.0355314389  dual=0.0355314389  LP@centre=0.0355314389  gap=3.8e-10  centre_in_L=True  primal-blind=-1.73e-09
-path  t=0.3  blind=0.0793707497  primal=0.0793707467  dual=0.0793707467  LP@centre=0.0793707467  gap=1.8e-15  centre_in_L=True  primal-blind=-2.99e-09
-path  t=0.5  blind=0.0889935273  primal=0.0889935251  dual=0.0889935251  LP@centre=0.0889935251  gap=2.3e-08  centre_in_L=True  primal-blind=-2.19e-09
-path  t=0.7  blind=0.0695719005  primal=0.0695718998  dual=0.0695718998  LP@centre=0.0695718998  gap=4.8e-09  centre_in_L=True  primal-blind=-7.13e-10
-path  t=0.9  blind=0.0275627831  primal=0.0275627831  dual=0.0275627831  LP@centre=0.0275627831  gap=2.1e-09  centre_in_L=True  primal-blind=-2.88e-16
-tri   t=0.1  blind=0.0253802804  primal=0.0253802804  dual=0.0253802804  LP@centre=0.0253802804  gap=1.1e-13  centre_in_L=True  primal-blind=-1.48e-11
-tri   t=0.3  blind=0.0575436968  primal=0.0575436968  dual=0.0575436968  LP@centre=0.0575436968  gap=7.1e-09  centre_in_L=True  primal-blind=-2.62e-13
-tri   t=0.5  blind=0.0666725949  primal=0.0666725949  dual=0.0666725949  LP@centre=0.0666725949  gap=5.4e-09  centre_in_L=True  primal-blind=-3.05e-16
-tri   t=0.7  blind=0.0545583655  primal=0.0545583655  dual=0.0545583655  LP@centre=0.0545583655  gap=1.5e-09  centre_in_L=True  primal-blind=-3.75e-16
-tri   t=0.9  blind=0.0226649719  primal=0.0226649719  dual=0.0226649719  LP@centre=0.0226649719  gap=8.6e-09  centre_in_L=True  primal-blind=-1.15e-15
-asym  t=0.1  blind=0.0170793430  primal=0.0170793418  dual=0.0170793418  LP@centre=0.0170793418  gap=1.8e-09  centre_in_L=True  primal-blind=-1.21e-09
-asym  t=0.3  blind=0.0390982575  primal=0.0390982546  dual=0.0390982546  LP@centre=0.0390982546  gap=3.2e-09  centre_in_L=True  primal-blind=-2.92e-09
-asym  t=0.5  blind=0.0453477129  primal=0.0453477094  dual=0.0453477094  LP@centre=0.0453477094  gap=1.5e-11  centre_in_L=True  primal-blind=-3.53e-09
-asym  t=0.7  blind=0.0368820401  primal=0.0368820372  dual=0.0368820372  LP@centre=0.0368820372  gap=6.0e-09  centre_in_L=True  primal-blind=-2.95e-09
-asym  t=0.9  blind=0.0152282713  primal=0.0152282713  dual=0.0152282713  LP@centre=0.0152282713  gap=3.7e-09  centre_in_L=True  primal-blind=-6.00e-16
-largest |primal-dual|, |primal-LP@centre|, duality gap: 2.28e-08
-blind search never exceeds the Renyi value: False  largest shortfall of the blind search: 6.42e-17
+bin   t=0.7  blind=0.0206543463  primal=0.0206543463  dual=0.0206543463  LP@centre=0.0206543463  gap=-3.5e-18  centre_in_L=True  primal-blind=-4.86e-17
+bin   t=0.9  blind=0.0086733080  primal=0.0086733080  dual=0.0086733080  LP@centre=0.0086733080  gap=6.6e-17  centre_in_L=True  primal-blind=-1.70e-16
+path  t=0.1  blind=0.0355314389  primal=0.0355314389  dual=0.0355314389  LP@centre=0.0355314389  gap=2.3e-15  centre_in_L=True  primal-blind=+6.53e-15
+path  t=0.3  blind=0.0793707467  primal=0.0793707467  dual=0.0793707467  LP@centre=0.0793707467  gap=4.0e-16  centre_in_L=True  primal-blind=+8.33e-17
+path  t=0.5  blind=0.0889935251  primal=0.0889935251  dual=0.0889935251  LP@centre=0.0889935251  gap=5.0e-16  centre_in_L=True  primal-blind=-5.41e-16
+path  t=0.7  blind=0.0695718998  primal=0.0695718998  dual=0.0695718998  LP@centre=0.0695718998  gap=1.7e-16  centre_in_L=True  primal-blind=+1.53e-16
+path  t=0.9  blind=0.0275627831  primal=0.0275627831  dual=0.0275627831  LP@centre=0.0275627831  gap=2.5e-16  centre_in_L=True  primal-blind=-1.56e-16
+tri   t=0.1  blind=0.0253802804  primal=0.0253802804  dual=0.0253802804  LP@centre=0.0253802804  gap=-2.6e-15  centre_in_L=True  primal-blind=+2.54e-15
+tri   t=0.3  blind=0.0575436968  primal=0.0575436968  dual=0.0575436968  LP@centre=0.0575436968  gap=2.0e-16  centre_in_L=True  primal-blind=-2.50e-16
+tri   t=0.5  blind=0.0666725949  primal=0.0666725949  dual=0.0666725949  LP@centre=0.0666725949  gap=3.0e-14  centre_in_L=True  primal-blind=-8.33e-17
+tri   t=0.7  blind=0.0545583655  primal=0.0545583655  dual=0.0545583655  LP@centre=0.0545583655  gap=3.1e-16  centre_in_L=True  primal-blind=-1.46e-16
+tri   t=0.9  blind=0.0226649719  primal=0.0226649719  dual=0.0226649719  LP@centre=0.0226649719  gap=3.8e-16  centre_in_L=True  primal-blind=-4.44e-16
+asym  t=0.1  blind=0.0170793418  primal=0.0170793418  dual=0.0170793418  LP@centre=0.0170793418  gap=7.8e-16  centre_in_L=True  primal-blind=+1.14e-13
+asym  t=0.3  blind=0.0390982546  primal=0.0390982546  dual=0.0390982546  LP@centre=0.0390982546  gap=2.2e-16  centre_in_L=True  primal-blind=+2.28e-13
+asym  t=0.5  blind=0.0453477094  primal=0.0453477094  dual=0.0453477094  LP@centre=0.0453477094  gap=3.3e-16  centre_in_L=True  primal-blind=+2.26e-13
+asym  t=0.7  blind=0.0368820372  primal=0.0368820372  dual=0.0368820372  LP@centre=0.0368820372  gap=-1.1e-16  centre_in_L=True  primal-blind=+2.99e-15
+asym  t=0.9  blind=0.0152282713  primal=0.0152282713  dual=0.0152282713  LP@centre=0.0152282713  gap=2.9e-16  centre_in_L=True  primal-blind=-3.87e-16
+largest |primal-dual|, |primal-LP@centre|, duality gap: 4.08e-14
+blind search never exceeds the Renyi value: True  largest shortfall of the blind search: 2.28e-13
 
 == random sites, asymmetric envelopes, q = 2,3,4 ==
+cases: 36;  largest deviation among (primal, dual, LP at centre, duality gap): 9.07e-13
+centres outside L: 0;  largest (blind - primal) [must be <= ~0]: +5.97e-16
+
+== F(gamma,t) <= F*(t) also for gamma OUTSIDE L (the inequality needs only that pi_gamma is a probability) ==
+largest F(gamma,t) - F*(t) over 1600 random gamma (unconstrained): -2.993e-07
+
+== E_0(rho,M) (Gallager, raw definition) = rho * I_t^Sibson(M) = G_t(M)/t, t = 1/(1+rho) ==
+largest |E_0(rho,M) - G_t(M)/t|: 5.41e-16
+[308.5 s]
+exit=0

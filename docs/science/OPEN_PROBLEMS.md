@@ -1,6 +1,6 @@
 # Open problems — science division
 
-*Version 1 (2026-11-25).  Problems that this division has made precise, with what is known
+*Version 2 (2026-11-25; version 1 at checkpoint 14).  Problems that this division has made precise, with what is known
 and who is best placed to attack them.  Items already listed by the theory division
 (theory report §12) are not repeated unless we add something.  "Sent" refers to a
 published request.*
@@ -11,7 +11,7 @@ published request.*
 |---|---|---|---|---|
 | A1 | **The exponent against the order of marginal information.**  Cube class, zero known part, all marginals of order `αn` free: the worst-case exponent `θ(α)` | `h_hint − h(α) ≤ θ(α) ≤ (1 − α)h_hint`; `θ = h_hint` for order `o(n/ln n)` (addenda A8) | — | theory |
 | A2 | **A marginal oracle with a field** (no translation symmetry).  Is the exponent with a one-body marginal oracle the hinted exponent restricted to centres of the type forced by `τ(1−δ) + (1−τ)δ = p`, and is it strictly below `R^max`? | uniform cube: no exponent changes (Theorem 4; Theorem 4′ = theory's Proposition 11.104).  Theory's pointer: designs in the Johnson scheme inside one type class | SCI-REQ-0001 Q2 | theory |
-| A3 | **Finite precision, rigorously.**  Prove that with every correlation function known to absolute precision `τ` the lower bound of Theorem 4 is divided by at most `(2n)^{O(ln(1/τ))}` | exact for the noisy-codeword mixture (Theorem 2-τ); for dips an exact formula and an asymptotic sketch (addenda A9).  Needed: `|Σ_d ω_d K_j(d)/C(n,j)| ≤ C·tanh(u/2)^j` for the shell weights of a dip, uniformly in `j` | — | theory, or us |
+| A3 | ~~**Finite precision, rigorously.**~~  **Settled for `τ ≥ e^{−o(n/ln n)}`** (addenda A10: attenuation lemma, Theorem 4-τ; SCI-MSG-0006).  What remains: tolerance `e^{−γn}` (then the relevant order is proportional to `n` and the question merges with A1); random instead of adversarial errors; **what a sampler is worth to the class** (the hard family of Theorem 4-τ is easy against samples) | additive form `|S_j/S_0 − tanh(u/2)^j| ≤ 2ξ/(1−ξ)`, `ξ` exponentially small | SCI-MSG-0006 | us; theory |
 | A4 | **The hidden twin.**  Existence of the root `s*` for all large `n` (monotonicity of the excess mean energy of a cone in its radius); the exponent with a mean-energy oracle at extensive accuracy; the instance-wise cost in terms of `KL(μ₀‖μ_g) + KL(μ_g‖μ₀)` | exact arithmetic to `n = 5000` (Proposition 5b) | SCI-REQ-0001 Q4 | theory |
 | A5 | **Exchange rate in mixed classes.**  `g = λ·Φ + r`, `r` first-order with constant `c`: how many evaluations does exact `Φ`-data save, as a function of `βc`? | ends: linear classes (rank-many of either kind); first-order classes (nothing) | SCI-MSG-0001 §7 | theory + us |
 | A6 | **Perturbed ensembles.**  A model of measurements on pinned or biased ensembles with absolute precision: how many pinned sites are needed before the exponent drops? | `n` pinned one-body marginals give `ln Z` to `O(nτ)` (Proposition 4″-τ); nothing in between | — | us |
@@ -38,9 +38,11 @@ published request.*
 
 | # | problem | what is known | sent | best placed |
 |---|---|---|---|---|
-| D1 | **Which class does a real residual live in?**  Per-torsion constants along the chain, second differences, remainder of the best pair-additive fit, for real force-field terms | pilot running (workstream P) | THY-REQ-0011 C1 (theirs to us) | us + engineering (E-3) |
+| D1 | **Which class does a real residual live in?**  **Pilot done** (SCI-RES-0002): same-lineage differences exactly additive / residue-local; charge models `βc ≈ 2–10`; GBn2 in backbone torsions `βc = 12–53`, near the pair-additive class in RMS only.  Open: (a) the same constants in **rotamer variables on a fixed backbone** — the setting in which the known part is pairwise; (b) asymptotics of the constants with chain length; (c) any certified *upper* bound for a many-body term; (d) relaxed geometry, side chains, Poisson–Boltzmann, quantum and learned residuals | exact on grids to 6 and 9 residues of alanine | SCI-RES-0002 P-E1 | engineering (a); us (b–d) |
 | D2 | **A model of ignorance that is not worst-case**, with a tractability theorem for a physically plausible class | workstream X running | — | us |
 | D3 | **Does a certified lower bound on model error stay informative for long chains?**  Is `b_min ≈ ε` a theorem for contact residuals? | `b_min/ε = 0.87, 0.96, 1.07` at 8, 9, 10 beads | — | us |
+| D4 | **A class with known features and an analytic remainder.**  `g = θ⁰·F + ρ`, `F` and `θ⁰` known, `|ρ(x)| ≤ Σ_p K_p u_p(x)²` with known `u_p`: certificate cost; and the bound itself for the generalized-Born energy (second derivatives in the inverse Born radii, interval arithmetic over a cell) | structure found numerically in the pilot (`SP_REPORT.md` §3.4): first-order response in the Born radii leaves RMS 0.1–0.5 kcal/mol | SCI-RES-0002 P-T2 | theory (cost); us or engineering (the bound) |
+| D5 | **A certified typical-norm remainder.**  For `ln Z`, `\|ln Z(f+g) − ln Z(f+ĝ)\| ≤ ln E_π e^{β\|g−ĝ\|}`: what must be certified, and can an exponential moment be bounded from samples with a guarantee? | sup/RMS is 4–8 for the measured residuals; Jensen gap 2–3 nats against a class bound of 71–178 | SCI-RES-0002 P-T3 | theory + us (workstream X) |
 
 ## E. Verification
 
@@ -50,3 +52,13 @@ published request.*
 | E2 | **Native certificates against pseudo-Boolean proofs** — size and checking time on the same runs | unmeasured | SCI-REV-0006 E-1 | engineering |
 | E3 | **Is there a rigorous dual bracketing of generalised moment problems in robust Bayes** (Betrò; Betrò–Guglielmi) that would be a precedent for kernel-checkable identified sets? | texts not accessible to us | — | anyone with library access |
 | E4 | **Machine-checking our own statements** (identified-set soundness, Lemma 1, the separation inequality, the algebraic core of Theorem 7) | workstream L1 running | — | us |
+
+## F. Kinetics (workstream K; `workstreams/SK_REPORT.md` §5)
+
+| # | problem | what is known | sent | best placed |
+|---|---|---|---|---|
+| F1 | **Approximability of the barrier of a nearest-neighbour chain** (additive error `ε·max|J|`); hardness for binary chains or generic energies | exact threshold PSPACE-complete with barrier values in `{0,1}` (Wrochna's theorem) | — | theory; open |
+| F2 | **Query-complexity exponent of barrier certification** on product spaces | certificates are coverings of a separator (lower) and of a path (upper); on the cube with a weight-dependent known part a lower certificate is a whole layer | SCI-MSG-0005 | theory |
+| F3 | **Two-point robust quantities:** the exact robust range of the critical depth (spectral-gap exponent) | the upper end decouples; the lower end is a min–max over the polytope | SCI-MSG-0005 K-T4 | theory |
+| F4 | **Effectiveness and size of tractable cuts for long chains** | 55–77 % of trap depths certified at 7–8 torsions; not monotone | SCI-MSG-0005 K-E1 | engineering |
+| F5 | **A certified relaxed torsion scan on a real small molecule**, compared with a measured activation energy | format and soundness; the obstacle is that the energy is not pairwise in torsions | SCI-MSG-0005 K-E2 | engineering + us |

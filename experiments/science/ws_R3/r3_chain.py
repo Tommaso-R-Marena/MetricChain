@@ -165,10 +165,21 @@ def cmd_sec111(n=10):
     h = ch["h"][m].astype(float); g = ch["g"][m].astype(float); rg2 = ch["rg2"][m]; r2 = ch["r2"][m].astype(float)
     print(f"§11.1 ({N} beads, n={n}, {int(m.sum())} conformations): width of the model-free identified interval / a-priori range")
     print("   own enumeration; dual LP on un-aggregated conformations; note's values in brackets")
-    note = {("rg2", "gauche"): (0.76, 0.73, 0.72), ("rg2", "r2"): (0.41, 0.45, 0.37),
-            ("profile", "gauche"): (0.47, 0.26, 0.49), ("profile", "r2"): (0.59, 0.73, 0.50)}
-    feats = {"rg2": rg2[:, None], "profile": h}
-    targets = {"gauche": g / n, "r2": r2}
+    note = {("rg2", "gauche"): (0.76, 0.73, 0.72), ("rg2", "r2"): (0.41, 0.45, 0.37), ("rg2", "decile"): (0.79, 0.57, 0.89),
+            ("profile", "gauche"): (0.47, 0.26, 0.49), ("profile", "r2"): (0.59, 0.73, 0.50), ("profile", "decile"): (0.70, 0.29, 1.00),
+            ("fullhist", "gauche"): (0.31, 0.14, 0.35), ("fullhist", "r2"): (0.22, 0.18, 0.21), ("fullhist", "decile"): (0.50, 0.20, 0.75)}
+    # full pair-distance histogram over pairs with q - p >= 3 (definition read from the author's
+    # dia_chain.py AFTER my own enumerator was written), and the compact decile by R_g^2
+    X = ch["x"][m]
+    iu = np.triu_indices(N, 3)
+    d2all = ((X[:, iu[0], :] - X[:, iu[1], :]) ** 2).sum(-1)
+    svals = np.unique(d2all)
+    full = np.stack([(d2all == s).sum(1) for s in svals], axis=1).astype(float)
+    thr = np.quantile(rg2, 0.10)
+    decile = (rg2 <= thr).astype(float)
+    print(f"   full histogram: {len(svals)} distinct squared distances; compact decile: R_g^2 <= {thr:.4f}, athermal population {decile.mean():.4f}")
+    feats = {"rg2": rg2[:, None], "profile": h, "fullhist": full}
+    targets = {"gauche": g / n, "r2": r2, "decile": decile}
     for fn, F in feats.items():
         for tn, tgt in targets.items():
             out = []

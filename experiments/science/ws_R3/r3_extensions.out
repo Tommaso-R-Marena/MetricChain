@@ -1,0 +1,61 @@
+(C) Theorem 4 on small codes (exact)
+    simplex [15,4,8] r=2: |U_0| = 256 <= |C| V = 256: True;  ln Z(g^C) - ln Z(dip) = +0.0321 (>= 0);  ln Z(dip) - ln Z_0 = 0.0022;  max flip ratio 4.4817 <= e^u = 4.4817;  max |E chi_T|, 1<=|T|<=2: 0.0e+00; |T|=3: 2.38e-02
+    simplex [15,4,8] r=3: |U_0| = 1936 <= |C| V = 1936: True;  ln Z(g^C) - ln Z(dip) = +0.2864 (>= 0);  ln Z(dip) - ln Z_0 = 0.0224;  max flip ratio 4.4817 <= e^u = 4.4817;  max |E chi_T|, 1<=|T|<=2: 0.0e+00; |T|=3: 1.35e-01
+    simplex [15,4,8] r=4: |U_0| = 9216 <= |C| V = 9216: True;  ln Z(g^C) - ln Z(dip) = +1.1305 (>= 0);  ln Z(dip) - ln Z_0 = 0.1506;  max flip ratio 4.4817 <= e^u = 4.4817;  max |E chi_T|, 1<=|T|<=2: 0.0e+00; |T|=3: 2.76e-01
+    dual BCH(15,2) [15,8,4] r=2: |U_0| = 4096 <= |C| V = 4096: True;  ln Z(g^C) - ln Z(dip) = +0.4407 (>= 0);  ln Z(dip) - ln Z_0 = 0.0022;  max flip ratio 4.4817 <= e^u = 4.4817;  max |E chi_T|, 1<=|T|<=4: 0.0e+00; |T|=5: 1.83e-01
+    dual BCH(15,2) [15,8,4] r=3: |U_0| = 19456 <= |C| V = 30976: True;  ln Z(g^C) - ln Z(dip) = +1.6940 (>= 0);  ln Z(dip) - ln Z_0 = 0.0224;  max flip ratio 4.4817 <= e^u = 4.4817;  max |E chi_T|, 1<=|T|<=4: 0.0e+00; |T|=5: 2.59e-01
+    dual BCH(15,2) [15,8,4] r=4: |U_0| = 32000 <= |C| V = 147456: True;  ln Z(g^C) - ln Z(dip) = +3.0625 (>= 0);  ln Z(dip) - ln Z_0 = 0.1506;  max flip ratio 4.4817 <= e^u = 4.4817;  max |E chi_T|, 1<=|T|<=4: 0.0e+00; |T|=5: 2.61e-01
+    Golay [24,12,8] r=2: |U_0| = 102400 <= |C| V = 102400: True;  ln Z(g^C) - ln Z(dip) = +0.0247 (>= 0);  ln Z(dip) - ln Z_0 = 0.0000;  max flip ratio 4.4817 <= e^u = 4.4817;  max |E chi_T|, 1<=|T|<=7: 0.0e+00; |T|=8: 1.12e-02
+    Golay [24,12,8] r=3: |U_0| = 1232896 <= |C| V = 1232896: True;  ln Z(g^C) - ln Z(dip) = +0.3134 (>= 0);  ln Z(dip) - ln Z_0 = 0.0001;  max flip ratio 4.4817 <= e^u = 4.4817;  max |E chi_T|, 1<=|T|<=7: 0.0e+00; |T|=8: 5.56e-02
+    Golay [24,12,8] r=4: |U_0| = 9523200 <= |C| V = 9523200: True;  ln Z(g^C) - ln Z(dip) = +1.5309 (>= 0);  ln Z(dip) - ln Z_0 = 0.0009;  max flip ratio 4.4817 <= e^u = 4.4817;  max |E chi_T|, 1<=|T|<=7: 0.0e+00; |T|=8: 7.75e-02
+(A) simplex [15,4,8]: n=15, |C|=16, d_min=8, covering radius 7
+    u=0.5: R=1: drop_C=0.0012 vs D_R=0.0003 (disjoint, >= holds) |U|/(|C|V)=1.000; R=2: drop_C=0.0134 vs D_R=0.0034 (disjoint, >= holds) |U|/(|C|V)=1.000; R=3: drop_C=0.0712 vs D_R=0.0179 (disjoint, >= holds) |U|/(|C|V)=1.000; R=4: drop_C=0.2596 vs D_R=0.0608 (disjoint, >= holds) |U|/(|C|V)=1.000; R=5: drop_C=0.6405 vs D_R=0.1547 |U|/(|C|V)=0.748; R=6: drop_C=1.1320 vs D_R=0.3197 |U|/(|C|V)=0.405; R=7: drop_C=1.6319 vs D_R=0.5668 |U|/(|C|V)=0.206; R=8: drop_C=2.1319 vs D_R=0.8952 |U|/(|C|V)=0.125
+    u=1.0: R=1: drop_C=0.0100 vs D_R=0.0058 (disjoint, >= holds) |U|/(|C|V)=1.000; R=2: drop_C=0.0713 vs D_R=0.0404 (disjoint, >= holds) |U|/(|C|V)=1.000; R=3: drop_C=0.2646 vs D_R=0.1437 (disjoint, >= holds) |U|/(|C|V)=1.000; R=4: drop_C=0.7322 vs D_R=0.3552 (disjoint, >= holds) |U|/(|C|V)=1.000; R=5: drop_C=1.5361 vs D_R=0.7003 |U|/(|C|V)=0.748; R=6: drop_C=2.5226 vs D_R=1.1883 |U|/(|C|V)=0.405; R=7: drop_C=3.5223 vs D_R=1.8153 |U|/(|C|V)=0.206; R=8: drop_C=4.5223 vs D_R=2.5666 |U|/(|C|V)=0.125
+    u=2.0: R=1: drop_C=0.1451 vs D_R=0.1379 (disjoint, >= holds) |U|/(|C|V)=1.000; R=2: drop_C=0.5580 vs D_R=0.5239 (disjoint, >= holds) |U|/(|C|V)=1.000; R=3: drop_C=1.2986 vs D_R=1.1817 (disjoint, >= holds) |U|/(|C|V)=1.000; R=4: drop_C=2.5255 vs D_R=2.0970 (disjoint, >= holds) |U|/(|C|V)=1.000; R=5: drop_C=4.2505 vs D_R=3.2458 |U|/(|C|V)=0.748; R=6: drop_C=6.2321 vs D_R=4.6027 |U|/(|C|V)=0.405; R=7: drop_C=8.2317 vs D_R=6.1423 |U|/(|C|V)=0.206; R=8: drop_C=10.2317 vs D_R=7.8368 |U|/(|C|V)=0.125
+(A) RM(1,4) [16,5,8]: n=16, |C|=32, d_min=8, covering radius 6
+    u=0.5: R=1: drop_C=0.0012 vs D_R=0.0002 (disjoint, >= holds) |U|/(|C|V)=1.000; R=2: drop_C=0.0133 vs D_R=0.0023 (disjoint, >= holds) |U|/(|C|V)=1.000; R=3: drop_C=0.0749 vs D_R=0.0124 (disjoint, >= holds) |U|/(|C|V)=1.000; R=4: drop_C=0.2932 vs D_R=0.0444 (disjoint, >= holds) |U|/(|C|V)=1.000; R=5: drop_C=0.6990 vs D_R=0.1182 |U|/(|C|V)=0.625; R=6: drop_C=1.1937 vs D_R=0.2542 |U|/(|C|V)=0.293; R=7: drop_C=1.6937 vs D_R=0.4662 |U|/(|C|V)=0.138
+    u=1.0: R=1: drop_C=0.0091 vs D_R=0.0042 (disjoint, >= holds) |U|/(|C|V)=1.000; R=2: drop_C=0.0676 vs D_R=0.0310 (disjoint, >= holds) |U|/(|C|V)=1.000; R=3: drop_C=0.2647 vs D_R=0.1149 (disjoint, >= holds) |U|/(|C|V)=1.000; R=4: drop_C=0.7882 vs D_R=0.2938 (disjoint, >= holds) |U|/(|C|V)=1.000; R=5: drop_C=1.6343 vs D_R=0.5951 |U|/(|C|V)=0.625; R=6: drop_C=2.6256 vs D_R=1.0320 |U|/(|C|V)=0.293; R=7: drop_C=3.6256 vs D_R=1.6046 |U|/(|C|V)=0.138
+    u=2.0: R=1: drop_C=0.1305 vs D_R=0.1204 (disjoint, >= holds) |U|/(|C|V)=1.000; R=2: drop_C=0.5174 vs D_R=0.4692 (disjoint, >= holds) |U|/(|C|V)=1.000; R=3: drop_C=1.2414 vs D_R=1.0765 (disjoint, >= holds) |U|/(|C|V)=1.000; R=4: drop_C=2.5569 vs D_R=1.9328 (disjoint, >= holds) |U|/(|C|V)=1.000; R=5: drop_C=4.3425 vs D_R=3.0172 |U|/(|C|V)=0.625; R=6: drop_C=6.3306 vs D_R=4.3072 |U|/(|C|V)=0.293; R=7: drop_C=8.3306 vs D_R=5.7800 |U|/(|C|V)=0.138
+(A) dual BCH(15,2) [15,8,4]: n=15, |C|=256, d_min=4, covering radius 4
+    u=0.5: R=1: drop_C=0.0091 vs D_R=0.0003 (disjoint, >= holds) |U|/(|C|V)=1.000; R=2: drop_C=0.1018 vs D_R=0.0034 (disjoint, >= holds) |U|/(|C|V)=1.000; R=3: drop_C=0.4302 vs D_R=0.0179 |U|/(|C|V)=0.628; R=4: drop_C=0.9210 vs D_R=0.0608 |U|/(|C|V)=0.217; R=5: drop_C=1.4210 vs D_R=0.1547 |U|/(|C|V)=0.066
+    u=1.0: R=1: drop_C=0.0376 vs D_R=0.0058 (disjoint, >= holds) |U|/(|C|V)=1.000; R=2: drop_C=0.2931 vs D_R=0.0404 (disjoint, >= holds) |U|/(|C|V)=1.000; R=3: drop_C=1.0039 vs D_R=0.1437 |U|/(|C|V)=0.628; R=4: drop_C=1.9890 vs D_R=0.3552 |U|/(|C|V)=0.217; R=5: drop_C=2.9890 vs D_R=0.7003 |U|/(|C|V)=0.066
+    u=2.0: R=1: drop_C=0.2274 vs D_R=0.1379 (disjoint, >= holds) |U|/(|C|V)=1.000; R=2: drop_C=1.0322 vs D_R=0.5239 (disjoint, >= holds) |U|/(|C|V)=1.000; R=3: drop_C=2.6157 vs D_R=1.1817 |U|/(|C|V)=0.628; R=4: drop_C=4.5952 vs D_R=2.0970 |U|/(|C|V)=0.217; R=5: drop_C=6.5952 vs D_R=3.2458 |U|/(|C|V)=0.066
+(A) Golay [24,12,8]: n=24, |C|=4096, d_min=8, covering radius 4
+    u=0.5: R=1: drop_C=0.0005 vs D_R=0.0000 (disjoint, >= holds) |U|/(|C|V)=1.000; R=2: drop_C=0.0079 vs D_R=0.0001 (disjoint, >= holds) |U|/(|C|V)=1.000; R=3: drop_C=0.0638 vs D_R=0.0006 (disjoint, >= holds) |U|/(|C|V)=1.000; R=4: drop_C=0.3773 vs D_R=0.0029 (disjoint, >= holds) |U|/(|C|V)=1.000; R=5: drop_C=0.8773 vs D_R=0.0109 |U|/(|C|V)=0.316
+    u=1.0: R=1: drop_C=0.0035 vs D_R=0.0003 (disjoint, >= holds) |U|/(|C|V)=1.000; R=2: drop_C=0.0364 vs D_R=0.0035 (disjoint, >= holds) |U|/(|C|V)=1.000; R=3: drop_C=0.1966 vs D_R=0.0176 (disjoint, >= holds) |U|/(|C|V)=1.000; R=4: drop_C=0.8773 vs D_R=0.0589 (disjoint, >= holds) |U|/(|C|V)=1.000; R=5: drop_C=1.8773 vs D_R=0.1493 |U|/(|C|V)=0.316
+    u=2.0: R=1: drop_C=0.0597 vs D_R=0.0420 (disjoint, >= holds) |U|/(|C|V)=1.000; R=2: drop_C=0.2932 vs D_R=0.1987 (disjoint, >= holds) |U|/(|C|V)=1.000; R=3: drop_C=0.8527 vs D_R=0.5222 (disjoint, >= holds) |U|/(|C|V)=1.000; R=4: drop_C=2.3846 vs D_R=1.0318 (disjoint, >= holds) |U|/(|C|V)=1.000; R=5: drop_C=4.3846 vs D_R=1.7272 |U|/(|C|V)=0.316
+(B) dual BCH(15,2) [15,8,4]: n=15, |C|=256, k=4, t=2
+    b=1.0: Delta = S - n h(sigma) = 1.6591;  -ln E kappa^d(Z,Z') = 0.8738;  k-wise-uniform-only bound = 0.3799;  ln|C| = 5.5452;  ln M_t = 4.7958;  chain Delta >= code bound >= generic bound: True
+    b=2.0: Delta = S - n h(sigma) = 4.3724;  -ln E kappa^d(Z,Z') = 2.8921;  k-wise-uniform-only bound = 1.4196;  ln|C| = 5.5452;  ln M_t = 4.7958;  chain Delta >= code bound >= generic bound: True
+    b=4.0: Delta = S - n h(sigma) = 5.5217;  -ln E kappa^d(Z,Z') = 5.4389;  k-wise-uniform-only bound = 3.0487;  ln|C| = 5.5452;  ln M_t = 4.7958;  chain Delta >= code bound >= generic bound: True
+(B) Golay [24,12,8]: n=24, |C|=4096, k=7, t=3
+    b=1.0: Delta = S - n h(sigma) = 2.6613;  -ln E kappa^d(Z,Z') = 1.3981;  k-wise-uniform-only bound = 0.7361;  ln|C| = 8.3178;  ln M_t = 7.7515;  chain Delta >= code bound >= generic bound: True
+    b=2.0: Delta = S - n h(sigma) = 7.0666;  -ln E kappa^d(Z,Z') = 4.6419;  k-wise-uniform-only bound = 2.4194;  ln|C| = 8.3178;  ln M_t = 7.7515;  chain Delta >= code bound >= generic bound: True
+    b=4.0: Delta = S - n h(sigma) = 8.3158;  -ln E kappa^d(Z,Z') = 8.2987;  k-wise-uniform-only bound = 4.9332;  ln|C| = 8.3178;  ln M_t = 7.7515;  chain Delta >= code bound >= generic bound: True
+(B) simplex [15,4,8]: n=15, |C|=16, k=2, t=1
+    b=1.0: Delta = S - n h(sigma) = 1.4839;  -ln E kappa^d(Z,Z') = 0.8648;  k-wise-uniform-only bound = 0.2504;  ln|C| = 2.7726;  ln M_t = 2.7726;  chain Delta >= code bound >= generic bound: True
+    b=2.0: Delta = S - n h(sigma) = 2.6571;  -ln E kappa^d(Z,Z') = 2.3896;  k-wise-uniform-only bound = 1.0895;  ln|C| = 2.7726;  ln M_t = 2.7726;  chain Delta >= code bound >= generic bound: True
+    b=4.0: Delta = S - n h(sigma) = 2.7725;  -ln E kappa^d(Z,Z') = 2.7722;  k-wise-uniform-only bound = 2.0411;  ln|C| = 2.7726;  ln M_t = 2.7726;  chain Delta >= code bound >= generic bound: True
+(B') non-code mixing laws (n=15, 4-wise uniform): S(nu_pi) - n h(sigma) vs -ln E kappa^d(Z,Z') vs generic bound
+    trial 0 (5 components) b=2.0: Delta = 4.6685 >= 2.8999 >= 1.4196: True
+    trial 0 (5 components) b=4.0: Delta = 6.7434 >= 6.2056 >= 3.0487: True
+    trial 1 (5 components) b=2.0: Delta = 4.6804 >= 2.9002 >= 1.4196: True
+    trial 1 (5 components) b=4.0: Delta = 6.7841 >= 6.2459 >= 3.0487: True
+    trial 2 (3 components) b=2.0: Delta = 4.5993 >= 2.8985 >= 1.4196: True
+    trial 2 (3 components) b=4.0: Delta = 6.3976 >= 6.0127 >= 3.0487: True
+    trial 3 (3 components) b=2.0: Delta = 4.5696 >= 2.8977 >= 1.4196: True
+    trial 3 (3 components) b=4.0: Delta = 6.2942 >= 5.9142 >= 3.0487: True
+(B'') the generic lower bound  -ln min_r [M_t/min F_t^2 + kappa^(r+1)]  against  t ln n - ln t!  and ceil(k/2) ln(2n):
+    b=1.0 t=1: n=1e2: 2.49 / 4.61 / 5.30  n=1e3: 6.52 / 6.91 / 7.60  n=1e4: 9.16 / 9.21 / 9.90  n=1e5: 11.51 / 11.51 / 12.21
+    b=1.0 t=2: n=1e2: 3.05 / 8.52 / 10.60  n=1e3: 11.95 / 13.12 / 15.20  n=1e4: 17.56 / 17.73 / 19.81  n=1e5: 22.31 / 22.33 / 24.41
+    b=1.0 t=3: n=1e2: 3.11 / 12.02 / 15.89  n=1e3: 16.57 / 18.93 / 22.80  n=1e4: 25.51 / 25.84 / 29.71  n=1e5: 32.71 / 32.75 / 36.62
+    b=2.0 t=1: n=1e2: 3.90 / 4.61 / 5.30  n=1e3: 6.79 / 6.91 / 7.60  n=1e4: 9.19 / 9.21 / 9.90  n=1e5: 11.51 / 11.51 / 12.21
+    b=2.0 t=2: n=1e2: 6.54 / 8.52 / 10.60  n=1e3: 12.79 / 13.12 / 15.20  n=1e4: 17.68 / 17.73 / 19.81  n=1e5: 22.33 / 22.33 / 24.41
+    b=2.0 t=3: n=1e2: 8.33 / 12.02 / 15.89  n=1e3: 18.27 / 18.93 / 22.80  n=1e4: 25.75 / 25.84 / 29.71  n=1e5: 32.73 / 32.75 / 36.62
+    b=4.0 t=1: n=1e2: 4.38 / 4.61 / 5.30  n=1e3: 6.87 / 6.91 / 7.60  n=1e4: 9.21 / 9.21 / 9.90  n=1e5: 11.51 / 11.51 / 12.21
+    b=4.0 t=2: n=1e2: 7.86 / 8.52 / 10.60  n=1e3: 13.01 / 13.12 / 15.20  n=1e4: 17.71 / 17.73 / 19.81  n=1e5: 22.33 / 22.33 / 24.41
+    b=4.0 t=3: n=1e2: 10.73 / 12.02 / 15.89  n=1e3: 18.72 / 18.93 / 22.80  n=1e4: 25.81 / 25.84 / 29.71  n=1e5: 32.74 / 32.75 / 36.62
+
+real	1m35.503s
+user	0m20.795s
+sys	0m12.070s

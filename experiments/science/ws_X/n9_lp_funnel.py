@@ -153,43 +153,48 @@ def run_family(name, make_edges, n, p_af, hscale, ntrial, hetero=False):
     return rec
 
 
-out = []
-for p_af in (0.0, 0.1, 0.3, 0.5):
-    for hs in (0.5, 2.0):
-        out.append(run_family("grid4x4", lambda: grid_edges(4, 4), 16, p_af, hs, 60))
-for p_af in (0.0, 0.3, 0.5):
-    out.append(run_family("chain12+6contacts", lambda: chain_with_contacts(12, 6), 12, p_af, 1.0, 100))
-    out.append(run_family("chain12+6contacts", lambda: chain_with_contacts(12, 6), 12, p_af, 1.0, 100,
-                          hetero=True))
-out.append(run_family("tree14", lambda: random_tree(14), 14, 0.5, 1.0, 100))
-out.append(run_family("tree14", lambda: random_tree(14), 14, 0.5, 1.0, 100, hetero=True))
+def main():
+    out = []
+    for p_af in (0.0, 0.1, 0.3, 0.5):
+        for hs in (0.5, 2.0):
+            out.append(run_family("grid4x4", lambda: grid_edges(4, 4), 16, p_af, hs, 60))
+    for p_af in (0.0, 0.3, 0.5):
+        out.append(run_family("chain12+6contacts", lambda: chain_with_contacts(12, 6), 12, p_af, 1.0, 100))
+        out.append(run_family("chain12+6contacts", lambda: chain_with_contacts(12, 6), 12, p_af, 1.0, 100,
+                              hetero=True))
+    out.append(run_family("tree14", lambda: random_tree(14), 14, 0.5, 1.0, 100))
+    out.append(run_family("tree14", lambda: random_tree(14), 14, 0.5, 1.0, 100, hetero=True))
 
-# ---- a minimal explicit example: exhaustive search over triangles with half-integer fields
-best = None
-edges = [(0, 1), (1, 2), (0, 2)]
-c = np.ones(3)
-vals = [x / 2 for x in range(-8, 9)]
-for Js in itertools.product((-1.0, 1.0), repeat=3):
-    for hs in itertools.product(vals, repeat=3):
-        h, J = np.array(hs), np.array(Js)
-        E, _ = energies(3, h, edges, J)
-        srt = np.sort(E)
-        if srt[1] - srt[0] < 1e-9:
-            continue                                       # unique ground state only
-        xs, tau, droplet = tau_integer(3, E, c)
-        tlp, st = tau_lp(3, h, edges, J, c, xs)
-        if st == 0 and tau - tlp > 1e-6:
-            gap = (tau - tlp) / tau
-            if best is None or gap > best[0] + 1e-9:
-                best = (gap, hs, Js, tau, tlp, xs, droplet, E.tolist())
-if best is None:
-    ex = {"example": "no triangle with half-integer fields in [-4,4] and J=+-1 has tau_LP < tau"}
-else:
-    ex = {"example": "triangle, largest relative gap among half-integer fields in [-4,4], J=+-1",
-          "h": best[1], "J(01,12,02)": best[2], "tau": best[3], "tau_LP": best[4],
-          "xstar": best[5], "worst_droplet_size": best[6], "E": best[7]}
-print(ex)
-out.append(ex)
-with open("n9_lp_funnel.json", "w") as fh:
-    json.dump(out, fh, indent=1)
-print("N9 done")
+    # ---- a minimal explicit example: exhaustive search over triangles with half-integer fields
+    best = None
+    edges = [(0, 1), (1, 2), (0, 2)]
+    c = np.ones(3)
+    vals = [x / 2 for x in range(-8, 9)]
+    for Js in itertools.product((-1.0, 1.0), repeat=3):
+        for hs in itertools.product(vals, repeat=3):
+            h, J = np.array(hs), np.array(Js)
+            E, _ = energies(3, h, edges, J)
+            srt = np.sort(E)
+            if srt[1] - srt[0] < 1e-9:
+                continue                                       # unique ground state only
+            xs, tau, droplet = tau_integer(3, E, c)
+            tlp, st = tau_lp(3, h, edges, J, c, xs)
+            if st == 0 and tau - tlp > 1e-6:
+                gap = (tau - tlp) / tau
+                if best is None or gap > best[0] + 1e-9:
+                    best = (gap, hs, Js, tau, tlp, xs, droplet, E.tolist())
+    if best is None:
+        ex = {"example": "no triangle with half-integer fields in [-4,4] and J=+-1 has tau_LP < tau"}
+    else:
+        ex = {"example": "triangle, largest relative gap among half-integer fields in [-4,4], J=+-1",
+              "h": best[1], "J(01,12,02)": best[2], "tau": best[3], "tau_LP": best[4],
+              "xstar": best[5], "worst_droplet_size": best[6], "E": best[7]}
+    print(ex)
+    out.append(ex)
+    with open("n9_lp_funnel.json", "w") as fh:
+        json.dump(out, fh, indent=1)
+    print("N9 done")
+
+
+if __name__ == "__main__":
+    main()

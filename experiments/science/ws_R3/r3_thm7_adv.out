@@ -1,0 +1,10 @@
+(a) J / [2 TV ln((1+TV)/(1-TV))] over 2e5 random pairs: min = 1.000000 (>= 1 claimed; = 1 on symmetric two-point pairs)
+(b) 4000 random instances (|X|<40, <=6 features): max TV/(w/4) = 0.99994, max TV/tanh(w/4) = 0.99999, max J/(w^2/4) = 0.99994, max J/(w tanh(w/4)) = 0.99999;
+    identity (i) residual 3.3e-09, Pythagoras (v) residual 3.3e-09, moment residual 4.6e-09
+(d) the extremal family: two points, no feature, mu0(A) = 1/(1+e^{w/2}), r = 0 on A, w off A
+   w=0.1: TV = 0.0249947930, tanh(w/4) = 0.0249947930; J = 0.0024994793, w tanh(w/4) = 0.0024994793; note's example (uniform mu0): TV = 0.024979
+   w=1.0: TV = 0.2449186624, tanh(w/4) = 0.2449186624; J = 0.2449186624, w tanh(w/4) = 0.2449186624; note's example (uniform mu0): TV = 0.231059
+   w=4.0: TV = 0.7615941560, tanh(w/4) = 0.7615941560; J = 3.0463766238, w tanh(w/4) = 3.0463766238; note's example (uniform mu0): TV = 0.482014
+   w=10.0: TV = 0.9866142982, tanh(w/4) = 0.9866142982; J = 9.8661429815, w tanh(w/4) = 9.8661429815; note's example (uniform mu0): TV = 0.499955
+(c) adversarial ascent (Nelder-Mead, many restarts): can features make max-ent refinement worse than tanh(w/4)?
+   w=0.5: best TV found = 0.124353; tanh(w/4) = 0.124353; note's w/4 = 0.1250 | best KL(mu|nu) = 0.03114, best KL(nu|mu) = 0.03114; no-feature sup: 0.03114, 0.03114; J bound w tanh(w/4) = 0.06218; note's w^2/4 = 0.0625

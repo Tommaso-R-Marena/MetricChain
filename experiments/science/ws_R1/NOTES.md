@@ -167,3 +167,31 @@ shown to be the degenerate accuracy: at X = 1e-8, 1e-6, 1e-4 the excess is ≤ 1
 X = 1e-12 gives .094079262253 < two-block .094079262572.  (N^κ has a square-root cusp at X=0: N(1e-12) = N(0) − 5.8e-7.)
 The best 3-block profile has two equal block densities (.143090, .143090, .552343; weights .1397+.4769, .3834) = a two-block
 profile with m = .383 = my m_N for κ=.3.   ⇒ 11.90(a) REPLICATED numerically (R: e≥0 and e<0; N: X≥0).
+
+## Step 10 — after the coordinator's message
+- Read thy_ro (89ac710): diff of §11.25 old/new: only (1) status line ("11.78/11.79 refereed 'proved' by R10 as the checkpoint closed;
+  report applied at the twelfth"), (2) a note in Cor 11.91(iii) (R10: the junction of Prop 11.81(b) comes earlier for u > 2 — global half
+  false as a general statement), (3) the remark on more than two letters, rewritten with a "Correction" paragraph; harness XXI.1–5, 24 mutations.
+  New §11.26 (workstream W): Thms 11.95–11.101, Prop 11.102–11.103; Prop 11.103(d),(e) carry the corrected statements.  D52 item 7.
+- A1_REPORT §2.1: Lemma 11.89 = Hasenclever–Scholz (arXiv:1302.6161) Prop 8(a); A1's proof by two exponential tilts.
+  MY READING: arXiv abstract page [abstract] and ar5iv full text through the fetch tool [full text, machine-summarised; Prop 8 quoted:
+  "For all x∈ℝ∖{0}: a) sMutInf_x has exactly one maximum at the origin (y,z)=(0,0). b) lim sMutInf_x = 0"]; x = ln√(odds ratio).
+  The fetch summary says the published proof is sketched ("after some calculations").  Journal reference (Open Stat. Probab. J. 2016)
+  NOT verified by me (arXiv page lists none).
+- My own short search (3 queries): no capacity-phrased version found; Ding–Song–Sun (arXiv:2107.09243, to appear PTRF) [abstract]:
+  in ferromagnetic Ising models spin–spin correlations are maximal at zero field — the covariance analogue, any graph.
+  One-line analogue for the phi coefficient (mine): φ = sinh2J / sqrt((cosh2h1+cosh2J)(cosh2h2+cosh2J)) ≤ tanh J = Yule's Y.
+- `lemma_1189_authors_steps.py`: the authors' six steps verified numerically (40 digits): (1) 4e-40, (2) 2e-40, (3) max T = −5e-6 < 0,
+  (4) closed form 3e-40, max(−T−δΔ) = −6e-5 < 0, (5) h1* = −k (1e-44), 0<k<h2, g(k)<δ(h2), dC/dh2 formula = finite difference of the
+  directly maximised capacity, max dC/dh2 = −3.6e-4 < 0, (6) ✓.  I also re-derived (1)–(6) by hand: correct, incl. the envelope step
+  (the existence of the root δ(h1) = T/Δ needs |T/Δ| < J, which is (4), cited one line later; non-degeneracy ∂²I/∂h1² < 0 gives
+  differentiability of the maximiser).
+- Lean: verbatim copy of SliceRefinement.lean + `#print axioms` compiles in 18 s (`out_lean_slice_refinement.txt`): all five theorems
+  depend only on [propext, Classical.choice, Quot.sound].  Added: satisfiability example, `lower_end_any` (paper's lower end max_t p_t L_t).
+- `remark_v2_sites.py` (new version of the remark, Prop 11.103(d),(e), via the vertex-channel formulas of Thm 11.99 taken as given):
+  (S1) thresholds u=1: .119499 (uniform 3), .120196 ((.05,.5,.45)), .120115 (2 letters) ✓ brackets 1e-9.
+  (S2) uniform q=3,4, u∈{.5,1,2,3}: E,a,h = best equal grouping in all 8 cases; q=4,u=1: E=E_2=.120115, a=a_4=.117993, h=h_2=.029139 ✓;
+       q=4,u=.5: h=.007673=h_2 (the old remark's .006552 = h_4 is the single-letter-dip value) ✓ CONFIRMS THE CORRECTION.
+  (S3) laws ((1−d)/2,(1−d)/2,d), u=.5: h = .007425 (d=1/3), .007610 (.1), .007673 (.01, .001, .0001) ✓; a_2(.3)=.011125, a_3(.3)=.010582 ✓.
+  (S4) h_k = h_{k+1} at e^u = k(k−1), k=2..5 (1e-10) ✓.
+  (S5) 171-law grid: uniform hardest for h at u=1 (.030654 vs .030572) and u=2 (.117699 vs .117413) ✓; u=.5 running.

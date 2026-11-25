@@ -1,0 +1,193 @@
+# Physical applicability: what the mathematics says about molecules, and what it does not
+
+*Science division.  Version 1 (2026-11-25).  A synthesis for a reader who has not followed
+the session.  Sources: workstream P (`workstreams/SP_REPORT.md`, a pilot on a real force
+field; two of its numbers re-computed by the coordinator, see §8), workstream K
+(`workstreams/SK_REPORT.md`, kinetics; its Lean file re-compiled and three scripts re-run by
+the coordinator), workstream A2 (`workstreams/A2_REPORT.md`), `INFERENCE_LIMITS.md` and its
+addenda, and the theory report at `89ac710`.  Labels as in `SCIENCE_TO_ALL.md`; **[M]** =
+measured on a named model with a stated protocol.  Units: kcal/mol; `k_BT = 0.596 kcal/mol`
+at 300 K.*
+
+## 0. Verdict
+
+1. **The mathematics is about models, never about molecules.**  A certificate proves a
+   statement about an energy function on a discretised conformation space.  Every input —
+   tables, class constants, anchor values — is a modelling statement, and none of the
+   constants the theory needs has ever been *certified* for a production force field,
+   except for corrections with an explicit low-dimensional form (torsion refits).
+2. **Which class a real residual lives in — measured for the first time in this programme
+   [M].**  On capped alanine peptides with Amber ff14SB as known part:
+   * a difference between force fields of one lineage is **exactly** in the cheapest
+     classes (ff99SB − ff14SB: a sum of single-torsion terms, range `1.115 kcal/mol`;
+     ff19SB − ff14SB: one table per residue);
+   * a change of charge model (ff03, ff15ipq) is a first-order class with `βc ≈ 2–10`;
+   * an implicit-solvent polarisation energy (GBn2) is **not near any per-torsion
+     class**: constants of `12–53 k_BT`, growing with chain length, dense second-order
+     couplings of the same size, no sharp site in any enumerated instance — and it is
+     near the pair-additive ("profile") class only in root mean square
+     (`0.2–0.9 k_BT`), not in supremum norm (`2–16 k_BT` from three residues on).
+3. **The exponents of the query-complexity theory are evaluated at `βc ∼ 1`; nothing
+   measured is there.**  For the solvent term the theory is in its zero-temperature regime
+   and says, correctly but uninformatively, "evaluate a fixed fraction of everything"
+   (at least 19, 12 and 11 % of the conformations at 3, 4 and 5 residues, measured).  For same-lineage refits it
+   says "one to three evaluations".  The regime in which exponents discriminate
+   (`βc` between about 0.5 and 3) is occupied, in the pilot, only by torsion refits.
+4. **The class is expensive, not the function.**  The actual solvent residual has a Jensen
+   gap of 2–3 nats where its own first-order class allows 71–178.  Worst-case class
+   statements are, for this residual, pessimistic by two orders of magnitude.  This is the
+   strongest empirical argument for models of ignorance that are not worst-case
+   (`OPEN_PROBLEMS.md` D2) and for classes with known features and a bounded remainder.
+5. **Three statements could meet an experiment**, each falsifiable and each still to be
+   carried out on a physical system: a certified lower bound on a rotational barrier
+   (against dynamic NMR); a certified range and a certified lower bound on model error
+   from ensemble-averaged data (against NMR or scattering averages); and the profile class
+   as the natural class of scattering data (Debye intensities are in it with constant
+   `q²/6`).  §5.
+
+## 1. The dictionary
+
+| mathematical object | physical counterpart | valid when | what is lost | what must be measured or certified |
+|---|---|---|---|---|
+| finite product space `∏ D_i` | rotamers on a fixed backbone; torsion wells; voxels of torsion space; lattice walks | each state is a cell on which the energy can be enclosed, cells are products over sites, hard degrees of freedom rigid or integrated out | vibrational entropy inside a cell; bond-angle flexibility; kinetics; the product structure itself (41 % of the three-state grid of the hexapeptide is clash-free) [M] | interval enclosures of every energy term over every cell; they widen with the lever arm |
+| known part, pairwise in sites | a molecular-mechanics energy **on a fixed backbone**: each atom moves with one site | fixed backbone, no many-body terms | for a flexible backbone nothing is pairwise in torsions: vacuum ff14SB has mixed differences up to 28 kcal/mol (12 at separation seven) [M] | tables with outward rounding; a statement of which terms were moved into the residual |
+| residual `g` | continuum-solvent polarisation; explicit polarisation; quantum minus classical energy; a learned correction; the difference of two force fields | the split is a choice: `g` is the expensive, non-decomposable or uncertain part | all structure of the functional form, unless it is put into the class | which class, with which constants (§2) |
+| envelope constants `c_i`, `c_ij`, slope `L` | an a-priori worst-case bound on the change of the correction when one degree of freedom changes: a **sup-norm** error bar | it holds for all pairs of configurations of the domain | typicality: force-field accuracy is quoted in RMS; sup/RMS is 4–8 in the pilot [M] | an *upper* bound — interval arithmetic or a proved Lipschitz property.  None exists for a production force field; a constant fitted on a sample is not a bound (held-out maxima up to ten times the fitted ones [M]) |
+| anchor `(a, g(a))` | a single-point evaluation of the expensive model.  **No experiment measures `g` at a chosen conformation** | the evaluation is exact, or comes with an interval | convergence error of the expensive calculation | the number of anchors is the theory's cost |
+| `min E` | the global minimum of the model | it predicts a structure only if its basin dominates and the model error is below the gap to competing basins | for a flexible peptide helix, β and PPII lie within 0.4–2.7 kcal/mol and a torsion refit of 0.64 kcal/mol per residue reorders them [M] | gaps against constants, by droplets rather than by sites |
+| `ln Z` | **observable** only in differences: between macrostates of one model, between thermodynamic states, gas phase → solvent (a hydration free energy).  The absolute `ln Z` of a discretised model and `ln Z(f+g) − ln Z(f)` for a model correction are not observable | — | in a first-order class correlated errors do not cancel in differences (theory report §11.13) | the accuracy that matters is about `1.7 k_BT` on differences; the class threshold measured for the solvent term is 43–48 nats per residue [M] |
+| `u = βc` | `1 kcal/mol = 1.68 k_BT` at 300 K | — | — | measured: 12–53 (solvent), 2–10 (charge models), 1.1–4.3 (one lineage) [M] |
+| hint | a cheaper surrogate of the residual which expensive evaluations spot-check | the surrogate is free; correctness is demanded on the class | — | a fitted typed-pair model predicts the solvent term to 0.26 kcal/mol RMS (max 2.2) [M]: a good hint; the price of checking it is set by the class |
+| product landscape, the cube | independent degrees of freedom: far-apart side chains, independent rotors, titration sites | couplings small against site gaps | cooperativity, excluded volume.  In the helix basin of the hexapeptide 8 of 12 torsions have no clash-free single flip, and the collective move to PPII costs 0.37 kcal/mol in all [M] | the exponents are properties of this idealisation |
+| profile class (pair-distance features) | a pair-additive energy with unknown radial functions; **the pair-distance distribution measured by small-angle scattering** (Debye intensities are in the class with constant `q²/6`, A2.1 [P]) | typed pairs; distance-dependent slope bounds | one pair type explains nothing of an electrostatic residual (remainder = total variance) [M]; chains are not identifiable from complete distance distributions (homometric pairs from 6 beads; 19 % of 9-bead site sets on the cubic lattice, A2 [N]) | a sup-norm remainder, *bounded*, not sampled |
+| evaluations of `g`; averaged observables; mean residual energy (our I1, I2, I3) | single-point calculations; NMR/scattering/FRET averages; calorimetry | I2: the forward model of the observable is known and exact | forward-model error; in the worst case of a first-order class averaged data of bounded order — and of every order at fixed absolute precision — are worth a polynomial factor only (Theorems 4, 4′, 4-τ) | error bars as *tolerances* (addenda A10) |
+| identified set; extent of falsification | the range of a quantity over all ensembles (or all class members) consistent with the data; the least model error the data force | exact linear programmes on enumerable systems | — | the dual certificate; see §5 |
+| barrier `B(a,b)`; trap survival | a potential-energy barrier of the model; non-equilibration of a *sampler* | on the voxel **face-adjacency** graph (K8 [P]); for every dynamics stationary for the Gibbs measure and local on the graph (K10 [V]) | physical rates: the kinetic prefactor is not in the programme; the discrete Metropolis rate is not a physical rate | wall and basin partition functions; the envelope enters as `exp(β·d(basin, wall))` |
+| certificate, kernel | a proof-carrying computation about the model | always | it certifies nothing about nature | the inputs |
+
+The full table with one more column and five more rows is in `SP_REPORT.md` §2.B.
+
+## 2. Which class do real residuals live in?  [M]
+
+Protocol (all of it in `SP_REPORT.md` §3.1): Ace-(Ala)ₙ-NMe; rigid bond lengths and angles;
+backbone torsions on a three-state grid per torsion (`n ≤ 6`, 531 441 conformations) or a
+two-state grid (`n ≤ 9`); conformations with steric clashes removed; energies from OpenMM
+8.6.1 parameter files; exact enumeration.  **Every constant below is an exact maximum over
+a finite grid, hence a lower bound for the continuous conformation space and not an upper
+bound for anything.**
+
+| residual (known part: ff14SB vacuum) | first-order constants `c_i` | second order | best cheap class | certificate of the minimum, 5 residues (28 843 conf.) |
+|---|---|---|---|---|
+| ff99SB − ff14SB | 0.64 on φ, 0 on ψ, for every length (1.115 on the full circle) | exactly 0 | sum of single-φ terms, **exact** [P] | 1 evaluation |
+| ff19SB − ff14SB | 1.5 (φ), 2.6 (ψ), for every length (3.7, 4.4 on the clash-free continuous map) | 2.5 inside a residue, exactly 0 otherwise | one table per residue, **exact** [P] | 2–3 |
+| ff03 − ff14SB, ff15ipq − ff14SB | 2.6–6.1, slowly growing | neither sparse nor large (3.9 → 0.7 over seven torsions) | residue pairs: RMS 0.12, max 1.4 | 2–28 |
+| GBn2 polarisation energy | **9.0, 14.0, 18.6, 22.9, 27.5, 31.6** for `n = 1…6` (three-state grid: `≈ 4.8 + 4.5n`); 3.7 → 19.0 for `n = 1…9` on the two-state grid, sub-linear | dense; entries up to 29; half row sums 52–89 | torsion pairs: RMS 2.1, max 13.  Typed atom pairs (36 types): RMS 0.26, max 2.2 (held out).  An explicit exactly pair-additive surrogate: RMS 0.10 → 0.52, max 0.5 → 9.3 for `n = 2 → 8` | between 3 042 and 5 357 |
+
+Further facts of the pilot that a reader should not miss:
+
+* The **typical** single-flip change of the solvent term does not grow with length
+  (6.5 kcal/mol RMS); the growth is in the extreme pairs, i.e. in exactly what a sup-norm
+  envelope must cover.
+* The lever-arm prediction of the theory report (§11.14) is confirmed as growth with chain
+  length, not as a law in the distance to the nearer chain end.
+* Restricting the domain lowers the constants (within 20 kcal/mol of the minimum of the
+  known part the largest solvent constant is 14.6 instead of 27.5) — but the envelope is
+  needed to justify the restriction that would make the envelope small.
+* Freezing the Born radii ("pairwise GB") is useless (RMS 5 kcal/mol); the first-order
+  response in the radii, which is itself pair-additive, repairs it.  The structure
+  `g = (explicit pair sum) + (explicit linear term) + (remainder quadratic in the
+  Born-radius fluctuations)` suggests a class with **known features and an analytic
+  remainder bound** — the most promising route to a certified envelope for a real
+  many-body term (`SP_REPORT.md` §6, item 2).
+
+## 3. What the theory's formulas give with the measured numbers (model-relative)
+
+Product landscape with the measured single-site numbers; constants extrapolated in three
+ways (`SP_REPORT.md`, Statement 7):
+
+| chain | sharp sites | uncertifiable free-energy width `Σ ln cosh(βc_i/2)` | lower bound on the certificate of the minimum |
+|---|---|---|---|
+| 10 residues | 0 of 20 | 430–480 nats | `≥ 10⁵` of `10^{9.5}` conformations |
+| 100 residues | 0 of 200 | `4.6·10³ – 3.1·10⁴` nats | `≥ 10^{56} – 10^{74}` |
+
+These say what a certifier that knows only per-torsion constants must pay.  They are not
+statements about the peptide: on the enumerated instances the exact Jensen gap of the
+solvent term is 2.1–2.6 nats where the class allows 71–178.
+
+## 4. Resolution statements and algorithmic statements
+
+*Resolution statements* — what any user of the model can conclude from class membership,
+whatever they compute: the sharp-minimum and contact theorems; thermal contact; the exact
+free-energy sandwich; the theorem that Boltzmann averages are uncertain over most of their
+range; every lower bound on the number of evaluations; on the measurement side, identified
+sets and the theorems on what averaged data cannot add; in kinetics, the exact robust
+interval of a barrier height (K6).  *Algorithmic statements*: the kernels, learn-then-cover,
+the nested samplers, the cut and rate certificates.
+
+The measured numbers speak to the first kind: for the solvent residual no torsion is sharp
+in any enumerated instance, and the collective criterion fails by factors of 26 to 380
+(`λ* = 0.038 … 0.0026` for two to six residues, where one evaluation would need `λ* ≥ 1`).
+
+## 5. Three statements that could meet an experiment
+
+| statement | what would be computed | what would be compared | how it could fail | state |
+|---|---|---|---|---|
+| **A certified relaxed torsion scan** (K2(b) with K8): "for this force field every pathway that takes torsion `i` from conformer `a` to conformer `b` crosses potential energy at least `L` above `a`" | interval tables on torsion voxels with nearest-voxel adjacency; `k` certified wall minimisations | a measured activation energy or exchange rate of a hindered rotation (dynamic NMR) | a measured barrier *below* the certified lower bound — after the entropic and kinetic prefactors are accounted for — falsifies the energy model, independently of any sampling | proposal; no physical system treated; the real obstacle is that the energy is not pairwise in torsions |
+| **A certified range and a certified lower bound on model error** from averaged data (`INFERENCE_LIMITS.md` §8, §9) | the identified interval of a structural quantity over the model's envelope class given the data, with a dual certificate; the least envelope constant consistent with the data | NMR or scattering averages of a fixed-sequence system with a public ensemble | an empty identified set at the assumed constant is a certified falsification of (model + class); sampling cannot change it | exact on lattice chains to 10 beads; on a physical instance not done; the model-free and divergence-ball versions are known methods (maximum occurrence; Christensen–Connault) |
+| **The profile class is the class of scattering data** (A2.1) | Debye intensities as linear functionals of the pair-distance profile, constant `q²/6` | a scattering curve on a finite grid of `q` | — (a statement of structure, not a prediction); its limits are homometric chains | proved; identified sets from scattering curves computed to 15 beads |
+
+Also observable in principle and untouched: hydration free energies (`ln Z(f+g) − ln Z(f)`
+with `f` the gas-phase energy and `g` a solvation potential of mean force).
+
+## 6. What must not be claimed
+
+* That a certified minimum is a predicted structure.
+* That a class constant measured on a grid, or fitted on a sample, is a bound.
+* That exponents computed at `βc ∼ 1` describe the cost for a solvent or quantum residual.
+* That "GB is nearly pair-additive" in the sense certificates need (it is so in RMS).
+* That a certified discrete rate bounds an experimental rate, or that a barrier certified
+  on the Hamming graph of rotamer labels is a barrier of the molecule.
+* That low-order agreement with averaged data establishes order or disorder (Theorem 2),
+  or that a profile match establishes a structure (homometry).
+* That anything here has been compared with a measurement.  Nothing has.
+
+## 7. Under which physical assumptions do the exponential lower bounds stop applying?
+
+They are theorems about first-order classes, in which an evaluation informs about a
+neighbourhood only.  They stop applying when the class is finite-dimensional in *known*
+features with a small sup-norm remainder (theory report Theorem 11.47).  Assumptions that
+give this, and the pilot's verdict on each [M]:
+
+| assumption | ff99SB − ff14SB | ff19SB − ff14SB | charge models | GBn2 |
+|---|---|---|---|---|
+| low order in torsions | exact, order 1 | exact, order 2 in a residue | approximately | no |
+| typed pair-additivity in atoms | yes | not tested | RMS 0.11, max 1.3 | RMS yes, sup norm no |
+| locality along the chain | yes | yes | no | no |
+| weak coupling, `Σ_j tanh(βc_ij/4) < 1` | 0 | 0.78 | 4.1 | 7.0 |
+
+Smoothness alone does not help (the torus bound of theory report Theorem 11.34 is
+exponential).  A bound in a typical norm — `L²` or an exponential moment under the Gibbs
+measure of the known part — would, for `ln Z`, replace the sup-norm floor by the typical
+remainder; whether such a bound can be *certified* is the question put to the theory
+division as T-3 of SCI-RES-0002.
+
+## 8. Provenance, replication, limitations
+
+* **Replicated by the coordinator (same machine, the workstream's scripts):** the
+  tripeptide constants `16.09 12.41 18.63 16.43 15.14 11.19` and 508 clash-free
+  conformations from OpenMM's own force objects (`verify_openmm_direct.py`); the range
+  1.1147 kcal/mol of ff99SB − ff14SB along φ and its independence of ψ
+  (`an9_torsion_refits.py`).  Not independently replicated: everything else of the pilot.
+  This is a re-run, not a second implementation.
+* **Kinetics:** `KineticsCertificates.lean` re-compiled (32 theorems, standard axioms, no
+  `sorry`); scripts T1, T3, T9 re-run with identical output.  Wrochna's theorem and the
+  Edmonds–Fulkerson reference checked at the level of bibliographic record and abstract by
+  the coordinator; read in full (pp. 1–8, 299–301) by the workstream.
+* **Limitations of the pilot:** alanine only; rigid geometry (58 % of the dipeptide map is
+  a clash); grids of basins; exact only to six and nine residues; one clash threshold with
+  a sensitivity check (constants move by up to 15 %); the prior-art search is six PubMed
+  abstract queries; no side chains, no Poisson–Boltzmann, quantum or learned residual; no
+  certificate in the span format was run.
+* **The decisive missing measurement** is the same constants where the theory's known part
+  exists: rotamer variables on a fixed backbone, where no lever arm exists
+  (`BENCHMARK_DESIGN.md` B1; request E-1 of SCI-RES-0002).

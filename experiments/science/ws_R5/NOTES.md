@@ -33,3 +33,23 @@ Hand re-derivation of the identity (done before any code; details go to the repo
   at e^u = k(k−1): c_k + c_{k+1} = 1 and h_k − h_{k+1} = 0 exactly (hand computation).  ✓ [P, mine]
   To check numerically: uniqueness of the crossing, t* ∈ [0,1].
 Next: own code r5lib.py (vertex enumeration, LP game value, Rényi capacity by three routes, E, a, R̂, θ_na).
+
+## Step 2 — own implementation (r5lib.py), written before reading wv_lib.py; first results
+* r5lib.py: brute-force vertex enumeration of L/ℝ; LP game value (HiGHS, tolerances 1e-10, value re-evaluated from the
+  returned strategy); primal Rényi programme (SLSQP + analytic gradient, gradient derived by hand:
+  ∂G/∂M(φ) = −exp(G − (1−t)D_t(π_φ‖Q_M))); dual epigraph programme min_Q max_φ (1−t)D_t; E by the geometric-mean
+  programme with KL(Q‖π_φ) certificate; a by Blahut–Arimoto with max_φ KL(π_φ‖Q) certificate; R̂, θ_na by grid+Brent.
+* NUMERICAL TRAP (mine, caught): first version — blind Nelder–Mead over γ of the LP value EXCEEDED the Rényi value by
+  2–3.5e-9 on path/asym.  Cause: HiGHS default feasibility tolerance (1e-7) → LP optimum noisy at 1e-9 and a maximiser over γ
+  picks the positive noise; also my SLSQP had no analytic gradient (duality gap 2e-8).  After tightening both:
+  blind − primal ≤ 6e-16 everywhere.  NOT a counterexample.
+* t01_identity.py (out/t01_identity.txt, 309 s): 20 cases on bin/path/tri/asym at t = .1,.3,.5,.7,.9:
+  blind LP search = primal = dual = LP at the Rényi centre to 4e-14; centre always in L; 36 random asymmetric sites
+  (q = 2,3,4): 9e-13, centre in L always, blind never above.  F(γ,t) ≤ F*(t) also for 1600 random γ outside L (largest
+  difference −3e-7 < 0).  Gallager's raw E_0(ρ,M) = G_t(M)/t to 5e-16.
+  Vertices: bin 2, path 4, tri 6, asym 5 — as in W_REPORT §6.1.
+* t02_reference_numbers.py (out/t02_reference_numbers.txt): all 6 chains × (E, a, h, R̂(0.3E), θ_na(0.3E), R_0(0)):
+  largest |mine − theirs| = 5.0e-7 = rounding of their 6-decimal table.  path: E=0.400622034, a=0.294791205,
+  h=0.089589 (t*=0.4601), R̂(0.3E)=0.043375, θ_na(0.3E)=0.066899057 (both by sup formula and by R̂∘S⁻¹, diff 1e-15),
+  R_0(0)=0.080032; centre law (0.4734,0.2456,0.2810), γ*=(0,0.1454,−0.3946), M*=(0.5039,0.4961) on the two end dips. ✓.
+  cut/pair for path: 0.048586 / 0.115369 ✓.

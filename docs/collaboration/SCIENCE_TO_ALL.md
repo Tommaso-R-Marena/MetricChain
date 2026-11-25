@@ -160,6 +160,38 @@ was done.
    body (the all-gauche helix), finite-size forms of the upper bound, and a proof that below
    about `4·10⁴` beads the finite profile set misses the limit by more than a covering radius.
 
+12. **Which class do real residuals live in — measured** ([SCI-RES-0002](responses/science/SCI-RES-0002.md);
+   answers THY-REQ-0011 C1; theory: four requests; engineering: three, one of them decisive).
+   Pilot on capped alanine peptides, ff14SB as known part, exact on grids of up to 531 441
+   conformations.  Differences between force fields of one lineage are **exactly** additive
+   over torsions or residues (certifiable for every length); a change of charge model has
+   `βc ≈ 2–10`; the GBn2 polarisation energy in backbone torsions has `βc = 12–53`, growing
+   with chain length, dense second-order couplings and no sharp site, and is close to the
+   pair-additive class in root mean square (`0.2–0.9 k_BT`) but not in supremum norm
+   (`2–16 k_BT`).  The exponents are falsified as a description of the cost in two opposite
+   directions: the class overstates the actual function by two orders of magnitude (Jensen
+   gap 2–3 nats against 71–178), and the product idealisation understates real certificates
+   by a factor of six to seven.  Synthesis: `docs/science/PHYSICAL_APPLICABILITY.md`.
+
+13. **Certified kinetics** ([SCI-MSG-0005](messages/science/SCI-MSG-0005.md); theory: four
+   requests, one an hour of formalisation; engineering: three).  A lower bound on a barrier
+   is a cut certified by your min-kernel on the wall boxes; an upper bound on an escape
+   rate is the same cut with partition functions; under an envelope class the barrier
+   height has an **exact** robust interval attained at the two cone residuals.  32 Lean
+   theorems on top of `verify_sound`, `verifyR_sound`, `zverifyTop_sound` (re-compiled by
+   the coordinator).  Limits: the barrier threshold of a nearest-neighbour chain is
+   PSPACE-complete (a published theorem read as a barrier statement) — no transfer matrix
+   for barriers; a linear multiplier on a counting cut is vacuous; rates are
+   sampler-relative.  No physical system treated.
+
+14. **Measurements with error bars** ([SCI-MSG-0006](messages/science/SCI-MSG-0006.md)).
+   Correlation data of *every* order known to absolute precision `τ ≥ e^{−o(n/ln n)}` leave the
+   worst-case exponent `h_hint` unchanged (proved with constants for every `n`; for `u = 1`,
+   `τ = 1 %`, `n ≥ 200` the lower bound is divided by at most `(2n)³`), whereas `n` one-body
+   measurements on pinned ensembles at the same precision determine `ln Z`.  Closes the
+   tension left by SCI-MSG-0004 and the uniform-cube part of our own question
+   SCI-REQ-0001 Q2(c).
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -181,6 +213,9 @@ was done.
 | [SCI-MSG-0003](messages/science/SCI-MSG-0003.md) | checkpoint 12 | message | both (§3 theory) | attributions and sharp form of Theorem 7; "extent of falsification" for Theorem 8; pinned marginals as the informative end of the two-oracle model | proposed |
 | [SCI-MSG-0004](messages/science/SCI-MSG-0004.md) | checkpoint 13 | correction of SCI-MSG-0003 §3 | both | pinned marginals are marginals of higher order; Theorem 4‴: exponent against the order of marginal information | proposed |
 | [SCI-REV-0002](messages/science/SCI-REV-0002.md) | checkpoint 14 | review + replication | theory; engineering §8 | theory report §11.22: verdict per statement; M1 (headline), M2 (proved bracket `[116, 3 627]`; `vol 𝒦 ≥ 1.56`); m1–m8; new statements N1–N5; request for larger witness bridges and an exact packing | completed |
+| [SCI-RES-0002](responses/science/SCI-RES-0002.md) | checkpoint 15 | response to THY-REQ-0011 C1, with measurements | theory; engineering §6 | per-site envelopes for real residuals (force-field differences, charge models, GBn2); four falsification tests of the exponents; requests P-T1…P-T4, P-E1…P-E3 | completed (C1) |
+| [SCI-MSG-0005](messages/science/SCI-MSG-0005.md) | checkpoint 15 | message (new direction) | both | certified kinetics: cut certificates for barriers and rates on the existing kernels, exact robust barrier intervals, 32 Lean theorems; PSPACE obstruction; requests K-T1…K-T4, K-E1…K-E3 | proposed |
+| [SCI-MSG-0006](messages/science/SCI-MSG-0006.md) | checkpoint 15 | message | theory; copy engineering | finite precision: Theorem 2-τ, attenuation lemma, Theorem 4-τ, pinned ensembles | proposed |
 
 ## Responses and requests received
 
@@ -188,6 +223,6 @@ was done.
 |---|---|---|---|
 | THY-MSG-0011 §4 | theory (`89ac710`) | welcome; orientation; where their branch is weakest (§11.24, §11.26 unrefereed; §11.23 with their referee) | SCI-RES-0001 |
 | THY-RES-0003 | theory | answers to SCI-MSG-0001 §5, §7: Proposition 11.104 (non-adaptive exponent unchanged by a marginal oracle); a field and the two-oracle model open; no closed form for ratios; a correction of a remark of §11.25 | SCI-RES-0001 §3; passed to workstream R1 |
-| THY-REQ-0011 | theory | A1 review §11.26 (Theorems 11.99, 11.101); A2 review §11.24; B1 prior art for the channel-coding dictionary; B2 "`e^{u/2}` states"; C1 applicability of per-site envelopes | SCI-RES-0001 (accepted) |
+| THY-REQ-0011 | theory | A1 review §11.26 (Theorems 11.99, 11.101); A2 review §11.24; B1 prior art for the channel-coding dictionary; B2 "`e^{u/2}` states"; C1 applicability of per-site envelopes | SCI-RES-0001 (accepted); **C1 answered: SCI-RES-0002**; A1, A2, B1 (rest), B2 in progress |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

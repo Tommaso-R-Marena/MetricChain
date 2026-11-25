@@ -194,3 +194,66 @@ Neither is about estimating a normalising constant over a Lipschitz class on the
 u=1: ladder (1,1,1): 0.5403a (phi=0.512, xi1=0.631a, xi2=0.107a); ladder (1,2): 0.5454a.  => T^(3)(0) <= 0.5403a.
 Report: 0.541a (coordinator 0.5406/0.5453).  REPRODUCED (upper bound).
 Not re-computed by me: T^(r)(0) for r >= 4 (in particular "tau^(48) <= 0.342a" of Corollary 11.87).
+
+## Step 16 — harness for Theorem 11.84 at u = 3 and u = 0.5 (out_batched_sim_u3.txt, out_batched_sim_u05.txt)
+u=3  : 100 runs, 76 good; Claim A 0 violations (good or bad), Claim B 0; 96 non-trivial rungs (max |C_l|/N_l .0073);
+       486 negligible levels; 98 410 sequential calls at rungs >= 2; mutations detected in 40 and 6 runs.
+u=0.5: 100 runs, 79 good; Claim A 0, Claim B 0; 69 non-trivial rungs (max ratio .0174); mutations 4 and 0.
+TOTAL: 350 runs, 267 with the good event: no violation of Claim A or B anywhere; 339 rungs with N_l < M_max.
+
+## Step 17 — more checks on the lower bound
+* gap_scan.py (out_gap_scan_u1_n800.txt): the gap of the twins is decreasing in T on a 57-point grid (n=800,
+  n1=360) -> "largest budget with gap > 1" is well defined; the mass of F_D sits outside V2 while the gap is large.
+* tightness.py (out_tightness.txt): an explicit two-round algorithm (stars in round 1, two probes in round 2) tells
+  the twins apart as soon as a star lands in R = {F(d1,d2-1) != F(d1,d2+1)}; P(R)/p1 = 1.5 (n=800), 1.6 (1600),
+  1.6 (3200), 3.0 (u=2, n=1600).  So the bound of Lemma 11.85 is attained on the twins up to poly(n):
+  the pair yields exactly the exponent -ln(p1)/n, nothing is lost in the lemma.
+* small_cube_exact_opt.py (out_small_cube_exact_opt.txt): EXACT optimum over two-round algorithms with one point
+  per batch (first batch unique by translation; best second point per posterior class): 7 configurations,
+  optimum/bound = 0.35 .. 0.62, never above 1; greedy (1,k) reaches 0.93 of the bound at k = 8.
+
+## Step 18 — extension of the table and extreme slopes
+* twins_exact.py 1.0 1.0 6400 (out_twins_u1_6400.txt): best E = 0.03705 at n1 = 3520 (T/n = 0.03838, gap 1.008);
+  all algorithms 0.02973.  All checks pass on the 5 pairs.  (Workstream, other W2: 0.03720 / 0.02973.)
+* exponents.py 0.1 4.0 6.0 10.0 (out_exponents_extreme.txt), so far:
+  u=0.1: theta2*/a = 0.34617, T2/a = 0.61810;  u=4: theta2*/a = 0.48777 (/h 1.2295, phi1 0.5122), T2/a = 0.69041.
+  Necessary condition theta2* <= T2(0): holds.  (u = 6, 10 pending.)
+
+## Step 19 — REPORT written: docs/science/workstreams/R4_REPORT.md (first complete version)
+Findings: no critical, no major, ten minor (m1..m10).  Strengthening: Theorem R4.1 / Corollary R4.2.
+
+## Step 20 — extreme slopes done (out_exponents_extreme.txt)
+  u     h/a      theta2*/a  theta2*/h  phi1*   T2(0)/a
+  0.1   0.25013  0.34617    1.38397    0.6538  0.61810
+  4     0.39673  0.48777    1.22948    0.5122  0.69041
+  6     0.49727  0.57490    1.15611    0.4251  0.73908
+  10    0.63711  0.69018    1.08330    0.3098  0.80626
+Necessary condition h < theta2* < T2(0) < a holds at all nine slopes (0.1 .. 10).  Workstream's u=4,6 values reproduced.
+
+## Step 21 — finding M1 made concrete (m1_demo.py -> out_m1_demo.txt)
+Reading R7 again: R7 classified "the cost bound is proved on the good event only; the definition and the induction
+need it always" as MAJOR (its M1) for Theorem 11.52.  The same gap is in Theorem 11.84(ii) as stated in the theory
+report ("in every run |C_l| <= ...", no stopping rule).  Demonstration: candidate sets computed exactly as in the
+theorem, all rung-1 calls returning the valid trivial bracket of the fibre (ratio e^{2 u n_i} > e^{x_1}):
+  |C_2| = 162178 > N_2 = 59059;  413649 > 105262;  307083 > 50968;  393216 (= M_max) > 79931;  (37619 < 164868 in one).
+With honest brackets |C_2| = 145..1043.  => promoted to MAJOR M1; the former m2..m10 renumbered m1..m9.
+Repair: stop before stage l if a stored bracket of rung l-1 is wider than e^{x_{l-1}} (or if |C_l| > N_l).
+
+## Files
+exponents.py, twins_exact.py, asymptotic_check.py, gap_scan.py, tightness.py, small_cube.py,
+small_cube_exact_opt.py, batched_sim.py, m1_demo.py, three_rounds.py, cond_cover_check.py,
+lean/AxiomCheck.lean, lean/TwoRoundsExpected.lean; outputs out_*.txt, lean/out_*.txt.
+(out_exponents.txt is the partial output of the first, killed, scalar version of exponents.py — superseded by
+out_exponents_u1.txt / _other.txt / _extreme.txt.)
+
+## Step 22 — report final: docs/science/workstreams/R4_REPORT.md
+Verdict: no critical; one major (M1); nine minor (m1..m9); strengthening R4.1/R4.2 (Lean, standard axioms).
+
+## Step 23 — final consistency pass on the report
+* all scripts/outputs named in the report exist in this directory; line references to THEORY_REPORT.md,
+  U_REPORT.md, README.md and TwoRounds.lean re-checked with grep.
+* chronology of "own code before authors' code" stated precisely in report §3 (exponents, twins, whole cubes,
+  asymptotic check: before; harness, covering, three rounds, tightness: after reading the coordinator's
+  u_check1/2 and outputs, never the corresponding authors' scripts).
+* R7/R8 were read only in part (search); said so in the report.
+FINAL VALUES (u = 1): theta2*/a = 0.35939, theta2*/h = 1.36834, T2(0)/a = 0.62432, h/a = 0.26265.

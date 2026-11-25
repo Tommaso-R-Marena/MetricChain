@@ -104,9 +104,14 @@ def game_value(K):
     A_eq = np.zeros((1, nphi + 1))
     A_eq[0, :nphi] = 1.0
     res = linprog(c, A_ub=A_ub, b_ub=b_ub, A_eq=A_eq, b_eq=[1.0],
-                  bounds=[(0, None)] * nphi + [(None, None)], method="highs")
+                  bounds=[(0, None)] * nphi + [(None, None)], method="highs",
+                  options=dict(primal_feasibility_tolerance=1e-10, dual_feasibility_tolerance=1e-10))
     assert res.status == 0, res.message
-    return res.x[-1], res.x[:nphi]
+    M = np.maximum(res.x[:nphi], 0)
+    M /= M.sum()
+    # report the value of the returned strategy itself (an upper bound for val that does not depend on the
+    # solver's tolerances); the LP optimum is a lower bound up to tolerance
+    return float(np.max(K @ M)), M
 
 
 def F_game(site, gamma, t):
@@ -216,10 +221,14 @@ def renyi_primal(site, t, M0=None, tol=1e-12):
     lo = G_primal(site, M, t)
     hi = radius_at(site, centre_of(site, M, t), t)
     if hi - lo > tol:
-        lo2, M2 = _eg_primal(site, t, M, tol=tol)
+        # the upper certificate at Q_M is first-order sensitive to M; the dual programme gives an independent,
+        # equally rigorous upper bound (ANY Q gives one)
+        hi = min(hi, renyi_dual(site, t, Q0=centre_of(site, M, t))[0])
+    if hi - lo > 1e-9:
+        lo2, M2 = _eg_primal(site, t, M, iters=3000, tol=tol)
         if lo2 >= lo:
             lo, M = lo2, M2
-            hi = radius_at(site, centre_of(site, M, t), t)
+            hi = min(hi, radius_at(site, centre_of(site, M, t), t))
     return lo, M, hi
 
 
@@ -301,8 +310,8 @@ def threshold_E(site):
     M /= M.sum()
     lo, kl = bracket(M)
     eta = 1.0
-    for it in range(20000):                    # exponentiated-gradient polishing until the duality gap closes
-        if kl.max() - lo < 1e-13:
+    for it in range(3000):                     # exponentiated-gradient polishing until the duality gap closes
+        if kl.max() - lo < 1e-11:
             break
         while True:
             Mn = M * np.exp(eta * (kl - kl.max()))

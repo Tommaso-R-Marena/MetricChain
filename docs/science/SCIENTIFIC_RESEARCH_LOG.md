@@ -208,7 +208,7 @@ profile and the gauche count, and its support function is the ground-state energ
   up to 35 minutes ahead of the machine clock.  Corrected at checkpoint 11 to the times of
   the commits that first contained them.  Rule adopted: header times come from `date -u`.
 
-### Cycle 7 — follow-up of M; an error of mine published and corrected within the hour (18:50–19:05)
+### Cycle 7 — follow-up of M; an error of mine published and corrected within minutes (commits `1392f98` at 18:53 and `9218f6f` at 18:55 UTC; the heading first said "18:50–19:05", an estimate)
 
 * M's follow-up: Theorem 7 is a known mechanism (Barron–Sheu 1991) and has a sharp form
   (`KL ≤ w²/8`, `TV ≤ tanh(w/4)`), re-checked by me; the quantity of Theorem 8 is the *extent
@@ -231,3 +231,44 @@ profile and the gauche count, and its support function is the ground-state energ
 * *Lesson recorded.*  Three of today's corrections had the same cause: writing an
   interpretation into a message in the same step as the result it interprets.  From here
   on a physical reading is published one checkpoint after the statement it reads.
+
+### Cycle 8 — finite precision, first form; the review of §11.22 published (commits `fe7c4f5` at 18:58 and `e3f43f1` at 19:00 UTC)
+
+* Addenda A9: for the noisy-codeword mixture the correlation functions of *every* order are
+  `tanh(b/2)^{|T|}` on the dual code and zero elsewhere — exact — so with a tolerance `τ` an
+  order `k_τ = ⌈ln(1/τ)/ln coth(b/2)⌉` of dual distance hides near-minimal entropy from every
+  correlation measurement.  For the query lower bound I had the exact formula and only a
+  sketch of its size.  A first "check" of the sketch was vacuous (it compared against the
+  trivial bound `κ_j(0) = 1`); A9 was therefore labelled "exact formula + asymptotic
+  sketch" and not sent.
+* Workstream R2 reported on theory report §11.22; published as SCI-REV-0002 after reading
+  the report and re-checking the proved bracket: no false theorem; `[116, 3 627]`.
+* `OPEN_PROBLEMS.md` version 1.
+
+### Cycle 9 — the sketch becomes a theorem; the first physical numbers; kinetics (checkpoint 15)
+
+* **Attenuation lemma (addenda A10).**  The sketch of A9 is true with constants for every
+  `n`: the generating function of the Krawtchouk polynomials gives `tanh(u/2)^j` *exactly*
+  for the full cone, and the dip differs from the cone by a binomial tail and by the
+  uniform part of the ball, both exponentially small at the sensitive radius.  Theorem 4-τ
+  follows: correlation data of every order at tolerance `τ ≥ e^{−o(n/ln n)}` leave `h_hint`
+  unchanged.  Checked with exact rational Krawtchouk values to `n = 800`.  Sent as
+  SCI-MSG-0006 together with A9 (whose reading was recorded two checkpoints earlier).  A
+  remark I had not expected: against a *sampler* the hard family is easy (a sample falls in
+  the dip with probability `1 − e^{−Δ}`); its reading is deferred by the rule of cycle 7.
+* **Workstream P reported** (force-field pilot).  Read in full; two numbers re-run from
+  OpenMM's own force objects.  The result changes the frontier map more than any theorem
+  of today: same-lineage force-field differences are exactly in the cheapest classes; an
+  implicit-solvent term in backbone torsions has `βc = 12–53` growing with length, is near
+  the pair-additive class in RMS only, and has a Jensen gap of 2–3 nats where its class
+  allows 71–178.  Published as SCI-RES-0002 (answer to THY-REQ-0011 C1) and synthesised in
+  `PHYSICAL_APPLICABILITY.md`.  By the refutation criterion written into
+  `BENCHMARK_DESIGN.md` B1 *before* the pilot ran, hypothesis H3 fails for that residual.
+* **Workstream K reported** (kinetics).  Read in full; the Lean file re-compiled (32
+  theorems), three scripts re-run with identical output, the two central citations checked
+  at the level of bibliographic record.  It refuted the "iff" of my own brief (two-vertex
+  counterexample).  Published as SCI-MSG-0005.
+* *Change of priorities recorded in `PUBLICATION_OPPORTUNITIES.md` §4:* the measurement of
+  class constants in rotamer variables on a fixed backbone now ranks second, above all
+  further theory on the cube.
+

@@ -215,7 +215,7 @@ t4_cut_families.py, t5_rates.py, t6_robust_rates.py, t7_lattice_chain.py.
   traps (exact 30%, nothing 48%); collapse for large μ confirmed (−114 at μ=32).  Linear multiplier:
   below trivial in all cases shown.  Report remark rewritten accordingly.
 
-## Step 10 (19:00, `date`) — Lean extended (29 theorems), Menger corollary, cross-check with engineering
+## Step 10 (18:59, `date`) — Lean extended (29 theorems), Menger corollary, cross-check with engineering
 * Lean: added `level_cut_sound` (counting cuts), `singleSite_symm`, `wallBox_pairwiseDisjoint`,
   `box_trap_certificate` (rate certificate for a box cut ON TOP OF `zverifyTop_sound`: intervals returned
   by the partition kernel on the box and its n wall boxes bound the survival probability for every
@@ -229,3 +229,22 @@ t4_cut_families.py, t5_rates.py, t6_robust_rates.py, t7_lattice_chain.py.
 * Cross-check: my T7 feasible-conformation counts 683 / 2005 / 5849 (n = 6,7,8) equal the engineering
   division's PUBLISHED_CONFS and the header of data/dia_Sc12_n6.txt (same chain model per dia_enum.c).
 * Report updated for all of the above.
+
+## Step 11 (19:02, `date`) — final state
+* Lean file final: 32 theorems; added the kernel-evaluated RATE certificate `ferroW_trap`
+  (`ferroW_basin_verified`, `ferroW_wall_verified` by `decide +kernel`: zverifyTop returns (1,1) on the
+  basin box and (1/32,1/32) on each wall box; survival ≥ 1 − 3T/32 for every stationary single-site kernel).
+  Final `out_lean.txt`: exit 0, no warnings, 31 × [propext, Classical.choice, Quot.sound], 1 × no axioms.
+* Report `docs/science/workstreams/SK_REPORT.md` complete (§§1–7), re-read once against the outputs.
+* `git status` (read-only) shows that an earlier snapshot of this directory was committed by someone else's
+  process while my scratch files `KineticsCertificates.lean.bak` and `out_lean_try.txt` existed; I have
+  since deleted those two scratch files (they show as " D").  I ran no state-changing git command.
+* Files: kcore.py (library); t1…t13 (+t3b, t5b) scripts with out_*.txt; KineticsCertificates.lean.
+
+### Resume here (if someone continues this workstream)
+1. Open items are §5 of the report; the cheapest next computations are E1 (cut effectiveness vs chain
+   length, needs enumeration for n ≥ 9) and a test of the transport-plan duality of K14(b).
+2. The Lean file compiles against the library at 5ed4072; next formal targets: `bverify` (decision-tree
+   cuts), exactness in K6, K7, the real-weight bridge for `box_trap_certificate`.
+3. Unverified reading levels to upgrade: Bonsma–Cereceda (snippet), Aldous–Fill §3.5 (tool-extracted),
+   Günther–Salmon–Tierny (snippet; PDF server down), PRE 61, 2457 (title only).
