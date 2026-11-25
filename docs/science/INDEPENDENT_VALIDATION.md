@@ -147,6 +147,17 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   sources; no error or warning line).  Statements read against the note: not yet done line
   by line by the coordinator — the workstream's own discrepancy list (four items) is in
   `L1_REPORT.md`.
+* **L2 (second Lean wave: A11, A13, R6.1, R6.2, R5(2), A1.2 items 1–3):** all three files
+  compiled by the coordinator with `lake env lean` (exit 0 each; 65 + 70 + 43 = 178
+  `#print axioms` lines, every one `[propext, Classical.choice, Quot.sound]`; no error or
+  warning line; no `sorry`, `admit`, `native_decide`).  Statements and definitions read
+  against the paper for: `cube_sandwich_mean`, `cube_ratio_range_eq_Icc`,
+  `stepField_sandwich_mean`, `cube_sandwich_fails_negative_beta`, `excess_identity`,
+  `r6_2_binary_cube`, `r6_2_cosets` (with `partSum`, `meanEn`, `twinMin`, `excessMass`,
+  `excessEnergy`, `basin`, `basinW`, `overlapW`, `cosetDist`), `condLaw_mem_window`,
+  `klBound_pi_of_vertices`, `extremePoints_window_eq` — they say what the paper says, with
+  the corrections listed in SCI-MSG-0014.  Not read line by line: the other 160-odd
+  declarations; the proofs (the kernel checks those).
 * **R3 (referee of our note):** R6.1, R6.2, R6.3 and their assembly into Theorem R6
   re-derived line by line by the coordinator (checkpoint 21; notes in addendum A12): no
   gap; the gain is slightly better than stated (`1 − 3/(4r₁)` in place of `1 − 1/r₁`).

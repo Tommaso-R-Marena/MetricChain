@@ -141,7 +141,8 @@ def run(n, L, eps, time_limit=600.0, verbose=False, cd=None, D=None):
     g = greedy_cover(cov)
     lpval, w = lp_fractional(cov)
     lb = certified_lp_lower_bound(cov, w)
-    ex = exact_cover(cov, time_limit=time_limit, verbose=verbose)
+    # time_limit <= 0: bounds only (greedy cover + tolerance-free LP bound), no integer programme
+    ex = exact_cover(cov, time_limit=time_limit, verbose=verbose) if time_limit > 0 else dict(status=-1, message="no MILP", dual_bound=None)
     return dict(n=n, L=L, eps=eps, classes=cd["ncls"], greedy=len(g), lp=lpval,
                 lp_certified_lb=float(lb), lp_certified_ceil=math.ceil(lb),
                 min_margin=info["min_margin"], **{k: v for k, v in ex.items() if k != "chosen"})

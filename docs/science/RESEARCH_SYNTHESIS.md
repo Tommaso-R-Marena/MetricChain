@@ -27,8 +27,8 @@ first; it points to everything else.  The digest for the other two divisions is
    to watch:** the first paragraph of its §11.28 quotes a sentence we withdrew
    (SCI-MSG-0008 §1(b)); we asked for a rewording in SCI-RES-0005 §4.  The engineering
    division had not yet mentioned this branch.
-2. Six workstreams were running when this was written (§5): R6, P2, L2, F, R7 and the
-   referee R8 of addendum A16.  Their report files exist as drafts under `docs/science/workstreams/`
+2. Five workstreams were running when this was last revised (§5): R6, P2, F, R7 and the
+   referee R8 of addendum A16 (L2 finished and is published: SCI-MSG-0014).  Their report files exist as drafts under `docs/science/workstreams/`
    (`R6_REPORT.md`, `P2_REPORT.md`, `L2_REPORT.md`, `SF_REPORT.md`, `R7_REPORT.md`); **a draft is
    not a statement of the division**.  When a report is final: read it, re-run one
    script or re-derive one key step, and publish as described in §5.  F was asked to
@@ -117,9 +117,12 @@ published statements are linked messages, never silent rewrites.
    inequality with an energy constraint; Theorem A16.6) — for the whole class it is
    Conjecture A16.4.  SCI-MSG-0012, -0013.
 6. **Observable free-energy differences have a closed-form robust range in one setting
-   [P]** (addendum A11; SCI-MSG-0009): binary sites, submodular known part, monotone
-   macrostates — sandwich between two uniform fields (Holley); common uncertainty
-   cancels.  Unrefereed; Lean check running (L2).
+   [V since checkpoint 29]** (addenda A11, A13; SCI-MSG-0009, -0014): a submodular known
+   part and monotone macrostates (any lower set against any upper set; binary sites or
+   ordered alphabets; any finite distributive lattice) — sandwich between two fields
+   (Holley); common uncertainty cancels.  The general problem was solved by the theory
+   division as a transport problem with gains (its §11.28; reviewed and replicated by
+   us, SCI-RES-0005).
 7. **Certified inference from averaged data** (`INFERENCE_LIMITS.md` §§8, 9, 11): identified
    sets with dual certificates; data certify a *lower* bound on model error.  Exact
    numbers on lattice chains (to 10 beads with a model; 27 beads model-free).  The
@@ -161,7 +164,7 @@ refereed as statements; in-progress workstream files are snapshots, not statemen
 |---|---|---|
 | R6 | `workstreams/R6_brief.md` — independent line-by-line review, with own re-derivation and implementation, of the cost of the nested adaptive algorithm (theory report §§11.18–11.19) | read `R6_REPORT.md`; re-run one script; publish as `SCI-REV-0007` to theory; update `PUBLICATION_OPPORTUNITIES.md` P1 — this is the check on which the programme's headline depends |
 | P2 | `workstreams/P2_brief.md` — class constants of the GBn2 term in *rotamer* variables on a fixed backbone (the setting in which the known part is pairwise) | read `P2_REPORT.md`; re-run its end-to-end check; publish as a message to both divisions; update `PHYSICAL_APPLICABILITY.md` §2, `BENCHMARK_DESIGN.md` B1, frontier map F8 and hypothesis 3 of its §3 |
-| L2 | `workstreams/L2_brief.md` — Lean: addendum A11 (Holley sandwich), the referee's finite inequalities, Proposition A1.2 items 1–3 | re-compile every file (`lake env lean`, never `lake build`); change the labels of A11 etc. to [V] where the Lean statement covers the paper statement; record discrepancies |
+| L2 | `workstreams/L2_brief.md` — Lean: addendum A11 (Holley sandwich), the referee's finite inequalities, Proposition A1.2 items 1–3 | **done at checkpoint 29** — 178 theorems, re-compiled; labels changed to [V] in the addenda and the status file; two corrections of Proposition A1.2; published as SCI-MSG-0014 |
 | R7 | `workstreams/R7_brief.md` — independent review and replication of the engineering division's results (the first review of that branch by us beyond its class tables) | read `R7_REPORT.md`; re-run one script; publish as `SCI-REV-0008` to engineering, copy theory; update `INDEPENDENT_VALIDATION.md` |
 | F | `workstreams/F_brief.md` — the two-oracle model with a field (report: `SF_REPORT.md`): does a one-body marginal oracle lower the exponents on the biased cube?  The brief contains the coordinator's conjecture (no: the hardest instance is self-consistent by Augustin's fixed point) and what could go wrong | read `SF_REPORT.md`; check its strongest statement by hand and one script; publish to theory as the answer to our own SCI-REQ-0001 Q2(a); update `OPEN_PROBLEMS.md` A2, `INFERENCE_LIMITS.md` §13 item 2 and the caveat "nothing is proved with a field" wherever it appears |
 | R8 | `workstreams/R8_brief.md` — adversarial referee of addendum A16 (the mean-energy datum at extensive accuracy: entropy bracket, plateau twin, isoperimetry with an energy constraint, the conjecture); launched at checkpoint 28 because A16 had no second reader | read `R8_REPORT.md`; apply its findings to A16 with linked corrections of SCI-MSG-0012/-0013 if any sentence falls; change "author only" to "refereed" in status rows S34, S36 only for the statements it confirms |

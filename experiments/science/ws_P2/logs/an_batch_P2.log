@@ -2571,3 +2571,26 @@
       [4.91 0.   4.91 3.89]
       [3.89 4.91 0.   4.91]
       [3.85 3.89 4.91 0.  ]
+    c_ijk : max 7.958e-13 kcal/mol; sum over the 4 triples 3.070e-12; max by span k-i = 2..: 7.96e-13 7.39e-13
+    fits  : one-site LS rms 0.584 max 5.909 | two-site LS rms 0.0000 max 0.0000  [783000 points, 5430 parameters]
+    (474.0s)
+--- [Xp] ff15ipq-ff14SB: range 26.49, std 3.40 kcal/mol
+    c_i   = [ 9.16 10.77 10.11  8.93]   max 10.77 kcal/mol = 18.1 kT;  rms single flip = [2.51 2.58 2.61 2.2 ]
+    c_ij  : max 5.767 kcal/mol = 9.67 kT; max by separation 1..: 5.767 3.580 3.207
+    half row sums (1/2) sum_j c_ij = [6.28 7.56 7.56 6.28];  Dobrushin-type sums = [2.76 2.87 2.87 2.76] (max 2.87)
+    fits  : one-site LS rms 0.549 max 8.026 | two-site LS rms 0.0000 max 0.0000  [783000 points, 5430 parameters]
+    (11.3s)
+--- [Xp] ff99SB-ff14SB: range 0.00, std 0.00 kcal/mol
+    c_i   = [0. 0. 0. 0.]   max 0.00 kcal/mol = 0.0 kT;  rms single flip = [0. 0. 0. 0.]
+    c_ij  : max 0.000 kcal/mol = 0.00 kT; max by separation 1..: 0.000 0.000 0.000
+    half row sums (1/2) sum_j c_ij = [0. 0. 0. 0.];  Dobrushin-type sums = [0. 0. 0. 0.] (max 0.00)
+    fits  : one-site LS rms 0.000 max 0.000 | two-site LS rms 0.0000 max 0.0000  [783000 points, 5430 parameters]
+    (11.3s)
+--- [Xp] f: range 236.33, std 22.30 kcal/mol
+    c_i   = [129.71 126.34 122.06 107.58]   max 129.71 kcal/mol = 217.6 kT;  rms single flip = [18.03 15.7  16.96 17.67]
+    c_ij  : max 86.027 kcal/mol = 144.30 kT; max by separation 1..: 86.027 50.971 47.381
+    half row sums (1/2) sum_j c_ij = [ 92.19 111.51 111.51  92.19];  Dobrushin-type sums = [3. 3. 3. 3.] (max 3.00)
+    c_ijk : max 5.684e-13 kcal/mol; sum over the 4 triples 2.160e-12; max by span k-i = 2..: 5.68e-13 5.68e-13
+    (210.6s)
+--- [Xtau] GB: range 145.98, std 17.59 kcal/mol
+    c_i   = [65.05 74.07 65.05 70.96]   max 74.07 kcal/mol = 124.3 kT;  rms single flip = [15.07 11.98 11.14 15.13]

@@ -277,6 +277,98 @@ Outputs: `out_own_cover_n5_9.txt`, `out_own_cover_table_*.{txt,json}`, `out_own_
 
 RE-RUN of their code (reduced size): see §3.6.
 
+### 3.2 X-002 — lattice chains: the published covers as certificates (ENG-RES-0002 §§1–2, 4, 6; ENG-RES-0007 §2)
+
+Own code: `own_lattice_cert.py` (exact primal check; tolerance-free dual bound), `own_dia.c` +
+`own_dia_compare.py` (own enumerator, written from the model definition before `dia_enum.c` was read),
+`own_lattice_opt.py` (HiGHS and CP-SAT in my own formulation on the unreduced instance), `own_flip.c`
+(brute-force single-flip constants), `own_lattice_nets.py`, `check_eng_res_0002_prose.py`.
+
+**(a) Class tables** (`experiments/eng/chain_cover/data/dia_Sc12_n*.txt`; per class: pair counts, number of
+conformations, fewest and most gauche torsions).  My enumerator gives **identical tables for
+`n = 1 … 20`** (with the mirror reduction; without it for `n ≤ 9`), e.g. `n = 20`: 2 139 332 335
+conformations, 2 328 classes (253 s here).  This re-does, with a third implementation, what workstream
+R2 did up to 23 beads.  The tables for `n = 21 … 24` (Modal job M-002) — see the end of this
+subsection.
+
+**(b) Primal certificates.**  `results/lattice_Sc12.json` stores for each of the 288 cells
+(`n = 1…24` × 12 settings) the cover itself (`centres_hist`).  With my own profile distance
+(`5|ΔC₁| + 3|ΔC₂| + |ΔC₃|`, derived from the definition) and an exact integer cover relation:
+**all 288 stored covers are covers of the stored class table and have the published size**
+(`python3 own_lattice_cert.py primal`: 0 failures); class counts and conformation counts of the result
+file equal those of the class tables in all 24 rows.
+
+**(c) Dual bounds — which optima are certified, and by what.**  My lower bound solves the dual of the
+covering LP in floating point, truncates the weights to integers and evaluates the largest centre
+load in exact integer arithmetic on the *unreduced* matrix; it is valid whatever the LP solver did.
+
+| | cells | what proves the published lower end |
+|---|---|---|
+| published single number, my certified bound equals it | **241** | stored cover (checked) + exact LP certificate: **an optimum with no reliance on any branch and bound** |
+| published single number, LP certificate 1 or 2 below | 22 | branch and bound only: 18 cells at `n = 14…18` (`L = 1`, `ε ∈ {0, 1, N/20, N/10}`) and 4 cells at `n ≥ 19`: `(19, N/10)` 35, `(19, N/4)` 22, `(20, N/4)` 24, `(22, N/4)` 26 |
+| published bracket `[a, b]` | 25 | `b`: stored cover (checked, 25/25).  `a`: equals my certified bound in 15 cells; in **10 cells it is one above it** and is the HiGHS branch-and-bound bound after 300 s |
+
+For `n ≥ 19` my certified bound equals the stored `lower_certified` in all 72 cells, and my LP value
+equals the stored `lp_bound` in all 288 (to its 6 printed decimals).  The ten brackets whose published
+lower end is *not* the certified bound: `(19, ε=0)` `[52, 56]` (certified 51); `(19, ε=1)` and
+`(19, N/20)` `[42, 44]` (41); `(20, ε=0)` `[57, 61]` (56); `(20, N/10)` `[37, 40]` (36); `(21, ε=1)` and
+`(21, N/20)` `[50, 54]` (49); `(23, ε=0)` `[74, 83]` (73); `(23, ε=1)` and `(23, N/20)` `[60, 67]` (59).
+ENG-RES-0002 §2 describes every bracket as "`a` a certified lower bound"; the table generator
+(`make_tables.cover_cell`) prints `max(lower_certified, lower_solver)`.  **So "is each bracket what it
+says?": the upper ends yes; fifteen lower ends yes; ten lower ends are solver-trusted bounds, one
+above what is certified.**  (They are very probably true; they are not what the text says they are.)
+As a consequence all 24 published covering numbers of the theory division (P_REPORT §3.3, `n = 5…12`)
+are among the 241: reproduced *and* certified independently of any solver's search.
+
+**(d) "Two solvers agree on every cover" / "proved by HiGHS and CP-SAT independently for `n ≤ 18`".**
+Three of the 18 cells that rest on branch and bound, 1 core:
+
+| cell (published; LP-certified) | HiGHS, my formulation, unreduced | CP-SAT, my formulation, unreduced, 1 worker, 120 s | their `min_cover_highs` on their reduced instance | their `min_cover_cpsat(workers=1)` on it, 240 s |
+|---|---|---|---|---|
+| `n = 14`, `L = 1`, `ε = 1` (25; 24) | optimal 25 (13 s) | cover 27, bound 6 | proves 25 (5 s) | cover 27, bound 7, not proved |
+| `n = 15`, `L = 1`, `ε = 0` (33; 32) | optimal 33 (6 s) | cover 38, bound 6 | proves 33 (4 s) | cover 39, bound 8, not proved |
+| `n = 16`, `L = 1`, `ε = 0` (38; 36) | optimal 38 (45 s) | cover 50, bound 7 | proves 38 (21 s) | cover 43, bound 7, not proved |
+
+The published optima are confirmed by HiGHS in three settings (their stored run; my formulation on
+the unreduced matrix; their function re-run here).  That CP-SAT proves them *independently* I could
+not confirm: with one worker it neither finds the optimum nor gets a bound above 8 in the time I can
+give it; the engineering runs used 8 workers on 4 cores without a time limit (job M-004).  More
+important for the record: **the evidence for the sentence cannot be regenerated from the repository.**
+The stored rows `n = 1…18` have `solvers = {highs: k, cpsat: k}` and lack the keys `lower_certified`,
+`lower_solver`, `exact_certified`, which `lattice_analysis.analyse_table` writes at *every* commit of
+the branch (`206fd9e`, `db56d05`, `a2f6dc7`): they were produced by a version of the code that was
+never committed.  In the committed `covering_number_P` the loop over solvers ends as soon as one of
+them has proved optimality, so CP-SAT is only a fallback; re-running `analyse_table` at `a2f6dc7` for
+`n = 14` reproduces all twelve covering numbers and reports `solvers = {greedy, highs}` or `{greedy}` —
+**CP-SAT is not called in any cell** (`out_rerun_lattice_solvers.txt`).  And the stored rows record,
+per solver, only the size it found, not whether it proved it.
+
+**(e) Single-flip constants** (ENG-RES-0002 §6, `results/lattice_Sc12_flip.json`).  Own brute force
+(every self-avoiding conformation, every torsion, both other states; gauche states defined by the
+sign of a triple product): `c^{sf}` **identical for `n = 3, 5, 8, 9, 10, 11, 12, 13`**
+(`n = 13`: `53 89 98 113 132 132 130 | sym`, 44 s).  Not replicated: `n = 14, 15, 16` and the exhaustive
+test that `c^{sf}` is a valid Hamming envelope (their mode B).  The derived table of ENG-RES-0009 §1
+(36 pairs `(n, j)`, bounds of Proposition 11.74, no violation; least excess 21 … 73; largest ratio
+0.136 … 0.286) follows from the stored constants (recomputed).
+
+**(f) Prose and derived numbers of ENG-RES-0002 / -0007 §2**, recomputed from the class tables and the
+result file (`check_eng_res_0002_prose.py`): the finite-size table (2.45 … 4.56; 6.64 … 13.56; 7/8 …
+14/24), "four gauche torsions reach `‖N‖₁ = 166`", the sequence of conformations and classes for
+`n = 13…24`, `N_cov/N² = 0.100, 0.093, 0.109, 0.110–0.126`, the effective exponent 4.3, "at most 8" at
+`L = 1/5`, the `ε = N/2` sequence, the hand-typed table of ENG-RES-0007 §2: all consistent.  (One
+rounding: `166/27 = 6.15`, printed as 6.1.)  The two-line proof that every trans/gauche pattern is
+realised (restrict even bonds to `{a₀, a₂}` and odd bonds to `{a₁, a₃}`: every bond then has
+`y`-component `+1`) is correct **[P, checked by reading]**.
+
+**(g) Entropy brackets** (ENG-RES-0002 §4) and **class tables for `n = 21, 22`**: (pending — see the end
+of §3.2 below if completed.)
+
+Re-run: `gcc -O3 -march=native -o own_dia own_dia.c && python3 own_dia_compare.py 1 20`;
+`python3 own_lattice_cert.py primal`; `python3 own_lattice_cert.py dual 1 18` and `… dual 19 24` (13 min);
+`PYTHONPATH=<ortools> python3 own_lattice_opt.py 120 "14:L=1,eps=1" "15:L=1,eps=0" "16:L=1,eps=0"`;
+`PYTHONPATH=<ortools> python3 rerun_eng_two_solvers.py <work tree> 240 "14:L=1,eps=1" …`;
+`gcc -O3 -march=native -o own_flip own_flip.c && ./own_flip -n 13`; `python3 check_eng_res_0002_prose.py`.
+
 ### 3.3 X-003 — exact fractional hitting numbers on the uniform cube (ENG-RES-0006 §1): RE-DERIVED and REPLICATED, no difference
 
 `own_harper.py` (written from A_REPORT §2.0 before ENG-RES-0006 and

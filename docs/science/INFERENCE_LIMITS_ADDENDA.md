@@ -394,7 +394,14 @@ helix–coil model with cooperative nearest-neighbour terms).  `μ_e ∝ e^{−�
 `h^↑(x) = Σ_i c_i^↑ x_i`, `h^↓(x) = Σ_i c_i^↓ x_i`; both `h^↑` and `−h^↓` are admissible.
 
 **Theorem A11 (sandwich in stochastic order) [P; the tool is Holley's inequality [K]; exact
-linear programmes on 900 instances, `monotone_ratio_check.py`].**  For every admissible `g`
+linear programmes on 900 instances, `monotone_ratio_check.py`; **machine-checked at checkpoint
+29** — workstream L2, `experiments/science/ws_L2/Sandwich.lean`: `cube_sandwich_mean`,
+`cube_mean_isLeast`, `cube_mean_isGreatest`, `cube_mean_range_eq_Icc`; re-compiled by the
+coordinator].**  (*What the formalisation fixed:* the statement is for `β ≥ 0` — it fails
+at `β = −1`, `cube_sandwich_fails_negative_beta`; "every value in between" for `β > 0`.  It
+needs **no** sign condition on `c_i^↑, c_i^↓`: attainment needs exactly `c_i^↑ + c_i^↓ ≥ 0`, which is
+equivalent to the class being non-empty.  And it holds on any finite distributive
+lattice with an envelope that two functions saturate — `sandwich_mean`.)  For every admissible `g`
 
     μ_{f + h^↑}  ≼  μ_{f + g}  ≼  μ_{f − h^↓} ,
 
@@ -415,8 +422,11 @@ this is `h^↑(x) − h^↑(x∧y)`.  *Upper end:* `μ₁ = μ_{f+g}`, `μ₂ = 
 `g(x∧y) − g(x) ≤ d(x∧y, x) = Σ_{x_i=1, y_i=0} c_i^↓ = h^↓(x∨y) − h^↓(y)`.  The normalising constants cancel
 in Holley's condition. ∎
 
-**Corollary A11.1 (macrostates).**  Let `B` be an up-set (`x ∈ B`, `x ≤ x′ ⇒ x′ ∈ B`) and
-`A = X ∖ B`, both non-empty.  Over the admissible class the ratio `Z_{f+g}(A)/Z_{f+g}(B)` fills
+**Corollary A11.1 (macrostates) [machine-checked: `cube_macrostate_cross_upper`,
+`cube_macrostate_cross_lower`, `cube_ratio_range_eq_Icc`; L2 — and stronger than stated here:
+it holds for *any* lower set `A` against *any* non-empty upper set `B`, e.g. two
+macrostates separated by a transition region, not only for complements].**  Let `B` be an
+up-set (`x ∈ B`, `x ≤ x′ ⇒ x′ ∈ B`) and `A = X ∖ B`, both non-empty.  Over the admissible class the ratio `Z_{f+g}(A)/Z_{f+g}(B)` fills
 exactly the interval
 
     [ Z_{f − h^↓}(A)/Z_{f − h^↓}(B) ,   Z_{f + h^↑}(A)/Z_{f + h^↑}(B) ] :
@@ -507,9 +517,9 @@ the exponent.
 | part | lower bound | upper bound | read / checked by |
 |---|---|---|---|
 | (a) | Theorem 4 (symmetrisation of a dip over a code of dual distance `> k`) | theory report Theorems 11.54, 11.58 (paper proofs; under review by our workstream R6) | author; referee R3 ("proved"); **[V]** given the code (L1: `theorem4_adaptive_marginal_oracle`; the code itself for `k = 1` only) |
-| (b) | addendum A1 = theory report Proposition 11.104 = referee's R5 (symmetrised cones; R5(2): the drop of `ln Z` is at least `D_R + ln(1−γ)`, `γ = ½(#C − 1)·cosh(u/2)^{−d_min}`) | theory report Theorem 11.44 (plain Monte Carlo ignores the oracle) | three independent derivations; **[V]** given the code (L1: `theorem4'_nonadaptive_marginal_oracle`) |
-| (c) | referee's R6: excess identity R6.1, sign lemma R6.2, overlap bound R6.3 | theory report Theorem 11.58; Corollary of Theorem 5 for the zero residual | referee (author of the proof); **second full reading by the coordinator at checkpoint 21: R6.1, R6.2, R6.3 and the assembly re-derived line by line, no gap found** (notes below); numerics by both; Lean for R6.1, R6.2 requested of workstream L2 |
-| (c) with both oracles | referee's Corollary R6′ (cosets of a code in place of the two centres) | as (c) | referee; **written out and re-derived by the coordinator at checkpoint 25** (notes below) |
+| (b) | addendum A1 = theory report Proposition 11.104 = referee's R5 (symmetrised cones; R5(2): the drop of `ln Z` is at least `D_R + ln(1−γ)`, `γ = ½(#C − 1)·cosh(u/2)^{−d_min}`) | theory report Theorem 11.44 (plain Monte Carlo ignores the oracle) | three independent derivations; **[V]** given the code (L1: `theorem4'_nonadaptive_marginal_oracle`); the referee's inequality R5(2) **[V]** (L2: `r5_2_abstract`, `r5_2_binary_cube` — for any finite set of centres with pairwise distances `≥ δ`, no linearity needed) |
+| (c) | referee's R6: excess identity R6.1, sign lemma R6.2, overlap bound R6.3 | theory report Theorem 11.58; Corollary of Theorem 5 for the zero residual | referee (author of the proof); **second full reading by the coordinator at checkpoint 21: R6.1, R6.2, R6.3 and the assembly re-derived line by line, no gap found** (notes below); numerics by both; **R6.1 and R6.2 machine-checked at checkpoint 29** (L2, `Referee.lean`: `excess_identity`, `r6_2_signs`, `r6_2_root`, `r6_2_binary_cube`, with the sharper gain `r6_2_root_sharp`; hypotheses made explicit: `u > 0`, `r₁ ≥ 1`; the step at `s = −1` uses `ω_{−1} ≤ ω_{+1}`); R6.3 and the assembly are paper proofs |
+| (c) with both oracles | referee's Corollary R6′ (cosets of a code in place of the two centres) | as (c) | referee; **written out and re-derived by the coordinator at checkpoint 25** (notes below); step (3), the two signs and the root for the coset profiles, **machine-checked** (L2: `r6_2_cosets`); steps (1), (4), (5) on paper |
 | (d) | addendum A10 | as (a) | author only |
 
 *Notes of the second reading of R6 (coordinator).*  R6.1: with `g′ = min(g₀, T)`,
@@ -572,7 +582,11 @@ Step fields
     Γ^↑(x) = Σ_i Σ_{r < x_i} d_i(r+1, r) ,          Γ^↓(x) = Σ_i Σ_{r < x_i} d_i(r, r+1) .
 
 **Theorem A13 [P; Holley's inequality [K]; exact linear programmes on 360 instances,
-`ordered_alphabet_ratio_check.py`].**  For every admissible `g`:
+`ordered_alphabet_ratio_check.py`; **machine-checked at checkpoint 29** (L2, `Sandwich.lean`:
+`stepField_sandwich_mean`, `stepField_macrostate_ratio`; for a path envelope the
+attainment: `chain_mean_range_eq_Icc`, `chain_ratio_range_eq_Icc`; again for any lower set
+against any non-empty upper set).  Not machine-checked: "not attained in general
+otherwise", which is numerical].**  For every admissible `g`:
 `μ_{f + Γ^↑} ≼ μ_{f + g} ≼ μ_{f − Γ^↓}`.  Hence for every up-set `B`, `A = X ∖ B`:
 
     Z_{f − Γ^↓}(A)/Z_{f − Γ^↓}(B)  ≤  Z_{f+g}(A)/Z_{f+g}(B)  ≤  Z_{f + Γ^↑}(A)/Z_{f + Γ^↑}(B) .

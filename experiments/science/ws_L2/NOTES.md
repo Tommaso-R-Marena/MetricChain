@@ -288,3 +288,26 @@ with `a014576`), but the coordinator has added A12–A16.  Relevant to this work
 * **A12**, Corollary R6′ written out, step (3): the two signs for coset profiles "follow as
   before" → the abstract `r6_2_*` apply; add the explicit instance for distances to translates
   of a finite set `C ⊂ F₂ⁿ`.
+
+## 21:42 UTC — additions for A12/A13; final check; report final
+
+* `Sandwich.lean`, section `StepFields` (addendum A13): `siteDist`, `stepUp`, `stepDn`,
+  `le_sum_steps_up`, `le_sum_steps_dn` (triangle inequality telescoped along the order, by
+  `Nat.le_induction`), `siteDist_sup_right_le`, `siteDist_inf_left_le`,
+  `stepField_sandwich_mean`, `stepField_macrostate_ratio` — Theorem A13 for arbitrary site
+  quasi-metrics [V]; attainment for path envelopes is the `Chains` section.
+* `Referee.lean`: `gain_arith` now proves the constant `1 − 3/(4r)` (the note in A12's second
+  reading is correct [V]); `r6_2_core` carries it; `r6_2_root_sharp` (sharp gain) and
+  `r6_2_root` (referee's `1 − 1/r₁`, derived); `cosetDist`, `cosetDist_translate`,
+  `r6_2_cosets` (Lemma R6.2 for distances to `a₀ + C`, `a′ + C`, any non-empty finite `C`:
+  step (3) of "R6′ written out" in A12).
+* Final `check_all.sh` 21:37–21:40 UTC: `Sandwich.lean` 1 392 lines / 70 theorems,
+  `Referee.lean` 1 490 / 65, `Window.lean` 1 295 / 43; exit codes 0; 178/178 `#print axioms`
+  lines `[propext, Classical.choice, Quot.sound]`; no error, no warning; no forbidden token.
+* Mathlib `grep` for the items not done: `azuma`/`hoeffding` only in
+  `Probability/Moments/SubGaussian.lean`; no hypergeometric distribution found.
+* Report `docs/science/workstreams/L2_REPORT.md` updated to this state.
+
+Where I stopped: everything in the brief is done; beyond it A13 and the finite parts of the A12
+notes.  Not done: A11.2's integral, A11.3, R5(1),(3),(4), R6.3, Theorem R6, R6′ (4),(5),
+A1.2 items 4–5, finiteness of the vertex set, `Σ M_i = n·a`.

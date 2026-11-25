@@ -252,3 +252,11 @@ The hinted and the non-adaptive lower bounds recomputed directly from the defini
 largest difference of ln(lower bound) 1.2e-11.  (My first version of the cross-check overflowed in expm1 for u(k+1-j) > 709 and reported
 false mismatches of k*; fixed with ln(e^y - 1) = y + log1p(-e^-y).)
 Crossover cells: u=1 n=1400: R = 381 (R/n = .2721, p_u = .2689), ln LB_na = 155.023; u=2 n=540: R = 67, 176.477; u=1/2 n=4700: R = 1784, 141.539.
+
+### Step 21 (queue status; real inner brackets; three levels)
+- e2e.py seed 21, theorem constants (cut by its 420 s limit): 129 runs on explicit cubes of 12-13 coordinates, 9 786 461 real two-sample
+  inner brackets (224 of 270 rungs real, the others enumerated): no inner bracket invalid or too wide, every final bracket valid and within
+  x_out, no abort, queries <= 0.6% of C_max, no claim violated.
+- three.py seed 61 (running, low priority) + seed 5 (test): so far 5 outer runs, 192 middle runs, 14 251 858 bottom brackets, all valid.
+- lean/R6Axioms2.lean: `cube_nonadaptive_bound` (statement = Thm 11.45(b), non-adaptive mixtures, E|Q| >= (1-2 delta) 2^n/B); standard axioms.
+- finalize_report.py / fill_report.py / make_section3.py: all run counts of the report are generated from the data files.

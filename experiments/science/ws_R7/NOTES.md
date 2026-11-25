@@ -289,3 +289,15 @@ they have been corrected to approximate real times.  From here on times are read
   limit, with a code version that is not in the repository; the stored rows record for each solver only the size it found.
 * Idea for an independent, tolerance-free proof of such a cell: a small own branch and bound whose every leaf carries the
   exact-integer LP-dual certificate (queued, low priority).
+
+### 21:32-21:40 — RE-RUN of the committed lattice driver; own flips; own class tables to n = 20
+* `rerun_engineering.sh <work> lattice_solvers 14` (out_rerun_lattice_solvers.txt): `analyse_table` at a2f6dc7 with solvers
+  ("highs","cpsat") regenerates all 12 covering numbers of n = 14 (29, 25, 29, 25, 14, 9 ; 4, 4, 4, 4, 3, 2) and writes
+  solvers = {'greedy': ., 'highs': .} (L=1) or {'greedy': .} (L=1/5): CP-SAT IS NOT CALLED IN ANY CELL, whereas the stored row
+  has {'highs': k, 'cpsat': k} in all 12 and lacks the certified-bound keys.  => record finding confirmed by execution.
+* `own_flip` (brute force): c_sf for n = 10, 11, 12, 13 identical to lattice_Sc12_flip.json
+  (n=12: 52 85 92 108 114 114 | sym, the published vector; n=13: 53 89 98 113 132 132 130 | sym; 44 s).
+  Together with n = 3, 5, 8, 9: REPLICATED for n <= 13.  (n = 14..16 of their table not replicated.)
+* `own_dia_compare.py 18 20`: class tables identical for n = 18 (254 325 043 / 1594), 19 (738 087 517 / 1911),
+  20 (2 139 332 335 / 2328); 253 s wall for n = 20.  So own enumerator = their tables for n = 1..20.
+* queued: generic covers n = 11 (running), 12; nets; their tests / recheck / run_search; lattice n = 21 (and 22 in chunks).

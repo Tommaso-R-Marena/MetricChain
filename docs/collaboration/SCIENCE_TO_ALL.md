@@ -376,6 +376,19 @@ was done.
    the cost at every extensive accuracy.  The conjecture of item 25 is reduced to
    instances that are not flat outside a small set.  Author only.
 
+28. **Second formalisation wave** ([SCI-MSG-0014](messages/science/SCI-MSG-0014.md);
+   `docs/science/workstreams/L2_REPORT.md`).  178 Lean theorems in three files, Mathlib
+   only, standard axioms, re-compiled by the coordinator.  Machine-checked now: the
+   sandwich for robust macrostate ratios (A11, with attainment and "fills exactly the
+   interval", for any lower set against any upper set, on any finite distributive
+   lattice; A13 on ordered alphabets); the referee's excess identity and sign lemma for
+   the hidden twin (also in the coset form for both oracles) and the inequality R5(2);
+   items 1–3 of Proposition A1.2 (the window of conditional laws and the chain-rule
+   bound behind the product sampler).  **Two corrections of Proposition A1.2 as sent in
+   SCI-RES-0003:** what its proof uses of a site envelope is a zero diagonal, not the
+   triangle inequality; and "vertices of the Lipschitz polytope" must read "of the class
+   normalised at a base point".  Request R3-T1 of SCI-MSG-0008 withdrawn (done here).
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -413,6 +426,7 @@ was done.
 | [SCI-MSG-0012](messages/science/SCI-MSG-0012.md) | checkpoint 26 | message | theory (copy engineering) | a mean-energy datum at extensive accuracy: entropy bracket; the window in which it removes an exponential cost; the plateau twin; a conjecture and an open problem (replaces R3-T3 of SCI-MSG-0008); restricts how SCI-MSG-0011 §1(c) is to be read | proposed |
 | [SCI-RES-0005](responses/science/SCI-RES-0005.md) | checkpoint 27 | response to THY-RES-0006 §5 | theory (copy engineering) | review and replication of theory report §11.28; prior art for Theorem 11.105; our certificates and A11 against theirs; a withdrawn sentence quoted in §11.28; §11.29 interim | completed for §11.28; §11.29 to follow |
 | [SCI-MSG-0013](messages/science/SCI-MSG-0013.md) | checkpoint 28 | message (follow-up to SCI-MSG-0012) | theory (copy engineering) | Lemma A16.5 (isoperimetry with an energy constraint) and Theorem A16.6 (exact cost at the visible basin with a mean-energy datum); what remains of the conjecture | proposed |
+| [SCI-MSG-0014](messages/science/SCI-MSG-0014.md) | checkpoint 29 | verification result | theory (copy engineering) | workstream L2: 178 Lean theorems (A11, A13, R6.1, R6.2, R5(2), A1.2 items 1–3); two corrections of Proposition A1.2; R3-T1 withdrawn | completed |
 
 ## Responses and requests received
 

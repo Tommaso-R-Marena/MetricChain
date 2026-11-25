@@ -1,0 +1,19 @@
+{
+ "outer_runs": 17,
+ "skipped": 0,
+ "outer_closed": 17,
+ "outer_invalid": 0,
+ "outer_too_wide": 0,
+ "outer_det": 0,
+ "outer_good": 0,
+ "middle_runs": 1104,
+ "middle_closed": 1104,
+ "middle_invalid": 0,
+ "middle_too_wide": 0,
+ "middle_det": 0,
+ "middle_good": 0,
+ "bottom_brackets": 76289716,
+ "bottom_invalid": 0,
+ "runs_with_real_bottom": 10,
+ "secs": 484.7
+}

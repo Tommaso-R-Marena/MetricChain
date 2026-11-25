@@ -114,6 +114,17 @@ for name in ("B_reducedK", "D_2L_off"):
         print("   ", key, dict(by[key]))
     summary[name + "_byK"] = {str(k): dict(v) for k, v in by.items()}
 
+# B_lazy split by the cost model of the cell
+lz = [r for r in load("B_lazy_[0-9]*.jsonl") if "harness_limit" not in r]
+steep = [r for r in lz if json.loads(r["cell"]).get("costs") == "steep"]
+cheap = [r for r in lz if json.loads(r["cell"]).get("costs") != "steep"]
+summary["B_lazy_split"] = dict(steep_runs=len(steep), steep_abort_cost=sum(r.get("abort") == "query budget C_max" for r in steep),
+                               steep_q_gt_Cmax=sum(not r["q_le_Cmax"] for r in steep),
+                               steep_max_lnq_minus_lnCmax=max([r["lnq"] - r["lnCmax"] for r in steep], default=None),
+                               cheap_runs=len(cheap), cheap_abort_cost=sum(r.get("abort") == "query budget C_max" for r in cheap),
+                               cheap_max_q_over_Cvi=max([r["ratios"]["q_over_Cvi"] for r in cheap], default=None))
+print("B_lazy split:", summary["B_lazy_split"])
+
 e2e = load("e2e_*.jsonl")
 for Kdiv in sorted(set(r["Kdiv"] for r in e2e)):
     rr = [r for r in e2e if r["Kdiv"] == Kdiv]

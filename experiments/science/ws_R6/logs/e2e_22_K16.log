@@ -1,0 +1,19 @@
+e2e seed 22 Kdiv 16 time 84s
+{
+ "runs": 400,
+ "closed": 400,
+ "abort": 0,
+ "real_brackets": 1844727,
+ "inner_calls": 2444604,
+ "invalid_inner": 0,
+ "Gfail": 31,
+ "det_viol": 0,
+ "good_viol": 0,
+ "invalid_final": 0,
+ "too_wide_final": 0,
+ "max_q_over_Cmax": 0.023282922451070522,
+ "neg": 0,
+ "rungs_real": 667,
+ "rungs": 802,
+ "max_width_excess": -0.13541254327051833
+}

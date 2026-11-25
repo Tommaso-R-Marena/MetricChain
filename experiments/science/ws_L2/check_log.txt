@@ -1,4 +1,4 @@
-=== lake env lean /home/user/MetricChain/experiments/science/ws_L2/Sandwich.lean   (start 21:23:25 UTC)
+=== lake env lean /home/user/MetricChain/experiments/science/ws_L2/Sandwich.lean   (start 21:37:07 UTC)
 'ScienceL2.boltz_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL2.zOn_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL2.zOn_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -63,8 +63,14 @@
 'ScienceL2.field_modular' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL2.cube_occupation_cross' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL2.cube_occupation_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
-exit code: 0   (end 21:24:40 UTC)
-=== lake env lean /home/user/MetricChain/experiments/science/ws_L2/Referee.lean   (start 21:24:40 UTC)
+'ScienceL2.le_sum_steps_up' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL2.le_sum_steps_dn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL2.siteDist_sup_right_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL2.siteDist_inf_left_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL2.stepField_sandwich_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL2.stepField_macrostate_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit code: 0   (end 21:37:57 UTC)
+=== lake env lean /home/user/MetricChain/experiments/science/ws_L2/Referee.lean   (start 21:37:57 UTC)
 'ScienceL2.partSum_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL2.excessMass_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL2.partSum_twinMin' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -127,8 +133,11 @@ exit code: 0   (end 21:24:40 UTC)
 'ScienceL2.pair_sum_binary' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL2.rho_eq_inv_cosh' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL2.r5_2_binary_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
-exit code: 0   (end 21:26:12 UTC)
-=== lake env lean /home/user/MetricChain/experiments/science/ws_L2/Window.lean   (start 21:26:12 UTC)
+'ScienceL2.r6_2_root_sharp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL2.cosetDist_translate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL2.r6_2_cosets' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit code: 0   (end 21:39:27 UTC)
+=== lake env lean /home/user/MetricChain/experiments/science/ws_L2/Window.lean   (start 21:39:27 UTC)
 'ScienceL2.gibbsZ_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL2.gibbsLaw_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL2.sum_gibbsLaw' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -172,11 +181,11 @@ exit code: 0   (end 21:26:12 UTC)
 'ScienceL2.klBound_pi_of_vertices' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL2.exists_site_max' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL2.kl_pi_exists_isGreatest' depends on axioms: [propext, Classical.choice, Quot.sound]
-exit code: 0   (end 21:27:02 UTC)
+exit code: 0   (end 21:40:40 UTC)
 === forbidden tokens (sorry / admit / native_decide / axiom declarations), per file
-Sandwich.lean: 0 token(s); 0 axiom declaration(s); 64 '#print axioms' line(s)
-Referee.lean: 0 token(s); 0 axiom declaration(s); 62 '#print axioms' line(s)
+Sandwich.lean: 0 token(s); 0 axiom declaration(s); 70 '#print axioms' line(s)
+Referee.lean: 0 token(s); 0 axiom declaration(s); 65 '#print axioms' line(s)
 Window.lean: 0 token(s); 0 axiom declaration(s); 43 '#print axioms' line(s)
 === summary
-axiom lines: 169; of which exactly [propext, Classical.choice, Quot.sound]: 169
+axiom lines: 178; of which exactly [propext, Classical.choice, Quot.sound]: 178
 lines with 'error': 0; lines with 'warning': 0

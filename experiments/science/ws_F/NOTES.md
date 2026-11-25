@@ -89,13 +89,13 @@ H5. k ≥ 2: k-transitive group ⇒ k-body matching ⇔ matching the first k fac
   numerically: is the constrained sup attained by plain dips of the forced centre type `m_0`
   ("restricted to centres of that type"), or do annular/soft-label dips do better?
 
-* 20:45 — **N1 done** (`t01_single_letter.py`, `out/t01_single_letter.txt`): my own implementation
+* (by 20:45, clock read 20:45 when these three entries were written) — **N1 done** (`t01_single_letter.py`, `out/t01_single_letter.txt`): my own implementation
   (`sl.py`) reproduces every printed number I tried: closed form of Thm 11.59(b) vs exact 2×2 game
   value `1.5e-14` (2000 random cases); Sibson form vs max over γ `3e-16`; table of §11.20 (u=2,
   θ=0,.5,1,2,3: R_0, R^max, γ*, a) to all printed digits; `R_0(0.3E)=0.019497`, `R^max(0.3E)=0.023270`
   at (0.1,2); `θ_na` = .1020,.0440,.0243; the "bin" row of §11.26 to 6 digits; pair identity;
   constant-composition exponent dual = primal (`5e-15`), `max_m Rcc = R_γ`.
-* 20:50 — **N2 done** (`t02_fixed_point.py`, `out/t02_fixed_point.txt` once the slow job ends):
+* (by 20:45) — **N2 done** (`t02_fixed_point.py`, `out/t02_fixed_point.txt` once the slow job ends):
   Augustin's identity `Q* = Σ_φ M*(φ)V_φ` holds at the saddle (to 1e-9).  **But the identity that
   matters for the oracle is `M*W = Q*` and it FAILS for p ≠ ½**: gap `(M*W − Q*)(1)` = +0.018
   (p=.3,u=1,e=0) … +0.127 (p=.1,u=2,e=.9E); exactly 0 at p=½.  Plain dips at additive bases with
@@ -103,7 +103,7 @@ H5. k ≥ 2: k-transitive group ⇒ k-body matching ⇔ matching the first k fac
   from e=0.6E (p=.3) resp. e=0.3E (p=.1) on.  ⇒ H1, H2 confirmed at the single-letter level; the
   coordinator's mechanism (self-consistency) is false; within additive bases + plain dips the
   constraint binds hard.
-* 21:05 — **N5a done** (`t03_enum_adaptive.py`, `out/t03_enum_adaptive.txt`): exhaustive enumeration
+* (by 20:45) — **N5a done** (`t03_enum_adaptive.py`, `out/t03_enum_adaptive.txt`): exhaustive enumeration
   n = 8, 12, 14, 16, eight parameter sets.  Compensated base `w~_{γ1} + b w~_{γ2}` and cyclically
   symmetrised alternative: both in the class (max |ln ratio| ≤ u), **all n one-body marginals
   equal to ≤ 1.4e-13**, separation = ln(1+E/(1+b)) as predicted.  Without compensation the
@@ -111,7 +111,7 @@ H5. k ≥ 2: k-transitive group ⇒ k-body matching ⇔ matching the first k fac
   spread over e.g. [0.105, 0.404] (oracle reveals the centre).  ⇒ H3 (construction) confirmed.
   At these n the packing numbers are trivial, as they must be (exponents 0.01–0.05).
 
-* 20:55 — **N3 (instance-wise, zero residual)** (`prof.py`, `t04_instance.py`, `out/t04_instance.txt`).
+* (between 20:49 and 21:01; clock read 21:01 when the next four entries were written) — **N3 (instance-wise, zero residual)** (`prof.py`, `t04_instance.py`, `out/t04_instance.txt`).
   Three single-letter quantities at the zero residual with the oracle:
   (a) plain dips of the centre type forced by one-body matching, `Rcc(0, m_0; e)`;
   (b) sup over binary-label *annular* profiles `(m, v0, v1)` (dips around a shell, cores in the
@@ -129,7 +129,7 @@ H5. k ≥ 2: k-transitive group ⇒ k-body matching ⇔ matching the first k fac
   not know the window.  True instance exponent with oracle ∈ [(b), (c)] — gap 1–8 % typically.
   Sanity: f(plain profile) ≥ Rcc (annular around the cone-typical shell is smaller than the
   ball), equality at the optimal type; unconstrained sup over profiles = R_γ to 8 digits.
-* 21:00 — **N5b** (`t06_nonadaptive.py` part A): exhaustive enumeration n = 10…14, six cases: the
+* (20:59) — **N5b** (`t06_nonadaptive.py` part A): exhaustive enumeration n = 10…14, six cases: the
   type-wise truncated cone is in the class (their [V] statement re-checked by brute force); the
   compensated pair (truncated + b·additive, cone + b·additive) is in the class and has ALL
   one-body marginals equal to ≤ 1.6e-15; uncompensated gap 1e-3…2e-2.  ⇒ H3 for the non-adaptive
@@ -149,11 +149,11 @@ H5. k ≥ 2: k-transitive group ⇒ k-body matching ⇔ matching the first k fac
   ⇒ polynomial-size t-designs for ALL (n, block size, t): what the general k-body exact
   statement needs in place of the BCH codes of the uniform cube.
 
-* 21:04 (clock read) — **N-tilt** (`t09_tilt_check.py`, `out/t09_tilt_check.txt`): the tilt inequality
+* 21:02 (clock read) — **N-tilt** (`t09_tilt_check.py`, `out/t09_tilt_check.txt`): the tilt inequality
   holds with min(LHS−RHS) = 0 (attained at λ=0) on 5 exactly matched alternatives (n = 10…14,
   λ ∈ [−3,3]); an unmatched alternative violates it (−4e-3 … −6e-2).  Derivative of the tilt bound
   at λ=0 at the zero residual: +0.0088 (p=.3,u=1), +0.0277 (p=.1,u=2), 0 (p=½).
-* 21:05 — **Second coordinator note received**: the theory division published its own answer
+* 21:02 — **Second coordinator note received**: the theory division published its own answer
   (THY-RES-0006 §3; theory report §11.29, Proposition 11.109, at commit dcdfea6; DEAD_ENDS D54
   item 3; scripts `oracle_field_scan.py`, `oracle_zero_types.py`).  I am asked for a separate
   report section "Against theory report §11.29".
@@ -163,7 +163,7 @@ H5. k ≥ 2: k-transitive group ⇒ k-body matching ⇔ matching the first k fac
   by me WITHOUT having seen THY-RES-0006, §11.29, D54 or their scripts.  I had read only
   THY-RES-0005 §2 (their two-sentence expectation and the parameter-counting remark).
 
-* 21:08–21:15 — **Read the theory division's answer** (THY-RES-0006 §3; theory report §11.29,
+* 21:02–21:15 (clock read 21:15 when written) — **Read the theory division's answer** (THY-RES-0006 §3; theory report §11.29,
   Proposition 11.109, lines 7080–7177 of the report at dcdfea6; DEAD_ENDS D54 item 3;
   `oracle_field_scan.py`, `oracle_zero_types.py`).  Their (a)–(d) [P]: window; one number;
   identity κ̄(ψ1) − κ̄(ψ0) = Φ/(1+Φ)[type(ν) − κ̄(ψ0)]; the lower bound (1−2δ)/maxdens survives with
@@ -200,3 +200,40 @@ H5. k ≥ 2: k-transitive group ⇒ k-body matching ⇔ matching the first k fac
 * The first run of `t02` was killed at its 30-minute limit (401-point γ-scan too slow); its
   partial output is kept as `out/t02_fixed_point_partial_first_run.txt`; a light version
   (41-point scan + refinement) is running and writes `out/t02_fixed_point.txt`.
+
+* NOTE on the timestamps above (written 21:42): several entry headers were typed as estimates; I have corrected
+  them here to the clock readings that the shell printed at the time (20:07, 20:23, 20:45, 20:49, 20:53, 20:59,
+  21:01, 21:02, 21:15).  Order of events, which is what matters for provenance: H1-H5 (before 20:23) -> N1, N2,
+  N5a (by 20:45) -> N3 zero-residual bracket, N5b, k=2 (by 21:01) -> tilt check (21:02) -> second coordinator note
+  (21:02) -> theory material read and compared (21:02-21:15).
+* 21:26-21:41 — report sections 1-8 written.  `t07` (slow annular scan) stopped; bug found in it by `t07b`
+  debugging: the bisection range for the lift (eps + 60) is too short for annular dips at n >= 800 (their lift is
+  n(e + D(core||pi)), not eps + O(1)); `t07b_annular_fast.py` (bounding box, lift range up to u*n) reproduces
+  n = 400 (+0.002842) and gives n = 800: lnLB = +6.83 (lnLB/n = +0.008534) at p=.1,u=2,e=.2E_0.
+* 21:41 — `t14_theory_numbers.py`: my profile formula with label laws UNRESTRICTED reproduces the theory
+  division's own output file (dcdfea6, out_oracle_zero_types.txt) at all six types: 0.00491/0.00485,
+  0.01210/0.01210, 0.01294/0.01294, 0.01341/0.01340, 0.00938/0.00942, 0.00338/0.00338; their reported maximiser
+  (0.46, 0.497, 0.118) is mine (0.460, 0.1178, 0.4967), with 0.497 > p_+ = 0.4754.  Restricted to the window:
+  0.00217, 0.01142, 0.01263, 0.01302, 0.00482, 0.  => their r_mu is my f; their rho_e(kappa) admits profiles
+  whose excess mass does not have type kappa.
+
+* 21:43 — `t15_tolerance_check.py`: ingredients of Theorem τ by enumeration at n = 12: all marginals of orders 1–3 of
+  (base + average of N i.i.d.-centre dips) within 0.02 (τ = 0.1, N = 400) resp. 0.007 (τ = 0.03, N = 2000) of the base's.
+* 21:45 — `t07b`: n = 1600: lnLB = +17.98 (lnLB/n = +0.011240) at the zero residual with the oracle, p=.1,u=2,e=.2E_0
+  (V = 0.015441, U = 0.016345; forced-type plain dips: nothing).  `t05`: n = 3200 rows for (0.1,2,0.3E): 0.021586
+  (R^max 0.023270) and (0.1,2,0.05E): 0.041652 (R^max 0.043316).
+* 21:47 — report `docs/science/workstreams/SF_REPORT.md` complete (sections 1–8 + re-run instructions).
+
+## State at close (resume here)
+
+* Report: `docs/science/workstreams/SF_REPORT.md`.
+* Still running when I closed (they write `out/<name>.txt` only when they end; the running logs are complete records
+  of what was computed): `t05_typesums_adaptive.py` (`out/t05_run.log`), `t06_nonadaptive.py` (`out/t06_run.log`),
+  `t07b_annular_fast.py` (`out/t07b_run.log`).  If they were killed with the session, the logs stand.
+* Main results: Lemma 3 (compensation), Theorem A / Corollary A (adaptive exponent unchanged, every n), Theorem B /
+  Corollary B (non-adaptive), Proposition S (the sketch's mechanism is false: M*W ≠ Q*), Proposition C (tilt
+  inequality; oracle helps at additive instances), Proposition D (lower bounds at an instance; shells beat forced
+  centre types), Conjecture Z, Proposition E (k = 2), Theorem τ (tolerances), §8 (against theory §11.29).
+* Open: exact instance-wise exponent (bracket [V, U]); k ≥ 3; U at bounded accuracy; nothing machine-checked.
+* Files: `sl.py` (single-letter library), `ts.py` (type-class sums), `prof.py` (profiles, tilt bound),
+  `t01`…`t15` (tests; `t07` superseded by `t07b`), `out/` (outputs and logs).

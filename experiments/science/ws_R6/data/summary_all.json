@@ -348,6 +348,15 @@
    "invalid_final_on_G": 0
   }
  },
+ "B_lazy_split": {
+  "steep_runs": 60,
+  "steep_abort_cost": 33,
+  "steep_q_gt_Cmax": 0,
+  "steep_max_lnq_minus_lnCmax": -0.006006691095535643,
+  "cheap_runs": 59,
+  "cheap_abort_cost": 0,
+  "cheap_max_q_over_Cvi": 0.020972500244140664
+ },
  "e2e_K1": {
   "runs": 129,
   "closed": 129,
@@ -370,25 +379,25 @@
   "max_width_excess": -0.13950228054812053
  },
  "e2e_K16": {
-  "runs": 36,
-  "closed": 36,
+  "runs": 347,
+  "closed": 347,
   "abort": 0,
-  "real_brackets": 190365,
-  "inner_calls": 207264,
-  "rungs_real": 65,
-  "rungs": 74,
+  "real_brackets": 1584994,
+  "inner_calls": 2121805,
+  "rungs_real": 576,
+  "rungs": 696,
   "invalid_inner": 0,
   "runs_with_invalid_inner": 0,
-  "G_failed": 2,
+  "G_failed": 22,
   "det_viol": 0,
   "good_viol": 0,
   "invalid_final": 0,
   "invalid_final_on_G": 0,
   "too_wide_final": 0,
-  "max_q_over_Cmax": 0.00623005950799849,
+  "max_q_over_Cmax": 0.011678032709413156,
   "neg": 0,
-  "points": 125356,
-  "max_width_excess": -0.13692459805358126
+  "points": 1558200,
+  "max_width_excess": -0.13541254327051833
  },
  "three": {
   "outer_runs": 5,

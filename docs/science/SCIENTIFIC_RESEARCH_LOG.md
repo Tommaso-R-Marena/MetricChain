@@ -567,3 +567,21 @@ profile and the gauche count, and its support function is the ground-state energ
   and terrace constructions and concluded "conjecture").  A convex formulation should
   have been the first thing tried.
 
+### Cycle 23 — the second formalisation wave returns (checkpoint 29)
+
+* **L2 finished:** three Lean files, 178 theorems, Mathlib only.  The coordinator
+  re-compiled all three (exit 0, standard axioms) and read a dozen headline statements
+  and all definitions of the referee file against the paper.
+* **Now machine-checked:** Theorem A11 and Corollary A11.1 (with attainment and "fills
+  exactly"), in fact on any finite distributive lattice with an envelope that two
+  functions saturate; Theorem A13; the referee's R6.1 and R6.2 (abstract, binary cube,
+  coset form) and R5(2); Proposition A1.2 items 1–3.
+* **What the formalisation found** (none a false theorem): A1.2 listed the wrong
+  hypotheses for the site envelopes (zero diagonal is what is used; item 2 fails without
+  it) and its "vertices of the Lipschitz polytope" has no literal meaning; A11 needs
+  `β ≥ 0` and no sign condition on the constants; A11.1 holds for any lower set against
+  any upper set; R6.2 has two implicit hypotheses and one unused.  Corrections sent as
+  SCI-MSG-0014 and marked in SCI-RES-0003.
+* **Lesson (again):** a formalisation is the cheapest referee for hypotheses — both times
+  (L1, L2) it found the hypothesis that the paper proof used and the statement omitted.
+

@@ -24,7 +24,8 @@ runs_2l = v2l + off2l
 runs_2lp = v2lp + redK + inval
 e1, e16, th, cc = S.get("e2e_K1", {}), S.get("e2e_K16", {}), S.get("three", {}), S.get("capcorner", {})
 adv_total = sum(r["evaluations"] for r in S.get("adversarial", []))
-lazy_cost, lazy_runs = g("B_lazy", "abort_cost"), g("B_lazy", "runs")
+LZ = S.get("B_lazy_split", {})
+lazy_cost, lazy_runs = LZ.get("steep_abort_cost", 0), LZ.get("steep_runs", 0)
 close_pop_A = sum(g(n, "close_pop") for n in A)
 closed_A = sum(g(n, "closed") for n in A)
 e2e_runs = e1.get("runs", 0) + e16.get("runs", 0)
@@ -96,8 +97,8 @@ rep("""  behaviour that returns the rung-0 bracket at every rung but the last (s
   reaches the dearest rung) and rung costs growing by `e^{80}`, 33 of my 60 runs stop on the query
   budget,""",
     f"""  behaviour that returns the rung-0 bracket at every rung but the last (so that every refined point
-  reaches the dearest rung), {lazy_cost} of my {lazy_runs} runs stop on the query budget (all of them among the runs
-  with rung costs growing by `e^{{80}}`),""")
+  reaches the dearest rung) and rung costs growing by `e^{{80}}`, {lazy_cost} of my {lazy_runs} runs stop on the query
+  budget,""")
 
 open(REPORT, "w").write(s)
 print("finalised: total", total, "valid", valid, "(2L+", v2lp, ", 2L", v2l, ") reducedK", redK, "invalid", inval, "2L off", off2l,

@@ -22,7 +22,7 @@ oracle costing at most a factor `C·n(n+1)` (adaptive) resp. `n` in the count an
 for the adaptive bound this includes every fixed accuracy `ε > 0`.  (ii) *False:* the proposed reason — "the hardest
 instance is self-consistent" by Augustin's fixed point — fails twice.  The excess mass of a sensitive dip is carried
 by the **cone law** `π_φ` (the output law `MW` of the vertex channel), not by the tilted type `V_φ ∝ π_φ^t Q*^{1−t}`, which
-is the type of the dip's *rim*; and `M*W ≠ Q*` whenever `p ≠ ½` (gap `0.018 … 0.127` in the cases computed), so the
+is the type of the dip's *rim*; and `M*W ≠ Q*` whenever `p ≠ ½` (gap `0.006 … 0.21` in the 28 cases computed), so the
 hardest *additive* instance is **not** self-consistent, and with the oracle its own instance-wise exponent drops
 (Proposition C).  (iii) *The actual mechanism is compensation:* the class is a convex cone in the weights and contains
 the tilted product measures, whose densities sweep the whole window of possible one-body marginals; adding
@@ -39,8 +39,9 @@ value**: dips around shells do much better (`0.0154` against `0` in the example)
 is impossible with one centre type and any mixture of additive instances (the excess is *below* the parabola
 `c₂ = c₁²`), and possible with two centre types `≳ √n` apart — an explicit two-component base again, verified exactly
 at `n = 13` with `AGL(1,13)` (all 13 + 78 marginals equal to `10⁻¹⁴`).  (vi) *Tolerance:* with **all** marginals of every
-order known to absolute precision `τ ≥ e^{−o(n/ln n)}` the adaptive lower bound loses a factor polynomial in `n` and
-`1/τ` (Theorem τ).  Against the theory division's §11.29 (commit `dcdfea6`, read afterwards): (a)–(d) agree; their
+order known to absolute precision `τ` the adaptive lower bound loses a factor polynomial in `1/τ` and logarithmic
+in `n`, so the exponent is unchanged for every `τ ≥ e^{−o(n)}` (Theorem τ).  Against the theory division's §11.29
+(commit `dcdfea6`, read afterwards): (a)–(d) agree; their
 conjecture (f) is **proved** here by a different instance; their conjecture (e) is right in direction, their value
 `ρ_e(p)` is (numerically, to six digits) my tilt **upper** bound, and the profiles that attain it do not have excess
 mass of type `p` (§8).
@@ -168,9 +169,10 @@ For the last display take `r := ln(1 + max{2/ω_m, (1 + 2/m̲)(e^ε − 1)}) + �
 
 **Corollary A (the class exponent) [P for the lower bound; the upper bound is Theorem 11.64, black box].**  For
 every `p, u`, `δ < ½`:
-(a) for `0 ≤ ε₁ < E` and every `n ≥ 2`, the worst-case expected cost of `(ε₁n/2, δ)`-correct oracle algorithms is at
-least `(1 − 2δ)·c·e^{n·R^max(ε₁)}/(n(n+1))`, with `c = c(p,u,ε₁) > 0` (take `γ = γ*`, `t = t*`, `k = round(m*n)` in Theorem A;
-`ρ_{t*}(k/n;γ*)ⁿ ≤ e^{L}·e^{−nF*(t*)}`, `L` a Lipschitz constant of `ρ` in `m`; `0 < m* < 1` because `F*(t*) > 0`);
+(a) for `0 ≤ ε₁ < E` and all `n ≥ n₀(p,u,ε₁)`, the worst-case expected cost of `(ε₁n/2, δ)`-correct oracle algorithms is
+at least `(1 − 2δ)·c·e^{n·R^max(ε₁)}/(n(n+1))`, with `c = c(p,u,ε₁) > 0` (take `γ = γ*`, `t = t*`, `k = round(m*n)` in Theorem A;
+`ρ_{t*}(k/n;γ*)ⁿ ≤ e^{L}·e^{−nF*(t*)}`, `L` a Lipschitz constant of `ρ` in `m`; `0 < m* < 1` because `F*(t*) > 0`; `n₀` only
+ensures `1 ≤ k ≤ n−1` and `min(k, n−k)/n ≥ ½·min(m*, 1−m*)`);
 (b) for every fixed `ε > 0`: at least `(1 − 2δ)·c′·e^{nh}/(n(n+1))`, `h = R^max(0)`;
 (c) hence for `0 < ε₁ < E` **the adaptive exponent with the oracle is `R^max(ε₁)`, the value without it**.
 The hard instance is `ψ₀ = −ln(w̃_{γ*} + b·w̃_{∓u})`: its Gibbs measure is the mixture
@@ -256,11 +258,12 @@ if moreover `Δ ≥ 0`, the excess form `Φ^{(λ)} ≥ Φ·e^{−n c_γ(λ)}` ho
 The algorithm: given the hint `γ`, **reject the hint if the oracle's answers are not `(p_γ, …, p_γ)`** (then evaluate
 everything); otherwise run the hedged spot-check of Theorem 11.22(e) with `e^{nU_γ(e) + o(n)}` points from
 `½π_γⁿ + ½·`(uniform on types, uniform inside each type class).  The oracle is used for one comparison only.
-(c) `dU_γ/dλ|_{λ=0} = −∂_θ R_γ(e; θ)`, which at `γ = 0` vanishes iff `p = ½` (`+0.0088` at `(0.3, 1)`, `+0.0277` at `(0.1, 2)`,
+(c) The derivative of `λ ↦ R_γ(e − c_γ(λ); θ − λ)` at `λ = 0` is `−∂_θ R_γ(e; θ)` (because `c_γ′(0) = 0`); at `γ = 0` it vanishes
+for `p = ½` (symmetry) and is non-zero in every case computed with `p ≠ ½` (`+0.0088` at `(0.3, 1)`, `+0.0277` at `(0.1, 2)`,
 `e = 0.2E_0`): **for `p ≠ ½` the oracle strictly lowers the exponent of the zero residual**, and likewise that of the
-hardest additive instance `γ*` (table in §3.5).  The threshold drops too:
-`E_0^{orc} ≤ min_λ[E_0(θ − λ) + c_0(λ)] < E_0`, so for accuracies in between the cost at the zero residual is
-`e^{o(n)}` with the oracle and `e^{nR_0}` without.
+hardest additive instance `γ*` (§3.5).  The threshold drops too: `E_0^{orc} ≤ min_λ[E_0(θ − λ) + c_0(λ)]`, which is `< E_0`
+in every case computed with `p ≠ ½` (ratio `0.99 … 0.37`, §3.5); for accuracies in between, the cost at the zero
+residual is `e^{o(n)}` with the oracle and `e^{nR_0}` without.
 *Proof.*  (a) `Σ_x π^{(λ)}(x)w(x) = Z_λ^{−n}Σ_x π(x)e^{λ|x|}w(x)` for every weight `w`, with `Z_λ = q + pe^{λ}`; for `w = e^{−ψ_γ}` this
 is `Z_λ^{−n}A(ψ_γ)(1 − p_γ + p_γe^{λ})ⁿ`; divide.  If the marginals agree, `E_{μ_{ψ′}}|x| = np_γ`, and by Jensen
 `E_{μ_{ψ′}}e^{λ(|x| − np_γ)} ≥ 1`, i.e. `Σ_x π(x)e^{−ψ′(x)}e^{λ|x|} ≥ A(ψ′)e^{λnp_γ}`.  If `Δ ≥ 0`, Jensen for `Δ/Φ`, whose mean
@@ -363,7 +366,7 @@ same reduction (§11.29 at `dcdfea6`, last paragraph: "`k` matching conditions �
 *Model* (as in addendum A10, for marginal probabilities): for the instance `ψ` the oracle returns numbers `m_{S,a}`
 for every non-empty `S ⊆ [n]` and `a ∈ {0,1}^S`, subject only to `|m_{S,a} − μ_ψ(x_S = a)| ≤ τ`.
 
-**Theorem τ [P; not checked numerically beyond its ingredients].**  Let `0 < τ ≤ 1`, `|γ| ≤ u`, `0 < m < 1`, `0 ≤ t ≤ 1`,
+**Theorem τ [P; its ingredients checked by enumeration at `n = 12`, §3.9; not checked as a whole].**  Let `0 < τ ≤ 1`, `|γ| ≤ u`, `0 < m < 1`, `0 ≤ t ≤ 1`,
 `ε > 0`, `n ≥ 2`; `θ₀ := max(p₊, 1 − p₋) < 1`, `k_τ := ⌈ln(1/τ)/ln(1/θ₀)⌉`, `N := ⌈(k_τ ln(2n) + ln 4)·2^{2k_τ+3}/τ²⌉`.  Let
 `γ_c` be the additive instance with `p_{γ_c} = c₀(m)` and `ψ₀ := −ln(w̃_γ + (4/τ − 1)·w̃_{γ_c})`.  Every oracle algorithm with
 the `τ`-tolerant oracle of all orders that is `(ε/2, δ)`-correct on `L_u` makes on `ψ₀` (with a legal answer of the
@@ -410,13 +413,14 @@ homogeneous ensemble happens to reproduce the averages of its own hidden basins 
 adversary may take the ensemble to be a *population-weighted mixture of two sub-ensembles*.  An averaged
 observable cannot tell a homogeneous ensemble from such a mixture, and the mixing weight is exactly the one free
 number needed to absorb the signature of a hidden basin.  This is the ensemble-averaging ambiguity familiar from
-the interpretation of averaged structural data, here with a price tag: a factor `≈ 15·n²` in the lower bound.
+the interpretation of averaged structural data, here with a price tag: a factor `C_m·n(n+1)` in the lower bound
+(`C_m ≈ 15` at `p = 0.3`, `u = 1`).
 (2) **The same data are informative once one commits to a homogeneous model.**  If the ensemble is believed to be
 the reference itself (zero residual) and the measured per-site averages agree with it, hidden basins must be
 "self-averaging" (their extra population must have the reference's composition, which forces shell-shaped rather
 than ball-shaped basins), and the cost of certification drops: by a few percent of the exponent in a weak field
-(`2–8 %` at `p = 0.3`, `u = 1`), by a large factor in a strong one (`40–100 %` at `p = 0.1`, `u = 2`), and from exponential to
-sub-exponential in a window of accuracies.  (3) Pair data change nothing in the worst case either, but need a
+(at least `2–17 %` at `p = 0.3`, `u = 1`, growing towards the threshold), by a large part of it in a strong one (at least
+`21–100 %` at `p = 0.1`, `u = 2`), and from exponential to sub-exponential in a window of accuracies.  (3) Pair data change nothing in the worst case either, but need a
 mixture whose two components are tuned to the *spread* of the hidden basins' compositions; and error bars of
 any fixed size make marginals of every order worthless against the worst case, at a polynomial price.  None of
 this is a statement about a physical system: the class constant `u`, the reference and the oracle are idealisations.
@@ -464,6 +468,8 @@ compared with the union bound of the proof.
 ### 3.4 Exact type-class sums for Theorem A (`ts.py`, `t05_typesums_adaptive.py`; `n = 100 … 3200`)
 
 `ε = ε₁n`, `γ = γ*(ε₁)`, centre type scanned near `m*n`; `ln LB` = the exact bound of Theorem A without the factor `1 − 2δ`.
+("Exact" here and below: finite sums over the `(n+1)(k+1)` joint-type classes, no asymptotics, evaluated in float64 in
+the log domain — not rational arithmetic.)
 
 | `(p, u, ε₁)` | `n` | with oracle `ln LB/n` | `b` | `c_{k,r}` | no oracle `ln LB₀/n` | `ln LB − ln LB₀` | `R^max − ln LB/n` | `× n/ln n` |
 |---|---|---|---|---|---|---|---|---|
@@ -474,12 +480,14 @@ compared with the union bound of the proof.
 | `(0.1, 2, 0.3E)`, `R^max = 0.023270` | `400` | `0.012611` | `0.441` | `0.25137` | `0.027830` | `−6.09` | `0.010659` | `0.712` |
 | | `800` | `0.017453` | `0.434` | `0.25028` | `0.025961` | `−6.81` | `0.005817` | `0.696` |
 | | `1600` | `0.020144` | `0.426` | `0.24919` | `0.024811` | `−7.47` | `0.003127` | `0.678` |
+| | `3200` | `0.021586` | `0.427` | `0.24932` | `0.024141` | `−8.18` | `0.001684` | `0.668` |
 
 The bound with the oracle differs from the bound without it by `−ln n − O(0.1)` (the cyclic union; the deeper dip
 costs almost nothing), and approaches `R^max` from below like `0.7·ln n/n`.  At `n = 3200`, `(0.3, 1, 0.3E)`: every algorithm
 with the oracle needs `(1−2δ)·e^{33.7} ≈ 4·10^{14}` evaluations at the two-component instance.  `c_{k,r}` is the cone
-density `c₀(k/n)` to all digits shown (Lemma 2), not `p_{γ*} = 0.317` resp. `0.163`.  (Rows for further parameter sets:
-`out/t05_typesums_adaptive.txt`.)
+density `c₀(k/n)` to all digits shown (Lemma 2), not `p_{γ*} = 0.317` resp. `0.163`.  (Rows for four further parameter
+sets, `(0.1, 2, 0.05E)`, `(0.2, 1, 0.5E)`, `(0.5, 1, 0.3E)`, `(0.05, 3, 0.2E)`, as far as computed: `out/t05_run.log`; e.g.
+`(0.1, 2, 0.05E)`, `R^max = 0.043316`: `0.037550`, `0.040221`, `0.041652` at `n = 800, 1600, 3200`.)
 
 ### 3.5 The tilt inequality and its consequences (`t09_tilt_check.py`, `t12_tilt_gammastar.py`, `t13_threshold.py`)
 
@@ -490,7 +498,7 @@ at `(0.3, 1)`, `e/E = 0, 0.3, 0.6`; `0.867, 0.654, 0.182` at `(0.1, 2)`; `0.799,
 Thresholds of the zero residual: `min_λ[E_0(θ−λ) + c_0(λ)]/E_0 = 1` (`p = ½`), `0.990` (`0.4, 1`), `0.963` (`0.3, 1`), `0.943` (`0.25, 1`),
 `0.864` (`0.1, 1`), `0.631` (`0.1, 2`), `0.368` (`0.05, 3`).
 
-### 3.6 The zero residual with the oracle (`prof.py`, `t04_instance.py`, `t10`, `t11`, `t07_zero_residual_annular.py`)
+### 3.6 The zero residual with the oracle (`prof.py`, `t04_instance.py`, `t10`, `t11`, `t14`, `t07b_annular_fast.py`)
 
 Single-letter values: table in §2.5 (36 rows in `out/t04_instance.txt`).  Checks of the profile formula: `f` at the
 plain-dip profile `≥ Rcc`, with equality at the optimal centre type; the unconstrained supremum over two-label
@@ -504,14 +512,20 @@ density `0.2439`; around `(76, 24)` — label-0 law `0.1091`, at the end of the 
 Certified finite-`n` bounds at the zero residual with the oracle (two shells with the same centre, excess
 densities bracketing `p`, exact matching by the linear equation):
 
-| `(p, u, e)` | `n` | shells: `ln LB/n` | `ln LB` | plain dips of two adjacent centre types |
-|---|---|---|---|---|
-| `(0.1, 2, 0.2E_0)`; `V = 0.015441`, `U = 0.016345`, `R_0 = 0.026849`, forced-type plain dips `0` | `200` | `−0.006703` | `−1.34` | no admissible pair |
-| | `400` | `+0.002842` | `+1.14` | no admissible pair |
-| | `800`, `1600` | see `out/t07_zero_residual_annular.txt` (running when this was written; §5) | | |
+| `(p, u, e)` | `n` | shells: `ln LB/n` | `ln LB` | centre type, shells `(j₁, j₀)`, excess densities | plain dips of the forced centre type |
+|---|---|---|---|---|---|
+| `(0.1, 2, 0.2E_0)`; `V = 0.015441`, `U = 0.016345`, `R_0 = 0.026849` | `200` | `−0.006703` | `−1.34` | `k = 76`; `(18, 0)`, `(19, 0)`; `0.09678`, `0.10148` | no admissible pair (single-letter value `0`) |
+| | `400` | `+0.002842` | `+1.14` | `k = 144`; `(36, 2)`, `(37, 2)`; `0.09891`, `0.10131` | no admissible pair |
+| | `800` | `+0.008534` | `+6.83` | `k = 297`; `(72, 5)`, `(73, 5)`; `0.09939`, `0.10062` | — |
+| | `1600` | `+0.011240` | `+17.98` | `k = 546`; `(143, 14)`, `(144, 14)`; `0.09991`, `0.10052` | — |
 
-(At `n = 400` the best pair of shells is `(36, 1)` and `(37, 1)` around a centre of type `k = 144`, excess densities
-`0.09824` and `0.10064`, mixing weight `0.108`.)
+So at `n = 1600`, `ε = 0.0404·n`, every algorithm with the oracle needs `(1−2δ)·e^{17.98} ≈ 6·10⁷` evaluations **at the
+zero residual**, where dips of the forced centre type certify nothing; `(V − ln LB/n)·n/ln n = 0.84, 0.83, 0.91` (the
+scan over `(k, j₀)` is coarse — five centre types, six `j₀` — so these are lower bounds on what shells give).
+Rows `n = 200, 400` of the first, slow script `t07_zero_residual_annular.py` (kept as
+`out/t07_zero_residual_annular_partial.txt`) agree with `t07b_annular_fast.py`, which computes on a bounding box of the
+supports (checked not to touch its boundary).  Further rows (`n = 3200`; `(0.3, 1)`, `(0.25, 1)`) were still running
+when the report was closed: `out/t07b_run.log`.
 
 ### 3.7 Exact two-body matching (`t08_k2_exact.py`; `n = 11, 13`, `G = AGL(1, n)`, exhaustive)
 
@@ -531,15 +545,26 @@ class with all one-body marginals equal to `1.6·10⁻¹⁵`; without compensati
 (B) Exact sums, `(0.3, 1, ε₁ = 0.25E)`, `θ_na = 0.024324`: with the oracle `−ln(nq)/n = 0.010781, 0.016693, 0.019706, 0.021837,
 0.023026` at `n = 100, 200, 400, 800, 1600` (deficit `≈ 0.29·ln n/n`); without the oracle the same pairs give
 `0.0569, 0.0432, 0.0349, 0.0303, 0.0277` (from above).  `b/A_t = 0.07 … 0.09`: the compensator carries a tenth of the
-mass of the *truncated* cone.
+mass of the *truncated* cone.  (Three further parameter sets were queued; what was computed is in `out/t06_run.log`.)
+
+### 3.9 Ingredients of Theorem τ (`t15_tolerance_check.py`; `n = 12`, exhaustive)
+
+Base `(τ/4)π_γⁿ + (1 − τ/4)Bern(c₀)ⁿ`, alternative = base + average of `N` dips at i.i.d. `Bern(m*)` centres, `e^r = 1 + 8/τ`:
+both in the class; separation `ln 3`; largest deviation of all marginals of orders `1, 2, 3` between alternative
+and base: `0.019, 0.018, 0.016` (`p = 0.3`, `u = 1`, `τ = 0.1`, `N = 400`), `0.014, 0.020, 0.020` (`p = 0.1`, `u = 2`, `τ = 0.1`, `N = 400`),
+`0.0070, 0.0070, 0.0056` (`p = 0.3`, `u = 1`, `τ = 0.03`, `N = 2000`) — within `τ`, with lists far shorter than the theorem's `N`.
 
 ### How to re-run
 
 `cd experiments/science/ws_F && export OMP_NUM_THREADS=1 && mkdir -p out`; then `python3 t01_single_letter.py` (1 min),
 `t02_fixed_point.py` (20 min), `t03_enum_adaptive.py` (5 min), `t04_instance.py` (15 min), `t05_typesums_adaptive.py`
-(40 min, 2 GB at `n = 3200`), `t06_nonadaptive.py` (40 min), `t07_zero_residual_annular.py` (long: > 1 h for `n = 1600`),
+(60 min, 2 GB at `n = 3200`), `t06_nonadaptive.py` (60 min), `t07b_annular_fast.py` (30 min),
 `t08_k2_exact.py` (1 min), `t09_tilt_check.py` (1 min), `t10_theory_e.py` (6 min), `t11_unrestricted_profiles.py` (10 min),
-`t12_tilt_gammastar.py` (3 min), `t13_threshold.py` (seconds).  Each writes `out/<name>.txt`.
+`t12_tilt_gammastar.py` (3 min), `t13_threshold.py` (seconds), `t14_theory_numbers.py` (2 min), `t15_tolerance_check.py`
+(1 min).  Each writes `out/<name>.txt` when it ends (running logs
+`out/*_run.log`).  `t07_zero_residual_annular.py` is the first, slow version of `t07b`; it was stopped after `n = 400`,
+and its header records a bug that would have affected it from `n = 800` on (the bisection range of the lift was too
+short for annular dips); its two rows agree with `t07b`.  The times are with three jobs sharing the machine.
 
 ---
 
@@ -584,10 +609,11 @@ The theory division's §11.29 (`dcdfea6`) is treated in §8.
    it lies in `[V, U]` (§2.5), a gap of `1–8 %` in most rows, larger near the threshold (`0.001226` against `0.001648`).
    Conjecture Z says the lower end.  Missing: an isoperimetric *upper* bound for sets whose excess mass has a
    prescribed type, with the window built in.  I also did not test profiles with three labels.
-2. **The finite-`n` certificates with shells** stop at `n = 400` in this report for the first parameter set (the
-   scan is slow); the single-letter value `V` rests on a proof sketch (Proposition D(b)) plus those sums.  The rows
-   `n = 800, 1600` were still running when the report was written; if they exist, they are in
-   `out/t07_zero_residual_annular.txt` and are not quoted here.
+2. **The finite-`n` certificates with shells** (§3.6) are for one parameter set and `n ≤ 1600`, with a coarse scan;
+   the single-letter value `V` rests on a proof sketch (Proposition D(b)) plus those sums.  Rows for `n = 3200` and
+   for two more parameter sets were still running when the report was closed (`out/t07b_run.log`) and are not
+   quoted.  The same holds for the last rows of `t05` (`n = 3200` for the later parameter sets) and of `t06`
+   (`n = 3200`; three more parameter sets): what was computed is in `out/t05_run.log`, `out/t06_run.log`.
 3. **`U` at bounded accuracy** (`e = 0`) needs the isoperimetric statement for an additive reference at negative `e`,
    which I did not read; at `e = 0` only the trivial `λ = 0` is covered by the black box as stated.
 4. **`k = 2`** is a proposition with a proof sketch for the asymptotics (Proposition E(iv)): the uniform estimate of
@@ -624,12 +650,13 @@ T1. *Review Lemma 3 and Theorem A of `docs/science/workstreams/SF_REPORT.md`*: t
     flat histogram with a well.  Is there an error?  If not, (f) can be relabelled, and Theorem B does the same for
     `θ_na` (not treated in §11.29).
 T2. *Proposition 11.109(e)*: the quantity your script `oracle_zero_types.py` maximises admits block laws outside the
-    window `[p₋, p₊]` (`x0` down to `0.005`); for such profiles the excess mass of the dip does not sit on the profile
-    class (our exact sums: shell type `0.2150`, excess type `0.2439` at `n = 400`).  With unrestricted block laws the
-    supremum is `0.012941` at your test point and equals `min_λ R_0(e − c(λ); θ − λ)`, which we prove to be an *upper*
-    bound for the exponent with the oracle (tilt inequality + your Theorem 11.59(a) at the field `θ − λ`); restricted
-    to the window it is `0.012630`.  Please check both numbers, and say whether your Theorem 11.78 gives the
-    type-resolved statement that would decide between them.
+    window `[p₋, p₊]` (`x0` down to `0.005`; your reported maximiser at type `0.292` has `x1 = 0.497 > p₊ = 0.4754`); for such
+    profiles the excess mass of the dip does not sit on the profile class (our exact sums: shell type `0.2150`,
+    excess type `0.2439` at `n = 400`).  We reproduce your six numbers with block laws unrestricted (table in §8.3);
+    at type `p` the supremum is `0.012941` and equals `min_λ R_0(e − c(λ); θ − λ)`, which we prove to be an *upper* bound
+    for the exponent with the oracle (tilt inequality + your Theorem 11.59(a) at the field `θ − λ`); restricted to the
+    window it is `0.012630`.  Please check both numbers, and say whether your Theorem 11.78 gives the type-resolved
+    statement that would decide between them.
 T3. *The hinted theorem at negative accuracy*: is the isoperimetric statement behind Theorem 11.59(a) proved for
     all real `e` for an additive reference (as Theorem 11.63 is for the flat histogram)?  We need it for `U` at
     bounded accuracy.
@@ -637,11 +664,12 @@ T3. *The hinted theorem at negative accuracy*: is the isoperimetric statement be
 E1. *Exact sums for annular dips at the zero residual.*  Motivation: certified finite-`n` lower bounds with the
     one-body oracle at `ψ = 0` (Proposition D(b)).  Formulation: for `n ∈ {800, 1600, 3200, 6400}`, `(p, u) ∈ {(0.1, 2),
     (0.3, 1), (0.25, 1)}`, `ε = e·n` with `e ∈ {0.2, 0.5}·E_0`: maximise over `(k, j₀)` and adjacent `j₁` the bound
-    `−ln n − ln max_κ Σ_{j ∈ D_A∪D_B} P_s(j | κ)` of `t07_zero_residual_annular.py` (functions `ann`, `pair_bound`), with the
-    common lift chosen minimal for separation `> ε`.  Inputs: the script.  Expected output: `ln LB/n` approaching
-    `V` of §2.5 from below like `c·ln n/n`.  Validation: reproduce our rows `n = 200, 400` (`−0.006703`, `+0.002842`);
-    exact rational arithmetic at `n = 200`.  Stopping: `n = 6400` or 8 GB.  Resources: the grid is `(n+1)(k+1)`
-    doubles per evaluation; a band of width `O(√n)` around the optimum suffices and makes it `O(n^{1.5})`.
+    `−ln n − ln max_κ Σ_{j ∈ D_A∪D_B} P_s(j | κ)` of `t07b_annular_fast.py` (class `Box`, function `pair`), with the common
+    lift chosen minimal for separation `> ε`.  Inputs: the script.  Expected output: `ln LB/n` approaching `V` of §2.5
+    from below like `c·ln n/n` (`c ≈ 0.83` in our rows).  Validation: reproduce our rows `n = 400, 800` (`+0.002842`,
+    `+0.008534`) for `(0.1, 2, 0.2E_0)`; exact rational arithmetic at `n = 200`; a wider scan of `(k, j₀, j₁)` than ours (we
+    scan five centre types and six `j₀`).  Stopping: `n = 6400` or 8 GB.  Resources: the bounding box of the supports
+    has `O(n²)` cells with a small constant; a few minutes per `n` up to `1600`.
 
 ---
 
@@ -650,8 +678,9 @@ E1. *Exact sums for annular dips at the zero residual.*  Motivation: certified f
 *Provenance.*  The theory division published its answer to the same question while this workstream was running.
 Everything in §§2–3 above except the comparison rows marked "theirs" was derived and computed **before** I opened
 THY-RES-0006, §11.29, D54 or the scripts `oracle_field_scan.py`, `oracle_zero_types.py` (`NOTES.md` records the order
-with clock readings: first analysis H1–H5 before 20:23; compensated construction verified by enumeration at
-20:45–21:05; their material read at 21:08–21:15).  Before that I had read only THY-RES-0005 §2 (their two-sentence
+with clock readings: first analysis H1–H5 before 20:23; compensated construction verified by enumeration by 20:45;
+zero-residual bracket, non-adaptive pair and `k = 2` by 21:01; tilt check 21:02; their material read from 21:02 on).
+Before that I had read only THY-RES-0005 §2 (their two-sentence
 expectation "at the zero residual, restricted to that type; not for the class", and the parameter-counting
 remark, which I attribute to them in Lemma 3, remark (3)).  All statements of theirs below are quoted from
 `git show dcdfea6:docs/THEORY_REPORT.md`, lines 7080–7177, and are tagged **[T, `dcdfea6`]**.
@@ -726,20 +755,31 @@ two-block profiles at `p = ¼`, `u = 1`, `e = 0.02`: `ρ_e(κ)` is unimodal in t
    algorithm they lack exists and is trivial — reject the hint if the oracle's answers differ from the hinted
    instance's, otherwise spot-check as without oracle; what was missing is the analysis, which is the tilt
    inequality.  The oracle strictly lowers the exponent of the zero residual for `p ≠ ½` in every case computed.
-2. **Their numbers.**  At `p = ¼`, `u = 1`, `e = 0.02` (`t10_theory_e.py`): the exact `R_0(e)` is **`0.013669`** (two independent
-   formulas), attained by cones of centre type `0.4555` whose excess type is `0.2760` — not "`0.0134` at `κ ≈ 0.29`"
-   (their grid has seven types).  Their second number, `0.0129`, agrees to their digits with **`0.012941`**, which is
-   (i) the supremum of the two-block profile exponent over profiles of type `p` with block laws *unrestricted*
-   (their script lets `x0` go down to `0.005`), and (ii) my tilt bound `min_λ R_0(e − c(λ); θ − λ)` — the two coincide
-   to six digits in the three cases tried, as Lagrangian duality suggests, and the maximiser is the pair of cone
-   laws of the *tilted* reference, `(0.0956, 0.4386)`.  The decrease is `5.3 %` (or `7.6 %`, next item), not `3.5 %`.
-3. **The formula over-counts.**  The maximising profile has a block law (`0.0956`) *outside* the window
+2. **Their numbers** (I did not run their code; I compared my profile formula `f` of §2.5 with their output file
+   `out_oracle_zero_types.txt` at `dcdfea6`; `t10_theory_e.py`, `t14_theory_numbers.py`).  At `p = ¼`, `u = 1`, `e = 0.02`, for
+   two-block profiles of type `κ`:
+
+   | type `κ` | `0.184` | `0.238` | `0.250 = p` | `0.292` | `0.347` | `0.401` |
+   |---|---|---|---|---|---|---|
+   | theirs **[T, `dcdfea6`]** | `0.00485` | `0.01210` | `0.01294` | `0.01340` | `0.00942` | `0.00338` |
+   | mine, block laws unrestricted | `0.00491` | `0.01210` | `0.01294` | `0.01341` | `0.00938` | `0.00338` |
+   | mine, block laws in the window `[0.1092, 0.4754]` | `0.00217` | `0.01142` | `0.01263` | `0.01302` | `0.00482` | `0` |
+
+   So their `r_μ` is my `f` with the block laws **unrestricted** (their script lets `x0` range over `(0.005, x1)`), and
+   their reported maximiser at type `0.292`, `(m, x1, x0) = (0.46, 0.497, 0.118)`, has `x1 = 0.497 > p₊ = 0.4754`.  The exact
+   `R_0(e)` is **`0.013669`** (two independent formulas), attained by cones of centre type `0.4555` whose excess type
+   is `0.2760`; "`0.0134` at `κ ≈ 0.29`" is the value of their grid of seven types, not the maximum.  Their `0.01294` at
+   `κ = p` equals my tilt bound `min_λ R_0(e − c(λ); θ − λ) = 0.012941` — the unrestricted supremum and the tilt bound
+   coincide to six digits in the three cases tried, as Lagrangian duality suggests, and the maximiser is the pair
+   of cone laws of the *tilted* reference, `(0.0956, 0.4386)`.  The decrease is `5.3 %` (or `7.6 %`, next item), not `3.5 %`.
+3. **The formula over-counts.**  The maximising profile at type `p` has a block law (`0.0956`) *outside* the window
    `[p₋, p₊] = [0.1092, 0.4754]`.  For such a profile the excess mass of the dip does **not** sit on the profile class
    — it sits on the nearest shell inside the window (exact sums, §3.6: shell type `0.2150`, excess type `0.2439`) —
    so "`μ̄ = p`" is not "the excess mass has type `p`", and that dip is visible to the oracle.  The concentration
    statement they flag as unproved is false for these profiles.  Restricting to block laws in the window (shells
    that are Gibbs shells of soft cones) gives **`0.012630`** at their test point (two-label profiles; `ρ_e(κ)` so
-   restricted is unimodal with maximum `0.01366` near `κ = 0.276`, `t10`).
+   restricted is unimodal with maximum `0.01366` near `κ = 0.276`, `t10`); away from the centre the restriction
+   matters much more (`0.00482` against `0.00942` at `κ = 0.347`; `0` against `0.00338` at `0.401`).
 4. **Status of the value.**  `0.012630 ≤ R_0^{orc}(0.02) ≤ 0.012941`: the lower end from explicitly matched
    alternatives (Proposition D; certified at finite `n` in §3.6 for another parameter set), the upper end proved
    by the tilt inequality.  Their `ρ_e(p)` is therefore an **upper bound** for the true exponent, proved here, and
@@ -766,8 +806,8 @@ two-block profiles at `p = ¼`, `u = 1`, `e = 0.02`: `ρ_e(κ)` is unimodal in t
   is labelled **[C]** (now a theorem, so harmless); in (e) the identification of "excess mass of type `p`" with
   "profile of type `p`" (item 3 above), and the two coarse numbers (item 2).  The closing paragraph ("at an
   instance that the user believes in … the data do exclude most dips") is supported by Proposition C and the
-  tables of §2.5; "most" is quantitatively right for strong fields (`40–100 %` of the exponent at `(0.1, 2)`) and
-  an overstatement for weak ones (`2–8 %` at `(0.3, 1)`).
+  tables of §2.5; "most" is quantitatively right for strong fields (at least `21–100 %` of the exponent at `(0.1, 2)`)
+  and an overstatement for weak ones (`2–17 %` at `(0.3, 1)`, the larger values near the threshold).
 * Not treated by them and treated here: the non-adaptive exponent (Theorem B), tolerances (Theorem τ), an exact
   `k = 2` construction, the hardest additive instance with the oracle, thresholds.  Not treated here and treated
   by them: the brute-force scan along the additive instances on `Q_10` (I did not re-run it).

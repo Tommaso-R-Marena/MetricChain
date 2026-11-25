@@ -20,7 +20,9 @@ if __name__ == "__main__":
             if only and f"{L}:{name}" not in only:
                 continue
             t0 = time.time()
-            r = oc.run(n, L, eps, time_limit=tl, cd=cd, D=D)
+            # optional 5th argument: time limit for the L = 1 cells (0 = bounds only)
+            tl_cell = float(sys.argv[5]) if (len(sys.argv) > 5 and L == 1.0) else tl
+            r = oc.run(n, L, eps, time_limit=tl_cell, cd=cd, D=D)
             r["eps_name"] = name
             r["seconds"] = time.time() - t0
             res.append(r)
@@ -28,4 +30,4 @@ if __name__ == "__main__":
                   f"certLB={r['lp_certified_ceil']} MILP primal={r.get('primal')} dual={r['dual_bound']} "
                   f"feas={r.get('primal_feasible_checked')} margin={r['min_margin']:.3e} status={r['status']} "
                   f"t={r['seconds']:.1f}s", flush=True)
-            json.dump(res, open(f"out_own_cover_table_{n0}_{n1}.json", "w"), indent=1)
+            json.dump(res, open(f"out_own_cover_table_{n0}_{n1}.json", "w"), indent=1, default=str)

@@ -116,7 +116,12 @@ Setting of §11.26.  Let the *window* of site type `j` be
 `𝒲_j = {p : π_j(a)p(b) ≤ e^{d_j(a,b)}π_j(b)p(a) for all a, b}`.
 
 1. `𝒲_j` is a convex polytope whose vertices are the Gibbs laws of the vertices of the site's
-   Lipschitz polytope (the constraints are linear in `p`).
+   Lipschitz polytope (the constraints are linear in `p`).  *[Corrected at checkpoint 29,
+   SCI-MSG-0014 §2, after the formalisation: ~~of the site's Lipschitz polytope~~ — that
+   set is invariant under adding constants and has no extreme points; read "of the
+   site's Lipschitz class normalised at a base point".  And the hypotheses of the
+   proposition: what items 1–3 use of a site envelope is `d_j(a,a) = 0`; the triangle
+   inequality is not used, and without a zero diagonal item 2 is false.]*
 2. For every `ψ` of the class, every order of the sites and every prefix, the conditional
    law of the next site lies in `𝒲_{τ(i)}` (your `softmin_admissible`).
 3. Hence for product laws `Q`: `KL(ν_ψ‖Q) ≤ Σ_i max_φ KL(π_φ‖Q_{τ(i)})`, and with the Shannon

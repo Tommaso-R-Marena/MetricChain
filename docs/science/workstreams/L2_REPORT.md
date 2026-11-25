@@ -1,8 +1,8 @@
 # Workstream L2 — machine-checking the science division's newest statements
 
 *Lean 4.31.0 + Mathlib (the repository's pinned version, commit `fabf563a`).  Three files,
-3 938 lines, 169 theorems, in `experiments/science/ws_L2/`; log `NOTES.md`; last full check
-`check_log.txt` (2026-11-25, 21:23–21:27 UTC); numerics `sanity_numerics.py`.*
+4 177 lines, 178 theorems, in `experiments/science/ws_L2/`; log `NOTES.md`; last full check
+`check_log.txt` (2026-11-25, 21:37–21:40 UTC); numerics `sanity_numerics.py`.*
 
 Labels: **[V]** machine-checked here (declaration named) · **[P]** paper proof given here ·
 **[K]** known · **[N]** numerical only.
@@ -11,15 +11,21 @@ Labels: **[V]** machine-checked here (declaration named) · **[P]** paper proof 
 only `Mathlib` and was checked on its own with
 `export PATH="$HOME/.lean/lean-4.31.0-linux/bin:$PATH"; cd /home/user/MetricChain; lake env lean <absolute path>`;
 exit code 0, no error, no warning; `#print axioms` was run for **every** theorem of every file
-(64 + 62 + 43 = 169) and printed exactly `[propext, Classical.choice, Quot.sound]` each time
+(70 + 65 + 43 = 178) and printed exactly `[propext, Classical.choice, Quot.sound]` each time
 (`check_log.txt`; re-run with `bash experiments/science/ws_L2/check_all.sh`).  No `sorry`,
-`admit`, `native_decide` or `axiom` occurs in any file.  Nothing was written outside
-`experiments/science/ws_L2/` and this report; `lake build` was never run.  All declarations are
+`admit`, `native_decide` or `axiom` occurs in any file.  Nothing in the repository was written
+outside `experiments/science/ws_L2/` and this report; `lake build` was never run.  All declarations are
 in the namespace `ScienceL2`.  The files do not import each other or workstream L1.
 
 What kind of check this is: every paper proof was first re-derived by hand (*independent
 review*), the formal statements were then tested on random small instances with my own code
 (§3; this is not a replication of the notes' own numerics), and finally proved in Lean.
+
+*Sources as read.*  Addendum A11 as it stood when I started (unchanged since; compared with
+commit `a014576`); `R3_REPORT.md` §4; `A1_REPORT.md` §§2.5, 9.3.  While I worked the coordinator
+added addenda A12–A16.  Two of them restate material of this workstream, and I covered what is
+finite in them: **A13** (the sandwich on ordered alphabets, replacing Remark (1) of A11) and the
+notes on R6.2 and R6′ in **A12**.
 
 ---
 
@@ -30,12 +36,15 @@ All three priorities of the brief are done, each beyond the minimum asked.
 conditions, the sandwich for every monotone observable, the macrostate ratios, attainment of both
 ends, and "fills exactly the interval" — on the cube, and more generally on *any finite
 distributive lattice with any envelope that two functions saturate* (so Remark (1), products of
-finite chains, is [V] as an instance).  Of Corollary A11.2 the sign of the summands is [V]; the
-integral formula is not formalised.
+finite chains, is [V] as an instance, and so is **Theorem A13** of the later addendum: arbitrary
+site quasi-metrics with their step fields).  Of Corollary A11.2 the sign of the summands is [V];
+the integral formula is not formalised.
 **(2) Referee statements.**  R6.1 is [V].  R5(2) is [V] in abstract form *and* on the binary cube
 with the referee's `D_R` and `γ`.  **Lemma R6.2 is [V] in full** — the two signs, the exact root
 `s*` (intermediate value theorem), the bound on `ln Z′ − ln Z₀` and locality — in an abstract
-setting and on the binary cube; its hypotheses are shown to be jointly satisfiable [V].
+setting and on the binary cube; its hypotheses are shown to be jointly satisfiable [V]; the
+sharper gain `1 − 3/(4r₁)` noted in addendum A12 and the coset form used in Corollary R6′ are
+[V] as well.
 **(3) Proposition A1.2, items 1–3, are [V]** with two corrections to the text (§2.7, nos. 1, 2):
 the window is the set of Gibbs laws of the Lipschitz class, convex and compact, and its extreme
 points are the Gibbs laws of the extreme points of the class *normalised at a base point*
@@ -71,6 +80,8 @@ macrostates.
 | Corollary A11.1, "fills exactly the interval" | `cube_ratio_range_eq_Icc`; abstract `ratio_range_eq_Icc` | `Sandwich` | [V] for `β > 0` |
 | A11, examples of submodular `f` (additive; pairwise, `J_ij ≤ 0`) | `field_submodular`, `pairTerm_submodular`, `pairwise_submodular` | `Sandwich` | [V] |
 | A11, Remark (1), ordered alphabets | `chainDist_sup_right`, `chainDist_inf_left`, `chainField_admissible`, `neg_chainField_admissible`, `chain_sandwich_mean`, `chain_mean_range_eq_Icc`, `chain_ratio_range_eq_Icc` | `Sandwich` | [V]; alphabets `Fin (k i)`, costs `c↑ i r`, `c↓ i r` with `c↑ + c↓ ≥ 0` |
+| **Theorem A13** (added to the addenda after my start): `μ_{f+Γ↑} ≼ μ_{f+g} ≼ μ_{f−Γ↓}` for site quasi-metrics; macrostate ratios | `stepField_sandwich_mean`, `stepField_macrostate_ratio`, `siteDist_sup_right_le`, `siteDist_inf_left_le` | `Sandwich` | [V]; `d_i(s,s) ≤ 0` and the triangle inequality on the levels; lower set against upper set |
+| A13, "for a path envelope the step fields are admissible and both bounds are attained" | `chainField_admissible`, `neg_chainField_admissible`, `chain_mean_range_eq_Icc`, `chain_ratio_range_eq_Icc` | `Sandwich` | [V] (the path envelope is `chainDist`); "not attained in general otherwise" is numerical in A13 and not formalised |
 | Corollary A11.2, "every summand is non-negative (FKG)" | `cube_occupation_cross`, `cube_occupation_mono`, `updown_inter_cross` | `Sandwich` | [V]: `⟨x_i⟩_{A,t} ≤ ⟨x_i⟩_{B,t}` for a lower set `A`, an upper set `B`, any real `t` |
 | satisfiable instance with strict conclusion (brief, bullet 5) | `cube_sandwich_strict_witness` | `Sandwich` | [V]; two sites, `f = −[x₀∧x₁]`, `c = 1`, `g = 0`, `β = 1`, `φ = [x₀]` |
 | `β ≥ 0` is needed | `cube_sandwich_fails_negative_beta` | `Sandwich` | [V]; same instance, `β = −1` |
@@ -86,7 +97,9 @@ macrostates.
 | **R6.2**, `U′_{+1} < U₀ < U′_{−1}` under (i), (ii) | `r6_2_signs` (abstract), `r6_2_binary_cube` | `Referee` | [V]; `u > 0`, `r₁ ≥ 1` explicit; `r₁ < n/2` not needed |
 | R6.2, exact root, gain, locality | `r6_2_root`, `r6_2_binary_cube` | `Referee` | [V] |
 | R6.2, hypotheses satisfiable | `r6_2_nonvacuous` | `Referee` | [V]; `n = 4`, `r₁ = 2`, `u = 6`, antipodal centres |
-| R6.3, Theorem R6, Corollary R6′ | — | — | not formalised (the abstract `r6_2_*` apply verbatim to the coset profiles of R6′) |
+| A12, note of the second reading: the gain is `≥ e^{−u}(1 − 3/(4r₁))` | `gain_arith`, `r6_2_root_sharp` | `Referee` | [V] |
+| A12, Corollary R6′ written out, step (3): the two signs for the coset profiles | `r6_2_cosets`, `cosetDist_translate` | `Referee` | [V]; any non-empty finite `C ⊂ F₂ⁿ` (linearity not used); (i), (ii) stated for `W^C`, `ω^C` |
+| R6.3, Theorem R6; R6′ steps (1), (4), (5) | — | — | not formalised |
 | **A1.2 item 1**, `𝒲 = {π_γ : γ ∈ L}`, convex (polytope) | `window_eq_gibbs_image`, `gibbsLaw_mem_window`, `exists_gibbsLaw_of_mem_window`, `window_convex`, `isCompact_window` | `Window` | [V]; `π > 0` |
 | A1.2 item 1, "its vertices are the Gibbs laws of the vertices of `L`" | **`extremePoints_window_eq`** (`gibbsLaw_extreme_of_extreme`, `extreme_of_gibbsLaw_extreme`); `lipClass_extremePoints_eq_empty` | `Window` | [V] **after correction**: `L` normalised at a base point; `L` itself has no extreme points |
 | **A1.2 item 2** (brief's `α × β` form) | `site_conditional_mem_window` | `Window` | [V]; weight on the rest only `≥ 0`, positive mass |
@@ -125,6 +138,15 @@ chains `∏_i {0,…,k_i−1}` with costs `c↑ i r` (raise site `i` from level 
 `h↑ x = Σ_i Σ_{r<x_i} c↑ i r`, they are identities too (`chainDist_sup_right`,
 `chainDist_inf_left`): Remark (1) of the note is [V] (`chain_sandwich_mean`,
 `chain_mean_range_eq_Icc`, `chain_ratio_range_eq_Icc`).
+
+**Theorem A13** (general site quasi-metrics).  `siteDist ds x y = Σ_i ds i (x_i) (y_i)` with
+`ds i s s ≤ 0` and the triangle inequality on the levels below `k i`;
+`stepUp ds x = Σ_i Σ_{r<x_i} ds i (r+1) r`, `stepDn ds x = Σ_i Σ_{r<x_i} ds i r (r+1)` (the note's
+`Γ↑`, `Γ↓`).  The triangle inequality telescoped along the order (`le_sum_steps_up`,
+`le_sum_steps_dn`) gives the two saturation inequalities (`siteDist_sup_right_le`,
+`siteDist_inf_left_le`), hence `stepField_sandwich_mean` and `stepField_macrostate_ratio`.  Here
+the inequalities are strict in general, the step fields need not be admissible, and the bounds
+are sound but not claimed to be attained — exactly the distinction A13 draws.
 
 **Proof structure as formalised.**
 (a) `holley_cross`: for non-negative `w₁, w₂` with `w₁ x·w₂ y ≤ w₁(x⊓y)·w₂(x⊔y)` and monotone `φ`,
@@ -202,6 +224,13 @@ Corollary R6′.
 `U′_{+1} < U₀ < U′_{−1}`.
 **`r6_2_root`.**  Under the same hypotheses there is `s* ∈ (−1,1)` with `U′_{s*} = U₀`,
 `log Z′_{s*} − log Z₀ ≥ log(1 + e^{−u}(1 − 1/r₁))`, and `g′_{s*}(x) = g₀(x)` whenever `d′(x) > r₁`.
+**`r6_2_root_sharp`.**  The same with `log(1 + e^{−u}(1 − 3/(4r₁)))` — the constant noted in the
+second reading recorded in addendum A12 (`gain_arith`).
+**`r6_2_cosets`.**  For a non-empty finite `C ⊂ F₂ⁿ`, `d₀ = d_H(·, a₀+C)`, `d′ = d_H(·, a′+C)`
+(equidistributed through the translation by `a′ − a₀`, `cosetDist_translate`): signs and root
+under (i) `8r₁e^u2ⁿ ≤ W^C` and (ii) `ω^C_{+1} ≤ e^{−u}W^C/(2(r₁+1))`, `W^C = Σ_{d₀<r₁}e^{u(r₁−d₀)}`.
+This is step (3) of "Corollary R6′ written out" in A12; that (i) follows from `W^C ≥ W`, the
+overlap bound (4) and the query bound (5) are not formalised.
 **`r6_2_nonvacuous`.**  For `n = 4`, `r₁ = 2`, `u = 6`, `a₀ = 0000`, `a′ = 1111` both hypotheses
 hold ((i) is `256e⁶ ≤ e¹² + 4e⁶`; `ω_{+1} = 0`).  Here `r₁ = n/2`; the lemma as formalised does
 not assume `r₁ < n/2`.  With `r₁ < n/2` both hypotheses hold e.g. at `n = 8`, `r₁ = 3`, `u = 6`,
@@ -298,7 +327,10 @@ and `Σ_i M_i = n·a` for the Shannon centres (the minimax characterisation of c
    **[V]**.
 6. **A11, Remark (1) is a theorem**, and the proof never uses the cube: the abstract statement of
    §2.2 isolates what is used (a finite distributive lattice and two functions that saturate the
-   envelope) **[V]**.
+   envelope) **[V]**.  Addendum A13, written by the coordinator meanwhile, states the same for
+   site quasi-metrics; it is an instance (`stepField_sandwich_mean`), and — like A11.1 — it holds
+   for a lower set against an upper set, not only for `A = X∖B`.  No discrepancy was found in
+   A13: zero diagonal and the triangle inequality are exactly what the proof uses.
 7. **R6.1 divides by `E`.**  The identity is stated for `E ≠ 0`; `E = 0` iff the twin is nowhere
    below `g₀`, and then `g′ = g₀` **[V]**.  The division-free form `U′ − U₀ = (D − U₀E)/(Z₀+E)`
    needs no condition.
@@ -348,6 +380,11 @@ measure-theoretic and was not needed.  Used as stated **[signatures read with `#
 `Real.convexOn_mul_log`, `Real.continuous_mul_log`, `intermediate_value_Icc'`,
 `Fintype.prod_sum`.  Two lemmas (`supportEquiv`, `sum_hammingNorm_binary`) are copied from
 workstream L1 (`experiments/science/ws_L1/MarginalOracle.lean`).
+For the items not done **[case-insensitive `grep -rIl` over `Mathlib/`, files not opened]**:
+`azuma` and `hoeffding` occur in one file, `Mathlib/Probability/Moments/SubGaussian.lean`
+(measure-theoretic); `hypergeometric` occurs only for the special function
+(`Analysis/SpecialFunctions/OrdinaryHypergeometric.lean`, `Analysis/Analytic/Binomial.lean`), so I
+found no hypergeometric distribution and no Hoeffding bound for sampling without replacement.
 
 ## 5. Not done, and why
 
@@ -356,9 +393,11 @@ workstream L1 (`experiments/science/ws_L1/MarginalOracle.lean`).
   Remark (2) (symmetry); the remark `½ tanh(u/2)`.
 * **R5**: (1) (membership of the class, Lemma 1 — the latter is in L1), (3) (the query bound;
   L1 has the corresponding assembly for Theorem 4′), (4) (random codes).
-* **R6**: Lemma R6.3 (Hoeffding for sampling without replacement — not found in Mathlib; not
-  searched systematically), Theorem R6 (needs R6.3 and the indistinguishability argument),
-  Corollary R6′ beyond the remark that the abstract `r6_2_*` apply to coset profiles.
+* **R6**: Lemma R6.3 (Hoeffding for sampling without replacement; see §4 for what a `grep` of
+  Mathlib shows), Theorem R6 (needs R6.3 and the indistinguishability argument),
+  Corollary R6′ beyond its step (3) (`r6_2_cosets`).
+* **A13**: "not attained in general" for envelopes that are not path envelopes (numerical there).
+  **A12, A14–A16** otherwise: not read in full, not formalised.
 * **A1.2**: finiteness of the set of vertices; `Σ_i M_i = n·a` for the Shannon centres; items 4
   (Azuma) and 5.
 * For `β = 0` the "fills exactly" statements are true and trivial but are not covered by
@@ -369,9 +408,9 @@ workstream L1 (`experiments/science/ws_L1/MarginalOracle.lean`).
 1. Lemma R6.3 and Theorem R6: with R6.2 machine-checked, what is missing is the hypergeometric
    tail bound and the assembly with L1's oracle model (`theorem4_adaptive_marginal_oracle`).
 2. Items 4–5 of A1.2 (Azuma–Hoeffding for the log-density along the chain rule, then the
-   truncation step): `kl_gibbs_prod_eq` already gives the martingale decomposition, and
-   Mathlib has Azuma–Hoeffding-type bounds only in measure-theoretic form — the transfer to a
-   finite product is the work.
+   truncation step): `kl_gibbs_prod_eq` already gives the martingale decomposition; what Mathlib
+   offers for the tail bound is in §4 — either transfer it to a finite product or prove the
+   finite Azuma inequality directly by the same induction over `Fin.consEquiv`.
 3. The integral form of Corollary A11.2 (derivative of `log Z_{f+th}(A)` in `t`, then the
    fundamental theorem of calculus), which with `cube_occupation_mono` gives the width formula
    and its monotonicity in each `c_i`.
@@ -396,8 +435,8 @@ rule needs.
 
 | file | lines | theorems | definitions | content |
 |---|---|---|---|---|
-| `Sandwich.lean` | 1 247 | 64 | 12 | A11: abstract lattice, convexity in the weights, cube, occupation sign, chains, witnesses |
-| `Referee.lean` | 1 396 | 62 | 15 | R6.1; R5(2) abstract and binary cube; R6.2 abstract, binary cube, witness |
+| `Sandwich.lean` | 1 392 | 70 | 15 | A11: abstract lattice, convexity in the weights, cube, occupation sign, chains, step fields (A13), witnesses |
+| `Referee.lean` | 1 490 | 65 | 16 | R6.1; R5(2) abstract and binary cube; R6.2 abstract, binary cube, cosets, witness |
 | `Window.lean` | 1 295 | 43 | 9 | A1.2 items 1–3, vertices, vertex-label bound, counterexample for the diagonal |
 | `check_all.sh`, `check_log.txt` | | | | the check of the three files, one at a time |
 | `sanity_numerics.py`, `sanity_numerics_output.txt` | 569 | | | §3 |

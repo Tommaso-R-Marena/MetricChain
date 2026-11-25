@@ -36,6 +36,7 @@ total_runs = sum(g(n, "runs") for n in all_names)
 total_det = sum(g(n, "det_viol") for n in all_names)
 total_good = sum(g(n, "good_viol") for n in all_names)
 inv_runs = g("B_invalid", "runs") + g("B_lazy", "runs")
+LZ = S.get("B_lazy_split", {})
 byK = S.get("B_reducedK_byK", {})
 byK2 = S.get("D_2L_off_byK", {})
 
@@ -87,12 +88,13 @@ Reading.
   `≤ C_max` — **held in all {inv_runs} runs**.  As allowed off the good event, {g('B_invalid', 'invalid_final')} final brackets were
   invalid, {g('B_invalid', 'closed_LgtU')} returned pairs had `L > U` (erratum m1 of `K_REPORT.md`: return the trivial bracket), and
   {g('B_invalid', 'abort_unclassified')} runs aborted with a point unclassified at the last rung.
-* **The abort rule is not decorative.**  With the behaviour LAZY and rung costs `10^l` no run needs it; with
-  rung costs `e^{{80l}}` — the regime of the theorems, where the last rung dominates — **{g('B_lazy', 'abort_cost')} of the
-  {g('B_lazy', 'runs')} `B_lazy` runs stop on the query budget**: without the rule their cost would exceed `C_max`.  With the
-  test made *before* the inner call the number of queries is `≤ C_max` in every run (largest
-  `ln(queries) − ln(C_max)`: see `data/B_lazy_*.jsonl`; runs above `C_max`: {g('B_lazy', 'q_gt_Cmax')}).  This is the first
-  execution of the branch that makes "the cost bound holds always" true (R7's M1).
+* **The abort rule is not decorative.**  With the behaviour LAZY and rung costs `10^l` ({LZ.get('cheap_runs', 0)} runs) no run
+  needs it ({LZ.get('cheap_abort_cost', 0)} aborts; queries at most `{LZ.get('cheap_max_q_over_Cvi', 0):.3f}` of the bound of claim (vi)); with rung costs
+  `e^{{80l}}` — the regime of the theorems, where the last rung dominates — **{LZ.get('steep_abort_cost', 0)} of {LZ.get('steep_runs', 0)} runs stop on the
+  query budget**: without the rule their cost would exceed `C_max`.  With the test made *before* the inner
+  call the number of queries is `≤ C_max` in every run (runs above `C_max`: {LZ.get('steep_q_gt_Cmax', 0)}; largest
+  `ln(queries) − ln(C_max) = {LZ.get('steep_max_lnq_minus_lnCmax', 0):.3f}`).  This is the first execution of the branch that
+  makes "the cost bound holds always" true (R7's M1).
 * **Algorithm 2L off the good event** (`D_2L_off`, {g('D_2L_off', 'runs')} runs with reduced `K` and/or invalid answers): the
   every-run statements of Theorem 11.52 (`r > r†` at every level left, `M ≤ 8Je²M†`, `M < 2eM†`, the width,
   the completed cost display) held in all runs; {g('D_2L_off', 'invalid_final')} final brackets were invalid, {g('D_2L_off', 'invalid_final_on_G')} of them on a
@@ -128,7 +130,7 @@ of Theorem 11.56 from the formulas; `L ∈ {{1, 2, 3}}`.
 the rest by enumeration): {e1.get('invalid_inner', 0)} inner brackets invalid or wider than promised; {e1.get('invalid_final', 0)} final brackets
 invalid; {e1.get('too_wide_final', 0)} wider than `x_out`; {e1.get('abort', 0)} aborts; violations of every-run / good-event claims:
 {e1.get('det_viol', 0)} / {e1.get('good_viol', 0)}; queries at most `{e1.get('max_q_over_Cmax', 0):.2g}·C_max`.
-With `K` (outer and inner) divided by 16 — off the theorems, to see real failures of (V1): {e16.get('runs', 0)} runs,
+With `K` (outer and inner) divided by 16 — off the theorems, an attempt to provoke real failures of (V1): {e16.get('runs', 0)} runs,
 {e16.get('real_brackets', 0):,} real brackets, {e16.get('invalid_inner', 0)} of them invalid or too wide (in {e16.get('runs_with_invalid_inner', 0)} runs); the events of
 the proof failed in {e16.get('G_failed', 0)} runs; {e16.get('invalid_final', 0)} invalid final brackets, {e16.get('invalid_final_on_G', 0)} of them on a run where the
 events hold; violations of every-run / good-event claims: {e16.get('det_viol', 0)} / {e16.get('good_viol', 0)}.
