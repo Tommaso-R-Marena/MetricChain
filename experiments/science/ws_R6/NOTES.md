@@ -260,3 +260,14 @@ Crossover cells: u=1 n=1400: R = 381 (R/n = .2721, p_u = .2689), ln LB_na = 155.
 - three.py seed 61 (running, low priority) + seed 5 (test): so far 5 outer runs, 192 middle runs, 14 251 858 bottom brackets, all valid.
 - lean/R6Axioms2.lean: `cube_nonadaptive_bound` (statement = Thm 11.45(b), non-adaptive mixtures, E|Q| >= (1-2 delta) 2^n/B); standard axioms.
 - finalize_report.py / fill_report.py / make_section3.py: all run counts of the report are generated from the data files.
+
+### Step 22 (adversarial search, cap sweep, three levels: final)
+- adversarial.py (hill climbing, literal runs, ~210 s each): cell 0 (n_o=100,u=2) objective ineq: 74 runs, best 0.461; cell 0 cap: 67 runs,
+  best 0.0 (uninformative: samples near M-dagger exceed the sampler limit in that cell); cell 2 (n_o=80) calls: 58 runs, best 0.144;
+  cell 4 (n_o=24,u=lam=1/2) cap: 594 runs, best 0.181; plus the 23-run test on cell 5.  No violation.  WEAK search: does not improve on
+  the structured campaign instances (0.869 count, 0.843 cap).
+- capsearch.py seed 71 (structured sweep, 200 s): 1609 literal runs, 0 violations; largest sample 2.46 M-dagger where cap = 4.056 M-dagger
+  (r-dagger = 9, n_o = 24, u = lam = 1/2, theta = 3, nu1 = 1; a plain cone, inner behaviour ADV_LO): 0.61 of the cap.
+- three.py seed 61: 17 outer runs, 1104 middle runs, 76 289 716 real bottom brackets (two-sample brackets at the bottom in 10 of 17 runs),
+  everything valid, no claim violated at the middle or outer level.  With the test run (seed 5): 19 outer, 1152 middle, 80.4M bottom brackets.
+- e2e.py seed 22, K divided by 16: 400 runs, 1 844 727 real brackets, none invalid; events of the proof failed in 31 runs; no invalid final bracket.

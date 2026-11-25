@@ -1,0 +1,6 @@
+n=5: counts identical True; margins differ by <= 0.0e+00; cover cells identical 12/12; reduced sizes identical 12/12; nearest_tie differs by <= 0.0e+00; 0 s
+n=6: counts identical True; margins differ by <= 0.0e+00; cover cells identical 12/12; reduced sizes identical 12/12; nearest_tie differs by <= 1.8e-15; 0 s
+n=7: counts identical True; margins differ by <= 0.0e+00; cover cells identical 12/12; reduced sizes identical 12/12; nearest_tie differs by <= 4.4e-15; 0 s
+n=8: counts identical True; margins differ by <= 0.0e+00; cover cells identical 12/12; reduced sizes identical 12/12; nearest_tie differs by <= 0.0e+00; 1 s
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+n=9: counts identical True; margins differ by <= 4.4e-16; cover cells identical 12/12; reduced sizes identical 12/12; nearest_tie differs by <= 4.5e-14; 20 s

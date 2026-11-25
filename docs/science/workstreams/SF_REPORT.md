@@ -46,6 +46,15 @@ conjecture (f) is **proved** here by a different instance; their conjecture (e) 
 `ρ_e(p)` is (numerically, to six digits) my tilt **upper** bound, and the profiles that attain it do not have excess
 mass of type `p` (§8).
 
+*Status of each claim.*  **[P]** (complete proofs here; finite ingredients checked exhaustively, for Theorem A also in
+exact rational arithmetic): Lemmas 0–3, Theorem A, Theorem B (on top of the machine-checked truncation lemma),
+Proposition C(a), Proposition D(a), Proposition E(i)–(iii), Theorem τ.  **[P given a refereed paper proof of the theory
+division that I did not re-derive]**: the upper bounds in Corollaries A(c) and B (Theorems 11.64, 11.61), the exponent
+in Corollary B (Theorem 11.61(c)), Proposition C(b) (the hinted theorem at shifted fields).  **[P sketch + finite-`n`
+certificates]**: `V` as a lower bound at the zero residual (Proposition D(b)); Proposition E(iv).  **[N]**: every
+table, the strictness `U < R_0`, the failure of `M*W = Q*`.  **[C]**: Conjecture Z, exact `k`-body marginals for `k ≥ 3`.
+Nothing is machine-checked by me.
+
 ---
 
 ## 2. Statements and proofs
@@ -138,7 +147,7 @@ specific parameter and the decoupling that makes the matching exact and explicit
 ### 2.2 The adaptive exponent is unchanged
 
 **Theorem A (every `n`; adaptive algorithms with an exact one-body oracle) [P; every finite ingredient checked by
-exhaustive enumeration for `n ≤ 16` and by exact type-class sums for `n ≤ 3200`].**  Let `0 < p < 1`, `u > 0`, `n ≥ 2`,
+exhaustive enumeration for `n ≤ 16` (in exact rational arithmetic for `n ≤ 10`) and by type-class sums for `n ≤ 3200`].**  Let `0 < p < 1`, `u > 0`, `n ≥ 2`,
 `|γ| ≤ u`, `1 ≤ k ≤ n − 1`, `m = k/n`, `m̲ := min(m, 1−m)`, `ω_m := ω·m̲`, and let `r > 0` satisfy `(e^r − 1)·ω_m > 1`.  Put
 `κ := ω_m − 1/(e^r − 1)` and `β := ω/κ`.  There are `γ₂ ∈ {−u, +u}` and `b ∈ [0, β]` such that for the instance
 `ψ₀ := −ln(w̃_γ + b·w̃_{γ₂}) ∈ L_u` the following holds: every randomised oracle algorithm (adaptive, with any hint) that
@@ -464,6 +473,10 @@ so that the separation is `ε`).  On the whole cube: base and alternative in the
 differ by `1.4·10⁻² … 8.2·10⁻²`; a single unsymmetrised dip has marginals spread over e.g. `[0.105, 0.404]`.  At these
 sizes the packing numbers are trivial (the exponents are `0.01 … 0.05`); for `n ≤ 12` the exact orbit-union count was
 compared with the union bound of the proof.
+**Exact rational arithmetic** (`t16_exact_rational.py`; Python fractions, no rounding at all; `n = 8, 8, 10`, with `p`, `e^{−u}`,
+`e^{−γ}`, `e^r` rational, e.g. `p = 1/10`, `e^{−u} = 1/7`, `e^{−γ} = 3/2`, `e^r = 3`, `k = 5`): base and alternative are in the class, and
+**their one-body marginals are identical as fractions at every site** (all equal to `c_{k,r}`); `A(w₁)/A(w₀) = 1 + E/(1+b)`
+exactly; `b = 24607020265/142714081349` in the first case.  One of the three cases has `c_{k,r} < p_γ` (compensator `γ₂ = +u`).
 
 ### 3.4 Exact type-class sums for Theorem A (`ts.py`, `t05_typesums_adaptive.py`; `n = 100 … 3200`)
 
@@ -561,7 +574,7 @@ and base: `0.019, 0.018, 0.016` (`p = 0.3`, `u = 1`, `τ = 0.1`, `N = 400`), `0.
 (60 min, 2 GB at `n = 3200`), `t06_nonadaptive.py` (60 min), `t07b_annular_fast.py` (30 min),
 `t08_k2_exact.py` (1 min), `t09_tilt_check.py` (1 min), `t10_theory_e.py` (6 min), `t11_unrestricted_profiles.py` (10 min),
 `t12_tilt_gammastar.py` (3 min), `t13_threshold.py` (seconds), `t14_theory_numbers.py` (2 min), `t15_tolerance_check.py`
-(1 min).  Each writes `out/<name>.txt` when it ends (running logs
+(1 min), `t16_exact_rational.py` (1 min).  Each writes `out/<name>.txt` when it ends (running logs
 `out/*_run.log`).  `t07_zero_residual_annular.py` is the first, slow version of `t07b`; it was stopped after `n = 400`,
 and its header records a bug that would have affected it from `n = 800` on (the bisection range of the lift was too
 short for annular dips); its two rows agree with `t07b`.  The times are with three jobs sharing the machine.

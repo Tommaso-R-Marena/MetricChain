@@ -237,3 +237,7 @@ H5. k ≥ 2: k-transitive group ⇒ k-body matching ⇔ matching the first k fac
 * Open: exact instance-wise exponent (bracket [V, U]); k ≥ 3; U at bounded accuracy; nothing machine-checked.
 * Files: `sl.py` (single-letter library), `ts.py` (type-class sums), `prof.py` (profiles, tilt bound),
   `t01`…`t15` (tests; `t07` superseded by `t07b`), `out/` (outputs and logs).
+* 21:48 — `t16_exact_rational.py`: Lemma 3 / Theorem A construction in exact rational arithmetic (fractions), n = 8, 8,
+  10: base and alternative in class; one-body marginals IDENTICAL as fractions at every site; separation identity
+  exact.  (No solver anywhere in this workstream; the only numerics are closed forms, finite sums and 1-D/2-D
+  bounded minimisations for the single-letter quantities.)

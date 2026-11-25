@@ -1,9 +1,10 @@
 # Benchmark design: what would convince, and what would refute
 
-*Science division.  Version 2 (2026-11-25; version 1 at checkpoint 13).  A design, not a
-result: nothing here has been run except where a script is named.  Revised after workstreams
-P (a real force field) and K (kinetics) reported; X (alternative models of ignorance) is
-still running.*
+*Science division.  Version 2, with H9, H10 and B9 added at checkpoint 29 (2026-11-25;
+version 1 at checkpoint 13).  A design, not a result: nothing here has been run except
+where a script is named.  Revised after workstreams P (a real force field) and K
+(kinetics) reported; X (alternative models of ignorance) has reported since
+(`workstreams/SX_REPORT.md`) and did not change the design.*
 
 ## 0. Principles
 
@@ -37,6 +38,8 @@ still running.*
 | H6 | data can certify a non-trivial lower bound on model error that sampling cannot change | science (Theorem 8) |
 | H7 | certified ranges are tighter than, or disagree informatively with, what current ensemble methods report | science |
 | H8 | tractable cuts (boxes, counting statistics, small decision trees) certify a useful fraction of barrier heights on chains | science (workstream K) |
+| H9 | with a mean-energy datum, uniform sampling plus the datum's bracket certifies `ln Z` at the cost `2ⁿ/|B(n,R(ε))|` on landscapes that are flat outside a small set, and nothing hidden there does better than a plateau twin | science (addendum A16: Lemma A16.5, Theorem A16.6; author only until workstream R8 reports) |
+| H10 | the robust range of a free-energy difference between two macrostates is certified by a transport plan from one macrostate to the other, checkable site by site for one-coordinate macrostates | theory (theory report §11.28, Theorems 11.105, 11.107; reviewed and replicated by us for 11.105, 11.106) |
 
 ## 2. The benchmarks
 
@@ -152,6 +155,29 @@ bound of Proposition A1.1 (explicit for every `n`); the limit shape against enum
 (prediction from Newton–Okounkov theory: the number of attained profiles grows like
 `vol(𝒦)·N³`; SCI-REV-0006, T-4); the lever-arm constant against chain length.
 
+### B9 — a datum-assisted bracket under adversarial search  (tests H9; proposed at checkpoint 29, not run)
+
+*Object.*  The algorithm of Theorem A16.6(ii): `M` uniform evaluations; if they show one
+value, the bracket `[max(ln(2ⁿ − |B(n,R)|), n·h(σ_u) − U), ln Z^{pl}(R, U)]` from the datum `U`
+(closed-form radial sums; `energy_isoperimetry_check.py`, function `plateau_ball_upper`).
+*Adversary.*  The engineering division's search harness for Algorithm 2L⁺ (experiment
+X-005), pointed at this bracket: members of the class that vanish outside at most
+`|B(n,R)|` points — dips, hills, several basins, overlapping supports, non-radial
+supports — with the datum computed exactly.
+*Refutation criteria.*  (i) A member with `ln Z` outside the bracket refutes Lemma A16.5
+or Proposition A16.1 (none in 661 806 small cases).  (ii) A pair of members with equal
+datum, equal values on the complement of a set smaller than the plateau twin's support,
+and a larger gap refutes Theorem A16.6(iii).  (iii) For Conjecture A16.4: a pair of
+members with equal datum on a *sloped* landscape that an adaptive algorithm cannot
+separate at the plateau cost — the brute force of (i) does not cover this, and it is
+where the conjecture can fail.
+*Baselines.*  Algorithm 2L⁺ without the datum at the same instances (the engineering
+division's counts); the hinted lower bound `2ⁿ/|B(n, (ρ₁ + ε₁/u)n)|`.
+*Sizes.*  Exact radial sums to `n = 2000` cost seconds; a search over non-radial members
+is exhaustive only to `n ≈ 5` and by enumeration of the cube to `n ≈ 24`.
+*What success would not show:* anything about known parts, about a datum with a
+tolerance, or about an instrument (the datum is a mean *residual* energy).
+
 ### B8 — certified kinetics  (tests a new hypothesis H8: tractable cuts certify a useful fraction of barriers on chains)
 
 *Instances.*  Rotational-isomeric chains on the diamond lattice (exact merge trees up to
@@ -202,4 +228,6 @@ definitions against the reference checker (their E-1); replication on independen
 | B7 | audit at `5ed4072` | `docs/science/INDEPENDENT_VALIDATION.md` |
 | B1 | pilot: alanine peptides, GBn2 and four force-field differences against ff14SB, exact on grids | `workstreams/SP_REPORT.md`; `experiments/science/ws_P/` |
 | B8 | cut families on tiny systems (≤ 5 849 states) and one 200-site chain | `workstreams/SK_REPORT.md`; `experiments/science/ws_K/` |
+| B9 (H9), the coordinator's own checks only | all 65 534 supports of `Q_4` and 8 000 random supports of `Q_5`, `Q_6` (clipped-level profiles); 1 398 random members; ten exact plateau twins to `n = 2000`; **no adversarial search, no second implementation yet** (workstream R8 is asked for a brute force over general members) | `experiments/science/pi_inference/energy_isoperimetry_check.py`, `plateau_twin_check.py` |
+| H10 | independent linear programmes for Theorems 11.105, 11.106 (400 + 24 instances) | `experiments/science/pi_inference/ratio_duality_replication.py`; SCI-RES-0005 |
 | B2, B5 | nothing yet | — |

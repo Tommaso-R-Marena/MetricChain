@@ -50,6 +50,14 @@ e16 = S.get("e2e_K16", {})
 th = S.get("three", {})
 cc = S.get("capcorner", {})
 adv = S.get("adversarial", [])
+CS = {}
+import glob as _glob
+for _f in sorted(_glob.glob(os.path.join(HERE, "data", "capsearch_*.json"))):
+    _c = json.load(open(_f))
+    if not CS:
+        CS = _c
+    else:
+        CS = dict(runs=CS["runs"] + _c["runs"], violations=CS["violations"] + _c["violations"], best=max((CS["best"], _c["best"]), key=lambda b: b.get("ratio", 0)))
 
 for _n in A + ["D_2L"]:
     assert g(_n, "closed") == g(_n, "runs"), ("not every valid run closed", _n)
@@ -140,7 +148,8 @@ outer Algorithm 2L⁺; on every fibre a middle Algorithm 2L⁺ whose *certified*
 outer rung's and whose failure probability is the outer `δ′`; at the bottom real two-sample brackets;
 all constants from the theorems; the declared cost of a middle call is the middle `C_max`.  (For run
 time an outer point draws its bracket from a pool of independent middle runs on its fibre, as in
-R8.)  **{th.get('outer_runs', 0)} outer runs, {th.get('middle_runs', 0)} middle runs, {th.get('bottom_brackets', 0):,} bottom brackets:**
+R8.)  **{th.get('outer_runs', 0)} outer runs, {th.get('middle_runs', 0)} middle runs, {th.get('bottom_brackets', 0):,} real bottom brackets** (in {th.get('runs_with_real_bottom', 0)} of the
+outer runs the bottom rung is a two-sample bracket, in the others no radius qualifies and the fibre is enumerated):
 invalid or too wide at the bottom {th.get('bottom_invalid', 0)}, in the middle {th.get('middle_invalid', 0)} / {th.get('middle_too_wide', 0)}, at the top
 {th.get('outer_invalid', 0)} / {th.get('outer_too_wide', 0)}; violations of a claim of Theorem 11.56 at the middle level {th.get('middle_det', 0)} + {th.get('middle_good', 0)}, at
 the outer level {th.get('outer_det', 0)} + {th.get('outer_good', 0)}; the outer number of queries stays a factor `e^{{{-th.get('max_lnq_minus_lnCmax', 0):.1f}}}` below its `C_max`.
@@ -160,10 +169,16 @@ time; every run is also checked for every claim.
 |---|---|---|---|---|
 {adv_table}
 
-{adv_total} runs, no violation.  The search does not get closer to any bound than the structured instances of the
-campaigns do (count inequality `{maxA('count_ineq'):.3f}` there); the engineering division's much larger search in
-expectation reports `0.95` for the count and `1.8·M†` for the sample.  K's own runs report samples up to
-`4.5·M†`, the theory division's harness `3.7·M†` on a "plateau, then cone" (91 % of the cap).
+{adv_total} runs, {sum(r['violations'] for r in adv)} violations.  With these budgets (about 200 s per search on a loaded machine) the hill
+climbing does **not** get closer to any bound than the structured instances of the campaigns do (count
+inequality `{maxA('count_ineq'):.3f}`, sample `{maxA('M_over_capnew'):.3f}` of the cap there); it is a weak search and I report it as such.
+A structured sweep aimed at the cap (`capsearch.py`: the cell of the theory division's own example,
+`n_o = 24`, `u = λ = ½`, and neighbours; landscapes "plateau, then cone" with every plateau radius, cones,
+"cone, then flat"; {CS.get('runs', 0)} literal runs, {CS.get('violations', 0)} violations) reaches a sample of `{CS.get('best', {}).get('M_over_Mdag', 0):.2f}·M†` where the cap is
+`{CS.get('best', {}).get('cap_over_Mdag', 0):.2f}·M†` and `M̄ = {CS.get('best', {}).get('Mbar_over_Mdag', 0):.0f}·M†`: `{CS.get('best', {}).get('ratio', 0):.2f}` of the cap (samples move in factors of two, so the
+next step would exceed it).  For comparison: the engineering division's search in expectation reports
+`0.95` for the count and `1.8·M†` for the sample; K's runs report samples up to `4.5·M†`; the theory division's
+harness `3.7·M†` (91 % of the cap) at the same `n_o`, `u`, `λ` (its other parameters are not stated).
 
 ### 3.7 Overlap with ENG-RES-0008
 

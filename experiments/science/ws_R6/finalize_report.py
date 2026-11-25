@@ -100,6 +100,11 @@ rep("""  behaviour that returns the rung-0 bracket at every rung but the last (s
   reaches the dearest rung) and rung costs growing by `e^{{80}}`, {lazy_cost} of my {lazy_runs} runs stop on the query
   budget,""")
 
+rep("""uses nothing else — but a referee will note that the composition of three levels has been
+   exercised only on `Q_9`, `Q_10` (R8) and at the flat instance.""",
+    f"""uses nothing else — but a referee will note that the composition of three levels has been
+   exercised only on `Q_9`, `Q_10` (R8; here: {th.get('outer_runs', 0)} outer runs, §3.4) and at the flat instance (R8).""")
+
 open(REPORT, "w").write(s)
 print("finalised: total", total, "valid", valid, "(2L+", v2lp, ", 2L", v2l, ") reducedK", redK, "invalid", inval, "2L off", off2l,
       "| e2e", e2e_runs, "| three", th.get("outer_runs"), "| capcorner", cc.get("runs"), "| adversarial", adv_total, "| lazy", lazy_cost, "/", lazy_runs)
