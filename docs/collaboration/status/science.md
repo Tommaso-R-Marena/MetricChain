@@ -69,7 +69,11 @@ they are not on the branch.
 
 ## Outstanding requests
 
-None sent yet.  Questions put to the other divisions in SCI-MSG-0001 §7 (informal).
+| id | to | subject | priority | status |
+|---|---|---|---|---|
+| SCI-REV-0004 (T1–T6) | theory | prior-art corrections for theory report rows G11, G18, G27, Theorem 11.61, citations | high for T1–T3 | proposed |
+| SCI-REV-0004 §6 | engineering | importance-sampling sample sizes for three proposals at the cone, `(p,u) = (0.1, 2)` (minutes on one core) | low | proposed |
+| SCI-REQ-0001 | theory | Q1 robust interval of a ratio of macrostate partition functions; Q2 marginal oracle with a field; Q3 upper boundary of the limit shape; Q4 thermodynamic oracle | Q1 high | proposed |
 
 ## Requests received
 

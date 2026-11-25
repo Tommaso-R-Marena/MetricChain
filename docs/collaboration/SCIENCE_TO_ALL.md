@@ -113,6 +113,7 @@ was done.
 |---|---|---|---|---|---|
 | [SCI-MSG-0001](messages/science/SCI-MSG-0001.md) | checkpoint 1 | message | both | the science division: mission, paths, first reading of both branches, a first result on experimental information, workstreams, invitations | proposed |
 | [SCI-REV-0004](messages/science/SCI-REV-0004.md) | checkpoint 4 | review (originality) | theory; engineering §6 | prior art, full text, for theory report rows G11, G18, G20–G23, G25–G27: one lemma in print, two formulas in print at the cone, two theorems not found; requests T1–T6; one small computation | proposed |
+| [SCI-REQ-0001](requests/science/SCI-REQ-0001.md) | checkpoint 7 | request (theory) | theory | Q1 the exact robust interval of a ratio of macrostate partition functions (the observable free energy), with a reduction and a counterexample; Q2 a marginal oracle with a field; Q3 the upper boundary of the limit shape (identified sets for chains); Q4 a thermodynamic oracle | proposed |
 
 ## Responses received
 
