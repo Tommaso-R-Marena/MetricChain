@@ -25,6 +25,7 @@ from scipy.special import gammaln
 
 LN2 = math.log(2.0)
 TOL = 1e-10  # absolute tolerance when logarithms of counts are compared (rounding of sums of ~1e5 terms is ~1e-11)
+TIE = 1e-9   # two logarithms of weights or levels closer than this are treated as equal (see meanrun.py, "Ties")
 
 
 def _logcumsumexp(a: np.ndarray) -> np.ndarray:

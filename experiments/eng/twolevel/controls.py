@@ -29,7 +29,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from metricchain_eng.twolevel.alg2l import Params, constants, inner_costs  # noqa: E402
 from metricchain_eng.twolevel.meanrun import Instance, Law, mean_run, radial_law  # noqa: E402
-from metricchain_eng.twolevel.tables import CubeTables, cube_constants  # noqa: E402
+from metricchain_eng.twolevel.ckernel import Evaluator  # noqa: E402
+from metricchain_eng.twolevel.tables import TIE, CubeTables, cube_constants  # noqa: E402
 
 
 # ------------------------------------------------------------------------------------------------
@@ -77,6 +78,7 @@ def control_radial(theory: Path) -> bool:
                                                             int(m["npop"]), int(m["nneg"]))
     rng = np.random.default_rng(11)
     n_rows = n_bad = 0
+    tie_rows = []
     t0 = time.time()
     for u in (0.5, 1.0, 2.0):
         c = cube_constants(u)
@@ -85,28 +87,45 @@ def control_radial(theory: Path) -> bool:
             P = Params(n=n_o, n_o=n_o, u=u, lam=0.5, eta=0.25, etap=0.1, theta=0.1, nu1=2 * math.exp(u) * n_o / 0.1,
                        b=0.5, delta=0.05, xs=(0.0,) * 7)
             C = constants(P, tabs)
+            evs = {(variant, tie): Evaluator(P, tabs, harper=(variant == "harper"), enforce_abort=(variant == "harper"),
+                                             count_grid=(0.5, 2.0, 8.0, 32.0), tie=tie)       # the published "plain" rows have no abort rule
+                   for variant in ("harper", "plain") for tie in (0.0, TIE)}
             for name, F in k_profiles(n_o, u, rng, tabs).items():
                 inst = Instance(radial_law(F, tabs), psi0=float(F[n_o // 2]))
                 for variant in ("harper", "plain"):
                     key = ((u, n_o), name, variant)
                     if key not in want:
                         continue
-                    R = mean_run(P, tabs, inst, "bottom", C=C, harper=(variant == "harper"), count_grid=(0.5, 2.0, 8.0, 32.0),
-                                 enforce_abort=(variant == "harper"))        # the published "plain" rows have no abort rule
-                    got = (R.status.replace("closed-", ""), R.r_close, round(R.lM_last / (n_o * c.a), 4), round(R.width, 3),
-                           R.npop, R.nneg)
                     w = want[key]
-                    same = (got[0] == w[0] and got[1] == w[1] and abs(got[2] - w[2]) <= 1.5e-4 and abs(got[3] - w[3]) <= 1.5e-3
-                            and got[4] == w[4] and got[5] == w[5])
+                    got = {}
+                    for tie in (0.0, TIE):
+                        R = evs[(variant, tie)].run(inst, "bottom")
+                        got[tie] = (R.status.replace("closed-", ""), R.r_close, round(R.lM_last / (n_o * c.a), 4), round(R.width, 3),
+                                    R.npop, R.nneg)
+                        if variant == "harper" and R.violations():
+                            print(f"  CLAIM VIOLATED {key} (tie = {tie}): {R.violations()}")
+                            n_bad += 1
+
+                    def same(g):
+                        return (g[0] == w[0] and g[1] == w[1] and abs(g[2] - w[2]) <= 1.5e-4 and abs(g[3] - w[3]) <= 1.5e-3
+                                and g[4] == w[4] and g[5] == w[5])
                     n_rows += 1
-                    if not same:
+                    if not same(got[0.0]):                       # plain floating-point comparisons, as in the published script
                         n_bad += 1
-                        print(f"  DIFFERENT {key}: published {w}, here {got}")
-                    if variant == "harper" and R.violations():
-                        print(f"  CLAIM VIOLATED {key}: {R.violations()}")
-                        n_bad += 1
-    print(f"radial control: {n_rows} published rows compared, {n_bad} different   ({time.time() - t0:.0f} s)")
-    return n_bad == 0 and n_rows > 0
+                        print(f"  DIFFERENT {key}: published {w}, here {got[0.0]}")
+                    if not same(got[TIE]):
+                        tie_rows.append((key, w, got[TIE]))
+                    if n_o == 1000 and variant == "harper":      # the Python reference gives the same record as the kernel
+                        Rp = mean_run(P, tabs, inst, "bottom", C=C, count_grid=(0.5, 2.0, 8.0, 32.0))
+                        Rc = evs[("harper", TIE)].run(inst, "bottom")
+                        if (Rp.status, Rp.r_close, Rp.npop, Rp.nneg) != (Rc.status, Rc.r_close, Rc.npop, Rc.nneg) or abs(Rp.lM_last - Rc.lM_last) > 1e-9:
+                            n_bad += 1
+                            print(f"  KERNEL != REFERENCE {key}")
+    print(f"radial control: {n_rows} published rows compared; with plain floating-point comparisons {n_bad} differ; "
+          f"with the tie rule {len(tie_rows)} differ:   ({time.time() - t0:.0f} s)")
+    for key, w, g in tie_rows:
+        print(f"  tie row {key}: published {w}, with ties treated exactly {g}")
+    return n_bad == 0 and n_rows > 0 and len(tie_rows) <= 4
 
 
 FLAT_HEAD = re.compile(r"^=== u = (?P<u>[\d.]+):")
@@ -145,8 +164,9 @@ def control_flat(theory: Path, n_max: int) -> bool:
         C = constants(P, tabs)
         lC = inner_costs(P, C)
         inst = Instance(Law(np.array([0.0]), np.array([0.0])), psi0=0.0, t0=u * P.n_i)
-        Rb = mean_run(P, tabs, inst, "bottom", C=C, lC=lC)
-        Rt = mean_run(P, tabs, inst, "top", C=C, lC=lC)
+        ev = Evaluator(P, tabs, lC=lC)
+        Rb = ev.run(inst, "bottom")
+        Rt = ev.run(inst, "top")
         pub = (int(m["r"]), int(m["rdag"]), int(m["npop"]), int(m["nneg"]), float(m["lm"]))
         here = (Rb.r_close, C.r_dag, Rb.npop, Rb.nneg, round(Rb.lM_last / n, 5))
         same_traj = pub[:4] == here[:4] and abs(pub[4] - here[4]) < 1.5e-5

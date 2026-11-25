@@ -294,3 +294,62 @@ def test_claimed_exponent_formula():
         assert claimed_exponent(u, phi, rates) == pytest.approx(t2, rel=0.03)
         assert all(claimed_exponent(u, p, rates) >= c.h for p in (0.1, 0.3, 0.5, 0.7, 0.9))
         assert hinted_lower_bound(4000, u, 0.872, 0.05) / 4000 >= c.h
+
+
+# ------------------------------------------------------------------------------------------------ 5. literal simulation
+from metricchain_eng.twolevel.simulate import simulate, stable_multinomial  # noqa: E402
+import run_sampled  # noqa: E402
+
+
+def test_stable_multinomial_samples_far_tail_cells():
+    """Cells of mass 1e-15 at 2^55 draws: the mean count must be right (numpy's multinomial loses such cells)."""
+    rng = np.random.default_rng(5)
+    lp = np.log(np.array([0.5, 0.3, 0.2 - 3e-15, 2e-15, 1e-15]))
+    tot = np.zeros(5)
+    reps = 400
+    for _ in range(reps):
+        c = stable_multinomial(rng, 2 ** 55, lp)
+        assert int(c.sum()) == 2 ** 55
+        tot += c
+    for cell, mass in ((3, 2e-15), (4, 1e-15)):
+        mean, expect = tot[cell] / reps, 2 ** 55 * mass
+        assert abs(mean - expect) < 5 * math.sqrt(expect / reps)
+
+
+@pytest.mark.parametrize("size", [(0.5, 300, 6), (1.0, 120, 6), (2.0, 48, 6)])
+def test_literal_runs_agree_with_the_mean_run_and_satisfy_the_claims(size):
+    """The step-by-step simulation (random outer sample, deterministic oracle) and the mean-run evaluator share
+    only the cube tables.  With the theorem's K the counts concentrate, so both must stop at the same level with
+    the same sample size, and ln(evaluations) must agree; every claim of Theorem 11.56 must hold on each run."""
+    u, n_o, n_i = size
+    P = run_sampled.params(u, n_o, n_i)
+    ev = Evaluator(P)
+    rng = np.random.default_rng(11)
+    profs = run_sampled.profiles(u, n_o, ev.C.r_dag, ev.outer)
+    for name in ("flat", "cone", "dip R=1.0 Lambda1 n_o/u", "plateau below r_dag+1, cone above", "random monotone"):
+        F = profs[name]
+        psi0, t0 = float(F[n_o // 2]), u * n_i
+        for oracle in ("bottom", "top"):
+            Rm = ev.run(Instance(radial_law(F, ev.outer), psi0=psi0, t0=t0), oracle)
+            same_level = 0
+            for _ in range(3):
+                Rs = simulate(P, ev.outer, ev.C, F, psi0, t0, 0.0, oracle, rng, lC=ev.lC, lCmax=ev.lCmax)
+                assert Rs.status.startswith("closed") and Rs.valid and Rs.good_event and Rs.violations == [], (name, oracle, Rs.status, Rs.violations)
+                assert abs(Rs.lqueries - Rm.lcost) < 0.75, (name, oracle, Rs.lqueries, Rm.lcost)      # within a factor 2 (one doubling)
+                same_level += (Rs.j_stop == Rm.j_stop and abs(math.log(Rs.M_max) - Rm.lM_max) < 1e-9)
+            assert same_level >= 2, (name, oracle)
+
+
+def test_literal_run_with_random_oracle_and_small_K_stays_within_the_width_bound():
+    """U <= e^{x_out} L holds whenever the algorithm stops through the closure test, on or off the good event."""
+    u, n_o, n_i = 1.0, 120, 6
+    P = run_sampled.params(u, n_o, n_i)
+    ev = Evaluator(P)
+    rng = np.random.default_rng(3)
+    F = run_sampled.profiles(u, n_o, ev.C.r_dag, ev.outer)["cone"]
+    off_good_event = 0
+    for _ in range(20):
+        Rs = simulate(P, ev.outer, ev.C, F, float(F[n_o // 2]), u * n_i, 0.0, "random", rng, lC=ev.lC, K_override=15)
+        assert Rs.status.startswith("closed") and "width" not in Rs.violations
+        off_good_event += not Rs.good_event
+    assert off_good_event >= 10          # with K = 15 the Chernoff events of the proof do fail

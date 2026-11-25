@@ -29,6 +29,12 @@ bracket (after intersection with the trivial bracket).  The number of evaluation
 
     1 + max_j M_j + sum_{l=1}^{L} calls_l * C_l .
 
+Ties.  The reference point's own weight lies exactly on the level grid whenever its fibre is
+flat and u n / lambda is an integer (s_j = s_0 e^{j lambda}, s_0 = e^{-psi_0 - u n}), so "W > s_j"
+with W = s_j is not a rare coincidence, and in floating point ln s_j = (-psi_0 - u n) + j lambda
+is off by rounding.  Every comparison of a weight with a level therefore treats values
+within TIE = 1e-9 (in the logarithm) as equal, which is what exact arithmetic gives.
+
 Nothing here is taken from the workstream's scripts; ``experiments/eng/twolevel/controls.py``
 compares the results with the workstream's stored outputs.
 """
@@ -41,7 +47,7 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from .alg2l import Constants, Params, constants, inner_costs, lC_max, logsumexp
-from .tables import LN2, TOL, CubeTables
+from .tables import LN2, TIE, TOL, CubeTables
 
 POP, NEG, STOP_POP, STOP_UNPOP = 0, 1, 2, 3
 
@@ -72,9 +78,9 @@ class Law:
         self.ltail_ge[0] = 0.0
         self.lA = float(np.logaddexp.reduce(self.lw + self.lpr))
 
-    def ltail_gt(self, ls):
-        """ln P(W > e^ls) (vectorised)."""
-        return self.ltail_ge[np.searchsorted(self.lw, ls, side="right")]
+    def ltail_gt(self, ls, tie: float = TIE):
+        """ln P(W > e^ls) (vectorised).  A weight within ``tie`` of the threshold counts as equal to it."""
+        return self.ltail_ge[np.searchsorted(self.lw, np.asarray(ls) + tie, side="right")]
 
 
 def radial_law(F: np.ndarray, tables: CubeTables, shift: float = 0.0) -> Law:
@@ -199,7 +205,7 @@ def _range_max(arr: np.ndarray, lo: np.ndarray, hi: np.ndarray, cache: dict) -> 
 # ---------------------------------------------------------------------------------------------
 def mean_run(P: Params, outer: CubeTables, inst: Instance, oracle: str = "bottom", *, C: Constants | None = None,
              lC: np.ndarray | None = None, harper: bool = True, record: bool = False,
-             count_grid: tuple = (), enforce_abort: bool = True) -> Run:
+             count_grid: tuple = (), enforce_abort: bool = True, tie: float = TIE) -> Run:
     """Run Algorithm 2L+ on ``inst`` with counts replaced by their means.
 
     oracle   "bottom" or "top" (see the module docstring)
@@ -207,6 +213,8 @@ def mean_run(P: Params, outer: CubeTables, inst: Instance, oracle: str = "bottom
     harper   False removes the Harper term from the lower bound (a mutation, for controls)
     enforce_abort  False lets the sample grow beyond K 2^{m_max} (only for comparison with scripts
              that do not implement the abort rule; the claims then report by how much)
+    tie      tolerance of the comparisons of weights with levels (module docstring, "Ties"); 0 gives plain
+             floating-point comparisons
     count_grid  extra values of x at which claim (v) is tested (the ladder is always tested)
     """
     if oracle not in ("bottom", "top"):
@@ -227,7 +235,7 @@ def mean_run(P: Params, outer: CubeTables, inst: Instance, oracle: str = "bottom
 
     theta_z = 1.0 if oracle == "bottom" else 0.0
     ls = ls0 + lam * np.arange(J + 1)
-    ph = law.ltail_gt(ls - b * theta_z)                         # ln P(HIGH) at each level
+    ph = law.ltail_gt(ls - b * theta_z, tie)                    # ln P(HIGH) at each level
     with np.errstate(divide="ignore", invalid="ignore"):
         m_pop = np.where(ph >= 0.0, 0.0, np.ceil(-ph / LN2 - 1e-12))
     m_pop_l = m_pop.tolist()
@@ -342,7 +350,7 @@ def mean_run(P: Params, outer: CubeTables, inst: Instance, oracle: str = "bottom
     for x in xs_v:
         if x <= 0:
             continue
-        lp_x = law.ltail_gt(ls[used] - x)
+        lp_x = law.ltail_gt(ls[used] - x, tie)
         R.slack_v = max(R.slack_v, float(np.max(lMneg_rec[used] + lp_x)) - (C.lcount_factor + x))
         if n_i > 0:
             R.slack_vi = max(R.slack_vi, float(np.max(lMj + lp_x)) - C.lcnt(x, P))

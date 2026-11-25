@@ -21,6 +21,7 @@ typedef struct {
     double u, lam, b, eta, theta, lK, lnu, psi0, t0;
     /* constants needed for the claims */
     double lpi_dag, lM_bar, lMneg_cap, lcount_factor, x_out, lcnt_const; /* lcnt(x) = max(lK, lcnt_const + x) */
+    double tie; /* weights within tie of a level (in the logarithm) are treated as equal to it */
 } mr_params;
 
 /* results: indices into res[] */
@@ -111,7 +112,7 @@ int mr_run(const mr_params *p, int natoms, const double *lw, const double *lpr, 
     for (int j = 0; j <= J; j++) {
         const double lsj = ls0 + lam * j;
         const double thr = lsj - b * theta_z;
-        while (idx < natoms && lw[idx] <= thr) idx++;
+        while (idx < natoms && lw[idx] <= thr + p->tie) idx++;
         const double lph = ltail_ge[idx];
         double mpop;
         if (lph >= 0.0) mpop = 0.0; else mpop = ceil(-lph / LN2 - 1e-12); /* +inf if lph = -inf */
@@ -238,7 +239,7 @@ int mr_run(const mr_params *p, int natoms, const double *lw, const double *lpr, 
             double best_v = -INFINITY, best_vi = -INFINITY;
             for (int j = 0; j <= j_stop; j++) {
                 double th = ls0 + lam * j - x;
-                while (id < natoms && lw[id] <= th) id++;
+                while (id < natoms && lw[id] <= th + p->tie) id++;
                 double lp = ltail_ge[id];
                 if (lMneg_rec[j] + lp > best_v) best_v = lMneg_rec[j] + lp;
                 if (lM[j] + lp > best_vi) best_vi = lM[j] + lp;

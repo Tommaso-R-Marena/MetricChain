@@ -17,7 +17,7 @@ import numpy as np
 
 from .alg2l import Constants, Params, constants, inner_costs, lC_max
 from .meanrun import Instance, Law, Run
-from .tables import CubeTables
+from .tables import TIE, CubeTables
 
 _SRC = Path(__file__).with_name("meanrun_kernel.c")
 _STATUS = ("closed-populated", "closed-unpopulated", "abort-levels", "abort-sample")
@@ -29,7 +29,7 @@ _RES = ("status", "j_stop", "r_close", "lM_last", "lM_max", "lL", "lU", "lA", "n
 class _MrParams(ct.Structure):
     _fields_ = [(k, ct.c_int) for k in ("n", "n_o", "J", "m_max", "L", "harper", "enforce_abort", "oracle")] + \
                [(k, ct.c_double) for k in ("u", "lam", "b", "eta", "theta", "lK", "lnu", "psi0", "t0", "lpi_dag", "lM_bar",
-                                           "lMneg_cap", "lcount_factor", "x_out", "lcnt_const")]
+                                           "lMneg_cap", "lcount_factor", "x_out", "lcnt_const", "tie")]
 
 
 _lib = None
@@ -64,7 +64,7 @@ class Evaluator:
     """Fast mean runs of Algorithm 2L+ for fixed parameters ``P`` (see ``meanrun.mean_run``)."""
 
     def __init__(self, P: Params, outer: CubeTables | None = None, *, lC: np.ndarray | None = None, harper: bool = True,
-                 enforce_abort: bool = True, count_grid: tuple = ()):
+                 enforce_abort: bool = True, count_grid: tuple = (), tie: float = TIE):
         self.P = P
         self.outer = outer if outer is not None else CubeTables(P.n_o, P.u)
         self.C: Constants = constants(P, self.outer)
@@ -94,7 +94,7 @@ class Evaluator:
             n=P.n, n_o=P.n_o, J=J, m_max=C.m_max, L=P.L, harper=int(harper), enforce_abort=int(enforce_abort), oracle=0,
             u=P.u, lam=P.lam, b=P.b, eta=P.eta, theta=P.theta, lK=C.lK, lnu=C.lnu, psi0=0.0, t0=0.0,
             lpi_dag=C.lpi_dag, lM_bar=C.lM_bar, lMneg_cap=C.lMneg_cap, lcount_factor=C.lcount_factor, x_out=C.x_out,
-            lcnt_const=math.log(2 * (1 + P.eta) ** 2 / (1 - P.eta)) + P.lam + C.lnu)
+            lcnt_const=math.log(2 * (1 + P.eta) ** 2 / (1 - P.eta)) + P.lam + C.lnu, tie=tie)
 
     def run(self, inst: Instance, oracle: str = "bottom", record: bool = False) -> Run:
         P, law = self.P, inst.law
