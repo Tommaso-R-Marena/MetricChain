@@ -42,6 +42,7 @@ import proofs.Frontiers.NonAdaptive
 import proofs.Frontiers.LinearClass
 import proofs.Frontiers.LinearKernel
 import proofs.Frontiers.HintRecursion
+import proofs.Frontiers.CubeHintPair
 import proofs.AuditCommand
 
 /-!
@@ -384,6 +385,14 @@ import proofs.AuditCommand
 #print axioms MetricChain.LayerCake.fibre_sum_le
 #print axioms MetricChain.LayerCake.close_points_bound
 #print axioms MetricChain.LayerCake.negligibility_threshold_le
+#print axioms MetricChain.HintRecursion.cubePair
+#print axioms MetricChain.HintRecursion.cubeNa_isLeast_allRadii
+#print axioms MetricChain.HintRecursion.cubeHint_lt_cubeNa
+#print axioms MetricChain.HintRecursion.cube_superSolution_le_hint
+#print axioms MetricChain.HintRecursion.cube_iterates_lt_hint_add
+#print axioms MetricChain.HintRecursion.cube_step_from_hint_le
+#print axioms MetricChain.HintRecursion.cube_hint_superSolution
+#print axioms MetricChain.HintRecursion.cube_hintRecursion_witness
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp

@@ -206,8 +206,9 @@ the fibre averages refined only as far as a one-sided test against a ladder of l
 requires, and the tail lemma once at the top.  One level maps an exponent function `T` to
 `R[T]`; by the identity `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁` the hinted exponent is a fixed point of
 `R`, and every other solution of `T ≤ R[T]` lies below it, so the iteration from the
-non-adaptive exponent converges to it (machine-checked for an abstract pair of exponent
-functions, together with the validity and the width of the bracket; the count of
+non-adaptive exponent converges to it (machine-checked, abstractly and for the exponent
+functions of the cube themselves, together with the validity and the width of the bracket;
+the count of
 evaluations of the algorithm is a paper proof, re-derived by the referee and supported by an
 evaluation in expectation up to `n = 10⁶`).  This is a statement about exponents: at the sizes
 that can be simulated the algorithm is worse than plain Monte Carlo, and five wrong

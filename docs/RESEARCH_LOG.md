@@ -899,6 +899,17 @@ a hint, somewhere between `θ_hint` and `θ_na` — is answered: **it is `θ_hin
   to 64 levels, residual halving with the grid; Lean compiled, axioms printed.  All
   corrections are in the text; the boundedness hypothesis of the two Lean theorems was
   generalised as the referee suggested.
+* **Workstream L** (`workstreams/L_REPORT.md`; a bounded Lean task commissioned after the
+  referee's remark that the machine check covered an abstract pair only): `CubeHintPair.lean`
+  proves that the exponent functions of the cube satisfy `HintPair` (`cubePair`), identifies
+  `cubeNa` with the minimum that defines `θ_na` in §11.16 (`cubeNa_isLeast_allRadii`), instantiates
+  the two convergence theorems, and proves both halves of the fixed-point statement on the
+  cube (`cube_step_from_hint_le`, `cube_hint_superSolution`).  It found that `step_from_hint_le`
+  cannot be applied to the unclipped formula of `θ_hint`, which increases again beyond `ε*`;
+  the statement is for the exponent continued by zero.  Checked by the coordinator before
+  integration: compiles with empty output, no forbidden tokens, definitions literal.
+  Theorem 11.53 is now machine-checked for the cube; what is not in Lean is the operator `R`
+  itself and everything about algorithms.
 
 ### Collaboration hub established (2026-11-25)
 
@@ -922,8 +933,8 @@ research/ubuntu-engineering`, read `docs/collaboration/ENGINEERING_TO_THEORY.md`
 
 ### Resume here (cycle 10, third checkpoint)
 
-Verified state: every module under `proofs/` (45 files) builds with zero warnings and is walked
-by the axiom audit (3016 declarations); the harness (96 registered tests: 79 that must survive,
+Verified state: every module under `proofs/` (46 files) builds with zero warnings and is walked
+by the axiom audit (3101 declarations); the harness (96 registered tests: 79 that must survive,
 17 documented refutations) and its mutation tests (164 mutations: 163 caught, one expected
 pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 at commit
 `36ec238` (corrected), §11.18 in draft (R7, corrected).  **Not refereed**: the revised Theorem

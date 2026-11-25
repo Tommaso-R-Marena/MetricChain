@@ -1118,7 +1118,8 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 * **Without a hint, exponents only, and only on the cube** (§§11.16, 11.18).  The exponent of
   non-adaptive algorithms is `θ_na`, that of adaptive ones `θ_hint` — the latter by a nested
   algorithm whose cost analysis is a paper proof (machine-checked are the analysis of its
-  recursion and the validity and width of its bracket, not its number of evaluations), with
+  recursion, for the cube's own exponent functions, and the validity and width of its
+  bracket, not its number of evaluations), with
   `o(n)` terms that make it useless at any size one could simulate, at extensive accuracies
   only.  All upper bounds rest on Harper's theorem, which is cited, and on paper reductions
   to it.
@@ -1201,6 +1202,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/LinearClass.lean` | `linRes`, `featEnv`, `featEnv_isEnvelope`, `linRes_sub_le`, `linRes_dev_admissible`, `linRes_sub_attained`, `linRes_span_upper`, `linRes_span_lower`, `linRes_span_exact`, `sumClass_span_upper`, `sumClass_sub_le`, `pairRes`, `cumCount`, `pairRes_eq_cum`, `profEnv`, `profEnv_isEnvelope`, `pairRes_sub_le`, `pairRes_admissible`, `pairRes_span_upper`, `pairRes_span_lower`, `pairRes_le_of_dominates`, `pairRes_sharp` (classes linear in features; pair-additive residuals; §11.17) |
 | `proofs/Frontiers/LinearKernel.lean` | `PairInstance.addSmul`, `PairInstance.addSmul_energy`, `LProblem`, `LinResidualClass`, `LCert`, `dataTerm`, `verifyL`, `dataTerm_le_zero`, `verifyL_sound`, `verifyLTop`, `verifyLTop_sound`, `contactTriangle_verified`, `contactTriangle_no_anchor_rejects`, `contactTriangle_bound`, `contactTriangle_class_nonempty` (kernel for residuals linear in pairwise features; §11.17) |
 | `proofs/Frontiers/HintRecursion.lean` | `StepLE`, `HintPair`, `StepLE.of_limit`, `StepLE.of_macro`, `StepLE.at_hint_fraction`, `superSolution_le_hint`, `step_from_hint_le`, `iterates_lt_hint_add`, `klBin_shift`, `gaussPair`, `gauss_hint_superSolution` (the level recursion of adaptive algorithms without a hint converges to the hinted exponent); `LayerCake.level_mul_exceed_le_mean`, `LayerCake.mean_le_layer_cake`, `LayerCake.mean_le_upper`, `LayerCake.upper_le_width`, `LayerCake.fibre_sum_le`, `LayerCake.close_points_bound`, `LayerCake.negligibility_threshold_le` (deterministic core of the two-level bracket; §11.18) |
+| `proofs/Frontiers/CubeHintPair.lean` | `cubeP`, `cubeLam`, `cubeEstar`, `cubeA`, `cubeH`, `cubeHint`, `cubeNa`, `cubeNa_isLeast`, `cubeNa_isLeast_allRadii`, `cubeNa_add_cubeHint`, `cubeHint_lt_cubeNa`, `cubeEstar_eq_log_cosh`, `cubePair`, `cube_superSolution_le_hint`, `cube_iterates_lt_hint_add`, `cubeHintClip`, `cubePairClip`, `cube_step_from_hint_le`, `cube_hint_superSolution`, `cube_hintRecursion_witness` (the exponent functions of the cube satisfy `HintPair`; the hinted exponent is a fixed point of the recursion; workstream L; §11.18) |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -1249,7 +1251,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 
 | G18 | **Without a hint on the cube**: the exponent of non-adaptive algorithms is `min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}` at extensive accuracies and `KL(p_u‖½)` at every fixed accuracy — plain Monte Carlo attains it on the whole class (tail lemmas: above a threshold the mass is at most the excess of a dip on a ball of the size of the super-level set, below it at least that of a cone around such a ball), and no non-adaptive algorithm does better (cones against cones with a flattened bottom); two independent samples give a certified bracket that needs no hint at the zero residual for `ε > 2`; an adaptive algorithm that is correct on the class needs `n + 3` evaluations on a cone (for adaptive algorithms see G20) | `nonadaptive_expected_queries_ge`, `cube_nonadaptive_bound` (conditional on two finite sums), `weight_le_of_outside`, `sum_le_truncated_add_tail`, `weight_ge_of_inside`, `sum_truncated_ge` **[V]**; Harper's theorem **[K]**; the reductions to it, the closed forms, all exponents and the probabilistic statements **[P]** | cycle 10, refereed (`reviews/R5`); the sample size `e^{KL(π‖uniform)}` at one instance is **known** (Chatterjee–Diaconis 2018) and the *method* of the non-adaptive lower bound — hidden cone centres, Bakhvalov averaging, defeated by adaption — is **known** (Mathé–Novak 2007, for log-concave densities with a Lipschitz logarithm); the exponent on the cube for `ln Z` and the matching class-wide upper bound were not found |
 | G19 | **Correlated uncertainty**: for residuals that are linear in known features with coefficients in a box, the envelope is a pulled-back weighted `ℓ¹` distance, every linear combination of evaluations brackets the value at a new point by the unexplained part of its feature vector (worst case over the data: the `ℓ¹` distance to the span, against the distance to the nearest point for the first-order class of the same envelope), and rank-many evaluations determine everything; pair-additive residuals with unknown Lipschitz radial functions are linear in cumulative pair-count profiles, their envelope is a transport distance between pair-distance distributions, sharpness is stochastic dominance, and at extensive accuracy certificates in this format exist whose size does not depend on the chain length; a kernel certifies minima for all coefficient vectors consistent with evaluated anchors | `linRes_sub_le`, `linRes_sub_attained`, `linRes_span_upper`, `linRes_span_lower`, `linRes_span_exact`, `sumClass_span_upper`, `sumClass_span_lower`, `pairRes_eq_cum`, `pairRes_sub_le`, `pairRes_span_upper`, `pairRes_span_upper_enclosure`, `pairRes_sharp`, `verifyLTop_sound`, `contactTriangle_bound` **[V]**; exactness (duality), the transport form, the entropy bound and everything about chain length **[P]** | cycle 10, refereed (`reviews/R6`) except the kernel; the linear theory is **known** (optimal recovery: Smolyak, Micchelli–Rivlin; set-membership estimation; robust linear programming), the features are those of linear contact potentials (Maiorov–Crippen 1992; Tobi et al. 2000), the distance is **known** as a descriptor distance (Osada et al. 2002; bag of bonds), the entropy of monotone functions is classical; its reading as the exact envelope of a residual class next to a known part, and the consequences for certificates, were not found; **none of it is deep** |
-| G20 | **Adaptivity replaces the hint**: on the cube class the worst-case exponent of adaptive randomised algorithms without a hint is the hinted exponent `θ_hint(ε₁) = KL((Λ₁+ε₁)/u‖½)`, strictly below the non-adaptive `θ_na`.  A two-level "layer-cake" algorithm — uniform outer sample, brackets of the fibre averages refined only as far as a one-sided test against a ladder of levels requires, the tail lemma once at the top — turns bracket procedures with exponent function `T` into ones with `R[T]`; by the identity `θ_na(e + θ_hint(e)) = θ_hint(e)` (that is, `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁`) the hinted exponent is a fixed point of `R`, every nonincreasing `T ≤ R[T]` lies below it, and the iteration from `θ_na` converges to it; on radial instances a direct adaptive algorithm has the hinted exponent | `superSolution_le_hint`, `iterates_lt_hint_add`, `step_from_hint_le`, `klBin_shift`, `gauss_hint_superSolution`, `LayerCake.mean_le_upper`, `LayerCake.upper_le_width`, `LayerCake.close_points_bound` **[V]** (analysis of the recursion for an abstract pair of exponent functions; validity and width of the bracket; the two algebraic inequalities behind the cost); the algorithm's number of evaluations, the induction over levels and all asymptotics **[P]** | cycle 10, refereed (`reviews/R7`: "proved with gaps", the gaps written into the text; no error found in the cost accounting beyond one closure rule); the two-level algorithm and the recursion are due to workstream H, the oracle-relative form, the identity and the convergence proof to the coordinator; relatives of the algorithm are nested sampling, multilevel splitting and nested simulation, adaption with polynomial gains is known in information-based complexity (Heinrich; Kunsch–Novak–Wnuk) — a certified version with a worst-case exponent, and the statement that adaption recovers the value of a hint exactly, were **not found** (abstracts only) |
+| G20 | **Adaptivity replaces the hint**: on the cube class the worst-case exponent of adaptive randomised algorithms without a hint is the hinted exponent `θ_hint(ε₁) = KL((Λ₁+ε₁)/u‖½)`, strictly below the non-adaptive `θ_na`.  A two-level "layer-cake" algorithm — uniform outer sample, brackets of the fibre averages refined only as far as a one-sided test against a ladder of levels requires, the tail lemma once at the top — turns bracket procedures with exponent function `T` into ones with `R[T]`; by the identity `θ_na(e + θ_hint(e)) = θ_hint(e)` (that is, `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁`) the hinted exponent is a fixed point of `R`, every nonincreasing `T ≤ R[T]` lies below it, and the iteration from `θ_na` converges to it; on radial instances a direct adaptive algorithm has the hinted exponent | `superSolution_le_hint`, `iterates_lt_hint_add`, `step_from_hint_le`, `klBin_shift`, `cubePair`, `cube_iterates_lt_hint_add`, `cube_hint_superSolution`, `LayerCake.mean_le_upper`, `LayerCake.upper_le_width`, `LayerCake.close_points_bound` **[V]** (analysis of the recursion, abstractly and for the exponent functions of the cube; validity and width of the bracket; the two algebraic inequalities behind the cost); the algorithm's number of evaluations, the induction over levels and all asymptotics **[P]** | cycle 10, refereed (`reviews/R7`: "proved with gaps", the gaps written into the text; no error found in the cost accounting beyond one closure rule); the two-level algorithm and the recursion are due to workstream H, the oracle-relative form, the identity and the convergence proof to the coordinator; relatives of the algorithm are nested sampling, multilevel splitting and nested simulation, adaption with polynomial gains is known in information-based complexity (Heinrich; Kunsch–Novak–Wnuk) — a certified version with a worst-case exponent, and the statement that adaption recovers the value of a hint exactly, were **not found** (abstracts only) |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -3556,39 +3558,50 @@ tail lemma once, at the top of the ladder, where the certified exceedance probab
 already that of a small ball.  At the exponential scale `A = max_s s·p(s)`.  No product
 structure of `ψ` is used.
 
-**Theorem 11.53 (the recursion converges to the hinted exponent) [V for an abstract pair of exponent functions; that the functions of the cube qualify, and "`≥`" in (b) on the cube: P] (`HintRecursion.lean`).**
+**Theorem 11.53 (the recursion converges to the hinted exponent) [V] (`HintRecursion.lean` for an abstract pair of exponent functions; `CubeHintPair.lean` for the functions of the cube).**
 (a) *An identity.*  For `0 < ρ < 1`: `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁` (`klBin_shift`).  Read at the
 radius `ρn`: the accuracy that a non-adaptive sample of `e^{nθ}` points certifies is the accuracy
 that the same number of points certifies with a hint, **plus `θ` itself** — without a hint,
 a sample cannot exclude that a set of the size it has not seen carries all the weight.
 Consequently, for `0 ≤ e < ε*`,
 
-    θ_na( e + θ_hint(e) )  =  θ_hint(e),        in particular   θ_na(h) = h.                     (11.18.1)
+    θ_na( e + θ_hint(e) )  =  θ_hint(e),        in particular   θ_na(h) = h                      (11.18.1)
+
+(`cubeNa_add_cubeHint`; here `θ_na` is `cubeNa`, defined through the largest feasible radius and
+shown to be the minimum of the definition of §11.16 in `cubeNa_isLeast_allRadii`; also
+`cubeHint_lt_cubeNa`: `θ_hint < θ_na` on `[0, ε*)`).
 
 (b) *The hinted exponent is a fixed point.*  `R[θ_hint] = θ_hint` on `(0, ε*)`.
-"`≤`" (`step_from_hint_le`): with `φ = g/(g + θ_hint(g))` and `β → 0` the outer sample has the
+"`≤`" (`step_from_hint_le`, `cube_step_from_hint_le`): with `φ = g/(g + θ_hint(g))` and `β → 0` the outer sample has the
 exponent `φ·θ_na(g/φ) = φ θ_hint(g)` by (11.18.1), the inner brackets are needed at accuracy rate at
 most `g`, and `φ θ_hint(g) + (1−φ) θ_hint(g) = θ_hint(g)`: an outer sample and inner samples of the
-hinted sizes, for the hinted accuracy on both blocks.  "`≥`" **[P]**: for any `φ`, `β` let `ρ_o` be
+hinted sizes, for the hinted accuracy on both blocks.  "`≥`" (`cube_hint_superSolution`): for any `φ`, `β` let `ρ_o` be
 the outer radius (`φ KL(ρ_o‖½) = μ := φ θ_na((g−β)/φ)`) and take `γ = max(β, μ)` with inner radius `ρ_i`
 (`uρ_i − Λ₁ = γ/(1−φ)`, or `ρ_i = ½`); by (a), `φ(uρ_o − Λ₁) ≤ g − β − μ`, so the mean radius
 `ρ̄ = φρ_o + (1−φ)ρ_i` has `uρ̄ − Λ₁ ≤ g − β − μ + γ ≤ g`, and by convexity of `KL(·‖½)` the bracket is at
-least `φ KL(ρ_o‖½) + (1−φ) KL(ρ_i‖½) ≥ KL(ρ̄‖½) ≥ θ_hint(g)` (machine-checked in the small-slope limit,
-`gauss_hint_superSolution`; harness XV.1 for the cube).  Since `R` is monotone and `θ_na ≥ θ_hint`,
+least `φ KL(ρ_o‖½) + (1−φ) KL(ρ_i‖½) ≥ KL(ρ̄‖½) ≥ θ_hint(g)` (also in the small-slope limit,
+`gauss_hint_superSolution`; harness XV.1 checks it numerically).  Since `R` is monotone and `θ_na ≥ θ_hint`,
 **no level of the recursion goes below the hinted exponent** — as it must not, by the lower
 bound of Theorem 11.25(a); a wrong accounting of the algorithm typically violates this
 (two of the workstream's superseded recursions did).
 (c) *No fixed point above it.*  Let `T` be nonincreasing and bounded above with `T ≤ R[T]`.  Then
-`T ≤ θ_hint` on `(0, ε*)` (`superSolution_le_hint`).
+`T ≤ θ_hint` on `(0, ε*)` (`superSolution_le_hint`, `cube_superSolution_le_hint`).
 (d) *Convergence.*  Let `T₁ = θ_na` and `T_{k+1} = min(T_k, R[T_k])`.  Then for every `g ∈ (0, ε*)`
-and `η > 0` there is a `k` with `T_k(g) < θ_hint(g) + η` (`iterates_lt_hint_add`).
-The machine-checked statements are about an abstract pair of functions with the properties
-used — (11.18.1), `e + θ_hint(e)` nondecreasing, `θ_na` continuous and bounded, `θ_hint(e) ≥ h − Le` —
-and hold in particular for the small-slope limit `θ_na(x) = (1 − √x)²`, `θ_hint(e) = (1 − e)²/4`
-(`gaussPair`), where the bound of (c) is attained (`hintRecursion_witness`); that the functions
-of the cube have these properties is elementary calculus with (a) — the slope of `θ_hint` is
-`u^{−1} ln(ρ/(1−ρ)) > −1` for `ρ > p_u`, it is convex, and `θ_na` is continuous because
-`KL(·‖p_u)` is strictly increasing on `[p_u, ½]` — and is checked numerically (harness XV.1).
+and `η > 0` there is a `k` with `T_k(g) < θ_hint(g) + η` (`iterates_lt_hint_add`,
+`cube_iterates_lt_hint_add`).
+The abstract statements are about a pair of functions with the properties used — (11.18.1),
+`e + θ_hint(e)` nondecreasing, `θ_na` continuous and bounded, `θ_hint(e) ≥ h − Le` (structure `HintPair`) —
+and hold for the small-slope limit `θ_na(x) = (1 − √x)²`, `θ_hint(e) = (1 − e)²/4` (`gaussPair`) and for
+the functions of the cube (`cubePair`, with `L = 1`; an independent Lean workstream, after the
+referee had asked for it: the calculus is that `KL(·‖p_u)` is strictly increasing on `[p_u, ½]`,
+`KL(·‖½)` strictly decreasing on `[0, ½]`, and the largest feasible radius depends
+continuously on the accuracy).  In both cases the bound of (c) is attained
+(`hintRecursion_witness`, `cube_hintRecursion_witness`).  One caveat that the formalisation
+exposed: `θ_hint` as a formula increases again beyond `ε*`, so "(b), `≤`" is stated for the
+exponent continued by zero from `ε*` on (`cubeHintClip`).  What is **not** in Lean is the
+operator `R` itself: `StepLE θ_na T T′` states `T′ ≤ R[T]` without suprema, and that the iterates
+`T_{k+1} = min(T_k, R[T_k])` satisfy the hypotheses of (d) — nonincreasing, nonnegative, bounded,
+`T_{k+1} ≤ R[T_k]` — is immediate from the definition of `R` and is not formalised.
 *Proof of (c).*  Three choices of parameters in `T ≤ R[T]`, with `S(x) := x + T(x)`:
 
     (i)   φ = g/h, β → 0:               T(g) ≤ sup_{0 < γ ≤ g} [ γ + (1 − g/h)·T(γ/(1 − g/h)) ]      (g < h);
@@ -3715,9 +3728,9 @@ recursion.  All of this is at the level of abstracts and search summaries; see
 count, the cost sum); found the closure gap independently; closed the abort rule and the
 induction on paper; compiled the Lean file and printed its axioms; verified by hand that
 the functions of the cube satisfy the hypotheses of the abstract theorem, and the "≥" half
-of Theorem 11.53(b); iterated the recursion with own code to 64 levels (the excess over
-`θ_hint` halves with the grid spacing: a discretisation artefact); ran the radial algorithm on
-full cubes.  *Not checked:* the algorithm end to end with real inner brackets, or with
+of Theorem 11.53(b) — both have since been machine-checked (`CubeHintPair.lean`); iterated the
+recursion with own code to 64 levels (the excess over `θ_hint` halves with the grid spacing: a
+discretisation artefact); ran the radial algorithm on full cubes.  *Not checked:* the algorithm end to end with real inner brackets, or with
 three nested levels; non-radial outer landscapes in the evaluation of the cost (the referee
 argues that only the law of the fibre averages matters); the uniformity of the `o(n)` terms
 through `k` levels other than on paper; Theorems 11.25(a), 11.44, 11.45 and Proposition 11.46

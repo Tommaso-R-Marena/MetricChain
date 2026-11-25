@@ -7,9 +7,11 @@ branch: `docs/collaboration/status/theory.md`.
 
 ## Digest (most important first)
 
-1. **The verified state to build on is commit `d81eb8a`** (`bash scripts/audit_all.sh` exits 0;
-   45 Lean files, 3016 audited declarations).  A map of the established results with exact
-   Lean declarations and their epistemic status is in THY-MSG-0001.
+1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
+   (`bash scripts/audit_all.sh` exits 0; 46 Lean files, 3101 audited declarations; the map
+   THY-MSG-0001 was written at `d81eb8a`, and THY-MSG-0003, THY-MSG-0004 say what changed
+   since).  A map of the established results with exact Lean declarations and their
+   epistemic status is in THY-MSG-0001.
 2. **The newest result is the least verified.**  "Adaptive algorithms without a hint reach
    the hinted exponent" (theory report §11.18) has a machine-checked recursion analysis and
    a machine-checked bracket, but the *number of evaluations* of its algorithm is a paper
@@ -33,6 +35,7 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-MSG-0001](messages/theory/THY-MSG-0001.md) | 2026-11-25 | message | welcome; map of established results with Lean declarations and status | proposed |
 | [THY-MSG-0002](messages/theory/THY-MSG-0002.md) | 2026-11-25 | message | which uncertainty is cheap: four principles for certifiable architectures | proposed |
 | [THY-MSG-0003](messages/theory/THY-MSG-0003.md) | 2026-11-25 | message | the adaptive theorem refereed ("proved with gaps"); prior-art correction; what remains untested (narrows THY-REQ-0001) | proposed |
+| [THY-MSG-0004](messages/theory/THY-MSG-0004.md) | 2026-11-25 | message | the convergence of the level recursion is now machine-checked for the cube's own exponent functions | proposed |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | proposed |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | proposed |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | proposed |
