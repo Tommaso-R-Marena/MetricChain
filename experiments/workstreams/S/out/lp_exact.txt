@@ -1,0 +1,26 @@
+# 46 orbits of cluster configurations, 32 allowed; 6 star constraints
+# star constraint k:  P(v, w=1, u1=0, u2, u3) - P(v, w=0, u1=1, u2, u3) = 0  for (v, u2, u3) = [(0, 0, 0), (0, 0, 1), (0, 1, 1), (1, 0, 0), (1, 0, 1), (1, 1, 1)]
+# LP polytope: 12 vertices, 11 facets, volume 3.226852
+# facet  c3*p3 + c8*p8 + c11*p11 <= b ;  certified bound (exact) ; equal? ; M (largest reduced cost of a forbidden orbit)
+       (-4, 2, -1) . p <=      2    certified: <=      2   EXACT   M = 6   y = ['0', '-6', '-6', '0', '-18', '-6'], y0 = 0
+        (-3, 0, 2) . p <=      9    certified: <=      9   EXACT   M = 3   y = ['-6', '-18', '-12', '0', '-30', '-18'], y0 = 6
+        (-2, 1, 0) . p <=      3    certified: <=      3   EXACT   M = 2   y = ['0', '-3', '-3', '0', '-15', '-7'], y0 = 2
+        (-1, 0, 0) . p <=      0    certified: <=      0   EXACT   M = 1/2   y = ['0', '0', '0', '0', '-3', '-1'], y0 = -1
+       (-1, 1, -1) . p <=      0    certified: <=      0   EXACT   M = 3   y = ['0', '-3', '-3', '0', '-3', '-3'], y0 = 0
+       (-1, 2, -1) . p <=      3    certified: <=      3   EXACT   M = 4   y = ['0', '-6', '-6', '0', '-6', '-2'], y0 = 4
+        (0, -1, 2) . p <=      7    certified: <=      7   EXACT   M = 1   y = ['-6', '-15', '-9', '0', '-15', '-9'], y0 = 6
+        (3, 4, -3) . p <=      5    certified: <=      5   EXACT   M = 6   y = ['0', '-12', '-12', '0', '12', '0'], y0 = 12
+        (4, -1, 0) . p <=      0    certified: <=      0   EXACT   M = 5   y = ['0', '3', '3', '0', '12', '6'], y0 = 3
+        (6, -2, 1) . p <=      2    certified: <=      2   EXACT   M = 6   y = ['-3', '-3', '0', '0', '15', '9'], y0 = 6
+        (6, -1, 0) . p <=      1    certified: <=      1   EXACT   M = 6   y = ['0', '3', '3', '0', '21', '9'], y0 = 6
+# all facets certified exactly: True
+# other inequalities:
+             p3 >= 0:  (-1, 0, 0) . p <= 0   (M = 1/2)
+          p8 >= 4 p3:  (4, -1, 0) . p <= 0   (M = 5)
+      p8 >= 6 p3 - 1:  (6, -1, 0) . p <= 1   (M = 6)
+      p8 <= 3 + 2 p3:  (-2, 1, 0) . p <= 3   (M = 2)
+            p11 <= ?:  (0, 0, 1) . p <= 6   (M = 0)
+             p3 <= ?:  (1, 0, 0) . p <= 1   (M = 0)
+             p8 <= ?:  (0, 1, 0) . p <= 5   (M = 0)
+            p11 >= ?:  (0, 0, -1) . p <= 0   (M = 0)
+    9p3+4p8+p11 <= ?:  (9, 4, 1) . p <= 35   (M = 0)

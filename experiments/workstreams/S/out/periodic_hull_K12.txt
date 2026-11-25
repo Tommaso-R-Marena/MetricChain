@@ -1,0 +1,33 @@
+# periodic site sets with every occupied site of degree >= 2, cell index <= 12: 12534 distinct density points
+# hull: 17 vertices, volume 2.490429 (p-coordinates), x36 = 89.6555 (weighted coordinates)
+# vertices: (p3, p8, p11)   first witness (index K, n per cell, E3, E8, E11)
+  (     0,      0,      0)   K=4 n=2 E3=4 E8=4 E11=0
+  (     0,      0,    3/2)   K=12 n=8 E3=16 E8=16 E11=24
+  (     0,      1,      1)   K=12 n=8 E3=16 E8=32 E11=16
+  (     0,      1,      3)   K=2 n=2 E3=4 E8=8 E11=12
+  (     0,  27/14,      4)   K=12 n=14 E3=28 E8=82 E11=112
+  (     0,   12/5,   22/5)   K=8 n=10 E3=20 E8=68 E11=88
+  (     0,      3,      4)   K=3 n=4 E3=8 E8=32 E11=32
+  (     0,      3,    9/2)   K=12 n=16 E3=32 E8=128 E11=144
+  (  1/15,  34/15,  64/15)   K=12 n=15 E3=32 E8=98 E11=128
+  (  1/12,      2,      4)   K=10 n=12 E3=26 E8=72 E11=96
+  (   1/3,    7/3,      2)   K=12 n=12 E3=32 E8=80 E11=48
+  (   1/3,   10/3,      5)   K=4 n=6 E3=16 E8=52 E11=60
+  (   1/3,   11/3,      4)   K=2 n=3 E3=8 E8=28 E11=24
+  (  5/11,  37/11,  36/11)   K=8 n=11 E3=32 E8=96 E11=72
+  (   1/2,      2,    3/2)   K=2 n=2 E3=6 E8=12 E11=6
+  (   1/2,      2,    5/2)   K=4 n=4 E3=12 E8=24 E11=20
+  (     1,      5,      6)   K=1 n=2 E3=8 E8=24 E11=24
+# LP vertices: inside the periodic hull?  (max facet violation; <= 1e-9 means inside)
+  ( 0.00000,  0.00000,  0.00000)   violation   0.00000   attained
+  ( 0.00000,  0.00000,  2.00000)   violation   0.14286   NOT attained by these periodic sets
+  ( 0.00000,  1.00000,  4.00000)   violation   0.58534   NOT attained by these periodic sets
+  ( 0.00000,  2.00000,  2.00000)   violation   0.14286   NOT attained by these periodic sets
+  ( 0.00000,  2.00000,  4.50000)   violation   0.32644   NOT attained by these periodic sets
+  ( 0.00000,  3.00000,  4.00000)   violation   0.00000   attained
+  ( 0.00000,  3.00000,  4.50000)   violation   0.00000   attained
+  ( 0.33333,  3.00000,  2.66667)   violation   0.11561   NOT attained by these periodic sets
+  ( 0.33333,  3.66667,  4.00000)   violation   0.00000   NOT attained by these periodic sets
+  ( 0.50000,  2.00000,  1.50000)   violation   0.00000   attained
+  ( 0.50000,  2.00000,  3.00000)   violation   0.05923   NOT attained by these periodic sets
+  ( 1.00000,  5.00000,  6.00000)   violation   0.00000   attained

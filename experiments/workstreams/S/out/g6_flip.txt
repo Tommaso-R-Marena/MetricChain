@@ -1,0 +1,21 @@
+# torsion word of a 3-stem rung-folded sheet: ttttttttttt+-+ttttttt-+-ttttttttttt
+# fold between two stems: +-+  ( 3 gauche torsions )
+# n = a + b + len(fold) torsions; flip of fold torsion number f (0-based) to state s; d = distance of the flipped torsion from the nearer end
+#   a    b    n   d | best single flip at the fold: (f, s), profile distance D | D/d | D - 14 d
+    3    3    9   5 |   (1, t)      55   |  11.00 |  -15
+    7    7   17   9 |   (1, t)     111   |  12.33 |  -15
+   11   11   25  13 |   (1, t)     167   |  12.85 |  -15
+   15   15   33  17 |   (1, t)     223   |  13.12 |  -15
+   19   19   41  21 |   (1, t)     279   |  13.29 |  -15
+   23   23   49  25 |   (1, t)     335   |  13.40 |  -15
+   27   27   57  29 |   (1, t)     391   |  13.48 |  -15
+   31   31   65  33 |   (1, t)     447   |  13.55 |  -15
+   35   35   73  37 |   (1, t)     503   |  13.59 |  -15
+   39   39   81  41 |   (1, t)     559   |  13.63 |  -15
+   43   43   89  45 |   (1, t)     615   |  13.67 |  -15
+    5   30   38   7 |   (1, t)      88   |  12.57 |  -10
+   10   30   43  12 |   (1, t)     163   |  13.58 |   -5
+   20   30   53  22 |   (1, t)     303   |  13.77 |   -5
+   10   60   73  12 |   (1, t)     163   |  13.58 |   -5
+   20   60   83  22 |   (1, t)     303   |  13.77 |   -5
+   30   60   93  32 |   (1, t)     443   |  13.84 |   -5

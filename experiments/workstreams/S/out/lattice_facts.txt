@@ -1,0 +1,9 @@
+site of type A: neighbours at squared distance 3, 8, 11: [4, 12, 12]; height differences: {3: {-1: 2, 1: 2}, 8: {-2: 4, 0: 4, 2: 4}, 11: {-3: 2, -1: 4, 1: 4, 3: 2}}
+   squared distance 8: number of common neighbours -> {1: 12} (expected all 1)
+   squared distance 11: number of three-bond paths -> {2: 12} (expected all 2)
+   squared distances of the end points of three-bond paths: {19: 12, 11: 24}
+site of type B: neighbours at squared distance 3, 8, 11: [4, 12, 12]; height differences: {3: {-1: 2, 1: 2}, 8: {-2: 4, 0: 4, 2: 4}, 11: {-3: 2, -1: 4, 1: 4, 3: 2}}
+   squared distance 8: number of common neighbours -> {1: 12} (expected all 1)
+   squared distance 11: number of three-bond paths -> {2: 12} (expected all 2)
+   squared distances of the end points of three-bond paths: {19: 12, 11: 24}
+F3: every map sends the bond star of A to a bond star: True ; orbit of one ordered pair of up-bonds has 8 elements = 8 ordered pairs: True

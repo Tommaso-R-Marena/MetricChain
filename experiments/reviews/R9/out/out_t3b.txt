@@ -1,0 +1,20 @@
+p=0.1 u=2.0 e=-0.08187: sup over |U|=2 laws of V - R^max(e) found = +3.361e-08  (R^max(e)=0.095251; at P(u2)=0.5351, mu=(0.4509,0.0148); cone law: (0.0148,0.4509))   [26s]
+p=0.1 u=2.0 e=-0.02456: sup over |U|=2 laws of V - R^max(e) found = -5.072e-15  (R^max(e)=0.060355; at P(u2)=0.4944, mu=(0.0148,0.4509); cone law: (0.0148,0.4509))   [35s]
+p=0.1 u=2.0 e=+0.00000: sup over |U|=2 laws of V - R^max(e) found = -5.690e-16  (R^max(e)=0.048130; at P(u2)=0.5065, mu=(0.0148,0.4509); cone law: (0.0148,0.4509))   [49s]
+p=0.1 u=2.0 e=+0.06369: sup over |U|=2 laws of V - R^max(e) found = -9.680e-16  (R^max(e)=0.023270; at P(u2)=0.5373, mu=(0.0148,0.4509); cone law: (0.0148,0.4509))   [60s]
+p=0.1 u=2.0 e=+0.14861: sup over |U|=2 laws of V - R^max(e) found = +6.587e-07  (R^max(e)=0.004248; at P(u2)=0.5774, mu=(0.0147,0.4515); cone law: (0.0148,0.4509))   [75s]
+p=0.3 u=1.0 e=-0.04765: sup over |U|=2 laws of V - R^max(e) found = +2.221e-08  (R^max(e)=0.054116; at P(u2)=0.4868, mu=(0.1362,0.5381); cone law: (0.1362,0.5381))   [138s]
+p=0.3 u=1.0 e=-0.01430: sup over |U|=2 laws of V - R^max(e) found = +2.394e-08  (R^max(e)=0.032547; at P(u2)=0.4965, mu=(0.1361,0.5380); cone law: (0.1362,0.5381))   [170s]
+p=0.3 u=1.0 e=+0.00000: sup over |U|=2 laws of V - R^max(e) found = +1.587e-06  (R^max(e)=0.025034; at P(u2)=0.4994, mu=(0.5381,0.1362); cone law: (0.1362,0.5381))   [198s]
+p=0.3 u=1.0 e=+0.03094: sup over |U|=2 laws of V - R^max(e) found = +3.970e-08  (R^max(e)=0.012209; at P(u2)=0.5096, mu=(0.1362,0.5381); cone law: (0.1362,0.5381))   [256s]
+p=0.3 u=1.0 e=+0.07219: sup over |U|=2 laws of V - R^max(e) found = -3.612e-15  (R^max(e)=0.002235; at P(u2)=0.5216, mu=(0.1362,0.5381); cone law: (0.1362,0.5381))   [268s]
+p=0.2 u=4.0 e=-0.27675: sup over |U|=2 laws of V - R^max(e) found = -2.776e-15  (R^max(e)=0.347938; at P(u2)=0.5078, mu=(0.9317,0.0046); cone law: (0.0046,0.9317))   [302s]
+p=0.2 u=4.0 e=-0.08302: sup over |U|=2 laws of V - R^max(e) found = +3.657e-08  (R^max(e)=0.249452; at P(u2)=0.5062, mu=(0.0046,0.9318); cone law: (0.0046,0.9317))   [341s]
+p=0.2 u=4.0 e=+0.00000: sup over |U|=2 laws of V - R^max(e) found = +1.859e-08  (R^max(e)=0.214245; at P(u2)=0.5119, mu=(0.0045,0.9317); cone law: (0.0046,0.9317))   [443s]
+p=0.2 u=4.0 e=+0.35137: sup over |U|=2 laws of V - R^max(e) found = -5.274e-16  (R^max(e)=0.100321; at P(u2)=0.5350, mu=(0.0046,0.9317); cone law: (0.0046,0.9317))   [460s]
+p=0.2 u=4.0 e=+0.81985: sup over |U|=2 laws of V - R^max(e) found = -2.030e-04  (R^max(e)=0.017915; at P(u2)=0.5649, mu=(0.0000,0.9318); cone law: (0.0046,0.9317))   [477s]
+max |F(g,t)/t - chord gap of ln C| at t = 1e-6 over 2000 random (p,u,g): 4.4e-06
+
+real	7m57.234s
+user	7m51.402s
+sys	0m0.311s

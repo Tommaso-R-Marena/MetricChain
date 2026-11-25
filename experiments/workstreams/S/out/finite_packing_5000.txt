@@ -1,0 +1,2 @@
+#     N  walks  distinct (h,g) | max ||h||_c/N   min g/N at that point | packing lower bounds for N_cov:  L=1,eps=N/2   L=1,eps=N/4   L=1/5,eps=N/2   L=1/5,eps=N/4
+    5000   6196   6159        |    29.806         0.080            |              35            77              6              12

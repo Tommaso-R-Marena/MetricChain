@@ -1,0 +1,10 @@
+# pchain index=3 sublattices=13 leaves=1048 chain_systems=999 ; columns: n e3 e8 e11 gmin gmax (per cell)
+2 2 2 2 0 0
+2 2 4 4 0 0
+2 3 6 3 0 0
+4 4 16 16 0 0
+4 5 14 17 2 2
+4 6 14 14 0 4
+4 6 16 16 0 0
+4 7 18 15 0 0
+6 12 36 36 0 6

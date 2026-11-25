@@ -1,0 +1,14 @@
+site programme: 176 allowed non-empty patterns, 1757 equality rows
+Theorem 4.2: LP optimum equals b for each of the eleven rows (|diff| < 1e-7)
+K1: the rows cut out exactly the 12 listed vertices; volume = 3.2269 (10.8 % of the bulk box; 48.40 in u-coordinates)
+  support function of the LP set = support function of K1 in 400 random directions (max |diff| = 3.8e-09)
+path programme: 339 non-empty configurations, 3531 equality rows
+Theorem 4.2'(i): LP optimum equals b for each of the twelve rows
+K2: the rows cut out exactly the 12 listed vertices; volume = 3.1250 (10.4 % of the bulk box; 46.88 in u-coordinates)
+  support function of the path-LP set = support function of K2 in 400 random directions (max |diff| = 1.4e-14)
+Theorem 4.2'(ii): max of 2p11-5p3-q, 2p11-p8-q, p11+p8-4p3-q over the path programme = 8, 7, 7
+  gamma_LP(0, 2.4, 4.4) = 0.800000
+  gamma_LP(0, 2.5714285714285716, 4.357142857142857) = 0.714286
+  gamma_LP(1, 5, 6) = 0.000000
+  gamma_LP(0.5, 2, 1.5) = 0.000000
+PART 3 OK

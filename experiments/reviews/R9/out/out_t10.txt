@@ -1,0 +1,5 @@
+210 (set, m) instances, n in 5..9, random p: violations of (2): 0, of (3): 0; max |I(X_I;V|U_I) - (alpha_C~ - alpha)| = 5.6e-16; Step 4 mean deviations <= 3.6e-15; Step 5: max [n^-1 D(P_X'^n||Q^n) - I(X';U) - (alpha_C~ - alpha)] = +2.78e-16 (must be <= 0)   [1s]
+
+real	0m1.095s
+user	0m1.324s
+sys	0m0.020s

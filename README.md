@@ -18,7 +18,7 @@ evaluation only.
 | how the program evolved and what is open | [`docs/RESEARCH_LOG.md`](docs/RESEARCH_LOG.md) |
 | what turned out false, weaker, or already known | [`docs/DEAD_ENDS.md`](docs/DEAD_ENDS.md) |
 | the literature checks behind the novelty assessments | [`docs/prior_art/`](docs/prior_art) |
-| the independent referee reports on the theory report (eight so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md), [`R5`](docs/reviews/R5_referee_report.md), [`R6`](docs/reviews/R6_referee_report.md), [`R7`](docs/reviews/R7_referee_report.md), [`R8`](docs/reviews/R8_referee_report.md) |
+| the independent referee reports on the theory report (nine so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md), [`R5`](docs/reviews/R5_referee_report.md), [`R6`](docs/reviews/R6_referee_report.md), [`R7`](docs/reviews/R7_referee_report.md), [`R8`](docs/reviews/R8_referee_report.md), [`R9`](docs/reviews/R9_referee_report.md) |
 | the independent reviews of the workstream reports | [`docs/reviews/`](docs/reviews) (`R_B_review.md`, `R_C_review.md`, `R_D_review.md`, `R_E_review.md`, `R_G_review.md`, `R_P_review.md`) |
 | collaboration with the Computational Research Division (branch `research/ubuntu-engineering`): protocol, status, messages and computational requests | [`docs/collaboration/`](docs/collaboration/README.md), digest in [`THEORY_TO_ENGINEERING.md`](docs/collaboration/THEORY_TO_ENGINEERING.md) |
 | reports of independent exploratory workstreams (as delivered; not part of the theory report unless it says so) | [`docs/workstreams/`](docs/workstreams) |
@@ -237,7 +237,10 @@ algebra of the bracket and of the count; simulated with the constants of the the
 a violation (scripts in `experiments/workstreams/K/`).  The coordinator's own sketch of this
 step was wrong in its mechanism (D46).
 (v) *With a known part* (theory report §11.20; workstream F, `docs/workstreams/F_REPORT.md`;
-**paper proofs under independent review at this checkpoint — unrefereed**).  The first step
+**paper proofs, refereed** — `docs/reviews/R9_referee_report.md`: no critical finding; the new
+isoperimetric theorem and the non-adaptive exponent proved; the adaptive exponent proved
+after two gaps in the written proof of the algorithmic part were closed, one of them a
+real parameter change for strong fields).  The first step
 beyond the uniform cube: a field as known part, i.e. a `p`-biased product reference measure.
 The exponents are again single-letter, and "adaptive = hinted" persists in the form *the
 worst case without a hint is the hardest case with a hint* — but three things that look
@@ -245,12 +248,15 @@ obvious on the uniform cube are false with a field (D47): the hardest instance i
 zero residual but an additive residual that partly cancels the field; the right sample is
 not the Gibbs measure of the known part but uniform on every type class (a flat histogram
 in the magnetisation — plain Monte Carlo from the Gibbs measure is worse by up to a factor
-2.9 in the exponent); and the isoperimetric input is not that of a fixed product measure
-but a new asymptotic statement for a "flat-histogram" reference instance, proved by the
-method of types.  Machine-checked: the identity between the three rates (`FieldShift.lean`)
-and the convergence of the exact recursion for any pair of exponent functions with the
-abstract properties; the central formulas were re-computed by the coordinator
-(`experiments/coordinator_checks/f_spot_checks.py`).
+2.9 in the exponent, by an elementary lower bound; the best single tilted product measure
+is worse by 0.5–3 % in the examples computed); and the isoperimetric input is not that of
+a fixed product measure but a new asymptotic statement for a "flat-histogram" reference
+instance, proved by the method of types.  A field always helps: every exponent decreases
+with the strength of the field (proved by the coordinator, refereed).  Machine-checked: the
+identity between the three rates (`FieldShift.lean`) and the convergence of the exact
+recursion for any pair of exponent functions with the abstract properties; the central
+formulas were re-computed by the coordinator and, independently, by the referee
+(`experiments/coordinator_checks/`, `experiments/reviews/R9/`).
 (vi) *The common structure* (theory report §11.21; workstream M; machine-checked).  In both
 cases the non-adaptive curve is the hinted curve sheared by its own height — with a budget
 of `e^{nθ}` evaluations a non-adaptive algorithm certifies an accuracy rate that is worse by
@@ -259,6 +265,18 @@ exactly `θ` — and the analytic core is one theorem about arbitrary game funct
 which the convergence theorem applies, and the exact level recursion converges to `R`
 (`GamePair.lean`).  What a problem must supply beyond that — a lower bound of this form, a
 reference instance with the matching isoperimetric exponent, and fibres — is listed there.
+(vii) *Chains in the thermodynamic limit* (theory report §11.22; workstream S,
+`docs/workstreams/S_REPORT.md`; **paper proofs with computer-assisted parts, checked by the
+coordinator with independent code, no separate referee**).  The Computational Research
+Division measured that certificates in the profile format grow with the chain at every
+size that can be enumerated and asked what the limit is.  For the lattice chain: the
+normalised sets of (pair-count profile, number of gauche torsions) of *bridges* converge to
+a compact convex **limit shape**; the certificate sizes converge to a covering number of
+it; for unrestricted walks this is a conjecture with unconditional bounds — **the plateau
+is between 50 and 3 627 evaluations at `(L, ε₁) = (1, ½)`, where the earlier existence bound
+gave `10^{1387}`**, most likely a few hundred, and it is reached only at `10³`–`10⁵` beads,
+because the shape converges with a surface correction of exact order `N^{-1/3}`.  The
+coordinator's brief for this workstream had the profile distance wrong (D48).
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
@@ -269,9 +287,12 @@ part or a field), with paper proofs wherever the theory report does not name a L
 newest of them — the adaptive exponent — has a machine-checked recursion and bracket but a
 paper proof for the number of evaluations, its extension to bounded accuracies is refereed
 but has been run with three nested levels only at toy sizes and at the flat instance, its
-extension to a field as known part was still under review when this was written, and its
+extension to a field as known part is refereed but its nested algorithm has never been
+simulated end to end, and its
 algorithms are
 not practical at any size that can be simulated.  The chain-length independence of profile certificates is a bound, not an
-observation: at every enumerated size the certificates grow.  `docs/THEORY_REPORT.md` §8 lists the limitations, §10 ends with a
+observation: at every enumerated size the certificates grow; the limit theorem of §11.22 is
+proved for bridges only, is a conjecture for unrestricted walks, concerns one synthetic
+lattice model, and has not been read by a separate referee.  `docs/THEORY_REPORT.md` §8 lists the limitations, §10 ends with a
 one-table summary of what each kind of knowledge about the residual costs, and
 `docs/DEAD_ENDS.md` records every claim that was made and withdrawn.

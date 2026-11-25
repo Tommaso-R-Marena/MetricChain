@@ -1,0 +1,25 @@
+n=3: 254 subsets; family of balls with type-dependent radii: 134 sets
+  p=0.1 u=2.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.016 (at q=0.1422);  max defect ln Phi+ - n (R^max)^-1(theta) = 9.390 = 8.55 ln n (|D|=7, theta=0.017); family only: 9.390;  least omega for all sets = 0.2820 (family only: 0.2820)   [1s]
+  p=0.3 u=1.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.064 (at q=0.1713);  max defect ln Phi+ - n (R^max)^-1(theta) = 3.667 = 3.34 ln n (|D|=7, theta=0.033); family only: 3.667;  least omega for all sets = 0.2849 (family only: 0.2849)   [2s]
+  p=0.2 u=4.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.000 (at q=0.0552);  max defect ln Phi+ - n (R^max)^-1(theta) = 14.135 = 12.87 ln n (|D|=7, theta=0.120); family only: 14.135;  least omega for all sets = 0.6858 (family only: 0.6858)   [2s]
+  p=0.5 u=1.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.393 (at q=0.3548);  max defect ln Phi+ - n (R^max)^-1(theta) = 2.730 = 2.48 ln n (|D|=7, theta=0.089); family only: 2.730;  least omega for all sets = 0.2650 (family only: 0.2562)   [3s]
+  p=0.5 u=2.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.511 (at q=0.2627);  max defect ln Phi+ - n (R^max)^-1(theta) = 5.325 = 4.85 ln n (|D|=7, theta=0.120); family only: 5.325;  least omega for all sets = 0.4260 (family only: 0.4260)   [4s]
+  p=0.3 u=3.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.000 (at q=0.0582);  max defect ln Phi+ - n (R^max)^-1(theta) = 9.946 = 9.05 ln n (|D|=7, theta=0.111); family only: 9.946;  least omega for all sets = 0.6256 (family only: 0.6256)   [5s]
+  p=0.2 u=6.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.000 (at q=0.0518);  max defect ln Phi+ - n (R^max)^-1(theta) = 18.995 = 17.29 ln n (|D|=7, theta=0.138); family only: 18.995;  least omega for all sets = 0.7835 (family only: 0.7835)   [6s]
+  p=0.5 u=4.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.579 (at q=0.2129);  max defect ln Phi+ - n (R^max)^-1(theta) = 10.086 = 9.18 ln n (|D|=7, theta=0.139); family only: 10.086;  least omega for all sets = 0.6170 (family only: 0.6170)   [7s]
+  p=0.5 u=6.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.588 (at q=0.2062);  max defect ln Phi+ - n (R^max)^-1(theta) = 14.683 = 13.37 ln n (|D|=7, theta=0.141); family only: 14.683;  least omega for all sets = 0.7365 (family only: 0.7365)   [8s]
+n=4: 65534 subsets; family of balls with type-dependent radii: 1310 sets
+  p=0.1 u=2.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.286 (at q=0.1913);  max defect ln Phi+ - n (R^max)^-1(theta) = 12.417 = 8.96 ln n (|D|=15, theta=0.005); family only: 12.417;  least omega for all sets = 0.2602 (family only: 0.2602)   [62s]
+  p=0.3 u=1.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.427 (at q=0.2558);  max defect ln Phi+ - n (R^max)^-1(theta) = 4.829 = 3.48 ln n (|D|=15, theta=0.012); family only: 4.829;  least omega for all sets = 0.2085 (family only: 0.2085)   [115s]
+  p=0.2 u=4.0: max_q Xi_H(q)/[best family set with mu<=q] = 2.080 (at q=0.2988);  max defect ln Phi+ - n (R^max)^-1(theta) = 18.336 = 13.23 ln n (|D|=15, theta=0.074); family only: 18.336;  least omega for all sets = 0.5444 (family only: 0.5444)   [168s]
+  p=0.5 u=1.0: max_q Xi_H(q)/[best family set with mu<=q] = 2.000 (at q=0.0700);  max defect ln Phi+ - n (R^max)^-1(theta) = 3.520 = 2.54 ln n (|D|=15, theta=0.044); family only: 3.520;  least omega for all sets = 0.2216 (family only: 0.2216)   [229s]
+  p=0.5 u=2.0: max_q Xi_H(q)/[best family set with mu<=q] = 2.000 (at q=0.0516);  max defect ln Phi+ - n (R^max)^-1(theta) = 6.873 = 4.96 ln n (|D|=15, theta=0.071); family only: 6.873;  least omega for all sets = 0.3703 (family only: 0.3703)   [287s]
+  p=0.3 u=3.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.673 (at q=0.1657);  max defect ln Phi+ - n (R^max)^-1(theta) = 12.893 = 9.30 ln n (|D|=15, theta=0.066); family only: 12.893;  least omega for all sets = 0.4125 (family only: 0.4125)   [346s]
+  p=0.2 u=6.0: max_q Xi_H(q)/[best family set with mu<=q] = 1.781 (at q=0.2778);  max defect ln Phi+ - n (R^max)^-1(theta) = 24.466 = 17.65 ln n (|D|=15, theta=0.090); family only: 24.466;  least omega for all sets = 0.6090 (family only: 0.6090)   [408s]
+  p=0.5 u=4.0: max_q Xi_H(q)/[best family set with mu<=q] = 2.000 (at q=0.0406);  max defect ln Phi+ - n (R^max)^-1(theta) = 12.916 = 9.32 ln n (|D|=15, theta=0.090); family only: 12.916;  least omega for all sets = 0.5413 (family only: 0.5413)   [463s]
+  p=0.5 u=6.0: max_q Xi_H(q)/[best family set with mu<=q] = 2.000 (at q=0.0391);  max defect ln Phi+ - n (R^max)^-1(theta) = 18.682 = 13.48 ln n (|D|=15, theta=0.093); family only: 18.682;  least omega for all sets = 0.6476 (family only: 0.6476)   [521s]
+[521s]
+
+real	8m42.071s
+user	4m21.732s
+sys	4m2.320s

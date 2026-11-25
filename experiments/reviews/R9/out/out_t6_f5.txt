@@ -1,0 +1,18 @@
+Lemma F5 on Q_4 (exact Xi_0 from all subsets); random psi in L_u and fibre averages over a second block
+  p=0.1 u=2.0 reference H: 2295 thresholds, max (lhs - rhs)/rhs = +2.18e-15, max lhs/rhs = 1.0000
+  p=0.1 u=2.0 reference zero: 1676 thresholds, max (lhs - rhs)/rhs = +7.96e-16, max lhs/rhs = 1.0000
+  p=0.1 u=2.0 reference add(gamma=-1.00): 2587 thresholds, max (lhs - rhs)/rhs = +1.32e-15, max lhs/rhs = 1.0000
+  p=0.1 u=2.0 reference add(gamma=+2.00): 2121 thresholds, max (lhs - rhs)/rhs = +8.81e-16, max lhs/rhs = 1.0000
+  p=0.3 u=1.0 reference H: 2587 thresholds, max (lhs - rhs)/rhs = +9.08e-16, max lhs/rhs = 1.0000
+  p=0.3 u=1.0 reference zero: 1676 thresholds, max (lhs - rhs)/rhs = +1.06e-15, max lhs/rhs = 1.0000
+  p=0.3 u=1.0 reference add(gamma=-0.50): 2563 thresholds, max (lhs - rhs)/rhs = +5.79e-16, max lhs/rhs = 1.0000
+  p=0.3 u=1.0 reference add(gamma=+1.00): 1992 thresholds, max (lhs - rhs)/rhs = +4.63e-16, max lhs/rhs = 1.0000
+  p=0.2 u=4.0 reference H: 2613 thresholds, max (lhs - rhs)/rhs = +1.34e-15, max lhs/rhs = 1.0000
+  p=0.2 u=4.0 reference zero: 1689 thresholds, max (lhs - rhs)/rhs = +2.38e-15, max lhs/rhs = 1.0000
+  p=0.2 u=4.0 reference add(gamma=-2.00): 2583 thresholds, max (lhs - rhs)/rhs = +3.57e-16, max lhs/rhs = 1.0000
+  p=0.2 u=4.0 reference add(gamma=+4.00): 2064 thresholds, max (lhs - rhs)/rhs = +2.02e-15, max lhs/rhs = 1.0000
+[1s]
+
+real	0m1.664s
+user	0m1.727s
+sys	0m0.158s

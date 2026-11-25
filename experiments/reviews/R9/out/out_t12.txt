@@ -1,0 +1,12 @@
+(0) |F closed form (b) - ln rho_theta(theta+gamma)| <= 1.9e-15  (3000 random points)
+(i) residual of rho'' + t tanh(x/2) rho' + (t(1-t)/4) sech^2(x/2) rho = 0 (finite differences): <= 1.2e-07; cases in which rho is not increasing-then-decreasing on the window: 0 of 2000
+(ii) |d/dgamma F(0,t) - (t/2)[tanh(t u A/2)/tanh(t u/2) - tanh(theta/2)]| <= 4.7e-11; not negative (theta > 0): 0 of 3000; quotient not increasing in t, or != tanh(theta/2) at t = 1, or A not in (0,1): 0
+(iii) |dF*/dtheta (finite differences of the maximum) - envelope formula| <= 4.1e-09; gamma* >= 0: 0; [P,Q] not inside the window / wrong length / centre not to the right: 0; dF*/dtheta >= 0: 0  (1500 random (theta > 0, u, t))
+      inequality ln cosh Q - ln cosh P >= (1-t)[ln cosh((theta+u)/2) - ln cosh((theta-u)/2)]: violated 0 times; least (avg over [P,Q] - avg over the window) = 8.88e-06
+(iv) lemma: average of f over [c-r, c+r] nonincreasing in r (c >= 0): 0 violations in 3000 random (f, c, radii); largest increase 1.8e-15 (quadrature error ~1e-6)
+      (mutation: c = -1 < 0: averages over r = 0.5, 2 are -0.7353, -0.4689 -- increasing, as it should be for c < 0)
+consequences on a grid (u in {0.3,1,2,4}, theta = 0, 0.25, ..., 6, 1001 values of t): violations of [F* even in theta, F*, E, a, R^max(0.02) nonincreasing in theta, gamma*(t) < 0 for theta > 0]: 0   [41s]
+
+real	0m41.938s
+user	0m32.909s
+sys	0m8.357s

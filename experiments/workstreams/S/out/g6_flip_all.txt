@@ -1,0 +1,2 @@
+arms 3..30: 784 hairpins, all self-avoiding; D - 14 d in [-15, -5]
+violations of D(a+2,b+2) = D(a,b) + 28 for a,b >= 5: 0 ; of D(a,b+2) = D(a,b) for b >= a+6, a >= 5: 0

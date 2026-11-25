@@ -1138,47 +1138,138 @@ from below.
 **Workstream M and the common structure** (theory report §11.21) and **harness blocks XVI,
 XVII** are described under the fifth checkpoint above.
 
-### Resume here (cycle 10, sixth checkpoint)
+### Cycle 10, seventh checkpoint — referee R9 on the known part; a limit shape for chains (theory report §11.22; 2026-11-25)
+
+**Referee report R9** (`reviews/R9_referee_report.md`; 22 scripts with outputs in
+`experiments/reviews/R9/`; addendum with the coordinator's proof: `reviews/R9_addendum_monotonicity.md`).
+**No critical finding.**  Theorem F4 = 11.61 (non-adaptive exponent with a field): proved.
+Theorem F6 = 11.63 (asymptotic isoperimetry for the flat-histogram reference, the critical
+part): proved — Lemma T, Lemma SL and Steps 1–6 re-derived line by line, the single-letter
+lemma confirmed by primal minimisation over kernels, the theorem tested on all subsets of
+`Q_3`, `Q_4`, by annealing on `Q_5`, `Q_6`, and on 3 494 multi-centre and centreless profile sets
+at `n = 80…240`; not a black-box corollary of the fixed-measure theorem.  Theorem F9 = 11.64
+(adaptive exponent): lower bound proved; upper bound proved with two gaps, both closed and
+now written into the proof — (M1) the induction over the levels with left limits (the
+induction of Theorem 11.54 applies verbatim; the workstream had repeated the compressed
+sentence that R7 objected to); (M2) for `|θ| > u` the number of potential inner calls is
+`4K·Z_H·e^{c₁n_o}` with `c₁ > ln 2`, so the inner failure probability must be `δe^{−c₁n}/(2⁶n⁴)`.
+The coordinator's proof of Proposition 11.65(b) (a field always helps): proved.  Twelve
+minor findings, all applied (errata at the head of `F_REPORT.md`); two of them concern
+things passed on to the other division and are corrected in THY-MSG-0008: "the exact tail
+function exceeds the best one-centre set by a factor at most 2 on `Q_4`" is false (`2.08` at
+`p = 0.2`, `u = 4`), and the table for single product samplers was inaccurate by up to 4 %
+(maximum over centre types at the end points, outside the grid scanned).  The lower bound
+for product samplers, `max(φ₀, φ₁)`, is now written out in Theorem 11.61 with a two-line
+proof (cone around a constant centre against its truncation) and re-computed
+(`experiments/coordinator_checks/r9_product_sampler_check.py`).  `DEAD_ENDS.md` D47, item 5.
+
+**Workstream S** (`workstreams/S_REPORT.md`; scripts and outputs in
+`experiments/workstreams/S/`) — the question of ENG-REQ-0001: what is the limit of the
+certificate sizes of the profile format, and when is it reached?  Results, integrated as
+theory report §11.22:
+
+* *Lemma 11.67* — the profile is a function of the site set (the coordinator's lemma of
+  THY-RES-0001) with local counting formulas: the profile part is a lattice-gas
+  ground-state problem.
+* *Lemma 11.68, Theorem 11.69* — bridges concatenate with three linker beads and errors
+  `(1, 9, 14; 1)`; by Fekete's lemma for sets their normalised `(profile, #gauche)` sets
+  converge to a compact convex body `K^{br}`, one-sided rate `168/(N+3)`.
+* *Lemma 11.70, Theorem 11.71* — covering numbers with position-dependent radii and
+  internal centres are stable under Hausdorff convergence of truncated epigraphs (slack
+  `(2L+e)η`, attained), hence the certificate sizes of bridges converge to the covering
+  number of the limit shape off a countable set of accuracies.  For all walks:
+  `50 ≤ liminf`, `limsup ≤ 3 627` at `(L, ε₁) = (1, ½)` (and `26 437` for every `N`), in place of
+  `10^{1387}`; explicit walks force at least 26 and 35 evaluations at `10³` and `5·10³` beads.
+* *Proposition 11.72* — outer polytopes from the cluster method with exact dual
+  certificates (`𝒦₁`: all finite site sets; `𝒦₂`: with chain marks; three lower bounds for the
+  gauche density); inner points from rods and rung-folded lamellae; the gauche function is
+  not identically zero (an explicit bridge with 166 199 beads).
+* *Proposition 11.73* — `‖N^x‖₁ ≤ 35N − 17.6N^{2/3} + 17` (Loomis–Whitney): the shape converges at
+  rate exactly `N^{-1/3}` at the crystal vertex; the exact data follow `35(1 − 1.8N^{-1/3})`;
+  enumeration cannot see the limit.
+* *Proposition 11.74* — single-flip constants `14d_j − 15 ≤ c_j ≤ 70(d_j + 3)`; the lower bounds for
+  per-torsion formats need the lower half only.
+* *Conjecture 11.75* — unrestricted walks have the same limit; equivalent to equality of
+  ground-state energies per bead of walks and bridges for all three-shell energies with a
+  stiffness term, and to "every walk has the `(h, g)` of `o(N)` bridges"; local surgery cannot
+  prove it (a double strand is rigid).
+
+**How S was checked.**  No separate referee.  The coordinator re-derived every proof by
+hand and re-computed every computer-assisted statement with independent code
+(`experiments/coordinator_checks/s_check1.py` … `s_check7.py`): the finite inequalities on all
+profile classes to 27 beads (own enumeration to 12, the other division's tables beyond);
+the concatenation lemma with an own implementation (48 058 concatenations; the placing
+symmetry is unique); both cluster programmes re-formulated and re-solved; the eleven site
+certificates verified, and fifteen own certificates of the marked programme found, in
+exact rational arithmetic; own lamella builder; the volume bounds to the last digit; own
+packings (52 and 162 where the workstream had 50 and 157); exact set covers at 15 and 21
+beads; the 166 199-bead bridge recounted.  No discrepancy.  Not re-done: the enumeration of
+periodic chain systems (inner hull), the generic bridge builder beyond one run, the
+estimates of the plateau.
+**One error of the coordinator** found by the workstream: the brief defined the profile
+distance as `9|Δh₃| + 4|Δh₈| + |Δh₁₁|` "equivalently" the cumulative `L¹` distance — not
+equivalent; the exact cover at 15 beads is 8 with the right norm and 10 with the wrong one.
+D48 (with four further items: no local surgery; the rate formula for integers; enumeration
+cannot see the plateau; convexity is not visible in the data).
+
+**Harness.**  Block XVIII (six tests for §11.22, 21 mutations, all caught) and the
+documented refutation DEAD.18 (the weighted norm).  Counts: 110 registered tests (92 must
+survive, 18 documented refutations); 207 mutations (206 caught, one expected pass).
+
+**Collaboration.**  THY-RES-0002 (full answer to ENG-REQ-0001), THY-MSG-0008 (R9 outcome;
+corrections of THY-MSG-0006 item 3 and of two validation targets of THY-REQ-0007),
+THY-REQ-0008 (ground states for the seven open vertices; walks against bridges at
+`10²`–`10³` beads; the plateau by exact set cover; off-lattice distance entropy).  The other
+division's branch was unchanged at `db56d05` at every fetch of this checkpoint.
+
+### Resume here (cycle 10, seventh checkpoint)
 
 Verified state: every module under `proofs/` (49 files) builds with zero warnings and is walked
-by the axiom audit (3255 declarations); the harness (103 registered tests: 86 that must survive,
-17 documented refutations) and its mutation tests (186 mutations: 185 caught, one expected
+by the axiom audit (3255 declarations); the harness (110 registered tests: 92 that must survive,
+18 documented refutations) and its mutation tests (207 mutations: 206 caught, one expected
 pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 (R5, R6,
-R_P), §11.18 (R7), §11.19 (R8: "proved").  Machine-checked: §11.21.  **Under review at this
-checkpoint, hence unrefereed:** §11.20 (referee R9; `reviews/R9_brief.md`; when the report
-exists it will be `reviews/R9_referee_report.md`), including the coordinator's proof of
-Proposition 11.65(b).  **Not refereed:** the
-revised Theorem 11.44, Proposition 11.50.  **Not checked by anyone:** the two-level algorithms
-at scale with real inner brackets on non-flat instances, or with four levels (THY-REQ-0001;
-three levels were run by referee R8 on cubes of ten coordinates and, exactly, at the flat
-instance).  Running, with outputs in the session's scratch directory until integrated:
-referee R9; workstream S (limit shape of profile sets; `workstreams/S_brief.md`).  In
-priority order:
+R_P), §11.18 (R7), §11.19 (R8: "proved"), §11.20 (R9: proved; two gaps closed).
+Machine-checked: §11.21.  **Checked by the coordinator with independent code, no separate
+referee:** §11.22.  **Not refereed:** the revised Theorem 11.44, Proposition 11.50.  **Not
+checked by anyone:** the two-level algorithms at scale with real inner brackets on non-flat
+instances, or with four levels (THY-REQ-0001); the nested algorithm with a field end to
+end; Theorem 11.63 on sets without symmetry for `n > 6`.  Nothing is running.  In priority
+order:
 
-1. **Act on R9** when it reports: corrections into §11.20 and the repository note of
-   `F_REPORT.md`; a D-entry for anything withdrawn; a linked THY-MSG to the other division
-   (it has been told that the result is under review).
-2. **Workstream S / ENG-REQ-0001**: complete THY-RES-0001 (linked update) with the bridge
-   theorem, the status of the buried-end problem, computable brackets for the plateau.
-3. **Synchronise with `research/ubuntu-engineering`** at every checkpoint (read-only; never
-   merge).  Open on their side: THY-REQ-0001 (not started; target now Algorithm 2L⁺),
-   -0003, -0004, the rest of -0002, and the new THY-REQ-0007 (exact tail function of the
-   flat-histogram reference on small cubes).
+1. **Known parts with interactions** — the largest open item of the query-complexity
+   theory (§12 item 2(d)(v)).  The natural first case, not yet attempted: a known part that
+   is a function of the type, `f(x) = nφ(|x|/n)` (mean-field models, Curie–Weiss).  Its Gibbs
+   measure is uniform on type classes, so Theorem 11.61(a), (b) hold verbatim and every
+   exponent is a type-level computation in which the known part enters only through the
+   rate function `I(κ)` of the type; conjecture: for convex `I` everything of §11.20 carries
+   over with `KL(·‖p)` replaced by `I` (reference: `ψ_H = −n·v`, `v` the largest `u`-Lipschitz
+   minorant of `I`; hardest instances additive); for non-convex `I` (two phases) the least
+   favourable instance is the flat-histogram one and is *not* additive.  Test the pair
+   identity (necessary condition of D45) numerically before proving anything.
+2. **Synchronise with `research/ubuntu-engineering`** at every checkpoint (read-only; never
+   merge).  Open on their side: THY-REQ-0001 (not started; target Algorithm 2L⁺), -0003,
+   -0004, the rest of -0002, -0007 (narrowed by THY-MSG-0008), -0008 (new).
+3. **The limit shape** (§12 item 9(a1)–(a6)): Conjecture 11.75; a second-level cluster
+   programme (two-shell cluster or six-ring) for the seven vertices of `𝒦₂` that no periodic
+   system attains; the routing lemma for periodic chain systems; an independent referee
+   for §11.22 if it is to carry more weight than an answer to a question.
 4. **Machine-check that the game functions of the two problems are game functions** in the
    sense of `GamePair.lean` (continuity, the two zeros, the two linear bounds; for the field
    also the closed form of Theorem 11.59(b)) and the shear law for their non-adaptive
    exponents — the abstract part is done (§11.21), these identifications are on paper.
-5. **Bounded accuracies with a field** (§11.19 is for the uniform cube; its ingredients are
-   Harper in both directions — with a field only exponents of the tail function are known).
+   Also natural Lean targets: Lemma 11.70 and the Fekete lemma for sets of Theorem 11.69.
+5. **A weighted Harper-type inequality** for the type-uniform measure and the slack of the
+   flat-histogram reference (finite `n`, usable error term) — it would make the nested
+   algorithm with a field explicit and is the missing ingredient for bounded accuracies
+   with a field; the exact maximisers on `Q_4` are not always one-centre balls (THY-REQ-0007).
 6. **Below the exponential scale** (§12 item 2(d)(i),(ii)): quantify the `o(n)`; a lower bound
    for a bounded number of levels or rounds matching `τ_k`; exponentially small accuracies.
 7. **A machine-checked count** for Theorems 11.52 / 11.56.
-8. **Chains** (theory report §12 item 9): the limit theorem (item 2 above); an upper bound
-   for "pair-additive plus a small remainder"; randomised algorithms for linear classes; the
+8. **Chains, the rest** (theory report §12 item 9(b)–(f)): an upper bound for
+   "pair-additive plus a small remainder"; randomised algorithms for linear classes; the
    cost of checking in the profile format; whether realistic residuals have a small
    per-pair constant (THY-REQ-0003).
-9. Larger alphabets, several site types, known parts with interactions (§11.20, remark (3):
-   a sketch for the first two, nothing for the third).
+9. Larger alphabets and several site types with a field (§11.20, remark (4): a sketch).
 10. The list of the earlier checkpoints, below, is otherwise unchanged.
 
 ### State at the end of cycle 9 (superseded in part by the list above)

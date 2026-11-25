@@ -5931,6 +5931,488 @@ def t_field_monotone(rng, trials):
     return True, stats
 
 
+# ----------------------------------------------------------------------------------------------
+# XVIII. Chains in the thermodynamic limit: profile sets of the diamond-lattice chain (theory report §11.22)
+# ----------------------------------------------------------------------------------------------
+
+LS_BV = [(1, 1, 1), (1, -1, -1), (-1, 1, -1), (-1, -1, 1)]
+LS_DISP = {d: [v for v in itertools.product(range(-3, 4), repeat=3) if v[0] ** 2 + v[1] ** 2 + v[2] ** 2 == d]
+           for d in (3, 8, 11)}
+# rows (c3, c8, c11; b; M) of Proposition 11.72(b)
+LS_ROWS = [((-1, 0, 0), 0, Fraction(1, 2)), ((4, -1, 0), 0, 5), ((6, -1, 0), 1, 6), ((-2, 1, 0), 3, 2), ((-1, 1, -1), 0, 3),
+           ((-1, 2, -1), 3, 4), ((-4, 2, -1), 2, 6), ((3, 4, -3), 5, 6), ((6, -2, 1), 2, 6), ((0, -1, 2), 7, 1),
+           ((-3, 0, 2), 9, 3)]
+# integer multipliers of the six star relations and y0 for the rows above (workstream S, exact certificates)
+LS_CERT = {(-4, 2, -1): ([0, -6, -6, 0, -18, -6], 0), (-3, 0, 2): ([-6, -18, -12, 0, -30, -18], 6),
+           (-2, 1, 0): ([0, -3, -3, 0, -15, -7], 2), (-1, 0, 0): ([0, 0, 0, 0, -3, -1], -1),
+           (-1, 1, -1): ([0, -3, -3, 0, -3, -3], 0), (-1, 2, -1): ([0, -6, -6, 0, -6, -2], 4),
+           (0, -1, 2): ([-6, -15, -9, 0, -15, -9], 6), (3, 4, -3): ([0, -12, -12, 0, 12, 0], 12),
+           (4, -1, 0): ([0, 3, 3, 0, 12, 6], 3), (6, -2, 1): ([-3, -3, 0, 0, 15, 9], 6), (6, -1, 0): ([0, 3, 3, 0, 21, 9], 6)}
+LS_STAR_KEYS = [(0, 0, 0), (0, 0, 1), (0, 1, 1), (1, 0, 0), (1, 0, 1), (1, 1, 1)]
+
+
+def ls_is_a(p):
+    return p[0] % 2 == 0 and p[1] % 2 == 0 and p[2] % 2 == 0 and (p[0] + p[1] + p[2]) % 4 == 0
+
+
+def ls_nbrs(p):
+    s = 1 if ls_is_a(p) else -1
+    return [(p[0] + s * a[0], p[1] + s * a[1], p[2] + s * a[2]) for a in LS_BV]
+
+
+def ls_sq(p, q):
+    return (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2 + (p[2] - q[2]) ** 2
+
+
+def ls_valid_walk(w):
+    if len(set(w)) != len(w):
+        return False
+    if not all(ls_is_a(p) or ls_is_a((p[0] - 1, p[1] - 1, p[2] - 1)) for p in w):
+        return False
+    return all(w[i + 1] in ls_nbrs(w[i]) for i in range(len(w) - 1))
+
+
+def ls_profile(w):
+    """(h3, h8, h11, gauche) from the definition: pairs p < q with q - p >= 3 at squared distance 3, 8, 11."""
+    idx = {p: i for i, p in enumerate(w)}
+    h = [0, 0, 0]
+    for i, p in enumerate(w):
+        for k, d in enumerate((3, 8, 11)):
+            for v in LS_DISP[d]:
+                j = idx.get((p[0] + v[0], p[1] + v[1], p[2] + v[2]))
+                if j is not None and j - i >= 3:
+                    h[k] += 1
+    g = sum(1 for i in range(len(w) - 3) if ls_sq(w[i], w[i + 3]) == 11)
+    return (h[0], h[1], h[2], g)
+
+
+def ls_site_counts(S):
+    """(e3, e8, e11, n_E, local e3, local e8, number of ordered gauche four-site paths) of a finite site set."""
+    S = set(S)
+    e = []
+    for d in (3, 8, 11):
+        e.append(sum(1 for p in S for v in LS_DISP[d] if (p[0] + v[0], p[1] + v[1], p[2] + v[2]) in S) // 2)
+    deg = {}
+    for p in S:
+        for q in ls_nbrs(p):
+            deg[q] = deg.get(q, 0) + 1
+    n_e = sum(1 for p in S if deg.get(p, 0) < 2)
+    loc3 = sum(deg.get(p, 0) for p in S)                       # = 2 e3
+    loc8 = sum(dd * (dd - 1) // 2 for dd in deg.values())      # sum over ALL lattice sites of C(d, 2)
+    paths = 0
+    for u_ in S:
+        for v_ in ls_nbrs(u_):
+            for w_ in ls_nbrs(v_):
+                if w_ == u_:
+                    continue
+                for z_ in ls_nbrs(w_):
+                    if z_ != v_ and z_ in S and ls_sq(u_, z_) == 11:
+                        paths += 1
+    return e[0], e[1], e[2], n_e, loc3, loc8, paths
+
+
+def ls_is_bridge(w):
+    y0, yl = w[0][1], w[-1][1]
+    return all(p[1] > y0 for p in w[1:]) and all(p[1] <= yl for p in w)
+
+
+def ls_cnorm(d):
+    return 5 * abs(d[0]) + 3 * abs(d[0] + d[1]) + abs(d[0] + d[1] + d[2])
+
+
+def ls_wnorm(d):
+    return 9 * abs(d[0]) + 4 * abs(d[1]) + abs(d[2])
+
+
+def ls_enum(nbeads, bridge=False):
+    """all walks with nbeads beads from the origin with first bond +a_0, or (bridge=True) all bridges from the origin"""
+    out, w, occ = [], [(0, 0, 0)], {(0, 0, 0)}
+
+    def rec():
+        if len(w) == nbeads:
+            if (not bridge) or all(p[1] <= w[-1][1] for p in w):
+                out.append(list(w))
+            return
+        for q in ls_nbrs(w[-1]):
+            if q in occ or (bridge and q[1] <= 0) or ((not bridge) and len(w) == 1 and q != (1, 1, 1)):
+                continue
+            occ.add(q); w.append(q)
+            rec()
+            occ.discard(q); w.pop()
+
+    rec()
+    return out
+
+
+def ls_lamella(M, Q, ell):
+    """rung-folded lamella (Proposition 11.72(d)): M x Q block of all-trans stems of ell periods in snake order"""
+    def site(m, q, t):
+        k, r = divmod(t, 2)
+        return (2 * m + 2 * q + r, 2 * m + 2 * k + r, 2 * q + 2 * k + r)
+    order = []
+    for q in range(Q):
+        order += [(m, q) for m in (range(M) if q % 2 == 0 else range(M - 1, -1, -1))]
+    w, up, t = [], True, -2
+    for i, (m, q) in enumerate(order):
+        if i == len(order) - 1:
+            t_end = 2 * ell + 1
+        else:
+            m2, q2 = order[i + 1]
+            plus = (m2 - m, q2 - q) in ((1, 0), (0, 1))
+            k = ell - 1 if up else 0
+            t_end = 2 * k + 1 if plus else 2 * k
+        step = 1 if up else -1
+        while True:
+            w.append(site(m, q, t))
+            if t == t_end:
+                break
+            t += step
+        if i < len(order) - 1:
+            t = 2 * k if plus else 2 * k + 1
+            up = not up
+    return w
+
+
+@conjecture("XVIII.1 Lemma 11.67, Proposition 11.72(a),(b), Proposition 11.73 (diamond-lattice chain, cutoff 12): for every walk the profile from the definition is h3 = e3(S) - (N-1), h8 = e8(S) - (N-2), h11 = e11(S) with S its site set; for every finite site set e3 = (1/2) sum_S d(m), e8 = sum over ALL lattice sites of C(d(m),2), and two sites at squared distance 11 are joined by exactly two three-bond paths; every walk satisfies h8 >= 4h3 - 2, h8 >= 6h3 - N - 4, h8 <= 2h3 + 3N + 3; every finite site set satisfies the eleven inequalities c3(e3-N) + c8(e8-N) + c11 e11 <= bN + 2M n_E; and e3 <= 2N - 2^(-2/3) N^(2/3), e8 <= 6N - 3N^(2/3), hence 9h3 + 4h8 + h11 <= 35N - 17.6 N^(2/3) + 17")
+def t_ls_site_sets(rng, trials):
+    stats = dict(walks=0, sets=0, tightest_row_slack=10 ** 9, largest_density=0.0)
+    sets = []
+    for N in range(4, (9 if trials < 100 else 10) + 1):
+        for w in ls_enum(N):
+            h3, h8, h11, g = ls_profile(w)
+            e3, e8, e11, n_e, loc3, loc8, paths = ls_site_counts(w)
+            if (h3, h8, h11) != (e3 - (N - 1), e8 - (N - 2), e11):
+                return False, dict(reason="the profile is not the site-set formula", N=N)
+            if not (h8 >= 4 * h3 - 2 and h8 >= 6 * h3 - N - 4 and h8 <= 2 * h3 + 3 * N + 3):
+                return False, dict(reason="a by-hand inequality of Proposition 11.72(a) fails", N=N, h=(h3, h8, h11))
+            if n_e > 2:
+                return False, dict(reason="a walk has more than two sites with fewer than two occupied neighbours", N=N)
+            sets.append((w, (e3, e8, e11, n_e, loc3, loc8, paths)))
+            stats["walks"] += 1
+    # lamellae and random finite site sets (arbitrary degrees): the finite-set forms
+    for (M, Q, ell) in ((3, 1, 5), (5, 1, 9), (3, 3, 4), (5, 5, 6), (7, 7, 8)):
+        w = ls_lamella(M, Q, ell)
+        if not (ls_valid_walk(w) and ls_is_bridge(w)) or ls_profile(w)[3] > 3 * (M * Q - 1):
+            return False, dict(reason="a rung-folded lamella is not a bridge with at most 3(MQ-1) gauche torsions", M=M, Q=Q, ell=ell)
+        sets.append((w, ls_site_counts(w)))
+    box = [p for p in itertools.product(range(0, 7), repeat=3) if ls_is_a(p) or ls_is_a((p[0] - 1, p[1] - 1, p[2] - 1))]
+    for rep in range(max(12, trials // 10)):
+        rho = float(rng.choice([0.25, 0.5, 0.75, 0.95, 1.0]))
+        S = [p for p in box if rng.random() < rho]
+        if len(S) >= 2:
+            sets.append((S, ls_site_counts(S)))
+    for S, (e3, e8, e11, n_e, loc3, loc8, paths) in sets:
+        N = len(S)
+        if loc3 != 2 * e3 or loc8 != e8 or paths != 4 * e11:
+            return False, dict(reason="a local counting formula fails", N=N)
+        for (c, b, M_) in LS_ROWS:
+            slack = b * N + 2 * M_ * n_e - (c[0] * (e3 - N) + c[1] * (e8 - N) + c[2] * e11)
+            if slack < 0:
+                return False, dict(reason="one of the eleven inequalities fails on a finite site set", N=N, row=c)
+            stats["tightest_row_slack"] = min(stats["tightest_row_slack"], float(slack))
+        if e3 > 2 * N - 2 ** (-2 / 3) * N ** (2 / 3) + 1e-9 or e8 > 6 * N - 3 * N ** (2 / 3) + 1e-9:
+            return False, dict(reason="an isoperimetric bound of Proposition 11.73 fails", N=N, e3=e3, e8=e8)
+        if 9 * (e3 - N + 1) + 4 * (e8 - N + 2) + e11 > 35 * N - 17.6 * N ** (2 / 3) + 17 + 1e-9 and e11 <= 6 * N:
+            return False, dict(reason="the surface bound on the profile norm fails", N=N)
+        stats["largest_density"] = max(stats["largest_density"], (9 * (e3 - N) + 4 * (e8 - N) + e11) / N)
+        stats["sets"] += 1
+    return True, stats
+
+
+LS_SIGNED_PERMS = [(perm, sg) for perm in itertools.permutations(range(3)) for sg in itertools.product((1, -1), repeat=3)]
+
+
+def ls_concat(x1, x2, which=0, force_other=False):
+    """the bridge of Lemma 11.68 built from x1, three linker beads and the copy of x2 that continues the zigzag;
+    returns (walk, b' is a down-bond, number of admissible copies)"""
+    P = x1[-1]
+    b = tuple(x1[-1][i] - x1[-2][i] for i in range(3))
+    bp = tuple(x1[-2][i] - x1[-3][i] for i in range(3))
+    down = (bp[1] == -1)
+    ups = [tuple(q[i] - P[i] for i in range(3)) for q in ls_nbrs(P) if q[1] == P[1] + 1]
+    if down:
+        c1 = ups[which]
+    elif force_other:
+        c1 = [v for v in ups if v != bp][0]
+    else:
+        c1 = bp
+    add = lambda p, v: (p[0] + v[0], p[1] + v[1], p[2] + v[2])
+    l1 = add(P, c1); l2 = add(l1, b); l3 = add(l2, c1); Q = add(l3, b)
+    copies = []
+    for perm, sg in LS_SIGNED_PERMS:
+        if (perm[1], sg[1]) != (1, 1):
+            continue                                   # must fix the y-axis
+        img = []
+        for p in x2:
+            v = (p[0] - x2[0][0], p[1] - x2[0][1], p[2] - x2[0][2])
+            img.append(add((sg[0] * v[perm[0]], sg[1] * v[perm[1]], sg[2] * v[perm[2]]), Q))
+        if tuple(img[1][i] - img[0][i] for i in range(3)) != c1 or tuple(img[2][i] - img[1][i] for i in range(3)) != b:
+            continue
+        if ls_valid_walk(img):
+            copies.append(img)
+    return (x1 + [l1, l2, l3] + copies[0]) if copies else None, down, len(copies)
+
+
+@conjecture("XVIII.2 Lemma 11.68 (concatenation of bridges on the diamond lattice): for bridges x1, x2 with at least 3 beads the copy of x2 that continues the linker zigzag by a height-preserving lattice symmetry exists and is unique; x1, three linker beads and the copy form a bridge with N1 + N2 + 3 beads whose (h3, h8, h11, gauche) exceeds the sum by (d3, d8, d11, dg) with 0 <= d3 <= 1, 0 <= d8 <= 9, 0 <= d11 <= 14 and dg = [the second-to-last bond of x1 is a down-bond]; appending one bead to a bridge changes them by a vector in [0,1]x[0,3]x[0,6]x[0,1]")
+def t_ls_concatenation(rng, trials):
+    nfull, nsamp = (5, 8) if trials < 100 else (6, 9)
+    br = {N: ls_enum(N, bridge=True) for N in range(3, nsamp + 1)}
+    pr = {N: [ls_profile(w) for w in br[N]] for N in br}
+    stats = dict(concatenations=0, max_d8=0, max_d11=0, gauche_linkers=0)
+    for N in br:
+        for w, p in zip(br[N], pr[N]):
+            bp = w[-2][1] - w[-3][1]
+            P = w[-1]
+            cs = [tuple(w[-2][i] - w[-3][i] for i in range(3))] if bp == 1 else \
+                [tuple(q[i] - P[i] for i in range(3)) for q in ls_nbrs(P) if q[1] == P[1] + 1]
+            for c1 in cs:
+                x = w + [(P[0] + c1[0], P[1] + c1[1], P[2] + c1[2])]
+                if not (ls_valid_walk(x) and ls_is_bridge(x)):
+                    return False, dict(reason="appending the prescribed bead does not give a bridge", N=N)
+                q_ = ls_profile(x)
+                d = tuple(q_[i] - p[i] for i in range(4))
+                if not (0 <= d[0] <= 1 and 0 <= d[1] <= 3 and 0 <= d[2] <= 6 and d[3] == (0 if bp == 1 else 1)):
+                    return False, dict(reason="one more bead changes the counts by more than (1, 3, 6; 1)", N=N, d=d)
+
+    def check(N1, i, N2, j):
+        x1, x2 = br[N1][i], br[N2][j]
+        for which in ((0, 1) if x1[-2][1] - x1[-3][1] == -1 else (0,)):
+            x, down, ncopies = ls_concat(x1, x2, which)
+            if ncopies != 1:
+                return dict(reason="the placing symmetry is not unique", copies=ncopies)
+            if not (ls_valid_walk(x) and ls_is_bridge(x) and len(x) == N1 + N2 + 3):
+                return dict(reason="the concatenation is not a bridge with N1 + N2 + 3 beads")
+            p = ls_profile(x)
+            d = tuple(p[k] - pr[N1][i][k] - pr[N2][j][k] for k in range(4))
+            if not (0 <= d[0] <= 1 and 0 <= d[1] <= 9 and 0 <= d[2] <= 14):
+                return dict(reason="a concatenation error is outside the proved interval", d=d)
+            if d[3] != (1 if down else 0):
+                return dict(reason="the gauche error is not [b' is a down-bond]", d=d, down=down)
+            stats["concatenations"] += 1
+            stats["max_d8"] = max(stats["max_d8"], d[1]); stats["max_d11"] = max(stats["max_d11"], d[2])
+            stats["gauche_linkers"] += d[3]
+        return None
+
+    for N1 in range(3, nfull + 1):
+        for N2 in range(3, nfull + 1):
+            for i in range(len(br[N1])):
+                for j in range(len(br[N2])):
+                    bad = check(N1, i, N2, j)
+                    if bad:
+                        return False, bad
+    for _ in range(max(150, trials)):
+        N1, N2 = int(rng.integers(3, nsamp + 1)), int(rng.integers(3, nsamp + 1))
+        bad = check(N1, int(rng.integers(len(br[N1]))), N2, int(rng.integers(len(br[N2]))))
+        if bad:
+            return False, bad
+    return True, stats
+
+
+def ls_cover_number(F, L, e, eps, norm):
+    """least number of centres among the first components of F such that every (p, g) in F has a centre a with
+    L |a - p| <= e g + eps  (brute force over subsets by increasing size)"""
+    cents = sorted(set(p for p, _ in F))
+    covers = [[i for i, (p, g) in enumerate(F) if L * norm(a, p) <= e * g + eps + 1e-12] for a in cents]
+    full = set(range(len(F)))
+    if set().union(*[set(c) for c in covers]) != full:
+        return math.inf
+    for k in range(1, len(cents) + 1):
+        for comb in itertools.combinations(range(len(cents)), k):
+            if set().union(*[set(covers[i]) for i in comb]) == full:
+                return k
+    return math.inf
+
+
+@conjecture("XVIII.3 Lemma 11.70 (stability of covering numbers with position-dependent radii and internal centres): N(F, eps) is unchanged when points (p, t) with t above the lower boundary are added; if every point of F is within eta of F' and conversely (distance max(|dp|, |dg|)), then N(F', eps + (2L+e) eta) <= N(F, eps) <= N(F', eps - (2L+e) eta), and the constant 2L + e cannot be improved; and at a jump of eps -> N(F, eps) the covering numbers of a convergent sequence need not converge: F = {(0,0), (1,0)}, F_N = {(0,0), (1 + 1/N, 0)}, eps = L")
+def t_ls_cover_stability(rng, trials):
+    stats = dict(instances=0, strict_changes=0)
+    l1 = lambda a, b: float(sum(abs(x - y) for x, y in zip(a, b)))
+    for rep in range(max(40, trials // 2)):
+        dim = int(rng.integers(1, 3))
+        m = int(rng.integers(3, 8))
+        L, e = float(rng.choice([0.5, 1.0, 2.0])), float(rng.choice([0.0, 0.5, 1.0]))
+        F = [(tuple(float(v) for v in np.round(rng.uniform(0, 4, size=dim), 2)), float(np.round(rng.uniform(0, 1), 2)))
+             for _ in range(m)]
+        eps = float(rng.uniform(0.2, 2.5))
+        eta = float(rng.choice([0.02, 0.1, 0.3]))
+        n0 = ls_cover_number(F, L, e, eps, l1)
+        # (a) the truncated epigraph: add points above existing ones
+        Fup = F + [(p, min(1.5, g + float(rng.uniform(0, 1)))) for p, g in F[: m // 2 + 1]]
+        if ls_cover_number(Fup, L, e, eps, l1) != n0:
+            return False, dict(reason="adding points above the lower boundary changes the covering number")
+        # (b) a perturbation within Hausdorff distance eta: move every point (adversarially: by exactly +-eta in one
+        #     coordinate of p and by +-eta in g), and duplicate some points nearby
+        F2 = []
+        for p, g in F:
+            k = int(rng.integers(dim))
+            p2 = tuple(p[i] + (eta * float(rng.choice([-1.0, 1.0])) if i == k else 0.0) for i in range(dim))
+            F2.append((p2, max(0.0, g + eta * float(rng.choice([-1.0, 0.0, 1.0])))))
+        for p, g in F[:2]:
+            F2.append((tuple(p[i] + (eta * float(rng.uniform(-1, 1)) if i == 0 else 0.0) for i in range(dim)), g))
+        shift = (2 * L + e) * eta
+        lo = ls_cover_number(F2, L, e, eps + shift, l1)
+        hi = ls_cover_number(F2, L, e, eps - shift, l1)
+        if not (lo <= n0 <= hi):
+            return False, dict(reason="the two-sided stability inequality fails", n0=n0, lo=lo, hi=hi, L=L, e=e, eta=eta)
+        stats["strict_changes"] += int(lo < n0) + int(n0 < hi)
+        stats["instances"] += 1
+    # the constant 2L + e cannot be improved: two points on the line, the client moved away by 2 eta in all and its
+    # gauche credit lowered by eta
+    l1s = lambda a, b: abs(a[0] - b[0])
+    for (L, e, x, g, eta) in ((1.0, 1.0, 2.0, 0.5, 0.1), (0.5, 2.0, 3.0, 0.4, 0.05), (2.0, 0.5, 1.0, 0.6, 0.2)):
+        eps = L * x - e * g
+        F = [((0.0,), 0.0), ((x,), g)]
+        F2 = [((-eta,), 0.0), ((x + eta,), g - eta)]
+        shift = (2 * L + e) * eta
+        if ls_cover_number(F, L, e, eps, l1s) != 1 or ls_cover_number(F2, L, e, eps + shift, l1s) > 1:
+            return False, dict(reason="the stability inequality fails on the extremal two-point instance", L=L, e=e, eta=eta)
+        if ls_cover_number(F2, L, e, eps + (2 * L + e) * eta - 0.01 * eta, l1s) != 2:
+            return False, dict(reason="the constant 2L + e is not attained on the two-point instance", L=L, e=e, eta=eta)
+    # the exceptional accuracy
+    L = 1.0
+    if ls_cover_number([((0.0,), 0.0), ((1.0,), 0.0)], L, 1.0, L, l1s) != 1:
+        return False, dict(reason="the limit set at the jump accuracy is not covered by one centre")
+    for N in (10, 1000, 10 ** 6):
+        FN = [((0.0,), 0.0), ((1.0 + 1.0 / N,), 0.0)]
+        if ls_cover_number(FN, L, 1.0, L, l1s) != 2:
+            return False, dict(reason="the approximating sets are covered by one centre at the jump accuracy")
+        if ls_cover_number(FN, L, 1.0, 1.01 * L, l1s) != (1 if N >= 1000 else 2):
+            return False, dict(reason="off the jump the covering numbers do not converge as predicted", N=N)
+    return True, stats
+
+
+@conjecture("XVIII.4 The profile distance of the lattice chain (Theorem 11.48(b) with three distances 3, 8, 11 below the cutoff 12): the L1 distance of the cumulative pair-count functions on [0, 12) is ||dh||_c = 5|dh3| + 3|dh3 + dh8| + |dh3 + dh8 + dh11|; it is at most 9|dh3| + 4|dh8| + |dh11| with equality if and only if no two of the three differences have opposite signs; for a single profile both are 9h3 + 4h8 + h11")
+def t_ls_profile_norm(rng, trials):
+    stats = dict(pairs=0, strict=0)
+    grid = np.arange(0, 12, 0.5) + 0.25                       # midpoints of half-unit cells on [0, 12)
+
+    def cum(h):
+        return (grid >= 3) * h[0] + (grid >= 8) * h[1] + (grid >= 11) * h[2]
+    profs = sorted(set(ls_profile(w)[:3] for N in (8, 9) for w in ls_enum(N)))
+    cand = [(profs[int(rng.integers(len(profs)))], profs[int(rng.integers(len(profs)))]) for _ in range(max(200, trials))]
+    cand += [(tuple(int(v) for v in rng.integers(0, 9, size=3)), tuple(int(v) for v in rng.integers(0, 9, size=3)))
+             for _ in range(max(200, trials))]
+    for h, k in cand:
+        d = (h[0] - k[0], h[1] - k[1], h[2] - k[2])
+        l1 = float(np.abs(cum(h) - cum(k)).sum() * 0.5)
+        if abs(l1 - ls_cnorm(d)) > 1e-9:
+            return False, dict(reason="the cumulative norm is not the L1 distance of the cumulative profiles", h=h, k=k)
+        if ls_cnorm(d) > ls_wnorm(d):
+            return False, dict(reason="the cumulative norm exceeds the weighted form", d=d)
+        mixed = any(d[i] * d[j] < 0 for i in range(3) for j in range(i + 1, 3))
+        if (ls_cnorm(d) == ls_wnorm(d)) == mixed:
+            return False, dict(reason="equality with the weighted form does not match the sign condition", d=d)
+        if ls_cnorm(h) != 9 * h[0] + 4 * h[1] + h[2]:
+            return False, dict(reason="the norm of a single profile is not 9h3 + 4h8 + h11", h=h)
+        stats["pairs"] += 1; stats["strict"] += int(mixed)
+    return True, stats
+
+
+def ls_torsion_walk(states):
+    """walk from torsion states: 't' or 0/1 (the two gauche continuations in increasing order of the bond index)"""
+    b = [0, 1]
+    for s in states:
+        i, j = b[-2], b[-1]
+        b.append(i if s == 't' else [k for k in range(4) if k not in (i, j)][s])
+    p = (0, 0, 0)
+    w = [p]
+    for i in b:
+        s = 1 if ls_is_a(p) else -1
+        p = (p[0] + s * LS_BV[i][0], p[1] + s * LS_BV[i][1], p[2] + s * LS_BV[i][2])
+        w.append(p)
+    return w
+
+
+@conjecture("XVIII.5 Proposition 11.74 (single-flip constants of the lattice chain): for the hairpin t^a g g g t^b (two adjacent stems) and the conformation with its middle fold torsion set to trans, the profile distance D satisfies -15 <= D - 14 d <= -5 with d = min(a, b) + 2, whenever d >= 5; and for every pair of conformations that differ in one torsion j the profile distance is at most 70 (d_j + 3), d_j = min(j, n + 1 - j)")
+def t_ls_single_flip(rng, trials):
+    stats = dict(hairpins=0, lo=10 ** 9, hi=-10 ** 9, flips=0, largest_ratio=0.0)
+    amax = 10 if trials < 100 else 14
+    for a in range(3, amax + 1):
+        for b_ in range(3, amax + 1):
+            best = None
+            for fold in itertools.product((0, 1), repeat=3):
+                w = ls_torsion_walk(['t'] * a + list(fold) + ['t'] * b_)
+                if ls_valid_walk(w):
+                    p = ls_profile(w)
+                    if best is None or p[0] > best[0][0]:
+                        best = (p, fold)
+            p, fold = best
+            w2 = ls_torsion_walk(['t'] * a + [fold[0], 't', fold[2]] + ['t'] * b_)
+            if not ls_valid_walk(w2):
+                return False, dict(reason="the opened hairpin is not self-avoiding", a=a, b=b_)
+            p2 = ls_profile(w2)
+            D = ls_cnorm((p[0] - p2[0], p[1] - p2[1], p[2] - p2[2]))
+            d = min(a, b_) + 2
+            if d >= 5:
+                if not (-15 <= D - 14 * d <= -5):
+                    return False, dict(reason="the hairpin flip is outside 14 d - 15 ... 14 d - 5", a=a, b=b_, D=D)
+                stats["lo"] = min(stats["lo"], D - 14 * d); stats["hi"] = max(stats["hi"], D - 14 * d)
+                stats["hairpins"] += 1
+    # random single flips of random self-avoiding conformations
+    n = 9
+    for _ in range(max(300, trials)):
+        st = [('t' if rng.random() < 0.4 else int(rng.integers(2))) for _ in range(n)]
+        w = ls_torsion_walk(st)
+        if not ls_valid_walk(w):
+            continue
+        j = int(rng.integers(n))
+        alt = [s for s in ('t', 0, 1) if s != st[j]]
+        st2 = list(st); st2[j] = alt[int(rng.integers(2))]
+        w2 = ls_torsion_walk(st2)
+        if not ls_valid_walk(w2):
+            continue
+        p, p2 = ls_profile(w), ls_profile(w2)
+        D = ls_cnorm((p[0] - p2[0], p[1] - p2[1], p[2] - p2[2]))
+        dj = min(j + 1, n - j)
+        if D > 70 * (dj + 3):
+            return False, dict(reason="a single flip changes the profile by more than 70 (d_j + 3)", D=D, dj=dj)
+        stats["largest_ratio"] = max(stats["largest_ratio"], D / (70.0 * (dj + 3)))
+        stats["flips"] += 1
+    return True, stats
+
+
+@conjecture("XVIII.6 Proposition 11.72(b), exact certificates: on the eight-site cluster of a lattice bond (v, w; u1..u3; z1..z3) with integer multipliers y1..y6 of the star relations P(v, w=1, u1=0, u2, u3) = P(v, w=0, u1=1, u2, u3) and y0 = b + c3 + c8, the function c3*2[v][w] + c8*(C(d_v,2) + C(d_w,2))/2 + c11*sum_{j != k} u_j z_k - sum_k y_k r_k - y0 [v], averaged over the 12 symmetries of the cluster, is <= 0 on every pattern whose occupied centres have at least two occupied neighbours and <= M on the others — in exact rational arithmetic, for each of the eleven rows")
+def t_ls_exact_certificates(rng, trials):
+    V_, W_, U_, Z_ = 0, 1, (2, 3, 4), (5, 6, 7)
+    ex = {V_: W_, W_: V_}
+    for j in range(3):
+        ex[U_[j]] = Z_[j]; ex[Z_[j]] = U_[j]
+    syms = []
+    for pj in itertools.permutations(range(3)):
+        m = list(range(8))
+        for j in range(3):
+            m[U_[j]] = U_[pj[j]]; m[Z_[j]] = Z_[pj[j]]
+        syms.append(m)
+        syms.append([ex[m[s]] for s in range(8)])
+    dv = lambda s: s[W_] + s[2] + s[3] + s[4]
+    dw = lambda s: s[V_] + s[5] + s[6] + s[7]
+
+    def star(k, s):
+        v, u2, u3 = LS_STAR_KEYS[k]
+        base = s[V_] == v and s[U_[1]] == u2 and s[U_[2]] == u3
+        return int(base and s[W_] == 1 and s[U_[0]] == 0) - int(base and s[W_] == 0 and s[U_[0]] == 1)
+
+    def gfun(s, c, y, y0):
+        val = Fraction(c[0] * 2 * s[V_] * s[W_]) + Fraction(c[1] * (math.comb(dv(s), 2) + math.comb(dw(s), 2)), 2)
+        val += c[2] * sum(s[U_[j]] * s[Z_[k]] for j in range(3) for k in range(3) if j != k)
+        return val - sum(y[k] * star(k, s) for k in range(6)) - y0 * s[V_]
+    stats = dict(rows=0, tight_patterns=0)
+    for (c, b, M_) in LS_ROWS:
+        y, y0 = LS_CERT[c]
+        if y0 != b + c[0] + c[1]:
+            return False, dict(reason="y0 is not b + c3 + c8", row=c)
+        for s in itertools.product((0, 1), repeat=8):
+            if not any(s):
+                continue
+            avg = sum(gfun(tuple(s[m[i]] for i in range(8)), c, y, y0) for m in syms) / 12
+            forbidden = (s[V_] and dv(s) < 2) or (s[W_] and dw(s) < 2)
+            if avg > (M_ if forbidden else 0):
+                return False, dict(reason="a dual certificate fails on a cluster pattern", row=c, pattern=s)
+            stats["tight_patterns"] += int(avg == 0 and not forbidden)
+        stats["rows"] += 1
+    return True, stats
+
+
 @conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
 def t_dead_exact_free_energy(rng, trials):
     """Refuted (second referee, C1): with positive slack off the diagonal, an exact certificate of ln Z is the whole
@@ -6157,6 +6639,25 @@ def t_dead_line_known_part(rng, trials):
 # ----------------------------------------------------------------------------------------------
 # Driver
 # ----------------------------------------------------------------------------------------------
+
+@conjecture("DEAD.18 The profile distance of the diamond-lattice chain is the weighted form 9|dh3| + 4|dh8| + |dh11| (the coordinator's brief for workstream S: 'equivalently the L1 distance of cumulative profiles')", expect_fail=True)
+def t_dead_weighted_profile_norm(rng, trials):
+    """Refuted (workstream S; D48): the L1 distance of the cumulative pair-count functions is 5|dh3| + 3|dh3 + dh8| +
+    |dh3 + dh8 + dh11|, which is strictly smaller than the weighted form for pairs of conformations whose differences
+    have opposite signs — and such pairs exist already among chains with 9 beads."""
+    grid = np.arange(0, 12, 0.5) + 0.25
+    cum = lambda h: (grid >= 3) * h[0] + (grid >= 8) * h[1] + (grid >= 11) * h[2]
+    for N in (7, 8, 9, 10):
+        profs = sorted(set(ls_profile(w)[:3] for w in ls_enum(N)))
+        for h in profs:
+            for k in profs:
+                d = (h[0] - k[0], h[1] - k[1], h[2] - k[2])
+                l1 = float(np.abs(cum(h) - cum(k)).sum() * 0.5)
+                if abs(l1 - ls_wnorm(d)) > 1e-9:
+                    return False, dict(reason="two conformations whose cumulative-profile distance is not the weighted form",
+                                       beads=N, h=h, k=k, cumulative=l1, weighted=float(ls_wnorm(d)))
+    return True, {}
+
 
 def main():
     ap = argparse.ArgumentParser()

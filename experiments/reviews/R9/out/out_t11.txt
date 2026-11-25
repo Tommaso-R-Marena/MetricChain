@@ -1,0 +1,20 @@
+(a) 400 random (psi, q), n in 3..9: violations of [quantiles e^u-Lipschitz, psi^tr in L_u, differs only on D, maxdens(D) <= q, dens(w >= t) >= q]: 0   [1s]
+(b)(ii) n=10 p=0.2 u=1.5 cone, q=0.2, M=200 (K=40): eps^tr(psi)=0.172; lower-tail failures 0/2000 (bound (n+1)e^(-K/8) = 7.41e-02); upper-tail failures 0/2000 (bound 0.1)
+(b)(ii) n=10 p=0.2 u=1.5 cone, q=0.05, M=800 (K=40): eps^tr(psi)=0.005; lower-tail failures 0/2000 (bound (n+1)e^(-K/8) = 7.41e-02); upper-tail failures 0/2000 (bound 0.1)
+(b)(ii) n=10 p=0.2 u=1.5 random, q=0.2, M=200 (K=40): eps^tr(psi)=0.714; lower-tail failures 0/2000 (bound (n+1)e^(-K/8) = 7.41e-02); upper-tail failures 0/2000 (bound 0.1)
+(b)(ii) n=10 p=0.2 u=1.5 random, q=0.05, M=800 (K=40): eps^tr(psi)=0.233; lower-tail failures 0/2000 (bound (n+1)e^(-K/8) = 7.41e-02); upper-tail failures 0/2000 (bound 0.1)
+(c) exact ln[A(cone)/A(truncated cone)] against the bound n F_m(theta + 3 ln(n+1)/n) - 5 ln(n+2) and against n F_m(theta)
+    p=0.1 u=2.0 n=200 m=0.500 theta=0.0640: exact 10.140; bound -26.393; n F_m(theta) 6.531; (exact - n F_m)/ln n = +0.68
+    p=0.1 u=2.0 n=1000 m=0.500 theta=0.0640: exact 37.791; bound -16.122; n F_m(theta) 32.654; (exact - n F_m)/ln n = +0.74
+    p=0.1 u=2.0 n=2000 m=0.500 theta=0.0640: exact 70.771; bound 10.255; n F_m(theta) 65.307; (exact - n F_m)/ln n = +0.72
+    p=0.3 u=1.0 n=200 m=0.500 theta=0.0380: exact 5.991; bound -26.541; n F_m(theta) 2.875; (exact - n F_m)/ln n = +0.59
+    p=0.3 u=1.0 n=1000 m=0.500 theta=0.0380: exact 18.510; bound -29.643; n F_m(theta) 14.373; (exact - n F_m)/ln n = +0.60
+    p=0.3 u=1.0 n=2000 m=0.500 theta=0.0380: exact 33.418; bound -21.375; n F_m(theta) 28.746; (exact - n F_m)/ln n = +0.61
+    p=0.2 u=4.0 n=200 m=0.500 theta=0.2208: exact 46.654; bound -4.344; n F_m(theta) 40.894; (exact - n F_m)/ln n = +1.09
+    p=0.2 u=4.0 n=1000 m=0.500 theta=0.2208: exact 212.076; bound 141.812; n F_m(theta) 204.468; (exact - n F_m)/ln n = +1.10
+    p=0.2 u=4.0 n=2000 m=0.500 theta=0.2208: exact 417.361; bound 339.272; n F_m(theta) 408.937; (exact - n F_m)/ln n = +1.11
+    102 cases (3 parameter pairs, n = 200, 1000, 2000, 3 centre types, up to 4 values of theta): violations of the bound: 0   [10s]
+
+real	0m10.263s
+user	0m10.039s
+sys	0m0.551s

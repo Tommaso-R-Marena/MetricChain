@@ -1,0 +1,5 @@
+bridges from an A site: {3: 4, 4: 8, 5: 20, 6: 48, 7: 116, 8: 312, 9: 804, 10: 2144}
+Lemma 3.2 (one more bead): increments in [0,1]x[0,3]x[0,6], gauche increment = [b' down]: OK for all bridges listed
+Lemma 3.1: all pairs with 3 <= N1, N2 <= 7: 44688 concatenations, max (d3, d8, d11, dg) = (0, 0, 1, 1): OK
+Lemma 3.1: 3000 random pairs with N1, N2 <= 10: 3370 concatenations, max (d3, d8, d11, dg) = (0, 2, 4, 1): OK
+PART 2 OK

@@ -1,0 +1,6 @@
+# inner model: 5680 periodic chain systems (index <= 12); body volume 33.35 (u-coordinates)
+#  L    eps1 | grid step, points | with gamma of the model: packing, net | gamma = 0: packing, net | volume fraction with gamma > 0.02
+  1.00  0.50 |  0.156    9091   |           155    341            |      169    371      | 0.158
+  1.00  0.25 |  0.125   17768   |           608   1283            |      676   1434      | 0.168
+  0.20  0.50 |  0.781      82   |             6      9            |        7      8      | 0.122
+  0.20  0.25 |  0.391     605   |            19     35            |       20     34      | 0.149

@@ -1,0 +1,9 @@
+# enum mode=hsw n_beads=6 leaves=42 classes=7
+# columns: h3 h8 h11 count gmin gmax gmask
+0 0 0 2 0 0 1
+0 0 1 12 1 1 2
+0 0 2 14 2 2 4
+0 1 2 6 2 2 4
+0 0 3 2 3 3 8
+1 2 3 2 3 3 8
+0 1 4 4 3 3 8

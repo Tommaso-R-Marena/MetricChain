@@ -1,5 +1,16 @@
 # Workstream S — a limit shape for profile sets, and the thermodynamic limit of certificate sizes
 
+> **Erratum (added by the coordinator after the workstream reported; the brief below is as it
+> was sent).**  The sentence that defines the profile distance is **wrong**: the envelope of
+> the class is `L` times the `L¹` distance of the *cumulative* profiles,
+> `‖Δh‖_c = 5|Δh₃| + 3|Δh₃ + Δh₈| + |Δh₃ + Δh₈ + Δh₁₁|`, and this is **not** equal to
+> `9|Δh₃| + 4|Δh₈| + |Δh₁₁|` (the two agree for a single profile, and whenever no two of the three
+> differences have opposite signs; in general `‖Δh‖_c ≤` the weighted form).  The workstream
+> found the error, used the correct norm throughout, and showed that it matters for numbers:
+> the covering number at 15 beads is 8 with the correct norm and 10 with the wrong one
+> (re-computed by the coordinator: `experiments/coordinator_checks/s_check4.py`).  Wherever
+> `‖·‖_w` appears below, read `‖·‖_c`.  `docs/DEAD_ENDS.md`, D48.
+
 You are an independent mathematical research workstream.  The coordinator (the Theoretical
 Research Division of the MetricChain programme) owns the programme; you own this question.
 A negative or partial result, stated precisely, is as valuable as a theorem.  Do not force

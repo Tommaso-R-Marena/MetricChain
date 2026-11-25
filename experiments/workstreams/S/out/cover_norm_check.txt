@@ -1,0 +1,7 @@
+walk N=15 classes=356 L=1 eps=1/2*N norm=c: N_cov in [8, 8]   (reduced instance: 131 centres x 131 clients)
+walk N=15 classes=356 L=1 eps=1/2*N norm=w: N_cov in [10, 10]   (reduced instance: 174 centres x 134 clients)
+walk N=21 classes=1594 L=1 eps=1/2*N norm=c: N_cov in [11, 11]   (reduced instance: 815 centres x 595 clients)
+walk N=27 classes=4532 L=1 eps=1/2*N norm=c: N_cov in [15, 15]   (reduced instance: 2456 centres x 1692 clients)
+walk N=27 classes=4532 L=1/5 eps=1/2*N norm=c: N_cov in [2, 2]   (reduced instance: 3 centres x 30 clients)
+walk N=27 classes=4532 L=1/5 eps=1/4*N norm=c: N_cov in [3, 3]   (reduced instance: 11 centres x 42 clients)
+walk N=27 classes=4532 L=1 eps=1/2*N norm=w: N_cov in [20, 23]   (reduced instance: 3585 centres x 1970 clients)

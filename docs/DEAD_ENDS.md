@@ -1131,13 +1131,18 @@ coordinator's own, written into §12 item 2(d) of two checkpoints.
    every `0 ≤ e < E` when `p ≠ ½` (Theorem 11.59(d)); the hardest residual is additive and
    partly cancels the field (`γ* = −0.62` at `p = 0.1`, `u = 2`, `e → 0`).  True at `θ = 0` (remark (4)
    of §11.18).
-3. **"The Gibbs measure of the known part is the right sampling distribution."**  False, for
-   non-adaptive algorithms (plain Monte Carlo from `π` has an exponent up to 2.9 times the
-   non-adaptive exponent `a`) and for the nested scheme (with the reference `ψ₀ = 0` the
-   recursion converges to a strictly larger limit: `0.0884` against `0.0481` at `p = 0.1`, `u = 2`,
-   `e → 0`).  A single tilted product measure is not right either (a few per cent worse; a
-   sketch).  The right sample is uniform on every type class: the Gibbs law of the
-   flat-histogram instance, a mixture of all tilted product measures.
+3. **"The Gibbs measure of the known part is the right sampling distribution."**  False for
+   non-adaptive algorithms: plain Monte Carlo from `π` needs at least `e^{n·max(φ₀,φ₁)}` points
+   (an elementary lower bound from the cone around a constant centre and its truncation,
+   written out in Theorem 11.61 after the referee asked for it), which is up to 2.9 times
+   the non-adaptive exponent `a` at vanishing accuracy.  A single tilted product measure is
+   not right either in the examples computed (0.5–3 % worse; that this holds for every
+   `p ≠ ½` is not proved).  For the nested scheme the corresponding statement — with the
+   reference `ψ₀ = 0` the recursion converges to a strictly larger limit, `0.0884` against
+   `0.0481` at `p = 0.1`, `u = 2`, `e → 0` — is a **sketch** (it rests on Yu's theorem read as a
+   machine summary, and on numerics; the referee did not check it).  The right sample is
+   uniform on every type class: the Gibbs law of the flat-histogram instance, a mixture of
+   all tilted product measures.
 4. **"What is missing for product measures is a Harper-type theorem — the asymptotic
    isoperimetry of a fixed product measure (Ahlswede–Zhang) should do"** (theory report §12
    item 2(d), checkpoints three and four; research log, "Resume here", item 2).  Neither
@@ -1147,6 +1152,29 @@ coordinator's own, written into §12 item 2(d) of two checkpoints.
    plain `π`-sampling and yields the worse exponents of item 3.  The statement that is needed
    has the measure chosen as a mixture over types *and* a reference instance `H` in the
    slack (Theorem 11.63), and it is proved by types, not by compression.
+
+5. **Found by referee R9 in the workstream's report** (none affects a theorem).  (i) A
+   finite-`n` side remark was false as a general statement: "on the 4-cube the exact tail
+   function `Ξ_H` exceeds the best ball with type-dependent radii by a factor at most 2" —
+   `2.080` at `p = 0.2`, `u = 4`; it was true in the nine cases the workstream computed (`u ≤ 2`), and
+   the coordinator passed "at most 2.000" on to the other division as a validation target
+   (THY-REQ-0007; corrected in THY-MSG-0008).  (ii) The table for single product samplers
+   was inaccurate by up to 4 %: the script maximised over centre types on a grid
+   `[0.005, 0.995]`, and the maximum is at the constant centres `m ∈ {0, 1}` — objective and
+   constraint are linear in `m`, so the maximum of the formula is at an end point, in closed
+   form.  The margin by which the best single tilted product measure loses shrank from
+   "a few per cent" to `0.0244` against `0.0243` in one row.  (iii) Conclusions of a proposition
+   labelled "sketch" were used as facts in three other places of the report, and the
+   coordinator copied two of them into this entry and into THY-MSG-0006 without the label.
+   (iv) Two gaps in the written proof of the upper bound (theory report, Theorem 11.64,
+   (M1), (M2)): a compressed induction that an earlier referee (R7) had already objected to
+   in the uniform case was repeated, and "verbatim" hid a union bound that fails for strong
+   fields; the workstream's simulation used simulated inner brackets and could not see it.
+   *Lessons.*  A maximum over a parameter on an open grid must be checked at the end points
+   — here a two-line argument (linearity) decides where it is.  "At most 2 in all cases
+   computed" is not "at most 2".  A sketch stays a sketch wherever it is quoted.  "Verbatim"
+   in a proof that transposes an algorithm to a new measure is a claim about every constant
+   that depended on the old measure — here `2^{n_o}` as the number of points.
 
 Also recorded by the workstream: importance weights `1/π(T_κ)` without regularisation
 correspond to a reference that is not in the class outside the window (its "slack" becomes
@@ -1160,3 +1188,48 @@ residual, the Gibbs measure of the known part is uniform on type classes up to t
 binomial weights that the optimal profile respects, and Harper's theorem is both exact and
 about the right measure.  A statement that is true on the uniform cube "for the obvious
 reason" should be re-derived with a field before it is believed in general.
+
+## D48. Limit shape of profile sets: a wrong norm in the coordinator's brief, a plan that cannot work, and a rate that was mis-stated (cycle 10; workstream S, ENG-REQ-0001)
+
+1. **"The profile distance on the lattice is `9|Δh₃| + 4|Δh₈| + |Δh₁₁|`, equivalently the `L¹`
+   distance of cumulative profiles"** (the coordinator's brief for workstream S).  The two
+   are not equivalent.  The envelope of Theorem 11.48(b) is `L` times the `L¹` distance of the
+   *cumulative* counts, `5|Δh₃| + 3|Δh₃ + Δh₈| + |Δh₃ + Δh₈ + Δh₁₁|`; the weighted form is what one gets by
+   applying the triangle inequality to it, agrees with it for a single profile (`9h₃ + 4h₈ + h₁₁`)
+   and whenever no two of the three differences have opposite signs, and is strictly larger
+   otherwise.  It matters for numbers: the exact covering number at 15 beads (`L = 1`,
+   `ε = N/2`) is 8 with the right norm — the value the other division had published — and 10
+   with the wrong one (20–23 instead of 15 at 27 beads).  The workstream found it on its
+   first comparison with published numbers; the theorems of §11.22 hold for every norm.
+   *Lesson:* a brief should define a distance by reference to the theorem and to code that
+   reproduces a published number, not by a formula re-derived from memory; and "equivalently"
+   deserves a check on one example with mixed signs.
+2. **"A buried chain end can be exposed by changing `o(N)` sites"** (the natural route from
+   bridges to all walks; the coordinator's outline in THY-RES-0001 had a version of it for
+   compact conformations).  False as a general statement (Conjecture 11.75(iv)): a site set
+   that contains a double strand — two adjacent parallel rods and nothing else over `2ℓ`
+   levels — is not within `(ℓ − 3)/2` sites of the site set of any bridge that starts below it,
+   by parity of level crossings.  The conformation still has the `(h, g)` of two bridges up to
+   `O(1)`: the statement that can be true, and is open, changes `(N, h, g)` by `o(N)` and uses the
+   convexity of the limit set non-locally.
+3. **"`N_∞(ε₁) − N^P_cov(ε₁N) = Θ(N^{-1/3})`"** (the form of the rate question in ENG-REQ-0001, and of
+   the coordinator's first answer).  Covering numbers are integers; for a non-exceptional
+   accuracy the difference is eventually zero.  What has a surface correction of order
+   `N^{-1/3}` is the *shape*, and the covering number at length `N` is the limiting one at an
+   accuracy shifted by `(2L + e)·d_H` (Theorem 11.71(a)).
+4. **"Enumeration will eventually show the plateau."**  At 27 beads the profile set has
+   39 % of its bulk extent and about a tenth of its limiting volume; by the surface law
+   `35(1 − 1.8N^{-1/3})` half of the extent needs about 47 beads (`≈ 10²⁰` conformations), 90 %
+   about 5 800.  The plateau is a statement about `10³`–`10⁵` beads and has to be approached
+   through the limit shape and through constructed conformations.
+5. **"The convexity of the lower boundary should be visible in the data."**  It is not: the
+   largest gap between the least gauche count and its convex envelope is a constant
+   `0.25…0.30` per bead for `N = 12 … 27` — at these sizes a fold costs as much as a stem.
+   Convexity of `γ` is a statement about `N ≫ 27`.
+6. *Not a dead end, but a correction of scale:* the "numerically vacuous" bound of
+   Proposition 11.49(a) (`10^{1387}`) and the volume bound with three discrete distances
+   (`1.5·10⁹`) overestimate the lattice plateau by `1380` and by 5 to 7 orders of magnitude; the
+   reason is the same in both — the a-priori box of profile densities is ten times larger
+   than the body that chains can reach, and the gauche credit and the internal-centre
+   factor `2³` are ignored.
+

@@ -1,0 +1,28 @@
+# path-cluster LP: 340 configurations, 487 equality constraints
+# profile polytope of the path-cluster LP: 12 vertices, volume 3.125000 (p-coordinates), x36 = 112.5000
+  (      0,       0,       0)
+  (      0,       0,       2)
+  (      0,       1,       4)
+  (      0,       2,       2)
+  (      0,       2,     9/2)
+  (      0,       3,       4)
+  (      0,       3,     9/2)
+  (    1/2,       2,     3/2)
+  (    1/2,       2,       3)
+  (    1/2,     7/2,     7/2)
+  (    1/2,       4,     9/2)
+  (      1,       5,       6)
+# smallest gauche density allowed by the LP at its profile vertices (lower bound for gamma there):
+  [ 0. -0.  0.]  gamma_LP = 0.0
+  [0. 0. 2.]  gamma_LP = 1.0
+  [0. 1. 4.]  gamma_LP = 1.0
+  [0. 2. 2.]  gamma_LP = 0.0
+  [0.  2.  4.5]  gamma_LP = 1.0
+  [0. 3. 4.]  gamma_LP = 0.0
+  [0.  3.  4.5]  gamma_LP = 1.0
+  [0.5 2.  1.5]  gamma_LP = 0.0
+  [0.5 2.  3. ]  gamma_LP = 0.0
+  [0.5 3.5 3.5]  gamma_LP = 0.0
+  [0.5 4.  4.5]  gamma_LP = 0.0
+  [1. 5. 6.]  gamma_LP = 0.0
+# 4D: 25 distinct support points, hull vertices 25, 4-volume 2.90885

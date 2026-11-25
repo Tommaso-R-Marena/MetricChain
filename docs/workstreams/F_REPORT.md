@@ -1,9 +1,49 @@
 # Workstream F — algorithms without a hint when there is a known part (a field)
 
 > **Repository note (added by the coordinator at integration; the report below is otherwise as
-> delivered).**  Status: **paper proofs, under independent review (referee R9,
-> `docs/reviews/R9_brief.md`) at the time of integration** — see `docs/THEORY_REPORT.md` §11.20
-> for the integrated statements and their labels.  The scripts and outputs named in §4 are in
+> delivered).**  Status: **paper proofs, refereed after integration (R9,
+> `docs/reviews/R9_referee_report.md`): Theorems F4 and F6 proved; Theorem F9 — lower bound
+> proved, upper bound proved with two gaps in the written proof of F7/F9, both closed; no
+> critical finding** — see `docs/THEORY_REPORT.md` §11.20 for the integrated statements, their
+> labels and the repairs.
+>
+> **Errata after the referee report (the text below is unchanged; read it with these).**
+> *Major (gaps in a written proof; closed; no exponent changes).*
+> (M1) Theorem F9, proof: "By Theorem F7 … and induction, for every `k` and `η > 0` there is a
+> family with exponent function at most `T_k + η`" is not what Theorem F7 yields.  The
+> assembly of the one-level procedures into a family gives `min(T, R[T])(ξ⁻) + η₀` — a left
+> limit in the accuracy — and the induction needs the shift inequality.  The induction
+> written in the proof of Theorem 11.54 of the theory report applies verbatim; the result
+> reads "for every `g < ξ`: exponent at `ξ` at most `T_k(g) + kη′`".  Proposition E of `K_REPORT.md` is
+> not applicable with `T₁ ≡ ln 2`.
+> (M2) Theorem F7, "good event, validity, width: verbatim": the number of potential inner
+> calls is `4K/min μ_H = 4K·Z_H·e^{c₁n_o}`, with `c₁ = ln(1 + e^{|θ|−u}) > ln 2` when `|θ| > u`; with the
+> unchanged inner failure probability `δ/(2^{n+6}n³)` the union bound is void when `c₁φ > ln 2`
+> (`φ > 0.87` at `p = 0.1`, `u = 2`).  Repair: inner failure probability `δe^{−c₁n}/(2⁶n⁴)` and
+> `K = ⌈24 ln(2⁶n³/δ)⌉`, or a union over the calls actually made.  The simulation `t14` uses
+> simulated inner brackets and cannot see this.
+> *Minor.*  (m1) Theorem F6: the "equivalent" inverse form needs `θ > ω_n`; the constant of Step 3
+> is `[2(m+1)² + 3]ln(n+1)/n`; Steps 4 and 6 need `n ≥ n₀(p,u)` (below it take the trivial `ω_n = u`).
+> (m2) Lemma T is a weighted variant of the Ahlswede–Yang–Zhang lemma, proved here — not
+> "[known]".  (m3) Theorem F6, Remark (ii), "by a factor at most 2" is **false in general**:
+> `2.080` at `p = 0.2`, `u = 4` on the 4-cube (true in the nine cases computed, `u ≤ 2`).
+> (m4) Proposition F11(a), table: the values for product samplers are inaccurate by up to
+> 4 % — the maximum over centre types is at the constant centres, outside the grid used;
+> correct values: best single `r`: `0.1033`, `0.0451`, `0.0244`; plain `π_f`: `0.2743`, `0.1430`, `0.0348`
+> (closed form `max(φ₀, φ₁)`; theory report, Theorem 11.61).  The qualitative statement survives,
+> in the third row by `0.0244` against `0.0243`.  (m5) Theorem F4(d): the minimum runs over
+> lattice types (rounding costs at most `u`; no error).  (m6) Theorem F7: at `q = q†` read `≥`
+> for `>` and `<` for `≤`.  (m7) Theorem F9: `HintPair θ_na R^max a h E` with `T₁ ≡ ln 2` bounded
+> suffices.  (m8) Theorem F10(c): the sentence on the worst case is a sketch under a [proved]
+> label (sample quantiles are not the exact quantiles of F4(a)).  (m9) Theorem F7, Remark
+> (ii): an explicit upper bound of `Ξ_H` follows from the proof of F6 and suffices.  (m10) §7
+> item 2: at bounded accuracy only the lower bound `a` is proved.  (m11) The Lean theorem is
+> F3 for a two-letter `S` and interior profiles.  (m12) `out_run_all.log` is from an earlier
+> version of `run_all.sh`.  *Statements used as facts although only sketched:* the conclusions
+> of Proposition F11 in §1, in Remark (i) after Theorem F7 and in §5 items 3–4 — the lower
+> bound for product samplers is now written out (theory report, Theorem 11.61), the
+> statements about the nested scheme with the reference `0` remain sketches.  *Now a theorem:*
+> F10(b) (numerical here) — theory report, Proposition 11.65(b), refereed.  The scripts and outputs named in §4 are in
 > `experiments/workstreams/F/` (run from that directory; numpy and scipy).  The Lean file
 > `lean/WorkstreamF.lean` is `proofs/Frontiers/FieldShift.lean` in the repository (namespace
 > `MetricChain.FieldShift`, the repository's `klBin` reused, theorem names unchanged).

@@ -1,0 +1,16 @@
+table of Section 3.7 (u; theta; E_0; E; R_0(0+); R^max(0+); gamma* at eps->0; a; a_pi)
+  u=1.0 theta=0.0: 0.120115 0.120115 0.029139 0.029139 -0.000000 0.110944 0.110944   | max deviation from the printed row: 4.4e-05
+  u=1.0 theta=0.5: 0.113668 0.113832 0.027531 0.027621 -0.055263 0.105159 0.122459   | max deviation from the printed row: 2.6e-04
+  u=1.0 theta=1.0: 0.096776 0.097281 0.023340 0.023618 -0.105172 0.089909 0.120115   | max deviation from the printed row: 1.7e-04
+  u=1.0 theta=2.0: 0.053997 0.054793 0.012884 0.013322 -0.177091 0.050698 0.082608   | max deviation from the printed row: 9.1e-05
+  u=1.0 theta=3.0: 0.023952 0.024465 0.005672 0.005954 -0.213610 0.022654 0.040862   | max deviation from the printed row: 3.9e-04
+  u=2.0 theta=0.0: 0.433781 0.433781 0.097281 0.097281 -0.000000 0.327813 0.327813   | max deviation from the printed row: 1.3e-05
+  u=2.0 theta=0.5: 0.416075 0.417738 0.092895 0.093758 -0.170312 0.316177 0.407813   | max deviation from the printed row: 3.1e-04
+  u=2.0 theta=1.0: 0.367663 0.373145 0.081093 0.083936 -0.329764 0.283625 0.462117   | max deviation from the printed row: 2.4e-04
+  u=2.0 theta=2.0: 0.228721 0.239250 0.048716 0.054171 -0.583459 0.184090 0.433781   | max deviation from the printed row: 4.6e-04
+  u=2.0 theta=3.0: 0.111401 0.119421 0.023040 0.027194 -0.733553 0.092845 0.273209   | max deviation from the printed row: 4.5e-04
+  largest deviation from the report's table: 4.6e-04 (printed digits: 4-6)
+
+real	0m3.328s
+user	0m3.126s
+sys	0m0.578s

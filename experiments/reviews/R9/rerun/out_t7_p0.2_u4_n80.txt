@@ -1,0 +1,19 @@
+done sizes (20, 20, 20, 20)  [2s]
+done sizes (32, 8, 8, 32)  [3s]
+p=0.2 u=4.0: a=0.5535 h=0.2142 E=1.1712
+  n=80 B1 single density ball: 12 sets (12 with theta >= 3 ln n/n = 0.164); max raw = +0.0846 = +1.54 ln n/n at theta=0.244 e=+0.014; max omega (all sets) = 0.0252 = 0.46 ln n/n at theta=0.244 e=+0.014
+  n=80 EL ellipsoid around a fractional profile: 47 sets (6 with theta >= 3 ln n/n = 0.164); max raw = -0.1293 = -2.36 ln n/n at theta=0.257 e=-0.229; max omega (all sets) = 0.0000 = 0.00 ln n/n at theta=0.052 e=+0.111
+  n=80 HS half-space: 48 sets (9 with theta >= 3 ln n/n = 0.164); max raw = +0.0431 = +0.79 ln n/n at theta=0.495 e=-0.446; max omega (all sets) = 0.0194 = 0.35 ln n/n at theta=0.495 e=-0.446
+  n=80 I2 intersection of two balls: 5 sets (5 with theta >= 3 ln n/n = 0.164); max raw = +0.0371 = +0.68 ln n/n at theta=0.527 e=-0.488; max omega (all sets) = 0.0175 = 0.32 ln n/n at theta=0.527 e=-0.488
+  n=80 L1 l1-ball around a fractional profile: 23 sets (4 with theta >= 3 ln n/n = 0.164); max raw = -0.1371 = -2.50 ln n/n at theta=0.251 e=-0.223; max omega (all sets) = 0.0000 = 0.00 ln n/n at theta=0.051 e=+0.161
+  n=80 RB random union of boxes: 24 sets (4 with theta >= 3 ln n/n = 0.164); max raw = -0.0792 = -1.45 ln n/n at theta=0.302 e=-0.272; max omega (all sets) = 0.0000 = 0.00 ln n/n at theta=0.066 e=-0.029
+  n=80 SL slab: 24 sets (3 with theta >= 3 ln n/n = 0.164); max raw = -0.1555 = -2.84 ln n/n at theta=0.176 e=-0.055; max omega (all sets) = 0.0000 = 0.00 ln n/n at theta=0.024 e=+0.007
+  n=80 U16 union of 16 Hamming balls: 24 sets, none with theta >= 3 ln n/n
+  n=80 U16d union of 16 balls, type-dependent radii: 24 sets (24 with theta >= 3 ln n/n = 0.164); max raw = +0.0437 = +0.80 ln n/n at theta=0.538 e=-0.494; max omega (all sets) = 0.0209 = 0.38 ln n/n at theta=0.538 e=-0.494
+  n=80 U2 union of two density balls: 48 sets (48 with theta >= 3 ln n/n = 0.164); max raw = +0.0876 = +1.60 ln n/n at theta=0.228 e=+0.054; max omega (all sets) = 0.0252 = 0.46 ln n/n at theta=0.228 e=+0.054
+  n=80 U2h union of two Hamming balls: 24 sets (16 with theta >= 3 ln n/n = 0.164); max raw = +0.0441 = +0.80 ln n/n at theta=0.507 e=-0.459; max omega (all sets) = 0.0203 = 0.37 ln n/n at theta=0.533 e=-0.489
+  total 303 sets; overall max omega = 0.0252   [3s]
+
+real	0m3.493s
+user	0m3.363s
+sys	0m0.633s

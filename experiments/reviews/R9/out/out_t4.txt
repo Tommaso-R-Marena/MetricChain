@@ -1,0 +1,1 @@
+354 (grouping, set, reference) cases, n <= 11: largest deviation between profile sums and brute force = 1.22e-14  (also: deepest dip is u-Lipschitz and A(psi^D)/A(psi) = 1 + Phi)  [2.0s]

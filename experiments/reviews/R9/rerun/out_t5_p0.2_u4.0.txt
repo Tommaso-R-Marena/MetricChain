@@ -1,0 +1,14 @@
+p=0.2 u=4.0 eps1=0.3E=0.351366: R0=0.086324 (m*=0.4235); R^max=0.100321 at gamma*=-0.8645 (centre types: gamma* 0.5350, H 0.5346); theta_na=0.139401 (m*=0.5260)   [6s]
+n=1000: g=0: 0.088966 (k/n=0.423); gamma*: 0.102958 (k/n=0.535); H: 0.101969 (k/n=0.535); nonadaptive: 0.143927 (k/n=0.526)   [9s]
+n=2000: g=0: 0.088015 (k/n=0.423); gamma*: 0.101809 (k/n=0.535); H: 0.101300 (k/n=0.534); nonadaptive: 0.141920 (k/n=0.526)   [28s]
+n=4000: g=0: 0.087143 (k/n=0.423); gamma*: 0.101133 (k/n=0.535); H: 0.100876 (k/n=0.534); nonadaptive: 0.140782 (k/n=0.526)   [116s]
+limits claimed:   g=0: R0 = 0.086324; gamma*: R^max = 0.100321; H: R^max = 0.100321; non-adaptive: theta_na = 0.139401
+  g=0: extrapolated 0.085475 (coefficient of ln n/n: +2.29); formula 0.086324; excess at the largest n: +0.39 ln n/n
+  gamma*: extrapolated 0.100251 (coefficient of ln n/n: +0.59); formula 0.100321; excess at the largest n: +0.39 ln n/n
+  H: extrapolated 0.100276 (coefficient of ln n/n: +0.51); formula 0.100321; excess at the largest n: +0.27 ln n/n
+  nonadaptive: extrapolated 0.139373 (coefficient of ln n/n: +0.78); formula 0.139401; excess at the largest n: +0.67 ln n/n
+[116s]
+
+real	1m57.019s
+user	1m53.959s
+sys	0m1.916s

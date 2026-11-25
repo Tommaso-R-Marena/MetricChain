@@ -1,0 +1,2 @@
+box (96, 96, 96): strands 823, linker sites 3621, strands not linked 0; walk: N = 70428, (h3,h8,h11,g)/N = (0.0173, 2.2321, 4.0670, 0.7892)
+  bridge: N = 70537, (h3,h8,h11,g)/N = (0.0173, 2.2287, 4.0619, 0.7891)   [exact counts (1218, 157207, 286516, 55658)]

@@ -370,5 +370,47 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XVII.4 M2: interval comparison claimed with the sub-interval at the left end
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.1 M1: site-set formula with the wrong number of chain neighbours at separation 2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.1 M2: the row p8 >= 6 p3 - 1 sharpened to p8 >= 6 p3 (false at the crystal)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.1 M3: second neighbours counted through occupied sites only (vacant common neighbours forgotten)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.1 M4: the row p11 >= p8 - p3 sharpened to p11 >= 2 (p8 - p3) (false for one row of stems)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.2 M1: concatenation claimed to create no third-neighbour pairs
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.2 M2: the linker claimed to be all-trans always
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.2 M3: linker started with the other up-bond (the zigzag of x1 is not continued)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.2 M4: the copy of x2 placed without the condition that the first two bonds continue the zigzag
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.3 M1: stability claimed with the slack (L + e) eta
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.3 M2: stability claimed with the slack 2 L eta (the change of the radii forgotten)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.3 M3: points below the lower boundary claimed not to matter
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.3 M4: convergence of the covering numbers claimed at the jump accuracy
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.4 M1: the cumulative-profile distance claimed to be the weighted form 9, 4, 1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.4 M2: equality with the weighted form claimed whenever dh3 and dh8 have the same sign
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.5 M1: hairpin flip claimed to be at least 14 d - 10
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.5 M2: hairpin flip claimed with 28 per bead of the shorter arm (two stems counted twice)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.5 M3: single flips claimed to change the profile by at most 7 (d_j + 3)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.6 M1: one multiplier of a dual certificate changed
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.6 M2: certificate checked without averaging over the symmetries of the cluster
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.6 M3: occupied centres with one occupied neighbour treated as allowed
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.6 M4: a bound sharpened by one unit (y0 and b lowered together)
+                  exit=1  1 TEST(S) MISBEHAVED
 
-186 mutations: 185 caught, 1 expected pass, 0 not as expected
+207 mutations: 206 caught, 1 expected pass, 0 not as expected

@@ -1,0 +1,12 @@
+     (-4, 2, -1) . p <=  2: symmetrised reduced cost <= 0 on allowed patterns, <= 6 on forbidden ones (M = 6): exact
+      (-3, 0, 2) . p <=  9: symmetrised reduced cost <= 0 on allowed patterns, <= 3 on forbidden ones (M = 3): exact
+      (-2, 1, 0) . p <=  3: symmetrised reduced cost <= 0 on allowed patterns, <= 2 on forbidden ones (M = 2): exact
+      (-1, 0, 0) . p <=  0: symmetrised reduced cost <= 0 on allowed patterns, <= 1/2 on forbidden ones (M = 1/2): exact
+     (-1, 1, -1) . p <=  0: symmetrised reduced cost <= 0 on allowed patterns, <= 3 on forbidden ones (M = 3): exact
+     (-1, 2, -1) . p <=  3: symmetrised reduced cost <= 0 on allowed patterns, <= 4 on forbidden ones (M = 4): exact
+      (0, -1, 2) . p <=  7: symmetrised reduced cost <= 0 on allowed patterns, <= 1 on forbidden ones (M = 1): exact
+      (3, 4, -3) . p <=  5: symmetrised reduced cost <= 0 on allowed patterns, <= 6 on forbidden ones (M = 6): exact
+      (4, -1, 0) . p <=  0: symmetrised reduced cost <= 0 on allowed patterns, <= 5 on forbidden ones (M = 5): exact
+      (6, -2, 1) . p <=  2: symmetrised reduced cost <= 0 on allowed patterns, <= 6 on forbidden ones (M = 6): exact
+      (6, -1, 0) . p <=  1: symmetrised reduced cost <= 0 on allowed patterns, <= 6 on forbidden ones (M = 6): exact
+PART 5 OK: the eleven certificates of Theorem 4.2 hold in exact arithmetic
