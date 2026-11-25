@@ -11,7 +11,3 @@ T11: greedy size of exact box-cover cut certificates
   RIS diamond chain n=6 (683 states): 17 traps | exact: boxes median 7 max 9; |wall| median 10 max 12; |S*| median 1 max 1; boxes/n median 1.2 max 1.5 | 90% of height: boxes median 7 max 11
   RIS diamond chain n=7 (2005 states): 35 traps | exact: boxes median 11 max 22; |wall| median 21 max 57; |S*| median 2 max 6; boxes/n median 1.6 max 3.1 | 90% of height: boxes median 11 max 22
   RIS diamond chain n=8 (5849 states): 85 traps | exact: boxes median 11 max 26; |wall| median 20 max 88; |S*| median 2 max 9; boxes/n median 1.4 max 3.2 | 90% of height: boxes median 11 max 28
-
-real	1m19.068s
-user	0m27.487s
-sys	0m0.054s

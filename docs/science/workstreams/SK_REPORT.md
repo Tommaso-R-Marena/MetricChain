@@ -26,7 +26,7 @@ limits are sharp and mostly negative: (i) the brief's "iff" for cuts is false as
 repaired form = Edmonds–Fulkerson 1970); (ii) coordinate cuts certify nothing under unrestricted
 single-site moves; (iii) Lagrangian (or Chernoff) relaxation of a counting constraint — the obvious way to
 hand a reaction-coordinate cut to the pairwise kernel — **never** beats the trivial bound
-`max(E(a),E(b))`; (iv) there is **no transfer matrix for barriers**: by a theorem of Wrochna (2014/2018)
+`max(E(a),E(b))` (a quadratic penalty does, but unreliably); (iv) there is **no transfer matrix for barriers**: by a theorem of Wrochna (2014/2018)
 the barrier threshold problem is PSPACE-complete already for a translation-invariant nearest-neighbour
 chain with a fixed alphabet, the family on which minima and partition functions cost `O(nk²)`; (v) rate
 bounds inherit a factor `exp(β × envelope distance between basin and wall)`, so first-order envelopes
@@ -300,7 +300,8 @@ product voxels `V_x`, `x ∈ ∏[k_i]`, let `E_lo(x) ≤ inf_{V_x} E`, `E_hi(x) 
     B_{E_lo}^{G_face}(a,b)  ≤  B_cont(p,q)  ≤  B_{E_hi}^{G_face}(a,b).
 
 Enlarging the move graph (e.g. to the Hamming graph on voxel labels) keeps the left inequality and
-destroys the right one, and the left side then no longer converges to `B_cont` under refinement.
+destroys the right one, and the left side then need not converge to `B_cont` under refinement (it does
+not in T8).
 
 *Proof.*  Upper: the union of two face-adjacent voxels is convex, so a discrete walk lifts to a
 polygonal path through voxel centres on which `E ≤ E_hi`.  Lower: for a path `γ` the closed sets
@@ -576,7 +577,7 @@ arithmetic except where stated.  Random instances: pairwise tables with Gaussian
 | `t5b_scaling_highprec.py` | the identity at 60 digits; Curie–Weiss lumped chain up to `n = 320` | — | defect `4.7e-61`; recrossing `≈ n^{-1/2}`; multi-cut ratio → `0.9998`; rows with `λ_A < 1e-10` not reported |
 | `t6_robust_rates.py` | Thm K14: LP for `sup_g k(g)` vs closed forms and samples | `N = 256, 243`, 33 cases | no violation; inflation `0.10–0.77`; optimiser admissible and attains the LP value |
 | `t7_chain.py` | rotational-isomeric chain on the diamond lattice, hard overlaps, `E = 0.5·#gauche − #contacts` | `n = 6, 7, 8` torsions; 683 / 2005 / 5849 states | box/count certify `1.00 / 0.55 / 0.77` of the depths (17 / 35 / 85 traps); global contact-number cut `0.00`; connected piece of the contact superlevel set `0.24 / 0.89 / 0.49`; `λ_A/k_TST = 0.75–0.87` |
-| `t8_voxel_continuum.py` | Prop. K8, certified relaxed scan | 2 torsions up to `720²`, 3 torsions up to `96³` voxels | all brackets nested around the reference; Hamming-graph lower bound does not converge |
+| `t8_voxel_continuum.py` | Prop. K8, certified relaxed scan | 2 torsions up to `720²`, 3 torsions up to `96³` voxels | all brackets contain the reference bracket; the Hamming-graph lower bound stays far below at every resolution tested |
 | `t9_trap_stationary.py` | Thm K10 for Metropolis, heat-bath, non-reversible kernels | `N = 256, 243`, 30 cases | no violation |
 | `t10_counter_dp.py` | counting cuts at scale (transfer matrix with counter) | validation `n = 12`; `n = 200` | errors `4e-15`, `7e-15`; height bracket `[1.3758, 1.5178]` on `2²⁰⁰` states; Lagrangian below trivial |
 | `t11_cut_size.py` | greedy number of wall boxes of exact cut certificates | as T4, T7 | median `≤ 1.6 n`, max `3.2 n` boxes |
@@ -605,6 +606,15 @@ torsion coordinates, so it tests theorems and cut families, not the kernels.  (i
 kernels of T9 leave the boundary flux unchanged by construction, so that test exercises the theorem
 weakly; the theorem itself is machine-checked.  (iv) In T5 the first run (kept as
 `out_t5_partial_first_run.txt`) was killed for slowness, not for a failure.
+
+**One cross-check against another division.**  The numbers of self-avoiding conformations found by my
+enumeration in T7 for `n = 6, 7, 8` torsions — 683, 2005, 5849 — coincide with the engineering
+division's counts for the same model and the same `n` (`PUBLISHED_CONFS` in
+`experiments/eng/chain_cover/run_lattice.py` and the header `conformations=683` of
+`data/dia_Sc12_n6.txt`, in their checkout at `db56d05`; their `dia_enum.c` defines the same chain: `n`
+torsions, `n + 3` beads, first two bonds fixed, self-avoidance).  I read those files and did not run
+their code.  This replicates those three counts with independent code; nothing else of theirs was
+replicated.
 
 ---
 
@@ -756,7 +766,7 @@ box cut and the best counting cut `q_I` over all `I` (for `n > 10`: over `|I| �
 the greedy number of wall boxes of `t11_cut_size.py`.  *Inputs:* `n`, `e_g = 0.5`, `ε = 1`, `S_c = 8`.
 *Expected output:* a table of the mean certified fraction and the box counts versus `n`.
 *Validation:* reproduce `out_t7.txt` and `out_t11.txt` for `n = 6, 7, 8` (17 / 35 / 85 traps; fractions
-`1.00 / 0.55 / 0.77`).  *Stopping condition:* `n = 13` (1 231 221 conformations by your tables) or 6 GB.
+`1.00 / 0.55 / 0.77`).  *Stopping condition:* `n = 13` (1 231 221 conformations by your `PUBLISHED_CONFS`) or 6 GB.
 *Resources:* union–find merge tree is `O(N n)`; the subset loop is the cost — restrict `I` as stated.
 
 **E2 (prototype).**  A producer for certified relaxed scans on a torsion-voxel model: given interval

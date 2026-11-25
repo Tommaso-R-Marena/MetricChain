@@ -1,2 +1,6 @@
 n=16 A2 GB site   0 (dist to end 1): sampled median   1.61 max   4.68 -> local search   6.34 kcal/mol   [26s]
 n=16 A2 GB site   3 (dist to end 4): sampled median   1.80 max   6.45 -> local search   9.89 kcal/mol   [51s]
+n=16 A2 GB site   7 (dist to end 8): sampled median   1.69 max   8.11 -> local search  11.38 kcal/mol   [93s]
+n=16 A2 GB site  11 (dist to end 12): sampled median   1.50 max   8.23 -> local search  12.19 kcal/mol   [136s]
+n=16 A2 GB site  15 (dist to end 16): sampled median   1.45 max   6.99 -> local search  12.65 kcal/mol   [179s]
+n=16 A2 GB site  16 (dist to end 16): sampled median   1.41 max   9.73 -> local search  19.17 kcal/mol   [207s]

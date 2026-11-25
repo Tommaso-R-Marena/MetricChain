@@ -125,3 +125,78 @@ For `sup{E_μψ : μ = μ_g, g in the class of constant b, E_μΦ ∈ D}` on a p
 
 For targets and features that are pairwise in the site variables only 1 and 2 are
 available; a tractable exact dual is the open problem of §8 ("flows with gains").
+
+## A5. Theorem 7 sharpened, and attributed (workstream M, follow-up; checked by the coordinator)
+
+**Theorem 7, sharp form [P; workstream M; `stability_sharpened_check.py`: 2 950 random
+instances, all three ratios reach 1.0000].**  In the setting of Theorem 7, with `w = β·osc(r)`:
+
+    KL(μ‖ν) ≤ w²/8,        TV(μ, ν) ≤ tanh(w/4),        KL(μ‖ν) + KL(ν‖μ) ≤ w·tanh(w/4).
+
+*Proof.*  (i) `ν` is also the *reverse* I-projection of `μ` on the exponential family
+`{ν_θ ∝ μ₀e^{−θ·Φ}}` (moment matching is maximum likelihood), so
+`KL(μ‖ν) ≤ KL(μ‖ν_{βλ})`, and `μ ∝ ν_{βλ}e^{−βr}` is a tilt by a function of oscillation `w`:
+`KL = ∫₀^β t·Var_t(r) dt ≤ w²/8`.  (ii) For any two laws the symmetrised divergence satisfies
+`J ≥ 4·TV·artanh(TV)` (equality for a binary symmetric pair); with `J ≤ w·TV` from Theorem
+7(i): `artanh(TV) ≤ w/4`.  ∎
+
+*Attribution.*  The ingredients are textbook (I-projection and its Pythagorean identity,
+the Jeffreys identity, Pinsker).  The principle "the error of moment matching is at most a
+constant times the square of the part of the log-density outside the span" is Lemma 1 of
+Barron–Sheu (1991), read by the workstream only as quoted in a later paper.  **Not found:**
+the dimension-free statement for ensemble refinement; reviews of the refinement literature
+up to 2025 give no error bound of this kind, only cross-validation (workstream M,
+`SM_REPORT.md` §8).  Theorem 7′ is the transport-inequality mechanism of theory report
+Theorem 11.14.  We present Theorem 7 as a known mechanism applied to a question for which
+no statement was found.
+
+## A6. Theorem 8: the established names, and a remark on sampling
+
+*Names.*  `ρ_min(D)` is the quantity `δ̂` of Christensen–Connault (2023, §3.3) and the *extent
+of falsification* / *falsification frontier* of Masten–Poirier (arXiv:1812.11598); its dual
+is the exponential-tilting / empirical-likelihood test statistic for moment conditions
+(Kitamura–Stutzer; Schennach).  We adopt "extent of falsification".  According to the
+workstream's searches the ensemble-refinement literature uses the relative entropy of a
+reweighted *sample* as a diagnostic and does not use this test.  **Not found:** a
+sampling-independent (certified) lower bound on it for a molecular model, and the
+density-ratio analogue `b_min`.
+
+*Remark (workstream M) [P].*  For a sample of size `N` from the model, the plug-in value
+`ρ̂_N = sup_λ [−λ·m − ln N⁻¹Σ_s e^{−λ·Φ(x_s)}]` satisfies `E ρ̂_N ≥ ρ_min` (Jensen, twice).  So on
+average **finite sampling makes a model look more wrong than it is**: the two sources of
+disagreement with experiment are confounded with a definite sign.  A certified lower bound
+errs, by construction, only in the other direction.
+
+## A7. A third kind of local data: pinned marginals make the problem easy (a contrast to Theorem 4)
+
+**Proposition 4″ (self-reducibility) [K; the reduction of counting to conditional marginals,
+Jerrum–Valiant–Vazirani 1986 — from memory, not re-read; the identity checked numerically].**
+Let an oracle return one-body marginals of the Gibbs measure *conditioned on a partial
+assignment* ("pinned").  For any `x*`,
+
+    Z_g = e^{−β(f+g)(x*)} / ∏_{i=1}^{n} μ_g( x*_i | x*_1, …, x*_{i−1} ),
+
+so `n` pinned one-body marginals and **one** evaluation of `g` determine `Z_g` exactly; with
+each marginal known to relative accuracy `τ` the error of `ln Z_g` is at most `nτ + O(nτ²)`.  In the
+cube class every conditional probability is at least `1/(1+e^{b})`, so absolute accuracy
+`τ/(1+e^{b})` suffices.
+
+*Reading.*  Together with Theorems 4, 4′, 5 and Proposition 5b this gives the picture for
+the cube class with zero known part:
+
+| second oracle | worst-case cost of `ln Z` to bounded accuracy |
+|---|---|
+| none | `e^{nh}` evaluations (theory division) |
+| all `k`-body marginals of the unperturbed ensemble, exact | unchanged up to `(2n)^{⌈k/2⌉}` |
+| mean residual energy of the unperturbed ensemble | unchanged in the exponent (the zero residual becomes easy) |
+| one-body marginals of `n` successively *pinned* ensembles | `n` oracle calls and one evaluation |
+
+What separates the last row from the others is not the order of the observable but that
+the measurement is made on a **perturbed (constrained) ensemble**.  The physical
+counterparts are measurements on systems in which a degree of freedom has been fixed or
+biased — restrained, cross-linked, chemically locked — and, in the limit of small
+perturbations, response measurements.  This suggests the precise form of the question
+"which experiments are worth what": the value of a measurement to certification is
+governed by *which family of perturbed ensembles it has access to*, and local measurements
+on the unperturbed ensemble are the uninformative end of that scale **[H for the physical
+reading]**.

@@ -12,4 +12,6 @@ beta*c_i: [2.6 4.3 2.6 4.3 2.6 4.3 2.6 4.3 2.6 4.3]
 sum_i ln cosh(beta c_i/2) = 10.8 nats = 6.4 kcal/mol;   beta^2 sum c_i^2/8 = 16 nats;   range of g on the domain = 11.8 kcal/mol = 20 kT
 exact on the grid: ln Z(f+g) - ln Z(f) = 57.01 nats; -beta <g>_f = 55.81; Jensen gap = 1.206 nats (the class bound above is 11); Gibbs weight of argmin E: 0.991; entropy H(pi_E) = 0.08 nats
 product-landscape formula (Thm 11.8, Boltzmann weights) with the measured star of f at argmin f and measured c_i: ln N >= 0.00 (t = 0) of ln(prod k_i) = 3.58; i.e. N >= 1   [heuristic for a non-additive f]
-Killed
+cover at eps = 0.000 kcal/mol: forced points 1, volume bound nan, partition bound nan => N_cov >= 2;  greedy cover 3  (of M = 28843;  mean set size 27713.4, max 28828; dense path)  [32s]
+cover at eps = 0.596 kcal/mol: forced points 0, volume bound nan, partition bound nan => N_cov >= 2;  greedy cover 3  (of M = 28843;  mean set size 27873.9, max 28832; dense path)  [31s]
+cover at eps = 2.000 kcal/mol: forced points 0, volume bound nan, partition bound nan => N_cov >= 2;  greedy cover 3  (of M = 28843;  mean set size 28184.0, max 28841; dense path)  [30s]

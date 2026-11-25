@@ -2,7 +2,7 @@
 T11 — at what cost?  Size of EXACT decision-tree/box cut certificates on small systems.
 
 For a trap a with exit target b and t = B(a,b), the canonical cut is S* = component of a in {E < t}.
-An exact certificate (format K9 of the report) needs a family of boxes, each contained in the high set
+An exact certificate (format of §2.5 of the report) needs a family of boxes, each contained in the high set
 {E >= t} (so that a leaf of the min-kernel can certify it), whose union covers the outer boundary of S*.
 We report a GREEDY upper bound on the number of such boxes (grow a maximal box inside {E >= t} around an
 uncovered wall point, repeat), next to |wall|, |S*| and the number n of boxes of a box cut.

@@ -39,3 +39,10 @@ tri   t=0.7  blind=0.0545583655  primal=0.0545583655  dual=0.0545583655  LP@cent
 tri   t=0.9  blind=0.0226649719  primal=0.0226649719  dual=0.0226649719  LP@centre=0.0226649719  gap=8.6e-09  centre_in_L=True  primal-blind=-1.15e-15
 asym  t=0.1  blind=0.0170793430  primal=0.0170793418  dual=0.0170793418  LP@centre=0.0170793418  gap=1.8e-09  centre_in_L=True  primal-blind=-1.21e-09
 asym  t=0.3  blind=0.0390982575  primal=0.0390982546  dual=0.0390982546  LP@centre=0.0390982546  gap=3.2e-09  centre_in_L=True  primal-blind=-2.92e-09
+asym  t=0.5  blind=0.0453477129  primal=0.0453477094  dual=0.0453477094  LP@centre=0.0453477094  gap=1.5e-11  centre_in_L=True  primal-blind=-3.53e-09
+asym  t=0.7  blind=0.0368820401  primal=0.0368820372  dual=0.0368820372  LP@centre=0.0368820372  gap=6.0e-09  centre_in_L=True  primal-blind=-2.95e-09
+asym  t=0.9  blind=0.0152282713  primal=0.0152282713  dual=0.0152282713  LP@centre=0.0152282713  gap=3.7e-09  centre_in_L=True  primal-blind=-6.00e-16
+largest |primal-dual|, |primal-LP@centre|, duality gap: 2.28e-08
+blind search never exceeds the Renyi value: False  largest shortfall of the blind search: 6.42e-17
+
+== random sites, asymmetric envelopes, q = 2,3,4 ==

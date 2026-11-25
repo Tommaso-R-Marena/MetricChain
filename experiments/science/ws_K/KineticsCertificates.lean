@@ -4,7 +4,8 @@ import proofs.CertificateAlgebra
 /-!
 # Workstream K (science division): barrier certificates on top of the verified min-kernels
 
-Machine-checked core of `docs/science/workstreams/SK_REPORT.md`, §2 (Theorems K1, K4, K5, K9).
+Machine-checked core of `docs/science/workstreams/SK_REPORT.md`, §2 (Theorem K1(a), Proposition K2(a),
+Lemma K5, Theorem K6 and its Corollary K6.1, Theorem K10).
 
 * `cut_sound` — the `(min,max)` cut certificate on an arbitrary move graph: if every step that
   leaves a set `S` lands on energy `≥ t`, every walk from inside `S` to outside `S` visits a
@@ -83,7 +84,7 @@ theorem cone_admissible {X : Type*} {d : X → X → ℝ} (hd : IsEnvelope d) (a
   simp only
   linarith
 
-/-- **Robust cut certificate (Theorem K4, lower end).**  A cut for the anchored-down energy
+/-- **Robust cut certificate (Theorem K6, lower end).**  A cut for the anchored-down energy
 `f - d a ·` with wall height `t` above `f a` certifies that for **every** admissible residual `g`
 every walk from `a` out of `S` climbs at least `t` above the true energy of `a`. -/
 theorem robust_cut_sound {X : Type*} (adj : X → X → Prop) (f : X → ℝ) (d : X → X → ℝ) (a : X)
@@ -99,7 +100,7 @@ theorem robust_cut_sound {X : Type*} (adj : X → X → Prop) (f : X → ℝ) (d
   have h4 := hg a (p (j + 1))
   linarith
 
-/-- **Robust path certificate (Theorem K4, upper end).**  A walk whose anchored-up energies
+/-- **Robust path certificate (Theorem K6, upper end).**  A walk whose anchored-up energies
 `f + d · a` stay at most `t` above `f a` stays at most `t` above the true energy of `a` for
 **every** admissible residual. -/
 theorem robust_path_sound {X : Type*} (f : X → ℝ) (d : X → X → ℝ) (a : X) (t : ℝ)
@@ -156,7 +157,7 @@ theorem mem_wallBox_of_exit {D : Dom n k} {x y : Config n k} (hx : InBox D x) (h
   · rw [Function.update_of_ne hj, ← hi j hj]
     exact hx j
 
-/-- **Barrier certificate for a pairwise energy (Theorem K9, box cut).**  If the kernel accepts a
+/-- **Barrier certificate for a pairwise energy (Proposition K2(a), box cut).**  If the kernel accepts a
 lower-bound certificate with bound `L` on each of the `n` wall boxes of `D`, then every walk of
 single-site moves that starts in the box `D` and ends outside it visits a configuration of energy
 at least `L`. -/
@@ -169,7 +170,7 @@ theorem box_cut_barrier (I : PairInstance n k) (D : Dom n k) (L : ℚ) (certs : 
   obtain ⟨i, hi⟩ := mem_wallBox_of_exit h1 h2 (hp j hj)
   exact ⟨j + 1, hj, verify_sound (certs i) I (wallBox D i) L (hv i) (p (j + 1)) hi⟩
 
-/-- **Robust barrier certificate (residual kernel).**  The same with `verifyR`: for **every**
+/-- **Robust barrier certificate (residual kernel; Corollary K6.1).**  The same with `verifyR`: for **every**
 residual of the class (bounded differences, published anchor values) every walk of single-site
 moves leaving the box `D` visits a configuration of true energy at least `L`. -/
 theorem box_cut_barrier_residual (P : RProblem n k) (D : Dom n k) (L : ℚ)

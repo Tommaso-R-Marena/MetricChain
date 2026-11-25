@@ -68,3 +68,9 @@ additive toy kappa=1.0 e=0.10 n=  50: ln N_W >=     0.00 (min    0.00; log10 N >
 additive toy kappa=1.0 e=0.10 n= 100: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 101
 additive toy kappa=1.0 e=0.10 n= 200: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 201
 additive toy kappa=1.0 e=0.10 n= 500: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 501
+additive toy kappa=1.0 e=0.10 n=1000: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 1001
+additive toy kappa=1.0 e=0.20 n=  10: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 11
+additive toy kappa=1.0 e=0.20 n=  20: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 21
+additive toy kappa=1.0 e=0.20 n=  50: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 51
+additive toy kappa=1.0 e=0.20 n= 100: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 101
+additive toy kappa=1.0 e=0.20 n= 200: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 201

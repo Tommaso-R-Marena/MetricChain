@@ -116,3 +116,32 @@ two rounds beat one blind batch of the same total size (e.g. 0.361 vs 0.219 at (
 * Statement read: X arbitrary type, S1,S2 finite, deterministic TwoRound = (first, second, output + 2 congruences);
   randomness = finite Omega with weights P >= 0 summing to 1; hM1: forall omega; hM2: forall omega AND forall f : X -> R
   (all functions, not only class members); conclusion 1 - 2 delta <= M1 p1 + M2 p2.
+
+## Step 7 — asymptotic formula vs exact twins (asymptotic_check.py -> out_asymptotic_u1_phi06.txt, 32 s)
+u=1, phi1=0.6, n=800/3200/6400: exact gap/n vs gamma = min(Xi, phi2 k(y1)):
+  theta=0.75h: gamma .00440 | .00585 .00451 .00443      theta=h: .00179 | .00208 .00162 .00166
+  theta=1.15h: .00085 | .00111 .00060 .00066            theta=1.25h: .00044 | .00067 .00023 .00023
+  theta=1.33h: 0 (Xi<0) | .00048 .00010 .00007          theta=1.40h: 0 | .00034 .00004 .00000
+Heaviest type of F_D at (0.269,0.269) = (p_u,p_u) in every case with a positive predicted gap.  Consistent with
+"ln A(F_D) - ln A(F_S) >= n gamma - O(log n)" (ln(6400)/6400 = 0.0014).  lnA_S/n -> 0 (0.0008 at n=6400).
+
+## Step 8 — AFTER my own code: read the coordinator's scripts (experiments/coordinator_checks/rounds_U) and
+skimmed the workstream's (experiments/workstreams/U/code).
+* u_check2.py is an independent implementation of the same statement; its table (n1, T/n, gap, E) coincides with
+  mine in every printed digit (e.g. n=3200: n1=1760, T/n=0.03928, E=0.03684).  Its k* is my k*+1 (open-ball
+  convention: uses |B(n,k-1)|); same bound.
+* workstream's lb2_exact.py uses a different W2 ("balance": smallest central interval with p2 <= p1; W1 not inside V2,
+  bound (1-2 delta)/(p1+2p2)) -> its E differs in the 3rd digit (0.0339/0.0360/0.0366), as the report says.
+* u_check1/3: T2(0)/a = 0.6243 at u=1 (mine 0.62432); T3(0) <= 0.5406a via ladders (1,1,1), (2,1), (1,2).
+  Theorem 11.84: "no script" (paper check only) by the coordinator; simulation only by the workstream.
+
+## Step 9 — own Lean strengthening (lean/TwoRoundsExpected.lean -> out_TwoRoundsExpected.txt; exit 0;
+axioms propext, Classical.choice, Quot.sound only)
+* card_distinguished_le_sum: #distinguished <= |B1| p1 N + (sum_{s1} |B2(v s1)|) p2 |S2|.
+* two_round_expected_bound: 1 - 2 delta <= E|B1| p1 + E_{omega,s1}|B2(v s1)| p2  (NO bound on batch sizes assumed).
+* two_round_expected_cost:  1 - 2 delta <= p * E_{omega,s1}[ |B1| + |B2(v s1)| ]  if p1,p2 <= p.
+* two_round_bound_of_class: worst-case form with hM2 only for f in the class G (needs v s1 in G).
+Meaning for Thm 11.86: v s1 = g1(d(x^1,s1)) is in L_u, so every (eps/2,delta)-correct two-round algorithm makes at
+least (1-2 delta) e^{n theta}/(n+1)^2 evaluations IN EXPECTATION AT THE FLAT-HISTOGRAM INSTANCE of the first block
+(averaged over its centre) — the exact analogue of Thm 11.25(a) "at the zero function".  Closes the workstream's
+"extension to expected batch sizes: only the Markov remark".

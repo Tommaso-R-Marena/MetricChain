@@ -24,7 +24,7 @@
 'MetricChain.Kinetics.trap_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MetricChain.Kinetics.trap_certificate_weighted' depends on axioms: [propext, Classical.choice, Quot.sound]
 
-real	0m48.563s
-user	0m8.492s
-sys	0m4.305s
+real	0m26.712s
+user	0m7.507s
+sys	0m1.550s
 exit: 0

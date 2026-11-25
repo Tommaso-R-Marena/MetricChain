@@ -16,3 +16,4 @@
 === n=8: exactly pair-additive surrogate of g_GB fitted on 8000 conformations of ensemble C
   ensemble C (train)       std(g)  6.88 | g - S (intercept as fitted): RMS 0.492 max 7.03 kcal/mol; intercept refitted: RMS 0.492 max 7.03 = 0.83 / 11.8 kT | naive frozen-radii surrogate: RMS 7.19 max 42.8 | Born radii rel. std: mean 0.042, max 0.117
   ensemble C (held-out)    std(g)  6.90 | g - S (intercept as fitted): RMS 0.516 max 6.09 kcal/mol; intercept refitted: RMS 0.516 max 6.08 = 0.87 / 10.2 kT | naive frozen-radii surrogate: RMS 7.22 max 42.0 | Born radii rel. std: mean 0.043, max 0.116
+  grid A2 (35478 conf.)    std(g)  4.26 | g - S (intercept as fitted): RMS 0.554 max 9.04 kcal/mol; intercept refitted: RMS 0.471 max 9.33 = 0.79 / 15.7 kT | naive frozen-radii surrogate: RMS 8.54 max 90.8 | Born radii rel. std: mean 0.038, max 0.134

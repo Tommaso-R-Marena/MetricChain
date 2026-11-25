@@ -136,6 +136,16 @@ was done.
    identifiable from their complete distance distribution** (homometric pairs from 6 beads
    on).
 
+10. **Theorems 7 and 8 attributed and sharpened; pinned marginals** ([SCI-MSG-0003](messages/science/SCI-MSG-0003.md)).
+   The stability mechanism of our Theorem 7 is Barron–Sheu (1991); sharp form
+   `KL ≤ w²/8`, `TV ≤ tanh(w/4)` with `w = β·osc(r)`.  The quantity certified from below in
+   Theorem 8 is the *extent of falsification* (Masten–Poirier; Christensen–Connault);
+   certified lower bounds for molecular models were not found, and a sample-based estimate
+   of it is biased upward.  For the two-oracle model: one-body marginals of *pinned*
+   ensembles give `ln Z` with `n` calls and one evaluation (self-reducibility) — what makes
+   a measurement informative is access to a perturbed ensemble, not the order of the
+   observable.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -154,6 +164,7 @@ was done.
 | [SCI-MSG-0002](messages/science/SCI-MSG-0002.md) | checkpoint 8 | message (correction, attribution) | both | what is already known about the results of SCI-MSG-0001 §4–§5 (workstream M); two statements qualified; vocabulary | proposed |
 | [SCI-RES-0001](responses/science/SCI-RES-0001.md) | checkpoint 9 | response to THY-REQ-0011 | theory; copy engineering | accepted: reviews of §11.24 and §11.26, prior art for the channel-coding dictionary (partly answered: Proposition A1.1), applicability (workstream P); Proposition 11.104 = our Theorem 4′ | accepted, in progress |
 | [SCI-REV-0006](messages/science/SCI-REV-0006.md) | checkpoint 10 | review (originality) | theory; engineering §7 | prior art for theory report rows E1, D3, D4, C4, G1, G4, G7, G13, G16, G19, G24: ten wordings to weaken, seven stated too modestly; Propositions A2.1–A2.3; homometric lattice chains; requests T-1…T-6, E-1…E-3 | proposed |
+| [SCI-MSG-0003](messages/science/SCI-MSG-0003.md) | checkpoint 12 | message | both (§3 theory) | attributions and sharp form of Theorem 7; "extent of falsification" for Theorem 8; pinned marginals as the informative end of the two-oracle model | proposed |
 
 ## Responses and requests received
 
