@@ -625,7 +625,18 @@ site functions (a convex problem in one site), sample `Q*ⁿ`, and return the mi
 number of samples on every instance (`product_sandwich`), and no algorithm does better in the
 worst case (Theorem 11.28(d)).  For two-state sites `Q*` is the Gibbs law tilted to the slope
 at which the tangent of the pressure is parallel to its chord over `[−c, c]` (Theorem
-11.28(e)).  Exact equality of values
+11.28(e)).  *Without a model, below that accuracy* (binary sites, zero known part; theory
+report §11.16): draw two independent uniform samples of size `M`; let `t` be the `⌈K⌉`-th largest
+Gibbs weight in the first, `Â_t` the mean of `min(w, t)` over the second, `r` the least radius with
+`|B(r)| ≥ 2^{n+1}K/M`; with `K = 24 ln(4/δ)` the interval
+`[Â_t/1.5, 2Â_t + t·2^{−n} Σ_{j≤r} C(n,j)(e^{βc(r+1−j)} − 1)]` contains `2^{−n}Z` except with probability
+`δ`, for every residual of the class (Proposition 11.46; the isoperimetric term is the price
+of what the samples cannot have seen).  Double `M` (with `K` raised by `24 ln 2` per stage)
+until the interval is narrow enough.  The cost is the best possible with a hint when the
+residual is flat, and at worst `e^{n·min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}}` — which no procedure that
+fixes its sample points in advance can beat (Theorem 11.45), so a producer should spend a few
+adaptive evaluations first: a point and its neighbours detect a cone, and then two more
+evaluations determine it.  Exact equality of values
 is assumed; with numerical tolerances the comparison and the envelope must be widened
 consistently.  No kernel for such transcripts is implemented here.
 
@@ -688,33 +699,67 @@ expressed in windowed local frames (bounded constants); envelopes in a contact-m
 chain rule, costs a stretched exponential `exp(Θ̃(√N))` at the zero residual instead of an
 exponential — a bound on certificate sizes, not yet a kernel.
 
-**A format that does not grow: pair-distance profiles** (theory report §11.17; `LinearClass.lean`;
-not yet refereed).  If the residual is *pair-additive with unknown radial functions* —
-`g(x) = Σ_{p<q} φ_{type(p,q)}(s_pq(x))`, `s` the squared distance, each `φ` `L`-Lipschitz and zero
-beyond a cutoff `S_c` — the exporter publishes, instead of per-torsion constants: the pair
-types, the cutoff, and `L`.  The envelope is then
+**A format for pair-additive residuals: pair-distance profiles** (theory report §11.17;
+`LinearClass.lean`; refereed, `reviews/R6_referee_report.md`).  If the residual is *pair-additive
+with unknown radial functions* — `g(x) = Σ_{p<q} φ_{type(p,q)}(s_pq(x))`, `s` the squared distance,
+each `φ` `L`-Lipschitz **in `s`** and zero beyond a cutoff `S_c` — the exporter publishes, instead of
+per-torsion constants: the pair types, the cutoff, and `L` (a constant per pair, which does
+not grow with the chain).  The envelope is then
 
     d_P(x, y) = L Σ_types ∫_0^{S_c} |N^x(s) − N^y(s)| ds,
 
-`N^x(s)` the number of pairs of that type with squared distance at most `s` (a step function
-with rational breakpoints when the geometry is rational, so `d_P` is computed exactly).  Two
-checkable rules follow.  *Nearest profile* (McShane): `|g(y) − g(x_i)| ≤ d_P(y, x_i)`.  *Span*:
-for any rational coefficients `λ_i`,
+`N^x(s)` the number of pairs of that type with squared distance at most `s` (a step function;
+its breakpoints are rational when the coordinates are, and then `d_P` is computed exactly —
+with irrational bond geometry only enclosures are available).  Checkable rules:
 
-    | g(y) − Σ_i λ_i g(x_i) |  ≤  L Σ_types ∫_0^{S_c} | N^y(s) − Σ_i λ_i N^{x_i}(s) | ds
+* *Nearest profile* (McShane): `|g(y) − g(x_i)| ≤ d_P(y, x_i)` (`pairRes_sub_le`).
+* *Span*: for any rational coefficients `λ_i` (no condition on their sum),
+  `|g(y) − Σ_i λ_i g(x_i)| ≤ L Σ_types ∫_0^{S_c} |N^y(s) − Σ_i λ_i N^{x_i}(s)| ds`
+  (`pairRes_span_upper`, `pairRes_span_lower`).  The producer finds coefficients by linear
+  programming — one program for the upper end and one for the lower end, since the two
+  optimal `λ` differ — and the checker evaluates one integral of a step function.
+* *Voxels*: if over a voxel of conformations the profile of `y` is enclosed between `N_lo` and
+  `N_hi`, replace the integrand by `max(|N_lo(s) − c(s)|, |N_hi(s) − c(s)|)`, `c = Σ_i λ_i N^{x_i}`
+  (`pairRes_span_upper_enclosure`).  The enclosure of a pair distance over a voxel of torsions
+  widens with the lever arm: this is where the difficulty of §11.14 reappears, in the
+  checker instead of in the constants.
+* *Remainder*: with a first-order remainder of envelope `d` the rules need `Σ_i λ_i = 1` and
+  gain the cost of a transport plan between `δ_y + Σ λ_i⁻ δ_{x_i}` and `Σ λ_i⁺ δ_{x_i}` — any plan is a
+  valid certificate, checked by one sum; the default "everything through `y`" costs
+  `Σ_i (λ_i⁺ d(y,x_i) + λ_i⁻ d(x_i,y))` at the upper end (`sumClass_span_upper`) and the transposed
+  expression at the lower end (`sumClass_span_lower`), and can be wasteful.
+* *No evaluation at all*: if the known radial function rises by at least `L` per unit of `s`
+  below the cutoff, a conformation whose cumulative profile dominates all others is optimal
+  for every residual of the class (`pairRes_sharp`).
 
-(`pairRes_span_upper`, `pairRes_span_lower`): the producer searches for good coefficients by
-linear programming, the checker evaluates one integral of a step function.  Planning numbers
-(Proposition 11.49): with at most `z` beads within the cutoff of any bead, certificates at an
-accuracy of `ε₁` per bead have at most `exp(5.6·(number of pair types)²·z L S_c/ε₁)` evaluated
-conformations, whatever the chain length; if the squared distances below the cutoff take `G`
-values (lattice or rational-torus geometries), `(number of pair types)·G` evaluations
-determine the residual exactly.  What this does **not** cover: residuals with pair-specific
-terms (every pair its own type: no gain), many-body terms (profiles over triangles are
-needed), and a remainder outside the class — with a first-order remainder of envelope `d` the
-span rule gains the term `Σ_i (λ_i⁺ d(y,x_i) + λ_i⁻ d(x_i,y))` and requires `Σ λ_i = 1`
-(`sumClass_span_upper`), so large coefficients of both signs are not free.  To bound a whole
-voxel of conformations, replace `N^y` by its interval enclosure over the voxel.
+What to expect.  On a lattice, where the squared distances below the cutoff take `G` values,
+`(number of pair types)·G` evaluations determine a pair-additive residual exactly, for every
+chain length (on the rational torus `G` grows with the chain).  With continuous distances,
+certificates at an accuracy of `ε₁` per bead exist whose number of evaluations does not depend
+on the chain length (theory report Proposition 11.49), but the bound that proves it —
+`exp(1.39·(number of pair types)·⌈4 z L S_c/ε₁⌉)` for the nearest-profile rule — is an existence
+statement and useless as a planning number (it is hundreds of orders of magnitude above
+measured sizes); measure the diameter of the profile set of the system at hand instead.
+What this format does **not** cover: residuals that are not functionals of pair-distance
+statistics (chirality, sequence-specific pairs, many-body terms; a mirror image has the same
+profile), terms that are steep in `s` at short range, and any remainder outside the class —
+which is paid at first-order prices, i.e. exponentially for a per-torsion remainder envelope
+(theory report Proposition 11.49(e)).
+
+*A verified kernel for this format* (`LinearKernel.lean`; theory report Proposition 11.50).
+When the features are pairwise tables with nonnegative entries — contact counts or
+cumulative pair counts on a grid of rotamer pairs — and the unknown coefficients lie in a
+rational box, minimisation over the conformations with the residual *and* its uncertainty is
+certified by the pairwise kernel of §6.1: subdivide the coefficient box; at each leaf
+`[lo, hi]` certify `m ≤ min_x (E₀ + Σ_α lo_α F_α)(x)` with an ordinary `min` certificate and add
+the data term `Σ_i λ_i v_i − Σ_α max(lo_α c_α, hi_α c_α)`, `c_α = Σ_i λ_i F_α(a_i)`, for
+multipliers `λ_i` of the producer's choice (a small linear program per leaf; `λ = 0` is always
+allowed).  The accepted bound holds for every coefficient vector of the box that is
+consistent with the evaluated anchors (`verifyLTop_sound`).  Producer strategy: split along
+the coefficient with the largest `(hi_α − lo_α)·max_x F_α(x)`; leaves that contradict the
+anchors are closed by the data term alone.  There is no JSON schema for this kind yet (the
+kernel exists in Lean only), and features with entries of both signs must be split into
+their positive and negative parts first.
 
 **From bound propagation to an envelope.**  Alternatively run interval or linear bound
 propagation through the network with site `i` ranging over its domain and the other sites over
@@ -874,7 +919,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 132 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 147 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  The audit script runs it, and starts with a self-test in which

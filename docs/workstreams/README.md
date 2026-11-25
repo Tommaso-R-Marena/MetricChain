@@ -40,5 +40,5 @@ coordinator's claims first.
 
 | stream | question | brief | report |
 |---|---|---|---|
-| H | Algorithms without a hint on the cube: verify the Monte Carlo and non-adaptive results of theory report §11.16; is adaptivity enough to reach the hinted exponent? | `H_brief.md` | pending |
-| P | Chains: envelopes from pair-distance profiles (theory report §11.17); verification on synthetic chains, lower bounds, prior art. | `P_brief.md` | pending |
+| H | Algorithms without a hint on the cube: verify the Monte Carlo and non-adaptive results of theory report §11.16; is adaptivity enough to reach the hinted exponent? | `H_brief.md` | `H_REPORT.md` (delivered at the second checkpoint of cycle 10: the four statements of §11.16 confirmed; on radial instances adaptivity closes the whole gap; a two-level algorithm beats the non-adaptive exponent on the whole class; the coordinator's own multilevel accounting refuted.  **Not yet reviewed and not yet integrated into the theory report** — that is the next checkpoint) |
+| P | Chains: envelopes from pair-distance profiles (theory report §11.17); verification on synthetic chains, lower bounds, prior art. | `P_brief.md` | `P_REPORT.md` (delivered; reviewed in `reviews/R_P_review.md`: no statement false, four numbers and several sentences of the summary corrected; its corrections to the coordinator's claims and the reviewer's corrections to its own are applied in theory report §11.17) |

@@ -40,6 +40,7 @@ import proofs.Frontiers.SecondOrderDip
 import proofs.Frontiers.SoftGapIndependence
 import proofs.Frontiers.NonAdaptive
 import proofs.Frontiers.LinearClass
+import proofs.Frontiers.LinearKernel
 import proofs.AuditCommand
 
 /-!
@@ -354,12 +355,21 @@ import proofs.AuditCommand
 #print axioms MetricChain.nonadaptive_expected_queries_ge
 #print axioms MetricChain.cube_nonadaptive_bound
 #print axioms MetricChain.sum_le_truncated_add_tail
+#print axioms MetricChain.sum_truncated_ge
 #print axioms MetricChain.linRes_sub_attained
 #print axioms MetricChain.linRes_span_upper
 #print axioms MetricChain.linRes_span_exact
 #print axioms MetricChain.sumClass_span_upper
+#print axioms MetricChain.sumClass_span_lower
+#print axioms MetricChain.pairRes_span_upper_enclosure
 #print axioms MetricChain.pairRes_sub_le
 #print axioms MetricChain.pairRes_span_upper
+#print axioms MetricChain.pairRes_sharp
+#print axioms MetricChain.verifyL_sound
+#print axioms MetricChain.verifyLTop_sound
+#print axioms MetricChain.contactTriangle_verified
+#print axioms MetricChain.contactTriangle_bound
+#print axioms MetricChain.contactTriangle_class_nonempty
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp

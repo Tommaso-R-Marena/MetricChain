@@ -59,3 +59,30 @@ Not read by anyone in this project: Novak 1988, Nemirovski–Yudin 1983, Ge–Le
 * Asymptotic isoperimetric inequalities on product spaces at the large-deviation scale
   (Ahlswede–Gács–Körner blowing-up; Ahlswede–Zhang; Yu) as the tool for exponents beyond the
   cube.
+
+## Addendum (cycle 10): algorithms without a hint (theory report §11.16)
+
+Sources and who read what.  "R5" is the fifth referee (`reviews/R5_referee_report.md`, §4, with
+its own search log of fifteen searches and nine page fetches).
+
+| source | relevance | read by | depth |
+|---|---|---|---|
+| P. Mathé, E. Novak, *Simple Monte Carlo and the Metropolis algorithm*, J. Complexity 23 (2007); arXiv:math/0611285 | **closest prior art for Theorem 11.45**: lower bound for every non-adaptive Monte Carlo method on log-concave densities with a Lipschitz logarithm, by Bakhvalov's averaging over densities `exp(−α‖y − y_i‖)` with hidden centres and integrands supported near the centre (their Theorem 3); remark that one function value identifies the centre for an adaptive method; an adaptive Metropolis method of polynomial cost (Theorem 5); simple Monte Carlo optimal among all methods on the larger class `sup ρ/inf ρ ≤ C` (Theorems 1–2) | R5; the coordinator | R5: §§1–4.1 and §5 in full text, §4.2 skimmed; coordinator: abstract page only (title, authors, abstract: "adaptive methods are much better than nonadaptive ones … the curse of dimension (for nonadaptive methods) can be broken by adaption") |
+| S. Chatterjee, P. Diaconis, *The sample size required in importance sampling*, Ann. Appl. Probab. 28 (2018) | the sample size `exp(KL(ν‖μ))` at one instance; Theorem 11.44 makes it a bound on the class at the exponential scale | R5 | abstract page; Theorem 1.1 and a summary of §3 through an automatic reading of the full text |
+| L. H. Harper (1966), vertex-isoperimetric theorem | Lemma 11.43(b), (c) | nobody in this project | statement taken from secondary sources (Keevash–Long, *Stability for vertex isoperimetry in the cube*, introduction, automatic reading; a search summary of *Uniqueness in Harper's vertex-isoperimetric theorem*); the consequence used was checked exhaustively for `n ≤ 5` by R5 |
+| D. Dzindzalieta, *Extremal Lipschitz functions in the deviation inequalities from the mean*, Electron. Commun. Probab. 18 (2013) | distance functions as extremal Lipschitz functions (precedent for "cones are extremal") | R5 | abstract |
+| D. Krieg, E. Novak, M. Ullrich, *On the power of adaption and randomization* (2025); S. Heinrich, *Randomized complexity of parametric integration and the role of adaption I* (2024) | adaption versus non-adaption for **linear** problems; `ln Z` is not linear, so neither "adaption does not help" nor these gaps apply | R5 | abstract pages |
+| X. Cai, J. Scarlett, *Kernelized normalizing constant estimation* (AAAI 2024) | bounds for `∫e^{−λf}` over an RKHS ball; related to the open question of §12 item 2(d) | R5 | abstract |
+| Dagum–Karp–Luby–Ross (2000); Kunsch–Novak–Rudolf (2019); Ionides (2008); Štefankovič–Vempala–Vigoda (2009) | stopping-rule Monte Carlo, varying cardinality, truncated importance sampling, adaptive cooling schedules | R5 | search summaries only |
+
+Searches by R5 without a relevant hit: query complexity of the partition function of a
+Lipschitz function on the Hamming cube (adaptive / non-adaptive); `Σ exp(−f)` over the Boolean
+cube by value queries; Harper's theorem combined with Monte Carlo or importance sampling;
+worst case of importance sampling over log-Lipschitz classes (this one led to Mathé–Novak).
+
+Assessment (R5, accepted): the method of Theorem 11.45 is known and its hard family is
+Mathé–Novak's; the exact non-adaptive exponent on the cube for `ln Z` with a matching
+class-wide upper bound was not found; Theorem 11.44 is a routine combination.  The earlier
+entry of this file "whether the threshold of Theorem 11.25 … [is] known in the literature on
+Monte-Carlo integration of exponential functionals" remains open for a specialist.
+

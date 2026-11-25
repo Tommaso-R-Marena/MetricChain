@@ -1115,6 +1115,17 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   format makes long chains certifiable.  §§11.13–11.14 are paper results of independent
   workstreams, re-derived by reviewers but not machine-checked, and they ignore excluded
   volume.
+* **Without a hint, only the non-adaptive case is settled, and only on the cube** (§11.16).
+  The exponent of adaptive algorithms without a hint is open; the upper bounds rest on
+  Harper's theorem, which is cited, and on paper reductions to it.
+* **The profile format answers a narrower question than §11.14 asked** (§11.17).  Certificates
+  that do not grow with the chain exist for residuals that are functionals of pair-distance
+  statistics, at extensive accuracy, and the bound that says so is numerically vacuous; a
+  remainder that is only bounded in a first-order envelope is paid at first-order prices (one
+  bounded in the supremum norm costs an accuracy floor), chirality and sequence-specific
+  terms are outside, the class is far smaller than an RMSD-Lipschitz class, and checking a
+  certificate over voxels of torsions meets the lever arm again.  Whether a physical residual
+  has a useful Lipschitz constant in this format is not addressed.
 * **No claim of practical performance.**  All experiments are synthetic and small; they check
   tightness and scaling of bounds, not solver speed.
 * **Unformalized statements** are marked [P] or [K]: the hardness half of the link-graph
@@ -1129,7 +1140,11 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   assembly of the product lower bound from its two machine-checked ingredients, the
   identification of the best constant `γ(Q)` with a maximum over vertices, the algorithmic
   reading of the hitting bound and of the one-reference sandwich, the minimax identity, and
-  the closed form for two-state sites.
+  the closed form for two-state sites; in §11.16, Lemma 11.43(b,c) (the reduction to Harper's
+  theorem), Theorem 11.44, the closed forms and all exponents of Theorem 11.45, its parts (d)
+  and (e), and Proposition 11.46; in §11.17, every exactness statement (linear-programming and
+  Kantorovich–Rubinstein duality), the attainment and the transport form of the profile
+  envelope for general distances and several types, and Proposition 11.49 except (c).
 * **Certified numerics outside Lean.**  Eigenvalue enclosures needed to *evaluate* the spectral
   bound of §4.1 on data are standard verified numerics but are not part of the development.
 
@@ -1179,7 +1194,8 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/SecondOrderDip.lean` | `SecondOrderDip.dip`, `SecondOrderDip.dip_mixedDiffBound`, `SecondOrderDip.dip_center`, `SecondOrderDip.dip_eq_zero`, `SecondOrderDip.dip_witness`, `SecondOrderDip.star_upper`, `SecondOrderDip.stars_do_not_combine` (dense second-order classes; from workstream E's scratch files) |
 | `proofs/Frontiers/SoftGapIndependence.lean` | `gibbs_mul_exp_softGap`, `sum_gibbs_exp_softGap_indep`, `sum_dipWeight_indep`, `spotCheck_const_le_cover` (the spot-check constant does not depend on the residual; from workstream G's scratch files) |
 | `proofs/Frontiers/NonAdaptive.lean` | `nonadaptive_expected_queries_ge`, `cone_admissible`, `flatCone_admissible`, `cube_nonadaptive_bound`, `weight_le_of_outside`, `sum_le_truncated_add_tail` (non-adaptive lower bound; tail lemma; §11.16) |
-| `proofs/Frontiers/LinearClass.lean` | `linRes`, `featEnv`, `featEnv_isEnvelope`, `linRes_sub_le`, `linRes_dev_admissible`, `linRes_sub_attained`, `linRes_span_upper`, `linRes_span_lower`, `linRes_span_exact`, `pairRes`, `cumCount`, `pairRes_eq_cum`, `profEnv`, `profEnv_isEnvelope`, `pairRes_sub_le`, `pairRes_admissible`, `pairRes_span_upper`, `pairRes_span_lower` (classes linear in features; pair-additive residuals; §11.17) |
+| `proofs/Frontiers/LinearClass.lean` | `linRes`, `featEnv`, `featEnv_isEnvelope`, `linRes_sub_le`, `linRes_dev_admissible`, `linRes_sub_attained`, `linRes_span_upper`, `linRes_span_lower`, `linRes_span_exact`, `sumClass_span_upper`, `sumClass_sub_le`, `pairRes`, `cumCount`, `pairRes_eq_cum`, `profEnv`, `profEnv_isEnvelope`, `pairRes_sub_le`, `pairRes_admissible`, `pairRes_span_upper`, `pairRes_span_lower`, `pairRes_le_of_dominates`, `pairRes_sharp` (classes linear in features; pair-additive residuals; §11.17) |
+| `proofs/Frontiers/LinearKernel.lean` | `PairInstance.addSmul`, `PairInstance.addSmul_energy`, `LProblem`, `LinResidualClass`, `LCert`, `dataTerm`, `verifyL`, `dataTerm_le_zero`, `verifyL_sound`, `verifyLTop`, `verifyLTop_sound`, `contactTriangle_verified`, `contactTriangle_no_anchor_rejects`, `contactTriangle_bound`, `contactTriangle_class_nonempty` (kernel for residuals linear in pairwise features; §11.17) |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -1226,7 +1242,8 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G16 | **Chain geometry**: the verified torsion-to-RMSD constants grow like `m^{3/2}` with the distance to the chain end (lever-arm law); with constants growing like any positive power, weighted-Hamming envelopes make certification exponential with almost full exponent; used directly, the RMSD envelope costs a stretched exponential `exp(Θ̃(√N))` at the zero residual; contact residuals force growing constants in every torsion-Hamming envelope | **[P]** from machine-checked bounds (`card_ge_exp_weights`, `expected_queries_ge_exp_weights_min`, `thermal_expected_queries_ge`); two constants numerical | workstream G, checked by a reviewer with own geometry code; lever-arm effects are folklore in molecular modelling, the quantitative consequences for certification were not found (no literature search was possible in the review) |
 | G17 | **Chains as known parts**: one evaluation certifies iff every contiguous droplet is sharp (`c ≤ τ`, a minimum-ratio cycle; `2h` for the Ising ferromagnet); the exponent of homogeneous chains is `sup_ν R_ν(e(ν))` over stationary processes; the transfer-matrix (Boltzmann) bound vanishes on the window `2h < c ≤ 2(J+h)`; the soft gap of a chain is a pinned free energy | **[P]**, re-derived by a reviewer (no Lean) | workstream B; the exactness criterion at zero field is **known** (Gray's critical distortion); the droplet criterion, the exponent theorem and the vacuous window were not found (no literature search was possible in the review) |
 
-| G18 | **Without a hint on the cube**: the exponent of non-adaptive algorithms is exactly `min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}` — plain Monte Carlo attains it on the whole class (tail lemma: above a threshold the mass is at most the excess of a dip on a ball of the size of the super-level set), and no non-adaptive algorithm does better (cones against cones with a flattened bottom); the same samples give a certified bracket that needs no hint at the zero residual; adaptive algorithms without a hint lie between this and the hinted exponent | `nonadaptive_expected_queries_ge`, `cube_nonadaptive_bound`, `weight_le_of_outside`, `sum_le_truncated_add_tail` **[V]**; Harper's theorem **[K]**; the probabilistic statements **[P]** | cycle 10, review pending; the sample size `e^{KL(π‖uniform)}` at one instance is **known** (Chatterjee–Diaconis 2018); its validity on a Lipschitz class and the matching non-adaptive lower bound were not found (search by workstream H pending) |
+| G18 | **Without a hint on the cube**: the exponent of non-adaptive algorithms is `min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}` at extensive accuracies and `KL(p_u‖½)` at every fixed accuracy — plain Monte Carlo attains it on the whole class (tail lemmas: above a threshold the mass is at most the excess of a dip on a ball of the size of the super-level set, below it at least that of a cone around such a ball), and no non-adaptive algorithm does better (cones against cones with a flattened bottom); two independent samples give a certified bracket that needs no hint at the zero residual for `ε > 2`; an adaptive algorithm that is correct on the class needs `n + 3` evaluations on a cone; adaptive algorithms without a hint lie between this and the hinted exponent | `nonadaptive_expected_queries_ge`, `cube_nonadaptive_bound` (conditional on two finite sums), `weight_le_of_outside`, `sum_le_truncated_add_tail`, `weight_ge_of_inside`, `sum_truncated_ge` **[V]**; Harper's theorem **[K]**; the reductions to it, the closed forms, all exponents and the probabilistic statements **[P]** | cycle 10, refereed (`reviews/R5`); the sample size `e^{KL(π‖uniform)}` at one instance is **known** (Chatterjee–Diaconis 2018) and the *method* of the non-adaptive lower bound — hidden cone centres, Bakhvalov averaging, defeated by adaption — is **known** (Mathé–Novak 2007, for log-concave densities with a Lipschitz logarithm); the exponent on the cube for `ln Z` and the matching class-wide upper bound were not found |
+| G19 | **Correlated uncertainty**: for residuals that are linear in known features with coefficients in a box, the envelope is a pulled-back weighted `ℓ¹` distance, every linear combination of evaluations brackets the value at a new point by the unexplained part of its feature vector (worst case over the data: the `ℓ¹` distance to the span, against the distance to the nearest point for the first-order class of the same envelope), and rank-many evaluations determine everything; pair-additive residuals with unknown Lipschitz radial functions are linear in cumulative pair-count profiles, their envelope is a transport distance between pair-distance distributions, sharpness is stochastic dominance, and at extensive accuracy certificates in this format exist whose size does not depend on the chain length; a kernel certifies minima for all coefficient vectors consistent with evaluated anchors | `linRes_sub_le`, `linRes_sub_attained`, `linRes_span_upper`, `linRes_span_lower`, `linRes_span_exact`, `sumClass_span_upper`, `sumClass_span_lower`, `pairRes_eq_cum`, `pairRes_sub_le`, `pairRes_span_upper`, `pairRes_span_upper_enclosure`, `pairRes_sharp`, `verifyLTop_sound`, `contactTriangle_bound` **[V]**; exactness (duality), the transport form, the entropy bound and everything about chain length **[P]** | cycle 10, refereed (`reviews/R6`) except the kernel; the linear theory is **known** (optimal recovery: Smolyak, Micchelli–Rivlin; set-membership estimation; robust linear programming), the features are those of linear contact potentials (Maiorov–Crippen 1992; Tobi et al. 2000), the distance is **known** as a descriptor distance (Osada et al. 2002; bag of bonds), the entropy of monotone functions is classical; its reading as the exact envelope of a residual class next to a known part, and the consequences for certificates, were not found; **none of it is deep** |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -1250,7 +1267,12 @@ second-order classes at finite temperature, the continuum threshold and the hard
 averages (G15), and what all of this predicts for the chain geometry the program started
 from (G16) — the last being the finding with the most direct consequence for the blueprint:
 the verified route through per-torsion constants cannot certify long chains; (viii) the first
-results with an interacting known part (G17).
+results with an interacting known part (G17); (ix) the exact exponent of non-adaptive
+algorithms without a hint on the cube (G18) — a known method for the lower bound, a routine
+combination of truncation, an isoperimetric tail bound and Chernoff for the upper one;
+(x) the transfer of classical optimal recovery to residual classes next to a known part
+(G19), whose mathematical content is known and whose use here is to say precisely which
+uncertainty is cheap: the correlated kind.
 Each rests on textbook tools (type covering, Hölder, telescoping, linear-programming duality);
 the proofs are short.  The second referee's verdict on G1–G10 — "a coherent note, not a
 theorem-driven paper" — is reproduced in §12 together with what a publication would still
@@ -2186,11 +2208,11 @@ accuracy `nΛ₁`, the soft gap.  For small `u` the exponent of the third row is
 *Without a hint* the worst-case cost on this class is at least that and at most
 `(cosh u)ⁿ/(δ(1 − e^{−ε/2})²)`: plain Monte Carlo over uniform samples, by Chebyshev's inequality,
 since `E e^{−2β(g − Eg)} ≤ (cosh u)ⁿ` by the martingale argument of (b) and `E e^{−βg} ≥ e^{−βEg}`
-**[P]**.  So the hint-free exponent lies between `≈ u²/32` and `ln cosh u ≈ u²/2`; the value
-`e^{KL(π‖uniform)} ≈ e^{nu²/8}` at the additive worst case (Chatterjee–Diaconis 2018) is what one
-expects of importance sampling from the uniform reference, but it is a heuristic here, not a
-theorem (it would need the concentration hypothesis of that paper and a correctness proof on
-the whole class).  The exponent of hint-free algorithms is open (§12).
+**[P]**.  §11.16 replaces this Chebyshev bound: the value `e^{KL(π‖uniform)} ≈ e^{nu²/8}` at the
+additive worst case (Chatterjee–Diaconis 2018) is the exact exponent of plain Monte Carlo on
+the whole class and of every non-adaptive algorithm (Theorems 11.44–11.45), so the exponent
+of algorithms without a hint lies between `≈ u²/32` and `≈ u²/8`; where between, for adaptive
+algorithms, is open (§12).
 
 **Theorem 11.26 (soft-gap sampling: an upper bound in the same quantity) [V].**  Let `β ≥ 0`.
 (a) The soft gap is Lipschitz for `β` times the slack, `Λ(x) ≤ Λ(z) + β s(z,x)`
@@ -2835,142 +2857,195 @@ So for chains the one-reference sandwich of Theorem 11.28(d) holds as stated the
 not use the product structure — but its width is not a single-site quantity, and the threshold
 is open.
 
-### 11.16 Without a hint: Monte Carlo is optimal among non-adaptive algorithms
+### 11.16 Without a hint: Monte Carlo is exponent-optimal among non-adaptive algorithms
 
 Theorem 11.25 left the cost of algorithms *without a hint* on the cube class between the
 exponent `ln 2 − h(Λ₁/u) ≈ u²/32` of the zero residual and `ln cosh u ≈ u²/2` (Chebyshev), and
 called the value `e^{KL(π‖uniform)}` of importance sampling a heuristic.  This section proves
-that value on the whole class, shows that no non-adaptive algorithm does better, and reduces
-the open question to adaptivity.  Setting and notation of Theorem 11.25: `X = {0,1}ⁿ`, `f ≡ 0`,
-`d = c·`Hamming, `u = βc`, algorithms that are `(ε/2, δ)`-correct for `ln Z` on the whole class;
-`w = e^{−βg}` is the Gibbs weight, `A = 2^{−n} Σ_x w(x)`, `B(r)` a Hamming ball, `Δ_r` the effect of the
-dip on `B(r)` at the zero residual (`e^{Δ_r} − 1 = 2^{−n} Σ_{j≤r} C(n,j)(e^{u(r+1−j)} − 1)`),
-`p_u = 1/(1+e^u)`, `KL(a‖b)` the binary relative entropy; recall
-`ln cosh(u/2) = KL(½‖p_u)`.  (Written in cycle 10; the statements are checked by the harness and,
-where marked, by Lean; an independent review is pending.)
+that value on the whole class, shows that no non-adaptive algorithm does better — by the
+method of Mathé–Novak (2007) for log-Lipschitz densities — and reduces the open question to
+adaptivity.  Setting and notation of Theorem 11.25: `X = {0,1}ⁿ`, `f ≡ 0`, `d = c·`Hamming,
+`u = βc`, algorithms that are `(ε/2, δ)`-correct for `ln Z` on the whole class; `w = e^{−βg}` is the
+Gibbs weight, `A = 2^{−n} Σ_x w(x)`, `B(r)` a Hamming ball, `Δ_r` the effect of the dip on `B(r)` at
+the zero residual (`e^{Δ_r} − 1 = 2^{−n} Σ_{j≤r} C(n,j)(e^{u(r+1−j)} − 1)`), `p_u = 1/(1+e^u)`, `KL(a‖b)` the
+binary relative entropy; recall `ln cosh(u/2) = KL(½‖p_u)`.
 
-**Lemma 11.43 (tail lemma) [V; Harper's theorem K] (`NonAdaptive.lean`).**
-(a) *Any space, any envelope* (`weight_le_of_outside`, `sum_le_truncated_add_tail`).  Let `g` be
-admissible and `t > 0`.  If `w(z) ≤ t` then `w(x) ≤ t e^{β d(z,x)}` for every `x`: an admissible
-residual cannot fall faster than the envelope.  Hence, with `D = {w > t}`,
+*Status.*  Written in cycle 10 and refereed (`reviews/R5_referee_report.md`): no statement was
+found false; three major defects — the first version said nothing at bounded accuracies, the
+prior art for the lower bound was missing, and the labels claimed more machine-checking than
+there is — are corrected below (`DEAD_ENDS.md` D43).  Lemma 11.43(c) and the present form of
+Theorem 11.44 follow an appendix of that report; we re-derived and tested them (harness
+XIII.2), and they have not been refereed a second time.
 
-    Σ_x w(x)  ≤  Σ_x min(w(x), t)  +  t Σ_{x ∈ D} (e^{β dist(Dᶜ, x)} − 1),
+**Lemma 11.43 (tail lemmas) [(a) V; (b), (c) P + K] (`NonAdaptive.lean`).**
+(a) *Any space, any envelope.*  Let `g` be admissible and `t > 0`.  If `w(z) ≤ t` then
+`w(x) ≤ t e^{β d(z,x)}` for every `x`, and if `w(y) ≥ t` then `w(x) ≥ t e^{−β d(x,y)}`: an admissible
+residual can neither fall nor rise faster than the envelope (`weight_le_of_outside`,
+`weight_ge_of_inside`).  Hence, with `D = {w > t}` and `S = {w ≥ t}`,
 
-and the second sum depends only on the shape of the super-level set.
-(b) *The cube.*  If `|D| ≤ |B(r)|`, then `Σ_{x∈D} (e^{u dist(x, Dᶜ)} − 1) ≤ 2ⁿ(e^{Δ_r} − 1)`, with
-equality for balls: the erosions `D_j = {x : dist(x, Dᶜ) ≥ j}` satisfy `N^{j−1}(D_j) ⊆ D`, so
-`|D_j| ≤ |B(r+1−j)|` by Harper's vertex-isoperimetric theorem, and the sum is
-`Σ_{j≥1} (e^{uj} − e^{u(j−1)}) |D_j|`.  So **the mass above a threshold is at most the excess of
-a dip on a ball of the size of the super-level set**, `E[(w − t)₊] ≤ t (e^{Δ_r} − 1)`; truncated
+    Σ_x w(x)  ≤  Σ_x min(w(x), t)  +  t Σ_{x ∈ D} (e^{β dist(Dᶜ, x)} − 1),        Σ_x min(w(x), t)  ≥  t Σ_x e^{−β dist(x, S)}
+
+(`sum_le_truncated_add_tail`, `sum_truncated_ge`; `dist(Dᶜ, x) = min_{z∉D} d(z,x)`, in this
+orientation also for asymmetric envelopes).  Both sums on the right depend only on the shape
+of a level set.
+(b) *The cube, above the threshold.*  If `∅ ≠ D ≠ X` and `|D| ≤ |B(r)|`, then
+`Σ_{x∈D} (e^{u dist(x, Dᶜ)} − 1) ≤ 2ⁿ(e^{Δ_r} − 1)`, with equality for balls.  Proof: the erosions
+`D_j = {x : dist(x, Dᶜ) ≥ j}` are the complements of the neighbourhoods `N^{j−1}(Dᶜ)`;
+`|Dᶜ| ≥ |B(n−r−1)|`, so `|N^{j−1}(Dᶜ)| ≥ |B(n−r+j−2)|` by Harper's vertex-isoperimetric theorem
+(initial segments of the simplicial order minimise the neighbourhood, hence
+`|A| ≥ |B(k)| ⇒ |N^t(A)| ≥ |B(k+t)|`), i.e. `|D_j| ≤ |B(r+1−j)|`; and the sum is
+`Σ_{j≥1} (e^{uj} − e^{u(j−1)}) |D_j|`.  So **the mass above a threshold is at most the excess of a
+dip on a ball of the size of the super-level set**: `E(w − t)₊ ≤ t (e^{Δ_r} − 1)`; truncated
 cones attain equality.  This is the isoperimetric step of Theorem 11.25(c), used there at the
 zero residual only, applied to the level sets of an arbitrary member of the class.
-Harness XIII.1.
+(c) *The cube, below the threshold* (fifth referee).  If `|S| ≥ |B(k)|`, then
+`2ⁿ E min(w, t) ≥ t·T_n(k)`, `T_n(k) = Σ_j C(n,j) e^{−u(j−k)₊}`: the sum `Σ_x e^{−u dist(x,S)}` is
+increasing in every `|N^i(S)|`, and `|N^i(S)| ≥ |B(k+i)|` by Harper.
+The reduction to Harper's theorem in (b) and (c) is a paper proof; the referee checked the
+erosion bound for all subsets of the `n`-cube, `n ≤ 5`, and harness XIII.1–2 check (b) and (c) on
+members of the class for `n ≤ 9`.
 
-**Theorem 11.44 (plain Monte Carlo on the whole class) [P; its deterministic step V + K].**
+**Theorem 11.44 (plain Monte Carlo on the whole class) [P; uses Lemma 11.43].**
 Let `X_1,…,X_M` be uniform, `Â = M⁻¹ Σ_i w(X_i)`, `1 ≤ K ≤ M`, `r` the least radius with
-`|B(r)| ≥ 2ⁿK/M`, and
+`|B(r)| ≥ 2ⁿK/M`, `t*` the upper `K/M`-quantile of `w`, and
 
-    Γ_n(r) = Σ_{j≤r} C(n,j)(e^{u(r+1−j)} − 1) / |B(r−1)|        (Γ_n(0) = 0).
+    Γ′_n(r) = Σ_{j≤r} C(n,j)(e^{u(r+1−j)} − 1) / T_n(r−1)   (r ≥ 1),        Γ′_n(0) = 0.
 
 For **every** residual of the class:
-(a) `ln Â − ln A ≥ −ln(2(1 + Γ_n(r)))` outside an event of probability `e^{−K/8}`, and
-`ln Â − ln A ≤ ln(1/δ₂)` outside an event of probability `δ₂`.
-(b) Hence the recentred estimate `ln Â + ½[ln(2(1+Γ_n(r))) − ln(1/δ₂)]` is
-`(ε/2, e^{−K/8} + δ₂)`-correct on the whole class as soon as `ln(2(1+Γ_n(r))) + ln(1/δ₂) ≤ ε`.
-(c) `n⁻¹ ln Γ_n(ρn) → KL(ρ‖p_u)` for `p_u ≤ ρ ≤ ½` (and `→ 0` below `p_u`).  So at accuracy `ε = nε₁`,
-`0 < ε₁ < ln cosh(u/2)`, `e^{n θ_na(ε₁) + o(n)}` uniform samples suffice on every instance, with
+(a) `A ≤ (1 + Γ′_n(r)) · E min(w, t*)`.
+(b) For `0 < η < 1`: `Â ≥ (1−η) A/(1 + Γ′_n(r))` outside an event of probability `e^{−η²K/2}`;
+`Â ≤ A/δ₂` outside an event of probability `δ₂`; and `Â ≤ (1 + η + Γ′_n(r)/δ₃) A` outside an event
+of probability `e^{−η²K/3} + δ₃`.
+(c) `n⁻¹ ln Γ′_n(ρn) → KL(ρ‖p_u)` for `p_u ≤ ρ ≤ ½` and `→ −KL(ρ‖p_u)` for `0 < ρ < p_u`.  Hence
+(i) at an extensive accuracy `ε = nε₁`, `0 < ε₁ < ln cosh(u/2)`, the estimate
+`ln Â + ½[ln(2(1+Γ′_n(r))) − ln(1/δ₂)]` is `(ε/2, e^{−K/8} + δ₂)`-correct on the whole class as soon
+as `ln(2(1+Γ′_n(r))) + ln(1/δ₂) ≤ ε`, and `e^{n θ_na(ε₁) + o(n)}` samples suffice, with
 
-    θ_na(ε₁)  =  min { KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁ }.
+    θ_na(ε₁)  =  min { KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁ };
 
-*Proof.*  Let `t*` be the upper `K/M`-quantile of `w` (the largest `t` with `|{w ≥ t}| ≥ 2ⁿK/M`).
-Then `D = {w > t*}` has fewer than `2ⁿK/M ≤ |B(r)|` points, so by Lemma 11.43
-`A ≤ E min(w,t*) + t*(e^{Δ_r} − 1)`.  Since `E min(w,t*) ≥ t* K/M` and, for `r ≥ 1`,
-`|B(r−1)| < 2ⁿK/M`, the last term is at most `Γ_n(r) · E min(w,t*)` (for `r = 0` the set `D` is
-empty): `A ≤ (1 + Γ_n(r)) E min(w,t*)`.  The variables `min(w(X_i),t*)/t* ∈ [0,1]` have total mean
-at least `K`, so by the multiplicative Chernoff bound their sum is at least half its mean
-outside an event of probability `e^{−K/8}`, and then
-`Â ≥ M⁻¹ Σ min(w(X_i),t*) ≥ ½ E min(w,t*) ≥ A/(2(1+Γ_n(r)))`.  The upper tail is Markov's
-inequality.  (c) is Stirling's formula: the exponent of the numerator is
-`max_{σ≤ρ} [h(σ) + u(ρ − σ)] = uρ + ln(1+e^{−u})` above `p_u`, and
+(ii) at every fixed accuracy `ε > 0` the plain estimate `ln Â` is correct on the whole class
+with `e^{n KL(p_u‖½) + O(√n)}` samples (take `r = p_u n − O(√n)`, where `Γ′` is a small constant).
+
+*Proof.*  `D = {w > t*}` has fewer than `2ⁿK/M ≤ |B(r)|` points and `{w ≥ t*}` has at least
+`2ⁿK/M > |B(r−1)|`; Lemma 11.43(b) and (c) give
+`E(w − t*)₊ ≤ t* (e^{Δ_r} − 1)` and `E min(w,t*) ≥ t* 2^{−n} T_n(r−1)`, which is (a) (for `r = 0` the set
+`D` is empty).  Write `Â = Â_trunc + Â_exc`, the means of `min(w, t*)` and of `(w − t*)₊`.  The
+variables `min(w(X_i), t*)/t* ∈ [0,1]` have total mean at least `K`: the multiplicative Chernoff
+bounds give `(1−η) E min(w,t*) ≤ Â_trunc ≤ (1+η) E min(w,t*)` outside events of probability
+`e^{−η²K/2}` and `e^{−η²K/3}`; `Â_exc ≥ 0` has mean at most `Γ′ A`: Markov.  (c) is Stirling's
+formula: the numerator has exponent `h(ρ)` below `p_u` and `uρ + ln(1+e^{−u})` above, the
+denominator `uρ + ln(1+e^{−u})` below `p_u` and `h(ρ)` above, and
 `uρ + ln(1+e^{−u}) − h(ρ) = KL(ρ‖p_u)`.  ∎
 
-At `ε₁ → 0` the exponent is `KL(p_u‖½) = n⁻¹ KL(π_cone‖uniform)` (`≈ u²/8`), the value that
-Chatterjee–Diaconis (2018) give for importance sampling at one instance, the cone: by the
-tail lemma the cone is the worst member of the class for uniform sampling, so their sample
-size is now a theorem on the class and replaces the Chebyshev bound `ln cosh u`.  Harness
-XIII.2 (the deterministic inequality on random members of the class; simulation at cones).
+The first version of this theorem bounded `E min(w,t*)` below by `t* K/M` only, i.e. had
+`|B(r−1)|` in place of `T_n(r−1)`; the minimum over `r` of that quantity tends to `4eᵘ(eᵘ−1)`, so
+the bound was void below an accuracy of about `ln(2(1+4eᵘ(eᵘ−1))) + ln(1/δ₂)` and the Chebyshev
+bound of
+Theorem 11.25 remained the only one there (referee, M1; benchmark B12 shows both versions at
+`ε = 1`).  At `ε₁ → 0` the exponent is `KL(p_u‖½) = n⁻¹ KL(π_cone‖uniform)` (`≈ u²/8`), the sample
+size that Chatterjee–Diaconis (2018) give for importance sampling at one instance, the cone;
+by the tail lemmas the two geometric sums are attained by cones up to one unit of radius, so
+their sample size holds on the whole class at the exponential scale and replaces `ln cosh u`.
+Harness XIII.2 (the deterministic inequalities on members of the class; the Chernoff step by
+simulation at small `K`, where failures do occur).
 
-**Theorem 11.45 (non-adaptive algorithms) [V] (`nonadaptive_expected_queries_ge`,
-`cube_nonadaptive_bound`).**  Call an algorithm *non-adaptive* if its set of evaluated points
-does not depend on the answers.
+**Theorem 11.45 (non-adaptive algorithms) [(a) V; (b) V given two finite sums; closed forms, (c)–(e) P] (`nonadaptive_expected_queries_ge`, `cube_nonadaptive_bound`).**
+Call an algorithm *non-adaptive* if its set of evaluated points does not depend on the
+answers.
 (a) *Any class, any functional.*  Let `(g_j, g'_j)` be pairs of class members with
 `|Φ(g'_j) − Φ(g_j)| > ε` and `v ≥ 0` weights such that every point lies in difference sets
 `{g'_j ≠ g_j}` of total weight at most `B`.  Then every randomised non-adaptive algorithm that
 is `(ε/2, δ)`-correct on the class evaluates at least `(1 − 2δ) Σ_j v_j / B` points in
 expectation.  (For adaptive algorithms only alternatives of one common instance can be
 combined in this way, Theorem 11.22(c); here both members of the pair vary, because the
-query set is the same on every instance.)
+query set is the same on every instance.  Without that hypothesis the statement is false:
+the referee gives a four-point example.)
 (b) *The cube.*  For every centre `s` the cone `c·d_H(·, s)` and the cone with a flattened
-bottom `max(c·d_H(·, s), cR)` are members of the class, they differ exactly on the open ball
-`{d_H(·, s) < R}`, and flattening lowers `ln Z` by
-`D_R = n ln(1+e^{−u}) − ln Σ_j C(n,j) e^{−u max(j,R)}`.  If `ε < D_R`, every randomised
-non-adaptive algorithm needs at least `(1 − 2δ) 2ⁿ/|B(R−1)|` evaluations.
-(c) Since `n⁻¹ D_{ρn} → KL(ρ‖p_u)` for `p_u ≤ ρ ≤ ½`, the exponent of non-adaptive algorithms at
-accuracy `nε₁` is at least `θ_na(ε₁)`: **the non-adaptive exponent on the cube class is exactly
-`θ_na(ε₁)`, and plain Monte Carlo with a recentred output attains it.**
-The pairs of (b) do not bind adaptive algorithms: a point and its `n` neighbours determine
-the centre of a cone (each neighbour is closer or farther), and one more evaluation at the
-centre separates the cone from its flattened version.  Harness XIII.3; non-vacuity witness `cube_nonadaptive_witness`.  The same
-counting covers algorithms that evaluate a pre-drawn sequence of points and choose only when
-to stop: the first index at which a pre-drawn sequence enters the ball of a uniformly random
-centre exceeds `m` with probability at least `1 − m|B(R−1)|/2ⁿ` **[P]**.
+bottom `max(c·d_H(·, s), cR)` are members of the class and differ exactly on the open ball
+`{d_H(·, s) < R}` (machine-checked); flattening lowers `ln Z` by
+`D_R = n ln(1+e^{−u}) − ln Σ_j C(n,j) e^{−u max(j,R)}` (elementary counting).  If `ε < D_R`, every
+randomised non-adaptive algorithm needs at least `(1 − 2δ) 2ⁿ/|B(R−1)|` evaluations (the Lean
+theorem has the drop of `ln Z` and the size of the ball as two finite sums over the cube).
+(c) `n⁻¹ D_{ρn} → KL(ρ‖p_u)` for `p_u ≤ ρ ≤ ½`.  With Theorem 11.44: **the exponent of non-adaptive
+algorithms on the cube class is `θ_na(ε₁)` at extensive accuracies and `KL(p_u‖½)` at every fixed
+accuracy, and plain Monte Carlo attains it.**  This is a statement about exponents: at
+`n = 4000`, `u = 1`, `ε = 1` the two bounds are `e^{0.134n}` and `e^{0.109n}` (benchmark B12).
+(d) *Adaptivity defeats the construction.*  A point and its `n` neighbours determine the
+centre `s` of a cone; if in addition `g(s̄) − g(s) = cn` at the antipode `s̄`, the two McShane
+envelopes of these two values coincide, so `g` is that cone and `ln Z` is known exactly.  An
+algorithm that makes these `n + 3` evaluations and otherwise falls back on any class-correct
+procedure is correct on the whole class and costs `n + 3` on every cone (referee, Appendix D;
+harness XIII.3), against `e^{188}` for non-adaptive ones at `n = 6400`, `u = 1`,
+`ε₁ = ¼ ln cosh ½`.
+(e) *Pre-drawn points with adaptive stopping.*  For algorithms that evaluate a sequence
+fixed in advance and choose only when to stop,
+`max_s E τ(cone_s) ≥ (1−2δ)² 2ⁿ/(2|B(R−1)|)` whenever `ε < D_R` (the first index at which the
+sequence enters the ball of a uniformly random centre exceeds `m` with probability at least
+`1 − m|B(R−1)|/2ⁿ`; referee, Appendix C): the same exponent in the worst case over cones —
+although such an algorithm can be cheap elsewhere, Proposition 11.46.
 
-**Proposition 11.46 (a certified bracket from the same samples; no hint is needed at the zero residual) [P].**
-Draw two independent uniform samples of size `M`.  Let `t̂` be the `⌈K⌉`-th largest weight in the
-first, `Â_t̂` the mean of `min(w, t̂)` over the second, and `r̂` the least radius with
+*Prior art for the method.*  Mathé and Novak (2007) prove a lower bound for all non-adaptive
+Monte Carlo methods on the class of log-concave densities with a Lipschitz logarithm by
+Bakhvalov's averaging over densities `exp(−α‖y − y_i‖)` with hidden centres and integrands
+supported near the centre, remark that one function value identifies the centre for an
+adaptive method, and give an adaptive Metropolis algorithm of polynomial cost that uses
+log-concavity.  Theorem 11.45(b) is that construction on the cube.  Not there: the cube, the
+functional `ln Z`, a class without concavity, the exponent, and the matching upper bound on
+the whole class (Theorem 11.44) — which we did not find elsewhere either.
+
+**Proposition 11.46 (a certified bracket from two independent uniform samples) [P].**
+Draw two independent uniform samples of size `M ≥ 2K`.  Let `t̂` be the `⌈K⌉`-th largest weight
+in the first, `Â_t̂` the mean of `min(w, t̂)` over the second, and `r̂` the least radius with
 `|B(r̂)| ≥ 2^{n+1}K/M`.  With `K = 24 ln(4/δ)`, outside an event of probability `δ`, on every
 instance,
 
-    Â_t̂ / (3/2)  ≤  A  ≤  2 Â_t̂ + t̂ (e^{Δ_r̂} − 1).
+    Â_t̂ / (3/2)  ≤  A  ≤  2 Â_t̂ + t̂ (e^{Δ_r̂} − 1)
 
-(The `K`-th largest of `M` samples lies above the upper `2K/M`-quantile and its super-level set
-has probability at least `K/2M`, each outside an event of probability `e^{−K/6}`; then Chernoff
-for the second sample and Lemma 11.43.)  At the zero residual `t̂ = Â_t̂`, so the bracket has
-logarithmic width `ln(3/2) + ln(1 + e^{Δ_r̂})`: for `ε > 2` it is narrower than `ε` once
-`M ≥ 2K·2ⁿ/|B(k*(ε − 2) − 1)|` — the cost of the hinted spot-check of Theorem 11.25(c), up to
-the constant in the accuracy.  An algorithm that doubles `M` until the bracket is narrower than `ε`
-is therefore correct on the whole class, costs at the zero residual what the best algorithm
-with a hint costs there (same exponent, for extensive accuracies), and never more than the
-Monte Carlo cost of Theorem 11.44 up to a polynomial factor.
+(the last term is absent if `r̂ = 0`).  (The `K`-th largest of `M` samples lies above the upper
+`2K/M`-quantile and its super-level set has probability at least `K/2M`, outside events of
+probability `e^{−K/4}` and `e^{−K/6}`; then Chernoff for the second sample and Lemma 11.43(b).)
+At the zero residual `t̂ = Â_t̂`, so the bracket has logarithmic width
+`ln(3/2) + ln(1 + e^{Δ_r̂})`: for `ε > 2` it is narrower than `ε` once
+`M ≥ 2K·2ⁿ/|B(k*(ε − 2) − 1)|` (when `k*(ε−2) ≥ 1`) — the cost of the hinted spot-check of Theorem
+11.25(c), up to the constant in the accuracy.  The algorithm that doubles `M`, uses
+`K_i = 24 ln(4·2^i/δ)` at stage `i` (a union bound over the stages), and stops when the bracket
+is narrower than `ε` is therefore correct on the whole class for every `ε > ln 3`; at the zero
+residual it has the exponent of the best algorithm with a hint, for `ε > 2` and in particular
+for extensive accuracies; and it never needs more than the Monte Carlo sample size of
+Theorem 11.44 up to a polynomial factor.  (The bracket is never narrower than `ln 3`; with
+`1 ± η` in place of `3/2` and `2`, and `K` of order `η⁻²`, smaller accuracies are reached at the
+price of a factor `ε⁻²`.)  Harness XIII.5 (coverage by simulation; the width at the zero
+residual).
 
 So the picture for extensive accuracies `0 < ε₁ < ln cosh(u/2)` is:
 
 | algorithms | exponent | status |
 |---|---|---|
 | with a hint, at the zero residual | `θ_hint = KL((Λ₁+ε₁)/u ‖ ½)` | Theorem 11.25 |
-| non-adaptive (also: pre-drawn points, adaptive stopping) | `θ_na = min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}` | Theorems 11.44–11.45: exact |
+| non-adaptive (and, in the worst case over cones, pre-drawn points with adaptive stopping) | `θ_na = min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}` | Theorems 11.44–11.45 |
 | adaptive, without a hint | between `θ_hint` and `θ_na` | **open** |
 
 `θ_hint < θ_na` throughout (`ρ = (Λ₁+ε₁)/u` has `KL(ρ‖p_u) = ε₁ + ln 2 − h(ρ) > ε₁`); both vanish at
 `ln cosh(u/2)` with the same leading term `2((ln cosh(u/2) − ε₁)/u)²`, and at `ε₁ → 0` they are
 `0.0291` and `0.1109` for `u = 1` (`0.0077`, `0.0303` for `u = ½`; `0.0973`, `0.3278` for `u = 2`), a
 factor that tends to `4` as `u → 0`.  At finite `n` the two sides of the second row are
-`0.0293` and `0.0307` for `u = 1`, `ε₁ = ¼ ln cosh(½)`, `n = 6400` (limit `0.0283`; harness XIII.4,
-benchmark B12).
+`0.0293` (with `δ = 0.05`) and `0.0307` (total failure probability `0.10`) for `u = 1`,
+`ε₁ = ¼ ln cosh(½)`, `n = 6400` (limit `0.0283`; harness XIII.4, benchmark B12).
 
-*What adaptivity would have to do* (heuristics, not theorems; workstream H).  The hard
-instances of the two bounds are different: a *dip* hidden in the zero residual is found only by
-hitting its ball, with or without adaptivity; a *flattened bottom* is hidden from uniform
-samples but not from an algorithm that follows the slope of the cone.  In every family we
-examined that is built from Hamming balls — populations of cones, a cone on a mesa among many
-mesas, cones shadowed by shallower dips, decoys — uniform sampling followed by local
-exploration costs at most `e^{nθ_hint}`: a structure that matters is deep, a deep member of a
-Lipschitz class is wide, and structures that shadow a deep centre reveal it by coincidences.
-A proof needs an algorithm that learns a hint from an arbitrary member of the class; a
-refutation needs a prior on which locating the critical difference set is hard even with
-slopes.  Neither is known to us.
+*What adaptivity would have to do* (heuristics, not theorems).  The hard instances of the two
+bounds are different: a *dip* hidden in the zero residual is found only by hitting its ball,
+with or without adaptivity; a *flattened bottom* is hidden from uniform samples but not from an
+algorithm that follows the slope of the cone.  In the families we examined by hand
+(calculations not recorded) that are built from Hamming balls — populations of cones, a cone
+on a mesa among many mesas, cones shadowed by shallower dips, decoys — uniform sampling
+followed by local exploration costs at most `e^{nθ_hint}`: a structure that matters is deep, a
+deep member of a Lipschitz class is wide, and structures that shadow a deep centre reveal it
+by coincidences.  A proof needs an algorithm that learns a hint from an arbitrary member of
+the class; a refutation needs a prior on which locating the critical difference set is hard
+even with slopes.  The adaptive upper bound of Mathé–Novak uses log-concavity, which this
+class lacks.  Neither a proof nor a refutation is known to us (workstream H).
 
-### 11.17 Correlated uncertainty: classes that are linear in features, and an envelope for chains that does not grow
+### 11.17 Correlated uncertainty: classes that are linear in features, and pair-distance profiles for chains
 
 §11.14 ended negatively for chains: every envelope in per-torsion format has constants that
 grow with the lever arm.  The exponential lower bounds of §§11.4–11.10 are theorems about
@@ -2978,10 +3053,20 @@ grow with the lever arm.  The exponential lower bounds of §§11.4–11.10 are t
 learned at one configuration says something about another only through the envelope distance
 between the two, and certificates are coverings.  Physical residuals have more structure — a
 sum of few-body terms with unknown radial functions is **linear in the unknown**, and its
-uncertainty at different configurations is *correlated* through the coefficients.  (Written in
-cycle 10; machine-checked or harness-checked where marked; independent review pending.)
+uncertainty at different configurations is *correlated* through the coefficients.
 
-**Theorem 11.47 (classes that are linear in features) [V; exactness by linear-programming duality, K] (`LinearClass.lean`).**
+*Status.*  Written in cycle 10 and refereed (`reviews/R6_referee_report.md`): no inequality
+stated as a theorem was found false and every machine-checked label was confirmed; six major
+defects of wording and scope are corrected below (`DEAD_ENDS.md` D43) — among them a comparison
+of formats that was not like with like.  An independent workstream checked the statements on
+rotamer chains and went further (`workstreams/P_REPORT.md`), and its report was itself
+reviewed (`reviews/R_P_review.md`): all eighteen of its statements were re-derived and none
+found false, every number quoted here was reproduced with independent code, four of them
+were corrected, and several sentences of its summary — which this section had repeated —
+were stronger than its theorems (`DEAD_ENDS.md` D44).  What is taken from the workstream is
+marked.  Proposition 11.50 was added after the reviews and is not refereed.
+
+**Theorem 11.47 (classes that are linear in features) [V; the exactness statements are linear-programming duality, K] (`LinearClass.lean`).**
 Let `g(x) = Σ_α θ_α F_α(x)` with known features `F : X → ℝ^p` and unknown coefficients in a box,
 `|θ_α − θ⁰_α| ≤ w_α`.
 (a) *No evaluations.*  `sup_θ [g(x) − g(y)] = θ⁰·(F(x) − F(y)) + Σ_α w_α |F_α(x) − F_α(y)|`
@@ -2993,97 +3078,248 @@ as wide.
 
     | g(y) − Σ_i λ_i v_i − θ⁰·r |  ≤  Σ_α w_α |r_α|,        r = F(y) − Σ_i λ_i F(x_i)
 
-(`linRes_span_upper`, `linRes_span_lower`): the bracket is the weighted `ℓ¹` size of the part of
-the feature vector of `y` that the evaluated ones do not explain.  Minimised over `λ` it is the
-exact range of the values consistent with the evaluations (duality of a linear program — the
-lemma of Smolyak in optimal recovery; harness XIV.1 compares primal and dual).  McShane's bound
-is the case of a unit vector `λ`.
+(`linRes_span_upper`, `linRes_span_lower`).  Each end of the set of consistent values is
+attained after its own optimisation: the largest is `min_λ [λ·v + θ⁰·r + w·|r|]`, the smallest
+`max_λ [λ·v + θ⁰·r − w·|r|]` (duality of a linear program; harness XIV.1, also for data at a
+vertex of the box).  The two optimal `λ` differ in general, so the width is **at most**
+`2·min_λ w·|r|`, twice the weighted `ℓ¹` distance of `F(y)` to the span of the evaluated feature
+vectors, with equality at the central data.  That distance is the *worst case over the data*
+— the radius of information of a linear problem on a balanced convex set, attained at the
+zero information by an affine rule (Smolyak; Micchelli–Rivlin 1977; Sukharev for classes that
+are not symmetric) — while for given data the bracket can be narrower, down to a point (two
+features suffice for an example; in random instances a seventh of the brackets is strictly
+narrower).  McShane's bound is the case of a unit vector `λ`; that a first-order class "has
+the distance to the nearest evaluated point" is likewise a statement about the worst case.
 (c) *Rank.*  If `F(y)` lies in the span of the evaluated feature vectors, `g(y)` is determined
 exactly (`linRes_span_exact`).  Hence `rank F ≤ p` evaluations determine the residual on all of
 `X`: a certificate for the minimum, for `ln Z` and for every other functional, at every
 accuracy, whatever the size of `X`.
-(d) *With a remainder.*  If `g = θ·F + ρ` with `ρ` in a first-order class of envelope `d`, then for
-coefficients with `Σ_i λ_i = 1` the bracket of (b) gains the transport term
-`Σ_i (λ_i⁺ d(y, x_i) + λ_i⁻ d(x_i, y))` (`sumClass_span_upper`): the remainder is harmless as long as
-its envelope, multiplied by the absolute size and the reach of the coefficients, stays below
-the accuracy.
+(d) *With a remainder.*  Let `g = θ·F + ρ` with `ρ` in a first-order class of envelope `d`.  For
+coefficients with `Σ_i λ_i = 1` (necessary: the remainder is defined up to a constant) the
+upper end of (b) gains the term
+
+    sup_ρ [ρ(y) − Σ_i λ_i ρ(x_i)]  =  the cost of transporting  δ_y + Σ_i λ_i⁻ δ_{x_i}  onto  Σ_i λ_i⁺ δ_{x_i}  at unit cost d
+
+(Kantorovich–Rubinstein duality; workstream P, Theorem 14, with the minimum over `λ` exact).
+Machine-checked is the bound by one transport plan — everything is shipped to or from `y`:
+`Σ_i (λ_i⁺ d(y, x_i) + λ_i⁻ d(x_i, y))` (`sumClass_span_upper`), and for the lower end the
+transposed term `Σ_i (λ_i⁺ d(x_i, y) + λ_i⁻ d(y, x_i))` (`sumClass_span_lower`; with the term of the
+upper end the statement is false for asymmetric envelopes).  The plan through `y` can be
+wasteful: for the star `x⁰, x⁰ ⊕ e_i` on the cube and a remainder of envelope `η·`Hamming it
+gives `2k(k−1)η` at Hamming distance `k`, while the transport cost is `2(k−1)η` (referee,
+attained).  So an additive residual plus a first-order remainder is determined by a star up
+to a term *linear* in the distance; the quadratic law of §11.7 belongs to second-order
+classes.
 
 The first-order class of the *same* envelope is exponentially more expensive.  On the cube
 with the features `F_i(x) = x_i` and `w_i = c`, the feature envelope is `c·`Hamming: its
 first-order class is the cube class of §11.10 (every deterministic algorithm needs
 `2^{n(1−o(1))}` evaluations at the zero residual, every randomised one exponentially many below
 the threshold), and the linear class is the set of additive residuals with slopes in `[−c, c]`
-(`n + 1` evaluations).  The difference between "additive instances" and "the class" that runs
-through Theorems 11.23–11.28 is this difference; for the star `x⁰, x⁰ ⊕ e_i` and a remainder of
-envelope `η·`Hamming, part (d) gives the term `2k(k−1)η` at Hamming distance `k` — the order of
-the second-order bound of §11.7 (`k(k−1)η` there, from the mixed differences).
+(`n` evaluations; `n + 1` with a constant term).  The difference between "additive instances"
+and "the class" that runs through Theorems 11.23–11.28 is this difference.
 
-**Theorem 11.48 (pair-additive residuals: the envelope is a transport distance between pair-distance distributions) [V on a grid of distances].**
+**Theorem 11.48 (pair-additive residuals: the envelope is a transport distance between pair-distance distributions) [the inequalities V on a grid of distances and for one pair type; attainment and the transport form P].**
 Consider a chain with `N` beads, a finite set `𝒯` of pair types, squared pair distances
 `s_pq(x)`, and residuals
 
-    g(x) = Σ_{p<q} φ_{τ(p,q)}(s_pq(x)),        φ_τ  L-Lipschitz,   φ_τ(s) = 0  for  s ≥ S_c
+    g(x) = Σ_{p<q} φ_{τ(p,q)}(s_pq(x)),        φ_τ  L-Lipschitz in s,   φ_τ(s) = 0  for  s ≥ S_c
 
-with unknown radial functions (a known centre is part of `f`).  Let `N^x_τ(s)` be the number of
-pairs of type `τ` with `s_pq(x) ≤ s`, for `s < S_c` — the cumulative pair-count profile.
-(a) `g(x) = −Σ_τ ∫_0^{S_c} φ_τ′(s) N^x_τ(s) ds` (summation by parts, `pairRes_eq_cum`): the class is
-linear in the profiles, with coefficient functions in an `L^∞` ball of radius `L`.
-(b) Hence `sup_g [g(x) − g(y)] = L Σ_τ ‖N^x_τ − N^y_τ‖_{L¹[0,S_c]} =: d_P(x,y)`
-(`pairRes_sub_le`, `pairRes_admissible`, `profEnv_isEnvelope`; attained, harness XIV.2).  The `L¹`
-distance of cumulative counts is the Wasserstein-1 distance between the pair-distance
-distributions, with the cutoff as a free boundary (a pair may be moved to `S_c` and dropped).
-`d_P` is invariant under rigid motions, reflections and permutations of beads of one type; no
-superposition is involved.
+with unknown radial functions (a known centre is part of `f`; `L` is a Lipschitz constant in
+the *squared* distance, so terms that are steep at short range are outside).  Let `N^x_τ(s)` be
+the number of pairs of type `τ` with `s_pq(x) ≤ s`, for `s < S_c` — the cumulative pair-count
+profile.
+(a) `g(x) = −Σ_τ ∫_0^{S_c} φ_τ′(s) N^x_τ(s) ds` (`pairRes_eq_cum`): the class is linear in the
+profiles, with coefficient functions in an `L^∞` ball of radius `L`.  This is the textbook
+energy equation of a pair-additive system after one integration by parts.
+(b) Hence `sup_g [g(x) − g(y)] = L Σ_τ ‖N^x_τ − N^y_τ‖_{L¹[0,S_c]} =: d_P(x,y)` (`pairRes_sub_le`,
+`pairRes_admissible`, `profEnv_isEnvelope` for the inequality; attained by `φ′ = −L·sgn(N^x − N^y)`).
+Equivalently `d_P(x,y) = L Σ_τ ‖sort(s̃^x_τ) − sort(s̃^y_τ)‖_{ℓ¹}`, `s̃ = min(s, S_c)`: the
+Wasserstein-1 distance between the multisets of squared distances truncated at the cutoff
+(Kantorovich–Rubinstein duality on the line; harness XIV.4 compares the three forms on
+lattice chains).  `d_P` is a pseudometric with large fibres: it is invariant under rigid
+motions and reflections — so every member of the class takes the same value on a
+conformation and its mirror image — and under permutations of beads that preserve the pair
+types, and it vanishes between any two conformations with equal profiles (the 802 075
+self-avoiding walks with 16 beads on the square lattice have 541 profiles at `S_c = 5`;
+referee).  The first-order class of `d_P` is the class of Lipschitz functionals of the
+pair-distance statistics.
 (c) After evaluations, for every `λ`:
-`|g(y) − Σ_i λ_i v_i| ≤ L Σ_τ ‖N^y_τ − Σ_i λ_i N^{x_i}_τ‖_{L¹}` (`pairRes_span_upper`, `pairRes_span_lower`),
-exact after minimising over `λ`: the bracket at `y` is the `L¹` distance from the profile of `y` to
-the *span* of the evaluated profiles, where a first-order class has the distance to the nearest
-one.
+`|g(y) − Σ_i λ_i v_i| ≤ L Σ_τ ‖N^y_τ − Σ_i λ_i N^{x_i}_τ‖_{L¹}` (`pairRes_span_upper`, `pairRes_span_lower`;
+with an enclosure of the profile of `y` over a voxel of conformations in place of the profile,
+`pairRes_span_upper_enclosure`).  As in Theorem 11.47(b), each end is exact after its own
+optimisation, and the half-width is at most `L` times the `L¹` distance from the profile of `y`
+to the *span* of the evaluated profiles, with equality at the zero data.
 
-**Proposition 11.49 (certificates that do not grow with the chain) [P].**  Suppose every bead
-has at most `z` beads within the cutoff (excluded volume).
-(a) *First-order class of `d_P`* (pair-additivity is not used).  For every known part, every
-residual of the class and every accuracy `ε = ε₁N`, the minimum and `β⁻¹ ln Z` have certificates
-of size
+**Proposition 11.49 (what the profile format costs) [P; (c) V].**  Suppose every conformation
+has at most `zN/2` pairs within the cutoff (excluded volume; this excludes the phantom product
+domains of §11.14).
+(a) *Existence at extensive accuracy, first-order class of `d_P`* (pair-additivity is not
+used).  For every known part, every residual of the class and every accuracy `ε = ε₁N`, the
+minimum and `β⁻¹ ln Z` have certificates of size
 
-    ln N_cov  ≤  8 ln 2 · |𝒯|² z L S_c / ε₁,
+    ln N_cov  ≤  ln 4 · |𝒯| · ⌈4 z L S_c / ε₁⌉,
 
-**independent of `N`**.  (The profiles divided by `N` are nondecreasing functions with values in
-`[0, z/2]` on `[0, S_c]`; rounding their values at `B` grid points down to multiples of `z/2B`
-changes them by at most `z S_c/B` in `L¹` and leaves at most `C(2B, B) ≤ 4^B` step functions;
-`B = 4 z S_c L |𝒯|/ε₁` gives an internal net of `d_P`-radius `ε₁N/2`, and a net of radius `ρ`
-determines every value within `±ρ`.)
-(b) *Finitely many distances.*  If the squared distances below the cutoff take at most `G`
-values (lattice chains; chains on the rational torus of §5 with bounded denominators), the
-class has at most `|𝒯|·G` features, and by Theorem 11.47(c) at most `|𝒯|·G` evaluations determine
-the residual exactly, at every accuracy and for every `N`.  For a nearest-neighbour contact
-energy with unknown contact strengths there is one feature per pair type: the number of
-contacts of that type.
-(c) *What is not covered.*  If every pair is its own type, `d_P` is the weighted `ℓ¹` distance
-of distance matrices, the number of features grows with `N²`, and nothing is gained: the
-governing quantity is the number of pair types that occur often, not the length of the chain.
-Many-body terms need profiles on higher-dimensional spaces (triangles for three-body terms).
-With continuous distances the span bracket of Theorem 11.48(c) is at most McShane's bound, so
-(a) applies to it; whether polynomially many evaluations in `z L S_c/ε₁` suffice depends on how
-well the profiles of all conformations are approximated by combinations with *bounded
-coefficients* of few of them — with a remainder (Theorem 11.47(d)) large coefficients are not
-free.  And whether a given physical residual lies in such a class with a useful `L` is an
-empirical question that this report does not address.
+independent of `N`.  (The profiles are nondecreasing with total mass at most `M = zN/2` over
+all types.  Round every profile down to multiples of `q = M/(|𝒯|G)` and move each of the at most
+`|𝒯|G` remaining jumps of size `q` up to the next of `G` grid points per type: the `L¹` error is at
+most `2S_cM/G`, and at most `C(2|𝒯|G, |𝒯|G) ≤ 4^{|𝒯|G}` functions remain.  A maximal subset of
+profiles that is `ε/2L`-separated is then a net of `d_P`-radius `ε/2` with at most
+`4^{|𝒯|⌈4zNLS_c/ε⌉}` elements, and a net of radius `ρ` determines every value within `±ρ`.  This
+is the classical entropy of monotone functions; the linear dependence on `|𝒯|` is due to
+workstream P and the referee; harness XIV.4 checks the rounding.)  **This is an existence
+statement, not a planning number**: it evaluates to `10^{93}`–`10^{2697}` at accuracies at which 8
+to 7000 evaluations suffice in the referee's examples, because the a-priori diameter
+overestimates the real one several times and that factor sits in the exponent.  With `G`
+discrete distances `ln N_cov ≤ |𝒯|G ln(1 + 2|𝒯| z L S_c/ε₁)` (volume bound; referee), and the
+number of profiles is at most `C(zN/2 + |𝒯|G, |𝒯|G)`, so the first-order class of `d_P` has
+certificates of size polynomial in `N` at *every* accuracy on a lattice (workstream P).
+(b) *The pair-additive class.*  If the squared distances below the cutoff take at most `G`
+values, the class has at most `|𝒯|·G` features and by Theorem 11.47(c) at most `|𝒯|·G` evaluations
+determine the residual exactly, at every accuracy.  On a lattice `G` does not depend on `N`
+(for a nearest-neighbour contact energy with unknown strengths there is one feature per pair
+type: the number of contacts of that type).  For chains on the rational torus of §5 `G` is
+finite for every `N` but grows with `N` — `1, 1, 1, 2, 5, 14, 36` for `N = 4,…,10` in the referee's
+model — so that count is not independent of the chain length there.  With continuous
+distances, greedy reduced bases give `(8(1+κ)|𝒯| z L S_c/ε₁)²` evaluations at extensive accuracy
+for residuals with `|φ′| ≤ κL` (the published greedy theorem of DeVore–Petrova–Wojtaszczyk 2013
+in `L²` and Cauchy–Schwarz; derived independently by workstream P and by the referee, who has
+the constant `256` for the worst-case bracket.  The cited corollary, 3.3(ii) of the arXiv
+version, was read in full by the reviewer of workstream P and is quoted correctly; the
+argument is that of the `P`-greedy algorithm of kernel interpolation, Santin–Haasdonk 2017).
+(c) *Sharpness is stochastic dominance* **[V]** (`pairRes_le_of_dominates`, `pairRes_sharp`).  If
+the known radial function rises by at least `L` per unit of squared distance below the cutoff
+(an attraction at least as steep as the uncertainty), then known part plus residual is a
+nonincreasing functional of the cumulative profile, and a conformation whose profile
+dominates all others pointwise — `N^x_τ(s) ≥ N^y_τ(s)` for all `y`, `τ`, `s` — is optimal for every
+residual of the class: no evaluation is needed.  In general the candidates are the
+conformations on the Pareto front of the dominance order.
+(d) *Fixed absolute accuracy.*  For the first-order class the argument of (a) gives only
+`exp(O(N/ε))`, and on conformation spaces whose profiles can be varied freely this is the truth
+at `f = g = 0`: `ln N_cov(ε) ≥ c·L m₁ ℓ N/ε` with an explicit small `c` (referee, by a
+Gilbert–Varshamov packing of staircases; not re-derived by us).  So in the regime in which a
+ground state is told from its competitors the first-order class of `d_P` is exponential in `N`
+off-lattice in general — at most stretched-exponential for a gapped site-additive known part
+at the zero residual (workstream P) — while the pair-additive class stays polynomial.
+(e) *What is not covered, and what is not counted.*  If every pair is its own type, `d_P` is
+the weighted `ℓ¹` distance of the squared-distance matrices clamped at `S_c` and the number of
+features grows with `N²`: for a vanishing known part at the zero residual, on the product
+domain, the first-order format is exponential again and the span format needs at least
+`n − 2ε/(Lδ₁₄)` evaluations, one per torsion (`δ₁₄` the difference of the squared 1–4 distances;
+workstream P, Proposition 12, by the classical width of a box in `ℓ¹`, Pietsch–Stesin; the
+reviewer extends both to a gapped torsional known part when `Lδ₁₄ > 2e` and to self-avoiding
+chains of the sizes at which every trans/gauche pattern occurs).  The summary "the cost is
+governed by the number of independent features, not by the length of the chain" is a
+heuristic: the proved upper bound for the span format is the rank, the proved lower bound
+counts torsions, and the first-order format depends on `N` at a fixed number of features
+(`5 → 21` evaluations with three features in the table below).  Chirality and everything
+else that is not a function of the pair-distance statistics must be in the known part.
+Many-body terms need profiles on higher-dimensional spaces (measures on triangles for
+three-body terms, with a transport norm in place of the `L¹` distance of cumulative counts).
+**What a remainder outside the class costs depends on how it is bounded.**  A remainder
+bounded in the supremum norm by `η` costs an accuracy floor `η(1 + ‖λ‖₁)` and nothing else
+(workstream P, Theorem 13).  A remainder that is only known to be first-order in an envelope
+`η·d₀` is paid at first-order prices: the slack of the sum class at every conformation is at
+least the sum of the two slacks, so a certificate is at least as large as the first-order
+certificate of the remainder alone (workstream P, Corollary 15), and with a per-torsion `d₀`
+whose constants grow with the lever arm the exponential cost of D42 returns **for every
+fixed `η > 0`** — by Theorem 11.37 the leading term of the exponent does not depend on `η`,
+which enters a sub-leading correction only (reviewer; the first version said "in proportion
+to `η`", for which there is no theorem).  The chain-length independence therefore belongs to
+residuals that are Lipschitz functionals of the pair-distance statistics, up to a sup-norm
+remainder — not to chains, and not only to the exactly pair-additive class (part (a) uses no
+pair-additivity).  No lower bound above two evaluations is proved for the sum class on the
+measured instance; greedy covers have 2 to 21 points and prune to 2 to 17 (reviewer).
+With a purely torsional known part none of the three formats has, in the measurements
+(`n ≤ 12`), a one-evaluation threshold that is independent of `N`: a hairpin changes the
+profile by an amount proportional to `N`, and the largest `L` at which one evaluation
+certifies the lattice chain decays like `4.8/N` (reviewer; not a theorem).  Finally, all counts are evaluations of the residual: *checking* a certificate
+requires a lower bound of `f + L_A` over all conformations, `L_A` depends on global pair
+counts, and over voxels of torsions the enclosure of a pair distance widens with the lever
+arm — the difficulty of §11.14 leaves the constants and returns in the checker (referee).
+Whether a given physical residual lies in such a class with a useful `L` is an empirical
+question that this report does not address.
 
-So the three formats compare as follows for a chain of `N` beads at an extensive accuracy:
-per-torsion weighted Hamming `exp(Θ(N))` (Theorem 11.37); RMSD used directly `exp(Θ̃(√N))` at the
-zero residual (Theorem 11.38); the profile envelope `exp(O(1))`, and a number of evaluations
-bounded by the number of features when the distances are discrete.  The price is the class:
-`d_P` is small only between conformations with similar pair-distance statistics, and a
-residual that is `d_P`-Lipschitz is a functional of those statistics.  *Prior art.*  (a)–(c) of
-Theorem 11.47 are optimal recovery of a linear functional from linear information over a
-box (Smolyak; Micchelli–Rivlin 1977) and robust linear programming with interval
-coefficients; contact potentials determined by linear inequalities over decoys go back to
-Maiorov–Crippen (1992); the size of the coefficients as an "extrapolation grade" is the
-D-optimality criterion of active learning for potentials that are linear in features
-(Podryabinkin–Shapeev 2017).  What is specific here is the comparison with the first-order
-class of the same envelope and the consequence for the question left open by §11.14.
-Workstream P checks these statements on synthetic chains and searches the literature.
+**Proposition 11.50 (a kernel for residuals that are linear in pairwise features) [V] (`LinearKernel.lean`; not refereed).**
+Let the features be pairwise tables with nonnegative entries (contact counts, cumulative pair
+counts on a grid), the coefficients lie in a rational box, and `(a_i, v_i)` be evaluated
+anchors.  A certificate is a subdivision of the coefficient box; at a leaf with box `[lo, hi]`
+it carries multipliers `λ_i` and a certificate of the pairwise kernel of §6.1 for the instance
+`E₀ + Σ_α lo_α F_α`, with value `m`.  The kernel accepts the bound `L` if at every leaf
+
+    L  ≤  m  +  Σ_i λ_i v_i  −  Σ_α max(lo_α c_α, hi_α c_α),        c_α = Σ_i λ_i F_α(a_i),
+
+and then `L ≤ E₀(x) + Σ_α θ_α F_α(x)` for every configuration and **every real coefficient
+vector of the box that is consistent with the anchors** (`verifyL_sound`, `verifyLTop_sound`).
+The first term uses `F ≥ 0`; the data term is a lower bound for `Σ_i λ_i (v_i − θ·F(a_i))`, which
+vanishes on consistent coefficients and can be made large on a part of the box that
+contradicts the anchors, so such parts are discharged without work.  Worked example
+(`contactTriangle_bound`, verified by kernel evaluation): the frustrated triangle with a
+contact term of unknown strength in `[−2, 2]`; without the evaluation the best bound is `−1`,
+with one evaluation the kernel certifies `1`, which is attained, with two leaves.  This is
+weak duality for the robust problem — the minimum over the coefficient polytope of a concave
+function — and no more; what it adds to §6 is that correlated uncertainty is handled by the
+existing pairwise kernel, leaf by leaf.  It addresses the last point of Proposition 11.49(e)
+only for features that are pairwise in the *rotamer* variables.  Harness XIV.3 checks the
+leaf bound against brute-force robust minima.
+
+*How the formats compare* (the first version of this section set `exp(Θ(N))`, `exp(Θ̃(√N))` and
+`exp(O(1))` side by side "at an extensive accuracy"; that was not like with like — Theorem
+11.38 is a statement at `ε = 0`, and its `L` is a Lipschitz constant in RMSD, while `L` here is
+per pair, so that an extensive pair-additive residual has an RMSD constant of order `N`;
+referee, M2).  Like for like:
+
+| residual class | accuracy | per-torsion Hamming | RMSD used directly | profile envelope `d_P` |
+|---|---|---|---|---|
+| RMSD-Lipschitz, constant fixed | `ε = 0`, zero residual | `exp(Θ(N))` (11.37) | `exp(Θ̃(√N))` (11.38) | not applicable (another class) |
+| RMSD-Lipschitz, constant fixed | `ε₁N` | `exp(Θ(N))` (11.37) | `exp(O(Lb/ε₁))`, independent of `N` (blocks of beads snapped to a grid; referee, re-derived here) | not applicable |
+| functional of pair statistics, per-pair `L` fixed (RMSD constant `∝ N`) | `ε₁N` | `exp(Θ(N))` | `exp(O(N))`; a matching lower bound is not proved | `exp(O(1))` (11.49(a)) |
+| the same | fixed `ε`, or `ε = 0` | exponential | exponential | first-order class: `exp(O(N/ε))`, polynomial on lattices; pair-additive class: polynomial (11.49(b)) |
+
+So a reader may conclude that a residual which is admissible for `d_P` has certificates at an
+extensive accuracy whose number of evaluations does not depend on the chain length, and that
+finitely many distances make a pair-additive residual exactly learnable; not that the profile
+format beats the RMSD format on a common class at a common accuracy, not that its
+certificates stay bounded at a fixed accuracy, and nothing about residuals that are not
+functionals of pair-distance statistics.
+
+*Measured on the same instances* (workstream P, reproduced and in four entries corrected by
+its reviewer; known part `e·#gauche`, zero residual, `L = e`, exact certification of the
+minimum; the Hamming entries hold for every valid vector of constants — the smallest valid
+constant exceeds the largest gap, so no conformation is covered by another one):
+
+| chain | per-torsion Hamming | profile envelope | span |
+|---|---|---|---|
+| diamond lattice, `S_c = 12`, `n = 8 → 12` torsions | all conformations (`5849 → 422 825`) | `10 → 21` | 2 throughout (rank 3) |
+| off-lattice, `n = 5 → 10` | all conformations (`99 → 8115`) | `27 → 319` (`×1.5`–`1.9` per torsion) | between 3 and 10 |
+| `ln Z`, lattice, `n = 8`, `ε = 0.01` | all 5849 | between 65 and 69 (of 90 profiles) | 3 |
+
+The off-lattice profile column still grows geometrically at these sizes: the saturation
+promised by Proposition 11.49(a) is not visible below `N ≈ 16` except in the three-feature
+lattice model.
+
+*Prior art.*  Theorem 11.47(a)–(c) is optimal recovery of a linear functional from linear
+information over a box (Smolyak; Micchelli–Rivlin 1977) in its worst-case part and plain
+linear-programming duality — the feasible-set intervals of set-membership estimation
+(Milanese–Vicino 1991), robust linear programming with box uncertainty (Soyster 1973) — in its
+data-dependent part.  Potentials that are linear in pair counts per type and distance bin,
+determined by linear inequalities over decoys, are those of Maiorov–Crippen (1992; known to
+us through Tobi–Shafran–Linial–Elber 2000, who use exactly these features).  The size of the
+coefficients as an "extrapolation grade" is the D-optimality criterion of active learning for
+potentials that are linear in features (Podryabinkin–Shapeev 2017; their grade is the `ℓ^∞`
+size of the multipliers, the transport term of (d) a weighted `ℓ¹` size).  The `L¹` distance of
+cumulative distance distributions as an earth mover's distance between shapes is in Osada et
+al. (2002), sorted pair descriptors compared in `ℓ¹` are the "bag of bonds" (Hansen et al.
+2015), and Wasserstein distances between radial distribution functions are used as
+structural similarity scores; the entropy of monotone functions is classical
+(Birman–Solomyak; van de Geer), as are greedy reduced bases (Binev et al. 2011;
+DeVore–Petrova–Wojtaszczyk 2013; their use for greedily chosen evaluation points in
+worst-case recovery is the `P`-greedy algorithm, Santin–Haasdonk 2017), the width of a box in
+`ℓ¹` (Pietsch 1974; Stesin 1975) and transport with a boundary reservoir (Figalli–Gigli 2010).
+Not found in print, and immediate once named: the profile distance read as the *exact*
+envelope of the class of unknown Lipschitz pair potentials next to a known part, the count
+of evaluations that follows, and the comparison with the first-order class of the same
+envelope.  Verification status of each citation: `prior_art/L8_linear_classes.md`.
 
 ---
 
@@ -3139,10 +3375,12 @@ Workstream P checks these statements on synthetic chains and searches the litera
    and the minimax identity hold there too, but the width is no longer a single-site
    quantity (workstream B gives a lower threshold by a transfer-matrix formula and a
    conjecture for the upper half);
-   (d) **algorithms without a hint** on the cube class.  *Updated in cycle 10* (§11.16): the
-   exponent of **non-adaptive** algorithms is exactly `θ_na(ε₁) = min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}`
-   (`≈ u²/8` at `ε₁ → 0`; plain Monte Carlo, optimal by a machine-checked lower bound), and no
-   hint is needed at the zero residual.  Open: the exponent of **adaptive** algorithms without
+   (d) **algorithms without a hint** on the cube class.  *Updated in cycle 10* (§11.16): at
+   extensive accuracies the exponent of **non-adaptive** algorithms is
+   `θ_na(ε₁) = min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}`, and `KL(p_u‖½) ≈ u²/8` at every fixed accuracy (plain
+   Monte Carlo; the lower bound is machine-checked up to two finite sums, the exponents are
+   paper computations), and no hint is needed at the zero residual for `ε > 2`.  Open: the
+   exponent of **adaptive** algorithms without
    a hint, between `θ_hint = KL((Λ₁+ε₁)/u ‖ ½)` (`≈ u²/32`) and `θ_na`.  Does adaptivity help in the
    worst case at all, and does it reach `θ_hint`?  A candidate is a multilevel scheme: the tail
    lemma holds on every subcube, the partition functions of the subcubes of a coordinate
@@ -3196,12 +3434,25 @@ Workstream P checks these statements on synthetic chains and searches the litera
    closed slack balls and the set of near-minimisers (harness XII.4, XII.7); for free energies
    it is an isoperimetric quantity (item 2(b)) — at additive instances above the threshold the
    two-reference sandwich certifies it by a single-site computation.
-9. **Envelopes for chains** (§11.14).  Which envelope formats have constants that do not grow
-   with the chain length and still admit small certificates?  Candidates: sequence-local or
-   windowed-frame residual classes; the contact-map metric (sharpness per contact); classes
-   linear in pair features.  Close the bracket of Theorem 11.38 (constants two orders of
-   magnitude apart; lower bound at the zero residual only; excluded volume ignored) and prove
-   the lower constant of the lever-arm law.
+9. **Envelopes for chains** (§§11.14, 11.17).  *Partly answered in cycle 10*: residual classes
+   that are linear in pair-distance profiles have per-pair constants and, at extensive
+   accuracy, certificates whose number of evaluations does not depend on the chain length —
+   for a class that is much smaller than the RMSD-Lipschitz classes of §11.14, and with a
+   bound that is numerically vacuous.  Open: (a) the true entropy and widths of the profile
+   sets of chains, i.e. the size at which the independence of the chain length sets in (not
+   reached at 16 beads except in a three-feature lattice model), and a thermodynamic limit
+   theorem for certificate sizes (workstream P, §5); (b) an upper bound for the class
+   "pair-additive plus a small first-order remainder" that matches the lower bound "the two
+   slacks add", or a proof that the cost is a product; (c) randomised algorithms for linear
+   classes — all lower bounds there are for deterministic schemes at the zero residual, and a
+   generic evaluation sees every perturbation, so the dip construction has no analogue;
+   (d) the cost of *checking* a certificate in the profile format over voxels of torsions,
+   where the lever arm returns; (e) profiles for three-body terms; (f) whether a physically
+   motivated residual has a useful Lipschitz constant in this format — the interface is
+   hypothetical until one instance is certified.  Unchanged from cycle 9: close the bracket of
+   Theorem 11.38 (constants two orders of magnitude apart; lower bound at the zero residual
+   only; excluded volume ignored), prove the lower constant of the lever-arm law, and a lower
+   bound for the RMSD format when its constant is extensive.
 10. **Second-order classes at finite temperature** (Theorem 11.33): sharpen the polynomial
    bound below the Curie–Weiss coupling; non-homogeneous constants (Dobrushin's condition is
    then a row-sum condition); `k`-state sites; the continuous analogue and its relation to the
@@ -3232,6 +3483,19 @@ best-first search is provably within a constant of `N_cov`, or tight constants; 
 and one certified instance for second-order classes; and, new, the exact randomised exponent
 (item 2(b)).
 
+*The fifth and sixth referees' assessments* of §§11.16–11.17 (`reviews/R5`, `reviews/R6`), which
+we accept.  §11.16: Lemma 11.43(a) is elementary and (b) a routine corollary of Harper's
+theorem; Theorem 11.44 was not found in print and is a routine combination of truncation at a
+quantile, an isoperimetric tail bound, Chernoff and Markov; the method of Theorem 11.45 is
+known, its hard family is that of Mathé–Novak (2007) moved to the cube, and the exact
+non-adaptive exponent on the cube for `ln Z` is apparently new.  §11.17: the linear theory is
+known (optimal recovery, set-membership estimation, robust linear programming), the profile
+distance is known as a descriptor distance, the entropy bound is the classical one for
+monotone functions, and what was not found — the profile distance as the exact envelope of a
+residual class next to a known part, with the count of evaluations — is immediate once
+named.  Neither section changes the verdict of the earlier referees; §11.17 answers the
+question of §11.14 for a narrower class than the one that was asked about.
+
 *The third referee's assessment* of §11.10 (`reviews/R3`, §4), which we accept: the section does
 not change the verdict.  Theorem 11.22 is the indistinguishability argument with a union bound
 — fractional block sensitivity transplanted to real-valued classes; Theorem 11.23(a) is the
@@ -3261,8 +3525,8 @@ Full bibliographic details, DOIs and verification status of each citation are in
 `prior_art/L1_pruning_certificates.md`, `L2_relaxations_partition.md`,
 `L3_realizability_geometry.md` and, for §§10–12, `L4_certified_optimisation_and_recovery.md`,
 `L5_polytropes_interval_uncertainty.md`, `L6_transport_entropy_and_information_limits.md`,
-`L7_query_complexity.md` (each with its search log and a list of sources that could not be read
-in full).  Principal
+`L7_query_complexity.md`, `L8_linear_classes.md` (each with its search log and a list of sources
+that could not be read in full).  Principal
 sources:
 
 *Pruning and certificates.*  Desmet, De Maeyer, Hazes, Lasters (1992); Goldstein (1994); Leach &
@@ -3316,4 +3580,13 @@ Zhang (1999); Yu (2024, isoperimetric exponents of product measures).  Search an
 (§11.11): Hetland (2020); Dechter & Pearl (1985); Goldberg & Harrelson (2005); Vidal (1986);
 Johnson (1977).  Second-order classes (§11.12): Chierichetti, Dasgupta, Kumar (2020, approximate
 modularity); Feige, Feldman, Talgam-Cohen (2017).  Verification status of these additions:
-`reviews/R4_referee_report.md`, `R_C_review.md`, `R_E_review.md`.
+`reviews/R4_referee_report.md`, `R_C_review.md`, `R_E_review.md`.  Without a hint (§11.16):
+Mathé & Novak (2007, simple Monte Carlo and the Metropolis algorithm); Chatterjee & Diaconis
+(2018); Harper (1966); Dzindzalieta (2013); Krieg, Novak, Ullrich (2025); Heinrich (2024); Cai
+& Scarlett (2024).  Linear classes and pair-distance profiles (§11.17): Smolyak (1965);
+Micchelli & Rivlin (1977); Milanese & Vicino (1991); Soyster (1973); Maiorov & Crippen (1992);
+Tobi, Shafran, Linial, Elber (2000); Podryabinkin & Shapeev (2017); Osada, Funkhouser,
+Chazelle, Dobkin (2002); Hansen et al. (2015, bag of bonds); Figalli & Gigli (2010); Birman &
+Solomyak (1967); van de Geer (2000); Binev et al. (2011); DeVore, Petrova, Wojtaszczyk (2013);
+Henderson (1974).  Verification status: `prior_art/L7_query_complexity.md` (addendum),
+`prior_art/L8_linear_classes.md`, `reviews/R5_referee_report.md`, `R6_referee_report.md`.

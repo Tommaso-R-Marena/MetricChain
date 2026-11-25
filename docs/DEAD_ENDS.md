@@ -880,3 +880,101 @@ recorded: the workstream's own summary sentence "the whole exponential price is 
 rule" was found too strong by its reviewer (one instance, `Lb/e = o(N)`, a bracket of two orders
 of magnitude in the exponent's constant).
 
+## D43. Six statements of the first version of theory report §§11.16–11.17 that said more than was proved (cycle 10; fifth and sixth referees, workstream P)
+
+No theorem of the two sections was found false; these sentences were.
+
+1. **"Their sample size is now a theorem on the class and replaces the Chebyshev bound"**
+   (Theorem 11.44, first version).  The bound used `E min(w,t*) ≥ t* K/M` only; the resulting
+   quantity `Γ_n(r)` stays near or above `4eᵘ(eᵘ−1)` (the limit of its minimum over `r`), so the theorem certified nothing below an
+   accuracy of about `ln(2(1+4eᵘ(eᵘ−1))) + ln(1/δ₂)` (`6.7` for `u = 1`, `δ₂ = 0.05`), and just above
+   it gave an exponent larger than `KL(p_u‖½)`.  *Repair*: the two-sided tail lemma of the
+   referee (Lemma 11.43(c); `Γ′_n` with `T_n(r−1)` in the denominator), which gives the exponent
+   `KL(p_u‖½)` at every fixed accuracy.  Harness XIII.2 checks both facts; benchmark B12 shows
+   "void" for the first bound at `ε = 1`.
+2. **"The matching non-adaptive lower bound was not found"** (table row G18).  The method —
+   hidden cone centres, pairs that differ on a ball at the centre, Bakhvalov averaging, the
+   remark that adaption defeats it — is in Mathé–Novak (2007) for log-concave densities with a
+   Lipschitz logarithm.  What was not found is the exponent on the cube for `ln Z` and the
+   class-wide upper bound.
+3. **"[V]" on Theorem 11.45 as a whole, "machine-checked up to Harper's theorem"** (README).
+   Machine-checked are part (a) of the tail lemma, the abstract non-adaptive bound, and the
+   cube bound *given* two finite sums; the reduction to Harper, the closed forms and every
+   exponent are paper computations.
+4. **"Exact after minimising over `λ`: the bracket is the `L¹` distance to the span"** (Theorems
+   11.47(b), 11.48(c)).  Each end of the consistent range is attained by its own `λ`; the width
+   is at most twice the distance to the span, with equality at the central data only (the
+   radius of information is attained at the zero information).  Two features suffice for a
+   range that is a single point at distance one.  Harness XIV.1 now requires such cases.
+5. **The comparison "per-torsion Hamming `exp(Θ(N))`, RMSD `exp(Θ̃(√N))`, profile `exp(O(1))` at an
+   extensive accuracy".**  Not like with like: the `√N` law is a statement at `ε = 0`; at an
+   extensive accuracy and a fixed RMSD-Lipschitz constant the RMSD envelope has nets of size
+   `exp(O(Lb/ε₁))`, independent of `N` (blocks of beads snapped to a grid); the constant of
+   §11.17 is per pair, so an extensive pair-additive residual has an RMSD constant of order
+   `N`; and the classes differ.  The section now has a like-for-like table.  Likewise "does not
+   grow" holds at extensive accuracy and for counts of evaluations only: at a fixed accuracy
+   the first-order class of the profile envelope is `exp(Θ(N/ε))` on rich conformation spaces,
+   and the existence bound of Proposition 11.49(a) is numerically vacuous (`10^{93}`–`10^{2697}`
+   where 8–7000 evaluations suffice).
+6. **Three smaller ones.**  "Chains on the rational torus with bounded denominators" as a
+   case of finitely many distances (the number of distinct squared distances grows with the
+   chain: `1, 1, 1, 2, 5, 14, 36` for 4–10 beads); the remark that the star with a first-order
+   remainder shows "the order of the second-order bound" (it came from a wasteful transport
+   plan: the exact term is `2(k−1)η`, linear in the distance); and, in the brief of workstream
+   P, "at fixed absolute accuracy the first-order class is exponential in `N`" as a general
+   statement (on lattices it is polynomial, because there are polynomially many profiles).
+
+*Lesson.*  The pattern of cycles 8 and 9 repeated: every proof survived, and the sentences
+around the proofs did not — a comparison across theorems with different hypotheses, a label
+wider than the formalisation, a "not found" after too little search.  The one statement that
+would have been useful to a reader as a number (the planning bound) was the vacuous one.
+
+## D44. Four numbers and four sentences about the profile format that were weaker or stronger than the facts (cycle 10; review of workstream P)
+
+The reviewer of workstream P re-derived its eighteen statements and found none false
+(`reviews/R_P_review.md`).  What did not survive, in the workstream's summary and in the
+sentences of theory report §11.17 and of the research log that repeated it:
+
+1. **"The chain-length independence is a property of the exactly pair-additive class, not of
+   chains."**  Contradicted by the workstream's own Theorem 7 (independence at extensive
+   accuracy for the whole first-order class of the profile envelope — pair-additivity is not
+   used) and Theorem 13 (a sup-norm remainder costs an accuracy floor and nothing else).
+   What is lost with a remainder that is only first-order in a per-torsion envelope is the
+   subject of Corollary 15, and nothing wider.
+2. **"With a per-torsion remainder the exponential cost returns in proportion to `η`."**  No
+   theorem says so.  By Theorem 11.37 the leading term of the exponent is the same for every
+   fixed `η > 0`; `η` enters a sub-leading correction.  The measured growth "2 → 20
+   evaluations" could not support a proportionality either: these were sizes of greedy
+   covers, i.e. upper bounds reported as requirements (they prune to 6 and 17; no lower
+   bound above 2 is proved).
+3. **"No format has a one-evaluation threshold that is independent of `N`."**  A measurement
+   for three formats and `n ≤ 12`, not a theorem; and the span column on the lattice was the
+   threshold of an evaluation at the all-trans state, whose profile is zero there, so that
+   it carries no information — the best single evaluation certifies up to an `L` that is
+   seven to eight times larger (and still decays like `4.8/N`).
+4. **"Span cost ∝ features, first-order cost ∝ exp(features); the chain length enters only
+   through the number of features."**  The proved statements are: span at most the rank;
+   span at least one evaluation per *torsion* for pair-specific classes at a vanishing known
+   part on the product domain (a classical width of a box in `ℓ¹`, Pietsch–Stesin — listed
+   as new, it is not); first-order at most the number of profiles, which depends on `N` at a
+   fixed number of features.
+5. **Four numbers.**  The Hamming entries "≥ 2.2·10⁵ of 422 825" and "≥ 5539 of 8115" were valid
+   and grossly weak: the smallest valid constant exceeds the largest gap, so every
+   conformation must be evaluated.  Off-lattice `n = 10` in the profile format: 319, not 318
+   (318 was the lower end of a bracket).  `ln Z` in the profile format: between 65 and 69, not
+   between 10 and 69.  "`3^{n−O(√n)}`" cannot hold on a self-avoiding domain with `2.9ⁿ` points
+   (the reviewer gives the replacement `|X_N|·exp(−4√((en+ε)/(Lc₀)))`).
+
+*Also at this checkpoint, a defect of the harness, not of a claim.*  XIV.3 required that
+multipliers bounded by 50 gain one unit on every coefficient box that contradicts the
+anchors.  The claim is that the data term is unbounded there, which is true (Farkas plus
+positive homogeneity); the gain at bounded multipliers is proportional to the margin of the
+contradiction and was `0.035` in one instance of the full run.  The quick mode, which the
+audit runs, had never met such an instance.  The check is now positivity plus exact
+homogeneity, with a mutation of its own.
+
+*Lesson.*  A summary written by the author of the theorems is not safer than one written by
+a reader: three of the four sentences were contradicted by statements a few pages below
+them.  And weak numbers are errors too — "at least half" where the truth is "all" hid the
+one-line reason.
+

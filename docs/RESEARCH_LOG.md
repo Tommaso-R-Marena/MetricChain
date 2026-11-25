@@ -782,26 +782,100 @@ claims first (`workstreams/H_brief.md`, `P_brief.md`).
   distance between pair-distance distributions, and its first-order class has certificates
   whose size does not depend on the chain length at extensive accuracy.  This is the
   constructive counterpart of D42 — for a smaller class.
+* **A kernel for the new format** (`LinearKernel.lean`; theory report Proposition 11.50;
+  harness XIV.3).  For residuals that are linear in nonnegative pairwise features with
+  coefficients in a box and evaluated anchors: subdivide the coefficient box, certify the
+  lower corner with the pairwise kernel, add a Lagrangian data term.  Sound for every
+  coefficient vector consistent with the anchors; a worked example is verified by kernel
+  evaluation (one evaluation lifts the certified bound from `−1` to the optimum `1`).
 * **Modal** remains unreachable from this session (the client needs gRPC, which the session
-  proxy does not carry); nothing was run there and nothing was worked around.
+  proxy does not carry; re-checked at this checkpoint); nothing was run there and nothing was
+  worked around.
 
-### Resume here (cycle 10, first checkpoint)
+### Cycle 10, second checkpoint — two referee reports and workstream P acted upon
 
-Verified state: every module under `proofs/` (43 files) builds with zero warnings and is walked
-by the axiom audit (2835 declarations); the harness (89 registered tests: 72 that must survive,
-17 documented refutations) and its mutation tests (132 mutations: 131 caught, one expected
-pass) pass; `scripts/audit_all.sh` exits 0.  **Sections 11.16 and 11.17 of the theory report
-are not yet refereed**; workstreams H and P were still running when this checkpoint was
-written.  In priority order:
+Commit `36ec238` was sent to two referees while the workstreams were running.
 
-1. **Integrate workstreams H and P** when they report (their reports go to
-   `docs/workstreams/`), then commission independent reviews of §§11.16–11.17.
-2. **The adaptive exponent without a hint** (theory report §12 item 2(d)): prove that some
-   adaptive scheme beats `θ_na` on the whole class, or find a prior on which none does.
-3. **Chains**: a kernel rule for span brackets over pair-distance profiles (exact in squared
-   distances on the rational torus); profiles for three-body terms; lower bounds for the
-   profile class; an honest test of whether a physically motivated residual has a useful
-   Lipschitz constant in this format.
+* **R5 on §11.16** (`reviews/R5_referee_report.md`).  No statement false.  Three major defects,
+  all repaired: (i) the Monte Carlo theorem said nothing at bounded accuracy — its bound on
+  the truncated mean was too crude; the referee's two-sided tail lemma (the mass *below* a
+  threshold is at least that of a cone around a ball of the size of the super-level set)
+  removes the restriction, and the exponent `KL(p_u‖½)` now holds at every fixed accuracy;
+  (ii) the method of the non-adaptive lower bound is in Mathé–Novak (2007), which we had not
+  found; (iii) the labels claimed more machine-checking than there is.  Also: the bound
+  provably fails for adaptive algorithms that are correct on the whole class (`n + 3`
+  evaluations on a cone); the doubling algorithm needed a union bound; the harness
+  simulation had no power.
+* **R6 on §11.17** (`reviews/R6_referee_report.md`).  No theorem false, every machine-checked
+  label confirmed.  Six major defects of wording and scope, all repaired: the "exact"
+  bracket is exact end by end only; the comparison of the three formats was not like with
+  like (the RMSD envelope has `N`-independent nets at an extensive accuracy too — re-derived
+  here); the remainder term was one transport plan, not the transport cost; the rational
+  torus has a growing number of distances; the existence bound is numerically vacuous; "does
+  not grow" needed its scope.
+* **Workstream P** (`workstreams/P_REPORT.md`).  Confirmed the identities on rotamer chains
+  (exactly, on all conformations up to ten torsions), corrected the same exactness wording
+  and the dependence on the number of types, and went further: on lattices the three formats
+  are constant / polynomial / exponential; the slack of a linear part plus a first-order
+  remainder is at least the sum of the two slacks.  Its report was reviewed
+  (`reviews/R_P_review.md`): all eighteen statements re-derived, none false, every quoted
+  number reproduced; four numbers corrected (the Hamming entries are *all* conformations, 319
+  instead of 318, 65–69 instead of 10–69, and the one-evaluation threshold of the span format
+  on the lattice was that of an uninformative evaluation); and the sentences "the
+  chain-length independence belongs to the exactly pair-additive class" and "the exponential
+  cost returns in proportion to `η`", which this log and §11.17 had repeated, are withdrawn —
+  the independence holds for the whole first-order class of the profile envelope up to a
+  sup-norm remainder, and for a per-torsion first-order remainder the exponential rate
+  returns in full for every `η > 0` (`DEAD_ENDS.md` D44).
+* **Added after the reviews** (not refereed): `LinearKernel.lean` (a kernel for residuals that
+  are linear in nonnegative pairwise features; Proposition 11.50), `pairRes_sharp` (sharpness
+  in the profile format is stochastic dominance), `sumClass_span_lower`,
+  `pairRes_span_upper_enclosure`, `weight_ge_of_inside`, `sum_truncated_ge`.
+* Harness: XIII.1–5 and XIV.1–4, reworked so that the checks the referees found powerless
+  can fail (brute force over the vertices of the box; data at vertices; real lattice chains;
+  the Chernoff event at small `K`); 32 mutations for these nine tests.
+* The full run of the harness (the audit runs the quick mode) failed once at this checkpoint:
+  XIV.3 demanded a gain of one unit from multipliers bounded by 50 on every box that
+  contradicts the anchors, which is false when the contradiction is marginal.  The claim
+  (the data term is unbounded there) was right, the cut-off was not; the check is now
+  positivity plus exact homogeneity, with its own mutation.  Stored outputs are always
+  regenerated in the full mode for this reason.
+* `DEAD_ENDS.md` D43 records the six overstated sentences.  The lesson of cycles 8 and 9
+  repeated itself: the proofs survived, the sentences around them did not.
+
+### Resume here (cycle 10, second checkpoint)
+
+Verified state: every module under `proofs/` (44 files) builds with zero warnings and is walked
+by the axiom audit (2931 declarations); the harness (92 registered tests: 75 that must survive,
+17 documented refutations) and its mutation tests (147 mutations: 146 caught, one expected
+pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 at commit
+`36ec238`, corrected here; **not refereed**: the revised Theorem 11.44 and Lemma 11.43(c) (the
+referee's own suggestion, re-derived here), Proposition 11.50 and the Lean additions listed
+above.  In priority order:
+
+1. **Workstream H has delivered** (`workstreams/H_REPORT.md`, arrived while this checkpoint
+   was being closed; *not reviewed, not in the theory report yet*).  Its claims: the four
+   statements of §11.16 confirmed; on radial instances the adaptive exponent is exactly
+   `θ_hint` (H1); a two-level "layer-cake" algorithm — uniform outer sample, brackets on the
+   fibres refined only as far as a one-sided test against a ladder of levels requires, the
+   tail lemma once at the top — is correct on the whole class with an exponent `T_2 < θ_na`
+   (H2, about `θ_na/2` at small accuracy); `k` levels give a recursion `T_k` (H3, a sketch)
+   that numerically approaches `θ_hint` (H4, a conjecture).  The coordinator's accounting of
+   the multilevel idea (step 3 of the brief) is wrong and is refuted by the "trap" instance.
+   **Next:** (i) referee H2; (ii) write H3 as a theorem with an explicit oracle interface;
+   (iii) the coordinator has a proof that every nonincreasing super-solution of the
+   recursion is at most `θ_hint` — from the identity `θ_hint(e) = θ_na(e + θ_hint(e))`, i.e.
+   `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁` — so that `T_k → θ_hint`; it compiles in Lean in scratch
+   (`HintRecursion.lean`) and must be integrated, tested in the harness and refereed.  If
+   (i)–(iii) hold, **the adaptive exponent without a hint equals the hinted one**, and the
+   whole price of having no hint is paid by non-adaptive algorithms only.
+2. **Have the revised §11.16 read once more** (Theorem 11.44 with the two-sided tail lemma is
+   the referee's suggestion re-derived here; it has not been read by anyone else).
+3. **Chains** (theory report §12 item 9): the size at which chain-length independence sets in
+   and a limit theorem; an upper bound for "pair-additive plus a small remainder"; randomised
+   algorithms for linear classes; the cost of checking in the profile format; a JSON schema
+   and reference checker for the linear kernel; an honest test on one physically motivated
+   residual.
 4. The list of the previous checkpoint, below, is otherwise unchanged.
 
 ### State at the end of cycle 9 (superseded in part by the list above)

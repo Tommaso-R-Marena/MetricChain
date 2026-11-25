@@ -17,8 +17,10 @@ the uncertainty is correlated through the coefficients, and evaluations combine 
   class is exactly as wide as the first-order class of the **feature envelope**
   `∑_α w_α |F_α(x) - F_α(y)|` (a pulled-back weighted `ℓ¹` distance), which is an envelope
   (`featEnv_isEnvelope`);
-* `sumClass_span_upper`, `sumClass_sub_le` — a first-order remainder on top of the linear part
-  adds a transport term to the bracket, weighted by the absolute values of the coefficients;
+* `sumClass_span_upper`, `sumClass_span_lower`, `sumClass_sub_le` — a first-order remainder on top
+  of the linear part adds to the bracket the cost of one transport plan (every evaluated point
+  ships to or from `y`), an upper bound for the Kantorovich–Rubinstein cost that is the exact
+  term; the lower end uses the transposed envelope;
 * `linRes_span_upper`, `linRes_span_lower`, `linRes_span_exact` — after evaluations at points
   `a k`, for **every** choice of coefficients `lam`, the value at `y` lies within
   `∑_α w_α |r_α|` of `∑_k lam k · g(a k) + ∑_α θ₀_α r_α`, where
@@ -26,8 +28,9 @@ the uncertainty is correlated through the coefficients, and evaluations combine 
   evaluated ones.  McShane's bound is the special case of one unit coefficient.  If the feature
   vector of `y` lies in the span of the evaluated ones, the value is determined exactly: a
   certificate needs at most as many evaluations as there are independent features, whatever
-  the size of the configuration space.  (That the bound is attained after minimising over `lam`
-  is linear-programming duality — Smolyak's lemma of optimal recovery — and is not formalised.)
+  the size of the configuration space.  (That each end of the range of consistent values is
+  attained by some `lam` is linear-programming duality and is not formalised; the two optimal
+  `lam` differ in general.)
 
 **Pair-additive residuals** `g(x) = ∑_k φ(s_k) · cnt_k(x)` — `cnt_k(x)` the number of pairs at the
 `k`-th grid distance, `φ` an unknown radial function with `φ = 0` at the cutoff and increments
@@ -36,8 +39,14 @@ bounded by `L·Δ_k` — are of this form with the **cumulative pair counts** as
 
 * `pairRes_sub_le`, `pairRes_admissible` — the envelope is the weighted `L¹` distance between
   cumulative pair-count profiles (a transport distance between pair-distance distributions);
-* `pairRes_span_upper`, `pairRes_span_lower` — the bracket after evaluations is the `L¹` distance
-  from the profile of `y` to a linear combination of the evaluated profiles.
+* `pairRes_span_upper`, `pairRes_span_lower`, `pairRes_span_upper_enclosure` — for every choice of
+  coefficients the value at `y` is within `L` times the weighted `L¹` distance between the profile
+  of `y` and the same combination of the evaluated profiles (each end of the exact range is
+  obtained by its own optimisation over the coefficients; the `L¹` distance to the span is the
+  worst case over the data), also when the profile of `y` is only enclosed between two bounds;
+* `pairRes_le_of_dominates`, `pairRes_sharp` — sharpness in this format is stochastic dominance:
+  if the known attraction is at least as steep as the uncertainty, a configuration whose
+  cumulative profile dominates all others is optimal for every residual of the class.
 -/
 
 namespace MetricChain
@@ -223,6 +232,38 @@ theorem sumClass_span_upper {F : X → ι → ℝ} {θ θ₀ w : ι → ℝ} (h�
   rw [hsplit]
   linarith
 
+/-- **Lower end with a first-order remainder.**  For an asymmetric envelope the transport term
+of the lower end is the transposed one: positive coefficients pay `d (a k) y`, negative ones
+`d y (a k)` (fifth and sixth referees; with the term of `sumClass_span_upper` the statement would
+be false). -/
+theorem sumClass_span_lower {F : X → ι → ℝ} {θ θ₀ w : ι → ℝ} (hθ : ∀ α, |θ α - θ₀ α| ≤ w α)
+    {d : X → X → ℝ} {ρ : X → ℝ} (hρ : Admissible d ρ) (a : κ → X) (lam : κ → ℝ)
+    (hlam : ∑ k, lam k = 1) (y : X) :
+    ∑ k, lam k * (linRes F θ (a k) + ρ (a k)) +
+      ∑ α, θ₀ α * (F y α - ∑ k, lam k * F (a k) α) -
+      ∑ α, w α * |F y α - ∑ k, lam k * F (a k) α| -
+      ∑ k, (max (lam k) 0 * d (a k) y + max (-lam k) 0 * d y (a k)) ≤ linRes F θ y + ρ y := by
+  have hlin := linRes_span_lower (F := F) hθ a lam y
+  have hrem : ∑ k, lam k * ρ (a k) - ρ y ≤
+      ∑ k, (max (lam k) 0 * d (a k) y + max (-lam k) 0 * d y (a k)) := by
+    have hy : ρ y = ∑ k, lam k * ρ y := by rw [← Finset.sum_mul, hlam, one_mul]
+    rw [hy, ← Finset.sum_sub_distrib]
+    refine Finset.sum_le_sum fun k _ => ?_
+    have h1 := hρ (a k) y
+    have h2 := hρ y (a k)
+    by_cases hk : 0 ≤ lam k
+    · rw [max_eq_left hk, max_eq_right (by linarith : -lam k ≤ 0), zero_mul, add_zero]
+      nlinarith [mul_le_mul_of_nonneg_left h1 hk]
+    · have hk' : lam k ≤ 0 := (not_le.mp hk).le
+      rw [max_eq_right hk', max_eq_left (by linarith : (0 : ℝ) ≤ -lam k), zero_mul, zero_add]
+      nlinarith [mul_le_mul_of_nonneg_left h2 (by linarith : (0 : ℝ) ≤ -lam k)]
+  have hsplit : ∑ k, lam k * (linRes F θ (a k) + ρ (a k)) =
+      ∑ k, lam k * linRes F θ (a k) + ∑ k, lam k * ρ (a k) := by
+    rw [← Finset.sum_add_distrib]
+    exact Finset.sum_congr rfl fun k _ => by ring
+  rw [hsplit]
+  linarith
+
 /-- The sum of a linear class and a first-order class is contained in the first-order class of
 the sum of the two envelopes (around the centre): the case of one evaluated point. -/
 theorem sumClass_sub_le {F : X → ι → ℝ} {θ θ₀ w : ι → ℝ} (hθ : ∀ α, |θ α - θ₀ α| ≤ w α)
@@ -343,6 +384,34 @@ theorem pairRes_span_lower {φ : ℕ → ℝ} {Δ : ℕ → ℝ} {L : ℝ} {m : 
   rw [e1, e2] at hneg
   linarith
 
+/-- **Span bracket over a set of configurations.**  If the cumulative profile of `y` is only known
+to lie between `lo` and `hi` (an enclosure over a voxel of conformations), the misfit of every
+cell is at most the larger of the misfits of the two ends, and the span bracket holds with that
+bound. -/
+theorem pairRes_span_upper_enclosure {φ : ℕ → ℝ} {Δ : ℕ → ℝ} {L : ℝ} {m : ℕ} (hφm : φ m = 0)
+    (hφ : ∀ k < m, |φ k - φ (k + 1)| ≤ L * Δ k) (hL : ∀ k < m, 0 ≤ L * Δ k)
+    (cnt : X → ℕ → ℝ) (a : κ → X) (lam : κ → ℝ) (y : X) (lo hi : ℕ → ℝ)
+    (hlo : ∀ k < m, lo k ≤ cumCount cnt y k) (hhi : ∀ k < m, cumCount cnt y k ≤ hi k) :
+    pairRes φ cnt m y ≤ ∑ i, lam i * pairRes φ cnt m (a i) +
+      ∑ k ∈ range m, L * Δ k * max |lo k - ∑ i, lam i * cumCount cnt (a i) k|
+        |hi k - ∑ i, lam i * cumCount cnt (a i) k| := by
+  refine (pairRes_span_upper hφm hφ cnt a lam y).trans ?_
+  refine add_le_add le_rfl (Finset.sum_le_sum fun k hk => ?_)
+  have hk' := Finset.mem_range.mp hk
+  refine mul_le_mul_of_nonneg_left ?_ (hL k hk')
+  rw [abs_le]
+  constructor
+  · have h1 : -|lo k - ∑ i, lam i * cumCount cnt (a i) k| ≤ lo k - ∑ i, lam i * cumCount cnt (a i) k :=
+      neg_abs_le _
+    have h2 := le_max_left |lo k - ∑ i, lam i * cumCount cnt (a i) k|
+      |hi k - ∑ i, lam i * cumCount cnt (a i) k|
+    linarith [hlo k hk']
+  · have h1 : hi k - ∑ i, lam i * cumCount cnt (a i) k ≤ |hi k - ∑ i, lam i * cumCount cnt (a i) k| :=
+      le_abs_self _
+    have h2 := le_max_right |lo k - ∑ i, lam i * cumCount cnt (a i) k|
+      |hi k - ∑ i, lam i * cumCount cnt (a i) k|
+    linarith [hhi k hk']
+
 /-- **The transport envelope.**  Differences of a pair-additive residual are bounded by the
 profile envelope: `g(x) - g(y) ≤ L ∑_k Δ_k |N_k(x) - N_k(y)|`. -/
 theorem pairRes_sub_le {φ : ℕ → ℝ} {Δ : ℕ → ℝ} {L : ℝ} {m : ℕ} (hφm : φ m = 0)
@@ -358,6 +427,43 @@ theorem pairRes_admissible {φ : ℕ → ℝ} {Δ : ℕ → ℝ} {L : ℝ} {m : 
     (hφ : ∀ k < m, |φ k - φ (k + 1)| ≤ L * Δ k) (cnt : X → ℕ → ℝ) :
     Admissible (profEnv L Δ cnt m) (pairRes φ cnt m) :=
   fun x y => pairRes_sub_le hφm hφ cnt x y
+
+/-- **Profile dominance.**  If the total radial function (known part plus residual) vanishes at
+the cutoff and is nondecreasing in the distance — attraction, whatever its exact shape — then a
+configuration whose cumulative pair counts dominate those of another one has the smaller
+energy.  This is first-order stochastic dominance: a configuration with the pointwise largest
+profile is optimal for every such residual, without any evaluation. -/
+theorem pairRes_le_of_dominates {Φ : ℕ → ℝ} {m : ℕ} (hΦm : Φ m = 0)
+    (hΦ : ∀ k < m, Φ k ≤ Φ (k + 1)) (cnt : X → ℕ → ℝ) {x y : X}
+    (hdom : ∀ k < m, cumCount cnt y k ≤ cumCount cnt x k) :
+    pairRes Φ cnt m x ≤ pairRes Φ cnt m y := by
+  rw [pairRes_eq_cum Φ cnt m hΦm, pairRes_eq_cum Φ cnt m hΦm]
+  refine Finset.sum_le_sum fun k hk => ?_
+  have hk' := Finset.mem_range.mp hk
+  have h1 : Φ k - Φ (k + 1) ≤ 0 := by linarith [hΦ k hk']
+  nlinarith [hdom k hk']
+
+/-- **Sharpness in the profile format.**  Let the known radial function `φ₀` rise by at least
+`L · Δ k` over every grid cell (an attraction at least as strong as the uncertainty of the
+residual) and let the residual's radial function have increments bounded by `L · Δ k`.  Then a
+configuration whose profile dominates all others minimises known part plus residual: no
+evaluation is needed. -/
+theorem pairRes_sharp {φ₀ φ : ℕ → ℝ} {Δ : ℕ → ℝ} {L : ℝ} {m : ℕ} (h₀m : φ₀ m = 0) (hφm : φ m = 0)
+    (h₀ : ∀ k < m, L * Δ k ≤ φ₀ (k + 1) - φ₀ k) (hφ : ∀ k < m, |φ k - φ (k + 1)| ≤ L * Δ k)
+    (cnt : X → ℕ → ℝ) {x : X} (hdom : ∀ y, ∀ k < m, cumCount cnt y k ≤ cumCount cnt x k) (y : X) :
+    pairRes φ₀ cnt m x + pairRes φ cnt m x ≤ pairRes φ₀ cnt m y + pairRes φ cnt m y := by
+  have hsum : ∀ z, pairRes φ₀ cnt m z + pairRes φ cnt m z = pairRes (fun k => φ₀ k + φ k) cnt m z := by
+    intro z
+    unfold pairRes
+    rw [← Finset.sum_add_distrib]
+    exact Finset.sum_congr rfl fun k _ => by ring
+  rw [hsum x, hsum y]
+  refine pairRes_le_of_dominates (Φ := fun k => φ₀ k + φ k) (by simp [h₀m, hφm]) (fun k hk => ?_)
+    cnt (hdom y)
+  have h1 := h₀ k hk
+  have h2 := (abs_le.mp (hφ k hk)).2
+  show φ₀ k + φ k ≤ φ₀ (k + 1) + φ (k + 1)
+  linarith
 
 end PairAdditive
 

@@ -18,8 +18,8 @@ evaluation only.
 | how the program evolved and what is open | [`docs/RESEARCH_LOG.md`](docs/RESEARCH_LOG.md) |
 | what turned out false, weaker, or already known | [`docs/DEAD_ENDS.md`](docs/DEAD_ENDS.md) |
 | the literature checks behind the novelty assessments | [`docs/prior_art/`](docs/prior_art) |
-| the independent referee reports on the theory report (four so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md) |
-| the independent reviews of the workstream reports | [`docs/reviews/`](docs/reviews) (`R_B_review.md`, `R_C_review.md`, `R_D_review.md`, `R_E_review.md`, `R_G_review.md`) |
+| the independent referee reports on the theory report (six so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md), [`R5`](docs/reviews/R5_referee_report.md), [`R6`](docs/reviews/R6_referee_report.md) |
+| the independent reviews of the workstream reports | [`docs/reviews/`](docs/reviews) (`R_B_review.md`, `R_C_review.md`, `R_D_review.md`, `R_E_review.md`, `R_G_review.md`, `R_P_review.md`) |
 | reports of independent exploratory workstreams (as delivered; not part of the theory report unless it says so) | [`docs/workstreams/`](docs/workstreams) |
 
 ## Layout
@@ -160,22 +160,41 @@ for the original goal is negative: the verified per-torsion constants grow with 
 to the chain end, so the weighted-Hamming route cannot certify long chains (D42).  §12 of the
 report says what a publication would still need.
 
-**Since the last review (cycle 10; not yet refereed).**  Two additions, theory report
-§§11.16–11.17.  (i) *Without a hint on the cube.*  Above any threshold, the Gibbs mass of a
-member of the class is at most the excess of a dip on a ball of the size of the super-level
-set (a tail lemma; machine-checked up to Harper's theorem).  Hence plain Monte Carlo is
-accurate on the whole class with the exponent `min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}`, no non-adaptive
-algorithm does better (machine-checked lower bound), and the same samples give a certified
-bracket that needs no hint at the zero residual.  Whether adaptive algorithms without a hint
-reach the hinted exponent is open.  (ii) *Correlated uncertainty.*  A residual that is linear
-in known features with coefficients in a box is determined by rank-many evaluations; its
-bracket after evaluations is a weighted `ℓ¹` distance to the *span* of the evaluated feature
-vectors, where a first-order class has the distance to the nearest one (machine-checked;
-exactness is linear-programming duality).  Pair-additive residuals with unknown Lipschitz
-radial functions are of this kind, with the cumulative pair-count profiles as features; their
-envelope is a transport distance between pair-distance distributions, and certificates in
-that format do not grow with the chain length at extensive accuracy — the constructive
-counterpart of D42, for a smaller class of residuals.
+**Cycle 10 (refereed: `docs/reviews/R5_referee_report.md`, `R6_referee_report.md`; the
+workstream on chains reviewed in `R_P_review.md`).**  Two additions, theory report
+§§11.16–11.17; no referee found a false theorem, all found sentences that said more than was
+proved and some numbers that said less (`docs/DEAD_ENDS.md` D43, D44), and the text below is
+the corrected one.  (i) *Without a hint on the cube.*  For every member of the class, the Gibbs
+mass above a threshold `t` satisfies `E(w − t)₊ ≤ t(e^{Δ_r} − 1)`, the excess of a dip on a ball of
+the size of the super-level set, and the mass below it is at least that of a cone around
+such a ball (tail lemmas: the pointwise and summed inequalities are machine-checked, their
+comparison with Hamming balls is a paper reduction to Harper's theorem).  Hence plain Monte
+Carlo is accurate on the whole class with the exponent `min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}` at
+extensive accuracies and `KL(p_u‖½)` at every fixed accuracy, and no non-adaptive algorithm has
+a smaller exponent (the lower bound is machine-checked given two finite sums; its method is
+that of Mathé–Novak 2007).  Two independent samples give a certified bracket that needs no
+hint at the zero residual for accuracies above 2.  An adaptive algorithm that is correct on
+the class needs only `n + 3` evaluations on a cone, the hard instance of non-adaptive ones;
+whether adaptive algorithms without a hint reach the hinted exponent in the worst case is
+open in the theory report as it stands (a workstream has since reported a two-level algorithm
+that beats the non-adaptive exponent on the whole class, `docs/workstreams/H_REPORT.md`; it
+is not reviewed and not integrated yet).  (ii) *Correlated uncertainty.*  A residual that is linear in known features with
+coefficients in a box is determined by rank-many evaluations; every linear combination of
+evaluations brackets the value at a new point by the part of its feature vector that the
+evaluated ones do not explain — in the worst case over the data the weighted `ℓ¹` distance to
+their *span*, where the first-order class of the same envelope has the distance to the
+nearest one (machine-checked; exactness is linear-programming duality, and the mathematics
+is classical optimal recovery).  Pair-additive residuals with unknown Lipschitz radial
+functions are of this kind, with the cumulative pair-count profiles as features; their
+envelope is a transport distance between pair-distance distributions, sharpness in this
+format is stochastic dominance of profiles, and a small verified kernel certifies minima for
+every coefficient vector that is consistent with evaluated anchors.  At an extensive accuracy
+certificates in the profile format exist whose number of evaluations does not depend on the
+chain length — a partial answer to D42, for a class of residuals that is much smaller than
+the one D42 was about (functionals of pair-distance statistics; no chirality, no
+sequence-specific terms), with an existence bound that is numerically vacuous, and with a
+remainder outside the class costing an accuracy floor if it is bounded in the supremum norm
+and the old exponential price if it is only bounded in a per-torsion first-order envelope.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

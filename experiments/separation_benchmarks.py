@@ -889,6 +889,33 @@ def nonadaptive_bounds(n, u, eps, delta=0.05):
     return Rstar, lower, r0, upper
 
 
+def fixed_accuracy_bounds(n, u, eps, eta=0.3, delta3=0.05):
+    """Monte Carlo at a fixed accuracy eps (output ln Ahat, no recentring), by the two-sided tail lemma:
+    (1 - eta)/(1 + G') <= Ahat/A <= 1 + eta + G'/delta3 outside probability e^{-eta^2 K/2} + e^{-eta^2 K/3} + delta3,
+    G' = Gamma'_n(r) = sum_{j<=r} C(n,j)(e^{u(r+1-j)} - 1) / sum_j C(n,j) e^{-u(j-r+1)_+}.  Returns
+    (r, ln M) for the largest admissible radius, K = 3 ln(40)/eta^2, or (None, None) if eps is too small for eta."""
+    target = min(math.exp(eps / 2) * (1 - eta) - 1, delta3 * (math.exp(eps / 2) - 1 - eta))
+    if target <= 0:
+        return None, None
+    K = 3 * math.log(40) / eta ** 2
+    logc = [math.lgamma(n + 1) - math.lgamma(j + 1) - math.lgamma(n - j + 1) for j in range(n + 1)]
+    logex, logball = cube_dip_tables(n, u)
+
+    def log_T(k):
+        terms = [logc[j] - u * max(j - k, 0) for j in range(n + 1)]
+        mx = max(terms)
+        return mx + math.log(sum(math.exp(t - mx) for t in terms))
+
+    best = None
+    for r in range(1, n + 1):
+        if logex[r] + n * math.log(2) - log_T(r - 1) > math.log(target):
+            break
+        best = r
+    if best is None:
+        return None, None
+    return best, math.log(K) + n * math.log(2) - logball[best]
+
+
 def bench_without_hint(rng, quick):
     section("B12. Without a hint on the cube: Monte Carlo is optimal among non-adaptive algorithms")
     out = dict(exponents=[], finite=[], simulation=[])
@@ -917,6 +944,19 @@ def bench_without_hint(rng, quick):
             print(f"{u:5.1f} | {e1:7.4f} | {n:5d} | {Rs:5d} | {lo / n:8.5f} | {str(r0):>5} | {up / n:8.5f} | {th:8.5f}")
             if lo > up + 1e-9:
                 raise RuntimeError("lower bound above upper bound")
+    print("\nfixed accuracy eps = 1 (n fixed): ln(evaluations)/n; the first bound (Gamma) is void there, the two-sided lemma (Gamma') is not")
+    print(f"{'u':>5} | {'n':>5} | {'first bound':>11} | {'two-sided':>9} | {'non-adaptive lower bound':>24} | {'KL(p_u||1/2)':>12} | {'Chebyshev ln cosh u':>19}")
+    out["fixed"] = []
+    for u in (0.5, 1.0, 2.0):
+        for n in (1000,) if quick else (1000, 4000):
+            _, lo, r0, up = nonadaptive_bounds(n, u, 1.0)
+            r2, up2 = fixed_accuracy_bounds(n, u, 1.0)
+            pu = 1 / (1 + math.exp(u))
+            first = "void" if r0 is None else f"{up / n:.4f}"
+            out["fixed"].append(dict(u=u, n=n, first=None if r0 is None else up / n, two_sided=up2 / n, lower=lo / n, kl=kl2(pu, 0.5)))
+            print(f"{u:5.1f} | {n:5d} | {first:>11} | {up2 / n:9.4f} | {lo / n:24.4f} | {kl2(pu, 0.5):12.4f} | {math.log(math.cosh(u)):19.4f}")
+            if r0 is not None or not lo <= up2 + 1e-9 or up2 / n > math.log(math.cosh(u)):
+                raise RuntimeError("fixed-accuracy bounds are not as documented")
     print("\nMonte Carlo at a cone (n = 60, u = 1; 400 repetitions; weights sampled exactly through the binomial law of the distance):")
     print(f"{'M':>8} | {'median ln(Ahat/A)':>18} | {'1% quantile':>12} | {'certified lower end -ln(2(1+Gamma))':>36} | {'fraction below':>14}")
     n, u, K = 60, 1.0, 8 * math.log(20.0)

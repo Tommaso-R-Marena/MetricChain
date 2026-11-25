@@ -258,6 +258,15 @@ finite n (delta = 0.05): ln(evaluations)/n for the non-adaptive lower bound and 
   2.0 |  0.2169 |  1600 |   600 |  0.03370 |   595 |  0.03706 |  0.03106
   2.0 |  0.2169 |  6400 |  2405 |  0.03182 |  2399 |  0.03273 |  0.03106
 
+fixed accuracy eps = 1 (n fixed): ln(evaluations)/n; the first bound (Gamma) is void there, the two-sided lemma (Gamma') is not
+    u |     n | first bound | two-sided | non-adaptive lower bound | KL(p_u||1/2) | Chebyshev ln cosh u
+  0.5 |  1000 |        void |    0.0598 |                   0.0297 |       0.0303 |              0.1201
+  0.5 |  4000 |        void |    0.0427 |                   0.0297 |       0.0303 |              0.1201
+  1.0 |  1000 |        void |    0.1630 |                   0.1089 |       0.1109 |              0.4338
+  1.0 |  4000 |        void |    0.1338 |                   0.1093 |       0.1109 |              0.4338
+  2.0 |  1000 |        void |    0.4101 |                   0.3233 |       0.3278 |              1.3250
+  2.0 |  4000 |        void |    0.3664 |                   0.3252 |       0.3278 |              1.3250
+
 Monte Carlo at a cone (n = 60, u = 1; 400 repetitions; weights sampled exactly through the binomial law of the distance):
        M |  median ln(Ahat/A) |  1% quantile |  certified lower end -ln(2(1+Gamma)) | fraction below
     1000 |             -0.764 |       -2.056 |                               -5.146 |          0.000

@@ -23,9 +23,11 @@ and that adaptivity is necessary to do better.
   bound: above a threshold `t`, a Gibbs weight of an admissible residual is at most `t` times
   `exp (β · (envelope distance to a point below the threshold))`; hence the partition function is
   at most the sum of the truncated weights plus `t` times a purely geometric sum over the
-  super-level set.  With Harper's vertex-isoperimetric theorem (not formalised here) the
-  geometric sum is largest for Hamming balls, which gives the worst-case accuracy of Monte Carlo
-  on the whole class.
+  super-level set.  `weight_ge_of_inside`, `sum_truncated_ge` bound the truncated weights from
+  below by another geometric sum.  **Not formalised here**: the comparison of the two geometric
+  sums with their values for Hamming balls (a paper reduction to Harper's vertex-isoperimetric
+  theorem), the closed forms of the sums in `cube_nonadaptive_bound`, and every asymptotic
+  statement — in particular the exponent of theory report Theorems 11.44–11.45.
 -/
 
 namespace MetricChain
@@ -239,6 +241,56 @@ theorem sum_le_truncated_add_tail {d : X → X → ℝ} {g : X → ℝ} (hg : Ad
           t * ∑ x ∈ univ.filter (fun x => t < Real.exp (-β * g x)),
             (Real.exp (β * ρ x) - 1) := by
         rw [Finset.sum_add_distrib, Finset.mul_sum, Finset.sum_filter]
+
+omit [Fintype X] in
+/-- **Pointwise bound from the other side.**  If the Gibbs weight of `y` is at least `t`, the
+weight of any `x` is at least `t · exp (-β d x y)`: an admissible residual cannot rise faster than
+the envelope either. -/
+theorem weight_ge_of_inside {d : X → X → ℝ} {g : X → ℝ} (hg : Admissible d g) {β t : ℝ}
+    (hβ : 0 ≤ β) (ht : 0 ≤ t) {x y : X} (hy : t ≤ Real.exp (-β * g y)) :
+    t * Real.exp (-β * d x y) ≤ Real.exp (-β * g x) := by
+  have h1 : g x - g y ≤ d x y := hg x y
+  have hsplit : Real.exp (-β * g x) = Real.exp (-β * g y) * Real.exp (-β * (g x - g y)) := by
+    rw [← Real.exp_add]
+    ring_nf
+  have h2 : Real.exp (-β * d x y) ≤ Real.exp (-β * (g x - g y)) :=
+    Real.exp_le_exp.mpr (by nlinarith)
+  calc t * Real.exp (-β * d x y) ≤ t * Real.exp (-β * (g x - g y)) :=
+        mul_le_mul_of_nonneg_left h2 ht
+    _ ≤ Real.exp (-β * g y) * Real.exp (-β * (g x - g y)) :=
+        mul_le_mul_of_nonneg_right hy (Real.exp_pos _).le
+    _ = Real.exp (-β * g x) := hsplit.symm
+
+open Classical in
+/-- **Two-sided tail lemma, lower half** (suggested by the fifth referee).  Let `ρ x` bound the
+envelope distance from `x` to some point of weight at least `t`, for every `x` of weight below
+`t`, and let `ρ x = 0` otherwise.  Then the truncated weights carry at least
+
+  `∑_x min (exp (-β g x)) t ≥ t · ∑_x exp (-β ρ x)`.
+
+On the cube, with `ρ = c · dist (·, {weight ≥ t})`, Harper's theorem bounds the right-hand side
+below by its value for a Hamming ball of the same size.  Together with
+`sum_le_truncated_add_tail` this compares the mass above a threshold with the truncated mass,
+for every member of the class, and gives the accuracy of Monte Carlo at every fixed accuracy. -/
+theorem sum_truncated_ge {d : X → X → ℝ} {g : X → ℝ} (hg : Admissible d g) {β t : ℝ}
+    (hβ : 0 ≤ β) (ht : 0 ≤ t) (ρ : X → ℝ)
+    (hρ : ∀ x, Real.exp (-β * g x) < t → ∃ y, t ≤ Real.exp (-β * g y) ∧ d x y ≤ ρ x)
+    (hρ0 : ∀ x, t ≤ Real.exp (-β * g x) → ρ x = 0) :
+    t * ∑ x, Real.exp (-β * ρ x) ≤ ∑ x, min (Real.exp (-β * g x)) t := by
+  rw [Finset.mul_sum]
+  refine Finset.sum_le_sum fun x _ => ?_
+  by_cases hx : Real.exp (-β * g x) < t
+  · rw [min_eq_left hx.le]
+    obtain ⟨y, hy, hdy⟩ := hρ x hx
+    have h1 := weight_ge_of_inside hg hβ ht (x := x) hy
+    have h2 : Real.exp (-β * ρ x) ≤ Real.exp (-β * d x y) :=
+      Real.exp_le_exp.mpr (by nlinarith)
+    calc t * Real.exp (-β * ρ x) ≤ t * Real.exp (-β * d x y) :=
+          mul_le_mul_of_nonneg_left h2 ht
+      _ ≤ Real.exp (-β * g x) := h1
+  · have hx' := not_lt.mp hx
+    rw [min_eq_right hx', hρ0 x hx']
+    simp
 
 end Tail
 

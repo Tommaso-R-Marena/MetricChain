@@ -234,6 +234,12 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIII.2 M2: exponent of Gamma_n claimed to be KL(rho || 1/2)
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.2 M4: Chernoff bound claimed with the constant e^{-2K}
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.2 M5: two-sided tail lemma claimed with Gamma'/8
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.2 M6: below p_u the first bound claimed to vanish like the second
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIII.2 M3: truncated mean claimed to be at least 1.5 t* q
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIII.3 M1: difference set claimed to be the closed ball
@@ -243,6 +249,12 @@
 [         caught] XIII.3 M3: centre read off with the wrong sign
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIII.3 M4: closed form of the drop with the floor at R - 1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.3 M5: adaptive certificate without the evaluation at the antipode
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.5 M1: certified bracket without the isoperimetric tail term
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.5 M2: certified bracket with a lower end above the truncated mean
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIII.4 M1: order of the two exponents reversed
                   exit=1  1 TEST(S) MISBEHAVED
@@ -256,11 +268,29 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIV.1 M4: remainder transported in the wrong direction
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.1 M5: width claimed to equal twice the distance to the span for all data
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.1 M6: lower end with the envelope in the orientation of the upper end
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.4 M1: sorted-distance form without truncation at the cutoff
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.4 M2: radial function that does not vanish at the cutoff
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.4 M3: entropy lemma with half the rounding error
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIV.2 M1: profile envelope with the pair counts instead of the cumulative counts
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIV.2 M2: summation by parts with the radial function shifted by one cell
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.3 M1: leaf bound taken at the upper corner of the coefficient box
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.3 M2: data term with the smaller of the two corner values
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.3 M3: data term capped (a bounded penalty on boxes that contradict the anchors)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.2 M4: dominance claimed to give the larger energy
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIV.2 M3: span bracket claimed to equal McShane's bound
                   exit=1  1 TEST(S) MISBEHAVED
 
-132 mutations: 131 caught, 1 expected pass, 0 not as expected
+147 mutations: 146 caught, 1 expected pass, 0 not as expected

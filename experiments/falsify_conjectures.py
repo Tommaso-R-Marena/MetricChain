@@ -4328,6 +4328,21 @@ def na_theta_hint(u, e1):
     return na_kl(rho, 0.5) if rho < 0.5 else 0.0
 
 
+def na_log_T(n, u, k):
+    """ln T_n(k), T_n(k) = sum_j C(n,j) e^{-u (j-k)_+}: the least value of sum_x e^{-u dist(x, S)} over |S| >= |B(k)|."""
+    terms = [math.lgamma(n + 1) - math.lgamma(j + 1) - math.lgamma(n - j + 1) - u * max(j - k, 0) for j in range(n + 1)]
+    mx = max(terms)
+    return mx + math.log(sum(math.exp(t - mx) for t in terms))
+
+
+def na_log_gamma2(logex, n, u, r):
+    """ln Gamma'_n(r), Gamma'_n(r) = sum_{j<=r} C(n,j)(e^{u(r+1-j)} - 1) / T_n(r-1)  (Gamma'_n(0) = 0): the two-sided
+    tail lemma (fifth referee)."""
+    if r == 0:
+        return -math.inf
+    return logex[r] + n * math.log(2) - na_log_T(n, u, r - 1)
+
+
 def na_log_gamma(logex, logball, n, r):
     """ln Gamma_n(r), Gamma_n(r) = sum_{j<=r} C(n,j)(e^{u(r+1-j)} - 1) / |B(n, r-1)|  (Gamma_n(0) = 0)."""
     if r == 0:
@@ -4370,7 +4385,7 @@ def t_tail_lemma_cube(rng, trials):
     return True, stats
 
 
-@conjecture("XIII.2 Monte Carlo on the whole class: with t* the upper q-quantile of w under the uniform measure and r the least radius with |B(n,r)| >= 2^n q, E[w] <= E[min(w,t*)] (1 + Gamma_n(r)), Gamma_n(r) = sum_{j<=r} C(n,j)(e^{u(r+1-j)}-1)/|B(n,r-1)|; hence K/q uniform samples give ln Ahat - ln A >= -ln(2(1+Gamma_n(r))) outside an event of probability e^{-K/8}; and n^{-1} ln Gamma_n(rho n) -> KL(rho || p_u) above p_u")
+@conjecture("XIII.2 Monte Carlo on the whole class: with t* the upper q-quantile of w under the uniform measure and r the least radius with |B(n,r)| >= 2^n q, E[w] <= E[min(w,t*)] (1 + Gamma_n(r)), Gamma_n(r) = sum_{j<=r} C(n,j)(e^{u(r+1-j)}-1)/|B(n,r-1)|; the same with Gamma'_n(r) = (numerator)/T_n(r-1) <= Gamma_n(r), T_n(k) = sum_j C(n,j) e^{-u(j-k)_+} (two-sided tail lemma: 2^n E min(w,t) >= t T_n(k) when |{w >= t}| >= |B(k)|); hence K/q uniform samples give ln Ahat - ln A >= -ln(2(1+Gamma'_n(r))) outside an event of probability e^{-K/8}; n^{-1} ln Gamma and n^{-1} ln Gamma' -> KL(rho || p_u) above p_u; below p_u the minimum of Gamma over r tends to 4 e^u (e^u - 1) > 0 (so the first bound is void at bounded accuracy) while n^{-1} ln Gamma' -> -KL(rho || p_u)")
 def t_monte_carlo_whole_class(rng, trials):
     stats = dict(deterministic=0, simulated=0, min_margin=math.inf)
     for n in (5, 7, 9):
@@ -4392,44 +4407,67 @@ def t_monte_carlo_whole_class(rng, trials):
                     trunc = float(np.minimum(w, tstar).mean())
                     if trunc < tstar * q * (1 - 1e-12) or A > trunc * (1 + G) * (1 + 1e-9):
                         return False, dict(reason="truncated mean does not control the mean", n=n, u=u, m=m, A=A, truncated=trunc, Gamma=G)
+                    # two-sided lemma: |{w >= t*}| >= m > |B(r-1)|  =>  2^n E min(w,t*) >= t* T_n(r-1);  A <= (1 + Gamma') E min(w,t*)
+                    G2 = math.exp(na_log_gamma2(logex, n, u, r)) if r > 0 else 0.0
+                    if r > 0 and N * trunc < tstar * math.exp(na_log_T(n, u, r - 1)) * (1 - 1e-9):
+                        return False, dict(reason="truncated mass below the Harper value of the ball", n=n, u=u, m=m)
+                    if G2 > G * (1 + 1e-9) or A > trunc * (1 + G2) * (1 + 1e-9):
+                        return False, dict(reason="two-sided tail lemma violated", n=n, u=u, m=m, A=A, truncated=trunc, Gamma2=G2)
                     stats["deterministic"] += 1
-                    stats["min_margin"] = min(stats["min_margin"], trunc * (1 + G) / A)
-    # the probabilistic statement, simulated at cones (the worst instances) and at a random instance
-    n, u, K = 12, 1.0, 8 * math.log(10.0)
-    N = 2 ** n
-    pop = np.array([bin(x).count("1") for x in range(N)])
-    logex, logball = qc_cube_log_excess(n, u)
-    D12 = None
-    for inst in range(3):
-        if inst < 2:
-            w = np.exp(-u * pop.astype(float)) if inst == 0 else np.exp(-u * np.minimum(pop, 4).astype(float))
-        else:
-            D12 = na_cube(n)
-            psi = na_rand_lipschitz(rng, n, u, D12, 0)
-            w = np.exp(-(psi - psi.min()))
-        A = float(w.mean())
-        for M in (60, 400, 2000):
-            r = next(k for k in range(n + 1) if math.exp(logball[k]) >= N * K / M - 1e-9)
-            G = math.exp(na_log_gamma(logex, logball, n, r)) if r > 0 else 0.0
-            reps = 300
-            est = w[rng.integers(0, N, size=(reps, M))].mean(axis=1)
-            fail = float((est < A / (2 * (1 + G))).mean())
-            if fail > math.exp(-K / 8):
-                return False, dict(reason="Monte Carlo falls below the certified lower end too often", instance=inst, M=M, failure=fail)
+                    stats["min_margin"] = min(stats["min_margin"], trunc * (1 + G2) / A)
+    # the probabilistic statement at cones (the extremal instances), n = 40, weights sampled through the binomial law
+    # of the distance; small K, so that the Chernoff event does occur and a wrong constant would be seen
+    n = 40
+    reps, seen = 1500, 0.0
+    pj = np.array([math.comb(n, j) for j in range(n + 1)], dtype=float) / 2.0 ** n
+    cdf = np.cumsum(pj)
+    for u, K, M in [(uu, KK, MM) for uu in (1.0, 4.0) for KK in (2.0, 4.0, 8.0) for MM in (200, 5000)]:
+        logex, logball = qc_cube_log_excess(n, u)
+        lnA = n * math.log((1 + math.exp(-u)) / 2)
+        if True:
+            r = next(k for k in range(n + 1) if logball[k] >= n * math.log(2) + math.log(K / M) - 1e-12)
+            lg2 = na_log_gamma2(logex, n, u, r)
+            j0 = int(np.searchsorted(cdf, K / M - 1e-15))            # t* = e^{-u j0}: the upper K/M-quantile of the weight
+            tstar = math.exp(-u * j0)
+            etrunc = float((pj * np.minimum(np.exp(-u * np.arange(n + 1)), tstar)).sum())
+            dist = rng.binomial(n, 0.5, size=(reps, M))
+            wts = np.exp(-u * dist)
+            est = np.log(wts.mean(axis=1)) - lnA
+            lower_end = math.log(0.5) - (math.log1p(math.exp(lg2)) if lg2 < 30 else lg2)
+            if float((est < lower_end).mean()) > math.exp(-K / 8) + 4 * math.sqrt(math.exp(-K / 8) / reps):
+                return False, dict(reason="Monte Carlo falls below the certified lower end too often", K=K, M=M)
+            chern = float((np.minimum(wts, tstar).mean(axis=1) < 0.5 * etrunc).mean())   # the Chernoff event itself
+            bound = math.exp(-K / 8)
+            if chern > bound + 4 * math.sqrt(bound * (1 - bound) / reps):
+                return False, dict(reason="truncated mean falls below half its expectation too often", K=K, M=M, frequency=chern, bound=bound)
+            if float((est > math.log(1 / 0.05)).mean()) > 0.05 + 4 * math.sqrt(0.05 * 0.95 / reps):
+                return False, dict(reason="Markov bound for the upper tail violated", K=K, M=M)
+            seen = max(seen, chern)
             stats["simulated"] += 1
+    if seen < 0.05:
+        return False, dict(reason="the Chernoff event is too rare: the simulation has no power")
+    stats["largest_chernoff_frequency"] = seen
     n, u = 2000, 1.0
     pu = 1 / (1 + math.exp(u))
     logex, logball = qc_cube_log_excess(n, u)
     for rho in (0.30, 0.38, 0.45):
         val = na_log_gamma(logex, logball, n, int(rho * n)) / n
-        if abs(val - na_kl(rho, pu)) > 0.01:
+        val2 = na_log_gamma2(logex, n, u, int(rho * n)) / n
+        if abs(val - na_kl(rho, pu)) > 0.01 or abs(val2 - na_kl(rho, pu)) > 0.01:
             return False, dict(reason="exponent of Gamma_n differs from KL(rho || p_u)", rho=rho, value=val, kl=na_kl(rho, pu))
+    for rho in (0.05, 0.15, 0.22):                         # below p_u: Gamma stays bounded away from 0, Gamma' vanishes
+        val = na_log_gamma(logex, logball, n, int(rho * n)) / n
+        val2 = na_log_gamma2(logex, n, u, int(rho * n)) / n
+        if abs(val) > 0.01 or abs(val2 + na_kl(rho, pu)) > 0.01:
+            return False, dict(reason="below p_u the exponents are not 0 and -KL(rho || p_u)", rho=rho, gamma=val, gamma2=val2)
+    if min(na_log_gamma(logex, logball, n, r) for r in range(1, n + 1)) < math.log(4 * math.exp(u) * math.expm1(u)) - 0.05:
+        return False, dict(reason="the minimum of Gamma_n is far below 4 e^u (e^u - 1): the first bound would not be void at bounded accuracy")
     return True, stats
 
 
-@conjecture("XIII.3 Non-adaptive lower bound: the flattened cone max(u d(.,s), uR) is u-Lipschitz, differs from the cone exactly on the open ball {d(.,s) < R} and lowers ln Z by ln[(1+e^{-u})^n / sum_j C(n,j) e^{-u max(j,R)}]; a query set that misses that ball cannot separate the two (both lie between the McShane envelopes of the answers); every query set Q meets the balls of at most |Q| |B(n,R-1)| centres; and a point with its n neighbours determines the centre of a cone")
+@conjecture("XIII.3 Non-adaptive lower bound: the flattened cone max(u d(.,s), uR) is u-Lipschitz, differs from the cone exactly on the open ball {d(.,s) < R} and lowers ln Z by ln[(1+e^{-u})^n / sum_j C(n,j) e^{-u max(j,R)}]; a query set that misses that ball cannot separate the two (both lie between the McShane envelopes of the answers); every query set Q meets the balls of at most |Q| |B(n,R-1)| centres; a point with its n neighbours determines the centre of a cone; and n + 3 evaluations (the centre and its antipode in addition) certify a cone exactly while no other member of the class passes that test")
 def t_nonadaptive_lower_bound(rng, trials):
-    stats = dict(pairs=0, query_sets=0, centres=0)
+    stats = dict(pairs=0, query_sets=0, centres=0, certificates=0)
     for n in (3, 5, 7, 8):
         N = 2 ** n
         D = na_cube(n)
@@ -4473,6 +4511,73 @@ def t_nonadaptive_lower_bound(rng, trials):
                 if rec != s:
                     return False, dict(reason="centre of a cone not recovered from n + 1 evaluations")
                 stats["centres"] += 1
+
+            def cone_certificate(g, x0):
+                """n + 3 evaluations: x0, its neighbours, the candidate centre and its antipode.  Returns the centre if
+                g(antipode) - g(centre) = u n (then both McShane envelopes of these two values coincide), else None."""
+                cand = 0
+                for i in range(n):
+                    dg = g[x0 ^ (1 << i)] - g[x0]
+                    if abs(abs(dg) - u) > 1e-9:
+                        return None
+                    bit = x0 >> i & 1
+                    cand |= (bit if dg > 0 else 1 - bit) << i
+                return cand if abs(g[cand ^ (N - 1)] - g[cand] - u * n) < 1e-9 else None
+
+            for _ in range(6):
+                s, x0 = int(rng.integers(N)), int(rng.integers(N))
+                cone = u * D[s].astype(float) + float(rng.normal())
+                if cone_certificate(cone, x0) != s:
+                    return False, dict(reason="the adaptive certificate does not accept a cone")
+                up = cone[s] + u * D[s]                                 # largest member with these two values ...
+                lo = cone[s ^ (N - 1)] - u * D[s ^ (N - 1)]              # ... and the smallest: equal, so g is determined
+                if np.abs(up - lo).max() > 1e-9 or np.abs(up - cone).max() > 1e-9:
+                    return False, dict(reason="two evaluations do not determine a cone")
+                others = [np.maximum(cone, cone[s] + u * int(rng.integers(1, n + 1))), na_rand_lipschitz(rng, n, u, D, int(rng.integers(5)))]
+                for g in others:
+                    acc = cone_certificate(g, x0)
+                    if acc is not None and np.abs(g - (g[acc] + u * D[acc])).max() > 1e-9:
+                        return False, dict(reason="the adaptive certificate accepts a member that is not a cone")
+                stats["certificates"] += 1
+    return True, stats
+
+
+@conjecture("XIII.5 Certified bracket from two independent uniform samples of size M >= 2K: with t the ceil(K)-th largest weight of the first sample, Ahat_t the mean of min(w, t) over the second and r the least radius with |B(r)| >= 2^{n+1} K/M, the interval [Ahat_t/1.5, 2 Ahat_t + t (e^{Delta_r} - 1)] contains A outside an event of probability delta for K = 24 ln(4/delta), on every member of the class; at the zero residual its logarithmic width is ln(3/2) + ln(1 + e^{Delta_r})")
+def t_certified_bracket(rng, trials):
+    stats = dict(runs=0, misses=0, widest=0.0)
+    n, u, delta = 40, 1.0, 0.2
+    K = 24 * math.log(4 / delta)
+    logex, logball = qc_cube_log_excess(n, u)
+    pj = np.array([math.comb(n, j) for j in range(n + 1)], dtype=float) / 2.0 ** n
+    jj = np.arange(n + 1)
+    profiles = dict(zero=np.zeros(n + 1), cone=u * jj, truncated=u * np.minimum(jj, 12), flattened=u * np.maximum(jj, 14),
+                    spike=u * np.minimum(jj, 3), far=u * np.abs(jj - 30.0))      # functions of the distance to a centre
+    reps = 60 if trials < 200 else 300
+    for name, psi in profiles.items():
+        w_of = np.exp(-(psi - psi.min()))
+        A = float((pj * w_of).sum())
+        for M in (300, 3000, 30000):
+            if M < 2 * K:
+                continue
+            r = next(k for k in range(n + 1) if logball[k] >= (n + 1) * math.log(2) + math.log(K / M) - 1e-12)
+            tail = math.exp(logex[r]) if r > 0 else 0.0                     # e^{Delta_r} - 1 (dropped at r = 0)
+            miss = 0
+            for _ in range(reps):
+                w1 = w_of[rng.binomial(n, 0.5, size=M)]
+                w2 = w_of[rng.binomial(n, 0.5, size=M)]
+                t = float(np.sort(w1)[-int(math.ceil(K))])
+                ahat = float(np.minimum(w2, t).mean())
+                lo_end, hi_end = ahat / 1.5, 2 * ahat + t * tail
+                miss += not (lo_end <= A * (1 + 1e-12) and A <= hi_end * (1 + 1e-12))
+                if name == "zero":
+                    width = math.log(hi_end / lo_end)
+                    if abs(width - (math.log(1.5) + math.log(2 + tail))) > 1e-9:
+                        return False, dict(reason="width at the zero residual is not ln(3/2) + ln(1 + e^{Delta_r})", width=width)
+                    stats["widest"] = max(stats["widest"], width)
+            if miss / reps > delta:
+                return False, dict(reason="certified bracket misses the truth too often", instance=name, M=M, misses=miss, runs=reps)
+            stats["runs"] += reps
+            stats["misses"] += miss
     return True, stats
 
 
@@ -4543,10 +4648,11 @@ def lc_span_bracket(F, theta0, w, A, v, y):
     return (-prim.fun if prim.status == 0 else None), (dual.fun if dual.status == 0 else None)
 
 
-@conjecture("XIV.1 Linear classes g = theta.F, |theta - theta0| <= w: without evaluations sup (g(x) - g(y)) = centre + sum_a w_a |F_a(x) - F_a(y)| (attained); after evaluations on A the largest consistent value at y is min_lam [lam.v + theta0.r + w.|r|], r = F(y) - sum_i lam_i F(x_i) (linear-programming duality: primal = dual, every lam gives a valid bound); the value is determined exactly when F(y) lies in the span of the evaluated feature vectors; and with a first-order remainder the bracket gains the transport term sum_i (lam_i^+ d(y,x_i) + lam_i^- d(x_i,y)) for coefficients summing to one")
+@conjecture("XIV.1 Linear classes g = theta.F, |theta - theta0| <= w: without evaluations sup (g(x) - g(y)) = centre + sum_a w_a |F_a(x) - F_a(y)| (attained); after evaluations on A the largest consistent value at y is min_lam [lam.v + theta0.r + w.|r|] and the smallest max_lam [lam.v + theta0.r - w.|r|], r = F(y) - sum_i lam_i F(x_i) (linear-programming duality at both ends, also for data at a vertex of the box; every lam gives a valid bound); the width is at most twice the weighted l1 distance of F(y) to the span, with equality at the central data and strict inequality in general; the value is determined exactly when F(y) lies in the span of the evaluated feature vectors; and with a first-order remainder the upper end gains the transport term sum_i (lam_i^+ d(y,x_i) + lam_i^- d(x_i,y)) and the lower end the transposed one, for coefficients summing to one")
 def t_linear_class_span_bracket(rng, trials):
-    stats = dict(pairs=0, brackets=0, exact=0, nontrivial=0, remainder=0)
-    for _ in range(max(8, trials // 6)):
+    from scipy.optimize import linprog
+    stats = dict(pairs=0, brackets=0, exact=0, nontrivial=0, remainder=0, narrower=0)
+    for _ in range(max(20, trials // 4)):
         N, p = int(rng.integers(5, 12)), int(rng.integers(2, 6))
         F = rng.integers(-2, 4, size=(N, p)).astype(float)
         theta0 = rng.normal(0, 1, size=p)
@@ -4554,26 +4660,34 @@ def t_linear_class_span_bracket(rng, trials):
         for _ in range(4):
             x, y = int(rng.integers(N)), int(rng.integers(N))
             env = float((w * np.abs(F[x] - F[y])).sum())
-            best = theta0 + w * np.where(F[x] - F[y] >= 0, 1.0, -1.0)
-            if abs((best - theta0) @ (F[x] - F[y]) - env) > 1e-9:
-                return False, dict(reason="feature envelope is not attained by the sign choice")
+            brute = max(float((np.array(sg) * w) @ (F[x] - F[y])) for sg in itertools.product((-1.0, 1.0), repeat=p))
+            if abs(brute - env) > 1e-9:                                   # the supremum over the box is at a vertex
+                return False, dict(reason="feature envelope differs from the largest difference over the vertices of the box", brute=brute, formula=env)
             for _ in range(5):
                 th = theta0 + w * rng.uniform(-1, 1, size=p)
                 if (th - theta0) @ (F[x] - F[y]) > env + 1e-9:
                     return False, dict(reason="a member of the class exceeds the feature envelope")
             stats["pairs"] += 1
-        truth = theta0 + w * rng.uniform(-1, 1, size=p)
-        k = int(rng.integers(1, min(N, p + 2)))
+        mode = int(rng.integers(3))                                  # 0 interior data, 1 central data, 2 data at a vertex of the box
+        truth = theta0 + w * (rng.uniform(-1, 1, size=p) if mode == 0 else (np.zeros(p) if mode == 1 else rng.choice([-1.0, 1.0], size=p)))
+        k = int(rng.integers(1, p + 1)) if rng.uniform() < 0.8 else int(rng.integers(1, min(N, p + 2)))   # mostly fewer evaluations than features
         A = [int(a) for a in rng.choice(N, size=k, replace=False)]
         v = F[A] @ truth
         rankA = np.linalg.matrix_rank(F[A])
         for y in range(N):
             up, dual = lc_span_bracket(F, theta0, w, A, v, y)
-            lo_neg, _ = lc_span_bracket(-F, theta0, w, A, -v, y)       # sup of -g(y) over the same coefficients
-            if up is None or dual is None or lo_neg is None:
+            lo_neg, dual_neg = lc_span_bracket(-F, theta0, w, A, -v, y)   # sup of -g(y) over the same coefficients, and its dual
+            if up is None or dual is None or lo_neg is None or dual_neg is None:
                 return False, dict(reason="linear program failed on a feasible instance")
-            if abs(up - dual) > 1e-6 * (1 + abs(up)):
-                return False, dict(reason="span bracket (dual) differs from the largest consistent value (primal)", primal=up, dual=dual)
+            if abs(up - dual) > 1e-6 * (1 + abs(up)) or abs(lo_neg - dual_neg) > 1e-6 * (1 + abs(lo_neg)):
+                return False, dict(reason="span bracket (dual) differs from the consistent range (primal)", primal=up, dual=dual)
+            # the width is at most twice the weighted l1 distance to the span, with equality at the central data
+            dist_lp = linprog(np.concatenate([np.zeros(k), w, w]), A_eq=np.hstack([F[A].T, np.eye(p), -np.eye(p)]), b_eq=F[y],
+                              bounds=[(None, None)] * k + [(0, None)] * (2 * p), method="highs")
+            if dist_lp.status != 0 or up + lo_neg > 2 * dist_lp.fun + 1e-6 or (mode == 1 and abs(up + lo_neg - 2 * dist_lp.fun) > 1e-6):
+                return False, dict(reason="width is not bounded by twice the distance to the span (or not equal at central data)",
+                                   width=up + lo_neg, distance=float(dist_lp.fun), mode=mode)
+            stats["narrower"] += up + lo_neg < 2 * dist_lp.fun - 1e-6
             val = float(F[y] @ truth)
             if val > up + 1e-7 or val < -lo_neg - 1e-7:
                 return False, dict(reason="true value outside the bracket")
@@ -4601,6 +4715,9 @@ def t_linear_class_span_bracket(rng, trials):
             r = F[y] - F[A].T @ lam
             if F[y] @ truth + rho[y] > lam @ (v + rho[A]) + theta0 @ r + w @ np.abs(r) + transport(lam, A, y) + 1e-7:
                 return False, dict(reason="span bracket with a first-order remainder is violated")
+            transposed = sum(max(l, 0.0) * Dm[a, y] + max(-l, 0.0) * Dm[y, a] for l, a in zip(lam, A))
+            if F[y] @ truth + rho[y] < lam @ (v + rho[A]) + theta0 @ r - w @ np.abs(r) - transposed - 1e-7:
+                return False, dict(reason="lower end of the span bracket with a remainder (transposed envelope) is violated")
             a = A[0]                                                    # one evaluated point: the bound is attained
             ext = theta0 + w * np.where(F[y] - F[a] >= 0, 1.0, -1.0)
             r1 = F[y] - F[a]
@@ -4608,23 +4725,39 @@ def t_linear_class_span_bracket(rng, trials):
             rhs = F[a] @ ext + theta0 @ r1 + w @ np.abs(r1) + transport([1.0], [a], y)
             if abs(lhs - rhs) > 1e-9:
                 return False, dict(reason="one-point bracket with a remainder is not attained", lhs=lhs, rhs=rhs)
+            low = theta0 - w * np.where(F[y] - F[a] >= 0, 1.0, -1.0)   # lower end: remainder rho = -Dm[a, .], opposite vertex
+            lower_term = lambda co, pts, yy: sum(max(l, 0.0) * Dm[b, yy] + max(-l, 0.0) * Dm[yy, b] for l, b in zip(co, pts))
+            if abs((F[y] @ low - Dm[a, y]) - (F[a] @ low + theta0 @ r1 - w @ np.abs(r1) - lower_term([1.0], [a], y))) > 1e-9:
+                return False, dict(reason="one-point lower bracket with a remainder is not attained with the transposed envelope")
         stats["remainder"] += 1
-    if stats["exact"] == 0 or stats["nontrivial"] == 0:
-        return False, dict(reason="the test has no power (no exact or no open bracket)")
+    if stats["exact"] == 0 or stats["nontrivial"] == 0 or stats["narrower"] == 0:
+        return False, dict(reason="the test has no power (no exact, no open, or no bracket narrower than twice the distance)")
     return True, stats
 
 
-@conjecture("XIV.2 Pair-additive residuals g(x) = sum_k phi(s_k) cnt_k(x) with phi = 0 at the cutoff and |phi(s_k) - phi(s_{k+1})| <= L (s_{k+1} - s_k): g(x) = sum_k (phi_k - phi_{k+1}) N_k(x) with N the cumulative pair counts; sup (g(x) - g(y)) = L sum_k Delta_k |N_k(x) - N_k(y)| (a transport distance between pair-distance distributions, attained); and after evaluations the largest consistent value at y is min_lam [lam.v + L sum_k Delta_k |N_k(y) - sum_i lam_i N_k(x_i)|]")
+@conjecture("XIV.2 Pair-additive residuals g(x) = sum_k phi(s_k) cnt_k(x) with phi = 0 at the cutoff and |phi(s_k) - phi(s_{k+1})| <= L (s_{k+1} - s_k): g(x) = sum_k (phi_k - phi_{k+1}) N_k(x) with N the cumulative pair counts; sup (g(x) - g(y)) = L sum_k Delta_k |N_k(x) - N_k(y)| (a transport distance between pair-distance distributions, attained); after evaluations the largest consistent value at y is min_lam [lam.v + L sum_k Delta_k |N_k(y) - sum_i lam_i N_k(x_i)|]; and for a radial function that vanishes at the cutoff and is nondecreasing, a configuration whose cumulative profile dominates another one has the smaller energy")
 def t_pair_additive_profiles(rng, trials):
     from scipy.optimize import linprog
-    stats = dict(identities=0, envelopes=0, brackets=0, open_brackets=0)
+    stats = dict(identities=0, envelopes=0, brackets=0, open_brackets=0, dominances=0)
     for _ in range(max(8, trials // 6)):
         N, m = int(rng.integers(4, 10)), int(rng.integers(2, 8))
         L = float(rng.uniform(0.3, 2.0))
         grid = np.sort(rng.uniform(0.5, 6.0, size=m + 1))            # s_0 < ... < s_m = cutoff
         Delta = np.diff(grid)
         cnt = rng.integers(0, 5, size=(N, m)).astype(float)          # pairs at s_0..s_{m-1}
+        j = int(rng.integers(m - 1))
+        cnt[1] = cnt[0]                                              # configuration 1: one pair of configuration 0 moved outwards
+        cnt[0, j] += 1.0
+        cnt[1, j + 1] += 1.0
         cum = np.cumsum(cnt, axis=1)
+        mono = np.concatenate([-np.cumsum(rng.uniform(0.1, 1, size=m)[::-1])[::-1], [0.0]])   # nondecreasing, zero at the cutoff
+        e = cnt @ mono[:m]
+        for x in range(N):
+            for y in range(N):
+                if (cum[x] >= cum[y]).all():
+                    if e[x] > e[y] + 1e-9:
+                        return False, dict(reason="a dominating profile has the larger energy under an attractive radial function")
+                    stats["dominances"] += x != y
         incr = L * Delta * rng.uniform(-1, 1, size=m)                # phi_k - phi_{k+1}
         phi = np.concatenate([np.cumsum(incr[::-1])[::-1], [0.0]])   # phi_m = 0
         g = cnt @ phi[:m]
@@ -4636,9 +4769,9 @@ def t_pair_additive_profiles(rng, trials):
             env = float(L * (Delta * np.abs(cum[x] - cum[y])).sum())
             if g[x] - g[y] > env + 1e-9:
                 return False, dict(reason="pair-additive residual exceeds the profile envelope")
-            ext = L * Delta * np.where(cum[x] - cum[y] >= 0, 1.0, -1.0)
-            if abs(ext @ (cum[x] - cum[y]) - env) > 1e-9:
-                return False, dict(reason="profile envelope is not attained")
+            brute = max(float((np.array(sg) * L * Delta) @ (cum[x] - cum[y])) for sg in itertools.product((-1.0, 1.0), repeat=m))
+            if abs(brute - env) > 1e-9:                               # extreme radial functions: increments +-L Delta_k
+                return False, dict(reason="profile envelope differs from the supremum over the extreme radial functions", brute=brute, formula=env)
             stats["envelopes"] += 1
         k = int(rng.integers(1, min(N, m + 1)))
         A = [int(a) for a in rng.choice(N, size=k, replace=False)]
@@ -4660,6 +4793,172 @@ def t_pair_additive_profiles(rng, trials):
             stats["brackets"] += 1
     if stats["open_brackets"] == 0:
         return False, dict(reason="linear combinations never improved on McShane: the test has no power")
+    return True, stats
+
+
+@conjecture("XIV.3 Linear-residual kernel (LinearKernel.lean): on a coefficient box [lo, hi] with nonnegative features, min_x (E0 + lo.F)(x) + lam.v - sum_a max(lo_a c_a, hi_a c_a), c = F(A)^T lam, is a lower bound on min_x (E0 + theta.F)(x) for every theta of the box that is consistent with the anchors, for every lam; on boxes that contradict the anchors the data term is unbounded; and on small boxes around a consistent theta the bound approaches the true minimum")
+def t_linear_kernel_leaf(rng, trials):
+    from scipy.optimize import linprog
+    stats = dict(leaves=0, contradicted=0, tight=0, improved=0)
+    for _ in range(max(10, trials // 5)):
+        N, p = int(rng.integers(4, 17)), int(rng.integers(1, 4))
+        E0 = rng.normal(0, 2, size=N)
+        F = rng.integers(0, 4, size=(N, p)).astype(float)
+        lo0 = rng.uniform(-2, 0.5, size=p)
+        hi0 = lo0 + rng.uniform(0.5, 3, size=p)
+        truth = lo0 + (hi0 - lo0) * rng.uniform(0.1, 0.9, size=p)
+        A = [int(a) for a in rng.choice(N, size=int(rng.integers(1, 3)), replace=False)]
+        v = F[A] @ truth
+
+        def robust_min(lo, hi):
+            """min over x and over theta in [lo, hi] with F[A] theta = v of E0[x] + F[x].theta (inf if no such theta)."""
+            best = math.inf
+            for x in range(N):
+                res = linprog(F[x], A_eq=F[A], b_eq=v, bounds=list(zip(lo, hi)), method="highs")
+                if res.status == 0:
+                    best = min(best, E0[x] + res.fun)
+                elif res.status != 2:
+                    return None
+            return best
+
+        def leaf_bound(lo, hi, lam):
+            c = F[A].T @ lam
+            return float((E0 + F @ lo).min()) + float(lam @ v) - float(np.maximum(lo * c, hi * c).sum())
+
+        for kind in range(4):
+            if kind == 0:                                   # the whole box
+                lo, hi = lo0.copy(), hi0.copy()
+            elif kind == 1:                                 # a small box around the truth
+                lo, hi = np.maximum(lo0, truth - 1e-3), np.minimum(hi0, truth + 1e-3)
+            elif kind == 2:                                 # a random sub-box containing the truth
+                lo = lo0 + (truth - lo0) * rng.uniform(size=p)
+                hi = hi0 - (hi0 - truth) * rng.uniform(size=p)
+            else:                                           # a sub-box that excludes the truth in one coordinate
+                lo, hi = lo0.copy(), hi0.copy()
+                a = int(rng.integers(p))
+                hi[a] = lo0[a] + 0.5 * (truth[a] - lo0[a])
+            true_min = robust_min(lo, hi)
+            if true_min is None:
+                return False, dict(reason="linear program failed")
+            # best multipliers by linear programming: maximise lam.v - sum t, t >= lo c, t >= hi c, |lam| <= 50
+            k = len(A)
+            cost = np.concatenate([-v, np.ones(p)])
+            Aub = np.vstack([np.hstack([lo[:, None] * F[A].T, -np.eye(p)]), np.hstack([hi[:, None] * F[A].T, -np.eye(p)])])
+            res = linprog(cost, A_ub=Aub, b_ub=np.zeros(2 * p), bounds=[(-50, 50)] * k + [(None, None)] * p, method="highs")
+            if res.status != 0:
+                return False, dict(reason="multiplier program failed")
+            lam_best = res.x[:k]
+            for lam in (np.zeros(k), lam_best, rng.normal(0, 3, size=k)):
+                b = leaf_bound(lo, hi, lam)
+                if true_min < math.inf and b > true_min + 1e-6:
+                    return False, dict(reason="leaf bound exceeds the robust minimum", bound=b, robust_min=true_min, kind=kind)
+            b0, b1 = leaf_bound(lo, hi, np.zeros(k)), leaf_bound(lo, hi, lam_best)
+            if true_min == math.inf:
+                # Farkas: some multipliers separate the box from the data, and the data term is positively homogeneous
+                # in them, so it is unbounded (the size of the gain at |lam| <= 50 depends on the margin of the contradiction)
+                gain = b1 - b0
+                if gain <= 1e-7:
+                    return False, dict(reason="no multipliers separate a box that contradicts the anchors", gain=gain)
+                far = leaf_bound(lo, hi, 1000.0 * lam_best) - b0
+                if far < 999.0 * gain or abs(far - 1000.0 * gain) > 1e-6 * (1.0 + 1000.0 * gain):
+                    return False, dict(reason="data term is not unbounded on a box that contradicts the anchors", gain=gain, far=far)
+                stats["contradicted"] += 1
+                stats["smallest_gain"] = min(stats.get("smallest_gain", math.inf), gain)
+            if kind == 1:
+                if true_min - b1 > 0.05 * (1 + float(np.abs(F).max())):
+                    return False, dict(reason="bound on a small consistent box is far from the minimum", gap=true_min - b1)
+                stats["tight"] += 1
+            stats["improved"] += b1 > b0 + 1e-6
+            stats["leaves"] += 1
+    if stats["contradicted"] == 0 or stats["improved"] == 0:
+        return False, dict(reason="the test has no power")
+    return True, stats
+
+
+def lc_square_lattice_walks(nbeads):
+    """All self-avoiding walks with `nbeads` beads on the square lattice whose first step is (1, 0)."""
+    walks, steps = [], ((1, 0), (-1, 0), (0, 1), (0, -1))
+
+    def extend(path):
+        if len(path) == nbeads:
+            walks.append(list(path))
+            return
+        x, y = path[-1]
+        for dx, dy in steps:
+            q = (x + dx, y + dy)
+            if q not in path:
+                path.append(q)
+                extend(path)
+                path.pop()
+
+    extend([(0, 0), (1, 0)])
+    return walks
+
+
+@conjecture("XIV.4 Pair-distance profiles on real chains (self-avoiding walks on the square lattice, squared distances, cutoff S_c): for an L-Lipschitz radial function with phi(S_c) = 0 the pair-additive energy is -int phi' N^x; the envelope L int |N^x - N^y| equals L times the l1 distance of the sorted squared distances truncated at the cutoff and the supremum over the extreme radial functions; mirror images and reversed chains have equal profiles; and (entropy lemma of Proposition 11.49) rounding a nondecreasing function of total mass M on [0, S] to G levels and G grid points changes it by at most 2SM/G in L1 and leaves at most C(2G, G) functions")
+def t_profiles_on_chains(rng, trials):
+    stats = dict(walks=0, profiles=0, pairs=0, rounded=0, worst_rounding=0.0)
+    for nbeads, Sc in ((7, 5.0), (8, 5.0), (8, 10.0)):
+        walks = lc_square_lattice_walks(nbeads)
+        pairs = [(a, b) for a in range(nbeads) for b in range(a + 2, nbeads)]
+        sq = np.array([[(wk[a][0] - wk[b][0]) ** 2 + (wk[a][1] - wk[b][1]) ** 2 for a, b in pairs] for wk in walks], dtype=float)
+        grid = sorted(set(sq[sq < Sc].tolist())) + [Sc]                     # occurring squared distances below the cutoff, then the cutoff
+        Delta = np.diff(grid)
+        cum = np.array([[float((row <= g).sum()) for g in grid[:-1]] for row in sq])   # N^x on the cells [g_k, g_{k+1})
+        L = float(rng.uniform(0.3, 2.0))
+        stats["walks"] += len(walks)
+        stats["profiles"] += len({tuple(c) for c in cum.tolist()})
+        # an L-Lipschitz radial function, piecewise linear between the grid points, zero from the cutoff on
+        incr = L * Delta * rng.uniform(-1, 1, size=len(Delta))              # phi(g_k) - phi(g_{k+1})
+        phi_grid = np.concatenate([np.cumsum(incr[::-1])[::-1], [0.0]])
+        phi = lambda t: float(np.interp(min(t, Sc), grid, phi_grid))
+        for i in rng.choice(len(walks), size=min(len(walks), 40), replace=False):
+            direct = sum(phi(t) for t in sq[i])
+            if abs(direct - float(cum[i] @ incr)) > 1e-9:
+                return False, dict(reason="pair-additive energy differs from the integral of the profile against -phi'")
+        for _ in range(60):
+            i, j = int(rng.integers(len(walks))), int(rng.integers(len(walks)))
+            dP = L * float((Delta * np.abs(cum[i] - cum[j])).sum())
+            sorted_l1 = L * float(np.abs(np.sort(np.minimum(sq[i], Sc)) - np.sort(np.minimum(sq[j], Sc))).sum())
+            brute = max(float((np.array(sg) * L * Delta) @ (cum[i] - cum[j])) for sg in itertools.product((-1.0, 1.0), repeat=len(Delta)))
+            if abs(dP - sorted_l1) > 1e-9 or abs(dP - brute) > 1e-9:
+                return False, dict(reason="profile envelope differs from the sorted-distance form or from the supremum over radial functions",
+                                   integral=dP, sorted=sorted_l1, brute=brute)
+            stats["pairs"] += 1
+        index = {tuple(map(tuple, wk)): t for t, wk in enumerate(walks)}
+        for i in rng.choice(len(walks), size=min(len(walks), 30), replace=False):
+            wk = walks[i]
+            mirror = tuple((x, -y) for x, y in wk)
+            last, prev = wk[-1], wk[-2]
+            rev = [(x - last[0], y - last[1]) for x, y in reversed(wk)]      # reversed chain, rotated so that its first step is (1, 0)
+            dx, dy = rev[1]
+            rot = {(1, 0): lambda q: q, (-1, 0): lambda q: (-q[0], -q[1]), (0, 1): lambda q: (q[1], -q[0]), (0, -1): lambda q: (-q[1], q[0])}[(dx, dy)]
+            rev = tuple(rot(q) for q in rev)
+            for other in (mirror, rev):
+                if other not in index or not np.array_equal(cum[index[other]], cum[i]):
+                    return False, dict(reason="mirror image or reversed chain has a different profile")
+    # entropy lemma: rounding to multiples of q = M/G and moving every jump up to the next of G grid points
+    for _ in range(max(40, trials)):
+        G, S, M = int(rng.integers(2, 9)), float(rng.uniform(1, 6)), float(rng.uniform(1, 10))
+        kind = int(rng.integers(3))
+        njump = int(rng.integers(1, 30))
+        pos = np.sort(rng.uniform(0, S, size=njump)) if kind < 2 else np.sort((np.floor(rng.uniform(0, G, size=njump)) + 1e-6) * S / G)
+        hts = rng.dirichlet(np.ones(njump)) * M * (1.0 if kind else rng.uniform(0.2, 1.0))
+        ts = np.linspace(0, S, 4001)[:-1] + S / 8000                         # quadrature points
+        Fv = np.array([hts[pos <= t].sum() for t in ts])
+        q = M / G
+        rounded = np.floor(Fv / q + 1e-12) * q
+        levels = np.arange(1, G + 1) * q                                    # level l*q is first reached at the point u_l ...
+        reach = np.array([ts[np.argmax(rounded >= lv - 1e-12)] if (rounded >= lv - 1e-12).any() else S for lv in levels])
+        moved = np.minimum(np.ceil(reach / (S / G) - 1e-12) * (S / G), S)   # ... and the jump is moved up to the next grid point
+        Fr = np.array([q * float((moved <= t).sum()) for t in ts])
+        err = float(np.abs(Fv - Fr).mean() * S)
+        if err > 2 * S * M / G * (1 + 1e-3) + 1e-9:
+            return False, dict(reason="rounding error exceeds 2SM/G", error=err, bound=2 * S * M / G)
+        stats["rounded"] += 1
+        stats["worst_rounding"] = max(stats["worst_rounding"], err / (2 * S * M / G))
+    if stats["profiles"] >= stats["walks"]:
+        return False, dict(reason="every walk has its own profile: the fibres of the pseudometric were expected to be large")
     return True, stats
 
 
