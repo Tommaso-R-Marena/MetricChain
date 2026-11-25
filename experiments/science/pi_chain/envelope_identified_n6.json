@@ -1,0 +1,902 @@
+[
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "gauche fraction",
+  "b": null,
+  "lo": 0.0,
+  "hi": 1.0,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "gauche fraction",
+  "b": 0.25,
+  "lo": 0.5972047595854967,
+  "hi": 0.7026844120134503,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "gauche fraction",
+  "b": 0.5,
+  "lo": 0.5392413764147278,
+  "hi": 0.7485656279997135,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "gauche fraction",
+  "b": 1.0,
+  "lo": 0.4198017718285948,
+  "hi": 0.8251931770949599,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "gauche fraction",
+  "b": 2.0,
+  "lo": 0.21263996679514433,
+  "hi": 0.9233071937014313,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "end-to-end R2",
+  "b": null,
+  "lo": 8.0,
+  "hi": 128.0,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "end-to-end R2",
+  "b": 0.25,
+  "lo": 41.60301576477606,
+  "hi": 50.934449744016526,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "end-to-end R2",
+  "b": 0.5,
+  "lo": 37.65372970812161,
+  "hi": 56.5064888058373,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "end-to-end R2",
+  "b": 1.0,
+  "lo": 30.960526531500825,
+  "hi": 69.38730817896261,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "end-to-end R2",
+  "b": 2.0,
+  "lo": 20.617570033502275,
+  "hi": 95.99688070414537,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "P(compact decile)",
+  "b": null,
+  "lo": 0.0,
+  "hi": 1.0,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "P(compact decile)",
+  "b": 0.25,
+  "lo": 0.07606072264892019,
+  "hi": 0.15633750775924177,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "P(compact decile)",
+  "b": 0.5,
+  "lo": 0.0498421143240641,
+  "hi": 0.21125449036566812,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "P(compact decile)",
+  "b": 1.0,
+  "lo": 0.018735583949844304,
+  "hi": 0.3453067090118322,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "no data",
+  "target": "P(compact decile)",
+  "b": 2.0,
+  "lo": 0.0014721866782678274,
+  "hi": 0.6363589548048079,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "gauche fraction",
+  "b": null,
+  "lo": 0.3294899951195705,
+  "hi": 1.0,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "gauche fraction",
+  "b": 0.25,
+  "lo": 0.6307192902345763,
+  "hi": 0.672746833184024,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "gauche fraction",
+  "b": 0.5,
+  "lo": 0.6082415050212218,
+  "hi": 0.6929107861509649,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "gauche fraction",
+  "b": 1.0,
+  "lo": 0.5574939558953285,
+  "hi": 0.7320955365186418,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "gauche fraction",
+  "b": 2.0,
+  "lo": 0.4521515609715423,
+  "hi": 0.8225806547265191,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "end-to-end R2",
+  "b": null,
+  "lo": 23.984841960210154,
+  "hi": 66.28964287987779,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "end-to-end R2",
+  "b": 0.25,
+  "lo": 44.600609344365445,
+  "hi": 47.33586766039087,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "end-to-end R2",
+  "b": 0.5,
+  "lo": 43.17601997829698,
+  "hi": 48.645825133435,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "end-to-end R2",
+  "b": 1.0,
+  "lo": 40.21496429944323,
+  "hi": 51.14106712080566,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "end-to-end R2",
+  "b": 2.0,
+  "lo": 34.036360226306805,
+  "hi": 56.11912317423916,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "P(compact decile)",
+  "b": null,
+  "lo": 0.0,
+  "hi": 0.718887262079063,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "P(compact decile)",
+  "b": 0.25,
+  "lo": 0.08568636017354596,
+  "hi": 0.14117354843848018,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "P(compact decile)",
+  "b": 0.5,
+  "lo": 0.06437586368405325,
+  "hi": 0.17529056612574495,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "P(compact decile)",
+  "b": 1.0,
+  "lo": 0.03348767055126482,
+  "hi": 0.25499470564729165,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "Rg2",
+  "target": "P(compact decile)",
+  "b": 2.0,
+  "lo": 0.006643358851895556,
+  "hi": 0.4349185227670149,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "gauche fraction",
+  "b": null,
+  "lo": 0.492337725719864,
+  "hi": 0.7867252318204012,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "gauche fraction",
+  "b": 0.25,
+  "lo": 0.6401218358727045,
+  "hi": 0.6642487652601612,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "gauche fraction",
+  "b": 0.5,
+  "lo": 0.6285189108938669,
+  "hi": 0.6767767029072104,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "gauche fraction",
+  "b": 1.0,
+  "lo": 0.6067983283270194,
+  "hi": 0.7008856813079603,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "gauche fraction",
+  "b": 2.0,
+  "lo": 0.5673504095454619,
+  "hi": 0.7414860948445016,
+  "truth_value": 0.6520253782332848
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "end-to-end R2",
+  "b": null,
+  "lo": 16.529689279323236,
+  "hi": 77.56368960468517,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "end-to-end R2",
+  "b": 0.25,
+  "lo": 44.05217971913267,
+  "hi": 47.92728957983835,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "end-to-end R2",
+  "b": 0.5,
+  "lo": 42.11092746464576,
+  "hi": 49.887042834956524,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "end-to-end R2",
+  "b": 1.0,
+  "lo": 38.23078967504525,
+  "hi": 53.92862769883558,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "end-to-end R2",
+  "b": 2.0,
+  "lo": 31.099948974568925,
+  "hi": 62.42997255527641,
+  "truth_value": 45.98535871156662
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "P(compact decile)",
+  "b": null,
+  "lo": 0.0,
+  "hi": 0.4089799902391413,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "P(compact decile)",
+  "b": 0.25,
+  "lo": 0.09086395083766123,
+  "hi": 0.13319407880033574,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "P(compact decile)",
+  "b": 0.5,
+  "lo": 0.07231475390379445,
+  "hi": 0.1560382345318354,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "P(compact decile)",
+  "b": 1.0,
+  "lo": 0.04205421295208603,
+  "hi": 0.20325582416350754,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = model (athermal)",
+  "data": "three-shell profile",
+  "target": "P(compact decile)",
+  "b": 2.0,
+  "lo": 0.00988172488891187,
+  "hi": 0.29331992635329385,
+  "truth_value": 0.11127379209370425
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "gauche fraction",
+  "b": null,
+  "lo": 0.0,
+  "hi": 1.0,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "gauche fraction",
+  "b": 0.25,
+  "lo": 0.5972047595854967,
+  "hi": 0.7026844120134503,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "gauche fraction",
+  "b": 0.5,
+  "lo": 0.5392413764147278,
+  "hi": 0.7485656279997135,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "gauche fraction",
+  "b": 1.0,
+  "lo": 0.4198017718285948,
+  "hi": 0.8251931770949599,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "gauche fraction",
+  "b": 2.0,
+  "lo": 0.21263996679514433,
+  "hi": 0.9233071937014313,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "end-to-end R2",
+  "b": null,
+  "lo": 8.0,
+  "hi": 128.0,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "end-to-end R2",
+  "b": 0.25,
+  "lo": 41.60301576477606,
+  "hi": 50.934449744016526,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "end-to-end R2",
+  "b": 0.5,
+  "lo": 37.65372970812161,
+  "hi": 56.5064888058373,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "end-to-end R2",
+  "b": 1.0,
+  "lo": 30.960526531500825,
+  "hi": 69.38730817896261,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "end-to-end R2",
+  "b": 2.0,
+  "lo": 20.617570033502275,
+  "hi": 95.99688070414537,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "P(compact decile)",
+  "b": null,
+  "lo": 0.0,
+  "hi": 1.0,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "P(compact decile)",
+  "b": 0.25,
+  "lo": 0.07606072264892019,
+  "hi": 0.15633750775924177,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "P(compact decile)",
+  "b": 0.5,
+  "lo": 0.0498421143240641,
+  "hi": 0.21125449036566812,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "P(compact decile)",
+  "b": 1.0,
+  "lo": 0.018735583949844304,
+  "hi": 0.3453067090118322,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "no data",
+  "target": "P(compact decile)",
+  "b": 2.0,
+  "lo": 0.0014721866782678274,
+  "hi": 0.6363589548048079,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "gauche fraction",
+  "b": null,
+  "lo": 0.3498411040305186,
+  "hi": 1.0,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "gauche fraction",
+  "b": 0.25,
+  "lo": 0.669302371443114,
+  "hi": 0.6966690162577183,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "gauche fraction",
+  "b": 0.5,
+  "lo": 0.6413032605226654,
+  "hi": 0.7202078055674983,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "gauche fraction",
+  "b": 1.0,
+  "lo": 0.5852964234985837,
+  "hi": 0.7625892135098243,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "gauche fraction",
+  "b": 2.0,
+  "lo": 0.4756918804753677,
+  "hi": 0.8581215465069323,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "end-to-end R2",
+  "b": null,
+  "lo": 20.324359865689786,
+  "hi": 62.73857736970449,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "end-to-end R2",
+  "b": 0.25,
+  "lo": 42.10353159329193,
+  "hi": 43.67514354004709,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "end-to-end R2",
+  "b": 0.5,
+  "lo": 40.33218465231186,
+  "hi": 45.263120136803906,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "end-to-end R2",
+  "b": 1.0,
+  "lo": 37.10259821519586,
+  "hi": 47.83572983909839,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "end-to-end R2",
+  "b": 2.0,
+  "lo": 30.45579031395597,
+  "hi": 52.760779262228006,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "P(compact decile)",
+  "b": null,
+  "lo": 0.0,
+  "hi": 0.7520343833185051,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "P(compact decile)",
+  "b": 0.25,
+  "lo": 0.11327156548424425,
+  "hi": 0.15540503929617996,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "P(compact decile)",
+  "b": 0.5,
+  "lo": 0.07993048525822385,
+  "hi": 0.1953970510451735,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "P(compact decile)",
+  "b": 1.0,
+  "lo": 0.042158907507855455,
+  "hi": 0.2799272597670989,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "Rg2",
+  "target": "P(compact decile)",
+  "b": 2.0,
+  "lo": 0.00872156835523443,
+  "hi": 0.4643619849144941,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "gauche fraction",
+  "b": null,
+  "lo": 0.511418754559649,
+  "hi": 0.8329191959173756,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "gauche fraction",
+  "b": 0.25,
+  "lo": null,
+  "hi": null,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "gauche fraction",
+  "b": 0.5,
+  "lo": 0.6663502259980804,
+  "hi": 0.6762722806418757,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "gauche fraction",
+  "b": 1.0,
+  "lo": 0.6329416448664296,
+  "hi": 0.7206848983607569,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "gauche fraction",
+  "b": 2.0,
+  "lo": 0.5871217235432119,
+  "hi": 0.773471157838399,
+  "truth_value": 0.671039678887511
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "end-to-end R2",
+  "b": null,
+  "lo": 14.940629320648654,
+  "hi": 75.37441573345934,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "end-to-end R2",
+  "b": 0.25,
+  "lo": null,
+  "hi": null,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "end-to-end R2",
+  "b": 0.5,
+  "lo": 41.17360956965775,
+  "hi": 43.87809357681789,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "end-to-end R2",
+  "b": 1.0,
+  "lo": 35.65329999013153,
+  "hi": 49.686187641604754,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "end-to-end R2",
+  "b": 2.0,
+  "lo": 28.282388569671838,
+  "hi": 59.14714214143747,
+  "truth_value": 42.66568748934822
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "P(compact decile)",
+  "b": null,
+  "lo": 0.0,
+  "hi": 0.48941771922066557,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "P(compact decile)",
+  "b": 0.25,
+  "lo": null,
+  "hi": null,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "P(compact decile)",
+  "b": 0.5,
+  "lo": 0.14265954866801778,
+  "hi": 0.17112131189661894,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "P(compact decile)",
+  "b": 1.0,
+  "lo": 0.06604503118970366,
+  "hi": 0.259175170872154,
+  "truth_value": 0.16185174094603103
+ },
+ {
+  "n": 6,
+  "truth": "truth = attractive (exp(+0.5*c3))",
+  "data": "three-shell profile",
+  "target": "P(compact decile)",
+  "b": 2.0,
+  "lo": 0.014873724800646138,
+  "hi": 0.3708399598949545,
+  "truth_value": 0.16185174094603103
+ }
+]

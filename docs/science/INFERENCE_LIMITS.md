@@ -1,6 +1,6 @@
 # Inference limits: what models, energy evaluations and measurements jointly determine
 
-*Science division, coordinator's research thread.  Version 1 (checkpoint 1, 2026-11-25).
+*Science division, coordinator's research thread.  Version 2 (checkpoint 2, 2026-11-25; §§9–12 new).
 Theory commit referred to: `5ed4072`.  Scripts: `experiments/science/pi_inference/`.*
 
 Labels: **[V]** machine-checked · **[P]** paper proof given here · **[K]** known, cited ·
@@ -39,6 +39,8 @@ Summary of this file, for the cube class with zero known part unless said otherw
 | I2(`Φ_k`) | **an upper bound `≈ t!/(n^t (1−2ρ)^{2t})`, `t = ⌊k/2⌋`, on the population of every basin** of radius `ρn` when the marginals are uniform (Theorem 3); attained up to constants | [P], enumerated |
 | I1 + I2(`Φ_k`) | the lower bound for all algorithms at the zero residual is divided by at most `(2n)^{⌈k/2⌉}`: **`θ_hint` unchanged** (Theorem 4) | [P] |
 | I3 (+ polynomially many I1) | a bracket of `ln(Z_g/Z_0)` of width `J(μ₀, μ_g) + ε`; **at the zero residual — the hardest instance for I1 alone — the cost is `O(n b²/ε²)`** (Theorem 5) | [P]; the inequality is [K] |
+| I1 + I3 | **the worst-case exponent is unchanged**: a visible basin can have a hidden twin with exactly the same mean energy (Proposition 5b) | mechanism [P], root [N] |
+| I2(Φ) + model + envelope class | data certify a **lower** bound on the envelope constant and on `KL(truth‖model)`; kernel-checkable (Theorem 8) | [P] |
 | I2(Φ), `g ∈ span Φ` | everything (exponential-family identifiability; maximum-entropy refinement is exact) (Proposition 6) | [K] |
 | I2(Φ), `g ∈ span Φ + r` | maximum-entropy refinement within `TV ≤ β·osc(r)/4`, dimension-free (Theorem 7) | [P], 3 900 random instances |
 
@@ -218,11 +220,38 @@ certificate is tight exactly when the model is good, and both ends are *measured
 width is known a posteriori.  For a generic member of the class `J` is extensive; the
 a-priori product-reference sandwich of theory report §3.2 has width `β²Σc_i²/8`.
 
-*Open.*  (i) The worst-case exponent with the I3 oracle.  We expect it to remain positive:
-two hidden dips of different shape with the same `U` but different `ln Z` (flattened cones:
-two parameters, one constraint) must be told apart by evaluations **[C]**; the hard
-instances are then not the zero residual but residuals with hidden structure, and the
-relevant instance parameter is `J` rather than a covering number.  (ii) **Physical status of
+**Proposition 5b (the datum does not lower the worst-case exponent: a visible basin can have
+a hidden twin) [mechanism P; the existence of the root N, exact arithmetic].**  Cube class,
+`u = βc`, `ρ₀ = ln(2/(1+e^{−u}))/u` (the radius at which a dip matters for `Z`; theory report
+§11.10).  Fix `ρ₁ > ρ₀`, `r₁ = ρ₁n`, a public centre `a₀`, and the base instance
+`g₀ = −c·(r₁ − d_H(x, a₀))₊` — one visible basin that dominates `Z`.  For a hidden centre `a′` and
+`s ∈ (−1, 1)` let `g′ = min(g₀, −c·(r₁ + s − d_H(x, a′))₊)`.  Adding a region whose *excess* mass has
+mean energy `m` changes `U` to a weighted mean of `U` and `m`; when the visible basin dominates,
+a twin of almost the same radius has `m ≈ U`, and by continuity in `s` there is `s*` with
+**exactly** `E_{μ_{g′}} g′ = E_{μ_{g₀}} g₀`, while `ln Z_{g′} − ln Z_{g₀} ≈ ln 2`.  Since `g′ = g₀` outside
+`B(a′, r₁ + 1)`, an algorithm with an exact I3 oracle and accuracy `ε < ½(ln Z_{g′} − ln Z_{g₀})` must
+still evaluate `g` inside that ball for (almost) every `a′`:
+`E[#evaluations] ≥ (1 − 2δ − o(1))·2ⁿ/V(n, r₁ + 1)` at `g₀`.  Letting `ρ₁ ↓ ρ₀`: **the worst-case
+exponent with the thermodynamic oracle is at least `ln 2 − h(ρ₀)`, the hinted exponent at
+bounded accuracy — the same as without the oracle.**  Only the hard instance has moved,
+from "nothing is there" to "is the visible state the only one?".
+*Numerical evidence* (`calorimetric_twin_check.py`, `calorimetric_twin_exact.py`; exact sums
+over the joint law of the two distances, overlapping supports included): `u = 1`,
+`ρ₀ = 0.3799`; for `n = 1000`, `ρ₁ = ρ₀ + 0.01` and hidden centres at distance `0.3n`, `0.45n`, `0.5n`:
+`s* = −0.0049`, equal mean energies to `10⁻¹³`, `ln Z′ − ln Z₀ = 0.691`; for `n = 5000`,
+`ρ₁ = ρ₀ + 0.002`: `s* = −0.039`, `ln Z′ − ln Z₀ = 0.674`, cost exponent `0.0281` against the hinted
+`0.0291`.  When the visible basin does not dominate (`ln B₀ ≲ 2`) there is no root in `(−1, 1)`:
+the construction needs `n` large for `ρ₁` close to `ρ₀`.
+
+**Reading.**  Calorimetry excludes hidden states *deeper* than what is seen (they would
+lower the mean energy) and cannot exclude a hidden state *as deep as* what is seen.  With
+local structural data added the twin must also reproduce the visible state's `k`-body
+marginals; at maximal polarisation that is impossible (the product measure with
+single-site probabilities `σ(u)` is the only member of the class with those one-body
+marginals), below it we expect designs around `a₀` to supply twins **[C]**.
+
+*Open.*  (i) A proof of the root (monotonicity of the excess mean energy in the radius),
+and the exponent at extensive accuracies.  (ii) **Physical status of
 the oracle [H]:** `E_{μ_g} g = E_{μ_g}(f+g) − E_{μ_g} f` is a calorimetric mean energy minus the
 model energy averaged over the true ensemble; the second term is determined by `m`-body
 marginals when `f` has interaction order `m`.  Neither is cleanly measurable for a solvated
@@ -337,16 +366,179 @@ Nothing in this section is deep; what is new to the programme is that its kernel
 dual-feasibility checkers for inference from *measurements*, and that the first version
 needs no energy model.
 
-## 9. Open problems arising here
+## 9. Falsification: data certify a *lower* bound on model error
+
+Envelope constants are inputs that nobody has certified (theory report §8).  Measurements
+cannot certify an upper bound on them.  They can certify a lower bound.
+
+**Definition.**  For a model `μ₀ ∝ e^{−βf}` and an envelope `d`, the *Lipschitz divergence* of an
+ensemble `μ` from the model is the least `b ≥ 0` such that `μ = μ_g` with `g(x) − g(y) ≤ (b/β)·d(x,y)`:
+
+    D_d(μ‖μ₀) = sup_{x ≠ y}  [ ln( μ(y) μ₀(x) / (μ(x) μ₀(y)) ) ]₊ / d(x, y).
+
+The envelope class with constant `b` is the ball `{D_d(·‖μ₀) ≤ b}`; it is convex in `μ`
+(a cone in the weights).  For data `E_μΦ ∈ D` put
+
+    b_min(D) = inf{ D_d(μ‖μ₀) : E_μΦ ∈ D },        ρ_min(D) = inf{ KL(μ‖μ₀) : E_μΦ ∈ D }.
+
+**Theorem 8 (falsification certificates) [P; duality K].**
+(a) If the true ensemble is `μ_g` and the data are correct (`E_{μ_g}Φ ∈ D`), then the envelope
+constant of `g` is at least `b_min(D)/β`, and `KL(μ_g‖μ₀) ≥ ρ_min(D)`.
+(b) For every `λ`:  `ρ_min(D) ≥ −h_D(λ) − ln E_{μ₀} e^{−λ·Φ}`, `h_D(λ) = sup_{m∈D} λ·m`, with equality at
+the supremum over `λ`.  **A certificate is `λ` with a certified upper bound on the partition
+function of the tilted model `f + λ·Φ/β` and a certified lower bound on `Z_0`** — two outputs of
+the verified `(+,×)` kernel.
+(c) The data are inconsistent with the envelope class of constant `b` if there are `λ^± ≥ 0`
+and a flow `F ≥ 0` with `(1 − Λ(z))·μ₀(z) ≤ Σ_x F(x,z) − Σ_y e^{b·d(z,y)} F(z,y)` for all `z` (notation of
+§8); then `b_min(D) > b`.
+
+*Proof.*  (a) is the definition.  (b) Donsker–Varadhan: `KL(μ‖μ₀) ≥ E_μ(−λ·Φ) − ln E_{μ₀}e^{−λ·Φ}`;
+equality is maximum-entropy duality.  (c) is §8 with `ψ ≡ 1`, `t = 0`: it would give `1 ≤ 0`.  ∎
+
+**Why this matters [H].**  When a simulated ensemble disagrees with experiment, the
+disagreement is due to the model, to incomplete sampling, or to both, and current practice
+cannot separate them: the reweighting statistics that quantify "how far the force field
+must be moved" are computed from the same finite sample.  `ρ_min` and `b_min` are properties of
+the model and the data alone.  A certified lower bound on either is a statement about model
+error that no amount of additional sampling can change.  It requires `f` and `Φ` to be
+decomposable in the configuration variables (§12).
+
+*Numbers* (`envelope_scaling.py`; diamond-lattice chain, model = athermal, data = exact
+averages under the truth `∝ e^{+ε·c₃}`, `c₃` the number of nearest-neighbour contacts;
+"truth's constant" = its largest single-torsion energy change between self-avoiding
+conformations, a lower bound on its envelope constant):
+
+| beads | `ε` | truth's constant | `b_min` from `R_g²` | `b_min` from the three-shell profile |
+|---|---|---|---|---|
+| 8 | 0.25 / 0.5 / 1.0 | 0.25 / 0.5 / 1.0 | 0.068 / 0.150 / 0.360 | 0.220 / 0.438 / 0.866 |
+| 9 | 0.25 / 0.5 / 1.0 | 0.5 / 1.0 / 2.0 | 0.079 / 0.176 / 0.436 | 0.240 / 0.482 / 0.952 |
+
+The profile certifies between `0.87·ε` and `0.96·ε` at both sizes, while the truth's worst-case constant
+doubles from 8 to 9 beads (one torsion flip can change two contacts: the lever arm of
+theory report §11.14 in miniature).  The certified bound tracks the *typical* strength of
+the missing interaction, not the worst-case constant.
+
+## 10. A caloric curve determines `ln Z`
+
+**Proposition 9 [K].**  Let `U(β) = E_{μ_β}(f+g)` be the mean energy at inverse temperature `β`.
+`U` is non-increasing, `ln Z(β_m) − ln Z(β_0) = −∫ U dβ`, and for `β_0 < β_1 < … < β_m`
+
+    −Σ_j (β_{j+1} − β_j) U(β_j)  ≤  ln Z(β_m) − ln Z(β_0)  ≤  −Σ_j (β_{j+1} − β_j) U(β_{j+1}),
+
+of width at most `max_j(β_{j+1} − β_j)·(U(β_0) − U(β_m))`.  With `β_0 = 0`, `Z(0) = |X|`.  So `m` mean
+energies certify `ln Z_β` within `β·osc(f+g)/m` **with no evaluation of `g`**; for an extensive
+accuracy `ε₁n` a number of temperatures independent of `n` suffices.
+
+This is how absolute entropies are measured.  It is recorded here because of what it says
+about targets: **the total `ln Z` is the one quantity of the programme that experiment
+delivers without any model**, whereas the quantities for which a certificate would be
+scientifically new — the population of a structural state, a contact probability, the
+entropy of a subsystem — are ratios of restricted partition functions and conditional
+averages, for which the exact robust theory is missing (§7) and for which the theory
+division's own Theorem 11.35 shows the uncertifiable fraction to be larger than for `ln Z`.
+
+## 11. Identified sets on the programme's lattice chain: numbers
+
+Model: the diamond-lattice chain of theory report §11.17 (`n` torsions, `N = n + 3` beads;
+profile = numbers of non-bonded pairs at squared distances 3, 8, 11).  Own enumerator
+(`experiments/science/pi_chain/dia_chain.py`).
+
+**Replication.**  For `n = 1 … 10` the conformation counts, class counts and complete class
+tables agree exactly with the engineering division's tables at `db56d05`.
+
+**11.1 Model-free, exact data** (`identified_sets.py`; exact linear programmes after
+aggregation).  Width of the identified interval as a fraction of the a-priori range, 13
+beads, truths athermal / stiff (`e^{−#gauche}`) / attractive (`e^{+c₃}`):
+
+| data | gauche fraction | end-to-end `R²` | population of the most compact decile |
+|---|---|---|---|
+| `R_g²` | 0.76 / 0.73 / 0.72 | 0.41 / 0.45 / 0.37 | 0.79 / 0.57 / 0.89 |
+| three-shell profile | 0.47 / 0.26 / 0.49 | 0.59 / 0.73 / 0.50 | 0.70 / 0.29 / 1.00 |
+| full pair-distance histogram | 0.31 / 0.14 / 0.35 | 0.22 / 0.18 / 0.21 | 0.50 / 0.20 / 0.75 |
+
+From 7 to 13 beads the entries grow or level off; none decreases towards zero.  The weight
+of the all-trans conformation is identified exactly by the full histogram (it is the only
+conformation with a pair at the largest distance): identification depends on whether the
+target is in the span of the features, exactly as §6 says.
+
+**11.2 Up to 27 beads, from the engineering tables** (`identified_from_eng_tables.py`).  The
+tables give, for every profile class, the least and the largest number of gauche torsions,
+which is all the linear programme needs.  Identified interval of the mean gauche fraction
+given the exact athermal mean profile:
+
+| beads | 7 | 9 | 11 | 13 | 15 | 17 | 19 | 21 | 23 | 25 | 27 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| lower end | 0.595 | 0.492 | 0.407 | 0.359 | 0.324 | 0.294 | 0.270 | 0.247 | 0.230 | 0.211 | 0.201 |
+| upper end | 0.734 | 0.787 | 0.822 | 0.834 | 0.850 | 0.850 | 0.850 | 0.853 | 0.851 | 0.854 | 0.855 |
+| width | 0.139 | 0.294 | 0.415 | 0.474 | 0.527 | 0.556 | 0.580 | 0.607 | 0.621 | 0.644 | 0.654 |
+
+(the athermal value is `0.64–0.65`).  **At 27 beads an exact ensemble-averaged three-shell
+profile leaves the mean gauche fraction undetermined over two thirds of its range, and the
+interval is still widening.**
+
+**11.3 The limit is a chord of the theory division's limit shape [P, given theory report
+Theorem 11.69].**  The model-free identified set of (mean profile, mean gauche count)`/N` over
+ensembles of `N`-bead chains is the convex hull of `𝒟_N = {(h(x), g(x))/N}`.  For bridges,
+`𝒟_N^{br} → K^{br}` in the Hausdorff metric with `K^{br}` compact and convex (Theorem 11.69), so the
+hulls converge to `K^{br}` as well, and at every profile density `p` in the interior of the
+projection `𝒦` the identified interval converges to the chord `[γ(p), γ⁺(p)]`,
+`γ⁺(p) = max{g : (p,g) ∈ K^{br}}`.  **The limit shape of §11.22 is the asymptotic model-free
+identified set; its lower boundary is the theory division's least-gauche function, its
+upper boundary has not been computed.**  In exponential-family terms `K^{br}` is the
+mean-parameter set of the family generated by the profile and the gauche count, and its
+support function is the ground-state energy density of the corresponding energies.  For
+unrestricted walks the same holds under Conjecture 11.75.  Whether the chord at the
+athermal point is at least the 27-bead value `0.65` is **[C]** (the finite-size chords
+increase at every size computed; the one-sided rate `168/(N+3)` of Theorem 11.69 is vacuous
+at these sizes).
+
+**11.4 With a model and its envelope class** (`envelope_identified.py`, `envelope_scaling.py`;
+linear-fractional programmes in the weights with single-torsion constraints on all `3ⁿ`
+torsion patterns).  Model = truth = athermal chain, envelope constant `b` per torsion; 9 beads:
+
+| target (true value) | envelope `b = 1` only | profile only | both, `b = 1` | both, `b = 0.5` |
+|---|---|---|---|---|
+| gauche fraction (0.652) | [0.420, 0.825] | [0.492, 0.787] | [0.607, 0.701] | [0.629, 0.677] |
+| end-to-end `R²` (46.0) | [31.0, 69.4] | [16.5, 77.6] | [38.2, 53.9] | [42.1, 49.9] |
+| compact decile (0.111) | [0.019, 0.345] | [0.000, 0.409] | [0.042, 0.203] | [0.072, 0.156] |
+
+Each kind of information is weak alone; together they are several times stronger than
+either.  At 8 beads the corresponding widths are smaller (compact decile, both, `b = 1`:
+0.089 against 0.161 at 9 beads; gauche fraction: 0.085 against 0.094).  Two sizes are not
+a scaling law; but at fixed `b` the combined interval for a macrostate population must
+eventually grow with the chain (a tilt of `b` per torsion can move an event of probability
+`p₀` by a factor `e^{Θ(bn)}`), and programmes of this kind have `3ⁿ` variables — beyond about
+10 beads they need the structured duals of §8.
+
+## 12. Where the kernels can check such certificates
+
+The certificates of §§8–9 are maxima and partition functions of `ψ − λ·Φ` and `f + λ·Φ/β`.  The
+verified kernels handle pairwise (low-treewidth) functions of the configuration variables.
+For a backbone in torsion space a pair distance depends on all torsions in between, so
+profile-type features are *not* pairwise there.  They are pairwise (or single-site) in:
+(i) **side-chain ensembles on a fixed backbone** — rotamers as variables; a pairwise force
+field; scalar couplings and order parameters as single-site observables; inter-residue
+distance-dependent observables (NOE-type) as pairwise ones **[H]**; (ii) lattice and
+coarse-grained models whose features are local along the chain (transfer-matrix
+structure).  The first is the physical arena in which the whole chain of reasoning —
+model, class, measurement, certificate — could be closed on public fixed-sequence data.
+
+## 13. Open problems arising here
 
 1. `θ_na` with a `k`-body marginal oracle (§4, remark (i)).
 2. Theorem 4 with a field, or any known part without a large translation symmetry.
-3. The worst-case and instance-wise complexity with the thermodynamic oracle I3 (§5).
+3. The worst-case and instance-wise complexity with the thermodynamic oracle I3 (§5):
+   the hard instances should be a visible basin with a hidden twin of the same mean energy
+   (adding a region whose excess mass has mean energy `U` leaves `U` unchanged).
 4. The exchange rate between I1 and I2 in classes between linear and first-order: for
    `g = λ·Φ + r` with `r` in a first-order class of constant `c`, how many evaluations does exact
    `Φ`-data save, as a function of `βc`?
 5. Extensive and local versions of Theorem 7 (§6, open items).
 6. An exact formula or an efficient dual for robust ratios of macrostate partition
-   functions (§7), and tractable flow families (§8).
+   functions (§7), and tractable flow families (§8) — needed for §11.4 beyond 10 beads.
 7. Everything above for alphabets of size `k > 2` and for chains: Lemma 1 has an analogue
    for any abelian group code, but a chain's known part has no such symmetry.
+8. The upper boundary `γ⁺` of the limit shape and the chord at the athermal point (§11.3);
+   the limit of the unidentified fraction for each data type.
+9. Is `b_min ≈ 0.9·ε` (§9) a theorem about contact residuals — the certified constant tracks
+   the mean-field strength of the missing interaction — and what is its large-`n` limit?
