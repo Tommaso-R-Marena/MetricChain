@@ -123,9 +123,7 @@ theorem separation_ratio [Nonempty X] {u : ℝ} (hu : 0 ≤ u) (R : ℝ) (dC d1 
   rw [le_div_iff₀ hFpos]
   have hq : F / (m * F1) ≤ 1 := (div_le_one (mul_pos hm hF1pos)).mpr hF
   have e : (1 + (A1 / F1 - 1) / m) * F = F + (A1 - F1) * (F / (m * F1)) := by
-    first
-      | (field_simp; ring)
-      | field_simp
+    field_simp
   rw [e]
   have h2 := mul_le_mul_of_nonneg_left hq (sub_nonneg.mpr hF1A1)
   linarith

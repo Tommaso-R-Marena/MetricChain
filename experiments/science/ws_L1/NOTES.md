@@ -58,3 +58,21 @@ Observations while formalising (for the report):
   `b_min(D) > b` (strict, about an infimum) additionally needs attainment (D closed) — true by a
   compactness argument but NOT formalised.
 * Model-free soundness needs neither convexity nor compactness of D.
+
+## 19:15 Target 2 DONE — `Separation.lean` (checks, 48 s)
+
+Abstract: `exp_sub_exp_max_antitone`, `pSum_sub_flat_mono` (A₁−F₁ ≤ A−F), `separation_ratio`
+(F ≤ m·F₁ ⟹ 1 + (A₁/F₁ − 1)/m ≤ A/F; needs only u ≥ 0, m > 0 is derived), `separation_log`
+(m ≥ 1 ⟹ log(A₁/F₁) − log m ≤ log A − log F).
+Concrete on `ι → G` (G finite additive commutative group, so `Fin n → ZMod 2` is an instance):
+`distToCoset C hC s x = min_{a∈C} d_H(x, s+a)`, `pSum_flat_distToCoset_le` (F ≤ |C|·F₁, for ANY
+non-empty finite set C of translations and any real u — no linearity, no sign condition),
+`distToCoset_le` (needs 0 ∈ C), `separation_distToCoset`, `sensitivity_distToCoset`.
+`#print axioms` for the 7 headline declarations: `[propext, Classical.choice, Quot.sound]`.
+Observation: the separation step of Theorem 4′ uses of C only: finite, non-empty, contains 0.
+Linearity/dual distance is used only for the oracle (Lemma 1) — and for the count of the
+difference sets one needs nothing either.
+Not done: closed forms A₁ = (1+e^{−u})^n, F₁ = Σ_j C(n,j) e^{−u max(j,R)} (the theory division's
+`cube_nonadaptive_bound` does not have them either).
+(after the check I replaced a `first | (field_simp; ring) | field_simp` by `field_simp` to silence a
+linter warning; to be re-checked in the final pass)

@@ -13,3 +13,6 @@
   ensemble C (held-out)    std(g)  6.01 | g - S (intercept as fitted): RMS 0.429 max 5.41 kcal/mol; intercept refitted: RMS 0.429 max 5.42 = 0.72 / 9.1 kT | naive frozen-radii surrogate: RMS 5.83 max 38.4 | Born radii rel. std: mean 0.039, max 0.113
   grid A3 (40000 conf.)    std(g)  8.33 | g - S (intercept as fitted): RMS 0.559 max 8.87 kcal/mol; intercept refitted: RMS 0.556 max 8.82 = 0.93 / 14.8 kT | naive frozen-radii surrogate: RMS 5.61 max 47.0 | Born radii rel. std: mean 0.034, max 0.110
   grid A2 (2811 conf.)     std(g)  3.82 | g - S (intercept as fitted): RMS 0.490 max 6.01 kcal/mol; intercept refitted: RMS 0.429 max 6.25 = 0.72 / 10.5 kT | naive frozen-radii surrogate: RMS 7.06 max 60.1 | Born radii rel. std: mean 0.036, max 0.134
+=== n=8: exactly pair-additive surrogate of g_GB fitted on 8000 conformations of ensemble C
+  ensemble C (train)       std(g)  6.88 | g - S (intercept as fitted): RMS 0.492 max 7.03 kcal/mol; intercept refitted: RMS 0.492 max 7.03 = 0.83 / 11.8 kT | naive frozen-radii surrogate: RMS 7.19 max 42.8 | Born radii rel. std: mean 0.042, max 0.117
+  ensemble C (held-out)    std(g)  6.90 | g - S (intercept as fitted): RMS 0.516 max 6.09 kcal/mol; intercept refitted: RMS 0.516 max 6.08 = 0.87 / 10.2 kT | naive frozen-radii surrogate: RMS 7.22 max 42.0 | Born radii rel. std: mean 0.043, max 0.116
