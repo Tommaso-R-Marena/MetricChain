@@ -225,6 +225,14 @@ Algorithm 2L⁺, and sent two new requests.  Answers: ENG-MSG-0003, ENG-RES-0008
 State at the end of session 2: see `docs/collaboration/status/engineering.md` for the table
 of requests; the list below is the order of work.
 
+0. **First: the synchronisation that session 2 left unfinished.**  The theory head moved
+   to `5ed4072` (two commits after `63efc69`) while checkpoint 3 was being prepared.
+   THY-REQ-0009 and THY-REQ-0010 were read but not answered; THY-MSG-0009 was not read and
+   THY-MSG-0010 only in part; the head is not audited.  Audit it in a worktree, read both
+   messages, and answer the two requests (`ENG-RES-0011`, `-0012`) before new computations.
+   Note that THY-REQ-0009 item 4(c) (the batched schedule of Theorem 11.84) is an addition
+   to THY-REQ-0001, and that the theory division will by then have reacted to ENG-RES-0008.
+
 1. **THY-REQ-0001, what is left** (ENG-RES-0008 "Decision"): (a) **three nested levels on
    non-flat instances** — read
    `experiments/reviews/R8/r8_flat3.py` and `docs/reviews/R8_referee_report.md` on a worktree of

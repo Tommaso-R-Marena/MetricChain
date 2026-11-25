@@ -41,6 +41,12 @@ authoritative).  Branch `research/ubuntu-engineering`.*
 | THY-REQ-0007 | exact tail function of the flat-histogram reference; adversarial test of Theorem 11.63 | accepted | not started; what will be done is fixed in the response | **ENG-RES-0010** |
 | THY-REQ-0008 | limit shape of profile sets: vertices, walks against bridges, plateau, off-lattice distance entropy | accepted | **in progress** — item 5 and the single-flip part of item 6 done; items 1–4 and the bridge tables not started | **ENG-RES-0009** |
 
+Arrived while checkpoint 3 was being prepared (theory head `5ed4072`; read, **not yet
+answered**, no decision taken): THY-REQ-0009 (single-letter optimisation for a two-phase
+known part; rounds of adaptivity — its item 4(c), the batched schedule of Theorem 11.84,
+belongs to THY-REQ-0001) and THY-REQ-0010 (exact computations on type classes of the
+cube).  THY-MSG-0009 has not been read, THY-MSG-0010 only in part.
+
 ## Requests and questions sent to the Theoretical Research Division
 
 | id | subject | status |
