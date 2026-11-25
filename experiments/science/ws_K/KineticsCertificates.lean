@@ -560,6 +560,45 @@ theorem box_trap_certificate (I : WInstance n k) (D : Dom n k)
     ((Finset.univ : Finset (Fin n)).biUnion (fun i => boxFinset (wallBox D i)))
     hP0 hP1 hw0 hstat hloc (∑ i, (hi i : ℝ)) (loA : ℝ) hU hLo hLo0 T
 
+/-! ### Kernel-evaluated rate certificate (non-vacuity)
+
+The double well of `ferro` in the weight domain: one-body weight `2` on state `1`, pair factor `1/8`
+for a disagreeing pair.  `weight(000) = 1`, each single flip has weight `2·(1/8)² = 1/32`,
+`weight(111) = 8`. -/
+
+/-- The weight-domain double well on three binary sites. -/
+def ferroW : WInstance 3 2 where
+  w := fun _ a => if a = 1 then 2 else 1
+  W := fun i j a b => if i < j ∧ a ≠ b then 1 / 8 else 1
+
+/-- Exact pair factors on the `i`-th wall box of `well` (a single configuration). -/
+def ferroWallBounds (i : Fin 3) : Fin 3 → Fin 3 → ℚ :=
+  fun i' j' => if i' < j' ∧ (i' = i ∨ j' = i) then 1 / 8 else 1
+
+theorem ferroW_basin_verified :
+    zverifyTop (.leaf (fun _ _ => 1) (fun _ _ => 1)) ferroW well = some (1, 1) := by
+  decide +kernel
+
+theorem ferroW_wall_verified :
+    ∀ i, zverifyTop (.leaf (ferroWallBounds i) (ferroWallBounds i)) ferroW (wallBox well i)
+      = some (1 / 32, 1 / 32) := by
+  decide +kernel
+
+/-- **Certified kinetic trap, kernel-evaluated.**  For every stochastic kernel that is stationary
+for the weights of `ferroW` and moves at most one site per step, the chain started at `000`
+(the stationary law restricted to the box `{000}`) is still at `000` after `T` steps with
+probability at least `1 - T * (3/32)`. -/
+theorem ferroW_trap (P : Config 3 2 → Config 3 2 → ℝ)
+    (hP0 : ∀ x y, 0 ≤ P x y) (hP1 : ∀ x, ∑ y, P x y = 1)
+    (hstat : ∀ y, ∑ x, (ferroW.weight x : ℝ) * P x y = (ferroW.weight y : ℝ))
+    (hlocal : ∀ x y, P x y ≠ 0 → SingleSite x y) (T : ℕ) :
+    1 - T * ((∑ _i : Fin 3, ((1 / 32 : ℚ) : ℝ)) / ((1 : ℚ) : ℝ)) ≤
+      (∑ x ∈ boxFinset well, (ferroW.weight x : ℝ) * surv P (boxFinset well) T x) /
+        (∑ x ∈ boxFinset well, (ferroW.weight x : ℝ)) :=
+  box_trap_certificate ferroW well (.leaf (fun _ _ => 1) (fun _ _ => 1))
+    (fun i => .leaf (ferroWallBounds i) (ferroWallBounds i)) 1 1 (fun _ => 1 / 32) (fun _ => 1 / 32)
+    ferroW_basin_verified ferroW_wall_verified (by norm_num) P hP0 hP1 hstat hlocal T
+
 end BoxTrap
 
 end MetricChain.Kinetics
@@ -594,3 +633,6 @@ end MetricChain.Kinetics
 #print axioms MetricChain.Kinetics.singleSite_symm
 #print axioms MetricChain.Kinetics.wallBox_pairwiseDisjoint
 #print axioms MetricChain.Kinetics.box_trap_certificate
+#print axioms MetricChain.Kinetics.ferroW_basin_verified
+#print axioms MetricChain.Kinetics.ferroW_wall_verified
+#print axioms MetricChain.Kinetics.ferroW_trap
