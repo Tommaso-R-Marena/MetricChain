@@ -219,4 +219,11 @@ with the hinted one were not found in print.
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
 interval evaluation of force-field terms over voxels, and any claim of practical solver
-performance are outside the development.
+performance are outside the development.  The complexity results are exponents on idealised
+classes (product landscapes; for algorithms without a hint only the cube with a zero known
+part), with paper proofs wherever the theory report does not name a Lean declaration; the
+newest of them — the adaptive exponent — has a machine-checked recursion and bracket but a
+paper proof for the number of evaluations, and its algorithm is not practical at any size
+that can be simulated.  `docs/THEORY_REPORT.md` §8 lists the limitations, §10 ends with a
+one-table summary of what each kind of knowledge about the residual costs, and
+`docs/DEAD_ENDS.md` records every claim that was made and withdrawn.
