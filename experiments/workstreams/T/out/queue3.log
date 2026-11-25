@@ -1,0 +1,65 @@
+### t10_sweeps.py J 1.0 0.0 0.9,1.0,1.05,1.1,1.12,1.14 -> t10_sweep_J_u1_e0_a.txt
+exit 0 after 240s: time 240s
+### t10_sweeps.py J 1.0 0.0 1.16,1.2,1.3,1.4,1.5,1.75 -> t10_sweep_J_u1_e0_b.txt
+exit 0 after 270s: time 269s
+### t10_sweeps.py U 1.5 0.0 1.0,0.6,0.45,0.4 -> t10_sweep_U_bJ1.5_e0_a.txt
+exit 0 after 149s: time 149s
+### t10_sweeps.py U 1.5 0.0 0.35,0.3,0.25,0.2 -> t10_sweep_U_bJ1.5_e0_b.txt
+exit 0 after 125s: time 124s
+### t14_finite3.py 1.5 1.0 0.05 S2 0.318 150,300,600,1200 -> t14_finite3_S2_e0.05.txt
+exit 0 after 1s:    1200   (600, 600)           0.004607                  0.050839      0.24323   -0.000019     -0.003                 1s
+### t14_finite3.py 1.5 1.0 0.05 S3 0.1553,0.2841 150,300,600 -> t14_finite3_S3_e0.05.txt
+exit 0 after 13s:     600   (254, 92, 254)       0.005730                  0.051694      0.26693   -0.000437     -0.041                 12s
+### t14_finite3.py 1.5 1.0 0.05 S4 0.2104,0.2752,0.0662 150,300 -> t14_finite3_S4_e0.05.txt
+exit 0 after 43s:     300   (118, 32, 32, 118)   0.005593                  0.053391      0.28933   -0.000788     -0.041                 42s
+### t06_finite.py 1.5 0.0 1.0 0.05 1.0 0.318 0.318 150,300,600,1200 -> t06_finite_bJ1.5_u1_e0.05.txt
+exit 0 after 4s:   1200   600 | 0.005027  0.050846  |    none         | 0.007814  0.050892 | 0.000059 | 3s
+### t06_finite.py 1.5 0.0 1.0 0.0 1.0 0.2689 0.2689 250,500,1000,2000,4000 -> t06_finite_bJ1.5_u1_eps1_shell_pu.txt
+exit 0 after 52s:   4000  2000 | 0.025087  0.000253  | 0.006684 | 0.101742  0.000250 | 0.043512 | 52s
+### t06_finite.py 1.5 0.0 1.0 0.0251012 0.0 0.298 0.298 250,500,1000,2000,4000 -> t06_finite_bJ1.5_u1_X0.0251012.txt
+exit 0 after 54s:   4000  2000 | 0.013249  0.025104  | 0.001133 | 0.026060  0.025108 | 0.002813 | 54s
+### t06_finite.py 1.5 0.0 1.0 0.01 0.0 0.2847 0.2847 250,500,1000,2000,4000 -> t06_finite_bJ1.5_u1_e0.01.txt
+exit 0 after 57s:   4000  2000 | 0.020032  0.010001  | 0.003666 | 0.052181  0.010003 | 0.012995 | 56s
+### t06_finite.py 0.5 0.3 1.0 0.029737 0.0 0.0 0.0 500,1000,2000,4000 0.4282 -> t06_finite_bJ0.5_B0.3_e0.3E.txt
+exit 0 after 57s:   4000  1713 | 0.012138  0.029749  | 0.004901 | 0.020431  0.029740 | 0.020431 | 56s
+### t06_finite.py 0.5 0.3 1.0 0.041422 0.0 0.0 0.0 500,1000,2000,4000 0.4282 -> t06_finite_bJ0.5_B0.3_X.txt
+exit 0 after 57s:   4000  1713 | 0.008527  0.041427  | 0.002624 | 0.012825  0.041425 | 0.012825 | 57s
+### t06_finite.py -99 0.1 2.0 0.0636884 0.0 0.0 0.0 500,1000,2000,4000 0.5373 -> t06_finite_field_p0.1_u2_H.txt
+exit 0 after 57s:   4000  2149 | 0.023734  0.063690  | 0.007179 | 0.037553  0.063692 | 0.037553 | 56s
+### t06_finite.py -99 0.1 2.0 0.0636884 0.0 0.0 0.0 500,1000,2000,4000 0.3994 -> t06_finite_field_p0.1_u2_zero.txt
+exit 0 after 51s:   4000  1598 | 0.020535  0.063701  | 0.020255 | 0.033273  0.063702 | 0.033273 | 51s
+### t06_finite.py -99 0.1 2.0 0.0636884 0.0 0.0 0.0 500,1000,2000,4000 0.517 -> t06_finite_field_p0.1_u2_na.txt
+exit 0 after 53s:   4000  2068 | 0.023657  0.063769  | 0.009180 | 0.037646  0.063692 | 0.037646 | 52s
+### t11_instances.py 1.5 0.0 1.0 0.0 add -> t11_instances_add.txt
+exit 0 after 64s: largest R_lam - R_H in family 'add': -1.64e-02   (time 63s)
+### t11_instances.py 1.5 0.0 1.0 0.0 flat -> t11_instances_flat.txt
+exit 0 after 138s: largest R_lam - R_H in family 'flat': -2.34e-09   (time 139s)
+### t11_instances.py 1.5 0.0 1.0 0.0 roof -> t11_instances_roof.txt
+exit 0 after 126s: largest R_lam - R_H in family 'roof': -5.21e-03   (time 125s)
+### t11_instances.py 1.5 0.0 1.0 0.0 rand -> t11_instances_rand.txt
+exit 0 after 180s: largest R_lam - R_H in family 'rand': -2.34e-09   (time 180s)
+### t02_convex.py table 1.0 -2.0,-1.0 -> t02_convex_table_u1_a.txt
+exit 0 after 176s: time 176s
+### t02_convex.py table 1.0 0.0,0.5 -> t02_convex_table_u1_b.txt
+exit 0 after 185s: time 185s
+### t02_convex.py table 1.0 0.9,1.0 -> t02_convex_table_u1_c.txt
+exit 0 after 199s: time 198s
+### t01_control.py -> t01_control.txt
+exit 0 after 125s: time 124.9s
+### t12_crosscheck.py 1.5 0.0 1.0 0.0 1001 -> t12_crosscheck_bJ1.5_u1_e0.txt
+exit 0 after 43s: time 43s
+### t04_table.py 1.5 0.0 1.0 0.0,0.02 1 -> t04_table_bJ1.5_u1_DE.txt
+exit 0 after 131s: time 130s
+### t10_sweeps.py J 1.0 0.02 1.0,1.1,1.2,1.3,1.5 -> t10_sweep_J_u1_e0.02.txt
+exit 0 after 244s: time 244s
+### t03_blocks.py 1.5 0.05 1.0 0.0 3 3 60 -> t03_blocks_bJ1.5_B0.05_u1_e0_k3.txt
+exit 0 after 220s: time 219s
+### t03_blocks.py 1.5 0.0 0.3 0.0 3 4 60 -> t03_blocks_bJ1.5_u0.3_e0_k3.txt
+exit 0 after 192s: time 191s
+### t04_table.py 1.5 0.05 1.0 0.0,0.01,0.02 -> t04_table_bJ1.5_B0.05_u1.txt
+exit 0 after 111s: time 111s
+### t13_multiblock.py 1.2 1.0 0.0,0.02,0.04 -> t13_multiblock_bJ1.2_u1.txt
+exit 0 after 174s: time 173s
+### t13_multiblock.py 2.0 1.0 0.0,0.01,0.03 -> t13_multiblock_bJ2.0_u1.txt
+exit 0 after 240s: time 240s
+### queue3 done

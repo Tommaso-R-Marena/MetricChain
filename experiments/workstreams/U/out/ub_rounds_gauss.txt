@@ -1,0 +1,20 @@
+mode=gauss: a=1.000000 h=0.250000 h/a=0.2500 eps*=1.000000; grid K=120 (conservative rounding)
+one-round product samples: min over (g, phi, beta) of [phi th_na((g-beta)/phi) + (1-phi) th_na(beta/(1-phi)) - th_na(g)] = -2.22e-16 (must be >= 0)
+r=2: T(0)/a=0.6187  [phi=0.562]  T(eps*/16)/a=0.3802 T(eps*/4)/a=0.1892  max(theta_hint - T)=+0.00e+00  monotone in r: True  (0s)
+r=3: T(0)/a=0.5354  [phi=0.512]  T(eps*/16)/a=0.3358 T(eps*/4)/a=0.1725  max(theta_hint - T)=+0.00e+00  monotone in r: True  (1s)
+r=4: T(0)/a=0.4712  [phi=0.400]  T(eps*/16)/a=0.3122 T(eps*/4)/a=0.1655  max(theta_hint - T)=+0.00e+00  monotone in r: True  (2s)
+r=5: T(0)/a=0.4436  [phi=0.388]  T(eps*/16)/a=0.2969 T(eps*/4)/a=0.1596  max(theta_hint - T)=+0.00e+00  monotone in r: True  (3s)
+r=6: T(0)/a=0.4296  [phi=0.388]  T(eps*/16)/a=0.2889 T(eps*/4)/a=0.1566  max(theta_hint - T)=+0.00e+00  monotone in r: True  (5s)
+r=7: T(0)/a=0.4177  [phi=0.363]  T(eps*/16)/a=0.2841 T(eps*/4)/a=0.1551  max(theta_hint - T)=+0.00e+00  monotone in r: True  (7s)
+r=8: T(0)/a=0.4079  [phi=0.338]  T(eps*/16)/a=0.2802 T(eps*/4)/a=0.1542  max(theta_hint - T)=+0.00e+00  monotone in r: True  (9s)
+r=10: T(0)/a=0.3930  [phi=0.288]  T(eps*/16)/a=0.2757 T(eps*/4)/a=0.1530  max(theta_hint - T)=+0.00e+00  monotone in r: True  (11s)
+r=12: T(0)/a=0.3816  [phi=0.275]  T(eps*/16)/a=0.2702 T(eps*/4)/a=0.1529  max(theta_hint - T)=+0.00e+00  monotone in r: True  (16s)
+r=16: T(0)/a=0.3675  [phi=0.263]  T(eps*/16)/a=0.2626 T(eps*/4)/a=0.1513  max(theta_hint - T)=+0.00e+00  monotone in r: True  (24s)
+r=24: T(0)/a=0.3514  [phi=0.213]  T(eps*/16)/a=0.2542 T(eps*/4)/a=0.1479  max(theta_hint - T)=+0.00e+00  monotone in r: True  (48s)
+r=32: T(0)/a=0.3409  [phi=0.213]  T(eps*/16)/a=0.2496 T(eps*/4)/a=0.1466  max(theta_hint - T)=+0.00e+00  monotone in r: True  (72s)
+table  T^(r)(0)/a : r=1:1.0000  r=2:0.6187  r=3:0.5354  r=4:0.4712  r=5:0.4436  r=6:0.4296  r=7:0.4177  r=8:0.4079  r=10:0.3930  r=12:0.3816  r=16:0.3675  r=24:0.3514  r=32:0.3409
+(T^(r)(0) - h)/a   : r=1:0.7500  r=2:0.3687  r=3:0.2854  r=4:0.2212  r=5:0.1936  r=6:0.1796  r=7:0.1677  r=8:0.1579  r=10:0.1430  r=12:0.1316  r=16:0.1175  r=24:0.1014  r=32:0.0909
+
+real	3m19.232s
+user	3m16.398s
+sys	0m0.040s

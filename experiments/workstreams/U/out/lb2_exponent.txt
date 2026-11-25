@@ -1,0 +1,42 @@
+== small-slope limit (a = 1, h = 0.25) ==
+theta2* = 0.345000  at phi1 = 0.6550  (root of Xi: 0.345000);  h = 0.25
+   phi1=0.10: Xi(h)=+0.01707  root of Xi=0.25886  phi2*a=0.900  theta2*(phi1)=0.25886
+   phi1=0.30: Xi(h)=+0.05400  root of Xi=0.28067  phi2*a=0.700  theta2*(phi1)=0.28067
+   phi1=0.50: Xi(h)=+0.09583  root of Xi=0.31118  phi2*a=0.500  theta2*(phi1)=0.31118
+   phi1=0.60: Xi(h)=+0.11928  root of Xi=0.33215  phi2*a=0.400  theta2*(phi1)=0.33215
+   phi1=0.65: Xi(h)=+0.13183  root of Xi=0.34494  phi2*a=0.350  theta2*(phi1)=0.34494
+   phi1=0.70: Xi(h)=+0.14504  root of Xi=0.30000  phi2*a=0.300  theta2*(phi1)=0.30000
+   phi1=0.80: Xi(h)=+0.17396  root of Xi=0.20000  phi2*a=0.200  theta2*(phi1)=0.20000
+
+u=0.25: a=0.007752 h=0.001944 h/a=0.2508  theta2*=0.002689  theta2*/a=0.3469  theta2*/h=1.3830  at phi1=0.6530
+   phi1=0.30: Xi(h)=+0.000420  root=0.2816a  phi2*a=0.700a  theta2*(phi1)=0.2816a
+   phi1=0.50: Xi(h)=+0.000746  root=0.3122a  phi2*a=0.500a  theta2*(phi1)=0.3122a
+   phi1=0.65: Xi(h)=+0.001026  root=0.3460a  phi2*a=0.350a  theta2*(phi1)=0.3460a
+u=0.5: a=0.030300 h=0.007673 h/a=0.2532  theta2*=0.010589  theta2*/a=0.3495  theta2*/h=1.3800  at phi1=0.6505
+   phi1=0.30: Xi(h)=+0.001664  root=0.2843a  phi2*a=0.700a  theta2*(phi1)=0.2843a
+   phi1=0.50: Xi(h)=+0.002951  root=0.3151a  phi2*a=0.500a  theta2*(phi1)=0.3151a
+   phi1=0.65: Xi(h)=+0.004058  root=0.3493a  phi2*a=0.350a  theta2*(phi1)=0.3493a
+u=1.0: a=0.110944 h=0.029139 h/a=0.2626  theta2*=0.039869  theta2*/a=0.3594  theta2*/h=1.3682  at phi1=0.6405
+   phi1=0.30: Xi(h)=+0.006384  root=0.2947a  phi2*a=0.700a  theta2*(phi1)=0.2947a
+   phi1=0.50: Xi(h)=+0.011314  root=0.3267a  phi2*a=0.500a  theta2*(phi1)=0.3267a
+   phi1=0.65: Xi(h)=+0.015542  root=0.3621a  phi2*a=0.350a  theta2*(phi1)=0.3500a
+u=2.0: a=0.327813 h=0.097281 h/a=0.2968  theta2*=0.129158  theta2*/a=0.3940  theta2*/h=1.3277  at phi1=0.6060
+   phi1=0.30: Xi(h)=+0.022050  root=0.3324a  phi2*a=0.700a  theta2*(phi1)=0.3324a
+   phi1=0.50: Xi(h)=+0.038945  root=0.3679a  phi2*a=0.500a  theta2*(phi1)=0.3679a
+   phi1=0.65: Xi(h)=+0.053290  root=0.4074a  phi2*a=0.350a  theta2*(phi1)=0.3500a
+u=3.0: a=0.502282 h=0.172831 h/a=0.3441  theta2*=0.220777  theta2*/a=0.4395  theta2*/h=1.2774  at phi1=0.5600
+   phi1=0.30: Xi(h)=+0.040751  root=0.3842a  phi2*a=0.700a  theta2*(phi1)=0.3842a
+   phi1=0.50: Xi(h)=+0.071630  root=0.4240a  phi2*a=0.500a  theta2*(phi1)=0.4240a
+   phi1=0.65: Xi(h)=+0.097501  root=0.4680a  phi2*a=0.350a  theta2*(phi1)=0.3500a
+u=4.0: a=0.603052 h=0.239250 h/a=0.3967  theta2*=0.294116  theta2*/a=0.4877  theta2*/h=1.2293  at phi1=0.5120
+   phi1=0.30: Xi(h)=+0.058491  root=0.4410a  phi2*a=0.700a  theta2*(phi1)=0.4410a
+   phi1=0.50: Xi(h)=+0.102267  root=0.4845a  phi2*a=0.500a  theta2*(phi1)=0.4845a
+   phi1=0.65: Xi(h)=+0.138435  root=0.4019a  phi2*a=0.350a  theta2*(phi1)=0.3500a
+u=6.0: a=0.675836 h=0.336076 h/a=0.4973  theta2*=0.388524  theta2*/a=0.5749  theta2*/h=1.1561  at phi1=0.4250
+   phi1=0.30: Xi(h)=+0.086778  root=0.5471a  phi2*a=0.700a  theta2*(phi1)=0.5471a
+   phi1=0.50: Xi(h)=+0.150248  root=0.5123a  phi2*a=0.500a  theta2*(phi1)=0.5000a
+   phi1=0.65: Xi(h)=+0.201458  root=0.3586a  phi2*a=0.350a  theta2*(phi1)=0.3500a
+
+real	6m54.350s
+user	6m48.254s
+sys	0m0.126s

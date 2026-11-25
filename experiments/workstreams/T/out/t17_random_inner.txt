@@ -1,0 +1,4 @@
+e=0.0: 2 blocks, clipping solver 0.0251012 (clip [0.0000,0.5172]); random search with I, three runs (upper bounds of the minimum): [0.0251013 0.0251013 0.0251013]   [13s]
+e=0.02: 3 blocks, clipping solver 0.0161545 (clip [0.0560,0.4520]); random search with I, three runs (upper bounds of the minimum): [0.0161559 0.0161556 0.0161557]   [30s]
+e=0.04: 4 blocks, clipping solver 0.0091397 (clip [0.4688,0.6098]); random search with I, three runs (upper bounds of the minimum): [0.0091401 0.0091431 0.0091439]   [51s]
+e=0.05: 5 blocks, clipping solver 0.0063860 (clip [0.3910,0.5045]); random search with I, three runs (upper bounds of the minimum): [0.0063893 0.0063885 0.0063914]   [75s]

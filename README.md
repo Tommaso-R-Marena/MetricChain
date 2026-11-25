@@ -269,7 +269,7 @@ specific to a field: for *every* known part that is a function of the order para
 optimal among fixed samples up to a polynomial factor, for every `n` — the truncation
 lemma and the lower bound are machine-checked (`TypeQuantiles.lean`,
 `SymmetricSampling.lean`), the matching upper bound is a paper proof; the exponents for
-such known parts are under investigation.
+such known parts are item (viii).
 (vi) *The common structure* (theory report §11.21; workstream M; machine-checked).  In both
 cases the non-adaptive curve is the hinted curve sheared by its own height — with a budget
 of `e^{nθ}` evaluations a non-adaptive algorithm certifies an accuracy rate that is worse by
@@ -293,13 +293,46 @@ coordinator's brief for this workstream had the profile distance wrong (D48).  M
 the two abstract theorems behind it — Fekete's lemma for sets and the stability of covering
 numbers (`SetLimit.lean`, `CoverStability.lean`); the lattice lemmas that feed them are paper
 proofs checked numerically.
+(viii) *A known part with interactions: mean-field models* (theory report §11.23; workstream
+T, `docs/workstreams/T_REPORT.md`; **paper proofs, re-derived in part and re-computed by the
+coordinator with independent solvers; not yet refereed** — a referee is at work).  The
+first known part that is not a product measure: a function of the order parameter, with
+one phase or two.  By permutation symmetry alone, for every system size: the
+flat-histogram ("multicanonical") sample is optimal among fixed samples up to a polynomial
+factor, and the flat-histogram instance is the hardest instance among those that are
+functions of the order parameter.  (The lower halves are machine-checked, and not only for
+permutations: for any finite symmetry group with an invariant envelope, sampling
+uniformly in every orbit cannot be beaten by a fixed sample by more than the number of
+orbits — `GroupSampling.lean`.)  The exponents are again single-letter, for every rate
+function, by the method of types applied inside a type class.  With one phase everything
+of (v) carries over except the nested algorithm.  **With two phases the perturbations that
+are hardest to exclude are shells of configurations in the barrier region — not cones
+around a point, which miss the exponent by more than a factor two, and, beyond a small
+accuracy, not even sets built around one centre: the extremal sets constrain only part of
+the system** (found by the workstream against the coordinator's brief; D49).  A
+ferromagnetic interaction never makes the problem harder than no interaction, and a
+shallow barrier is invisible to every exponent.  Open: what adaptive algorithms can do
+(the nested algorithm does not transfer; a repair is proposed and a workstream is on it),
+and the value of the exponent with two phases beyond small accuracies.
+(ix) *Rounds of adaptivity* (theory report §11.24; workstream U,
+`docs/workstreams/U_REPORT.md`; **paper proofs, checked against the proof they build on and
+re-computed by the coordinator; unrefereed**).  How much adaptivity does the adaptive
+exponent need?  A number of rounds that does not depend on the system size suffices (the
+nested algorithms can be re-scheduled: a ladder with `L` rungs is `L` rounds); two rounds
+already beat every fixed sample; and two rounds provably do **not** reach the adaptive
+exponent — at slope 1 their exponent lies between `0.359a` and `0.624a`, where a fixed
+sample costs `a` and full adaptivity `0.263a`.  The hard instances are not nested basins,
+as the coordinator had expected (D50), but a flat histogram in one block of coordinates
+that dilutes the first batch.  Whether three rounds suffice is open.  Machine-checked: the
+indistinguishability lemma behind the lower bound, for two rounds (`TwoRounds.lean`).
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
 interval evaluation of force-field terms over voxels, and any claim of practical solver
 performance are outside the development.  The complexity results are exponents on idealised
 classes (product landscapes; for algorithms without a hint only the cube, with a zero known
-part or a field), with paper proofs wherever the theory report does not name a Lean declaration; the
+part, a field, or — unrefereed, and without an adaptive algorithm — a mean-field known
+part), with paper proofs wherever the theory report does not name a Lean declaration; the
 newest of them — the adaptive exponent — has a machine-checked recursion and bracket but a
 paper proof for the number of evaluations, its extension to bounded accuracies is refereed
 but has been run with three nested levels only at toy sizes and at the flat instance, its

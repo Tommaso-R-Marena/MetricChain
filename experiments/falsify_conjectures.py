@@ -6413,6 +6413,866 @@ def t_ls_exact_certificates(rng, trials):
     return True, stats
 
 
+# ----------------------------------------------------------------------------------------------
+# XIX. Known parts that are functions of the type (mean-field models; theory report 11.23)
+# ----------------------------------------------------------------------------------------------
+
+def mf_hb(x):
+    """Binary entropy in nats (vectorised)."""
+    x = np.clip(np.asarray(x, float), 1e-300, 1 - 1e-16)
+    return -(x * np.log(x) + (1 - x) * np.log1p(-x))
+
+
+def mf_model(bJ, bB, u, K=40001):
+    """Curie-Weiss known part f = n phi(|x|/n), phi(k) = -(bJ/2)(2k-1)^2 - bB(2k-1): rate function I = phi - h - min and its
+    largest u-Lipschitz minorant v (tables on a grid of K points; I also exactly)."""
+    kap = np.linspace(0, 1, K)
+    phi = lambda k: -(bJ / 2) * (2 * np.asarray(k, float) - 1) ** 2 - bB * (2 * np.asarray(k, float) - 1)
+    raw = phi(kap) - mf_hb(kap)
+    c = float(raw.min())
+    Ik = raw - c
+    v = np.minimum(np.minimum.accumulate(Ik - u * kap) + u * kap, np.minimum.accumulate((Ik + u * kap)[::-1])[::-1] - u * kap)
+    return dict(u=u, kap=kap, Ik=Ik, vk=v, I=lambda x: phi(x) - mf_hb(x) - c, v=lambda x: np.interp(x, kap, v), phi=phi)
+
+
+def mf_MI(lam, nu):
+    """Mutual information between the block label and the letter: h(type) - sum_j lam_j h(nu_j) (last axis = blocks)."""
+    nu = np.asarray(nu, float)
+    return mf_hb((nu * lam).sum(axis=-1)) - (mf_hb(nu) * lam).sum(axis=-1)
+
+
+def mf_alpha(M, lam, mu):
+    return float(mf_MI(lam, mu) + M["I"](float((np.asarray(mu) * lam).sum())))
+
+
+def mf_golden(f, a, b, tol=1e-12):
+    """Golden-section minimisation of a unimodal function on [a, b]; returns (minimum value seen, its argument)."""
+    g = (math.sqrt(5) - 1) / 2
+    c, d = b - g * (b - a), a + g * (b - a)
+    fc, fd = f(c), f(d)
+    best = min((fc, c), (fd, d))
+    while b - a > tol:
+        if fc <= fd:
+            b, d, fd = d, c, fc
+            c = b - g * (b - a)
+            fc = f(c)
+            best = min(best, (fc, c))
+        else:
+            a, c, fc = c, d, fd
+            d = a + g * (b - a)
+            fd = f(d)
+            best = min(best, (fd, d))
+    return best
+
+
+def mf_inner(M, lam, mu, B, G=1500):
+    """V(mu, B) = min{ MI(nu) : u dist(nu, mu) + v(type of nu) <= B } over clippings nu_j = clip(mu_j, c_lo, c_hi) (Lemma
+    11.77(a)); the constraint is nonincreasing in c_hi, so for every c_lo the best c_hi is the smallest feasible one
+    (bisection); scan over c_lo, golden-section refinement at every local minimum of the scan (plateaus count once)."""
+    lam = np.asarray(lam, float)
+    mu = np.asarray(mu, float)
+    u = M["u"]
+
+    def g_mi(clo, chi):
+        nu = np.clip(mu[None, :], clo[:, None], chi[:, None])
+        return u * (np.abs(nu - mu[None, :]) * lam).sum(axis=1) + M["v"]((nu * lam).sum(axis=1)) - B, mf_MI(lam, nu)
+
+    def best_for(clo):
+        lo, hi = clo.copy(), np.ones_like(clo)
+        feas = g_mi(clo, hi)[0] <= 0
+        full = g_mi(clo, lo)[0] <= 0
+        for _ in range(48):
+            mid = 0.5 * (lo + hi)
+            ok = g_mi(clo, mid)[0] <= 0
+            hi = np.where(ok, mid, hi)
+            lo = np.where(ok, lo, mid)
+        mi = np.where(full, 0.0, g_mi(clo, hi)[1])
+        return np.where(feas, mi, np.inf)
+
+    clo = np.linspace(0, 1, G)
+    val = best_for(clo)
+    if not np.isfinite(val).any():
+        return float("inf")
+    cand = [i for i in range(G) if np.isfinite(val[i]) and (i == 0 or not np.isfinite(val[i - 1]) or val[i] <= val[i - 1])
+            and (i == G - 1 or val[i] <= val[i + 1])]
+    runs = []
+    for i in cand:
+        if runs and i == runs[-1][-1] + 1:
+            runs[-1].append(i)
+        else:
+            runs.append([i])
+    best = float(val.min())
+    for run in sorted(runs, key=lambda r: val[r[0]])[:6]:
+        for i in {run[0], run[-1]}:
+            a, b = clo[max(i - 2, 0)], clo[min(i + 2, G - 1)]
+            best = min(best, mf_golden(lambda c: float(best_for(np.array([c]))[0]), a, b, tol=1e-11)[0])
+    return best
+
+
+def mf_r(M, lam, mu, e, G=1500):
+    """r_mu(e) = V(mu, e + alpha(mu))."""
+    return mf_inner(M, lam, mu, e + mf_alpha(M, lam, mu), G)
+
+
+def mf_grid2(M, lam, mu, B, G, use_I):
+    """The same minimum for two blocks on a full G x G grid of exit profiles (no clipping lemma), with v or with I in the
+    constraint; returns the minimum over the feasible grid points."""
+    ax = np.linspace(0, 1, G)
+    N1, N0 = np.meshgrid(ax, ax, indexing="ij")
+    nb = lam[0] * N1 + lam[1] * N0
+    mi = mf_hb(nb) - lam[0] * mf_hb(N1) - lam[1] * mf_hb(N0)
+    pen = M["I"](nb) if use_I else M["v"](nb)
+    feas = M["u"] * (lam[0] * np.abs(N1 - mu[0]) + lam[1] * np.abs(N0 - mu[1])) + pen <= B
+    return float(mi[feas].min()) if feas.any() else float("inf")
+
+
+def mf_kl(a, p):
+    return a * math.log(a / p) + (1 - a) * math.log((1 - a) / (1 - p))
+
+
+def mf_R_unif(e, u):
+    """Hinted exponent of the uniform cube: KL((Lambda_1 + e)/u || 1/2), Lambda_1 = ln(2/(1 + e^-u))."""
+    rho = (math.log(2 / (1 + math.exp(-u))) + e) / u
+    return mf_kl(rho, 0.5) if 0 < rho < 0.5 else 0.0
+
+
+@conjecture("XIX.1 Theorem 11.76(c) (the flat-histogram instance is the hardest symmetric instance, for every n and every exchangeable known part): with J_t = -ln pi(T_t), V_n = the largest u-Lipschitz minorant of J, an instance g(|x|), its landscape Lambda_g(t) = -g(t) + min_t'[J_t' + g(t')] and Z_g = sum_t e^{-(J_t - Lambda_g(t))}: Lambda_g <= V_n with equality for H = -V_n, 1 <= Z_g <= n+1, the deepest dip on a set D is in L_u, A(dip)/A = 1 + Phi_g(D) with Phi_g(D) + mu_g(D) = Z_g^{-1} sum_{x in D} pi(x) exp(min_{y not in D}[u d(x,y) + Lambda_g(|y|)]), and Z_g Phi_g^+(D) <= Z_H Phi_H^+(D), hence Phi_g^+(D) <= (n+1) Phi_H^+(D); the factor cannot be dropped")
+def t_mf_hardest_symmetric(rng, trials):
+    stats = dict(sets=0, worst_ratio=0.0, largest_over_H=0.0)
+    for n in (4, 5, 6):
+        D = na_cube(n)
+        wt = D[0]
+        N = 2 ** n
+        nbr = [[x ^ (1 << i) for i in range(n)] for x in range(N)]
+        binom = np.array([math.comb(n, t) for t in range(n + 1)], float)
+        for rep in range(max(8, trials // 12)):
+            u = float(rng.choice([0.3, 0.5, 1.0, 2.0]))
+            kind = rep % 4
+            if kind == 0:      # two wells
+                J = np.array([1.5 * n * (2 * t / n - 1) ** 2 * (-1) + 0.0 for t in range(n + 1)]) * 0.3 + rng.normal(0, 0.2, n + 1)
+            elif kind == 1:    # flat over the types
+                J = np.zeros(n + 1)
+            elif kind == 2:    # binomial (uniform cube)
+                J = -np.log(binom / 2 ** n)
+            else:
+                J = rng.uniform(0, 2.5 * u, n + 1)
+            p = np.exp(-J)
+            p = p / p.sum()
+            J = -np.log(p)
+            pi = (p / binom)[wt]
+            tt = np.arange(n + 1)
+            Vn = (J[None, :] + u * np.abs(tt[:, None] - tt[None, :])).min(axis=1)
+            if np.any(Vn > J + 1e-12) or np.any(np.abs(np.diff(Vn)) > u + 1e-12) or abs((J - Vn).min()) > 1e-12:
+                return False, dict(reason="V_n is not a u-Lipschitz minorant of J touching it", n=n)
+            gs = [-Vn, np.zeros(n + 1), float(rng.uniform(-u, u)) * tt, u * np.abs(tt - n // 2).astype(float),
+                  np.concatenate([[0.0], np.cumsum(rng.uniform(-u, u, n))])]
+            ZH = float(np.exp(-(J - Vn)).sum())
+            for gi, g in enumerate(gs):
+                Lam = -g + (J + g).min()
+                Zg = float(np.exp(-(J - Lam)).sum())
+                if np.any(Lam > Vn + 1e-10) or np.any(np.abs(np.diff(Lam)) > u + 1e-10):
+                    return False, dict(reason="the landscape of an instance is not a u-Lipschitz function below V_n", n=n, instance=gi)
+                if gi == 0 and np.abs(Lam - Vn).max() > 1e-10:
+                    return False, dict(reason="the landscape of H is not V_n", n=n)
+                if not (1 - 1e-12 <= Zg <= n + 1 + 1e-12):
+                    return False, dict(reason="Z_g outside [1, n+1]", n=n, Z=Zg)
+                psi = g[wt]
+                A = float((pi * np.exp(-psi)).sum())
+                mug = pi * np.exp(-psi) / A
+                for srep in range(4):
+                    if srep == 0:
+                        mask = rng.random(N) < rng.uniform(0.05, 0.6)
+                    elif srep == 1:
+                        mask = D[int(rng.integers(N))] <= int(rng.integers(0, n // 2 + 1))
+                    elif srep == 2:
+                        c = int(rng.integers(N))
+                        r = int(rng.integers(1, n))
+                        mask = (D[c] >= r) & (D[c] <= r + 1) & (rng.random(N) < 0.8)
+                    else:
+                        mask = np.zeros(N, bool)
+                        mask[int(rng.choice(np.flatnonzero(wt == n // 2)))] = True
+                    if not mask.any() or mask.all():
+                        continue
+                    out = ~mask
+
+                    def dip_and_plus(psi_, Lam_, Z_, A_):
+                        dip = psi_.copy()
+                        dip[mask] = (psi_[None, out] - u * D[np.ix_(mask, out)]).max(axis=1)
+                        if np.any(dip > psi_ + 1e-12) or any(abs(dip[x] - dip[y]) > u + 1e-10 for x in range(N) for y in nbr[x]):
+                            return None
+                        phi = float((pi * np.exp(-dip)).sum()) / A_ - 1
+                        plus = phi + float((pi * np.exp(-psi_))[mask].sum()) / A_
+                        form = float((pi[mask] * np.exp((u * D[np.ix_(mask, out)] + Lam_[wt][None, out]).min(axis=1))).sum()) / Z_
+                        return plus, form
+                    rg = dip_and_plus(psi, Lam, Zg, A)
+                    psiH = -Vn[wt]
+                    rH = dip_and_plus(psiH, Vn, ZH, float((pi * np.exp(-psiH)).sum()))
+                    if rg is None or rH is None:
+                        return False, dict(reason="the deepest dip is not a member of L_u below the instance", n=n, instance=gi)
+                    if abs(rg[0] - rg[1]) > 1e-9 * max(1.0, rg[0]) or abs(rH[0] - rH[1]) > 1e-9 * max(1.0, rH[0]):
+                        return False, dict(reason="formula for Phi^+ in terms of the landscape", n=n, instance=gi, direct=rg[0], formula=rg[1])
+                    if Zg * rg[0] > ZH * rH[0] * (1 + 1e-9):
+                        return False, dict(reason="Z_g Phi_g^+(D) > Z_H Phi_H^+(D)", n=n, instance=gi)
+                    if rg[0] > (n + 1) * rH[0] * (1 + 1e-9):
+                        return False, dict(reason="Phi_g^+(D) > (n+1) Phi_H^+(D)", n=n, instance=gi)
+                    stats["worst_ratio"] = max(stats["worst_ratio"], rg[0] / ((n + 1) * rH[0]))
+                    stats["largest_over_H"] = max(stats["largest_over_H"], rg[0] / rH[0])
+                    stats["sets"] += 1
+    if stats["largest_over_H"] <= 1.02:
+        return False, dict(reason="no instance with Phi_g^+ > Phi_H^+ was seen: the factor would be superfluous", **stats)
+    return True, stats
+
+
+@conjecture("XIX.2 Lemma 11.77 (the inner problem of the single-letter theory): for a block profile mu and a budget B the minimum of MI(nu) over {u dist(nu, mu) + v(type) <= B} is attained at a clipping nu_j = clip(mu_j, c_lo, c_hi) and is the same with the rate function I in place of its largest u-Lipschitz minorant v (two blocks: against full grids of exit profiles); thinning a profile to a type kappa* (nu_j kappa*/type, or the mirror image upwards) moves it by exactly |type - kappa*| and does not increase MI")
+def t_mf_inner_problem(rng, trials):
+    stats = dict(profiles=0, positive=0, worst_gap=0.0, thinnings=0)
+    G = 420
+    for (bJ, bB, u) in ((1.5, 0.0, 1.0), (0.5, 0.3, 1.0), (2.0, 0.1, 0.5)):
+        M = mf_model(bJ, bB, u)
+        done = 0
+        while done < (4 if trials < 100 else 8):
+            m = float(rng.uniform(0.3, 0.7))
+            lam = np.array([m, 1 - m])
+            mu = np.array([1 - rng.uniform(0.15, 0.4), rng.uniform(0.15, 0.4)])
+            e = float(rng.choice([-0.03, 0.0, 0.01, 0.03]))
+            B = e + mf_alpha(M, lam, mu)
+            if B < float(M["v"]((lam * mu).sum())):
+                continue
+            fast = mf_inner(M, lam, mu, B)
+            gv = mf_grid2(M, lam, mu, B, G, False)
+            gI = mf_grid2(M, lam, mu, B, G, True)
+            # a grid point within one cell of the minimiser is feasible up to the slack 2u/G; allow for it through B
+            gv_lo = mf_grid2(M, lam, mu, B + 2.5 * u / G, G, False)
+            gI_lo = mf_grid2(M, lam, mu, B + 2.5 * u / G + 2e-3, G, True)
+            if fast > min(gv, gI) + 1e-7:
+                return False, dict(reason="a grid profile beats every clipping", model=(bJ, bB, u), fast=fast, grid_v=gv, grid_I=gI)
+            if fast < gv_lo - 6.0 / G or fast < gI_lo - 6.0 / G:
+                return False, dict(reason="the clipping value is below the grid minimum by more than the resolution", model=(bJ, bB, u), fast=fast, grid_v=gv_lo, grid_I=gI_lo)
+            stats["worst_gap"] = max(stats["worst_gap"], min(gv, gI) - fast)
+            stats["profiles"] += 1
+            stats["positive"] += fast > 1e-4
+            done += 1
+    if stats["positive"] < 4:
+        return False, dict(reason="too few profiles with a positive value (the test would be void)", **stats)
+    for _ in range(trials):
+        k = int(rng.integers(2, 6))
+        lam = rng.dirichlet(np.ones(k))
+        nu = rng.uniform(0.01, 0.99, k)
+        t = float((lam * nu).sum())
+        ks = float(rng.uniform(0.01, 0.99))
+        if ks <= t:
+            nu2 = nu * ks / t
+        else:
+            nu2 = nu + (1 - nu) * (ks - t) / (1 - t)
+        if abs(float((lam * nu2).sum()) - ks) > 1e-12 or abs(float((lam * np.abs(nu2 - nu)).sum()) - abs(ks - t)) > 1e-12:
+            return False, dict(reason="thinning does not move the profile by |type - kappa*|")
+        if float(mf_MI(lam, nu2)) > float(mf_MI(lam, nu)) + 1e-12:
+            return False, dict(reason="thinning increased the mutual information", k=k)
+        stats["thinnings"] += 1
+    return True, stats
+
+
+MF_TWO_PHASE = dict(R0=0.0251012, x0=0.29803, R002=0.0152765, x002=0.30553, S3=(0.2774, 0.1408, 0.016155), cone_at_S0=0.0020379)
+
+
+@conjecture("XIX.3 Two phases (Curie-Weiss, beta J = 1.5, B = 0, u = 1; theory report 11.23, Proposition 11.82): the symmetric shell (1/2; x, x) in the barrier type class with x = 0.29803 has r_mu(0) = 0.0251012 and is a local maximum over binary centres; every profile evaluated stays below the uniform cube's KL(Lambda_1/u || 1/2) = 0.0291391 (Proposition 11.81(a)); e + r_mu(e) is increasing near 0 and n_mu(S(0)) = min{r_mu(e') : e' + r_mu(e') <= S(0)} = r_mu(0) (pair identity, Theorem 11.79(b)); the truncated cone around the shell attains the same value at accuracy S(0) while the truncated cone around a point gives 0.00204; the cone formula gives about 0.0107; and at e = 0.02 the three-block profile with a free block of weight 0.1408 at type 1/2 and shells x = 0.2774 has r = 0.016155, above the best binary centre 0.0152765")
+def t_mf_two_phase(rng, trials):
+    M = mf_model(1.5, 0.0, 1.0)
+    c = MF_TWO_PHASE
+    half = np.array([0.5, 0.5])
+    shell = lambda x: np.array([1 - x, x])
+    r0 = mf_r(M, half, shell(c["x0"]), 0.0)
+    if abs(r0 - c["R0"]) > 4e-7:
+        return False, dict(reason="value of the barrier shell at e = 0", value=r0)
+    Ru = mf_R_unif(0.0, 1.0)
+    if abs(Ru - 0.0291391) > 1e-7:
+        return False, dict(reason="uniform cube", value=Ru)
+    worst = 0.0
+    for dm, da, db in ((0, 0.004, 0.004), (0, -0.004, -0.004), (0, 0.003, -0.003), (0.01, 0, 0), (-0.01, 0.002, 0), (0.006, -0.003, 0.003)):
+        lam = np.array([0.5 + dm, 0.5 - dm])
+        val = mf_r(M, lam, np.array([1 - c["x0"] - da, c["x0"] + db]), 0.0)
+        worst = max(worst, val)
+        if val > r0 + 1e-7:
+            return False, dict(reason="a neighbouring binary centre beats the symmetric shell", shift=(dm, da, db), value=val)
+        if val > Ru + 1e-9:
+            return False, dict(reason="a profile of a ferromagnet beats the uniform cube", value=val)
+    # pair identity through r_mu
+    es = np.linspace(-0.003, 0.003, 13)
+    rv = np.array([mf_r(M, half, shell(c["x0"]), float(e)) for e in es])
+    S = es + rv
+    if np.any(np.diff(S) <= 0) or np.any(np.diff(rv) >= 0):
+        return False, dict(reason="e + r_mu(e) is not increasing, or r_mu not decreasing, near e = 0")
+    X = c["R0"]
+    n_mu = float(rv[S <= X + 2e-7].min())
+    if abs(n_mu - r0) > 1e-6:
+        return False, dict(reason="pair identity at the barrier shell", n_mu=n_mu, r=r0)
+    # shell-cones on a grid: theta_shell(X; mu0) = min{MI : G_mu0 - min G_mu0 <= X}
+    G = 700
+    ax = np.linspace(0, 1, G)
+    N1, N0 = np.meshgrid(ax, ax, indexing="ij")
+    nb = 0.5 * (N1 + N0)
+    mi = mf_hb(nb) - 0.5 * mf_hb(N1) - 0.5 * mf_hb(N0)
+
+    def theta_shell(mu0):
+        Gf = mi + M["I"](nb) + 0.5 * (np.abs(N1 - mu0[0]) + np.abs(N0 - mu0[1]))
+        return float(mi[Gf - Gf.min() <= X].min())
+    ts, tc = theta_shell(shell(c["x0"])), theta_shell(np.array([1.0, 0.0]))
+    if abs(ts - r0) > 2.5e-4:
+        return False, dict(reason="the truncated cone around the barrier shell does not attain the dip exponent", value=ts)
+    if abs(tc - c["cone_at_S0"]) > 1.5e-4 or tc > 0.1 * r0:
+        return False, dict(reason="the truncated cone around a point", value=tc)
+    # cone formula at centre type 1/2: min{MI(z) : u rho + v(kappa_z) - Lambda_m <= 0}
+    A_, B_ = 1 - N1, N0
+    rho = 0.5 * (A_ + B_)
+    Lam = float((mi + M["I"](nb) + rho).min())
+    feas = rho + M["v"](nb) - Lam <= 0
+    cone = float(mi[feas].min())
+    if not (0.0100 <= cone <= 0.0114):
+        return False, dict(reason="cone formula", value=cone)
+    # the free block at e = 0.02
+    x3, lf, v3 = c["S3"]
+    s3 = mf_r(M, np.array([(1 - lf) / 2, lf, (1 - lf) / 2]), np.array([1 - x3, 0.5, x3]), 0.02)
+    b2 = -mf_golden(lambda x: -mf_r(M, half, shell(x), 0.02), 0.295, 0.315, tol=2e-5)[0]
+    if abs(s3 - v3) > 3e-6 or abs(b2 - c["R002"]) > 5e-7:
+        return False, dict(reason="values at e = 0.02", three_blocks=s3, binary=b2)
+    if s3 < 1.05 * b2:
+        return False, dict(reason="the free block does not beat the binary centre by 5% at e = 0.02", three_blocks=s3, binary=b2)
+    # at e = 0 the same construction loses
+    s30 = max(mf_r(M, np.array([(1 - l) / 2, l, (1 - l) / 2]), np.array([1 - x, 0.5, x]), 0.0) for (x, l) in ((0.2715, 0.14), (0.285, 0.07), (0.295, 0.02)))
+    if s30 > r0 + 1e-7:
+        return False, dict(reason="a free block beats the binary shell at e = 0", value=s30)
+    return True, dict(shell=r0, uniform=Ru, n_mu=n_mu, shell_cone=ts, point_cone=tc, cone_formula=cone, three_blocks=s3, binary_002=b2, free_block_at_0=s30)
+
+
+@conjecture("XIX.4 Proposition 11.81(b) (the junction with the uniform cube is at beta J* = 1 + u c2/(2L) > 1, not at the critical coupling; B = 0, u = 1, e = 0: rho = Lambda_1/u, c2 = 1/(2 rho (1 - rho)) - 2, L = ln((1 - rho)/rho), beta J* = 1.12498): at the uniform cube's optimal shell (1/2; p_u, p_u) the single-letter value equals KL(rho || 1/2) = 0.0291391 for beta J = 0.6, 1.0, 1.08, 1.12 and is strictly smaller for beta J = 1.13, 1.14, 1.2, 1.5; for beta J < beta J* the exit profile (rho-bar - t, rho-bar + t) on the constraint curve has MI increasing in |t|, for beta J > beta J* decreasing at small |t|")
+def t_mf_junction(rng, trials):
+    u = 1.0
+    rho = math.log(2 / (1 + math.exp(-u))) / u
+    c2 = 1 / (2 * rho * (1 - rho)) - 2
+    L = math.log((1 - rho) / rho)
+    bstar = 1 + u * c2 / (2 * L)
+    if abs(bstar - 1.12498) > 2e-5:
+        return False, dict(reason="value of beta J*", value=bstar)
+    pu = 1 / (1 + math.exp(u))
+    Ru = mf_R_unif(0.0, u)
+    half = np.array([0.5, 0.5])
+    mu = np.array([1 - pu, pu])
+    out = {}
+    for bJ in (0.6, 1.0, 1.08, 1.12, 1.13, 1.14, 1.2, 1.5):
+        M = mf_model(bJ, 0.0, u, K=80001)
+        val = mf_r(M, half, mu, 0.0, G=3000)
+        out[bJ] = val
+        if val > Ru + 1e-8:
+            return False, dict(reason="a ferromagnet above the uniform cube", bJ=bJ, value=val)
+        if (bJ < bstar) != (abs(val - Ru) < 2e-7):
+            return False, dict(reason="equality with the uniform cube holds exactly below beta J*", bJ=bJ, value=val, uniform=Ru, bstar=bstar)
+        # second-order test along the constraint curve: exits (a', b') = (rb - t, rb + t) in the coordinates of the centre,
+        # i.e. nu = (1 - rb + t, rb + t): type 1/2 + t, dist = |rb - pu|; the constraint u dist + I(1/2 + t) = e + alpha fixes rb
+        B = mf_alpha(M, half, mu)
+        def mi_on_curve(t):
+            rb = pu + (B - float(M["I"](0.5 + t))) / u
+            return float(mf_MI(half, np.array([1 - rb + t, rb + t])))
+        t = 0.01
+        curv = mi_on_curve(t) + mi_on_curve(-t) - 2 * mi_on_curve(0.0)
+        pred = 2 * t * t * (c2 + 2 * (1 - bJ) * L / u)
+        if abs(curv - pred) > 0.05 * abs(pred) + 2e-9:
+            return False, dict(reason="second-order coefficient c2 + 2(1 - beta J) L/u", bJ=bJ, numerical=curv, predicted=pred)
+        if (curv > 0) != (bJ < bstar):
+            return False, dict(reason="the symmetric exit is a local minimum exactly below beta J*", bJ=bJ)
+    return True, dict(bstar=bstar, uniform=Ru, at_1_12=out[1.12], at_1_14=out[1.14], at_1_5=out[1.5])
+
+
+def mf_classes(n, k):
+    """Classes (i, j) around a centre of type k on Q_n: i = number of ones of the centre set to zero, j = number of its zeros
+    set to one; type t = k - i + j; number of points C(k, i) C(n - k, j)."""
+    ii, jj = np.meshgrid(np.arange(k + 1), np.arange(n - k + 1), indexing="ij")
+    logc = np.array([[math.lgamma(k + 1) - math.lgamma(i + 1) - math.lgamma(k - i + 1) + math.lgamma(n - k + 1) - math.lgamma(j + 1) - math.lgamma(n - k - j + 1)
+                      for j in range(n - k + 1)] for i in range(k + 1)])
+    return ii, jj, k - ii + jj, logc
+
+
+def mf_l1_transform(cost, u):
+    """T(i, j) = min over (i', j') of [cost(i', j') + u(|i - i'| + |j - j'|)] (two-pass l1 distance transform, exact)."""
+    T = cost.copy()
+    for axis in (0, 1):
+        T = np.moveaxis(T, axis, 0)
+        for a in range(1, T.shape[0]):
+            T[a] = np.minimum(T[a], T[a - 1] + u)
+        for a in range(T.shape[0] - 2, -1, -1):
+            T[a] = np.minimum(T[a], T[a + 1] + u)
+        T = np.moveaxis(T, 0, axis)
+    return T
+
+
+@conjecture("XIX.5 Theorem 11.78(a) on exact sums (every n): for the flat-histogram instance of a Curie-Weiss known part, a centre of type k with classes (i, j) and the budget neighbourhood D = {classes with u l1((i,j),(i0,j0)) + V_n(type) < nB} of the class of a profile mu: the class-level formulas dens_t(D) = sum C(k,i)C(n-k,j)/C(n,t) and Phi^+(D) = Z^{-1} sum pi(class) e^{T(i,j)}, T the l1 distance transform of V_n over the classes outside D, agree with brute force on the full cube (n = 8, 10); and for n = 60, 120: ln(1 + Phi(D)) >= n(B - alpha_n(mu)) - ln 2 - ln Z and maxdens(D) <= (n+1)^2 exp(-n V(mu, B))")
+def t_mf_exact_sums(rng, trials):
+    stats = dict(brute=0, bounds=0, tightest_dens=-1e9, tightest_phi=1e9)
+
+    def setup(n, bJ, bB, u):
+        t = np.arange(n + 1)
+        logbin = np.array([math.lgamma(n + 1) - math.lgamma(a + 1) - math.lgamma(n - a + 1) for a in t])
+        lw = logbin + n * ((bJ / 2) * (2 * t / n - 1) ** 2 + bB * (2 * t / n - 1))
+        J = -(lw - (lw.max() + math.log(np.exp(lw - lw.max()).sum())))
+        Vn = (J[None, :] + u * np.abs(t[:, None] - t[None, :])).min(axis=1)
+        return J, Vn, logbin
+
+    def class_level(n, k, J, Vn, logbin, u, i0, j0, nB):
+        ii, jj, tt, logc = mf_classes(n, k)
+        inD = u * (np.abs(ii - i0) + np.abs(jj - j0)) + Vn[tt] < nB
+        if inD.all() or not inD.any():
+            return None
+        T = mf_l1_transform(np.where(inD, np.inf, Vn[tt]), u)
+        logpi = -J[tt] - logbin[tt] + logc            # ln pi(class)
+        ZH = float(np.exp(-(J - Vn)).sum())
+        plus = float(np.exp(logpi[inD] + T[inD]).sum()) / ZH
+        muD = float(np.exp(logpi[inD] + Vn[tt][inD]).sum()) / ZH
+        dens = np.zeros(n + 1)
+        np.add.at(dens, tt[inD], np.exp(logc[inD] - logbin[tt[inD]]))
+        return inD, plus, plus - muD, float(dens.max()), ZH, logpi
+
+    # (1) brute force on full cubes
+    for n in (8, 10):
+        D = na_cube(n)
+        wt = D[0]
+        N = 2 ** n
+        for rep in range(3 if trials < 100 else 6):
+            bJ, bB, u = [(1.5, 0.0, 1.0), (0.5, 0.3, 1.0), (2.0, 0.1, 0.5)][rep % 3]
+            J, Vn, logbin = setup(n, bJ, bB, u)
+            k = int(rng.integers(n // 2 - 1, n // 2 + 2))
+            s = sum(1 << b for b in rng.choice(n, size=k, replace=False))
+            i0, j0 = int(rng.integers(1, max(2, k // 2 + 1))), int(rng.integers(1, max(2, (n - k) // 2 + 1)))
+            nB = float(Vn[k - i0 + j0] + u * rng.uniform(0.6, 2.6))
+            res = class_level(n, k, J, Vn, logbin, u, i0, j0, nB)
+            if res is None:
+                continue
+            inD, plus, phi, dens, ZH, _ = res
+            x = np.arange(N)
+            ci = np.array([bin(v & s).count("1") for v in x])        # ones of the centre kept
+            cj = wt - ci                                              # ones outside the centre
+            mask = inD[k - ci, cj]
+            pi = np.exp(-J[wt] - logbin[wt])
+            psiH = -Vn[wt]
+            A = float((pi * np.exp(-psiH)).sum())
+            out = ~mask
+            dip = psiH.copy()
+            dip[mask] = (psiH[None, out] - u * D[np.ix_(mask, out)]).max(axis=1)
+            phi_b = float((pi * np.exp(-dip)).sum()) / A - 1
+            dens_b = max(float(mask[wt == a].mean()) for a in range(n + 1))
+            if abs(phi_b - phi) > 1e-9 * max(1.0, abs(phi)) or abs(dens_b - dens) > 1e-12:
+                return False, dict(reason="class-level formulas against brute force", n=n, model=(bJ, bB, u), phi=phi, brute=phi_b, dens=dens, dens_brute=dens_b)
+            stats["brute"] += 1
+    # (2) the bounds of Theorem 11.78(a)
+    for n in (60, 120):
+        for (bJ, bB, u) in ((1.5, 0.0, 1.0), (0.5, 0.3, 1.0)):
+            M = mf_model(bJ, bB, u)
+            J, Vn, logbin = setup(n, bJ, bB, u)
+            k = n // 2
+            for (fa, fb, e) in ((0.3, 0.3, 0.0), (0.3, 0.3, 0.02), (0.25, 0.35, 0.01), (0.2, 0.2, -0.02)):
+                i0, j0 = round(fa * k), round(fb * (n - k))
+                lam = np.array([k / n, 1 - k / n])
+                mu = np.array([1 - i0 / k, j0 / (n - k)])
+                ii, jj, tt, logc = mf_classes(n, k)
+                alpha_n = float(J[k - i0 + j0] + logbin[k - i0 + j0] - logc[i0, j0]) / n      # -ln pi(class)/n
+                nB = n * (e + alpha_n)
+                if nB <= Vn[k - i0 + j0] + math.log(2):
+                    continue
+                res = class_level(n, k, J, Vn, logbin, u, i0, j0, nB)
+                if res is None:
+                    continue
+                inD, plus, phi, dens, ZH, _ = res
+                lhs = math.log1p(phi)
+                rhs = n * e - math.log(2) - math.log(ZH)
+                if lhs < rhs - 1e-9:
+                    return False, dict(reason="ln(1 + Phi(D)) below n(B - alpha_n) - ln 2 - ln Z", n=n, model=(bJ, bB, u), lhs=lhs, rhs=rhs)
+                # the lattice instance has the landscape V_n/n, within c ln(n+1)/n of v: compare with V at a slightly larger budget
+                slack = float(np.abs(Vn / n - M["v"](np.arange(n + 1) / n)).max())
+                V = mf_inner(M, lam, mu, nB / n + slack)
+                if math.log(dens) > 2 * math.log(n + 1) - n * V + 1e-9:
+                    return False, dict(reason="maxdens(D) above (n+1)^2 exp(-n V)", n=n, model=(bJ, bB, u), ln_dens=math.log(dens), V=V)
+                stats["tightest_dens"] = max(stats["tightest_dens"], (math.log(dens) + n * V) / math.log(n + 1))
+                stats["tightest_phi"] = min(stats["tightest_phi"], lhs - rhs)
+                stats["bounds"] += 1
+    if stats["brute"] < 4 or stats["bounds"] < 8:
+        return False, dict(reason="too few instances", **stats)
+    return True, stats
+
+
+@conjecture("XIX.6 Theorem 11.79(a) (cones around shells; beta J = 1.5, B = 0, u = 1): a shell (1/2; x, x) in the barrier type class is its own Gibbs shell (min_nu [MI + I + u dist(nu, mu)] = alpha(mu)) exactly when x >= p_u = 1/(1 + e^u), the local condition |phi'(type) + logit(mu_j)| <= u; hence the exponent of non-adaptive algorithms at vanishing accuracy is at least MI of the shell at p_u, KL(p_u || 1/2) = 0.110944 = the uniform cube's value; for every centre mu0 the minimiser mu* of G_mu0 is self-consistent, and the truncated cone around mu0 is not better than the truncated cone around mu*: theta_shell(X; mu0) <= theta_shell(X; mu*) (both by the triangle inequality alone, hence exactly on a grid; equality whenever the truncation shell lies beyond the Gibbs shell)")
+def t_mf_shells(rng, trials):
+    u = 1.0
+    M = mf_model(1.5, 0.0, u)
+    pu = 1 / (1 + math.exp(u))
+    if abs(mf_kl(pu, 0.5) - 0.110944) > 1e-6:
+        return False, dict(reason="KL(p_u || 1/2)")
+    G = 800
+    ax = np.linspace(0, 1, G + 1)
+    N1, N0 = np.meshgrid(ax, ax, indexing="ij")
+
+    def tables(lam):
+        nb = lam[0] * N1 + lam[1] * N0
+        mi = mf_hb(nb) - lam[0] * mf_hb(N1) - lam[1] * mf_hb(N0)
+        return mi, mi + M["I"](nb)
+    half = np.array([0.5, 0.5])
+    mi, base = tables(half)
+    stats = dict(consistent=0, inconsistent=0, centres=0, worst=-1.0, strict=0)
+    for x in (0.2, 0.24, 0.26, 0.2675, 0.27, 0.28, 0.3, 0.35, 0.45):
+        mu = np.array([1 - x, x])
+        Gf = base + u * 0.5 * (np.abs(N1 - mu[0]) + np.abs(N0 - mu[1]))
+        gap = mf_alpha(M, half, mu) - float(Gf.min())
+        local = abs(float(np.log(mu[1] / (1 - mu[1])))) <= u + 1e-12
+        if (x >= pu) != local:
+            return False, dict(reason="local criterion against x >= p_u", x=x)
+        if x >= pu and gap > 2e-6:
+            return False, dict(reason="a shell beyond p_u is not its own Gibbs shell", x=x, gap=gap)
+        if x < pu - 0.005 and gap < 2e-6:
+            return False, dict(reason="a shell inside p_u is self-consistent", x=x, gap=gap)
+        stats["consistent" if x >= pu else "inconsistent"] += 1
+    for rep in range(6 if trials < 100 else 12):
+        m = float(rng.uniform(0.35, 0.65))
+        lam = np.array([m, 1 - m])
+        mi_l, base_l = tables(lam)
+        mu0 = np.array([1 - rng.uniform(0.0, 0.3), rng.uniform(0.0, 0.3)]) if rep % 3 else np.array([1.0, 0.0])
+        dist = lambda c: u * (lam[0] * np.abs(N1 - c[0]) + lam[1] * np.abs(N0 - c[1]))
+        G0 = base_l + dist(mu0)
+        idx = np.unravel_index(np.argmin(G0), G0.shape)
+        mus = np.array([ax[idx[0]], ax[idx[1]]])
+        Gs = base_l + dist(mus)
+        # both statements are consequences of the triangle inequality alone, so they hold exactly on the grid
+        if float(Gs[idx]) - float(Gs.min()) > 1e-12:
+            return False, dict(reason="the Gibbs shell of a cone is not self-consistent", centre=mu0.tolist(), shell=mus.tolist(), gap=float(Gs[idx]) - float(Gs.min()))
+        for X in (0.01, 0.03, 0.06, 0.15, 0.3):
+            t0 = float(mi_l[G0 - G0.min() <= X].min())
+            ts = float(mi_l[Gs - Gs.min() <= X].min())
+            stats["worst"] = max(stats["worst"], t0 - ts)
+            stats["strict"] += t0 < ts - 1e-6
+            if t0 > ts + 1e-12:
+                return False, dict(reason="a truncated cone beats the truncated cone around its own Gibbs shell", centre=mu0.tolist(), X=X, cone=t0, shell=ts)
+        stats["centres"] += 1
+
+    return True, stats
+
+
+# ----------------------------------------------------------------------------------------------
+# XX. Rounds of adaptivity (theory report 11.24)
+# ----------------------------------------------------------------------------------------------
+
+def rd_setup(u, G=200001):
+    """Exponent functions of the uniform cube: f = KL(.||1/2), k = KL(.||p_u), a, h, theta_na, theta_hint, and the inverse
+    functions D(theta) = u f^{-1}(theta) - Lambda_1 (accuracy rate certified with a hint) and x_na = D + theta."""
+    pu = 1 / (1 + math.exp(u))
+    L1 = math.log(2 / (1 + math.exp(-u)))
+    f = lambda r: np.asarray(r, float) * np.log(2 * np.asarray(r, float)) + (1 - np.asarray(r, float)) * np.log(2 * (1 - np.asarray(r, float)))
+    rho = np.linspace(pu, 0.5, G)
+    kk, ff = f(rho) + u * rho - L1, f(rho)
+    estar = float(kk[-1])
+    rfull = np.linspace(1e-9, 0.5, 4 * G)
+    ffull = f(rfull)
+    finv = lambda th: np.interp(th, ffull[::-1], rfull[::-1])
+
+    def theta_na(e):
+        e = np.asarray(e, float)
+        return np.where(e >= estar, 0.0, np.interp(np.clip(e, 0, estar), kk, ff))
+
+    def theta_hint(e):
+        r = (L1 + np.asarray(e, float)) / u
+        return np.where(r >= 0.5, 0.0, f(np.clip(r, 1e-12, 0.5)))
+    D = lambda th: u * finv(th) - L1
+    return dict(u=u, pu=pu, L1=L1, f=f, finv=finv, a=float(ff[0]), h=float(f(L1 / u)), estar=estar, theta_na=theta_na, theta_hint=theta_hint,
+                D=D, xna=lambda th: D(th) + np.asarray(th, float))
+
+
+def rd_logbinom(n):
+    d = np.arange(n + 1)
+    return np.array([math.lgamma(n + 1) - math.lgamma(i + 1) - math.lgamma(n - i + 1) for i in d]) - n * math.log(2)
+
+
+def rd_lip_minorant(t, u):
+    v = t.copy()
+    for i in range(1, len(v)):
+        v[i] = min(v[i], v[i - 1] + u)
+    for i in range(len(v) - 2, -1, -1):
+        v[i] = min(v[i], v[i + 1] + u)
+    return v
+
+
+def rd_logsumexp(x):
+    x = np.asarray(x, float).ravel()
+    m = x.max()
+    return float(m + math.log(np.exp(x - m).sum()))
+
+
+def rd_twins(n1, n2, T, u, cap=True):
+    """The twins of Theorem 11.86 on the grid of types (d1, d2): returns F_D, F_S, the sets W1 (what a blind batch of
+    e^T points sees) and W2 (V2 = all d1 x W2: what a batch that knows the first centre sees), g1, and the log-weights."""
+    lp1, lp2 = rd_logbinom(n1), rd_logbinom(n2)
+    g1 = -rd_lip_minorant(lp1.max() - lp1, u)          # flat histogram of block 1
+    g2 = -rd_lip_minorant(lp2.max() - lp2, u)
+    W1 = (-lp1[:, None] - lp2[None, :]) <= T
+    W2 = -lp2 <= T
+    if not W1.any() or W2.all():
+        return None
+    F = np.where(W1, g1[:, None] * np.ones((1, n2 + 1)), -np.inf)      # lower McShane envelope of g1 from W1
+    for axis in (0, 1):
+        F = np.moveaxis(F, axis, 0)
+        for i in range(1, F.shape[0]):
+            F[i] = np.maximum(F[i], F[i - 1] - u)
+        for i in range(F.shape[0] - 2, -1, -1):
+            F[i] = np.maximum(F[i], F[i + 1] - u)
+        F = np.moveaxis(F, 0, axis)
+    Fcap = np.maximum(F, g1[:, None] + g2[None, :]) if cap else F
+    idx = np.flatnonzero(W2)
+    d2 = np.arange(n2 + 1)
+    b = np.clip(d2, idx[0], idx[-1])
+    dist = np.abs(d2 - b)
+    FD = Fcap[:, b] - u * dist[None, :]
+    FS = Fcap[:, b] + u * dist[None, :]
+    return FD, FS, W1, W2, g1, lp1[:, None] + lp2[None, :], lp2
+
+
+def rd_hinted_exponent(n, u, eps):
+    """Theorem 11.25(a) at the zero residual of the uniform cube: with k the least radius of a dip of depth u k whose effect
+    exceeds eps, every algorithm needs (1 - 2 delta) 2^n/|B(n, k-1)| evaluations; returns ln(2^n/|B(n, k-1)|)/n."""
+    lp = rd_logbinom(n)
+    d = np.arange(n + 1)
+    for k in range(1, n):
+        x = u * (k - d[:k])
+        if np.logaddexp(0.0, rd_logsumexp(lp[:k] + x + np.log1p(-np.exp(-x)))) > eps:
+            return -rd_logsumexp(lp[:k]) / n
+    return 0.0
+
+
+@conjecture("XX.1 Theorem 11.86 (the twins that two rounds cannot tell apart; types (d1, d2) on two blocks, budget T): with W1 = {c1(d1) + c2(d2) <= T} (what a blind batch sees), V2 = {c2(d2) <= T} (what a batch that knows the first centre sees), g_j the flat histogram of block j, F_cap = max(lower McShane envelope of g1 from W1, g1 + g2), and F_D / F_S its continuation outside V2 at slope -u / +u: both are u-Lipschitz in each argument, coincide on V2 which contains W1, equal g1(d1) on W1, F_S >= F_D, every type has mass at most one under F_S (so A(F_S) <= (n1+1)(n2+1)); on whole cubes Q_12 with random centres the block-radial functions have largest edge difference at most u and ln A equals the sum over types; and at u = 1, n = 800 (n1 = 360, T = 0.0421 n) the gap ln A(F_D) - ln A(F_S) exceeds 1 while -ln(p1 + p2)/n exceeds the exponent of the lower bound for all algorithms at accuracy 1")
+def t_rounds_twins(rng, trials):
+    stats = dict(grids=0, cubes=0)
+    cases = [(1.0, 60, 30, 5.0), (1.0, 120, 70, 9.0), (2.0, 80, 36, 14.0), (0.5, 150, 90, 7.5), (1.0, 800, 360, 0.0421 * 800)]
+    for (u, n, n1, T) in cases:
+        r = rd_twins(n1, n - n1, T, u)
+        if r is None:
+            return False, dict(reason="degenerate case in the test", case=(u, n, n1, T))
+        FD, FS, W1, W2, g1, lw, lp2 = r
+        for G_ in (FD, FS):
+            if np.abs(np.diff(G_, axis=0)).max() > u + 1e-9 or np.abs(np.diff(G_, axis=1)).max() > u + 1e-9:
+                return False, dict(reason="a twin is not u-Lipschitz in each argument", case=(u, n, n1, T))
+        if not np.all(W1 <= W2[None, :]):
+            return False, dict(reason="W1 is not contained in V2", case=(u, n, n1, T))
+        if not np.array_equal(FD[:, W2], FS[:, W2]) or np.any(FS < FD - 1e-12):
+            return False, dict(reason="the twins differ on V2, or F_S < F_D", case=(u, n, n1, T))
+        if np.abs((FD - g1[:, None])[W1]).max() > 1e-9:
+            return False, dict(reason="on W1 the twins are not the flat histogram of the first block", case=(u, n, n1, T))
+        if (lw - FS).max() > 1e-9:
+            return False, dict(reason="a type has mass above one under F_S", case=(u, n, n1, T), excess=float((lw - FS).max()))
+        if not np.any(FD[:, ~W2] < FS[:, ~W2] - 1e-9):
+            return False, dict(reason="the twins do not differ anywhere", case=(u, n, n1, T))
+        stats["grids"] += 1
+        if n == 800:
+            gap = rd_logsumexp(lw - FD) - rd_logsumexp(lw - FS)
+            E = -float(np.logaddexp(rd_logsumexp(lw[~W1]), rd_logsumexp(lp2[~W2]))) / n
+            he = rd_hinted_exponent(n, u, 1.0)
+            stats.update(gap=gap, two_round_exponent=E, all_algorithms=he)
+            if gap <= 1.0 or E <= he + 0.001:
+                return False, dict(reason="no separation at n = 800", **stats)
+    # whole cubes
+    for (n1, n2, u, T) in ((6, 6, 1.0, 3.2), (7, 5, 2.0, 3.4), (5, 7, 0.5, 3.0)):
+        r = rd_twins(n1, n2, T, u)
+        if r is None:
+            return False, dict(reason="degenerate cube case in the test")
+        FD, FS, W1, W2, g1, lw, lp2 = r
+        n = n1 + n2
+        N = 2 ** n
+        x = np.arange(N)
+        pop = np.array([bin(v).count("1") for v in range(2 ** max(n1, n2))])
+        s1, s2 = int(rng.integers(2 ** n1)), int(rng.integers(2 ** n2))
+        d1 = pop[(x & (2 ** n1 - 1)) ^ s1]
+        d2 = pop[(x >> n1) ^ s2]
+        for Fm in (FD, FS):
+            psi = Fm[d1, d2]
+            if max(float(np.abs(psi - psi[x ^ (1 << i)]).max()) for i in range(n)) > u + 1e-9:
+                return False, dict(reason="a block-radial twin is not u-Lipschitz on the cube", blocks=(n1, n2))
+            lnA = math.log(float(np.exp(-psi).mean()))
+            if abs(lnA - rd_logsumexp(lw - Fm)) > 1e-9:
+                return False, dict(reason="ln A by enumeration against the sum over types", blocks=(n1, n2))
+        if not np.array_equal(FD[d1, d2][W2[d2]], FS[d1, d2][W2[d2]]):
+            return False, dict(reason="twins differ at a point whose type is in V2", blocks=(n1, n2))
+        stats["cubes"] += 1
+    return True, stats
+
+
+@conjecture("XX.2 Theorem 11.86, asymptotic form: with D(theta) = u f^{-1}(theta) - Lambda_1, x_na = D + theta and E_theta(c) = phi1 x_na(c/phi1) + phi2 D((theta - c)/phi2): E_theta(c) >= c + D(theta) (convexity of f); Xi(h, phi1) = min_c E_h(c) > 0 for every split; hence theta2* = sup{theta : Xi(theta, phi1) > 0, theta < phi2 a} > h, with theta2*/a = 0.349, 0.359, 0.394 at u = 0.5, 1, 2 (best phi1 = 0.65, 0.64, 0.61), below the two-round upper bound T2(0); and Lemma 11.85 on the type process: a second batch that knows the first centre and chooses d1 adversarially sees a type outside V2 with probability at most M2 p2")
+def t_rounds_lower(rng, trials):
+    stats = {}
+    for u, want in ((0.5, 0.3493), (1.0, 0.3592), (2.0, 0.3938)):
+        S = rd_setup(u, G=40001)
+        a, h = S["a"], S["h"]
+
+        def Xi(theta, phi1, npts=2001):
+            c = np.linspace(0, min(theta, phi1 * a), npts)
+            E = phi1 * S["xna"](c / phi1) + (1 - phi1) * S["D"]((theta - c) / (1 - phi1))
+            return float(E.min()), E, c
+        for phi1 in (0.1, 0.3, 0.5, 0.65, 0.8):
+            for theta in (h, 1.2 * h, 0.5 * min(a * (1 - phi1), a)):
+                if theta >= (1 - phi1) * math.log(2):
+                    continue
+                _, E, c = Xi(theta, phi1)
+                if np.any(E < c + float(S["D"](theta)) - 1e-7):
+                    return False, dict(reason="E_theta(c) < c + D(theta)", u=u, phi1=phi1, theta=theta)
+            if Xi(h, phi1)[0] <= 0:
+                return False, dict(reason="Xi(h, phi1) is not positive", u=u, phi1=phi1)
+        best = 0.0
+        for phi1 in np.linspace(0.5, 0.75, 51):
+            lo, hi = h, (1 - phi1) * a
+            if Xi(hi, phi1, 801)[0] > 0:
+                root = hi
+            else:
+                for _ in range(40):
+                    mid = 0.5 * (lo + hi)
+                    if Xi(mid, phi1, 801)[0] > 0:
+                        lo = mid
+                    else:
+                        hi = mid
+                root = lo
+            best = max(best, min(root, (1 - phi1) * a))
+        stats[f"theta2_over_a_u{u}"] = best / a
+        if abs(best / a - want) > 0.002:
+            return False, dict(reason="value of theta2*", u=u, value=best / a, expected=want)
+        if not (h < best):
+            return False, dict(reason="theta2* does not exceed h", u=u)
+        # two-round upper bound
+        xi = np.linspace(1e-6, S["estar"], 1201)[None, :]
+        ph = np.linspace(0.01, 0.99, 491)[:, None]
+        T2 = float(np.maximum(ph * a + (1 - ph) * S["theta_na"](xi), np.minimum(ph * a, (1 - ph) * xi) + (1 - ph) * a).min())
+        if not (best < T2 < a):
+            return False, dict(reason="lower bound for two rounds above the upper bound, or upper bound not below a", u=u, lower=best, upper=T2)
+    # Lemma 11.85 on the type process (two blocks): batch 2 knows s1 and may give its points any d1
+    n1, n2, u, T = 14, 14, 1.0, 6.0
+    FD, FS, W1, W2, g1, lw, lp2 = rd_twins(n1, n2, T, u)
+    p2 = float(np.exp(rd_logsumexp(lp2[~W2])))
+    M2 = max(1, int(0.3 / p2))
+    runs = 400 if trials < 100 else 2000
+    bad = 0
+    for _ in range(runs):
+        d2 = rng.binomial(n2, 0.5, size=M2)
+        bad += bool(np.any(~W2[d2]))        # whatever d1 the batch chooses, the twins differ only where d2 is outside W2
+    freq = bad / runs
+    stats.update(freq=freq, bound=M2 * p2)
+    if freq > M2 * p2 + 4 * math.sqrt(M2 * p2 / runs):
+        return False, dict(reason="a second batch sees the difference more often than M2 p2", **stats)
+    return True, stats
+
+
+@conjecture("XX.3 Theorem 11.84(b),(c) (round-limited ladders at bounded accuracy): T2(0) = min_{phi, xi} max{phi a + (1 - phi) theta_na(xi), min(phi a, (1 - phi) xi) + (1 - phi) a} is 0.6197 a, 0.6243 a, 0.6413 a at u = 0.5, 1, 2 and tends to the golden ratio (sqrt 5 - 1)/2 for small slopes; for fixed xi with (1 - phi) xi <= phi a the two terms balance at the value a (a + xi)/(2a + xi - theta_na(xi)), which is (a + h)/2 at xi = h; the three-rung ladder gives T3(0) <= 0.542 a at u = 1; and the two-round function T2(g) stays above the hinted exponent theta_hint(g) at every accuracy (no level undercuts the lower bound)")
+def t_rounds_upper(rng, trials):
+    out = {}
+    for u, want in ((0.05, (math.sqrt(5) - 1) / 2), (0.5, 0.6197), (1.0, 0.6243), (2.0, 0.6413)):
+        S = rd_setup(u, G=40001)
+        a, h = S["a"], S["h"]
+        xi = np.linspace(1e-7 * a, S["estar"], 3001)[None, :]
+        ph = np.linspace(0.005, 0.995, 991)[:, None]
+        v = np.maximum(ph * a + (1 - ph) * S["theta_na"](xi), np.minimum(ph * a, (1 - ph) * xi) + (1 - ph) * a)
+        T2 = float(v.min())
+        out[f"T2_over_a_u{u}"] = T2 / a
+        if abs(T2 / a - want) > 0.0012:
+            return False, dict(reason="two-round value", u=u, value=T2 / a, expected=want)
+        # balance formula
+        for x in (h, 0.5 * h, 2 * h, 0.4 * a):
+            if x >= S["estar"]:
+                continue
+            tn = float(S["theta_na"](x))
+            one_minus_phi = a / (2 * a + x - tn)
+            phi = 1 - one_minus_phi
+            if one_minus_phi * x > phi * a:
+                continue
+            t1, t2 = phi * a + one_minus_phi * tn, one_minus_phi * x + one_minus_phi * a
+            val = a * (a + x) / (2 * a + x - tn)
+            if abs(t1 - t2) > 1e-9 * a or abs(t1 - val) > 1e-9 * a:
+                return False, dict(reason="balance of the two rungs", u=u, xi=x)
+            col = np.maximum(ph[:, 0] * a + (1 - ph[:, 0]) * tn, np.minimum(ph[:, 0] * a, (1 - ph[:, 0]) * x) + (1 - ph[:, 0]) * a)
+            if abs(float(col.min()) - val) > 2e-3 * a:
+                return False, dict(reason="minimum over phi at fixed xi against the balance value", u=u, xi=x, grid=float(col.min()), formula=val)
+        if abs(a * (a + h) / (2 * a + h - float(S["theta_na"](h))) - (a + h) / 2) > 2e-4 * a:
+            return False, dict(reason="theta_na(h) = h, so the balance value at xi = h is (a + h)/2", u=u)
+    S = rd_setup(1.0, G=40001)
+    a, h, es = S["a"], S["h"], S["estar"]
+    p3 = np.linspace(0.02, 0.98, 97)[:, None, None]
+    x1 = np.linspace(1e-6, es, 150)[None, :, None]
+    x2 = np.linspace(1e-6, es, 150)[None, None, :]
+    m3 = p3 * a
+    v3 = np.maximum(np.maximum(m3 + (1 - p3) * S["theta_na"](x1), np.minimum(m3, (1 - p3) * x1) + (1 - p3) * S["theta_na"](x2)),
+                    np.minimum(m3, (1 - p3) * x2) + (1 - p3) * a)
+    T3 = float(np.where(x1 > x2, v3, np.inf).min())
+    out["T3_over_a"] = T3 / a
+    if not (0.52 * a < T3 < 0.542 * a):
+        return False, dict(reason="three-rung value at u = 1", value=T3 / a)
+    # lower barrier for T2(g), g > 0
+    worst = 1.0
+    ph = np.linspace(0.03, 0.97, 48)[:, None, None]
+    for g in np.linspace(0.05, 0.95, 10) * es:
+        be = np.linspace(0.02 * g, 0.98 * g, 40)[None, None, :]
+        xi2 = be / (1 - ph)
+        mu = ph * S["theta_na"]((g - be) / ph)
+        fr = np.linspace(0.0, 1.0, 60)[None, :, None]
+        xi1 = xi2 + fr * np.maximum(es - xi2, 0.0)
+        v = np.maximum(mu + (1 - ph) * S["theta_na"](xi1), np.minimum(mu, (1 - ph) * xi1) + (1 - ph) * S["theta_na"](xi2))
+        T2g = min(float(S["theta_na"](g)), float(v.min()))
+        hint = float(S["theta_hint"](g))
+        worst = min(worst, T2g - hint)
+        if T2g < hint - 1e-9:
+            return False, dict(reason="a two-round ladder undercuts the hinted exponent", g=float(g), T2=T2g, hint=hint)
+    out["least_margin_over_hint"] = worst
+    return True, out
+
+
+@conjecture("XX.4 Proposition 11.88(a),(b): (a) conditional covering — for a ball of radius kappa n whose centre is uniform on the sphere of radius sigma n around a known point, a point at distance t n from the known point hits with probability sum_{i >= (t + sigma - kappa) n/2} C(tn, i) C((1-t)n, sigma n - i)/C(n, sigma n), at most |B(n, kappa n)|/C(n, sigma n) for every t, and at t* = (sigma - kappa)/(1 - 2 kappa) within a factor n of it: the exponent is KL(kappa || 1/2) - KL(sigma || 1/2); (b) shadows — for psi = min(-D + u (d(., s1) - R)_+, -D - uK + u d(., s2)): if d(s1, s2) + K <= R the two functions differ only inside the open ball B(s2, K), and if d(s1, s2) + K >= R + 3 then psi is the cone at the antipode of s1 and at its n neighbours")
+def t_rounds_covering_shadows(rng, trials):
+    stats = dict(pairs=0, shadows=0, worst_ratio=0.0)
+    for n in (300, 600):
+        for (sig, kap) in ((0.45, 0.38), (0.4, 0.3), (0.5, 0.35), (0.3, 0.2), (0.35, 0.1)):
+            sn, kn = round(sig * n), round(kap * n)
+            lC = lambda N, k: math.lgamma(N + 1) - math.lgamma(k + 1) - math.lgamma(N - k + 1) if 0 <= k <= N else -math.inf
+            lball = rd_logsumexp([lC(n, j) for j in range(kn + 1)])
+            dual = lball - lC(n, sn)
+            best = -math.inf
+            for tn in range(0, n + 1, max(1, n // 200)):
+                # i = number of coordinates among the tn in which the centre differs from the known point as well
+                terms = [lC(tn, i) + lC(n - tn, sn - i) for i in range(max(0, sn - (n - tn)), min(tn, sn) + 1) if tn + sn - 2 * i <= kn]
+                lp = rd_logsumexp(terms) - lC(n, sn) if terms else -math.inf
+                if lp > dual + 1e-9:
+                    return False, dict(reason="a point hits with probability above |B|/C(n, sigma n)", n=n, sigma=sig, kappa=kap, t=tn)
+                best = max(best, lp)
+            ts = round((sig - kap) / (1 - 2 * kap) * n)
+            terms = [lC(ts, i) + lC(n - ts, sn - i) for i in range(max(0, sn - (n - ts)), min(ts, sn) + 1) if ts + sn - 2 * i <= kn]
+            lps = rd_logsumexp(terms) - lC(n, sn)
+            stats["worst_ratio"] = max(stats["worst_ratio"], (dual - lps) / math.log(n))
+            if lps < dual - 1.0 * math.log(n) or lps < best - 0.6 * math.log(n):
+                return False, dict(reason="the sphere of radius t* n does not attain the counting bound up to the factor n", n=n, sigma=sig, kappa=kap)
+            rate = mf_kl(kn / n, 0.5) - mf_kl(sn / n, 0.5)
+            if abs(-lps / n - rate) > 1.2 * math.log(n) / n:
+                return False, dict(reason="exponent of the conditional covering", n=n, sigma=sig, kappa=kap, exact=-lps / n, formula=rate)
+            stats["pairs"] += 1
+    for n in (8, 9, 10):
+        D = na_cube(n)
+        N = 2 ** n
+        for _ in range(max(10, trials // 8)):
+            u = float(rng.choice([0.5, 1.0, 2.0]))
+            s1, s2 = int(rng.integers(N)), int(rng.integers(N))
+            R, K, Dp = int(rng.integers(1, n)), int(rng.integers(1, n)), float(rng.uniform(0, 3))
+            psi1 = -Dp + u * np.maximum(D[s1] - R, 0)
+            psi2 = -Dp - u * K + u * D[s2]
+            dd = int(D[s1, s2])
+            if dd + K <= R:
+                if np.any((psi2 < psi1 - 1e-12) & (D[s2] >= K)):
+                    return False, dict(reason="a dip inside the plateau is visible outside its ball", n=n)
+                stats["shadows"] += 1
+            elif dd + K >= R + 3:
+                anti = (N - 1) ^ s1
+                pts = [anti] + [anti ^ (1 << i) for i in range(n)]
+                if any(psi2[x] > psi1[x] + 1e-12 for x in pts):
+                    return False, dict(reason="a dip that sticks out of the plateau is not seen at the antipode", n=n)
+                stats["shadows"] += 1
+    if stats["shadows"] < 10:
+        return False, dict(reason="too few shadow instances", **stats)
+    return True, stats
+
+
 @conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
 def t_dead_exact_free_energy(rng, trials):
     """Refuted (second referee, C1): with positive slack off the diagonal, an exact certificate of ln Z is the whole
@@ -6657,6 +7517,94 @@ def t_dead_weighted_profile_norm(rng, trials):
                     return False, dict(reason="two conformations whose cumulative-profile distance is not the weighted form",
                                        beads=N, h=h, k=k, cumulative=l1, weighted=float(ls_wnorm(d)))
     return True, {}
+
+
+@conjecture("DEAD.19 With two phases binary centres still suffice: the dip exponent of the flat-histogram instance is attained by sets around one centre (as for convex rate functions, Theorem 11.80(b), and as the coordinator's brief for workstream T assumed)", expect_fail=True)
+def t_dead_binary_centres(rng, trials):
+    M = mf_model(1.5, 0.0, 1.0)
+    x3, lf, _ = MF_TWO_PHASE["S3"]
+    s3 = mf_r(M, np.array([(1 - lf) / 2, lf, (1 - lf) / 2]), np.array([1 - x3, 0.5, x3]), 0.02)
+    best2 = 0.0
+    for m, xs in ((0.5, np.linspace(0.285, 0.325, 9)), (0.47, (0.295, 0.305, 0.315)), (0.53, (0.295, 0.305, 0.315))):
+        for x in xs:
+            for dx in ((0.0, 0.008, -0.008) if m == 0.5 else (0.0,)):
+                best2 = max(best2, mf_r(M, np.array([m, 1 - m]), np.array([1 - x - dx, x - dx]), 0.02, G=600))
+    if s3 > best2 + 1e-4:
+        return False, dict(reason="a profile with a free block (86% of the coordinates constrained) beats every binary centre at e = 0.02", three_blocks=s3, best_binary=best2)
+    return True, dict(three_blocks=s3, best_binary=best2)
+
+
+@conjecture("DEAD.20 With two phases the cone formula max_m min{MI : u rho + v - Lambda_m <= e} is the dip exponent of the flat-histogram instance, and truncated cones around points attain the non-adaptive exponent (pair identity with cones, as for convex rate functions)", expect_fail=True)
+def t_dead_cones_two_phase(rng, trials):
+    M = mf_model(1.5, 0.0, 1.0)
+    r0 = mf_r(M, np.array([0.5, 0.5]), np.array([1 - MF_TWO_PHASE["x0"], MF_TWO_PHASE["x0"]]), 0.0)
+    G = 500
+    ax = np.linspace(0, 1, G)
+    A_, B_ = np.meshgrid(ax, ax, indexing="ij")
+    best_cone, best_trunc = 0.0, 0.0
+    for m in np.linspace(0.3, 0.7, 9):
+        kap = m * (1 - A_) + (1 - m) * B_
+        rho = m * A_ + (1 - m) * B_
+        mi = mf_hb(kap) - m * mf_hb(A_) - (1 - m) * mf_hb(B_)
+        J = mi + M["I"](kap) + rho
+        Lam = float(J.min())
+        best_cone = max(best_cone, float(mi[rho + M["v"](kap) - Lam <= 0].min()))
+        best_trunc = max(best_trunc, float(mi[J - Lam <= r0].min()))
+    if best_cone < 0.6 * r0 or best_trunc < 0.6 * r0:
+        return False, dict(reason="cones around points fall short of shells in the barrier class", shell=r0, cone_formula=best_cone, truncated_cone=best_trunc)
+    return True, dict(shell=r0, cone_formula=best_cone, truncated_cone=best_trunc)
+
+
+@conjecture("DEAD.21 Two rounds of adaptivity reach the adaptive exponent on the cube class (as they do on radial instances, Theorem 11.51): no family of instances forces a two-round algorithm to more evaluations than the lower bound for all algorithms", expect_fail=True)
+def t_dead_two_rounds(rng, trials):
+    u, n, n1 = 1.0, 1600, 800
+    best = None
+    for T in np.linspace(0.036, 0.0405, 10) * n:
+        r = rd_twins(n1, n - n1, float(T), u)
+        if r is None:
+            continue
+        FD, FS, W1, W2, g1, lw, lp2 = r
+        if rd_logsumexp(lw - FD) - rd_logsumexp(lw - FS) > 1.0:
+            best = -float(np.logaddexp(rd_logsumexp(lw[~W1]), rd_logsumexp(lp2[~W2]))) / n
+    he = rd_hinted_exponent(n, u, 1.0)
+    if best is not None and best > he + 0.003:
+        return False, dict(reason="twins that differ by more than 1 in ln A and are seen by two batches of e^{nE} points with probability below 1 - 2 delta", two_round_exponent=best, all_algorithms=he)
+    return True, dict(two_round_exponent=best if best is not None else 0.0, all_algorithms=he)
+
+
+@conjecture("DEAD.22 With two phases cones around profile classes attain the exponent R_H o S^{-1} of non-adaptive algorithms (the pair identity n_mu(e + R(e)) = R(e) for some shell) whenever the top of the barrier is a contact point, as they do at u = 1", expect_fail=True)
+def t_dead_pair_identity_threshold(rng, trials):
+    u = 0.30
+    M = mf_model(1.5, 0.0, u)
+    half = np.array([0.5, 0.5])
+    shell = lambda x: np.array([1 - x, x])
+    R0, x0 = mf_golden(lambda x: -mf_r(M, half, shell(x), 0.0, G=1200), 0.40, 0.49, tol=1e-5)
+    R0 = -R0
+
+    def n_mu(x):
+        """min{r_mu(e) : e + r_mu(e) <= X} at X = S(0) = R0: the value of r_mu at the largest feasible e <= X"""
+        al = mf_alpha(M, half, shell(x))
+        rr = lambda e: mf_inner(M, half, shell(x), e + al, G=1200)
+        if rr(R0) <= 1e-12:
+            return 0.0
+        es = np.linspace(max(float(M["v"](0.5)) - al, -0.004), R0, 17)       # the feasible accuracies include e <= 0
+        g = [e + rr(float(e)) - R0 for e in es]
+        ok = [i for i in range(len(es)) if g[i] <= 0]
+        if not ok:
+            return float("inf")
+        a, b = float(es[ok[-1]]), float(es[min(ok[-1] + 1, len(es) - 1)])
+        for _ in range(9):
+            m_ = 0.5 * (a + b)
+            if m_ + rr(m_) - R0 <= 0:
+                a = m_
+            else:
+                b = m_
+        return rr(a)
+    vals = {round(x, 4): n_mu(x) for x in (x0, x0 + 0.005, x0 + 0.0105, x0 + 0.015)}
+    best = max(v for v in vals.values() if math.isfinite(v))
+    if best < 0.9 * R0:
+        return False, dict(reason="at u = 0.30 the best cone around a barrier shell certifies only 81% of the dip exponent at the accuracy S(0); the cone around the optimal dip shell certifies nothing", dip_exponent=R0, shell=x0, best_cone=best, at_dip_shell=vals[round(x0, 4)])
+    return True, dict(dip_exponent=R0, shell=x0, best_cone=best)
 
 
 def main():

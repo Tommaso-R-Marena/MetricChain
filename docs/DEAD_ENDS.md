@@ -1233,3 +1233,139 @@ reason" should be re-derived with a field before it is believed in general.
    than the body that chains can reach, and the gauche credit and the internal-centre
    factor `2³` are ignored.
 
+
+## D49. Known parts that are functions of the type: four guesses that fail with two phases, one about antiferromagnets, a repair that does not work, and what a max–min computation does to its inner solver (cycle 10; workstream T)
+
+1. **"The dip exponent of the flat-histogram instance, computed from sets around one centre, is
+   its exponent at phase coexistence (`≈ 0.026`)"** (the coordinator's brief for workstream T).
+   Wrong twice.  The value is `0.0251012` (`βJ = 1.5`, `B = 0`, `u = 1`); the coordinator's
+   `0.0255`–`0.0261` were the same quantity on grids of `241²` and `161²` points.  And for
+   accuracy rates above `e₀ ≈ 0.0018` the statement itself fails: profiles with a **free
+   block** — a shell on about 86 % of the coordinates, nothing on the rest — give strictly
+   larger exponents than every binary centre (`0.016155` against `0.015277` at `e = 0.02`;
+   Proposition 11.82(c); harness DEAD.19).  "Binary centres suffice" is a theorem for convex
+   rate functions (Theorem 11.80(b)) and false in general.  Three searches with three
+   blocks at `e = 0` had found nothing — nothing is there at `e = 0`; the gain was found by
+   the fourth, at `e = 0.02`.
+2. **"The cone formulas of §11.20 hold with the rate function in place of the divergence."**
+   True for convex `I`, false with two phases: `0.01070` against `0.025101` at `e = 0`, and the
+   truncated cone around a point misses the pair identity by a factor 12 (harness DEAD.20).
+   The cone's own Gibbs shell sits in a well; the hard dips sit on the barrier.  The right
+   functions are cones around shells that are their own Gibbs shell (Theorem 11.79(b)).
+3. **"With the zero residual's exponent the pair identity holds."**  False whenever `H ≠ 0`
+   (D47, item 1, again): one phase with a field `0.02529` against `0.02266`; two phases
+   `R_0(0) = 0.00875`.
+4. **"The flat-histogram ensemble is the normalised-maximum-likelihood mixture of the
+   field-tilted Gibbs measures, also with interactions"** (theory report §11.20, remark (3),
+   offered as the route beyond independent sites).  The ensemble is right, the derivation
+   is right only for convex `I`: the tilted measures of a two-phase known part never sit on
+   the barrier, `max_γ λ_γ` is the convex envelope of the landscape, and the hardest additive
+   instance has 35 % of the exponent of `H`.
+5. **"An antiferromagnetic interaction — in the limit, the uniform measure on one slice —
+   should be harder than the uniform cube, because exits that change the type are more
+   expensive."**  The workstream's guess, and the coordinator's own reasoning while reading
+   its report.  The premise is right and the conclusion is not: at the uniform cube's
+   optimal profile the cheapest exit does not change the type anyway, and no other profile
+   does better.  Every antiferromagnet without a field (`βJ` down to `−40`), and the slice of
+   type `½` itself, have the uniform cube's exponents to all digits computed; slices of type
+   `0.4`, `0.3`, `0.2` have less (`0.0281`, `0.0247`, `0.0189` against `0.0291`;
+   `experiments/coordinator_checks/meanfield_T/slice_check.py`).  "`≥`" is proved, "`=`" is
+   numerical.
+6. **"The nested algorithm transfers once the fibres stay in the class."**  They do (the
+   conditional law of a block is again a function of its type), but fibre averages are not
+   Lipschitz relative to a reference: the constant is `u + osc φ′` and the excess depends on
+   the instance.  Three repairs were examined by the workstream and fail, among them
+   working slice by slice at fixed *total* type (the outer function is then `2u`-Lipschitz
+   across outer type classes).  Not examined there, and open: conditioning on the type of
+   the *inner* block, under which the two blocks are independent (theory report §11.23,
+   "a possible repair").
+7. **Numerics: in a max–min computation every inaccuracy of the inner minimum is found by
+   the outer maximiser.**  The workstream lists six errors of its own that tests caught and
+   reading did not; the coordinator's independent solver made two of the same kind within
+   an hour.  (a) Local minima of a scan were ranked by value; a plateau of equal values (no
+   clipping from below) filled all the slots, the other exit was never refined, and
+   Nelder–Mead climbed to `0.0251100` at an asymmetric centre whose true value is
+   `0.0250913`.  (b) The repair compared neighbours with a tolerance of `10⁻¹⁵`; next to
+   exact zeros the scan has values of `5·10⁻¹⁷`, the zero region was dropped, and the
+   maximiser reported `0.0521` at a profile whose value is `0`.  *Rule adopted:* an optimum
+   is re-evaluated with an inner solver that shares no approximation with the one used in
+   the search (here: clippings with the minorant `v`, against a generic convex programme per
+   exit type with `I`), and a search result is not quoted before that.
+8. **"Small cubes will test the isoperimetric statement."**  On `Q_3` and `Q_4` every subset
+   satisfies it without any error term, because `Φ⁺(D) < 1` puts all of them in the volume
+   regime; the tests say nothing about exponents.  Families of sets at `n = 96, 144` did not
+   see the free-block gain either (it is below the finite-size terms there); the
+   single-letter search found it, and exact sums at fixed profiles confirm it from
+   `n = 300` on.
+9. **A harness test that "refuted" Theorem 11.79(b)** for a few minutes: the coordinator's
+   first version compared a truncated cone with the truncated cone around its Gibbs shell
+   at an accuracy relaxed on the wrong side.  Both statements of the theorem are
+   consequences of the triangle inequality and hold *exactly* on a grid; the test now
+   checks them without tolerance, and they hold with equality whenever the truncation
+   shell lies beyond the Gibbs shell.
+10. **A documented refutation that would have "refuted" a true statement.**  The first
+   version of harness test DEAD.22 (cones around shells fall short at `u = 0.30`) scanned the
+   accuracies `e ≥ R − 0.003` only; at `u = 0.35`, where the statement is true, the feasible
+   accuracies are `e ≤ 0` and lie outside that range, so the test reported the same
+   "refutation".  Its mutation — the same test at `u = 0.35`, where the refutation must
+   disappear — was the one mutation of 246 that was not caught, which is how the flaw was
+   found.  A test of a negative result needs a control on which the positive result holds.
+11. **A threshold quoted from a finite difference.**  The threshold `E` of the field case was
+   given as `0.21227` (`p = 0.1`, `u = 2`) in the brief for workstream T and in THY-REQ-0007;
+   that is `F*(t)/t` at `t = 10⁻⁴`.  The threshold is the limit, the largest chord gap of
+   `ln 2cosh(x/2)` over the window of fields: `0.212295` (and `0.103131`, not `0.10312`, at
+   `p = 0.3`, `u = 1`); `R^max(0.3E) = 0.023270` as in the theory report (`0.023273` belongs to
+   `0.3·0.21227`).  Found by the workstream's control computation.
+
+## D50. Rounds of adaptivity: the mechanism the coordinator expected is not the one that works, an estimate that bounds nothing, and three numerical traps (cycle 10; workstream U)
+
+1. **"A separation, if there is one, needs instances in which finding one level of
+   structure does not reveal the location of the next — nested basins with hidden
+   centres"** (the coordinator's observation (iii) in the brief for workstream U).  It points the wrong way.  In every nested family that could be analysed —
+   balls inside plateaus, concentric balls in growing sets of blocks, max–min nests of
+   cones with independent centres — two rounds cost exactly `e^{nh}`: a structure that
+   matters is wide, a blind batch of `e^{nh}` points lands on every level that is cheap, and
+   what remains hidden costs at most `e^{nh}` again from where the batch stands (the erosion
+   inequality, workstream U §3.3; a proof in one case, random search over up to four levels
+   otherwise).  Moreover a dip that sticks out of a plateau is read off from the antipode
+   of the plateau's centre (Proposition 11.88(b)).  **The separation that exists comes from
+   dilution**: a structure in one block that is *not* localised — a flat histogram, every
+   shell equally heavy — forces a blind batch to spread over the shells, and on each shell
+   it sees too little of a second block to notice a dip there (Theorem 11.86).  Twice in the
+   workstream hand computations with nested families produced instances that seemed to
+   cost a fully adaptive algorithm more than `e^{nh}`; the necessary conditions "`r = ∞` gives
+   at most `h`, `r = 1` at most `a`" caught both.
+2. **"`r` rounds of local descent cost about `e^{na/r}`, so two rounds cost about `a/2`"** (a
+   scratch computation of the coordinator while the workstream was running: the cost of
+   descending a cone in `r` batches).  It bounds nothing.  A cone is an easy instance (its
+   centre is found from `n + 1` evaluations), so a descent on it is not an algorithm for the
+   class, and its cost is not a lower bound either.  What is proved: `τ^{(2)} ∈ [0.359a, 0.624a]`
+   at `u = 1`; and the two-level value `τ₂ = 0.5006a` of §11.19 is reached only by a ladder
+   with unboundedly many rungs, i.e. rounds (four rounds give `0.481a`).  Harness XX.3,
+   mutation M1.
+3. **The twins without the cap.**  The first version of the pair of Theorem 11.86 — the lower
+   McShane envelope of the flat histogram from what a blind batch sees, without the cap
+   `g₁ + g₂` — plateaued at `1.18h` in exact computations where the analysis predicted
+   `1.37h`.  Below the range that the first batch sees, the first-block profile continued as
+   a full cone, whose bulk is *visible* to the second batch and heavier than the typical
+   type: the visible maximum was not zero.  The analysis had assumed a flat histogram on
+   all shells.  *Lesson (again, D45):* compute the visible maximum, do not assume it.
+4. **The product formula for the measure of an intersection of balls with independent
+   centres**, used outside its range: at `u = 4` it gave a one-round value `1.087a > a`.  Two
+   balls of radius below `n/4` around centres at distance `n/2` are disjoint; the formula
+   holds on average over the centres only.  Caught by the one-round necessary condition.
+5. **A three-round lower bound by iterating the two-round construction** (three blocks:
+   flat histogram, a structure the first batch cannot see, a dip the second cannot
+   follow): the hidden gain at the budget `e^{nh}` is negative for every split tried,
+   `≈ −φ₁/2` for a small first block.  The second batch knows the first centre and has the
+   full budget on a smaller cube, whose own hinted exponent is smaller.  Whether three
+   rounds reach `h` on the whole class is open in both directions.
+6. **Three arithmetic traps.**  (a) `p₁ = 1 − Σ_{W₁}P` in floating point is zero or negative
+   from `n ≈ 1600` on; tail probabilities must be summed in log space over the complement
+   (workstream).  (b) The coordinator's first helper for the lower bound of all algorithms
+   computed `ln(e^x − 1)` through `expm1`, which overflows from `n ≈ 3000` on and returned a
+   radius of 710 instead of 1217 (an "exponent" `0.165` instead of `0.0301`); now `x + ln(1 − e^{−x})`.
+   (c) The coordinator's first harness test for the conditional covering exponent ran at
+   `n ≤ 240` with tolerance `4 ln n/n ≈ 0.1`, larger than the term `KL(σ‖½)` it was meant to
+   see; two mutations survived until the test was moved to `n = 300, 600` with tolerances
+   calibrated on the exact counts.

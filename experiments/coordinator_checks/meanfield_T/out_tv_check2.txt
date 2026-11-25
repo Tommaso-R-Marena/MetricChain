@@ -1,0 +1,20 @@
+== B. binary symmetric shells (1/2; x, x): maximum over x of r(e)
+   e=-0.050: max_x = 0.0575961 at x = 0.28213   (report: 0.0575961 at 0.2821);  at the report's x: 0.0575961   [5s]
+   e=+0.000: max_x = 0.0251012 at x = 0.29803   (report: 0.0251012 at 0.29803);  at the report's x: 0.0251012   [8s]
+   e=+0.010: max_x = 0.0199399 at x = 0.30170   (report: 0.0199399 at 0.3017);  at the report's x: 0.0199399   [12s]
+   e=+0.020: max_x = 0.0152765 at x = 0.30553   (report: 0.0152765 at 0.30553);  at the report's x: 0.0152765   [16s]
+   e=+0.050: max_x = 0.0046265 at x = 0.31795   (report: 0.0046265 at 0.31795);  at the report's x: 0.0046265   [20s]
+== C. is the symmetric shell optimal among all binary centres (m; a, b)?  Nelder-Mead from perturbed starts, e = 0
+   start [0.5, 0.3, 0.3] -> 0.0251012 at (m, a, b) = [0.50001 0.29805 0.29801]   [74s]
+   start [0.45, 0.27, 0.33] -> 0.0251012 at (m, a, b) = [0.50001 0.29804 0.29801]   [151s]
+   start [0.6, 0.25, 0.3] -> 0.0251012 at (m, a, b) = [0.5     0.29803 0.29803]   [216s]
+   start [0.50035, 0.29868, 0.29785] -> 0.0251012 at (m, a, b) = [0.49984 0.29778 0.29828]   [266s]
+   best binary value at e = 0: 0.0251012   (report: 0.0251012)
+== D. three blocks with a free block (S3): value at the report's parameters and own maximisation
+   e=0.002: S3 max = 0.02404193 at (x, lam_f) = [0.2715 0.1398]  (report: 0.02404192);  at the report's parameters 0.02403883;  binary 0.02403044;  gain +0.05 %   [389s]
+   e=0.010: S3 max = 0.02038167 at (x, lam_f) = [0.2744 0.1398]  (report: 0.02038167);  at the report's parameters 0.02037655;  binary 0.01993989;  gain +2.22 %   [544s]
+   e=0.020: S3 max = 0.01615479 at (x, lam_f) = [0.2774 0.1408]  (report: 0.01615476);  at the report's parameters 0.01614997;  binary 0.01527650;  gain +5.75 %   [661s]
+   e=0.050: S3 max = 0.00616695 at (x, lam_f) = [0.284  0.1553]  (report: 0.00616685);  at the report's parameters nan;  binary 0.00462647;  gain +33.30 %   [831s]
+== E. the same S3 optima re-evaluated with the slow solver (no clipping lemma, I in the constraint)
+   e=0.02: slow 0.01614997 (exit type 0.5000, exit profile [0.5966 0.5    0.4033]);  fast 0.01614997   [832s]
+   e=0.0: slow 0.02510349 (exit type 0.4076, exit profile [0.5172 0.2981]);  fast 0.02510117   [833s]

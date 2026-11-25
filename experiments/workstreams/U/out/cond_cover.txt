@@ -1,0 +1,25 @@
+sigma=0.5 kappa=0.2 n=200: min_t cost/n = 0.20115 at t=0.500 (predicted t* = 0.500); counting lower bound/n = 0.19022; h(sigma)-h(kappa) = 0.19274
+sigma=0.5 kappa=0.2 n=800: min_t cost/n = 0.19570 at t=0.500 (predicted t* = 0.500); counting lower bound/n = 0.19211; h(sigma)-h(kappa) = 0.19274
+sigma=0.5 kappa=0.2 n=3200: min_t cost/n = 0.19370 at t=0.500 (predicted t* = 0.500); counting lower bound/n = 0.19259; h(sigma)-h(kappa) = 0.19274
+sigma=0.4 kappa=0.2 n=200: min_t cost/n = 0.18082 at t=0.330 (predicted t* = 0.333); counting lower bound/n = 0.17019; h(sigma)-h(kappa) = 0.17261
+sigma=0.4 kappa=0.2 n=800: min_t cost/n = 0.17552 at t=0.333 (predicted t* = 0.333); counting lower bound/n = 0.17200; h(sigma)-h(kappa) = 0.17261
+sigma=0.4 kappa=0.2 n=3200: min_t cost/n = 0.17355 at t=0.333 (predicted t* = 0.333); counting lower bound/n = 0.17246; h(sigma)-h(kappa) = 0.17261
+sigma=0.3 kappa=0.1 n=200: min_t cost/n = 0.29134 at t=0.250 (predicted t* = 0.250); counting lower bound/n = 0.28310; h(sigma)-h(kappa) = 0.28578
+sigma=0.3 kappa=0.1 n=800: min_t cost/n = 0.28802 at t=0.250 (predicted t* = 0.250); counting lower bound/n = 0.28511; h(sigma)-h(kappa) = 0.28578
+sigma=0.3 kappa=0.1 n=3200: min_t cost/n = 0.28656 at t=0.250 (predicted t* = 0.250); counting lower bound/n = 0.28561; h(sigma)-h(kappa) = 0.28578
+sigma=0.45 kappa=0.38 n=200: min_t cost/n = 0.03214 at t=0.280 (predicted t* = 0.292); counting lower bound/n = 0.01948; h(sigma)-h(kappa) = 0.02407
+sigma=0.45 kappa=0.38 n=800: min_t cost/n = 0.02691 at t=0.290 (predicted t* = 0.292); counting lower bound/n = 0.02288; h(sigma)-h(kappa) = 0.02407
+sigma=0.45 kappa=0.38 n=3200: min_t cost/n = 0.02500 at t=0.291 (predicted t* = 0.292); counting lower bound/n = 0.02377; h(sigma)-h(kappa) = 0.02407
+sigma=0.35 kappa=0.27 n=200: min_t cost/n = 0.07209 at t=0.170 (predicted t* = 0.174); counting lower bound/n = 0.06158; h(sigma)-h(kappa) = 0.06419
+sigma=0.35 kappa=0.27 n=800: min_t cost/n = 0.06702 at t=0.172 (predicted t* = 0.174); counting lower bound/n = 0.06352; h(sigma)-h(kappa) = 0.06419
+sigma=0.35 kappa=0.27 n=3200: min_t cost/n = 0.06511 at t=0.174 (predicted t* = 0.174); counting lower bound/n = 0.06402; h(sigma)-h(kappa) = 0.06419
+sigma=0.2 kappa=0.2 n=200: min_t cost/n = 0.00000 at t=0.000 (predicted t* = 0.000); counting lower bound/n = 0.00000; h(sigma)-h(kappa) = 0.00000
+sigma=0.2 kappa=0.2 n=800: min_t cost/n = 0.00000 at t=0.000 (predicted t* = 0.000); counting lower bound/n = 0.00000; h(sigma)-h(kappa) = 0.00000
+sigma=0.2 kappa=0.2 n=3200: min_t cost/n = 0.00000 at t=0.000 (predicted t* = 0.000); counting lower bound/n = 0.00000; h(sigma)-h(kappa) = 0.00000
+sigma=0.15 kappa=0.25 n=200: min_t cost/n = -0.00000 at t=0.075 (predicted t* = 0.000); counting lower bound/n = 0.00000; h(sigma)-h(kappa) = 0.00000
+sigma=0.15 kappa=0.25 n=800: min_t cost/n = -0.00000 at t=0.056 (predicted t* = 0.000); counting lower bound/n = 0.00000; h(sigma)-h(kappa) = 0.00000
+sigma=0.15 kappa=0.25 n=3200: min_t cost/n = -0.00000 at t=0.037 (predicted t* = 0.000); counting lower bound/n = 0.00000; h(sigma)-h(kappa) = 0.00000
+
+real	0m3.352s
+user	0m3.531s
+sys	0m0.052s

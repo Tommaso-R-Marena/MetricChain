@@ -1,0 +1,11 @@
+### t07_smallcubes.py 1.5 0.0 1.0 bJ1.5_u1 3,4,5,6 -> t07_smallcubes_bJ1.5_u1.txt
+exit 0 after 129s: time 129s
+### t08_families.py 1.5 0.0 1.0 bJ1.5_u1 96 -> t08_families_bJ1.5_u1_n96.txt
+exit 0 after 10s: time 9s
+### t08_families.py 1.5 0.0 1.0 bJ1.5_u1 144 12 -> t08_families_bJ1.5_u1_n144.txt
+exit 0 after 41s: time 41s
+### t03_blocks.py 1.5 0.0 1.0 0.0 4 1 50 -> t03_blocks_bJ1.5_u1_e0_k4.txt
+exit 0 after 203s: time 202s
+### t03_blocks.py 1.5 0.0 1.0 0.02 3 2 60 -> t03_blocks_bJ1.5_u1_e0.02_k3.txt
+exit 0 after 219s: time 218s
+### t10_sweeps.py J 1.0 0.0 0.9,1.0,1.05,1.1,1.12,1.14 -> t10_sweep_J_u1_e0_a.txt

@@ -641,7 +641,24 @@ well as procedures with a hint, exponent `KL((Λ₁+ε₁)/u ‖ ½)` — theory
 nested algorithm that shows this is not something to run: at every size that can be
 simulated it needs more evaluations than the two-sample bracket above.  What carries over
 to practice is its idea: certify how *few* configurations lie above a level before spending
-accuracy on them.)  Exact equality of values
+accuracy on them.)  *With a known part that has an order parameter* (theory report §§11.20,
+11.23): stratify the sample by the order parameter — the same number of uniform points in
+every level set, weighted with the known weights of the level sets — instead of sampling
+the Gibbs measure of the known part.  For every known part that is a function of the
+order parameter and every system size this flat-histogram sample is the best fixed sample
+up to a polynomial factor (the lower bound is machine-checked:
+`symmetric_nonadaptive_queries_ge`, `truncated_weight_queries_ge`), and sampling the Gibbs
+measure of the known part is exponentially worse; the theory assumes that the weights of
+the level sets are known and that uniform points in a level set are free, and says
+nothing about producing such a sample by a Markov chain.  With coexisting states the
+configurations that decide the cost lie in the barrier region: a procedure that never
+evaluates the residual there cannot certify `ln Z` below the accuracy at which a
+perturbation of barrier configurations matters, and neighbourhoods of single
+configurations are the wrong regions to test (unrefereed: §11.23).  *If evaluations are
+made in batches* (theory report §11.24, unrefereed): the nested algorithm can be scheduled
+with one batch per rung of its ladder, so its exponent needs a number of rounds that does
+not grow with the system; two rounds already beat every fixed sample, and two rounds
+provably do not reach the exponent of full adaptivity.  Exact equality of values
 is assumed; with numerical tolerances the comparison and the envelope must be widened
 consistently.  No kernel for such transcripts is implemented here.
 
@@ -932,7 +949,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 207 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 246 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  The audit script runs it, and starts with a self-test in which

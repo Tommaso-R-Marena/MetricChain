@@ -412,5 +412,83 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XVIII.6 M4: a bound sharpened by one unit (y0 and b lowered together)
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.1 M1: the flat-histogram instance claimed hardest without any factor (Phi_g^+ <= Phi_H^+)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.1 M2: the rate function itself used as the reference landscape (no Lipschitz minorant)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.1 M3: effect of a dip with the landscape taken at the point of the set instead of the exit point
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.1 M4: landscape of an instance without its normalisation
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.2 M1: exits clipped from below only (one threshold)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.2 M2: thinning replaced by a common shift of all blocks
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.3 M1: budget of a profile without the rate function of its type (alpha = MI only)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.3 M2: the two-phase model claimed to have the uniform cube's exponent
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.3 M3: pair identity claimed for the truncated cone around a point
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.3 M4: binary centres claimed sufficient at e = 0.02
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.3 M5: a free block claimed to help already at e = 0
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.4 M1: junction with the uniform cube claimed at the critical coupling
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.4 M2: curvature of MI along the exit curve without the term -2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.4 M3: coupling term of the second-order coefficient with the wrong sign
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.5 M1: distance transform with a doubled step in one direction
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.5 M2: density of a class taken in the cube instead of its type class
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.5 M3: lower bound on the effect claimed with + ln Z instead of - ln 2 - ln Z
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.5 M4: density bound claimed with the factor 1/(n+1) instead of (n+1)^2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.6 M1: every barrier shell claimed to be its own Gibbs shell
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.6 M2: Gibbs shell of a cone taken as the minimiser of MI + I alone (the centre forgotten)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIX.6 M3: local self-consistency claimed with the constant u/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.19 M1: the free block removed (the refutation must disappear)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.20 M1: the claim weakened to "cones are within a factor 3 (formula) and 20 (truncation) of shells" (true)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.1 M1: flat histogram built with slope 2u (the first-block profile is not u-Lipschitz)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.1 M2: twins without the cap g1 + g2 (the first version of the workstream)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.1 M3: what a blind batch sees taken as a product set (each block within the budget separately)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.1 M4: separation claimed at the budget 0.05 n
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.2 M1: Jensen inequality in the wrong direction
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.2 M2: two rounds claimed to have the hinted exponent as their lower bound (theta2* = h)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.2 M3: certified accuracy D with the wrong normalisation (u p_u in place of Lambda_1)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.3 M1: two rounds claimed to cost a/2 (the coordinator's local-descent estimate)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.3 M2: second rung charged for every outer point (max in place of min)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.3 M3: balance value with the hinted exponent in place of the non-adaptive one
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.3 M4: two-round ladders claimed not to improve on a fixed sample at extensive accuracy
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.4 M1: knowledge of a nearby point claimed worthless (exponent KL(kappa || 1/2))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.4 M2: best sphere claimed to be the one on which the centre lies
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XX.4 M3: a dip claimed visible at the antipode as soon as it sticks out by one
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.22 M1: the same test at u = 0.35, where the barrier shell is safely self-consistent (the refutation must disappear)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.21 M1: the second batch sees every type (the twins coincide; the refutation must disappear)
+                  exit=1  1 TEST(S) MISBEHAVED
 
-207 mutations: 206 caught, 1 expected pass, 0 not as expected
+246 mutations: 245 caught, 1 expected pass, 0 not as expected

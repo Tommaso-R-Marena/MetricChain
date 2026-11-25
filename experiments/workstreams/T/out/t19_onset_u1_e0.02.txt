@@ -1,0 +1,34 @@
+u=1.0 e=0.02: Lam1=0.379885 p_u=0.268941 rho=0.399885; bJ* = bJ_stab(0) = 1.10289;  R_unif(e) = 0.0201820
+(1) finite differences on the boundary curve:  [MI(t) - MI(0)]/((1-lf) t^2)  against  A(lf)
+   lf=0.00 bJ=1.0529 (bJ_stab=1.1029):  t=1e-2: +0.040668  3e-3: +0.040601  1e-3: +0.040595   A = +0.040594
+   lf=0.00 bJ=1.1529 (bJ_stab=1.1029):  t=1e-2: -0.040538  3e-3: -0.040589  1e-3: -0.040594   A = -0.040594
+   lf=0.05 bJ=1.1882 (bJ_stab=1.2382):  t=1e-2: +0.038213  3e-3: +0.038154  1e-3: +0.038149   A = +0.038148
+   lf=0.05 bJ=1.2882 (bJ_stab=1.2382):  t=1e-2: -0.038080  3e-3: -0.038142  1e-3: -0.038147   A = -0.038148
+   lf=0.15 bJ=1.5176 (bJ_stab=1.5676):  t=1e-2: +0.033387  3e-3: +0.033269  1e-3: +0.033258   A = +0.033257
+   lf=0.15 bJ=1.6176 (bJ_stab=1.5676):  t=1e-2: -0.033086  3e-3: -0.033241  1e-3: -0.033255   A = -0.033257
+(2) solver: r_mu(e) of S3(lf, p_u) against the diluted uniform-cube value (1-lf) KL(rho'||1/2)
+   lf=0.03 bJ = bJ_stab-0.030 = 1.1521:  r_mu(e) = 0.01933372   diluted value = 0.01933372   difference -1.55e-13   [0s]
+   lf=0.03 bJ = bJ_stab-0.005 = 1.1771:  r_mu(e) = 0.01933372   diluted value = 0.01933372   difference -2.02e-13   [0s]
+   lf=0.03 bJ = bJ_stab+0.005 = 1.1871:  r_mu(e) = 0.01932763   diluted value = 0.01933372   difference -6.08e-06   [0s]
+   lf=0.03 bJ = bJ_stab+0.030 = 1.2121:  r_mu(e) = 0.01899377   diluted value = 0.01933372   difference -3.40e-04   [0s]
+   lf=0.08 bJ = bJ_stab-0.030 = 1.2979:  r_mu(e) = 0.01792370   diluted value = 0.01792370   difference -3.32e-13   [0s]
+   lf=0.08 bJ = bJ_stab-0.005 = 1.3229:  r_mu(e) = 0.01784846   diluted value = 0.01792370   difference -7.52e-05   [0s]
+   lf=0.08 bJ = bJ_stab+0.005 = 1.3329:  r_mu(e) = 0.01770197   diluted value = 0.01792370   difference -2.22e-04   [0s]
+   lf=0.08 bJ = bJ_stab+0.030 = 1.3579:  r_mu(e) = 0.01732963   diluted value = 0.01792370   difference -5.94e-04   [0s]
+(3) marginal weight and predicted onset
+   cost of a free block  c = R_unif(e) - e R_unif'(e) = 0.028301;   k = d bJ_stab/d lf (0) = 2.5446
+   binary branch: bJ=1.1050  R = 0.0201808  deficit 1.169e-06 = 0.2619 * (bJ - bJ*)^2
+   binary branch: bJ=1.1200  R = 0.0201047  deficit 7.727e-05 = 0.2638 * (bJ - bJ*)^2
+   binary branch: bJ=1.1250  R = 0.0200527  deficit 1.293e-04 = 0.2644 * (bJ - bJ*)^2
+   binary branch: bJ=1.1300  R = 0.0199875  deficit 1.945e-04 = 0.2645 * (bJ - bJ*)^2
+   kappa = 0.2641:  predicted onset of the free block  bJ** = bJ* + c/(2 kappa k) = 1.1239
+   bJ      marginal weight lf_stab(bJ)   [bJ_stab(lf_stab) = bJ]     diluted value at lf_stab
+   1.130   0.0105                                              0.0198843
+   1.140   0.0143                                              0.0197764
+   1.150   0.0181                                              0.0196696
+   1.200   0.0365                                              0.0191500
+   1.300   0.0709                                              0.0181793
+   1.500   0.1316                                              0.0164741
+   1.750   0.1952                                              0.0146974
+   2.000   0.2483                                              0.0132238
+time 0s

@@ -1,0 +1,5 @@
+### t13_multiblock.py 1.5 0.3 0.0001,0.0003,0.0006,0.001 -> t13_multiblock_bJ1.5_u0.3.txt
+exit 1 after 16s: ZeroDivisionError: float division by zero
+### t04_table.py 1.5 0.0 0.3 0.0,0.0001,0.0003,0.0006,0.001 -> t04_table_bJ1.5_u0.3.txt
+exit 0 after 207s: time 207s
+### queue5 done

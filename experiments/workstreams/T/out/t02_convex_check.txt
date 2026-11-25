@@ -1,0 +1,32 @@
+== convex I: cone formula vs single-letter sup-min; collapse to the hardest additive instance; pair identity
+
+bJ=0.5 bB=0.0 u=1.0: minimum of I at 0.50000; contact set [(0.1561, 0.8439)]; E = 0.120115
+  e=0.000000: R_H sup-min 0.02913914 at (m,a,b)=(0.5000,0.2689,0.2689) | cone formula 0.02913914 (m=0.5000) [diff +4.5e-13] | max_gamma R_gamma 0.02913914 at gamma*=+0.0000 [diff -2.8e-13; sup-min at gamma*: 0.02913914] | R_0 0.02913914
+        pair identity at X = e + R_H = 0.029139: n_mu* = 0.02913914 [diff +1.0e-14], truncated cone (m=0.500) = 0.02913914 [diff +6.7e-10];  with R_0 in its place: theta_na(e + R_0) = 0.02913914 against R_0 = 0.02913914   [40s]
+  e=0.036034: R_H sup-min 0.01420635 at (m,a,b)=(0.5000,0.2689,0.2689) | cone formula 0.01420635 (m=0.5000) [diff +2.7e-13] | max_gamma R_gamma 0.01420635 at gamma*=-0.0000 [diff -3.1e-13; sup-min at gamma*: 0.01420635] | R_0 0.01420635
+        pair identity at X = e + R_H = 0.050241: n_mu* = 0.01420635 [diff +2.0e-13], truncated cone (m=0.500) = 0.01420635 [diff +1.2e-09];  with R_0 in its place: theta_na(e + R_0) = 0.01420635 against R_0 = 0.01420635   [73s]
+
+bJ=0.5 bB=0.3 u=1.0: minimum of I at 0.75042; contact set [(0.3176, 0.9198)]; E = 0.099123
+  e=0.000000: R_H sup-min 0.02398316 at (m,a,b)=(0.4371,0.1310,0.4731) | cone formula 0.02398316 (m=0.4371) [diff -2.6e-14] | max_gamma R_gamma 0.02398316 at gamma*=+0.2147 [diff +1.5e-14; sup-min at gamma*: 0.02398316] | R_0 0.02265916
+        pair identity at X = e + R_H = 0.023983: n_mu* = 0.02398316 [diff +1.7e-13], truncated cone (m=0.437) = 0.02398373 [diff +5.7e-07];  with R_0 in its place: theta_na(e + R_0) = 0.02528640 against R_0 = 0.02265916   [119s]
+  e=0.029737: R_H sup-min 0.01168528 at (m,a,b)=(0.4282,0.1323,0.4703) | cone formula 0.01168528 (m=0.4282) [diff +8.4e-15] | max_gamma R_gamma 0.01168528 at gamma*=+0.2053 [diff -9.0e-15; sup-min at gamma*: 0.01168528] | R_0 0.01062083
+        pair identity at X = e + R_H = 0.041422: n_mu* = 0.01168528 [diff +1.8e-13], truncated cone (m=0.428) = 0.01168528 [diff +4.0e-11];  with R_0 in its place: theta_na(e + R_0) = 0.01224026 against R_0 = 0.01062083   [160s]
+
+bJ=0.9 bB=0.2 u=2.0: minimum of I at 0.83068; contact set [(0.0367, 0.9844)]; E = 0.415454
+  e=0.000000: R_H sup-min 0.09321538 at (m,a,b)=(0.4196,0.0917,0.1536) | cone formula 0.09321538 (m=0.4196) [diff +2.2e-16] | max_gamma R_gamma 0.09321538 at gamma*=+0.3944 [diff +2.2e-16; sup-min at gamma*: 0.09321538] | R_0 0.07194050
+        pair identity at X = e + R_H = 0.093215: n_mu* = 0.09321538 [diff +1.2e-13], truncated cone (m=0.420) = 0.09321943 [diff +4.0e-06];  with R_0 in its place: theta_na(e + R_0) = 0.11383401 against R_0 = 0.07194050   [201s]
+  e=0.124636: R_H sup-min 0.04488822 at (m,a,b)=(0.4148,0.0935,0.1508) | cone formula 0.04488822 (m=0.4148) [diff +8.2e-15] | max_gamma R_gamma 0.04488822 at gamma*=+0.3908 [diff -2.6e-14; sup-min at gamma*: 0.04488822] | R_0 0.02948370
+        pair identity at X = e + R_H = 0.169524: n_mu* = 0.04488822 [diff -3.7e-14], truncated cone (m=0.415) = 0.04488829 [diff +7.4e-08];  with R_0 in its place: theta_na(e + R_0) = 0.05236883 against R_0 = 0.02948370   [242s]
+
+bJ=-1.0 bB=0.3 u=1.0: minimum of I at 0.57472; contact set [(0.4501, 0.6946)]; E = 0.117461
+  e=0.000000: R_H sup-min 0.02850905 at (m,a,b)=(0.5168,0.2109,0.3361) | cone formula 0.02850905 (m=0.5168) [diff +8.3e-15] | max_gamma R_gamma 0.02850905 at gamma*=+0.0023 [diff -4.3e-13; sup-min at gamma*: 0.02850905] | R_0 0.02850890
+        pair identity at X = e + R_H = 0.028509: n_mu* = 0.02850905 [diff -1.0e-14], truncated cone (m=0.517) = 0.02850982 [diff +7.7e-07];  with R_0 in its place: theta_na(e + R_0) = 0.02850998 against R_0 = 0.02850890   [284s]
+  e=0.035238: R_H sup-min 0.01390158 at (m,a,b)=(0.5133,0.2104,0.3369) | cone formula 0.01390158 (m=0.5133) [diff -1.1e-14] | max_gamma R_gamma 0.01390158 at gamma*=-0.0015 [diff +1.6e-14; sup-min at gamma*: 0.01390158] | R_0 0.01390153
+        pair identity at X = e + R_H = 0.049140: n_mu* = 0.01390158 [diff +2.4e-13], truncated cone (m=0.513) = 0.01390249 [diff +9.0e-07];  with R_0 in its place: theta_na(e + R_0) = 0.01390243 against R_0 = 0.01390153   [323s]
+
+bJ=1.0 bB=0.1 u=1.0: minimum of I at 0.80591; contact set [(0.0762, 0.9531)]; E = 0.115250
+  e=0.000000: R_H sup-min 0.02796382 at (m,a,b)=(0.4038,0.2486,0.2903) | cone formula 0.02796382 (m=0.4038) [diff +2.4e-14] | max_gamma R_gamma 0.02796382 at gamma*=+0.2000 [diff -5.7e-12; sup-min at gamma*: 0.02796382] | R_0 0.02027115
+        pair identity at X = e + R_H = 0.027964: n_mu* = 0.02796382 [diff +0.0e+00], truncated cone (m=0.404) = 0.02796384 [diff +2.4e-08];  with R_0 in its place: theta_na(e + R_0) = 0.03650750 against R_0 = 0.02027115   [374s]
+  e=0.034575: R_H sup-min 0.01363464 at (m,a,b)=(0.4027,0.2506,0.2881) | cone formula 0.01363464 (m=0.4027) [diff +3.8e-15] | max_gamma R_gamma 0.01363464 at gamma*=+0.2000 [diff -8.9e-14; sup-min at gamma*: 0.01363464] | R_0 0.00749071
+        pair identity at X = e + R_H = 0.048210: n_mu* = 0.01363464 [diff +2.4e-15], truncated cone (m=0.403) = 0.01363515 [diff +5.0e-07];  with R_0 in its place: theta_na(e + R_0) = 0.01709455 against R_0 = 0.00749071   [424s]
+time 424s

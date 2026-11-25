@@ -50,6 +50,8 @@ import proofs.Frontiers.CoverStability
 import proofs.Frontiers.SetLimit
 import proofs.Frontiers.TypeQuantiles
 import proofs.Frontiers.SymmetricSampling
+import proofs.Frontiers.TwoRounds
+import proofs.Frontiers.GroupSampling
 import proofs.AuditCommand
 
 /-!
@@ -461,6 +463,23 @@ import proofs.AuditCommand
 #print axioms MetricChain.SymmetricSampling.perm_fraction_le
 #print axioms MetricChain.SymmetricSampling.symmetric_queries_ge
 #print axioms MetricChain.SymmetricSampling.symmetric_queries_witness
+#print axioms MetricChain.TwoRounds.TwoRound.output_eq_of_virtual
+#print axioms MetricChain.TwoRounds.card_distinguished_le
+#print axioms MetricChain.TwoRounds.prob_output_ne_ge
+#print axioms MetricChain.TwoRounds.two_round_bound
+#print axioms MetricChain.TwoRounds.two_round_witness
+#print axioms MetricChain.GroupSampling.gdens_mono
+#print axioms MetricChain.GroupSampling.gdens_smul
+#print axioms MetricChain.GroupSampling.lowDens_shift
+#print axioms MetricChain.GroupSampling.regLevel_admissible
+#print axioms MetricChain.GroupSampling.regLevel_lowDens_le
+#print axioms MetricChain.GroupSampling.regLevel_smul
+#print axioms MetricChain.GroupSampling.truncate_admissible
+#print axioms MetricChain.GroupSampling.truncate_gdens_le
+#print axioms MetricChain.GroupSampling.group_nonadaptive_queries_ge
+#print axioms MetricChain.GroupSampling.group_queries_ge
+#print axioms MetricChain.GroupSampling.gdens_mul_card_orbit
+#print axioms MetricChain.GroupSampling.group_witness
 #print axioms MetricChain.GamePair.exactRec_congr
 #print axioms MetricChain.GamePair.HintShape.pair
 #print axioms MetricChain.GamePair.HintShape.exists_pair

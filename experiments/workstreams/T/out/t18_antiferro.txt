@@ -1,0 +1,10 @@
+bJ=-1.0: contact set [(0.376, 0.624)]; cone formula R(0) = 0.0291391 at m = 0.5000; by centre type [(0.3, 0.0243799), (0.4, 0.0279454), (0.45, 0.0288405), (0.5, 0.0291391)]; symmetric sup-min 0.0291391
+bJ=-2.0: contact set [(0.417, 0.583)]; cone formula R(0) = 0.0291391 at m = 0.5000; by centre type [(0.3, 0.0241982), (0.4, 0.0278922), (0.45, 0.0288267), (0.5, 0.0291391)]; symmetric sup-min 0.0291391
+bJ=-8.0: contact set [(0.472, 0.528)]; cone formula R(0) = 0.0291391 at m = 0.5000; by centre type [(0.3, 0.0238503), (0.4, 0.0277874), (0.45, 0.0287993), (0.5, 0.0291391)]; symmetric sup-min 0.0291391
+bJ=-40.0: contact set [(0.494, 0.506)]; cone formula R(0) = 0.0291391 at m = 0.5000; by centre type [(0.3, 0.023679), (0.4, 0.0277344), (0.45, 0.0287853), (0.5, 0.0291391)]; symmetric sup-min 0.0291391
+bJ=1.5: largest chord slope from the top of the barrier u_top = 0.28153 (chord to kappa = 0.1183); largest slope of I on the barrier 0.41509; mean slope to the well 0.26834
+   u = 0.27: contact set [(0.0483, 0.1152), (0.8848, 0.9517)]
+   u = 0.28: contact set [(0.0477, 0.1179), (0.8821, 0.9523)]
+   u = 0.2843: contact set [(0.0474, 0.1191), (0.4962, 0.5038), (0.8809, 0.9526)]
+   u = 0.29: contact set [(0.0471, 0.1207), (0.4884, 0.5116), (0.8793, 0.9529)]
+   u = 0.3: contact set [(0.0465, 0.1237), (0.4745, 0.5255), (0.8763, 0.9535)]

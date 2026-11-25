@@ -1307,57 +1307,197 @@ non-adaptive lower bound are easy for two rounds; single hidden dips do not sepa
 rounds from many; a separation needs nested structure with hidden centres.  Output in
 the session's scratch directory (`ws/U/`) until integrated.
 
-### Resume here (cycle 10, seventh checkpoint)
+### Cycle 10, ninth checkpoint — a known part with interactions (mean-field models); rounds of adaptivity (theory report §§11.23, 11.24; 2026-11-25)
 
-Verified state: every module under `proofs/` (53 files) builds with zero warnings and is walked
-by the axiom audit (3369 declarations); the harness (110 registered tests: 92 that must survive,
-18 documented refutations) and its mutation tests (207 mutations: 206 caught, one expected
-pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 (R5, R6,
-R_P), §11.18 (R7), §11.19 (R8: "proved"), §11.20 (R9: proved; two gaps closed).
+Two workstreams reported, both were verified by the coordinator and integrated; one
+referee and one new workstream were commissioned.
+
+**Workstream T** (`docs/workstreams/T_REPORT.md`; scripts `experiments/workstreams/T/`) →
+theory report §11.23.  The first known part that is not a product measure: a function of
+the type (Curie–Weiss, one phase or two).
+* *What it proves.*  By symmetry alone, for every `n` and every exchangeable reference
+  measure: the type-stratified (flat-histogram) sample is optimal among non-adaptive
+  algorithms up to a polynomial factor, every algorithm needs `(1 − 2δ)/maxdens(D)`
+  evaluations at a symmetric instance, the flat-histogram instance is the hardest symmetric
+  one (Theorem 11.76).  For every rate function the cost of every algorithm at a symmetric
+  instance has a single-letter exponent — a supremum over block profiles (Theorem 11.78;
+  the isoperimetric theorem of §11.20 with the typical-subset lemma applied inside one type
+  class, where the product measure `Bernoulli(k/n)ⁿ` is uniform).  Non-adaptive algorithms:
+  cones around self-consistent shells against the sheared tail function; the exponent
+  function is 1-Lipschitz and the shear nondecreasing without any convexity (Theorem
+  11.79).  Convex rate functions: everything of §11.20 except the nested algorithm
+  (Theorem 11.80).  Ferromagnets are never harder than the uniform cube (Proposition 11.81).
+* *What it finds with two phases* (Proposition 11.82; numbers, each a proved lower bound):
+  the cone formula of the field case gives `0.01070` where the best set around one centre —
+  a shell in the barrier type class — gives `0.0251012` (`βJ = 1.5`, `u = 1`); and **beyond the
+  accuracy `e₀ = 0.00181` sets around one centre are not extremal** — profiles with a free
+  block do better.  This refutes a statement of the coordinator's brief (D49, item 1).  A
+  shallow barrier is invisible to every exponent (up to `βJ* = 1.125`).
+* *What the coordinator did.*  Re-derived the proofs of Theorems 11.76, 11.78(a), 11.79,
+  11.80(a), Lemma 11.77 and Proposition 11.81(a); read Theorems 11.78(b), 11.80(b), (c).
+  Re-computed every headline number with two inner solvers that share no approximation
+  (`experiments/coordinator_checks/meanfield_T/`, four check scripts): no discrepancy.  Made
+  two solver errors of exactly the kind the workstream reports about itself; both were
+  found because an outer maximiser climbed onto them (D49, item 7).  Computed the slice
+  exponents (the slice of type `½` has the uniform cube's exponent; `slice_check.py`) and
+  found that a threshold quoted in two earlier documents was a finite difference
+  (`E = 0.212295`, not `0.21227`; corrected in THY-MSG-0009).  Applied the workstream's three
+  late corrections after checking each (`tv_check4.py`): the threshold `u_top = 0.2815`, the
+  failure of the pair identity for cones around shells at `u = 0.30`, the onset of the free
+  block at a coupling `βJ** > βJ*`.
+* *Open.*  **The adaptive exponent without a hint for an interacting known part** (the
+  nested algorithm fails: fibre averages are not Lipschitz relative to a reference); the
+  value of the single-letter supremum beyond `e₀`; binary optimality at vanishing accuracy;
+  the non-adaptive exponent at `u = 0.30`.
+* *Commissioned.*  **Workstream W** (`docs/workstreams/W_brief.md`): sites of several types
+  with larger alphabets, single-site known parts and site envelopes — the heteropolymer
+  product landscape, for which the theory without a hint is a sketch.
+  **Referee R10** on the report and on §11.23 (`docs/reviews/R10_brief.md`).
+  **Workstream V** (`docs/workstreams/V_brief.md`) on the adaptive exponent, with the
+  coordinator's observation to attack first: for an exchangeable measure the two blocks of
+  a split are independent *given the type of the inner block*, so
+  `A = Σ_{t_i}Σ_a ω_{t_i}(a)W_{t_i}(a)` with outer functions `W_{t_i}` (means over inner slices) that
+  are exactly `u`-Lipschitz and exchangeable outer weights — the property that fails is
+  restored at the price of inner problems on slices, whose accuracy is needed only
+  relative to the fibre total.  Unproved; the workstream's report on why the nested
+  algorithm fails examined a different decomposition (fixed total type).
+
+**Workstream U** (`docs/workstreams/U_REPORT.md`; scripts `experiments/workstreams/U/`) →
+theory report §11.24.  Rounds of adaptivity on the uniform cube.
+* *What it proves.*  The two-level algorithm can be scheduled with one batch per rung
+  (Theorem 11.84: the candidate set of a rung is computed from empirical levels of the
+  previous rung; on the good event the result is identical to the sequential algorithm's),
+  so the nested algorithms need a number of rounds independent of `n` and the round-limited
+  exponents decrease to `h`.  Two rounds: `τ^{(2)} ≤ T^{(2)}(0)` (`0.624a` at `u = 1`; the golden
+  ratio times `a` for small slopes), and `τ^{(2)} ≥ θ₂*(u) > h` for every slope (`0.359a = 1.37h` at
+  `u = 1`; Lemma 11.85, Theorem 11.86): a hierarchy with at least three levels.  The hard
+  instances: a flat histogram in one block of coordinates that dilutes the first batch,
+  and a dip in a second block that opens where a blind batch stops seeing each shell.
+* *What the coordinator did.*  Checked Theorem 11.84 line by line against the proof of
+  Theorem 11.56 (`K_REPORT.md` §2.4: its two claims use steps 2, 6, 7 and one more family of
+  Chernoff events).  Re-derived Lemma 11.85 with a "virtual run" in place of conditional
+  probabilities, and **machine-checked it for two rounds** (`proofs/Frontiers/TwoRounds.lean`:
+  `card_distinguished_le`, `two_round_bound`, `two_round_witness`; compiled at the first
+  attempt but for three small errors in the witness).  Re-computed the two- and three-round
+  upper bounds, `θ₂*` at five slopes and the exact finite-`n` twins from the statement of the
+  theorem (`experiments/coordinator_checks/rounds_U/`): at `n = 3200`, `u = 1`, accuracy 1, two
+  rounds need `e^{0.0368n}` against `e^{0.0301n}` for all algorithms.
+* *What was wrong on the coordinator's side* (D50): the expectation that the separation
+  would come from nested basins with hidden centres, and a scratch estimate "`r` rounds of
+  local descent cost `a/r`" that bounds nothing.
+* *Open.*  Whether three rounds reach `h`; the exact two-round exponent; the rate.  Not
+  refereed.
+
+**A generalisation found while writing up** (coordinator; theory report, remark after
+Theorem 11.76; `proofs/Frontiers/GroupSampling.lean`, machine-checked).  The every-`n`
+statements of Theorem 11.76 need no cube and no coordinate permutations: for any finite
+group acting on the configurations with an invariant (possibly asymmetric) envelope and
+an invariant reference measure, the low sets of an admissible residual in any two orbits
+satisfy the normalised matching inequality with the shift `d(a, b)` — *because* a random
+group element sends a point to a uniform point of its orbit and admissibility is
+preserved; no coupling of adjacent orbits has to be constructed (the workstream's sketch
+of extensions assumed one).  Consequences, machine-checked: truncation at regularised
+orbit-wise levels stays admissible; `(1 − 2δ)/q` evaluations for non-adaptive algorithms;
+`(1 − 2δ)/q` for every algorithm at an invariant instance.  The uniform cube with all its
+isometries is the one-orbit case (the every-`n` form of "a uniform sample is optimal among
+fixed samples"); the statement is empty when the number of orbits is exponential.
+
+**Harness.**  Block XIX (six tests on §11.23), block XX (four tests on §11.24), and four
+documented refutations: DEAD.19 (binary centres suffice with two phases), DEAD.20 (cones
+around points attain the exponents with two phases), DEAD.21 (two rounds reach the
+adaptive exponent), DEAD.22 (cones around shells attain the non-adaptive exponent
+whenever the top of the barrier is a contact point).  39 new mutations, all detected
+(two of them only after a test with tolerances too loose for its sizes was tightened:
+D50, item 6(c); and one — the control of DEAD.22 — exposed a scan range in that test that
+would have "refuted" the statement also where it is true: D49, item 10).  Totals: 124 registered tests (102 must survive, 22 documented
+refutations); 246 mutations (245 caught, one expected pass).
+
+**Collaboration.**  THY-MSG-0009 (both sections, with their labels; the batched schedule
+as the one to implement for THY-REQ-0001; corrections of two reference values of
+THY-REQ-0007 and of one sentence of THY-RES-0002) and THY-REQ-0009 (four computations that
+would decide open questions: binary optimality at vanishing accuracy, the supremum beyond
+`e₀`, the non-adaptive exponent near the threshold, three rounds).  `research/ubuntu-engineering`
+unchanged at `db56d05` at 10:48, 12:17 and 15:05 UTC.
+
+**Honest assessment.**  §11.23: what is new is less the mean-field computation than two
+structural facts — permutation symmetry alone makes the flat-histogram ensemble the
+optimal fixed sample and its instance the hardest symmetric one, for every `n`; and at
+phase coexistence the extremal perturbations are shells of barrier configurations,
+eventually on part of the system only.  The proofs are the method of types inside a type
+class; the theorem that carries the upper bounds (11.78(b)) is "the same proof with one
+change" and has not been read by a referee.  The adaptive problem — the one that made the
+field case interesting — is open.  §11.24: the upper bound is a re-scheduling, the lower
+bound a coupling argument of a known kind with an instance that is not of the usual kind;
+one non-trivial step of a hierarchy, and no evidence either way about the next.
+
+**Audit at this checkpoint:** `scripts/audit_all.sh` exits 0; 55 Lean files, 3418 audited
+declarations; harness and mutation totals as above.
+
+### Resume here (cycle 10, ninth checkpoint)
+
+Verified state: every module under `proofs/` (55 files) builds with zero warnings and is walked
+by the axiom audit (3418 declarations); the harness (124 registered tests: 102 that must
+survive, 22 documented refutations) and its mutation tests (246 mutations: 245 caught, one
+expected pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17
+(R5, R6, R_P), §11.18 (R7), §11.19 (R8: "proved"), §11.20 (R9: proved; two gaps closed).
 Machine-checked: §11.21.  **Checked by the coordinator with independent code, no separate
-referee:** §11.22.  **Not refereed:** the revised Theorem 11.44, Proposition 11.50.  **Not
-checked by anyone:** the two-level algorithms at scale with real inner brackets on non-flat
-instances, or with four levels (THY-REQ-0001); the nested algorithm with a field end to
-end; Theorem 11.63 on sets without symmetry for `n > 6`.  Running: workstream T (item 1 below)
-and workstream U (item 6, in the model of rounds); see the entry above.  In priority order:
+referee:** §11.22, §11.24.  **Checked by the coordinator, referee at work:** §11.23.  **Not
+refereed:** the revised Theorem 11.44, Proposition 11.50.  **Not checked by anyone:** the
+two-level algorithms at scale with real inner brackets on non-flat instances, or with four
+levels, or in the batched schedule (THY-REQ-0001); the nested algorithm with a field end
+to end; Theorem 11.63 on sets without symmetry for `n > 6`.  Running at the time of
+writing: **referee R10** (§11.23; directory `scratchpad/referee10/` of the session, report to
+be copied to `docs/reviews/R10_referee_report.md`), **workstream V** (the adaptive exponent
+for exchangeable known parts; `docs/workstreams/V_brief.md`) and **workstream W** (sites of
+several types with larger alphabets — the heteropolymer product landscape;
+`docs/workstreams/W_brief.md`).  If the session that started them has ended, their briefs
+are complete and they can be re-commissioned as written.  In
+priority order:
 
-1. **Known parts with interactions** — the largest open item of the query-complexity
-   theory (§12 item 2(d)(v)).  The natural first case, not yet attempted: a known part that
-   is a function of the type, `f(x) = nφ(|x|/n)` (mean-field models, Curie–Weiss).  Its Gibbs
-   measure is uniform on type classes, so Theorem 11.61(a), (b) hold verbatim and every
-   exponent is a type-level computation in which the known part enters only through the
-   rate function `I(κ)` of the type; conjecture: for convex `I` everything of §11.20 carries
-   over with `KL(·‖p)` replaced by `I` (reference: `ψ_H = −n·v`, `v` the largest `u`-Lipschitz
-   minorant of `I`; hardest instances additive); for non-convex `I` (two phases) the least
-   favourable instance is the flat-histogram one and is *not* additive.  Test the pair
-   identity (necessary condition of D45) numerically before proving anything.
-2. **Synchronise with `research/ubuntu-engineering`** at every checkpoint (read-only; never
-   merge).  Open on their side: THY-REQ-0001 (not started; target Algorithm 2L⁺), -0003,
-   -0004, the rest of -0002, -0007 (narrowed by THY-MSG-0008), -0008 (new).
-3. **The limit shape** (§12 item 9(a1)–(a6)): Conjecture 11.75; a second-level cluster
-   programme (two-shell cluster or six-ring) for the seven vertices of `𝒦₂` that no periodic
-   system attains; the routing lemma for periodic chain systems; an independent referee
-   for §11.22 if it is to carry more weight than an answer to a question.
-4. **Machine-check that the game functions of the two problems are game functions** in the
-   sense of `GamePair.lean` (continuity, the two zeros, the two linear bounds; for the field
-   also the closed form of Theorem 11.59(b)) and the shear law for their non-adaptive
-   exponents — the abstract part is done (§11.21), these identifications are on paper.
-   (Done after the checkpoint: Lemma 11.70(a), (b), `proofs/Frontiers/CoverStability.lean`, and
-   Fekete's lemma for sets with the covering-number sandwich, `proofs/Frontiers/SetLimit.lean`.
-   Still on paper: Lemmas 11.67 and 11.68 — the lattice input.)
-5. **A weighted Harper-type inequality** for the type-uniform measure and the slack of the
-   flat-histogram reference (finite `n`, usable error term) — it would make the nested
-   algorithm with a field explicit and is the missing ingredient for bounded accuracies
-   with a field; the exact maximisers on `Q_4` are not always one-centre balls (THY-REQ-0007).
-6. **Below the exponential scale** (§12 item 2(d)(i),(ii)): quantify the `o(n)`; a lower bound
-   for a bounded number of levels or rounds matching `τ_k`; exponentially small accuracies.
-7. **A machine-checked count** for Theorems 11.52 / 11.56.
-8. **Chains, the rest** (theory report §12 item 9(b)–(f)): an upper bound for
-   "pair-additive plus a small remainder"; randomised algorithms for linear classes; the
-   cost of checking in the profile format; whether realistic residuals have a small
-   per-pair constant (THY-REQ-0003).
-9. Larger alphabets and several site types with a field (§11.20, remark (4): a sketch).
-10. The list of the earlier checkpoints, below, is otherwise unchanged.
+1. **Act on referee R10** when it reports: §11.23 is the newest foundation and is
+   unrefereed; its critical step is Theorem 11.78(b).
+2. **The adaptive exponent without a hint for an interacting known part** (Conjecture
+   11.83, O4; workstream V).  Conjecture: `R_H(ε₁)`.  The route to verify first: nesting by
+   the type of the inner block (§11.23, "a possible repair").  Fallbacks that are proved or
+   nearly so: the uniform cube's exponent for ferromagnets by a mixture of fields
+   (Proposition 11.81(c), a sketch); slices in isolation (the slice of type `½` has the
+   uniform cube's exponent numerically).
+3. **Synchronise with `research/ubuntu-engineering`** at every checkpoint (read-only; never
+   merge).  Open on their side: THY-REQ-0001 (not started; target Algorithm 2L⁺, now in the
+   batched schedule of Theorem 11.84), -0003, -0004, the rest of -0002, -0007, -0008, -0009.
+4. **Known parts with spatial structure** — the next foundational step, not started:
+   nearest-neighbour interactions along the sequence (a Markov chain as reference
+   measure).  What carries over in principle: the measure is uniform on *Markov* type
+   classes (pair counts), symmetric instances are functions of the pair type, random
+   centres can be drawn from a Markov type class, and the method of types has a Markov
+   version; what does not: the one-flip coupling of adjacent classes is no longer exact (a
+   flip changes two pair counts and its multiplicity depends on triples), so Theorem
+   11.76(a) can hold only up to polynomial factors, and there is no transitive group, so
+   Theorem 11.76(b) needs random centres instead of random permutations (as Theorem
+   11.27(c) does for product measures).  The expected output: "two-letter" formulas with
+   conditional entropies of Markov chains in place of `MI`.
+5. **Rounds** (§11.24): is `τ^{(3)} = h`?  A referee for §11.24 if it is to carry weight.  The
+   general-`r` form of Lemma 11.85 in Lean (two rounds are done).
+6. **Two phases** (§11.23): binary optimality at vanishing accuracy (C1); the supremum
+   beyond `e₀` (O2); the non-adaptive exponent at `u = 0.30` (O5); a proof that the slice of
+   type `½` and antiferromagnets without a field have the uniform cube's exponents.
+   Machine-checking Theorem 11.76(c) is routine and not done.
+7. **The limit shape** (§12 item 9(a1)–(a6)): Conjecture 11.75; a second-level cluster
+   programme for the seven vertices of `𝒦₂` that no periodic system attains; the routing
+   lemma for periodic chain systems; an independent referee for §11.22.
+8. **Machine-check that the game functions of the problems are game functions** in the
+   sense of `GamePair.lean` (cube, field, and now convex mean-field models: Theorem
+   11.80(c) is a paper proof), and the shear law for their non-adaptive exponents.  Still on
+   paper as well: Lemmas 11.67 and 11.68 (the lattice input of §11.22).
+9. **A weighted Harper-type inequality** for the type-uniform measure and the slack of the
+   flat-histogram reference (finite `n`, usable error term; THY-REQ-0007).
+10. **Below the exponential scale** (§12 item 2(d)(i)): quantify the `o(n)`; exponentially
+    small accuracies.  **A machine-checked count** for Theorems 11.52 / 11.56 / 11.84.
+11. **Chains, the rest** (theory report §12 item 9(b)–(f)); larger alphabets and several
+    site types with a field (§11.20, remark (4): a sketch — **workstream W is on it**; the
+    every-`n` half is machine-checked for any symmetry group, `GroupSampling.lean`);
+    mean-field Potts models (§11.23, extensions: a sketch).
+12. The list of the earlier checkpoints, below, is otherwise unchanged.
 
 ### State at the end of cycle 9 (superseded in part by the list above)
 

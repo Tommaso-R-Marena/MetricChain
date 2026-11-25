@@ -1,0 +1,7 @@
+u=1.0 e=0.0: slice 1/2: sup = 0.0291415 at (m, a) = [0.50004 0.26925] (p_u = 0.26894);  uniform cube 0.0291391;  symmetric shell on the slice 0.0291394
+u=1.0 e=0.02: slice 1/2: sup = 0.0201837 at (m, a) = [0.50104 0.26905] (p_u = 0.26894);  uniform cube 0.0201820;  symmetric shell on the slice 0.0201822
+u=2.0 e=0.0: slice 1/2: sup = 0.0972840 at (m, a) = [0.50098 0.11936] (p_u = 0.11920);  uniform cube 0.0972809;  symmetric shell on the slice 0.0972852
+u=2.0 e=0.02: slice 1/2: sup = 0.0882389 at (m, a) = [0.50005 0.11953] (p_u = 0.11920);  uniform cube 0.0882347;  symmetric shell on the slice 0.0882387
+u=1 e=0 slice 0.4: sup over binary centres = 0.028092 at (m, a) = [0.56  0.795];  uniform cube 0.029139
+u=1 e=0 slice 0.3: sup over binary centres = 0.024689 at (m, a) = [0.59 0.86];  uniform cube 0.029139
+u=1 e=0 slice 0.2: sup over binary centres = 0.018902 at (m, a) = [0.36 0.59];  uniform cube 0.029139

@@ -1,0 +1,15 @@
+== A. fast (clipping, v) against slow (generic convex programme per exit type, I): random profiles, two-phase model
+   k=2 e=-0.02  fast 0.0000000  slow -0.0000000  diff +2.2e-16   [2s]
+   k=3 e=-0.02  fast 0.0031185  slow 0.0031203  diff -1.8e-06   [3s]
+   k=3 e=+0.01  fast 0.0027388  slow 0.0027392  diff -4.5e-07   [4s]
+   k=3 e=+0.03  fast 0.0000000  slow -0.0000000  diff +5.6e-17   [5s]
+   k=3 e=+0.03  fast 0.0000000  slow -0.0000000  diff +1.1e-16   [7s]
+   k=2 e=+0.03  fast 0.0000000  slow -0.0000000  diff +5.6e-17   [8s]
+   k=2 e=+0.03  fast 0.0000000  slow 0.0000000  diff +0.0e+00   [9s]
+   k=4 e=-0.02  fast 0.0035808  slow 0.0035808  diff -3.6e-10   [10s]
+   k=3 e=+0.03  fast 0.0000000  slow -0.0000000  diff +1.1e-16   [11s]
+   k=2 e=+0.01  fast 0.0000000  slow -0.0000000  diff +1.1e-16   [13s]
+   k=3 e=+0.01  fast 0.0000000  slow -0.0000000  diff +1.1e-16   [15s]
+   k=2 e=-0.02  fast 0.0009695  slow 0.0009856  diff -1.6e-05   [16s]
+   k=2 e=+0.00  fast -0.0000000  slow -0.0000000  diff +5.6e-17   [17s]
+   worst |fast - slow| = 1.6e-05

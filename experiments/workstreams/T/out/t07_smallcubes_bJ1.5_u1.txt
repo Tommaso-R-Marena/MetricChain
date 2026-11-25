@@ -1,0 +1,18 @@
+Curie-Weiss bJ=1.5 bB=0.0 u=1.0; R from table 'bJ1.5_u1' (44 points, e in [-0.108,0.064])
+
+n = 3: J_t = [1.0339 1.9353 1.9353 1.0339], V_n = [1.0339 1.9353 1.9353 1.0339], Z_H = 4.0000, contact types [0, 1, 2, 3]
+  all 254 subsets: max omega = 0.00000 (= 0.000 ln n/n) at e_D = 0.1717, theta_D = -0.0000, |D| = 1;  subsets with omega > 0: 0
+  the same with -ln mu_H(D)/n in place of -ln maxdens(D)/n: max omega = 0.31690
+  exact tail function Xi_md(q) against unions of profile classes around one centre (158 sets): largest ratio 1.0000 at q = 0.3333   [0s]
+
+n = 4: J_t = [1.1448 2.0085 2.3531 2.0085 1.1448], V_n = [1.1448 2.0085 2.3531 2.0085 1.1448], Z_H = 5.0000, contact types [0, 1, 2, 3, 4]
+  all 65534 subsets: max omega = 0.00000 (= 0.000 ln n/n) at e_D = 0.0636, theta_D = -0.0000, |D| = 1;  subsets with omega > 0: 0
+  the same with -ln mu_H(D)/n in place of -ln maxdens(D)/n: max omega = 0.23296
+  exact tail function Xi_md(q) against unions of profile classes around one centre (2366 sets): largest ratio 1.4730 at q = 0.2500   [0s]
+
+n = 5: J_t = [1.2394 2.03   2.5368 2.5368 2.03   1.2394], V_n = [1.2394 2.03   2.5368 2.5368 2.03   1.2394], Z_H = 6.0000, contact types [0, 1, 2, 3, 4, 5]
+  annealing (12 restarts x 6000 steps): max omega found = 0.00189 (= 0.006 ln n/n) at e_D = -0.0981, theta_D = 0.1022, |D| = 18   [80s]
+
+n = 6: J_t = [1.3235 2.0318 2.6155 2.8278 2.6155 2.0318 1.3235], V_n = [1.3235 2.0318 2.6155 2.8278 2.6155 2.0318 1.3235], Z_H = 7.0000, contact types [0, 1, 2, 3, 4, 5, 6]
+  annealing (8 restarts x 5000 steps): max omega found = 0.01262 (= 0.042 ln n/n) at e_D = -0.0338, theta_D = 0.0676, |D| = 41   [129s]
+time 129s

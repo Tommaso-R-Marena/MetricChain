@@ -8,9 +8,9 @@ branch: `docs/collaboration/status/theory.md`.
 ## Digest (most important first)
 
 1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
-   (`bash scripts/audit_all.sh` exits 0; 53 Lean files, 3369 audited declarations).  A map of
+   (`bash scripts/audit_all.sh` exits 0; 55 Lean files, 3418 audited declarations).  A map of
    the established results with exact Lean declarations and their epistemic status is in
-   THY-MSG-0001 (written at `d81eb8a`); THY-MSG-0003 … -0008 say what changed since.
+   THY-MSG-0001 (written at `d81eb8a`); THY-MSG-0003 … -0009 say what changed since.
 2. **Your data changed four of our statements** (THY-MSG-0005 §2, §5): "certificates in the
    profile format do not grow with the chain" is now stated as a bound whose regime is not
    reached — measured growth is linear on the lattice and geometric off-lattice — in the
@@ -55,13 +55,32 @@ branch: `docs/collaboration/status/theory.md`.
    gaps", gaps closed in the text; its recursion is now machine-checked *as defined*
    (`exactRec_tendsto_hint`), its number of evaluations is still a paper proof, and nobody
    has run it end to end at scale or with three nested levels.
-7. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
+7. **A known part with interactions (mean-field models) — unrefereed** (theory report
+   §11.23, workstream T; THY-MSG-0009 §1).  By symmetry alone and for every `n`: the
+   flat-histogram sample is the optimal fixed sample and the flat-histogram instance the
+   hardest symmetric instance (the lower halves machine-checked, also for an arbitrary
+   finite symmetry group: `proofs/Frontiers/GroupSampling.lean`).  Exponents are
+   single-letter for every rate function.  With
+   two phases the perturbations that are hardest to exclude are shells in the *barrier*
+   region (cones around points miss the exponent by a factor above two), and beyond a small
+   accuracy the extremal sets constrain only part of the system.  The adaptive exponent is
+   open.  What a larger computation could decide: THY-REQ-0009.
+8. **Rounds of adaptivity — unrefereed** (theory report §11.24, workstream U; THY-MSG-0009
+   §2).  **Algorithm 2L⁺ can be scheduled with one batch per rung of its ladder** (the
+   candidate sets are given explicitly), so the adaptive exponent needs a number of rounds
+   independent of `n` — the schedule to use on parallel hardware for THY-REQ-0001.  Two
+   rounds beat every fixed sample and provably do not reach the adaptive exponent
+   (`0.359a … 0.624a` at `u = 1`); whether three do is open.  The two-round indistinguishability
+   lemma is machine-checked (`proofs/Frontiers/TwoRounds.lean`).
+9. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
-8. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
+10. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
    chain-length independence of profile certificates as an observable fact (D46); the
    nested algorithms of §§11.18–11.19 as practical samplers (asymptotic only); any statement
-   about continuous spaces.
+   about continuous spaces; the threshold values `E = 0.21227`, `0.10312` of THY-REQ-0007 (they
+   are `0.212295`, `0.103131`: THY-MSG-0009 §3); cones around single configurations as test
+   functions at phase coexistence (D49).
 
 ## Index
 
@@ -75,18 +94,20 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-MSG-0006](messages/theory/THY-MSG-0006.md) | 2026-11-25 | message | a field as known part (sent unrefereed): exponents, the flat-histogram sample, the hardest instance is not the zero residual; interpretation for sampling design | proposed; refereed since — outcome and a correction of item 3 in THY-MSG-0008 |
 | [THY-MSG-0007](messages/theory/THY-MSG-0007.md) | 2026-11-25 | message | referee outcome for the bounded-accuracy theorem ("proved"); correction of THY-MSG-0005 §4 (numpy binomial); what THY-REQ-0001 still has to find out; the machine-checked structural theorem | proposed |
 | [THY-MSG-0008](messages/theory/THY-MSG-0008.md) | 2026-11-25 | message | referee outcome for the known-part results (isoperimetric theorem and exponents stand; two gaps closed, one a real parameter change for strong fields); corrections of THY-MSG-0006 item 3 and of two validation targets of THY-REQ-0007 | proposed |
+| [THY-MSG-0009](messages/theory/THY-MSG-0009.md) | 2026-11-25 | message | two new sections, both unrefereed: a known part with interactions (mean-field models; shells in the barrier class; flat-histogram sampling optimal for every `n`) and rounds of adaptivity (2L⁺ in one batch per rung; two rounds strictly between a fixed sample and full adaptivity); corrections of two reference values of THY-REQ-0007 and of a sentence of THY-RES-0002 | proposed |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | accepted by ENG-RES-0001 (plan revised in ENG-MSG-0002 §4); target extended by THY-MSG-0005 §4 |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | in progress — lattice done to 24 torsions, off-lattice to 12 (ENG-RES-0002, -0007): it does not set in |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | accepted in a revised design (ENG-RES-0003); our clarification in THY-MSG-0005 §3(b) |
 | [THY-REQ-0004](requests/theory/THY-REQ-0004.md) | 2026-11-25 | request | schema, reference checker and producer for the linear-residual kernel | accepted (ENG-RES-0004); our answer on evaluation order in THY-MSG-0005 §3(c) |
 | [THY-REQ-0005](requests/theory/THY-REQ-0005.md) | 2026-11-25 | request | independent replication of the audit | **completed** (ENG-RES-0005; repeated at `4cef47e`): no divergence |
 | [THY-REQ-0006](requests/theory/THY-REQ-0006.md) | 2026-11-25 | request | exact fractional hitting numbers over all sensitive sets (reassessed, low priority) | deferred; uniform cube completed in closed form (ENG-RES-0006), re-checked by us for `n ≤ 4` |
-| [THY-REQ-0007](requests/theory/THY-REQ-0007.md) | 2026-11-25 | request | exact tail function of the flat-histogram reference on small cubes; adversarial test of Theorem 11.63 | proposed; two validation targets corrected and the request narrowed by THY-MSG-0008 §2 |
+| [THY-REQ-0007](requests/theory/THY-REQ-0007.md) | 2026-11-25 | request | exact tail function of the flat-histogram reference on small cubes; adversarial test of Theorem 11.63 | proposed; two validation targets corrected and the request narrowed by THY-MSG-0008 §2; the thresholds `E` among its reference values corrected by THY-MSG-0009 §3 |
 | [THY-REQ-0008](requests/theory/THY-REQ-0008.md) | 2026-11-25 | request | the limit shape of profile sets: settle seven vertices by optimisation over long conformations and larger periodic cells; test "walks = bridges" where ends can be buried; the plateau by exact set cover; the off-lattice distance entropy | proposed |
+| [THY-REQ-0009](requests/theory/THY-REQ-0009.md) | 2026-11-25 | request | two-phase known parts and rounds of adaptivity: is the barrier shell optimal at vanishing accuracy; the single-letter supremum beyond `e₀`; the non-adaptive exponent near the threshold; exact twins, a three-round family, the batched schedule of 2L⁺ | proposed |
 
 ## Responses to engineering requests
 
 | id | date (UTC) | answers | subject | status |
 |---|---|---|---|---|
 | [THY-RES-0001](responses/theory/THY-RES-0001.md) | 2026-11-25 | ENG-REQ-0001 | a limit shape for profile sets: reduction to site sets; covering numbers converge given convergence of the shape; bridges; the buried-end obstruction | first part; completed and in two places corrected by THY-RES-0002 |
-| [THY-RES-0002](responses/theory/THY-RES-0002.md) | 2026-11-25 | ENG-REQ-0001 | full answer: limit shape for bridges (proved), convergence of certificate sizes to its covering number, bounds `50 … 3 627` for all walks, rate `N^{-1/3}`, single-flip constants, the conjecture for walks and why local surgery cannot prove it | completed |
+| [THY-RES-0002](responses/theory/THY-RES-0002.md) | 2026-11-25 | ENG-REQ-0001 | full answer: limit shape for bridges (proved), convergence of certificate sizes to its covering number, bounds `50 … 3 627` for all walks, rate `N^{-1/3}`, single-flip constants, the conjecture for walks and why local surgery cannot prove it | completed; its sentence "nothing machine-checked" superseded (THY-MSG-0009 §3: the abstract limit theorems are machine-checked since) |

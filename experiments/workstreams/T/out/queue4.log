@@ -1,0 +1,7 @@
+### t10_sweeps.py U 1.5 0.0 0.3,0.27,0.25,0.2 -> t10_sweep_U_bJ1.5_e0_c.txt
+exit 0 after 145s: time 145s
+### t13_multiblock.py 1.5 1.0 0.02,0.04 -> t13_multiblock_bJ1.5_u1_c.txt
+exit 0 after 159s: time 158s
+### t10_sweeps.py U 1.5 0.2 1.0,0.45,0.3,0.25 -> t10_sweep_U_bJ1.5_e0.2_a.txt
+exit 0 after 196s: time 196s
+### queue4 done

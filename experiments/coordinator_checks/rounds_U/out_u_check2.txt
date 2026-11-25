@@ -1,0 +1,15 @@
+== A. asymptotic formula
+   u=0.25: a=0.007752 h=0.001944  theta2* = 0.002682 = 0.3460 a = 1.3797 h  at phi1 = 0.650   [15s]
+   u=0.5: a=0.030300 h=0.007673  theta2* = 0.010585 = 0.3493 a = 1.3795 h  at phi1 = 0.650   [30s]
+   u=1.0: a=0.110944 h=0.029139  theta2* = 0.039853 = 0.3592 a = 1.3677 h  at phi1 = 0.640   [42s]
+   u=2.0: a=0.327813 h=0.097281  theta2* = 0.129099 = 0.3938 a = 1.3271 h  at phi1 = 0.605   [50s]
+   u=3.0: a=0.502282 h=0.172831  theta2* = 0.220777 = 0.4395 a = 1.2774 h  at phi1 = 0.560   [54s]
+   Xi(h, phi1) at u = 1: [0.00202, 0.006384, 0.011314, 0.015542]  (must be positive)
+== B. exact twins (accuracy 1): the largest T with gap > 1, over a few splits
+   u=1.0 n=400: n1=180 gap=1.15 T/n=0.04434  E = -ln(p1+p2)/n = 0.03005;  hinted bound 0.03477 (k*=153);  ratio 0.864;  ln A(F_S) = 2.36   [56s]
+   u=1.0 n=800: n1=360 gap=1.04 T/n=0.04216  E = -ln(p1+p2)/n = 0.03411;  hinted bound 0.03234 (k*=305);  ratio 1.055;  ln A(F_S) = 2.31   [61s]
+   u=1.0 n=1600: n1=800 gap=1.07 T/n=0.03987  E = -ln(p1+p2)/n = 0.03543;  hinted bound 0.03092 (k*=609);  ratio 1.146;  ln A(F_S) = 2.82   [81s]
+   u=1.0 n=3200: n1=1760 gap=1.00 T/n=0.03928  E = -ln(p1+p2)/n = 0.03684;  hinted bound 0.03011 (k*=1217);  ratio 1.224;  ln A(F_S) = 3.41   [233s]
+   u=2.0 n=200: n1=90 gap=1.02 T/n=0.13748  E = -ln(p1+p2)/n = 0.11294;  hinted bound 0.11164 (k*=57);  ratio 1.012;  ln A(F_S) = 2.10   [233s]
+   u=2.0 n=400: n1=180 gap=1.11 T/n=0.12916  E = -ln(p1+p2)/n = 0.11520;  hinted bound 0.10441 (k*=114);  ratio 1.103;  ln A(F_S) = 2.33   [235s]
+   u=2.0 n=1600: n1=880 gap=1.01 T/n=0.12555  E = -ln(p1+p2)/n = 0.12117;  hinted bound 0.09934 (k*=454);  ratio 1.220;  ln A(F_S) = 3.53   [254s]
