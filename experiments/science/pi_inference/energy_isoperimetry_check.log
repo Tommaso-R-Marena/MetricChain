@@ -1,0 +1,17 @@
+check 3 (Proposition A16.6): at the visible basin, lower bound = exact plateau twin of radius r2 (supported in B(a', r2-1)); upper bound G(R) for every alternative that agrees with g0 outside |B(n,R)| - |V| points
+  n=1000 u=1.0: twin r2=422, kappa*=137.49, gap=20.100 | upper bounds G(R): R=420: 19.233 (level 137.72), R=421: 20.100 (level 137.49), R=422: 20.962 (level 137.22) | gap <= G(r2): True; G(r2-2) < gap: True
+  n=1000 u=1.0: twin r2=461, kappa*=133.37, gap=50.532 | upper bounds G(R): R=459: 49.834 (level 133.42), R=460: 50.532 (level 133.37), R=461: 51.226 (level 133.32) | gap <= G(r2): True; G(r2-2) < gap: True
+  n=2000 u=1.0: twin r2=824, kappa*=249.08, gap=40.665 | upper bounds G(R): R=822: 39.789 (level 249.28), R=823: 40.665 (level 249.08), R=824: 41.539 (level 248.94) | gap <= G(r2): True; G(r2-2) < gap: True
+  n=2000 u=1.0: twin r2=899, kappa*=244.57, gap=100.036 | upper bounds G(R): R=897: 99.327 (level 244.60), R=898: 100.036 (level 244.57), R=899: 100.744 (level 244.55) | gap <= G(r2): True; G(r2-2) < gap: True
+  n=1000 u=2.0: twin r2=332, kappa*=187.93, gap=51.423 | upper bounds G(R): R=330: 49.690 (level 187.98), R=331: 51.423 (level 187.93), R=332: 53.149 (level 187.87) | gap <= G(r2): True; G(r2-2) < gap: True
+  n=1000 u=2.0: twin r2=398, kappa*=185.74, gap=150.775 | upper bounds G(R): R=396: 149.475 (level 185.75), R=397: 150.775 (level 185.74), R=398: 152.070 (level 185.73) | gap <= G(r2): True; G(r2-2) < gap: True
+  n=600 u=4.0: twin r2=139, kappa*=109.85, gap=62.762 | upper bounds G(R): R=137: 59.837 (level 109.86), R=138: 62.762 (level 109.85), R=139: 65.653 (level 109.83) | gap <= G(r2): True; G(r2-2) < gap: True
+  n=600 u=4.0: twin r2=190, kappa*=109.50, gap=180.437 | upper bounds G(R): R=188: 178.577 (level 109.50), R=189: 180.437 (level 109.50), R=190: 182.283 (level 109.49) | gap <= G(r2): True; G(r2-2) < gap: True
+check 2: 1398 random members with zero background (dips and hills, n = 4..10): Z(g) <= Z_plateau(N(g), U(g)); largest ln ratio 9.33e-15; equality (g itself a plateau on a ball) in 735 cases
+check 1, n = 4 (all): supports x (u, U0) cases so far 589806; largest ln[Z_best(D)/Z_plateau(ball)] = 1.71e-14 (must be <= 0)
+check 1, n = 5 (random): supports x (u, U0) cases so far 625806; largest ln[Z_best(D)/Z_plateau(ball)] = 2.02e-14 (must be <= 0)
+check 1, n = 6 (random): supports x (u, U0) cases so far 661806; largest ln[Z_best(D)/Z_plateau(ball)] = 3.26e-14 (must be <= 0)
+
+real	4m3.952s
+user	1m23.315s
+sys	0m0.133s

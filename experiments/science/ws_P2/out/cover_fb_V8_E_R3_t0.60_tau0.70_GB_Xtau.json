@@ -1,0 +1,49 @@
+{
+"tag": "fb_V8_E_R3_t0.60",
+"tau": 0.7,
+"residual": "GB",
+"domain": "Xtau",
+"M": 6561,
+"c": [
+0.35259458105429786,
+0.4150517298514771,
+0.4257877793370497,
+0.42746105792705436,
+0.42997130840952025,
+0.42937277028923404,
+0.43875795933096384,
+0.37932788000911444
+],
+"shape": [
+3,
+3,
+3,
+3,
+3,
+3,
+3,
+3
+],
+"kappa_max": 1.0,
+"cover_eps0.000": {
+"forced": 1,
+"volume": NaN,
+"partition": NaN,
+"lower": 1,
+"greedy": 1
+},
+"cover_eps0.596": {
+"forced": 0,
+"volume": NaN,
+"partition": NaN,
+"lower": 1,
+"greedy": 1
+},
+"cover_eps2.000": {
+"forced": 0,
+"volume": NaN,
+"partition": NaN,
+"lower": 1,
+"greedy": 1
+}
+}

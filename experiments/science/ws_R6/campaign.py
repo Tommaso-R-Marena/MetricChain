@@ -73,7 +73,10 @@ def ladder(cell, rng=None):
                 xs.append(top * (lo / top) ** (i / max(Lx - 1, 1)))
         xs = sorted(set(xs), reverse=True)
     xs.append(xl)
-    costs = [10.0 ** l for l in range(1, len(xs))]
+    if cell.get("costs") == "steep":      # the finest rung is e^80 times dearer than the one before: the regime in which the abort rule matters
+        costs = [mp.e ** (80 * l) for l in range(1, len(xs))]
+    else:
+        costs = [10.0 ** l for l in range(1, len(xs))]
     return xs, costs
 
 
@@ -258,6 +261,8 @@ def _b_lazy():
     cells = [cell_general(200, 100, 2.0, 0.5, 1.0, Fraction(1, 2), 1.0, 1.0), cell_general(160, 80, 2.0, 0.5, 0.5, Fraction(1, 2), 1.0, 0.5, nu1=1.0),
              cell_general(120, 60, 3.0, 0.5, 0.5, Fraction(1, 2), 0.5, 0.5), cell_bounded(300, 120, 1.0, 4.0), cell_bounded(80, 40, 1.0, 4.0),
              cell_extensive(1200, 400, 1.0, 0.025, 0.015)]
+    for c in cells:
+        c["costs"] = "steep"
     return cells, ["cone", "cone_half", "platcone", "flatcone", "eqmass", "dip_crit", "rw_down", "flat", "two_plateaus"], ["lazy", "lazy_mix"], {}
 
 

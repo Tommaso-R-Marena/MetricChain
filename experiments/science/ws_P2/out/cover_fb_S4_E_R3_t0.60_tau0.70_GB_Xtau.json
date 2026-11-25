@@ -2,7 +2,7 @@
 "tag": "fb_S4_E_R3_t0.60",
 "tau": 0.7,
 "residual": "GB",
-"domain": "X",
+"domain": "Xtau",
 "M": 6561,
 "c": [
 4.902425945325682,

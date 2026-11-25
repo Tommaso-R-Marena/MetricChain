@@ -162,3 +162,41 @@ H5. k ≥ 2: k-transitive group ⇒ k-body matching ⇔ matching the first k fac
   annular profiles; the k=2 construction with AGL(1,n); KLP designs) was derived and computed
   by me WITHOUT having seen THY-RES-0006, §11.29, D54 or their scripts.  I had read only
   THY-RES-0005 §2 (their two-sentence expectation and the parameter-counting remark).
+
+* 21:08–21:15 — **Read the theory division's answer** (THY-RES-0006 §3; theory report §11.29,
+  Proposition 11.109, lines 7080–7177 of the report at dcdfea6; DEAD_ENDS D54 item 3;
+  `oracle_field_scan.py`, `oracle_zero_types.py`).  Their (a)–(d) [P]: window; one number;
+  identity κ̄(ψ1) − κ̄(ψ0) = Φ/(1+Φ)[type(ν) − κ̄(ψ0)]; the lower bound (1−2δ)/maxdens survives with
+  a factor n.  (e) [C]: at the zero residual the exponent with the oracle is
+  ρ_e(p) = sup{r_μ(e): μ̄ = p}; coarse numbers 0.0129 vs 0.0134 at p=¼,u=1,e=0.02.  (f) [C]: for
+  the class nothing changes at ε ≫ ln n — base = flat histogram with a logarithmic well at the
+  excess type; missing: concentration of the excess mass / uniqueness of the optimal profile.
+  Comparison with mine:
+  - (a)–(d): agree; (c) is the mixture identity of my Lemma 3; my Theorem A is a pair that
+    meets their criterion (c) EXACTLY by an explicit linear equation → their conjecture (f) is
+    PROVED (different base: hardest additive instance + b × extreme additive instance; excess
+    decoupled from the tuning parameter; no uniqueness/concentration needed; every n; every ε>0).
+  - their trap (no sign change along the additive instances with the deepest dip) is real and
+    does not touch my compensation (I do not move the base along additive instances; I ADD a
+    second additive component to both members of the pair).
+  - (e): `t10_theory_e.py`: exact R_0(0.02) = 0.013669 (centre type 0.4555, excess type 0.2760 —
+    not "0.0134 at 0.29"); `t11_unrestricted_profiles.py`: **sup over two-block profiles of type
+    p with block laws UNRESTRICTED = my tilt bound to 6 digits** (0.012941; 0.016345; 0.024371)
+    and is attained at the cone laws of the TILTED reference, one of which lies OUTSIDE the
+    window; restricted to block laws in the window (where the excess mass really sits — exact
+    sums: an unstable-core dip with shell type 0.215 has true excess density 0.2439): 0.012630.
+    So their number 0.0129 for ρ_e(p) is (numerically) my tilt upper bound; their search range
+    (x0 down to 0.005 < p₋ = 0.109) includes profiles whose excess mass does NOT have the type
+    of the profile — the concentration statement they flag as unproved is false there.
+    Status of (e): direction proved here (tilt upper bound, given their hinted theorem at
+    shifted fields); value in [0.012630, 0.012941] at their test point (decrease 5.3–7.6 %, not
+    3.5 %).  They say "(e) needs an algorithm that uses the oracle (we have none)": mine is the
+    hinted spot check + "reject the hint if the marginals differ", analysed by the tilt inequality.
+* 21:13 — `t12`: at the hardest ADDITIVE instance γ* the oracle lowers the instance exponent too
+  (tilt bound / R^max = 0.98, 0.96, 0.89 at p=.3,u=1, e = 0, .3E, .6E; 0.87, 0.65, 0.18 at p=.1,u=2;
+  0 at p=.05,u=3,e=.6E).  With the oracle the hardest instance is no longer additive.
+  `t13`: threshold of the zero residual with the oracle ≤ min_λ[E_0(θ−λ) + c(λ)]: ratio to E_0:
+  0.990 (p=.4,u=1), 0.963 (.3,1), 0.864 (.1,1), 0.631 (.1,2), 0.368 (.05,3).
+* The first run of `t02` was killed at its 30-minute limit (401-point γ-scan too slow); its
+  partial output is kept as `out/t02_fixed_point_partial_first_run.txt`; a light version
+  (41-point scan + refinement) is running and writes `out/t02_fixed_point.txt`.

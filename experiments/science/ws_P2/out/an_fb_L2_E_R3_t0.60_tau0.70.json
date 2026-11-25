@@ -1,0 +1,13 @@
+{
+"tag": "fb_L2_E_R3_t0.60",
+"tau": 0.7,
+"seq": "LL",
+"bb": "E",
+"grid": "R3",
+"shape": [
+0,
+0
+],
+"natoms": 50,
+"empty": true
+}

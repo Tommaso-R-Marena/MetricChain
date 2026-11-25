@@ -185,8 +185,8 @@ brief.  **[P; every inequality below was afterwards checked on every run of my i
 change at such a pass.  So every sample of level `j` is `K` or `< 2M_j^neg(ℓ_j)`, `ℓ_j` the value at entry.
 
 (D2) A level left as populated has `s_{i+1}q_i ≤ e·s_i·2N/M = 4e^{b+1}·s_ie^{−b}N/(2M) ≤ 4e^{b+1}ℓ`; a level
-left as negligible has `s_{i+1}q_i ≤ e s_i·2K/M_i^neg = e^bℓ/J`.  With `s₀ ≤ ℓ` and `tail ≤ e^Gℓ`:
-`U/ℓ ≤ 1 + 4(J+1)e^{b+1}·[populated share] + e^b + e^G`, hence the width.
+left as negligible has `s_{i+1}q_i ≤ e s_i·2K/M_i^neg = e^bℓ/J`.  With `s₀ ≤ ℓ`, `tail ≤ e^Gℓ` and at most
+`J` levels left before the closing one: `U/ℓ ≤ 1 + 4Je^{b+1} + e^b + e^G`, hence the width.
 
 (D3) *Closing radius.*  Let `r*` be the largest `r ≤ n_o − 1` with `Γ̃(r′) ≤ e^{G−b}/4` for all `r′ ≤ r`,
 `π* = 2^{−n_o}|B(n_o, r*)|`.  If a level is left without closure, then `q > π*`.  Proof: by minimality of
@@ -237,6 +237,20 @@ without closure must violate (negligible: `tail ≤ e^bℓΓ̃(r)/((1−η)ν₀
 through the Markov term and `tail ≤ e^bℓ·Γ″(r)` through the Harper term, because `2^{n_o}p̲ = c_η2^{n_o}q >
 c_η|B(n_o,r−1)|` gives `k ≥ κ(r)`); `M_j^neg ≤ (1+η)e^λν₀M†` and `M ≤ M̄`; and the count
 `M_j^neg p(s_je^{−x}) ≤ c_η⁻¹e^λ·ν·e^x`.
+
+*The good event of Algorithm 2L⁺ and its probability* (`K_REPORT.md` §2.4; re-derived after reading).
+With `X_t(M) = #{i ≤ M : W(a_i) > t} ~ Bin(M, p(t))` and `ℳ = {K2^m : m ≤ m_max}`:
+(V1) every *potential* inner call `(i, l)`, `i ≤ K2^{m_max}`, `l ≤ L`, is valid and of ratio `≤ e^{x_l}` — at most
+`L·K2^{m_max} < 2LM̄` calls, each failing with probability `≤ δ′ = δ/(4LM̄)` given its fibre: total `< δ/2`;
+(V2) for `j ≤ J`, `M ∈ ℳ`: `Mp(s_j) ≤ K/(1−η)` or `X_{s_j}(M) ≥ (1−η)Mp(s_j)` — each fails with probability
+`≤ e^{−η²K/2}`; (V3) for `j ≤ J`, `M ∈ ℳ` and the `L + 1` thresholds `t ∈ {s_je^{−b}} ∪ {s_je^{−x_l} : l < L}`:
+`X_t(M) < K` or `X_t(M) ≤ (1+η)Mp(t)` — each fails with probability `≤ e^{−η²K/(3(1+η))}` (Chernoff if
+`Mp ≥ K/(1+η)`, monotonicity in `p` otherwise).  There are `(J+1)(m_max+1)(L+2)` events (V2), (V3), and
+`K = ⌈3(1+η)η⁻² ln(2(J+1)(m_max+1)(L+2)/δ)⌉` makes their total `≤ δ/2`.  The thresholds are functions of
+`ψ₀` alone and the list `a₁, a₂, …` is not influenced by inner answers, so these are statements about
+binomial variables at fixed thresholds; the sizes actually used lie in `ℳ` because `M ≤ M̄ ≤ K2^{m_max}`
+holds in every run.  Hence `P(good event) ≥ 1 − δ` for every `n`, with no "for `n` large" (unlike Theorem
+11.52, whose `K` is fixed in advance and whose failure bound needs `n ≥ n₀(η₀)`).
 
 ### 2.4 Term-by-term comparison
 
@@ -448,7 +462,7 @@ fibres (enumeration where `C_l = 2^{n_i}`):
 
 `C_max` and `x_out` are finite expressions in binomial coefficients of `n_o`, `n_i` and in `e^u`; there
 is no `o(n)` and no "for `n` large".  With the cap of §2.8, `M̄` may be replaced by
-`max{e^λM†, M‡}` in the two places where it appears doubled.
+`2max{e^λM†, M‡}` in `C_max` (my tables give both values; the second keeps `m_max`, `K`, `δ′` unchanged).
 
 *Proof.*  Proposition K0 makes `I_l` a bracket procedure for `(n_i, x_l, δ′)` with cost `2M_l` (two
 samples; §0: re-derived — the three events, `t⁺`, `t⁻`, the two tail lemmas, `r̂ ≤ r*_l ≤ n_i − 1`);
@@ -521,3 +535,274 @@ explicit function of `n`; my engine reproduces the published values (§3.3).  Th
 *cheap* instance for this algorithm (it closes at a radius far above `r†`), so an every-`n` statement
 restricted to it would be weaker than Theorem R6.1 in the only direction that matters.
 
+## 3. Numerics
+
+Everything here is my own code (`experiments/science/ws_R6/`); no script of the authors, of their
+referees or of the engineering division was run or read.  Python 3.13, numpy 2.5.3, mpmath 1.3.0,
+at most two processes, every job under ten minutes.  The machine was shared and heavily loaded
+(load average 10–15 on 4 cores), so several campaigns were cut by their time limit: the numbers
+below are the runs that completed, and every number in the tables is produced from the data files by
+`make_section3.py` (`data/summary_all.json`), not transcribed.
+
+### 3.1 The implementation and its checker
+
+* `r6lib.py` — exact tables on the outer cube (`|B|` as integers; `E_r`, `T_m` with 40 digits); the
+  constants of Theorem 11.56 (`Params2LP`) and of Theorem 11.52 (`Params2L`); the two algorithms, pass by
+  pass (`Run`).  `q`, `p̲`, the closing radius and the Harper radius are exact (Fractions against
+  integer ball sizes: `q = 1` gives `r = n_o` exactly); levels, `ℓ`, `Σ`, tails are 40-digit numbers;
+  brackets are float64 logarithms.  The outer sample is literal: the list `a₁, a₂, …` is drawn at
+  random, block by block of the doubling sequence, as exact counts of the classes of outer points with
+  equal fibre average (sequential binomials; chunks of `2^61` so that blocks of up to `2^83` points
+  can be drawn — `big_binomial`, tested against means and variances), one bracket per (block, class),
+  or one unit per point for explicit cubes.
+* `checks.py` — after every run, every claim of the theorem against quantities the algorithm never
+  sees (the exact tail `p(t)` and mean `A` of the instance): *for every run* — closing radius of every
+  level left (iii), `M ≤ max(K, 2M_j^neg)`, `M_j^neg ≤ (1+η)e^λν₀M†`, `M ≤ M̄` (iv), the cap of `40c5bd7`,
+  the width of a pair returned through the test, queries `≤ C_max`; *on the good event* — evaluated
+  as "(V1), (V2), (V3) hold at every pass the run actually made", a superset of the proof's event —
+  no abort (i), `L ≤ A ≤ U`, `p(s_j) ≤ q` and `p̲ ≤ p(s_je^{−b})` at every pass, `ℓ ≤ A` at every update
+  (ii), the count inequality and the sampled count against `cnt` (v), calls per level and rung and the
+  total against claim (vi).  For Algorithm 2L: the corresponding statements of Theorem 11.52 (`r > r†`,
+  `M ≤ 8Je²M†`, `M < 2eM†`, width, the count `32KJe²e^x + 4K`, calls per level, the cost display
+  completed as in m2).
+* `instances.py`, `campaign.py` — product instances `ψ(a,b) = −F(d(a,c)) + s_in|b|`: outer radial
+  profile `F` with increments in `[−u, u]` (17 families: flat, cones of slope `u, u/2, u/4`, dips —
+  also at the radius `r†`, at `Λ₁n_o/u` and at `p_un_o` —, flattened cones, plateau-then-cone, the
+  equal-mass staircase `W ∝ 1/|B(d)|`, four kinds of random walk, the 2-periodic profile, staircases,
+  profiles on the level grid, two plateaus), reference point in the shell `0`, `n_o/2`, `n_o` or random,
+  inner slope `s_in ∈ {0, ±u, ±u/2}` (it moves the reference value inside the trivial bracket).
+  Inner behaviours: a valid bracket of ratio `e^{x_l}` placed with `W` at the middle / top / bottom, at
+  random, narrower than promised, exact, or by one of two adversaries that keep a point unclassified
+  at the current level whenever a valid bracket allows it and then make it high, resp. low; mixtures
+  within a run.  *Invalid* behaviours, to test the every-run statements: a bracket entirely above or
+  below `W`, one `2.5` times too wide, the rung-0 bracket again, and "LAZY" (the rung-0 bracket at
+  every rung but the last, a valid bracket at the last).
+
+*Negative controls* (`data/MUT_*_7.jsonl`, 48 runs each, six cells): each of the five mutations of
+`K_REPORT.md` is detected by the check it should break.
+
+| mutation | detected as | runs in which it is detected |
+|---|---|---|
+| negligibility threshold without `e^{−b}` | the count inequality (v) | 24 of 47 (and `M_j^neg` above its bound in 8) |
+| no Harper term | a level left with `q ≤ π†` (iii) | 1 of 47 |
+| lower end without the sum `Σ` | width | 26 of 47 |
+| tail lemma at `r = n_o` | the returned pair has `L > U` | 48 of 48 |
+| `q` without `1/(1−η)` | certificate `p(s_j) ≤ q` false | 26 of 48 (one invalid final bracket) |
+
+<!--SECTION3B-->
+
+### 3.3 Reproduction of published numbers (which I had not seen when the code was written)
+
+*The constants.*  `everyn.py` evaluates `C_max` of Theorem 11.56 with the base brackets of Proposition
+11.57(a) inside, the plain base bracket, and the hinted lower bound, for the design of `K_REPORT.md`
+§6.4.  Entries `ln(·)/(na)`; the second number in each cell is the value in the tables of
+ENG-RES-0008 ("cap `C_max` at that `φ`", "plain bracket", "hinted lower bound"):
+
+| `u`, `n`, `φ` | `C_max` | plain bracket | hinted lower bound |
+|---|---|---|---|
+| 1, 1000, 0.55 | 1.1720 / 1.172 | 1.3493 / 1.349 | 0.2857 / 0.286 |
+| 1, 2000, 0.50 | 0.8700 / 0.870 | 1.2303 / 1.230 | 0.2754 / 0.275 |
+| 1, 4000, 0.50 | 0.7228 / 0.723 | 1.1516 / 1.152 | 0.2707 / 0.271 |
+| 1, 16000, 0.50 | 0.5887 / 0.589 | 1.0689 / 1.069 | 0.2649 / 0.265 |
+| 2, 1000, 0.50 | 0.8056 / 0.806 | 1.2285 / 1.229 | 0.3061 / 0.306 |
+| 2, 4000, 0.50 | 0.6210 / 0.621 | 1.1043 / 1.104 | 0.2999 / 0.300 |
+| ½, 4000, 0.50 | 1.0482 / 1.048 | 1.2440 / 1.244 | 0.2751 / 0.275 |
+| ½, 8000, 0.50 | 0.8142 / 0.814 | 1.1546 / 1.155 | 0.2661 / 0.266 |
+
+Three independent implementations (workstream K, the engineering division, this one) therefore agree
+on every constant of Theorem 11.56 and of Proposition 11.57(a).  The two lower bounds of §2.9 (hinted and
+non-adaptive) were in addition recomputed directly from the definitions of `Δ_k` and `D_R` with a different
+arithmetic (float64 logarithms, `crosscheck_lb.py`): in all 184 cells of the separation tables `k*` and `R`
+are identical and the logarithms of the bounds differ by at most `1.2·10⁻¹¹`.
+
+*A whole trajectory.*  `flat_exact.py` runs my literal engine, unchanged, on the flat instance with the
+inner behaviour "bottom" and the costs of the base brackets:
+
+| `u`, `n`, `φ` | `ln(cost)/(na)` | `ln M/(n_oa)` | closing radius (`r†`) | levels left populated / negligible | ENG-RES-0008 |
+|---|---|---|---|---|---|
+| 1, 1000, 0.80 | 0.7013 | 0.756 | 255 (180) | 5003 / 223 | 0.701, 0.756, 255 (180), 5003 / 223 |
+| 1, 1000, 0.55 | 0.9788 | 0.781 | 179 (119) | 5003 / 128 | 0.979 |
+| 1, 4000, 0.50 | 0.6872 | 0.793 | 603 (482) | 20003 / 762 | 0.687 |
+
+(Other cells were stopped to free the machine.)  This is an end-to-end agreement of the pass-by-pass
+logic and of the cost accounting with an implementation I have not read.
+
+*The exponents.*  `tau2.py`: `τ₂/a = 0.5001, 0.5004, 0.5056` for `u = ½, 1, 2` (reports: `0.5001`,
+`0.5004–0.5006`, `0.5056–0.5057`); the identity `θ_na(e + θ_hint(e)) = θ_hint(e)` to `4·10⁻¹²` on 2001
+accuracies; Proposition 11.57(c) on 999 values of `φ`: the bracket with `T = θ_hint` exceeds `h` by at
+least `7.6·10⁻⁶` (never below).
+
+<!--SECTION3C-->
+
+### 3.5 The inputs, by brute force
+
+`check_tail_lemmas.py`, `check_K4cd.py` (`logs/check_tail_lemmas.log`):
+
+* Harper's theorem in the form used (`|S| ≥ |B(m,k)| ⇒ |N(S)| ≥ |B(m,k+1)|`): all 65 808 nonempty subsets of
+  `Q_1, …, Q_4`; 60 000 random and structured subsets of `Q_5, Q_6, Q_7`: no violation.
+* Lemma K.1 = 11.43(b),(c) at every threshold of 960 random `u`-Lipschitz functions on `Q_4 … Q_10`
+  (McShane extensions, additive, radial walks, inf-convolutions of noise): 34 873 thresholds for (a),
+  35 833 for (b), no violation, equality attained (largest ratio `1.000000`).
+* Lemma 11.55 = K.4: (a), (b) and inequality (3.0) in 22 583 cases (`m ≤ 2000`, `u ∈ {½, 1, 2}`, four values
+  of `η`): largest ratios `0.886`, `0.854`, `0.264`; (c) in 401 cases (`m ≤ 4000`): `min(r† − r₊) = 2`; (d)
+  in 290 cases: `max(lhs − rhs) = −7.6`; the binomial median `P(Bin(m, p_u) ≥ ⌊mp_u⌋) ≥ ½` in 27 cases
+  (`m ≤ 4000`): smallest value `0.508`.
+* Lean: `lean/R6Axioms.lean` (§2.6).
+
+<!--SECTION3D-->
+
+
+## 4. Prior art, with a search log
+
+The object of this workstream is a proof, not a novelty claim; I looked only at the cited inputs and
+made one generic search for the result itself.  Searches on 25 Nov 2026, generic queries, no project
+information sent.
+
+| query / page | what I read | level |
+|---|---|---|
+| "Harper vertex isoperimetric theorem hypercube initial segments simplicial order minimize neighbourhood Hamming ball statement" | the statement as quoted by the search tool from Räty, arXiv:1806.11061, and Przykucki–Roberts, arXiv:1808.02572: for `A ⊆ Q_n` and `B` the initial segment of the simplicial order with `|B| = |A|`, `|N(A)| ≥ |N(B)|` (also in the closed-neighbourhood form); initial segments of ball size are balls | [search snippet]; Harper 1966 not retrieved |
+| "Kaas Buhrman 1980 Mean, median and mode in binomial distributions median between floor np and ceil np" | bibliographic data (Statistica Neerlandica 34(1), 13–18); a 1978 preprint statement that an integer within `min{p, 1−p}` of `np` is a median; the `⌊np⌋ ≤ m ≤ ⌈np⌉` form is attributed to the paper by secondary sources | [search snippet]; the paper itself not read |
+| arXiv math/0611285 (Mathé–Novak, *Simple Monte Carlo and the Metropolis algorithm*) | "adaptive methods are much better than nonadaptive ones … the curse of dimension (for nonadaptive methods) can be broken by adaption", for integration with respect to an unknown density, by a Metropolis ball walk, "for certain classes of inputs" | [abstract], through a fetch tool |
+| "adaptive versus non-adaptive query complexity estimating partition function Lipschitz function Hamming cube exponential separation isoperimetric layer cake algorithm" | nothing on this problem (junta testing, partition learning, nearest-point search in the cube) | [search snippets] |
+
+*Assessment.*  The two cited combinatorial inputs are standard and are used in the form in which they
+are known: Harper [K, search snippet; verified by computation on all subsets of `Q_m`, `m ≤ 4`, §3.5];
+binomial median [K, attribution unverified; verified by computation for `m ≤ 4000`, §3.5 — the proof
+needs only *some* constant in place of `½`].  On novelty I have nothing to add to
+`docs/prior_art/L7_query_complexity.md` and to the referees' logs: the qualitative phenomenon is in
+Mathé–Novak; the exact exponents and the algorithm were **not found**, at the level of abstracts and
+search summaries, which is not "new".  The finite-`n` separation of §2.9 is a computation with the
+programme's own theorems; I did not search for it and make no novelty claim.
+
+## 5. What I did not settle
+
+1. **Three or more nested levels, end to end.**  My runs with real inner brackets are two-level, on
+   cubes of 12–13 coordinates, where 2L⁺ can only be tested for logic (an inner bracket costs more than
+   enumerating its fibre).  With the constants of the theorems a two-sample bracket is cheaper than
+   enumeration only for fibres of several hundred coordinates, and a level above it needs
+   `e^{n_oa}` outer points: there is no size at which the nested algorithm can be *executed* with real
+   randomness at every level.  Referee R8's three-level runs on `Q_9, Q_10` have the same limitation.
+   The composition is therefore certified only by the interface "bracket procedure" (which I checked)
+   and by the exact flat-instance computation of R8 (which I did not repeat for three levels).
+2. **A rate.**  No explicit `o(n)` for Theorems 11.54/11.58, and no explicit `n₀(η)` (§2.6, §2.9).
+3. **The Lean proofs** line by line; **Theorem 11.25(d)** (asymptotics of the lower bound) and the
+   closed forms of the two sums in `cube_exact_dip_randomized`, beyond what my tables use (the hinted
+   and non-adaptive lower bounds are *computed* from the exact sums in §2.9, and agree with the
+   engineering division's hinted column).
+4. **Monotonicity in `n`** of the separation of Corollary R6.2 (observed on the grid only).
+5. **Outer landscapes with real fluctuations and real inner brackets** beyond explicit cubes with
+   `n_o ≤ 8`.  With a simulated inner oracle the run depends on the instance only through the law of
+   `W` (remark of `40c5bd7`; I checked both directions of its Harper argument), and my class
+   instances — radial, increments anywhere in `[−u, u]`, whole shells — cover those laws up to partial
+   shells; laws with partial shells are not covered by my simulated runs.
+6. **The frequency of the good event from below**: with the constants of the theorems it never failed
+   in my runs; with `K` reduced it fails, and I report the frequencies, but I did not test whether the
+   bound `δ` is anywhere near tight (it is a union bound and is not).
+7. **Theorem 11.51** (radial class) was outside my list and not examined.
+
+## 6. The three most promising next steps
+
+1. **Machine-check the deterministic core of Theorem 11.56** — the statements that hold "for every
+   run": the closing radius of a level that is left (Step 5), the sample sizes (Step 6), the lowered
+   cap of §2.8, the width (Step 4).  They are statements about an abstract run — a finite sequence of
+   passes `(j, M, N)` obeying the update rules of §2.1, with tables `|B|, E, T` as parameters — and use
+   no probability and no geometry beyond monotonicity of the tables.  This is a formalisation of a few
+   hundred lines, it removes the sentence "nothing in the count of evaluations is machine-checked" for
+   the part of the count that was wrong five times, and it leaves outside Lean only Chernoff, Harper
+   and the two tail lemmas.
+2. **State the finite-`n` separation as a theorem with numbers**, after an independent recomputation
+   (the engineering division has every ingredient): the least `n`, for each `u`, at which a certified
+   adaptive upper bound is below the non-adaptive lower bound, with the design (`φ`, ladder, `λ, η, θ`)
+   optimised for that purpose and with the lowered cap.  It turns "exponents differ" into a statement
+   a reader can check at `n = 1400`.
+3. **A rate for the recursion** (`T_k − θ_hint ≤ C/k²` is what the numerics suggest), or a different
+   construction at bounded accuracy that does not halve the accuracy at every level: either would
+   give the first explicit `o(n)` and decide whether `e^{nh + O(n^{3/4})}` is an artefact.
+
+## 7. Requests
+
+**To the theory division** (each can be sent as it is):
+
+* **R6-T1 (cap remark, `40c5bd7`).**  In the proof of the remark after Theorem 11.56 the sentence
+  "(If `r† < Δ`: a pass with `2^{n_o}q < 1` has an empty tail.)  So at level `j` the size is doubled only
+  below `M‡`" does not cover the pass with `M = M‡ = K2^{n_o}/(1−η)` exactly (`η = ½`), where
+  `2^{n_o}q = 1`, `r = 0`, `tail = s_j2^{−n_o}E_0`.  In 4 500 runs of `capcorner.py` that pass failed to
+  close 1 255 times (all with `r† ∈ {0, −1}`), and in 1 133 runs the largest sample was exactly `2M‡`.  The
+  statement survives: for `r† ≥ 1`, `E_0 ≤ E_1/(n_o+2)` and `λ ≤ 1` give `tail < s_{j−1}2^{−n_o}E_{r†} ≤ θe^bℓ`;
+  for `r† ∈ {0, −1}`, `M† ≥ M‡` and the cap is `2e^λM†`.  Please add these lines and say that `λ ≤ 1` is
+  used here (erratum m3 of `K_REPORT.md` calls it unused).
+* **R6-T2 (§11.18 text).**  (i) line 3649: the abort test must precede the inner call, as in line
+  3986; (ii) line 3707: add the reference query and the rung-0 queries, start the sum at `l = 1`;
+  (iii) line 3689: add the case `s_je^{−x} < s₀`; (iv) lines 3804–3810: admit a tuple only from its own
+  `n₀` on, or replace the assembly by Proposition E of `K_REPORT.md`, which needs neither `n₀` nor left
+  limits.
+* **R6-T3 (a finite-`n` statement).**  Consider adding to §11.19, after an independent check, the
+  comparison of `C_max` with the *non-adaptive lower bound* of Theorem 11.45(b) at the same accuracy
+  (§2.9): crossover `n = 1400` (`u = 1`), `540` (`u = 2`), `4700` (`u = ½`) for the design of
+  `K_REPORT.md` §6.4.  The present text compares with the plain bracket, which is an upper bound.
+* **R6-T4.**  Is there a rate for `T_k → θ_hint`?  Even `T_k(g) − θ_hint(g) ≤ C(u, g)/k` would make the
+  `o(n)` of Theorems 11.54/11.58 explicit.
+
+**To the engineering division:**
+
+* **R6-E1 (recompute §2.9).**  *Motivation:* a certified finite-`n` separation between adaptive and
+  non-adaptive algorithms.  *Formulation:* for `u ∈ {½, 1, 2}` and every `n` in a window around the
+  crossover, compute `C_max` of Theorem 11.56 with base brackets inside (your evaluator has it: the
+  column "cap `C_max`"), with and without the cap of the `40c5bd7` remark, and
+  `LB_na = (1−2δ)2ⁿ/|B(n, R−1)|`, `R` the least radius with
+  `n ln(1+e^{−u}) + uR − ln T_n(R) > x_out`.  *Inputs:* the design of your ENG-RES-0008; then a search
+  over `(φ, λ, η, η′, θ, ladder)` minimising the least `n` with `C_max < LB_na`.  *Expected output:* that
+  least `n` per `u`, and whether the inequality is monotone in `n` beyond it.  *Validation:* my values
+  `ln C_max = 154.0`, `ln LB_na = 155.0` at `u = 1`, `n = 1400`, `φ = 0.5` (files
+  `experiments/science/ws_R6/data/separation_K64_u*.jsonl`).  *Stopping:* one window of 200 sizes per
+  `u`.  *Resources:* seconds per cell at `n ≤ 5000`.
+* **R6-E2 (the abort rule).**  Your literal runs report "aborted: 0".  With an invalid inner
+  behaviour that returns the rung-0 bracket at every rung but the last (so that every refined point
+  reaches the dearest rung) and rung costs growing by `e^{80}`, 33 of my 60 runs stop on the query
+  budget, and the cost stays below `C_max` only because the test precedes the call.  A harness for
+  the "bracket procedure" interface should contain such a behaviour; it is the only test of the
+  sentence "the cost bound holds always".
+
+## 8. What a hostile referee would attack first
+
+In this order.
+
+1. **"The theorem's content is the count of evaluations, and the count is not machine-checked."**
+   True, and said by the authors.  What is in Lean is the analysis of the recursion and four algebraic
+   identities; the algorithm, its events and its cost are ten pages of paper with five retracted
+   predecessors.  The defence is redundancy, not formality: the accounting has now been derived
+   independently three times (R7 and R8 inside the theory division, this review outside it) with
+   identical constants, implemented independently five times (workstream K, the coordinator, R8, the
+   engineering division, this review) with identical numbers where they overlap, and attacked with
+   mutations that each implementation detects.  A referee who does not accept that will ask for the
+   deterministic half of the count in Lean (§6, step 1) — a reasonable demand and a feasible one.
+2. **"Exponent `h` is a limit of families of growing depth; there is no algorithm, no rate, no
+   finite-`n` content beyond two levels."**  Also true.  For a target `h + 2η` the proof stacks about
+   `ln(a/h)·a/η` bounded levels, with inner accuracies `ε/2^j`, on top of an unspecified number of
+   extensive levels; the "polynomial" prefactors at fixed `η` are of size `exp(Θ(η⁻²))` and the `o(n)` is
+   heuristically `n^{3/4}`.  The honest headline is "*at the exponential scale* adaptivity recovers the
+   hinted exponent"; the only certified statement at a finite size is the two-level one of §2.9
+   (separation from non-adaptive algorithms from `n = 1400` on at `u = 1`), and it is about two levels
+   and exponent `≈ a/2`, not about `h`.
+3. **"Nobody has run it."**  With the constants of the theorems an inner two-sample bracket is cheaper
+   than enumeration only for several hundred coordinates, so every end-to-end run with real inner
+   randomness (workstream K, R8, mine) is at sizes where the levels enumerate; every large-size run
+   uses a simulated oracle or expectations.  What links the levels is one definition ("bracket
+   procedure": cost bound in every run, validity and width with probability `1 − δ′`), and the proof
+   uses nothing else — but a referee will note that the composition of three levels has been
+   exercised only on `Q_9`, `Q_10` (R8) and at the flat instance.
+4. **"Worst case against one instance."**  The lower bound is at the zero function; the algorithm's
+   own worst instance is not the zero function (engineering division, ENG-RES-0008), and the cost
+   table that the theory report quoted until `40c5bd7` was a best case.  This is now corrected in the
+   text; it does not touch a theorem.
+5. **"Harper's theorem and the binomial median are quoted from memory."**  They are standard and are
+   used in their standard form; both were verified by computation here and by R8.  A final version
+   should cite page and theorem number.
+6. **The abort rule.**  A referee who reads Theorem 11.52 as printed (abort *after* the budget is
+   exceeded) gets `bound + one inner call`; and one who suspects that the rule is decorative should be
+   shown §3.2: with an invalid inner behaviour and a dear last rung the run *does* exceed the budget
+   unless it is stopped, in 33 of 60 runs.
+
+What a hostile referee would **not** find: an error in the validity of the bracket (it was never in
+doubt), a wrong constant in the count, a tolerance entering the wrong place (the one thing that went
+wrong five times), or an instance on which the claimed bound fails.

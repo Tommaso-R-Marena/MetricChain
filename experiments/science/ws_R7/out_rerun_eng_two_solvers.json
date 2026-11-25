@@ -1,0 +1,83 @@
+[
+ {
+  "n": 14,
+  "key": "L=1,eps=1",
+  "published": 25,
+  "stored_solvers": {
+   "highs": 25,
+   "cpsat": 25
+  },
+  "reduced": [
+   265,
+   175
+  ],
+  "certified": 24,
+  "greedy": 26,
+  "highs": {
+   "size": 25,
+   "proved": true,
+   "bound": 25.0,
+   "seconds": 4.8
+  },
+  "cpsat_1_worker": {
+   "size": 27,
+   "proved": false,
+   "bound": 7.0,
+   "seconds": 240.9
+  }
+ },
+ {
+  "n": 15,
+  "key": "L=1,eps=0",
+  "published": 33,
+  "stored_solvers": {
+   "highs": 33,
+   "cpsat": 33
+  },
+  "reduced": [
+   450,
+   298
+  ],
+  "certified": 32,
+  "greedy": 39,
+  "highs": {
+   "size": 33,
+   "proved": true,
+   "bound": 32.99999999999998,
+   "seconds": 3.8
+  },
+  "cpsat_1_worker": {
+   "size": 39,
+   "proved": false,
+   "bound": 8.0,
+   "seconds": 240.0
+  }
+ },
+ {
+  "n": 16,
+  "key": "L=1,eps=0",
+  "published": 38,
+  "stored_solvers": {
+   "highs": 38,
+   "cpsat": 38
+  },
+  "reduced": [
+   573,
+   364
+  ],
+  "certified": 36,
+  "greedy": 45,
+  "highs": {
+   "size": 38,
+   "proved": true,
+   "bound": 38.0,
+   "seconds": 20.9
+  },
+  "cpsat_1_worker": {
+   "size": 43,
+   "proved": false,
+   "bound": 7.0,
+   "seconds": 240.0
+  }
+ }
+]

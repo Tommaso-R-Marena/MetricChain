@@ -1,8 +1,8 @@
 # Workstream L2 — machine-checking the science division's newest statements
 
 *Lean 4.31.0 + Mathlib (the repository's pinned version, commit `fabf563a`).  Three files,
-3 260 lines, in `experiments/science/ws_L2/`; log `NOTES.md`; last full check `check_log.txt`
-(2026-11-25, see the time stamps in that file); numerics `sanity_numerics.py`.*
+3 938 lines, 169 theorems, in `experiments/science/ws_L2/`; log `NOTES.md`; last full check
+`check_log.txt` (2026-11-25, 21:23–21:27 UTC); numerics `sanity_numerics.py`.*
 
 Labels: **[V]** machine-checked here (declaration named) · **[P]** paper proof given here ·
 **[K]** known · **[N]** numerical only.
@@ -11,7 +11,7 @@ Labels: **[V]** machine-checked here (declaration named) · **[P]** paper proof 
 only `Mathlib` and was checked on its own with
 `export PATH="$HOME/.lean/lean-4.31.0-linux/bin:$PATH"; cd /home/user/MetricChain; lake env lean <absolute path>`;
 exit code 0, no error, no warning; `#print axioms` was run for **every** theorem of every file
-(148 in all) and printed exactly `[propext, Classical.choice, Quot.sound]` each time
+(64 + 62 + 43 = 169) and printed exactly `[propext, Classical.choice, Quot.sound]` each time
 (`check_log.txt`; re-run with `bash experiments/science/ws_L2/check_all.sh`).  No `sorry`,
 `admit`, `native_decide` or `axiom` occurs in any file.  Nothing was written outside
 `experiments/science/ws_L2/` and this report; `lake build` was never run.  All declarations are
@@ -30,23 +30,29 @@ All three priorities of the brief are done, each beyond the minimum asked.
 conditions, the sandwich for every monotone observable, the macrostate ratios, attainment of both
 ends, and "fills exactly the interval" — on the cube, and more generally on *any finite
 distributive lattice with any envelope that two functions saturate* (so Remark (1), products of
-finite chains, is [V] as an instance).
+finite chains, is [V] as an instance).  Of Corollary A11.2 the sign of the summands is [V]; the
+integral formula is not formalised.
 **(2) Referee statements.**  R6.1 is [V].  R5(2) is [V] in abstract form *and* on the binary cube
 with the referee's `D_R` and `γ`.  **Lemma R6.2 is [V] in full** — the two signs, the exact root
 `s*` (intermediate value theorem), the bound on `ln Z′ − ln Z₀` and locality — in an abstract
 setting and on the binary cube; its hypotheses are shown to be jointly satisfiable [V].
-**(3) Proposition A1.2.**  Item 1: the window is the set of Gibbs laws of the Lipschitz class, and
-is convex [V]; the vertex correspondence is not formalised.  Item 2 [V] in the report's form
-(dependent product, any conditioning set, any pattern).  Item 3: the chain-rule inequality on
-`∏_{i<n} S_i`, equality at additive instances, and "maximum over the class = sum of the site
-maxima" are [V]; "site maximum is at a vertex" and the identification with `n·a` remain on paper.
+**(3) Proposition A1.2, items 1–3, are [V]** with two corrections to the text (§2.7, nos. 1, 2):
+the window is the set of Gibbs laws of the Lipschitz class, convex and compact, and its extreme
+points are the Gibbs laws of the extreme points of the class *normalised at a base point*
+(item 1); every conditional law lies in the window, for any conditioning set (item 2); the
+chain-rule bound with vertex labels, equality at additive instances, and "the maximum over the
+class exists and is the sum of the site maxima" (item 3).  On paper remain: finiteness of the
+vertex set and the identification of the sum with `n·a` (capacity).
 **No statement was found false.**  Nine places where the formal statement differs from the text
-are in §2.7.  The ones that matter: Proposition A1.2 lists two hypotheses on the site envelopes
-that are not used and omits the one that is needed (`d_j(a,a) = 0`; machine-checked
-counterexample without it); "the vertices of the Lipschitz polytope" cannot be read literally
-(that set has no extreme points [V]); Theorem A11 needs `β ≥ 0` (machine-checked failure at
-`β = −1`) but **no** sign condition on the envelope constants, and Corollary A11.1 holds for any
-lower set against any upper set, not only for complementary macrostates.
+are in §2.7.  The ones that matter: the hypotheses that Proposition A1.2 lists for the site
+envelopes are not the ones its proof uses (the triangle inequality is never used, `d_j ≥ 0` only
+makes the class non-empty), and the one that is needed is omitted (`d_j(a,a) = 0`;
+machine-checked counterexample without it); "the vertices of the Lipschitz polytope" cannot be
+read literally
+(that set has no extreme points [V]; the corrected statement is [V]); Theorem A11 needs `β ≥ 0`
+(machine-checked failure at `β = −1`) but **no** sign condition on the envelope constants, and
+Corollary A11.1 holds for any lower set against any upper set, not only for complementary
+macrostates.
 
 ## 2. Statements
 
@@ -59,15 +65,16 @@ lower set against any upper set, not only for complementary macrostates.
 | Holley's inequality, cross-multiplied, unnormalised | `holley_cross_nonneg`, `holley_cross` | `Sandwich` | [V]; any finite distributive lattice; `φ` monotone of any sign |
 | A11, sandwich cross-multiplied (brief, bullet 2) | `cube_sandwich_cross_lower`, `cube_sandwich_cross_upper` | `Sandwich` | [V]; every monotone `φ`, not only `φ ≥ 0` |
 | **Theorem A11**, `E_{f+h↑}φ ≤ E_{f+g}φ ≤ E_{f−h↓}φ` | `cube_sandwich_mean`; abstract `sandwich_mean` | `Sandwich` | [V] |
-| A11, "both ends are attained" | `cube_mean_isLeast`, `cube_mean_isGreatest`, `field_admissible`, `neg_field_admissible` | `Sandwich` | [V]; needs `c↑_i + c↓_i ≥ 0`, which is necessary for the class to be non-empty (`add_nonneg_of_admissible`) |
+| A11, "both ends are attained" (brief, bullet 4) | `cube_mean_isLeast`, `cube_mean_isGreatest`, `field_admissible`, `neg_field_admissible` | `Sandwich` | [V]; needs `c↑_i + c↓_i ≥ 0`, which is necessary for the class to be non-empty (`add_nonneg_of_admissible`) |
 | A11, "every value in between is attained" | `cube_mean_range_eq_Icc`; abstract `mean_range_eq_Icc`, `exists_admissible_ratio`, `mixRes_admissible` | `Sandwich` | [V] for `β > 0` |
 | **Corollary A11.1**, inequalities (brief, bullet 3) | `cube_macrostate_cross_upper`, `cube_macrostate_cross_lower`, `cube_macrostate_ratio`, `cube_macrostate_ratio_compl`; abstract `updown_cross`, `macrostate_ratio` | `Sandwich` | [V]; `A` any lower set, `B` any upper set (non-empty for the ratio form) |
 | Corollary A11.1, "fills exactly the interval" | `cube_ratio_range_eq_Icc`; abstract `ratio_range_eq_Icc` | `Sandwich` | [V] for `β > 0` |
 | A11, examples of submodular `f` (additive; pairwise, `J_ij ≤ 0`) | `field_submodular`, `pairTerm_submodular`, `pairwise_submodular` | `Sandwich` | [V] |
 | A11, Remark (1), ordered alphabets | `chainDist_sup_right`, `chainDist_inf_left`, `chainField_admissible`, `neg_chainField_admissible`, `chain_sandwich_mean`, `chain_mean_range_eq_Icc`, `chain_ratio_range_eq_Icc` | `Sandwich` | [V]; alphabets `Fin (k i)`, costs `c↑ i r`, `c↓ i r` with `c↑ + c↓ ≥ 0` |
+| Corollary A11.2, "every summand is non-negative (FKG)" | `cube_occupation_cross`, `cube_occupation_mono`, `updown_inter_cross` | `Sandwich` | [V]: `⟨x_i⟩_{A,t} ≤ ⟨x_i⟩_{B,t}` for a lower set `A`, an upper set `B`, any real `t` |
 | satisfiable instance with strict conclusion (brief, bullet 5) | `cube_sandwich_strict_witness` | `Sandwich` | [V]; two sites, `f = −[x₀∧x₁]`, `c = 1`, `g = 0`, `β = 1`, `φ = [x₀]` |
 | `β ≥ 0` is needed | `cube_sandwich_fails_negative_beta` | `Sandwich` | [V]; same instance, `β = −1` |
-| Corollaries A11.2, A11.3; "the hypotheses are needed"; Remark (2) | — | — | not formalised (§5) |
+| Corollary A11.2 (the integral formula), A11.3; "the hypotheses are needed"; Remark (2) | — | — | not formalised (§5) |
 | **R6.1**, `Z′ = Z₀ + E` | `partSum_twinMin` | `Referee` | [V]; any finite type, any `g₀, T` |
 | R6.1, `U′ − U₀ = (E/(Z₀+E))(D/E − U₀)` | `excess_identity`; division-free `meanEn_twinMin_sub` | `Referee` | [V]; the referee's form for `E ≠ 0` |
 | R6.1, "unchanged iff the mean energy of the excess mass is `U₀`" | `meanEn_twinMin_eq_iff`, `excessMass_eq_zero_iff`, `twinMin_eq_of_excessMass_eq_zero` | `Referee` | [V] |
@@ -80,15 +87,15 @@ lower set against any upper set, not only for complementary macrostates.
 | R6.2, exact root, gain, locality | `r6_2_root`, `r6_2_binary_cube` | `Referee` | [V] |
 | R6.2, hypotheses satisfiable | `r6_2_nonvacuous` | `Referee` | [V]; `n = 4`, `r₁ = 2`, `u = 6`, antipodal centres |
 | R6.3, Theorem R6, Corollary R6′ | — | — | not formalised (the abstract `r6_2_*` apply verbatim to the coset profiles of R6′) |
-| **A1.2 item 1**, `𝒲 = {π_γ : γ ∈ L}`, convex | `window_eq_gibbs_image`, `gibbsLaw_mem_window`, `exists_gibbsLaw_of_mem_window`, `window_convex` | `Window` | [V]; `π > 0` |
-| A1.2 item 1, vertices | `lipClass_extremePoints_eq_empty` | `Window` | the literal reading is empty [V]; the intended statement is [P] here (§2.6), not machine-checked |
+| **A1.2 item 1**, `𝒲 = {π_γ : γ ∈ L}`, convex (polytope) | `window_eq_gibbs_image`, `gibbsLaw_mem_window`, `exists_gibbsLaw_of_mem_window`, `window_convex`, `isCompact_window` | `Window` | [V]; `π > 0` |
+| A1.2 item 1, "its vertices are the Gibbs laws of the vertices of `L`" | **`extremePoints_window_eq`** (`gibbsLaw_extreme_of_extreme`, `extreme_of_gibbsLaw_extreme`); `lipClass_extremePoints_eq_empty` | `Window` | [V] **after correction**: `L` normalised at a base point; `L` itself has no extreme points |
 | **A1.2 item 2** (brief's `α × β` form) | `site_conditional_mem_window` | `Window` | [V]; weight on the rest only `≥ 0`, positive mass |
 | A1.2 item 2 (report's form) | `cylinder_cross_le`, `condLaw_mem_window`, `single_site_of_admissible` | `Window` | [V]; dependent product, any conditioning set `P ∌ i`, any pattern |
 | A1.2 needs `d_j(a,a) = 0` | `window_needs_diag_zero` | `Window` | [V] counterexample |
-| **A1.2 item 3**, `KL(ν_ψ‖⊗Q_i) ≤ Σ_i M_i` | `klBound_pi`, `klBound_prod`, `kl_gibbs_prod_eq`, `softMin_admissible` | `Window` | [V]; `M_i` any bound on `KL(π_γ‖Q_i)` over `L_i` |
+| **A1.2 item 3**, `KL(ν_ψ‖⊗Q_i) ≤ Σ_i max_{φ∈𝒱_i} KL(π_φ‖Q_i)` | **`klBound_pi_of_vertices`** (`klBound_pi`, `klBound_of_vertices`, `klBound_prod`, `kl_gibbs_prod_eq`, `softMin_admissible`) | `Window` | [V]; `M_i` any bound over the vertex labels of site `i`; `Q_i > 0` need not be normalised |
 | A1.2 item 3, equality at additive instances | `kl_additive_pi`, `kl_gibbs_prod_additive` | `Window` | [V] |
-| A1.2 item 3, `sup_𝒞 = Σ_i max_{L_i}` | `kl_pi_isGreatest` | `Window` | [V], *given* that each site maximum exists |
-| A1.2 item 3, "max over vertices", `= n·a`; items 4, 5 | — | — | not formalised |
+| A1.2 item 3, `sup_𝒞 = Σ_i max_{L_i}` | `kl_pi_exists_isGreatest` (`kl_pi_isGreatest`, `exists_site_max`) | `Window` | [V]; non-empty site classes, `d_i(s,s) ≤ 0` |
+| A1.2 item 3, `= n·a` for the Shannon centres; finiteness of `𝒱_i`; items 4, 5 | — | — | not formalised |
 
 ### 2.2 Addendum A11 (`Sandwich.lean`) [V]
 
@@ -132,6 +139,12 @@ lines.  (d) "Every value in between": for `β > 0` and admissible `g₀, g₁` t
 Boltzmann weight is the convex combination (`boltz_mixRes`), and a ratio of two linear functionals
 of the weights takes every value between its values at the ends at an explicit `t`
 (`exists_convex_ratio`; no continuity argument is needed).
+
+**Corollary A11.2, the sign.**  `updown_inter_cross`: for a log-supermodular weight `w`, a lower
+set `A` and upper sets `B, U`: `w(A∩U)·w(B) ≤ w(A)·w(B∩U)` (the four functions theorem with
+`s = A∩U, t = B`).  With `w = e^{−β(f + t·h)}` (log-supermodular for every real `t`:
+`boltz_logSupermodular`, `field_modular`) and `U = {x_i = 1}`: `cube_occupation_mono`,
+`⟨x_i⟩_{A,t} ≤ ⟨x_i⟩_{B,t}`.
 
 **Instances.**  `cube_sandwich_strict_witness`: two sites, `f = −[x₀∧x₁]`, `c↑ = c↓ = 1`, `g = 0`,
 `β = 1`, `φ = [x₀]`: `f` is submodular, `φ` monotone, `g` admissible, and
@@ -190,7 +203,9 @@ Corollary R6′.
 **`r6_2_root`.**  Under the same hypotheses there is `s* ∈ (−1,1)` with `U′_{s*} = U₀`,
 `log Z′_{s*} − log Z₀ ≥ log(1 + e^{−u}(1 − 1/r₁))`, and `g′_{s*}(x) = g₀(x)` whenever `d′(x) > r₁`.
 **`r6_2_nonvacuous`.**  For `n = 4`, `r₁ = 2`, `u = 6`, `a₀ = 0000`, `a′ = 1111` both hypotheses
-hold ((i) is `256e⁶ ≤ e¹² + 4e⁶`; `ω_{+1} = 0`).
+hold ((i) is `256e⁶ ≤ e¹² + 4e⁶`; `ω_{+1} = 0`).  Here `r₁ = n/2`; the lemma as formalised does
+not assume `r₁ < n/2`.  With `r₁ < n/2` both hypotheses hold e.g. at `n = 8`, `r₁ = 3`, `u = 6`,
+antipodal centres (`W/(8r₁e^u2ⁿ) = 27`, `ω_{+1} = 0`, `U′_{±1} − U₀ = −5.985, +0.0148`) **[N]**.
 
 **The inequalities used, isolated** (what the proof consists of):
 *Layer A* (any `g₀, T ≤ 0`; `E^f = Σ(e^{−T}−1)`, `D^f = ΣTe^{−T}` the sums "if `g₀` were `0`"):
@@ -204,26 +219,29 @@ hold ((i) is `256e⁶ ≤ e¹² + 4e⁶`; `ω_{+1} = 0`).
 *Root*: `s ↦ U′_s` is continuous (`fun_prop`), `intermediate_value_Icc'`; `Z′_s ≥ Z′_{−1}`
 (`partSum_twinMin_mono`).
 
-### 2.6 Proposition A1.2, items 1–3 (`Window.lean`)
+### 2.6 Proposition A1.2, items 1–3 (`Window.lean`) [V]
 
 `gibbsLaw π γ a = π a e^{−γ a}/Σ_b π b e^{−γ b}`;
 `window π d = {p : p ≥ 0, Σp = 1, π a·p b ≤ e^{d a b}·π b·p a ∀a,b}`;
+`lipNorm d a₀ = {γ : γ a − γ b ≤ d a b ∀a,b, γ a₀ = 0}`;
 `klDivFin p q = Σ p(log p − log q)`.
 
-**Item 1 [V, except vertices].**  `window_eq_gibbs_image`: for `π > 0`,
+**Item 1.**  `window_eq_gibbs_image`: for `π > 0`,
 `window π d = {gibbsLaw π γ : γ a − γ b ≤ d a b}` (`⊆` with `γ = log π − log p`; members of the
-window are strictly positive, `window_pos`).  `window_convex`.  The class
-`L = {γ : γ a − γ b ≤ d a b}` has **no extreme points** (`lipClass_extremePoints_eq_empty`), so
-"its vertices are the Gibbs laws of the vertices of the Lipschitz polytope" must be read with `L`
-taken modulo constants (or normalised at a base point).  With that reading the statement is true
-**[P, not machine-checked, not checked numerically]**: for `p = π_γ` call a pair `(a,b)` *tight*
-if `π a·p b = e^{d a b}π b·p a`, equivalently `γ a − γ b = d a b`.  If `p = ½(p₁+p₂)` in the
-window, tight pairs are tight for `p₁, p₂`, so `η = (p₁−p₂)/p` is constant along tight pairs and
-not constant; then `γ ± ε(η − η(a₀))` stay in the class for small `ε` (finitely many slack
-constraints), so `γ` is not extreme.  The converse is the same computation backwards.  Both
-directions say: extreme ⇔ the graph of tight pairs is connected.
+window are strictly positive, `window_pos`).  `window_convex`, `isCompact_window`.
+The class `L = {γ : γ a − γ b ≤ d a b}` has **no extreme points**
+(`lipClass_extremePoints_eq_empty`).  The vertex statement, corrected:
 
-**Item 2 [V].**  `condLaw_mem_window`: on `∏_i S_i` (finite alphabets, `π_i > 0`), for every `ψ`
+    extremePoints (window π d) = gibbsLaw π '' extremePoints (lipNorm d a₀)     (`extremePoints_window_eq`).
+
+Proof as formalised: a window constraint is tight at `π_γ` iff the Lipschitz constraint is tight
+at `γ` (`window_tight_iff`); a direction that is constant along tight pairs can be added and
+subtracted with a small coefficient without leaving the set (`perturb_mem_lipNorm`,
+`perturb_mem_window`; the coefficient is the least of finitely many ratios, `exists_pos_scale`);
+in a proper convex combination, tight constraints are tight for both parts
+(`eq_of_convex_comb_eq`).
+
+**Item 2.**  `condLaw_mem_window`: on `∏_i S_i` (finite alphabets, `π_i > 0`), for every `ψ`
 with `ψ(x) − ψ(x^{i←b}) ≤ d(x_i,b)` (true for every `ψ ∈ 𝒞` when the envelopes vanish on the
 diagonal: `single_site_of_admissible`), every site `i`, every set `P ∌ i` of sites and every
 pattern `y` on `P`: the conditional law of `x_i` given `x_P = y_P` under `ν_ψ` lies in
@@ -231,7 +249,7 @@ pattern `y` on `P`: the conditional law of `x_i` given `x_P = y_P` under `ν_ψ`
 The proof is the bijection `x ↦ x^{i←b}` between cylinders (`cylinder_cross_le`).
 `site_conditional_mem_window` is the two-factor form asked for in the brief.
 
-**Item 3 [V, in the following form].**
+**Item 3.**
 `kl_gibbs_prod_eq` (chain rule, two factors): for positive `π₁, π₂, Q₁, Q₂` and any `ψ` on `α×β`,
 
     KL(ν_ψ ‖ Q₁⊗Q₂) = KL(ν_{ψ₂} ‖ Q₂) + Σ_r ν_{ψ₂}(r)·KL(π₁-Gibbs law of ψ(·,r) ‖ Q₁),
@@ -240,28 +258,33 @@ The proof is the bijection `x ↦ x^{i←b}` between cylinders (`cylinder_cross_
 `klBound_pi`: for alphabets `S_i`, `i < n`, positive `π_i`, positive `Q_i` (not necessarily
 normalised), envelopes with `d_i(s,s) ≤ 0`: if `KL(π_γ‖Q_i) ≤ M_i` for all `γ ∈ L_i`, then
 `KL(ν_ψ ‖ ⊗Q_i) ≤ Σ_i M_i` for every `ψ` with `ψ x − ψ y ≤ Σ_i d_i(x_i,y_i)`.
+`klBound_of_vertices`: it is enough that `KL(π_φ‖Q_i) ≤ M_i` at the extreme points `φ` of
+`lipNorm (d i) a₀` (Krein–Milman, `closure_convexHull_extremePoints`; convexity of
+`p ↦ KL(p‖Q)` on the window from `Real.convexOn_mul_log`; its continuity; item 1).  Together:
+**`klBound_pi_of_vertices`**, the first display of item 3.
 `kl_additive_pi`: `KL(ν_ψ‖⊗Q_i) = Σ_i KL(π_{γ_i}‖Q_i)` for `ψ = Σ_i γ_i(x_i)`.
-`kl_pi_isGreatest`: if every site has a greatest value `M_i` of `KL(π_γ‖Q_i)` over `L_i`, then
-`Σ_i M_i` is the greatest value of `KL(ν_ψ‖⊗Q_i)` over `𝒞`.
-The proof is induction on `n` through `Fin.consEquiv` (`klBound_equiv`, `klDivFin_gibbs_equiv`
-transport along the equivalence).  No relative-entropy theory from Mathlib is used.
-Remaining on paper: existence of the site maximum (compactness), its location at a vertex
-(convexity of `KL(·‖Q)` + item 1), and `Σ_i M_i = n·a` for the Shannon centres (the minimax
-characterisation of capacity, [K]).
+`exists_site_max`, `kl_pi_exists_isGreatest`: for non-empty site classes the greatest value `M_i`
+of `KL(π_γ‖Q_i)` over `L_i` exists, and `Σ_i M_i` is the greatest value of `KL(ν_ψ‖⊗Q_i)` over
+`𝒞` (attained at an additive instance).
+The `n`-site statements are proved by induction on `n` through `Fin.consEquiv` (`klBound_equiv`,
+`klDivFin_gibbs_equiv` transport along the equivalence).  No relative-entropy theory from Mathlib
+is used.  Remaining on paper: the vertex set is finite (so that "max over `𝒱_i`" is a maximum),
+and `Σ_i M_i = n·a` for the Shannon centres (the minimax characterisation of capacity, [K]).
 
 ### 2.7 Discrepancies between the formal statements and the texts
 
 1. **A1.2: the hypotheses on the site envelopes are the wrong ones as listed.**  The proposition
-   assumes "envelopes `d_j ≥ 0` with the triangle inequality".  Neither is used in items 1–3.
-   What is used is `d_j(a,a) = 0` (`single_site_of_admissible`, `klBound_prod`), and it does not
-   follow from the two listed properties (`d ≡ 1` has both).  Without it item 2 is false **[V]**
+   assumes "envelopes `d_j ≥ 0` with the triangle inequality".  The triangle inequality is used
+   nowhere in items 1–3; `d_j ≥ 0` only serves to make the class non-empty.  What is used is
+   `d_j(a,a) = 0` (`single_site_of_admissible`, `klBound_prod`), and it does not follow from the
+   two listed properties (`d ≡ 1` has both).  Without it item 2 is false **[V]**
    (`window_needs_diag_zero`: two binary sites, uniform `π`, `d₁ ≡ 0`, `d₂ ≡ 1`, `ψ(a,r) = [a]`
    is in the class, and the law of the first letter is not in the window of `d₁`).  If "envelope"
    is read as a quasi-metric (the programme's convention), the proposition stands; the formal
    statement needs `d_j(a,a) ≤ 0` and nothing else.
 2. **A1.2 item 1, "vertices of the Lipschitz polytope `L_j`".**  `L_j` is invariant under adding
-   constants and has no extreme points **[V]**.  The statement is about `L_j` modulo constants
-   (§2.6, [P]).
+   constants and has no extreme points **[V]**.  The statement that is true, and now **[V]**, is
+   about `L_j` normalised at a base point (`extremePoints_window_eq`).
 3. **A11 needs `β ≥ 0`** (not stated; for `β < 0` the order reverses, **[V]**
    `cube_sandwich_fails_negative_beta`).  "Every value in between" is formalised for `β > 0`
    (for `β = 0` the interval is a point).
@@ -294,7 +317,8 @@ characterisation of capacity, [K]).
 `experiments/science/ws_L2/sanity_numerics.py` (seed fixed; 45–95 s depending on machine load;
 output in `sanity_numerics_output.txt`).  Purpose: to try to falsify the *formal statements*, with
 the hypotheses exactly as in the Lean files, before proving them.  Nothing below is evidence for a
-theorem; the theorems are proved.  All **[N]**:
+theorem; the theorems are proved.  (The vertex correspondence, the vertex-label bound and the
+occupation inequality were proved without a numerical pre-check.)  All **[N]**:
 
 | check | sizes | result |
 |---|---|---|
@@ -317,35 +341,40 @@ arguments), and no literature search was made.  Facts about the library, from th
 lattice; `holley` is stated for `Σf = Σg`; the file has no stochastic-domination statement for
 unnormalised weights and no statement for up-sets/down-sets (both are a few lines from
 `four_functions_theorem`, §2.2).  `Mathlib/InformationTheory/Hamming.lean` **[declaration list
-read]**: `hammingDist_comp`, `hammingDist_eq_hammingNorm` used.  The chain rule for relative
+read]**: `hammingDist_comm`, `hammingDist_eq_hammingNorm` used.  The chain rule for relative
 entropy in `Mathlib/InformationTheory/KullbackLeibler/ChainRule.lean` **[not opened]** is
-measure-theoretic and was not needed.  Two lemmas (`supportEquiv`, `sum_hammingNorm_binary`) are
-copied from workstream L1 (`experiments/science/ws_L1/MarginalOracle.lean`).
+measure-theoretic and was not needed.  Used as stated **[signatures read with `#check`]**:
+`closure_convexHull_extremePoints` (Krein–Milman), `ConvexOn.exists_ge_of_mem_convexHull`,
+`Real.convexOn_mul_log`, `Real.continuous_mul_log`, `intermediate_value_Icc'`,
+`Fintype.prod_sum`.  Two lemmas (`supportEquiv`, `sum_hammingNorm_binary`) are copied from
+workstream L1 (`experiments/science/ws_L1/MarginalOracle.lean`).
 
 ## 5. Not done, and why
 
-* **A11**: Corollary A11.2 (the width formula is an integral over `t`; the non-negativity of its
-  summands is one application of Mathlib's `fkg` and was not written); Corollary A11.3;
-  "the hypotheses are needed" (numerical in the note); Remark (2) (symmetry).
+* **A11**: the integral formula of Corollary A11.2 (calculus in `t`; only the sign of the
+  integrand is [V]); Corollary A11.3; "the hypotheses are needed" (numerical in the note);
+  Remark (2) (symmetry); the remark `½ tanh(u/2)`.
 * **R5**: (1) (membership of the class, Lemma 1 — the latter is in L1), (3) (the query bound;
   L1 has the corresponding assembly for Theorem 4′), (4) (random codes).
-* **R6**: Lemma R6.3 (Hoeffding for sampling without replacement — not in Mathlib as far as I
-  saw; not searched systematically), Theorem R6 (needs R6.3 and the indistinguishability
-  argument), Corollary R6′ beyond the remark that the abstract `r6_2_*` apply to coset profiles.
-* **A1.2**: the vertex correspondence of item 1 ([P] in §2.6); "a convex function on the window is
-  maximal at a vertex"; existence of the site maximum; `Σ_i M_i = n·a`; items 4 (Azuma) and 5.
+* **R6**: Lemma R6.3 (Hoeffding for sampling without replacement — not found in Mathlib; not
+  searched systematically), Theorem R6 (needs R6.3 and the indistinguishability argument),
+  Corollary R6′ beyond the remark that the abstract `r6_2_*` apply to coset profiles.
+* **A1.2**: finiteness of the set of vertices; `Σ_i M_i = n·a` for the Shannon centres; items 4
+  (Azuma) and 5.
 * For `β = 0` the "fills exactly" statements are true and trivial but are not covered by
   `cube_mean_range_eq_Icc` / `cube_ratio_range_eq_Icc` (they assume `β > 0`).
 
 ## 6. Three next steps
 
-1. The vertex correspondence of A1.2 item 1 (extreme points of `window π d` ⇔ extreme points of
-   the normalised Lipschitz class ⇔ connected tight graph), then `kl_pi_isGreatest` with
-   `M_i = max over finitely many vertex laws` — this would make item 3 hypothesis-free.
-2. Lemma R6.3 and Theorem R6: with R6.2 machine-checked, what is missing is the hypergeometric
+1. Lemma R6.3 and Theorem R6: with R6.2 machine-checked, what is missing is the hypergeometric
    tail bound and the assembly with L1's oracle model (`theorem4_adaptive_marginal_oracle`).
-3. Corollary A11.2's sign statement via Mathlib's `fkg`, and the closed form
-   `E_{h}|x|/n = 1/(1+e^{u})` on the uniform cube (the `½ tanh(u/2)` remark).
+2. Items 4–5 of A1.2 (Azuma–Hoeffding for the log-density along the chain rule, then the
+   truncation step): `kl_gibbs_prod_eq` already gives the martingale decomposition, and
+   Mathlib has Azuma–Hoeffding-type bounds only in measure-theoretic form — the transfer to a
+   finite product is the work.
+3. The integral form of Corollary A11.2 (derivative of `log Z_{f+th}(A)` in `t`, then the
+   fundamental theorem of calculus), which with `cube_occupation_mono` gives the width formula
+   and its monotonicity in each `c_i`.
 
 ## 7. Requests
 
@@ -367,9 +396,9 @@ rule needs.
 
 | file | lines | theorems | definitions | content |
 |---|---|---|---|---|
-| `Sandwich.lean` | 1 110 | 59 | 12 | A11: abstract lattice, convexity in the weights, cube, chains, witnesses |
-| `Referee.lean` | 1 373 | 62 | 15 | R6.1; R5(2) abstract and binary cube; R6.2 abstract, binary cube, witness |
-| `Window.lean` | 777 | 27 | 8 | A1.2 items 1–3, counterexample for the diagonal |
+| `Sandwich.lean` | 1 247 | 64 | 12 | A11: abstract lattice, convexity in the weights, cube, occupation sign, chains, witnesses |
+| `Referee.lean` | 1 396 | 62 | 15 | R6.1; R5(2) abstract and binary cube; R6.2 abstract, binary cube, witness |
+| `Window.lean` | 1 295 | 43 | 9 | A1.2 items 1–3, vertices, vertex-label bound, counterexample for the diagonal |
 | `check_all.sh`, `check_log.txt` | | | | the check of the three files, one at a time |
 | `sanity_numerics.py`, `sanity_numerics_output.txt` | 569 | | | §3 |
 | `NOTES.md` | | | | chronological log |

@@ -1,0 +1,97 @@
+=== fb_S4_E_R3_t0.60 tau=0.7 residual GB on Xtau: 6561 assignments, states/site [9, 9, 9, 9]
+c_i = [4.902 4.663 4.651 4.335] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 53, volume bound 6.5, partition bound 1.8 => N_cov >= 53;  greedy cover 156  (of M = 6561; mean set size 229.1, max 1761; sparse path)  [8s]
+cover at eps = 0.596 kcal/mol: forced points 30, volume bound 4.7, partition bound 1.4 => N_cov >= 30;  greedy cover 116  (of M = 6561; mean set size 297.5, max 2116; sparse path)  [8s]
+cover at eps = 2.000 kcal/mol: forced points 4, volume bound 2.6, partition bound 1.0 => N_cov >= 4;  greedy cover 53  (of M = 6561; mean set size 520.3, max 3124; sparse path)  [8s]
+=== fb_S4_H_R3_t0.60 tau=0.7 residual GB on Xtau: 2916 assignments, states/site [9, 9, 6, 6]
+c_i = [8.338 9.798 8.226 6.728] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 455, volume bound 239.9, partition bound 18.3 => N_cov >= 455;  greedy cover 582  (of M = 2916; mean set size 10.7, max 89; sparse path)  [1s]
+cover at eps = 0.596 kcal/mol: forced points 322, volume bound 153.8, partition bound 14.4 => N_cov >= 322;  greedy cover 447  (of M = 2916; mean set size 13.4, max 110; sparse path)  [1s]
+cover at eps = 2.000 kcal/mol: forced points 126, volume bound 59.1, partition bound 8.2 => N_cov >= 126;  greedy cover 253  (of M = 2916; mean set size 22.0, max 169; sparse path)  [1s]
+=== fb_K3_H_R3_t0.60 tau=0.7 residual GB on Xtau: 2352 assignments, states/site [14, 14, 12]
+c_i = [38.591 51.498 49.551] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 2128, volume bound 1694.5, partition bound 182.9 => N_cov >= 2128;  greedy cover 2128  (of M = 2352; mean set size 1.7, max 7; sparse path)  [1s]
+cover at eps = 0.596 kcal/mol: forced points 2108, volume bound 1643.1, partition bound 172.3 => N_cov >= 2108;  greedy cover 2108  (of M = 2352; mean set size 1.8, max 8; sparse path)  [1s]
+cover at eps = 2.000 kcal/mol: forced points 2059, volume bound 1535.9, partition bound 149.7 => N_cov >= 2059;  greedy cover 2059  (of M = 2352; mean set size 1.9, max 8; sparse path)  [1s]
+=== fb_LKSEc4_H_R3_t0.60 tau=0.6 residual GB on Xtau: 7254 assignments, states/site [2, 31, 9, 13]
+c_i = [ 2.38  32.239 19.849 31.378] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 78, volume bound 10.8, partition bound 9.2 => N_cov >= 78;  greedy cover 754  (of M = 7254; mean set size 356.8, max 2021; sparse path)  [12s]
+cover at eps = 0.596 kcal/mol: forced points 47, volume bound 9.9, partition bound 7.2 => N_cov >= 47;  greedy cover 707  (of M = 7254; mean set size 371.2, max 2068; sparse path)  [13s]
+cover at eps = 2.000 kcal/mol: forced points 18, volume bound 7.9, partition bound 5.6 => N_cov >= 18;  greedy cover 611  (of M = 7254; mean set size 407.2, max 2193; sparse path)  [13s]
+=== fb_L12_H_R3_t0.60 tau=0.6 residual GB on Xtau: 4096 assignments, states/site [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+c_i = [0.827 0.826 1.122 0.488 0.85  0.742 0.421 0.398 0.391 0.314 0.596 0.758] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 1, volume bound 1.0, partition bound 0.1 => N_cov >= 1;  greedy cover 1  (of M = 4096; mean set size 4088.7, max 4096; sparse path)  [9s]
+cover at eps = 0.596 kcal/mol: forced points 0, volume bound 1.0, partition bound 0.1 => N_cov >= 1;  greedy cover 1  (of M = 4096; mean set size 4089.8, max 4096; sparse path)  [9s]
+cover at eps = 2.000 kcal/mol: forced points 0, volume bound 1.0, partition bound 0.1 => N_cov >= 1;  greedy cover 1  (of M = 4096; mean set size 4092.1, max 4096; sparse path)  [7s]
+=== fb_V8_E_R3_t0.60 tau=0.7 residual GB on Xtau: 6561 assignments, states/site [3, 3, 3, 3, 3, 3, 3, 3]
+c_i = [0.353 0.415 0.426 0.427 0.43  0.429 0.439 0.379] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 1, volume bound nan, partition bound nan => N_cov >= 1;  greedy cover 1  (of M = 6561; mean set size 6560.0, max 6561; dense path)  [2s]
+cover at eps = 0.596 kcal/mol: forced points 0, volume bound nan, partition bound nan => N_cov >= 1;  greedy cover 1  (of M = 6561; mean set size 6560.4, max 6561; dense path)  [2s]
+cover at eps = 2.000 kcal/mol: forced points 0, volume bound nan, partition bound nan => N_cov >= 1;  greedy cover 1  (of M = 6561; mean set size 6561.0, max 6561; dense path)  [1s]
+=== fb_S4_E_R3_t0.60 tau=0.7 residual ff03-ff14SB on Xtau: 6561 assignments, states/site [9, 9, 9, 9]
+c_i = [4.818 4.567 4.617 4.574] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 7, volume bound 1.8, partition bound 0.7 => N_cov >= 7;  greedy cover 85  (of M = 6561; mean set size 620.2, max 5387; sparse path)  [7s]
+cover at eps = 0.596 kcal/mol: forced points 3, volume bound 1.4, partition bound 0.7 => N_cov >= 3;  greedy cover 59  (of M = 6561; mean set size 749.6, max 5624; sparse path)  [7s]
+cover at eps = 2.000 kcal/mol: forced points 0, volume bound 1.1, partition bound 0.6 => N_cov >= 2;  greedy cover 24  (of M = 6561; mean set size 1129.3, max 6069; sparse path)  [6s]
+=== fb_S4_H_R3_t0.60 tau=0.7 residual ff03-ff14SB on Xtau: 2916 assignments, states/site [9, 9, 6, 6]
+c_i = [5.068 4.525 4.277 4.3  ] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 2, volume bound 1.0, partition bound 0.4 => N_cov >= 2;  greedy cover 24  (of M = 2916; mean set size 1849.1, max 2824; sparse path)  [3s]
+cover at eps = 0.596 kcal/mol: forced points 0, volume bound 1.0, partition bound 0.4 => N_cov >= 2;  greedy cover 15  (of M = 2916; mean set size 1950.5, max 2842; sparse path)  [2s]
+cover at eps = 2.000 kcal/mol: forced points 0, volume bound 1.0, partition bound 0.3 => N_cov >= 2;  greedy cover 6  (of M = 2916; mean set size 2175.3, max 2880; sparse path)  [3s]
+=== fb_K3_H_R3_t0.60 tau=0.7 residual ff03-ff14SB on Xtau: 2352 assignments, states/site [14, 14, 12]
+c_i = [6.975 8.598 5.895] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 28, volume bound 1.1, partition bound 1.0 => N_cov >= 28;  greedy cover 30  (of M = 2352; mean set size 1734.0, max 2089; sparse path)  [1s]
+cover at eps = 0.596 kcal/mol: forced points 22, volume bound 1.1, partition bound 0.4 => N_cov >= 22;  greedy cover 24  (of M = 2352; mean set size 1765.3, max 2116; sparse path)  [1s]
+cover at eps = 2.000 kcal/mol: forced points 12, volume bound 1.1, partition bound 0.3 => N_cov >= 12;  greedy cover 16  (of M = 2352; mean set size 1836.1, max 2173; sparse path)  [1s]
+=== fb_LKSEc4_H_R3_t0.60 tau=0.6 residual ff03-ff14SB on Xtau: 7254 assignments, states/site [2, 31, 9, 13]
+c_i = [1.32  5.772 5.229 9.604] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 1, volume bound nan, partition bound nan => N_cov >= 2;  greedy cover 8  (of M = 7254; mean set size 6843.8, max 7235; dense path)  [2s]
+cover at eps = 0.596 kcal/mol: forced points 0, volume bound nan, partition bound nan => N_cov >= 2;  greedy cover 5  (of M = 7254; mean set size 6882.5, max 7239; dense path)  [2s]
+cover at eps = 2.000 kcal/mol: forced points 0, volume bound nan, partition bound nan => N_cov >= 1;  greedy cover 1  (of M = 7254; mean set size 6963.4, max 7254; dense path)  [2s]
+=== fb_L12_H_R3_t0.60 tau=0.6 residual ff03-ff14SB on Xtau: 4096 assignments, states/site [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+c_i = [0.784 0.82  0.862 0.307 0.317 0.319 0.308 0.295 0.3   0.316 0.309 0.333] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 1, volume bound 1.0, partition bound 0.0 => N_cov >= 1;  greedy cover 1  (of M = 4096; mean set size 4095.0, max 4096; sparse path)  [9s]
+cover at eps = 0.596 kcal/mol: forced points 0, volume bound 1.0, partition bound 0.0 => N_cov >= 1;  greedy cover 1  (of M = 4096; mean set size 4096.0, max 4096; sparse path)  [7s]
+cover at eps = 2.000 kcal/mol: forced points 0, volume bound 1.0, partition bound 0.0 => N_cov >= 1;  greedy cover 1  (of M = 4096; mean set size 4096.0, max 4096; sparse path)  [8s]
+=== fb_V8_E_R3_t0.60 tau=0.7 residual ff03-ff14SB on Xtau: 6561 assignments, states/site [3, 3, 3, 3, 3, 3, 3, 3]
+c_i = [0.613 0.467 0.513 0.498 0.508 0.511 0.497 0.521] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 1, volume bound nan, partition bound nan => N_cov >= 1;  greedy cover 1  (of M = 6561; mean set size 6539.2, max 6561; dense path)  [2s]
+cover at eps = 0.596 kcal/mol: forced points 0, volume bound nan, partition bound nan => N_cov >= 1;  greedy cover 1  (of M = 6561; mean set size 6546.4, max 6561; dense path)  [2s]
+cover at eps = 2.000 kcal/mol: forced points 0, volume bound nan, partition bound nan => N_cov >= 1;  greedy cover 1  (of M = 6561; mean set size 6555.8, max 6561; dense path)  [2s]
+=== fb_F8_H_R3_t0.60 tau=0.6 residual GB on Xtau: 14014 assignments, states/site [6, 6, 4, 3, 3, 3, 3, 3]
+c_i = [2.569 2.843 1.453 1.78  2.413 2.847 2.942 2.854] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 1, volume bound nan, partition bound nan => N_cov >= 2;  greedy cover 4  (of M = 14014; mean set size 13980.4, max 14010; dense path)  [11s]
+cover at eps = 0.596 kcal/mol: forced points 0, volume bound nan, partition bound nan => N_cov >= 2;  greedy cover 3  (of M = 14014; mean set size 13986.1, max 14012; dense path)  [12s]
+cover at eps = 2.000 kcal/mol: forced points 0, volume bound nan, partition bound nan => N_cov >= 1;  greedy cover 1  (of M = 14014; mean set size 13996.7, max 14014; dense path)  [10s]
+=== fb_L14_H_R3_t0.60 tau=0.6 residual GB on Xtau: 16384 assignments, states/site [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+c_i = [0.834 0.839 1.145 0.527 0.894 0.785 0.544 0.632 0.671 0.552 0.453 0.37
+ 0.63  0.78 ] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 1, volume bound nan, partition bound nan => N_cov >= 1;  greedy cover 1  (of M = 16384; mean set size 16374.8, max 16384; dense path)  [15s]
+cover at eps = 0.596 kcal/mol: forced points 0, volume bound nan, partition bound nan => N_cov >= 1;  greedy cover 1  (of M = 16384; mean set size 16376.4, max 16384; dense path)  [16s]
+cover at eps = 2.000 kcal/mol: forced points 0, volume bound nan, partition bound nan => N_cov >= 1;  greedy cover 1  (of M = 16384; mean set size 16379.0, max 16384; dense path)  [15s]
+=== fb_LKSEc5_H_R3_t0.60 tau=0.6 residual GB on Xtau: 14508 assignments, states/site [2, 31, 9, 13, 2]
+c_i = [ 2.51  30.637 20.307 32.934  4.446] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 68, volume bound 7.0, partition bound 6.3 => N_cov >= 68;  greedy cover 800  (of M = 14508; mean set size 894.0, max 4247; sparse path)  [75s]
+cover at eps = 0.596 kcal/mol: forced points 42, volume bound 6.5, partition bound 6.0 => N_cov >= 42;  greedy cover 761  (of M = 14508; mean set size 926.6, max 4332; sparse path)  [79s]
+cover at eps = 2.000 kcal/mol: forced points 16, volume bound 5.6, partition bound 5.2 => N_cov >= 16;  greedy cover 660  (of M = 14508; mean set size 1007.2, max 4577; sparse path)  [76s]
+=== fb_K3_H_R3_t0.60 tau=0.6 residual GB on Xtau: 20718 assignments, states/site [31, 31, 22]
+c_i = [53.258 62.838 58.94 ] kcal/mol
+validity of the weighted-Hamming envelope on the domain: max |g(x)-g(y)|/d(x,y) = 1.0000
+cover at eps = 0.000 kcal/mol: forced points 15721, volume bound 2786.2, partition bound 623.6 => N_cov >= 15721;  greedy cover 15725  (of M = 20718; mean set size 10.3, max 74; sparse path)  [93s]
+cover at eps = 0.596 kcal/mol: forced points 15547, volume bound 2620.0, partition bound 587.6 => N_cov >= 15547;  greedy cover 15553  (of M = 20718; mean set size 10.8, max 75; sparse path)  [84s]
+cover at eps = 2.000 kcal/mol: forced points 15120, volume bound 2269.4, partition bound 510.6 => N_cov >= 15120;  greedy cover 15130  (of M = 20718; mean set size 11.9, max 79; sparse path)  [90s]

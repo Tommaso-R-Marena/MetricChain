@@ -253,3 +253,22 @@ they have been corrected to approximate real times.  From here on times are read
   "below 5.1e-06 at 95 % (pooled)": 1-0.05^(1/585000) = 5.12e-6 OK; per case 6.0e-4; Bonferroni over the 117 cases 1.6e-3.
   literal runs vs mean run at the theorem's K (oracles bottom/top): mean ln(evaluations) - mean-run value in [-0.0006, +0.0019];
   within a case the extreme runs are within [-0.0035, +0.018] of the mean run: at these sizes the cost is essentially deterministic.
+
+### 21:11 — step 2, lattice dual bounds complete (own_lattice_cert.py dual; out_own_lattice_dual_{1_18,19_24}.txt/.json; 764 s)
+* 288 cells.  My tolerance-free LP-duality bound (dual solved by HiGHS in floating point, truncated to integers, maximal
+  centre load evaluated in exact integer arithmetic on the unreduced matrix):
+    - equals the published N_cov in 241 cells: there the published number is an optimum certified WITHOUT any branch and
+      bound (stored primal cover checked exactly + exact dual bound);
+    - 22 cells published as "proved optimum" rest on branch and bound (LP certificate 1 or 2 below): 18 cells at n = 14..18
+      (L=1, eps in {0, 1, N/20, N/10}) and 4 cells at n >= 19 where HiGHS alone ran: (19, N/10) 35 vs 34, (19, N/4) 22 vs 21,
+      (20, N/4) 24 vs 23, (22, N/4) 26 vs 25;
+    - 25 cells are brackets.  My certified bound equals engineering's stored `lower_certified` in all 72 cells with n >= 19
+      (no difference at all), and my LP value equals their `lp_bound` in all 288 cells (max diff 5e-7 = their rounding).
+* IS EACH BRACKET WHAT IT SAYS?  Upper end: yes (verified cover, 25/25).  Lower end: ENG-RES-0002 says "a a certified lower
+  bound"; in 15 brackets it is (reproduced), in 10 it is the HiGHS branch-and-bound bound after 300 s, one above the certified
+  one: (19,eps=0) 52 vs 51; (19,eps=1) and (19,N/20) 42 vs 41; (20,eps=0) 57 vs 56; (20,N/10) 37 vs 36; (21,eps=1) and (21,N/20)
+  50 vs 49; (23,eps=0) 74 vs 73; (23,eps=1) and (23,N/20) 60 vs 59.  These 10 lower ends are solver-trusted, not certified.
+* own single-flip code `own_flip.c` (brute force, chirality-defined gauche states): c_sf identical to the stored
+  lattice_Sc12_flip.json for n = 3, 5, 8, 9 (e.g. n=8: 35 50 56 58 58 56 50 35).  Larger n queued.
+* Two-solver test (own formulation, unreduced instance; HiGHS via scipy + CP-SAT via private OR-Tools) started on a sample
+  of the 22 branch-and-bound cells.

@@ -1,0 +1,49 @@
+{
+"tag": "fb_V8_E_R3_t0.60",
+"tau": 0.7,
+"residual": "ff03-ff14SB",
+"domain": "Xtau",
+"M": 6561,
+"c": [
+0.6130857802191088,
+0.4669052445015893,
+0.5133576048570774,
+0.4982209885145892,
+0.5081373777024965,
+0.5114179715655212,
+0.49715135105111585,
+0.5208927444408573
+],
+"shape": [
+3,
+3,
+3,
+3,
+3,
+3,
+3,
+3
+],
+"kappa_max": 1.0,
+"cover_eps0.000": {
+"forced": 1,
+"volume": NaN,
+"partition": NaN,
+"lower": 1,
+"greedy": 1
+},
+"cover_eps0.596": {
+"forced": 0,
+"volume": NaN,
+"partition": NaN,
+"lower": 1,
+"greedy": 1
+},
+"cover_eps2.000": {
+"forced": 0,
+"volume": NaN,
+"partition": NaN,
+"lower": 1,
+"greedy": 1
+}
+}

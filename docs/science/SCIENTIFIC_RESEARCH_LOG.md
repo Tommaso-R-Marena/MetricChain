@@ -547,3 +547,23 @@ profile and the gauche count, and its support function is the ground-state energ
   next message to that reader.
 * Workstream F was told of §11.29 and asked to position its report against it.
 
+### Cycle 22 — the energy-constrained tail lemma; the plateau twin is optimal at the basin (checkpoint 28)
+
+* **The observation:** in the weights `t = e^{−g}` the constraint "mean energy at least `U₀`" is
+  `Σ t ln t + U₀ Σ t ≤ 0` — convex.  So `Z ≤ Σ_x f_η(t(x))` with a concave `f_η`, the pointwise
+  maximiser is a level, clipped by the Lipschitz bounds, the bound is a nondecreasing
+  function of the distance to the complement of the support, and Harper's theorem
+  finishes.  The extremal instance is a plateau on a ball — the twin of cycle 20.
+* **Lemma A16.5** proved this way; **brute force first** on all supports of `Q_4`.
+* **Theorem A16.6:** exact cost at the visible basin with the datum; the algorithm is
+  uniform sampling plus the datum's bracket and needs no hint.  The upper bound `G(R)`
+  coincides with the gap of the exact twins to three decimals.
+* **What was tried and did not work for the whole class:** a general reference loses
+  Harper; on sloped landscapes an adaptive algorithm changes what "hidden" means.  A
+  heuristic for non-adaptive algorithms (the cone with two fillings of its apex ball)
+  suggests `θ_na^U(ε₁) = θ_na(u(σ₂(ε₁) − σ_u))`; recorded as a guess.
+* **Method note.**  The proof was found by asking for the *optimal profile on a fixed
+  support* instead of comparing constructions (cycle 20 had compared plateau, two-shell
+  and terrace constructions and concluded "conjecture").  A convex formulation should
+  have been the first thing tried.
+

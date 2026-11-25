@@ -64,8 +64,14 @@ A product of finite chains `∀ i, Fin (k i)` (Remark (1) of A11):
   `chainField_admissible`, `neg_chainField_admissible`;
 * `chain_sandwich_mean`, `chain_mean_range_eq_Icc`, `chain_ratio_range_eq_Icc`.
 
-Not proved here: Corollaries A11.2 (width formula; it has an integral) and A11.3, the
-necessity of the hypotheses (numerical in the note), Remark (2).
+Corollary A11.2, the sign only:
+
+* `updown_inter_cross`, `cube_occupation_cross`, `cube_occupation_mono` — for a lower set `A`
+  and an upper set `B`, `⟨x_i⟩_{A,t} ≤ ⟨x_i⟩_{B,t}` in `μ_{f+th}` (every summand of the width
+  formula is non-negative when `c_i ≥ 0`).
+
+Not proved here: the width formula of Corollary A11.2 itself (an integral), Corollary A11.3,
+the necessity of the hypotheses (numerical in the note), Remark (2).
 -/
 
 set_option autoImplicit false
@@ -797,6 +803,119 @@ theorem pairwise_submodular (a : ι → ℝ) (J : ι → ι → ℝ) (hJ : ∀ i
 
 end Cube
 
+/-! ### The sign of the summands in Corollary A11.2 (FKG)
+
+Corollary A11.2 writes the width of the robust interval as an integral of
+`∑_i c_i (⟨x_i⟩_{B,t} - ⟨x_i⟩_{A,t})`, `⟨·⟩_{S,t}` the mean in `μ_{f + t h}(· | S)`, and says
+that every summand is non-negative.  The integral is not formalised; the sign is: for a lower
+set `A` and an upper set `B`, the conditional occupation of a site is larger on `B`. -/
+
+section Occupation
+
+/-- For a log-supermodular weight on a distributive lattice, a lower set `A` and upper sets
+`B, U`: `w(A ∩ U) w(B) ≤ w(A) w(B ∩ U)`. -/
+theorem updown_inter_cross {α : Type*} [DistribLattice α] [DecidableEq α] (w : α → ℝ)
+    (hw : ∀ x, 0 ≤ w x) (h : ∀ x y, w x * w y ≤ w (x ⊓ y) * w (x ⊔ y))
+    (A B U : Finset α) (hA : IsLowerSet (A : Set α)) (hB : IsUpperSet (B : Set α))
+    (hU : IsUpperSet (U : Set α)) :
+    (∑ x ∈ A ∩ U, w x) * (∑ x ∈ B, w x) ≤ (∑ x ∈ A, w x) * (∑ x ∈ B ∩ U, w x) := by
+  have key := four_functions_theorem w w w w hw hw hw hw h (A ∩ U) B
+  have hsub1 : (A ∩ U) ⊼ B ⊆ A := by
+    intro z hz
+    obtain ⟨a, ha, b, _, rfl⟩ := Finset.mem_infs.1 hz
+    exact Finset.mem_coe.1 (hA inf_le_left (Finset.mem_coe.2 (Finset.mem_inter.1 ha).1))
+  have hsub2 : (A ∩ U) ⊻ B ⊆ B ∩ U := by
+    intro z hz
+    obtain ⟨a, ha, b, hb, rfl⟩ := Finset.mem_sups.1 hz
+    exact Finset.mem_inter.2 ⟨Finset.mem_coe.1 (hB le_sup_right (Finset.mem_coe.2 hb)),
+      Finset.mem_coe.1 (hU le_sup_left (Finset.mem_coe.2 (Finset.mem_inter.1 ha).2))⟩
+  calc (∑ x ∈ A ∩ U, w x) * (∑ x ∈ B, w x)
+      ≤ (∑ a ∈ (A ∩ U) ⊼ B, w a) * ∑ a ∈ (A ∩ U) ⊻ B, w a := key
+    _ ≤ (∑ x ∈ A, w x) * (∑ x ∈ B ∩ U, w x) := by
+        apply mul_le_mul
+        · exact Finset.sum_le_sum_of_subset_of_nonneg hsub1 (fun x _ _ => hw x)
+        · exact Finset.sum_le_sum_of_subset_of_nonneg hsub2 (fun x _ _ => hw x)
+        · exact Finset.sum_nonneg (fun x _ => hw x)
+        · exact Finset.sum_nonneg (fun x _ => hw x)
+
+/-- The Boltzmann weight of a submodular energy is log-supermodular (`β ≥ 0`). -/
+theorem boltz_logSupermodular {α : Type*} [Lattice α] {β : ℝ} (hβ : 0 ≤ β) {e : α → ℝ}
+    (he : Submodular e) (x y : α) :
+    boltz β e x * boltz β e y ≤ boltz β e (x ⊓ y) * boltz β e (x ⊔ y) := by
+  unfold boltz
+  rw [← Real.exp_add, ← Real.exp_add, Real.exp_le_exp]
+  have h := mul_le_mul_of_nonneg_left (he x y) hβ
+  linarith
+
+variable {ι : Type*} [Fintype ι]
+
+/-- Fields are modular. -/
+theorem field_modular (c : ι → ℝ) (x y : ι → Bool) :
+    field c (x ⊔ y) + field c (x ⊓ y) = field c x + field c y := by
+  unfold field
+  rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl (fun i _ => ?_)
+  show (if (x i || y i) then c i else 0) + (if (x i && y i) then c i else 0) =
+    (if x i then c i else 0) + (if y i then c i else 0)
+  cases x i <;> cases y i <;> simp
+
+/-- **Sign of the summands of Corollary A11.2.**  For submodular `f`, any field `h = ∑ c_i x_i`,
+any real `t`, `β ≥ 0`, a lower set `A` and an upper set `B`, and any site `i`:
+`Z_{f+th}(A ∩ {x_i = 1}) · Z_{f+th}(B) ≤ Z_{f+th}(A) · Z_{f+th}(B ∩ {x_i = 1})`,
+i.e. `⟨x_i⟩_{A,t} ≤ ⟨x_i⟩_{B,t}`. -/
+theorem cube_occupation_cross {β : ℝ} (hβ : 0 ≤ β) {f : (ι → Bool) → ℝ} (hf : Submodular f)
+    (c : ι → ℝ) (t : ℝ) (i : ι) (A B : Finset (ι → Bool))
+    (hA : IsLowerSet (A : Set (ι → Bool))) (hB : IsUpperSet (B : Set (ι → Bool))) :
+    zOn β (fun x => f x + t * field c x) (A.filter (fun x => x i = true)) *
+        zOn β (fun x => f x + t * field c x) B ≤
+      zOn β (fun x => f x + t * field c x) A *
+        zOn β (fun x => f x + t * field c x) (B.filter (fun x => x i = true)) := by
+  classical
+  have he : Submodular (fun x : ι → Bool => f x + t * field c x) := by
+    intro x y
+    have h1 := hf x y
+    have h2 := field_modular c x y
+    have h3 : t * (field c (x ⊔ y) + field c (x ⊓ y)) = t * (field c x + field c y) := by
+      rw [h2]
+    simp only
+    linarith
+  have hU : IsUpperSet (((Finset.univ : Finset (ι → Bool)).filter (fun x => x i = true) :
+      Finset (ι → Bool)) : Set (ι → Bool)) := by
+    intro x y hxy hx
+    simp only [Finset.coe_filter, Finset.mem_univ, true_and, Set.mem_setOf_eq] at hx ⊢
+    have h := hxy i
+    rw [hx] at h
+    exact le_antisymm le_top h
+  have key := updown_inter_cross (boltz β (fun x => f x + t * field c x))
+    (fun x => (boltz_pos _ _ x).le) (boltz_logSupermodular hβ he) A B
+    ((Finset.univ : Finset (ι → Bool)).filter (fun x => x i = true)) hA hB hU
+  have eA : A ∩ (Finset.univ : Finset (ι → Bool)).filter (fun x => x i = true) =
+      A.filter (fun x => x i = true) := by
+    ext x
+    simp
+  have eB : B ∩ (Finset.univ : Finset (ι → Bool)).filter (fun x => x i = true) =
+      B.filter (fun x => x i = true) := by
+    ext x
+    simp
+  rw [eA, eB] at key
+  exact key
+
+/-- The same as an inequality between conditional occupations, for non-empty `A` and `B`:
+`⟨x_i⟩_{A,t} ≤ ⟨x_i⟩_{B,t}`. -/
+theorem cube_occupation_mono {β : ℝ} (hβ : 0 ≤ β) {f : (ι → Bool) → ℝ} (hf : Submodular f)
+    (c : ι → ℝ) (t : ℝ) (i : ι) (A B : Finset (ι → Bool))
+    (hA : IsLowerSet (A : Set (ι → Bool))) (hB : IsUpperSet (B : Set (ι → Bool)))
+    (hAne : A.Nonempty) (hBne : B.Nonempty) :
+    zOn β (fun x => f x + t * field c x) (A.filter (fun x => x i = true)) /
+        zOn β (fun x => f x + t * field c x) A ≤
+      zOn β (fun x => f x + t * field c x) (B.filter (fun x => x i = true)) /
+        zOn β (fun x => f x + t * field c x) B := by
+  rw [div_le_div_iff₀ (zOn_pos _ _ hAne) (zOn_pos _ _ hBne)]
+  have := cube_occupation_cross hβ hf c t i A B hA hB
+  linarith
+
+end Occupation
+
 /-! ### Ordered alphabets (Remark (1) of A11): a product of finite chains
 
 Sites `i : ι` with levels `0, …, k i - 1` (the alphabet `Fin (k i)`), coordinatewise order.
@@ -1121,3 +1240,8 @@ end
 #print axioms ScienceL2.zero_admissible_one
 #print axioms ScienceL2.cube_sandwich_strict_witness
 #print axioms ScienceL2.cube_sandwich_fails_negative_beta
+#print axioms ScienceL2.updown_inter_cross
+#print axioms ScienceL2.boltz_logSupermodular
+#print axioms ScienceL2.field_modular
+#print axioms ScienceL2.cube_occupation_cross
+#print axioms ScienceL2.cube_occupation_mono

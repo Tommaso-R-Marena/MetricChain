@@ -720,9 +720,11 @@ exact identified sets as functions of `K` and `τ` are computations, not theorem
 
 ## A16. A thermodynamic datum at extensive accuracy: the entropy bracket and the plateau twin (our own question R3-T3 of SCI-MSG-0008; `INFERENCE_LIMITS.md` §5, "Open (i)")
 
-*Added at checkpoint 26.  Everything here is the coordinator's; nothing has been read by a
-second party.  Scripts: `experiments/science/pi_inference/plateau_twin_check.py` (30 s),
-`terrace_twin_explore.py` (1 min).*
+*Added at checkpoint 26; part (c) (Lemma A16.5, Theorem A16.6) added at checkpoint 28 —
+numbering: Propositions A16.1, A16.3, Corollary A16.2, Conjecture A16.4 keep their
+numbers.  Everything here is the coordinator's; nothing has been read by a second
+party.  Scripts: `experiments/science/pi_inference/plateau_twin_check.py` (30 s),
+`terrace_twin_explore.py` (1 min), `energy_isoperimetry_check.py` (4 min).*
 
 *Setting and conventions.*  Cube `Q_n`, zero known part, class `|g(x) − g(y)| ≤ c·d_H(x,y)`,
 `u = βc`; units `β = 1` in proofs.  `σ = σ_u = 1/(1+e^u)`, `h` the binary entropy,
@@ -742,7 +744,7 @@ the datum, computing `ln Z` *is* computing the entropy of the ensemble; and two 
 of the class with the same datum differ in `ln Z` by exactly the difference of their
 entropies.
 
-### A16.1 The datum alone
+### (a) The datum alone
 
 **Proposition A16.1 (entropy bracket) [P; checked by enumeration on 400 random members of the
 class, `n ≤ 11`].**  For every `g` of the class, `n·h(σ_u) ≤ S(μ_g) ≤ n ln 2`, that is
@@ -791,7 +793,7 @@ without.  **So the oracle invariance of addendum A12 is a statement about bounde
 accuracy; for the thermodynamic datum it fails at coarse extensive accuracy, and the
 failure is exactly an entropy bound.**
 
-### A16.2 Below `a(u)`: the plateau twin
+### (b) Below `a(u)`: the plateau twin
 
 At extensive accuracy the equal-depth twin of Proposition 5b gives only
 `θ ≥ h − ε₁` (it takes `e^{ε₁n}` equal twins to raise `ln Z` by `ε₁n`).  By the identity, a
@@ -862,22 +864,106 @@ several near `a(u)`.  For `ε₁ᶜ ≤ ε₁ < a(u)` the plateau would have to 
 cube and the bound is void (`ε₁ᶜ = 0.086, 0.273, 0.557` against `a = 0.111, 0.328, 0.603` at
 `u = 1, 2, 4`).
 
-### A16.3 What is known, and a conjecture
+### (c) An isoperimetric inequality with an energy constraint; the plateau twin is optimal at the visible basin (added at checkpoint 28)
+
+The step that was missing at checkpoint 26 — "a tail lemma with an energy constraint" — has
+a short proof for the flat reference, and that is enough to make the bound of A16.3 exact
+at the instance where it was proved.
+
+**Lemma A16.5 (isoperimetry with an energy constraint) [P; brute force: all 65 534 supports
+in `Q_4`, 8 000 random supports in `Q_5`, `Q_6`, 1 398 random members with dips and hills,
+`n ≤ 10`].**  Units `β = 1`.  Let `U₀ ≤ 0` and `N = |B(n, R)|`, `R < n/2`.  Among all members `g` of the
+class that vanish outside a set of at most `N` points and have mean energy `U_g ≥ U₀`, the
+**plateau on a ball**
+
+    g_pl(x) = −min(c*, u·(R + 1 − |x|)₊),        c* the level with U_{g_pl} = U₀
+
+(the full cone, `c* = ∞`, if even that has mean energy `≥ U₀`) has the largest partition
+function: `Z_g ≤ Z_{g_pl} =: Z^{pl}(R, U₀)`.  For sizes that are not ball sizes, replace the
+ball by the complement of an initial segment of the simplicial order.
+*Proof.*  Write `t = e^{−g}`.  The constraint `U_g ≥ U₀` is `φ(t) := Σ t ln t + U₀ Σ t ≤ 0`, a
+*convex* constraint in the weights, so for every `η ≥ 0`
+`Z_g = Σ t ≤ Σ_x f_η(t(x))`, `f_η(t) := (1 − ηU₀)t − η t ln t` — concave, with its maximum at
+`ln t*_η = 1/η − 1 − U₀`.  If `ρ(x)` is the distance from `x` to the complement of the support,
+`t(x) ∈ [e^{−uρ(x)}, e^{uρ(x)}]`, so `f_η(t(x)) ≤ F_η(ρ(x))` with
+`F_η(ρ) := max{f_η(t) : e^{−uρ} ≤ t ≤ e^{uρ}}` — **nondecreasing in `ρ`** (a maximum over a
+growing interval).  By Harper's theorem the numbers `#{x : ρ(x) ≥ k}` are, for all `k`
+simultaneously, largest when the support is the ball; hence `Z_g ≤ Σ_x F_η(R + 1 − |x|)` for
+every `η ≥ 0`.  For the ball the maximiser inside `F_η` is `min(t*_η, e^{uρ})`, i.e. the plateau
+at the level `c = ln t*_η`, which is a member of the class.  Choose `η = 1/(c* + U₀ + 1)` (positive,
+because a plateau at level `c` has mean energy `≥ −c`, so `c* ≥ |U₀|`): then
+`Σ_x F_η = Z_{g_pl} − ηφ(t_pl) = Z_{g_pl}`.  If the full cone is feasible take `η = 0`.  ∎
+*Remarks.*  (1) For a given support the optimal profile is "the deepest dip, flooded up
+to a level"; for a general reference instance the same Lagrangian gives the level
+clipped between the two McShane envelopes — but then Harper's theorem is not
+available.  (2) Hills are allowed in the statement and never help.  (3) The unconstrained
+case `η = 0` is the tail lemma of the theory report (its Lemma 11.43(b)).  (4) *Above any
+level of any member.*  As in that lemma, the argument does not need a flat background:
+for a member with weights `w`, datum `U`, a level `t` and `D = {w > t}`, for every `η ≥ 0`
+
+    Z  =  Σ_x f_η(w(x))  ≤  Σ_{x∉D} f_η(w(x))  +  Σ_{x∈D} max{ f_η(s) : t ≤ s ≤ t·e^{u·dist(x,Dᶜ)} },
+
+(`f_η` with `U₀ = U`; the first equality because the constraint holds with equality), and the
+last sum is at most its value for a ball of the size of `D`.  The first sum is an average
+of a bounded function of the weights below the level, which sampling estimates.  So the
+datum turns plain Monte Carlo into a bracket procedure on the whole class; its
+worst-case exponent has not been evaluated (the guess at the end of this addendum is
+for it).
+
+**Theorem A16.6 (the complexity at the visible basin, with the datum) [P, given A16.1, A16.3,
+A16.5; exact sums].**  Let `g₀` be the visible basin of Proposition A16.3 (`ρ₀ < ρ₁`), `V` its
+support, `U₀ = U_{g₀}`.
+(i) *Every alternative is bounded.*  If `g′` is a member of the class with `U_{g′} = U₀` that
+agrees with `g₀` outside a set `D` with `|D| + |V| ≤ |B(n, R)|`, then
+
+    −(S(μ_{g₀}) − n·h(σ_u))  ≤  ln Z_{g′} − ln Z_{g₀}  ≤  G(R) := ln Z^{pl}(R, U₀) − ln Z_{g₀},
+
+the left side by the entropy bracket (it is `o(1)`), the right by Lemma A16.5 (`g′` vanishes
+outside `D ∪ V`).
+(ii) *An algorithm.*  Draw `M = ⌈2ⁿ ln(1/δ)/|B(n,R)|⌉` uniform points.  If all values equal one
+number `v`, compute from the datum the bracket
+`[max(ln(2ⁿ − |B(n,R)|), n·h(σ_u) − (U − v)), ln Z^{pl}(R, min(U − v, 0))]` for `ln Z + v` and return its
+midpoint if its width is at most `ε`; in every other case run any class-correct
+procedure.  This algorithm uses no hint, is correct on the whole class with probability
+`1 − δ(1+o(1))` (an instance that is not constant outside `|B(n,R)|` points shows two
+different values, except with probability `δ`), and at `g₀` it stops after the `M` samples
+with probability `1 − e^{−Ω(n)}` whenever `G(R) + o(1) ≤ ε`.
+(iii) *It matches.*  The plateau twin of radius `r₂` has `ln Z′ − ln Z₀ = G(r₂ − 1)` up to
+`10⁻³` in all eight exact cases (e.g. `100.036` against `100.036` at `n = 2000`), so with
+Proposition A16.3: **with the datum, the number of evaluations needed at `g₀` for accuracy
+`ε` is `Θ(2ⁿ/|B(n, R(ε))|)`, `G(R(ε)) ≈ ε`** — lower and upper bound differ by the factor
+`ln(1/δ)/(1−2δ)` and one unit of the radius.  Per site: `ln 2 − h(ρ₁ − σ_u + σ₂(ε₁))`.  Without
+the datum the same packing argument with cone dips (the smallest one that matters at
+this instance has radius `(ρ₁ + ε₁/u)n`) gives at least `ln 2 − h(ρ₁ + ε₁/u)`, which is larger:
+**at this instance the datum lowers the cost at every extensive accuracy**, and changes
+nothing at bounded accuracy.
+(iv) *Among flat landscapes with small structures the threshold basin is the hardest
+[evaluation of the bracket of (ii) at the exponential scale].*  For an instance that is constant outside a set small against `|B(n,R)|` the width of the
+bracket in (ii) depends on the instance through its datum only; with `e = |U − v|/(un)` it is
+`n·min(h(R/n − e) − h(σ_u), ue + h(R/n − e) − ln 2)₊ + o(n)`, largest at `e = ρ₀ − σ_u` — the energy of
+a basin at threshold dominance.
+
+*Checks* (`energy_isoperimetry_check.py`, four minutes): the lemma as stated above; and
+`G(r₂ − 2) < ` gap of the twin `= G(r₂ − 1) < G(r₂)` in all eight cases.
+
+### (d) What is known, and a conjecture
 
     bounded accuracy:            θ_U = h                               (A12(c); the datum is worth nothing)
     0 < ε₁ < ε₁ᶜ:                ln 2 − h(ρ₀ − σ_u + σ₂(ε₁))  ≤  θ_U(ε₁)  ≤  ln 2 − h(ρ₀ + ε₁/u)
+                                 (the lower value is the exact cost at the threshold basin: A16.6)
     ε₁ᶜ ≤ ε₁ < a(u):             0  ≤  θ_U(ε₁)  ≤  ln 2 − h(ρ₀ + ε₁/u)
     a(u) ≤ ε₁ < ln cosh(u/2):    θ_U = 0  <  θ_hint(ε₁)                (A16.2; the datum is worth everything)
 
 **Conjecture A16.4 [C].**  `θ_U(ε₁) = ln 2 − h(min{½, ρ₀ − σ_u + σ₂(ε₁)})` for every `ε₁ ≥ 0`: the
 plateau twin is the best hiding place, and the datum lowers the exponent at *every*
 extensive accuracy.
-*Evidence.*  (i) Among dips with radial profiles in a flat region, for a mask with
-entropy `s₁` and energy `−ue₁` per site, a twin needs a shell of entropy `s₁ + ε₁` at depth `e₁`,
-hence a support of radius at least `h⁻¹(s₁+ε₁) + e₁`; mixtures of two shells of equal free
-energy are worse (the shallower shell alone already needs a larger support); and over
-masks (`s₁ ≥ h(σ_u)`, `s₁ + ue₁ ≥ ln 2`) the minimum is at the cone basin at threshold
-dominance — the construction of A16.3.  (ii) Hiding the twin on a visible, just
+*Evidence.*  (i) **Now a theorem (A16.6):** for instances that are constant outside a small
+set, no alternative of any shape or support does better than the plateau twin, an
+algorithm without a hint attains the bound, and the threshold basin is the hardest such
+instance.  What the conjecture still needs is the same for instances that are *not*
+flat outside a small set — sloped landscapes, on which an adaptive algorithm walks
+downhill — i.e. the lemma for a general reference, combined with the theory division's
+nested algorithm.  (ii) Hiding the twin on a visible, just
 sub-dominant terrace instead of the flat background (less digging, fewer places) is
 never better: maximum at the flat background in twelve cases
 (`terrace_twin_explore.py`; exponential-scale formulas, a valid lower bound within the
@@ -891,7 +977,14 @@ on a set of given measure **whose excess has a prescribed mean energy** — for 
 arbitrary reference instance; equivalently, the largest entropy gain at fixed mean
 energy.  The unconstrained lemma is the theory report's Lemma 11.62.
 
-*Not done.*  The upper bound; the plateau twin against the marginal oracle (symmetrise
+*For non-adaptive algorithms [H, exponential-scale reasoning, not worked out].*  There the
+flat mask is not the hardest instance with the datum: on a cone the unexplored ball
+around the apex can hold either the truncated cone or a displaced inner cone with the
+same mean energy, and the same counting gives `θ_na^U(ε₁) = θ_na(u·(σ₂(ε₁) − σ_u))` — the datum
+acts as an amplification of the accuracy, from `ε₁` to `u(σ₂(ε₁) − σ_u) ≥ ε₁`, with `θ_na^U(0⁺) = a`
+unchanged and `θ_na^U = 0` from `ε₁ᶜ` on.  A guess to be tested, not a claim.
+
+*Not done.*  The upper bound for the whole class; the plateau twin against the marginal oracle (symmetrise
 by a code as in Corollary R6′ — expected to go through, not written); a field; a
 tolerance on the datum (as in the referee's remark, any tolerance makes the exact root
 unnecessary); a Lean check of the three finite inequalities used.

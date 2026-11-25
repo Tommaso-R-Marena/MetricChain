@@ -179,7 +179,12 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   sums over the joint law of the two distances (overlapping supports), ten cases,
   `n = 600 … 2000`: root above `κ_lo`, gap above the proved bound, radii against the
   asymptotic formula (`experiments/science/pi_inference/plateau_twin_check.py`).  One
-  numerical trap met and recorded (`DEAD_ENDS.md` SD31).  **No second reader.**
+  numerical trap met and recorded (`DEAD_ENDS.md` SD31).  Lemma A16.5: the best
+  energy-feasible modification on *every* support of `Q_4` (65 534 supports × 9 parameter
+  pairs) and on 8 000 random supports of `Q_5`, `Q_6` against the plateau on the initial
+  segment of the same size — no violation (largest `3·10⁻¹⁴`); 1 398 random members with
+  dips and hills, `n ≤ 10`; Theorem A16.6(iii): `G(r₂−2) <` gap `= G(r₂−1) < G(r₂)` in eight
+  exact cases (`energy_isoperimetry_check.py`).  **No second reader.**
 * **L1, statements against the note (owed since checkpoint 18; done at checkpoint 26 for
   the headline statements):** the Lean statements `theorem4_adaptive_marginal_oracle`,
   `theorem4'_nonadaptive_marginal_oracle`, `theorem4'_binary_cube_closed_form`,

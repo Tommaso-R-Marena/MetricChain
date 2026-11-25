@@ -2,3 +2,6 @@ A_small 11 exit 0
 A_ties 12 exit 0
 A_medium 13 stopped by me after 276 runs (machine load)
 B_invalid 15 exit 0 (400 runs)
+D_2L 16 exit 143 (2 runs)
+B_reducedK 14 exit 124 (202 runs)
+D_2L_off 17 exit 124 (210 runs)

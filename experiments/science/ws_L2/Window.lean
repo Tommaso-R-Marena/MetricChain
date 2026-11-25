@@ -13,13 +13,17 @@ envelopes `d i`, reference `π = ⊗ π i`, class `𝒞 = {ψ : ψ x - ψ y ≤ 
 
 ## What is proved
 
-Item 1 (one site, `OneSite` section):
+Item 1 (one site; sections `OneSite`, `Vertices`, `VertexBound`):
 * `gibbsLaw_mem_window`, `exists_gibbsLaw_of_mem_window`, `window_eq_gibbs_image` —
   `𝒲 = {π_γ : γ ∈ L}`, `L = {γ : γ a - γ b ≤ d a b}`;
-* `window_convex` — `𝒲` is convex;
+* `window_convex`, `isCompact_window` — `𝒲` is convex and compact;
 * `lipClass_extremePoints_eq_empty` — `L` itself has **no** extreme points (it is invariant under
   adding constants), so "the vertices of the Lipschitz polytope `L`" must be read modulo
-  constants.
+  constants;
+* `extremePoints_window_eq` — **the vertex statement, corrected**:
+  `extremePoints 𝒲 = gibbsLaw π '' extremePoints (lipNorm d a₀)`, `lipNorm d a₀` the class
+  normalised at a base point (`gibbsLaw_extreme_of_extreme`, `extreme_of_gibbsLaw_extreme`,
+  through the tight pairs: `window_tight_iff`, `perturb_mem_lipNorm`, `perturb_mem_window`).
 
 Item 2:
 * `site_conditional_mem_window` — the form of the brief: on `α × β` with weight
@@ -29,24 +33,25 @@ Item 2:
   `∀ i, S i`, for every site `i`, every set `P ∌ i` of conditioning sites and every pattern on
   `P`, the conditional law of `x i` lies in the window of site `i` (this contains "every order of
   the sites and every prefix");
-* `single_site_of_admissible` — the single-site hypothesis follows from membership of `𝒞`.
+* `single_site_of_admissible` — the single-site hypothesis follows from membership of `𝒞`;
+* `window_needs_diag_zero` — it fails if the envelopes do not vanish on the diagonal.
 
-Item 3 (`ChainRule` section):
+Item 3 (`ChainRule`, `VertexBound` sections):
 * `kl_gibbs_prod_eq` — the chain rule for the relative entropy of a Gibbs law on a product of
   two finite types with respect to a product law, as an explicit identity;
-* `klBound_prod`, `klAttained_prod` — a bound on, and attainment of, `KL(ν_ψ ‖ Q)` over the
-  class tensorise over two factors;
-* `klBound_pi` — **item 3, inequality**: on `∀ i : Fin n, S i`,
-  `KL(ν_ψ ‖ ⊗ Q i) ≤ ∑_i M i` for every `ψ ∈ 𝒞` whenever `M i` bounds `KL(π_γ ‖ Q i)` over
-  `γ ∈ L i`;
-* `klAttained_pi` — the value `∑_i KL(π_{γ i} ‖ Q i)` is attained at the additive instance
+* `klBound_prod` — a bound on `KL(ν_ψ ‖ Q)` over the class tensorises over two factors;
+* `klBound_pi` — on `∀ i : Fin n, S i`, `KL(ν_ψ ‖ ⊗ Q i) ≤ ∑_i M i` for every `ψ ∈ 𝒞` whenever
+  `M i` bounds `KL(π_γ ‖ Q i)` over `γ ∈ L i`;
+* `klBound_of_vertices`, `klBound_pi_of_vertices` — **item 3, the inequality as stated**: it is
+  enough that `M i` bounds `KL(π_φ ‖ Q i)` over the *vertices* `φ` of the normalised site class
+  (Krein–Milman, convexity and continuity of the divergence, the vertex correspondence);
+* `kl_additive_pi` — `KL(ν_ψ ‖ ⊗ Q i) = ∑_i KL(π_{γ i} ‖ Q i)` at the additive instance
   `ψ x = ∑_i γ i (x i)`;
-* `kl_pi_isGreatest` — hence, if each `M i` is the greatest value of `KL(π_γ ‖ Q i)` over `L i`,
-  then `∑_i M i` is the greatest value of `KL(ν_ψ ‖ ⊗ Q i)` over `𝒞`.
+* `kl_pi_isGreatest`, `exists_site_max`, `kl_pi_exists_isGreatest` — the site maxima exist, and
+  their sum is the greatest value of `KL(ν_ψ ‖ ⊗ Q i)` over `𝒞`.
 
-Not proved here: that the site maximum is attained at a vertex (convexity of `KL` and the
-vertex correspondence of item 1), the identification of `∑_i M i` with `n · a` (capacity) for the
-Shannon centres, items 4 and 5.
+Not proved here: that the vertex set is finite, the identification of `∑_i M i` with `n · a`
+(capacity) for the Shannon centres, items 4 and 5.
 -/
 
 set_option autoImplicit false
@@ -751,6 +756,496 @@ theorem kl_pi_isGreatest {n : ℕ} (S : Fin n → Type u) [∀ i, Fintype (S i)]
 
 end ChainRule
 
+/-! ### Item 1, the vertices: extreme points of the window and of the normalised class
+
+The class `{γ : γ a - γ b ≤ d a b}` has no extreme points (`lipClass_extremePoints_eq_empty`).
+Normalised at a base point `a₀` (`lipNorm d a₀ = {γ admissible, γ a₀ = 0}`) it does, and they
+correspond to the extreme points of the window:
+`extremePoints (window π d) = gibbsLaw π '' extremePoints (lipNorm d a₀)`.
+The proof uses the *tight* pairs `γ a - γ b = d a b` (equivalently
+`π a p b = e^{d a b} π b p a`): a perturbation that is constant along tight pairs can be added
+and subtracted with a small coefficient without leaving the set. -/
+
+section Vertices
+
+variable {α : Type*} [Fintype α]
+
+/-- The Lipschitz class normalised at the base point `a₀`. -/
+def lipNorm (d : α → α → ℝ) (a₀ : α) : Set (α → ℝ) := {γ | Admissible d γ ∧ γ a₀ = 0}
+
+/-- Finitely many strict slacks leave room for a common positive scale. -/
+theorem exists_pos_scale {κ : Type*} [Fintype κ] [Nonempty κ] (slack bound : κ → ℝ)
+    (hb : ∀ k, 0 ≤ bound k) :
+    ∃ ε : ℝ, 0 < ε ∧ ∀ k, 0 < slack k → ε * bound k ≤ slack k := by
+  classical
+  set f : κ → ℝ := fun k => if 0 < slack k then slack k / (1 + bound k) else 1 with hf
+  have hfpos : ∀ k, 0 < f k := by
+    intro k
+    rw [hf]
+    by_cases h : 0 < slack k
+    · have h2 : 0 < 1 + bound k := by linarith [hb k]
+      simpa [h] using div_pos h h2
+    · simp [h]
+  obtain ⟨k₀, -, hmin⟩ := Finset.exists_min_image Finset.univ f Finset.univ_nonempty
+  refine ⟨f k₀, hfpos k₀, fun k hk => ?_⟩
+  have hfk : f k = slack k / (1 + bound k) := by
+    rw [hf]
+    exact if_pos hk
+  have h1 : f k₀ ≤ slack k / (1 + bound k) := hfk ▸ hmin k (Finset.mem_univ k)
+  have h2 : 0 < 1 + bound k := by linarith [hb k]
+  rw [le_div_iff₀ h2] at h1
+  nlinarith [hfpos k₀, hb k]
+
+/-- If a proper convex combination of two numbers `≤ c` equals `c`, both equal `c`. -/
+theorem eq_of_convex_comb_eq {s t x₁ x₂ c : ℝ} (hs : 0 < s) (ht : 0 < t) (hst : s + t = 1)
+    (h₁ : x₁ ≤ c) (h₂ : x₂ ≤ c) (h : s * x₁ + t * x₂ = c) : x₁ = c ∧ x₂ = c := by
+  have hc : (s + t) * c = c := by rw [hst, one_mul]
+  have h4 : 0 ≤ s * (c - x₁) := mul_nonneg hs.le (by linarith)
+  have h5 : 0 ≤ t * (c - x₂) := mul_nonneg ht.le (by linarith)
+  have h6 : s * (c - x₁) = 0 := by nlinarith
+  have h7 : t * (c - x₂) = 0 := by nlinarith
+  have h8 := (mul_eq_zero.1 h6).resolve_left hs.ne'
+  have h9 := (mul_eq_zero.1 h7).resolve_left ht.ne'
+  exact ⟨by linarith, by linarith⟩
+
+/-- The slack of a window constraint at a Gibbs law. -/
+theorem window_slack_eq [Nonempty α] {π : α → ℝ} (hπ : ∀ a, 0 < π a) (γ : α → ℝ)
+    (d : α → α → ℝ) (a b : α) :
+    Real.exp (d a b) * π b * gibbsLaw π γ a - π a * gibbsLaw π γ b =
+      π a * π b / (∑ c, π c * Real.exp (-γ c)) *
+        (Real.exp (d a b - γ a) - Real.exp (-γ b)) := by
+  have hZ := gibbsZ_pos hπ γ
+  unfold gibbsLaw
+  rw [sub_eq_add_neg (d a b) (γ a), Real.exp_add]
+  field_simp
+
+/-- A window constraint is tight at `π_γ` iff the corresponding Lipschitz constraint is tight
+at `γ`. -/
+theorem window_tight_iff [Nonempty α] {π : α → ℝ} (hπ : ∀ a, 0 < π a) (γ : α → ℝ)
+    (d : α → α → ℝ) (a b : α) :
+    π a * gibbsLaw π γ b = Real.exp (d a b) * π b * gibbsLaw π γ a ↔ γ a - γ b = d a b := by
+  have hZ := gibbsZ_pos hπ γ
+  have hs := window_slack_eq hπ γ d a b
+  have hc : 0 < π a * π b / (∑ c, π c * Real.exp (-γ c)) :=
+    div_pos (mul_pos (hπ a) (hπ b)) hZ
+  constructor
+  · intro h
+    have h0 : π a * π b / (∑ c, π c * Real.exp (-γ c)) *
+        (Real.exp (d a b - γ a) - Real.exp (-γ b)) = 0 := by
+      rw [← hs]
+      linarith
+    have h1 := (mul_eq_zero.1 h0).resolve_left hc.ne'
+    have h2 : Real.exp (d a b - γ a) = Real.exp (-γ b) := by linarith
+    have h3 := Real.exp_injective h2
+    linarith
+  · intro h
+    have h2 : Real.exp (d a b - γ a) = Real.exp (-γ b) := by
+      congr 1
+      linarith
+    rw [h2, sub_self, mul_zero] at hs
+    linarith
+
+omit [Fintype α] in
+/-- A direction that vanishes at the base point and is constant along tight pairs can be added
+to and subtracted from `γ` with a small positive coefficient inside the normalised class. -/
+theorem perturb_mem_lipNorm [Finite α] [Nonempty α] {d : α → α → ℝ} {a₀ : α} {γ θ : α → ℝ}
+    (hγ : γ ∈ lipNorm d a₀) (hθ0 : θ a₀ = 0)
+    (hθtight : ∀ a b, γ a - γ b = d a b → θ a = θ b) :
+    ∃ ε : ℝ, 0 < ε ∧ (fun a => γ a + ε * θ a) ∈ lipNorm d a₀ ∧
+      (fun a => γ a - ε * θ a) ∈ lipNorm d a₀ := by
+  have := Fintype.ofFinite α
+  obtain ⟨hadm, hγ0⟩ := hγ
+  obtain ⟨ε, hε, hεb⟩ := exists_pos_scale (κ := α × α)
+    (fun k => d k.1 k.2 - (γ k.1 - γ k.2)) (fun k => |θ k.1 - θ k.2|) (fun k => abs_nonneg _)
+  have hbound : ∀ a b, ε * |θ a - θ b| ≤ d a b - (γ a - γ b) := by
+    intro a b
+    have hslack : 0 ≤ d a b - (γ a - γ b) := by linarith [hadm a b]
+    rcases eq_or_lt_of_le hslack with h0 | hpos
+    · have hθ : θ a = θ b := hθtight a b (by linarith)
+      rw [hθ, sub_self, abs_zero, mul_zero]
+      exact hslack
+    · exact hεb (a, b) hpos
+  refine ⟨ε, hε, ⟨fun a b => ?_, ?_⟩, ⟨fun a b => ?_, ?_⟩⟩
+  · have h1 := hbound a b
+    have h2 := mul_le_mul_of_nonneg_left (le_abs_self (θ a - θ b)) hε.le
+    simp only
+    linarith
+  · simp [hγ0, hθ0]
+  · have h1 := hbound a b
+    have h2 := mul_le_mul_of_nonneg_left (neg_le_abs (θ a - θ b)) hε.le
+    simp only
+    linarith
+  · simp [hγ0, hθ0]
+
+/-- A direction of mean zero that is constant along tight pairs can be added to and subtracted
+from `p` (multiplicatively) with a small positive coefficient inside the window. -/
+theorem perturb_mem_window [Nonempty α] {π : α → ℝ} {d : α → α → ℝ} {p τ : α → ℝ}
+    (hp : p ∈ window π d) (hτsum : ∑ a, p a * τ a = 0)
+    (hτtight : ∀ a b, π a * p b = Real.exp (d a b) * π b * p a → τ a = τ b) :
+    ∃ ε : ℝ, 0 < ε ∧ (fun a => p a * (1 + ε * τ a)) ∈ window π d ∧
+      (fun a => p a * (1 - ε * τ a)) ∈ window π d := by
+  obtain ⟨hp0, hp1, hpw⟩ := hp
+  obtain ⟨ε₁, hε₁, hb₁⟩ := exists_pos_scale (κ := α × α)
+    (fun k => Real.exp (d k.1 k.2) * π k.2 * p k.1 - π k.1 * p k.2)
+    (fun k => |π k.1 * p k.2 * τ k.2 - Real.exp (d k.1 k.2) * π k.2 * p k.1 * τ k.1|)
+    (fun k => abs_nonneg _)
+  obtain ⟨ε₂, hε₂, hb₂⟩ := exists_pos_scale (κ := α) (fun _ => (1 : ℝ)) (fun a => |τ a|)
+    (fun a => abs_nonneg _)
+  have hε : 0 < min ε₁ ε₂ := lt_min hε₁ hε₂
+  have hpos : ∀ a, min ε₁ ε₂ * |τ a| ≤ 1 := fun a =>
+    le_trans (mul_le_mul_of_nonneg_right (min_le_right _ _) (abs_nonneg _)) (hb₂ a one_pos)
+  have hwin : ∀ a b, min ε₁ ε₂ *
+      |π a * p b * τ b - Real.exp (d a b) * π b * p a * τ a| ≤
+        Real.exp (d a b) * π b * p a - π a * p b := by
+    intro a b
+    have hslack : 0 ≤ Real.exp (d a b) * π b * p a - π a * p b := by linarith [hpw a b]
+    rcases eq_or_lt_of_le hslack with h0 | hposs
+    · have hτ : τ a = τ b := hτtight a b (by linarith)
+      have hz : π a * p b * τ b - Real.exp (d a b) * π b * p a * τ a = 0 := by
+        have he : π a * p b = Real.exp (d a b) * π b * p a := by linarith
+        rw [hτ, he]
+        ring
+      rw [hz, abs_zero, mul_zero]
+      exact hslack
+    · exact le_trans (mul_le_mul_of_nonneg_right (min_le_left _ _) (abs_nonneg _))
+        (hb₁ (a, b) hposs)
+  refine ⟨min ε₁ ε₂, hε, ⟨fun a => ?_, ?_, fun a b => ?_⟩, ⟨fun a => ?_, ?_, fun a b => ?_⟩⟩
+  · have h1 := hpos a
+    have h2 := mul_le_mul_of_nonneg_left (neg_le_abs (τ a)) hε.le
+    exact mul_nonneg (hp0 a) (by linarith)
+  · have e : ∑ a, p a * (1 + min ε₁ ε₂ * τ a) = ∑ a, p a + min ε₁ ε₂ * ∑ a, p a * τ a := by
+      rw [Finset.mul_sum, ← Finset.sum_add_distrib]
+      exact Finset.sum_congr rfl (fun a _ => by ring)
+    rw [e, hp1, hτsum]
+    ring
+  · have h1 := hwin a b
+    have h2 := mul_le_mul_of_nonneg_left
+      (le_abs_self (π a * p b * τ b - Real.exp (d a b) * π b * p a * τ a)) hε.le
+    simp only
+    linarith
+  · have h1 := hpos a
+    have h2 := mul_le_mul_of_nonneg_left (le_abs_self (τ a)) hε.le
+    exact mul_nonneg (hp0 a) (by linarith)
+  · have e : ∑ a, p a * (1 - min ε₁ ε₂ * τ a) = ∑ a, p a - min ε₁ ε₂ * ∑ a, p a * τ a := by
+      rw [Finset.mul_sum, ← Finset.sum_sub_distrib]
+      exact Finset.sum_congr rfl (fun a _ => by ring)
+    rw [e, hp1, hτsum]
+    ring
+  · have h1 := hwin a b
+    have h2 := mul_le_mul_of_nonneg_left
+      (neg_le_abs (π a * p b * τ b - Real.exp (d a b) * π b * p a * τ a)) hε.le
+    simp only
+    linarith
+
+/-- If `γ` is an extreme point of the normalised class, `π_γ` is an extreme point of the
+window. -/
+theorem gibbsLaw_extreme_of_extreme [Nonempty α] {π : α → ℝ} (hπ : ∀ a, 0 < π a)
+    {d : α → α → ℝ} {a₀ : α} {γ : α → ℝ} (hγ : γ ∈ Set.extremePoints ℝ (lipNorm d a₀)) :
+    gibbsLaw π γ ∈ Set.extremePoints ℝ (window π d) := by
+  rw [mem_extremePoints] at hγ ⊢
+  obtain ⟨hγmem, hext⟩ := hγ
+  have hadm : Admissible d γ := hγmem.1
+  refine ⟨gibbsLaw_mem_window hπ hadm, ?_⟩
+  have main : ∀ q₁ ∈ window π d, ∀ q₂ ∈ window π d, ∀ s t : ℝ, 0 < s → 0 < t → s + t = 1 →
+      s • q₁ + t • q₂ = gibbsLaw π γ → q₁ = gibbsLaw π γ := by
+    intro q₁ hq₁ q₂ hq₂ s t hs ht hst hcomb
+    have hp_pos : ∀ a, 0 < gibbsLaw π γ a := gibbsLaw_pos hπ γ
+    have hcomb' : ∀ a, s * q₁ a + t * q₂ a = gibbsLaw π γ a := fun a => by
+      have := congrFun hcomb a
+      simpa using this
+    -- tight pairs of `γ` are tight for `q₁`
+    have htight : ∀ a b, γ a - γ b = d a b →
+        π a * q₁ b = Real.exp (d a b) * π b * q₁ a := by
+      intro a b hab
+      have hp := (window_tight_iff hπ γ d a b).2 hab
+      have h1 := hq₁.2.2 a b
+      have h2 := hq₂.2.2 a b
+      rw [← hcomb' a, ← hcomb' b] at hp
+      have h3 := eq_of_convex_comb_eq (c := 0) hs ht hst
+        (x₁ := π a * q₁ b - Real.exp (d a b) * π b * q₁ a)
+        (x₂ := π a * q₂ b - Real.exp (d a b) * π b * q₂ a) (by linarith) (by linarith)
+        (by linarith)
+      linarith [h3.1]
+    -- the ratio `q₁ / p`, normalised at the base point
+    have hratio : ∀ a b, γ a - γ b = d a b →
+        q₁ a / gibbsLaw π γ a = q₁ b / gibbsLaw π γ b := by
+      intro a b hab
+      have hp := (window_tight_iff hπ γ d a b).2 hab
+      have hq := htight a b hab
+      have hπa := (hπ a).ne'
+      have e1 : gibbsLaw π γ b = Real.exp (d a b) * π b * gibbsLaw π γ a / π a := by
+        rw [eq_div_iff hπa]
+        linarith
+      have e2 : q₁ b = Real.exp (d a b) * π b * q₁ a / π a := by
+        rw [eq_div_iff hπa]
+        linarith
+      have hπb := (hπ b).ne'
+      have hE := (Real.exp_pos (d a b)).ne'
+      have hpa := (hp_pos a).ne'
+      rw [e2, e1]
+      field_simp
+    have hθzero : ∀ a, q₁ a / gibbsLaw π γ a - q₁ a₀ / gibbsLaw π γ a₀ = 0 := by
+      by_contra hne
+      obtain ⟨ε, hε, hplus, hminus⟩ := perturb_mem_lipNorm hγmem
+        (θ := fun a => q₁ a / gibbsLaw π γ a - q₁ a₀ / gibbsLaw π γ a₀) (by simp)
+        (fun a b hab => by rw [hratio a b hab])
+      have hseg : γ ∈ openSegment ℝ
+          (fun a => γ a + ε * (q₁ a / gibbsLaw π γ a - q₁ a₀ / gibbsLaw π γ a₀))
+          (fun a => γ a - ε * (q₁ a / gibbsLaw π γ a - q₁ a₀ / gibbsLaw π γ a₀)) := by
+        refine ⟨1 / 2, 1 / 2, by norm_num, by norm_num, by norm_num, ?_⟩
+        funext a
+        simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul]
+        ring
+      have h := (hext _ hplus _ hminus hseg).1
+      apply hne
+      intro a
+      have ha : γ a + ε * (q₁ a / gibbsLaw π γ a - q₁ a₀ / gibbsLaw π γ a₀) = γ a :=
+        congrFun h a
+      have hz : ε * (q₁ a / gibbsLaw π γ a - q₁ a₀ / gibbsLaw π γ a₀) = 0 := by linarith
+      exact (mul_eq_zero.1 hz).resolve_left hε.ne'
+    have hc : ∀ a, q₁ a = (q₁ a₀ / gibbsLaw π γ a₀) * gibbsLaw π γ a := by
+      intro a
+      have h := hθzero a
+      have hpa := (hp_pos a).ne'
+      have h' : q₁ a / gibbsLaw π γ a = q₁ a₀ / gibbsLaw π γ a₀ := by linarith
+      rw [← h', div_mul_cancel₀ _ hpa]
+    have hconst : q₁ a₀ / gibbsLaw π γ a₀ = 1 := by
+      have hsum : ∑ a, q₁ a = (q₁ a₀ / gibbsLaw π γ a₀) * ∑ a, gibbsLaw π γ a := by
+        rw [Finset.mul_sum]
+        exact Finset.sum_congr rfl (fun a _ => hc a)
+      rw [hq₁.2.1, sum_gibbsLaw hπ γ, mul_one] at hsum
+      exact hsum.symm
+    funext a
+    rw [hc a, hconst, one_mul]
+  intro p₁ hp₁ p₂ hp₂ hseg
+  obtain ⟨s, t, hs, ht, hst, hcomb⟩ := hseg
+  exact ⟨main p₁ hp₁ p₂ hp₂ s t hs ht hst hcomb,
+    main p₂ hp₂ p₁ hp₁ t s ht hs (by linarith) (by rw [add_comm]; exact hcomb)⟩
+
+/-- If `π_γ` is an extreme point of the window, `γ` is an extreme point of the normalised
+class. -/
+theorem extreme_of_gibbsLaw_extreme [Nonempty α] {π : α → ℝ} (hπ : ∀ a, 0 < π a)
+    {d : α → α → ℝ} {a₀ : α} {γ : α → ℝ} (hγmem : γ ∈ lipNorm d a₀)
+    (hp : gibbsLaw π γ ∈ Set.extremePoints ℝ (window π d)) :
+    γ ∈ Set.extremePoints ℝ (lipNorm d a₀) := by
+  rw [mem_extremePoints] at hp ⊢
+  obtain ⟨hpw, hext⟩ := hp
+  refine ⟨hγmem, ?_⟩
+  have hp_pos : ∀ a, 0 < gibbsLaw π γ a := gibbsLaw_pos hπ γ
+  have main : ∀ γ₁ ∈ lipNorm d a₀, ∀ γ₂ ∈ lipNorm d a₀, ∀ s t : ℝ, 0 < s → 0 < t → s + t = 1 →
+      s • γ₁ + t • γ₂ = γ → γ₁ = γ₂ := by
+    intro γ₁ hγ₁ γ₂ hγ₂ s t hs ht hst hcomb
+    have hcomb' : ∀ a, s * γ₁ a + t * γ₂ a = γ a := fun a => by
+      have := congrFun hcomb a
+      simpa using this
+    -- tight pairs of `γ` are tight for `γ₁` and `γ₂`
+    have htight : ∀ a b, γ a - γ b = d a b → γ₁ a - γ₂ a = γ₁ b - γ₂ b := by
+      intro a b hab
+      have h3 := eq_of_convex_comb_eq (c := d a b) hs ht hst
+        (x₁ := γ₁ a - γ₁ b) (x₂ := γ₂ a - γ₂ b) (hγ₁.1 a b) (hγ₂.1 a b)
+        (by rw [← hab, ← hcomb' a, ← hcomb' b]; ring)
+      linarith [h3.1, h3.2]
+    -- the mean of the direction under `p`
+    set c : ℝ := ∑ a, gibbsLaw π γ a * (γ₁ a - γ₂ a) with hcdef
+    have hτsum : ∑ a, gibbsLaw π γ a * ((γ₁ a - γ₂ a) - c) = 0 := by
+      have e : ∑ a, gibbsLaw π γ a * ((γ₁ a - γ₂ a) - c) =
+          ∑ a, gibbsLaw π γ a * (γ₁ a - γ₂ a) - c * ∑ a, gibbsLaw π γ a := by
+        rw [Finset.mul_sum, ← Finset.sum_sub_distrib]
+        exact Finset.sum_congr rfl (fun a _ => by ring)
+      rw [e, sum_gibbsLaw hπ γ, mul_one, ← hcdef, sub_self]
+    obtain ⟨ε, hε, hplus, hminus⟩ := perturb_mem_window hpw
+      (τ := fun a => (γ₁ a - γ₂ a) - c) hτsum
+      (fun a b hab => by
+        have := htight a b ((window_tight_iff hπ γ d a b).1 hab)
+        linarith)
+    have hseg : gibbsLaw π γ ∈ openSegment ℝ
+        (fun a => gibbsLaw π γ a * (1 + ε * ((γ₁ a - γ₂ a) - c)))
+        (fun a => gibbsLaw π γ a * (1 - ε * ((γ₁ a - γ₂ a) - c))) := by
+      refine ⟨1 / 2, 1 / 2, by norm_num, by norm_num, by norm_num, ?_⟩
+      funext a
+      simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul]
+      ring
+    have h := (hext _ hplus _ hminus hseg).1
+    have hconst : ∀ a, γ₁ a - γ₂ a = c := by
+      intro a
+      have ha : gibbsLaw π γ a * (1 + ε * ((γ₁ a - γ₂ a) - c)) = gibbsLaw π γ a :=
+        congrFun h a
+      have hz : gibbsLaw π γ a * (ε * ((γ₁ a - γ₂ a) - c)) = 0 := by linarith
+      have hz' := (mul_eq_zero.1 hz).resolve_left (hp_pos a).ne'
+      have hz'' := (mul_eq_zero.1 hz').resolve_left hε.ne'
+      linarith
+    have hc0 : c = 0 := by
+      have := hconst a₀
+      rw [hγ₁.2, hγ₂.2, sub_self] at this
+      exact this.symm
+    funext a
+    have := hconst a
+    linarith
+  intro γ₁ hγ₁ γ₂ hγ₂ hseg
+  obtain ⟨s, t, hs, ht, hst, hcomb⟩ := hseg
+  have heq := main γ₁ hγ₁ γ₂ hγ₂ s t hs ht hst hcomb
+  have h1 : γ₁ = γ := by
+    rw [← hcomb, ← heq]
+    funext a
+    simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul]
+    have : (s + t) * γ₁ a = γ₁ a := by rw [hst, one_mul]
+    linarith
+  exact ⟨h1, heq ▸ h1⟩
+
+/-- **Item 1, the vertex statement, corrected**: the extreme points of the window are exactly
+the Gibbs laws of the extreme points of the Lipschitz class normalised at a base point. -/
+theorem extremePoints_window_eq [Nonempty α] {π : α → ℝ} (hπ : ∀ a, 0 < π a)
+    (d : α → α → ℝ) (a₀ : α) :
+    Set.extremePoints ℝ (window π d) = gibbsLaw π '' Set.extremePoints ℝ (lipNorm d a₀) := by
+  ext p
+  constructor
+  · intro hp
+    obtain ⟨γ', hγ', rfl⟩ := exists_gibbsLaw_of_mem_window hπ hp.1
+    have hnorm : (fun a => γ' a + -γ' a₀) ∈ lipNorm d a₀ := by
+      refine ⟨fun a b => ?_, by simp⟩
+      have := hγ' a b
+      simp only
+      linarith
+    have heq : gibbsLaw π (fun a => γ' a + -γ' a₀) = gibbsLaw π γ' :=
+      gibbsLaw_add_const π γ' (-γ' a₀)
+    refine ⟨fun a => γ' a + -γ' a₀, ?_, heq⟩
+    exact extreme_of_gibbsLaw_extreme hπ hnorm (heq ▸ hp)
+  · rintro ⟨γ, hγ, rfl⟩
+    exact gibbsLaw_extreme_of_extreme hπ hγ
+
+end Vertices
+
+/-! ### Item 3 with vertex labels: a convex function on the window is bounded by its values at
+the vertex laws -/
+
+section VertexBound
+
+universe u
+
+variable {α : Type*} [Fintype α]
+
+/-- The window is compact. -/
+theorem isCompact_window (π : α → ℝ) (d : α → α → ℝ) : IsCompact (window π d) := by
+  have hbox : IsCompact (Set.univ.pi (fun _ : α => Set.Icc (0 : ℝ) 1)) :=
+    isCompact_univ_pi (fun _ => isCompact_Icc)
+  refine hbox.of_isClosed_subset ?_ ?_
+  · have h1 : IsClosed {p : α → ℝ | ∀ a, 0 ≤ p a} := by
+      rw [Set.setOf_forall]
+      exact isClosed_iInter (fun a => isClosed_le continuous_const (continuous_apply a))
+    have h2 : IsClosed {p : α → ℝ | ∑ a, p a = 1} :=
+      isClosed_eq (continuous_finsetSum _ (fun a _ => continuous_apply a)) continuous_const
+    have h3 : IsClosed {p : α → ℝ | ∀ a b, π a * p b ≤ Real.exp (d a b) * π b * p a} := by
+      rw [Set.setOf_forall]
+      refine isClosed_iInter (fun a => ?_)
+      rw [Set.setOf_forall]
+      exact isClosed_iInter (fun b =>
+        isClosed_le (continuous_const.mul (continuous_apply b))
+          (continuous_const.mul (continuous_apply a)))
+    exact h1.inter (h2.inter h3)
+  · intro p hp
+    obtain ⟨hp0, hp1, _⟩ := hp
+    rw [Set.mem_univ_pi]
+    intro a
+    refine ⟨hp0 a, ?_⟩
+    calc p a ≤ ∑ b, p b := Finset.single_le_sum (fun b _ => hp0 b) (Finset.mem_univ a)
+      _ = 1 := hp1
+
+/-- `p ↦ KL(p ‖ Q)` is convex on the window. -/
+theorem klDivFin_convexOn_window (π : α → ℝ) (d : α → α → ℝ) (Q : α → ℝ) :
+    ConvexOn ℝ (window π d) (fun p => klDivFin p Q) := by
+  refine ⟨window_convex π d, ?_⟩
+  intro p hp q hq s t hs ht hst
+  unfold klDivFin
+  simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul]
+  rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]
+  refine Finset.sum_le_sum (fun a _ => ?_)
+  have hc := Real.convexOn_mul_log.2 (show p a ∈ Set.Ici (0 : ℝ) from hp.1 a)
+    (show q a ∈ Set.Ici (0 : ℝ) from hq.1 a) hs ht hst
+  simp only [smul_eq_mul] at hc
+  linarith
+
+/-- `p ↦ KL(p ‖ Q)` is continuous (with the convention `0 log 0 = 0`). -/
+theorem continuous_klDivFin (Q : α → ℝ) : Continuous (fun p : α → ℝ => klDivFin p Q) := by
+  have e : (fun p : α → ℝ => klDivFin p Q) =
+      fun p => ∑ a, (p a * Real.log (p a) - p a * Real.log (Q a)) := by
+    funext p
+    unfold klDivFin
+    exact Finset.sum_congr rfl (fun a _ => by ring)
+  rw [e]
+  exact continuous_finsetSum _ (fun a _ =>
+    (Real.continuous_mul_log.comp (continuous_apply a)).sub
+      ((continuous_apply a).mul continuous_const))
+
+/-- **Vertex labels suffice.**  If `KL(π_γ ‖ Q) ≤ M` at every extreme point `γ` of the
+normalised Lipschitz class, then `KL(π_γ ‖ Q) ≤ M` on the whole class (Krein–Milman, convexity
+and continuity of the divergence, and the vertex correspondence). -/
+theorem klBound_of_vertices [Nonempty α] {π : α → ℝ} (hπ : ∀ a, 0 < π a) (d : α → α → ℝ)
+    (a₀ : α) (Q : α → ℝ) {M : ℝ}
+    (hM : ∀ γ ∈ Set.extremePoints ℝ (lipNorm d a₀), klDivFin (gibbsLaw π γ) Q ≤ M) :
+    KLBound π d Q M := by
+  intro γ hγ
+  have hmem : gibbsLaw π γ ∈ window π d := gibbsLaw_mem_window hπ hγ
+  have hKM := closure_convexHull_extremePoints (isCompact_window π d) (window_convex π d)
+  have hclosed : IsClosed {p : α → ℝ | klDivFin p Q ≤ M} :=
+    isClosed_le (continuous_klDivFin Q) continuous_const
+  have hsub : convexHull ℝ (Set.extremePoints ℝ (window π d)) ⊆
+      {p : α → ℝ | klDivFin p Q ≤ M} := by
+    intro p hp
+    obtain ⟨y, hy, hle⟩ := (klDivFin_convexOn_window π d Q).exists_ge_of_mem_convexHull
+      extremePoints_subset hp
+    rw [extremePoints_window_eq hπ d a₀] at hy
+    obtain ⟨γ', hγ', rfl⟩ := hy
+    exact le_trans hle (hM γ' hγ')
+  have hall := closure_minimal hsub hclosed
+  rw [hKM] at hall
+  exact hall hmem
+
+/-- **Item 3, the inequality with vertex labels**: if `M i` bounds `KL(π_φ ‖ Q i)` over the
+vertices `φ` of the (normalised) site class, then `KL(ν_ψ ‖ ⊗ Q i) ≤ ∑_i M i` for every `ψ` in
+the class of the product. -/
+theorem klBound_pi_of_vertices {n : ℕ} (S : Fin n → Type u) [∀ i, Fintype (S i)]
+    [∀ i, Nonempty (S i)] (π : ∀ i, S i → ℝ) (d : ∀ i, S i → S i → ℝ) (Q : ∀ i, S i → ℝ)
+    (M : Fin n → ℝ) (a₀ : ∀ i, S i) (hπ : ∀ i s, 0 < π i s) (hQ : ∀ i s, 0 < Q i s)
+    (hd : ∀ i s, d i s s ≤ 0)
+    (hM : ∀ i, ∀ γ ∈ Set.extremePoints ℝ (lipNorm (d i) (a₀ i)),
+      klDivFin (gibbsLaw (π i) γ) (Q i) ≤ M i) :
+    KLBound (fun x : ∀ i, S i => ∏ i, π i (x i)) (fun x y => ∑ i, d i (x i) (y i))
+      (fun x => ∏ i, Q i (x i)) (∑ i, M i) :=
+  klBound_pi S π d Q M hπ hQ hd
+    (fun i => klBound_of_vertices (hπ i) (d i) (a₀ i) (Q i) (hM i))
+
+/-- The site maximum exists: `KL(π_γ ‖ Q)` attains a greatest value over a non-empty Lipschitz
+class (compactness of the window, continuity of the divergence). -/
+theorem exists_site_max [Nonempty α] {π : α → ℝ} (hπ : ∀ a, 0 < π a) (d : α → α → ℝ)
+    (Q : α → ℝ) (hne : ∃ γ, Admissible d γ) :
+    ∃ M, IsGreatest {m | ∃ γ, Admissible d γ ∧ klDivFin (gibbsLaw π γ) Q = m} M := by
+  obtain ⟨γ₀, hγ₀⟩ := hne
+  have hne' : (window π d).Nonempty := ⟨_, gibbsLaw_mem_window hπ hγ₀⟩
+  obtain ⟨p, hp, hmax⟩ := (isCompact_window π d).exists_isMaxOn hne'
+    (continuous_klDivFin Q).continuousOn
+  obtain ⟨γ, hγ, rfl⟩ := exists_gibbsLaw_of_mem_window hπ hp
+  refine ⟨klDivFin (gibbsLaw π γ) Q, ⟨γ, hγ, rfl⟩, ?_⟩
+  rintro m ⟨γ', hγ', rfl⟩
+  exact (isMaxOn_iff.1 hmax) _ (gibbsLaw_mem_window hπ hγ')
+
+/-- **Item 3, as a maximum, without hypotheses on the site maxima**: for non-empty site classes
+(e.g. `d i ≥ 0`) with envelopes vanishing on the diagonal, the site maxima `M i` exist, and
+`∑_i M i` is the greatest value of `KL(ν_ψ ‖ ⊗ Q i)` over the class of the product. -/
+theorem kl_pi_exists_isGreatest {n : ℕ} (S : Fin n → Type u) [∀ i, Fintype (S i)]
+    [∀ i, Nonempty (S i)] (π : ∀ i, S i → ℝ) (d : ∀ i, S i → S i → ℝ) (Q : ∀ i, S i → ℝ)
+    (hπ : ∀ i s, 0 < π i s) (hQ : ∀ i s, 0 < Q i s) (hd : ∀ i s, d i s s ≤ 0)
+    (hne : ∀ i, ∃ γ, Admissible (d i) γ) :
+    ∃ M : Fin n → ℝ,
+      (∀ i, IsGreatest
+        {m | ∃ γ, Admissible (d i) γ ∧ klDivFin (gibbsLaw (π i) γ) (Q i) = m} (M i)) ∧
+      IsGreatest {m | ∃ ψ, Admissible (fun x y : ∀ i, S i => ∑ i, d i (x i) (y i)) ψ ∧
+        klDivFin (gibbsLaw (fun x : ∀ i, S i => ∏ i, π i (x i)) ψ)
+          (fun x => ∏ i, Q i (x i)) = m} (∑ i, M i) := by
+  choose M hM using fun i => exists_site_max (hπ i) (d i) (Q i) (hne i)
+  exact ⟨M, hM, kl_pi_isGreatest S π d Q M hπ hQ hd hM⟩
+
+end VertexBound
+
 end ScienceL2
 
 end
@@ -782,3 +1277,19 @@ end
 #print axioms ScienceL2.klBound_pi
 #print axioms ScienceL2.kl_additive_pi
 #print axioms ScienceL2.kl_pi_isGreatest
+#print axioms ScienceL2.exists_pos_scale
+#print axioms ScienceL2.eq_of_convex_comb_eq
+#print axioms ScienceL2.window_slack_eq
+#print axioms ScienceL2.window_tight_iff
+#print axioms ScienceL2.perturb_mem_lipNorm
+#print axioms ScienceL2.perturb_mem_window
+#print axioms ScienceL2.gibbsLaw_extreme_of_extreme
+#print axioms ScienceL2.extreme_of_gibbsLaw_extreme
+#print axioms ScienceL2.extremePoints_window_eq
+#print axioms ScienceL2.isCompact_window
+#print axioms ScienceL2.klDivFin_convexOn_window
+#print axioms ScienceL2.continuous_klDivFin
+#print axioms ScienceL2.klBound_of_vertices
+#print axioms ScienceL2.klBound_pi_of_vertices
+#print axioms ScienceL2.exists_site_max
+#print axioms ScienceL2.kl_pi_exists_isGreatest

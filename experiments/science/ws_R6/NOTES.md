@@ -205,3 +205,50 @@ theta in {0.003..1}, nu1 in {1, 30, 2e^u n_o/theta, 1e4}, K partly reduced, vali
  - r-dagger in {0,-1}: the unpopulated pass at M = M-ddagger did NOT close 1255 times and the sample was then doubled to exactly
    2 M-ddagger in 1133 runs: the sentence of the published proof "at level j the size is doubled only below M-ddagger" is false there
    (2^{n_o} q = 1 is not < 1); the STATEMENT is unaffected because then the cap is 2 e^lam M-dagger >= 2e M-ddagger (observed ratio 1/e).
+
+### Step 16 (off the good event: invalid inner answers; the abort rule exercised for the first time)
+B_invalid seed 15 (400 runs; 7 cells incl. n_o = 100, 80, 400; invalid inner behaviours: bracket above W, below W, 2.5x too wide, the trivial
+  bracket again, mixtures): 195 closed (159 of them with an invalid final bracket, as allowed off the good event), 21 closed with L > U,
+  179 aborted ("unclassified at the last rung"), 5 discarded (sampler limit).  Deterministic claims of K1 -- (iii) closing radius > r-dagger at
+  every level left, (iv) M <= max(K, 2M^neg), M^neg <= (1+eta)e^lam nu0 M-dagger, M <= Mbar, the cap of 40c5bd7, the width of every bracket
+  returned through the closure test, queries <= C_max -- held in ALL 395 runs.
+B_lazy (new behaviour LAZY: returns the rung-0 bracket at every rung but the last, a valid one at the last rung; so every point that needs any
+  refinement is driven to the most expensive rung):
+  seed 18, rung costs 10^l: 59 runs, none aborted, queries <= 0.021 C_vi  (the bound is dominated by Mbar*C_{L-1}; the abort is not needed).
+  seed 19, STEEP rung costs C_l = e^{80 l} (the regime of the theorems: the last rung dominates): 60 runs, 33 ABORTED ON THE QUERY BUDGET
+  (sample sizes e^24.5 .. e^28.6 > (J+1) cnt(x_{L-1})), 27 closed; queries <= C_max in all 60 (largest ln q - ln C_max = -0.006);
+  0 deterministic violations.  => off the good event the cost WOULD exceed C_max without the abort rule (R7's M1 is not a formality),
+  and the rule "test before the call" keeps it below.  Nobody had exercised this branch (R8: "no abort"; ENG: "aborted: 0").
+
+### Step 17 (report drafted while the queue runs; fixes to my own tooling)
+- R6_REPORT.md: sections 0, 1, 2.1-2.9, 4-8 written; section 3 (numerics) to be filled when the queue (run_rest2.sh, run_rest3.sh) ends.
+  WARNING to myself: the run counts in section 1 of the report were provisional when first written; they must be replaced by the
+  final numbers of summarise_all.py before the report is declared finished.
+- checks.check_2L originally looped over all x in b + N for every pass (O(J^2) thresholds): replaced by the thresholds the proof uses
+  (x = b and x_{l-1} rounded up into b + N); the first D_2L campaign (2 runs in 7 minutes) was discarded and is re-run by run_rest3.sh.
+- a patch of mine broke the import lines of everyn.py/adversarial.py/separation.py/flat_exact.py for about one minute (HERE became a tuple);
+  repaired and re-tested (everyn.py reproduces 1.6306 at u=1, n=500, phi=.5); no campaign imported these files in that minute.
+- partial B_reducedK (118 runs): events of the proof fail in 22/40 runs at K=8, 5/40 at K=20, 0/38 at K=50; no claim violated on runs where they hold.
+
+### Step 18 (independent numerics of the exponents: tau2.py; three levels: three.py)
+tau2.py: tau_2/a = 0.5001 (u=1/2, phi=.500), 0.5004 (u=1, phi=.500), 0.5056 (u=2, phi=.494)  [reports: 0.5001, 0.5004-0.5006, 0.5056-0.5057];
+  identity theta_na(e + theta_hint(e)) = theta_hint(e): max error 4e-12 on 2001 accuracies; Prop 11.57(c) (no level below h, T = theta_hint):
+  min over 999 values of phi of [sup_gamma bracket - h] = +7.6e-6, +2.8e-5, +7.8e-5 > 0.
+three.py (three nested levels, real randomness at every level, constants of the theorems, pool of middle runs per fibre): first test,
+  2 outer runs, 48 middle runs, 4 073 472 real bottom brackets: all valid, all within certified width, no claim violated.
+
+### Step 19 (reading completed; report generator)
+- Read the rest of K_REPORT.md (lines 648-998: section 5 remainder, 6.1-6.8, 7, 8, 9, summary) -- after my own implementation and
+  numerics; nothing there changes a verdict.  K's own runs report samples up to 4.5 M-dagger (6.2) and 3.9 M-dagger (6.8).
+- Proofread R6_REPORT.md sections 0-2.9; fixed the width sentence in (D2) and the cap sentence in Theorem R6.1.
+- make_section3.py computes every run count of section 3 from the data files; fill_report.py writes sections 3.2, 3.4, 3.6-3.8 into
+  the report from data/summary_all.json (it asserts the sentences that are claims about the data: every valid run closed, good event
+  never failed with theorem constants, no violation).  Preview written to the scratchpad; the report itself is filled when the queue ends.
+- D_2L_off finished: 210 runs (2L, reduced K and/or invalid answers).
+
+### Step 20 (cross-check of the lower bounds of the separation table: crosscheck_lb.py)
+The hinted and the non-adaptive lower bounds recomputed directly from the definitions of Delta_k and D_R with float64 logarithms
+(scipy gammaln / logsumexp), sharing nothing with r6lib.Tables: 184 rows of data/separation_K64_u*.jsonl, k* and R identical in every row,
+largest difference of ln(lower bound) 1.2e-11.  (My first version of the cross-check overflowed in expm1 for u(k+1-j) > 709 and reported
+false mismatches of k*; fixed with ln(e^y - 1) = y + log1p(-e^-y).)
+Crossover cells: u=1 n=1400: R = 381 (R/n = .2721, p_u = .2689), ln LB_na = 155.023; u=2 n=540: R = 67, 176.477; u=1/2 n=4700: R = 1784, 141.539.

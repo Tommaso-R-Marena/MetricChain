@@ -228,3 +228,47 @@ Next: report skeleton; then extras in this order: (E0) counterexample `d(s,s) > 
 
 Next: write `L2_REPORT.md`.  Possible further extras afterwards: (E4) vertex correspondence of
 A1.2 item 1 and "max at a vertex"; FKG nonnegativity of the summands of A11.2.
+
+## 21:12 UTC — report drafted; all theorems now have `#print axioms`; full check clean
+
+* Added `cube_sandwich_fails_negative_beta` (two-site witness at `β = −1`: lower inequality of
+  A11 fails) — `β ≥ 0` is needed [V].
+* Every theorem of every file now has a `#print axioms` line (59 + 62 + 27 = 148);
+  `check_all.sh` (21:09–21:11 UTC): three exit codes 0, 148/148 lines
+  `[propext, Classical.choice, Quot.sound]`, no error, no warning.
+* Numerics extended: the Lean witness of R6.2 (`n=4, r₁=2, u=6`) and products of chains.
+* `docs/science/workstreams/L2_REPORT.md` written (first complete version).
+
+Next (extra E4): vertex correspondence of A1.2 item 1 — `gibbsLaw π γ` extreme in the window
+⇔ `γ` extreme in the class normalised at a base point.  Plan: tight pairs; a perturbation
+`θ` constant along tight pairs; `ε` = minimum over the finitely many pairs of
+`slack/(1 + |Δθ|)` (1 on tight pairs).
+
+## 21:27 UTC — extras E4 and A11.2-sign done; final full check
+
+* E4 (`Window.lean`, sections `Vertices`, `VertexBound`):
+  `lipNorm d a₀` (class normalised at a base point), `exists_pos_scale` (finitely many strict
+  slacks leave a common positive scale), `eq_of_convex_comb_eq`, `window_slack_eq`,
+  `window_tight_iff` (window constraint tight at `π_γ` ⇔ Lipschitz constraint tight at `γ`),
+  `perturb_mem_lipNorm`, `perturb_mem_window`, `gibbsLaw_extreme_of_extreme`,
+  `extreme_of_gibbsLaw_extreme`, **`extremePoints_window_eq`**:
+  `extremePoints (window π d) = gibbsLaw π '' extremePoints (lipNorm d a₀)` — item 1's vertex
+  statement in corrected form.
+  `isCompact_window`, `klDivFin_convexOn_window` (from `Real.convexOn_mul_log`),
+  `continuous_klDivFin`, **`klBound_of_vertices`** (Krein–Milman
+  `closure_convexHull_extremePoints` + `ConvexOn.exists_ge_of_mem_convexHull`: a bound at the
+  vertex laws is a bound on the class), **`klBound_pi_of_vertices`** (item 3's inequality as
+  stated), `exists_site_max`, **`kl_pi_exists_isGreatest`** (site maxima exist; their sum is the
+  greatest value over the product class).
+  Remaining on paper for A1.2 items 1–3: finiteness of the vertex set; `Σ M_i = n·a`.
+* A11.2, sign of the summands (`Sandwich.lean`, section `Occupation`): `updown_inter_cross`
+  (`w(A∩U)w(B) ≤ w(A)w(B∩U)` for log-supermodular `w`, lower `A`, upper `B, U` — one application
+  of the four functions theorem), `boltz_logSupermodular`, `field_modular`,
+  `cube_occupation_cross`, `cube_occupation_mono` (`⟨x_i⟩_{A,t} ≤ ⟨x_i⟩_{B,t}`).  The integral
+  formula itself is not formalised.
+* `check_all.sh` 21:23–21:27 UTC: `Sandwich.lean` (1 247 lines, 64 theorems) 75 s,
+  `Referee.lean` (1 396, 62) 92 s, `Window.lean` (1 295, 43) 50 s; exit codes 0; 169/169
+  `#print axioms` lines `[propext, Classical.choice, Quot.sound]`; no error, no warning.
+  (Wall times are inflated by the other workstreams; user time is 12–30 s per file.)
+
+Next: update the report; final message.

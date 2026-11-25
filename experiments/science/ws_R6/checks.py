@@ -161,6 +161,8 @@ def check_2L(run):
     maxM = 0
     r_calls = mp.mpf(0)
     r_cnt = mp.mpf(0)
+    r_ineq = mp.mpf(0)
+    xgrid = sorted(set([float(P.b)] + [float(P.round_up(xs[l - 1])) for l in range(1, P.L + 1)]))
     for rec in run.levels:
         j = rec["j"]
         lns = run.ln_s(j)
@@ -178,17 +180,13 @@ def check_2L(run):
             if M * p_s >= 2 * K and not (X_s >= M * p_s / 2):
                 out["G"] = False
                 out["Gfail"].append(("V2", j, M))
-            i = 0
-            while True:
-                x = float(P.b) + i
+            # (V3) at the thresholds that the proof uses: x = b (validity) and x = x_{l-1} rounded up into b + N (the count)
+            for x in xgrid:
                 pt = inst.tail(lns - x)
                 Xt = run.count_above(ps["t"], lns - x)
                 if not (Xt <= max(2 * M * pt, mp.mpf(K) / 2)):
                     out["G"] = False
-                    out["Gfail"].append(("V3", j, M, i))
-                if lns - x < float(run.ln_s0) - 1.0:
-                    break
-                i += 1
+                    out["Gfail"].append(("V3", j, M, x))
         if rec["status"] in ("populated", "negligible"):
             qF = rec["qF"]
             # "a level that is left without stopping has r > r-dagger, that is q_j > 2K/M-dagger"
@@ -200,6 +198,10 @@ def check_2L(run):
             out["det"].append(("width", float(mp.log(Up / Lo)), float(P.width_bound)))
     out["ratios"]["M_over_Mbar"] = float(maxM / P.Mbar) if P.Mbar != mp.inf else 0.0
     out["ratios"]["M_over_Mdag"] = float(maxM / P.Mdag) if P.Mdag != mp.inf else 0.0
+    if P.Cmax != mp.inf:
+        if run.queries() > P.Cmax * (1 + TOL):
+            out["det"].append(("cost > bound of 11.52", float(mp.log(run.queries())), float(mp.log(P.Cmax))))
+        out["ratios"]["lnq_over_lnCmax"] = float(mp.log(run.queries()) / mp.log(P.Cmax))
     if out["G"]:
         g = out["good"]
         if run.status != "closed":
@@ -218,18 +220,19 @@ def check_2L(run):
                     g.append(("p(s_j) > q", j))
             if rec["passes"]:
                 tfin = rec["passes"][-1]["t"]
-                # the count for x in b + N
-                i = 0
-                while True:
-                    x = float(P.b) + i
+                # the count for x in b + N (at the values the cost proof uses, plus b)
+                for x in xgrid:
                     used = run.count_above(tfin, lns - x)
                     c = P.cnt(x)
                     r_cnt = max(r_cnt, mp.mpf(used) / c)
                     if used > c * (1 + TOL):
-                        g.append(("count", j, i, float(used / c)))
-                    if lns - x < float(run.ln_s0) - 1.0:
-                        break
-                    i += 1
+                        g.append(("count", j, x, float(used / c)))
+                    # the deterministic step of the count: 2 M_j^neg p(s_j e^-x) <= 16 K J e^2 e^x
+                    lhs = 2 * rec["Mneg"] * inst.tail(lns - x)
+                    rhs = 16 * K * J * e ** 2 * e ** mp.mpf(x)
+                    r_ineq = max(r_ineq, lhs / rhs)
+                    if lhs > rhs * (1 + TOL):
+                        g.append(("count inequality", j, x, float(lhs / rhs)))
                 for l in range(1, P.L + 1):
                     bound = min(P.Mbar, 32 * K * J * e ** 3 * e ** xs[l - 1] + 4 * K)
                     r_calls = max(r_calls, mp.mpf(rec["calls"][l]) / bound)
@@ -237,4 +240,8 @@ def check_2L(run):
                         g.append(("calls per level", j, l, float(rec["calls"][l] / bound)))
         out["ratios"]["calls_over_bound"] = float(r_calls)
         out["ratios"]["used_over_cnt"] = float(r_cnt)
+        out["ratios"]["count_ineq"] = float(r_ineq)
+    if run.status == "abort" and hasattr(P, "Cmax"):
+        pass
+    out["ratios"]["M_over_capnew"] = float(maxM / P.cap_new) if (P.cap_new != mp.inf and maxM > K) else 0.0
     return out

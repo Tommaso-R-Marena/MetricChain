@@ -1,4 +1,4 @@
-"""N2: Augustin's fixed point at the saddle; is the hardest additive instance self-consistent?
+"""N2 (light version after the first run hit the 30-minute limit: gamma-scan of 41 points + refinement): Augustin's fixed point at the saddle; is the hardest additive instance self-consistent?
    i.e. does the output law M*W of the vertex channel equal the Renyi centre Q* ?"""
 import numpy as np
 from sl import *
@@ -21,11 +21,11 @@ for (p,u) in ((0.5,1.0),(0.5,2.0),(0.3,1.0),(0.1,2.0),(0.1,1.0),(0.05,3.0),(0.2,
         mf = m_forced(p,u,g)
         rc = Rcc(p,u,g,mf,e)
         # additive bases only: maximise over gamma the constrained exponent
-        gs = np.linspace(-u*0.999,u*0.999,401)
+        gs = np.linspace(-u*0.999,u*0.999,41)
         vals = [Rcc(p,u,gg,m_forced(p,u,gg),e) for gg in gs]
         i = int(np.argmax(vals)); radd = vals[i]
         from scipy.optimize import minimize_scalar
-        res = minimize_scalar(lambda gg: -Rcc(p,u,gg,m_forced(p,u,gg),e), bounds=(gs[max(i-1,0)], gs[min(i+1,400)]), method='bounded', options={'xatol':1e-10})
+        res = minimize_scalar(lambda gg: -Rcc(p,u,gg,m_forced(p,u,gg),e), bounds=(gs[max(i-1,0)], gs[min(i+1,40)]), method='bounded', options={'xatol':1e-6})
         radd = max(radd, -res.fun)
         P(f"{p:5.2f} {u:4.1f} {f:3.1f} | {t:.4f} {m:.5f} | {Q[1]:.6f} | {aug:.6f} | {mw:.6f} | {mw-Q[1]:+.6f} | {mf:.5f} | {R:.6f} | {rc:.6f} | {radd:.6f} | {100*(1-radd/R) if R>0 else 0:.3f}")
         rows.append((p,u,f,t,m,Q[1],aug,mw,mf,R,rc,radd))

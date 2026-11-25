@@ -3,7 +3,7 @@ Mechanism analysis: where do the constants of g_GB in rotamer variables come fro
 
 usage: python3 -B an_mech.py TAG TAU
 
-On the product domain X(TAU) of an enumerated model the GBn2 energy is split in two ways:
+On the pruned product domain X'(TAU) of an enumerated model the GBn2 energy is split in two ways:
   (a) GB = GBself + GBcross      self = -(pref/2) sum_p q_p^2 / B_p(x)   (desolvation: depends on x
                                  only through the Born radii)
                                  cross = -pref sum_{p<q} q_p q_q / f_GB(r_pq, B_p B_q)
@@ -23,8 +23,11 @@ from fbmodel import FBModel
 
 np.set_printoptions(precision=3, suppress=True, linewidth=220)
 tag, tau = sys.argv[1], float(sys.argv[2])
+from an_main import pruned_product, subselect
 d0 = load_fb(tag)
 d = restrict(d0, tau) if tau > d0["tau_enum"] + 1e-12 else d0
+if not (d["s2min"] > tau).all():
+    d = subselect(d, pruned_product(d, tau))          # pair-clash-free product X'
 shape = d["shape"]; n = len(shape)
 Mdl = FBModel(d["seq"], d["bb"], grid=d["grid"], extra_ffs=())
 st = Mdl.product_states(d["dom"])

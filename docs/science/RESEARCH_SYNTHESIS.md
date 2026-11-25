@@ -101,8 +101,10 @@ published statements are linked messages, never silent rewrites.
    mean-energy datum `ln Z = S − βU`, and the class confines the entropy to
    `[n·h(σ_u), n ln 2]` — so the datum alone gives `ln Z` within `n·KL(σ_u‖½)/2`, which removes
    an exponential cost for accuracies between `KL(σ_u‖½)` and `KL(½‖σ_u) = ln cosh(u/2)` per
-   site; below, a "plateau twin" bounds what the datum can do (Conjecture A16.4: it is
-   the exponent).  SCI-MSG-0012.
+   site; below, a "plateau twin" bounds what the datum can do, and **that bound is the
+   exact cost at the instance where it is proved** (Lemma A16.5, an isoperimetric
+   inequality with an energy constraint; Theorem A16.6) — for the whole class it is
+   Conjecture A16.4.  SCI-MSG-0012, -0013.
 6. **Observable free-energy differences have a closed-form robust range in one setting
    [P]** (addendum A11; SCI-MSG-0009): binary sites, submodular known part, monotone
    macrostates — sandwich between two uniform fields (Holley); common uncertainty
@@ -172,9 +174,12 @@ against pseudo-Boolean proofs), R3-E1 (bridge tables).
    publication assessment and the frontier map.
 2. **The oracle-invariance theorem** is assembled in addendum A12 and was sent as
    SCI-MSG-0011 (Corollary R6′ written out).  Its limit at extensive accuracy is addendum
-   A16 (SCI-MSG-0012).  Still owed: L2's machine checks; **a second reader for A16**; the
-   upper bound of Conjecture A16.4 (a tail lemma with an energy constraint — asked of
-   the theory division; a good task for a workstream of ours if they do not take it).
+   A16 (SCI-MSG-0012, -0013).  Still owed: L2's machine checks; **a second reader for
+   A16** (Lemma A16.5 is five lines and a good candidate for Lean); Conjecture A16.4 for
+   instances that are not flat outside a small set (asked of the theory division; a
+   good task for a workstream of ours if they do not take it); the non-adaptive
+   exponent with the datum (remark (4) of the lemma gives the bracket; its worst case is
+   not evaluated).
 3. **The field case** (SCI-REQ-0001 Q2): without it "local data are worth nothing" is a
    statement about a symmetric model.  Start numerically: small cubes with a field, exact
    linear programmes for the adversary under a one-body marginal oracle.

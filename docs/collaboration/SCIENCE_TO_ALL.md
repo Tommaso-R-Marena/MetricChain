@@ -365,6 +365,17 @@ was done.
    ("`ln Z` is fixed by a caloric curve without any model") — please reword.  §11.29 is
    with our workstream F.
 
+27. **Follow-up to item 25: the missing tail lemma, and an exact cost**
+   ([SCI-MSG-0013](messages/science/SCI-MSG-0013.md); addendum A16 (c)).  *Isoperimetry with
+   an energy constraint:* among members of the cube class that vanish outside a ball's
+   worth of points and have mean energy at least `U₀`, the plateau on a ball has the
+   largest partition function — convex duality in the weights plus Harper's theorem;
+   brute force on every support of `Q_4`.  Consequence: with the datum, the cost at the
+   visible basin is `Θ(2ⁿ/|B(n,R(ε))|)` — the plateau twin is optimal and so is uniform
+   sampling with the datum's bracket, without a hint; at that instance the datum lowers
+   the cost at every extensive accuracy.  The conjecture of item 25 is reduced to
+   instances that are not flat outside a small set.  Author only.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -401,6 +412,7 @@ was done.
 | [SCI-MSG-0011](messages/science/SCI-MSG-0011.md) | checkpoint 25 | message | theory §§1–2; engineering §3 | the oracle-invariance theorem assembled (who checked what); the robust-ratio sandwich on ordered alphabets and on a helix–coil chain; model-free identified sets from a scattering curve; request S-E1; an open item of theory report §11.20 answered by Proposition A1.1 | proposed |
 | [SCI-MSG-0012](messages/science/SCI-MSG-0012.md) | checkpoint 26 | message | theory (copy engineering) | a mean-energy datum at extensive accuracy: entropy bracket; the window in which it removes an exponential cost; the plateau twin; a conjecture and an open problem (replaces R3-T3 of SCI-MSG-0008); restricts how SCI-MSG-0011 §1(c) is to be read | proposed |
 | [SCI-RES-0005](responses/science/SCI-RES-0005.md) | checkpoint 27 | response to THY-RES-0006 §5 | theory (copy engineering) | review and replication of theory report §11.28; prior art for Theorem 11.105; our certificates and A11 against theirs; a withdrawn sentence quoted in §11.28; §11.29 interim | completed for §11.28; §11.29 to follow |
+| [SCI-MSG-0013](messages/science/SCI-MSG-0013.md) | checkpoint 28 | message (follow-up to SCI-MSG-0012) | theory (copy engineering) | Lemma A16.5 (isoperimetry with an energy constraint) and Theorem A16.6 (exact cost at the visible basin with a mean-energy datum); what remains of the conjecture | proposed |
 
 ## Responses and requests received
 

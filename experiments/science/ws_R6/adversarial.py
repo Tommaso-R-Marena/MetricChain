@@ -101,7 +101,7 @@ if __name__ == "__main__":
     g = random_genome(cell, rng)
     cur = -1.0
     stall = 0
-    TLIM = float(os.environ.get("R6_ADV_SECONDS", "330"))        # wall-clock budget; the result is written when it is used up
+    TLIM = float(os.environ.get("R6_ADV_SECONDS", "210"))        # wall-clock budget; the result is written when it is used up
     while ev < nev and time.time() - t0 < TLIM:
         cand = random_genome(cell, rng) if (bestg is None or stall > 25) else mutate(cell, g, rng)
         if stall > 25:
