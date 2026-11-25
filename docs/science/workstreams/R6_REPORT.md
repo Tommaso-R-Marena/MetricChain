@@ -309,7 +309,8 @@ The differences are in what is written down, not in what is true: see m1–m4 in
    already put `e^{nβ}` points at the finest inner accuracy.  *Not repeated:* the term is the endpoint
    `γ = β` of the supremum in (11.18.2), `min(β, μ) + (1−φ)T(β/(1−φ))`; in the proof it is the last rung,
    `(J+1)·cnt(x_{L−1})·C_L` with `x_{L−1} ≈ b`.  In my runs on flat bulks all points of the levels just above
-   the bulk do go to the last rung (calls per level up to `0.38` of the bound, §3.3).
+   the bulk do go to the last rung (calls per level and rung up to `0.40` of the bound of claim (vi) in
+   the three flat-instance runs of §3.3, `data/flat_exact.jsonl`).
 5. **CLOSE** (coordinator; the tail lemma at every level).  *What was wrong:* not wrong but unproved —
    it needs two-sided inner accuracy on the points that carry each stratum.  *Not repeated:* the upper
    tail lemma enters the returned bracket once, at the closing pass; Algorithm 2L⁺ does use a tail
@@ -429,7 +430,8 @@ Minor (each with location, what is missing, and the repair; "closed" = I give th
   text): numpy's binomial sampler is biased at the sample sizes these harnesses use.**  numpy 2.5.3,
   `Generator.binomial(n, p)`: for `n ≥ 10^16` and a mean `np` between about `60` and `10^4` the mean of the
   samples is too small — by `0.84 %` at `n = 2^61`, `np = 92` (`z = −50` in `4·10^5` draws), `0.2–0.3 %` at
-  `np = 500`, `n ≥ 10^18`, `0.08 %` at `n = 10^17`; no bias for `n ≤ 10^15`, for `np ≤ 31` or for `np ≥ 5·10^4`; the
+  `np = 500`, `n ≥ 10^18`, `0.08 %` at `n = 10^17`, `0.02–0.06 %` at `n = 10^16`; no bias detected for `n ≤ 10^15`,
+  for `np ≤ 31` or for `np ≥ 5·10^4`; the
   Poisson sampler and sums of binomials with `2^51` trials are unbiased (`numpy_binomial_bias.py`, two
   seeds, `logs/numpy_binomial_bias.log`) **[N]**.  This is the regime of the far-tail shells in a block of
   `10^17`–`10^18` outer points — exactly the "rare high levels" on which the negligible branch and the

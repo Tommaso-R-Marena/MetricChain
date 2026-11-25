@@ -1,0 +1,9 @@
+numpy 2.5.3
+n=2.306e+18 np=92: binomial mean 91.2605 (rel. dev. -0.804 %, z = -46.9); var/mean 1.0808; Poisson control mean 91.9849 (z = -1.0)
+n=1.000e+18 np=500: binomial mean 498.9667 (rel. dev. -0.207 %, z = -29.7); var/mean 0.9714; Poisson control mean 499.9944 (z = -0.2)
+n=1.000e+17 np=500: binomial mean 499.5956 (rel. dev. -0.081 %, z = -11.1); var/mean 1.0601; Poisson control mean 500.0459 (z = +1.3)
+n=1.000e+16 np=500: binomial mean 499.9419 (rel. dev. -0.012 %, z = -1.7); var/mean 0.9852; Poisson control mean 500.0508 (z = +1.4)
+n=1.000e+15 np=500: binomial mean 499.9312 (rel. dev. -0.014 %, z = -1.9); var/mean 1.0107; Poisson control mean 500.0659 (z = +1.9)
+n=2.306e+18 np=20: binomial mean 20.0030 (rel. dev. +0.015 %, z = +0.4); var/mean 1.0034; Poisson control mean 19.9948 (z = -0.7)
+n=2.306e+18 np=100000: binomial mean 100001.5201 (rel. dev. +0.002 %, z = +3.0); var/mean 0.9961; Poisson control mean 99999.9950 (z = -0.0)
+n=1.000e+12 np=92: binomial mean 92.0058 (rel. dev. +0.006 %, z = +0.4); var/mean 0.9991; Poisson control mean 92.0098 (z = +0.6)
