@@ -1,0 +1,17 @@
+# u=4.0 n=200: reference curve at e=0: 0.2392497; R_unif(0) = 0.2392496; E_unif = 1.32500; table time 62s
+#   shells x=0.028 done t=73
+#   shells x=0.048 done t=81
+#   shells x=0.078 done t=90
+# family: sets | max omega w.r.t. R_ref (in units ln n/n) | max omega w.r.t. R_unif (units ln n/n) | where the first maximum is attained
+  1 one shell-neighbourhood (control): 12 | 0.00305 (0.115) | 0.00310 (0.117) | e_D=+0.4425 theta_D=0.1046 x=0.028 e=+0.4638
+  2 union of two shell-neighbourhoods (centres at distance n/2): 12 | 0.00093 (0.035) | 0.00096 (0.036) | e_D=+0.4459 theta_D=0.1012 x=0.028 e=+0.4638
+  3 union of three: 12 | 0.00000 (0.000) | 0.00000 (0.000) | e_D=-0.2562 theta_D=0.3550 x=0.028 e=-0.2412
+  4 intersection of two: 3 | 0.00000 (0.000) | 0.00000 (0.000) | e_D=-0.2028 theta_D=0.2364 x=0.028 e=+0.4638
+  5 symmetric difference of two: 12 | 0.00000 (0.000) | 0.00000 (0.000) | e_D=-0.2582 theta_D=0.3570 x=0.028 e=-0.2412
+  6 sum of the two distances: 3 | 0.00000 (0.000) | 0.00000 (0.000) | e_D=-0.1903 theta_D=0.2276 x=0.028 e=+0.4638
+  7 union with unequal budgets: 12 | 0.00478 (0.181) | 0.00486 (0.183) | e_D=+0.6851 theta_D=0.0578 x=0.028 e=+0.4638
+  8 neighbourhood of a random 4-block class: 28 | 0.00000 (0.000) | 0.00000 (0.000) | e_D=-0.0201 theta_D=0.2300 c=(np.int64(48), np.int64(44), np.int64(2), np.int64(2)) e=+0.0000
+  9 union of two such: 28 | 0.00000 (0.000) | 0.00000 (0.000) | e_D=-0.0178 theta_D=0.2022 c=(np.int64(48), np.int64(44), np.int64(2), np.int64(2)),(np.int64(48), np.int64(9), np.int64(46), np.int64(7)) e=+0.0000
+  10 cylinder (block 4 free): 28 | 0.00000 (0.000) | 0.00000 (0.000) | e_D=-0.0198 theta_D=0.1366 c=(np.int64(48), np.int64(44), np.int64(2)) e=+0.0000
+  11 half-space in the counts: 42 | 0.00000 (0.000) | 0.00000 (0.000) | e_D=-0.1456 theta_D=0.1956 w=[ 0.28 -0.55  0.98 -0.31] q=0.02
+time 147.918701171875

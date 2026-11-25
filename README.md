@@ -256,7 +256,10 @@ zero residual but an additive residual that partly cancels the field; the right 
 not the Gibbs measure of the known part but uniform on every type class (a flat histogram
 in the magnetisation — plain Monte Carlo from the Gibbs measure is worse by up to a factor
 2.9 in the exponent, by an elementary lower bound; the best single tilted product measure
-is worse by 0.5–3 % in the examples computed); and the isoperimetric input is not that of
+is worse by 0.5–3 % in the examples computed, all at extensive accuracies — at bounded
+accuracy a product measure with the right marginal, which is not the Gibbs measure's,
+ties with the flat histogram in that lower bound, as the Scientific Discovery Division
+pointed out: capacity equals information radius); and the isoperimetric input is not that of
 a fixed product measure but a new asymptotic statement for a "flat-histogram" reference
 instance, proved by the method of types.  A field always helps: every exponent decreases
 with the strength of the field (proved by the coordinator, refereed).  Machine-checked: the
@@ -295,8 +298,10 @@ numbers (`SetLimit.lean`, `CoverStability.lean`); the lattice lemmas that feed t
 proofs checked numerically.
 (viii) *A known part with interactions: mean-field models* (theory report §11.23; workstream
 T, `docs/workstreams/T_REPORT.md`; **paper proofs, re-derived in part and re-computed by the
-coordinator with independent solvers; refereed (R10): no critical finding, two major
-corrections that are applied at the next checkpoint**).  The
+coordinator with independent solvers; refereed (R10, `docs/reviews/R10_referee_report.md`): no
+critical finding; two major and fifteen minor corrections, all applied — the claim that a
+shallow barrier is invisible up to one explicit coupling for every slope was false at
+large slopes, and an interval for one non-adaptive exponent had an unproved end**).  The
 first known part that is not a product measure: a function of the order parameter, with
 one phase or two.  By permutation symmetry alone, for every system size: the
 flat-histogram ("multicanonical") sample is optimal among fixed samples up to a polynomial
@@ -330,7 +335,9 @@ indistinguishability lemma behind the lower bound, for two rounds (`TwoRounds.le
 paper proofs, every step checked numerically; not refereed**).  Inside a level set of the
 order parameter the known part is a constant, and there are only `n + 1` level sets.  Two
 consequences.  First, an elementary inequality — among pairs of binary variables with a
-given odds ratio the mutual information is largest when both marginals are uniform —
+given odds ratio the mutual information is largest when both marginals are uniform; it
+is **known** (Hasenclever and Scholz 2013, found for us by the Scientific Discovery
+Division; our first version said "may be folklore") —
 shows that on every level set sets around one centre are extremal and the exponents are
 at most the uniform cube's, with equality at half filling.  Hence **no known part that
 depends on the configuration only through one order parameter — ferromagnetic or
@@ -372,7 +379,8 @@ envelope constants, anchor values); certifying envelope constants for a concrete
 interval evaluation of force-field terms over voxels, and any claim of practical solver
 performance are outside the development.  The complexity results are exponents on idealised
 classes (product landscapes; for algorithms without a hint only the cube, with a zero known
-part, a field, or — unrefereed, and without an adaptive algorithm — a mean-field known
+part, a field, or — with an adaptive algorithm only for ferromagnets, and exact only up
+to the junction with the uniform cube — a mean-field known
 part, where the comparison with the uniform cube of item (x) is the coordinator's own
 unrefereed proof), with paper proofs wherever the theory report does not name a Lean declaration; the
 newest of them — the adaptive exponent — has a machine-checked recursion and bracket but a

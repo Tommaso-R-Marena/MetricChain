@@ -1486,3 +1486,74 @@ turned out right; these did not.
    `n ≈ 450`; isoperimetric test families at `n ≤ 72` have no power against a wrong exponent
    function and are recorded as such.
 
+
+## D53. What the referee of the mean-field section found: a numerical statement made at one slope and stated for all, an interval whose "upper end" was a lower bound, and two numbers nobody had recomputed (cycle 10; referee R10 on workstream T and theory report §11.23)
+
+Referee R10 (`docs/reviews/R10_referee_report.md`) found no critical error in §11.23 and
+confirmed its core (the isoperimetric theorem for every rate function, the convex case,
+the every-`n` statements).  What it did find is recorded here because each item is a
+*kind* of error that the coordinator's own check — re-derivation of the proofs and
+re-computation of "every headline number" with independent solvers — had passed.
+
+1. **"For `1 < βJ ≤ βJ*(e, u)` the barrier is invisible" — false for large slopes.**  The
+   workstream proved a local statement (the symmetric exit of the uniform cube's optimal
+   profile is a strict local minimum iff `βJ < βJ* = 1 + u·c₂/(2L)`), observed at `u = 1` and
+   three accuracies that the local minimum is the global one, and wrote the conclusion
+   `R_H = R_unif` for `1 < βJ ≤ βJ*` with the label "numerical" but without the range.  The
+   coordinator re-computed it at six couplings — at `u = 1` — and copied the sentence into
+   Proposition 11.81(b), into finding 4 of the section head, into Corollary 11.91(iii) and
+   into a message (THY-MSG-0009).  At `u = 8`, `e = 0` the statement fails: at
+   `βJ = 8.2632 < βJ* = 8.3366` the barrier `I(½) = 3.438` exceeds the uniform cube's threshold
+   `E_unif = ln cosh(u/2) = 3.307`, the *constant* exit at a well (`MI = 0`) is feasible for the
+   uniform cube's profile, and its value is `0`; the best profile found has `0.3674` against
+   `R_unif = 0.3985`.  A local analysis around one exit cannot see a far exit.  On the
+   referee's grid the junction is `min{βJ*, βJ_w}`, `βJ_w` the coupling at which a constant
+   exit becomes feasible; at `u = 1` the second number is far away.  Harness DEAD.25.
+   *Lessons:* (a) a statement with a free parameter that was computed at one value of the
+   parameter must carry that value — the same lesson as D52 item 7, one day later;
+   (b) "local minimum, numerically global" needs the competing far exits named, and the
+   cheapest of them (a constant profile) has a closed form that would have shown the
+   failure in one line; (c) a coordinator who re-computes at the workstream's own
+   parameters confirms the workstream's arithmetic, not its statement.
+2. **An interval whose upper end was a lower bound.**  At `u = 0.30` the best cone around a
+   shell certifies `0.00184` at the accuracy `S(0)` while the best binary centre has
+   `R^{(2)}(0) = 0.00226`; both documents wrote "the exponent of non-adaptive algorithms is
+   known only to lie in `[0.00184, 0.00226]`".  The upper bound of Theorem 11.79(c) is in
+   terms of the *full* supremum `R_H`, of which `R^{(2)}` is a lower bound; what is proved is
+   `[0.00184, 0.00338]` (from `R_H ≤ R_unif`).  The same care had been taken at `u = 1` (where
+   the text says "if binary centres are optimal") and was dropped here.  *Lesson:* in a
+   sandwich, write next to every number whether it bounds the quantity from above or
+   from below; a supremum that has only been searched is a lower bound everywhere it is
+   used.
+3. **Two numbers wrong in the third digit, both outside every re-computation.**
+   `e₀ = 0.00181` was a linear interpolation between `e = 0.001` and `0.002` (the crossing of
+   the two branches is at `0.001804`); `a_cone = 0.0446` is the mutual information of the
+   *metastable* Gibbs shell of a cone at centre type `≈ 0.5025` — the global shell has
+   `0.04435` at type `½`, where the two wells tie (re-computed by the coordinator after the
+   report: `0.044351`; `0.044596` on the metastable branch).  No output file of the
+   workstream contains `0.0446`.  Neither number enters any conclusion.  *Lesson:* the
+   coordinator's "every headline number" was a list chosen by the coordinator; numbers
+   quoted in passing were not on it.  A local minimiser started on the wrong side of a
+   tie returns the metastable branch; the global shell needs all local minima.
+4. **A certified exponent rounded up.**  "`(1 − 2δ)e^{0.02509n}`" for the certified `0.025087`.
+   A lower bound is rounded down.
+5. **A loosely worded step that happened to have a true conclusion**: "every constant `ν` is
+   at distance `≥ η`" as the argument for a positive threshold in the convex case (the
+   minimiser of the Lagrangian is not constant; the repair is two inequalities), and
+   "`R_λ` is nonincreasing" where only `R̄_λ` is (admissibility at negative accuracies) — the
+   coordinator had "read, not re-derived" exactly these two proofs.
+6. **What the theory report said beyond the workstream's report** (the referee compared
+   the two statement by statement): `R_H = max_t[F* − te]` without the restriction `e ≥ 0`
+   (true for `R̄_H`, with an argument that was missing and is now in Theorem 11.80(c));
+   "the best cone around *any* shell" for three families of shells; "every coupling
+   `−40 ≤ βJ ≤ 1`" for eight couplings; and an interpretation that dropped the caveat that
+   the optimal fixed sample is stratified over *all* level sets.  Each is the
+   coordinator's summary going one step past its source.
+7. **For the record: the coordinator read the referee's draft.**  The eleventh checkpoint
+   cites finding M1 (in Corollary 11.91(iii)) before the referee had handed in the report —
+   the coordinator had read the draft in the referee's scratch directory.  The finding
+   did not change, and the referee gives two precisions (the failure needs large slopes
+   *and* small or negative accuracies; that `R_H` itself leaves `R_unif` rests on searches
+   in two cells).  Reading a draft is not a breach of the referee's independence — nothing
+   was sent to the referee — but a citation of an unfinished report should say that it is
+   one; it did not.

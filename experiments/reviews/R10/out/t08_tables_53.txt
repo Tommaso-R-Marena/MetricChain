@@ -1,0 +1,6 @@
+# Section 5.3 (u = 1): rows (bJ, bB) = (0.5, 0.3) and (1.0, 0.1)
+  bJ=0.5 bB=0.3: R_H(0) 0.023983 [0.47307@0.56293  0.86902@0.43707] (report 0.023983)   max_gamma R_gamma(0) 0.023983 at gamma* +0.2147 (report +0.2147)
+       cone formula R_cone(0) 0.023983 (m=0.4371)   R_0(0) 0.022659 (report 0.022659)   E_H 0.099123 (report 0.099123)   E_0 0.095345 (report 0.095345)   a(cones) 0.091019 at m=0.4664 (report 0.091019)   t=61
+  bJ=1.0 bB=0.1: R_H(0) 0.027964 [0.29025@0.59615  0.75138@0.40385] (report 0.027964)   max_gamma R_gamma(0) 0.027964 at gamma* +0.2000 (report +0.2000)
+       cone formula R_cone(0) 0.027964 (m=0.4038)   R_0(0) 0.020271 (report 0.020271)   E_H 0.115250 (report 0.11525)   E_0 0.090246 (report 0.090246)   a(cones) 0.106465 at m=0.4077 (report 0.106465)   t=134
+time 133.8292257785797

@@ -490,6 +490,24 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.21 M1: the second batch sees every type (the twins coincide; the refutation must disappear)
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.4 M1: the cap claimed without the shift of the closing radius (2 e^lambda M_dag)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.4 M2: every sample claimed to be at most M_dag
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.4 M3: the tail sums claimed to fall by e^{-2u} per unit of the radius
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.5 M1: the optimal input law of the cone channel taken for the sampling marginal
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.5 M2: the divergences of the information radius taken in the other order
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.5 M3: the best product sampler claimed to tie with the flat histogram at an extensive accuracy as well
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.5 M4: plain Monte Carlo claimed to attain the capacity
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.25 M1: the same test half way to beta J*, where the barrier is still below the uniform cube's threshold (the refutation must disappear)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.25 M2: the same test at u = 2, where the junction is at beta J* (the refutation must disappear)
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXI.1 M1: symmetric table taken at a smaller odds ratio (0.9 s)
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXI.1 M2: kernel inequality with the weight Y in place of 1 - Y
@@ -585,4 +603,4 @@
 [         caught] XXII.4 M4: the single cone claimed invisible to one-body data as well
                   exit=1  1 TEST(S) MISBEHAVED
 
-293 mutations: 292 caught, 1 expected pass, 0 not as expected
+302 mutations: 301 caught, 1 expected pass, 0 not as expected

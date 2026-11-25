@@ -2,7 +2,8 @@
 
 > **Repository note (added by the coordinator at integration; the report below is otherwise as
 > delivered).**  Status: **paper proofs by one author; re-derived in part and re-computed by
-> the coordinator; not yet refereed** (referee R10 commissioned, `docs/reviews/R10_brief.md`).
+> the coordinator; refereed by R10** (`docs/reviews/R10_brief.md`, `R10_referee_report.md`; see
+> the errata below).
 > The coordinator re-derived the proofs of T1, T2, T4, T5, T6, T7, T3(a), T8, T8′, T9(a), T9(e),
 > read T3(b), T9(b), (c) without re-deriving them in full, and re-computed with independent
 > solvers (`experiments/coordinator_checks/meanfield_T/`, `tv_check1.py` … `tv_check4.py`,
@@ -21,6 +22,50 @@
 > §14 of the report lists what changed against earlier drafts; the theory report was written
 > from the final version.  The statement of the brief that the report corrects ("the dip
 > exponent from its definition around one centre") is recorded in `docs/DEAD_ENDS.md` D49.
+>
+> **Errata (referee R10, `docs/reviews/R10_referee_report.md`; added by the coordinator at the
+> twelfth checkpoint of cycle 10; the text below is unchanged).**  The referee's line numbers
+> refer to the report as delivered, which starts at the line "Independent report (25 Nov
+> 2026)" below, counted so that the title is line 1.  **Verdict: no critical finding; every
+> statement labelled [proved] is proved, some after small repairs; two major and fifteen
+> minor findings.**
+> *Major.*  **(M1) §6.6, Statement (iii), and §0, row G3(e)** — "for `1 < βJ ≤ βJ*(e,u)` that
+> local minimum is global, so `R_H(e) = R_unif(e)`" — is **false as a general statement**:
+> true at the parameters computed (`u = 1`) and on the referee's grid for `u ≤ 2`, but for
+> large slopes at small or negative accuracies the constant exit at a well becomes
+> feasible for the uniform cube's profile below `βJ*` (`u = 8`, `e = 0`, `βJ = 8.2632 < 8.3366`:
+> `r_{μ*} = 0`, best profile found `0.36742 < R_unif = 0.39854`; `u = 4`, `e = 0.6e_c`,
+> `βJ = 4.9578 < 4.9978`: `0.41763 < 0.41857`); on the grid the junction is at
+> `min{βJ*, βJ_w}`.  Statement (ii) and the formula for `βJ*` are correct.  The corollary of
+> T12 ("for `1 < βJ ≤ βJ*(ε₁,u)` the adaptive exponent is `R_unif`") inherits the restriction.
+> **(M2) §6.5 (4), §0 row G3(d), §7.1 (O5), §12 item 7a** — "only known to lie in
+> `[0.00184, 0.00226]`": the upper end is `R^{(2)}(0)`, a *lower* bound of `R_H(0)`; proved is
+> `[0.00184, 0.00338]`.
+> *Minor.*  (m1) T1, summary display: `ε_n^{tr}(q)` is non**de**creasing in `q`,
+> `q*(ε) := inf{q : ε_n^{tr}(q) > ε}`, and the upper bound holds for every `q < q*`.  (m2) (2.1) and
+> `Z ≤ (n+1)^{1+c_φ}` need a Lipschitz `φ`; for a continuous one the error is
+> `3ln(n+1)/n + ω_φ(1/n)`.  (m3) T3(b), last line: use "`R̄_λ` is nonincreasing and
+> `r_μ(x) ≤ R̄_λ(e′)` for `x ≥ e′`", not "`R_λ` is nonincreasing"; the trivial `ω_n` for small `n`.
+> (m4) T8(b): `N(X) ≤ min{R̄_H(e) : e + R̄_H(e) ≤ X}` (admissibility at `e < 0`).  (m5) T8(c): left
+> limit at jumps of `R̄_H^{−1}`.  (m6) `ψ_H = −V_n(|x|)` against `−n·v(|x|/n)`: they differ by `O(log n)`.
+> (m7) T9(c), `E > 0`: the sentence "every constant `ν` is at distance `≥ η`" is not an argument
+> (repair: `MI(ν) ≥ ½(ν₁−ν₂)²`, `dist ≥ η − ½|ν₁−ν₂|`); the theorem holds as `R̄_H = R̂` for every real
+> `e`.  (m8) T9(e): statements about `θ_na` need the comparison of the game functions, which
+> holds by the same argument applied to the Lagrangian; the case "not admissible for the
+> field problem" is one line.  (m9) §4.2, last paragraph: an assertion; completed by the
+> referee with uniform continuity; not used.  (m10) `e₀ = 0.001804`, not `0.00181`.  (m11) §7.2:
+> "`Φ_H⁺(D) < 1` for most sets" is not right on `Q_3`, `Q_4`; the test is void because every set
+> with `Φ_H⁺ > 1` has `maxdens = 1`.  (m12) `a_cone = 0.04435`, not `0.0446` (the latter is the
+> metastable shell at `m ≈ 0.5025`; confirmed by the coordinator).  (m13) "`e^{0.02509n}`"
+> rounds the certified `0.025087` up: read `e^{0.02508n}`; in §6.2 (A) the value at `e = −0.07`
+> belongs to the shell `x = 0.2770`.  (m14) T3(a)/T8′: `D ≠ Q_n`, lattice approximations, left
+> limits.  (m15) T9(a): "sup" over `γ`, not "max".
+> *Not findings.*  T9(d) "`=`" can be proved for differentiable `φ` along the report's sketch;
+> **T12 can be completed without uniformity in `p`** (a finite net of fields; the variation
+> of the field inside a cell is absorbed into the residual at the price `u → u + 2Δ`) — this
+> is now Proposition 11.81(c) of the theory report; new data: a seven-atom profile at
+> `e = 0.05` (`0.0063875`), and the free block also with a field `βB = 0.05` at `e = 0.02`
+> (`0.0160758` against `0.0152121`).
 
 Independent report (25 Nov 2026).  Directory: `scratchpad/ws/T/` (`T_report.md`, scripts `code/`, outputs `out/`).  The
 repository was read at commit `36613b9` and not modified (no state-changing git command, no subagent, no Lean).  All numerics:

@@ -1608,38 +1608,133 @@ question.
 **Audit at this checkpoint:** `scripts/audit_all.sh` exits 0; 57 Lean files, 3432 audited
 declarations; harness and mutation totals as above.
 
-### Resume here (cycle 10, eleventh checkpoint)
+### Cycle 10, twelfth checkpoint — three independent checks: a referee, a prior-art review, an adversarial computation (2026-11-25)
+
+*What happened.*  Within one hour of the eleventh checkpoint three pieces of independent
+work arrived, one from each direction: the report of referee R10 on the mean-field
+section (§11.23), the Scientific Discovery Division's review of originality of the whole
+query-complexity cluster (SCI-REV-0004, with a research request, SCI-REQ-0001), and the
+Computational Research Division's checkpoint 3 (ENG-RES-0008: an adversarial count for
+Algorithm 2L⁺; ENG-RES-0009).  This checkpoint applies all three.  It contains almost no
+new mathematics of ours.
+
+*Referee R10* (`docs/reviews/R10_referee_report.md`, scripts in `experiments/reviews/R10/`).
+No critical finding; the core of §11.23 — Theorem 11.78(b), Theorem 11.79(d), the convex
+case, the every-`n` statements — is proved, some of it after small repairs that are now in
+the text (the bookkeeping at negative accuracies; the argument for a positive threshold;
+`R̄_H = R̂` at all accuracies).  **Two major findings.**  (M1) "For `1 < βJ ≤ βJ*(e, u)` the barrier
+is invisible" is false for large slopes: a constant exit at a well undercuts the uniform
+cube's profile as soon as the barrier reaches the uniform cube's threshold; true at `u = 1`,
+where the workstream and the coordinator had computed it.  The coordinator re-computed
+the first counterexample (`u = 8`, `e = 0`, `βJ = 8.263 < βJ* = 8.337`: value `0`; best shell `0.366`
+against `0.3985`) and put it into the harness as DEAD.25.  (M2) The interval
+`[0.00184, 0.00226]` at `u = 0.30` had a lower bound as its upper end; proved is
+`[0.00184, 0.00338]`.  Two numbers were wrong in the third digit (`e₀ = 0.001804`;
+`a_cone = 0.04435`, re-computed: the old value was the metastable branch).  **One gain:**
+the referee's completion of the workstream's sketch makes Proposition 11.81(c) a proof
+(given Theorem 11.64): for ferromagnets there is an adaptive algorithm without a hint
+with at most the uniform cube's exponent — the first interacting known parts for which
+the adaptive exponent is determined (no field, `βJ ≤ 1`; two phases up to the junction).
+Lessons: `DEAD_ENDS.md` D53 — the same lesson as D52 item 7, one day later (a statement
+with a free parameter computed at one value of it), and a coordinator who re-computes at
+the workstream's own parameters confirms its arithmetic, not its statement.
+
+*The originality review* (SCI-REV-0004).  Adopted in full; details in THY-RES-0005.
+Lemma 11.89 is in print (Hasenclever–Scholz 2013, Proposition 8(a); verified by us in the
+full text); the formulas of rows G11 and G18 are in print at the cone instance
+(Suárez–Silbey–Oppenheim 2012; Chatterjee–Diaconis 2018) and only the minimax statements
+were not found; the comparison of product samplers with the flat histogram is an
+*equality* at vanishing accuracy (capacity = information radius; harness XVII.5); "`ln Z` is
+not linear" was the wrong explanation of why adaption helps (linear functional, convex
+non-symmetric cone, relative error); the shear law reads "the adaption gain equals the
+cardinality".  §10 of the theory report now reproduces the division's classification,
+including "reformulation" for the shear law and for the first half of Theorem 11.76, and
+its summary: one result — the exact adaptive and non-adaptive exponents for the
+normalising constant over the log-Lipschitz cone of the cube, neither half alone — would
+survive a hostile referee, possibly the two-round separation.  *Coordinator's assessment:*
+this is the most useful single document the programme has received about itself; our
+own prior-art notes were search summaries, and two of our "not found" were statements
+about where we had looked.
+
+*The adversarial count* (ENG-RES-0008).  No claim of Theorem 11.56 violated in more than
+seven million mean runs — and the cost figures we had quoted (`0.70·na` at `n = 1000`; "two
+levels win from `n ≈ 250`") turned out to be best-case numbers: the flat instance with the
+outer fraction tuned for it.  Worst case: `1.04·na`, crossover at `n ≈ 500`.  Corrected in
+§11.19, §12 and `K_REPORT.md` (errata e1–e4).  Their question whether the sample cap `M̄` can
+be lowered has the answer yes: **every sample is `K` or smaller than `2·max{e^λM†, M‡}`**, a
+constant multiple of `M†` at bounded accuracy (remark after Theorem 11.56; a two-case
+argument on the level before the closing level; harness XVI.4, where the cap is attained
+up to 9 %).  Their reduction of outer landscapes to tail functions (Harper) is correct
+and is now a remark with credit; our sentence "radial instances are a small subfamily"
+was wrong for the outer loop.  ENG-RES-0009: Proposition 11.74 holds in all 36 cases; the
+off-lattice distance entropy is `0.33` and rising at 14 torsions (our inferred `0.39` is a
+statement about a limit not yet reached).
+
+*SCI-REQ-0001.*  Four questions.  Q1 — the robust interval of a ratio `Z(A)/Z(B)` of
+macrostate weights, the *observable* free energy — is accepted as the next piece of work:
+the division's argument (the total `ln Z` is not what experiments compare with) is right.
+Q2 (a one-body marginal oracle with a field) likewise.  Q3(c) is answered by a short
+lemma in THY-RES-0005 (an interior point of the limit shape at distance `r` from the
+boundary is the mean of a Gibbs measure with coefficients at most `ln 3/r`).
+
+*Housekeeping.*  Workstream Y (interactions along the chain) is running; its brief is
+`docs/workstreams/Y_brief.md`.  Messages: THY-MSG-0012 (linked corrections, to both
+divisions), THY-RES-0004 (engineering), THY-RES-0005 (science).  Synchronisation:
+engineering at `a2f6dc7`, science at `d7f6d47`; nothing merged.
+
+**Audit at this checkpoint:** `scripts/audit_all.sh` exits 0; 57 Lean files, 3432 audited
+declarations (no Lean changed); harness 138 tests (113 must survive, 25 documented
+refutations); 302 mutations (301 caught, one expected pass).
+
+### Resume here (cycle 10, twelfth checkpoint)
 
 Verified state: every module under `proofs/` (57 files) builds with zero warnings and is walked
-by the axiom audit (3432 declarations); the harness (135 registered tests: 111 that must
-survive, 24 documented refutations) and its mutation tests (293 mutations: 292 caught, one
+by the axiom audit (3432 declarations); the harness (138 registered tests: 113 that must
+survive, 25 documented refutations) and its mutation tests (302 mutations: 301 caught, one
 expected pass) pass; `scripts/audit_all.sh` exits 0.  **Three divisions** work on three
 branches (this one; `research/ubuntu-engineering`; `research/scientific-translation`); the
 other two are read-only for us and are fetched at every checkpoint
 (`docs/collaboration/status/theory.md`).  Refereed: theory report §§11.16–11.17
-(R5, R6, R_P), §11.18 (R7), §11.19 (R8: "proved"), §11.20 (R9: proved; two gaps closed).
+(R5, R6, R_P), §11.18 (R7), §11.19 (R8: "proved"; tested adversarially by the Computational
+Research Division), §11.20 (R9: proved; two gaps closed), **§11.23 (R10: no critical
+finding; two major and fifteen minor findings applied)**.
 Machine-checked: §11.21.  **Checked by the coordinator with independent code, no separate
-referee:** §11.22, §11.24.  **Refereed (R10: no critical finding, two major corrections
-still to be applied):** §11.23.  **The
+referee:** §11.22, §11.24 (under review by the Scientific Discovery Division).  **The
 coordinator's own proofs, checked numerically, no referee:** §11.25 (under review by the
-Scientific Discovery Division), §11.27.  **A workstream's proofs by transfer, re-computed,
+Scientific Discovery Division), §11.27, Proposition 11.81(c) in its completed form, the
+remark on sample sizes after Theorem 11.56.  **A workstream's proofs by transfer, re-computed,
 no referee:** §11.26.  **Not refereed:** the revised Theorem 11.44, Proposition 11.50.  **Not checked by anyone:** the
-two-level algorithms at scale with real inner brackets on non-flat instances, or with four
-levels, or in the batched schedule (THY-REQ-0001); the nested algorithm with a field end
+two-level algorithms with three levels or in the extensive regime under an adversarial
+search, or in the batched schedule; the nested algorithm with a field end
 to end; Theorem 11.63 on sets without symmetry for `n > 6`.  Running at the time of
-writing: **referee R10** (§11.23; directory `scratchpad/referee10/` of the session, report to
-be copied to `docs/reviews/R10_referee_report.md`).  If the session that started it has
-ended, its brief is complete and it can be re-commissioned as written (**with one change, learned from
-workstream V, which ended without a report: require a notes file after every step and
-numerics before theory** — D51).  In
+writing: **workstream Y** (interactions along the chain; directory `scratchpad/ws/Y/` of the
+session; brief `docs/workstreams/Y_brief.md` — if the session that started it has ended, the
+brief is complete and can be re-commissioned as written).  In
 priority order:
 
-1. **Apply referee report R10** (§11.23): it has reported — no critical finding, Theorem
-   11.78(b) "proved".  To do: copy the report to `docs/reviews/R10_referee_report.md` and its
-   scripts to `experiments/reviews/R10/`; correct Proposition 11.81(b) (junction at
-   `min{βJ*, βJ_w}` on the referee's grid; M1) and Proposition 11.82(e) (M2); the twelve
-   minor findings; errata in `T_REPORT.md`; a harness test for M1; linked corrections of
-   THY-MSG-0009; statuses in README, §8, §10, §12.
+1. **SCI-REQ-0001, Q1: the robust interval of a ratio of macrostate weights** — the
+   observable free energies.  Plan (worked out, not yet verified numerically; nothing of
+   it is claimed anywhere): in the weights `t = e^{−g}` the supremum of `Z_g(A)/Z_g(B)` is a
+   linear-fractional programme over the cone `t(y) ≤ e^{d(x,y)}t(x)`; by the triangle
+   inequality only the constraints between `B` and `A` matter (lower McShane extension to
+   `A`, upper to `B`; the two operations form a Galois connection), and the dual is a
+   bipartite transport plan with gains: `R⁺(A,B) = min{λ : ∃ψ ≥ 0, Σ_y e^{d(z,y)}ψ(z,y) ≤ λw(z)`,
+   `Σ_zψ(z,y) ≥ w(y)}`.  Soundness of such a certificate is three lines (candidate for
+   Lean).  For exchangeable reference measures and macrostates that are unions of type
+   classes: a linear programme on types; on the cube with a threshold macrostate the
+   extremal residual is the maximal field `−u|x|`; at the exponential scale
+   `n⁻¹ln R⁺ → max_{P∈A} min_{Q∈B}[W_d(Q,P) + I(Q) − I(P)]`, attained by a cone around a type
+   class.  On product spaces with a macrostate defined by one coordinate: the single-site
+   programme (exact for an additive known part; an upper bound, conditional on the
+   neighbours, for a pairwise one).  To do: scripts, harness block, Lean soundness
+   statement, a new section; prior art (density-ratio classes of robust Bayesian
+   analysis; transportation with gains) is with the science division.
+   **Q2 (a one-body marginal oracle with a field):** expected answer — the *class*
+   exponent is unchanged (the adversary moves the instance: a logarithmic well makes the
+   instance's own mean type equal to that of the hard dips' excess mass, cyclic
+   symmetrisation makes the marginals constant, one continuous parameter matches them
+   exactly), while the exponent *at the zero residual* drops to dips whose excess mass has
+   the reference's type.  Needs to be written and checked.
 2. **The adaptive exponent without a hint for an interacting known part** (Conjecture
    11.83, O4).  Reduced at the tenth checkpoint to the uniform measure on one type class
    (§11.25).  Two steps remain, in this order: (a) **Conjecture 11.94(iii)** — redo the
@@ -1654,12 +1749,15 @@ priority order:
    a recursion over rate functions.  A referee for §11.25 if it is to carry weight.
 3. **Synchronise with `research/ubuntu-engineering` and `research/scientific-translation`** at
    every checkpoint (read-only; never merge).  Awaited from the science division:
-   SCI-REV-0001 (§11.25), SCI-REV-0002 (§11.22), its prior-art findings, answers to
-   THY-REQ-0011; act on them as on our own referee reports.  Open on their side: THY-REQ-0001 (not started; target Algorithm 2L⁺, now in the
-   batched schedule of Theorem 11.84), -0003, -0004, the rest of -0002, -0007, -0008, -0009,
-   -0010.
-4. **Known parts with spatial structure** — the next foundational step, not started:
-   nearest-neighbour interactions along the sequence (a Markov chain as reference
+   SCI-REV-0001 (§11.25), SCI-REV-0002 (§11.22), SCI-REV-0003 (§11.24), its referee's verdict
+   on its own `INFERENCE_LIMITS.md`, answers to THY-REQ-0011; act on them as on our own
+   referee reports.  Open on the engineering side: THY-REQ-0001 (two levels at bounded
+   accuracy done, ENG-RES-0008; three levels, the extensive regime and the batched schedule
+   open), -0003, -0004, the rest of -0002, -0007, -0008 (items 1–4), -0009, -0010.
+4. **Known parts with spatial structure** — the next foundational step; **workstream Y is
+   on it** (two exact reductions to product landscapes of blocks; a regularised formula):
+   read its report critically, re-derive, re-compute with own code, then integrate.
+   Nearest-neighbour interactions along the sequence (a Markov chain as reference
    measure).  What carries over in principle: the measure is uniform on *Markov* type
    classes (pair counts), symmetric instances are functions of the pair type, random
    centres can be drawn from a Markov type class, and the method of types has a Markov
@@ -1671,9 +1769,13 @@ priority order:
    conditional entropies of Markov chains in place of `MI`.
 5. **Rounds** (§11.24): is `τ^{(3)} = h`?  A referee for §11.24 if it is to carry weight.  The
    general-`r` form of Lemma 11.85 in Lean (two rounds are done).
-6. **Two phases** (§11.23): binary optimality at vanishing accuracy (C1); the supremum
+6. **Two phases** (§11.23): binary optimality at vanishing accuracy (C1; not refuted by
+   the referee's 86 searches); the supremum
    beyond `e₀` (O2) — now known to lie below the uniform cube's value for every
-   interaction (Corollary 11.91); the non-adaptive exponent at `u = 0.30` (O5).
+   interaction (Corollary 11.91); the non-adaptive exponent at `u = 0.30` (O5; proved
+   interval `[0.00184, 0.00338]`); the junction `min{βJ*, βJ_w}` and a proof that `R_H < R_unif`
+   beyond it (would follow from uniqueness of the uniform cube's optimal profile); a
+   referee for the completion of Proposition 11.81(c).
    Machine-checking Theorem 11.76(c) is routine and not done.  The odds-ratio lemma
    (11.89) in Lean needs the derivative of the capacity; its kernel, the monotonicity of
    `t·ln(t/(t+W))`, is a few lines.  The same lemma for larger alphabets is open and is

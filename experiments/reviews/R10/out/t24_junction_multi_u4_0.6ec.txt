@@ -1,0 +1,46 @@
+# u=4.0 e=-0.361831 (0.6ec) bJ*=4.99780 bJ=4.95782 (f=0.99) p_u=0.017986 R_unif(e)=0.418570639 seed=25
+# contact set [(0.0, 0.0028), (0.44, 0.56), (0.9972, 1.0)]  I(1/2)=1.78581  well at 4.944e-05
+# mu* at the accuracy e: r = -0.000000000; cheapest constant exit at type 2.845e-03, margin -2.975e-02 (negative = feasible)
+# search accuracy e + delta, delta = 2e-05
+# best symmetric binary shell: x = 0.025812, value 0.417616492; R_unif - value = +9.541e-04; positive values for x in [0.02587, 0.10277]
+# 23 starts
+binary shell               v0=0.4176165 -> 0.417616504 (1 cycles) [0.02581@0.50000  0.97419@0.50000] type 0.5000 MI 0.57328 t=7
+binary asym a              v0=0.0000000 -> 0.000000000 (1 cycles) [0.02968@0.53000  0.97419@0.47000] type 0.4736 MI 0.56459 t=11
+binary asym b              v0=0.0000000 -> 0.417616400 (2 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=26
+diluted 0.03               v0=0.4122848 -> 0.417615615 (3 cycles) [0.02581@0.50000  0.97412@0.48348  0.97613@0.01652] type 0.5000 MI 0.57328 t=50
+diluted 0.08               v0=0.4032009 -> 0.417616400 (2 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=57
+diluted 0.15               v0=0.3866295 -> 0.417616400 (2 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=65
+four atoms 0.1             v0=-0.0000000 -> 0.417616309 (2 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=74
+four atoms 0.2             v0=0.4129913 -> 0.417609057 (3 cycles) [0.02491@0.28910  0.02704@0.21090  0.97418@0.50000] type 0.5000 MI 0.57328 t=102
+four atoms 0.05            v0=0.4087049 -> 0.417616404 (3 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=115
+frozen 0.05                v0=0.4148319 -> 0.415800099 (3 cycles) [0.00000@0.05036  0.02953@0.44964  0.97088@0.45585  1.00000@0.04415] type 0.5000 MI 0.57328 t=152
+frozen 0.12                v0=0.4109399 -> 0.417616400 (2 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=160
+off-centre                 v0=0.0000000 -> 0.417616251 (3 cycles) [0.02580@0.49998  0.97417@0.50002] type 0.5000 MI 0.57328 t=174
+rand0(binary shell)        v0=0.4174860 -> 0.417607805 (3 cycles) [0.02580@0.49998  0.97339@0.33350  0.97572@0.16652] type 0.5000 MI 0.57328 t=198
+rand3(diluted 0.03)        v0=0.4107104 -> 0.417616404 (2 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=206
+rand4(diluted 0.08)        v0=0.4027365 -> 0.417616400 (2 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=214
+rand5(diluted 0.15)        v0=0.3862473 -> 0.417616400 (2 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=223
+rand6(four atoms 0.1)      v0=0.4138435 -> 0.417616468 (3 cycles) [0.02582@0.50001  0.97419@0.49999] type 0.5000 MI 0.57328 t=266
+rand7(four atoms 0.2)      v0=0.3993744 -> 0.417616404 (3 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=276
+rand8(four atoms 0.05)     v0=0.4008416 -> 0.417616400 (2 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=283
+rand9(frozen 0.05)         v0=0.4084730 -> 0.417616408 (2 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=291
+rand10(frozen 0.12)        v0=0.4052115 -> 0.417616400 (2 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=298
+rand11(off-centre)         v0=0.3939860 -> 0.417616502 (2 cycles) [0.02581@0.50000  0.97419@0.50000] type 0.5000 MI 0.57328 t=307
+rand12(binary shell)       v0=0.4057702 -> 0.417616404 (3 cycles) [0.02580@0.49999  0.97418@0.50001] type 0.5000 MI 0.57328 t=318
+# best symmetric binary shell (found at e + delta): x = 0.025812; R_unif(e) = 0.418570639
+# evaluation AT THE ACCURACY e with three inner solvers (S1 fine: clippings, v; S2: dual per exit type, I; S3: primal SLSQP, I):
+  best symmetric binary shell: [0.02581@0.50000  0.97419@0.50000] type 0.50000 MI 0.573280
+     S1 0.417628794  S2 0.417628794  S3 0.417628794  (spread 1.0e-12);  R_unif - S1 = +9.4184e-04;  cheapest constant exit: type 2.845e-03, margin +2.000e-05
+     local minima over exit types [(0.5, 0.41762879)]
+  binary shell: [0.02581@0.50000  0.97419@0.50000] type 0.50000 MI 0.573280
+     S1 0.417628794  S2 0.417628794  S3 0.417628794  (spread 1.0e-12);  R_unif - S1 = +9.4184e-04;  cheapest constant exit: type 2.845e-03, margin +2.000e-05
+     local minima over exit types [(0.5, 0.41762879)]
+  rand11(off-centre): [0.02581@0.50000  0.97419@0.50000] type 0.50000 MI 0.573280
+     S1 0.417628778  S2 0.417628778  S3 0.417628778  (spread 6.2e-12);  R_unif - S1 = +9.4186e-04;  cheapest constant exit: type 2.845e-03, margin +2.023e-05
+     local minima over exit types [(0.4998, 0.41762878)]
+  rand6(four atoms 0.1): [0.02582@0.50001  0.97419@0.49999] type 0.50000 MI 0.573280
+     S1 0.417628758  S2 0.417628758  S3 0.417628758  (spread 4.9e-12);  R_unif - S1 = +9.4188e-04;  cheapest constant exit: type 2.845e-03, margin +2.004e-05
+     local minima over exit types [(0.499, 0.41762876)]
+# search values (at e + delta): best symmetric binary shell 0.417616492; starts that end above it by more than 1e-7: 0 of 23; best search value 0.417616504
+# largest value at e on which the three solvers agree to 1e-5: 0.417628794; R_unif(e) - it = +9.4184e-04
+# time 328.28033208847046

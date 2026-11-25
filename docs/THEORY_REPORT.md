@@ -89,7 +89,7 @@ referees (`reviews/R2` – `R9`), are classified separately there; §0.3 is a ma
 | a **known part** (field) | single-letter exponents; the right sample is flat in the order parameter; the hardest instance is additive, not the zero residual; a new asymptotic isoperimetric theorem | §11.20 | paper proofs, refereed (R9); shift identity machine-checked |
 | the common structure | the shear law; every game function yields a pair, and the level recursion converges | §11.21 | machine-checked |
 | **chains in the thermodynamic limit** | a convex limit shape for profile sets of bridges; certificate sizes converge to its covering number; bounds `50 … 3 627` for all walks; rate `N^{-1/3}` | §11.22 | abstract limit theorems machine-checked; lattice lemmas paper proofs checked with independent code; no separate referee; conjecture for unrestricted walks |
-| a **known part with interactions** (a function of the type: mean-field models) | by symmetry alone, for every `n`: flat-histogram sampling is optimal non-adaptively and the flat-histogram instance is the hardest symmetric one; a single-letter theorem for every rate function; with two phases the extremal perturbations are shells in the barrier class, beyond a small accuracy on part of the coordinates only; ferromagnets are never harder than the uniform cube | §11.23 | the every-`n` lower bounds machine-checked; paper proofs, numbers re-computed with independent solvers; **not yet refereed**; adaptive exponent open |
+| a **known part with interactions** (a function of the type: mean-field models) | by symmetry alone, for every `n`: flat-histogram sampling is optimal non-adaptively and the flat-histogram instance is the hardest symmetric one; a single-letter theorem for every rate function; with two phases the extremal perturbations are shells in the barrier class, beyond a small accuracy on part of the coordinates only; ferromagnets are never harder than the uniform cube, also for adaptive algorithms without a hint | §11.23 | the every-`n` lower bounds machine-checked; paper proofs, numbers re-computed with independent solvers; **refereed (R10; two major and fifteen minor findings applied)**; adaptive exponent open beyond ferromagnets up to the junction with the uniform cube |
 | **rounds of adaptivity** | a ladder with `L` rungs is `L` rounds, so the adaptive exponent is reached with a number of rounds independent of `n`; two rounds beat every fixed sample (`≤ 0.624a` at `u = 1`) and provably do not reach the adaptive exponent (`≥ 0.359a = 1.37h`): a hierarchy with at least three levels | §11.24 | the two-round indistinguishability lemma machine-checked; paper proofs checked against Theorem 11.56 and re-computed by the coordinator; unrefereed; three rounds open |
 | **slices** (every known part that is a function of the type, against the uniform cube) | among pairs of binary variables with a given odds ratio the mutual information is largest at uniform marginals; hence inside every type class binary centres suffice and the game function is dominated by the cube's, with equality for the class `½`: **no function-of-type known part is harder than the uniform cube, and an interaction without a field — antiferromagnets included — changes no exponent** (two letters; with three or more letters the comparison fails at small slopes: a known part that removes letters can make the problem harder); algorithms reduce to type classes (`n + 1` terms, each with a constant known part) | §11.25 | the coordinator's paper proofs, every step checked numerically; deterministic core of the reduction machine-checked; **not refereed**; the reading as exponents rests on §11.23; the adaptive exponent of a single type class is a conjecture |
 | **heteropolymer product landscapes** (a fixed sequence of site types, any alphabets, single-site known parts, envelopes that need not be symmetric) | the sketch of §11.20 is a chain of theorems: joint-type-stratified sampling is optimal among fixed samples for every `n`; the three exponents are `R̂(e) = max_t[Σ_jλ_jF*_j(t) − te]` (hinted at the hardest instance = adaptive without a hint), `θ_na = R̂∘S^{−1}`, with one common slope for all site types; **the site function is a Rényi capacity, `F*_j(t) = (1−t)C_t`, of the channel "vertex of the site's Lipschitz polytope ↦ its Gibbs law", so a fixed sample of `e^{nθ}` points certifies the accuracy rate `E_sp(θ)` (the sphere-packing exponent) and adaptivity gains exactly `θ`**; exponents of site types do not add; with three or more letters `F*` need not be concave and the uniform site law need not be the hardest | §11.26 | the every-`n` lower bounds and two elementary steps of the Rényi form machine-checked; paper proofs by a workstream, the upper bounds by transfer of Theorems 11.78(b), 11.52, 11.54, 11.64; every number re-computed by the coordinator with an own implementation; **not refereed**; nothing of the nested algorithm simulated |
@@ -1156,21 +1156,30 @@ We prove no new expressivity or mixing theorem; the following are consequences o
   kind (`n^{-1/8}` from the proof), gives exponents at extensive accuracies only, its nested
   algorithm uses a table of numbers for which no formula is known and has never been
   simulated end to end, and that a single tilted product measure is strictly worse than the
-  type-uniform sample is established numerically in three examples only.
+  type-uniform sample is established numerically in three examples at extensive
+  accuracies only — at vanishing accuracy the best one *ties* with it in the lower bound
+  (capacity = information radius; an observation of the Scientific Discovery Division).
 * **A known part with interactions is understood only when it is a function of the type,
   and there only in part** (§11.23).  The section is a workstream's paper proof that has
-  been checked and re-computed by the coordinator but **not yet refereed**.  What is proved
+  been checked and re-computed by the coordinator and **refereed (R10)**; the referee
+  found one general statement false (the junction with the uniform cube at large slopes)
+  and one interval unproved at its upper end, in a section whose numbers the coordinator
+  had re-computed — at one slope only (`DEAD_ENDS.md` D53).  What is proved
   for every `n` uses nothing but permutation symmetry (the flat-histogram sample among
   non-adaptive algorithms; the flat-histogram instance among *symmetric* instances).  The
   exponents are a single-letter supremum whose value is known for convex rate functions
   only: with two phases the value at vanishing accuracy is a number supported by searches
   (`0.0251012` at `βJ = 1.5`, `u = 1`, between proved bounds `0.0251012` and `0.0291391`), and
-  beyond a small accuracy only lower bounds from profiles with up to six block types are
-  known.  **The exponent of adaptive algorithms without a hint is open for every
-  interacting known part** — the nested algorithm does not transfer, the route through a
-  mixture of fields is a sketch for ferromagnets and not tight with two phases, and the
-  repair proposed in §11.23 is unproved — and so is the statement that the flat-histogram
-  instance is the hardest of *all* instances.  §11.25 (the coordinator's paper proofs,
+  beyond a small accuracy only lower bounds from profiles with up to seven block types are
+  known.  **The exponent of adaptive algorithms without a hint is open for interacting
+  known parts, with one exception** — the nested algorithm does not transfer; the route
+  through a mixture of fields gives the uniform cube's exponent as an upper bound for
+  ferromagnets (Proposition 11.81(c), given Theorem 11.64; the completion of the
+  workstream's sketch follows the referee and has not been refereed in turn), which is
+  exact where the single-letter value equals the uniform cube's (no field and `βJ ≤ 1`;
+  with two phases up to a junction that is known numerically only) and not tight beyond;
+  the repair proposed in §11.23 is unproved — and so is the statement that the
+  flat-histogram instance is the hardest of *all* instances.  §11.25 (the coordinator's paper proofs,
   **unrefereed**) adds an upper bound for the three exponents that needs no assumption on
   the interaction — the uniform cube's — and equality for interactions without a field;
   for adaptive algorithms it only *reduces* the question to the uniform measure on one
@@ -1335,7 +1344,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G8 | **Second-order envelopes**: with bounded mixed differences, `n(k−1)+1` evaluations on a star give an exact pairwise sandwich; the extremal extensions are pairwise models; certified-minimiser criterion; order `m` in general.  The remainder is quadratic in the Hamming distance, so this is a way out only under weak second-order coupling (D32) | `secondOrder_remainder`, `pairwise_sandwich`, `verify_sound_secondOrder`, `secondOrder_envelope_exact`, `secondOrder_certified_minimizer_iff`, `higherOrder_remainder`, `higherOrder_remainder_sharp` **[V]** | anchored (cut-HDMR) decomposition **known**; as a certified uncertainty class with an exact reduction to the pairwise kernel: no match found |
 | G10 | **Sampled free-energy sandwich**: `N` independent samples of a product reference pin `ln(Z/Z₀)` to `±\|β\|η + β²Σc_i²/8` outside an event of probability `2e^{−2Nη²/Σc_i²}` — polynomially many random evaluations where deterministic certification needs exponentially many | `sample_mean_two_sided`, `sampled_free_energy_sandwich`, `sampled_free_energy_sandwich_of_sample_size` **[V]** | standard concentration (Chernoff bound for a sub-Gaussian mean); stated as the constructive counterpart of G7 |
 | G9 | **Compositional partition kernel**: cut rule and elimination rule (exact on every chain, with one leaf), with exponential separations from the elementary rules for every chain length — for certificates whose lower end is exact, and relative to the given representation of the instance (D33) | `zverify2_sound`, `WInstance.Z_cut`, `cut_rule_separation`, `WInstance.Z_elim1`, `WInstance.Z_elim2`, `zverify2Top_chainCert`, `chain_separation`, `ferroChain_separation` **[V]** | repair of the kernel; variable elimination is classical; the separation is the formal counterpart of E2 at finite temperature |
-| G11 | **Query complexity of every algorithm**: sensitive alternatives must be detected (any class, any functional; deterministic and randomised), with a hedged spot-check converse; for the minimum, the instance-wise deterministic complexity *equals* the size of a value certificate, and every randomised algorithm (finite mixture) pays `(1−2δ)` times each fractional covering bound — attained by the hedged spot-check up to `ln(1/δ)`; for `ln Z`, a soft-gap radius for every algorithm and an upper bound for randomised ones in the same quantity, a lower bound on the randomised exponent with an upper bound in the same quantity, a machine-checked exponential gap between deterministic and randomised cost at the zero residual of the cube, and there a sharp worst-case accuracy threshold and the exponent in every accuracy regime | `exists_query_ne`, `prob_query_ne_ge`, `expected_queries_ge_packing`, `spotCheck_correct`, `instance_query_complexity`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `thermal_queries_strict_cover`, `thermal_queries_bracket`, `thermal_expected_queries_ge`, `thermal_product_randomized`, `cube_thermal_randomized_bound`, `detection_weight_ge`, `thermal_spotCheck_correct`, `cube_deterministic_lower_bound`, `exists_query_ne_pair`, `hedgedSpotCheck_correct`, `min_hedgedSpotCheck_correct`, `thermal_exact_dip_randomized`, `cube_exact_dip_randomized` **[V]**; single-letter forms and the upper bounds on the cube **[P + K]** | method **known** (radius of information; instance complexity; fractional block sensitivity as a bound on randomised query complexity); that randomisation helps for `ln Z` only above an accuracy scale is **known** for smoothness classes (Holzmüller–Bach 2025, §2.2); the instance-wise randomised bound with gap radii, the soft gap, and the exact threshold and accuracy diagram on the cube: not found |
+| G11 | **Query complexity of every algorithm**: sensitive alternatives must be detected (any class, any functional; deterministic and randomised), with a hedged spot-check converse; for the minimum, the instance-wise deterministic complexity *equals* the size of a value certificate, and every randomised algorithm (finite mixture) pays `(1−2δ)` times each fractional covering bound — attained by the hedged spot-check up to `ln(1/δ)`; for `ln Z`, a soft-gap radius for every algorithm and an upper bound for randomised ones in the same quantity, a lower bound on the randomised exponent with an upper bound in the same quantity, a machine-checked exponential gap between deterministic and randomised cost at the zero residual of the cube, and there a sharp worst-case accuracy threshold and the exponent in every accuracy regime | `exists_query_ne`, `prob_query_ne_ge`, `expected_queries_ge_packing`, `spotCheck_correct`, `instance_query_complexity`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `thermal_queries_strict_cover`, `thermal_queries_bracket`, `thermal_expected_queries_ge`, `thermal_product_randomized`, `cube_thermal_randomized_bound`, `detection_weight_ge`, `thermal_spotCheck_correct`, `cube_deterministic_lower_bound`, `exists_query_ne_pair`, `hedgedSpotCheck_correct`, `min_hedgedSpotCheck_correct`, `thermal_exact_dip_randomized`, `cube_exact_dip_randomized` **[V]**; single-letter forms and the upper bounds on the cube **[P + K]** | method **known** (radius of information; instance complexity; fractional block sensitivity as a bound on randomised query complexity); that randomisation helps for `ln Z` only above an accuracy scale is **known** for smoothness classes (Holzmüller–Bach 2025, §2.2); the constants themselves are in print in another role: `n·ln cosh(βc/2)` is the maximal bias `B_max = N log cosh(ε/2)` of the one-sample Jarzynski estimator for `N` independent two-state units, and `nΛ₁` its free-energy change (Suárez–Silbey–Oppenheim, Phys. Rev. E 85, 051108 (2012), arXiv:1108.5783, eq. (31) and the bias formula; found by the Scientific Discovery Division, SCI-REV-0004); **not found: the role of that constant as a sharp complexity threshold with an exponential lower bound below it**, the instance-wise randomised bound with gap radii, the soft gap, and the accuracy diagram on the cube |
 | G12 | **Beyond the cube at finite temperature**: every slack-Lipschitz function is the centre of an admissible perturbation that must be detected (generalised dips), with a single-letter lower bound on product landscapes that is a game over the vertices of the Lipschitz polytope of a site — single dips are not extremal for three or more states; a two-reference sandwich that tensorises, the sharp accuracy threshold of every additive instance, and the worst-case threshold of the whole class without a hint, for every alphabet (the smallest oscillation of the tilted site pressure; for two-state sites the largest chord gap of the pressure) | `genDip_admissible`, `log_sum_exp_genDip_ge`, `genDip_expected_queries_ge_exp_weights`, `twoMeasureBound_pow`, `twoMeasureLower_pow`, `product_sandwich`, `product_mass_ge`, `detect_weight_le` **[V]**; product assembly, thresholds, the minimax identity and the algorithmic reading **[P]**; the matching upper bound of the exponent **[P]**, checked by an independent referee (R4) | found by independent workstreams (A, B; D confirms) and, for the hint-free threshold of general alphabets, in their synthesis; tools **known** (Chernoff and packing; tensorisation of exponential-moment inequalities; for the upper bound of the exponent: inherently typical subsets, Ahlswede–Yang–Zhang; isoperimetric exponents of two product measures, Ahlswede–Zhang, Yu — read by the referee); the upper bound of the exponent is a new statement with a known proof, and may follow from the fixed-measure theorem used as a black box; its evaluation as a matrix game, the lower bound, the thresholds and the application were not found |
 | G13 | **Normal form**: a known part is the gradient part of an asymmetric envelope — value certificates of `(d, f, g)` are exactly the point certificates of `(σ, 0, f^d + g)`, `σ` the reduced cost of `d` under the Pasch–Hausdorff envelope `f^d`; a centre-form bound for best-first search valid for every admissible residual; best-first search is unboundedly worse than the smallest certificate on the line once there is a known part | `isValueCertificate_iff_normalForm`, `inf_add_phEnv_eq`, `certUB_normalForm`, `client_eq_centre`, `not_cocovered_centre` **[V]**; the search bound **[P]**; the line families computed | workstream C, verified by its reviewer; elementary (Johnson reweighting, min-plus adjointness); the packaging for certification apparently new; for `f ≡ 0`, symmetric `d` the covering characterisation and the hardness gadget are **known** (Hetland 2020), and the search bound is the known packing argument |
 | G14 | **Dense second-order classes**: a second-order dip; the uncertainty after any evaluations is at least `c·C(d+1, 2)` at Hamming distance `d` from the evaluated set; unions of stars give exactly the best single-star bound; covering sandwich for the certificate size; full exponent for constants of order one, a rate–distortion exponent with a square-root budget and a transition at `e/γ = 1/4` for mean-field constants; a three-legged spider beats the star | `SecondOrderDip.dip_mixedDiffBound`, `SecondOrderDip.dip_witness`, `SecondOrderDip.stars_do_not_combine` **[V]**; sandwich, asymptotics, spider **[P]**, verified by a reviewer with linear programmes over the whole class | workstream E (D found the dips independently); the `Θ(n²)` law is **known** for approximate modularity (Chierichetti–Dasgupta–Kumar 2020); the covering sandwich, the non-combination of stars and the spider were not found |
@@ -1343,16 +1352,16 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G16 | **Chain geometry**: the verified torsion-to-RMSD constants grow like `m^{3/2}` with the distance to the chain end (lever-arm law); with constants growing like any positive power, weighted-Hamming envelopes make certification exponential with almost full exponent; used directly, the RMSD envelope costs a stretched exponential `exp(Θ̃(√N))` at the zero residual; contact residuals force growing constants in every torsion-Hamming envelope | **[P]** from machine-checked bounds (`card_ge_exp_weights`, `expected_queries_ge_exp_weights_min`, `thermal_expected_queries_ge`); two constants numerical | workstream G, checked by a reviewer with own geometry code; lever-arm effects are folklore in molecular modelling, the quantitative consequences for certification were not found (no literature search was possible in the review) |
 | G17 | **Chains as known parts**: one evaluation certifies iff every contiguous droplet is sharp (`c ≤ τ`, a minimum-ratio cycle; `2h` for the Ising ferromagnet); the exponent of homogeneous chains is `sup_ν R_ν(e(ν))` over stationary processes; the transfer-matrix (Boltzmann) bound vanishes on the window `2h < c ≤ 2(J+h)`; the soft gap of a chain is a pinned free energy | **[P]**, re-derived by a reviewer (no Lean) | workstream B; the exactness criterion at zero field is **known** (Gray's critical distortion); the droplet criterion, the exponent theorem and the vacuous window were not found (no literature search was possible in the review) |
 
-| G18 | **Without a hint on the cube**: the exponent of non-adaptive algorithms is `min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}` at extensive accuracies and `KL(p_u‖½)` at every fixed accuracy — plain Monte Carlo attains it on the whole class (tail lemmas: above a threshold the mass is at most the excess of a dip on a ball of the size of the super-level set, below it at least that of a cone around such a ball), and no non-adaptive algorithm does better (cones against cones with a flattened bottom); two independent samples give a certified bracket that needs no hint at the zero residual for `ε > 2`; an adaptive algorithm that is correct on the class needs `n + 3` evaluations on a cone (for adaptive algorithms see G20) | `nonadaptive_expected_queries_ge`, `cube_nonadaptive_bound` (conditional on two finite sums), `weight_le_of_outside`, `sum_le_truncated_add_tail`, `weight_ge_of_inside`, `sum_truncated_ge` **[V]**; Harper's theorem **[K]**; the reductions to it, the closed forms, all exponents and the probabilistic statements **[P]** | cycle 10, refereed (`reviews/R5`); the sample size `e^{KL(π‖uniform)}` at one instance is **known** (Chatterjee–Diaconis 2018) and the *method* of the non-adaptive lower bound — hidden cone centres, Bakhvalov averaging, defeated by adaption — is **known** (Mathé–Novak 2007, for log-concave densities with a Lipschitz logarithm); the exponent on the cube for `ln Z` and the matching class-wide upper bound were not found |
+| G18 | **Without a hint on the cube**: the exponent of non-adaptive algorithms is `min{KL(ρ‖½) : KL(ρ‖p_u) ≤ ε₁}` at extensive accuracies and `KL(p_u‖½)` at every fixed accuracy — plain Monte Carlo attains it on the whole class (tail lemmas: above a threshold the mass is at most the excess of a dip on a ball of the size of the super-level set, below it at least that of a cone around such a ball), and no non-adaptive algorithm does better (cones against cones with a flattened bottom); two independent samples give a certified bracket that needs no hint at the zero residual for `ε > 2`; an adaptive algorithm that is correct on the class needs `n + 3` evaluations on a cone (for adaptive algorithms see G20) | `nonadaptive_expected_queries_ge`, `cube_nonadaptive_bound` (conditional on two finite sums), `weight_le_of_outside`, `sum_le_truncated_add_tail`, `weight_ge_of_inside`, `sum_truncated_ge` **[V]**; Harper's theorem **[K]**; the reductions to it, the closed forms, all exponents and the probabilistic statements **[P]** | cycle 10, refereed (`reviews/R5`); the sample size `e^{KL(π‖uniform)}` at one instance is **known** (Chatterjee–Diaconis 2018) and the *method* of the non-adaptive lower bound — hidden cone centres, Bakhvalov averaging, defeated by adaption — is **known** (Mathé–Novak 2007, for log-concave densities with a Lipschitz logarithm); **the two formulas are in print at the cone instance**: they are the "freezing" formulas of the Jarzynski estimator in the discrete random energy model (Suárez–Silbey–Oppenheim 2012, arXiv:1108.5783, eqs. (39)–(46) in the reading of the Scientific Discovery Division, SCI-REV-0004, which checked the agreement of the formulas to `4·10⁻¹⁵`; at bounded accuracy Chatterjee–Diaconis 2018, Theorem 3.4); **not found: the minimax statements** — that the cone is the worst instance of the class for plain Monte Carlo (the class-wide upper bound) and that no non-adaptive algorithm does better |
 | G19 | **Correlated uncertainty**: for residuals that are linear in known features with coefficients in a box, the envelope is a pulled-back weighted `ℓ¹` distance, every linear combination of evaluations brackets the value at a new point by the unexplained part of its feature vector (worst case over the data: the `ℓ¹` distance to the span, against the distance to the nearest point for the first-order class of the same envelope), and rank-many evaluations determine everything; pair-additive residuals with unknown Lipschitz radial functions are linear in cumulative pair-count profiles, their envelope is a transport distance between pair-distance distributions, sharpness is stochastic dominance, and at extensive accuracy certificates in this format exist whose size does not depend on the chain length; a kernel certifies minima for all coefficient vectors consistent with evaluated anchors | `linRes_sub_le`, `linRes_sub_attained`, `linRes_span_upper`, `linRes_span_lower`, `linRes_span_exact`, `sumClass_span_upper`, `sumClass_span_lower`, `pairRes_eq_cum`, `pairRes_sub_le`, `pairRes_span_upper`, `pairRes_span_upper_enclosure`, `pairRes_sharp`, `verifyLTop_sound`, `contactTriangle_bound` **[V]**; exactness (duality), the transport form, the entropy bound and everything about chain length **[P]** | cycle 10, refereed (`reviews/R6`) except the kernel; the linear theory is **known** (optimal recovery: Smolyak, Micchelli–Rivlin; set-membership estimation; robust linear programming), the features are those of linear contact potentials (Maiorov–Crippen 1992; Tobi et al. 2000), the distance is **known** as a descriptor distance (Osada et al. 2002; bag of bonds), the entropy of monotone functions is classical; its reading as the exact envelope of a residual class next to a known part, and the consequences for certificates, were not found; **none of it is deep** |
 | G20 | **Adaptivity replaces the hint**: on the cube class the worst-case exponent of adaptive randomised algorithms without a hint is the hinted exponent `θ_hint(ε₁) = KL((Λ₁+ε₁)/u‖½)`, strictly below the non-adaptive `θ_na`.  A two-level "layer-cake" algorithm — uniform outer sample, brackets of the fibre averages refined only as far as a one-sided test against a ladder of levels requires, the tail lemma once at the top — turns bracket procedures with exponent function `T` into ones with `R[T]`; by the identity `θ_na(e + θ_hint(e)) = θ_hint(e)` (that is, `KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁`) the hinted exponent is a fixed point of `R`, every nonincreasing `T ≤ R[T]` lies below it, and the iteration from `θ_na` converges to it; on radial instances a direct adaptive algorithm has the hinted exponent | `superSolution_le_hint`, `iterates_lt_hint_add`, `step_from_hint_le`, `klBin_shift`, `cubePair`, `cube_iterates_lt_hint_add`, `cube_hint_superSolution`, `LayerCake.mean_le_upper`, `LayerCake.upper_le_width`, `LayerCake.close_points_bound` **[V]** (analysis of the recursion, abstractly and for the exponent functions of the cube; validity and width of the bracket; the two algebraic inequalities behind the cost); the algorithm's number of evaluations, the induction over levels and all asymptotics **[P]** | cycle 10, refereed (`reviews/R7`: "proved with gaps", the gaps written into the text; no error found in the cost accounting beyond one closure rule); the two-level algorithm and the recursion are due to workstream H, the oracle-relative form, the identity and the convergence proof to the coordinator; relatives of the algorithm are nested sampling, multilevel splitting and nested simulation, adaption with polynomial gains is known in information-based complexity (Heinrich; Kunsch–Novak–Wnuk) — a certified version with a worst-case exponent, and the statement that adaption recovers the value of a hint exactly, were **not found** (abstracts only) |
 | G21 | **Every bounded accuracy**: at every fixed accuracy, and down to accuracies `e^{-o(n)}`, the worst-case exponent of adaptive randomised algorithms without a hint on the cube class is `h = KL(Λ₁/u‖½)`, the hinted one, against `a = KL(p_u‖½)` for non-adaptive algorithms.  The two-level algorithm is modified so that a level costs only an arbitrarily small constant of accuracy: layer-cake *sum* as lower end, and the lower isoperimetric bound (Harper, two-sided tail lemma) inside the closure test, which is what certifies a bounded ratio at radii `p_u n_o − O(√n_o)`; the recursion continues to accuracy zero and contracts to `h` | `exactRec_tendsto_hint`, `exactRec_ge_hint`, `bounded_iterates_lt`, `cube_levels_reach_hint_at_zero`, `two_rung_bound`, `certified_lower_sum_le_mean`, `populated_part_le`, `close_points_bound'`, `width_le` **[V]** (the exact recursion; the contraction; the algebra of the bracket and of the count); the algorithm, its events, its cost and the assembly over the levels **[P]** | cycle 10, workstream K; **refereed (`reviews/R8`: "proved", no critical or major finding, ten minor points corrected)**; simulated with the constants of the theorem by the workstream, by the referee (15 000 runs; three nested levels with real inner brackets on small cubes; exact three-level cost at the flat instance) and in the harness (XVI.3); prior art from search summaries only |
 | G22 | **With a known part (a field)**: on the `p`-biased cube the exponent of non-adaptive algorithms without a hint is `θ_na = max_m min{I(S;X) : D(P_{X|S}‖π_s|P_S) ≤ ε₁}`, attained by sampling uniformly on every type class and not by the Gibbs measure of the known part; the worst-case exponent of adaptive algorithms without a hint is `R^max = max_γ R_γ`, the hinted exponent of the hardest *additive* instance, which is strictly above the hinted exponent of the zero residual whenever `p ≠ ½`; the reference instance of the nested algorithm is the lower envelope of the additive instances (flat histogram), and the isoperimetric input is an asymptotic statement for that reference proved by the method of types | `shift_identity`, `klBin_tilt`, `exactRec_reaches_hint_of_pair`, `admissible_succ`, `admissible_pred`, `truncate_lipschitz_insert`, `symmetric_nonadaptive_queries_ge` **[V]** (the identity between the three rates; convergence of the exact recursion for any pair with the abstract properties; type-wise quantiles are Lipschitz, so the truncated weight stays in the class; the non-adaptive lower bound `(1 − 2δ)/q` for permutation-invariant problems); the single-letter formulas, the isoperimetric theorem, the abstract properties of the pair and everything about algorithms **[P]** | cycle 10, workstream F; **refereed (`reviews/R9`): the isoperimetric theorem and the non-adaptive exponent proved; the adaptive exponent — lower bound proved, upper bound proved after two gaps in the written proof of the algorithmic part were closed; no critical finding**; the coordinator's proof that a field always helps (Proposition 11.65(b)) refereed "proved"; central formulas re-computed by the coordinator and, independently, by the referee; prior art: the Ahlswede–Zhang summary read in full by the referee, otherwise abstracts and machine summaries (Bollobás–Leader; Yu) — the isoperimetric statement is not a black-box corollary of the fixed-measure theorem |
 | G23 | **The structure behind G18–G22**: the shear law `x_na(θ) = e_hint(θ) + θ` (a non-adaptive sample of `e^{nθ}` points loses exactly `θ` of accuracy rate), and an abstract theorem: for every game function `F` on `[0,1]` the transform `R(e) = max_{t≤1}[F(t) − te]` and its sheared partner `R ∘ (id + R)^{-1}` form a pair to which the convergence theorem applies, `R` is a fixed point and lower barrier of the level operator, and the exact level recursion converges to `R`; the uniform cube, the biased cube and the toy pair `t(1−t)` are instances | `GameFunction.hintShape_critical`, `GameFunction.pair`, `HintShape.superSolution`, `GameFunction.exactRec_tendsto`, `gauss_exactRec_tendsto` **[V]**; that the exponent functions of a given problem are of this form **[P]** | cycle 10, workstream M (a formalisation task; statement by the coordinator after workstream F's Theorem F8); elementary convex analysis — the value is that the analytic core of two theorems is one machine-checked statement |
 | G24 | **Chains in the thermodynamic limit** (the lattice chain of G19): the normalised sets `{(profile, #gauche)/N}` of bridges converge in the Hausdorff metric to a compact convex body — a limit shape with a convex least-gauche function — by a concatenation lemma with explicit constants and Fekete's lemma for sets, with the one-sided rate `168/(N+3)`; covering numbers with position-dependent radii are stable under Hausdorff convergence of truncated epigraphs, so the certificate sizes of bridges converge to a covering number of the limit shape (off a countable set of accuracies); for all walks: an outer polytope with exact dual certificates (cluster method), the bounds `50 ≤ liminf`, `limsup ≤ 3 627` at `(L, ε₁) = (1, ½)` in place of `10^{1387}`, and `26 437` for every chain length; the shape converges at rate exactly `N^{-1/3}` at its compact end (Loomis–Whitney), so enumeration cannot see the limit; single-flip constants are bounded below linearly | `SuperAdditive.hausdorff_limit`, `SuperAdditive.convex_limit`, `SuperAdditive.dist_limit_le`, `SuperAdditive.cover_sandwich`, `hasCover_sandwich`, `hasCover_upper_iff`, `not_hasCover_shifted` **[V]** (Fekete's lemma for sets and the stability of covering numbers, in abstract form); that lattice bridges satisfy the hypotheses and everything else about the lattice **[P]**, the polytopes and the numbers computer-assisted with exact certificates; equality of the limits for walks and bridges **[C]** | cycle 10, workstream S, in answer to a question of the Computational Research Division (`ENG-REQ-0001`); **checked by the coordinator — every proof re-derived, every computer-assisted statement re-computed with independent code — not by a separate referee**; limits of supermultiplicative models and the cluster method for lattice-gas ground states are **known**; the corresponding free-energy statement for self-attracting walks is open in the literature; the limit shape for this model, the stability lemma and the numbers were not found |
-| G25 | **A known part with interactions, first case: a function of the type** (mean-field models, one phase or two): for every `n` and every exchangeable reference measure the type-stratified (flat-histogram) sample is optimal among non-adaptive algorithms up to a polynomial factor and the flat-histogram instance is the hardest instance that is a function of the type; the cost of every algorithm at such an instance has a single-letter exponent, a supremum over block profiles, for every rate function (isoperimetry for the type-uniform measure by the method of types); for a convex rate function binary centres suffice, the flat-histogram instance is as hard as the hardest additive one and there is a game function, so the pair identity holds; with two phases cones fail, the extremal perturbations are shells in the barrier type class, cones around self-consistent shells restore the pair identity, and beyond a small accuracy profiles that constrain only part of the coordinates beat every set around one centre; ferromagnets are never harder than the uniform cube and coincide with it up to a coupling beyond the critical one | `admissible_succ`, `admissible_pred`, `truncate_lipschitz_insert`, `symmetric_nonadaptive_queries_ge`, `symmetric_queries_ge` **[V]** (the truncation and both every-`n` lower bounds, for every permutation-invariant problem); `lowDens_shift`, `truncate_gdens_le`, `group_nonadaptive_queries_ge`, `group_queries_ge` **[V]** (the same for an arbitrary finite symmetry group with an invariant envelope); `GameFunction` and Theorem 11.66 **[V]** apply once its hypotheses are verified on paper; the hardest-symmetric-instance inequality, the single-letter theorem, the convex case and the ferromagnetic comparison **[P]**; the two-phase values **[N]** (each a proved lower bound); binary optimality at vanishing accuracy and the adaptive exponent **[C]** | cycle 10, workstream T; proofs re-derived in part and all headline numbers re-computed by the coordinator with independent solvers; **not yet refereed**; tools **known** (method of types, inherently typical subsets, Sion's theorem, Hubbard–Stratonovich); prior art: flat-histogram methods (Berg–Neuhaus; Wang–Landau) and their dynamical non-optimality (Trebst–Huse–Troyer), worst-case optimal importance proposals for other criteria (Cérou–Héas–Rousset; He–Owen) — abstracts only; a minimax statement for certified estimates over a class of perturbations was not found |
+| G25 | **A known part with interactions, first case: a function of the type** (mean-field models, one phase or two): for every `n` and every exchangeable reference measure the type-stratified (flat-histogram) sample is optimal among non-adaptive algorithms up to a polynomial factor and the flat-histogram instance is the hardest instance that is a function of the type; the cost of every algorithm at such an instance has a single-letter exponent, a supremum over block profiles, for every rate function (isoperimetry for the type-uniform measure by the method of types); for a convex rate function binary centres suffice, the flat-histogram instance is as hard as the hardest additive one and there is a game function, so the pair identity holds; with two phases cones fail, the extremal perturbations are shells in the barrier type class, cones around self-consistent shells restore the pair identity, and beyond a small accuracy profiles that constrain only part of the coordinates beat every set around one centre; ferromagnets are never harder than the uniform cube and coincide with it up to a coupling beyond the critical one | `admissible_succ`, `admissible_pred`, `truncate_lipschitz_insert`, `symmetric_nonadaptive_queries_ge`, `symmetric_queries_ge` **[V]** (the truncation and both every-`n` lower bounds, for every permutation-invariant problem); `lowDens_shift`, `truncate_gdens_le`, `group_nonadaptive_queries_ge`, `group_queries_ge` **[V]** (the same for an arbitrary finite symmetry group with an invariant envelope); `GameFunction` and Theorem 11.66 **[V]** apply once its hypotheses are verified on paper; the hardest-symmetric-instance inequality, the single-letter theorem, the convex case and the ferromagnetic comparison **[P]**; the two-phase values **[N]** (each a proved lower bound); for ferromagnets an adaptive algorithm without a hint with at most the uniform cube's exponent **[P]**, given Theorem 11.64; binary optimality at vanishing accuracy and the adaptive exponent in general **[C]** | cycle 10, workstream T; proofs re-derived in part and all headline numbers re-computed by the coordinator with independent solvers; **refereed (R10: no critical finding; two major findings — the junction formula false at large slopes, an interval with an unproved end — and fifteen minor ones, all applied)**; tools **known** (method of types, inherently typical subsets, Sion's theorem, Hubbard–Stratonovich); prior art: flat-histogram methods (Berg–Neuhaus; Wang–Landau) and their dynamical non-optimality (Trebst–Huse–Troyer), worst-case optimal importance proposals for other criteria (Cérou–Héas–Rousset; He–Owen) — abstracts only; a minimax statement for certified estimates over a class of perturbations was not found |
 | G26 | **Rounds of adaptivity** (uniform cube, no known part): the two-level algorithm can be scheduled so that a ladder with `L` rungs uses `L` rounds (the candidate set of a rung is computed from empirical levels of the previous one and is polynomially many times `e^{x_{l−1}}` points, deterministically), so `k` levels need `L^{k−1}` rounds independently of `n` and the round-limited exponents `τ^{(r)}` decrease to the adaptive exponent `h`; two rounds: `τ^{(2)} ≤ T^{(2)}(0)`, the golden ratio times `a` for small slopes; and `τ^{(2)} ≥ θ₂*(u) > h` for every slope, by an indistinguishability lemma for block-radial functions with hidden centres and a pair of instances in which a flat-histogram structure in one block dilutes the first batch while a dip in the other block opens exactly where a blind batch stops seeing each shell; radial instances need exactly two rounds | `card_distinguished_le`, `two_round_bound` **[V]** (the indistinguishability lemma for two rounds, in abstract form); `certified_lower_sum_le_mean`, `width_le` and the other deterministic parts of Theorem 11.56 **[V]** are inherited by the batched schedule; the batching theorem, the application of the lemma to the twins, the lower bound **[P]**; the values of the recursion and the exact finite-`n` twins **[N]**; three rounds **[C]**/open | cycle 10, workstream U; checked against the proof of Theorem 11.56 and re-computed by the coordinator (two- and three-round upper bounds, `θ₂*`, exact twins up to `n = 3200`); unrefereed; prior art: adaptivity hierarchies in property testing (Canonne–Gur), rounds in parallel convex optimisation (Nemirovski; Balkanski–Singer; Bubeck et al.), batched bandits and sparse recovery — summaries only; a round hierarchy for normalising constants over a Lipschitz class was not found |
-| G27 | **Slices: every known part that is a function of the type against the uniform cube.**  Among pairs of binary variables with a given odds ratio the mutual information is largest when both marginals are uniform (equivalently, among binary channels with a given odds ratio the symmetric one has the largest capacity).  For the uniform measure on one type class: binary centres suffice, the exponent functions have closed forms, and the game function of every centre on every type class is dominated pointwise by the uniform cube's, with equality only for the class `½` and the centre type `½`.  Hence for every exchangeable known part and every symmetric instance the hinted exponent, the lower bound for all algorithms from symmetric instances and the non-adaptive exponent are at most the uniform cube's, with equality for every interaction without a field up to the junction (antiferromagnets included).  Algorithms reduce to type classes: the class means are Lipschitz in the type, and optimistic refinement over the `n + 1` classes refines a class only as far as its deficit requires; with a random split a type class splits into type classes of the same density | `sum_mem_bracket`, `bracket_width`, `argmax_deficit_le`, `deficit_ge`, `mean_le_of_biregular` **[V]** (the deterministic core of the reduction and the double counting behind the Lipschitz property of the class means); the odds-ratio lemma, binary sufficiency (duality), the closed forms, the domination, the random-partition lemma **[P]**; the reading of the inequalities as exponents: given Theorems 11.78, 11.79 **[P, unrefereed]**; the adaptive exponent of a type class **[C]** | cycle 10, the coordinator (after a workstream on the adaptive question ended without a report); every step of the proofs checked numerically with independent code, harness XXI.1–4 with 21 mutations; **not refereed**; prior art: capacity of the binary asymmetric channel (textbook), bounds through the Bhattacharyya parameter — the comparison at a fixed odds ratio was not found in two searches and may be folklore |
+| G27 | **Slices: every known part that is a function of the type against the uniform cube.**  Among pairs of binary variables with a given odds ratio the mutual information is largest when both marginals are uniform (equivalently, among binary channels with a given odds ratio the symmetric one has the largest capacity).  For the uniform measure on one type class: binary centres suffice, the exponent functions have closed forms, and the game function of every centre on every type class is dominated pointwise by the uniform cube's, with equality only for the class `½` and the centre type `½`.  Hence for every exchangeable known part and every symmetric instance the hinted exponent, the lower bound for all algorithms from symmetric instances and the non-adaptive exponent are at most the uniform cube's, with equality for every interaction without a field up to the junction (antiferromagnets included).  Algorithms reduce to type classes: the class means are Lipschitz in the type, and optimistic refinement over the `n + 1` classes refines a class only as far as its deficit requires; with a random split a type class splits into type classes of the same density | `sum_mem_bracket`, `bracket_width`, `argmax_deficit_le`, `deficit_ge`, `mean_le_of_biregular` **[V]** (the deterministic core of the reduction and the double counting behind the Lipschitz property of the class means); the odds-ratio lemma, binary sufficiency (duality), the closed forms, the domination, the random-partition lemma **[P]**; the reading of the inequalities as exponents: given Theorems 11.78, 11.79 **[P, unrefereed]**; the adaptive exponent of a type class **[C]** | cycle 10, the coordinator (after a workstream on the adaptive question ended without a report); every step of the proofs checked numerically with independent code, harness XXI.1–4 with 21 mutations; **not refereed**; prior art: capacity of the binary asymmetric channel (textbook), bounds through the Bhattacharyya parameter — the comparison at a fixed odds ratio is **known**: Hasenclever–Scholz 2013 (arXiv:1302.6161), Proposition 8(a), found by the Scientific Discovery Division (SCI-REV-0004); the applications (binary sufficiency on a type class, domination by the cube, the reduction of algorithms) were not found in print by that division |
 | G28 | **Heteropolymer product landscapes** — a fixed sequence of site types, any alphabets, single-site known parts, site envelopes that need not be symmetric.  By the symmetry of the sequence alone, for every `n`: the joint-type-stratified sample is optimal among fixed samples up to a polynomial factor and the flat-histogram instance is the hardest invariant one; the quotient envelope is the transport cost.  Single-letter theorem with labelled profiles and transport costs, for every known part that is a function of the joint type.  For product known parts: the flat-histogram instance is as hard as the hardest additive instance; labels are vertices of the sites' Lipschitz polytopes; the game functions of the site types add at one common slope; `F*_j(t) = (1−t)C_t`, the Rényi capacity of the vertex channel, the hardest instance being the Rényi centre; hence `θ_na` is the inverse sphere-packing exponent, `a` the Shannon capacity, and adaptivity (or a hint) gains exactly the rate.  The adaptive exponent without a hint is the hinted exponent of the hardest additive instance.  Exponents of site types do not add; for three or more letters `F*` need not be concave and the uniform site law need not be the hardest; uniform sites group their letters, the hardest number of groups at slope `u` being about `e^{u/2}` | `group_nonadaptive_queries_ge`, `group_queries_ge`, `lowDens_shift`, `truncate_admissible` **[V]** (every-`n` lower bounds for any symmetry group), Theorems 11.22, 11.27 **[V]** (the lower bound at additive instances), `exists_ratio_le`, `eq_of_forall_ratio_ge`, `softmin_admissible` **[V]** (the Rényi centre); `GameFunction` ⇒ pair and recursion **[V]**; everything else **[P]** — the upper bounds by transfer of Theorems 11.78(b), 11.52, 11.54, 11.64; numbers **[N]** with duality certificates; the grouping statement and the hardest-law statements **[N]** except the exact crossings | cycle 10, workstream W; re-computed by the coordinator with an own implementation (largest deviation `5·10⁻⁷`); one conjecture of the workstream refuted by the coordinator (the uniform law is not the hardest at small slopes), one remark of the coordinator corrected by the workstream's controls (uniform sites with four letters); **not refereed**; prior art: Rényi capacity and centre (Csiszár; Nakiboğlu), sphere-packing exponent (Csiszár–Körner), parallel channels (Gallager) — search summaries only; the identification of certification complexity with these exponents was not found |
 | G29 | **Local ensemble-averaged data do not change the exponents of the cube class** (with the Scientific Discovery Division): besides evaluations, let the algorithm know all marginals of the Gibbs measure on at most `k` sites.  Their Theorem C: the hinted (= adaptive) exponent is unchanged.  Proposition 11.104: so is the non-adaptive exponent — cones symmetrised over a linear code with dual distance `k + 1` have exactly uniform `k`-body marginals, cost a factor `|C| ≤ (2n)^{⌈k/2⌉}` in the count and `ln|C|` in the accuracy | `group_nonadaptive_queries_ge` **[V]** (the two-point argument for any transitive group); the proposition **[P]**; exact enumeration at `n = 7` **[N]**; their Lemma A **[K]** (orthogonal arrays), their Theorem C not reviewed by us | cycle 10, the coordinator, answering SCI-MSG-0001 §7(a); not refereed; zero known part and exact marginals only |
 
@@ -1412,8 +1421,9 @@ less the mean-field computation than two structural facts — that permutation s
 alone makes the flat-histogram ensemble the optimal fixed sample and its instance the
 hardest symmetric one, for every `n`, and that at phase coexistence the extremal
 perturbations are shells of barrier configurations, eventually on part of the system
-only; the proofs are the method of types applied inside a type class; unrefereed, and
-the adaptive problem is open; (xvii) rounds of adaptivity (G26): the upper bound is a
+only; the proofs are the method of types applied inside a type class; refereed (R10),
+and the adaptive problem is open except for ferromagnets up to the junction with the
+uniform cube; (xvii) rounds of adaptivity (G26): the upper bound is a
 re-scheduling of an existing algorithm, the lower bound a coupling argument of the
 pointer-chasing kind with a hard instance that is *not* of the nested kind such arguments
 usually use — what separates two rounds from many here is dilution of a blind batch by a
@@ -1422,7 +1432,8 @@ flat histogram; one non-trivial step of a hierarchy is proved, the next is open;
 argument; what they buy is a statement without hypotheses on the interaction — a known
 part that depends on the configuration only through one order parameter never makes
 certification harder than no known part at all — and the reduction of the open adaptive
-problem to a homogeneous space; the inequality itself may well be folklore;
+problem to a homogeneous space; the inequality itself is in print (Hasenclever–Scholz
+2013; found by the Scientific Discovery Division), only its application here is ours;
 (xix) heteropolymer landscapes (G28): the proofs are transfers of proofs already in this
 report, and the formulas — Rényi capacity, sphere-packing exponent, parallel channels —
 are sixty years old; what is new, if anything, is the *identification*: certifying a
@@ -1435,6 +1446,39 @@ Each rests on textbook tools (type covering, Hölder, telescoping, linear-progra
 the proofs are short.  The second referee's verdict on G1–G10 — "a coherent note, not a
 theorem-driven paper" — is reproduced in §12 together with what a publication would still
 need.
+
+**An independent assessment of originality for the query-complexity rows** (Scientific
+Discovery Division, SCI-REV-0004, 25 November 2026: full-text reading of the closest
+sources where accessible, a search log of 23 queries, own numerical replications; a
+review of originality, not of correctness).  Its classification, which we adopt in the
+rows above: G27's lemma — **established prior art** (Hasenclever–Scholz 2013); G18's
+exponent function and G11's threshold constant — **known special case** and **new
+combination** (the formulas are in print at the cone instance: Suárez–Silbey–Oppenheim
+2012, Chatterjee–Diaconis 2018; not found: the minimax statements and the role of the
+constant as a sharp threshold); G20/G21, adaptive exponent = hinted exponent —
+**plausibly original theorem** (not found in information-based complexity, normalising
+constants, importance sampling, pure-exploration bandits, sampling-oracle counting or
+nested simulation; concept precedents Mathé–Novak 2007, Karnin 2016, Garivier–Kaufmann
+2016); G26, two rounds strictly between — **plausibly original**, conditional on the
+former and unrefereed (rounds for partition functions are studied in 2026 in the
+*sampling-oracle* model, at polynomial scale and with the opposite conclusion: Guo, Liu,
+Yang, Yin, Zhang; Harris, Kolmogorov, Liu, Yin, Zhang); G22 — **plausibly original
+generalisation** (the sampler statement is the capacity-achieving output law / universal
+mixture; Theorem 11.63 is a new variant of Ahlswede–Zhang / Yu by their method, not
+settled against Yu's theorem); G23, the shear law and the game-function pair — a
+**reformulation** (an exponential change of measure; restricted Legendre duality); G25,
+first half — a **reformulation** (the invariance principle of design theory, Kiefer, plus
+Bakhvalov averaging over the group, with one small new lemma: type-wise quantile
+truncation is Lipschitz), second half (shells) unresolved.  **Its summary: one result
+would survive a hostile referee — the exact exponents of adaptive and of non-adaptive
+randomised algorithms for the normalising constant over the log-Lipschitz cone of the
+Hamming cube, neither half alone — and possibly the two-round separation; every novelty
+claim on Lemma 11.89, on the formula `θ_na`, on `ln cosh(u/2)` as a number and on "flat
+histogram, not Gibbs" as a discovery has to go.**  They have gone, in this version.
+What the review did not examine: whether Theorem 11.54 is true (the proof of the cost of
+the nested algorithm was not re-derived), and the sources it lists as not accessed
+(Novak's papers of 1988–1996, Harper 1966, Kiefer 1959, Ahlswede–Zhang 1999, Yu beyond the
+abstract).
 
 **The picture after cycle 10, in one table.**  What each *kind of knowledge about the
 residual* costs, in evaluations of the residual, for an accuracy that is a fixed fraction
@@ -3174,6 +3218,20 @@ adaptive method, and give an adaptive Metropolis algorithm of polynomial cost th
 log-concavity.  Theorem 11.45(b) is that construction on the cube.  Not there: the cube, the
 functional `ln Z`, a class without concavity, the exponent, and the matching upper bound on
 the whole class (Theorem 11.44) — which we did not find elsewhere either.
+*The formulas are in print at one instance* (found by the Scientific Discovery Division,
+SCI-REV-0004, which read the sources in full; we verified the first formula and the
+subject of the paper).  For `N` independent two-state units — the discrete random energy
+model — Suárez, Silbey and Oppenheim (Phys. Rev. E 85, 051108 (2012), arXiv:1108.5783) compute
+the bias of the Jarzynski estimator of a free-energy difference from `M = e^{γN}` samples:
+`ΔF = N log(2/(1 + e^{−ε}))` is our `nΛ₁` (their eq. (31)), the maximal bias
+`B_max = N log cosh(ε/2)` is our threshold `E` of §11.10, and their "freezing" formulas (eqs.
+(39)–(46) in the division's reading) are `n·KL(ρ_θ‖p_u)` and `a = KL(p_u‖½)` — the accuracy and the
+exponent of plain Monte Carlo *at the cone*, which is their system; at bounded accuracy
+the sample size `e^{na}` there is Chatterjee–Diaconis (2018).  **So what is not in print, as
+far as two divisions could find, is the minimax content:** that the cone is the worst
+instance of the Lipschitz class for plain Monte Carlo (Theorem 11.44), and that no
+non-adaptive algorithm does better (Theorem 11.45(b)).  The exponent function itself and
+the constants `Λ₁`, `ln cosh(u/2)`, `KL(p_u‖½)` are not new.
 
 **Proposition 11.46 (a certified bracket from two independent uniform samples) [P].**
 Draw two independent uniform samples of size `M ≥ 2K`.  Let `t̂` be the `⌈K⌉`-th largest weight
@@ -3904,7 +3962,21 @@ with a constrained sampler or with mean-square criteria.  What was not found in 
 close the ladder, and a recursion for worst-case exponents.  In information-based complexity
 adaption is known not to help for linear problems on convex symmetric classes and to help
 by polynomial factors in some randomised linear settings (Heinrich 2024; Kunsch–Novak–Wnuk
-2024).  **That adaption can remove an exponential barrier of non-adaptive randomised methods
+2024).  *Where our problem sits* (Scientific Discovery Division, SCI-REV-0004, observation
+(b); our earlier note in `prior_art/L7` — "`ln Z` is not linear, so 'adaption does not help'
+does not apply" — was not the accurate explanation): in the weights `w = e^{−ψ}` the solution
+operator `A(w) = E_π w` **is linear** and the class is a **convex cone**; what takes the
+problem out of the reach of those theorems is that the class is **not symmetric**, the
+error is **relative**, and the information is standard (function values).  For such
+problems adaption is known to help by factors polynomial in the cardinality (Novak 1995,
+as quoted by Krieg–Novak–Ullrich 2025; not read by us), and in these units the shear law of
+§11.21 says how much here: the error factor of the best non-adaptive method with `N`
+evaluations is `N^{1+o(1)}` times that of the best adaptive one, for `N ≤ e^{nh}` — **the adaption
+gain equals the cardinality**.  The pattern "learn where to look, then verify" of §11.10
+and of this section is the explore–verify scheme of Karnin (2016) and the
+identification-as-cheap-as-verification phenomenon of Garivier–Kaufmann (2016), in
+another regime (theirs: noisy observations, confidence `δ → 0`; here: exact evaluations,
+fixed `δ`, exponents in `n`).  **That adaption can remove an exponential barrier of non-adaptive randomised methods
 is not new**: Mathé–Novak (2007) — whose method gives the lower bound of §11.16 — show it for
 integration against an unknown log-concave density with Lipschitz logarithm, by a
 Metropolis walk ("the curse of dimension (for nonadaptive methods) can be broken by
@@ -4042,6 +4114,53 @@ and the tolerance of "negligible" are the same `b` and cancel, as in Theorem 11.
 Termination at level `J` because nothing is high there and the threshold forces an empty
 tail.  ∎
 
+*Remark (the sample-size cap can be lowered to a constant multiple of `M†`)* **[P; coordinator,
+in answer to the Computational Research Division, ENG-RES-0008; not refereed; harness
+XVI.4].**  With `M† := K/((1−η)π†)`, the cap of the theorem is `M̄ = 2(1+η)e^λν₀M†`.  The division
+found that in more than seven million runs, under a search over instances and inner
+behaviours, no sample exceeded `1.8·M†`, while `M̄/M†` is of order `ν₀ ≈ J/η′` (`ln ν₀` between `8.9` and
+`17.3` in its cells), and asked whether `M ≤ c·M†` can be proved.  It can.  Let `Δ := ⌈λ/u⌉`,
+`π‡ := 2^{-n_o}|B(n_o, r† − Δ)|` and `M‡ := K/((1−η)π‡)` (`M‡ := K·2^{n_o}/(1−η)` if `r† < Δ`).  **In every run
+every sample is `K` or has fewer than `2·max{e^λM†, M‡}` points**, and
+`M‡/M† = |B(n_o, r†)|/|B(n_o, r†−Δ)| ≤ ((n_o+1)/(r†−Δ+1))^Δ`, which tends to `((1−ρ)/ρ)^Δ` when `r†/n_o → ρ`: at
+a bounded accuracy, where `r† = p_un_o − O(√n_o)`, the cap is `2e^{uΔ}(1+o(1))·M†` (`2e·M†` for `u = 1`,
+`λ ≤ 1`).  So `M̄` may be replaced by `2max{e^λM†, M‡}` in `C_max`, `m_max` and `δ′`: the first term of
+`C_max` loses a factor of order `ν₀`; no exponent changes.
+*Proof.*  `M` is doubled only after a pass that is unpopulated, fails the closure test and
+has `M < M_j^neg`.  (1) *After a negligible level:* `M_j^neg ≤ e^λM_{j−1}^neg ≤ e^λM_{j−1} < e^λM†` (the
+running bound does not decrease, and a negligible level that is left has `M < M†`), so
+every sample of level `j` is below `2e^λM†`.  (2) *After a populated level `j − 1`* (level `0`
+is populated at `M = K`): that level was left, so its closing radius exceeded `r†`; hence
+`p̲_{j−1} > c_ηπ†`, the radius of its Harper term is at least `κ(r†+1)`, and
+`ℓ ≥ s_{j−1}e^{-b}·max{c_ηπ†, 2^{-n_o}T_{n_o}(κ(r†+1))}`.  At an unpopulated pass of level `j` with `M ≥ M‡`,
+`q = K/((1−η)M) ≤ π‡`, so the closing radius is `r ≤ r† − Δ`; and `E_{r−1} ≤ e^{-u}E_r` for every `r ≥ 1`
+(compare the two sums term by term: `e^{u(r−i)} − 1 ≤ e^{-u}(e^{u(r+1−i)} − 1)`), so
+`tail = s_j2^{-n_o}E_r ≤ s_{j−1}e^{λ−uΔ}·2^{-n_o}E_{r†} ≤ s_{j−1}·2^{-n_o}E_{r†}`.  By the definition of `r†`, either
+`Γ″(r†) ≤ θ`, that is `E_{r†} ≤ θT_{n_o}(κ(r†)) ≤ θT_{n_o}(κ(r†+1))`, or `Γ̃(r†) ≤ c_ηθ`, that is
+`E_{r†} ≤ c_ηθ|B(n_o, r†−1)| ≤ c_ηθ·2^{n_o}π†`; in both cases `tail ≤ θe^bℓ` and the algorithm stops.  (If
+`r† < Δ`: a pass with `2^{n_o}q < 1` has an empty tail.)  So at level `j` the size is doubled
+only below `M‡`.  ∎
+In the constants of Theorem 11.52 the same argument gives **`M < 2e·M†` in place of `8Je²M†`**
+(an unpopulated pass with `M ≥ max{M†, M_j^neg/(4Je)}` passes the closure test, and
+`M_j^neg ≤ 4Je²M†`), so the first branch of the minimum in its cost bound loses the factor
+`4Je`.  In the harness the cap is attained up to `9 %` (a sample of `3.7·M†` at `n_o = 24`, `u = ½`,
+`λ = ½`, on a landscape "plateau, then cone", where the cap is `4.06·M†` and `M̄ = 627·M†`), so
+the constant cannot be improved much by this argument; that the division's search stayed
+below `1.8·M†` reflects its instances and its parameters, not a better bound.
+
+*Remark (for the outer loop, radial landscapes are almost the whole class)* **[P; Computational
+Research Division, ENG-RES-0008 §5; checked by us].**  The outer loop sees an instance only
+through the law of the fibre averages, i.e. through the tail function `m(t) = |{W > t}|` on
+the outer cube.  For a `u`-Lipschitz landscape `m` is nonincreasing and right-continuous
+with `m(te^{-u}) ≥ ∂(m(t))`, `∂(k)` the size of the closed neighbourhood of the initial segment
+of size `k` of the simplicial order (the neighbourhood of `{W > t}` lies in `{W > te^{-u}}`, and
+Harper's theorem); conversely every such function is the tail function of a `u`-Lipschitz
+landscape whose level sets are initial segments.  So with a fixed inner behaviour the
+mean run on any instance is the mean run on an instance whose outer level sets are
+initial segments, and monotone radial profiles — those with whole balls — differ from the
+general case only by partial shells.  Our request THY-REQ-0001 had called radial
+instances "a small subfamily of the class"; for the outer loop that was wrong.
+
 With `λ = 1`, `η = ½`, `η′ = 1`, `ν₁ = 1` and `θ = e^{gn−b} − (3e+1) − (2p_u)^ne^{-b}` this is Theorem 11.52 again,
 with accuracy *exactly* `gn` instead of `gn + O(log n)` (Corollary K1.b of the report), and the
 levels of Theorem 11.54 can be assembled from it by asking each inner family only for an
@@ -4115,11 +4234,27 @@ accuracy (`τ₁ = a`, `τ_{k+1} = inf_φ sup_{γ≥0}[min(γ, φa) + (1−φ)T_
 `τ_k/a = 0.5006, 0.361, 0.311, 0.290, 0.280, …, 0.2631` for `k = 2, 3, 4, 5, 6, …, 40` at `u = 1`, against
 `h/a = 0.2627`; `(τ_k − h)/a ≈ 0.65/k²`; `max_g(T_k − θ_hint)(g) = τ_k − h` **[N; workstream; `τ₂` re-computed by
 the coordinator]**.  The algorithm of the proof has about `ln(a/h)·a/η` bounded levels on top of
-an extensive family: nothing one would run.  At the flat instance the exact cost of two
+an extensive family: nothing one would run.  *At the flat instance, with the outer
+fraction `φ` tuned for that instance,* the exact cost of two
 levels at accuracy `0.87` is `ln(cost)/(na) = 1.70, 0.70, 0.55, 0.52, 0.51` for
 `n = 250, 10³, 4·10³, 1.6·10⁴, 6.4·10⁴` (limit `τ₂/a`), against `1.93, 1.35, 1.15, 1.07, 1.03` for the plain
-bracket and never below the hinted lower bound — two levels win from `n ≈ 250` on, where
-either needs more than `e^{45}` evaluations.
+bracket and never below the hinted lower bound.  **These are best-case numbers: the flat
+instance is where the lower bound for every algorithm is proved, not where this
+algorithm works hardest** (Computational Research Division, ENG-RES-0008: exact counts
+for Algorithm 2L⁺ under a search over instances and inner behaviours; in `7 095 840` mean
+runs no claim of Theorem 11.56 was violated).  With the flat-tuned `φ` a radial instance
+"flat bulk with a slightly supercritical dip", or a cone, costs `e^{71}` times more
+evaluations at `n = 1000` — as much as the plain bracket — and `e^{513}` times more at `n = 64 000`
+(`u = 1`).  Tuned against the worst instance the best outer fraction is between `0.50` and
+`0.60` at every size (`0.50` from `n = 4000` on), and the cost is `ln(cost)/(na) = 1.04` at `n = 1000`
+and `0.537` at `n = 64 000` instead of `0.70` and `0.512`; the excess over the exponent claimed
+for the same `φ` and ladder decreases with `n`, consistently with the `O(√n)` correction of
+the theorem, and is below `0.01` in exponent units from `n = 32 000` on.  **So two levels beat
+the plain bracket from `n ≈ 500` on at `u = 1` (from `n ≈ 250` at the flat instance; from
+`n ≈ 1000` if `φ` is left at its flat-tuned value) and from `n ≈ 2000` on at `u = ½`**, where
+either needs more than `e^{45}` evaluations.  The limit `τ₂` is a worst-case exponent and is
+not affected; the three-level numbers at the flat instance quoted in THY-MSG-0007 carry
+the same caveat, and no worst case has been computed for three levels.
 (2) **Below the exponential scale nothing is known.**  With a hint the cost at the zero
 function is `2ⁿ/|B(n, k*)|` up to a polynomial factor — exactly `2ⁿ/|D_min|` up to the factor
 `1 − 2δ`, with `D_min` the complement of the largest initial segment of the simplicial order that
@@ -4338,8 +4473,9 @@ isoperimetry.*  If `ε < ε_n^{tr}(q)`, every non-adaptive `(ε/2, δ)`-correct 
 type (cones truncated at type-dependent radii), and (d) `ε_n^{tr}(e^{−nθ}) ≤ n·S((R^max)^{-1}(θ)) + o(n)`.
 Hence **the exponent of non-adaptive algorithms is `θ_na(ε₁)`** for `0 < ε₁ < E`, attained by
 sampling uniformly on every type class — equivalently, importance sampling from `μ_H`.
-*Product samplers are worse* **[lower bound: P, elementary; the comparison with `θ_na`:
-numerical].**  A non-adaptive algorithm whose points are i.i.d. from one product measure
+*Product samplers: worse at extensive accuracies, not at vanishing accuracy* **[lower bound:
+P, elementary; the comparison with `θ_na` at extensive accuracies: numerical; the equality
+at vanishing accuracy: P, an observation of the Scientific Discovery Division].**  A non-adaptive algorithm whose points are i.i.d. from one product measure
 `Bernoulli(r)^{⊗n}` — plain Monte Carlo from `π` is `r = p` — makes at least
 `(1 − 2δ)·exp(n·max(φ₀, φ₁)(ε₁) − O(log n))` evaluations, where for the constant centre `s ∈ {0ⁿ, 1ⁿ}`,
 with `r_s` the sampler's and `η_s` the cone's Gibbs probability that a letter differs from the
@@ -4357,7 +4493,23 @@ single `r` gives `0.1033`, `0.0451`, `0.0244` there (referee; `0.1035`, `0.0453`
 coordinator's re-computation, `experiments/coordinator_checks/r9_product_sampler_check.py`):
 **plain Monte Carlo from the Gibbs measure of the known part is exponentially worse; the best
 single tilted product measure is worse by 0.5–3 % of the exponent in these examples.**  That
-`min_r max(φ₀, φ₁) > θ_na` whenever `p ≠ ½` is not proved in general.
+`min_r max(φ₀, φ₁) > θ_na` whenever `p ≠ ½` is not proved in general — and **at vanishing accuracy
+it is false: there the two are equal** (SCI-REV-0004, observation (a); re-computed by us,
+harness XVII.5).  The Gibbs laws of the cones are the output laws of the memoryless
+channel `W(·|b)` = letter law of a cone whose centre has the letter `b`; `a = θ_na(0⁺) = max_m I(S; X)`
+is its capacity; `max(φ₀, φ₁)(0⁺) = max_b KL(W(·|b)‖Bernoulli(r))`; and capacity = information
+radius: the minimum over `r` is `a`, attained at the capacity-achieving *output* marginal
+`r*` (`r* = 0.4308, 0.3607, 0.2225, 0.1124` against `p = 0.3775, 0.2689, 0.1192, 0.0474` at `u = 2`; it is
+neither `p` nor the optimal centre type).  So the lower bound above does not separate
+`Bernoulli(r*)^{⊗n}` from the type-stratified sample at vanishing — hence at every bounded —
+accuracy, and at cone instances the sample size `e^{na}` suffices for it (Chatterjee–Diaconis
+2018).  **A strict separation of product samplers from the flat histogram can only be a
+statement about extensive accuracies.**  Open: whether `Bernoulli(r*)^{⊗n}` is exponent-optimal
+on the whole class at bounded accuracy.  (`Bernoulli(r*)^{⊗n}` is the Gibbs measure of the
+additive instance `γ*|x|` with `γ* = logit p − logit r*`, and `|γ*| < u` because `r*` lies strictly
+between the two letter laws of the channel, so Lemma 11.62 applies with this reference
+instance; what is missing is the evaluation of its tail function — the analogue of
+Theorem 11.63 for the reference `γ*|x|` in place of the flat-histogram instance.)
 
 **Lemma 11.62 (tail lemma relative to a reference instance) [P; elementary].**  Let `ψ₀ ∈ L_u`
 with weights `w₀`, Gibbs law `μ₀` and *slack* `s₀(x,y) = u·d(x,y) + ψ₀(x) − ψ₀(y) ≥ 0`.  For `ψ ∈ L_u`
@@ -4664,6 +4816,17 @@ reason is the same in both: a sample of `e^{nθ}` points from the Gibbs law of t
 misses sets of measure `e^{−nθ}`; an algorithm that knows where to look (a hint) or learns it
 (adaptivity) pays only for the *effect* of such a set, a non-adaptive one also pays for
 never having seen it, and measure and effect multiply.
+*In the units of information-based complexity* (a rewriting due to the Scientific
+Discovery Division, SCI-REV-0004): with `N = e^{nθ}` evaluations, `ε_na(N) = ε_ad(N) + ln N + o(n)`
+for budgets `N ≤ e^{nh}` — the multiplicative error of the best non-adaptive method is
+`N^{1+o(1)}` times that of the best adaptive one.  This is a statement about the two minimax
+errors (the non-adaptive lower bound and the adaptive one are attained at different
+pairs of instances — a cone against its truncation, the flat instance against a dip),
+not about any single instance.  As an identity it is the exponential change of measure
+`KL(ρ‖p_u) = KL(ρ‖½) + uρ − Λ₁`, which is in print in the form "`ln M` + frozen energy" for the
+Jarzynski estimator of the discrete random energy model (Suárez–Silbey–Oppenheim 2012,
+eq. (39) in the division's reading); Theorem 11.66 below is restricted Legendre duality
+packaged for the recursion.
 
 **Theorem 11.66 (every game function yields a pair, and its level recursion converges) [V]
 (`GamePair.lean`: `GameFunction.hintShape_critical`, `GameFunction.pair`,
@@ -5025,6 +5188,15 @@ asymptotically).  A linear *law* is neither needed nor true: an arm of `d` beads
 surrounded by up to eight stems of the other arm if `d ≪ n`, by one if `d ≈ n/2`, so the
 expected form is `c_j ≈ nΦ(d_j/n)` with `Φ` concave **[C]** — the shape reported by the other
 division (ratios `c_j/d_j = 58, 54, 41, 35, 32, 28, 24, 21` at 16 torsions).
+*Checked against exact data* (Computational Research Division, ENG-RES-0009; exhaustive
+single-flip constants for 3–16 torsions): the two bounds hold in all 36 pairs `(n, j)` with
+`d_j ≥ 5` that exist up to 16 torsions (the lower bound is never closer than `21`, the
+constants stay below `0.29` of the upper bound) — a check of the statement, not of the
+proof.  **The conjectured scaling form is not visible at these sizes:** at fixed `d_j/n` the
+ratio `c_j/n` still rises (at the centre of the chain from `7.25` at 8 torsions to `10.6` at
+16), while at fixed small `d_j` the constant itself is nearly independent of `n`; the data
+are closer to "a function of `d_j` with a plateau towards the centre".  The conjecture is
+about a limit that enumerable chains have not reached, and it stays a conjecture.
 
 **Conjecture 11.75 (unrestricted walks have the same limit shape) [C].**  `𝒟_N → K^{br}` in the
 Hausdorff metric; all that certificates need is the weaker `𝒟_N^↑ → (K^{br})^↑`, and then
@@ -5135,18 +5307,31 @@ on every type class) but not a product measure.  Workstream T
    identity; and for accuracy rates above `e₀ ≈ 0.0018` profiles that constrain only part
    of the coordinates do strictly better than every set built around one centre
    (Proposition 11.82).
-4. **Ferromagnets are never harder than the uniform cube, and a shallow barrier is
-   invisible:** for the zero-field model the exponents are *equal* to the uniform cube's
-   up to a coupling `βJ*(e, u) > 1` beyond the critical one (Proposition 11.81).
+4. **Ferromagnets are never harder than the uniform cube, and a shallow barrier can be
+   invisible:** for the zero-field model at moderate slopes (`u = 1`; `u ≤ 2` on the
+   referee's grid) the exponents are *equal* to the uniform cube's up to a coupling
+   `βJ*(e, u) > 1` beyond the critical one; for large slopes at small accuracies the
+   junction comes earlier, but still beyond the critical coupling (Proposition 11.81).
 
 Open: the exponent of adaptive algorithms without a hint for an interacting known part
-(the nested algorithm of Theorem 11.64 does not transfer as it stands), and the value of
-the single-letter supremum beyond `e₀` with two phases.
+(the nested algorithm of Theorem 11.64 does not transfer as it stands; for ferromagnets
+it is at most the uniform cube's, Proposition 11.81(c)), and the value of the
+single-letter supremum beyond `e₀` with two phases.
 
-**Status of this section.**  Paper proofs by workstream T; **not yet refereed** (an
-independent referee has been commissioned).  The coordinator re-derived line by line the
+**Status of this section.**  Paper proofs by workstream T, **refereed** by the independent
+referee R10 (`docs/reviews/R10_referee_report.md`; own code, three inner solvers that share
+no approximation, about ninety numbers recomputed): **no critical finding**; every
+statement labelled as proved is proved, some after small repairs that are now in the
+text — in particular Theorem 11.78(b), the isoperimetric theorem for every rate function,
+Theorem 11.79(d) and the whole convex case; **two major findings**, both applied here:
+the global half of Proposition 11.81(b) was false as a general statement (true where it
+had been computed), and the interval of Proposition 11.82(e) had an upper end that is not
+proved; fifteen minor findings (two numbers wrong in the third digit, several unstated
+routine steps, one loosely worded argument), all applied.  What the referee did not
+check is listed in §10 of the report (the Lean files were read, not compiled; sets
+without symmetry beyond `Q_4`; parts of the two-phase tables).  Before that, the coordinator had re-derived line by line the
 proofs of Theorem 11.76, Lemma 11.77, Theorem 11.78(a), Theorem 11.79, Theorem 11.80(a) and
-Proposition 11.81(a), read but did not re-derive in full Theorems 11.78(b) and 11.80(b), (c),
+Proposition 11.81(a), read but not re-derived in full Theorems 11.78(b) and 11.80(b), (c),
 and **re-computed every headline number with independent solvers**
 (`experiments/coordinator_checks/meanfield_T/`: two inner solvers that share no approximation
 — clippings with the minorant `v`, and a generic convex programme per exit type with `I` —
@@ -5154,9 +5339,12 @@ the binary optima, the free-block profiles at four accuracies, the junction with
 uniform cube at six couplings, the pair identity, cones against shell-cones, a one-phase
 case with a field, ferromagnets against the uniform cube on 180 random profiles, the
 threshold `u_top`, the failure of the pair identity at `u = 0.30`, the onset of the free
-block in the coupling; all agree with the workstream's numbers to the digits printed; one error of the coordinator's
+block in the coupling; all agreed with the workstream's numbers to the digits printed — the
+coordinator's runs did not include the two numbers that the referee corrected in the
+third digit (`e₀`, `a_cone`) and covered the junction at `u = 1` only, which is why they
+did not find what the referee found; one error of the coordinator's
 own first solver, of exactly the kind the workstream reports about its own, was found on
-the way and is recorded in `DEAD_ENDS.md` D49).  Machine-checked: Theorem 11.76(a) (the
+the way and is recorded in `DEAD_ENDS.md` D49; the lessons of the review are D53).  Machine-checked: Theorem 11.76(a) (the
 truncation and the lower bound) and (b) (`TypeQuantiles.lean`, `SymmetricSampling.lean`), and
 the same statements for an arbitrary symmetry group (`GroupSampling.lean`).
 Everything about limits is a paper proof by the method of types with `e^{o(n)}` factors.
@@ -5165,9 +5353,13 @@ Everything about limits is a paper proof by the method of types with `e^{o(n)}` 
 `A(ψ) = E_π e^{−ψ}`, accuracy `ε = ε₁n`, cost = number of evaluations of `ψ`, as in §11.20.
 `π` is *exchangeable*: `π(x) = p_{|x|}/C(n,|x|)` with `p_t = π(T_t) > 0`, `T_t = {|x| = t}`,
 `J_t := −ln p_t`; `dens_t(D) := |D ∩ T_t|/|T_t|`, `maxdens(D) := max_t dens_t(D)`.  For
-`f = nφ(|x|/n)` with `φ` continuous, `J_t/n = I(t/n) + O(ln n/n)` with the rate function
-`I := φ − h − min(φ − h)` (`h` the binary entropy); `v` is the largest `u`-Lipschitz minorant
-of `I`, `V_n` that of `J` on the lattice; the *contact set* is `{v = I}`.  Curie–Weiss:
+`f = nφ(|x|/n)` with `φ` Lipschitz, `J_t/n = I(t/n) + O(ln n/n)` with the rate function
+`I := φ − h − min(φ − h)` (`h` the binary entropy; for a merely continuous `φ` the error is
+`3 ln(n+1)/n + ω_φ(1/n)` with the modulus of continuity `ω_φ`, still `o(1)`, which is all
+that the limit statements need); `v` is the largest `u`-Lipschitz minorant
+of `I`, `V_n` that of `J` on the lattice (`|V_n(t) − n·v(t/n)| = O(ln n)` uniformly: the
+every-`n` statements use the lattice instance `−V_n(|x|)`, the limit statements `−n·v(|x|/n)`,
+and the two differ by a polynomial factor in every quantity below); the *contact set* is `{v = I}`.  Curie–Weiss:
 `φ(κ) = −(βJ/2)(2κ−1)² − βB(2κ−1)`; `βJ = 0` is the field of §11.20.
 
 *Symmetric instances and their landscapes.*  `ψ_g(x) = g(|x|)` with `|g(t+1) − g(t)| ≤ u`.  Its
@@ -5202,7 +5394,8 @@ class of `μ`); the centre itself, `μ₀ = (1, 0)`, gives the cone of §11.20. 
 [(a): the truncation and the lower bound **[V]**, the upper bound **[P]**; (b) **[V]**; (c), (d) **[P]**;
 workstream T, Theorems T1, T2, T4, Proposition T10].**
 (a) *Non-adaptive algorithms.*  Let `ψ^{tr,q}` be `ψ` truncated at its type-wise `q`-quantiles
-(Theorem 11.61) and `ε_n^{tr}(q) := sup_{ψ∈L_u} ln[A(ψ)/A(ψ^{tr,q})]`.  If `ε < ε_n^{tr}(q)`, every
+(Theorem 11.61) and `ε_n^{tr}(q) := sup_{ψ∈L_u} ln[A(ψ)/A(ψ^{tr,q})]` (nondecreasing in `q`: a larger
+`q` lowers the thresholds and removes more weight).  If `ε < ε_n^{tr}(q)`, every
 randomised non-adaptive `(ε/2, δ)`-correct algorithm makes at least `(1 − 2δ)/q`
 evaluations; and the type-stratified sample — `⌈8 ln(2(n+1)/δ)/q⌉` uniform points from each
 type class, `Â = Σ_t p_t·(`sample mean of `e^{−ψ}` over `T_t)` — is `(ε/2, δ)`-correct for every
@@ -5254,9 +5447,19 @@ sample is optimal among non-adaptive algorithms up to the factor
 (b′) Every algorithm needs `(1 − 2δ)/max_x dens_x(D)` evaluations at an invariant instance
 (`group_queries_ge`).
 (c′) On the orbit space with `J_O = −ln π(O)` and the quotient envelope
-`δ(O, O′) = min{d(x, y) : x ∈ O, y ∈ O′}`, the instance `−V`, `V` the largest `δ`-admissible
-minorant of `J`, is the hardest invariant instance up to the factor `N_orb` (**[P]**, the same
-three lines).
+`δ(O, O′) = min{d(x, y) : x ∈ O, y ∈ O′}` (it satisfies the triangle inequality because `Γ` acts by
+isometries), the instance `−V`, `V(O) := min_{O′}[J_{O′} + δ(O′, O)]`, is the hardest invariant
+instance up to the factor `N_orb` (**[P]**, the same three lines).
+*Conventions for a non-symmetric envelope* (referee R10, D13; on the cube they are
+invisible): the triangle inequality of `d` is a hypothesis throughout (it is one of
+`regLevel_admissible`); admissible means `ψ(x) − ψ(y) ≤ d(x, y)`; the deepest dip on `D` is
+`max_{y∉D}[ψ(y) − d(y, x)]`, in this order of the arguments, so the exponent in (11.23.1) reads
+`min_{y∉D}[d(y, x) + Λ_g(Γy)]`; and a landscape satisfies `Λ(O) − Λ(O′) ≤ δ(O′, O)` — it is the
+*negative* of an admissible function, so `V` above is the largest minorant of `J` whose
+negative is an admissible residual, not the largest admissible minorant.  A shorter
+route to the truncation than the regularisation of arbitrary invariant levels: the
+orbit-wise quantile `t(x) := max{c : dens_x{ψ < c} ≤ q}` is invariant and, by (a′) with
+`c = t(a)`, satisfies `t(a) − t(b) ≤ d(a, b)`.
 Examples: the symmetric group on the cube (types: this section); the uniform cube with
 all its isometries (one orbit: a uniform sample is optimal among fixed samples up to the
 constant `8 ln(2/δ)/(1 − 2δ)` for every `n`, and constants are the hardest invariant
@@ -5283,7 +5486,8 @@ passed through a channel that does not look at the block).  No convexity is used
 
 **Theorem 11.78 (the single-letter theorem for every rate function) [P; workstream T,
 Theorem T3; (a) for every `n`; (b) by the method of types — the proof of Theorem 11.63
-with Lemma T applied inside one type class; not refereed].**  Let `λ` be a landscape and
+with Lemma T applied inside one type class; refereed by R10, which went through the six
+steps against the proofs of Theorems 11.44 and 11.63 and found only cosmetic repairs].**  Let `λ` be a landscape and
 `ψ_n = −nλ(|x|/n)` its instance.
 (a) *Lower bound, every `n`.*  Let `μ` be a block profile with `k` blocks on the lattice, `C` its
 class, `B > λ(μ̄) + ln 2/n`, and `D` the union of the classes `c′` with
@@ -5291,9 +5495,11 @@ class, `B > λ(μ̄) + ln 2/n`, and `D` the union of the classes `c′` with
 
     ln(1 + Φ(D)) ≥ n(B − α_n(μ)) − ln 2 − ln Z,        maxdens(D) ≤ (n+1)^k · exp(−n·V(μ, B; λ))
 
-(`α_n(μ) := −n⁻¹ln π(C)`, `Z ≤ (n+1)^{1+c_φ}`), so by Theorem 11.76(b) every algorithm makes at
-least `(1 − 2δ)(n+1)^{−k}e^{n·V(μ,B;λ)}` evaluations at `ψ_n` whenever `ε < n(B − α_n(μ)) − ln 2 − ln Z`:
-the exponent of the instance is at least `R_λ(ε₁⁺)`.
+(`α_n(μ) := −n⁻¹ln π(C)`, `Z ≤ (n+1)^{1+c_φ}` for Lipschitz `φ`), so by Theorem 11.76(b) every algorithm makes at
+least `(1 − 2δ)(n+1)^{−k}e^{n·V(μ,B;λ)}` evaluations at `ψ_n` whenever `ε < n(B − α_n(μ)) − ln 2 − ln Z`
+(and `D ≠ Q_n`, which holds as soon as the bound on `maxdens` is below one):
+the exponent of the instance is at least `R_λ(ε₁⁺)` (lattice approximations of the block
+fractions and of `μ` are routine).
 (b) *Isoperimetry for the type-uniform measure.*  There is `ω_n → 0`, depending on `(φ, u)`
 only, such that for all `n`, all `e` and all `D ⊊ Q_n`
 
@@ -5301,7 +5507,7 @@ only, such that for all `n`, all `e` and all `D ⊊ Q_n`
 
 Consequently the hedged spot-check of Theorem 11.22(e), with samples from
 `½μ_n + ½·(`uniform over types, uniform inside each type class`)`, costs `e^{nR_λ(ε₁)+o(n)}` at `ψ_n`
-(at continuity points): **the hinted exponent of every symmetric instance of every
+(at continuity points of `R_λ`; for `H` every `ε₁ > 0` is one, by Theorem 11.79(d)): **the hinted exponent of every symmetric instance of every
 function-of-type known part is `R_λ(ε₁)`; by Theorem 11.76(c), (d) the largest of them is
 `R_H(ε₁)`, it is attained at the flat-histogram instance, and at symmetric instances it is
 attained without a hint.**
@@ -5325,22 +5531,35 @@ lemma of §11.20** — whether the supremum can be evaluated is a separate quest
 11.80, Proposition 11.82).  *Step 6* is simpler than for a product measure: every product
 measure `Qⁿ` satisfies `Qⁿ(y) ≤ e^{−nh(|y|/n)} ≤ 1/|T_{|y|}|`, so `Qⁿ(D) ≤ (n+1)·maxdens(D)` — the
 type-uniform measure dominates every product measure up to `n+1`; no typical set, no
-window and no continuity of `I − v` are needed.  ∎
+window and no continuity of `I − v` are needed.  *Bookkeeping* (referee R10, m3; the
+workstream's last line said "`R_λ` is nonincreasing", which is not automatic at negative
+accuracies, where the set of admissible profiles grows with `e`): what is used is that
+`R̄_λ` is nonincreasing and that `r_μ(x) ≤ R̄_λ(e′)` whenever `μ` is admissible at some `x ≥ e′` —
+if `μ` is admissible at `e′` this is monotonicity of `r_μ`, and if not, `MI(μ) < −e′` and
+`r_μ(x) ≤ MI(μ)` (the exit `ν = μ`).  The factor `1/(1 − θ_n)` of the typical-subset lemma
+multiplies a mutual information `≤ ln 2`, so the error is `O(θ_n)` for all real `e`; for the
+finitely many `n` with `θ_n ≥ 1` the trivial `ω_n = ½(sup I + u) + c·ln(n+1)/n` serves.  ∎
 
 **Theorem 11.79 (non-adaptive algorithms: cones around shells) [P; workstream T, Theorems
 T5, T8, Lemma T8′].**
 (a) *Truncated shell-cones, every `n`.*  For a block profile `μ` with `k` blocks, `ψ = u·d(·, C_μ)`
 and `q = e^{−nθ}`:
-`ln[A(ψ)/A(ψ^{tr,q})] ≥ n[min{G_μ(ν) : MI(ν) ≤ θ + (k+1)ln(n+1)/n} − 𝒱(μ)] − c_k ln(n+1)`; by Theorem
+`ln[A(ψ)/A(ψ^{tr,q})] ≥ n[min{G_μ(ν) : MI(ν) ≤ θ + (k+1)ln(n+1)/n} − 𝒱(μ)] − c_k ln(n+1) − c′_φ`; by Theorem
 11.76(a) non-adaptive algorithms have an exponent at least `θ_shell(ε₁⁺; μ)` for every `μ`.
 (b) *Shell-cones against dips.*  For every block structure
 `sup_{μ₀} θ_shell(X; μ₀) = sup_μ n_μ(X)`, and the left supremum may be restricted to
 self-consistent shells: for the Gibbs shell `μ*` of `μ₀` (a minimiser of `G_{μ₀}`),
 `θ_shell(X; μ₀) ≤ n_{μ*}(X) = θ_shell(X; μ*)`, and `μ*` is self-consistent.  Moreover
-`n_μ(X) = min{r_μ(e) : e + r_μ(e) ≤ X}`, hence `N(X) ≤ min{R_H(e) : e + R_H(e) ≤ X}`.
-(c) *Upper bound.*  `n⁻¹ε_n^{tr}(e^{−nθ}) ≤ θ + R̄_H^{−1}(θ) + o(1)`: the shear law of §11.21 as an
+`n_μ(X) = min{r_μ(e) : e + r_μ(e) ≤ X}` over the accuracies `e` at which `μ` is admissible
+(`e + α(μ) ≥ v(μ̄)`; at the others `n_μ(X) ≤ MI(μ) < −e`), hence
+`N(X) ≤ min{R̄_H(e) : e + R̄_H(e) ≤ X}`.
+(c) *Upper bound.*  `n⁻¹ε_n^{tr}(e^{−nθ}) ≤ θ + R̄_H^{−1}(θ) + o(1)` (with the left limit `R̄_H^{−1}(θ⁻)` at a
+jump, i.e. at a flat piece of `R̄_H`): the shear law of §11.21 as an
 upper bound.  So the exponent of non-adaptive algorithms satisfies
-`N(ε₁⁺) ≤ θ_na(ε₁) ≤ inf{θ : θ + R̄_H^{−1}(θ) < ε₁}`.
+`N(ε₁⁺) ≤ θ_na(ε₁) ≤ inf{θ : θ + R̄_H^{−1}(θ) < ε₁}`.  **The upper bound needs the value of the full
+supremum `R_H`**: a lower bound of `R_H` — the best binary centre, say — bounds `θ_na` from
+above only where it is known to equal `R_H` (this is what went wrong in the first version
+of Proposition 11.82(e)).
 (d) *Regularity, for every rate function.*  For all `e′ < e`: `R̄_H(e) ≥ R_H(e′) − (e − e′)`.  Hence
 `R̄_H` is nonincreasing and 1-Lipschitz and the shear `S̄(e) := e + R̄_H(e)` is nondecreasing —
 the slope condition of a `HintPair` needs no convexity.  Consequently
@@ -5359,7 +5578,10 @@ Theorem 11.78(b).  (d) Let `D` be `e′`-sensitive with `maxdens(D) = q` and tak
 `k` copies with probability at most `1/k!`, so with positive probability no point lies in
 more than `n` copies; then `Φ_H⁺(D′) ≥ n⁻¹Σ_iΦ_H⁺(σ_iD) = (N/n)Φ_H⁺(D) ≥ e^{ne}/n` (the slack out of `D′` is
 at least the slack out of each copy, and `H` is symmetric), while `maxdens(D′) ≤ Nq`; now
-Theorem 11.78(a) for the existence of `D` and (b) for `D′`.  ∎
+Theorem 11.78(a) for the existence of `D` and (b) for `D′`.  (Theorem 11.78(a) yields sets
+for `r_μ(e′ + η)`, every `η > 0`, so the inequality comes out first for the left limit
+`R̄_H(e⁻)`; a nonincreasing function that satisfies it for left limits has no jumps.
+`Nq ≤ 1` may be assumed, since otherwise the right-hand side is negative.)  ∎
 *Reading.*  Unions of permuted copies of a sensitive set are what profiles with fewer
 constraints are — a cylinder over a free block is the union of the shells whose centres
 differ on that block.  This is why the supremum over **all** block structures, and not
@@ -5372,39 +5594,67 @@ Self-consistency has the local form `|φ′(μ̄) + logit μ_j| ≤ u` for every
 the mean-field effective field of the shell's own type.
 
 **Theorem 11.80 (a convex rate function: §11.20 without the nested algorithm) [P; workstream
-T, Theorem T9; (a) re-derived by the coordinator, (b), (c) read; (d): "`≤`" proved, "`=`"
-numerical to `10⁻¹¹` in ten cases].**  Let `I` be convex (Curie–Weiss with `βJ ≤ 1` and any
+T, Theorem T9; refereed by R10: (a), (b), (c) proved — (c) after a repair of one argument
+and with a strengthening, both below; (d): "`≤`" proved, "`=`" numerical: to `10⁻¹¹` in ten
+cases of the workstream and to `5·10⁻⁹` in fourteen of the referee's, twelve of them not of
+Curie–Weiss type].**  Let `I` be convex (Curie–Weiss with `βJ ≤ 1` and any
 field; every antiferromagnet).
-(a) `V(μ, B; v) = max_{|γ|≤u} V(μ, B; λ_γ)`; hence `R_H = max_{|γ|≤u} R_γ`: **the flat-histogram
+(a) `V(μ, B; v) = sup_{|γ|≤u} V(μ, B; λ_γ)`; hence `R_H = sup_{|γ|≤u} R_γ`: **the flat-histogram
 instance is exactly as hard as the hardest additive instance** (`v = max_γλ_γ`, and Sion's
-theorem twice).
+theorem twice; the minimising side is compact, so no Slater condition is needed, and
+`γ ↦ V(μ, B; λ_γ)` is only lower semicontinuous a priori — hence "sup").
 (b) **Binary centres suffice**, `R_γ = R_γ^{(2)}` and `R_H = R_H^{(2)}`: for fixed `γ` and Lagrange
 parameter the value depends on the law of the block types linearly, and the function to
 be maximised is strictly concave on two outer pieces and strictly convex between them,
 so a supporting line of its concave envelope touches it in at most two points.
-(c) **There is a game function:** `F*(t) := max_{|γ|≤u} sup_μ min_ν[MI(ν) + t(u·dist(ν,μ) + λ_γ(ν̄) − α(μ))]`
-satisfies the hypotheses of `GameFunction`, `R_H(e) = max_t[F*(t) − te]` and
-`N(x) = max_{τ<1}(F*(τ) − τx)/(1 − τ)`; so Theorem 11.66 **[V]** applies: `R_H` is convex with
-slopes in `[−1, 0]`, the pair identity `N(e + R_H(e)) = R_H(e)` holds, and with Theorems 11.78,
-11.79 **the exponent of non-adaptive algorithms is `θ_na = R_H∘S^{−1}`, attained by the
+(c) **There is a game function:** `F*(t) := sup_{|γ|≤u} sup_μ min_ν[MI(ν) + t(u·dist(ν,μ) + λ_γ(ν̄) − α(μ))]`
+satisfies the hypotheses of `GameFunction`, `R̄_H(e) = R̂(e) := max_t[F*(t) − te]` **for every real
+`e`** (so `R_H = R̂` for `e ≥ 0`) and
+`N(x) = max_{τ<1}(F*(τ) − τx)/(1 − τ)`; so Theorem 11.66 **[V]** applies: `R̄_H` is convex with
+slopes in `[−1, 0]`, the pair identity `N(e + R̄_H(e)) = R̄_H(e)` holds, and with Theorems 11.78,
+11.79 **the exponent of non-adaptive algorithms is `θ_na = R̄_H∘S̄^{−1}`, attained by the
 type-stratified sample, and the hinted exponent of `H` and of the hardest additive
 instance is `R_H`.**
+*Three points of the proof* (referee R10).  (1) The workstream proved `R_H = R̂` for `e ≥ 0`
+and `R̄_H ≤ R̂` in general (for `τ ≥ 1` and an admissible profile the bracket is at most
+`−e = F*(1) − e`).  The equality for all `e`, which the formula for `θ_na` below `R_H(0)`
+needs: for `e₀` above the accuracy `e_c` at which `R̂` reaches the line `−e`, put `X = Ŝ(e₀)`;
+then `N(X) = R̂(e₀)` by the formula for `N`, and `N(X) ≤ R̄_H(e)` for every `e` with
+`e + R̄_H(e) ≤ X` (Theorem 11.79(b)), which `e = e₀` satisfies because `R̄_H ≤ R̂`; so
+`R̂(e₀) ≤ R̄_H(e₀) ≤ R̂(e₀)`; for `e ≤ e_c` both sides are `−e`.  (2) `E > 0` (a field of
+`GameFunction`): for `μ = (κ₀ + η, κ₀ − η)` with equal weights around a minimiser `κ₀` of `I` and
+`γ = 0`, `MI(ν) ≥ ½(ν₁ − ν₂)²` and `dist(ν, μ) ≥ η − ½|ν₁ − ν₂|` give
+`F*(t) ≥ t(uη − O(η²)) − (tu)²/8`, whence `E ≥ uη − O(η²) > 0` (the workstream's sentence
+"every constant `ν` is at distance `≥ η`" was not an argument: the minimiser is not
+constant).  (3) Statements about `θ_na` compare game functions, i.e. Lagrangians at all
+slopes, not only the values `r_μ(e)` at `e ≥ 0`; the comparisons of Proposition 11.81(a) hold
+for the Lagrangian by the same two arguments.
 (d) The cone formulas of §11.20 hold with `Λ_m := min_z[MI + I(κ_z) + uρ]`:
-`R_H(e) = max_m min{MI(z) : uρ(z) + v(κ_z) − Λ_m ≤ e}`, `θ_na(x) = max_m min{MI(z) : J_m(z) ≤ x}`.
+`R_H(e) = max_m min{MI(z) : uρ(z) + v(κ_z) − Λ_m ≤ e}`, `θ_na(x) = max_m min{MI(z) : J_m(z) ≤ x}`
+("`=`" is numerical; the referee indicates a proof for differentiable `φ`: at the saddle
+of (b) the tangency conditions `logit M_hi = u − φ′(m̄)`, `logit M_lo = −u − φ′(m̄)` are the
+stationarity conditions of the cone functional, and when the contacts are in the outer
+pieces the exit is coordinatewise beyond the shell, so that the triangle inequality of
+"`≤`" is an equality — not written out).
 *What fails:* the closed form of the game function (the soft gap is not additive in the
 sites), the clean every-`n` product bound `e^{−tε+nF}` (a polynomial factor is lost), and
 **Theorem 11.64** — see "adaptive algorithms" below.
-*Numbers* (`u = 1`; cone formulas, checked against the sup–min): with `B = 0` every coupling
-`−40 ≤ βJ ≤ 1` has exactly the uniform cube's values (`R_H(0⁺) = 0.029139`, `a = 0.110944`) —
-**an interaction without a field changes no exponent** (proved for `0 ≤ βJ ≤ 1`, numerical for
-antiferromagnets, where "`≥`" is proved); with a field every exponent is below the uniform
+*Numbers* (`u = 1`; cone formulas, checked against the sup–min): with `B = 0` each of the
+couplings computed, `βJ ∈ {−40, −8, −2, −1, 0, 0.5, 0.9, 1}`, has exactly the uniform cube's
+values (`R_H(0⁺) = 0.029139`, `a = 0.110944`) —
+**an interaction without a field changes no exponent** (proved: for `0 ≤ βJ ≤ 1` by
+Proposition 11.81(a), and for every symmetric convex rate function, antiferromagnets
+included, by Corollary 11.91(ii)); with a field every exponent is below the uniform
 cube's and `R_H > R_0` strictly; near the critical coupling the gap between the class and
 the zero residual is large (`βJ = 1`, `βB = 0.1`: `R_H(0⁺) = 0.02796` against `R_0(0⁺) = 0.02027`), and
 the hardest additive residual cancels the field exactly (`γ* = 2βB`).
 
 **Proposition 11.81 (ferromagnets) [(a) P, given Proposition 11.65(b) and the evaluation
 lemma of Theorem 11.63 (both refereed); (b): the local statement P, the global one
-numerical; (c) a sketch; workstream T, T9(e), §6.6, T12].**
+numerical **and true only in a range of slopes and accuracies** (referee R10, finding M1:
+as first stated, for all `(e, u)`, it was false); (c) P, given Theorem 11.64: the
+workstream's sketch with the referee's completion, checked by the coordinator, not
+refereed in turn; workstream T, T9(e), §6.6, T12].**
 (a) *Never harder than the uniform cube.*  If `φ` is concave (ferromagnetic interaction of
 any strength, any field — also with two phases), then for all `e`
 
@@ -5413,23 +5663,73 @@ any strength, any field — also with two phases), then for all `e`
 and for `B = 0`, `0 ≤ βJ ≤ 1` there is equality.
 (b) *The junction is beyond the critical coupling.*  Let `ρ := (Λ₁ + e)/u`,
 `c₂ := 1/(2ρ(1−ρ)) − 2`, `L := ln((1−ρ)/ρ)` and `βJ*(e, u) := 1 + u·c₂/(2L)` (`= 1.1250` at `u = 1`,
-`e = 0`).  For `B = 0`, at the uniform cube's optimal profile the symmetric exit is a strict
-local minimum iff `βJ < βJ*`; numerically it is then the global one, so
+`e = 0`).  For `B = 0`, at the uniform cube's optimal profile `μ* = (½; p_u, p_u)` the symmetric
+exit is a strict local minimum iff `βJ < βJ*` **[P]**.  *Where it is also the global minimum*
+**[N]**: at `u = 1` (`e = 0, 0.02, 0.04`: workstream and coordinator); on the referee's grid
+(couplings `1 + f(βJ* − 1)`, `f ≤ 0.99`) for `u ≤ 2` at seven accuracies between `0.9e_c` and
+`0.9E_unif`, at `e = 0` for `u ≤ 6`, and for every `u ≤ 8` when `e ≥ 0.3E_unif`
+(`e_c = u·p_u − Λ₁ < 0` is the accuracy at which `R_unif` meets the line `−e`).  There
 **`R_H(e) = R_unif(e)` for `1 < βJ ≤ βJ*` although there are two phases**, and `R_H < R_unif`
-beyond (`0.0290694` at `βJ = 1.14`, `0.0251012` at `1.5`, `0.0230260` at `1.75`; `e = 0`).
-(c) *Adaptive algorithms, a sketch.*  By the Hubbard–Stratonovich transformation a
-ferromagnetic Curie–Weiss measure is a mixture of fields, `π = ∫ν(dy)·Bernoulli(p_y)^{⊗n}`,
-and `A(ψ) = ∫ν(dy)A_y(ψ)` for the same residual; running the adaptive algorithm of Theorem
-11.64 on a polynomial grid of fields gives an adaptive algorithm without a hint with
-exponent at most `max_yR^max_{p_y}(ε₁) ≤ R_unif(ε₁)`.  So for `B = 0` and `βJ ≤ βJ*(ε₁, u)` the
-adaptive exponent would be exactly `R_H(ε₁) = R_unif(ε₁)`.  *Missing step:* the uniformity in
-`p` of the `o(n)` of Theorem 11.64.
+beyond (`0.0290694` at `βJ = 1.14`, `0.0251012` at `1.5`, `0.0230260` at `1.75`; `u = 1`, `e = 0`).
+*Where it is not* (referee R10, M1): for large slopes at small or negative accuracies a
+**far exit** undercuts the symmetric one below `βJ*`.  The constant profile at a well `κ_w`
+(`MI = 0`) is feasible for `μ*` as soon as
+
+    I(½) ≥ E_unif(u) − e + u·(p_u − κ_w)₊,        E_unif(u) = ln cosh(u/2)
+
+(from `u·dist(κ_w𝟙, μ*) + I(κ_w) ≤ e + KL(p_u‖½) + I(½)` and `u(½ − p_u) − KL(p_u‖½) = ln cosh(u/2)`; the
+cheapest constant exit sits at the edge of the well's contact interval and is slightly
+cheaper still), i.e. as soon as the barrier is as high as what is left of the uniform
+cube's threshold, and then `r_{μ*}(e) = 0`.  Example: `u = 8`, `e = 0`, `βJ = 8.2632 < βJ* = 8.3366`:
+`I(½) = 3.438 > E_unif = 3.307`, the constant exit costs `4.000` against the budget `4.129`,
+`r_{μ*}(0) = 0`, and the best profile found — the binary shell `(½; 0.0292, 0.0292)` at the edge
+of the cliff where the constant exits stop being feasible; 16 multi-block starts give
+nothing better — has `0.36742` against `R_unif(0) = 0.39854`; likewise `u = 4`,
+`e = 0.6e_c = −0.3618`, `βJ = 4.9578 < βJ* = 4.9978`: `0.41763` against `0.41857` (23 starts); eight
+further cells of the grid.  That the uniform cube's profile loses its value there is an
+explicit feasible exit (re-computed by the coordinator; DEAD.25 of the harness); that
+`R_H` itself is below `R_unif` rests on the comparison chain of (a) — a profile that
+restored `R_unif` would have to be an optimal profile of the uniform cube of type `½` — and
+on those searches, not on a proof.  On the grid the failure occurs exactly in the cells
+where the displayed inequality holds at `βJ*`, so **the junction is at `min{βJ*(e, u), βJ_w(e, u)}`**,
+`βJ_w` the coupling at which a constant exit becomes feasible for `μ*` **[N]**; for `u = 1` the
+second number is far away (`I(½) = 0.010` at `βJ*` against `0.120`), and in every cell
+computed the junction is beyond the critical coupling.
+(c) *Adaptive algorithms: never more than the uniform cube.*  For a ferromagnetic
+Curie–Weiss known part (`βJ ≥ 0`, any field) there is an adaptive algorithm without a hint
+whose cost exponent is at most `R_unif(ε₁)`.  Hence **the adaptive exponent without a hint
+lies in `[R_H(ε₁), R_unif(ε₁)]`, and it equals `R_unif(ε₁)` — the first interacting known parts for
+which it is determined — wherever `R_H = R_unif`: for `B = 0` and `0 ≤ βJ ≤ 1` (proved), and with
+two phases up to the junction of (b) (numerical).**
+*Proof of (c).*  By the Hubbard–Stratonovich transformation a ferromagnetic Curie–Weiss
+measure is a mixture of fields, `π = ∫ν(dy)·Bernoulli(p_y)^{⊗n}` with
+`p_y = e^{y+βB}/(2cosh(y+βB))` and `ν(dy) ∝ exp(−n[y²/(2βJ) − ln 2cosh(y+βB)])dy`, so
+`A(ψ) = ∫ν(dy)A_y(ψ)` for the same residual (checked numerically to `6·10⁻¹⁵` by the referee).
+Since `A_y/A_{y′} ≤ e^{un}` and `ν(|y| > Y) ≤ e^{−n(u+1)}` for a fixed `Y`, the fields `|y| ≤ Y` suffice, and
+since `|∂_y ln A_y| ≤ 2n`, a grid of mesh `n⁻²` reproduces the integral up to `1 + O(1/n)`.  The
+workstream ran the algorithm of Theorem 11.64 at every grid field and lacked the
+uniformity in `p` of its `o(n)`.  The referee's completion avoids it: take a *finite* net
+`y_j` of `[−Y, Y]` with cells of radius `Δ`, independent of `n`; for `y` in the cell of `y_j`,
+
+    A_y(ψ) = C_n(y, y_j) · A_{y_j}( ψ − 2(y − y_j)|x| ),      C_n = e^{−(y−y_j)n}·(cosh(y_j+βB)/cosh(y+βB))ⁿ,
+
+the tilted residual belongs to `L_{u+2Δ}`, and an evaluation of it is an evaluation of `ψ`.
+So the algorithm of Theorem 11.64 for the field `p_{y_j}` and the class `L_{u+2Δ}`, at the
+accuracy `ε − 1` and the confidence `δ` divided by the number of grid fields, serves every
+grid field of the cell; only finitely many pairs `(p_{y_j}, u + 2Δ)` occur, so the `o(n)` is
+uniform, and the brackets combine with the weights of `ν`.  The exponent is at most
+`max_jR^max_{p_{y_j}, u+2Δ}(ε₁) ≤ R^max_{½, u+2Δ}(ε₁)` (Proposition 11.65(b)), which tends to `R_unif(ε₁)` as
+`Δ → 0`.  ∎  (Not tight in general, and nothing for antiferromagnets: a negative coupling
+is not a positive mixture of fields.)
 *Proof of (a).*  A concave `φ` is the lower envelope of its tangents, and
 `θκ − h(κ) = KL(κ‖p_θ) − ln(1 + e^{−θ})` with `logit p_θ = −θ`; so `I = min_θ[KL(·‖p_θ) + c(θ)]` with
-equality at `θ = φ′(κ)`, and for every pair of profiles
+equality at a supergradient `θ ∈ ∂φ(κ)`, and for every pair of profiles
 `I(ν̄) − I(μ̄) ≤ KL(ν̄‖p₀) − KL(μ̄‖p₀)`, `p₀` the effective field at the type of `μ`: the feasible
 set of `r_μ(e)` contains that of the field `p₀` (Lemma 11.77(b)), so
-`r_μ(e) ≤ R^max_{p₀}(e) ≤ R^max_{½}(e)`.  Equality: for a symmetric convex `I` the feasible set of
+`r_μ(e) ≤ R^max_{p₀}(e) ≤ R^max_{½}(e)` (if `μ` is not admissible for the field problem, then
+`e + MI(μ) < 0` and `r_μ(e) ≤ MI(μ) < −e ≤ R^max(e)`; the same two steps applied to the Lagrangian
+compare the game functions, which is what statements about `θ_na` need: Theorem 11.80,
+point (3)).  Equality: for a symmetric convex `I` the feasible set of
 the uniform cube's optimal profile is convex and invariant under the reflection that
 exchanges the two blocks, `MI` is convex, so there is a minimiser of type `½`, where the
 constraint is the uniform cube's.  ∎
@@ -5447,7 +5747,7 @@ barrier).
 | `0.002` | | | `0.0240304` | | `0.0240419` | free block, `λ_f = 0.140` | `0.0281676` |
 | `0.01` | `0.0061622` | `0.0047744` | `0.0199399` | `0.30170` | `0.0203817` | free block, `λ_f = 0.140` | `0.0244503` |
 | `0.02` | `0.0028153` | `0.0020627` | `0.0152765` | `0.30553` | `0.0161548` | free block, `λ_f = 0.141`, `x = 0.2774` | `0.0201820` |
-| `0.05` | `0` | `0` | `0.0046265` | `0.31795` | `0.0063867` | five block types | `0.0098646` |
+| `0.05` | `0` | `0` | `0.0046265` | `0.31795` | `0.0063875` | seven block types (referee R10; `0.0063867` with five) | `0.0098646` |
 
 (a) *Cones fail.*  At `e = 0` the cone formula gives `0.01070`, the best dip around one centre
 `0.025101`.  The optimal dips have their Gibbs shell **in the barrier type class**, at
@@ -5457,11 +5757,15 @@ distance `xn ≈ 0.30n` from a centre of type `½`, and two tied, asymmetric che
 `n_{μ*}(e + R^{(2)}(e)) = R^{(2)}(e)` to `10⁻⁸` for `−0.108 ≤ e ≤ 0.064`; the truncated cone around the
 shell attains it, the truncated cone around a point gives `0.0020` at `S(0)`.  At vanishing
 accuracy `a = θ_na(0⁺) = KL(p_u‖½) = 0.110944`, the uniform cube's value (shells `(½; x, x)` are
-self-consistent exactly for `x ≥ p_u`; `≤` by Proposition 11.81(a)), against `0.0446` from cones.
-(c) *Beyond `e₀ = 0.00181` one centre is not enough.*  Profiles with a **free block** — a
+self-consistent exactly for `x ≥ p_u`; `≤` by Proposition 11.81(a)), against `0.04435` from cones
+(the mutual information of the cone's Gibbs shell, largest at a centre of type `½`, where
+the shells in the two wells tie; the first version had `0.0446`, the value of the
+*metastable* shell at `m ≈ 0.5025` — referee R10, m12, re-computed by the coordinator).
+(c) *Beyond `e₀ = 0.001804` one centre is not enough.*  Profiles with a **free block** — a
 shell on about 86 % of the coordinates, the remaining coordinates unconstrained — have
 larger values than every binary centre: `+0.05 %` at `e = 0.002`, `+5.7 %` at `0.02`, `+38 %` at
-`0.05` (where the best profiles found have five or six block types).  The binary branch and
+`0.05` (where the best profiles found have five to seven block types: the number of atoms
+grows with the accuracy).  The binary branch and
 the diluted branch are two local maxima that cross at `e₀`; the free block appears with a
 finite weight.  *In the coupling*, at a fixed accuracy `e > 0`, there are three regimes:
 an **invisible barrier** (`βJ ≤ βJ*(e, u)`: the uniform cube's exponents), **tilted dips
@@ -5479,7 +5783,9 @@ sit on the barrier, so the flat-histogram ensemble is **not** their
 normalised-maximum-likelihood mixture here (the conjecture of §11.20, remark (3), is right
 about the ensemble and wrong about its derivation beyond convex `I`).
 (e) *Other parameters.*  A field that keeps two wells changes little (`βB = 0.05`:
-`R^{(2)}(0) = 0.0250232`, asymmetric barrier shell).  If the barrier is steeper than `u` on its
+`R^{(2)}(0) = 0.0250232`, asymmetric barrier shell; the free block appears there too: at
+`e = 0.02` a three-block profile has `0.0160758` against `0.0152121` for the best binary centre,
+and none was found at `e = 0` — referee R10).  If the barrier is steeper than `u` on its
 flanks the contact set breaks into pieces, and as long as the top of the barrier is a
 contact point — `u ≥ u_top = 0.2815`, the largest slope of a chord from the top — the optimal
 dips are still barrier shells with `0.81`–`0.83` of the uniform cube's exponent; when the
@@ -5489,14 +5795,22 @@ optimal dips sit in a well, the cone formula is right again and the exponent dro
 around profile classes:** at `u = 0.30`, where the piece of the contact set at the top is
 narrow (`[0.4745, 0.5255]`), `R^{(2)}(0) = 0.0022646` on the shell `x = 0.4409`, which is only
 marginally self-consistent — the Gibbs measure of the cone around it is on the verge of
-escaping into a well, `n_μ(S(0)) = 0` for it — and the best cone around any shell certifies
-`0.00184 = 0.81·R^{(2)}(0)` at the accuracy `S(0)` (re-computed by the coordinator: `0.001839` at
-`x = 0.4514`).  There the exponent of non-adaptive algorithms is known only to lie in
-`[0.00184, 0.00226]`: either functions other than cones around profile classes do better,
-or the shear bound of Theorem 11.79(c) is not attained when a second phase carries more
-weight than the classes at the quantile.
+escaping into a well, `n_μ(S(0)) = 0` for it — and the best cone found around a shell
+(symmetric shells, general binary profiles, profiles with a free block) certifies
+`0.00184 = 0.81·R^{(2)}(0)` at the accuracy `S^{(2)}(0) = 0.0022646` (re-computed by the coordinator:
+`0.001839` at `x = 0.4514`; by the referee three ways: `0.00184002` at `x = 0.45138`).  **What is
+proved there** (referee R10, M2; the first version of this item gave the interval
+`[0.00184, 0.00226]`, whose upper end is `R^{(2)}(0)`, a *lower* bound of `R_H(0)`): the exponent of
+non-adaptive algorithms at that accuracy lies in `[0.00184, 0.00338]`, the upper end from
+`R̄_H ≤ R̂_unif` (Proposition 11.81(a), Theorem 11.79(c): `R_unif(S_unif^{−1}(0.0022646)) = 0.003377`).  The
+interval `[0.00184, 0.00226]` holds *if* `R_H = R^{(2)}` on a left neighbourhood of `0` at this
+slope — the analogue of (C1), supported by one three-block search of the workstream and
+24 multi-block runs of the referee that return the binary shell.  So three things can
+happen: functions other than cones around profile classes do better; the shear bound
+of Theorem 11.79(c) is not attained when a second phase carries more weight than the
+classes at the quantile; or `R_H(0) > R^{(2)}(0)` at this slope.
 (f) *Exact sums.*  At `n = 4000` and bounded accuracy every algorithm needs
-`(1 − 2δ)e^{0.02509n}` evaluations at `H` and every non-adaptive algorithm `(1 − 2δ)e^{0.1017n}`
+`(1 − 2δ)e^{0.02508n}` evaluations at `H` (the exact sum gives `0.025087`) and every non-adaptive algorithm `(1 − 2δ)e^{0.1017n}`
 (cones around shells; cones around points certify `e^{0.0435n}`); at `ε = 0.05n + 1` and `n = 600`
 the neighbourhood of a three-block class certifies `e^{0.00573n}` against `e^{0.00520n}` for the
 best capped set around one centre.
@@ -5504,20 +5818,31 @@ best capped set around one centre.
 **Conjecture 11.83 and open problems [C].**
 (C1) For `e ≤ e₀` — in particular at vanishing accuracy — the supremum is attained at the
 binary barrier shell: `R_H(0⁺) = 0.0251012` at `βJ = 1.5`, `u = 1`.  Proved: `0.0251012 ≤ R_H(0⁺) ≤ 0.0291391`.
+*Not refuted by the referee:* 86 searches with methods independent of the workstream's
+and the coordinator's (differential evolution over 3, 4 and 5 blocks; Nelder–Mead; a
+sequential linear programme over the *law* of the block types, which moves finite mass
+in one step) find nothing above `0.0251012`, and the binary optimum is a critical point of
+the linearised problem over all laws (LP optimum `0.02510118` against `0.02510117`) — which
+excludes improving directions to first order only, since the exit values are convex in
+the law.
 (O2) The value of `R_H(e)` for `e > e₀`: is the supremum attained by finitely many block
 types?  (For a *fixed* exit type the inner value is convex in the law of the block types,
 so two block types suffice against any one exit; the number of block types is driven by
 the number of exit types that tie, and the minimum over exit types cannot be convexified
-because `v` is not convex.)
+because `v` is not convex.  The referee's seven-atom profile at `e = 0.05` supports the doubt
+that finitely many suffice.)
 (O3) Without convexity `R̄_H` is 1-Lipschitz and the shear nondecreasing (Theorem 11.79(d));
 open are the *strict* monotonicity of the shear and the witness condition, i.e. whether
 `θ_na = R_H∘S^{−1}` for every rate function.  (O5) The exponent of non-adaptive algorithms
-where the witness condition fails for cones around profile classes (`u = 0.30`:
-`[0.00184, 0.00226]`, Proposition 11.82(e)).
+where the witness condition fails for cones around profile classes (`u = 0.30`: proved to
+lie in `[0.00184, 0.00338]`; in `[0.00184, 0.00226]` if binary centres are optimal there;
+Proposition 11.82(e)).
 (O4) **The adaptive exponent without a hint**, for every interacting known part, convex or
 not.  Conjecture: it is `R_H(ε₁)`; equivalently `H` is the hardest instance among *all*
 instances.  Proved: the lower bound `R_H`; the non-adaptive upper bound; for ferromagnets
-the truth lies in `[R_H, R_unif]` given the sketch of Proposition 11.81(c).
+the truth lies in `[R_H, R_unif]` (Proposition 11.81(c), given Theorem 11.64), so the
+conjecture holds wherever `R_H = R_unif`; for every function-of-type known part the problem
+reduces to type classes (§11.25, Theorem 11.92, Conjecture 11.94).
 
 *Adaptive algorithms: what fails in the nested algorithm, and a possible repair.*  The
 one-level theorem behind Theorem 11.64 needs, for a split of the coordinates into an
@@ -5528,7 +5853,9 @@ function `−ln W` changes by `φ′(κ_ψ) − φ′(κ_π)` per outer flip (th
 instance and by the known part on the fibre): it is Lipschitz only with the constant
 `u + osc φ′`, and the excess depends on the instance (workstream T, §8.1).  For a field `φ′` is
 constant — this is where the product structure was used.  *Coordinator's remark* **[C]**,
-not proved, the subject of a workstream commissioned at this checkpoint: for an
+not proved (the workstream commissioned on it failed without output; the coordinator
+took the question up in §11.25, which reduces it to type classes: Theorem 11.92,
+Conjecture 11.94): for an
 exchangeable `π`, **given the type of the inner block the two blocks are independent**
 (the inner block is uniform on its slice), so
 `A = Σ_{t_i} Σ_a ω_{t_i}(a)·W_{t_i}(a)` with `W_{t_i}(a)` the mean of `e^{−ψ(a,·)}` over the inner slice
@@ -5536,13 +5863,24 @@ exchangeable `π`, **given the type of the inner block the two blocks are indepe
 Resolving the inner block by its type therefore restores the property that fails,
 within the class "exchangeable known part, Lipschitz residual", at the price of inner
 problems on slices whose accuracy is needed only relative to the fibre total.  Whether
-the resulting recursion has `R_H` as its limit is open.
+the resulting recursion has `R_H` as its limit is open.  The referee sees no obstruction
+and names what would have to be supplied: (1) the inner problems live on slices (no
+one-flip coupling inside a slice), so the family must be enlarged to products of slices
+and the recursion is no longer scale-free — the pair `(θ_na, R_H)` becomes a family indexed
+by the conditional rate functions, and the machine-checked convergence theorem does not
+apply as it stands; (2) the accuracy must be allocated over the inner types (`t_i ↦ W_{t_i}(a)`
+is itself log-`u`-Lipschitz, but the weights `ω_{t_i}` change with `t_i`); (3) the cost of an
+outer point is a maximum over inner types and outer instances that need not be realised
+by one residual, so the limit may exceed `R_H`.
 
 *Interpretation.*  For a known part that is a function of an order parameter, with its
 density of states known, the ensemble that is uniform inside every level set and flat
-over the levels of a window — the multicanonical ensemble of Berg and Neuhaus, the target
+over the levels — the multicanonical ensemble of Berg and Neuhaus, the target
 of Wang–Landau sampling — is (i) the sampling law of a non-adaptive certified estimator
-that is optimal up to a polynomial factor for every `n`, and (ii) the Gibbs law of the
+that is optimal up to a polynomial factor for every `n` (what Theorem 11.76(a) proves is
+this for the sample stratified over **all** `n + 1` level sets; that the levels outside
+the window of contact types may be dropped at the exponential scale is not proved
+here), and (ii) flat over the window of contact types, the Gibbs law of the
 hardest symmetric instance; and (iii) at phase coexistence the perturbations that are
 hardest to exclude live on shells of barrier configurations.  *What this does not say:*
 the class is an idealised Hamming–Lipschitz class; the density of states of the known
@@ -5562,18 +5900,21 @@ formula (11.23.1) by brute force on `Q_4`–`Q_6` for random exchangeable measur
 sets; the factor `Z_H/Z_g` exceeds one), XIX.2 (Lemma 11.77: clippings against full grids of
 exit profiles with `v` and with `I`; thinning), XIX.3 (Proposition 11.82: the barrier shell,
 local maximality, the pair identity through `r_μ`, shell-cone against point-cone, the cone
-formula, the free block at `e = 0.02` and its absence at `e = 0`), XIX.4 (Proposition 11.81(b):
-`βJ*`, equality with the uniform cube below it and strict inequality above, the
+formula, the free block at `e = 0.02` and its absence at `e = 0`), XIX.4 (Proposition 11.81(b)
+at `u = 1`, `e = 0`: `βJ*`, equality with the uniform cube below it and strict inequality above, the
 second-order coefficient), XIX.5 (Theorem 11.78(a): class-level exact sums against brute
 force on `Q_8`, `Q_10`, and the two bounds at `n = 60, 120`), XIX.6 (Theorem 11.79(b):
 self-consistency of barrier shells exactly beyond `p_u`, and the two triangle-inequality
 statements exactly on a grid); 21 mutations, all detected; and the documented refutations
 DEAD.19 (binary centres do not suffice with two phases), DEAD.20 (cones around points
-fall short of shells) and DEAD.22 (near the threshold `u_top` cones around shells fall
-short as well), with one mutation each.
+fall short of shells), DEAD.22 (near the threshold `u_top` cones around shells fall
+short as well) and DEAD.25 (the junction is not at `βJ*` for every slope: at `u = 8`, `e = 0` a
+constant exit undercuts the uniform cube's shell below `βJ*`; controls at `u = 1, 2`), with
+one or two mutations each.
 
 *Prior art* (workstream T; search summaries and abstract pages only, nothing read in
-full).  The multicanonical ensemble (Berg–Neuhaus 1992); Wang–Landau sampling (2001);
+full; the referee found no statement attributed to a source contradicted by its
+abstract).  The multicanonical ensemble (Berg–Neuhaus 1992); Wang–Landau sampling (2001);
 performance limits of flat-histogram methods and the non-optimality of the flat ensemble
 for round-trip times (Dayal et al. 2004; Trebst–Huse–Troyer 2004); worst-case optimal
 importance proposals for a relative-entropy criterion (Cérou–Héas–Rousset 2022) and minimax
@@ -5583,11 +5924,22 @@ Theorem 11.45).  Not found: a statement that the flat-histogram ensemble is
 minimax-optimal for a *certified* estimate of a partition function over a class of
 perturbations of a known part; exact non-adaptive or hinted exponents for such a class;
 shells of barrier configurations as extremal perturbations.  "Not found", not "new".
+*The Scientific Discovery Division's reading* (SCI-REV-0004): the first half of Theorem
+11.76 — an invariant problem has an optimal invariant (here: type-stratified) sample — is
+a **reformulation** of the invariance principle of the theory of experimental design
+(invariant designs are optimal; Kiefer) combined with Bakhvalov's averaging over the
+group, with one small new lemma, that type-wise quantile truncation preserves the
+Lipschitz class (Theorem 11.61(a)); whether the second half (shells at coexistence) is in
+print it could not resolve.
 
-*Not done.*  A referee's report (commissioned).  The adaptive exponent (O4).  The value
+*Not done.*  The adaptive exponent (O4) beyond the cases of Proposition 11.81(c).  The value
 of the supremum beyond `e₀` (O2) and binary optimality below it (C1).  The non-adaptive
-exponent where cones around profile classes fall short (O5).  The equality "cone
-formula = sup–min" for convex `I` beyond ten numerical cases.  Asymmetric two-phase models
+exponent where cones around profile classes fall short (O5).  A proof that `R_H < R_unif`
+between the junction `min{βJ*, βJ_w}` and `βJ*` at large slopes, and of the junction formula
+itself.  The equality "cone
+formula = sup–min" for convex `I` beyond twenty-four numerical cases (a proof for
+differentiable `φ` is indicated in Theorem 11.80(d), not written out).  A referee's check
+of the completion of Proposition 11.81(c).  Asymmetric two-phase models
 with free blocks.  Product samplers and plain Monte Carlo for interacting known parts.
 Bounded accuracies beyond the two lower bounds.  Machine-checking of anything in this
 section beyond Theorem 11.76(a), (b).
@@ -5814,7 +6166,14 @@ the nested structures that do *not* work here; round–cost trade-offs in batche
 and adaptive sparse recovery; a two-batch algorithm for kernelised normalising constants
 (Cai–Scarlett 2024).  Not found: a round hierarchy for normalising constants over a
 Lipschitz class, or dilution by a flat histogram as the separating mechanism.  "Not
-found", not "new".
+found", not "new".  *Added on the evidence of the Scientific Discovery Division*
+(SCI-REV-0004; abstracts read by us): rounds of adaptivity for partition functions are a
+topic of 2026 in the *sampling-oracle* model — an oracle returns samples from the Gibbs
+measure at a chosen inverse temperature — where a non-adaptive annealing schedule loses
+only a logarithmic factor and two rounds match sequential algorithms (Harris, Kolmogorov,
+Liu, Yin, Zhang, arXiv:2604.01263; Guo, Liu, Yang, Yin, Zhang, arXiv:2609.20337): polynomial
+scale, another oracle, and the opposite conclusion; no hierarchy for value queries was
+found by the division either.
 
 ### 11.25 Slices: no known part that is a function of the type is harder than the uniform cube; reduction of algorithms to slices
 
@@ -5835,10 +6194,10 @@ with 24 mutations); the deterministic core of Theorem 11.92(b) is machine-checke
 (`proofs/Frontiers/SliceRefinement.lean`).  **Not refereed.**  Lemma 11.89 and Theorem 11.90
 are statements about explicit variational formulas and do not depend on §11.23; Corollary
 11.91 is an inequality between the formulas of §11.23 and is an inequality between
-*exponents* only through Theorems 11.78 and 11.79 (refereed "proved" by R10 as the
-eleventh checkpoint was closed; its report is applied at the twelfth).  Conjecture 11.94 is a conjecture.
+*exponents* only through Theorems 11.78 and 11.79 (refereed "proved" by R10).  Conjecture 11.94 is a conjecture.
 
-**Lemma 11.89 (odds ratio).**  Let `(B, X)` be a pair of binary random variables with
+**Lemma 11.89 (odds ratio) [known: Hasenclever–Scholz 2013, Proposition 8(a) — see "Prior art"
+below; the proof given here was found independently].**  Let `(B, X)` be a pair of binary random variables with
 positive probabilities `P_{bx}` and log odds ratio `ln[P₁₁P₀₀/(P₁₀P₀₁)] = 2s ≥ 0`.  Then
 
     I(B; X)  ≤  ln 2 − h(σ(s))  =  K(s/2),        σ(s) = 1/(1 + e^{−s}),    K(x) := x·tanh x − ln cosh x,
@@ -5884,11 +6243,23 @@ maximal in `h₁` where `δ(h₁) = T(h₂)/Δ(h₂) < 0` (by (2), (3)), i.e. at
 (6) `C` is even in `h₂`, so `I(h₁, h₂) ≤ C(h₂) ≤ C(0) = I(0, 0)`, with equality only for
 `h₂ = 0` and `h₁ = 0` (the mutual information is strictly concave in the input law).  ∎
 
-*Prior art.*  The capacity of the binary asymmetric channel and its non-uniform optimal
-input are textbook material, and capacities of binary-input channels are bounded in
-terms of the Bhattacharyya parameter (Kesal 2017, by title and abstract).  The comparison at a fixed
-odds ratio was not found in two searches; it is elementary and may well be folklore.
-"Not found", not "new".
+*Prior art: the lemma is known.*  It is Proposition 8(a) of Hasenclever and Scholz,
+*Comparing measures of association in 2×2 probability tables* (arXiv:1302.6161, 2013; Open
+Stat. Probab. J. 2016): in their coordinates `x = ln√(odds ratio)`, `y`, `z` (the two margins)
+the signed mutual information at fixed `x ≠ 0` "has exactly one maximum at the origin
+`(y, z) = (0, 0)`", the table with uniform margins — the statement above with `x = s`,
+including the equality case.  Found by the Scientific Discovery Division (SCI-REV-0004,
+workstream A1; the proposition was then read by us in the full text of the arXiv
+version; its proof, in an appendix, was not).  The first version of this section said
+"not found in two searches; may well be folklore"; our two searches had been for
+capacities of channels, not for measures of association.  The division also gives a
+five-line proof (two exponential tilts that keep the odds ratio; the chord slope of
+`ln(1 − cx)` decreases; `docs/science/workstreams/A1_REPORT.md` §2.1 on its branch), shorter
+than the one above, which is kept because the harness checks each of its steps.  The
+capacity of the binary asymmetric channel and its non-uniform optimal input are textbook
+material (bounds through the Bhattacharyya parameter: Kesal 2017, by title and abstract).
+**What is ours in this section is therefore the application** — Theorem 11.90, Corollary
+11.91 and the reduction of Theorem 11.92 — which the division did not find in print.
 
 **Slices.**  Fix `κ ∈ (0, 1)` and `u > 0`, and consider block profiles *inside the type class of
 density `κ`* (`μ̄ = ν̄ = κ`; then `MI(μ) = Σ_jλ_jKL(μ_j‖κ)`):
@@ -5998,10 +6369,11 @@ changes no exponent.**  ("`≥`" is Proposition 11.81(a): the uniform cube's opt
 an exit of minimal `MI` inside its own type class.  This closes item (δ) of §12.)
 (iii) The same equality holds whenever the uniform cube's optimal profile keeps its
 cheapest exit inside the type class `½` and `½` is a contact type — with two phases up to
-the junction of Proposition 11.81(b).  (*Referee R10, received as the eleventh checkpoint
-was closed:* the junction is at `βJ*` of that proposition for `u = 1` and, on the referee's
-grid, for `u ≤ 2`; for larger slopes it comes earlier — the global half of Proposition
-11.81(b) is false as a general statement and is corrected at the next checkpoint.)
+the junction of Proposition 11.81(b), which is at `min{βJ*, βJ_w}` on the referee's grid: at
+`βJ*` for `u = 1` and for `u ≤ 2`, earlier for large slopes at small or negative accuracies,
+where a constant exit at a well — an exit that leaves the type class — becomes feasible
+first (referee R10, M1; the first version of that proposition placed the junction at
+`βJ*` for all slopes).
 *Proof.*  Restricting the exits to `ν̄ = μ̄` shrinks the feasible sets of `r_μ` and `n_μ`, and on
 them `u·dist + λ(κ) ≤ e + MI(μ) + I(κ)` is the constraint of `r^κ_μ` at the accuracy
 `e + (I−λ)(κ) ≥ e`; feasibility of the two problems is the same condition (`λ` is
@@ -6089,8 +6461,8 @@ known part) [C].**  For the uniform measure on the type class of density `κ`:
 (ii) the exponent of non-adaptive algorithms is `N^κ = R^κ∘(S^κ)^{−1}` (`sup_mF*_{m,κ}` is a game
 function, so Theorem 11.66 **[V]** gives the pair identity);
 — *(i) and (ii) are not conjectures for a softly pinned type: there they are Theorems
-11.78–11.80, by the remark after Theorem 11.90; they are listed here because they are
-what (iii) builds on and because §11.23 is not refereed yet;* —
+11.78–11.80 (refereed), by the remark after Theorem 11.90; they are listed here because they are
+what (iii) builds on;* —
 (iii) **the exponent of adaptive algorithms without a hint is `R^κ`**: Algorithm 2L⁺ of
 §§11.18–11.19 with every split drawn at random (Lemma 11.93), the sum over the typical type
 pairs taken by Theorem 11.92(b), and the tail lemma of the cube (Harper) replaced by the
@@ -6102,9 +6474,10 @@ adaptive algorithms without a hint satisfies
     R_H(ε₁)  ≤  θ*(ε₁)  ≤  sup_κ R^κ( max(ε₁, (I−v)(κ)) )  ≤  R_unif(ε₁),
 
 with equality throughout in the cases (ii), (iii) of Corollary 11.91 — in particular
-**`θ* = R_unif` for every interaction without a field up to the junction** — and Proposition
-11.81(c) (a sketch for ferromagnets through mixtures of fields) would be superseded by a
-statement for every interaction.  What is missing for a proof of (iii) is written work,
+**`θ* = R_unif` for every interaction without a field up to the junction**.  For
+ferromagnets this much is Proposition 11.81(c), which is proved (given Theorem 11.64)
+through mixtures of fields; (iii) would give it for every interaction, antiferromagnets
+included.  What is missing for a proof of (iii) is written work,
 not an idea: the proof of Theorem 11.56 has to be gone through with product slices in
 place of product cubes (the three facts (F1)–(F3) of Theorem 11.52 hold verbatim; the
 closure test needs the tail bound in the form of an exponent with an `o(n)` slack; a failed
@@ -6466,6 +6839,11 @@ measure; the natural setting is one type class with designs in the Johnson schem
 expectations of a restricted family of observables under its Gibbs measure — has the two
 ends the other division names (linear classes: rank-many evaluations, §11.17; exponential
 families: rank-many expectations) and nothing in between.  Open, and theirs.
+(4) The Scientific Discovery Division proved the same statement independently, on the
+same day, as its "Theorem 4′" (non-adaptive algorithms need `(1 − 2δ)·2ⁿ/(|C|·|B(R−1)|)` whenever
+`ε < D_R − ln|C|`; SCI-REQ-0001); the two proofs use the same symmetrised cones.  Its
+follow-up question — what a one-body oracle is worth *with a field*, where translations
+are not symmetries — is its SCI-REQ-0001, Q2, and is being worked on.
 
 
 ## 12. Strongest unresolved questions, and what a publication would need
@@ -6539,8 +6917,11 @@ families: rank-many expectations) and nothing in between.  Open, and theirs.
    exponent — and **whether three rounds reach `h` is open**; so are the exact two-round
    exponent, strict monotonicity in the number of rounds, and the rate of convergence.
    And **finite sizes** — two
-   levels beat the plain bracket only from `n ≈ 250` on at bounded accuracy (beyond `e^{45}`
-   evaluations) and from `n ≈ 2000` at extensive ones; is there an adaptive algorithm that
+   levels beat the plain bracket only from `n ≈ 500` on at bounded accuracy and `u = 1`
+   (beyond `e^{45}` evaluations; `n ≈ 250` at the flat instance only — the worst instance at
+   finite `n` is not the flat one, ENG-RES-0008, and which instance maximises the cost of
+   Algorithm 2L⁺ at a given `n` is not known beyond that division's search) and from
+   `n ≈ 2000` at extensive ones; is there an adaptive algorithm that
    wins at sizes that can be simulated, or a lower bound showing that the gain needs
    `n ≫ 1/θ_hint`?  (iii) **instance by instance** — the zero function is the hardest instance
    with a hint (a corollary of Theorems 11.54 and 11.58); is there an adaptive algorithm
@@ -6557,7 +6938,9 @@ families: rank-many expectations) and nothing in between.  Open, and theirs.
    proof gives `n^{-1/8}`; numerically it is `O(ln n/n)`, and on the 4-cube the exact maximisers
    are not always one-centre balls: ratio `2.08`) — a weighted Harper-type inequality; bounded
    accuracies; a proof that no single tilted product measure attains the non-adaptive
-   exponent when `p ≠ ½` (numerical in three examples); an end-to-end simulation of the
+   exponent at extensive accuracies when `p ≠ ½` (numerical in three examples), and whether
+   the product measure with the capacity-achieving marginal attains it on the whole class
+   at bounded accuracy (it does at cone instances; Theorem 11.61); an end-to-end simulation of the
    nested algorithm with a field; instance-optimality beyond symmetric
    instances; larger alphabets and sites of several types — **§11.26: theorems by transfer,
    unrefereed** (open there: a referee; concavity of `F*` for two letters; which site law
@@ -6566,7 +6949,7 @@ families: rank-many expectations) and nothing in between.  Open, and theirs.
    beyond names — bounds on `E_0`, algorithms for `C_t`, strong-converse analogues); **known parts with
    interactions** — for functions of the type (mean-field models) §11.23 settles the
    non-adaptive problem and the hinted exponent of symmetric instances for every rate
-   function, unrefereed; open there, in order of importance: (α) *the adaptive exponent
+   function (refereed, R10); open there, in order of importance: (α) *the adaptive exponent
    without a hint* (conjecture: the single-letter value `R_H` of the flat-histogram
    instance; the nested algorithm fails because fibre averages are not Lipschitz relative
    to a reference.  §11.25 reduces the question to the uniform measure on one type class
@@ -6577,12 +6960,19 @@ families: rank-many expectations) and nothing in between.  Open, and theirs.
    products of type classes, and — when exits that change the type matter — the exact
    exponent between `R_H` and the bound from type classes**, which needs information
    across type classes; nesting by the type of the inner block leads to a recursion over
-   rate functions that we could not close); (β) the value
+   rate functions that we could not close.  For ferromagnets the uniform cube's exponent
+   is already an upper bound, through mixtures of fields: Proposition 11.81(c)); (β) the value
    of the single-letter supremum with two phases beyond the accuracy `e₀` at which sets
    around one centre stop being extremal, and a proof that they are extremal below it;
    (γ) without convexity: strict monotonicity of the shear and the witness condition for
    the pair identity, which fails for cones around profile classes near the threshold at
-   which the top of the barrier leaves the contact set; (δ) ~~whether an
+   which the top of the barrier leaves the contact set (there the non-adaptive exponent is
+   proved to lie in `[0.00184, 0.00338]` only); (γ′) the junction with the uniform cube: a
+   proof that it is at `min{βJ*, βJ_w}` — the smaller of the coupling at which the symmetric
+   exit of the uniform cube's profile stops being a local minimum and the coupling at
+   which a constant exit at a well becomes feasible — and that `R_H < R_unif` beyond it
+   (Proposition 11.81(b); the second would follow from uniqueness of the uniform cube's
+   optimal profile among laws of block types of type `½`); (δ) ~~whether an
    antiferromagnet without a field — in the limit a single slice — has exactly the
    uniform cube's exponents~~ **settled in §11.25** (Corollary 11.91: yes, and no
    function-of-type known part exceeds them; unrefereed); (ε) mean-field Potts models and two
@@ -6683,7 +7073,15 @@ families: rank-many expectations) and nothing in between.  Open, and theirs.
    (a4) A rate for the whole body (only the compact end is settled).  (a5) Anything
    off-lattice: there the profile is a function, the plateau is exponential in
    `L·S_c·M/ε₁`, and only a heuristic estimate exists; a prediction of the measured growth
-   rate per torsion needs the distance-entropy function of the profile classes.  (a6) The
+   rate per torsion needs the distance-entropy function of the profile classes.  The
+   Computational Research Division has measured it up to 14 torsions (ENG-RES-0009): at
+   `L = 1` the entropy per torsion of a profile ball of radius `N/2` is `0.33` and still rising
+   by `0.013` per torsion — the value `0.39` that we had inferred from the growth of the
+   covering numbers (THY-RES-0002) is a statement about a limit these sizes have not
+   reached, neither established nor excluded; at `L = ⅕` it has nearly converged at `0.65`
+   (inferred: `0.6`); and the number of pairs per bead within the cutoff is `3.1` at 17 beads
+   against the bulk value of about `63` on which the heuristic plateau estimate rests —
+   **every enumerable chain is at one twentieth of the bulk coordination**.  (a6) The
    abstract limit theorems are machine-checked (`CoverStability.lean`, `SetLimit.lean`); the
    two lattice lemmas that feed them — the site-set reduction and the concatenation of
    bridges — are not.  (b) an upper bound for the class
@@ -6848,12 +7246,29 @@ optimisation); Balkanski & Singer (2018); Bubeck, Jiang, Lee, Li, Sidford (2019)
 Diakonikolas & Guzmán (2018); Agarwal, Agarwal, Assadi, Khanna (2017); Gao, Han, Ren, Zhou
 (2019); Price & Woodruff (2012); Cai & Scarlett (2024); Novak (2023 survey on adaption).
 Verification status: search summaries only (workstream U, `docs/workstreams/U_REPORT.md` §7).
-Slices and the odds-ratio lemma (§11.25): the capacity of the binary asymmetric channel is
+Slices and the odds-ratio lemma (§11.25): **Hasenclever & Scholz (2013; arXiv:1302.6161;
+Open Stat. Probab. J. 2016), *Comparing measures of association in 2×2 probability
+tables* — Proposition 8(a) is Lemma 11.89** (found by the Scientific Discovery Division;
+the statement read by us in the arXiv full text, the proof not); the capacity of the binary asymmetric channel is
 textbook material (e.g. Mondelli, Hassani, Urbanke 2014, *How to achieve the capacity of
 asymmetric channels*, for the non-uniform optimal input); Kesal (2017, *Generalized bounds
 on the capacity of the binary-input channels*, bounds through the Bhattacharyya
-parameter).  Verification status: titles and search summaries only; two searches for the
-comparison at a fixed odds ratio found nothing.
+parameter).  Verification status of these two: titles and search summaries only; our two
+searches for the comparison at a fixed odds ratio (among channel capacities) found
+nothing, the Scientific Discovery Division found it among measures of association.
+Added on the evidence of SCI-REV-0004 (the division read them in full where accessible;
+*we* verified only what is said here): Suárez, Silbey, Oppenheim (2012, *Phase transition
+in the Jarzynski estimator of free energy differences*, Phys. Rev. E 85, 051108,
+arXiv:1108.5783 — subject, eq. (31) and the bias formula verified by us; §11.10, §11.16);
+Karnin (2016, verification-based solutions for structured bandits) and Garivier & Kaufmann
+(2016, optimal best-arm identification with fixed confidence) for "explore, then verify"
+(§11.18; not opened by us); Guo, Liu, Yang, Yin, Zhang (2026, arXiv:2609.20337) and Harris,
+Kolmogorov, Liu, Yin, Zhang (2026, arXiv:2604.01263) on non-adaptive and two-round
+annealing in the sampling-oracle model (§11.24; abstracts read by us); Beh & Morio (2026)
+on minimax proposals, Idais & Schwabe and Kiefer (1959) on invariant designs (§11.23),
+Williams (2022) for the value of the mutual information at uniform margins, Novak (1995)
+as quoted in Krieg–Novak–Ullrich (2025) on adaption for non-symmetric classes — named by
+the division, not checked by us.
 Heteropolymer product landscapes and the channel-coding dictionary (§11.26): Csiszár
 (1995, generalized cutoff rates and Rényi's information measures: the definitions of the
 Rényi capacity coincide with the Rényi radius); Sibson (1969, information radius);

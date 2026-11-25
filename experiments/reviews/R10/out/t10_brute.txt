@@ -1,0 +1,11 @@
+(2.3) and A(dip)/A = 1+Phi: 266 cases, worst relative error 1.35e-15; dips not in L_u: 0
+T4: max of Z_g Phi_g+ / (Z_H Phi_H+) - 1 = 4.44e-16 (must be <= 0);  largest Phi_g+/Phi_H+ = 2.1614
+   two phases n=8 u=1.0: Phi_0+/Phi_H+ = 2.0649  Z_H/Z_0 = 2.0649  (n+1 = 9)
+   two phases n=8 u=3.0: Phi_0+/Phi_H+ = 2.0649  Z_H/Z_0 = 2.0649  (n+1 = 9)
+   two phases n=10 u=6.0: Phi_0+/Phi_H+ = 2.2095  Z_H/Z_0 = 2.2095  (n+1 = 11)
+   field+coupling n=8 u=1.0: Phi_0+/Phi_H+ = 2.0060  Z_H/Z_0 = 2.0060  (n+1 = 9)
+   field+coupling n=8 u=3.0: Phi_0+/Phi_H+ = 2.2146  Z_H/Z_0 = 2.2146  (n+1 = 9)
+   field+coupling n=10 u=6.0: Phi_0+/Phi_H+ = 2.5102  Z_H/Z_0 = 2.5102  (n+1 = 11)
+block sums against brute force: 236 cases, worst error 1.38e-15
+T1(a): 108 random (psi, q): violations 0
+time 1.8537044525146484

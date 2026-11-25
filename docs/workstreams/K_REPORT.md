@@ -32,6 +32,33 @@
 > and Theorem 11.53]" also rests on Harper's theorem, the binomial median, Chernoff–Hoeffding
 > and the paper chain K1–K2; "deterministic core machine-checked" means four algebraic lemmas.
 
+> **Errata after the Computational Research Division's checkpoint 3** (ENG-RES-0008 and
+> ENG-MSG-0003 on branch `research/ubuntu-engineering`: exact counts of evaluations of
+> Algorithm 2L⁺ under a search over instances and inner behaviours; all 324 rows of
+> `out_radial_trajectory.txt` and all 18 rows of `out_flat_cost_bounded.txt` reproduced by an
+> implementation written from §§2.1–2.3; no claim of Theorem K1 violated in more than seven
+> million mean runs).  The text below is unchanged.  **(e1) §6.4, "what the algorithm
+> costs", and the sentences that quote it (§0; §6.4 "two levels beat the plain bracket from
+> `n ≈ 250`"; the Summary) are best-case numbers: the cost at the flat instance with the outer
+> fraction `φ` tuned for the flat instance.**  The flat instance is not the worst instance
+> at finite `n`: with the flat-tuned `φ` a radial instance "flat bulk with a slightly
+> supercritical dip", or a cone, costs `e^{71}` times more at `n = 1000` and `e^{513}` times more
+> at `n = 64 000` (`u = 1`); tuned against the worst instance the best `φ` is `0.50`–`0.60`, the cost
+> is `1.04·na` at `n = 1000` and `0.537·na` at `n = 64 000` (instead of `0.70`, `0.512`), and the crossover
+> with the plain bracket is at `n ≈ 500` (`u = 1`) and `n ≈ 2000` (`u = ½`).  The exponent `τ₂` is not
+> affected.  **(e2) Two rows of `out_radial_trajectory.txt` depend on a floating-point tie**
+> ("random walk 1" at `u = 1`, `n_o = 1000`, both variants): with ties treated exactly the
+> closing radius is `311` (not `312`), there are `114` negligible levels (not `113`) and
+> `ln M/(n_o a) = 0.7573` (not `0.7511`); the reference point's weight lies exactly on the level
+> grid whenever its fibre is flat and `un/λ` is an integer, so the tie of (m10) is
+> structural, not a rare coincidence.  **(e3) The cap `M̄` can be lowered** to
+> `2·max{e^λM†, M‡}`, `M‡ = K/((1−η)·2^{−n_o}|B(n_o, r† − ⌈λ/u⌉)|)` — a constant multiple of `M†` (theory
+> report §11.19, remark after Theorem 11.56; the division had observed `M ≤ 1.8·M†` in its
+> runs).  **(e4)** For the outer loop radial instances are not "a small subfamily": by
+> Harper's theorem the tail functions of all `u`-Lipschitz outer landscapes are those of
+> landscapes whose level sets are initial segments of the simplicial order (the division's
+> argument, same remark).
+
 Independent report.  All scripts and outputs named below were produced in the workstream's
 scratch directory (`python3 <script>`, numpy only, `ulimit -v 4000000`, each run under ten
 minutes) and are reproduced in `experiments/workstreams/K/`.  Nothing in the repository was

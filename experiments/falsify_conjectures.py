@@ -5698,6 +5698,57 @@ def t_two_level_plus(rng, trials):
     return True, stats
 
 
+@conjecture("XVI.4 Sample sizes of Algorithm 2L+ (remark after Theorem 11.56; a question of ENG-RES-0008): E_{r-1} <= e^{-u} E_r on exact tables, and with Delta = ceil(lambda/u), pi_ddag = 2^{-n_o} |B(n_o, r_dag - Delta)| and M_ddag = K/((1 - eta) pi_ddag) (K 2^{n_o}/(1 - eta) if r_dag < Delta) every sample of the algorithm is K or smaller than 2 max(e^lambda M_dag, M_ddag) -- in the runs, on outer landscapes 'plateau, then cone' with real fluctuations and three inner behaviours; the cap M_bar of the theorem is larger by a factor of order nu_0")
+def t_two_level_plus_sample_sizes(rng, trials):
+    # (i) the termwise inequality behind the argument
+    for m, u in ((30, 0.5), (60, 1.0), (120, 2.0), (200, 0.3)):
+        _, _, E, _ = ba_exact_tables(m, u, m)
+        for r in range(1, m + 1):
+            if E[r - 1] > math.exp(-u) * E[r] * (1 + 1e-12):
+                return False, dict(reason="E_{r-1} <= e^{-u} E_r fails", m=m, u=u, r=r)
+    # (ii) runs
+    def plateau_cone(n_o, u, d0, frac):
+        binom = [math.comb(n_o, j) for j in range(n_o + 1)]
+        f = u * frac * np.maximum(np.arange(n_o + 1, dtype=float) - d0, 0.0)
+        return np.exp(-f), np.array(binom, dtype=float) / 2 ** n_o, float(-f[0])
+    pars = [dict(lam=0.5, eta=0.25, etap=0.5, theta=2.0, b=0.5, delta=0.01, nu1=1.0),
+            dict(lam=1.0, eta=0.5, etap=1.0, theta=2.0, b=3.0, delta=0.01, nu1=1.0),
+            dict(lam=0.5, eta=0.25, etap=0.5, theta=0.5, b=1.0, delta=0.01, nu1=1.0),
+            dict(lam=1.0, eta=0.5, etap=1.0, theta=0.3, b=1.0, delta=0.01, nu1=1.0)]
+    stats = dict(runs=0, samples_above_M_dag=0, largest_over_new_cap=0.0, largest_over_M_dag=0.0, smallest_old_cap_over_new=math.inf)
+    cells = [(24, 0.5), (20, 1.0), (24, 1.0), (20, 2.0)] if trials < 100 else [(24, 0.5), (20, 1.0), (24, 1.0), (28, 1.0), (20, 2.0), (24, 2.0), (20, 0.5)]
+    for n_o, u in cells:
+        for par in pars:
+            for d0 in (0, 1, 2, 4, 6):
+                for frac in (1.0, 0.6):
+                    vals, probs, lnw = plateau_cone(n_o, u, d0, frac)
+                    mode = int(rng.integers(3))
+                    run = ba_two_level_plus(rng, vals, probs, lnw, n_o, n_o + 2, u, par, mode, max_points=1_500_000)
+                    if "error" in run:
+                        if run["error"].startswith("sample beyond"):
+                            continue
+                        return False, dict(reason=run["error"], n_o=n_o, u=u, d0=d0)
+                    C = run["C"]
+                    Delta = math.ceil(par["lam"] / u - 1e-12)
+                    if C["rdag"] >= Delta:
+                        Mdd = C["K"] / ((1 - par["eta"]) * (C["ball"][C["rdag"] - Delta + 1] / 2 ** n_o))
+                    else:
+                        Mdd = C["K"] * 2 ** n_o / (1 - par["eta"]) * (1 + 1e-9)
+                    cap = 2 * max(math.exp(par["lam"]) * C["Mdag"], Mdd)
+                    stats["smallest_old_cap_over_new"] = min(stats["smallest_old_cap_over_new"], C["Mbar"] / cap)
+                    for lv in run["levels"] + [run["last"]]:
+                        if lv["M"] > C["K"]:
+                            if lv["M"] >= cap:
+                                return False, dict(reason="a sample is not smaller than 2 max(e^lambda M_dag, M_ddag)", n_o=n_o, u=u, d0=d0, frac=frac, par=par, M=lv["M"], cap=cap, M_dag=C["Mdag"])
+                            stats["largest_over_new_cap"] = max(stats["largest_over_new_cap"], lv["M"] / cap)
+                            stats["largest_over_M_dag"] = max(stats["largest_over_M_dag"], lv["M"] / C["Mdag"])
+                            stats["samples_above_M_dag"] += lv["M"] > C["Mdag"]
+                    stats["runs"] += 1
+    if stats["runs"] < 40 or stats["samples_above_M_dag"] < 5 or stats["largest_over_new_cap"] < 0.4:
+        return False, dict(reason="the test has no power", **stats)
+    return True, stats
+
+
 # ----------------------------------------------------------------------------------------------
 # XVII. With a known part (a field): the p-biased cube (theory report 11.20)
 # ----------------------------------------------------------------------------------------------
@@ -5929,6 +5980,59 @@ def t_field_monotone(rng, trials):
                 return False, dict(reason="the comparison of interval averages of tanh fails at the maximiser", u=u, t=t, theta=float(theta), margin=margin)
             stats["cases"] += 1
     return True, stats
+
+
+@conjecture("XVII.5 Theorem 11.61, product samplers at vanishing accuracy (observation (a) of SCI-REV-0004): with a field p and slope u the Gibbs laws of the cones are the output laws of the binary channel W(.|b) = letter law of a cone whose centre has the letter b, the exponent a of non-adaptive algorithms at vanishing accuracy is its capacity max_m I(S;X), and by capacity = information radius the lower bound max(phi_0, phi_1)(0+) = max_b KL(W(.|b) || Bern(r)) for a product sampler Bern(r)^n has the minimum a over r, attained at the capacity-achieving OUTPUT marginal r* (not at r = p, and not at the optimal input m*): at u = 2 and logit p = -0.5, -1, -2, -3: a = 0.3162, 0.2836, 0.1841, 0.0928, r* = 0.4308, 0.3607, 0.2225, 0.1124, plain Monte Carlo 0.4078, 0.4621, 0.4338, 0.2732; at extensive accuracy the best product sampler is strictly worse than theta_na in the example (p, u, x) = (0.1, 2, 0.25 E)")
+def t_field_product_sampler_capacity(rng, trials):
+    u = 2.0
+    kl = lambda x, y: x * math.log(x / y) + (1 - x) * math.log((1 - x) / (1 - y))
+    hb = lambda x: -(x * math.log(x) + (1 - x) * math.log(1 - x))
+    table = {-0.5: (0.3162, 0.4308, 0.4078), -1.0: (0.2836, 0.3607, 0.4621), -2.0: (0.1841, 0.2225, 0.4338), -3.0: (0.0928, 0.1124, 0.2732)}
+    out = {}
+    for lg, (a_ref, r_ref, mc_ref) in table.items():
+        p = 1 / (1 + math.exp(-lg))
+        q = 1 - p
+        w0 = p * math.exp(-u) / (q + p * math.exp(-u))        # P(X = 1 | centre letter 0)
+        w1 = p / (p + q * math.exp(-u))                       # P(X = 1 | centre letter 1)
+        # capacity by golden section over the input law m = P(S = 1)
+        mi = lambda m: hb(m * w1 + (1 - m) * w0) - m * hb(w1) - (1 - m) * hb(w0)
+        negC, m_star = mf_golden(lambda m: -mi(m), 1e-9, 1 - 1e-9, tol=1e-13)
+        C = -negC
+        r_star = m_star * w1 + (1 - m_star) * w0
+        # information radius: min over r of the larger divergence
+        rad, r_min = mf_golden(lambda r: max(kl(w0, r), kl(w1, r)), w0 + 1e-12, w1 - 1e-12, tol=1e-13)
+        mc = max(kl(w0, p), kl(w1, p))
+        if abs(C - rad) > 1e-9 or abs(r_min - r_star) > 1e-6:
+            return False, dict(reason="capacity = information radius, attained at the capacity-achieving output marginal", logit=lg, capacity=C, radius=rad, r_min=r_min, r_star=r_star)
+        if abs(kl(w0, r_star) - C) > 1e-7 or abs(kl(w1, r_star) - C) > 1e-7:
+            return False, dict(reason="both divergences equal the capacity at r*", logit=lg)
+        if abs(C - a_ref) > 6e-5 or abs(r_star - r_ref) > 6e-5 or abs(mc - mc_ref) > 6e-5:
+            return False, dict(reason="tabulated values", logit=lg, a=C, r_star=r_star, plain_monte_carlo=mc)
+        if not (mc > C + 0.05 and abs(r_star - p) > 0.04 and abs(r_star - m_star) > 0.02):
+            return False, dict(reason="plain Monte Carlo is strictly worse; r* is neither p nor the optimal input law", logit=lg, p=p, r_star=r_star, m_star=m_star)
+        out[lg] = (round(C, 5), round(r_star, 5))
+    # extensive accuracy: (p, u, x) = (0.1, 2, 0.25 E): the best product sampler has 0.0451 against theta_na = 0.0440 (Theorem 11.61)
+    p, q = 0.1, 0.9
+    eta0 = p * math.exp(-u) / (q + p * math.exp(-u))          # the letter differs from the centre letter 0
+    eta1 = q * math.exp(-u) / (p + q * math.exp(-u))          # the letter differs from the centre letter 1
+    E = 0.212295                                              # the threshold of the field case (Theorem 11.59; THY-MSG-0009 section 3.1)
+    x = 0.25 * E
+
+    def phi(prior, eta):
+        if prior <= eta or kl(prior, eta) <= x:
+            return 0.0
+        lo, hi = eta, prior
+        for _ in range(100):
+            mid = 0.5 * (lo + hi)
+            if kl(mid, eta) < x:
+                lo = mid
+            else:
+                hi = mid
+        return kl(0.5 * (lo + hi), prior)
+    best, r_best = mf_golden(lambda r: max(phi(r, eta0), phi(1 - r, eta1)), 0.02, 0.6, tol=1e-10)
+    if abs(best - 0.0451) > 2e-4 or best < 0.0440 + 5e-4:
+        return False, dict(reason="at the extensive accuracy 0.25 E the best product sampler has 0.0451 > theta_na = 0.0440", best=best, r=r_best)
+    return True, dict(values=out, best_product_at_extensive_accuracy=best, r=r_best)
 
 
 # ----------------------------------------------------------------------------------------------
@@ -8386,6 +8490,47 @@ def t_dead_uniform_law_hardest(rng, trials):
         return False, dict(reason="three letters, Hamming envelope: at u = 1 the law (0.05, 0.5, 0.45) has a larger threshold than the uniform law, at u = 0.5 the law (0.02, 0.49, 0.49) has a larger exponent at vanishing accuracy; for two letters the uniform law is the hardest in all 18 cases tried",
                            E_field=E_field, E_uniform=E_unif, h_near_two_letters=h_near, h_uniform=h_unif)
     return True, dict(E_field=E_field, E_uniform=E_unif, h_near=h_near, h_uniform=h_unif, two_letters_ok=two)
+
+
+@conjecture("DEAD.25 For B = 0 the uniform cube's optimal shell (1/2; p_u, p_u) keeps the uniform cube's value at every coupling 1 < beta J < beta J*(e, u), for every slope and accuracy, so that R_H(e) = R_unif(e) up to beta J* (Proposition 11.81(b) as first stated: 'the local minimum is then the global one'; true at u = 1 and u = 2)", expect_fail=True)
+def t_dead_junction_large_slope(rng, trials):
+    u, e = 8.0, 0.0
+    frac = 0.99                                   # the coupling is 1 + frac (beta J* - 1) < beta J*
+    half = np.array([0.5, 0.5])
+
+    def cell(u_, frac_):
+        rho = (math.log(2 / (1 + math.exp(-u_))) + e) / u_
+        c2 = 1 / (2 * rho * (1 - rho)) - 2
+        bstar = 1 + u_ * c2 / (2 * math.log((1 - rho) / rho))
+        bJ = 1 + frac_ * (bstar - 1)
+        pu = 1 / (1 + math.exp(u_))
+        M = mf_model(bJ, 0.0, u_, K=400001)
+        return bstar, bJ, pu, M
+
+    bstar, bJ, pu, M = cell(u, frac)
+    Ru = mf_R_unif(e, u)
+    mu = np.array([1 - pu, pu])
+    val = mf_r(M, half, mu, e, G=3000)
+    # the far exit in closed form: the constant profile at a well (MI = 0); it is feasible iff u dist + I <= e + alpha
+    m = 1.0
+    for _ in range(400):
+        m = math.tanh(bJ * m)
+    kw = (1 - m) / 2
+    far = u * (0.5 - min(pu, kw)) + float(M["I"](kw))
+    budget = e + mf_alpha(M, half, mu)
+    barrier, E_unif = float(M["I"](0.5)), math.log(math.cosh(u / 2))
+    # the best symmetric shell (1/2; x, x) on a scan: positive only beyond the cliff where every constant exit is infeasible
+    best = max(mf_r(M, half, np.array([1 - x, x]), e, G=1200) for x in np.linspace(0.02, 0.06, 21))
+    # controls: the same fraction of the way to beta J* at u = 1 and u = 2, where the statement holds
+    ctrl = True
+    for uc in (1.0, 2.0):
+        _, _, puc, Mc = cell(uc, frac)
+        ctrl &= abs(mf_r(Mc, half, np.array([1 - puc, puc]), e, G=3000) - mf_R_unif(e, uc)) < 2e-7
+    if (abs(bstar - 8.3366) < 2e-4 and far < budget - 0.1 and barrier > E_unif - e + u * max(pu - kw, 0.0) and val < 1e-9
+            and best < Ru - 0.02 and ctrl):
+        return False, dict(reason="at u = 8, e = 0 and beta J = 8.263 < beta J* = 8.337 the barrier I(1/2) = 3.438 exceeds the uniform cube's threshold E_unif = 3.307, the constant exit at a well is feasible for the uniform cube's shell, its value is 0, and the best symmetric shell has 0.367 against R_unif = 0.3985; at u = 1, 2 the value is the uniform cube's",
+                           bstar=bstar, coupling=bJ, far_exit=far, budget=budget, barrier=barrier, E_unif=E_unif, value_at_uniform_shell=val, best_symmetric_shell=best, R_unif=Ru)
+    return True, dict(bstar=bstar, coupling=bJ, far_exit=far, budget=budget, value_at_uniform_shell=val, best_symmetric_shell=best, R_unif=Ru, controls=ctrl)
 
 
 def main():

@@ -1,0 +1,5 @@
+phi1 = -1.5(k-0.4)^2 + 0.8k^4, u=1.0, e=0.0000: I convex: True (min I'' = 2.566);  binary sup-min 0.029053486 (m; a, b) = (0.5030; 0.2921, 0.2470);  cone formula 0.029053486 (m = 0.5030);  cone - binary = +2.11e-10;  best of 5 multi-atom runs 0.029053486 (excess +1.00e-11)   t=50
+phi1 = -1.5(k-0.4)^2 + 0.8k^4, u=1.0, e=0.0360: I convex: True (min I'' = 2.566);  binary sup-min 0.014128764 (m; a, b) = (0.5043; 0.2920, 0.2471);  cone formula 0.014128761 (m = 0.5043);  cone - binary = -2.60e-09;  best of 6 multi-atom runs 0.014128763 (excess -7.01e-10)   t=102
+phi1 = -1.5(k-0.4)^2 + 0.8k^4, u=2.0, e=0.0000: I convex: True (min I'' = 2.566);  binary sup-min 0.097110578 (m; a, b) = (0.5031; 0.1307, 0.1086);  cone formula 0.097110578 (m = 0.5030);  cone - binary = -4.39e-10;  best of 5 multi-atom runs 0.097110578 (excess -2.04e-10)   t=158
+phi1 = -1.5(k-0.4)^2 + 0.8k^4, u=2.0, e=0.1301: I convex: True (min I'' = 2.566);  binary sup-min 0.046682686 (m; a, b) = (0.5048; 0.1306, 0.1086);  cone formula 0.046682684 (m = 0.5048);  cone - binary = -1.65e-09;  best of 8 multi-atom runs 0.046682684 (excess -1.40e-09)   t=209
+time 209.37281847000122

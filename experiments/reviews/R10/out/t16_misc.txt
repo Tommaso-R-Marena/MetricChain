@@ -1,0 +1,19 @@
+wells at 0.07072 and 0.92928; barrier I(1/2) = 0.115194; largest slope of I on the barrier flank: 0.41509; contact set (u=1): [(np.float64(0.0203), np.float64(0.9797))]
+u_top = max chord slope from the top = 0.28153 at kappa = 0.1183 (report 0.28153 at 0.1183); mean slope to the bottom of the well: 0.26834 (report 0.26834)
+   u=0.2815: (I - v)(1/2) = 1.306e-05; contact pieces [(np.float64(0.0476), np.float64(0.1183)), (np.float64(0.8817), np.float64(0.9524))]
+   u=0.2816: (I - v)(1/2) = 0.000e+00; contact pieces [(np.float64(0.0476), np.float64(0.1183)), (np.float64(0.4999), np.float64(0.5001)), (np.float64(0.8817), np.float64(0.9524))]
+   u=0.3: (I - v)(1/2) = 0.000e+00; contact pieces [(np.float64(0.0465), np.float64(0.1237)), (np.float64(0.4745), np.float64(0.5255)), (np.float64(0.8763), np.float64(0.9535))]
+shell x | alpha(mu) | min_nu G_mu(nu) on a 2000^2 grid (polished) | self-consistent? | second-best local minimum of G - alpha away from mu
+   x=0.24000  alpha=0.257261421  min G=0.254560616 at nu=(0.7600,0.3161)  False   min of G - alpha at distance > 0.05 from mu: -0.00269
+   x=0.26000  alpha=0.235284432  min G=0.235033683 at nu=(0.7177,0.2600)  False   min of G - alpha at distance > 0.05 from mu: +0.00012
+   x=0.26894  alpha=0.226138241  min G=0.226138241 at nu=(0.7311,0.2689)  True   min of G - alpha at distance > 0.05 from mu: +0.00122
+   x=0.28000  alpha=0.215388032  min G=0.215388032 at nu=(0.7200,0.2800)  True   min of G - alpha at distance > 0.05 from mu: +0.00254
+   x=0.29800  alpha=0.199181179  min G=0.199181179 at nu=(0.7020,0.2980)  True   min of G - alpha at distance > 0.05 from mu: +0.00464
+   x=0.35000  alpha=0.160894710  min G=0.160894710 at nu=(0.6500,0.3500)  True   min of G - alpha at distance > 0.05 from mu: +0.01038
+   theta_shell(X=0.01; x = p_u) = 0.048966  (grid; tends to MI(mu) = KL(p_u||1/2) = 0.110944)
+   theta_shell(X=0.001; x = p_u) = 0.089774  (grid; tends to MI(mu) = KL(p_u||1/2) = 0.110944)
+   theta_shell(X=0.0001; x = p_u) = 0.104400  (grid; tends to MI(mu) = KL(p_u||1/2) = 0.110944)
+   theta_shell(X=3e-05; x = p_u) = 0.107311  (grid; tends to MI(mu) = KL(p_u||1/2) = 0.110944)
+a from cones around points: 0.044351 at centre type m = 0.5000 (report 0.0446);  Gibbs shell of the cone m=1/2: nu = [0.23764942 0.04048059]
+cone formula R_cone(0) = 0.0107007 at m = 0.5000 (report 0.0107007);  zero residual R_0(0) = 0.0087471 [0.03214@0.59337  0.19706@0.40663] (report 0.0087471)
+time 20.06570553779602
