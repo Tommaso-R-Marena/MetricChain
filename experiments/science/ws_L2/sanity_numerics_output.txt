@@ -15,8 +15,17 @@ R6.2 (exact sums by classes; hypotheses (i) W >= 8 r1 e^u 2^n, (ii) omega_+1 <= 
    example n=24, r1=5, u=4.0, D=24: W/(8 r1 e^u 2^n) = 0.0205, omega_+1 = 0, U'_+1-U0 = -4.3177, U'_-1-U0 = +0.0631
    signs fail with (ii) true, (i) false:  (12, 1, 0.25, 2, -0.0011404219543100073, 0.0)
    signs fail with (i) true, (ii) false:  (12, 4, 4.0, 1, -4.004417742287082, -1.7763568394002505e-15)
+R6.2 witness of the Lean file (n=4, r1=2, u=6, antipodal centres):
+   (i)  W / (8 r1 e^u 2^n) = 1.5915 (>= 1),  (ii) omega_+1 = 0.0 <= 67.905
+   U'_+1 - U0 = -5.985529,  U'_-1 - U0 = +0.014471,  s* = -0.000193786,  U'_s* - U0 = 0.0e+00
+   ln Z'_s* - ln Z0 = 0.692517 >= ln(1 + e^-u (1 - 1/r1)) = 0.001239
+A11 Remark (1), products of chains (200 instances, 1..3 sites, 1..3 levels, signed costs): worst violations: admissibility 1.1e-15, Holley 2.4e-15, sandwich 4.4e-16
 A1.2: 300 instances, 1..3 sites, 2..3 letters, asymmetric envelopes:
-   item 2, worst violation of the window inequalities (all sites, all conditioning sets) 4.44e-16
-   item 3, chain rule identity error 1.3e-15; least slack of sum of window maxima - KL -6.66e-16
-   additive instances: |KL - sum of site KLs| <= 1.3e-15
+   item 2, worst violation of the window inequalities (all sites, all conditioning sets) 3.33e-16
+   item 3, chain rule identity error 8.9e-16; least slack of sum of window maxima - KL -6.66e-16
+   additive instances: |KL - sum of site KLs| <= 1.8e-15
 all checks passed
+
+real	1m36.465s
+user	0m41.388s
+sys	0m0.451s

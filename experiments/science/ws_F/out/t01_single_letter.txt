@@ -1,0 +1,37 @@
+== (1) closed form of Thm 11.59(b) against the exact 2x2 game value ==
+max |F_game - F_closed| over 2000 random (p,u,gamma,t): 1.4663183861562956e-14
+
+== (2) F*(t): Sibson form (max over M) against max over gamma of the game; Renyi-centre check ==
+max |F*_Sibson - max_gamma F|: 2.8449465006019636e-16   max |gamma*(centre) - argmax gamma|: 2.3104451242483837e-07
+
+== (3) table of §11.20 (u = 2): theta, R_0(0+), R^max(0+), gamma*, a ==
+printed: theta  0: .0973 .0973 0 .3278 | 0.5: .0929 .0938 -.170 .3162 | 1: .0811 .0839 -.330 .2836 | 2: .0487 .0542 -.583 .1841 | 3: .0230 .0272 -.734 .0928
+theta= 0.0 p=0.50000  R_0(0)=0.0973 (closed max_m: 0.0973)  R^max(0)=0.0973  gamma*=+0.000  a=0.3278   [t*=0.4645, m*=0.5000]
+theta= 0.5 p=0.37754  R_0(0)=0.0929 (closed max_m: 0.0929)  R^max(0)=0.0938  gamma*=-0.170  a=0.3162   [t*=0.4647, m*=0.5018]
+theta= 1.0 p=0.26894  R_0(0)=0.0811 (closed max_m: 0.0811)  R^max(0)=0.0839  gamma*=-0.330  a=0.2836   [t*=0.4651, m*=0.5036]
+theta= 2.0 p=0.11920  R_0(0)=0.0487 (closed max_m: 0.0487)  R^max(0)=0.0542  gamma*=-0.583  a=0.1841   [t*=0.4664, m*=0.5062]
+theta= 3.0 p=0.04743  R_0(0)=0.0230 (closed max_m: 0.0230)  R^max(0)=0.0272  gamma*=-0.734  a=0.0928   [t*=0.4675, m*=0.5076]
+
+== (4) numbers quoted in §11.20: p=0.1,u=2,eps1=0.3E: R_0=0.019497, R^max=0.023270 ==
+E = 0.21229437560763148  R_0(0.3E) = 0.019496697895270042  R^max(0.3E) = 0.023270356861389188
+theta_na at (0.1,2,0.05E),(0.1,2,0.25E),(0.3,1,0.25E): printed 0.1020, 0.0440, 0.0243
+    0.1 2 0.05 E=0.212294 theta_na = 0.1020
+    0.1 2 0.25 E=0.212294 theta_na = 0.0440
+    0.3 1 0.25 E=0.103131 theta_na = 0.0243
+§11.26 table, site 'bin' (pi=(0.7,0.3), u=1): printed E=0.103131 a=0.095301 h=0.025034 R(0.3E)=0.012209 theta_na(0.3E)=0.019941
+    E=0.103131 a=0.095301 h=0.025034 R(0.3E)=0.012209 theta_na(0.3E)=0.019941
+
+== (5) pair identity theta_na(e + R^max(e)) = R^max(e) ==
+   p=0.1 u=2.0 e=0.1E: R^max=0.03877733  theta_na(e+R)=0.03877733
+   p=0.1 u=2.0 e=0.3E: R^max=0.02327036  theta_na(e+R)=0.02327036
+   p=0.1 u=2.0 e=0.6E: R^max=0.00755407  theta_na(e+R)=0.00755407
+   p=0.3 u=1.0 e=0.1E: R^max=0.02024093  theta_na(e+R)=0.02024093
+   p=0.3 u=1.0 e=0.3E: R^max=0.01220875  theta_na(e+R)=0.01220875
+   p=0.3 u=1.0 e=0.6E: R^max=0.00397536  theta_na(e+R)=0.00397536
+   p=0.5 u=1.0 e=0.1E: R^max=0.02355813  theta_na(e+R)=0.02355813
+   p=0.5 u=1.0 e=0.3E: R^max=0.01420636  theta_na(e+R)=0.01420636
+   p=0.5 u=1.0 e=0.6E: R^max=0.00462394  theta_na(e+R)=0.00462394
+
+== (6) constant-composition exponent: dual form vs primal; max over m equals R_gamma ==
+max |Rcc_dual - Rcc_primal| (40 random): 4.597884573076527e-15
+max [R_gamma - max_m(grid 99) Rcc] (should be >= 0 and small): 7.039545166146605e-05

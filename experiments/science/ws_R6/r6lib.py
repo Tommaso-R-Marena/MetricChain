@@ -331,7 +331,7 @@ def big_binomial(n, p, rng):
 # simulated inner oracle (valid or deliberately invalid)
 # ----------------------------------------------------------------------------------------------
 S_CENTER, S_TOP, S_BOTTOM, S_ADV_HI, S_ADV_LO, S_EXACT, S_RANDOM, S_NARROW = 0, 1, 2, 3, 4, 5, 6, 7
-S_INV_ABOVE, S_INV_BELOW, S_TOO_WIDE, S_TRIVIAL = 20, 21, 22, 23
+S_INV_ABOVE, S_INV_BELOW, S_TOO_WIDE, S_TRIVIAL, S_LAZY = 20, 21, 22, 23, 24
 VALID_STRATS = [S_CENTER, S_TOP, S_BOTTOM, S_ADV_HI, S_ADV_LO, S_EXACT, S_RANDOM, S_NARROW]
 
 
@@ -346,6 +346,8 @@ class SimOracle:
     Invalid behaviours (to test the statements "in every run, on or off the good event"):
       INV_ABOVE  bracket of the right width entirely above W;   INV_BELOW  entirely below W;
       TOO_WIDE   contains W but has width 2.5 x_l;              TRIVIAL    returns the rung-0 bracket again.
+      LAZY       returns the rung-0 bracket at every rung but the last, and a valid centred bracket at the last rung:
+                 every point that needs any refinement is driven to the most expensive rung (to make the cost abort fire).
     """
 
     def __init__(self, xs, rng):
@@ -390,6 +392,9 @@ class SimOracle:
         lnU = np.where(st == S_TOO_WIDE, lnW + 1.25 * x, lnU)
         lnL = np.where(st == S_TRIVIAL, run.lnL0[idx], lnL)
         lnU = np.where(st == S_TRIVIAL, run.lnU0[idx], lnU)
+        if l < run.P.L:
+            lnL = np.where(st == S_LAZY, run.lnL0[idx], lnL)
+            lnU = np.where(st == S_LAZY, run.lnU0[idx], lnU)
         return lnL, lnU
 
 

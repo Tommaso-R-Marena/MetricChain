@@ -1,0 +1,72 @@
+n=19 L=1,eps=0: N_cov=56 ownLB=51 LP=50.6060 engLP=50.6060 engC=51 engS=52 proved=False  <-- gap 5
+n=19 L=1,eps=1: N_cov=44 ownLB=41 LP=40.5115 engLP=40.5115 engC=41 engS=42 proved=False  <-- gap 3
+n=19 L=1,eps=1/20*N: N_cov=44 ownLB=41 LP=40.5115 engLP=40.5115 engC=41 engS=42 proved=False  <-- gap 3
+n=19 L=1,eps=1/10*N: N_cov=35 ownLB=34 LP=33.0497 engLP=33.0497 engC=34 engS=35 proved=True  <-- gap 1
+n=19 L=1,eps=1/4*N: N_cov=22 ownLB=21 LP=20.9824 engLP=20.9824 engC=21 engS=22 proved=True  <-- gap 1
+n=19 L=1,eps=1/2*N: N_cov=12 ownLB=12 LP=11.1000 engLP=11.1000 engC=12 engS=12 proved=True
+n=19 L=1/5,eps=0: N_cov=7 ownLB=7 LP=7.0000 engLP=7.0000 engC=7 engS=7 proved=True
+n=19 L=1/5,eps=1: N_cov=5 ownLB=5 LP=5.0000 engLP=5.0000 engC=5 engS=5 proved=True
+n=19 L=1/5,eps=1/20*N: N_cov=5 ownLB=5 LP=5.0000 engLP=5.0000 engC=5 engS=5 proved=True
+n=19 L=1/5,eps=1/10*N: N_cov=4 ownLB=4 LP=4.0000 engLP=4.0000 engC=4 engS=4 proved=True
+n=19 L=1/5,eps=1/4*N: N_cov=3 ownLB=3 LP=3.0000 engLP=3.0000 engC=3 engS=3 proved=True
+n=19 L=1/5,eps=1/2*N: N_cov=2 ownLB=2 LP=2.0000 engLP=2.0000 engC=2 engS=2 proved=True
+n=20 L=1,eps=0: N_cov=61 ownLB=56 LP=55.8347 engLP=55.8347 engC=56 engS=57 proved=False  <-- gap 5
+n=20 L=1,eps=1: N_cov=48 ownLB=45 LP=44.1441 engLP=44.1441 engC=45 engS=45 proved=False  <-- gap 3
+n=20 L=1,eps=1/20*N: N_cov=48 ownLB=45 LP=44.1441 engLP=44.1441 engC=45 engS=45 proved=False  <-- gap 3
+n=20 L=1,eps=1/10*N: N_cov=40 ownLB=36 LP=35.7045 engLP=35.7045 engC=36 engS=37 proved=False  <-- gap 4
+n=20 L=1,eps=1/4*N: N_cov=24 ownLB=23 LP=22.6324 engLP=22.6324 engC=23 engS=24 proved=True  <-- gap 1
+n=20 L=1,eps=1/2*N: N_cov=13 ownLB=13 LP=12.3057 engLP=12.3057 engC=13 engS=13 proved=True
+n=20 L=1/5,eps=0: N_cov=7 ownLB=7 LP=7.0000 engLP=7.0000 engC=7 engS=7 proved=True
+n=20 L=1/5,eps=1: N_cov=5 ownLB=5 LP=5.0000 engLP=5.0000 engC=5 engS=5 proved=True
+n=20 L=1/5,eps=1/20*N: N_cov=5 ownLB=5 LP=5.0000 engLP=5.0000 engC=5 engS=5 proved=True
+n=20 L=1/5,eps=1/10*N: N_cov=4 ownLB=4 LP=4.0000 engLP=4.0000 engC=4 engS=4 proved=True
+n=20 L=1/5,eps=1/4*N: N_cov=3 ownLB=3 LP=3.0000 engLP=3.0000 engC=3 engS=3 proved=True
+n=20 L=1/5,eps=1/2*N: N_cov=2 ownLB=2 LP=2.0000 engLP=2.0000 engC=2 engS=2 proved=True
+n=21 L=1,eps=0: N_cov=68 ownLB=62 LP=61.5288 engLP=61.5288 engC=62 engS=62 proved=False  <-- gap 6
+n=21 L=1,eps=1: N_cov=54 ownLB=49 LP=48.8062 engLP=48.8062 engC=49 engS=50 proved=False  <-- gap 5
+n=21 L=1,eps=1/20*N: N_cov=54 ownLB=49 LP=48.8062 engLP=48.8062 engC=49 engS=50 proved=False  <-- gap 5
+n=21 L=1,eps=1/10*N: N_cov=44 ownLB=40 LP=39.4200 engLP=39.4200 engC=40 engS=40 proved=False  <-- gap 4
+n=21 L=1,eps=1/4*N: N_cov=23 ownLB=23 LP=22.0926 engLP=22.0926 engC=23 engS=23 proved=True
+n=21 L=1,eps=1/2*N: N_cov=13 ownLB=13 LP=12.2000 engLP=12.2000 engC=13 engS=13 proved=True
+n=21 L=1/5,eps=0: N_cov=7 ownLB=7 LP=7.0000 engLP=7.0000 engC=7 engS=7 proved=True
+n=21 L=1/5,eps=1: N_cov=5 ownLB=5 LP=5.0000 engLP=5.0000 engC=5 engS=5 proved=True
+n=21 L=1/5,eps=1/20*N: N_cov=5 ownLB=5 LP=5.0000 engLP=5.0000 engC=5 engS=5 proved=True
+n=21 L=1/5,eps=1/10*N: N_cov=5 ownLB=5 LP=5.0000 engLP=5.0000 engC=5 engS=5 proved=True
+n=21 L=1/5,eps=1/4*N: N_cov=3 ownLB=3 LP=3.0000 engLP=3.0000 engC=3 engS=3 proved=True
+n=21 L=1/5,eps=1/2*N: N_cov=2 ownLB=2 LP=2.0000 engLP=2.0000 engC=2 engS=2 proved=True
+n=22 L=1,eps=0: N_cov=77 ownLB=68 LP=67.3840 engLP=67.3840 engC=68 engS=68 proved=False  <-- gap 9
+n=22 L=1,eps=1: N_cov=62 ownLB=54 LP=53.7036 engLP=53.7036 engC=54 engS=54 proved=False  <-- gap 8
+n=22 L=1,eps=1/20*N: N_cov=62 ownLB=54 LP=53.7036 engLP=53.7036 engC=54 engS=54 proved=False  <-- gap 8
+n=22 L=1,eps=1/10*N: N_cov=50 ownLB=44 LP=43.1705 engLP=43.1705 engC=44 engS=44 proved=False  <-- gap 6
+n=22 L=1,eps=1/4*N: N_cov=26 ownLB=25 LP=24.4090 engLP=24.4090 engC=25 engS=26 proved=True  <-- gap 1
+n=22 L=1,eps=1/2*N: N_cov=13 ownLB=13 LP=13.0000 engLP=13.0000 engC=13 engS=13 proved=True
+n=22 L=1/5,eps=0: N_cov=8 ownLB=8 LP=8.0000 engLP=8.0000 engC=8 engS=8 proved=True
+n=22 L=1/5,eps=1: N_cov=6 ownLB=6 LP=6.0000 engLP=6.0000 engC=6 engS=6 proved=True
+n=22 L=1/5,eps=1/20*N: N_cov=6 ownLB=6 LP=6.0000 engLP=6.0000 engC=6 engS=6 proved=True
+n=22 L=1/5,eps=1/10*N: N_cov=5 ownLB=5 LP=5.0000 engLP=5.0000 engC=5 engS=5 proved=True
+n=22 L=1/5,eps=1/4*N: N_cov=3 ownLB=3 LP=3.0000 engLP=3.0000 engC=3 engS=3 proved=True
+n=22 L=1/5,eps=1/2*N: N_cov=2 ownLB=2 LP=2.0000 engLP=2.0000 engC=2 engS=2 proved=True
+n=23 L=1,eps=0: N_cov=83 ownLB=73 LP=72.9269 engLP=72.9269 engC=73 engS=74 proved=False  <-- gap 10
+n=23 L=1,eps=1: N_cov=67 ownLB=59 LP=58.8896 engLP=58.8896 engC=59 engS=60 proved=False  <-- gap 8
+n=23 L=1,eps=1/20*N: N_cov=67 ownLB=59 LP=58.8896 engLP=58.8896 engC=59 engS=60 proved=False  <-- gap 8
+n=23 L=1,eps=1/10*N: N_cov=55 ownLB=48 LP=47.4746 engLP=47.4746 engC=48 engS=48 proved=False  <-- gap 7
+n=23 L=1,eps=1/4*N: N_cov=29 ownLB=27 LP=26.0888 engLP=26.0888 engC=27 engS=27 proved=False  <-- gap 2
+n=23 L=1,eps=1/2*N: N_cov=14 ownLB=14 LP=13.2500 engLP=13.2500 engC=14 engS=14 proved=True
+n=23 L=1/5,eps=0: N_cov=8 ownLB=8 LP=8.0000 engLP=8.0000 engC=8 engS=8 proved=True
+n=23 L=1/5,eps=1: N_cov=6 ownLB=6 LP=6.0000 engLP=6.0000 engC=6 engS=6 proved=True
+n=23 L=1/5,eps=1/20*N: N_cov=6 ownLB=6 LP=6.0000 engLP=6.0000 engC=6 engS=6 proved=True
+n=23 L=1/5,eps=1/10*N: N_cov=5 ownLB=5 LP=5.0000 engLP=5.0000 engC=5 engS=5 proved=True
+n=23 L=1/5,eps=1/4*N: N_cov=3 ownLB=3 LP=3.0000 engLP=3.0000 engC=3 engS=3 proved=True
+n=23 L=1/5,eps=1/2*N: N_cov=2 ownLB=2 LP=2.0000 engLP=2.0000 engC=2 engS=2 proved=True
+n=24 L=1,eps=0: N_cov=92 ownLB=80 LP=79.0305 engLP=79.0305 engC=80 engS=80 proved=False  <-- gap 12
+n=24 L=1,eps=1: N_cov=75 ownLB=64 LP=63.7873 engLP=63.7873 engC=64 engS=64 proved=False  <-- gap 11
+n=24 L=1,eps=1/20*N: N_cov=75 ownLB=64 LP=63.7873 engLP=63.7873 engC=64 engS=64 proved=False  <-- gap 11
+n=24 L=1,eps=1/10*N: N_cov=58 ownLB=51 LP=50.3287 engLP=50.3287 engC=51 engS=51 proved=False  <-- gap 7
+n=24 L=1,eps=1/4*N: N_cov=31 ownLB=28 LP=27.6718 engLP=27.6718 engC=28 engS=28 proved=False  <-- gap 3
+n=24 L=1,eps=1/2*N: N_cov=15 ownLB=15 LP=14.1719 engLP=14.1719 engC=15 engS=15 proved=True
+n=24 L=1/5,eps=0: N_cov=8 ownLB=8 LP=8.0000 engLP=8.0000 engC=8 engS=8 proved=True
+n=24 L=1/5,eps=1: N_cov=7 ownLB=7 LP=7.0000 engLP=7.0000 engC=7 engS=7 proved=True
+n=24 L=1/5,eps=1/20*N: N_cov=7 ownLB=7 LP=7.0000 engLP=7.0000 engC=7 engS=7 proved=True
+n=24 L=1/5,eps=1/10*N: N_cov=5 ownLB=5 LP=5.0000 engLP=5.0000 engC=5 engS=5 proved=True
+n=24 L=1/5,eps=1/4*N: N_cov=3 ownLB=3 LP=3.0000 engLP=3.0000 engC=3 engS=3 proved=True
+n=24 L=1/5,eps=1/2*N: N_cov=2 ownLB=2 LP=2.0000 engLP=2.0000 engC=2 engS=2 proved=True

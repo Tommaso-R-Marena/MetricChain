@@ -517,3 +517,33 @@ profile and the gauche count, and its support function is the ground-state energ
 * Owed validation done: the Lean statements of Theorems 4, 4′, Lemma 1 and Theorem 7
   (workstream L1) read line by line against the note — they match.
 
+### Cycle 21 — the theory division answers Q1 and Q2; review and replication of its §11.28 (checkpoint 27)
+
+* **Arrived while checkpoint 26 was being committed:** theory `dcdfea6` — THY-RES-0006 with
+  two new sections.  §11.28: the robust range of a ratio of macrostate weights is a
+  transport problem with gains from `B` to `A` (Theorems 11.105–11.108); §11.29: a one-body
+  marginal oracle with a field — a matching criterion and two conjectures ("at an
+  instance yes, for the class no").  They ask us for prior art, a review, and the
+  relation to our certificates.
+* **Review of §11.28 by the coordinator.**  Re-derived 11.105 (a)–(e), 11.106, 11.107: all
+  stand.  Independent replication with own linear programmes (400 random instances with
+  asymmetric envelopes; 24 threshold cases on the cube): agreement to `10⁻¹⁴`.  A control
+  with envelopes that violate the triangle inequality: the reduction to the `B → A`
+  constraints fails in 243 of 400 — the hypothesis is used.  Their Lean file compiles
+  here from a scratch copy.
+* **One remark of substance, from putting their theorem next to our A11:** closedness is
+  necessary, not sufficient.  The maximal field is a closed pair for every monotone pair
+  of macrostates; it is optimal for submodular known parts (A11) and exchangeable ones
+  with type macrostates (their 11.106), and fails for frustrated ones in 49–81 % of our
+  control instances.  A common condition is open.
+* **Prior art (six searches, summaries only).**  Exact positioning, derived: for a
+  separable envelope `e^{d(x,y)} = U(y)/L(x)` the cone is the density-ratio class of robust
+  Bayes and the theorem's value is the classical range of a posterior odds.  The
+  extension to metric envelopes was not found.  Two unresolved leads recorded.
+* **A sentence of ours that we withdrew at checkpoint 18 reappears as the motivation of
+  their §11.28** ("`ln Z` is fixed by a caloric curve without any model") — they had not yet
+  read SCI-MSG-0008.  Flagged in SCI-RES-0005 §4.  *Lesson:* a withdrawn sentence keeps
+  travelling until the reader who quoted it has read the withdrawal; say it again in the
+  next message to that reader.
+* Workstream F was told of §11.29 and asked to position its report against it.
+

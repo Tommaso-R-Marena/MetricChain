@@ -28,7 +28,15 @@ Abstract part (any finite distributive lattice `α`; tool: Mathlib's four functi
   `d (x ⊔ y) y ≤ h↑ x - h↑ (x ⊓ y)`, `d (x ⊓ y) x ≤ h↓ (x ⊔ y) - h↓ y`;
 * `sandwich_cross_lower`, `sandwich_cross_upper`, `sandwich_mean` — Theorem A11 on such a lattice;
 * `macrostate_cross_lower`, `macrostate_cross_upper`, `macrostate_ratio` — Corollary A11.1,
-  inequalities, for a lower set `A` and an upper set `B`.
+  inequalities, for a lower set `A` and an upper set `B`;
+* `mean_range_eq_Icc`, `ratio_range_eq_Icc` — if moreover `h↑` and `-h↓` are admissible and
+  `0 < β`, the set of values over the class *is* the closed interval ("fills exactly").
+
+No lattice (`Mixture` section; any type, any envelope):
+
+* `mixRes_admissible` — the class is convex in the weights `e^{-β g}`;
+* `exists_admissible_ratio` — a ratio of two linear functionals of the weights takes every value
+  between its values at two admissible residuals.
 
 The cube `ι → Bool` (`ι` any finite type, e.g. `Fin n`):
 
@@ -43,12 +51,21 @@ The cube `ι → Bool` (`ι` any finite type, e.g. `Fin n`):
 * `cube_mean_isLeast`, `cube_mean_isGreatest` — both ends are attained in the class;
 * `cube_mean_range_eq_Icc`, `cube_ratio_range_eq_Icc` — for `0 < β` the set of values over the
   class *is* the closed interval ("fills exactly");
+* `field_submodular`, `pairTerm_submodular`, `pairwise_submodular` — additive known parts and
+  pairwise known parts with all couplings `J_ij ≤ 0` are submodular;
 * `cube_sandwich_strict_witness` — a two-site instance with a non-additive submodular known
-  part in which all hypotheses hold and both inequalities are strict.
+  part in which all hypotheses hold and both inequalities are strict;
+  `cube_sandwich_fails_negative_beta` — in the same instance at `β = -1` the lower inequality
+  fails (so `0 ≤ β` is needed).
+
+A product of finite chains `∀ i, Fin (k i)` (Remark (1) of A11):
+
+* `chainDist`, `chainField`, `chainDist_sup_right`, `chainDist_inf_left`,
+  `chainField_admissible`, `neg_chainField_admissible`;
+* `chain_sandwich_mean`, `chain_mean_range_eq_Icc`, `chain_ratio_range_eq_Icc`.
 
 Not proved here: Corollaries A11.2 (width formula; it has an integral) and A11.3, the
-necessity of the hypotheses (numerical in the note), Remark (1) for ordered alphabets beyond
-what the abstract part gives, Remark (2).
+necessity of the hypotheses (numerical in the note), Remark (2).
 -/
 
 set_option autoImplicit false
@@ -434,6 +451,75 @@ theorem exists_admissible_ratio {β : ℝ} (hβ : 0 < β) {d : α → α → ℝ
 
 end Mixture
 
+/-! ### The exact range on a lattice with a saturated envelope -/
+
+section LatticeRange
+
+variable {α : Type*} [DistribLattice α] [Fintype α]
+
+/-- **Theorem A11, "every value in between is attained", abstract form**: on a finite
+distributive lattice with an envelope `d` saturated by `h↑` and `h↓`, both admissible, and
+`0 < β`: the set of values of `E_{f+g} φ` over the admissible class is exactly the closed interval
+between the values at the two extremal residuals. -/
+theorem mean_range_eq_Icc [Nonempty α] {β : ℝ} (hβ : 0 < β) {f hup hdn : α → ℝ}
+    {d : α → α → ℝ} (hf : Submodular f)
+    (hsatU : ∀ x y, d (x ⊔ y) y ≤ hup x - hup (x ⊓ y))
+    (hsatD : ∀ x y, d (x ⊓ y) x ≤ hdn (x ⊔ y) - hdn y)
+    (hUadm : Admissible d hup) (hDadm : Admissible d (fun x => -hdn x))
+    {φ : α → ℝ} (hφ : Monotone φ) :
+    {r | ∃ g, Admissible d g ∧ gibbsMean β (fun z => f z + g z) φ = r} =
+      Set.Icc (gibbsMean β (fun z => f z + hup z) φ) (gibbsMean β (fun z => f z - hdn z) φ) := by
+  ext r
+  constructor
+  · rintro ⟨g, hg, rfl⟩
+    exact sandwich_mean hβ.le hf hg hsatU hsatD hφ
+  · rintro ⟨h1, h2⟩
+    have hsub : (fun z => f z - hdn z) = (fun z => f z + (fun y => -hdn y) z) := by
+      funext z
+      ring
+    rw [hsub] at h2
+    unfold gibbsMean at h1 h2
+    obtain ⟨g, hg, hgr⟩ := exists_admissible_ratio hβ hUadm hDadm (f := f) Finset.univ
+      Finset.univ φ (fun _ => 1) (by simpa using sum_boltz_pos _ _)
+      (by simpa using sum_boltz_pos _ _) (r := r) (by simpa using h1) (by simpa using h2)
+    refine ⟨g, hg, ?_⟩
+    unfold gibbsMean
+    simpa using hgr
+
+omit [Fintype α] in
+/-- **Corollary A11.1, "fills exactly the interval", abstract form**: for a lower set `A` and a
+non-empty upper set `B`, the set of values of `Z_{f+g}(A)/Z_{f+g}(B)` over the admissible class
+is exactly `[Z_{f-h↓}(A)/Z_{f-h↓}(B), Z_{f+h↑}(A)/Z_{f+h↑}(B)]`. -/
+theorem ratio_range_eq_Icc [DecidableEq α] {β : ℝ} (hβ : 0 < β) {f hup hdn : α → ℝ}
+    {d : α → α → ℝ} (hf : Submodular f)
+    (hsatU : ∀ x y, d (x ⊔ y) y ≤ hup x - hup (x ⊓ y))
+    (hsatD : ∀ x y, d (x ⊓ y) x ≤ hdn (x ⊔ y) - hdn y)
+    (hUadm : Admissible d hup) (hDadm : Admissible d (fun x => -hdn x))
+    (A B : Finset α) (hA : IsLowerSet (A : Set α)) (hB : IsUpperSet (B : Set α))
+    (hBne : B.Nonempty) :
+    {r | ∃ g, Admissible d g ∧
+        zOn β (fun z => f z + g z) A / zOn β (fun z => f z + g z) B = r} =
+      Set.Icc (zOn β (fun z => f z - hdn z) A / zOn β (fun z => f z - hdn z) B)
+        (zOn β (fun z => f z + hup z) A / zOn β (fun z => f z + hup z) B) := by
+  ext r
+  constructor
+  · rintro ⟨g, hg, rfl⟩
+    exact macrostate_ratio hβ.le hf hg hsatU hsatD A B hA hB hBne
+  · rintro ⟨h1, h2⟩
+    have hsub : (fun z => f z - hdn z) = (fun z => f z + (fun y => -hdn y) z) := by
+      funext z
+      ring
+    rw [hsub] at h1
+    unfold zOn at h1 h2
+    obtain ⟨g, hg, hgr⟩ := exists_admissible_ratio hβ hDadm hUadm (f := f) A B (fun _ => 1)
+      (fun _ => 1) (by simpa [zOn] using zOn_pos β _ hBne)
+      (by simpa [zOn] using zOn_pos β _ hBne) (r := r) (by simpa using h1) (by simpa using h2)
+    refine ⟨g, hg, ?_⟩
+    unfold zOn
+    simpa using hgr
+
+end LatticeRange
+
 /-! ### The cube `ι → Bool` -/
 
 section Cube
@@ -642,24 +728,10 @@ theorem cube_mean_range_eq_Icc {β : ℝ} (hβ : 0 < β) {f : (ι → Bool) → 
     (hc : ∀ i, 0 ≤ cup i + cdn i) (hf : Submodular f) {φ : (ι → Bool) → ℝ} (hφ : Monotone φ) :
     {r | ∃ g, Admissible (envDist cup cdn) g ∧ gibbsMean β (fun x => f x + g x) φ = r} =
       Set.Icc (gibbsMean β (fun x => f x + field cup x) φ)
-        (gibbsMean β (fun x => f x - field cdn x) φ) := by
-  ext r
-  constructor
-  · rintro ⟨g, hg, rfl⟩
-    exact cube_sandwich_mean hβ.le hf hg hφ
-  · rintro ⟨h1, h2⟩
-    have hsub : (fun x => f x - field cdn x) = (fun x => f x + (fun y => -field cdn y) x) := by
-      funext x
-      ring
-    rw [hsub] at h2
-    unfold gibbsMean at h1 h2
-    obtain ⟨g, hg, hgr⟩ := exists_admissible_ratio hβ (field_admissible hc)
-      (neg_field_admissible hc) (f := f) Finset.univ Finset.univ φ (fun _ => 1)
-      (by simpa using sum_boltz_pos _ _) (by simpa using sum_boltz_pos _ _)
-      (r := r) (by simpa using h1) (by simpa using h2)
-    refine ⟨g, hg, ?_⟩
-    unfold gibbsMean
-    simpa using hgr
+        (gibbsMean β (fun x => f x - field cdn x) φ) :=
+  mean_range_eq_Icc hβ hf (fun a b => (envDist_sup_right cup cdn a b).le)
+    (fun a b => (envDist_inf_left cup cdn a b).le) (field_admissible hc)
+    (neg_field_admissible hc) hφ
 
 omit [DecidableEq ι] in
 /-- **Corollary A11.1, "fills exactly the interval"**: for `0 < β`, a lower set `A` and a
@@ -672,26 +744,207 @@ theorem cube_ratio_range_eq_Icc {β : ℝ} (hβ : 0 < β) {f : (ι → Bool) →
     {r | ∃ g, Admissible (envDist cup cdn) g ∧
         zOn β (fun x => f x + g x) A / zOn β (fun x => f x + g x) B = r} =
       Set.Icc (zOn β (fun x => f x - field cdn x) A / zOn β (fun x => f x - field cdn x) B)
-        (zOn β (fun x => f x + field cup x) A / zOn β (fun x => f x + field cup x) B) := by
-  ext r
-  constructor
-  · rintro ⟨g, hg, rfl⟩
-    exact cube_macrostate_ratio hβ.le hf hg A B hA hB hBne
-  · rintro ⟨h1, h2⟩
-    have hsub : (fun x => f x - field cdn x) = (fun x => f x + (fun y => -field cdn y) x) := by
-      funext x
-      ring
-    rw [hsub] at h1
-    unfold zOn at h1 h2
-    obtain ⟨g, hg, hgr⟩ := exists_admissible_ratio hβ (neg_field_admissible hc)
-      (field_admissible hc) (f := f) A B (fun _ => 1) (fun _ => 1)
-      (by simpa [zOn] using zOn_pos β _ hBne) (by simpa [zOn] using zOn_pos β _ hBne)
-      (r := r) (by simpa using h1) (by simpa using h2)
-    refine ⟨g, hg, ?_⟩
-    unfold zOn
-    simpa using hgr
+        (zOn β (fun x => f x + field cup x) A / zOn β (fun x => f x + field cup x) B) :=
+  ratio_range_eq_Icc hβ hf (fun a b => (envDist_sup_right cup cdn a b).le)
+    (fun a b => (envDist_inf_left cup cdn a b).le) (field_admissible hc)
+    (neg_field_admissible hc) A B hA hB hBne
+
+omit [DecidableEq ι] in
+/-- Additive known parts are submodular (with equality). -/
+theorem field_submodular (c : ι → ℝ) : Submodular (field c) := by
+  intro x y
+  unfold field
+  rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+  refine Finset.sum_le_sum (fun i _ => ?_)
+  show (if (x i || y i) then c i else 0) + (if (x i && y i) then c i else 0) ≤
+    (if x i then c i else 0) + (if y i then c i else 0)
+  cases x i <;> cases y i <;> simp
+
+omit [Fintype ι] [DecidableEq ι] in
+/-- A pair term `J [x_i ∧ x_j]` with `J ≤ 0` (no frustration) is submodular. -/
+theorem pairTerm_submodular (i j : ι) {J : ℝ} (hJ : J ≤ 0) :
+    Submodular (fun x : ι → Bool => if x i && x j then J else 0) := by
+  intro x y
+  show (if (x i || y i) && (x j || y j) then J else 0) +
+      (if (x i && y i) && (x j && y j) then J else 0) ≤
+    (if x i && x j then J else 0) + (if y i && y j then J else 0)
+  cases x i <;> cases x j <;> cases y i <;> cases y j <;> simp <;> linarith
+
+omit [Fintype ι] [DecidableEq ι] in
+/-- Finite sums of submodular functions are submodular. -/
+theorem submodular_sum {κ : Type*} (s : Finset κ) (F : κ → (ι → Bool) → ℝ)
+    (hF : ∀ k ∈ s, Submodular (F k)) : Submodular (fun x => ∑ k ∈ s, F k x) := by
+  intro x y
+  simp only
+  rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+  exact Finset.sum_le_sum (fun k hk => hF k hk x y)
+
+omit [DecidableEq ι] in
+/-- **Every pairwise known part without frustration is submodular**:
+`f x = ∑_i a_i x_i + ∑_{i,j} J_ij x_i x_j` with all `J_ij ≤ 0`. -/
+theorem pairwise_submodular (a : ι → ℝ) (J : ι → ι → ℝ) (hJ : ∀ i j, J i j ≤ 0) :
+    Submodular (fun x : ι → Bool =>
+      field a x + ∑ i, ∑ j, if x i && x j then J i j else 0) := by
+  intro x y
+  have h1 := field_submodular a x y
+  have h2 := submodular_sum Finset.univ
+    (fun i (x : ι → Bool) => ∑ j, if x i && x j then J i j else 0)
+    (fun i _ => submodular_sum Finset.univ
+      (fun j (x : ι → Bool) => if x i && x j then J i j else 0)
+      (fun j _ => pairTerm_submodular i j (hJ i j))) x y
+  simp only at h2 ⊢
+  linarith
 
 end Cube
+
+/-! ### Ordered alphabets (Remark (1) of A11): a product of finite chains
+
+Sites `i : ι` with levels `0, …, k i - 1` (the alphabet `Fin (k i)`), coordinatewise order.
+Raising site `i` from level `r` to `r + 1` costs `c↑ i r`, lowering it from `r + 1` to `r` costs
+`c↓ i r`; the envelope is additive along each chain:
+`d x y = ∑_i (∑_{y_i ≤ r < x_i} c↑ i r + ∑_{x_i ≤ r < y_i} c↓ i r)`.  The additive functions
+`h↑ x = ∑_i ∑_{r < x_i} c↑ i r` and `h↓ x = ∑_i ∑_{r < x_i} c↓ i r` saturate it, so the sandwich
+holds verbatim.  The cube is the case `k i = 2`. -/
+
+section Chains
+
+variable {ι : Type*} [Fintype ι] {k : ι → ℕ}
+
+/-- The envelope that is additive along each chain. -/
+def chainDist (cup cdn : ι → ℕ → ℝ) (x y : ∀ i, Fin (k i)) : ℝ :=
+  ∑ i, ((∑ r ∈ Finset.Ico (y i : ℕ) (x i : ℕ), cup i r) +
+    ∑ r ∈ Finset.Ico (x i : ℕ) (y i : ℕ), cdn i r)
+
+/-- The additive function `x ↦ ∑_i ∑_{r < x_i} c i r`. -/
+def chainField (c : ι → ℕ → ℝ) (x : ∀ i, Fin (k i)) : ℝ :=
+  ∑ i, ∑ r ∈ Finset.range (x i : ℕ), c i r
+
+/-- `d (x ∨ y, y) = h↑ x - h↑ (x ∧ y)` on a product of chains. -/
+theorem chainDist_sup_right (cup cdn : ι → ℕ → ℝ) (x y : ∀ i, Fin (k i)) :
+    chainDist cup cdn (x ⊔ y) y = chainField cup x - chainField cup (x ⊓ y) := by
+  unfold chainDist chainField
+  rw [← Finset.sum_sub_distrib]
+  refine Finset.sum_congr rfl (fun i _ => ?_)
+  rcases le_total (x i) (y i) with h | h
+  · have e1 : (x ⊔ y) i = y i := by
+      rw [Pi.sup_apply]
+      exact sup_of_le_right h
+    have e2 : (x ⊓ y) i = x i := by
+      rw [Pi.inf_apply]
+      exact inf_of_le_left h
+    rw [e1, e2]
+    simp
+  · have e1 : (x ⊔ y) i = x i := by
+      rw [Pi.sup_apply]
+      exact sup_of_le_left h
+    have e2 : (x ⊓ y) i = y i := by
+      rw [Pi.inf_apply]
+      exact inf_of_le_right h
+    have hle : (y i : ℕ) ≤ (x i : ℕ) := h
+    rw [e1, e2, Finset.sum_Ico_eq_sub _ hle, Finset.Ico_eq_empty_of_le hle, Finset.sum_empty,
+      add_zero]
+
+/-- `d (x ∧ y, x) = h↓ (x ∨ y) - h↓ y` on a product of chains. -/
+theorem chainDist_inf_left (cup cdn : ι → ℕ → ℝ) (x y : ∀ i, Fin (k i)) :
+    chainDist cup cdn (x ⊓ y) x = chainField cdn (x ⊔ y) - chainField cdn y := by
+  unfold chainDist chainField
+  rw [← Finset.sum_sub_distrib]
+  refine Finset.sum_congr rfl (fun i _ => ?_)
+  rcases le_total (x i) (y i) with h | h
+  · have e1 : (x ⊔ y) i = y i := by
+      rw [Pi.sup_apply]
+      exact sup_of_le_right h
+    have e2 : (x ⊓ y) i = x i := by
+      rw [Pi.inf_apply]
+      exact inf_of_le_left h
+    rw [e1, e2]
+    simp
+  · have e1 : (x ⊔ y) i = x i := by
+      rw [Pi.sup_apply]
+      exact sup_of_le_left h
+    have e2 : (x ⊓ y) i = y i := by
+      rw [Pi.inf_apply]
+      exact inf_of_le_right h
+    have hle : (y i : ℕ) ≤ (x i : ℕ) := h
+    rw [e1, e2, Finset.sum_Ico_eq_sub _ hle, Finset.Ico_eq_empty_of_le hle, Finset.sum_empty,
+      zero_add]
+
+/-- `h↑` is admissible when `0 ≤ c↑ i r + c↓ i r` for every site and level. -/
+theorem chainField_admissible {cup cdn : ι → ℕ → ℝ} (hc : ∀ i r, 0 ≤ cup i r + cdn i r) :
+    Admissible (chainDist (k := k) cup cdn) (chainField cup) := by
+  intro x y
+  unfold chainDist chainField
+  rw [← Finset.sum_sub_distrib]
+  refine Finset.sum_le_sum (fun i _ => ?_)
+  rcases le_total (x i : ℕ) (y i : ℕ) with h | h
+  · have h0 : 0 ≤ ∑ r ∈ Finset.Ico (x i : ℕ) (y i : ℕ), (cup i r + cdn i r) :=
+      Finset.sum_nonneg (fun r _ => hc i r)
+    rw [Finset.sum_add_distrib, Finset.sum_Ico_eq_sub _ h] at h0
+    rw [Finset.Ico_eq_empty_of_le h, Finset.sum_empty, zero_add]
+    linarith
+  · rw [Finset.sum_Ico_eq_sub _ h, Finset.Ico_eq_empty_of_le h, Finset.sum_empty, add_zero]
+
+/-- `-h↓` is admissible when `0 ≤ c↑ i r + c↓ i r` for every site and level. -/
+theorem neg_chainField_admissible {cup cdn : ι → ℕ → ℝ} (hc : ∀ i r, 0 ≤ cup i r + cdn i r) :
+    Admissible (chainDist (k := k) cup cdn) (fun x => -chainField cdn x) := by
+  intro x y
+  have key : chainField cdn y - chainField cdn x ≤ chainDist cup cdn x y := by
+    unfold chainDist chainField
+    rw [← Finset.sum_sub_distrib]
+    refine Finset.sum_le_sum (fun i _ => ?_)
+    rcases le_total (x i : ℕ) (y i : ℕ) with h | h
+    · rw [Finset.sum_Ico_eq_sub (cdn i) h, Finset.Ico_eq_empty_of_le h, Finset.sum_empty,
+        zero_add]
+    · have h0 : 0 ≤ ∑ r ∈ Finset.Ico (y i : ℕ) (x i : ℕ), (cup i r + cdn i r) :=
+        Finset.sum_nonneg (fun r _ => hc i r)
+      rw [Finset.sum_add_distrib, Finset.sum_Ico_eq_sub (cdn i) h] at h0
+      rw [Finset.Ico_eq_empty_of_le h, Finset.sum_empty, add_zero]
+      linarith
+  linarith
+
+variable [DecidableEq ι]
+
+/-- **Theorem A11 on a product of finite chains** (Remark (1)):
+`E_{f+h↑} φ ≤ E_{f+g} φ ≤ E_{f-h↓} φ` for every monotone `φ`, submodular `f`, admissible `g`. -/
+theorem chain_sandwich_mean [∀ i, NeZero (k i)] {β : ℝ} (hβ : 0 ≤ β)
+    {f g : (∀ i, Fin (k i)) → ℝ} {cup cdn : ι → ℕ → ℝ} (hf : Submodular f)
+    (hg : Admissible (chainDist cup cdn) g) {φ : (∀ i, Fin (k i)) → ℝ} (hφ : Monotone φ) :
+    gibbsMean β (fun x => f x + chainField cup x) φ ≤ gibbsMean β (fun x => f x + g x) φ ∧
+      gibbsMean β (fun x => f x + g x) φ ≤ gibbsMean β (fun x => f x - chainField cdn x) φ :=
+  sandwich_mean hβ hf hg (fun a b => (chainDist_sup_right cup cdn a b).le)
+    (fun a b => (chainDist_inf_left cup cdn a b).le) hφ
+
+/-- **Theorem A11 on a product of finite chains, exact range**: for `0 < β` the values of
+`E_{f+g} φ` over the class fill exactly the interval between the two additive extremal
+residuals. -/
+theorem chain_mean_range_eq_Icc [∀ i, NeZero (k i)] {β : ℝ} (hβ : 0 < β)
+    {f : (∀ i, Fin (k i)) → ℝ} {cup cdn : ι → ℕ → ℝ} (hc : ∀ i r, 0 ≤ cup i r + cdn i r)
+    (hf : Submodular f) {φ : (∀ i, Fin (k i)) → ℝ} (hφ : Monotone φ) :
+    {r | ∃ g, Admissible (chainDist cup cdn) g ∧ gibbsMean β (fun x => f x + g x) φ = r} =
+      Set.Icc (gibbsMean β (fun x => f x + chainField cup x) φ)
+        (gibbsMean β (fun x => f x - chainField cdn x) φ) :=
+  mean_range_eq_Icc hβ hf (fun a b => (chainDist_sup_right cup cdn a b).le)
+    (fun a b => (chainDist_inf_left cup cdn a b).le) (chainField_admissible hc)
+    (neg_chainField_admissible hc) hφ
+
+omit [DecidableEq ι] in
+/-- **Corollary A11.1 on a product of finite chains, exact range** of the macrostate ratio for
+a lower set `A` and a non-empty upper set `B`. -/
+theorem chain_ratio_range_eq_Icc {β : ℝ} (hβ : 0 < β)
+    {f : (∀ i, Fin (k i)) → ℝ} {cup cdn : ι → ℕ → ℝ} (hc : ∀ i r, 0 ≤ cup i r + cdn i r)
+    (hf : Submodular f) (A B : Finset (∀ i, Fin (k i)))
+    (hA : IsLowerSet (A : Set (∀ i, Fin (k i)))) (hB : IsUpperSet (B : Set (∀ i, Fin (k i))))
+    (hBne : B.Nonempty) :
+    {r | ∃ g, Admissible (chainDist cup cdn) g ∧
+        zOn β (fun x => f x + g x) A / zOn β (fun x => f x + g x) B = r} =
+      Set.Icc
+        (zOn β (fun x => f x - chainField cdn x) A / zOn β (fun x => f x - chainField cdn x) B)
+        (zOn β (fun x => f x + chainField cup x) A / zOn β (fun x => f x + chainField cup x) B) :=
+  ratio_range_eq_Icc hβ hf (fun a b => (chainDist_sup_right cup cdn a b).le)
+    (fun a b => (chainDist_inf_left cup cdn a b).le) (chainField_admissible hc)
+    (neg_chainField_admissible hc) A B hA hB hBne
+
+end Chains
 
 /-! ### Non-vacuity: a two-site instance with strict inequalities
 
@@ -781,12 +1034,38 @@ theorem cube_sandwich_strict_witness :
     rw [hc, div_lt_div_iff₀ (by positivity) (by positivity)]
     nlinarith
 
+/-- **`β ≥ 0` is needed.**  In the same two-site instance at `β = -1` the lower inequality of
+Theorem A11 fails: `E_{f+h↑} φ > E_{f+g} φ`. -/
+theorem cube_sandwich_fails_negative_beta :
+    Submodular wF ∧ Monotone wPhi ∧
+      Admissible (envDist (fun _ : Fin 2 => (1 : ℝ)) (fun _ => 1)) (fun _ => (0 : ℝ)) ∧
+      gibbsMean (-1) (fun x => wF x + (fun _ => (0 : ℝ)) x) wPhi <
+        gibbsMean (-1) (fun x => wF x + field (fun _ : Fin 2 => (1 : ℝ)) x) wPhi := by
+  have ha : 0 < Real.exp (-1) := Real.exp_pos _
+  have hb : 1 < Real.exp 1 := by
+    have := Real.add_one_lt_exp (show (1 : ℝ) ≠ 0 by norm_num)
+    linarith
+  have hab : Real.exp (-1) * Real.exp 1 = 1 := by
+    rw [← Real.exp_add]
+    norm_num
+  have ha1 : Real.exp (-1) < 1 := by nlinarith [mul_pos ha (sub_pos.2 hb)]
+  refine ⟨wF_submodular, wPhi_monotone, zero_admissible_one, ?_⟩
+  unfold gibbsMean
+  rw [sum_fin_two_bool, sum_fin_two_bool, sum_fin_two_bool, sum_fin_two_bool]
+  simp [boltz, wF, wPhi, field_fin_two]
+  rw [div_lt_div_iff₀ (by positivity) (by positivity)]
+  nlinarith
+
 end Witness
 
 end ScienceL2
 
 end
 
+#print axioms ScienceL2.boltz_pos
+#print axioms ScienceL2.zOn_nonneg
+#print axioms ScienceL2.zOn_pos
+#print axioms ScienceL2.sum_boltz_pos
 #print axioms ScienceL2.holley_cross_nonneg
 #print axioms ScienceL2.holley_cross
 #print axioms ScienceL2.updown_cross
@@ -798,6 +1077,13 @@ end
 #print axioms ScienceL2.macrostate_cross_upper
 #print axioms ScienceL2.macrostate_cross_lower
 #print axioms ScienceL2.macrostate_ratio
+#print axioms ScienceL2.exists_convex_ratio
+#print axioms ScienceL2.mix_pos
+#print axioms ScienceL2.boltz_mixRes
+#print axioms ScienceL2.mixRes_admissible
+#print axioms ScienceL2.exists_admissible_ratio
+#print axioms ScienceL2.mean_range_eq_Icc
+#print axioms ScienceL2.ratio_range_eq_Icc
 #print axioms ScienceL2.envDist_sup_right
 #print axioms ScienceL2.envDist_inf_left
 #print axioms ScienceL2.field_admissible
@@ -811,13 +1097,27 @@ end
 #print axioms ScienceL2.cube_macrostate_cross_upper
 #print axioms ScienceL2.cube_macrostate_cross_lower
 #print axioms ScienceL2.cube_macrostate_ratio
+#print axioms ScienceL2.isLowerSet_compl_finset
 #print axioms ScienceL2.cube_macrostate_ratio_compl
-#print axioms ScienceL2.exists_convex_ratio
-#print axioms ScienceL2.boltz_mixRes
-#print axioms ScienceL2.mixRes_admissible
-#print axioms ScienceL2.exists_admissible_ratio
 #print axioms ScienceL2.cube_mean_isLeast
 #print axioms ScienceL2.cube_mean_isGreatest
 #print axioms ScienceL2.cube_mean_range_eq_Icc
 #print axioms ScienceL2.cube_ratio_range_eq_Icc
+#print axioms ScienceL2.field_submodular
+#print axioms ScienceL2.pairTerm_submodular
+#print axioms ScienceL2.submodular_sum
+#print axioms ScienceL2.pairwise_submodular
+#print axioms ScienceL2.chainDist_sup_right
+#print axioms ScienceL2.chainDist_inf_left
+#print axioms ScienceL2.chainField_admissible
+#print axioms ScienceL2.neg_chainField_admissible
+#print axioms ScienceL2.chain_sandwich_mean
+#print axioms ScienceL2.chain_mean_range_eq_Icc
+#print axioms ScienceL2.chain_ratio_range_eq_Icc
+#print axioms ScienceL2.sum_fin_two_bool
+#print axioms ScienceL2.field_fin_two
+#print axioms ScienceL2.wF_submodular
+#print axioms ScienceL2.wPhi_monotone
+#print axioms ScienceL2.zero_admissible_one
 #print axioms ScienceL2.cube_sandwich_strict_witness
+#print axioms ScienceL2.cube_sandwich_fails_negative_beta

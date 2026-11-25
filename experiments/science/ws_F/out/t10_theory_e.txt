@@ -1,0 +1,19 @@
+p=0.25 u=1.0 e=0.02 (E_0=0.092681, e/E_0=0.2158)
+R_0(e) = 0.013669 (closed form max_m: 0.013669 at centre type m*=0.4555; excess (cone) density at m*: 0.27602)   [theirs: 0.0134 at type ~0.29]
+(a) plain dips, forced centre type m_0=0.3845: Rcc = 0.005704
+(b) constrained sup over binary annular profiles: 0.012635 at (m,v0,v1)=(0.4484,0.10923,0.42318)   [theirs: rho_e(p) = 0.0129]
+(c) tilt upper bound: 0.012941 at lambda=-0.1484
+decrease: (b) 7.57 %, (c) 5.33 %   [theirs: about 3.5 %]
+type-resolved sup over binary annular profiles, rho_e(kappa):
+   kappa=0.20: 0.005128
+   kappa=0.22: 0.008830
+   kappa=0.24: 0.011653
+   kappa=0.25: 0.012630
+   kappa=0.26: 0.013282
+   kappa=0.27: 0.013594
+   kappa=0.28: 0.013619
+   kappa=0.29: 0.013135
+   kappa=0.30: 0.012273
+   kappa=0.31: 0.010974
+   kappa=0.32: 0.009503
+   kappa=0.34: 0.006035

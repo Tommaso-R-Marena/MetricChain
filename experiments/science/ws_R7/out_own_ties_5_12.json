@@ -1,0 +1,98 @@
+{
+ "5": {
+  "classes": 30,
+  "ties": [],
+  "nearest_non_tie": 0.0005210545938045819
+ },
+ "6": {
+  "classes": 60,
+  "ties": [],
+  "nearest_non_tie": 0.000271142843542016
+ },
+ "7": {
+  "classes": 136,
+  "ties": [],
+  "nearest_non_tie": 0.00011553309398948386
+ },
+ "8": {
+  "classes": 291,
+  "ties": [],
+  "nearest_non_tie": 1.8238440294915392e-05
+ },
+ "9": {
+  "classes": 639,
+  "ties": [],
+  "nearest_non_tie": 4.473312300135035e-06
+ },
+ "10": {
+  "classes": 1360,
+  "ties": [],
+  "nearest_non_tie": 3.2482294543001444e-07
+ },
+ "11": {
+  "classes": 2908,
+  "ties": [
+   {
+    "L": 1.0,
+    "eps": "N/2",
+    "centre": "tt+tt-tt---",
+    "point": "+t+ttt++t--",
+    "gmin_point": 6,
+    "float_slack": -3.375077994860476e-14,
+    "D_float": 13.000000000000034,
+    "D_mp": "13.0",
+    "deviation_mp": "-2.4892e-60"
+   },
+   {
+    "L": 1.0,
+    "eps": "N/2",
+    "centre": "tt++t-tt+t-",
+    "point": "+t+ttt++t--",
+    "gmin_point": 6,
+    "float_slack": -1.4210854715202004e-14,
+    "D_float": 13.000000000000014,
+    "D_mp": "13.0",
+    "deviation_mp": "6.223e-60"
+   },
+   {
+    "L": 1.0,
+    "eps": "N/2",
+    "centre": "tt+tt-t++t-",
+    "point": "+t+t--ttt++",
+    "gmin_point": 6,
+    "float_slack": -1.7763568394002505e-14,
+    "D_float": 13.000000000000018,
+    "D_mp": "13.0",
+    "deviation_mp": "-1.2446e-60"
+   },
+   {
+    "L": 1.0,
+    "eps": "N/2",
+    "centre": "tt+tt-t-t++",
+    "point": "+t+t+ttt+++",
+    "gmin_point": 6,
+    "float_slack": -2.3092638912203256e-14,
+    "D_float": 13.000000000000023,
+    "D_mp": "13.0",
+    "deviation_mp": "2.987e-59"
+   },
+   {
+    "L": 1.0,
+    "eps": "N/2",
+    "centre": "tt+tt-t+t--",
+    "point": "+t+t-ttt+++",
+    "gmin_point": 6,
+    "float_slack": -3.730349362740526e-14,
+    "D_float": 13.000000000000037,
+    "D_mp": "13.0",
+    "deviation_mp": "2.4892e-60"
+   }
+  ],
+  "nearest_non_tie": 1.2733542575915635e-07
+ },
+ "12": {
+  "classes": 6137,
+  "ties": [],
+  "nearest_non_tie": 2.9286310265774773e-08
+ }
+}

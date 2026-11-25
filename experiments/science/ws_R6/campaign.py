@@ -145,7 +145,7 @@ STRAT_SETS = {
 INVALID_SETS = {
     "inv_above": (R.S_INV_ABOVE, R.S_CENTER), "inv_below": (R.S_INV_BELOW, R.S_CENTER), "too_wide": (R.S_TOO_WIDE,),
     "trivial": (R.S_TRIVIAL,), "inv_mix": (R.S_INV_ABOVE, R.S_INV_BELOW, R.S_TOO_WIDE, R.S_ADV_HI),
-    "inv_above_all": (R.S_INV_ABOVE,), "inv_below_all": (R.S_INV_BELOW,),
+    "inv_above_all": (R.S_INV_ABOVE,), "inv_below_all": (R.S_INV_BELOW,), "lazy": (R.S_LAZY,), "lazy_mix": (R.S_LAZY, R.S_BOTTOM),
 }
 
 
@@ -177,7 +177,8 @@ def one_run(args):
                levels=len(run.levels), pop=st.count("populated"), neg=st.count("negligible"),
                lnM=float(mp.log(run.points_drawn)), lnq=float(mp.log(run.queries())), calls=[int(c) if c < 2 ** 62 else float(c) for c in run.calls],
                G=ck["G"], Gfail=[str(x) for x in ck["Gfail"][:4]], det=[str(x) for x in ck["det"][:6]], good=[str(x) for x in ck["good"][:6]],
-               ratios=ck["ratios"], secs=round(time.time() - t0, 2), K=P.K, J=P.J, rdag=P.rdag, lnMdag=float(mp.log(P.Mdag)) if P.Mdag != mp.inf else None)
+               ratios=ck["ratios"], secs=round(time.time() - t0, 2), K=P.K, J=P.J, rdag=P.rdag, lnMdag=float(mp.log(P.Mdag)) if P.Mdag != mp.inf else None,
+               lnCmax=float(mp.log(P.Cmax)) if P.Cmax != mp.inf else None, q_le_Cmax=bool(run.queries() <= P.Cmax))
     if run.status == "closed":
         lo, up = run.result
         lnA = mp.log(inst.A)
@@ -250,6 +251,14 @@ def _b_invalid():
              cell_general(120, 60, 3.0, 0.5, 0.5, Fraction(1, 2), 0.5, 0.5), cell_bounded(24, 12, 1.0, 1.0),
              cell_general(200, 100, 2.0, 0.5, 1.0, Fraction(1, 2), 1.0, 1.0, Kov=20)]
     return cells, PROFILES, list(INVALID_SETS), {}
+
+
+@campaign("B_lazy")           # invalid answers designed to make the cost abort fire: "the cost bound holds always"
+def _b_lazy():
+    cells = [cell_general(200, 100, 2.0, 0.5, 1.0, Fraction(1, 2), 1.0, 1.0), cell_general(160, 80, 2.0, 0.5, 0.5, Fraction(1, 2), 1.0, 0.5, nu1=1.0),
+             cell_general(120, 60, 3.0, 0.5, 0.5, Fraction(1, 2), 0.5, 0.5), cell_bounded(300, 120, 1.0, 4.0), cell_bounded(80, 40, 1.0, 4.0),
+             cell_extensive(1200, 400, 1.0, 0.025, 0.015)]
+    return cells, ["cone", "cone_half", "platcone", "flatcone", "eqmass", "dip_crit", "rw_down", "flat", "two_plateaus"], ["lazy", "lazy_mix"], {}
 
 
 @campaign("D_2L")             # Algorithm 2L of Theorem 11.52, constants of the theorem

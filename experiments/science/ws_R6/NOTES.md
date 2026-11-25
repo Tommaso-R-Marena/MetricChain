@@ -101,3 +101,107 @@ remarks after Thm 11.56 in the 40c5bd7 theory report (extracted to scratchpad, l
      with a simulated inner oracle only the LAW of W(a) matters; I represent an outer landscape by classes (value, probability).
  (3) Flat-instance cost numbers are best-case numbers (K_REPORT erratum e1).
 All findings in my report will be tagged with the commit they refer to (5ed4072 unless stated; the cap remark is 40c5bd7).
+
+### Step 6 (own implementation; written before reading any implementation)
+Files: r6lib.py (tables, Params2LP, Params2L, ClassInstance, SimOracle, Run engine for 2L+ and 2L), checks.py (run-by-run checks of
+every claim of K1 and of 11.52; deterministic claims vs claims on the good event), instances.py (radial profiles), campaign.py
+(cells, campaigns), smoke.py, smoke2.py, explore_params.py.  Engine: units = (block, class) with exact counts (Python ints,
+chunked binomials beyond 2^61); q, p_low and all radii exact (Fractions/integers); levels/ell/tails in mpmath (40 digits);
+brackets float64 logs.  The sample law is represented by classes (value, probability): by the remark of 40c5bd7 (ENG-RES-0008 sec. 5)
+only the law of W matters for the outer loop with a simulated oracle.
+Checker validated by five mutations (data/MUT_*_7.jsonl, 48 runs each):
+  neg_tol -> count inequality (v) violated in 24 runs (+ M_j^neg bound);   noharper -> level left with q <= pi-dagger (1 run) and
+  the 40c5bd7 cap violated;   maxform -> width violated in 26 runs;   close_at_no -> every run returns L > U (48/48);
+  q_no_eta -> certificate p(s_j) <= q false in 21 runs, 1 invalid bracket.
+First results (before the big campaigns): A_small seed 1: 64 runs, 0 violations; A_medium seed 2: 44 runs, 175 negligible levels,
+0 violations, max M/M-dagger = 1.91.
+
+### Step 7 (read R7, R8, ENG-RES-0008 after my own derivation and implementation)
+R7 (theory division's referee of 11.18): same line-by-line content as my Step 2/3; found the r = n_o closure gap, the abort rule (M1),
+the induction (M2).  R8 (referee of K): "proved", ten minor points; own 2L+ implementation, 15 000 simulated runs, three nested levels on Q_9, Q_10.
+ENG-RES-0008 (engineering): 7 095 840 mean runs (expectation level, bounded regime, one set of design parameters b=0.5, lam=0.2,
+eta=eta'=theta=0.05) + 585 000 literal runs (b=0.5, lam=0.5, eta=1/4, eta'=theta=0.1; (u,n_o) in {(1/2,300),(1,120),(2,48)}) + reduced K.
+None of the three tested: invalid inner answers ((V1) is true by construction everywhere), the extensive regime / Algorithm 2L with
+the constants of 11.52 at sizes with negligible levels (R7 did 2L; ENG: "not started"), the new cap of 40c5bd7 (theory's harness XVI.4 only).
+My campaigns cover exactly these (B_invalid, D_2L, D_2L_off, cap check in every run).
+
+### Step 8 (Lean: statements read, compiled, axioms printed)
+lean/R6Axioms.lean (imports BoundedAccuracy, QueryRefinements; `lake env lean`, exit 0, 8 s; output lean/R6Axioms.out).
+- `admissible`, `Rstep`, `exactRec` are exactly R[T] of (11.18.2) and T_1 = theta_na, T_{k+1} = min(T_k, R[T_k]) (index shifted by one).
+- `exactRec_reaches_hint : 0<u -> 0<g -> g<cubeEstar u -> 0<eta -> exists k, exactRec (cubeNa u) k g < cubeHint u g + eta`  = statement (R).
+- cubeNa = klBin(cubeRadius, 1/2), cubeRadius = sSup{rho in [p_u,1/2] : KL(rho||p_u) <= x}; `cubeNa_isLeast_allRadii` identifies it with
+  min{KL(rho||1/2): KL(rho||p_u) <= x} for x >= 0.  cubeHint u e = klBin((Lambda_1+e)/u, 1/2).  OK = paper.
+- `two_rung_bound` = the iteration of Thm 11.58;  `close_points_bound'`, `width_le`, `populated_part_le`, `certified_lower_sum_le_mean`
+  = algebra only (no algorithm, no probability).
+- `cube_exact_dip_randomized` = (LB): finite mixture of consistent deterministic query algorithms, counts DISTINCT queried points at g = 0.
+- all ten depend on [propext, Classical.choice, Quot.sound] only.
+NOT machine-checked (confirmed by reading): the algorithm, the good event, Harper/tail lemmas, closing radius, sample sizes, the count as a
+statement about the algorithm, termination, cost sum, Lemma K.4, Prop K0, Cor K1.b, Prop E, Thm K2, the assembly.
+
+### Step 9 (every-n computations: everyn.py, separation.py)  [refers to Thm 11.56/K1, Prop 11.57(a)/K0, Thm 11.45(b), Thm 11.25(a) at 5ed4072]
+everyn.py computes, from exact binomial tables for the given n (no asymptotics): C_max of K1 with K0 inner brackets, the plain K0 bracket,
+the hinted lower bound and the NON-ADAPTIVE lower bound of Thm 11.45(b), all at the certified accuracy x_out and delta = 0.05.
+Design "K64" = the design of K_REPORT 6.4 / ENG-RES-0008 (b=0.5, lam=0.2, eta=eta'=theta=0.05, nu1=2e^u n_o/theta, inner rates eps* 0.85^i, i<40).
+CROSS-CHECK of my constants against ENG-RES-0008 (their table "cap C_max at that phi", ln/(n a)), all digits agree:
+  u=1: n=1000 phi=.55: 1.1720 (ENG 1.172); n=2000 phi=.5: 0.8700 (0.870); n=4000: 0.7228 (0.723); n=16000: 0.5887 (0.589);
+       plain 1.9254/1.3493/1.2303/1.1516/1.0689 (ENG 1.925/1.349/1.230/1.152/1.069); hinted LB 0.3324/0.2857/0.2754/0.2707/0.2649 (0.332/0.286/0.275/0.271/0.265).
+  u=2: n=1000: 0.8056 (0.806); 2000: 0.6899 (0.690); 4000: 0.6210 (0.621).   u=0.5: n=4000: 1.0482 (1.048); 8000: 0.8142 (0.814).
+  => three independent implementations (K, ENG, mine) agree on every constant of Theorem K1 and of Prop K0.
+NEW (not in any report I read): comparison with the non-adaptive LOWER bound (not with the plain bracket, which is an upper bound):
+  certified finite-n separation  C_max(two levels, every run, every instance) < LB_na (expected, every non-adaptive algorithm):
+  u=1:   n=1380: tie (ln ratio 0.0); n=1400: +1.1; 1700: +14.5; 2000: +28.1; 4000: +120.5; 8000: +316.2; 16000: +722.5   (n<=1350: negative)
+  u=2:   n=520: -1.0; n=540: +2.5; 700: +23.1; 1000: +63.2; 4000: +492.3
+  u=0.5: n=4500: -0.6; n=4700: +1.9; 5600: +13.3; 8000: +43.4; 11000: +81.8
+  (best phi on the grid = 0.50 at the crossover in all three cases; LB_na/(n a) is 0.99-1.02 already at n = 250.)
+  The lowered cap of 40c5bd7 changes ln C_max by at most 0.6 at the crossover sizes (it matters where the first term 2Mbar dominates: n=1000, phi=.55: 130.0 -> 120.7).
+Outputs: logs/separation_u1.log, _u2.log, _u05.log, data/separation_K64_u*.jsonl.
+
+### Step 10 (brute-force checks of the inputs: check_tail_lemmas.py, logs/check_tail_lemmas.log)
+Harper in the form used (|S| >= |B(m,k)| => |N(S)| >= |B(m,k+1)|): all nonempty subsets of Q_1..Q_4 (65 808 sets), 60 000 random/structured
+subsets of Q_5..Q_7: 0 violations.  Lemma K.1(a),(b) at every threshold of 960 random u-Lipschitz functions on Q_4..Q_10 (34 873 + 35 833
+thresholds): 0 violations, equality attained (ratio 1.000000).  Lemma K.4(a),(b) and (3.0) on exact tables, m <= 2000, u in {.5,1,2}, 4 values
+of eta: 22 583 cases, 0 violations (largest ratios 0.886, 0.854, 0.264).
+
+### Step 11 (the cap remark of 40c5bd7, edge case analysed on paper)
+Degenerate branch r-dagger < Delta: the published sentence covers passes with 2^{n_o} q < 1 only; at M = M-ddagger exactly, 2^{n_o} q = 1,
+r = 0, tail = s_j 2^{-n_o} E_0.  I close it: for r-dagger >= 1, E_0 <= E_1/(m+2) <= E_{r-dagger}/3, so with lam <= 1:
+tail <= s_{j-1} e^lam 2^{-n_o} E_0 < s_{j-1} 2^{-n_o} E_{r-dagger} <= theta e^b ell by [P] at r-dagger and the bound on ell after a populated
+level; for r-dagger in {0, -1}: M-dagger >= M-ddagger and the cap is 2 e^lam M-dagger > 2 M-ddagger >= every sample.  So the remark is true
+as stated (given lam <= 1, which is a hypothesis of Thm 11.56); the proof has one uncovered pass, closed here.  MINOR.
+
+### Step 12 (end-to-end replication of published trajectories with my literal engine: flat_exact.py)
+Flat instance, design K64, inner behaviour "bottom", K0 costs; my engine unchanged (one class, exact block sizes).
+  u=1 n=1000 phi=0.55: ln(cost)/(n a) = 0.9788           (ENG-RES-0008 table "flat instance at that phi": 0.979)
+  u=1 n=1000 phi=0.80: 0.7013, ln M/(n_o a) = 0.756, closing radius 255, r-dagger 180, 5003 populated / 223 negligible levels
+                       (ENG-RES-0008 mechanism table: 0.701, 0.756, 255 (180, 215), 5003 / 223 -- identical in every number)
+  u=1 n=4000 phi=0.50: 0.6872                             (ENG: 0.687)
+(I have not read their code; K_REPORT's own table has 0.701 at n=1000 as well.)  Remaining cells stopped to free CPU (machine load 10+).
+
+### Step 13 (campaign results so far; machine heavily loaded by other workstreams, my campaigns use 2 processes)
+A_small seed 11: 1600 runs (8 cells, n_o 10..40, theorem constants, 17 profile families x 10 valid inner behaviours): 1600 closed,
+  0 deterministic violations, 0 violations on the good event, good event never failed; 327 926 populated and 180 negligible levels;
+  closures: 232 at a populated pass, 1368 at an unpopulated one, 343 with empty tail; max M/M-dagger 1.98, max M/cap(40c5bd7) 0.84,
+  max count ratio (v) 0.869, max calls/bound 0.125.
+A_ties seed 12: 500 runs (dyadic lam, u n/lam integer, flat fibres, grid profiles): 451 closed, 49 discarded (a block would exceed the
+  sampler limit 2^83), 0 violations, 1819 negligible levels in 134 runs.
+
+### Step 14 (prior-art searches, 25 Nov 2026, generic queries only)
+(1) Harper's theorem, statement: search summary + the abstract-level statements quoted by the search tool from arXiv:1806.11061 (Raty),
+    arXiv:1808.02572 (Przykucki-Roberts): "|N(A)| >= |N(B)| for B the initial segment of the simplicial order with |B| = |A|"; closed-neighbourhood
+    version as well.  [search snippet]  Harper 1966 itself not retrieved.
+(2) Kaas-Buhrman 1980 (Statistica Neerlandica 34(1) 13-18): bibliographic data confirmed [search snippet]; the floor/ceil statement of the
+    median is attributed to it by secondary sources only (not confirmed from the paper).
+(3) Mathe-Novak, "Simple Monte Carlo and the Metropolis Algorithm", arXiv math/0611285: abstract read through a fetch tool: "adaptive methods are
+    much better than nonadaptive ones ... the curse of dimension (for nonadaptive methods) can be broken by adaption" [abstract].
+(4) query "adaptive versus non-adaptive query complexity estimating partition function Lipschitz function Hamming cube exponential separation
+    isoperimetric layer cake algorithm": nothing on this problem [search snippets only]; "not found", not "new".
+
+### Step 15 (cap remark of 40c5bd7, degenerate branch: capcorner.py, seeds 41-43, 4500 runs; data/capcorner_4*.json)
+Small outer cubes n_o in 3..12, lam = 1 > u in {0.15,0.2,0.3,0.45}, eta = 1/2 (M-ddagger = K 2^{n_o+1} is in the doubling sequence),
+theta in {0.003..1}, nu1 in {1, 30, 2e^u n_o/theta, 1e4}, K partly reduced, valid and invalid inner behaviours.
+ - degenerate branch (r-dagger < Delta) in 4151 of 4500 runs; r-dagger >= 1 in 1801 of them.
+ - cap 2 max{e^lam M-dagger, M-ddagger} never reached (largest M/cap = 0.5); no deterministic claim violated.
+ - r-dagger >= 1: 193 unpopulated passes with M = M-ddagger exactly; all 193 closed (as proved in my Step 11).
+ - r-dagger in {0,-1}: the unpopulated pass at M = M-ddagger did NOT close 1255 times and the sample was then doubled to exactly
+   2 M-ddagger in 1133 runs: the sentence of the published proof "at level j the size is doubled only below M-ddagger" is false there
+   (2^{n_o} q = 1 is not < 1); the STATEMENT is unaffected because then the cap is 2 e^lam M-dagger >= 2e M-ddagger (observed ratio 1/e).

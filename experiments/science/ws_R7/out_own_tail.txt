@@ -1,0 +1,44 @@
+T0 Harper brute force, m = 2 -> (min |N(S)| = |N(I_k)| for all k, N(I_k) initial segment): (True, True)
+T0 Harper brute force, m = 3 -> (min |N(S)| = |N(I_k)| for all k, N(I_k) initial segment): (True, True)
+T0 Harper brute force, m = 4 -> (min |N(S)| = |N(I_k)| for all k, N(I_k) initial segment): (True, True)
+    nestedness of neighbourhoods of initial segments, m = 5 : True
+    nestedness of neighbourhoods of initial segments, m = 6 : True
+    nestedness of neighbourhoods of initial segments, m = 7 : True
+    nestedness of neighbourhoods of initial segments, m = 8 : True
+    nestedness of neighbourhoods of initial segments, m = 9 : True
+    nestedness of neighbourhoods of initial segments, m = 10 : True
+    nestedness of neighbourhoods of initial segments, m = 11 : True
+    nestedness of neighbourhoods of initial segments, m = 12 : True
+T1 claim (a): m=3 grid units per slope u=1 trials=3000: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=3 grid units per slope u=7 trials=3000: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=3 grid units per slope u=1000 trials=3000: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=4 grid units per slope u=1 trials=3000: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=4 grid units per slope u=7 trials=3000: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=4 grid units per slope u=1000 trials=3000: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=6 grid units per slope u=1 trials=1500: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=6 grid units per slope u=7 trials=1500: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=6 grid units per slope u=1000 trials=1500: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=8 grid units per slope u=1 trials=600: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=8 grid units per slope u=7 trials=600: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=8 grid units per slope u=1000 trials=600: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=10 grid units per slope u=1 trials=150: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=10 grid units per slope u=7 trials=150: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T1 claim (a): m=10 grid units per slope u=1000 trials=150: min over thresholds of m(t e^-u) - d(m(t)) = 0
+T2 claim (b): m=3 q=1 trials=3000: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 3000)
+T2 claim (b): m=3 q=2 trials=3000: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 3000)
+T2 claim (b): m=3 q=5 trials=3000: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 3000)
+T2 claim (b): m=4 q=1 trials=3000: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 3000)
+T2 claim (b): m=4 q=2 trials=3000: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 3000)
+T2 claim (b): m=4 q=5 trials=3000: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 3000)
+T2 claim (b): m=6 q=1 trials=2000: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 2000)
+T2 claim (b): m=6 q=2 trials=2000: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 2000)
+T2 claim (b): m=6 q=5 trials=2000: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 2000)
+T2 claim (b): m=8 q=1 trials=1000: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 1000)
+T2 claim (b): m=8 q=2 trials=1000: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 1000)
+T2 claim (b): m=8 q=5 trials=1000: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 1000)
+T2 claim (b): m=10 q=1 trials=300: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 300)
+T2 claim (b): m=10 q=2 trials=300: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 300)
+T2 claim (b): m=10 q=5 trials=300: (constructed landscapes that are NOT u-Lipschitz, landscapes made) = (0, 300)
+T3 exhaustive converse, m=2: (#functions, #achieved sequences, #admissible sequences, equal, examples) = (19, 5, 5, True, [], [])
+T3 exhaustive converse, m=3: (#functions, #achieved sequences, #admissible sequences, equal, examples) = (495, 17, 17, True, [], [])
+T3 exhaustive converse, m=4: (#functions, #achieved sequences, #admissible sequences, equal, examples) = (197547, 86, 86, True, [], [])

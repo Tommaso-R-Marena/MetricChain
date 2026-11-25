@@ -1,0 +1,16 @@
+{
+"tag": "fb_V5_H_R3_t0.60",
+"tau": 0.7,
+"seq": "VVVVV",
+"bb": "H",
+"grid": "R3",
+"shape": [
+1,
+1,
+1,
+0,
+0
+],
+"natoms": 92,
+"empty": true
+}

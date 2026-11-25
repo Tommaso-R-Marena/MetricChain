@@ -289,3 +289,235 @@ absent from both final texts ("no closure at `r = n_o`", `tail := +∞`), and my
 returns an invalid pair in 48 of 48 runs (§3.1).  The necessary condition "no level below the hinted
 exponent" is a theorem for the recursion as defined (`exactRec_ge_hint` [V]).
 
+### 2.6 The assembly into exponents: what is proved, what is machine-checked, what depends on `n`
+
+**One level → (11.18.2).**  From the cost of §2.3: the outer sample has exponent
+`φθ_na((g−β)/φ)` because `n_o⁻¹ ln Γ̃(ρn_o) → KL(ρ‖p_u)` on `[p_u, ½]` (explicitly
+`Γ̃(r) ≤ (m+1)e^{2u}exp(m·KL((r−1)/m‖p_u))`, inequality (3.0) of `K_REPORT.md`; checked on exact tables,
+§3.5) and `|B(m,ρm)|/2^m = e^{−m·KL(ρ‖½)+O(log m)}`; the points that need the rung `x_l` number at most
+`e^{x_{l−1}}·poly`; an inner call costs `e^{n_iT(ξ_l)+o(n_i)}`.  With `γ = (1−φ)ξ_l` this is the bracket of
+(11.18.2) plus the ladder step `η₀`.  **[P; re-derived.]**
+
+**Levels → `θ_hint` (Theorem 11.54).**  Two routes, both re-derived:
+(i) *theory report, lines 3800–3818* (left limits): the assembled family has `T′ ≤ min(T, R[T])(·⁻) + η₀`;
+the shift `R[T̃](g) ≤ R[T](g−ε) + ε + η′` for `T̃ ≤ T(·⁻) + η′` (replace `β` by `β+ε`, `γ` by `γ−ε`); the
+induction `T̃_{k+1} ≤ T_{k+1}(·⁻) + η_k + 2η₀`.  One step is left implicit there: that the infimum over a
+*countable dense* set of tuples `(φ, β, g, η₀)` reaches `inf_{g<ξ} R[T](g)`.  It does — for fixed `ζ`
+the bracket is continuous in `(φ, β, g)` apart from the constraint `ζ ≥ β/(1−φ)` and the factors
+`(1−φ)ζ`, `(1−φ)T(ζ)`, which only decrease when `φ` is increased slightly and `β` is kept with
+`β′/(1−φ′) ≥ β/(1−φ)`; so a tuple can be approximated from the good side — but the sentence should be
+there (m4).
+(ii) *`K_REPORT.md` Proposition E* (no left limits): by induction on `k`, for all `g < g′` and `ζ > 0` a
+family with `T_F(g′) ≤ T_k(g) + ζ`; the ladder of step `k+1` is shifted by `ι ≤ g′ − g` so that the inner
+families are asked only at rates slightly above their nominal ones.  I checked every inequality
+(`(1−φ)ξ_L ≤ β + (1−φ)ι < g′`; `μ′ ≤ μ`; the three contributions `ζ/4`; the case `y_L = u < β/(1−φ)`, where
+`T_k(y_l) = 0` because `u > ε*`).  Route (ii) is the cleaner one and is the one Theorem 11.58 uses.
+
+**Bounded accuracy (Theorem 11.58).**  `φ = min(½, η/a)`, `ξ = min(ε*/2, φη)`; a family with extensive
+exponent `≤ h + η` at the rate `ξ` (Proposition E(b), from (R)); the base family (`t₀ ≤ a`); then `m`
+applications of the two-rung level, `t_{m+1} ≤ max{φa + (1−φ)(h+η), (1−φ)(ξ + t_m)} ≤
+max{h + 2η, (1−φ)t_m + φη}`, so `t_m ≤ η + max{h+η, (1−φ)^m a}`.  **[P; re-derived; the last implication
+is `two_rung_bound` [V].]**
+
+**Which part is Lean, and what exactly it states** (`lean/R6Axioms.lean`: statements printed, compiled
+with `lake env lean`, exit 0; all depend on `[propext, Classical.choice, Quot.sound]` only):
+
+| declaration | what it states | what it is in the paper |
+|---|---|---|
+| `admissible`, `Rstep`, `exactRec` (`BoundedAccuracy.lean`) | `R[T](g) = sInf{B : ∃ 0<β<g, 0<φ<1, ∀γ≥β, min(γ, φθ_na((g−β)/φ)) + (1−φ)T(γ/(1−φ)) ≤ B}`; `T₁ = θ_na`, `T_{k+1} = min(T_k, R[T_k])` | the recursion (11.18.2), exactly (index shifted by one) |
+| `exactRec_reaches_hint` | `0<u → 0<g<ε* → 0<η → ∃k, T_k(g) < θ_hint(g) + η` for `θ_na = cubeNa u`, `θ_hint = cubeHint u` | statement (R) = Theorem 11.53(d) with no hypothesis left |
+| `cubeNa_isLeast_allRadii`, `cubeHint` (`CubeHintPair.lean`) | `cubeNa u x = min{KL(ρ‖½) : 0≤ρ≤1, KL(ρ‖p_u) ≤ x}` for `x ≥ 0`; `cubeHint u e = KL((Λ₁+e)/u‖½)` | the Lean functions are the paper's `θ_na`, `θ_hint` |
+| `exactRec_ge_hint`, `exactRec_tendsto_hint` | no level below `θ_hint` (clipped at `ε*`); convergence | Theorem 11.53(b) "≥", (d) |
+| `two_rung_bound` | the iteration of Theorem 11.58 for an abstract sequence `t` | last line of the proof |
+| `certified_lower_sum_le_mean`, `populated_part_le`, `close_points_bound'`, `width_le` | four algebraic inequalities | the algebra of Steps 3, 4, 7 of K1 |
+| `cube_exact_dip_randomized` (`QueryRefinements.lean`) | for a finite mixture of consistent deterministic query algorithms that is `(ε/2, δ)`-correct on the class: if the dip of depth `r` moves `ln Z` by more than `ε` and every open ball has `≤ B` points, `(1−2δ)2ⁿ ≤ E[#distinct queries at 0]·B` | Theorem 11.25(a) |
+
+**Is the paper step from the abstract recursion to the algorithm's exponent filled?**  Yes, on paper:
+Corollary K1.b + Proposition E (extensive levels) and Theorem K2 (bounded level).  **Not** in Lean:
+the algorithm, its events, the tail lemmas and Harper's theorem, the closing radius, the sample
+sizes, the count *as a statement about the algorithm*, termination, the cost sum, Lemma 11.55,
+Proposition 11.57, the assembly.  The label of Theorem 11.56, "the algebra of the width and of the
+count V", is accurate; the status paragraph of §11.18 ("the count of evaluations — the content of
+the theorem — is not [machine-checked]") is accurate.
+
+**"Exponent `h`" or "for every `η` exponent `≤ h + η`"?**  The latter.  The proof gives, for every
+`η > 0`, a family `G_{m(η)}` — `m ≈ ln(a/h)·a/η` bounded levels on top of `k(ξ, η/2)` extensive levels at
+the rate `ξ ≈ η²/a` — with cost `exp(n(h + 2η) + o_η(n))`.  Because Theorem 11.58 is a statement about the
+*least* cost at each `n`, this suffices: `limsup n⁻¹ ln(min cost) ≤ h + 2η` for every `η`.  No single
+algorithm with exponent `h` is exhibited (a diagonal sequence `η_n → 0` would give one, with an `o(n)`
+that nobody has bounded; `k(ξ, η)` comes from a Lean proof that I did not read and the report gives no
+rate for it — numerically `(τ_k − h)/a ≈ 0.65/k²` [N, theirs]).  **What depends on `n`:** in Theorem
+11.56 nothing is asymptotic; in Proposition 11.57 and Theorems 11.54/11.58 the `o(n)` collects the
+polynomial factors (`K, J, ν₀, 1/λ, 1/η², 1/η′, 1/θ` at every level — with accuracies `ε/2^j` down the
+`m` levels), the `O(√n_o)` of the outer sample at each bounded level (Lemma 11.55(d); it is real:
+`(ln(1/π†) − ma)/√m` reaches `2.9` in R8's tables), and the unquantified `o(n_i)` of every inner
+family.  The theory report's own estimate "heuristically not better than `n^{3/4}`" (Remark (2) after
+Theorem 11.58) is consistent with what I see and is not a theorem.
+
+### 2.7 Findings
+
+**Critical: none.  Major: none.**
+
+Minor (each with location, what is missing, and the repair; "closed" = I give the missing line):
+
+* **m1 — abort rule of Theorem 11.52 is still the post-hoc one** (`docs/THEORY_REPORT.md` line 3649:
+  "If the number of queries exceeds the bound of the cost proof below … stop").  Tested after the
+  fact, the cost is bounded by the bound *plus* one inner call.  Referee R8's m1 corrected this for
+  Theorem 11.56 (line 3986–3989: "before every inner call"); the text of §11.18 was not changed.
+  Repair: the same sentence.  Closed.
+* **m2 — the displayed cost of Theorem 11.52** (line 3707) sums over `l` a term containing `x_{l−1}`,
+  undefined at `l = 0`, and omits the reference query; read literally with `l ≥ 1` it omits the one
+  query per sampled point.  Repair: `1 + (J+1)·8Je²M† + Σ_{j≤J}Σ_{l≥1}…`.  No exponent changes.  Closed.
+* **m3 — a case missing in the count of Theorem 11.52** (line 3689: "let `s_i` be the largest level not
+  above `s_je^{−x}`"): for `x > j` there is no such level.  Then `p = 1` and
+  `2M_j^neg ≤ 4KJe·e^{j−b} < 4KJe·e^{x−b}` because `ℓ ≥ s₀`.  (`K_REPORT.md` Step 7 has this case; R7 §3.7
+  mentions it.)  Closed.
+* **m4 — the assembly of Theorem 11.54** (lines 3804–3810).  (a) "the cheapest among the old one and the
+  first `d` tuples whose accuracy is at most `x`" admits a tuple at a dimension `d` where its procedure
+  is not yet a bracket procedure: the failure bound of Theorem 11.52 is proved "for `n ≥ n₀(η₀)`" (line
+  3663), and `gd + ln(4eJ+3)` (line 3805) is its accuracy only when `b ≤ G`, i.e. for
+  `d ≥ β/((1−φ)(g−β))` (otherwise `b + ln(4eJ+3)`).  Repair: admit a tuple from its own `n₀` on.  (b) the
+  passage from a countable dense set of tuples to the infimum needs the one-sided approximation
+  described in §2.6.  Both are routine; the route through Proposition E (`K_REPORT.md` §3.3), where
+  `θ` is chosen so that the accuracy is exactly `Gn` and Theorem K1 has no `n₀`, avoids them.  Closed.
+* **m5 — "likewise in expectation" and the model of the lower bound** (line 4056).  True, and worth one
+  sentence in the text: the machine-checked lower bound counts *distinct* evaluated points of a finite
+  mixture of deterministic algorithms at the zero function; the upper bound counts evaluations with
+  multiplicity in every run.  The two conventions are compatible in the direction needed.  No gap.
+* **m6 — detection of the Harper term in harnesses.**  Not an error of the text: in my runs the
+  mutation "no Harper term" is detected in 1 of 47 runs only (R8: 2–15 %), i.e. most instances never
+  exercise the one step that distinguishes Theorem 11.56 from Theorem 11.52 at a bounded accuracy
+  (a populated level whose closing radius is just above `r†`).  A harness that reports "no violation"
+  should report how many populated passes had `min{Γ̃/c_η, Γ″} ≤ θ` decided by `Γ″`.  (In my campaigns:
+  §3.2.)
+* **m7 — the cap remark of `40c5bd7` has one uncovered pass** — see §2.8.  Closed.
+
+### 2.8 The remark "the sample-size cap can be lowered" (commit `40c5bd7`) — proved, with one pass added
+
+*Statement* (theory report at `40c5bd7`, remark after Theorem 11.56; `[P]`, theirs, unrefereed).
+`Δ := ⌈λ/u⌉`, `π‡ := 2^{−n_o}|B(n_o, r†−Δ)|`, `M‡ := K/((1−η)π‡)` (`M‡ := K2^{n_o}/(1−η)` if `r† < Δ`).  **In every
+run every sample is `K` or has fewer than `2max{e^λM†, M‡}` points.**  For Theorem 11.52: `M < 2e·M†`.
+
+*My derivation* **[P; checked on every run of §3: the cap was never reached, largest observed ratio
+in §3.2].**  Level 0 is populated at `M = K` in every run: the rung-0 bracket of any point has
+`L = e^{−ψ(a,0)−un_i} ≥ e^{−ψ₀−un_o−un_i} = s₀ > s₀e^{−b}`, so every point is high without an inner call.  A
+later level `j` follows a level that was left.  (1) After a negligible level, `M_j^neg ≤ e^λM_{j−1}^neg ≤
+e^λM_{j−1} < e^λM†`, so every sample of level `j` is `< 2e^λM†`.  (2) After a populated level, `q_{j−1} > π†`
+gives `p̲_{j−1} > c_ηπ†` and a Harper radius `≥ κ(r†+1)`, so `ℓ ≥ s_{j−1}e^{−b}max{c_ηπ†, 2^{−n_o}T(κ(r†+1))}`.
+Let a pass of level `j` be unpopulated with `M ≥ M‡`.  If `r† ≥ Δ`: `q ≤ π‡`, so `r ≤ r† − Δ`; termwise
+`E_{r−1} ≤ e^{−u}E_r`, hence `tail = s_j2^{−n_o}E_r ≤ s_{j−1}e^{λ−uΔ}2^{−n_o}E_{r†} ≤ s_{j−1}2^{−n_o}E_{r†}`, and [P] at `r†`
+(either `E_{r†} ≤ θT(κ(r†))` or `E_{r†} ≤ c_ηθ·max(1, |B(r†−1)|) ≤ c_ηθ2^{n_o}π†`) gives `tail ≤ θe^bℓ`: the run
+stops.  All of this agrees with the published proof.
+
+*The uncovered pass.*  For `r† < Δ` the published proof says only "(a pass with `2^{n_o}q < 1` has an
+empty tail)".  But `M = M‡ = K2^{n_o}/(1−η)` can lie in the doubling sequence (`η = ½`), and then
+`2^{n_o}q = 1` exactly: `r = 0` and `tail = s_j2^{−n_o}E_0 ≠ 0`.  If that pass did not close and had
+`M < M_j^neg`, the next sample would have exactly `2M‡` points — not "fewer than".  It does close:
+* if `r† ≥ 1`: `E_1 = (e^{2u}−1) + m(e^u−1) ≥ (m+2)(e^u−1) = (m+2)E_0`, so with `λ ≤ 1`,
+  `e^λE_0 ≤ (e/3)E_1 < E_{r†}`, and `tail ≤ s_{j−1}e^λ2^{−n_o}E_0 < s_{j−1}2^{−n_o}E_{r†} ≤ θe^bℓ` as before;
+* if `r† ∈ {0, −1}`: `M† ≥ M‡`, so the cap is `2e^λM† > 2M‡`, and no sample exceeds `2M‡` because a pass
+  with `M > M‡` has an empty tail.
+So the statement is true as published, *given* `λ ≤ 1` (a hypothesis of Theorem 11.56 that erratum m3
+of `K_REPORT.md` calls unused — here it is used), and its proof needs these three lines.  The 2L form
+`M < 2e·M†` I re-derived directly: an unpopulated pass with `M ≥ max{M†, M_j^neg/(4Je)}` has
+`q ≤ π*`, `Γ̃(r) ≤ e^{G−b}/4`, `tail ≤ s_j(2K/M)e^{G−b}/4 ≤ e^Gℓ`, and `M_j^neg ≤ 4Je²M†`.  **Verdict: proved
+with a gap that I close (minor).**  Effect on the cost: the first branch of every minimum in `C_max`
+loses a factor of order `ν₀`; in my tables `ln C_max` drops by between `0.1` and `11` (§2.9), no exponent changes.
+
+### 2.9 An every-`n` statement (no `o(n)`), and a certified finite-`n` separation
+
+The brief asks whether the cost can be stated and proved with explicit constants for every `n` on a
+sub-class.  **It can, and on the whole class** — for two levels.  The `o(n)` of §§11.18–11.19 enters
+only (a) when binomial sums are replaced by exponents and (b) through the unquantified `o(d)` of an
+inner *family*; with the base bracket as inner procedure neither is needed.
+
+**Theorem R6.1 (two levels, every `n`, the whole class) [P: the composition of Theorem 11.56 = K1 and
+Proposition 11.57(a) = K0, both re-derived here; every constant computed by my own code and equal, to
+all published digits, to the engineering division's (§3.3)].**  Let `u > 0`, `n ≥ 2`, `1 ≤ n_o ≤ n−1`,
+`n_i = n − n_o`, `0 < λ ≤ 1`, `0 < η ≤ ½`, `η′ > 0`, `θ > 0`, `ν₁ ≥ 1`, `b > 0`, `0 < δ < 1`, and a ladder
+`2un_i = x₀ > x₁ > … > x_L`, `x_L ≤ b`.  Let `J, ν₀, r†, π†, m_max, K, ν, M†, M̄, δ′, cnt` be the constants of
+§2.1.  For `l = 1, …, L` let `η_l = min(½, tanh(x_l/4))`, `K_l = ⌈3(1+η_l)η_l⁻² ln(4/δ′)⌉`, `r*_l` the largest
+radius `≤ n_i − 1` with `ln(1 + Γ″_{n_i}(r′)) ≤ x_l − ln((1+η_l)/(1−η_l))` for all `r′ ≤ r*_l` (`Γ″` with `η_l`),
+`M_l = ⌈K_l2^{n_i}/((1−η_l)|B(n_i, r*_l)|)⌉`, and `C_l = min{2M_l, 2^{n_i}}` (`2^{n_i}` if no radius qualifies).
+Then, for **every** `ψ ∈ L_u(Q_n)`, Algorithm 2L⁺ with the two-sample bracket of accuracy `x_l` on the
+fibres (enumeration where `C_l = 2^{n_i}`):
+
+* makes at most `C_max = 1 + 2M̄ + Σ_{l=1}^{L} min{2M̄, (J+1)cnt(x_{l−1})}·C_l` evaluations **in every run**;
+* returns, with probability at least `1 − δ`, a pair `L ≤ A ≤ U` with
+  `U/L ≤ e^{x_out}`, `x_out = ln[(2p_u)^n + e^b(e^λ(1+η)/(1−η) + η′ + θ)]`.
+
+`C_max` and `x_out` are finite expressions in binomial coefficients of `n_o`, `n_i` and in `e^u`; there
+is no `o(n)` and no "for `n` large".  With the cap of §2.8, `M̄` may be replaced by
+`max{e^λM†, M‡}` in the two places where it appears doubled.
+
+*Proof.*  Proposition K0 makes `I_l` a bracket procedure for `(n_i, x_l, δ′)` with cost `2M_l` (two
+samples; §0: re-derived — the three events, `t⁺`, `t⁻`, the two tail lemmas, `r̂ ≤ r*_l ≤ n_i − 1`);
+enumeration is exact.  Theorem K1 (§2.3–2.4) then applies verbatim.  ∎
+
+*A closed form for the dominant factor* (Lemma 11.55(d), checked on exact tables `m ≤ 4000`, §3.5): if
+`θ ≤ 2e^{u(m₀+2)}`, `ν₁ ≥ 2e^un_o/θ` and `r₊ := ⌊p_un_o − √((n_o/2)ln(2e^{u(m₀+2)}/θ))⌋ ≥ p_un_o/2`, with
+`m₀ = ⌈u⁻¹ln((1+η)/(1−η))⌉`, then
+
+    ln M̄ ≤ n_o·a + (u + ln 4)(1 + √((n_o/2)·ln(2e^{u(m₀+2)}/θ))) + ln(n_o+1) + ln(2(1+η)e^λν₀K/(1−η)) ,
+
+and the same form with `d = n_i`, `e^{x/2} − 1` for `θ` holds for the base bracket at a bounded accuracy
+`x`.  With (3.0) for the extensive rungs this gives a two-level bound of the form
+`exp(n·max{…} + c₁√n + c₂ ln n + c₃)` whose constants are explicit in principle; I did not write them out —
+the tables below are computed from the exact `C_max`, not from such a closed form.
+
+**Where it resists.**  For `k ≥ 3` levels the bound is still an explicit finite recursion in `n`
+(Theorem K1 applied to itself), but no closed form with an explicit `o(n)` follows from the proofs:
+the number of levels needed for a given `η` comes from the convergence of the recursion, for which
+the Lean proof gives existence and the reports give numerics only; each bounded level loses a factor
+`e^{O(√n)}`; and the inner accuracies shrink like `ε/2^j`.  An explicit statement
+"`min_alg cost ≤ exp(nh + C·n^α)` for all `n ≥ n₀`" with `α < 1` is **not** proved by anyone, and I could not
+prove one in the time I had: the missing input is a rate for `T_k → θ_hint`.
+
+**Corollary R6.2 (a certified separation at explicit finite `n`) [P given Theorem R6.1 and Theorem
+11.45(b) — the non-adaptive lower bound, machine-checked up to two finite sums; numbers from exact
+binomial tables with 40-digit arithmetic, `everyn.py`, `separation.py`].**  Take the design of
+`K_REPORT.md` §6.4: `b = 0.5`, `λ = 0.2`, `η = η′ = θ = 1/20`, `ν₁ = 2e^un_o/θ`, `δ = 0.05`, inner rates
+`ε*·0.85^i` (`i < 40`), `n_o = ⌊n/2⌋`; certified accuracy `x_out = 0.872`.  Let `LB_na` be the lower bound
+of Theorem 11.45(b) at the same accuracy and `δ`: `(1 − 2δ)2ⁿ/|B(n, R−1)|` with `R` the least radius such
+that flattening a cone below `R` lowers `ln Z` by more than `x_out`.  Then (natural logarithms of
+numbers of evaluations):
+
+| `u` | `n` | `ln C_max` (adaptive, every run, every instance) | `ln LB_na` (every non-adaptive algorithm, in expectation, on some instance) | `ln` of the plain two-sample bracket | `ln` of the hinted lower bound |
+|---|---|---|---|---|---|
+| 1 | 1000 | 126.3 | 110.9 | 149.7 | 31.7 |
+| 1 | 1350 | 150.8 | 149.0 | 193.9 | 42.0 |
+| 1 | **1400** | **154.0** | **155.0** | 199.9 | 43.5 |
+| 1 | 2000 | 193.1 | 221.1 | 273.0 | 61.1 |
+| 1 | 4000 | 320.8 | 441.3 | 511.1 | 120.1 |
+| 1 | 8000 | 566.9 | 883.1 | 976.9 | 236.8 |
+| 1 | 16000 | 1045.1 | 1767.6 | 1897.4 | 470.3 |
+| 2 | 520 | 170.1 | 169.1 | 228.8 | 53.4 |
+| 2 | **540** | **173.9** | **176.5** | 236.2 | 55.1 |
+| 2 | 1000 | 264.1 | 327.2 | 402.7 | 100.4 |
+| 2 | 4000 | 814.3 | 1306.6 | 1448.0 | 393.2 |
+| ½ | 4500 | 136.3 | 135.7 | 166.8 | 37.3 |
+| ½ | **4700** | **139.6** | **141.5** | 173.7 | 39.0 |
+| ½ | 8000 | 197.4 | 240.7 | 279.9 | 64.5 |
+| ½ | 11000 | 249.3 | 331.1 | 375.8 | 87.5 |
+
+So, for instance, **at `n = 2000`, `u = 1`, bracket ratio `e^{0.872}`, `δ = 0.05`: every non-adaptive
+algorithm needs more than `e^{221}` evaluations in expectation on some member of `L_u(Q_n)`, while
+Algorithm 2L⁺ needs at most `e^{193.1}` in every run on every member** — a factor `e^{28}`, with every
+constant explicit.  On the grids I computed (`u = 1`: 17 sizes from `250` to `16 000`; `u = 2`: 12 sizes
+from `250` to `4000`; `u = ½`: 11 sizes from `1000` to `11 000`; outer fractions `0.35–0.60`, `0.45–0.55` at the
+refinement sizes, `0.50` only at `n = 16 000`), the certified bound falls below the non-adaptive lower
+bound at `n = 1400` (`u = 1`; at `1380` the two agree to the first decimal of the logarithm), `540` (`u = 2`),
+`4700` (`u = ½`) and stays below at every larger size computed.  What this does **not** say: it is a statement at the listed `n` (monotonicity in `n` is
+observed, not proved); the numbers are far beyond anything executable; and it compares a paper-proved
+upper bound with a lower bound whose closed forms are paper calculus.  What it adds to the reports:
+they compare the algorithm with the *plain bracket* (an upper bound for non-adaptive algorithms,
+crossover `n ≈ 500` at `u = 1` in ENG-RES-0008); the comparison that makes "adaptivity helps" a theorem
+at a given `n` is with the non-adaptive *lower* bound, and that crossover is at `n = 1400`.  Note that
+`ln LB_na/(na)` is between `0.99` and `1.02` at every size: at a bounded accuracy the non-adaptive lower
+bound is essentially `e^{na}` already at `n = 250`.
+
+**On the zero residual** the run with real base brackets is deterministic and its cost is an exact,
+explicit function of `n`; my engine reproduces the published values (§3.3).  The zero residual is the
+*cheap* instance for this algorithm (it closes at a radius far above `r†`), so an every-`n` statement
+restricted to it would be weaker than Theorem R6.1 in the only direction that matters.
+

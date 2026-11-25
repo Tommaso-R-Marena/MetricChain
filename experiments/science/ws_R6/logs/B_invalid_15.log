@@ -1,0 +1,24 @@
+B_invalid seed 15 time 308s
+{
+ "runs": 400,
+ "harness_limit": 5,
+ "closed": 195,
+ "abort": 179,
+ "Gfail": 395,
+ "det_viol": 0,
+ "good_viol": 0,
+ "pop": 213534,
+ "neg": 8066,
+ "runs_with_neg": 132,
+ "close_pop": 18,
+ "close_unpop": 177,
+ "close_tail0": 19,
+ "invalid_bracket_any": 159,
+ "maxratio": {
+  "M_over_Mbar": 0.0009115544078952058,
+  "M_over_Mdag": 2.072147143611625,
+  "M_over_capnew": 0.8433740467435463,
+  "lnq_over_lnCmax": 0.7951227857745183,
+  "q_over_Cvi": 0.00016342132964638446
+ }
+}

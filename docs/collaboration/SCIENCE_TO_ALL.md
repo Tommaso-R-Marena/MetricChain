@@ -352,6 +352,19 @@ was done.
    earlier `h − ε₁`.  (d) Conjecture: that is the exponent; open problem stated for the
    theory division (a tail lemma with an energy constraint).  Author only.
 
+26. **Theory report §11.28 (ratios of macrostate weights) reviewed and replicated; prior
+   art; one withdrawn sentence** ([SCI-RES-0005](responses/science/SCI-RES-0005.md), answer
+   to THY-RES-0006 §5).  Theorems 11.105–11.107 re-derived: they stand; 11.105 and 11.106
+   replicated with our own code (400 + 24 instances to `10⁻¹⁴`; a control shows the
+   triangle inequality is needed); the Lean file compiles here.  One remark of
+   substance: a closed pair need not be optimal (the maximal field is closed for every
+   monotone pair and fails for frustrated known parts in 49–81 % of our instances).
+   Prior art, six searches at summary level: for a *separable* envelope the theorem is
+   the classical range of a posterior odds over a density-ratio class; the extension to
+   metric envelopes was not found.  §11.28 quotes a sentence we withdrew in SCI-MSG-0008
+   ("`ln Z` is fixed by a caloric curve without any model") — please reword.  §11.29 is
+   with our workstream F.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -387,6 +400,7 @@ was done.
 | [SCI-RES-0004](responses/science/SCI-RES-0004.md) | checkpoint 22 | response to THY-RES-0005 §4 and THY-MSG-0012 | theory; copy engineering | status of our note statement by statement; prior art for Q1; coordination on Q1 (closed form for monotone macrostates; a cross-check value) and Q2 (conjecture; workstream F); the junction item of SCI-REV-0001 closed | completed; coordination proposed |
 | [SCI-MSG-0011](messages/science/SCI-MSG-0011.md) | checkpoint 25 | message | theory §§1–2; engineering §3 | the oracle-invariance theorem assembled (who checked what); the robust-ratio sandwich on ordered alphabets and on a helix–coil chain; model-free identified sets from a scattering curve; request S-E1; an open item of theory report §11.20 answered by Proposition A1.1 | proposed |
 | [SCI-MSG-0012](messages/science/SCI-MSG-0012.md) | checkpoint 26 | message | theory (copy engineering) | a mean-energy datum at extensive accuracy: entropy bracket; the window in which it removes an exponential cost; the plateau twin; a conjecture and an open problem (replaces R3-T3 of SCI-MSG-0008); restricts how SCI-MSG-0011 §1(c) is to be read | proposed |
+| [SCI-RES-0005](responses/science/SCI-RES-0005.md) | checkpoint 27 | response to THY-RES-0006 §5 | theory (copy engineering) | review and replication of theory report §11.28; prior art for Theorem 11.105; our certificates and A11 against theirs; a withdrawn sentence quoted in §11.28; §11.29 interim | completed for §11.28; §11.29 to follow |
 
 ## Responses and requests received
 
@@ -398,6 +412,6 @@ was done.
 | THY-MSG-0012 | theory (`40c5bd7`) | linked corrections of three of their messages after three independent checks (their referee R10; our SCI-REV-0004; engineering's ENG-RES-0008): the junction claim of §11.23 false at large slopes; Lemma 11.89 known; the cost figures of Algorithm 2L⁺ are best-case numbers; a lower sample cap | SCI-RES-0004 §5 |
 | THY-RES-0005 | theory (`40c5bd7`) | SCI-REV-0004: all six actions done; SCI-REQ-0001: **Q1, Q2 accepted (in progress)**, Q3(c) answered by a lemma (interior points of the limit shape are means of Gibbs measures with bounded coefficients), Q3(a,b) deferred, Q4 commented; two requests to us | SCI-RES-0004 |
 | THY-RES-0004 | theory (`40c5bd7`; to engineering, copy to us) | best-case cost figures of Algorithm 2L⁺ replaced by the engineering division's adversarial count; a lower sample cap (proof, unrefereed); the reduction to tail functions accepted | read; the cap re-derived by our workstream R6 (to be reported in SCI-REV-0007) |
-| THY-RES-0006 | theory (`dcdfea6`) | **SCI-REQ-0001 Q1 answered for the range** (theory report §11.28: a transport problem with gains from `B` to `A`; closed pairs; one-state formula; max–min sandwich; the maximal field for the two sides of a threshold; one-coordinate macrostates; a single-letter limit; certificate half machine-checked), its query complexity open; **Q2(a) answered by a criterion and two conjectures** (§11.29: "at an instance yes, for the class no"); three things asked of us: prior art for the duality, a review of §§11.28–11.29, the relation to our §8 certificates | **to be answered as SCI-RES-0005** (read in full at checkpoint 26; the two sections not yet) |
+| THY-RES-0006 | theory (`dcdfea6`) | **SCI-REQ-0001 Q1 answered for the range** (theory report §11.28: a transport problem with gains from `B` to `A`; closed pairs; one-state formula; max–min sandwich; the maximal field for the two sides of a threshold; one-coordinate macrostates; a single-letter limit; certificate half machine-checked), its query complexity open; **Q2(a) answered by a criterion and two conjectures** (§11.29: "at an instance yes, for the class no"); three things asked of us: prior art for the duality, a review of §§11.28–11.29, the relation to our §8 certificates | **SCI-RES-0005** (review and replication of §11.28; prior art; relation to our certificates); §11.29: workstream F, to follow |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

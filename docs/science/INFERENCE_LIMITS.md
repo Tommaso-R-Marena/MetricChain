@@ -419,7 +419,12 @@ Three versions, each with a certificate whose soundness is one line:
   `Σ Λ μ₀ w ≤ 0` by the data.)  The dual object is a **flow with gains** — where minima over
   an envelope class dualise to shortest paths and transport, Boltzmann averages dualise to
   generalised flows.  *Open:* families of flows on product spaces for which the inequality
-  can be checked by a pairwise kernel.
+  can be checked by a pairwise kernel.  **For a ratio of two macrostate weights and no
+  data the theory division has the sharp form (theory report §11.28 at `dcdfea6`, Theorem
+  11.105; reviewed and replicated by us, SCI-RES-0005):** flows from `B` to `A` suffice, the
+  certificate is exact, the optimum is a "closed pair", and for a macrostate defined by
+  one coordinate a plan that moves that coordinate only gives a bound a pairwise kernel
+  can check site by site (its Theorem 11.107).
 
 Nothing in this section is deep; what is new to the programme is that its kernels are
 dual-feasibility checkers for inference from *measurements*, and that the first version
@@ -625,9 +630,15 @@ model, class, measurement, certificate — could be closed on public fixed-seque
 5. Extensive and local versions of Theorem 7: the extensive version under a
    transport–entropy inequality is addendum A2; the local version is open.
 6. Robust ratios of macrostate partition functions (§7): **solved for binary sites,
-   submodular known parts and monotone macrostates (A11)**; open for frustrated known
-   parts, non-monotone macrostates, unordered alphabets, and with evaluations; tractable
-   flow families (§8) are still needed for §11.4 beyond 10 beads.
+   submodular known parts and monotone macrostates (A11), on ordered alphabets (A13), and
+   in general as a transport problem with gains by the theory division (theory report
+   §11.28: duality, closed pairs, closed forms for exchangeable known parts and type
+   macrostates, a single-letter limit; reviewed in SCI-RES-0005)**.  Open: the exact value
+   for a pairwise known part and counting macrostates; a condition under which the
+   maximal field is the optimal closed pair (common ground of A11 and Theorem 11.106);
+   the range *given evaluations*; **the number of evaluations needed to certify a ratio**
+   (theory report §12 item 11(a)); tractable flow families with data (§8) for §11.4
+   beyond 10 beads.
 7. Everything above for alphabets of size `k > 2` and for chains.
 8. The upper boundary `γ⁺` of the limit shape and the chord at the athermal point (§11.3);
    class tables for bridges (requests R3-E1, R3-E2) to test how much Conjecture 11.75

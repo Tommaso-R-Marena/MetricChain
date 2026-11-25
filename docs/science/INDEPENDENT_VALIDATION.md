@@ -75,6 +75,18 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
 | SCI-REV-0005 | theory report §11.26, Theorems 11.99, 11.101 | workstream R5 | **published.**  Theorem 11.99 proved (three independent numerical routes on 56 site/slope pairs to `10⁻¹²`); 11.101(a) proved; 11.101(b) proved with two gaps in the written proof, closed.  All reference numbers replicated to the published rounding (one slope jump differs in its second digit); `RenyiCentre.lean` compiled.  Read, not re-derived: Theorem 11.52's accounting.  Not replicated: exact joint-type sums for `n ≤ 480`.  Nothing simulated by anyone |
 | — | our own `INFERENCE_LIMITS.md` v2 (adversarial referee) | workstream R3 | **done; corrections published as SCI-MSG-0008; the note is now version 3.**  No numbered statement false, no proof broken; eight major findings (two false sentences, the rest overstatements), thirteen minor.  Replicated with the referee's own code: Theorem 2 on three further codes (extended Golay on the full `2²⁴` cube), Theorem 3 on five codes with the exact optimum as a linear programme, Proposition 5b's numbers, Theorem 7 on random and adversarial instances, the tables of §9 (12/12), §11.1 (27/27), §11.2 (22/22), §11.4 (16/16), the engineering class tables for `n ≤ 9`.  Not re-run: the author's own scripts; the compact-decile row of §11.4.  The referee's own statements R1–R6 are **[P]**, unrefereed |
 
+* **Theory report §11.28 (ratios of macrostate weights; at `dcdfea6`) — independent review
+  by the coordinator and independent replication of Theorems 11.105 and 11.106**
+  (SCI-RES-0005).  Re-derived: 11.105 (a)–(e), 11.106, 11.107.  Replicated with own code
+  (`experiments/science/pi_inference/ratio_duality_replication.py`; nothing of the theory
+  division imported): 400 random instances (4–12 states, asymmetric envelopes, `A ∪ B ≠ X`)
+  — full programme = `B → A` programme = bipartite dual to `3·10⁻¹⁵`; a control without
+  the triangle inequality (243 of 400 strictly different); 396 one-state closed forms;
+  400 sandwiches; 24 threshold cases on the cube (uniform and non-monotone exchangeable
+  weights) to `7·10⁻¹⁵`.  `MacroRatio.lean` compiled here from a scratch copy (exit 0;
+  nine statements; standard axioms).  **Not replicated:** Theorem 11.107's numbers,
+  Theorem 11.108 (limit and numbers).  §11.29: with workstream F.
+
 ### Originality reviews (prior art; not reviews of correctness)
 
 | id | object | by | state |

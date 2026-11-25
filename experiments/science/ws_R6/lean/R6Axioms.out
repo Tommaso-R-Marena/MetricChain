@@ -1,0 +1,85 @@
+admissible : (ℝ → ℝ) → (ℝ → ℝ) → ℝ → Set ℝ
+def MetricChain.BoundedAccuracy.admissible : (ℝ → ℝ) → (ℝ → ℝ) → ℝ → Set ℝ :=
+fun θna T g =>
+  {B |
+    ∃ φ β,
+      0 < β ∧ β < g ∧ 0 < φ ∧ φ < 1 ∧ ∀ (γ : ℝ), β ≤ γ → min γ (φ * θna ((g - β) / φ)) + (1 - φ) * T (γ / (1 - φ)) ≤ B}
+def MetricChain.BoundedAccuracy.Rstep : (ℝ → ℝ) → (ℝ → ℝ) → ℝ → ℝ :=
+fun θna T g => sInf (admissible θna T g)
+def MetricChain.BoundedAccuracy.exactRec : (ℝ → ℝ) → ℕ → ℝ → ℝ :=
+fun θna x => Nat.brecOn (motive := fun x => ℝ → ℝ) x (exactRec._f θna)
+@exactRec_reaches_hint : ∀ {u : ℝ},
+  0 < u → ∀ {g : ℝ}, 0 < g → g < cubeEstar u → ∀ {η : ℝ}, 0 < η → ∃ k, exactRec (cubeNa u) k g < cubeHint u g + η
+@exactRec_ge_hint : ∀ {u : ℝ}, 0 < u → ∀ (k : ℕ) (g : ℝ), 0 < g → cubeHintClip u g ≤ exactRec (cubeNa u) k g
+@exactRec_tendsto_hint : ∀ {u : ℝ},
+  0 < u →
+    ∀ {g : ℝ},
+      0 < g → g < cubeEstar u → Filter.Tendsto (fun k => exactRec (cubeNa u) k g) Filter.atTop (nhds (cubeHint u g))
+@two_rung_bound : ∀ {h a η φ ξ Tξ : ℝ} (t : ℕ → ℝ),
+  0 ≤ φ →
+    φ ≤ 1 →
+      0 ≤ η →
+        0 ≤ h →
+          φ * a ≤ η →
+            ξ ≤ φ * η →
+              Tξ ≤ h + η →
+                t 0 ≤ a →
+                  (∀ (m : ℕ), t (m + 1) ≤ max (φ * a + (1 - φ) * Tξ) ((1 - φ) * (ξ + t m))) →
+                    ∀ (m : ℕ), t m ≤ η + max (h + η) ((1 - φ) ^ m * a)
+@certified_lower_sum_le_mean : ∀ {α : Type u_1} [inst : Fintype α] [Nonempty α] (W : α → ℝ),
+  (∀ (a : α), 0 ≤ W a) →
+    ∀ (t : ℕ → ℝ),
+      Monotone t →
+        0 ≤ t 0 →
+          ∀ (P : Finset ℕ) (pbar : ℕ → ℝ),
+            (∀ i ∈ P, pbar i ≤ LayerCake.exceed W (t (i + 1))) → ∑ i ∈ P, (t (i + 1) - t i) * pbar i ≤ LayerCake.mean W
+@populated_part_le : ∀ {lam b c : ℝ},
+  0 ≤ lam →
+    ∀ (P : Finset ℕ) (s q pbar : ℕ → ℝ),
+      (∀ i ∈ P, 0 ≤ s i) →
+        (∀ i ∈ P, q i ≤ c * pbar i) →
+          ∑ i ∈ P, (Real.exp lam - 1) * s i * q i ≤
+            c * Real.exp (lam + b) * ((1 - Real.exp (-lam)) * Real.exp (-b) * ∑ i ∈ P, s i * pbar i)
+@close_points_bound' : ∀ {ν ℓ b x lam s si P c : ℝ},
+  0 ≤ ν →
+    0 < ℓ →
+      s * Real.exp (-x - lam) ≤ si →
+        0 ≤ P → si * P ≤ c * Real.exp b * ℓ → ν * s / (ℓ * Real.exp b) * P ≤ ν * c * Real.exp (x + lam)
+@width_le : ∀ {s0 pop neg tail L b lam c ε0 η' θ : ℝ},
+  s0 ≤ ε0 * L →
+    pop ≤ c * Real.exp (lam + b) * L →
+      neg ≤ η' * Real.exp b * L →
+        tail ≤ θ * Real.exp b * L → s0 + pop + neg + tail ≤ (ε0 + Real.exp b * (c * Real.exp lam + η' + θ)) * L
+@cube_exact_dip_randomized : ∀ {Ω : Type u_1} [inst : Fintype Ω] (n : ℕ) (alg : Ω → QueryAlgorithm (Fin n → Bool))
+  (P : Ω → ℝ),
+  (∀ (ω : Ω), 0 ≤ P ω) →
+    ∑ ω, P ω = 1 →
+      ∀ {β c ε δ r : ℝ},
+        0 ≤ c →
+          (∀ (y : Fin n → Bool),
+              ε < Real.log (∑ x, Real.exp (β * max 0 (r - hamEnv (fun x => c) x y))) - Real.log (2 ^ n)) →
+            ∀ {B : ℝ},
+              (∀ (a : Fin n → Bool), ↑{y | hamEnv (fun x => c) a y < r}.card ≤ B) →
+                (∀ (g : (Fin n → Bool) → ℝ),
+                    Admissible (hamEnv fun x => c) g →
+                      1 - δ ≤ ∑ ω with |(alg ω).output g - Real.log (∑ x, Real.exp (-β * (0 + g x)))| ≤ ε / 2, P ω) →
+                  (1 - 2 * δ) * 2 ^ n ≤ (∑ ω, P ω * ↑((alg ω).queries fun x => 0).card) * B
+@cubeNa_isLeast_allRadii : ∀ {u : ℝ},
+  0 < u →
+    ∀ {x : ℝ}, 0 ≤ x → IsLeast ((fun ρ => klBin ρ (1 / 2)) '' {ρ | 0 ≤ ρ ∧ ρ ≤ 1 ∧ klBin ρ (cubeP u) ≤ x}) (cubeNa u x)
+@cubeNa_add_cubeHint : ∀ {u : ℝ},
+  0 < u → ∀ {e : ℝ}, 0 ≤ e → e ≤ cubeEstar u → cubeNa u (e + cubeHint u e) = cubeHint u e
+'MetricChain.BoundedAccuracy.exactRec_reaches_hint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoundedAccuracy.exactRec_ge_hint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoundedAccuracy.exactRec_tendsto_hint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoundedAccuracy.two_rung_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoundedAccuracy.certified_lower_sum_le_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoundedAccuracy.populated_part_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoundedAccuracy.close_points_bound'' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoundedAccuracy.width_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.cube_exact_dip_randomized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.HintRecursion.cubeNa_isLeast_allRadii' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+real	0m8.048s
+user	0m4.417s
+sys	0m1.540s

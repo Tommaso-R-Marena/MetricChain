@@ -1,0 +1,41 @@
+(A) exhaustive enumeration
+--- n=10 p=0.3 u=1.0 k=5 q=0.05: single truncated cone in class: True (max|ln ratio|=1.000000); density of its difference set per type class <= 0.0238
+    A_t=0.885928 (removed 0.114072); densities: cone 0.337146, truncated 0.323596, removed 0.442377; b=1.099312 (gamma2=-1.0)
+    compensated pair in class: True, True; one-body marginals: truncated+b: 0.442377047913 (spread 7.8e-16), cone+b: 0.442377047913 (spread 6.1e-16); max diff 1.11e-16
+    without compensation: cone 0.337145999 vs truncated 0.323596443: gap +1.355e-02
+    separation ln A(w1)/A(w0) = 0.055870 (uncompensated 0.121120); max density of the symmetrised difference set = 0.1905 (<= n q = 0.500)
+--- n=12 p=0.3 u=1.0 k=6 q=0.02: single truncated cone in class: True (max|ln ratio|=1.000000); density of its difference set per type class <= 0.0076
+    A_t=0.938117 (removed 0.061883); densities: cone 0.337146, truncated 0.329660, removed 0.450628; b=1.297317 (gamma2=-1.0)
+    compensated pair in class: True, True; one-body marginals: truncated+b: 0.450627514222 (spread 1.4e-15), cone+b: 0.450627514222 (spread 1.1e-15); max diff 8.33e-16
+    without compensation: cone 0.337145999 vs truncated 0.329660161: gap +7.486e-03
+    separation ln A(w1)/A(w0) = 0.027307 (uncompensated 0.063881); max density of the symmetrised difference set = 0.0758 (<= n q = 0.240)
+--- n=12 p=0.1 u=2.0 k=5 q=0.02: single truncated cone in class: True (max|ln ratio|=2.000000); density of its difference set per type class <= 0.0101
+    A_t=0.881471 (removed 0.118529); densities: cone 0.196497, truncated 0.176212, removed 0.347353; b=1.457544 (gamma2=-2.0)
+    compensated pair in class: True, True; one-body marginals: truncated+b: 0.347353056725 (spread 6.7e-16), cone+b: 0.347353056725 (spread 7.2e-16); max diff 2.78e-16
+    without compensation: cone 0.196497224 vs truncated 0.176212035: gap +2.029e-02
+    separation ln A(w1)/A(w0) = 0.049433 (uncompensated 0.126163); max density of the symmetrised difference set = 0.0970 (<= n q = 0.240)
+--- n=14 p=0.2 u=1.5 k=6 q=0.01: single truncated cone in class: True (max|ln ratio|=1.500000); density of its difference set per type class <= 0.0093
+    A_t=0.907720 (removed 0.092280); densities: cone 0.256647, truncated 0.244160, removed 0.379477; b=0.824814 (gamma2=-1.5)
+    compensated pair in class: True, True; one-body marginals: truncated+b: 0.379477173584 (spread 2.8e-15), cone+b: 0.379477173584 (spread 2.6e-15); max diff 1.55e-15
+    without compensation: cone 0.256646927 vs truncated 0.244159869: gap +1.249e-02
+    separation ln A(w1)/A(w0) = 0.051893 (uncompensated 0.096819); max density of the symmetrised difference set = 0.0979 (<= n q = 0.140)
+--- n=14 p=0.1 u=2.0 k=7 q=0.005: single truncated cone in class: True (max|ln ratio|=2.000000); density of its difference set per type class <= 0.0023
+    A_t=0.967750 (removed 0.032250); densities: cone 0.232834, truncated 0.226012, removed 0.437549; b=15.387347 (gamma2=-2.0)
+    compensated pair in class: True, True; one-body marginals: truncated+b: 0.437548936740 (spread 1.5e-15), cone+b: 0.437548936740 (spread 1.6e-15); max diff 1.67e-16
+    without compensation: cone 0.232833772 vs truncated 0.226011662: gap +6.822e-03
+    separation ln A(w1)/A(w0) = 0.001970 (uncompensated 0.032782); max density of the symmetrised difference set = 0.0280 (<= n q = 0.070)
+--- n=12 p=0.4 u=0.7 k=4 q=0.1: single truncated cone in class: True (max|ln ratio|=0.700000); density of its difference set per type class <= 0.0909
+    A_t=0.808665 (removed 0.191335); densities: cone 0.356847, truncated 0.357953, removed 0.352173; b=0.045176 (gamma2=+0.7)
+    compensated pair in class: True, True; one-body marginals: truncated+b: 0.352173160895 (spread 1.8e-15), cone+b: 0.352173160895 (spread 1.4e-15); max diff 1.28e-15
+    without compensation: cone 0.356846861 vs truncated 0.357952689: gap -1.106e-03
+    separation ln A(w1)/A(w0) = 0.202196 (uncompensated 0.212371); max density of the symmetrised difference set = 0.5455 (<= n q = 1.200)
+SUMMARY (A): all valid: True ; max marginal difference: 1.5543122344752192e-15
+
+(B) exact type-class sums: exponent of the non-adaptive bound with the oracle against theta_na
+
+=== p=0.3 u=1.0 eps1=0.25E=0.025783: theta_na=0.024324 (capacity a=0.095301, capacity-achieving m=0.4718)
+    n |   k | with oracle: -ln(n q)/n   sep-eps   b/A_t    c_0      c_t      c_D   | no oracle: -ln(q0)/n | theta_na - with  [x n/ln n]
+  100 |   46 | 0.010781   +0.0107  0.0719  0.32107  0.30664  0.32216 | 0.056891 | +0.013542 [0.294]
+  200 |   90 | 0.016693   +0.0051  0.0779  0.31705  0.29993  0.31714 | 0.043186 | +0.007630 [0.288]
+  400 |  197 | 0.019706   +0.0159  0.0835  0.33413  0.31710  0.33413 | 0.034905 | +0.004618 [0.308]
+  800 |  409 | 0.021837   +0.0034  0.0895  0.34167  0.32408  0.34167 | 0.030269 | +0.002486 [0.298]

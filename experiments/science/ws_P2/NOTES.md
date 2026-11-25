@@ -3,7 +3,8 @@
 (Second wave, continues workstream P.  Measurement of class constants of a real residual
 — GBn2 polarisation energy against Amber ff14SB — in ROTAMER variables on a FIXED backbone.)
 
-Started 2026-11-25 19:59 UTC.
+Started 2026-11-25 19:59 UTC.  (Clock: Steps 0-6 below all took place between 19:59 and 20:34 UTC;
+from Step 7 on the headings carry the time printed by `date -u`.)
 
 ## Step 0 — orientation (19:59)
 
@@ -14,7 +15,7 @@ Started 2026-11-25 19:59 UTC.
   OMP_NUM_THREADS=1 etc.; computations < ~20 min, < ~5 GB; grid data goes into `data/` (git-ignored `*.npz`, `*.npy`).
 * Next: read SP_REPORT §1, §2, §2.B, §3.1, §5, §6 and PHYSICAL_APPLICABILITY.md; then P's code.
 
-## Step 1 — reading done; control 1 (P's end-to-end check) reproduced (20:05)
+## Step 1 — reading done; control 1 (P's end-to-end check) reproduced
 
 * Read SP_REPORT §1, §2 (Statements 1–9), §2.B, §3.1, §3.2, §5, §6, §7 (E-1 is this workstream's
   specification), PHYSICAL_APPLICABILITY.md (all), theory report §11.7 (Thm 11.16–11.18 and the
@@ -37,7 +38,7 @@ Started 2026-11-25 19:59 UTC.
 * Machine: 4 cores, 14 GB free, load 0.03 at start.  OpenMM 8.6.1, numpy 2.5.3, scipy 1.18.1,
   numexpr 2.14.2, Python 3.13.18.
 
-## Step 2 — design fixed IN ADVANCE of any measurement (20:15)
+## Step 2 — design fixed IN ADVANCE of any measurement
 
 Everything below was written before any constant of any side-chain system was computed.
 
@@ -91,7 +92,7 @@ of every pair-additive energy component by anchored decomposition, GB by pre-tab
 descreening integrals — a second implementation validated against FastFF and OpenMM);
 `anlib.py` (constants of order 1, 2, 3 on masked non-uniform grids, fits, covers).
 
-## Step 3 — side-chain builder written and validated (control 2) (20:35)
+## Step 3 — side-chain builder written and validated (control 2)
 
 * `scbuild.py`: `SCPeptide(seq)` subclasses P's `Peptide` (imported from `../ws_P`, with
   `sys.dont_write_bytecode`): topology from the ff14SB residue templates of OpenMM (atom order and
@@ -125,7 +126,7 @@ descreening integrals — a second implementation validated against FastFF and O
 * Timing: OpenMM Reference 6-28 ms/conf; FastFF 0.35-4.0 ms/conf (146 atoms: 4 ms) -> too slow
   for 5e5-conformation grids of 100-200 atoms; hence the table-based evaluator below.
 
-## Step 4 — fixed-backbone table model written and validated (control 2, second half) (21:05)
+## Step 4 — fixed-backbone table model written and validated (control 2, second half)
 
 * `fbmodel.py`: `FBModel(seq, bb, grid)`.  Site = residue; every atom depends on at most one
   site (asserted when the coordinates of each site's states are built: all other atoms unchanged
@@ -183,7 +184,7 @@ Consequences (decided now, before measuring):
    F 2^n at 0.70 / 6^n at 0.60; L 2^n at 0.60; K 14^n-21^n at 0.70 (n <= 4-5), 31^n at 0.60
    (n <= 4); LKSE at 0.60: 2*31*9*18 ~ 1e4 per repeat (n <= 6).
 
-## Step 5 — control 3 (synthetic residuals) passed; analysis library; enumerations launched (21:25)
+## Step 5 — control 3 (synthetic residuals) passed; analysis library; enumerations launched
 
 * `anlib.py`: constants of order 1, 2, 3 on masked grids with non-uniform state counts
   (`mixed`: all state pairs at each involved site, all base points, every evaluation point in the
@@ -202,7 +203,7 @@ Consequences (decided now, before measuring):
   Long chains are reached instead by (i) the R3 domain itself where it is small (Val 3 states;
   Leu at 0.60 and Phe at 0.70: 2 states), (ii) grid "T3" = chi1 staggered, further chi trans
   (3 states) for Ser and Lys.
-* `enum_fb.py` runs launched 21:22 for H, E, P2 in parallel (`run_enum_R3.sh`): homopolymers
+* `enum_fb.py` runs launched 20:22 for H, E, P2 in parallel (`run_enum_R3.sh`): homopolymers
   S, V, F, L, K for n = 1.. until the product exceeds 1.1e6, then LKSE:n.  One-site threshold
   0.60 (0.70 by restriction).  Logs `logs/enum_R3_<BB>.log`.
 * In the helix the one-site domains depend on the position (contacts with the backbone of
@@ -227,3 +228,113 @@ Consequences (decided now, before measuring):
 => working hypothesis to test on all systems: in rotamer variables the obstacle is not many-body
    character (third order is tiny) but the size of the PAIR part of the residual; the right
    interface is order three (Thm 11.18) / "pair part into the model", not the star.
+
+## Step 6 — prior-art search (while the enumerations run)
+
+Search log (PubMed through the literature tool; reading level of every item: **[abstract]**):
+| # | query (PubMed syntax) | hits | kept |
+|---|---|---|---|
+| 1 | `generalized Born pairwise protein design` | 13 | 16853951, 28749575, 24854675, 26948696, 28886244, 17348031, 41055950 |
+| 2 | `pairwise decomposable Poisson-Boltzmann protein design` | 2 | 15802649, 18074340 |
+| 3 | `residue-pairwise generalized Born` | 4 | (same as 1) |
+| 4 | `LUTE local unpruned tuple expansion` | 1 | 27681371 |
+| 5 | `cost function network protein design guaranteed discrete energy optimization` | 0 | — |
+| 6 | `partition function provable approximation side-chain rotamer K* algorithm` | 0 | — |
+| 7 | `Simoncini Schiex guaranteed discrete energy optimization` | 1 | 26610100 |
+| 8 | `Donald BR[Author] partition function provable approximation` | 2 | 31855059 (32511232 not used: about design of a specific interface) |
+
+What the abstracts say (my paraphrase; quotes are from the abstracts):
+* Archontis & Simonson, J Phys Chem B 109:22667 (2005), doi 10.1021/jp055282+ : a GB approximation
+  "in which the interaction energy between two amino acids depends on the whole protein structure,
+  but can be accurately computed from residue-pairwise information" (residue Born radii; a
+  parabolic fit in their product).
+* Gaillard & Simonson, J Comput Chem 35:1371 (2014), doi 10.1002/jcc.23637 : pairwise decomposition
+  of an MMGBSA function; the GB term's "many-body character is overcome using an effective
+  dielectric environment"; "the error remains reasonable, compared to other uncertainties".
+* Villa, Mignon, Polydorides & Simonson, J Comput Chem 38:2396 (2017), doi 10.1002/jcc.24898 : "GB
+  is a many-body potential"; common simplification "a mean, native-like protein/solvent boundary,
+  which removes the many-body property"; their "fluctuating dielectric boundary" treatment is
+  "numerically exact (within the GB framework)" while "retaining the residue-pairwise complexity".
+* Gaillard, Panel & Simonson, Proteins 84:803 (2016), doi 10.1002/prot.25030 : side-chain
+  prediction with a pairwise-additive MMGBSA function; "For the prediction of all side chains,
+  however, errors due to the pairwise additive approximation overcome the improvement brought by
+  these terms."
+* Gaillard & Simonson, JCTC 13:4932 (2017), doi 10.1021/acs.jctc.7b00202 : the GB term "is affected
+  by pairwise decomposition errors when all positions are designed together" (cited only for this
+  sentence; the paper's subject, sequence design, is outside our scope).
+* Gaillard, J Phys Chem B 129:10699 (2025), doi 10.1021/acs.jpcb.5c03662 : extension of the
+  fluctuating-dielectric-boundary approach "allowing an exact decomposition of the GB term" to the
+  whole protein (again cited only for the decomposition statement).
+* Lopes, Alexandrov, Bathelt, Archontis & Simonson, Proteins 67:853 (2007), doi 10.1002/prot.21379 :
+  side-chain placement for 29 proteins with implicit solvent; "the electrostatic model is not
+  important for sidechain placement"; mentions "the recent discovery of efficient, pairwise
+  implementations of GB".
+* Marshall, Vizcarra & Mayo, Protein Sci 14:1293 (2005), doi 10.1110/ps.041259105 : one- and
+  two-body decomposable finite-difference Poisson-Boltzmann; for desolvation of polar side chains
+  "the two-body model has a 0.64 kcal/mol RMSD" against the full calculation; screened Coulomb
+  interactions between side chains "approximated with an RMSD of 0.13 kcal/mol".
+* Vizcarra, Zhang, Marshall, Wingreen, Zeng & Mayo, J Comput Chem 29:1153 (2008),
+  doi 10.1002/jcc.20878 : improved pairwise decomposable FDPB ("generic sidechains", "two-body
+  perturbations to the dielectric environment"; "two to threefold increase in accuracy").
+* Hallen, Jou & Donald, J Comput Biol 24:536 (2017), doi 10.1089/cmb.2016.0136 (LUTE): represents
+  "general, possibly nonpairwise energy functions to an arbitrary level of accuracy using a discrete
+  energy matrix" by a local tuple expansion (fitted, not an anchored expansion with a bound).
+* Simoncini, Allouche, de Givry, Delmas, Barbe & Schiex, JCTC 11:5980 (2015),
+  doi 10.1021/acs.jctc.5b00594 : exact global minimum of pairwise-decomposable rotamer models by
+  cost-function-network methods on spaces "of size up to 10^234" (for the statement that exact
+  solvers for the pairwise problem exist at scale; the application is design).
+* Jou, Holt, Lowegard & Donald, J Comput Biol 27:550 (2020), doi 10.1089/cmb.2019.0315 (MARK*):
+  "provable epsilon-approximations to partition functions" over rotamer ensembles for pairwise
+  energy bounds.
+Not found by these queries and therefore NOT claimed absent: a sup-norm (worst-case over an
+enumerated domain) measurement of the non-pairwise part of GB in rotamer variables, or mixed
+third-difference constants.  The literature above reports RMS / mean errors of specific pairwise
+constructions on folded proteins; mine are exact maxima on small exposed model peptides.
+
+## Step 7 — first full results; a domain problem found and fixed (21:07 UTC)
+
+* Enumerations (grid R3, one-site threshold 0.60): H finished (S1-6, V1-16, F1-10, L1-16, K1-4,
+  LKSE:1-6); E and P2 still running (machine load 10-13 from other workstreams; my jobs run 3-4x
+  slower than on an idle machine).  Largest: S6 531 441, K4 465 124, LKSE:6 319 176 (H), V12 531 441.
+* `an_perchi.py` (Q1, second half), Ser3 on E / H, exact: with residue sites the third-order mixed
+  differences of f are 4e-14 / 6e-14 kcal/mol; with one site per chi they vanish (4e-14) iff the
+  three chi's lie in three different residues and are 4.4 / 5.5 kcal/mol for two chi's of one
+  residue and one of another; order 4 (two residues, both chi's each): 6.5 / 5.6; order 5: zero.
+  So in per-chi variables f is "pairwise per residue" only.
+* **Problem found.**  First version of `an_main.py` computed the second-order interface on the raw
+  product X.  For Phe (and partly Lys, LKSE) X contains assignments with two-site clashes, i.e.
+  overlapping atoms: f up to 1.65e16 kcal/mol, "ff03 - ff14SB" up to 2.3e5, and all constants on
+  X are garbage (c_ijk of a pairwise function 3.5 = rounding of 1e16).  P's warning ("without the
+  filter the numbers are meaningless") applies to X.  But the product-space theorems (star
+  sandwich) need a product domain: on the non-product X_tau the bound sum c_ij is not valid
+  (the hybrids of x and x0 used in the proof may clash).
+  **Fix (an_main.pruned_product):** X' = a product sub-domain of X_tau obtained by greedily
+  removing the state involved in most two-site clashes until none is left.  If there is no pair
+  clash, X = X_tau = X'.  Reported from now on: constants and fits on X_tau (P's domain) AND on X';
+  interfaces (star, ball, first-order sharpness) on X' only.  Old outputs moved to `out_old/`.
+* `an_long.py` (chains beyond enumeration): exact c_i, c_ij for pair-additive residuals from the
+  tables; for GB the anchored order-2 expansion at a reference gives rigorous LOWER bounds on c_ij
+  and — by evaluating true GB at the pair of assignments that maximises the pairwise surrogate —
+  on c_i.  Validation on K4/H/0.70 (exact enumeration available): lower bounds
+  [34.723 55.665 49.606 36.787] vs exact [34.72 55.66 49.61 36.79]; c_ij by separation
+  [17.592 7.276 19.091] vs exact [17.60 7.28 19.10]; 868 GB evaluations instead of 16 464.
+  Long runs launched (`run_long.sh`, log `logs/long.log`).
+
+### Headline numbers so far (helix H; exact; kcal/mol; from `make_tables.py`)
+* g_GB, max_i c_i by n:  Leu (tau .60, 2 states/site): 0.55 0.69 0.96 0.86 1.07 1.08 0.97 0.97
+  1.04 1.12 1.14 1.15 for n = 1,2,3,4,5,6,7,8,10,12,14,16 -> saturates;  Ser (tau .70): 6.8 8.6 10.1
+  9.8 9.0 9.4 (n = 1..6) -> saturates;  Phe (tau .60, X'): 2.6 3.2 3.0 3.0 2.9 2.6 1.9 1.6 1.6;
+  Lys (tau .70): 10.0 37.3 51.5 55.7 (n = 1..4); (tau .60): 18.6 45.2 62.8 77.9 -> GROWS.
+* c_ij(g_GB): Leu <= 0.51 (i,i+4), tail 0.04 at separation 9-11 (not present in f: it is the r^-4
+  descreening tail); Ser <= 2.8; Lys 17.7-38.6 (charge-charge cross terms).
+* c_ijk(g_GB): Ser/E 0.004; Ser/H 0.05 (tau .70), 0.19 (tau .60); Leu 0.09; Phe 0.10; Lys 0.14
+  (tau .70), 1.9 (tau .60); LKSE 0.2-0.5.  Two-site fit remainder (rms / max): Ser6/E 0.0003 /
+  0.003; Ser6/H 0.003 / 0.03; Leu16/H 0.047 / 0.21; Lys4/H 0.004 / 0.08 (tau .70), 0.026 / 1.3 (tau .60).
+* Star (Thm 11.17 exact criterion, enumeration): Leu/H: EXACT certificate for every n <= 16
+  (17 evaluations of 65 536; bracket 0.015 nats) — and lambda* = 1.18 > 1, so even one evaluation
+  certifies; Phe/H: eps* 0.06-0.43; Ser: eps* 1.7 -> 10.6 (E), 6.4 -> 22.6 (H) growing with n;
+  Lys: 18 -> 79 (tau .70), 34 -> 178 (tau .60); LKSE 13-33.
+* Hamming-2 ball (Thm 11.18, m = 3): exact certificate in every instance at tau .70; Lys at .60:
+  eps 0.14-0.19; free-energy bracket <= 0.19 nats except Lys/.60 (0.5-1.1 nats).
+* ff03 - ff14SB: exactly pairwise (c_ijk ~ 1e-13); star exact for Leu, Phe, LKSE:4-5; fails for
+  Lys (eps* 0.5-11.6).  ff99SB - ff14SB: additive (c_ij = 0), zero for Lys.

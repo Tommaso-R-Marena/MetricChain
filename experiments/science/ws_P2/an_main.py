@@ -3,9 +3,12 @@ Main analysis of one enumerated fixed-backbone rotamer model (data/<tag>.npz fro
 
 usage: python3 -B an_main.py TAG TAU [--names GB,ff03-ff14SB,...] [--nothird] [--nofits] [--nocover] [--quiet]
 
-Domains (NOTES.md, Step 2):  X = product of the states with one-site clash score > TAU;
-X_tau = {x in X : every two-site clash score > TAU}.  Every number printed is an exact maximum,
-mean or sum over one of these two finite sets.
+Domains (NOTES.md, Steps 2 and 7):  X = product of the states with one-site clash score > TAU;
+X_tau = {x in X : every two-site clash score > TAU} (P's clash-free domain; not a product if any
+pair of rotamers clashes);  X' = a product sub-domain of X_tau obtained by greedy removal of
+clashing states (pruned_product) -- the domain on which the product-space theorems of the theory
+are applied.  If no pair clashes, X = X_tau = X'.  Every number printed is an exact maximum,
+mean or sum over X_tau or X'.
 
 For each residual g (GB = GBn2 polarisation energy; ff03-ff14SB etc.; coul+GB; and the known
 part f itself as a check of pairwiseness):
@@ -33,6 +36,50 @@ def fl(v):
     return [float(x) for x in np.asarray(v).ravel()]
 
 
+def pruned_product(d, tau):
+    """Largest-by-greedy product sub-domain without pair clashes: starting from the states with
+    one-site score > tau, repeatedly remove the (site, state) that takes part in the largest
+    number of two-site clashes (score <= tau) with still-present states of other sites (ties:
+    the lower one-site score, then the lower index), until no clash is left.
+    Returns the list over sites of kept positions (indices into d['dom'][i])."""
+    from fbmodel import FBModel
+    Mdl = FBModel(d["seq"], d["bb"], grid=d["grid"], extra_ffs=())
+    n = d["n"]; dom = d["dom"]
+    bad = {}
+    for (i, j), tab in Mdl.s2.items():
+        b = tab[np.ix_(dom[i], dom[j])] <= tau
+        if b.any():
+            bad[(i, j)] = b
+    keep = [np.ones(len(dom[i]), dtype=bool) for i in range(n)]
+    while True:
+        deg = [np.zeros(len(dom[i])) for i in range(n)]
+        for (i, j), b in bad.items():
+            bb_ = b & keep[i][:, None] & keep[j][None, :]
+            deg[i] += bb_.sum(1); deg[j] += bb_.sum(0)
+        best = None
+        for i in range(n):
+            for s in np.flatnonzero(deg[i] > 0):
+                key = (-deg[i][s], d["s1"][i][s], i, s)
+                if best is None or key < best:
+                    best = key
+        if best is None:
+            break
+        keep[best[2]][best[3]] = False
+    return [np.flatnonzero(k) for k in keep]
+
+
+def subselect(d, keep):
+    out = dict(d)
+    ix = np.ix_(*keep)
+    for key in GRID_KEYS:
+        if key in d:
+            out[key] = d[key][ix]
+    out["shape"] = tuple(len(k) for k in keep)
+    out["dom"] = [d["dom"][i][keep[i]] for i in range(d["n"])]
+    out["s1"] = [d["s1"][i][keep[i]] for i in range(d["n"])]
+    return out
+
+
 def analyse(tag, tau, names=None, do_third=True, do_fits=True, quiet=False, third_names=None):
     t00 = time.time()
     d0 = load_fb(tag)
@@ -46,11 +93,20 @@ def analyse(tag, tau, names=None, do_third=True, do_fits=True, quiet=False, thir
         res["empty"] = True
         return res
     size = int(np.prod(shape))
-    R = residuals(d)
-    X = np.ones(shape, dtype=bool)
     Xt = d["s2min"] > tau
-    res.update(size=size, clashfree=int(Xt.sum()))
-    say(f"   product domain X: {size} assignments; pair-clash-free X_tau: {int(Xt.sum())} ({100 * Xt.mean():.1f} %); kT = {KT300:.4f} kcal/mol")
+    # the product domain on which the theory's product-space theorems are applied: no pair clash at all
+    if Xt.all():
+        dp = d
+    else:
+        dp = subselect(d, pruned_product(d, tau))
+    shape_p = dp["shape"]
+    assert (dp["s2min"] > tau).all()
+    res.update(size=size, clashfree=int(Xt.sum()), shape_pruned=list(shape_p), size_pruned=int(np.prod(shape_p)))
+    say(f"   raw product X: {size} assignments; pair-clash-free X_tau: {int(Xt.sum())} ({100 * Xt.mean():.1f} %); "
+        f"pruned clash-free product X' : states per site {list(shape_p)} = {int(np.prod(shape_p))} assignments; kT = {KT300:.4f} kcal/mol")
+    Rt = residuals(d)
+    R = residuals(dp)
+    X = np.ones(shape_p, dtype=bool)
     cb = d["CB"]
     dist = np.sqrt(((cb[:, None, :] - cb[None, :, :]) ** 2).sum(-1))
     res["cb_dist"] = dist.tolist()
@@ -60,12 +116,12 @@ def analyse(tag, tau, names=None, do_third=True, do_fits=True, quiet=False, thir
     if third_names is None:
         third_names = names
     f = R["f"]
-    doms = [("X", X)] + ([("Xtau", Xt)] if not Xt.all() else [])
-    for dname, mask in doms:
+    doms = [("Xp", X, R)] + ([("Xtau", Xt, Rt)] if not Xt.all() else [])
+    for dname, mask, RR in doms:
         if mask.sum() < 2:
             continue
         for name in names:
-            g = R[name]
+            g = RR[name]
             key = f"{dname}|{name}"
             t0 = time.time()
             c, rms, cnt = first_order(g, mask)
@@ -85,7 +141,7 @@ def analyse(tag, tau, names=None, do_third=True, do_fits=True, quiet=False, thir
                 say(f"    c_ij  : max {C.max():.3f} kcal/mol = {C.max() * BETA:.2f} kT; max by separation 1..: "
                     + " ".join(f"{bysep[s][0]:.3f}" for s in range(1, n)))
                 say(f"    half row sums (1/2) sum_j c_ij = {half};  Dobrushin-type sums = {dob} (max {dob.max():.2f})")
-                if n <= 8 and name in ("GB", "ff03-ff14SB") and dname == "X":
+                if n <= 8 and name in ("GB", "ff03-ff14SB") and dname == "Xp":
                     say("    matrix c_ij:\n" + "\n".join("      " + str(row) for row in C))
             if n >= 3 and do_third and name in third_names:
                 T = third_order(g, mask)
@@ -113,15 +169,16 @@ def analyse(tag, tau, names=None, do_third=True, do_fits=True, quiet=False, thir
             continue
         g = R[name]
         E = f + g
-        key = f"X|{name}"
-        if key not in res or n < 2:
+        key = f"Xp|{name}"
+        shape = shape_p
+        if key not in res or n < 2 or "C" not in res[key]:
             continue
         c = np.array(res[key]["c"]); C = np.array(res[key]["C"])
         o = {}
         xf = tuple(int(v) for v in np.unravel_index(np.argmin(f), shape))
         xE = tuple(int(v) for v in np.unravel_index(np.argmin(E), shape))
         o.update(argmin_f=list(xf), argmin_E=list(xE), same_min=bool(xf == xE), regret=float(E[xf] - E[xE]))
-        say(f"=== interfaces on the product domain X, residual {name}: argmin f = {xf}, argmin E = {xE} (same: {xf == xE}; "
+        say(f"=== interfaces on the pruned product domain X', residual {name}: argmin f = {xf}, argmin E = {xE} (same: {xf == xE}; "
             f"E(argmin f) - min E = {E[xf] - E[xE]:.3f} kcal/mol)")
         # ---- first-order format
         for cname, x0, h in (("argmin_f", xf, f), ("argmin_E", xE, E)):

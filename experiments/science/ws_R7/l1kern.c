@@ -55,3 +55,30 @@ void l1_nearest(const double *S, int64_t C, int64_t P, double *nn) {
         }
     }
 }
+
+/* R7: integer-valued distances and ties of the cover relation, without storing the matrix.
+   n_int      = number of unordered pairs a<b with |D - rint(D)| < tol
+   near       = smallest |D - rint(D)| among the others
+   ties[e]    = number of ORDERED pairs (a,y), a != y, with |D(a,y) - (gmin[y] + eps[e])| < tol
+   nearest[e] = smallest |D(a,y) - (gmin[y] + eps[e])| among the others                              */
+void l1_integer_stats(const double *S, int64_t C, int64_t P, const double *gmin, const double *eps, int64_t E,
+                      double tol, int64_t *n_int, double *near, int64_t *ties, double *nearest) {
+    *n_int = 0; *near = INFINITY;
+    for (int64_t e = 0; e < E; e++) { ties[e] = 0; nearest[e] = INFINITY; }
+    for (int64_t a = 0; a < C; a++) {
+        const double *ra = S + a * P;
+        for (int64_t b = a + 1; b < C; b++) {
+            const double *rb = S + b * P;
+            double acc = 0.0;
+            for (int64_t k = 0; k < P; k++) acc += fabs(ra[k] - rb[k]);
+            double f = fabs(acc - rint(acc));
+            if (f < tol) (*n_int)++; else if (f < *near) *near = f;
+            for (int64_t e = 0; e < E; e++) {
+                double s1 = fabs(acc - (gmin[b] + eps[e]));   /* centre a, point b */
+                double s2 = fabs(acc - (gmin[a] + eps[e]));   /* centre b, point a */
+                if (s1 < tol) ties[e]++; else if (s1 < nearest[e]) nearest[e] = s1;
+                if (s2 < tol) ties[e]++; else if (s2 < nearest[e]) nearest[e] = s2;
+            }
+        }
+    }
+}

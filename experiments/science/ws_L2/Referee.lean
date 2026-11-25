@@ -39,7 +39,22 @@ Abstract form: a finite type `X`, a non-empty finite set `C` of centres, profile
 
 ## R6.2 (signs at the ends) — `Signs` section
 
-See the section header.
+Abstract setting (see the section header): a finite type with two ℕ-valued distance profiles
+that are equidistributed through a bijection.
+
+* `r6_2_signs` — under (i) and (ii): `U′_{+1} < U₀ < U′_{-1}`;
+* `r6_2_root` — there is `s* ∈ (-1, 1)` with `U′_{s*} = U₀`,
+  `log Z′_{s*} - log Z₀ ≥ log (1 + e^{-u} (1 - 1/r₁))`, and `g′_{s*} = g₀` where `d' > r₁`.
+
+## The binary cube — `BinaryCube` section
+
+* `r6_2_binary_cube` — Lemma R6.2 on `Fin n → ZMod 2` with `2ⁿ` and
+  `W = ∑_j C(n,j) [j < r₁] e^{u (r₁ - j)}`;
+* `r6_2_nonvacuous` — its two hypotheses hold for `n = 4`, `r₁ = 2`, `u = 6`, antipodal centres;
+* `pair_sum_binary`, `rho_eq_inv_cosh`, `r5_2_binary_cube` — R5(2) with the referee's `D_R` and
+  `γ = ½ (|C| - 1) cosh(u/2)^{-δ}` for any set of centres with pairwise distances `≥ δ`.
+
+Not proved here: R5(1), (3), (4); Lemma R6.3 (Hoeffding); Theorem R6; Corollary R6′.
 -/
 
 set_option autoImplicit false
@@ -1023,10 +1038,302 @@ theorem r6_2_root (d₀ d' : X → ℕ) (σ : X ≃ X) (hσ : ∀ x, d' (σ x) =
 
 end Signs
 
+/-! ### The binary cube: Lemma R6.2 in the referee's own terms
+
+`X = Fin n → ZMod 2`, `d₀ = d_H(·, a₀)`, `d' = d_H(·, a′)`, `|X| = 2ⁿ`, and
+`W = ∑_{j < r₁} C(n, j) e^{u (r₁ - j)}`. -/
+
+section BinaryCube
+
+/-- Configurations of the binary cube correspond to their supports (as in workstream L1). -/
+def supportEquiv (n : ℕ) : (Fin n → ZMod 2) ≃ Finset (Fin n) where
+  toFun x := univ.filter fun i => x i ≠ 0
+  invFun T := fun i => if i ∈ T then 1 else 0
+  left_inv x := by
+    funext i
+    by_cases h : x i = 0
+    · simp [h]
+    · have h1 : x i = 1 := (by decide : ∀ a : ZMod 2, a ≠ 0 → a = 1) (x i) h
+      simp [h1]
+  right_inv T := by
+    ext i
+    simp
+
+/-- `∑_x φ(wt x) = ∑_j C(n, j) φ(j)` on `F₂ⁿ` (as in workstream L1). -/
+theorem sum_hammingNorm_binary (n : ℕ) (φ : ℕ → ℝ) :
+    ∑ x : Fin n → ZMod 2, φ (hammingNorm x) =
+      ∑ j ∈ Finset.range (n + 1), (n.choose j : ℝ) * φ j := by
+  have h1 : ∑ x : Fin n → ZMod 2, φ (hammingNorm x) = ∑ T : Finset (Fin n), φ T.card :=
+    Fintype.sum_equiv (supportEquiv n) _ _ fun x => rfl
+  rw [h1, ← Finset.powerset_univ, Finset.sum_powerset_apply_card]
+  simp
+
+/-- `∑_x φ(d_H(x, a)) = ∑_j C(n, j) φ(j)` on `F₂ⁿ`, for every centre `a`. -/
+theorem sum_hammingDist_binary (n : ℕ) (a : Fin n → ZMod 2) (φ : ℕ → ℝ) :
+    ∑ x : Fin n → ZMod 2, φ (hammingDist x a) =
+      ∑ j ∈ Finset.range (n + 1), (n.choose j : ℝ) * φ j := by
+  rw [← sum_hammingNorm_binary, ← Equiv.sum_comp (Equiv.addRight a) (fun x => φ (hammingDist x a))]
+  refine Finset.sum_congr rfl (fun x _ => ?_)
+  have h : hammingDist (x + a) a = hammingNorm x := by
+    rw [hammingDist_comm, hammingDist_eq_hammingNorm]
+    congr 1
+    abel
+  simp only [Equiv.coe_addRight]
+  rw [h]
+
+/-- The two distance profiles on the cube are equidistributed through a translation. -/
+theorem hammingDist_translate (n : ℕ) (a₀ a' x : Fin n → ZMod 2) :
+    hammingDist (x + (a' - a₀)) a' = hammingDist x a₀ := by
+  rw [hammingDist_eq_hammingNorm, hammingDist_eq_hammingNorm]
+  congr 1
+  abel
+
+/-- **Lemma R6.2 on the binary cube**, with `W` in the referee's closed form
+`∑_j C(n, j) e^{u (r₁ - j)} [j < r₁]` and `2ⁿ` for the number of configurations. -/
+theorem r6_2_binary_cube (n : ℕ) (a₀ a' : Fin n → ZMod 2) {u : ℝ} (hu : 0 < u) {r₁ : ℕ}
+    (hr : 1 ≤ r₁)
+    (hi : 8 * (r₁ : ℝ) * Real.exp u * 2 ^ n ≤
+      ∑ j ∈ Finset.range (n + 1),
+        (n.choose j : ℝ) * (if j < r₁ then Real.exp (u * ((r₁ : ℝ) - j)) else 0))
+    (hii : overlapW (basin u r₁ (fun x : Fin n → ZMod 2 => hammingDist x a₀))
+        (basin u ((r₁ : ℝ) + 1) (fun x : Fin n → ZMod 2 => hammingDist x a')) ≤
+      Real.exp (-u) * (∑ j ∈ Finset.range (n + 1),
+        (n.choose j : ℝ) * (if j < r₁ then Real.exp (u * ((r₁ : ℝ) - j)) else 0)) /
+          (2 * ((r₁ : ℝ) + 1))) :
+    (meanEn (twinMin (basin u r₁ (fun x : Fin n → ZMod 2 => hammingDist x a₀))
+          (basin u ((r₁ : ℝ) + 1) (fun x : Fin n → ZMod 2 => hammingDist x a'))) <
+        meanEn (basin u r₁ (fun x : Fin n → ZMod 2 => hammingDist x a₀)) ∧
+      meanEn (basin u r₁ (fun x : Fin n → ZMod 2 => hammingDist x a₀)) <
+        meanEn (twinMin (basin u r₁ (fun x : Fin n → ZMod 2 => hammingDist x a₀))
+          (basin u ((r₁ : ℝ) - 1) (fun x : Fin n → ZMod 2 => hammingDist x a')))) ∧
+    ∃ s : ℝ, -1 < s ∧ s < 1 ∧
+      meanEn (twinMin (basin u r₁ (fun x : Fin n → ZMod 2 => hammingDist x a₀))
+          (basin u ((r₁ : ℝ) + s) (fun x : Fin n → ZMod 2 => hammingDist x a'))) =
+        meanEn (basin u r₁ (fun x : Fin n → ZMod 2 => hammingDist x a₀)) ∧
+      Real.log (1 + Real.exp (-u) * (1 - 1 / (r₁ : ℝ))) ≤
+        Real.log (partSum (twinMin (basin u r₁ (fun x : Fin n → ZMod 2 => hammingDist x a₀))
+          (basin u ((r₁ : ℝ) + s) (fun x : Fin n → ZMod 2 => hammingDist x a')))) -
+          Real.log (partSum (basin u r₁ (fun x : Fin n → ZMod 2 => hammingDist x a₀))) ∧
+      ∀ x : Fin n → ZMod 2, r₁ < hammingDist x a' →
+        twinMin (basin u r₁ (fun x : Fin n → ZMod 2 => hammingDist x a₀))
+          (basin u ((r₁ : ℝ) + s) (fun x : Fin n → ZMod 2 => hammingDist x a')) x =
+        basin u r₁ (fun x : Fin n → ZMod 2 => hammingDist x a₀) x := by
+  have hW : basinW u r₁ (fun x : Fin n → ZMod 2 => hammingDist x a₀) =
+      ∑ j ∈ Finset.range (n + 1),
+        (n.choose j : ℝ) * (if j < r₁ then Real.exp (u * ((r₁ : ℝ) - j)) else 0) :=
+    sum_hammingDist_binary n a₀ (fun j => if j < r₁ then Real.exp (u * ((r₁ : ℝ) - j)) else 0)
+  have hcard : (Fintype.card (Fin n → ZMod 2) : ℝ) = 2 ^ n := by
+    simp [ZMod.card]
+  rw [← hW, ← hcard] at hi
+  rw [← hW] at hii
+  have hσ : ∀ x : Fin n → ZMod 2,
+      (fun x : Fin n → ZMod 2 => hammingDist x a') ((Equiv.addRight (a' - a₀)) x) =
+        (fun x : Fin n → ZMod 2 => hammingDist x a₀) x :=
+    fun x => hammingDist_translate n a₀ a' x
+  exact ⟨r6_2_signs _ _ (Equiv.addRight (a' - a₀)) hσ hu hr hi hii,
+    r6_2_root _ _ (Equiv.addRight (a' - a₀)) hσ hu hr hi hii⟩
+
+/-! #### Non-vacuity of Lemma R6.2
+
+`n = 4`, `r₁ = 2`, `u = 6`, `a₀ = 0000`, `a′ = 1111`: hypothesis (i) reads
+`256 e⁶ ≤ e¹² + 4 e⁶` and the overlap weight `ω_{+1}` is `0` (the two balls are disjoint). -/
+
+theorem hammingDist_zero_add_one :
+    ∀ x : Fin 4 → ZMod 2, hammingDist x 0 + hammingDist x 1 = 4 := by decide
+
+/-- **The hypotheses of Lemma R6.2 are jointly satisfiable**: both hold for `n = 4`, `r₁ = 2`,
+`u = 6` and antipodal centres. -/
+theorem r6_2_nonvacuous :
+    8 * ((2 : ℕ) : ℝ) * Real.exp 6 * 2 ^ 4 ≤
+        ∑ j ∈ Finset.range (4 + 1), ((4 : ℕ).choose j : ℝ) *
+          (if j < 2 then Real.exp (6 * (((2 : ℕ) : ℝ) - j)) else 0) ∧
+      overlapW (basin 6 ((2 : ℕ) : ℝ) (fun x : Fin 4 → ZMod 2 => hammingDist x 0))
+          (basin 6 (((2 : ℕ) : ℝ) + 1) (fun x : Fin 4 → ZMod 2 => hammingDist x 1)) ≤
+        Real.exp (-6) * (∑ j ∈ Finset.range (4 + 1), ((4 : ℕ).choose j : ℝ) *
+          (if j < 2 then Real.exp (6 * (((2 : ℕ) : ℝ) - j)) else 0)) / (2 * (((2 : ℕ) : ℝ) + 1)) := by
+  have hW : ∑ j ∈ Finset.range (4 + 1), ((4 : ℕ).choose j : ℝ) *
+      (if j < 2 then Real.exp (6 * (((2 : ℕ) : ℝ) - j)) else 0) =
+        Real.exp 6 * Real.exp 6 + 4 * Real.exp 6 := by
+    have e12 : Real.exp (6 * 2) = Real.exp 6 * Real.exp 6 := by
+      rw [← Real.exp_add]
+      norm_num
+    simp [Finset.sum_range_succ, Nat.choose]
+    rw [e12]
+    norm_num
+  have hE : (252 : ℝ) ≤ Real.exp 6 := by
+    have h1 : (2.7 : ℝ) < Real.exp 1 := by
+      have := Real.exp_one_gt_d9
+      linarith
+    have h6 : Real.exp 6 = Real.exp 1 ^ 6 := by
+      rw [Real.exp_one_pow]
+      norm_num
+    have h7 : (2.7 : ℝ) ^ 6 < Real.exp 1 ^ 6 := pow_lt_pow_left₀ h1 (by norm_num) (by norm_num)
+    rw [h6]
+    norm_num at h7 ⊢
+    linarith
+  constructor
+  · rw [hW]
+    push_cast
+    nlinarith [Real.exp_pos 6]
+  · have hω : overlapW (basin 6 ((2 : ℕ) : ℝ) (fun x : Fin 4 → ZMod 2 => hammingDist x 0))
+        (basin 6 (((2 : ℕ) : ℝ) + 1) (fun x : Fin 4 → ZMod 2 => hammingDist x 1)) = 0 := by
+      unfold overlapW
+      refine Finset.sum_eq_zero (fun x _ => ?_)
+      rw [if_neg]
+      rintro ⟨h1, h2⟩
+      have hsum : (hammingDist x 0 : ℝ) + (hammingDist x 1 : ℝ) = 4 := by
+        exact_mod_cast hammingDist_zero_add_one x
+      unfold basin at h1 h2
+      have h1' : (0 : ℝ) < max (((2 : ℕ) : ℝ) - (hammingDist x 0 : ℝ)) 0 := by nlinarith
+      have h2' : (0 : ℝ) < max (((2 : ℕ) : ℝ) + 1 - (hammingDist x 1 : ℝ)) 0 := by nlinarith
+      rcases lt_max_iff.1 h1' with h | h
+      · rcases lt_max_iff.1 h2' with h' | h'
+        · have hd0 : hammingDist x 0 < 2 := by
+            have : (hammingDist x 0 : ℝ) < ((2 : ℕ) : ℝ) := by linarith
+            exact_mod_cast this
+          have hd1 : hammingDist x 1 < 3 := by
+            have : (hammingDist x 1 : ℝ) < ((3 : ℕ) : ℝ) := by
+              push_cast at h' ⊢
+              linarith
+            exact_mod_cast this
+          have := hammingDist_zero_add_one x
+          omega
+        · exact lt_irrefl _ h'
+      · exact lt_irrefl _ h
+    rw [hω, hW]
+    positivity
+
+/-! #### R5(2) on the binary cube
+
+The centres are an arbitrary non-empty finite set `C` of points of `F₂ⁿ` with pairwise Hamming
+distances at least `δ` (in the report: a coset `a + C` of a linear code with minimum distance
+`d_min`). -/
+
+/-- The Hamming distance as a sum of site indicators. -/
+theorem hammingDist_cast_eq_sum (n : ℕ) (x c : Fin n → ZMod 2) :
+    (hammingDist x c : ℝ) = ∑ i, if x i ≠ c i then (1 : ℝ) else 0 := by
+  unfold hammingDist
+  rw [Finset.card_filter]
+  push_cast
+  rfl
+
+/-- `Z(cone) = ∑_x e^{-u d_H(x, c)} = (1 + e^{-u})ⁿ` for every centre `c`. -/
+theorem cone_sum_binary (n : ℕ) (u : ℝ) (c : Fin n → ZMod 2) :
+    ∑ x : Fin n → ZMod 2, Real.exp (-u * (hammingDist x c : ℝ)) = (1 + Real.exp (-u)) ^ n := by
+  rw [sum_hammingDist_binary n c (fun j => Real.exp (-u * (j : ℝ))),
+    add_comm (1 : ℝ) (Real.exp (-u)), add_pow]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [one_pow, mul_one, ← Real.exp_nat_mul, mul_comm]
+  congr 2
+  ring
+
+/-- One site of the pair sum. -/
+theorem site_pair_sum (u : ℝ) (a b : ZMod 2) :
+    ∑ s : ZMod 2, Real.exp (-u * ((if s ≠ a then (1 : ℝ) else 0) +
+        (if s ≠ b then (1 : ℝ) else 0)) / 2) =
+      (1 + Real.exp (-u)) *
+        (if a ≠ b then 2 * Real.exp (-u / 2) / (1 + Real.exp (-u)) else 1) := by
+  have h2 : ∀ F : ZMod 2 → ℝ, ∑ s : ZMod 2, F s = F 0 + F 1 := fun F => Fin.sum_univ_two F
+  have hpos : (0 : ℝ) < 1 + Real.exp (-u) := by positivity
+  have h01 : (0 : ZMod 2) ≠ 1 := by decide
+  have h10 : (1 : ZMod 2) ≠ 0 := by decide
+  have e0 : -u * ((0 : ℝ) + 0) / 2 = 0 := by ring
+  have e1 : -u * ((1 : ℝ) + 1) / 2 = -u := by ring
+  have e2 : -u * ((1 : ℝ) + 0) / 2 = -u / 2 := by ring
+  have e3 : -u * ((0 : ℝ) + 1) / 2 = -u / 2 := by ring
+  rw [h2]
+  rcases (by decide : ∀ a : ZMod 2, a = 0 ∨ a = 1) a with rfl | rfl <;>
+    rcases (by decide : ∀ a : ZMod 2, a = 0 ∨ a = 1) b with rfl | rfl
+  · simp only [ne_eq, not_true_eq_false, if_false, h10, not_false_eq_true, if_true, e0, e1,
+      Real.exp_zero, mul_one]
+  · simp only [ne_eq, not_true_eq_false, if_false, h10, h01, not_false_eq_true, if_true, e2, e3]
+    field_simp
+    ring
+  · simp only [ne_eq, not_true_eq_false, if_false, h10, h01, not_false_eq_true, if_true, e2, e3]
+    field_simp
+    ring
+  · simp only [ne_eq, not_true_eq_false, if_false, h01, not_false_eq_true, if_true, e0, e1,
+      Real.exp_zero, mul_one]
+    ring
+
+/-- **The pair sum.**  For two centres at Hamming distance `D`:
+`∑_x e^{-u (d(x,c) + d(x,c′))/2} = (1 + e^{-u})ⁿ ρ^D`, `ρ = 2 e^{-u/2} / (1 + e^{-u})`
+(the report writes it as `(1 + e^{-u})^{n-D} (2 e^{-u/2})^D`). -/
+theorem pair_sum_binary (n : ℕ) (u : ℝ) (c c' : Fin n → ZMod 2) :
+    ∑ x : Fin n → ZMod 2,
+        Real.exp (-u * ((hammingDist x c : ℝ) + (hammingDist x c' : ℝ)) / 2) =
+      (1 + Real.exp (-u)) ^ n *
+        (2 * Real.exp (-u / 2) / (1 + Real.exp (-u))) ^ hammingDist c c' := by
+  have hterm : ∀ x : Fin n → ZMod 2,
+      Real.exp (-u * ((hammingDist x c : ℝ) + (hammingDist x c' : ℝ)) / 2) =
+        ∏ i, Real.exp (-u * ((if x i ≠ c i then (1 : ℝ) else 0) +
+          (if x i ≠ c' i then (1 : ℝ) else 0)) / 2) := by
+    intro x
+    rw [← Real.exp_sum, hammingDist_cast_eq_sum, hammingDist_cast_eq_sum,
+      ← Finset.sum_add_distrib, Finset.mul_sum, Finset.sum_div]
+  rw [Finset.sum_congr rfl (fun x _ => hterm x),
+    ← Fintype.prod_sum (fun i (s : ZMod 2) => Real.exp (-u * ((if s ≠ c i then (1 : ℝ) else 0) +
+      (if s ≠ c' i then (1 : ℝ) else 0)) / 2)),
+    Finset.prod_congr rfl (fun i _ => site_pair_sum u (c i) (c' i)), Finset.prod_mul_distrib,
+    Finset.prod_const, Finset.card_univ, Fintype.card_fin, Finset.prod_ite, Finset.prod_const,
+    Finset.prod_const_one, mul_one]
+  rfl
+
+/-- `2 e^{-u/2} / (1 + e^{-u}) = 1 / cosh (u/2)`. -/
+theorem rho_eq_inv_cosh (u : ℝ) :
+    2 * Real.exp (-u / 2) / (1 + Real.exp (-u)) = (Real.cosh (u / 2))⁻¹ := by
+  have h1 : Real.exp (-u) = Real.exp (-(u / 2)) * Real.exp (-(u / 2)) := by
+    rw [← Real.exp_add]
+    ring_nf
+  have h2 : Real.exp (u / 2) * Real.exp (-(u / 2)) = 1 := by
+    rw [← Real.exp_add]
+    simp
+  have h4 : Real.exp (-u / 2) = Real.exp (-(u / 2)) := by ring_nf
+  have hp := Real.exp_pos (-(u / 2))
+  have hq := Real.exp_pos (u / 2)
+  rw [Real.cosh_eq, h1, h4, inv_div, div_eq_div_iff (by positivity) (by positivity)]
+  linear_combination 2 * h2
+
+/-- **R5(2) on the binary cube**:
+`log Z(cone^C) - log Z(flat^C) ≥ D_R + log (1 - γ)` with
+`D_R = n log (1 + e^{-u}) - log ∑_j C(n,j) e^{-u max (j, R)}` and
+`γ = ½ (|C| - 1) cosh(u/2)^{-δ} < 1`, for any non-empty set `C` of centres with pairwise
+distances at least `δ`, any `u ≥ 0` and any real `R`. -/
+theorem r5_2_binary_cube (n : ℕ) (C : Finset (Fin n → ZMod 2)) (hC : C.Nonempty) {u : ℝ}
+    (hu : 0 ≤ u) (R : ℝ) (δ : ℕ)
+    (hδ : ∀ c ∈ C, ∀ c' ∈ C, c ≠ c' → δ ≤ hammingDist c c')
+    (hγ : (1 / 2) * ((C.card : ℝ) - 1) * (Real.cosh (u / 2))⁻¹ ^ δ < 1) :
+    (n : ℝ) * Real.log (1 + Real.exp (-u)) -
+        Real.log (∑ j ∈ Finset.range (n + 1), (n.choose j : ℝ) * Real.exp (-u * max (j : ℝ) R)) +
+        Real.log (1 - (1 / 2) * ((C.card : ℝ) - 1) * (Real.cosh (u / 2))⁻¹ ^ δ) ≤
+      Real.log (∑ x : Fin n → ZMod 2,
+          Real.exp (-u * distTo C hC (fun c x => (hammingDist x c : ℝ)) x)) -
+        Real.log (∑ x : Fin n → ZMod 2,
+          Real.exp (-u * max (distTo C hC (fun c x => (hammingDist x c : ℝ)) x) R)) := by
+  have h := r5_2_abstract C hC (fun c (x : Fin n → ZMod 2) => (hammingDist x c : ℝ)) hu R
+    (A₁ := (1 + Real.exp (-u)) ^ n)
+    (F₁ := ∑ j ∈ Finset.range (n + 1), (n.choose j : ℝ) * Real.exp (-u * max (j : ℝ) R))
+    (κ := (Real.cosh (u / 2))⁻¹ ^ δ)
+    (fun c _ => cone_sum_binary n u c)
+    (fun c _ => sum_hammingDist_binary n c (fun j => Real.exp (-u * max (j : ℝ) R)))
+    (fun c hc c' hc' hne => by
+      rw [pair_sum_binary, rho_eq_inv_cosh, mul_comm]
+      exact mul_le_mul_of_nonneg_right
+        (pow_le_pow_of_le_one (inv_nonneg.2 (Real.cosh_pos _).le)
+          (inv_le_one_of_one_le₀ (Real.one_le_cosh _)) (hδ c hc c' hc' hne))
+        (by positivity))
+    hγ
+  rw [Real.log_pow] at h
+  exact h
+
+end BinaryCube
+
 end ScienceL2
 
 end
 
+#print axioms ScienceL2.partSum_pos
+#print axioms ScienceL2.excessMass_nonneg
 #print axioms ScienceL2.partSum_twinMin
 #print axioms ScienceL2.enSum_twinMin
 #print axioms ScienceL2.meanEn_twinMin_sub
@@ -1041,21 +1348,49 @@ end
 #print axioms ScienceL2.sum_apply_distTo_le
 #print axioms ScienceL2.flat_distTo_le
 #print axioms ScienceL2.flat_distTo_le_card_mul
+#print axioms ScienceL2.min_exp_le_exp_half
 #print axioms ScienceL2.cone_distTo_ge
 #print axioms ScienceL2.r5_2_abstract
+#print axioms ScienceL2.overlapW_nonneg
 #print axioms ScienceL2.excessMass_le_freeMass
 #print axioms ScienceL2.freeMass_sub_overlapW_le
 #print axioms ScienceL2.enSum_le_excessEnergy
 #print axioms ScienceL2.excessEnergy_le
+#print axioms ScienceL2.basin_nonpos
+#print axioms ScienceL2.basin_anti
+#print axioms ScienceL2.neg_le_basin
+#print axioms ScienceL2.basinW_nonneg
+#print axioms ScienceL2.basinV_nonneg
+#print axioms ScienceL2.sphereC_nonneg
+#print axioms ScienceL2.basinV_add_sphereC_le
+#print axioms ScienceL2.basinA_nonneg
+#print axioms ScienceL2.basinA_le
 #print axioms ScienceL2.partSum_basin
 #print axioms ScienceL2.enSum_basin
 #print axioms ScienceL2.freeMass_basin_succ
 #print axioms ScienceL2.enSum_basin_succ
 #print axioms ScienceL2.freeMass_basin_pred
 #print axioms ScienceL2.enSum_basin_pred
+#print axioms ScienceL2.sum_comp_of_equidist
+#print axioms ScienceL2.freeMass_basin_equidist
+#print axioms ScienceL2.enSum_basin_equidist
 #print axioms ScienceL2.sign_plus_arith
 #print axioms ScienceL2.sign_minus_arith
 #print axioms ScienceL2.gain_arith
+#print axioms ScienceL2.overlapW_mono
+#print axioms ScienceL2.partSum_twinMin_mono
 #print axioms ScienceL2.r6_2_core
 #print axioms ScienceL2.r6_2_signs
 #print axioms ScienceL2.r6_2_root
+#print axioms ScienceL2.sum_hammingNorm_binary
+#print axioms ScienceL2.sum_hammingDist_binary
+#print axioms ScienceL2.hammingDist_translate
+#print axioms ScienceL2.r6_2_binary_cube
+#print axioms ScienceL2.hammingDist_zero_add_one
+#print axioms ScienceL2.r6_2_nonvacuous
+#print axioms ScienceL2.hammingDist_cast_eq_sum
+#print axioms ScienceL2.cone_sum_binary
+#print axioms ScienceL2.site_pair_sum
+#print axioms ScienceL2.pair_sum_binary
+#print axioms ScienceL2.rho_eq_inv_cosh
+#print axioms ScienceL2.r5_2_binary_cube

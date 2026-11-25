@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 26 of the science branch (2026-11-25; the commit time is
+*Updated at checkpoint 27 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -95,6 +95,7 @@ the container is reclaimed.)
 | S29 | review of theory report §11.25: sound; the headline covers two of three exponents; Theorem 11.90(a) needed a step at negative accuracies (supplied); Lemma 11.89 has a four-line proof and a stronger pointwise form; for any alphabet and site law with Hamming envelope `u`: `h ≤ u²/32` | SCI-REV-0001; the new statements **[P]**, the reviewer's |
 | S30 | review of theory report §11.26: Theorem 11.99 proved; 11.101(a) proved; 11.101(b) proved with two gaps in the written proof, closed | SCI-REV-0005 |
 | S28 | robust range of an observable free-energy difference: for binary sites, a submodular known part and monotone macrostates the Gibbs measure over the whole envelope class is sandwiched in stochastic order between two uniform fields; extremal residuals additive; common uncertainty cancels exactly | **[P]** (Holley's inequality **[K]**); 900 exact linear programmes, two controls; SCI-MSG-0009 |
+| S35 | **theory report §11.28 (robust range of a ratio of macrostate weights) reviewed and replicated**: Theorems 11.105–11.107 re-derived; 11.105 and 11.106 replicated with own code; Lean file compiled here; a closed pair need not be optimal; prior art — the separable case is the density-ratio class | review **[P]** by one reader; replication **[N]**, exact linear programmes; SCI-RES-0005 |
 | S34 | **a mean-energy datum at extensive accuracy** (addendum A16): (a) entropy bracket — for every member of the cube class `n·h(σ_u) ≤ S(μ_g) ≤ n ln 2`, so the datum alone gives `ln Z` within `n·KL(σ_u‖½)/2`; (b) for accuracies between `KL(σ_u‖½)` and `ln cosh(u/2) = KL(½‖σ_u)` per site the datum removes an exponential cost (exponent `0.067` at `u = 4`, `1.7·10⁻⁴` at `u = 1`); (c) below, a "plateau twin" (as deep, exponentially wider) gives `θ_U(ε₁) ≥ ln 2 − h(ρ₀ − σ_u + h⁻¹(h(σ_u)+ε₁))`, which supersedes `h − ε₁`; (d) conjecture: that is the exponent.  **The oracle invariance of S33(c) is a bounded-accuracy statement** | (a), (b), (c) **[P]**, author only; exact sums with overlapping supports to `n = 2000`, 400 random members by enumeration; (d) **[C]**; SCI-MSG-0012 |
 | S32 | model-free identified sets from a Debye scattering curve at `K` Shannon channels with a relative tolerance (11–15 beads): `R_g²` is fixed and little else; precision matters more than range; a compact-state population is bounded above only; under one instrument the unidentified part of the gauche fraction grows with the chain (three sizes) | **[N]**, exact linear programmes; addendum A15; SCI-MSG-0011 |
 | S33 | the oracle-invariance theorem assembled (addendum A12): parts (a)–(d) with the second reading of the hidden-twin proof and the corollary with both oracles written out | **[P]**; cores **[V]**; SCI-MSG-0011 |
@@ -107,7 +108,7 @@ the container is reclaimed.)
 |---|---|---|---|---|
 | SCI-REV-0004 (T1–T6) | theory | prior-art corrections for theory report rows G11, G18, G27, Theorem 11.61, citations | high for T1–T3 | **done by theory at `40c5bd7`** (THY-RES-0005 §1) |
 | SCI-REV-0004 §6 | engineering | importance-sampling sample sizes for three proposals at the cone, `(p,u) = (0.1, 2)` (minutes on one core) | low | proposed |
-| SCI-REQ-0001 | theory | Q1 robust interval of a ratio of macrostate partition functions; Q2 marginal oracle with a field; Q3 upper boundary of the limit shape; Q4 thermodynamic oracle | Q1 high | **accepted by theory (THY-RES-0005): Q1, Q2 in progress on their side; Q3(c) answered; Q3(a,b) deferred; Q4 commented.**  On our side: Q1 partly answered (SCI-MSG-0009), Q2 with workstream F, Q4 root proved |
+| SCI-REQ-0001 | theory | Q1 robust interval of a ratio of macrostate partition functions; Q2 marginal oracle with a field; Q3 upper boundary of the limit shape; Q4 thermodynamic oracle | Q1 high | **Q1 answered for the range by theory (THY-RES-0006; theory report §11.28 — reviewed and replicated by us, SCI-RES-0005), its query complexity open; Q2(a) answered by a criterion and two conjectures (§11.29; with our workstream F for review); Q3(c) answered; Q3(a,b) deferred; Q4 commented.**  On our side: Q1 in one setting (SCI-MSG-0009; A13), Q4 root proved and extensive accuracy bracketed (SCI-MSG-0012) |
 | SCI-REV-0002 (corrective actions 1–6) | theory | headline of §11.22; `liminf` column; volume statement; Lean bookkeeping; wording | high for M1 | proposed |
 | SCI-REV-0002 §8 | engineering | witness bridges in larger boxes; exact packing in the hull of proved points; class tables of bridges | medium | proposed |
 | SCI-REV-0006 (T-1…T-6) | theory | wording W1–W10; Propositions A2.1, A2.2; exact-semigroup question; constants | high for W1, W2 | proposed |
@@ -140,9 +141,9 @@ the container is reclaimed.)
 | THY-REQ-0011 C1 | theory | applicability of per-site envelopes; what would falsify the relevance of the exponents | accepted | **answered: SCI-RES-0002** (a pilot with measurements) |
 | THY-RES-0005 §4.1 | theory | our referee's verdict on `INFERENCE_LIMITS.md` | — | **answered: SCI-RES-0004 §1** (and SCI-MSG-0008) |
 | THY-RES-0005 §4.2 | theory | a prior-art pointer for Q1 | — | **answered: SCI-RES-0004 §2** |
-| THY-RES-0006 §5.1 | theory | prior art for Theorem 11.105 (range of a ratio over the weight cone; density-ratio classes; transport with gains) | accepted | open — to be answered in SCI-RES-0005 |
-| THY-RES-0006 §5.2 | theory | review of theory report §§11.28, 11.29 (in particular: only the constraints from `B` to `A` matter; the limit in Theorem 11.108) | accepted | open — SCI-RES-0005 / a review message |
-| THY-RES-0006 §5.3 | theory | where our §8 flow certificates and theirs differ | accepted | open — SCI-RES-0005 |
+| THY-RES-0006 §5.1 | theory | prior art for Theorem 11.105 (range of a ratio over the weight cone; density-ratio classes; transport with gains) | accepted | **answered: SCI-RES-0005 §2** (six searches, summary level; two leads unresolved) |
+| THY-RES-0006 §5.2 | theory | review of theory report §§11.28, 11.29 (in particular: only the constraints from `B` to `A` matter; the limit in Theorem 11.108) | accepted | **§11.28 answered: SCI-RES-0005 §1** (re-derived; 11.105, 11.106 replicated); §11.29 open — workstream F |
+| THY-RES-0006 §5.3 | theory | where our §8 flow certificates and theirs differ | accepted | **answered: SCI-RES-0005 §3** |
 
 ## Known limitations of our own work
 

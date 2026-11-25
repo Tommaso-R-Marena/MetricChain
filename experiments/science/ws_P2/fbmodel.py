@@ -360,10 +360,13 @@ class FBModel:
         self.gbB = B
         return B
 
-    def gb_energy(self, st, chunk=1024):
+    def gb_energy(self, st, chunk=1024, Bfix=None, parts=False):
         """GBn2 polarisation energy (kcal/mol) at the states st (M, ns); block version.
         E = -pref [ (1/2) sum_p q_p^2/B_p + sum_{p<q} q_p q_q / f_GB(r_pq, B_p B_q) ]; the diagonal
-        term of a same-site square block (r = 0) is exactly the self term q^2/B."""
+        term of a same-site square block (r = 0) is exactly the self term q^2/B.
+        Bfix: (natoms,) Born radii in nm used for every assignment instead of the exact ones
+        ("frozen radii": the energy is then pair-additive in atoms, hence pairwise in the sites).
+        parts=True: returns (total, self part = -pref/2 sum q^2/B, cross part)."""
         Bk = self._gb_blocks()
         g = self.F.gb["gbn2"]
         st = np.atleast_2d(st)
@@ -371,13 +374,17 @@ class FBModel:
         q2f = (g["charge"][self.fixed] ** 2)[None]
         pref = ONE_4PI_EPS0 * (1.0 / self.F.eps_in - 1.0 / self.F.eps_out)
         out = np.empty(M)
+        eself = np.empty(M)
+        q2all = (g["charge"] ** 2)[None]
         expr = "sum(qq / sqrt(r2 + BB * exp(-r2 / (4.0 * BB))), axis=1)"
         for s in range(0, M, chunk):
             sub = st[s:s + chunk]
             C = sub.shape[0]
-            B = self.born_radii(sub)
+            B = self.born_radii(sub) if Bfix is None else np.broadcast_to(Bfix, (C, self.P.natoms))
             Bf = B[:, self.fixed]
             e = 0.5 * (q2f / Bf).sum(1)
+            if parts:
+                eself[s:s + chunk] = -pref * 0.5 * (q2all / B).sum(1) / KCAL
             r2, qq = Bk["r2ff"], Bk["qqff"]
             BB = Bf[:, Bk["ffi"]] * Bf[:, Bk["ffj"]]
             e += ne.evaluate(expr)
@@ -398,6 +405,8 @@ class FBModel:
                     BB = (Bm[i][:, :, None] * Bm[j][:, None, :]).reshape(C, -1)
                     e += ne.evaluate(expr)
             out[s:s + chunk] = -pref * e
+        if parts:
+            return out / KCAL, eself, out / KCAL - eself
         return out / KCAL
 
     # ------------------------------------------------------------------ domains and enumeration

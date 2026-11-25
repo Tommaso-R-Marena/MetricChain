@@ -455,6 +455,107 @@ def check_A12(trials=300):
     assert worst_window < TOL and worst_chain < 1e-9 and worst_bound > -1e-7 and worst_add < 1e-9
 
 
+def check_R62_witness():
+    """The instance of the Lean theorem `r6_2_nonvacuous`: n = 4, r1 = 2, u = 6, antipodal
+    centres.  Brute force over the 16 points; root s* by bisection."""
+    n, r1, u = 4, 2, 6.0
+    X = cube(n)
+    a0 = (0, 0, 0, 0)
+    a1 = (1, 1, 1, 1)
+
+    def dH(x, a):
+        return sum(1 for i in range(n) if x[i] != a[i])
+    g0 = {x: -u * max(r1 - dH(x, a0), 0) for x in X}
+    Z0 = sum(math.exp(-g0[x]) for x in X)
+    U0 = sum(g0[x] * math.exp(-g0[x]) for x in X) / Z0
+    W = sum(math.exp(u * (r1 - dH(x, a0))) for x in X if dH(x, a0) < r1)
+
+    def twin(s):
+        T = {x: -u * max(r1 + s - dH(x, a1), 0) for x in X}
+        gp = {x: min(g0[x], T[x]) for x in X}
+        Zp = sum(math.exp(-gp[x]) for x in X)
+        Up = sum(gp[x] * math.exp(-gp[x]) for x in X) / Zp
+        om = sum(math.exp(-T[x]) for x in X if g0[x] < 0 and T[x] < 0)
+        return Zp, Up, om
+    Zp1, Up1, om1 = twin(+1.0)
+    Zm1, Um1, omm1 = twin(-1.0)
+    lo, hi = -1.0, 1.0
+    for _ in range(200):
+        mid = 0.5 * (lo + hi)
+        if twin(mid)[1] > U0:
+            lo = mid
+        else:
+            hi = mid
+    sstar = 0.5 * (lo + hi)
+    Zs, Us, _ = twin(sstar)
+    print("R6.2 witness of the Lean file (n=4, r1=2, u=6, antipodal centres):")
+    print(f"   (i)  W / (8 r1 e^u 2^n) = {W / (8 * r1 * math.exp(u) * 2 ** n):.4f} (>= 1),"
+          f"  (ii) omega_+1 = {om1:.1f} <= {math.exp(-u) * W / (2 * (r1 + 1)):.3f}")
+    print(f"   U'_+1 - U0 = {Up1 - U0:+.6f},  U'_-1 - U0 = {Um1 - U0:+.6f},  s* = {sstar:+.9f},"
+          f"  U'_s* - U0 = {Us - U0:.1e}")
+    print(f"   ln Z'_s* - ln Z0 = {math.log(Zs) - math.log(Z0):.6f} >= ln(1 + e^-u (1 - 1/r1)) ="
+          f" {math.log(1 + math.exp(-u) * (1 - 1 / r1)):.6f}")
+    assert W >= 8 * r1 * math.exp(u) * 2 ** n and om1 == 0.0
+    assert Up1 < U0 < Um1 and -1 < sstar < 1
+    assert math.log(Zs) - math.log(Z0) >= math.log(1 + math.exp(-u) * (1 - 1 / r1))
+
+
+def check_chains(trials=200):
+    """Remark (1) of A11 as formalised (`chain_sandwich_mean`): product of chains with levels
+    0..k_i-1, envelope additive along each chain."""
+    worst_holley = 0.0
+    worst_sandwich = 0.0
+    worst_adm = 0.0
+    for t in range(trials):
+        n = int(rng.integers(1, 4))
+        ks = [int(rng.integers(1, 4)) for _ in range(n)]
+        X = list(itertools.product(*[range(k) for k in ks]))
+        beta = float(rng.uniform(0.0, 2.0))
+        cup = [rng.normal(size=k) for k in ks]
+        cdn = [-cup[i] + np.abs(rng.normal(size=ks[i])) for i in range(n)]
+
+        def d(x, y):
+            v = 0.0
+            for i in range(n):
+                v += sum(cup[i][r] for r in range(y[i], x[i]))
+                v += sum(cdn[i][r] for r in range(x[i], y[i]))
+            return v
+        hup = {x: sum(sum(cup[i][r] for r in range(x[i])) for i in range(n)) for x in X}
+        hdn = {x: sum(sum(cdn[i][r] for r in range(x[i])) for i in range(n)) for x in X}
+        # submodular f: additive + concave function of a non-negative modular function
+        a = [rng.normal(size=k) for k in ks]
+        w = np.abs(rng.normal(size=n))
+
+        def f(x):
+            return sum(a[i][x[i]] for i in range(n)) + math.sqrt(1.0 + sum(w[i] * x[i] for i in range(n)))
+        fv = {x: f(x) for x in X}
+        kk = int(rng.integers(1, 4))
+        anchors = [X[int(rng.integers(0, len(X)))] for _ in range(kk)]
+        v = rng.normal(scale=2.0, size=kk)
+        g = {x: min(v[j] + d(x, anchors[j]) for j in range(kk)) for x in X}
+        for x in X:
+            for y in X:
+                assert fv[join(x, y)] + fv[meet(x, y)] <= fv[x] + fv[y] + 1e-9
+                assert g[x] - g[y] <= d(x, y) + 1e-9
+                worst_adm = max(worst_adm, hup[x] - hup[y] - d(x, y), -hdn[x] + hdn[y] - d(x, y))
+        wlo = {x: math.exp(-beta * (fv[x] + hup[x])) for x in X}
+        wg = {x: math.exp(-beta * (fv[x] + g[x])) for x in X}
+        whi = {x: math.exp(-beta * (fv[x] - hdn[x])) for x in X}
+        for x in X:
+            for y in X:
+                m_, j_ = meet(x, y), join(x, y)
+                worst_holley = max(worst_holley, (wlo[x] * wg[y] - wlo[m_] * wg[j_]) / (wlo[m_] * wg[j_]),
+                                   (wg[x] * whi[y] - wg[m_] * whi[j_]) / (wg[m_] * whi[j_]))
+        phi = {x: float(sum(x)) for x in X}
+
+        def E(wt):
+            return sum(phi[x] * wt[x] for x in X) / sum(wt.values())
+        worst_sandwich = max(worst_sandwich, E(wlo) - E(wg), E(wg) - E(whi))
+    print(f"A11 Remark (1), products of chains ({trials} instances, 1..3 sites, 1..3 levels, signed costs):"
+          f" worst violations: admissibility {worst_adm:.1e}, Holley {worst_holley:.1e}, sandwich {worst_sandwich:.1e}")
+    assert worst_adm < TOL and worst_holley < TOL and worst_sandwich < TOL
+
+
 if __name__ == "__main__":
     check_A11()
     check_A11_needs()
@@ -462,5 +563,7 @@ if __name__ == "__main__":
     check_R52()
     check_R62()
     check_R62_hypotheses_needed()
+    check_R62_witness()
+    check_chains()
     check_A12()
     print("all checks passed")

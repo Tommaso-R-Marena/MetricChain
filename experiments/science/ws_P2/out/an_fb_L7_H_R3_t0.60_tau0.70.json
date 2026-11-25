@@ -1,0 +1,18 @@
+{
+"tag": "fb_L7_H_R3_t0.60",
+"tau": 0.7,
+"seq": "LLLLLLL",
+"bb": "H",
+"grid": "R3",
+"shape": [
+0,
+0,
+0,
+0,
+0,
+0,
+0
+],
+"natoms": 145,
+"empty": true
+}

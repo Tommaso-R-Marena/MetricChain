@@ -88,3 +88,77 @@ H5. k ≥ 2: k-transitive group ⇒ k-body matching ⇔ matching the first k fac
   `inf_λ sup_P ≥ sup_{P: P_X(1)=p_γ}`; time-sharing convexity suggests equality.  To test
   numerically: is the constrained sup attained by plain dips of the forced centre type `m_0`
   ("restricted to centres of that type"), or do annular/soft-label dips do better?
+
+* 20:45 — **N1 done** (`t01_single_letter.py`, `out/t01_single_letter.txt`): my own implementation
+  (`sl.py`) reproduces every printed number I tried: closed form of Thm 11.59(b) vs exact 2×2 game
+  value `1.5e-14` (2000 random cases); Sibson form vs max over γ `3e-16`; table of §11.20 (u=2,
+  θ=0,.5,1,2,3: R_0, R^max, γ*, a) to all printed digits; `R_0(0.3E)=0.019497`, `R^max(0.3E)=0.023270`
+  at (0.1,2); `θ_na` = .1020,.0440,.0243; the "bin" row of §11.26 to 6 digits; pair identity;
+  constant-composition exponent dual = primal (`5e-15`), `max_m Rcc = R_γ`.
+* 20:50 — **N2 done** (`t02_fixed_point.py`, `out/t02_fixed_point.txt` once the slow job ends):
+  Augustin's identity `Q* = Σ_φ M*(φ)V_φ` holds at the saddle (to 1e-9).  **But the identity that
+  matters for the oracle is `M*W = Q*` and it FAILS for p ≠ ½**: gap `(M*W − Q*)(1)` = +0.018
+  (p=.3,u=1,e=0) … +0.127 (p=.1,u=2,e=.9E); exactly 0 at p=½.  Plain dips at additive bases with
+  the forced centre type lose 13 % (p=.3,u=1,e=0), 43 % (p=.1,u=2,e=0), and **100 %** (exponent 0)
+  from e=0.6E (p=.3) resp. e=0.3E (p=.1) on.  ⇒ H1, H2 confirmed at the single-letter level; the
+  coordinator's mechanism (self-consistency) is false; within additive bases + plain dips the
+  constraint binds hard.
+* 21:05 — **N5a done** (`t03_enum_adaptive.py`, `out/t03_enum_adaptive.txt`): exhaustive enumeration
+  n = 8, 12, 14, 16, eight parameter sets.  Compensated base `w~_{γ1} + b w~_{γ2}` and cyclically
+  symmetrised alternative: both in the class (max |ln ratio| ≤ u), **all n one-body marginals
+  equal to ≤ 1.4e-13**, separation = ln(1+E/(1+b)) as predicted.  Without compensation the
+  marginal gap is 1.4e-2 … 8.2e-2 (oracle separates); a single unsymmetrised dip has marginals
+  spread over e.g. [0.105, 0.404] (oracle reveals the centre).  ⇒ H3 (construction) confirmed.
+  At these n the packing numbers are trivial, as they must be (exponents 0.01–0.05).
+
+* 20:55 — **N3 (instance-wise, zero residual)** (`prof.py`, `t04_instance.py`, `out/t04_instance.txt`).
+  Three single-letter quantities at the zero residual with the oracle:
+  (a) plain dips of the centre type forced by one-body matching, `Rcc(0, m_0; e)`;
+  (b) sup over binary-label *annular* profiles `(m, v0, v1)` (dips around a shell, cores in the
+      window) with density constraint `(1−m)v0 + m v1 = p`;
+  (c) my tilt upper bound `U(e) = min_λ R_0(e − c(λ); θ − λ)`.
+  Results (p=.3,u=1): e=0: R_0=.024814 | (a) .021007 | (b) .024157 | (c) .024371;
+  e=.3E_0: .012089 | .005667 | .011301 | .011558; e=.7E_0: .002211 | 0 | .001638 | .001826.
+  (p=.1,u=2): e=.2E_0: .026849 | 0 | .015441 | .016345; e=.7E_0: .003686 | 0 | 0 | 0.
+  (p=.05,u=3): e=0: .054854 | .013855 | .030820 | .031349; e ≥ .5E_0: with oracle 0 (R_0=.0129).
+  p=½: all four equal.  ⇒ (i) the oracle strictly lowers the instance exponent at the zero
+  residual with a field ((c) < R_0), up to making it ZERO in a window of accuracies;
+  (ii) **"restricted to centre types forced by matching" (a) is a valid lower bound but NOT the
+  value**: annular dips (b) do much better; the optimum of (b) always has `v0` at the lower end
+  of the window (stability constraint active), which is why (b) < (c): the tilt bound does
+  not know the window.  True instance exponent with oracle ∈ [(b), (c)] — gap 1–8 % typically.
+  Sanity: f(plain profile) ≥ Rcc (annular around the cone-typical shell is smaller than the
+  ball), equality at the optimal type; unconstrained sup over profiles = R_γ to 8 digits.
+* 21:00 — **N5b** (`t06_nonadaptive.py` part A): exhaustive enumeration n = 10…14, six cases: the
+  type-wise truncated cone is in the class (their [V] statement re-checked by brute force); the
+  compensated pair (truncated + b·additive, cone + b·additive) is in the class and has ALL
+  one-body marginals equal to ≤ 1.6e-15; uncompensated gap 1e-3…2e-2.  ⇒ H3 for the non-adaptive
+  pair confirmed.  Part B and `t05` (type sums to n = 3200) running: with-oracle exponents
+  approach R^max / θ_na from below like 0.7·ln n/n and 0.3·ln n/n (the price is the factor 1/n of
+  the cyclic union bound: lnLB(oracle) − lnLB(no oracle) = −ln n − O(0.1)).
+* 21:01 — **k = 2 exact** (`t08_k2_exact.py`, `out/t08_k2_exact.txt`): n = 13, G = AGL(1,13): base
+  `a π_γ + (1−a) π_{γ2}` with `a = h/(h+g²)`, `p_2 = x + h/g` (h = height of the mixed excess above the
+  parabola c2 = c1², g = self-consistency gap) and alternative = base + mixture of G-symmetrised
+  dips of two centre types: ALL 13 one-body and ALL 78 two-body marginals equal to ≤ 7e-15;
+  three-body differ by 2–4e-4.  A single centre type has h < 0 (below the parabola: sampling
+  without replacement) — no mixture of product measures can match it; two types ≳ √n apart
+  fix it.  Failures recorded: p_2 outside the window (n=11 case), h ≤ 0 (types too close).
+* Literature: Kuperberg–Lovett–Peled, arXiv:1302.4295, Theorem 1.3 [full text of the statement
+  read via pdftotext of the arXiv PDF]: "For all integers v ≥ 1, 1 ≤ t ≤ v and t ≤ k ≤ v there
+  exists a t-(v,k,λ) design whose size is at most (cv/t)^{ct} for some universal constant c>0."
+  ⇒ polynomial-size t-designs for ALL (n, block size, t): what the general k-body exact
+  statement needs in place of the BCH codes of the uniform cube.
+
+* 21:04 (clock read) — **N-tilt** (`t09_tilt_check.py`, `out/t09_tilt_check.txt`): the tilt inequality
+  holds with min(LHS−RHS) = 0 (attained at λ=0) on 5 exactly matched alternatives (n = 10…14,
+  λ ∈ [−3,3]); an unmatched alternative violates it (−4e-3 … −6e-2).  Derivative of the tilt bound
+  at λ=0 at the zero residual: +0.0088 (p=.3,u=1), +0.0277 (p=.1,u=2), 0 (p=½).
+* 21:05 — **Second coordinator note received**: the theory division published its own answer
+  (THY-RES-0006 §3; theory report §11.29, Proposition 11.109, at commit dcdfea6; DEAD_ENDS D54
+  item 3; scripts `oracle_field_scan.py`, `oracle_zero_types.py`).  I am asked for a separate
+  report section "Against theory report §11.29".
+  **Provenance record, before I open any of it:** everything logged above (H1–H5; the
+  compensation lemma and the two-component base; Theorems A/B numerics N1–N6; the tilt bound;
+  annular profiles; the k=2 construction with AGL(1,n); KLP designs) was derived and computed
+  by me WITHOUT having seen THY-RES-0006, §11.29, D54 or their scripts.  I had read only
+  THY-RES-0005 §2 (their two-sentence expectation and the parameter-counting remark).

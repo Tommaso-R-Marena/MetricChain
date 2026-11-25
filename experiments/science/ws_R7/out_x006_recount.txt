@@ -1,0 +1,21 @@
+u n_o K scale | cases runs good_event_failed invalid invalid_on_good width claim aborted
+(0.5, 300, 979, 1.0) 39 195000 0 0 0 0 0 0
+(0.5, 300, 245, 0.25) 39 39000 82 0 0 0 0 0
+(0.5, 300, 61, 0.0625) 39 39000 14668 0 0 0 0 0
+(0.5, 300, 15, 0.015625) 39 39000 29408 10 0 0 0 0
+(0.5, 300, 4, 0.00390625) 39 39000 31698 1188 0 0 0 0
+(1.0, 120, 968, 1.0) 39 195000 0 0 0 0 0 0
+(1.0, 120, 242, 0.25) 39 39000 47 0 0 0 0 0
+(1.0, 120, 60, 0.0625) 39 39000 14013 0 0 0 0 0
+(1.0, 120, 15, 0.015625) 39 39000 30082 18 0 0 0 0
+(1.0, 120, 4, 0.00390625) 39 39000 32152 1106 0 0 0 0
+(2.0, 48, 953, 1.0) 39 195000 0 0 0 0 0 0
+(2.0, 48, 238, 0.25) 39 39000 67 0 0 0 0 0
+(2.0, 48, 60, 0.0625) 39 39000 13080 0 0 0 0 0
+(2.0, 48, 15, 0.015625) 39 39000 32031 65 0 0 0 0
+(2.0, 48, 4, 0.00390625) 39 39000 34413 868 0 0 0 0
+theorem's K: cases 117, runs 585000, failures of any kind 0
+  95% upper bound, pooled: 1 - 0.05^(1/585000) = 5.121e-06;  per case (5000 runs): 5.990e-04;  Bonferroni over 117 cases at overall 95%: 1.550e-03
+  landscapes: 13  oracles: ['bottom', 'random', 'top']  (u, n_o, n_i): [(0.5, 300, 6), (1.0, 120, 6), (2.0, 48, 6)]
+  mean ln(evaluations) minus mean-run ln(cost), oracles bottom/top at the theorem's K: min -0.0006 max +0.0019
+  spread of ln(evaluations) around the mean run within a case: max over cases of (max - meanrun) +0.0180, min of (min - meanrun) -0.0035

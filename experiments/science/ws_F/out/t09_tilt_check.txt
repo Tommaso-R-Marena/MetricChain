@@ -1,0 +1,20 @@
+--- n=12 p=0.2 u=1.0 gamma=0.0 depth r=1.0: centre types 4,5 (excess densities 0.19527 <= p_gamma=0.20000 <= 0.22887), mixing weight 0.8610
+    matched alternative in class: True; max |marginal(alt) - p_gamma| = 2.86e-15; ln A(alt)/A(base) = 1.088975
+    min over lambda in [-3,3] of (LHS - RHS): matched +0.000e+00 (>= 0 required);  unmatched control -1.537e-02 (negative = violated)
+--- n=12 p=0.1 u=2.0 gamma=0.0 depth r=1.5: centre types 2,3 (excess densities 0.09120 <= p_gamma=0.10000 <= 0.13240), mixing weight 0.7877
+    matched alternative in class: True; max |marginal(alt) - p_gamma| = 3.19e-15; ln A(alt)/A(base) = 1.580090
+    min over lambda in [-3,3] of (LHS - RHS): matched -2.220e-16 (>= 0 required);  unmatched control -5.629e-02 (negative = violated)
+--- n=14 p=0.3 u=1.0 gamma=0.0 depth r=0.8: centre types 5,6 (excess densities 0.28057 <= p_gamma=0.30000 <= 0.31581), mixing weight 0.4459
+    matched alternative in class: True; max |marginal(alt) - p_gamma| = 5.00e-15; ln A(alt)/A(base) = 0.974216
+    min over lambda in [-3,3] of (LHS - RHS): matched -2.220e-16 (>= 0 required);  unmatched control -3.764e-03 (negative = violated)
+--- n=12 p=0.3 u=1.5 gamma=0.4 depth r=1.0: centre types 2,3 (excess densities 0.18209 <= p_gamma=0.22317 <= 0.23638), mixing weight 0.2490
+    matched alternative in class: True; max |marginal(alt) - p_gamma| = 2.53e-15; ln A(alt)/A(base) = 1.166065
+    min over lambda in [-3,3] of (LHS - RHS): matched +0.000e+00 (>= 0 required);  unmatched control -3.625e-03 (negative = violated)
+--- n=10 p=0.5 u=1.0 gamma=0.0 depth r=1.0: centre types 5,6 (excess densities 0.50000 <= p_gamma=0.50000 <= 0.55582), mixing weight 1.0000
+    matched alternative in class: True; max |marginal(alt) - p_gamma| = 1.78e-15; ln A(alt)/A(base) = 1.119547
+    min over lambda in [-3,3] of (LHS - RHS): matched +0.000e+00 (>= 0 required);  unmatched control -3.345e-02 (negative = violated)
+
+derivative of the tilt bound at lambda=0 (zero residual): d/dlam R_0(e - c(lam); theta - lam) = -dR_0/dtheta; finite differences
+   p=0.3 u=1.0 e=0.2E_0: R_0=0.015817, derivative in lambda at 0 = +0.008763
+   p=0.1 u=2.0 e=0.2E_0: R_0=0.026849, derivative in lambda at 0 = +0.027742
+   p=0.5 u=1.0 e=0.2E_0: R_0=0.018583, derivative in lambda at 0 = +0.000000
