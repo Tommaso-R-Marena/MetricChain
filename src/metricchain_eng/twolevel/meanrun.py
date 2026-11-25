@@ -1,0 +1,378 @@
+"""The run of Algorithm 2L+ with every count replaced by its mean ("mean run"), on an instance
+given by the law of the fibre averages W(a), with exact accounting of the evaluations for
+two explicit, valid inner oracles.
+
+Why the law is enough.  The outer loop of the algorithm (K_REPORT §2.2, steps 0-3) reads the
+instance only through (i) the reference value psi_0, (ii) which sampled points are HIGH at each
+level, and (iii) the brackets the inner procedures return.  With counts replaced by their
+means, (ii) is a function of p(s) = P(W > s) alone.  (iii) is not determined by the
+instance: an inner procedure may return any valid bracket of the promised ratio.  Two
+consistent choices are implemented, between which every bracket placement lies:
+
+    oracle "bottom":  rung l >= 1 returns [W, W e^{x_l}]      (the value sits at the lower end)
+    oracle "top":     rung l >= 1 returns [W e^{-x_l}, W]     (the value sits at the upper end)
+
+and the trivial bracket of rung 0 is [W e^{-t0}, W e^{x_0 - t0}], x_0 = 2 u n_i, where
+t0 = ln(W / lower end) is a property of the fibre (the same for every fibre of a product
+instance; u n_i for a flat fibre).  Under "bottom" every point of the tolerance zone
+(s e^-b, s] is HIGH, under "top" none is; these are the two extreme trajectories.
+
+Evaluations.  A point a_i is moved from rung l to rung l + 1 at level j when it is among the
+points used at that level (i <= M_j) and its rung-l bracket [L, U] has U > s_j and
+L <= s_j e^-b, i.e. when  s_j  lies in  [L e^b, U).  These windows are nested in l for l >= 1
+and contained in the window of rung 0, so the number of calls of I_{l+1} is
+
+    calls_{l+1} = sum over atoms w of  P(W = w) * max{ M_j : j <= j_stop,  w e^{b - alpha_l} <= s_j < w e^{beta_l} },
+
+with (alpha_l, beta_l) the logarithmic distances of the value from the two ends of the rung-l
+bracket (after intersection with the trivial bracket).  The number of evaluations is
+
+    1 + max_j M_j + sum_{l=1}^{L} calls_l * C_l .
+
+Nothing here is taken from the workstream's scripts; ``experiments/eng/twolevel/controls.py``
+compares the results with the workstream's stored outputs.
+"""
+from __future__ import annotations
+
+import math
+from bisect import bisect_left, bisect_right
+from dataclasses import dataclass, field
+
+import numpy as np
+
+from .alg2l import Constants, Params, constants, inner_costs, lC_max, logsumexp
+from .tables import LN2, TOL, CubeTables
+
+POP, NEG, STOP_POP, STOP_UNPOP = 0, 1, 2, 3
+
+
+# ---------------------------------------------------------------------------------------------
+# Laws of W
+# ---------------------------------------------------------------------------------------------
+@dataclass
+class Law:
+    """A discrete law of ln W: atoms ``lw`` (any order) with log-probabilities ``lpr``."""
+
+    lw: np.ndarray
+    lpr: np.ndarray
+    ltail_ge: np.ndarray = field(init=False, repr=False)
+    lA: float = field(init=False)
+
+    def __post_init__(self) -> None:
+        order = np.argsort(self.lw, kind="stable")
+        self.lw = np.asarray(self.lw, dtype=float)[order]
+        self.lpr = np.asarray(self.lpr, dtype=float)[order]
+        total = float(np.logaddexp.reduce(self.lpr))
+        if abs(total) > 1e-8:
+            raise ValueError(f"probabilities sum to exp({total})")
+        # Normalise exactly.  A total of 1 - 1e-12 would make the levels below the whole support look
+        # "not populated at the first pass" (M p < K by one part in 10^12), which no run does.
+        self.lpr = self.lpr - total
+        self.ltail_ge = np.concatenate([np.logaddexp.accumulate(self.lpr[::-1])[::-1], [-np.inf]])
+        self.ltail_ge[0] = 0.0
+        self.lA = float(np.logaddexp.reduce(self.lw + self.lpr))
+
+    def ltail_gt(self, ls):
+        """ln P(W > e^ls) (vectorised)."""
+        return self.ltail_ge[np.searchsorted(self.lw, ls, side="right")]
+
+
+def radial_law(F: np.ndarray, tables: CubeTables, shift: float = 0.0) -> Law:
+    """Law of W(a) = exp(shift - F(d(a, centre))) for a uniform point of the cube of ``tables``."""
+    F = np.asarray(F, dtype=float)
+    if F.shape != (tables.m + 1,):
+        raise ValueError("profile must have m + 1 values")
+    return Law(shift - F, tables.lbinom - tables.m * LN2)
+
+
+def lipschitz_violation(F: np.ndarray, u: float) -> float:
+    """max |F(d+1) - F(d)| - u  (<= 0 for a u-Lipschitz radial profile)."""
+    return float(np.max(np.abs(np.diff(F)))) - u if len(F) > 1 else -u
+
+
+@dataclass
+class Instance:
+    """Everything the mean run needs to know about the instance.
+
+    law   law of the fibre averages W(a), a uniform in the outer cube
+    psi0  the value of psi at the reference point 0^n
+    t0    ln(W(a) / lower end of the trivial bracket) = psi(a, 0) + u n_i + ln W(a), taken equal
+          for all a (true for product instances psi(a, b) = F_o(a) + F_i(b));
+          admissible range: n_i (u - Lambda_1) <= t0 <= n_i (2u - Lambda_1)
+    """
+
+    law: Law
+    psi0: float
+    t0: float = 0.0
+
+
+# ---------------------------------------------------------------------------------------------
+# Result
+# ---------------------------------------------------------------------------------------------
+@dataclass
+class Run:
+    status: str = ""             # "closed-populated", "closed-unpopulated", "abort-levels", "abort-sample"
+    j_stop: int = -1
+    r_close: int = -2            # closing radius (-1: empty tail)
+    lM_last: float = -math.inf   # ln of the sample size at the closing pass
+    lM_max: float = -math.inf    # ln of the largest sample used (= number of outer points drawn)
+    lL: float = -math.inf
+    lU: float = math.inf
+    lA: float = 0.0
+    width: float = math.inf      # ln(U/L)
+    npop: int = 0
+    nneg: int = 0
+    min_pop_radius: float = math.inf   # least closing radius r(q_j) over populated levels that were left
+    # claims of Theorem 11.56 (each "slack" must be <= 0, "margin" must be > 0)
+    slack_valid_lower: float = -math.inf     # ln L - ln A
+    slack_valid_upper: float = -math.inf     # ln A - ln U
+    slack_width: float = -math.inf           # ln(U/L) - x_out
+    margin_iii: float = math.inf             # min over levels left of ln q_j - ln pi_dagger
+    slack_iv_M: float = -math.inf            # max_j ln M_j - max(ln K, ln 2 + ln M_j^neg)
+    slack_iv_Mneg: float = -math.inf         # max_j ln M_j^neg - ln((1+eta) e^lam nu0 M_dagger)
+    slack_iv_Mbar: float = -math.inf         # max_j ln M_j - ln M_bar
+    slack_v: float = -math.inf               # max_{j,x} ln(M_j^neg p(s_j e^-x)) - ln((1+eta)/(1-eta) e^lam nu e^x)
+    slack_vi: float = -math.inf              # max_{j,l} ln(M_j p(s_j e^-x_{l-1})) - ln cnt(x_{l-1})   (mean count per level)
+    # evaluations
+    lcalls: np.ndarray | None = None         # ln calls_l, l = 0..L (index 0 unused)
+    lcost: float = math.inf                  # ln(number of evaluations)
+    lCmax: float = math.inf
+    # per-level record (kept when record=True)
+    lM: np.ndarray | None = None
+    kind: np.ndarray | None = None
+    lq: np.ndarray | None = None
+    lMneg: np.ndarray | None = None
+
+    @property
+    def closed(self) -> bool:
+        return self.status.startswith("closed")
+
+    def violations(self, tol: float = 1e-7) -> list[str]:
+        """Names of the claims of Theorem 11.56 that this run violates."""
+        out = []
+        if not self.closed:
+            out.append("(i) " + self.status)
+        for name in ("slack_valid_lower", "slack_valid_upper", "slack_width", "slack_iv_M", "slack_iv_Mneg",
+                     "slack_iv_Mbar", "slack_v", "slack_vi"):
+            if getattr(self, name) > tol:
+                out.append(name)
+        if self.margin_iii <= -tol:
+            out.append("margin_iii")
+        if self.lcost > self.lCmax + tol:
+            out.append("cost > C_max")
+        return out
+
+
+# ---------------------------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------------------------
+def _forward_window_max(arr: np.ndarray, w: int) -> np.ndarray:
+    """out[j] = max(arr[j : j + w]) (shorter windows at the end), by the van Herk / Gil-Werman scheme."""
+    n = arr.size
+    if w <= 1:
+        return arr.copy()
+    if w >= n:
+        return np.maximum.accumulate(arr[::-1])[::-1]
+    pad = (-n) % w + w                      # one extra block, so that j + w - 1 always exists
+    a = np.concatenate([arr, np.full(pad, -np.inf)]).reshape(-1, w)
+    pre = np.maximum.accumulate(a, axis=1).ravel()
+    suf = np.maximum.accumulate(a[:, ::-1], axis=1)[:, ::-1].ravel()
+    idx = np.arange(n)
+    return np.maximum(suf[idx], pre[idx + w - 1])
+
+
+def _range_max(arr: np.ndarray, lo: np.ndarray, hi: np.ndarray, cache: dict) -> np.ndarray:
+    """max(arr[lo..hi]) for index arrays lo <= hi with few distinct lengths; -inf where lo > hi."""
+    out = np.full(lo.shape, -np.inf)
+    length = hi - lo + 1
+    for w in np.unique(length[length > 0]):
+        w = int(w)
+        if w not in cache:
+            cache[w] = _forward_window_max(arr, w)
+        sel = length == w
+        out[sel] = cache[w][lo[sel]]
+    return out
+
+
+# ---------------------------------------------------------------------------------------------
+# The mean run
+# ---------------------------------------------------------------------------------------------
+def mean_run(P: Params, outer: CubeTables, inst: Instance, oracle: str = "bottom", *, C: Constants | None = None,
+             lC: np.ndarray | None = None, harper: bool = True, record: bool = False,
+             count_grid: tuple = (), enforce_abort: bool = True) -> Run:
+    """Run Algorithm 2L+ on ``inst`` with counts replaced by their means.
+
+    oracle   "bottom" or "top" (see the module docstring)
+    lC       ln C_l, l = 0..L (default: the base family inside); ignored when n_i = 0
+    harper   False removes the Harper term from the lower bound (a mutation, for controls)
+    enforce_abort  False lets the sample grow beyond K 2^{m_max} (only for comparison with scripts
+             that do not implement the abort rule; the claims then report by how much)
+    count_grid  extra values of x at which claim (v) is tested (the ladder is always tested)
+    """
+    if oracle not in ("bottom", "top"):
+        raise ValueError("oracle must be 'bottom' or 'top'")
+    if C is None:
+        C = constants(P, outer)
+    n, n_o, n_i, u, b, lam, eta = P.n, P.n_o, P.n_i, P.u, P.b, P.lam, P.eta
+    law = inst.law
+    J = C.J
+    lK, lnu = C.lK, C.lnu
+    lth = math.log(P.theta)
+    l1me, l1pe = math.log(1 - eta), math.log(1 + eta)
+    nln2 = n_o * LN2
+    ls0 = -inst.psi0 - u * n
+    lell = -inst.psi0 + n * math.log((1 + math.exp(-u)) / 2)
+    if law.lw[0] < ls0 - 1e-9 or law.lw[-1] > ls0 + 2 * u * n + 1e-9:
+        raise ValueError("the law is not supported in [s_0, s_0 e^{2un}]: psi0 does not belong to this instance")
+
+    theta_z = 1.0 if oracle == "bottom" else 0.0
+    ls = ls0 + lam * np.arange(J + 1)
+    ph = law.ltail_gt(ls - b * theta_z)                         # ln P(HIGH) at each level
+    with np.errstate(divide="ignore", invalid="ignore"):
+        m_pop = np.where(ph >= 0.0, 0.0, np.ceil(-ph / LN2 - 1e-12))
+    m_pop_l = m_pop.tolist()
+    ph_l = ph.tolist()
+    ls_l = ls.tolist()
+    lE = outer.lE[:n_o].tolist()                                # radii 0 .. n_o - 1 only: no closure at radius n_o
+    lball = outer.lball
+    lT = outer.lT
+    m_empty = math.floor(n_o - l1me / LN2 + 1e-12) + 1          # least m with 2^{n_o} q_m < 1, q_m = 1/((1-eta) 2^m)
+    l_e_lam_m1 = math.log(math.expm1(lam))
+    l_1_m_e = math.log(-math.expm1(-lam))
+
+    R = Run(lA=law.lA)
+    lM_rec = np.full(J + 1, -np.inf)
+    kind_rec = np.full(J + 1, -1, dtype=np.int8)
+    lq_rec = np.full(J + 1, np.nan)
+    lMneg_rec = np.full(J + 1, np.nan)
+    lsum = -math.inf            # ln Sigma
+    lU_acc = ls0                # ln(s_0 + sum_{i<j} (s_{i+1} - s_i) q_i)
+    j_stop = -1
+    for j in range(J + 1):
+        lsj = ls_l[j]
+        lell_in = lell
+        lMneg = lnu + lsj - lell_in - b
+        lMneg_rec[j] = lMneg
+        m_neg = max(0, math.ceil((lMneg - lK) / LN2 - 1e-12))
+        # closure at an unpopulated pass m: q_m = min(1, 1/((1-eta) 2^m)), tail nonincreasing in m
+        m_close = m_empty
+        r_ok = bisect_right(lE, lth + b + lell_in - lsj + nln2 + TOL) - 1
+        if r_ok >= 0:
+            m2 = max(0, math.ceil((nln2 - l1me - float(lball[r_ok])) / LN2 - 1e-12))
+            if m2 < m_close:
+                m_close = m2
+        mp = m_pop_l[j]
+        m_end = min(mp, m_neg, m_close)
+        if m_end > C.m_max and enforce_abort:
+            R.status = "abort-sample"
+            j_stop = j
+            lM_rec[j] = lK + C.m_max * LN2
+            kind_rec[j] = NEG
+            break
+        lM = lK + m_end * LN2
+        lM_rec[j] = lM
+        if mp == m_end:                                          # populated at this pass
+            lph = ph_l[j]
+            lpbar = lph - l1pe
+            lell = max(lell, lsj - b + lpbar)
+            if harper:
+                k = outer.kball(nln2 + lpbar)
+                lell = max(lell, lsj - b - nln2 + float(lT[k]))
+            lq = min(0.0, lph - l1me)
+            if nln2 + lq < 0.0:
+                r, ltail = -1, -math.inf
+            else:
+                r = outer.radius(lq)
+                ltail = lsj - nln2 + float(outer.lE[r]) if r <= n_o - 1 else math.inf
+            lq_rec[j] = lq
+            new_sum = float(np.logaddexp(lsum, l_1_m_e - b + lsj + lpbar))
+            if ltail <= lth + b + lell:
+                R.status, R.r_close, R.lM_last = "closed-populated", r, lM
+                R.lL = max(lell, new_sum)
+                R.lU = float(np.logaddexp(lU_acc, ltail))
+                kind_rec[j] = STOP_POP
+                j_stop = j
+                break
+            lsum = new_sum
+            lU_acc = float(np.logaddexp(lU_acc, l_e_lam_m1 + lsj + lq))
+            kind_rec[j] = POP
+            R.npop += 1
+            R.min_pop_radius = min(R.min_pop_radius, r)
+        elif m_close == m_end:                                   # closure at an unpopulated pass
+            lq = min(0.0, -l1me - m_end * LN2)
+            if nln2 + lq < 0.0:
+                r, ltail = -1, -math.inf
+            else:
+                r = outer.radius(lq)
+                ltail = lsj - nln2 + float(outer.lE[r]) if r <= n_o - 1 else math.inf
+            lq_rec[j] = lq
+            R.status, R.r_close, R.lM_last = "closed-unpopulated", r, lM
+            R.lL = max(lell, lsum)
+            R.lU = float(np.logaddexp(lU_acc, ltail))
+            kind_rec[j] = STOP_UNPOP
+            j_stop = j
+            break
+        else:                                                    # left as negligible
+            lq = min(0.0, -l1me - m_end * LN2)
+            lq_rec[j] = lq
+            lU_acc = float(np.logaddexp(lU_acc, l_e_lam_m1 + lsj + lq))
+            kind_rec[j] = NEG
+            R.nneg += 1
+    else:
+        R.status = "abort-levels"
+        j_stop = J
+    R.j_stop = j_stop
+    used = slice(0, j_stop + 1)
+    lMj = lM_rec[used]
+    R.lM_max = float(np.max(lMj))
+
+    # ---- claims of Theorem 11.56 ---------------------------------------------------------
+    if R.closed:
+        R.width = R.lU - R.lL
+        R.slack_valid_lower = R.lL - law.lA
+        R.slack_valid_upper = law.lA - R.lU
+        R.slack_width = R.width - C.x_out
+    left = kind_rec[used] <= NEG                                  # levels left without stopping
+    if left.any():
+        R.margin_iii = float(np.min(lq_rec[used][left] - C.lpi_dag))
+    R.slack_iv_M = float(np.max(lMj - np.maximum(lK, LN2 + lMneg_rec[used])))
+    R.slack_iv_Mneg = float(np.max(lMneg_rec[used])) - C.lMneg_cap
+    R.slack_iv_Mbar = R.lM_max - C.lM_bar
+    xs_v = sorted(set(list(P.xs[:-1]) + list(count_grid))) if n_i > 0 else sorted(set(count_grid))
+    for x in xs_v:
+        if x <= 0:
+            continue
+        lp_x = law.ltail_gt(ls[used] - x)
+        R.slack_v = max(R.slack_v, float(np.max(lMneg_rec[used] + lp_x)) - (C.lcount_factor + x))
+        if n_i > 0:
+            R.slack_vi = max(R.slack_vi, float(np.max(lMj + lp_x)) - C.lcnt(x, P))
+
+    # ---- evaluations -----------------------------------------------------------------------
+    if n_i > 0:
+        if lC is None:
+            lC = inner_costs(P, C)
+        R.lCmax = lC_max(P, C, lC)
+        x0 = P.xs[0]
+        t0 = inst.t0
+        if not (-1e-9 <= t0 <= x0 + 1e-9):
+            raise ValueError("t0 must lie in [0, x_0]")
+        cache: dict = {}
+        lcalls = np.full(P.L + 1, -np.inf)
+        for l in range(P.L):                                     # calls of I_{l+1}: windows of the rung-l bracket
+            if l == 0:
+                alpha, beta = t0, x0 - t0
+            elif oracle == "bottom":
+                alpha, beta = 0.0, min(P.xs[l], x0 - t0)
+            else:
+                alpha, beta = min(P.xs[l], t0), 0.0
+            lo = np.ceil((law.lw + b - alpha - ls0) / lam - 1e-12).astype(np.int64)
+            hi = np.ceil((law.lw + beta - ls0) / lam - 1e-12).astype(np.int64) - 1
+            lo = np.maximum(lo, 0)
+            hi = np.minimum(hi, j_stop)
+            mx = _range_max(lMj, lo, np.maximum(hi, lo - 1), cache)
+            lcalls[l + 1] = float(np.logaddexp.reduce(law.lpr + mx))
+        R.lcalls = lcalls
+        R.lcost = logsumexp([0.0, R.lM_max] + [lcalls[l] + lC[l] for l in range(1, P.L + 1)])
+    if record:
+        R.lM, R.kind, R.lq, R.lMneg = lMj, kind_rec[used], lq_rec[used], lMneg_rec[used]
+    return R
