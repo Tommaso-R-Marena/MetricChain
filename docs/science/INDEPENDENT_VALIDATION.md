@@ -118,6 +118,11 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   Proposition A1.2 and the two formulas of the `e^{u/2}` rule re-derived by hand; two of the
   workstream's citations checked earlier (SCI-REV-0004), none of the addendum's new ones
   re-opened by the coordinator.
+* **X (alternative frameworks):** `n1_coset_formula.py` re-run ("N1 OK": aliasing formulas
+  to `3·10⁻¹⁴`; spectra of exact order `m` recovered with zero posterior variance on dual BCH
+  designs; `sup P_A² ≤ 4·NL` in every printed case); the arguments of Theorem 3(a),(b),
+  Proposition 5′(a) and Proposition 8(c) re-derived by hand.  The comparison tables and
+  every other statement of `SX_REPORT.md` were read, not re-run.
 * **Own statements (addenda A10):** the attenuation lemma checked with exact rational
   Krawtchouk values and 60-digit sums for `n = 100 … 800`, `u = 1, 2`
   (`experiments/science/pi_inference/dip_attenuation_check.py`): identity A10.1 to `10⁻⁵⁹`;

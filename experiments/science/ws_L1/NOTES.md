@@ -201,3 +201,45 @@ lower bound m of f² on it; asymptotics.
 * `repetition_dual_distance`, `repetition_add_mem`, `theorem4_one_body_marginals`,
   `theorem4'_one_body_marginals`: explicit hypothesis-free instance (k = 1, C = {0ⁿ,1ⁿ}):
   all one-site marginals for free cost at most a factor 2 in both bounds.  Axioms: std.
+
+## ~19:33 UTC Further extras DONE (between `date` readings 19:29 and 19:36; the earlier header
+## text "19:45 UTC (clock)" was wrong and is corrected here)
+
+* `MaxEntStability.lean`: `expFam_eq_of_moments_eq` (Proposition 6, identifiability: equal Φ-means ⟹
+  equal ensembles; from Theorem 7(i) with r = 0 and the symmetrised Pinsker inequality).  Clean.
+* `PerturbationBracket.lean`: Proposition 9 (§10) — `logZ_step`, `meanEnergy_anti`,
+  `caloric_bracket`, `caloric_bracket_width`; derived from Theorem 5 on each interval, no calculus
+  (the integral identity is not formalised).  One fix (unfold order), then clean.
+* `Pinsker.lean` (new): `kemperman_scalar`, `pinsker` (2·TV² ≤ KL(p‖q), p ≥ 0, q > 0 probability
+  vectors on a finite type), `pinsker_tv_le`.  The calculus part (derivative of
+  G(t) = (2t²+4t) log t − (5t²−4t−1) is 4((t+1) log t − 2(t−1)), sign of t − 1) passed first time;
+  one fix in the Cauchy–Schwarz side condition (`generalize` before `field_simp`).  Axioms: std.
+
+## 19:36–19:37 UTC (from `check_log.txt`) FINAL CHECK of all eight files
+
+`check_log.txt`: each file run with `lake env lean <abs path>`, sequentially; all exit code 0, no
+warning, no error; 74 `#print axioms` lines, every one exactly
+`[propext, Classical.choice, Quot.sound]` (IdentifiedSets 14, Separation 7, OrthogonalArray 7,
+MaxEntStability 16, MarginalOracle 11, PerturbationBracket 8, BasinBound 8, Pinsker 3).
+Forbidden-token scan (`grep "sorry|admit|native_decide|axiom"` minus the `#print axioms` lines)
+on `*.lean`: no match.
+
+## Numerical sanity check of the formal statements (`sanity_numerics.py`, output in
+## `sanity_numerics_output.txt`; 2.5 s; seed 20261125)
+
+[7,3] simplex code on F_2^7: |C| = 8, dual distance 3 (so k = 2: a non-trivial instance of the
+hypothesis of Lemma 1 / Theorems 4, 4′ beyond the k = 1 instance proved in Lean).
+(2) random C-invariant μ: marginals of order 1, 2 uniform to 5.6e-17, order 3 off by 4.5e-2.
+(3) separation: min slacks |C|F1 − F = 1.05, (A−F)−(A1−F1) = 2.75, log form 2.1 (6 centres,
+u ∈ {0.5,1,2}, R ∈ {1,2,2.5,3}).  (4) centre count: slack 0 (the bound of `card_centres_near` is
+attained).  (5) Theorem 3 point mass: M_1 = 8, uniform measure on C has point mass 1/8 = bound
+(attained).  (6) 20000 random pairs: min(KL − 2TV²) = 3.7e-10, min(J − 4TV²) = 7.6e-10.
+(7) Theorem 7 on 196 of 200 random instances (4 discarded: BFGS did not match the moments to 1e-7):
+|J − β(E_ν r − E_μ r)| ≤ 2.9e-7, TV/(βω/4) ≤ 0.726, J/((βω)²/4) ≤ 0.624.
+These are sanity checks of statement fidelity, not evidence for the theorems (which are proved).
+
+## Git (observation, 19:38 UTC)
+
+`git status` / `git log` (read-only) show that the files of this directory and `L1_REPORT.md` were
+committed by the coordinator's periodic checkpoints (`[SCI] Checkpoint 14–16`, 19:00–19:34 UTC).
+I ran no git command that changes state.

@@ -1,0 +1,32 @@
+u = 3.0, bJ = 2.0 (below bJ* = 2.1158); R_unif(0) = 0.172831; barrier I(1/2) = 0.3265
+    exits of type in [0.00, 0.30]: min MI = inf  (none feasible)
+    exits of type in [0.30, 0.45]: min MI = 0.173119 at (a', b') = (0.7335, 0.1665)
+    exits of type in [0.45, 0.49]: min MI = 0.172858 at (a', b') = (0.7700, 0.2000)
+    exits of type in [0.49, 0.51]: min MI = 0.172965 at (a', b') = (0.7850, 0.2145)
+    exits of type in [0.51, 0.55]: min MI = 0.172858 at (a', b') = (0.8000, 0.2300)
+    exits of type in [0.55, 0.70]: min MI = 0.173119 at (a', b') = (0.8335, 0.2665)
+    exits of type in [0.70, 1.00]: min MI = inf  (none feasible)
+u = 3.0, bJ = 2.25 (above bJ*); R_unif(0) = 0.172831; barrier I(1/2) = 0.4435
+    exits of type in [0.00, 0.30]: min MI = inf  (none feasible)
+    exits of type in [0.30, 0.45]: min MI = 0.171082 at (a', b') = (0.5940, 0.0700)   <-- below R_unif
+    exits of type in [0.45, 0.49]: min MI = 0.172576 at (a', b') = (0.7355, 0.1690)   <-- below R_unif
+    exits of type in [0.49, 0.51]: min MI = 0.172965 at (a', b') = (0.7850, 0.2145)
+    exits of type in [0.51, 0.55]: min MI = 0.172576 at (a', b') = (0.8310, 0.2645)   <-- below R_unif
+    exits of type in [0.55, 0.70]: min MI = 0.171082 at (a', b') = (0.9300, 0.4060)   <-- below R_unif
+    exits of type in [0.70, 1.00]: min MI = inf  (none feasible)
+u = 6.0, bJ = 5.0 (below bJ* = 5.2783); R_unif(0) = 0.336076; barrier I(1/2) = 1.8069
+    exits of type in [0.00, 0.30]: min MI = inf  (none feasible)
+    exits of type in [0.30, 0.45]: min MI = 0.336672 at (a', b') = (0.8310, 0.0680)
+    exits of type in [0.45, 0.49]: min MI = 0.336100 at (a', b') = (0.8745, 0.1050)
+    exits of type in [0.49, 0.51]: min MI = 0.336304 at (a', b') = (0.8850, 0.1150)
+    exits of type in [0.51, 0.55]: min MI = 0.336100 at (a', b') = (0.8950, 0.1255)
+    exits of type in [0.55, 0.70]: min MI = 0.336672 at (a', b') = (0.9320, 0.1690)
+    exits of type in [0.70, 1.00]: min MI = inf  (none feasible)
+u = 2.5, bJ = 1.7 (below bJ*(u=2.5)); R_unif(0) = 0.135582; barrier I(1/2) = 0.1943
+    exits of type in [0.00, 0.30]: min MI = inf  (none feasible)
+    exits of type in [0.30, 0.45]: min MI = 0.135798 at (a', b') = (0.7000, 0.1945)
+    exits of type in [0.45, 0.49]: min MI = 0.135603 at (a', b') = (0.7440, 0.2355)
+    exits of type in [0.49, 0.51]: min MI = 0.135589 at (a', b') = (0.7450, 0.2365)
+    exits of type in [0.51, 0.55]: min MI = 0.135603 at (a', b') = (0.7645, 0.2560)
+    exits of type in [0.55, 0.70]: min MI = 0.135798 at (a', b') = (0.8055, 0.3000)
+    exits of type in [0.70, 1.00]: min MI = inf  (none feasible)

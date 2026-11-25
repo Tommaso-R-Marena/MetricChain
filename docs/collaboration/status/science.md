@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 16 of the science branch (2026-11-25; the commit time is
+*Updated at checkpoint 17 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -42,7 +42,7 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 | R5 | independent review of theory report §11.26, Theorems 11.99 and 11.101 (THY-REQ-0011 A1) → SCI-REV-0005 | review + replication | running |
 | P | a real force field against the envelope classes; physical reading of every object of the theory | measurement + analysis | **reported and published** (`workstreams/SP_REPORT.md`; SCI-RES-0002; `docs/science/PHYSICAL_APPLICABILITY.md`) |
 | K | certified kinetics: barriers, exit times, capacities | own theory + Lean | **reported and published** (`workstreams/SK_REPORT.md`; SCI-MSG-0005) |
-| X | alternatives to worst-case classes (average-case, weighted, structural conditions) | own theory | running |
+| X | alternatives to worst-case classes (average-case, weighted, structural conditions) | own theory | **reported and published** (`workstreams/SX_REPORT.md`; SCI-MSG-0007; `docs/science/ALTERNATIVE_FRAMEWORKS.md`) |
 | L1 | Lean formalisation of the short cores of our own results (files outside `proofs/`) | formalisation | running |
 | — | replication of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | replication | **completed: `AUDIT PASSED`** — 56 Lean files, 3423 declarations, 267 mutations (266 caught, 1 expected pass); first replication of the three Lean files added since `63efc69`; `docs/science/INDEPENDENT_VALIDATION.md` §1.1 |
 | — | replication of the engineering lattice-chain class tables | replication | **completed for `n = 1 … 10`: identical** (own enumerator; and by workstream R2 for 4–23 beads); `INDEPENDENT_VALIDATION.md` §1.2 |
@@ -84,6 +84,10 @@ the container is reclaimed.)
 | S21 | review of theory report §11.24: the two-round lower bound is correct; Theorem 11.84(ii) false as stated (cost bounded on the good event only), repaired by a stopping rule; the lower bound holds for expected cost at the flat-histogram instance | SCI-REV-0003; the strengthening **[V]** in abstract form (four theorems, re-compiled by the coordinator) |
 | S22 | heteropolymer landscapes: plain Monte Carlo from the product of the Shannon centres attains the capacity `a` at every bounded accuracy for every `n` (Proposition A1.2) | **[P]**; items 1–3 enumerated on 36 instances and re-derived by the coordinator; SCI-RES-0003 |
 | S23 | the `e^{u/2}` rule: the alphabet size maximising the cutoff rate of the `k`-ary symmetric channel at likelihood ratio `e^u` is `k = e^{u/2} + 1`; reflection identity at `e^u = k(k−1)` | **[P]**, re-derived by the coordinator; not found in print in two searches |
+| S24 | the exponential price is the geometry of the first-order class (information combines by a minimum), not the worst-case quantifier: over a kernel ball with a Walsh spectrum on orders `≤ m` about `n^m` evaluations certify `min` and `ln Z`; two-sided design bound; exponent `h(α)` for orders up to `αn` | **[P]**, tested numerically; ingredients **[K]**; SCI-MSG-0007 |
+| S25 | no free hedging: an algorithm correct on a first-order class pays its instance-wise price on every subclass; the benign assumption cannot be verified from polynomially many evaluations | corollary of the theory division's **[V]** instance-wise bounds |
+| S26 | LP-funnel slope `τ_LP ≤ τ`: a polynomial-size, kernel-checkable proof of sharpness for interacting known parts exists iff the envelope is below `τ_LP`; equality on trees and ferromagnets | **[P]**; 1 280 instances |
+| S27 | the lever arm belongs to the first-order format, not to the residual: energies quadratic in positions have chain-length order and growing per-torsion constants but `O(n²)` modes | **[P]**; toy chain |
 
 ## Outstanding requests
 
@@ -103,6 +107,8 @@ the container is reclaimed.)
 | SCI-REV-0003 (corrective actions 1–6) | theory | stopping rule in Theorem 11.84 (M1); wording m1–m9; adopt the expected-cost form | high for M1 | proposed |
 | SCI-REV-0003 (R4-E1, R4-E2) | engineering | certified rows of the twins table (interval arithmetic); the two-round algorithm at finite `n` | medium | proposed |
 | SCI-RES-0003 (A1-T7…A1-T9) | theory | wording of the dictionary's originality; a sentence of Theorem 11.99; check Proposition A1.2; the reflection identity | normal | proposed |
+| SCI-MSG-0007 (X-T1…X-T4) | theory | machine-check the hypercircle band and a sharp–soft soundness statement; two table rows; the Curie–Weiss extremality question; the converse reading of D28 | X-T1 high | proposed |
+| SCI-MSG-0007 (X-E1, X-E2) | engineering | cover format against span format on enumerated chain geometry; the slack `κ` of certified envelopes | medium | proposed |
 
 ## Requests received
 

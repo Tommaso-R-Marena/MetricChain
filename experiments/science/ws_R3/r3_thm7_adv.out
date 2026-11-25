@@ -9,3 +9,4 @@
 (c) adversarial ascent (Nelder-Mead, many restarts): can features make max-ent refinement worse than tanh(w/4)?
    w=0.5: best TV found = 0.124353; tanh(w/4) = 0.124353; note's w/4 = 0.1250 | best KL(mu|nu) = 0.03114, best KL(nu|mu) = 0.03114; no-feature sup: 0.03114, 0.03114; J bound w tanh(w/4) = 0.06218; note's w^2/4 = 0.0625
    w=2.0: best TV found = 0.462117; tanh(w/4) = 0.462117; note's w/4 = 0.5000 | best KL(mu|nu) = inf, best KL(nu|mu) = 0.47447; no-feature sup: 0.47447, 0.47447; J bound w tanh(w/4) = 0.92423; note's w^2/4 = 1.0000
+   w=4.0: best TV found = 0.761594; tanh(w/4) = 0.761594; note's w/4 = 1.0000 (vacuous: > 1) | best KL(mu|nu) = inf, best KL(nu|mu) = 1.66985; no-feature sup: 1.66985, 1.66985; J bound w tanh(w/4) = 3.04638; note's w^2/4 = 4.0000

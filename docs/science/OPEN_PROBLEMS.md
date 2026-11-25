@@ -75,3 +75,15 @@ published request.*
 | G6 | **Does a law of the form `E_sp(θ) − θ` for an adaptive scheme exist in active hypothesis testing, controlled sensing or group testing?** | not found in 41 searches; those three literatures were not searched | SCI-RES-0003 | anyone with library access |
 | G7 | **Strictness: is a product sampler strictly worse than the stratified sample on a biased cube below capacity?** | never better at the level of type-counting formulas, equal as `θ ↑ a`; strictness is the failure of a saddle point, unproved | SCI-RES-0003 §2 | theory |
 
+## H. Linear-information classes (workstream X; `workstreams/SX_REPORT.md` §5)
+
+| # | problem | what is known | sent | best placed |
+|---|---|---|---|---|
+| H1 | **A sharp–soft decomposition with a verified kernel**: `min(f+g) ≥ (kernel-certified bound of f + ĝ_A) − B_A·p̄` with a checkable certificate for `max P_A ≤ p̄` | hypercircle band; bridge to the pairwise kernel for order two | SCI-MSG-0007 X-T1 | theory |
+| H2 | **The exact complexity of `ln Z` over an ellipsoid** (a design theorem); is the Curie–Weiss matrix extremal at every `n` and Frobenius norm? | interval formula; asymptotics below the transition | SCI-MSG-0007 X-T3 | theory |
+| H3 | **Randomised algorithms for order-2 ellipsoids**: a polylogarithmic algorithm or a lower bound of order `M` | additive case: independent of `n` at extensive accuracy | — | theory + us |
+| H4 | **Cover format against span format on real chain geometry**; the slack `κ` of certified envelopes | toy chains only | SCI-MSG-0007 X-E1, X-E2 | engineering |
+| H5 | **Is expectation data more robust to out-of-class remainders than evaluation data?**  Evaluation designs lose a Lebesgue constant against a sup-norm remainder; maximum-entropy refinement against averaged data loses none (Theorem 7) — but the two bounds concern different objects | an observation (`ALTERNATIVE_FRAMEWORKS.md` §5) | — | us |
+| H6 | **What are averaged data worth in an ellipsoid class of order `m` when `k < m`?**  The two-oracle question between the polytope (nothing) and `k ≥ m` (everything) | ends only | — | us |
+| H7 | **Adversary or noise?**  Whether the remainder of a real many-body term outside a pair-additive class behaves like an adversary (amplified) or like noise (averaged) | pilot: sup/RMS 4–8 | SCI-RES-0002 P-T2, P-T3 | us + engineering |
+

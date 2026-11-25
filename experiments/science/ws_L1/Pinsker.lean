@@ -180,6 +180,7 @@ theorem pinsker (p q : X → ℝ) (hp : ∀ x, 0 ≤ p x) (hq : ∀ x, 0 < q x)
         have hne := (hw x).ne'
         rw [sq_abs]
         refine le_of_eq ?_
+        generalize 2 * p x + 4 * q x = w at hne ⊢
         field_simp)
   have hsum2 : ∑ x, (2 * p x + 4 * q x) / 3 = 2 := by
     rw [← Finset.sum_div, Finset.sum_add_distrib, ← Finset.mul_sum, ← Finset.mul_sum, hp1, hq1]

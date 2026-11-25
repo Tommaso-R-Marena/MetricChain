@@ -1,0 +1,6 @@
+w=2.0: best TV 0.462117 (tanh(w/4) = 0.462117); best J 0.92423 (w tanh(w/4) = 0.92423); best KL(mu|nu) 0.47447 (no-feature sup 0.47447); best KL(nu|mu) 0.47447 (no-feature sup 0.47447)
+w=8.0: best TV 0.964028 (tanh(w/4) = 0.964028); best J 7.71222 (w tanh(w/4) = 7.71222); best KL(mu|nu) 4.92291 (no-feature sup 4.92291); best KL(nu|mu) 4.92291 (no-feature sup 4.92291)
+
+real	8m14.276s
+user	6m35.497s
+sys	0m0.422s

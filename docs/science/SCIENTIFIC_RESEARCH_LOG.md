@@ -294,3 +294,24 @@ profile and the gauche count, and its support function is the ground-state energ
   report's change list before the next checkpoint.
 * With this, THY-REQ-0011 is answered except for A1 (review of §11.26, workstream R5).
 
+### Cycle 11 — the alternative framework (checkpoint 17)
+
+* **Workstream X reported.**  Read in full; one script re-run; four arguments re-derived.
+  Its verdict is sharper than the question I had put ("is worst case the right model?"):
+  the exponential price is the *geometry* of the first-order class — information from
+  evaluations combines by a minimum — not the worst-case quantifier.  In a kernel ball it
+  combines linearly and a spectrum of bounded interaction order is polynomial, with a
+  matching lower bound; the envelope still wins where the known part is sharp; and by the
+  theory division's own instance-wise bounds no cheaper paradigm can stay valid on a
+  first-order class.  Published as SCI-MSG-0007; synthesis with P's measurements in
+  `ALTERNATIVE_FRAMEWORKS.md`.
+* *A connection I had not seen before writing the synthesis:* the BCH codes of my Theorems
+  2 and 4 and of X's design theorem are the same objects in dual roles — a code of minimum
+  distance `2m+1` makes its dual a design that resolves every interaction of order `≤ m`; a
+  code of dual distance `> k` hides a dip from every `k`-body average.  Low-order information
+  is complete for low-order classes and blind for first-order ones, for evaluations and
+  for averaged data alike.  Recorded in the synthesis (§5) as a table; the further
+  observation about robustness to remainders is marked as unexamined.
+* The three results of today that change the frontier map most are not theorems about the
+  cube: P's constants, X's "geometry, not quantifier", and K's "cuts need no new kernel".
+

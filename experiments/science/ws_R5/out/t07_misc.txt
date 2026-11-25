@@ -12,3 +12,8 @@
    eps = 37.27; max_t [n F*(t) - t eps] = 13.0091 at t = 0.3134: every algorithm needs >= (1-2delta) * 4.465e+05 evaluations at the hardest additive instance  [theirs, from exact joint-type sums, NOT replicated: (1-2delta) * 1.9e6]
 
 == (i) three letters, Hamming: grid of 171 site laws (multiples of 1/20) ==
+   u = 1.0: 171 laws.  uniform: h = 0.030654, a = 0.123284, E = 0.119499;  two-letter cube: h_2 = 0.029139, a_2 = 0.110944, E_2 = 0.120115
+        grid maximum of h: 0.030572 at pi = [0.35 0.35 0.3 ]  ->  uniform law is harder
+        grid maximum of a: 0.122951 at pi = [0.35 0.3  0.35]  ->  uniform law is harder
+        grid maximum of E: 0.120196 at pi = [0.05 0.5  0.45]  ->  a grid law is HARDER than the uniform law
+   [412 s]

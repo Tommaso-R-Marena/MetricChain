@@ -277,7 +277,7 @@ instances (`|X| < 40`, `≤ 6` features): identity (i) and (v) to `3·10^{−9}`
 Replacing Pinsker by the sharp inequality between the symmetrised divergence and the total
 variation gives `TV ≤ tanh(βω/4)`, with equality at **every** `βω` (R1); an adversarial search over
 `(μ₀, Φ, r)` with up to 5 points and 2 features reaches `tanh(βω/4)` to six digits and never
-exceeds it (`βω = 0.5`: `0.124353` against `0.124353`; larger `βω` in `r3_thm7_adv.out`, see §5).
+exceeds it (`βω = 0.5, 2, 4, 8`: `0.124353`, `0.462117`, `0.761594`, `0.964028`).
 
 ### §7 — correct, but the example is the easy case
 
@@ -579,9 +579,10 @@ correct on it; Theorem 11.45(a) ("any class, any functional") with the pairs
 non-zero vector is a dual word with probability `2^{−K}`, a fixed non-zero message gives a
 uniformly random word; union bounds over `≤ (n+1)^k` light vectors and `2^K` messages.  The upper
 bounds: plain Monte Carlo ignores the oracle (Theorem 11.44).  ∎
-*Checked* (`r3_extensions.py`, part A; exact, on the cosets of four codes, `u = 0.5, 1, 2`, all `R`
-up to the covering radius `+1`): `drop_C ≥ D_R` in every case (e.g. Golay, `u = 2`, `R = 3`:
-`0.853 ≥ 0.522`), and `|U_a| = |C|·|B(R−1)|` while the balls are disjoint.
+*Checked* (`r3_extensions.py`, part A; exact, on the cosets of five codes — simplex `[15,4,8]`,
+`RM(1,4)`, `[15,8,4]`, Golay, `[31,10,12]` — `u = 0.5, 1, 2`, all `R` up to the covering radius `+1`):
+`drop_C ≥ D_R` in every case (e.g. Golay, `u = 2`, `R = 3`: `0.853 ≥ 0.522`; `[31,10,12]`, `u = 1`,
+`R = 6`: `0.416 ≥ 0.096`), and `|U_a| = |C|·|B(R−1)|` while the balls are disjoint.
 
 ### R6.  Proposition 5b is a theorem, and it survives the marginal oracle
 
@@ -666,15 +667,15 @@ said.
 
 | script (command) | what | size | result | time |
 |---|---|---|---|---|
-| `r3_codes.py` | own GF(2) algebra, BCH codes from `GF(2^m)`, duals, punctured codes, exact dual distances (brute force / MacWilliams, integers) | all `n ≤ 31`, `k ≤ n`, 2 coordinate sets | bound `|C| ≤ (2n)^{⌈k/2⌉}` and dual distance `> k`: **0 failures**; extended-BCH duals `m ≤ 5`: sizes `2(2^m)^t`, dual distance `2t+2` or more; puncturing example with `d_min = 1` | 5 s |
+| `r3_codes.py` | own GF(2) algebra, BCH codes from `GF(2^m)`, duals, punctured codes, exact dual distances (brute force / MacWilliams, integers) | all `n ≤ 31`, `k ≤ n`, 2 coordinate sets | bound `|C| ≤ (2n)^{⌈k/2⌉}` and dual distance `> k`: **0 failures**; extended-BCH duals `m = 3…6`, `t = 1, 2, 3`: sizes `≤ 2(2^m)^t`, dual distance `2t+2` or more; puncturing example with `d_min = 1` | 5 s |
 | `r3_thm2.py` | Theorem 2 on `[15,8,4]` (`k=4`) and Golay `[24,12,8]` (`k=7`): `ν_{C,b}` and the variant; all Fourier coefficients (full WHT), all flip ratios, entropies, path (e); (d) on random members | `2^{15}`, `2^{24}` states; 3 200 members `n ≤ 10` | all of (a)–(e) confirmed; first visible order is exactly `k+1` | 4 min |
 | `r3_thm2.py big` | the same on `[31,10,12]` (`k = 4`) through the coset table (no full cube: uniformity follows from the exact dual distance 5 and `E_νχ_T = τ^{|T|}[T ∈ C^⊥]`) | `2^{21}` cosets × `2^{10}` words | `b = 1, 2, 4`: `S = 21.4201, 18.0444, 9.7244` inside `[18.05, 24.98]`, `[11.33, 18.26]`, `[2.79, 9.72]`; hidden order `n ln 2 − S = 0.07, 3.44, 11.76` nats | +1 min |
 | `r3_thm3.py` | Theorem 3: identities (integers); **exact LP optimum** vs bound vs attained on 5 codes; all centres on 2 codes; asymptotics `n ≤ 10⁵`; LP/bound for `n ≤ 400`; moment bound | LPs with `n+1` variables | see §2 | 6 s |
-| `r3_extensions.py` | Theorem 4's ingredients on 3 codes (C); R5 on 4 codes (A); R2 on 3 codes and 4 non-code laws, asymptotics (B, B′, B″) | up to `2^{24}` | all inequalities hold | 1.5 min |
+| `r3_extensions.py` (`big` adds `[31,10,12]`) | Theorem 4's ingredients on 3 codes (C); R5 on 4 (+1) codes (A); R2 on 3 (+1) codes and 4 non-code laws, asymptotics (B, B′, B″) | up to `2^{24}` states, `2^{21}` cosets | all inequalities hold | 1.5 min (+2 min) |
 | `r3_thm5.py` | Theorem 5 bracket, identity, sampled lower end | 450 members, `9·10⁴` sample sets | 0 violations; failure rate `10^{−4}` at `δ = 0.1` | 10 s |
 | `r3_prop5b.py` | Proposition 5b: the note's cases; root structure in `n`; disjoint twins (`u = 2.6, 3, 4`); joint oracle on Golay | `n ≤ 5000` (`6.25·10⁶` terms) | note's `s*` and `ln Z′ − ln Z₀` reproduced with integer `r₁`; root from `n = 400`; R6 checks | 1 min |
 | `r3_prop5b_overlap.py` | R6.2, R6.3 with overlapping supports | `n = 2000, 4000`; `u = 0.5, 1, 2` | signs at `s = ±1`, Hoeffding bound | 45 s |
-| `r3_thm7.py` (`adv` for the ascent) | Theorem 7 and R1: lemma on `2·10⁵` pairs; 4 000 random instances; extremal family; adversarial ascent | `|X| < 40`; ascent `|X| ≤ 5` | largest `TV/tanh(βω/4) = 0.99999`; extremal family exact | 1 min (+ ascent, slow) |
+| `r3_thm7.py` (`adv` for the ascent), `r3_thm7_kl.py` (guarded ascent) | Theorem 7 and R1: lemma on `2·10⁵` pairs; 4 000 random instances; extremal family; adversarial ascent (Nelder–Mead restarts) on `TV`, `J` and the two one-sided divergences | `|X| < 40`; ascent `|X| ≤ 5`, `≤ 2` features, `βω ∈ {0.5, 2, 4, 8}` | largest `TV/tanh(βω/4)` over random instances `0.99999`; extremal family exact; ascent reaches `tanh(βω/4)` and `βω·tanh(βω/4)` to six digits and never more; the one-sided divergences never exceed their no-feature suprema (`0.4745` at `βω = 2`, `4.9229` at `βω = 8`) **[N]** | 1 min; ascent 8 min per `βω` |
 | `r3_chain.py tables 9` | own enumerator of the diamond-lattice chain vs the engineering tables | `n = 1…9` torsions (17 107 conformations) | class tables identical (classes, counts, `gmin`, `#gmin`, `gmax`) | 10 s |
 | `r3_chain.py sec112` | §11.2 from the engineering tables, **dual** LP (4 multipliers) | `N = 7…27` beads, up to 4 532 classes | all 22 ends agree with the note to `≤ 10^{−3}` | 3 s |
 | `r3_chain.py sec111` | §11.1, dual LP on the un-aggregated conformations | 13 beads, 49 833 conformations, up to 57 features | all 27 entries agree to two decimals | 2 min |
@@ -898,8 +899,12 @@ worst-case exponent with such an oracle stays positive … is open" is supersede
    compact-decile row of §11.4; §11.1 at sizes other than 13 beads ("grow or level off").
 9. **The exact optimum of Theorem 3 within the class** (finite `b`): I computed it over all
    measures only.
-10. The adversarial ascent for Theorem 7 was limited to `|X| ≤ 5` and two features, and was slow
-    on the shared machine; the values it reached are in `r3_thm7_adv.out`.
+10. The adversarial ascent for Theorem 7 was limited to `|X| ≤ 5`, two features and
+    `βω ≤ 8` (`r3_thm7_adv.out`, `r3_thm7_kl.out`).  In the unguarded run two searches on
+    `KL(μ‖ν)` returned `inf`: an underflow of `ν` in floating point, not a counterexample
+    (`KL(μ‖ν) ≤ J ≤ βω·tanh(βω/4)` is proved); the guarded script rejects such instances.  A side
+    observation **[N]**: with features the one-sided divergences never exceeded their no-feature
+    suprema, which suggests a sharp form of (v) that I did not try to prove.
 
 ---
 

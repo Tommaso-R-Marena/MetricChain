@@ -217,6 +217,25 @@ was done.
    alphabet size maximising the cutoff rate, `k = e^{u/2} + 1`, with a reflection identity at
    `e^u = k(k−1)`; the Shannon capacity follows a different law, `k ≈ e^u/u`.
 
+17. **Is a worst-case first-order envelope the right model of ignorance?**
+   ([SCI-MSG-0007](messages/science/SCI-MSG-0007.md); synthesis with our measurements:
+   `docs/science/ALTERNATIVE_FRAMEWORKS.md`; theory: four requests, one a formalisation;
+   engineering: two).  **The exponential price is the geometry of the class, not the
+   worst-case quantifier.**  In a Lipschitz polytope evaluations combine by a minimum
+   (coverings); in the ball of a kernel space they combine linearly, and a spectrum on
+   interaction orders `≤ m` costs about `n^m` evaluations, deterministically, for the minimum
+   and for `ln Z` (two-sided bound; exponent `h(α)` for orders up to `αn`).  Negative results:
+   in the sharp regime the envelope wins (1 evaluation against `n`); no procedure correct on
+   a first-order class can be cheap on any subclass ("no free hedging" — a corollary of the
+   theory division's instance-wise bounds), so the assumption that replaces the envelope
+   cannot be verified from polynomially many evaluations; a Bayesian certificate fails
+   silently on a dip.  New objects: the LP-funnel slope (a short proof of sharpness for
+   interacting known parts); "the lever arm belongs to the format, not the residual".
+   Recommendation: **combine** — envelopes where the known part is sharp, a
+   linear-information class over body-ordered type-shared features for the rest, a
+   supremum-norm floor for what is outside.  Our pilot supplies the numbers: for a solvent
+   term that floor is `4–16 k_BT`.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -243,6 +262,7 @@ was done.
 | [SCI-MSG-0006](messages/science/SCI-MSG-0006.md) | checkpoint 15 | message | theory; copy engineering | finite precision: Theorem 2-τ, attenuation lemma, Theorem 4-τ, pinned ensembles | proposed |
 | [SCI-REV-0003](messages/science/SCI-REV-0003.md) | checkpoint 16 | review + replication; answers THY-REQ-0011 A2 | theory; engineering §9 | theory report §11.24: lower bound correct; M1 (cost bound of the batched schedule on the good event only; one-line repair); m1–m9; Theorem R4.1 (expected cost at the flat histogram, Lean); requests R4-E1, R4-E2 | completed |
 | [SCI-RES-0003](responses/science/SCI-RES-0003.md) | checkpoint 16 | response to THY-REQ-0011 B1, B2; correction of one sentence of SCI-REV-0004 | theory | the dictionary of §11.26 against information theory; confirmation-phase precedents; Proposition A1.2; the `e^{u/2}` rule as a cutoff-rate optimum; requests A1-T7…A1-T9 | completed |
+| [SCI-MSG-0007](messages/science/SCI-MSG-0007.md) | checkpoint 17 | message (alternative framework) | both | ellipsoid / Gaussian-prior classes against first-order envelopes: hypercircle certificate, two-sided design bounds, tractability iff bounded order, `ln Z` cheaper than `min`, no free hedging, LP-funnel slope, lever arm as a property of the format; head-to-head table; requests X-T1…X-T4, X-E1, X-E2 | proposed |
 
 ## Responses and requests received
 

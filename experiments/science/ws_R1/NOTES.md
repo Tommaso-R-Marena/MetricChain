@@ -231,3 +231,20 @@ Excess 2.3e-6 (0.03 %) — small, but with a certified bracket.  Local search fo
 - `corollary_1191_checks.py` rerun: (C1) PASS: max[r_mu − r^κ_mu] = 1.6e-16, max[r^κ_mu − R^κ] = 1e-17, max[R^κ − R_unif] = −1.7e-7 (142 profiles).
 - `remark_v2_extra.py`: local search at u=.5: π = (.04502, .45679, .49819), h ∈ [.007675293, .007675294] (h_2 = .007672866).
 - final full rerun of `thm_1190.py` started (thresholds after bug fixes).
+
+## Step 14 — results of the long runs
+- `out_thm_1190.txt` (final): ALL PASS (defs; 11.90(b) 24 centres; (c) grid 270 400 pts; equality case; curvature domination; table; sup_m).
+- `out_corollary_1191_checks.txt` (final): ALL PASS.  (C2) field: .025034 by direct sup–min at (m,a,b) = (.4994,.1362,.5381)/(mirror), and by the
+  vertex-channel formula.  (C5) junction: u=1 equality below βJ*=1.125 and loss just above (βJ=1.1312: −1.2e-5); u=3: equality at
+  βJ = 1.56, 1.89, 2.06 (< βJ* = 2.1158), loss at 2.17 (−3.0e-4).
+- `junction_scan.py`/`junction_exits.py`: u ∈ {1,2,3,4,6}, e ∈ {0, 0.3Ψ_c(u)}, βJ = 1 + f(βJ*−1), f ∈ {.3,.6,.8,.9,.97}: r_mu(e) = R_unif(e)
+  to 1e-15 in all 50 cases — NO early junction.  Exit tables (grid 2001², by exit type): below βJ* no feasible exit of any type has
+  MI below R_unif (u=3, βJ=2.0; u=6, βJ=5.0; u=2.5, βJ=1.7); above βJ* (u=3, βJ=2.25) exits of type ≈ .33/.67 win (.171082 < .172831).
+  ⇒ I do NOT reproduce the statement attributed to referee R10 in the 89ac710 text ("for larger slopes the junction comes earlier";
+  R10's report is not in the checkout).  Unresolved; a concrete (u, e, βJ) from R10 is needed.
+- `ceiling_check.py`: (U1) I ≤ s²/8 for 4000 random Potts pairs q=2..6 (max ratio .9958); (U2) F*(t) ≤ t(1−t)u²/8, E, a ≤ u²/8 for 60 random
+  Hamming sites q=2..4 (max ratios .9966, .9971, .9920); h_2/(u²/32) = .9993, .9955, .9821, .9325, .7782 at u = .1,.25,.5,1,2;
+  h_3/(u²/32) = .9033, .9230, .9504, .9809, .9416.  (U3) pair identity N^κ(e+R^κ(e)) = R^κ(e): 2e-16.
+  [P] proof of the ceiling: Hoeffding's lemma (Λ'' ≤ u²/4) with Q = π in min_Q max_φ (1−t)D_t(π_φ‖Q).
+- `remark_v2_extra.py` final: local maximiser at u=.5: π = (.04502,.45679,.49819), h ∈ [.007675293,.007675295]; excess over h_2: 2.4e-6.
+Now writing R1_REPORT.md.
