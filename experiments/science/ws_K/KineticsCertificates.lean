@@ -1,5 +1,6 @@
 import Mathlib
 import proofs.CertificateAlgebra
+import proofs.Frontiers.PartitionCertificate
 
 /-!
 # Workstream K (science division): barrier certificates on top of the verified min-kernels
@@ -57,6 +58,21 @@ theorem cut_sound {X : Type*} (adj : X → X → Prop) (E : X → ℝ) (S : Set 
     ∃ j, j ≤ m ∧ t ≤ E (p j) := by
   obtain ⟨j, hj, h1, h2⟩ := exists_exit S p m ha hb
   exact ⟨j + 1, hj, hwall _ _ h1 h2 (hp j hj)⟩
+
+/-- **Counting (level) cut (Proposition K2(c)).**  If a statistic `q` increases by at most one per
+move and every configuration on the level `q = r` has energy at least `t`, then every walk from
+`q < r` to `q ≥ r` visits a configuration of energy at least `t`. -/
+theorem level_cut_sound {X : Type*} (adj : X → X → Prop) (E : X → ℝ) (q : X → ℕ) (r : ℕ) (t : ℝ)
+    (hstep : ∀ x y, adj x y → q y ≤ q x + 1)
+    (hlevel : ∀ y, q y = r → t ≤ E y)
+    (p : ℕ → X) (m : ℕ) (hp : IsWalk adj p m) (ha : q (p 0) < r) (hb : r ≤ q (p m)) :
+    ∃ j, j ≤ m ∧ t ≤ E (p j) := by
+  refine cut_sound adj E {x | q x < r} t ?_ p m hp ha (by simpa using hb)
+  intro x y hx hy hxy
+  have h1 : q x < r := hx
+  have h2 : r ≤ q y := by simpa using hy
+  have h3 := hstep x y hxy
+  exact hlevel y (by omega)
 
 /-! ### The pinned class and the two cone residuals -/
 
@@ -461,11 +477,90 @@ theorem trap_certificate_weighted (P : X → X → ℝ) (w κ : X → ℝ) (A : 
 
 end Trap
 
+/-! ### Rate certificate on top of the partition-function kernel (box cut) -/
+
+section BoxTrap
+
+variable {n k : ℕ}
+
+theorem singleSite_symm {x y : Config n k} (h : SingleSite x y) : SingleSite y x := by
+  obtain ⟨i, hi⟩ := h
+  exact ⟨i, fun j hj => (hi j hj).symm⟩
+
+/-- The `n` wall boxes of a box are pairwise disjoint. -/
+theorem wallBox_pairwiseDisjoint (D : Dom n k) :
+    ((Finset.univ : Finset (Fin n)) : Set (Fin n)).PairwiseDisjoint
+      (fun i => boxFinset (wallBox D i)) := by
+  intro i _ j _ hij
+  rw [Function.onFun, Finset.disjoint_left]
+  intro x hxi hxj
+  have h1 := mem_boxFinset.mp hxi j
+  have h2 := mem_boxFinset.mp hxj j
+  unfold wallBox at h1 h2
+  rw [Function.update_of_ne (Ne.symm hij)] at h1
+  rw [Function.update_self] at h2
+  simp [List.mem_filter] at h2
+  exact h2 h1
+
+/-- **Rate certificate, box cut, on top of `zverifyTop_sound` (§2.8 of the report).**  Let `I` be a
+rational weight instance, `D` a box, and suppose the partition kernel returns the interval
+`(loA, hiA)` on `D` and `(lo i, hi i)` on the `i`-th wall box.  Then for **every** stochastic
+kernel `P` that is stationary for the weights of `I` and moves at most one site per step, the
+chain started from the stationary law restricted to the box is still in the box after `T` steps
+with probability at least `1 - T * (Σ_i hi i) / loA`. -/
+theorem box_trap_certificate (I : WInstance n k) (D : Dom n k)
+    (cA : ZCert n k) (cW : Fin n → ZCert n k) (loA hiA : ℚ) (lo hi : Fin n → ℚ)
+    (hA : zverifyTop cA I D = some (loA, hiA))
+    (hW : ∀ i, zverifyTop (cW i) I (wallBox D i) = some (lo i, hi i))
+    (hloA : 0 < loA)
+    (P : Config n k → Config n k → ℝ)
+    (hP0 : ∀ x y, 0 ≤ P x y) (hP1 : ∀ x, ∑ y, P x y = 1)
+    (hstat : ∀ y, ∑ x, (I.weight x : ℝ) * P x y = (I.weight y : ℝ))
+    (hlocal : ∀ x y, P x y ≠ 0 → SingleSite x y) (T : ℕ) :
+    1 - T * ((∑ i, (hi i : ℝ)) / (loA : ℝ)) ≤
+      (∑ x ∈ boxFinset D, (I.weight x : ℝ) * surv P (boxFinset D) T x) /
+        (∑ x ∈ boxFinset D, (I.weight x : ℝ)) := by
+  have hI : I.Nonneg := (zverifyTop_eq_some hA).1
+  have hw0 : ∀ x, (0 : ℝ) ≤ (I.weight x : ℝ) := fun x => by
+    exact_mod_cast I.weight_nonneg hI x
+  have hloc : ∀ x ∈ (boxFinset D)ᶜ,
+      x ∉ (Finset.univ : Finset (Fin n)).biUnion (fun i => boxFinset (wallBox D i)) →
+        ∀ y ∈ boxFinset D, P x y = 0 := by
+    intro x hx hxW y hy
+    by_contra hne
+    have hss := singleSite_symm (hlocal x y hne)
+    have hxbox : ¬ InBox D x := fun h => (Finset.mem_compl.mp hx) (mem_boxFinset.mpr h)
+    obtain ⟨i, hi⟩ := mem_wallBox_of_exit (mem_boxFinset.mp hy) hxbox hss
+    exact hxW (Finset.mem_biUnion.mpr ⟨i, Finset.mem_univ i, mem_boxFinset.mpr hi⟩)
+  have hU : ∑ x ∈ (Finset.univ : Finset (Fin n)).biUnion (fun i => boxFinset (wallBox D i)),
+      (I.weight x : ℝ) ≤ ∑ i, (hi i : ℝ) := by
+    rw [Finset.sum_biUnion (wallBox_pairwiseDisjoint D)]
+    apply Finset.sum_le_sum
+    intro i _
+    have h := (zverifyTop_sound (cW i) I (wallBox D i) (lo i) (hi i) (hW i)).2
+    unfold WInstance.Z at h
+    have h' : ((∑ x ∈ boxFinset (wallBox D i), I.weight x : ℚ) : ℝ) ≤ ((hi i : ℚ) : ℝ) := by
+      exact_mod_cast h
+    rwa [Rat.cast_sum] at h'
+  have hLo : (loA : ℝ) ≤ ∑ x ∈ boxFinset D, (I.weight x : ℝ) := by
+    have h := (zverifyTop_sound cA I D loA hiA hA).1
+    unfold WInstance.Z at h
+    have h' : ((loA : ℚ) : ℝ) ≤ ((∑ x ∈ boxFinset D, I.weight x : ℚ) : ℝ) := by
+      exact_mod_cast h
+    rwa [Rat.cast_sum] at h'
+  have hLo0 : (0 : ℝ) < (loA : ℝ) := by exact_mod_cast hloA
+  exact trap_certificate P (fun x => (I.weight x : ℝ)) (boxFinset D)
+    ((Finset.univ : Finset (Fin n)).biUnion (fun i => boxFinset (wallBox D i)))
+    hP0 hP1 hw0 hstat hloc (∑ i, (hi i : ℝ)) (loA : ℝ) hU hLo hLo0 T
+
+end BoxTrap
+
 end MetricChain.Kinetics
 
 /-! ### Axiom audit (printed when the file is checked) -/
 #print axioms MetricChain.Kinetics.exists_exit
 #print axioms MetricChain.Kinetics.cut_sound
+#print axioms MetricChain.Kinetics.level_cut_sound
 #print axioms MetricChain.Kinetics.pinned_bounds
 #print axioms MetricChain.Kinetics.neg_cone_admissible
 #print axioms MetricChain.Kinetics.cone_admissible
@@ -489,3 +584,6 @@ end MetricChain.Kinetics
 #print axioms MetricChain.Kinetics.trap_survival
 #print axioms MetricChain.Kinetics.trap_certificate
 #print axioms MetricChain.Kinetics.trap_certificate_weighted
+#print axioms MetricChain.Kinetics.singleSite_symm
+#print axioms MetricChain.Kinetics.wallBox_pairwiseDisjoint
+#print axioms MetricChain.Kinetics.box_trap_certificate

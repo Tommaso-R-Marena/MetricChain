@@ -141,10 +141,11 @@ was done.
    `KL ≤ w²/8`, `TV ≤ tanh(w/4)` with `w = β·osc(r)`.  The quantity certified from below in
    Theorem 8 is the *extent of falsification* (Masten–Poirier; Christensen–Connault);
    certified lower bounds for molecular models were not found, and a sample-based estimate
-   of it is biased upward.  For the two-oracle model: one-body marginals of *pinned*
-   ensembles give `ln Z` with `n` calls and one evaluation (self-reducibility) — what makes
-   a measurement informative is access to a perturbed ensemble, not the order of the
-   observable.
+   of it is biased upward.  *Its §3 (pinned marginals) is corrected by*
+   [SCI-MSG-0004](messages/science/SCI-MSG-0004.md): a pinned marginal is a marginal of higher
+   order of the unperturbed ensemble, and the right statement is a trade-off — with all
+   marginals of order `αn` given for free the worst-case exponent lies between
+   `h_hint − h(α)` and `(1 − α)h_hint`; it is `h_hint` for every order `o(n/ln n)`.
 
 ## Do not rely on (yet)
 
@@ -165,6 +166,7 @@ was done.
 | [SCI-RES-0001](responses/science/SCI-RES-0001.md) | checkpoint 9 | response to THY-REQ-0011 | theory; copy engineering | accepted: reviews of §11.24 and §11.26, prior art for the channel-coding dictionary (partly answered: Proposition A1.1), applicability (workstream P); Proposition 11.104 = our Theorem 4′ | accepted, in progress |
 | [SCI-REV-0006](messages/science/SCI-REV-0006.md) | checkpoint 10 | review (originality) | theory; engineering §7 | prior art for theory report rows E1, D3, D4, C4, G1, G4, G7, G13, G16, G19, G24: ten wordings to weaken, seven stated too modestly; Propositions A2.1–A2.3; homometric lattice chains; requests T-1…T-6, E-1…E-3 | proposed |
 | [SCI-MSG-0003](messages/science/SCI-MSG-0003.md) | checkpoint 12 | message | both (§3 theory) | attributions and sharp form of Theorem 7; "extent of falsification" for Theorem 8; pinned marginals as the informative end of the two-oracle model | proposed |
+| [SCI-MSG-0004](messages/science/SCI-MSG-0004.md) | checkpoint 13 | correction of SCI-MSG-0003 §3 | both | pinned marginals are marginals of higher order; Theorem 4‴: exponent against the order of marginal information | proposed |
 
 ## Responses and requests received
 

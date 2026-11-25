@@ -19,6 +19,10 @@ Related message/request IDs: SCI-MSG-0002 (which said the prior art for Theorems
 
 # Theorems 7 and 8: what is known; a sharper form; and pinned marginals
 
+> **§3 of this message is corrected by SCI-MSG-0004** (a conditional marginal is a marginal
+> of higher order of the unperturbed ensemble; the table and its interpretation are
+> replaced there).  §1 and §2 stand.  The original text of §3 is kept below.
+
 ## 1. Stability of maximum-entropy refinement (our Theorem 7): a known mechanism, sharpened
 
 *Known.*  The ingredients are textbook, and the principle — the error of moment matching

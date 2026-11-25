@@ -1,0 +1,13 @@
+random additive residual, c_i = |gam_i|/kappa
+kappa=0.90 e=0.00 n=  10: ln N_W >=     0.00  (N_W >= 10^   0.0; rate 0.0000/site)   N_H = N_B = 11
+kappa=0.90 e=0.00 n=  20: ln N_W >=     0.03  (N_W >= 10^   0.0; rate 0.0014/site)   N_H = N_B = 21
+kappa=0.90 e=0.00 n=  50: ln N_W >=     0.50  (N_W >= 10^   0.2; rate 0.0099/site)   N_H = N_B = 51
+kappa=0.90 e=0.00 n= 100: ln N_W >=     1.35  (N_W >= 10^   0.6; rate 0.0135/site)   N_H = N_B = 101
+kappa=0.90 e=0.00 n= 200: ln N_W >=     3.44  (N_W >= 10^   1.5; rate 0.0172/site)   N_H = N_B = 201
+kappa=0.90 e=0.00 n= 500: ln N_W >=     9.58  (N_W >= 10^   4.2; rate 0.0192/site)   N_H = N_B = 501
+kappa=0.90 e=0.00 n=1000: ln N_W >=    20.05  (N_W >= 10^   8.7; rate 0.0201/site)   N_H = N_B = 1001
+kappa=0.90 e=0.10 n=  10: ln N_W >=     0.00  (N_W >= 10^   0.0; rate 0.0000/site)   N_H = N_B = 11
+kappa=0.90 e=0.10 n=  20: ln N_W >=     0.02  (N_W >= 10^   0.0; rate 0.0010/site)   N_H = N_B = 21
+kappa=0.90 e=0.10 n=  50: ln N_W >=     0.48  (N_W >= 10^   0.2; rate 0.0095/site)   N_H = N_B = 51
+kappa=0.90 e=0.10 n= 100: ln N_W >=     1.29  (N_W >= 10^   0.6; rate 0.0129/site)   N_H = N_B = 101
+kappa=0.90 e=0.10 n= 200: ln N_W >=     3.52  (N_W >= 10^   1.5; rate 0.0176/site)   N_H = N_B = 201

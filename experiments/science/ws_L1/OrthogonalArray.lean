@@ -230,8 +230,12 @@ theorem lemma1_binary {n : ℕ} (C : Submodule (ZMod 2) (Fin n → ZMod 2)) (k :
     ∑ x ∈ univ.filter (fun x : Fin n → ZMod 2 => ∀ i ∈ S, x i = y i), μ x =
       1 / (2 : ℝ) ^ S.card := by
   have h := lemma1_uniform_marginals C k (fun u hu horth => hdist u hu horth) μ hsum hinv S hS y
-  rw [ZMod.card 2] at h
-  exact_mod_cast h
+  have hcard : (Fintype.card (ZMod 2) : ℝ) = 2 := by
+    rw [ZMod.card 2]
+    norm_num
+  rw [hcard] at h
+  -- the two sides differ only in the `Decidable` instance chosen for `∀ i ∈ S, _` on `Fin n`
+  convert h using 3
 
 /-- **Two invariant ensembles have the same low-order marginals.**  The form used for the
 marginal oracle: on `C`-invariant probability vectors the oracle for marginals of order `≤ k`

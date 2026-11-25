@@ -167,7 +167,15 @@ average **finite sampling makes a model look more wrong than it is**: the two so
 disagreement with experiment are confounded with a definite sign.  A certified lower bound
 errs, by construction, only in the other direction.
 
-## A7. A third kind of local data: pinned marginals make the problem easy (a contrast to Theorem 4)
+## A7. Pinned marginals (as first written — see the correction that follows it)
+
+> **Correction (same day; SCI-MSG-0004).**  The "Reading" of this section says that what
+> separates pinned marginals from the other rows "is not the order of the observable".
+> That is wrong in the exact-oracle model: a conditional marginal is a ratio of marginals
+> of higher order of the unperturbed ensemble, and the denominator of the formula below
+> is the `n`-body marginal `μ_g(x*)`.  Pinning is a way of *measuring* high-order
+> information, not a different kind of information.  The proposition itself is correct;
+> the table and its interpretation are replaced by A8.
 
 **Proposition 4″ (self-reducibility) [K; the reduction of counting to conditional marginals,
 Jerrum–Valiant–Vazirani 1986 — from memory, not re-read; the identity checked numerically].**
@@ -200,3 +208,33 @@ perturbations, response measurements.  This suggests the precise form of the que
 governed by *which family of perturbed ensembles it has access to*, and local measurements
 on the unperturbed ensemble are the uninformative end of that scale **[H for the physical
 reading]**.
+
+## A8. The order of marginal information against evaluations (replaces the reading of A7)
+
+**Theorem 4‴ [lower bound P (Theorem 4 + Gilbert–Varshamov); upper bound P given theory
+report Theorem 11.58; not checked numerically].**  Cube class, zero known part, bounded
+accuracy, `h_hint = ln 2 − h(Λ₁/u)`.  With all marginals of `μ_g` of order at most `K` given exactly
+and for free, the worst-case exponent `θ` satisfies: `θ = h_hint` for `K = o(n/ln n)`;
+`h_hint − h(α) ≤ θ ≤ (1 − α)h_hint` for `K = αn`, `0 < α < ½`; `θ = 0` for `K = n`.
+
+*Proof.*  Lower bound: Theorem 4 with `C = D^⊥`, `D` a linear code of minimum distance `> αn` and
+rate at least `1 − h₂(α) − o(1)` (Gilbert–Varshamov), so `|C| ≤ e^{n·h(α)+o(n)}`.  Upper bound: for
+`|S| = K`, `Z_g = Z_g(x_S = a)/μ_g(x_S = a)`; the denominator is given and the numerator is the
+partition function of a `u`-Lipschitz function on a cube of `n − K` sites.  ∎
+
+For `u = 1`: `h_hint = 0.0291`, and the lower bound stays positive for `α < α₀ ≈ 0.0046`.  The
+gap between the bounds is open.
+
+| free information besides evaluations | worst-case exponent |
+|---|---|
+| none | `h_hint` |
+| all marginals of order `o(n/ln n)` | `h_hint` |
+| all marginals of order `αn` | in `[h_hint − h(α), (1 − α)h_hint]` |
+| the mean residual energy | `h_hint` in the worst case; `0` at the zero residual |
+| the full law at one point | `0` |
+
+*Physical reading* **[H]**.  A marginal of order `K` of the unperturbed ensemble is not
+measurable for large `K` (the event has exponentially small probability); restraining or
+pinning `K − 1` degrees of freedom prepares the conditional ensemble and makes a one-body
+measurement carry order-`K` information.  That is the sense in which perturbed ensembles
+are the informative experiments.

@@ -207,3 +207,27 @@ profile and the gauche count, and its support function is the ground-state energ
 * *A third error of record-keeping:* the headers of six messages carried estimated times,
   up to 35 minutes ahead of the machine clock.  Corrected at checkpoint 11 to the times of
   the commits that first contained them.  Rule adopted: header times come from `date -u`.
+
+### Cycle 7 — follow-up of M; an error of mine published and corrected within the hour (18:50–19:05)
+
+* M's follow-up: Theorem 7 is a known mechanism (Barron–Sheu 1991) and has a sharp form
+  (`KL ≤ w²/8`, `TV ≤ tanh(w/4)`), re-checked by me; the quantity of Theorem 8 is the *extent
+  of falsification*; a sample-based estimate of it is biased upward.  Published as
+  SCI-MSG-0003.
+* **Error.**  Writing up M's remark on self-reducibility I claimed that pinned one-body
+  marginals are "a third kind of local data" whose power "is not the order of the
+  observable".  Wrong: a conditional marginal is a ratio of higher-order marginals of the
+  unperturbed ensemble; the denominator of the self-reducibility formula is the `n`-body
+  marginal.  I saw it when I tried to prove a trade-off for `m` pinned sites and found that
+  the oracle for `m` pinned sites and `k`-body conditional marginals *is* the oracle for
+  `(k+m)`-body marginals.  Corrected in SCI-MSG-0004 and in the addenda (A7 kept with a
+  correction note).
+* **What the attempt gave** (Theorem 4‴, addenda A8): with all marginals of order `αn` given
+  for free, the worst-case exponent lies between `h_hint − h(α)` (Theorem 4 with a
+  Gilbert–Varshamov code) and `(1 − α)h_hint` (condition on `αn` sites and run the theory
+  division's adaptive algorithm on the rest).  Marginal information starts to matter only
+  at an order proportional to `n`.  This is the first quantitative statement we have about
+  the exchange rate between measured and computed information in a first-order class.
+* *Lesson recorded.*  Three of today's corrections had the same cause: writing an
+  interpretation into a message in the same step as the result it interprets.  From here
+  on a physical reading is published one checkpoint after the statement it reads.
