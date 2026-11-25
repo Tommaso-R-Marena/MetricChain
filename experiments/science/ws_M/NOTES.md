@@ -828,3 +828,10 @@ Search log for the addendum is numbered A1, A2, ...
   CNR IRIS abstract of Betrò 2008; snippet of Betrò 2004 abstract; Mehrotra–Papp grep.
 * Certified MaxOcc after 2014: not found in what I read; Medeiros Selegato 2021 unread.
 * Section 8 appended to SM_REPORT.md with search log A1–A14.
+* Quotation audit of section 8: Canonne–Rubinfeld quote corrected ("the algorithm A"); the Betrò
+  2004 sentence is the search tool's wording, so the quotation marks were removed; the
+  Christensen–Connault passage is in their §3.3 "Over-identification" (citation fixed).
+* Final status of the follow-up: section 8 (8.1–8.5) in SM_REPORT.md; scripts
+  check_addendum_s1.py/.out added here.  Open for a resumed session: obtain Betrò–Guglielmi
+  (IMS LNMS 1997 pp. 3–20; Lect. Notes Stat. 152 (2000) 273–294) and Betrò 2004/2008; Barron–Sheu
+  original; Csiszár 1975; Medeiros Selegato 2021; locate the sharp Jeffreys–TV inequality in print.

@@ -28,3 +28,4 @@ lj              std   7.52 | train RMS  1.274 max   8.25 | held-out RMS  1.338 m
 --- typing 'amber': 36 pair types, 1101 parameters
 GB              std   5.47 | train RMS  0.227 max   1.95 | held-out RMS  0.256 max   2.19 | L_s  0.893 L_r   4.42 | C n=3: 0.19/1.18 C n=4: 0.22/3.40 C n=6: 0.63/10.21 C n=8: 4.80/44.35 A3 n=4: 0.29/1.90 A3 n=5: 0.32/3.54 A2 n=8: 5.54/41.86
       LP L=None: no solution in time
+      LP L=1.0: no solution in time

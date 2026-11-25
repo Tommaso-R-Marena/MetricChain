@@ -931,7 +931,7 @@ partition-function certificates.
 
 **Closest statements** (all `[abstract]`).
 * Hybrid access to a *distribution*: Canonne & Rubinfeld, arXiv:1402.3835 — "dual and cumulative
-  dual access models, in which the algorithm can both sample from D and ... query the probability
+  dual access models, in which the algorithm A can both sample from D and ... query the probability
   mass D(i)"; these "bypass the strong lower bounds" of single-oracle models, yet "some tasks
   remain hard even with this additional power".  Same shape of result (a second oracle helps on
   some tasks and not in the worst case), different objects (samples and point masses of an
@@ -988,8 +988,8 @@ reference list of the paper below.
 * Betrò 2008 `[abstract, CNR IRIS record]`: "An algorithm for solving LSIP problems under rather
   mild assumptions, as required by the typical presence of indicator functions in the generalized
   moment conditions, has been previously developed by the author ... called accelerated central
-  cutting plane (ACCP) algorithm".  Betrò 2004 `[search snippet of the abstract]`: the scheme "also
-  produces an interval of fixed length that contains the optimal value".
+  cutting plane (ACCP) algorithm".  Betrò 2004 `[search snippet; wording of the search tool, not verified against the abstract]`:
+  the scheme is reported to produce an interval of fixed length that contains the optimal value.
 * Mehrotra & Papp, arXiv:1306.3437 `[abstract + grep]`: cutting-surface method for moment-robust
   optimisation; cites Betrò 2004; assumes a cut-generation *oracle* (a global optimisation).
 **What can be said.**  There is a precedent for *dual, cutting-plane computation of moment-problem
