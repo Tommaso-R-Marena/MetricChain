@@ -1,0 +1,7 @@
+600 instances: KL(nu_psi || Bern(r*)^n) <= n a, largest ratio 1.0 (1 at cones)
+p=0.3775 u=2.0: letter laws (0.0758, 0.8175), r*=0.4308, a=0.31617, with r=p the bound would be 0.40784
+p=0.2689 u=2.0: letter laws (0.0474, 0.7310), r*=0.3606, a=0.28361, with r=p the bound would be 0.46213
+p=0.1192 u=2.0: letter laws (0.0180, 0.5000), r*=0.2225, a=0.18409, with r=p the bound would be 0.43378
+p=0.0474 u=2.0: letter laws (0.0067, 0.2688), r*=0.1123, a=0.09280, with r=p the bound would be 0.27311
+p=0.5 u=1.0: letter laws (0.2689, 0.7311), r*=0.5000, a=0.11094, with r=p the bound would be 0.11094
+range of the increments of the log-likelihood ratio <= 2u in 2000 parameter pairs

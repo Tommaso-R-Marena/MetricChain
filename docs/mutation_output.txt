@@ -382,6 +382,14 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XVII.4 M2: interval comparison claimed with the sub-interval at the left end
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.6 M1: the product sampler with the marginal p of the known part instead of r*
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.6 M2: conditional laws claimed to lie between sigma(logit p - u/2) and sigma(logit p + u/2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.6 M3: increments of the log-likelihood ratio claimed to have range u
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVII.6 M4: truncated second moment claimed to be at most tau/2
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XVIII.1 M1: site-set formula with the wrong number of chain neighbours at separation 2
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XVIII.1 M2: the row p8 >= 6 p3 - 1 sharpened to p8 >= 6 p3 (false at the crystal)
@@ -682,6 +690,62 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.26 M2: all three distances of the example equal (the shift is then exact; the refutation must disappear)
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.6 M1: frustrated known parts claimed to have the uniform field as extremal residual as well
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.6 M2: the extremal field claimed to be the lowering field for R+(A, B)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.6 M3: the controls claimed never to fail (hypotheses not needed)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.7 M1: weight of the compensator with the null's type in the denominator (p_2 - p_gamma)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.7 M2: the compensator taken at the end of the window on the wrong side
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.7 M3: the excess claimed to have exactly the type of the cone law
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.7 M4: the gain claimed without the mass of the compensator (ln(1 + E))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.7 M5: no compensation claimed necessary (the uncompensated alternative has the marginals of the null)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.7 M6: the Markov bound with the smaller of the two letters (min in place of max in rho_t)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.7 M7: the maximising profile of type p claimed to lie in the window (the first version of Proposition 11.109(e))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.7 M8: the oracle claimed to lower the exponent of the zero residual by 3.5 per cent (the first version)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.7 M9: the dips of the cyclic average replaced by the dip of one shift (not invariant: the marginals differ from site to site)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIII.7 M10: the depth of the dips in Theorem A taken as the accuracy (without the loss ln(1 + beta) of the compensator)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.1 M1: largest Jensen gap claimed to be w^2/8 exactly
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.1 M2: range of ln Z after evaluations with the floor and the ceiling exchanged
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.1 M3: deterministic certificate claimed to need the mass 1 - 2q* only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.1 M4: Jensen bracket with the mean taken with the opposite sign
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.2 M1: dip weight with the instance at the ceiling (w (e^{-lo} - e^{-hi}) replaced by w (e^{-r} - e^{-hi}))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.2 M2: detection probability claimed without the factor 1/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.2 M3: the least detection probability of the relaxation claimed to be at most 1.2 p (at the centre of a constant box it is exactly 2p)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.2 M4: spot check with half the number of samples
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.3 M1: a set of mass p0/2 lowered to the floor claimed to be sensitive
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.3 M2: number of disjoint sensitive dips claimed to be 1/p0
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.3 M3: upper and lower bound claimed to differ by a factor 2 at most
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.4 M1: truncated cones claimed to gain at most (e^{rho/2} - 1) per unit of support
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.4 M2: the cube exponent claimed to stay below the cap up to n = 2000
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.5 M1: empirical Bernstein bound without the range term
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.28 M1: the naive interval tested on a law without rare dips (Bernoulli(1/2)), where it does cover
+                  exit=1  1 TEST(S) MISBEHAVED
 
-342 mutations: 341 caught, 1 expected pass, 0 not as expected
-115 baseline runs of the unmutated harness (one per selection): 115 behave as expected, 0 misbehave
+374 mutations: 373 caught, 1 expected pass, 0 not as expected
+124 baseline runs of the unmutated harness (one per selection): 124 behave as expected, 0 misbehave

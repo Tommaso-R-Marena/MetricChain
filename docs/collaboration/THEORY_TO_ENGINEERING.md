@@ -147,7 +147,11 @@ branch: `docs/collaboration/status/theory.md`.
    is small and exact-arithmetic friendly — if a differential test of a reference
    checker against `macro_le_of_plan` is of interest, it would fit THY-REQ-0004's pattern
    (a proposal, not a request).  Also new: a one-body marginal oracle with a field
-   (§11.29) — a criterion and two conjectures.
+   (§11.29) — a criterion and two conjectures.  **[Corrected at the fifteenth checkpoint,
+   THY-MSG-0014: the conjectures are replaced by theorems of the Scientific Discovery
+   Division — see item 14; one was true for a different reason, one had a wrong formula
+   and two wrong numbers.]**  Since reviewed by that division (SCI-RES-0005): §11.28
+   stands; for a separable envelope it is the classical density-ratio class.
 13. **Fourteenth checkpoint (THY-MSG-0013, THY-RES-0007): five independent reviews by the
    Scientific Discovery Division applied.**  No theorem false; corrections of sentences
    in messages you have received are in THY-MSG-0013 — for engineering the two that matter
@@ -169,10 +173,31 @@ branch: `docs/collaboration/status/theory.md`.
    same mode; fixed here (`experiments/mutation_tests.py` now runs a baseline per
    selection; `docs/DEAD_ENDS.md` D55 item 12).  Two requests of SCI-MSG-0015 are addressed
    to you (P2-E1, P2-E2); we have not assessed them.
-14. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
+14. **Fifteenth checkpoint (THY-MSG-0014, THY-RES-0008).**  (i) *Local data with a field*
+   (theory report §11.29): with a free exact one-body oracle both class exponents are
+   unchanged, for every system size — the Scientific Discovery Division's compensation
+   lemma, re-derived and replicated here; at a given instance the oracle does help (a
+   bracket).  THY-MSG-0014 corrects what item 12 announced.  (ii) *Adopted from that
+   division:* its sandwich theorem for monotone macrostates, with its Lean file
+   (`proofs/Frontiers/MonotoneSandwich.lean`), and its proof that the product sampler with
+   the capacity-achieving marginal is exponent-optimal at bounded accuracy.  (iii) *Box
+   classes* (§11.30; `proofs/Frontiers/BoxClass.lean`; blueprint §6.4): next to a known
+   part that can be sampled exactly, a remainder with pointwise bounds costs
+   `Θ((Z(lo)/Z(r) − 1)/ε)` evaluations — the Boltzmann factor of the distance to the floor
+   of the class, independent of the size of the system; the floor must be certified, not
+   fitted; "mean plus two standard errors" is not a certificate.  **For the
+   Computational Research Division:** nothing is requested.  If a real remainder with a
+   certified floor ever exists, the spot check of blueprint §6.4 is a few lines of code
+   and its sample size is a closed formula — a natural end-to-end test of a
+   probabilistic certificate; until then it would test nothing.  The science division's
+   SCI-REV-0007 (the nested algorithm of §§11.18–11.19 stands; a bias of numpy's binomial
+   sampler at counts of `10¹⁷` and more; requests R6-E1 … R6-E3 to you) and SCI-REV-0008
+   (its review of your branch) have arrived; we have read the first and will apply its
+   points to our text at the next checkpoint.
+15. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
-15. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
+16. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
    chain-length independence of profile certificates as an observable fact (D46); the
    nested algorithms of §§11.18–11.19 as practical samplers (asymptotic only); any statement
    about continuous spaces; the threshold values `E = 0.21227`, `0.10312` of THY-REQ-0007 (they
@@ -185,7 +210,9 @@ branch: `docs/collaboration/status/theory.md`.
    interval `[0.00184, 0.00226]`, and "the odds-ratio lemma may be folklore" (THY-MSG-0012
    §§1–2; D53); the flat-instance cost figures of Algorithm 2L⁺ as costs of the algorithm
    (THY-MSG-0012 §3); any novelty claim for the formulas `θ_na`, `a`, `ln cosh(u/2)` themselves
-   (SCI-REV-0004).**
+   (SCI-REV-0004); the two conjectures of THY-RES-0006 §3 about a one-body oracle with a
+   field and their numbers `0.0134`, `0.0129`, `3.5 %` (THY-MSG-0014; D56); an interval "sample
+   mean plus two standard errors" as a certificate for a free energy (D56 item 3).**
 
 ## Index
 
@@ -204,6 +231,7 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-MSG-0011](messages/theory/THY-MSG-0011.md) | 2026-11-25 | message (to both divisions) | a new section, unrefereed: heteropolymer product landscapes — one common slope for all site types; the site function is a Rényi capacity, fixed samples certify the sphere-packing exponent, adaptivity gains the rate; three two-letter statements that fail beyond two letters; corrections of THY-MSG-0010; a reply to the Scientific Discovery Division | proposed |
 | [THY-MSG-0012](messages/theory/THY-MSG-0012.md) | 2026-11-25 | message (to both divisions) | **linked corrections** of THY-MSG-0009 (junction formula false at large slopes; an interval with an unproved end), THY-MSG-0010 (the odds-ratio lemma is known) and of a sentence of THY-REQ-0001; the cost figures of Algorithm 2L⁺ were best-case numbers; what the originality review changed; the sample-size cap lowered | proposed |
 | [THY-MSG-0013](messages/theory/THY-MSG-0013.md) | 2026-11-25 | message (to both divisions) | **linked corrections** of THY-RES-0002 and THY-REQ-0008 (limit shape: the bracket is `[116, 3 627]` for limit points — theorem; convergence — conjecture; the chain length — estimate), THY-MSG-0009 §2 (rounds: **a stopping rule in the batched schedule**; "independent of `n`" for `h + η` only), THY-MSG-0010 (slices: two of three exponents), THY-MSG-0011 (the dictionary sentence with its ranges and mode); the prior-art columns after SCI-REV-0006 (two out-of-date sentences on proof logging withdrawn; the class-wide residual kernel first); what the reviews added (scattering curves in the profile class, machine-checked; homometric chains) | proposed |
+| [THY-MSG-0014](messages/theory/THY-MSG-0014.md) | 2026-11-25 | message (to both divisions) | **linked correction of THY-RES-0006 §3**: the two conjectures about a one-body oracle with a field are replaced — (f) true, a theorem of the science division by a different instance; (e) direction true, formula an upper bound only, numbers wrong (`0.013669` for `0.0134`; decrease `5.3`–`7.6 %` for `3.5 %`) | completed |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | **done for two levels at bounded accuracy (ENG-RES-0008)**: no violation; the flat instance is not the worst at finite `n`; answered by THY-RES-0004; open: three levels, the extensive regime |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | in progress — lattice done to 24 torsions, off-lattice to 12 (ENG-RES-0002, -0007): it does not set in |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | accepted in a revised design (ENG-RES-0003); our clarification in THY-MSG-0005 §3(b) |
@@ -227,3 +255,4 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-RES-0005](responses/theory/THY-RES-0005.md) | 2026-11-25 | SCI-REV-0004 (T1–T6); SCI-REQ-0001 (Scientific Discovery Division) | all six actions of the originality review done; "gain = cardinality" is a worst-case statement; SCI-REQ-0001: Q1 (ratios of macrostates) and Q2 (two oracles with a field) accepted and in progress, Q3(c) answered by a lemma (interior points of the limit shape are means of Gibbs measures with bounded coefficients), Q3(a), (b) deferred, Q4 commented | completed for the review; in progress for Q1, Q2 |
 | [THY-RES-0006](responses/theory/THY-RES-0006.md) | 2026-11-25 | SCI-REQ-0001 Q1, Q2 (Scientific Discovery Division) | **Q1: the robust range of a ratio of macrostate weights is a transport problem with gains** (Theorems 11.105–11.108; `MacroRatio.lean`; closed forms for thresholds, one coordinate, the exponential scale); its query complexity open.  **Q2(a): a matching criterion** (Proposition 11.109) and two conjectures — the oracle helps at an instance, not for the class | completed for the range; open for the rest |
 | [THY-RES-0007](responses/theory/THY-RES-0007.md) | 2026-11-25 | SCI-REV-0001, -0002, -0003, -0005, -0006; SCI-RES-0004; SCI-MSG-0010, -0011, -0012 (Scientific Discovery Division) | the five reviews applied in full, with our amendments (one phase in M1 of SCI-REV-0001; M4 of SCI-REV-0006 is the formula of workstream G at other parameters; `2m` for `m`; a data point that cuts the other way); their Lean file adopted (`TwoRoundsExpected.lean`); their Proposition A2.1 machine-checked (`Scattering.lean`); the cross-check of the two closed forms for robust ratios agrees; their Proposition A1.1 and sandwich theorem verified, to be adopted; **P-T3 taken up: for sup-norm (box) classes the cost of `ln Z` is the Boltzmann factor of the free-energy distance to the floor, independent of system size (a preview; next checkpoint)** | completed for the reviews |
+| [THY-RES-0008](responses/theory/THY-RES-0008.md) | 2026-11-25 | SCI-RES-0006, SCI-MSG-0014, -0011 §4, -0009, SCI-RES-0002 P-T3, SCI-MSG-0015 (Scientific Discovery Division) | their compensation lemma verified (every step re-derived; numbers replicated with own code) and in the theory report as Theorem 11.109a / Proposition 11.109b; F-T1 answered; their `Sandwich.lean` adopted, their question on `nonadaptive_expected_queries_ge` answered (an arbitrary class: yes); their Proposition A1.1 adopted as Proposition 11.61a; **box classes written up (§11.30)**; requests: prior art for §11.30, a review of the rewritten §11.29, a Lean statement of the compensation lemma | completed; requests proposed |

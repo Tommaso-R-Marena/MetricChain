@@ -433,8 +433,10 @@ knowing all `k`-body marginals of the true ensemble exactly changes neither the 
 nor the non-adaptive exponent, for every fixed `k`: the hard instances can be symmetrised
 over a code so that no `k`-body statistic sees them.
 (xiii) *Observable free energies* (theory report §11.28; a question of the Scientific
-Discovery Division; **the coordinator's paper proofs, the certificate half machine-checked,
-not refereed, prior art not searched**).  Everything above is about the total `ln Z`, which
+Discovery Division; **the coordinator's paper proofs, the certificate half machine-checked;
+reviewed and replicated by that division — it stands; for envelopes of a special
+("separable") form it is the classical range of a posterior odds in robust Bayesian
+analysis, and the theorem extends that to envelopes with the triangle inequality**).  Everything above is about the total `ln Z`, which
 no experiment compares with; what is measured are free-energy differences between
 macrostates, `−ln[Z(A)/Z(B)]`.  Their exact range over the residual class has a dual
 description: the largest ratio is the least factor by which the weight of `B` must be
@@ -445,8 +447,32 @@ a threshold of an order parameter the extremal perturbation is the strongest uni
 field, so the free-energy difference between the two halves of the cube is uncertain by
 `±n·ln cosh(u/2)`; a macrostate defined by one coordinate reduces to that site for
 independent sites and has a site-by-site certificate for pairwise known parts; and at
-large sizes the range is a max–min of transport costs and rate functions.  Nothing is
-said yet about how many evaluations narrow the range.
+large sizes the range is a max–min of transport costs and rate functions.  For known
+parts without frustration (submodular ones) and macrostates that are monotone in the
+state, the two extreme uniform fields are extremal for every such pair of macrostates —
+the Scientific Discovery Division's theorem, machine-checked by it, its Lean file adopted
+here (`MonotoneSandwich.lean`).  Nothing is said yet about how many evaluations narrow the
+range.
+(xiv) *Evaluations together with local data when there is a field* (theory report §11.29;
+**the theorems are the Scientific Discovery Division's; our first version had two
+conjectures in their place, one true for a different reason and one with a wrong formula
+and two wrong numbers — `docs/DEAD_ENDS.md` D56**).  Knowing all one-body averages of the true
+ensemble exactly changes neither class exponent, for any system size: the hard instance
+is a mixture of two simple ensembles whose averages already equal those of the same
+mixture with a hidden well.  At a *given* instance — the known part itself — the same data
+do exclude wells: a few per cent of the exponent for weak fields, most of it for strong
+ones (a bracket; the exact value is open).
+(xv) *When the remainder is small in a typical norm* (theory report §11.30; a request of
+the Scientific Discovery Division after its measurements on force-field terms;
+**elementary, partly machine-checked in `BoxClass.lean`, not refereed, no novelty claimed
+beyond the placement**).  If the energy is a known function whose ensemble can be sampled
+exactly plus a remainder with pointwise bounds, the number of evaluations that certifies
+the free energy is the Boltzmann factor of *how far below the known function the truth
+may lie*, divided by the accuracy — and **does not depend on the size of the system**, in
+contrast to every class above.  The upper side of the free energy (a mean) is cheap; the
+floor is the one assumption that sampling cannot replace — a constant fitted on samples
+is not one, and the usual "mean plus two standard errors" is not a certificate; ground
+states do not share the benefit.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

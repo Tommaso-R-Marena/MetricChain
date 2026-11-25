@@ -1719,3 +1719,60 @@ had passed the coordinator's own check and, in three cases, an earlier referee's
     *Lesson:* "the mutant fails" is evidence only relative to "the original passes *under
     the same conditions*"; and a new test must be run in every mode in which it will be
     run later, before its mutations are written.
+
+## D56. Two conjectures that another division settled within hours, and a "certificate" that is not one (theory report §§11.29, 11.30; fifteenth checkpoint of cycle 10)
+
+1. **A conjecture offered with a formula and two numbers from a grid of seven points**
+   (first version of Proposition 11.109(e)).  We wrote that with a one-body marginal
+   oracle the exponent of the zero residual is `sup{r_μ(e) : μ̄ = p}`, "`0.0129` against `0.0134`,
+   about `3.5 %`".  The Scientific Discovery Division's workstream F (SCI-RES-0006) showed:
+   the exact value without the oracle is `0.013669` — our `0.0134` was the best of seven
+   grid points, reported as a maximum; our `0.0129` is an *upper* bound (it equals a tilt
+   bound that the division proved), not the value; and the decrease is between `5.3 %` and
+   `7.6 %`.  The formula over-counts for a structural reason we had not looked at: **"a
+   profile of mean type `p`" is not "a dip whose excess mass has type `p`"**.  The excess
+   mass of a dip around a shell sits on that shell only if the shell's block laws lie in
+   the window `[p₋, p₊]` of one-body marginals; otherwise it sits on the nearest shell
+   inside the window, the dip's mean type is another one, and the oracle sees it.  The
+   maximiser of our formula has a block law outside the window.  *Lesson:* a coarse
+   search may support the *direction* of a statement; a number quoted from it is a
+   claim about a maximum and needs the maximiser to be examined — here one look at the
+   maximising profile against Proposition 11.109(a), which we had proved two paragraphs
+   earlier, would have shown that it is not admissible.  Harness XXIII.7 (mutations M7,
+   M8 are the two claims of the first version).
+2. **A true conjecture with an argument that could not be completed** (first version of
+   Proposition 11.109(f)).  To make the class exponent survive the oracle we modified
+   the flat-histogram instance by a logarithmic well — a pointwise *maximum* of weights —
+   and took its deepest dips.  Then the excess measure moves with the tuning parameter,
+   the matching equation needs an intermediate-value argument, and that needs a
+   concentration statement we could not prove (and which, for the profiles of item 1, is
+   false).  The division's proof adds a *sum*: a fixed excess, and a null moved by an
+   admixture of an extreme additive instance.  The matching equation is then linear in
+   one weight, holds exactly, for every `n`, and costs a factor `(1 + b)·n`.  *Lesson, in
+   the division's words:* an extremal instance is useless as the end of a homotopy of
+   perturbations and perfectly useful as an admixture.  More generally: in a class that
+   is a convex cone in the weights, look for constructions that are *linear* in the
+   weights before tuning nonlinear ones.  The trap of D54 item 3 remains a trap.
+3. **The naive interval is not a certificate** (harness DEAD.28).  "The sample mean of the
+   Boltzmann factors of the remainder plus two standard errors is an upper confidence
+   bound for `E_π e^{−r}`": false for every sample size at members of a box class with a
+   rare deep dip — with a dip of probability `1/m` the sample contains no dip point with
+   probability about `e^{−1} ≈ 0.37`, the sample variance is then zero and the interval a
+   point below the truth (frequency `0.3705` in the test).  This is the precise sense of
+   "a typical-norm estimate is not a certificate" (§11.30): the number of samples below
+   which *nothing* is certified is set by the floor of the class, `e^{ρ₋}/ε`, and no
+   statistic of the sample can replace an a-priori floor.  The science division's pilot
+   had met the same fact empirically (sup-norm remainders estimated on samples were
+   exceeded on held-out conformations by factors up to ten).
+4. **A "tightness" check that no instance exercised** (found by the mutation of harness
+   XXIV.2).  The test asserted that the least detection probability of a far member in
+   the linear relaxation is at most `2p`.  True, and trivially so — but in all random
+   instances it was below `1.2p`, so that weakening the constant changed nothing: the
+   check tested no boundary.  The factor 2 is attained exactly at the centre of a
+   constant box; that instance is now part of the test.  The same pattern as D55 item
+   12: an inequality is tested only where it is nearly an equality.
+5. **A citation to a file that does not contain it.**  The draft of §11.30 cited the
+   empirical Bernstein inequality "in the form recalled in `prior_art/L7`"; that file
+   does not mention it.  The reference was from memory.  It is now in
+   `docs/prior_art/L10_box_classes.md` with its reading level (a search summary), and
+   its use is tested by simulation.

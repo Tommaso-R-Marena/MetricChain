@@ -57,6 +57,8 @@ import proofs.Frontiers.SliceRefinement
 import proofs.Frontiers.RenyiCentre
 import proofs.Frontiers.MacroRatio
 import proofs.Frontiers.Scattering
+import proofs.Frontiers.BoxClass
+import proofs.Frontiers.MonotoneSandwich
 import proofs.AuditCommand
 
 /-!
@@ -516,6 +518,33 @@ import proofs.AuditCommand
 #print axioms MetricChain.Scattering.debye_sub_le
 #print axioms MetricChain.Scattering.debye_eq_of_matching
 #print axioms MetricChain.Scattering.one_sub_sinc_le
+
+-- Sup-norm (box) classes around a known function (theory report §11.30)
+#print axioms MetricChain.BoxClass.Zw_sub_le_dip
+#print axioms MetricChain.BoxClass.Zw_sub_le_bump
+#print axioms MetricChain.BoxClass.detect_ge
+#print axioms MetricChain.BoxClass.box_spotCheck_correct
+#print axioms MetricChain.BoxClass.dipAlt_mem
+#print axioms MetricChain.BoxClass.logZ_dipAlt_gt
+#print axioms MetricChain.BoxClass.box_expected_queries_ge
+#print axioms MetricChain.BoxClass.jensen_bracket
+#print axioms MetricChain.BoxClass.centre_weights
+
+-- The stochastic sandwich for monotone macrostates (theory report §11.28, Theorem 11.106a; the Scientific Discovery
+-- Division's file, adopted)
+#print axioms ScienceL2.holley_cross
+#print axioms ScienceL2.sandwich_mean
+#print axioms ScienceL2.macrostate_ratio
+#print axioms ScienceL2.ratio_range_eq_Icc
+#print axioms ScienceL2.cube_sandwich_mean
+#print axioms ScienceL2.cube_macrostate_ratio_compl
+#print axioms ScienceL2.cube_mean_isLeast
+#print axioms ScienceL2.cube_mean_isGreatest
+#print axioms ScienceL2.cube_ratio_range_eq_Icc
+#print axioms ScienceL2.pairwise_submodular
+#print axioms ScienceL2.stepField_sandwich_mean
+#print axioms ScienceL2.cube_sandwich_strict_witness
+#print axioms ScienceL2.cube_sandwich_fails_negative_beta
 #print axioms MetricChain.GamePair.exactRec_congr
 #print axioms MetricChain.GamePair.HintShape.pair
 #print axioms MetricChain.GamePair.HintShape.exists_pair

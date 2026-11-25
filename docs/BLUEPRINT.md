@@ -451,6 +451,37 @@ probabilistic and outside the verified kernel).  Use the sandwich cell by cell i
 partition-function branch-and-bound: within a cell the relevant constants are the cell-local
 oscillations, and the gap is second order in the cell size.
 
+**A remainder with pointwise bounds around a known part that can be sampled exactly**
+(theory report §11.30; `proofs/Frontiers/BoxClass.lean`; unrefereed).  If `E = f̂ + r` with
+`lo ≤ r ≤ hi` pointwise and independent exact samples from `π ∝ e^{−f̂}` are available (a product
+measure; a chain or a tree by the elimination rules of §6.3), free energies are certified
+by sampling, with confidence `1 − δ`, at a cost that does not grow with the system:
+
+```
+lower side (Gibbs–Bogoliubov, a mean):
+    ln Z ≥ ln Z₀ − mean_π(r) − ε            ⌈w² ln(1/δ)/(2ε²)⌉ samples of r under π,  w = sup hi − inf lo     paper (Hoeffding)
+both sides, given a proposed remainder r (a hint; e.g. a surrogate that is then spot-checked):
+    sampler  q = ½·dip/U + ½·bump/V,   dip = π(e^{−lo} − e^{−r}),  bump = π(e^{−r} − e^{−hi})
+    N = ⌈ ln(1/δ)/p(ε/2) ⌉,   p(η) = min{1, ½ min((e^η − 1)Z/(Z(lo) − Z), (1 − e^{−η})Z/(Z − Z(hi)))}   verified
+    N ≤ ⌈ 2 ln(1/δ) · max((Z(lo)/Z(r) − 1)/(e^{ε/2} − 1), 1/(1 − e^{−ε/2})) ⌉
+no algorithm of any kind does better than
+    (1 − 2δ) ⌊ (Z(lo)/Z(r) − 1) / (2(e^ε − 1)) ⌋   evaluations                                          verified
+```
+
+Rules that follow.  (1) What you pay for is the **floor** — how far below the known function
+the truth may lie, `Z(lo)/Z(r)`; at the centre of a constant box `(e^{ρ₋} − 1)/ε`.  The ceiling
+and the size of the system do not enter.  (2) The floor must be **certified**, by analysis of
+the functional form of the remainder; a constant fitted or observed on samples is not a
+floor, and no statistic of the sample replaces one — "mean plus two standard errors" fails
+with probability about `e^{−1}` at a remainder with one deep well of probability `1/N`
+(`docs/DEAD_ENDS.md` D56).  (3) If a per-site envelope is available as well, intersect: the spot
+check with the mixture of the two samplers costs at most twice the smaller of the two
+sample sizes, and the sup-norm bound wins as soon as the system is large.  (4) Sampling
+must be exact; a Markov chain without a certified mixing time voids the guarantee.  (5) The
+result is for `ln Z` of the whole domain at positive temperature: a minimum needs every state
+within the floor of the optimum, and ratios of macrostate weights are not covered.  (6) These
+certificates are probabilistic and are **not** checked by any kernel of this repository.
+
 ### 6.5 Multi-state comparison
 
 To certify `Z^{(0)} > max_k Z^{(k)}` keep an interval per state and refine the state whose
@@ -992,7 +1023,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 342 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 374 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  Before the first mutant of a test it runs the unmutated test in

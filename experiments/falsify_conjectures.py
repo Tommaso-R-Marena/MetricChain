@@ -6145,6 +6145,66 @@ def t_field_product_sampler_capacity(rng, trials):
     return True, dict(values=out, best_product_at_extensive_accuracy=best, r=r_best)
 
 
+@conjecture("XVII.6 The product sampler with the capacity-achieving output marginal is exponent-optimal on the whole class at bounded accuracy (theory report Proposition 11.61a; Proposition A1.1 of the science division, SCI-RES-0001 / SCI-MSG-0011): for the known part Bernoulli(p)^n and every u-Lipschitz residual psi, each conditional law of a coordinate of the Gibbs measure nu_psi given a prefix is Bernoulli with parameter between the letter laws a0 = sigma(logit p - u), a1 = sigma(logit p + u) of the two extreme cones; hence KL(nu_psi || Bernoulli(r)^n) <= n max(KL(a0||r), KL(a1||r)), which at r = r* (equal relative entropies) is n a, a the information radius = the exponent of non-adaptive algorithms at vanishing accuracy, with equality at cones; the increments of the log-likelihood ratio have range at most 2u; and E_Q[rho^2 1{rho <= tau}] <= tau for the density ratio rho (the truncation step of the importance-sampling bound)")
+def t_product_sampler_optimal(rng, trials):
+    from scipy.optimize import brentq
+    sig = lambda t: 1 / (1 + math.exp(-t))
+    kl = lambda a, b: a * math.log(a / b) + (1 - a) * math.log((1 - a) / (1 - b))
+    stats = dict(instances=0, worst=0.0, cone_ratio=0.0)
+    for rep in range(max(120, trials // 2)):
+        n = int(rng.integers(3, 10))
+        p, u = float(rng.uniform(0.05, 0.6)), float(rng.uniform(0.3, 3.0))
+        a0, a1 = sig(math.log(p / (1 - p)) - u), sig(math.log(p / (1 - p)) + u)
+        r = brentq(lambda t: kl(a0, t) - kl(a1, t), a0 + 1e-12, a1 - 1e-12)
+        a = kl(a0, r)
+        vals = [math.log(t / r) for t in (a0, a1)] + [math.log((1 - t) / (1 - r)) for t in (a0, a1)]
+        if max(vals) - min(vals) > 2 * u + 1e-9:
+            return False, dict(reason="range of the log-likelihood increments exceeds 2u")
+        X = np.array(list(itertools.product((0, 1), repeat=n)))
+        kind = rep % 4
+        centre = X[int(rng.integers(len(X)))]
+        dist = np.abs(X - centre).sum(axis=1)
+        if kind == 0:
+            psi = u * dist                                                     # cone
+        elif kind == 1:
+            psi = -u * dist                                                    # inverted cone
+        elif kind == 2:
+            psi = u * np.maximum(dist, int(rng.integers(0, n)))                # truncated cone
+        else:                                                                  # lower envelope of random cones
+            k = int(rng.integers(1, 8))
+            idx = rng.choice(len(X), size=k, replace=False)
+            psi = (rng.uniform(-u * n, u * n, size=k)[None, :] + u * np.abs(X[:, None, :] - X[idx][None, :, :]).sum(axis=2)).min(axis=1)
+        w = np.exp(-(psi - psi.min())) * np.prod(np.where(X == 1, p, 1 - p), axis=1)
+        nu = w / w.sum()
+        Q = np.prod(np.where(X == 1, r, 1 - r), axis=1)
+        KL = float((nu * np.log(nu / Q)).sum())
+        if KL > n * a + 1e-9:
+            return False, dict(reason="KL(nu_psi || Bernoulli(r*)^n) exceeds n a", KL=KL, bound=n * a)
+        stats["worst"] = max(stats["worst"], KL / (n * a))
+        if kind == 0 and (centre.sum() in (0, n)):
+            stats["cone_ratio"] = max(stats["cone_ratio"], KL / (n * a))
+        for k in range(n):
+            keys = X[:, :k] @ (1 << np.arange(k)) if k else np.zeros(len(X), dtype=int)
+            s1 = np.bincount(keys, weights=nu * (X[:, k] == 1), minlength=1 << k)
+            s0 = np.bincount(keys, weights=nu * (X[:, k] == 0), minlength=1 << k)
+            t = s1 / (s0 + s1)
+            if t.min() < a0 - 1e-12 or t.max() > a1 + 1e-12:
+                return False, dict(reason="a conditional law outside the interval of the two letter laws")
+        rho = nu / Q
+        for tau in (1.0, math.exp(n * a / 2), math.exp(n * a)):
+            if float((Q * rho ** 2 * (rho <= tau)).sum()) > tau + 1e-9:
+                return False, dict(reason="truncated second moment exceeds tau")
+        stats["instances"] += 1
+    # the constant-centre cones attain the bound in the limit (ratio -> 1); and r = p would not do
+    if stats["worst"] < 0.9:
+        return False, dict(reason="the bound n a is never approached", worst=stats["worst"])
+    a0, a1 = sig(math.log(0.1192 / 0.8808) - 2.0), sig(math.log(0.1192 / 0.8808) + 2.0)
+    r = brentq(lambda t: kl(a0, t) - kl(a1, t), a0 + 1e-12, a1 - 1e-12)
+    if abs(r - 0.2225) > 2e-4 or abs(kl(a0, r) - 0.18409) > 2e-4 or not max(kl(a0, 0.1192), kl(a1, 0.1192)) > 2 * kl(a0, r):
+        return False, dict(reason="reference values at p = 0.1192, u = 2", r=r, a=kl(a0, r))
+    return True, stats
+
+
 # ----------------------------------------------------------------------------------------------
 # XVIII. Chains in the thermodynamic limit: profile sets of the diamond-lattice chain (theory report §11.22)
 # ----------------------------------------------------------------------------------------------
@@ -8850,6 +8910,527 @@ def t_oracle_field(rng, trials):
     return True, dict(root_gamma=0.5 * (lo_g + hi_g), marginal_gap_at_root=gap, sensitivity_at_root=sens, maxdens_of_the_symmetrised_set=dens, unmatched_family_min_mismatch=min(vals), window_use=worst)
 
 
+@conjecture("XXIII.6 Robust ratios for monotone macrostates (theory report Theorem 11.106a; the sandwich theorem of the science division, SCI-MSG-0009, by Holley's inequality): on the cube with a submodular known part (additive plus pair terms J_ij x_i x_j, J_ij <= 0) and the envelope with constants c_i^up for raising and c_i^dn for lowering a site, for every up-set B and A its complement the robust ratio R+(A, B) is attained at the uniform field g = sum_i c_i^up x_i and R+(B, A) at g = -sum_i c_i^dn x_i — exact linear programmes; both hypotheses are needed: with a frustrated known part, or with a macrostate that is not monotone, the field is strictly suboptimal in some instances")
+def t_ratio_monotone(rng, trials):
+    stats = dict(cases=0, worst=0.0, frustrated_fail=0, nonmonotone_fail=0, controls=0)
+    for rep in range(max(60, trials // 5)):
+        n = int(rng.integers(3, 6))
+        X = np.array(list(itertools.product((0, 1), repeat=n)))
+        cu, cd = rng.uniform(0.2, 1.5, size=n), rng.uniform(0.2, 1.5, size=n)
+        up = (X[:, None, :] > X[None, :, :])                                   # x above y at site i
+        D = (up * cu).sum(axis=2) + ((X[:, None, :] < X[None, :, :]) * cd).sum(axis=2)   # d(x, y): g(x) - g(y) <= d(x, y)
+        hfield = rng.normal(0, 1, size=n)
+        J = -np.abs(rng.normal(0, 0.8, size=(n, n)))
+        J = np.triu(J, 1)
+        mode = rep % 3                                                         # 0: hypotheses hold; 1: frustrated; 2: non-monotone macrostate
+        if mode == 1:
+            J = np.triu(rng.normal(0, 1.2, size=(n, n)), 1)
+            J[0, 1] = abs(J[0, 1]) + 0.5
+        f = X @ hfield + np.einsum("xi,ij,xj->x", X, J, X)
+        w = np.exp(-(f - f.min()))
+        # a random up-set: the up-closure of a few points
+        gens = X[rng.choice(len(X), size=int(rng.integers(1, 4)), replace=False)]
+        inB = np.zeros(len(X), dtype=bool)
+        for gpt in gens:
+            inB |= np.all(X >= gpt, axis=1)
+        if mode == 2:
+            flip = rng.choice(len(X), size=2, replace=False)
+            inB[flip] = ~inB[flip]
+        if inB.all() or not inB.any():
+            continue
+        B, A = list(np.flatnonzero(inB)), list(np.flatnonzero(~inB))
+        val_up, _ = mr_lp_bip(w, D, A, B)
+        val_dn, _ = mr_lp_bip(w, D, B, A)
+        field_up = mr_ratio(w, X @ cu, A, B)
+        field_dn = mr_ratio(w, -(X @ cd), B, A)
+        gap = max(math.log(val_up / field_up), math.log(val_dn / field_dn))
+        if gap < -1e-7:
+            return False, dict(reason="a field beats the linear programme: the field is not admissible?", gap=gap)
+        if mode == 0:
+            if gap > 1e-7:
+                return False, dict(reason="the uniform field is not optimal although the known part is submodular and the macrostate monotone", gap=gap, n=n)
+            stats["cases"] += 1
+            stats["worst"] = max(stats["worst"], gap)
+        else:
+            stats["controls"] += 1
+            if gap > 1e-6:
+                stats["frustrated_fail" if mode == 1 else "nonmonotone_fail"] += 1
+    if stats["cases"] < 10 or stats["frustrated_fail"] == 0 or stats["nonmonotone_fail"] == 0:
+        return False, dict(reason="hypotheses not exercised, or the controls never fail", **stats)
+    return True, stats
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# XXIII.7  A one-body oracle with a field: the compensation lemma of the Scientific Discovery Division (SCI-RES-0006),
+#          Theorem 11.109a, and the corrected numbers of Proposition 11.109b.   Helpers cp_*.
+# ---------------------------------------------------------------------------------------------------------------------
+def cp_window(p, u):
+    q = 1 - p
+    return p * math.exp(-u) / (q + p * math.exp(-u)), p * math.exp(u) / (q + p * math.exp(u))
+
+
+def cp_lip(w, n):
+    """Largest |ln w(x) - ln w(x^i)| over the edges of the cube (w indexed by itertools.product order)."""
+    lw = np.log(w).reshape((2,) * n)
+    return max(float(np.abs(np.take(lw, 0, axis=i) - np.take(lw, 1, axis=i)).max()) for i in range(n))
+
+
+def cp_lnH(n, k, p, u, g, r):
+    """ln of H_{k,r} = max_x P_{s uniform in T_k}[x in the support of the dip of depth r at s on the base gamma], by sums over
+    joint types: x is in the support iff Phi_s(x) = sum_i ln(pi_gamma(x_i)/pi_{s_i}(x_i)) < r."""
+    q = 1 - p
+    pg = p * math.exp(-g) / (q + p * math.exp(-g))
+    pm, pp = cp_window(p, u)
+    l = {(a, b): math.log(((1 - pg, pg)[a]) / (((1 - pm, pm), (1 - pp, pp))[b][a])) for a in (0, 1) for b in (0, 1)}
+    lf = np.cumsum(np.concatenate([[0.0], np.log(np.arange(1, n + 1))]))              # ln j!
+    lb = lambda N, K: lf[N] - lf[K] - lf[N - K]
+    best = -math.inf
+    for j in range(n + 1):
+        i = np.arange(max(0, k - (n - j)), min(j, k) + 1)                              # ones of x inside the ones of s
+        Phi = i * l[(1, 1)] + (j - i) * l[(1, 0)] + (k - i) * l[(0, 1)] + (n - j - k + i) * l[(0, 0)]
+        sel = i[Phi < r]
+        if len(sel) == 0:
+            continue
+        lw = lb(j, sel) + lb(n - j, k - sel) - lb(n, k)
+        best = max(best, float(lw.max() + math.log(np.exp(lw - lw.max()).sum())))
+    return best
+
+
+def cp_rho(p, u, g, t, m):
+    """rho_t(m; gamma) = max over the letter a of (1 - m)(pi_0(a)/pi_gamma(a))^t + m (pi_1(a)/pi_gamma(a))^t."""
+    q = 1 - p
+    pg = p * math.exp(-g) / (q + p * math.exp(-g))
+    pm, pp = cp_window(p, u)
+    return max((1 - m) * ((1 - pm, pm)[a] / (1 - pg, pg)[a]) ** t + m * ((1 - pp, pp)[a] / (1 - pg, pg)[a]) ** t for a in (0, 1))
+
+
+def cp_R0(e, p, u):
+    """Hinted exponent of the zero residual, max_m [h(m) - h((Lambda_m + e)/u)]_+ (Theorem 11.59(c)), by golden section on
+    three brackets."""
+    q, L0, L1 = fd_consts(p, u)
+    hb = lambda x: 0.0 if x <= 0 or x >= 1 else -x * math.log(x) - (1 - x) * math.log(1 - x)
+
+    def val(m):
+        x = ((1 - m) * L0 + m * L1 + e) / u
+        return 0.0 if x >= 0.5 else hb(m) - hb(max(x, 0.0))
+    ms = np.linspace(1e-6, 1 - 1e-6, 401)
+    i = int(np.argmax([val(m) for m in ms]))
+    a, b = ms[max(i - 1, 0)], ms[min(i + 1, len(ms) - 1)]
+    for _ in range(80):
+        c1, c2 = a + 0.382 * (b - a), a + 0.618 * (b - a)
+        a, b = (a, c2) if val(c1) > val(c2) else (c1, b)
+    return max(0.0, val(0.5 * (a + b)))
+
+
+def cp_profile(m, v0, v1, e, p, u):
+    """Hitting exponent of the dips around the shell of profile (v0, v1) of centres of type m at the zero residual:
+    min{ I(M, V') : u sum_phi M(phi)|v'_phi - v_phi| <= e + D(V || pi | M) }  (the two block laws move towards each other)."""
+    kl = lambda a, b: (a * math.log(a / b) if a > 0 else 0.0) + ((1 - a) * math.log((1 - a) / (1 - b)) if a < 1 else 0.0)
+    budget = (e + (1 - m) * kl(v0, p) + m * kl(v1, p)) / u
+    (lo, wlo), (hi, whi) = sorted([(v0, 1 - m), (v1, m)])
+    if budget >= min(wlo, whi) * (hi - lo):
+        return 0.0
+
+    def obj(a):
+        b = (budget - wlo * a) / whi
+        A, B = lo + a, hi - b
+        if b < 0 or A >= B:
+            return 0.0 if A >= B else math.inf
+        bar = wlo * A + whi * B
+        return wlo * kl(A, bar) + whi * kl(B, bar)
+    a, b = 0.0, budget / wlo
+    for _ in range(90):
+        c1, c2 = a + 0.382 * (b - a), a + 0.618 * (b - a)
+        a, b = (a, c2) if obj(c1) < obj(c2) else (c1, b)
+    return min(obj(0.5 * (a + b)), obj(0.0), obj(budget / wlo))
+
+
+@conjecture("XXIII.7 A one-body marginal oracle with a field — the compensation lemma and Theorems A, B of the Scientific Discovery Division (SCI-RES-0006; theory report Theorem 11.109a, Proposition 11.109b), re-derived and replicated with own code: on Q_n with the reference Bernoulli(p)^n, for the cyclic average of the cone dips of depth r around the shifts of a centre of type k/n on an additive base gamma, the excess has mass in [e^r - 1, e^r] and mean type within 1/(e^r - 1) of the cone law's; if that type is in the open window, the base plus b times an extreme additive instance, b = (c_Delta - p_gamma)/(p_2 - c_Delta), and the same plus the excess are class members whose one-body marginals all equal c_Delta, with ln A differing by ln(1 + E/(1 + b)), while without the compensator the marginals differ by Phi/(1 + Phi)(c_Delta - p_gamma); the fraction H of centres whose dip contains a given point satisfies H <= (n + 1) e^{tr} rho_t(k/n; gamma)^n for every t, and at the saddle of R^max the bound 1/(nH) has an exponent that approaches R^max from below (exact sums over joint types, n = 400, 1600); at p = 1/4, u = 1, e = 0.02 the hinted exponent of the zero residual is 0.013669, the tilt bound min_lambda R_0(e - c(lambda); theta - lambda) is 0.012941 and equals the supremum over two-block profiles of mean type p, whose maximiser has a block law outside the window; with block laws in the window the supremum is 0.012635")
+def t_compensation(rng, trials):
+    stats = dict(cases=0, outside=0, worst_marginal=0.0, least_unmatched=math.inf)
+    for _ in range(max(8, trials // 40)):
+        n = int(rng.integers(6, 9)); p = float(rng.uniform(0.1, 0.9)); u = float(rng.uniform(0.5, 2.0))
+        gam = float(rng.uniform(-u, u)); k = int(rng.integers(1, n)); r = float(rng.uniform(0.7, 4.0))
+        X = np.array(list(itertools.product((0, 1), repeat=n)), dtype=float)
+        wt = X.sum(axis=1)
+        q = 1 - p
+        pi = p ** wt * q ** (n - wt)
+        pg = lambda g: p * math.exp(-g) / (q + p * math.exp(-g))
+        wtil = lambda g: np.exp(-g * wt) / (q + p * math.exp(-g)) ** n
+        pm, pp = cp_window(p, u)
+        Z0, Z1 = q + p * math.exp(-u), p + q * math.exp(-u)
+        base = wtil(gam)
+        s = np.array([1.0] * k + [0.0] * (n - k))
+        dips = []
+        for j in range(n):
+            sj = np.roll(s, j)
+            cone = np.exp(-u * np.abs(X - sj[None, :]).sum(axis=1)) / (Z0 ** (n - k) * Z1 ** k)
+            dips.append(np.maximum(math.exp(r) * cone - base, 0.0))
+        Dbar = sum(dips) / n
+        E = float((pi * Dbar).sum())
+        c = float((pi * Dbar * wt).sum() / (n * E))
+        c0 = (1 - k / n) * pm + (k / n) * pp
+        if not (math.exp(r) - 1 - 1e-10 <= E <= math.exp(r) + 1e-10):
+            return False, dict(reason="mass of the excess outside [e^r - 1, e^r]", E=E, r=r)
+        if abs(c - c0) > 1 / (math.exp(r) - 1) + 1e-10:
+            return False, dict(reason="mean type of the excess further than 1/(e^r - 1) from the cone law", c=c, c0=c0, r=r)
+        marg = lambda w: ((pi * w)[:, None] * X).sum(axis=0) / float((pi * w).sum())
+        Phi = E / float((pi * base).sum())
+        un = marg(base + Dbar)
+        if np.abs(un - (pg(gam) + Phi / (1 + Phi) * (c - pg(gam)))).max() > 1e-11:
+            return False, dict(reason="criterion: marginals of the uncompensated alternative", n=n, k=k)
+        if not (pm < c < pp):
+            stats["outside"] += 1
+            continue
+        p2, g2 = (pp, -u) if c > pg(gam) else (pm, u)
+        b = (c - pg(gam)) / (p2 - c)
+        if b < 0:
+            return False, dict(reason="negative weight of the compensator", b=b)
+        w0 = base + b * wtil(g2)
+        w1 = w0 + Dbar
+        if cp_lip(w0, n) > u + 1e-10 or cp_lip(w1, n) > u + 1e-10:
+            return False, dict(reason="a compensated instance is not in the class", n=n, k=k, lip=(cp_lip(w0, n), cp_lip(w1, n)))
+        err = float(max(np.abs(marg(w0) - c).max(), np.abs(marg(w1) - c).max()))
+        stats["worst_marginal"] = max(stats["worst_marginal"], err)
+        if err > 1e-11:
+            return False, dict(reason="one-body marginals of null and alternative are not all equal to the excess type", err=err, n=n, k=k, b=b)
+        gap = math.log(float((pi * w1).sum()) / float((pi * w0).sum()))
+        if abs(gap - math.log(1 + E / (1 + b))) > 1e-10:
+            return False, dict(reason="ln A(w1) - ln A(w0) != ln(1 + E/(1 + b))", gap=gap, E=E, b=b)
+        if ((w1 != w0) != (Dbar > 0)).any():
+            return False, dict(reason="null and alternative do not differ exactly on the support of the excess")
+        stats["least_unmatched"] = min(stats["least_unmatched"], abs(Phi / (1 + Phi) * (c - pg(gam))))
+        stats["cases"] += 1
+    if stats["cases"] < 4:
+        return False, dict(reason="compensation not exercised", **stats)
+    # Theorem A at the saddle of R^max, (p, u) = (0.3, 1), e = 0.3 E: exact sums over joint types
+    p, u = 0.3, 1.0
+    T = np.linspace(1e-4, 1, 2001)
+    Fs, F0, gs = fd_fstar(p, u, T, ngam=801)
+    E_thr = float((Fs / T).max())
+    e = 0.3 * E_thr
+    it = int((Fs - T * e).argmax())
+    Rmax, ts, gam = float((Fs - T * e)[it]), float(T[it]), float(gs[it])
+    ms = np.linspace(0.01, 0.99, 981)
+    mstar = float(ms[int(np.argmin([cp_rho(p, u, gam, ts, m) for m in ms]))])
+    if abs(Rmax - 0.012210) > 3e-5 or abs(-math.log(cp_rho(p, u, gam, ts, mstar)) - float(Fs[it])) > 1e-5:
+        return False, dict(reason="saddle of R^max at (0.3, 1), e = 0.3E", Rmax=Rmax, t=ts, gamma=gam, m=mstar)
+    pm, pp = cp_window(p, u)
+    om = pp - pm
+    expo = []
+    for n in (400, 1600):
+        k = round(mstar * n)
+        m = k / n
+        omm = om * min(m, 1 - m)
+        eps = e * n
+        lo, hi = 1e-9, eps + 50.0                                           # least r with ln(1 + (e^r - 1)/(1 + beta(r))) > eps
+        for _ in range(100):
+            mid = 0.5 * (lo + hi)
+            kap = omm - 1 / math.expm1(mid)
+            lo, hi = (lo, mid) if kap > 0 and math.log1p(math.expm1(mid) / (1 + om / kap)) > eps else (mid, hi)
+        r = hi
+        kap = omm - 1 / math.expm1(r)                                       # the gain of every alternative exceeds the accuracy:
+        if not (kap > 0 and math.log1p(math.expm1(r) / (1 + om / kap)) > eps):   # E >= e^r - 1 and b <= omega/kappa
+            return False, dict(reason="the certified gain ln(1 + (e^r - 1)/(1 + beta)) does not exceed the accuracy", n=n, r=r, eps=eps)
+        lH = cp_lnH(n, k, p, u, gam, r)
+        for t in np.linspace(0.0, 1.5, 61):
+            if lH > math.log(n + 1) + t * r + n * math.log(cp_rho(p, u, gam, t, m)) + 1e-9:
+                return False, dict(reason="H > (n + 1) e^{tr} rho_t^n", n=n, t=float(t), lnH=lH)
+        expo.append((-lH - math.log(n)) / n)
+    stats.update(Rmax=round(Rmax, 6), bound_400=round(expo[0], 6), bound_1600=round(expo[1], 6))
+    if not (expo[0] < expo[1] < Rmax and expo[1] > 0.7 * Rmax):
+        return False, dict(reason="the lower bound with the oracle does not approach R^max from below", **stats)
+    # the numbers at the test point of Proposition 11.109b
+    p, u, e = 0.25, 1.0, 0.02
+    pm, pp = cp_window(p, u)
+    r0 = cp_R0(e, p, u)
+    cl = lambda lam: math.log(1 - p + p * math.exp(lam)) - lam * p
+    tl = lambda lam: cp_R0(e - cl(lam), 1 / (1 + math.exp(-(math.log(p / (1 - p)) + lam))), u) if cl(lam) < e else math.inf
+    lams = np.linspace(-0.4, 0.2, 61)
+    i = int(np.argmin([tl(lam) for lam in lams]))
+    a, b = lams[max(i - 1, 0)], lams[min(i + 1, len(lams) - 1)]
+    for _ in range(50):
+        c1, c2 = a + 0.382 * (b - a), a + 0.618 * (b - a)
+        a, b = (a, c2) if tl(c1) < tl(c2) else (c1, b)
+    tilt = tl(0.5 * (a + b))
+    free, arg, win = 0.0, None, 0.0
+    for m in np.linspace(0.30, 0.70, 41):                                    # two-block profiles of mean type p
+        for v1 in np.linspace(0.05, 0.60, 111):
+            v0 = (p - m * v1) / (1 - m)
+            if not 1e-6 < v0 < 1 - 1e-6:
+                continue
+            val = cp_profile(m, v0, v1, e, p, u)
+            if val > free:
+                free, arg = val, (float(m), float(v0), float(v1))
+            if pm <= v0 <= pp and pm <= v1 <= pp:
+                win = max(win, val)
+    for m in np.linspace(arg[0] - 0.01, arg[0] + 0.01, 21):                  # refinement around the maximiser
+        for v1 in np.linspace(arg[2] - 0.005, arg[2] + 0.005, 21):
+            val = cp_profile(m, (p - m * v1) / (1 - m), v1, e, p, u)
+            if val > free:
+                free, arg = val, (float(m), float((p - m * v1) / (1 - m)), float(v1))
+    for wa in np.linspace(0.45, 0.65, 401):                                  # one block at the lower end of the window
+        vb = (p - wa * pm) / (1 - wa)
+        if vb <= pp:
+            win = max(win, cp_profile(1 - wa, pm, vb, e, p, u))
+    stats.update(R0=round(r0, 6), tilt=round(tilt, 6), free=round(free, 6), window=round(win, 6))
+    if abs(r0 - 0.013669) > 2e-6 or abs(tilt - 0.012941) > 3e-6 or abs(win - 0.012635) > 4e-6:
+        return False, dict(reason="numbers at p = 1/4, u = 1, e = 0.02", **stats)
+    if abs(free - tilt) > 2e-5 or not (win < tilt < r0):
+        return False, dict(reason="the supremum over profiles of type p is not the tilt bound, or the order window < tilt < R_0 fails", **stats)
+    if pm <= min(arg[1], arg[2]) and max(arg[1], arg[2]) <= pp:
+        return False, dict(reason="the maximising profile of type p has both block laws in the window", arg=arg, window=(pm, pp))
+    return True, stats
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# XXIV. Sup-norm (box) classes around a known function whose Gibbs measure can be sampled (theory report 11.30)
+# ---------------------------------------------------------------------------------------------------------------
+
+def bx_jensen_gap(w):
+    """Largest Jensen gap ln E e^Y - E Y of a random variable with range w."""
+    return math.log(math.expm1(w) / w) - 1 + w / math.expm1(w)
+
+
+def bx_range(w, r, lo, hi, Q):
+    """Exact range of ln Z = ln sum_x w e^{-r} over the box, given the values of r on Q."""
+    mask = np.ones(len(w), dtype=bool)
+    mask[list(Q)] = False
+    S = float((w[~mask] * np.exp(-r[~mask])).sum())
+    return math.log(S + float((w[mask] * np.exp(-hi[mask])).sum())), math.log(S + float((w[mask] * np.exp(-lo[mask])).sum()))
+
+
+def bx_weights(w, r, lo, hi):
+    return w * (np.exp(-lo) - np.exp(-r)), w * (np.exp(-r) - np.exp(-hi))
+
+
+@conjecture("XXIV.1 Box classes lo <= r <= hi around a known function with Gibbs weights w (theory report Theorem 11.110(a),(b)): ln Z - ln Z0 = ln E_pi e^{-r} lies in [-E_pi r, -E_pi r + L(w)], L(w) = ln((e^w - 1)/w) - 1 + w/(e^w - 1) <= w^2/8 the largest Jensen gap of a variable of range w (attained by a two-point law); after evaluations on Q the possible values of ln Z fill exactly the interval between 'hi off Q' and 'lo off Q'; at the centre of a constant box the smallest deterministic certificate consists of the heaviest points up to mass 1 - q*, q* = (e^eps - 1)/(e^rho_minus - e^(eps - rho_plus) + e^eps - 1)")
+def t_box_deterministic(rng, trials):
+    stats = dict(gaps=0, certs=0)
+    for wd in (0.2, 0.7, 1.5, 3.0, 6.0, 12.0):
+        ts = np.linspace(0, 1, 100001)
+        two = np.log1p(ts * math.expm1(wd)) - ts * wd
+        if abs(float(two.max()) - bx_jensen_gap(wd)) > 1e-6 or bx_jensen_gap(wd) > wd * wd / 8 + 1e-12:
+            return False, dict(reason="closed form of the largest Jensen gap", width=wd, formula=bx_jensen_gap(wd), two_point=float(two.max()))
+        for _ in range(200):
+            k = int(rng.integers(2, 7))
+            y, p = rng.uniform(0, wd, size=k), rng.dirichlet(np.ones(k))
+            if math.log(float(p @ np.exp(y))) - float(p @ y) > bx_jensen_gap(wd) + 1e-9:
+                return False, dict(reason="a law with a larger Jensen gap than the two-point law", width=wd)
+            stats["gaps"] += 1
+    for _ in range(max(60, trials // 4)):
+        n = int(rng.integers(4, 11))
+        w = rng.dirichlet(np.ones(n) * float(rng.uniform(0.3, 2.0)))
+        lo, hi = -rng.uniform(0.2, 3.0, size=n), rng.uniform(0.2, 3.0, size=n)
+        r = rng.uniform(lo, hi)
+        Q = [i for i in range(n) if rng.random() < 0.5]
+        a, b = bx_range(w, r, lo, hi, Q)
+        # random members agreeing with r on Q stay inside, and the two ends are members
+        for _ in range(20):
+            rp = rng.uniform(lo, hi)
+            rp[Q] = r[Q]
+            v = math.log(float(w @ np.exp(-rp)))
+            if v < a - 1e-12 or v > b + 1e-12:
+                return False, dict(reason="a member outside the claimed range of ln Z")
+        # Jensen bracket at the instance
+        lnratio = math.log(float(w @ np.exp(-r)))
+        mean_r = float(w @ r)
+        width = float(hi.max() - lo.min())
+        if not (-mean_r - 1e-12 <= lnratio <= -mean_r + bx_jensen_gap(width) + 1e-12):
+            return False, dict(reason="Jensen bracket violated", lnratio=lnratio, mean=mean_r)
+    for n, rho_m, rho_p in ((10, 2.0, 1.0), (11, 1.0, 3.0), (12, 3.5, 0.5)):
+        w = rng.dirichlet(np.ones(n) * 0.7)
+        lo, hi, r0 = -rho_m * np.ones(n), rho_p * np.ones(n), np.zeros(n)
+        order = np.argsort(-w)
+        for eps in (0.05, 0.2, 0.6):
+            best = next(k for k in range(n + 1)
+                        if any((lambda ab: ab[1] - ab[0])(bx_range(w, r0, lo, hi, Q)) <= eps + 1e-12 for Q in itertools.combinations(range(n), k)))
+            qstar = math.expm1(eps) / (math.exp(rho_m) - math.exp(eps - rho_p) + math.expm1(eps))
+            formula = next(k for k in range(n + 1) if 1 - float(w[order[:k]].sum()) <= qstar + 1e-12)
+            if best != formula:
+                return False, dict(reason="smallest deterministic certificate differs from 'heaviest points up to mass 1 - q*'", n=n, eps=eps, brute=best, formula=formula)
+            stats["certs"] += 1
+    return True, stats
+
+
+@conjecture("XXIV.2 Sampling certificates in a box class (theory report Theorem 11.110(c); BoxClass.lean: Zw_sub_le_dip, Zw_sub_le_bump, detect_ge, box_spotCheck_correct): a member that differs from r only on D raises Z by at most the dip weight sum_D w(e^{-lo} - e^{-r}) and lowers it by at most the bump weight sum_D w(e^{-r} - e^{-hi}), with equality at the ends of the box; hence every member with |ln Z' - ln Z| > eta differs from r on a set of probability at least p = (1/2) min((e^eta - 1) Z/U, (1 - e^{-eta}) Z/V) under the sampler (1/2) dip/U + (1/2) bump/V; the least detection probability of a far member in the linear relaxation (a fractional knapsack) lies between p and 2p, is exactly 2p at the centre of a constant box and close to p in generic instances; and the spot check with ceil(ln(1/delta)/p) samples misses the hardest far member with frequency at most delta")
+def t_box_sampling(rng, trials):
+    from scipy.optimize import linprog
+    stats = dict(pairs=0, instances=0, worst_over_p=float("inf"), miss=0.0)
+    for _ in range(max(2000, 5 * trials)):
+        n = int(rng.integers(3, 10))
+        w = rng.dirichlet(np.ones(n))
+        lo, hi = -rng.uniform(0.2, 3.0, size=n), rng.uniform(0.2, 3.0, size=n)
+        r = rng.uniform(lo, hi)
+        rp = r.copy()
+        D = rng.random(n) < 0.5
+        mode = int(rng.integers(3))
+        rp[D] = lo[D] if mode == 0 else (hi[D] if mode == 1 else rng.uniform(lo[D], hi[D]))
+        D = rp != r
+        Z, Zp = float(w @ np.exp(-r)), float(w @ np.exp(-rp))
+        dip, bump = bx_weights(w, r, lo, hi)
+        if Zp - Z > float(dip[D].sum()) + 1e-12 or Z - Zp > float(bump[D].sum()) + 1e-12:
+            return False, dict(reason="change of the partition sum exceeds the dip or bump weight of the difference set")
+        if mode == 0 and abs(Zp - Z - float(dip[D].sum())) > 1e-12:
+            return False, dict(reason="dip weight not attained at the floor")
+        if mode == 1 and abs(Z - Zp - float(bump[D].sum())) > 1e-12:
+            return False, dict(reason="bump weight not attained at the ceiling")
+        stats["pairs"] += 1
+    most = 0.0
+    for it in range(max(100, trials // 4)):
+        n = int(rng.integers(6, 40))
+        w = rng.dirichlet(np.ones(n))
+        lo, hi = -rng.uniform(0.5, 4.0, size=n), rng.uniform(0.2, 3.0, size=n)
+        r = rng.uniform(lo, hi)
+        if it % 5 == 0:                                                        # the centre of a constant box: the sampler is pi
+            lo, hi, r = np.full(n, lo[0]), np.full(n, hi[0]), np.zeros(n)     # itself and the relaxation's optimum is exactly 2p
+        eta = float(rng.uniform(0.02, 0.5))
+        Z = float(w @ np.exp(-r))
+        dip, bump = bx_weights(w, r, lo, hi)
+        U, V = float(dip.sum()), float(bump.sum())
+        q = 0.5 * dip / U + 0.5 * bump / V
+        p = 0.5 * min(math.expm1(eta) * Z / U, -math.expm1(-eta) * Z / V)
+        vals = []
+        for wt, need in ((dip, math.expm1(eta) * Z), (bump, -math.expm1(-eta) * Z)):
+            if wt.sum() > need * (1 + 1e-9):                                   # a far member of this kind exists
+                res = linprog(q, A_ub=[-wt], b_ub=[-need], bounds=[(0, 1)] * n, method="highs")
+                vals.append(float(res.fun))
+        if not vals:
+            continue
+        worst = min(vals)
+        if worst < p - 1e-9:
+            return False, dict(reason="a far member is detected with probability below p", p=p, worst=worst)
+        if worst > 2 * p + 1e-9:
+            return False, dict(reason="the least detection probability exceeds 2p: the bound p would be loose by more than its factor 1/2", p=p, worst=worst)
+        stats["worst_over_p"] = min(stats["worst_over_p"], worst / p)
+        most = max(most, worst / p)
+        if it % 5 == 0 and abs(worst - 2 * p) > 1e-7 * p:
+            return False, dict(reason="at the centre of a constant box the least detection probability of the relaxation is not exactly 2p", p=p, worst=worst)
+        stats["instances"] += 1
+    stats["most_over_p"] = most
+    if not (stats["worst_over_p"] < 1.5 and most > 2 - 1e-6):
+        return False, dict(reason="the two ends of the interval [p, 2p] are not both approached", **stats)
+    # simulation at the centre of a constant box: the hardest far member is a dip of mass just above p0 at the floor
+    n, rho_m, eps, delta = 4000, 3.0, 0.3, 0.1
+    w = rng.dirichlet(np.ones(n) * 3.0)
+    eta = eps / 2
+    p0 = math.expm1(eta) / math.expm1(rho_m)                                   # pi-mass that a sensitive dip set must exceed
+    order = rng.permutation(n)
+    k = int(np.searchsorted(np.cumsum(w[order]), p0)) + 1
+    Dset = order[:k]
+    massD = float(w[Dset].sum())
+    if not math.log(1 + massD * math.expm1(rho_m)) > eta:
+        return False, dict(reason="test construction: the dip is not far")
+    # sampler at the centre: 1/2 dip/U + 1/2 bump/V = pi; detection probability of this member is massD >= p0 >= p
+    N = math.ceil(math.log(1 / delta) / p0)
+    reps = 4000
+    hits = rng.random((reps, 1)) < 1 - (1 - massD) ** N                        # exact miss probability, sampled as Bernoulli
+    exact_miss = (1 - massD) ** N
+    stats["miss"] = float(exact_miss)
+    if exact_miss > delta + 1e-12 or abs(float(hits.mean()) - (1 - exact_miss)) > 0.03:
+        return False, dict(reason="the spot check misses the hardest dip too often", miss=exact_miss, delta=delta)
+    return True, stats
+
+
+@conjecture("XXIV.3 Lower bound in a box class and the size-free bracket (theory report Theorem 11.110(d); BoxClass.lean: logZ_dipAlt_gt, box_expected_queries_ge): at the centre of the constant box [-rho_minus, rho_plus], a set of pi-mass above p0 = (e^eps - 1)/(e^rho_minus - 1) lowered to the floor changes ln Z by more than eps; if no atom of pi exceeds p0 there are at least floor(1/(2 p0)) disjoint such sets, so every randomised algorithm makes at least (1 - 2 delta) floor(1/(2 p0)) evaluations, against ceil(ln(1/delta)/p) for the spot check, p = min(1, (1/2) min((e^{eps/2} - 1)/(e^rho_minus - 1), (1 - e^{-eps/2})/(1 - e^{-rho_plus}))): the two differ by a factor that depends on eps and delta only, not on the number of states")
+def t_box_lower_bound(rng, trials):
+    stats = {}
+    delta = 0.05
+    for n, rho_m, rho_p, eps in ((4096, 3.0, 1.0, 0.2), (65536, 4.0, 2.0, 0.1), (400000, 5.0, 0.5, 0.1), (400000, 5.0, 5.0, 0.05)):
+        w = rng.dirichlet(np.ones(n) * 5.0)
+        p0 = math.expm1(eps) / math.expm1(rho_m)
+        if float(w.max()) > p0:
+            return False, dict(reason="test construction: an atom heavier than p0", n=n)
+        k, acc = 0, 0.0
+        for x in w:                                                            # greedy packing in a fixed order
+            acc += float(x)
+            if acc > p0:
+                if not math.log(1 + acc * math.expm1(rho_m)) > eps:
+                    return False, dict(reason="a set of mass above p0 lowered to the floor is not sensitive")
+                k, acc = k + 1, 0.0
+        if k < math.floor(1 / (2 * p0)):
+            return False, dict(reason="fewer disjoint sensitive dips than floor(1/(2 p0))", found=k, bound=math.floor(1 / (2 * p0)))
+        p = min(1.0, 0.5 * min(math.expm1(eps / 2) / math.expm1(rho_m), -math.expm1(-eps / 2) / -math.expm1(-rho_p)))
+        upper = math.ceil(math.log(1 / delta) / p)
+        lower = (1 - 2 * delta) * math.floor(1 / (2 * p0))
+        ratio_bound = 4 * math.log(1 / delta) / (1 - 2 * delta) * math.expm1(eps) / math.expm1(eps / 2) * 1.05 + 1
+        if upper / lower > ratio_bound:
+            return False, dict(reason="upper and lower bound differ by more than the size-free factor", upper=upper, lower=lower, bound=ratio_bound)
+        stats[f"n{n}_rho{rho_m}_eps{eps}"] = (round(lower, 1), upper)
+    # the cost does not depend on the number of states: same box, growing n
+    costs = []
+    for n in (10 ** 4, 10 ** 5, 10 ** 6):
+        p = 0.5 * min(math.expm1(0.1) / math.expm1(3.0), -math.expm1(-0.1) / -math.expm1(-1.0))
+        costs.append(math.ceil(math.log(1 / delta) / p))
+    if len(set(costs)) != 1:
+        return False, dict(reason="spot-check cost depends on the number of states")
+    return True, stats
+
+
+@conjecture("XXIV.4 A sup-norm bound caps the cost of a first-order class (theory report Corollary 11.111): on the cube with per-site slope u, the members of the class that also satisfy -rho <= g <= rho form a subclass of the box, so at the zero residual the spot check with the uniform sampler needs at most ceil(2 ln(1/delta) max((e^rho - 1)/(e^{eps/2} - 1), (1 - e^{-rho})/(1 - e^{-eps/2}))) evaluations whatever n, while without the sup-norm bound the cost grows like e^{n theta_hint(eps/n)}; exact check: among all truncated cones -u min(kappa, (r - d(x, a))_+) with u kappa <= rho the largest change of ln Z per unit of uniform probability of the support is at most e^rho - 1")
+def t_box_caps_first_order(rng, trials):
+    stats = {}
+    u, delta = 1.0, 0.05
+    for n in (40, 200, 1000):
+        logbin = np.array([math.lgamma(n + 1) - math.lgamma(k + 1) - math.lgamma(n - k + 1) for k in range(n + 1)]) - n * math.log(2)
+        for rho in (1.0, 3.0):
+            kappa = int(rho / u)
+            worst = 0.0
+            for rad in range(1, n // 2):
+                # truncated cone of radius rad and depth cap kappa: value -u*min(kappa, rad - d) on d < rad
+                d = np.arange(0, rad)
+                depth = u * np.minimum(kappa, rad - d)
+                gain = float(np.exp(logbin[:rad] + np.log(np.expm1(depth))).sum())       # Z'/Z - 1
+                support = float(np.exp(logbin[:rad]).sum())
+                worst = max(worst, gain / support)
+            if worst > math.expm1(rho) + 1e-9:
+                return False, dict(reason="a truncated cone gains more than (e^rho - 1) per unit of support", n=n, rho=rho, worst=worst)
+            stats[f"n{n}_rho{rho}"] = round(worst / math.expm1(u * kappa), 4)
+    eps = 0.2
+    cap = math.ceil(2 * math.log(1 / delta) * max(math.expm1(3.0) / math.expm1(eps / 2), -math.expm1(-3.0) / -math.expm1(-eps / 2)))
+    # the hinted exponent of the cube class at a fixed accuracy: n * (ln 2 - h(Lambda1/u)) (theory report 11.25): exceeds the cap from n = 2000 on
+    lam1 = math.log(2 / (1 + math.exp(-u)))
+    theta = math.log(2) + (lam1 / u) * math.log(lam1 / u) + (1 - lam1 / u) * math.log(1 - lam1 / u)
+    n_cross = next(n for n in range(10, 10 ** 6, 10) if n * theta > math.log(cap))
+    stats["cap"], stats["theta_hint_fixed_accuracy"], stats["n_cross"] = cap, round(theta, 5), n_cross
+    if not (0.02 < theta < 0.03 and n_cross < 2000):
+        return False, dict(reason="comparison with the cube exponent", theta=theta, n_cross=n_cross)
+    return True, stats
+
+
+def bx_upper_bounds(samples, delta):
+    """(empirical Bernstein upper bound of Maurer-Pontil form, naive 'mean + two standard errors') for the mean of a [0,1]-valued variable."""
+    m = samples.shape[-1]
+    mean = samples.mean(axis=-1)
+    var = samples.var(axis=-1, ddof=1)
+    eb = mean + np.sqrt(2 * var * math.log(2 / delta) / m) + 7 * math.log(2 / delta) / (3 * (m - 1))
+    return eb, mean + 2 * np.sqrt(var / m)
+
+
+@conjecture("XXIV.5 The bracket of the hint-free estimate (theory report 11.30, 'Without a hint'; a simulation, not a proof): for independent copies of a [0,1]-valued variable the empirical Bernstein bound mean + sqrt(2 V ln(2/delta)/m) + 7 ln(2/delta)/(3(m-1)) (V the sample variance) is an upper confidence bound for the mean at level 1 - delta — coverage on rare-dip, Bernoulli, uniform and beta laws; and for a law with zero sample variance it is 7 ln(2/delta)/(3(m-1)): the range of the variable enters only through the term of order 1/m")
+def t_box_empirical_bernstein(rng, trials):
+    delta, reps = 0.1, 4000
+    stats = {}
+    for m in (50, 400):
+        laws = [("dip_half", lambda s: (rng.random(s) < 0.5 / m).astype(float), 0.5 / m),
+                ("dip_one", lambda s: (rng.random(s) < 1.0 / m).astype(float), 1.0 / m),
+                ("dip_three", lambda s: (rng.random(s) < 3.0 / m).astype(float), 3.0 / m),
+                ("bern_0.1", lambda s: (rng.random(s) < 0.1).astype(float), 0.1),
+                ("bern_0.5", lambda s: (rng.random(s) < 0.5).astype(float), 0.5),
+                ("uniform", lambda s: rng.random(s), 0.5),
+                ("beta_0.3_3", lambda s: rng.beta(0.3, 3.0, size=s), 0.3 / 3.3)]
+        for name, draw, mean in laws:
+            eb, _ = bx_upper_bounds(draw((reps, m)), delta)
+            viol = float((eb < mean).mean())
+            stats[f"{name}_m{m}"] = round(viol, 4)
+            if viol > delta + 3 * math.sqrt(delta * (1 - delta) / reps):
+                return False, dict(reason="empirical Bernstein bound violated more often than delta", law=name, m=m, frequency=viol)
+        eb0, _ = bx_upper_bounds(np.zeros((1, m)), delta)
+        if abs(float(eb0[0]) - 7 * math.log(2 / delta) / (3 * (m - 1))) > 1e-12:
+            return False, dict(reason="value at zero sample variance")
+    return True, stats
+
+
 @conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
 def t_dead_exact_free_energy(rng, trials):
     """Refuted (second referee, C1): with positive slack off the diagonal, an exact certificate of ln Z is the whole
@@ -9295,6 +9876,17 @@ def t_dead_candidates_every_run(rng, trials):
     wide, _ = rd_candidate_set(np.ones(Mmax), np.full(Mmax, float(s[-1]) * math.exp(lam)), s, K, m_max, nu, c_eta, eta, b, 1.0)
     if wide.sum() > N:
         return False, dict(reason="more than N candidates in a run in which the previous rung returned trivial brackets", candidates=int(wide.sum()), N=round(N), M_max=Mmax)
+    return True, {}
+
+
+@conjecture("DEAD.28 (documented refutation, D56) 'A typical-norm estimate is a certificate: the interval mean + two standard errors of the sampled Boltzmann factors is an upper confidence bound at level 0.9' — false in a box class: at a member with a rare deep dip (probability 1/m per sample) the sample contains no dip, and the sample variance vanishes, with probability about 1/e, and the interval then excludes the true mean", expect_fail=True)
+def t_dead_naive_interval(rng, trials):
+    delta, reps, m = 0.1, 4000, 200
+    samples = (rng.random((reps, m)) < 1.0 / m).astype(float)
+    _, naive = bx_upper_bounds(samples, delta)
+    viol = float((naive < 1.0 / m).mean())
+    if viol > delta + 3 * math.sqrt(delta * (1 - delta) / reps):
+        return False, dict(reason="the naive interval misses the mean far more often than delta", frequency=round(viol, 4), expected_about=round(math.exp(-1), 4))
     return True, {}
 
 
