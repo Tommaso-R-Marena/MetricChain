@@ -298,6 +298,8 @@ def build() -> dict[str, str]:
             continue
         runs6 = [json.loads(line) for line in xp.read_text().splitlines() if line.strip()]
         full = [r for r in runs6 if r["k_scale"] == 1.0]
+        if not full:
+            continue
         n_full = sum(r["runs"] - r["skipped"] for r in full)
         bad_full = sum(r["good_event_failed"] + r["invalid"] + r["width_violations"] + r["claim_violations_on_good_event"] + r["aborted"] for r in full)
         blocks[pre + "_headline"] = (
@@ -323,6 +325,20 @@ def build() -> dict[str, str]:
                              f"{sum(r['good_event_failed'] for r in rows):,} | {sum(r['invalid'] for r in rows):,} | {sum(r['invalid_on_good_event'] for r in rows)} | "
                              f"{sum(r['width_violations'] for r in rows)} | {sum(r['claim_violations_on_good_event'] for r in rows)} | {sum(r['aborted'] for r in rows)} | {dd} |")
         blocks[pre] = "\n".join(lines)
+        # worst case per value of K
+        lines = ["| `K` scale | cases | runs per case | largest fraction of runs with the good event failed (landscape, inner behaviour, `u`) | largest fraction of runs with an invalid bracket (landscape, inner behaviour, `u`) | cases with at least one invalid bracket |",
+                 "|---|---|---|---|---|---|"]
+        for scale in sorted({r["k_scale"] for r in runs6}, reverse=True):
+            rows = [r for r in runs6 if r["k_scale"] == scale]
+            g = max(rows, key=lambda r: r["good_event_failed"] / r["runs"])
+            v = max(rows, key=lambda r: r["invalid"] / r["runs"])
+
+            def tag(r, key):
+                f = r[key] / r["runs"]
+                return f"{100 * f:.1f} % ({r['profile']}, {r['oracle']}, {r['u']:g})" if r[key] else "0"
+            lines.append(f"| {'1' if scale == 1 else '1/' + str(round(1 / scale))} | {len(rows)} | {rows[0]['runs']:,} | {tag(g, 'good_event_failed')} | {tag(v, 'invalid')} | "
+                         f"{sum(r['invalid'] > 0 for r in rows)} |")
+        blocks[pre + "_worst"] = "\n".join(lines)
         # landscapes on which the good event fails first
         small = [r for r in runs6 if r["k_scale"] < 1.0]
         if small:

@@ -42,7 +42,7 @@ parameters than those of your own table.
    that maximise the slack of one claim at a time (§4):
 
 <!-- TABLE:headline_counts -->
-In 6,951,552 mean runs every run closed and no claim of Theorem 11.56 was violated.
+In 7,095,840 mean runs every run closed and no claim of Theorem 11.56 was violated.
 <!-- /TABLE:headline_counts -->
 
 <!-- TABLE:closest -->
@@ -362,7 +362,7 @@ M-009 the objective *was* the slack (cost against the cap; the count (v); the bo
 `M_j^neg`; the bound on the sample; claim (vi) per level), on 36 cells.
 
 <!-- TABLE:claims -->
-Instances evaluated: **6,951,552** (jobs M-008, M-009, M-010 together); runs that did not close within the level and sample caps: **0**; runs violating a claim: **0**.
+Instances evaluated: **7,095,840** (jobs M-008, M-009, M-010 together); runs that did not close within the level and sample caps: **0**; runs violating a claim: **0**.
 
 | quantity | claimed | extreme over all instances, `u = ½` | `u = 1` | `u = 2` |
 |---|---|---|---|---|
@@ -453,6 +453,10 @@ larger search budget and other seeds do not change the result:
 | 1 | 1000 | 0.50 | 3 | 20000 / 10000 | 1.0467 | 1.0466 |
 | 1 | 1000 | 0.65 | 2 | 20000 / 10000 | 1.1542 | 1.1542 |
 | 1 | 1000 | 0.65 | 3 | 20000 / 10000 | 1.1542 | 1.1542 |
+| 1 | 16000 | 0.50 | 2 | 12000 / 6000 | 0.5758 | 0.5757 |
+| 1 | 16000 | 0.50 | 3 | 12000 / 6000 | 0.5758 | 0.5757 |
+| 1 | 16000 | 0.65 | 2 | 12000 / 6000 | 0.7321 | 0.7321 |
+| 1 | 16000 | 0.65 | 3 | 12000 / 6000 | 0.7321 | 0.7321 |
 <!-- /TABLE:converge -->
 
 ## 5. Why radial instances are not "a small subfamily" for the outer loop (engineering argument; please check)
@@ -493,42 +497,88 @@ A literal implementation (`simulate.py`) follows the algorithm pass by pass on a
 sample drawn at random — counts per shell and per block of the doubling sequence, sampled
 with a multinomial routine that is exact in the far tail — with the abort rule, and checks
 the good event (V2)–(V3) on the realised sample and every claim of the theorem on every
-run.  It shares only the cube tables with the evaluator of §§1–4.  First runs (local; three
-landscapes, three sizes, three inner behaviours, 20 runs each, with the theorem's `K` and
-with `K/64`; design parameters `b = 0.5`, `λ = 0.5`, `η = ¼`, `η′ = θ = 0.1`, `n_i = 6`):
+run.  It shares only the cube tables with the evaluator of §§1–4.  Job M-011: 13 radial
+landscapes (flat, cone, cone of slope `u/2`, anti-cone, two plateau-then-cone, three dips
+around the critical radius, the staircase `W ∝ 1/|B(d)|`, the 2-periodic profile, a random
+walk, a random monotone profile) × `(u, n_o) ∈ {(½, 300), (1, 120), (2, 48)}`, `n_i = 6` × three
+inner behaviours (bottom, top, random; one bracket per group of points) × five values of
+`K`: the theorem's and that value divided by 4, 16, 64, 256.  Design parameters `b = 0.5`,
+`λ = 0.5`, `η = ¼`, `η′ = θ = 0.1`, `δ = 0.05`.
 
-<!-- TABLE:preview_headline -->
-With the theorem's `K` (953–979): **540 literal runs** on 3 landscapes, three sizes and three inner behaviours; runs in which the good event failed, a bracket was invalid, the width bound was exceeded, a claim was violated or the run aborted: **0**.  With no failure in 540 runs, the frequency of each of these events is below `5.6e-03` at 95 % confidence (pooled over cases).
-<!-- /TABLE:preview_headline -->
+<!-- TABLE:sampled_headline -->
+With the theorem's `K` (953–979): **585,000 literal runs** on 13 landscapes, three sizes and three inner behaviours; runs in which the good event failed, a bracket was invalid, the width bound was exceeded, a claim was violated or the run aborted: **0**.  With no failure in 585,000 runs, the frequency of each of these events is below `5.1e-06` at 95 % confidence (pooled over cases).
+<!-- /TABLE:sampled_headline -->
 
-<!-- TABLE:preview -->
+<!-- TABLE:sampled -->
 | `u` | `n_o` | `K` (scale) | runs | good event failed | bracket invalid | of these on the good event | width bound exceeded | another claim violated on the good event | aborted | mean `ln(evaluations)` minus mean run: bottom / top |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 0.5 | 300 | 979 (1) | 180 | 0 | 0 | 0 | 0 | 0 | 0 | +0.00 / +0.00 |
-| 0.5 | 300 | 15 (1/64) | 180 | 120 | 0 | 0 | 0 | 0 | 0 | — |
-| 1 | 120 | 968 (1) | 180 | 0 | 0 | 0 | 0 | 0 | 0 | +0.00 / +0.00 |
-| 1 | 120 | 15 (1/64) | 180 | 119 | 0 | 0 | 0 | 0 | 0 | — |
-| 2 | 48 | 953 (1) | 180 | 0 | 0 | 0 | 0 | 0 | 0 | +0.00 / +0.00 |
-| 2 | 48 | 15 (1/64) | 180 | 119 | 0 | 0 | 0 | 0 | 0 | — |
-<!-- /TABLE:preview -->
+| 0.5 | 300 | 979 (1) | 195,000 | 0 | 0 | 0 | 0 | 0 | 0 | +0.00 / +0.00 |
+| 0.5 | 300 | 245 (1/4) | 39,000 | 82 | 0 | 0 | 0 | 0 | 0 | — |
+| 0.5 | 300 | 61 (1/16) | 39,000 | 14,668 | 0 | 0 | 0 | 0 | 0 | — |
+| 0.5 | 300 | 15 (1/64) | 39,000 | 29,408 | 10 | 0 | 0 | 0 | 0 | — |
+| 0.5 | 300 | 4 (1/256) | 39,000 | 31,698 | 1,188 | 0 | 0 | 0 | 0 | — |
+| 1 | 120 | 968 (1) | 195,000 | 0 | 0 | 0 | 0 | 0 | 0 | -0.00 / +0.00 |
+| 1 | 120 | 242 (1/4) | 39,000 | 47 | 0 | 0 | 0 | 0 | 0 | — |
+| 1 | 120 | 60 (1/16) | 39,000 | 14,013 | 0 | 0 | 0 | 0 | 0 | — |
+| 1 | 120 | 15 (1/64) | 39,000 | 30,082 | 18 | 0 | 0 | 0 | 0 | — |
+| 1 | 120 | 4 (1/256) | 39,000 | 32,152 | 1,106 | 0 | 0 | 0 | 0 | — |
+| 2 | 48 | 953 (1) | 195,000 | 0 | 0 | 0 | 0 | 0 | 0 | -0.00 / -0.00 |
+| 2 | 48 | 238 (1/4) | 39,000 | 67 | 0 | 0 | 0 | 0 | 0 | — |
+| 2 | 48 | 60 (1/16) | 39,000 | 13,080 | 0 | 0 | 0 | 0 | 0 | — |
+| 2 | 48 | 15 (1/64) | 39,000 | 32,031 | 65 | 0 | 0 | 0 | 0 | — |
+| 2 | 48 | 4 (1/256) | 39,000 | 34,413 | 868 | 0 | 0 | 0 | 0 | — |
+<!-- /TABLE:sampled -->
 
-<!-- TABLE:preview_profiles -->
+Worst case over the 117 cases at each value of `K`:
+
+<!-- TABLE:sampled_worst -->
+| `K` scale | cases | runs per case | largest fraction of runs with the good event failed (landscape, inner behaviour, `u`) | largest fraction of runs with an invalid bracket (landscape, inner behaviour, `u`) | cases with at least one invalid bracket |
+|---|---|---|---|---|---|
+| 1 | 117 | 5,000 | 0 | 0 | 0 |
+| 1/4 | 117 | 1,000 | 1.1 % (dip R=1.1 Lambda1 n_o/u, random, 0.5) | 0 | 0 |
+| 1/16 | 117 | 1,000 | 64.1 % (anti-cone, bottom, 0.5) | 0 | 0 |
+| 1/64 | 117 | 1,000 | 100.0 % (cone, bottom, 0.5) | 2.7 % (random walk, bottom, 2) | 9 |
+| 1/256 | 117 | 1,000 | 100.0 % (cone slope u/2, random, 0.5) | 18.8 % (random walk, bottom, 2) | 88 |
+<!-- /TABLE:sampled_worst -->
+
+By landscape, all reduced values of `K` together:
+
+<!-- TABLE:sampled_profiles -->
 | landscape | runs with `K` scaled down | good event failed | bracket invalid |
 |---|---|---|---|
-| cone | 180 | 180 (100 %) | 0 (0.00 %) |
-| dip R=1.0 Lambda1 n_o/u | 180 | 178 (99 %) | 0 (0.00 %) |
-| flat | 180 | 0 (0 %) | 0 (0.00 %) |
-<!-- /TABLE:preview_profiles -->
+| staircase W ~ 1/|B(d)| | 36,000 | 23,114 (64 %) | 259 (0.72 %) |
+| cone | 36,000 | 23,113 (64 %) | 307 (0.85 %) |
+| anti-cone | 36,000 | 23,060 (64 %) | 349 (0.97 %) |
+| plateau below r_dag+1, cone above | 36,000 | 22,960 (64 %) | 342 (0.95 %) |
+| dip R=1.1 Lambda1 n_o/u | 36,000 | 22,557 (63 %) | 319 (0.89 %) |
+| cone slope u/2 | 36,000 | 22,169 (62 %) | 174 (0.48 %) |
+| dip R=1.0 Lambda1 n_o/u | 36,000 | 21,891 (61 %) | 16 (0.04 %) |
+| plateau below p_u n_o, cone above | 36,000 | 21,749 (60 %) | 329 (0.91 %) |
+| random monotone | 36,000 | 21,444 (60 %) | 490 (1.36 %) |
+| random walk | 36,000 | 16,244 (45 %) | 342 (0.95 %) |
+| dip R=0.9 Lambda1 n_o/u | 36,000 | 7,638 (21 %) | 0 (0.00 %) |
+| 2-periodic | 36,000 | 5,802 (16 %) | 328 (0.91 %) |
+| flat | 36,000 | 0 (0 %) | 0 (0.00 %) |
+<!-- /TABLE:sampled_profiles -->
 
-Reading.  With the theorem's `K` the literal runs make the same number of evaluations as
-the mean run (last column), which is the independent check of the evaluator.  With `K = 15`
-the events (V2)–(V3) of the proof fail in almost every run on the cone and on the dip — and
-in none on the flat instance, where the counts do not fluctuate — yet no bracket is
-invalid and the width bound holds in every run: the events are sufficient for the
-theorem, and far from necessary for a valid bracket at these sizes.  This is the answer,
-at small size, to "where do the events start to fail" of the request; the full job (M-011:
-13 landscapes, five values of `K` from the theorem's value down to 1/256 of it, 5 000 runs
-per case at the theorem's `K`) will be published as a linked update of this message.
+Reading.
+* **With the theorem's `K` nothing failed**, and the literal runs make the same number of
+  evaluations as the mean run (last column of the first table) — the independent check of
+  the evaluator of §§1–4.
+* **Where the events start to fail** (the question of the request): the good event
+  (V2)–(V3) begins to fail at `K/4` (one or two runs in a thousand) and fails in most runs
+  from `K/64` on; **no bracket was invalid at `K/4` and `K/16`** (234 000 runs), the first
+  invalid brackets appear at `K/64` (fewer than one in a thousand overall), and at `K/256` —
+  `K = 4` — 2.7 % of all brackets are invalid, up to 19 % on one landscape.
+* **Every invalid bracket occurred on a run on which the good event had failed**, as the
+  theorem requires; the width bound held in all runs, as it must whenever the algorithm
+  stops through the closure test; no run aborted; no other claim failed on the good event.
+* The flat instance never fails: its counts do not fluctuate.
+
+So at these sizes the events of the proof are sufficient and far from necessary: the
+constant `K` of the theorem (a union bound over `(J+1)(m_max+1)(L+2)` events) could be
+divided by 16 without a single invalid bracket in 117 000 runs.  This says nothing about
+large `n`, where the number of events grows.
 
 The inner procedures in these runs are oracles (valid brackets by construction), so the
 event (V1) of the proof is not tested.  One implementation pitfall surfaced and is
@@ -537,17 +587,20 @@ described in ENG-MSG-0003 §5 (a tie at the last rung, with a structural cause).
 ## What this does and does not say about the theory
 
 * It does **not** contradict Theorem 11.56 or Theorem 11.58: the worst case found stays
-  below the theorem's own cap `C_max`, and the cap has the claimed exponent.
+  below the theorem's own cap `C_max`, and both approach the claimed exponent as `n` grows
+  (§3).
 * It **does** correct a reading of the published numbers.  "What the algorithm costs" in
   `K_REPORT.md` §6.4 (and wherever the theory report quotes it) is the cost *at the flat
   instance with `φ` tuned for the flat instance*.  As a statement about the algorithm it
   should be replaced by the worst-case column of §2 — larger in the exponent by the
   ratios of the last table of §2: 11–49 % at `n ≤ 2000`, between 1 % and 11 % at the two
-  largest sizes — or be labelled as a best case.  The flat instance is the hardest instance for *every algorithm* (it carries the
-  lower bound); it is not the hardest instance for *this* algorithm with these parameters.
+  largest sizes — or be labelled as a best case.  The flat instance is where the lower bound
+  for every algorithm is proved; it is not the instance on which *this* algorithm, with
+  these parameters, works hardest.
 * The same caveat applies to the exact three-level numbers at the flat instance quoted in
-  THY-MSG-0007 §3 (`0.712, 0.460, 0.405, 0.379`): we have not computed three levels, but the
-  mechanism of §2 acts at every level that draws an outer sample.
+  THY-MSG-0007 §3 (`0.712, 0.460, 0.405, 0.379`).  We have not computed three levels; we
+  expect the mechanism of §2 to act at every level that draws an outer sample, and that
+  expectation is untested.
 
 ## Execution environment, resources, reproduction
 
@@ -555,9 +608,13 @@ Local: Ubuntu under WSL2, 8 threads; Python 3.12, NumPy, SciPy; a C kernel compi
 system compiler (`src/metricchain_eng/twolevel/meanrun_kernel.c`), tested against the Python
 reference implementation (`meanrun.py`).  Remote: Modal, one core per task, jobs M-008 … M-011
 of `docs/engineering/COMPUTE_LEDGER.md` (bounds, measured cost).  Remote and local results
-are bit-identical on the cases compared; every stored maximiser was re-evaluated locally
-with the final code (`recheck.py`): the largest change of `ln(cost)` from the tie rule
-introduced after job M-008 is `1.5·10⁻⁵`.
+are bit-identical on the cases compared.  Job M-008 ran before the tie rule of ENG-MSG-0003
+§5 existed; every stored maximiser and every flat-instance value was re-evaluated locally
+with the final code (`recheck.py`): with plain floating-point comparisons all 2 808 stored
+values of that job are reproduced exactly, and with the tie rule the largest change of
+`ln(cost)` is `0.69` (one doubling of the sample, on one instance), at most `0.0015·na` — so
+the third decimal of the tables of §2 can move by a unit or two in a few cells — and no
+claim is violated under either convention.
 
 ```
 python -m pytest tests/eng/test_twolevel.py -q
@@ -588,13 +645,14 @@ decoded profile, the run, and the extremes of every claim over all instances eva
 ## Recommended theoretical follow-up
 
 1. Label the table of §6.4 as a best case, or replace it by a worst-case table; state in
-   the theory report which `φ` the two-level algorithm should be run with (`½` up to the grid,
-   by §2).
+   the theory report which `φ` the two-level algorithm should be run with (0.50–0.60 on our
+   grid, 0.50 from `n = 4000` on, by §2).
 2. **Can `M̄` be lowered?**  In all instances evaluated the sample stayed below `2M†`
    (Summary, first table), while `M̄ = 2(1+η)e^λ ν₀ M†` is larger by a factor of order `ν₀`, and
    `ln ν₀` is between 8.9 and 17.3 over the cells run.
-   Every level that is *left* has `M_j < 2M†` by your Steps 5–6; only the closing level can
-   exceed that.  If `M ≤ c·M†` could be proved for the closing level too, `C_max` would lose a
+   A level that is *left* has `q_j > π†` (your Step 5), hence `M_j < M†` if it is negligible
+   (your Step 6) and `M_j < 2M†` if it is populated, in a mean run (`N < 2K` at the first pass
+   with `N ≥ K`); only the closing level can exceed that.  If `M ≤ c·M†` could be proved for the closing level too, `C_max` would lose a
    factor of order `ν₀` in its first term — invisible in the exponent, but a tenth of `na` at
    `u = 1`, `n = 1000` (`ln ν₀ = 11.1`).
 3. Check §5.  If it stands, "for all `u`-Lipschitz outer landscapes" can be tested

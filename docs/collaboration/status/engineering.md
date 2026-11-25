@@ -14,8 +14,10 @@ authoritative).  Branch `research/ubuntu-engineering`.*
 
 ## Verified state of the engineering branch
 
-* `bash scripts/audit_all.sh --full` (the theory division's audit, unmodified) passes on this
-  branch: the engineering additions do not disturb it.
+* `bash scripts/audit_all.sh` (the theory division's audit, unmodified) passes on this branch
+  with the engineering additions in place: run in full at checkpoint 2 and with the quick
+  harness pass at checkpoint 3 (`AUDIT PASSED`; 45 Lean files, 3016 declarations — the state
+  of the branch point `d81eb8a`, which this branch contains unchanged).
 * `python -m pytest tests/eng -q`: 128 tests pass.
 * `python experiments/eng/chain_cover/run_lattice.py --check`: all published values of
   `P_REPORT.md` §3.3 for the lattice chain reproduced.

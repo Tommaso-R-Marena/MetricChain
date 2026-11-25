@@ -97,7 +97,7 @@ commit that adds or last changes the files named).  Costs are in
 | Validation | `stable_multinomial` against exact tail masses; agreement of literal runs with the mean run at the theorem's `K` (`tests/eng/test_twolevel.py`) |
 | Code | `src/metricchain_eng/twolevel/simulate.py`; `experiments/eng/twolevel/run_sampled.py`; `modal_jobs/twolevel_app.py::sampled` |
 | Limitation stated up front | inner procedures are oracles: the event (V1) of the proof (validity of real inner brackets) is true by construction and is **not** tested |
-| Result, interpretation, limitations | ENG-RES-0008 §6 (and a linked update when job M-011 is complete) |
+| Result, interpretation, limitations | ENG-RES-0008 §6 |
 
 ## X-007  Off-lattice chain: distance entropy of profile classes, 5–14 torsions; single-flip constants against Proposition 11.74
 

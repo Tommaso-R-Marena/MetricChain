@@ -226,8 +226,8 @@ def main() -> int:
     text = target.read_text()
     new = text
     for name, body in blocks.items():
-        pat = re.compile(rf"(<!-- TABLE:{re.escape(name)} -->\n).*?(\n<!-- /TABLE:{re.escape(name)} -->)", re.S)
-        new = pat.sub(lambda m: m.group(1) + body + m.group(2), new)
+        pat = re.compile(rf"(<!-- TABLE:{re.escape(name)} -->\n)(?:.*?\n)?(<!-- /TABLE:{re.escape(name)} -->)", re.S)
+        new = pat.sub(lambda m: m.group(1) + body + "\n" + m.group(2), new)
     if args.verify:
         print("tables in", target.name, "match the artifacts" if new == text else "DIFFER from the artifacts")
         return 0 if new == text else 1

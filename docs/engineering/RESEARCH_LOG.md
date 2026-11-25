@@ -164,8 +164,9 @@ Algorithm 2L⁺, and sent two new requests.  Answers: ENG-MSG-0003, ENG-RES-0008
    are exactly the tail functions with `m(te^{−u}) ≥ ∂(m(t))`; monotone radial profiles are
    those with ball level sets.  Unrefereed.
 4. **A literal sampled implementation** (X-006) that shares only the tables with the
-   evaluator and agrees with it; job M-011 for statistics with the theorem's `K` and with `K`
-   scaled down.
+   evaluator and agrees with it; job M-011: 585 000 runs with the theorem's `K` without a
+   single failure of any kind, and 468 000 runs with `K` divided by 4 … 256 — the good event
+   starts to fail at `K/4`, the first invalid brackets appear at `K/64`.
 5. **A tie pitfall with a structural cause** (ED-5): a literal run aborted on the good
    event; fixed by an exact tie rule; two published rows of the workstream's table turn out
    to be decided by rounding.
@@ -224,14 +225,13 @@ Algorithm 2L⁺, and sent two new requests.  Answers: ENG-MSG-0003, ENG-RES-0008
 State at the end of session 2: see `docs/collaboration/status/engineering.md` for the table
 of requests; the list below is the order of work.
 
-1. **THY-REQ-0001, what is left** (ENG-RES-0008 "Decision"): (a) publish the table of job
-   M-011 if it was not in checkpoint 3 (`python experiments/eng/twolevel/make_tables.py`, block
-   `sampled`); (b) **three nested levels on non-flat instances** — read
+1. **THY-REQ-0001, what is left** (ENG-RES-0008 "Decision"): (a) **three nested levels on
+   non-flat instances** — read
    `experiments/reviews/R8/r8_flat3.py` and `docs/reviews/R8_referee_report.md` on a worktree of
    the theory head for the design of the middle level, then nest `Evaluator` (inner cost of
-   rung `l` = mean run of the two-level algorithm on the fibre at accuracy `x_l`); (c) the
+   rung `l` = mean run of the two-level algorithm on the fibre at accuracy `x_l`); (b) the
    extensive regime of §11.18 (`λ = 1`, `η = ½`, `η′ = 1`, `ν₁ = 1`, `θ = e^{Gn−b} − …`): `Params.theta`
-   must become a logarithm first, `θ` overflows a double at `n = 10⁵`; (d) real inner brackets
+   must become a logarithm first, `θ` overflows a double at `n = 10⁵`; (c) real inner brackets
    beyond 13 coordinates in the form of `DEAD_ENDS.md` ED-7 (small outer cube, large inner
    cube, a few hundred runs).
 2. **THY-REQ-0003** in the revised design of ENG-RES-0003, with the remainder
