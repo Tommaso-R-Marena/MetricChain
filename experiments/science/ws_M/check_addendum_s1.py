@@ -14,8 +14,9 @@ Facts checked here:
   =>  KL(mu||nu) <= (beta*omega)^2/8  and, by Pinsker, TV(mu,nu) <= beta*omega/4.
   Compared with Theorem 7:  (i) J = KL(mu||nu)+KL(nu||mu) = beta(E_nu r - E_mu r);
   (ii) TV <= beta*omega/4;  (iii) J <= (beta*omega)^2/4;  (v) Pythagoras.
-  Also recorded: the sharp feature-free bound TV <= tanh(beta*omega/4) does NOT need to hold
-  with features (we report the largest ratio TV/tanh(beta*omega/4) seen).
+  Sharp forms (SM_REPORT.md section 8, remark R2): J >= 4*TV*artanh(TV) (data processing to the
+  two-point partition {mu>nu}, then a one-variable minimisation), hence with (i)
+  TV <= tanh(beta*omega/4) and J <= beta*omega*tanh(beta*omega/4), with or without features.
 Run:  python3 experiments/science/ws_M/check_addendum_s1.py   (about 20 s)
 """
 import numpy as np
@@ -64,7 +65,7 @@ def iproj(mu0, Phi, m):
 
 
 rows = []
-worst = dict(F1=-np.inf, F2=0.0, KL8=0.0, TV=0.0, J4=0.0, idJ=0.0, pyth=0.0, tanh=0.0)
+worst = dict(F1=-np.inf, F2=0.0, KL8=0.0, TV=0.0, J4=0.0, idJ=0.0, pyth=0.0, tanh=0.0, jtv=np.inf, jsharp=0.0)
 n_inst = 0
 for trial in range(4000):
     n = int(rng.integers(3, 40))
@@ -102,6 +103,9 @@ for trial in range(4000):
     worst["idJ"] = max(worst["idJ"], abs(J - beta * (nu @ r - mu @ r)))
     worst["pyth"] = max(worst["pyth"], abs(kl(mu, mu0) - kl(nu, mu0) - klmn))
     worst["tanh"] = max(worst["tanh"], tv / np.tanh(bw / 4))
+    if tv > 1e-9:
+        worst["jtv"] = min(worst["jtv"], J / (4 * tv * np.arctanh(tv)))   # sharp Jeffreys-TV: >= 1
+    worst["jsharp"] = max(worst["jsharp"], J / (bw * np.tanh(bw / 4)))      # J <= bw*tanh(bw/4)
 
 lines = [f"instances used: {n_inst}",
          f"F1  max [KL(mu||nu) - KL(mu||mu_lam)]            = {worst['F1']:.3e}   (must be <= 0 up to solver tolerance)",
@@ -111,7 +115,9 @@ lines = [f"instances used: {n_inst}",
          f"T7(iii) max J(mu,nu)  / ((beta*omega)^2/4)        = {worst['J4']:.5f}",
          f"T7(i)   max |J - beta(E_nu r - E_mu r)|           = {worst['idJ']:.2e}",
          f"T7(v)   max |KL(mu||mu0) - KL(nu||mu0) - KL(mu||nu)| = {worst['pyth']:.2e}",
-         f"        max TV(mu,nu) / tanh(beta*omega/4)        = {worst['tanh']:.5f}   (feature-free sharp form; > 1 would show it fails with features)"]
+         f"        max TV(mu,nu) / tanh(beta*omega/4)        = {worst['tanh']:.5f}   (sharp form of (ii); must be <= 1)",
+         f"        min J / (4 TV artanh TV)                  = {worst['jtv']:.5f}   (sharp Jeffreys-TV inequality; must be >= 1)",
+         f"        max J / (beta*omega*tanh(beta*omega/4))   = {worst['jsharp']:.5f}   (sharp form of (iii); must be <= 1)"]
 out = "\n".join(lines)
 print(out)
 open(__file__.replace(".py", ".out"), "w").write(out + "\n")

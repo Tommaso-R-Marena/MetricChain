@@ -143,6 +143,14 @@ barrier top is where the profile is not convex.)  The Chernoff statement is the 
 case (mean certified fraction of the height: 0.00); for a 200-site chain `−155.11 <` trivial
 `−154.68 <` true level minimum `−153.31`.
 
+*Remark (a quadratic penalty does not rescue the leaf rule) [P].*  `min_{q=r} E ≥ min_x [E(x) +
+μ(q(x) − r)²]` for every `μ`, with equality for large `μ` — as an integer programme.  But
+`(q − r)²` is a dense pairwise term, and for binary sites with `q` the Hamming weight its pairwise LP
+relaxation (the bound a single `leaf` of the kernel can certify) is at most `r² − nr + n/2` (all
+one-site marginals `1/2`, all pairs anti-correlated), which is negative for every `0 < r < n` once
+`n ≥ 3`: the leaf bound tends to `−∞` as `μ` grows.  The counting constraint has to be carried exactly
+— by a counter in the elimination order, or by branching.  (Not tested numerically.)
+
 **Theorem K4 (no transfer matrix for barriers) [K — Wrochna, Theorem 3; the reading as a statement
 about barriers is a one-line reduction].**  There are a fixed finite alphabet `Σ` and a fixed relation
 `R ⊆ Σ²` such that for the translation-invariant nearest-neighbour chain energy
@@ -228,8 +236,9 @@ residual of the class.  Machine-checked form: if `verifyR (certs i) P (wallBox D
 `g ∈ ResidualClass P` some configuration on the walk has true energy at least
 `L − (E(a) + v)` above the true energy of `a` before the walk can leave `D`.
 
-*Corollary K6.2 (position-dependent stability) [P, N].*  For an `f`-optimal path `P` and an
-`f`-optimal separator `C`,
+*Corollary K6.2 (position-dependent stability) [P, N].*  For an `f`-optimal path `P`
+(`max_P f = B_f(a,b)`) and an `f`-optimal separator `C` (`min_C f = B_f(a,b)`; if `H_f = 0` the lower
+bound below is trivial),
 
     H_f − max_{y ∈ C} d(a,y)  ≤  H_g(a,b)  ≤  H_f + max_{x ∈ P} d(x,a)     for every admissible g.
 
@@ -267,11 +276,13 @@ theory report Thm 11.4.)
 `W_ε(A)`; `B_{E + s(·,A)} ≤ B + ε` iff some walk has all vertices with `E(y) + s(y,A) ≤ B + ε`. ∎
 
 *Corollary K7.1 (lower bounds are expensive, upper bounds cheap) [P, N].*  On the `n`-cube with
-`f(x) = φ(|x|)`, `φ` with a strict global maximum at layer `m`, uniform Hamming envelope `c`, a
-`κ`-Lipschitz true residual and `ε < min((1−κ)c, φ(m) − max_{j≠m} φ(j))`: every lower certificate for
-the barrier between `0ⁿ` and `1ⁿ` contains the **whole transition layer**, `N_low ≥ C(n,m)`, while
-`n + 1` evaluations along one monotone path are an exact upper certificate.  (The covered set lies in
-layer `m`, each of its points must be evaluated, and a separator inside one layer is the whole layer.)
+`f(x) = φ(|x|)`, `φ` with a strict global maximum at layer `m`, uniform Hamming envelope `c`, true
+residual `g = 0` (so the slack is `d` itself) and `ε < min(c, φ(m) − max_{j≠m} φ(j))`: every lower
+certificate for the barrier between `0ⁿ` and `1ⁿ` contains the **whole transition layer**,
+`N_low ≥ C(n,m)`, while `n + 1` evaluations along one monotone path are an exact upper certificate.
+(The barrier is `φ(m)`; the covered set `W_ε(A)` lies in layer `m`; each of its points is within slack
+`ε < c` of an evaluation, hence evaluated; a separator inside one layer is the whole layer, because
+every point of the layer lies on a monotone path that meets the layer only there.)
 *Numerics T3:* both equivalences without a mismatch in 1280 tests each; for `n = 4` no anchor set
 smaller than the layer (6 points) is a lower certificate (exhaustive).
 
@@ -391,9 +402,18 @@ in 60-digit arithmetic where double precision fails).
 **Proposition K12 (Thomson certificates: path mixtures, parallel law) [K, N].**  Every unit flow gives
 `cap(a,b) ≥ 1/𝒟(ψ)`; a flow supported on `K` edge-disjoint walks gives `cap ≥ Σ_j 1/R_j`,
 `R_j = Σ_{e ∈ γ_j} 1/c(e)` — only energies along the walks enter, no partition function — and
-`E_a[τ_b] ≤ (1 − π(b)) 𝒟(ψ)`.  On product spaces these are the only flows I can check without summing
-over configurations; flows built from a reaction coordinate are valid flows only for exactly lumpable
-(mean-field) models.
+`E_a[τ_b] ≤ (1 − π(b)) 𝒟(ψ)`.  Flows built from the conductances of a reaction coordinate are valid
+(divergence-free) only for exactly lumpable models.  One genuinely *product* flow is checkable **[P, N]**:
+flip the `D` sites on which `a` and `b` differ in a uniformly random order; the flow through an edge
+leaving level `m` of the spanned subcube is `1/(C(D,m)(D−m))`, and for Metropolis conductances
+
+    cap(a,b)⁻¹ ≤ 𝒟(ψ) ≤ Z · Σ_{m<D} [C(D,m)(D−m)]⁻² [ (D−m) Z⁻_m + (m+1) Z⁻_{m+1} ],   Z⁻_j = Σ_{level j} e^{+βE},
+
+a capacity **lower** bound from *negative-temperature* level partition functions (same kernel, sign of
+`β` reversed).  *Numerics T12 (`n = 8`):* the flow is exact for a flat landscape and for Curie–Weiss
+(the `Z⁻` form loses a factor `≤ 2`); on random pairwise landscapes it gives `0.43–0.59` of the capacity
+at `β = 0.5` (one path: `0.07–0.09`) but `10⁻⁴–10⁻³` at `β = 2` (one path: `0.19–0.37`).  So product
+flows are the Thomson certificate for entropic barriers, path mixtures for energetic ones.
 
 **Proposition K13 (one cut, three semirings) [P].**  For `A` contained in `{E ≤ m_W}`,
 `m_W = min_{∂⁺A} E`, `m_A = min_A E`, Metropolis rates:
@@ -476,7 +496,8 @@ the inside leaves into `Lo`, checks the adjacency condition (2) of §2.5 and out
 stationary for the Boltzmann weights and moves one site per step,
 `P_{π_A}(τ > T) ≥ 1 − T·U/Lo` for all `T` (**[V]** `trap_certificate_weighted` + `zverifyTop_sound` +
 `certified_partition_of_intervals`; the glue is not formalised), and for reversible continuous-time
-dynamics with rates at most one per neighbour `λ_A ≤ U/Lo` and `P_{π_A}(τ > t) ≥ e^{−tU/Lo}` **[K]**.
+dynamics with rates at most one per neighbour `λ_A ≤ U′/Lo` and `P_{π_A}(τ > t) ≥ e^{−tU′/Lo}` **[K]**,
+where `U′` is the wall sum weighted by `deg_A(y)` instead of `κ(y)`.
 Robust version: anchored upper/lower instances as in Theorem K14(b).  Level certificates (K11) need the
 same kernel over polynomial weights (§7, request T2).  Rate *lower* bounds are path lists (K12) plus an
 upper bound on `Z(A)`.
@@ -555,6 +576,7 @@ arithmetic except where stated.  Random instances: pairwise tables with Gaussian
 | `t9_trap_stationary.py` | Thm K10 for Metropolis, heat-bath, non-reversible kernels | `N = 256, 243`, 30 cases | no violation |
 | `t10_counter_dp.py` | counting cuts at scale (transfer matrix with counter) | validation `n = 12`; `n = 200` | errors `4e-15`, `7e-15`; height bracket `[1.3758, 1.5178]` on `2²⁰⁰` states; Lagrangian below trivial |
 | `t11_cut_size.py` | greedy number of wall boxes of exact cut certificates | as T4, T7 | median `≤ 1.6 n`, max `3.2 n` boxes |
+| `t12_product_flow.py` | random-order (product) flow and its `Z⁻` bound against exact capacities | `N = 256`, 13 cases | no violation; exact when lumpable; useless at low temperature on rugged landscapes |
 | `KineticsCertificates.lean` | 25 theorems (listed below) | — | `lake env lean`: exit 0, no warnings; `#print axioms` of all 25: `[propext, Classical.choice, Quot.sound]` (`out_lean.txt`) |
 
 **Machine-checked statements** (`experiments/science/ws_K/KineticsCertificates.lean`; imports

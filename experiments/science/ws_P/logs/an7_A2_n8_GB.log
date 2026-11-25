@@ -1,0 +1,20 @@
+=== A2 n=8 residual GB: 35478 clash-free conformations; kT = 0.5962 kcal/mol
+c_i (single-flip, kcal/mol): [ 8.46  9.82 12.21 10.29 14.75 15.23 13.05 17.52 11.8  14.92 12.09 16.38
+ 11.86 18.35  9.48 18.28]
+argmin f: states [1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0], f = min;  argmin E: states [1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0];  same conformation: True;  E(argmin f) - min E = 0.000 kcal/mol = 0.00 kT
+site gaps of the KNOWN part at argmin f (kcal/mol):   [14.16   inf   inf   inf   inf   inf   inf   inf   inf   inf   inf   inf
+   inf 22.54   inf 12.94]
+site gaps of the TRUE energy at argmin E (kcal/mol):  [6.24  inf  inf  inf  inf  inf  inf  inf  inf  inf  inf  inf  inf 4.19
+  inf 1.87]
+single-flip sharpness at argmin f: 3 of 16 sites have a clash-free single-flip neighbour; of these 2 are sharp (gap of f >= c_i);   ratios e_i/c_i: [1.673   inf   inf   inf   inf   inf   inf   inf   inf   inf   inf   inf
+   inf 1.228   inf 0.708]
+single-flip sharpness at argmin E (gaps of the known part f there: [14.16   inf   inf   inf   inf   inf   inf   inf   inf   inf   inf   inf
+   inf 22.54   inf 12.94]): 3 sites with a neighbour, 2 sharp
+validity of d = sum c_i[x_i != y_i] on the clash-free domain: max |g(x)-g(y)|/d(x,y) = 1.0000  (envelope valid as measured)
+Theorem 11.7 (one evaluation certifies iff d(x0,y) <= f(y)-f(x0) for all y): min margin = -198.85 kcal/mol -> NO;  conformations violating: 35423 of 35477
+cost-to-distance ratio lambda* = min_y (f(y)-f(x0))/d(x0,y) = 0.0000  (the constants would have to be 1000000000000 times smaller for one evaluation to certify); attained at Hamming distance 0, f(y)-f(x0) = 0.00 kcal/mol
+beta*c_i: [14.2 16.5 20.5 17.3 24.7 25.6 21.9 29.4 19.8 25.  20.3 27.5 19.9 30.8
+ 15.9 30.7]
+sum_i ln cosh(beta c_i/2) = 168.8 nats = 100.6 kcal/mol;   beta^2 sum c_i^2/8 = 1065 nats;   range of g on the domain = 41.3 kcal/mol = 69 kT
+exact on the grid: ln Z(f+g) - ln Z(f) = 77.22 nats; -beta <g>_f = 76.60; Jensen gap = 0.624 nats (the class bound above is 169); Gibbs weight of argmin E: 0.536; entropy H(pi_E) = 3.63 nats
+product-landscape formula (Thm 11.8, Boltzmann weights) with the measured star of f at argmin f and measured c_i: ln N >= 0.00 (t = 0) of ln(prod k_i) = 2.08; i.e. N >= 1   [heuristic for a non-additive f]

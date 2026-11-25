@@ -7,3 +7,11 @@ single-flip sharpness at argmin f: 4 of 10 sites have a clash-free single-flip n
             inf 3.26410472e+07            inf 2.18450194e+07
             inf 1.22283866e+07]
 single-flip sharpness at argmin E (gaps of the known part f there: [1.39 4.73 0.74 4.66 0.85 4.87 0.7  4.79 1.27 5.34]): 10 sites with a neighbour, 10 sharp
+validity of d = sum c_i[x_i != y_i] on the clash-free domain: max |g(x)-g(y)|/d(x,y) = 1.0000  (envelope valid as measured)
+Theorem 11.7 (one evaluation certifies iff d(x0,y) <= f(y)-f(x0) for all y): min margin = -2.33 kcal/mol -> NO;  conformations violating: 6 of 28842
+cost-to-distance ratio lambda* = min_y (f(y)-f(x0))/d(x0,y) = 0.2752  (the constants would have to be 4 times smaller for one evaluation to certify); attained at Hamming distance 10, f(y)-f(x0) = 0.89 kcal/mol
+beta*c_i: [1.1 0.  1.1 0.  1.1 0.  1.1 0.  1.1 0. ]
+sum_i ln cosh(beta c_i/2) = 0.7 nats = 0.4 kcal/mol;   beta^2 sum c_i^2/8 = 1 nats;   range of g on the domain = 3.2 kcal/mol = 5 kT
+exact on the grid: ln Z(f+g) - ln Z(f) = 1.30 nats; -beta <g>_f = -0.79; Jensen gap = 2.081 nats (the class bound above is 1); Gibbs weight of argmin E: 0.677; entropy H(pi_E) = 1.42 nats
+product-landscape formula (Thm 11.8, Boltzmann weights) with the measured star of f at argmin f and measured c_i: ln N >= 0.00 (t = 0) of ln(prod k_i) = 3.58; i.e. N >= 1   [heuristic for a non-additive f]
+Killed

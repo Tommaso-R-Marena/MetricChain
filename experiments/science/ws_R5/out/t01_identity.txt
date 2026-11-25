@@ -1,0 +1,34 @@
+== vertices of the Lipschitz polytopes (normalised phi[0]=0) ==
+bin q=2 #vertices=2
+[[ 0. -1.]
+ [ 0.  1.]]
+path q=3 #vertices=4
+[[ 0.  -0.8 -2.4]
+ [ 0.  -0.8  0.8]
+ [ 0.   0.8 -0.8]
+ [ 0.   0.8  2.4]]
+tri q=3 #vertices=6
+[[ 0.  -1.  -2. ]
+ [ 0.  -1.   0.5]
+ [ 0.  -0.5 -2. ]
+ [ 0.   1.  -0.5]
+ [ 0.   1.   2. ]
+ [ 0.   0.5  2. ]]
+asym q=3 #vertices=5
+[[ 0.  -1.  -2. ]
+ [ 0.  -1.  -0.5]
+ [ 0.  -0.5 -2. ]
+ [ 0.   0.5 -1. ]
+ [ 0.   0.5  1. ]]
+
+== identity F*(t): route1 (LP game, blind search over gamma) | route2 primal | route3 dual | LP at centre ==
+bin   t=0.1  blind=0.0092420174  primal=0.0092420174  dual=0.0092420174  LP@centre=0.0092420174  gap=6.1e-11  centre_in_L=True  primal-blind=+6.42e-17
+bin   t=0.3  blind=0.0213256315  primal=0.0213256315  dual=0.0213256315  LP@centre=0.0213256315  gap=2.2e-11  centre_in_L=True  primal-blind=+3.47e-18
+bin   t=0.5  blind=0.0250235863  primal=0.0250235863  dual=0.0250235863  LP@centre=0.0250235863  gap=5.6e-17  centre_in_L=True  primal-blind=-7.98e-17
+bin   t=0.7  blind=0.0206543463  primal=0.0206543463  dual=0.0206543463  LP@centre=0.0206543463  gap=4.6e-10  centre_in_L=True  primal-blind=-4.16e-17
+bin   t=0.9  blind=0.0086733080  primal=0.0086733080  dual=0.0086733080  LP@centre=0.0086733080  gap=1.5e-10  centre_in_L=True  primal-blind=-3.30e-17
+path  t=0.1  blind=0.0355314407  primal=0.0355314389  dual=0.0355314389  LP@centre=0.0355314389  gap=3.8e-10  centre_in_L=True  primal-blind=-1.73e-09
+path  t=0.3  blind=0.0793707497  primal=0.0793707467  dual=0.0793707467  LP@centre=0.0793707467  gap=1.8e-15  centre_in_L=True  primal-blind=-2.99e-09
+path  t=0.5  blind=0.0889935273  primal=0.0889935251  dual=0.0889935251  LP@centre=0.0889935251  gap=2.3e-08  centre_in_L=True  primal-blind=-2.19e-09
+path  t=0.7  blind=0.0695719005  primal=0.0695718998  dual=0.0695718998  LP@centre=0.0695718998  gap=4.8e-09  centre_in_L=True  primal-blind=-7.13e-10
+path  t=0.9  blind=0.0275627831  primal=0.0275627831  dual=0.0275627831  LP@centre=0.0275627831  gap=2.1e-09  centre_in_L=True  primal-blind=-2.88e-16

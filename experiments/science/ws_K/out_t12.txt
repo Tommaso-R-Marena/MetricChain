@@ -1,0 +1,20 @@
+T12 product (random-order) flow:  ratios to the exact capacity (all must be <= 1)
+   system                          beta  flow/cap   Zneg-bound/cap  one-path/cap
+   flat landscape n=8              1.0   1.0000     0.5000          0.0381
+   Curie-Weiss n=8                 0.5   1.0000     0.6702          0.0215
+   Curie-Weiss n=8                 1.0   1.0000     0.7519          0.0127
+   Curie-Weiss n=8                 2.0   1.0000     0.7735          0.0065
+   random chain+ n=8 inst 0        0.5   4.30e-01   3.20e-01        9.24e-02
+   random chain+ n=8 inst 0        1.0   4.26e-02   3.77e-02        1.76e-01
+   random chain+ n=8 inst 0        2.0   1.63e-04   1.49e-04        3.65e-01
+   random chain+ n=8 inst 1        0.5   5.45e-01   4.02e-01        7.71e-02
+   random chain+ n=8 inst 1        1.0   7.62e-02   6.68e-02        1.27e-01
+   random chain+ n=8 inst 1        2.0   1.13e-04   1.07e-04        2.64e-01
+   random chain+ n=8 inst 2        0.5   5.92e-01   4.09e-01        6.55e-02
+   random chain+ n=8 inst 2        1.0   1.30e-01   1.12e-01        1.09e-01
+   random chain+ n=8 inst 2        2.0   1.81e-03   1.67e-03        1.94e-01
+T12 summary: violations 0
+
+real	0m0.715s
+user	0m0.200s
+sys	0m0.024s

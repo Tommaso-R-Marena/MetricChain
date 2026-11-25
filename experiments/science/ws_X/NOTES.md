@@ -153,3 +153,42 @@ Tool: web search (results = titles+snippets), page fetch for 3 URLs.  Levels: [a
     Kandasamy-Schneider-Poczos ICML 2015 (additive models: regret linear in D) [snip].
 14. Sloan-Woźniakowski, J. Complexity 14 (1998) 1-33 [snip]; Novak-Woźniakowski, Tractability of
     Multivariate Problems I-III (EMS 2008/2010/2012) [snip, titles only].
+
+### 20:10 — N4/N8, N6, N9, N10 done; N5 part I done, part II running
+* N5 part I (order-2 residual, eps=.25, medians of 5; n5_compare.log):
+  sharp regime (e=2, kappa=1): W = 1 evaluation, H/B ~ n+1  -> the envelope paradigm WINS when the
+  known part is sharp.  Non-sharp, oracle-tight constants (kappa=1, e=0): W best-first 19..336
+  (n=6..12, x1.6/site), H 15..57, B 20..70.  Safety factor 2 (kappa=.5, e=0): W greedy 40..567
+  (n=6..11), best-first 45..1423 (n=6..12, x1.78/site), H = M = 21..79, B 20..70.
+  All H/B runs valid (true min inside [LB,UB]) in 5/5 everywhere.
+* N5 part II, kappa=1: product lower bound = 0 for all n.  NOT a bug: with oracle-tight constants
+  and an additive residual the envelope is saturated between argmax g and argmin g, two
+  evaluations pin g on every geodesic = everywhere.  (Theory report notes kappa<1 is needed.)
+  kappa=0.5 rows are the meaningful ones.
+* N4 (n4_bayes.json): analytic (sup-norm) Bayesian intervals always cover, but for ln Z they are
+  9-80x wider than the sampled posterior interval (n=15, m=2: 0.81 vs 0.010 at beta=.5; 3.33 vs
+  0.37 at beta=2); for min only ~1.8x (1.30 vs 0.72).  => ln Z is governed by the Gibbs-averaged
+  posterior covariance, not by sup P.  Sampled coverage 0.91-0.98 (nominal .95; 200 posterior
+  samples shared across draws -> correlated MC error).  Cosmetic bug: rows with exact posterior
+  (n=7, m=2: the "m=2" BCH code of length 7 is the repetition code, strength 6) show coverage
+  0.73 at width 0 = float rounding in the coverage test.  FIX + rerun at the end.
+* N8 (white tail tw2=1 unlearnable, main effects learnable): second-moment certificate width
+  0.16 (n=12, N=256, beta=.5; true posterior 95% spread 0.07; sup-norm width 2.9), 0.61 at beta=1
+  (true 0.28), vacuous at beta=2 (true spread 1.27), frozen at beta=4 (true spread 5.1).
+* N6 (n6_misspec.json): nominal 95% interval for min: coverage .948 well specified; .557 pair
+  variance x4; .770 unmodelled order 3; .930 t3 coefficients; dips at low states in 20% of
+  instances: .795 overall = .089 on dipped / .957 on clean.  Split conformal restores marginal
+  coverage in all cases (.953-.967) but only .767 on the dipped instances.  Goodness-of-fit on
+  the same 16 evaluations rejects 76% (b), 29% (c), 8% of dipped (baseline 5.5%); 32 held-out
+  evaluations reject 98% (b), 88% (c), 24% of dipped (baseline 11%).
+  Lebesgue constants max_x sum_a |lambda_a(x)| = 2.5, 4.28, 2.875, 4.69, 3.25 for (n,m)=(7,1),(7,2),
+  (10,1),(10,2),(12,1) (about 0.6-0.9 sqrt(M)); l2 norm of weights = sqrt(M/N) exactly.
+* N9 (n9_lp_funnel.json): tau_LP <= tau in all 1360 instances (0 violations).  Ferromagnets
+  (grid 4x4, chain12+6 contacts) and trees: tau_LP = tau in 100%.  Frustrated: grid weak field
+  5-25% equal, LP tight at x* in 28-55%; strong field 80-85% equal, 93-100% tight; chain+contacts
+  ~50% equal, 74-84% tight.  Triangle h=(-.5,0,-.5), J=(-1,-1,+1): tau=1/2, tau_LP=-2/3.
+* N10 (n10_extras.json): (I) order-2 ellipsoid, f=0, B=sqrt(n), s2=.25: numerical sup of ln Z ==
+  Curie-Weiss member to 4 digits at all (n,beta); O(1) below 2 beta b sqrt(s2)=1 (0.058 at .4),
+  extensive above; sup-norm bound far above.  (II) RKHS norm of a depth-3 dip under the product
+  spectrum with lam=.5: 3.9e3 (n=8) -> 1.7e9 (n=16) vs typical draw 16 -> 256 and an additive
+  function of the same depth 3.3.
