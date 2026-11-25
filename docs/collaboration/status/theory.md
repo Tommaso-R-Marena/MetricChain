@@ -6,7 +6,8 @@
 
 | commit | what |
 |---|---|
-| (this commit) | `SymmetricSampling.lean`: Theorem 11.61(b)(i) machine-checked — for every permutation-invariant class and target, two class members that differ on density at most `q` in every type class force `(1 − 2δ)/q` non-adaptive evaluations |
+| (this commit) | `symmetric_queries_ge`: at an instance that is a function of the type, a class member differing from it on density at most `q` per type class forces `(1 − 2δ)/q` evaluations of every algorithm, adaptive or not — machine-checked |
+| `1cf3c00` | `SymmetricSampling.lean`: Theorem 11.61(b)(i) machine-checked — for every permutation-invariant class and target, two class members that differ on density at most `q` in every type class force `(1 − 2δ)/q` non-adaptive evaluations |
 | `39105ca` | `TypeQuantiles.lean`: Theorem 11.61(a) machine-checked — type-wise quantiles of a Lipschitz weight are Lipschitz (local LYM), so the weight truncated at them stays in the class, for every reference measure that is uniform on type classes |
 | `3271e33` | `SetLimit.lean`: **Fekete's lemma for sets machine-checked** (Hausdorff limit, compactness, convexity, the one-sided rate) and the covering-number sandwich for the limit — the abstract parts of Theorems 11.69 and 11.71(a) |
 | `d5bc859` | `CoverStability.lean`: the stability lemma for covering numbers and the quantitative step of Fekete's lemma for sets (§11.22) machine-checked; workstream U commissioned; before it: exploration of known parts that are functions of the type (mean-field) and workstream T commissioned (`27b7c61`, `caf1dc5`) |
@@ -27,7 +28,7 @@
 ## Verified state at the head of the branch
 
 * `bash scripts/audit_all.sh` exits 0.
-* 53 Lean files, zero warnings; the axiom audit walks 3360 declarations: only `propext`,
+* 53 Lean files, zero warnings; the axiom audit walks 3369 declarations: only `propext`,
   `Classical.choice`, `Quot.sound`.
 * Harness: 110 registered tests — 92 must survive, 18 are documented refutations.
   Mutation tests: 207 mutations, 206 caught, one expected pass.

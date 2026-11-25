@@ -21,6 +21,12 @@ reference measure enters only through the permutation invariance of the target.
   truncation at type-wise admissible thresholds (`TypeQuantiles.lean`).
 * `symmetric_nonadaptive_witness`: a concrete instance — summing an arbitrary function over
   the cube to within `1/4` needs `(1 − 2δ)·C(n, k)` non-adaptive evaluations for every `k`.
+* `symmetric_queries_ge`: the same for **every** algorithm, adaptive or not, at an instance
+  that is itself permutation-invariant (a function of the type): if a class member whose
+  target differs by more than `ε` differs from it on density at most `q` in every type
+  class, then `(1 − 2δ)/q` evaluations are needed at that instance (from
+  `expected_queries_ge_packing` with the alternative permuted by all permutations);
+  `perm_fraction_le` is the counting step, `symmetric_queries_witness` a concrete instance.
 
 Together with `TypeQuantiles.truncate_lipschitz_insert`/`_erase` (the truncation stays in the
 Lipschitz class) this is the every-`n` lower bound behind "a sample that is uniform on
@@ -208,6 +214,126 @@ theorem symmetric_nonadaptive_witness {Ω : Type*} [Fintype Ω]
   refine symmetric_nonadaptive_queries_ge (G := fun _ => True) (Φ := fun g => ∑ s, g s)
     alg P hP hP1 hcorr Q hna (fun _ _ _ => trivial) (fun σ g => ?_)
     (ψ := fun _ => 0) (ψ' := fun s => if s = a then 1 else 0) trivial trivial ?_ ?_
+  · exact Fintype.sum_equiv (MulAction.toPerm σ) _ _ (fun s => rfl)
+  · simp
+    norm_num
+  · intro r
+    have hsub : {s ∈ powersetCard r (univ : Finset α) | (if s = a then (1 : ℝ) else 0) ≠ 0}
+        ⊆ {a} := by
+      intro s hs
+      have h2 := (mem_filter.mp hs).2
+      by_contra hne
+      rw [mem_singleton] at hne
+      simp [hne] at h2
+    have hcard : (#{s ∈ powersetCard r (univ : Finset α) | (if s = a then (1 : ℝ) else 0) ≠ 0} : ℝ)
+        ≤ 1 := by
+      exact_mod_cast (card_le_card hsub).trans (card_singleton a).le
+    rcases eq_or_ne r #a with rfl | hr
+    · rw [one_div, inv_mul_cancel₀ hC.ne']
+      exact hcard
+    · have hempty : {s ∈ powersetCard r (univ : Finset α) | (if s = a then (1 : ℝ) else 0) ≠ 0}
+          = ∅ := by
+        refine eq_empty_of_forall_notMem fun s hs => ?_
+        obtain ⟨h1, h2⟩ := mem_filter.mp hs
+        have hsa : s = a := by
+          by_contra hne
+          simp [hne] at h2
+        exact hr (hsa ▸ (mem_powersetCard.mp h1).2).symm
+      rw [hempty]
+      simp only [card_empty, Nat.cast_zero]
+      positivity
+
+open Classical in
+/-- If two functions differ on density at most `q` in every type class, then for every
+configuration `a` the fraction of permutations `σ` with `ψ' (σ • a) ≠ ψ (σ • a)` is at
+most `q`. -/
+theorem perm_fraction_le {ψ ψ' : Finset α → ℝ} {q : ℝ}
+    (hdens : ∀ r : ℕ, (#{s ∈ powersetCard r (univ : Finset α) | ψ' s ≠ ψ s} : ℝ)
+      ≤ q * (Fintype.card α).choose r) (a : Finset α) :
+    (#{σ : Perm α | ψ' (σ • a) ≠ ψ (σ • a)} : ℝ) * (1 / ((Fintype.card α).factorial : ℝ)) ≤ q := by
+  have hfact : (0 : ℝ) < (Fintype.card α).factorial := by exact_mod_cast Nat.factorial_pos _
+  set 𝒟 : Finset (Finset α) := {s ∈ powersetCard #a (univ : Finset α) | ψ' s ≠ ψ s} with h𝒟def
+  have hset : (univ.filter fun σ : Perm α => ψ' (σ • a) ≠ ψ (σ • a))
+      = (univ.filter fun σ : Perm α => σ • a ∈ 𝒟) := by
+    ext σ
+    simp only [mem_filter, mem_univ, true_and, h𝒟def, mem_powersetCard, subset_univ,
+      card_smul_finset]
+  rw [hset]
+  have hcount := card_perm_smul_mem_mul a 𝒟
+    (fun t ht => (mem_powersetCard.mp (mem_filter.mp ht).1).2)
+  have hC : (0 : ℝ) < (Fintype.card α).choose #a := by
+    exact_mod_cast Nat.choose_pos (card_le_univ a)
+  have hcountR : (#{σ : Perm α | σ • a ∈ 𝒟} : ℝ) * (Fintype.card α).choose #a
+      = #𝒟 * (Fintype.card α).factorial := by exact_mod_cast hcount
+  have hd : (#𝒟 : ℝ) ≤ q * (Fintype.card α).choose #a := hdens #a
+  rw [mul_one_div, div_le_iff₀ hfact]
+  have hmul : (#{σ : Perm α | σ • a ∈ 𝒟} : ℝ) * (Fintype.card α).choose #a
+      ≤ q * (Fintype.card α).factorial * (Fintype.card α).choose #a := by
+    rw [hcountR]
+    nlinarith [mul_le_mul_of_nonneg_right hd hfact.le]
+  exact le_of_mul_le_mul_right hmul hC
+
+open Classical in
+/-- **Lower bound for every algorithm at a permutation-invariant instance.**  Let the class
+`G` and the target `Φ` be invariant under permutations of the coordinates, let `g` be a
+class member that is itself invariant (a function of the type), and let `ψ'` be a class
+member whose target differs from that of `g` by more than `ε` and which differs from `g`,
+in every type class, on a set of density at most `q`.  Then every randomised algorithm —
+adaptive or not — that is `(ε/2, δ)`-correct on the class makes at least `(1 − 2δ)/q`
+evaluations in expectation **at `g`**. -/
+theorem symmetric_queries_ge {Ω : Type*} [Fintype Ω]
+    {G : (Finset α → ℝ) → Prop} {Φ : (Finset α → ℝ) → ℝ}
+    (alg : Ω → QueryAlgorithm (Finset α)) (P : Ω → ℝ) (hP : ∀ ω, 0 ≤ P ω) (hP1 : ∑ ω, P ω = 1)
+    {ε δ : ℝ}
+    (hcorr : ∀ g, G g →
+      1 - δ ≤ ∑ ω ∈ univ.filter (fun ω => |(alg ω).output g - Φ g| ≤ ε / 2), P ω)
+    (hGperm : ∀ (σ : Perm α) g, G g → G (fun s => g (σ • s)))
+    (hΦperm : ∀ (σ : Perm α) g, Φ (fun s => g (σ • s)) = Φ g)
+    {g ψ' : Finset α → ℝ} (hg : G g) (hginv : ∀ (σ : Perm α) s, g (σ • s) = g s)
+    (hψ' : G ψ') (hsens : ε < |Φ ψ' - Φ g|) {q : ℝ}
+    (hdens : ∀ r : ℕ, (#{s ∈ powersetCard r (univ : Finset α) | ψ' s ≠ g s} : ℝ)
+      ≤ q * (Fintype.card α).choose r) :
+    1 - 2 * δ ≤ (∑ ω, P ω * ((alg ω).queries g).card) * q := by
+  have hfact : (0 : ℝ) < (Fintype.card α).factorial := by exact_mod_cast Nat.factorial_pos _
+  have hcap : ∀ a : Finset α,
+      ∑ σ ∈ univ.filter (fun σ : Perm α => ψ' (σ • a) ≠ g a),
+        (1 / ((Fintype.card α).factorial : ℝ)) ≤ q := by
+    intro a
+    rw [sum_const, nsmul_eq_mul]
+    have hset : (univ.filter fun σ : Perm α => ψ' (σ • a) ≠ g a)
+        = (univ.filter fun σ : Perm α => ψ' (σ • a) ≠ g (σ • a)) := by
+      ext σ
+      simp only [mem_filter, mem_univ, true_and, hginv σ a]
+    rw [hset]
+    exact perm_fraction_le hdens a
+  have key := expected_queries_ge_packing (ι := Perm α) alg P hP hP1 hcorr hg
+    (fun σ s => ψ' (σ • s)) (fun σ => hGperm σ ψ' hψ')
+    (fun σ => by rw [hΦperm σ ψ']; exact hsens)
+    (fun _ => 1 / ((Fintype.card α).factorial : ℝ)) (fun _ => by positivity) hcap
+  have hsum : ∑ _σ : Perm α, (1 / ((Fintype.card α).factorial : ℝ)) = 1 := by
+    rw [sum_const, card_univ, Fintype.card_perm, nsmul_eq_mul]
+    field_simp
+  rwa [hsum, mul_one] at key
+
+open Classical in
+/-- **Witness for `symmetric_queries_ge`.**  Class: all functions; target: the sum of all
+values; instance: the zero function (invariant); alternative: the indicator of one
+configuration `a`.  Hence every randomised algorithm, adaptive or not, that computes the
+sum of an arbitrary function to within `1/4` with probability `1 − δ` evaluates the zero
+function at at least `(1 − 2δ)·C(n, #a)` points in expectation. -/
+theorem symmetric_queries_witness {Ω : Type*} [Fintype Ω]
+    (alg : Ω → QueryAlgorithm (Finset α)) (P : Ω → ℝ) (hP : ∀ ω, 0 ≤ P ω) (hP1 : ∑ ω, P ω = 1)
+    {δ : ℝ}
+    (hcorr : ∀ g : Finset α → ℝ, True →
+      1 - δ ≤ ∑ ω ∈ univ.filter (fun ω => |(alg ω).output g - ∑ s, g s| ≤ (1 / 2 : ℝ) / 2), P ω)
+    (a : Finset α) :
+    1 - 2 * δ ≤ (∑ ω, P ω * ((alg ω).queries (fun _ => 0)).card)
+      * (1 / ((Fintype.card α).choose #a : ℝ)) := by
+  have hC : (0 : ℝ) < (Fintype.card α).choose #a := by
+    exact_mod_cast Nat.choose_pos (card_le_univ a)
+  refine symmetric_queries_ge (G := fun _ => True) (Φ := fun g => ∑ s, g s)
+    alg P hP hP1 hcorr (fun _ _ _ => trivial) (fun σ g => ?_)
+    (g := fun _ => 0) (ψ' := fun s => if s = a then 1 else 0) trivial (fun _ _ => rfl) trivial ?_ ?_
   · exact Fintype.sum_equiv (MulAction.toPerm σ) _ _ (fun s => rfl)
   · simp
     norm_num

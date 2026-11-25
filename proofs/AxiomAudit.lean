@@ -458,6 +458,9 @@ import proofs.AuditCommand
 #print axioms MetricChain.SymmetricSampling.symmetric_nonadaptive_queries_ge
 #print axioms MetricChain.SymmetricSampling.truncated_weight_queries_ge
 #print axioms MetricChain.SymmetricSampling.symmetric_nonadaptive_witness
+#print axioms MetricChain.SymmetricSampling.perm_fraction_le
+#print axioms MetricChain.SymmetricSampling.symmetric_queries_ge
+#print axioms MetricChain.SymmetricSampling.symmetric_queries_witness
 #print axioms MetricChain.GamePair.exactRec_congr
 #print axioms MetricChain.GamePair.HintShape.pair
 #print axioms MetricChain.GamePair.HintShape.exists_pair
