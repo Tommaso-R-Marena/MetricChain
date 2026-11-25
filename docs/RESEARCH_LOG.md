@@ -1251,8 +1251,18 @@ client set in both directions (`hasCover_of_close`, `hasCover_sandwich`), that o
 lower boundary matters (`hasCover_upper_iff`), the two-point example in which covering
 numbers do not converge at a jump (`not_hasCover_shifted`, with `hasCover_shifted_of_close`
 as the witness that a shifted accuracy does suffice), and the approximate-nestedness
-estimate behind Fekete's lemma for sets (`approx_nested`, with a witness).  50 Lean files,
-3282 audited declarations.
+estimate behind Fekete's lemma for sets (`approx_nested`, with a witness).
+
+**`SetLimit.lean`** (44 declarations): Fekete's lemma for sets in full — for a bounded,
+approximately nested sequence of non-empty sets in a proper normed space the lower limit
+is compact, non-empty and is the Hausdorff limit (`hausdorff_limit`); for a family that is
+super-additive up to `β` with bounded increments (`SuperAdditive`) the normalised sets
+converge (`SuperAdditive.hausdorff_limit`), every one of their points is within `β/M` of the
+limit (`SuperAdditive.dist_limit_le`), the limit is convex (`SuperAdditive.convex_limit`), and
+for client sets in `V × ℝ` the covering numbers of the finite sets are sandwiched by those
+of the limit at shifted accuracies (`SuperAdditive.cover_sandwich`).  So the abstract parts
+of Theorems 11.69 and 11.71(a) are machine-checked; what remains on paper there is the
+lattice input (Lemmas 11.67, 11.68).  51 Lean files, 3326 audited declarations.
 
 Workstream T (`workstreams/T_brief.md`) was commissioned to establish what is true:
 every-`n` type-level statements, the convex case step by step against the proofs of
@@ -1272,8 +1282,8 @@ the session's scratch directory (`ws/U/`) until integrated.
 
 ### Resume here (cycle 10, seventh checkpoint)
 
-Verified state: every module under `proofs/` (50 files) builds with zero warnings and is walked
-by the axiom audit (3282 declarations); the harness (110 registered tests: 92 that must survive,
+Verified state: every module under `proofs/` (51 files) builds with zero warnings and is walked
+by the axiom audit (3326 declarations); the harness (110 registered tests: 92 that must survive,
 18 documented refutations) and its mutation tests (207 mutations: 206 caught, one expected
 pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 (R5, R6,
 R_P), §11.18 (R7), §11.19 (R8: "proved"), §11.20 (R9: proved; two gaps closed).
@@ -1305,9 +1315,9 @@ and workstream U (item 6, in the model of rounds); see the entry above.  In prio
    sense of `GamePair.lean` (continuity, the two zeros, the two linear bounds; for the field
    also the closed form of Theorem 11.59(b)) and the shear law for their non-adaptive
    exponents — the abstract part is done (§11.21), these identifications are on paper.
-   (Done after the checkpoint: Lemma 11.70(a), (b) and the quantitative step of the Fekete
-   lemma for sets, `proofs/Frontiers/CoverStability.lean`; not done: the existence and
-   convexity of the Hausdorff limit.)
+   (Done after the checkpoint: Lemma 11.70(a), (b), `proofs/Frontiers/CoverStability.lean`, and
+   Fekete's lemma for sets with the covering-number sandwich, `proofs/Frontiers/SetLimit.lean`.
+   Still on paper: Lemmas 11.67 and 11.68 — the lattice input.)
 5. **A weighted Harper-type inequality** for the type-uniform measure and the slack of the
    flat-histogram reference (finite `n`, usable error term) — it would make the nested
    algorithm with a field explicit and is the missing ingredient for bounded accuracies

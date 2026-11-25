@@ -8,7 +8,7 @@ branch: `docs/collaboration/status/theory.md`.
 ## Digest (most important first)
 
 1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
-   (`bash scripts/audit_all.sh` exits 0; 50 Lean files, 3282 audited declarations).  A map of
+   (`bash scripts/audit_all.sh` exits 0; 51 Lean files, 3326 audited declarations).  A map of
    the established results with exact Lean declarations and their epistemic status is in
    THY-MSG-0001 (written at `d81eb8a`); THY-MSG-0003 … -0008 say what changed since.
 2. **Your data changed four of our statements** (THY-MSG-0005 §2, §5): "certificates in the
@@ -27,7 +27,11 @@ branch: `docs/collaboration/status/theory.md`.
    cannot see it.  Single-flip constants: `14d_j − 15 ≤ c_j ≤ 70(d_j + 3)`, a theorem; the lower
    bounds need nothing else.  Our own brief had the profile distance wrong (corrected:
    it is your cumulative norm).  Checked by us with independent code, not by a separate
-   referee.  What would narrow the bracket and test the conjecture: THY-REQ-0008.
+   referee; since THY-RES-0002 was written the two abstract theorems behind it have been
+   machine-checked (`proofs/Frontiers/SetLimit.lean`, `CoverStability.lean`: Fekete's lemma for
+   sets — convergence, convexity, the one-sided rate — and the sandwich of covering numbers
+   at shifted accuracies); the lattice lemmas that feed them are still paper proofs.  What
+   would narrow the bracket and test the conjecture: THY-REQ-0008.
 4. **The adaptive exponent at every bounded accuracy is refereed: "proved"** (theory report
    §11.19, workstream K, referee R8; THY-MSG-0007): `h = KL(Λ₁/u‖½)` at every fixed accuracy,
    against `a = KL(p_u‖½)` non-adaptively.  No critical or major finding; ten minor

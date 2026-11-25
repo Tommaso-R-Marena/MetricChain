@@ -47,6 +47,7 @@ import proofs.Frontiers.BoundedAccuracy
 import proofs.Frontiers.FieldShift
 import proofs.Frontiers.GamePair
 import proofs.Frontiers.CoverStability
+import proofs.Frontiers.SetLimit
 import proofs.AuditCommand
 
 /-!
@@ -431,6 +432,17 @@ import proofs.AuditCommand
 #print axioms MetricChain.CoverStability.approx_multiple
 #print axioms MetricChain.CoverStability.approx_nested
 #print axioms MetricChain.CoverStability.approx_nested_example
+#print axioms MetricChain.SetLimit.isClosed_lowerLimit
+#print axioms MetricChain.SetLimit.mem_lowerLimit_of_tendsto
+#print axioms MetricChain.SetLimit.hausdorff_limit
+#print axioms MetricChain.SetLimit.SuperAdditive.approxNested
+#print axioms MetricChain.SetLimit.SuperAdditive.combination
+#print axioms MetricChain.SetLimit.SuperAdditive.hausdorff_limit
+#print axioms MetricChain.SetLimit.SuperAdditive.dist_limit_le
+#print axioms MetricChain.SetLimit.SuperAdditive.convex_limit
+#print axioms MetricChain.SetLimit.SuperAdditive.cover_sandwich
+#print axioms MetricChain.SetLimit.superAdditive_example
+#print axioms MetricChain.SetLimit.one_mem_limit_example
 #print axioms MetricChain.GamePair.exactRec_congr
 #print axioms MetricChain.GamePair.HintShape.pair
 #print axioms MetricChain.GamePair.HintShape.exists_pair

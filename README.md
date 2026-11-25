@@ -52,8 +52,9 @@ proofs/Frontiers/       envelope duality, dominance calculus, free-energy sandwi
                         recursion of adaptive algorithms and its convergence — for the
                         cube and for every game function — the algebra of the two-level
                         brackets), the shift identity with a field, residual classes that
-                        are linear in features and the profile kernel, and the stability
-                        of covering numbers behind the limit theorem for chains
+                        are linear in features and the profile kernel, and the abstract
+                        limit theorems behind the limit shape of chains (Fekete's lemma
+                        for sets; stability of covering numbers)
 proofs/CertificateAlgebra.lean   executable verification kernels + Master Soundness Theorems
 proofs/AuditCommand.lean         the axiom walk (by defining module)
 proofs/AxiomAudit.lean           axiom audit of every project constant + non-vacuity witnesses
@@ -282,7 +283,10 @@ it; for unrestricted walks this is a conjecture with unconditional bounds — **
 is between 50 and 3 627 evaluations at `(L, ε₁) = (1, ½)`, where the earlier existence bound
 gave `10^{1387}`**, most likely a few hundred, and it is reached only at `10³`–`10⁵` beads,
 because the shape converges with a surface correction of exact order `N^{-1/3}`.  The
-coordinator's brief for this workstream had the profile distance wrong (D48).
+coordinator's brief for this workstream had the profile distance wrong (D48).  Machine-checked:
+the two abstract theorems behind it — Fekete's lemma for sets and the stability of covering
+numbers (`SetLimit.lean`, `CoverStability.lean`); the lattice lemmas that feed them are paper
+proofs checked numerically.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
