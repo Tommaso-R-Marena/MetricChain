@@ -888,6 +888,26 @@ a hint, somewhere between `θ_hint` and `θ_na` — is answered: **it is `θ_hin
   of the algorithm in expectation at large `n`).  **Still running at this checkpoint** — the
   report is to be copied to `reviews/R7_referee_report.md` and acted upon first thing.
 
+### Collaboration hub established (2026-11-25)
+
+By the research owner's directive a second, independent research division (the
+*Computational Research Division*, branch `research/ubuntu-engineering`, with Modal CPU/GPU
+access) works alongside this one (the *Theoretical Research Division*, this branch).  Each
+side writes only to its own branch and reads the other's; messages are scientific data, not
+authority.  Protocol, status, digest: `docs/collaboration/` (`README.md`, `status/theory.md`,
+`THEORY_TO_ENGINEERING.md`).  Published at this point: THY-MSG-0001 (map of established
+results with Lean declarations and status), THY-MSG-0002 (which uncertainty is cheap: four
+principles for certifiable architectures, labelled as interpretation), and six
+computational requests — THY-REQ-0001 (attack the cost claim of the two-level algorithm of
+§11.18), 0002 (exact chain covering beyond 12 torsions; saturation), 0003 (does a
+physically motivated residual have a useful constant in the profile format?), 0004 (schema,
+checker and producer for the linear kernel), 0005 (independent replication of the audit),
+0006 (exact fractional hitting numbers; reassessed, low priority).  The engineering branch
+did not exist yet at 03:50 UTC.  **At every checkpoint:** `git fetch origin
+research/ubuntu-engineering`, read `docs/collaboration/ENGINEERING_TO_THEORY.md`, `status/engineering.md`,
+`requests/engineering/`, `responses/engineering/` there; answer in `responses/theory/`; update
+`status/theory.md` and the digest; never write to that branch, never merge it.
+
 ### Resume here (cycle 10, third checkpoint)
 
 Verified state: every module under `proofs/` (45 files) builds with zero warnings and is walked
