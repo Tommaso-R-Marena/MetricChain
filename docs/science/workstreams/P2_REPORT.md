@@ -473,12 +473,12 @@ pair-additive residuals the constants are computed exactly for *any* length from
 
 | `g_03` on `X′` | max `c_i` by `n` | max `c_ij` | max half row sum | star at `argmin E` |
 |---|---|---|---|---|
-| Val, E / P2 (.70) | 0.61 / 1.05 (`n = 12`); 0.61 (`n = 16`) | 0.02 | 0.04 | exact, every `n ≤ 12` |
-| Leu, H / E / P2 (.60) | 0.86 / 1.28 / 1.33 (`n = 16`); 0.85 (`n = 32`, H) | 0.01–0.02 | 0.02–0.04 | exact, every `n ≤ 16` |
+| Val, E / P2 (.70) | 0.61 / 1.05 (`n = 12`); 0.61 / 1.05 (`n = 24`) | 0.02 | 0.04 | exact at every enumerated `n ≤ 12` |
+| Leu, H / E / P2 (.60) | 0.86 / 1.28 / 1.33 (`n = 16`); 0.85 (`n = 32`, H) | 0.01–0.02 | 0.02–0.04 | exact at every enumerated `n ≤ 16` |
 | Phe, H / E / P2 (.60) | 1.49 / 1.26 / 2.70 | 0.16–0.19 | 0.17–0.34 | exact |
 | Ser, E / P2 / H (.70) | 4.83 / 5.85 / 5.02 (`n = 6`); 4.83 / 5.84 / 5.20 (`n = 24`) | 0.31 / 0.25 / 0.54 | 0.53 / 0.42 / 0.81 (0.61 / 0.54 / 0.92 at `n = 24`) | exact on E and P2 at every `n ≤ 6`; on H off by 0.1–0.6 for `n = 2–5`, exact at `n = 6` |
 | Lys, H (.70) | 2.9, 6.0, 8.6, 9.2 (`n = 1…4`); 9.5, 8.7, 8.6, 9.0 (`n = 8, 12, 16, 24`) | 2.2–2.4 | 2.5 (`n = 4`) → 6.9 (`n = 24`) | fails: ε* = 1.7, 2.7, 0.5 (`n = 2, 3, 4`); 3.5–11.6 at τ = 0.60 |
-| Lys, E / P2 (.70) | 5.2 (`n = 3`), 7.0–7.5 (`n = 8–16`) / 6.4 (`n = 4`), 9.0 (`n = 8`) | 4.4 / 3.3 | 2.7 / 3.5 | E: exact at `n = 2, 4`, ε* = 1.9 at `n = 3`; P2: ε* = 0.9, 2.0, 3.6 |
+| Lys, E / P2 (.70) | 5.2 (`n = 3`), 7.0–7.5 (`n = 8–16`) / 6.4 (`n = 4`), 9.0–9.9 (`n = 8, 12`) | 4.4 / 3.3 | 2.7 / 3.5 | E: exact at `n = 2, 4`, ε* = 1.9 at `n = 3`; P2: ε* = 0.9, 2.0, 3.6 |
 | LKSE, H / P2 (.60) | 9.4 / 12.5 (`n = 5`); 11.4–11.8 (`n = 8–16`, H) | 1.4–2.6 / 2.0 | 1.3–2.4 / 1.9–2.3 | exact at every `n ≤ 6` |
 | LKSE, E (.60) | 12.5 (`n = 5`) | 1.9 | 1.5 | ε* = 0.2, 2.1, 3.2, 5.4 at `n = 3…6` |
 
@@ -491,10 +491,10 @@ format needs up to 85 evaluations at four residues (Statement 5(a)) and `λ* < 1
 Phe, Lys.  In several of these instances (Ser₆ on strand and helix, Leu₁₆ and Phe₇ on PPII)
 the minimiser of `f + g_03` differs from that of `f` (regret 0.2–3.7 kcal/mol), so the
 certificate is not a triviality.  The neutral exception is serine on the helix up to five
-residues (star off by 0.1–0.6 kcal/mol).  (iii) For poly-Lys the
-row sums (2.5–6.9) exceed the excitation energies (0.1–2.3) and the star fails by 0.5–12
-kcal/mol in 13 of the 16 poly-Lys analyses; the ball is exact by construction (`c_ijk = 0`).  (iv) `g_ipq` behaves like `g_03`
-(max `c_i` 1.0–2.7 neutral, 6.5–10 Lys, 5.9–8.4 LKSE/H; Table B of `out/tables.md`; star
+residues (star off by 0.1–0.6 kcal/mol).  (iii) For poly-Lys the row sums (2.5–6.9) exceed
+the excitation energies (0.1–2.3) and the star fails by 0.5–12 kcal/mol in 13 of the 16
+poly-Lys analyses; the ball is exact by construction (`c_ijk = 0`).  (iv) `g_ipq` behaves like
+`g_03` (max `c_i` 1.0–2.7 neutral, 6.5–10 Lys, 5.9–8.4 LKSE/H; Table B of `out/tables.md`; star
 exact in 155 of 178 analyses).
 (v) `g_99`: one star determines the residual completely (`starPart_eq_of_additive` [V]).
 
@@ -531,8 +531,7 @@ kind tried rescues the star for charged side chains: with `coul + g_GB` as resid
 is exact for all apolar instances and for serine on strand and PPII at every length (half
 row sums 0.54–0.78) and on the helix at τ = 0.70 for `n = 4–6` (it is off by 0.1–5.3 there for
 `n = 2, 3` and at τ = 0.60), but fails for Lys and LKSE beyond two residues by 0.2–212
-kcal/mol; with
-the frozen-radius term moved into the known part the remaining `g_fluct` satisfies the
+kcal/mol; with the frozen-radius term moved into the known part the remaining `g_fluct` satisfies the
 row-sum condition for Ser on the strand (0.42 against 1.02) and not on the helix (1.7–3.2
 against 0.13) nor for Lys (5.9–58).
 
@@ -547,8 +546,9 @@ user of the theory could afford; nobody has an a-priori upper bound on `c_ij` or
 GB term.  What the measurement shows is that such bounds, if proved, would not be vacuous:
 the true constants are small where the tables say so.  (iii) The product-space theorems
 were applied on a pruned product `X′ ⊂ X_τ`; a certificate over `X′` says nothing about
-`X_τ ∖ X′` (27–98 % of `X_τ` survives pruning in the Phe, Lys and LKSE instances; 100 % for
-Ser, Val, Leu).  (iv) The peptides are small and fully solvent-exposed.  In a protein
+`X_τ ∖ X′` (of `X_τ`, 0–91 % survives pruning in the Phe instances — nothing for Phe on the
+strand at τ = 0.70 from five residues on —, 47–97 % for Lys, 67–84 % for LKSE; 100 % for Ser,
+Val, Leu).  (iv) The peptides are small and fully solvent-exposed.  In a protein
 interior every atom is descreened by many side chains at once; the Born-radius response
 (Statement 8(ii)) and with it `c_ijk` must be expected to be larger there — the literature
 reports that pairwise treatments of GB lose accuracy precisely when all side chains are

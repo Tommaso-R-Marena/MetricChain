@@ -317,3 +317,26 @@ they have been corrected to approximate real times.  From here on times are read
 * RE-RUN `run_search.py --u 1 --n 1000 --phi 0.5 0.8` (the stated local command; rerun_logs/run_search.log): flat 1.0405 /
   worst 1.0466 and flat 0.7013 / worst 1.3382; all eight search optima equal the stored ones to the last bit (same numbers
   of evaluations 4002/4002/1950/1950).  54 s here.
+
+### 21:52-21:58 — record numbers traced; partial-shell control; engineering test suite
+* `check_record_numbers.py` (out_check_record_numbers.txt), all from stored files with own code:
+  M-008: 468 tasks, 5 144 256 instances, 34.8 core-hours, longest task 2241 s; M-009: 180, 1 568 160, 20.7 h, 2147 s;
+  M-010: 8, 383 424, 1.1 h, 971 s  (= ledger).  Extremes of the claims table of ENG-RES-0008 section 4 (cost over cap -10.374 /
+  -9.433 / -9.402; count (v) -0.052 / -0.051 / -0.051; ...) = stored `extremes`.  Generic timings 389/565/701 s; entropy 25 s
+  (n=5..12), 73 s, 334 s; "differ by at most 0.05 ... 0.03 at 13 and 14" (0.049; 0.031); increments 0.0132 (rho=1/2), 0.0134
+  (rho=1/4; text says 0.014, from the rounded table), +0.004; 3.1 pairs per bead, +0.12 per bead: all traced.
+* PARTIAL-SHELL CONTROL (rerun_eng_partial_shell.py; out_rerun_eng_partial_shell.{txt,json}; engineering's evaluator and search
+  re-run with a new instance family): cylinders g(a) = F(|a_{k+1..n_o}|), k = 1, 2, 4, 8, 16, 32 (level sets are not balls of the
+  outer cube; law of W = radial law of the (n_o-k)-cube), monotone profiles, both oracles, budget 2000, 6 cells:
+     u=1 n=250 phi=.60:  radial (k=0, re-run) 2.0811 = stored;  cylinders 2.0553 (all k)
+     u=1 n=1000 phi=.55: radial 1.0401 (stored 1.0402);        cylinders 0.9959 .. 0.9904
+     u=1 n=1000 phi=.80: radial 1.3382 = stored;               cylinders 1.2882 .. 1.2632
+     u=1/2 n=1000 phi=.55: 1.8285 = stored;                    cylinders 1.8285 (all k)
+     u=2 n=1000 phi=.50: radial 0.7723 (stored 0.7726);        cylinders 0.7723 .. 0.7728   (+0.0002 na above the stored worst)
+     u=1 n=4000 phi=.50: 0.6941 = stored;                      cylinders 0.6926 .. 0.6939
+  158 508 mean runs on cylinders+radial: NO claim violated; largest ln(cost) - ln(C_max) = -10.75.
+  => in these cells non-ball level sets of cylinder type never beat the radial worst case by more than 0.0002 na and often
+     cost much less (down to -0.075 na): the conclusion of ENG-RES-0008 section 5 survives this control; the cost is NOT
+     insensitive to partial shells at the 0.002 na level, though (differences up to 0.075 na, in the favourable direction).
+* RE-RUN `python -m pytest tests/eng -q` (with dia_enum/dia_flip compiled from their sources; CP-SAT from the private
+  OR-Tools): 128 passed in 11 s (rerun_logs/pytest.log).

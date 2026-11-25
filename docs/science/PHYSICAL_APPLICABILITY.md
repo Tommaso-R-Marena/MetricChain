@@ -152,6 +152,47 @@ experiment:* helix contents and their temperature dependence are measured (circu
 dichroism); a model with stated per-residue uncertainty either brackets the measurement
 or is falsified by it, whatever non-additive form its error has.  Not done.
 
+**What the measurement-side theorems of checkpoints 26–30 say, in physical terms [H —
+readings of theorems about an idealised class; none has met a measurement].**
+
+1. *Calorimetry turns a free-energy problem into an entropy problem* (addendum A16).
+   With a mean energy known, `ln Z = S − βU`, and a bound on how much one local change can
+   alter the energy bounds how ordered the ensemble can be.  Reading: a thermodynamic
+   datum fixes the free energy up to an entropy uncertainty that is set by the class
+   alone — per site, the relative entropy between a fair coin and a coin biased by one
+   envelope constant.  For weak residuals (`βc ≲ 1`) that is about `(βc)²/8` per site and the
+   datum adds almost nothing to what cheap sampling already gives; for strong ones it is
+   decisive.  **Caveat that matters physically:** the theorem's datum is the mean
+   *residual* energy `E_μ g`, which no instrument measures; the measurable mean energy is
+   that of the whole system including solvent and momenta.  With a known part that has
+   interactions the entropy bound is not available in this form (not proved).
+2. *A hidden state compatible with a calorimetric datum must be as deep as the visible
+   one and exponentially wider* (A16, plateau twin).  Reading: calorimetry cannot exclude
+   a second basin of the same depth (already in §5 of the note), and what it does
+   exclude at coarse accuracy are *narrow deep* hidden states; the hidden states that
+   survive are broad, hence easier to find by search — in the model, by a computable
+   factor.
+3. *Local averages with a bias do not rescue the worst case, and do help at the model
+   one believes in* (workstream F; theory report §11.29).  With a field, exact one-body
+   averages leave both class exponents unchanged: there is an ensemble — a mixture of
+   two product ensembles — whose one-body averages equal those of the same ensemble with
+   a hidden state added.  At the unperturbed model, however, the same averages exclude
+   part of the hidden states: the cost exponent falls by at least 2–17 % in a weak field
+   (`p = 0.3`, `u = 1`) and by at least 21–100 % in a strong one (`p = 0.1`, `u = 2`), and to
+   zero in a window of accuracies.  Reading: order parameters and chemical-shift-like
+   one-site averages are informative *relative to a trusted model* (how much depends on
+   the strength of the field) and uninformative as
+   a guarantee over a class — the instance-wise statement is the meaningful one, as the
+   theory division also concludes.
+4. *The uncertainty of an observable free-energy difference is a transport problem*
+   (theory report §11.28; our A11, A13).  The largest shift of the free-energy difference
+   between two macrostates that a class of model errors allows is attained by moving
+   weight from one macrostate to the other along the cheapest routes of the envelope;
+   for a threshold of an order parameter the extremal error is a uniform field.  This is
+   the quantity an alchemical or conformational free-energy calculation should quote as
+   its model-error bar, and it is computable with ordinary partition functions in the
+   monotone case.
+
 ## 6. What must not be claimed
 
 * That a certified minimum is a predicted structure.
@@ -162,6 +203,11 @@ or is falsified by it, whatever non-additive form its error has.  Not done.
   on the Hamming graph of rotamer labels is a barrier of the molecule.
 * That low-order agreement with averaged data establishes order or disorder (Theorem 2),
   or that a profile match establishes a structure (homometry).
+* That a calorimetric measurement supplies the datum of addendum A16 (it supplies the
+  mean energy of everything, not the mean residual energy of a model).
+* That "local data are worthless" — the theorem is about the worst member of a class;
+  at a trusted model they exclude a part of the hidden states that is small in a weak
+  field and large in a strong one (workstream F).
 * That anything here has been compared with a measurement.  Nothing has.
 
 ## 7. Under which physical assumptions do the exponential lower bounds stop applying?
