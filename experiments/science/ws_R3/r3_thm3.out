@@ -92,15 +92,26 @@
    t=2 rho=0.45: 20.8719 1.1821 1.0163 1.0016   | (2t-1)!!/t! = 1.500 (factor by which the moment bound is weaker)
    t=3 rho=0.1: 1.0181 1.0019 1.0002 1.0000   | (2t-1)!!/t! = 2.500 (factor by which the moment bound is weaker)
    t=3 rho=0.3: 1.2691 1.0229 1.0023 1.0002   | (2t-1)!!/t! = 2.500 (factor by which the moment bound is weaker)
-Traceback (most recent call last):
-  File "/home/user/MetricChain/experiments/science/ws_R3/r3_thm3.py", line 199, in <module>
-    asymptotics()
-    ~~~~~~~~~~~^^
-  File "/home/user/MetricChain/experiments/science/ws_R3/r3_thm3.py", line 170, in asymptotics
-    assert all(s >= Fr for s in samples) and Fr > 0, (n, t, rho, samples)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: (100, 3, 0.45, [166751, 156849, 56161, 28063, -273, -319])
+   t=3 rho=0.45: nan 1.8879 1.0563 1.0054   | (2t-1)!!/t! = 2.500 (factor by which the moment bound is weaker)
+== exact LP optimum / Theorem-3 bound for larger n (how sharp is the bound among ALL measures?)
+   k=2 t=1 rho=0.0: LP/bound at n=50,100,200,400: 0.9808 0.9902 0.9950 0.9975
+   k=2 t=1 rho=0.1: LP/bound at n=50,100,200,400: 0.9810 0.9902 0.9951 0.9975
+   k=2 t=1 rho=0.3: LP/bound at n=50,100,200,400: 0.9499 0.9727 0.9857 0.9927
+   k=4 t=2 rho=0.0: LP/bound at n=50,100,200,400: 1.0000 0.9804 0.9903 0.9950
+   k=4 t=2 rho=0.1: LP/bound at n=50,100,200,400: 0.9806 0.9806 0.9902 0.9950
+   k=4 t=2 rho=0.3: LP/bound at n=50,100,200,400: 0.8761 0.9352 0.9685 0.9846
+   k=6 t=3 rho=0.0: LP/bound at n=50,100,200,400: 0.9436 0.9818 0.9872 0.9944
+   k=6 t=3 rho=0.1: LP/bound at n=50,100,200,400: 0.9439 0.9823 0.9867 0.9941
+   k=6 t=3 rho=0.3: LP/bound at n=50,100,200,400: 0.7249 0.8911 0.9484 0.9768
+   first radius r at which F_t(r) <= 0 (the theorem needs r below it):
+     n=24: t=1: r0=13 (n/2 - r0 = -1.0), t=2: r0=11 (n/2 - r0 = 1.0), t=3: r0=9 (n/2 - r0 = 3.0), t=4: r0=8 (n/2 - r0 = 4.0)
+     n=100: t=1: r0=51 (n/2 - r0 = -1.0), t=2: r0=46 (n/2 - r0 = 4.0), t=3: r0=42 (n/2 - r0 = 8.0), t=4: r0=39 (n/2 - r0 = 11.0)
+     n=1000: t=1: r0=501 (n/2 - r0 = -1.0), t=2: r0=485 (n/2 - r0 = 15.0), t=3: r0=474 (n/2 - r0 = 26.0), t=4: r0=464 (n/2 - r0 = 36.0)
+== odd k: with the extended code the bound of Theorem 3 is attained up to a constant as well
+   RM(1,4): n=16, k=3, t=1: 1/|C| = 1/32, Rao bound 1/M_1 = 1/17, note's construction would have |C| <= (2n)^2 = 1024
+   RM(1,5): n=32, k=3, t=1: 1/|C| = 1/64, Rao bound 1/M_1 = 1/33, note's construction would have |C| <= (2n)^2 = 4096
+   RM(1,6): n=64, k=3, t=1: 1/|C| = 1/128, Rao bound 1/M_1 = 1/65, note's construction would have |C| <= (2n)^2 = 16384
 
-real	0m6.102s
-user	0m1.667s
-sys	0m0.276s
+real	0m5.487s
+user	0m1.702s
+sys	0m0.154s

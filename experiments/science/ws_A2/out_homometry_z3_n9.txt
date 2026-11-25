@@ -1,0 +1,20 @@
+# lattice Z^3, point group of order 48, cutoff S_c = 5 (squared distances < S_c)
+# N  c_{N-1}/|first step|  W_N  S_N  D_N  homometric_groups  P_all  P_sep3
+4 25 6 5 5 0 5 3
+5 121 22 14 14 0 11 8
+6 589 92 47 43 4 28 22
+#   example of non-congruent site sets with equal distance multisets (N=6):
+#      ((0, 0, 0), (0, 0, 1), (0, 0, 2), (0, 1, 0), (1, 0, 0), (1, 1, 0))
+#      ((0, 0, 0), (0, 0, 1), (0, 0, 2), (0, 1, 0), (0, 1, 1), (1, 0, 2))
+#   sizes of the largest homometric groups: [2, 2, 2, 2]; site sets in groups: 8
+7 2821 402 184 171 12 68 54
+#   example of non-congruent site sets with equal distance multisets (N=7):
+#      ((0, 0, 0), (0, 0, 1), (0, 0, 2), (0, 1, 0), (0, 1, 1), (0, 2, 1), (1, 2, 1))
+#      ((0, 0, 0), (0, 0, 1), (0, 0, 2), (0, 1, 0), (0, 1, 1), (0, 2, 1), (1, 0, 2))
+#      ((0, 0, 0), (0, 0, 1), (0, 0, 2), (0, 1, 0), (0, 1, 2), (1, 0, 0), (1, 1, 0))
+#   sizes of the largest homometric groups: [3, 2, 2, 2, 2, 2, 2, 2, 2, 2]; site sets in groups: 25
+8 13565 1832 768 679 69 153 138
+#   example of non-congruent site sets with equal distance multisets (N=8):
+#      ((0, 0, 0), (0, 0, 1), (0, 0, 2), (0, 0, 3), (0, 1, 0), (0, 1, 1), (0, 2, 1), (0, 3, 1))
+#      ((0, 0, 0), (0, 0, 1), (0, 0, 2), (0, 0, 3), (0, 1, 0), (0, 1, 1), (0, 1, 3), (0, 2, 3))
+#   sizes of the largest homometric groups: [6, 4, 4, 4, 3, 3, 3, 3, 3, 3]; site sets in groups: 158

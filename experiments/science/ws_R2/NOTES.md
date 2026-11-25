@@ -248,3 +248,25 @@ Did NOT read dia_enum.c (will write my own enumerator first).
   correctly (liminf/limsup, "off a countable set").
 * Definition check (§11.2, Thm 11.4): N_cov <= N_point <= N_cov + 1; §11.22's "certifies iff covered"
   is the covering number (a certificate needs in addition a minimiser among the centres): wording.
+
+* `r2_outer_on_witnesses.py`: all twelve rows of K2 and the three gauche bounds evaluated on the ten
+  verified bridges (N up to 166 199), two of my lamellae (48 174, 60 548 beads) and the helix: smallest
+  slack >= 0 everywhere (inner and outer bounds are mutually consistent on large explicit walks).
+* Web (generic queries only): Kucherenko–Wolf arXiv:1210.0135 [abstract]: generalised rotation sets
+  are compact convex; Permuter–Weissman arXiv:0708.0271v1 Appendix IV Lemma 23 + Cor. 24 [full text of
+  lemma and proof, pdftotext of the fetched PDF]: sup-additive bounded sequences of sets in R^2
+  containing the origin converge to cl ∪ A_n, limit convex => an exact set-valued Fekete lemma is in
+  print (information theory).  Kanamori/configuration polytope: snippets only.
+* README.md written for the directory.
+
+## Finite-N constants for the marked programme (new; `r2_lp_marked_finite.py`)
+
+Derivation: F := c.f + c_g fg − y0[v] − Σ y_k r_k(star_v); orbit average <= 0 on regular configs (exact);
+Σ ν̄ r_k = 0 exactly (star marginal S4-invariant incl. when w is an end); <= 16 irregular oriented bonds;
+=> c.e + c_g g <= y0 N + 4C, C = max F over the 736 irregular configurations.
+  rows (c;b): K := 4C + c3 + 2c8 = 7, 22, 28, 50, 23, 35, 53 [(-3,2,-1)], 65 [(-3,4,-3)], 71, 26, 70, 125
+  gauche: g >= 2h11-5h3-8N-143; g >= 2h11-h8-7N-70; g >= h11+h8-4h3-7N-128.
+Tested: all classes N<=27, 400 random walks, ten verified bridges: hold (far from tight at small N).
+Finite-N volume bounds with K1 rows (site constants) + the two extra rows (53, 65):
+  N>=100: 4650 / 30352 / 110 / 486;  N>=1000: 3728 / 23978 / 94 / 402;  N>=1e4: 3636 / 23342 / 92 / 393;
+  N>=1e5: 3627 / 23279 / 92 / 392.

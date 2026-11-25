@@ -261,3 +261,100 @@ allow this (dead-end elimination shrinks the domain before the residual is touch
 pilot did not explore it.
 
 ---
+## 2.B The physical reading of the mathematics
+
+One row per mathematical object.  "Pilot" refers to the measurements of §§2–3.
+
+| # | mathematical object | physical counterpart | the identification is valid when | what is lost | what must be measured or certified to use it |
+|---|---|---|---|---|---|
+| 1 | finite configuration space `X = ∏ D_i` (sites × states; theory report §1) | a discretised conformation space: rotamers of side chains on a fixed backbone; torsion wells (rotational-isomeric-state models); voxels of torsion space; lattice walks | every state is a cell of the continuous space on which the energy can be *enclosed* (`voxel_boltzmann_bounds` [V] needs `E_lo ≤ E ≤ E_hi` on the cell and its measure), the cells are products over sites (`certified_torsion_partition` [V]), and bond lengths/angles are either rigid or integrated out into the known part | vibrational entropy and relaxation inside a cell; bond-angle flexibility (a rigid-geometry map forbids 59 % of the `(φ,ψ)` plane of the dipeptide and puts α_L 6–10 kcal/mol too high); the Jacobian of rigid constraints; kinetics | interval enclosures of every energy term over every cell — these widen with the lever arm (cell width × arm length); pilot: along one torsion `g_GB` changes by up to 20 kcal/mol/rad, so a cell must be ≲ 2° wide for `k_BT` resolution of the residual alone; the excluded (clash) cells; the product structure — pilot: only 41 % of the A3 grid of the hexapeptide is clash-free, the domain is not a product |
+| 2 | known part `f = Σ h_i(x_i) + Σ J_ij(x_i, x_j)` | a molecular-mechanics energy.  It is pairwise in *atoms*; it is pairwise in the *site variables* exactly when each atom's position depends on one site: fixed-backbone side-chain placement (every side-chain atom depends on its own rotamer), rigid-body pose tables, lattice or contact models written in bead positions | fixed backbone (or a finite set of backbones treated as one extra site); force field without many-body terms; then `h_i`, `J_ij` are sums of atom–atom terms and exact | for a flexible backbone nothing is pairwise in torsions: the distance of two atoms depends on every torsion between them.  Pilot: the vacuum ff14SB energy of the tetrapeptide has `c_ij(f)` up to 25 kcal/mol, and its best pairwise-in-torsions approximation leaves RMS 2.1 and sup-optimal 6.1 kcal/mol — the "known part" of the theory does not exist in backbone torsion variables | rational tables with outward rounding (straightforward at rotamer *points*); over voxels, interval evaluation of Lennard-Jones and Coulomb terms; a statement of which terms were moved into the residual |
+| 3 | residual `g = E − f` | continuum-solvent polarisation (GB, PB: many-body through the dielectric boundary); explicit polarisation; quantum-chemical minus force-field energy; a learned correction; backbone-relaxation energy; the difference of two force fields | the split is a *choice*: `g` should be the part that is expensive, non-decomposable, or uncertain | the theory treats `g` as a black box known through class membership and point evaluations; all structure of the functional form (pair-additivity in atoms, locality in space, the anticorrelation of polarisation with Coulomb energy — pilot: `c_i(Coulomb + GB)` is half of `c_i(GB)`) is lost unless it is put into the class | which class, with which constants (this report: Statements 1–5); the split itself can be optimised (screened Coulomb in `f`) |
+| 4 | envelope `d` / class: bounded differences `c_i`; torsion-space Lipschitz constants; mixed differences `c_ij`; profile slope `L` | an a-priori worst-case bound on how much the correction can change when one degree of freedom changes — a *sup-norm* error bar | the bound holds for **all** pairs of configurations of the domain | typicality and correlation: force-field accuracy is quoted as RMS error; pilot: sup/RMS is 4.2 for single flips of `g_GB` at five residues (27.5 against 6.5 kcal/mol) and 8.4 for the profile remainder (2.19 against 0.26); the exact Jensen gap is 2.3 nats where the class allows 178 | an *upper* bound: interval arithmetic over the domain or a proved Lipschitz property of the functional form, plus (for Corollary 4.7) inertia bounds.  None exists for a production force field.  For torsion-refit differences the bound is elementary: `g_99` is a trigonometric polynomial of φ with range 1.115 kcal/mol on the whole circle (§3.6) |
+| 5 | anchors `(a, g(a))` | single-point evaluations of the expensive model at chosen conformations: a GB/PB solve, a quantum-chemical single point, an inference of a learned potential.  No experiment measures `g` at a chosen conformation | the evaluation is exact at exactly that configuration (or comes with an interval: the kernels accept interval anchors) | convergence and discretisation error of the expensive calculation; for voxels a point value is not an enclosure | the number of evaluations is the theory's cost; the search over `f` (NP-hard, theory report §8) is not counted |
+| 6 | `min E` | the global minimum-energy conformation of the *model* on the discretised space | it predicts a structure only if (a) the Gibbs weight of its basin dominates and (b) the model error is below the gap to competing basins — which is the theory's own sharpness condition (Theorems 2.4, 11.7 [V]) | pilot: for the pentapeptide the helix is the minimum in vacuum and PPII with GBn2, 0.46 kcal/mol apart; the uncertainty constants are 17–27 kcal/mol for the solvent term and 3–5 kcal/mol between charge models: the minimiser is not a model-robust object for a flexible peptide | the gaps of the known part against the constants, site by site or droplet by droplet (Theorem 11.39) |
+| 7 | `ln Z_β` | conformational free energies | **observable**: differences between macrostates of one model (populations of basins; binding constants as ratios of partition functions) and between thermodynamic states (temperature, and gas phase → solvent: if `f` is the gas-phase energy and `g` a solvation potential of mean force, `ln Z(f+g) − ln Z(f)` is `−β` times a hydration free energy).  **Not observable**: the absolute `ln Z` of a discretised model (depends on cell volumes and the energy zero), and `ln Z(f+g) − ln Z(f)` when `g` is a model correction (force field → better force field): a model-to-model free energy | in differences, correlated errors cancel physically, but not in a first-order class ("the sum of the two thresholds, no cancellation", theory report §11.13) | the accuracy that matters is ≈ 1 kcal/mol = 1.7 `k_BT` on differences; the class threshold measured here is 43–48 nats per residue |
+| 8 | inverse temperature `β`; the scale `u = βc` | at 300 K, `1 kcal/mol = 1.68 k_BT` | — | the theory report tabulates exponents at `u = 0.5–2.8`, i.e. `c = 0.3–1.7 kcal/mol` | pilot: `βc_i = 15–53` for the solvent term (the theory's zero-temperature regime: `ln cosh(u/2) ≈ u/2 − ln 2`), `2–10` between charge models, `1.1–4.3` between force fields of one lineage |
+| 9 | the hint (an instance handed to an algorithm that must still be correct on the class; §11.10) | a surrogate of the residual: a cheaper solvent model, a fitted pair-additive approximation, a learned potential, or the output of a heuristic search, which expensive evaluations then spot-check | the surrogate is free and correctness is demanded on the class, not on the surrogate | — | pilot: a fitted typed pair model predicts `g_GB` to 0.26 kcal/mol RMS (max 2.2) — a good hint; the theory's price for checking it is set by the class, not by the quality of the hint |
+| 10 | product landscapes (additive `f`, independent sites); the cube | independent degrees of freedom: side chains that do not interact (far apart on a fixed backbone), independent rotors on a stiff scaffold, independent two-state titration or tautomer sites (the cube), the reference system of a mean-field theory | couplings small against site gaps (a Dobrushin-type condition) | cooperativity, excluded volume, phase transitions.  Pilot: a peptide backbone is not product-like — in the helix basin of the hexapeptide 11 of 12 single-torsion excitations are sterically excluded or cost 8–20 kcal/mol, while the collective excitation to PPII costs only a few kcal/mol in total | the exponents `R*`, `R_β` are properties of this idealisation; for a chain the relevant theorems are 11.39–11.40 (droplets) and the general Theorem 11.6 |
+| 11 | the lattice chain of §11.22 (diamond lattice, trans/gauche, pair counts at three distances, known part `e·#gauche`) | a rotational-isomeric-state homopolymer with excluded volume and a three-shell contact energy: a coarse-grained model of collapse and of stiff attractive chains | questions about scaling and the thermodynamic limit of a homopolymer | chirality, sequence, hydrogen-bond directionality, continuous distances (off-lattice the profile is a function and the number of features grows with the chain) | whether a real residual depends on the conformation through pair-count profiles: pilot — with one pair type, as in the lattice model, not at all (remainder = total variance); with 36 atom-type pairs and ≈ 40 distance bins, to 0.26 kcal/mol RMS |
+| 12 | second-order class (`c_ij`), sparse or dense (§§11.7, 11.12) | "the correction is pairwise in the site variables up to `c_ij`" | sparse or weak: corrections that are local in the sequence (pilot: `g_19`, exactly one table per residue) | — | pilot: for the solvent term in backbone torsions the constants are dense and large (Statement 2) — the unfavourable case of Theorem 11.32 |
+| 13 | linear class `g = θ·F`, `θ` in a box (Theorem 11.47); profile class (Theorem 11.48) | an energy model that is linear in its parameters with parameter uncertainty: torsion Fourier amplitudes, CMAP grid values, products of partial charges, Lennard-Jones coefficients; contact potentials; linear machine-learned potentials | the features are known and the remainder is small in sup norm | steep short-range terms (a Lipschitz bound in `s = r²` must depend on distance); many-body terms | pilot: same-lineage force-field differences are exactly of this kind (Statement 3); the solvent term is so up to `η_RMS = 0.26`, `η_sup ≈ 2–6 kcal/mol` at five residues with ≈ 10³ coefficients; the sup remainder must be *bounded*, not sampled (Statement 5) |
+| 14 | certificate and kernel (rational arithmetic, soundness theorem) | a proof-carrying computation about the model | always — it is mathematics | it certifies nothing about nature: every input (tables, constants, anchors) is a modelling statement | the inputs |
+
+### Three questions of the brief
+
+**(i) For which physical question, system size and accuracy could a certificate be produced
+today, with constants one could actually certify?**
+*(a) Fixed-backbone side-chain placement with a pairwise force field and no residual.*  Here
+row 2 holds exactly, the tables are evaluated at rotamer points (no voxel enclosure, no lever
+arm), and the certified statement is "this assignment is the global minimum of this rotamer
+model".  The sizes are those of the kernel, not of the physics: the theory report (§12 item 7)
+states that kernel evaluation does not scale and that no certificate producer at realistic
+sizes exists; the comparison to make is with existing exact solvers for this problem (dead-end
+elimination with A*, cost-function networks, integer programming), which routinely solve
+instances with tens to hundreds of positions **[K, from memory — unverified in this
+workstream]**.  *(b) Robustness of a minimiser against a same-lineage reparametrisation.*  The
+constants of `g_99` are certifiable today and for every chain length — a one-dimensional
+trigonometric polynomial with range 1.115 kcal/mol (§3.6) — and Theorem 11.7 then decides,
+site by site, whether the minimiser can change.  On the A3 grids every site is sharp for
+`n ≤ 4` (`c = 0.64` against gaps `≥ 0.68`), by a margin of 0.04 kcal/mol at the tightest site:
+a true but fragile certificate.  *(c) Conformer ranking of a small molecule with an expensive
+correction.*  This is the regime of Statement 4: `βc_i ≈ 2–10`, about half of the torsions
+sharp, certificates of about ten evaluations among 3 844 conformations at eight torsions —
+*given* the constants.  That is the first-order format doing something useful, and it is the
+provable version of what conformer workflows do by hand (re-rank everything within an energy
+window by the expensive method; the theory says the window is the envelope distance to the
+incumbent, not a fixed number of kcal/mol).  The constants are not certified for any
+quantum-chemical residual; the pilot's stand-in is a second force field.  *(d) Coarse-grained
+chains with contact potentials of unknown strength.*  The class is exact by construction and
+rank-many evaluations suffice; this is synthetic.  **In short: today a certificate with
+certified inputs exists only where there is no residual, or where the residual has an explicit
+analytic form (torsion refits, parameter boxes).  For a continuum-solvent term nobody has a
+certified constant, and the measured ones put the per-torsion format out of reach beyond three
+or four residues.**
+
+**(ii) Which results are resolution statements about models rather than algorithms, and what
+do the measured numbers say?**
+Resolution statements: the sharp-minimum and contact-set theorems (2.3, 2.4, 11.2, 11.7: with
+uncertainty `c_i` per site the model determines its own minimiser iff every site — on a chain,
+every droplet — is sharp); thermal contact (11.12: the interval of Gibbs probabilities of a
+state over the class); the free-energy sandwich and its exact constant (3.1: `Σ ln cosh(βc_i/2)`
+is the largest free-energy shift the class allows at a given reference average); Theorem 11.35
+(Boltzmann averages are uncertain over most of their a-priori range).  These say what *any*
+user of the model can conclude from class membership, whatever they compute.  The lower bounds
+on evaluations (11.6, 11.8, 11.13, 11.23–11.25) are information statements of the same kind:
+they bound every algorithm.  Algorithms proper are the kernels, learn-then-cover, the hedged
+spot-check and the nested samplers.  The measured numbers say: for the solvent residual
+**typical sites are not sharp** (ratio of gap to constant 0.03–0.47 in the extended basins,
+and the minimiser itself changes between `f` and `f + g` at `n = 3, 4, 5`); for a change of
+charge model about half the torsions are sharp (the ψ torsions, whose second well lies 4.7
+kcal/mol up; the φ torsions, where the β and PPII wells differ by 0.7–1.4 kcal/mol, are not);
+for a same-lineage torsion refit all are.  In the helix basin single-site sharpness is
+vacuous and the relevant quantity is collective (§3.5).
+
+**(iii) What is the smallest set of additional physical assumptions under which the
+exponential lower bounds stop applying, and does the real residual satisfy them?**
+The lower bounds are theorems about first-order classes, in which an evaluation informs only
+about a neighbourhood.  They stop applying as soon as the class is *finite-dimensional in
+known features with a small sup-norm remainder* (Theorem 11.47(c),(d)).  Physical assumptions
+that give this: (A1) finite interaction order in the site variables with known supports;
+(A2) pair-additivity in atoms with radial functions from a controlled family; (A3) locality
+along the chain.  Not sufficient alone: smoothness (Theorem 11.34 is exponential on the torus)
+and weak coupling unless it is weak in the sense of Theorem 11.33 (`Σ_j tanh(βc_ij/4) < 1`).
+
+| assumption | `g_99` | `g_19` | `g_03`, `g_ipq` | `g_GB` |
+|---|---|---|---|---|
+| (A1) low order in torsions | exact, order 1 | exact, order 2 inside a residue | approximately: pairs of residues leave RMS 0.12, max 1.4 kcal/mol (`n = 5`) | no: torsion pairs leave RMS 2.1, max 13; residue pairs RMS 1.1, max 9 |
+| (A2) typed pair-additivity in atoms | (trivially) | (no: a torsion term) | yes to RMS 0.11, max 1.3 (36 types, `n = 5`) | in RMS yes (0.26), in sup norm to 2–6 kcal/mol; the remainder grows with the chain (§3.4) |
+| (A3) locality along the chain | yes | yes | no (`c_ij` decays to 0.7 kcal/mol but not to zero) | no (`c_ij = 7` kcal/mol at separation 7) |
+| weak coupling, `Σ_j tanh(βc_ij/4) < 1` | 0 | 0.78 | 4.1 | 7.0 |
+
+So the real solvent residual leaves the first-order world only through (A2), and there the
+theory's replacement guarantee carries an accuracy floor of at least `2η_sup ≈ 4–12 kcal/mol`
+at five residues (Theorem 13 of the theory division's workstream P: `η(1 + ‖λ‖₁)`), far above
+`k_BT`.  The statement "GB is close to pair-additive" is true in the sense in which force
+fields are judged (RMS) and false in the sense in which certificates need it (sup norm, with
+a *proved* bound).
+
+---

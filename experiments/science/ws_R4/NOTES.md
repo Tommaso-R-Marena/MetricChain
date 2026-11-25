@@ -58,3 +58,43 @@ MY VALUES at u = 1:
   theta -> Xi(theta, phi_1) is decreasing on (0, phi_2 a) on a 60-point grid (justifies bisection).
 => agree with the report's 0.359 / 1.37 / 0.64 / 0.624 / 0.346 / 1.38 / 0.65 / 0.618 to all printed digits.
 Other slopes (0.5, 2, 3) to be run in the background later.
+
+## Step 3 — exact finite-n twins (twins_exact.py; own implementation from the statement of Thm 11.86)
+Outputs: out_twins_u1_small.txt, out_twins_u1_large.txt, out_twins_u2.txt.
+For each (n, split n1/n in {0.45,...,0.65}): bisection for the largest budget T with gap > 1; ALL structural
+checks pass on every pair (u-Lipschitz in each argument: FD, FS, Fcap; FD=FS=g1 on W1; FD=FS on V2; W1 subset V2;
+A(F_S) <= (n1+1)(n2+1) and every type mass <= 1; p1 <= (n1+1)(n2+1)e^-T; p2 <= (n2+1)e^-T; twins differ only
+outside V2).
+  u=1:  n=400  E=0.03005 (n1=180)   all-algorithms 0.03477   | report: 0.0301 / 0.0348
+        n=800  E=0.03411 (n1=360)   all 0.03234              | report: 0.0341 / 0.0323
+        n=1600 E=0.03543 (n1=800)   all 0.03092              | report: 0.0354 / 0.0309
+        n=3200 E=0.03684 (n1=1760)  all 0.03011              | report: 0.0368 / 0.0301
+  u=2:  n=200  E=0.11294 (n1=90)    all 0.11164              | report: 0.1129 / 0.1116
+        n=400  E=0.11520 (n1=180)   all 0.10441              | report: 0.1152 / 0.1044
+        n=1600 E=0.12117 (n1=880)   all 0.09934              | report: 0.1212 / 0.0993
+=> the coordinator's table in section 11.24 REPRODUCED to all printed digits with independent code.
+Observation: at n=400,u=1 the two-round bound (0.0301) is BELOW the bound for all algorithms (0.0348): the
+twins say nothing there; crossover between n=400 and 800 (as the report says).
+Observation (headline): the comparison at n=3200 is between two LOWER bounds.  No adaptive algorithm is known to
+cost less than e^{0.037 n} at n=3200 (section 11.19: two levels cost 0.55a=0.061n at n=4000 at the flat instance,
+three levels 0.46a=0.051n).  So the finite-n sentence is not a separation at n=3200; the separation is asymptotic.
+
+## Step 4 — Theorem 11.84 against Algorithm 2L+ as written (K_REPORT §2.2, read in full §§1-3.4)
+Paper check, line by line:
+* Claim A (on G'): call (i,l) at level j, pass M >= i  =>  M <= max{K, 2 nu s_j/(l_j e^b)} (K1(iv), l_j = value at
+  entry of level j, which is what step (e) uses); need l_j >= lambda_j: populated i': q <= pbar/c_eta, l >= s e^-b pbar;
+  negligible i': s q <= e^b l/((1-eta)nu_0) <= e^b l; q_i' >= p(s_i') (Step 2); (V3') gives p(s_i') >= N_L/((1+eta)M').  OK.
+* Claim B: stored lower ends >= s_0; member i>K with witness j has L_i > s_j e^{-x_{l-1}} PROVIDED the stored
+  bracket of rung l-1 has ratio <= e^{x_{l-1}}; counted in N_L(i',M*); M* > K (the parenthesis "< K/2" in U_REPORT
+  is garbled; correct reason: i > K and i <= 2 nu s_j/(lambda_j e^b) force 2 nu s_j/(lambda_j e^b) > K);
+  M* <= 4 nu s_j/(lambda_j e^b); count <= 4(1+eta)c_eta^-1 e^lambda nu e^{x_{l-1}}.  OK.
+  !! "in every run" (theory report (ii)) needs the stop rule "a stored bracket of rung l-1 wider than e^{x_{l-1}}
+  => stop BEFORE stage l"; U_REPORT puts this rule under *Output*, the theory report omits it.  Minor (an explicit
+  abort "if |C_l| > N_l" repairs it).
+* Rounds: base bracket (Prop. K0) has M fixed in advance from (d,x,delta') => one batch.  Stage 1 = reference
+  point + trivial brackets + I_1 on all M_max fibres: no evaluation depends on another of the same stage.  OK.
+* Two rounds: L=2, x_1 = xi n_i (one-round bracket, cost e^{n_i theta_na(xi)}), x_2 = b = x/2 (one-round bracket of
+  bounded accuracy, e^{n_i a + O(sqrt n_i)}), M_max = e^{phi a n + O(sqrt n)}, |C_2| <= min(M_max, poly e^{xi n_i})
+  => exponent max{phi a + (1-phi) theta_na(xi), min(phi a,(1-phi)xi) + (1-phi) a}.  OK.
+* Looseness: "Theorems 11.54 and 11.58 hold ... independently of n" — the o(n) in those theorems needs the number of
+  levels -> infinity; what holds with n-independent rounds is: for every eta there is r(eta) with tau^(r) <= h+3 eta.

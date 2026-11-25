@@ -106,3 +106,55 @@ Corollary 11.91: inequalities r_μ(e) ≤ r^κ_μ(e+(I−λ)(κ)) ✓ (restricti
   u=2: R^κ(0) = .097281,.096389,.093707,.082861,.064328,.037269; N^κ(0+) = .327813,.325037,.316667,.282567,.223249,.133574.
 - sup_m domination on a grid (u ∈ {.5,1,2}, 8 κ, 5 accuracies): R^κ ≤ R_unif, N^κ ≤ θ_na^cube, equality at κ=½ (1e-9), smallest
   strict gap 3.0e-7 (κ=.49).
+
+## Step 5 — Lean file read (`proofs/Frontiers/SliceRefinement.lean`, 153 lines) — not yet compiled (waiting, other builds running)
+Declarations: `sum_mem_bracket`, `bracket_width`, `argmax_deficit_le`, `deficit_ge`, `mean_le_of_biregular`. No `sorry`, no axioms in the text.
+Match with Thm 11.92: (a) Lipschitz property of class means = `mean_le_of_biregular` + (NOT formalised) the biregular one-flip graph between
+adjacent type classes; d_t ≥ J_t − V_n(t) = `deficit_ge` in multiplicative form (✓ I re-derived the log form).
+(b) validity `sum_mem_bracket` — lower end in Lean is p_k L_k (k the arg max of p U), the paper returns max_t p_t L_t (tighter, also valid);
+width `bracket_width` ✓; "refined only if d_t ≤ x_{l−1}" = `argmax_deficit_le` with hypothesis U_k ≤ c·A_k ✓.
+NOT formalised (the file says so): the procedure itself (loop, termination, the invariant, intersection of brackets), the failure
+probability (n+1)mδ′, the cost bound Σ_tΣ_l C_t(x_l), all of (c).  No vacuity: hypotheses are satisfiable, conclusions non-trivial but
+each is a 3–4 line calc.  "Deterministic core" is a fair description; "(b) [V]" would not be.
+GameFunction (GamePair.lean:515): cont on [0,1], F0=F1=0, F ≤ L(1−t), F ≤ E t, E sharp, E>0 — NO concavity needed ⇒ sup_m F*_{m,κ}
+is a game function (checked the five fields by hand) ⇒ Conj 11.94(ii) parenthesis is right.  Pair identity also elementary:
+N(X) = min{θ : R(X−θ) ≤ θ}.
+
+## Step 6 — multi-block test of 11.90(a) (`thm_1190a_blocks.py`): quick run done, full run in background
+Inner solver: KKT clipping root-finding; every value sandwiched dual ≤ min ≤ primal (gap ≤ 6e-17); independent SLSQP agrees to 7e-16
+(40 random profiles, k = 2..5).  Quick outer search (4 starts, k=3,4,5): best k-block values = two-block sup to 9 digits for
+(κ,u,e) = (.5,1,0): .029139139; (.3,1,0): .024587500; (.3,1,e=−0.03): .041619952 (two-block .041619950 from a coarse m-grid — fixed);
+n at (.3,1,X=0): .094079843.  No k-block profile beats two blocks.
+
+## Step 7 — three letters / Potts remark (`potts_three_letters.py` → `out_potts_three_letters.txt`): ALL REPLICATED
+- thresholds: I_2=I_3 at s=0.519366, I_3=I_4 at s=1.335309 (claimed 0.5194, 1.3353); (extra) I_4=I_5 at 1.841601.
+- second order I_k ≈ s²(k−1)/(2k²) ✓; third order (k−1)(k−2)/(3k³) (extra).
+- max over BOTH marginals, q=3,4,5, 30–40 restarts, 11 slopes: always the uniform law on k*(s) letters; excess over max_k I_k ≤ 7e-16.
+- integral identity tΨ(u)−Ψ(tu) = tu∫ I/s² for 12 random (a,c,u,t), q=3: 5e-16.
+- R_k(0): u=.5: .007673, .007425, .006552; u=1: .029139, .030654, .028405 — game form = closed form = sup–min over shells ✓ (claimed digits).
+  Crossings: R_2=R_3 at u = ln 2 (to 1e-12), R_3=R_4 at u = ln 6 (1e-12); mismatch fractions 2−log₂3, log₂3−1 ✓.
+- (mine) second order: I(s) ≈ (s²/2)·Σ_{jk}Σ^a_{jk}Σ^c_{jk}; max over marginals = 1/4 (two letters) for q=3,4; uniform ternary 2/9.
+- (mine) finite n, exact sums, u=.5, ε=1: ln(evals)/n certified by balls: ternary cube .008425/.007575/.007446/.007428 vs binary slice ½
+  .008658/.007835/.007694/.007676 at n = 2e3/2e4/2e5/2e6.
+LOGICAL STATUS of "a known part can make certification harder" (q≥3): both numbers are LOWER bounds from single-centre sets.
+"Harder" needs an UPPER bound for the uniform ternary cube (its hinted exponent ≤ R_3) — the report itself calls larger alphabets
+"a sketch" (§11.20 remark (4), §11.18 "not worked out").  So the remark compares lower-bound functions; fine as [N], but the bold
+sentence is not established as a statement about complexity.  My small-u check: in the Gaussian regime the best direction for a
+ternary block is (2,−1,−1) (ratio |v|₁²/|v|₂² = 8/3 < 4·... two-letter direction (1,−1,0) gives 2), coefficient 1/9 vs binary 1/8 ⇒
+the ordering at small u is robust at second order under any single-letter structure.
+
+## Step 8 — COORDINATOR MESSAGE received (about 18:45, after Step 7 was written)
+Theory division published checkpoint 89ac710 (read-only at scratchpad/thy_ro): the remark "more than two letters" of §11.25 was
+corrected (k=4 numbers were single dips on letters, not the uniform four-letter site; "hardest known part = uniformly weighted
+sub-alphabet" false near the threshold; D52 item 7); three-letter statement now Prop 11.103(d) in new §11.26.  11.89–11.93 unchanged.
+Asked: (i) review the remark as it now stands, say which version each finding refers to; (ii) say explicitly whether I had found the
+corrected error; (iii) originality: A1 found Lemma 11.89 in Hasenclever–Scholz arXiv:1302.6161, Prop 8(a).
+HONEST STATUS re (ii) at the time of the message: I had NOT found the k=4 error.  What I had (Step 7, written before the message):
+ (1) replication of all numbers of the old remark AS VALUES OF THE SINGLE-CENTRE FORMULA (my script calls them "single-centre shells");
+ (2) the logical objection that these are lower bounds only and that "harder than no known part" needs an upper bound for the
+     uniform k-ary cube that the report does not have;
+ (3) a second-order criterion (best direction v maximises |v|₁²/|v|₂² over zero-sum v) that I had applied to q=3 only.
+ After the message: criterion (3) at q=4 gives v=(1,1,−1,−1), ratio 4 > 3 (single letter (3,−1,−1,−1)) ⇒ coefficient 1/8 = binary:
+ the uniform four-letter site is a product of two uniform bits, so it contains the binary cube as a quotient and is at least as hard
+ as the binary cube for every u.  So R_4(0)=0.006552 (u=.5) cannot be "the uniform 4-ary cube's exponent" (≥ 0.007673).  This is
+ a confirmation obtained AFTER being told, from a tool I had built before; not an independent discovery.

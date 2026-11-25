@@ -49,13 +49,40 @@ def lamella(M,Q,l,N=None):
             x.append(site(m,q,tt)); tt+=1
     return x
 
+def lamella_np(M,Q,l,N=None):
+    """the same walk as lamella(), as an (n,3) int64 array, built stem by stem with numpy (fast)"""
+    assert M%2==1 and Q%2==1 and l>=2
+    rods=[]
+    for q in range(Q):
+        ms=range(M) if q%2==0 else range(M-1,-1,-1)
+        rods+=[(m,q) for m in ms]
+    parts=[]; t=-2; up=True; n=0
+    for s_,(m,q) in enumerate(rods):
+        last=(s_==len(rods)-1)
+        if last: tend=2*l+1
+        else:
+            m2,q2=rods[s_+1]
+            forward=(m2==m+1 and q2==q) or (m2==m and q2==q+1)
+            if up: tend=2*l-1 if forward else 2*l-2
+            else:  tend=1 if forward else 0
+        if last and N is not None:
+            tend=tend+(N-(n+(tend-t+1)))
+            if tend<2*l+1: return None
+        tt=np.arange(t,tend+1,dtype=np.int64) if up else np.arange(t,tend-1,-1,dtype=np.int64)
+        k=tt//2; odd=tt%2
+        parts.append(np.stack([2*m+2*q+odd, 2*m+2*k+odd, 2*q+2*k+odd],axis=1)); n+=len(tt)
+        if not last:
+            t = tend-1 if forward else tend+1
+            up = not up
+    return np.concatenate(parts)
+
 OFF=1<<10; KK=1<<11
 def key(a): return ((a[:,0]+OFF)*KK+(a[:,1]+OFF))*KK+(a[:,2]+OFF)
 _VEC={3:np.array(V3),8:np.array(V8),11:np.array(V11)}
 def measure_np(x):
     """(h3,h8,h11,g) via site-set counts (Lemma 11.67, verified in r2_lemma67.py) and the 1-4 distance;
     checks: lattice walk (consecutive distance^2 = 3), injective."""
-    a=np.array(x,dtype=np.int64); N=len(a)
+    a=np.asarray(x,dtype=np.int64); N=len(a)
     d=np.diff(a,axis=0); assert np.all((d*d).sum(1)==3), "not bonded"
     k=key(a); assert len(np.unique(k))==N, "not injective"
     ks=np.sort(k); e={}

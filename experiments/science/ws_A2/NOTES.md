@@ -334,3 +334,34 @@ N3. `lever_constant.py` (own code): all-trans arms joined to the central bond th
     the limit is 2√(2/9) = 0.943.  => Theorem 11.36's "c_i ≥ 0.824 Λ b m^{3/2}" is confirmed in power and is not sharp in the
     constant for the central torsion: 0.943 is attained asymptotically (independent replication of the law, [N]).
     Runtime 80 s CPU.
+N1 (update). Z², 16 beads: 1 604 149 walks with fixed first step; W = 802 075 (= the referee's count in §11.17), S = 283 409 site
+    sets, D = 281 086 complete distance multisets, 2 252 homometric groups (4 575 site sets, 1.6 %); truncated profiles at S_c = 5:
+    541 with all pairs (= the referee's "541 profiles"), 507 with chain separation ≥ 3.  => INDEPENDENT REPLICATION of both
+    numbers; the convention behind 541 is "all pairs p<q with squared distance < 5".  ~9 min CPU, ~2 GB.
+N4. `scattering_bound.py`: Prop. A2.1 |I_x(q) − I_y(q)| ≤ (q²/3)·Σ|sorted s^x − sorted s^y|: 4 000 chain pairs × 6 q-values, no
+    violation, max ratio 0.9998; sup|(t cos t − sin t)/t³| = 1/3 (proof: derivative of sin t − t cos t is t sin t).
+S41. Koops, Le Berre, Myreen, Nordström, Oertel, Tan, Vinyals, "Practically feasible proof logging for pseudo-Boolean
+    optimization", CP 2025, LIPIcs 340, paper 21 [fetch tool on the DROPS HTML: abstract in full + sentences of intro/experiments]:
+    VeriPB + CakePB toolchain "for formally verified pseudo-Boolean optimization", RoundingSat and Sat4j, "core-guided search and
+    linear programming integration with Farkas certificates and cut generation"; "formally verified conclusions within a factor 20
+    of the solving time"; RoundingSat: median 1.43, 95 % within 9.22, worst 19.17.
+
+## Step 10 — observations made while writing (21:40– )
+* A2.7 (cutoff): locally the fibre of the truncated profile = flexes of the contact framework (pairs below the cutoff), under
+  distinctness + no distance at the cutoff.  If S_c covers the 1–4 distances every torsion is pinned up to sign => local fibres are
+  points, global fibres of extended conformations contain all re-orderings/sign changes of torsion values.  (First draft of the
+  report said "the whole torsion space of an extended chain is one fibre" — true only if the cutoff is below the 1–4 distances;
+  corrected before delivery.)
+* Heuristic check of the Newton–Okounkov prediction (#profiles ≈ vol(𝒦)·N³): at 27 beads vol·N³ ≈ (4–6)·10⁴ vs 4 532 observed;
+  with the surface contraction 0.39³ ≈ 0.06 → 2 600–3 700: right order.  [H]
+* For walks on the diamond lattice the two fcc sublattices are balanced, so Bezdek's bound gives e₈ < 6N − 4.617 N^{2/3} + 3.1
+  and the surface-law constant k ≥ 0.69 (report: 0.50; data 1.71–1.86).
+
+## Deliverables
+* Report: /home/user/MetricChain/docs/science/workstreams/A2_REPORT.md (sections 1–7; lists W1–W10 and M1–M7 in §4.8–4.9).
+* Scripts + outputs: this directory.  Nothing else in the repository was written; no git state was changed.
+
+## Not accessed (also listed in report §5)
+Featherstone 2004 full text; Lanford 1973; Ziemian 1995; Mémoli 2011; Matthews 1992/94; Künzi–Vajner 1994; Petoukhov–Svergun
+2015; Janse van Rensburg's book; Hansen–Jaumard–Lu 1991; JAIR version of Py–Cherif–Habet (HTTP 502); body of Tan et al. 2024;
+Oertel (Lund 2026) and McIlree (Glasgow 2026) theses; K*-family supplements; OSPREY source code.

@@ -1,0 +1,11 @@
+  scan n=8 site 1/16  13s
+  scan n=8 site 2/16  22s
+  scan n=8 site 3/16  29s
+  scan n=8 site 4/16  36s
+  scan n=8 site 5/16  44s
+  scan n=8 site 6/16  50s
+  scan n=8 site 7/16  56s
+  scan n=8 site 8/16  63s
+  scan n=8 site 9/16  69s
+  scan n=8 site 10/16  76s
+  scan n=8 site 11/16  82s

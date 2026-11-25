@@ -1,0 +1,9 @@
+instances used: 3554
+F1  max [KL(mu||nu) - KL(mu||mu_lam)]            = 5.560e-16   (must be <= 0 up to solver tolerance)
+F2  max KL(mu||mu_lam) / ((beta*omega)^2/8)       = 0.99993   (must be <= 1)
+    max KL(mu||nu)     / ((beta*omega)^2/8)       = 0.99993   (must be <= 1: the sharper bound)
+T7(ii)  max TV(mu,nu) / (beta*omega/4)            = 0.99984
+T7(iii) max J(mu,nu)  / ((beta*omega)^2/4)        = 0.99984
+T7(i)   max |J - beta(E_nu r - E_mu r)|           = 5.57e-14
+T7(v)   max |KL(mu||mu0) - KL(nu||mu0) - KL(mu||nu)| = 1.33e-13
+        max TV(mu,nu) / tanh(beta*omega/4)        = 0.99992   (feature-free sharp form; > 1 would show it fails with features)

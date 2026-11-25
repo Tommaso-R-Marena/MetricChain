@@ -104,6 +104,7 @@ def main():
           "max lambda_A(g)/k(g)")
     nviol = 0
     ncheck = 0
+    sens = []
     for name, ks, cval in (("binary n=8 chain+", [2] * 8, 0.15), ("binary n=8 chain+", [2] * 8, 0.4),
                            ("3-state n=5 chain+", [3] * 5, 0.15), ("3-state n=5 chain+", [3] * 5, 0.4)):
         S = Space(ks)
@@ -147,6 +148,12 @@ def main():
                     terms.append((t, y))
                     K_gate += t
                 ystar = max(terms)[1]
+                # sensitivity bound (report, Thm K14(c)): K_gate <= ktilde_nom * exp(beta * max_{x in A, y in wall} d(x,y))
+                ktilde = (degA[ob] * np.exp(-beta * (f[ob] - f[a]))).sum() / np.exp(-beta * (f[A] - f[a])).sum()
+                dmax = D[np.ix_(A, ob)].max()
+                assert K_gate <= ktilde * np.exp(beta * dmax) * (1 + 1e-9)
+                assert abs(ktilde / k_nom - 1) < 1e-9          # A is a sublevel component of f
+                sens.append((np.log(K_exact / k_nom) / beta, dmax, D[a, ystar]))
                 # tilt candidate
                 g_tilt = D[:, ~A].min(axis=1)
                 assert is_admissible(g_tilt, D)
@@ -175,6 +182,11 @@ def main():
                       f"{mx:.4f} | {mxlam:.3f}"
                       f"{'' if adm and abs(k_at_opt / K_exact - 1) < 1e-5 else '   [LP optimiser check FAILED]'}")
     print(f"T6 summary: {ncheck} (instance, beta) cases, violations: {nviol}")
+    sa = np.array(sens)
+    print(f"   exact inflation (1/beta) ln(K_exact/k_nom): min {sa[:,0].min():.3f} max {sa[:,0].max():.3f}; "
+          f"<= max_(x in A, y in wall) d(x,y) in all cases: {bool(np.all(sa[:,0] <= sa[:,1] + 1e-9))}; "
+          f"<= d(a, dominant gateway) in {int(np.sum(sa[:,0] <= sa[:,2] + 1e-9))}/{len(sa)} cases; "
+          f"ratio inflation / max d: median {np.median(sa[:,0] / sa[:,1]):.2f}")
 
 
 if __name__ == "__main__":

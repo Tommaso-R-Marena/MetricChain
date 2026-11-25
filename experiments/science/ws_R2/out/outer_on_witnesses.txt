@@ -1,0 +1,14 @@
+W3 woodpile (0,3,4;0)              N= 22351: smallest slack over the 12 rows of K2:   0.0171;  smallest slack of the gauche bounds q - (c.p - b):   0.7527
+checkerboard (0,1,3;0)             N= 17796: smallest slack over the 12 rows of K2:   0.0371;  smallest slack of the gauche bounds q - (c.p - b):   2.5425
+coplanar sheets (0,0,1;0)          N= 12041: smallest slack over the 12 rows of K2:   0.0056;  smallest slack of the gauche bounds q - (c.p - b):   5.1649
+rods (1/2,2,5/2;0)                 N= 17245: smallest slack over the 12 rows of K2:   0.0072;  smallest slack of the gauche bounds q - (c.p - b):   4.3039
+crossed rods (1/2,4,9/2;0)         N= 27144: smallest slack over the 12 rows of K2:   0.3042;  smallest slack of the gauche bounds q - (c.p - b):   1.1367
+crystal (1,5,6;0)                  N= 33988: smallest slack over the 12 rows of K2:   0.1296;  smallest slack of the gauche bounds q - (c.p - b):   0.6126
+gauche-rich (0,12/5,22/5;4/5)      N= 21235: smallest slack over the 12 rows of K2:   0.0285;  smallest slack of the gauche bounds q - (c.p - b):   1.1173
+gauche-rich (1/3,5/3,3;2/3)        N= 16238: smallest slack over the 12 rows of K2:   0.3080;  smallest slack of the gauche bounds q - (c.p - b):   3.6250
+all-gauche (0,1/2,9/4;1)           N= 12767: smallest slack over the 12 rows of K2:   0.0100;  smallest slack of the gauche bounds q - (c.p - b):   4.2481
+gauche-rich box 128                N=166199: smallest slack over the 12 rows of K2:   0.0103;  smallest slack of the gauche bounds q - (c.p - b):   0.5674
+lamella 151x1x160                  N= 48174: smallest slack over the 12 rows of K2:   0.0031;  smallest slack of the gauche bounds q - (c.p - b):   5.5241
+lamella 31x31x32                   N= 60548: smallest slack over the 12 rows of K2:   0.0645;  smallest slack of the gauche bounds q - (c.p - b):   0.5346
+4_1 helix                          N=  3001: smallest slack over the 12 rows of K2:   0.0000;  smallest slack of the gauche bounds q - (c.p - b):   6.0010
+smallest slack overall: 0.0 (>= 0: no row violated by any of these walks)

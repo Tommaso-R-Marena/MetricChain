@@ -1,0 +1,44 @@
+== 1. the note's numbers (u = 1)
+   rho0 = 0.379885; hinted exponent ln2 - h(rho0) = 0.029139
+   n=1000 rho1=rho0+0.01 (r1=389.89) D=300: ln B0 = 10.000, U0 = -120.9386; s* = -0.005491; |U'-U0|/|U0| = 0.0e+00; ln Z' - ln Z0 = 0.6904; exponent ln2 - ln V(n,r1+1)/n = 0.02705, ln2 - h(rho1) = 0.02445
+   n=1000 rho1=rho0+0.01 (r1=389.89) D=450: ln B0 = 10.000, U0 = -120.9386; s* = -0.005491; |U'-U0|/|U0| = 1.8e-16; ln Z' - ln Z0 = 0.6904; exponent ln2 - ln V(n,r1+1)/n = 0.02705, ln2 - h(rho1) = 0.02445
+   n=1000 rho1=rho0+0.01 (r1=389.89) D=500: ln B0 = 10.000, U0 = -120.9386; s* = -0.005491; |U'-U0|/|U0| = 5.9e-17; ln Z' - ln Z0 = 0.6904; exponent ln2 - ln V(n,r1+1)/n = 0.02705, ln2 - h(rho1) = 0.02445
+/home/user/MetricChain/experiments/science/ws_R3/r3_prop5b.py:38: RuntimeWarning: overflow encountered in expm1
+  self.lnB0 = logsumexp((self.lc + np.log(np.maximum(np.expm1(-self.g0), 1e-300)))[self.g0 < 0]) - n * math.log(2)
+   n=5000 rho1=rho0+0.002 (r1=1909.43) D=1500: ln B0 = inf, U0 = -564.6947; s* = -0.025637; |U'-U0|/|U0| = 9.9e-17; ln Z' - ln Z0 = 0.6804; exponent ln2 - ln V(n,r1+1)/n = 0.02881, ln2 - h(rho1) = 0.02817
+   n=5000 rho1=rho0+0.002 (r1=1909.43) D=2250: ln B0 = inf, U0 = -564.6947; s* = -0.025637; |U'-U0|/|U0| = 0.0e+00; ln Z' - ln Z0 = 0.6804; exponent ln2 - ln V(n,r1+1)/n = 0.02881, ln2 - h(rho1) = 0.02817
+   n=5000 rho1=rho0+0.002 (r1=1909.43) D=2500: ln B0 = inf, U0 = -564.6947; s* = -0.025637; |U'-U0|/|U0| = 0.0e+00; ln Z' - ln Z0 = 0.6804; exponent ln2 - ln V(n,r1+1)/n = 0.02881, ln2 - h(rho1) = 0.02817
+== 2. when does the root exist?  (u = 1, rho1 = rho0 + 0.01, D = n/2; real r1 as in the note)
+   n=100: ln B0 =   0.991, |U0| =    8.908, B0/|U0| =     0.302; root in (-1,1): None; sign changes on grid: 0; U'(s)-U0 nonincreasing in s: True
+   n=200: ln B0 =   2.000, |U0| =   21.310, B0/|U0| =     0.347; root in (-1,1): None; sign changes on grid: 0; U'(s)-U0 nonincreasing in s: True
+   n=300: ln B0 =   3.000, |U0| =   34.563, B0/|U0| =     0.581; root in (-1,1): None; sign changes on grid: 0; U'(s)-U0 nonincreasing in s: True
+   n=400: ln B0 =   4.000, |U0| =   47.508, B0/|U0| =     1.149; root in (-1,1): -0.87014; sign changes on grid: 1; U'(s)-U0 nonincreasing in s: True
+   n=500: ln B0 =   5.000, |U0| =   60.067, B0/|U0| =     2.471; root in (-1,1): -0.40473; sign changes on grid: 1; U'(s)-U0 nonincreasing in s: True
+   n=600: ln B0 =   6.000, |U0| =   72.387, B0/|U0| =     5.573; root in (-1,1): -0.17943; sign changes on grid: 1; U'(s)-U0 nonincreasing in s: True
+   n=700: ln B0 =   7.000, |U0| =   84.584, B0/|U0| =    12.965; root in (-1,1): -0.07713; sign changes on grid: 1; U'(s)-U0 nonincreasing in s: True
+   n=800: ln B0 =   8.000, |U0| =   96.723, B0/|U0| =    30.820; root in (-1,1): -0.03245; sign changes on grid: 1; U'(s)-U0 nonincreasing in s: True
+   n=1000: ln B0 =  10.000, |U0| =  120.939, B0/|U0| =   182.129; root in (-1,1): -0.00549; sign changes on grid: 1; U'(s)-U0 nonincreasing in s: True
+== 3. referee's disjoint-support statement (u large so that rho0 < 1/4):
+      supports disjoint => U'(0) < U0 always, and U'(-1) > U0 as soon as W/2^n > e^u r1
+   u=2.6 rho0=0.2390 n=60 r1=16 D=34: ln(W/2^n) =    4.310 vs ln(e^u r1) =  5.373 (condition False); U'(0)-U0 = -2.029e-01 (<0), U'(-1)-U0 = +1.496e-01; root s* = -0.157129; ln Z'-ln Z0 = 0.5043 (>= ln(1+e^-u) - o(1) = 0.0716)
+   u=2.6 rho0=0.2390 n=120 r1=32 D=66: ln(W/2^n) =    8.620 vs ln(e^u r1) =  6.066 (condition True); U'(0)-U0 = -5.561e-03 (<0), U'(-1)-U0 = +1.790e-01; root s* = -0.004278; ln Z'-ln Z0 = 0.6875 (>= ln(1+e^-u) - o(1) = 0.0716)
+   u=2.6 rho0=0.2390 n=240 r1=63 D=128: ln(W/2^n) =   14.639 vs ln(e^u r1) =  6.743 (condition True); U'(0)-U0 = -2.647e-05 (<0), U'(-1)-U0 = +1.798e-01; root s* = -0.000020; ln Z'-ln Z0 = 0.6931 (>= ln(1+e^-u) - o(1) = 0.0716)
+   u=2.6 rho0=0.2390 n=480 r1=125 D=252: ln(W/2^n) =   26.679 vs ln(e^u r1) =  7.428 (condition True); U'(0)-U0 = -3.089e-10 (<0), U'(-1)-U0 = +1.798e-01; root s* = -0.000000; ln Z'-ln Z0 = 0.6931 (>= ln(1+e^-u) - o(1) = 0.0716)
+   u=3.0 rho0=0.2149 n=60 r1=15 D=32: ln(W/2^n) =    6.326 vs ln(e^u r1) =  5.708 (condition True); U'(0)-U0 = -3.252e-02 (<0), U'(-1)-U0 = +1.390e-01; root s* = -0.021699; ln Z'-ln Z0 = 0.6603 (>= ln(1+e^-u) - o(1) = 0.0486)
+   u=3.0 rho0=0.2149 n=120 r1=29 D=60: ln(W/2^n) =    9.653 vs ln(e^u r1) =  6.367 (condition True); U'(0)-U0 = -2.246e-03 (<0), U'(-1)-U0 = +1.421e-01; root s* = -0.001497; ln Z'-ln Z0 = 0.6909 (>= ln(1+e^-u) - o(1) = 0.0486)
+   u=3.0 rho0=0.2149 n=240 r1=57 D=116: ln(W/2^n) =   16.306 vs ln(e^u r1) =  7.043 (condition True); U'(0)-U0 = -5.673e-06 (<0), U'(-1)-U0 = +1.423e-01; root s* = -0.000004; ln Z'-ln Z0 = 0.6931 (>= ln(1+e^-u) - o(1) = 0.0486)
+   u=3.0 rho0=0.2149 n=480 r1=113 D=228: ln(W/2^n) =   29.611 vs ln(e^u r1) =  7.727 (condition True); U'(0)-U0 = -1.819e-11 (<0), U'(-1)-U0 = +1.423e-01; root s* = -0.000000; ln Z'-ln Z0 = 0.6931 (>= ln(1+e^-u) - o(1) = 0.0486)
+   u=4.0 rho0=0.1687 n=60 r1=12 D=26: ln(W/2^n) =    7.500 vs ln(e^u r1) =  6.485 (condition True); U'(0)-U0 = -1.207e-02 (<0), U'(-1)-U0 = +7.147e-02; root s* = -0.006036; ln Z'-ln Z0 = 0.6809 (>= ln(1+e^-u) - o(1) = 0.0181)
+   u=4.0 rho0=0.1687 n=120 r1=23 D=48: ln(W/2^n) =   11.000 vs ln(e^u r1) =  7.135 (condition True); U'(0)-U0 = -6.959e-04 (<0), U'(-1)-U0 = +7.192e-02; root s* = -0.000348; ln Z'-ln Z0 = 0.6924 (>= ln(1+e^-u) - o(1) = 0.0181)
+   u=4.0 rho0=0.1687 n=240 r1=46 D=94: ln(W/2^n) =   22.001 vs ln(e^u r1) =  7.829 (condition True); U'(0)-U0 = -2.324e-08 (<0), U'(-1)-U0 = +7.194e-02; root s* = -0.000000; ln Z'-ln Z0 = 0.6931 (>= ln(1+e^-u) - o(1) = 0.0181)
+   u=4.0 rho0=0.1687 n=480 r1=91 D=184: ln(W/2^n) =   40.001 vs ln(e^u r1) =  8.511 (condition True); U'(0)-U0 = -3.325e-12 (<0), U'(-1)-U0 = +7.194e-02; root s* = -0.000000; ln Z'-ln Z0 = 0.6931 (>= ln(1+e^-u) - o(1) = 0.0181)
+== 4. joint oracle (k-body marginals + mean energy) on the extended Golay code, exact on cosets:
+      visible instance g0 = -u (r1 - d(x,C))_+ , twin = -u (r1 + s - d(x, a'+C))_+ ; both C-invariant,
+      so every marginal of order <= 7 is uniform for g0 and for g' (Lemma 1); tune s for equal U.
+   u=5.0 r1=3.0: Z0/2^n = 938.088, U0 = -14.190685; s* = -0.005574; U' - U0 = +0.0e+00; ln Z' - ln Z0 = 0.6781; g' differs from g0 on a fraction 0.0647 of the cube
+   u=6.0 r1=3.0: Z0/2^n = 17012.018, U0 = -17.643503; s* = -0.000576; U' - U0 = -3.6e-15; ln Z' - ln Z0 = 0.6913; g' differs from g0 on a fraction 0.0647 of the cube
+   u=5.0 r1=4.0: Z0/2^n = 139160.907, U0 = -19.197169; s* = -0.004095; U' - U0 = -3.6e-15; ln Z' - ln Z0 = 0.6820; g' differs from g0 on a fraction 0.0647 of the cube
+
+real	0m51.499s
+user	0m12.503s
+sys	0m6.177s

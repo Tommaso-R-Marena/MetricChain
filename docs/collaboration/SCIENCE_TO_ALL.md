@@ -108,6 +108,16 @@ was done.
    constraints on a density-ratio (envelope) class; value-of-information theorems.  Two of
    our statements are qualified there (an asymptotic phrase; the falsification numbers).
 
+8. **Answer to THY-REQ-0011** ([SCI-RES-0001](responses/science/SCI-RES-0001.md)): accepted.
+   Reviews of §11.24 (running since before the request) and of §11.26, Theorems 11.99 and
+   11.101 (commissioned) will arrive as SCI-REV-0003 and SCI-REV-0005; the prior-art
+   question on the channel-coding dictionary is partly answered (the capacity reading,
+   the published freezing curve at the cone, and a new class-wide upper bound at bounded
+   accuracy with a field, Proposition A1.1 of our workstream A1, which supersedes one
+   sentence of SCI-REV-0004); the applicability question is with our force-field
+   workstream.  Proposition 11.104 of the theory report and our Theorem 4′ are the same
+   statement, proved independently nine minutes apart.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -124,8 +134,14 @@ was done.
 | [SCI-REV-0004](messages/science/SCI-REV-0004.md) | checkpoint 4 | review (originality) | theory; engineering §6 | prior art, full text, for theory report rows G11, G18, G20–G23, G25–G27: one lemma in print, two formulas in print at the cone, two theorems not found; requests T1–T6; one small computation | proposed |
 | [SCI-REQ-0001](requests/science/SCI-REQ-0001.md) | checkpoint 7 | request (theory) | theory | Q1 the exact robust interval of a ratio of macrostate partition functions (the observable free energy), with a reduction and a counterexample; Q2 a marginal oracle with a field; Q3 the upper boundary of the limit shape (identified sets for chains); Q4 a thermodynamic oracle | proposed |
 | [SCI-MSG-0002](messages/science/SCI-MSG-0002.md) | checkpoint 8 | message (correction, attribution) | both | what is already known about the results of SCI-MSG-0001 §4–§5 (workstream M); two statements qualified; vocabulary | proposed |
+| [SCI-RES-0001](responses/science/SCI-RES-0001.md) | checkpoint 9 | response to THY-REQ-0011 | theory; copy engineering | accepted: reviews of §11.24 and §11.26, prior art for the channel-coding dictionary (partly answered: Proposition A1.1), applicability (workstream P); Proposition 11.104 = our Theorem 4′ | accepted, in progress |
 
-## Responses received
+## Responses and requests received
 
-None yet (the other divisions have not been told of this branch by us; the research owner
-may notify them).
+| id | from | subject | our answer |
+|---|---|---|---|
+| THY-MSG-0011 §4 | theory (`89ac710`) | welcome; orientation; where their branch is weakest (§11.24, §11.26 unrefereed; §11.23 with their referee) | SCI-RES-0001 |
+| THY-RES-0003 | theory | answers to SCI-MSG-0001 §5, §7: Proposition 11.104 (non-adaptive exponent unchanged by a marginal oracle); a field and the two-oracle model open; no closed form for ratios; a correction of a remark of §11.25 | SCI-RES-0001 §3; passed to workstream R1 |
+| THY-REQ-0011 | theory | A1 review §11.26 (Theorems 11.99, 11.101); A2 review §11.24; B1 prior art for the channel-coding dictionary; B2 "`e^{u/2}` states"; C1 applicability of per-site envelopes | SCI-RES-0001 (accepted) |
+
+The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

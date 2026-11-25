@@ -54,7 +54,7 @@ volume **at least 1.56** (proved), where the report's "2.2" rests on an unproved
 | Theorem 11.71(c), column "estimate of the plateau" (150–350, …) | **estimate, not a theorem** (labelled [N] in the table, stated as fact in the text below it) | only read |
 | Proposition 11.72(a) (by-hand inequalities) | **proved** (the one-line justification in the report is incomplete; S_REPORT has the full proof) | re-derived; checked on all classes `N ≤ 27` |
 | Proposition 11.72(b) (eleven inequalities, all finite site sets) | **proved** | own LP formulation, own exact certificates; direct test on 65 535 + 7 000 site sets |
-| Proposition 11.72(c) (marked programme: `𝒦₂`, three gauche bounds) | **proved as a statement about limit points** | own formulation (340 configurations), own exact certificates |
+| Proposition 11.72(c) (marked programme: `𝒦₂`, three gauche bounds) | **proved as a statement about limit points**; finite-`N` forms supplied here (N5) | own formulation (340 configurations), own exact certificates |
 | Proposition 11.72(d) (rod, row of stems, crystal in `K^{br}`; `γ = 0` on `T₀`) | **proved** | own lamella construction to 60 548 beads; rod-pair counts verified |
 | Proposition 11.72(e) (`γ ≥ 0.22` somewhere) | **proved** | bridge regenerated with the authors' builder, verified with my code: exact match |
 | Proposition 11.72, paragraph "how much of the body is known" (`2.2 ≲ vol 𝒦`, "five vertices settled") | **weaker than advertised** (rests on the routing sketch; proved: `1.56 ≤ vol 𝒦 ≤ 3.125`, three vertices) | new computation |
@@ -232,7 +232,7 @@ invariance with marks, at most 16 oriented bonds with a chain end as a centre) i
 gauche functionals; own integer certificates verified exactly on all orbits for all fifteen
 statements.  `𝒦₂` has the 12 listed vertices and volume `25/8 = 3.125` exactly, `𝒦₂ ⊂ 𝒦₁`.
 The statement is about limit points (the two chain ends carry mass `O(1/N)`); no finite-`N` constants
-are claimed, and I computed none.
+are claimed in the report; N5 below supplies them.
 
 *(d)* Own construction (`r2_lamella.py`), every walk verified from coordinates (lattice walk,
 injective, bridge), `(h, g)` three ways:
@@ -338,6 +338,32 @@ which is the hypothesis of Theorem 11.71(b) for the points `Q_k*`. ∎  Results:
 Hence `116 ≤ liminf_N N^P_cov(N/2) ≤ limsup ≤ 3 626` for all walks at `L = e = 1` (`3 626` is the floor of
 the volume ratio `3 626.5`), and likewise `116 ≤ N_∞(½) ≤ 3 626` for the limit object of bridges.  The proof uses Lemma 11.68, the abstract theorem (convexity, `β/M`), Proposition
 11.72(d), fact N1 and the ten verified bridges; nothing about periodic systems or routing.
+
+**N5 [P, computer-assisted, exact] (finite-`N` constants for the marked programme — listed as "not
+done" in §11.22).**  For a walk with `N` beads let `ν` count the oriented bonds per marked
+configuration, a configuration being *irregular* if one of its centres is a chain end (one mark
+instead of two; 736 such configurations, at most 16 oriented bonds of a walk).  With a certificate
+`(y₀, y_k)` of §3.6(c) put `F = c·f + c_g·f_g − y₀[v] − Σ_k y_k r_k(star of v)`.  Then the orbit average of `F` is
+`≤ 0` on regular configurations, `Σ ν̄·r_k = 0` exactly for the symmetrised measure (the star marginal is
+`S₄`-invariant whatever `w` is; tested exactly with end stars as separate patterns), and
+`Σ ν·[v] = 4N`; hence `c·e + c_g·g ≤ y₀N + 4C` with `C = max F` over irregular configurations
+(`r2_lp_marked_finite.py`).  Result, for **every** walk:
+
+    −3h₃ + 2h₈ − h₁₁ ≤ 2N + 53,        −3h₃ + 4h₈ − 3h₁₁ ≤ 2N + 65,
+    g ≥ 2h₁₁ − 5h₃ − 8N − 143,     g ≥ 2h₁₁ − h₈ − 7N − 70,     g ≥ h₁₁ + h₈ − 4h₃ − 7N − 128
+
+(constants not optimised; tested on every class with `N ≤ 27`, 400 random walks, the ten verified
+bridges).  With the eleven finite rows of (b) this gives an outer polytope `𝒦₂^{(N)}` for every `N`, and
+the volume count becomes a bound for every chain of at least `N` beads (`out/volumes_K2_finiteN.txt`):
+
+| at least `N` beads | 100 | 1 000 | 10 000 | 100 000 | `∞` |
+|---|---|---|---|---|---|
+| `N^P_cov(N/2) ≤`, `L = 1` | 4 650 | 3 728 | 3 636 | 3 627 | 3 626 |
+| `N^P_cov(N/4) ≤`, `L = 1` | 30 352 | 23 978 | 23 342 | 23 279 | 23 272 |
+| `N^P_cov(N/2) ≤`, `L = ⅕` | 110 | 94 | 92 | 92 | 92 |
+| `N^P_cov(N/4) ≤`, `L = ⅕` | 486 | 402 | 393 | 392 | 392 |
+
+So "`limsup ≤ 3 627`" holds in the finite form "`≤ 3 627` for every walk with at least `10⁵` beads".
 
 **N4 [P] (when the shape is resolved).**  From Proposition 11.73 and `(1,5,6;0) ∈ K^{br}`:
 `d_H(𝒟_N^{br}, K^{br}) ≥ 17.6N^{-1/3} − 17/N ≥ ε₁/L = ½` for every `N ≤ 43 512` (and `≥ ¼` for every
@@ -539,7 +565,7 @@ Pending entries are completed in §6.1.
 ```
 gcc -O3 -march=native -o bin/r2_enum r2_enum.c ; gcc -O3 -march=native -o bin/r2_concat r2_concat.c
 for N in $(seq 4 23); do bin/r2_enum walk $N > out/walk_N$N.txt; done        # 323 s for N = 23
-for N in $(seq 3 23); do bin/r2_enum bridge $N > out/bridge_N$N.txt; done    # 160 s for N = 23
+for N in $(seq 3 24); do bin/r2_enum bridge $N > out/bridge_N$N.txt; done    # 160 s for N = 23, 3x that for 24
 python3 cmp_tables.py 4 23 ; python3 r2_lemma67.py 12 3000 ; python3 r2_tables.py
 bin/r2_concat 13 ; bin/r2_concat 16 8 ; bin/r2_concat 8 16 ; python3 r2_concat_bounds.py
 python3 r2_bridge_tables.py ; python3 r2_walk_vs_bridge.py
@@ -549,7 +575,8 @@ python3 r2_packing.py B 27 60 120 250 500 1000 2000 5000
 python3 r2_cover.py walk 21 1 1 1 2 ; python3 r2_cover.py bridge 21 1 1 1 2
 python3 r2_flip.py 40 ; python3 r2_directions.py
 python3 r2_verify_witness.py big ; python3 r2_verify_witness.py nine 64      # use the authors' build.py
-python3 r2_inner_volume.py ; python3 r2_rigorous_packing.py
+python3 r2_inner_volume.py ; python3 r2_rigorous_packing.py ; python3 r2_rigorous_packing_verify.py
+export PATH="$HOME/.lean/lean-4.31.0-linux/bin:$PATH"; (cd /home/user/MetricChain && lake env lean experiments/science/ws_R2/R2Axioms.lean)
 ```
 
 No random seeds matter for the verdicts (random tests use fixed seeds).  Largest memory: 1.4 GB
@@ -582,7 +609,7 @@ density-function theory of supermultiplicative models of walks (Janse van Rensbu
 authors from abstracts; not read by me]**) is the same idea with entropy.  I did **not** find the
 specific object (the body of (pair counts, gauche count) densities of diamond-lattice bridges), its
 inequalities, or the identification of a limiting certificate size with a covering number of it;
-"not found" after four generic searches, not "new".  In more than one dimension rotation sets of
+"not found" after three generic searches, not "new".  In more than one dimension rotation sets of
 subshifts of finite type need not be polytopes and ground-state energies of finite-range lattice
 models are not computable in general (domino problem) **[from memory — unverified]**, so "the exact
 shape of `𝒦`" is not guaranteed to have a finite description.
@@ -617,7 +644,7 @@ did not surface).
 
 ## 9. Recommended corrective action
 
-1. Rewrite the headline sentence in the five places of M1 with labels (theorem for `liminf`/`limsup`;
+1. Rewrite the headline sentence in the places listed under M1 with labels (theorem for `liminf`/`limsup`;
    convergence proved for bridges off an unidentified countable set; conjecture for walks; estimates
    for "hundreds" and for the chain length).
 2. Replace the `liminf` column of Theorem 11.71(c) by bounds obtained from *all* proved points of
@@ -635,16 +662,16 @@ did not surface).
 * Is `ε₁ = ½` (or `¼`) a jump of `N_∞`?  Unknown as long as `K^{br}` is unknown.
 * The routing lemma (periodic chain systems are limits of bridges); the true shape of `𝒦` between
   the proved `1.56` and `3.125`; whether the seven doubtful vertices of `𝒦₂` are artefacts.
-* Finite-`N` constants for the marked programme (my certificates are `≤ 0` on all regular
-  configurations, so only the at most 16 end configurations have to be bounded — an afternoon).
+* Optimal finite-`N` constants for the marked programme (N5 gives valid ones, not the best).
 * Any rigorous statement about *when* the covering number is near its limit points.
 
 ## 11. The three most promising next steps
 
-1. **Raise the proved lower bound further and compute an honest upper estimate from the same data.**
-   Larger boxes (`W = 96, 128`: `δ ≈ 0.002`, gauche densities of the zero-gauche systems `≈ 0.05`) and an
-   exact packing (integer programme on the conflict graph) in the hull of proved points.  The bracket
-   `[116, 3 627]` should close to within a factor of about 10 without any new theory.
+1. **Raise the proved lower bound further with the tools that already exist.**  Larger boxes
+   (`W = 96, 128`: `δ ≈ 0.002`, gauche densities of the zero-gauche systems `≈ 0.05`) and an exact packing
+   (integer programme on the conflict graph) in the hull of proved points.  I expect **[H]** that the
+   bracket `[116, 3 627]` narrows to within a factor of about 10 without any new theory; the upper end
+   needs a covering argument that uses `γ` or external centres more cleverly than the volume count.
 2. **Settle the routing lemma for the two simple structures** (woodpile `W₃`, crossed rods): both
    are stacks of layers of parallel rods and should admit an explicit snake construction like the
    lamella, which would prove the vertices `(0,3,4)` and `(½,4,9/2)` and enlarge the `γ = 0` region.
@@ -672,7 +699,8 @@ with the packings in exact rationals; each is a proved lower bound for the `limi
 least that.  *Stopping condition:* optimality gap below 10 % or one hour per instance.  *Resources:*
 bridges of up to `3·10⁵` beads (minutes each), integer programmes with about `10⁵` binaries
 (conflict graph of bounded degree).  (iii) Independently of (ii): class tables of **bridges** for
-`N = 24 … 27` with the full set of gauche counts per class, to extend the walk-versus-bridge comparison.
+`N = 25 … 27` with the full set of gauche counts per class (the authors and I have them to 24), to
+extend the walk-versus-bridge comparison to the sizes of your walk tables.
 
 ---
 

@@ -28,3 +28,24 @@
         5   0.51  0.031485164   0.031485164 (k=2)        2 letters: 0.5000, 0.5000, 0.0000, 0.0000, 0.0000
         5   0.53  0.033998895   0.033998896 (k=3)        3 letters: 0.3334, 0.3333, 0.3333, 0.0000, 0.0000
         5   0.80  0.078815259   0.078815259 (k=3)        3 letters: 0.3333, 0.3333, 0.3333, 0.0000, 0.0000
+        5   1.20  0.175999102   0.175999103 (k=3)        3 letters: 0.3333, 0.3333, 0.3333, 0.0000, 0.0000
+        5   1.33  0.213903553   0.213903553 (k=3)        3 letters: 0.3333, 0.3333, 0.3333, 0.0000, 0.0000
+        5   1.34  0.217049652   0.217049652 (k=4)        4 letters: 0.2500, 0.2500, 0.2500, 0.2500, 0.0000
+        5   1.60  0.309197697   0.309197697 (k=4)        4 letters: 0.2500, 0.2500, 0.2500, 0.2500, 0.0000
+        5   2.50  0.707556153   0.707556153 (k=5)        5 letters: 0.2000, 0.2000, 0.2000, 0.2000, 0.2000
+        5   4.00  1.265688623   1.265688623 (k=5)        5 letters: 0.2000, 0.2000, 0.2000, 0.2000, 0.2000
+[PASS] (b) Potts maximisation: in all cases the best table found is the uniform law on k*(s) letters and no table exceeds max_k I_k(s) (largest excess 6.66e-16); uniform marginals on all q letters are NOT maximal for s below the thresholds
+[PASS] (c) integral identity: |t Psi(u) - Psi(tu) - t u int I/s^2| <= 4.70e-16 for 12 random (a, c, u, t), q = 3
+      u = 0.5: R_2(0) = 0.007673 (game 0.007673, sup-min 0.007673; claimed 0.007673); R_3(0) = 0.007425 (game 0.007425, sup-min 0.007425; claimed 0.007425); R_4(0) = 0.006552 (game 0.006552, sup-min 0.006552; claimed 0.006552)
+      u = 1.0: R_2(0) = 0.029139 (game 0.029139, sup-min 0.029139; claimed 0.029139); R_3(0) = 0.030654 (game 0.030654, sup-min 0.030654; claimed 0.030654); R_4(0) = 0.028405 (game 0.028405, sup-min 0.028405; claimed 0.028405)
+[PASS] (d) k-ary cubes: R_2(0) = R_3(0) at u = 0.693147180560 (ln 2 = 0.693147180560); R_3(0) = R_4(0) at u = 1.791759469228 (ln 6 = 1.791759469228); optimal mismatch fractions at u = ln 2: 0.415037499 (2 - log2 3 = 0.415037499), 0.584962501 (log2 3 - 1 = 0.584962501)
+[PASS] (e) second order: I(s) = (s^2/2) * ||Sigma_a o Sigma_c||_1-type residual variance (checked to 4.7e-05 at s = 1e-3); its maximum over both marginals is 0.250000000 (q=3), 0.250000000 (q=4) = 1/4, the two-letter value; uniform on 3 letters gives 0.222222 = 2/9
+      finite n (u = 0.5, accuracy eps = 1): largest certified ln(evaluations)/n from balls
+             n     ternary cube    binary slice 1/2     (limits R_3(0) = 0.007425, R_2(0) = 0.007673)
+            2000     0.008425        0.008658
+           20000     0.007575        0.007835
+          200000     0.007446        0.007694
+         2000000     0.007428        0.007676
+[PASS] (f) finite n: for n >= 20000 the exact lower bound from balls in the binary slice 1/2 exceeds the one from balls in the uniform ternary cube (both are LOWER bounds for all algorithms)
+
+SUMMARY: ALL PASS

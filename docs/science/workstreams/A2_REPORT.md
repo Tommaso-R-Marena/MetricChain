@@ -66,7 +66,7 @@ Classifications (one per claim, from the brief's list):
 | E1 pairwise kernel + DEE, machine-checked | **plausibly original capability** (narrow: nativeness and Lean 4; every rule is known) | gap statement stands; supporting argument about checking cost must be weakened |
 | E1 residual kernel (valid for a whole envelope class with anchors) | **plausibly original capability** | stated too modestly: no proof-logging system certifies statements about classes of instances |
 | D3 partition-function kernel (leaf / branch / thermal prune / cut / elimination) | **new combination** (rules individually known; a verified two-sided checker for weighted sums not found) | the sentence "exact model counting only" is wrong and must go |
-| D1 thermal prune as a certificate rule | **unresolved → plausibly original algorithm**, medium-low confidence | unchanged |
+| D1 thermal prune as a certificate rule | **unresolved** (not re-searched by me; `L1`: inequality folklore, rule not found) | unchanged |
 | D4 voxel-integral enclosures in a provable pipeline | **plausibly original capability** (elementary mathematics) | unchanged; "provable" in the OSPREY literature means a paper proof relative to the model, floating point not discussed |
 | G1 certificates = coverings in the slack quasi-metric | **reformulation** | unchanged |
 | G4 dichotomy and rate–distortion exponent on product landscapes | **plausibly original theorem** (an application of type covering) | unchanged |
@@ -130,8 +130,8 @@ Setting of the proof of Theorem 11.69: non-empty `Q_M ⊂ ℝ^d` with (C) `∀q�
 
 **Proposition A2.2.**  Let `p` be an interior point of `K`.  There are `M₀(p)` and a constant
 `c = 2√(β(d+1)(β′+R))` such that `dist(p, E_M) ≤ c·M^{-1/2}` for all `M ≥ M₀(p)`; `M₀` can be chosen uniformly on
-compact subsets of the interior.  For the bridges of Theorem 11.69 (`β = 60`, `β′ = 28`, `R = 36`, `d = 4`):
-`c ≈ 277`.
+compact subsets of the interior.  For the bridges of Theorem 11.69 (`β = 60`, `β′ = 28`, `R = 36`, `d = 4`,
+`M = N + 3`, norm `‖·‖_c + |g|`): `c ≈ 277`.
 
 *Proof.*  Fix a simplex with vertices `w₀,…,w_d ∈ K` that contains a ball around `p`.  Since `E_m → K` in the
 Hausdorff metric, for all `m ≥ m₀(p)` there are `v_i = q_i/m ∈ E_m` so close to `w_i` that `p = Σ λ_i v_i` with
@@ -205,8 +205,10 @@ For a transitive subshift of finite type and a vector potential that is constant
 the rotation set `{∫Φ dμ}` is a polytope whose vertices are the averages over elementary periodic orbits
 (Ziemian 1995, as reported by Kucherenko–Wolf **[K: abstract and introduction of Kucherenko–Wolf read; Ziemian
 not read]**); hence every exposed face contains a point that finite orbit segments reach exactly along
-multiples of a period, and within `O(1/N)` for all `N`.  By Proposition 11.73 no profile density of a walk or
-bridge with `N` beads is closer than `17.6·N^{-1/3} − 17/N` to the face `9p₃ + 4p₈ + p₁₁ = 35` of `K^{br}`.  So
+multiples of a period, and within `O(1/N)` for all `N`: the maximum of any linear functional over the
+finite-length averages is within `O(1/N)` of its maximum over the rotation set.  By Proposition 11.73 the
+functional `9p₃ + 4p₈ + p₁₁`, whose maximum over `K^{br}` is 35 (crystal vertex), stays below
+`35 − 17.6·N^{-1/3} + 17/N` on the profile densities of all walks and bridges with `N` beads.  So
 `K^{br}` is not such a rotation set in any coding in which chain length is orbit length.  The reason is visible
 in Lemma 11.67: in sequence coordinates the profile is a *long-range, superadditive* observable (contacts
 between beads far apart along the chain), additive only across bridge junctions; in space coordinates it is a
@@ -246,10 +248,10 @@ distance multisets):
 
 Three layers of non-identifiability are thus separated: (1) *labels*: different chains through the same site
 set (factor `W/S ≈ 2.5–2.8`); (2) *homometry*: non-congruent site sets with all distances equal — on `ℤ²` a
-fraction of the site sets that decreases with the length (11, 10, 9, 6, 3 % at 6, 8, 10, 12, 14 beads; 3, 3, 2,
-1 % at 9, 11, 13, 15), on `ℤ³` a fraction that does not (17, 14, 21, 19 % at 6, 7, 8, 9 beads); (3) *truncation
-and counting*: the profile of the theory report keeps only the numbers of
-pairs below a cutoff, and then `8 453` conformations share `285` profiles.  Mirror images are identified
+fraction of the site sets that decreases with the length (11, 10, 9, 6, 3, 2 % at 6, 8, 10, 12, 14, 16 beads;
+3, 3, 2, 1 % at 9, 11, 13, 15), on `ℤ³` a fraction that does not (17, 14, 21, 19 % at 6, 7, 8, 9 beads);
+(3) *truncation and counting*: the profile of the theory report keeps only the numbers of pairs below a cutoff,
+and then `8 453` conformations share `285` profiles (`ℤ³`, 9 beads) and `802 075` share `507` (`ℤ²`, 16 beads).  Mirror images are identified
 throughout (no distance data can separate them).  The generic-uniqueness theorem of Boutin–Kemper does not
 contradict this: its hypothesis fails for every configuration with two equal distances (§4.5).
 
@@ -262,7 +264,7 @@ repository.  "Independent replication" below means: re-computed with this code.
 
 | script | what | sizes | result | CPU time |
 |---|---|---|---|---|
-| `homometry_saw.py 2 14 5`, `… 2 16 5 15`, `… 3 9 5` | exhaustive enumeration of self-avoiding walks on `ℤ²`, `ℤ³` up to lattice symmetries (reflections included); site sets; complete squared-distance multisets; truncated profiles | `ℤ²`: 4–15 beads complete (593 611 walks with fixed first step at 15); `ℤ³`: 4–9 beads (64 661) | table in A2.6; first homometric pair at 6 beads; sanity: 5 and 6 walk classes at 4 beads (Burnside) | 70 s (`ℤ²`, ≤ 14), ≈ 5 min (15), 42 s (`ℤ³`) |
+| `homometry_saw.py 2 14 5`, `… 2 16 5 15`, `… 3 9 5` | exhaustive enumeration of self-avoiding walks on `ℤ²`, `ℤ³` up to lattice symmetries (reflections included); site sets; complete squared-distance multisets; truncated profiles | `ℤ²`: 4–16 beads (1 604 149 walks with fixed first step at 16); `ℤ³`: 4–9 beads (64 661) | table in A2.6; first homometric pair at 6 beads; sanity: 5 and 6 walk classes at 4 beads (Burnside), 802 075 at 16 beads | 70 s (`ℤ²`, ≤ 14), ≈ 15 min and 2 GB (15 and 16), 42 s (`ℤ³`) |
 | `torsion_checks.py` (seed fixed) | C4: closed form vs direct minimisation over the re-superposition angle; Kabsch (proper rotation) cost vs coaxial cost; two-sided reduced-inertia bounds | 20 000 random two-body torsion moves, 1–11 atoms per side | formula = direct minimum (relative deviation `7·10⁻⁶`, grid error) `= 2(S − |I_A + I_B e^{iφ}|)`; Kabsch ≤ coaxial in all cases, largest ratio `0.9983`; bounds of Theorem 4.6(c) never violated — **independent replication of Theorem 4.6(b),(c)** (the earlier reviewer of `L3` also reports `0.998`) | 17 s |
 | same | G16: `2√min(I_A,I_B)` about a torsion axis at distance `m` from the end of an all-trans tetrahedral chain; regular helices; phantom random-rotamer coils | `m = 10 … 640`, `N` up to 2003 | `value/m^{3/2} = 0.625, 0.585, 0.565, 0.554, 0.549, 0.547, 0.546`; fitted exponent `1.47 → 3/2` — **independent replication of the power in Theorem 11.36**; random coils: `2√min I ≈ 1.17·m` (median, `m = 200`) | (same run) |
 | `lever_constant.py` | sup over arm orientations (three torsions next to the central bond on each side, 20° grid, all-trans arms) of `2√(2I_red)/m^{3/2}` | `m = 20, 40, 80` | `1.013, 0.978, 0.961`, attained with a gauche torsion next to the central bond; `sup I_arm/m³ → 2/9` | 80 s |
@@ -297,6 +299,20 @@ a compact state.
 
 The complete log (40 searches S1–S40, with outcomes) is in `experiments/science/ws_A2/NOTES.md`; the table at
 the end of this section lists them in abridged form.  I extend, and do not repeat, `docs/prior_art/L1…L8`.
+
+*Exact statements and locations of the claims tested* (theory report at `5ed4072`; the kernel claims are quoted
+in §4.1):
+
+| claim | where | statement, and the repository's own novelty sentence |
+|---|---|---|
+| G1 | §11.2, Thms 11.3–11.5; `isCertificate_iff_cover` | `A` is a point `ε`-certificate iff every `y` has an evaluated point within slack distance `E(y) − UB(A) + ε`, `s(a,y) = d(a,y) − g(a) + g(y)`; `N_cov ≤ N_point ≤ N_cov + 1`.  "reformulation of a known notion …; the slack form with a known part and an asymmetric envelope was not found" |
+| G4 | §11.4, Thms 11.7–11.9 | one evaluation certifies iff every site is sharp; otherwise `n⁻¹ ln N_cov → R* = max_P R(P; s − gap, 0)`.  "no match found; an application of the type covering lemma" |
+| G7 | §11.6, Thms 11.12–11.15 | `n⁻¹ ln N_Z → R_β = max_Q R(Q; s, KL(Q‖π)/β)` for accuracies neither extensive nor exponentially small.  "the exponent formula is a corollary of Merhav's (2011) theorem …; the identification … and the one-shot converses: no match found" |
+| G13 | §11.11, Thm 11.29; `isValueCertificate_iff_normalForm` | value certificates of `(d, f, g)` = point certificates of `(σ, 0, f^d + g)`, `σ` the reduced cost of `d` under the Pasch–Hausdorff envelope `f^d`.  "elementary (Johnson reweighting, min-plus adjointness); the packaging for certification apparently new" |
+| G16 | §11.14, Thms 11.36–11.38 | `c_i ≥ 0.824·Λ b m_i^{3/2}`; with `c_i ≥ c₀m_i^γ` the weighted-Hamming format costs `ln N_cov ≥ n ln k − C((G+ε)/c₀)^{1/(1+γ)}`; RMSD used directly: `exp(Θ̃(√N))`.  "lever-arm effects are folklore in molecular modelling, the quantitative consequences for certification were not found (no literature search was possible in the review)" |
+| G19 | §11.17, Thms 11.47–11.48, Props 11.49–11.50 | linear classes: bracket = unexplained part of the feature vector; pair-additive Lipschitz residuals: `d_P(x,y) = L Σ_τ‖N^x_τ − N^y_τ‖_{L¹}` = Wasserstein-1 distance of truncated squared-distance multisets.  "the linear theory is known …; its reading as the exact envelope of a residual class next to a known part, and the consequences for certificates, were not found; none of it is deep" |
+| G24 | §11.22, Lemmas 11.67–11.68, 11.70, Thms 11.69, 11.71, Props 11.72–11.74 | normalised `(profile, #gauche)` sets of diamond-lattice bridges converge in the Hausdorff metric to a compact convex body; certificate sizes converge to its covering number; outer polytopes; `N^{-1/3}` law.  "limits of supermultiplicative models and the cluster method … are known; … the limit shape for this model, the stability lemma and the numbers were not found" |
+| C4 | §4.4, Thm 4.6, Cor 4.7 | coaxial cost `2S − 2√(S² − 4I_AI_B sin²(φ/2)) ≤ 4 min(I_A,I_B) sin²(φ/2)`; chain rule.  "small-angle content classical …; finite-angle closed form and chained bound: no match found" |
 
 ### 4.1 Kernels (E1, D3, D4; theory report §0.2, §3.4, §6.1–6.4, §11.8)
 
@@ -614,3 +630,139 @@ stability of covering numbers **unresolved (elementary, not found)**.
 | S36–S39 | Merhav 2011; follow-ups of certified Lipschitz optimisation | 1 PDF, 2 searches, 4 arXiv API queries | §4.2 |
 | S40 | hinge RMSD closed form | 1 search | nothing |
 
+
+### 4.8 Claims in the README or the theory report whose novelty wording should be weakened
+
+Each item: where, what it says, the evidence, a replacement that I would accept as a referee.
+
+| # | where | wording now | evidence | suggested wording |
+|---|---|---|---|---|
+| W1 | theory report §0.2, row D3 | "verified checkers exist for exact model counting only" | Tan et al. CAV 2024 (formally verified approximate counting); McCreesh et al. CP 2026 (formally verified enumeration; count-preserving transformations); Cheng–Luo–Jiang IJCAI 2024 (two-sided bounds of a weighted count with pruning, clausal proofs) — §4.1 items 5–7 | "verified or proof-producing checkers exist for exact weighted and unweighted model counting (CPOG, Lean 4), for approximate counting with probabilistic guarantees (ApproxMC certificates, Isabelle/HOL + CakeML), for solution enumeration (VeriPB/CakePB) and for exact stochastic-SAT values through two-sided implication proofs; a verified checker for *deterministic two-sided bounds on a weighted sum* with this rule set was not found" |
+| W2 | §6.4, first two sentences; §0.2 row E1 ("the gap concerns native witnesses and their checking cost"); `L1` §C4(ii) ("the 43-times figure … is the number to beat") | checking cost of the pseudo-Boolean route is presented as the reason for native certificates | Koops et al. CP 2025: formally verified PBO, with LP/Farkas bounds, within a factor 20 of solving, median 1.43; van Doren et al. ASE 2025: native MaxSAT logging with median overhead < 2 %; Py–Cherif–Habet 2022: EPT-sequence certificates with a checker for MaxSAT | "… no proof logging for cost-function-network / MAP solvers was found (toulbar2 1.0.0 has none).  The ingredients have verified checkers in the pseudo-Boolean setting — LP bounds through Farkas certificates and dominance — with checking within a factor 20 of solving time, and certificates made of equivalence-preserving transformations exist for MaxSAT with an unverified checker; whether a native format is cheaper has not been measured.  What has no counterpart there is a certificate valid for a whole class of residuals." |
+| W3 | §10 row G19 and §11.17 "Prior art" | "the distance is known as a descriptor distance (Osada et al. 2002; bag of bonds)"; "Not found in print, and immediate once named: the profile distance read as the exact envelope of the class of unknown Lipschitz pair potentials" | Mémoli–Needham 2022 (and Mémoli 2011): the Wasserstein distance between global distance distributions is a named pseudometric, a lower bound of the Gromov–Wasserstein distance, with a literature on its zero set (Boutin–Kemper; homometry) — §4.5 | "the distance is the Wasserstein-1 distance between global distance distributions, a standard lower bound of the Gromov–Wasserstein distance (Mémoli 2011; Mémoli–Needham 2022), whose zero set is Patterson homometry; its reading as the support function of the class of Lipschitz pair potentials is Kantorovich–Rubinstein duality for that distance" |
+| W4 | §11.17, Theorem 11.48(b) | "`d_P` is a pseudometric with large fibres … (802 075 walks … 541 profiles)" | the fibres have three distinct sources (labels, homometry, truncation), the second being a classical subject; generic uniqueness (Boutin–Kemper) does *not* apply to chains (their Lemma 1.8) — §4.5, A2.6, A2.7 | add one sentence naming the three sources and citing Boutin–Kemper with the caveat; the count 541 is reproduced (all pairs, squared distance `< 5`) |
+| W5 | §10 row G13; §11.11 ("the reviewer judged the packaging new for this problem") | "elementary (Johnson reweighting, min-plus adjointness); the packaging for certification apparently new" | A2.4: for symmetric `d` the reduced envelope is a weightable quasi-metric with weight `−2f^d` — the classical correspondence between weighted semimetrics, weightable quasi-metrics and partial metrics (Matthews; Künzi–Vajner; Deza–Deza–Vidali) | "… the reduced envelope is a weightable quasi-metric (equivalently a partial metric) whose weight is the regularised known part — a classical correspondence; the equivalence of value certificates with point certificates of the reduced instance was not found" |
+| W6 | §10 row G16 ("lever-arm effects are folklore in molecular modelling"); README "Status" ("the verified per-torsion constants grow with the distance to the chain end") ; the name "lever-arm law" | the growth law reads as a finding | the weighted-`ℓ¹` displacement bound with lever-arm weights is a published certificate in motion planning (Schwarzer–Saha–Latombe 2005, Lemma 2); the growth of joint-space inertia is documented in robotics (Featherstone 2004); the `m³` of a moment of inertia is a one-line computation — §4.4 | "the constants are (square roots of) reduced moments of inertia and therefore grow like `m^{3/2}` on any domain that contains extended arms (sharp constant `2√2/3` at the centre of a tetrahedral chain); per-joint lever-arm bounds of this kind are standard in robot motion planning.  New here are the consequences for certification (Theorems 11.37–11.38)." |
+| W7 | §10 row G7; §11.6 "Attribution" | "a corollary of Merhav's (2011) theorem on exponential moments of distortion"; "[K, not verified in detail]" | Merhav 2011, §4, read in full: an example of a general observation, stated as "a straightforward exercise", for memoryless finite-alphabet sources and additive distortion | "a corollary of an example in Merhav (2011, §4, eq. (37))"; tag "[K, section read in full]" |
+| W8 | §10 row G24 and §11.22 "Prior art" ("Fekete's lemma for sets"; "limits of supermultiplicative models … are known") | the abstract theorem is presented without its closest classical relative | Kaveh–Khovanskii 2012 (Newton–Okounkov body of a graded semigroup; approximation theorem 1.6, stronger for exact semigroups) — §4.6 | add: "for an exact semigroup of lattice points this is the Newton–Okounkov body (Khovanskii; Kaveh–Khovanskii 2012), whose approximation theorem gives in addition that interior lattice points are eventually attained; the statement here allows a bounded error" |
+| W9 | §11.22, Proposition 11.73 (`e₈(S) ≤ 6N − 3N^{2/3}`; "proved: `k ≥ 0.50`") | presented as new, with the constant 3 | Bezdek 2012, Theorem 1.1(ii): contact numbers of subsets of a lattice packing are `< 6n − 3.665n^{2/3}` — A2.3 | cite Bezdek for the second-neighbour term; constants `3.665` (all site sets) and `4.617` (walks, by sublattice balance); "`k ≥ 0.69`" |
+| W10 | §0.2 row C4; §4.4 "Prior art" | "finite-angle closed form and chained bound: no match found" | the closed form is the planar weighted Procrustes residual `2(S − |I_A + I_B e^{iφ}|)`; the chained bound without superposition is Lemma 2 of Schwarzer–Saha–Latombe | keep "not found as a bound on the Kabsch cost"; add the two remarks |
+
+None of W1–W10 touches a machine-checked statement or a theorem; they concern the last column of the two
+tables and the prior-art paragraphs.
+
+### 4.9 Claims that are stated too modestly
+
+| # | where | what is stated | what could be stated, and the evidence |
+|---|---|---|---|
+| M1 | §6.1, §0.2 row E1, README "Kernels" | the residual kernel is listed as one of three kernels, novelty "no native verified checker … found" | Its distinguishing property is the quantifier: one accepted certificate bounds `E + g` for **every** residual of an envelope class consistent with interval anchor data, and the kernel decides non-emptiness of the class (`verifyITop_sound`, `IProblem.consistent_iff_nonempty` **[V]**).  Every proof-logging system I read certifies a statement about one instance (§4.1).  This is the capability to put first.  (Evidence is a comparison of statements for the systems read plus absence in 20 listed preprints — not a proof of novelty.) |
+| M2 | §11.22, Theorem 11.69 ("nothing in this argument says how fast they fill it") | only the one-sided rate `168/(N+3)`; the `N^{-1/3}` law is read as the rate of the shape | Proposition A2.2 **[P]**: under the same hypotheses interior points are approached at rate `O(N^{-1/2})`; the `N^{-1/3}` law is a boundary effect.  For exact semigroups the classical theorem gives `O(1/N)`. |
+| M3 | §11.22, Proposition 11.73 ("proved: `k ≥ 0.50`") | surface-law constant | `k ≥ 0.69` for walks (A2.3) **[P from K]** |
+| M4 | §11.14, Theorem 11.36 ("`c_i ≥ 0.824·Λ b m_i^{3/2}`", "lower constant numerical") | a lower bound with a numerical constant | the sharp asymptotic constant: `sup_x 2√(2I_red) = (2√2/3)·b·m^{3/2}(1+o(1))` at the central torsion, `(4/3)·b·m^{3/2}` far from the centre, by a three-line argument (largest extension of `j` bonds) and attained by an all-trans arm behind one gauche torsion **[P sketch + N]** (§3) |
+| M5 | §11.17 and COMMON ("no experimental observable appears anywhere") | the profile class is described as a class of unknown pair potentials | Proposition A2.1 **[P, checked]**: the Debye intensity at wave number `q` is a member of the class with `L = q²/6` per pair, so every statement of Theorem 11.48 and the linear kernel applies verbatim to *scattering curves of a single conformation*, and the fibres of the complete profile are exactly the scattering-indistinguishable conformations.  This is a precise physical reading under stated assumptions (kinematic scattering, `q`-independent form factors, no cutoff, one conformation — not an ensemble). |
+| M6 | §11.17 (the referee's "541 profiles") | quoted from a referee, convention unstated | reproduced independently (A2.6, §3) with the convention "all pairs, squared distance `< 5`"; under the convention of §11.22 the number is 507 |
+| M7 | §11.6 | Merhav's example "available to us only through an automatic summary" | now read in full; the attribution is correct (W7) |
+
+---
+
+## 5. What I did not settle
+
+* **Absence claims.**  E1 rests on indexed sources and on toulbar2's public documentation and code as of today;
+  two 2026 theses that surfaced (Oertel, Lund; McIlree, Glasgow) were not read, and workshop papers are not
+  indexed.  D1 (thermal prune as a certificate rule) was not searched beyond `L1`.
+* **Not accessed** (cited through others or from memory, and tagged so): Featherstone 2004 beyond the abstract
+  (repository copy restricted); Lanford 1973; Ziemian 1995; Mémoli 2011; Matthews 1992/1994 and Künzi–Vajner
+  1994 (through Deza–Deza–Vidali and a search snippet); Petoukhov–Svergun 2015; Janse van Rensburg's book;
+  Hansen–Jaumard–Lu 1991 (already inaccessible to `L4`); the JAIR version of Py–Cherif–Habet (server error; the
+  IJCAI abstract was read); the supplementary material of the K*-family papers; the body of Tan et al. 2024.
+* **Read through a fetch tool only** (short quotations, no page images): Koops et al. 2025; Hallen–Donald 2019;
+  Konarev–Svergun 2015; the Gortler–Theran–Thurston abstract; the toulbar2 guide.
+* **Mathematics.**  A2.2 and A2.7 are not checked numerically; `M₀(p)` in A2.2 is not effective.  A2.3 uses the
+  report's bound on `e₃` without re-deriving it.  A2.5 uses Ziemian's theorem through a secondary source.
+  Whether the bridge statistics of Lemma 11.68 can be made an exact semigroup is open.  The sharp constant in M4
+  is a sketch plus numerics on a 20° grid, not a written proof.
+* **Identifiability.**  I did not apply Proposition 1.10 of Boutin–Kemper to chains (is a *generic chain with
+  fixed bond lengths* reconstructible from its complete distance multiset?); did not enumerate the diamond
+  lattice of §11.22; do not know whether the homometric fraction on `ℤ³` has a positive limit; have no
+  stability estimate (RMSD against profile distance) and A2.6 shows none can hold globally.
+* **No measurement** supports or refutes "native certificates are cheaper to check" (see §7, request E-1).
+
+## 6. The three most promising next steps
+
+1. **Measure the native-versus-pseudo-Boolean question.**  One cost-function-network run with DEE, logged twice:
+   as a certificate of the Lean kernel and as a VeriPB proof (cutting-planes derivation of each reparameterisation
+   bound from its dual solution; dominance steps for DEE), checked by CakePB.  Until this exists E1 is a
+   statement about absence, not about a capability with an advantage.  The residual kernel has no
+   pseudo-Boolean competitor and should be presented first.
+2. **Identifiability of chains from distance data, done properly.**  Three precise questions that the literature
+   leaves open and that are within reach: (a) *generic chains*: for fixed bond lengths (and angles), is the map
+   from torsion space to the complete distance multiset injective modulo the obvious symmetries (isometries,
+   chain reversal) on a dense open set?  Boutin–Kemper's Proposition 1.10 with the symmetry group of the bonded
+   pattern is the tool; (b) *lattices*: growth rate of the homometric fraction (A2.6) and of the fibres of the
+   truncated profile — the latter is the joint density function of Janse van Rensburg's theory, i.e. a concave
+   entropy on the limit shape, which nobody has computed for this model; (c) *with a cutoff*: A2.7 reduces
+   local identifiability to rigidity of the contact framework and exhibits exponentially large global fibres;
+   the right global object is the group of re-orderings and sign changes of torsions that preserve the contact
+   framework.  For the science division's agenda the conclusion to date is negative and should be stated
+   plainly: **a pair-distance profile with a cutoff does not identify a conformation, not even on small
+   lattices, and the theorem usually quoted for the opposite (generic reconstructibility) does not cover
+   chains.**
+3. **The limit shape as a Newton–Okounkov body.**  If the concatenation error of Lemma 11.68 can be made
+   constant by a change of bookkeeping (e.g. recording the linker's own contribution separately, or restricting
+   to bridges with a prescribed end pattern), the profile vectors of bridges form a genuine graded semigroup of
+   lattice points; then the approximation theorem gives interior convergence at rate `1/N`, the number of
+   attained profiles at length `N` is asymptotically `vol(K)·N^d` (Kaveh–Khovanskii, Theorem 1.14 — statement
+   seen, not studied), and `vol 𝒦` — which §11.22 brackets by `2.2 ≲ vol ≤ 3.125` — becomes computable from the
+   exact class counts of the Computational Research Division (4 532 profile classes at 27 beads).  This is a
+   cheap, falsifiable prediction: the number of distinct profiles of bridges should grow like `vol(𝒦)·N³`
+   (divided by the index of the lattice they generate in `ℤ³`).  A plausibility check **[H]**: at 27 beads
+   `vol(𝒦)·N³ ≈ (4–6)·10⁴`, far above 4 532; but the profile set at that size reaches only 39 % of the bulk
+   extent (surface law), and `0.39³·(4–6)·10⁴ ≈ 2 600–3 700` is of the observed order.
+
+## 7. Requests
+
+### To the theory division
+
+* **T-1 (wording; no mathematics).**  Apply W1–W10 of §4.8, in particular replace the D3 sentence and the two
+  sentences of §6.4 by the texts given there, and add to `docs/prior_art/` the references of §4 (reading levels
+  as stated).  Remove "is the number to beat" from `L1` or date it.
+* **T-2.**  Add Proposition A2.1 to §11.17 (or refute it): `|I_x(q) − I_y(q)| ≤ (q²/3)·Σ_k|s^x_(k) − s^y_(k)|` for
+  Debye intensities of `N` equal scatterers.  A Lean statement is a three-line consequence of `pairRes_sub_le`
+  once `|d/ds sinc(q√s)| ≤ q²/6` is available; say explicitly that it concerns one conformation.
+* **T-3.**  Check and, if correct, machine-check Proposition A2.2 in `SetLimit.lean`: under (C), (E), (B), for
+  `p` in the interior of the limit, `dist(p, E_M) ≤ β/m + (d+1)(β′+R)m/M` whenever `E_m` contains `d+1` points
+  whose convex hull contains `p`.  Then correct the sentence after Theorem 11.69.
+* **T-4.**  Decide whether Lemma 11.68 can be sharpened to an exact semigroup (constant error vector for a
+  suitable sub-family of bridges).  If yes, state Theorem 11.69 as a Newton–Okounkov body and test the
+  prediction of §6 item 3 on the enumeration data.
+* **T-5.**  Replace the constant 3 of Proposition 11.73 by Bezdek's, with the citation (A2.3), and state the
+  sharp constant of Theorem 11.36 (M4) or say why the present one is preferred.
+* **T-6.**  State in §11.17 what the fibres of `d_P` are (labels, homometry, truncation), cite Boutin–Kemper
+  with the caveat of their Lemma 1.8, and state the convention behind "541".
+
+### To the engineering division
+
+* **E-1 (benchmark: native kernel against pseudo-Boolean proof logging).**  *Motivation:* §6 item 1.
+  *Formulation:* for each instance, (i) a certificate of `verify`/`verifyR` as now; (ii) the same search tree as
+  a VeriPB proof for the 0–1 encoding (one indicator per site and state, exactly-one constraints, objective =
+  table entries): each `leaf` bound as a cutting-planes derivation whose multipliers are the messages, each
+  `prune` as a dominance step with the witness "replace state `r` by `t` at site `i`", each `branch` as case
+  splitting.  *Inputs:* the conformance vectors in `experiments/certs/`, the frustrated-triangle families of
+  §6.3 for `m ≤ 12`, and ten pairwise instances with 20–60 sites and 3–10 states.  *Outputs:* certificate and
+  proof sizes, checking times of the reference checker, of the Lean kernel (`decide +kernel` where feasible)
+  and of VeriPB with elaboration to CakePB.  *Validation:* both routes must certify the same bound; a planted
+  wrong bound must be rejected by both.  *Stopping:* if the VeriPB route is within a factor 3 in size and time
+  on all instances, report that the "native" advantage is not measurable.  *Resources:* a few CPU hours; no
+  solver changes (proofs can be generated from existing certificates).
+* **E-2 (homometry on the diamond lattice).**  *Motivation:* A2.6 was done on `ℤ²`, `ℤ³`; the theory's model is
+  the diamond lattice.  *Formulation:* from the existing exhaustive enumeration (`ENG-RES-0002`, up to 27
+  beads) count, per chain length: walk classes, site sets up to the lattice point group with reflections,
+  distinct complete squared-distance multisets, homometric groups and their sizes, and profile classes at
+  `S_c = 12` — i.e. the columns of the table in A2.6.  *Validation:* my script `homometry_saw.py` reproduces
+  802 075 and 541 on `ℤ²` and can be adapted by changing `STEPS` and the point group; agree on 8–12 beads first.
+  *Expected output:* the homometric fraction as a function of `N` and the number of profile classes of
+  *bridges* (for §6 item 3).  *Stopping:* at the largest size for which the site-set table fits in memory
+  (my unoptimised script needs about 2 GB for the 2.8·10⁵ site sets of 16 beads on `ℤ²`; a compact
+  implementation is needed beyond ≈ 18 beads).
+* **E-3 (optional).**  Tabulate, for the enumerated conformations, the Debye curves `I(q)` on a grid and verify
+  A2.1 on the real data; report the largest `|ΔI(q)|/(q²W/3)` per `q`.

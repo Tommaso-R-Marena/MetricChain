@@ -75,7 +75,7 @@ too strong — neither their paper nor the Novak–Rudolf survey poses the non-l
 coincide *in the limit* `ε₁ → 0⁺` (§2.3); (4) §2.4 now contains a proof that in *absolute* error the
 adaption gain disappears; (5) the two headline numbers of G26 were re-computed (§3, §4.6);
 (6) the theory division's own earlier mention of the Suárez–Silbey–Oppenheim paper (by title) is
-recorded (§2.2); (7) search log: 24 queries; seven scripts.
+recorded (§2.2); (7) search log: 25 queries; eight scripts.
 
 ---
 
@@ -318,6 +318,13 @@ every `p`, so `a(p, u) ≤ a(½, u) = ln 2 − h(p_u)`, with equality iff `p = �
 in its capacity form (Hasenclever–Scholz), and the monotonicity of `a` in the field is step (5) of
 the report's proof of that lemma.  For the exponent `a` this replaces the separate proof of
 Proposition 11.65(b).
+*How sharp it is at finite `n`.*  Not very: the `O(√n)` term comes from Azuma's inequality with the
+worst-case range `2u`.  At `n = 4000`, `u = 1`, `ε = 1`, `δ = 0.1` the proposition gives `e^{0.20n}`
+samples, against `e^{0.134n}` for the report's Harper-based Theorem 11.44 and the lower bound
+`e^{0.109n}` (benchmark B12, as quoted in §11.16); the exponent `a = 0.111` is reached only
+asymptotically, as in the report.  (A Freedman-type inequality with the conditional variance
+`κ(1−κ)(logit κ)²`, whose maximum over `κ ∈ [p_u, ½]` is attained at `κ = p_u` — the cone — for
+`u ≤ 2.40`, would bring the constant of the `√n` term down to the cone's there.)
 *What it does not give.*  The extensive-accuracy bound `θ_na(ε₁)` (Theorem 11.44(i)): there the
 *lower* tail of the log-density under `ν_ψ` is needed uniformly over the class, the adapted
 conditional means act as an adversary who can freeze the walk (`κ ≡ ½` is the flat instance), and I
@@ -363,7 +370,7 @@ All scripts are mine, share nothing with the theory division's code, and run in 
 | `exponent_checks.py` → `.out` (4 s) | E1 the report's values of `h`, `a`; E2 S–S–O formulas = `θ_na`, `ln cosh`, `a`; Chatterjee–Diaconis `q = a`; E3 shear identity; E4 exact finite-`n` lower-bound constructions; E5 simulation of plain Monte Carlo at the cone; E6, E7 | E1: `h = 0.00767, 0.02914, 0.09728, 0.15614` (`u = ½, 1, 2, ln 16`), `a = 0.03030, 0.11094, 0.32781` — all digits of the report; E2: `4·10⁻¹⁵`; **E4: `0.02933` at `n = 6400`, `u = 1`, `ε₁ = ¼ ln cosh ½`, `δ = 0.05` — replicates the report's `0.0293`** (limit `0.0283`); hinted side `0.0169 → 0.0163`; E5 as in §2.2 |
 | `capacity_check.py` → `.out` (3 s) | C1 capacity = information radius for the cone channel, six `(p, u)`; C2 uniform cube; C3 plain MC from `π`; C4 exact finite-`n` KL of a cone against the flat histogram; C5 mutation | equality to `10⁻⁸`; `a(0.1, 2) = 0.16374`, `r* = 0.1975`; flat histogram: `0.1752, 0.1675, 0.1649` at `n = 200, 800, 3200` `→ 0.1637`; **replicates the table of §11.20 exactly** (§2.3(c)) |
 | `chain_rule_check.py` → `.out` (5 s) | Proposition A1.1 by exact enumeration, `n = 8…14`, seven `(n, p, u)`, 16 families of Lipschitz functions each (cones, flattened cones, dips, minima/maxima of cones, McShane regularisations of random functions at four roughness scales, wells, block-radial, additive): A2 conditional means in `[a₀, a₁]`; A3 `KL ≤ na`; A4 exact upper tail against `exp(−s²/(2nu²))`; A5 Monte Carlo for item 4; A6 `a(p,u) ≤ a(½,u)`; A7 three mutations | 112 instances: largest excursion of a conditional mean `4·10⁻¹⁵`; `max KL/(na) = 1.000000`, attained at a constant cone; tail bound never violated; item 4: measured `0.227` against the bound `0.471` in the tightest case; mutations detected (a `3u`-Lipschitz function leaves the interval; proposal `π` gives `1.28·na`) |
-| `rounds_numbers_check.py` → `.out` (3 min), `rounds_refine.py` → `.out` (finer grid, ≈ 15 min) | the two headline numbers of the round hierarchy, re-computed from the formulas *as printed* in Theorems 11.84(b) and 11.86 (this replicates the evaluation of the formulas, not their proofs) | upper value `T^{(2)}(0)/a = 0.6196, 0.6243, 0.6412, 0.6646` at `u = 0.5, 1, 2, 3` (report: `0.620, 0.624, 0.641, 0.665`), `0.6181` at `u = 0.02` (golden ratio `0.618`); lower value `θ₂*/a = 0.3493, 0.3592, 0.3940, 0.4395` (report: `0.349, 0.359, 0.394, 0.440`), `θ₂*/h = 1.379, 1.368, 1.328, 1.277` (report: `1.38, 1.37, 1.33, 1.28`); at `u = 2` the supremum sits on the constraint `θ < φ₂a` (`φ₁ = 0.606`), which a grid of step `0.01` in `φ₁` misses by `0.002` |
+| `rounds_numbers_check.py` → `.out` (3 min), `rounds_refine.py` → `.out` (finer grid, ≈ 15 min) | the two headline numbers of the round hierarchy, re-computed from the formulas *as printed* in Theorems 11.84(b) and 11.86 (this replicates the evaluation of the formulas, not their proofs) | upper value `T^{(2)}(0)/a = 0.6196, 0.6243, 0.6412, 0.6646` at `u = 0.5, 1, 2, 3` (report: `0.620, 0.624, 0.641, 0.665`), `0.6181` at `u = 0.02` (golden ratio `0.618`); lower value `θ₂*/a = 0.3493, 0.3592, 0.3940, 0.4396` (report: `0.349, 0.359, 0.394, 0.440`), `θ₂*/h = 1.379, 1.368, 1.328, 1.277` (report: `1.38, 1.37, 1.33, 1.28`), best `φ₁ = 0.640, 0.606, 0.560` at `u = 1, 2, 3` (report: `0.64, 0.61, 0.56`); at `u = 2` the supremum sits on the constraint `θ < φ₂a`, which a grid of step `0.01` in `φ₁` misses by `0.002` |
 
 Re-run: `cd experiments/science/ws_A1 && python3 <script>`; every script exits non-zero on a
 failed check.  *Errors of mine found on the way* (recorded in `NOTES.md`): two mutation/optimiser
@@ -523,7 +530,9 @@ converges to `R`.
 it is the published form of the REM bias, `ln M` + frozen energy (§2.2); as a statement about
 algorithms it is Theorems 11.45 + 11.54 restated (§2.4).  The transform `max_{0≤t≤1}[F(t) − te]`, with
 the constraint `t ≤ 1` producing a slope-`(−1)` regime, is the structure of Gallager's random-coding
-exponent `max_{0≤ρ≤1}[E₀(ρ) − ρR]` `[from memory — unverified]`; `θ_na(x) = max_{τ<1}(F(τ) − τx)/(1−τ)`
+exponent `max_{0≤ρ≤1}[E₀(ρ) − ρR]` (against the sphere-packing exponent with `ρ ≥ 0`; straight-line
+portion of slope `−1` below the critical rate) `[search snippet from secondary sources; Gallager
+1968 not accessed]`; `θ_na(x) = max_{τ<1}(F(τ) − τx)/(1−τ)`
 is the same game after eliminating the shear.  The convergence of the level recursion is specific
 to the nested algorithm and has no counterpart that I know.
 *Classification:* **(2) reformulation of a known result** — useful packaging (one machine-checked
@@ -627,6 +636,7 @@ lower bound adapted to a Lipschitz class, and Harper's theorem for tightness.
 22. S `Novak "Optimal recovery and n-widths for convex classes of functions" Journal of Approximation Theory 80 1995 adaption gain order n function values example abstract` → index entries only; full text not found.
 23. S `channel capacity equals information radius "min_Q max_x D(W(·|x)||Q)" … "redundancy-capacity theorem"` → arXiv:1206.2459 (opened), lecture notes.
 24. X `importance sampling hypercube "log-Lipschitz" OR "bounded log-ratio" OR "bounded influence" density conditional probabilities bounded chain rule "Kullback" product measure worst case over class sample size exp(KL) Hamming` → **nothing relevant** to Proposition A1.1 (Chatterjee–Diaconis follow-ups only).
+25. S `Gallager random coding exponent "E_r(R) = max" "0 ≤ ρ ≤ 1" "E_0(ρ) − ρR" critical rate slope −1 sphere packing exponent ρ ≥ 0` → secondary sources confirming the form (snippets only).
 
 ### 4.10 Sources and what was read
 

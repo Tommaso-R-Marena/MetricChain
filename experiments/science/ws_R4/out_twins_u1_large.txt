@@ -8,3 +8,8 @@ n=  1600 n1=  960 n2=  640 T=   54.3541 T/n=0.03397 gap=1.0031 lnA_S=3.784 lnA_D
 n=  1600 n1= 1040 n2=  560 T=   46.8827 T/n=0.02930 gap=1.0524 lnA_S=3.937 lnA_D=4.990 lnp1=-39.809 lnp2=-45.618 E=0.02488 lo2/n2=0.3071 checks_all_ok=True
 ==> n=1600: best E (two rounds) = 0.03543 at n1=800;  all algorithms: 0.03092 (k*=608, Delta_k*=1.4504)
 n=  3200 n1= 1440 n2= 1760 T=  119.1071 T/n=0.03722 gap=1.0108 lnA_S=3.020 lnA_D=4.031 lnp1=-111.314 lnp2=-117.860 E=0.03479 lo2/n2=0.3216 checks_all_ok=True
+n=  3200 n1= 1600 n2= 1600 T=  122.1469 T/n=0.03817 gap=1.1268 lnA_S=3.214 lnA_D=4.341 lnp1=-114.341 lnp2=-121.024 E=0.03573 lo2/n2=0.3106 checks_all_ok=True
+n=  3200 n1= 1760 n2= 1440 T=  125.6841 T/n=0.03928 gap=1.0009 lnA_S=3.414 lnA_D=4.415 lnp1=-117.903 lnp2=-125.299 E=0.03684 lo2/n2=0.2972 checks_all_ok=True
+n=  3200 n1= 1920 n2= 1280 T=  113.3175 T/n=0.03541 gap=1.0707 lnA_S=4.214 lnA_D=5.285 lnp1=-105.550 lnp2=-112.081 E=0.03298 lo2/n2=0.2969 checks_all_ok=True
+n=  3200 n1= 2080 n2= 1120 T=   98.3646 T/n=0.03074 gap=1.0549 lnA_S=4.477 lnA_D=5.532 lnp1=-90.610 lnp2=-97.125 E=0.02832 lo2/n2=0.2982 checks_all_ok=True
+==> n=3200: best E (two rounds) = 0.03684 at n1=1760;  all algorithms: 0.03011 (k*=1216, Delta_k*=1.5936)

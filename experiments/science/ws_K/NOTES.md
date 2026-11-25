@@ -180,3 +180,21 @@ t4_cut_families.py, t5_rates.py, t6_robust_rates.py, t7_lattice_chain.py.
   Also read: Results paragraph "there exist integers k,b such that reachability in reconfiguration variants
   of k-Coloring, Independent Set and Shortest Path is PSPACE-complete even when limited to graphs of
   bandwidth b"; tractable for bounded tree-depth.
+
+## Step 8 (18:40, `date`) — T11, T6 extension; more prior art; start of the report
+* **T11 (`t11_cut_size.py`, out_t11.txt)**: greedy number of boxes (each inside {E ≥ t}) needed to cover the
+  wall of the canonical cut exactly: random pairwise n ≤ 10: 3–10 boxes (≤ 1.3 n); RIS chain n=6,7,8:
+  median 7, 11, 11 boxes (1.2–1.6 n), max 9, 22, 26 (≤ 3.2 n); walls of 10–88 states, basins of 1–9 states.
+  So exact certificates of these (small) traps cost O(n) kernel leaves.  Caveat: tiny basins.
+* T6 extended: K_gate ≤ k_nom·exp(β·max_{x∈A,y∈wall} d(x,y)) asserted in all 33 cases; exact inflation
+  (1/β)ln(K_exact/k_nom) ∈ [0.103, 0.771], ≤ max d always, median ratio to max d 0.36; ≤ d(a,y*) in 33/33 [N].
+* Prior art (cont.): CSEH 2007 [snippet]; Nash-Williams via Lyons–Peres §2.5 [snippet]; Westerberg–Floudas
+  1999, Nerantzis–Adjiman 2017 (deterministic enclosure of all saddles: certified barriers in low-dim
+  continuous PES) [snippets]; Günther–Salmon–Tierny 2014 mandatory critical points from bounding fields
+  [snippet]; Berman–Konsowa / den Hollander–Jansen [snippet]; Noé–Nüske VAC [snippet]; Becker–Karplus,
+  Flamm et al. [snippets]; Krak et al. imprecise Markov chains [snippet]; OSPREY: no kinetics/barrier
+  guarantees found in one search; one extended search for certified/verified rate bounds: nothing found.
+* Proof checks done on paper before writing: K7 (covering iff), depth monotonicity, continuum bracket
+  WITHOUT genericity (nerve of the closed cover γ^{-1}(V_x) of [0,1] is connected; voxels through a common
+  point are face-connected and all have E_lo ≤ E there), multi-cut Dirichlet eigenvalue bound, transport-plan
+  dual bound for robust rates (K_gate = the Gibbs plan).

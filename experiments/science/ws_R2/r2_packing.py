@@ -59,8 +59,7 @@ def partA():
     return
 
 def partB(Ns):
-    from r2_lamella import lamella, measure_np
-    from r2_lattice import is_bridge
+    from r2_lamella import lamella_np, measure_np
     print("Part B: packings among explicit bridges with exactly N beads (lamellae + all-trans tail)")
     for N in Ns:
         cand={}
@@ -68,12 +67,13 @@ def partB(Ns):
             for Q in range(1,400,2):
                 if 2*M*Q*2>N+8: break
                 for l in range(2,N):
-                    x=lamella(M,Q,l,N)
+                    x=lamella_np(M,Q,l,N)
                     if x is None: break
-                    hg=measure_np(x)
-                    if hg not in cand:
-                        assert len(x)==N and is_bridge(x)
-                        cand[hg]=(M,Q,l)
+                    hg=measure_np(x)          # asserts: bonded, injective, 1-4 distances in {11,19}
+                    # bridge and lattice checks from coordinates (vectorised)
+                    assert len(x)==N and x[1:,1].min()>x[0,1] and x[:,1].max()==x[-1,1]
+                    par=x%2; assert np.all((par[:,0]==par[:,1])&(par[:,1]==par[:,2])) and np.all(((x-par).sum(1))%4==0)
+                    cand[hg]=(M,Q,l)
         pts=sorted(cand)
         H=np.array(pts,dtype=np.int64); n=len(pts)
         # cumulative coordinates: ||dh||_c = 5|d1| + 3|d2| + |d3| with (d1,d2,d3) differences of (h3, h3+h8, h3+h8+h11)

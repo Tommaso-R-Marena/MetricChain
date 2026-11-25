@@ -167,12 +167,31 @@ def asymptotics():
                 # min over d<=r of F_t(d): F_t is decreasing on [0, first root); verify monotone by sampling
                 Fr = F(n, t, r)
                 samples = [F(n, t, d) for d in sorted(set([0, 1, r // 3, r // 2, max(r - 1, 0), r]))]
-                assert all(s >= Fr for s in samples) and Fr > 0, (n, t, rho, samples)
+                if not (all(s >= Fr for s in samples) and Fr > 0):
+                    row.append(float('nan'))        # F_t not positive on [0, r]: theorem not applicable
+                    continue
                 bd = Fraction(M(n, t), Fr * Fr)
                 row.append(float(bd) * n ** t * (1 - 2 * r / n) ** (2 * t) / math.factorial(t))
             dbl = math.prod(range(1, 2 * t, 2))
             print(f"   t={t} rho={rho}: " + " ".join(f"{v:.4f}" for v in row)
                   + f"   | (2t-1)!!/t! = {dbl / math.factorial(t):.3f} (factor by which the moment bound is weaker)")
+
+def lp_vs_bound():
+    print("== exact LP optimum / Theorem-3 bound for larger n (how sharp is the bound among ALL measures?)")
+    for t in (1, 2, 3):
+        k = 2 * t
+        for rho in (0.0, 0.1, 0.3):
+            row = []
+            for n in (50, 100, 200, 400):
+                r = int(rho * n)
+                bd, pos = thm3_bound(n, t, r)
+                lp, _ = lp_exact_ball(n, k, r)
+                row.append(lp / float(bd) if pos else float('nan'))
+            print(f"   k={k} t={t} rho={rho}: LP/bound at n=50,100,200,400: " + " ".join(f"{v:.4f}" for v in row))
+    print("   first radius r at which F_t(r) <= 0 (the theorem needs r below it):")
+    for n in (24, 100, 1000):
+        print(f"     n={n}: " + ", ".join(f"t={t}: r0={next(d for d in range(n + 1) if F(n, t, d) <= 0)} "
+              f"(n/2 - r0 = {n / 2 - next(d for d in range(n + 1) if F(n, t, d) <= 0):.1f})" for t in (1, 2, 3, 4)))
 
 def odd_k():
     print("== odd k: with the extended code the bound of Theorem 3 is attained up to a constant as well")
@@ -197,4 +216,5 @@ if __name__ == "__main__":
     C, n = bch_ext_dual(5, 1)
     code_report("RM(1,5) [32,6,16] (odd k = 3)", C, n, 3)
     asymptotics()
+    lp_vs_bound()
     odd_k()

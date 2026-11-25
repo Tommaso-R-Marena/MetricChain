@@ -1,0 +1,21 @@
+# R4 own computation: exact twins of Theorem 11.86, u = 2.0, accuracy (gap >) 1.0
+# for each n and split: the largest budget T at which ln A(F_D) - ln A(F_S) > gap;
+# E = -ln(p1+p2)/n;  'all' = n^-1 ln(2^n/|B(n,k*)|) (Theorem 11.25(a), same accuracy)
+n=   200 n1=   90 n2=  110 T=   27.4956 T/n=0.13748 gap=1.0166 lnA_S=2.104 lnA_D=3.120 lnp1=-22.600 lnp2=-27.006 E=0.11294 lo2/n2=0.1818 checks_all_ok=True
+n=   200 n1=  100 n2=  100 T=   24.4451 T/n=0.12223 gap=1.2201 lnA_S=2.683 lnA_D=3.903 lnp1=-19.616 lnp2=-23.512 E=0.09798 lo2/n2=0.1900 checks_all_ok=True
+n=   200 n1=  110 n2=   90 T=   22.4754 T/n=0.11238 gap=1.0606 lnA_S=2.869 lnA_D=3.930 lnp1=-17.503 lnp2=-21.547 E=0.08743 lo2/n2=0.1889 checks_all_ok=True
+n=   200 n1=  120 n2=   80 T=   19.0205 T/n=0.09510 gap=1.3684 lnA_S=2.986 lnA_D=4.355 lnp1=-14.059 lnp2=-18.076 E=0.07020 lo2/n2=0.2000 checks_all_ok=True
+n=   200 n1=  130 n2=   70 T=   17.0293 T/n=0.08515 gap=1.2105 lnA_S=3.042 lnA_D=4.253 lnp1=-12.107 lnp2=-16.090 E=0.06044 lo2/n2=0.2000 checks_all_ok=True
+==> n=200: best E (two rounds) = 0.11294 at n1=90;  all algorithms: 0.11164 (k*=56, Delta_k*=1.1411)
+n=   400 n1=  180 n2=  220 T=   51.6652 T/n=0.12916 gap=1.1054 lnA_S=2.326 lnA_D=3.432 lnp1=-46.083 lnp2=-51.424 E=0.11520 lo2/n2=0.1818 checks_all_ok=True
+n=   400 n1=  200 n2=  200 T=   51.6353 T/n=0.12909 gap=1.0869 lnA_S=2.588 lnA_D=3.675 lnp1=-46.042 lnp2=-50.726 E=0.11508 lo2/n2=0.1700 checks_all_ok=True
+n=   400 n1=  220 n2=  180 T=   46.1967 T/n=0.11549 gap=1.0498 lnA_S=3.247 lnA_D=4.297 lnp1=-40.550 lnp2=-45.284 E=0.10135 lo2/n2=0.1722 checks_all_ok=True
+n=   400 n1=  240 n2=  160 T=   40.7574 T/n=0.10189 gap=1.0534 lnA_S=3.464 lnA_D=4.518 lnp1=-35.128 lnp2=-39.842 E=0.08780 lo2/n2=0.1750 checks_all_ok=True
+n=   400 n1=  260 n2=  140 T=   35.3179 T/n=0.08829 gap=1.0848 lnA_S=3.583 lnA_D=4.668 lnp1=-29.684 lnp2=-34.398 E=0.07419 lo2/n2=0.1786 checks_all_ok=True
+==> n=400: best E (two rounds) = 0.11520 at n1=180;  all algorithms: 0.10441 (k*=113, Delta_k*=1.7115)
+n=  1600 n1=  720 n2=  880 T=  193.2324 T/n=0.12077 gap=1.0702 lnA_S=3.032 lnA_D=4.102 lnp1=-186.250 lnp2=-193.640 E=0.11641 lo2/n2=0.1841 checks_all_ok=True
+n=  1600 n1=  800 n2=  800 T=  198.4918 T/n=0.12406 gap=1.0199 lnA_S=3.226 lnA_D=4.246 lnp1=-191.477 lnp2=-198.581 E=0.11967 lo2/n2=0.1663 checks_all_ok=True
+n=  1600 n1=  880 n2=  720 T=  200.8750 T/n=0.12555 gap=1.0061 lnA_S=3.533 lnA_D=4.539 lnp1=-193.876 lnp2=-200.497 E=0.12117 lo2/n2=0.1486 checks_all_ok=True
+n=  1600 n1=  960 n2=  640 T=  176.2011 T/n=0.11013 gap=1.1623 lnA_S=4.426 lnA_D=5.588 lnp1=-169.215 lnp2=-175.315 E=0.10576 lo2/n2=0.1516 checks_all_ok=True
+n=  1600 n1= 1040 n2=  560 T=  152.7766 T/n=0.09549 gap=1.1607 lnA_S=4.696 lnA_D=5.857 lnp1=-145.798 lnp2=-151.887 E=0.09112 lo2/n2=0.1536 checks_all_ok=True
+==> n=1600: best E (two rounds) = 0.12117 at n1=880;  all algorithms: 0.09934 (k*=453, Delta_k*=2.1705)

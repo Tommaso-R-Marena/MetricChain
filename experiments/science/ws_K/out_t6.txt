@@ -45,7 +45,4 @@ T6: robust TST bounds under a weighted Hamming envelope
     beta=2 k_nom=2.387e-01 | exact 0.519  gate 0.743  pin-a 1.155  tilt 0.232 | d(a,y*)=0.894 | 0.7123 | 0.942
     beta=4 k_nom=2.195e-02 | exact 0.722  gate 0.806  pin-a 1.010  tilt 0.232 | d(a,y*)=0.894 | 0.6986 | 0.982
 T6 summary: 33 (instance, beta) cases, violations: 0
-
-real	0m6.104s
-user	0m1.756s
-sys	0m0.085s
+   exact inflation (1/beta) ln(K_exact/k_nom): min 0.103 max 0.771; <= max_(x in A, y in wall) d(x,y) in all cases: True; <= d(a, dominant gateway) in 33/33 cases; ratio inflation / max d: median 0.36

@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 3 of the science branch (2026-11-25, about 18:20 UTC; the commit time is
+*Updated at checkpoint 9 of the science branch (2026-11-25, about 19:00 UTC; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -8,7 +8,7 @@ authoritative).  Branch `research/scientific-translation`.*
 | what | commit |
 |---|---|
 | branch point (theory head when the division started) | `5ed407282d89af46d260d2dd1687059c8e3e7728` |
-| latest theory commit read | `5ed4072` |
+| latest theory commit read | `89ac710` (their eleventh checkpoint; our tree is built on `5ed4072`) |
 | latest engineering commit read | `a2f6dc7` (digest and ENG-MSG-0003 §§1–3); computations and workstreams use `db56d05` |
 
 Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
@@ -42,6 +42,10 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 | X | alternatives to worst-case classes (average-case, weighted, structural conditions) | own theory | running |
 | R3 | adversarial referee for our own `INFERENCE_LIMITS.md` v2 | review + replication | running |
 | R4 | independent review of theory report §11.24 (rounds) → SCI-REV-0003 | review + replication | running |
+| R5 | independent review of theory report §11.26, Theorems 11.99 and 11.101, at theory `89ac710` (THY-REQ-0011 A1) → SCI-REV-0005 | review + replication | running |
+| L1 | Lean formalisation of the short cores of our own results (files outside `proofs/`) | formalisation | running |
+| M | prior art for the measurement side — **reported** (`docs/science/workstreams/SM_REPORT.md`; SCI-MSG-0002); follow-up on the stability and falsification statements running | originality | first report done |
+| A1 | prior art for the query-complexity cluster — **reported** (SCI-REV-0004); follow-up on THY-REQ-0011 B1, B2 running | originality | first report done |
 | — | replication of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | replication | **completed: `AUDIT PASSED`** — 56 Lean files, axiom audit OK on 3423 declarations, harness as expected, 267 mutations (266 caught, 1 expected pass); first replication of the three Lean files added since `63efc69` (corrected: engineering's checkpoint 3 had replicated `63efc69`); `docs/science/INDEPENDENT_VALIDATION.md` §1.1 |
 | — | replication of the engineering lattice-chain class tables | replication | **completed for `n = 1 … 10`: identical** (own enumerator); `INDEPENDENT_VALIDATION.md` §1.2 |
 
@@ -83,7 +87,12 @@ the container is reclaimed.)
 
 ## Requests received
 
-None.
+| id | from | subject | decision | state |
+|---|---|---|---|---|
+| THY-REQ-0011 A1 | theory | review of theory report §11.26 (Theorems 11.99, 11.101) | accepted | workstream R5 running → SCI-REV-0005 |
+| THY-REQ-0011 A2 | theory | review of §11.24 (Theorem 11.86) | accepted | workstream R4 running since 18:15 UTC → SCI-REV-0003 |
+| THY-REQ-0011 B1, B2 | theory | prior art: channel-coding dictionary; "`e^{u/2}` states" | accepted | B1 partly answered (SCI-RES-0001 §2); follow-up with workstream A1 |
+| THY-REQ-0011 C1 | theory | applicability of per-site envelopes; what would falsify the relevance of the exponents | accepted | workstream P running → SCI-RES-0002 |
 
 ## Known limitations of our own work
 
