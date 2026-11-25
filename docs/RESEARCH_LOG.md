@@ -1271,8 +1271,19 @@ thresholds propagate with the factor `e^u` (`admissible_succ`, `admissible_pred`
 weight truncated at type-dependent levels stays in the class (`truncate_lipschitz_insert`,
 `truncate_lipschitz_erase`, `truncate_ne_iff`).  The statement does not mention the reference
 measure: it is the reason why a sample that is uniform on type classes is the right fixed
-sample for *every* known part that is a function of the type.  52 Lean files, 3349 audited
-declarations.
+sample for *every* known part that is a function of the type.
+
+**`SymmetricSampling.lean`** (11 declarations, with a concrete witness): the matching lower bound, Theorem 11.61(b)(i),
+for every permutation-invariant class and target: a uniformly random permutation sends a
+configuration to a uniformly random configuration of its type (`card_perm_smul_mem_mul`, from
+the transitivity of the action on `k`-subsets in Mathlib), so two class members that differ
+on density at most `q` in every type class force `(1 − 2δ)/q` evaluations of every
+non-adaptive algorithm (`symmetric_nonadaptive_queries_ge`, from
+`nonadaptive_expected_queries_ge`); `truncated_weight_queries_ge` is the instance "a weight
+against its type-wise truncation".  With `TypeQuantiles.lean` the every-`n` lower half of
+"the flat-histogram sample is optimal among fixed samples for every known part that is a
+function of the type" is machine-checked; the upper half (stratified sampling: Chernoff
+and Markov) and all exponents are paper proofs.  53 Lean files, 3360 audited declarations.
 
 Workstream T (`workstreams/T_brief.md`) was commissioned to establish what is true:
 every-`n` type-level statements, the convex case step by step against the proofs of
@@ -1292,8 +1303,8 @@ the session's scratch directory (`ws/U/`) until integrated.
 
 ### Resume here (cycle 10, seventh checkpoint)
 
-Verified state: every module under `proofs/` (52 files) builds with zero warnings and is walked
-by the axiom audit (3349 declarations); the harness (110 registered tests: 92 that must survive,
+Verified state: every module under `proofs/` (53 files) builds with zero warnings and is walked
+by the axiom audit (3360 declarations); the harness (110 registered tests: 92 that must survive,
 18 documented refutations) and its mutation tests (207 mutations: 206 caught, one expected
 pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 (R5, R6,
 R_P), §11.18 (R7), §11.19 (R8: "proved"), §11.20 (R9: proved; two gaps closed).

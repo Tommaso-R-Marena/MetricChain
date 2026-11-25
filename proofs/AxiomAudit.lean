@@ -49,6 +49,7 @@ import proofs.Frontiers.GamePair
 import proofs.Frontiers.CoverStability
 import proofs.Frontiers.SetLimit
 import proofs.Frontiers.TypeQuantiles
+import proofs.Frontiers.SymmetricSampling
 import proofs.AuditCommand
 
 /-!
@@ -452,6 +453,11 @@ import proofs.AuditCommand
 #print axioms MetricChain.TypeQuantiles.truncate_lipschitz_erase
 #print axioms MetricChain.TypeQuantiles.truncate_ne_iff
 #print axioms MetricChain.TypeQuantiles.witness_admissible
+#print axioms MetricChain.SymmetricSampling.exists_perm_smul_eq
+#print axioms MetricChain.SymmetricSampling.card_perm_smul_mem_mul
+#print axioms MetricChain.SymmetricSampling.symmetric_nonadaptive_queries_ge
+#print axioms MetricChain.SymmetricSampling.truncated_weight_queries_ge
+#print axioms MetricChain.SymmetricSampling.symmetric_nonadaptive_witness
 #print axioms MetricChain.GamePair.exactRec_congr
 #print axioms MetricChain.GamePair.HintShape.pair
 #print axioms MetricChain.GamePair.HintShape.exists_pair

@@ -263,7 +263,13 @@ with the strength of the field (proved by the coordinator, refereed).  Machine-c
 identity between the three rates (`FieldShift.lean`) and the convergence of the exact
 recursion for any pair of exponent functions with the abstract properties; the central
 formulas were re-computed by the coordinator and, independently, by the referee
-(`experiments/coordinator_checks/`, `experiments/reviews/R9/`).
+(`experiments/coordinator_checks/`, `experiments/reviews/R9/`).  One half of it is not
+specific to a field: for *every* known part that is a function of the order parameter
+(mean-field models, with or without a phase transition) the flat-histogram sample is
+optimal among fixed samples up to a polynomial factor, for every `n` — the truncation
+lemma and the lower bound are machine-checked (`TypeQuantiles.lean`,
+`SymmetricSampling.lean`), the matching upper bound is a paper proof; the exponents for
+such known parts are under investigation.
 (vi) *The common structure* (theory report §11.21; workstream M; machine-checked).  In both
 cases the non-adaptive curve is the hinted curve sheared by its own height — with a budget
 of `e^{nθ}` evaluations a non-adaptive algorithm certifies an accuracy rate that is worse by
