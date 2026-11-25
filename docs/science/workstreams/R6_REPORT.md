@@ -774,14 +774,16 @@ In this order.
    predecessors.  The defence is redundancy, not formality: the accounting has now been derived
    independently three times (R7 and R8 inside the theory division, this review outside it) with
    identical constants, implemented independently five times (workstream K, the coordinator, R8, the
-   engineering division, this review) with identical numbers where they overlap, and attacked with
-   mutations that each implementation detects.  A referee who does not accept that will ask for the
+   engineering division, this review) — the three whose numbers I could compare (workstream K, the
+   engineering division, this review) agree to every published digit — and attacked with mutations
+   that each implementation detects.  A referee who does not accept that will ask for the
    deterministic half of the count in Lean (§6, step 1) — a reasonable demand and a feasible one.
 2. **"Exponent `h` is a limit of families of growing depth; there is no algorithm, no rate, no
    finite-`n` content beyond two levels."**  Also true.  For a target `h + 2η` the proof stacks about
    `ln(a/h)·a/η` bounded levels, with inner accuracies `ε/2^j`, on top of an unspecified number of
-   extensive levels; the "polynomial" prefactors at fixed `η` are of size `exp(Θ(η⁻²))` and the `o(n)` is
-   heuristically `n^{3/4}`.  The honest headline is "*at the exponential scale* adaptivity recovers the
+   extensive levels; the "polynomial" prefactors at fixed `η` are of size `exp(Θ(η⁻²))` (**[H]**, my
+   estimate: `m ≈ 1/η` levels whose constants `K_j ∝ 4^j` multiply along the chain) and the `o(n)` is
+   heuristically `n^{3/4}` (theirs).  The honest headline is "*at the exponential scale* adaptivity recovers the
    hinted exponent"; the only certified statement at a finite size is the two-level one of §2.9
    (separation from non-adaptive algorithms from `n = 1400` on at `u = 1`), and it is about two levels
    and exponent `≈ a/2`, not about `h`.

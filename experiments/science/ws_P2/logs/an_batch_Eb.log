@@ -928,3 +928,5 @@
     (41.1s)
 --- [Xtau] GB: range 147.25, std 18.36 kcal/mol
     c_i   = [71.1  58.16 60.72 59.95]   max 71.10 kcal/mol = 119.3 kT;  rms single flip = [18.12 12.93 11.8  14.77]
+    c_ij  : max 54.869 kcal/mol = 92.04 kT; max by separation 1..: 28.623 54.869 12.705
+    half row sums (1/2) sum_j c_ij = [47.89 55.89 55.63 47.71];  Dobrushin-type sums = [3. 3. 3. 3.] (max 3.00)

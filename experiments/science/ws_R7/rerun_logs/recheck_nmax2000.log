@@ -1,0 +1,42 @@
+{
+ "cost": {
+  "searches": 1008,
+  "flat": 504,
+  "max_abs_change_no_tie": 0.0,
+  "max_abs_change_tie": 1.5387167906055765e-05,
+  "max_rel_change_tie": 3.6273545488715897e-07,
+  "violations_no_tie": 0,
+  "violations_tie": 0,
+  "worst": {
+   "u": 0.5,
+   "n": 1400,
+   "phi": 0.3,
+   "objective": "cost",
+   "family": "general",
+   "oracle": "top",
+   "stored": 69.71347335066929,
+   "now": 69.7134887378372
+  }
+ },
+ "claims": {
+  "searches": 240,
+  "flat": 120,
+  "max_abs_change_no_tie": 1.5392626679816388,
+  "max_abs_change_tie": 0.0,
+  "max_rel_change_tie": 0.0,
+  "violations_no_tie": 0,
+  "violations_tie": 0,
+  "worst": null
+ },
+ "converge": {
+  "searches": 16,
+  "flat": 8,
+  "max_abs_change_no_tie": 0.0,
+  "max_abs_change_tie": 0.0,
+  "max_rel_change_tie": 0.0,
+  "violations_no_tie": 0,
+  "violations_tie": 0,
+  "worst": null
+ },
+ "seconds": 8.583852767944336
+}
