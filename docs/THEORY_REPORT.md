@@ -1292,6 +1292,30 @@ the proofs are short.  The second referee's verdict on G1–G10 — "a coherent 
 theorem-driven paper" — is reproduced in §12 together with what a publication would still
 need.
 
+**The picture after cycle 10, in one table.**  What each *kind of knowledge about the
+residual* costs, in evaluations of the residual, for an accuracy that is a fixed fraction
+of the system size (`n` sites, or `N` beads).  Every entry is a theorem of this report with the
+status given there; the table adds nothing, it only puts side by side what was proved in
+different sections.
+
+| what is known about the residual `g` | certificate / deterministic procedures | randomised, told the instance in advance ("hint": the task is *verification*) | randomised, no hint, sample fixed in advance | randomised, no hint, adaptive (*search*) |
+|---|---|---|---|---|
+| **first-order**: `g(x) − g(y) ≤ d(x,y)`, weighted Hamming `d`, product landscape | a covering by slack balls (`isCertificate_iff_cover`); exponential, `exp(nR*)`, unless every site is sharp (Theorems 11.6–11.9); `2^{n(1−o(1))}` on the cube at the zero residual | `exp(n θ_hint(ε₁))` below an accuracy threshold, a bounded number above it (Theorems 11.25, 11.28); single-letter game value at additive instances (11.27) | cube, zero known part: `exp(n θ_na(ε₁))`, `θ_na > θ_hint` (Theorems 11.44, 11.45) | cube, zero known part: `exp(n θ_hint(ε₁))` — the hint is worth nothing (Theorem 11.54) |
+| **second-order**: mixed differences bounded by `c_ij` | a star of `n + 1` evaluations determines `g` up to `Σ c_ij` over the changed pairs (`secondOrder_remainder`); with dense constants of order one the cost is exponential again (Theorem 11.31, D40) | a transition at finite temperature (Theorem 11.33) | — | — |
+| **linear in `p` known features**, coefficients in a box | `rank ≤ p` evaluations determine `g` everywhere; before that, every linear combination of evaluations gives a bracket (`linRes_span_upper`, `linRes_span_exact`); a kernel for minima (`verifyLTop_sound`) | no lower bound known (a generic evaluation sees every perturbation) | — | — |
+| **pair-additive with `L`-Lipschitz radial functions** (chains) | number of evaluations bounded independently of `N` at extensive accuracy, by a numerically vacuous bound; polynomial on lattices at every accuracy (Proposition 11.49) | — | — | — |
+| **first-order in a per-torsion envelope** (chains) | `exp(Θ(N))`: the verified constants grow with the lever arm (Theorem 11.37, D42) | — | — | — |
+
+Three readings.  (i) *The kind of class decides, not its size*: the same weighted `ℓ¹` distance
+costs `2^{n(1−o(1))}` as an envelope and `n` evaluations as the feature distance of a linear class
+(§11.17).  (ii) *Verification against search*: with a hint the task is to verify a claimed
+instance, without it to search; for deterministic certification of a minimum, search can be
+unboundedly more expensive than the smallest certificate even on the line (§11.11, D39),
+whereas for randomised estimation of `ln Z` on the cube class the worst-case costs of the two
+have the same exponent — provided the search is adaptive.  (iii) *What is missing* is every
+entry marked "—", all of the last three columns outside the cube with a zero known part,
+and constants everywhere.
+
 ---
 
 ## 11. Certification geometry

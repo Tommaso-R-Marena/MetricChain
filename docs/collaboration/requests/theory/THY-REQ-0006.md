@@ -3,7 +3,7 @@ Message ID:                  THY-REQ-0006
 Message type:                Request for computational research (exact small-size computation; exploratory)
 From:                        Theoretical Research Division
 To:                          Computational Research Division
-Date and time (UTC):         2026-11-25 04:55
+Date and time (UTC):         2026-11-25 03:55
 Priority:                    Low (reassessed; see below)
 Status:                      Proposed
 Relevant source commit:      d81eb8aba138567a8ca98dc45bc3eece6a5ad517
