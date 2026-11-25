@@ -44,7 +44,7 @@ incomplete capability**: it certifies the direction that path-finding methods ca
 | sketch | verdict |
 |---|---|
 | 1. barrier lower bounds are cut certificates; reduce to `(min,+)` on a constrained set | soundness true **[V]**; "iff" false as stated, true in the form `B(a,b) = max(E(a), max_S min_{∂⁺S} E)` **[K]** (Thm K1); the reduction is real but *incomplete in polynomial size* unless NP = PSPACE (Thm K4) |
-| 1. which cuts stay decomposable | boxes (wall = `n` boxes) **[V]**; counting cuts with an exact counter (not with a multiplier) **[P, N]**; coordinate cuts only on restricted site graphs **[P, N]** (Prop. K2, K3) |
+| 1. which cuts stay decomposable | boxes (wall = `n` boxes) **[V]**; counting cuts with an exact counter — never with a linear multiplier, unreliably with a quadratic penalty **[P, N]**; coordinate cuts only on restricted site graphs **[P, N]** (Prop. K2, K3) |
 | 2. robust interval for the height above `a` | true, exact, with anchors via the conditional envelope `D_A` **[P, N; both ends' soundness V]** (Thm K6); saddle energy in `[B_{f+L}, B_{f+U}]` exactly **[P, N]** |
 | 2. query complexity; persistence | certificates are coverings of a separator and of a path **[P, N]** (Thm K7); position-dependent stability of the persistence of one minimum **[P, N]** (Cor. K6.2, K6.4) |
 | 3(i) exit time from boundary/basin partition functions | true **[K]**; stronger: discrete-time survival bound for any stationary local kernel **[V]** (Thm K10) |
@@ -143,13 +143,17 @@ barrier top is where the profile is not convex.)  The Chernoff statement is the 
 case (mean certified fraction of the height: 0.00); for a 200-site chain `−155.11 <` trivial
 `−154.68 <` true level minimum `−153.31`.
 
-*Remark (a quadratic penalty does not rescue the leaf rule) [P].*  `min_{q=r} E ≥ min_x [E(x) +
-μ(q(x) − r)²]` for every `μ`, with equality for large `μ` — as an integer programme.  But
-`(q − r)²` is a dense pairwise term, and for binary sites with `q` the Hamming weight its pairwise LP
-relaxation (the bound a single `leaf` of the kernel can certify) is at most `r² − nr + n/2` (all
-one-site marginals `1/2`, all pairs anti-correlated), which is negative for every `0 < r < n` once
-`n ≥ 3`: the leaf bound tends to `−∞` as `μ` grows.  The counting constraint has to be carried exactly
-— by a counter in the elimination order, or by branching.  (Not tested numerically.)
+*Remark (a quadratic penalty rescues the leaf rule only partly) [P, N].*  `min_{q=r} E ≥ min_x [E(x) +
+μ(q(x) − r)²]` for every `μ`, with equality for large `μ` — as an integer programme.  `(q − r)²` is a
+dense pairwise term, so `E + μ(q − r)²` is still an instance of the existing kernel.  For binary sites
+with `q` a Hamming distance the pairwise LP relaxation of the penalty alone (what a single `leaf` can
+certify) is at most `r² − nr + n/2` (all one-site marginals `1/2`, all pairs anti-correlated), negative
+for every `0 < r < n` once `n ≥ 3`: the leaf bound collapses to `−∞` as `μ` grows **[P]**.  For moderate
+`μ` it can nevertheless be tight: with the best `μ ∈ {0.25, …, 6}` one leaf certified on average `0.42`
+of the level height over 23 traps of random binary models (`n = 10`) — the exact level minimum in
+`30 %` of them, nothing in `48 %` (T13) **[N]**.  So, unlike a linear multiplier, a quadratic penalty is
+a usable but unreliable way to hand a counting cut to the unmodified kernel; an exact counter (or
+branching) is needed for a guarantee.
 
 **Theorem K4 (no transfer matrix for barriers) [K — Wrochna, Theorem 3; the reading as a statement
 about barriers is a one-line reduction].**  There are a fixed finite alphabet `Σ` and a fixed relation
@@ -577,6 +581,7 @@ arithmetic except where stated.  Random instances: pairwise tables with Gaussian
 | `t10_counter_dp.py` | counting cuts at scale (transfer matrix with counter) | validation `n = 12`; `n = 200` | errors `4e-15`, `7e-15`; height bracket `[1.3758, 1.5178]` on `2²⁰⁰` states; Lagrangian below trivial |
 | `t11_cut_size.py` | greedy number of wall boxes of exact cut certificates | as T4, T7 | median `≤ 1.6 n`, max `3.2 n` boxes |
 | `t12_product_flow.py` | random-order (product) flow and its `Z⁻` bound against exact capacities | `N = 256`, 13 cases | no violation; exact when lumpable; useless at low temperature on rugged landscapes |
+| `t13_penalty_lp.py` | linear multiplier, quadratic penalty (integer and pairwise-LP leaf) against exact level minima | binary `n = 10`, 8 + 23 traps | linear: below trivial always; quadratic integer → exact; quadratic LP leaf: mean `0.42`, exact `30 %`, nothing `48 %`; collapses for large `μ` |
 | `KineticsCertificates.lean` | 25 theorems (listed below) | — | `lake env lean`: exit 0, no warnings; `#print axioms` of all 25: `[propext, Classical.choice, Quot.sound]` (`out_lean.txt`) |
 
 **Machine-checked statements** (`experiments/science/ws_K/KineticsCertificates.lean`; imports
@@ -730,7 +735,7 @@ semiring in place of `ℚ≥0`?  For `ℚ≥0[z]/(z^{R+1})` with the coefficient
 one `chainCert`, certified brackets for all level partition functions `Z_r = [z^r] Z(z)` of a
 site-additive statistic — the inputs of Proposition K11.  Same question for the tropical kernel with an
 elimination rule over min-plus polynomials (level minima; Proposition K2(c)).  Proposition K3 shows that
-a multiplier cannot replace this.
+a linear multiplier cannot replace this, and T13 that a quadratic penalty does so only unreliably.
 
 **T3 (state and prove).**  Theorem K6 in full (exactness: the set of heights is the closed interval) and
 Theorem K7, in the style of `CertificationGeometry.lean`; this needs a definition of `B` as a minimum

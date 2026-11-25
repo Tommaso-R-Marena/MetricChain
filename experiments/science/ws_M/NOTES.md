@@ -794,3 +794,37 @@ entropy as a certified lower bound on model error, and least envelope constant (
 MaxOcc after 2014.  Deliverable: section 8 of SM_REPORT.md + final message ≤ 350 words.
 Search log for the addendum is numbered A1, A2, ...
 ### Step A0 — read the coordinator's statements
+* Read `docs/science/INFERENCE_LIMITS.md` §4, §5, §6 (Thm 7), §9 (Thm 8) and the whole of
+  `INFERENCE_LIMITS_ADDENDA.md` (Thm 4′, 7′, Prop 10, A4).
+### Step A1 — S1
+* Derived (R1): nu is the reverse I-projection of mu on the exponential family ⇒
+  KL(mu‖nu) ≤ KL(mu‖mu_lam) ≤ (beta·omega)²/8 (Hoeffding).  Factor 2 better than Thm 7(v).
+* Derived (R2): J ≥ 4·TV·artanh(TV) (data processing + one-variable minimisation) ⇒ with Thm 7(i)
+  TV ≤ tanh(beta·omega/4), J ≤ beta·omega·tanh(beta·omega/4); sharp (two points, nu tilted).
+* `check_addendum_s1.py` → `.out`: 3554 instances; F1 max 6e-16; KL/((bw)²/8) max 0.99993;
+  TV/(bw/4) max 0.99984; J/((bw)²/4) max 0.99984; identity (i) 6e-14; Pythagoras 1e-13;
+  TV/tanh(bw/4) max 0.99992; J/(4 TV artanh TV) min 1.00009; J/(bw·tanh(bw/4)) max 0.99992.
+* Barron–Sheu 1991 Lemma 1 (3.2) read as quoted in Scricciolo (arXiv:0708.0175, p. with eq. 15):
+  "If ‖log(f_θ'/f_θ)‖_∞ < ∞, then for any constant c, K(P_θ'‖P_θ) ≤ ½ e^{‖log(f_θ'/f_θ) − c‖_∞}
+  ∫ f_θ' (log(f_θ'/f_θ) − c)² dx" ("inequality (3.2) from Lemma 1 of Barron and Sheu, pages
+  1355–1356").
+* Refinement literature: Stöckelmaier & Oostenbrink 2025 (PCCP 27:14704, doi:10.1039/d5cp01263e):
+  no error bound; validation set; no empirical-likelihood vocabulary.  Bottaro et al. 2018: same.
+### Step A2 — S2
+* Christensen–Connault: δ̂ = inf_θ Δ(θ; γ̂, P̂), "the smallest value of δ for which there exists
+  F ∈ N_δ consistent with the sample moment conditions" (full text).
+* Masten–Poirier arXiv:1812.11598 (abstract): "falsification frontier", "extent of falsification",
+  "falsification adaptive set".  arXiv:1705.04765 breakdown frontiers (snippet).
+* EL/ET references (snippets; Schennach abstract).  PubMed: 0 records for EL/ET + MD.
+* R3 (Jensen): E ρ̂_N ≥ ρ_min — sample-based minimum relative entropy is biased upward.
+### Step A3 — S3
+* Abstracts: Canonne–Rubinfeld 1402.3835 (dual access); Kolmogorov 1608.04223 and
+  Harris–Kolmogorov 2007.10824 (sampling-oracle complexity of Z, lower bound Ω(q ε⁻²));
+  Feldman–Perkins–Vempala 1311.4821 (distribution complexity = degree of independence);
+  Lange–Qiao 2512.02279 (statistical MQ algorithms).  JVV from memory.
+### Step A4 — S4
+* Betrò–Guglielmi algorithm papers: NOT accessible (Academia 403, ScienceDirect 403, Springer
+  login redirect, IMS LNMS not located).  Read: AISM 58 (2006) 721–738 published PDF (ism.ac.jp);
+  CNR IRIS abstract of Betrò 2008; snippet of Betrò 2004 abstract; Mehrotra–Papp grep.
+* Certified MaxOcc after 2014: not found in what I read; Medeiros Selegato 2021 unread.
+* Section 8 appended to SM_REPORT.md with search log A1–A14.

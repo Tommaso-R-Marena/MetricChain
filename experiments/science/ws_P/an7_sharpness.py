@@ -113,7 +113,8 @@ margin[x0] = np.inf
 print(f"Theorem 11.7 (one evaluation certifies iff d(x0,y) <= f(y)-f(x0) for all y): min margin = {margin.min():.2f} kcal/mol "
       f"-> {'YES' if margin.min() >= 0 else 'NO'};  conformations violating: {int((margin < 0).sum())} of {M - 1}")
 out.update(thm117_margin=float(margin.min()), thm117_viol=int((margin < 0).sum()))
-ratio = np.where(D0 > 0, (f - f[x0]) / np.where(D0 > 0, D0, 1.0), np.inf)
+ham0 = (st != st[x0]).sum(axis=1)
+ratio = np.where(ham0 > 0, (f - f[x0]) / np.where(ham0 > 0, D0, 1.0), np.inf)
 ystar = int(np.argmin(ratio))
 print(f"cost-to-distance ratio lambda* = min_y (f(y)-f(x0))/d(x0,y) = {ratio[ystar]:.4f}  (the constants would have to be "
       f"{1/max(ratio[ystar],1e-12):.0f} times smaller for one evaluation to certify); attained at Hamming distance {int((st[ystar] != st[x0]).sum())}, "
@@ -155,50 +156,73 @@ print(f"product-landscape formula (Thm 11.8, Boltzmann weights) with the measure
       f"ln N >= {pb:.2f} (t = {tb:.3g}) of ln(prod k_i) = {lnsize:.2f}; i.e. N >= {math.exp(pb):.3g}   [heuristic for a non-additive f]")
 out.update(product_bound=pb, lnsize=lnsize)
 
-# --- the real covering problem
+# --- the real covering problem (memory-safe: two chunked passes; sparse storage only if the cover is sparse)
 if do_cover and M <= 40000:
     gap = E - E.min()
+    def slack_rows(rows):
+        return dist_rows(rows) * scale - g[rows][:, None] + g[None, :]       # slack s(a, y)
     for eps in (0.0, KT300, 2.0):
         t0 = time.time()
-        rows_l, cols_l = [], []
+        ncover_of_y = np.zeros(M); size_of_a = np.zeros(M)
         for s0 in range(0, M, 512):
             rows = np.arange(s0, min(M, s0 + 512))
-            S = dist_rows(rows) * scale - g[rows][:, None] + g[None, :]       # slack s(a, y)
-            cov = S <= gap[None, :] + eps + 1e-9
-            r_, c_ = np.nonzero(cov)
-            rows_l.append(rows[r_]); cols_l.append(c_)
-        rr = np.concatenate(rows_l); cc_ = np.concatenate(cols_l)
-        C = sp.csr_matrix((np.ones(len(rr), dtype=np.float32), (rr, cc_)), shape=(M, M))   # C[a, y] = a covers y
-        ncover_of_y = np.asarray(C.sum(axis=0)).ravel()       # number of centres covering y
-        size_of_a = np.asarray(C.sum(axis=1)).ravel()
-        forced = ncover_of_y == 1                              # only itself
-        # lower bounds: forced points; volume form sum_y 1/M(y), M(y) = max size of a set covering y
-        Ccsc = C.tocsc()
-        My = np.array([size_of_a[Ccsc.indices[Ccsc.indptr[y]:Ccsc.indptr[y + 1]]].max() for y in range(M)])
-        vol = float((1.0 / My).sum())
-        # partition-function bound (Thm 11.6(c)) over a grid of t
-        best_pf = 0.0
-        for t in (0.05, 0.1, 0.2, 0.4, 0.8, 1.6, 3.2):
-            numer = np.exp(-t * gap).sum()
-            den = 0.0
+            cov = slack_rows(rows) <= gap[None, :] + eps + 1e-9
+            ncover_of_y += cov.sum(axis=0); size_of_a[rows] = cov.sum(axis=1)
+        forced = ncover_of_y == 1                              # covered only by itself
+        sparse_case = size_of_a.sum() < 3e7
+        vol = float("nan"); best_pf = float("nan")
+        if sparse_case:
+            rows_l, cols_l = [], []
             for s0 in range(0, M, 512):
                 rows = np.arange(s0, min(M, s0 + 512))
-                S = dist_rows(rows) * scale - g[rows][:, None] + g[None, :]
-                den = max(den, float(np.exp(-t * S).sum(axis=1).max()))
-            best_pf = max(best_pf, math.exp(-t * eps) * numer / den)
-        # greedy cover (upper bound): forced points first
-        chosen = np.flatnonzero(forced).tolist()
-        covered = np.zeros(M, dtype=bool)
-        if chosen:
-            covered |= np.asarray(C[chosen].sum(axis=0)).ravel() > 0
-        while not covered.all():
-            gain = C @ (~covered).astype(np.float32)
-            a = int(np.argmax(gain))
-            chosen.append(a)
-            covered[C.indices[C.indptr[a]:C.indptr[a + 1]]] = True
-        lb = max(int(forced.sum()), math.ceil(vol - 1e-9), math.ceil(best_pf - 1e-9))
+                r_, c_ = np.nonzero(slack_rows(rows) <= gap[None, :] + eps + 1e-9)
+                rows_l.append(rows[r_]); cols_l.append(c_)
+            rr = np.concatenate(rows_l); cc_ = np.concatenate(cols_l)
+            C = sp.csr_matrix((np.ones(len(rr), dtype=np.float32), (rr, cc_)), shape=(M, M))
+            Ccsc = C.tocsc()
+            My = np.array([size_of_a[Ccsc.indices[Ccsc.indptr[y]:Ccsc.indptr[y + 1]]].max() for y in range(M)])
+            vol = float((1.0 / My).sum())
+            best_pf = 0.0
+            for t in (0.1, 0.4, 1.6):
+                numer = np.exp(-t * gap).sum(); den = 0.0
+                for s0 in range(0, M, 512):
+                    rows = np.arange(s0, min(M, s0 + 512))
+                    den = max(den, float(np.exp(-t * slack_rows(rows)).sum(axis=1).max()))
+                best_pf = max(best_pf, math.exp(-t * eps) * numer / den)
+            chosen = np.flatnonzero(forced).tolist()
+            covered = np.zeros(M, dtype=bool)
+            if chosen:
+                covered |= np.asarray(C[chosen].sum(axis=0)).ravel() > 0
+            while not covered.all():
+                gain = C @ (~covered).astype(np.float32)
+                a_ = int(np.argmax(gain)); chosen.append(a_)
+                covered[C.indices[C.indptr[a_]:C.indptr[a_ + 1]]] = True
+        else:
+            # dense cover: greedy over a candidate pool (forced points + the 1500 largest sets); any point left
+            # uncovered is added itself, so the result is a valid cover (an upper bound on N_cov)
+            cand = np.unique(np.concatenate([np.flatnonzero(forced), np.argsort(-size_of_a)[:1500]]))
+            Cd = np.zeros((len(cand), M), dtype=bool)
+            for s0 in range(0, len(cand), 512):
+                rows = cand[s0:s0 + 512]
+                Cd[s0:s0 + 512] = slack_rows(rows) <= gap[None, :] + eps + 1e-9
+            fidx = np.flatnonzero(np.isin(cand, np.flatnonzero(forced)))
+            chosen = cand[fidx].tolist()
+            covered = Cd[fidx].any(axis=0) if len(fidx) else np.zeros(M, dtype=bool)
+            while not covered.all():
+                gain = (Cd & ~covered[None, :]).sum(axis=1)
+                a_ = int(np.argmax(gain))
+                if gain[a_] == 0:
+                    chosen += np.flatnonzero(~covered).tolist(); break
+                chosen.append(int(cand[a_])); covered |= Cd[a_]
+        lbs = [int(forced.sum()), 1]
+        if vol == vol: lbs.append(math.ceil(vol - 1e-9))
+        if best_pf == best_pf: lbs.append(math.ceil(best_pf - 1e-9))
+        lb = max(lbs)
+        if lb == 1 and len(chosen) > 1 and size_of_a.max() < M:
+            lb = 2                                   # no single centre covers everything
         print(f"cover at eps = {eps:.3f} kcal/mol: forced points {int(forced.sum())}, volume bound {vol:.1f}, partition bound {best_pf:.1f} "
-              f"=> N_cov >= {lb};  greedy cover {len(chosen)}  (of M = {M};  mean set size {size_of_a.mean():.2f}, max {int(size_of_a.max())})  [{time.time()-t0:.0f}s]", flush=True)
+              f"=> N_cov >= {lb};  greedy cover {len(chosen)}  (of M = {M};  mean set size {size_of_a.mean():.1f}, max {int(size_of_a.max())}; "
+              f"{'sparse' if sparse_case else 'dense'} path)  [{time.time()-t0:.0f}s]", flush=True)
         out[f"cover_eps{eps:.3f}"] = dict(forced=int(forced.sum()), volume=vol, partition=best_pf, lower=lb, greedy=len(chosen))
 os.makedirs(os.path.join(HERE, "out"), exist_ok=True)
 json.dump(out, open(os.path.join(HERE, "out", f"an7_{alphabet}_n{n}_{rname}.json"), "w"), indent=0)

@@ -784,3 +784,245 @@ Create or connect a free Consensus account to return more than 3 results per sea
 **[P]**, and re-computed N1–N4 with my own code (independent replication of the formulas, not of
 any published data set).  I did not review or replicate the coordinator's theory beyond the
 sketch printed in `M_brief.md`.
+
+---
+
+## 8. Addendum: statements added after the brief
+
+*Requested by the coordinator on 2026-11-25 for `docs/science/INFERENCE_LIMITS.md` (v2: Theorems 4,
+5, 7, 8, Proposition 5b) and `INFERENCE_LIMITS_ADDENDA.md` (Theorems 4′, 7′), which I read in full
+for those items.  Same tags and labels as above.  Search log: §8.5 (A1–A14).  Numerics:
+`experiments/science/ws_M/check_addendum_s1.py` (3 554 random instances, seed 7, 35 s).*
+
+### 8.1 S1 — stability of maximum-entropy refinement (Theorems 7, 7′)
+
+**Closest statements.**
+* *Pythagorean identity (Theorem 7(v))* and "moment matching = I-projection": Csiszár, Ann. Probab.
+  3 (1975) 146 `[from memory — unverified; not opened in this session]`.  Standard.
+* *Identity (i)*: the symmetrised divergence of two members of an exponential family is
+  `(Δθ)·(Δη)`; with matched feature means only the remainder survives.  Textbook (Jeffreys
+  divergence); it is also the width identity of the note's own Theorem 5.  I found it stated for
+  MaxEnt refinement nowhere, and it is one line.
+* **Barron & Sheu, "Approximation of density functions by sequences of exponential families",
+  Ann. Statist. 19(3):1347–1369 (1991), doi:10.1214/aos/1176348252** `[record: search snippet;
+  Lemma 1, inequality (3.2), read as quoted verbatim in Scricciolo, Ann. Statist. 34 (2006) 2897,
+  arXiv:0708.0175, full-text passage; original PDF not retrievable]`:
+  `KL(p‖q) ≤ ½·e^{‖log(p/q) − c‖_∞}·∫ p·(log(p/q) − c)²` for every constant `c`.  Their programme is
+  exactly the "reading" of Theorem 7: the relative-entropy error of the moment-matching
+  (information-projection) member of an exponential family is controlled by how well the true
+  log-density is approximated by the span of the sufficient statistics, in `L²` and `L^∞`.
+* *Bounded perturbations of Gibbs measures*: for `dμ/dν ∝ e^{−βr}` (no features) the sharp
+  dimension-free bound is `TV ≤ tanh(β·osc(r)/4)` — the density-ratio / pure-differential-privacy
+  bound (`prior_art/L5`, P5–P6; `[from memory]` for the exact form).  Holley–Stroock concerns
+  log-Sobolev constants, Dobrushin's comparison theorem local observables under weak dependence
+  (Rebeschini–van Handel, read by `L5`): neither states Theorem 7.
+* *Information-inequality UQ*: (iv) is the Dupuis–Katsoulakis bound
+  `|E_μψ − E_νψ| ≤ inf_c [Λ_ν(c;ψ) + KL(μ‖ν)]/c` (Gourgoulias et al. Thm 1–2, `[full text]`, K4) fed
+  with a bound on `KL(μ‖ν)`.
+* *Extensive version (7′)*: `KL ≤ βc·W₁` (Kantorovich–Rubinstein) combined with a transport–entropy
+  inequality — the mechanism of theory report Theorem 11.14 (`gap_le_of_T1`) and of `prior_art/L6`
+  (Marton; Bobkov–Götze; Djellout–Guillin–Wu, read there).  New only in that the feature mismatch
+  cancels and that the inequality is required of the *refined* measure `ν`.
+* *Ensemble-refinement literature*: no error bound of the refined ensemble against the true one
+  was found.  Stöckelmaier & Oostenbrink, "Combining simulations and experiments – a perspective on
+  maximum entropy methods", PCCP 27(28):14704–14717 (2025),
+  [doi:10.1039/d5cp01263e](https://doi.org/10.1039/d5cp01263e) (PMC12216290)
+  `[full text via fetch tool, first 100 000 of 131 100 chars]` *(PubMed)*: no guarantee is stated;
+  quality is assessed by a validation set of held-out observables; "The choice of θ is system
+  specific and an expression of the quality of the initial distribution of weights".  Bottaro et
+  al., Sci. Adv. 4 (2018) eaar8521, [doi:10.1126/sciadv.aar8521](https://doi.org/10.1126/sciadv.aar8521)
+  `[full text via fetch tool]` *(PubMed)*: cross-validation only.  Hummer–Köfinger 2015, Cesari et
+  al. 2018, Bonomi et al. 2016 (K5; full texts searched for "bound"): none.  Köfinger & Hummer 2024
+  `[abstract]` relate `KL` to the variance of the energy difference ("gentle refinement") — the
+  same second-order quantity, as a prior, not as an error bound.
+
+**Remarks of mine (three lines each; R1–R2 checked numerically).**
+* **R1 [P].**  `ν` is also the *reverse* I-projection of `μ` on the exponential family
+  `{μ₀e^{−θ·Φ}}` (moment matching = maximum likelihood), so `KL(μ‖ν) ≤ KL(μ‖μ_λ)` with
+  `μ_λ ∝ μ₀e^{−βλ·Φ}`; and `μ` is a tilt of `μ_λ` by `e^{−βr}`, so
+  `KL(μ‖μ_λ) = ∫₀¹ s·β²Var_{μ_s}(r) ds ≤ (βω)²/8`.  Hence **`KL(μ‖ν) ≤ (βω)²/8`**, a factor 2 better
+  than Theorem 7(v), and Pinsker returns (ii).  Numerics: largest ratio `0.99993`; largest
+  `KL(μ‖ν) − KL(μ‖μ_λ) = 6e-16`.  The variance form, `KL(μ‖ν) ≤ ½β²·max_s Var_{μ_s}(r)`, is the
+  instance-dependent version (cf. Barron–Sheu).
+* **R2 [P].**  `J ≥ 4·TV·artanh(TV)` for any two measures (data processing to the two-set
+  partition `{μ > ν}`, then minimise `t·ln[a(1−b)/(b(1−a))]` over `a − b = t`).  With (i),
+  `J ≤ βω·TV`, so **`TV(μ,ν) ≤ tanh(βω/4)`** and `J ≤ βω·tanh(βω/4)`, with or without features.
+  Sharp: two points, no feature, `ν = (1, e^{βω/2})/(1 + e^{βω/2})`, `r = (0, ω)`.  Numerics: largest
+  `TV/tanh(βω/4) = 0.99992`, smallest `J/(4·TV·artanh TV) = 1.00009`.  (The sharp Jeffreys–TV
+  inequality is surely in the f-divergence literature — Gilardoni, arXiv:cs/0603097 `[abstract]`
+  treats best-possible Pinsker-type bounds — but I did not locate the formula.)
+* All of Theorem 7 was re-checked on my own instances: identity (i) to `6e-14`, Pythagoras to
+  `1e-13`, largest `TV/(βω/4) = 0.99984`, largest `J/((βω)²/4) = 0.99984` **[N, independent
+  replication]**.
+
+**Verdict S1: partially known (known in spirit).**  Every ingredient is textbook and the
+conclusion "error of moment matching ≤ constant × (size of the part of the log-density outside
+the span)²" is Barron–Sheu (1991) in `L²` form.  The dimension-free oscillation statement with
+the identity (i), and its use as an error bound for experimental refinement of molecular
+ensembles, were **not found**.  *Attribution to use:* Csiszár 1975 (I-projection, Pythagoras);
+Barron & Sheu 1991, Lemma 1, for the approximation-error principle; Pinsker/Hoeffding; Marton and
+Bobkov–Götze for 7′; Dupuis et al. for (iv).  Present Theorem 7 as an elementary sharp form
+(constants `tanh(βω/4)`, `(βω)²/8`) of a known principle, new as a statement about ensemble
+refinement.
+
+### 8.2 S2 — falsification (Theorem 8)
+
+**Closest statements.**
+* `ρ_min(D)` is the value of the minimum-discrimination-information problem; by Cramér/Sanov it is
+  `inf_{m∈D} Λ*(m)`, the large-deviation rate at which independent copies of the *model* would
+  show the data `[from memory — textbook]`; the bound (b) is weak duality (Donsker–Varadhan).
+* **The concept "smallest relaxation of the model that the data do not refute, as a measure of
+  falsification" is established in econometrics.**  Masten & Poirier, "Salvaging Falsified
+  Instrumental Variable Models", arXiv:1812.11598 `[abstract]`: "researchers can measure the extent
+  of falsification ... we consider continuous relaxations of the baseline assumptions ... the
+  falsification frontier: The smallest relaxations of the baseline model which are not refuted.
+  This frontier provides a quantitative measure of the extent of falsification"; they also define
+  the identified set on the frontier ("falsification adaptive set").  Masten & Poirier, "Inference
+  on Breakdown Frontiers", Quant. Econ. 11(1):41–111 (2020), arXiv:1705.04765 `[search snippet]`
+  (generalising Horowitz–Manski's identification breakdown point).  Christensen & Connault
+  `[full text, §3.3 "Over-identification"]`: "one may compute the smallest value of δ for which there exists
+  F ∈ N_δ consistent with the sample moment conditions ... `δ̂ = inf_θ Δ(θ; γ̂, P̂)` ... If the model is
+  correctly specified under F*, then δ̂ will converge in probability to zero" — `ρ_min` exactly,
+  estimated from data.
+* *Tests built on the same dual*: empirical likelihood and exponential tilting for moment
+  restrictions — Kitamura & Stutzer, Econometrica 65(4) (1997); Imbens, Spady, Johnson (1998);
+  Kitamura, Econometrica 69(6) (2001); Newey & Smith (2004) `[search snippet]`; Schennach,
+  arXiv:0708.1874 `[abstract]` (exponential tilting stays well behaved under misspecification).
+  There the sample is the data and the moment function carries the model; in refinement the
+  sample is the simulation and the moments are measured — the same convex programme with the
+  roles exchanged.  PubMed finds no record combining "empirical likelihood" or "exponential
+  tilting" with molecular dynamics, conformational ensembles or force fields (A5): **the
+  refinement literature does not use this test theory**.
+* *Molecular simulation*: the relative entropy of reweighting is used as a diagnostic, always
+  computed from the sampled frames.  Leung et al. (COPER) `[abstract]`: "the reduction of entropy
+  due to the experimental constraints ... provides a robust measure of the information content of
+  the experimental data relative to the simulated ensemble and an indication for the density of
+  the sampling"; "Reweighting factors are moderate and consistent with errors in MD force fields
+  of less than 3kT".  Bottaro et al. 2018 `[via fetch tool]`: the relative entropy "quantifies the
+  deviation from the prior distribution"; it is not used as a force-field score.  Hummer–Köfinger
+  `[full text]`: `θ` at "the kink of the S_KL-versus-χ² curve".  Köfinger–Hummer 2024 `[abstract]`:
+  KL as encoded force-field uncertainty.  Stöckelmaier–Oostenbrink 2025: no method to separate
+  sampling from force-field error is offered `[via fetch tool]`.  (BME's `φ_eff = exp(S_rel)`:
+  `[from memory — unverified]`; the bioRxiv page returned HTTP 429.)
+* `b_min(D)` (least envelope / density-ratio constant consistent with the data): nearest objects
+  are the falsification frontier above, the "isoseparation" of Smith–Rigat (read by `L5`) and the
+  smallest odds-ratio bound `Γ` of Rosenbaum-type sensitivity analysis `[from memory]`.  A
+  metric-governed version, or any use in privacy, was not found.
+
+**Remark R3 [P] (Jensen; not checked numerically).**  For the sample version
+`ρ̂_N = sup_λ[−h_D(λ) − ln(N⁻¹Σ_i e^{−λ·Φ(x_i)})]` with `x_i` distributed as `μ₀`,
+`E ρ̂_N ≥ ρ_min(D)`: reweighting statistics *over*-estimate the model's distance from the data in
+expectation, and nothing bounds the excess without a deviation inequality for the tilted mean.
+This is the precise sense in which sampling error masquerades as model error, and why a
+*lower* bound needs an *upper* bound on the tilted partition function.
+
+**Verdict S2: the quantity and the idea are known; the certificate is not found.**  Known:
+`ρ_min` as minimum discrimination information / Cramér rate / smallest non-refuted neighbourhood
+(Christensen–Connault's `δ̂`; Masten–Poirier's falsification frontier), and its sample-based use
+in refinement.  **Not found**: a sampling-independent or exactly computed lower bound on it for a
+molecular model (searches S37, A5), and `b_min` for a metric density-ratio class.
+*Attribution to use:* Kullback / Csiszár for the dual; Masten & Poirier for "falsification
+frontier" and "extent of falsification" (adopt the term); Christensen & Connault for `δ̂`;
+Kitamura–Stutzer and Schennach for the test theory; Leung et al. and Köfinger–Hummer for the
+practice in refinement.  The claim that survives is narrow: *certified* lower bounds from two
+partition-function certificates.
+
+### 8.3 S3 — the two-oracle query model (Theorems 4, 4′, 5, Proposition 5b)
+
+**Closest statements** (all `[abstract]`).
+* Hybrid access to a *distribution*: Canonne & Rubinfeld, arXiv:1402.3835 — "dual and cumulative
+  dual access models, in which the algorithm can both sample from D and ... query the probability
+  mass D(i)"; these "bypass the strong lower bounds" of single-oracle models, yet "some tasks
+  remain hard even with this additional power".  Same shape of result (a second oracle helps on
+  some tasks and not in the worst case), different objects (samples and point masses of an
+  explicit distribution; no Gibbs structure, no marginals).
+* Partition functions from a *sampling* oracle at chosen temperatures: Kolmogorov,
+  arXiv:1608.04223 (`O(q ln n·ε⁻²)` oracle calls and "a lower bound of Ω(q·ε⁻²) oracle calls under
+  a natural model of computation"); Harris & Kolmogorov, arXiv:2007.10824.  This is the
+  information-theoretic study of a thermodynamic oracle; it explains why Proposition 9 (a caloric
+  curve) is cheap, and it has no evaluation oracle and no worst case over a function class.
+* Lower bounds from `r`-wise independence: Feldman, Perkins, Vempala, arXiv:1311.4821 — the
+  "distribution complexity" of a planted problem is "the largest r for which the distribution is
+  not r-wise independent", and it fixes the complexity of statistical-query algorithms.  The
+  mechanism of Theorems 4/4′ (low-order statistics are blind to a structure hidden under
+  `k`-wise uniformity) is this one; there the algorithm has *only* statistical access.
+* Membership plus statistical queries: Lange & Qiao, arXiv:2512.02279 — a class of "statistical"
+  MQ algorithms ("subcube-conditional statistical queries") with lower bounds inherited from SQ
+  dimension.
+* Counting from marginals: with marginals of *pinned* (conditioned) systems the partition function
+  follows by self-reducibility (Jerrum–Valiant–Vazirani 1986, `[from memory — unverified]`);
+  Theorems 4/4′ say that *unconditioned* `k`-body marginals do not help.  This contrast should be
+  stated in the note.
+* Information-based complexity distinguishes standard (function values) from arbitrary linear
+  information for linear problems (`prior_art/L7`, `L8`); the marginal oracle is a nonlinear
+  functional of `g`, and I found no IBC model with free side information of this kind.
+* Theorem 5's bracket is the two-sided Gibbs–Bogoliubov inequality; that its width is the
+  symmetrised divergence is the "hysteresis" identity of free-energy perturbation
+  `[from memory — unverified]`.
+
+**Verdict S3: not found as a model; the techniques are known.**  No source combines point
+evaluations of an energy with free low-order marginals (or a mean energy) of its Gibbs measure.
+*Attribution to use:* indistinguishability under `k`-wise independence — Alon–Babai–Itai lineage
+and Feldman–Perkins–Vempala for its use in lower bounds; dual-access models — Canonne–Rubinfeld;
+sampling-oracle complexity of `Z` — Kolmogorov, Harris–Kolmogorov; self-reducibility — JVV.
+I did not check whether the lower bounds in the dual-access literature use code-based
+constructions.
+
+### 8.4 S4 — Betrò–Guglielmi; certified MaxOcc
+
+**Not accessible.**  The algorithm papers could not be read: Betrò & Guglielmi, "Numerical robust
+Bayesian analysis under generalized moment conditions", IMS Lecture Notes–Monograph Series,
+*Bayesian Robustness* (1997) pp. 3–20 (not located on Project Euclid; Academia page HTTP 403);
+Betrò & Guglielmi, Lect. Notes Statist. 152 (2000) 273–294; Betrò, Math. Program. A 101 (2004)
+479–495, doi:10.1007/s10107-003-0492-5 (Springer redirects to a login service); Betrò, "Numerical
+treatment of Bayesian robustness problems", Int. J. Approx. Reason. (2008),
+doi:10.1016/j.ijar.2008.03.016 (ScienceDirect HTTP 403).  Bibliographic entries: read in the
+reference list of the paper below.
+**What I could read.**
+* Betrò, Bodini, Guglielmi, Ann. Inst. Statist. Math. 58 (2006) 721–738,
+  doi:10.1007/s10463-006-0046-8 `[full text, published version]`: theory only (when the
+  robustness problem equals a linear semi-infinite programme).  Verbatim: "Although algorithms for
+  this latter exist, regardless of the structure of S (see e.g. Betrò 2004), in practice the
+  infinite dimensionality of S must be dealt with, so that a finite approximation is necessary.
+  Treatment of such computational aspects is beyond the scope of this paper."
+* Betrò 2008 `[abstract, CNR IRIS record]`: "An algorithm for solving LSIP problems under rather
+  mild assumptions, as required by the typical presence of indicator functions in the generalized
+  moment conditions, has been previously developed by the author ... called accelerated central
+  cutting plane (ACCP) algorithm".  Betrò 2004 `[search snippet of the abstract]`: the scheme "also
+  produces an interval of fixed length that contains the optimal value".
+* Mehrotra & Papp, arXiv:1306.3437 `[abstract + grep]`: cutting-surface method for moment-robust
+  optimisation; cites Betrò 2004; assumes a cut-generation *oracle* (a global optimisation).
+**What can be said.**  There is a precedent for *dual, cutting-plane computation of moment-problem
+bounds that returns a bracket of the optimal value* (Betrò 2004).  Whether the bracket is
+rigorous — a verified global optimiser for the constraint check, outward rounding — I could not
+establish; the only description of "interval analysis" that I have is a search snippet about the
+1997 paper, and the 2006 paper says that in practice a finite approximation of the index set is
+used.  **Status of "kernel-checkable dual certificates for identified sets": no precedent found
+in what I could read; a precedent in Betrò–Guglielmi (1997/2000) cannot be excluded.**  The
+coordinator should obtain those two texts before claiming it.
+**Certified MaxOcc after 2014: not found.**  Read: Gigli et al. 2018 (full text: penalised
+non-negative least squares, L-curve), Andrałojć et al. 2015 and 2016 (via fetch tool: the same
+scheme), Hou & Tochio 2022 (review, via fetch tool: nothing newer), PubMed and arXiv listings of
+L. Sgheri for 2015–2026 (no later paper on the subject; `[abstract]`).  Not read: Medeiros
+Selegato et al. 2021 (two numerical analysts among the authors — the one place where an LP
+formulation with duality might be), Ravera et al. 2016.  No paper cites the maximal-mass dual of
+di Dio–Schmüdgen.
+
+### 8.5 Search log of the addendum
+
+| # | tool | query / action | outcome |
+|---|---|---|---|
+| A1 | web; curl | Barron–Sheu 1991 lemma; Project Euclid PDF | record confirmed; PDF = HTML shell; Lemma 1 read as quoted in arXiv:0708.0175 |
+| A2 | web (extended) | maximum entropy reweighting + "error bound"/"approximation error"/"stability" + force-field error | no theorem; hits: Crehuet et al. 2019, Köfinger–Hummer 2024, BioEn, a 2025 perspective |
+| A3 | fetch | PMC12216290 (Stöckelmaier & Oostenbrink 2025) | read via tool (first 100 000 chars) |
+| A4 | web | exponential tilting / empirical likelihood / minimum discrimination information | Kitamura–Stutzer 1997, Imbens–Spady–Johnson 1998, Kitamura 2001, Newey–Smith 2004, Schennach 2007 (records) |
+| A5 | PubMed | Bottaro + Lindorff-Larsen reweighting; ("empirical likelihood" OR "exponential tilting") AND (molecular dynamics OR conformational ensemble OR force field); (relative entropy OR Kullback-Leibler) AND reweighting AND force field quality AND (NMR OR SAXS) | 2; **0**; **0** |
+| A6 | fetch | bioRxiv 457952 (BME); PMC5959319 (Bottaro et al. 2018) | HTTP 429; read via tool |
+| A7 | web ×3; curl; fetch ×3 | Betrò–Guglielmi algorithm papers; Betrò 2004; Betrò 2008 | none accessible in full; AISM 2006 published PDF read; abstract of Betrò 2008 from CNR IRIS |
+| A8 | arXiv | Mehrotra–Papp 1306.3437 | abstract + grep |
+| A9 | PubMed; arXiv | MaxOcc 2015–2026; Sgheri L 2015–2026; au:Sgheri | no post-2016 methodological MaxOcc paper besides Medeiros Selegato 2021 |
+| A10 | arXiv | Gilardoni (Pinsker-type inequalities); Canonne–Rubinfeld; Feldman–Perkins–Vempala | abstracts |
+| A11 | arXiv | Harris–Kolmogorov; Kolmogorov; "statistical queries" + "membership queries"; evaluation + sampling oracle + partition function | abstracts; Lange–Qiao 2512.02279; last query empty |
+| A12 | web; arXiv | breakdown frontier / sensitivity value; Masten–Poirier 1812.11598; Schennach 0708.1874 | abstracts; Rosenbaum not retrieved |
+| A13 | local | Christensen–Connault text: use of `Δ` and `δ̂` | passage read |
+| A14 | numerics | `check_addendum_s1.py` | all assertions consistent (figures in 8.1) |

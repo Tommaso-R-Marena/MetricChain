@@ -199,3 +199,18 @@ t4_cut_families.py, t5_rates.py, t6_robust_rates.py, t7_lattice_chain.py.
   WITHOUT genericity (nerve of the closed cover γ^{-1}(V_x) of [0,1] is connected; voxels through a common
   point are face-connected and all have E_lo ≤ E there), multi-cut Dirichlet eigenvalue bound, transport-plan
   dual bound for robust rates (K_gate = the Gibbs plan).
+
+## Step 9 (18:52, `date`) — report drafted; corrections found by re-checking it against the outputs
+* SK_REPORT.md written (§§1–7).  Re-check against outputs found and fixed: Lean theorem count (25, not 14;
+  now ALL 25 audited by `#print axioms`: standard axioms only); "0.81–0.99" → 0.73–0.99 (8 paths, β=8);
+  T2 size N ≤ 81; relaxed scan in 3-D is 0.24 (k=24) / 0.09 (k=48) below the full bound;
+  Cor. K7.1 restated for true residual g = 0 (my first draft claimed it for κ-Lipschitz g without proof).
+* **T12 (`t12_product_flow.py`, out_t12.txt)**: random-order ("product") Thomson flow: exact for flat and
+  Curie–Weiss landscapes; bound through NEGATIVE-temperature level partition functions loses ≤ 2×;
+  on random landscapes 0.43–0.59 of cap at β=0.5 (one path 0.07–0.09) but 1e-4–1e-3 at β=2
+  (one path 0.19–0.37).  13 cases, 0 violations.
+* **T13 (`t13_penalty_lp.py`, out_t13.txt)** — SELF-CORRECTION: I had drafted "a quadratic penalty does not
+  rescue the leaf rule" from the large-μ LP collapse alone.  The numerics say otherwise for moderate μ:
+  best single pairwise-LP leaf over μ ∈ {0.25..6} certifies on average 0.42 of the level height on 23
+  traps (exact 30%, nothing 48%); collapse for large μ confirmed (−114 at μ=32).  Linear multiplier:
+  below trivial in all cases shown.  Report remark rewritten accordingly.

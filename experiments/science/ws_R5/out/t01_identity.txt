@@ -34,3 +34,7 @@ path  t=0.7  blind=0.0695719005  primal=0.0695718998  dual=0.0695718998  LP@cent
 path  t=0.9  blind=0.0275627831  primal=0.0275627831  dual=0.0275627831  LP@centre=0.0275627831  gap=2.1e-09  centre_in_L=True  primal-blind=-2.88e-16
 tri   t=0.1  blind=0.0253802804  primal=0.0253802804  dual=0.0253802804  LP@centre=0.0253802804  gap=1.1e-13  centre_in_L=True  primal-blind=-1.48e-11
 tri   t=0.3  blind=0.0575436968  primal=0.0575436968  dual=0.0575436968  LP@centre=0.0575436968  gap=7.1e-09  centre_in_L=True  primal-blind=-2.62e-13
+tri   t=0.5  blind=0.0666725949  primal=0.0666725949  dual=0.0666725949  LP@centre=0.0666725949  gap=5.4e-09  centre_in_L=True  primal-blind=-3.05e-16
+tri   t=0.7  blind=0.0545583655  primal=0.0545583655  dual=0.0545583655  LP@centre=0.0545583655  gap=1.5e-09  centre_in_L=True  primal-blind=-3.75e-16
+tri   t=0.9  blind=0.0226649719  primal=0.0226649719  dual=0.0226649719  LP@centre=0.0226649719  gap=8.6e-09  centre_in_L=True  primal-blind=-1.15e-15
+asym  t=0.1  blind=0.0170793430  primal=0.0170793418  dual=0.0170793418  LP@centre=0.0170793418  gap=1.8e-09  centre_in_L=True  primal-blind=-1.21e-09
