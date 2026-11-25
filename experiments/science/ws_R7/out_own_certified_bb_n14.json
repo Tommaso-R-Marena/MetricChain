@@ -1,0 +1,18 @@
+{
+ "n": 14,
+ "key": "L=1,eps=1",
+ "target": 25,
+ "reduced": [
+  265,
+  175
+ ],
+ "nodes": 598,
+ "pruned_by_certified_bound": 486,
+ "pruned_infeasible": 0,
+ "full_cover_leaves": 0,
+ "max_depth": 19,
+ "complete": true,
+ "smaller_cover_found": null,
+ "seconds": 3.9,
+ "conclusion": "PROVED with exact certificates: every cover has at least 25 centres"
+}

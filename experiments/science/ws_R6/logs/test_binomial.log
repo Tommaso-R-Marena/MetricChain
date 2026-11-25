@@ -5,9 +5,15 @@
    n=4.61e+18 p=1.0e-15: mean 4608.8 (exact 4611.7, z=-5.98), variance/mean 1.004
    n=4.61e+18 p=2.0e-17: mean 91.385 (exact 92.234, z=-12.51), variance/mean 1.067
    n=1e+18 p=5.0e-16: mean 498.88 (exact 500, z=-7.10), variance/mean 0.972
-(2) r6lib.big_binomial, 300 draws each
-   n=2^70.0 p=8.67e-19: mean 1023.42 (exact 1024, z=-0.31)
-   n=2^66.0 p=1e-18: mean 73.636667 (exact 73.786976, z=-0.30)
-   n=2^64.0 p=0.25: mean 4.611686e+18 (exact 4.611686e+18, z=+0.74)
+(2) r6lib.big_binomial (corrected sampler), 300 draws each; then 100000 draws in the regime where numpy is biased
+   n=2^61.0 n p=92.2337: mean 92.2434 (z=+0.32)
+   n=2^59.8 n p=500: mean 499.996 (z=-0.06)
+   n=2^61.0 n p=60: mean 59.9954 (z=-0.19)
+   n=2^56.5 n p=500: mean 499.949 (z=-0.73)
+   n=2^70.0 n p=500: mean 499.996 (z=-0.06)
+   n=2^75.0 n p=3e+06: mean 3e+06 (z=+0.68)
+   n=2^70.0 p=8.67e-19: mean 1026.2067 (exact 1024, z=+1.19)
+   n=2^66.0 p=1e-18: mean 73.783333 (exact 73.786976, z=-0.01)
+   n=2^64.0 p=0.25: mean 4.611686e+18 (exact 4.611686e+18, z=-0.89)
 (3) ClassInstance.new_block: shells of Q_300, block of 2^59 points, 40 blocks; tail shells with expectation between 1e-3 and 1e7
-   block totals preserved; 46 tail shells checked; largest |z| of the summed counts: 2.08
+   block totals preserved; 46 tail shells checked; largest |z| of the summed counts: 2.45

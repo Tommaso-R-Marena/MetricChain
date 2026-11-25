@@ -16,7 +16,12 @@ for n, p in [(10 ** 18, 1e-17), (10 ** 18, 1e-19), (10 ** 18, 3e-18), (2 ** 62, 
     mu = n * p
     z = (x.mean() - mu) / math.sqrt(mu / 20000)
     print("   n=%.3g p=%.1e: mean %.5g (exact %.5g, z=%+.2f), variance/mean %.3f" % (n, p, x.mean(), mu, z, x.var() / x.mean()))
-print("(2) r6lib.big_binomial, 300 draws each")
+print("(2) r6lib.big_binomial (corrected sampler), 300 draws each; then 100000 draws in the regime where numpy is biased")
+for n, p in [(2 ** 61, 92.2337 / 2 ** 61), (10 ** 18, 5e-16), (2 ** 61, 60.0 / 2 ** 61), (10 ** 17, 5e-15), (2 ** 70, 500.0 / 2 ** 70), (2 ** 75, 3e6 / 2 ** 75)]:
+    xs = [R.big_binomial(n, p, rng) for _ in range(100000)]
+    m = sum(xs) / len(xs)
+    mu = n * p
+    print("   n=2^%.1f n p=%.6g: mean %.6g (z=%+.2f)" % (math.log2(n), mu, m, (m - mu) / math.sqrt(mu / len(xs))))
 for n, p in [(2 ** 70, 2.0 ** -60), (2 ** 66, 1e-18), (2 ** 64 + 12345, 0.25)]:
     xs = [R.big_binomial(n, p, rng) for _ in range(300)]
     m = sum(xs) / len(xs)

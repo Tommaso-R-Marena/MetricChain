@@ -340,3 +340,37 @@ they have been corrected to approximate real times.  From here on times are read
      insensitive to partial shells at the 0.002 na level, though (differences up to 0.075 na, in the favourable direction).
 * RE-RUN `python -m pytest tests/eng -q` (with dia_enum/dia_flip compiled from their sources; CP-SAT from the private
   OR-Tools): 128 passed in 11 s (rerun_logs/pytest.log).
+
+### 21:58-22:06 — lattice n = 21 replicated; entropy nets; flips n = 14; report sections 2-7 drafted
+* `own_dia_compare.py 21 21`: own enumerator 6 204 141 457 conformations, 2 753 classes, class table IDENTICAL (per class:
+  count, gmin, gmax) to data/dia_Sc12_n21.txt, the first of the four tables produced on Modal (job M-002) and not replicated
+  by anybody so far (R2 stopped at n = 20).  278 s wall, one core.
+* `own_flip -n 14`: 57 92 109 118 137 154 147 | sym = stored (52 s).  => c_sf replicated for n = 3, 5, 8..14.
+* `own_lattice_nets.py 0 8 10 12 13 14 16 18 20 22 24` (out_own_lattice_nets.{txt,json}): 50 cells of the entropy table of
+  ENG-RES-0002 section 4.  No inconsistency (my certified LB <= published upper, my greedy cover >= published lower, in all 50).
+  Of the 40 published single values my tolerance-free LP bound equals 33 (lower side certified; the upper side - a cover of
+  that size - is NOT checkable: net covers are not stored); 7 rest on branch and bound (n=10 d=1/4: 43 vs 40; n=12 d=1/4: 65 vs
+  60; n=13: 20 vs 19, 55 vs 52; n=14: 25 vs 24, 72 vs 66).  In all 10 brackets the published lower end EQUALS my certified
+  bound (25, 98, 29, 104, 33, 146, 38, 141, 41, 186): for the nets "certified lower bound" is accurate.
+* web search (2 queries, standard mode) for the two cited theorems: Harper 1966 (bibliographic data confirmed, statement not
+  seen), Lehmer 1933 (statement and reference confirmed in snippets).  Logged in the report, section 4.
+* wrote `own_certified_bb.py` (+ self-test): branch and bound with an exact-integer LP-dual certificate at every pruned node.
+
+### 22:06-22:14 — certified branch and bound; external control of the conformation totals
+* `own_certified_bb.py` self-test (test_own_certified_bb.py): 300 random instances, reduced and unreduced, target = optimum
+  -> tree exhausted; target = optimum + 1 -> smaller cover found.  Passed.
+* `own_certified_bb_all.py optima 240 14 16` (out_own_certified_bb_optima_14_16.{txt,json}): every pruned node certified by an
+  exact-integer LP-dual bound:
+     n=14 L=1 eps=1 (= eps=N/10):  >= 25 PROVED, 598 nodes, 3.7 s
+     n=15 L=1 eps=0 (= N/20):      >= 33 PROVED, 99 nodes, 1.6 s
+     n=15 L=1 eps=1 (= N/10):      >= 27 PROVED, 12 nodes, 0.2 s
+     n=16 L=1 eps=1 (= N/10):      >= 30 PROVED, 8 nodes, 0.3 s
+     n=16 L=1 eps=0 (= N/20):      target 38 (LP 35.56, gap 2): NOT finished in 240 s (11 226 nodes)
+  With the stored covers (primal-checked) these 8 cells are now optima certified without any MILP solver.
+  n = 17..22 running (240 s cap per distinct instance).
+* EXTERNAL CONTROL (check_saw_counts_oeis.py): the total number of conformations of every class table n = 1..24 equals
+  A001394(n+2)/12, A001394 = number of n-step self-avoiding walks on the diamond lattice (OEIS b-file fetched today;
+  [full text of the b-file through a page-reading tool]).  In particular the four Modal-produced tables:
+  n=21: 74 449 697 484/12 = 6 204 141 457; n=22: 215 677 847 460/12 = 17 973 153 955; n=23: 625 096 195 404/12 = 52 091 349 617;
+  n=24: 1 810 062 340 812/12 = 150 838 528 401.  The engineering register does not use this control (it validates counts
+  against P_REPORT up to n = 13 only).  It checks totals, not the split into classes.

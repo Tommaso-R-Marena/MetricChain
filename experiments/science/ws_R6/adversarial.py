@@ -98,6 +98,7 @@ if __name__ == "__main__":
     t0 = time.time()
     hist = []
     ev = 0
+    disc = 0
     g = random_genome(cell, rng)
     cur = -1.0
     stall = 0
@@ -109,7 +110,8 @@ if __name__ == "__main__":
             cur = -1.0
         val, ck = evaluate(cell, P, cand, int(rng.integers(0, 2 ** 31)), objective)
         ev += 1
-        if val is None:
+        if val is None:                   # the run needed a block beyond the sampler limit (2^83 points): discarded
+            disc += 1
             continue
         if ck["det"] or (ck["G"] and ck["good"]):
             viol.append(dict(det=[str(x) for x in ck["det"][:4]], good=[str(x) for x in ck["good"][:4]], G=ck["G"],
@@ -123,7 +125,7 @@ if __name__ == "__main__":
         if val > best:
             best, bestg = val, cand
             hist.append((ev, round(best, 4)))
-    out = dict(cell=CP.cell_tag(cell), objective=objective, evaluations=ev, seed=seed, best=best, violations=len(viol), viol=viol[:5],
+    out = dict(cell=CP.cell_tag(cell), objective=objective, evaluations=ev, completed=ev - disc, discarded=disc, seed=seed, best=best, violations=len(viol), viol=viol[:5],
                best_genome=dict(steps=[round(float(x), 4) for x in bestg["steps"]], d0=bestg["d0"], s_in=bestg["s_in"], strat=bestg["strat"]),
                history=hist, secs=round(time.time() - t0, 1), rdag=P.rdag, K=P.K)
     _os.makedirs(_os.path.join(HERE, "data"), exist_ok=True)

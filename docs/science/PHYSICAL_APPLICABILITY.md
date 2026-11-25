@@ -27,6 +27,14 @@ at 300 K.*
      couplings of the same size, no sharp site in any enumerated instance — and it is
      near the pair-additive ("profile") class only in root mean square
      (`0.2–0.9 k_BT`), not in supremum norm (`2–16 k_BT` from three residues on).
+   **In residue-rotamer variables on a fixed backbone the picture changes (workstream
+   P2, checkpoint 31) [M]:** the known part is *exactly* pairwise; the solvent term is
+   pairwise up to third-order constants of `0.003–0.2 kcal/mol` for neutral side chains;
+   the second-order interface certifies the minimum exactly, with tens of evaluations,
+   for apolar side chains and fails for polar and charged ones because the *pair* part
+   of the residual is large; the third-order interface (values on a Hamming ball of
+   radius 2) certifies every enumerated instance.  First-order constants saturate for
+   neutral side chains and grow for charged ones (§2a).
 3. **The exponents of the query-complexity theory are evaluated at `βc ∼ 1`; nothing
    measured is there.**  For the solvent term the theory is in its zero-temperature regime
    and says, correctly but uninformatively, "evaluate a fixed fraction of everything"
@@ -242,11 +250,47 @@ division as T-3 of SCI-RES-0002.
   `sorry`); scripts T1, T3, T9 re-run with identical output.  Wrochna's theorem and the
   Edmonds–Fulkerson reference checked at the level of bibliographic record and abstract by
   the coordinator; read in full (pp. 1–8, 299–301) by the workstream.
+### 2a. The same residual in rotamer variables on a fixed backbone  [M; workstream P2, `workstreams/P2_REPORT.md`; SCI-MSG-0015]
+
+Protocol: capped homopolymers of Val, Leu, Phe, Ser, Lys and one patterned heteropolymer
+on ideal helix, strand and PPII backbones; one site per residue, the rotamer (three
+states per side-chain dihedral) as site variable; rigid ideal geometry; clash filter;
+exact enumeration (140 models, 8.5·10⁶ assignments).  Exact maxima over finite sets, lower
+bounds for anything larger.
+
+| quantity | backbone torsions (§2) | residue rotamers, fixed backbone |
+|---|---|---|
+| known part pairwise in the sites? | no (`c_ij(f)` up to 28 kcal/mol) | **yes, exactly** with one site per residue; not with one site per χ |
+| `max c_i` of the GBn2 term | 9 → 32 kcal/mol for 1…6 residues | neutral: saturates (Val 0.4–0.8, Leu 1.0–1.6, Phe 1.6–4.5, Ser 5.0–9.4 by backbone); charged: grows (poly-Lys 10, 37, 52, 56; ≥ 138 at 24 residues) |
+| `c_ij`; half row sums against excitation energies | up to 29; 52–89 | Val, Leu 0.1–0.5; Ser 2.1–3.0 (row sums 3.5–4.9 against 0.13–1.0); Lys–Lys 18–51; Lys–Glu 78 |
+| `c_ijk`; best two-site fit | RMS 2.1, max 13 | neutral 0.003–0.2 (fit max 0.002–0.2); charged up to 2.4 (10.2 at a relaxed clash threshold) |
+| second-order interface (star, exact criterion) | condition fails by 1–2 orders | exact certificate for apolar side chains (25 evaluations of 531 441; 17 of 65 536); fails for polar and charged ones from three residues on |
+| third-order interface (ball of radius 2) | — | exact certificate in every instance at the pilot's clash threshold (1 009 of 531 441 for Ser₆) |
+| Jensen gap against the class bound | 2.3 against 178 nats | 0.99 against 20 (Ser₆); 4.6 against 146 (Lys₄) |
+
+What a reader should not miss.  (1) **The solvent term is not far from pairwise in these
+variables; what defeats the second-order interface is the size of its pair part** — the
+screening cross terms that nearly cancel the vacuum Coulomb term of the known part.
+Moving a pairwise term between known part and residual changes the first- and
+second-order constants and leaves the third-order ones unchanged: the cost of the star
+depends on the split, that of the ball does not.  (2) **Our prediction that the constants
+would be bounded by the solvation of one side chain is true for neutral side chains and
+false for charged ones** (an unscreened long-range charge–charge term stays in the
+residual).  (3) Every certificate is conditional on constants that were obtained by
+enumerating the whole domain; nobody has an a-priori bound on `c_ij` or `c_ijk` of a
+generalized-Born term.  The measurement shows such bounds would not be vacuous.
+(4) **No buried environment was measured**; there the third-order constants must be
+expected to be larger — the literature reports that pairwise treatments of GB lose
+accuracy when all side chains of a folded protein move together (abstracts only; the
+report's §4).  That is the next measurement (request P2-E1).
+
 * **Limitations of the pilot:** alanine only; rigid geometry (58 % of the dipeptide map is
   a clash); grids of basins; exact only to six and nine residues; one clash threshold with
   a sensitivity check (constants move by up to 15 %); the prior-art search is six PubMed
   abstract queries; no side chains, no Poisson–Boltzmann, quantum or learned residual; no
   certificate in the span format was run.
-* **The decisive missing measurement** is the same constants where the theory's known part
-  exists: rotamer variables on a fixed backbone, where no lever arm exists
-  (`BENCHMARK_DESIGN.md` B1; request E-1 of SCI-RES-0002).
+* ~~**The decisive missing measurement** is the same constants where the theory's known part
+  exists: rotamer variables on a fixed backbone~~ — **made (workstream P2; §2a)**.  The
+  decisive missing measurement is now the same third-order constants in a **buried**
+  environment (request P2-E1 of SCI-MSG-0015), and the missing theorem an a-priori bound
+  on them.

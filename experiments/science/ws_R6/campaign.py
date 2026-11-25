@@ -266,6 +266,14 @@ def _b_lazy():
     return cells, ["cone", "cone_half", "platcone", "flatcone", "eqmass", "dip_crit", "rw_down", "flat", "two_plateaus"], ["lazy", "lazy_mix"], {}
 
 
+@campaign("B_lazycheap")      # the same with rung costs 10^l: the abort rule is not needed there
+def _b_lazycheap():
+    cells, profs, strats, opts = _b_lazy()
+    for c in cells:
+        c.pop("costs", None)
+    return cells, profs, strats, opts
+
+
 @campaign("D_2L")             # Algorithm 2L of Theorem 11.52, constants of the theorem
 def _d_2l():
     cells = [cell_2L(60, 30, 1.0, 0.25, 0.1), cell_2L(2000, 1000, 1.0, 0.03, 0.02), cell_2L(1200, 400, 1.0, 0.025, 0.015), cell_2L(600, 300, 2.0, 0.08, 0.04),

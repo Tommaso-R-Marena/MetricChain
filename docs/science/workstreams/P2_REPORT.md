@@ -26,46 +26,46 @@ property; sequences, backbones, grid and thresholds were fixed before any consta
 
 On a fixed backbone with one site per residue and the rotamer as site variable, the theory's
 known part **exists exactly** for a real force field: the ff14SB vacuum energy is a sum of
-one-site and two-site tables to `2·10⁻¹²` kcal/mol in all 215 non-empty instance analyses (it
-is *not* pairwise with one site per χ angle: third-order mixed differences of 4–6 kcal/mol).  For the
-real residual of the brief — the GBn2 polarisation energy `g_GB` — **the second-order interface
+one-site and two-site tables to `2·10⁻¹²` kcal/mol in all 217 non-empty instance analyses (it
+is *not* pairwise with one site per χ angle: third-order mixed differences of 4–6 kcal/mol).
+For the real residual of the brief — the GBn2 polarisation energy `g_GB` — **the second-order interface
 (star + the exact criterion of Theorem 11.17) has real instances, but only the easy ones**: one
 star of `1 + Σ(k_i − 1)` evaluations is an exact certificate of the minimum for the apolar
 homopolymers (poly-Val on the strand and on PPII at every enumerated length up to 12: 25
 evaluations of 531 441 assignments; poly-Leu on helix, strand and PPII at every enumerated
-length up to 16: 17 of 65 536, of which the
-PPII instances are ones where the first-order one-evaluation criterion fails, `λ* = 0.45`;
+length up to 16: 17 of 65 536, of which the PPII instances are ones where the first-order one-evaluation criterion fails, `λ* = 0.45`;
 poly-Phe on the strand), with free-energy brackets of `10⁻³–0.2` nats — and **it fails for every
 polar or charged instance beyond two residues**: for poly-Ser the half row sums `½Σ_j c_ij` are
 3.5–4.9 kcal/mol against single-site excitation energies of 0.13–1.0 (a factor 4–40), and the
 accuracy one star certifies degrades by about 3–6 kcal/mol per residue (1.7 → 10.6 kcal/mol on
 the strand, `n = 3 → 6`); for poly-Lys the row sums are 17–41 kcal/mol (lower bounds 49–68 at
-12–16 residues: a factor 20 in the median, up to 160) and the star is off by 10–178 kcal/mol;
+12–16 residues: a factor 20 in the median, up to 160) and the star is off by 10–204 kcal/mol;
 for the heteropolymer (LKSE)ₘ by 13–170.  **The reason is not that the solvent term is
-many-body.**  In rotamer variables `g_GB` is pairwise up to third-order constants `c_ijk` of 0.003–0.2 kcal/mol for the
-neutral peptides (best two-site fit: RMS `2·10⁻⁴–5·10⁻²`, maximum `2·10⁻³–0.2` kcal/mol over up
-to 531 441 assignments — against RMS 2.1 / max 13 for torsion pairs in P's variables) and
-0.07–2.4 kcal/mol for the charged ones (RMS still ≤ 0.04).  What defeats the star is the size
-of the *pair* part: direct solvent-screening cross terms between polar and charged side chains
+many-body.**  In rotamer variables `g_GB` is pairwise up to third-order constants `c_ijk` of
+0.003–0.2 kcal/mol for the neutral peptides (best two-site fit: RMS `2·10⁻⁴–5·10⁻²`, maximum `2·10⁻³–0.2` kcal/mol over up
+to 531 441 assignments — against RMS 2.1 / max 13 for torsion pairs in P's variables); for
+the charged ones the typical remainder is as small (RMS ≤ 0.12) but `c_ijk` reaches 0.1–2.4
+kcal/mol at P's clash threshold and 10 kcal/mol at the relaxed one (three lysines on PPII).
+What defeats the star is the size of the *pair* part: direct solvent-screening cross terms between polar and charged side chains
 (`c_ij` up to 3.0 for Ser–Ser, 18–51 for Lys–Lys, 78 for Lys–Glu), which are pairwise by
 construction and nearly cancel the vacuum Coulomb term of the known part, plus a
 Born-radius-mediated pair coupling of 0.35–2.4 kcal/mol for the neutral peptides (6 and more
-for Lys).  Consequently **the interface of the theory that has a real instance for the solvent term is the third-order one**
-(Theorem 11.18 with `m = 3`: `g_GB` on the Hamming ball of radius 2, i.e.
+for Lys).  Consequently **the interface of the theory that has a real instance for the
+solvent term is the third-order one** (Theorem 11.18 with `m = 3`: `g_GB` on the Hamming ball of radius 2, i.e.
 `1 + Σ(k_i−1) + Σ_{i<j}(k_i−1)(k_j−1)` evaluations): it is an exact certificate of the minimum in
-every enumerated instance at P's clash threshold (e.g. 1 009 evaluations of 531 441 for Ser₆,
-2 481 of 194 481 for Lys₄) with free-energy brackets of `10⁻³–0.2` nats, and within 0.2
-kcal/mol / 1.1 nats in the worst instance at the relaxed threshold.  **P's prediction that the
-first-order constants do not grow with chain length is confirmed for neutral side chains**
-(max `c_i`: Val 0.44–0.84, Leu 0.96–1.56, Phe 1.6–4.5, Ser 5.0 / 7.7 / 9.4 kcal/mol on strand /
-PPII / helix, flat from 4–6 residues on and still so in lower bounds at 24–32 residues) **and
+every enumerated instance of three to eight sites at P's clash threshold (e.g. 1 009 evaluations of 531 441 for Ser₆,
+2 481 of 194 481 for Lys₄) with free-energy brackets of `10⁻³–0.2` nats; at the relaxed
+threshold it is exact in all but three poly-Lys instances, where it is off by 0.14, 0.19 and —
+for Lys₄ on PPII — 6.7 kcal/mol.  **P's prediction that the first-order constants do not grow with chain length is confirmed for neutral side chains**
+(max `c_i`: Val 0.44–0.84, Leu 0.96–1.56, Phe 1.6–4.5, Ser 5.0–5.3 / 7.7–8.0 / 9.4–10 kcal/mol
+on strand / PPII / helix; no growth between 6–12 residues and the lower bounds at 24–32) **and
 refuted for charged ones**: for poly-Lys `max c_i = 10, 37, 52, 56` kcal/mol at `n = 1…4`
 (exact) and `≥ 85, 110, 124, 138` at `n = 8, 12, 16, 24` — the unscreened long-range
 charge–charge term that the split "vacuum force field + GB" puts into the residual.  A
 force-field difference with another charge model (ff03 − ff14SB) is *exactly* in the pairwise
 class in these variables and the star certifies it exactly for the apolar peptides, for
 serine on strand and PPII and for the heteropolymer on helix and PPII, but not for poly-Lys
-(off by 0.5–12 kcal/mol in 13 of 16 analyses); a same-lineage torsion refit
+(off by 0.5–17 kcal/mol in 15 of 18 analyses); a same-lineage torsion refit
 (ff99SB − ff14SB) is exactly additive (`c_ij = 0`, `c_i` = 0–2.9 kcal/mol by residue type,
 independent of length).  Everything is a property of small exposed model peptides with rigid
 ideal geometry (in which leucine has *no* rotamer at P's threshold 0.70); no protein interior
@@ -166,7 +166,7 @@ torsion term involves atoms of at most one site; bonds and angles are constant. 
 field used is asserted to touch at most one site.  (iii) Tables built by direct atom-pair
 summation agree with P's evaluator on the full conformation to `1.1·10⁻¹²` kcal/mol and with
 OpenMM's Reference platform to `1.9·10⁻¹²` (12 systems × 200 random assignments,
-`test_fbmodel.py`).  (iv) On all 215 non-empty instance analyses
+`test_fbmodel.py`).  (iv) On all 217 non-empty instance analyses
 `max_{ijk} c_ijk(f) ≤ 1.6·10⁻¹²` kcal/mol (ranges of `f` up to 306 kcal/mol).
 
 (b) Hence the difference of two fixed-charge force fields at identical coordinates is exactly
@@ -205,7 +205,9 @@ rigorous lower bound from `an_long.py` (true GB difference at a pair of assignme
 | **Lys, H, .70** | 9.96 | 37.25 | 51.50 | 55.66 | | | ≥ 85.5 | ≥ 110.1 | ≥ 123.6 | ≥ 137.9 (24) |
 | Lys, H, .60 | 18.63 | 45.24 | 62.84 | 77.89 | | | | | | |
 | Lys, E, .70 | 6.30 | 13.86 | 39.29 [44.66] | 47.04 [52.83] | | | ≥ 73.5 | ≥ 81.9 | ≥ 86.0 | |
+| Lys, E, .60 | 16.36 | 26.13 | 57.23 [59.60] | 63.46 [71.10] | | | | | | |
 | Lys, P2, .70 | 6.73 | 27.51 | 28.61 | 58.28 | | | ≥ 93.8 | ≥ 108.4 | | |
+| Lys, P2, .60 | 7.18 | 33.46 | 40.96 [42.69] | 71.68 [74.07] | | | | | | |
 | LKSE, H, .60 | 0.55 | 20.30 | 25.79 | 32.24 | 32.93 | 47.66 [61.15] | ≥ 60.0 | ≥ 60.0 | ≥ 65.1 | |
 | LKSE, E, .60 | 0.61 | 14.45 | 15.76 | 64.66 [67.97] | 65.84 [69.15] | 63.19 [76.86] | ≥ 72.8 | | | |
 | LKSE, P2, .60 | 0.29 | 16.10 | 24.18 | 58.96 | 64.07 | 74.02 | ≥ 71.7 | | | |
@@ -235,8 +237,8 @@ of `f` cancels it: for `coul + g_GB` the same constants are 5.3, 11.9, 15.1, 15.
 τ = 0.70, `n = 1…4`).  (iv) *Typical* single-site changes are a third to a tenth of the
 constants: sup/RMS = 1.7–3.0 (Val, Leu, Phe, Ser), 4.4–5.7 (Lys), 5.7–11 (LKSE).
 (v) Threshold: relaxing τ from 0.70 to 0.60 changes nothing for Ser on E and P2 (all nine
-states pass at 0.80 as well) and raises the helix values by 15–30 % (Ser 9.4 → 12.4,
-Lys₄ 55.7 → 77.9).
+states pass at 0.80 as well) and raises the other values by 15–40 % (Ser on the helix 9.4 → 12.4;
+Lys₄ 55.7 → 77.9 on the helix, 47 → 63 on the strand, 58 → 72 on PPII).
 
 ### Statement 3 [M] — second-order constants: size, decay, row sums
 
@@ -281,7 +283,7 @@ excitation energy of `E = f + g_GB` at `argmin E`, min over sites; kcal/mol):
 For an interior site of a long poly-Ser strand the half row sum converges (lower bounds 4.34
 at `n = 12` and 4.45 at `n = 24`; exact value 3.89 at `n = 6`); for poly-Lys it does not converge within 16 residues.
 
-### Statement 4 [M] — third order: `g_GB` is close to pairwise in the rotamers, in supremum norm
+### Statement 4 [M] — third order: `g_GB` is close to pairwise in the rotamers — in supremum norm for neutral side chains, in RMS only for charged ones
 
 `X′`, longest enumerated chain of each kind; `c_ijk`: max over triples and sum over all
 triples; fit: best approximation of `g_GB` by a sum of one-site and two-site tables (least
@@ -305,6 +307,8 @@ squares; "Cheb." = sup-optimal by linear programme where the domain is small eno
 | Lys₄, E (.70) | 74 529 | 0.19 | 0.53 | 4.5 / 38 | 0.0048 / 0.18 / — | 16.1 |
 | Lys₄, P2 (.70) | 194 481 | **2.39** | 2.97 | 4.6 / 28 | 0.036 / **1.65** / — | 15.5 |
 | Lys₄, H (.60) | 353 220 | **1.90** | 4.08 | 5.2 / 35 | 0.026 / **1.30** / — | 18.3 |
+| Lys₄, E (.60) | 450 225 | 1.05 | 2.6 | 6.1 / 60 | 0.026 / 0.67 / — | 16.8 |
+| Lys₄, P2 (.60) | 783 000 | **10.2** | 13.4 | 6.0 / 40 | 0.12 / **7.8** / — | 17.1 |
 | LKSE:6, H (.60) | 217 152 | 0.71 | 3.4 | 3.2 / 20 | 0.041 / 0.36 / — | 12.2 |
 | LKSE:6, P2 (.60) | 622 728 | 0.45 | 2.2 | 4.8 / 42 | 0.019 / 0.30 / — | 12.4 |
 | LKSE:6, E (.60) | 341 172 | 0.15 | 0.58 | 7.4 / 39 | 0.0073 / 0.12 / — | 13.4 |
@@ -318,9 +322,12 @@ pairwise class **in supremum norm over the whole enumerated domain** (`βη_sup 
 for Ser, Val and Leu on strand and PPII), and `Σ c_ijk` grows about linearly with the chain
 (Ser/E: 0.004, 0.010, 0.016, 0.022 for `n = 3…6`, i.e. 0.006 kcal/mol per residue; Ser/H at
 τ = 0.70: 0.05, 0.08, 0.15, 0.23, i.e. 0.06–0.08 per residue; for Leu on the helix the sum
-over the 560 triples of the 16-mer is 7.4 although no single `c_ijk` exceeds 0.09).  For charged side chains the typical remainder is as small (RMS ≤ 0.04) but
-its maximum reaches 1.3–2.4 kcal/mol (`2–4 k_BT`) in the states where an ammonium group
-comes close to other groups.  This is the opposite of P's finding in backbone torsions (all
+over the 560 triples of the 16-mer is 7.4 although no single `c_ijk` exceeds 0.09).  For charged side chains the typical remainder is as small (RMS ≤ 0.04 at
+τ = 0.70, ≤ 0.12 at 0.60) but its maximum is not: 0.07–0.18 kcal/mol for Lys on helix and
+strand at τ = 0.70, 1.65 for Lys₄ on PPII, and 0.7–7.8 at τ = 0.60 — the largest `c_ijk`, 2.4
+(τ = 0.70) and 10.2 (τ = 0.60) kcal/mol, belongs to the triple of residues 1, 2, 4 of Lys₄ on
+PPII, three long charged side chains that can converge.  The sup/typical gap that P found
+at first order reappears here at third order, for charged side chains only.  This is the opposite of P's finding in backbone torsions (all
 torsion pairs: RMS 2.10, max 13.4 kcal/mol at five residues).  The one-site (additive) class
 is far in every polar case (max 3–42 kcal/mol).
 
@@ -378,6 +385,7 @@ partition bound, upper bound = greedy cover; `an_cover.py`, the same computation
 | LKSE:3 … LKSE:6, H (.60) | 558 … 217 152 | 40 … 66 | fails | 25.8 (87.6) at `n = 6` | 12.9, 32.4, 32.6, 82.3 | 20.9, 53.7, 54.2, 138 |
 | LKSE:6, P2 / E (.60) | 622 728 / 341 172 | 88 / 75 | fails | 51 (141) / 48 (158) | 161 / 170 | 269 / 285 |
 | Lys₄, E (.70) | 74 529 | 65 | fails | 52 (122) | 121 | 204 |
+| Lys₄, E / P2 (.60) | 450 225 / 783 000 | 101 / 116 | fails | 74 (190) / 53 (184) | 204 / 195 | 341 / 327 |
 
 So **for `g_GB` the star is an exact certificate in the apolar homopolymers** — in poly-Leu
 on PPII (and poly-Phe on the strand at `n = 4–7`, `λ* = 0.14–0.18`) it certifies where the
@@ -387,7 +395,7 @@ minimiser from the pairwise kernel applied to `L`, and `ln Z` to within 0.008 (r
 nats — **and it fails for every polar or charged instance with more than two residues**, the
 certified accuracy degrading linearly in the chain length (the "quadratic law" of theory
 report §11.7 seen on a real instance: the envelope half-width `W` is a sum over pairs).
-Overall the star is an exact certificate in 110 of the 179 instance analyses with at least
+Overall the star is an exact certificate in 110 of the 181 instance analyses with at least
 two sites.  The plain row-sum condition (a theorem only for an additive known part; request
 T-2) holds in 97 of them and in no instance where the star fails; it is violated in the
 other 13 exact ones (e.g. Leu₁₆/H), so it is sufficient in practice and not necessary.  In
@@ -411,16 +419,21 @@ evaluations at `x₀ = argmin E`; lower model `f + I₂g − Σ_{T ⊆ changed} 
 | Lys₄, E (.70) | 74 529 | 1 569 | 0.33 (0.53) | **0** | 0.0017 | — |
 | Lys₄, P2 (.70) | 194 481 | 2 481 | 1.74 (2.97) | **0** | 0.17 | 0, 1.73 |
 | Lys₄, H (.60) | 353 220 | 3 444 | 2.11 (4.08) | 0.19 | 1.12 | 1.43, 4.0 |
+| Lys₄, E (.60) | 450 225 | 3 841 | 0.74 (2.62) | **0** | 0.036 | — |
+| Lys₄, P2 (.60) | 783 000 | 5 075 | 10.2 (13.4) | **6.7** | 14.5 | — |
 | LKSE:5, H (.60) | 14 508 | 850 | 0.48 (1.53) | **0** | 0.082 | 0.25, 1.39 |
 | LKSE:6, H (.60) | 217 152 | 1 569 | 0.85 (3.41) | **0** | 0.12 | 0.68, 2.76 |
 | LKSE:6, P2 (.60) | 622 728 | 2 795 | 0.44 (2.20) | **0** | 0.22 | 0.75, 2.68 |
 
-In all 124 instance analyses with three to eight sites the ball is an exact certificate of
-`min E`, except poly-Lys on the helix at τ = 0.60 (ε = 0.14, 0.19 kcal/mol at `n = 3, 4`); the
-free-energy bracket is below 0.25 nats except there (0.54, 1.12) and for Ser₅, Ser₆ on the
-helix at 0.60 (0.56, 1.12).  **This is the interface that has a real instance for
-the solvent term**: polynomially many evaluations (`≈ n²k²/2`), a remainder controlled by
-measured third-order constants, exact certificates.  For the charged peptides the ball costs
+In all 126 instance analyses with three to eight sites the ball is an exact certificate of
+`min E`, except three poly-Lys instances at the relaxed threshold: helix, `n = 3, 4`
+(ε = 0.14, 0.19 kcal/mol) and PPII, `n = 4` (ε = 6.7 kcal/mol).  The free-energy bracket is
+below 0.18 nats in every instance at τ = 0.70; at 0.60 it is below 0.25 nats except in those
+three (0.54, 1.12, 14.5) and for Ser₅, Ser₆ on the helix (0.56, 1.12).  **This is the
+interface that has a real instance for the solvent term**: polynomially many evaluations
+(`≈ n²k²/2`), a remainder controlled by measured third-order constants, exact certificates
+at P's threshold for every residue type — and a clear limit where three charged side chains
+meet.  For the charged peptides the ball costs
 a few per cent of the domain at these sizes (Lys₄/P2: 1.3 %; Lys₃/E: 16 %) where the
 first-order format needs 76–90 %.
 
@@ -478,7 +491,7 @@ pair-additive residuals the constants are computed exactly for *any* length from
 | Phe, H / E / P2 (.60) | 1.49 / 1.26 / 2.70 | 0.16–0.19 | 0.17–0.34 | exact |
 | Ser, E / P2 / H (.70) | 4.83 / 5.85 / 5.02 (`n = 6`); 4.83 / 5.84 / 5.20 (`n = 24`) | 0.31 / 0.25 / 0.54 | 0.53 / 0.42 / 0.81 (0.61 / 0.54 / 0.92 at `n = 24`) | exact on E and P2 at every `n ≤ 6`; on H off by 0.1–0.6 for `n = 2–5`, exact at `n = 6` |
 | Lys, H (.70) | 2.9, 6.0, 8.6, 9.2 (`n = 1…4`); 9.5, 8.7, 8.6, 9.0 (`n = 8, 12, 16, 24`) | 2.2–2.4 | 2.5 (`n = 4`) → 6.9 (`n = 24`) | fails: ε* = 1.7, 2.7, 0.5 (`n = 2, 3, 4`); 3.5–11.6 at τ = 0.60 |
-| Lys, E / P2 (.70) | 5.2 (`n = 3`), 7.0–7.5 (`n = 8–16`) / 6.4 (`n = 4`), 9.0–9.9 (`n = 8, 12`) | 4.4 / 3.3 | 2.7 / 3.5 | E: exact at `n = 2, 4`, ε* = 1.9 at `n = 3`; P2: ε* = 0.9, 2.0, 3.6 |
+| Lys, E / P2 (.70) | 5.2 (`n = 3`), 7.0–7.5 (`n = 8–16`) / 6.4 (`n = 4`), 9.0–9.9 (`n = 8, 12`) | 4.4 / 3.3 | 2.7 / 3.5 | E: exact at `n = 2, 4`, ε* = 1.9 at `n = 3` (2.6, 3.5 at τ = 0.60); P2: ε* = 0.9, 2.0, 3.6 (4.2, 9.6, 16.8 at τ = 0.60) |
 | LKSE, H / P2 (.60) | 9.4 / 12.5 (`n = 5`); 11.4–11.8 (`n = 8–16`, H) | 1.4–2.6 / 2.0 | 1.3–2.4 / 1.9–2.3 | exact at every `n ≤ 6` |
 | LKSE, E (.60) | 12.5 (`n = 5`) | 1.9 | 1.5 | ε* = 0.2, 2.1, 3.2, 5.4 at `n = 3…6` |
 
@@ -492,10 +505,10 @@ Phe, Lys.  In several of these instances (Ser₆ on strand and helix, Leu₁₆ 
 the minimiser of `f + g_03` differs from that of `f` (regret 0.2–3.7 kcal/mol), so the
 certificate is not a triviality.  The neutral exception is serine on the helix up to five
 residues (star off by 0.1–0.6 kcal/mol).  (iii) For poly-Lys the row sums (2.5–6.9) exceed
-the excitation energies (0.1–2.3) and the star fails by 0.5–12 kcal/mol in 13 of the 16
+the excitation energies (0.1–2.3) and the star fails by 0.5–17 kcal/mol in 15 of the 18
 poly-Lys analyses; the ball is exact by construction (`c_ijk = 0`).  (iv) `g_ipq` behaves like
 `g_03` (max `c_i` 1.0–2.7 neutral, 6.5–10 Lys, 5.9–8.4 LKSE/H; Table B of `out/tables.md`; star
-exact in 155 of 178 analyses).
+exact in 155 of 180 analyses; `g_03`: 154 of 181).
 (v) `g_99`: one star determines the residual completely (`starPart_eq_of_additive` [V]).
 
 ### Statement 8 [M] — why: the anatomy of the pair part
@@ -530,7 +543,7 @@ order is what is left after both, and it is small (Statement 4).  (iv) So no spl
 kind tried rescues the star for charged side chains: with `coul + g_GB` as residual the star
 is exact for all apolar instances and for serine on strand and PPII at every length (half
 row sums 0.54–0.78) and on the helix at τ = 0.70 for `n = 4–6` (it is off by 0.1–5.3 there for
-`n = 2, 3` and at τ = 0.60), but fails for Lys and LKSE beyond two residues by 0.2–212
+`n = 2, 3` and at τ = 0.60), but fails for Lys and LKSE beyond two residues by 0.2–233
 kcal/mol; with the frozen-radius term moved into the known part the remaining `g_fluct` satisfies the
 row-sum condition for Ser on the strand (0.42 against 1.02) and not on the helix (1.7–3.2
 against 0.13) nor for Lys (5.9–58).
@@ -564,13 +577,13 @@ treated together in folded proteins (§4).  That regime is outside this measurem
 | `max c_ij(g_GB)` | 28.8 (slow decay: 8.1 at separation 9) | 0.11–0.51 (Val, Leu); 0.5–1.7 (Phe); 2.1–2.8 (Ser); 19–41 (Lys); 32–78 (LKSE) |
 | half row sums `½Σ_j c_ij` | 52–89 | 0.16–1.15 (Val, Leu); 0.8–2.3 (Phe); 3.5–4.9 (Ser); 22–36 (Lys₄) |
 | Dobrushin-type sums | ≈ 7 (`n = 4`) | 0.14–0.96 (Val, Leu); 0.7–1.7 (Phe); 2.5–3.2 (Ser); `n − 1` (Lys) |
-| distance of `g_GB` to "pairwise in the sites" | all torsion pairs: RMS 2.10, max 13.4; sup-optimal 5.0 at `n = 4` | two-site fit RMS / max: `(2–30)·10⁻⁴` / 0.002–0.03 (Ser, Val, Leu on E, P2; Ser/H at .70); 0.009–0.05 / 0.04–0.2 (Leu/H, Phe, Ser/H at .60); 0.003–0.04 / 0.07–1.65 (Lys); 0.02–0.04 / 0.3–0.4 (LKSE) |
+| distance of `g_GB` to "pairwise in the sites" | all torsion pairs: RMS 2.10, max 13.4; sup-optimal 5.0 at `n = 4` | two-site fit RMS / max: `(2–30)·10⁻⁴` / 0.002–0.03 (Ser, Val, Leu on E, P2; Ser/H at .70); 0.009–0.05 / 0.04–0.2 (Leu/H, Phe, Ser/H at .60); 0.003–0.12 / 0.07–7.8 (Lys); 0.02–0.04 / 0.3–0.4 (LKSE) |
 | sharp sites; `λ*` | none in any instance; 0.038 … 0.0026 for `n = 2…6` | all (or all but one) sharp, `λ* = 1.2–18`: Val/E, Val/P2, Leu/E, Leu/H; none or one sharp, `λ* = 4·10⁻⁴–0.17`: Ser, Lys, LKSE at three or more residues |
 | first-order certificate of `min E`, ε = 0 | [3 042, 5 357] of 28 843 (11–19 %) | 1 (Val, Leu); [53, 156] of 6 561 (Ser₄/E); [1 361, 2 172] of 17 496 (Ser₅/H); 2 128 of 2 352 (Lys₃/H) |
-| second-order star | not computed (row-sum condition fails by 1–2 orders of magnitude) | exact for Val, Leu, Phe/E; ε* = 1.7–32 (Ser), 10–178 (Lys), 13–170 (LKSE) |
-| third-order ball | — | exact certificate at τ = 0.70 in every instance; 571–2 481 evaluations at `n = 4–6` |
+| second-order star | not computed (row-sum condition fails by 1–2 orders of magnitude) | exact for Val, Leu, Phe/E; ε* = 1.7–32 (Ser), 10–204 (Lys), 13–170 (LKSE) |
+| third-order ball | — | exact certificate at τ = 0.70 in every instance (571–2 481 evaluations at `n = 4–6`); at τ = 0.60 off by 0.14–6.7 in three poly-Lys instances |
 | Jensen gap against `Σ ln cosh(βc_i/2)` | 2.3 against 178 | 0.02 / 0.7 (Val₁₂/E); 0.99 / 20 (Ser₆/E); 4.6 / 146 (Lys₄/H); 25.7 / 114 (LKSE:6/H) |
-| `g_03` (other charge model) | `max c_i` 2.6–4.9, slowly growing; `c_ij` 3.9 → 0.7, not exactly low order; certificate [2, 28] | exactly pairwise; `max c_i` 0.6–5.9 neutral, 9 Lys, 12 LKSE, not growing; star exact for the apolar peptides, Ser on E and P2, LKSE on H and P2 |
+| `g_03` (other charge model) | `max c_i` 2.6–4.9, slowly growing; `c_ij` 3.9 → 0.7, not exactly low order; certificate [2, 28] | exactly pairwise; `max c_i` 0.6–5.9 neutral, 9–14 Lys, 9–13 LKSE, not growing; star exact for the apolar peptides, Ser on E and P2, LKSE on H and P2 |
 | `g_99` (same-lineage refit) | sum of single-φ terms, `c = 0.64` | sum of one-residue terms, `c_i = 0–2.9` by residue type |
 
 The two workstreams measured different molecules (alanine has no rotamer), so the table
@@ -608,9 +621,11 @@ directory with `OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1` 
   component, and for GBn2 tabulated descreening integrals (exact Born radii of an assignment
   by table look-ups) followed by a block pair sum.  Validation (`test_fbmodel.py`, 12 systems ×
   200 random assignments): tables against FastFF `≤ 1.1·10⁻¹²`; table GB against FastFF
-  `≤ 4.5·10⁻¹³` and against OpenMM's own `CustomGBForce` on the Reference platform
-  `≤ 8.9·10⁻¹²` kcal/mol.  Every enumeration also spot-checks 24 assignments against FastFF and
-  4 against OpenMM's CPU platform (single precision: `1–4·10⁻⁵`).
+  `≤ 2.0·10⁻¹²` and against OpenMM's own `CustomGBForce` on the Reference platform
+  `≤ 9.3·10⁻¹²` kcal/mol (final block version; the first, straightforward version gave
+  `4.5·10⁻¹³` and `8.9·10⁻¹²`, `logs/test_fbmodel_v1.log`).  Every enumeration also spot-checks 24 assignments against FastFF and
+  4 against OpenMM's CPU platform (worst deviations over the 140 enumerations: `1.8·10⁻¹¹`
+  against FastFF, `7·10⁻⁵` against the single-precision CPU platform).
 * **Hydroxyl hydrogen.**  OpenMM's ff14SB gives the type HO (`ε = 0`) a placeholder
   `σ = 1 nm`; with the resulting "radius" of 5.61 Å P's clash score marks every serine state as
   a clash (0.3–0.5).  Atoms with `ε = 0` are given radius 0 in the clash score (Amber's own
@@ -627,7 +642,7 @@ directory with `OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1` 
   where it is small (Val, Leu) and by `an_long.py` otherwise; (3) the interfaces are evaluated
   on the pruned product `X′` after the raw product was found to contain overlapping atoms
   (`NOTES.md`, Step 7).  The backbones H′, E′, P2′ of P's grid, announced as a sensitivity
-  check, were built and validated but not analysed (§5).
+  check, were not analysed (only Leu₆ on H′ was built, in the validation; §5).
 * **Temperature** 300 K.
 
 ### 3.2 Scripts and outputs
@@ -645,22 +660,24 @@ directory with `OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1` 
 | `an_mech.py`, `run_mech.sh` | Statement 8 | `out/mech_*.json`, `logs/mech.log` |
 | `an_long.py`, `run_long.sh`, `run_long2.sh` | long chains: exact constants of pair-additive residuals, lower bounds for GB | `out/long_*.json`, `logs/long*.log` |
 | `an_perchi.py` | Statement 1(c) | `logs/an_perchi.log` |
+| `verify_openmm_direct_sc.py` | end-to-end check with OpenMM's own forces and explicit loops (§3.3, item 4) | `logs/verify_openmm_direct_sc.log` |
 
 To re-run everything: `python3 -B test_scbuild.py; python3 -B test_fbmodel.py; python3 -B
-test_controls.py; for b in H E P2; do bash run_enum_R3.sh $b; python3 -B an_batch.py $b R3;
+test_controls.py; python3 -B verify_openmm_direct_sc.py; for b in H E P2; do bash run_enum_R3.sh $b; python3 -B an_batch.py $b R3;
 done; bash run_cover.sh; bash run_mech.sh; bash run_long.sh; bash run_long2.sh; python3 -B
 make_tables.py R3 > out/tables.md`.
 
 **Sizes.**  140 enumerated models with 8 476 447 assignments in all (each one an exact GB
-evaluation), analysed at two thresholds: 278 instance analyses, 215 of them non-empty; largest
+evaluation), analysed at two thresholds: 280 instance analyses, 217 of them non-empty; largest
 enumerations 923 521 (Lys₄ on E and on P2), 622 728 (LKSE:6/P2), 553 536 (LKSE:6/E), 531 441
-(Ser₆ on three backbones, Val₁₂ on two), 465 124 (Lys₄/H).  The two 923 521-point grids were
-analysed at τ = 0.70 (restriction to 194 481 points); their analysis at τ = 0.60 was started but
-is not part of this report.  Long-chain, mechanism and cover runs add about 3·10⁶ evaluations.  GB cost: 24 ns per atom pair (75 µs for 78 atoms, 0.6 ms for 204 atoms) on an idle
-core; the machine was shared (load 8–16 on 4 cores), so wall-clock times in the logs are 3–6
-times longer.  Total about 1.5 CPU-hours.  Data: `data/` holds the enumerated grids.
+(Ser₆ on three backbones, Val₁₂ on two), 465 124 (Lys₄/H).  The 29 long-chain runs add
+237 929 evaluations, the 12 mechanism runs 431 264.  GB cost: 24 ns per atom pair (75 µs for
+78 atoms, 0.6 ms for 204 atoms) on an idle core; the machine was shared (load 8–16 on 4 cores), so wall-clock times in the logs are 3–6
+times longer.  Wall-clock time summed over the single-thread jobs (from the logs): 2.4 h of
+enumeration, 2.0 h of analysis, 0.8 h of long-chain runs, 0.3 h of covers.  Data: `data/`
+(584 MB of `.npz`, not under version control) holds the grids.
 
-### 3.3 Controls (done before any measurement)
+### 3.3 Controls (items 1–3 before any measurement; items 4–5 afterwards)
 
 1. **P's end-to-end check reproduced** (`ws_P/verify_openmm_direct.py`, run from my directory
    without writing into `ws_P`): 508 clash-free conformations, `c_i = 16.09 12.41 18.63 16.43
@@ -675,22 +692,31 @@ times longer.  Total about 1.5 CPU-hours.  Data: `data/` holds the enumerated gr
    deviations; a planted term `0.37·[x₀=1][x₁=0][x₂=2]` is recovered as `c_ijk = 0.3700` exactly
    (Chebyshev two-site remainder 0.0463 = 0.37/8); the bounds of Theorems 11.16 and 11.18 hold
    on all random instances.
-4. *Internal consistency on the real data*: `c_ijk` of every pair-additive function
-   `≤ 2·10⁻¹²`; measured star and ball remainders never exceed their bounds (tables of
-   Statement 5); lower bounds of `an_long.py` equal to the exact constants where both exist.
+4. **Independent end-to-end check of the central numbers** (`verify_openmm_direct_sc.py`, the
+   analogue of P's script): Ser₃ on the strand, all 729 assignments, `g_GB` from OpenMM's own
+   `CustomGBForce` on the Reference platform and `f` from OpenMM's torsion and nonbonded force
+   groups, coordinates from the full internal-coordinate build, constants by explicit loops —
+   without P's evaluator, without my tables and without `anlib`: `c_i(g_GB) = 4.81 4.12 4.32`,
+   `c_12, c_13, c_23 = 1.306 2.426 1.308`, `c_123(g_GB) = 4.03·10⁻³`, `c_123(f) = 6·10⁻¹³` kcal/mol.
+   The pipeline gives the same numbers to all printed digits.
+5. *Internal consistency on the real data*: `c_ijk` of every pair-additive function
+   `≤ 2·10⁻¹²`; the measured star and ball remainders never exceed their bounds (2 377
+   comparisons over all residuals and both centres, no violation); the lower bounds of
+   `an_long.py` reproduce the exact constants in the case where both were computed (Lys₄/H).
 
 ### 3.4 Full tables
 
 `out/tables.md`: A (domains), B (`max c_i` by `n` for `g_GB`, `coul+g_GB`, `g_03`, `g_ipq`,
-`g_99`), C (second and third order), D (interfaces for four residuals: 714 rows), E (decay
+`g_99`), C (second and third order), D (interfaces for four residuals: 722 rows), E (decay
 with distance).
 
 ---
 
 ## 4. Prior art, with a search log
 
-Reading level of every item: **[abstract]** (PubMed record through the literature tool);
-nothing was read in full.  Bibliographic details are those of the PubMed records.
+Based on articles retrieved from PubMed.  Reading level of every item: **[abstract]** (the
+PubMed record, through the literature tool); nothing was read in full.  Bibliographic details
+and DOIs are those of the PubMed records.
 
 | # | query (PubMed) | hits | kept (PMID) |
 |---|---|---|---|
@@ -710,39 +736,39 @@ for pairwise rotamer models.
 **What is known about pairwise decomposability of generalized-Born energies [K, abstract].**
 * That GB is many-body and that practical side-chain placement needs it pairwise is the
   starting point of a line of work by Simonson, Archontis and co-workers: Archontis &
-  Simonson, *J Phys Chem B* 109:22667 (2005), doi:10.1021/jp055282+ ("the interaction energy
+  Simonson, *J Phys Chem B* 109:22667 (2005), [doi:10.1021/jp055282+](https://doi.org/10.1021/jp055282+) ("the interaction energy
   between two amino acids depends on the whole protein structure, but can be accurately
   computed from residue-pairwise information"); Gaillard & Simonson, *J Comput Chem* 35:1371
-  (2014), doi:10.1002/jcc.23637 (the GB term's "many-body character is overcome using an
+  (2014), [doi:10.1002/jcc.23637](https://doi.org/10.1002/jcc.23637) (the GB term's "many-body character is overcome using an
   effective dielectric environment"; "the error remains reasonable, compared to other
   uncertainties"); Villa, Mignon, Polydorides & Simonson, *J Comput Chem* 38:2396 (2017),
-  doi:10.1002/jcc.24898 ("GB is a many-body potential"; the usual simplification is "a mean,
+  [doi:10.1002/jcc.24898](https://doi.org/10.1002/jcc.24898) ("GB is a many-body potential"; the usual simplification is "a mean,
   native-like protein/solvent boundary, which removes the many-body property"; their
   fluctuating-boundary treatment is "numerically exact (within the GB framework)" at
   "residue-pairwise complexity"); Gaillard, *J Phys Chem B* 129:10699 (2025),
-  doi:10.1021/acs.jpcb.5c03662 (extension "allowing an exact decomposition of the GB term").
+  [doi:10.1021/acs.jpcb.5c03662](https://doi.org/10.1021/acs.jpcb.5c03662) (extension "allowing an exact decomposition of the GB term").
 * That the pairwise approximation costs accuracy when all side chains move: Gaillard, Panel &
-  Simonson, *Proteins* 84:803 (2016), doi:10.1002/prot.25030 ("For the prediction of all side
+  Simonson, *Proteins* 84:803 (2016), [doi:10.1002/prot.25030](https://doi.org/10.1002/prot.25030) ("For the prediction of all side
   chains, however, errors due to the pairwise additive approximation overcome the improvement
   brought by these terms"); Gaillard & Simonson, *JCTC* 13:4932 (2017),
-  doi:10.1021/acs.jctc.7b00202 (the GB term "is affected by pairwise decomposition errors when
+  [doi:10.1021/acs.jctc.7b00202](https://doi.org/10.1021/acs.jctc.7b00202) (the GB term "is affected by pairwise decomposition errors when
   all positions are designed together").
 * Poisson–Boltzmann: Marshall, Vizcarra & Mayo, *Protein Sci* 14:1293 (2005),
-  doi:10.1110/ps.041259105 (one- and two-body decomposable finite-difference PB; desolvation of
+  [doi:10.1110/ps.041259105](https://doi.org/10.1110/ps.041259105) (one- and two-body decomposable finite-difference PB; desolvation of
   polar side chains "0.64 kcal/mol RMSD" against the full calculation, screened Coulomb
   between side chains "0.13 kcal/mol"); Vizcarra et al., *J Comput Chem* 29:1153 (2008),
-  doi:10.1002/jcc.20878 (explicit "two-body perturbations to the dielectric environment").
+  [doi:10.1002/jcc.20878](https://doi.org/10.1002/jcc.20878) (explicit "two-body perturbations to the dielectric environment").
 * Side-chain placement with implicit solvent: Lopes et al., *Proteins* 67:853 (2007),
-  doi:10.1002/prot.21379 ("the electrostatic model is not important for sidechain placement";
+  [doi:10.1002/prot.21379](https://doi.org/10.1002/prot.21379) ("the electrostatic model is not important for sidechain placement";
   "the recent discovery of efficient, pairwise implementations of GB").
 * General non-pairwise energies as tuple expansions: Hallen, Jou & Donald, *J Comput Biol*
-  24:536 (2017), doi:10.1089/cmb.2016.0136 (LUTE: a fitted local expansion in tuples of
+  24:536 (2017), [doi:10.1089/cmb.2016.0136](https://doi.org/10.1089/cmb.2016.0136) (LUTE: a fitted local expansion in tuples of
   rotamers representing "general, possibly nonpairwise energy functions to an arbitrary level
   of accuracy").
 * Exact solvers for the pairwise problem and provable partition functions: Simoncini et al.,
-  *JCTC* 11:5980 (2015), doi:10.1021/acs.jctc.5b00594 (proven global minima of
+  *JCTC* 11:5980 (2015), [doi:10.1021/acs.jctc.5b00594](https://doi.org/10.1021/acs.jctc.5b00594) (proven global minima of
   pairwise-decomposable rotamer models on spaces "of size up to 10²³⁴"); Jou, Holt, Lowegard &
-  Donald, *J Comput Biol* 27:550 (2020), doi:10.1089/cmb.2019.0315 ("provable ε-approximations
+  Donald, *J Comput Biol* 27:550 (2020), [doi:10.1089/cmb.2019.0315](https://doi.org/10.1089/cmb.2019.0315) ("provable ε-approximations
   to partition functions" for pairwise energy bounds).
 
 **How this report relates to it.**  Consistent with the literature: GB is many-body through
@@ -753,8 +779,9 @@ not find in these abstracts, and therefore do not claim to be absent from the li
 energy to the pairwise class in rotamer variables; mixed third-difference constants; or the
 observation that the Born-radius response is itself pairwise to high accuracy for exposed
 side chains, so that the *best* pairwise function (as opposed to a mean-environment
-construction) is 10–1000 times closer than the frozen-radius one (`g_fluct` has a range of
-5–68 kcal/mol where the two-site remainder is 0.002–1.3).  The quoted error figures of the
+construction) is far closer than the frozen-radius one (over the domains of Statement 8
+`g_fluct` varies by 3–68 kcal/mol where the two-site remainder is at most 0.002–1.1 kcal/mol).
+None of this is a claim of novelty: the search was eight queries read at abstract level.  The quoted error figures of the
 literature are RMS or mean errors of specific constructions on folded proteins; mine are
 exact maxima for small exposed peptides.  The two are not comparable and the difference in
 setting (exposure) is the most likely reason why mine are smaller [H].
@@ -790,6 +817,10 @@ setting (exposure) is the most likely reason why mine are smaller [H].
 9. **The ball beyond eight sites** was not evaluated by enumeration (the third-order
    constants are available to `n = 16`, the lower-model minimisation only to `n = 8`).
 10. **Prior art** was read at abstract level only.
+11. **The large third-order constant of Lys₄ on PPII** (2.4 kcal/mol at τ = 0.70, 10.2 at
+    0.60, triple of residues 1, 2, 4) was located but not dissected: which states realise it,
+    how much of it is due to the strained states that the relaxed threshold admits, and
+    whether it persists with relaxed geometry.
 
 ---
 
@@ -803,10 +834,11 @@ setting (exposure) is the most likely reason why mine are smaller [H].
    in general; the code needs only a backbone from coordinates instead of from `(φ, ψ)`.
 2. **A proved bound on the third-order constants of GB** — the missing input of Statement 9.
    The structure found in Statement 8 suggests the route: `g_GB = g_frozen` (pairwise,
-   computable) `+` a function of the Born radii, whose inverse radii are *exactly* pair sums
-   over sites (`I_p = I_p⁰ + Σ_i A_i^p(x_i)`); the third-order mixed difference of a smooth
-   function of such sums is bounded by its third derivatives times products of the one-site
-   ranges of `I_p`, all of which are tabulated.  An interval evaluation of that expression
+   computable) `+` a function of the Born radii, and the descreening integral `I_p` of every
+   atom is *exactly* a sum of one-site tables (backbone atoms: `I_p = I_p⁰ + Σ_i A_i^p(x_i)`) or
+   of one- and two-site tables (side-chain atoms) — these are the tables `fbmodel.py` builds;
+   the third-order mixed difference of a smooth function of such sums is bounded by its
+   derivatives up to third order times products of the tabulated ranges.  An interval evaluation of that expression
    would give certified `c_ijk` (and `c_ij(g_fluct)`) for a given backbone without
    enumeration — the first certified class constants for a real many-body term.
 3. **Run the third-order certificate end to end with the existing kernels**: the pairwise
@@ -825,9 +857,10 @@ setting (exposure) is the most likely reason why mine are smaller [H].
 **T-1 (third order with a pairwise kernel).**  Statement 5(d): for constants `c_T`, `|T| = 3`,
 and `γ_i = ⅓Σ_{T∋i} c_T`, the model `f + I₂g − Σ_i γ_i[x_i ≠ x₀_i]` is a pairwise lower bound of
 `E`.  Please state and machine-check this corollary of `higherOrder_remainder` together with
-soundness of the pairwise kernel on it (the analogue of `verify_sound_secondOrder`), and say
-whether the one-body penalty can be replaced by the sharper two-body penalty
-`Σ_{i<j ∈ S} max_k c_ijk` without losing validity.  Measured input: on Ser₆ (531 441
+soundness of the pairwise kernel on it (the analogue of `verify_sound_secondOrder`).  The
+same counting gives a two-body penalty that is never larger and still pairwise:
+`Σ_{T ⊆ S} c_T ≤ Σ_{i<j ∈ S} β_ij` with `β_ij = ⅓Σ_k c_ijk` (each triple inside `S` contains three
+pairs of `S`) [P, not evaluated numerically here].  Measured input: on Ser₆ (531 441
 assignments) `γ_i ≤ 0.011` kcal/mol against excitation energies 1.0–1.1; on Lys₄/PPII
 `γ_i = 0.2–0.95` against 1.0–2.1.
 
@@ -835,8 +868,8 @@ assignments) `γ_i ≤ 0.011` kcal/mol against excitation energies 1.0–1.1; on
 of §11.7 is stated for an additive known part.  For pairwise `f` the exact criterion is that
 `x₀` minimises `f + g_star − W`; a sufficient site-wise condition must involve the mixed
 differences of `f` at `x₀`.  On the measured instances the plain condition is violated while
-the exact criterion holds (Leu₁₆ on the helix: half row sum 1.15 against 0.52 at three
-terminal sites) and conversely the natural pairwise generalisation
+the exact criterion holds in 13 cases (e.g. Leu₁₆ on the helix: half row sum 0.58 against an
+excitation energy of 0.52 at one N-terminal site), and the natural pairwise generalisation
 `Δ_i(a) ≥ ½Σ_j max_b (c_ij − M^f_ij(a, b))₊` is far from necessary.  Is there a condition of
 maximum-density type (theory report Theorem 11.32(v)) that is checkable in `O(n²k²)` and
 tight on such instances?
@@ -876,7 +909,8 @@ enumeration.
 remainder 0.0008 kcal/mol.
 *Stopping conditions.*  Stop when `γ_i` is known for 20 buried sites; report the fraction
 with `γ_i` below the local excitation energy.
-*Resources.*  `k³` GB evaluations per triple at about 0.1 ms per 100 atoms squared: minutes.
+*Resources.*  `k³` GB evaluations per triple at 24 ns per atom pair and evaluation (table-based
+evaluator of this report): minutes.
 
 **E-2.**  If the kernels accept pairwise instances with 6 sites × 9 states, run Statement
 5(d) for Ser₆ end to end (tables from `fbmodel.site_tables`, anchors = the 1 009 ball values,

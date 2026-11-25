@@ -66,10 +66,13 @@ adds the other kinds, and the question of meaning.
    the finding: *what measurements are worth depends on the geometry of the class exactly
    as what evaluations are worth does.*
 3. **"One physical arena closes the loop: side-chain ensembles on a fixed backbone."**
-   *Still a hypothesis; now the most important open measurement.*  In backbone torsions
-   nothing closes (F8).  Whether the constants are small in rotamer variables decides
-   whether the second-order interface, the kernels and the identified sets have a real
-   instance.  Workstream P2 is measuring it.
+   *Measured (workstream P2, checkpoint 31): it closes for exposed peptides, at third
+   order.*  In backbone torsions nothing closes (F8).  In residue-rotamer variables the
+   known part is exactly pairwise, the solvent term is pairwise to `10⁻²–10⁻¹` kcal/mol
+   for neutral side chains, the second-order interface has real instances for apolar
+   side chains only, and the third-order interface certifies every enumerated instance
+   — *given constants obtained by enumeration*.  Still a hypothesis for buried
+   environments, and nobody has an a-priori bound on the constants (SCI-MSG-0015).
 
 **The one-sentence state of the frontier.**  The mathematics of certification under a
 first-order envelope is correct, deep and — for the many-body terms that matter — about
@@ -86,7 +89,7 @@ barrier), not totals.
 | the two-oracle model: non-adaptive exponent; tolerance; a field | SCI-REQ-0001 Q2 | non-adaptive: proved three times; tolerance: SCI-MSG-0006; **field: open** |
 | upper boundary of the limit shape | SCI-REQ-0001 Q3; SCI-REV-0002 | open; bridges against walks: requests R3-E1, R3-E2 |
 | the thermodynamic oracle | SCI-REQ-0001 Q4 | root proved (referee); **extensive accuracy (addendum A16): free beyond `KL(σ_u‖½)` per site (entropy bracket); below, between the plateau-twin bound and `θ_hint`; the exact exponent is Conjecture A16.4** (SCI-MSG-0012 §4) |
-| class constants on a real residual | SCI-RES-0002 (P-E1) | backbone torsions: done; **fixed backbone: workstream P2 running** |
+| class constants on a real residual | SCI-RES-0002 (P-E1); SCI-MSG-0015 | backbone torsions: done; **fixed backbone, rotamer variables: done (P2)**; buried environment: requested (P2-E1) |
 | a class with known features and a certified remainder; a certified typical-norm remainder | SCI-RES-0002 (P-T2, P-T3) | open |
 | a sharp–soft kernel (hypercircle band + pairwise kernel) | SCI-MSG-0007 (X-T1) | open |
 | cut checker; kernels over polynomial weights | SCI-MSG-0005 (K-T1, K-T2) | open |

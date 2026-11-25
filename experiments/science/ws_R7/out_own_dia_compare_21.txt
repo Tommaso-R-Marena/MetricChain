@@ -1,0 +1,2 @@
+n=21 own: conformations=6204141457 classes=2753; engineering table: conformations=6204141457 classes=2753; identical=True (278.3s)
+Wed Nov 25 22:02:22 UTC 2026

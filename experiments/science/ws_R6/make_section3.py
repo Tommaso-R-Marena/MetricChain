@@ -19,7 +19,7 @@ def load(pat):
 DESC = {
     "A_small": ("2L⁺", "theorem", "8 cells, `n_o ∈ {10,…,40}`: Theorem-K2 parameters at `x ∈ {1, 2, 4}`, two general cells, one Corollary-K1.b cell", "valid (10 behaviours)"),
     "A_ties": ("2L⁺", "theorem", "5 cells, `n_o ∈ {24, 32, 100, 120}`, dyadic `λ`, `un/λ ∈ ℕ`, flat fibres, profiles on the level grid", "valid (ends of brackets exactly at `W`)"),
-    "A_medium": ("2L⁺", "theorem", "12 cells, `n_o ∈ {60,…,1000}`, `u ∈ {½, 1, 2, 3}`: eight bounded-regime cells and four Corollary-K1.b (extensive) cells (12 of the runs are on three earlier extensive cells whose outer sample is trivial)", "valid (10 behaviours)"),
+    "A_medium": ("2L⁺", "theorem", "12 cells, `n_o ∈ {60,…,1000}`, `u ∈ {½, 1, 2, 3}`: eight bounded-regime cells and four Corollary-K1.b (extensive) cells", "valid (10 behaviours)"),
     "B_reducedK": ("2L⁺", "`K ∈ {8, 20, 50}`", "5 cells, `n_o ∈ {40,…,400}`", "valid"),
     "B_invalid": ("2L⁺", "theorem (one cell `K = 20`)", "7 cells, `n_o ∈ {12,…,400}`", "**invalid** (above `W`, below `W`, too wide, trivial, mixtures)"),
     "B_lazy": ("2L⁺", "theorem", "6 cells, `n_o ∈ {40,…,400}`", "**invalid** (LAZY: every refined point reaches the last rung)"),
@@ -33,6 +33,8 @@ tot = collections.Counter()
 mx_all = collections.defaultdict(float)
 for name in ["A_small", "A_ties", "A_medium", "D_2L", "B_reducedK", "B_invalid", "B_lazy", "D_2L_off"]:
     recs = load(name + "_[0-9]*.jsonl")
+    if name == "B_lazy":
+        recs += load("B_lazycheap_[0-9]*.jsonl")
     if not recs:
         continue
     ok = [r for r in recs if "harness_limit" not in r]
@@ -66,7 +68,13 @@ for name in ["A_small", "A_ties", "A_medium", "D_2L", "B_reducedK", "B_invalid",
             mx[k] = max(mx[k], v)
             mx_all[name[0] + ":" + k] = max(mx_all[name[0] + ":" + k], v)
         mx["lnM"] = max(mx["lnM"], r["lnM"])
-    summary[name] = dict(S=dict(S), max=dict(mx))
+        S["runs_big_blocks"] += r["lnM"] > 36.84           # a block of more than 1e16 points
+    cells_seen = collections.Counter(r["cell"] for r in ok)
+    cs = [json.loads(c) for c in cells_seen]
+    census = dict(cells=len(cs), n=sorted(set(c["n"] for c in cs)), n_o=sorted(set(c["n_o"] for c in cs)), u=sorted(set(c["u"] for c in cs)),
+                  Kov=sorted(set(str(c.get("Kov")) for c in cs)), runs_per_cell=sorted(cells_seen.values()),
+                  behaviours=len(set(r["strat"] for r in ok)), profiles=len(set(r["prof"] for r in ok)))
+    summary[name] = dict(S=dict(S), max=dict(mx), census=census)
     rows.append((name, S, mx))
     for k, v in S.items():
         tot[k] += v
@@ -91,6 +99,10 @@ for name, S, mx in rows:
     print("  %-11s closures: at a populated pass %d, unpopulated %d, empty tail %d, at a radius <= r-dagger %d; runs with negligible levels %d; aborts: cost %d, unclassified %d; max ln M %.1f; q>C_max: %d"
           % (name, S["close_pop"], S["close_unpop"], S["close_tail0"], S["close_r_le_rdag"], S["runs_neg"], S["abort_cost"], S["abort_unclassified"], mx["lnM"], S["q_gt_Cmax"]))
 
+print("census of the cells that have completed runs (to be compared with the descriptions in the table):")
+for name in summary:
+    if "census" in summary[name]:
+        print("  %-11s" % name, summary[name]["census"])
 # reduced K by value
 for name in ("B_reducedK", "D_2L_off"):
     recs = [r for r in load(name + "_[0-9]*.jsonl") if "harness_limit" not in r]
@@ -115,7 +127,7 @@ for name in ("B_reducedK", "D_2L_off"):
     summary[name + "_byK"] = {str(k): dict(v) for k, v in by.items()}
 
 # B_lazy split by the cost model of the cell
-lz = [r for r in load("B_lazy_[0-9]*.jsonl") if "harness_limit" not in r]
+lz = [r for r in load("B_lazy_[0-9]*.jsonl") + load("B_lazycheap_[0-9]*.jsonl") if "harness_limit" not in r]
 steep = [r for r in lz if json.loads(r["cell"]).get("costs") == "steep"]
 cheap = [r for r in lz if json.loads(r["cell"]).get("costs") != "steep"]
 summary["B_lazy_split"] = dict(steep_runs=len(steep), steep_abort_cost=sum(r.get("abort") == "query budget C_max" for r in steep),
@@ -155,8 +167,11 @@ adv = load("adversarial.jsonl")
 print("adversarial search:")
 for r in adv:
     c = json.loads(r["cell"])
-    print("   n=%d n_o=%d u=%g lam=%s | objective %-5s | %4d literal runs | best %.4f | violations %d" % (c["n"], c["n_o"], c["u"], c["lam"], r["objective"], r["evaluations"], r["best"], r["violations"]))
-summary["adversarial"] = [dict(cell=json.loads(r["cell"]), objective=r["objective"], evaluations=r["evaluations"], best=r["best"], violations=r["violations"]) for r in adv]
+    print("   n=%d n_o=%d u=%g lam=%s | objective %-5s | %4d literal runs attempted, %s completed | best %.4f | violations %d" % (
+        c["n"], c["n_o"], c["u"], c["lam"], r["objective"], r["evaluations"], r.get("completed", "all"), r["best"], r["violations"]))
+# records written before the counter `completed` existed are from cells with n_o <= 40, where no run can reach the sampler limit
+summary["adversarial"] = [dict(cell=json.loads(r["cell"]), objective=r["objective"], evaluations=r["evaluations"], completed=r.get("completed", r["evaluations"]),
+                               seed=r["seed"], best=r["best"], violations=r["violations"]) for r in adv]
 cc = [json.load(open(f))["summary"] for f in sorted(glob.glob(os.path.join(HERE, "data", "capcorner_*.json")))]
 if cc:
     keys = [k for k in cc[0] if isinstance(cc[0][k], (int, float)) and k not in ("max_M_over_cap", "rge1_max_M_over_cap", "rle0_max_M_over_cap")]

@@ -305,17 +305,33 @@ class ClassInstance:
 
 
 def big_binomial(n, p, rng):
-    """Binomial(n, p) as a Python int, for any n: chunks of 2^61 (the numpy Generator sampler was checked in
-    test_binomial.py for n up to 2^62 and n p from 0.1 to 5000; a sum of independent binomials with the same p is binomial)."""
+    """Binomial(n, p) as a Python int, for any n.
+
+    numpy's Generator.binomial (2.5.3) is BIASED LOW, by up to 0.84 % of the mean, when n >= 1e16 and the mean n p lies between
+    about 60 and 1e4 (numpy_binomial_bias.py; found while testing this sampler).  In that regime p <= 1e-12, and the binomial law is
+    within total variation p of the Poisson law of the same mean, so the Poisson sampler (which shows no bias) is used instead:
+    whenever n > 2^50, p <= 1e-9 and 30 < n p < 1e6.  Elsewhere: numpy's binomial, in chunks of 2^61 beyond that size (a sum of
+    independent binomials with the same p is binomial); there the mean is below 30 (inversion branch) or above 1e6 (no bias seen).
+    Tests: test_binomial.py."""
     if p <= 0.0 or n == 0:
         return 0
     if p >= 1.0:
         return n
+    mean = n * p
+    if n > (1 << 50) and p <= 1e-9 and 30.0 < mean < 1e6:
+        return min(int(rng.poisson(mean)), n)
     CH = 1 << 61
     if n <= CH:
         return int(rng.binomial(n, p))
     full, rest = divmod(n, CH)
     assert full <= (1 << 22), "block too large for the sampler"
+    if p <= 1e-9 and 30.0 < CH * p < 1e6:          # the chunks themselves would be in the biased regime
+        x = 0
+        m = mean
+        # Poisson(mean) for mean >= 1e6 as a sum of Poisson variables of mean < 1e6
+        k = int(m // 5e5) + 1
+        x = int(rng.poisson(m / k, size=k).astype(object).sum())
+        return min(x, n)
     tot = 0
     done = 0
     while done < full:
@@ -323,7 +339,7 @@ def big_binomial(n, p, rng):
         tot += int(rng.binomial(CH, p, size=k).astype(object).sum())
         done += k
     if rest:
-        tot += int(rng.binomial(rest, p))
+        tot += big_binomial(rest, p, rng)
     return tot
 
 

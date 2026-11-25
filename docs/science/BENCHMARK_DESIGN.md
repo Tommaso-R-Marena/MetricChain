@@ -74,8 +74,9 @@ term, so the remainder of the typed class measures the typing).  *Lessons for th
 benchmark:* (i) report sup norms over enumerated domains only — a sampled maximum was
 exceeded on held-out conformations by factors up to ten; (ii) state the domain: constants
 are dominated by its most compact and most extended members and by the clash threshold
-(up to 15 %); (iii) the decisive missing case is **rotamer variables on a fixed backbone**
-(request P-E1), where the known part is pairwise and no lever arm exists; (iv) add the
+(up to 15 %); (iii) ~~the decisive missing case is **rotamer variables on a fixed backbone**
+(request P-E1)~~ — measured by workstream P2 (§4); the decisive missing case is now a
+**buried** environment (request P2-E1), where third-order constants should be larger; (iv) add the
 typical-norm metrics next to the sup-norm ones (RMS, and the exact Jensen gap against the
 class bound) — the gap between them is the finding.
 
@@ -227,6 +228,7 @@ definitions against the reference checker (their E-1); replication on independen
 | B6 | engineering X-005 (theirs) | ENG-RES-0008 |
 | B7 | audit at `5ed4072` | `docs/science/INDEPENDENT_VALIDATION.md` |
 | B1 | pilot: alanine peptides, GBn2 and four force-field differences against ff14SB, exact on grids | `workstreams/SP_REPORT.md`; `experiments/science/ws_P/` |
+| B1, rotamer variables on a fixed backbone | Val, Leu, Phe, Ser, Lys homopolymers and one heteropolymer on three ideal backbones; GBn2 and three force-field differences; orders 1–3; first-, second- and third-order interfaces; exact enumeration (8.5·10⁶ assignments) | `workstreams/P2_REPORT.md`; `experiments/science/ws_P2/`; SCI-MSG-0015 |
 | B8 | cut families on tiny systems (≤ 5 849 states) and one 200-site chain | `workstreams/SK_REPORT.md`; `experiments/science/ws_K/` |
 | B9 (H9), the coordinator's own checks only | all 65 534 supports of `Q_4` and 8 000 random supports of `Q_5`, `Q_6` (clipped-level profiles); 1 398 random members; ten exact plateau twins to `n = 2000`; **no adversarial search, no second implementation yet** (workstream R8 is asked for a brute force over general members) | `experiments/science/pi_inference/energy_isoperimetry_check.py`, `plateau_twin_check.py` |
 | H10 | independent linear programmes for Theorems 11.105, 11.106 (400 + 24 instances) | `experiments/science/pi_inference/ratio_duality_replication.py`; SCI-RES-0005 |

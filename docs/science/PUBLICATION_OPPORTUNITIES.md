@@ -144,6 +144,18 @@ exponent irrelevant; constants in the limit shape.
   attack first; the mathematics underneath held everywhere we looked.  What nobody has
   re-derived remains the cost of the nested adaptive algorithm (Theorems 11.52, 11.56) —
   still the single most valuable check.
+* *Checkpoint 31:* **P10 has its second half** (workstream P2; SCI-MSG-0015).  In residue
+  rotamer variables on a fixed backbone the known part is exactly pairwise, the solvent
+  term is pairwise to hundredths of a kcal/mol for neutral side chains, the
+  second-order interface has real instances for apolar side chains only, and the
+  third-order interface for all enumerated ones.  With the pilot this is a complete
+  empirical statement — *which class a real solvent residual lives in, in two sets of
+  variables, with exact constants* — and the first evidence that an interface of the
+  theory has a physical instance.  What a referee would ask: a buried environment
+  (requested, P2-E1), relaxed geometry and a rotamer library, an a-priori bound on the
+  third-order constants (the route is sketched in the report), and a full-text reading
+  of the pairwise-GB literature (ours is at abstract level).  Still one group's
+  measurement with the coordinator's re-run of one end-to-end check.
 * *Checkpoint 30:* **P7 has its field case** (workstream F; SCI-RES-0006).  With a field a
   free exact one-body oracle changes neither class exponent, for every `n` (compensation
   lemma; two-component hard instance), and at an instance it helps by a bracketed

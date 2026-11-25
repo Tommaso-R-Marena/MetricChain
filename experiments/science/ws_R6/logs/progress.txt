@@ -11,3 +11,8 @@ ALLDONE
 D_2L 16 (rerun) exit 124 (137 runs)
 B_lazy 20 exit 0 (200 runs)
 ALLDONE3
+pass2 B_reducedK 214 exit 0 (400 runs)
+pass2 A_ties 212 exit 0 (500 runs)
+pass2 B_invalid 215 exit 0 (400 runs)
+pass2 B_lazy 220 exit 0 (260 runs)
+pass2 B_lazycheap 218 exit 0 (60 runs)

@@ -1,0 +1,7 @@
+assignments: 729 ; clash score min 0.783 (all > 0.70: True )
+g_GB: c_i = [4.81 4.12 4.32]; c_12, c_13, c_23 = 1.306 2.426 1.308; c_123 = 4.03e-03 kcal/mol
+f: c_i = [6.78 5.35 5.98]; c_12, c_13, c_23 = 1.336 3.097 1.336; c_123 = 5.86e-13 kcal/mol
+
+real	0m9.145s
+user	0m8.238s
+sys	0m0.552s

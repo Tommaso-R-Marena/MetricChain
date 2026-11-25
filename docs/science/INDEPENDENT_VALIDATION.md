@@ -147,6 +147,17 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   sources; no error or warning line).  Statements read against the note: not yet done line
   by line by the coordinator — the workstream's own discrepancy list (four items) is in
   `L1_REPORT.md`.
+* **P2 (class constants in rotamer variables on a fixed backbone):**
+  `verify_openmm_direct_sc.py` re-run by the coordinator (9 s, OpenMM 8.6.1; Ser₃ on the
+  strand, 729 assignments, OpenMM's own `CustomGBForce` and force groups, explicit loops,
+  none of the workstream's evaluators): `c_i(g_GB) = 4.81 4.12 4.32`,
+  `c_12, c_13, c_23 = 1.306 2.426 1.308`, `c_123(g_GB) = 4.03·10⁻³`, `c_123(f) = 5.86·10⁻¹³` kcal/mol
+  — identical to the committed log.  Three citations checked against the PubMed records
+  (Gaillard and Simonson 2014, doi:10.1002/jcc.23637; Marshall, Vizcarra and Mayo 2005,
+  doi:10.1110/ps.041259105; Villa et al. 2017, doi:10.1002/jcc.24898): bibliographic data
+  and the quoted abstract sentences are as the report gives them.  **Not re-run:** the
+  140 enumerations (2.4 h), the analyses, the covers; the 584 MB of grids are not under
+  version control.  A measurement by one workstream, not independently replicated.
 * **F (local data with a field; also a review of theory report §11.29 at `dcdfea6`):**
   re-derived by the coordinator — Lemma 0 (window), Lemma 1 (indistinguishability with an
   oracle), Lemma 2 (the excess of a dip is the cone law, within `1/(e^r − 1)`), Lemma 3

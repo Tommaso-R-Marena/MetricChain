@@ -57,3 +57,4 @@ engineering branch is read through `git show` / a detached read-only checkout.
 | 2026-11-25 21:31 | fetched immediately before checkpoint 28: theory `dcdfea6`, engineering `a2f6dc7`, both unchanged.  Read in addition at theory `dcdfea6`: Lemma 11.43 (a), (b) in full (the tail lemmas; (b) is the Harper step that Lemma A16.5 generalises) |
 | 2026-11-25 21:47 | fetched immediately before checkpoint 29: theory `dcdfea6`, engineering `a2f6dc7`, both unchanged |
 | 2026-11-25 21:56 | fetched immediately before checkpoint 30: theory `dcdfea6`, engineering `a2f6dc7`, both unchanged.  Theory report §11.29 at `dcdfea6` was read statement by statement by workstream F after its own results were logged (its report §8); the theory division's scripts `oracle_field_scan.py`, `oracle_zero_types.py` were read by it, not run |
+| 2026-11-25 22:11 | fetched immediately before checkpoint 31: theory `dcdfea6`, engineering `a2f6dc7`, both unchanged |

@@ -285,3 +285,39 @@ categories in section 1 were then corrected by hand from data/headline_counts.js
 valid answers, 63 with reduced K, 90 with invalid answers).
 Corrected a wrong sentence of my draft: a two-sample bracket is cheaper than enumeration from ~30-40 fibre coordinates (u=1) / 80-150 (u=2)
 (computed with everyn.k0_cost), not "several hundred"; one bracket then costs e^17..e^26 evaluations or more.
+
+### Step 24 (A NUMERICAL TRAP FOUND LATE: numpy's binomial sampler is biased at n >= 1e16; second pass launched)
+While writing test_binomial.py (the test my engine's docstring referred to but which I had only run inline), I computed z-scores:
+numpy 2.5.3 `Generator.binomial(n, p)` returns samples whose MEAN IS TOO SMALL when n >= 1e16..1e17 and the mean n p is between about
+60 and 1e4 (BTPE branch): e.g. n = 2^61, n p = 92.23: -0.84 % (z = -50 in 4e5 draws); n = 1e18, n p = 500: -0.21 % (z = -30);
+n = 1e17, n p = 500: -0.08 % (z = -11).  No bias for n <= 1e15, for n p <= 31, for n p >= 5e4; the Poisson sampler and sums of 1024
+binomials with 2^51 trials (same law) are unbiased.  Reproducible with two seeds: numpy_binomial_bias.py, logs/numpy_binomial_bias.log.
+(R8's erratum m6 "Generator.binomial is correct down to p = 1e-20 (n = 2^59)" is about the inversion branch; in the BTPE branch at
+n >= 1e16 there is this small bias.  K's, R8's and the engineering division's "exact" samplers at n up to 2^61-2^62 may be affected for
+shells with expected counts 60..1e4 -- I have not read their code and cannot tell.)
+CONSEQUENCE FOR MY RUNS (first pass): the sampler was used for blocks of more than 1e16 points in 173 of the 3686 campaign runs
+(A_ties 11, A_medium 49, D_2L 29, B_reducedK 28, B_invalid 27, B_lazy 13, D_2L_off 16; A_small 0).  The logical content of the tests is
+unaffected: "every-run claims hold" and "good-event claims hold whenever (V2),(V3) hold on the realised sample" are statements about every
+sample sequence, whatever its law.  What a biased sampler could distort is only the FREQUENCY with which the events hold.
+FIX: r6lib.big_binomial now uses the Poisson sampler when n > 2^50, p <= 1e-9 and 30 < n p < 1e6 (total-variation error <= p <= 1e-9
+per draw); test_binomial.py: z within +-1 in the formerly biased regime (100 000 draws each).
+SECOND PASS: all campaigns that can contain such blocks are re-run with the corrected sampler (run_pass2.sh; new seeds 212-220);
+first-pass files moved to data/pass1/ (with its summary).  The report tables will be regenerated from the second pass (A_small, which
+has no block above 2^43 points, is kept).  e2e / three / capcorner / capsearch (small samples) and flat_exact (no sampling) are unaffected.
+
+### Step 25 (m8 written into the report; mechanism of the numpy bias read in the source)
+- Report: m8 inserted in section 2.7 (after m7), sampler note in 3.1, caveat in 5 item 6, requests R6-T5 (theory division, referee of
+  erratum m6) and R6-E3 (engineering division).  (My first attempt at this edit aborted on a line-broken search string; nothing had
+  been written; redone.)
+- Mechanism, read through a fetch tool in numpy's source (branch main, numpy/random/src/distributions/distributions.c; quoted lines only,
+  not compared with the 2.5.3 tag): `random_binomial` uses inversion when p*n <= 30.0 and BTPE otherwise; in `random_binomial_btpe`
+  x1 = (double)y + 1; f1 = (double)m + 1; z = (double)n + 1 - (double)m; w = (double)n - (double)y + 1; and the final acceptance test
+  starts `if (A > (xm * log(f1 / x1) + (n - m + 0.5) * log(z / w) ...`.  z/w = 1 + (y-m)/(n-y+1) is not resolved in float64 for n of
+  order 1e16 and larger (exactly 1 once n > 2^53 and y, m are below half an ulp of n), so a term ~ (y - m) is lost from the log acceptance
+  ratio: candidates above the mode are rejected too often, candidates below it too rarely => mean too small (the sign I measured).
+  The test is reached only if |y-m| > 20 and the squeeze is undecided => no bias at small means (inversion; explicit product) and little
+  at very large means (tight squeeze).  This is [H] supported by the quoted lines; the measurement is [N].
+- Which of my other runs used numpy's binomial above 1e16?  e2e / three / capcorner / capsearch: samples far below 1e15 (n_o <= 24 or
+  explicit cubes) -- unaffected.  adversarial.py: cells 4 (n_o = 24) and 5 (n_o = 40, Mbar = 3.5e13) unaffected; cells 0 (n_o = 100) and
+  2 (n_o = 80), 199 runs, can contain such blocks -> to be re-run with the corrected sampler after the second pass.
+- Second pass so far (22:07): B_reducedK 400 runs, A_ties 500 runs, B_invalid 400 runs completed (machine load now ~6, was 10-15).

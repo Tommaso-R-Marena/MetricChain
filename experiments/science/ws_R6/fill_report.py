@@ -37,6 +37,14 @@ total_det = sum(g(n, "det_viol") for n in all_names)
 total_good = sum(g(n, "good_viol") for n in all_names)
 inv_runs = g("B_invalid", "runs") + g("B_lazy", "runs")
 LZ = S.get("B_lazy_split", {})
+P1 = {}
+_p1 = os.path.join(HERE, "data", "pass1", "summary_all_pass1.json")
+if os.path.exists(_p1):
+    _s1 = json.load(open(_p1))
+    _names = ["A_ties", "A_medium", "D_2L", "B_reducedK", "B_invalid", "B_lazy", "D_2L_off"]
+    P1 = dict(runs=sum(_s1[n]["S"].get("runs", 0) for n in _names), det=sum(_s1[n]["S"].get("det_viol", 0) for n in _names),
+              good=sum(_s1[n]["S"].get("good_viol", 0) for n in _names), big=173)
+    assert all(_s1[n]["S"].get("G_failed", 0) == 0 for n in ("A_ties", "A_medium", "D_2L"))
 byK = S.get("B_reducedK_byK", {})
 byK2 = S.get("D_2L_off_byK", {})
 
@@ -68,6 +76,17 @@ sec_b = f"""### 3.2 Literal runs with a simulated inner oracle (`campaign.py`; d
 
 {table}
 
+*Two passes.*  The table is the **second pass**.  A first pass of the same campaigns ({P1.get('runs', 0)} runs, in
+`data/pass1/`) used numpy's binomial sampler directly; I then found that sampler to be biased by up to
+`0.84 %` for blocks of more than `10^16` points (m8 in §2.7), which had affected {P1.get('big', 0)} of those runs.  The
+sampler was corrected (`r6lib.big_binomial`, `test_binomial.py`) and every campaign that can contain such
+blocks was run again with new seeds; `A_small` (no block above `2^43` points) is the same in both passes.
+The first pass had the same outcome: {P1.get('det', 0)} violations of an every-run claim and {P1.get('good', 0)} of a good-event claim
+in {P1.get('runs', 0)} runs, the events of the proof never failed with the theorem's constants and valid answers.
+The logical content of the tests does not depend on the sampler (the every-run claims, and "the
+good-event claims hold whenever (V2), (V3) hold on the realised sample", are statements about every
+sample sequence); only the frequency of the events could.
+
 Reading.
 
 * **With the constants of the theorems and valid inner answers** ({valid_2lp} runs of Algorithm 2L⁺, {valid_2l} of
@@ -97,11 +116,11 @@ Reading.
   invalid, {g('B_invalid', 'closed_LgtU')} returned pairs had `L > U` (erratum m1 of `K_REPORT.md`: return the trivial bracket), and
   {g('B_invalid', 'abort_unclassified')} runs aborted with a point unclassified at the last rung.
 * **The abort rule is not decorative.**  With the behaviour LAZY and rung costs `10^l` ({LZ.get('cheap_runs', 0)} runs) no run
-  needs it ({LZ.get('cheap_abort_cost', 0)} aborts; queries at most `{LZ.get('cheap_max_q_over_Cvi', 0):.3f}` of the bound of claim (vi)); with rung costs
+  needs it ({LZ.get('cheap_abort_cost', 0)} aborts; queries at most `{(LZ.get('cheap_max_q_over_Cvi') or 0):.3f}` of the bound of claim (vi)); with rung costs
   `e^{{80l}}` — the regime of the theorems, where the last rung dominates — **{LZ.get('steep_abort_cost', 0)} of {LZ.get('steep_runs', 0)} runs stop on the
   query budget**: without the rule their cost would exceed `C_max`.  With the test made *before* the inner
   call the number of queries is `≤ C_max` in every run (runs above `C_max`: {LZ.get('steep_q_gt_Cmax', 0)}; largest
-  `ln(queries) − ln(C_max) = {LZ.get('steep_max_lnq_minus_lnCmax', 0):.4f}`).  This is the first execution of the branch that
+  `ln(queries) − ln(C_max) = {(LZ.get('steep_max_lnq_minus_lnCmax') or 0):.4f}`).  This is the first execution of the branch that
   makes "the cost bound holds always" true (R7's M1).
 * **Algorithm 2L off the good event** (`D_2L_off`, {g('D_2L_off', 'runs')} runs with reduced `K` and/or invalid answers): the
   every-run statements of Theorem 11.52 (`r > r†` at every level left, `M ≤ 8Je²M†`, `M < 2eM†`, the width,
@@ -119,18 +138,35 @@ violations of a good-event claim on a run where the events hold.**
 adv_lines = []
 for r in adv:
     c = r["cell"]
-    adv_lines.append("| `n = %d`, `n_o = %d`, `u = %g`, `λ = %.3g` | %s | %d | %.3f | %d |" % (
+    adv_lines.append("| `n = %d`, `n_o = %d`, `u = %g`, `λ = %.3g` | %s | %d (%d) | %.3f | %d |" % (
         c["n"], c["n_o"], c["u"], float(c["lam"]),
         {"ineq": "count inequality (v)", "count": "sampled count / `cnt`", "calls": "calls per level / bound (vi)", "cap": "sample / cap of `40c5bd7`",
-         "mbar": "sample / `M†`", "cost": "`ln q/ln C_max`"}[r["objective"]], r["evaluations"], r["best"], r["violations"]))
+         "mbar": "sample / `M†`", "cost": "`ln q/ln C_max`"}[r["objective"]], r["completed"], r["evaluations"], r["best"], r["violations"]))
 adv_table = "\n".join(adv_lines)
 adv_total = sum(r["evaluations"] for r in adv)
+adv_done = sum(r["completed"] for r in adv)
+_unin = [i + 1 for i, r in enumerate(adv) if r["objective"] == "cap" and r["best"] < 0.01]
+ORD = {1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth", 6: "sixth"}
+adv_note = ""
+if _unin:
+    adv_note = ("(In the " + " and the ".join(ORD[i] for i in _unin) + " row no run with a sample above `K` completed: samples near `M†` exceed my sampler in that\n"
+                "cell, so the row is uninformative.)  ")
+ADV1 = []
+_a1 = os.path.join(HERE, "data", "pass1", "adversarial_pass1.jsonl")
+if os.path.exists(_a1):
+    ADV1 = [json.loads(l) for l in open(_a1) if l.strip()]
+    ADV1 = [r for r in ADV1 if json.loads(r["cell"])["n_o"] >= 80]
+adv_pass1 = ""
+if ADV1:
+    adv_pass1 = ("The three searches in the cells with `n_o ≥ 80` are the second pass (corrected sampler, m8 in §2.7); the first pass\n"
+                 "(`data/pass1/adversarial_pass1.jsonl`: %d attempted runs, largest values %s, %d violations) is not counted.  "
+                 % (sum(r["evaluations"] for r in ADV1), ", ".join("`%.3f`" % r["best"] for r in ADV1), sum(r["violations"] for r in ADV1)))
 
 sec_c = f"""### 3.4 Real inner brackets: two levels and three levels (`e2e.py`, `three.py`)
 
 *Two levels.*  Explicit `u`-Lipschitz functions on `Q_{{n_o}} × Q_{{n_i}}`, `(n_o, n_i) ∈ {{(6,6), (7,6), (6,7), (7,5), (8,5), (5,7)}}`
-(five random constructions: McShane envelopes of random data, additive, radial walks, inf-convolutions of
-noise), `u ∈ {{½, 1, 2}}`; every outer point is individual; the inner procedure of every rung is the two-sample
+(five random constructions: lower and upper McShane envelopes of random data, additive functions, radial
+walks, inf-convolutions of noise), `u ∈ {{½, 1, 2}}`; every outer point is individual; the inner procedure of every rung is the two-sample
 bracket of Proposition 11.57(a) on the fibre with fresh randomness (two samples drawn as exact
 multinomial counts over the fibre) and the constants of the proposition for `δ′ = δ/(4LM̄)`; all constants
 of Theorem 11.56 from the formulas; `L ∈ {{1, 2, 3}}`.
@@ -143,16 +179,16 @@ With `K` (outer and inner) divided by 16 — off the theorems, an attempt to pro
 the proof failed in {e16.get('G_failed', 0)} runs; {e16.get('invalid_final', 0)} invalid final brackets, {e16.get('invalid_final_on_G', 0)} of them on a run where the
 events hold; violations of every-run / good-event claims: {e16.get('det_viol', 0)} / {e16.get('good_viol', 0)}.
 
-*Three levels.*  `Q_n = Q_{{n_o}} × (Q_{{n_o′}} × Q_{{n_i′}})`, `(n_o, n_o′, n_i′) ∈ {sorted(tuple(x) for x in th.get('sizes', []))}`, `u ∈ {{½, 1}}`:
+*Three levels.*  `Q_n = Q_{{n_o}} × (Q_{{n_o′}} × Q_{{n_i′}})`, `(n_o, n_o′, n_i′) ∈ {{(3,3,3), (3,3,4), (3,4,3), (4,3,3)}}`, `u ∈ {{½, 1}}`:
 outer Algorithm 2L⁺; on every fibre a middle Algorithm 2L⁺ whose *certified* accuracy is at most the
-outer rung's and whose failure probability is the outer `δ′`; at the bottom real two-sample brackets;
+outer rung's and whose failure probability is the outer `δ′`; at the bottom two-sample brackets;
 all constants from the theorems; the declared cost of a middle call is the middle `C_max`.  (For run
 time an outer point draws its bracket from a pool of independent middle runs on its fibre, as in
 R8.)  **{th.get('outer_runs', 0)} outer runs, {th.get('middle_runs', 0)} middle runs, {th.get('bottom_brackets', 0):,} real bottom brackets** (in {th.get('runs_with_real_bottom', 0)} of the
 outer runs the bottom rung is a two-sample bracket, in the others no radius qualifies and the fibre is enumerated):
-invalid or too wide at the bottom {th.get('bottom_invalid', 0)}, in the middle {th.get('middle_invalid', 0)} / {th.get('middle_too_wide', 0)}, at the top
-{th.get('outer_invalid', 0)} / {th.get('outer_too_wide', 0)}; violations of a claim of Theorem 11.56 at the middle level {th.get('middle_det', 0)} + {th.get('middle_good', 0)}, at
-the outer level {th.get('outer_det', 0)} + {th.get('outer_good', 0)}; the outer number of queries stays a factor `e^{{{-th.get('max_lnq_minus_lnCmax', 0):.1f}}}` below its `C_max`.
+invalid or too wide brackets: {th.get('bottom_invalid', 0)} at the bottom, {th.get('middle_invalid', 0)} (invalid) and {th.get('middle_too_wide', 0)} (too wide) in the middle, {th.get('outer_invalid', 0)} and {th.get('outer_too_wide', 0)} at
+the top; violations of an every-run or a good-event claim of Theorem 11.56: {th.get('middle_det', 0)} and {th.get('middle_good', 0)} at the middle level,
+{th.get('outer_det', 0)} and {th.get('outer_good', 0)} at the outer level; the outer number of queries stays a factor `e^{{{-th.get('max_lnq_minus_lnCmax', 0):.1f}}}` below its `C_max`.
 
 *What these runs are worth.*  The cubes have 12–13 (two levels) and 9–10 (three levels) coordinates;
 at these sizes an inner bracket costs more than enumerating its fibre, and the runs test the logic of
@@ -165,11 +201,12 @@ Hill climbing with restarts over the radial profile (one increment in `[−u, u]
 of the reference point, the inner offset and the inner behaviour, with literal runs, one objective at a
 time; every run is also checked for every claim.
 
-| cell | objective (a ratio that the theorem bounds by 1) | literal runs | largest value found | violations |
+| cell | objective (a ratio that the theorem bounds by 1) | literal runs completed (attempted) | largest value found | violations |
 |---|---|---|---|---|
 {adv_table}
 
-{adv_total} runs, {sum(r['violations'] for r in adv)} violations.  With these budgets (about 200 s per search on a loaded machine) the hill
+{adv_note}{adv_done} runs completed ({adv_total} attempted; the others needed a block of more than `2^83` points), {sum(r['violations'] for r in adv)} violations.
+{adv_pass1}With these budgets (about 200 s per search on a loaded machine) the hill
 climbing does **not** get closer to any bound than the structured instances of the campaigns do (count
 inequality `{maxA('count_ineq'):.3f}`, sample `{maxA('M_over_capnew'):.3f}` of the cap there); it is a weak search and I report it as such.
 A structured sweep aimed at the cap (`capsearch.py`: the cell of the theory division's own example,
@@ -199,27 +236,45 @@ the theorem's `K` and no violation.
 
 ### 3.8 How to re-run (from `experiments/science/ws_R6/`; `OMP_NUM_THREADS=1`)
 
-    python3 campaign.py A_small 1600 11 2        # likewise A_ties 500 12, A_medium 500 13, D_2L 240 16,
-                                                 # B_reducedK 400 14, B_invalid 400 15, B_lazy 60 19, D_2L_off 300 17
+    python3 campaign.py A_small 1600 11 2        # and A_small 64 1; then (second pass, corrected sampler)
+                                                 # A_ties 500 212, A_medium 500 213, D_2L 240 216, B_reducedK 400 214,
+                                                 # B_invalid 400 215, B_lazy 260 220, B_lazycheap 60 218, D_2L_off 300 217
+                                                 # (first pass, seeds 2, 12-20: data/pass1/)
     python3 campaign.py MUT_neg_tol 48 7 2       # mutations: MUT_noharper, MUT_maxform, MUT_close_at_no, MUT_q_no_eta
     python3 capcorner.py 1500 41                 # seeds 41, 42, 43
     python3 e2e.py 600 21 1 ; python3 e2e.py 400 22 16 ; python3 three.py 40 61 6
-    python3 adversarial.py <cell 0..6> <ineq|count|calls|cap|mbar|cost> <evaluations> <seed>
+    python3 adversarial.py <cell 0..6> <ineq|count|calls|cap|mbar|cost> <evaluations> <seed> ; python3 capsearch.py 71 200
     python3 everyn.py 1.0 0.5 4000,16000 ; python3 separation.py 1.0 250,...,8000 ; python3 flat_exact.py 1.0 1000 0.80
-    python3 check_tail_lemmas.py ; python3 check_K4cd.py ; python3 tau2.py
+    python3 check_tail_lemmas.py ; python3 check_K4cd.py ; python3 tau2.py ; python3 crosscheck_lb.py
+    python3 test_binomial.py ; python3 numpy_binomial_bias.py
     python3 make_section3.py                     # every number of section 3.2, 3.4, 3.6 from the data files
-    cd /home/user/MetricChain && lake env lean /home/user/MetricChain/experiments/science/ws_R6/lean/R6Axioms.lean
+    cd /home/user/MetricChain && lake env lean /home/user/MetricChain/experiments/science/ws_R6/lean/R6Axioms.lean    # and R6Axioms2.lean
 
 Campaigns are stopped by a time limit when the machine is loaded; the run counts above are those of the
 data files in `data/`.  `NOTES.md` records what was run in which order, including what was discarded.
 """
 
-s = open(REPORT).read()
-for marker, text in (("<!--SECTION3B-->", sec_b), ("<!--SECTION3C-->", sec_c), ("<!--SECTION3D-->", sec_d)):
-    assert marker in s, marker
-    s = s.replace(marker, text)
-OUT = os.environ.get("R6_DRY_OUT", REPORT)       # set R6_DRY_OUT=<file> to write a preview instead of the report
-open(OUT, "w").write(s)
-print("report sections written to", OUT, ";", "total literal runs in the table:", total_runs, "| valid 2L+:", valid_2lp, "| valid 2L:", valid_2l,
-      "| invalid-answer runs:", inv_runs, "| e2e:", e1.get("runs"), e16.get("runs"), "| three:", th.get("outer_runs"), "| capcorner:", cc.get("runs"),
-      "| adversarial:", adv_total)
+def write_into_report():
+    s = open(REPORT).read()
+    import re as _re
+    def block(start, end, text):
+        nonlocal s
+        i = s.index(start)
+        j = s.index(end, i)
+        s = s[:i] + text.rstrip("\n") + "\n\n" + s[j:]
+    if "<!--SECTION3B-->" in s:
+        for marker, text in (("<!--SECTION3B-->", sec_b), ("<!--SECTION3C-->", sec_c), ("<!--SECTION3D-->", sec_d)):
+            s = s.replace(marker, text)
+    else:                                   # regenerate in place
+        block("### 3.2 Literal runs", "### 3.3 Reproduction", sec_b)
+        block("### 3.4 Real inner brackets", "### 3.5 The inputs", sec_c)
+        block("### 3.6 Adversarial search", "## 4. Prior art", sec_d)
+    OUT = os.environ.get("R6_DRY_OUT", REPORT)       # set R6_DRY_OUT=<file> to write a preview instead of the report
+    open(OUT, "w").write(s)
+    print("report sections written to", OUT, "; total literal runs in the table:", total_runs, "| valid 2L+:", valid_2lp, "| valid 2L:", valid_2l,
+          "| invalid-answer runs:", inv_runs, "| e2e:", e1.get("runs"), e16.get("runs"), "| three:", th.get("outer_runs"), "| capcorner:", cc.get("runs"),
+          "| adversarial:", adv_done, "completed of", adv_total)
+
+
+if __name__ == "__main__":
+    write_into_report()

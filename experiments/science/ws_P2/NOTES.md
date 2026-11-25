@@ -373,3 +373,73 @@ constructions on folded proteins; mine are exact maxima on small exposed model p
   20 718; LKSE:4/H [78, 754] of 7254; LKSE:5/H [68, 800] of 14 508; Phe8/H [2, 4] of 14 014;
   Leu12/H, Leu14/H, Val8/E: 1 (one evaluation certifies).  ff03: Ser4/E [7, 85]; Ser4/H [2, 24];
   Lys3/H [28, 30]; LKSE:4/H [2, 8]; Leu12/H 1; Val8/E 1.  Envelope validity kappa_max = 1.0000 in all.
+
+## Step 9 — all runs complete; verification of the report against the outputs (22:01 UTC)
+
+* All enumerations and analyses finished: 140 models, 8 476 447 assignments; 280 instance
+  analyses (217 non-empty); 29 long-chain runs (237 929 GB evaluations); 12 mechanism runs;
+  17 cover runs.  Tables: `out/tables.md` (`make_tables.py`), compact dump: `dump_sel.py`.
+* The coordinator's snapshots commit this directory while it changes.  I deleted `out_old/`
+  (outputs of the first, flawed version of `an_main.py` on the raw product X; superseded and
+  misleading — the snapshot history still has them).
+* **Late result that changed a sentence of the verdict.**  Lys4 on E and P2 at tau = 0.60
+  (923 521-point grids, analysis 12 and 34 min): on PPII the third-order constant of the triple
+  of residues (1, 2, 4) is 10.2 kcal/mol (2.39 at tau = 0.70), the two-site fit leaves RMS 0.12 /
+  max 7.8, and the Hamming-2 ball certifies only to 6.7 kcal/mol (bracket 14.5 nats); on the
+  strand c_ijk <= 1.05 and the ball is exact.  So "g_GB is pairwise to <= 0.2 kcal/mol in sup
+  norm" is true for the neutral peptides only; for charged side chains the RMS remainder stays
+  <= 0.12 but the sup remainder reaches 1.7 (tau .70) and 7.8 (tau .60) kcal/mol.  The report
+  was corrected accordingly (verdict, Statements 4, 5(c), comparison table).
+* Global statistics recomputed from the JSON files (script in the session; numbers in the
+  report): c_ijk of pair-additive functions <= 2.1e-12 everywhere; star exact for g_GB in 110 of
+  181 analyses with >= 2 sites (plain row-sum condition holds in 97 of them and in no failing
+  one; Dobrushin-type sums < 1 in all 110); no polar/charged instance with n >= 3 has an exact
+  star; ball: 126 analyses, exact except Lys3/H, Lys4/H, Lys4/P2 at tau .60 (0.14, 0.19, 6.7);
+  ff03: star exact in 154 of 181 (Lys fails in 15 of 18: 0.5-16.8; LKSE in 4 of 15: 0.2-5.4;
+  neutral exception: Ser on the helix, n = 2-5: 0.1-0.6); coul+GB: 145 of 180; ff15ipq: 155 of 180.
+* `an_ball_pairwise.py` (Statement 5(d), my own remark): with gamma_i = (1/3) sum_{T contains i} c_T
+  the model f + I_2 g - sum_i gamma_i [x_i != x0_i] is a PAIRWISE lower model; it certifies exactly
+  for Ser6 (E, P2, H at .70), Val8/E, Leu8/H, Lys4/H and Lys4/P2 at .70; to 0.06-1.4 kcal/mol
+  for Ser6/H, Lys4/H, Phe7/P2 at .60 and for LKSE.  `logs/ball_pairwise.log`.
+* Errors of mine caught while writing (all corrected before the report was finalised):
+  N_ball(100, 9) = 317 601, not 316 801; several ranges in the first draft of the verdict
+  (lambda*, star errors of Lys, pruning survival fractions) did not match the JSON files and were
+  replaced by the values printed by the verification script; run times replaced by the sums of
+  the logged times (2.4 h enumeration, 2.0 h analysis, 0.8 h long chains, 0.3 h covers).
+* Not done (stated in the report, §5): buried environments; upper bounds; the sensitivity
+  backbones H', E', P2' (built and validated in `test_fbmodel.py` for Leu6/Hp only); ball
+  beyond eight sites; prior art beyond abstracts.
+* `test_fbmodel.py` re-run with the final code (the enumeration evaluator `gb_energy` is now
+  the block version): table GB vs FastFF <= 2.0e-12, vs OpenMM Reference <= 9.3e-12 kcal/mol;
+  all other figures unchanged.  The log of the first version is kept as
+  `logs/test_fbmodel_v1.log`.  (Every enumeration also spot-checked the block version against
+  FastFF: worst deviation 1.8e-11 over all 140 runs, asserted at 1e-8; worst against OpenMM's
+  single-precision CPU platform 7.2e-5.)
+
+## Final state (22:06 UTC) — resume here
+
+* Report: `docs/science/workstreams/P2_REPORT.md` (complete: verdict, Statements 1-9, comparison
+  with P, numerics, prior art with search log, open items, next steps, requests).
+* No process of this workstream is running.  Data: `data/` 140 grids (584 MB, git-ignored);
+  `out/` 280 analysis JSON files + covers, mechanism, long-chain JSON files + `tables.md`;
+  `logs/` every run.
+* Headline: (1) known part exactly pairwise in residue rotamers; (2) g_GB: the star (second
+  order) is an exact certificate for the apolar homopolymers only and fails for every polar or
+  charged instance with >= 3 residues, because the PAIR part is large — not because GB is
+  many-body; (3) g_GB is pairwise up to c_ijk = 0.003-0.2 kcal/mol (neutral), 0.1-2.4 (charged,
+  tau .70), 10 (Lys4/PPII, tau .60): the third-order interface (Hamming-2 ball) is an exact
+  certificate in every instance at tau .70; (4) c_i saturate with length for neutral side
+  chains and grow for charged ones (Lys/H >= 138 kcal/mol at 24 residues); (5) ff03 - ff14SB is
+  exactly pairwise and the star certifies it for the apolar peptides, Ser on strand/PPII and
+  LKSE on helix/PPII.
+* If continued: (a) buried environment (request E-1); (b) certified bound on c_ijk from the
+  tabulated descreening integrals (§6 item 2); (c) dissect the Lys4/PPII triple; (d) the
+  sensitivity backbones H', E', P2'.
+
+* **Independent end-to-end check added last** (`verify_openmm_direct_sc.py`, the analogue of P's
+  `verify_openmm_direct.py`): Ser3 on the strand, all 729 assignments, g_GB from OpenMM's own
+  CustomGBForce on the Reference platform, f from OpenMM's torsion + nonbonded groups, full
+  internal-coordinate build, constants by explicit loops — no fastff, no tables, no anlib:
+  g_GB: c_i = 4.81 4.12 4.32; c_12, c_13, c_23 = 1.306 2.426 1.308; c_123 = 4.03e-3;
+  f: c_123 = 5.9e-13.  The pipeline (`an_main`) gives 4.81 4.12 4.32; 1.306 2.426 1.308;
+  0.004026; f: 4.3e-14.  Identical.  Log `logs/verify_openmm_direct_sc.log`.

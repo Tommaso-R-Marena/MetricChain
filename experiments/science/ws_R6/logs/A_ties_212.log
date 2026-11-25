@@ -1,0 +1,27 @@
+A_ties seed 212 time 326s
+{
+ "runs": 500,
+ "harness_limit": 35,
+ "closed": 465,
+ "abort": 0,
+ "Gfail": 0,
+ "det_viol": 0,
+ "good_viol": 0,
+ "pop": 167890,
+ "neg": 1960,
+ "runs_with_neg": 151,
+ "close_pop": 21,
+ "close_unpop": 444,
+ "close_tail0": 0,
+ "invalid_bracket_any": 0,
+ "maxratio": {
+  "M_over_Mbar": 0.00016872433983910383,
+  "M_over_Mdag": 1.4858718860009597,
+  "M_over_capnew": 0.18085625533238603,
+  "lnq_over_lnCmax": 0.770871838216544,
+  "q_over_Cvi": 2.601507044176463e-05,
+  "calls_over_bound": 0.20596870415004814,
+  "used_over_cnt": 0.2764633890339252,
+  "count_ineq": 0.662503112119533
+ }
+}

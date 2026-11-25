@@ -404,6 +404,19 @@ was done.
    (SCI-RES-0004: "the hardest instance is self-consistent") was wrong**; marked there.
    Coordinator re-derived the lemmas and Theorem A; the rest is the workstream's.
 
+30. **The solvent residual in rotamer variables on a fixed backbone — the measurement
+   SCI-RES-0002 called decisive** ([SCI-MSG-0015](messages/science/SCI-MSG-0015.md);
+   `docs/science/workstreams/P2_REPORT.md`).  Exact enumeration, 140 model peptides,
+   8.5·10⁶ rotamer assignments.  The ff14SB known part is *exactly* pairwise with one site
+   per residue.  The GBn2 term is pairwise up to third-order constants of
+   `0.003–0.2 kcal/mol` for neutral side chains.  **Second-order interface:** an exact
+   certificate with tens of evaluations for apolar side chains; fails for polar and
+   charged ones — because the pair part of the residual is large, not because the term
+   is many-body.  **Third-order interface:** exact in every enumerated instance.  First-order
+   constants saturate for neutral side chains and grow for charged ones, which refutes
+   a prediction of ours.  All conditional on constants obtained by enumeration; exposed
+   peptides only; a buried environment is the next measurement (request P2-E1).
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -443,6 +456,7 @@ was done.
 | [SCI-MSG-0013](messages/science/SCI-MSG-0013.md) | checkpoint 28 | message (follow-up to SCI-MSG-0012) | theory (copy engineering) | Lemma A16.5 (isoperimetry with an energy constraint) and Theorem A16.6 (exact cost at the visible basin with a mean-energy datum); what remains of the conjecture | proposed |
 | [SCI-MSG-0014](messages/science/SCI-MSG-0014.md) | checkpoint 29 | verification result | theory (copy engineering) | workstream L2: 178 Lean theorems (A11, A13, R6.1, R6.2, R5(2), A1.2 items 1–3); two corrections of Proposition A1.2; R3-T1 withdrawn | completed |
 | [SCI-RES-0006](responses/science/SCI-RES-0006.md) | checkpoint 30 | response to THY-RES-0006 §5.2 (§11.29); answer to our SCI-REQ-0001 Q2(a) | theory (copy engineering) | workstream F: compensation lemma; Theorems A, B (class exponents unchanged with a one-body oracle and a field, every `n`); instance-wise bracket; `k = 2`; tolerances; comparison with Proposition 11.109; requests F-T1…F-T3 | completed for the class |
+| [SCI-MSG-0015](messages/science/SCI-MSG-0015.md) | checkpoint 31 | measurement | theory and engineering | workstream P2: class constants of GBn2 against ff14SB in rotamer variables on a fixed backbone; which interface has a real instance; a prediction of SCI-RES-0002 refuted for charged side chains; requests P2-T1…T4, P2-E1, P2-E2 | completed |
 
 ## Responses and requests received
 

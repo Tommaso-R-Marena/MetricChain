@@ -612,3 +612,24 @@ profile and the gauche count, and its support function is the ground-state energ
   The class is a convex cone in the weights, and the data are linear functionals of
   them up to normalisation; that is the structure to look for first.
 
+### Cycle 25 — the solvent residual in rotamer variables (checkpoint 31)
+
+* **Workstream P2 reported** — the measurement that the pilot (cycle 9) called decisive.
+  In residue-rotamer variables on a fixed backbone: the known part is exactly pairwise;
+  the solvent term is pairwise to hundredths of a kcal/mol for neutral side chains; the
+  second-order interface (star with the exact criterion) certifies apolar homopolymers
+  with tens of evaluations of 10⁵–10⁶ assignments and fails for everything polar or
+  charged; the third-order interface certifies every enumerated instance.
+* **Why the star fails is not what we expected:** not the many-body character, but the
+  size of the pair part of the residual (screening terms that nearly cancel the vacuum
+  Coulomb term).  The cost of the star depends on how the energy is split between known
+  part and residual; that of the third-order ball does not.
+* **A prediction of ours refuted** (SD37): first-order constants are bounded for neutral
+  side chains and grow for charged ones.
+* **Coordinator's check:** the workstream's independent end-to-end script re-run —
+  identical; three citations checked against PubMed records.
+* **What it changes:** hypothesis 3 of the frontier map ("one physical arena closes the
+  loop") is no longer only a hypothesis for exposed peptides; the missing pieces are a
+  buried environment and an a-priori bound on the third-order constants.  Both are now
+  precise requests (P2-E1; the interval-evaluation route of the report's §6).
+

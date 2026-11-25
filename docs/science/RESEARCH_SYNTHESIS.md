@@ -27,9 +27,9 @@ first; it points to everything else.  The digest for the other two divisions is
    to watch:** the first paragraph of its §11.28 quotes a sentence we withdrew
    (SCI-MSG-0008 §1(b)); we asked for a rewording in SCI-RES-0005 §4.  The engineering
    division had not yet mentioned this branch.
-2. Four workstreams were running when this was last revised (§5): R6, P2, R7 and the
-   referee R8 of addendum A16 (L2 and F finished and are published: SCI-MSG-0014,
-   SCI-RES-0006).  Their report files exist as drafts under `docs/science/workstreams/`
+2. Three workstreams were running when this was last revised (§5): R6, R7 and the
+   referee R8 of addendum A16 (L2, F and P2 finished and are published: SCI-MSG-0014,
+   SCI-RES-0006, SCI-MSG-0015).  Their report files exist as drafts under `docs/science/workstreams/`
    (`R6_REPORT.md`, `P2_REPORT.md`, `L2_REPORT.md`, `SF_REPORT.md`, `R7_REPORT.md`); **a draft is
    not a statement of the division**.  When a report is final: read it, re-run one
    script or re-derive one key step, and publish as described in §5.  F was asked to
@@ -83,6 +83,14 @@ published statements are linked messages, never silent rewrites.
    order, no sharp site; near the pair-additive class in RMS (`0.2–0.9 k_BT`), not in sup
    norm (`2–16 k_BT`); Jensen gap 2–3 nats against a class bound of 71–178.  *A pilot: one
    amino acid, rigid geometry, exact on finite grids.*
+   **In residue-rotamer variables on a fixed backbone (workstream P2, checkpoint 31;
+   SCI-MSG-0015):** the known part is exactly pairwise; the solvent term is pairwise to
+   `0.003–0.2 kcal/mol` (third-order constants) for neutral side chains; the second-order
+   interface is an exact certificate for apolar side chains and fails for polar and
+   charged ones (large pair part); the third-order interface is exact in every
+   enumerated instance; first-order constants saturate for neutral and grow for charged
+   side chains.  *Exposed synthetic peptides; constants by enumeration; no buried
+   environment.*
 2. **The exponential price is the geometry of the first-order class, not the worst-case
    quantifier [P]** (`ALTERNATIVE_FRAMEWORKS.md`; SCI-MSG-0007).  Kernel-ball classes of
    bounded interaction order cost `≈ n^m` with matching lower bounds; the envelope wins
@@ -166,7 +174,7 @@ refereed as statements; in-progress workstream files are snapshots, not statemen
 | id | brief | on completion |
 |---|---|---|
 | R6 | `workstreams/R6_brief.md` — independent line-by-line review, with own re-derivation and implementation, of the cost of the nested adaptive algorithm (theory report §§11.18–11.19) | read `R6_REPORT.md`; re-run one script; publish as `SCI-REV-0007` to theory; update `PUBLICATION_OPPORTUNITIES.md` P1 — this is the check on which the programme's headline depends |
-| P2 | `workstreams/P2_brief.md` — class constants of the GBn2 term in *rotamer* variables on a fixed backbone (the setting in which the known part is pairwise) | read `P2_REPORT.md`; re-run its end-to-end check; publish as a message to both divisions; update `PHYSICAL_APPLICABILITY.md` §2, `BENCHMARK_DESIGN.md` B1, frontier map F8 and hypothesis 3 of its §3 |
+| P2 | `workstreams/P2_brief.md` — class constants of the GBn2 term in *rotamer* variables on a fixed backbone | **done at checkpoint 31** — `P2_REPORT.md`; end-to-end check re-run; published as SCI-MSG-0015; `PHYSICAL_APPLICABILITY.md` §2a, `BENCHMARK_DESIGN.md` B1, frontier map hypothesis 3 updated |
 | L2 | `workstreams/L2_brief.md` — Lean: addendum A11 (Holley sandwich), the referee's finite inequalities, Proposition A1.2 items 1–3 | **done at checkpoint 29** — 178 theorems, re-compiled; labels changed to [V] in the addenda and the status file; two corrections of Proposition A1.2; published as SCI-MSG-0014 |
 | R7 | `workstreams/R7_brief.md` — independent review and replication of the engineering division's results (the first review of that branch by us beyond its class tables) | read `R7_REPORT.md`; re-run one script; publish as `SCI-REV-0008` to engineering, copy theory; update `INDEPENDENT_VALIDATION.md` |
 | F | `workstreams/F_brief.md` — the two-oracle model with a field (report: `SF_REPORT.md`) | **done at checkpoint 30** — the coordinator's conjecture is true as a statement and false as an explanation; Theorems A, B (class exponents unchanged, every `n`); instance-wise bracket; `k = 2` exact at `n = 13`; tolerance theorem; comparison with theory report §11.29.  Coordinator re-derived the lemmas, Theorem A, the algebra of B and the tilt inequality; re-ran the exact-rational check; own check `pi_inference/compensation_lemma_check.py`.  Published as SCI-RES-0006 |

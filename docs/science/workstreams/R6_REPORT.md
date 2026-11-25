@@ -34,6 +34,10 @@ git command; no `lake build`; nothing delegated.
   their referees or the engineering division was opened; I have still not read any of them):
   Algorithm 2L and Algorithm 2L⁺ with every constant of the theorems, a run-by-run checker of every
   claim, and an explicit evaluator of the cost bound for every `n` (§3).
+* **Run twice**: the campaigns with a simulated inner oracle.  After the first pass I found that numpy's
+  binomial sampler, which my engine called, is biased for blocks of more than `10^16` points (m8 in
+  §2.7); I corrected the sampler and repeated every campaign that can contain such blocks.  The tables
+  are the second pass; the first (same outcome) is kept in `data/pass1/`.
 * **Done only at toy size**: runs with real inner brackets — two levels on cubes of 12–13 coordinates
   (529 runs), three nested levels on cubes of 9–10 coordinates (19 outer runs); they test the logic of
   the nesting, not the cost (§3.4, §5).
@@ -57,9 +61,10 @@ runs would exceed `C_max` without the abort rule, and none does with it) — nor
 19 three-level runs with real inner brackets at toy size, nor in 4,500 runs aimed at the degenerate
 branch of the new cap remark and 2,425 runs of two searches for a counterexample (§3); and it
 reproduces to every published digit numbers of the engineering division that I had not seen when I
-wrote it (§3.3).  **What I add:** (i) seven minor
-points, each with its repair (§2.7): four gaps in the text of §11.18, an uncovered pass in the proof of
-the new cap remark of `40c5bd7`, which I close (§2.8), and two observations; (ii) an **every-`n` statement
+wrote it (§3.3).  **What I add:** (i) eight minor points, each with its repair (§2.7): four gaps in
+the text of §11.18, an uncovered pass in the proof of the new cap remark of `40c5bd7`, which I close
+(§2.8), two observations, and a numerical trap that concerns every harness of this algorithm — numpy's
+binomial sampler is biased for blocks of more than `10^16` points (m8); (ii) an **every-`n` statement
 with no `o(n)`**: the two-level algorithm
 with base brackets has an explicit worst-case cost bound for every `n` on the whole class, and at
 `u = 1`, accuracy `0.872`, `δ = 0.05` that bound is **below the lower bound for all non-adaptive
@@ -420,6 +425,31 @@ Minor (each with location, what is missing, and the repair; "closed" = I give th
   do not: in the valid 2L⁺ campaigns 315 of 2424 closures happen at a populated pass, and I did
   not log which of the two terms decided them.)
 * **m7 — the cap remark of `40c5bd7` has one uncovered pass** — see §2.8.  Closed.
+* **m8 — a numerical trap for every "exact sample" harness of this algorithm (not an error of the
+  text): numpy's binomial sampler is biased at the sample sizes these harnesses use.**  numpy 2.5.3,
+  `Generator.binomial(n, p)`: for `n ≥ 10^16` and a mean `np` between about `60` and `10^4` the mean of the
+  samples is too small — by `0.84 %` at `n = 2^61`, `np = 92` (`z = −50` in `4·10^5` draws), `0.2–0.3 %` at
+  `np = 500`, `n ≥ 10^18`, `0.08 %` at `n = 10^17`; no bias for `n ≤ 10^15`, for `np ≤ 31` or for `np ≥ 5·10^4`; the
+  Poisson sampler and sums of binomials with `2^51` trials are unbiased (`numpy_binomial_bias.py`, two
+  seeds, `logs/numpy_binomial_bias.log`) **[N]**.  This is the regime of the far-tail shells in a block of
+  `10^17`–`10^18` outer points — exactly the "rare high levels" on which the negligible branch and the
+  closing radius depend.  `K_REPORT.md` §6.8 records two other sampler traps, and erratum m6 of R8
+  states that "`Generator.binomial` is correct down to `p = 10^{−20}` (`n = 2^59`)"; that is true in the
+  inversion branch (`np ≤ 30`) and not in the branch above it.  My own first pass used this sampler
+  (§3.2); whether the samplers of workstream K, of R8 and of the engineering division call it in the
+  affected regime I cannot tell without reading their code.  The logical tests of all harnesses are
+  immune (they condition on the events holding on the realised sample); a reported *frequency* of the
+  good event is not.  Repair: draw such counts from the Poisson law (total-variation error `≤ p`), or
+  as sums of binomials with at most `2^50` trials.
+  *Mechanism* (**[H]**, supported by the source: `numpy/random/src/distributions/distributions.c` on the
+  `main` branch, function `random_binomial_btpe`, lines quoted to me by a fetch tool — I did not compare
+  with the 2.5.3 tag): inversion is used for a mean `≤ 30` and BTPE above; the final acceptance test of
+  BTPE contains `(n − m + 0.5) * log(z / w)` with `z = (double)n + 1 − (double)m`,
+  `w = (double)n − (double)y + 1`.  The quotient is `1 + (y−m)/(n−y+1)`, which float64 does not resolve
+  once `n` is of the order `10^16` (for `n > 2^53` and `y, m` below half a unit in the last place of `n` it
+  is exactly `1`), so a term of size about `y − m` is lost from the logarithm of the acceptance ratio
+  and candidates above the mode are rejected too often — the sign I measure.  The test is reached only
+  for `|y − m| > 20` and when the squeeze does not decide, which is the window of means I measure.
 
 ### 2.8 The remark "the sample-size cap can be lowered" (commit `40c5bd7`) — proved, with one pass added
 
@@ -555,10 +585,13 @@ restricted to it would be weaker than Theorem R6.1 in the only direction that ma
 Everything in this section is **[N]** — independent *replication* with my own code
 (`experiments/science/ws_R6/`); no script of the authors, of their referees or of the engineering
 division was run or read.  Python 3.13, numpy 2.5.3, mpmath 1.3.0,
-at most two processes, every job under ten minutes.  The machine was shared and heavily loaded
-(load average 10–15 on 4 cores), so several campaigns were cut by their time limit: the numbers
-below are the runs that completed, and every number in the tables is produced from the data files by
-`make_section3.py` (`data/summary_all.json`), not transcribed.
+at most four processes at a time (two in the first pass), every job under ten minutes.  The machine
+was shared and loaded (load average 10–15 on 4 cores during the first pass, about 6 during the
+second), so several campaigns were cut by their time limit: the numbers below are the runs that
+completed, and every number in the tables is produced from the data files by `make_section3.py`
+(`data/summary_all.json`), not transcribed.  The campaigns of §3.2 and the affected searches of §3.6
+were run **twice**, because I found my sampler biased after the first pass (m8 in §2.7); what is
+reported is the second pass, and the first is kept in `data/pass1/`.
 
 ### 3.1 The implementation and its checker
 
@@ -569,8 +602,10 @@ below are the runs that completed, and every number in the tables is produced fr
   brackets are float64 logarithms.  The outer sample is literal: the list `a₁, a₂, …` is drawn at
   random, block by block of the doubling sequence, as exact counts of the classes of outer points with
   equal fibre average (sequential binomials; chunks of `2^61` so that blocks of up to `2^83` points
-  can be drawn — `big_binomial`, tested against means and variances), one bracket per (block, class),
-  or one unit per point for explicit cubes.
+  can be drawn), one bracket per (block, class), or one unit per point for explicit cubes.  The sampler
+  (`big_binomial`) does **not** call numpy's binomial in the regime where that sampler is biased (m8 in
+  §2.7): there it draws from the Poisson law; `test_binomial.py` checks means in that regime (`|z| < 1`
+  in `10^5` draws) and the far-tail shells of `Q_300` in blocks of `2^59` points.
 * `checks.py` — after every run, every claim of the theorem against quantities the algorithm never
   sees (the exact tail `p(t)` and mean `A` of the instance): *for every run* — closing radius of every
   level left (iii), `M ≤ max(K, 2M_j^neg)`, `M_j^neg ≤ (1+η)e^λν₀M†`, `M ≤ M̄` (iv), the cap of `40c5bd7`,
@@ -829,6 +864,7 @@ information sent.
 | "Kaas Buhrman 1980 Mean, median and mode in binomial distributions median between floor np and ceil np" | bibliographic data (Statistica Neerlandica 34(1), 13–18); a 1978 preprint statement that an integer within `min{p, 1−p}` of `np` is a median; the `⌊np⌋ ≤ m ≤ ⌈np⌉` form is attributed to the paper by secondary sources | [search snippet]; the paper itself not read |
 | arXiv math/0611285 (Mathé–Novak, *Simple Monte Carlo and the Metropolis algorithm*) | "adaptive methods are much better than nonadaptive ones … the curse of dimension (for nonadaptive methods) can be broken by adaption", for integration with respect to an unknown density, by a Metropolis ball walk, "for certain classes of inputs" | [abstract], through a fetch tool |
 | "adaptive versus non-adaptive query complexity estimating partition function Lipschitz function Hamming cube exponential separation isoperimetric layer cake algorithm" | nothing on this problem (junta testing, partition learning, nearest-point search in the cube) | [search snippets] |
+| `raw.githubusercontent.com/numpy/numpy/main/numpy/random/src/distributions/distributions.c` (for m8) | the threshold `p * n <= 30.0` between inversion and BTPE; in `random_binomial_btpe` the definitions of `x1, f1, z, w` as doubles and the first line of the final acceptance test; the structure of Steps 50/52 as summarised by the tool | [quoted lines through a fetch tool; the rest a summary]; branch `main`, not the installed 2.5.3 |
 
 *Assessment.*  The two cited combinatorial inputs are standard and are used in the form in which they
 are known: Harper [K, search snippet; verified by computation on all subsets of `Q_m`, `m ≤ 4`, §3.5];
@@ -865,7 +901,9 @@ programme's own theorems; I did not search for it and make no novelty claim.
    shells; laws with partial shells are not covered by my simulated runs.
 6. **The frequency of the good event from below**: with the constants of the theorems it never failed
    in my runs; with `K` reduced it fails, and I report the frequencies, but I did not test whether the
-   bound `δ` is anywhere near tight (it is a union bound and is not).
+   bound `δ` is anywhere near tight (it is a union bound and is not).  My corrected sampler replaces a
+   binomial by a Poisson law where `p ≤ 10^{−9}`; that is an approximation of total-variation size `≤ p`
+   per draw, not an exact sample.
 7. **Theorem 11.51** (radial class) was outside my list and not examined.
 
 ## 6. The three most promising next steps
@@ -910,6 +948,12 @@ programme's own theorems; I did not search for it and make no novelty claim.
   `K_REPORT.md` §6.4.  The present text compares with the plain bracket, which is an upper bound.
 * **R6-T4.**  Is there a rate for `T_k → θ_hint`?  Even `T_k(g) − θ_hint(g) ≤ C(u, g)/k` would make the
   `o(n)` of Theorems 11.54/11.58 explicit.
+* **R6-T5 (samplers; also to the referee who wrote erratum m6).**  Please check whether
+  `stable_multinomial.py` (workstream K), the sampler of R8 and harness XVI call numpy's
+  `Generator.binomial` with `n ≥ 10^16` and a mean between `60` and `10^4`: there it is biased low by up to
+  `0.84 %` (`experiments/science/ws_R6/numpy_binomial_bias.py` reproduces it in a minute).  No conclusion
+  of yours that conditions on the realised sample is affected; the sentences "the good event held in
+  all … runs" should be re-checked with an unbiased sampler, and erratum m6 should be qualified.
 
 **To the engineering division:**
 
@@ -930,6 +974,11 @@ programme's own theorems; I did not search for it and make no novelty claim.
   budget, and the cost stays below `C_max` only because the test precedes the call.  A harness for
   the "bracket procedure" interface should contain such a behaviour; it is the only test of the
   sentence "the cost bound holds always".
+* **R6-E3 (sampler).**  Your literal runs use "a multinomial routine that is exact in the far tail".
+  If it calls numpy's `Generator.binomial` with `n ≥ 10^16` and a mean between `60` and `10^4`, the counts
+  are biased low by up to `0.84 %` (m8 of my report; `numpy_binomial_bias.py`).  *Requested:* one run of
+  that script in your environment (NumPy version, platform), and — if your routine is affected — a
+  re-run of the cells with `n_o ≥ 120` of job M-011.  *Expected:* no change of any conclusion.
 
 ## 8. What a hostile referee would attack first
 
