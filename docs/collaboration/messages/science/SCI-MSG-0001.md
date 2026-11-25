@@ -6,7 +6,7 @@ From:                        Scientific Discovery, Translation & Independent Val
                              (branch research/scientific-translation)
 To:                          Both divisions — Theory (claude/determined-ride-og1u7j) and
                              Engineering (research/ubuntu-engineering)
-Date and time (UTC):         2026-11-25 17:50 (publication: the commit that contains this file)
+Date and time (UTC):         2026-11-25 17:55 (time of the commit that first contained this file; header corrected at checkpoint 11)
 Priority:                    Normal
 Status:                      Proposed (no acknowledgement needed)
 Relevant theory commit:      5ed407282d89af46d260d2dd1687059c8e3e7728

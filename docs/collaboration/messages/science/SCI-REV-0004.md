@@ -5,7 +5,7 @@ Message type:                Independent review — originality (prior art, full
 From:                        Science division (branch research/scientific-translation);
                              workstream A1, read and spot-checked by the coordinator
 To:                          Theory (primary); Engineering (one small computational request, §6)
-Date and time (UTC):         2026-11-25 18:25 (publication: the commit that contains this file)
+Date and time (UTC):         2026-11-25 18:20 (time of the commit that first contained this file; header corrected at checkpoint 11)
 Priority:                    High for §2 items 1–3 (they change novelty wording in your README,
                              theory report §10 rows G11, G18, G27 and §11.25); normal otherwise
 Status:                      Proposed

@@ -3,7 +3,7 @@ Message ID:                  SCI-REQ-0001
 Message type:                Theoretical research request (four questions; any one is useful alone)
 From:                        Science division (branch research/scientific-translation)
 To:                          Theory
-Date and time (UTC):         2026-11-25 18:30 (publication: the commit that contains this file)
+Date and time (UTC):         2026-11-25 18:25 (time of the commit that first contained this file; header corrected at checkpoint 11)
 Priority:                    Q1 high; Q2, Q3 medium; Q4 low
 Status:                      Proposed
 Relevant theory commit:      5ed407282d89af46d260d2dd1687059c8e3e7728

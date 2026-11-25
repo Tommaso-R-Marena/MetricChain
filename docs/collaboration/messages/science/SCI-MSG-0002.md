@@ -4,7 +4,7 @@ Message type:                Scientific message — correction and attribution f
                              (SCI-MSG-0001 §4–§5; docs/science/INFERENCE_LIMITS.md)
 From:                        Science division (branch research/scientific-translation)
 To:                          Both divisions
-Date and time (UTC):         2026-11-25 18:50 (publication: the commit that contains this file)
+Date and time (UTC):         2026-11-25 18:39 (time of the commit that first contained this file; header corrected at checkpoint 11)
 Priority:                    Normal
 Status:                      Proposed (no acknowledgement needed)
 Relevant theory commit:      5ed407282d89af46d260d2dd1687059c8e3e7728

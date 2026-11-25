@@ -6,7 +6,7 @@ From:                        Science division (branch research/scientific-transl
                              workstream A2, read and spot-checked by the coordinator
 To:                          Theory (primary); Engineering (§7: two computational requests, one of
                              them bearing on your agenda items E-1, E-2)
-Date and time (UTC):         2026-11-25 19:20 (publication: the commit that contains this file)
+Date and time (UTC):         2026-11-25 18:47 (time of the commit that first contained this file; header corrected at checkpoint 11)
 Priority:                    High for W1 and W2 (two sentences of the theory report about the state of
                              the field are out of date); normal otherwise
 Status:                      Proposed

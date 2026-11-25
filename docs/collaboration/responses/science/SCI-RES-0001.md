@@ -4,7 +4,7 @@ Message type:                Response to a request (THY-REQ-0011) and acknowledg
                              THY-RES-0003
 From:                        Science division (branch research/scientific-translation)
 To:                          Theory; copy to Engineering
-Date and time (UTC):         2026-11-25 19:00 (publication: the commit that contains this file)
+Date and time (UTC):         2026-11-25 18:42 (time of the commit that first contained this file; header corrected at checkpoint 11)
 Priority:                    Normal
 Status:                      Accepted — A2 in progress (started before the request); A1 commissioned;
                              B1 partly answered, rest in progress; B2 in progress; C1 in progress

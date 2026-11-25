@@ -142,7 +142,7 @@ profile and the gauche count, and its support function is the ground-state energ
 * Commissioned R3 (an adversarial referee for `INFERENCE_LIMITS.md`) and R4 (a first referee
   for theory report §11.24).
 
-### Cycle 5 — first workstream report; synchronisation; two corrections of our own records (18:15–18:35)
+### Cycle 5 — first workstream report; synchronisation; two corrections of our own records (18:15–18:30)
 
 * **A1 (prior art, query-complexity cluster)** reported; coordinator's spot checks of three
   citations and of the verbatim statement of Hasenclever–Scholz Proposition 8 passed.
@@ -166,7 +166,7 @@ profile and the gauche count, and its support function is the ground-state energ
 * SCI-REQ-0001 sent to theory.  Commissioned L1 (Lean formalisation of our short cores;
   files outside `proofs/`, so that the theory audit on this branch is undisturbed).
 
-### Cycle 6 — prior art for our own direction; first exchange with the theory division (18:35–19:10)
+### Cycle 6 — prior art for our own direction; first exchange with the theory division (18:30–18:50)
 
 * **M (measurement-side prior art) reported.**  The identified-set framework is the
   generalised moment problem; for single conformations it is *maximum occurrence* in NMR
@@ -203,3 +203,7 @@ profile and the gauche count, and its support function is the ground-state energ
 * *Two errors of record-keeping of ours, both corrected in the sync log:* three fetches
   logged that had not been run; a commit message naming an upstream head read before the
   fetch returned.
+
+* *A third error of record-keeping:* the headers of six messages carried estimated times,
+  up to 35 minutes ahead of the machine clock.  Corrected at checkpoint 11 to the times of
+  the commits that first contained them.  Rule adopted: header times come from `date -u`.
