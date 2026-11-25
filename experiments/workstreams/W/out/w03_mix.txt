@@ -1,0 +1,54 @@
+=== w03: chain mix(bin,path), fractions [0.5 0.5] ===
+(i) game function F* on 801 points: F*(0) = F*(1) = 0; max F* = 0.057275 at t = 0.4662;
+    F*(t)/t nonincreasing: largest increase -2.44e-04; value at t = 1/800: 0.251529, E = sum_j lam_j E_j = 0.251877
+    F*(t)/(1-t) nondecreasing: largest decrease -1.68e-04; value at t = 1 - 1/800: 0.194878, a = sum_j lam_j a_j = 0.195046
+    concavity: largest second difference -4.208e-07 (x 640000 = second derivative -0.2693) at t = 0.9988  -> F* is concave on the grid
+    site bin(0.3,1): largest second difference of F*_j: -2.638e-07 at t = 0.9988
+    site path(0.8,1.6): largest second difference of F*_j: -5.777e-07 at t = 0.9988
+(ii) R convex: smallest second difference 0.00e+00; slopes in [-0.92785, 0.00000]; S = e + R nondecreasing: True; pair identity theta_na(e + R(e)) = R(e) on 400 accuracies (both signs): max abs error 5.1e-07
+     h = R(0) = 0.057275; theta_na(h) = 0.057275; R(E) = 0.00e+00
+
+(iii/iv) recursion built on the pair of: all vertices, hardest additive instance (F*)
+     own E = 0.251529, own a = 0.194878, own h = 0.057275   (true: E = 0.251877, a = 0.195046, h = 0.057275)
+     g/E        0.008    0.050    0.090    0.251    0.492    0.754
+     T_1 /a    0.8342   0.6220   0.5111   0.2681   0.0990   0.0199
+     T_2 /a    0.4324   0.3434   0.2951   0.1783   0.0767   0.0181
+     T_4 /a    0.3151   0.2771   0.2493   0.1644   0.0752   0.0180
+     T_10/a    0.2926   0.2658   0.2428   0.1636   0.0752   0.0180
+     R^max/a   0.2886   0.2644   0.2420   0.1631   0.0747   0.0176
+     own R/a   0.2886   0.2644   0.2420   0.1631   0.0747   0.0176
+     min over levels and accuracies of (T_k - R^max)/a = -0.00000  -> never below the lower bound; max_g (T_10 - own R)/a = +0.00600
+
+(iii/iv) recursion built on the pair of: zero residual gamma = 0
+     own E = 0.248266, own a = 0.176075, own h = 0.052360   (true: E = 0.251877, a = 0.195046, h = 0.057275)
+     g/E        0.008    0.050    0.090    0.251    0.492    0.754
+     T_1 /a    0.7470   0.5474   0.4447   0.2255   0.0794   0.0147
+     T_2 /a    0.3918   0.3067   0.2619   0.1535   0.0635   0.0143
+     T_4 /a    0.2874   0.2506   0.2242   0.1441   0.0628   0.0140
+     T_10/a    0.2671   0.2411   0.2189   0.1435   0.0628   0.0140
+     R^max/a   0.2886   0.2644   0.2420   0.1631   0.0747   0.0176
+     own R/a   0.2635   0.2398   0.2182   0.1431   0.0622   0.0133
+     min over levels and accuracies of (T_k - R^max)/a = -0.02333  -> FALLS BELOW the proved lower bound R^max; max_g (T_10 - own R)/a = +0.00554
+
+(iii/iv) recursion built on the pair of: single dips only (distance-function vertices), hardest additive instance
+     own E = 0.251529, own a = 0.194878, own h = 0.057275   (true: E = 0.251877, a = 0.195046, h = 0.057275)
+     g/E        0.008    0.050    0.090    0.251    0.492    0.754
+     T_1 /a    0.8342   0.6220   0.5111   0.2681   0.0990   0.0199
+     T_2 /a    0.4324   0.3434   0.2951   0.1783   0.0767   0.0181
+     T_4 /a    0.3151   0.2771   0.2493   0.1644   0.0752   0.0180
+     T_10/a    0.2926   0.2658   0.2428   0.1636   0.0752   0.0180
+     R^max/a   0.2886   0.2644   0.2420   0.1631   0.0747   0.0176
+     own R/a   0.2886   0.2644   0.2420   0.1631   0.0747   0.0176
+     min over levels and accuracies of (T_k - R^max)/a = -0.00000  -> never below the lower bound; max_g (T_10 - own R)/a = +0.00600
+
+(iii/iv) recursion built on the pair of: worst binary reduction of every site (pointwise maximum over the cuts)
+     own E = 0.155503, own a = 0.134109, own h = 0.036804   (true: E = 0.251877, a = 0.195046, h = 0.057275)
+     g/E        0.008    0.050    0.090    0.251    0.492    0.754
+     T_1 /a    0.5417   0.3603   0.2708   0.0951   0.0085   0.0000
+     T_2 /a    0.2793   0.2016   0.1624   0.0686   0.0085   0.0000
+     T_4 /a    0.1999   0.1649   0.1397   0.0663   0.0083   0.0000
+     T_10/a    0.1858   0.1596   0.1374   0.0662   0.0083   0.0000
+     R^max/a   0.2886   0.2644   0.2420   0.1631   0.0747   0.0176
+     own R/a   0.1835   0.1590   0.1370   0.0658   0.0077   0.0000
+     min over levels and accuracies of (T_k - R^max)/a = -0.10486  -> FALLS BELOW the proved lower bound R^max; max_g (T_10 - own R)/a = +0.00389
+time 13 s

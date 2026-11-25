@@ -662,7 +662,15 @@ always refine the level set whose weighted upper end is largest, and stop when t
 has the target width — the result is a valid bracket for `Z` up to the logarithm of the
 number of level sets, and a level set is refined only as far as its distance from the
 largest term requires.  And no known part of this kind makes the worst case harder than
-it is without a known part (§11.25, unrefereed).  *If evaluations are
+it is without a known part (§11.25, unrefereed; a two-state statement — with three or
+more states per site a known part that removes states can make things worse).  *With
+several kinds of sites* (theory report §11.26, unrefereed): stratify by the composition
+of every kind of site; do not split an accuracy budget between the kinds at a common
+accuracy — their costs combine through a common slope, and a kind that is beyond its own
+threshold still contributes; per site, the quantity that sets the cost is a capacity of
+the family of site laws the allowed perturbations can produce (computable by a small
+convex programme), not the number of states; an asymmetric envelope (one-sided
+information) is used as it is, never symmetrised.  *If evaluations are
 made in batches* (theory report §11.24, unrefereed): the nested algorithm can be scheduled
 with one batch per rung of its ladder, so its exponent needs a number of rounds that does
 not grow with the system; two rounds already beat every fixed sample, and two rounds
@@ -957,7 +965,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 267 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 293 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  The audit script runs it, and starts with a self-test in which

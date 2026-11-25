@@ -1,0 +1,13 @@
+=== w05 finite-n: chain tri, fractions [1.]; eps = 0.3 E n + 1.0 (E = 0.284907); single-letter R^max(eps_1) = 0.032077 at t* = 0.3243 ===
+  type 0 (tri(1,1.5,2)): gamma* = [ 0.       0.12407 -0.09497], labels (vertices) [[0.0, -0.5, -2.0], [0.0, 1.0, 2.0], [0.0, 0.5, 2.0]] with weights [0.5093 0.0504 0.4403]
+  n =   60 [gamma] eps =    6.128: r* =   23.385, E(r*) =    6.128, maxdens = 8.3485e-02  ->  theta_n = 0.041385  (R = 0.032077; (theta_n - R) n / ln n = +0.136); densest joint type [12 27 21]; 0.0 s
+         type 0: sizes [31, 3, 26], centre counts [[2, 8, 21], [2, 1, 0], [10, 14, 2]]
+  n =   60 [H    ] eps =    6.128: r* =   25.481, E(r*) =    6.128, maxdens = 1.6877e-01  ->  theta_n = 0.029654  (R = 0.032077; (theta_n - R) n / ln n = -0.036); densest joint type [13 28 19]; 0.1 s
+         type 0: sizes [31, 3, 26], centre counts [[2, 8, 21], [2, 1, 0], [10, 14, 2]]
+  n =  120 [gamma] eps =   11.257: r* =   43.513, E(r*) =   11.257, maxdens = 1.0627e-02  ->  theta_n = 0.037870  (R = 0.032077; (theta_n - R) n / ln n = +0.145); densest joint type [25 53 42]; 0.4 s
+  n =  120 [H    ] eps =   11.257: r* =   45.999, E(r*) =   11.257, maxdens = 2.6651e-02  ->  theta_n = 0.030208  (R = 0.032077; (theta_n - R) n / ln n = -0.047); densest joint type [26 54 40]; 0.6 s
+  n =  240 [gamma] eps =   21.513: r* =   81.617, E(r*) =   21.513, maxdens = 2.0826e-04  ->  theta_n = 0.035320  (R = 0.032077; (theta_n - R) n / ln n = +0.142); densest joint type [ 49 110  81]; 4.7 s
+  n =  240 [H    ] eps =   21.513: r* =   83.715, E(r*) =   21.513, maxdens = 6.4247e-04  ->  theta_n = 0.030626  (R = 0.032077; (theta_n - R) n / ln n = -0.064); densest joint type [ 47 112  81]; 4.7 s
+  [gamma] two-point extrapolation theta_n = a + b ln n/n from n = 120, 240: a = 0.031906, b = 0.149   (R = 0.032077)
+  [H] two-point extrapolation theta_n = a + b ln n/n from n = 120, 240: a = 0.031186, b = -0.025   (R = 0.032077)
+time 11 s

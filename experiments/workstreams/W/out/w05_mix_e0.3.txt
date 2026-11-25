@@ -1,0 +1,16 @@
+=== w05 finite-n: chain mix(bin,path), fractions [0.5 0.5]; eps = 0.3 E n + 1.0 (E = 0.251877); single-letter R^max(eps_1) = 0.027759 at t* = 0.3173 ===
+  type 0 (bin(0.3,1)): gamma* = [ 0.      -0.08045], labels (vertices) [[0.0, -1.0], [0.0, 1.0]] with weights [0.511 0.489]
+  type 1 (path(0.8,1.6)): gamma* = [ 0.       0.07559 -0.36062], labels (vertices) [[0.0, -0.8, -2.4], [0.0, 0.8, 2.4]] with weights [0.5191 0.4809]
+  n =   60 [gamma] eps =    5.534: r* =   21.427, E(r*) =    5.534, maxdens = 1.1674e-01  ->  theta_n = 0.035796  (R = 0.027759; (theta_n - R) n / ln n = +0.118); densest joint type [[21, 9], [6, 20, 4]]; 0.0 s
+         type 0: sizes [15, 15], centre counts [[7, 8], [13, 2]]; type 1: sizes [16, 14], centre counts [[2, 3, 11], [11, 3, 0]]
+  n =   60 [H    ] eps =    5.534: r* =   23.940, E(r*) =    5.534, maxdens = 2.3063e-01  ->  theta_n = 0.024449  (R = 0.027759; (theta_n - R) n / ln n = -0.049); densest joint type [[21, 9], [15, 8, 7]]; 0.0 s
+         type 0: sizes [15, 15], centre counts [[7, 8], [13, 2]]; type 1: sizes [16, 14], centre counts [[2, 3, 11], [11, 3, 0]]
+  n =  120 [gamma] eps =   10.068: r* =   36.364, E(r*) =   10.068, maxdens = 2.3030e-02  ->  theta_n = 0.031425  (R = 0.027759; (theta_n - R) n / ln n = +0.092); densest joint type [[40, 20], [20, 31, 9]]; 0.1 s
+  n =  120 [H    ] eps =   10.068: r* =   39.062, E(r*) =   10.068, maxdens = 5.7883e-02  ->  theta_n = 0.023744  (R = 0.027759; (theta_n - R) n / ln n = -0.101); densest joint type [[41, 19], [29, 17, 14]]; 0.2 s
+  n =  240 [gamma] eps =   19.135: r* =   70.704, E(r*) =   19.135, maxdens = 6.0274e-04  ->  theta_n = 0.030892  (R = 0.027759; (theta_n - R) n / ln n = +0.137); densest joint type [[82, 38], [45, 50, 25]]; 0.8 s
+  n =  240 [H    ] eps =   19.135: r* =   72.694, E(r*) =   19.135, maxdens = 2.1835e-03  ->  theta_n = 0.025528  (R = 0.027759; (theta_n - R) n / ln n = -0.098); densest joint type [[82, 38], [57, 32, 31]]; 0.9 s
+  n =  480 [gamma] eps =   37.270: r* =  138.727, E(r*) =   37.270, maxdens = 5.3274e-07  ->  theta_n = 0.030094  (R = 0.027759; (theta_n - R) n / ln n = +0.182); densest joint type [[161, 79], [93, 91, 56]]; 10.3 s
+  n =  480 [H    ] eps =   37.270: r* =  139.303, E(r*) =   37.270, maxdens = 2.7280e-06  ->  theta_n = 0.026692  (R = 0.027759; (theta_n - R) n / ln n = -0.083); densest joint type [[163, 77], [112, 65, 63]]; 7.4 s
+  [gamma] two-point extrapolation theta_n = a + b ln n/n from n = 240, 480: a = 0.029066, b = 0.080   (R = 0.027759)
+  [H] two-point extrapolation theta_n = a + b ln n/n from n = 240, 480: a = 0.028191, b = -0.117   (R = 0.027759)
+time 21 s

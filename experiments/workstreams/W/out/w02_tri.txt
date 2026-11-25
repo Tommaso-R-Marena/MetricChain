@@ -1,0 +1,39 @@
+=== w02 single-letter tests: chain tri; fractions [1.]; E = 0.284907; a = 0.247541 ===
+  site tri(1,1.5,2): pi = [0.2 0.5 0.3], vertices of L (rows; * = distance function):
+       [ 0. -1. -2.]
+     * [ 0.  -1.   0.5]
+     * [ 0.  -0.5 -2. ]
+       [ 0.   1.  -0.5]
+     * [0. 1. 2.]
+       [0.  0.5 2. ]
+
+--- e = 0.0 E = 0.000000:  R = 0.066728814 (upper certificate at t*: 0.066728814)  t* = 0.48562
+    type 0 (tri(1,1.5,2)): gamma* = [ 0.       0.1558  -0.08882],  M* = [0.      0.16545 0.45771 0.      0.37684 0.     ],  Gibbs law of gamma* = [0.20926 0.44768 0.34305]
+    T2 primal at mu*: H 0.066728814   I 0.066728814   additive gamma* 0.066728814   (differences to R: -1.1e-15, -3.2e-14, -2.8e-17)
+    T4 largest r_mu(e;H) over 30 random profiles: 0.018924564; over 30 perturbations of mu*: 0.066708862; R = 0.066728814; excess -2.00e-05; solver failures 0
+    T5 pair identity: x = e + R = 0.066729: cone formula at M*: 0.066728814; max_tau (F*-tau x)/(1-tau) = 0.066728814; R = 0.066728814; largest cone value over 30 random label laws on all vertices: 0.061403736
+
+--- e = 0.3 E = 0.085472:  R = 0.032076870 (upper certificate at t*: 0.032076871)  t* = 0.32427
+    type 0 (tri(1,1.5,2)): gamma* = [ 0.       0.12407 -0.09497],  M* = [0.      0.      0.50929 0.      0.05039 0.44031],  Gibbs law of gamma* = [0.20586 0.45459 0.33955]
+    T2 primal at mu*: H 0.032076870   I 0.032076870   additive gamma* 0.032076870   (differences to R: -2.3e-14, -6.2e-16, +2.3e-15)
+    T4 largest r_mu(e;H) over 30 random profiles: 0.007239762; over 30 perturbations of mu*: 0.032060999; R = 0.032076870; excess -1.59e-05; solver failures 0
+    T5 pair identity: x = e + R = 0.117549: cone formula at M*: 0.032076870; max_tau (F*-tau x)/(1-tau) = 0.032076870; R = 0.032076870; largest cone value over 30 random label laws on all vertices: 0.029003767
+
+--- e = 0.6 E = 0.170944:  R = 0.010432395 (upper certificate at t*: 0.010432396)  t* = 0.18318
+    type 0 (tri(1,1.5,2)): gamma* = [ 0.       0.04007 -0.12127],  M* = [0.      0.      0.52093 0.      0.00404 0.47503],  Gibbs law of gamma* = [0.19626 0.47138 0.33235]
+    T2 primal at mu*: H 0.010432395   I 0.010432395   additive gamma* 0.010432395   (differences to R: -3.5e-16, -1.6e-14, +5.2e-15)
+    T4 largest r_mu(e;H) over 30 random profiles: 0.002770940; over 30 perturbations of mu*: 0.010430583; R = 0.010432395; excess -1.81e-06; solver failures 0
+    T5 pair identity: x = e + R = 0.181377: cone formula at M*: 0.010432395; max_tau (F*-tau x)/(1-tau) = 0.010432395; R = 0.010432395; largest cone value over 30 random label laws on all vertices: 0.008474553
+
+--- e = -0.25 a = -0.06189 (negative): R^ = 0.100347916 (>= -e = 0.06189); largest r_mu over 62 admissible random profiles: 0.080381114
+
+--- T3: V(mu, B; v) against max_gamma V(mu, B; gamma)  (B = e + alpha(mu)).  'V(v) >= V(gamma)' is trivial (v >= v_gamma);
+    equality is the collapse (Sion).  gamma0 is read off the exit type of the H-problem; the blind search can miss a small positive region.
+    profile 1: e = 0.0285, labels [3]: V(mu,B;v) = 0.039550351; V(mu,B;gamma0) at gamma0 = argmax v_gamma(exit type) = 0.039550351 (difference -2.1e-15); blind search over gamma (grid of 63, then Nelder-Mead): 0.039550351
+    profile 2: e = 0.0000, labels [3]: V(mu,B;v) = 0.039712851; V(mu,B;gamma0) at gamma0 = argmax v_gamma(exit type) = 0.039712851 (difference -5.4e-15); blind search over gamma (grid of 63, then Nelder-Mead): 0.039712851
+    profile 3: e = 0.0285, labels [3]: V(mu,B;v) = 0.049208854; V(mu,B;gamma0) at gamma0 = argmax v_gamma(exit type) = 0.049208854 (difference -1.2e-14); blind search over gamma (grid of 63, then Nelder-Mead): 0.049208854
+    profile 4: e = 0.0285, labels [3]: V(mu,B;v) = 0.007223841; V(mu,B;gamma0) at gamma0 = argmax v_gamma(exit type) = 0.007223841 (difference +6.9e-17); blind search over gamma (grid of 63, then Nelder-Mead): 0.007223841
+    profile 5: e = 0.0000, labels [3]: V(mu,B;v) = 0.043262560; V(mu,B;gamma0) at gamma0 = argmax v_gamma(exit type) = 0.043262560 (difference -2.8e-14); blind search over gamma (grid of 63, then Nelder-Mead): 0.043262560
+    profile 6: e = 0.0285, labels [3]: V(mu,B;v) = 0.040096551; V(mu,B;gamma0) at gamma0 = argmax v_gamma(exit type) = 0.040096551 (difference -3.1e-14); blind search over gamma (grid of 63, then Nelder-Mead): 0.040096551
+
+summary tri: worst |primal - R| at mu* (T2): 3.2e-14; worst |collapse| (T3): 3.1e-14; time 109 s

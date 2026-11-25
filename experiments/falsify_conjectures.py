@@ -7647,6 +7647,376 @@ def t_slice_reduction(rng, trials):
     return True, stats
 
 
+# -----------------------------------------------------------------------------------------------------------------
+# XXII. Product landscapes with several site types, any alphabets, asymmetric envelopes (theory report 11.26)
+# -----------------------------------------------------------------------------------------------------------------
+def st_vertices(d):
+    """Vertices of the Lipschitz polytope {g : g[a] - g[b] <= d[a][b]} of a site, normalised by g[0] = 0."""
+    q = len(d)
+    cons = [(a, b) for a in range(q) for b in range(q) if a != b]
+    out = []
+    for S in itertools.combinations(cons, q - 1):
+        A = np.zeros((q - 1, q - 1))
+        rhs = np.zeros(q - 1)
+        for i, (a, b) in enumerate(S):
+            if a > 0:
+                A[i, a - 1] += 1
+            if b > 0:
+                A[i, b - 1] -= 1
+            rhs[i] = d[a][b]
+        if abs(np.linalg.det(A)) < 1e-12:
+            continue
+        g = np.concatenate([[0.0], np.linalg.solve(A, rhs)])
+        if all(g[a] - g[b] <= d[a][b] + 1e-9 for a, b in cons) and not any(np.allclose(g, h, atol=1e-8) for h in out):
+            out.append(g)
+    return out
+
+
+def st_gibbs(pi, g):
+    w = np.asarray(pi, float) * np.exp(-np.asarray(g, float))
+    return w / w.sum()
+
+
+def st_site(pi, d):
+    V = st_vertices(d)
+    return dict(pi=np.asarray(pi, float), d=np.asarray(d, float), V=V, P=np.array([st_gibbs(pi, phi) for phi in V]))
+
+
+def st_game(site, gamma, t):
+    """F(gamma, t) = -ln of the value of the game K[a, phi] = (pi_phi(a)/pi_gamma(a))^t (the adversary mixes vertices)."""
+    from scipy.optimize import linprog
+    K = (site["P"] / st_gibbs(site["pi"], gamma)[None, :]).T ** t
+    nr, nc = K.shape
+    c = np.zeros(nc + 1)
+    c[-1] = 1.0
+    A_eq = np.zeros((1, nc + 1))
+    A_eq[0, :nc] = 1.0
+    res = linprog(c, A_ub=np.hstack([K, -np.ones((nr, 1))]), b_ub=np.zeros(nr), A_eq=A_eq, b_eq=[1.0],
+                  bounds=[(0, None)] * nc + [(None, None)], method="highs")
+    return -math.log(res.x[-1])
+
+
+def st_renyi(site, t):
+    """Theorem 11.99: F*(t) = max_M -t ln sum_a (sum_phi M(phi) pi_phi(a)^t)^(1/t); returns (value, upper bound from
+    the dual (1-t) max_phi D_t(pi_phi || Q), M, the Renyi centre Q)."""
+    from scipy.optimize import minimize
+    Pt = site["P"] ** t
+    nv = len(Pt)
+
+    def N(M):
+        return float(((M @ Pt) ** (1 / t)).sum())
+
+    def dN(M):
+        return (Pt * ((M @ Pt) ** (1 / t - 1))[None, :]).sum(axis=1) / t
+    best = None
+    for start in range(4):
+        M0 = np.ones(nv) / nv if start == 0 else np.random.default_rng(start).dirichlet(np.ones(nv))
+        res = minimize(N, M0, jac=dN, method="SLSQP", bounds=[(0, 1)] * nv, constraints=[{"type": "eq", "fun": lambda M: M.sum() - 1, "jac": lambda M: np.ones(nv)}],
+                       options={"ftol": 1e-15, "maxiter": 400})
+        M = np.clip(res.x, 0, None)
+        M /= M.sum()
+        m = (M @ Pt) ** (1 / t)
+        Q = m / m.sum()
+        val = -t * math.log(N(M))
+        upper = max(-math.log(float((Pt[i] * Q ** (1 - t)).sum())) for i in range(nv))
+        if best is None or val > best[0]:
+            best = (val, upper, M, Q)
+        if upper - val < 1e-9:
+            break
+    return best
+
+
+def st_F(chain, t):
+    """F*(t) = sum_j lam_j F*_j(t) of a chain [(lam_j, site_j)] (one common slope)."""
+    if t <= 1e-12 or t >= 1 - 1e-12:
+        return 0.0
+    return sum(l * st_renyi(s, t)[0] for l, s in chain)
+
+
+def st_R(chain, e, grid=60):
+    ts = np.linspace(0, 1, grid + 1)
+    vals = [st_F(chain, t) - t * e for t in ts]
+    i = int(np.argmax(vals))
+    v, t = mf_golden(lambda t: -(st_F(chain, t) - t * e), ts[max(i - 1, 0)], ts[min(i + 1, grid)], tol=1e-9)
+    return max(-v, 0.0), t
+
+
+def st_theta_na(chain, x, grid=60):
+    ts = np.linspace(0, 0.995, grid + 1)
+    vals = [(st_F(chain, t) - t * x) / (1 - t) for t in ts]
+    i = int(np.argmax(vals))
+    v, t = mf_golden(lambda t: -(st_F(chain, t) - t * x) / (1 - t), ts[max(i - 1, 0)], ts[min(i + 1, grid)], tol=1e-9)
+    return max(-v, 0.0)
+
+
+def st_E(site):
+    """Threshold of a site: max_M -ln sum_a prod_phi pi_phi(a)^M(phi) (a concave programme)."""
+    from scipy.optimize import minimize
+    lP = np.log(site["P"])
+    nv = len(lP)
+    res = minimize(lambda M: math.log(float(np.exp(M @ lP).sum())), np.ones(nv) / nv, method="SLSQP", bounds=[(0, 1)] * nv,
+                   constraints=[{"type": "eq", "fun": lambda M: M.sum() - 1}], options={"ftol": 1e-15, "maxiter": 400})
+    return -float(res.fun)
+
+
+def st_a(site):
+    """Shannon capacity of the vertex channel (Blahut-Arimoto)."""
+    P = site["P"]
+    M = np.ones(len(P)) / len(P)
+    for _ in range(4000):
+        Q = M @ P
+        D = (P * np.log(P / Q[None, :])).sum(axis=1)
+        M2 = M * np.exp(D)
+        M2 /= M2.sum()
+        if np.abs(M2 - M).max() < 1e-13:
+            M = M2
+            break
+        M = M2
+    Q = M @ P
+    return float((M[:, None] * P * np.log(P / Q[None, :])).sum())
+
+
+def st_hamming(q, u):
+    return [[0.0 if a == b else u for b in range(q)] for a in range(q)]
+
+
+def st_groups(k, u, t=None):
+    """Single dips on k equally weighted groups of letters with the Hamming envelope: Psi_k, the game function, h, a, E."""
+    Psi = lambda s: math.log((math.exp(s) + k - 1) / k) - s / k
+    if t is not None:
+        return t * Psi(u) - Psi(t * u)
+    h = -mf_golden(lambda tt: -(tt * Psi(u) - Psi(tt * u)), 0.0, 1.0, tol=1e-12)[0]
+    p = math.exp(u) / (math.exp(u) + k - 1)
+    a = math.log(k) + p * math.log(p) + (1 - p) * math.log((1 - p) / (k - 1))
+    return h, a, Psi(u)
+
+
+ST_SITES = dict(
+    bin=([0.7, 0.3], st_hamming(2, 1.0)),
+    path=([0.5, 0.3, 0.2], [[0, 0.8, 2.4], [0.8, 0, 1.6], [2.4, 1.6, 0]]),
+    tri=([0.2, 0.5, 0.3], [[0, 1.0, 2.0], [1.0, 0, 1.5], [2.0, 1.5, 0]]),
+    asym=([0.5, 0.3, 0.2], [[0, 1, 2], [0.5, 0, 1.5], [1, 0.5, 0]]),
+)
+
+
+@conjecture("XXII.1 Theorem 11.99 (the site function is a Renyi capacity): for a site with law pi and envelope d (zero diagonal, triangle inequality, not necessarily symmetric), Lipschitz polytope L = {g : g(a) - g(b) <= d(a,b)} with vertices V and Gibbs laws pi_phi ~ pi e^{-phi}: max over gamma in L of -ln val((pi_phi(a)/pi_gamma(a))^t) equals max_M -t ln sum_a (sum_phi M(phi) pi_phi(a)^t)^{1/t} = min_Q max_phi (1-t) D_t(pi_phi || Q); the maximising gamma has the Renyi centre as its Gibbs law and lies in L (closure under soft minima); no member of L does better; the example sites have 2, 4, 6, 5 vertices and h = max_t F*(t) = 0.025034, 0.089589, 0.066729, 0.045407")
+def t_sites_renyi(rng, trials):
+    stats = dict(gap=0.0, centre=0.0, random=-1.0)
+    sites = {k: st_site(*v) for k, v in ST_SITES.items()}
+    if [len(sites[k]["V"]) for k in ("bin", "path", "tri", "asym")] != [2, 4, 6, 5]:
+        return False, dict(reason="number of vertices of the example sites", got=[len(s["V"]) for s in sites.values()])
+    extra = []
+    for _ in range(max(2, trials // 100)):
+        q = int(rng.integers(2, 4))
+        d = rng.uniform(0.3, 2.0, (q, q))
+        np.fill_diagonal(d, 0.0)
+        for k in range(q):                                              # shortest-path closure: the triangle inequality
+            d = np.minimum(d, d[:, [k]] + d[[k], :])
+        extra.append(st_site(rng.dirichlet(np.ones(q) * 3), d))
+    for site in list(sites.values()) + extra:
+        q = len(site["pi"])
+        for t in (0.2, float(rng.uniform(0.3, 0.7)), 0.85):
+            val, upper, M, Q = st_renyi(site, t)
+            stats["gap"] = max(stats["gap"], upper - val)
+            if not (-1e-9 <= upper - val <= 1e-7):
+                return False, dict(reason="primal and dual form of the Renyi capacity differ", t=t, primal=val, dual=upper)
+            gstar = -np.log(Q / site["pi"])
+            if any(gstar[a] - gstar[b] > site["d"][a][b] + 1e-7 for a in range(q) for b in range(q)):
+                return False, dict(reason="the instance whose Gibbs law is the Renyi centre is not in the class", t=t)
+            at = st_game(site, gstar, t)
+            stats["centre"] = max(stats["centre"], abs(at - val))
+            if abs(at - val) > 2e-7:
+                return False, dict(reason="the game at the Renyi centre does not have the Renyi value", t=t, game=at, renyi=val)
+            for _ in range(max(3, trials // 80)):
+                w = rng.dirichlet(np.ones(len(site["V"])) * float(rng.choice([0.3, 1.0])))
+                g = sum(wi * v for wi, v in zip(w, site["V"]))            # a random member of L
+                fg = st_game(site, g, t)
+                stats["random"] = max(stats["random"], fg - val)
+                if fg > val + 2e-7:
+                    return False, dict(reason="an additive instance beats the Renyi value", t=t, game=fg, renyi=val)
+    for name, want in (("bin", 0.025034), ("path", 0.089589), ("tri", 0.066729), ("asym", 0.045407)):
+        h = st_R([(1.0, sites[name])], 0.0)[0]
+        if abs(h - want) > 2e-6:
+            return False, dict(reason="h of an example site", site=name, value=h, expected=want)
+    return True, stats
+
+
+@conjecture("XXII.2 Theorems 11.98, 11.99, Propositions 11.100, 11.102 (chains of several site types): F* = sum_j lam_j F*_j at one common slope; for the chain of half binary sites (pi = (0.7, 0.3), u = 1) and half three-state path sites (steps 0.8, 1.6; pi = (0.5, 0.3, 0.2)): E = 0.251877, a = 0.195046, h = 0.057275, R^max(0.3E) = 0.027759 < 0.030121 = the average of the two types at the common accuracy (the exponents do not add); the pair identity theta_na(e + R(e)) = R(e); on the uniform cube the dictionary: (1-t) C_t of the binary symmetric channel with crossover 1/(1+e^u) is t ln cosh(u/2) - ln cosh(tu/2), its capacity is KL(p_u || 1/2) and theta_na is the inverse sphere-packing exponent; a two-letter site with the asymmetric envelope (u1, u2) is the symmetric one with u = (u1+u2)/2 and the site law tilted by (u2-u1)/2")
+def t_sites_chain(rng, trials):
+    sb, sp = st_site(*ST_SITES["bin"]), st_site(*ST_SITES["path"])
+    mix = [(0.5, sb), (0.5, sp)]
+    E = 0.5 * st_E(sb) + 0.5 * st_E(sp)
+    a = 0.5 * st_a(sb) + 0.5 * st_a(sp)
+    h = st_R(mix, 0.0)[0]
+    r3 = st_R(mix, 0.3 * E)[0]
+    avg = 0.5 * st_R([(1.0, sb)], 0.3 * E)[0] + 0.5 * st_R([(1.0, sp)], 0.3 * E)[0]
+    got = dict(E=E, a=a, h=h, R03=r3, average=avg)
+    want = dict(E=0.251877, a=0.195046, h=0.057275, R03=0.027759, average=0.030121)
+    for k in want:
+        if abs(got[k] - want[k]) > 3e-6:
+            return False, dict(reason="numbers of the mixed chain", quantity=k, value=got[k], expected=want[k])
+    if not r3 < avg - 1e-3:
+        return False, dict(reason="the exponents of the site types add", chain=r3, average=avg)
+    worst = 0.0
+    for e in (0.0, 0.3 * st_E(sp)):
+        R = st_R([(1.0, sp)], e)[0]
+        worst = max(worst, abs(st_theta_na([(1.0, sp)], e + R) - R))
+    if worst > 1e-6:
+        return False, dict(reason="pair identity theta_na(e + R(e)) = R(e)", err=worst)
+    dic = 0.0
+    for _ in range(max(4, trials // 60)):
+        u, t = float(rng.uniform(0.3, 3)), float(rng.uniform(0.1, 0.9))
+        cube = st_site([0.5, 0.5], st_hamming(2, u))
+        closed = t * math.log(math.cosh(u / 2)) - math.log(math.cosh(t * u / 2))
+        pu = 1 / (1 + math.exp(u))
+        bsc = (1 - t) * math.log(2) - math.log(pu ** t + (1 - pu) ** t)          # (1-t) C_t of the binary symmetric channel
+        dic = max(dic, abs(st_renyi(cube, t)[0] - closed), abs(bsc - closed), abs(st_a(cube) - mf_kl(pu, 0.5)), abs(st_E(cube) - math.log(math.cosh(u / 2))))
+        x = float(rng.uniform(0.05, 0.9)) * math.log(math.cosh(u / 2))
+        lo, hi = pu, 0.5                                                           # sphere-packing: KL(rho || p_u) = x, exponent KL(rho || 1/2)
+        for _ in range(60):
+            mid = 0.5 * (lo + hi)
+            if mf_kl(mid, pu) <= x:
+                lo = mid
+            else:
+                hi = mid
+        dic = max(dic, abs(st_theta_na([(1.0, cube)], x) - mf_kl(lo, 0.5)))
+        u1, u2, p = float(rng.uniform(0.2, 2)), float(rng.uniform(0.2, 2)), float(rng.uniform(0.2, 0.8))
+        asym = st_site([1 - p, p], [[0.0, u1], [u2, 0.0]])
+        kap = (u2 - u1) / 2                                                        # psi = psi' + kap |x| with psi' symmetric-Lipschitz
+        ww = np.array([1 - p, p * math.exp(-kap)])
+        sym = st_site(ww / ww.sum(), st_hamming(2, (u1 + u2) / 2))
+        dic = max(dic, abs(st_renyi(asym, t)[0] - st_renyi(sym, t)[0]))
+    if dic > 2e-6:
+        return False, dict(reason="dictionary on the cube / normal form of an asymmetric two-letter site", err=dic)
+    return True, dict(got, pair=worst, dictionary=dic)
+
+
+@conjecture("XXII.3 Proposition 11.103(d),(e) (which site law is hardest; uniform sites group their letters): with Psi_k(s) = ln((e^s + k - 1)/k) - s/k and h_k = max_t[t Psi_k(u) - Psi_k(tu)] (single dips on k equally weighted groups): h_k = h_{k+1} exactly at e^u = k(k-1), k = 2..5, with h_k > h_{k+1} below; the uniform three-letter Hamming site has (h, a, E) = (h_3, a_3, E_3) and the uniform four-letter site has each of h, a, E equal to the larger of its values for k = 2 and k = 4, and F*(t) = max(F*_2(t), F*_4(t)) pointwise (u = 1: h = h_2, a = a_4); at u = 0.5 the three-letter law (0.02, 0.49, 0.49) has a larger h than the uniform law (two letters: 0.007673 against 0.007425), at u = 0.3 a larger a, and at u = 1 the law (0.05, 0.5, 0.45) has a larger threshold E (0.120196 against 0.119499)")
+def t_sites_hardest_law(rng, trials):
+    stats = {}
+    for k in (2, 3, 4, 5):
+        u = math.log(k * (k - 1))
+        hk, hk1 = st_groups(k, u)[0], st_groups(k + 1, u)[0]
+        below = st_groups(k, 0.9 * u)[0] - st_groups(k + 1, 0.9 * u)[0]
+        above = st_groups(k, 1.1 * u)[0] - st_groups(k + 1, 1.1 * u)[0]
+        if abs(hk - hk1) > 1e-10 or not (below > 0 > above):
+            return False, dict(reason="crossing of the groupings k and k+1 is not at e^u = k(k-1)", k=k, hk=hk, hk1=hk1, below=below, above=above)
+    for u in (0.5, 1.0, 2.0):
+        s3 = st_site([1 / 3] * 3, st_hamming(3, u))
+        got = (st_R([(1.0, s3)], 0.0)[0], st_a(s3), st_E(s3))
+        if max(abs(g - w) for g, w in zip(got, st_groups(3, u))) > 2e-6:
+            return False, dict(reason="uniform three-letter site against single dips", u=u, got=got, closed=st_groups(3, u))
+        s4 = st_site([0.25] * 4, st_hamming(4, u))
+        got = (st_R([(1.0, s4)], 0.0)[0], st_a(s4), st_E(s4))
+        want = tuple(max(x, y) for x, y in zip(st_groups(2, u), st_groups(4, u)))
+        if max(abs(g - w) for g, w in zip(got, want)) > 2e-6:
+            return False, dict(reason="uniform four-letter site against the best grouping", u=u, got=got, want=want)
+        stats[f"u{u}"] = got[0]
+    s4 = st_site([0.25] * 4, st_hamming(4, 1.0))
+    for t in (0.3, 0.6, 0.65, 0.7, 0.9):
+        f = st_renyi(s4, t)[0]
+        if abs(f - max(st_groups(2, 1.0, t), st_groups(4, 1.0, t))) > 1e-7:
+            return False, dict(reason="F* of the uniform four-letter site is not the upper envelope of the two groupings", t=t, value=f)
+    if not (st_groups(2, 1.0)[0] > st_groups(4, 1.0)[0] and st_groups(4, 1.0)[1] > st_groups(2, 1.0)[1]):
+        return False, dict(reason="at u = 1 the two groupings are not ordered differently for h and for a")
+    near2 = st_site([0.02, 0.49, 0.49], st_hamming(3, 0.5))
+    unif = st_site([1 / 3] * 3, st_hamming(3, 0.5))
+    h_near, h_unif = st_R([(1.0, near2)], 0.0)[0], st_R([(1.0, unif)], 0.0)[0]
+    if not (h_near > h_unif + 2e-4 and abs(st_groups(2, 0.5)[0] - 0.007673) < 1e-6 and abs(h_unif - 0.007425) < 1e-6):
+        return False, dict(reason="small slope: a law near two letters is not harder than the uniform one", near=h_near, uniform=h_unif)
+    a_near, a_unif = st_a(st_site([0.02, 0.49, 0.49], st_hamming(3, 0.3))), st_a(st_site([1 / 3] * 3, st_hamming(3, 0.3)))
+    if not a_near > a_unif + 3e-4:
+        return False, dict(reason="small slope: capacity", near=a_near, uniform=a_unif)
+    E_field, E_unif = st_E(st_site([0.05, 0.5, 0.45], st_hamming(3, 1.0))), st_E(st_site([1 / 3] * 3, st_hamming(3, 1.0)))
+    if abs(E_field - 0.120196) > 2e-6 or abs(E_unif - 0.119499) > 2e-6:
+        return False, dict(reason="thresholds of the three-letter site at u = 1", field=E_field, uniform=E_unif)
+    return True, dict(stats, h_near=h_near, h_unif=h_unif, a_near=a_near, a_unif=a_unif, E_field=E_field, E_unif=E_unif)
+
+
+@conjecture("XXII.4 Proposition 11.104 (local ensemble-averaged data do not change the non-adaptive exponent; with Lemma A of the Scientific Discovery Division): for a linear code C whose dual has minimum distance at least k + 1 (here the [7,3] simplex code, k = 2), a centre a and the C-symmetrised cone psi_C = u d(., a + C): the Gibbs measures of psi_C and of its truncation max(psi_C, u r) have exactly uniform marginals on every set of at most k coordinates (so a k-body marginal oracle answers identically on both), while the single cone does not; A(psi_C)/A(psi_C^tr) - 1 >= (A(cone)/A(cone^tr) - 1)/|C| and the two functions differ on at most |C| |B(r-1)| points; hence a non-adaptive algorithm with that oracle needs (1 - 2 delta)/(|C| q) evaluations at the accuracy of the single cone minus ln |C|")
+def t_sites_marginal_oracle(rng, trials):
+    n = 7
+    gens = [0b1010101, 0b0110011, 0b0001111]
+    C = sorted({(a * gens[0]) ^ (b * gens[1]) ^ (c * gens[2]) for a in (0, 1) for b in (0, 1) for c in (0, 1)})
+    pts = np.arange(1 << n)
+    bits = (pts[:, None] >> np.arange(n)[None, :]) & 1
+    popc = np.array([bin(x).count("1") for x in range(1 << n)])
+    stats = dict(marg=0.0, single=0.0, slack=1e9)
+    for _ in range(max(3, trials // 60)):
+        u, a = float(rng.uniform(0.3, 1.5)), int(rng.integers(0, 1 << n))
+        dC = np.min(np.stack([popc[pts ^ a ^ c] for c in C]), axis=0)          # distance to the coset a + C
+        d1 = popc[pts ^ a]
+        for r in (1, 2):
+            wC, w1 = np.exp(-u * dC), np.exp(-u * d1)
+            wCt, w1t = np.minimum(wC, math.exp(-u * r)), np.minimum(w1, math.exp(-u * r))
+            for w in (wC, wCt):
+                mu = w / w.sum()
+                for i in range(n):
+                    for j in range(i, n):
+                        for vi in (0, 1):
+                            for vj in (0, 1):
+                                sel = (bits[:, i] == vi) & (bits[:, j] == vj)
+                                want = 0.5 if i == j and vi == vj else (0.0 if i == j else 0.25)
+                                stats["marg"] = max(stats["marg"], abs(float(mu[sel].sum()) - want))
+            m1 = w1 / w1.sum()
+            stats["single"] = max(stats["single"], abs(float(m1[bits[:, 0] == 1].sum()) - 0.5))
+            lhs = wC.sum() / wCt.sum() - 1
+            rhs = (w1.sum() / w1t.sum() - 1) / len(C)
+            stats["slack"] = min(stats["slack"], lhs - rhs)
+            ball = sum(math.comb(n, j) for j in range(r))
+            if stats["marg"] > 1e-12:
+                return False, dict(reason="the symmetrised cone or its truncation has a non-uniform marginal of order at most two", err=stats["marg"])
+            if lhs < rhs - 1e-12:
+                return False, dict(reason="the effect of truncating the symmetrised cone is below that of the single cone divided by |C|", lhs=lhs, rhs=rhs)
+            if int((wC != wCt).sum()) > len(C) * ball:
+                return False, dict(reason="the symmetrised cone and its truncation differ on more than |C| balls", count=int((wC != wCt).sum()), bound=len(C) * ball)
+    if stats["single"] < 1e-3:
+        return False, dict(reason="the single cone has uniform one-body marginals (the control has no power)")
+    return True, stats
+
+
+@conjecture("XXI.5 Theorem 11.90(c), integral form, and the remark on more than two letters: on a binary type class the game function of a centre is an integral of the mutual information along the tilting path, t Psi(u) - Psi(tu) = t u int_{tu}^{u} I(s) s^-2 ds with I(s) = F(l(s)) the mutual information at slope s (also for single dips on k equally weighted groups, I_k(s) = ln k - H of the conditional law); for a Potts pair P(b, x) ~ a_b c_x exp(s 1[b = x]) on three letters the mutual information never exceeds the larger of its values for the uniform laws on two and on three letters, which cross at s = 0.519366 (two letters win below)")
+def t_slice_integral_potts(rng, trials):
+    xs, ws = np.polynomial.legendre.leggauss(24)
+    stats = dict(integral=0.0, potts=-1.0)
+    for _ in range(max(4, trials // 50)):
+        m, k, u, t = float(rng.uniform(0.15, 0.85)), float(rng.uniform(0.15, 0.85)), float(rng.uniform(0.4, 3)), float(rng.uniform(0.15, 0.85))
+        s_nodes = 0.5 * (u - t * u) * xs + 0.5 * (u + t * u)
+
+        def I_s(s):
+            l = mf_golden(lambda l: -(s * l - sl_F(m, k, l)), 0.0, sl_hi(m, k) * (1 - 1e-13), tol=1e-13)[1]
+            return sl_F(m, k, l)
+        val = t * u * 0.5 * (u - t * u) * sum(w * I_s(s) / s ** 2 for s, w in zip(s_nodes, ws))
+        stats["integral"] = max(stats["integral"], abs(val - (t * sl_Psi(m, k, u) - sl_Psi(m, k, t * u))))
+        kk = int(rng.integers(2, 6))
+        Ik = lambda s: math.log(kk) + (lambda p: p * math.log(p) + (1 - p) * math.log((1 - p) / (kk - 1)))(math.exp(s) / (math.exp(s) + kk - 1))
+        val = t * u * 0.5 * (u - t * u) * sum(w * Ik(s) / s ** 2 for s, w in zip(s_nodes, ws))
+        stats["integral"] = max(stats["integral"], abs(val - st_groups(kk, u, t)))
+    if stats["integral"] > 1e-7:
+        return False, dict(reason="the game function is not the integral of the mutual information along the tilting path", err=stats["integral"])
+    I_unif = lambda kk, s: math.log(kk) + (lambda p: p * math.log(p) + (1 - p) * math.log((1 - p) / (kk - 1)))(math.exp(s) / (math.exp(s) + kk - 1))
+    if abs(I_unif(2, 0.519366) - I_unif(3, 0.519366)) > 1e-7 or not (I_unif(2, 0.4) > I_unif(3, 0.4) and I_unif(2, 0.7) < I_unif(3, 0.7)):
+        return False, dict(reason="crossing of the uniform laws on two and three letters")
+    N = max(3000, 60 * trials)
+    for s in (0.3, 0.52, 1.0, 2.0):
+        fa, fc = rng.normal(0, 1.5, (N, 3)), rng.normal(0, 1.5, (N, 3))
+        fa[: N // 4, 2] -= 8.0                                           # tables that nearly live on two letters
+        fc[: N // 4, 2] -= 8.0
+        fa[: N // 8, :2] = 0.0
+        fc[: N // 8, :2] = 0.0
+        P = np.exp(fa[:, :, None] + fc[:, None, :] + s * np.eye(3)[None, :, :])
+        P /= P.sum(axis=(1, 2), keepdims=True)
+        pb, px = P.sum(axis=2, keepdims=True), P.sum(axis=1, keepdims=True)
+        mi = (P * np.log(P / (pb * px))).sum(axis=(1, 2))
+        bound = max(I_unif(2, s), I_unif(3, s))
+        stats["potts"] = max(stats["potts"], float(mi.max() - bound))
+        if mi.max() > bound + 1e-9:
+            return False, dict(reason="a Potts pair with more mutual information than the uniform laws on two or three letters", s=s, mi=float(mi.max()), bound=bound)
+        if s < 0.5 and not mi.max() > I_unif(3, s) + 1e-5:
+            return False, dict(reason="below the crossing no table near two letters beats the uniform law on three", s=s)
+    return True, stats
+
+
 @conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
 def t_dead_exact_free_energy(rng, trials):
     """Refuted (second referee, C1): with positive slack off the diagonal, an exact certificate of ln Z is the whole
@@ -7979,6 +8349,43 @@ def t_dead_pair_identity_threshold(rng, trials):
     if best < 0.9 * R0:
         return False, dict(reason="at u = 0.30 the best cone around a barrier shell certifies only 81% of the dip exponent at the accuracy S(0); the cone around the optimal dip shell certifies nothing", dip_exponent=R0, shell=x0, best_cone=best, at_dip_shell=vals[round(x0, 4)])
     return True, dict(dip_exponent=R0, shell=x0, best_cone=best)
+
+
+@conjecture("DEAD.23 The site function F* is concave in the slope (hence R^max is smooth and the best split of the accuracy between site types is exact)", expect_fail=True)
+def t_dead_site_function_concave(rng, trials):
+    tri = st_site(*ST_SITES["tri"])
+    f = [st_renyi(tri, t)[0] for t in (0.376, 0.378, 0.380)]
+    d2 = (f[0] - 2 * f[1] + f[2]) / 0.002 ** 2
+    ctrl = []
+    for t0 in (0.2, 0.6):
+        g = [st_renyi(tri, t)[0] for t in (t0 - 0.002, t0, t0 + 0.002)]
+        ctrl.append((g[0] - 2 * g[1] + g[2]) / 0.002 ** 2)
+    s4 = st_site([0.25] * 4, st_hamming(4, 1.0))
+    g = [st_renyi(s4, t)[0] for t in (0.64, 0.65, 0.66)]
+    d4 = (g[0] - 2 * g[1] + g[2]) / 0.01 ** 2
+    if d2 > 0.5 and d4 > 0.01 and max(ctrl) < -0.3:
+        return False, dict(reason="the triangle site (1, 1.5, 2) has a convex kink of F* at the label switch t = 0.378, the uniform four-letter Hamming site at t = 0.65 where the best grouping of its letters changes; away from the switches F* is strictly concave",
+                           second_difference_triangle=d2, second_difference_four_letters=d4, controls=ctrl)
+    return True, dict(second_difference_triangle=d2, second_difference_four_letters=d4, controls=ctrl)
+
+
+@conjecture("DEAD.24 Beyond two letters the uniform site law is still the hardest (a field always helps, Proposition 11.65(b); no known part is harder than none, Corollary 11.91)", expect_fail=True)
+def t_dead_uniform_law_hardest(rng, trials):
+    out = {}
+    E_field, E_unif = st_E(st_site([0.05, 0.5, 0.45], st_hamming(3, 1.0))), st_E(st_site([1 / 3] * 3, st_hamming(3, 1.0)))
+    h_near = st_R([(1.0, st_site([0.02, 0.49, 0.49], st_hamming(3, 0.5)))], 0.0)[0]
+    h_unif = st_R([(1.0, st_site([1 / 3] * 3, st_hamming(3, 0.5)))], 0.0)[0]
+    # control: two letters, where the statement is a theorem
+    two = True
+    for u in (0.5, 1.0, 2.0):
+        for t in (0.2, 0.5, 0.8):
+            f0 = st_renyi(st_site([0.5, 0.5], st_hamming(2, u)), t)[0]
+            for p in (0.3, 0.1):
+                two &= st_renyi(st_site([1 - p, p], st_hamming(2, u)), t)[0] <= f0 + 1e-9
+    if E_field > E_unif + 5e-4 and h_near > h_unif + 2e-4 and two:
+        return False, dict(reason="three letters, Hamming envelope: at u = 1 the law (0.05, 0.5, 0.45) has a larger threshold than the uniform law, at u = 0.5 the law (0.02, 0.49, 0.49) has a larger exponent at vanishing accuracy; for two letters the uniform law is the hardest in all 18 cases tried",
+                           E_field=E_field, E_uniform=E_unif, h_near_two_letters=h_near, h_uniform=h_unif)
+    return True, dict(E_field=E_field, E_uniform=E_unif, h_near=h_near, h_uniform=h_unif, two_letters_ok=two)
 
 
 def main():

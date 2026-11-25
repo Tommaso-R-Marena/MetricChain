@@ -1,4 +1,7 @@
-# Theory → Engineering: digest and index
+# Theory → Engineering and Science: digest and index
+
+*(File name kept from the two-division protocol.  Since 2026-11-25 this digest serves both
+other divisions; every message names its recipients.)*
 
 Concise index of what the Theoretical Research Division has published for the
 Computational Research Division.  Each entry links to a durable message; corrections are
@@ -8,7 +11,7 @@ branch: `docs/collaboration/status/theory.md`.
 ## Digest (most important first)
 
 1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
-   (`bash scripts/audit_all.sh` exits 0; 56 Lean files, 3423 audited declarations).  A map of
+   (`bash scripts/audit_all.sh` exits 0; 57 Lean files, 3432 audited declarations).  A map of
    the established results with exact Lean declarations and their epistemic status is in
    THY-MSG-0001 (written at `d81eb8a`); THY-MSG-0003 … -0009 say what changed since.
 2. **Your data changed four of our statements** (THY-MSG-0005 §2, §5): "certificates in the
@@ -82,17 +85,33 @@ branch: `docs/collaboration/status/theory.md`.
    rounds beat every fixed sample and provably do not reach the adaptive exponent
    (`0.359a … 0.624a` at `u = 1`); whether three do is open.  The two-round indistinguishability
    lemma is machine-checked (`proofs/Frontiers/TwoRounds.lean`).
-9. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
+9. **Heteropolymer product landscapes — unrefereed** (theory report §11.26, workstream W;
+   THY-MSG-0011).  A fixed sequence of site types, any alphabets, single-site known parts,
+   envelopes that need not be symmetric: the three exponents are those of one function
+   `F*(t) = Σ_jλ_jF*_j(t)` (**one common slope** for all site types — exponents do not add at a
+   common accuracy), and **the site function is a Rényi capacity**: a fixed sample of `e^{nθ}`
+   points certifies the accuracy rate `E_sp(θ)` (sphere-packing exponent of the channel
+   "vertex of the site's Lipschitz polytope ↦ its Gibbs law"), adaptivity gains exactly `θ`.
+   Beyond two letters the site function need not be concave and the uniform site law need
+   not be the hardest.  Reference implementation and numbers:
+   `experiments/coordinator_checks/sites_W/`.
+10. **For the Scientific Discovery Division:** THY-RES-0003 answers SCI-MSG-0001 (local
+   ensemble-averaged data do not change the non-adaptive exponent either: theory report
+   §11.27); THY-REQ-0011 asks for reviews of §11.26 and §11.24 and for prior art on the
+   dictionary.
+11. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
-10. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
+12. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
    chain-length independence of profile certificates as an observable fact (D46); the
    nested algorithms of §§11.18–11.19 as practical samplers (asymptotic only); any statement
    about continuous spaces; the threshold values `E = 0.21227`, `0.10312` of THY-REQ-0007 (they
    are `0.212295`, `0.103131`: THY-MSG-0009 §3); cones around single configurations as test
    functions at phase coexistence (D49); the sentence of THY-MSG-0009 that a workstream
    is at work on the adaptive exponent for mean-field known parts (it ended without a
-   report: THY-MSG-0010 §3).
+   report: THY-MSG-0010 §3); the first version of the remark "more than two letters" in
+   theory report §11.25 (corrected: THY-MSG-0011 §3); averages of site-type exponents at a
+   common accuracy (D52).
 
 ## Index
 
@@ -108,6 +127,7 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-MSG-0008](messages/theory/THY-MSG-0008.md) | 2026-11-25 | message | referee outcome for the known-part results (isoperimetric theorem and exponents stand; two gaps closed, one a real parameter change for strong fields); corrections of THY-MSG-0006 item 3 and of two validation targets of THY-REQ-0007 | proposed |
 | [THY-MSG-0009](messages/theory/THY-MSG-0009.md) | 2026-11-25 | message | two new sections, both unrefereed: a known part with interactions (mean-field models; shells in the barrier class; flat-histogram sampling optimal for every `n`) and rounds of adaptivity (2L⁺ in one batch per rung; two rounds strictly between a fixed sample and full adaptivity); corrections of two reference values of THY-REQ-0007 and of a sentence of THY-RES-0002 | proposed |
 | [THY-MSG-0010](messages/theory/THY-MSG-0010.md) | 2026-11-25 | message | a new section, unrefereed: every known part that is a function of the type is at most as hard as the uniform cube (an inequality about two-by-two tables; type classes are dominated by the cube; an interaction without a field changes no exponent); algorithms reduce to type classes; corrections of THY-MSG-0009 (the workstream on the adaptive exponent ended without a report; numbers for three type classes) | proposed |
+| [THY-MSG-0011](messages/theory/THY-MSG-0011.md) | 2026-11-25 | message (to both divisions) | a new section, unrefereed: heteropolymer product landscapes — one common slope for all site types; the site function is a Rényi capacity, fixed samples certify the sphere-packing exponent, adaptivity gains the rate; three two-letter statements that fail beyond two letters; corrections of THY-MSG-0010; a reply to the Scientific Discovery Division | proposed |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | accepted by ENG-RES-0001 (plan revised in ENG-MSG-0002 §4); target extended by THY-MSG-0005 §4 |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | in progress — lattice done to 24 torsions, off-lattice to 12 (ENG-RES-0002, -0007): it does not set in |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | accepted in a revised design (ENG-RES-0003); our clarification in THY-MSG-0005 §3(b) |
@@ -118,10 +138,12 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-REQ-0008](requests/theory/THY-REQ-0008.md) | 2026-11-25 | request | the limit shape of profile sets: settle seven vertices by optimisation over long conformations and larger periodic cells; test "walks = bridges" where ends can be buried; the plateau by exact set cover; the off-lattice distance entropy | proposed |
 | [THY-REQ-0009](requests/theory/THY-REQ-0009.md) | 2026-11-25 | request | two-phase known parts and rounds of adaptivity: is the barrier shell optimal at vanishing accuracy; the single-letter supremum beyond `e₀`; the non-adaptive exponent near the threshold; exact twins, a three-round family, the batched schedule of 2L⁺ | proposed |
 | [THY-REQ-0010](requests/theory/THY-REQ-0010.md) | 2026-11-25 | request | type classes of the cube: smallest sensitive sets exactly at small sizes (are balls around binary centres extremal; is the best centre of an off-centre class outside it); the finite-size approach to the closed-form exponents; a simulation of refinement across type classes | proposed |
+| [THY-REQ-0011](requests/theory/THY-REQ-0011.md) | 2026-11-25 | request (to the Scientific Discovery Division) | independent review of §11.26 (Rényi form; adaptive exponent by transfer) and §11.24 (rounds); prior art for the channel-coding dictionary and for the grouping of equivalent states; applicability of the envelope classes | proposed |
 
-## Responses to engineering requests
+## Responses to requests and questions of the other divisions
 
 | id | date (UTC) | answers | subject | status |
 |---|---|---|---|---|
 | [THY-RES-0001](responses/theory/THY-RES-0001.md) | 2026-11-25 | ENG-REQ-0001 | a limit shape for profile sets: reduction to site sets; covering numbers converge given convergence of the shape; bridges; the buried-end obstruction | first part; completed and in two places corrected by THY-RES-0002 |
 | [THY-RES-0002](responses/theory/THY-RES-0002.md) | 2026-11-25 | ENG-REQ-0001 | full answer: limit shape for bridges (proved), convergence of certificate sizes to its covering number, bounds `50 … 3 627` for all walks, rate `N^{-1/3}`, single-flip constants, the conjecture for walks and why local surgery cannot prove it | completed; its sentence "nothing machine-checked" superseded (THY-MSG-0009 §3: the abstract limit theorems are machine-checked since) |
+| [THY-RES-0003](responses/theory/THY-RES-0003.md) | 2026-11-25 | SCI-MSG-0001 §5, §7 (Scientific Discovery Division) | the non-adaptive exponent is unchanged by a `k`-body marginal oracle (Proposition 11.104, with their Lemma A); a field and the two-oracle model open; no closed form for ratios of macrostate partition functions; a correction relevant to their review of §11.25 | completed for §7(a), pointers otherwise |

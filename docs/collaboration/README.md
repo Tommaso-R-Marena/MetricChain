@@ -1,16 +1,20 @@
 # MetricChain collaboration hub
 
-Two independent research divisions work on this repository:
+Three independent research divisions work on this repository (the third was introduced by
+the research owner on 2026-11-25):
 
 | division | branch (writes only here) | reads |
 |---|---|---|
-| **Theoretical Research Division** (theory) | `claude/determined-ride-og1u7j` | `research/ubuntu-engineering` |
-| **Computational Research Division** (engineering) | `research/ubuntu-engineering` | `claude/determined-ride-og1u7j` |
+| **Theoretical Research Division** (theory) | `claude/determined-ride-og1u7j` | the other two |
+| **Computational Research Division** (engineering) | `research/ubuntu-engineering` | the other two |
+| **Scientific Discovery, Translation & Independent Validation Division** (science) | `research/scientific-translation` | the other two |
 
-Each division writes exclusively to its own branch and reads the other's branch without
-modifying it.  No automatic merges, no force pushes, no changes to `main`, no pull requests
-without the research owner's explicit authorisation.  This file is the theory branch's copy
-of the common protocol; the engineering branch may keep its own copy.
+Each division writes exclusively to its own branch and reads the others' branches without
+modifying them.  No automatic merges, no force pushes, no changes to `main`, no pull requests
+without the research owner's explicit authorisation.  The three divisions are equal
+collaborators with complementary priorities and draw on one shared allocation of
+resources.  This file is the theory branch's copy of the common protocol; the other
+branches may keep their own copies.
 
 ## Layout and ownership
 
@@ -28,7 +32,16 @@ docs/collaboration/
     responses/engineering/        engineering ENG-RES-nnnn.md  (answers to THY-REQ)
     status/theory.md              theory
     status/engineering.md         engineering
+    SCIENCE_TO_ALL.md             science     digest and index of what science has sent
+    SCIENCE_UPSTREAM_SYNC.md      science
+    messages/science/             science     SCI-MSG-nnnn.md, SCI-REV-nnnn.md (independent reviews)
+    requests/science/             science     SCI-REQ-nnnn.md
+    responses/science/            science     SCI-RES-nnnn.md
+    status/science.md             science
 ```
+
+Every message names its intended recipients (one division or both).  `THEORY_TO_ENGINEERING.md`
+keeps its name and serves as the theory division's digest for both other divisions.
 
 ## Rules
 
@@ -92,6 +105,10 @@ git fetch origin research/ubuntu-engineering
 git log -1 origin/research/ubuntu-engineering
 git ls-tree -r --name-only origin/research/ubuntu-engineering docs/collaboration
 git show origin/research/ubuntu-engineering:docs/collaboration/ENGINEERING_TO_THEORY.md
+git fetch origin research/scientific-translation
+git log -1 origin/research/scientific-translation
+git ls-tree -r --name-only origin/research/scientific-translation docs/collaboration docs/science
+git show origin/research/scientific-translation:docs/collaboration/SCIENCE_TO_ALL.md
 ```
 
 and symmetrically `git fetch origin claude/determined-ride-og1u7j` for the engineering

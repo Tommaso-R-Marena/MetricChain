@@ -1,0 +1,27 @@
+=== w10 isoperimetry at H: chain path, n = 72 ([72]); 2 blocks, 494209 cells, 5618376 moves; E = 0.40062, a = 0.29479; setup 10.4 s ===
+sets analysed in 49.5 s
+
+ exponent function: R^ (all vertices)
+   F1 neighbourhoods {Phi_C < r} of the optimal centre classes  15 sets: e_D in [-0.270, +0.348]; least omega (maxdens form): max 0.00563 = 0.095 ln n/n (at e_D = +0.3479, theta_D = 0.0075, R(e_D) = 0.0015); (mu_H form): max 0.02466 = 0.415 ln n/n
+   F2 neighbourhoods of random centre classes                  24 sets: e_D in [-0.185, +0.363]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = -0.0634, theta_D = 0.0190, R(e_D) = 0.1215); (mu_H form): max 0.00716 = 0.121 ln n/n
+   F3 unions of two neighbourhoods                             16 sets: e_D in [-0.074, +0.192]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = +0.0031, theta_D = 0.0044, R(e_D) = 0.0882); (mu_H form): max 0.00943 = 0.159 ln n/n
+   F4 half-spaces of the cell lattice                          30 sets: e_D in [-0.371, +0.252]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = -0.2469, theta_D = 0.1063, R(e_D) = 0.2499); (mu_H form): max 0.00044 = 0.007 ln n/n
+   F5 sub-level sets of random admissible functions            24 sets: e_D in [-0.124, +0.271]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = -0.0618, theta_D = 0.0289, R(e_D) = 0.1206); (mu_H form): max 0.00000 = 0.000 ln n/n
+   F6 neighbourhoods restricted to one joint type               6 sets: e_D in [-0.285, -0.099]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = -0.2825, theta_D = 0.1939, R(e_D) = 0.2827); (mu_H form): max 0.00559 = 0.094 ln n/n
+
+ exponent function: mutation: zero residual
+   F1 neighbourhoods {Phi_C < r} of the optimal centre classes  15 sets: e_D in [-0.270, +0.348]; least omega (maxdens form): max 0.00798 = 0.134 ln n/n (at e_D = +0.0770, theta_D = 0.0606, R(e_D) = 0.0498); (mu_H form): max 0.03096 = 0.521 ln n/n
+   F2 neighbourhoods of random centre classes                  24 sets: e_D in [-0.185, +0.363]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = -0.0634, theta_D = 0.0190, R(e_D) = 0.1116); (mu_H form): max 0.00811 = 0.136 ln n/n
+   F3 unions of two neighbourhoods                             16 sets: e_D in [-0.074, +0.192]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = +0.0031, theta_D = 0.0044, R(e_D) = 0.0787); (mu_H form): max 0.01441 = 0.243 ln n/n
+   F4 half-spaces of the cell lattice                          30 sets: e_D in [-0.371, +0.252]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = -0.2469, theta_D = 0.1063, R(e_D) = 0.2472); (mu_H form): max 0.00044 = 0.007 ln n/n
+   F5 sub-level sets of random admissible functions            24 sets: e_D in [-0.124, +0.271]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = -0.0618, theta_D = 0.0289, R(e_D) = 0.1107); (mu_H form): max 0.00178 = 0.030 ln n/n
+   F6 neighbourhoods restricted to one joint type               6 sets: e_D in [-0.285, -0.099]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = -0.2825, theta_D = 0.1939, R(e_D) = 0.2825); (mu_H form): max 0.00562 = 0.095 ln n/n
+
+ exponent function: mutation: single dips only
+   F1 neighbourhoods {Phi_C < r} of the optimal centre classes  15 sets: e_D in [-0.270, +0.348]; least omega (maxdens form): max 0.00563 = 0.095 ln n/n (at e_D = +0.3479, theta_D = 0.0075, R(e_D) = 0.0015); (mu_H form): max 0.02466 = 0.415 ln n/n
+   F2 neighbourhoods of random centre classes                  24 sets: e_D in [-0.185, +0.363]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = -0.0634, theta_D = 0.0190, R(e_D) = 0.1215); (mu_H form): max 0.00716 = 0.121 ln n/n
+   F3 unions of two neighbourhoods                             16 sets: e_D in [-0.074, +0.192]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = +0.0031, theta_D = 0.0044, R(e_D) = 0.0882); (mu_H form): max 0.00943 = 0.159 ln n/n
+   F4 half-spaces of the cell lattice                          30 sets: e_D in [-0.371, +0.252]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = -0.2469, theta_D = 0.1063, R(e_D) = 0.2499); (mu_H form): max 0.00044 = 0.007 ln n/n
+   F5 sub-level sets of random admissible functions            24 sets: e_D in [-0.124, +0.271]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = -0.0618, theta_D = 0.0289, R(e_D) = 0.1206); (mu_H form): max 0.00000 = 0.000 ln n/n
+   F6 neighbourhoods restricted to one joint type               6 sets: e_D in [-0.285, -0.099]; least omega (maxdens form): max 0.00000 = 0.000 ln n/n (at e_D = -0.2825, theta_D = 0.1939, R(e_D) = 0.2827); (mu_H form): max 0.00559 = 0.094 ln n/n
+time 60 s

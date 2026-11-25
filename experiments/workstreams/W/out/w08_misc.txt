@@ -1,0 +1,39 @@
+=== (i) Lemma T' by brute force ===
+  480 cases (sets of four kinds x m = 1, 2, 3, 5) on a chain of 3 ternary + 3 binary sites (216 points):
+  violations of (2) pi(A~) >= pi(A)/#classes: 0; of (3) alpha_A - q/m <= alpha <= alpha_A~: 0; of (4) alpha_A~ - alpha = I(X_I; V | U_I, T_I) >= 0: 0; largest alpha_A - alpha = 0.3539
+
+=== (ii) asymmetric binary envelope = symmetric envelope + field ===
+  p = 0.3, (u1, u2) = (1.5, 0.5): E = 0.117031 / 0.117031; a = 0.108105 / 0.108105
+  p = 0.5, (u1, u2) = (2.0, 0.2): E = 0.121999 / 0.121999; a = 0.111003 / 0.111003
+  p = 0.1, (u1, u2) = (0.4, 1.8): E = 0.032880 / 0.032880; a = 0.030000 / 0.030000
+  p = 0.7, (u1, u2) = (1.0, 0.0): E = 0.020521 / 0.020521; a = 0.020105 / 0.020105
+  max |F*_asym(t) - F*_sym+field(t)| over 4 sites x 19 values of t: 2.8e-16
+
+=== (iii) concavity of F* for binary sites ===
+  100 binary sites (u in {0.3,1,2,4}, 25 fields in [0,6]), 201 values of t: largest second difference of F*: -5.50e-09 at (u, theta) = (0.3, np.float64(6.0))  -> concave in all cases
+
+=== (iv) the label switch of the triangle site ===
+  chain tri: kink of F* at t_c = 0.3780 (slope jump +0.00516); the two branches tie at e_c = 0.056860 = 0.1996 E, R^max(e_c) = 0.0420514 = 0.0420514
+     e < e_c: t* = 0.3829, label weights [0.    0.145 0.466 0.    0.389 0.   ]
+     e > e_c: t* = 0.3731, label weights [0.    0.    0.506 0.    0.063 0.431]
+     gamma* (last type): [ 0.      0.1537 -0.0864] / [ 0.      0.151  -0.0871];  R^max has a corner: slope -0.3829 -> -0.3731
+  chain mix(bin,tri): kink of F* at t_c = 0.3780 (slope jump +0.00305); the two branches tie at e_c = 0.043304 = 0.2041 E, R^max(e_c) = 0.0312572 = 0.0312572
+     e < e_c: t* = 0.3819, label weights [0.507 0.493]; [0.    0.145 0.466 0.    0.389 0.   ]
+     e > e_c: t* = 0.3741, label weights [0.508 0.492]; [0.    0.    0.506 0.    0.063 0.431]
+     gamma* (last type): [ 0.      0.1537 -0.0864] / [ 0.      0.1515 -0.0869];  R^max has a corner: slope -0.3819 -> -0.3741
+  chain mix2: bridge of F*_tri: [0.3731, 0.3829]; largest gap between the best split of the accuracy and R^max: 7.80e-07 at e = 0.043309 = 0.2041 E (R^max = 0.0312554, best split = 0.0312562, relative 2.5e-05)
+
+=== (v) which site law is hardest? three states, Hamming envelope ===
+  u = 1.0: uniform law: h = 0.030654, E = 0.119499, a = 0.123284;  over 171 laws on a grid of step 0.05:
+     largest h = 0.030572 at pi = [0.35 0.3  0.35]; largest E = 0.120196 at [0.05 0.5  0.45]; largest a = 0.122951 at [0.3  0.35 0.35]
+     largest F*(t; pi) - F*(t; uniform) over a third of the laws and t in {.1,.3,.5,.7,.9}: -2.81e-05
+  u = 2.0: uniform law: h = 0.117699, E = 0.474266, a = 0.433040;  over 171 laws on a grid of step 0.05:
+     largest h = 0.117413 at pi = [0.35 0.3  0.35]; largest E = 0.473084 at [0.35 0.3  0.35]; largest a = 0.432024 at [0.3  0.35 0.35]
+     largest F*(t; pi) - F*(t; uniform) over a third of the laws and t in {.1,.3,.5,.7,.9}: -9.41e-05
+
+=== (vi) dictionary with channel coding (path site) ===
+  x = 0.1 E: theta_na(x) = 0.146318 = max_rho (E_0 - x)/rho = 0.146313;  E_sp(theta_na(x)) = 0.040059 (x = 0.040062);  R(x) = 0.072194 = max_rho (E_0 - x)/(1+rho) = 0.072194
+  x = 0.3 E: theta_na(x) = 0.066899 = max_rho (E_0 - x)/rho = 0.066899;  E_sp(theta_na(x)) = 0.120186 (x = 0.120187);  R(x) = 0.043375 = max_rho (E_0 - x)/(1+rho) = 0.043375
+  x = 0.6 E: theta_na(x) = 0.017352 = max_rho (E_0 - x)/rho = 0.017352;  E_sp(theta_na(x)) = 0.240373 (x = 0.240373);  R(x) = 0.014130 = max_rho (E_0 - x)/(1+rho) = 0.014130
+  E_0(rho -> infinity) = 0.39950 (E = 0.40062);  E_0(rho)/rho at rho -> 0: 0.29461 (a = 0.29479)
+time 226 s

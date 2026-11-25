@@ -1,0 +1,15 @@
+=== w05 finite-n: chain asym, fractions [1.]; eps = 0.0 E n + 1.0 (E = 0.191059); single-letter R^max(eps_1) = 0.045407 at t* = 0.4820 ===
+  type 0 (asym): gamma* = [ 0.       0.08059 -0.61145], labels (vertices) [[0.0, -0.5, -2.0], [0.0, 0.5, 1.0]] with weights [0.5009 0.4991]
+  n =   60 [gamma] eps =    1.000: r* =   12.371, E(r*) =    1.000, maxdens = 4.4837e-02  ->  theta_n = 0.051745  (R = 0.045407; (theta_n - R) n / ln n = +0.093); densest joint type [22 24 14]; 0.0 s
+         type 0: sizes [30, 30], centre counts [[6, 6, 18], [20, 7, 3]]
+  n =   60 [H    ] eps =    1.000: r* =   14.543, E(r*) =    1.000, maxdens = 9.5185e-02  ->  theta_n = 0.039199  (R = 0.045407; (theta_n - R) n / ln n = -0.091); densest joint type [26 15 19]; 0.1 s
+         type 0: sizes [30, 30], centre counts [[6, 6, 18], [20, 7, 3]]
+  n =  120 [gamma] eps =    1.000: r* =   22.637, E(r*) =    1.000, maxdens = 2.3283e-03  ->  theta_n = 0.050522  (R = 0.045407; (theta_n - R) n / ln n = +0.128); densest joint type [45 45 30]; 0.1 s
+  n =  120 [H    ] eps =    1.000: r* =   25.169, E(r*) =    1.000, maxdens = 6.6157e-03  ->  theta_n = 0.041819  (R = 0.045407; (theta_n - R) n / ln n = -0.090); densest joint type [52 29 39]; 0.2 s
+  n =  240 [gamma] eps =    1.000: r* =   42.683, E(r*) =    1.000, maxdens = 8.0304e-06  ->  theta_n = 0.048884  (R = 0.045407; (theta_n - R) n / ln n = +0.152); densest joint type [86 88 66]; 1.0 s
+  n =  240 [H    ] eps =    1.000: r* =   45.541, E(r*) =    1.000, maxdens = 3.2642e-05  ->  theta_n = 0.043041  (R = 0.045407; (theta_n - R) n / ln n = -0.104); densest joint type [106  59  75]; 1.1 s
+  n =  480 [gamma] eps =    1.000: r* =   83.007, E(r*) =    1.000, maxdens = 1.0918e-10  ->  theta_n = 0.047788  (R = 0.045407; (theta_n - R) n / ln n = +0.185); densest joint type [187 152 141]; 13.0 s
+  n =  480 [H    ] eps =    1.000: r* =   86.101, E(r*) =    1.000, maxdens = 6.4331e-10  ->  theta_n = 0.044093  (R = 0.045407; (theta_n - R) n / ln n = -0.102); densest joint type [209 119 152]; 7.5 s
+  [gamma] two-point extrapolation theta_n = a + b ln n/n from n = 240, 480: a = 0.046373, b = 0.110   (R = 0.045407)
+  [H] two-point extrapolation theta_n = a + b ln n/n from n = 240, 480: a = 0.045448, b = -0.105   (R = 0.045407)
+time 24 s

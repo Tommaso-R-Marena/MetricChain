@@ -1519,31 +1519,127 @@ in the section has been read by a referee.
 **Audit at this checkpoint:** `scripts/audit_all.sh` exits 0; 56 Lean files, 3423 audited
 declarations; harness and mutation totals as above.
 
-### Resume here (cycle 10, tenth checkpoint)
+### Cycle 10, eleventh checkpoint — heteropolymer product landscapes and a dictionary with channel coding; a third division (theory report §§11.26, 11.27; 2026-11-25)
 
-Verified state: every module under `proofs/` (56 files) builds with zero warnings and is walked
-by the axiom audit (3423 declarations); the harness (128 registered tests: 106 that must
-survive, 22 documented refutations) and its mutation tests (267 mutations: 266 caught, one
-expected pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17
+**What happened.**  The tenth checkpoint was pushed (`5ed4072`).  Workstream W reported.  The
+research owner introduced a third division — *Scientific Discovery, Translation &
+Independent Validation*, branch `research/scientific-translation` — as an equal, read-only
+peer; its first checkpoint (`9c4bf96`) appeared during this one.
+
+**Workstream W (theory report §11.26; paper proofs, not refereed).**  The sketch for larger
+alphabets and several site types is a chain of theorems.  (i) By the symmetry of the
+sequence alone, for every `n`: the joint-type-stratified sample is optimal among fixed
+samples; the quotient envelope is the transport cost (Theorem 11.95).  (ii) A single-letter
+theorem with labelled profiles and transport costs for every known part that is a
+function of the joint type (Theorem 11.97; Lemma T with the site type in the label).
+(iii) For product known parts: labels are vertices of the sites' Lipschitz polytopes; the
+site types share **one common slope**, `F*(t) = Σ_jλ_jF*_j(t)`; `F*` is a game function (Theorem
+11.98).  (iv) **`F*_j(t) = (1−t)C_t`, the Rényi capacity of the channel "vertex ↦ Gibbs law"**; the
+hardest additive instance is the Rényi centre; `θ_na` is the inverse sphere-packing
+exponent, `a` the Shannon capacity; a fixed sample of rate `θ` certifies `E_sp(θ)`, adaptivity
+gains exactly `θ`; "one common slope" is Gallager's rule for parallel channels (Theorem
+11.99).  (v) The adaptive exponent without a hint is the hinted exponent of the hardest
+additive instance (Theorem 11.101; by transfer of Theorems 11.52, 11.54, 11.64).
+(vi) Asymmetric envelopes: everything survives in a fixed orientation (Proposition
+11.102).  (vii) Negative: exponents of site types do not add; for three letters `F*` need
+not be concave; "a field always helps" fails near the threshold (Propositions 11.100,
+11.103).
+
+**Verification.**  An own implementation written from the statements
+(`experiments/coordinator_checks/sites_W/`): vertices; the Rényi form against the
+linear-programming value of the game, its dual bound and a blind search; every number of
+the worked example and its comparison columns (largest deviation `5·10⁻⁷`, the rounding of
+the report); non-additivity; the pair identity; both negative results.  Re-derived:
+Theorem 11.99, the dictionary, the quotient envelope, the lower bound of Theorem 11.101.
+Machine-checked: the two elementary steps of Theorem 11.99 (`RenyiCentre.lean`:
+`exists_ratio_le`, `eq_of_forall_ratio_ge`, `softmin_admissible`).  Not re-run: the
+workstream's exact sums and brute-force runs.  **The upper bounds inherit the status of
+Theorem 11.78(b).**  *Referee R10 reported as this checkpoint was being closed:* no
+critical finding; Theorem 11.78(b), the convex case and the every-`n` statements are
+"proved"; two major corrections — the junction formula of Proposition 11.81(b) is false
+for large slopes (true at `u = 1` and for `u ≤ 2` on the referee's grid), and the interval
+of Proposition 11.82(e) has an unproved upper end (proved: `[0.00184, 0.00338]`).  The
+report is in the session's scratch directory and is applied in full at the next
+checkpoint (priority 1 below).
+
+**What the checks added.**  (a) *A conjecture of the workstream refuted:* it had scanned
+site laws at `u = 1, 2` and found the uniform law hardest for `h` and `a`.  At small slopes it
+is not: for three letters a law near `(½, ½, 0)` has the larger `h` exactly when `u < ln 2`, the
+larger `a` when `u < 0.5194`.  (b) *A remark of the coordinator corrected:* the tenth
+checkpoint's remark in §11.25 quoted single-dip values for "uniform four-letter cubes";
+the workstream's controls show that a uniform four-letter site has the two-letter values
+at small slopes — it groups its letters in pairs (indicator functions of sets are vertices
+of its polytope).  (c) *What is true* (Proposition 11.103(e); numerical for `q = 3, 4`): each
+of `E`, `a`, `h` of a uniform site is the largest of its values for single dips on `k` equally
+weighted groups of letters, `k | q`; `F*` is the upper envelope of the groupings (a label
+switch, hence a convex kink, at `t = 0.65` for four letters at `u = 1`); and **`h_k = h_{k+1}`
+exactly at `e^u = k(k−1)`** — at vanishing accuracy a site with many equivalent states
+behaves like one with about `e^{u/2}` states.  D52.
+
+**The third division.**  Read at `9c4bf96`: it is reviewing §11.25 and §11.22
+(SCI-REV-0001, -0002, announced), checking prior art for the query-complexity results,
+replicating the audit (Lean part identical at `5ed4072`), and has a result of its own —
+local ensemble-averaged data of bounded order (all `k`-body marginals of the Gibbs
+measure) do not change the hinted exponent of the cube class.  It asked whether the
+non-adaptive exponent is unchanged too.  **It is** (theory report §11.27, Proposition
+11.104; THY-RES-0003): cones symmetrised over a linear code with dual distance `k + 1` have
+uniform `k`-body marginals, as do their truncations at a global level, at the cost of a
+factor `|C|` in the count and `ln|C|` in the accuracy.  Its other questions (a field; the
+two-oracle model; ratios of macrostate partition functions) are answered with pointers.
+THY-REQ-0011 asks it for reviews of §11.26 and §11.24 and for prior art on the dictionary.
+
+**Harness.**  Block XXII (four tests: the Rényi form; chains and the dictionary; which site
+law is hardest; the marginal oracle), XXI.5 (the integral form of the game function on
+type classes; Potts pairs), DEAD.23 (`F*` concave), DEAD.24 (the uniform law is hardest
+beyond two letters); 26 mutations, all caught for the intended reason.  Totals: 135
+registered tests (111 must survive, 24 documented refutations); 293 mutations (292
+caught, one expected pass).
+
+**Honest assessment.**  The mathematics of §11.26 is transfer plus classical information
+theory; its value is the identification — certification with a fixed sample is a covering
+problem for the outputs of a channel whose input is unknown, and adaptivity is worth the
+sampling rate — and the list of two-letter statements that turned out to be two-letter
+statements.  Whether the identification is known elsewhere we cannot tell from two
+searches; the question is now with the division whose task it is.  The section has more
+unrefereed transfer proofs than any other; R10's verdict on Theorem 11.78(b) matters for
+it.  §11.27 is a short remark that exists because another division asked the right
+question.
+
+**Audit at this checkpoint:** `scripts/audit_all.sh` exits 0; 57 Lean files, 3432 audited
+declarations; harness and mutation totals as above.
+
+### Resume here (cycle 10, eleventh checkpoint)
+
+Verified state: every module under `proofs/` (57 files) builds with zero warnings and is walked
+by the axiom audit (3432 declarations); the harness (135 registered tests: 111 that must
+survive, 24 documented refutations) and its mutation tests (293 mutations: 292 caught, one
+expected pass) pass; `scripts/audit_all.sh` exits 0.  **Three divisions** work on three
+branches (this one; `research/ubuntu-engineering`; `research/scientific-translation`); the
+other two are read-only for us and are fetched at every checkpoint
+(`docs/collaboration/status/theory.md`).  Refereed: theory report §§11.16–11.17
 (R5, R6, R_P), §11.18 (R7), §11.19 (R8: "proved"), §11.20 (R9: proved; two gaps closed).
 Machine-checked: §11.21.  **Checked by the coordinator with independent code, no separate
-referee:** §11.22, §11.24.  **Checked by the coordinator, referee at work:** §11.23.  **The
-coordinator's own proofs, checked numerically, no referee:** §11.25.  **Not
-refereed:** the revised Theorem 11.44, Proposition 11.50.  **Not checked by anyone:** the
+referee:** §11.22, §11.24.  **Refereed (R10: no critical finding, two major corrections
+still to be applied):** §11.23.  **The
+coordinator's own proofs, checked numerically, no referee:** §11.25 (under review by the
+Scientific Discovery Division), §11.27.  **A workstream's proofs by transfer, re-computed,
+no referee:** §11.26.  **Not refereed:** the revised Theorem 11.44, Proposition 11.50.  **Not checked by anyone:** the
 two-level algorithms at scale with real inner brackets on non-flat instances, or with four
 levels, or in the batched schedule (THY-REQ-0001); the nested algorithm with a field end
 to end; Theorem 11.63 on sets without symmetry for `n > 6`.  Running at the time of
 writing: **referee R10** (§11.23; directory `scratchpad/referee10/` of the session, report to
-be copied to `docs/reviews/R10_referee_report.md`) and **workstream W** (sites of
-several types with larger alphabets — the heteropolymer product landscape;
-`docs/workstreams/W_brief.md`).  If the session that started them has ended, their briefs
-are complete and they can be re-commissioned as written (**with one change, learned from
+be copied to `docs/reviews/R10_referee_report.md`).  If the session that started it has
+ended, its brief is complete and it can be re-commissioned as written (**with one change, learned from
 workstream V, which ended without a report: require a notes file after every step and
 numerics before theory** — D51).  In
 priority order:
 
-1. **Act on referee R10** when it reports: §11.23 is the newest foundation and is
-   unrefereed; its critical step is Theorem 11.78(b).
+1. **Apply referee report R10** (§11.23): it has reported — no critical finding, Theorem
+   11.78(b) "proved".  To do: copy the report to `docs/reviews/R10_referee_report.md` and its
+   scripts to `experiments/reviews/R10/`; correct Proposition 11.81(b) (junction at
+   `min{βJ*, βJ_w}` on the referee's grid; M1) and Proposition 11.82(e) (M2); the twelve
+   minor findings; errata in `T_REPORT.md`; a harness test for M1; linked corrections of
+   THY-MSG-0009; statuses in README, §8, §10, §12.
 2. **The adaptive exponent without a hint for an interacting known part** (Conjecture
    11.83, O4).  Reduced at the tenth checkpoint to the uniform measure on one type class
    (§11.25).  Two steps remain, in this order: (a) **Conjecture 11.94(iii)** — redo the
@@ -1556,8 +1652,10 @@ priority order:
    `R^max`; two phases beyond the junction: open) — needs information across type classes;
    the natural algorithm keeps the top-level outer block unresolved by type and leads to
    a recursion over rate functions.  A referee for §11.25 if it is to carry weight.
-3. **Synchronise with `research/ubuntu-engineering`** at every checkpoint (read-only; never
-   merge).  Open on their side: THY-REQ-0001 (not started; target Algorithm 2L⁺, now in the
+3. **Synchronise with `research/ubuntu-engineering` and `research/scientific-translation`** at
+   every checkpoint (read-only; never merge).  Awaited from the science division:
+   SCI-REV-0001 (§11.25), SCI-REV-0002 (§11.22), its prior-art findings, answers to
+   THY-REQ-0011; act on them as on our own referee reports.  Open on their side: THY-REQ-0001 (not started; target Algorithm 2L⁺, now in the
    batched schedule of Theorem 11.84), -0003, -0004, the rest of -0002, -0007, -0008, -0009,
    -0010.
 4. **Known parts with spatial structure** — the next foundational step, not started:
@@ -1591,10 +1689,13 @@ priority order:
    flat-histogram reference (finite `n`, usable error term; THY-REQ-0007).
 10. **Below the exponential scale** (§12 item 2(d)(i)): quantify the `o(n)`; exponentially
     small accuracies.  **A machine-checked count** for Theorems 11.52 / 11.56 / 11.84.
-11. **Chains, the rest** (theory report §12 item 9(b)–(f)); larger alphabets and several
-    site types with a field (§11.20, remark (4): a sketch — **workstream W is on it**; the
-    every-`n` half is machine-checked for any symmetry group, `GroupSampling.lean`);
-    mean-field Potts models (§11.23, extensions: a sketch).
+11. **Heteropolymer landscapes** (§11.26): a referee; which site law and which pinned
+    composition is the hardest for a given envelope (Proposition 11.103: groupings into
+    about `e^{u/2}` equal classes at vanishing accuracy — numerical for `q ≤ 4`; a proper
+    implementation of `C_t` for larger alphabets); concavity of `F*` for two letters;
+    whether the channel-coding dictionary gives more than names; the two-oracle model of
+    the science division (§11.27, remark (3)).  **Chains, the rest** (theory report §12
+    item 9(b)–(f)); mean-field Potts models beyond the convex regime.
 12. The list of the earlier checkpoints, below, is otherwise unchanged.
 
 ### State at the end of cycle 9 (superseded in part by the list above)

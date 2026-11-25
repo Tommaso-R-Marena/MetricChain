@@ -532,5 +532,57 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXI.4 M6: a slice refined only while its deficit is below half its bracket
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.5 M1: integrand I(s)/s in place of I(s)/s^2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.5 M2: Potts pairs on three letters bounded by the uniform law on three letters only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.5 M3: crossing of the uniform laws claimed at s = 0.6
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.1 M1: dual bound with the Renyi order t in place of 1 - t
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.1 M2: game with the exponent 1 - t
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.1 M3: the hardest instance taken at the arithmetic mixture of the Gibbs laws (not the Renyi centre)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.1 M4: the zero residual claimed to be the hardest instance of the path site
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.1 M5: vertices without the feasibility test (every basic solution taken for a vertex)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.2 M1: the exponents of the site types claimed to add at a common accuracy
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.2 M2: the chain value claimed to be the average of its site types
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.2 M3: binary symmetric channel with the crossover 1/(1 + e^{u/2})
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.2 M4: asymmetric two-letter envelope replaced by the symmetric one with the larger constant
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.2 M5: pair identity without the shear (theta_na at the accuracy e)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.2 M6: asymmetric two-letter envelope with the tilt of the wrong sign
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.3 M1: crossing of the groupings claimed at e^u = k^2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.3 M2: the uniform four-letter site claimed to be single dips on its letters
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.3 M3: at a small slope the uniform three-letter law claimed to be the hardest
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.3 M4: threshold of the three-letter site with a field claimed equal to the uniform one
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.3 M5: soft gap of k groups centred as for two letters
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.3 M6: F* of the uniform four-letter site claimed to be that of two groups at every slope
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.23 M1: concavity tested away from the label switch (the documented refutation must not be reproduced there)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.24 M1: the three-letter counterexamples replaced by the uniform law itself
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.4 M1: a code whose dual has minimum distance two (the repetition code): pair marginals are not uniform
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.4 M2: effect of the symmetrised cone claimed to be |C| times that of the single cone
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.4 M3: the difference set claimed to be a single ball
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXII.4 M4: the single cone claimed invisible to one-body data as well
+                  exit=1  1 TEST(S) MISBEHAVED
 
-267 mutations: 266 caught, 1 expected pass, 0 not as expected
+293 mutations: 292 caught, 1 expected pass, 0 not as expected

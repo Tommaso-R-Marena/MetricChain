@@ -53,6 +53,7 @@ import proofs.Frontiers.SymmetricSampling
 import proofs.Frontiers.TwoRounds
 import proofs.Frontiers.GroupSampling
 import proofs.Frontiers.SliceRefinement
+import proofs.Frontiers.RenyiCentre
 import proofs.AuditCommand
 
 /-!
@@ -486,6 +487,10 @@ import proofs.AuditCommand
 #print axioms MetricChain.SliceRefinement.argmax_deficit_le
 #print axioms MetricChain.SliceRefinement.deficit_ge
 #print axioms MetricChain.SliceRefinement.mean_le_of_biregular
+#print axioms MetricChain.RenyiCentre.scale_le_inv_sum
+#print axioms MetricChain.RenyiCentre.exists_ratio_le
+#print axioms MetricChain.RenyiCentre.eq_of_forall_ratio_ge
+#print axioms MetricChain.RenyiCentre.softmin_admissible
 #print axioms MetricChain.GamePair.exactRec_congr
 #print axioms MetricChain.GamePair.HintShape.pair
 #print axioms MetricChain.GamePair.HintShape.exists_pair

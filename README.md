@@ -20,7 +20,7 @@ evaluation only.
 | the literature checks behind the novelty assessments | [`docs/prior_art/`](docs/prior_art) |
 | the independent referee reports on the theory report (nine so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md), [`R5`](docs/reviews/R5_referee_report.md), [`R6`](docs/reviews/R6_referee_report.md), [`R7`](docs/reviews/R7_referee_report.md), [`R8`](docs/reviews/R8_referee_report.md), [`R9`](docs/reviews/R9_referee_report.md) |
 | the independent reviews of the workstream reports | [`docs/reviews/`](docs/reviews) (`R_B_review.md`, `R_C_review.md`, `R_D_review.md`, `R_E_review.md`, `R_G_review.md`, `R_P_review.md`) |
-| collaboration with the Computational Research Division (branch `research/ubuntu-engineering`): protocol, status, messages and computational requests | [`docs/collaboration/`](docs/collaboration/README.md), digest in [`THEORY_TO_ENGINEERING.md`](docs/collaboration/THEORY_TO_ENGINEERING.md) |
+| collaboration between three research divisions on three branches — this one (theory), the Computational Research Division (`research/ubuntu-engineering`) and the Scientific Discovery, Translation & Independent Validation Division (`research/scientific-translation`); the other two branches are read-only from here and are never merged: protocol, status, messages, requests and responses | [`docs/collaboration/`](docs/collaboration/README.md), digest in [`THEORY_TO_ENGINEERING.md`](docs/collaboration/THEORY_TO_ENGINEERING.md), state in [`status/theory.md`](docs/collaboration/status/theory.md) |
 | reports of independent exploratory workstreams (as delivered; not part of the theory report unless it says so) | [`docs/workstreams/`](docs/workstreams) |
 
 ## Layout
@@ -295,7 +295,8 @@ numbers (`SetLimit.lean`, `CoverStability.lean`); the lattice lemmas that feed t
 proofs checked numerically.
 (viii) *A known part with interactions: mean-field models* (theory report §11.23; workstream
 T, `docs/workstreams/T_REPORT.md`; **paper proofs, re-derived in part and re-computed by the
-coordinator with independent solvers; not yet refereed** — a referee is at work).  The
+coordinator with independent solvers; refereed (R10): no critical finding, two major
+corrections that are applied at the next checkpoint**).  The
 first known part that is not a product measure: a function of the order parameter, with
 one phase or two.  By permutation symmetry alone, for every system size: the
 flat-histogram ("multicanonical") sample is optimal among fixed samples up to a polynomial
@@ -344,6 +345,27 @@ then examined only as closely as its distance from the maximum requires (determi
 core machine-checked, `SliceRefinement.lean`).  Still open: the adaptive exponent on a
 single level set (conjectured to be the hinted one, as on the cube), and the exact
 adaptive exponent when perturbations that change the order parameter matter.
+(xi) *Heteropolymer product landscapes* (theory report §11.26; workstream W,
+`docs/workstreams/W_REPORT.md`; **paper proofs — the upper bounds by transfer of the
+two-letter proofs — re-computed by the coordinator with an own implementation; not
+refereed**).  The setting the certificate formats were built for: a fixed sequence of
+site types, any number of states per site, single-site known parts, envelopes that need
+not be symmetric.  All three exponents come from one function, and the kinds of sites
+combine through a common *slope*, not at a common accuracy (their exponents do not add).
+**The single-site ingredient is a classical object: a Rényi capacity of the channel that
+sends an extreme allowed perturbation of the site to the site law it produces.  A fixed
+sample of `e^{nθ}` evaluations certifies the accuracy rate given by the sphere-packing
+exponent of that channel at rate `θ`; adaptivity, or a hint, gains exactly `θ`.**  Three
+things that hold for two states fail beyond: the site function need not be concave, a
+field does not always help, and the uniform site law is not always the hardest — a
+uniform site with many equivalent states behaves, at vanishing accuracy, like one with
+about `e^{u/2}` states.  Machine-checked here: the every-`n` lower bounds and the two
+elementary steps behind "the hardest instance is the Rényi centre" (`RenyiCentre.lean`).
+(xii) *Evaluations together with local experimental data* (theory report §11.27; a question
+of the Scientific Discovery Division, which proved the adaptive case).  On the cube class,
+knowing all `k`-body marginals of the true ensemble exactly changes neither the adaptive
+nor the non-adaptive exponent, for every fixed `k`: the hard instances can be symmetrised
+over a code so that no `k`-body statistic sees them.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

@@ -856,6 +856,71 @@ MUTS["XXI"] = [
      [('                if d[k] > width + 1e-12:', '                if d[k] > 0.5 * width + 1e-12:')], 'XXI.4'),
 ]
 
+MUTS["XXI"] += [
+    ('XXI.5 M1: integrand I(s)/s in place of I(s)/s^2',
+     [('        val = t * u * 0.5 * (u - t * u) * sum(w * I_s(s) / s ** 2 for s, w in zip(s_nodes, ws))',
+       '        val = t * u * 0.5 * (u - t * u) * sum(w * I_s(s) / s for s, w in zip(s_nodes, ws))')], 'XXI.5'),
+    ('XXI.5 M2: Potts pairs on three letters bounded by the uniform law on three letters only',
+     [('        bound = max(I_unif(2, s), I_unif(3, s))', '        bound = I_unif(3, s)')], 'XXI.5'),
+    ('XXI.5 M3: crossing of the uniform laws claimed at s = 0.6',
+     [('    if abs(I_unif(2, 0.519366) - I_unif(3, 0.519366)) > 1e-7 or', '    if abs(I_unif(2, 0.6) - I_unif(3, 0.6)) > 1e-7 or')], 'XXI.5'),
+]
+
+MUTS["XXII"] = [
+    ('XXII.1 M1: dual bound with the Renyi order t in place of 1 - t',
+     [('        upper = max(-math.log(float((Pt[i] * Q ** (1 - t)).sum())) for i in range(nv))',
+       '        upper = max(-math.log(float((Pt[i] * Q ** t).sum())) for i in range(nv))')], 'XXII.1'),
+    ('XXII.1 M2: game with the exponent 1 - t',
+     [('    K = (site["P"] / st_gibbs(site["pi"], gamma)[None, :]).T ** t', '    K = (site["P"] / st_gibbs(site["pi"], gamma)[None, :]).T ** (1 - t)')], 'XXII.1'),
+    ('XXII.1 M3: the hardest instance taken at the arithmetic mixture of the Gibbs laws (not the Renyi centre)',
+     [('        m = (M @ Pt) ** (1 / t)\n        Q = m / m.sum()\n        val', '        m = M @ site["P"]\n        Q = m / m.sum()\n        val')], 'XXII.1'),
+    ('XXII.1 M4: the zero residual claimed to be the hardest instance of the path site',
+     [('("path", 0.089589), ("tri", 0.066729), ("asym", 0.045407)):\n        h = st_R', '("path", 0.080032), ("tri", 0.066729), ("asym", 0.045407)):\n        h = st_R')], 'XXII.1'),
+    ('XXII.1 M5: vertices without the feasibility test (every basic solution taken for a vertex)',
+     [('        if all(g[a] - g[b] <= d[a][b] + 1e-9 for a, b in cons) and not any(', '        if not any(')], 'XXII.1'),
+    ('XXII.2 M1: the exponents of the site types claimed to add at a common accuracy',
+     [('    if not r3 < avg - 1e-3:', '    if not abs(r3 - avg) < 1e-3:')], 'XXII.2'),
+    ('XXII.2 M2: the chain value claimed to be the average of its site types',
+     [('    want = dict(E=0.251877, a=0.195046, h=0.057275, R03=0.027759, average=0.030121)',
+       '    want = dict(E=0.251877, a=0.195046, h=0.057275, R03=0.030121, average=0.030121)')], 'XXII.2'),
+    ('XXII.2 M3: binary symmetric channel with the crossover 1/(1 + e^{u/2})',
+     [('        pu = 1 / (1 + math.exp(u))\n        bsc', '        pu = 1 / (1 + math.exp(u / 2))\n        bsc')], 'XXII.2'),
+    ('XXII.2 M4: asymmetric two-letter envelope replaced by the symmetric one with the larger constant',
+     [('        sym = st_site(ww / ww.sum(), st_hamming(2, (u1 + u2) / 2))', '        sym = st_site(ww / ww.sum(), st_hamming(2, max(u1, u2)))')], 'XXII.2'),
+    ('XXII.2 M5: pair identity without the shear (theta_na at the accuracy e)',
+     [('        worst = max(worst, abs(st_theta_na([(1.0, sp)], e + R) - R))', '        worst = max(worst, abs(st_theta_na([(1.0, sp)], e) - R))')], 'XXII.2'),
+    ('XXII.2 M6: asymmetric two-letter envelope with the tilt of the wrong sign',
+     [('        ww = np.array([1 - p, p * math.exp(-kap)])', '        ww = np.array([1 - p, p * math.exp(kap)])')], 'XXII.2'),
+    ('XXII.3 M1: crossing of the groupings claimed at e^u = k^2',
+     [('        u = math.log(k * (k - 1))\n        hk, hk1', '        u = math.log(k * k)\n        hk, hk1')], 'XXII.3'),
+    ('XXII.3 M2: the uniform four-letter site claimed to be single dips on its letters',
+     [('        want = tuple(max(x, y) for x, y in zip(st_groups(2, u), st_groups(4, u)))', '        want = st_groups(4, u)')], 'XXII.3'),
+    ('XXII.3 M3: at a small slope the uniform three-letter law claimed to be the hardest',
+     [('    if not (h_near > h_unif + 2e-4 and abs(st_groups(2, 0.5)[0] - 0.007673) < 1e-6', '    if not (h_near < h_unif and abs(st_groups(2, 0.5)[0] - 0.007673) < 1e-6')], 'XXII.3'),
+    ('XXII.3 M4: threshold of the three-letter site with a field claimed equal to the uniform one',
+     [('    if abs(E_field - 0.120196) > 2e-6 or abs(E_unif - 0.119499) > 2e-6:', '    if abs(E_field - 0.119499) > 2e-6 or abs(E_unif - 0.119499) > 2e-6:')], 'XXII.3'),
+    ('XXII.3 M5: soft gap of k groups centred as for two letters',
+     [('    Psi = lambda s: math.log((math.exp(s) + k - 1) / k) - s / k\n    if t is not None:', '    Psi = lambda s: math.log((math.exp(s) + k - 1) / k) - s / 2\n    if t is not None:')], 'XXII.3'),
+    ('XXII.3 M6: F* of the uniform four-letter site claimed to be that of two groups at every slope',
+     [('        if abs(f - max(st_groups(2, 1.0, t), st_groups(4, 1.0, t))) > 1e-7:', '        if abs(f - st_groups(2, 1.0, t)) > 1e-7:')], 'XXII.3'),
+    ('DEAD.23 M1: concavity tested away from the label switch (the documented refutation must not be reproduced there)',
+     [('    f = [st_renyi(tri, t)[0] for t in (0.376, 0.378, 0.380)]', '    f = [st_renyi(tri, t)[0] for t in (0.476, 0.478, 0.480)]')], 'DEAD.23'),
+    ('DEAD.24 M1: the three-letter counterexamples replaced by the uniform law itself',
+     [('    E_field, E_unif = st_E(st_site([0.05, 0.5, 0.45], st_hamming(3, 1.0))), st_E(st_site([1 / 3] * 3, st_hamming(3, 1.0)))\n    h_near = st_R([(1.0, st_site([0.02, 0.49, 0.49], st_hamming(3, 0.5)))], 0.0)[0]',
+       '    E_field, E_unif = st_E(st_site([1 / 3] * 3, st_hamming(3, 1.0))), st_E(st_site([1 / 3] * 3, st_hamming(3, 1.0)))\n    h_near = st_R([(1.0, st_site([1 / 3] * 3, st_hamming(3, 0.5)))], 0.0)[0]')], 'DEAD.24'),
+]
+
+MUTS["XXII"] += [
+    ('XXII.4 M1: a code whose dual has minimum distance two (the repetition code): pair marginals are not uniform',
+     [('    C = sorted({(a * gens[0]) ^ (b * gens[1]) ^ (c * gens[2]) for a in (0, 1) for b in (0, 1) for c in (0, 1)})', '    C = [0, (1 << n) - 1]')], 'XXII.4'),
+    ('XXII.4 M2: effect of the symmetrised cone claimed to be |C| times that of the single cone',
+     [('            rhs = (w1.sum() / w1t.sum() - 1) / len(C)', '            rhs = (w1.sum() / w1t.sum() - 1) * len(C)')], 'XXII.4'),
+    ('XXII.4 M3: the difference set claimed to be a single ball',
+     [('            if int((wC != wCt).sum()) > len(C) * ball:', '            if int((wC != wCt).sum()) > ball:')], 'XXII.4'),
+    ('XXII.4 M4: the single cone claimed invisible to one-body data as well',
+     [('    if stats["single"] < 1e-3:', '    if stats["single"] > 1e-3:')], 'XXII.4'),
+]
+
 which = sys.argv[1:] or list(MUTS)
 for key in which:
     for item in MUTS[key]:

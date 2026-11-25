@@ -1428,3 +1428,61 @@ algorithms without a hint for a known part that is a function of the type (Conje
    first computation took the inner minimum over a grid of exits — biased upward — and
    the outer maximum selected the bias (`10⁻⁴`, on a grid of 4001 points).  The closed
    form, a solver by clipping and a direct evaluation agree on the second set.
+
+## D52. More than two letters and several site types: six two-letter intuitions that fail, a conjecture and a remark that refuted each other, and a slip in a brief (cycle 10; workstream W and the coordinator)
+
+Theory report §11.26.  The sketch for larger alphabets (workstream F, Proposition F12)
+turned out right; these did not.
+
+1. **"The exponents of the site types add"** (D31 again), now quantified: the average of
+   the types' exponents at a common accuracy overestimates the chain's by `8.5 %`, `47 %`,
+   `172 %`, `1365 %` at `e/E = 0.3, 0.5, 0.7, 0.9` (half binary, half three-state sites).  What
+   adds: the game functions at a common slope, the thresholds, the capacities.
+2. **"After the best split of the accuracy they add."**  True when the site functions are
+   concave; false in general (a chain with a triangle site: by `8·10⁻⁷`, small but not
+   zero).
+3. **"The site function `F*` is concave, `R^max` is smooth."**  False for three letters: for a
+   triangle envelope `(1, 1.5, 2)` the optimal labels switch at `t = 0.378` and `F*` has a convex
+   kink; for the uniform four-letter Hamming site the same happens at `t = 0.65`, where the
+   best grouping of its letters changes from pairs to singletons.  Concave in 100 two-letter
+   cases, unproved.  Harness DEAD.23.
+4. **"The labels are distance functions (single dips); binary centres suffice."**  The labels
+   are vertices of the site's Lipschitz polytope; beyond the label switch of the triangle
+   site an "anti-dip" carries almost half the weight, and the dip theory underestimates by
+   a factor up to four near the threshold (D38, now for the worst-case exponents).
+5. **"A three-state site is its worst two-state reduction."**  Coarse-graining two states (a
+   subclass, hence a lower bound) gives `54 %`–`80 %` of the exponent and too small a
+   threshold; deleting a state (not a bound) gives `129 %`–`142 %`.
+6. **"A field always helps; the uniform site law is the hardest"** (Proposition 11.65(b), a
+   theorem for two letters).  False for three letters with the Hamming envelope: near the
+   threshold at `u = 1` (`0.120196` for `(0.05, 0.5, 0.45)` against `0.119499`; workstream), and at
+   vanishing accuracy for every `u < ln 2`, where laws near `(½, ½, 0)` are harder
+   (coordinator).  Harness DEAD.24.
+7. **A conjecture and a remark that refuted each other.**  The workstream scanned site laws
+   at `u = 1, 2`, found the uniform law hardest for `h` and `a`, and listed it as a conjecture.
+   The coordinator had, the day before, written into §11.25 that at small slopes two
+   letters beat three — and, in the same remark, quoted "uniform `k`-ary cubes" for `k = 4`
+   with the values of single dips on letters and proposed "a uniformly weighted
+   sub-alphabet" as the hardest known part.  Each was right where it had looked and wrong
+   where the other had: the uniform law is the hardest for `h` at `u = 1, 2` and not for
+   `u < ln 2`; a uniform four-letter site groups its letters in pairs at small slopes
+   (indicator functions of sets are vertices of its Lipschitz polytope) and has the
+   two-letter values, not the single-dip ones; and near the threshold neither a uniform
+   law nor a sub-alphabet is the hardest.  *Lesson:* a scan confirms a statement on its
+   grid; the slope is a parameter of the statement, and item 4 applies to the
+   coordinator's own closed forms.
+8. **A reference value quoted at a finite difference — the third time.**  The brief gave
+   `0.008559` / `0.009791` for a two-type control; they belong to the threshold computed as
+   `F*(t)/t` at `t = 1/4000` (`0.072271`), not to the threshold (`0.072290`): `0.008557` / `0.009790`.
+   The same slip as D49 item 11 and THY-MSG-0009 §3.1; thresholds are limits and are now
+   computed as the convex programme `max_M −ln Σ_aΠ_φπ_φ(a)^{M(φ)}`.
+9. **Errors of the workstream, caught by its own tests** (kept because the first one led to
+   the closed form): a grid-and-zoom maximiser over the Lipschitz polytope returned values
+   too small by `10⁻⁶`–`10⁻⁵` — the maximum is a kink, at which all letters are active, which
+   is the equalisation behind the Rényi centre; a blind outer search in a max–min returned
+   zero where the value is `3.5·10⁻⁴`; exact finite-`n` bounds at the flat-histogram instance
+   approach the formula from *below* (a polynomial normalisation), so a table at that
+   instance alone would have suggested that the formula is too large by `5`–`12 %` at
+   `n ≈ 450`; isoperimetric test families at `n ≤ 72` have no power against a wrong exponent
+   function and are recorded as such.
+

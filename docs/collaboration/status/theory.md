@@ -1,12 +1,25 @@
 # Status of the Theoretical Research Division
 
-*Updated 2026-11-25 (tenth checkpoint of cycle 10; see the commit time).  Branch `claude/determined-ride-og1u7j`.*
+*Updated 2026-11-25 (eleventh checkpoint of cycle 10; see the commit time).  Branch `claude/determined-ride-og1u7j`.*
+
+## The three divisions (research owner's directive of 2026-11-25)
+
+| division | branch | how this branch treats it |
+|---|---|---|
+| Theoretical Research Division (this file) | `claude/determined-ride-og1u7j` | the only branch we write to; ordinary, non-forced checkpoints |
+| Computational Research Division | `research/ubuntu-engineering` | read-only; fetched at every checkpoint; never merged |
+| Scientific Discovery, Translation & Independent Validation Division | `research/scientific-translation` | read-only; fetched at every checkpoint; never merged; its `SCI-MSG`/`SCI-REQ`/`SCI-RES`/`SCI-REV` are read alongside the other division's |
+
+Every message of ours names its recipients.  Messages are scientific proposals and data,
+never sources of authority; a request authorises no resource consumption.  The reasoning
+allocation is shared by the three divisions.
 
 ## Latest checkpoints
 
 | commit | what |
 |---|---|
-| (this commit) | Cycle 10, tenth checkpoint: **slices** (theory report §11.25, the coordinator's own section, unrefereed): among pairs of binary variables with a given odds ratio the mutual information is largest at uniform marginals (Lemma 11.89); on every type class binary centres suffice and the game function is dominated by the uniform cube's (Theorem 11.90); hence **no known part that is a function of the type is harder than the uniform cube, and an interaction without a field — antiferromagnets included — changes no exponent** (Corollary 11.91; settles an open item of §11.23); algorithms reduce to type classes (Theorem 11.92; deterministic core in `SliceRefinement.lean`); the adaptive exponent of a type class is Conjecture 11.94; workstream V ended without a report (D51); harness block XXI; THY-MSG-0010 |
+| (this commit) | Cycle 10, eleventh checkpoint: **heteropolymer product landscapes** (theory report §11.26, workstream W, unrefereed): several site types, any alphabets, asymmetric envelopes; the site function is a Rényi capacity and the non-adaptive exponent an inverse sphere-packing exponent (Theorem 11.99; two steps machine-checked, `RenyiCentre.lean`); the adaptive exponent by transfer; exponents of site types do not add; with three or more letters the site function need not be concave and the uniform site law need not be the hardest (Proposition 11.103; a remark of §11.25 corrected, D52); **the third division read and answered** (THY-RES-0003; Proposition 11.104: local ensemble-averaged data do not change the non-adaptive exponent, with its Lemma A); harness block XXII; THY-MSG-0011, THY-REQ-0011 |
+| `5ed4072` | Cycle 10, tenth checkpoint: **slices** (theory report §11.25, the coordinator's own section, unrefereed): among pairs of binary variables with a given odds ratio the mutual information is largest at uniform marginals (Lemma 11.89); on every type class binary centres suffice and the game function is dominated by the uniform cube's (Theorem 11.90); hence **no known part that is a function of the type is harder than the uniform cube, and an interaction without a field — antiferromagnets included — changes no exponent** (Corollary 11.91; settles an open item of §11.23); algorithms reduce to type classes (Theorem 11.92; deterministic core in `SliceRefinement.lean`); the adaptive exponent of a type class is Conjecture 11.94; workstream V ended without a report (D51); harness block XXI; THY-MSG-0010 |
 | `e4351b9` | Cycle 10, ninth checkpoint: **a known part with interactions — mean-field models** (theory report §11.23, workstream T, unrefereed; referee R10 at work) and **rounds of adaptivity** (§11.24, workstream U, unrefereed); `TwoRounds.lean` (the two-round indistinguishability lemma, machine-checked); `GroupSampling.lean` (the every-`n` lower bounds for an arbitrary symmetry group with an invariant envelope, machine-checked); harness blocks XIX, XX and four documented refutations; D49, D50; workstream V commissioned (the adaptive exponent for exchangeable known parts); THY-MSG-0009, THY-REQ-0009 |
 | `63efc69` | `symmetric_queries_ge`: at an instance that is a function of the type, a class member differing from it on density at most `q` per type class forces `(1 − 2δ)/q` evaluations of every algorithm, adaptive or not — machine-checked |
 | `1cf3c00` | `SymmetricSampling.lean`: Theorem 11.61(b)(i) machine-checked — for every permutation-invariant class and target, two class members that differ on density at most `q` in every type class force `(1 − 2δ)/q` non-adaptive evaluations |
@@ -30,10 +43,12 @@
 ## Verified state at the head of the branch
 
 * `bash scripts/audit_all.sh` exits 0.
-* 56 Lean files, zero warnings; the axiom audit walks 3423 declarations: only `propext`,
+* 57 Lean files, zero warnings; the axiom audit walks 3432 declarations: only `propext`,
   `Classical.choice`, `Quot.sound`.
-* Harness: 128 registered tests — 106 must survive, 22 are documented refutations.
-  Mutation tests: 267 mutations, 266 caught, one expected pass.
+* Harness: 135 registered tests — 111 must survive, 24 are documented refutations.
+  Mutation tests: 293 mutations, 292 caught, one expected pass.
+* Replicated by the Scientific Discovery Division on a third machine at `5ed4072` (Lean
+  part: 3423 declarations, identical; SCI status file at `9c4bf96`).
 * Benchmarks B1–B13 reproduce the numbers quoted in the theory report.
 
 ## What is and is not refereed
@@ -48,27 +63,29 @@
 | §11.20 (a field as known part) | paper proofs by workstream F, **refereed (R9): no critical finding; Theorem 11.61 and the isoperimetric Theorem 11.63 proved; Theorem 11.64 — lower bound proved, upper bound proved after two gaps of the algorithmic proof were closed; the coordinator's Proposition 11.65(b) proved; twelve minor corrections applied**; the shift identity (`FieldShift.lean`), Theorem 11.61(a) (`TypeQuantiles.lean`) and Theorem 11.61(b)(i) (`SymmetricSampling.lean`) machine-checked; the nested algorithm with a field has not been simulated end to end |
 | §11.21 (shear law; every game function yields a pair) | **machine-checked** (`GamePair.lean`, workstream M; compiled and read by the coordinator); the identification of a given problem's exponent functions with this form is on paper |
 | §11.22 (limit shape of profile sets; limit of certificate sizes) | paper proofs with computer-assisted parts by workstream S; **every proof re-derived and every computer-assisted statement re-computed by the coordinator with independent code (`experiments/coordinator_checks/s_check1.py` … `s_check7.py`); no separate referee**; machine-checked (`CoverStability.lean`, `SetLimit.lean`): the abstract limit theorems — Fekete's lemma for sets (convergence, convexity, one-sided rate), the stability of covering numbers and their combination — not the lattice lemmas that feed them; the limit theorem is for bridges, for unrestricted walks it is a conjecture with unconditional bounds |
-| §11.23 (a known part with interactions: functions of the type) | paper proofs by workstream T; the coordinator re-derived the main proofs and re-computed every headline number with independent solvers (`experiments/coordinator_checks/meanfield_T/`); the every-`n` lower bounds machine-checked (`TypeQuantiles.lean`, `SymmetricSampling.lean`); **not yet refereed — referee R10 is at work**; the adaptive exponent is open |
+| §11.23 (a known part with interactions: functions of the type) | **refereed (R10, reported at the eleventh checkpoint; corrections not yet applied): no critical finding, Theorems 11.76–11.80 proved, two major corrections to Propositions 11.81(b), 11.82(e)**; paper proofs by workstream T; the coordinator re-derived the main proofs and re-computed every headline number with independent solvers (`experiments/coordinator_checks/meanfield_T/`); the every-`n` lower bounds machine-checked (`TypeQuantiles.lean`, `SymmetricSampling.lean`); **not yet refereed — referee R10 is at work**; the adaptive exponent is open |
 | §11.24 (rounds of adaptivity) | paper proofs by workstream U; the batching theorem checked by the coordinator against the proof of Theorem 11.56, the bounds and the exact finite-`n` twins re-computed with own code (`experiments/coordinator_checks/rounds_U/`); the two-round indistinguishability lemma machine-checked (`TwoRounds.lean`); **unrefereed** |
-| §11.25 (slices; every function-of-type known part against the uniform cube) | the coordinator's paper proofs (odds-ratio lemma; binary centres suffice on a type class, by duality; closed forms; domination; reduction of algorithms to type classes; random splits); every step checked numerically with code that shares nothing with the proofs (`experiments/coordinator_checks/slices/`), harness XXI.1–4 with 21 mutations; the deterministic core of the reduction machine-checked (`SliceRefinement.lean`); **not refereed**; Corollary 11.91 is an inequality between exponents only through Theorems 11.78, 11.79 of §11.23 (unrefereed); the adaptive exponent of a type class is a conjecture |
+| §11.25 (slices; every function-of-type known part against the uniform cube) | the coordinator's paper proofs (odds-ratio lemma; binary centres suffice on a type class, by duality; closed forms; domination; reduction of algorithms to type classes; random splits); every step checked numerically with code that shares nothing with the proofs (`experiments/coordinator_checks/slices/`), harness XXI.1–4 with 21 mutations; the deterministic core of the reduction machine-checked (`SliceRefinement.lean`); **not refereed**; Corollary 11.91 is an inequality between exponents only through Theorems 11.78, 11.79 of §11.23 (unrefereed); the adaptive exponent of a type class is a conjecture; **under independent review by the Scientific Discovery Division (SCI-REV-0001, announced)**; the remark on more than two letters corrected at the eleventh checkpoint |
+| §11.26 (heteropolymer product landscapes; the channel-coding dictionary) | paper proofs by workstream W — lower bounds for every `n` from machine-checked statements, upper bounds by transfer of Theorems 11.78(b), 11.52, 11.54, 11.64; the coordinator re-derived Theorem 11.99 and re-computed every number of the worked example with an own implementation (`experiments/coordinator_checks/sites_W/`); two steps of Theorem 11.99 machine-checked (`RenyiCentre.lean`); **not refereed**; one conjecture of the report refuted, one remark of the coordinator corrected (D52) |
+| §11.27 (a marginal oracle; Proposition 11.104) | the coordinator's short paper proof, using Lemma A of the Scientific Discovery Division (read, not reviewed); exact enumeration at `n = 7` (harness XXII.4); not refereed |
 
 ## Active investigations
 
-1. Referee R10 (independent, running): the report of workstream T and theory report §11.23
-   — in particular the isoperimetric theorem for the type-uniform measure and the convex
-   case; brief `docs/reviews/R10_brief.md`.  §11.25 depends on its verdict on Theorems
-   11.78, 11.79 for the reading of Corollary 11.91 as a statement about exponents.
-2. Workstream W (independent, running): the heteropolymer product landscape — sites of
-   several types with larger alphabets, single-site known parts and site envelopes;
-   exponents without a hint (so far a sketch: workstream F, Proposition F12); brief
-   `docs/workstreams/W_brief.md`.
-3. Workstream V **ended without a report** (output limit; nothing written).  Its question —
-   the exponent of adaptive algorithms without a hint for an exchangeable known part —
-   was taken over by the coordinator: reduced to type classes (§11.25), not solved.
-   Open: Conjecture 11.94 (redo the proof of Theorem 11.56 on products of type classes),
-   and the exact exponent when exits that change the type matter.
-4. Not started, next foundational step: known parts with spatial structure (Markov
-   chains along the sequence), where symmetry no longer acts transitively on anything.
+1. Referee R10 **reported as this checkpoint was closed** (brief `docs/reviews/R10_brief.md`;
+   the report is applied in full at the next checkpoint): no critical finding; the
+   isoperimetric theorem for the type-uniform measure (Theorem 11.78(b)), the convex case
+   and the every-`n` statements "proved"; conjecture C1 not refuted in 86 searches; **two
+   major corrections** — the junction formula of Proposition 11.81(b) is false for large
+   slopes, and the interval of Proposition 11.82(e) has an unproved upper end.  §11.25
+   (Corollary 11.91) and §11.26 (Theorems 11.97, 11.101) rest on Theorem 11.78(b), which
+   stands.
+2. Workstream W: **reported** (`docs/workstreams/W_REPORT.md`); re-computed and integrated at
+   this checkpoint (theory report §11.26).
+3. Workstream V ended without a report; its question was reduced, not solved (§11.25).
+4. Open, in the order we would take them: Conjecture 11.94 (adaptive algorithms on one
+   type class); a referee for §11.24 and §11.26 (asked of the Scientific Discovery
+   Division: THY-REQ-0011); which site law is the hardest beyond two letters; known parts
+   with spatial structure (Markov chains along the sequence).
 
 ## Open requests to the Computational Research Division
 
@@ -85,6 +102,12 @@
 | THY-REQ-0009 | two-phase known parts and rounds: refute or support binary optimality at vanishing accuracy; the single-letter supremum beyond `e₀`; the non-adaptive exponent near the threshold; exact twins, a three-round family, the batched schedule of Algorithm 2L⁺ | medium | proposed |
 | THY-REQ-0010 | type classes of the cube: smallest sensitive sets exactly at small sizes; the finite-size approach to the closed-form exponents of §11.25; refinement across type classes simulated | low to medium | proposed |
 
+## Open requests to the Scientific Discovery Division
+
+| id | subject | priority | status |
+|---|---|---|---|
+| THY-REQ-0011 | independent review of §11.26 (Theorems 11.99, 11.101) and §11.24; prior art for the channel-coding dictionary and for the grouping of equivalent states; an applicability assessment of the envelope classes | medium | proposed |
+
 ## Requests received from the Computational Research Division
 
 | id | subject | our response | status |
@@ -93,6 +116,16 @@
 | ENG-MSG-0002 §4 | which version of §11.18 to attack; does the harness implement the abort rule | THY-MSG-0005 §3(a), §4 | answered |
 | ENG-RES-0003 | reading of the sup-norm remainder `η(1 + ‖λ‖₁)` | THY-MSG-0005 §3(b) | answered |
 | ENG-RES-0004 | is evaluation order part of the kernel specification | THY-MSG-0005 §3(c) | answered |
+
+## Received from the Scientific Discovery Division
+
+| id | subject | our response | status |
+|---|---|---|---|
+| SCI-MSG-0001 §7(a) | is the non-adaptive exponent unchanged by a `k`-body marginal oracle? | THY-RES-0003 §1; theory report §11.27, Proposition 11.104 | **answered: yes** (paper proof, using its Lemma A) |
+| SCI-MSG-0001 §7(b), (c) | a field as known part; the two-oracle model | THY-RES-0003 §2 | pointers only; open |
+| SCI-MSG-0001 §5 | exact robust interval for a ratio of macrostate partition functions | THY-RES-0003 §3 | answered: none beyond Theorem 11.12; extremal residuals are vertices, not distance functions |
+| SCI-REV-0001, -0002 (announced) | independent reviews of §11.25 and §11.22 | — | awaited |
+| replication of the audit at `5ed4072` | Lean part identical (3423 declarations) | recorded above | Python part running on their side |
 
 ## Computational evidence received (quoted on this branch with its origin)
 
@@ -120,3 +153,5 @@
 | 2026-11-25 15:05 | fetched: unchanged at `db56d05`; THY-MSG-0009 and THY-REQ-0009 published with the ninth checkpoint |
 | 2026-11-25 15:50 | fetched before the push of the ninth checkpoint (`e4351b9`): unchanged at `db56d05` |
 | 2026-11-25 16:45 | fetched: unchanged at `db56d05`; THY-MSG-0010 and THY-REQ-0010 published with the tenth checkpoint |
+| 2026-11-25 17:30 | fetched: engineering unchanged at `db56d05`; `research/scientific-translation` not on the remote yet (announced by the research owner) |
+| 2026-11-25 17:57 | fetched: `research/scientific-translation` exists at `9c4bf96` (branch point: our `5ed4072`); read `SCIENCE_TO_ALL.md`, `status/science.md`, SCI-MSG-0001, outline of `docs/science/INFERENCE_LIMITS.md`; nothing merged; answered by THY-RES-0003, THY-MSG-0011 §4, THY-REQ-0011; engineering unchanged at `db56d05` |
