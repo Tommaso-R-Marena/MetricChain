@@ -1,0 +1,28 @@
+Part A: base bracket (Proposition K0) on enumerated cubes
+   u    x delta_in     K        M rhat cert.width  calls  invalid event fails    bound
+ 0.5  0.6    3e-01   403    44079    1      0.369    960   0.0000      0.0000   0.2995
+ 0.5  0.6    1e-03  1290   141095    1      0.369    960   0.0000      0.0000   0.0010
+ 0.5  1.0    3e-01   162     3924    2      0.861    960   0.0000      0.0000   0.2965
+ 0.5  1.0    1e-03   517    12521    2      0.861    960   0.0000      0.0000   0.0010
+ 0.5  2.0    3e-01    54      585    3      1.715    960   0.0000      0.0000   0.2886
+ 0.5  2.0    1e-03   171     1850    3      1.715    960   0.0000      0.0000   0.0010
+ 0.5  4.0    3e-01    47      100    7      3.608    960   0.0000      0.0000   0.2938
+ 0.5  4.0    1e-03   150      318    7      3.608    960   0.0000      0.0000   0.0010
+ 1.0  0.6    3e-01   403   484861   -1      0.300    960   0.0000      0.0010   0.2995
+ 1.0  0.6    1e-03  1290  1552035   -1      0.300    960   0.0000      0.0000   0.0010
+ 1.0  1.0    3e-01   162   219696   -1      0.500    960   0.0000      0.0000   0.2965
+ 1.0  1.0    1e-03   517   701128   -1      0.500    960   0.0000      0.0000   0.0010
+ 1.0  2.0    3e-01    54     9346    1      1.707    960   0.0000      0.0000   0.2886
+ 1.0  2.0    1e-03   171    29595    1      1.707    960   0.0000      0.0000   0.0010
+ 1.0  4.0    3e-01    47      547    3      3.677    960   0.0000      0.0021   0.2938
+ 1.0  4.0    1e-03   150     1746    3      3.677    960   0.0000      0.0000   0.0010
+ 2.0  4.0    3e-01    47    96256    0      2.127    960   0.0000      0.0000   0.2938
+ 2.0  4.0    1e-03   150   307200    0      2.127    960   0.0000      0.0000   0.0010
+  total calls 17280, invalid brackets 0, calls on the good event 17277; on the good event: invalid 0, wider than certified 0
+Part A as expected (valid and within the certified width on the good event; failure rates within the bound): True
+
+Part B: Algorithm 2L+ end to end with real inner two-sample brackets
+  stats: {'runs': 84, 'invalid': 0, 'too_wide': 0, 'aborts': 0, 'max_queries_over_Cmax': 0.003287, 'widest': 2.525, 'min_slack': 0.1798, 'points': 436224, 'calls': 10506912, 'enumerated_rungs': 38, 'sampled_rungs': 279}
+Part B as expected (every bracket valid and within the width bound, no abort, queries <= C_max): True
+
+all as expected: True   (308 s)

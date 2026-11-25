@@ -1043,3 +1043,57 @@ with explicit constants, in which a cancellation becomes visible (`close_points_
 running the logic at small size with a simulated inner oracle, which found the one gap that
 all readers had missed.
 
+
+## D46. Bounded accuracy and chain length: a sketch that was wrong in its mechanism, a reason that was wrong, and a saturation that is not there (cycle 10; workstream K, Computational Research Division)
+
+Four corrections, none of which invalidates a theorem, all of which changed sentences.
+
+1. **The "closure window" (coordinator's sketch for bounded accuracy; refuted by workstream
+   K).**  The sketch handed to workstream K proposed to keep the closure test of Theorem 11.52
+   — tail against the mass certified at the level itself, ratio `Γ̃(r) = E_r/|B(r−1)|` — and
+   argued that, as the sample doubles, the closing radius moves through a window of radii in
+   which `Γ̃(r) ≤ e^{G−b}/4` with `G − b = O(1)`.  Wrong as a mechanism, for three reasons.
+   (a) `Γ̃` is never small: `Γ̃(r) ≥ 4e^u(e^u−1)(1−o(1))` for every `r`, so the window is empty unless
+   `G − b ≥ ln(16e^u(e^u−1))` (`2.84, 4.31, 6.63` for `u = ½, 1, 2`).  (b) Where it is not empty its upper
+   end is `ρ₊n_o` with `ρ₊ < p_u`: the outer sample would have the exponent `φ·KL(ρ₊‖½) > φa`, which
+   gives at best a weak form of the result.  (c) Populated levels never sit in the window:
+   their closing radius lies within `O(√(n log n))` of `p_un_o`, where `Γ̃ ≈ c√n` (a level whose
+   super-level set is a ball well inside radius `p_un_o` carries a negligible share of the
+   mass of the cone above it and is declared negligible before it is populated).  The repair
+   puts the *two-sided* tail lemma into the algorithm (the Harper term of Theorem 11.56) and
+   raises the negligibility factor; the same sketch's "each level adds `O(1)` to the accuracy"
+   then turned out to be too pessimistic — a level adds an arbitrarily small constant, which
+   is why the strong form (every fixed accuracy) holds.
+2. **"Ratio `≤ 3 + 12Γ(r)`, bounded up to `p_un`" (reason given for the exponent `a` of the base
+   bracket at fixed accuracy).**  The conclusion is right, the reason is not: that ratio is
+   never below `3 + 48e^u(e^u−1)` and grows like `√n` at `p_un`.  The bounded ratio at exponent `a`
+   comes from the two-sided lemma 11.43(c) (Proposition 11.57(a)).
+3. **A saturation read off from an estimator.**  Workstream P's table of traversal numbers
+   `m(δ)` (its §3.2) — `m(1) = 11, 11, 10, 12` — was read as "the entropy of the profile set
+   saturates near `N ≈ 13`".  The Computational Research Division could not reproduce `m(δ)` as
+   defined (a farthest-point traversal depends on the starting point and on tie-breaking,
+   neither of which is stated; its values differ by up to 2 at `δ ≥ 1` and by a factor 1.4 at
+   `δ = ¼`), and the *exact* internal covering numbers at the same radii keep increasing
+   through 27 beads (`δ = 1`: 4, 5, 6, 7, 8, 8, 9, 10, 11, 11 for `n = 8, …, 24`).  A traversal
+   length is an upper estimate of a covering number, not a covering number; report
+   covering numbers with certified brackets.
+4. **"Certificates whose size does not depend on the chain length" (blueprint §7, theory
+   report §11.17, G19, THY-MSG-0002 principle 3).**  True as a bound (Proposition 11.49(a)),
+   and the theory division asked at which size the plateau sets in, expecting an answer
+   within reach of enumeration (THY-REQ-0002: "where does chain-length independence set
+   in?").  It does not
+   set in at any size that can be enumerated: on the diamond-lattice chain the smallest
+   certificate at accuracy `N/2` grows by about one evaluation per two torsions through 27
+   beads, because the profile set per bead has reached only about 38 % of its bulk extent;
+   off-lattice it grows geometrically (a factor 1.3–1.7 per torsion through 15 beads),
+   because the number of distinct distances below the cutoff grows with the chain and the
+   plateau is of the order `exp(c·zLS_c/ε₁)`.  The format is cheap in absolute terms when the
+   per-pair constant is small and orders of magnitude cheaper than the per-torsion format
+   always; "independent of the chain length" describes a regime nobody will reach by
+   enumeration.  All four places were reworded.
+
+*Lesson.*  (1) and (2): a mechanism that is plausible at the level of exponents can fail at
+the level of constants in a way that changes the exponent — tabulate the ratio before
+building on it.  (3) and (4): an existence bound and a heuristic estimator together
+produced an expectation ("saturation near 16 beads") that exact computation by an
+independent party removed in one day.

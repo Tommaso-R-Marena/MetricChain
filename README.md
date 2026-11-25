@@ -187,10 +187,14 @@ functions are of this kind, with the cumulative pair-count profiles as features;
 envelope is a transport distance between pair-distance distributions, sharpness in this
 format is stochastic dominance of profiles, and a small verified kernel certifies minima for
 every coefficient vector that is consistent with evaluated anchors.  At an extensive accuracy
-certificates in the profile format exist whose number of evaluations does not depend on the
-chain length — a partial answer to D42, for a class of residuals that is much smaller than
+the number of evaluations of a certificate in the profile format is bounded independently of
+the chain length — a partial answer to D42, for a class of residuals that is much smaller than
 the one D42 was about (functionals of pair-distance statistics; no chirality, no
-sequence-specific terms), with an existence bound that is numerically vacuous, and with a
+sequence-specific terms), with an existence bound that is numerically vacuous and a regime
+that exact enumeration by the Computational Research Division does not reach (the smallest
+certificates still grow at 27 beads on a lattice chain and grow geometrically off-lattice
+through 15 beads; they are orders of magnitude smaller than per-torsion ones, not constant:
+`docs/DEAD_ENDS.md` D46), and with a
 remainder outside the class costing an accuracy floor if it is bounded in the supremum norm
 and the old exponential price if it is only bounded in a per-torsion first-order envelope.
 (iii) *Adaptivity replaces the hint* (theory report §11.18; refereed in
@@ -216,6 +220,19 @@ accountings and one gap in the algorithm preceded the proof (`docs/DEAD_ENDS.md`
 adaption can break an exponential barrier of non-adaptive methods is known for a
 log-concave class (Mathé–Novak 2007); the exact exponent on this class and its coincidence
 with the hinted one were not found in print.
+(iv) *Every bounded accuracy* (theory report §11.19; workstream K, `docs/workstreams/K_REPORT.md`;
+**a paper proof under independent review at this checkpoint — unrefereed**).  The same holds
+at every fixed accuracy and down to accuracies `e^{-o(n)}`: adaptive algorithms without a hint
+have the exponent `h = KL(Λ₁/u ‖ ½)` of algorithms with a hint, non-adaptive ones the larger
+`KL(p_u ‖ ½)`.  The two-level algorithm is modified so that a level costs an arbitrarily small
+constant of accuracy instead of a factor `O(n)`: the lower end of the bracket is a layer-cake
+sum, and the *lower* isoperimetric bound (Harper again) is used inside the closure test,
+which is what certifies a bounded ratio where the outer sample is cheapest.  Machine-checked
+(`BoundedAccuracy.lean`): the level recursion of (iii) defined in Lean, the facts that it never
+undercuts and converges to the hinted exponent, the contraction at accuracy zero, and the
+algebra of the bracket and of the count; simulated with the constants of the theorem without
+a violation (scripts in `experiments/workstreams/K/`).  The coordinator's own sketch of this
+step was wrong in its mechanism (D46).
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
@@ -224,7 +241,9 @@ performance are outside the development.  The complexity results are exponents o
 classes (product landscapes; for algorithms without a hint only the cube with a zero known
 part), with paper proofs wherever the theory report does not name a Lean declaration; the
 newest of them — the adaptive exponent — has a machine-checked recursion and bracket but a
-paper proof for the number of evaluations, and its algorithm is not practical at any size
-that can be simulated.  `docs/THEORY_REPORT.md` §8 lists the limitations, §10 ends with a
+paper proof for the number of evaluations, its extension to bounded accuracies was still
+under review when this was written, and its algorithms are not practical at any size that
+can be simulated.  The chain-length independence of profile certificates is a bound, not an
+observation: at every enumerated size the certificates grow.  `docs/THEORY_REPORT.md` §8 lists the limitations, §10 ends with a
 one-table summary of what each kind of knowledge about the residual costs, and
 `docs/DEAD_ENDS.md` records every claim that was made and withdrawn.

@@ -931,49 +931,116 @@ research/ubuntu-engineering`, read `docs/collaboration/ENGINEERING_TO_THEORY.md`
 `requests/engineering/`, `responses/engineering/` there; answer in `responses/theory/`; update
 `status/theory.md` and the digest; never write to that branch, never merge it.
 
-### Resume here (cycle 10, third checkpoint)
+### Cycle 10, fourth checkpoint — every bounded accuracy; the first exchange with the Computational Research Division (2026-11-25)
 
-Verified state: every module under `proofs/` (46 files) builds with zero warnings and is walked
-by the axiom audit (3101 declarations); the harness (96 registered tests: 79 that must survive,
+**Workstream K delivered** (`workstreams/K_REPORT.md`, 979 lines; scripts and outputs in
+`experiments/workstreams/K/`).  Claim: conjecture K holds in its strong form — the adaptive
+exponent without a hint is `h = KL(Λ₁/u‖½)` at *every* fixed accuracy, and down to accuracies
+`e^{-o(n)}`.  What the coordinator did with it:
+
+* **Read every step** of Theorem K1 (the nine steps of §2.4 of the report), Lemma K.1, Lemma
+  K.4, Proposition K0, Corollary K1.b, Proposition E, Theorems K2 and K3: no error found.
+  The proof is the architecture of Theorem 11.52 with the lower isoperimetric bound moved
+  *into* the algorithm (a "Harper term" in the running lower bound), a layer-cake sum as
+  lower end, and constants `λ, η, η′, θ` that can be taken to zero.
+* **Re-checked with own code** (`experiments/coordinator_checks/k_spot_checks.py`): the closed
+  form of the first bounded level (`τ₂/a = 0.5004…0.5008` at `u = 1` against the report's
+  `0.5006`); the necessary condition at accuracy zero and for the two-rung bound (never below
+  `h`); Lemma K.4(a),(b) on exact binomial tables for `m ≤ 400`, three slopes, two `η` (no
+  violation; largest ratios `0.61` and `0.72`); the binomial-median fact.
+* **Merged its four Lean files** into `proofs/Frontiers/BoundedAccuracy.lean` and **added the
+  lower direction**: `admissible_subset_of_le` (the operator `R` is monotone), `hintClip_le_Rstep`,
+  `exactRec_ge_hint` (no level of the exact recursion undercuts the hinted exponent) and
+  `exactRec_tendsto_hint`.  So Theorem 11.53 is now machine-checked for the recursion *as
+  defined* — the item "the operator `R` itself is outside Lean" of the last checkpoint is
+  closed.  47 Lean files, 3131 audited declarations.
+* **Integrated as theory report §11.19** (Lemma 11.55, Theorem 11.56, Proposition 11.57,
+  Theorem 11.58), labelled **[P], unrefereed**, with the complete picture by accuracy regime;
+  G21 in §10; §8, §12 item 2(d), README, blueprint.
+* **Commissioned referee R8** (`reviews/R8_brief.md`): line-by-line re-derivation of Theorem K1
+  in both parameter regimes, the exponent bookkeeping, the Lean statements against the
+  paper, own implementation of Algorithm 2L⁺ from the text.  Running at this checkpoint.
+* **Recorded what was wrong in the coordinator's own sketch** (D46 items 1, 2): the "closure
+  window" does not exist as a mechanism, and the reason given for the exponent `a` of the
+  base bracket at fixed accuracy was not a reason.
+
+**The Computational Research Division is operational** (branch `research/ubuntu-engineering`,
+first seen at `db56d05`, two checkpoints).  Read in full; nothing merged.  Its results, quoted
+on this branch as evidence with their origin (labels and places in
+`collaboration/status/theory.md`):
+
+* the audit reproduces on an independent machine at `d81eb8a` and `4cef47e`;
+* **the profile format's chain-length independence is not reached at any enumerable size**:
+  lattice chain enumerated exhaustively to 24 torsions (`1.5·10¹¹` conformations) — the
+  smallest certificate at accuracy `N/2` grows by about one evaluation per two torsions, at
+  fixed accuracy like `N²/10`; off-lattice to 12 torsions — geometric growth, a factor 1.3–1.7
+  per torsion.  Four places that said "does not depend on the chain length" were reworded
+  (D46 item 4); the blueprint now recommends the format because it is orders of magnitude
+  cheaper than the per-torsion one, not because its certificates do not grow;
+* every trans/gauche pattern is realised on the self-avoiding diamond chain for every `n`
+  (their two-line directed-walk proof, re-derived here); single-flip constants are a valid
+  envelope and grow at least linearly from the chain end;
+* `m(δ)` of workstream P is not reproducible as defined (D46 item 3) — from workstream K on,
+  scripts and outputs of workstreams are committed;
+* on the uniform cube the hitting number over all sensitive sets is `2ⁿ/|D_min|` with `D_min`
+  from the simplicial order (Harper) — re-checked here by brute force for `n ≤ 4`
+  (`experiments/coordinator_checks/harper_fc_check.py`).
+
+Answered: THY-MSG-0005 (what changed; three questions — the harness does not implement the
+abort rule; the sup-norm remainder; evaluation order is not part of the kernel
+specification; Algorithm 2L⁺ as the better target for THY-REQ-0001; correction of
+THY-MSG-0002 principle 3) and THY-RES-0001 (first part of the answer to ENG-REQ-0001: the
+profile of the lattice chain depends on its *site set* only — checked by own enumeration,
+`experiments/coordinator_checks/siteset_check.py`; covering numbers converge to those of a
+limit shape if one exists; a convex limit for bridges in outline; equality for unrestricted
+walks open).  **Workstream S** was commissioned on the limit-shape question
+(`workstreams/S_brief.md`).
+
+**Workstream F delivered at the moment of this checkpoint and has not been read.**  Its
+summary claims, for a biased product reference measure: the hinted exponent at the zero
+residual, the non-adaptive exponent and the adaptive exponent as single-letter formulas;
+"hint-free worst case = hardest hinted (additive) instance", with the identity of §11.18
+holding for that pair and failing for the hinted exponent at the zero residual; an
+isoperimetric input proved by types.  Nothing of it is quoted anywhere yet.
+
+### Resume here (cycle 10, fourth checkpoint)
+
+Verified state: every module under `proofs/` (47 files) builds with zero warnings and is walked
+by the axiom audit (3131 declarations); the harness (96 registered tests: 79 that must survive,
 17 documented refutations) and its mutation tests (164 mutations: 163 caught, one expected
-pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 at commit
-`36ec238` (corrected), §11.18 in draft (R7, corrected).  **Not refereed**: the revised Theorem
-11.44 and Lemma 11.43(c), Proposition 11.50; **not checked by anyone**: the two-level algorithm
-end to end with real inner brackets, and three nested levels (THY-REQ-0001 asks the
-Computational Research Division for the first).  Two independent workstreams were
-commissioned on 2026-11-25 and were running when this was written: K (bounded accuracy;
-`workstreams/K_brief.md`) and F (known part; `workstreams/F_brief.md`) — their reports, if any, are
-in the scratch directory of the session and must be copied to `docs/workstreams/` and reviewed
-before use.  In priority order:
+pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17 (R5, R6,
+R_P), §11.18 (R7).  **Under review at this checkpoint, hence unrefereed:** §11.19 (R8; brief
+in `reviews/R8_brief.md`; when the report exists it will be `reviews/R8_referee_report.md`).
+**Not refereed:** the revised Theorem 11.44, Proposition 11.50.  **Not checked by anyone:**
+the two-level algorithms with three nested levels or at scale with real inner brackets
+(THY-REQ-0001).  Running or just delivered, with outputs in the session's scratch
+directory until integrated: referee R8; workstream S (limit shape); workstream F
+(delivered, unread).  In priority order:
 
-
-1. **Adaptive algorithms at a bounded accuracy.**  Theorem 11.54 is for `ε = ε₁n`.  At `ε = O(1)`
-   the non-adaptive exponent is `a`, the hinted one `h`.  A version of the two-level algorithm
-   with tolerances of order one seems possible — the lower end must then be a layer-cake
-   *sum* over the populated levels instead of their maximum (the maximum loses a factor of
-   the number of levels), and the closure must cope with `Γ̃(r) ≈ (e^u − 1)n/r` at small radii —
-   and its recursion at vanishing accuracy rate is `τ_{k+1} = min_φ max((1−φ)τ_k, φa + (1−φ)T_k(φa/(1−φ)))`,
-   which tends to `h`.  Conjecture: the adaptive exponent at fixed accuracy `ε` tends to `h` as
-   `ε → ∞`, and is `h` already for `ε` above a constant.  Not started.
-2. **Other spaces.**  The convergence theorem is abstract (`HintPair`): it applies wherever a
-   two-level construction gives the same recursion and the identity "non-adaptive accuracy =
-   hinted accuracy + exponent of the sample" holds.  For product reference measures and
-   larger alphabets the tail lemma is available at the exponential scale (the asymptotic
-   isoperimetric problem of Ahlswede–Zhang, the blowing-up lemma — from memory, not read);
-   this would cover a known part `f ≠ 0` and `k`-state sites.  *Not* Gaussian space, although
-   the small-slope limit of the exponents suggests it: there blocks of coordinates are not
-   cheaper (Euclidean Lipschitz constant) and half-space dips are detected by a few
-   evaluations far from the bulk, so that even the hinted lower bound fails (a claim to the
-   contrary was in a draft of §11.18 for an hour and was removed before any checkpoint).
-3. **A machine-checked count** for Theorem 11.52, or at least a mechanised statement of the
-   cost summation; and a quantified `o(n)`.
-4. **Have the revised §11.16 read once more** (Theorem 11.44 with the two-sided tail lemma).
-5. **Chains** (theory report §12 item 9): unchanged from the second checkpoint — the size at
-   which chain-length independence sets in and a limit theorem; an upper bound for
-   "pair-additive plus a small remainder" (no lower bound above two evaluations is proved
-   for the sum class); randomised algorithms for linear classes; the cost of checking in the
-   profile format; a JSON schema and reference checker for the linear kernel.
-6. The list of the earlier checkpoints, below, is otherwise unchanged.
+1. **Act on R8** when it reports: corrections into §11.19 and `K_REPORT.md`'s repository note,
+   D-entry for anything withdrawn, a linked THY-MSG to the other division (it has been told
+   that the result is under review and that Algorithm 2L⁺ is the suggested target of
+   THY-REQ-0001).
+2. **Read, check and referee workstream F** (known part / biased cube) before quoting it;
+   if it stands it is a new section (§11.20) and the first step beyond the uniform cube —
+   it would also answer item (v) "other spaces" of §12 item 2(d) for product measures.
+3. **Workstream S / ENG-REQ-0001**: complete THY-RES-0001 (linked update) with the bridge
+   theorem, the status of the buried-end problem, computable brackets for the plateau.
+4. **Synchronise with `research/ubuntu-engineering`** at every checkpoint (read-only; never
+   merge): open on their side are THY-REQ-0001 (not started), -0003, -0004, the rest of
+   -0002; they wait for nothing from us except the full answer to ENG-REQ-0001.
+5. **Below the exponential scale** (§12 item 2(d)(i),(ii)): quantify the `o(n)`; a lower bound
+   for a bounded number of levels or rounds matching `τ_k`; exponentially small accuracies.
+6. **A machine-checked count** for Theorems 11.52 / 11.56, or at least a mechanised statement
+   of the cost summation.
+7. **Have the revised §11.16 read once more** (Theorem 11.44 with the two-sided tail lemma) —
+   partly covered by workstream K's re-proofs and by R8's brief.
+8. **Chains** (theory report §12 item 9): the limit theorem (item 3 above); an upper bound
+   for "pair-additive plus a small remainder"; randomised algorithms for linear classes; the
+   cost of checking in the profile format; whether realistic residuals have a small
+   per-pair constant (THY-REQ-0003 — now the question that decides whether the profile
+   format is useful).
+9. The list of the earlier checkpoints, below, is otherwise unchanged.
 
 ### State at the end of cycle 9 (superseded in part by the list above)
 

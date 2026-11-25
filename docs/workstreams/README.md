@@ -30,7 +30,11 @@ What was verified and integrated, what was refuted, and what remains unverified 
 
 `COMMON.md` is the shared context given to every stream.  Scripts and raw outputs of the streams
 were produced in a session scratch directory; the ones needed to reproduce an integrated claim
-are copied next to the harness when the claim is integrated.
+are copied next to the harness when the claim is integrated.  From workstream K on, a
+workstream's own scripts and outputs are kept under `experiments/workstreams/<stream>/` (the
+Computational Research Division pointed out that the earlier ones cannot be re-run; one of
+their quantities, `m(δ)` of `P_REPORT.md` §3.2, turned out not to be reproducible as defined —
+`DEAD_ENDS.md` D46).
 
 ## Cycle 10
 
@@ -42,6 +46,7 @@ coordinator's claims first.
 |---|---|---|---|
 | H | Algorithms without a hint on the cube: verify the Monte Carlo and non-adaptive results of theory report §11.16; is adaptivity enough to reach the hinted exponent? | `H_brief.md` | `H_REPORT.md` (delivered: the four statements of §11.16 confirmed; on radial instances adaptivity closes the whole gap; a two-level algorithm beats the non-adaptive exponent on the whole class; the coordinator's own multilevel accounting refuted.  Integrated as theory report §11.18, where its Theorems H1 and H2 are Theorems 11.51 and 11.52, its conjecture H4 is proved (Theorem 11.53) and one gap of its algorithm is repaired (`DEAD_ENDS.md` D45); the section was refereed in `reviews/R7_referee_report.md`) |
 | P | Chains: envelopes from pair-distance profiles (theory report §11.17); verification on synthetic chains, lower bounds, prior art. | `P_brief.md` | `P_REPORT.md` (delivered; reviewed in `reviews/R_P_review.md`: no statement false, four numbers and several sentences of the summary corrected; its corrections to the coordinator's claims and the reviewer's corrections to its own are applied in theory report §11.17) |
-| K | Adaptive algorithms without a hint at a **bounded** accuracy: is the exponent `h` (conjecture K), with a layer-cake sum for the lower end? | `K_brief.md` | commissioned 2026-11-25; running at the time of writing |
+| K | Adaptive algorithms without a hint at a **bounded** accuracy: is the exponent `h` (conjecture K), with a layer-cake sum for the lower end? | `K_brief.md` | `K_REPORT.md` (delivered: **the conjecture holds in its strong form** — exponent `h` at every fixed accuracy and down to `e^{-o(n)}`; a modified two-level algorithm 2L⁺ with explicit constants; the coordinator's sketch was wrong in its mechanism and in one reason, `DEAD_ENDS.md` D46.  Integrated as theory report §11.19 — its Lemma K.4, Theorem K1, Propositions K0/K2/K5 and Theorem K3 are Lemma 11.55, Theorem 11.56, Proposition 11.57 and Theorem 11.58 — **labelled unrefereed: referee R8 was reading it at the checkpoint of integration** (`reviews/R8_brief.md`).  Its four Lean files are merged into `proofs/Frontiers/BoundedAccuracy.lean`; its scripts and outputs are in `experiments/workstreams/K/`) |
 | F | Algorithms without a hint with a **known part** (biased product reference measure; then `k`-state sites): non-adaptive exponent, tail lemma without Harper, does "adaptive = hinted" survive, instance-optimality in the field | `F_brief.md` | commissioned 2026-11-25; running at the time of writing |
 | L | Lean: the exponent functions of the cube satisfy the abstract hypotheses (`HintPair`) of the convergence theorem, so that Theorem 11.53 is machine-checked for the cube and not only for an abstract pair | `L_brief.md` | `L_REPORT.md` (delivered: `proofs/Frontiers/CubeHintPair.lean`, 69 declarations, integrated after the coordinator's check; also both halves of the fixed-point statement on the cube) |
+| S | A limit shape for profile sets and the thermodynamic limit of certificate sizes (the question the Computational Research Division put back to the theory in `ENG-REQ-0001`): reduction to site sets, concatenation and convexity for bridges, the buried-end obstruction for unrestricted walks, convergence of covering numbers, computable bounds for the plateau | `S_brief.md` | commissioned 2026-11-25; running at the time of writing |

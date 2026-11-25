@@ -740,11 +740,19 @@ with irrational bond geometry only enclosures are available).  Checkable rules:
 What to expect.  On a lattice, where the squared distances below the cutoff take `G` values,
 `(number of pair types)·G` evaluations determine a pair-additive residual exactly, for every
 chain length (on the rational torus `G` grows with the chain).  With continuous distances,
-certificates at an accuracy of `ε₁` per bead exist whose number of evaluations does not depend
-on the chain length (theory report Proposition 11.49), but the bound that proves it —
+the number of evaluations of a certificate at an accuracy of `ε₁` per bead is *bounded*
+independently of the chain length (theory report Proposition 11.49), but the bound —
 `exp(1.39·(number of pair types)·⌈4 z L S_c/ε₁⌉)` for the nearest-profile rule — is an existence
-statement and useless as a planning number (it is hundreds of orders of magnitude above
-measured sizes); measure the diameter of the profile set of the system at hand instead.
+statement and useless as a planning number, and **the regime it describes has not been
+reached at any size that could be enumerated**: with `L = 1` the smallest certificate grows
+by about one evaluation per two torsions on a three-distance lattice chain (15 evaluations
+at 27 beads, accuracy `N/2`) and by a factor 1.3–1.7 per torsion off-lattice (between 109 and
+136 at 15 beads); with `L = 1/5` it is 2 and 4 at those sizes (exact enumeration by the
+Computational Research Division, theory report §11.17).  Recommend this format because it
+is orders of magnitude cheaper than the per-torsion one — 8 evaluations against at least
+136 200 at 15 beads on the lattice — **not because its certificates do not grow**; what
+governs their size is the dimensionless ratio `z·L·S_c/ε₁`, so measure the per-pair constant
+`L` and the diameter of the profile set of the system at hand before planning.
 What this format does **not** cover: residuals that are not functionals of pair-distance
 statistics (chirality, sequence-specific pairs, many-body terms; a mirror image has the same
 profile), terms that are steep in `s` at short range, and any remainder outside the class —

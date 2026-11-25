@@ -43,6 +43,7 @@ import proofs.Frontiers.LinearClass
 import proofs.Frontiers.LinearKernel
 import proofs.Frontiers.HintRecursion
 import proofs.Frontiers.CubeHintPair
+import proofs.Frontiers.BoundedAccuracy
 import proofs.AuditCommand
 
 /-!
@@ -393,6 +394,22 @@ import proofs.AuditCommand
 #print axioms MetricChain.HintRecursion.cube_step_from_hint_le
 #print axioms MetricChain.HintRecursion.cube_hint_superSolution
 #print axioms MetricChain.HintRecursion.cube_hintRecursion_witness
+
+-- The exact level recursion and the passage to a bounded accuracy (theory report §11.19)
+#print axioms MetricChain.BoundedAccuracy.stepLE_exact
+#print axioms MetricChain.BoundedAccuracy.exactRec_props
+#print axioms MetricChain.BoundedAccuracy.exactRec_reaches_hint
+#print axioms MetricChain.BoundedAccuracy.exactRec_ge_hint
+#print axioms MetricChain.BoundedAccuracy.exactRec_tendsto_hint
+#print axioms MetricChain.BoundedAccuracy.bounded_iterates_lt
+#print axioms MetricChain.BoundedAccuracy.two_rung_bound
+#print axioms MetricChain.BoundedAccuracy.levels_reach_hint_at_zero
+#print axioms MetricChain.BoundedAccuracy.cube_levels_reach_hint_at_zero
+#print axioms MetricChain.BoundedAccuracy.cube_levels_reach_hint_at_zero_consistent
+#print axioms MetricChain.BoundedAccuracy.certified_lower_sum_le_mean
+#print axioms MetricChain.BoundedAccuracy.populated_part_le
+#print axioms MetricChain.BoundedAccuracy.close_points_bound'
+#print axioms MetricChain.BoundedAccuracy.width_le
 #print axioms MetricChain.product_rate_bound
 #print axioms MetricChain.product_entropy_bound
 #print axioms MetricChain.thermal_binary_sharp

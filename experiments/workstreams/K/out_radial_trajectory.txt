@@ -1,0 +1,422 @@
+
+=== u = 0.5, n_o = 1000: p_u n_o = 378, a = 0.03030;  b = 0.5, lam = 0.5, eta = 0.25, eta' = theta = 0.1
+profile                            | variant th | closes at      r   | ln M/(n_o a) | width (bound) | levels pop/neg | min_pop (r - p_u n_o)/sqrt(n_o ln n_o)
+flat                               | harper 1  | unpopulated    430 |       0.6431 | 1.255 (1.581) |   1001/1      |     -   
+flat                               | plain  1  | unpopulated    430 |       0.6431 | 1.268 (1.581) |   1001/1      |     -   
+cone                               | harper 1  | populated      347 |       1.9241 | 1.533 (1.581) |   1154/0      |   -0.355
+cone                               | plain  1  | unpopulated    334 |       2.1987 | 1.513 (1.581) |   1167/0      |   -0.512
+cone slope u/2                     | harper 1  | unpopulated    388 |       1.1692 | 1.517 (1.581) |   1057/0      |    0.150
+cone slope u/2                     | plain  1  | populated      386 |       1.2150 | 1.514 (1.581) |   1058/0      |    0.126
+anti-cone                          | harper 1  | populated      347 |       1.9241 | 1.533 (1.581) |   1154/0      |   -0.355
+anti-cone                          | plain  1  | unpopulated    334 |       2.1987 | 1.513 (1.581) |   1167/0      |   -0.512
+flattened bottom R=0.5 p_u n_o     | harper 1  | populated      347 |       1.9241 | 1.533 (1.581) |   1154/0      |   -0.355
+flattened bottom R=0.5 p_u n_o     | plain  1  | unpopulated    334 |       2.1987 | 1.513 (1.581) |   1167/0      |   -0.512
+mesa R=0.5 p_u n_o                 | harper 1  | unpopulated    430 |       0.6431 | 1.255 (1.581) |   1001/1      |     -   
+mesa R=0.5 p_u n_o                 | plain  1  | unpopulated    430 |       0.6431 | 1.268 (1.581) |   1001/1      |     -   
+flattened bottom R=1.0 p_u n_o     | harper 1  | unpopulated    370 |       1.4666 | 1.530 (1.581) |   1124/0      |    0.006
+flattened bottom R=1.0 p_u n_o     | plain  1  | unpopulated    366 |       1.5353 | 1.513 (1.581) |   1124/0      |    0.006
+mesa R=1.0 p_u n_o                 | harper 1  | unpopulated    430 |       0.6431 | 1.255 (1.581) |   1001/1      |     -   
+mesa R=1.0 p_u n_o                 | plain  1  | unpopulated    430 |       0.6431 | 1.268 (1.581) |   1001/1      |     -   
+flattened bottom R=1.5 p_u n_o     | harper 1  | unpopulated    430 |       0.6431 | 1.255 (1.581) |   1001/1      |     -   
+flattened bottom R=1.5 p_u n_o     | plain  1  | unpopulated    430 |       0.6431 | 1.269 (1.581) |   1001/1      |     -   
+mesa R=1.5 p_u n_o                 | harper 1  | populated      347 |       1.9241 | 1.533 (1.581) |   1154/0      |   -0.355
+mesa R=1.5 p_u n_o                 | plain  1  | unpopulated    334 |       2.1987 | 1.513 (1.581) |   1167/0      |   -0.512
+dip R=0.8 Lambda1 n_o/u            | harper 1  | unpopulated    430 |       0.6431 | 1.255 (1.581) |   1001/1      |     -   
+dip R=0.8 Lambda1 n_o/u            | plain  1  | unpopulated    430 |       0.6431 | 1.268 (1.581) |   1001/1      |     -   
+dip R=1.0 Lambda1 n_o/u            | harper 1  | populated      350 |       1.8555 | 1.390 (1.581) |   1089/0      |   -0.319
+dip R=1.0 Lambda1 n_o/u            | plain  1  | populated      349 |       1.8784 | 1.388 (1.581) |   1090/0      |   -0.331
+dip R=1.2 Lambda1 n_o/u            | harper 1  | populated      347 |       1.9241 | 1.533 (1.581) |   1154/0      |   -0.355
+dip R=1.2 Lambda1 n_o/u            | plain  1  | unpopulated    334 |       2.1987 | 1.513 (1.581) |   1167/0      |   -0.512
+staircase W ~ 1/|B(d)|             | harper 1  | populated      347 |       1.9241 | 1.513 (1.581) |   1097/0      |   -0.355
+staircase W ~ 1/|B(d)|             | plain  1  | unpopulated    334 |       2.1987 | 1.504 (1.581) |   1110/0      |   -0.512
+random walk 0                      | harper 1  | unpopulated    426 |       0.6888 | 1.469 (1.581) |   1005/0      |    1.112
+random walk 0                      | plain  1  | unpopulated    426 |       0.6888 | 1.469 (1.581) |   1005/0      |    1.112
+random walk 1                      | harper 1  | unpopulated    421 |       0.7346 | 1.401 (1.581) |   1009/0      |    0.679
+random walk 1                      | plain  1  | unpopulated    421 |       0.7346 | 1.401 (1.581) |   1009/0      |    0.679
+random walk 2                      | harper 1  | unpopulated    421 |       0.7346 | 1.490 (1.581) |   1010/0      |    0.751
+random walk 2                      | plain  1  | unpopulated    421 |       0.7346 | 1.490 (1.581) |   1010/0      |    0.751
+2-periodic                         | harper 1  | unpopulated    430 |       0.6431 | 1.333 (1.581) |   1002/0      |    1.558
+2-periodic                         | plain  1  | unpopulated    430 |       0.6431 | 1.333 (1.581) |   1002/0      |    1.558
+largest ln M_last/(n_o a) over the profiles: with the Harper term 1.9241, without 2.1987
+additive: slopes u (half), u/2 (half)    | harper 1  | populated      363 |       1.6039 | 1.519 (1.581) |    730/4      |   -0.151
+additive: slopes u (half), u/2 (half)    | plain  1  | populated      357 |       1.7183 | 1.513 (1.581) |    735/4      |   -0.235
+additive: slopes u (third), 0 (rest)     | harper 1  | populated      383 |       1.2607 | 1.518 (1.581) |    901/0      |    0.090
+additive: slopes u (third), 0 (rest)     | plain  1  | populated      380 |       1.3065 | 1.515 (1.581) |    903/0      |    0.054
+additive: slopes +u (half), -u (half)    | harper 1  | populated      347 |       1.9241 | 1.533 (1.581) |   1154/0      |   -0.355
+additive: slopes +u (half), -u (half)    | plain  1  | unpopulated    334 |       2.1987 | 1.513 (1.581) |   1167/0      |   -0.512
+additive: slopes u, u/2, -u/2 (thirds)   | harper 1  | populated      369 |       1.4895 | 1.516 (1.581) |    927/0      |   -0.079
+additive: slopes u, u/2, -u/2 (thirds)   | plain  1  | populated      366 |       1.5353 | 1.513 (1.581) |    929/0      |   -0.115
+additive: slopes u/2 (all)               | harper 1  | unpopulated    388 |       1.1692 | 1.517 (1.581) |    807/0      |    0.150
+additive: slopes u/2 (all)               | plain  1  | populated      386 |       1.2150 | 1.514 (1.581) |    808/0      |    0.126
+
+=== u = 0.5, n_o = 4000: p_u n_o = 1510, a = 0.03030;  b = 0.5, lam = 0.5, eta = 0.25, eta' = theta = 0.1
+profile                            | variant th | closes at      r   | ln M/(n_o a) | width (bound) | levels pop/neg | min_pop (r - p_u n_o)/sqrt(n_o ln n_o)
+flat                               | harper 1  | unpopulated   1618 |       0.6936 | 1.245 (1.581) |   4001/127    |     -   
+flat                               | plain  1  | unpopulated   1618 |       0.6936 | 1.260 (1.581) |   4001/127    |     -   
+cone                               | harper 1  | populated     1449 |       1.3628 | 1.536 (1.581) |   4552/0      |   -0.330
+cone                               | plain  1  | populated     1416 |       1.5229 | 1.512 (1.581) |   4585/0      |   -0.511
+cone slope u/2                     | harper 1  | populated     1606 |       0.7337 | 1.514 (1.581) |   4198/0      |    0.537
+cone slope u/2                     | plain  1  | unpopulated   1604 |       0.7394 | 1.513 (1.581) |   4199/0      |    0.526
+anti-cone                          | harper 1  | populated     1449 |       1.3628 | 1.536 (1.581) |   4552/0      |   -0.330
+anti-cone                          | plain  1  | populated     1416 |       1.5229 | 1.512 (1.581) |   4585/0      |   -0.511
+flattened bottom R=0.5 p_u n_o     | harper 1  | populated     1449 |       1.3628 | 1.536 (1.581) |   4552/0      |   -0.330
+flattened bottom R=0.5 p_u n_o     | plain  1  | populated     1416 |       1.5229 | 1.512 (1.581) |   4585/0      |   -0.511
+mesa R=0.5 p_u n_o                 | harper 1  | unpopulated   1618 |       0.6936 | 1.245 (1.581) |   4001/127    |     -   
+mesa R=0.5 p_u n_o                 | plain  1  | unpopulated   1618 |       0.6936 | 1.260 (1.581) |   4001/127    |     -   
+flattened bottom R=1.0 p_u n_o     | harper 1  | unpopulated   1503 |       1.1226 | 1.538 (1.581) |   4491/0      |    0.005
+flattened bottom R=1.0 p_u n_o     | plain  1  | unpopulated   1497 |       1.1454 | 1.512 (1.581) |   4491/0      |    0.005
+mesa R=1.0 p_u n_o                 | harper 1  | unpopulated   1618 |       0.6936 | 1.245 (1.581) |   4001/127    |     -   
+mesa R=1.0 p_u n_o                 | plain  1  | unpopulated   1618 |       0.6936 | 1.260 (1.581) |   4001/127    |     -   
+flattened bottom R=1.5 p_u n_o     | harper 1  | unpopulated   1618 |       0.6936 | 1.245 (1.581) |   4001/127    |     -   
+flattened bottom R=1.5 p_u n_o     | plain  1  | unpopulated   1618 |       0.6936 | 1.260 (1.581) |   4001/127    |     -   
+mesa R=1.5 p_u n_o                 | harper 1  | populated     1449 |       1.3628 | 1.536 (1.581) |   4552/0      |   -0.330
+mesa R=1.5 p_u n_o                 | plain  1  | populated     1416 |       1.5229 | 1.512 (1.581) |   4585/0      |   -0.511
+dip R=0.8 Lambda1 n_o/u            | harper 1  | unpopulated   1618 |       0.6936 | 1.245 (1.581) |   4001/127    |     -   
+dip R=0.8 Lambda1 n_o/u            | plain  1  | unpopulated   1618 |       0.6936 | 1.260 (1.581) |   4001/127    |     -   
+dip R=1.0 Lambda1 n_o/u            | harper 1  | unpopulated   1457 |       1.3227 | 1.379 (1.581) |   4186/110    |   -0.286
+dip R=1.0 Lambda1 n_o/u            | plain  1  | unpopulated   1457 |       1.3227 | 1.379 (1.581) |   4186/110    |   -0.286
+dip R=1.2 Lambda1 n_o/u            | harper 1  | populated     1449 |       1.3628 | 1.536 (1.581) |   4552/0      |   -0.330
+dip R=1.2 Lambda1 n_o/u            | plain  1  | populated     1416 |       1.5229 | 1.512 (1.581) |   4585/0      |   -0.511
+staircase W ~ 1/|B(d)|             | harper 1  | populated     1449 |       1.3628 | 1.516 (1.581) |   4311/0      |   -0.330
+staircase W ~ 1/|B(d)|             | plain  1  | populated     1416 |       1.5229 | 1.509 (1.581) |   4344/0      |   -0.511
+random walk 0                      | harper 1  | unpopulated   1618 |       0.6936 | 1.461 (1.581) |   4008/121    |    2.135
+random walk 0                      | plain  1  | unpopulated   1618 |       0.6936 | 1.461 (1.581) |   4008/121    |    2.135
+random walk 1                      | harper 1  | unpopulated   1618 |       0.6936 | 1.513 (1.581) |   4021/112    |    1.679
+random walk 1                      | plain  1  | unpopulated   1618 |       0.6936 | 1.513 (1.581) |   4021/112    |    1.679
+random walk 2                      | harper 1  | unpopulated   1618 |       0.6936 | 1.469 (1.581) |   4006/121    |    2.003
+random walk 2                      | plain  1  | unpopulated   1618 |       0.6936 | 1.469 (1.581) |   4006/121    |    2.003
+2-periodic                         | harper 1  | unpopulated   1618 |       0.6936 | 1.328 (1.581) |   4002/126    |    2.766
+2-periodic                         | plain  1  | unpopulated   1618 |       0.6936 | 1.328 (1.581) |   4002/126    |    2.766
+largest ln M_last/(n_o a) over the profiles: with the Harper term 1.3628, without 1.5229
+additive: slopes u (half), u/2 (half)    | harper 1  | populated     1517 |       1.0654 | 1.516 (1.581) |    657/2225   |    0.049
+additive: slopes u (half), u/2 (half)    | plain  1  | unpopulated   1505 |       1.1111 | 1.512 (1.581) |    667/2225   |   -0.023
+additive: slopes u (third), 0 (rest)     | harper 1  | populated     1587 |       0.8023 | 1.515 (1.581) |   1346/2225   |    0.433
+additive: slopes u (third), 0 (rest)     | plain  1  | populated     1582 |       0.8195 | 1.512 (1.581) |   1349/2225   |    0.405
+additive: slopes +u (half), -u (half)    | harper 1  | populated     1449 |       1.3628 | 1.536 (1.581) |   2327/2225   |   -0.330
+additive: slopes +u (half), -u (half)    | plain  1  | populated     1416 |       1.5229 | 1.512 (1.581) |   2360/2225   |   -0.511
+additive: slopes u, u/2, -u/2 (thirds)   | harper 1  | unpopulated   1542 |       0.9624 | 1.514 (1.581) |   1433/2225   |    0.186
+additive: slopes u, u/2, -u/2 (thirds)   | plain  1  | populated     1536 |       0.9910 | 1.512 (1.581) |   1437/2225   |    0.153
+additive: slopes u/2 (all)               | harper 1  | populated     1606 |       0.7337 | 1.514 (1.581) |   3198/0      |    0.537
+additive: slopes u/2 (all)               | plain  1  | unpopulated   1604 |       0.7394 | 1.513 (1.581) |   3199/0      |    0.526
+
+=== u = 0.5, n_o = 16000: p_u n_o = 6041, a = 0.03030;  b = 0.5, lam = 0.5, eta = 0.25, eta' = theta = 0.1
+profile                            | variant th | closes at      r   | ln M/(n_o a) | width (bound) | levels pop/neg | min_pop (r - p_u n_o)/sqrt(n_o ln n_o)
+flat                               | harper 1  | unpopulated   6266 |       0.8056 | 1.262 (1.581) |  16001/737    |     -   
+flat                               | plain  1  | unpopulated   6266 |       0.8056 | 1.267 (1.581) |  16001/737    |     -   
+cone                               | harper 1  | populated     5918 |       1.1559 | 1.537 (1.581) |  18083/0      |   -0.309
+cone                               | plain  1  | populated     5839 |       1.2445 | 1.511 (1.581) |  18162/0      |   -0.510
+cone slope u/2                     | harper 1  | unpopulated   6269 |       0.8027 | 1.513 (1.581) |  16660/319    |    1.635
+cone slope u/2                     | plain  1  | unpopulated   6261 |       0.8099 | 1.512 (1.581) |  16663/322    |    1.619
+anti-cone                          | harper 1  | populated     5918 |       1.1559 | 1.537 (1.581) |  18083/0      |   -0.309
+anti-cone                          | plain  1  | populated     5839 |       1.2445 | 1.511 (1.581) |  18162/0      |   -0.510
+flattened bottom R=0.5 p_u n_o     | harper 1  | populated     5918 |       1.1559 | 1.537 (1.581) |  18083/0      |   -0.309
+flattened bottom R=0.5 p_u n_o     | plain  1  | populated     5839 |       1.2445 | 1.511 (1.581) |  18162/0      |   -0.510
+mesa R=0.5 p_u n_o                 | harper 1  | unpopulated   6266 |       0.8056 | 1.262 (1.581) |  16001/737    |     -   
+mesa R=0.5 p_u n_o                 | plain  1  | unpopulated   6266 |       0.8056 | 1.267 (1.581) |  16001/737    |     -   
+flattened bottom R=1.0 p_u n_o     | harper 1  | unpopulated   6031 |       1.0344 | 1.522 (1.581) |  17961/0      |    0.001
+flattened bottom R=1.0 p_u n_o     | plain  1  | unpopulated   6026 |       1.0401 | 1.512 (1.581) |  17961/0      |    0.001
+mesa R=1.0 p_u n_o                 | harper 1  | unpopulated   6266 |       0.8056 | 1.262 (1.581) |  16001/737    |     -   
+mesa R=1.0 p_u n_o                 | plain  1  | unpopulated   6266 |       0.8056 | 1.267 (1.581) |  16001/737    |     -   
+flattened bottom R=1.5 p_u n_o     | harper 1  | unpopulated   6266 |       0.8056 | 1.262 (1.581) |  16001/737    |     -   
+flattened bottom R=1.5 p_u n_o     | plain  1  | unpopulated   6266 |       0.8056 | 1.267 (1.581) |  16001/737    |     -   
+mesa R=1.5 p_u n_o                 | harper 1  | populated     5918 |       1.1559 | 1.537 (1.581) |  18083/0      |   -0.309
+mesa R=1.5 p_u n_o                 | plain  1  | populated     5839 |       1.2445 | 1.511 (1.581) |  18162/0      |   -0.510
+dip R=0.8 Lambda1 n_o/u            | harper 1  | unpopulated   6266 |       0.8056 | 1.262 (1.581) |  16001/737    |     -   
+dip R=0.8 Lambda1 n_o/u            | plain  1  | unpopulated   6266 |       0.8056 | 1.267 (1.581) |  16001/737    |     -   
+dip R=1.0 Lambda1 n_o/u            | harper 1  | unpopulated   5929 |       1.1430 | 1.389 (1.581) |  16386/696    |   -0.281
+dip R=1.0 Lambda1 n_o/u            | plain  1  | unpopulated   5929 |       1.1430 | 1.388 (1.581) |  16386/696    |   -0.281
+dip R=1.2 Lambda1 n_o/u            | harper 1  | populated     5918 |       1.1559 | 1.537 (1.581) |  18083/0      |   -0.309
+dip R=1.2 Lambda1 n_o/u            | plain  1  | populated     5839 |       1.2445 | 1.511 (1.581) |  18162/0      |   -0.510
+staircase W ~ 1/|B(d)|             | harper 1  | populated     5918 |       1.1559 | 1.514 (1.581) |  17101/0      |   -0.309
+staircase W ~ 1/|B(d)|             | plain  1  | populated     5840 |       1.2431 | 1.510 (1.581) |  17179/0      |   -0.507
+random walk 0                      | harper 1  | unpopulated   6263 |       0.8085 | 1.516 (1.581) |  16018/725    |    4.280
+random walk 0                      | plain  1  | unpopulated   6263 |       0.8085 | 1.516 (1.581) |  16018/725    |    4.280
+random walk 1                      | harper 1  | unpopulated   6261 |       0.8099 | 1.516 (1.581) |  16024/724    |    4.010
+random walk 1                      | plain  1  | unpopulated   6261 |       0.8099 | 1.516 (1.581) |  16024/724    |    4.010
+random walk 2                      | harper 1  | unpopulated   6266 |       0.8056 | 1.498 (1.581) |  16017/725    |    4.158
+random walk 2                      | plain  1  | unpopulated   6266 |       0.8056 | 1.498 (1.581) |  16017/725    |    4.158
+2-periodic                         | harper 1  | unpopulated   6266 |       0.8056 | 1.332 (1.581) |  16002/736    |    5.047
+2-periodic                         | plain  1  | unpopulated   6266 |       0.8056 | 1.332 (1.581) |  16002/736    |    5.047
+largest ln M_last/(n_o a) over the profiles: with the Harper term 1.1559, without 1.2445
+
+=== u = 1.0, n_o = 1000: p_u n_o = 269, a = 0.11094;  b = 0.5, lam = 0.5, eta = 0.25, eta' = theta = 0.1
+profile                            | variant th | closes at      r   | ln M/(n_o a) | width (bound) | levels pop/neg | min_pop (r - p_u n_o)/sqrt(n_o ln n_o)
+flat                               | harper 1  | unpopulated    311 |       0.7573 | 1.257 (1.581) |   2001/129    |     -   
+flat                               | plain  1  | unpopulated    311 |       0.7573 | 1.257 (1.581) |   2001/129    |     -   
+cone                               | harper 1  | unpopulated    235 |       1.4321 | 1.525 (1.581) |   2531/0      |   -0.396
+cone                               | plain  1  | unpopulated    225 |       1.5383 | 1.512 (1.581) |   2551/0      |   -0.517
+cone slope u/2                     | harper 1  | unpopulated    308 |       0.7761 | 1.513 (1.581) |   2193/0      |    0.482
+cone slope u/2                     | plain  1  | unpopulated    308 |       0.7761 | 1.513 (1.581) |   2193/0      |    0.482
+anti-cone                          | harper 1  | unpopulated    235 |       1.4321 | 1.525 (1.581) |   2531/0      |   -0.396
+anti-cone                          | plain  1  | unpopulated    225 |       1.5383 | 1.512 (1.581) |   2551/0      |   -0.517
+flattened bottom R=0.5 p_u n_o     | harper 1  | unpopulated    235 |       1.4321 | 1.525 (1.581) |   2531/0      |   -0.396
+flattened bottom R=0.5 p_u n_o     | plain  1  | unpopulated    225 |       1.5383 | 1.512 (1.581) |   2551/0      |   -0.517
+mesa R=0.5 p_u n_o                 | harper 1  | unpopulated    311 |       0.7573 | 1.257 (1.581) |   2001/129    |     -   
+mesa R=0.5 p_u n_o                 | plain  1  | unpopulated    311 |       0.7573 | 1.257 (1.581) |   2001/129    |     -   
+flattened bottom R=1.0 p_u n_o     | harper 1  | unpopulated    263 |       1.1509 | 1.519 (1.581) |   2465/0      |    0.001
+flattened bottom R=1.0 p_u n_o     | plain  1  | unpopulated    262 |       1.1634 | 1.514 (1.581) |   2465/0      |    0.001
+mesa R=1.0 p_u n_o                 | harper 1  | unpopulated    311 |       0.7573 | 1.257 (1.581) |   2001/129    |     -   
+mesa R=1.0 p_u n_o                 | plain  1  | unpopulated    311 |       0.7573 | 1.257 (1.581) |   2001/129    |     -   
+flattened bottom R=1.5 p_u n_o     | harper 1  | unpopulated    312 |       0.7511 | 1.541 (1.581) |   2195/85     |    1.625
+flattened bottom R=1.5 p_u n_o     | plain  1  | unpopulated    311 |       0.7573 | 1.529 (1.581) |   2195/86     |    1.625
+mesa R=1.5 p_u n_o                 | harper 1  | unpopulated    235 |       1.4321 | 1.525 (1.581) |   2302/35     |   -0.396
+mesa R=1.5 p_u n_o                 | plain  1  | unpopulated    225 |       1.5383 | 1.512 (1.581) |   2322/35     |   -0.517
+dip R=0.8 Lambda1 n_o/u            | harper 1  | unpopulated    311 |       0.7573 | 1.257 (1.581) |   2001/129    |     -   
+dip R=0.8 Lambda1 n_o/u            | plain  1  | unpopulated    311 |       0.7573 | 1.257 (1.581) |   2001/129    |     -   
+dip R=1.0 Lambda1 n_o/u            | harper 1  | unpopulated    245 |       1.3259 | 1.345 (1.581) |   2162/107    |   -0.276
+dip R=1.0 Lambda1 n_o/u            | plain  1  | unpopulated    245 |       1.3259 | 1.345 (1.581) |   2162/107    |   -0.276
+dip R=1.2 Lambda1 n_o/u            | harper 1  | unpopulated    235 |       1.4321 | 1.525 (1.581) |   2441/0      |   -0.396
+dip R=1.2 Lambda1 n_o/u            | plain  1  | unpopulated    225 |       1.5383 | 1.512 (1.581) |   2461/0      |   -0.517
+staircase W ~ 1/|B(d)|             | harper 1  | unpopulated    235 |       1.4321 | 1.511 (1.581) |   2296/0      |   -0.396
+staircase W ~ 1/|B(d)|             | plain  1  | unpopulated    226 |       1.5258 | 1.508 (1.581) |   2314/0      |   -0.505
+random walk 0                      | harper 1  | unpopulated    312 |       0.7511 | 1.515 (1.581) |   2014/117    |    1.830
+random walk 0                      | plain  1  | unpopulated    312 |       0.7511 | 1.515 (1.581) |   2014/117    |    1.830
+random walk 1                      | harper 1  | unpopulated    312 |       0.7511 | 1.492 (1.581) |   2015/113    |    2.034
+random walk 1                      | plain  1  | unpopulated    312 |       0.7511 | 1.492 (1.581) |   2015/113    |    2.034
+random walk 2                      | harper 1  | unpopulated    311 |       0.7573 | 1.522 (1.581) |   2004/123    |    2.431
+random walk 2                      | plain  1  | unpopulated    311 |       0.7573 | 1.522 (1.581) |   2004/123    |    2.431
+2-periodic                         | harper 1  | unpopulated    312 |       0.7511 | 1.392 (1.581) |   2003/126    |    2.864
+2-periodic                         | plain  1  | unpopulated    312 |       0.7511 | 1.392 (1.581) |   2003/126    |    2.864
+largest ln M_last/(n_o a) over the profiles: with the Harper term 1.4321, without 1.5383
+additive: slopes u (half), u/2 (half)    | harper 1  | populated      269 |       1.0947 | 1.515 (1.581) |   1469/144    |    0.013
+additive: slopes u (half), u/2 (half)    | plain  1  | populated      264 |       1.1447 | 1.512 (1.581) |   1477/144    |   -0.047
+additive: slopes u (third), 0 (rest)     | harper 1  | unpopulated    304 |       0.8073 | 1.514 (1.581) |   1887/0      |    0.446
+additive: slopes u (third), 0 (rest)     | plain  1  | populated      302 |       0.8261 | 1.512 (1.581) |   1889/0      |    0.422
+additive: slopes +u (half), -u (half)    | harper 1  | unpopulated    235 |       1.4321 | 1.525 (1.581) |   2531/0      |   -0.396
+additive: slopes +u (half), -u (half)    | plain  1  | unpopulated    225 |       1.5383 | 1.512 (1.581) |   2551/0      |   -0.517
+additive: slopes u, u/2, -u/2 (thirds)   | harper 1  | populated      281 |       0.9947 | 1.514 (1.581) |   1975/0      |    0.157
+additive: slopes u, u/2, -u/2 (thirds)   | plain  1  | unpopulated    279 |       1.0072 | 1.513 (1.581) |   1978/0      |    0.133
+additive: slopes u/2 (all)               | harper 1  | unpopulated    308 |       0.7761 | 1.513 (1.581) |   1693/0      |    0.482
+additive: slopes u/2 (all)               | plain  1  | unpopulated    308 |       0.7761 | 1.513 (1.581) |   1693/0      |    0.482
+
+=== u = 1.0, n_o = 4000: p_u n_o = 1076, a = 0.11094;  b = 0.5, lam = 0.5, eta = 0.25, eta' = theta = 0.1
+profile                            | variant th | closes at      r   | ln M/(n_o a) | width (bound) | levels pop/neg | min_pop (r - p_u n_o)/sqrt(n_o ln n_o)
+flat                               | harper 1  | unpopulated   1171 |       0.8238 | 1.265 (1.581) |   8001/689    |     -   
+flat                               | plain  1  | unpopulated   1171 |       0.8238 | 1.270 (1.581) |   8001/689    |     -   
+cone                               | harper 1  | unpopulated   1008 |       1.1861 | 1.526 (1.581) |   9985/0      |   -0.367
+cone                               | plain  1  | unpopulated    982 |       1.2502 | 1.512 (1.581) |  10037/0      |   -0.509
+cone slope u/2                     | harper 1  | unpopulated   1171 |       0.8238 | 1.512 (1.581) |   8645/286    |    1.544
+cone slope u/2                     | plain  1  | unpopulated   1168 |       0.8300 | 1.512 (1.581) |   8646/290    |    1.539
+anti-cone                          | harper 1  | unpopulated   1008 |       1.1861 | 1.526 (1.581) |   9985/0      |   -0.367
+anti-cone                          | plain  1  | unpopulated    982 |       1.2502 | 1.512 (1.581) |  10037/0      |   -0.509
+flattened bottom R=0.5 p_u n_o     | harper 1  | unpopulated   1008 |       1.1861 | 1.526 (1.581) |   9985/0      |   -0.367
+flattened bottom R=0.5 p_u n_o     | plain  1  | unpopulated    982 |       1.2502 | 1.512 (1.581) |  10037/0      |   -0.509
+mesa R=0.5 p_u n_o                 | harper 1  | unpopulated   1171 |       0.8238 | 1.265 (1.581) |   8001/689    |     -   
+mesa R=0.5 p_u n_o                 | plain  1  | unpopulated   1171 |       0.8238 | 1.270 (1.581) |   8001/689    |     -   
+flattened bottom R=1.0 p_u n_o     | harper 1  | unpopulated   1070 |       1.0393 | 1.522 (1.581) |   9851/0      |    0.001
+flattened bottom R=1.0 p_u n_o     | plain  1  | unpopulated   1068 |       1.0440 | 1.512 (1.581) |   9851/0      |    0.001
+mesa R=1.0 p_u n_o                 | harper 1  | unpopulated   1171 |       0.8238 | 1.265 (1.581) |   8001/689    |     -   
+mesa R=1.0 p_u n_o                 | plain  1  | unpopulated   1171 |       0.8238 | 1.270 (1.581) |   8001/689    |     -   
+flattened bottom R=1.5 p_u n_o     | harper 1  | unpopulated   1171 |       0.8238 | 1.539 (1.581) |   8775/532    |    2.955
+flattened bottom R=1.5 p_u n_o     | plain  1  | unpopulated   1167 |       0.8316 | 1.528 (1.581) |   8775/539    |    2.955
+mesa R=1.5 p_u n_o                 | harper 1  | unpopulated   1008 |       1.1861 | 1.526 (1.581) |   8970/241    |   -0.367
+mesa R=1.5 p_u n_o                 | plain  1  | unpopulated    982 |       1.2502 | 1.512 (1.581) |   9022/241    |   -0.509
+dip R=0.8 Lambda1 n_o/u            | harper 1  | unpopulated   1171 |       0.8238 | 1.265 (1.581) |   8001/689    |     -   
+dip R=0.8 Lambda1 n_o/u            | plain  1  | unpopulated   1171 |       0.8238 | 1.270 (1.581) |   8001/689    |     -   
+dip R=1.0 Lambda1 n_o/u            | harper 1  | unpopulated   1023 |       1.1486 | 1.363 (1.581) |   8343/650    |   -0.284
+dip R=1.0 Lambda1 n_o/u            | plain  1  | unpopulated   1023 |       1.1486 | 1.363 (1.581) |   8343/650    |   -0.284
+dip R=1.2 Lambda1 n_o/u            | harper 1  | unpopulated   1008 |       1.1861 | 1.526 (1.581) |   9619/12     |   -0.367
+dip R=1.2 Lambda1 n_o/u            | plain  1  | unpopulated    982 |       1.2502 | 1.512 (1.581) |   9671/12     |   -0.509
+staircase W ~ 1/|B(d)|             | harper 1  | unpopulated   1008 |       1.1861 | 1.512 (1.581) |   9031/0      |   -0.367
+staircase W ~ 1/|B(d)|             | plain  1  | unpopulated    983 |       1.2486 | 1.510 (1.581) |   9081/0      |   -0.504
+random walk 0                      | harper 1  | unpopulated   1171 |       0.8238 | 1.504 (1.581) |   8028/665    |    4.080
+random walk 0                      | plain  1  | unpopulated   1171 |       0.8238 | 1.504 (1.581) |   8028/665    |    4.080
+random walk 1                      | harper 1  | unpopulated   1168 |       0.8300 | 1.521 (1.581) |   8017/686    |    4.608
+random walk 1                      | plain  1  | unpopulated   1168 |       0.8300 | 1.521 (1.581) |   8017/686    |    4.608
+random walk 2                      | harper 1  | unpopulated   1167 |       0.8316 | 1.520 (1.581) |   8018/687    |    4.646
+random walk 2                      | plain  1  | unpopulated   1168 |       0.8300 | 1.520 (1.581) |   8018/685    |    4.646
+2-periodic                         | harper 1  | unpopulated   1168 |       0.8300 | 1.389 (1.581) |   8003/693    |    5.151
+2-periodic                         | plain  1  | unpopulated   1168 |       0.8300 | 1.389 (1.581) |   8003/693    |    5.151
+largest ln M_last/(n_o a) over the profiles: with the Harper term 1.1861, without 1.2502
+additive: slopes u (half), u/2 (half)    | harper 1  | unpopulated   1135 |       0.8972 | 1.512 (1.581) |   1423/4937   |    0.331
+additive: slopes u (half), u/2 (half)    | plain  1  | populated     1131 |       0.9065 | 1.511 (1.581) |   1429/4937   |    0.309
+additive: slopes u (third), 0 (rest)     | harper 1  | unpopulated   1167 |       0.8316 | 1.512 (1.581) |   2501/5178   |    1.335
+additive: slopes u (third), 0 (rest)     | plain  1  | unpopulated   1167 |       0.8316 | 1.512 (1.581) |   2505/5173   |    1.313
+additive: slopes +u (half), -u (half)    | harper 1  | unpopulated   1008 |       1.1861 | 1.526 (1.581) |   5048/4937   |   -0.367
+additive: slopes +u (half), -u (half)    | plain  1  | unpopulated    982 |       1.2502 | 1.512 (1.581) |   5100/4937   |   -0.509
+additive: slopes u, u/2, -u/2 (thirds)   | harper 1  | unpopulated   1171 |       0.8238 | 1.513 (1.581) |   2872/4965   |    0.616
+additive: slopes u, u/2, -u/2 (thirds)   | plain  1  | unpopulated   1168 |       0.8300 | 1.512 (1.581) |   2880/4961   |    0.589
+additive: slopes u/2 (all)               | harper 1  | unpopulated   1171 |       0.8238 | 1.512 (1.581) |   6645/286    |    1.544
+additive: slopes u/2 (all)               | plain  1  | unpopulated   1168 |       0.8300 | 1.512 (1.581) |   6646/290    |    1.539
+
+=== u = 1.0, n_o = 16000: p_u n_o = 4303, a = 0.11094;  b = 0.5, lam = 0.5, eta = 0.25, eta' = theta = 0.1
+profile                            | variant th | closes at      r   | ln M/(n_o a) | width (bound) | levels pop/neg | min_pop (r - p_u n_o)/sqrt(n_o ln n_o)
+flat                               | harper 1  | unpopulated   4502 |       0.8983 | 1.265 (1.581) |  32001/3144   |     -   
+flat                               | plain  1  | unpopulated   4502 |       0.8983 | 1.265 (1.581) |  32001/3144   |     -   
+cone                               | harper 1  | unpopulated   4168 |       1.0846 | 1.527 (1.581) |  39665/0      |   -0.341
+cone                               | plain  1  | unpopulated   4105 |       1.1221 | 1.511 (1.581) |  39791/0      |   -0.501
+cone slope u/2                     | harper 1  | unpopulated   4502 |       0.8983 | 1.511 (1.581) |  34285/1842   |    3.588
+cone slope u/2                     | plain  1  | unpopulated   4499 |       0.8999 | 1.511 (1.581) |  34288/1844   |    3.575
+anti-cone                          | harper 1  | unpopulated   4168 |       1.0846 | 1.527 (1.581) |  39665/0      |   -0.341
+anti-cone                          | plain  1  | unpopulated   4105 |       1.1221 | 1.511 (1.581) |  39791/0      |   -0.501
+flattened bottom R=0.5 p_u n_o     | harper 1  | unpopulated   4168 |       1.0846 | 1.527 (1.581) |  39665/0      |   -0.341
+flattened bottom R=0.5 p_u n_o     | plain  1  | unpopulated   4105 |       1.1221 | 1.511 (1.581) |  39791/0      |   -0.501
+mesa R=0.5 p_u n_o                 | harper 1  | unpopulated   4502 |       0.8983 | 1.265 (1.581) |  32001/3144   |     -   
+mesa R=0.5 p_u n_o                 | plain  1  | unpopulated   4502 |       0.8983 | 1.265 (1.581) |  32001/3144   |     -   
+flattened bottom R=1.0 p_u n_o     | harper 1  | unpopulated   4298 |       1.0100 | 1.523 (1.581) |  39395/0      |    0.002
+flattened bottom R=1.0 p_u n_o     | plain  1  | unpopulated   4295 |       1.0116 | 1.511 (1.581) |  39395/0      |    0.002
+mesa R=1.0 p_u n_o                 | harper 1  | unpopulated   4502 |       0.8983 | 1.265 (1.581) |  32001/3144   |     -   
+mesa R=1.0 p_u n_o                 | plain  1  | unpopulated   4502 |       0.8983 | 1.265 (1.581) |  32001/3144   |     -   
+flattened bottom R=1.5 p_u n_o     | harper 1  | unpopulated   4499 |       0.8999 | 1.535 (1.581) |  35093/2541   |    5.468
+flattened bottom R=1.5 p_u n_o     | plain  1  | unpopulated   4502 |       0.8983 | 1.535 (1.581) |  35093/2535   |    5.468
+mesa R=1.5 p_u n_o                 | harper 1  | unpopulated   4168 |       1.0846 | 1.527 (1.581) |  35494/1079   |   -0.341
+mesa R=1.5 p_u n_o                 | plain  1  | unpopulated   4105 |       1.1221 | 1.511 (1.581) |  35620/1079   |   -0.501
+dip R=0.8 Lambda1 n_o/u            | harper 1  | unpopulated   4502 |       0.8983 | 1.265 (1.581) |  32001/3144   |     -   
+dip R=0.8 Lambda1 n_o/u            | plain  1  | unpopulated   4502 |       0.8983 | 1.265 (1.581) |  32001/3144   |     -   
+dip R=1.0 Lambda1 n_o/u            | harper 1  | unpopulated   4189 |       1.0725 | 1.387 (1.581) |  32728/3051   |   -0.287
+dip R=1.0 Lambda1 n_o/u            | plain  1  | unpopulated   4189 |       1.0725 | 1.387 (1.581) |  32728/3051   |   -0.287
+dip R=1.2 Lambda1 n_o/u            | harper 1  | unpopulated   4168 |       1.0846 | 1.527 (1.581) |  38126/125    |   -0.341
+dip R=1.2 Lambda1 n_o/u            | plain  1  | unpopulated   4105 |       1.1221 | 1.511 (1.581) |  38252/125    |   -0.501
+staircase W ~ 1/|B(d)|             | harper 1  | unpopulated   4168 |       1.0846 | 1.511 (1.581) |  35829/0      |   -0.341
+staircase W ~ 1/|B(d)|             | plain  1  | unpopulated   4112 |       1.1178 | 1.511 (1.581) |  35941/0      |   -0.483
+random walk 0                      | harper 1  | unpopulated   4499 |       0.8999 | 1.522 (1.581) |  32020/3139   |    8.819
+random walk 0                      | plain  1  | unpopulated   4499 |       0.8999 | 1.522 (1.581) |  32020/3139   |    8.819
+random walk 1                      | harper 1  | unpopulated   4499 |       0.8999 | 1.521 (1.581) |  32033/3127   |    8.705
+random walk 1                      | plain  1  | unpopulated   4499 |       0.8999 | 1.521 (1.581) |  32033/3127   |    8.705
+random walk 2                      | harper 1  | unpopulated   4502 |       0.8983 | 1.523 (1.581) |  32060/3104   |    8.281
+random walk 2                      | plain  1  | unpopulated   4502 |       0.8983 | 1.523 (1.581) |  32060/3104   |    8.281
+2-periodic                         | harper 1  | unpopulated   4496 |       0.9015 | 1.386 (1.581) |  32003/3154   |    9.462
+2-periodic                         | plain  1  | unpopulated   4496 |       0.9015 | 1.386 (1.581) |  32003/3154   |    9.462
+largest ln M_last/(n_o a) over the profiles: with the Harper term 1.0846, without 1.1221
+
+=== u = 2.0, n_o = 1000: p_u n_o = 119, a = 0.32781;  b = 0.5, lam = 0.5, eta = 0.25, eta' = theta = 0.1
+profile                            | variant th | closes at      r   | ln M/(n_o a) | width (bound) | levels pop/neg | min_pop (r - p_u n_o)/sqrt(n_o ln n_o)
+flat                               | harper 1  | unpopulated    151 |       0.8528 | 1.263 (1.581) |   4001/518    |     -   
+flat                               | plain  1  | unpopulated    151 |       0.8528 | 1.263 (1.581) |   4001/518    |     -   
+cone                               | harper 1  | unpopulated     88 |       1.2398 | 1.516 (1.581) |   5649/0      |   -0.363
+cone                               | plain  1  | unpopulated     85 |       1.2609 | 1.512 (1.581) |   5661/0      |   -0.399
+cone slope u/2                     | harper 1  | unpopulated    151 |       0.8528 | 1.512 (1.581) |   4598/155    |    0.996
+cone slope u/2                     | plain  1  | unpopulated    151 |       0.8528 | 1.512 (1.581) |   4598/155    |    0.996
+anti-cone                          | harper 1  | unpopulated     88 |       1.2398 | 1.516 (1.581) |   5649/0      |   -0.363
+anti-cone                          | plain  1  | unpopulated     85 |       1.2609 | 1.512 (1.581) |   5661/0      |   -0.399
+flattened bottom R=0.5 p_u n_o     | harper 1  | unpopulated     88 |       1.2398 | 1.516 (1.581) |   5649/0      |   -0.363
+flattened bottom R=0.5 p_u n_o     | plain  1  | unpopulated     85 |       1.2609 | 1.512 (1.581) |   5661/0      |   -0.399
+mesa R=0.5 p_u n_o                 | harper 1  | unpopulated    151 |       0.8528 | 1.263 (1.581) |   4001/518    |     -   
+mesa R=0.5 p_u n_o                 | plain  1  | unpopulated    151 |       0.8528 | 1.263 (1.581) |   4001/518    |     -   
+flattened bottom R=1.0 p_u n_o     | harper 1  | unpopulated    115 |       1.0600 | 1.512 (1.581) |   5525/0      |    0.010
+flattened bottom R=1.0 p_u n_o     | plain  1  | unpopulated    115 |       1.0600 | 1.512 (1.581) |   5525/0      |    0.010
+mesa R=1.0 p_u n_o                 | harper 1  | unpopulated    151 |       0.8528 | 1.263 (1.581) |   4001/518    |     -   
+mesa R=1.0 p_u n_o                 | plain  1  | unpopulated    151 |       0.8528 | 1.263 (1.581) |   4001/518    |     -   
+flattened bottom R=1.5 p_u n_o     | harper 1  | unpopulated    151 |       0.8528 | 1.524 (1.581) |   5289/62     |    0.719
+flattened bottom R=1.5 p_u n_o     | plain  1  | unpopulated    151 |       0.8528 | 1.524 (1.581) |   5289/62     |    0.719
+mesa R=1.5 p_u n_o                 | harper 1  | unpopulated    151 |       0.8528 | 1.263 (1.581) |   4001/518    |     -   
+mesa R=1.5 p_u n_o                 | plain  1  | unpopulated    151 |       0.8528 | 1.263 (1.581) |   4001/518    |     -   
+dip R=0.8 Lambda1 n_o/u            | harper 1  | unpopulated    151 |       0.8528 | 1.263 (1.581) |   4001/518    |     -   
+dip R=0.8 Lambda1 n_o/u            | plain  1  | unpopulated    151 |       0.8528 | 1.263 (1.581) |   4001/518    |     -   
+dip R=1.0 Lambda1 n_o/u            | harper 1  | unpopulated     94 |       1.1975 | 1.380 (1.581) |   4281/476    |   -0.291
+dip R=1.0 Lambda1 n_o/u            | plain  1  | unpopulated     94 |       1.1975 | 1.380 (1.581) |   4281/476    |   -0.291
+dip R=1.2 Lambda1 n_o/u            | harper 1  | unpopulated     88 |       1.2398 | 1.516 (1.581) |   4867/138    |   -0.363
+dip R=1.2 Lambda1 n_o/u            | plain  1  | unpopulated     85 |       1.2609 | 1.512 (1.581) |   4879/138    |   -0.399
+staircase W ~ 1/|B(d)|             | harper 1  | unpopulated     88 |       1.2398 | 1.510 (1.581) |   4787/0      |   -0.363
+staircase W ~ 1/|B(d)|             | plain  1  | unpopulated     85 |       1.2609 | 1.510 (1.581) |   4799/0      |   -0.399
+random walk 0                      | harper 1  | unpopulated    149 |       0.8634 | 1.520 (1.581) |   4030/504    |    3.595
+random walk 0                      | plain  1  | unpopulated    149 |       0.8634 | 1.516 (1.581) |   4030/503    |    3.595
+random walk 1                      | harper 1  | unpopulated    151 |       0.8528 | 1.511 (1.581) |   4016/504    |    3.956
+random walk 1                      | plain  1  | unpopulated    151 |       0.8528 | 1.511 (1.581) |   4016/504    |    3.956
+random walk 2                      | harper 1  | unpopulated    151 |       0.8528 | 1.515 (1.581) |   4031/495    |    3.764
+random walk 2                      | plain  1  | unpopulated    151 |       0.8528 | 1.515 (1.581) |   4031/495    |    3.764
+2-periodic                         | harper 1  | unpopulated    151 |       0.8528 | 1.483 (1.581) |   4005/517    |    4.666
+2-periodic                         | plain  1  | unpopulated    151 |       0.8528 | 1.483 (1.581) |   4005/517    |    4.666
+largest ln M_last/(n_o a) over the profiles: with the Harper term 1.2398, without 1.2609
+additive: slopes u (half), u/2 (half)    | harper 1  | unpopulated    135 |       0.9395 | 1.512 (1.581) |   2858/773    |    0.202
+additive: slopes u (half), u/2 (half)    | plain  1  | populated      133 |       0.9522 | 1.511 (1.581) |   2864/773    |    0.178
+additive: slopes u (third), 0 (rest)     | harper 1  | unpopulated    151 |       0.8528 | 1.513 (1.581) |   3944/193    |    1.141
+additive: slopes u (third), 0 (rest)     | plain  1  | unpopulated    151 |       0.8528 | 1.513 (1.581) |   3944/193    |    1.141
+additive: slopes +u (half), -u (half)    | harper 1  | unpopulated     88 |       1.2398 | 1.516 (1.581) |   5649/0      |   -0.363
+additive: slopes +u (half), -u (half)    | plain  1  | unpopulated     85 |       1.2609 | 1.512 (1.581) |   5661/0      |   -0.399
+additive: slopes u, u/2, -u/2 (thirds)   | harper 1  | unpopulated    149 |       0.8634 | 1.512 (1.581) |   4303/2      |    0.371
+additive: slopes u, u/2, -u/2 (thirds)   | plain  1  | unpopulated    148 |       0.8697 | 1.512 (1.581) |   4305/3      |    0.359
+additive: slopes u/2 (all)               | harper 1  | unpopulated    151 |       0.8528 | 1.512 (1.581) |   3528/225    |    0.996
+additive: slopes u/2 (all)               | plain  1  | unpopulated    151 |       0.8528 | 1.512 (1.581) |   3528/225    |    0.996
+
+=== u = 2.0, n_o = 4000: p_u n_o = 477, a = 0.32781;  b = 0.5, lam = 0.5, eta = 0.25, eta' = theta = 0.1
+profile                            | variant th | closes at      r   | ln M/(n_o a) | width (bound) | levels pop/neg | min_pop (r - p_u n_o)/sqrt(n_o ln n_o)
+flat                               | harper 1  | unpopulated    543 |       0.9116 | 1.257 (1.581) |  16001/2347   |     -   
+flat                               | plain  1  | unpopulated    543 |       0.9116 | 1.258 (1.581) |  16001/2347   |     -   
+cone                               | harper 1  | unpopulated    414 |       1.1082 | 1.516 (1.581) |  22345/0      |   -0.339
+cone                               | plain  1  | unpopulated    403 |       1.1267 | 1.512 (1.581) |  22389/0      |   -0.400
+cone slope u/2                     | harper 1  | unpopulated    546 |       0.9074 | 1.512 (1.581) |  18138/1152   |    2.488
+cone slope u/2                     | plain  1  | unpopulated    546 |       0.9074 | 1.512 (1.581) |  18138/1152   |    2.488
+anti-cone                          | harper 1  | unpopulated    414 |       1.1082 | 1.516 (1.581) |  22345/0      |   -0.339
+anti-cone                          | plain  1  | unpopulated    403 |       1.1267 | 1.512 (1.581) |  22389/0      |   -0.400
+flattened bottom R=0.5 p_u n_o     | harper 1  | unpopulated    414 |       1.1082 | 1.516 (1.581) |  22345/0      |   -0.339
+flattened bottom R=0.5 p_u n_o     | plain  1  | unpopulated    403 |       1.1267 | 1.512 (1.581) |  22389/0      |   -0.400
+mesa R=0.5 p_u n_o                 | harper 1  | unpopulated    543 |       0.9116 | 1.257 (1.581) |  16001/2347   |     -   
+mesa R=0.5 p_u n_o                 | plain  1  | unpopulated    543 |       0.9116 | 1.258 (1.581) |  16001/2347   |     -   
+flattened bottom R=1.0 p_u n_o     | harper 1  | unpopulated    472 |       1.0163 | 1.512 (1.581) |  22097/0      |    0.001
+flattened bottom R=1.0 p_u n_o     | plain  1  | unpopulated    472 |       1.0163 | 1.512 (1.581) |  22097/0      |    0.001
+mesa R=1.0 p_u n_o                 | harper 1  | unpopulated    543 |       0.9116 | 1.257 (1.581) |  16001/2347   |     -   
+mesa R=1.0 p_u n_o                 | plain  1  | unpopulated    543 |       0.9116 | 1.258 (1.581) |  16001/2347   |     -   
+flattened bottom R=1.5 p_u n_o     | harper 1  | unpopulated    543 |       0.9116 | 1.522 (1.581) |  21141/550    |    1.313
+flattened bottom R=1.5 p_u n_o     | plain  1  | unpopulated    543 |       0.9116 | 1.522 (1.581) |  21141/550    |    1.313
+mesa R=1.5 p_u n_o                 | harper 1  | unpopulated    543 |       0.9116 | 1.257 (1.581) |  16001/2347   |     -   
+mesa R=1.5 p_u n_o                 | plain  1  | unpopulated    543 |       0.9116 | 1.258 (1.581) |  16001/2347   |     -   
+dip R=0.8 Lambda1 n_o/u            | harper 1  | unpopulated    543 |       0.9116 | 1.257 (1.581) |  16001/2347   |     -   
+dip R=0.8 Lambda1 n_o/u            | plain  1  | unpopulated    543 |       0.9116 | 1.258 (1.581) |  16001/2347   |     -   
+dip R=1.0 Lambda1 n_o/u            | harper 1  | unpopulated    432 |       1.0792 | 1.344 (1.581) |  16535/2266   |   -0.241
+dip R=1.0 Lambda1 n_o/u            | plain  1  | unpopulated    432 |       1.0792 | 1.344 (1.581) |  16535/2266   |   -0.241
+dip R=1.2 Lambda1 n_o/u            | harper 1  | unpopulated    414 |       1.1082 | 1.516 (1.581) |  19136/641    |   -0.339
+dip R=1.2 Lambda1 n_o/u            | plain  1  | unpopulated    403 |       1.1267 | 1.512 (1.581) |  19180/641    |   -0.400
+staircase W ~ 1/|B(d)|             | harper 1  | unpopulated    414 |       1.1082 | 1.511 (1.581) |  18881/0      |   -0.339
+staircase W ~ 1/|B(d)|             | plain  1  | unpopulated    406 |       1.1215 | 1.511 (1.581) |  18913/0      |   -0.383
+random walk 0                      | harper 1  | unpopulated    546 |       0.9074 | 1.520 (1.581) |  16020/2319   |    7.770
+random walk 0                      | plain  1  | unpopulated    546 |       0.9074 | 1.520 (1.581) |  16020/2319   |    7.770
+random walk 1                      | harper 1  | unpopulated    546 |       0.9074 | 1.522 (1.581) |  16029/2316   |    7.523
+random walk 1                      | plain  1  | unpopulated    546 |       0.9074 | 1.522 (1.581) |  16029/2316   |    7.523
+random walk 2                      | harper 1  | unpopulated    543 |       0.9116 | 1.520 (1.581) |  16006/2340   |    8.039
+random walk 2                      | plain  1  | unpopulated    543 |       0.9116 | 1.520 (1.581) |  16006/2340   |    8.039
+2-periodic                         | harper 1  | unpopulated    546 |       0.9074 | 1.479 (1.581) |  16005/2334   |    8.439
+2-periodic                         | plain  1  | unpopulated    546 |       0.9074 | 1.479 (1.581) |  16005/2334   |    8.439
+largest ln M_last/(n_o a) over the profiles: with the Harper term 1.1082, without 1.1267
+additive: slopes u (half), u/2 (half)    | harper 1  | unpopulated    546 |       0.9074 | 1.512 (1.581) |   2552/11993  |    0.720
+additive: slopes u (half), u/2 (half)    | plain  1  | unpopulated    546 |       0.9074 | 1.511 (1.581) |   2558/11986  |    0.709
+additive: slopes u (third), 0 (rest)     | harper 1  | unpopulated    546 |       0.9074 | 1.513 (1.581) |   4148/12673  |    2.669
+additive: slopes u (third), 0 (rest)     | plain  1  | unpopulated    546 |       0.9074 | 1.512 (1.581) |   4150/12670  |    2.669
+additive: slopes +u (half), -u (half)    | harper 1  | unpopulated    414 |       1.1082 | 1.516 (1.581) |  10900/11445  |   -0.339
+additive: slopes +u (half), -u (half)    | plain  1  | unpopulated    403 |       1.1267 | 1.512 (1.581) |  10944/11445  |   -0.400
+additive: slopes u, u/2, -u/2 (thirds)   | harper 1  | unpopulated    543 |       0.9116 | 1.512 (1.581) |   5486/11987  |    1.242
+additive: slopes u, u/2, -u/2 (thirds)   | plain  1  | unpopulated    543 |       0.9116 | 1.511 (1.581) |   5490/11982  |    1.231
+additive: slopes u/2 (all)               | harper 1  | unpopulated    546 |       0.9074 | 1.512 (1.581) |  14138/1152   |    2.488
+additive: slopes u/2 (all)               | plain  1  | unpopulated    546 |       0.9074 | 1.512 (1.581) |  14138/1152   |    2.488
+
+=== u = 2.0, n_o = 16000: p_u n_o = 1907, a = 0.32781;  b = 0.5, lam = 0.5, eta = 0.25, eta' = theta = 0.1
+profile                            | variant th | closes at      r   | ln M/(n_o a) | width (bound) | levels pop/neg | min_pop (r - p_u n_o)/sqrt(n_o ln n_o)
+flat                               | harper 1  | unpopulated   2047 |       0.9501 | 1.254 (1.581) |  64001/9920   |     -   
+flat                               | plain  1  | unpopulated   2047 |       0.9501 | 1.254 (1.581) |  64001/9920   |     -   
+cone                               | harper 1  | unpopulated   1782 |       1.0511 | 1.517 (1.581) |  88873/0      |   -0.316
+cone                               | plain  1  | unpopulated   1753 |       1.0626 | 1.511 (1.581) |  88989/0      |   -0.389
+cone slope u/2                     | harper 1  | unpopulated   2051 |       0.9487 | 1.511 (1.581) |  72010/5730   |    5.300
+cone slope u/2                     | plain  1  | unpopulated   2051 |       0.9487 | 1.511 (1.581) |  72010/5730   |    5.300
+anti-cone                          | harper 1  | unpopulated   1782 |       1.0511 | 1.517 (1.581) |  88873/0      |   -0.316
+anti-cone                          | plain  1  | unpopulated   1753 |       1.0626 | 1.511 (1.581) |  88989/0      |   -0.389
+flattened bottom R=0.5 p_u n_o     | harper 1  | unpopulated   1782 |       1.0511 | 1.517 (1.581) |  88873/0      |   -0.316
+flattened bottom R=0.5 p_u n_o     | plain  1  | unpopulated   1753 |       1.0626 | 1.511 (1.581) |  88989/0      |   -0.389
+mesa R=0.5 p_u n_o                 | harper 1  | unpopulated   2047 |       0.9501 | 1.254 (1.581) |  64001/9920   |     -   
+mesa R=0.5 p_u n_o                 | plain  1  | unpopulated   2047 |       0.9501 | 1.254 (1.581) |  64001/9920   |     -   
+flattened bottom R=1.0 p_u n_o     | harper 1  | unpopulated   1903 |       1.0041 | 1.513 (1.581) |  88373/0      |    0.002
+flattened bottom R=1.0 p_u n_o     | plain  1  | unpopulated   1902 |       1.0043 | 1.511 (1.581) |  88373/0      |    0.002
+mesa R=1.0 p_u n_o                 | harper 1  | unpopulated   2047 |       0.9501 | 1.254 (1.581) |  64001/9920   |     -   
+mesa R=1.0 p_u n_o                 | plain  1  | unpopulated   2047 |       0.9501 | 1.254 (1.581) |  64001/9920   |     -   
+flattened bottom R=1.5 p_u n_o     | harper 1  | unpopulated   2047 |       0.9501 | 1.521 (1.581) |  84561/2754   |    2.423
+flattened bottom R=1.5 p_u n_o     | plain  1  | unpopulated   2047 |       0.9501 | 1.521 (1.581) |  84561/2754   |    2.423
+mesa R=1.5 p_u n_o                 | harper 1  | unpopulated   2047 |       0.9501 | 1.254 (1.581) |  64001/9920   |     -   
+mesa R=1.5 p_u n_o                 | plain  1  | unpopulated   2047 |       0.9501 | 1.254 (1.581) |  64001/9920   |     -   
+dip R=0.8 Lambda1 n_o/u            | harper 1  | unpopulated   2047 |       0.9501 | 1.254 (1.581) |  64001/9920   |     -   
+dip R=0.8 Lambda1 n_o/u            | plain  1  | unpopulated   2047 |       0.9501 | 1.254 (1.581) |  64001/9920   |     -   
+dip R=1.0 Lambda1 n_o/u            | harper 1  | unpopulated   1829 |       1.0326 | 1.316 (1.581) |  65011/9790   |   -0.196
+dip R=1.0 Lambda1 n_o/u            | plain  1  | unpopulated   1829 |       1.0326 | 1.316 (1.581) |  65011/9790   |   -0.196
+dip R=1.2 Lambda1 n_o/u            | harper 1  | unpopulated   1782 |       1.0511 | 1.517 (1.581) |  75949/2664   |   -0.316
+dip R=1.2 Lambda1 n_o/u            | plain  1  | unpopulated   1753 |       1.0626 | 1.511 (1.581) |  76065/2664   |   -0.389
+staircase W ~ 1/|B(d)|             | harper 1  | unpopulated   1782 |       1.0511 | 1.511 (1.581) |  75000/0      |   -0.316
+staircase W ~ 1/|B(d)|             | plain  1  | unpopulated   1756 |       1.0614 | 1.511 (1.581) |  75104/0      |   -0.382
+random walk 0                      | harper 1  | unpopulated   2047 |       0.9501 | 1.520 (1.581) |  64060/9886   |   14.155
+random walk 0                      | plain  1  | unpopulated   2047 |       0.9501 | 1.520 (1.581) |  64060/9886   |   14.155
+random walk 1                      | harper 1  | unpopulated   2056 |       0.9468 | 1.527 (1.581) |  64038/9875   |   15.105
+random walk 1                      | plain  1  | unpopulated   2056 |       0.9468 | 1.527 (1.581) |  64038/9875   |   15.105
+random walk 2                      | harper 1  | unpopulated   2056 |       0.9468 | 1.520 (1.581) |  64063/9869   |   14.490
+random walk 2                      | plain  1  | unpopulated   2056 |       0.9468 | 1.520 (1.581) |  64063/9869   |   14.490
+2-periodic                         | harper 1  | unpopulated   2051 |       0.9487 | 1.475 (1.581) |  64005/9903   |   15.550
+2-periodic                         | plain  1  | unpopulated   2051 |       0.9487 | 1.475 (1.581) |  64005/9903   |   15.550
+largest ln M_last/(n_o a) over the profiles: with the Harper term 1.0511, without 1.0626
+
+no violation of claims (iii), (iv), (v), validity or width (in expectation): True   (145 s)

@@ -1,0 +1,4 @@
+Algorithm 2L+ with the constants of Theorem K1 (K, nu, J from the formulas; delta = 0.05); seed 777
+  stats: {'runs': 394, 'good': 394, 'bad_event': 0, 'widest': 5.981, 'width_slack': 0.0824, 'tightest_count': 0.6745, 'most_levels': 394, 'points': 14974976, 'largest_M_over_Mdag': 13.5, 'populated': 31970, 'negligible': 47, 'closed_empty': 56, 'closed_populated': 37, 'closed_unpopulated': 301, 'skipped': 46, 'neg_share': 0.019, 'runs_with_negligible_levels': 12, 'closed_by_tail_lemma_at_r<=n_o-2': 338, 'closed_at_r<=r_dagger': 91, 'seconds': 135.6}
+  failures: 0
+main suite passed (no failure; populated and negligible levels occur; closures at populated and at unpopulated levels occur): True
