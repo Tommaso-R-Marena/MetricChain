@@ -214,3 +214,18 @@ t4_cut_families.py, t5_rates.py, t6_robust_rates.py, t7_lattice_chain.py.
   best single pairwise-LP leaf over μ ∈ {0.25..6} certifies on average 0.42 of the level height on 23
   traps (exact 30%, nothing 48%); collapse for large μ confirmed (−114 at μ=32).  Linear multiplier:
   below trivial in all cases shown.  Report remark rewritten accordingly.
+
+## Step 10 (19:00, `date`) — Lean extended (29 theorems), Menger corollary, cross-check with engineering
+* Lean: added `level_cut_sound` (counting cuts), `singleSite_symm`, `wallBox_pairwiseDisjoint`,
+  `box_trap_certificate` (rate certificate for a box cut ON TOP OF `zverifyTop_sound`: intervals returned
+  by the partition kernel on the box and its n wall boxes bound the survival probability for every
+  stationary single-site kernel).  Compiled first try; `#print axioms` for all 29 theorems: 28 standard,
+  `singleSite_symm` none.  out_lean.txt regenerated (exit 0, no warnings).
+* **T3b (`t3b_menger.py`, out_t3b.txt)**: Cor. K7.2 — when the envelope is uninformative (slack between
+  distinct points > energy range), N_low = min ridge-vertex separator = Menger number, N_up = number of
+  vertices of a shortest optimal path.  24 instances with genuine barriers: N_up 24/24; N_low 23/24 equal
+  (values 4–8), 1 predicted 10 > brute-force cap 9 (no certificate ≤ 9 found: consistent); 0 contradictions.
+  (First version of the test was uninformative: random pairs mostly had B = max(E(p),E(q)), N_low = 1.)
+* Cross-check: my T7 feasible-conformation counts 683 / 2005 / 5849 (n = 6,7,8) equal the engineering
+  division's PUBLISHED_CONFS and the header of data/dia_Sc12_n6.txt (same chain model per dia_enum.c).
+* Report updated for all of the above.

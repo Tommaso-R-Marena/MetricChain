@@ -1,0 +1,7 @@
+(1) spread of iota - (J b x - delta(h2) b - delta(h1) x) over the four cells <= 3.67e-40
+(2) |dI/dh1 - (1/2)(1-mu^2)[T(h2) - delta(h1)Delta(h2)]| <= 2.44e-40
+(3) max T(h) over h>0: -5.1135e-6  (< 0)
+(4) closed form of -T - delta*Delta: error <= 3.04e-40; max(-T - delta*Delta) = -6.2026e-5 (< 0); reduction to X ln(Y/X) < (1-Y)ln((1-X)/(1-Y)) holds
+(5) maximiser h1* = -k with delta(k)=g(h2): |h1* + k| <= 9.82e-45; 0<k<h2 and g(k)<delta(h2): True; dC/dh2 formula = finite difference (1e-9); max dC/dh2 = -0.00035944 (< 0)
+(6) C(h2) < K(J) and C even: True
+SUMMARY: ALL PASS

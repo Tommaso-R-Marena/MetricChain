@@ -132,7 +132,7 @@ def Fstar_blind(site, t, n_starts=6, seed=0):
     for s in range(n_starts):
         z0 = rng.normal(size=nv) * (0.0 if s == 0 else 1.5)
         res = minimize(neg, z0, method="Nelder-Mead",
-                       options=dict(xatol=1e-10, fatol=1e-13, maxiter=6000, maxfev=6000))
+                       options=dict(xatol=1e-9, fatol=1e-12, maxiter=1500, maxfev=1500))
         if -res.fun > best[0]:
             w = np.exp(res.x - logsumexp(res.x))
             best = (-res.fun, w @ site.V)
@@ -283,16 +283,37 @@ def threshold_E(site):
     """E = max_M -ln sum_a prod_phi W[phi,a]^M[phi]  (lower bound)  = min_Q max_phi KL(Q||pi_phi) (upper bound at Q_M)."""
     nv = len(site.V)
     f = lambda M: logsumexp(M @ site.logW)
-    res = minimize(f, np.full(nv, 1.0 / nv), method="SLSQP", bounds=[(0, 1)] * nv,
-                   constraints=[dict(type="eq", fun=lambda M: M.sum() - 1.0)],
+
+    def jac(M):
+        lq = M @ site.logW
+        return site.logW @ np.exp(lq - logsumexp(lq))
+
+    def bracket(M):
+        lq = M @ site.logW
+        Q = np.exp(lq - logsumexp(lq))
+        kl = np.array([np.sum(Q * (np.log(Q) - site.logW[k])) for k in range(nv)])   # KL(Q_M || pi_phi)
+        return -logsumexp(lq), kl
+
+    res = minimize(f, np.full(nv, 1.0 / nv), jac=jac, method="SLSQP", bounds=[(0, 1)] * nv,
+                   constraints=[dict(type="eq", fun=lambda M: M.sum() - 1.0, jac=lambda M: np.ones(nv))],
                    options=dict(ftol=1e-16, maxiter=1000))
-    M = np.maximum(res.x, 0)
+    M = np.maximum(res.x, 1e-15)
     M /= M.sum()
-    lo = -logsumexp(M @ site.logW)
-    lq = M @ site.logW
-    Q = np.exp(lq - logsumexp(lq))
-    hi = max(np.sum(Q * (np.log(Q) - site.logW[k])) for k in range(nv))
-    return lo, hi, M
+    lo, kl = bracket(M)
+    eta = 1.0
+    for it in range(20000):                    # exponentiated-gradient polishing until the duality gap closes
+        if kl.max() - lo < 1e-13:
+            break
+        while True:
+            Mn = M * np.exp(eta * (kl - kl.max()))
+            Mn /= Mn.sum()
+            lon, kln = bracket(Mn)
+            if lon >= lo or eta < 1e-12:
+                break
+            eta *= 0.5
+        M, lo, kl = Mn, lon, kln
+        eta *= 1.3
+    return lo, kl.max(), M
 
 
 def capacity_a(site, iters=200000, tol=1e-13):

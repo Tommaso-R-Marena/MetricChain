@@ -239,8 +239,12 @@ def envelope_lp(ch, b, feat=None, m=None, target=None, sense=+1, allpairs=False)
     c = np.zeros(nv)
     if target is not None:
         c = -sense * on_sa(target[order][sa_by_code])
-    res = linprog(c, A_ub=Aub, b_ub=bub, A_eq=np.array(eq_rows), b_eq=np.array(beq),
-                  bounds=[(0, None)] * nv, method="highs")
+    res = None
+    for method in ("highs", "highs-ds", "highs-ipm"):
+        res = linprog(c, A_ub=Aub, b_ub=bub, A_eq=np.array(eq_rows), b_eq=np.array(beq),
+                      bounds=[(0, None)] * nv, method=method)
+        if res.status in (0, 2):
+            break
     if res.status == 2:
         return "infeasible", None
     assert res.status == 0, res.message

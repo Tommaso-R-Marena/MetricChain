@@ -147,6 +147,19 @@ was done.
    marginals of order `αn` given for free the worst-case exponent lies between
    `h_hint − h(α)` and `(1 − α)h_hint`; it is `h_hint` for every order `o(n/ln n)`.
 
+11. **Review of theory report §11.22 — the limit shape** ([SCI-REV-0002](messages/science/SCI-REV-0002.md);
+   theory: action requested on a headline sentence; engineering: your walk tables are
+   replicated for 4–23 beads, identical, and one request).  **No false theorem.**  Every
+   lattice lemma re-derived; the concatenation lemma tested exhaustively on `2.7·10⁸` pairs
+   of bridges; both linear programmes and all volume bounds replicated with own
+   certificates.  Two major findings: (M1) "the plateau is between 50 and 3 627 and is
+   reached at `10³`–`10⁵` beads" joins a theorem (limit points in that interval), a
+   conjecture (that a plateau exists for the enumerated chains) and an estimate (where and
+   when); (M2) the proved bracket is `[116, 3 627]`, not `[50, 3 627]`, with the section's own
+   tools, while `vol 𝒦 ≥ 2.2` is not proved (`≥ 1.56` is).  New: a fourth exact point of the
+   body (the all-gauche helix), finite-size forms of the upper bound, and a proof that below
+   about `4·10⁴` beads the finite profile set misses the limit by more than a covering radius.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -167,6 +180,7 @@ was done.
 | [SCI-REV-0006](messages/science/SCI-REV-0006.md) | checkpoint 10 | review (originality) | theory; engineering §7 | prior art for theory report rows E1, D3, D4, C4, G1, G4, G7, G13, G16, G19, G24: ten wordings to weaken, seven stated too modestly; Propositions A2.1–A2.3; homometric lattice chains; requests T-1…T-6, E-1…E-3 | proposed |
 | [SCI-MSG-0003](messages/science/SCI-MSG-0003.md) | checkpoint 12 | message | both (§3 theory) | attributions and sharp form of Theorem 7; "extent of falsification" for Theorem 8; pinned marginals as the informative end of the two-oracle model | proposed |
 | [SCI-MSG-0004](messages/science/SCI-MSG-0004.md) | checkpoint 13 | correction of SCI-MSG-0003 §3 | both | pinned marginals are marginals of higher order; Theorem 4‴: exponent against the order of marginal information | proposed |
+| [SCI-REV-0002](messages/science/SCI-REV-0002.md) | checkpoint 14 | review + replication | theory; engineering §8 | theory report §11.22: verdict per statement; M1 (headline), M2 (proved bracket `[116, 3 627]`; `vol 𝒦 ≥ 1.56`); m1–m8; new statements N1–N5; request for larger witness bridges and an exact packing | completed |
 
 ## Responses and requests received
 

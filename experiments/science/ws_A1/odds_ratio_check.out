@@ -3,10 +3,3 @@ PASS T1b equality at uniform margins   max |I - bound| = 9.99e-16
 PASS T1c strict inequality off the origin   min slack at |(y,z)|=0.05: 6.924e-06
 PASS T2  derivative formula = covariance formula = finite differences (both flows)   max discrepancy 4.70e-11
 PASS T2b sign of dI/dt = sign(p11 - p00) [diag flow], sign(p10 - p01) [off-diag flow]
-PASS T3  I is nondecreasing along diag flow then off-diag flow; endpoint = symmetric table with the same odds ratio
-PASS T4  capacity(a,b) = largest chord gap of the binary entropy; <= capacity of the BSC with the same odds ratio   max |C - chord gap| = 5.7e-16, max (C - BSC) = -3.85e-10
-PASS T5  40-digit grid (25000 tables, s in (0,10], |y|,|z| <= 6): I < bound strictly off the origin   largest (I - bound) off the origin = -5.1903e-5
-PASS T6  mutations detected (tighter bound fails; 0.9s-bound fails; one uniform margin is not enough)   tighter-bound violation 7.90e-03; 0.9s-bound slack -5.61e-03 (<0); one-margin slack 2.140e-02 (>0)
-PASS T7  three letters, Potts pair at slope s=0.3: uniform weights do NOT maximise I (two letters do better)   I(uniform on 3) = 0.010582, I(uniform on 2 letters) = 0.011125, best random = 0.010855
-
-failures: 0

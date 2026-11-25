@@ -1,3 +1,4 @@
 §9: falsification thresholds.  Model athermal; data = exact averages under truth ~ exp(+eps c3)
   N=8 data=rg2     : b_min = 0.068 / 0.150 / 0.360   [note: 0.068 / 0.150 / 0.360]   match to 0.002: True;  truth's single-flip constant = eps x 1
   N=8 data=profile : b_min = 0.220 / 0.438 / 0.866   [note: 0.220 / 0.438 / 0.866]   match to 0.002: True;  truth's single-flip constant = eps x 1
+  N=8 profile, eps=0.5, ALL-PAIRS formulation on conformations only: b_min = 0.438

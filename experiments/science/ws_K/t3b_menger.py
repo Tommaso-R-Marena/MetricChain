@@ -51,7 +51,7 @@ def bfs_len(S, ok, p, q):
 
 
 def main():
-    nlow_ok = nup_ok = ncase = 0
+    nlow_ok = nup_ok = ncase = ncap = nbad = 0
     for ks in ([2] * 4, [2, 3, 3], [4, 4]):
         S = Space(ks)
         D = S.hamming_env(np.full(S.n, 1000.0))
@@ -85,9 +85,15 @@ def main():
             ncase += 1
             nlow_ok += int(nl == pred_low)
             nup_ok += int(nu == pred_up)
+            # the brute force stops at 9 anchors: "None" with a prediction >= 10 is consistent, not a test
+            ncap += int(nl is None and pred_low >= 10)
+            nbad += int((nl is not None and nl != pred_low) or (nl is None and pred_low < 10)
+                        or (nu is not None and nu != pred_up) or (nu is None and pred_up < 10))
             print(f"  ks={ks} trial {trial}: N_low brute {nl} vs Menger {pred_low};  "
                   f"N_up brute {nu} vs shortest optimal path {pred_up}")
-    print(f"T3b summary: {ncase} instances; N_low = Menger number in {nlow_ok}; N_up = path length in {nup_ok}")
+    print(f"T3b summary: {ncase} instances; N_low = Menger number in {nlow_ok} "
+          f"(+{ncap} beyond the brute-force cap of 9 anchors, consistent); N_up = path length in {nup_ok}; "
+          f"contradictions: {nbad}")
 
 
 if __name__ == "__main__":

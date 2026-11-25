@@ -140,6 +140,22 @@ check("Q2b' replication of the theory report's values h_2, h_3, h_4 at u = 0.5 (
       and max(abs(x - y) for x, y in zip(vals[1.0], (0.029139, 0.030654, 0.028405))) < 6e-7,
       "mine: %s ; %s" % (", ".join("%.6f" % v for v in vals[0.5]), ", ".join("%.6f" % v for v in vals[1.0])))
 
+# (d) integer optima: for (k-1)(k-2) < L < k(k-1) the integer maximiser of R_0 and of h is k
+ok_d, cnt = True, 0
+for k in range(2, 13):
+    lo, hi = (k - 1) * (k - 2), k * (k - 1)
+    for frac in (0.1, 0.5, 0.9):
+        L = lo + frac * (hi - lo)
+        if L <= 1.0:
+            continue
+        u = math.log(L)
+        r0 = [2 * Fk(j, u, 0.5) for j in range(2, 20)]
+        hh = [-minimize_scalar(lambda t, j=j: -Fk(j, u, t), bounds=(0, 1), method="bounded", options={"xatol": 1e-12}).fun for j in range(2, 20)]
+        ok_d &= (2 + int(np.argmax(r0)) == k) and (2 + int(np.argmax(hh)) == k)
+        cnt += 1
+check("Q2d for (k-1)(k-2) < e^u < k(k-1) the integer maximiser of the cutoff rate and of h over the number of groups is k  (k = 2..12)",
+      ok_d, "%d slopes" % cnt)
+
 # (c) Shannon capacity maximal at k* = (L-1)^2/(L ln L - L + 1)
 ok_c, rows = True, []
 for u in (1.0, 2.0, 3.0, 5.0):

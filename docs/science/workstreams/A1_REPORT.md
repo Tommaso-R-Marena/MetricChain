@@ -75,7 +75,10 @@ too strong — neither their paper nor the Novak–Rudolf survey poses the non-l
 coincide *in the limit* `ε₁ → 0⁺` (§2.3); (4) §2.4 now contains a proof that in *absolute* error the
 adaption gain disappears; (5) the two headline numbers of G26 were re-computed (§3, §4.6);
 (6) the theory division's own earlier mention of the Suárez–Silbey–Oppenheim paper (by title) is
-recorded (§2.2); (7) search log: 25 queries; eight scripts.
+recorded (§2.2); (7) search log: 25 queries; eight scripts; (8) **§9 is an addendum** written on a
+later request: questions B1 and B2 of the theory division's THY-REQ-0011 (the channel-coding
+dictionary of their new Theorem 11.99), with Proposition A1.2 — the generalisation of Proposition
+A1.1 to their heteropolymer setting — ten more searches and a ninth script.
 
 ---
 
@@ -371,6 +374,7 @@ All scripts are mine, share nothing with the theory division's code, and run in 
 | `capacity_check.py` → `.out` (3 s) | C1 capacity = information radius for the cone channel, six `(p, u)`; C2 uniform cube; C3 plain MC from `π`; C4 exact finite-`n` KL of a cone against the flat histogram; C5 mutation | equality to `10⁻⁸`; `a(0.1, 2) = 0.16374`, `r* = 0.1975`; flat histogram: `0.1752, 0.1675, 0.1649` at `n = 200, 800, 3200` `→ 0.1637`; **replicates the table of §11.20 exactly** (§2.3(c)) |
 | `chain_rule_check.py` → `.out` (5 s) | Proposition A1.1 by exact enumeration, `n = 8…14`, seven `(n, p, u)`, 16 families of Lipschitz functions each (cones, flattened cones, dips, minima/maxima of cones, McShane regularisations of random functions at four roughness scales, wells, block-radial, additive): A2 conditional means in `[a₀, a₁]`; A3 `KL ≤ na`; A4 exact upper tail against `exp(−s²/(2nu²))`; A5 Monte Carlo for item 4; A6 `a(p,u) ≤ a(½,u)`; A7 three mutations | 112 instances: largest excursion of a conditional mean `4·10⁻¹⁵`; `max KL/(na) = 1.000000`, attained at a constant cone; tail bound never violated; item 4: measured `0.227` against the bound `0.471` in the tightest case; mutations detected (a `3u`-Lipschitz function leaves the interval; proposal `π` gives `1.28·na`) |
 | `rounds_numbers_check.py` → `.out` (3 min), `rounds_refine.py` → `.out` (finer grid, ≈ 15 min) | the two headline numbers of the round hierarchy, re-computed from the formulas *as printed* in Theorems 11.84(b) and 11.86 (this replicates the evaluation of the formulas, not their proofs) | upper value `T^{(2)}(0)/a = 0.6196, 0.6243, 0.6412, 0.6646` at `u = 0.5, 1, 2, 3` (report: `0.620, 0.624, 0.641, 0.665`), `0.6181` at `u = 0.02` (golden ratio `0.618`); lower value `θ₂*/a = 0.3493, 0.3592, 0.3940, 0.4396` (report: `0.349, 0.359, 0.394, 0.440`), `θ₂*/h = 1.379, 1.368, 1.328, 1.277` (report: `1.38, 1.37, 1.33, 1.28`), best `φ₁ = 0.640, 0.606, 0.560` at `u = 1, 2, 3` (report: `0.64, 0.61, 0.56`); at `u = 2` the supremum sits on the constraint `θ < φ₂a`, which a grid of step `0.01` in `φ₁` misses by `0.002` |
+| `addendum_checks.py` → `.out` (8 s) — for §9 | Q1 the dictionary of Theorem 11.99 on the cube from the textbook formulas (Rényi capacity of the BSC; Nakiboğlu's definition of `E_sp`; Merhav's glassy free energy; `E_sp − θ`); Q2 the `k`-ary symmetric channel behind Proposition 11.103(e): `F*_k = (1−t)C_t`, cutoff-rate optimum, reflection identity at `e^u = k(k−1)`, integer optima for `k ≤ 12`, capacity optimum, the report's `h_k` values; Q3 Proposition A1.2 by exact enumeration (two site types, 2–3 letters, asymmetric envelopes) | all pass: Q1 `10⁻¹²`; reflection identity `4·10⁻¹⁶` (and fails by `4·10⁻³` off the crossing); `h_2, h_3, h_4` reproduced to six digits; `a₂ = a₃` at `u = 0.51937`; 36 instances: conditional laws in the window to `5·10⁻¹⁵`, `max KL/(Σa) = 1.000000` with equality at additive vertex instances; a non-admissible `ψ` leaves the window |
 
 Re-run: `cd experiments/science/ws_A1 && python3 <script>`; every script exits non-zero on a
 failed check.  *Errors of mine found on the way* (recorded in `NOTES.md`): two mutation/optimiser
@@ -803,3 +807,303 @@ statistical physics of sampling* and would be read there as a clean application,
 inequalities.  The round hierarchy and the hinted-versus-unhinted viewpoint are closest to
 *sublinear algorithms / query complexity*; a referee from that side will compare with instance
 optimality and with the sampling-oracle counting literature of 2018–2026.
+
+---
+
+## 9. Addendum: questions B1, B2 of THY-REQ-0011
+
+*Written after the main report, on the coordinator's request, against theory checkpoint `89ac710`
+(read-only checkout; §11.26 of its `docs/THEORY_REPORT.md`, lines 6138–6420, and
+`docs/collaboration/requests/theory/THY-REQ-0011.md`, both read in full; `W_REPORT.md` not read).*
+Labels and reading levels as in the header.  New script: `experiments/science/ws_A1/addendum_checks.py`
+(8 s; all checks pass).
+
+### 9.1 What is asked, and the short answers
+
+**B1.**  *Is it known that the accuracy a fixed sample certifies for a normalising constant over a
+Lipschitz class is a sphere-packing exponent, and that adaptivity gains exactly the sampling rate?*
+— **At the level of formulas and of the mechanism: yes, three times over, under other names; at the
+level of the complexity theorem: not found.**  (i) Every identity of the dictionary of Theorem 11.99
+is a classical identity of information theory.  (ii) The mechanism — a sample of `e^{nθ}` points sees
+a tilted product law only on the conditional types of mutual information at most `θ`, and the mass it
+misses has the exponent `min{D(V‖W|P) : I(P,V) ≤ θ}` — is in print as the *glassy phase of the random
+code ensemble* (Mézard–Montanari; Merhav 2009), as the *bias of the Jarzynski estimator* (§2.2), and
+as *Hoeffding's error-exponent trade-off* for testing a channel law against product laws
+(Tomamichel–Hayashi 2018, who write it with Gallager's `E_0`).  (iii) "Adaptivity gains exactly the
+rate" is, as a formula, the textbook fact that the two error exponents of a likelihood-ratio test
+differ by the log-threshold (Forney's `E_2 = E_1 + T`).  (iv) What I did not find anywhere — in
+information-based complexity, Monte Carlo theory for normalising constants, the importance-sampling
+literature, learning theory, or statistical physics — is the *statement about algorithms*: that these
+exponents are the minimax accuracy of **every** fixed sample over a Lipschitz class, and that an
+adaptive algorithm **attains** the second exponent on the whole class.  On the coding side the
+adaptive half has no counterpart at all: feedback does not beat the sphere-packing exponent.
+
+**B2.**  *"A site with many equivalent states behaves like one with about `e^{u/2}` states".* — It has
+an exact counterpart that I can prove but did not find in print: **the alphabet size that maximises
+the cutoff rate `R_0 = C_{1/2}` of a `k`-ary symmetric channel at a fixed pairwise likelihood ratio
+`L = e^u` is `k = √L + 1`**, the integer optimum being the `k` with `(k−1)(k−2) ≤ L ≤ k(k−1)`
+(checked on a grid of slopes for `k ≤ 12`); and the
+crossings of `h` sit at the same places because of a reflection identity,
+`F*_k(t) = F*_{k+1}(1−t)` at `L = k(k−1)` (§9.4).  The *genre* — choose the number of signalling
+levels for a given signal-to-noise ratio — is classical.
+
+### 9.2 B1 in detail
+
+*The statement compared* (Theorem 11.99, [P], unrefereed).  For a site `(π_j, d_j)` the "vertex
+channel" sends a vertex `φ` of the site's Lipschitz polytope to its Gibbs law `π_φ`;
+`F*_j(t) = min_Q max_φ (1−t)D_t(π_φ‖Q) = (1−t)C_t`; with `E_0(ρ) = ρΣ_jλ_jC_{1/(1+ρ)}` and
+`E_sp(θ) = sup_{ρ≥0}[E_0(ρ) − ρθ]`: `θ_na = E_sp^{−1}`, `a` = capacity, and "with a budget of `e^{nθ}`
+evaluations a fixed sample certifies the accuracy rate `E_sp(θ)`; an adaptive algorithm, or one with
+a hint, certifies `E_sp(θ) − θ`".
+
+**(a) The identities** **[K]**.
+
+| line of the dictionary | where it is in print | read |
+|---|---|---|
+| Rényi capacity = Rényi radius, `min_Q max_φ D_α(π_φ‖Q)`, with a unique centre | "For finite Θ, Csiszár has shown that this result in fact extends to any α ∈ (0, ∞) … the minimax redundancy … may be geometrically interpreted as the 'radius' of the family"; Theorem 34 (van Erven–Harremoës 2014, arXiv:1206.2459); Nakiboğlu, *The Rényi capacity and center* (arXiv:1608.02424) | `[full text]` of the passage / `[abstract]` |
+| `E_sp(R) = sup_{α∈(0,1)} ((1−α)/α)(C_α − R)` | Nakiboğlu, *The sphere packing bound via Augustin's method* (arXiv:1611.06924), Definition 13 — verbatim this formula | `[full text]` of §II-D |
+| `E_0(ρ)/ρ` is a Rényi capacity of order `1/(1+ρ)` | Csiszár, IEEE-IT 41 (1995): `β`-cutoff rates, `α = (1−β)^{−1}` | `[search snippet]`; paper not accessed |
+| `E_sp(R) = D(δ_GV(R)‖p)`, `D(δ_GV(R)‖½) = R` for the BSC | Forney, *On exponential error bounds for random codes on the BSC* (MIT 6.441 notes), eqs. (1.2), (1.4) | `[full text]` of §1 |
+| `F*(t) = (1−t)C_t` as the exponent of an "exponential average" | `(1−t)D_t(P‖Q) = −ln Σ P^tQ^{1−t}` is the cumulant function of the log-likelihood ratio; fractional moments of importance weights are Rényi divergences (standard; e.g. the policy-optimisation literature) | `[search snippet]` |
+
+On the uniform cube I checked the chain `F*_c(t) = (1−t)C_t(BSC(p_u))`,
+`sup_α((1−α)/α)(C_α − θ) = KL(ρ_θ‖p_u)` (which is the Suárez–Silbey–Oppenheim bias curve of §2.2 and
+Forney's `D(δ_GV‖p)`), and `E_sp(θ) − θ = uρ_θ − Λ₁`, to `10⁻¹²` (`addendum_checks.py`, Q1).
+
+**(b) The mechanism: three literatures.**
+
+1. *Random codes as a random energy model* `[full text: abstract, §1, §2.2.1–2.2.2]`.  Merhav
+   (IEEE-IT 55 (2009); arXiv:0708.0850), following Mézard–Montanari (2009, ch. 6 `[not accessed]`),
+   studies `Z(β|y) = Σ_{x∈C} P^β(y|x)` over a code of `e^{nR}` random words.  For the BSC: the number
+   of words at distance `δn` from `y` is `≐ e^{n[R − ln 2 + h(δ)]}`, distances below the
+   Gilbert–Varshamov distance `δ_GV(R)` "are not populated", and the sum freezes ("glassy phase") at
+   `F_g = δ_GV ln(1/p) + (1−δ_GV)ln(1/(1−p))`; for a general channel (his eq. (10)) only conditional
+   types with `H_Q(X|Y) ≥ ln|X| − R` — mutual information at most `R` — are populated.  With
+   codewords = sample points, `y` = centre of a cone and `β = 1`, `Z/(M(1−p)ⁿ)` *is* the plain
+   Monte Carlo estimate at the cone, and `F_g − (ln 2 − R) = E_sp(R)` (checked, Q1).  This is the
+   paragraph "Why the sphere-packing exponent appears" of Theorem 11.99, in print since 2007–2009 in
+   the coding reading.  Merhav relates the glassy free energy to the *correct-decoding* exponent and
+   does not name `E_sp` there.
+2. *The Jarzynski estimator* — §2.2 (Suárez–Silbey–Oppenheim 2012: the binomial case, i.e. the cube);
+   in addition Rohwer, Angeletti, Touchette (PRE 92 (2015); arXiv:1409.8531) `[abstract, §II.B,
+   §IV.B]`: the "linearization effect" of estimators of generating functions, "our results shed
+   light on previous reports of 'phase transitions' in the statistics of free energy estimators",
+   sample sizes exponential in `n`; and Yunger Halpern & Jarzynski (PRE 93 (2016); arXiv:1601.02637)
+   `[abstract]`: "we bound the number of trials one should expect to perform, using the order-∞ Rényi
+   entropy", with a tolerance parameter for the dominant region — a one-shot hypothesis-testing
+   quantity between forward and reverse work distributions.  So Rényi quantities and the sample
+   size of an exponential average have met in print; the asymptotic curve with all orders (Hoeffding)
+   and the name "sphere packing" have not, as far as I found.
+3. *Hypothesis testing* `[full text: abstract, §I, eqs. (2)–(6), (51)–(55)]`.  Tomamichel & Hayashi
+   (IEEE-IT 2018; arXiv:1511.04874): if the type-II error must be at most `e^{−nR}`, the optimal
+   type-I error exponent is `sup_{0<s<1} ((1−s)/s)(D_s(P‖Q) − R)` (Hoeffding's bound); for the
+   composite alternative "`Xⁿ` independent of `Yⁿ`, any law of `Yⁿ`" the exponent is
+   `sup_{s∈(0,1)} ((1−s)/s)(I_s^{↑↓}(X:Y) − R)` with Sibson's Rényi mutual information
+   `I_s^{↑↓} = min_{Q_Y} D_s(P_{XY}‖P_X×Q_Y)`, which they write through "`E_0` … Gallager's error exponent
+   function".  **This is the dictionary, read as follows** **[P — a translation, checked on the
+   cube]**: budget `θ` = type-II exponent (the sampling-law measure of the set that has to be hit);
+   non-adaptive accuracy = type-I exponent (the Gibbs mass outside that set); the minimum over the
+   sampling law = the composite alternative; adaptive / hinted accuracy = minus the log-threshold of
+   the likelihood-ratio test.  The shear law `x_na = e_hint + θ` is then the identity
+   `D(V‖P) − D(V‖Q) = −λ` on the boundary of a likelihood-ratio test with threshold `e^{nλ}` — in
+   coding, Forney's erasure/list exponents `E_2(R,T) = E_1(R,T) + T` (as restated by Merhav,
+   arXiv:0711.2501 `[full text of the passage]`).  And the non-adaptive lower bound of the theory
+   report (Theorems 11.45, 11.98(d)) is the Shannon–Gallager–Berlekamp sphere-packing argument
+   `[from memory — unverified]` with the sampling law in the role of the auxiliary output law: there,
+   "some decoding region has output-measure at most `e^{−nR}`"; here, "a sample of `e^{nθ}` points
+   misses a set of sampling measure `e^{−nθ}`".
+
+**(c) Covering.**  The estimate `Â/A` at a cone with centre `s` equals, by Bayes' rule, the ratio of
+the output law *induced by the sample as a codebook* to the product output law, evaluated at `s`
+**[P]** — the object of the soft-covering lemma (Wyner; Han–Verdú; exact exponents above the mutual
+information: Yagli & Cuff, arXiv:1801.00714 `[abstract]`).  Its regime *below* the mutual
+information — the one that matters here — was settled only recently and for a different criterion
+(total variation tending to one): He, Pradhan, Winter, arXiv:2409.18307 `[abstract]`, with "a new
+two-parameter information quantity, differing from the … Rényi mutual information" and the remark
+that random coding is not tight.  So "a fixed sample has to cover the outputs of a channel" is a
+living topic, but the pointwise, worst-centre criterion of the theory report is not the one studied.
+
+**(d) Guessing and the adaptive half.**  The hinted problem is a *hitting* problem, and its home is
+guessing: Arikan's exponent `max_Q[ρH_Q − D(Q‖P)] = ρH_{1/(1+ρ)}` and guessing subject to distortion
+(Arikan–Merhav 1998, already cited by the theory report for G4/G7) `[the formula as quoted in
+Merhav & Cohen, arXiv:1811.04363, which I read: abstract, introduction]`; randomised i.i.d. guessing
+attains the guessing exponent (ibid.) — the analogue of "sample from the Rényi centre".  In channel
+coding proper, *adaptivity does not gain the rate*: "the reliability function of the discrete
+stationary product channels with feedback is bounded from above by the sphere packing exponent"
+(Nakiboğlu, abstract), and for symmetric channels `E_sp` "remains a valid bound even when strictly
+causal noiseless feedback is allowed" (Sahai, arXiv:cs/0610139 `[abstract]`).  The roles are
+transposed: in coding the adaptive party chooses channel *inputs*; here it chooses *outputs* to
+look at.  This is the half of B1 that I would call **not in print in any form**: an algorithm that
+realises the second exponent of the likelihood-ratio test without knowing the hypothesis.
+
+**(e) Where it was not found** (searches 26–35 of §9.5).  Importance sampling: the Stein-lemma end
+only (Chatterjee–Diaconis: sample size `e^{KL}`; the same rule of thumb in an appendix of
+arXiv:2312.15256 `[search snippet]`); necessary sample sizes through `f`-divergences (Sanz-Alonso,
+arXiv:1608.08814 `[abstract]`); no Hoeffding curve, no Rényi radius, no sphere packing.  Information-based complexity: nothing
+(Novak's survey and the adaption papers of §4.1 contain no information-theoretic exponents).
+Learning theory: not searched beyond the importance-weighting hits; the minimax-rates-via-capacity
+tradition (Yang–Barron) is about estimation rates, not about normalising constants `[from memory —
+unverified]`.
+
+*Classification.*  **Theorem 11.99 (the dictionary): (2) reformulation of known results** — a correct
+and useful one; the first identity is one minimax step away from Csiszár's radius theorem.  It does
+not change the classifications of §1: the theorems that the dictionary decorates (non-adaptive
+exponent: (3)/(4); adaptive exponent: (6)) are what is or is not new.  Two consequences for the write-up:
+the non-adaptive lower bound should be *presented* as the sphere-packing argument (with the
+citation), and the formula `E_sp(θ) − θ` should be introduced as the second exponent of the
+Neyman–Pearson test, so that the new statement stands out: an adaptive algorithm attains it.
+
+### 9.3 How Theorem 11.99 relates to §2.3 and Proposition A1.1 of this report
+
+*§2.3 is a special case.*  "`a` is the capacity of the cone channel, equal to its information radius,
+with the capacity-achieving output law as centre" is the limit `t ↑ 1` of Theorem 11.99 for two
+letters and one site type.  The two divisions arrived at it independently; theirs is the general
+statement.  What §2.3 adds to §11.26 is the *consequence for samplers*: the Shannon centre is a
+product law, so a product proposal ties with the stratified sample at vanishing accuracy.
+
+*Proposition A1.1 is an addition, and it generalises to the whole setting of §11.26.*  §11.26 lists
+"upper bounds at bounded accuracy" under "not done".
+
+**Proposition A1.2 [P; items 1–3 checked by exact enumeration on 36 instances with two site types,
+two and three letters and asymmetric envelopes, `addendum_checks.py` Q3; items 4–5 are the proof of
+Proposition A1.1 verbatim and were not re-simulated].**  In the setting of §11.26 (sites of types
+`τ(i)`, alphabets `𝒮_j`, site laws `π_j` of full support, envelopes `d_j ≥ 0` with the triangle
+inequality, not necessarily symmetric; `π = ⊗π_{τ(i)}`; class `𝒞 = {ψ : ψ(x) − ψ(y) ≤ d(x,y)}`), let the
+*window* of site type `j` be `𝒲_j := {p : π_j(a)p(b) ≤ e^{d_j(a,b)}π_j(b)p(a) for all a, b}`.  Then:
+
+1. `𝒲_j = {π_γ : γ ∈ L_j}` is a convex polytope, and its vertices are the Gibbs laws of the vertices of
+   the Lipschitz polytope `L_j` (the constraints `γ(a) − γ(b) ≤ d_j(a,b)` are *linear* in `p = π_γ`);
+2. for every `ψ ∈ 𝒞`, every order of the sites and every prefix, the conditional law
+   `ν_ψ(y_i = · | y_{<i})` lies in `𝒲_{τ(i)}` (sum the admissibility inequality over the remaining
+   coordinates — the closure of `L_j` under soft minima, `softmin_admissible` in the theory's Lean file);
+3. hence, for product laws `Q = ⊗Q_{τ(i)}`: `KL(ν_ψ‖Q) ≤ Σ_i max_{φ∈𝒱_{τ(i)}} KL(π_φ‖Q_{τ(i)})`, and with the
+   Shannon centres `Q*_j` (capacity-achieving output laws of the vertex channels)
+   `sup_{ψ∈𝒞} KL(ν_ψ ‖ ⊗Q*_{τ(i)}) = n·Σ_jλ_ja_j = n·a`, with equality at additive instances built from
+   capacity-achieving vertices;
+4. `ν_ψ(ln(dν_ψ/d⊗Q*) > na + s) ≤ exp(−2s²/Σ_ic²_{τ(i)})`, `c_j` the largest oscillation of
+   `ln(p/Q*_j)` over `p ∈ 𝒲_j` (`2u` for two letters);
+5. `M ≥ e^{na+t}` independent samples from the **product measure** `⊗Q*_{τ(i)}` give
+   `E|Â/A(ψ) − 1| ≤ e^{−t/4} + 2exp(−t²/(2Σ_ic²_{τ(i)}))` for every `ψ ∈ 𝒞` and every `n`.
+
+So, with the lower bound of Theorem 11.98(d) (stated there for every `n`; I take from the theory
+report that it gives `a` at vanishing accuracy, as in the two-letter case): **on heteropolymer
+product landscapes the exponent of non-adaptive algorithms at every bounded accuracy is the Shannon
+capacity `a = Σ_jλ_ja_j`, and plain Monte Carlo from the product of the Shannon centres — the limit
+`t ↑ 1` of the Gibbs laws of the hardest additive instances of Theorem 11.99 — attains it**, for
+every `n`, without types and without isoperimetry.  It is not a corollary
+of §11.26 (which has no upper bound at bounded accuracy and no statement about product samplers);
+it uses of §11.26 only the definition of the vertex channel and the fact `a = Σλ_ja_j`.
+
+*Two by-products* **[P]**.  (i) *"Vertex labels suffice"* for the radius form at every order
+`t ∈ (0,1]` in one line: `D_t(·‖Q)` is convex in its first argument for `t ≤ 1` (van Erven–Harremoës,
+Theorem 11 `[full text]`), and by item 1 the window is the convex hull of the vertex laws.
+(ii) *Product samplers at extensive accuracies.*  For a product sampler `Qⁿ` and a centre of type
+`P` the same type counting gives the certified rate `min{D(V‖W|P) : D(V‖Q|P) ≤ θ}`; since
+`D(V‖Q|P) = I(P,V) + D(PV‖Q)`, minimising over `Q` *after* the centre is chosen gives `E_sp(θ, P)`, and
+therefore `min_Q max_P ≥ max_P min_Q = E_sp(θ)`: **at the level of these formulas a product sampler
+is never better than the stratified sample, with equality as `θ ↑ a`** (§2.3).  Strictness for
+`p ≠ ½` at `θ < a` — the statement the theory report leaves "not proved in general" — is the
+failure of a saddle point (one law `Q` would have to be optimal for the worst centre types of both
+problems, which are the constant centres for a product sampler and a mixed type for the stratified
+one); I did not prove it.
+
+### 9.4 B2 in detail
+
+*The statement compared* (Proposition 11.103(e), [identity P, the rest N]).  For the uniform law on
+`q` letters with the Hamming envelope, single dips on `k` equally weighted groups of letters give
+`h_k = max_t[tΨ_k(u) − Ψ_k(tu)]`, `Ψ_k(s) = ln((e^s + k − 1)/k) − s/k`; "exactly at `e^u = k(k−1)`,
+`h_k = h_{k+1}`"; the hardest number of groups is "about `e^{u/2}`".
+
+*What it is* **[P; verified, `addendum_checks.py` Q2, Q2a–c]**.  Grouping into `k` classes is the
+`k`-ary symmetric channel with correct-letter probability `p_k = L/(L + k − 1)`, `L = e^u` — the pairwise
+likelihood ratio between the right group and any wrong one is `L` whatever `k`.  With
+`F*_k(t) = tΨ_k(u) − Ψ_k(tu) = (1−t)C_t = (1−t)ln k + t ln(L + k − 1) − ln(L^t + k − 1)`:
+
+* **the cutoff rate** `R_0(k) = C_{1/2} = 2F*_k(½) = ln[k(L+k−1)/(√L + k − 1)²]` is maximal over real `k`
+  **exactly at `k = √L + 1 = e^{u/2} + 1`** (the derivative vanishes iff `k(√L − 1)² = (√L − 1)(L − 1)`);
+* **reflection identity: at `L = k(k−1)`, `F*_k(t) = F*_{k+1}(1−t)` for all `t`**, i.e.
+  `(1−t)C_t(W_k) = t·C_{1−t}(W_{k+1})` (two lines: `L + k − 1 = (k−1)(k+1)`, `L + k = k²`, and
+  `(L^{1−t} + k)/(L^t + k − 1) = k^{1−t}/(k−1)^t`).  Hence at these slopes `h_k = h_{k+1}` *and*
+  `R_0(k) = R_0(k+1)`: every functional of `F*` that is symmetric under `t ↔ 1−t` switches from `k` to
+  `k+1` groups at `e^u = k(k−1)` — which is the report's crossing, with its "mismatch fractions add up
+  to one";
+* **the Shannon capacity obeys a different law**: `a_k = ln(k/(L+k−1)) + L ln L/(L+k−1)` is maximal
+  at `k = (L−1)²/(L ln L − L + 1) ≈ e^u/u` (`2.95, 4.87, 8.85, 36.5` at `u = 1, 2, 3, 5`, against
+  `e^{u/2} + 1 = 2.65, 3.72, 5.48, 13.2`); the crossing `a₂ = a₃` is at `u = 0.51937` (the report's
+  `0.5194`).  So "about `e^{u/2}` states" is a statement about `h` (and `R_0`), not about `a` or `E`.
+
+I also reproduced the report's `h_2, h_3, h_4` at `u = 0.5` and `u = 1` to six digits.
+
+*Does it ring a bell?*  **[H, with the reading levels given]**  (i) The exact counterpart is the
+choice of a modulation alphabet by the **cutoff rate**, the design rule of the sequential-decoding
+era (Wozencraft–Jacobs; Massey 1974) `[from memory — unverified]`; for Massey's optical model the
+cutoff rate of the `M`-ary erasure channel, `log M − log[1 + (M−1)ε]`, is the standard example
+`[search snippet, via Arıkan, arXiv:cs/0508034]`.  The two formulas above (`k = √L + 1`,
+`L = k(k−1)`) I did not find (two searches); they are elementary.  (ii) With `L` in the role of a
+signal-to-noise ratio, `k ≈ √L` is the rule of thumb "about `√(1 + SNR) = e^C` amplitude levels" for
+the Gaussian channel, whose rigorous form is the finiteness of the support of the capacity-achieving
+input under an amplitude constraint (Smith 1971 `[not accessed]`) with the bound `O(A²)` on the
+number of mass points (Dytso, Yagli, Poor, Shamai, arXiv:1901.03264 `[abstract]`).  (iii) The channel
+itself — one detection, landing in the signal slot with probability `L/(L+k−1)` — is `k`-ary pulse
+position modulation with a signal-to-background ratio `L` per slot, where "the optimal order" as a
+function of signal and background is a standard optimisation (e.g. Jarzyna et al.,
+arXiv:1709.00030 `[search snippet]`).  None of these states the `e^{u/2}` rule for an exponent of
+the present kind.  *Classification of Proposition 11.103(e):* **(5) new combination** — an
+elementary computation whose closed form (the reflection identity) and whose cutoff-rate reading
+are, as far as two searches go, not in print.
+
+### 9.5 Search log and sources of the addendum
+
+Searches (continuing §4.9): 26. X `"importance sampling" sample size "sphere packing" OR
+"sphere-packing exponent" OR "error exponent" OR "Hoeffding" "hypothesis testing" Neyman-Pearson Rényi
+divergence required number of samples normalizing constant` → **nothing** with these exponents for
+importance sampling (Sanz-Alonso; arXiv:2312.15256 App. A; two 2026 finite-sample hypothesis-testing
+preprints).  27. S `"random energy model" "random code" glassy phase free energy "sphere packing"
+exponent Mézard Montanari …` → Merhav's papers.  28. S `Csiszár 1995 "Generalized cutoff rates and
+Rényi's information measures" …` → abstract-level snippets.  29. S `Forney 1968 … "E_2(R,T) =
+E_1(R,T) + T" …` → Merhav, arXiv:0711.2501.  30. S `capacity-achieving input distribution finite
+support number of mass points …` → arXiv:1901.03264.  31. X `optimal alphabet size "q-ary symmetric
+channel" OR "M-ary" capacity maximized number of inputs … "pulse position modulation" optimal order`
+→ nothing exact.  32. S `optimal PPM order capacity "pulse position modulation" background noise …` →
+arXiv:1709.00030 (snippet).  33. S `"sphere packing" exponent "channel resolvability" OR "soft
+covering" … below mutual information …` → arXiv:2409.18307, 1801.00714.  34. S `"cutoff rate" R_0
+optimal alphabet size OR "number of signals" maximize cutoff rate … "Massey" "Wozencraft" …` →
+Arıkan cs/0508034 (snippet).  35. X `"sums of random exponentials" OR "exponential functionals" …
+"Rényi" OR "sphere packing" OR "Hoeffding trade-off" … importance sampling exponent …` → Forney's BSC
+notes; nothing on sampling.
+
+| source | read | used for |
+|---|---|---|
+| Merhav, IEEE-IT 55 (2009) 83–92; arXiv:0708.0850 | `[full text]` abstract, §1, §2.2.1–2.2.2 | B1 (b)1 |
+| Merhav, arXiv:0711.2501 | abstract; the two passages with `E_2 = E_1 + T` | B1 (b)3 |
+| Tomamichel & Hayashi, IEEE-IT 2018; arXiv:1511.04874v3 | `[full text]` abstract, §I, eqs. (2)–(6), (51)–(55) | B1 (b)3 |
+| Nakiboğlu, arXiv:1608.02424v8; arXiv:1611.06924v8 | `[abstract]`; Definition 13, Lemma 13 of the second | B1 (a), (d) |
+| van Erven & Harremoës, IEEE-IT 2014; arXiv:1206.2459 | Theorem 11; section "Channel capacity and minimax redundancy" (Thms 33–34) | B1 (a), §9.3 |
+| Forney, *On exponential error bounds for random codes on the BSC* (MIT 6.441 course notes) | `[full text]` §1 | B1 (a) |
+| Rohwer, Angeletti, Touchette, PRE 92, 052104; arXiv:1409.8531v3 | abstract, §II.B, §IV.B | B1 (b)2 |
+| Yunger Halpern & Jarzynski, PRE 93, 052144; arXiv:1601.02637v2 | `[abstract]`, first page | B1 (b)2 |
+| Merhav & Cohen, arXiv:1811.04363 | abstract, introduction | B1 (d) |
+| Yagli & Cuff, arXiv:1801.00714v8; He, Pradhan, Winter, arXiv:2409.18307v4 | `[abstract]`, first page | B1 (c) |
+| Sahai, arXiv:cs/0610139; Sanz-Alonso, arXiv:1608.08814; Masrani et al., arXiv:2107.00745 | `[abstract]` | B1 (d), (e) |
+| Dytso, Yagli, Poor, Shamai, arXiv:1901.03264v4 | `[abstract]` | B2 |
+
+*Not accessed:* Csiszár 1995; Shannon–Gallager–Berlekamp 1967; Forney 1968; Arikan 1996;
+Arikan–Merhav 1998; Mézard–Montanari 2009; Smith 1971; Wozencraft–Jacobs; Massey 1974; Hoeffding
+1965; Blahut 1974; `W_REPORT.md` of the theory division (only §11.26 of the theory report was read).
+
+### 9.6 Requests that follow (additions to §7)
+
+- T7. In §11.26, replace "not found" for the dictionary by: *the formulas are classical; the
+  mechanism is the glassy phase of the random code ensemble (Merhav 2009; Mézard–Montanari), the
+  Hoeffding trade-off against product alternatives (Tomamichel–Hayashi 2018) and, on the cube, the
+  Jarzynski bias curve (Suárez–Silbey–Oppenheim 2012); the non-adaptive lower bound is the
+  sphere-packing argument with the sampling law as auxiliary output law; what is not in print is
+  that an adaptive algorithm attains `E_sp(θ) − θ`.*  Say explicitly that feedback does **not** beat
+  `E_sp` in channel coding (Nakiboğlu; Sahai), so the adaptive theorem is not a transposition of a
+  coding theorem.
+- T8. Check Proposition A1.2 and, if it stands, move "upper bounds at bounded accuracy" from "not
+  done" to done for non-adaptive algorithms; state the sampler as "the product of the Shannon
+  centres".
+- T9. Proposition 11.103(e): add the reflection identity `F*_k(t) = F*_{k+1}(1−t)` at `e^u = k(k−1)` and
+  the cutoff-rate optimum `k = e^{u/2} + 1`; restrict "about `e^{u/2}` states" to `h` (the capacity `a`
+  follows `≈ e^u/u`).

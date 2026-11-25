@@ -22,8 +22,4 @@
   ks=[4, 4] trial 5: N_low brute 6 vs Menger 6;  N_up brute 3 vs shortest optimal path 3
   ks=[4, 4] trial 6: N_low brute 6 vs Menger 6;  N_up brute 5 vs shortest optimal path 5
   ks=[4, 4] trial 7: N_low brute 6 vs Menger 6;  N_up brute 6 vs shortest optimal path 6
-T3b summary: 24 instances; N_low = Menger number in 23; N_up = path length in 24
-
-real	1m7.243s
-user	0m25.435s
-sys	0m0.058s
+T3b summary: 24 instances; N_low = Menger number in 23 (+1 beyond the brute-force cap of 9 anchors, consistent); N_up = path length in 24; contradictions: 0

@@ -26,3 +26,17 @@ kappa=0.90 e=0.40 n=  50: ln N_W >=     0.19  (N_W >= 10^   0.1; rate 0.0038/sit
 kappa=0.90 e=0.40 n= 100: ln N_W >=     0.89  (N_W >= 10^   0.4; rate 0.0089/site)   N_H = N_B = 101
 kappa=0.90 e=0.40 n= 200: ln N_W >=     2.67  (N_W >= 10^   1.2; rate 0.0133/site)   N_H = N_B = 201
 kappa=0.90 e=0.40 n= 500: ln N_W >=     7.01  (N_W >= 10^   3.0; rate 0.0140/site)   N_H = N_B = 501
+kappa=0.90 e=0.40 n=1000: ln N_W >=    19.97  (N_W >= 10^   8.7; rate 0.0200/site)   N_H = N_B = 1001
+kappa=0.70 e=0.00 n=  10: ln N_W >=     0.30  (N_W >= 10^   0.1; rate 0.0303/site)   N_H = N_B = 11
+kappa=0.70 e=0.00 n=  20: ln N_W >=     0.85  (N_W >= 10^   0.4; rate 0.0425/site)   N_H = N_B = 21
+kappa=0.70 e=0.00 n=  50: ln N_W >=     2.92  (N_W >= 10^   1.3; rate 0.0584/site)   N_H = N_B = 51
+kappa=0.70 e=0.00 n= 100: ln N_W >=     6.22  (N_W >= 10^   2.7; rate 0.0622/site)   N_H = N_B = 101
+kappa=0.70 e=0.00 n= 200: ln N_W >=    13.35  (N_W >= 10^   5.8; rate 0.0667/site)   N_H = N_B = 201
+kappa=0.70 e=0.00 n= 500: ln N_W >=    34.29  (N_W >= 10^  14.9; rate 0.0686/site)   N_H = N_B = 501
+kappa=0.70 e=0.00 n=1000: ln N_W >=    69.66  (N_W >= 10^  30.3; rate 0.0697/site)   N_H = N_B = 1001
+kappa=0.70 e=0.10 n=  10: ln N_W >=     0.20  (N_W >= 10^   0.1; rate 0.0199/site)   N_H = N_B = 11
+kappa=0.70 e=0.10 n=  20: ln N_W >=     0.82  (N_W >= 10^   0.4; rate 0.0410/site)   N_H = N_B = 21
+kappa=0.70 e=0.10 n=  50: ln N_W >=     2.76  (N_W >= 10^   1.2; rate 0.0551/site)   N_H = N_B = 51
+kappa=0.70 e=0.10 n= 100: ln N_W >=     5.97  (N_W >= 10^   2.6; rate 0.0597/site)   N_H = N_B = 101
+kappa=0.70 e=0.10 n= 200: ln N_W >=    13.51  (N_W >= 10^   5.9; rate 0.0676/site)   N_H = N_B = 201
+kappa=0.70 e=0.10 n= 500: ln N_W >=    33.16  (N_W >= 10^  14.4; rate 0.0663/site)   N_H = N_B = 501

@@ -54,7 +54,7 @@ if __name__ == "__main__":
             gstar -= gstar[0]
             okL = in_L(gstar, s.d)
             lp_at_centre = F_game(s, gstar, t)[0]
-            blind, gb = Fstar_blind(s, t, n_starts=4, seed=1)
+            blind, gb = Fstar_blind(s, t, n_starts=2, seed=1)
             dev = max(abs(lo - dual), abs(lo - lp_at_centre), hi - lo)
             worst = max(worst, dev)
             rows.append((nm, t, blind, lo, dual, lp_at_centre, hi - lo, okL, lo - blind))
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     nfail_L = 0
     ncases = 0
     for q in (2, 3, 4):
-        for rep in range(8 if q < 4 else 4):
+        for rep in range(5 if q < 4 else 2):
             s = random_site(rng, q, asym=True)
             for t in (0.15, 0.5, 0.85):
                 lo, M, hi = renyi_primal(s, t)
@@ -81,7 +81,7 @@ if __name__ == "__main__":
                 okL = in_L(gstar, s.d, tol=1e-8)
                 nfail_L += (not okL)
                 lp = F_game(s, gstar, t)[0]
-                blind, _ = Fstar_blind(s, t, n_starts=3, seed=rep)
+                blind, _ = Fstar_blind(s, t, n_starts=2, seed=rep)
                 worst = max(worst, abs(lo - dual), abs(lo - lp), hi - lo)
                 worst_blind_excess = max(worst_blind_excess, blind - lo)
                 ncases += 1

@@ -13,3 +13,4 @@
 [PASS] (S4) crossings e^u = k(k-1): h_2 = h_3 at u = 0.6931471806 (ln 2 = 0.6931471806); h_3 = h_4 at u = 1.7917594692 (ln 6 = 1.7917594692); h_4 = h_5 at u = 2.4849066498 (ln 12 = 2.4849066498); h_5 = h_6 at u = 2.9957322736 (ln 20 = 2.9957322736)
       grid of 171 three-letter laws (i,j,k)/20: the law with the largest h, against the uniform law
         u=1.0: h(uniform) = 0.030654; largest h on the grid = 0.030572 at pi = [0.35, 0.35, 0.3]  -> uniform law hardest on the grid: True (claimed True)
+        u=2.0: h(uniform) = 0.117699; largest h on the grid = 0.117413 at pi = [0.35, 0.35, 0.3]  -> uniform law hardest on the grid: True (claimed True)

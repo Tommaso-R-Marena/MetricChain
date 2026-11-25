@@ -3,6 +3,7 @@ PASS Q2  F*_k(t) = t Psi_k(u) - Psi_k(tu) = (1-t) C_t of the k-ary symmetric cha
 PASS Q2a cutoff rate R_0(k) = C_{1/2} is maximal over real k at k = e^{u/2} + 1   u=1: argmax k = 2.6487, sqrt(L)+1 = 2.6487; u=2: argmax k = 3.7183, sqrt(L)+1 = 3.7183; u=3: argmax k = 5.4817, sqrt(L)+1 = 5.4817; u=5: argmax k = 13.1825, sqrt(L)+1 = 13.1825
 PASS Q2b at e^u = k(k-1):  F*_k(t) = F*_{k+1}(1-t) for all t, hence h_k = h_{k+1} and R_0(k) = R_0(k+1)   (k = 2..6)   max |F_k(t) - F_{k+1}(1-t)| = 4.4e-16; max |h_k - h_{k+1}| = 1.7e-16; off the crossing the identity fails by 4.0e-03
 PASS Q2b' replication of the theory report's values h_2, h_3, h_4 at u = 0.5 (0.007673, 0.007425, 0.006552) and u = 1 (0.029139, 0.030654, 0.028405)   mine: 0.007673, 0.007425, 0.006552 ; 0.029139, 0.030654, 0.028405
+PASS Q2d for (k-1)(k-2) < e^u < k(k-1) the integer maximiser of the cutoff rate and of h over the number of groups is k  (k = 2..12)   31 slopes
 PASS Q2c Shannon capacity a_k maximal at k = (L-1)^2/(L ln L - L + 1), L = e^u  -- a different law from the cutoff rate's   u=1: argmax k = 2.952 (formula 2.952; e^{u/2}+1 = 2.649); u=2: argmax k = 4.866 (formula 4.866; e^{u/2}+1 = 3.718); u=3: argmax k = 8.847 (formula 8.847; e^{u/2}+1 = 5.482); u=5: argmax k = 36.543 (formula 36.543; e^{u/2}+1 = 13.182)
 PASS Q2c' crossing a_2 = a_3 at u = 0.5194 (theory report)   mine: 0.51937
 PASS Q3  generators produce admissible instances (asymmetric envelopes, two site types, 2-3 letters)   36 instances

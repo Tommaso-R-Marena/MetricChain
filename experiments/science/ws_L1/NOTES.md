@@ -76,3 +76,33 @@ Not done: closed forms A₁ = (1+e^{−u})^n, F₁ = Σ_j C(n,j) e^{−u max(j,R
 `cube_nonadaptive_bound` does not have them either).
 (after the check I replaced a `first | (field_simp; ring) | field_simp` by `field_simp` to silence a
 linter warning; to be re-checked in the final pass)
+
+## 19:40 Target 3 DONE — `OrthogonalArray.lean` (checks, 21–63 s)
+
+Lemma 1 proved for any finite field F (in particular ZMod 2), C : Submodule F (ι → F):
+`restrict_surjective_of_dual` (projection to S onto if no non-zero dual word supported on S),
+`marginal_const_of_invariant`, `uniform_marginal_of_invariant` (cylinder weight = 1/|F|^|S|),
+`lemma1_uniform_marginals` (dual-distance form: every non-zero u ⟂ C has hammingNorm u > k),
+`lemma1_binary` (F₂, literal note statement), `lemma1_marginals_agree` (oracle form),
+`lemma1_sharp_witness` (repetition code {00,11}: hypothesis holds with k = 1; uniform measure on C
+is invariant; marginal on both coordinates is 1/2 ≠ 1/4 — `|S| ≤ k` is sharp).
+`#print axioms`: 7 × `[propext, Classical.choice, Quot.sound]`.
+Notes: * μ ≥ 0 is NOT needed (total mass 1 + invariance suffice).
+* Proof simpler than the note's: translate by a codeword projecting to y' − y (no coset
+  decomposition, no fibre counting).
+* One elaboration trap: for ι = Fin n the `Decidable (∀ i ∈ S, …)` instance is
+  `Nat.decidableForallFin`, in the generic statement `Fintype.decidableForallFintype`;
+  `exact` fails with identical-looking types, `convert h using 3` closes it.
+* `AddSubgroup.toZModSubmodule` exists in Mathlib (subgroup ≃ subspace over ZMod n); not used.
+
+## 19:45 Target 4 plan — `MaxEntStability.lean`
+
+KEY OBSERVATION: Theorem 7 needs only the *symmetrised* Pinsker `J ≥ 4 TV²`, and that has a
+direct elementary proof without Pinsker:
+  (a−b)(ln a − ln b) ≥ 2(a−b)²/(a+b)   [from ln t ≥ 2(t−1)/(t+1), t ≥ 1; Mathlib:
+  `Real.hasSum_log_sub_log_of_abs_lt_one`, first term of a series with non-negative terms]
+  and Cauchy–Schwarz (Σ|p−q|)² ≤ Σ (p−q)²/(p+q) · Σ (p+q) = 2 Σ (p−q)²/(p+q).
+So Theorem 7(ii)–(iii) can be proved with NO Pinsker hypothesis.
+SECOND OBSERVATION: the brief's "purely algebraic step" (4T² ≤ J, J ≤ ωT ⟹ T ≤ ω/4, J ≤ ω²/4)
+is FALSE as literally stated: T = J = 0, ω = −1.  It needs ω ≥ 0 (then T ≥ 0 is not needed).
+Harmless for the note (ω = β·osc(r) ≥ 0).

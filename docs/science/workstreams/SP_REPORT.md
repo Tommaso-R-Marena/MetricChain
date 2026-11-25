@@ -20,37 +20,48 @@ On a real, public molecular-mechanics model (Amber ff14SB with GBn2 implicit sol
 in OpenMM 8.6.1; capped alanine peptides Ace-(Ala)ₙ-NMe on rigid-geometry torsion grids,
 enumerated exactly up to 531 441 conformations) the residual "implicit-solvent polarisation
 energy relative to the vacuum force field" is **not near the first-order (per-torsion
-bounded-difference) class in any useful sense**: its exact constants are `c_i = 9–32 kcal/mol
-= 15–53 k_BT`, they grow with chain length (largest constant `≈ 4.8 + 4.5·n` kcal/mol for
-`n = 1…6` residues on the three-state grid) and are lower at the chain ends than in the interior
-— the predicted lever-arm effect is present, though as "growth with length plus an end effect",
-not as a clean power law in the distance to the chain end; no torsion is sharp in the
-extended basins (`e_i/c_i = 0.03–0.47`); the mixed second differences are dense and as large as
-the first-order constants (`c_ij` up to 23 kcal/mol at four residues, half row sums 37–60
-kcal/mol); and on the real instance a certificate of the global minimum in the per-torsion
-format needs between 3 042 and 5 357 of the 28 843 clash-free conformations at five residues
-(447–782 of 3 844 at four, 94–139 of 508 at three): it grows almost as fast as the domain.
-The theory's formulas with these numbers give an uncertifiable free-energy width of 43–48
-nats per residue and certificates of at least `10⁵` (10 residues) and `10⁵⁶` (100 residues)
-evaluations.  **The same residual is close, in root-mean-square but not in supremum norm, to
-the class the theory identifies as cheap** — pair-additive with unknown radial functions
-("profile class", theory report §11.17) — *provided* the pairs are typed by Amber atom type
-(36 pair types): on off-grid conformations of the pentapeptide the held-out remainder is
-`0.26 kcal/mol = 0.43 k_BT` RMS and `2.2 kcal/mol = 3.7 k_BT` in the maximum, with fitted
-slopes `≤ 0.9 kcal/mol/Å²`; with one pair type the class is useless (remainder = the whole
-variance), and low-order expansions in the *torsion* variables are poor (best pairwise-in-torsions
-fit: RMS 2.1, max 13 kcal/mol at five residues).  **Differences between force fields of one
-lineage lie exactly in the cheapest classes**: ff99SB − ff14SB is a sum of single-torsion terms
-(`c_i = 0.64 kcal/mol` on φ, 0 on ψ, independent of length, all `c_ij = 0`; every site sharp,
-one evaluation certifies), ff19SB − ff14SB is a sum of one table per residue (`c_i ≤ 2.6
-kcal/mol`, `c_ij = 0` beyond the residue); a change of charge model (ff03, ff15ipq) gives
-`βc_i ≈ 2–10`, slowly growing, half of the sites sharp, certificates of about ten evaluations
-at four residues.  So the answer to "which class do residuals live in" is: *model-to-model
+bounded-difference) class in any useful sense**: its exact constants are `c_i = 7–32 kcal/mol
+= 12–53 k_BT`; they grow with chain length (largest constant `≈ 4.8 + 4.5·n` kcal/mol for
+`n = 1…6` residues on the three-state grid; slower, possibly saturating near 20 kcal/mol, on a
+two-state grid without turn states, `n ≤ 9`) and are lower at the chain ends than in the
+interior — the predicted lever-arm effect is present as "growth with length plus an end
+effect", not as a clean power law in the distance to the chain end; **no torsion is sharp in
+any enumerated instance** (ratio of site gap to constant 0.03–0.47 in the extended basins;
+collective cost-to-distance ratio `λ* = 0.038 … 0.0026` for two to six residues, where one
+evaluation would need `λ* ≥ 1`); the mixed second differences are dense and as large as the
+first-order constants (`c_ij` up to 29 kcal/mol at five residues, half row sums 52–89 kcal/mol);
+and on the real instance a certificate of the global minimum in the per-torsion format needs
+between 3 042 and 5 357 of the 28 843 clash-free conformations at five residues (447–782 of
+3 844 at four, 94–139 of 508 at three): a fixed fraction of the domain.  The theory's formulas
+with these numbers give an uncertifiable free-energy width of 43–48 nats per residue and
+certificates of at least `10⁵` (10 residues) and `10⁵⁶` (100 residues) evaluations — while the
+*actual* residual has a Jensen gap of 2–3 nats: it is the class that is expensive, not this
+function.  **The same residual is close, in root-mean-square but not in supremum norm, to the
+class the theory identifies as cheap** — pair-additive in atoms with unknown radial functions
+("profile class", theory report §11.17): an explicit, exactly pair-additive function is within
+`0.10–0.52 kcal/mol` RMS (`0.2–0.9 k_BT`) of it for two to eight residues, but only within
+`0.2–9 kcal/mol` (up to `16 k_BT`) in the maximum, both growing with the chain; a fitted model
+with 36 Amber-atom-type pairs has held-out remainder `0.26 / 2.2 kcal/mol` (RMS / max) at five
+and `0.43 / 3.9` at eight residues, with slopes `≤ 0.9 kcal/mol/Å²`; one pair type is useless
+(remainder = the whole variance), "pairwise GB" with frozen Born radii is useless (RMS 5
+kcal/mol), and low-order expansions in the *torsion* variables are poor (all torsion pairs:
+RMS 2.1, max 13 kcal/mol at five residues).  A sup-norm remainder estimated on a sample is not
+a bound (held-out maxima were up to ten times the fitted ones).  **Differences between force
+fields of one lineage lie exactly in the cheapest classes**: ff99SB − ff14SB is a sum of
+single-φ terms (`c_i = 0.64 kcal/mol` on the grid, 1.115 on the full circle, independent of
+length, all `c_ij = 0`; one evaluation certifies), ff19SB − ff14SB is one table per residue
+(`c_i ≤ 2.6 kcal/mol`, `c_ij = 0` beyond the residue; two or three evaluations); a change of
+charge model (ff03, ff15ipq) gives `βc_i ≈ 2–10`, slowly growing, half of the sites sharp in
+the extended basin, certificates of 10–30 evaluations at four and five residues.  Yet even the
+cheapest of these decides the answer: at five residues ff14SB prefers the helix and ff99SB
+the β-strand, 0.64 kcal/mol per residue being enough to reorder two cooperative basins 0.9
+kcal/mol apart.  So the answer to "which class do residuals live in" is: *model-to-model
 corrections inside one functional form — additive or residue-local; a continuum-solvent term —
-linear in typed pair-distance features up to a few `k_BT` in sup norm, and nowhere near a
-per-torsion envelope with `βc ∼ 1`.*  The pilot is small (alanine only, ≤ 6 residues exact,
-rigid bond geometry, a grid of basins), all sup-norm numbers are properties of these finite
-domains, and nothing here certifies a constant for a continuous conformation space.
+linear in pair-distance features of typed atom pairs up to a remainder that is sub-`k_BT` on
+average and several `k_BT` in the worst case; nothing measured is a per-torsion envelope with
+`βc ∼ 1`.*  The pilot is small (alanine only, ≤ 6 residues exact on the richer grid, rigid
+bond geometry, grids of basins), all sup-norm numbers are properties of these finite domains,
+and nothing here certifies a constant for a continuous conformation space.
 
 ---
 
@@ -201,6 +212,8 @@ cover (Theorem 11.6(a) [V]), upper bound = greedy cover:
 | `g_GB`, 3 | 508 | [94, 139] | [85, 130] | [61, 112] |
 | `g_GB`, 4 | 3 844 | [447, 782] | [378, 717] | [261, 609] |
 | `g_GB`, 5 | 28 843 | [3 042, 5 357] | [2 668, 5 033] | [1 947, 4 307] |
+| `g_GB`, 8 (grid A2) | 35 478 | [4 061, 8 041] | — | — |
+| `g_99`, 5 | 28 843 | 1 | 1 | 1 |
 | `g_19`, 5 | 28 843 | [2, 3] | [2, 3] | [2, 3] |
 | `g_03`, 5 | 28 843 | [2, 28] | [2, 22] | [2, 10] |
 | `g_99`, 4 | 3 844 | 1 | 1 | 1 |
@@ -258,9 +271,12 @@ bound, i.e. interval arithmetic or a Lipschitz bound of `g` over torsion voxels;
 Lipschitz constants of Statement 8 show that such a bound cannot be below
 `≈ 20 kcal/mol/rad` for the pentapeptide.  (iii) Because the constants are maxima, they are
 controlled by the most compact and the most extended conformations of the domain; restricting
-the domain (an energy window around the minimum, a single basin) lowers them — the kernels
-allow this (dead-end elimination shrinks the domain before the residual is touched) and the
-pilot did not explore it.
+the domain lowers them: on the pentapeptide grid, among the 52 conformations within 5 kcal/mol
+of the minimum of `f` the polarisation energy varies by 6.0 kcal/mol in all (55.6 over the
+whole domain), and among the 5 378 within 20 kcal/mol the largest constant is 14.6 instead of
+27.5 kcal/mol.  But a window of the known part contains the minimiser of `f + g` for certain
+only if its width exceeds the range of `g` outside it — the envelope is needed to justify the
+restriction that would make the envelope small (request T-1).
 
 ---
 ## 2.B The physical reading of the mathematics
@@ -485,8 +501,8 @@ against the exact A3 `n = 5` constants: exact at 6 of 10 sites, within 20 % at t
 |---|---|---|---|
 | A3, `n = 8` | 16 of 16 | 34.6 kcal/mol = 58 `k_BT` | `4.81 + 4.51 n` = 40.9 |
 | A2, `n = 12` | 24 of 24 | 19.7 kcal/mol = 33 `k_BT` | exact at `n = 9`: 19.0 |
-| A3, `n = 10` | LONG_A3_10 |
-| A2, `n = 16` | LONG_A2_16 |
+| A3, `n = 10` | 8 of 20 (6 starts) | 35.2 kcal/mol = 59 `k_BT` | 49.9 |
+| A2, `n = 16` | 9 of 32 (6 starts) | 19.2 kcal/mol = 32 `k_BT` | — |
 | A2, `n = 20` | LONG_A2_20 |
 
 **What this says about the lever arm.**  (1) Constants grow with chain length in every
@@ -604,7 +620,8 @@ most 0.64 kcal/mol per residue.  A torsion refit that is exactly in the cheapest
 Covers (`an7_sharpness.py`): Statement 6(b).  Lower bounds are forced points, the volume bound
 `Σ_y 1/M(y)` and the partition-function bound of Theorem 11.6(c) (the first is by far the
 strongest: 3 042 against 915 and 204 at `n = 5`); upper bounds are greedy covers.  The covers of the force-field differences at `n = 5` are dense (a single centre covers up to
-28 828 of the 28 843 conformations) and were computed by a greedy cover over a candidate pool.  A2, `n = 8`, `g_GB` (35 478 conformations): COVER_A2_8.
+28 828 of the 28 843 conformations) and were computed by a greedy cover over a candidate pool.  A2, `n = 8`, `g_GB`
+(35 478 conformations), `ε = 0`: between 4 061 (volume bound) and 8 041 (greedy).
 
 Exact free-energy quantities on the grids, `g_GB`: `ln Z(f+g) − ln Z(f)` = 48.4, 58.9, 68.5
 nats (`n = 3, 4, 5`), of which first-order perturbation `−β⟨g⟩_f` gives 46.3, 56.4, 66.2; Jensen
@@ -774,7 +791,8 @@ and a certificate over `X′` plus a certified exclusion of `X ∖ X′` (by the
 is a certificate over `X` — and say what the exclusion step costs when it must itself use the
 envelope (`E ≥ f − (residual range)`).  Measured input: on the pentapeptide grid the range of
 `g_GB` is 55.6 kcal/mol and that of `f` 118 kcal/mol; a window of 20 kcal/mol in `f` contains
-PENDING_WINDOW.
+5 378 of the 28 843 conformations and on it `max_i c_i(g_GB)` is 14.6 instead of 27.5 kcal/mol; a
+window of 5 kcal/mol contains 52 conformations, on which `g_GB` varies by 6.0 kcal/mol in all.
 
 **T-2 (a class with known features and a quadratic remainder).**  Is there a version of
 Theorem 11.47(d) for `g = θ⁰·F + ρ` where `F` is known, `θ⁰` is *known* (not in a box), and

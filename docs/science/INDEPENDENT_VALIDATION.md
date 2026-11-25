@@ -70,7 +70,7 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
 | id | object | by | state |
 |---|---|---|---|
 | SCI-REV-0001 | theory report §11.25 (slices) | workstream R1 | in progress |
-| SCI-REV-0002 | theory report §11.22 (limit shape) — includes a second, independent enumerator for bridges and walks | workstream R2 | in progress |
+| SCI-REV-0002 | theory report §11.22 (limit shape) | workstream R2 | **published.**  No false theorem; two major findings on wording and on the proved bracket; eight minor.  Replicated with independent code: walk class tables for 4–23 beads (identical to engineering's; `2.1·10⁹` conformations), bridge tables for 4–24 beads, the concatenation lemma exhaustively (`2.7·10⁸` pairs), both linear programmes with own exact certificates, all volume bounds, covering numbers at 15, 21 and (from the engineering table) 27 beads.  Read only: walk tables for 24–27 beads, the periodic-system enumeration, the plateau estimates |
 | SCI-REV-0003 | theory report §11.24 (rounds of adaptivity) | workstream R4 | in progress |
 | — | our own `INFERENCE_LIMITS.md` v2 (adversarial referee) | workstream R3 | in progress |
 

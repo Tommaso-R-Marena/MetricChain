@@ -1,0 +1,2 @@
+n=20 A2 GB site   0 (dist to end 1): sampled median   1.87 max   4.53 -> local search   8.01 kcal/mol   [65s]
+n=20 A2 GB site   9 (dist to end 10): sampled median   1.67 max   5.12 -> local search  12.66 kcal/mol   [130s]

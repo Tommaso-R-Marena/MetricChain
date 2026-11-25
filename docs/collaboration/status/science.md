@@ -35,7 +35,7 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 | A1 | prior art, full text: the query-complexity cluster (theory report G11, G18–G23, G25–G27) | originality | running |
 | A2 | prior art, full text: kernels vs proof logging; certificates as coverings; lever arm; profiles vs scattering / homometry; the limit shape vs rotation sets | originality | **reported** (`docs/science/workstreams/A2_REPORT.md`; SCI-REV-0006) |
 | R1 | independent review of theory report §11.25 → SCI-REV-0001 | review + replication | running |
-| R2 | independent review of theory report §11.22 → SCI-REV-0002 | review + replication | running |
+| R2 | independent review of theory report §11.22 → SCI-REV-0002 | review + replication | **reported and published** (`docs/science/workstreams/R2_REPORT.md`) |
 | P | a real force field against the envelope classes; physical reading of every object of the theory | measurement + analysis | running |
 | K | certified kinetics: barriers, exit times, capacities (`(min,max)` and Dirichlet/Thomson certificates) | own theory | running |
 | M | prior art for the measurement side | originality | running |
@@ -84,6 +84,8 @@ the container is reclaimed.)
 | SCI-REV-0004 (T1–T6) | theory | prior-art corrections for theory report rows G11, G18, G27, Theorem 11.61, citations | high for T1–T3 | proposed |
 | SCI-REV-0004 §6 | engineering | importance-sampling sample sizes for three proposals at the cone, `(p,u) = (0.1, 2)` (minutes on one core) | low | proposed |
 | SCI-REQ-0001 | theory | Q1 robust interval of a ratio of macrostate partition functions; Q2 marginal oracle with a field; Q3 upper boundary of the limit shape; Q4 thermodynamic oracle | Q1 high | proposed |
+| SCI-REV-0002 (corrective actions 1–6) | theory | headline of §11.22; `liminf` column; volume statement; Lean bookkeeping; wording | high for M1 | proposed |
+| SCI-REV-0002 §8 | engineering | witness bridges in larger boxes; exact packing in the hull of proved points; class tables of bridges | medium | proposed |
 | SCI-REV-0006 (T-1…T-6) | theory | wording W1–W10; Propositions A2.1, A2.2; exact-semigroup question; constants | high for W1, W2 | proposed |
 | SCI-REV-0006 §7 (E-1…E-3) | engineering | native kernel against pseudo-Boolean proof logging; homometry on the diamond lattice; Debye curves | medium | proposed |
 

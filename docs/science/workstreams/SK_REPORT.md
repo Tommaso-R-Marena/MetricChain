@@ -291,6 +291,23 @@ every point of the layer lies on a monotone path that meets the layer only there
 *Numerics T3:* both equivalences without a mismatch in 1280 tests each; for `n = 4` no anchor set
 smaller than the layer (6 points) is a lower certificate (exhaustive).
 
+*Corollary K7.2 (exact certification when the envelope is uninformative: a Menger number) [P, N].*
+Suppose the slack between any two distinct points exceeds `max_z |E(z) − B| + ε`.  Then
+`W_ε(A) = A ∩ {E ≥ B − ε}` and `V_ε(A) = A ∩ {E ≤ B + ε}`, hence
+
+    N_low(ε) = least number of vertices of the ridge set R_ε = {E ≥ B − ε} whose removal separates p from q
+             = largest number of p–q paths that are pairwise disjoint on R_ε        (Menger, vertex capacities),
+    N_up(ε)  = number of vertices of a shortest p–q path inside {E ≤ B + ε}.
+
+(A point outside `A` would need an anchor within slack `E(y) − B + ε`, which is excluded; a point of `A`
+has slack zero.)  So the price of an exact lower bound is the *width of the ridge* in the sense of
+Menger, the price of an exact upper bound the *length of the best pass*; by Theorem K4 and
+Bonsma–Cereceda the latter can be super-polynomial in the number of sites as well.
+*Numerics T3b:* brute force over anchor sets against a max-flow computation and a breadth-first search
+on 24 instances with genuine barriers (`N = 16, 18`): `N_up` agrees in 24, `N_low` in 23 (values 4–8);
+in the remaining one the predicted value 10 lies beyond the brute-force cap of 9 anchors, and no
+certificate with at most 9 anchors exists, as predicted.
+
 ### 2.4 What a discrete barrier says about the continuous surface
 
 **Proposition K8 (continuum bracket) [P, N].**  Let the configuration torus be covered by the closed
@@ -579,6 +596,7 @@ arithmetic except where stated.  Random instances: pairwise tables with Gaussian
 | `t1_cut_duality.py` | Thm K1 (exhaustive over all `S`), counterexamples, K2(a,b) | `N = 8…16`, 126 instances | formula 126/126; unrepaired iff fails 43/54; coordinate wall = complement 800/800; box wall = `n` boxes 186/186 |
 | `t2_robust_barrier.py` | Thm K6, Lemma K5, Cor. K6.2 | `N ≤ 81`; LP check `N = 8, 9` | LP agreement `2e-16` (16 instances); 0 violations in 9600 samples; path- and cut-radius bounds 48/48 |
 | `t3_cover.py` | Thm K7, Cor. K7.1 | `N ≤ 128` | 0 mismatches in 2 × 1280 tests; whole layer necessary (`n = 4` exhaustive) |
+| `t3b_menger.py` | Cor. K7.2: brute-force `N_low`, `N_up` vs max-flow and BFS | `N = 16, 18`, 24 instances | `N_up` 24/24; `N_low` 23/24 equal, 1 beyond the brute-force cap (consistent); no contradiction |
 | `t4_cut_families.py` | certified fraction of trap depth: box / sphere / count / Lagrangian | binary `n = 10`, 3-state `n = 6`, 151 traps | box `0.89–0.99` (exact in `76–93 %`), count `0.91–1.00`, sphere `0.69–0.86`; Curie–Weiss: box `1.7` of `4.5`, count exact; Lagrangian `0.00`, never above trivial |
 | `t5_rates.py` | K10 (reversible part), K11, K12 against exact eigenvalues, exit times, capacities | `N ≤ 1024`, 43 (system, β) cases | no violation; ranges in the table of §2.6; hitting-time identity `≤ 2e-9` in 38 cases, 5 cases ill-conditioned in double precision |
 | `t5b_scaling_highprec.py` | the identity at 60 digits; Curie–Weiss lumped chain up to `n = 320` | — | defect `4.7e-61`; recrossing `≈ n^{-1/2}`; multi-cut ratio → `0.9998`; rows with `λ_A < 1e-10` not reported |
@@ -686,7 +704,7 @@ gaps by canonical paths as certificates.
 | K2 (wall of a box = `n` boxes; coordinate cuts trivial on the Hamming graph; certified relaxed scan), K8 (continuum bracket on the face-adjacency graph), K13 | **new combination** of elementary facts; I found no statement of them in this form, and each is short enough to be folklore |
 | K3 (multiplier/Chernoff relaxation is vacuous at a barrier) | **possibly new as a stated lemma**; two-line proof, certainly known in spirit (a barrier top is a non-convex point of the profile) |
 | K5–K6 (pinned extremal lemma; exact robust interval for barrier height, depth, saddle energy; with anchors) | **possibly new** in this form; elementary; subsumes Thm 2.3, 2.4, 11.12 of the theory report; the interval-valued-field literature (mandatory critical points) is the closest prior art I found and I could not read it |
-| K7 (barrier certificates are coverings of a separator and of a path) and K7.1 | **possibly new**; the analogue of the covering theorem for minima |
+| K7 (barrier certificates are coverings of a separator and of a path), K7.1, K7.2 (Menger number of the ridge) | **possibly new**; the analogue of the covering theorem for minima; K7.2 is Menger's theorem applied to K7 |
 | K14 (robust TST bounds: exact single gateway, transport-plan bounds, sensitivity factor) | **possibly new combination** (linear-fractional programming over the weight cone is standard; cf. imprecise Markov chains) |
 | machine-checked composition with `verify_sound` / `verifyR_sound` / `zverifyTop_sound`; `trap_survival` | **new artefacts** |
 
@@ -701,7 +719,8 @@ gaps by canonical paths as certificates.
 2. **Two-point robust quantities** (Remark K6.4): the exact robust range of the critical depth
    (spectral-gap exponent) and of the height above an unknown basin minimum.
 3. **Exponent of the number of evaluations** needed to certify a barrier on product spaces (the
-   analogue of `R*` of the theory report): only the example K7.1.
+   analogue of `R*` of the theory report): only the example K7.1 and the uninformative-envelope limit
+   K7.2.
 4. **Structure of the worst-case residual for rates** (K14d): when is `−d(a,·)` optimal?  Observed in
    one instance at two temperatures **[N]**; no theorem.
 5. **Typical effectiveness and size of tractable cuts for long chains.**  All data are for `n ≤ 10`

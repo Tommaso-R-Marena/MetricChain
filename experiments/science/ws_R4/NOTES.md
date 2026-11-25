@@ -179,3 +179,18 @@ Two web searches + two abstract pages (via the page-summarising tool; no verbati
   summarised]: Omega_kappa(log d) rounds at poly(d) width; depth-width trade-off for centred Gaussians
   (ceil(c log d) rounds <-> width d^{1-c/c*}).  Sampling, continuous, polynomial scale.
 Neither is about estimating a normalising constant over a Lipschitz class on the cube with exponential budgets.
+
+## Step 14 — results of the harness for Theorem 11.84, u = 1 (out_batched_sim_u1.txt)
+150 runs (18 configurations skipped for size), all closed through the closure test; good event G' in 112 runs.
+* sanity of my 2L+: 0 invalid brackets on the good event, 0 violations of the width x_out (Thm 11.56 holds in my impl.)
+* Claim A: 0 violations in the 112 good runs — and 0 in the 38 runs where an event failed (21 343 sequential
+  calls at rungs >= 2 in total, every one inside C_l)
+* Claim B: 0 violations; 174 rungs with N_l < M_max (not implied by |C_l| <= M_max); largest |C_l|/N_l = 0.027
+* 283 levels left as negligible, 3811 as populated
+* mutations: lambda_j without c_eta e^-b/(1+eta): Claim A violated in 29/150 runs; M-hat_j without the 2: 8/150.
+=> independent replication of the workstream's simulation of Claims A and B (which the coordinator had not run).
+
+## Step 15 — three rounds (three_rounds.py -> out_three_rounds.txt)
+u=1: ladder (1,1,1): 0.5403a (phi=0.512, xi1=0.631a, xi2=0.107a); ladder (1,2): 0.5454a.  => T^(3)(0) <= 0.5403a.
+Report: 0.541a (coordinator 0.5406/0.5453).  REPRODUCED (upper bound).
+Not re-computed by me: T^(r)(0) for r >= 4 (in particular "tau^(48) <= 0.342a" of Corollary 11.87).
