@@ -1433,38 +1433,133 @@ one non-trivial step of a hierarchy, and no evidence either way about the next.
 **Audit at this checkpoint:** `scripts/audit_all.sh` exits 0; 55 Lean files, 3418 audited
 declarations; harness and mutation totals as above.
 
-### Resume here (cycle 10, ninth checkpoint)
+### Cycle 10, tenth checkpoint — slices: no function-of-type known part is harder than the uniform cube (theory report §11.25; 2026-11-25)
 
-Verified state: every module under `proofs/` (55 files) builds with zero warnings and is walked
-by the axiom audit (3418 declarations); the harness (124 registered tests: 102 that must
-survive, 22 documented refutations) and its mutation tests (246 mutations: 245 caught, one
+**What happened.**  The ninth checkpoint was closed and pushed (`e4351b9`; audit green).
+Workstream V — commissioned for the open problem of §11.23, the exponent of adaptive
+algorithms without a hint for an exchangeable known part — **ended without a report**: the
+agent read the sources, wrote nothing in four maximal responses and was stopped by its
+output limit (`DEAD_ENDS.md` D51, item 1).  The coordinator took the question over in small
+steps, one script per step.  The brief's question is not answered; what came out is a
+reduction and two theorems that close other open items.
+
+**Results (theory report §11.25; the coordinator's paper proofs; not refereed).**
+* *Lemma 11.89 (odds ratio).*  Among pairs of binary variables with a given odds ratio the
+  mutual information is largest at uniform marginals; equivalently the symmetric binary
+  channel has the largest capacity among binary channels with its odds ratio.  Proof:
+  write the table as an Ising pair, differentiate the capacity along the field of the
+  channel (the gradient of the mutual information is a covariance with the information
+  density, which is bilinear plus two linear terms), and reduce the sign to the
+  monotonicity of `t ↦ t·ln(t/(t+W))`.  Not found in two searches; may be folklore.
+* *Theorem 11.90 (type classes).*  For the uniform measure on one type class: binary
+  centres suffice (Lagrangian duality: for fixed multipliers the value is linear in the
+  law of the block densities, which has one linear constraint); closed forms for the
+  hinted and the non-adaptive value of a centre; and by the lemma the game function of
+  every centre on every type class is dominated pointwise by the uniform cube's, with
+  equality only for the class `½` and centre type `½`.  At `u = 1`: `0.029139`, `0.028005`,
+  `0.024588`, `0.018842` for `κ = 0.5, 0.4, 0.3, 0.2`; the best centre of an off-centre class is
+  not in the class.
+* *Corollary 11.91.*  For **every** exchangeable known part (any `φ`) and every symmetric
+  instance: `R_λ ≤ sup_κ R^κ(e + (I−λ)(κ)) ≤ R_unif`, `N ≤ θ_na^{cube}`, `R̄_H ≤ R̂_cube` on the whole
+  line.  Hence Proposition 11.81(a) for every interaction, with a proof that does not use
+  Proposition 11.65(b); and **equality for every symmetric convex rate function — every
+  antiferromagnet without a field included**, which closes item (δ) of §12.  As a
+  statement about exponents this rests on Theorems 11.78, 11.79 (unrefereed).
+* *Theorem 11.92 (algorithms reduce to type classes; every `n`).*  `A = Σ_tp_tA_t`; `ln A_t` is
+  `u`-Lipschitz in `t`; optimistic refinement over the `n + 1` classes returns a valid
+  bracket and refines a class only if its deficit is at most its bracket.  Deterministic
+  core machine-checked: `proofs/Frontiers/SliceRefinement.lean` (`sum_mem_bracket`,
+  `bracket_width`, `argmax_deficit_le`, `deficit_ge`, `mean_le_of_biregular`).
+* *Lemma 11.93 (random splits).*  With a uniformly random split of the coordinates a type
+  class splits into type classes of the same density up to `O(√(n ln n))`; with a fixed
+  split this is false.
+* *Conjecture 11.94.*  Adaptive algorithms without a hint reach `R^κ` on a type class (the
+  proof of Theorem 11.56 on products of type classes with random splits).  Then
+  `R_H ≤ θ* ≤ sup_κR^κ(max(ε₁, (I−v)(κ))) ≤ R_unif` for every function-of-type known part,
+  with equality without a field.
+
+**Verification.**  Independent code for every statement (`experiments/coordinator_checks/slices/`:
+every step of the proof of the lemma; binary centres against profiles with 3–5 blocks,
+randomly and by Nelder–Mead — the three-block optimum is the binary one to `2.5·10⁻¹⁶`;
+closed forms against direct evaluation; domination pointwise).  Harness block XXI: four
+tests (XXI.1 the lemma and its proof, XXI.2 closed forms and binary sufficiency, XXI.3
+domination and Curie–Weiss known parts against their type classes and the cube, XXI.4
+the reduction and random splits by exact enumeration on cubes of dimension 8 and 9) with
+21 mutations, all caught for the intended reason.  Totals: 128 registered tests (106 must
+survive, 22 documented refutations); 267 mutations (266 caught, one expected pass).
+
+**A correction.**  The numbers `0.0281`, `0.0247`, `0.0189` for the type classes `0.4`, `0.3`, `0.2`
+(D49 item 5 until this checkpoint) were biased upward by `10⁻⁴`: inner minimum on a grid,
+outer maximum selects the bias — the lesson of D49 item 7 a second time (D51 item 7).
+
+**Dead ends** (D51): the proposal "nest by the type of the inner block" does not close
+(a recursion over rate functions); a fixed split does not work on a type class; a
+synchronous ladder over classes refines to half the deficit; two failed proofs of the
+lemma (a Sinkhorn relaxation; degradation — an asymmetric channel is not a degraded
+symmetric channel with the same odds ratio); two failed embeddings of a type class into a
+cube (retractions double the Lipschitz constant; domino subcubes are aligned with a
+centre with probability `2^{−n/2}`).
+
+**Collaboration.**  THY-MSG-0010 (the section; corrections of THY-MSG-0009: the workstream
+on the adaptive exponent ended without a report; the three numbers) and THY-REQ-0010
+(exact smallest sensitive sets on type classes at small sizes; the finite-size approach to
+the closed forms; a simulation of refinement across type classes).
+`research/ubuntu-engineering` unchanged at `db56d05` at 15:50 and 16:45 UTC.
+
+**Honest assessment.**  The lemma is elementary and the theorem is a duality argument plus
+the lemma; what they buy is a statement with no hypothesis on the interaction, and the
+end of two numerical "to all digits" claims.  The reduction of algorithms to type classes
+is simple and exact, and it is also where the remaining difficulty becomes visible: a
+type class is a homogeneous space on which the adaptive theory of the cube has to be
+redone (conjecture), and treating type classes separately discards exactly the
+information — exits that change the type — that makes a field easier than the uniform
+cube.  The exact adaptive exponent of an interacting known part is still open.  Nothing
+in the section has been read by a referee.
+
+**Audit at this checkpoint:** `scripts/audit_all.sh` exits 0; 56 Lean files, 3423 audited
+declarations; harness and mutation totals as above.
+
+### Resume here (cycle 10, tenth checkpoint)
+
+Verified state: every module under `proofs/` (56 files) builds with zero warnings and is walked
+by the axiom audit (3423 declarations); the harness (128 registered tests: 106 that must
+survive, 22 documented refutations) and its mutation tests (267 mutations: 266 caught, one
 expected pass) pass; `scripts/audit_all.sh` exits 0.  Refereed: theory report §§11.16–11.17
 (R5, R6, R_P), §11.18 (R7), §11.19 (R8: "proved"), §11.20 (R9: proved; two gaps closed).
 Machine-checked: §11.21.  **Checked by the coordinator with independent code, no separate
-referee:** §11.22, §11.24.  **Checked by the coordinator, referee at work:** §11.23.  **Not
+referee:** §11.22, §11.24.  **Checked by the coordinator, referee at work:** §11.23.  **The
+coordinator's own proofs, checked numerically, no referee:** §11.25.  **Not
 refereed:** the revised Theorem 11.44, Proposition 11.50.  **Not checked by anyone:** the
 two-level algorithms at scale with real inner brackets on non-flat instances, or with four
 levels, or in the batched schedule (THY-REQ-0001); the nested algorithm with a field end
 to end; Theorem 11.63 on sets without symmetry for `n > 6`.  Running at the time of
 writing: **referee R10** (§11.23; directory `scratchpad/referee10/` of the session, report to
-be copied to `docs/reviews/R10_referee_report.md`), **workstream V** (the adaptive exponent
-for exchangeable known parts; `docs/workstreams/V_brief.md`) and **workstream W** (sites of
+be copied to `docs/reviews/R10_referee_report.md`) and **workstream W** (sites of
 several types with larger alphabets — the heteropolymer product landscape;
 `docs/workstreams/W_brief.md`).  If the session that started them has ended, their briefs
-are complete and they can be re-commissioned as written.  In
+are complete and they can be re-commissioned as written (**with one change, learned from
+workstream V, which ended without a report: require a notes file after every step and
+numerics before theory** — D51).  In
 priority order:
 
 1. **Act on referee R10** when it reports: §11.23 is the newest foundation and is
    unrefereed; its critical step is Theorem 11.78(b).
 2. **The adaptive exponent without a hint for an interacting known part** (Conjecture
-   11.83, O4; workstream V).  Conjecture: `R_H(ε₁)`.  The route to verify first: nesting by
-   the type of the inner block (§11.23, "a possible repair").  Fallbacks that are proved or
-   nearly so: the uniform cube's exponent for ferromagnets by a mixture of fields
-   (Proposition 11.81(c), a sketch); slices in isolation (the slice of type `½` has the
-   uniform cube's exponent numerically).
+   11.83, O4).  Reduced at the tenth checkpoint to the uniform measure on one type class
+   (§11.25).  Two steps remain, in this order: (a) **Conjecture 11.94(iii)** — redo the
+   proof of Theorem 11.56 on products of type classes (facts (F1)–(F3) of Theorem 11.52
+   hold verbatim; needed: the tail bound of the closure test as an exponent with `o(n)`
+   slack, from Theorem 11.78(b) inside one type class; random splits with one-sided
+   failures, Lemma 11.93; the sum over typical type pairs by Theorem 11.92(b)); a
+   two-level version would already show that adaptivity helps on a type class;
+   (b) the exact exponent when exits that change the type matter (a field: known,
+   `R^max`; two phases beyond the junction: open) — needs information across type classes;
+   the natural algorithm keeps the top-level outer block unresolved by type and leads to
+   a recursion over rate functions.  A referee for §11.25 if it is to carry weight.
 3. **Synchronise with `research/ubuntu-engineering`** at every checkpoint (read-only; never
    merge).  Open on their side: THY-REQ-0001 (not started; target Algorithm 2L⁺, now in the
-   batched schedule of Theorem 11.84), -0003, -0004, the rest of -0002, -0007, -0008, -0009.
+   batched schedule of Theorem 11.84), -0003, -0004, the rest of -0002, -0007, -0008, -0009,
+   -0010.
 4. **Known parts with spatial structure** — the next foundational step, not started:
    nearest-neighbour interactions along the sequence (a Markov chain as reference
    measure).  What carries over in principle: the measure is uniform on *Markov* type
@@ -1479,9 +1574,12 @@ priority order:
 5. **Rounds** (§11.24): is `τ^{(3)} = h`?  A referee for §11.24 if it is to carry weight.  The
    general-`r` form of Lemma 11.85 in Lean (two rounds are done).
 6. **Two phases** (§11.23): binary optimality at vanishing accuracy (C1); the supremum
-   beyond `e₀` (O2); the non-adaptive exponent at `u = 0.30` (O5); a proof that the slice of
-   type `½` and antiferromagnets without a field have the uniform cube's exponents.
-   Machine-checking Theorem 11.76(c) is routine and not done.
+   beyond `e₀` (O2) — now known to lie below the uniform cube's value for every
+   interaction (Corollary 11.91); the non-adaptive exponent at `u = 0.30` (O5).
+   Machine-checking Theorem 11.76(c) is routine and not done.  The odds-ratio lemma
+   (11.89) in Lean needs the derivative of the capacity; its kernel, the monotonicity of
+   `t·ln(t/(t+W))`, is a few lines.  The same lemma for larger alphabets is open and is
+   what a comparison with the uniform case beyond two letters would need.
 7. **The limit shape** (§12 item 9(a1)–(a6)): Conjecture 11.75; a second-level cluster
    programme for the seven vertices of `𝒦₂` that no periodic system attains; the routing
    lemma for periodic chain systems; an independent referee for §11.22.

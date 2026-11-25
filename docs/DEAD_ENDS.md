@@ -1268,9 +1268,12 @@ reason" should be re-derived with a field before it is believed in general.
    optimal profile the cheapest exit does not change the type anyway, and no other profile
    does better.  Every antiferromagnet without a field (`βJ` down to `−40`), and the slice of
    type `½` itself, have the uniform cube's exponents to all digits computed; slices of type
-   `0.4`, `0.3`, `0.2` have less (`0.0281`, `0.0247`, `0.0189` against `0.0291`;
-   `experiments/coordinator_checks/meanfield_T/slice_check.py`).  "`≥`" is proved, "`=`" is
-   numerical.
+   `0.4`, `0.3`, `0.2` have less (`0.028005`, `0.024588`, `0.018842` against `0.029139`; the values
+   `0.0281`, `0.0247`, `0.0189` printed here until the tenth checkpoint came from
+   `experiments/coordinator_checks/meanfield_T/slice_check.py`, whose inner minimum on a grid
+   is biased upward: D51, item 7).  *Since the tenth checkpoint both statements are
+   theorems* (theory report §11.25: equality for every symmetric convex rate function,
+   strict inequality for every slice other than `½`; unrefereed).
 6. **"The nested algorithm transfers once the fibres stay in the class."**  They do (the
    conditional law of a block is again a function of its type), but fibre averages are not
    Lipschitz relative to a reference: the constant is `u + osc φ′` and the excess depends on
@@ -1369,3 +1372,59 @@ reason" should be re-derived with a field before it is believed in general.
    `n ≤ 240` with tolerance `4 ln n/n ≈ 0.1`, larger than the term `KL(σ‖½)` it was meant to
    see; two mutations survived until the test was moved to `n = 300, 600` with tolerances
    calibrated on the exact counts.
+
+## D51. The adaptive question for function-of-type known parts: a workstream that produced nothing, and six wrong turns on the way to the reduction to type classes (cycle 10; coordinator)
+
+Theory report §11.25 is what remained of an attempt to find the exponent of adaptive
+algorithms without a hint for a known part that is a function of the type (Conjecture
+11.83).  It does not answer that question; it reduces it.  What failed on the way:
+
+1. **Workstream V produced nothing.**  It was commissioned with an open brief
+   (`workstreams/V_brief.md`: "nesting by the type of the inner block"; find the exponent or
+   say what obstructs it).  The agent read the sources and then spent four maximal
+   responses without writing a file, a script or a note, and was stopped by the output
+   limit; nothing was recoverable.  *Lesson:* a brief for a problem whose answer may not
+   exist must demand written intermediate artefacts — a notes file after every step,
+   numerics before theory — and must be cut into steps that can be checked separately;
+   the earlier workstreams succeeded where the brief named the first three computations.
+   The coordinator then took the question in small steps, one script each.
+2. **"Nesting by the type of the inner block gives the adaptive exponent"** (the repair
+   proposed in §11.23 and in the brief).  The two facts it rests on are true — given the
+   type of the inner block the blocks are independent and the fibre means are exactly
+   `u`-Lipschitz — but the outer block then carries a *different* exchangeable law for
+   every inner type, all levels below the first are type classes, and the recursion does
+   not close on one family of functions.  Resolving the outer block by type as well gives
+   products of type classes and discards everything across type classes: the bound of
+   Theorem 11.92, which is not tight when exits change the type (a field `p = 0.3` at
+   `u = 1`: `0.0291` against the true `0.0250`).
+3. **"A fixed split of the coordinates will do on a type class."**  The centre of the hard
+   instance can have any outer type, so a window of pairs of block densities would
+   matter and the recursion would run over densities.  A uniformly random split removes
+   this (Lemma 11.93) — at the price of failures, one-sided and with probability `1/poly`,
+   for each fibre separately.
+4. **"A synchronous ladder over the type classes refines each class down to its deficit."**
+   It refines to half of it: the class and the current maximum are both known only up to
+   the common width.  Refining the class with the largest weighted upper end gives
+   `max(ε, d_t)`; the additive form `ε + d_t`, which the lower bound suggests, would need the
+   leading class at a finer width than the others and is not reached by the simple rule
+   (immaterial when the supremum over classes is attained in the contact set).
+5. **Two proofs of the odds-ratio lemma that do not work.**  (i) Write the table as a
+   diagonal scaling of the symmetric one and drop the two divergence terms: the bound
+   that remains is `KL(tilted w ‖ w)`, which exceeds the symmetric value for small `w`.
+   (ii) Degradation: an asymmetric channel is *not* a degraded version of the symmetric
+   channel with the same odds ratio (one of its two likelihood ratios exceeds `e^{2J}`), and
+   conditioning on a product event only gives `I ≤ I_sym/P(accept)`.  The proof that works
+   differentiates the capacity along the field of the channel.
+6. **Two embeddings of a type class into a cube** (to use Theorem 11.56 as a black box).
+   (i) Retractions of the cube onto a type class — greedy or random — send two adjacent
+   points to the same point or to points at distance two: the Lipschitz constant
+   doubles, and a penalty that concentrates the product measure on the class costs half
+   of the slope again.  (ii) The "domino" subcubes of the class `½` (a perfect matching of
+   the coordinates, one letter of each kind per pair) are isometric copies of `Q_{n/2}` with
+   slope `2u` and average to the class, but a random matching is aligned with a given
+   centre with probability `2^{−n/2}`.
+7. **A number, and D49 item 7 a second time.**  The slices `0.4`, `0.3`, `0.2` at `u = 1` were
+   quoted as `0.0281`, `0.0247`, `0.0189`; the values are `0.028005`, `0.024588`, `0.018842`.  The
+   first computation took the inner minimum over a grid of exits — biased upward — and
+   the outer maximum selected the bias (`10⁻⁴`, on a grid of 4001 points).  The closed
+   form, a solver by clipping and a direct evaluation agree on the second set.

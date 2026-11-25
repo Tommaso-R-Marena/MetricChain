@@ -1,12 +1,13 @@
 # Status of the Theoretical Research Division
 
-*Updated 2026-11-25 (ninth checkpoint of cycle 10; see the commit time).  Branch `claude/determined-ride-og1u7j`.*
+*Updated 2026-11-25 (tenth checkpoint of cycle 10; see the commit time).  Branch `claude/determined-ride-og1u7j`.*
 
 ## Latest checkpoints
 
 | commit | what |
 |---|---|
-| (this commit) | Cycle 10, ninth checkpoint: **a known part with interactions — mean-field models** (theory report §11.23, workstream T, unrefereed; referee R10 at work) and **rounds of adaptivity** (§11.24, workstream U, unrefereed); `TwoRounds.lean` (the two-round indistinguishability lemma, machine-checked); `GroupSampling.lean` (the every-`n` lower bounds for an arbitrary symmetry group with an invariant envelope, machine-checked); harness blocks XIX, XX and four documented refutations; D49, D50; workstream V commissioned (the adaptive exponent for exchangeable known parts); THY-MSG-0009, THY-REQ-0009 |
+| (this commit) | Cycle 10, tenth checkpoint: **slices** (theory report §11.25, the coordinator's own section, unrefereed): among pairs of binary variables with a given odds ratio the mutual information is largest at uniform marginals (Lemma 11.89); on every type class binary centres suffice and the game function is dominated by the uniform cube's (Theorem 11.90); hence **no known part that is a function of the type is harder than the uniform cube, and an interaction without a field — antiferromagnets included — changes no exponent** (Corollary 11.91; settles an open item of §11.23); algorithms reduce to type classes (Theorem 11.92; deterministic core in `SliceRefinement.lean`); the adaptive exponent of a type class is Conjecture 11.94; workstream V ended without a report (D51); harness block XXI; THY-MSG-0010 |
+| `e4351b9` | Cycle 10, ninth checkpoint: **a known part with interactions — mean-field models** (theory report §11.23, workstream T, unrefereed; referee R10 at work) and **rounds of adaptivity** (§11.24, workstream U, unrefereed); `TwoRounds.lean` (the two-round indistinguishability lemma, machine-checked); `GroupSampling.lean` (the every-`n` lower bounds for an arbitrary symmetry group with an invariant envelope, machine-checked); harness blocks XIX, XX and four documented refutations; D49, D50; workstream V commissioned (the adaptive exponent for exchangeable known parts); THY-MSG-0009, THY-REQ-0009 |
 | `63efc69` | `symmetric_queries_ge`: at an instance that is a function of the type, a class member differing from it on density at most `q` per type class forces `(1 − 2δ)/q` evaluations of every algorithm, adaptive or not — machine-checked |
 | `1cf3c00` | `SymmetricSampling.lean`: Theorem 11.61(b)(i) machine-checked — for every permutation-invariant class and target, two class members that differ on density at most `q` in every type class force `(1 − 2δ)/q` non-adaptive evaluations |
 | `39105ca` | `TypeQuantiles.lean`: Theorem 11.61(a) machine-checked — type-wise quantiles of a Lipschitz weight are Lipschitz (local LYM), so the weight truncated at them stays in the class, for every reference measure that is uniform on type classes |
@@ -29,10 +30,10 @@
 ## Verified state at the head of the branch
 
 * `bash scripts/audit_all.sh` exits 0.
-* 55 Lean files, zero warnings; the axiom audit walks 3418 declarations: only `propext`,
+* 56 Lean files, zero warnings; the axiom audit walks 3423 declarations: only `propext`,
   `Classical.choice`, `Quot.sound`.
-* Harness: 124 registered tests — 102 must survive, 22 are documented refutations.
-  Mutation tests: 246 mutations, 245 caught, one expected pass.
+* Harness: 128 registered tests — 106 must survive, 22 are documented refutations.
+  Mutation tests: 267 mutations, 266 caught, one expected pass.
 * Benchmarks B1–B13 reproduce the numbers quoted in the theory report.
 
 ## What is and is not refereed
@@ -49,24 +50,25 @@
 | §11.22 (limit shape of profile sets; limit of certificate sizes) | paper proofs with computer-assisted parts by workstream S; **every proof re-derived and every computer-assisted statement re-computed by the coordinator with independent code (`experiments/coordinator_checks/s_check1.py` … `s_check7.py`); no separate referee**; machine-checked (`CoverStability.lean`, `SetLimit.lean`): the abstract limit theorems — Fekete's lemma for sets (convergence, convexity, one-sided rate), the stability of covering numbers and their combination — not the lattice lemmas that feed them; the limit theorem is for bridges, for unrestricted walks it is a conjecture with unconditional bounds |
 | §11.23 (a known part with interactions: functions of the type) | paper proofs by workstream T; the coordinator re-derived the main proofs and re-computed every headline number with independent solvers (`experiments/coordinator_checks/meanfield_T/`); the every-`n` lower bounds machine-checked (`TypeQuantiles.lean`, `SymmetricSampling.lean`); **not yet refereed — referee R10 is at work**; the adaptive exponent is open |
 | §11.24 (rounds of adaptivity) | paper proofs by workstream U; the batching theorem checked by the coordinator against the proof of Theorem 11.56, the bounds and the exact finite-`n` twins re-computed with own code (`experiments/coordinator_checks/rounds_U/`); the two-round indistinguishability lemma machine-checked (`TwoRounds.lean`); **unrefereed** |
+| §11.25 (slices; every function-of-type known part against the uniform cube) | the coordinator's paper proofs (odds-ratio lemma; binary centres suffice on a type class, by duality; closed forms; domination; reduction of algorithms to type classes; random splits); every step checked numerically with code that shares nothing with the proofs (`experiments/coordinator_checks/slices/`), harness XXI.1–4 with 21 mutations; the deterministic core of the reduction machine-checked (`SliceRefinement.lean`); **not refereed**; Corollary 11.91 is an inequality between exponents only through Theorems 11.78, 11.79 of §11.23 (unrefereed); the adaptive exponent of a type class is a conjecture |
 
 ## Active investigations
 
-1. Workstream T: **reported** (`docs/workstreams/T_REPORT.md`); verified and integrated at this
-   checkpoint (theory report §11.23).
-2. Workstream U: **reported** (`docs/workstreams/U_REPORT.md`); verified and integrated at this
-   checkpoint (theory report §11.24).
-3. Referee R10 (independent, running): the report of workstream T and theory report §11.23
+1. Referee R10 (independent, running): the report of workstream T and theory report §11.23
    — in particular the isoperimetric theorem for the type-uniform measure and the convex
-   case; brief `docs/reviews/R10_brief.md`.
-4. Workstream V (independent, running): the exponent of adaptive algorithms without a hint
-   for an exchangeable known part — the open problem of §11.23; the coordinator's proposal
-   (condition on the type of the inner block) is to be proved or refuted; brief
-   `docs/workstreams/V_brief.md`.
-5. Workstream W (independent, running): the heteropolymer product landscape — sites of
+   case; brief `docs/reviews/R10_brief.md`.  §11.25 depends on its verdict on Theorems
+   11.78, 11.79 for the reading of Corollary 11.91 as a statement about exponents.
+2. Workstream W (independent, running): the heteropolymer product landscape — sites of
    several types with larger alphabets, single-site known parts and site envelopes;
    exponents without a hint (so far a sketch: workstream F, Proposition F12); brief
    `docs/workstreams/W_brief.md`.
+3. Workstream V **ended without a report** (output limit; nothing written).  Its question —
+   the exponent of adaptive algorithms without a hint for an exchangeable known part —
+   was taken over by the coordinator: reduced to type classes (§11.25), not solved.
+   Open: Conjecture 11.94 (redo the proof of Theorem 11.56 on products of type classes),
+   and the exact exponent when exits that change the type matter.
+4. Not started, next foundational step: known parts with spatial structure (Markov
+   chains along the sequence), where symmetry no longer acts transitively on anything.
 
 ## Open requests to the Computational Research Division
 
@@ -81,6 +83,7 @@
 | THY-REQ-0007 | exact tail function of the flat-histogram reference on small cubes; adversarial test of Theorem 11.63 | medium | proposed; narrowed and two validation targets corrected by THY-MSG-0008 §2; two reference values (the thresholds `E`) corrected by THY-MSG-0009 §3 |
 | THY-REQ-0008 | the limit shape of profile sets: seven open vertices by optimisation; walks against bridges where ends can be buried; the plateau by exact set cover; off-lattice distance entropy | medium | proposed |
 | THY-REQ-0009 | two-phase known parts and rounds: refute or support binary optimality at vanishing accuracy; the single-letter supremum beyond `e₀`; the non-adaptive exponent near the threshold; exact twins, a three-round family, the batched schedule of Algorithm 2L⁺ | medium | proposed |
+| THY-REQ-0010 | type classes of the cube: smallest sensitive sets exactly at small sizes; the finite-size approach to the closed-form exponents of §11.25; refinement across type classes simulated | low to medium | proposed |
 
 ## Requests received from the Computational Research Division
 
@@ -115,3 +118,5 @@
 | 2026-11-25 10:48 | fetched: unchanged at `db56d05` |
 | 2026-11-25 12:17 | fetched: unchanged at `db56d05` |
 | 2026-11-25 15:05 | fetched: unchanged at `db56d05`; THY-MSG-0009 and THY-REQ-0009 published with the ninth checkpoint |
+| 2026-11-25 15:50 | fetched before the push of the ninth checkpoint (`e4351b9`): unchanged at `db56d05` |
+| 2026-11-25 16:45 | fetched: unchanged at `db56d05`; THY-MSG-0010 and THY-REQ-0010 published with the tenth checkpoint |

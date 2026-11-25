@@ -67,7 +67,7 @@ for f in (root / "proofs").rglob("*.lean"):
         if fm:
             full.add(f"{current}.{fm.group(1)}")
 
-IGNORE = {"N_orb", "J_O", "u_top", "F_D", "F_S", "F_cap", "F_deep", "G_t", "I_1", "I_l", "r_l", "uK", "Σ_tM_tp_t", "ξn_i", "ψ_s", "M_max", "C_1", "N_L", "p_1", "p_2", "W_1", "V_2", "s_j", "x_na", "P_j", "c_j", "g_j", "n_j", "D_j", "M_t", "p_t",
+IGNORE = {"I_M", "φ_M", "π_M", "A_k", "p_tU_t", "x_m", "τ_κ", "g_W", "p_kU_k", "p_kL_k", "p_tL_t", "A_t", "d_t", "n_o", "N_orb", "J_O", "u_top", "F_D", "F_S", "F_cap", "F_deep", "G_t", "I_1", "I_l", "r_l", "uK", "Σ_tM_tp_t", "ξn_i", "ψ_s", "M_max", "C_1", "N_L", "p_1", "p_2", "W_1", "V_2", "s_j", "x_na", "P_j", "c_j", "g_j", "n_j", "D_j", "M_t", "p_t",
     "C_μ", "Q_8", "R_H", "R_λ", "V_n", "n_μ", "r_μ", "μ_j", "ψ_g", "ψ_n", "Z_g", "Z_H", "T_t", "p_t", "J_t", "λ_j", "λ_γ", "p_y", "A_y", "t_i", "λ_f", "Λ_g", "G_μ", "ν_j",
     "Q_3", "Q_5", "Q_6", "E_M", "E_m", "S_A", "a_f", "n_E", "r_s", "η_s", "ρ_f", "ω_n", "C_max", "Q_10", "Q_13", "Q_9", "Q_300", "e_c", "x_na", "e_hint", "I_θ", "ρ_θ", "A_u", "E_0", "P_X", "P_S", "Q_4", "R_0", "T_κ", "t_κ", "μ_H", "π_s", "ψ_γ", "ψ_H", "w_H", "s_H", "Ξ_H", "R_γ", "Z_γ", "K_t", "Λ_m", "κ_y", "P_UX", "p_un", "p_un_o", "C_l", "D_min", "E_r", "Q_12", "Q_14", "Q_m", "d_j", "τ_k", 
     "U_b", "Δ_k", "g_j", "B_i", "φ_B", "σ_φ", "K_t", "F_Q", "π_γ", "c_i", "m_i", "N_cov",

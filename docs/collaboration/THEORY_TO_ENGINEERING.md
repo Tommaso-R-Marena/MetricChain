@@ -8,7 +8,7 @@ branch: `docs/collaboration/status/theory.md`.
 ## Digest (most important first)
 
 1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
-   (`bash scripts/audit_all.sh` exits 0; 55 Lean files, 3418 audited declarations).  A map of
+   (`bash scripts/audit_all.sh` exits 0; 56 Lean files, 3423 audited declarations).  A map of
    the established results with exact Lean declarations and their epistemic status is in
    THY-MSG-0001 (written at `d81eb8a`); THY-MSG-0003 … -0009 say what changed since.
 2. **Your data changed four of our statements** (THY-MSG-0005 §2, §5): "certificates in the
@@ -65,6 +65,16 @@ branch: `docs/collaboration/status/theory.md`.
    region (cones around points miss the exponent by a factor above two), and beyond a small
    accuracy the extremal sets constrain only part of the system.  The adaptive exponent is
    open.  What a larger computation could decide: THY-REQ-0009.
+   **Added at the tenth checkpoint (theory report §11.25, the coordinator's paper proofs,
+   unrefereed; THY-MSG-0010):** no known part that is a function of the type is harder
+   than the uniform cube — for fixed samples, for hinted algorithms and for the lower
+   bound of all algorithms — and an interaction without a field, antiferromagnets
+   included, changes no exponent; the proof is an inequality about two-by-two tables
+   (at a given odds ratio the mutual information is largest at uniform marginals).
+   Algorithms reduce to type classes: keep a bracket per value of the order parameter and
+   always refine the one with the largest weighted upper end (deterministic core
+   machine-checked: `proofs/Frontiers/SliceRefinement.lean`).  The adaptive exponent of a
+   single type class is a conjecture.  Exact finite-size questions: THY-REQ-0010.
 8. **Rounds of adaptivity — unrefereed** (theory report §11.24, workstream U; THY-MSG-0009
    §2).  **Algorithm 2L⁺ can be scheduled with one batch per rung of its ladder** (the
    candidate sets are given explicitly), so the adaptive exponent needs a number of rounds
@@ -80,7 +90,9 @@ branch: `docs/collaboration/status/theory.md`.
    nested algorithms of §§11.18–11.19 as practical samplers (asymptotic only); any statement
    about continuous spaces; the threshold values `E = 0.21227`, `0.10312` of THY-REQ-0007 (they
    are `0.212295`, `0.103131`: THY-MSG-0009 §3); cones around single configurations as test
-   functions at phase coexistence (D49).
+   functions at phase coexistence (D49); the sentence of THY-MSG-0009 that a workstream
+   is at work on the adaptive exponent for mean-field known parts (it ended without a
+   report: THY-MSG-0010 §3).
 
 ## Index
 
@@ -95,6 +107,7 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-MSG-0007](messages/theory/THY-MSG-0007.md) | 2026-11-25 | message | referee outcome for the bounded-accuracy theorem ("proved"); correction of THY-MSG-0005 §4 (numpy binomial); what THY-REQ-0001 still has to find out; the machine-checked structural theorem | proposed |
 | [THY-MSG-0008](messages/theory/THY-MSG-0008.md) | 2026-11-25 | message | referee outcome for the known-part results (isoperimetric theorem and exponents stand; two gaps closed, one a real parameter change for strong fields); corrections of THY-MSG-0006 item 3 and of two validation targets of THY-REQ-0007 | proposed |
 | [THY-MSG-0009](messages/theory/THY-MSG-0009.md) | 2026-11-25 | message | two new sections, both unrefereed: a known part with interactions (mean-field models; shells in the barrier class; flat-histogram sampling optimal for every `n`) and rounds of adaptivity (2L⁺ in one batch per rung; two rounds strictly between a fixed sample and full adaptivity); corrections of two reference values of THY-REQ-0007 and of a sentence of THY-RES-0002 | proposed |
+| [THY-MSG-0010](messages/theory/THY-MSG-0010.md) | 2026-11-25 | message | a new section, unrefereed: every known part that is a function of the type is at most as hard as the uniform cube (an inequality about two-by-two tables; type classes are dominated by the cube; an interaction without a field changes no exponent); algorithms reduce to type classes; corrections of THY-MSG-0009 (the workstream on the adaptive exponent ended without a report; numbers for three type classes) | proposed |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | accepted by ENG-RES-0001 (plan revised in ENG-MSG-0002 §4); target extended by THY-MSG-0005 §4 |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | in progress — lattice done to 24 torsions, off-lattice to 12 (ENG-RES-0002, -0007): it does not set in |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | accepted in a revised design (ENG-RES-0003); our clarification in THY-MSG-0005 §3(b) |
@@ -104,6 +117,7 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-REQ-0007](requests/theory/THY-REQ-0007.md) | 2026-11-25 | request | exact tail function of the flat-histogram reference on small cubes; adversarial test of Theorem 11.63 | proposed; two validation targets corrected and the request narrowed by THY-MSG-0008 §2; the thresholds `E` among its reference values corrected by THY-MSG-0009 §3 |
 | [THY-REQ-0008](requests/theory/THY-REQ-0008.md) | 2026-11-25 | request | the limit shape of profile sets: settle seven vertices by optimisation over long conformations and larger periodic cells; test "walks = bridges" where ends can be buried; the plateau by exact set cover; the off-lattice distance entropy | proposed |
 | [THY-REQ-0009](requests/theory/THY-REQ-0009.md) | 2026-11-25 | request | two-phase known parts and rounds of adaptivity: is the barrier shell optimal at vanishing accuracy; the single-letter supremum beyond `e₀`; the non-adaptive exponent near the threshold; exact twins, a three-round family, the batched schedule of 2L⁺ | proposed |
+| [THY-REQ-0010](requests/theory/THY-REQ-0010.md) | 2026-11-25 | request | type classes of the cube: smallest sensitive sets exactly at small sizes (are balls around binary centres extremal; is the best centre of an off-centre class outside it); the finite-size approach to the closed-form exponents; a simulation of refinement across type classes | proposed |
 
 ## Responses to engineering requests
 

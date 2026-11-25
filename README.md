@@ -312,8 +312,8 @@ accuracy, not even sets built around one centre: the extremal sets constrain onl
 the system** (found by the workstream against the coordinator's brief; D49).  A
 ferromagnetic interaction never makes the problem harder than no interaction, and a
 shallow barrier is invisible to every exponent.  Open: what adaptive algorithms can do
-(the nested algorithm does not transfer; a repair is proposed and a workstream is on it),
-and the value of the exponent with two phases beyond small accuracies.
+(the nested algorithm does not transfer; see (x)), and the value of the exponent with two
+phases beyond small accuracies.
 (ix) *Rounds of adaptivity* (theory report §11.24; workstream U,
 `docs/workstreams/U_REPORT.md`; **paper proofs, checked against the proof they build on and
 re-computed by the coordinator; unrefereed**).  How much adaptivity does the adaptive
@@ -325,6 +325,25 @@ sample costs `a` and full adaptivity `0.263a`.  The hard instances are not neste
 as the coordinator had expected (D50), but a flat histogram in one block of coordinates
 that dilutes the first batch.  Whether three rounds suffice is open.  Machine-checked: the
 indistinguishability lemma behind the lower bound, for two rounds (`TwoRounds.lean`).
+(x) *One value of the order parameter at a time* (theory report §11.25; **the coordinator's
+paper proofs, every step checked numerically; not refereed**).  Inside a level set of the
+order parameter the known part is a constant, and there are only `n + 1` level sets.  Two
+consequences.  First, an elementary inequality — among pairs of binary variables with a
+given odds ratio the mutual information is largest when both marginals are uniform —
+shows that on every level set sets around one centre are extremal and the exponents are
+at most the uniform cube's, with equality at half filling.  Hence **no known part that
+depends on the configuration only through one order parameter — ferromagnetic or
+antiferromagnetic, with any number of phases — makes certification harder than no known
+part at all, and an interaction without a field changes no exponent** (this settles what
+(viii) had left numerical).  This is a statement about two-letter alphabets: with three
+or more letters it fails at small slopes — a known part that removes letters can make
+the problem harder (numerical; the mutual information of a Potts pair is largest on a
+sub-alphabet).  Second, algorithms reduce to level sets: keep a bracket per
+level set and always refine the one with the largest weighted upper end; a level set is
+then examined only as closely as its distance from the maximum requires (deterministic
+core machine-checked, `SliceRefinement.lean`).  Still open: the adaptive exponent on a
+single level set (conjectured to be the hinted one, as on the cube), and the exact
+adaptive exponent when perturbations that change the order parameter matter.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
@@ -332,7 +351,8 @@ interval evaluation of force-field terms over voxels, and any claim of practical
 performance are outside the development.  The complexity results are exponents on idealised
 classes (product landscapes; for algorithms without a hint only the cube, with a zero known
 part, a field, or — unrefereed, and without an adaptive algorithm — a mean-field known
-part), with paper proofs wherever the theory report does not name a Lean declaration; the
+part, where the comparison with the uniform cube of item (x) is the coordinator's own
+unrefereed proof), with paper proofs wherever the theory report does not name a Lean declaration; the
 newest of them — the adaptive exponent — has a machine-checked recursion and bracket but a
 paper proof for the number of evaluations, its extension to bounded accuracies is refereed
 but has been run with three nested levels only at toy sizes and at the flat instance, its

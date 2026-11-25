@@ -7273,6 +7273,380 @@ def t_rounds_covering_shadows(rng, trials):
     return True, stats
 
 
+# -----------------------------------------------------------------------------------------------------------------
+# XXI. Slices: no known part that is a function of the type is harder than the uniform cube (theory report 11.25)
+# -----------------------------------------------------------------------------------------------------------------
+def sl_kl(a, b):
+    """KL(Bernoulli(a) || Bernoulli(b)), vectorised in a, with 0 ln 0 = 0."""
+    a = np.clip(np.asarray(a, float), 0.0, 1.0)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        return np.where(a > 0, a * np.log(a / b), 0.0) + np.where(a < 1, (1 - a) * np.log((1 - a) / (1 - b)), 0.0)
+
+
+def sl_hi(m, k):
+    """End of the ray of two-block profiles of type k around a centre of type m (towards the centre)."""
+    return min(2 * m * (1 - k), 2 * (1 - m) * k)
+
+
+def sl_F(m, k, l):
+    """MI of the two-block profile (k + l/2m, k - l/(2(1-m))) inside the slice of density k (distance l from the mixed profile)."""
+    return float(m * sl_kl(k + l / (2 * m), k) + (1 - m) * sl_kl(k - l / (2 * (1 - m)), k))
+
+
+def sl_Psi(m, k, s):
+    """Legendre transform of F on l >= 0."""
+    if s <= 0:
+        return 0.0
+    return -mf_golden(lambda l: -(s * l - sl_F(m, k, l)), 0.0, sl_hi(m, k) * (1 - 1e-13), tol=1e-13)[0]
+
+
+def sl_V(m, k, u, e):
+    """Hinted value of a centre of type m on the slice k: the supremum over its shells, in closed form."""
+    P = sl_Psi(m, k, u)
+    return sl_F(m, k, (P - e) / u) if P > e else 0.0
+
+
+def sl_N(m, k, u, X):
+    """Non-adaptive value of a centre of type m on the slice k: F(l_X), u l_X - F(l_X) = Psi(u) - X on the rising branch."""
+    P = sl_Psi(m, k, u)
+    if X >= P:
+        return 0.0
+    lstar = mf_golden(lambda l: -(u * l - sl_F(m, k, l)), 0.0, sl_hi(m, k) * (1 - 1e-13), tol=1e-13)[1]
+    a, b = 0.0, lstar
+    for _ in range(60):
+        mid = 0.5 * (a + b)
+        if u * mid - sl_F(m, k, mid) <= P - X:
+            a = mid
+        else:
+            b = mid
+    return sl_F(m, k, 0.5 * (a + b))
+
+
+def sl_clip(lam, mu, k, c_lo):
+    """The clipping nu_j = min(max(mu_j, c_lo), c_hi) of type k (c_lo <= k <= c_hi); returns (nu, dist(nu, mu))."""
+    lo = np.maximum(mu, c_lo)
+    a, b = k, 1.0
+    if float(np.dot(lam, np.minimum(lo, k))) >= k:
+        b = k
+    else:
+        for _ in range(60):
+            mid = 0.5 * (a + b)
+            if float(np.dot(lam, np.minimum(lo, mid))) <= k:
+                a = mid
+            else:
+                b = mid
+    nu = np.minimum(lo, b)
+    return nu, float(np.dot(lam, np.abs(nu - mu)))
+
+
+def sl_r(lam, mu, k, u, e):
+    """min{ MI(nu) : type of nu = k, u dist(nu, mu) <= e + MI(mu) } for a profile with any number of blocks (clipping,
+    Lemma 11.77(a); along the path c_lo: 0 -> k the distance increases and MI decreases)."""
+    lam, mu = np.asarray(lam, float), np.asarray(mu, float)
+    Bd = (e + float(np.dot(lam, sl_kl(mu, k)))) / u
+    if sl_clip(lam, mu, k, k)[1] <= Bd:
+        return 0.0
+    a, b = 0.0, k
+    for _ in range(60):
+        mid = 0.5 * (a + b)
+        if sl_clip(lam, mu, k, mid)[1] <= Bd:
+            a = mid
+        else:
+            b = mid
+    return float(np.dot(lam, sl_kl(sl_clip(lam, mu, k, a)[0], k)))
+
+
+def sl_best(k, u, e, ms=None):
+    """sup over centre types of sl_V (scan, then golden section)."""
+    ms = np.linspace(0.03, 0.97, 48) if ms is None else ms
+    vals = [sl_V(m, k, u, e) for m in ms]
+    i = int(np.argmax(vals))
+    v, m = mf_golden(lambda mm: -sl_V(mm, k, u, e), ms[max(i - 1, 0)], ms[min(i + 1, len(ms) - 1)], tol=1e-9)
+    return -v, m
+
+
+def sl_cube_game(u, t):
+    """Game function of the uniform cube: t ln cosh(u/2) - ln cosh(tu/2)."""
+    return t * math.log(math.cosh(u / 2)) - math.log(math.cosh(t * u / 2))
+
+
+@conjecture("XXI.1 Lemma 11.89 (odds ratio): among pairs of binary variables with log odds ratio 2s the mutual information is largest when both marginals are uniform, I(B;X) <= ln 2 - h(sigma(s)) (= among binary channels with a given odds ratio the symmetric one has the largest capacity); and the steps of the proof for P ~ exp(J b x + h1 b + h2 x): dI/dh1 = (1/2)(1 - mu^2)[T(h2) - delta(h1) Delta(h2)] with delta(h) = (1/2) ln[cosh(h+J)/cosh(h-J)], T(h) = J[tanh(h+J) + tanh(h-J)] - 2 delta(h), Delta(h) = tanh(h+J) - tanh(h-J); T(h) < 0 and -T(h) < delta(h) Delta(h) for h > 0, the latter in the form X ln(Y/X) < (1-Y) ln((1-X)/(1-Y)) for X = 1/(1+e^{2(h+J)}), Y = 1/(1+e^{2(h-J)}); the capacity is decreasing in the field of the channel")
+def t_slice_odds_ratio(rng, trials):
+    N = max(4000, 100 * trials)
+    m, p, q = rng.uniform(0.001, 0.999, N), rng.uniform(0.0005, 0.9995, N), rng.uniform(0.0005, 0.9995, N)
+    p, q = np.maximum(p, q), np.minimum(p, q)
+    mi = mf_hb(m * p + (1 - m) * q) - m * mf_hb(p) - (1 - m) * mf_hb(q)
+    s = 0.5 * (np.log(p / (1 - p)) - np.log(q / (1 - q)))
+    sym = math.log(2) - mf_hb(1 / (1 + np.exp(-s)))
+    if np.any(mi > sym + 1e-12):
+        i = int(np.argmax(mi - sym))
+        return False, dict(reason="a table with more mutual information than the symmetric one with the same odds ratio", m=float(m[i]), p=float(p[i]), q=float(q[i]), mi=float(mi[i]), symmetric=float(sym[i]))
+    ps = 1 / (1 + np.exp(-s))
+    eq = float(np.abs(mf_hb(0.5) - mf_hb(ps) - sym).max())           # the symmetric table itself: m = 1/2, (p, q) = (sigma(s), 1 - sigma(s))
+    if eq > 1e-12:
+        return False, dict(reason="no equality at the symmetric table", err=eq)
+    J, h = rng.uniform(1e-3, 3.5, N), rng.uniform(1e-3, 3.5, N)
+    delta = lambda J, h: 0.5 * (np.log(np.cosh(h + J)) - np.log(np.cosh(h - J)))
+    T = lambda J, h: J * (np.tanh(h + J) + np.tanh(h - J)) - 2 * delta(J, h)
+    Delta = lambda J, h: np.tanh(h + J) - np.tanh(h - J)
+    if np.any(T(J, h) >= 0):
+        return False, dict(reason="T(h) >= 0 for some h > 0")
+    star = -T(J, h) - delta(J, h) * Delta(J, h)
+    X, Y = 1 / (1 + np.exp(2 * (h + J))), 1 / (1 + np.exp(2 * (h - J)))
+    kern = X * np.log(Y / X) - (1 - Y) * (np.log1p(-X) - np.log1p(-Y))
+    if np.any(kern >= 0) or np.any(star >= 1e-13):
+        return False, dict(reason="the kernel inequality fails", kernel=float(kern.max()), star=float(star.max()))
+    al, be = np.exp(2 * (h + J)), np.exp(2 * (h - J))
+    ident = ((al * be + 2 * be + 1) * np.log((al + 1) / (be + 1)) - be * (al + 1) * np.log(al / be)) / ((al + 1) * (be + 1))
+    if float(np.abs(star - ident).max()) > 1e-10:
+        return False, dict(reason="the reduction of (*) to the kernel inequality is not an identity", err=float(np.abs(star - ident).max()))
+
+    def MI(J, h1, h2):
+        P = np.array([[math.exp(J * b * x + h1 * b + h2 * x) for x in (1, -1)] for b in (1, -1)])
+        P = P / P.sum()
+        return float((P * np.log(P / (P.sum(1, keepdims=True) * P.sum(0, keepdims=True)))).sum()), float(P[0].sum() - P[1].sum())
+    worst = 0.0
+    for _ in range(max(6, trials // 20)):
+        J0, h1, h2 = float(rng.uniform(0.05, 2.5)), float(rng.uniform(-3, 3)), float(rng.uniform(-3, 3))
+        mu = MI(J0, h1, h2)[1]
+        formula = 0.5 * (1 - mu ** 2) * (float(T(J0, h2)) - float(delta(J0, h1)) * float(Delta(J0, h2)))
+        fd = (MI(J0, h1 + 1e-5, h2)[0] - MI(J0, h1 - 1e-5, h2)[0]) / 2e-5
+        worst = max(worst, abs(fd - formula))
+    if worst > 1e-8:
+        return False, dict(reason="derivative of the mutual information against the formula", err=worst)
+    for J0 in (0.4, 1.2):
+        prev = None
+        for h2 in np.linspace(0, 3, 13):
+            C, h1s = mf_golden(lambda h1: -MI(J0, h1, float(h2))[0], -12.0, 12.0, tol=1e-9)
+            if h2 > 0 and not (-h2 - 1e-6 < h1s < 0):
+                return False, dict(reason="the optimal input field is not between -h2 and 0", J=J0, h2=float(h2), h1=h1s)
+            if prev is not None and -C > prev + 1e-12:
+                return False, dict(reason="the capacity increases with the field of the channel", J=J0, h2=float(h2))
+            prev = -C
+    return True, dict(tables=N, smallest_gap=float((sym - mi).min()), derivative_err=worst)
+
+
+@conjecture("XXI.2 Theorem 11.90(a),(b) (a slice of density kappa; binary centres suffice; closed forms): for a centre of type m, F(l) = m KL(kappa + l/2m || kappa) + (1-m) KL(kappa - l/(2(1-m)) || kappa), Psi = F^* = min over tilts with th1 - th2 = 2s of m Lam(th1) + (1-m) Lam(th2); the supremum over shells of min{MI(nu) : u dist <= e + MI(mu)} is F((Psi(u) - e)_+/u) = max_{t <= 1}[t Psi(u) - Psi(tu) - te]; the non-adaptive value is F(l_X) with u l_X - F(l_X) = Psi(u) - X, = max_{tau < 1}(F*(tau) - tau X)/(1 - tau); and profiles with 3 to 5 blocks never beat the best binary centre (inner problem by clipping, no duality used); the best centre type of a slice of density != 1/2 is not the slice's own")
+def t_slice_binary(rng, trials):
+    stats = dict(legendre=0.0, closed=0.0, game=0.0, na_game=0.0, multi=-1.0)
+    Lam = lambda k, th: np.logaddexp(math.log1p(-k), math.log(k) + th) - k * th
+    for _ in range(max(6, trials // 30)):
+        k, m, u = float(rng.uniform(0.12, 0.88)), float(rng.uniform(0.12, 0.88)), float(rng.uniform(0.3, 3))
+        P = sl_Psi(m, k, u)
+        dual = mf_golden(lambda t1: float(m * Lam(k, t1) + (1 - m) * Lam(k, t1 - 2 * u)), -40.0, 40.0 + 2 * u, tol=1e-12)[0]
+        stats["legendre"] = max(stats["legendre"], abs(P - dual))
+        e = float(rng.uniform(0, 0.8)) * P
+        ls = np.linspace(0, sl_hi(m, k) * (1 - 1e-9), 3001)
+        Fl = np.array([sl_F(m, k, l) for l in ls])
+        x = ls - (e + Fl) / u
+        direct = max([sl_F(m, k, xx) for xx in x[x > 0]], default=0.0)
+        stats["closed"] = max(stats["closed"], abs(direct - sl_V(m, k, u, e)))
+        game = -mf_golden(lambda t: -(t * P - sl_Psi(m, k, t * u) - t * e), 0.0, 1.0, tol=1e-11)[0]
+        stats["game"] = max(stats["game"], abs(max(game, 0.0) - sl_V(m, k, u, e)))
+        X = float(rng.uniform(0.05, 0.9)) * P
+        ts = np.linspace(0, 0.999, 200)
+        nav = [(t * P - sl_Psi(m, k, t * u) - t * X) / (1 - t) for t in ts]
+        i = int(np.argmax(nav))
+        na = -mf_golden(lambda t: -(t * P - sl_Psi(m, k, t * u) - t * X) / (1 - t), ts[max(i - 1, 0)], ts[min(i + 1, 199)], tol=1e-10)[0]
+        stats["na_game"] = max(stats["na_game"], abs(na - sl_N(m, k, u, X)))
+        if abs(P - dual) > 1e-8 or abs(direct - sl_V(m, k, u, e)) > 1e-6 or abs(max(game, 0.0) - sl_V(m, k, u, e)) > 1e-7 \
+                or abs(na - sl_N(m, k, u, X)) > 1e-7:
+            return False, dict(reason="closed forms on a slice", k=k, m=m, u=u, e=e, X=X, Psi=P, dual=dual, direct=direct,
+                               closed=sl_V(m, k, u, e), game=game, na_game=na, na_closed=sl_N(m, k, u, X))
+    for (k, u) in ((0.5, 1.0), (0.3, 1.0), (0.7, 2.0)):
+        sb0, mb0 = sl_best(k, u, 0.0)
+        for ef in (0.0, 0.3):
+            e = ef * sb0
+            sb, mb = sl_best(k, u, e)
+            # the best binary profile itself, through the multi-block solver (it must not exceed the claimed supremum)
+            P = sl_Psi(mb, k, u)
+            lstar = mf_golden(lambda l: -(u * l - sl_F(mb, k, l)), 0.0, sl_hi(mb, k) * (1 - 1e-13), tol=1e-13)[1]
+            own = sl_r([mb, 1 - mb], [k + lstar / (2 * mb), k - lstar / (2 * (1 - mb))], k, u, e)
+            if abs(own - sb) > 1e-6:
+                return False, dict(reason="the best binary profile through the multi-block solver", k=k, u=u, e=e, multi=own, closed=sb)
+            for _ in range(max(8, trials // 25)):
+                kb = int(rng.integers(3, 6))
+                lam = rng.dirichlet(np.ones(kb) * float(rng.choice([0.5, 1, 3])))
+                if rng.random() < 0.5:                                  # a perturbation of the best binary profile
+                    base = np.where(np.arange(kb) < kb // 2, k + lstar / (2 * mb), k - lstar / (2 * (1 - mb)))
+                    mu = np.clip(base + rng.normal(0, 0.05, kb), 0.001, 0.999)
+                else:
+                    mu = rng.uniform(0, 1, kb)
+                t = float(np.dot(lam, mu))
+                mu = mu * k / t if t > k else 1 - (1 - mu) * (1 - k) / (1 - t)
+                val = sl_r(lam, mu, k, u, e)
+                stats["multi"] = max(stats["multi"], val - sb)
+                if val > sb + 1e-7:
+                    return False, dict(reason="a profile with more than two blocks beats every binary centre on the slice", k=k, u=u, e=e, lam=lam.tolist(), mu=mu.tolist(), value=val, binary=sb)
+        if k != 0.5 and abs(mb0 - k) < 0.02:
+            return False, dict(reason="the best centre of an off-centre slice lies in the slice", k=k, m=mb0)
+    return True, stats
+
+
+@conjecture("XXI.3 Theorem 11.90(c), Corollary 11.91 (domination by the uniform cube): for every slice density kappa, centre type m and 0 <= t <= 1: t Psi_{m,kappa}(u) - Psi_{m,kappa}(tu) <= t ln cosh(u/2) - ln cosh(tu/2), with equality at m = kappa = 1/2 (where the slice's functions are the cube's: sup of the hinted values = KL((Lambda_1 + e)/u || 1/2)); hence sup_m V <= R_unif and the non-adaptive values are below the cube's; the slices at u = 1 have 0.028005, 0.024588, 0.018842 at kappa = 0.4, 0.3, 0.2; and for Curie-Weiss known parts (ferromagnet with two phases, antiferromagnet, a field) and random block profiles mu: r_mu(e) <= [the same minimum with exits restricted to the slice of mu, at accuracy e + (I - v)(type)] <= R_unif(e); for the antiferromagnet without a field the cube's optimal profile attains R_unif")
+def t_slice_dominated(rng, trials):
+    worst = dict(game=-1.0, na=-1.0, model=-1.0, chain=-1.0)
+    for _ in range(max(40, trials)):
+        k, m, u, t = float(rng.uniform(0.03, 0.97)), float(rng.uniform(0.03, 0.97)), float(rng.uniform(0.2, 4)), float(rng.uniform(0, 1))
+        d = t * sl_Psi(m, k, u) - sl_Psi(m, k, t * u) - sl_cube_game(u, t)
+        worst["game"] = max(worst["game"], d)
+        if d > 1e-10:
+            return False, dict(reason="a slice's game function exceeds the cube's", k=k, m=m, u=u, t=t, excess=d)
+    for u in (0.5, 1.0, 2.0):
+        for e in (0.0, 0.3 * mf_R_unif(0.0, u)):
+            if abs(sl_V(0.5, 0.5, u, e) - mf_R_unif(e, u)) > 1e-9:
+                return False, dict(reason="the centre of type 1/2 on the slice 1/2 is not the uniform cube", u=u, e=e, slice=sl_V(0.5, 0.5, u, e), cube=mf_R_unif(e, u))
+        pu = 1 / (1 + math.exp(u))
+        for X in (0.01, 0.05):
+            rho = pu
+            a, b = pu, 0.5
+            for _ in range(60):
+                rho = 0.5 * (a + b)
+                if mf_kl(rho, pu) <= X:
+                    a = rho
+                else:
+                    b = rho
+            cube_na = mf_kl(a, 0.5) if mf_kl(0.5, pu) > X else 0.0
+            if abs(sl_N(0.5, 0.5, u, X) - cube_na) > 1e-8:
+                return False, dict(reason="non-adaptive value of the slice 1/2 against the cube", u=u, X=X, slice=sl_N(0.5, 0.5, u, X), cube=cube_na)
+            for _ in range(6):
+                k, m = float(rng.uniform(0.05, 0.95)), float(rng.uniform(0.05, 0.95))
+                worst["na"] = max(worst["na"], sl_N(m, k, u, X) - cube_na)
+                if sl_N(m, k, u, X) > cube_na + 1e-9:
+                    return False, dict(reason="a slice's non-adaptive value exceeds the cube's", k=k, m=m, u=u, X=X)
+    for k, want in ((0.4, 0.028005), (0.3, 0.024588), (0.2, 0.018842)):
+        sb, mb = sl_best(k, 1.0, 0.0)
+        if abs(sb - want) > 2e-6 or sb >= mf_R_unif(0.0, 1.0):
+            return False, dict(reason="value of a slice at u = 1", k=k, value=sb, expected=want)
+    for (bJ, bB, u) in ((1.5, 0.0, 1.0), (-2.0, 0.0, 1.0), (0.0, 0.6, 0.5), (0.8, 0.3, 1.0)):
+        M = mf_model(bJ, bB, u, K=20001)
+        for _ in range(max(3, trials // 60)):
+            kb = int(rng.integers(2, 4))
+            lam = rng.dirichlet(np.ones(kb) * 2)
+            mu = rng.uniform(0.03, 0.97, kb)
+            k = float(np.dot(lam, mu))
+            gam = float(M["I"](k) - M["v"](k))
+            e = float(rng.choice([0.0, 0.01, 0.03]))
+            full = mf_r(M, lam, mu, e, G=500)
+            inside = sl_r(lam, mu, k, u, e + gam)
+            worst["model"] = max(worst["model"], full - inside)
+            worst["chain"] = max(worst["chain"], inside - mf_R_unif(e, u))
+            if full > inside + 2e-6 or inside > mf_R_unif(e, u) + 1e-9:
+                return False, dict(reason="r_mu(e) <= slice value <= uniform cube fails", bJ=bJ, bB=bB, u=u, lam=lam.tolist(), mu=mu.tolist(), e=e,
+                                   full=full, slice=inside, cube=mf_R_unif(e, u))
+    M = mf_model(-2.0, 0.0, 1.0, K=20001)
+    pu = 1 / (1 + math.e)
+    for e in (0.0, 0.01):
+        rho = (math.log(2 / (1 + math.exp(-1.0))) + e) / 1.0                 # the cube's optimal shell: distance p_u from the centre
+        val = mf_r(M, np.array([0.5, 0.5]), np.array([1 - pu, pu]), e, G=1500)
+        if abs(val - mf_R_unif(e, 1.0)) > 2e-6:
+            return False, dict(reason="antiferromagnet without a field: the cube's optimal profile does not attain R_unif", e=e, value=val, cube=mf_R_unif(e, 1.0))
+    return True, worst
+
+
+@conjecture("XXI.4 Theorem 11.92, Lemma 11.93 (algorithms: reduction to slices; every n, exact enumeration on small cubes): for an exchangeable pi and a u-Lipschitz psi, t -> ln A_t (the mean of e^{-psi} over the type class T_t) is u-Lipschitz; the deficits d_t = ln[max_j p_j A_j / (p_t A_t)] are at least J_t - V_n(t), with equality for the flat-histogram instance; optimistic refinement (always refine the slice with the largest p_t U_t; stop when its bracket has the final width) returns a valid bracket of width at most x_last + ln(n+1) whatever the positions of the brackets, and refines a slice from the width x_{l-1} only if d_t <= x_{l-1}; for a uniform slice and a uniformly random set O of outer coordinates: A_k = sum_j H(j) A_{k;j}(O) for every O (H hypergeometric, A_{k;j}(O) the mean over the product of the outer slice of type j and the inner slice of type k - j) and E_O A_{k;j}(O) = A_k for every j; the inner-slice means are u-Lipschitz on the outer slice")
+def t_slice_reduction(rng, trials):
+    from itertools import combinations
+    stats = dict(lip=-1.0, deficit=1e9, refinements=0, partition=0.0)
+    for n in (8, 9):
+        pts = np.array([[(x >> i) & 1 for i in range(n)] for x in range(1 << n)])
+        wt = pts.sum(1)
+        u = float(rng.uniform(0.3, 1.5))
+        cs = pts[rng.integers(0, 1 << n, 6)]
+        off = rng.uniform(-2, 2, 6) * u
+        dist = (pts[:, None, :] != cs[None, :, :]).sum(2)
+        psi = np.minimum((off[None, :3] + u * dist[:, :3]).min(1), np.maximum(off[3] - u * dist[:, 3], (off[None, 4:] + u * dist[:, 4:]).min(1)))
+        for i in range(n):                                                # psi is u-Lipschitz
+            nb = np.arange(1 << n) ^ (1 << i)
+            if np.any(np.abs(psi - psi[nb]) > u + 1e-12):
+                return False, dict(reason="the test function is not u-Lipschitz")
+        A = np.array([np.exp(-psi[wt == t]).mean() for t in range(n + 1)])
+        for lnA_ in (np.log(A), np.log(np.array([np.exp(u * wt[wt == t]).mean() for t in range(n + 1)]))):   # psi, and -u|x|
+            lip = float(np.abs(np.diff(lnA_)).max())
+            stats["lip"] = max(stats["lip"], lip - u)
+            if lip > u + 1e-12:
+                return False, dict(reason="ln A_t is not u-Lipschitz in t", n=n, slope=lip, u=u)
+        J = rng.uniform(0, 0.5 * n, n + 1)
+        J = J - np.log(np.exp(-J).sum())
+        Vn = rd_lip_minorant(J.copy(), u)                                # the claim: d_t >= J_t - V_n(t)
+        lnAH = rd_lip_minorant(J.copy(), 1.0 * u)                        # the flat-histogram instance: ln A_t = V_n(t)
+        d = (np.log(A) - J).max() - (np.log(A) - J)
+        for lnA_ in (np.log(A), lnAH, u * np.arange(n + 1.0)):
+            d_ = (lnA_ - J).max() - (lnA_ - J)
+            stats["deficit"] = min(stats["deficit"], float((d_ - (J - Vn)).min()))
+            if np.any(d_ < J - Vn - 1e-10):
+                return False, dict(reason="a deficit below J_t - V_n(t)", n=n)
+        dH = (lnAH - J).max() - (lnAH - J)
+        if float(np.abs(dH - (J - Vn)).max()) > 1e-10:
+            return False, dict(reason="no equality at the flat-histogram instance", n=n)
+        # optimistic refinement with brackets in arbitrary position
+        ladder = np.linspace(2 * u * n, 0.25, 9)
+        for rep in range(max(3, trials // 80)):
+            lev = np.zeros(n + 1, int)
+            th = rng.uniform(0, 1, n + 1)
+            lo = np.log(A) - th * ladder[0]
+            hi = lo + ladder[0]
+            log = []
+            while True:
+                k = int(np.argmax(hi - J))
+                if lev[k] == len(ladder) - 1:
+                    break
+                log.append((k, ladder[lev[k]]))
+                lev[k] += 1
+                th = float(rng.uniform(0, 1))
+                nlo = np.log(A[k]) - th * ladder[lev[k]]
+                lo[k], hi[k] = max(lo[k], nlo), min(hi[k], nlo + ladder[lev[k]])
+            out_lo, out_hi = float((lo - J).max()), float((hi - J).max()) + math.log(n + 1)
+            truth = float(np.log(np.exp(np.log(A) - J).sum()))
+            if not (out_lo - 1e-12 <= truth <= out_hi + 1e-12) or out_hi - out_lo > ladder[-1] + math.log(n + 1) + 1e-12:
+                return False, dict(reason="the bracket of the optimistic refinement is not valid or too wide", n=n, lo=out_lo, hi=out_hi, truth=truth)
+            for k, width in log:
+                if d[k] > width + 1e-12:
+                    return False, dict(reason="a slice was refined although its deficit exceeds its bracket", n=n, slice=k, deficit=float(d[k]), width=float(width))
+            stats["refinements"] = max(stats["refinements"], len(log))
+            if len(log) > (n + 1) * (len(ladder) - 1):
+                return False, dict(reason="more refinements than slices times rungs")
+        # random partitions of a slice
+        k, no = n // 2, n // 2 - 1
+        w = np.exp(-psi)
+        Ak = w[wt == k].mean()
+        tot = np.zeros(no + 1)
+        cnt = 0
+        for O in combinations(range(n), no):
+            mask = sum(1 << i for i in O)
+            oj = np.array([bin(x & mask).count("1") for x in range(1 << n)])
+            acc = 0.0
+            for j in range(no + 1):
+                sel = (wt == k) & (oj == j)
+                if sel.any():
+                    Hj = math.comb(no, j) * math.comb(n - no, k - j) / math.comb(n, k)
+                    acc += Hj * w[sel].mean()
+                    tot[j] += w[sel].mean()
+            cnt += 1
+            stats["partition"] = max(stats["partition"], abs(acc - Ak) / Ak)
+            if abs(acc - Ak) > 1e-10 * Ak:
+                return False, dict(reason="the decomposition of a slice by the type of the outer block fails", n=n, O=O)
+        js = [j for j in range(no + 1) if 0 <= k - j <= n - no]
+        err = max(abs(tot[j] / cnt - Ak) / Ak for j in js)
+        stats["partition"] = max(stats["partition"], err)
+        if err > 1e-10:
+            return False, dict(reason="the mean over partitions of a product-slice mean is not the slice mean", n=n, err=err)
+        # inner-slice means on the outer slice (O = the first no coordinates, j = 1)
+        mask = (1 << no) - 1
+        j = 1
+        Wj = {}
+        for x in range(1 << n):
+            if wt[x] == k and bin(x & mask).count("1") == j:
+                Wj.setdefault(x & mask, []).append(w[x])
+        keys = list(Wj)
+        for a in keys:
+            for b in keys:
+                dd = bin(a ^ b).count("1")
+                if abs(math.log(np.mean(Wj[a])) - math.log(np.mean(Wj[b]))) > u * dd + 1e-12:
+                    return False, dict(reason="inner-slice means are not u-Lipschitz on the outer slice", n=n)
+    return True, stats
+
+
 @conjecture("DEAD.10 Some proper subset of the configurations certifies ln Z exactly (as the exponent formula R_beta < ln k would require at eps = 0)", expect_fail=True)
 def t_dead_exact_free_energy(rng, trials):
     """Refuted (second referee, C1): with positive slack off the diagonal, an exact certificate of ln Z is the whole

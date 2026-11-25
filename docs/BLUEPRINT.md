@@ -654,7 +654,15 @@ nothing about producing such a sample by a Markov chain.  With coexisting states
 configurations that decide the cost lie in the barrier region: a procedure that never
 evaluates the residual there cannot certify `ln Z` below the accuracy at which a
 perturbation of barrier configurations matters, and neighbourhoods of single
-configurations are the wrong regions to test (unrefereed: §11.23).  *If evaluations are
+configurations are the wrong regions to test (unrefereed: §11.23).  A stratified
+procedure can also be made instance-dependent without losing validity (theory report
+§11.25, Theorem 11.92; deterministic core machine-checked, `sum_mem_bracket`,
+`argmax_deficit_le`): keep a certified bracket for the mean of `e^{−ψ}` over every level set,
+always refine the level set whose weighted upper end is largest, and stop when that one
+has the target width — the result is a valid bracket for `Z` up to the logarithm of the
+number of level sets, and a level set is refined only as far as its distance from the
+largest term requires.  And no known part of this kind makes the worst case harder than
+it is without a known part (§11.25, unrefereed).  *If evaluations are
 made in batches* (theory report §11.24, unrefereed): the nested algorithm can be scheduled
 with one batch per rung of its ladder, so its exponent needs a number of rounds that does
 not grow with the system; two rounds already beat every fixed sample, and two rounds
@@ -949,7 +957,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 246 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 267 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  The audit script runs it, and starts with a self-test in which

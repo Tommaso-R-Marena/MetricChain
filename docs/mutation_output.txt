@@ -490,5 +490,47 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.21 M1: the second batch sees every type (the twins coincide; the refutation must disappear)
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.1 M1: symmetric table taken at a smaller odds ratio (0.9 s)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.1 M2: kernel inequality with the weight Y in place of 1 - Y
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.1 M3: derivative of the mutual information with the wrong sign of the second term
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.1 M4: optimal input field claimed to have the sign of the field of the channel
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.1 M5: T without the factor 2 (then it is positive somewhere)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.2 M1: closed form with the accuracy not divided by the slope
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.2 M2: two-block profile with the same shift in both blocks (the type is not kept)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.2 M3: non-adaptive value at twice the accuracy
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.2 M4: supremum over centres taken at the slice's own type only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.2 M5: budget of the inner problem with the profile's own MI not divided by the slope
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.3 M1: the cube's game function at the slope 0.9 u
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.3 M2: exits that change the type claimed never to help (equality with the slice value)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.3 M3: antiferromagnet tested at a shell that is not the cube's optimal one
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.3 M4: a centre of type 0.4 on the slice 1/2 claimed to give the uniform cube
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.3 M5: the slice 0.3 claimed to be as hard as the cube
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.4 M1: slice means claimed Lipschitz with the constant u/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.4 M2: deficits bounded with the minorant of slope u/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.4 M3: refinement of the slice with the smallest upper end
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.4 M4: output without the factor n + 1 (the sum taken for its largest term)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.4 M5: outer blocks restricted to cyclic windows (not exchangeable: the mean over partitions is not the slice mean)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXI.4 M6: a slice refined only while its deficit is below half its bracket
+                  exit=1  1 TEST(S) MISBEHAVED
 
-246 mutations: 245 caught, 1 expected pass, 0 not as expected
+267 mutations: 266 caught, 1 expected pass, 0 not as expected

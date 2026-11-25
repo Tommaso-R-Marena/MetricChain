@@ -52,6 +52,7 @@ import proofs.Frontiers.TypeQuantiles
 import proofs.Frontiers.SymmetricSampling
 import proofs.Frontiers.TwoRounds
 import proofs.Frontiers.GroupSampling
+import proofs.Frontiers.SliceRefinement
 import proofs.AuditCommand
 
 /-!
@@ -480,6 +481,11 @@ import proofs.AuditCommand
 #print axioms MetricChain.GroupSampling.group_queries_ge
 #print axioms MetricChain.GroupSampling.gdens_mul_card_orbit
 #print axioms MetricChain.GroupSampling.group_witness
+#print axioms MetricChain.SliceRefinement.sum_mem_bracket
+#print axioms MetricChain.SliceRefinement.bracket_width
+#print axioms MetricChain.SliceRefinement.argmax_deficit_le
+#print axioms MetricChain.SliceRefinement.deficit_ge
+#print axioms MetricChain.SliceRefinement.mean_le_of_biregular
 #print axioms MetricChain.GamePair.exactRec_congr
 #print axioms MetricChain.GamePair.HintShape.pair
 #print axioms MetricChain.GamePair.HintShape.exists_pair
