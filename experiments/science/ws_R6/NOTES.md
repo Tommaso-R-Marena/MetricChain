@@ -79,3 +79,25 @@ number of events (J+1)(m_max+1)(L+2) OK; no circularity J->nu0->r-dagger->pi-dag
 Steps 1-9; Lemma K.4 (a)-(d); Prop K0; Cor K1.b; Prop E (a),(b); Thm K2 (accuracy arithmetic 5.25 c0 <= x/2 - eps OK); Thm K3 iteration.
 No error found so far.  D45 read (five accountings: single threshold; v1; v2; v4; CLOSE).  H_REPORT read (2.6 = original 2L, 2.8 = the wrong ones).
 NEXT: implement from the spec (K_REPORT 2.2 + theory report 3616-3652) BEFORE reading any implementation; then R7/R8, Lean, ENG-RES-0008.
+
+### Step 5 (coordinator note received mid-work; new theory checkpoint 40c5bd7)
+The coordinator informed me that the theory division published checkpoint 40c5bd7 while I work at 5ed4072.  Read (read-only):
+`git diff 5ed4072 origin/claude/determined-ride-og1u7j -- docs/workstreams/K_REPORT.md` (errata e1-e4 added) and the two new
+remarks after Thm 11.56 in the 40c5bd7 theory report (extracted to scratchpad, lines 4117-4160 of that version).
+ (1) New remark "sample-size cap": in every run every sample is K or has fewer than 2 max{e^lam M-dagger, M-ddagger} points,
+     M-ddagger = K/((1-eta) pi-ddagger), pi-ddagger = 2^-n_o |B(n_o, r-dagger - Delta)|, Delta = ceil(lam/u)
+     (M-ddagger := K 2^n_o/(1-eta) if r-dagger < Delta).  [P], unrefereed.
+     MY RE-DERIVATION (done on paper now): correct for r-dagger >= Delta.  Steps checked: level 0 is populated at M=K in every run
+     (rung-0 bracket has L > s_0 e^-b because psi(a,0) <= psi_0 + u n_o: no inner call involved) ; case "after negligible": OK;
+     case "after populated": p_low > c_eta pi-dagger, Harper radius >= kappa(r-dagger+1), E_{r-1} <= e^-u E_r (term by term, OK),
+     tail <= s_{j-1} e^{lam - u Delta} 2^-n_o E_{r-dagger}; [P] at r-dagger gives tail <= theta e^b ell in both sub-cases
+     (also for r-dagger = 0 with the convention Gamma~(0) = e^u - 1).  OK.
+     EDGE (to test numerically): if r-dagger < Delta and M = M-ddagger = K 2^n_o/(1-eta) exactly lies in the doubling sequence
+     (eta = 1/2), then q = 2^-n_o, 2^n_o q = 1 is NOT < 1, the tail is s_j 2^-n_o (e^u - 1) and closure is not forced; the sample
+     may then be doubled to exactly 2 M-ddagger: "fewer than" could fail by equality in the corner 1 <= r-dagger < Delta (needs lam > u).
+     Also re-derived the 2L version: an unpopulated pass with M >= max{M-dagger, M_j^neg/(4Je)} closes; hence M < 2e M-dagger.  OK.
+ (2) New remark "radial landscapes are almost the whole class for the outer loop" (Harper: tail functions of all u-Lipschitz outer
+     landscapes = those of landscapes whose level sets are initial segments of the simplicial order).  Consequence for my harness:
+     with a simulated inner oracle only the LAW of W(a) matters; I represent an outer landscape by classes (value, probability).
+ (3) Flat-instance cost numbers are best-case numbers (K_REPORT erratum e1).
+All findings in my report will be tagged with the commit they refer to (5ed4072 unless stated; the cap remark is 40c5bd7).

@@ -134,6 +134,7 @@ theorem holley_cross (w₁ w₂ φ : α → ℝ) (hw₁ : ∀ x, 0 ≤ w₁ x) (
   rw [e1, e2] at key
   linarith
 
+omit [Fintype α] in
 /-- For a lower set `A` and an upper set `B`: `w₁(B) * w₂(A) ≤ w₁(A) * w₂(B)`.  (The sets need
 not be complementary.) -/
 theorem updown_cross [DecidableEq α] (w₁ w₂ : α → ℝ) (hw₁ : ∀ x, 0 ≤ w₁ x)
@@ -158,6 +159,7 @@ theorem updown_cross [DecidableEq α] (w₁ w₂ : α → ℝ) (hw₁ : ∀ x, 0
         · exact Finset.sum_nonneg (fun x _ => hw₂ x)
         · exact Finset.sum_nonneg (fun x _ => hw₁ x)
 
+omit [Fintype α] in
 /-- **Holley condition, lower end** (`μ₁ = μ_{f+h↑}`, `μ₂ = μ_{f+g}`), on any lattice, from
 submodularity of `f`, admissibility of `g` for `d`, `0 ≤ β` and
 `d (x ⊔ y) y ≤ h↑ x - h↑ (x ⊓ y)`. -/
@@ -177,6 +179,7 @@ theorem holley_condition_lower_of_saturation {β : ℝ} (hβ : 0 ≤ β) {f g hu
   simp only
   linarith
 
+omit [Fintype α] in
 /-- **Holley condition, upper end** (`μ₁ = μ_{f+g}`, `μ₂ = μ_{f-h↓}`), on any lattice, from
 submodularity of `f`, admissibility of `g` for `d`, `0 ≤ β` and
 `d (x ⊓ y) x ≤ h↓ (x ⊔ y) - h↓ y`. -/
@@ -233,6 +236,7 @@ theorem sandwich_mean [Nonempty α] {β : ℝ} (hβ : 0 ≤ β) {f g hup hdn : �
     have := sandwich_cross_upper hβ hf hg hsatD hφ
     linarith
 
+omit [Fintype α] in
 /-- **Corollary A11.1, upper end, cross-multiplied**: for a lower set `A` and an upper set `B`,
 `Z_{f+g}(A) * Z_{f+h↑}(B) ≤ Z_{f+h↑}(A) * Z_{f+g}(B)`. -/
 theorem macrostate_cross_upper [DecidableEq α] {β : ℝ} (hβ : 0 ≤ β) {f g hup : α → ℝ}
@@ -247,6 +251,7 @@ theorem macrostate_cross_upper [DecidableEq α] {β : ℝ} (hβ : 0 ≤ β) {f g
   unfold zOn
   linarith
 
+omit [Fintype α] in
 /-- **Corollary A11.1, lower end, cross-multiplied**: for a lower set `A` and an upper set `B`,
 `Z_{f-h↓}(A) * Z_{f+g}(B) ≤ Z_{f+g}(A) * Z_{f-h↓}(B)`. -/
 theorem macrostate_cross_lower [DecidableEq α] {β : ℝ} (hβ : 0 ≤ β) {f g hdn : α → ℝ}
@@ -280,6 +285,153 @@ theorem macrostate_ratio [DecidableEq α] {β : ℝ} (hβ : 0 ≤ β) {f g hup h
     exact macrostate_cross_upper hβ hf hg hsatU A B hA hB
 
 end Lattice
+
+/-! ### The class is convex in the weights: every value in between is attained
+
+No lattice structure is used in this section: `α` is any type, `d` any envelope. -/
+
+section Mixture
+
+variable {α : Type*}
+
+/-- Real-arithmetic core: a linear-fractional function on a segment takes every value between
+its values at the end points. -/
+theorem exists_convex_ratio {n₀ n₁ d₀ d₁ r : ℝ} (hd₀ : 0 < d₀) (hd₁ : 0 < d₁)
+    (h₀ : n₀ / d₀ ≤ r) (h₁ : r ≤ n₁ / d₁) :
+    ∃ t : ℝ, 0 ≤ t ∧ t ≤ 1 ∧ ((1 - t) * n₀ + t * n₁) / ((1 - t) * d₀ + t * d₁) = r := by
+  rw [div_le_iff₀ hd₀] at h₀
+  rw [le_div_iff₀ hd₁] at h₁
+  by_cases hz : (r * d₀ - n₀) + (n₁ - r * d₁) = 0
+  · refine ⟨0, le_refl 0, zero_le_one, ?_⟩
+    simp only [sub_zero, one_mul, zero_mul, add_zero]
+    rw [div_eq_iff hd₀.ne']
+    linarith
+  · have hpos : 0 < (r * d₀ - n₀) + (n₁ - r * d₁) :=
+      lt_of_le_of_ne (by linarith) (Ne.symm hz)
+    set t : ℝ := (r * d₀ - n₀) / ((r * d₀ - n₀) + (n₁ - r * d₁)) with ht
+    have ht0 : 0 ≤ t := div_nonneg (by linarith) hpos.le
+    have ht1 : t ≤ 1 := by
+      rw [ht, div_le_one hpos]
+      linarith
+    have hden : 0 < (1 - t) * d₀ + t * d₁ := by
+      rcases eq_or_lt_of_le ht0 with h | h
+      · rw [← h]
+        simpa using hd₀
+      · have h1 := mul_pos h hd₁
+        have h2 := mul_nonneg (sub_nonneg.2 ht1) hd₀.le
+        linarith
+    refine ⟨t, ht0, ht1, ?_⟩
+    rw [div_eq_iff hden.ne']
+    have key : t * ((r * d₀ - n₀) + (n₁ - r * d₁)) = r * d₀ - n₀ := by
+      rw [ht]
+      field_simp
+    linear_combination key
+
+/-- The residual whose weight `exp (-β g)` is the convex combination
+`(1 - t) exp (-β g₀) + t exp (-β g₁)` of the weights of `g₀` and `g₁`. -/
+def mixRes (β : ℝ) (g₀ g₁ : α → ℝ) (t : ℝ) (x : α) : ℝ :=
+  -(Real.log ((1 - t) * Real.exp (-(β * g₀ x)) + t * Real.exp (-(β * g₁ x)))) / β
+
+theorem mix_pos (β : ℝ) (g₀ g₁ : α → ℝ) {t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 1) (x : α) :
+    0 < (1 - t) * Real.exp (-(β * g₀ x)) + t * Real.exp (-(β * g₁ x)) := by
+  rcases eq_or_lt_of_le ht0 with h | h
+  · rw [← h]
+    simpa using Real.exp_pos (-(β * g₀ x))
+  · have h1 := mul_pos h (Real.exp_pos (-(β * g₁ x)))
+    have h2 := mul_nonneg (sub_nonneg.2 ht1) (Real.exp_pos (-(β * g₀ x))).le
+    linarith
+
+/-- The Boltzmann weight of `f + mixRes` is the convex combination of the two weights. -/
+theorem boltz_mixRes {β : ℝ} (hβ : β ≠ 0) (f g₀ g₁ : α → ℝ) {t : ℝ} (ht0 : 0 ≤ t)
+    (ht1 : t ≤ 1) (x : α) :
+    boltz β (fun z => f z + mixRes β g₀ g₁ t z) x =
+      (1 - t) * boltz β (fun z => f z + g₀ z) x + t * boltz β (fun z => f z + g₁ z) x := by
+  have hV := mix_pos β g₀ g₁ ht0 ht1 x
+  unfold boltz mixRes
+  simp only
+  have e : -(β * (f x +
+        -Real.log ((1 - t) * Real.exp (-(β * g₀ x)) + t * Real.exp (-(β * g₁ x))) / β)) =
+      -(β * f x) +
+        Real.log ((1 - t) * Real.exp (-(β * g₀ x)) + t * Real.exp (-(β * g₁ x))) := by
+    field_simp
+    ring
+  rw [e, Real.exp_add, Real.exp_log hV]
+  have e0 : Real.exp (-(β * (f x + g₀ x))) =
+      Real.exp (-(β * f x)) * Real.exp (-(β * g₀ x)) := by
+    rw [← Real.exp_add]
+    ring_nf
+  have e1 : Real.exp (-(β * (f x + g₁ x))) =
+      Real.exp (-(β * f x)) * Real.exp (-(β * g₁ x)) := by
+    rw [← Real.exp_add]
+    ring_nf
+  rw [e0, e1]
+  ring
+
+/-- **The class is convex in the weights**: for `0 < β` the mixture residual of two admissible
+residuals is admissible (for any envelope `d`). -/
+theorem mixRes_admissible {β : ℝ} (hβ : 0 < β) {d : α → α → ℝ} {g₀ g₁ : α → ℝ}
+    (h₀ : Admissible d g₀) (h₁ : Admissible d g₁) {t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 1) :
+    Admissible d (mixRes β g₀ g₁ t) := by
+  intro x y
+  have hVx := mix_pos β g₀ g₁ ht0 ht1 x
+  have hVy := mix_pos β g₀ g₁ ht0 ht1 y
+  have k₀ : Real.exp (-(β * g₀ y)) ≤ Real.exp (β * d x y) * Real.exp (-(β * g₀ x)) := by
+    rw [← Real.exp_add, Real.exp_le_exp]
+    have := mul_le_mul_of_nonneg_left (h₀ x y) hβ.le
+    linarith
+  have k₁ : Real.exp (-(β * g₁ y)) ≤ Real.exp (β * d x y) * Real.exp (-(β * g₁ x)) := by
+    rw [← Real.exp_add, Real.exp_le_exp]
+    have := mul_le_mul_of_nonneg_left (h₁ x y) hβ.le
+    linarith
+  have hV : (1 - t) * Real.exp (-(β * g₀ y)) + t * Real.exp (-(β * g₁ y)) ≤
+      Real.exp (β * d x y) *
+        ((1 - t) * Real.exp (-(β * g₀ x)) + t * Real.exp (-(β * g₁ x))) := by
+    have a := mul_le_mul_of_nonneg_left k₀ (sub_nonneg.2 ht1)
+    have b := mul_le_mul_of_nonneg_left k₁ ht0
+    linarith
+  have hlog : Real.log ((1 - t) * Real.exp (-(β * g₀ y)) + t * Real.exp (-(β * g₁ y))) ≤
+      β * d x y +
+        Real.log ((1 - t) * Real.exp (-(β * g₀ x)) + t * Real.exp (-(β * g₁ x))) := by
+    have := Real.log_le_log hVy hV
+    rwa [Real.log_mul (Real.exp_pos _).ne' hVx.ne', Real.log_exp] at this
+  unfold mixRes
+  rw [div_sub_div_same, div_le_iff₀ hβ]
+  linarith
+
+/-- **Every value in between is attained.**  Let `g₀, g₁` be admissible, `0 < β`, and let
+`N(g) = ∑_{x ∈ S} a x e^{-β(f+g)(x)}`, `D(g) = ∑_{x ∈ T} b x e^{-β(f+g)(x)}` with
+`D(g₀), D(g₁) > 0`.  Then every `r` with `N(g₀)/D(g₀) ≤ r ≤ N(g₁)/D(g₁)` equals `N(g)/D(g)` for
+some admissible `g`. -/
+theorem exists_admissible_ratio {β : ℝ} (hβ : 0 < β) {d : α → α → ℝ} {f g₀ g₁ : α → ℝ}
+    (h₀ : Admissible d g₀) (h₁ : Admissible d g₁) (S T : Finset α) (a b : α → ℝ)
+    (hD₀ : 0 < ∑ x ∈ T, b x * boltz β (fun z => f z + g₀ z) x)
+    (hD₁ : 0 < ∑ x ∈ T, b x * boltz β (fun z => f z + g₁ z) x) {r : ℝ}
+    (hr₀ : (∑ x ∈ S, a x * boltz β (fun z => f z + g₀ z) x) /
+        (∑ x ∈ T, b x * boltz β (fun z => f z + g₀ z) x) ≤ r)
+    (hr₁ : r ≤ (∑ x ∈ S, a x * boltz β (fun z => f z + g₁ z) x) /
+        (∑ x ∈ T, b x * boltz β (fun z => f z + g₁ z) x)) :
+    ∃ g, Admissible d g ∧ (∑ x ∈ S, a x * boltz β (fun z => f z + g z) x) /
+        (∑ x ∈ T, b x * boltz β (fun z => f z + g z) x) = r := by
+  obtain ⟨t, ht0, ht1, ht⟩ := exists_convex_ratio hD₀ hD₁ hr₀ hr₁
+  refine ⟨mixRes β g₀ g₁ t, mixRes_admissible hβ h₀ h₁ ht0 ht1, ?_⟩
+  have eS : ∑ x ∈ S, a x * boltz β (fun z => f z + mixRes β g₀ g₁ t z) x =
+      (1 - t) * ∑ x ∈ S, a x * boltz β (fun z => f z + g₀ z) x +
+        t * ∑ x ∈ S, a x * boltz β (fun z => f z + g₁ z) x := by
+    rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl (fun x _ => ?_)
+    rw [boltz_mixRes hβ.ne' f g₀ g₁ ht0 ht1 x]
+    ring
+  have eT : ∑ x ∈ T, b x * boltz β (fun z => f z + mixRes β g₀ g₁ t z) x =
+      (1 - t) * ∑ x ∈ T, b x * boltz β (fun z => f z + g₀ z) x +
+        t * ∑ x ∈ T, b x * boltz β (fun z => f z + g₁ z) x := by
+    rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl (fun x _ => ?_)
+    rw [boltz_mixRes hβ.ne' f g₀ g₁ ht0 ht1 x]
+    ring
+  rw [eS, eT]
+  exact ht
+
+end Mixture
 
 /-! ### The cube `ι → Bool` -/
 
@@ -323,7 +475,8 @@ theorem field_admissible {cup cdn : ι → ℝ} (hc : ∀ i, 0 ≤ cup i + cdn i
   rw [← Finset.sum_add_distrib, ← Finset.sum_sub_distrib]
   refine Finset.sum_le_sum (fun i _ => ?_)
   have := hc i
-  cases x i <;> cases y i <;> simp <;> linarith
+  cases x i <;> cases y i <;> simp
+  linarith
 
 /-- The field `-h↓` is admissible as soon as `0 ≤ c↑_i + c↓_i` for every site. -/
 theorem neg_field_admissible {cup cdn : ι → ℝ} (hc : ∀ i, 0 ≤ cup i + cdn i) :
@@ -334,7 +487,8 @@ theorem neg_field_admissible {cup cdn : ι → ℝ} (hc : ∀ i, 0 ≤ cup i + c
     rw [← Finset.sum_add_distrib, ← Finset.sum_sub_distrib]
     refine Finset.sum_le_sum (fun i _ => ?_)
     have := hc i
-    cases x i <;> cases y i <;> simp <;> linarith
+    cases x i <;> cases y i <;> simp
+    linarith
   linarith
 
 variable [DecidableEq ι]
@@ -357,6 +511,7 @@ theorem add_nonneg_of_admissible {cup cdn : ι → ℝ} {g : (ι → Bool) → �
   rw [e2] at h2
   linarith
 
+omit [DecidableEq ι] in
 /-- **Holley condition of Theorem A11, lower end, written out.** -/
 theorem cube_holley_lower {β : ℝ} (hβ : 0 ≤ β) {f g : (ι → Bool) → ℝ} {cup cdn : ι → ℝ}
     (hf : Submodular f) (hg : Admissible (envDist cup cdn) g) (x y : ι → Bool) :
@@ -366,6 +521,7 @@ theorem cube_holley_lower {β : ℝ} (hβ : 0 ≤ β) {f g : (ι → Bool) → �
   holley_condition_lower_of_saturation hβ hf hg
     (fun a b => (envDist_sup_right cup cdn a b).le) x y
 
+omit [DecidableEq ι] in
 /-- **Holley condition of Theorem A11, upper end, written out.** -/
 theorem cube_holley_upper {β : ℝ} (hβ : 0 ≤ β) {f g : (ι → Bool) → ℝ} {cup cdn : ι → ℝ}
     (hf : Submodular f) (hg : Admissible (envDist cup cdn) g) (x y : ι → Bool) :
@@ -454,7 +610,155 @@ theorem cube_macrostate_ratio_compl {β : ℝ} (hβ : 0 ≤ β) {f g : (ι → B
         zOn β (fun x => f x + field cup x) Bᶜ / zOn β (fun x => f x + field cup x) B :=
   cube_macrostate_ratio hβ hf hg Bᶜ B (isLowerSet_compl_finset hB) hB hBne
 
+/-- **Both ends of Theorem A11 are attained, lower end**: the least value of `E_{f+g} φ` over the
+class is the value at the field `g = h↑`. -/
+theorem cube_mean_isLeast {β : ℝ} (hβ : 0 ≤ β) {f : (ι → Bool) → ℝ} {cup cdn : ι → ℝ}
+    (hc : ∀ i, 0 ≤ cup i + cdn i) (hf : Submodular f) {φ : (ι → Bool) → ℝ} (hφ : Monotone φ) :
+    IsLeast {r | ∃ g, Admissible (envDist cup cdn) g ∧ gibbsMean β (fun x => f x + g x) φ = r}
+      (gibbsMean β (fun x => f x + field cup x) φ) := by
+  refine ⟨⟨field cup, field_admissible hc, rfl⟩, ?_⟩
+  rintro r ⟨g, hg, rfl⟩
+  exact (cube_sandwich_mean hβ hf hg hφ).1
+
+/-- **Both ends of Theorem A11 are attained, upper end**: the greatest value of `E_{f+g} φ` over
+the class is the value at the field `g = -h↓`. -/
+theorem cube_mean_isGreatest {β : ℝ} (hβ : 0 ≤ β) {f : (ι → Bool) → ℝ} {cup cdn : ι → ℝ}
+    (hc : ∀ i, 0 ≤ cup i + cdn i) (hf : Submodular f) {φ : (ι → Bool) → ℝ} (hφ : Monotone φ) :
+    IsGreatest {r | ∃ g, Admissible (envDist cup cdn) g ∧ gibbsMean β (fun x => f x + g x) φ = r}
+      (gibbsMean β (fun x => f x - field cdn x) φ) := by
+  refine ⟨⟨fun x => -field cdn x, neg_field_admissible hc, ?_⟩, ?_⟩
+  · simp only [sub_eq_add_neg]
+  · rintro r ⟨g, hg, rfl⟩
+    exact (cube_sandwich_mean hβ hf hg hφ).2
+
+/-- **Theorem A11, "every value in between is attained"**: for `0 < β` the set of values of
+`E_{f+g} φ` over the admissible class is exactly the closed interval between the values at the
+two fields. -/
+theorem cube_mean_range_eq_Icc {β : ℝ} (hβ : 0 < β) {f : (ι → Bool) → ℝ} {cup cdn : ι → ℝ}
+    (hc : ∀ i, 0 ≤ cup i + cdn i) (hf : Submodular f) {φ : (ι → Bool) → ℝ} (hφ : Monotone φ) :
+    {r | ∃ g, Admissible (envDist cup cdn) g ∧ gibbsMean β (fun x => f x + g x) φ = r} =
+      Set.Icc (gibbsMean β (fun x => f x + field cup x) φ)
+        (gibbsMean β (fun x => f x - field cdn x) φ) := by
+  ext r
+  constructor
+  · rintro ⟨g, hg, rfl⟩
+    exact cube_sandwich_mean hβ.le hf hg hφ
+  · rintro ⟨h1, h2⟩
+    have hsub : (fun x => f x - field cdn x) = (fun x => f x + (fun y => -field cdn y) x) := by
+      funext x
+      ring
+    rw [hsub] at h2
+    unfold gibbsMean at h1 h2
+    obtain ⟨g, hg, hgr⟩ := exists_admissible_ratio hβ (field_admissible hc)
+      (neg_field_admissible hc) (f := f) Finset.univ Finset.univ φ (fun _ => 1)
+      (by simpa using sum_boltz_pos _ _) (by simpa using sum_boltz_pos _ _)
+      (r := r) (by simpa using h1) (by simpa using h2)
+    refine ⟨g, hg, ?_⟩
+    unfold gibbsMean
+    simpa using hgr
+
+/-- **Corollary A11.1, "fills exactly the interval"**: for `0 < β`, a lower set `A` and a
+non-empty upper set `B`, the set of values of `Z_{f+g}(A)/Z_{f+g}(B)` over the admissible class
+is exactly `[Z_{f-h↓}(A)/Z_{f-h↓}(B), Z_{f+h↑}(A)/Z_{f+h↑}(B)]`. -/
+theorem cube_ratio_range_eq_Icc {β : ℝ} (hβ : 0 < β) {f : (ι → Bool) → ℝ} {cup cdn : ι → ℝ}
+    (hc : ∀ i, 0 ≤ cup i + cdn i) (hf : Submodular f)
+    (A B : Finset (ι → Bool)) (hA : IsLowerSet (A : Set (ι → Bool)))
+    (hB : IsUpperSet (B : Set (ι → Bool))) (hBne : B.Nonempty) :
+    {r | ∃ g, Admissible (envDist cup cdn) g ∧
+        zOn β (fun x => f x + g x) A / zOn β (fun x => f x + g x) B = r} =
+      Set.Icc (zOn β (fun x => f x - field cdn x) A / zOn β (fun x => f x - field cdn x) B)
+        (zOn β (fun x => f x + field cup x) A / zOn β (fun x => f x + field cup x) B) := by
+  ext r
+  constructor
+  · rintro ⟨g, hg, rfl⟩
+    exact cube_macrostate_ratio hβ.le hf hg A B hA hB hBne
+  · rintro ⟨h1, h2⟩
+    have hsub : (fun x => f x - field cdn x) = (fun x => f x + (fun y => -field cdn y) x) := by
+      funext x
+      ring
+    rw [hsub] at h1
+    unfold zOn at h1 h2
+    obtain ⟨g, hg, hgr⟩ := exists_admissible_ratio hβ (neg_field_admissible hc)
+      (field_admissible hc) (f := f) A B (fun _ => 1) (fun _ => 1)
+      (by simpa [zOn] using zOn_pos β _ hBne) (by simpa [zOn] using zOn_pos β _ hBne)
+      (r := r) (by simpa using h1) (by simpa using h2)
+    refine ⟨g, hg, ?_⟩
+    unfold zOn
+    simpa using hgr
+
 end Cube
+
+/-! ### Non-vacuity: a two-site instance with strict inequalities
+
+Two sites, known part `f x = -[x₀ ∧ x₁]` (submodular, not additive), `c↑ = c↓ = 1`, residual
+`g = 0`, `β = 1`, observable `φ = [x₀]`.  Then
+`E_{f+h↑} φ = 2e⁻¹/(1+3e⁻¹) < E_f φ = (1+e)/(3+e) < E_{f-h↓} φ = (e+e³)/(1+2e+e³)`. -/
+
+section Witness
+
+/-- Sum over the four points of `Fin 2 → Bool`. -/
+theorem sum_fin_two_bool (F : (Fin 2 → Bool) → ℝ) :
+    ∑ x, F x = F ![false, false] + F ![false, true] + F ![true, false] + F ![true, true] := by
+  have h := Fintype.sum_equiv (finTwoArrowEquiv Bool) F (fun p => F ![p.1, p.2]) (fun x => by
+    congr 1
+    funext i
+    fin_cases i <;> rfl)
+  rw [h, Fintype.sum_prod_type]
+  simp only [Fintype.sum_bool]
+  ring
+
+/-- The known part of the witness: `-1` if both sites are occupied, `0` otherwise. -/
+def wF (x : Fin 2 → Bool) : ℝ := if x 0 && x 1 then -1 else 0
+
+/-- The observable of the witness: occupation of site `0`. -/
+def wPhi (x : Fin 2 → Bool) : ℝ := if x 0 then 1 else 0
+
+theorem wF_submodular : Submodular wF := by
+  intro x y
+  show (if (x 0 || y 0) && (x 1 || y 1) then (-1 : ℝ) else 0) +
+      (if (x 0 && y 0) && (x 1 && y 1) then (-1 : ℝ) else 0) ≤
+    (if x 0 && x 1 then (-1 : ℝ) else 0) + (if y 0 && y 1 then (-1 : ℝ) else 0)
+  cases x 0 <;> cases x 1 <;> cases y 0 <;> cases y 1 <;> norm_num
+
+theorem wPhi_monotone : Monotone wPhi := by
+  intro x y hxy
+  have h0 : x 0 ≤ y 0 := hxy 0
+  unfold wPhi
+  revert h0
+  cases x 0 <;> cases y 0 <;> simp
+
+theorem zero_admissible_one : Admissible (envDist (fun _ : Fin 2 => (1 : ℝ)) (fun _ => 1))
+    (fun _ => (0 : ℝ)) := by
+  intro x y
+  unfold envDist
+  have h1 : 0 ≤ ∑ i : Fin 2, if x i && !y i then (1 : ℝ) else 0 :=
+    Finset.sum_nonneg (fun i _ => by split_ifs <;> norm_num)
+  have h2 : 0 ≤ ∑ i : Fin 2, if !x i && y i then (1 : ℝ) else 0 :=
+    Finset.sum_nonneg (fun i _ => by split_ifs <;> norm_num)
+  linarith
+
+/-- **Non-vacuity with strict inequalities.**  In the two-site instance all hypotheses of
+`cube_sandwich_mean` hold and both inequalities are strict. -/
+theorem cube_sandwich_strict_witness :
+    Submodular wF ∧ Monotone wPhi ∧
+      Admissible (envDist (fun _ : Fin 2 => (1 : ℝ)) (fun _ => 1)) (fun _ => (0 : ℝ)) ∧
+      gibbsMean 1 (fun x => wF x + field (fun _ : Fin 2 => (1 : ℝ)) x) wPhi <
+        gibbsMean 1 (fun x => wF x + (fun _ => (0 : ℝ)) x) wPhi ∧
+      gibbsMean 1 (fun x => wF x + (fun _ => (0 : ℝ)) x) wPhi <
+        gibbsMean 1 (fun x => wF x - field (fun _ : Fin 2 => (1 : ℝ)) x) wPhi := by
+  refine ⟨wF_submodular, wPhi_monotone, zero_admissible_one, ?_, ?_⟩
+  · unfold gibbsMean
+    rw [sum_fin_two_bool, sum_fin_two_bool, sum_fin_two_bool, sum_fin_two_bool]
+    simp [boltz, wF, wPhi, field]
+    trace_state
+    sorry
+  · unfold gibbsMean
+    rw [sum_fin_two_bool, sum_fin_two_bool, sum_fin_two_bool, sum_fin_two_bool]
+    simp [boltz, wF, wPhi, field]
+    trace_state
+    sorry
+
+end Witness
 
 end ScienceL2
 

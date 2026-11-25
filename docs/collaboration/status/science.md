@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 22 of the science branch (2026-11-25; the commit time is
+*Updated at checkpoint 23 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -94,6 +94,7 @@ the container is reclaimed.)
 | S29 | review of theory report §11.25: sound; the headline covers two of three exponents; Theorem 11.90(a) needed a step at negative accuracies (supplied); Lemma 11.89 has a four-line proof and a stronger pointwise form; for any alphabet and site law with Hamming envelope `u`: `h ≤ u²/32` | SCI-REV-0001; the new statements **[P]**, the reviewer's |
 | S30 | review of theory report §11.26: Theorem 11.99 proved; 11.101(a) proved; 11.101(b) proved with two gaps in the written proof, closed | SCI-REV-0005 |
 | S28 | robust range of an observable free-energy difference: for binary sites, a submodular known part and monotone macrostates the Gibbs measure over the whole envelope class is sandwiched in stochastic order between two uniform fields; extremal residuals additive; common uncertainty cancels exactly | **[P]** (Holley's inequality **[K]**); 900 exact linear programmes, two controls; SCI-MSG-0009 |
+| S31 | the sandwich of S28 on ordered multi-state sites: exact for envelopes additive along the order, a valid loose bound otherwise (addendum A13); on a Zimm–Bragg helix–coil chain a per-residue uncertainty of `0.1 k_BT` leaves the helix content of a 50-residue chain near the transition undetermined over more than half its range, and a local log odds uncertain by `2c` times a cooperative length (A14) | **[P]**; exact linear programmes (360 instances); exact transfer matrices; not yet sent |
 | S27 | the lever arm belongs to the first-order format, not to the residual: energies quadratic in positions have chain-length order and growing per-torsion constants but `O(n²)` modes | **[P]**; toy chain |
 
 ## Outstanding requests

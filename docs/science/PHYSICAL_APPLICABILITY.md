@@ -139,6 +139,19 @@ in any enumerated instance, and the collective criterion fails by factors of 26 
 Also observable in principle and untouched: hydration free energies (`ln Z(f+g) − ln Z(f)`
 with `f` the gas-phase energy and `g` a solvation potential of mean force).
 
+**A fourth, added at checkpoint 23: robust ranges of observable free-energy differences**
+(addenda A11, A13, A14; SCI-MSG-0009).  For binary (or ordered) sites, a known part without
+frustration and macrostates monotone in the site variables, the range of a population
+ratio over the *whole* envelope class is attained at two uniform fields and is computed by
+ordinary partition functions; uncertainty common to both macrostates cancels.  Worked on
+a classical helix–coil chain (`σ = 10⁻³`; a model, no molecule): a per-residue uncertainty of
+`0.1 k_BT` leaves the helix content of a 50-residue chain near the transition undetermined
+between 0.05 and 0.61, and the log odds of one residue's state uncertain by `2c` times a
+cooperative length of 5–25 residues — neither `2c` nor `2cn`.  *How it could meet an
+experiment:* helix contents and their temperature dependence are measured (circular
+dichroism); a model with stated per-residue uncertainty either brackets the measurement
+or is falsified by it, whatever non-additive form its error has.  Not done.
+
 ## 6. What must not be claimed
 
 * That a certified minimum is a predicted structure.

@@ -536,3 +536,82 @@ symmetry of the uniform cube (workstream F is on the field case); the thermodyna
 oracle at extensive accuracy; exact marginals of order proportional to `n` (addendum A8:
 there the exponent does drop); samples from the ensemble (addendum A10, remark 1).
 
+## A13. The sandwich of A11 on ordered alphabets (written out; replaces remark (1) of A11)
+
+**Setting.**  `X = ∏_i {0, …, q_i − 1}` with the product order (a finite distributive lattice);
+`d(x, y) = Σ_i d_i(x_i, y_i)` with each `d_i` a quasi-metric on the site alphabet (zero diagonal,
+triangle inequality); `g` admissible iff `g(x) − g(y) ≤ d(x, y)`; `f` submodular on the lattice
+(for example site terms plus convex functions of the differences of neighbouring sites).
+Step fields
+
+    Γ^↑(x) = Σ_i Σ_{r < x_i} d_i(r+1, r) ,          Γ^↓(x) = Σ_i Σ_{r < x_i} d_i(r, r+1) .
+
+**Theorem A13 [P; Holley's inequality [K]; exact linear programmes on 360 instances,
+`ordered_alphabet_ratio_check.py`].**  For every admissible `g`:
+`μ_{f + Γ^↑} ≼ μ_{f + g} ≼ μ_{f − Γ^↓}`.  Hence for every up-set `B`, `A = X ∖ B`:
+
+    Z_{f − Γ^↓}(A)/Z_{f − Γ^↓}(B)  ≤  Z_{f+g}(A)/Z_{f+g}(B)  ≤  Z_{f + Γ^↑}(A)/Z_{f + Γ^↑}(B) .
+
+If every `d_i` is additive along the order (a "path envelope": `d_i(s, t)` is the sum of the
+unit steps between `t` and `s`), the two step fields are admissible and **both bounds are
+attained**.  Otherwise the bounds are sound and not attained in general.
+
+*Proof.*  Holley's condition for the lower end is
+`[f(x∨y) + f(x∧y) − f(x) − f(y)] + [g(x∨y) − g(y)] ≤ Γ^↑(x) − Γ^↑(x∧y)`.  The first bracket is `≤ 0`.
+`x∨y` differs from `y` on the sites with `x_i > y_i`, so
+`g(x∨y) − g(y) ≤ Σ_{x_i > y_i} d_i(x_i, y_i) ≤ Σ_{x_i > y_i} Σ_{r = y_i}^{x_i − 1} d_i(r+1, r)` (triangle inequality along
+the order), which is `Γ^↑(x) − Γ^↑(x∧y)`.  The upper end is symmetric.  For a path envelope
+`Γ^↑(x) − Γ^↑(y) ≤ d(x, y)` with equality when `x ≥ y`, so the fields are members of the class. ∎
+
+*Numerics.*  Three and four ordered states, three and four sites, random site terms and
+convex nearest-neighbour couplings, random up-sets: with path envelopes the bounds equal
+the exact linear-programming extremes in 180 of 180 instances (to `3·10⁻¹⁵` in the
+logarithm); with the discrete envelope `c_i[s ≠ t]` they are valid in 180 of 180 and
+attained in none (slack up to a factor `e^{2.7}` in the ratio).
+
+*What it covers and what it does not.*  Sites with a natural order along which both the
+known part is submodular and the uncertainty accumulates additively — occupation
+numbers, heights, ordered levels of a degree of freedom.  **Not rotamers:** an unordered
+alphabet with the discrete envelope gets a valid but loose bound, and a Potts-type known
+part is not submodular for any order of three states.  For those the linear-fractional
+programme of A3 remains.
+
+## A14. An illustration of A11 on a classical model: the helix–coil chain (numbers; reading labelled)
+
+*Model (synthetic, classical).*  Zimm–Bragg chain of `n` residues, `x_i ∈ {coil, helix}`,
+statistical weight `∏ s^{x_i}·σ^{#helix starts}` with nucleation parameter `σ = 10⁻³`: in
+lattice-gas variables a ferromagnetic nearest-neighbour energy, hence submodular.
+*Class.*  Every residual whose change under the flip of **one** residue is at most `c`
+(in `k_BT`) — whatever its form: an error of the cooperativity, capping, `i/i+4` terms,
+sequence effects.  *Theorem A11 says:* for every increasing observable and every monotone
+macrostate the extremes over the whole class are those of the two uniform fields, i.e. of
+the same chain with `s·e^{−c}` and `s·e^{+c}`.  Exact transfer matrices
+(`helix_coil_robust_range.py`); the linear programme over the whole class agrees with the
+fields to `10⁻⁶` at `n = 10` (three cases).
+
+| chain | mean helix fraction at `s` | robust interval, `c = 0.05` | `c = 0.1` | `c = 0.3` |
+|---|---|---|---|---|
+| `n = 20`, `s = 1.2` | 0.336 | [0.224, 0.465] | [0.142, 0.586] | [0.024, 0.830] |
+| `n = 50`, `s = 1.0` | 0.218 | [0.104, 0.415] | [0.053, 0.614] | [0.009, 0.879] |
+| `n = 50`, `s = 1.2` | 0.788 | [0.703, 0.838] | [0.551, 0.870] | [0.043, 0.932] |
+| `n = 100`, `s = 1.0` | 0.347 | [0.145, 0.617] | [0.065, 0.776] | [0.010, 0.934] |
+| `n = 100`, `s = 1.5` | 0.955 | [0.947, 0.961] | [0.936, 0.966] | [0.787, 0.979] |
+
+**One residue helical against coil** (the middle one; `c = 0.1`): width of the robust
+interval of the log odds `2.0–2.5` at `n = 20`, `1.1–4.0` at `n = 50`, `1.0–4.9` at `n = 100`
+(`s = 1.5 … 1.0`), against `2c = 0.2` without cooperativity and `2cn = 4, 10, 20` without
+cancellation.  By Corollary A11.2 the width is `2c` times an effective number of residues —
+5 to 25 here — and 90 % of it comes from the 12 to 54 residues around the chosen one.
+
+**Reading [H].**  (i) Near the transition a per-residue uncertainty of `0.1 k_BT`
+(`0.06 kcal/mol` at 300 K) leaves the helix content of a 50-residue cooperative chain
+undetermined over more than half of its range — the textbook sensitivity of a cooperative
+transition to its propagation parameter, here as an exact statement about *all* model
+errors with bounded single-residue effect, not only about errors of `s`.  (ii) The robust
+uncertainty of a *local* conformational free energy is the per-site constant times the
+cooperative length (`≈ σ^{−1/2}`), neither `2c` nor `2cn`: cooperativity amplifies local model
+error, and cancellation between the two macrostates removes everything beyond the
+correlated region.  (iii) Far from the transition (`s = 1.5`, `n = 100`) the same class
+determines the helix content to within one or two per cent for `c ≤ 0.1`.  A model, not a
+molecule: no parameter here is fitted to anything.
+

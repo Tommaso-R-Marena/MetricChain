@@ -424,3 +424,19 @@ profile and the gauche count, and its support function is the ground-state energ
 * *Owed:* a reading of their referee report R10 and of the changed sections of the theory
   report at `40c5bd7`.
 
+### Cycle 17 — A11 extended and illustrated (checkpoint 23)
+
+* **A13.**  The sandwich holds on products of ordered alphabets with the "step fields"
+  built from consecutive-state constants: exact when each site's envelope is additive
+  along its order, a valid but loose bound for the discrete envelope on three or more
+  states (180 + 180 exact linear programmes).  Rotamers remain outside.
+* **A14.**  A worked classical example: the Zimm–Bragg helix–coil chain (ferromagnetic in
+  lattice-gas variables, so A11 applies to every helicity observable).  The class "any
+  residual with single-residue changes of at most `c`" has, by the theorem, the same
+  extremes as an uncertainty `±c` of `ln s` — including errors of the cooperativity or of
+  longer-range terms.  Numbers by exact transfer matrices; the reading (cooperative
+  amplification of local model error by the cooperative length; exact cancellation beyond
+  it) is labelled [H].  This is the first place where a result of ours makes a statement
+  that a physical chemist would recognise and could test — on a model, not a molecule.
+* Read the parts of the theory division's twelfth checkpoint that quote us: accurate.
+
