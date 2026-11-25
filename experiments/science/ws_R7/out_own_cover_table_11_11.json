@@ -184,5 +184,23 @@
   "dual_bound": 6.0,
   "eps_name": "N/4",
   "seconds": 59.46642875671387
+ },
+ {
+  "n": 11,
+  "L": 0.2,
+  "eps": 7.0,
+  "classes": 2908,
+  "greedy": 4,
+  "lp": 4.0,
+  "lp_certified_lb": 4.0,
+  "lp_certified_ceil": 4,
+  "min_margin": 1.245595747434436e-06,
+  "status": 0,
+  "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "primal": 4,
+  "primal_feasible_checked": true,
+  "dual_bound": 4.0,
+  "eps_name": "N/2",
+  "seconds": 41.84778428077698
  }
 ]

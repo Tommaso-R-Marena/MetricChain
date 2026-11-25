@@ -9,3 +9,4 @@ n=11 L=0.2 eps=1: classes=2908 greedy=15 LP=10.0000 certLB=10 MILP primal=10 dua
 n=11 L=0.2 eps=N/20: classes=2908 greedy=16 LP=11.0000 certLB=11 MILP primal=11 dual=11.0 feas=True margin=1.598e-07 status=0 t=59.1s
 n=11 L=0.2 eps=N/10: classes=2908 greedy=13 LP=9.2500 certLB=10 MILP primal=10 dual=9.999999999881862 feas=True margin=4.217e-06 status=0 t=88.8s
 n=11 L=0.2 eps=N/4: classes=2908 greedy=7 LP=6.0000 certLB=6 MILP primal=6 dual=6.0 feas=True margin=2.303e-06 status=0 t=59.5s
+n=11 L=0.2 eps=N/2: classes=2908 greedy=4 LP=4.0000 certLB=4 MILP primal=4 dual=4.0 feas=True margin=1.246e-06 status=0 t=41.8s
