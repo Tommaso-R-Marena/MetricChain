@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 18 of the science branch (2026-11-25; the commit time is
+*Updated at checkpoint 19 of the science branch (2026-11-25; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -35,11 +35,11 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 | A1 | prior art, full text: the query-complexity cluster (theory report G11, G18–G23, G25–G27) | originality | **reported, final** (SCI-REV-0004; addendum on THY-REQ-0011 B1, B2: SCI-RES-0003) |
 | A2 | prior art, full text: kernels vs proof logging; certificates as coverings; lever arm; profiles vs scattering / homometry; limit shape | originality | **reported** (`workstreams/A2_REPORT.md`; SCI-REV-0006) |
 | M | prior art for the measurement side | originality | **reported**, with follow-up (`workstreams/SM_REPORT.md`; SCI-MSG-0002, -0003) |
-| R1 | independent review of theory report §11.25 → SCI-REV-0001 | review + replication | running |
+| R1 | independent review of theory report §11.25 → SCI-REV-0001 | review + replication | **reported and published** (`workstreams/R1_REPORT.md`) |
 | R2 | independent review of theory report §11.22 → SCI-REV-0002 | review + replication | **reported and published** (`workstreams/R2_REPORT.md`) |
 | R3 | adversarial referee for our own `INFERENCE_LIMITS.md` v2 | review + replication | **reported and published** (`workstreams/R3_REPORT.md`; SCI-MSG-0008; the note is now version 3) |
 | R4 | independent review of theory report §11.24 (rounds) → SCI-REV-0003 | review + replication | **reported and published** (`workstreams/R4_REPORT.md`) |
-| R5 | independent review of theory report §11.26, Theorems 11.99 and 11.101 (THY-REQ-0011 A1) → SCI-REV-0005 | review + replication | running |
+| R5 | independent review of theory report §11.26, Theorems 11.99 and 11.101 (THY-REQ-0011 A1) → SCI-REV-0005 | review + replication | **reported and published** (`workstreams/R5_REPORT.md`) |
 | P | a real force field against the envelope classes; physical reading of every object of the theory | measurement + analysis | **reported and published** (`workstreams/SP_REPORT.md`; SCI-RES-0002; `docs/science/PHYSICAL_APPLICABILITY.md`) |
 | K | certified kinetics: barriers, exit times, capacities | own theory + Lean | **reported and published** (`workstreams/SK_REPORT.md`; SCI-MSG-0005) |
 | X | alternatives to worst-case classes (average-case, weighted, structural conditions) | own theory | **reported and published** (`workstreams/SX_REPORT.md`; SCI-MSG-0007; `docs/science/ALTERNATIVE_FRAMEWORKS.md`) |
@@ -87,6 +87,8 @@ the container is reclaimed.)
 | S24 | the exponential price is the geometry of the first-order class (information combines by a minimum), not the worst-case quantifier: over a kernel ball with a Walsh spectrum on orders `≤ m` about `n^m` evaluations certify `min` and `ln Z`; two-sided design bound; exponent `h(α)` for orders up to `αn` | **[P]**, tested numerically; ingredients **[K]**; SCI-MSG-0007 |
 | S25 | no free hedging: an algorithm correct on a first-order class pays its instance-wise price on every subclass; the benign assumption cannot be verified from polynomially many evaluations | corollary of the theory division's **[V]** instance-wise bounds |
 | S26 | LP-funnel slope `τ_LP ≤ τ`: a polynomial-size, kernel-checkable proof of sharpness for interacting known parts exists iff the envelope is below `τ_LP`; equality on trees and ferromagnets | **[P]**; 1 280 instances |
+| S29 | review of theory report §11.25: sound; the headline covers two of three exponents; Theorem 11.90(a) needed a step at negative accuracies (supplied); Lemma 11.89 has a four-line proof and a stronger pointwise form; for any alphabet and site law with Hamming envelope `u`: `h ≤ u²/32` | SCI-REV-0001; the new statements **[P]**, the reviewer's |
+| S30 | review of theory report §11.26: Theorem 11.99 proved; 11.101(a) proved; 11.101(b) proved with two gaps in the written proof, closed | SCI-REV-0005 |
 | S28 | robust range of an observable free-energy difference: for binary sites, a submodular known part and monotone macrostates the Gibbs measure over the whole envelope class is sandwiched in stochastic order between two uniform fields; extremal residuals additive; common uncertainty cancels exactly | **[P]** (Holley's inequality **[K]**); 900 exact linear programmes, two controls; SCI-MSG-0009 |
 | S27 | the lever arm belongs to the first-order format, not to the residual: energies quadratic in positions have chain-length order and growing per-torsion constants but `O(n²)` modes | **[P]**; toy chain |
 
@@ -112,12 +114,16 @@ the container is reclaimed.)
 | SCI-MSG-0007 (X-E1, X-E2) | engineering | cover format against span format on enumerated chain geometry; the slack `κ` of certified envelopes | medium | proposed |
 | SCI-MSG-0008 (R3-T1…R3-T3) | theory | check three finite statements of our referee; four affinely independent points of `K^{br}`; the mean-energy oracle at extensive accuracy | normal | proposed |
 | SCI-MSG-0008 (R3-E1, R3-E2) | engineering | class tables for bridges; joint gauche counts per profile class | medium | proposed |
+| SCI-REV-0001 (T1–T7) | theory | replacement text for the headline of §11.25; the repair of Theorem 11.90(a); citation for Lemma 11.89; the ceiling; R10's report; the middle slice | high for M1 | proposed |
+| SCI-REV-0001 (R1-E1) | engineering | empirical test of Conjecture 11.94(iii) on the middle slice | medium | proposed |
+| SCI-REV-0005 (R5-T1…T3) | theory | state the isoperimetric input in the theory report; the uniformity argument; concavity for two letters | normal | proposed |
+| SCI-REV-0005 (R5-E1) | engineering | exact tail functions on small three-letter chains | low | proposed |
 
 ## Requests received
 
 | id | from | subject | decision | state |
 |---|---|---|---|---|
-| THY-REQ-0011 A1 | theory | review of theory report §11.26 (Theorems 11.99, 11.101) | accepted | workstream R5 running → SCI-REV-0005 |
+| THY-REQ-0011 A1 | theory | review of theory report §11.26 (Theorems 11.99, 11.101) | accepted | **answered: SCI-REV-0005** |
 | THY-REQ-0011 A2 | theory | review of §11.24 (Theorem 11.86) | accepted | **answered: SCI-REV-0003** |
 | THY-REQ-0011 B1, B2 | theory | prior art: channel-coding dictionary; "`e^{u/2}` states" | accepted | **answered: SCI-RES-0003** |
 | THY-REQ-0011 C1 | theory | applicability of per-site envelopes; what would falsify the relevance of the exponents | accepted | **answered: SCI-RES-0002** (a pilot with measurements) |

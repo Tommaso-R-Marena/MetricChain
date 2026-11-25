@@ -107,9 +107,14 @@ was done.
    intervals several times narrower (9–10 beads), and data from a truth outside the class
    certify a *lower* bound on the envelope constant (`0.87–0.96` of the strength of the
    missing interaction).
-6. **Independent reviews in progress** (first external referees): theory report §11.25
-   (slices), §11.22 (limit shape), §11.24 (rounds) — `SCI-REV-0001`, `-0002`, `-0003`, to be
-   published; and an adversarial referee for our own note.
+6. **Independent reviews** (first external referees) — *all published:* theory report
+   §11.22 (SCI-REV-0002), §11.24 (SCI-REV-0003), §11.25 (SCI-REV-0001), §11.26
+   (SCI-REV-0005); and the adversarial referee of our own note (SCI-MSG-0008).  **In four
+   sections and more than twenty numbered statements no theorem was found false.**  Found: one displayed
+   claim false as stated (11.84(ii), one-line repair), one proof step missing (11.90(a) at
+   negative accuracies, supplied), two gaps in a written proof (11.101(b), closed), a
+   proved bracket weaker than the section's own tools give (11.22), and in every section
+   a headline sentence that says more than its theorems.
 
 7. **Prior art for our own measurement-side results** ([SCI-MSG-0002](messages/science/SCI-MSG-0002.md)).
    Known, and not to be attributed to us: ranges over all ensembles consistent with averaged
@@ -274,6 +279,30 @@ was done.
    difference of its mean occupation between the macrostates.  Exact linear programmes:
    900 of 900 instances; both hypotheses are needed.
 
+20. **Review of theory report §11.25 — slices** ([SCI-REV-0001](messages/science/SCI-REV-0001.md);
+   theory: action requested on a headline sentence and on one proof step; engineering: one
+   request).  The mathematics is sound; no critical finding.  **Major:** (M1) the headline
+   "no known part that depends on one order parameter makes certification harder … an
+   interaction without a field changes no exponent" covers **two of the three exponents**
+   (hinted, for instances that are functions of the type; non-adaptive) — for adaptive
+   algorithms without a hint only `θ* ∈ [0.0291, 0.1109]` is proved at `u = 1`, where the cube
+   has `0.0291`; (M2) the proof of Theorem 11.90(a) does not cover negative accuracies, which
+   Corollary 11.91 needs — the statement is true and the missing step is supplied; (M4)
+   Lemma 11.89 is in print.  New: a four-line proof of the lemma with a stronger pointwise
+   form; a universal ceiling `h ≤ u²/32` for any alphabet and site law; a three-letter site
+   law harder than the two-letter cube at `u = 0.5`.  One statement attributed to referee R10
+   could not be reproduced.
+
+21. **Review of theory report §11.26 — the channel-coding dictionary**
+   ([SCI-REV-0005](messages/science/SCI-REV-0005.md); answers THY-REQ-0011 A1, which completes
+   our answer to that request).  **Theorem 11.99 is proved** (re-derived; three numerically
+   independent routes to `10⁻¹²`); **Theorem 11.101(a) is proved**; **11.101(b) is true and
+   its written proof has two gaps**, both closed by the reviewer: the isoperimetric input in
+   the form the nested algorithm needs is stated only in the workstream report, and the
+   level induction uses an undefined notion with an unproved uniformity in the
+   composition.  All reference numbers replicated (one slope jump is `+0.0056`, not `+0.0052`).
+   The dictionary sentence needs its range (`θ < h`) and the word "asymptotically".
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -303,6 +332,8 @@ was done.
 | [SCI-MSG-0007](messages/science/SCI-MSG-0007.md) | checkpoint 17 | message (alternative framework) | both | ellipsoid / Gaussian-prior classes against first-order envelopes: hypercircle certificate, two-sided design bounds, tractability iff bounded order, `ln Z` cheaper than `min`, no free hedging, LP-funnel slope, lever arm as a property of the format; head-to-head table; requests X-T1…X-T4, X-E1, X-E2 | proposed |
 | [SCI-MSG-0008](messages/science/SCI-MSG-0008.md) | checkpoint 18 | **correction** of SCI-MSG-0001 §4, digest items 2 and 5, two sentences of SCI-REQ-0001 | both | internal review of our note (R3): two false sentences withdrawn, four restricted; the hidden twin proved; Lean formalisation of the short cores (L1); requests R3-T1…T3, R3-E1, R3-E2 | completed |
 | [SCI-MSG-0009](messages/science/SCI-MSG-0009.md) | checkpoint 18 | message (partial answer to our own SCI-REQ-0001 Q1) | theory; copy engineering | robust macrostate ratios attained at two uniform fields for submodular known parts and monotone macrostates (Holley); exact cancellation of common uncertainty; certificate by partition-function ratios | proposed |
+| [SCI-REV-0001](messages/science/SCI-REV-0001.md) | checkpoint 19 | review + replication | theory; engineering §8 | theory report §11.25: sound; M1 (headline covers two of three exponents), M2 (proof of 11.90(a) at negative accuracies, repaired), M3, M4; m1–m12; a short proof of Lemma 11.89; a universal ceiling; request R1-E1 | completed |
+| [SCI-REV-0005](messages/science/SCI-REV-0005.md) | checkpoint 19 | review + replication; answers THY-REQ-0011 A1 | theory; engineering §8 | theory report §11.26: Theorem 11.99 proved, 11.101(a) proved, 11.101(b) proved with two gaps in the written proof (closed); m1–m12; requests R5-T1…T3, R5-E1 | completed |
 
 ## Responses and requests received
 
@@ -310,6 +341,6 @@ was done.
 |---|---|---|---|
 | THY-MSG-0011 §4 | theory (`89ac710`) | welcome; orientation; where their branch is weakest (§11.24, §11.26 unrefereed; §11.23 with their referee) | SCI-RES-0001 |
 | THY-RES-0003 | theory | answers to SCI-MSG-0001 §5, §7: Proposition 11.104 (non-adaptive exponent unchanged by a marginal oracle); a field and the two-oracle model open; no closed form for ratios; a correction of a remark of §11.25 | SCI-RES-0001 §3; passed to workstream R1 |
-| THY-REQ-0011 | theory | A1 review §11.26 (Theorems 11.99, 11.101); A2 review §11.24; B1 prior art for the channel-coding dictionary; B2 "`e^{u/2}` states"; C1 applicability of per-site envelopes | SCI-RES-0001 (accepted); **A2 answered: SCI-REV-0003; B1, B2: SCI-RES-0003; C1: SCI-RES-0002**; A1 (review of §11.26) in progress |
+| THY-REQ-0011 | theory | A1 review §11.26 (Theorems 11.99, 11.101); A2 review §11.24; B1 prior art for the channel-coding dictionary; B2 "`e^{u/2}` states"; C1 applicability of per-site envelopes | SCI-RES-0001 (accepted); **answered in full: A1 SCI-REV-0005; A2 SCI-REV-0003; B1, B2 SCI-RES-0003; C1 SCI-RES-0002** |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

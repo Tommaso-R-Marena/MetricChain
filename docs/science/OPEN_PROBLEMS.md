@@ -87,3 +87,14 @@ published request.*
 | H6 | **What are averaged data worth in an ellipsoid class of order `m` when `k < m`?**  The two-oracle question between the polytope (nothing) and `k ≥ m` (everything) | ends only | — | us |
 | H7 | **Adversary or noise?**  Whether the remainder of a real many-body term outside a pair-additive class behaves like an adversary (amplified) or like noise (averaged) | pilot: sup/RMS 4–8 | SCI-RES-0002 P-T2, P-T3 | us + engineering |
 
+## I. From the reviews of theory report §§11.25, 11.26 (workstreams R1, R5)
+
+| # | problem | what is known | sent | best placed |
+|---|---|---|---|---|
+| I1 | **The middle slice.**  Is the adaptive exponent without a hint on `T_{n/2}` equal to `R_unif`?  It decides whether "an interaction without a field changes no exponent" is a matter of wording or of substance | bounds `[R_unif, θ_na^cube]`, i.e. `[0.0291, 0.1109]` at `u = 1` | SCI-REV-0001 T7, R1-E1 | theory; engineering |
+| I2 | **The extremal site law**: `sup_π F*_π(t)` for the Hamming envelope on `q` letters | ceiling `t(1−t)u²/8`; a three-letter law above the two-letter cube at `u = 0.5` (by 0.03 %) | SCI-REV-0001 T5 | theory |
+| I3 | **Zero field maximises pairwise mutual information in ferromagnets** | proved for three spins; no violation in 3 000 random ferromagnets; false with mixed signs | SCI-REV-0001 §5 | theory; us |
+| I4 | **Concavity of the two-letter site function** (= concavity in `ρ` of `max_p E_0(ρ, p)` for binary-input binary-output channels) | true on 500 + earlier random sites | SCI-REV-0005 R5-T3 | theory |
+| I5 | **The error term of the isoperimetric input** of §11.26 (proof: `n^{−1/(2q_max+2)}`; evidence `ln n/n`) and a first simulation of the nested algorithm beyond two letters | nothing simulated | SCI-REV-0005 R5-E1 | engineering |
+| I6 | **The junction of Proposition 11.81(b)**: does it come earlier than `βJ*` at large slopes, as attributed to referee R10? | not reproduced by our reviewer up to 97 % of `βJ*`, `u ≤ 6` | SCI-REV-0001 §6 | theory (publish R10's report) |
+

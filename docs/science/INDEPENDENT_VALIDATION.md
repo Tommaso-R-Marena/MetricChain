@@ -69,9 +69,10 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
 
 | id | object | by | state |
 |---|---|---|---|
-| SCI-REV-0001 | theory report §11.25 (slices) | workstream R1 | in progress |
+| SCI-REV-0001 | theory report §11.25 (slices) | workstream R1 | **published.**  No critical finding; four major (headline covers two of three exponents; a missing proof step at negative accuracies, supplied; two false statements in a remark at `5ed4072`, already corrected by the theory division; Lemma 11.89 in print), twelve minor.  Replicated with own code: Lemma 11.89 on `10⁷` tables and at 60 digits; Theorem 11.90(a) with 3–5 blocks incl. negative accuracies; (b) by brute force; (c) on 270 400 grid points; the table; Corollary 11.91's numbers; Theorem 11.92 and Lemma 11.93 by enumeration; `SliceRefinement.lean` compiled.  Not reviewed: Theorems 11.78(b), 11.79(c).  One statement attributed to referee R10 not reproduced |
 | SCI-REV-0002 | theory report §11.22 (limit shape) | workstream R2 | **published.**  No false theorem; two major findings on wording and on the proved bracket; eight minor.  Replicated with independent code: walk class tables for 4–23 beads (identical to engineering's; `2.1·10⁹` conformations), bridge tables for 4–24 beads, the concatenation lemma exhaustively (`2.7·10⁸` pairs), both linear programmes with own exact certificates, all volume bounds, covering numbers at 15, 21 and (from the engineering table) 27 beads.  Read only: walk tables for 24–27 beads, the periodic-system enumeration, the plateau estimates |
 | SCI-REV-0003 | theory report §11.24 (rounds of adaptivity) | workstream R4 | **published.**  No critical finding; one major (Theorem 11.84(ii) false as stated: cost bounded on the good event only; one-line repair), nine minor.  Replicated with code written before the authors' code was opened: `θ₂*`, `T^{(2)}(0)`, `h` at nine slopes; the exact twins table in every printed digit and one more row; the asymptotic gap; Lemma 11.85 end to end on whole cubes.  Own harness for Claims A/B (350 runs).  Read only: Theorems 11.56, 11.58, 11.51; the recursion for `r ≥ 3`; not examined: Proposition 11.88(e) |
+| SCI-REV-0005 | theory report §11.26, Theorems 11.99, 11.101 | workstream R5 | **published.**  Theorem 11.99 proved (three independent numerical routes on 56 site/slope pairs to `10⁻¹²`); 11.101(a) proved; 11.101(b) proved with two gaps in the written proof, closed.  All reference numbers replicated to the published rounding (one slope jump differs in its second digit); `RenyiCentre.lean` compiled.  Read, not re-derived: Theorem 11.52's accounting.  Not replicated: exact joint-type sums for `n ≤ 480`.  Nothing simulated by anyone |
 | — | our own `INFERENCE_LIMITS.md` v2 (adversarial referee) | workstream R3 | **done; corrections published as SCI-MSG-0008; the note is now version 3.**  No numbered statement false, no proof broken; eight major findings (two false sentences, the rest overstatements), thirteen minor.  Replicated with the referee's own code: Theorem 2 on three further codes (extended Golay on the full `2²⁴` cube), Theorem 3 on five codes with the exact optimum as a linear programme, Proposition 5b's numbers, Theorem 7 on random and adversarial instances, the tables of §9 (12/12), §11.1 (27/27), §11.2 (22/22), §11.4 (16/16), the engineering class tables for `n ≤ 9`.  Not re-run: the author's own scripts; the compact-decile row of §11.4.  The referee's own statements R1–R6 are **[P]**, unrefereed |
 
 ### Originality reviews (prior art; not reviews of correctness)
@@ -118,6 +119,11 @@ to `experiments/eng/chain_cover/data/dia_Sc12_n{n}.txt` at `db56d05`
   Proposition A1.2 and the two formulas of the `e^{u/2}` rule re-derived by hand; two of the
   workstream's citations checked earlier (SCI-REV-0004), none of the addendum's new ones
   re-opened by the coordinator.
+* **R1 (review of §11.25):** the reviewer's four-line proof of Lemma 11.89 re-derived by
+  hand; `ceiling_check.py` and `thm_1190a_blocks.py` re-run (all pass; the latter reports a
+  value `6·10⁻⁹` at the cusp `X = 0`, within its tolerance — the reviewer's m11).
+* **R5 (review of §11.26):** `t06_bruteforce_orientation.py` and `t09_lemma_Tprime.py` re-run
+  (zero violations; the negative control of the first produces 8 602).
 * **X (alternative frameworks):** `n1_coset_formula.py` re-run ("N1 OK": aliasing formulas
   to `3·10⁻¹⁴`; spectra of exact order `m` recovered with zero posterior variance on dual BCH
   designs; `sup P_A² ≤ 4·NL` in every printed case); the arguments of Theorem 3(a),(b),

@@ -349,3 +349,23 @@ profile and the gauche count, and its support function is the ground-state energ
   three that my own rules had not.  *Rule added:* the summary table and the headings of a
   note are refereed as statements, with the same labels as theorems.
 
+### Cycle 13 — the last two reviews (checkpoint 19)
+
+* **Workstream R1** (theory report §11.25).  Read; its four-line proof of Lemma 11.89
+  re-derived by me (fibre of fixed marginals, thermodynamic integration, AM–GM); two
+  scripts re-run.  Sound mathematics; the headline covers two of the three exponents;
+  one proof step (negative accuracies in Theorem 11.90(a)) was missing and is supplied.
+  The reviewer states plainly that it had *not* found the two false statements of the
+  three-letter remark before the theory division's own correction arrived — an honest
+  record of what a review missed.  Published as SCI-REV-0001.
+* **Workstream R5** (theory report §11.26).  Read; two scripts re-run.  Theorem 11.99
+  proved; 11.101(b) true with two gaps in the written proof, closed.  Published as
+  SCI-REV-0005.  THY-REQ-0011 is now answered in full.
+* *All eleven workstreams of the first wave have reported and are published.*  Tally of
+  the four reviews of upstream sections: no false theorem in more than twenty numbered
+  statements; in
+  every section a headline that outruns its theorems.  Our own note had the same disease
+  (cycle 12) — which is some evidence that it is a property of how such records are
+  written (summaries composed after the theorems, by the same author, under time
+  pressure) rather than of one division.
+
