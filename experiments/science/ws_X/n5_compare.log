@@ -10,3 +10,8 @@ kappa=1.0 e=0.5 n= 7 |X|=  128 c~1.08 sharp=0 | W: expw>=    1.1 frac=    8.5 gr
 kappa=1.0 e=0.5 n= 8 |X|=  256 c~1.09 sharp=0 | W: expw>=    1.2 frac=   12.2 greedy=    16 bestfirst=    30 | H: kbf=  21 | B: kbf=  30 | M=36 valid H/B=5/5 of 5  [63s]
 kappa=1.0 e=0.5 n= 9 |X|=  512 c~1.17 sharp=0 | W: expw>=    1.1 frac=   13.2 greedy=    19 bestfirst=    34 | H: kbf=  23 | B: kbf=  31 | M=45 valid H/B=5/5 of 5  [64s]
 kappa=1.0 e=0.5 n=10 |X|= 1024 c~1.23 sharp=0 | W: expw>=    1.3 frac=    nan greedy=    34 bestfirst=    58 | H: kbf=  34 | B: kbf=  45 | M=55 valid H/B=5/5 of 5  [77s]
+kappa=1.0 e=0.5 n=11 |X|= 2048 c~1.35 sharp=0 | W: expw>=    1.4 frac=    nan greedy=    44 bestfirst=    71 | H: kbf=  35 | B: kbf=  45 | M=66 valid H/B=5/5 of 5  [98s]
+kappa=1.0 e=0.5 n=12 |X|= 4096 c~1.37 sharp=0 | W: expw>=    1.8 frac=    nan greedy=   nan bestfirst=   156 | H: kbf=  48 | B: kbf=  57 | M=78 valid H/B=5/5 of 5  [99s]
+kappa=1.0 e=1.0 n= 6 |X|=   64 c~1.07 sharp=3 | W: expw>=    1.0 frac=    2.0 greedy=     3 bestfirst=     4 | H: kbf=   7 | B: kbf=   8 | M=21 valid H/B=5/5 of 5  [100s]
+kappa=1.0 e=1.0 n= 7 |X|=  128 c~1.08 sharp=3 | W: expw>=    1.0 frac=    3.0 greedy=     3 bestfirst=     6 | H: kbf=   8 | B: kbf=  11 | M=28 valid H/B=5/5 of 5  [100s]
+kappa=1.0 e=1.0 n= 8 |X|=  256 c~1.09 sharp=4 | W: expw>=    1.0 frac=    5.0 greedy=     6 bestfirst=    12 | H: kbf=  10 | B: kbf=  11 | M=36 valid H/B=5/5 of 5  [101s]

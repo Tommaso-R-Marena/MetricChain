@@ -104,14 +104,14 @@ ENG-RES-0007, THY-RES-0001.
   `3, 9, 27, 79, 233, …, 738 087 517, 2 139 332 335`; classes `2, 4, 7, 13, 22, …, 1 911, 2 328`.  Run time
   323 s for `N = 23`.  **Not replicated:** `N = 24 … 27` (`6·10⁹ … 1.5·10¹¹` conformations) — those four
   tables I only read; everything below that uses them says so.
-* **[N, replicated]** `r2_enum bridge N`: `N = 3 … 23` (`2.6·10⁸` canonical bridges at 23; 24 running at
-  the time of writing).  The sets of realised `(h, g)`, `gmin`, `gmax` are identical to the authors'
-  stored tables for `N = 4 … 21` (their counts are exactly twice mine: a convention).
+* **[N, replicated]** `r2_enum bridge N`: `N = 3 … 24` (712 195 212 canonical bridges at 24 beads).  The
+  sets of realised `(h, g)`, `gmin`, `gmax` are identical to the authors' stored tables for
+  `N = 4 … 24`, all sizes they have (their counts are exactly twice mine: a convention).
 * **[N, replicated]** Exact covering numbers by integer programming (`r2_cover.py`, cover relations
   in exact integers): walks, `L = 1`, `ε = N/2`: `3, 5, 5, 8, 9, 11, 13` at `N = 8, 11, 12, 15, 18, 21, 23`
   (the report's "8 and 11 at 15 and 21 beads"; ENG-RES-0002's column); `N = 15`: `21` at `ε = 0`, `13` at
   `N/4`, `2` at `L = ⅕`, and `10` with the weighted norm of the coordinator's brief (D48 confirmed);
-  `N = 21`, `ε = N/4`: `19`.  Bridges: `5, 6, 8, 10, 11` at `N = 12, 15, 18, 21, 23` (`ε = N/2`) and
+  `N = 21`, `ε = N/4`: `19`.  Bridges: `5, 6, 8, 10, 11, 11` at `N = 12, 15, 18, 21, 23, 24` (`ε = N/2`) and
   `7, 11, 14, 17` at `N = 12, 15, 18, 21` (`ε = N/4`) — the table of S_REPORT §5.4.
 
 ### 3.2 Lemma 11.67 — proved
@@ -159,8 +159,8 @@ also on 3 000 random finite site sets.
 
   `δ_g = [b′ down]` without exception.  `δ₃ = 1` occurs (460 936 times for `N ≤ 13`): the constant is
   attained, contrary to what the quoted maxima `(0, 2, 4, 1)` suggest (minor finding m3).
-  Set-level check on the complete tables (`r2_bridge_tables.py`): condition (C) on 13 069 pairs of
-  points of `P_{N₁} × P_{N₂}` with `N₁ + N₂ + 3 ≤ 21`, condition (E) on 17 971 points: no failure.
+  Set-level check on the complete tables (`r2_bridge_tables.py`): condition (C) on 81 519 pairs of
+  points of `P_{N₁} × P_{N₂}` with `N₁ + N₂ + 3 ≤ 24`, condition (E) on 49 204 points: no failure.
 
 ### 3.4 Theorem 11.69 — proved; the Lean hypotheses versus the application
 
@@ -279,16 +279,18 @@ from below to a highest bead crosses an odd number of times; one changed site sp
 values of `j`).  (ii): "about two thirds of all directions" is `0.670` with the authors' measure on
 directions and `0.77` with two other natural ones (`r2_directions.py`) — measure-dependent, and it
 concerns directions with `u_g ≤ 0` only.  Evidence: `r2_walk_vs_bridge.py` reproduces the table of
-S_REPORT §5.4 entry by entry where I have data (`N ≤ 23` walks, `N ≤ 23` bridges), once the
+S_REPORT §5.4 entry by entry (`N ≤ 23` walks, `N ≤ 24` bridges, all own tables), once the
 lower-boundary distance is taken one-sided as in their code; walks(`N`) → bridges(`N+1`) is 3–6 units
-for `N = 11 … 22`.
+for `N = 11 … 23`.
 
 ### 3.9 The machine-checked part
 
-`R2Axioms.lean` (in my directory; `lake env lean`, nothing built): see `out/lean_axioms.txt` for the
-axioms of `SuperAdditive.hausdorff_limit`, `dist_limit_le`, `convex_limit`, `cover_sandwich`,
-`hasCover_sandwich`, `hasCover_upper_iff`, `hasCover_limit_point`, `not_hasCover_shifted`
-(result recorded in §6).
+**[V, checked]** `R2Axioms.lean` (in my directory; `lake env lean` from the repository root, nothing
+built, 2 min 23 s): `SuperAdditive.hausdorff_limit`, `SuperAdditive.dist_limit_le`,
+`SuperAdditive.convex_limit`, `SuperAdditive.cover_sandwich`, `hasCover_sandwich`, `hasCover_upper_iff`,
+`hasCover_limit_point`, `not_hasCover_shifted` exist in this checkout with the statements I read
+(printed in `out/lean_axioms.txt`) and depend on the axioms `propext`, `Classical.choice`, `Quot.sound`
+only.  So the abstract part is machine-checked as claimed; what it is applied to is §3.4.
 
 ### 3.10 New statements found during the review
 
@@ -317,9 +319,12 @@ packings stored in `out/rigorous_packing_*.txt`):
 | `(L, ε₁)` | report: lower bound for the liminf | this review |
 |---|---|---|
 | `(1, ½)` | 50 (52) | **≥ 116** |
-| `(1, ¼)` | 157 (162) | see §6 |
-| `(⅕, ½)` | 7 | see §6 |
-| `(⅕, ¼)` | 14 | see §6 |
+| `(1, ¼)` | 157 (162) | **≥ 451** |
+| `(⅕, ½)` | 7 | **≥ 8** |
+| `(⅕, ¼)` | 14 | **≥ 19** |
+
+(Greedy packings on grids; each is re-verified by the stand-alone checker
+`r2_rigorous_packing_verify.py` from the stored weights.  They are not optimal.)
 
 Hence `116 ≤ liminf_N N^P_cov(N/2) ≤ limsup ≤ 3 626` for all walks at `L = e = 1` (the first inequality
 also for bridges).  The proof uses Lemma 11.68, the abstract theorem (convexity, `β/M`), Proposition
@@ -481,9 +486,9 @@ exponential in `L·S_c·M/ε₁` is a heuristic [H], consistent with geometric g
 |---|---|---|
 | class tables of walks, `N = 4 … 23` | **replicated** (identical to engineering) | `r2_enum.c`, `cmp_tables.py`, `out/walk_N*.txt` |
 | class tables of walks, `N = 24 … 27` | **read only** (too large for my budget: `6·10⁹ … 1.5·10¹¹`) | — |
-| bridge tables `N = 4 … 21` (authors') | **replicated** | `r2_bridge_tables.py` |
+| bridge tables `N = 4 … 24` (authors') | **replicated** (all sizes) | `r2_bridge_tables.py` |
 | covering numbers 8, 11 (15, 21 beads); 10 with the wrong norm | **replicated** | `r2_cover.py`, `out/cover.txt` |
-| covering number 15 at 27 beads | see below | `out/cover.txt` |
+| covering numbers 15, 2, 3 at 27 beads (`(1,½)`, `(⅕,½)`, `(⅕,¼)`) | **re-solved from the engineering table** (my integer programme: 15, 2, 3, proved optimal; the table itself is read only) | `out/cover.txt` |
 | Lemma 11.67 on all walks `n ≤ 9` | **replicated** (and extended to `N = 12`) | `r2_lemma67.py` |
 | Lemma 11.68 numerically (48 058 / 90 688 concatenations) | **replicated and extended** (`3.1·10⁸`, exhaustive) | `r2_concat.c`, `out/concat_*.txt` |
 | constants `(1, 9, 14)`, `60`, `28`, `168`, `R = 36` | **re-derived** | `r2_concat_bounds.py` |
@@ -499,12 +504,12 @@ exponential in `L·S_c·M/ε₁` is a heuristic [H], consistent with geometric g
 | the nine finite bridges at box 64 | same (all nine identical) | `out/witness_nine_W64.txt` |
 | surface law, `k_N ∈ [1.71, 1.86]`, 38 % at 27 beads | **replicated** (`N ≤ 23` own tables; 24–27 engineering) | `r2_tables.py` |
 | hairpins, `D − 14d ∈ [−15, −5]` | **replicated** (`a, b ≤ 40`) | `r2_flip.py` |
-| walks against bridges (distances 3–6) | **replicated** for `N = 8 … 22` | `r2_walk_vs_bridge.py` |
+| walks against bridges (distances 3–6); covering numbers of bridges | **replicated** for `N = 8 … 23` | `r2_walk_vs_bridge.py`, `out/cover.txt` |
 | "two thirds of all directions" | **replicated** (`0.670`) with the authors' measure | `r2_directions.py` |
 | periodic chain systems (`1.2·10⁹` systems, 5 680 densities, hull `2.22`), `γ_LP` values, "seven vertices not attained" | **read only** | — |
 | estimates of the plateau (150–350, …) | **read only** | — |
 | off-lattice estimates (S_REPORT §7.3) | **read only** | — |
-| Lean: the abstract theorems compile and their axioms | see below | `R2Axioms.lean`, `out/lean_axioms.txt` |
+| Lean: the eight cited declarations, their statements and axioms | **checked** (standard axioms only) | `R2Axioms.lean`, `out/lean_axioms.txt` |
 
 Pending entries are completed in §6.1.
 

@@ -219,6 +219,7 @@ noncomputable def surv (P : X → X → ℝ) (A : Finset X) : ℕ → X → ℝ
   | 0, _ => 1
   | t + 1, x => ∑ y ∈ A, P x y * surv P A t y
 
+omit [Fintype X] [DecidableEq X] in
 theorem surv_nonneg (P : X → X → ℝ) (hP0 : ∀ x y, 0 ≤ P x y) (A : Finset X) :
     ∀ t x, 0 ≤ surv P A t x := by
   intro t
@@ -231,6 +232,7 @@ theorem surv_nonneg (P : X → X → ℝ) (hP0 : ∀ x y, 0 ≤ P x y) (A : Fins
     simp only [surv]
     exact Finset.sum_nonneg fun y _ => mul_nonneg (hP0 x y) (ih y)
 
+omit [DecidableEq X] in
 theorem surv_le_one (P : X → X → ℝ) (hP0 : ∀ x y, 0 ≤ P x y) (hP1 : ∀ x, ∑ y, P x y = 1)
     (A : Finset X) : ∀ t x, surv P A t x ≤ 1 := by
   intro t
@@ -361,6 +363,42 @@ theorem trap_certificate (P : X → X → ℝ) (w : X → ℝ) (A W : Finset X)
     _ ≤ ∑ x ∈ A, w x - T * (∑ x ∈ Aᶜ, ∑ y ∈ A, w x * P x y) := by linarith
     _ ≤ ∑ x ∈ A, w x * surv P A T x := key
 
+/-- **Rate certificate, weighted form.**  `κ x` bounds the one-step probability of entering `A`
+from `x ∉ A` (for a Metropolis sampler with uniform proposals among `deg` single-site moves,
+`κ x = (number of neighbours of x in A) / deg`); `U` bounds the `κ`-weighted weight of the
+complement and `Lo > 0` bounds the weight of `A` from below.  Then the chain started from the
+stationary law restricted to `A` is still in `A` after `T` steps with probability at least
+`1 - T * U / Lo`. -/
+theorem trap_certificate_weighted (P : X → X → ℝ) (w κ : X → ℝ) (A : Finset X)
+    (hP0 : ∀ x y, 0 ≤ P x y) (hP1 : ∀ x, ∑ y, P x y = 1) (hw0 : ∀ x, 0 ≤ w x)
+    (hstat : ∀ y, ∑ x, w x * P x y = w y)
+    (hκ : ∀ x ∈ Aᶜ, ∑ y ∈ A, P x y ≤ κ x)
+    (U Lo : ℝ) (hU : ∑ x ∈ Aᶜ, w x * κ x ≤ U) (hLo : Lo ≤ ∑ x ∈ A, w x) (hLo0 : 0 < Lo) (T : ℕ) :
+    1 - T * (U / Lo) ≤ (∑ x ∈ A, w x * surv P A T x) / (∑ x ∈ A, w x) := by
+  have hflux : ∑ x ∈ Aᶜ, ∑ y ∈ A, w x * P x y ≤ ∑ x ∈ Aᶜ, w x * κ x := by
+    apply Finset.sum_le_sum
+    intro x hx
+    rw [← Finset.mul_sum]
+    exact mul_le_mul_of_nonneg_left (hκ x hx) (hw0 x)
+  have hflux0 : 0 ≤ ∑ x ∈ Aᶜ, ∑ y ∈ A, w x * P x y :=
+    Finset.sum_nonneg fun x _ => Finset.sum_nonneg fun y _ => mul_nonneg (hw0 x) (hP0 x y)
+  have key := trap_survival P w A hP0 hP1 hw0 hstat T
+  have hU0 : 0 ≤ U := le_trans hflux0 (le_trans hflux hU)
+  have hmpos : 0 < ∑ x ∈ A, w x := lt_of_lt_of_le hLo0 hLo
+  have hT0 : (0 : ℝ) ≤ (T : ℝ) := Nat.cast_nonneg T
+  have h5 : U ≤ U / Lo * ∑ x ∈ A, w x := by
+    rw [div_mul_eq_mul_div, le_div_iff₀ hLo0]
+    exact mul_le_mul_of_nonneg_left hLo hU0
+  have h6 : (T : ℝ) * U ≤ (T : ℝ) * (U / Lo * ∑ x ∈ A, w x) :=
+    mul_le_mul_of_nonneg_left h5 hT0
+  have h7 : (T : ℝ) * (∑ x ∈ Aᶜ, ∑ y ∈ A, w x * P x y) ≤ (T : ℝ) * U :=
+    mul_le_mul_of_nonneg_left (le_trans hflux hU) hT0
+  rw [le_div_iff₀ hmpos]
+  calc (1 - T * (U / Lo)) * ∑ x ∈ A, w x
+      = ∑ x ∈ A, w x - T * (U / Lo * ∑ x ∈ A, w x) := by ring
+    _ ≤ ∑ x ∈ A, w x - T * (∑ x ∈ Aᶜ, ∑ y ∈ A, w x * P x y) := by linarith
+    _ ≤ ∑ x ∈ A, w x * surv P A T x := key
+
 end Trap
 
 end MetricChain.Kinetics
@@ -376,3 +414,4 @@ end MetricChain.Kinetics
 #print axioms MetricChain.Kinetics.certified_trap_height
 #print axioms MetricChain.Kinetics.trap_survival
 #print axioms MetricChain.Kinetics.trap_certificate
+#print axioms MetricChain.Kinetics.trap_certificate_weighted
