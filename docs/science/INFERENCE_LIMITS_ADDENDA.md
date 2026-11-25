@@ -741,9 +741,18 @@ exact identified sets as functions of `K` and `τ` are computations, not theorem
 
 *Added at checkpoint 26; part (c) (Lemma A16.5, Theorem A16.6) added at checkpoint 28 —
 numbering: Propositions A16.1, A16.3, Corollary A16.2, Conjecture A16.4 keep their
-numbers.  Everything here is the coordinator's; nothing has been read by a second
-party.  Scripts: `experiments/science/pi_inference/plateau_twin_check.py` (30 s),
-`terrace_twin_explore.py` (1 min), `energy_isoperimetry_check.py` (4 min).*
+numbers.  Everything here is the coordinator's.  **Refereed at checkpoint 35 by workstream
+R8** (`docs/science/workstreams/R8_REPORT.md`; linked correction of the two messages that
+carried it: SCI-MSG-0016): *no numbered statement false*; A16.1, A16.2, A16.3 and Lemma
+A16.5 proved (the lemma also checked over general members and its algebraic core
+machine-checked, `experiments/science/ws_R8/A16Core.lean`); **Theorem A16.6 (ii)–(iii) said
+more than was proved and is proved after the repairs R8.2–R8.5**, entered below and
+marked "R8".  Sentences changed by the referee's findings carry the finding's number;
+what the text said before is in SCI-MSG-0016 and in the history of this file.  Scripts:
+`experiments/science/pi_inference/plateau_twin_check.py` (13 s; the version committed
+before checkpoint 35 aborted before the twins — `DEAD_ENDS.md` SD39),
+`terrace_twin_explore.py` (1 min), `energy_isoperimetry_check.py` (4 min); the referee's own:
+`experiments/science/ws_R8/`.*
 
 *Setting and conventions.*  Cube `Q_n`, zero known part, class `|g(x) − g(y)| ≤ c·d_H(x,y)`,
 `u = βc`; units `β = 1` in proofs.  `σ = σ_u = 1/(1+e^u)`, `h` the binary entropy,
@@ -766,7 +775,11 @@ entropies.
 ### (a) The datum alone
 
 **Proposition A16.1 (entropy bracket) [P; checked by enumeration on 400 random members of the
-class, `n ≤ 11`].**  For every `g` of the class, `n·h(σ_u) ≤ S(μ_g) ≤ n ln 2`, that is
+class, `n ≤ 11`; refereed — R8: 576 further members and an adversarial minimisation of the
+entropy over the class.  The lower end is not new here: it is Theorem 2(d) of
+`INFERENCE_LIMITS.md`, and in other words the entropy bound of a strong Santha–Vazirani
+source (R8, F8; **[K]** at abstract level, see the R8 report §6).  What this addendum adds
+is its use with the datum].**  For every `g` of the class, `n·h(σ_u) ≤ S(μ_g) ≤ n ln 2`, that is
 
     n·h(σ_u) − βU  ≤  ln Z_g  ≤  n ln 2 − βU,          width  n·a(u).
 
@@ -828,7 +841,10 @@ centre `a′` with `|d_H(a₀,a′) − n/2| ≤ √(n ln n)` and a real `κ ∈
     T_κ(x) = −u·min(κ, (r₂ − d_H(x,a′))₊),        g′_κ = min(g₀, T_κ)
 
 (a truncated cone: a plateau of depth `uκ` and radius `r₂ − κ`, with walls of slope `u`).
-Then for all large `n`:
+Then for all large `n` — precisely (R8.1, which writes out the deep end of the proof):
+whenever `|U₀| > 1` and the twin's full cone overlaps the visible basin in a weight
+fraction below `1/r₂`, a condition that needs no dominance and holds for the stated
+centres from `n` of a few hundred to a few thousand depending on `u`:
 (a) there is `κ* ∈ ((|U₀| − 1)/u, r₂)` with `U_{g′_{κ*}} = U₀` **exactly**;
 (b) `ln Z_{g′_{κ*}} − ln Z_{g₀} ≥ ln|B(n, ⌊r₂ − (|U₀| − 1)/u⌋)| − S₀ − 1 − o(1)`;
 (c) `g′_{κ*} = g₀` outside `B(a′, r₂ − 1)`.
@@ -863,7 +879,7 @@ is above the bound of (b) by one to three and a half nats; the plateau edge `(r�
 agrees with `σ₂(gap/n)` and `r₂/n` with `ρ₁ − σ_u + σ₂` to a few sites; centres at distance
 `0.45n`, `0.5n`, `0.55n` give identical numbers.  Examples: `n = 2000`, `u = 1`, `ρ₁ = ρ₀ + 0.01`,
 gap `0.050n`: `r₂ = 899`, `κ* = 244.57`, against the radius `860` of the smallest dip that
-does the same without the datum; `n = 600`, `u = 4`, gap `0.30n`: `r₂ = 190` against `147`.
+does the same without the datum; `n = 600`, `u = 4`, `ρ₁ = ρ₀ + 0.03`, gap `0.30n`: `r₂ = 190` against `147`.
 
 **Exponents per site** (`h − ε₁`: equal twins; plateau: A16.3; last column: no datum):
 
@@ -889,15 +905,23 @@ The step that was missing at checkpoint 26 — "a tail lemma with an energy cons
 a short proof for the flat reference, and that is enough to make the bound of A16.3 exact
 at the instance where it was proved.
 
-**Lemma A16.5 (isoperimetry with an energy constraint) [P; brute force: all 65 534 supports
-in `Q_4`, 8 000 random supports in `Q_5`, `Q_6`, 1 398 random members with dips and hills,
-`n ≤ 10`].**  Units `β = 1`.  Let `U₀ ≤ 0` and `N = |B(n, R)|`, `R < n/2`.  Among all members `g` of the
+**Lemma A16.5 (isoperimetry with an energy constraint) [P; refereed — R8: proved.  Evidence:
+the Harper step on all 65 534 supports of `Q_4` and 8 000 random supports of `Q_5`, `Q_6` with
+the clipped-level profile on each (the coordinator's script — it tests that step, not
+the lemma: R8, O4); the lemma over *general* members by a convex programme on every
+support of `Q_3`, `Q_4` and an exhaustive grid of `2.8·10⁸` Lipschitz functions on `Q_4`
+(`ws_R8/r8_03_isoperimetry.py`); algebraic core **[V]** (`ws_R8/A16Core.lean`:
+`sum_le_sum_F`, `F_mono`, `F_eq_plateau`, `plateau_optimal`; Harper's step and the existence
+of the level are not formal)].**  Units `β = 1`.  Let `U₀ ≤ 0` and `N = |B(n, R)|` (the
+hypothesis `R < n/2` of the first version is not used: R8, F6).  Among all members `g` of the
 class that vanish outside a set of at most `N` points and have mean energy `U_g ≥ U₀`, the
 **plateau on a ball**
 
     g_pl(x) = −min(c*, u·(R + 1 − |x|)₊),        c* the level with U_{g_pl} = U₀
 
-(the full cone, `c* = ∞`, if even that has mean energy `≥ U₀`) has the largest partition
+(the level exists and is unique: with `P` the top of the plateau, `dU/dc = −μ(P)(1 + c + U) < 0`
+and `d ln Z/dc = μ(P)`, so `d ln Z^{pl}/dU₀ = −1/(1 + c* + U₀) ∈ [−1, 0)` — R8, F6; the full cone,
+`c* = ∞`, if even that has mean energy `≥ U₀`) has the largest partition
 function: `Z_g ≤ Z_{g_pl} =: Z^{pl}(R, U₀)`.  For sizes that are not ball sizes, replace the
 ball by the complement of an initial segment of the simplicial order.
 *Proof.*  Write `t = e^{−g}`.  The constraint `U_g ≥ U₀` is `φ(t) := Σ t ln t + U₀ Σ t ≤ 0`, a
@@ -908,8 +932,11 @@ ball by the complement of an initial segment of the simplicial order.
 `F_η(ρ) := max{f_η(t) : e^{−uρ} ≤ t ≤ e^{uρ}}` — **nondecreasing in `ρ`** (a maximum over a
 growing interval).  By Harper's theorem the numbers `#{x : ρ(x) ≥ k}` are, for all `k`
 simultaneously, largest when the support is the ball; hence `Z_g ≤ Σ_x F_η(R + 1 − |x|)` for
-every `η ≥ 0`.  For the ball the maximiser inside `F_η` is `min(t*_η, e^{uρ})`, i.e. the plateau
-at the level `c = ln t*_η`, which is a member of the class.  Choose `η = 1/(c* + U₀ + 1)` (positive,
+every `η ≥ 0`.  For the ball, and for the `η` chosen next (for a general `η` with `t*_η < 1` the
+maximiser would be a hill, `max(t*_η, e^{−uρ})` — R8, F6), the maximiser inside `F_η` is
+`min(t*_η, e^{uρ})`, i.e. the plateau at the level `c = ln t*_η`, which is a member of the class.
+(The Lipschitz cone is used only for the pointwise bounds `t(x) ∈ [e^{−uρ(x)}, e^{uρ(x)}]`: the lemma
+holds for the larger set `{g : |g(x)| ≤ u·dist(x, supp^c)}` — R8, machine-checked in that form.)  Choose `η = 1/(c* + U₀ + 1)` (positive,
 because a plateau at level `c` has mean energy `≥ −c`, so `c* ≥ |U₀|`): then
 `Σ_x F_η = Z_{g_pl} − ηφ(t_pl) = Z_{g_pl}`.  If the full cone is feasible take `η = 0`.  ∎
 *Remarks.*  (1) For a given support the optimal profile is "the deepest dip, flooded up
@@ -923,14 +950,18 @@ for a member with weights `w`, datum `U`, a level `t` and `D = {w > t}`, for eve
     Z  =  Σ_x f_η(w(x))  ≤  Σ_{x∉D} f_η(w(x))  +  Σ_{x∈D} max{ f_η(s) : t ≤ s ≤ t·e^{u·dist(x,Dᶜ)} },
 
 (`f_η` with `U₀ = U`; the first equality because the constraint holds with equality), and the
-last sum is at most its value for a ball of the size of `D`.  The first sum is an average
+last sum is at most its value for a ball of the size of `D` (**R8, F6:** as stated when `|D|`
+is known exactly; a sampler knows an upper bound on `|D|` only, and enlarging the ball is
+harmless only for `η` with `f_η(t) ≥ 0`, i.e. `η(U + ln t) ≤ 1` — otherwise subtract
+`f_η(t)(|B| − |D|)`).  The first sum is an average
 of a bounded function of the weights below the level, which sampling estimates.  So the
 datum turns plain Monte Carlo into a bracket procedure on the whole class; its
 worst-case exponent has not been evaluated (the guess at the end of this addendum is
 for it).
 
 **Theorem A16.6 (the complexity at the visible basin, with the datum) [P, given A16.1, A16.3,
-A16.5; exact sums].**  Let `g₀` be the visible basin of Proposition A16.3 (`ρ₀ < ρ₁`), `V` its
+A16.5 and — for (ii), (iii) — the referee's repairs R8.2–R8.5, entered below; (i), (iv)
+proved as first written; exact sums].**  Let `g₀` be the visible basin of Proposition A16.3 (`ρ₀ < ρ₁`), `V` its
 support, `U₀ = U_{g₀}`.
 (i) *Every alternative is bounded.*  If `g′` is a member of the class with `U_{g′} = U₀` that
 agrees with `g₀` outside a set `D` with `|D| + |V| ≤ |B(n, R)|`, then
@@ -939,19 +970,41 @@ agrees with `g₀` outside a set `D` with `|D| + |V| ≤ |B(n, R)|`, then
 
 the left side by the entropy bracket (it is `o(1)`), the right by Lemma A16.5 (`g′` vanishes
 outside `D ∪ V`).
-(ii) *An algorithm.*  Draw `M = ⌈2ⁿ ln(1/δ)/|B(n,R)|⌉` uniform points.  If all values equal one
-number `v`, compute from the datum the bracket
-`[max(ln(2ⁿ − |B(n,R)|), n·h(σ_u) − (U − v)), ln Z^{pl}(R, min(U − v, 0))]` for `ln Z + v` and return its
-midpoint if its width is at most `ε`; in every other case run any class-correct
-procedure.  This algorithm uses no hint, is correct on the whole class with probability
-`1 − δ(1+o(1))` (an instance that is not constant outside `|B(n,R)|` points shows two
-different values, except with probability `δ`), and at `g₀` it stops after the `M` samples
-with probability `1 − e^{−Ω(n)}` whenever `G(R) + o(1) ≤ ε`.
-(iii) *It matches.*  The plateau twin of radius `r₂` has `ln Z′ − ln Z₀ = G(r₂ − 1)` up to
-`10⁻³` in all eight exact cases (e.g. `100.036` against `100.036` at `n = 2000`), so with
-Proposition A16.3: **with the datum, the number of evaluations needed at `g₀` for accuracy
-`ε` is `Θ(2ⁿ/|B(n, R(ε))|)`, `G(R(ε)) ≈ ε`** — lower and upper bound differ by the factor
-`ln(1/δ)/(1−2δ)` and one unit of the radius.  Per site: `ln 2 − h(ρ₁ − σ_u + σ₂(ε₁))`.  Without
+(ii) *An algorithm* (as corrected after the referee's findings F1, F3; the bracket is for
+`ln Z + v`, with the gauge `v` — the form printed in SCI-MSG-0013 dropped the gauge and is
+wrong at constant instances `g ≡ v ≠ 0`: F4).  Draw one point and read its value `v`; let
+`R` be the largest radius at which the bracket
+`[max(ln(2ⁿ − |B(n,R)|), n·h(σ_u) − (U − v)), ln Z^{pl}(R, min(U − v, 0))]` for `ln Z + v` has width at most `ε`
+(R8.5: so `R` comes from the datum and one sample, not from a hint); draw
+`M = ⌈2ⁿ ln(1/δ)/|B(n,R)|⌉` uniform points; if all values equal `v`, return the midpoint; in
+every other case evaluate everything.  This algorithm is correct on the whole class
+with probability at least `1 − δ·e^{|B(n,R)|/2ⁿ}` (an instance that is not constant outside
+`|B(n,R)|` points shows two different values except with that probability; the fallback
+is exact), and at `g₀` it stops after the samples **with probability `1 − e^{−Ω(n)}`** whenever
+`G(R) + o(1) ≤ ε`.  **Its expected cost at `g₀` is not of that order** (F1): the samples meet
+the visible basin with a small probability, and then everything is evaluated.
+*A tolerant variant with the cost in expectation* (R8.4 **[P]**, constants not optimised,
+not simulated): accept if all but at most `k₀` of `M′ = ⌈6(k₀ + ln(1/δ))·2ⁿ/|B(n,R)|⌉` samples show
+one value; it is class-correct, and at `g₀` its expected cost is at most `M′ + 1` for a
+constant `k₀ ≈ ln 2/(h(R/n) − h(ρ₁))`.
+(iii) *It matches* (rewritten after the referee's findings F1, F2: the first version
+rested on eight numerical coincidences "gap `= G(r₂ − 1)`", and compared a lower bound on
+the expectation with an upper bound that holds with high probability).  With
+`g″ = T_{κ*}` alone on the flat background and `U″` its mean energy,
+
+    G(r₂ − 1) − (U″ − U₀)₊  ≤  ln Z′ − ln Z₀  ≤  G(r₂)
+
+(R8.3 **[P]**, re-derived by the coordinator: `g″` is the plateau on `B(a′, r₂−1)` at its own
+energy; `g′ ≤ g″` pointwise; `|d ln Z^{pl}/dU₀| ≤ 1`; the right end is (i).  `U″ − U₀` is
+exponentially small at extensive accuracy; equality with `G(r₂ − 1)` holds to `10⁻¹¹` in the
+exact cases with extensive gaps and fails by `3·10⁻⁴ … 2·10⁻²` at gaps of 4–8 nats).  And for
+every class-correct algorithm and every `m` (R8.2 **[P]**, the quantile form of the packing
+bound): `P_{g₀}(#evaluations > m) ≥ (1 − 2δ)(1 − 2/n²) − m·|B(n, r₂ − 1)|/2ⁿ`.  Hence: **with the
+datum, at `g₀`, the number of evaluations needed for accuracy `ε` is `2ⁿ/|B(n, R(ε))|` up to a
+constant factor and at most two units of the radius, `G(R(ε)) ≈ ε` — in the quantile sense
+(more than `½(1−2δ)·2ⁿ/|B(n, R(ε)+2)|` with probability `≥ ½(1−2δ) − o(1)` for every algorithm;
+at most `ln(1/δ)·2ⁿ/|B(n, R(ε))|` with probability `1 − e^{−Ω(n)}` for the algorithm of (ii)), and
+in expectation for its tolerant variant.**  Per site: `ln 2 − h(ρ₁ − σ_u + σ₂(ε₁))`.  Without
 the datum the same packing argument with cone dips (the smallest one that matters at
 this instance has radius `(ρ₁ + ε₁/u)n`) gives at least `ln 2 − h(ρ₁ + ε₁/u)`, which is larger:
 **at this instance the datum lowers the cost at every extensive accuracy**, and changes
@@ -962,14 +1015,17 @@ bracket in (ii) depends on the instance through its datum only; with `e = |U −
 `n·min(h(R/n − e) − h(σ_u), ue + h(R/n − e) − ln 2)₊ + o(n)`, largest at `e = ρ₀ − σ_u` — the energy of
 a basin at threshold dominance.
 
-*Checks* (`energy_isoperimetry_check.py`, four minutes): the lemma as stated above; and
-`G(r₂ − 2) < ` gap of the twin `= G(r₂ − 1) < G(r₂)` in all eight cases.
+*Checks* (`energy_isoperimetry_check.py`, four minutes): the Harper step of the lemma; and
+`G(r₂ − 2) < ` gap of the twin `≈ G(r₂ − 1) < G(r₂)` in all eight cases (to `10⁻³`; the exact
+relation is R8.3).  The referee's: `ws_R8/r8_03_isoperimetry.py` (the lemma over general
+members), `r8_04_theorem166.py` (the cost bookkeeping), `r8_08_matching.py` (R8.3; re-run by
+the coordinator, output identical).
 
 ### (d) What is known, and a conjecture
 
     bounded accuracy:            θ_U = h                               (A12(c); the datum is worth nothing)
     0 < ε₁ < ε₁ᶜ:                ln 2 − h(ρ₀ − σ_u + σ₂(ε₁))  ≤  θ_U(ε₁)  ≤  ln 2 − h(ρ₀ + ε₁/u)
-                                 (the lower value is the exact cost at the threshold basin: A16.6)
+                                 (the lower value is the cost exponent of the basins `ρ₁ ↓ ρ₀`: A16.6)
     ε₁ᶜ ≤ ε₁ < a(u):             0  ≤  θ_U(ε₁)  ≤  ln 2 − h(ρ₀ + ε₁/u)
     a(u) ≤ ε₁ < ln cosh(u/2):    θ_U = 0  <  θ_hint(ε₁)                (A16.2; the datum is worth everything)
 
@@ -990,23 +1046,47 @@ family).  (iii) On the wall of the visible basin, which is maximally steep, a di
 contain with each of its points everything farther out, and its depth at a point is at
 most `2u` times the number of that point's own flips that must be undone to leave the
 dip; the simple dips there have depth `O(1)`.  We found no construction on a slope that
-helps, and have no proof that none exists.  *What a proof needs:* a
+helps, and have no proof that none exists.  (iv) **The referee's attempts to refute it
+(R8 report §3) [N, H]:** five families at the exponential scale (soft basins and global
+tilts; a terrace of any depth; products of a flat block and a cone block; exponentially
+many visible basins; "egg cartons" `u·dist(x, C)` for a code `C`) — none beats the plateau
+twin on the flat background, and each family's optimum degenerates to it; five explicit
+pairs with exact sums on non-flat landscapes at `n = 600` (on a global tilt a single
+query far uphill finds the twin: a slope is a direction from which a hidden state is
+visible); and a "column bound" in the small-slope limit — whatever the visible
+landscape, a twin hidden in a fresh direction is bounded by `θ ≤ (u²/8)(√(1 − ε₁/a) − ½)²`,
+which is the plateau value in that limit **[H: a Laplace-scale argument in a limit model]**.
+**Not excluded:** landscapes with exponentially many prepared sites at several levels;
+twins that are not single-level plateaus on a non-flat background; and **the interval
+`ε₁ᶜ ≤ ε₁ < a(u)`, where the conjecture says the exponent is zero and there is neither an
+algorithm for general instances nor a twin** — the referee has no evidence either way
+there, and neither have we.  *What a proof needs:* a
 tail lemma with an energy constraint — the largest excess of a modification supported
 on a set of given measure **whose excess has a prescribed mean energy** — for an
 arbitrary reference instance; equivalently, the largest entropy gain at fixed mean
 energy.  The unconstrained lemma is the theory report's Lemma 11.62.
 
-*For non-adaptive algorithms [H, exponential-scale reasoning, not worked out].*  There the
-flat mask is not the hardest instance with the datum: on a cone the unexplored ball
-around the apex can hold either the truncated cone or a displaced inner cone with the
-same mean energy, and the same counting gives `θ_na^U(ε₁) = θ_na(u·(σ₂(ε₁) − σ_u))` — the datum
-acts as an amplification of the accuracy, from `ε₁` to `u(σ₂(ε₁) − σ_u) ≥ ε₁`, with `θ_na^U(0⁺) = a`
-unchanged and `θ_na^U = 0` from `ε₁ᶜ` on.  A guess to be tested, not a claim.
+*For non-adaptive algorithms [the lower bound now **P** at sketch level with exact pairs —
+R8.6; equality open].*  There the flat mask is not the hardest instance with the datum:
+on a cone the unexplored ball around the apex can hold either the truncated cone or
+the cone raised by a constant under a plateau ring, with the same mean energy (the
+first version said "a displaced inner cone": a displaced one is a member only when
+raised by at least `u` times the displacement and gains nothing — R8, F9).  The pair
+exists for every radius and was constructed exactly in seven cases; with the averaging
+argument of the theory report's Theorem 11.45(a) it gives
+**`θ_na^U(ε₁) ≥ θ_na(u·(σ₂(ε₁) − σ_u))`** — the datum acts at best as an amplification of the
+accuracy, from `ε₁` to `u(σ₂(ε₁) − σ_u) ≥ ε₁`, with `θ_na^U(0⁺) = a` unchanged and the bound zero
+from `ε₁ᶜ` on.  Whether this is the exponent ("`=`") is open: the datum-assisted bracket of
+remark (4) meets it within 0.5–2.5 sites on six radial families at `n ≤ 400`, the worst
+instances being the two members of the pair; the worst case over the class was not
+evaluated.
 
 *Not done.*  The upper bound for the whole class; the plateau twin against the marginal oracle (symmetrise
 by a code as in Corollary R6′ — expected to go through, not written); a field; a
 tolerance on the datum (as in the referee's remark, any tolerance makes the exact root
-unnecessary); a Lean check of the three finite inequalities used.
+unnecessary); a Lean check of the three finite inequalities used (the algebraic core of
+A16.5 is now formal, `ws_R8/A16Core.lean`; R8.1 and R8.3 are not); a simulation of the
+algorithm of A16.6 (ii) and of its tolerant variant (they were analysed, never run).
 
 *Reading [H].*  A calorimetric mean energy turns a free-energy question into an entropy
 question, and the class — a bound on how much one flip can change the energy — bounds

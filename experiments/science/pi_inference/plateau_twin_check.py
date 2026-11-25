@@ -185,7 +185,15 @@ if __name__ == "__main__":
     for u in (0.25, 0.5, 1.0, 2.0, 4.0, 8.0):
         sigma = 1/(1 + math.exp(u)); a = math.log(2) - h(sigma); t = math.tanh(u/2)
         klr = 0.5*math.log(1/(2*sigma)) + 0.5*math.log(1/(2*(1 - sigma)))
-        ser = sum(t**(2*k)*(k - 1)/(k*(2*k - 1)) for k in range(2, 4000))
+        # the series converges like t^{2k}/(2k); at u = 8 (t = 0.99933) 4000 terms are not enough -- the
+        # first committed version truncated there, failed the assertion below and never reached the
+        # twins (found by the referee, workstream R8, finding F7).  Sum until the tail bound is negligible.
+        ser = 0.0; k = 2
+        while True:
+            term = t**(2*k)*(k - 1)/(k*(2*k - 1))
+            ser += term
+            if term/(1 - t*t) < 1e-13: break      # geometric bound on the remaining tail
+            k += 1
         rho0 = math.log(2/(1 + math.exp(-u)))/u
         assert abs(klr - math.log(math.cosh(u/2))) < 1e-12 and abs((klr - a) - ser) < 1e-9
         print(f"#   u={u}: a={a:.6f}  ln cosh(u/2)={klr:.6f}  difference={klr - a:.6f} (series {ser:.6f})  "

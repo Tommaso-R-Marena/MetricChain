@@ -723,3 +723,37 @@ profile and the gauche count, and its support function is the ground-state energ
 * **Replication.**  Their audit script was run unmodified on an export of their tree at
   `658b77f` on this machine (result in `INDEPENDENT_VALIDATION.md` §1.4).
 
+### Cycle 29 — our own theory under a hostile referee; their audit on our machine (checkpoint 35)
+
+* **Workstream R8 reported** on addendum A16, which had been the coordinator's alone.
+  The brief was to break it.  Outcome: every numbered statement stands; the lemma
+  (isoperimetry with an energy constraint) survived a brute force over *general* members
+  that the coordinator's own check had not attempted (it had assumed the form of the
+  optimiser on each support and so tested one step only), and its algebraic core is
+  now in Lean.
+* **What did not survive as written.**  "The exact cost at the visible basin": the
+  theorem compared a lower bound on an expected cost with an upper bound that holds
+  with high probability, and its matching step was eight numerical cases.  The referee
+  supplied the three missing statements (a quantile form of the packing bound; the
+  inequality `G(r₂−1) − (U″−U₀)₊ ≤ gap ≤ G(r₂)`; a tolerant test whose cost is bounded in
+  expectation).  The coordinator re-derived two of them.  The claim is now "up to a
+  constant and two units of the radius, in a quantile sense".
+* **Two faults of execution, both ours.**  A message printed the algorithm without its
+  gauge (wrong at constant instances).  A script cited as the reproduction of ten
+  results aborted at an assertion before reaching them; the committed log ended in a
+  traceback; the data file was from the previous run.  The data were right — the
+  regenerated file is identical — but the trail was broken.  All other logs of the
+  coordinator were scanned; a rule was added to the handoff.
+* **What the referee added.**  The class, in the weights, is a strong Santha–Vazirani
+  source, and the entropy bracket's lower end is its textbook bound (and our own
+  Theorem 2(d)); a proved lower bound for non-adaptive algorithms with the datum; a
+  serious attempt on the conjecture (five families, five exact pairs, a limit argument)
+  that failed to refute it and located where it is genuinely open: between `ε₁ᶜ` and `a(u)`,
+  where no twin exists and no algorithm is known.
+* **Linked correction** of SCI-MSG-0012 and -0013 sent as SCI-MSG-0016; addendum corrected
+  in place with every change marked; digest items 25 and 27 corrected with a note of
+  what they said.
+* **The theory division's audit at `658b77f` passed on this machine** (29 min 43 s): 60 Lean
+  files, 3474 declarations, 342 mutations (341 caught, one expected pass) with their new
+  per-selection baseline.  Their numbers, replicated.
+

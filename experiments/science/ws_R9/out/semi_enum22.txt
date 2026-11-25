@@ -187,3 +187,25 @@ N=19 bridges=4338769 bprime_up=3782284 topclean=3500422 botclean=4069300 clean=3
       head 0 tail 0: tried 4895254, NOT clean 1611739 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
       head 2 tail 1: tried 4895254, NOT clean 166508 ; cost min (0,0,0,0) max (1,5,8,1 | norm 36)
       [82.3 s]
+N=20 bridges=11995926 bprime_up=10464458 topclean=9664482 botclean=11251865 clean=9066451 | classes h: all=1070 clean=748 ; (h,g): all=5644 clean=3883
+      A-part max (d3,d8,d11,dg | norm) = (1,6,9,1 | 43), #(x,c1) with d3>=1: 61782 ; B-part max = (0,3,4 | 16)
+      head 5 tail 5: tried 13527394, NOT clean 0 ; cost min (0,0,0,0) max (1,7,10,1 | norm 48)
+      head 2 tail 3: tried 13527394, NOT clean 0 ; cost min (0,0,0,0) max (1,7,10,1 | norm 48)
+      head 1 tail 3: tried 13527394, NOT clean 345738 ; cost min (0,0,0,0) max (1,7,10,1 | norm 47)
+      head 2 tail 2: tried 13527394, NOT clean 92570 ; cost min (0,0,0,0) max (1,7,9,1 | norm 47)
+      head 0 tail 3: tried 13527394, NOT clean 838352 ; cost min (0,0,0,0) max (1,6,9,1 | norm 43)
+      head 3 tail 0: tried 13527394, NOT clean 3862912 ; cost min (0,0,0,0) max (0,3,4,0 | norm 16)
+      head 0 tail 0: tried 13527394, NOT clean 4460943 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 1: tried 13527394, NOT clean 467526 ; cost min (0,0,0,0) max (1,5,7,1 | norm 37)
+      [233.2 s]
+N=21 bridges=33195473 bprime_up=28977660 topclean=26766732 botclean=31130902 clean=25104120 | classes h: all=1328 clean=940 ; (h,g): all=7663 clean=5333
+      A-part max (d3,d8,d11,dg | norm) = (1,6,10,1 | 44), #(x,c1) with d3>=1: 171042 ; B-part max = (0,3,4 | 16)
+      [17.8 s]
+N=22 bridges=92121332 bprime_up=80457998 topclean=74224554 botclean=86400337 clean=69621633 | classes h: all=1617 clean=1162 ; (h,g): all=10190 clean=7161
+      A-part max (d3,d8,d11,dg | norm) = (1,6,10,1 | 44), #(x,c1) with d3>=1: 492590 ; B-part max = (0,3,4 | 16)
+      [49.2 s]
+# from-scratch profile checks: 18811481 ; O(n^2) brute-force checks: 18364
+# stored clean bridges with at most 0 beads: 0
+(S1) part 0/1: 0 ordered pairs of clean bridges (N1,N2 <= 0) concatenated from coordinates:
+     symmetry not unique: 0 ; not a self-avoiding lattice walk: 0 ; not a bridge: 0 ; (h,g) not exactly additive: 0 ; not clean: 0
+     O(n^2) brute-force profile checks on concatenations: 0   [0.0 s]

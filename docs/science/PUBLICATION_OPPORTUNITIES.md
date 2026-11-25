@@ -218,4 +218,16 @@ exponent irrelevant; constants in the limit shape.
   content only if a floor or a chi-square bound can be *proved* for a real energy term
   (P3).  Judged by the standard of §1: not a paper on its own; a section of P1's paper
   or of a methods note with the P2/P3 measurements.
+* *Checkpoint 35:* **our own candidate on thermodynamic data (addendum A16) has been
+  refereed internally.**  It stands, with its strongest sentence weakened: the cost at
+  the visible basin is determined up to a constant and two units of the radius in a
+  quantile sense, not "exactly".  For a publication the honest shape is: (i) the entropy
+  bracket and the window in which a calorimetric datum removes an exponential cost —
+  elementary, and partly a known bound under another name (Santha–Vazirani sources);
+  (ii) the plateau twin and the isoperimetric lemma with an energy constraint — short,
+  not found in print in three searches at snippet level, machine-checked in its
+  algebraic core; (iii) a conjecture that survived a serious attempt at refutation and
+  is open on a named interval.  This is a section of a paper on what data are worth
+  (P7), not a paper.  What would lift it: the lemma for a general reference instance,
+  or an algorithm with the datum below `a(u)` on the whole class.
 

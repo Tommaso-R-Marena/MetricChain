@@ -33,13 +33,13 @@ C5  product reference: D_p(pi_g||pi) against p K/8 and against p^2 K/(8(p-1))  [
     1200 random members; largest D_p/(pK/8):   p=1.0: 0.9894  p=1.01: 0.9893  p=1.5: 0.9807  p=2.0: 0.9759  p=3.0: 0.9780  p=6.0: 0.9473
                    largest D_p/(p^2K/(8(p-1))): p=1.01: 0.0098  p=1.5: 0.3269  p=2.0: 0.4880  p=3.0: 0.6520  p=6.0: 0.7894
     hill-climb on r (cube), objective D_p/(pK/8):
-      n=3, p=2.0, P(x_i=1)=0.5: best ratio found 0.97443
-      n=4, p=2.0, P(x_i=1)=0.5: best ratio found 0.97443
-      n=4, p=2.0, P(x_i=1)=0.2: best ratio found 0.63171
-      n=5, p=2.0, P(x_i=1)=0.5: best ratio found 0.97443
-      n=4, p=1.0, P(x_i=1)=0.5: best ratio found 0.98886
-      n=4, p=5.0, P(x_i=1)=0.3: best ratio found 0.61943
-      n=6, p=2.0, P(x_i=1)=0.5: best ratio found 0.97443
+      n=3, p=2.0, P(x_i=1)=0.5: best ratio found 0.999888  (50-digit re-evaluation: 0.999888, K = 0.001)
+      n=4, p=2.0, P(x_i=1)=0.5: best ratio found 0.999921  (50-digit re-evaluation: 0.999921, K = 0.001)
+      n=4, p=2.0, P(x_i=1)=0.2: best ratio found 0.938330  (50-digit re-evaluation: 0.938330, K = 4.22)
+      n=5, p=2.0, P(x_i=1)=0.5: best ratio found 0.999936  (50-digit re-evaluation: 0.999936, K = 0.001)
+      n=4, p=1.0, P(x_i=1)=0.5: best ratio found 0.999966  (50-digit re-evaluation: 0.999966, K = 0.00101)
+      n=4, p=5.0, P(x_i=1)=0.3: best ratio found 0.961467  (50-digit re-evaluation: 0.961467, K = 0.324)
+      n=6, p=2.0, P(x_i=1)=0.5: best ratio found 0.999947  (50-digit re-evaluation: 0.999947, K = 0.001)
     additive cube instance r = u|x|, u=0.3, n=4: D_2 = n ln(1+tanh^2(u/2)) = 0.087699;  K/4 = 0.090000;  K/2 = 0.180000
     additive cube instance r = u|x|, u=0.3, n=12: D_2 = n ln(1+tanh^2(u/2)) = 0.263096;  K/4 = 0.270000;  K/2 = 0.540000
 C6  T3 against the [0,1]-valued mean-estimation problem (X = e^{-(r-lo)} under the floor measure, mean m = Z(g)/Z(lo))

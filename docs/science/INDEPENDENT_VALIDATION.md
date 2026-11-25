@@ -112,23 +112,27 @@ decomposition at 23–24 torsions; CP-SAT's proofs; nine HiGHS-only optima; sing
 constants at 15–16 torsions and the envelope test; X-001; ENG-RES-0006 §2; the
 correctness of the mean-run evaluator (the algorithm's cost proof is SCI-REV-0007).
 
-### 1.4 The theory division's audit at its head `658b77f` (fourteenth checkpoint) — replication on this machine
+### 1.4 The theory division's audit at its head `658b77f` (fourteenth checkpoint) — passes on this machine
 
 | item | value |
 |---|---|
 | command | `bash scripts/audit_all.sh` (unmodified), default mode |
 | tree | `git archive 658b77f`, extracted outside the repository (no science files in it; nothing of the theory branch modified); Lean packages shared with our tree by a symbolic link (same `lean-toolchain`, `lake-manifest.json`, `lakefile.lean` as at `5ed4072` — checked with `git diff`) |
 | machine | the same cloud container as §1.1, 4 cores shared with six workstreams |
-| start (UTC) | 2026-11-25 23:23:53 |
+| start / end (UTC) | 2026-11-25 23:23:53 / 23:53:36 (29 min 43 s wall clock) |
+| result | **`AUDIT PASSED`**, exit code 0 |
 | self-test | planted violations detected; axiom-walk self-test ok |
 | Lean | **60 files, 32 393 lines; `Build completed successfully (8618 jobs)`**; forbidden-token scan: none |
 | axiom audit | **`AXIOM AUDIT OK: 3474 declarations`** use only `propext`, `Classical.choice`, `Quot.sound`; 412 headline theorems checked |
 | harness (quick mode) | **`ALL TESTS BEHAVE AS EXPECTED`** |
-| mutation tests, benchmarks, reference checker, conformance vectors, doc references | **still running when checkpoint 34 was committed** (the mutation stage: 342 mutations with a baseline run per selection); the result and the log are added at the next checkpoint |
-| log | `experiments/science/audit_replication/audit_all_658b77f.log` (added when the run has finished) |
+| mutation tests | **342 mutations: 341 caught, 1 expected pass, 0 not as expected**; 115 baseline runs of the unmutated harness (one per selection): all behave as expected — the check added by the theory division at this commit (its D55 item 12) |
+| benchmarks, reference checker, conformance vectors, doc references | pass (2 028 declarations indexed) |
+| log | `experiments/science/audit_replication/audit_all_658b77f.log` |
 
-The Lean numbers are those the theory division reports for this head in its status file
-(60 files; 3474 declarations).  New since our replication at `5ed4072`: four Lean files
+All numbers are those the theory division reports for this head in its status file
+(60 files; 3474 declarations; 342 mutations, 341 caught, one expected pass).  (Checkpoint
+34 was committed while the mutation stage was still running; this table was completed
+at checkpoint 35.)  New since our replication at `5ed4072`: four Lean files
 (among them `TwoRoundsExpected.lean`, which is our workstream R4's file adopted by them,
 and `Scattering.lean`, their machine-check of our Proposition A2.1) and the harness
 blocks XXII–XXIII, XIV.5, XX.5, XXI.6, DEAD.25–27.  *Kind of check:* a re-run of their
@@ -299,7 +303,7 @@ statements say (workstream R9 reads two of the new Lean files against the prose)
   Azuma; the truncation inequality `E|Â/A − 1| ≤ √(τ/M) + 2ν(dν/dQ > τ)`) before repeating
   the claim to the theory division in SCI-MSG-0011 §4.
 
-* **Own statements (addendum A16), author only:** entropy bracket — 400 random members of
+* **Own statements (addendum A16) — the author's checks (refereed since: see the next item):** entropy bracket — 400 random members of
   the class by enumeration (`n ≤ 11`), equality at the cone and at the zero residual to ten
   digits; the two relative entropies and their series to `10⁻⁹`; plateau twins — exact
   sums over the joint law of the two distances (overlapping supports), ten cases,
@@ -310,7 +314,26 @@ statements say (workstream R9 reads two of the new Lean files against the prose)
   pairs) and on 8 000 random supports of `Q_5`, `Q_6` against the plateau on the initial
   segment of the same size — no violation (largest `3·10⁻¹⁴`); 1 398 random members with
   dips and hills, `n ≤ 10`; Theorem A16.6(iii): `G(r₂−2) <` gap `= G(r₂−1) < G(r₂)` in eight
-  exact cases (`energy_isoperimetry_check.py`).  **No second reader.**
+  exact cases (`energy_isoperimetry_check.py`).  ~~No second reader.~~
+* **Addendum A16, refereed by workstream R8 (checkpoint 35; SCI-MSG-0016).**  Every step
+  re-derived by the referee; its own numerics with nothing imported from ours: 576
+  members and an adversarial entropy minimisation for A16.1; twelve own plateau twins
+  and our ten reproduced; **Lemma A16.5 over general members** (a convex programme with
+  rigorous LP bounds on every support of `Q_3`, `Q_4`, 650 random supports of `Q_5`, `Q_6`; an
+  exhaustive grid of `1.15·10⁷` + `2.77·10⁸` Lipschitz functions) — no violation; the
+  algebraic core in Lean (`ws_R8/A16Core.lean`).  Findings: Theorem A16.6 (ii)–(iii)
+  over-claimed and is repaired (R8.2–R8.5); one printed algorithm wrong without its
+  gauge; one script of ours aborted before its cited output.  *By the coordinator:* R8.2
+  (quantile form), R8.3 (`G(r₂−1) − (U″−U₀)₊ ≤ gap ≤ G(r₂)`: the three steps and the
+  derivative `d ln Z^{pl}/dU₀ = −1/(1+c*+U₀)`) and the counterexample to the printed bracket
+  re-derived; `A16Core.lean` compiled (exit 0, standard axioms, no `sorry`) and
+  `plateau_optimal` read against the lemma; `r8_07_deepend.py`, `r8_08_matching.py` re-run
+  from a scratch copy (output identical to the committed logs); our repaired
+  `plateau_twin_check.py` re-run to its end — the regenerated data identical to the
+  committed file in all 260 entries.  **Not re-run by the coordinator:** the referee's
+  brute force over general members (5 min), its conjecture families, its non-adaptive
+  bracket (29 min).  *Kind of check:* an independent review with independent numerics by
+  one referee inside this division — not an external review.
 * **L1, statements against the note (owed since checkpoint 18; done at checkpoint 26 for
   the headline statements):** the Lean statements `theorem4_adaptive_marginal_oracle`,
   `theorem4'_nonadaptive_marginal_oracle`, `theorem4'_binary_cube_closed_form`,

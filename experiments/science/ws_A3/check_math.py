@@ -254,28 +254,55 @@ for (n, p, bias) in [(3, 2.0, 0.5), (4, 2.0, 0.5), (4, 2.0, 0.2), (5, 2.0, 0.5),
     def obj(r):
         c = np.array([np.max(np.abs(r - r[flip[i]])) for i in range(n)])
         K = float(np.sum(c ** 2))
-        if K < 1e-14:
-            return 0.0
+        if K < 1e-3:       # below this, D_p (a difference of nearly equal numbers) is rounding noise:
+            return 0.0     # an earlier version without this guard "found" ratios up to 1.16 at K ~ 1e-13
         pg = pi * np.exp(-(r - r.min()))
         pg /= pg.sum()
         return renyi(pg, pi, p) / (p * K / 8)
 
+    def obj_exact(r):
+        """The same ratio in 50-digit arithmetic (mpmath), to confirm the best point found."""
+        import mpmath as mp
+        mp.mp.dps = 50
+        rr = [mp.mpf(float(x)) for x in r]
+        cs = [max(abs(rr[j] - rr[int(flip[i][j])]) for j in range(len(rr))) for i in range(n)]
+        K = sum(x * x for x in cs)
+        wts = [mp.mpf(float(pi[j])) * mp.e ** (-rr[j]) for j in range(len(rr))]
+        Z = sum(wts)
+        pgs = [x / Z for x in wts]
+        pis = [mp.mpf(float(x)) for x in pi]
+        if p == 1.0:
+            D = sum(a * mp.log(a / b) for a, b in zip(pgs, pis))
+        else:
+            D = mp.log(sum(a ** p * b ** (1 - p) for a, b in zip(pgs, pis))) / (p - 1)
+        return float(D / (p * K / 8)), float(K)
+
     top = 0.0
+    top_r = None
     for restart in range(6):
         r = rng.normal(0, 1.0, len(states)) if restart else (states.sum(axis=1) * 0.3).astype(float)
         cur = obj(r)
         step = 0.5
         for it in range(4000):
             cand = r.copy()
-            j = rng.integers(0, len(states), size=int(rng.integers(1, 4)))
-            cand[j] += rng.normal(0, step, size=len(j))
+            move = it % 3
+            if move == 0:      # perturb a few values
+                j = rng.integers(0, len(states), size=int(rng.integers(1, 4)))
+                cand[j] += rng.normal(0, step, size=len(j))
+            elif move == 1:    # rescale the whole function
+                cand *= float(rng.uniform(0.6, 1.3))
+            else:              # add a random one-site term
+                i = int(rng.integers(0, n))
+                cand += rng.normal(0, step) * states[:, i]
             v = obj(cand)
             if v > cur:
                 r, cur = cand, v
             elif it % 500 == 499:
                 step *= 0.7
-        top = max(top, cur)
-    print(f"      n={n}, p={p}, P(x_i=1)={bias}: best ratio found {top:.5f}")
+        if cur > top:
+            top, top_r = cur, r.copy()
+    ex, Kex = obj_exact(top_r)
+    print(f"      n={n}, p={p}, P(x_i=1)={bias}: best ratio found {top:.6f}  (50-digit re-evaluation: {ex:.6f}, K = {Kex:.3g})")
 u = 0.3
 for n in [4, 12]:
     exact = n * math.log(1 + math.tanh(u / 2) ** 2)

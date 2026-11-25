@@ -23,7 +23,7 @@ Part 2  the datum-assisted bracket of remark (4) of Lemma A16.5 on radial instan
         For each instance: the largest unexplored radius r at which the bracket is narrower than
         eps  (cost ~ 2^n/|B(n,r)|), over families of radial instances; the worst one against the guess.
 
-Run:  python3 r8_06_nonadaptive.py part1    (part 1 and 1b only: about 1 minute)
+Run:  python3 r8_06_nonadaptive.py part1    (part 1 and 1b only: about 8 minutes)
       python3 r8_06_nonadaptive.py          (everything; part 2 took 28 minutes on the shared 4-core machine --
                                              longer than intended; its output is in r8_06_nonadaptive.log)
 """

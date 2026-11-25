@@ -33,3 +33,8 @@ N=12 bridges=3824 bprime_up=3298 topclean=3106 botclean=3617 clean=2938 | classe
 N=13 bridges=10341 bprime_up=8944 topclean=8414 botclean=9734 clean=7925 | classes h: all=138 clean=88 ; (h,g): all=318 clean=184
       A-part max (d3,d8,d11,dg | norm) = (1,4,5,1 | 30), #(x,c1) with d3>=1: 24 ; B-part max = (0,2,3 | 11)
       [0.0 s]
+# from-scratch profile checks: 0 ; O(n^2) brute-force checks: 0
+# stored clean bridges with at most 13 beads: 12662
+(S1) part 1/2: 80163122 ordered pairs of clean bridges (N1,N2 <= 13) concatenated from coordinates:
+     symmetry not unique: 0 ; not a self-avoiding lattice walk: 0 ; not a bridge: 0 ; (h,g) not exactly additive: 0 ; not clean: 0
+     O(n^2) brute-force profile checks on concatenations: 19571   [191.1 s]

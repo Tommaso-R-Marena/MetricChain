@@ -1,0 +1,19 @@
+=== D: n = 5, all 395094 vertices ===
+vertices 395094, additive 32  (5.4s)
+p=0.3 t=0.45: site-wise optimum [0.1984112,0.1984112]; dual value of the site-wise centre over ALL vertices 0.1984112  -> certificate: site-wise optimal
+p=0.3 t=0.65: site-wise optimum [0.1661455,0.1661455]; dual value of the site-wise centre over ALL vertices 0.1661455  -> certificate: site-wise optimal
+p=0.3 t=0.85: site-wise optimum [0.0860848,0.0860848]; dual value of the site-wise centre over ALL vertices 0.0860848  -> certificate: site-wise optimal
+p=0.3 E: site-wise [1.009177989,1.009177991]; dual over ALL vertices 1.009177991; ln Z_5(h)/Z_5(0)=1.009177989 (diff 2.0e-09)
+p=0.3 a: site-wise [0.6397285,0.6397285]; dual over ALL vertices 0.6397285 -> certificate
+p=0.1 t=0.45: site-wise optimum [0.2592261,0.2592261]; dual value of the site-wise centre over ALL vertices 0.2592261  -> certificate: site-wise optimal
+p=0.1 t=0.65: site-wise optimum [0.1939640,0.1939640]; dual value of the site-wise centre over ALL vertices 0.2500923  -> NOT a certificate (gap 0.05613)
+        column generation: F*_5(0.65) in [0.1965988, 0.1965988] with 232 active labels; weight on non-additive 0.0942
+p=0.1 t=0.85: site-wise optimum [0.0928291,0.0928291]; dual value of the site-wise centre over ALL vertices 0.1066245  -> NOT a certificate (gap 0.01380)
+        column generation: F*_5(0.85) in [0.0945869, 0.0945869] with 232 active labels; weight on non-additive 0.1626
+p=0.1 E: site-wise [1.530291106,1.530291109]; dual over ALL vertices 1.530291109; ln Z_5(h)/Z_5(0)=1.530291106 (diff 3.0e-09)
+p=0.1 a: site-wise [0.6662407,0.6662407]; dual over ALL vertices 0.7202313 -> NOT a certificate
+time D: 39.6s
+
+real	0m39.840s
+user	0m32.693s
+sys	0m2.584s

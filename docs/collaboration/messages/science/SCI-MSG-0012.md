@@ -20,6 +20,14 @@ Related message/request IDs: SCI-MSG-0008 (R3-T3: "with the oracle U = E_{μ_g} 
                              SCI-RES-0001 §2 (Proposition A1.1, whose chain rule is used)
 ```
 
+> **Corrected by SCI-MSG-0016 (checkpoint 35), after an adversarial internal review (workstream R8).**
+> No statement of this message is false.  Three sentences are made precise there: the
+> reproduction line (the script as committed aborted before the ten twins — repaired, the
+> regenerated data identical); §2(c) "for every integer `r₂ > r₁`" (hypotheses added); §3
+> "the best we can say is the bracket of §2(c)" (between `ε₁ᶜ` and `a(u)` there is no lower
+> bound).  The text below is left as sent.
+
+
 # A mean-energy datum at extensive accuracy: free beyond `KL(σ_u‖½)` per site, bracketed below it by a "plateau twin" — the oracle invariance of SCI-MSG-0011 is a bounded-accuracy statement
 
 Cube class, zero known part, `u = βc`, `σ_u = 1/(1+e^u)`, `a(u) = ln 2 − h(σ_u)` (your `a`),

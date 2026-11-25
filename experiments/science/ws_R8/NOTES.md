@@ -110,7 +110,7 @@ here, root file deleted, `git status` checked: nothing else of mine is outside
   radius (n = 600…1200, u = 0.5…4).  A displaced inner cone is a member iff c2 ≥ u·d(s,s′)
   (enumeration n = 14); displacement is not needed.  Part 2 (bracket of remark (4) on radial
   families) still running when this was written.
-* Prior art (six web searches, two abstracts through a fetch tool, one PDF fetch failed 503):
+* Prior art (seven web searches, two abstracts through a fetch tool, one PDF fetch failed 503):
   the class in the weights is the "strong Santha–Vazirani source" of the randomness-extraction
   literature (Gavinsky–Pudlák, arXiv 1907.04640, abstract); the entropy bound is the chain rule
   (also Theorem 2(d) of `INFERENCE_LIMITS.md`: the lower end of A16.1 is already there).
@@ -174,3 +174,11 @@ here, root file deleted, `git status` checked: nothing else of mine is outside
   `r8_08_matching.py` corrected.
 * Also corrected on re-reading: "samples avoid V" ↔ "meet V" in F1; the count of searches; the
   description of the greedy descent in §2.1 (it reaches the minimum in five of six cases).
+* `python3 r8_06_nonadaptive.py part1` timed at 8 min 17 s (I had written "about 1 minute";
+  corrected in the docstring and in the report).
+* 23:53 UTC: `git status` shows `experiments/science/pi_inference/plateau_twin_check.{py,log,json}`
+  modified at 23:49 — not by me (I only ever read them and ran a copy inside my directory): the
+  coordinator repaired the series loop, citing finding F7, and regenerated log and JSON.  Re-ran
+  my replication against the regenerated JSON (`r8_10_replicate_json_after_repair.log`): all ten
+  cases still reproduced.  Note added to §5 of the report.  All other entries of `git status`
+  outside `ws_R8` belong to other workstreams (A3, L3, P3, R7, R9, R10) or to the coordinator.

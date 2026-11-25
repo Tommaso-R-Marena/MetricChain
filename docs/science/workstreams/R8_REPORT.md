@@ -98,7 +98,8 @@ twins, aborts with an `AssertionError` before reaching them (a series truncated 
 * **F4** (SCI-MSG-0013) — the algorithm as printed in the message (no gauge) is not correct on the
   class.  §2.5.
 * **F7** (evidence) — `plateau_twin_check.py` aborts before the ten twins; the committed log ends in
-  a traceback.  §5.
+  a traceback (repaired by the coordinator in the working tree while this report was being
+  finished).  §5.
 * **F3** (A16.6 (ii)) — "uses no hint": `R` has to be chosen; R8.5.  §2.5.
 * **F5** (A16.3) — "for all large `n`" quantified (R8.1); the second numerical example omits its `ρ₁`.  §2.3.
 * **F6** (A16.5) — five imprecisions: a hypothesis that is not needed (`R < n/2`); a sentence about
@@ -640,7 +641,7 @@ bookkeeping of A16.6).
 | `r8_03_isoperimetry.py` (5 min; `quick` option) | A16.5: Harper form on all subsets of `Q_3`, `Q_4`; convex programme over all members on every support of `Q_3`, `Q_4` and random ones in `Q_5`, `Q_6`; exhaustive grids; random members; mutations | 65 534 supports; `1.15·10⁷` and `2.77·10⁸` grid functions | no violation; LP certificates to `1.2·10⁻⁷`; mutations fire |
 | `r8_04_theorem166.py` (1.5 min) | table of A16 (b); twins against `G(R)`; radii of lower and upper bound; probability of meeting `V`; expected cost with fallbacks; (iv); bracket validity; bounded gaps | `n ≤ 2400`; 300 members at `n = 10, 12` | §2.5 |
 | `r8_05_conjecture.py` (2.5 min; `quick`) | five families at the exponential scale; small-slope closed forms | ten `(u, ε₁)`; grids `240²` with two zooms | nothing above `θ_pl` |
-| `r8_06_nonadaptive.py` (`part1`: 1 min; all: **29 min** — longer than intended) | the pair exactly; displaced inner cone; bracket of remark (4) on six radial families | `n ≤ 1200`; `≈ 1.1·10⁵` bracket evaluations | §4 |
+| `r8_06_nonadaptive.py` (`part1`: 8 min; all: **29 min** — longer than intended) | the pair exactly; displaced inner cone; bracket of remark (4) on six radial families | `n ≤ 1200`; `≈ 1.1·10⁵` bracket evaluations | §4 |
 | `r8_07_deepend.py` (1 s) | R8.1 line by line; Hoeffding thresholds; `k₀` of R8.4 | eight cases, `n ≤ 800` | chain holds |
 | `r8_08_matching.py` (1.2 min) | R8.3 | twelve cases | holds; size of the difference explained |
 | `r8_09_replicate_examples.py` (0.5 min) | the two examples of A16 (b) | `n = 600, 2000` | first reproduced; second needs `ρ₁ = ρ₀ + 0.03` |
@@ -662,8 +663,13 @@ committed `plateau_twin_check.log` ends in that traceback and contains **none** 
 cases; `plateau_twin_check.json`, written 52 seconds before the last modification of the script,
 has them.  The mathematics is untouched (the identity is right; the ten twins are right — I
 reproduced them), but the reproduction line of SCI-MSG-0012 ("`python3 … plateau_twin_check.py`
-(30 s; … ten exact plateau twins)") does not work.  Fix: drop `u = 8` from that loop or sum
-`4·10⁵` terms, and regenerate the log.
+(30 s; … ten exact plateau twins)") does not work at the committed state `39e0cd9`.  Fix: drop
+`u = 8` from that loop or sum the series to a tail bound, and regenerate the log.
+*Note added before this report was closed:* the coordinator made that repair in the working tree
+while I was writing (script, log and JSON modified at 23:49 UTC on 2026-11-25, with a comment
+citing this finding); the regenerated log contains the ten twins, and my replication agrees with
+the regenerated JSON too (`r8_10_replicate_json_after_repair.log`).  I did not run the repaired
+script myself.
 
 ## 6. Prior art (brief), with the search log
 
@@ -763,9 +769,10 @@ mean energy".
 **O6 (A) — "Evidence and reproduction".**  "`python3 experiments/science/pi_inference/plateau_twin_check.py`
 (30 s; entropy bracket on 400 random members by enumeration; the two relative entropies; ten exact
 plateau twins)".  As committed the script aborts at an assertion before the twins (§5).
-> *Replace by:* the same line after repairing the script (sum the series to `4·10⁵` terms or drop
-> `u = 8`) and regenerating the log; until then: "the ten twins are in `plateau_twin_check.json` and
-> were reproduced independently (R8 report, `r8_10_replicate_json.py`)".
+> *Replace by:* the same line after repairing the script (sum the series to a tail bound or drop
+> `u = 8`) and regenerating the log — done by the coordinator in the working tree, see §5 — with
+> "(13 s; … ten exact plateau twins, reproduced independently by workstream R8,
+> `r8_10_replicate_json.py`)".
 
 **O7 (B) — §2 (c).**  "for every integer `r₂ > r₁` (below `n/2`) there is a real `κ* > (|U₀|−1)/u` with
 **exactly** equal mean energies".  The proposition has hypotheses.
@@ -945,6 +952,10 @@ a small set" (fair: what remains is an upper bound for those instances).
   of mean energies were always taken through the excess identity.  The Lean file covers the
   algebraic core of A16.5 only — not Harper's step, not the existence of the level, not A16.6.
 * **My own slips** (in `NOTES.md`): one notes section was written to the repository root by a
-  relative path and was moved back; the estimate "2 minutes" for `r8_06` part 2 was wrong (29
-  minutes); a first validity test in `r8_05` rejected the reference configuration; a first mutation
-  in `r8_03` did not fire.  None affects a result reported here.
+  relative path and was moved back; my time estimates for `r8_06` were wrong (part 1: 8 minutes,
+  part 2: 29 minutes); a first validity test in `r8_05` rejected the reference configuration; a first
+  mutation in `r8_03` did not fire; and my first write-up of R8.3 had a wrong intermediate line
+  (`Z′ ≥ Z″ + (W − V − ω)`, useless for large gaps) where the right one is trivial (`g′ ≤ g″`
+  pointwise) — caught on re-reading, not by the numerical check, which tested the conclusion.  None
+  affects a result reported here; the last one is a reminder that R8.1–R8.6 are mine and have had
+  no second reader either.

@@ -16,6 +16,17 @@ Related theorem, experiment, or publication:
 Related message/request IDs: SCI-MSG-0012 (§4: "what a proof needs"); SCI-MSG-0008 R3-T3
 ```
 
+> **Corrected by SCI-MSG-0016 (checkpoint 35), after an adversarial internal review (workstream R8).**
+> **Two things in this message are wrong as printed:** (1) the algorithm of §2 (ii) is
+> printed without the gauge and is then not correct on the class (the addendum's form is);
+> (2) "the exact cost" / "`Θ(2ⁿ/|B(n, R(ε))|)`" compared a lower bound on an expectation with an
+> upper bound that holds with high probability, and rested on eight numerical cases —
+> it is proved in SCI-MSG-0016 in a quantile sense, with "two units of the radius" for
+> "one".  Also: "brute force on all supports of `Q_4`" tested the Harper step only; "a
+> displaced inner cone" should read "a raised cone under a plateau ring".  Lemma A16.5
+> stands.  The text below is left as sent.
+
+
 # The tail lemma with an energy constraint holds at the flat reference, by convex duality and Harper's theorem; with it the plateau-twin bound is the exact cost at the visible basin
 
 SCI-MSG-0012 §4 asked for "the largest excess of a modification supported on a set of

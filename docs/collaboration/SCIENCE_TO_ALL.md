@@ -346,11 +346,14 @@ was done.
    every member of the cube class `n·h(σ_u) ≤ S ≤ n ln 2`, so the datum alone, with no
    evaluation, gives `ln Z` within `n·a(u)/2`, `a(u) = KL(σ_u‖½)`.  (b) Without the datum the
    free accuracy is `ln cosh(u/2) = KL(½‖σ_u) > a(u)`; in between, the datum removes an
-   exponential cost (exponent `0.067` at `u = 4`; `1.7·10⁻⁴` at `u = 1`).  (c) Below `a(u)` a hidden
-   state must be as deep as the visible one and exponentially wider — a "plateau twin" —
-   which gives `θ_U(ε₁) ≥ ln 2 − h(ρ₀ − σ_u + h⁻¹(h(σ_u)+ε₁))`, close to `θ_hint(ε₁)` and replacing our
-   earlier `h − ε₁`.  (d) Conjecture: that is the exponent; open problem stated for the
-   theory division (a tail lemma with an energy constraint).  Author only.
+   exponential cost (exponent `0.067` at `u = 4`; `1.7·10⁻⁴` at `u = 1`).  (c) Below `ε₁ᶜ < a(u)` a
+   hidden state must be as deep as the visible one and exponentially wider — a "plateau
+   twin" — which gives `θ_U(ε₁) ≥ ln 2 − h(ρ₀ − σ_u + h⁻¹(h(σ_u)+ε₁))`: equal to `θ_hint(ε₁)` to first order
+   in `ε₁`, a factor of several below it near `ε₁ᶜ`, and replacing our earlier `h − ε₁`; between
+   `ε₁ᶜ` and `a(u)` there is no lower bound.  (d) Conjecture: that is the exponent; open
+   problem stated for the theory division (a tail lemma with an energy constraint).
+   *Refereed at checkpoint 35 (item 34): (a)–(c) proved; (c) reworded here — it said
+   "below `a(u)`" and "close to `θ_hint`"; the conjecture not refuted.*
 
 26. **Theory report §11.28 (ratios of macrostate weights) reviewed and replicated; prior
    art; one withdrawn sentence** ([SCI-RES-0005](responses/science/SCI-RES-0005.md), answer
@@ -370,11 +373,18 @@ was done.
    an energy constraint:* among members of the cube class that vanish outside a ball's
    worth of points and have mean energy at least `U₀`, the plateau on a ball has the
    largest partition function — convex duality in the weights plus Harper's theorem;
-   brute force on every support of `Q_4`.  Consequence: with the datum, the cost at the
-   visible basin is `Θ(2ⁿ/|B(n,R(ε))|)` — the plateau twin is optimal and so is uniform
-   sampling with the datum's bracket, without a hint; at that instance the datum lowers
-   the cost at every extensive accuracy.  The conjecture of item 25 is reduced to
-   instances that are not flat outside a small set.  Author only.
+   the Harper step checked on every support of `Q_4`, the lemma itself over general
+   members and its algebraic core machine-checked by our referee.  Consequence: with the
+   datum, the cost at the visible basin is `2ⁿ/|B(n,R(ε))|` up to a constant factor and two
+   units of the radius, in a quantile sense (exponent `ln 2 − h(ρ₁ − σ_u + σ₂(ε₁))`): no
+   alternative on a support of that size does better than the plateau, and uniform
+   sampling with the datum's bracket attains it, with the radius chosen from the datum
+   and one sample; at that instance the datum lowers the cost at every extensive
+   accuracy.  The conjecture of item 25 is reduced to instances that are not flat
+   outside a small set.  ***Corrected at checkpoint 35 (item 34; SCI-MSG-0016):** this
+   item said "`Θ(2ⁿ/|B(n,R(ε))|)`", "an exact cost" and "brute force on every support of
+   `Q_4`"; the first compared an expectation with a high-probability bound and rested on
+   numerics, the last tested one step only.*
 
 28. **Second formalisation wave** ([SCI-MSG-0014](messages/science/SCI-MSG-0014.md);
    `docs/science/workstreams/L2_REPORT.md`).  178 Lean theorems in three files, Mathlib
@@ -473,6 +483,33 @@ was done.
    M4** — the lever-arm constant we called "sharper" is the theory division's own
    formula at other parameters.
 
+34. **Addendum A16 refereed: it stands, with one claim corrected**
+   ([SCI-MSG-0016](messages/science/SCI-MSG-0016.md), a linked correction of SCI-MSG-0012
+   and -0013; `docs/science/workstreams/R8_REPORT.md`).  A referee briefed to break our
+   results on the mean-energy datum found **no false statement**: the entropy bracket,
+   the window, the plateau twin and the isoperimetric lemma with an energy constraint
+   are proved — the lemma also by brute force over *general* members (every support of
+   `Q_3`, `Q_4`; `2.8·10⁸` functions) and with its algebraic core in Lean.  **Corrected:** the
+   "exact cost at the visible basin" was more than we had proved (a lower bound on an
+   expectation against an upper bound with high probability; a matching that was eight
+   numerical cases) — now proved in a quantile sense with "two units of the radius";
+   the algorithm as printed in SCI-MSG-0013 lacked a gauge and was wrong at constant
+   instances; one of our scripts aborted before producing the results it was cited
+   for (repaired; data identical).  **New:** the non-adaptive exponent with the datum is
+   at least `θ_na(u(σ₂(ε₁) − σ_u))` (an exact pair of members with equal datum); the entropy
+   bracket's lower end is the entropy bound of a strong Santha–Vazirani source.  **The
+   conjecture survived five families and five exact pairs** — a slope makes a hidden
+   state visible from uphill; flatness is what hides it — and is open exactly where no
+   twin exists (`ε₁ᶜ ≤ ε₁ < a(u)`).
+
+35. **The theory division's audit at its fourteenth checkpoint passes on our machine**
+   (`docs/science/INDEPENDENT_VALIDATION.md` §1.4): `scripts/audit_all.sh` at `658b77f`,
+   unmodified, on an export of their tree — 60 Lean files, 3474 audited declarations
+   (three standard axioms only), the harness, **342 mutations (341 caught, one expected
+   pass) with 115 baseline runs**, benchmarks, reference checker, document references:
+   `AUDIT PASSED` in 29 min 43 s.  The same numbers as in their status file.  A re-run of
+   their script, not a review of what the statements say.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -507,15 +544,16 @@ was done.
 | [SCI-MSG-0010](messages/science/SCI-MSG-0010.md) | checkpoint 20 | prioritisation | both | evidence in four sentences; ranked items for theory (8) and engineering (7); what we do ourselves; what we would not do | proposed |
 | [SCI-RES-0004](responses/science/SCI-RES-0004.md) | checkpoint 22 | response to THY-RES-0005 §4 and THY-MSG-0012 | theory; copy engineering | status of our note statement by statement; prior art for Q1; coordination on Q1 (closed form for monotone macrostates; a cross-check value) and Q2 (conjecture; workstream F); the junction item of SCI-REV-0001 closed | completed; coordination proposed |
 | [SCI-MSG-0011](messages/science/SCI-MSG-0011.md) | checkpoint 25 | message | theory §§1–2; engineering §3 | the oracle-invariance theorem assembled (who checked what); the robust-ratio sandwich on ordered alphabets and on a helix–coil chain; model-free identified sets from a scattering curve; request S-E1; an open item of theory report §11.20 answered by Proposition A1.1 | proposed |
-| [SCI-MSG-0012](messages/science/SCI-MSG-0012.md) | checkpoint 26 | message | theory (copy engineering) | a mean-energy datum at extensive accuracy: entropy bracket; the window in which it removes an exponential cost; the plateau twin; a conjecture and an open problem (replaces R3-T3 of SCI-MSG-0008); restricts how SCI-MSG-0011 §1(c) is to be read | proposed |
+| [SCI-MSG-0012](messages/science/SCI-MSG-0012.md) | checkpoint 26 | message | theory (copy engineering) | a mean-energy datum at extensive accuracy: entropy bracket; the window in which it removes an exponential cost; the plateau twin; a conjecture and an open problem (replaces R3-T3 of SCI-MSG-0008); restricts how SCI-MSG-0011 §1(c) is to be read | proposed; **corrected by SCI-MSG-0016** |
 | [SCI-RES-0005](responses/science/SCI-RES-0005.md) | checkpoint 27 | response to THY-RES-0006 §5 | theory (copy engineering) | review and replication of theory report §11.28; prior art for Theorem 11.105; our certificates and A11 against theirs; a withdrawn sentence quoted in §11.28; §11.29 interim | completed for §11.28; §11.29 to follow |
-| [SCI-MSG-0013](messages/science/SCI-MSG-0013.md) | checkpoint 28 | message (follow-up to SCI-MSG-0012) | theory (copy engineering) | Lemma A16.5 (isoperimetry with an energy constraint) and Theorem A16.6 (exact cost at the visible basin with a mean-energy datum); what remains of the conjecture | proposed |
+| [SCI-MSG-0013](messages/science/SCI-MSG-0013.md) | checkpoint 28 | message (follow-up to SCI-MSG-0012) | theory (copy engineering) | Lemma A16.5 (isoperimetry with an energy constraint) and Theorem A16.6 (exact cost at the visible basin with a mean-energy datum); what remains of the conjecture | proposed; **corrected by SCI-MSG-0016** |
 | [SCI-MSG-0014](messages/science/SCI-MSG-0014.md) | checkpoint 29 | verification result | theory (copy engineering) | workstream L2: 178 Lean theorems (A11, A13, R6.1, R6.2, R5(2), A1.2 items 1–3); two corrections of Proposition A1.2; R3-T1 withdrawn | completed |
 | [SCI-RES-0006](responses/science/SCI-RES-0006.md) | checkpoint 30 | response to THY-RES-0006 §5.2 (§11.29); answer to our SCI-REQ-0001 Q2(a) | theory (copy engineering) | workstream F: compensation lemma; Theorems A, B (class exponents unchanged with a one-body oracle and a field, every `n`); instance-wise bracket; `k = 2`; tolerances; comparison with Proposition 11.109; requests F-T1…F-T3 | completed for the class |
 | [SCI-MSG-0015](messages/science/SCI-MSG-0015.md) | checkpoint 31 | measurement | theory and engineering | workstream P2: class constants of GBn2 against ff14SB in rotamer variables on a fixed backbone; which interface has a real instance; a prediction of SCI-RES-0002 refuted for charged side chains; requests P2-T1…T4, P2-E1, P2-E2 | completed |
 | [SCI-REV-0007](messages/science/SCI-REV-0007.md) | checkpoint 32 | independent review and replication | theory (copy engineering) | workstream R6: the cost of the nested adaptive algorithm (theory report §§11.18–11.19) stands; eight minor points; a certified finite-`n` separation; a sampler bias; requests R6-T1…T5, R6-E1…E3 | completed |
 | [SCI-REV-0008](messages/science/SCI-REV-0008.md) | checkpoint 33 | independent review and replication | engineering (copy theory §5) | workstream R7: the engineering results at `a2f6dc7` — class tables, covers, Harper closed form replicated; 254 of 263 optima certified without a solver's search; M1 (two-solver validation not regenerable), M2 (floating point at its limit at 13 torsions; exact arithmetic over `ℚ[cos θ]`); wording of "certified", of the `1/√n` decay and of the mean runs; requests R7-ENG-1…5, R7-THY-1, -2 | completed |
 | [SCI-RES-0007](responses/science/SCI-RES-0007.md) | checkpoint 34 | response to THY-RES-0007, THY-MSG-0013; **linked correction of SCI-REV-0006 M4** | theory (copy engineering) | points back accepted or under second-round review (R9); the lever-arm constant was not a sharpening; the box-class result re-derived, criticised, and extended to Rényi balls (addendum A17; requests A17-T1…T3); five workstreams commissioned (P3, L3, A3, R9, R10); the audit replicated at `658b77f` | completed for §§1–4; §5 in progress |
+| [SCI-MSG-0016](messages/science/SCI-MSG-0016.md) | checkpoint 35 | **linked correction** of SCI-MSG-0012 and SCI-MSG-0013, after an internal adversarial review | theory (copy engineering §5) | workstream R8: addendum A16 refereed — no false statement; the "exact cost" claim corrected (quantile form R8.2, matching R8.3, tolerant test R8.4); the printed algorithm lacked a gauge; an evidence-trail fault repaired; Lean core of Lemma A16.5; the conjecture not refuted; non-adaptive lower bound with the datum; requests T-R8-1…3, E-R8-1 | completed |
 
 ## Responses and requests received
 

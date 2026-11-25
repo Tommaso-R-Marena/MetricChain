@@ -1,0 +1,23 @@
+V6 E tau 0.7, T = (2, 3, 4)
+fixed-fixed pairs: by number of blocks 1,2,3: [0.2059452  0.34872196 0.11525138]
+fixed-site0 + site0-site0 (free sites (2, 3, 4)): max over states by blocks: [0.00019606 0.00147582 0.00105667] 
+fixed-site1 + site1-site1 (free sites (2, 3, 4)): max over states by blocks: [0.00235202 0.00895901 0.00252422] 
+fixed-site2 + site2-site2 (free sites (3, 4)): max over states by blocks: [0.16128518 0.15819655 0.        ]  in T
+fixed-site3 + site3-site3 (free sites (2, 4)): max over states by blocks: [0.15999417 0.06771464 0.        ]  in T
+fixed-site4 + site4-site4 (free sites (2, 3)): max over states by blocks: [0.16711212 0.16282391 0.        ]  in T
+fixed-site5 + site5-site5 (free sites (2, 3, 4)): max over states by blocks: [0.00267971 0.00807987 0.00228224] 
+site0-site1 (free sites (2, 3, 4)): max over states by blocks: [3.63440109e-08 7.88279244e-07 7.18380451e-07]
+site0-site2 (free sites (3, 4)): max over states by blocks: [2.24767750e-05 4.18800425e-05 0.00000000e+00]
+site0-site3 (free sites (2, 4)): max over states by blocks: [3.92455299e-07 6.28280797e-06 0.00000000e+00]
+site0-site4 (free sites (2, 3)): max over states by blocks: [7.55635154e-07 4.90562748e-06 0.00000000e+00]
+site0-site5 (free sites (2, 3, 4)): max over states by blocks: [8.08339851e-13 7.76665717e-10 5.50256017e-09]
+site1-site2 (free sites (3, 4)): max over states by blocks: [5.54374583e-05 9.00088064e-04 0.00000000e+00]
+site1-site3 (free sites (2, 4)): max over states by blocks: [1.63629211e-05 2.46137495e-05 0.00000000e+00]
+site1-site4 (free sites (2, 3)): max over states by blocks: [8.51264613e-06 1.90368858e-04 0.00000000e+00]
+site1-site5 (free sites (2, 3, 4)): max over states by blocks: [6.34705113e-10 2.36792851e-08 5.88382469e-08]
+site2-site3 (free sites (4,)): max over states by blocks: [0.03982346 0.         0.        ]
+site2-site4 (free sites (3,)): max over states by blocks: [0.0111774 0.        0.       ]
+site2-site5 (free sites (3, 4)): max over states by blocks: [8.38357112e-06 1.87308027e-04 0.00000000e+00]
+site3-site4 (free sites (2,)): max over states by blocks: [0.04511333 0.         0.        ]
+site3-site5 (free sites (2, 4)): max over states by blocks: [1.48026643e-05 2.21404934e-05 0.00000000e+00]
+site4-site5 (free sites (2, 3)): max over states by blocks: [6.90635436e-05 1.14613181e-03 0.00000000e+00]

@@ -48,6 +48,13 @@ theorem flipAt_flipAt (x : ι → Bool) (i : ι) : flipAt (flipAt x i) i = x := 
     rw [flipAt_same, flipAt_same, Bool.not_not]
   · rw [flipAt_ne _ h, flipAt_ne _ h]
 
+/-- Flipping the letter at site `i` is an involution of the cube. -/
+def flipEquiv (i : ι) : (ι → Bool) ≃ (ι → Bool) where
+  toFun x := flipAt x i
+  invFun x := flipAt x i
+  left_inv x := flipAt_flipAt x i
+  right_inv x := flipAt_flipAt x i
+
 /-- **The class in the weights**, `𝒲_u = {w > 0 : e^{−u} w(x) ≤ w(x⁽ⁱ⁾) ≤ e^{u} w(x) for all x, i}`. -/
 def InCone (u : ℝ) (w : (ι → Bool) → ℝ) : Prop :=
   (∀ x, 0 < w x) ∧
@@ -324,6 +331,14 @@ theorem densW_eq_avg (π w : (ι → Bool) → ℝ) :
   unfold densW margW
   rw [← sum_oneW, ← Finset.sum_div, div_div, mul_comm]
 
+/-- The density as the mean of `|x|/n`. -/
+theorem densW_eq_mean (π w : (ι → Bool) → ℝ) :
+    densW π w = (∑ x, π x * w x * ((wt x : ℝ) / (Fintype.card ι : ℝ))) / massW π w := by
+  unfold densW
+  rw [mul_comm (Fintype.card ι : ℝ), ← div_div, div_right_comm, Finset.sum_div]
+  congr 1
+  exact Finset.sum_congr rfl fun x _ => by ring
+
 /-- The action of a site permutation on the cube, `x ↦ x ∘ σ`. -/
 def permCube (σ : Equiv.Perm ι) : (ι → Bool) ≃ (ι → Bool) where
   toFun x := x ∘ σ
@@ -595,4 +610,774 @@ theorem lemma3_compensation {G : Set (Equiv.Perm ι)} (hG : SiteTransitive G)
 
 end Compensation
 
+/-! ## Part 4: product weights, the Bernoulli reference weight, the additive instances;
+Lemma 0 (window) -/
+
+section Product
+
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
+
+/-- A product weight `x ↦ ∏_i f_i(x_i)`. -/
+def prodW (f : ι → Bool → ℝ) (x : ι → Bool) : ℝ := ∏ i, f i (x i)
+
+omit [DecidableEq ι] in
+theorem prodW_pos {f : ι → Bool → ℝ} (hf : ∀ i a, 0 < f i a) (x : ι → Bool) : 0 < prodW f x :=
+  Finset.prod_pos fun i _ => hf i (x i)
+
+omit [DecidableEq ι] in
+theorem prodW_mul (f g : ι → Bool → ℝ) (x : ι → Bool) :
+    prodW f x * prodW g x = prodW (fun i a => f i a * g i a) x := by
+  unfold prodW
+  rw [← Finset.prod_mul_distrib]
+
+theorem prodW_eq_mul_erase (f : ι → Bool → ℝ) (x : ι → Bool) (i : ι) :
+    prodW f x = f i (x i) * ∏ j ∈ univ.erase i, f j (x j) :=
+  (Finset.mul_prod_erase univ (fun j => f j (x j)) (Finset.mem_univ i)).symm
+
+theorem prodW_flipAt (f : ι → Bool → ℝ) (x : ι → Bool) (i : ι) :
+    prodW f (flipAt x i) = f i (!x i) * ∏ j ∈ univ.erase i, f j (x j) := by
+  rw [prodW_eq_mul_erase f (flipAt x i) i, flipAt_same]
+  congr 1
+  refine Finset.prod_congr rfl fun j hj => ?_
+  rw [flipAt_ne x (Finset.ne_of_mem_erase hj)]
+
+/-- A product weight with positive site factors whose two values at each site differ by at
+most the factor `e^u` is in the cone. -/
+theorem prodW_inCone {u : ℝ} {f : ι → Bool → ℝ} (hf : ∀ i a, 0 < f i a)
+    (hf2 : ∀ i a, f i (!a) ≤ Real.exp u * f i a) : InCone u (prodW f) := by
+  refine inCone_of_upper (prodW_pos hf) fun x i => ?_
+  rw [prodW_flipAt, prodW_eq_mul_erase f x i, ← mul_assoc]
+  exact mul_le_mul_of_nonneg_right (hf2 i (x i))
+    (Finset.prod_nonneg fun j _ => (hf j (x j)).le)
+
+omit [DecidableEq ι] in
+/-- Permuting the sites of the factors and of the configuration leaves a product weight
+unchanged. -/
+theorem prodW_perm (f : ι → Bool → ℝ) (σ : Equiv.Perm ι) (x : ι → Bool) :
+    prodW (fun i => f (σ i)) (x ∘ σ) = prodW f x :=
+  Equiv.prod_comp σ (fun i => f i (x i))
+
+/-- `Σ_x ∏_i f_i(x_i) = ∏_i (f_i(1) + f_i(0))`. -/
+theorem sum_prodW (f : ι → Bool → ℝ) : ∑ x, prodW f x = ∏ i, (f i true + f i false) := by
+  unfold prodW
+  refine (Fintype.prod_sum f).symm.trans ?_
+  refine Finset.prod_congr rfl fun i _ => ?_
+  rw [Fintype.sum_bool]
+
+/-- `Σ_{x : x_j = 1} ∏_i f_i(x_i) = f_j(1) ∏_{i ≠ j} (f_i(1) + f_i(0))`. -/
+theorem sum_prodW_one (f : ι → Bool → ℝ) (j : ι) :
+    ∑ x, (if x j = true then prodW f x else 0) =
+      f j true * ∏ i ∈ univ.erase j, (f i true + f i false) := by
+  have key : ∀ x : ι → Bool, (if x j = true then prodW f x else 0) =
+      prodW (fun i a => if i = j then (if a = true then f i a else 0) else f i a) x := by
+    intro x
+    unfold prodW
+    by_cases hx : x j = true
+    · rw [if_pos hx]
+      refine Finset.prod_congr rfl fun i _ => ?_
+      show f i (x i) = if i = j then (if x i = true then f i (x i) else 0) else f i (x i)
+      by_cases hij : i = j
+      · subst hij
+        rw [if_pos rfl, if_pos hx]
+      · rw [if_neg hij]
+    · rw [if_neg hx]
+      symm
+      refine Finset.prod_eq_zero (Finset.mem_univ j) ?_
+      show (if j = j then (if x j = true then f j (x j) else 0) else f j (x j)) = 0
+      rw [if_pos rfl, if_neg hx]
+  rw [Finset.sum_congr rfl fun x _ => key x, sum_prodW,
+    ← Finset.mul_prod_erase univ _ (Finset.mem_univ j)]
+  congr 1
+  · simp
+  · refine Finset.prod_congr rfl fun i hi => ?_
+    rw [if_neg (Finset.ne_of_mem_erase hi), if_neg (Finset.ne_of_mem_erase hi)]
+
+/-- The site law of the reference weight: `Bernoulli(p)`. -/
+def bernW (p : ℝ) : Bool → ℝ
+  | true => p
+  | false => 1 - p
+
+/-- **The reference weight** `π = Bernoulli(p)^{⊗n}`. -/
+def refW (p : ℝ) : (ι → Bool) → ℝ := prodW fun _ => bernW p
+
+/-- `q + p e^{−γ}`, the normalising constant of one site of the additive instance `γ`. -/
+def tiltZ (p γ : ℝ) : ℝ := (1 - p) + p * Real.exp (-γ)
+
+/-- `p_γ = π_γ(1) = p e^{−γ}/(q + p e^{−γ})`. -/
+def pTilt (p γ : ℝ) : ℝ := p * Real.exp (-γ) / tiltZ p γ
+
+/-- The site factor of the normalised additive weight: `e^{−γ a}/(q + p e^{−γ})`. -/
+def tiltFac (p γ : ℝ) : Bool → ℝ
+  | true => Real.exp (-γ) / tiltZ p γ
+  | false => 1 / tiltZ p γ
+
+/-- **The normalised weight of the additive instance with site fields `γ i`**:
+`x ↦ ∏_i e^{−γ_i x_i}/(q + p e^{−γ_i})`.  For a constant field it is the report's `w̃_γ`; for the
+field `γ_i = u(1 − 2 s_i)` it is the normalised cone `c̃_s`. -/
+def tiltW (p : ℝ) (γ : ι → ℝ) : (ι → Bool) → ℝ := prodW fun i => tiltFac p (γ i)
+
+/-- The site law `π_γ` of the additive instance `γ`. -/
+def siteLaw (p γ : ℝ) : Bool → ℝ
+  | true => p * Real.exp (-γ) / tiltZ p γ
+  | false => (1 - p) / tiltZ p γ
+
+theorem tiltZ_pos {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (γ : ℝ) : 0 < tiltZ p γ :=
+  add_pos (by linarith) (mul_pos hp0 (Real.exp_pos _))
+
+theorem siteLaw_sum {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (γ : ℝ) :
+    siteLaw p γ true + siteLaw p γ false = 1 := by
+  have hZ := (tiltZ_pos hp0 hp1 γ).ne'
+  show p * Real.exp (-γ) / tiltZ p γ + (1 - p) / tiltZ p γ = 1
+  rw [← add_div, div_eq_one_iff_eq hZ]
+  unfold tiltZ
+  ring
+
+theorem pTilt_pos {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (γ : ℝ) : 0 < pTilt p γ :=
+  div_pos (mul_pos hp0 (Real.exp_pos _)) (tiltZ_pos hp0 hp1 γ)
+
+theorem pTilt_lt_one {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (γ : ℝ) : pTilt p γ < 1 := by
+  unfold pTilt
+  rw [div_lt_one (tiltZ_pos hp0 hp1 γ)]
+  unfold tiltZ
+  linarith
+
+/-- `γ ↦ p_γ` is non-increasing. -/
+theorem pTilt_anti {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) {γ γ' : ℝ} (h : γ ≤ γ') :
+    pTilt p γ' ≤ pTilt p γ := by
+  unfold pTilt
+  rw [div_le_div_iff₀ (tiltZ_pos hp0 hp1 γ') (tiltZ_pos hp0 hp1 γ)]
+  unfold tiltZ
+  have he : Real.exp (-γ') ≤ Real.exp (-γ) := Real.exp_le_exp.mpr (by linarith)
+  have h1 : 0 < p * (1 - p) := mul_pos hp0 (by linarith)
+  nlinarith [mul_le_mul_of_nonneg_left he h1.le]
+
+/-- `γ ↦ p_γ` is strictly decreasing. -/
+theorem pTilt_strictAnti {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) {γ γ' : ℝ} (h : γ < γ') :
+    pTilt p γ' < pTilt p γ := by
+  unfold pTilt
+  rw [div_lt_div_iff₀ (tiltZ_pos hp0 hp1 γ') (tiltZ_pos hp0 hp1 γ)]
+  unfold tiltZ
+  have he : Real.exp (-γ') < Real.exp (-γ) := Real.exp_lt_exp.mpr (by linarith)
+  have h1 : 0 < p * (1 - p) := mul_pos hp0 (by linarith)
+  nlinarith [mul_lt_mul_of_pos_left he h1]
+
+omit [DecidableEq ι] in
+theorem refW_pos {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (x : ι → Bool) : 0 < refW p x := by
+  refine prodW_pos (fun _ a => ?_) x
+  cases a
+  · show 0 < 1 - p
+    linarith
+  · exact hp0
+
+omit [DecidableEq ι] in
+theorem tiltW_pos {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (γ : ι → ℝ) (x : ι → Bool) :
+    0 < tiltW p γ x := by
+  refine prodW_pos (fun i a => ?_) x
+  have hZ := tiltZ_pos hp0 hp1 (γ i)
+  cases a
+  · exact div_pos one_pos hZ
+  · exact div_pos (Real.exp_pos _) hZ
+
+omit [DecidableEq ι] in
+/-- `π · w̃_γ = ⊗_i π_{γ_i}`. -/
+theorem refW_mul_tiltW (p : ℝ) (γ : ι → ℝ) (x : ι → Bool) :
+    refW p x * tiltW p γ x = prodW (fun i => siteLaw p (γ i)) x := by
+  unfold refW tiltW
+  rw [prodW_mul]
+  congr 1
+  funext i a
+  cases a
+  · show (1 - p) * (1 / tiltZ p (γ i)) = (1 - p) / tiltZ p (γ i)
+    ring
+  · show p * (Real.exp (-γ i) / tiltZ p (γ i)) = p * Real.exp (-γ i) / tiltZ p (γ i)
+    ring
+
+/-- The additive weights are normalised: `A(w̃_γ) = 1`. -/
+theorem massW_tiltW {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (γ : ι → ℝ) :
+    massW (refW p) (tiltW p γ) = 1 := by
+  unfold massW
+  rw [Finset.sum_congr rfl fun x _ => refW_mul_tiltW p γ x, sum_prodW]
+  exact Finset.prod_eq_one fun i _ => siteLaw_sum hp0 hp1 (γ i)
+
+/-- The mass of `{x_j = 1}` under `π · w̃_γ` is `p_{γ_j}`. -/
+theorem oneW_tiltW {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (γ : ι → ℝ) (j : ι) :
+    oneW (refW p) (tiltW p γ) j = pTilt p (γ j) := by
+  unfold oneW
+  have key : ∀ x : ι → Bool, (if x j = true then refW p x * tiltW p γ x else 0) =
+      if x j = true then prodW (fun i => siteLaw p (γ i)) x else 0 := fun x => by
+    rw [refW_mul_tiltW]
+  rw [Finset.sum_congr rfl fun x _ => key x, sum_prodW_one,
+    Finset.prod_eq_one fun i _ => siteLaw_sum hp0 hp1 (γ i), mul_one]
+  rfl
+
+/-- The one-body marginals of the additive instance: `μ(x_j = 1) = p_{γ_j}`. -/
+theorem margW_tiltW {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (γ : ι → ℝ) (j : ι) :
+    margW (refW p) (tiltW p γ) j = pTilt p (γ j) := by
+  unfold margW
+  rw [oneW_tiltW hp0 hp1, massW_tiltW hp0 hp1, div_one]
+
+/-- The density of an additive instance is the average of the `p_{γ_i}`. -/
+theorem densW_tiltW {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (γ : ι → ℝ) :
+    densW (refW p) (tiltW p γ) = (∑ i, pTilt p (γ i)) / (Fintype.card ι : ℝ) := by
+  rw [densW_eq_avg]
+  congr 1
+  exact Finset.sum_congr rfl fun i _ => margW_tiltW hp0 hp1 γ i
+
+/-- `dens(w̃_γ) = p_γ`. -/
+theorem densW_tiltW_const [Nonempty ι] {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (γ : ℝ) :
+    densW (refW p) (tiltW (ι := ι) p fun _ => γ) = pTilt p γ := by
+  have hn : (Fintype.card ι : ℝ) ≠ 0 := by
+    have h0 : 0 < Fintype.card ι := Fintype.card_pos
+    exact_mod_cast h0.ne'
+  rw [densW_tiltW hp0 hp1, Finset.sum_const, Finset.card_univ, nsmul_eq_mul,
+    mul_div_cancel_left₀ _ hn]
+
+/-- An additive instance with all fields in `[−u, u]` is in the class. -/
+theorem tiltW_inCone {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1) {γ : ι → ℝ} (hγ : ∀ i, |γ i| ≤ u) :
+    InCone u (tiltW p γ) := by
+  refine prodW_inCone (fun i a => ?_) fun i a => ?_
+  · have hZ := tiltZ_pos hp0 hp1 (γ i)
+    cases a
+    · exact div_pos one_pos hZ
+    · exact div_pos (Real.exp_pos _) hZ
+  · have hZ := tiltZ_pos hp0 hp1 (γ i)
+    have h := abs_le.mp (hγ i)
+    cases a
+    · show Real.exp (-γ i) / tiltZ p (γ i) ≤ Real.exp u * (1 / tiltZ p (γ i))
+      rw [mul_one_div]
+      exact div_le_div_of_nonneg_right (Real.exp_le_exp.mpr (by linarith [h.1])) hZ.le
+    · show 1 / tiltZ p (γ i) ≤ Real.exp u * (Real.exp (-γ i) / tiltZ p (γ i))
+      rw [← mul_div_assoc, ← Real.exp_add]
+      exact div_le_div_of_nonneg_right (Real.one_le_exp (by linarith [h.2])) hZ.le
+
+omit [DecidableEq ι] in
+/-- The reference weight is invariant under every site permutation. -/
+theorem refW_perm (p : ℝ) (σ : Equiv.Perm ι) (x : ι → Bool) : refW p (x ∘ σ) = refW p x :=
+  prodW_perm (fun _ => bernW p) σ x
+
+omit [DecidableEq ι] in
+/-- Covariance of the additive weights under site permutations. -/
+theorem tiltW_perm (p : ℝ) (γ : ι → ℝ) (σ : Equiv.Perm ι) (x : ι → Bool) :
+    tiltW p (fun i => γ (σ i)) (x ∘ σ) = tiltW p γ x :=
+  prodW_perm (fun i => tiltFac p (γ i)) σ x
+
+omit [DecidableEq ι] in
+theorem refW_invariant (p : ℝ) (G : Set (Equiv.Perm ι)) : Invariant G (refW (ι := ι) p) :=
+  fun σ _ x => refW_perm p σ x
+
+omit [DecidableEq ι] in
+theorem tiltW_const_invariant (p γ : ℝ) (G : Set (Equiv.Perm ι)) :
+    Invariant G (tiltW (ι := ι) p fun _ => γ) :=
+  fun σ _ x => tiltW_perm p (fun _ => γ) σ x
+
+/-! ### Lemma 0 (window) -/
+
+/-- The mass of `{x : x_i = 0}`. -/
+def zeroW (π w : (ι → Bool) → ℝ) (i : ι) : ℝ := ∑ x, if x i = true then 0 else π x * w x
+
+theorem oneW_add_zeroW (π w : (ι → Bool) → ℝ) (i : ι) :
+    oneW π w i + zeroW π w i = massW π w := by
+  unfold oneW zeroW massW
+  rw [← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun x _ => ?_
+  split_ifs <;> ring
+
+/-- The mass of `{x_i = 1}` as a sum over `{x_i = 0}`, through the flip of site `i`. -/
+theorem oneW_eq_sum_flip (π w : (ι → Bool) → ℝ) (i : ι) :
+    oneW π w i = ∑ x, if x i = true then 0 else π (flipAt x i) * w (flipAt x i) := by
+  unfold oneW
+  refine Fintype.sum_equiv (flipEquiv i) _ _ fun x => ?_
+  show (if x i = true then π x * w x else 0) =
+    if flipAt x i i = true then 0 else π (flipAt (flipAt x i) i) * w (flipAt (flipAt x i) i)
+  rw [flipAt_flipAt, flipAt_same]
+  by_cases h : x i = true
+  · simp [h]
+  · simp [h]
+
+/-- **Lemma 0 (window), for any reference weight with site odds `p : 1 − p` at site `i`.**
+If `π > 0` satisfies `π(x^{i←1})·(1 − p) = π(x^{i←0})·p` and `w ∈ 𝒲_u`, then
+`p₋ ≤ μ_w(x_i = 1) ≤ p₊`, `p₋ = p_u`, `p₊ = p_{−u}`. -/
+theorem window_of_site_odds {π w : (ι → Bool) → ℝ} {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1)
+    (i : ι) (hπ0 : ∀ x, 0 < π x)
+    (hπ : ∀ x, x i = false → π (flipAt x i) * (1 - p) = π x * p) (hw : InCone u w) :
+    pTilt p u ≤ margW π w i ∧ margW π w i ≤ pTilt p (-u) := by
+  have hmass : 0 < massW π w := massW_pos hπ0 hw.1
+  have hsum := oneW_add_zeroW π w i
+  have hflip := oneW_eq_sum_flip π w i
+  have hup : (1 - p) * oneW π w i ≤ p * Real.exp u * zeroW π w i := by
+    rw [hflip]
+    unfold zeroW
+    rw [Finset.mul_sum, Finset.mul_sum]
+    refine Finset.sum_le_sum fun x _ => ?_
+    by_cases hx : x i = true
+    · rw [if_pos hx, if_pos hx, mul_zero, mul_zero]
+    · rw [if_neg hx, if_neg hx]
+      have hx' : x i = false := by simpa using hx
+      have h1 := hπ x hx'
+      have h2 := (hw.2 x i).2
+      have h3 : π (flipAt x i) * (1 - p) * w (flipAt x i) ≤ π x * p * (Real.exp u * w x) := by
+        rw [h1]
+        exact mul_le_mul_of_nonneg_left h2 (mul_pos (hπ0 x) hp0).le
+      linarith
+  have hlo : p * Real.exp (-u) * zeroW π w i ≤ (1 - p) * oneW π w i := by
+    rw [hflip]
+    unfold zeroW
+    rw [Finset.mul_sum, Finset.mul_sum]
+    refine Finset.sum_le_sum fun x _ => ?_
+    by_cases hx : x i = true
+    · rw [if_pos hx, if_pos hx, mul_zero, mul_zero]
+    · rw [if_neg hx, if_neg hx]
+      have hx' : x i = false := by simpa using hx
+      have h1 := hπ x hx'
+      have h2 := (hw.2 x i).1
+      have h3 : π x * p * (Real.exp (-u) * w x) ≤ π (flipAt x i) * (1 - p) * w (flipAt x i) := by
+        rw [h1]
+        exact mul_le_mul_of_nonneg_left h2 (mul_pos (hπ0 x) hp0).le
+      linarith
+  constructor
+  · unfold margW pTilt
+    rw [div_le_div_iff₀ (tiltZ_pos hp0 hp1 u) hmass, ← hsum]
+    unfold tiltZ
+    nlinarith
+  · unfold margW pTilt
+    rw [div_le_div_iff₀ hmass (tiltZ_pos hp0 hp1 (-u)), ← hsum]
+    unfold tiltZ
+    rw [neg_neg]
+    nlinarith
+
+/-- The Bernoulli reference weight has site odds `p : 1 − p` at every site. -/
+theorem refW_flip_odds (p : ℝ) (x : ι → Bool) (i : ι) (hx : x i = false) :
+    refW p (flipAt x i) * (1 - p) = refW p x * p := by
+  unfold refW
+  rw [prodW_flipAt, prodW_eq_mul_erase (fun _ => bernW p) x i, hx]
+  show p * _ * (1 - p) = (1 - p) * _ * p
+  ring
+
+/-- **Lemma 0 (window), in the weights.**  For every `w ∈ 𝒲_u` and every site,
+`p₋ ≤ μ_w(x_i = 1) ≤ p₊` with `p₋ = p_u`, `p₊ = p_{−u}`. -/
+theorem lemma0_window {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1) {w : (ι → Bool) → ℝ}
+    (hw : InCone u w) (i : ι) :
+    pTilt p u ≤ margW (refW p) w i ∧ margW (refW p) w i ≤ pTilt p (-u) :=
+  window_of_site_odds hp0 hp1 i (refW_pos hp0 hp1) (fun x hx => refW_flip_odds p x i hx) hw
+
+/-- **Lemma 0 (window), in the energies.**  For every `ψ ∈ L_u` and every site,
+`μ_ψ(x_i = 1) ∈ [p₋, p₊]`. -/
+theorem lemma0_window_lipH {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1) {ψ : (ι → Bool) → ℝ}
+    (hψ : LipH u ψ) (i : ι) :
+    pTilt p u ≤ margW (refW p) (fun x => Real.exp (-ψ x)) i ∧
+      margW (refW p) (fun x => Real.exp (-ψ x)) i ≤ pTilt p (-u) :=
+  lemma0_window hp0 hp1 (lipH_iff_inCone.mp hψ) i
+
+/-- **Lemma 0, second sentence: the additive instances fill the window.**  For every `c` in
+`[p₋, p₊]` there is a field `γ ∈ [−u, u]` whose additive instance is in the class and has all
+its one-body marginals equal to `c`. -/
+theorem lemma0_additive_fill {p u c : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (hu : 0 ≤ u)
+    (hc : pTilt p u ≤ c) (hc' : c ≤ pTilt p (-u)) :
+    ∃ γ : ℝ, |γ| ≤ u ∧ InCone u (tiltW (ι := ι) p fun _ => γ) ∧
+      ∀ i : ι, margW (refW p) (tiltW p fun _ => γ) i = c := by
+  have hcont : ContinuousOn (fun γ : ℝ => pTilt p γ) (Set.Icc (-u) u) := by
+    apply Continuous.continuousOn
+    show Continuous fun γ : ℝ => p * Real.exp (-γ) / ((1 - p) + p * Real.exp (-γ))
+    exact Continuous.div (by fun_prop) (by fun_prop) fun γ => (tiltZ_pos hp0 hp1 γ).ne'
+  obtain ⟨γ, hγ, hγc⟩ := intermediate_value_Icc' (by linarith : -u ≤ u) hcont ⟨hc, hc'⟩
+  have hγu : |γ| ≤ u := abs_le.mpr ⟨hγ.1, hγ.2⟩
+  refine ⟨γ, hγu, tiltW_inCone hp0 hp1 (fun _ => hγu), fun i => ?_⟩
+  rw [margW_tiltW hp0 hp1]
+  exact hγc
+
+end Product
+
+/-! ## Part 5: Lemma 2 (the excess of a dip is the cone law) -/
+
+section Lemma2
+
+theorem max_sub_zero_eq (a b : ℝ) : max (a - b) 0 = a - min a b := by
+  rcases le_total a b with h | h
+  · rw [max_eq_right (by linarith), min_eq_left h]
+    ring
+  · rw [max_eq_left (by linarith), min_eq_right h]
+
+/-- The arithmetic of Lemma 2: `c − c₀ = J(c₀ − c_J)/(R − J)` and `J ≤ 1 < R`. -/
+theorem excess_core {R J Jf c₀ : ℝ} (hR : 1 < R) (hJ0 : 0 ≤ J) (hJ1 : J ≤ 1) (hJf0 : 0 ≤ Jf)
+    (hJfJ : Jf ≤ J) (hc0 : 0 ≤ c₀) (hc1 : c₀ ≤ 1) :
+    |(R * c₀ - Jf) / (R - J) - c₀| ≤ 1 / (R - 1) := by
+  have hEpos : 0 < R - J := by linarith
+  have hR1 : 0 < R - 1 := by linarith
+  have e : (R * c₀ - Jf) / (R - J) - c₀ = (J * c₀ - Jf) / (R - J) := by
+    field_simp
+    ring
+  have hJR : J * R ≤ R := mul_le_of_le_one_left (by linarith) hJ1
+  have hJc : J * c₀ ≤ J := mul_le_of_le_one_right hJ0 hc1
+  have hJc0 : 0 ≤ J * c₀ := mul_nonneg hJ0 hc0
+  rw [e, abs_le]
+  constructor
+  · rw [neg_le, ← neg_div, div_le_div_iff₀ hEpos hR1]
+    have h1 : -(J * c₀ - Jf) ≤ J := by linarith
+    have h2 := mul_le_mul_of_nonneg_right h1 hR1.le
+    linarith
+  · rw [div_le_div_iff₀ hEpos hR1]
+    have h1 : J * c₀ - Jf ≤ J := by linarith
+    have h2 := mul_le_mul_of_nonneg_right h1 hR1.le
+    linarith
+
+variable {X : Type*} [Fintype X]
+
+/-- **Lemma 2, the mass, for two arbitrary probability vectors.**  `P₁, P₂ ≥ 0` of total mass
+`1`, `R ≥ 0`: the excess `D = (R·P₁ − P₂)₊` has mass in `[R − 1, R]`. -/
+theorem excess_mass_bounds {P₁ P₂ : X → ℝ} (h₁ : ∀ x, 0 ≤ P₁ x) (h₂ : ∀ x, 0 ≤ P₂ x)
+    (s₁ : ∑ x, P₁ x = 1) (s₂ : ∑ x, P₂ x = 1) {R : ℝ} (hR : 0 ≤ R) :
+    R - 1 ≤ ∑ x, max (R * P₁ x - P₂ x) 0 ∧ ∑ x, max (R * P₁ x - P₂ x) 0 ≤ R := by
+  have hJ0 : 0 ≤ ∑ x, min (R * P₁ x) (P₂ x) :=
+    Finset.sum_nonneg fun x _ => le_min (mul_nonneg hR (h₁ x)) (h₂ x)
+  have hJ1 : ∑ x, min (R * P₁ x) (P₂ x) ≤ 1 := by
+    rw [← s₂]
+    exact Finset.sum_le_sum fun x _ => min_le_right _ _
+  have hE : ∑ x, max (R * P₁ x - P₂ x) 0 = R - ∑ x, min (R * P₁ x) (P₂ x) := by
+    rw [Finset.sum_congr rfl fun x _ => max_sub_zero_eq (R * P₁ x) (P₂ x),
+      Finset.sum_sub_distrib, ← Finset.mul_sum, s₁, mul_one]
+  rw [hE]
+  constructor <;> linarith
+
+/-- **Lemma 2, the mean of a bounded observable, for two arbitrary probability vectors.**
+`P₁, P₂ ≥ 0` of total mass `1`, `R > 1`, `0 ≤ f ≤ 1`: the `f`-mean of the normalised excess
+`D = (R·P₁ − P₂)₊` differs from the `f`-mean of `P₁` by at most `1/(R − 1)`. -/
+theorem excess_mean_bound {P₁ P₂ : X → ℝ} (h₁ : ∀ x, 0 ≤ P₁ x) (h₂ : ∀ x, 0 ≤ P₂ x)
+    (s₁ : ∑ x, P₁ x = 1) (s₂ : ∑ x, P₂ x = 1) {R : ℝ} (hR : 1 < R) {f : X → ℝ}
+    (hf0 : ∀ x, 0 ≤ f x) (hf1 : ∀ x, f x ≤ 1) :
+    |(∑ x, max (R * P₁ x - P₂ x) 0 * f x) / (∑ x, max (R * P₁ x - P₂ x) 0) -
+        ∑ x, P₁ x * f x| ≤ 1 / (R - 1) := by
+  have hR0 : 0 ≤ R := by linarith
+  have hmin0 : ∀ x, 0 ≤ min (R * P₁ x) (P₂ x) := fun x =>
+    le_min (mul_nonneg hR0 (h₁ x)) (h₂ x)
+  have hJ0 : 0 ≤ ∑ x, min (R * P₁ x) (P₂ x) := Finset.sum_nonneg fun x _ => hmin0 x
+  have hJ1 : ∑ x, min (R * P₁ x) (P₂ x) ≤ 1 := by
+    rw [← s₂]
+    exact Finset.sum_le_sum fun x _ => min_le_right _ _
+  have hJf0 : 0 ≤ ∑ x, min (R * P₁ x) (P₂ x) * f x :=
+    Finset.sum_nonneg fun x _ => mul_nonneg (hmin0 x) (hf0 x)
+  have hJfJ : ∑ x, min (R * P₁ x) (P₂ x) * f x ≤ ∑ x, min (R * P₁ x) (P₂ x) :=
+    Finset.sum_le_sum fun x _ => mul_le_of_le_one_right (hmin0 x) (hf1 x)
+  have hc0 : 0 ≤ ∑ x, P₁ x * f x := Finset.sum_nonneg fun x _ => mul_nonneg (h₁ x) (hf0 x)
+  have hc1 : ∑ x, P₁ x * f x ≤ 1 := by
+    rw [← s₁]
+    exact Finset.sum_le_sum fun x _ => mul_le_of_le_one_right (h₁ x) (hf1 x)
+  have hE : ∑ x, max (R * P₁ x - P₂ x) 0 = R - ∑ x, min (R * P₁ x) (P₂ x) := by
+    rw [Finset.sum_congr rfl fun x _ => max_sub_zero_eq (R * P₁ x) (P₂ x),
+      Finset.sum_sub_distrib, ← Finset.mul_sum, s₁, mul_one]
+  have hN : ∑ x, max (R * P₁ x - P₂ x) 0 * f x =
+      R * ∑ x, P₁ x * f x - ∑ x, min (R * P₁ x) (P₂ x) * f x := by
+    rw [Finset.mul_sum, ← Finset.sum_sub_distrib]
+    refine Finset.sum_congr rfl fun x _ => ?_
+    rw [max_sub_zero_eq]
+    ring
+  rw [hE, hN]
+  exact excess_core hR hJ0 hJ1 hJf0 hJfJ hc0 hc1
+
+end Lemma2
+
+/-! ## Part 6: Lemma 3 (ii) and Lemma 2 in the setting of the report -/
+
+section Report
+
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
+
+/-- **Lemma 3 (ii), as in the report**: reference weight `π = Bernoulli(p)^{⊗n}`, compensator
+the normalised additive instance `w̃_{γ₂}` with `|γ₂| ≤ u`, of density `p₂ = p_{γ₂}`. -/
+theorem lemma3_compensation_bernoulli [Nonempty ι] {G : Set (Equiv.Perm ι)}
+    (hG : SiteTransitive G) {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1)
+    {w Δ : (ι → Bool) → ℝ} (hw : InCone u w) (hwG : Invariant G w)
+    (hΔ0 : ∀ x, 0 ≤ Δ x) (hΔ1 : ∃ x, Δ x ≠ 0) (hwΔ : InCone u (fun x => w x + Δ x))
+    (hΔG : Invariant G Δ) {γ₂ : ℝ} (hγ₂ : |γ₂| ≤ u)
+    (hbetween : (densW (refW p) w < densW (refW p) Δ ∧ densW (refW p) Δ < pTilt p γ₂) ∨
+      (pTilt p γ₂ < densW (refW p) Δ ∧ densW (refW p) Δ < densW (refW p) w)) :
+    ∃ b : ℝ, b = massW (refW p) w * (densW (refW p) Δ - densW (refW p) w) /
+        (pTilt p γ₂ - densW (refW p) Δ) ∧ 0 < b ∧
+      InCone u (fun x => w x + b * tiltW p (fun _ => γ₂) x) ∧
+      InCone u (fun x => w x + Δ x + b * tiltW p (fun _ => γ₂) x) ∧
+      Invariant G (fun x => w x + b * tiltW p (fun _ => γ₂) x) ∧
+      Invariant G (fun x => w x + Δ x + b * tiltW p (fun _ => γ₂) x) ∧
+      (∀ i, margW (refW p) (fun x => w x + b * tiltW p (fun _ => γ₂) x) i = densW (refW p) Δ) ∧
+      (∀ i, margW (refW p) (fun x => w x + Δ x + b * tiltW p (fun _ => γ₂) x) i =
+        densW (refW p) Δ) ∧
+      (∀ x, w x + Δ x + b * tiltW p (fun _ => γ₂) x ≠ w x + b * tiltW p (fun _ => γ₂) x ↔
+        0 < Δ x) ∧
+      massW (refW p) (fun x => w x + Δ x + b * tiltW p (fun _ => γ₂) x) /
+          massW (refW p) (fun x => w x + b * tiltW p (fun _ => γ₂) x) =
+        1 + massW (refW p) Δ / massW (refW p) w *
+          ((pTilt p γ₂ - densW (refW p) Δ) / (pTilt p γ₂ - densW (refW p) w)) := by
+  have hd : densW (refW p) (tiltW (ι := ι) p fun _ => γ₂) = pTilt p γ₂ :=
+    densW_tiltW_const hp0 hp1 γ₂
+  have h := lemma3_compensation hG (refW_pos hp0 hp1) (refW_invariant p G) hw hwG hΔ0 hΔ1 hwΔ hΔG
+    (tiltW_inCone hp0 hp1 (fun _ => hγ₂)) (tiltW_const_invariant p γ₂ G)
+    (massW_tiltW hp0 hp1 _) (by rw [hd]; exact hbetween)
+  rw [hd] at h
+  exact h
+
+/-- The fields of the cone at `s`: `−u` where `s_i = 1`, `+u` where `s_i = 0`. -/
+def coneField (u : ℝ) (s : ι → Bool) (i : ι) : ℝ := if s i = true then -u else u
+
+/-- **The normalised cone weight** `c̃_s = e^{−u·d(·,s)}/Z_s`, as the additive instance with the
+site fields `coneField u s` (see `coneW_eq`). -/
+def coneW (p u : ℝ) (s : ι → Bool) : (ι → Bool) → ℝ := tiltW p (coneField u s)
+
+/-- **The normalised additive base** `w̃_γ = e^{−γ|x|}/(q + p e^{−γ})ⁿ` (see `baseW_eq`). -/
+def baseW (p γ : ℝ) : (ι → Bool) → ℝ := tiltW p fun _ => γ
+
+/-- **The excess of the dip** of depth `r` at `s` on the base `γ`:
+`Δ_{s,r} = (e^r c̃_s − w̃_γ)₊`. -/
+def dipW (p u γ r : ℝ) (s : ι → Bool) (x : ι → Bool) : ℝ :=
+  max (Real.exp r * coneW p u s x - baseW p γ x) 0
+
+omit [Fintype ι] [DecidableEq ι] in
+theorem abs_coneField {u : ℝ} (hu : 0 ≤ u) (s : ι → Bool) (i : ι) : |coneField u s i| ≤ u := by
+  unfold coneField
+  split_ifs
+  · rw [abs_neg, abs_of_nonneg hu]
+  · rw [abs_of_nonneg hu]
+
+/-- `c̃_s ∈ 𝒲_u`. -/
+theorem coneW_inCone {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (hu : 0 ≤ u) (s : ι → Bool) :
+    InCone u (coneW p u s) :=
+  tiltW_inCone hp0 hp1 (abs_coneField hu s)
+
+/-- `w̃_γ ∈ 𝒲_u` for `|γ| ≤ u`. -/
+theorem baseW_inCone {p u γ : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (hγ : |γ| ≤ u) :
+    InCone u (baseW (ι := ι) p γ) :=
+  tiltW_inCone hp0 hp1 fun _ => hγ
+
+omit [DecidableEq ι] in
+/-- `w̃_γ = e^{−γ|x|}/(q + p e^{−γ})ⁿ`. -/
+theorem baseW_eq (p γ : ℝ) (x : ι → Bool) :
+    baseW p γ x = Real.exp (-γ * (wt x : ℝ)) / tiltZ p γ ^ Fintype.card ι := by
+  have hsite : ∀ i, tiltFac p γ (x i) = (if x i = true then Real.exp (-γ) else 1) / tiltZ p γ := by
+    intro i
+    cases x i
+    · rfl
+    · rfl
+  show ∏ i, tiltFac p γ (x i) = _
+  rw [Finset.prod_congr rfl fun i _ => hsite i, Finset.prod_div_distrib, Finset.prod_const,
+    Finset.card_univ, ← Finset.prod_filter, Finset.prod_const, ← Real.exp_nat_mul]
+  unfold wt
+  congr 2
+  ring
+
+omit [DecidableEq ι] in
+/-- `c̃_s = e^{−u·d_H(x,s)}/Z_s` with `Z_s = ∏_i z_{s_i}`, `z_0 = q + p e^{−u}`, `z_1 = q e^{−u} + p`:
+the additive instance with the fields `±u` is the normalised cone of the report. -/
+theorem coneW_eq {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (s x : ι → Bool) :
+    coneW p u s x = Real.exp (-u * (hammingDist x s : ℝ)) /
+      ∏ i, (if s i = true then (1 - p) * Real.exp (-u) + p else (1 - p) + p * Real.exp (-u)) := by
+  have he : Real.exp u * Real.exp (-u) = 1 := by
+    rw [← Real.exp_add, add_neg_cancel, Real.exp_zero]
+  have hZ1 : 0 < (1 - p) * Real.exp (-u) + p :=
+    add_pos (mul_pos (by linarith) (Real.exp_pos _)) hp0
+  have hZ2 : 0 < (1 - p) + p * Real.exp (-u) := tiltZ_pos hp0 hp1 u
+  have hZ3 : 0 < (1 - p) + p * Real.exp u := by
+    have h := tiltZ_pos hp0 hp1 (-u)
+    unfold tiltZ at h
+    rwa [neg_neg] at h
+  have hsite : ∀ i, tiltFac p (coneField u s i) (x i) =
+      Real.exp (-u * (if x i ≠ s i then (1 : ℝ) else 0)) /
+        (if s i = true then (1 - p) * Real.exp (-u) + p else (1 - p) + p * Real.exp (-u)) := by
+    intro i
+    unfold coneField
+    rcases Bool.eq_false_or_eq_true (s i) with hs | hs <;>
+      rcases Bool.eq_false_or_eq_true (x i) with hx | hx <;> rw [hs, hx]
+    · -- s = 1, x = 1
+      show Real.exp (-(-u)) / tiltZ p (-u) = Real.exp (-u * 0) / ((1 - p) * Real.exp (-u) + p)
+      rw [mul_zero, Real.exp_zero]
+      unfold tiltZ
+      rw [neg_neg, div_eq_div_iff hZ3.ne' hZ1.ne']
+      linear_combination (1 - p) * he
+    · -- s = 1, x = 0
+      show 1 / tiltZ p (-u) = Real.exp (-u * 1) / ((1 - p) * Real.exp (-u) + p)
+      rw [mul_one]
+      unfold tiltZ
+      rw [neg_neg, div_eq_div_iff hZ3.ne' hZ1.ne']
+      linear_combination (-p) * he
+    · -- s = 0, x = 1
+      show Real.exp (-u) / tiltZ p u = Real.exp (-u * 1) / ((1 - p) + p * Real.exp (-u))
+      rw [mul_one]
+      rfl
+    · -- s = 0, x = 0
+      show 1 / tiltZ p u = Real.exp (-u * 0) / ((1 - p) + p * Real.exp (-u))
+      rw [mul_zero, Real.exp_zero]
+      rfl
+  have hd : (hammingDist x s : ℝ) = ∑ i, (if x i ≠ s i then (1 : ℝ) else 0) := by
+    unfold hammingDist
+    rw [Finset.card_filter]
+    push_cast
+    rfl
+  show ∏ i, tiltFac p (coneField u s i) (x i) = _
+  rw [Finset.prod_congr rfl fun i _ => hsite i, Finset.prod_div_distrib, ← Real.exp_sum, hd,
+    Finset.mul_sum]
+
+omit [DecidableEq ι] in
+/-- `π · Δ_{s,r} = (e^r π_s − π_γⁿ)₊`. -/
+theorem refW_mul_dipW {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (u γ r : ℝ) (s x : ι → Bool) :
+    refW p x * dipW p u γ r s x =
+      max (Real.exp r * (refW p x * coneW p u s x) - refW p x * baseW p γ x) 0 := by
+  unfold dipW
+  rw [mul_max_of_nonneg _ _ (refW_pos hp0 hp1 x).le, mul_zero]
+  congr 1
+  ring
+
+omit [DecidableEq ι] in
+theorem dipW_nonneg (p u γ r : ℝ) (s x : ι → Bool) : 0 ≤ dipW p u γ r s x :=
+  le_max_right _ _
+
+omit [DecidableEq ι] in
+/-- `w̃_γ + Δ_{s,r} = max(w̃_γ, e^r c̃_s)`. -/
+theorem baseW_add_dipW (p u γ r : ℝ) (s x : ι → Bool) :
+    baseW p γ x + dipW p u γ r s x = max (baseW p γ x) (Real.exp r * coneW p u s x) := by
+  unfold dipW
+  rcases le_total (Real.exp r * coneW p u s x) (baseW p γ x) with h | h
+  · have h' : Real.exp r * coneW p u s x - baseW p γ x ≤ 0 := by linarith
+    rw [max_eq_right h', max_eq_left h, add_zero]
+  · have h' : 0 ≤ Real.exp r * coneW p u s x - baseW p γ x := by linarith
+    rw [max_eq_left h', max_eq_right h]
+    ring
+
+/-- The dip `w̃_γ + Δ_{s,r} = max(w̃_γ, e^r c̃_s)` is in the class. -/
+theorem baseW_add_dipW_inCone {p u γ : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (hu : 0 ≤ u)
+    (hγ : |γ| ≤ u) (r : ℝ) (s : ι → Bool) :
+    InCone u (fun x => baseW p γ x + dipW p u γ r s x) := by
+  have h := inCone_max (baseW_inCone (ι := ι) hp0 hp1 hγ)
+    ((coneW_inCone hp0 hp1 hu s).smul (Real.exp_pos r))
+  have e : (fun x => baseW p γ x + dipW p u γ r s x) =
+      fun x => max (baseW p γ x) (Real.exp r * coneW p u s x) := by
+    funext x
+    exact baseW_add_dipW p u γ r s x
+  rw [e]
+  exact h
+
+/-- **Lemma 2, the mass:** `e^r − 1 ≤ E = A(Δ_{s,r}) ≤ e^r`. -/
+theorem lemma2_mass {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (u γ r : ℝ) (s : ι → Bool) :
+    Real.exp r - 1 ≤ massW (refW p) (dipW p u γ r s) ∧
+      massW (refW p) (dipW p u γ r s) ≤ Real.exp r := by
+  unfold massW
+  rw [Finset.sum_congr rfl fun x _ => refW_mul_dipW hp0 hp1 u γ r s x]
+  exact excess_mass_bounds (P₁ := fun x => refW p x * coneW p u s x)
+    (P₂ := fun x => refW p x * baseW p γ x)
+    (fun x => (mul_pos (refW_pos hp0 hp1 x) (tiltW_pos hp0 hp1 _ x)).le)
+    (fun x => (mul_pos (refW_pos hp0 hp1 x) (tiltW_pos hp0 hp1 _ x)).le)
+    (massW_tiltW hp0 hp1 (coneField u s)) (massW_tiltW hp0 hp1 fun _ => γ) (Real.exp_pos r).le
+
+/-- **Lemma 2, site by site:** for `r > 0` every one-body marginal of the normalised excess of
+the dip is within `1/(e^r − 1)` of the corresponding marginal of the cone law `π_s`. -/
+theorem lemma2_site {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (u γ : ℝ) {r : ℝ} (hr : 0 < r)
+    (s : ι → Bool) (i : ι) :
+    |margW (refW p) (dipW p u γ r s) i - pTilt p (coneField u s i)| ≤
+      1 / (Real.exp r - 1) := by
+  have h := excess_mean_bound (P₁ := fun x => refW p x * coneW p u s x)
+    (P₂ := fun x => refW p x * baseW p γ x)
+    (fun x => (mul_pos (refW_pos hp0 hp1 x) (tiltW_pos hp0 hp1 _ x)).le)
+    (fun x => (mul_pos (refW_pos hp0 hp1 x) (tiltW_pos hp0 hp1 _ x)).le)
+    (massW_tiltW hp0 hp1 (coneField u s)) (massW_tiltW hp0 hp1 fun _ => γ)
+    (Real.one_lt_exp_iff.mpr hr) (f := fun x => if x i = true then (1 : ℝ) else 0)
+    (fun x => by split_ifs <;> norm_num) (fun x => by split_ifs <;> norm_num)
+  have e1 : margW (refW p) (dipW p u γ r s) i =
+      (∑ x, max (Real.exp r * (refW p x * coneW p u s x) - refW p x * baseW p γ x) 0 *
+        (if x i = true then (1 : ℝ) else 0)) /
+      ∑ x, max (Real.exp r * (refW p x * coneW p u s x) - refW p x * baseW p γ x) 0 := by
+    unfold margW oneW massW
+    congr 1
+    · refine Finset.sum_congr rfl fun x _ => ?_
+      rw [refW_mul_dipW hp0 hp1]
+      split_ifs <;> ring
+    · exact Finset.sum_congr rfl fun x _ => refW_mul_dipW hp0 hp1 u γ r s x
+  have e2 : pTilt p (coneField u s i) =
+      ∑ x, refW p x * coneW p u s x * (if x i = true then (1 : ℝ) else 0) := by
+    rw [← oneW_tiltW hp0 hp1 (coneField u s) i]
+    unfold oneW coneW
+    refine Finset.sum_congr rfl fun x _ => ?_
+    split_ifs <;> ring
+  rw [e1, e2]
+  exact h
+
+/-- **Lemma 2, the density:** for `r > 0`, `|c − c₀| ≤ 1/(e^r − 1)`, where `c = dens(Δ_{s,r})` and
+`c₀ = dens(c̃_s)` is the density of the cone law. -/
+theorem lemma2_dens [Nonempty ι] {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (u γ : ℝ) {r : ℝ}
+    (hr : 0 < r) (s : ι → Bool) :
+    |densW (refW p) (dipW p u γ r s) - densW (refW p) (coneW p u s)| ≤
+      1 / (Real.exp r - 1) := by
+  have hn : (0 : ℝ) < Fintype.card ι := by
+    have h0 : 0 < Fintype.card ι := Fintype.card_pos
+    exact_mod_cast h0
+  have h := excess_mean_bound (P₁ := fun x => refW p x * coneW p u s x)
+    (P₂ := fun x => refW p x * baseW p γ x)
+    (fun x => (mul_pos (refW_pos hp0 hp1 x) (tiltW_pos hp0 hp1 _ x)).le)
+    (fun x => (mul_pos (refW_pos hp0 hp1 x) (tiltW_pos hp0 hp1 _ x)).le)
+    (massW_tiltW hp0 hp1 (coneField u s)) (massW_tiltW hp0 hp1 fun _ => γ)
+    (Real.one_lt_exp_iff.mpr hr) (f := fun x => (wt x : ℝ) / (Fintype.card ι : ℝ))
+    (fun x => div_nonneg (Nat.cast_nonneg _) hn.le)
+    (fun x => by
+      rw [div_le_one hn]
+      exact_mod_cast Finset.card_le_univ _)
+  have e1 : densW (refW p) (dipW p u γ r s) =
+      (∑ x, max (Real.exp r * (refW p x * coneW p u s x) - refW p x * baseW p γ x) 0 *
+        ((wt x : ℝ) / (Fintype.card ι : ℝ))) /
+      ∑ x, max (Real.exp r * (refW p x * coneW p u s x) - refW p x * baseW p γ x) 0 := by
+    rw [densW_eq_mean]
+    unfold massW
+    congr 1
+    · exact Finset.sum_congr rfl fun x _ => by rw [refW_mul_dipW hp0 hp1]
+    · exact Finset.sum_congr rfl fun x _ => refW_mul_dipW hp0 hp1 u γ r s x
+  have e2 : densW (refW p) (coneW p u s) =
+      ∑ x, refW p x * coneW p u s x * ((wt x : ℝ) / (Fintype.card ι : ℝ)) := by
+    have hm : massW (refW p) (coneW p u s) = 1 := massW_tiltW hp0 hp1 (coneField u s)
+    rw [densW_eq_mean, hm, div_one]
+  rw [e1, e2]
+  exact h
+
+/-- The density of the cone law of a centre with `k = |s|` ones:
+`c₀ = (k·p₊ + (n − k)·p₋)/n`, `p₊ = p_{−u}`, `p₋ = p_u`. -/
+theorem densW_coneW {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (u : ℝ) (s : ι → Bool) :
+    densW (refW p) (coneW p u s) =
+      ((wt s : ℝ) * pTilt p (-u) + ((Fintype.card ι : ℝ) - (wt s : ℝ)) * pTilt p u) /
+        (Fintype.card ι : ℝ) := by
+  unfold coneW
+  rw [densW_tiltW hp0 hp1]
+  congr 1
+  have hsite : ∀ i, pTilt p (coneField u s i) =
+      pTilt p u + (if s i = true then pTilt p (-u) - pTilt p u else 0) := by
+    intro i
+    unfold coneField
+    split_ifs <;> ring
+  rw [Finset.sum_congr rfl fun i _ => hsite i, Finset.sum_add_distrib, Finset.sum_const,
+    Finset.card_univ, nsmul_eq_mul, ← Finset.sum_filter, Finset.sum_const, nsmul_eq_mul]
+  unfold wt
+  ring
+
+end Report
+
 end ScienceL3
+
+/-! ## Axioms -/
+
+#print axioms ScienceL3.lipH_iff_inCone
+#print axioms ScienceL3.inCone_iff_lipH_log
+#print axioms ScienceL3.InCone.add
+#print axioms ScienceL3.InCone.smul
+#print axioms ScienceL3.inCone_max
+#print axioms ScienceL3.inCone_min
+#print axioms ScienceL3.margW_eq_densW
+#print axioms ScienceL3.margW_add
+#print axioms ScienceL3.lemma3_i
+#print axioms ScienceL3.oneW_compensated
+#print axioms ScienceL3.massW_compensated
+#print axioms ScienceL3.lemma3_compensation
+#print axioms ScienceL3.lemma3_compensation_bernoulli
+#print axioms ScienceL3.window_of_site_odds
+#print axioms ScienceL3.lemma0_window
+#print axioms ScienceL3.lemma0_window_lipH
+#print axioms ScienceL3.lemma0_additive_fill
+#print axioms ScienceL3.excess_mass_bounds
+#print axioms ScienceL3.excess_mean_bound
+#print axioms ScienceL3.baseW_eq
+#print axioms ScienceL3.coneW_eq
+#print axioms ScienceL3.baseW_add_dipW_inCone
+#print axioms ScienceL3.lemma2_mass
+#print axioms ScienceL3.lemma2_site
+#print axioms ScienceL3.lemma2_dens
+#print axioms ScienceL3.densW_coneW
