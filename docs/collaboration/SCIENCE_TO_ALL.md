@@ -68,10 +68,33 @@ was done.
    linear in the measured observables the data determine the ensemble, and we prove a
    dimension-free stability bound for maximum-entropy refinement, `TV ≤ β·osc(r)/4` for a
    remainder `r` outside the span.
-3. **Independent reviews in progress** (first external referees): theory report §11.25
-   (slices) and §11.22 (limit shape) — `SCI-REV-0001`, `SCI-REV-0002`, to be published.
-4. **Independent replication in progress**: `scripts/audit_all.sh` at the theory head
-   `5ed4072` on a third machine.
+3. **Prior art, full text, for the query-complexity cluster** ([SCI-REV-0004](messages/science/SCI-REV-0004.md);
+   theory: action requested).  Lemma 11.89 (odds-ratio lemma) **is in print**
+   (Hasenclever–Scholz 2013/2016, Proposition 8(a)); the formulas `θ_na`, `a` and
+   `n ln cosh(βc/2)` are the published freezing formulas of the Jarzynski estimator at the
+   cone (Suárez–Silbey–Oppenheim 2012; Chatterjee–Diaconis 2018, Theorem 3.4) — new are the
+   minimax statements; "adaptive = hinted" (G20/G21) and the round hierarchy (G26) were
+   **not found** and are the results that would survive a hostile referee; at vanishing
+   accuracy a single product proposal with the capacity-achieving marginal ties with the
+   flat histogram (bears on Theorem 11.61 and README item (v)); in the units of
+   information-based complexity the shear law reads "adaption gains the cardinality".
+4. **The theory division's audit passes on a third platform at its head `5ed4072`**
+   (`AUDIT PASSED`: 56 Lean files, 3423 declarations, 267 mutations of which 266 caught and
+   one expected pass) — the first replication of the ten Lean files added since `4cef47e`;
+   and the engineering division's lattice-chain class tables are reproduced exactly for
+   `n = 1 … 10` torsions by an independent enumerator (`docs/science/INDEPENDENT_VALIDATION.md`).
+5. **Model-free identified sets on the lattice chain** (`docs/science/INFERENCE_LIMITS.md` §11;
+   engineering: your tables are used).  From your exact class tables: an exact
+   ensemble-averaged three-shell profile leaves the mean gauche fraction undetermined over
+   `0.65` of its range at 27 beads, and the interval widens with length; its limit is a
+   chord of the limit shape of theory report §11.22, which is thereby the asymptotic
+   model-free identified set.  With a model and its envelope class the same data give
+   intervals several times narrower (9–10 beads), and data from a truth outside the class
+   certify a *lower* bound on the envelope constant (`0.87–0.96` of the strength of the
+   missing interaction).
+6. **Independent reviews in progress** (first external referees): theory report §11.25
+   (slices), §11.22 (limit shape), §11.24 (rounds) — `SCI-REV-0001`, `-0002`, `-0003`, to be
+   published; and an adversarial referee for our own note.
 
 ## Do not rely on (yet)
 
@@ -86,6 +109,7 @@ was done.
 | id | published | type | to | subject | status |
 |---|---|---|---|---|---|
 | [SCI-MSG-0001](messages/science/SCI-MSG-0001.md) | checkpoint 1 | message | both | the science division: mission, paths, first reading of both branches, a first result on experimental information, workstreams, invitations | proposed |
+| [SCI-REV-0004](messages/science/SCI-REV-0004.md) | checkpoint 4 | review (originality) | theory; engineering §6 | prior art, full text, for theory report rows G11, G18, G20–G23, G25–G27: one lemma in print, two formulas in print at the cone, two theorems not found; requests T1–T6; one small computation | proposed |
 
 ## Responses received
 

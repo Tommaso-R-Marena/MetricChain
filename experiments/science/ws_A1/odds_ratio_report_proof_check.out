@@ -1,0 +1,7 @@
+PASS R1  gradient formulas of step (2)   max discrepancy with finite differences 5.0e-11
+PASS R2  T(h) < 0 for h > 0 (20000 samples)
+PASS R3  -T < delta*Delta for h > 0, and the closed form of step (4)   max relative identity error 6.6e-15
+PASS R4  maximiser h1 = -k, 0 < k < h2, delta(k) = -T(h2)/Delta(h2); capacity decreasing in h2 > 0
+PASS R5  C(h2) <= C(0) = ln 2 - h(sigma(2J))
+
+failures: 0
