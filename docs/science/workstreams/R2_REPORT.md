@@ -22,11 +22,11 @@ concatenation lemma **exhaustively on all 270 997 444 ordered pairs of bridges w
 (308 million concatenations, zero failures) with an enumerator written before I read anyone else's
 code; that enumerator reproduces the engineering division's class tables **exactly** for every chain
 length from 4 to 23 beads (`2.1·10⁹` conformations at the largest size) and the authors' bridge
-tables for 4 to 21 beads.  All computer-assisted *bounds* were replicated with independent code:
+tables for 4 to 24 beads.  All computer-assisted *bounds* were replicated with independent code:
 both linear programmes were re-formulated from scratch and every row was certified with **my own**
-exact dual certificates; the volume bounds `26 437`, `3 719`, `3 627` (and the other nine) come out
-to the digit; I found my own packings of 51, 158, 7, 15 points in `T₀` (claimed 50, 157, 7, 14) and
-my own lamella families give the finite-`N` lower bounds `26` at 1 000 beads and `32` at 2 000
+exact dual certificates; the volume bounds (`26 437`, `3 719`, `3 627` and the seventeen others of
+S_REPORT §7.1) come out to the digit; I found my own packings of 51, 158, 7, 15 points in `T₀`
+(claimed 50, 157, 7, 14) and my own lamella families give the finite-`N` lower bounds `26` at 1 000 beads and `32` at 2 000
 (claimed 26, 31).  The machine-checked abstract theorems say what the report says they say, but
 their hypotheses are **not literally** what Lemma 11.68 delivers (index range, normalisation); the
 gap is bookkeeping and I give the patch.  What does **not** survive as written is the *practical
@@ -87,7 +87,7 @@ the authors' code (`experiments/workstreams/S/code`) and the coordinator's outpu
 against their use.
 
 **Evidence inspected.**  Full text of §11.22 (lines 4692–5083), §11.17, S_REPORT (all), D46, D48,
-`SetLimit.lean`, `CoverStability.lean`, ENG-REQ-0001, ENG-RES-0002, THY-RES-0002 (first 150 lines), the
+`SetLimit.lean`, `CoverStability.lean`, ENG-REQ-0001, ENG-RES-0002, THY-RES-0002, the
 24 engineering class tables, the authors' stored outputs, `build.py`, `lat.py`, `g3_compare.py`
 (parts), the seven coordinator outputs.  Not read: `pchain.c`, `periodic.c`, `g5_estimate.py`,
 ENG-RES-0007, THY-RES-0001.
@@ -260,8 +260,8 @@ part, `e₃ = (4N − ∂)/2`; the fcc line count for `e₈`; `9·2^{-2/3} + 12 
 from tight (observed `min (2N − e₃)/N^{2/3} = 1.66` against the proved `0.63`).  `k_N ∈ [1.710, 1.862]` for
 `N = 8 … 27` (claimed `[1.71, 1.86]`), `38.7 %` of the bulk extent at 27 beads; lamellae: `k = 2.43 … 2.54`.
 The numbers "47, 730, 5 800 beads for 50, 80, 90 %" are an extrapolation of the empirical `k ≈ 1.8`
-(the report labels them [N]); what is *proved* is that 90 % of the bulk extent is reached somewhere
-between `N ≈ 125` (upper bound) and `N ≈ 1.6·10⁴` (lamellae).
+(the report labels them [N]); what is *proved* is that 90 % of the bulk extent is not reached before
+`N ≈ 120` (Proposition 11.73) and is reached by `N = 18 968` (my `21 × 21 × 22` lamella: 90.5 %).
 
 ### 3.8 Proposition 11.74, Conjecture 11.75
 
@@ -304,7 +304,11 @@ argument, with `vol 𝒦 ≥ 1/12` from exact points alone.
 (a proved inner volume).**  Let `C` be the hull of the four exact points and of the profile
 densities of ten explicit bridges (the nine systems of S_REPORT §4.2 in a box of side 64, and the
 166 199-bead bridge), and `δ = max_i 168/(N_i + 3) = 0.01395`.  By Theorem 11.69 and a support-function
-argument, `𝒦 ⊇ C ⊖ δ𝔹_c` (erosion).  `r2_inner_volume.py`: `vol(C ⊖ δ𝔹_c) = 1.563`.  So
+argument, `𝒦 ⊇ C ⊖ δ𝔹_c` (erosion).  *Proof.*  Each approximate vertex `p_i` of `C` has a point `p_i* ∈ 𝒦`
+with `‖p_i* − p_i‖_c ≤ δ`; so the support functions satisfy `h_C ≤ h_A + δ·h_𝔹` for `A = conv{p_i*} ⊂ 𝒦`; a
+point `x` with `x + δ𝔹_c ⊂ C` has `n·x + δh_𝔹(n) ≤ h_C(n)`, hence `n·x ≤ h_A(n)` for every `n`, i.e. `x ∈ A`.  For a
+polytope `C = ∩{n_f·x ≤ b_f}` the eroded set is `∩{n_f·x ≤ b_f − δ‖U^{-T}n_f‖_∞}`, `U` the matrix of the
+coordinates `u`. ∎  `r2_inner_volume.py`: `vol(C ⊖ δ𝔹_c) = 1.563` (`vol C = 1.632`).  So
 
     1.56  ≤  vol 𝒦  ≤  3.125        (5.2 % to 10.4 % of the bulk box),   proved,
 
@@ -314,7 +318,12 @@ where the report has `2.2 ≲ vol 𝒦`, which needs the missing routing lemma.
 In the hull of the same fourteen proved points — with the gauche coordinate, and with the margin
 `max(L, e)(d_i + d_j)`, `d = Σλδ`, for the uncertainty of the ten approximate points — there are
 `k` points that satisfy the hypothesis of Theorem 11.71(b) pairwise (`r2_rigorous_packing.py`,
-packings stored in `out/rigorous_packing_*.txt`):
+packings stored in `out/rigorous_packing_*.txt`).  *Proof that this is enough.*  Let `q_i*` be the true
+points of `K^{br}` (`|q_i* − q_i| ≤ δ_i` in the norm `‖Δp‖_c + |Δg|`, `δ_i = 0` for the four exact ones).  For
+weights `λ` the point `Q* = Σλ_i q_i*` lies in `K^{br}` (convexity) and differs from the computable
+`Q = Σλ_i q_i = (p, g)` by at most `d = Σλ_iδ_i`.  If `L‖p_k − p_l‖_c > e(g_k + g_l) + 2ε₁ + max(L, e)(d_k + d_l)`,
+then `L‖p_k* − p_l*‖_c − e(g_k* + g_l*) − 2ε₁ ≥ L‖p_k − p_l‖_c − e(g_k + g_l) − 2ε₁ − max(L, e)(d_k + d_l) > 0`,
+which is the hypothesis of Theorem 11.71(b) for the points `Q_k*`. ∎  Results:
 
 | `(L, ε₁)` | report: lower bound for the liminf | this review |
 |---|---|---|
@@ -326,8 +335,8 @@ packings stored in `out/rigorous_packing_*.txt`):
 (Greedy packings on grids; each is re-verified by the stand-alone checker
 `r2_rigorous_packing_verify.py` from the stored weights.  They are not optimal.)
 
-Hence `116 ≤ liminf_N N^P_cov(N/2) ≤ limsup ≤ 3 626` for all walks at `L = e = 1` (the first inequality
-also for bridges).  The proof uses Lemma 11.68, the abstract theorem (convexity, `β/M`), Proposition
+Hence `116 ≤ liminf_N N^P_cov(N/2) ≤ limsup ≤ 3 626` for all walks at `L = e = 1` (`3 626` is the floor of
+the volume ratio `3 626.5`), and likewise `116 ≤ N_∞(½) ≤ 3 626` for the limit object of bridges.  The proof uses Lemma 11.68, the abstract theorem (convexity, `β/M`), Proposition
 11.72(d), fact N1 and the ten verified bridges; nothing about periodic systems or routing.
 
 **N4 [P] (when the shape is resolved).**  From Proposition 11.73 and `(1,5,6;0) ∈ K^{br}`:
@@ -347,10 +356,15 @@ None.  No statement labelled as proved was found false.
 ### Major
 
 **M1.  The practical headline mixes a theorem, a conjecture and an estimate.**
-*Where:* §11.22, first paragraph ("the plateau lies between 50 and 3 627 evaluations at
-`(L, ε₁) = (1, ½)` and is reached at chain lengths of `10³`–`10⁵` beads"); after Theorem 11.71 ("The
-plateau is real, it is in the hundreds, and it is 10 to 40 times the values at 27 beads"); "What
-this changes in §11.17"; §11.17, last sentence before *Prior art*; title and summary of THY-RES-0002.
+*Where:* `docs/THEORY_REPORT.md` line 4702 (§11.22, first paragraph: "the plateau lies between 50 and
+3 627 evaluations at `(L, ε₁) = (1, ½)` and is reached at chain lengths of `10³`–`10⁵` beads"); line 4888
+(after Theorem 11.71: "The plateau is real, it is in the hundreds, and it is 10 to 40 times the
+values at 27 beads"); lines 5042–5044 ("What this changes in §11.17"); line 3503 (§11.17); line 1190
+(§8, "is reached only at `10³`–`10⁵` beads"); line 6300 (§12); `README.md` lines 289–290 ("it is reached
+only at `10³`–`10⁵` beads, *because* the shape converges with a surface correction …"); the title and
+§4 of THY-RES-0002 (where "Together: `10³`–`10⁵` beads" stands under a heading labelled [P]).  The
+entry G24 of §10 and the research log are worded correctly (`liminf`, `limsup`, "off a countable set
+of accuracies").
 *What is wrong:* three different epistemic levels are joined in one unqualified sentence.
 (i) **Theorem** (verified here): for all walks `50 ≤ liminf_N N^P_cov(N/2)` and `limsup ≤ 3 627`
 (in fact `116 ≤` and `≤ 3 626`), `N^P_cov(N/2) ≤ 26 437` for every `N`, `≥ 26` at 1 000 beads.
@@ -443,12 +457,13 @@ beads".**
 | there is a plateau (the sizes converge) — bridges | **theorem only off a countable unidentified set of accuracies**; open at `ε₁ = ½` |
 | there is a plateau — all walks (the chains that were enumerated) | **conjecture-dependent** (Conjecture 11.75, epigraph form) and subject to the same exceptional set |
 | the plateau is "in the hundreds" / "150–350" | **estimate** [N]; the inner model behind it uses an unproved sketch |
-| not reached at enumerable sizes | **theorem** in the sense: the value at 27 beads (15, engineering, replicated by me to 23 beads: 13) is below every limit point |
+| not reached at enumerable sizes | **theorem** in the sense: the values at enumerable sizes (13 at 23 beads from my own table; 15 at 27 beads, re-solved by me from the engineering table) are below every limit point (≥ 116) |
 | at least 26 / 32 / 35 evaluations at `10³` / `2·10³` / `5·10³` beads | **theorem** [P, exact counts; replicated at `10³` and `2·10³`] |
 | "reached at `10³`–`10⁵` beads" | **estimate** [H]; no theorem in either direction.  Proved in the neighbourhood of this claim: N4 (the shape is not within one covering radius of its limit before `4·10⁴` beads) |
 
-**Is the model representative of anything?**  It is one lattice (the tetrahedral lattice of the
-rotational-isomeric-state picture of a saturated chain), one cutoff (three shells), one known part
+**Is the model representative of anything?**  It is one lattice (the tetrahedral lattice with
+trans/gauche torsions, the textbook lattice caricature of a saturated chain **[K, from memory —
+unverified]**), one cutoff (three shells), one known part
 (a stiffness energy `e` per gauche torsion, whose minimum is the trivial all-trans rod), the zero
 residual, and two points `(L, ε₁)`.  In these units `L = 1` allows the unknown pair potential to
 differ by up to `9e` between a first-shell contact and no contact, with up to one contact per bead:
@@ -456,13 +471,15 @@ the class is an order of magnitude wider than the whole range `[0, eN]` of the k
 accuracy `N/2` is half the range of the known part.  So the instance sits in the regime where the
 known part is almost irrelevant and a certificate must in effect learn the residual on the whole
 profile body to resolution `ε₁/L`: the covering number is essentially the metric entropy of the body
-`𝒦` (which is why `γ` barely matters: the bounds ignore it).  That regime is legitimate for a
+`𝒦` (which is why `γ` barely matters: the upper bounds ignore it altogether).  That regime is legitimate for a
 query-complexity statement, but the numbers `50 … 3 627` say nothing about a system in which the
 known part discriminates (large `e/L`), where the covering problem is concentrated near the minimum.
-What is model-independent is the *structure*: on any lattice with finitely many distances below the
-cutoff the normalised profile sets of concatenable chains have a convex limit, the limiting
-certificate size is a covering number of it — a polynomial in `L/ε₁` of degree equal to the number
-of shells — and finite sizes approach it with surface corrections of order `N^{-1/3}`.
+What should be model-independent is the *structure* **[H — the abstract theorems are general, but a
+concatenation lemma has to be proved lattice by lattice]**: on a lattice with finitely many
+distances below the cutoff the normalised profile sets of concatenable chains have a convex limit,
+the limiting certificate size is a covering number of it — at most a polynomial in `L/ε₁` of degree
+equal to the number of shells — and finite sizes approach it with surface corrections of order
+`N^{-1/3}`.
 **Every guarantee is model-relative**: no physical observable and no certified physical input
 appears.
 

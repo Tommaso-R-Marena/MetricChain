@@ -119,3 +119,7 @@ n=7 b=1.0 three-shell profile  end-to-end R2 / max  [0.2640, 0.3893] width 0.125
 n=7 truth exp(+0.25 c3): data Rg2                  certify b >= 0.094   (truth's max single-flip difference between self-avoiding patterns: 0.500)
 n=7 truth exp(+0.25 c3): data three-shell profile  certify b >= 0.271   (truth's max single-flip difference between self-avoiding patterns: 0.500)
 n=7 truth exp(+0.5 c3): data Rg2                  certify b >= 0.212   (truth's max single-flip difference between self-avoiding patterns: 1.000)
+n=7 truth exp(+0.5 c3): data three-shell profile  certify b >= 0.543   (truth's max single-flip difference between self-avoiding patterns: 1.000)
+n=7 truth exp(+1.0 c3): data Rg2                  certify b >= 0.533   (truth's max single-flip difference between self-avoiding patterns: 2.000)
+n=7 truth exp(+1.0 c3): data three-shell profile  certify b >= 1.056   (truth's max single-flip difference between self-avoiding patterns: 2.000)
+n=7 done in 1972s

@@ -22,3 +22,4 @@ T2(1,3,4,5) random sampling
   ends attained (cases): {'A': 48, 'B': 48, 'C': 48}
   exact interval width / sup-norm stability width: median 0.236, min 0.000, max 0.849
   upper excursion hi - H_f <= envelope radius of the f-optimal path in all cases: True
+  lower excursion H_f - lo <= envelope radius of the canonical f-optimal cut in all cases: True

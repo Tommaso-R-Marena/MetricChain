@@ -729,3 +729,68 @@ unverified]`.  Walley's natural extension: `[from memory — unverified]` (no sn
   ln|C|/n → 0, true for dual-BCH codes at fixed k) and is far from reached at enumerable n.
 * N4: envelope cone ∩ moment constraints is one LP per end in the weights (normalisation as a
   linear equality); nesting cone+moments ⊂ moments-only and ⊂ cone-only verified on 4 instances.
+
+### Step 9 — report written; last checks
+* `docs/science/workstreams/SM_REPORT.md` written (sections 1–7; matrix §4.1; vocabulary §4.2;
+  five papers §4.3; condensed search log §4.4; not-accessed list §5).
+* `check_q2_decomposition.py` → `.out`: `H(μ_C) = ln|C| + H(ν)` holds to 1e-9 in 16 cases;
+  `(H(μ_C) − n·h(p_u))/ln|C|` ranges from 0.249 (RM(1,3), u=1) to 1.000 (u=8); `H(ν)/n ≤ h(p_u)` in
+  all 16 cases (conjecture [C] that this is general).
+**S51** arXiv API: 5 multi-term abstract queries (force field + Kullback-Leibler + uncertainty
+quantification + bounds; experimental + relative entropy + worst-case + molecular/Gibbs;
+distributionally robust + molecular dynamics/Boltzmann/conformational; moment constraints +
+Kullback-Leibler + ambiguity set; partial identification + protein/molecular) → nothing relevant
+(the API returned unrelated DRO/conformal-prediction papers or nothing).
+**S52** arXiv API: Gavinsky & Pudlák, "On the Joint Entropy of d-Wise-Independent Variables",
+arXiv:1503.08154 `[abstract]` (see report K9).
+**S53** PubMed: `Fisher CK AND Stultz CM AND (ensembles OR Bayesian)` → Fisher & Stultz, Curr. Opin.
+Struct. Biol. 21 (2011) 426, doi:10.1016/j.sbi.2011.04.001; Fisher, Ullman, Stultz, Pac. Symp.
+Biocomput. 2012:82–93 `[abstracts]`.
+**S54** X. Xu's Columbia thesis via academiccommons (doi:10.7916/D8SX6MF1/download) → HTTP 404.
+Glasserman–Xu stays `[search snippet]`.
+* Verified against extracted text before finalising: BioEn functional `exp(−θ∫p ln(p/p0) − χ²/2)`
+  and "the kink of the S_KL-versus-χ² curve" (arXiv:1509.04447); Gigli et al. Table-2 numbers
+  (396 → 161 SAXS / 68 DEER / 50 both; 131 → 24 / 18 / 9).
+
+### Step 10 — a cleaner variant of the Q2 sketch and its prior art (late find)
+* While reviewing K10 I noticed that the *convolution* variant (uniform codeword `Y` plus
+  i.i.d. Bernoulli(p_u) noise `E`, `X = Y ⊕ E`) has a complete three-line proof of the no-go:
+  (i) in the class (each term of `m(x) = |C|⁻¹Σ_c π(x⊕c)` changes by a factor in `[e^{−u},e^{u}]`),
+  (ii) C-invariant ⇒ uniform marginals below `d(C^⊥)`, (iii) `H = n·h(p_u) + I(X;Y)`,
+  `0 ≤ I ≤ ln|C|`.  Labelled [P] in the report (K10(f)).
+* `check_q2_bsc_variant.py` → `.out` (seconds): 12 cases (4 codes × u = 1, 2, 4): single-site
+  log-ratio/u ≤ 1.0000; (d⊥−1)-marginals uniform to 2e-14; d⊥-marginals deviate 3e-3–1e-1;
+  `(H − n·h)/ln|C|` ∈ [0.316, 1.000].  All assertions pass.
+**S55** arXiv API (titles): Samorodnitsky & Sberlo, "On codes decoding a constant fraction of
+errors on the BSC", arXiv:2008.07236 `[abstract]`; **Samorodnitsky, "On the entropy of a noisy
+function", arXiv:1508.01464 `[abstract]`**: for binary `X` and BSC(ε) noise `Z`, with
+`v = (1−2ε)²·n`, `H(X ⊕ Z) ≥ n·H(ε + (1−2ε)·H⁻¹(E_{|B|=v} H(X_B)/v))` "up to lower-order terms"
+— "a strengthening of 'Mrs. Gerber's lemma'".  => a published *lower* bound on the entropy of a
+noise-smoothed measure from marginals of order linear in n: the positive counterpart of Q2 for
+the smoothed subclass; consistent with "no fixed order suffices".  Read as an abstract only;
+the exact hypotheses must be checked by the coordinator.
+
+### Final status (2026-11-25)
+* Report: `docs/science/workstreams/SM_REPORT.md` (§1 verdicts; §2 K1–K13 with reading levels;
+  §3 numerics N1–N4, N3b; §4 matrix, vocabulary, five papers, search log; §5 not settled / not
+  accessed; §6 next steps; §7 requests T-M1..4, E-M1..2).
+* Quotation audit done before closing: every passage in quotation marks in the report is either
+  verbatim from a text/abstract I saw or a fetch-tool extract labelled as such; three paraphrases
+  that had been set in quotation marks were rewritten (Albanna summary, Bonomi phrase,
+  Gavinsky–Pudlák attribution) and the brittleness quote was re-attributed to the EJS paper.
+* Files in this directory: NOTES.md; check_statements.py/.out (N1–N4);
+  check_q2_decomposition.py/.out (K10(c)); check_q2_bsc_variant.py/.out (K10(f)).
+* Nothing outside `experiments/science/ws_M/` and `docs/science/workstreams/SM_REPORT.md` was
+  written; no git state was changed; downloaded PDFs are in the session scratchpad only.
+* If resumed: (1) obtain Ravera et al. 2016 and Medeiros Selegato et al. 2021 through a library;
+  (2) read Glasserman–Xu 2014 and Betrò–Guglielmi; (3) read Samorodnitsky's paper in full and
+  state precisely what it implies for the noisy-codeword family; (4) forward-citation search of
+  Gardner–Longinetti–Sgheri 2005 and of Schmüdgen 2015.
+
+## Follow-up task (coordinator message, 2026-11-25): addendum S1–S4
+Targets: (S1) stability of MaxEnt refinement (Thm 7, 7'); (S2) falsification: minimum relative
+entropy as a certified lower bound on model error, and least envelope constant (Thm 8);
+(S3) two-oracle query model (Thm 4, 4', 5, Prop 5b); (S4) read Betrò–Guglielmi; certified
+MaxOcc after 2014.  Deliverable: section 8 of SM_REPORT.md + final message ≤ 350 words.
+Search log for the addendum is numbered A1, A2, ...
+### Step A0 — read the coordinator's statements

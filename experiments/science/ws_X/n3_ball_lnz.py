@@ -28,8 +28,10 @@ def lnE(pi, a):
 def sup_function_space(KA_half, BA, pihat, beta, starts=8):
     """max over ||w|| <= BA of ln E_pihat exp(-beta (KA_half w)) by fixed-point ascent (convex max)."""
     best, d = -np.inf, KA_half.shape[1]
-    for s in range(starts):
-        w = rng.standard_normal(d)
+    # random starts plus "localised" starts: the direction of the representer of a point mass
+    loc = [-(KA_half[x]) for x in np.argsort(-np.sum(KA_half ** 2, axis=1))[:6]]
+    for s in range(starts + len(loc)):
+        w = rng.standard_normal(d) if s < starts else loc[s - starts].copy()
         w *= BA / np.linalg.norm(w)
         val = -np.inf
         for _ in range(400):
@@ -112,7 +114,7 @@ def variational(KA, BA, pihat, beta, sign, starts=6):
 
 records = []
 viol = {"band": 0, "min_lower": 0.0, "U_gap": 0.0, "L_gap": 0.0, "bounds": 0}
-for trial in range(16):
+for trial in range(60):
     n = int(rng.integers(3, 6))
     size = 1 << n
     rank = int(rng.integers(2, size + 1))

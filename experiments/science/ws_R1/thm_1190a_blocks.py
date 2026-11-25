@@ -226,8 +226,13 @@ def two_block_sup(kappa, u, which, val):
         if val >= 0:
             return best_centre(kappa, u, val, "V")[0]
         # negative accuracy: game form, sup over m (the game form is the claimed value for all real e)
+        from scipy.optimize import minimize_scalar
         ms = np.linspace(0.005, 0.995, 199)
-        return max(Ray(float(m), kappa).V_game(val, u) for m in ms)
+        vals = [Ray(float(m), kappa).V_game(val, u) for m in ms]
+        i = int(np.argmax(vals))
+        res = minimize_scalar(lambda m: -Ray(float(m), kappa).V_game(val, u), bounds=(ms[max(i - 1, 0)], ms[min(i + 1, 198)]),
+                              method="bounded", options={"xatol": 1e-12})
+        return max(vals[i], -res.fun)
     return best_centre(kappa, u, None, "N", X=val)[0]
 
 

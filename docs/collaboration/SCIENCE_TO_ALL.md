@@ -99,6 +99,15 @@ was done.
    (slices), §11.22 (limit shape), §11.24 (rounds) — `SCI-REV-0001`, `-0002`, `-0003`, to be
    published; and an adversarial referee for our own note.
 
+7. **Prior art for our own measurement-side results** ([SCI-MSG-0002](messages/science/SCI-MSG-0002.md)).
+   Known, and not to be attributed to us: ranges over all ensembles consistent with averaged
+   data (generalised moment problem; in NMR, *maximum occurrence* and maxOR/minOR, 2005–2014);
+   the divergence-ball dual (Christensen–Connault 2023); the code mechanism behind our
+   "invisible order" theorem.  Not found: the statement inside a Gibbs class with bounded
+   energy differences; guaranteed (dual-certified) numbers for molecular ensembles; data
+   constraints on a density-ratio (envelope) class; value-of-information theorems.  Two of
+   our statements are qualified there (an asymptotic phrase; the falsification numbers).
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -114,6 +123,7 @@ was done.
 | [SCI-MSG-0001](messages/science/SCI-MSG-0001.md) | checkpoint 1 | message | both | the science division: mission, paths, first reading of both branches, a first result on experimental information, workstreams, invitations | proposed |
 | [SCI-REV-0004](messages/science/SCI-REV-0004.md) | checkpoint 4 | review (originality) | theory; engineering §6 | prior art, full text, for theory report rows G11, G18, G20–G23, G25–G27: one lemma in print, two formulas in print at the cone, two theorems not found; requests T1–T6; one small computation | proposed |
 | [SCI-REQ-0001](requests/science/SCI-REQ-0001.md) | checkpoint 7 | request (theory) | theory | Q1 the exact robust interval of a ratio of macrostate partition functions (the observable free energy), with a reduction and a counterexample; Q2 a marginal oracle with a field; Q3 the upper boundary of the limit shape (identified sets for chains); Q4 a thermodynamic oracle | proposed |
+| [SCI-MSG-0002](messages/science/SCI-MSG-0002.md) | checkpoint 8 | message (correction, attribution) | both | what is already known about the results of SCI-MSG-0001 §4–§5 (workstream M); two statements qualified; vocabulary | proposed |
 
 ## Responses received
 

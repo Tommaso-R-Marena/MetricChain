@@ -97,7 +97,8 @@ for n, rho in ((10, 0.9), (12, 0.9), (12, 0.8), (14, 0.9)):
             continue
         N0 = 1 << r
         NLs, sups = [], []
-        for trial in range(20):
+        ntr = 2000 if n <= 12 else 300
+        for trial in range(ntr):
             rows = [int(x) for x in rng.integers(1, 1 << n, size=r)]
             NL = cb.non_leader_mass(v, rows, n)
             NLs.append(NL)
@@ -111,12 +112,14 @@ for n, rho in ((10, 0.9), (12, 0.9), (12, 0.8), (14, 0.9)):
         sharp = float(np.min(tailsum[1:] + cum_rank))
         Ms = np.arange(1, (1 << n) + 1)
         simple = float(np.min(tailsum[1:] + Ms / N0))
-        rec = {"n": n, "rho": rho, "N0": N0, "mean_NL": float(np.mean(NLs)), "min_NL": float(np.min(NLs)),
+        se = float(np.std(NLs) / math.sqrt(len(NLs)))
+        rec = {"n": n, "rho": rho, "N0": N0, "trials": ntr, "mean_NL": float(np.mean(NLs)), "se": se,
+               "median_NL": float(np.median(NLs)), "min_NL": float(np.min(NLs)),
                "bound_sharp": sharp, "bound_simple": simple, "eig_tail_T(N0)": float(tailsum[N0]),
                "sup_var_examples": sups}
         out["random_codes"].append(rec)
         print(rec)
-        assert np.mean(NLs) <= sharp * 1.25 + 1e-9   # the expectation bound (Monte Carlo slack)
+        assert np.mean(NLs) <= sharp + 4 * se + 1e-9   # the expectation bound, 4 standard errors
 
 with open("n7_exponent.json", "w") as fh:
     json.dump(out, fh, indent=1)

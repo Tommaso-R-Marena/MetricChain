@@ -240,3 +240,11 @@ Did NOT read dia_enum.c (will write my own enumerator first).
   killed (my n x n x 3 distance tensor: 3.5 GB) -> rewritten with on-the-fly checks (same results at
   27, 250, 1000; exact re-verification added); 5000 running.
 * Report draft written: docs/science/workstreams/R2_REPORT.md.
+
+* Stand-alone verifier `r2_rigorous_packing_verify.py` (reads stored weights and the 14 proved
+  points): 116 / 451 / 8 / 19 points, all weights valid, pairwise condition exact: True.
+* Headline repeated at THEORY_REPORT lines 1190, 3503, 4702, 4888, 5042-5044, 6300, README 289-290,
+  THY-RES-0002 (title, §4 under a [P] heading).  G24 (line 1335) and RESEARCH_LOG are worded
+  correctly (liminf/limsup, "off a countable set").
+* Definition check (§11.2, Thm 11.4): N_cov <= N_point <= N_cov + 1; §11.22's "certifies iff covered"
+  is the covering number (a certificate needs in addition a minimiser among the centres): wording.

@@ -1,0 +1,10 @@
+# R4 own computation: exact twins of Theorem 11.86, u = 1.0, accuracy (gap >) 1.0
+# for each n and split: the largest budget T at which ln A(F_D) - ln A(F_S) > gap;
+# E = -ln(p1+p2)/n;  'all' = n^-1 ln(2^n/|B(n,k*)|) (Theorem 11.25(a), same accuracy)
+n=  1600 n1=  720 n2=  880 T=   62.3391 T/n=0.03896 gap=1.0445 lnA_S=2.637 lnA_D=3.682 lnp1=-55.251 lnp2=-61.766 E=0.03453 lo2/n2=0.3193 checks_all_ok=True
+n=  1600 n1=  800 n2=  800 T=   63.7982 T/n=0.03987 gap=1.0653 lnA_S=2.816 lnA_D=3.882 lnp1=-56.682 lnp2=-63.062 E=0.03543 lo2/n2=0.3088 checks_all_ok=True
+n=  1600 n1=  880 n2=  720 T=   61.8296 T/n=0.03864 gap=1.0398 lnA_S=3.279 lnA_D=4.318 lnp1=-54.736 lnp2=-60.577 E=0.03421 lo2/n2=0.3028 checks_all_ok=True
+n=  1600 n1=  960 n2=  640 T=   54.3541 T/n=0.03397 gap=1.0031 lnA_S=3.784 lnA_D=4.787 lnp1=-47.276 lnp2=-53.096 E=0.02955 lo2/n2=0.3047 checks_all_ok=True
+n=  1600 n1= 1040 n2=  560 T=   46.8827 T/n=0.02930 gap=1.0524 lnA_S=3.937 lnA_D=4.990 lnp1=-39.809 lnp2=-45.618 E=0.02488 lo2/n2=0.3071 checks_all_ok=True
+==> n=1600: best E (two rounds) = 0.03543 at n1=800;  all algorithms: 0.03092 (k*=608, Delta_k*=1.4504)
+n=  3200 n1= 1440 n2= 1760 T=  119.1071 T/n=0.03722 gap=1.0108 lnA_S=3.020 lnA_D=4.031 lnp1=-111.314 lnp2=-117.860 E=0.03479 lo2/n2=0.3216 checks_all_ok=True

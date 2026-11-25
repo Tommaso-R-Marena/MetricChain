@@ -70,3 +70,86 @@ Plan of numerics (each before the corresponding proof):
   (deterministic), Theorem B = exact consistent interval of ln Z over a ball (variational),
   Theorem C = Bayesian twin (credible intervals, variance sandwich, second-moment certificate),
   Corollary = no free hedging, Theorem D = LP-funnel slope (direction 3).
+
+### 18:45 — N7 done (n7_exponent.py -> n7_exponent.json); N5 running; N3 running (slow under load ~17)
+* [N] product covariance sigma^2 rho^{d_H}, fixed rho: two-sided bounds of Theorem A give
+  (1/n) ln n_p -> h((1-rho)/2): rho=0.5: [0.567, 0.582] at n=2000 (h=0.5623); rho=0.9: [0.206,
+  0.225] (h=0.1985); rho=0.99: [0.035, 0.047] (h=0.0315).  Convergence from above, O(n^{-1/2}).
+* [N] rho = 1 - 2 lam/n: polynomial; degree between ~0.9 and ~2.4 (lam=.5, theta=.5) up to ~5-7
+  (lam=2, theta=.1): the degree is the Poisson(lam) quantile at the tolerance, as predicted.
+* [N] random linear designs (2000 trials each, n=10,12; 300 at n=14): mean non-leader mass
+  below the expectation bound sum_U v_U min(1, rank(U)/N0) in all 12 cases (e.g. 0.0355 vs 0.0409),
+  and sup_x Var <= 4 NL in all examples.  First attempt with 20 trials "failed" by Monte Carlo
+  noise (NL is heavy-tailed: rare codes alias a main effect with the constant) — not a
+  counterexample; kept in the log as a warning about small trial counts.
+* N5 quick look (order-2 residual, eps=0.25): with oracle-tight envelope constants (kappa=1) and
+  e/c ~ 1/2 the FIRST-ORDER paradigm is as cheap as the kernel one up to n=10 (greedy 34 vs 34);
+  with a safety factor 2 on the constants (kappa=1/2) it is 186 vs 55 at n=10.  The envelope
+  exponent is small (R*(1/2)=0.188/site): separation is asymptotic, not dramatic at toy sizes.
+  => must report honestly; added Part II (additive toy, rigorous product lower bound, n to 1000).
+
+### 19:05 — N3 done (n3_ball_lnz.py -> n3_ball_lnz.json, .log)
+* LESSON (machine): load average 17 on 4 cores; numpy with multi-threaded BLAS stalls on small
+  matrices.  ALWAYS run with OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1.  (First two N3 attempts timed
+  out for this reason only.)
+* [N] 60 random (kernel, design, f, beta, ball member) instances, |X| = 8..32:
+  hypercircle band |g-ghat| <= B_A P_A: 0 violations; exact lower end of min attained (1.8e-15);
+  U_A (search in function space) == sup_pi[beta B_A sqrt(pi K_A pi) - KL] and
+  L_A == inf_pi[beta B_A sqrt(pi K_A pi) + KL] to 2e-7 / 7e-7 relative; ordering
+  L_A <= beta B_A sqrt(pihat K_A pihat) <= U_A <= beta B_A max P_A: 0 violations.
+* Wrinkle: in a first run 1/60 instances disagreed (1.97 vs 3.13).  Cause: the sup problem is a
+  difference-of-convex maximisation with TWO kinds of local maxima — a delocalised perturbation
+  and a localised (dip-like) one; random starts found only the first.  With localised starts both
+  searches agree.  This is the ellipsoid's analogue of the dip: at large beta*B the worst member
+  for ln Z localises.  (Worth one sentence in the report.)
+
+### 19:25 — literature search log (queries, what was read, reading level)
+Tool: web search (results = titles+snippets), page fetch for 3 URLs.  Levels: [abs] abstract read,
+[snip] search snippet only, [mem] from memory — unverified.
+ 1. "Mitchell Morris Ylvisaker Two-level fractional factorials and Bayesian prediction" ->
+    Statistica Sinica 5(2) (1995) 559-573 [abs, fetched stat.sinica.edu.tw; full text behind
+    password].  Stationary GP prior on {-1,1}^k, conditioning on a fractional factorial,
+    "useful regularities".  => the coset/aliasing posterior (my Lemma A1) is KNOWN in substance.
+    Later: Kerr 2001, Joseph 2006 (Bayesian fractional factorial design) [snip].
+ 2. "Wasilkowski Woźniakowski Finite-order weights imply tractability of linear multivariate
+    problems" -> J. Approx. Theory 130 (2004) 57-77, doi 10.1016/j.jat.2004.06.011 [snip/abs].
+ 3. "Kuo Sloan Woźniakowski Lattice rules for multivariate approximation in the worst case
+    setting" -> MCQMC 2004 (Springer 2006) 289-330 [snip].  Lattice algorithm = aliasing over the
+    dual lattice; my linear designs are its F_2 analogue (digital nets / Walsh).
+ 4. "Novak global optimization as hard as approximation" -> D. Krieg, PhD thesis arXiv:1905.01166
+    [snip]: "global optimization is never harder than uniform approximation ... practically as
+    hard ... if F is convex and symmetric [Was84, Nov88]".  => my lower bound for min over the ball
+    is an instance of Wasilkowski 1984 / Novak 1988 [mem for the originals].
+    Wasilkowski, "On average complexity of global optimization problems", Math. Programming 57
+    (1992) 313-324 [abs]: optimisation is easier on average than in the worst case; only upper
+    bounds; average complexity open.
+ 5. "Bayesian optimization combinatorial binary hypercube ... BOCS COMBO" -> Baptista-Poloczek
+    2018 (BOCS, second-order model on binary variables), Oh et al. 2019 (COMBO, diffusion kernel
+    on the graph Cartesian product = product kernel), Dadkhahi et al. 2020 (arXiv 2006.03963),
+    Deshwal et al. [snip].  No regret/complexity theorem for Walsh-spectrum kernels with a
+    matching lower bound surfaced in this search (absence of a match is NOT a novelty claim).
+ 6. "Bogunovic Krause Misspecified Gaussian process bandit optimization" -> NeurIPS 2021,
+    arXiv:2111.05008 [abs]: true function eps-close in sup norm to an RKHS-ball member; EC-GP-UCB;
+    regret bounds in eps, horizon, kernel.
+ 7. "Weller Rowland Sontag Tightness of LP relaxations for almost balanced models" -> AISTATS 2016
+    (PMLR 51) [snip]: LP+LOC tight for balanced binary pairwise models; triplet relaxation tight
+    iff blocks almost balanced.  Thapper-Zivny not surfaced [mem].
+ 8. "Lang Sontag Vijayaraghavan stable instances" -> AISTATS 2018 (arXiv:1711.02195) [abs,
+    fetched]: ferromagnetic Potts, alpha-expansion and an LP relaxation recover the MAP under
+    stability conditions; Block stability (arXiv:1810.05305) [snip]; Lang-Reddy-Sontag-
+    Vijayaraghavan "Beyond perturbation stability" [snip].
+ 9. "Thomas Chen Ortner Body-ordered approximations of atomic properties" -> Arch. Ration. Mech.
+    Anal. 246 (2022) 1-60, arXiv:2106.12572 [snip]: LDOS of tight-binding models has a weak
+    body-order expansion; rates in terms of Fermi temperature and band gap.
+10. "Bayesian quadrature log partition function" -> Rasmussen-Ghahramani "Bayesian Monte Carlo"
+    (NIPS 2002/2003), Osborne et al. NIPS 2012, Gunter et al. 2014 WSABI (arXiv:1411.0439) [snip].
+11. "Hinrichs Novak Ullrich Woźniakowski curse of dimensionality smooth functions" -> Math. Comp.
+    83 (2014) 2853-2863, arXiv:1211.0871 [abs/snip]: curse for unit balls of C^r, also when
+    directional derivatives are bounded by ~1/sqrt(d); part II J. Complexity 30 (2014) 117-143.
+12. "Kanagawa Hennig Sejdinovic Sriperumbudur" -> arXiv:1807.02582 [snip]: sect. 3.4 "posterior
+    variance = worst-case error in the RKHS unit ball".
+13. Srinivas-Krause-Kakade-Seeger ICML 2010 / IEEE TIT 2012 (GP-UCB; GP sample or low RKHS norm;
+    regret via maximal information gain) [snip]; Bull, JMLR 12 (2011) 2879-2904 [snip];
+    Kandasamy-Schneider-Poczos ICML 2015 (additive models: regret linear in D) [snip].
+14. Sloan-Woźniakowski, J. Complexity 14 (1998) 1-33 [snip]; Novak-Woźniakowski, Tractability of
+    Multivariate Problems I-III (EMS 2008/2010/2012) [snip, titles only].

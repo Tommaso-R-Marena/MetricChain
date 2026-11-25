@@ -64,6 +64,19 @@ theory report lists as missing and shows that the flat histogram is not needed a
 
 **What would survive a hostile referee** is §8.
 
+*Changes since the first complete version of this report* (18:20 UTC, from which the coordinator's
+message `SCI-REV-0004` was drawn; listed so that the message can be brought up to date):
+(1) **Proposition A1.1 (§2.5) is new** — the class-wide upper bound for the product sampler
+`Bern(r*)ⁿ` at bounded accuracy, which the first version called "not proved", is now proved (chain
+rule; checked by enumeration), so request T4 changed from "decide whether" to "check and adopt";
+(2) the sentence that the nested algorithm "answers the question Mathé and Novak leave open" was
+too strong — neither their paper nor the Novak–Rudolf survey poses the non-log-concave question
+(§8, §4.10); (3) "the strict inequality … cannot hold at `0⁺`" was made precise: the two sides
+coincide *in the limit* `ε₁ → 0⁺` (§2.3); (4) §2.4 now contains a proof that in *absolute* error the
+adaption gain disappears; (5) the two headline numbers of G26 were re-computed (§3, §4.6);
+(6) the theory division's own earlier mention of the Suárez–Silbey–Oppenheim paper (by title) is
+recorded (§2.2); (7) search log: 24 queries; seven scripts.
+
 ---
 
 ## 2. Precise statements, with proofs
@@ -81,7 +94,9 @@ transformations" (multiplying rows and columns by positive numbers), and `(y, z)
 table with diagonal symmetry, i.e. uniform margins.  Their Proposition 8 reads: "For all
 `x ∈ ℝ∖{0}`: a) `sMutInf_x` has exactly one maximum at the origin `(y, z) = (0, 0)`. b)
 `lim_{‖(y,z)‖→∞} sMutInf_x = 0`", where `sMutInf = sign(D)·`(mutual information in bits) and the
-subscript is the restriction to a fixed odds ratio.  This is Lemma 11.89 with its equality case.
+subscript is the restriction to a fixed odds ratio (for `x < 0` the signed quantity has its unique
+*extremum*, a minimum, there; the case `x > 0` is the one stated).  This is Lemma 11.89 with its
+equality case.
 The value at the origin, `(√λ/(1+√λ)) log √λ − log(1+√λ) + log 2` with `λ = e^{2s}`, is written out in
 Williams (Neural Computation 34 (2022), eq. (10)) **[K, full text]**, who also observes on Yule's
 smallpox table that "the MI is lowest in the original (unbalanced) table, and increases as the
@@ -164,6 +179,13 @@ background is the theory of sums of random exponentials (Ben Arous–Bogachev–
 (§3 E2e).  I also simulated the estimator (§3 E5): the deficit `ln(A/Â)/n` at `θ = a/2`, `u = 1` is
 `0.0166, 0.0123, 0.0112, 0.0108` at `n = 500 … 32 000`, limit `0.0106`.
 
+*What the theory division already had.*  Its workstream D (`docs/workstreams/D_REPORT.md`, §9, written
+for G15, before §11.16) lists "Suárez et al. (2012, 'phase transition in the Jarzynski estimator')"
+among sources read as "titles and summaries only", with the correct general remark that this
+literature is about "a *given* pair of systems and a *given* estimator".  The coincidence of the
+*formulas* with `θ_na`, `a` and `ln cosh(u/2)` was not noticed there, and §11.16, row G18 and L7 do
+not cite the paper.
+
 *What is not in these sources:* a class of instances, a minimax statement, a lower bound for all
 non-adaptive algorithms, `(ε, δ)`-statements for every `n`, adaptive algorithms.  So the sentence
 of row G18, "the exponent on the cube for `ln Z` … [was] not found", should become: *the exponent
@@ -200,7 +222,7 @@ over `r` of the larger one is the information radius): the strict inequality
 in that limit**, so it can at best be an extensive-accuracy statement; the reported gaps of 0.5–3 %
 indeed shrink with `ε₁` (1.3 % at `0.05E`, 2.5 % at `0.25E` in the report's own numbers).  That
 `Bern(r*)ⁿ` really attains `a` on the *whole class* at every bounded accuracy is Proposition A1.1 of
-§2.6.  (The report's remark that the isoperimetry of a fixed product measure "gives the worse
+§2.5.  (The report's remark that the isoperimetry of a fixed product measure "gives the worse
 exponents" is about `π` itself, not about `Bern(r*)ⁿ`, and is not contradicted.)
 (c) I reproduced the report's table of §11.20 (`u = 2`, fields `0, 0.5, 1, 2, 3`): `a = .3278, .3162,
 .2836, .1841, .0928` and plain Monte Carlo `.3278, .4078, .4621, .4338, .2732` — **independent
@@ -236,9 +258,12 @@ where adaption yields a gain up to the order `n`" (ibid. §6.1(5), citing Novak,
 **[not accessed]**).  The cube class is one more example of this kind, with the gain *exactly* one
 power of the cardinality, in the randomised setting, for relative error.  (3) The gain looks
 "exponential" in the theory report only because the error scale is `e^{n·rate}`.  This is an
-analogy, not a corollary: the cited bounds concern absolute error, and in absolute error on a
-bounded convex section of the cone (e.g. `max w ≤ 1`) the gain disappears, because large-`Z`
-instances dominate.  (4) A contrast worth citing: on the moment-ratio cones of
+analogy, not a corollary: the cited bounds concern absolute error, and in absolute error the gain
+disappears altogether **[P]**: the convex section `{w in the cone, max w ≤ 1}` contains every
+function with values in `[e^{−u}, 1]` (distinct points are at distance `≥ 1`), on which estimating
+the mean has randomised error `Θ(N^{−1/2})` for adaptive and non-adaptive methods alike (Bakhvalov;
+Mathé–Novak's class `F₁`), and plain Monte Carlo has error `≤ N^{−1/2}` on the whole section.  The
+adaption gain lives entirely in the small-`Z` instances that only a relative criterion sees.  (4) A contrast worth citing: on the moment-ratio cones of
 Kunsch–Novak–Rudolf (2019) **[abstract]** i.i.d. nodes with an adaptive *stopping rule* are optimal
 among all randomised algorithms; on the log-Lipschitz cone adaptive *nodes* gain a factor `N`
 (pre-drawn points with adaptive stopping do not: Theorem 11.45(e)).
@@ -337,8 +362,8 @@ All scripts are mine, share nothing with the theory division's code, and run in 
 | `odds_ratio_report_proof_check.py` → `.out` | the intermediate formulas of the *report's* proof of Lemma 11.89: gradient (2), `T < 0` (3), kernel (4) with closed form, maximiser and monotone capacity (5), (6) | all hold (finite differences `5·10⁻¹¹`; 20 000 samples) |
 | `exponent_checks.py` → `.out` (4 s) | E1 the report's values of `h`, `a`; E2 S–S–O formulas = `θ_na`, `ln cosh`, `a`; Chatterjee–Diaconis `q = a`; E3 shear identity; E4 exact finite-`n` lower-bound constructions; E5 simulation of plain Monte Carlo at the cone; E6, E7 | E1: `h = 0.00767, 0.02914, 0.09728, 0.15614` (`u = ½, 1, 2, ln 16`), `a = 0.03030, 0.11094, 0.32781` — all digits of the report; E2: `4·10⁻¹⁵`; **E4: `0.02933` at `n = 6400`, `u = 1`, `ε₁ = ¼ ln cosh ½`, `δ = 0.05` — replicates the report's `0.0293`** (limit `0.0283`); hinted side `0.0169 → 0.0163`; E5 as in §2.2 |
 | `capacity_check.py` → `.out` (3 s) | C1 capacity = information radius for the cone channel, six `(p, u)`; C2 uniform cube; C3 plain MC from `π`; C4 exact finite-`n` KL of a cone against the flat histogram; C5 mutation | equality to `10⁻⁸`; `a(0.1, 2) = 0.16374`, `r* = 0.1975`; flat histogram: `0.1752, 0.1675, 0.1649` at `n = 200, 800, 3200` `→ 0.1637`; **replicates the table of §11.20 exactly** (§2.3(c)) |
-
 | `chain_rule_check.py` → `.out` (5 s) | Proposition A1.1 by exact enumeration, `n = 8…14`, seven `(n, p, u)`, 16 families of Lipschitz functions each (cones, flattened cones, dips, minima/maxima of cones, McShane regularisations of random functions at four roughness scales, wells, block-radial, additive): A2 conditional means in `[a₀, a₁]`; A3 `KL ≤ na`; A4 exact upper tail against `exp(−s²/(2nu²))`; A5 Monte Carlo for item 4; A6 `a(p,u) ≤ a(½,u)`; A7 three mutations | 112 instances: largest excursion of a conditional mean `4·10⁻¹⁵`; `max KL/(na) = 1.000000`, attained at a constant cone; tail bound never violated; item 4: measured `0.227` against the bound `0.471` in the tightest case; mutations detected (a `3u`-Lipschitz function leaves the interval; proposal `π` gives `1.28·na`) |
+| `rounds_numbers_check.py` → `.out` (3 min), `rounds_refine.py` → `.out` (finer grid, ≈ 15 min) | the two headline numbers of the round hierarchy, re-computed from the formulas *as printed* in Theorems 11.84(b) and 11.86 (this replicates the evaluation of the formulas, not their proofs) | upper value `T^{(2)}(0)/a = 0.6196, 0.6243, 0.6412, 0.6646` at `u = 0.5, 1, 2, 3` (report: `0.620, 0.624, 0.641, 0.665`), `0.6181` at `u = 0.02` (golden ratio `0.618`); lower value `θ₂*/a = 0.3493, 0.3592, 0.3940, 0.4395` (report: `0.349, 0.359, 0.394, 0.440`), `θ₂*/h = 1.379, 1.368, 1.328, 1.277` (report: `1.38, 1.37, 1.33, 1.28`); at `u = 2` the supremum sits on the constraint `θ < φ₂a` (`φ₁ = 0.606`), which a grid of step `0.01` in `φ₁` misses by `0.002` |
 
 Re-run: `cd experiments/science/ws_A1 && python3 <script>`; every script exits non-zero on a
 failed check.  *Errors of mine found on the way* (recorded in `NOTES.md`): two mutation/optimiser
@@ -347,7 +372,7 @@ the largest instead of the least radius `R` with `D_R > ε` in the non-adaptive 
 test function in `chain_rule_check.py` that was `1.5u`- instead of `u`-Lipschitz (caught by the
 script's own Lipschitz check, and it did violate item 1 — the check has power).
 *Not done numerically:* nothing about the adaptive algorithm (Theorems 11.52, 11.56) — its cost
-accounting was outside this brief; Theorem 11.63; the two-round twins.
+accounting was outside this brief; Theorem 11.63; the finite-`n` two-round twins.
 
 ---
 
@@ -415,8 +440,9 @@ text: abstract, §1, Thms 1.2–1.4, Table 1]`: the oracle returns `H(X)`, `X �
 Harris, Kolmogorov, Liu, Yin, Zhang, arXiv:2604.01263 (2026) `[abstract, pp. 1–2]`: non-adaptive
 `O(qε⁻² log² h)`, and `O(qε⁻² log h)` "with just two additional adaptive rounds".  *Comparison.*
 Adaptivity and rounds for partition functions, but with Gibbs samples as the oracle, at polynomial
-scale, and with the conclusion that one round is (nearly) enough; an exponential adaptive /
-non-adaptive gap appears there only when `log h ≫ q`.
+scale, and with the conclusion that one round is (nearly) enough; a gap that is exponential in `q`
+between adaptive (`O(q²ε⁻²)`, as the paper recalls for the TPA method) and non-adaptive algorithms
+appears there only in the corner where `log h` is exponentially large in `q`.
 
 (f) **Normalising constants by value/gradient queries** — Holzmüller & Bach 2025 `[full text: §§1–2.2,
 Table 1, proofs of Thm 8 and Prop. 9]` (fixed `d`, `C^m` balls, rates in `n` and `B`, constants in
@@ -513,8 +539,9 @@ perturbations are shells in the barrier class.
 
 *Prior art for the first half.*  The invariance principle of design theory: Idais & Schwabe 2020
 `[full text: Theorem 2 and its paragraph]` — "If Φ is invariant (with respect to G) and convex, then
-there exists an invariant design … Invariant designs are uniform on orbits … it remains to find the
-optimal orbits and the [weights]", after Kiefer 1959 `[not accessed]`; Bakhvalov's averaging over a
+there exists an invariant design … which is Φ-optimal over all designs … Invariant designs are
+uniform on orbits … it remains to find the optimal orbits and the corresponding optimal weights",
+in the spirit of Kiefer 1959 `[not accessed]`; Bakhvalov's averaging over a
 group is the same argument for lower bounds (it is how Mathé–Novak and the theory report's Theorem
 11.45 proceed).  Once designs are uniform on orbits, giving every one of the `N_orb` orbits the same
 number of points loses at most the factor `N_orb` — that is the theorem.  The one ingredient that
@@ -539,7 +566,9 @@ adaptive over non-adaptive strategies (arXiv:2610.06197) `[search snippet]`.
 *Comparison.*  Round hierarchies are a standard genre; none of the sources treats estimation of a
 sum over a Lipschitz class by value queries, and none has "dilution of a blind batch by a flat
 histogram" as the separating instance.  The lower-bound lemma (virtual run, Lemma 11.85) is the
-standard coupling of round-elimination arguments.
+standard coupling of round-elimination arguments.  *Independent replication of the numbers* (§3):
+`T^{(2)}(0)/a` and `θ₂*/a` re-computed from the printed formulas agree with the report at four slopes
+to the digits given; I did not examine the proofs.
 *Classification:* **(6) plausibly original theorem**, conditional on claim 1 (its upper half is a
 re-scheduling of the nested algorithm) and unrefereed; one step of a hierarchy is proved.
 
@@ -661,7 +690,8 @@ Agarwal–Agarwal–Assadi–Khanna 2017; the statistical-query literature (not 
 5. **First source of the capacity phrasing of Lemma 11.89** and of the cosh bound on the Laplace
    functional of Hamming-Lipschitz functions; and whether Proposition A1.1 (§2.5) is in print
    (one search).
-6. **G25 second half, G26 lower bound, Theorem 11.90**: not examined.
+6. **G25 second half, Theorem 11.90, and the proofs of G26**: not examined (for G26 only the two
+   headline numbers were re-computed from the printed formulas).
 7. The statistical-query lower-bound literature and the Canetti–Even–Goldreich line were not opened;
    I expect them to be about unstructured classes, like Mathé–Novak's `F_C`, but that is from memory.
 
@@ -673,7 +703,7 @@ Agarwal–Agarwal–Assadi–Khanna 2017; the statistical-query literature (not 
    cardinality `N` up to `e^{o(n)}`, for `N ≤ e^{nh}`", with Mathé–Novak, Krieg–Novak–Ullrich,
    Suárez–Silbey–Oppenheim and Chatterjee–Diaconis as the four anchors.  Ask whether the same holds
    on `[0,1]^d` for log-Lipschitz densities *without* log-concavity (Mathé–Novak's class minus
-   concavity) — that is the question their paper leaves and the one their community will ask.
+   concavity) — that is the question their community will ask.
 2. **Extend Proposition A1.1 to extensive accuracies, or show that it cannot be done without
    isoperimetry.**  At bounded accuracy the chain rule replaces Harper's theorem and the method of
    types (§2.5).  At accuracy `ε₁n` one needs, uniformly over the class, a *lower* bound on the
@@ -737,9 +767,10 @@ direction.  What a referee cannot wave away is the **matching adaptive upper bou
 log-concavity and without a sampler** — the nested algorithm — because it treats, on a model class,
 a case that the Mathé–Novak line does not reach: what adaption can do when the density is only
 log-Lipschitz (their adaptive method, and its explicit version in the Novak–Rudolf survey, need
-log-concavity; neither paper poses the non-log-concave question).  A second result, if its proof survives external refereeing: *two rounds are
-strictly between* (Theorem 11.86), because round hierarchies for estimation problems with a natural
-class are rare and the separating instance is not of the usual nested kind.
+log-concavity; neither paper poses the non-log-concave question).  A second result, if its proof
+survives external refereeing: *two rounds are strictly between* (Theorem 11.86), because round
+hierarchies for estimation problems with a natural class are rare and the separating instance is
+not of the usual nested kind.
 
 **What the paper would have to add.**
 1. A complete, self-contained proof of the cost of the nested algorithm with the `o(n)` made

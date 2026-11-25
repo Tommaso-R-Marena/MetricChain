@@ -155,7 +155,15 @@ def main():
             glob = max(D[:, a].max(), D[a, :].max())       # sup-norm (pinned) stability bound
             P, _ = minimax_path(S, f, a, b)
             path_rad = D[P, a].max()
-            widths.append((hi - lo, 2 * glob, hi - H0, path_rad))
+            # envelope radius of the canonical f-optimal cut (outer boundary of the component of a below B_f)
+            Bf = H0 + f[a]
+            if H0 > 1e-12:
+                from kcore import component_below
+                comp = component_below(S, f, a, Bf, strict=True)
+                cut_rad = D[a, outer_boundary(S, comp)].max()
+            else:
+                cut_rad = 0.0
+            widths.append((hi - lo, 2 * glob, hi - H0, path_rad, H0 - lo, cut_rad))
             dlo, dhi = depth(S, f + gminus, a), depth(S, f + gplus, a)
             for s in range(60):
                 g = random_admissible(D, rng)
@@ -217,6 +225,9 @@ def main():
           f"min {np.min(w[:,0]/w[:,1]):.3f}, max {np.max(w[:,0]/w[:,1]):.3f}")
     ok = np.all(w[:, 2] <= w[:, 3] + 1e-9)
     print(f"  upper excursion hi - H_f <= envelope radius of the f-optimal path in all cases: {ok}")
+    ok2 = np.all(w[:, 4] <= w[:, 5] + 1e-9)
+    print(f"  lower excursion H_f - lo <= envelope radius of the canonical f-optimal cut in all cases: {ok2}")
+    assert ok and ok2
     assert all(vv == 0 for vv in viol.values())
 
 

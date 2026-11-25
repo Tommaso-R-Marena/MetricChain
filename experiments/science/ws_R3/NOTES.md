@@ -53,3 +53,33 @@ Started 2026-11-25 18:12 UTC.  Rules read (COMMON.md, R3_brief.md).  I write onl
 * Candidate "theorem within reach": (A) theta_na unchanged by the k-body oracle (C-symmetrised
   cones; drop >= D_R when balls disjoint: two-line proof); (B) joint oracle I1+I2(k)+I3 at
   bounded accuracy via C-symmetrised visible basin + C-symmetrised twin.
+
+## Numerics log
+
+* 18:40 `r3_codes.py` (own GF(2)/BCH code; output `r3_codes.out`).  For every n <= 31, every
+  k <= n, two coordinate choices (first n; random n-subset of 2^m-1): dual of BCH(t=ceil(k/2))
+  punctured to n coordinates has EXACT dual distance > k (brute force / MacWilliams) and
+  |C| <= (2n)^ceil(k/2); 0 failures; max of ln|C| - ceil(k/2) ln 2n is exactly 0 (n = 2^(m-1)).
+  => the "Codes" paragraph is right, also for k odd, k near n, tiny n.  Extended-BCH duals:
+  dual distance 2t+2 at size 2(2^m)^t, so for odd k the bound can be improved by a factor ~n:
+  |C| <= 2 (2n)^((k-1)/2).  Puncturing can destroy the MINIMUM distance of C itself
+  (simplex[15,4,8] on 8 well-chosen coordinates has a word of weight 1) - harmless for the
+  note (d_min(C) is never used), relevant for any sharpening.
+* 18:55 `r3_thm2.py` (output `r3_thm2.out`): Theorem 2 replicated exactly on codes the author did
+  not use: [15,8,4] = dual of BCH(15,2) (k=4) and extended Golay [24,12,8] (k=7), b in
+  {0.5,1,2,4} resp. {1,2,4}; both nu_{C,b} and the variant exp(-b d(x,C)); full-cube
+  Walsh-Hadamard transform: every Fourier coefficient of order 1..k is 0 (exactly), order k+1
+  equals tau^(k+1) for the mixture; all single-flip ratios <= e^b; entropies inside (c);
+  (d) on 3200 random class members + adversarial descent: min of S - n h = -3e-15.
+  OBSERVATION (matters for the reading): the upper end of (c), n h + ln|C|, EXCEEDS n ln 2 in
+  many of these cases (Golay b=1: 22.29 > 16.64; b=2: 17.09 > 16.64), so there the check is
+  vacuous and the "ordered" ensemble is in fact almost uniform (Golay, b=1: n ln2 - S = 0.0014).
+  By the same arithmetic 9 of the author's 16 cases ([7,3],[15,4],RM(1,3),RM(1,4) at b=0.5,1 and
+  RM(1,3) at b=2) test an inequality implied by S <= n ln 2.  The theorem has content only when
+  n (ln 2 - h(sigma(b))) > ln|C|.
+* Idea worked out on paper (to be checked numerically): for MIXTURES nu_pi = sum pi(a) P_a with
+  pi k-wise uniform, S(nu_pi) - n h(sigma) = I(Z;X) >= -ln E kappa^{d(Z,Z')}, kappa = 1/cosh(b/2)
+  (variational decoder bound + Jensen), and E kappa^{d(a,Z')} <= pi(B(a,r)) + kappa^(r+1)
+  <= M_t/min F_t^2 + kappa^(r+1) by Theorem 3 applied to pi.  Hence
+  S >= n h(sigma) + t ln n - ln t! - o(1): Theorem 2 is sharp (even k: up to O_k(1)) within
+  mixtures of polarised basins.  Full cone class: open.

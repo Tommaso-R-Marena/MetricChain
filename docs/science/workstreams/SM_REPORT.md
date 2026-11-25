@@ -36,11 +36,11 @@ a linear programme whose dual is the semi-infinite "hard-max" problem
 an **established experimental-NMR method** — MAP (2007), Maximum Occurrence / MaxOcc (2010–),
 maxOR and minOR (2014) of the Florence group — resting on a **theorem** of Gardner, Longinetti
 and Sgheri (2005); the same object is the *maximal mass function* of moment theory, with an
-exact conic dual (Schmüdgen 2015; di Dio–Schmüdgen 2018).  The two literatures do not cite each
-other.  (iii) Adding a KL (φ-divergence) ball around a reference measure gives the dual
+exact conic dual (Schmüdgen 2015, not read; di Dio–Schmüdgen 2018, read).  In the texts I read
+the two literatures do not cite each other.  (iii) Adding a KL (φ-divergence) ball around a reference measure gives the dual
 `inf_{η>0,λ} [η ln E_{μ0} e^{(ψ−λ·φ)/η} + ηρ + λ·m]`, with convergence to the prior-free sharp
 bounds as `ρ → ∞`: **this is Proposition 2.1 and Theorem 2.1 of Christensen & Connault
-(Econometrica 2023)**, in econometrics.  **Not found**: any of this for molecular ensembles with a
+(Econometrica 2023; numbering of arXiv v4)**, in econometrics.  **Not found**: any of this for molecular ensembles with a
 physical prior neighbourhood; general `ψ` in structural biology; dual certificates for the
 numbers that are published (MaxOcc is computed by penalised least squares on a finite pool with
 a heuristic misfit threshold); moment constraints on a density-ratio or metric ("envelope")
@@ -48,15 +48,19 @@ class; a KL-UQ bound evaluated with rigorous partition-function bounds.
 **Q2 (non-identifiability).**  The positive half (interaction order `≤ m` ⇒ identified by
 `≤ m`-marginals) is textbook (minimal exponential families; Griffiths–Ruelle; Henderson) and is
 computationally hard in general (Bresler–Gamarnik–Shah).  The negative mechanism is also known:
-`k`-wise independent distributions on linear codes of dual distance `> k` have entropy
-`O(k log n)` (Alon–Babai–Itai lineage; exact entropy bounds: Gavinsky–Pudlák, Bhangale–Potukuchi),
-and "the range of entropies consistent with means and pairwise correlations is almost the whole
-interval, unless a structural assumption is added" is the published conclusion of Albanna et al.
-(2017) for `k = 2, 3` in the unrestricted class.  **Not found**: the statement restricted to a
+there are `k`-wise independent distributions (uniform on linear codes of dual distance `> k`)
+with entropy `O(k log n)` (Alon–Babai–Itai lineage; entropy bounds: Gavinsky–Pudlák,
+Bhangale–Potukuchi), and Albanna et al. (2017) conclude, for `k = 2, 3` in the unrestricted
+class, that the range of entropies consistent with means and pairwise correlations is nearly
+the whole interval unless a further structural property is known (my paraphrase; their words
+are quoted in K9).  **Not found**: the statement restricted to a
 *Gibbs class with bounded single-site energy differences* (where the minimum entropy is
 extensive), for every `k`, and its reading for single-site NMR proxies of entropy.  The
 construction (a code-supported measure smoothed into a regular one) appeared three weeks ago in
-a different theorem (Arnese–Lacker, arXiv:2611.07460).
+a different theorem (Arnese–Lacker, arXiv:2611.07460); in its convolution form it is a random
+codeword seen through a binary symmetric channel, for which the no-go has a three-line proof
+(K10(f)) and for which a lower bound on entropy from marginals of *linear* order is published
+(Samorodnitsky, arXiv:1508.01464).
 **Q3 (value of information).**  The worst-case formulation — choose the experiment minimising the
 largest possible width of the optimal bounds after its outcome — is **equation (2.8) of the OUQ
 paper** (Owhadi et al., SIAM Review 2013), with "campaigns of experiments" as a game; no structure
@@ -254,7 +258,12 @@ Heller, Camilloni, Vendruscolo, Curr. Opin. Struct. Biol. 42 (2017) 106–116 `[
 copy]`: the inverse problem "is an ill-defined problem, in the sense that it allows multiple
 solutions ... As long as different structural ensembles generate the same observable average
 quantities, and thus result in similar predictions for the system properties, they should be
-considered equivalent".  None of these texts states a range, a bound or the set of all solutions.
+considered equivalent".  Posterior (typical-case) uncertainty of the weights is what Bayesian
+weighting and BICePs provide — Fisher, Ullman, Stultz, Pac. Symp. Biocomput. 2012:82–93 `[abstract]`
+*(PubMed)*: "models that contain more structures than the available experimental restraints are
+problematic as the large number of degrees of freedom in the ensemble leads to considerable
+uncertainty in the final model"; Raddi et al. 2026 (BICePs, J. Chem. Phys.) `[abstract, via
+Consensus]`.  None of these texts states a range, a bound or the set of all solutions.
 Köfinger & Hummer, J. Chem. Phys. 160 (2024),
 [doi:10.1063/5.0189901](https://doi.org/10.1063/5.0189901) `[abstract]`: the balance of data and
 model "Viewed as a Pareto optimization problem"; "By relating the variance of this energy
@@ -265,8 +274,9 @@ uncertainties, i.e., force-field errors, in the exchange rate".
 value of the maximum-entropy problem; with a misfit tolerance `χ² ≤ c` it is non-empty iff
 `(c, ρ)` lies on or above the BioEn `S_KL`–`χ²` curve.  So the curve that BioEn users plot to
 choose `θ` is the feasibility frontier of Q1, and Q1 asks for the spread of `∫ψ dμ` above it.
-The phrase "same observable averages, thus similar predictions" (Bonomi et al.) is precisely the
-inference that an identified-set computation tests.
+The step from "the same observable average quantities" to "similar predictions for the system
+properties" (Bonomi et al., quoted above) is precisely the inference that an identified-set
+computation tests.
 
 **K6 [K]/[not found] (density-ratio and envelope classes).**  `prior_art/L5` (items P5–P7) already
 established: density-ratio classes (DeRobertis–Hartigan; Wasserman), Walley's bounded-derivative
@@ -339,12 +349,16 @@ recovery (hardness above), and realizability of given marginals is itself open i
   radius of gyration ⟨Rg⟩"; the quantification is a conditional distribution `P(Rg² | ⟨E⟩)` under
   the model's sampling measure, **not a minimum–maximum range**.  Fuertes et al., PNAS 114 (2017)
   E6342, [doi:10.1073/pnas.1704692114](https://doi.org/10.1073/pnas.1704692114) `[abstract]`.
-* General theorem of the same flavour in UQ: Owhadi, Scovel, Sullivan, "On the Brittleness of
-  Bayesian Inference", SIAM Rev. 57(4):566–582 (2015),
-  [doi:10.1137/130938633](https://doi.org/10.1137/130938633), arXiv:1308.6306 `[abstract]`: for
-  models that "exactly capture an arbitrarily large number of finite-dimensional marginals of the
-  data-generating distribution", optimal bounds on posterior values span the largest possible
-  range (companion: Electron. J. Stat. 9 (2015) 1–79).
+* General theorems of the same flavour in UQ: Owhadi, Scovel, Sullivan, "Brittleness of Bayesian
+  Inference Under Finite Information in a Continuous World", Electron. J. Stat. 9 (2015) 1–79,
+  [doi:10.1214/15-EJS989](https://doi.org/10.1214/15-EJS989), arXiv:1304.6772 `[abstract]`:
+  "optimal lower and upper bounds on posterior values obtained from Bayesian models that exactly
+  capture an arbitrarily large number of finite-dimensional marginals of the data-generating
+  distribution ... such models may still make the largest possible prediction error"; and "On the
+  Brittleness of Bayesian Inference", SIAM Rev. 57(4):566–582 (2015),
+  [doi:10.1137/130938633](https://doi.org/10.1137/130938633), arXiv:1308.6306 `[abstract]`
+  (closeness "in terms of the total variation metric or the matching of a finite system of
+  generalized moments" does not prevent opposite posterior conclusions).
 
 **K9 [K] (entropy against marginals).**
 * Upper bounds from marginals are standard; in molecular simulation MIST "is also guaranteed to
@@ -363,10 +377,14 @@ recovery (hardness above), and realizability of given marginals is itself open i
   obeyed can yield strong guarantees" (exchangeability).
 * Bhangale & Potukuchi, arXiv:1709.00752v2 `[full text: abstract, §1, Thm 1.1–1.2]`: the uniform
   law on `yᵀM` (`M` a parity-check matrix of a code of distance `d`) is `(d−1)`-wise independent;
-  BCH codes give support `O(n^{k/2})`; "Gavinsky and Pudlák prove ... entropy at least
-  `log C(n, k/2)`"; Thm 1.1: `(k−1)`-wise independent unbiased bits have
-  `H ≥ n − n·H(1/2 − sqrt((k/n)(1 − k/n))) − o(n)`.  (Gavinsky–Pudlák, Babai, Alon–Babai–Itai,
-  Chor et al.: **not read**.)
+  BCH codes give support `O(n^{k/2})`; it attributes to Gavinsky and Pudlák the lower bound
+  `log C(n, k/2)` on the entropy of `k`-wise independent variables for small `k`; Thm 1.1: `(k−1)`-wise independent unbiased bits have
+  `H ≥ n − n·H(1/2 − sqrt((k/n)(1 − k/n))) − o(n)`.  Gavinsky & Pudlák, arXiv:1503.08154
+  `[abstract]`: "How low can the joint entropy of n d-wise independent (for d ≥ 2) discrete random
+  variables be, subject to given constraints on the individual distributions ...?  This question
+  has been posed and partially answered in a recent work of Babai"; tight lower bounds for
+  pairwise and three-wise independent balanced binary variables.  (Babai, Alon–Babai–Itai, Chor
+  et al.: **not read**.)
 * Arnese & Lacker, arXiv:2611.07460 (5 Nov 2026) `[abstract, Prop. 2.7, Remark 6.1]`: "most
   k-dimensional coordinate marginals are close to product measures" for broad classes; the
   sharpness example is a strength-2 orthogonal array (the `q`-ary simplex code) "with the
@@ -393,13 +411,40 @@ a `k`-wise uniform member of `𝒢_c` tends to the class minimum, while the unif
 `𝒢_c`, same `≤ k`-marginals) has `ln 2`.  The excess `ln|C| ≈ (k/2)·ln n` has the size of the
 Gavinsky–Pudlák lower bound for *unrestricted* `k`-wise independent laws; whether
 `n·h(p_u) + Ω(k ln n)` is necessary inside `𝒢_c` I did not find and did not try to prove.
-*Literature coverage.*  (b) and the small-support mechanism: known (K9).  The conclusion "the
+(f) **[P]** (a variant that needs no conjecture; checked numerically, §3 N3b).  Let `Y` be uniform
+on `C`, `E` i.i.d. Bernoulli(`p_u`) independent of `Y`, `X = Y ⊕ E` with law `m` — a uniformly
+random codeword seen through a binary symmetric channel.  Then (i) `m ∈ 𝒢_c`:
+`m(x) = |C|⁻¹ Σ_c π(x ⊕ c)` and each term changes by a factor in `[e^{−u}, e^{u}]` under one flip;
+(ii) `m` is `C`-invariant, so all marginals on fewer than `d(C^⊥)` sites are uniform;
+(iii) `H(m) = H(X|Y) + I(X;Y) = n·h(p_u) + I(X;Y)` with `0 ≤ I(X;Y) ≤ ln|C|`.  Hence
+**`n·h(p_u) ≤ H(m) ≤ n·h(p_u) + ln|C|`**, the excess being the mutual information across the
+channel.  With the support size `O(n^{k/2})` of BCH-based `k`-wise independent spaces (quoted
+in Bhangale–Potukuchi) this proves: *for every fixed `k` the class `𝒢_c` contains measures with
+exactly uniform `≤ k`-site marginals and entropy at most `n·h(p_u) + O(k ln n)`, while the uniform
+measure, with the same marginals, has entropy `n ln 2`.*
+(g) **[K]** A published inequality of the opposite kind exists for exactly this smoothed family.
+Samorodnitsky, "On the entropy of a noisy function", arXiv:1508.01464 `[abstract]`: for a random
+binary vector `X` and binary-symmetric noise `Z` of crossover `ε`, with `v = (1 − 2ε)²·n`,
+`H(X ⊕ Z) ≥ n·H(ε + (1 − 2ε)·H⁻¹(E_{|B|=v} H(X_B)/v))` up to lower-order terms — a strengthening
+of Mrs. Gerber's lemma that lower-bounds the entropy of a noise-smoothed measure by the average
+entropy of the *marginals of order `v`* of its un-smoothed part.  My reading **[H]** (from the
+abstract only): with `ε = p_u`, marginals that are uniform up to order `v = tanh²(u/2)·n` force
+the smoothed measure to have nearly maximal entropy; so inside the noisy-codeword family the
+order of marginals at which entropy becomes constrained is *linear in `n`*, consistent with (f)
+("no fixed order suffices") and with Bhangale–Potukuchi's Theorem 1.1 for the un-smoothed case.
+Related: Samorodnitsky & Sberlo, arXiv:2008.07236 `[abstract]` (low-rate doubly transitive codes
+decode errors on BSC(`p`) with high probability, i.e. `I(X;Y) ≈ ln|C|` there).
+*Literature coverage.*  (b) and the small-support mechanism: known (K9).  The conclusion — the
 identified set of the entropy is almost the whole a-priori interval, and a structural assumption
-rescues it": known for `k ≤ 3` in the unrestricted class (Albanna et al.), where the minimum
-entropy is `O(log N)` and the low-entropy measures have tiny support.  **Not found**: the version
-inside a class of everywhere-positive Gibbs measures with bounded energy differences, where the
-a-priori interval is `[n·h(p_u), n·ln 2]` and both ends are met with uniform `≤ k`-marginals; (c);
-the dichotomy with K7 stated in one theorem.
+rescues it — is known for `k ≤ 3` in the unrestricted class (Albanna et al.), where the minimum
+entropy is `O(log N)` and the low-entropy measures have tiny support.  Entropy of noisy
+codewords and lower bounds from marginals of linear order: known (item (g)).  **Not found**: the
+statement inside a class of everywhere-positive Gibbs measures with bounded energy differences —
+the a-priori interval is `[n·h(p_u), n·ln 2]` and uniform `≤ k`-marginals are compatible with
+both `n·h(p_u) + O(k ln n)` and `n ln 2` for every fixed `k` — as a statement about what
+low-order averaged data determine; the decomposition (c); the dichotomy with K7 in one theorem.
+Every ingredient of (f) is textbook, so the statement should be presented as an observation with
+the attributions of K9 and (g), not as a new technique.
 *Physical reading and its prior art.*  The NMR "entropy meter" converts single-site order
 parameters into conformational entropy by a linear calibration.  Wand & Sharp, Annu. Rev. Biophys.
 47 (2018) 41,
@@ -470,3 +515,272 @@ record (S44).
 identified set of a conformational ensemble (how `U − L` for a given `ψ` changes when `φ_{K+1}` is
 added, uniformly over its possible outcomes); any theorem about it.  The formulation itself is
 OUQ's and must be cited as such.
+
+---
+
+## 3. Numerics (checks of the statements compared above; not new results)
+
+Purpose: to make sure that the formulas quoted from different literatures are the same object
+before saying so.  Independent re-computation with my own code; no code of the cited papers was
+used.
+
+| id | what | sizes | result |
+|---|---|---|---|
+| N1 | primal LP for the largest mass at a point; hard-max dual; ray-shooting formula (Gardner–Longinetti–Sgheri Thm 3.8); conic dual `κ` (di Dio–Schmüdgen eq. 32) | 120 instances, `|X|` 12–59, 1–5 observables | all four agree to `1.1e-7` (bisection tolerance); true weight never exceeds the bound |
+| N1 | `minOR(A) = 1 − maxOR(Aᶜ)` | 40 instances | agreement to `9e-15` |
+| N2 | KL ball + moments: direct convex optimisation (SLSQP) against the dual of Christensen–Connault Prop. 2.1 | 12 instances × 2 radii, `|X|` 8–24, 1–2 moments | agreement to `4.9e-10`; at `ρ = 60` the dual equals the prior-free LP value to 5 digits |
+| N3 | `μ_C ∝ e^{−u·dist(x,C)}`: marginals and entropy | simplex [7,3], RM(1,3) [8,4], simplex [15,4], RM(1,4) [16,5]; `u` = 1, 2, 4, 8 | all marginals on fewer than `d(C^⊥)` sites uniform to `1e-13`; those on `d(C^⊥)` sites deviate by `2–7e-2`; `H(μ_C) = ln|C| + H(ν)` to `1e-9`; `(H − n·h(p_u))/ln|C|` between 0.249 (`u = 1`) and 1.000 (`u = 8`) |
+| N3b | noisy-codeword variant `X = Y ⊕ E` (K10(f)): single-site log-ratio, marginals, entropy | same four codes; `u` = 1, 2, 4 | `max|Δ ln m|/u ≤ 1.0000`; marginals on `d(C^⊥) − 1` sites uniform to `2e-14`, on `d(C^⊥)` sites not (`3e-3`–`1e-1`); `(H − n·h(p_u))/ln|C|` between 0.316 and 1.000, as proved |
+| N4 | envelope cone ∩ moment constraints as an LP in the weights | 4 instances, `|X| = 14`, 2 moments, `ℓ¹`-type metric | interval nested in the moments-only and in the cone-only intervals; truth inside |
+
+Entropy per site in N3 at `u = 4` (class minimum `h(p_u) = 0.0901`, uniform `ln 2 = 0.6931`):
+0.3818, 0.4297, 0.2749, 0.3066 for the four codes.  **The sketch's "minimum entropy the class
+allows" is therefore an asymptotic statement** (it needs `ln|C|/n → 0`); at every size that can be
+enumerated the entropy per site of the code ensemble is two to four times the class minimum.
+
+Re-run: `python3 experiments/science/ws_M/check_statements.py` (seed 20261125; about 2 min CPU,
+6.5 min wall on the shared machine; output `check_statements.out`) and
+`python3 experiments/science/ws_M/check_q2_decomposition.py` and
+`python3 experiments/science/ws_M/check_q2_bsc_variant.py` (seconds each; outputs `*.out`).  Nothing else in this report rests on computation.
+
+---
+
+## 4. Prior art: matrix, vocabulary, reading list, search log
+
+### 4.1 Matrix  (question × literature → known / partial / not found / n.a.)
+
+Columns: **ER** maximum-entropy and Bayesian ensemble refinement; **MO** MaxOcc and other
+extremal-ensemble work in NMR/SAXS; **GMP** generalised moment problems and OUQ; **PI** partial
+identification; **DRO** divergence-ball robust optimisation and information-inequality UQ; **RB**
+robust Bayes / imprecise probability; **KW** k-wise independence, entropy-from-marginals, inverse
+statistical mechanics; **SC** scattering/FRET-specific identifiability.
+
+| question | ER | MO | GMP | PI | DRO | RB | KW | SC |
+|---|---|---|---|---|---|---|---|---|
+| Q1a exact range of `∫ψdμ` given averages, no prior | not found (non-uniqueness acknowledged) | partial (`ψ` = indicator only) | **known** | **known** (sharp bounds, LP) | n.a. | **known** (fundamental theorem of prevision; LSIP) | n.a. | partial (prior-weighted `P(Rg | ⟨E⟩)`, not a range) |
+| Q1b largest / smallest population of a state or region | not found | **known** (MAP, MaxOcc, maxOR, minOR; theorem for RDC) | **known** (maximal mass function, conic dual) | known in form | n.a. | known in form (upper/lower probability) | n.a. | counted analogue for shapes (AMBIMETER) |
+| Q1c KL ball ∩ moment constraints, dual, `ρ → ∞` limit | partial (one point: MaxEnt; frontier: `S_KL`–`χ²` curve) | not found | partial | **known** (Christensen–Connault 2023) | **known** without data constraints; with expectation constraints: Glasserman–Xu `[unverified]` | partial | n.a. | not found |
+| Q1d envelope / density-ratio class ∩ moment constraints | not found | not found | not found | partial (constant density-ratio bounds in sensitivity analysis, cited in `L5` P6; whether they carry moment constraints: from memory, not read here) | not found | not found (class itself: `L5` P6) | n.a. | not found |
+| Q1e guaranteed numerical value (dual certificate, rigorous global optimisation or partition-function bound) | not found | not found (penalised NNLS, heuristic threshold) | partial (SDP hierarchies; OUQ uses heuristics) | partial (inference theory for estimated moments) | not found | partial (interval analysis in LSIP, `[search snippet]`) | n.a. | not found |
+| Q2a order ≤ m energy identified by ≤ m marginals | used implicitly (MaxEnt form) | n.a. | n.a. | n.a. | n.a. | n.a. | **known** (exponential families; Griffiths–Ruelle; Henderson), hard to compute | n.a. |
+| Q2b many ensembles share the low-order data | acknowledged, not quantified | **known** (5/25 tensor parameters; Carathéodory numbers) | **known** (brittleness; realizability) | n.a. | n.a. | known | **known** (XOR, codes) | **known** (Shannon channels; ⟨E⟩ vs Rg; pair-statistics degeneracy) |
+| Q2c range of entropy given ≤ k marginals, unrestricted class | not found | not found | n.a. | n.a. | n.a. | n.a. | **known** (Albanna et al. k ≤ 3; Gavinsky–Pudlák, Bhangale–Potukuchi any k) | not found |
+| Q2d the same inside Gibbs classes with bounded energy differences; reading for entropy proxies | not found | not found | n.a. | n.a. | not found | n.a. | partial: statement **not found**; ingredients known; blurred-code example in Arnese–Lacker 2026; lower bound from marginals of linear order for noise-smoothed measures in Samorodnitsky 2016 | not found (entropy meter is an empirical calibration) |
+| Q3a minimax choice of the next averaged observable: formulation | not found | partial (empirical: MaxOcc falls as data are added) | **known** (OUQ eq. 2.8, campaigns) | partial (minimax-regret data collection) | not found | partial | n.a. | partial (Shannon channels; FRET/DEER label selection, average-case) |
+| Q3b theorems (shrinkage, adaptivity, complexity) for identified sets of ensembles | not found | not found | not found in OUQ; general IBC results exist (`L7`, `L8`) | not found | not found | not found | n.a. | not found |
+
+"Not found" means: not in the sources opened under S1–S50, compared statement by statement; it is
+not a claim of novelty.  The cells I regard as most likely to be overturned by a specialist:
+Q1c/DRO (Glasserman–Xu and the finance literature were not read), Q1e/RB (Betrò–Guglielmi not
+read), Q2d/KW (the property-testing and pseudorandomness literature is large).
+
+### 4.2 Vocabulary the division should adopt
+
+| the division's term | moment theory / UQ | NMR–SAXS | econometrics / statistics | imprecise probability, OR | TCS / information theory |
+|---|---|---|---|---|---|
+| set of ensembles consistent with the data | representing measures of a moment sequence; admissible set `A` (OUQ) | "the infinite solutions"; underdetermined, ill-posed, degenerate | observationally equivalent distributions | credal set; ambiguity set | — |
+| exact range `[L, U]` of `∫ψdμ` | optimal bounds; generalised Chebyshev bounds | (for populations) minOR, MaxOcc / maxOR | **identified set**, sharp bounds | lower/upper prevision, natural extension; worst-case expectation | — |
+| largest population of a state | **maximal mass function** `ρ_s(x)`; Christoffel function | **MaxOcc**, MAP | sharp upper bound | upper probability | — |
+| number of states needed | Carathéodory number; Richter/Tchakaloff | minimal ensemble, sparse ensemble selection | — | — | support size |
+| prior neighbourhood | — | (reference ensemble, prior) | nonparametric neighbourhood of a parametric specification | φ-divergence ball; density-ratio class | — |
+| KL radius from force-field error | — | "exchange rate" `θ`, gentle refinement (Köfinger–Hummer) | neighbourhood size `δ` | radius `ρ`, tolerance `η` | — |
+| dual multiplier with a positivity check | positive functional `p ∈ Pos(A)`; LSIP | — | Lagrange multipliers; hard-max vs soft-max | pricing / separation oracle | — |
+| low-order data do not fix the joint | brittleness; realizability | 5 / 25 independent parameters; virtual structure | partial identification | — | k-wise independence (uniformity), orthogonal array of strength k, dual distance; connected information |
+| worst-case value of an experiment | most predictive experiment (minimax), campaign | "information content" (singular values, entropy reduction) | minimax regret; identification power | — | radius of information, adaption (IBC) |
+
+Two practical points.  (1) The word "identifiability" is essentially absent from the
+ensemble-refinement literature (PubMed query S38: 0 records); "underdetermined", "ill-posed",
+"degenerate" are used.  A paper for that community should say "what the data determine, with
+bounds" and name MaxOcc in the first paragraph.  (2) "Sharp" has a fixed meaning in partial
+identification (the bound is attained by some admissible distribution); the MaxOcc literature
+says "sharp bound from above" (Clarelli–Sgheri) in the same sense.
+
+### 4.3 The five papers the coordinator must read in full before writing
+
+1. **Christensen & Connault, "Counterfactual Sensitivity and Robustness", Econometrica 91(1):263–298
+   (2023), arXiv:1904.00989** — it contains the Q1 theorem for the KL neighbourhood (Prop. 2.1),
+   the `ρ → ∞` limit (Thm 2.1), the hard-max/soft-max remark, and an inference theory for
+   estimated moments that the division would otherwise have to rebuild.
+2. **Gardner, Longinetti, Sgheri, Inverse Problems 21 (2005) 879–898** (open copy at
+   flore.unifi.it), together with §10 of di Dio & Schmüdgen, arXiv:1809.00584 — the theorem behind
+   MaxOcc and its exact conic dual; the two are the same statement in two literatures that do not
+   cite each other.
+3. **Andrałojć, Luchinat, Parigi, Ravera, J. Phys. Chem. B 118 (2014) 10576** (reprinted in
+   Andrałojć's thesis, flore.unifi.it 2158/1072773) — the two-sided identified set of a region
+   population as it is actually computed and used on experimental data, with its tolerance
+   convention; this is what an NMR referee will compare any new claim with.
+4. **Owhadi, Scovel, Sullivan, McKerns, Ortiz, "Optimal Uncertainty Quantification", SIAM Review
+   55 (2013) 271–345, arXiv:1009.0679** (§2.2 and §4) — the reduction theorems and the minimax
+   definition of the most predictive experiment and of campaigns: Q3 is formulated there.
+5. **Albanna, Hillar, Sohl-Dickstein, DeWeese, Entropy 19 (2017), arXiv:1209.3744** — "what are
+   the possible entropies" given low-order statistics, with the same conclusion as the Q2 sketch
+   for `k ≤ 3` in the unrestricted class, and the remark that a structural assumption restores a
+   linear floor.
+Also to be read, in this order, if time allows: Ravera, Sgheri, Parigi, Luchinat, PCCP 18 (2016)
+5686 (the field's own assessment; I could not obtain the full text); Köfinger & Hummer, J. Chem.
+Phys. 160 (2024) (how the refinement community sets the KL scale from force-field error); Bhangale
+& Potukuchi, arXiv:1709.00752 with Gavinsky–Pudlák (entropy of k-wise independent variables);
+Betrò & Guglielmi on numerical robust Bayes under generalised moment conditions (interval
+analysis inside the semi-infinite LP).
+
+### 4.4 Search log (condensed; the full log with every query string is `NOTES.md`, S1–S50)
+
+| # | tool | query (abridged) | outcome |
+|---|---|---|---|
+| S1–S2 | PubMed | "maximum occurrence" + conformations + NMR/SAXS; Bertini/Luchinat/Parigi + MaxOcc/MAP/maxOR | 12 + 13 records: the MaxOcc corpus 2007–2021 |
+| S3–S9 | web | Ravera 2016; Gardner–Longinetti–Sgheri; Sgheri papers; maxOR/minOR; MaxOcc + "linear programming" | open copies of GLS 2005, Gigli 2018, Andrałojć thesis; arXiv:0712.3777, 1602.05953 |
+| S8 | PubMed | Andrałojć + Luchinat + regions / "information content" | JPCB 2014 (maxOR/minOR), J Biomol NMR 2015 |
+| S10 | arXiv API | titles: OUQ, Christensen–Connault, Lam, Dupuis et al., Katsoulakis et al., Chowdhary–Dupuis, Birmpa et al., Breuer–Csiszár | 9 papers downloaded |
+| S11–S14 | web | information inequalities + moment/experimental constraints; KL ball + moment constraints DRO; Glasserman–Xu; "maximum entropy" reweighting + bounds/range/worst-case | no molecular KL-ball-with-data work; Glasserman–Xu only as a record |
+| S15 | arXiv API | ensemble refinement + identifiability/bounds (several phrasings) | nothing relevant (arXiv indexes this field poorly) |
+| S16–S18 | arXiv API, web | entropy/marginals titles; k-wise independence + codes; Gibbs measure + k-wise uniform + low entropy | Albanna, Schneidman, Kuna–Lebowitz–Speer, Frommer–Hanke–Jansen, Jiao–Stillinger–Torquato, Gommes et al., Boutin–Kemper, Bhangale–Potukuchi, Bazzi, Arnese–Lacker; no direct hit for Q2d |
+| S19–S23 | PubMed | SAXS information content; SES; FRET vs SAXS; Song–Chan | 15 records |
+| S24–S25 | PubMed | entropy meter; Prompers–Brüschweiler; RDC parameter count; Jardetzky; Nikiforovich; NAMFIS | 14 records |
+| S26–S30 | web, arXiv | fundamental theorem of prevision; robust Bayes generalised moments; Bertsimas–Popescu; Smith 1995; journal refs | records and abstracts |
+| S31–S37 | web | repositories for Ravera 2016 and Medeiros Selegato 2021; dilation; adaption (IBC); Dominitz–Manski; LP bounds for conformer populations; provable partition functions × model uncertainty | two full texts unobtainable; no LP-bounds method in small-molecule NMR; no K*/DRO combination |
+| S38 | PubMed | MIE/MIST; ensemble refinement + bounds; + identifiability | MIST bound; 2 irrelevant; 0 |
+| S39–S43 | web | Chayes–Chayes–Lieb; Moore 1980; Christoffel function / maximal mass; Gordon 1968; density-ratio class + moment constraints | Schmüdgen / di Dio–Schmüdgen found and read; nothing for moment-constrained density-ratio classes |
+| S44–S46 | PubMed, arXiv, web | experimental design for ensembles; inverse Ising hardness; PSAT column generation | Dimura 2020, Mittal–Shukla; Bresler–Gamarnik–Shah; Jaumard et al. 1991 |
+| S47–S50 | Consensus | four semantic queries (bounds over all consistent ensembles; range of unmeasured observables; minimax experiment choice; entropy vs low-order marginals in Gibbs measures) | [1] Ravera et al. 2016 is the top hit for the first; OED surveys for the third; Arnese–Lacker and entropy-factorisation papers for the fourth |
+
+Consensus hits used (as returned): [A critical assessment of methods to recover information from averaged data](https://consensus.app/papers/details/w:071ba0ad-8c19-44ce-9ec1-34a51a7e3724/?utm_source=claude_code) (Ravera et al., 2016, PCCP);
+[Conformational Ensembles of an Intrinsically Disordered Protein Consistent with NMR, SAXS, and Single-Molecule FRET](https://consensus.app/papers/details/w:08a1c040-751d-4647-856f-c82c5cb99bef/?utm_source=claude_code) (Gomes et al., 2020, JACS);
+[Quantitative Description of Intrinsically Disordered Proteins Using Single-Molecule FRET, NMR, and SAXS](https://consensus.app/papers/details/w:2cfb37d3-5db6-4deb-9b53-dce16e0af8bb/?utm_source=claude_code) (Naudi-Fabra et al., 2021, JACS);
+[Optimal experimental design: Formulations and computations](https://consensus.app/papers/details/w:0f2bc6ee-2425-497b-9bb2-241a2e4f2852/?utm_source=claude_code) (Huan et al., 2024, Acta Numerica);
+[Goal-Oriented Bayesian Optimal Experimental Design for Nonlinear Models Using Markov Chain Monte Carlo](https://consensus.app/papers/details/w:cc90102b-64d4-4728-961d-b7b90e726ee8/?utm_source=claude_code) (Zhong et al., 2026, SIAM/ASA JUQ);
+[Entropic independence via sparse localization](https://consensus.app/papers/details/w:38ade3cd-3729-4a7d-a0e1-d8a88d8a6ebe/?utm_source=claude_code) (Jain et al., 2026, EJP);
+[Approximate independence of typical marginals of high-dimensional probability measures](https://consensus.app/papers/details/w:033ad4bd-0629-443f-b176-f98dfda15338/?utm_source=claude_code) (Arnese et al., 2026, arXiv);
+[Rapid Mixing of Global Markov Chains via Spectral Independence: The Unbounded Degree Case](https://consensus.app/papers/details/w:36b7fa1b-cfaa-485d-b6f1-3cffafb32eed/?utm_source=claude_code) (Blanca et al., 2026, Algorithmica).
+Create or connect a free Consensus account to return more than 3 results per search in Claude Code.: https://consensus.app/sign-up/?utm_source=claude_code&auth=claude_code
+
+---
+
+## 5. What I did not settle, and what I could not access
+
+**Not accessed (stated per rule 5).**
+* Full texts behind publisher walls or bot challenges: Ravera et al. 2016 (RSC: HTTP 403 for the
+  author PDF and the HTML; repository records without file); Medeiros Selegato et al.,
+  ChemPhysChem 22 (2021) 127; Bertini et al. 2007 and 2010 (JACS); Longinetti, Luchinat, Parigi,
+  Sgheri, Inverse Problems 22 (2006) 1485 (cited for "at most 25 independent RDC"); Sgheri 2010
+  (abstract paraphrase only); Glasserman–Xu 2014 and X. Xu's thesis (CORE: HTTP 403); Smith 1995;
+  Bertsimas–Popescu 2005; Lad–Dickey–Rahman 1990 (abstract paraphrase only); Betrò–Ruggeri–Męczarski
+  1994 and Betrò–Guglielmi; Schmüdgen 2015; Henderson 1974; Griffiths–Ruelle 1971;
+  Chayes–Chayes–Lieb 1984 (Project Euclid returned an HTML shell); Gavinsky–Pudlák 2016;
+  Alon–Babai–Itai 1986; Moore 1980; Seidenfeld–Wasserman 1993; Dominitz–Manski 2017; Gordon 1968;
+  Jardetzky 1980 and Nikiforovich et al. 1987 (abstracts only); the journal versions of every
+  arXiv paper cited.
+* Truncated by the fetch tool at 100 000 characters (final part unread): PMC4782772 (Andrałojć et
+  al. 2015), PMC5658725 (Song et al. 2017), PMC7071556 (Wand & Sharp 2018), PMC8921464 (Hou &
+  Tochio 2022); for these and PMC6589165 I saw tool extracts, not the text.
+* Tools: Europe PMC REST API timed out; the PubMed MCP full-text call returned empty for
+  PMC5347631; the arXiv API answered multi-term abstract queries unreliably.
+* Not searched at all: MathSciNet/zbMATH/Web of Science (so no forward-citation chasing of
+  Gardner–Longinetti–Sgheri from the moment-problem side, nor of Schmüdgen from the applied side);
+  Russian-language peptide-NMR literature of the 1980s (Nikiforovich's group published there);
+  patents; theses other than two; the cryo-EM heterogeneity literature beyond one 2026 preprint;
+  the quantum analogue (reduced density matrices, quantum codes); crystallographic ensemble
+  refinement; hydrogen-exchange and mass-spectrometry data.
+
+**Not settled.**
+1. Whether Glasserman–Xu (2014) or the DRO literature already states the KL-ball dual with
+   moment constraints before Christensen–Connault (2019/2023).  Attribution should say
+   "see also" until someone reads them.
+2. Whether Betrò–Guglielmi's interval-analysis algorithm delivers verified enclosures of the
+   optimal value (which would make "certified dual of a moment problem" known in robust Bayes).
+3. Whether any paper computes a minimum–maximum range of `⟨Rg⟩` (or another unmeasured
+   observable) given FRET or SAXS averages.  Song et al. compute a conditional distribution; I
+   did not read the final quarter of that paper nor its follow-ups.
+4. Q2d: whether the lower bound `n·h(p_u) + Ω(k ln n)` holds for `k`-wise uniform members of the
+   bounded-difference class (so that the code construction is optimal up to constants); whether
+   `H(ν) ≤ n·h(p_u)` in K10(c) holds in general (**[C]**; true in 16 computed cases; not needed
+   for the variant K10(f)); and the exact statement and hypotheses of Samorodnitsky's inequality
+   (read as an abstract only), which decides at what order of marginals the entropy of a
+   smoothed measure becomes constrained.
+5. Whether the envelope cone with one moment constraint has a closed-form range for a single
+   state, extending Theorem 11.12 of the theory report.
+6. How the tolerance convention of MaxOcc (fit quality within 1.2–1.3 × the best fit) relates to a
+   statistical confidence statement; the partial-identification literature has the tools
+   (inference for projections of identified sets) and I did not open it beyond Molinari's review
+   abstract (arXiv:2004.11751).
+
+---
+
+## 6. The three most promising next steps
+
+1. **Replicate MaxOcc with certificates on public data, then add a prior.**  Take a published
+   MaxOcc case with deposited restraints (calmodulin PCS/RDC; the pool can be regenerated),
+   recompute maxOR/minOR as linear programmes with explicit dual solutions `(λ0, λ)`, report the
+   duality gap and the dependence on the pool, and then show how the interval changes when the
+   pool is weighted by a physical model and a KL radius is imposed (Christensen–Connault dual,
+   with the radius set from an energy-error scale as in Köfinger–Hummer).  This is in scope
+   (public fixed-sequence data, no experiment), speaks to an existing community in its own
+   terms, and its novelty claim is narrow and defensible: *guaranteed* bounds, *general*
+   observables, *with* a prior neighbourhood.
+2. **State Q2 as one theorem with honest attribution, and test its physical reading.**
+   Dichotomy: order `≤ m` ⇒ identified (textbook, hard to compute) versus bounded differences ⇒
+   the entropy interval `[n·h(p_u) + O(k ln n), n ln 2]` is entirely compatible with uniform
+   `≤ k`-marginals (ingredients: K9; three-line proof K10(f); Samorodnitsky's inequality as the
+   complementary positive statement at linear order).  The scientific content is the
+   reading: site-resolved averaged observables cannot bound conformational entropy without an
+   assumption on the order or range of the energy; the entropy meter works to the extent that
+   proteins satisfy such an assumption.  The decisive check is numerical and model-relative: on
+   an exactly enumerable chain model of the engineering division, compute the range of entropy
+   over ensembles sharing all single-site and pair marginals with the Boltzmann ensemble, within
+   an envelope class of given constants.
+3. **Pose Q3 inside the theory division's own framework.**  For the linear-in-features classes of
+   §11.17 (pair-distance profiles), a SAXS curve is a linear functional of exactly those features.
+   The worst-case value of `K` Shannon channels for an unmeasured linear functional of the
+   profile is then a width problem of the kind already treated in §11.17 (distance to a span in a
+   dual norm), with the experiment in the place of the evaluations.  This would give the first
+   theorem on Q3 for ensembles, with OUQ's eq. (2.8) as the definition.
+
+---
+
+## 7. Requests (precise enough to be sent as they are)
+
+**To the theory division.**
+* T-M1.  Is weak duality for Q1 already a corollary of the machine-checked kernels?  Statement
+  wanted: *for finite `X`, observables `φ: X → ℝ^K`, `ψ: X → ℝ`, data `m`, and any `(λ0, λ)` such
+  that the minimisation kernel certifies `min_x [λ0 + λ·φ(x) − ψ(x)] ≥ 0`, every probability
+  vector `μ` with `Σμφ = m` satisfies `Σμψ ≤ λ0 + λ·m`.*  If `φ, ψ` are pairwise tables in rotamer
+  variables this is a certificate of the existing pairwise kernel (cf. Proposition 11.50).
+  Please state whether a Lean declaration of this form exists or what is missing.
+* T-M2.  The KL version needs a certified *upper* bound on a tilted log-partition function:
+  `Σμψ ≤ η·ln Z_β(f − (ψ − λ·φ)/(βη)) − η·ln Z_β(f) + ηρ + λ·m` for all `μ` with `KL(μ‖μ0) ≤ ρ`,
+  `Σμφ = m`.  Does the partition-function kernel (§3.4, §11.8) certify an upper bound on the
+  first `ln Z` term and a lower bound on the second, for a tilt `(ψ − λ·φ)/(βη)` that is pairwise
+  in the rotamer variables?  A yes/no with the name of the declaration suffices.
+* T-M3.  For the envelope class of Theorem 11.12, is there a closed form for the range of a
+  single Gibbs probability under one additional linear constraint `Σμφ = m`?  (L5 notes that the
+  closed form is special to single states; with a constraint the extremal residual is presumably
+  a two-piece McShane function.)
+* T-M4.  Please check K10(a)–(c) of this report (three lines each) and say whether
+  `H(ν) ≤ n·h(p_u)` for the coset-leader measure follows from results you already have.
+
+**To the engineering division.**
+* E-M1 (specification).  *Motivation*: measure how fast an identified set shrinks with
+  scattering information on exactly enumerated chains.  *Formulation*: for a chain model with
+  complete enumeration (`experiments/eng`, lattice and off-lattice), let `X` be the set of
+  conformations, `μ0 ∝ e^{−βf}` the known part, `φ_k(x) = Σ_{p<q} sin(q_k r_pq)/(q_k r_pq)` the
+  Debye intensity at `q_k = kπ/D_max`, `k = 1..K`, data `m = Σμ*φ` for a "true" ensemble `μ*`
+  drawn from the envelope class.  Compute for `ψ ∈ {Rg², one contact indicator, end-to-end
+  distance²}` the intervals `[L, U]` (a) with moments only, (b) with the envelope cone, (c) with a
+  KL ball of radius `ρ ∈ {0.1, 1, 10}`, for `K = 0..12`.  *Inputs*: enumerations already produced
+  (no new sampling).  *Outputs*: table of interval widths against `K`; dual solutions `(λ0, λ, η)`
+  for each end; time and memory.  *Validation*: `μ*`'s value inside every interval; (a) ⊇ (b), (a)
+  ⊇ (c); primal–dual gap below `1e-8`; agreement with `check_statements.py` on a 14-state toy
+  instance.  *Stopping*: sizes up to the largest enumeration that fits an LP with `|X|` columns in
+  6 GB; otherwise column generation with the existing minimiser as pricing oracle.  *Resources*:
+  hours on 4 cores.
+* E-M2.  For the same enumerations, the entropy range of step 2 of §6: minimum and maximum of
+  `H(μ)` over ensembles in the envelope cone sharing all one- and two-site (torsion) marginals
+  with `μ0`.  The maximum is a convex programme; the minimum is a concave minimisation over a
+  polytope, so report vertex-enumeration results for small sizes and best-found values with
+  certified lower bounds otherwise.
+
+---
+
+*Statement of independence.*  I read the sources listed, re-derived the three remarks marked
+**[P]**, and re-computed N1–N4 with my own code (independent replication of the formulas, not of
+any published data set).  I did not review or replicate the coordinator's theory beyond the
+sketch printed in `M_brief.md`.

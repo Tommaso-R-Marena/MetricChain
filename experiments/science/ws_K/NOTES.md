@@ -143,3 +143,40 @@ t4_cut_families.py, t5_rates.py, t6_robust_rates.py, t7_lattice_chain.py.
   cap/cut 0.22–0.30, gap/gap_cut 0.04–0.09 (that cut is not the slowest mode), 1-path Thomson 0.03–0.05.
   Robust height, c_i=0.3, n=8: exact [1.70,4.40] vs sup-norm stability [1.10,5.90].
   CAVEAT: tiny chains; non-monotone in n; no extrapolation.
+
+## Step 7 (18:35, `date`) — T8, T9, T10, Lean file; key prior-art find (Wrochna)
+(Earlier step times in this file were my estimates; from here on they are read from `date`.)
+* **T8 (`t8_voxel_continuum.py`, out_t8.txt)**: continuum bracket B_disc[E_lo] ≤ B_cont ≤ B_disc[E_hi] on the
+  FACE-ADJACENCY voxel graph, torus potentials with 2 and 3 torsions, Lipschitz enclosures:
+  d=2: k=6: [−4.14, 7.48] … k=192: [0.956, 1.319], all contain the k=720 reference [1.0894, 1.1863];
+  d=3: k=6..48 all contain the k=96 reference [−0.367, 0.811].  With UNRESTRICTED single-site moves
+  (complete site graph) the lower bound stays far below (k=96, d=2: −0.74 vs 0.775): a torsion "jumps" its
+  own barrier.  Certified relaxed scan (coordinate cut on the cyclic site graph): equals B_lo(face) for
+  k ≥ 24 in d=2 (0.9562 at k=192); −1.035 vs −0.942 at k=48 in d=3.
+* **Lean (`KineticsCertificates.lean`, out_lean.txt)**: checked with `lake env lean`, exit 0, no warnings,
+  axioms [propext, Classical.choice, Quot.sound] for all of: cut_sound, robust_cut_sound, robust_path_sound,
+  neg_cone_admissible, cone_admissible, box_cut_barrier (on verify_sound), box_cut_barrier_residual and
+  certified_trap_height (on verifyR_sound), ferro_barrier and ferroResidual_trap (kernel-evaluated:
+  `decide +kernel` runs the min-kernel on the three wall boxes; bound 7/2 accepted, 4 rejected; robust
+  height 13/4), trap_survival, trap_certificate, trap_certificate_weighted (discrete-time kinetic trap
+  for ANY stationary kernel, no reversibility).
+* **T9 (`t9_trap_stationary.py`, out_t9.txt)**: numerical reading of trap_survival: Metropolis, heat-bath
+  and a non-reversible single-site kernel with the same π (circulations on 4-cycles; reversibility defect
+  up to 7e-2): 30 cases, 0 violations; at T = 0.5/rate: survival 0.59–0.77 vs bound 0.50–0.60;
+  the unweighted wall-mass form is ~8–10× looser (κ = deg_A/deg matters) => added weighted Lean theorem.
+* **T10 (`t10_counter_dp.py`, out_t10.txt)**: counting cuts at scale via transfer matrix with a counter
+  (= chain kernel over polynomial weights).  Validated vs brute force at n=12 (errors 4e-15, 7e-15).
+  n=200 heterogeneous Ising chain: barrier height bracket [1.3758, 1.5178] (level-1 cut vs single-domain
+  growth path); Lagrangian value −155.11 < trivial −154.68 < true level min −153.31.
+* T2 extended: lower excursion H_f − lo ≤ envelope radius of the canonical f-optimal cut: 48/48.
+* **KEY PRIOR ART (read as page images, arXiv:1405.0847v1 pp. 1–8)**: Wrochna, Theorem 3: "There is a
+  digraph H for which H-Word Reachability is PSPACE-complete" (words over a fixed alphabet, every two
+  consecutive symbols in the relation E(H); change one symbol at a time, all intermediates H-words), and the
+  remark that existence/counting of H-words is trivial.  READING: a translation-invariant nearest-neighbour
+  CHAIN with a fixed alphabet and 0/1 pair energies has min E and Z by a k×k transfer matrix, but deciding
+  B(a,b)=0 vs ≥1 under single-site moves is PSPACE-complete.  => no transfer matrix for barriers; the
+  elimination rule has no (min,max) analogue (unless P=PSPACE); polynomial complete certificate formats
+  for barrier bounds on chains would give NP=PSPACE.
+  Also read: Results paragraph "there exist integers k,b such that reachability in reconfiguration variants
+  of k-Coloring, Independent Set and Shortest Path is PSPACE-complete even when limited to graphs of
+  bandwidth b"; tractable for bounded tree-depth.

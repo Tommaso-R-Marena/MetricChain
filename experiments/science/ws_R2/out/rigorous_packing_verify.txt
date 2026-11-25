@@ -1,0 +1,4 @@
+(L,eps1)=(1,1/2): 116 points; all weights valid; pairwise condition verified exactly: True
+(L,eps1)=(1,1/4): 451 points; all weights valid; pairwise condition verified exactly: True
+(L,eps1)=(1/5,1/2): 8 points; all weights valid; pairwise condition verified exactly: True
+(L,eps1)=(1/5,1/4): 19 points; all weights valid; pairwise condition verified exactly: True

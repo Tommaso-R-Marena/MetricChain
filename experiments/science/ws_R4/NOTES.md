@@ -43,3 +43,18 @@ Open questions for myself (to test numerically BEFORE believing):
  Q-c  is "tau^(2)" well defined (total cost vs batch, expected vs worst)?
  Q-d  Claim A/B of Thm 11.84 vs Algorithm 2L+ as written in K_REPORT §2.2.
  Q-e  README headline: which regime exactly.
+
+## Step 2 — own exponent code (exponents.py; written before reading any authors' code)
+First version (scalar brentq inside Python loops) too slow on the shared machine (load avg 16); killed
+after 10 min, rewritten vectorised (same formulas).  Output: out_exponents_u1.txt  (7.5 min wall, 2 min CPU).
+MY VALUES at u = 1:
+  a = 0.11094407, h = 0.02913914, h/a = 0.26265
+  theta_2^* = 0.03987221, theta_2^*/a = 0.35939, theta_2^*/h = 1.36834, best phi_1 = 0.6406
+  T^(2)(0)/a = 0.62432 (2-d grid directly from the statement AND the balance formula a(a+xi)/(2a+xi-theta_na(xi)));
+     optimal phi = 0.5555, xi = 0.04488
+  small-slope limit: theta_2^*/a = 0.346035, theta_2^*/h = 1.38414, phi_1 = 0.654; T^(2)(0)/a = 0.618034 = (sqrt5-1)/2,
+     at sqrt(xi/a) = 0.61803
+  Xi(h, phi_1) > 0 at phi_1 = 0.1,0.3,0.5,0.64 (u=1: +0.0020,+0.0064,+0.0113,+0.0152); small slope +0.0171,+0.0540,+0.0958,+0.1318
+  theta -> Xi(theta, phi_1) is decreasing on (0, phi_2 a) on a 60-point grid (justifies bisection).
+=> agree with the report's 0.359 / 1.37 / 0.64 / 0.624 / 0.346 / 1.38 / 0.65 / 0.618 to all printed digits.
+Other slopes (0.5, 2, 3) to be run in the background later.

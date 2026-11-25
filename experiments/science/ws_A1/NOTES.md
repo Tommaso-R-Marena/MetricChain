@@ -220,3 +220,20 @@ Shorter proof than the report's 35 lines: monotone margin flows + "ln(1+ax)/x de
 - Rudolf's thesis arXiv:1108.3201 downloaded, not read.
 - S24 (extended) for Prop A1.1-like statements → nothing.
 - Thought about extending Prop A1.1 to extensive accuracy: reduces to a stochastic control problem for the likelihood-ratio martingale with adapted two-point increments (κ_i ∈ [a0,a1]); constant control (cone) conjecturally extremal; freezing strategies do not improve the exponent in the cases I worked by hand (partial freezing: α x*(θ/α) increasing in α). The adapted relaxation is weaker than the Lipschitz condition (which must hold in every coordinate order), so tightness is unclear. Left as next step 2 in the report.
+
+### Step 16 (18:37 UTC) — replication of the round-hierarchy numbers; report review pass
+- rounds_numbers_check.py (3 min): T2(0)/a = 0.6196, 0.6243, 0.6412, 0.6646 at u = .5, 1, 2, 3 (report .620, .624, .641, .665); 0.6181 at u = 0.02 (golden ratio).
+  θ2*/a = 0.3493, 0.3592, 0.3924(!), 0.4395 on a φ1-grid of step 0.01 (report .349, .359, .394, .440).
+- The 0.3924 vs 0.394 at u = 2 looked like a discrepancy; rounds_refine.py (φ1 step 0.001, running in background): u = 1: 0.35922 at φ1 = 0.640 (constraint θ < φ2 a not binding); **u = 2: 0.39400 at φ1 = 0.606, where the constraint θ < φ2 a IS binding** — my coarse grid missed the kink by 0.002. So the report's 0.394 is right. (u = 3 pending.)
+- Report review pass: fixed §-reference (2.6→2.5), a broken table, the Idais–Schwabe quote (now verbatim from the PDF), the Guo et al. sentence, the sign remark on sMutInf for x<0.
+- New precise remark for §2.4: in ABSOLUTE error on the section {max w ≤ 1} of the cone there is no adaption gain at all: the section contains every function with values in [e^{-u}, 1] (any such function is u-Lipschitz because distinct points have distance ≥ 1), where mean estimation is Θ(N^{-1/2}) for adaptive and non-adaptive methods, and plain MC achieves N^{-1/2} on the section. So the adaption gain is a relative-error phenomenon.
+
+### Step 17 (18:38 UTC) — what the other documents already say
+- grep in theory docs: workstream D of the theory division (docs/workstreams/D_REPORT.md §9) lists "Suárez et al. (2012, 'phase transition in the Jarzynski estimator')" as "[titles and summaries only]" (context G15), with the remark "for a given pair of systems and a given estimator … None is a lower bound over algorithms". They did not notice the coincidence of formulas with θ_na/a/ln cosh; §11.16/G18/L7 do not cite it. Recorded in report §2.2.
+- The coordinator has already drawn SCI-REV-0004 (docs/collaboration/messages/science/, 18:19–18:25 UTC) and an entry in SCIENCE_TO_ALL.md from the FIRST complete version of my report. Points there that my later work supersedes:
+  (1) "A class-wide upper bound for Bern(r*)^n is not proved" → now proved (Prop A1.1);
+  (2) "T4 … decide whether … (missing: a tail lemma …)" → no tail lemma needed at bounded accuracy;
+  (3) "it answers … the question Mathé and Novak leave open" → too strong, corrected;
+  (4) counts (23 queries / 27 sources / four scripts) → 24 / more / seven.
+  I cannot edit those files (outside my write area); added a "changes since the first version" paragraph to the report and will say so in the handback.
+- rounds_refine.py finished u = 2 (0.39400 at φ1 = 0.606, constraint binding); u = 3 still running in the background.

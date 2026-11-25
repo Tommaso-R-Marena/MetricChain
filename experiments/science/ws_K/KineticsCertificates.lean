@@ -204,6 +204,65 @@ theorem certified_trap_height (P : RProblem n k) (D : Dom n k) (L : ℚ)
   linarith
 
 
+/-! ### Kernel-evaluated example (non-vacuity)
+
+Three binary sites, ferromagnetic pair cost `2` per disagreeing pair, field `-1/2` on state `1`:
+`E(000) = 0`, `E(111) = -3/2`, and every single flip out of `000` costs `7/2`.  The box `{000}`
+has three wall boxes; the kernel accepts the bound `7/2` on each of them (run inside Lean's
+kernel), so every walk of single-site moves that leaves `000` visits energy `≥ 7/2`. -/
+
+/-- A double-well instance on three binary sites. -/
+def ferro : PairInstance 3 2 where
+  h := fun _ a => if a = 1 then -1 / 2 else 0
+  J := fun i j a b => if i < j ∧ a ≠ b then 2 else 0
+
+/-- The box consisting of the single configuration `000`. -/
+def well : Dom 3 2 := fun _ => [0]
+
+theorem ferro_wall_verified :
+    ∀ i, verify (exhaustive3 ferro) ferro (wallBox well i) (7 / 2) = true := by decide +kernel
+
+/-- The kernel rejects the (false) wall bound `4`. -/
+theorem ferro_wall_rejects :
+    verify (exhaustive3 ferro) ferro (wallBox well 0) 4 = false := by decide +kernel
+
+/-- **Certified barrier, kernel-evaluated.**  Every walk of single-site moves from `000` to any
+other configuration visits a configuration of energy at least `7/2`. -/
+theorem ferro_barrier (p : ℕ → Config 3 2) (m : ℕ) (hp : IsWalk SingleSite p m)
+    (ha : InBox well (p 0)) (hb : ¬ InBox well (p m)) :
+    ∃ j, j ≤ m ∧ (7 / 2 : ℚ) ≤ ferro.energy (p j) :=
+  box_cut_barrier ferro well (7 / 2) (fun _ => exhaustive3 ferro) ferro_wall_verified p m hp ha hb
+
+/-- The start has energy `0` and the bound is attained on the wall: the certified barrier height
+`7/2` is exact. -/
+theorem ferro_start : ferro.energy ![0, 0, 0] = 0 := by decide +kernel
+
+theorem ferro_wall_attained : ferro.energy ![1, 0, 0] = 7 / 2 := by decide +kernel
+
+/-- The same landscape with an unknown residual: bounded differences `1/4` per site and one
+evaluated anchor, `g(000) = 0`. -/
+def ferroResidual : RProblem 3 2 where
+  base := ferro
+  c := fun _ => 1 / 4
+  anchors := [(![0, 0, 0], 0)]
+
+theorem ferroResidual_wall_verified :
+    ∀ i, verifyR (.anchor 0 (exhaustive3 (ferro.anchored (fun _ => 1 / 4) ![0, 0, 0])))
+      ferroResidual (wallBox well i) (13 / 4) = true := by decide +kernel
+
+/-- **Certified kinetic trap under an unknown residual, kernel-evaluated.**  For every residual
+with bounded differences `1/4` and `g(000) = 0`, every walk of single-site moves that starts at
+`000` and leaves it climbs at least `13/4` above the true energy of `000`. -/
+theorem ferroResidual_trap (g : Config 3 2 → ℝ) (hg : ResidualClass ferroResidual g)
+    (p : ℕ → Config 3 2) (m : ℕ) (hp : IsWalk SingleSite p m)
+    (h0 : p 0 = ![0, 0, 0]) (hb : ¬ InBox well (p m)) :
+    ∃ j, j ≤ m ∧ ((13 / 4 - (ferro.energy ![0, 0, 0] + 0) : ℚ) : ℝ) ≤
+      ((ferro.energy (p j) : ℝ) + g (p j)) - ((ferro.energy (p 0) : ℝ) + g (p 0)) :=
+  certified_trap_height ferroResidual well (13 / 4)
+    (fun _ => .anchor 0 (exhaustive3 (ferro.anchored (fun _ => 1 / 4) ![0, 0, 0])))
+    ferroResidual_wall_verified g hg (![0, 0, 0], 0) (by simp [ferroResidual]) p m hp h0
+    (by intro i; fin_cases i <;> simp [well]) hb
+
 /-! ### Rate certificates: a kinetic trap for every stationary local dynamics
 
 Discrete time.  `P` is a stochastic kernel on a finite state space with stationary weights `w`
@@ -412,6 +471,8 @@ end MetricChain.Kinetics
 #print axioms MetricChain.Kinetics.box_cut_barrier
 #print axioms MetricChain.Kinetics.box_cut_barrier_residual
 #print axioms MetricChain.Kinetics.certified_trap_height
+#print axioms MetricChain.Kinetics.ferro_barrier
+#print axioms MetricChain.Kinetics.ferroResidual_trap
 #print axioms MetricChain.Kinetics.trap_survival
 #print axioms MetricChain.Kinetics.trap_certificate
 #print axioms MetricChain.Kinetics.trap_certificate_weighted
