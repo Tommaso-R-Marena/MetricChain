@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -143,6 +144,71 @@ def build() -> dict[str, str]:
             lines.append(f"| {r['n_torsions']} | {r['n_beads']} | {fmt_int(r['conformations'])} | {fmt_int(r['classes'])} | "
                          + " | ".join(cells) + f" | {tie:.1e} |")
         out["generic"] = "\n".join(lines)
+    # ---- THY-REQ-0008, item 6: single-flip constants against Proposition 11.74 and the scaling form ----------
+    fp = HERE / "results" / "lattice_Sc12_flip.json"
+    if fp.exists():
+        flip = sorted(json.loads(fp.read_text())["rows"], key=lambda r: r["n_torsions"])
+        lines = ["| `n` | `j` with `d_j ≥ 5` | least `c_j − (14 d_j − 15)` | largest `c_j / (70 (d_j + 3))` | bound violated |", "|---|---|---|---|---|"]
+        total = bad = 0
+        for r in flip:
+            n, c = r["n_torsions"], r["c_sf"]
+            js = [j for j in range(1, n + 1) if min(j, n + 1 - j) >= 5]
+            if not js:
+                continue
+            lo = min(c[j - 1] - (14 * min(j, n + 1 - j) - 15) for j in js)
+            hi = max(c[j - 1] / (70 * (min(j, n + 1 - j) + 3)) for j in js)
+            v = sum(not (14 * min(j, n + 1 - j) - 15 <= c[j - 1] <= 70 * (min(j, n + 1 - j) + 3)) for j in js)
+            total += len(js)
+            bad += v
+            lines.append(f"| {n} | {len(js)} | {lo} | {hi:.3f} | {v} |")
+        lines.append(f"| all | {total} | | | **{bad}** |")
+        out["flip_bounds"] = "\n".join(lines)
+        ns = [r["n_torsions"] for r in flip if r["n_torsions"] >= 8]
+        dmax = max((n + 1) // 2 for n in ns)
+        lines = ["| `n` | " + " | ".join(f"`d_j = {d}`" for d in range(1, dmax + 1)) + " |", "|---|" + "---|" * dmax]
+        for r in flip:
+            n, c = r["n_torsions"], r["c_sf"]
+            if n < 8:
+                continue
+            cells = [f"{c[d - 1] / n:.2f} ({d / n:.2f})" if d <= (n + 1) // 2 else "" for d in range(1, dmax + 1)]
+            lines.append(f"| {n} | " + " | ".join(cells) + " |")
+        out["flip_scaling"] = "\n".join(lines)
+    # ---- THY-REQ-0008, item 5: distance entropy of the generic chain -------------------------------------------
+    ep = HERE / "results" / "generic_Sc16_entropy.json"
+    if ep.exists():
+        e = json.loads(ep.read_text())
+        rows_e = e["rows"]
+        rhos = [f"{x:g}" for x in e["rhos"]]
+        lines = ["| `n` | `N` | conformations | classes | `ln(classes)/n` | pairs within the cutoff per bead: mean over classes / over conformations / max | "
+                 + " | ".join(f"`σ(ρ = {x})`" for x in rhos) + " |", "|---|---|---|---|---|---|" + "---|" * len(rhos)]
+        for key in sorted(rows_e, key=int):
+            r = rows_e[key]
+            pb = r["pairs_per_bead"]
+            lines.append(f"| {r['n_torsions']} | {r['n_beads']} | {fmt_int(r['conformations'])} | {fmt_int(r['classes'])} | {r['ln_classes_per_torsion']:.3f} | "
+                         f"{pb['mean_over_classes']:.2f} / {pb['mean_over_conformations']:.2f} / {pb['max']:.2f} | "
+                         + " | ".join(f"{r['sigma'][x]['mean']:.3f}" for x in rhos) + " |")
+        out["generic_entropy"] = "\n".join(lines)
+        keys = sorted(rows_e, key=int)
+        cov = json.loads(gp.read_text())["rows"] if gp.exists() else {}
+        pairs = (("L=1,eps=1/4*N", "0.25"), ("L=1,eps=1/2*N", "0.5"), ("L=1/5,eps=1/4*N", "1.25"), ("L=1/5,eps=1/2*N", "2.5"))
+        lines = ["| `n → n+1` | growth of the number of classes | "
+                 + " | ".join(f"`{k.replace('eps=', 'ε=').replace('*N', ' N').replace(',', ', ')}`: predicted (classes growth / `e^σ`, `ρ = {x}`) / measured" for k, x in pairs) + " |",
+                 "|---|---|" + "---|" * len(pairs)]
+        for a, b in zip(keys, keys[1:]):
+            ra, rb = rows_e[a], rows_e[b]
+            g = rb["classes"] / ra["classes"]
+            cells = []
+            for k, x in pairs:
+                pred = g / math.exp(rb["sigma"][x]["mean"])
+                if a in cov and b in cov:
+                    ca, cb = cov[a]["cover"][k], cov[b]["cover"][k]
+                    lo, hi = cb["lower"] / ca["upper"], cb["upper"] / ca["lower"]
+                    meas = f"{lo:.2f}" if ca["exact"] and cb["exact"] else f"[{lo:.2f}, {hi:.2f}]"
+                else:
+                    meas = "—"
+                cells.append(f"{pred:.2f} / {meas}")
+            lines.append(f"| {a} → {b} | {g:.3f} | " + " | ".join(cells) + " |")
+        out["generic_entropy_growth"] = "\n".join(lines)
     return out
 
 
