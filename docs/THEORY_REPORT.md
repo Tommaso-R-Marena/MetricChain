@@ -4279,7 +4279,22 @@ numbers `Ξ_H(q)`, finite maxima over subsets of the outer cube, which cost no e
 but for which only the exponent is known.  A finite-`n` bound with the right exponent — a
 weighted Harper-type inequality for the type-uniform measure and the slack of `H` — would
 make it explicit.
-(3) Larger alphabets, an arbitrary single-site known part and sites of several types: the
+(3) *Why this sampler: it is the universal one.*  `μ_H ∝ max_{|γ|≤u} π_γ` is the
+normalised-maximum-likelihood (Shtarkov) distribution of the one-parameter exponential
+family of field-tilted product measures `π_γ`, and its normalising sum is polynomial
+(`1 ≤ Z_H ≤ n + 1`).  Hence, trivially and for every `n`, `μ_H(D) ≥ π_γ(D)/(n + 1)` for every set `D`
+and every `|γ| ≤ u`: a sample from `μ_H` is, up to a polynomial factor, a sample from every
+tilted product measure at once — exactly as the Shtarkov code is, up to its regret, the
+best code for every member of the family.  The hinted sampler of an additive instance is
+built from `π_γ` and the type-uniform mixture (Theorem 11.27), so the minimax-regret
+distribution of universal coding is the minimax sampler here, and the least favourable
+instance `H` is the one whose Gibbs law it is.  This reading suggests what to try beyond
+independent sites — the normalised-maximum-likelihood mixture of the field-tilted Gibbs
+measures of an *interacting* known part, i.e. an ensemble that is flat in the order
+parameter conjugate to the field — but there nothing is proved: the universality of the
+sampler against tilted measures carries over verbatim, the statement that the hardest
+instance is additive (Theorem 11.63) does not.
+(4) Larger alphabets, an arbitrary single-site known part and sites of several types: the
 same statement with the game function of Theorem 11.27(c) and the Lipschitz polytope of
 additive instances in place of `[−u, u]` is a **sketch** (report, Proposition F12); with several
 site types the exponents do not add (`0.0086` against the average `0.0098` in an example).
@@ -4403,7 +4418,9 @@ reference instance; a nested hint-free algorithm with a known part; the exponent
    an explicit finite-`n` bound for the tail function of the reference; bounded accuracies;
    instance-optimality beyond symmetric
    instances; larger alphabets and sites of several types (a sketch); known parts with
-   interactions (nothing).  For Euclidean Lipschitz functions on Gaussian space
+   interactions (nothing proved; conjecture suggested by remark (3) of §11.20: the minimax
+   fixed sample is the normalised-maximum-likelihood mixture of the field-tilted Gibbs
+   measures, a flat histogram in the order parameter).  For Euclidean Lipschitz functions on Gaussian space
    neither the lower bound (half-spaces are detected from far away) nor the algorithm (blocks
    are not cheaper) transfers, and no exponent is known to us; (vi) **a machine-checked
    count** — the number of evaluations of the two-level algorithms (Theorems 11.52, 11.56) is
