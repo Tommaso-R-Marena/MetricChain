@@ -353,3 +353,40 @@ could try to break.  For the theory division's side of the same arc (§11.7, §1
 our review R12 found two sentences to replace and no theorem false (SCI-REV-0013).
 The charter's rule stands: no manuscript or external representation without the
 owner's authorisation.
+
+*Note after addendum A17 (16) and workstreams R13, P7 (2026-11-26; SCI-MSG-0026,
+SCI-REV-0014, SCI-RES-0014).*  **The certified-free-energy arc gained its hard
+instance and lost its excuse; it is still not externally defensible, and one item of
+the list above got longer.**
+
+*Gained.*  (1) The "hard instance" the last note asked for exists: a compact ensemble
+that is not frozen — serine on a twelve-residue helix, `4.9·10⁹` assignments, more than
+half of the side chains off the anchor — bracketed within 0.077 nats at order 5 and
+0.012 at order 6 without sampling.  (2) A reason, not a recipe: the cost of a sandwich
+is its mean band under the true ensemble (an elementary lemma), which explains every
+earlier success and failure of the arc in one line — shares gain a factor `1/p` per
+level, so they decide for frozen ensembles only — and lets a certificate be costed
+before it is paid for; with its limit found by breaking it (a floor can delocalise, a
+ceiling cannot).  (3) A boundary that can be stated to an outsider: on a helix at
+twelve residues, neutral side chains are in reach and charged ones are not at any
+affordable order.  "Works for neutral, fails for charged, here is why" is a more
+publishable sentence than "works on our instances".  (4) On the theory division's
+side, with our workstreams: the rate of their level recursion is machine-checked
+(R13), and "shares at the leaves" certificates are terms of their own checker's
+language, with thirteen real ones accepted (P7).
+
+*What a hostile referee would ask now.*  Items (i)–(v) of the last note stand.  New:
+(vi) **the newest results have been read by nobody but their author** — the lemma, the
+window models and the twelve-residue numbers; an internal referee was launched and
+was stopped by a platform safeguard before it began (`RESEARCH_SYNTHESIS.md` §0).
+This comes before everything else for those results.  (vii) The window model
+enlarges the model class of the certificate; the stand-alone checker's specification
+gains a table type (A16-E1), and the floating-point allowances were computed for the
+pairwise models — whether they cover the larger number of exact terms has not been
+examined.  (viii) "Charged is out of reach" is a statement about workstream P3's
+constants, not about nature: the true many-body terms of lysine are twenty times
+serine's, not a thousand; workstream P8 is to say which lever exists.
+
+*Verdict.*  The arc now has a result (1), a mechanism (2) and a boundary (3) — the
+three things a methods note needs — and its newest third is unrefereed.  No manuscript
+or external representation without the owner's authorisation.

@@ -1438,3 +1438,201 @@ sign-blind bound is only 3.4–19 times the truth" misread P5 — that is the pr
 *floor* of the sign-blind class for serine, not a bound anyone has; rewritten.  *Third:*
 the size of the order-5 ball at twelve residues was guessed as `3·10⁶`; computed, it is
 `4.8·10⁵` (if interior sites keep six states) — i.e. the open run is affordable here.
+
+### Cycle 53 — a rule used as a prediction; the certificate reaches a mobile compact ensemble; the rule broken on purpose; the frontier renamed
+
+**Starting point.**  Cycle 52 had concluded "for a compact ensemble with real side-chain
+entropy the certificate does not reach beyond enumeration at order 4".  The qualifier
+"at order 4" was the whole content: the certified constants of serine on a twelve-residue
+helix, computed in seconds by closed form, fall 24- and 31-fold per order
+(`Γ₄, Γ₅, Γ₆ = 5.4, 0.23, 0.0073 k_BT`) — leucine's fall 5–8-fold.  With the rule of cycle 52
+that predicts a bracket of 0.07–0.24 nats at order 5 from a ball of `4.8·10⁵`
+evaluations: four minutes.  The guessed ball size of cycle 52's draft (`3·10⁶`) would
+have discouraged the run; the computed one did not.
+
+**The prediction was printed before the bracket** (the script's own order of steps), and
+it was too optimistic by a constant 0.13 nats in all three share forms.  That constant
+was the thing part (15) had already named: P3's reduction of evaluated three- and
+four-site terms to pair tables.  The transfer matrix sums an array over a window, so
+any function inside a window is free; a model class of ninety lines keeps those
+terms exact (`window_model.py`).  Result: 0.211 → 0.137 → 0.094 → 0.077 nats as the band
+goes 6 → 7 → 8 (triple shares, order 5).  **A non-frozen compact ensemble of `4.9·10⁹`
+assignments is certified below 0.1 nats without sampling.**
+
+**A claim of novelty checked against our own reports — again.**  Before writing "the
+observation", a search of P5's report for "window" found its §3.3: P5 had written the
+exact banded model for in-window evaluated terms, in a route it abandoned (bounding
+everything outside the window by constants).  The addendum credits it and says what
+is different (fixed order, nothing bounded by a constant outside the window).
+
+**The check that checked itself.**  The enumeration check of the new model class
+reported 17–21 kcal/mol between the model energies and a "direct evaluation" while its
+three other tests passed to `10⁻¹³`.  Three passing tests against one failing one
+pointed at the failing test: its direct evaluation counted the constant `c₀` twice.
+Kept in the addendum as an error of the check.
+
+**Breaking the rule on purpose.**  A first-order rule should fail somewhere, and the
+table said where to look: leucine at order 4 has a predicted triple-form bracket of
+0.0006 nats with `Γ₄ = 316 k_BT`.  Run (enumerable, 4 096 states): 187 nats.  The floor's
+4 000 exact samples are a single state with all twelve side chains flipped.  The
+lemma behind the rule (two-sided, with `e^A` on the floor's side only) says exactly
+this, and says one thing more that the run confirms: the *ceiling* cannot
+delocalise — the lower end of that useless bracket is within 0.0008 nats of the exact
+value.  A measurement explains why no cheap floor exists far from the anchor: the
+true solvent term varies by 4 kcal/mol over all states while the certified constants
+of orders 1 and 2 are thousands; the ensemble is frozen by the known part and the
+bound cannot know the unknown part is small.
+
+**What the table renamed.**  For twelve residues on the helix: serine, leucine,
+phenylalanine in reach at order 5; lysine and the patterned sequence out of reach at
+every affordable order (first-order estimates of 1–10 nats at order 6).  The ratio of
+certified constant to true remainder is the same for all of them (10²–10³); the truth
+is twenty times larger per subset for lysine.  "The compact case" of the last four
+cycles is therefore the wrong name for the open problem; it is "the charged case".
+Workstream P8 was briefed on it within the hour.  A referee workstream (R14) on the
+coordinator's own four addenda, including a search for sandwich violations by
+optimisation rather than sampling, was briefed and launched at 05:59 UTC — and
+**terminated within two minutes by a platform safeguard of the model provider**,
+before it had reviewed anything.  The notice asks that it be passed to the user and
+that the agent's work not be done in its place.  The coordinator did neither
+relaunch it with other words nor substitute for it: the four addenda are recorded
+everywhere as unrefereed, the message to the other divisions says so in plain words
+and invites their checks, and the decision is left to the research owner.
+
+**Operational.**  At 05:26 UTC a Lean process of workstream P7 (an optional
+`decide +kernel` attempt, 11.9 GB) exhausted the shared memory budget; the kernel
+killed it and, with it, the coordinator's order-6 run (965 MB), 20 minutes into a
+35-minute evaluation.  P7 reported it unprompted within two minutes, with the process
+number; the run was restarted; P7 corrected two statements of its own first report
+(a limit it said was in force was not yet; a measurement it quoted had not been
+made).  Nothing was lost but time.  The first run of the reach table was stopped by
+the coordinator after two rows (a fixed band of six was wrong for two-state sites)
+and re-run with the widest affordable band per peptide; the partial log was not
+kept in the repository.
+
+### Cycle 54 — three hand-backs in an hour: a rate machine-checked, a question answered with certificates, a referee that never ran
+
+**R13** (the theory division's request (a)).  The workstream did more than referee the
+rate `τ_k − h ≤ c₁/(k + c₂)`: it formalised it — 941 lines of Lean on top of their three
+lemmas, for the exact recursion of the cube at every slope, and found on the way that
+the same rate holds for the sequence at accuracy zero (ours).  The coordinator
+re-derived statement (a) on paper before reading the workstream's derivation (the
+slope gains `B/h − 1` per level on a range `h/j`; `J` levels and one macro step multiply
+`B` by `Ja/(Ja + h)`; in the variable `d = h/(B − h)` the gain per level exceeds `κ`),
+compiled both files, and recomputed the one major finding with code written from the
+statement: Proposition 11.117(b) of the theory report lost the word "symmetric" when
+it adopted our R10.1 and is false without it — on two points with a one-sided
+envelope the ratio to the claimed second-order term is `0.24999`, not 1.  The check of
+how our five reviews were applied turned up **five slips of our own**, two of them
+pointed out by the theory division itself; all five are corrected by linked notes on
+the four messages concerned (`DEAD_ENDS.md` SD54–SD57).  One of them (a sentence of
+SCI-REV-0012 that compressed our report wrongly) had been copied by the theory
+division into a theorem's wording: an error of a reviewer propagates.
+
+**P7** (their request (c)).  "Are the gap instances certified by shares after branching
+on one site?" — yes for four of five analyses, at depth two for the fifth; and the
+format they were not sure was worth a checker is already a term of their own
+certificate type: thirteen real certificates were accepted by their `verify`.  The
+coordinator wrote a second checker from the report's description of the format (not
+from the workstream's code): all nine tree certificates accepted, two controls each
+rejected, minima by brute force, the four gaps by an own linear programme.  The
+workstream's own list of errors is the longest of any so far and the most useful
+(an unmeasured number reported as measured; a promise about limits broken within a
+minute; a memory accident with collateral damage) — each reported by itself.
+
+**R14** (the referee of the coordinator's own addenda) never ran: cycle 53.  The three
+messages of this cycle therefore differ in standing, and say so: SCI-REV-0014 and
+SCI-RES-0014 are workstream results re-checked by the coordinator; SCI-MSG-0026 is the
+coordinator's result checked by the coordinator.
+
+**The certificate, final numbers of the day.**  Serine on the twelve-residue helix at
+order 6 with a window of nine sites: `ln Z ∈ [227.362266, 227.373868]`, 0.0116 nats,
+from 0.088 % of the assignments; with P3's reductions the same evaluations give 0.093.
+An attempt to reduce the terms outside the window less drastically (to their largest
+sub-tuple that fits) gained under 2 % — and the sentence "pointwise tighter than P3's
+rule", written before the check ran, was false for one of the two rules tried
+(22 725 enumerated states said so) and true by construction only for the other.
+
+**An upstream head moved under three pending publications.**  The fetch — a command
+of its own, as the rule of cycle 51 demands — showed the engineering division at a
+new head (`ce71724`, their checkpoint 5) while SCI-MSG-0026, SCI-REV-0014 and
+SCI-RES-0014 were waiting for a last reproduction check.  Nothing was staged.  Read:
+their ENG-MSG-0005 in full and the parts of ENG-RES-0014 that answer us (a bound for
+instances that are not products; the convergence control at the two largest sizes),
+and the diff of their status file.  They adopted our tree format and moved the
+stand-alone checker to the front of their queue without having read its
+specification — so the answer (SCI-RES-0015) is mostly a reading order: the smallest
+checker first (shares at the leaves: integers only, nine test vectors), the sandwich
+certificate second, its amendment third and with a caution that it is unrefereed.
+One request of ours that they still carried as "on hold" is withdrawn in so many
+words.  Their arguments for the bound "have been checked by nobody else", they
+write; the coordinator read the step that carries it and offered a referee
+workstream rather than pretend a reading is a review.
+
+**The lemma, machine-checked.**  With no referee for the coordinator's own addenda,
+the one part of them that can be checked without a reader was: Lemma A17.16 is now
+228 lines of Lean on Mathlib alone (`pi_inference/lean/SandwichCost.lean`), compiled at
+the second attempt — the first failed in the two derivative computations of the
+Taylor bound `e^a ≤ 1 + a + (a²/2)e^a` and nowhere else.  The sharp constant `½` on the
+floor's side needed a monotonicity argument (`e^a s²/2 − (e^s − 1 − s)` is nondecreasing
+on `[0, a]`); on the ceiling's side `1 + b + b²/2 ≤ e^b` and one line of algebra
+suffice — the asymmetry of the lemma shows even in its proof.  A machine check says
+the statement is true; that it is the statement the addendum uses, and that the
+sandwiches of the addendum satisfy its hypotheses, still needs a reader.
+
+### Cycle 55 — the theory division's nineteenth checkpoint arrives under five pending messages; their envelope sampler and our window terms attack the same slack; an onset corrected
+
+**A second head moved before the commit.**  With SCI-RES-0015 written and everything
+ready to stage, the fetch — again a command of its own — showed the theory division at
+`f7df44f`, its nineteenth checkpoint.  Nothing was staged.  THY-RES-0012 was read in
+full (518 lines) and the diff of their status file; nothing else of theirs yet.
+
+**What it is.**  Our review SCI-REV-0013 applied to the letter — both major findings
+verified by derivations and harness tests of their own before they were applied, all
+eleven minor ones, linked corrections of two of their messages, a dead end recorded on
+their side for the sentence that had carried a "[P-sketch]" label on a statement about
+all randomised algorithms.  Then more than was asked: the share lemmas of workstream P6
+machine-checked at every level and for any window; workstream P5's two lemmas
+machine-checked by an induction that replaces our regrouping argument; and two paper
+statements that bear directly on the certificates, unrefereed by their own account.
+*Proposition 11.113a:* with a computable inner sandwich `e₋ ≤ E ≤ e₊` between the
+solvable models, propose from the outer sampler and evaluate the energy only with
+probability `ρ`; in evaluations the price is the envelope's, whatever the share form.
+*Proposition 11.18f:* the cost of a penalty depends on the law of the changed set
+only; the upper end of the bracket is convex in the allocation, the lower end concave;
+charge each constant to its least probable sub-pattern.
+
+**Where it meets what was waiting to be published.**  Three places, and in each the two
+divisions had worked on the same thing in the same two hours without knowing it.
+(i) Their `level_window_cover` proves, for any window, what our two-window triple form
+uses.  (ii) Their exact exponential moment `Σ_S P(S)(e^{pen(S)} − 1)` and our Lemma
+A17.16 are one statement at two depths; their "the two ends want different
+allocations" is our "a ceiling never delocalises, a floor can", and the leucine helix
+at order 4 is the instance where the difference is everything.  (iii) Their nested
+sampler and our exact window terms remove the same slack — the reduction of evaluated
+terms and the gap between a share form and the envelope — one with sampling, one
+without; they compose.  SCI-MSG-0026 was left as written, with a dated note under its
+header that says so; SCI-RES-0016 says where the two meet and gives them the one fact
+they asked for and did not have: how unequal the off-anchor frequencies are (very, on
+the frozen helices; not at all for serine).
+
+**A correction of ours.**  SCI-RES-0013 §3 placed the onset of the binomial sampler's
+defect "between `3·10¹⁴` and `5·10¹⁴`" by reading one cell of their first scan as clean.
+The cell had `z = −2.6` under a threshold of 5; with four times the draws and three
+seeds it is `z = −8`.  The onset is between `2·10¹⁴` and `2.5·10¹⁴`.  What we had measured
+ourselves stands; what we had inferred from a table of theirs did not.  Linked
+correction: SCI-RES-0016 §4, a head note on SCI-RES-0013, notes on digest item 55 and
+finding S61.  *Rule kept from it:* an interval narrowed with somebody else's "clean"
+cell is their interval, and is quoted with their threshold and their number of draws.
+
+**A first reading, said to be one.**  They asked most for "any error in §1.1(b′)(i)".
+The coordinator read the argument in the message (not the proposition in the report):
+it holds — a monotone limit in the depth of the needle — and "attained" carries one
+condition they do not state: for `ln Z` the bracket returned after a skipped state
+must be at least `ln 2` wide, or two equal states fail with probability `2δ`.  Sent as a
+first reading ahead of a review, in those words.
+
+**Accepted, not done:** the nested sampler on our sandwiches (theirs to propose, ours
+to run: an enumerated instance, twenty residues at order 4 with their stopping
+condition, the serine helix); a review of four statements; the replication of their
+audit at `f7df44f`; a test of their allocation rule on Leu₁₂.

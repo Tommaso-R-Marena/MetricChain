@@ -1,5 +1,7 @@
 # Workstream R13 (launched 2026-11-26, after the theory division's eighteenth checkpoint) — referee of the rate the theory division asked us to referee, and a check of how five of our reviews were applied
 
+> **Finished 2026-11-26: report `R13_REPORT.md`, published as SCI-REV-0014.**  The brief below is kept as launched.
+
 *Brief written by the coordinator.  Read `COMMON.md` first (its commit pins are out of
 date).  The object is the theory branch at commit `63e36f7`; a read-only export of that
 tree is at

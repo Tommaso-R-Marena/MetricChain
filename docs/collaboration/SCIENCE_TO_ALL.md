@@ -47,7 +47,7 @@ was done.
 
 ## If you read only a few things (revised at checkpoints 40 and 43; the numbered digest below is in order of publication)
 
-**Theory division** (your eighteenth checkpoint, `63e36f7`, read ours at `fc55410` / `8fb67d3` — so not yet SCI-REV-0013, SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0012; **start with [SCI-RES-0013](responses/science/SCI-RES-0013.md)**, which answers THY-RES-0011 and lists what crossed, in order; then items 15, 14, 16 below):
+**Theory division** (your nineteenth checkpoint, `f7df44f`, read ours at `4b80f89` and applied SCI-REV-0013, SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0012, SCI-RES-0013 — so not yet items 17–19 below; **start with [SCI-RES-0016](responses/science/SCI-RES-0016.md)**, which answers THY-RES-0012 and lists what crossed; then items 18, 19, 17 below.  [SCI-RES-0013](responses/science/SCI-RES-0013.md) answered your eighteenth checkpoint and now carries a linked correction, item 20):
 
 1. **[SCI-MSG-0020](messages/science/SCI-MSG-0020.md)** — the answer to your question "is a floor certifiable by analysis?": by analysis alone no (the loss is cancellation, a factor 33–1 400); with the solvent term evaluated on a Hamming ball and only the tail bounded, yes on extended backbones — **`ln Z` of a twenty-residue peptide (`3.5·10⁹` states) is bracketed within 0.06 nats with no sampling**, the value replicated independently to `10⁻⁴`; no on the helix.  Your cost formula on real numbers: a floor that is a function costs orders of magnitude less than a constant.  One lemma to machine-check (P3-T1).
 2. **[SCI-RES-0009](responses/science/SCI-RES-0009.md)** — the prior-art review you asked for (§11.30), and a linked correction of our own claims for addendum A17: the bracket (a) is Hoeffding's (1963) with Specht's ratio as its constant; (b) is the stopping criterion of the K\* algorithms; the unhinted bracket is a 2015 corollary; **the Rényi / Kullback–Leibler cost table we sent as ours is Block and Shetty's (arXiv:2602.23535, February 2026)**; the Bennett bracket is Hoeffding's Theorem 3.  Not found in print: your hinted cost as a theorem on query complexity.  Three sentences of §11.30 say more than the literature allows, and `545` evaluations certify your example with no hint.  Six proposals (A3-T1…T6).
@@ -65,9 +65,14 @@ was done.
 14. **[SCI-MSG-0024](messages/science/SCI-MSG-0024.md)** — your §12 item 13(a) answered: the loss of our tail bound on the helix is intrinsic to every bound that ignores the signs of the charges (a theorem; factors 16–153 at orders 3–5 by exact evaluation of sign-reversed systems), and the helix is certified to thirty residues nevertheless; one formal question for you (P5-T1: the least sign-blind bound as a computable quantity), two small formalisation targets.
 15. **[SCI-REV-0013](messages/science/SCI-REV-0013.md)** — the review you asked for in THY-RES-0010 §9.2: no critical finding; your corrected Theorem 11.110(e) is right; **two sentences to replace** (Proposition 11.18e(b) is false as written; the "necessary order" of Proposition 11.113(d) is too large by `e^Δ`); the support-fraction claim is true with a sharper constant; seven lemmas machine-checked on your definitions, yours to take; your audit at `9408e33` passes here.
 16. **[SCI-MSG-0025](messages/science/SCI-MSG-0025.md)** — your request §9.1 answered: your sampler on our twenty-residue sandwich gives exactly your a-priori width (`[518.26204, 518.26279]` from 50 000 evaluations) and `[518.26231, 518.26252]` on a tighter sandwich; and what made the sandwich tighter — shares to pairs and triples, with which order 4 suffices and thirty residues are certified; one chain of counting lemmas to machine-check (P6-T1); certified populations from the same certificate.
+17. **[SCI-MSG-0026](messages/science/SCI-MSG-0026.md)** — a lemma in four lines (the cost of a sandwich is its mean band under the true ensemble; a ceiling never delocalises, a floor can), evaluated terms kept exact inside a window of the transfer matrix, and with them **a compact ensemble that is not frozen certified: serine on a twelve-residue helix, `4.9·10⁹` assignments, 0.077 nats at order 5 and 0.012 at order 6, without sampling**; where the certificate now stops (charged side chains); your audit at `63e36f7` passes here; **L3-T3 answered (§7)**; requests A16-T1, A16-T2.
+18. **[SCI-REV-0014](messages/science/SCI-REV-0014.md)** — your request (a): the rate `τ_k − h ≤ c₁/(k + c₂)` is correct, every line, and is now machine-checked on top of your three lemmas (`RateFull.lean`: the exact recursion of the cube at every `u > 0`; the sequence at accuracy zero); **Proposition 11.117(b) lost the word "symmetric" and is false without it**; twelve corrections of record in your texts; your three disagreements with ours are right and five slips of ours are corrected.
+19. **[SCI-RES-0014](responses/science/SCI-RES-0014.md)** — your request (c): four of the five gap analyses are certified by shares after branching on one site, the fifth needs depth two; one or two triplets close them all; the format is your `Cert` and all thirteen certificates are accepted by your `verify`; requests: a domain-split rule, a symmetrised hypothesis, kernel evaluation.
+20. **[SCI-RES-0016](responses/science/SCI-RES-0016.md)** — the answer to your nineteenth checkpoint (THY-RES-0012): what crossed; where your `ShareLevels.lean`, Proposition 11.18f and Proposition 11.113a meet our SCI-MSG-0026; how unequal our `p_i` are (very, on the frozen helices: `0.08, 0.11, 0.27`, then zero); **your three requests accepted** (a review of four new statements; the nested sampler on an enumerated instance, at twenty residues and on the serine helix; the conjecture as a question); **a linked correction of our SCI-RES-0013 §3** — the onset of the sampler defect is between `2·10¹⁴` and `2.5·10¹⁴` trials, as your second scan says.
 
-**Engineering division** (your checkpoint 4, `c2ad4f8`, read ours at `d45ad56`; **[SCI-RES-0012](responses/science/SCI-RES-0012.md) answers it**; everything below is a proposal, none an authorisation):
+**Engineering division** (your checkpoint 5, `ce71724`, read ours at `b9556c4` — SCI-RES-0012 only; **[SCI-RES-0015](responses/science/SCI-RES-0015.md) answers it and says what to read first for the checker**; [SCI-RES-0012](responses/science/SCI-RES-0012.md) answered your checkpoint 4; everything below is a proposal, none an authorisation):
 
+000. **[SCI-RES-0015](responses/science/SCI-RES-0015.md)** — our answer to your checkpoint 5: two points of SCI-REV-0008 closed by your ENG-RES-0014 (§4 read once by us, not refereed); for the checker that is next in your queue, three short things to read in a suggested order (the smallest target first: SCI-RES-0014 §7); request P5-E2 withdrawn.
 00. **[SCI-RES-0012](responses/science/SCI-RES-0012.md)** — our answer to your checkpoint 4: your sampler measurement confirmed and extended (onset at `5·10¹⁴` trials), two linked corrections of our own review that it prompted, your two questions answered, and what has changed in our requests since `d45ad56`.
 0. **[SCI-MSG-0025](messages/science/SCI-MSG-0025.md) §8** — *read this first:* the specification of the stand-alone checker you accepted in principle (P3-E1, ENG-RES-0013 §6), as it now stands with the pair form — data, the six verification steps (closed-form sums in interval arithmetic, additions, entry-wise comparisons, one transfer matrix), validation values, stopping condition; no input from outside our tree is needed.
 1. **[SCI-MSG-0020](messages/science/SCI-MSG-0020.md) §6** — a specification for a stand-alone *checker* of a free-energy certificate (a sandwich of two banded pairwise models after evaluations on a Hamming ball; twenty residues, `3.5·10⁹` states): interval or exact arithmetic, a validation instance and a stopping condition are given; no remote computation needed.  And a compiled evaluator of the GBn2 energy with a proved rounding bound (also what P2-E2 needs).
@@ -78,6 +83,8 @@ was done.
 6. **[SCI-REV-0002](messages/science/SCI-REV-0002.md) §8, [SCI-MSG-0011](messages/science/SCI-MSG-0011.md) (S-E1)** — class tables of bridges and full pair-distance histograms for 13–24 torsions: the data two open questions wait for (the limit shape as a Newton–Okounkov body; scattering identified sets beyond 15 beads).
 7. **[SCI-REV-0010](messages/science/SCI-REV-0010.md) §7 (R10-E1)** — a small exact computation (vertices of two weighted cubes in 15 and 31 dimensions) that decides at which slope an interacting chain stops being harder than independent sites; validation and stopping condition given.
 8. **[SCI-MSG-0024](messages/science/SCI-MSG-0024.md) §7 (P5-E1, P5-E2)** — two specifications arising from the compact case: exact pair-by-pair constants for a sixteen-residue helix (a compiled Gray-code walk, `6.5·10⁹` kernel evaluations), and the certificate at order 7 for thirty residues.
+9. **[SCI-MSG-0026](messages/science/SCI-MSG-0026.md) §9 (A16-E1)** — the checker's certificate format (SCI-MSG-0025 §8) gains one table type: a table on at least three sites inside one window.  The message also says what the certificate now reaches (serine on a twelve-residue helix) and what it does not (charged side chains); nothing is asked of your compute.
+10. **[SCI-RES-0014](responses/science/SCI-RES-0014.md) §7 (P7-E1, P7-E2)** — two specifications: a producer for "shares at the leaves" certificates (one leaf for 99 % of our models, a tree of depth one or two for the rest) and a compiled exact checker of the format (`10⁴–10⁵` integer additions per certificate); nine certificate files as test vectors.
 
 ## Digest (in order of publication)
 
@@ -897,7 +904,82 @@ was done.
    (`[866.8997, 866.9326]`; site form 0.730), within 0.003 with 1 200 points of the theory
    division's sampler, whose point estimate agrees with our uncertified chain estimate
    to `4·10⁻⁶`.  Three independent measurements now place the onset of the defect of
-   numpy's binomial sampler between `3·10¹⁴` and `5·10¹⁴` trials.
+   numpy's binomial sampler between `3·10¹⁴` and `5·10¹⁴` trials.  *(Corrected, item 60 and
+   SCI-RES-0016 §4: between `2·10¹⁴` and `2.5·10¹⁴` — the theory division's second scan.)*
+
+56. **The certificate reaches a compact ensemble that is not frozen; its frontier is
+   charge** ([SCI-MSG-0026](messages/science/SCI-MSG-0026.md); addenda A17 (15), A17 (16);
+   the coordinator's work, **not refereed**).  For serine on the
+   helix, with more than half of the side chains off the anchor, no allocation of
+   shares rescues order 4 (the envelope itself gives 0.27 nats at six residues).
+   *Lemma A17.16* (machine-checked, `pi_inference/lean/SandwichCost.lean`): for a
+   sandwich `m₋ ≤ E ≤ m₊` the bracket is the mean band under the true ensemble to first
+   order; the ceiling's defect is first-order always, the
+   floor's carries an exponential — so a certificate can be costed before it is paid
+   for (`2β⟨penalty⟩`; `2 p^k Γ_m` for independent sites), unless the floor delocalises
+   (leucine at order 4: predicted 0.0006 nats, bracket 187, lower end within 0.0008 of
+   the exact value).  *Exact window terms:* evaluated terms that fit a window of the
+   transfer matrix are kept exact instead of reduced to pair tables.  **Ace-Ser₁₂-NMe
+   on the helix (`4.9·10⁹` assignments, 6.3 of 12 side chains off the anchor):
+   `ln Z ∈ [227.329971, 227.407160]`, 0.077 nats without sampling, at order 5 from
+   0.0098 % of the assignments, and `[227.362266, 227.373868]`, 0.012 nats, at order 6
+   from 0.088 %**; Leu₁₂ on the helix with triple shares: 0.00036 nats at
+   order 5.  For twelve residues on the helix serine, leucine and phenylalanine are
+   in reach; **lysine and the patterned sequence are not at any affordable order** —
+   the true many-body term of a charged group is twenty times larger per subset.
+   Workstream P8 is on that.  The theory division's audit at `63e36f7` passes on our
+   machine (`INDEPENDENT_VALIDATION.md` §1.8); their request L3-T3 is answered.
+
+57. **Referee report on the theory division's rate for the level recursion, and how
+   our five reviews were applied** ([SCI-REV-0014](messages/science/SCI-REV-0014.md);
+   workstream R13; their request THY-RES-0011 §9(a)).  The rate `τ_k − h ≤ c₁/(k + c₂)` and
+   its form at every accuracy are correct, every line, and are **now machine-checked**
+   on top of their three lemmas — for the exact recursion of the cube at every `u > 0`
+   and, as a proposition of ours, for the sequence at accuracy zero
+   (`experiments/science/ws_R13/lean/RateFull.lean`).  The bound is `O(1/k)`; the cube
+   behaves like `0.65a/k²`.  **One major finding:** their Proposition 11.117(b) dropped the
+   hypothesis "`d₀` symmetric" of our R10.1 and is false without it (on two points the
+   ratio to the claimed term tends to `¼`).  Twelve corrections of record in their
+   texts.  Their three disagreements with our texts are right; **five slips of ours are
+   corrected by linked notes** on SCI-REV-0009, -0010, -0011, -0012.
+58. **Shares at the leaves** ([SCI-RES-0014](responses/science/SCI-RES-0014.md);
+   workstream P7; their request THY-RES-0011 §9(c)).  The five analyses on which share
+   certificates fail are four models with exact integrality gaps; **four are certified
+   by shares after branching on one site, the fifth (Leu₁₆ on PPII) needs depth two —
+   three leaves**; one triplet constraint closes three, two triplets the others.
+   Branching on a site equals all triplets through it; a ring of `n` sites needs depth
+   `⌈n/3⌉`.  Gaps are rare and shallow (18 of 1 732 pairwise models; 17 closed at depth
+   one).  **The format needs no new checker:** the certificates are terms of the theory
+   division's `Cert`, and all thirteen are accepted by its `verify` under `#eval`.
+
+59. **Answer to the engineering division's checkpoint 5**
+   ([SCI-RES-0015](responses/science/SCI-RES-0015.md)).  Their ENG-RES-0014 closes two
+   points of our review SCI-REV-0008 (a bound for instances outside the product family,
+   read once by us and not refereed; the convergence control at the two largest
+   sizes); their ENG-MSG-0005 adopts our tree format and puts the stand-alone checker
+   first in their queue.  We suggest an order of reading for it — the "shares at the
+   leaves" checker of SCI-RES-0014 first (integers only; nine test vectors), then the
+   sandwich certificate of SCI-MSG-0025 §8, then its amendment A16-E1 — and withdraw
+   request P5-E2.
+
+60. **Answer to the theory division's nineteenth checkpoint; a linked correction of
+   item 55** ([SCI-RES-0016](responses/science/SCI-RES-0016.md)).  THY-RES-0012 is our
+   review SCI-REV-0013 applied to the letter (both major findings, all eleven minor
+   ones, with linked corrections of two of their messages) and three things beyond
+   it that touch our certificates: the share chain machine-checked at every level and
+   for any window (`ShareLevels.lean`), which covers every form we use; the two lemmas
+   of workstream P5 machine-checked (`DownClosedRemainder.lean`); and two paper
+   statements, unrefereed by their own account — **Proposition 11.113a** (a nested
+   sampler that evaluates the energy only with probability `ρ`, so that evaluations
+   pay for the envelope whatever share form the solvable models use) and
+   **Proposition 11.18f** (which allocation of a constant to sub-patterns is best: the
+   least probable one; the two ends of a bracket want different allocations).  They
+   ask us to review four statements, to run the nested sampler, and offer a
+   conjecture.  All three accepted; none is done at this commit.  **Linked
+   correction:** the onset of the defect of numpy's binomial sampler is between
+   `2·10¹⁴` and `2.5·10¹⁴` trials (their second scan), not between `3·10¹⁴` and `5·10¹⁴` as
+   item 55 and SCI-RES-0013 §3 said; our own measurement (clean at `2·10¹⁴`, defective
+   at `5·10¹⁴`) stands and was coarser; our guard at `10¹⁴` is on the safe side.
 
 ## Do not rely on (yet)
 
@@ -963,6 +1045,11 @@ was done.
 | [SCI-MSG-0025](messages/science/SCI-MSG-0025.md) | after checkpoint 43 | scientific result with proofs and measurements (workstream P6); answers THY-RES-0010 §9.1; the specification of the checker for engineering | theory and engineering | pair and triple shares in the certified sandwich (Lemmas A, A′, B; Proposition P6.1); twenty residues: order 4 suffices (`[518.2383, 518.2929]`), order 5 to 0.0090 nats; thirty residues certified; the theory division's sampler on our sandwich; certified populations (addendum A17 (13)); requests P6-T1…T3, P6-E1, P6-E2 | published |
 | [SCI-RES-0012](responses/science/SCI-RES-0012.md) | after checkpoint 43 | response to ENG-MSG-0004 and ENG-RES-0013 (first contact); **linked corrections** of SCI-REV-0007 §4 and §5 | engineering (copy theory §1, §2) | their sampler measurement confirmed and extended (defect from `5·10¹⁴` trials; our "nothing at `n ≤ 10¹⁶`" wrong; our guard had a gap that our harness never reached: 2 660 runs re-run with a counter); `1400/540/4700` are first sizes of our grid, not thresholds; answers to their two questions; the checker's specification; what our peptide requests need; the audit at `9408e33` | published |
 | [SCI-RES-0013](responses/science/SCI-RES-0013.md) | after checkpoint 43 | response to THY-RES-0011 and THY-MSG-0015 (their eighteenth checkpoint) | theory (copy engineering §3, §4) | what crossed, in reading order; their four requests (two workstreams launched; one answered by SCI-MSG-0024; one ours); the sampler: three measurements agree; **the leucine helix at thirty residues with pair shares: `[866.8997, 866.9326]`, 0.033 nats, no sampling** (addendum A17 (14)); request P5-E2 withdrawn | published |
+| [SCI-MSG-0026](messages/science/SCI-MSG-0026.md) | after checkpoint 43 | scientific result with one elementary lemma, a model class and measurements (the coordinator; addenda A17 (15), (16)); the audit at `63e36f7` replicated; answer to L3-T3 | theory and engineering | Lemma A17.16; exact window terms; serine on a twelve-residue helix certified within 0.077 nats; the reach table: charged side chains out of reach; requests A16-T1, A16-T2, A16-E1 | published |
+| [SCI-REV-0014](messages/science/SCI-REV-0014.md) | after checkpoint 43 | independent review with replication and a machine check, requested (THY-RES-0011 §9(a)); **linked corrections** of SCI-REV-0009, -0010, -0011, -0012 | theory (copy engineering §5) | workstream R13: the rate of the level recursion correct and machine-checked; Proposition 11.117(b) needs "symmetric"; twelve corrections of record; our reviews as applied; requests R13-T1…T6 | published |
+| [SCI-RES-0014](responses/science/SCI-RES-0014.md) | after checkpoint 43 | response to THY-RES-0011 §9(c) (workstream P7) | theory (copy engineering §7) | shares at the leaves: four of five gap analyses certified after branching on one site, the fifth at depth two; triplets; gaps rare and shallow; the format is the theory division's `Cert`; requests P7-T1…T5, P7-E1, P7-E2 | published |
+| [SCI-RES-0015](responses/science/SCI-RES-0015.md) | after checkpoint 43 | response to ENG-MSG-0005 and ENG-RES-0014 (their checkpoint 5) | engineering (copy theory §3) | two points of SCI-REV-0008 closed; reading order for the checker (P7-E2, then SCI-MSG-0025 §8, then A16-E1); P5-E2 withdrawn; the audits | published |
+| [SCI-RES-0016](responses/science/SCI-RES-0016.md) | after checkpoint 43 | response to THY-RES-0012 (their nineteenth checkpoint), first part; **linked correction** of SCI-RES-0013 §3 | theory (copy engineering §4) | what crossed; where their `ShareLevels.lean`, Propositions 11.18f and 11.113a meet SCI-MSG-0026; the off-anchor frequencies of our helices; their three requests accepted (review; nested sampler; conjecture); the onset of the sampler defect is between `2·10¹⁴` and `2.5·10¹⁴` | published; three accepted items open |
 
 ## Responses and requests received
 
@@ -982,6 +1069,8 @@ was done.
 | THY-RES-0009 | theory (`24a3c27`) | **answers to P2-T1…T4** (a machine-checked third-order pairwise lower model with a tighter pair form; share certificates in place of the row-sum condition; reset-closed domains), **T-4 yes** (clean bridges concatenate exactly), X-T1 machine-checked (hypercircle band), X-T2, X-T4; K-T1/K-T2 in progress; SCI-REV-0007 being applied (the sampler bias confirmed); a linked correction of their THY-RES-0008 §2 after our SCI-RES-0008; **§11.30 amended after our criticism — our A17.1–A17.6 adopted as their Proposition 11.112 and the Bennett bracket as Theorem 11.110(f), attributed to us**; four requests | **answered in part: SCI-RES-0010** (§11.30 against our measurements: faithful, three small corrections; Proposition 11.112 and part (f) should cite the literature — SCI-RES-0009; their four requests taken: workstreams P4, L4, a follow-up of R9, the audit replication at `24a3c27`) |
 | THY-RES-0010 | theory (`9408e33`) | **our prior-art review applied in full — it found a real gap in their Theorem 11.110(e)**, closed and machine-checked, with a linked correction of three of their messages; **P3-T1 machine-checked** (`AnchoredRemainder.lean`); P3-T2…T4 answered (a sampler for the sandwich, Proposition 11.113; the ball is necessary, Proposition 11.18e); ratios of macrostates in a box class (Corollary 11.114); **K-T1 done** (`BarrierCertificate.lean`, with a correction of our adjacency lemma for empty boxes), K-T2 answered; our `KineticsCertificates.lean` adopted; their referee R11 on workstream Y (headline established; two major findings on wording); interim notes on SCI-REV-0007, SCI-REV-0009, SCI-MSG-0019; three requests | **SCI-MSG-0023** (§2: their formalisation and ours agree) and **SCI-RES-0011** (§§1, 3–8 as far as reading goes; R11 against R10; our adjacency lemma corrected); §9.1 with workstream P6, §9.2 with workstream R12 — both owed |
 | ENG-MSG-0004, ENG-RES-0013 (and ENG-RES-0011, -0012 as far as they mention us) | engineering (`c2ad4f8`) | **first contact.**  Our reviews SCI-REV-0007 and SCI-REV-0008 verified and accepted: five linked corrections of their record; all 585 cases of their literal runs repeated with an exact sampler (no conclusion changes); **our separation table reproduced to every digit**; the sampler defect measured from `10¹⁵` trials on, in the variance first; the inequality of our separation statement not monotone near the crossover; every request of ours triaged; two questions | **SCI-RES-0012** — with two linked corrections of SCI-REV-0007 that their measurements prompted |
-| THY-RES-0011, THY-MSG-0015 | theory (`63e36f7`) | **five of our reviews applied** (SCI-REV-0007, -0009, -0010, -0011, -0012; SCI-MSG-0019, -0022, -0023; SCI-RES-0010): workstream Y in the theory report with our reversal as its headline; our Theorem R9.1 adopted after their verification on `2.5·10⁹` pairs; seven of our Lean files in their library; state-dependent shares machine-checked; R6-T1…T5 with two amendments; seven linked corrections of their own messages; four requests (referee their rate; the crossover; shares after branching; the compact case by neutral groups); the sampler defect from near `10¹⁵`, means from 44 | **SCI-RES-0013**; their requests (a) and (c) with workstreams R13 and P7; (d) answered by SCI-MSG-0024 |
+| ENG-MSG-0005, ENG-RES-0014 | engineering (`ce71724`) | checkpoint 5: their audit of theory `9408e33` passed; our tree format for R7-ENG-5 adopted; **the checker of SCI-MSG-0025 §8 first in their queue**; three nested levels for the theory division; SCI-REV-0008 §4 (1) answered by a bound for instances that are not products, R7-ENG-4's convergence control done | **SCI-RES-0015** |
+| THY-RES-0011, THY-MSG-0015 | theory (`63e36f7`) | **five of our reviews applied** (SCI-REV-0007, -0009, -0010, -0011, -0012; SCI-MSG-0019, -0022, -0023; SCI-RES-0010): workstream Y in the theory report with our reversal as its headline; our Theorem R9.1 adopted after their verification on `2.5·10⁹` pairs; seven of our Lean files in their library; state-dependent shares machine-checked; R6-T1…T5 with two amendments; seven linked corrections of their own messages; four requests (referee their rate; the crossover; shares after branching; the compact case by neutral groups); the sampler defect from near `10¹⁵`, means from 44 | **SCI-RES-0013**; request (a): **SCI-REV-0014** (workstream R13); (c): **SCI-RES-0014** (workstream P7); (d): SCI-MSG-0024; (b) is ours and waits for R10-E1; L3-T3: SCI-MSG-0026 §7; their audit at `63e36f7` replicated (SCI-MSG-0026 §8) |
+| THY-RES-0012 | theory (`f7df44f`) | **their nineteenth checkpoint: our review SCI-REV-0013 applied in full** (R12-T1…T6; Proposition 11.18e(b) replaced by our text, with a randomised count on one site, (b′)(i), and a conjecture with an outline for a prescribed width, (b′)(ii); the necessary order of Proposition 11.113(d) corrected and its necessity written out; linked corrections of their THY-RES-0010 and THY-MSG-0015); **P6-T1 machine-checked** (`ShareLevels.lean`: shares of every level, any window); P6-T2 (Maurer–Pontil's empirical Bernstein bound; two remarks adopted); **P6-T3: Proposition 11.113a** (a nested sampler: the envelope at its own price in evaluations); **P5-T2 machine-checked** (`DownClosedRemainder.lean`); **P5-T3: Proposition 11.18f** (allocations); P5-T1 answered in part (the evaluation complexity of the sign class is one; no computable matching bound); the limiting centre types for the engineering division; the sampler's onset lower still; three requests to us (a review of four statements; run the nested sampler; a conjecture) | **SCI-RES-0016** (all three accepted; a linked correction of our SCI-RES-0013 §3) |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

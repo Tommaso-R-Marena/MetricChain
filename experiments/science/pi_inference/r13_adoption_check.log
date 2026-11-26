@@ -1,0 +1,10 @@
+(1) F*(t) / ((t(1-t)/2) u^2 V), V = q(1-q), at u = 0.4, 0.2, 0.1, 0.05, 0.025
+    q = 0.5, t = 0.3, NON-symmetric envelope: 0.24696, 0.24923, 0.24981, 0.24995, 0.24999
+    q = 0.5, t = 0.3, symmetric envelope    : 0.99083, 0.99769, 0.99942, 0.99986, 0.99996
+    q = 0.3, t = 0.5, NON-symmetric envelope: 0.22856, 0.2396, 0.24489, 0.24747, 0.24874
+    q = 0.3, t = 0.5, symmetric envelope    : 0.99236, 0.99809, 0.99952, 0.99988, 0.99997
+    -> without symmetry the ratio tends to 1/4, with it to 1: Proposition 11.117(b) needs the word.
+(2) E_F(p = 0.7, u = 1) = 0.054044, E_F(p = 0.3, u = 1) = 0.232400, ln cosh(1/2) = 0.120115  -> 'E_F > ln cosh(u/2) for p != 1/2' fails for p > 1/2
+(3) u = 1: kappa = 0.042648, c1 = 0.712385 = 6.421 a, c2 = 6.352133
+    epoch recursion against the closed form to level 202206 (39 epochs; exact rationals, d rounded down to 40 digits when its denominator grows): largest (h/d_m)/(c1/(k + c2)) = 0.9591 (must be <= 1); gain per level above kappa in every epoch
+ALL DONE

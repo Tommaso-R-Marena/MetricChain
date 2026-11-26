@@ -1,0 +1,41 @@
+# r13_03_closed_form.py
+## (A) constants of the cube (mpmath, 40 digits; printed to 12)
+   u |      p_u       |      Lam1      |      eps*      |       a        |       h        |   kappa    |     c1     |     c2     | c1/a
+0.25 | 0.437823499114 | 0.117207760681 | 0.0077922393189 | 0.00775188590255 | 0.00194426818191 | 0.038377651 | 0.052605737 |  6.7232789 | 6.78619
+ 0.5 | 0.377540668798 |  0.21907019638 | 0.0309298036202 | 0.0302998619808 | 0.00767286647803 | 0.039226642 | 0.20327632 |  6.6446939 | 6.70882
+   1 |  0.26894142137 | 0.379885493042 | 0.120114506958 | 0.110944071672 | 0.0291391385016 | 0.04264811 | 0.71238485 |  6.3521334 | 6.42112
+   2 | 0.119202922022 | 0.566219169517 | 0.433780830483 | 0.327813325473 | 0.0972809077466 | 0.056697173 |  1.8130791 |  5.4427633 | 5.53083
+   4 | 0.0179862099621 | 0.674997252642 |  1.32500274736 | 0.603052412794 | 0.239249644474 | 0.11650978 |  2.2927223 |  3.6444669 | 3.80186
+   identities checked at 40 digits: theta_na(h) = h means KL(Lam1/u || p_u) = h; eps* = KL(1/2||p_u) = u/2 - Lam1
+   u=0.5: KL(Lam1/u||p_u) - h = 5.74e-42;  KL(1/2||p_u) - eps* = 9.69e-42;  u/2 - Lam1 - eps* = 3.95e-42
+   u=1: KL(Lam1/u||p_u) - h = 0.0;  KL(1/2||p_u) - eps* = -1.43e-42;  u/2 - Lam1 - eps* = 1.43e-42
+   u=2: KL(Lam1/u||p_u) - h = 1.43e-41;  KL(1/2||p_u) - eps* = 0.0;  u/2 - Lam1 - eps* = -1.15e-41
+## (B) exact rational test of the closed form against the epoch recursion
+   (a, h) rational; columns: epochs run | last k reached | worst (h/d_m)/(c1/(k+c2)) over epochs (must be <= 1) | gain>(J+1)kappa | d_m>=d_0+kappa(k_m-1) | closed form
+   cube u=0.5 (a,h rounded to 12 digits)      |  54 | k= 12666018 | 0.962254 | True | True | True
+   cube u=1 (a,h rounded to 12 digits)        |  52 | k= 10615023 | 0.959096 | True | True | True
+      first epochs (k_m, J_m, d_m, ratio at the last level of the epoch, k(B_k-h)/a there):
+        k_m=    1 J_m=   1 d_m=    0.3562 ratio=0.9591 k(B-h)/a=1.4747
+        k_m=    3 J_m=   1 d_m=    0.4962 ratio=0.8534 k(B-h)/a=2.1174
+        k_m=    5 J_m=   1 d_m=    0.7204 ratio=0.7014 k(B-h)/a=2.1876
+        k_m=    7 J_m=   2 d_m=    1.1218 ratio=0.5598 k(B-h)/a=2.1071
+        k_m=   10 J_m=   2 d_m=    1.4885 ratio=0.5043 k(B-h)/a=2.1175
+        k_m=   13 J_m=   3 d_m=    2.0930 ratio=0.4368 k(B-h)/a=2.0078
+        k_m=   17 J_m=   3 d_m=    2.7870 ratio=0.3868 k(B-h)/a=1.8848
+        k_m=   21 J_m=   5 d_m=    4.0092 ratio=0.3301 k(B-h)/a=1.7033
+        ... last: k_m=7827033 J_m=2787990 d_m=2787989.540 ratio=0.1557 k(B-h)/a=1.0000
+   cube u=2 (a,h rounded to 12 digits)        |  44 | k= 10261834 | 0.946345 | True | True | True
+   gauss pair a=1,h=1/4                       |  55 | k= 13268788 | 0.963303 | True | True | True
+   a=1,h=1/2 (d_0=1, integer)                 |  23 | k= 16777214 | 0.818182 | True | True | True
+   a=3,h=2 (d_0=2, integer)                   |  15 | k= 21523359 | 0.812500 | True | True | True
+   a=1,h=9/10                                 |   7 | k= 11111110 | 0.911678 | True | True | True
+   a=1,h=999/1000                             |   3 | k=1001001000 | 0.999001 | True | True | True
+   a=1,h=1/100                                | 1509 | k= 10028903 | 0.999950 | True | True | True
+   a=1,h=1/3                                  |  39 | k= 10737080 | 0.930233 | True | True | True
+   a=7,h=5                                    |  14 | k= 33531801 | 0.910486 | True | True | True
+   all exact checks passed: True
+## (C) floating-point scan, k up to 1e9, 4000 random pairs (a, h) + a structured ladder
+   pairs: 4016; violations of the closed form or of d_m >= d_0 + kappa(k_m-1): 0
+   largest (h/d_m)/(c1/(k+c2)) over all pairs and epochs: 1.000000000 at (a,h)=(1.0, 0.9999) (h/a=0.999900)
+   k(B_k-h)/a at the last level of the last epoch (k ~ 1e9): min 1.000000, max 1.000276   (limsup claim: <= 1)
+# END

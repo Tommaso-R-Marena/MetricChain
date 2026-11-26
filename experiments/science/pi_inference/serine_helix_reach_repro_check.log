@@ -1,0 +1,11 @@
+# logs written before the last edit of window_model.py against re-runs with the final module (timings and cache-provenance phrases removed)
+serine_helix_reach_L12_m4_w11.log: 19 lines; identical: True
+serine_helix_reach_L12_m5_w11.log: 18 lines; identical: True
+serine_helix_reach_L12_m6_w11.log: 18 lines; identical: True
+serine_helix_reach_S12_m4_w6.log: 19 lines; identical: True
+serine_helix_reach_S12_m5_w6.log: 19 lines; identical: True
+serine_helix_reach_S12_m5_w7.log: 19 lines; identical: True
+serine_helix_reach_S12_m5_w8.log: 19 lines; identical: True
+serine_helix_reach_S6_m4_w5.log: 19 lines; identical: True
+all 8 identical: True
+ALL DONE

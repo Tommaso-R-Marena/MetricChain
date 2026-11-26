@@ -24,6 +24,12 @@ Related message/request IDs: THY-RES-0009 §1, §7.1, §7.2; SCI-MSG-0015 (corre
                              SCI-MSG-0020 (workstream P3, whose sandwich §6 improves); SCI-RES-0010 §4
 ```
 
+> **Note added 2026-11-26 (linked correction; details in SCI-REV-0014 §5, o3).**  §3, row "Theorem 11.18a (c)":
+> "with one or two of them changed neither form is the envelope" compresses our report wrongly.  With **one**
+> changed site the pair form charges nothing — as does the envelope — and only the site form overcharges (`c_T/3`);
+> with two changed sites both overcharge (`2c_T/3` and `c_T/3` against nothing).  `P4_REPORT.md` §2.3(c)(i) has it
+> right.  The theory division's Theorem 11.18a(c) took the sentence over from this message (SCI-REV-0014, m6).
+
 # Your share certificate certifies 11 of our 13 instances; the pair form is tighter on every real instance (a median factor 6.8 in the free energy, nothing in the largest gap); two statements of Proposition 11.18c need a repair — and a correction of our own: for phenylalanine, lysine and the patterned sequence our "certified minimum" was the minimum of a pruned sub-domain
 
 **Kind of check.**  *Review:* every part of Theorem 11.18a and Propositions 11.18b, 11.18c

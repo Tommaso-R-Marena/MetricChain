@@ -2319,6 +2319,241 @@ for every share allocation**.
     two rotamers per site, 95 % of the weight within one flip of the anchor.  This part
     is the counter-example to any wider reading.
 
+### (16) The certificate reaches a compact ensemble that is not frozen: a first-order law, exact window terms, serine on the helix at twelve residues — and the frontier moves to charged side chains [V for the lemma; P for the validity of the window models; M; added 2026-11-26; not refereed]
+
+*Scripts (coordinator's), all in `experiments/science/pi_inference/`:* `window_model.py`
+(the model class), `window_model_check.py` (+ log: against exhaustive enumeration),
+`serine_helix_reach.py` (+ one log and one JSON per run: `serine_helix_reach_<peptide>_m<order>_w<band>.log`),
+`certificate_reach_table.py` (+ log, JSON), `reach_side_checks.py` (+ log: the true
+remainder against the certified constants by residue type; the leucine far field).
+Part (15) ended with "at order 5 it needs
+the reduction replaced before the shares matter" and "whether order 5 certifies serine
+on a helix too long to enumerate has not been run".  Both are done here.
+
+**A. The cost of a sandwich is its mean band.**
+
+38. **Lemma A17.16** [**V**: `experiments/science/pi_inference/lean/SandwichCost.lean`,
+    `ScienceA17.sandwich_cost` — 228 lines, Mathlib only, the three standard axioms;
+    elementary; two of its four one-sided inequalities are the Gibbs–Bogoliubov
+    inequality, here with the mean under the *true* ensemble, which is the one that
+    can be sampled before any model exists; no reference opened].
+    Let `m₋ ≤ E ≤ m₊` on a finite set, `a = β(E − m₋)`, `b = β(m₊ − E)`, `⟨·⟩` the mean
+    under the Gibbs measure of `E`, `A = sup a`.  Then
+    `ln Z(m₋) − ln Z(m₊) = ln⟨e^a⟩ − ln⟨e^{−b}⟩`, and
+
+    `⟨a⟩ ≤ ln Z(m₋) − ln Z(E) ≤ ⟨a⟩ + ½ e^A ⟨a²⟩,   ⟨b⟩ − ½⟨b²⟩ ≤ ln Z(E) − ln Z(m₊) ≤ ⟨b⟩.`
+
+    *Proof.*  `Z(m₋) = Σ e^{−βE} e^{a} = Z(E)⟨e^a⟩` and `Z(m₊) = Z(E)⟨e^{−b}⟩`.  First
+    pair: `e^t ≥ 1 + t` at `t = a − ⟨a⟩` gives `⟨e^a⟩ ≥ e^{⟨a⟩}`; `e^a ≤ 1 + a + ½a²e^A` on
+    `[0, A]` and `ln u ≤ u − 1` give `ln⟨e^a⟩ ≤ ⟨a⟩ + ½e^A⟨a²⟩`.  Second pair:
+    `⟨e^{−b}⟩ ≥ e^{−⟨b⟩}` likewise; `e^{−b} ≤ 1 − b + ½b²` for `b ≥ 0` and `−ln u ≥ 1 − u`
+    give `−ln⟨e^{−b}⟩ ≥ ⟨b⟩ − ½⟨b²⟩`.  ∎
+    *Machine-checked* as stated, with `Z(m)/Z(E) = ⟨e^{β(E − m)}⟩` (`Z_ratio`), the floor's
+    side (`floor_side`) and the ceiling's side (`ceiling_side`) as separate theorems; the
+    two Taylor bounds are `exp_le_quadratic_mul_exp` (by monotonicity of
+    `e^a s²/2 − (e^s − 1 − s)` on `[0, a]`) and `exp_neg_le_quadratic` (from
+    `1 + b + b²/2 ≤ e^b`).  What the machine check does not cover: that the sandwiches of
+    this part satisfy its hypotheses (that is items 40–41), and the rule of item 39.
+    So the bracket is `β⟨m₊ − m₋⟩` to first order.  **The two sides are not alike:**
+    the ceiling's defect is first-order whatever the model does far from the
+    ensemble (no exponential on that side); the floor's carries `e^A`.
+    *Checked exactly* on 378 enumerated sandwiches (`window_model_check.py`): no
+    violation; the first-order term is within 6 % of the bracket at orders `m ≥ 4`
+    wherever the bracket is below 0.5 nats, within 21 % at order 3 (few states with
+    penalties of several `k_BT`).
+39. **The two rules** [M].  With exact evaluated terms `m₊ − m₋` is twice the penalty,
+    so the bracket of a form is `2β⟨penalty⟩` to first order — computable from the
+    closed-form sums of the constants and an uncertified sample of the true ensemble,
+    *before the ball is paid for* ("refined rule"; the scripts print it before any
+    bracket is computed).  For sites that leave the anchor independently with
+    probability `p` it is `2 p^k Γ_m` (part (15), "crude rule").  The crude rule needs
+    homogeneous sites: for Leu₁₂ on the helix, where only the three N-terminal side
+    chains move (off-anchor frequencies 0.08, 0.11, 0.27, then zero), it is wrong by
+    a factor 3 for pairs and 15 for triples at order 5 (0.138 against a bracket of
+    0.047; 0.0054 against 0.00036).  *Correction of part (15),
+    item 35:* its sentence "20–40 for the frozen leucine helix with pairs alone"
+    quoted measured gains next to a rule that does not hold there; the measured
+    gains stand, the rule is the refined one.
+
+**B. Exact window terms (open problem D9(b), done).**
+
+40. **The observation is not new in our record; its use here is** [P, immediate].
+    Workstream P3's models are pairwise, so every evaluated term `d_U` of order
+    3 … `m − 1` is replaced by a minorant in the floor and a majorant in the ceiling
+    that depend on two in-band sites (`pwmodel.build_band_models`).  But its transfer
+    matrix eliminates site `i` from an *array over the sites `i … i + w`*, and any
+    function of sites that fit into one such window can be added to that array at no
+    extra cost.  Workstream P6 used this for its triple penalty; workstream P5 wrote
+    it down for evaluated terms (`P5_REPORT.md` §3.3: "the model `Σ_{U ∈ 𝒟_w} d_U` is an
+    exact banded function") as part of a route it abandoned — bounding every subset
+    *outside* the window by its certified constant, which fails for leucine because
+    those constants are too large.  Here nothing outside the window is bounded by a
+    constant: the order of the certificate and its ball are unchanged, every
+    evaluated term with `max U − min U ≤ w` is kept exact, identically in floor and
+    ceiling, and only the others are reduced as P3 does (`window_model.py`).  The
+    penalties and therefore the validity argument are unchanged:
+    `m_∓ = f + [exact or minorised/majorised I_{m−1}g] ∓ penalty`, `|g − I_{m−1}g| ≤ penalty`.
+41. **Checked against exhaustive enumeration** [M, `window_model_check.py`]: 189
+    sandwiches (serine, helix and strand, orders 3–5, three windows each, three
+    penalty forms, three rules for the terms that do not fit a window): the model energies equal a direct evaluation that does not use
+    the model class to `1.9·10⁻¹³` kcal/mol at every state; `m₋ ≤ E ≤ m₊` at every
+    state; the transfer matrix equals the sum over states to `6·10⁻¹⁴`; with the full
+    window the brackets equal the "exact evaluated terms" columns of part (15) up
+    to the floating-point allowances those columns do not carry (`4·10⁻⁵` nats).  A
+    variant of P6's triple form with a narrower window for the triples than for
+    the model (`triple_form_two_windows`; P6's Lemma A′ holds for any set of triples
+    declared in-window) holds at every state of 11 further enumerated sandwiches
+    and equals P6's tables when the two windows coincide.  *An error of the check
+    itself, found by the check:* its first version double-counted a constant in the
+    direct evaluation and reported a difference of 17–21 kcal/mol while the three
+    other checks passed; the constant was `c₀` (`−18.3` kcal/mol for Ser₆), corrected.
+    *A better reduction of the terms that do not fit a window was tried and gains
+    nothing worth having* [M, `window_model_rules.py`]: replacing such a term by its
+    minimum / maximum over as few sites as possible — a maximal sub-tuple that fits a
+    window instead of P3's pair — narrows the serine brackets at twelve residues by
+    less than 2 % (order 5, band 6: 0.1373 → 0.1365; order 6: 0.0565 → 0.0557): the slack
+    of such a term is its dependence on the far site, which every rule gives up.  Two
+    rules are implemented and checked at every enumerated state; P3's stays the
+    default.  *A wrong sentence of the first version, found by the check:* "the new
+    rule is pointwise tighter than P3's" — false for the rule of least sup-norm slack
+    (22 725 enumerated states to the contrary), true by construction for the rule
+    that extends P3's chosen pair (no state to the contrary).
+
+**C. Serine on the helix at twelve residues** (Ace-Ser₁₂-NMe, `4.9·10⁹` assignments; 6.3 of
+12 side chains off the anchor under the true ensemble — heat-bath Gibbs sampling,
+3 200 states, uncertified).
+
+42. **Order 5 certifies it** [P for validity: Proposition P6.1 and item 40; M].
+    Ball of radius 4: 481 506 evaluations of the solvent term, 0.0098 % of the domain,
+    four minutes on one core.  Widths in nats; "rule" is the refined rule of item 39.
+
+    | band `w` | site, pair, triple form with P3's reductions | **with exact window terms** | refined rule | terms of order ≥ 3: exact / reduced | sandwich sampler on the triple form (2 000 points; prob. ≥ 0.95) |
+    |---|---|---|---|---|---|
+    | 6 | 0.364, 0.259, 0.211 | 0.290, 0.185, 0.137 | 0.242, 0.138, 0.089 | 245 / 470 | [227.36446, 227.37283] |
+    | 7 | 0.336, 0.227, 0.174 | 0.257, 0.148, **0.094** | 0.242, 0.133, 0.080 | 350 / 365 | [227.36590, 227.37162] |
+    | 8 | 0.328, 0.216, 0.159 | 0.246, 0.134, **0.077** | 0.242, 0.131, 0.073 | 462 / 253 | [227.36642, 227.37111] |
+
+    **Certified without sampling: `ln Z ∈ [227.329971, 227.407160]`, 0.077 nats** (triple shares,
+    band 8).  The sandwich holds at all 3 200 Gibbs states of the true ensemble and at
+    4 000 exact samples of the floor (3 989 distinct, 6.3 sites off the anchor on
+    average); an uncertified estimate by reweighting the floor's samples
+    (`227.36887 ± 0.00050`) and the sampler's point estimates lie inside every bracket; the
+    fraction of sites off the anchor re-estimated from the reweighted floor samples
+    is 0.523 (Gibbs: 0.527).  The bracket equals `β⟨m₊ − m₋⟩` over the Gibbs states
+    within 2.5 % in all nine cases.  What is left above the rule is the reduction of
+    the terms that do not fit a window.
+43. **Orders 4 and 6** [M].  At order 4 (38 256 evaluations, band 6) the brackets are
+    5.80, 3.41, 2.27 nats with exact window terms (rule: 5.80, 3.24, 2.01): useless,
+    as predicted; the theory division's sampler on that sandwich still gives
+    `[227.259, 227.497]` from 2 000 points.  At order 6
+    (4 329 006 evaluations, 0.088 % of the domain, 22 minutes on one core) the rule
+    says 0.014, 0.008, 0.006, and:
+
+    | band `w` | site, pair, triple form with P3's reductions | **with exact window terms** | terms of order ≥ 3: exact / reduced | sandwich sampler on the triple form (2 000 points; prob. ≥ 0.95) |
+    |---|---|---|---|---|
+    | 6 | 0.137, 0.132, 0.130 | 0.064, 0.058, 0.057 | 341 / 1 166 | [227.36699, 227.37043] |
+    | 7 | 0.109, 0.103, 0.102 | 0.030, 0.024, 0.022 | 546 / 961 | [227.36801, 227.36937] |
+    | 8 | 0.102, 0.095, 0.093 | 0.020, 0.013, **0.012** | 798 / 709 | [227.36836, 227.36907] |
+
+    **`ln Z ∈ [227.362266, 227.373868]`, 0.0116 nats without sampling** (triple shares,
+    band 8); the reweighting estimate is `227.368707 ± 0.000037`; no violation of the
+    sandwich at the 9 200 sampled states of any run.  At this order the penalties are
+    spent — the three share forms differ by a third — and what is left is the
+    evaluated terms that do not fit a window: with P3's reductions the bracket is
+    0.09–0.14 nats whatever the form and whatever the band.
+44. **Where the rules fail, and what survives: leucine at order 4** [M, exact
+    enumeration; P for the survival, by item 38].  Ace-Leu₁₂-NMe on the helix (4 096
+    assignments, exact `ln Z = 374.345343`; only the three N-terminal side chains
+    move): at order 4 (`Γ₄ = 316 k_BT`; 299 evaluations) the refined rule gives 18.7,
+    0.34, 0.0006 nats for sites, pairs, triples — and the certified brackets are
+    187 nats in all three forms.  The floor has *delocalised*: its 4 000 exact
+    samples are one state, all twelve side chains flipped, which costs `129 k_BT` in
+    truth and is charged the full `Γ₄` by every share form.  The lemma allows it
+    (`e^A` with `A = 316`).  (The uncertified reweighting estimate from those samples
+    is meaningless there — 244.9 — and the script's line says "inside the certified
+    bracket: False"; it is the estimate that fails, not the bracket.)  **So the rule is a lower estimate of the bracket; it is
+    accurate when the penalty is small at every state after reweighting (`βΓ_m ≲ 1`
+    suffices: serine at order 5), and it says nothing when `βΓ_m` exceeds the cost
+    of leaving the anchor.**  *What survives:* **the lower end of the bracket never
+    delocalises** — at order 4 it is `374.344556`, within 0.0008 nats of the exact
+    value, from 299 evaluations.  A certified *upper* bound on the free energy is
+    cheap; the price of the certificate is its other side.  (Why no cheap floor
+    exists far from the anchor: over all 4 096 states the true solvent term varies
+    by `[−2.7, +1.2]` kcal/mol while the known part rises by 3–78 kcal/mol with the
+    number of flips; the certified constants of orders 1 and 2 are 5 251 and 3 924
+    kcal/mol.  The ensemble is frozen by the known part; the bound does not know
+    that the unknown part is small.)
+    *The same peptide at orders 5 and 6* (794 and 1 586 evaluations; all pairs and
+    triples in band):
+
+    | order | form | with P3's reductions | with exact window terms | refined rule |
+    |---|---|---|---|---|
+    | 5 | site | 3.81 | 3.71 | 2.72 |
+    | 5 | pair | 0.0570 (workstream P6's number) | 0.0472 | 0.0474 |
+    | 5 | triple | 0.0071 | **0.00036** `[374.345178, 374.345533]` | 0.00009 |
+    | 6 | site | 0.3186 (workstream P5's certificate, every digit) | 0.3085 | 0.310 |
+    | 6 | pair | 0.0125 | 0.0049 | 0.0052 |
+    | 6 | triple | 0.0074 | **0.000046** `[374.345321, 374.345366]` | 0.000019 |
+
+    With triple shares the limit had been P3's reductions (factors 20 and 160); the
+    exact value lies in every bracket.  Not run: the leucine helix at twenty and
+    thirty residues with triple shares (part (14) used pairs; a narrow triple
+    window loses most of the gain — 0.021 nats with triples within four residues at
+    order 5 — so the triple sums of all in-band triples are needed: hours of closed
+    forms at thirty residues).
+
+**D. The reach of the certificate on the helix, predicted before paying for it**
+(`certificate_reach_table.py`: constants by closed form, the true ensemble by Gibbs
+sampling; twelve residues; nothing in this table is a certificate).
+
+45. | peptide | assignments | off the anchor | `Γ₄`, `Γ₅`, `Γ₆` (`k_BT`) | refined rule, triple form, orders 4, 5, 6 (nats) | ball at orders 4, 5, 6 | verdict |
+    |---|---|---|---|---|---|---|
+    | Ser₁₂ | `4.9·10⁹` | 6.3 of 12 | 5.4, 0.23, 0.0073 | 1.8, 0.080, 0.0064 | `3.8·10⁴`, `4.8·10⁵`, `4.3·10⁶` | **certified at order 5 (item 42)** |
+    | Leu₁₂ | 4 096 | 0.47 (three sites) | 316, 45, 5.0 | (delocalises), `9·10⁻⁵`, `2·10⁻⁵` | 299, 794, 1 586 | certified at order 5 (item 44) |
+    | Phe₁₂ | `7.7·10⁴` | 0.73 (two sites) | 8.2, 0.26, 0.0056 | `2·10⁻⁶`, `8·10⁻⁶`, `3·10⁻⁵` | 1 260, 4 910, 13 700 | in reach at order 4–5 (not run) |
+    | **Lys₁₂** | `9.5·10¹⁰` | 1.2 | 689, 145, 23 | 31, 7.3, 1.3 | `9.6·10⁴`, `1.6·10⁶`, `1.9·10⁷` | **out of reach** |
+    | **(LKSE)₃** | `7.1·10¹⁰` | 2.8 | 1 874, 568, 147 | 100, 34, 10 | `1.8·10⁵`, `3.5·10⁶`, `4.5·10⁷` | **out of reach** |
+
+    (Valine has no rotamer left on the ideal helix at the workstreams' threshold.)
+    *Serine at sixteen and twenty residues* (`6.4·10¹²` and `8.2·10¹⁵` assignments; half
+    of the side chains off the anchor): the refined rule for triples gives 0.14 and
+    0.21 nats at order 5 (balls `1.6·10⁶` and `4.0·10⁶`) and 0.026 and 0.080 at order 6
+    (balls `2.1·10⁷` and `6.8·10⁷`) — at order 6 the estimate is no longer the penalty but
+    the floating-point allowance, which grows with the number of evaluated terms.
+    Not run.
+46. **The frontier of the certificate is no longer "compact" but "charged"** [M for
+    the numbers; H for the reading].  Serine's and phenylalanine's constants fall
+    24–46-fold per order and order 5 is enough; leucine's fall only 7–9-fold from
+    `316 k_BT`, and it is certified because its ensemble is frozen (item 44).  Lysine
+    and the patterned sequence have both handicaps — constants of hundreds of `k_BT`
+    that fall 3–6-fold per order, and 1.2 and 2.8 of 12 side chains off the anchor —
+    and no affordable order brings even the first-order estimate below a nat.  On small enumerated
+    helices the ratio of the certified constant to the largest true remainder is of
+    the same size for all of them (Lys₄: 178, 290 at orders 3, 4; LKSE:5: 603, 578, 347
+    at orders 3–5; Ser₅: 183, 187, 80; Leu₆: 2 320, 428, 350) — what differs is the size:
+    per subset the true many-body term of lysine is about twenty times that of
+    serine (order 4: `2.9·10⁻³` against `1.3·10⁻⁴` kcal/mol for the one four-subset of
+    four residues; `reach_side_checks.log`).  A charged group has no dipolar cancellation to lose (workstream
+    P5's Theorem 9 is about neutral clusters).  Workstream P8 is on the question of
+    which lever moves this (the measurement of P5 for the charged side chains; the
+    decay of P3's cross bound for far pairs; what an ideal certificate would need).
+47. **What this part changes** [summary].  (i) Open problem D6, "a compact ensemble
+    that is not frozen": certified for serine at twelve residues (0.077 nats at order
+    5, 0.012 at order 6); open for charged side chains.  (ii) D9(b), exact in-window terms: done, a factor 2–3 on the
+    serine brackets and 20–160 on leucine with triple shares.  (iii) A certificate
+    can be costed before it is paid for (item 39), with the proviso of item 44.
+    (iv) The ceiling alone is a cheap one-sided certificate (items 38, 44).
+    *Limits:* model-relative throughout; the certified constants are workstream
+    P3's paper proofs; two floating-point allowances are allowances, computed by
+    P3/P6 for their models and taken over unchanged for the window models (whether
+    they still cover the larger number of exact terms has not been examined by
+    anyone but the author — a referee workstream, R14, was stopped at launch by a
+    platform safeguard and has not been replaced); at twelve residues nothing can be enumerated — the
+    support beyond the proof is the enumeration checks at up to six residues, the
+    sandwich at 9 200 sampled states per run (three kinds of samples), and two
+    estimates inside the brackets.
+
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every

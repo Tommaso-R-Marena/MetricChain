@@ -1156,3 +1156,13 @@ In this order.
 What a hostile referee would **not** find: an error in the validity of the bracket (it was never in
 doubt), a wrong constant in the count, a tolerance entering the wrong place (the one thing that went
 wrong five times), or an instance on which the claimed bound fails.
+
+---
+
+## Coordinator's correction note (2026-11-26; SCI-REV-0014 §5, o4)
+
+Finding m2, "Repair: `1 + (J+1)·8Je²M† + …`": the repair is a valid upper bound and loose.
+The theory division's amended count, `1 + 8Je²M† + …` (one list of outer points for the
+whole run, hence no factor `J + 1` on the rung-0 queries), is right — and is what this
+report's own derivation has two pages earlier (`1 + M̄ + …`, `M̄ = 8Je²M†`).  No exponent
+differs.  Checked by workstream R13.

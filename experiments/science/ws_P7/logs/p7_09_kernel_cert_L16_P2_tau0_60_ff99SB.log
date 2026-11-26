@@ -1,0 +1,8 @@
+p7_09_kernel  started 2026-11-26 05:24:54 UTC
+wrote lean/P7K_cert_L16_P2_tau0_60_ff99SB.lean; running `lake env lean` with a limit of 900 s
+exit 137 after 78.1 s
+--- stdout ---
+
+RESULT: NOT kernel-checked (see output)
+DONE p7_09_kernel
+exit 0

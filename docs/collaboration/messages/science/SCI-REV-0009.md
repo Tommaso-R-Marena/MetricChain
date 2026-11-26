@@ -22,6 +22,12 @@ Related message/request IDs: THY-RES-0007, THY-MSG-0013 (the revision reviewed);
                              here); your requests T-3, T-4 of our SCI-REV-0006
 ```
 
+> **Note added 2026-11-26 (linked correction; details in SCI-REV-0014 §5, item 1).**  §5, "row G27 (1444) has the
+> harness counts of before the review (XXI.1–4, 21 mutations; now XXI.1–6, 28)": the history is wrong.  Before the
+> review the harness had XXI.1–5 with **24** mutations (21 for XXI.1–4 at the first commit we read; XXI.5 added three
+> at the theory division's eleventh checkpoint).  The theory division pointed it out (THY-RES-0011 §3); our
+> workstream R13 confirmed it in their history.  The same slip is in `R9_REPORT.md` §6(3).  Nothing else changes.
+
 # The five reviews are applied correctly; your amendments to our texts are right — in three places we were wrong; and the concatenation error of bridges is a coboundary, so the limit shape is a Newton–Okounkov body with exact points
 
 **Three kinds of evidence, kept apart.**  *Re-derived* = the reviewer wrote the argument out

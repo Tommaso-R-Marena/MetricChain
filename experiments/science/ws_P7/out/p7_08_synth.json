@@ -1,0 +1,452 @@
+{
+ "theory_example": {
+  "t": -0.3333333333333333,
+  "relaxation": -0.5,
+  "depth": 1,
+  "leaves": 2
+ },
+ "ring": {
+  "rows": [
+   {
+    "n": 4,
+    "w": 0.75,
+    "t_root": 0.25,
+    "relaxation": -0.0,
+    "least_B": 0,
+    "n_good_B": 1,
+    "example_B": [],
+    "caterpillar_ok": true,
+    "caterpillar_leaves": 1,
+    "search_depth_leaves": [
+     0,
+     1
+    ],
+    "predicted": 0
+   },
+   {
+    "n": 4,
+    "w": 1.25,
+    "t_root": -0.25,
+    "relaxation": -0.5,
+    "least_B": 1,
+    "n_good_B": 4,
+    "example_B": [
+     0
+    ],
+    "caterpillar_ok": true,
+    "caterpillar_leaves": 2,
+    "search_depth_leaves": [
+     1,
+     2
+    ],
+    "predicted": 1
+   },
+   {
+    "n": 4,
+    "w": 1.75,
+    "t_root": -0.75,
+    "relaxation": -1.5,
+    "least_B": 2,
+    "n_good_B": 6,
+    "example_B": [
+     0,
+     1
+    ],
+    "caterpillar_ok": true,
+    "caterpillar_leaves": 3,
+    "search_depth_leaves": [
+     2,
+     3
+    ],
+    "predicted": 2
+   },
+   {
+    "n": 5,
+    "w": 1.75,
+    "t_root": -0.75,
+    "relaxation": -1.875,
+    "least_B": 2,
+    "n_good_B": 5,
+    "example_B": [
+     0,
+     2
+    ],
+    "caterpillar_ok": true,
+    "caterpillar_leaves": 3,
+    "search_depth_leaves": [
+     2,
+     3
+    ],
+    "predicted": 2
+   },
+   {
+    "n": 6,
+    "w": 1.75,
+    "t_root": -0.75,
+    "relaxation": -2.25,
+    "least_B": 2,
+    "n_good_B": 3,
+    "example_B": [
+     0,
+     3
+    ],
+    "caterpillar_ok": true,
+    "caterpillar_leaves": 3,
+    "search_depth_leaves": [
+     2,
+     3
+    ],
+    "predicted": 2
+   },
+   {
+    "n": 7,
+    "w": 1.75,
+    "t_root": -0.75,
+    "relaxation": -2.625,
+    "least_B": 3,
+    "n_good_B": 14,
+    "example_B": [
+     0,
+     1,
+     4
+    ],
+    "caterpillar_ok": true,
+    "caterpillar_leaves": 4,
+    "search_depth_leaves": null,
+    "predicted": 3
+   },
+   {
+    "n": 8,
+    "w": 1.75,
+    "t_root": -0.75,
+    "relaxation": -3.0,
+    "least_B": 3,
+    "n_good_B": 8,
+    "example_B": [
+     0,
+     2,
+     5
+    ],
+    "caterpillar_ok": true,
+    "caterpillar_leaves": 4,
+    "search_depth_leaves": null,
+    "predicted": 3
+   },
+   {
+    "n": 9,
+    "w": 1.75,
+    "t_root": -0.75,
+    "relaxation": -3.375,
+    "least_B": 3,
+    "n_good_B": 3,
+    "example_B": [
+     0,
+     3,
+     6
+    ],
+    "caterpillar_ok": true,
+    "caterpillar_leaves": 4,
+    "search_depth_leaves": null,
+    "predicted": 3
+   }
+  ],
+  "sweep": [
+   [
+    0.05,
+    0
+   ],
+   [
+    0.1,
+    0
+   ],
+   [
+    0.15,
+    0
+   ],
+   [
+    0.2,
+    0
+   ],
+   [
+    0.25,
+    0
+   ],
+   [
+    0.3,
+    0
+   ],
+   [
+    0.35,
+    0
+   ],
+   [
+    0.4,
+    0
+   ],
+   [
+    0.45,
+    0
+   ],
+   [
+    0.5,
+    0
+   ],
+   [
+    0.55,
+    0
+   ],
+   [
+    0.6,
+    0
+   ],
+   [
+    0.65,
+    0
+   ],
+   [
+    0.7,
+    0
+   ],
+   [
+    0.75,
+    0
+   ],
+   [
+    0.8,
+    0
+   ],
+   [
+    0.85,
+    0
+   ],
+   [
+    0.9,
+    0
+   ],
+   [
+    0.95,
+    0
+   ],
+   [
+    1.0,
+    0
+   ],
+   [
+    1.05,
+    1
+   ],
+   [
+    1.1,
+    1
+   ],
+   [
+    1.15,
+    1
+   ],
+   [
+    1.2,
+    1
+   ],
+   [
+    1.25,
+    1
+   ],
+   [
+    1.3,
+    1
+   ],
+   [
+    1.35,
+    1
+   ],
+   [
+    1.4,
+    1
+   ],
+   [
+    1.45,
+    1
+   ],
+   [
+    1.5,
+    1
+   ],
+   [
+    1.55,
+    2
+   ],
+   [
+    1.6,
+    2
+   ],
+   [
+    1.65,
+    2
+   ],
+   [
+    1.7,
+    2
+   ],
+   [
+    1.75,
+    2
+   ],
+   [
+    1.8,
+    2
+   ],
+   [
+    1.85,
+    2
+   ],
+   [
+    1.9,
+    2
+   ],
+   [
+    1.95,
+    2
+   ]
+  ],
+  "triplets_n4": {
+   "1": [
+    0,
+    4
+   ],
+   "2": [
+    0,
+    6
+   ],
+   "3": [
+    0,
+    4
+   ],
+   "4": [
+    1,
+    1
+   ]
+  }
+ },
+ "random": [
+  {
+   "n": 3,
+   "states": [
+    2
+   ],
+   "coupling": 2.0,
+   "models": 1500,
+   "shares": 1443,
+   "gap": 57,
+   "d1": 57,
+   "d2": 0,
+   "deeper": 0,
+   "every": 57,
+   "triple": 57,
+   "degenerate": 0
+  },
+  {
+   "n": 3,
+   "states": [
+    3
+   ],
+   "coupling": 2.0,
+   "models": 1500,
+   "shares": 1359,
+   "gap": 141,
+   "d1": 141,
+   "d2": 0,
+   "deeper": 0,
+   "every": 141,
+   "triple": 141,
+   "degenerate": 0
+  },
+  {
+   "n": 3,
+   "states": [
+    2,
+    3,
+    4
+   ],
+   "coupling": 2.0,
+   "models": 1500,
+   "shares": 1370,
+   "gap": 130,
+   "d1": 130,
+   "d2": 0,
+   "deeper": 0,
+   "every": 130,
+   "triple": 130,
+   "degenerate": 0
+  },
+  {
+   "n": 4,
+   "states": [
+    2
+   ],
+   "coupling": 2.0,
+   "models": 1500,
+   "shares": 1335,
+   "gap": 165,
+   "d1": 165,
+   "d2": 0,
+   "deeper": 0,
+   "every": 88,
+   "triple": 144,
+   "degenerate": 0
+  },
+  {
+   "n": 4,
+   "states": [
+    3
+   ],
+   "coupling": 2.0,
+   "models": 1000,
+   "shares": 723,
+   "gap": 277,
+   "d1": 277,
+   "d2": 0,
+   "deeper": 0,
+   "every": 174,
+   "triple": 216,
+   "degenerate": 0
+  },
+  {
+   "n": 4,
+   "states": [
+    2
+   ],
+   "coupling": 0.5,
+   "models": 1000,
+   "shares": 980,
+   "gap": 20,
+   "d1": 20,
+   "d2": 0,
+   "deeper": 0,
+   "every": 5,
+   "triple": 19,
+   "degenerate": 0
+  },
+  {
+   "n": 5,
+   "states": [
+    2
+   ],
+   "coupling": 2.0,
+   "models": 600,
+   "shares": 485,
+   "gap": 115,
+   "d1": 115,
+   "d2": 0,
+   "deeper": 0,
+   "every": 39,
+   "triple": 88,
+   "degenerate": 0
+  }
+ ],
+ "stat": {
+  "leaf_cert": 16573,
+  "leaf_viol": 0,
+  "leaf_truth": 0,
+  "leaves": 18183
+ }
+}

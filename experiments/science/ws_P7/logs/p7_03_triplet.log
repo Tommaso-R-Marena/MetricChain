@@ -1,0 +1,64 @@
+p7_03_triplet  started 2026-11-26 05:41:53 UTC
+
+=== S6/E tau 0.60 split ff03-ff14SB: X' = [9, 9, 9, 9, 9, 9]; gap 0.102553; sites that certify by one branching: [2, 3, 4, 5]
+  (a) 20 triples; single triples whose constraints close the gap (exact integer certificate): 2: [[2, 3, 4], [3, 4, 5]]
+      slack t of those certificates: [0.011052, 0.01188]
+      best triples by LP slack t: [([3, 4, 5], 0.01188), ([2, 3, 4], 0.011052), ([2, 3, 5], -0.014698), ([2, 4, 5], -0.014698), ([1, 2, 4], -0.017092)]
+      relaxation value with one triple (plain relaxation -0.102553): best [((3, 4, 5), 0.0), ((2, 3, 4), 0.0), ((2, 4, 5), -0.088191), ((2, 3, 5), -0.088191)]; triples that change the value at all: 4 of 20
+  (b) min over leaves of the leaf relaxation value  vs  relaxation with all triples through the site: largest difference over 6 sites 0.00e+00
+      site: value (certifies iff >= 0):  0: -0.102553  1: -0.102553  2: -0.000000  3: -0.000000  4: -0.000000  5: -0.000000
+  (3.2s)
+
+=== S6/E tau 0.70 split ff03-ff14SB: X' = [9, 9, 9, 9, 9, 9]; gap 0.102553; sites that certify by one branching: [2, 3, 4, 5]
+  (a) 20 triples; single triples whose constraints close the gap (exact integer certificate): 2: [[2, 3, 4], [3, 4, 5]]
+      slack t of those certificates: [0.011052, 0.01188]
+      best triples by LP slack t: [([3, 4, 5], 0.01188), ([2, 3, 4], 0.011052), ([2, 3, 5], -0.014698), ([2, 4, 5], -0.014698), ([1, 2, 4], -0.017092)]
+      relaxation value with one triple (plain relaxation -0.102553): best [((3, 4, 5), 0.0), ((2, 3, 4), 0.0), ((2, 4, 5), -0.088191), ((2, 3, 5), -0.088191)]; triples that change the value at all: 4 of 20
+  (b) min over leaves of the leaf relaxation value  vs  relaxation with all triples through the site: largest difference over 6 sites 0.00e+00
+      site: value (certifies iff >= 0):  0: -0.102553  1: -0.102553  2: -0.000000  3: -0.000000  4: -0.000000  5: -0.000000
+  (3.4s)
+
+=== K3/H tau 0.60 split ff99SB-ff14SB: X' = [30, 29, 21]; gap 0.000720; sites that certify by one branching: [0, 1, 2]
+  (a) 1 triples; single triples whose constraints close the gap (exact integer certificate): 1: [[0, 1, 2]]
+      slack t of those certificates: [0.282824]
+      best triples by LP slack t: [([0, 1, 2], 0.282824)]
+      relaxation value with one triple (plain relaxation -0.000720): best [((0, 1, 2), 0.0)]; triples that change the value at all: 1 of 1
+  (b) min over leaves of the leaf relaxation value  vs  relaxation with all triples through the site: largest difference over 3 sites 0.00e+00
+      site: value (certifies iff >= 0):  0: -0.000000  1: -0.000000  2: -0.000000
+  (2.0s)
+
+=== L16/P2 tau 0.60 split ff99SB-ff14SB: X' = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]; gap 0.001189; sites that certify by one branching: []
+  (a) 560 triples; single triples whose constraints close the gap (exact integer certificate): 0: []
+      best triples by LP slack t: [([4, 6, 7], -0.000112), ([1, 2, 4], -0.000112), ([6, 7, 9], -0.000118), ([6, 7, 8], -0.000137), ([6, 8, 9], -0.000137)]
+  (b) min over leaves of the leaf relaxation value  vs  relaxation with all triples through the site: largest difference over 16 sites 0.00e+00
+      site: value (certifies iff >= 0):  0: -0.001189  1: -0.000278  2: -0.000278  3: -0.001189  4: -0.000503  5: -0.000823  6: -0.000017  7: -0.000400  8: -0.000618  9: -0.000533  10: -0.000267  11: -0.000758  12: -0.001189  13: -0.001189  14: -0.001189  15: -0.001189
+      greedy: + triple (1, 2, 4) -> relaxation value -0.000503292
+      greedy: + triple (6, 7, 8) -> relaxation value 0.000000000
+  (c) greedy set of triples (floating point): 2 triples [(1, 2, 4), (6, 7, 8)], final value 0.00e+00
+  (8.1s)
+
+=== LKSE6/E tau 0.60 split ff99SB-ff14SB: X' = [2, 27, 9, 13, 2, 27]; gap 3.621790; sites that certify by one branching: [1, 3, 5]
+  (a) 20 triples; single triples whose constraints close the gap (exact integer certificate): 0: []
+      best triples by LP slack t: [([1, 3, 5], -0.162095), ([0, 1, 2], -1.898308), ([0, 1, 3], -1.898308), ([0, 1, 4], -1.898308), ([0, 1, 5], -1.898308)]
+      relaxation value with one triple (plain relaxation -3.621790): best [((1, 3, 5), -0.405237), ((1, 2, 3), -3.024393), ((2, 3, 5), -3.417167), ((1, 2, 5), -3.417167)]; triples that change the value at all: 4 of 20
+  (b) min over leaves of the leaf relaxation value  vs  relaxation with all triples through the site: largest difference over 6 sites 3.20e-14
+      site: value (certifies iff >= 0):  0: -3.621790  1: 0.000000  2: -2.912927  3: -0.000000  4: -3.621790  5: -0.000000
+  (c) pairs of triples (floating point, value > -1e-08): 1 of 190 close the gap: [([1, 2, 3], [1, 3, 5])]
+      greedy: + triple (1, 3, 5) -> relaxation value -0.405237492
+      greedy: + triple (1, 2, 3) -> relaxation value 0.000000000
+  (c) greedy set of triples (floating point): 2 triples [(1, 3, 5), (1, 2, 3)], final value 0.00e+00
+  (30.8s)
+
+SUMMARY
+instance   tau  split           triples | one triple closes the gap                | if not: triples needed (floating point) 
+S6/E       0.60 ff03-ff14SB          20 | [[2, 3, 4], [3, 4, 5]]                   |                                         
+S6/E       0.70 ff03-ff14SB          20 | [[2, 3, 4], [3, 4, 5]]                   |                                         
+K3/H       0.60 ff99SB-ff14SB         1 | [[0, 1, 2]]                              |                                         
+L16/P2     0.60 ff99SB-ff14SB       560 | NO                                       | greedy: 2 triples                       
+LKSE6/E    0.60 ff99SB-ff14SB        20 | NO                                       | pairs: 1 of 190; greedy: 2 triples      
+
+TOTAL: 621 single-triple programmes; 5 exact triplet certificates; 5 compared with the exact minimum of the published instance; violations 0
+[48s] wrote out/p7_03_triplet.json   finished 2026-11-26 05:42:41 UTC
+DONE p7_03_triplet
+[run_capped] peak anonymous resident memory 218 MB (cap 3500 MB); peak file-backed resident memory 47 MB; largest VmPeak 618 MB (ulimit -v not set); 48.2 s; exit 0
+exit 0

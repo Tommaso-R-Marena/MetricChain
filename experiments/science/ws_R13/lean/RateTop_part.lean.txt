@@ -1,0 +1,213 @@
+
+/-! ## The level recursion has the epoch property (Lemma 1, Lemma 2, "Epoch" of the proof), hence the rate (a) -/
+
+namespace ScienceR13
+
+open MetricChain.HintRecursion
+
+variable {θna θh : ℝ → ℝ} {a h E : ℝ}
+
+private theorem scale_aux' {p τ σ γ : ℝ} (hp : p ≠ 0) : p * (τ - σ * (γ / p)) = p * τ - σ * γ := by
+  field_simp
+
+/-- **Lemma 1 with `x₀ = ∞`** (`σ = 0`): a bound `T ≤ B` everywhere gives `T' g ≤ B − (B/h − 1) g` on `(0, h)`.
+This is `StepLE.of_limit` at the outer fraction `φ = g/h`. -/
+theorem lemma1_top (hp : HintPair θna θh a h E) {T T' : ℝ → ℝ} (hs : StepLE θna T T')
+    (hanti : ∀ x y, 0 < x → x ≤ y → T y ≤ T x) {B : ℝ} (hT : ∀ x, 0 < x → T x ≤ B) :
+    ∀ g, 0 < g → g < h → T' g ≤ B - (B / h - 1) * g := by
+  intro g hg hgh
+  have hh := hp.h_pos
+  have hφ0 : 0 < g / h := div_pos hg hh
+  have hφ1 : g / h < 1 := by rw [div_lt_one hh]; exact hgh
+  have h1 : 0 < 1 - g / h := by linarith
+  have hgφ : g / (g / h) = h := by field_simp
+  have hμ : g / h * θna (g / (g / h)) = g := by
+    rw [hgφ, hp.na_h]; exact div_mul_cancel₀ g hh.ne'
+  apply StepLE.of_limit hs hanti hg hφ0 hφ1 (by rw [hgφ]; exact hp.na_cont h hh) (by rw [hμ]; exact hg)
+  intro γ hγ0 hγ
+  rw [hμ] at hγ
+  have h2 := hT _ (div_pos hγ0 h1)
+  have h3 := mul_le_mul_of_nonneg_left h2 h1.le
+  have e : B - (B / h - 1) * g = g + (1 - g / h) * B := by field_simp; ring
+  rw [e]
+  linarith
+
+/-- **Lemma 1** (the slope grows, the range shrinks harmonically). -/
+theorem lemma1 (hp : HintPair θna θh a h E) {T T' : ℝ → ℝ} (hs : StepLE θna T T')
+    (hanti : ∀ x y, 0 < x → x ≤ y → T y ≤ T x) {B σ x0 : ℝ} (hσ : σ ≤ 1) (hx0 : 0 < x0)
+    (hT : ∀ x, 0 < x → x < x0 → T x ≤ B - σ * x) :
+    ∀ g, 0 < g → g < x0 * h / (h + x0) → T' g ≤ B - (σ + B / h - 1) * g := by
+  intro g hg hgx
+  have hh := hp.h_pos
+  have hsum : 0 < h + x0 := by linarith
+  have hgx' : g * (h + x0) < x0 * h := by rwa [lt_div_iff₀ hsum] at hgx
+  have hgh : g < h := by nlinarith
+  have hφ0 : 0 < g / h := div_pos hg hh
+  have hφ1 : g / h < 1 := by rw [div_lt_one hh]; exact hgh
+  have h1 : 0 < 1 - g / h := by linarith
+  have hgφ : g / (g / h) = h := by field_simp
+  have hμ : g / h * θna (g / (g / h)) = g := by
+    rw [hgφ, hp.na_h]; exact div_mul_cancel₀ g hh.ne'
+  apply StepLE.of_limit hs hanti hg hφ0 hφ1 (by rw [hgφ]; exact hp.na_cont h hh) (by rw [hμ]; exact hg)
+  intro γ hγ0 hγ
+  rw [hμ] at hγ
+  have hlt : γ / (1 - g / h) < x0 := by
+    rw [div_lt_iff₀ h1]
+    have e : x0 * (1 - g / h) = (x0 * h - x0 * g) / h := by field_simp
+    have : g < x0 * (1 - g / h) := by
+      rw [e, lt_div_iff₀ hh]
+      nlinarith
+    linarith
+  have h2 := hT _ (div_pos hγ0 h1) hlt
+  have h3 := mul_le_mul_of_nonneg_left h2 h1.le
+  have h4 : (1 - g / h) * (B - σ * (γ / (1 - g / h))) = (1 - g / h) * B - σ * γ := scale_aux' h1.ne'
+  rw [h4] at h3
+  have e : B - (σ + B / h - 1) * g = (1 - σ) * g + (1 - g / h) * B := by field_simp; ring
+  rw [e]
+  have h5 : (1 - σ) * γ ≤ (1 - σ) * g := mul_le_mul_of_nonneg_left hγ (by linarith)
+  linarith
+
+/-- **Lemma 2** (the drop): slope one on `(0, x₀)` gives the factor `a/(a + x₀)` everywhere at the next level.
+This is `StepLE.of_macro` with the outer fraction increasing to `x₀/(a + x₀)`. -/
+theorem lemma2 (hp : HintPair θna θh a h E) {T T' : ℝ → ℝ} (hs : StepLE θna T T')
+    (hanti : ∀ x y, 0 < x → x ≤ y → T y ≤ T x) {B x0 : ℝ} (hx0 : 0 < x0)
+    (hT : ∀ x, 0 < x → x < x0 → T x ≤ B - x) :
+    ∀ g, 0 < g → T' g ≤ B * a / (a + x0) := by
+  intro g hg
+  have ha := hp.a_pos
+  have hax : 0 < a + x0 := by linarith
+  have hφ : ∀ φ, 0 < φ → φ < x0 / (a + x0) → T' g ≤ (1 - φ) * B := by
+    intro φ hφ0 hφlt
+    have hφ1 : φ < 1 := lt_trans hφlt (by rw [div_lt_one hax]; linarith)
+    have h1 : 0 < 1 - φ := by linarith
+    apply StepLE.of_macro hp hs hanti hg hφ0 hφ1
+    intro γ hγ0 hγ
+    have hlt : γ / (1 - φ) < x0 := by
+      rw [div_lt_iff₀ h1]
+      have : φ * (a + x0) < x0 := by rwa [lt_div_iff₀ hax] at hφlt
+      nlinarith
+    have h2 := hT _ (div_pos hγ0 h1) hlt
+    have h3 := mul_le_mul_of_nonneg_left h2 h1.le
+    have h4 : (1 - φ) * (B - γ / (1 - φ)) = (1 - φ) * B - γ := by
+      have hne : (1 - φ) ≠ 0 := h1.ne'
+      field_simp
+    rw [h4] at h3
+    linarith
+  have hφs0 : 0 < x0 / (a + x0) := div_pos hx0 hax
+  have hlim : T' g ≤ (1 - x0 / (a + x0)) * B := by
+    refine le_of_forall_pos_le_add fun ε hε => ?_
+    obtain ⟨δ, hδ0, hδφ, hδB⟩ : ∃ δ : ℝ, 0 < δ ∧ δ < x0 / (a + x0) ∧ δ * |B| ≤ ε := by
+      refine ⟨min (x0 / (a + x0) / 2) (ε / (|B| + 1)), lt_min (by linarith) (by positivity),
+        lt_of_le_of_lt (min_le_left _ _) (by linarith), ?_⟩
+      have h1 : min (x0 / (a + x0) / 2) (ε / (|B| + 1)) ≤ ε / (|B| + 1) := min_le_right _ _
+      have h2 : ε / (|B| + 1) * |B| ≤ ε := by
+        rw [div_mul_eq_mul_div, div_le_iff₀ (by positivity)]
+        nlinarith [abs_nonneg B]
+      calc min (x0 / (a + x0) / 2) (ε / (|B| + 1)) * |B| ≤ ε / (|B| + 1) * |B| :=
+            mul_le_mul_of_nonneg_right h1 (abs_nonneg B)
+        _ ≤ ε := h2
+    have key := hφ (x0 / (a + x0) - δ) (by linarith) (by linarith)
+    have e : (1 - (x0 / (a + x0) - δ)) * B = (1 - x0 / (a + x0)) * B + δ * B := by ring
+    have hB : δ * B ≤ δ * |B| := mul_le_mul_of_nonneg_left (le_abs_self B) hδ0.le
+    linarith
+  have e : (1 - x0 / (a + x0)) * B = B * a / (a + x0) := by field_simp; ring
+  rw [← e]
+  exact hlim
+
+/-- **Epoch.**  If `T n ≤ b` everywhere and `b > h`, then with `J = ⌈h/(b − h)⌉` the level `n + J + 1` is bounded by
+`b J a/(J a + h)` everywhere: Lemma 1 `J` times, then Lemma 2. -/
+theorem epoch_of_stepLE (hp : HintPair θna θh a h E) (T : ℕ → ℝ → ℝ)
+    (hstep : ∀ k, StepLE θna (T k) (T (k + 1)))
+    (hanti : ∀ k x y, 0 < x → x ≤ y → T k y ≤ T k x)
+    {n : ℕ} {b : ℝ} (hb : h < b) (hTb : ∀ x, 0 < x → T n x ≤ b) :
+    ∀ x, 0 < x → T (n + ⌈h / (b - h)⌉₊ + 1) x ≤
+      b * ((⌈h / (b - h)⌉₊ : ℝ) * a) / ((⌈h / (b - h)⌉₊ : ℝ) * a + h) := by
+  have hh := hp.h_pos
+  have ha := hp.a_pos
+  have hbh : 0 < b - h := by linarith
+  have hdpos : 0 < h / (b - h) := div_pos hh hbh
+  obtain ⟨c, hc⟩ : ∃ c : ℝ, c = b / h - 1 := ⟨_, rfl⟩
+  have hc0 : 0 < c := by
+    rw [hc]
+    have : 1 < b / h := by rw [lt_div_iff₀ hh]; linarith
+    linarith
+  have hdc : h / (b - h) * c = 1 := by
+    rw [hc]
+    field_simp
+  obtain ⟨J, hJ⟩ : ∃ J : ℕ, J = ⌈h / (b - h)⌉₊ := ⟨_, rfl⟩
+  rw [← hJ]
+  have hJ1 : h / (b - h) ≤ J := by rw [hJ]; exact Nat.le_ceil _
+  have hJ2 : (J : ℝ) < h / (b - h) + 1 := by rw [hJ]; exact Nat.ceil_lt_add_one hdpos.le
+  have hJr : (0 : ℝ) < J := lt_of_lt_of_le hdpos hJ1
+  have hJpos : 1 ≤ J := by
+    have : (0 : ℝ) < (J : ℝ) := hJr
+    have : 0 < J := by exact_mod_cast this
+    omega
+  -- after j levels: slope j c on (0, h/j), for 1 ≤ j ≤ J
+  have ind : ∀ j : ℕ, 1 ≤ j → j ≤ J → ∀ x, 0 < x → x < h / (j : ℝ) → T (n + j) x ≤ b - ((j : ℝ) * c) * x := by
+    intro j hj1
+    induction j, hj1 using Nat.le_induction with
+    | base =>
+      intro _ x hx hxh
+      have hxh' : x < h := by simpa using hxh
+      have key := lemma1_top hp (hstep n) (hanti n) hTb x hx hxh'
+      rw [← hc] at key
+      simpa using key
+    | succ j hj ih =>
+      intro hjJ x hx hxh
+      have ihj := ih (by omega)
+      have hjr : (0 : ℝ) < j := by exact_mod_cast hj
+      have hσ : (j : ℝ) * c ≤ 1 := by
+        have h1 : (j : ℝ) + 1 ≤ J := by exact_mod_cast hjJ
+        have h2 : (j : ℝ) < h / (b - h) := by linarith
+        nlinarith
+      have hx0 : 0 < h / (j : ℝ) := div_pos hh hjr
+      have e : h / (j : ℝ) * h / (h + h / (j : ℝ)) = h / ((j : ℝ) + 1) := by
+        field_simp
+      have hxh' : x < h / (j : ℝ) * h / (h + h / (j : ℝ)) := by
+        rw [e]
+        push_cast at hxh
+        exact hxh
+      have key := lemma1 hp (hstep (n + j)) (hanti (n + j)) hσ hx0 ihj x hx hxh'
+      have e2 : b - ((j : ℝ) * c + b / h - 1) * x = b - (((j + 1 : ℕ) : ℝ) * c) * x := by
+        push_cast
+        rw [hc]
+        ring
+      rw [e2] at key
+      exact key
+  have hJc : 1 ≤ (J : ℝ) * c := by nlinarith
+  have hslope : ∀ x, 0 < x → x < h / (J : ℝ) → T (n + J) x ≤ b - x := by
+    intro x hx hxJ
+    have h1 := ind J hJpos le_rfl x hx hxJ
+    nlinarith
+  have key := lemma2 hp (hstep (n + J)) (hanti (n + J)) (x0 := h / (J : ℝ)) (div_pos hh hJr) hslope
+  intro x hx
+  have h1 := key x hx
+  have e : b * a / (a + h / (J : ℝ)) = b * ((J : ℝ) * a) / ((J : ℝ) * a + h) := by
+    field_simp
+  rw [← e]
+  exact h1
+
+/-- **Statement (a) of the rate, machine-checked.**  Let `(θna, θh, a, h, E)` be a `HintPair` with `h < a`, and let the
+levels `T 1, T 2, …` be nonincreasing in the accuracy, nonincreasing in the level, with `T 1 ≤ a` and
+`StepLE θna (T k) (T (k+1))`.  Then for every level `n ≥ 1` and every accuracy `x > 0`
+
+  `T n x ≤ h + c₁/(n + c₂)`,   `c₁ = h (1 + κ)/κ`, `c₂ = (a + h)(2a − h)/(h a) − 2`, `κ = h² a/((a − h)(a + h)(2a − h))`. -/
+theorem rate_top (hp : HintPair θna θh a h E) (hah : h < a) (T : ℕ → ℝ → ℝ)
+    (hstep : ∀ k, StepLE θna (T k) (T (k + 1)))
+    (hmono : ∀ k x, 0 < x → T (k + 1) x ≤ T k x)
+    (hanti : ∀ k x y, 0 < x → x ≤ y → T k y ≤ T k x)
+    (hbdd : ∀ x, 0 < x → T 1 x ≤ a) :
+    ∀ n : ℕ, 1 ≤ n → ∀ x, 0 < x → T n x ≤ h + c1 a h / (n + c2 a h) :=
+  rate_of_epochs hp.h_pos hah (fun n b => ∀ x, 0 < x → T n x ≤ b)
+    (fun n _ _ hP x hx => (hmono n x hx).trans (hP x hx))
+    (fun _ _ _ hP hbb' x hx => (hP x hx).trans hbb')
+    hbdd
+    (fun _ _ _ hP hb => epoch_of_stepLE hp T hstep hanti hb hP)
+
+end ScienceR13
+
+#print axioms ScienceR13.lemma1
+#print axioms ScienceR13.lemma2
+#print axioms ScienceR13.epoch_of_stepLE
+#print axioms ScienceR13.rate_top

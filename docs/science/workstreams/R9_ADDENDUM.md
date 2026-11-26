@@ -327,3 +327,10 @@ shows them as deleted — they are superseded.
    equivalence of the two definitions of clean, the minimality of head 2 + tail 3, or the bound `m(p) ≥ 13`;
    reading the harness test.
 
+---
+
+## Coordinator's correction note (2026-11-26; SCI-REV-0014 §5)
+
+"The first round gives five bridges with coordinates (4, 5, 9, 9, 11 beads)": the output
+file `ws_R9/out/certificate.txt` names those five and prints coordinates of four others;
+the coordinates of the five are in the script `ws_R9/r9_certificate.py`.

@@ -1,0 +1,257 @@
+p7_04_survey  started 2026-11-26 05:12:33 UTC
+[     1s] F10/H tau 0.60 X' 10 sites: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.9s)
+[     1s] F10/H tau 0.70 X' 10 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[     1s] F2/E tau 0.60 X' [5, 5]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[     1s] F2/E tau 0.70 X' [2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[     1s] F2/H tau 0.60 X' [5, 6]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     1s] F2/H tau 0.70 X' [2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[     1s] F2/P2 tau 0.60 X' [6, 6]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     1s] F2/P2 tau 0.70 X' [2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[     2s] F3/E tau 0.60 X' [4, 5, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     2s] F3/E tau 0.70 X' [2, 2, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     2s] F3/H tau 0.60 X' [5, 5, 4]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     2s] F3/H tau 0.70 X' [2, 2, 1]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[     2s] F3/P2 tau 0.60 X' [6, 5, 6]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     2s] F3/P2 tau 0.70 X' [2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[     2s] F4/E tau 0.60 X' [4, 3, 3, 4]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     3s] F4/E tau 0.70 X' [2, 1, 1, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     3s] F4/H tau 0.60 X' [5, 5, 4, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     3s] F4/H tau 0.70 X' [2, 2, 1, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[     3s] F4/P2 tau 0.60 X' [5, 6, 5, 6]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     3s] F4/P2 tau 0.70 X' [1, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.4s)
+[     4s] F5/E tau 0.60 X' [4, 3, 1, 4, 4]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     4s] F5/H tau 0.60 X' [5, 5, 4, 3, 2]: GB:S ff03-f:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     4s] F5/H tau 0.70 X' [2, 2, 1, 1, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[     4s] F5/P2 tau 0.60 X' [5, 5, 6, 5, 6]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     4s] F5/P2 tau 0.70 X' [1, 2, 2, 2, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     5s] F6/E tau 0.60 X' [4, 3, 1, 2, 4, 4]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[     5s] F6/H tau 0.60 X' [5, 5, 4, 3, 2, 2]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.3s)
+[     5s] F6/H tau 0.70 X' [2, 2, 1, 1, 1, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[     6s] F6/P2 tau 0.60 X' [5, 5, 5, 6, 5, 6]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.5s)
+[     6s] F6/P2 tau 0.70 X' [1, 2, 2, 2, 1, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.3s)
+[     6s] F7/E tau 0.60 X' [4, 3, 1, 2, 2, 4, 4]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.3s)
+[     7s] F7/H tau 0.60 X' [5, 5, 4, 3, 2, 2, 2]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.3s)
+[     7s] F7/H tau 0.70 X' [2, 2, 1, 1, 1, 1, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[     8s] F7/P2 tau 0.60 X' [5, 5, 5, 5, 6, 5, 6]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (1.0s)
+[     8s] F7/P2 tau 0.70 X' [1, 2, 2, 1, 1, 1, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.3s)
+[     8s] F8/E tau 0.60 X' [4, 3, 1, 2, 2, 3, 4, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.4s)
+[     9s] F8/H tau 0.60 X' [5, 5, 4, 3, 2, 2, 2, 2]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.6s)
+[     9s] F8/H tau 0.70 X' [2, 2, 1, 1, 1, 1, 1, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[     9s] K2/E tau 0.60 X' [31, 31]: GB:S* coul+G:S ff03-f:S ff15ip:S* ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[     9s] K2/E tau 0.70 X' [21, 21]: GB:S* coul+G:S ff03-f:S ff15ip:S* ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[     9s] K2/H tau 0.60 X' [30, 30]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.3s)
+[     9s] K2/H tau 0.70 X' [14, 14]: GB:S* coul+G:S* ff03-f:S* ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    10s] K2/P2 tau 0.60 X' [30, 31]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.3s)
+[    10s] K2/P2 tau 0.70 X' [21, 21]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    10s] K3/E tau 0.60 X' [27, 31, 25]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.5s)
+[    11s] K3/E tau 0.70 X' [13, 21, 21]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.5s)
+[    14s] K3/H tau 0.60 X' [30, 29, 21]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:G1 pair:S* site:S* ff14SB:G1 ff03:S ff15ip:S  (3.4s)
+[    14s] K3/H tau 0.70 X' [14, 14, 12]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    15s] K3/P2 tau 0.60 X' [30, 30, 31]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.7s)
+[    15s] K3/P2 tau 0.70 X' [21, 21, 21]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    24s] K4/E tau 0.60 X' [27, 29, 25, 23]: GB:S* coul+G:G1* ff03-f:S* ff15ip:S* ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (8.5s)
+[    26s] K4/E tau 0.70 X' [13, 13, 21, 21]: GB:S* coul+G:G1* ff03-f:S ff15ip:S* ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (2.4s)
+[    29s] K4/H tau 0.60 X' [29, 29, 21, 20]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S* site:S* ff14SB:S ff03:S ff15ip:S  (3.5s)
+[    30s] K4/H tau 0.70 X' [14, 14, 12, 7]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[    36s] K4/P2 tau 0.60 X' [29, 30, 30, 30]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S* site:S* ff14SB:S ff03:S ff15ip:S  (6.4s)
+[    37s] K4/P2 tau 0.70 X' [21, 21, 21, 21]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (1.2s)
+[    37s] L10/E tau 0.60 X' 10 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    38s] L10/H tau 0.60 X' 10 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    38s] L10/P2 tau 0.60 X' 10 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    38s] L12/E tau 0.60 X' 12 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    38s] L12/H tau 0.60 X' 12 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    38s] L12/P2 tau 0.60 X' 12 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    38s] L14/E tau 0.60 X' 14 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.3s)
+[    39s] L14/H tau 0.60 X' 14 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.3s)
+[    39s] L14/P2 tau 0.60 X' 14 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.3s)
+[    40s] L16/E tau 0.60 X' 16 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (1.0s)
+[    41s] L16/H tau 0.60 X' 16 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (1.0s)
+[    49s] L16/P2 tau 0.60 X' 16 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:G2 pair:S site:S ff14SB:S ff03:S ff15ip:S  (8.0s)
+[    49s] L2/E tau 0.60 X' [2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    49s] L2/H tau 0.60 X' [2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    49s] L2/P2 tau 0.60 X' [2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    49s] L3/E tau 0.60 X' [2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    49s] L3/H tau 0.60 X' [2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    49s] L3/P2 tau 0.60 X' [2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    49s] L4/E tau 0.60 X' [2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    49s] L4/H tau 0.60 X' [2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    50s] L4/P2 tau 0.60 X' [2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    50s] L5/E tau 0.60 X' [2, 2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    50s] L5/H tau 0.60 X' [2, 2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    50s] L5/P2 tau 0.60 X' [2, 2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    50s] L6/E tau 0.60 X' [2, 2, 2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    50s] L6/H tau 0.60 X' [2, 2, 2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    50s] L6/P2 tau 0.60 X' [2, 2, 2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    50s] L7/E tau 0.60 X' [2, 2, 2, 2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    50s] L7/H tau 0.60 X' [2, 2, 2, 2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    50s] L7/P2 tau 0.60 X' [2, 2, 2, 2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    50s] L8/E tau 0.60 X' [2, 2, 2, 2, 2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    50s] L8/H tau 0.60 X' [2, 2, 2, 2, 2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    50s] L8/P2 tau 0.60 X' [2, 2, 2, 2, 2, 2, 2, 2]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    50s] LKSE2/E tau 0.60 X' [2, 31]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    50s] LKSE2/H tau 0.60 X' [2, 31]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    51s] LKSE2/P2 tau 0.60 X' [2, 31]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    51s] LKSE3/E tau 0.60 X' [2, 31, 9]: GB:S* coul+G:S* ff03-f:S* ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    51s] LKSE3/H tau 0.60 X' [2, 31, 9]: GB:S* coul+G:S* ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    51s] LKSE3/P2 tau 0.60 X' [2, 31, 9]: GB:S* coul+G:S* ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    51s] LKSE4/E tau 0.60 X' [2, 27, 9, 15]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.3s)
+[    51s] LKSE4/H tau 0.60 X' [2, 31, 9, 13]: GB:S* coul+G:S* ff03-f:S ff15ip:S ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    51s] LKSE4/P2 tau 0.60 X' [2, 31, 9, 18]: GB:S* coul+G:S* ff03-f:S ff15ip:S ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    52s] LKSE5/E tau 0.60 X' [2, 27, 9, 15, 2]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.7s)
+[    52s] LKSE5/H tau 0.60 X' [2, 31, 9, 13, 2]: GB:S* coul+G:S* ff03-f:S ff15ip:S ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.5s)
+[    53s] LKSE5/P2 tau 0.60 X' [2, 31, 9, 18, 2]: GB:S* coul+G:S* ff03-f:S ff15ip:S ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.8s)
+[    68s] LKSE6/E tau 0.60 X' [2, 27, 9, 13, 2, 27]: GB:S* coul+G:S* ff03-f:G1* ff15ip:G1* ff99SB:G1 pair:S site:S* ff14SB:G1 ff03:G1 ff15ip:G1  (15.1s)
+[    71s] LKSE6/H tau 0.60 X' [2, 29, 9, 13, 2, 16]: GB:S* coul+G:S* ff03-f:S ff15ip:S* ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (2.2s)
+[    75s] LKSE6/P2 tau 0.60 X' [2, 31, 9, 18, 2, 31]: GB:S* coul+G:S* ff03-f:S ff15ip:S ff99SB:S pair:S* site:S* ff14SB:S ff03:S ff15ip:S  (4.1s)
+[    75s] S2/E tau 0.60 X' [9, 9]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    75s] S2/E tau 0.70 X' [9, 9]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    75s] S2/H tau 0.60 X' [9, 9]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    75s] S2/H tau 0.70 X' [9, 9]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    75s] S2/P2 tau 0.60 X' [9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    75s] S2/P2 tau 0.70 X' [9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    75s] S3/E tau 0.60 X' [9, 9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    75s] S3/E tau 0.70 X' [9, 9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    75s] S3/H tau 0.60 X' [9, 9, 9]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    75s] S3/H tau 0.70 X' [9, 9, 6]: GB:S* coul+G:S* ff03-f:S* ff15ip:S* ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    75s] S3/P2 tau 0.60 X' [9, 9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    76s] S3/P2 tau 0.70 X' [9, 9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[    76s] S4/E tau 0.60 X' [9, 9, 9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    76s] S4/E tau 0.70 X' [9, 9, 9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    76s] S4/H tau 0.60 X' [9, 9, 9, 9]: GB:S* coul+G:S* ff03-f:S* ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    76s] S4/H tau 0.70 X' [9, 9, 6, 6]: GB:S* coul+G:S ff03-f:S* ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    76s] S4/P2 tau 0.60 X' [9, 9, 9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    76s] S4/P2 tau 0.70 X' [9, 9, 9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    77s] S5/E tau 0.60 X' [9, 9, 9, 9, 9]: GB:G1* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.9s)
+[    78s] S5/E tau 0.70 X' [9, 9, 9, 9, 9]: GB:G1* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.9s)
+[    79s] S5/E tau 0.80 X' [9, 9, 9, 9, 9]: GB:G1* ff03-f:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.8s)
+[    79s] S5/H tau 0.60 X' [9, 9, 9, 9, 9]: GB:S* coul+G:S* ff03-f:S* ff15ip:S ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (0.3s)
+[    80s] S5/H tau 0.70 X' [9, 9, 6, 6, 6]: GB:S* coul+G:S ff03-f:S* ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[    80s] S5/H tau 0.80 X' [9, 9, 6, 6, 6]: GB:S* ff03-f:S* pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[    80s] S5/P2 tau 0.60 X' [9, 9, 9, 9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.3s)
+[    80s] S5/P2 tau 0.70 X' [9, 9, 9, 9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.3s)
+[    81s] S5/P2 tau 0.80 X' [9, 9, 9, 9, 9]: GB:S* ff03-f:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[    88s] S6/E tau 0.60 X' [9, 9, 9, 9, 9, 9]: GB:G1* coul+G:S ff03-f:G1 ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (7.0s)
+[    94s] S6/E tau 0.70 X' [9, 9, 9, 9, 9, 9]: GB:G1* coul+G:S ff03-f:G1 ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (6.4s)
+[    97s] S6/H tau 0.60 X' [9, 9, 9, 9, 9, 9]: GB:S* coul+G:S* ff03-f:S ff15ip:S ff99SB:S pair:S site:S* ff14SB:S ff03:S ff15ip:S  (3.3s)
+[    98s] S6/H tau 0.70 X' [9, 9, 6, 6, 6, 6]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.9s)
+[   102s] S6/P2 tau 0.60 X' [9, 9, 9, 9, 9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (3.9s)
+[   107s] S6/P2 tau 0.70 X' [9, 9, 9, 9, 9, 9]: GB:S* coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (4.2s)
+[   107s] V10/E tau 0.60 X' 10 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.7s)
+[   108s] V10/E tau 0.70 X' 10 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.6s)
+[   108s] V10/H tau 0.60 X' 10 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   109s] V10/P2 tau 0.60 X' 10 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.6s)
+[   109s] V10/P2 tau 0.70 X' 10 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.5s)
+[   116s] V12/E tau 0.60 X' 12 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (6.7s)
+[   123s] V12/E tau 0.70 X' 12 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (7.5s)
+[   124s] V12/H tau 0.60 X' 12 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   131s] V12/P2 tau 0.60 X' 12 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (7.5s)
+[   139s] V12/P2 tau 0.70 X' 12 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (7.9s)
+[   139s] V14/H tau 0.60 X' 14 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   139s] V16/H tau 0.60 X' 16 sites: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   139s] V2/E tau 0.60 X' [3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   139s] V2/E tau 0.70 X' [3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   139s] V2/H tau 0.60 X' [3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   140s] V2/P2 tau 0.60 X' [3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   140s] V2/P2 tau 0.70 X' [3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   140s] V3/E tau 0.60 X' [3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   140s] V3/E tau 0.70 X' [3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   140s] V3/H tau 0.60 X' [3, 3, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   140s] V3/P2 tau 0.60 X' [3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   140s] V3/P2 tau 0.70 X' [3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   140s] V4/E tau 0.60 X' [3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   140s] V4/E tau 0.70 X' [3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   140s] V4/H tau 0.60 X' [3, 3, 1, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   140s] V4/P2 tau 0.60 X' [3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   140s] V4/P2 tau 0.70 X' [3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   140s] V5/E tau 0.60 X' [3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   141s] V5/E tau 0.70 X' [3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   141s] V5/H tau 0.60 X' [3, 3, 1, 1, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   141s] V5/P2 tau 0.60 X' [3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   141s] V5/P2 tau 0.70 X' [3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   141s] V6/E tau 0.60 X' [3, 3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   141s] V6/E tau 0.70 X' [3, 3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   141s] V6/H tau 0.60 X' [3, 3, 1, 1, 1, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   141s] V6/P2 tau 0.60 X' [3, 3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   141s] V6/P2 tau 0.70 X' [3, 3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   141s] V7/E tau 0.60 X' [3, 3, 3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   141s] V7/E tau 0.70 X' [3, 3, 3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   142s] V7/H tau 0.60 X' [3, 3, 1, 1, 1, 1, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   142s] V7/P2 tau 0.60 X' [3, 3, 3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   142s] V7/P2 tau 0.70 X' [3, 3, 3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   142s] V8/E tau 0.60 X' [3, 3, 3, 3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   142s] V8/E tau 0.70 X' [3, 3, 3, 3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+[   142s] V8/H tau 0.60 X' [3, 3, 1, 1, 1, 1, 1, 1]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S ff14SB:S ff03:S ff15ip:S  (0.0s)
+[   142s] V8/P2 tau 0.60 X' [3, 3, 3, 3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.1s)
+[   143s] V8/P2 tau 0.70 X' [3, 3, 3, 3, 3, 3, 3, 3]: GB:S coul+G:S ff03-f:S ff15ip:S ff99SB:S pair:S site:S ff14SB:S ff03:S ff15ip:S  (0.2s)
+
+184 instance files; 1732 models; not pairwise (skipped): 0: []; largest pairwise error among the others 5.3e-11
+
+(A) P4's population: lower models whose minimiser is the reference x0 = argmin E  (certificate of x0 for the class)
+model              models | shares (depth 0)  GAP degenerate | gap: depth 1 depth 2 deeper/unknown | two leaves suffice one triple closes
+so|GB                 110 |              110    0          0 |            0       0              0 |                  0                 0
+so|coul+GB            145 |              145    0          0 |            0       0              0 |                  0                 0
+so|ff03-ff14SB        156 |              154    2          0 |            2       0              0 |                  2                 2
+so|ff15ipq-ff14SB     155 |              155    0          0 |            0       0              0 |                  0                 0
+so|ff99SB-ff14SB      180 |              177    3          0 |            2       1              0 |                  1                 1
+to|pair               132 |              132    0          0 |            0       0              0 |                  0                 0
+to|site               113 |              113    0          0 |            0       0              0 |                  0                 0
+ALL                   991 |              986    5          0 |            4       1              0 |                  3                 3
+
+(B) lower models NOT minimised at x0: certificate of the model's own minimum (a lower bound for min E)
+model              models | shares (depth 0)  GAP degenerate | gap: depth 1 depth 2 deeper/unknown | two leaves suffice one triple closes
+so|GB                  74 |               69    5          0 |            5       0              0 |                  3                 3
+so|coul+GB             35 |               33    2          0 |            2       0              0 |                  2                 2
+so|ff03-ff14SB         28 |               27    1          0 |            1       0              0 |                  1                 1
+so|ff15ipq-ff14SB      25 |               24    1          0 |            1       0              0 |                  0                 1
+to|pair                 4 |                4    0          0 |            0       0              0 |                  0                 0
+to|site                23 |               23    0          0 |            0       0              0 |                  0                 0
+ALL                   189 |              180    9          0 |            9       0              0 |                  6                 7
+
+(C) the vacuum energy of a force field as its own (pairwise) model: certificate of its minimiser
+model              models | shares (depth 0)  GAP degenerate | gap: depth 1 depth 2 deeper/unknown | two leaves suffice one triple closes
+en|ff03               184 |              183    1          0 |            1       0              0 |                  1                 1
+en|ff14SB             184 |              182    2          0 |            2       0              0 |                  1                 2
+en|ff15ipq            184 |              183    1          0 |            1       0              0 |                  1                 1
+ALL                   552 |              548    4          0 |            4       0              0 |                  3                 4
+
+(A)+(B)+(C)
+model              models | shares (depth 0)  GAP degenerate | gap: depth 1 depth 2 deeper/unknown | two leaves suffice one triple closes
+en|ff03               184 |              183    1          0 |            1       0              0 |                  1                 1
+en|ff14SB             184 |              182    2          0 |            2       0              0 |                  1                 2
+en|ff15ipq            184 |              183    1          0 |            1       0              0 |                  1                 1
+so|GB                 184 |              179    5          0 |            5       0              0 |                  3                 3
+so|coul+GB            180 |              178    2          0 |            2       0              0 |                  2                 2
+so|ff03-ff14SB        184 |              181    3          0 |            3       0              0 |                  3                 3
+so|ff15ipq-ff14SB     180 |              179    1          0 |            1       0              0 |                  0                 1
+so|ff99SB-ff14SB      180 |              177    3          0 |            2       1              0 |                  1                 1
+to|pair               136 |              136    0          0 |            0       0              0 |                  0                 0
+to|site               136 |              136    0          0 |            0       0              0 |                  0                 0
+ALL                  1732 |             1714   18          0 |           17       1              0 |                 12                14
+
+Every model with a gap:
+instance    tau  model              x0 min. sites   states    margin        gap | sites that certify       depth least leaves closing triples
+K3/H        0.60 so|ff99SB-ff14SB       yes     3    18270   0.36758   0.000720 | [0, 1, 2]                    1            2          1 of 1
+K3/H        0.60 en|ff14SB              yes     3    18270   0.36758   0.000720 | [0, 1, 2]                    1            2          1 of 1
+K4/E        0.60 so|coul+GB              no     4   450225   0.31344   0.605401 | [0, 1, 2]                    1            2          1 of 4
+K4/E        0.70 so|coul+GB              no     4    74529   0.31344   0.605401 | [0, 1, 2]                    1            2          1 of 4
+L16/P2      0.60 so|ff99SB-ff14SB       yes    16    65536   0.00055   0.001189 | []                           2            3        0 of 560
+LKSE6/E     0.60 so|ff03-ff14SB          no     6   341172   0.44642   0.636991 | [1, 3, 5]                    1            2         1 of 20
+LKSE6/E     0.60 so|ff15ipq-ff14SB       no     6   341172   0.38883   3.361468 | [1, 3, 5]                    1           13         1 of 20
+LKSE6/E     0.60 so|ff99SB-ff14SB       yes     6   341172   0.07679   3.621790 | [1, 3, 5]                    1           13         0 of 20
+LKSE6/E     0.60 en|ff14SB              yes     6   341172   0.88529   2.246446 | [1, 3, 5]                    1           13         1 of 20
+LKSE6/E     0.60 en|ff03                yes     6   341172   0.50326   1.330527 | [1, 3, 5]                    1            2         1 of 20
+LKSE6/E     0.60 en|ff15ipq             yes     6   341172   0.37646   3.474643 | [1, 3, 5]                    1            2         1 of 20
+S5/E        0.60 so|GB                   no     5    59049   0.15754   0.080435 | [1, 2, 3, 4]                 1            2         1 of 10
+S5/E        0.70 so|GB                   no     5    59049   0.15754   0.080435 | [1, 2, 3, 4]                 1            2         1 of 10
+S5/E        0.80 so|GB                   no     5    59049   0.15754   0.080435 | [1, 2, 3, 4]                 1            2         1 of 10
+S6/E        0.60 so|GB                   no     6   531441   0.02985   0.201729 | [2, 3, 4]                    1            9         0 of 20
+S6/E        0.60 so|ff03-ff14SB         yes     6   531441   0.08724   0.102553 | [2, 3, 4, 5]                 1            2         2 of 20
+S6/E        0.70 so|GB                   no     6   531441   0.02985   0.201729 | [2, 3, 4]                    1            9         0 of 20
+S6/E        0.70 so|ff03-ff14SB         yes     6   531441   0.08724   0.102553 | [2, 3, 4, 5]                 1            2         2 of 20
+
+gaps by family (models with a gap / models): {'F': '0/347', 'K': '4/168', 'L': '1/324', 'LKSE': '6/144', 'S': '7/309', 'V': '0/440'}
+
+BRUTE FORCE: 1732 models enumerated on their whole domain (exact minimum of the published instance); root certificates (shares or one triple) accepted 1730 and compared with it: violations 0; leaf certificates accepted 1275, compared with the exact leaf minimum 1275: violations 0; leaves with a negative exact minimum 0
+[143s] wrote out/p7_04_survey.json   finished 2026-11-26 05:14:56 UTC
+DONE p7_04_survey
+exit 0

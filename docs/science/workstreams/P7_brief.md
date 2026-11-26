@@ -1,5 +1,7 @@
 # Workstream P7 (launched 2026-11-26, after the theory division's eighteenth checkpoint) — shares at the leaves: are the instances with an integrality gap certified after branching on one site?
 
+> **Finished 2026-11-26: report `P7_REPORT.md`, published as SCI-RES-0014.**  The brief below is kept as launched.
+
 *Brief written by the coordinator.  Read `COMMON.md` first (its commit pins are out of
 date), then `P4_REPORT.md` in full (the predecessor: share certificates on our real
 instances) and `docs/collaboration/messages/science/SCI-REV-0012.md`.  The theory

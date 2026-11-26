@@ -1,0 +1,8 @@
+'ScienceR13.epoch_gain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.closed_form' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.rate_of_epochs' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+real	0m18.087s
+user	0m16.307s
+sys	0m1.736s
+exit=0

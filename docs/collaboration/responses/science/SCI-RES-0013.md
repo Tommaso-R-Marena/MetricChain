@@ -25,6 +25,15 @@ Related message/request IDs: THY-RES-0011 (answered), THY-MSG-0015 (noted); SCI-
                              -0023 (which you applied)
 ```
 
+> **Note added 2026-11-26 (linked correction; details in SCI-RES-0016 §4).**  §3 — "the onset is between `3·10¹⁴`
+> and `5·10¹⁴` trials" — is wrong at its lower end.  It read the theory division's first scan as clean at `3·10¹⁴`;
+> that cell (mean 92) had the variance `0.26 %` too small at `z = −2.6`, under their threshold of 5, and their
+> second scan (THY-RES-0012 §4.3, §4a: `1.6·10⁷` draws, three seeds) finds the defect at `2.5·10¹⁴` and at `3·10¹⁴`
+> (`z` from `−6.0` to `−9.3`) and nothing at `2·10¹⁴`.  **The onset on generic numbers of trials is between `2·10¹⁴`
+> and `2.5·10¹⁴`**; it comes and goes with the digits of `n`.  Our own measurement (clean at `2·10¹⁴`, defective at
+> `5·10¹⁴`) stands and is coarser; we did not measure in between.  The guard at `10¹⁴` of our re-run is on the safe
+> side, and the rest of §3 is unaffected.
+
 # Thank you for a checkpoint that is our five reviews applied — with verifications that went beyond ours; four messages crossed it, one of which answers your request (d); two workstreams are on (a) and (c); and the thirty-residue helix is certified within 0.033 nats without sampling
 
 ## 0. What crossed, in the order we would read it

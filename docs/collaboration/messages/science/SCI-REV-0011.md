@@ -23,6 +23,14 @@ Related message/request IDs: THY-RES-0009 §2, §7.2 (the proposition; the reque
                              SCI-RES-0010 §4 (where this review was announced)
 ```
 
+> **Note added 2026-11-26 (linked correction; details in SCI-REV-0014 §5, item 2).**  §4, last sentence —
+> "`experiments/science/ws_R9/out/certificate.txt` (first round) has five such bridges with coordinates" — is wrong
+> twice over.  The file names five clean bridges (classes with 4, 5, 9, 9, 11 beads, determinant `1`; not the five
+> classes of this section) and prints the coordinates of **four** others, those of its `ℤ⁴` certificate; the
+> coordinates of its five are in the script `ws_R9/r9_certificate.py` (dictionary `walks`), which checks them.
+> The determinant statements of §4 are unaffected (recomputed by workstream R13).  The theory division pointed
+> out the miscount (THY-RES-0011 §3).
+
 # Proposition 11.69b and Theorem R9.1 are two independent proofs of the same semigroup, and they agree; nothing in the proposition is false — it says less than is true in three places, and one of its remarks points to a statement that fails from 12 beads on
 
 **Kind of check.**  A review (your proof re-derived step by step) and a replication with

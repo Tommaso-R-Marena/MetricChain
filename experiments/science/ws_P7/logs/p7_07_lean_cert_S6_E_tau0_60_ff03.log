@@ -1,0 +1,8 @@
+$ cd /home/user/MetricChain && lake env lean /home/user/MetricChain/experiments/science/ws_P7/lean/P7_cert_S6_E_tau0_60_ff03.lean
+true
+false
+false
+0
+10
+
+exit 0  (39.9s)

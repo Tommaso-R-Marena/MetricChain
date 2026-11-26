@@ -1,0 +1,63 @@
+p7_06_check  started 2026-11-26 05:46:45 UTC
+p7_02_certB_K3_H_tau0.60_ff99SB.json: K3/H tau 0.60 ff99SB-ff14SB [greedy blocks, shared leaves]  depth 1, 2 leaf certificates for 21 leaf boxes
+   ACCEPTED: True   (41643 additions, 20790 comparisons of integers; certificate 332 integers, instance 2189 integers; 0.01s)
+   controls (each must be False): bound L+1: False;  first leaf alone on the whole domain: False;  children of two states exchanged: False
+   brute force: minimum of the published instance over the 18270 states = 0 (at the reference: 0); leaf boxes cover 18270 states; leaves whose certified bound exceeds the exact leaf minimum: 0
+   with a domain-split rule (each distinct leaf checked once on its own box; the boxes cover 18270 states): accepted True; 6246 additions, 3120 comparisons
+p7_02_certB_LKSE6_E_tau0.60_ff99SB.json: LKSE6/E tau 0.60 ff99SB-ff14SB [greedy blocks, shared leaves]  depth 1, 3 leaf certificates for 27 leaf boxes
+   ACCEPTED: True   (59886 additions, 27513 comparisons of integers; certificate 1263 integers, instance 2422 integers; 0.03s)
+   controls (each must be False): bound L+1: False;  first leaf alone on the whole domain: False;  children of two states exchanged: False
+   brute force: minimum of the published instance over the 341172 states = 0 (at the reference: 0); leaf boxes cover 341172 states; leaves whose certified bound exceeds the exact leaf minimum: 0
+   with a domain-split rule (each distinct leaf checked once on its own box; the boxes cover 341172 states): accepted True; 9318 additions, 4353 comparisons
+p7_02_certB_S6_E_tau0.60_ff03.json: S6/E tau 0.60 ff03-ff14SB [greedy blocks, shared leaves]  depth 1, 2 leaf certificates for 9 leaf boxes
+   ACCEPTED: True   (17640 additions, 8118 comparisons of integers; certificate 582 integers, instance 1269 integers; 0.02s)
+   controls (each must be False): bound L+1: False;  first leaf alone on the whole domain: False;  children of two states exchanged: False
+   brute force: minimum of the published instance over the 531441 states = 0 (at the reference: 0); leaf boxes cover 531441 states; leaves whose certified bound exceeds the exact leaf minimum: 0
+   with a domain-split rule (each distinct leaf checked once on its own box; the boxes cover 531441 states): accepted True; 4585 additions, 2126 comparisons
+p7_02_certB_S6_E_tau0.70_ff03.json: S6/E tau 0.70 ff03-ff14SB [greedy blocks, shared leaves]  depth 1, 2 leaf certificates for 9 leaf boxes
+   ACCEPTED: True   (17640 additions, 8118 comparisons of integers; certificate 582 integers, instance 1269 integers; 0.02s)
+   controls (each must be False): bound L+1: False;  first leaf alone on the whole domain: False;  children of two states exchanged: False
+   brute force: minimum of the published instance over the 531441 states = 0 (at the reference: 0); leaf boxes cover 531441 states; leaves whose certified bound exceeds the exact leaf minimum: 0
+   with a domain-split rule (each distinct leaf checked once on its own box; the boxes cover 531441 states): accepted True; 4585 additions, 2126 comparisons
+p7_02_cert_K3_H_tau0.60_ff99SB.json: K3/H tau 0.60 ff99SB-ff14SB [one leaf per state]  depth 1, 21 leaf certificates for 21 leaf boxes
+   ACCEPTED: True   (41643 additions, 20790 comparisons of integers; certificate 3486 integers, instance 2189 integers; 0.01s)
+   controls (each must be False): bound L+1: False;  first leaf alone on the whole domain: False;  children of two states exchanged: False
+   brute force: minimum of the published instance over the 18270 states = 0 (at the reference: 0); leaf boxes cover 18270 states; leaves whose certified bound exceeds the exact leaf minimum: 0
+   with a domain-split rule (each distinct leaf checked once on its own box; the boxes cover 18270 states): accepted True; 41643 additions, 20790 comparisons
+p7_02_cert_L16_P2_tau0.60_ff99SB.json: L16/P2 tau 0.60 ff99SB-ff14SB [one leaf per state]  depth 2, 3 leaf certificates for 3 leaf boxes
+   ACCEPTED: True   (4354 additions, 1386 comparisons of integers; certificate 1848 integers, instance 512 integers; 0.02s)
+   controls (each must be False): bound L+1: False;  first leaf alone on the whole domain: False;  children of two states exchanged: False
+   brute force: minimum of the published instance over the 65536 states = 0 (at the reference: 0); leaf boxes cover 65536 states; leaves whose certified bound exceeds the exact leaf minimum: 0
+   with a domain-split rule (each distinct leaf checked once on its own box; the boxes cover 65536 states): accepted True; 4354 additions, 1386 comparisons
+p7_02_cert_LKSE6_E_tau0.60_ff99SB.json: LKSE6/E tau 0.60 ff99SB-ff14SB [one leaf per state]  depth 1, 13 leaf certificates for 13 leaf boxes
+   ACCEPTED: True   (44668 additions, 20891 comparisons of integers; certificate 5473 integers, instance 2422 integers; 0.02s)
+   controls (each must be False): bound L+1: False;  first leaf alone on the whole domain: False;  children of two states exchanged: False
+   brute force: minimum of the published instance over the 341172 states = 0 (at the reference: 0); leaf boxes cover 341172 states; leaves whose certified bound exceeds the exact leaf minimum: 0
+   with a domain-split rule (each distinct leaf checked once on its own box; the boxes cover 341172 states): accepted True; 44668 additions, 20891 comparisons
+p7_02_cert_S6_E_tau0.60_ff03.json: S6/E tau 0.60 ff03-ff14SB [one leaf per state]  depth 1, 9 leaf certificates for 9 leaf boxes
+   ACCEPTED: True   (17640 additions, 8118 comparisons of integers; certificate 2619 integers, instance 1269 integers; 0.02s)
+   controls (each must be False): bound L+1: False;  first leaf alone on the whole domain: False;  children of two states exchanged: False
+   brute force: minimum of the published instance over the 531441 states = 0 (at the reference: 0); leaf boxes cover 531441 states; leaves whose certified bound exceeds the exact leaf minimum: 0
+   with a domain-split rule (each distinct leaf checked once on its own box; the boxes cover 531441 states): accepted True; 17640 additions, 8118 comparisons
+p7_02_cert_S6_E_tau0.70_ff03.json: S6/E tau 0.70 ff03-ff14SB [one leaf per state]  depth 1, 9 leaf certificates for 9 leaf boxes
+   ACCEPTED: True   (17640 additions, 8118 comparisons of integers; certificate 2619 integers, instance 1269 integers; 0.03s)
+   controls (each must be False): bound L+1: False;  first leaf alone on the whole domain: False;  children of two states exchanged: False
+   brute force: minimum of the published instance over the 531441 states = 0 (at the reference: 0); leaf boxes cover 531441 states; leaves whose certified bound exceeds the exact leaf minimum: 0
+   with a domain-split rule (each distinct leaf checked once on its own box; the boxes cover 531441 states): accepted True; 17640 additions, 8118 comparisons
+
+instance  tau  variant                        depth leaf cert. leaf boxes  integers  additions comparisons | split rule: additions comparisons | states (brute force)
+K3/H      0.60 greedy blocks, shared leaves       1          2         21       332      41643       20790 |                  6246        3120 |                18270
+LKSE6/E   0.60 greedy blocks, shared leaves       1          3         27      1263      59886       27513 |                  9318        4353 |               341172
+S6/E      0.60 greedy blocks, shared leaves       1          2          9       582      17640        8118 |                  4585        2126 |               531441
+S6/E      0.70 greedy blocks, shared leaves       1          2          9       582      17640        8118 |                  4585        2126 |               531441
+K3/H      0.60 one leaf per state                 1         21         21      3486      41643       20790 |                 41643       20790 |                18270
+L16/P2    0.60 one leaf per state                 2          3          3      1848       4354        1386 |                  4354        1386 |                65536
+LKSE6/E   0.60 one leaf per state                 1         13         13      5473      44668       20891 |                 44668       20891 |               341172
+S6/E      0.60 one leaf per state                 1          9          9      2619      17640        8118 |                 17640        8118 |               531441
+S6/E      0.70 one leaf per state                 1          9          9      2619      17640        8118 |                 17640        8118 |               531441
+
+all 9 certificates accepted; all 27 controls rejected; brute force: 121 leaf boxes, 0 violations
+[0s] wrote out/p7_06_check.json
+DONE p7_06_check
+[run_capped] peak anonymous resident memory 22 MB (cap 3500 MB); peak file-backed resident memory 16 MB; largest VmPeak 131 MB (ulimit -v not set); 0.5 s; exit 0
+exit 0

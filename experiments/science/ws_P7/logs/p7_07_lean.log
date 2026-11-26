@@ -1,0 +1,24 @@
+p7_07_lean  started 2026-11-26 05:19:42 UTC
+wrote lean/P7_certB_K3_H_tau0_60_ff99SB.lean  (39856 bytes; PairInstance 3 30; 2 leaves)
+   lake env lean: exit 0, 23.0s, output ['true', 'false', 'false', '0', '31'] -> AS EXPECTED (true, false, false, 0)
+wrote lean/P7_certB_LKSE6_E_tau0_60_ff99SB.lean  (48301 bytes; PairInstance 6 27; 3 leaves)
+   lake env lean: exit 0, 24.9s, output ['true', 'false', 'false', '0', '28'] -> AS EXPECTED (true, false, false, 0)
+wrote lean/P7_certB_S6_E_tau0_60_ff03.lean  (25960 bytes; PairInstance 6 9; 2 leaves)
+   lake env lean: exit 0, 23.5s, output ['true', 'false', 'false', '0', '10'] -> AS EXPECTED (true, false, false, 0)
+wrote lean/P7_certB_S6_E_tau0_70_ff03.lean  (25960 bytes; PairInstance 6 9; 2 leaves)
+   lake env lean: exit 0, 23.6s, output ['true', 'false', 'false', '0', '10'] -> AS EXPECTED (true, false, false, 0)
+wrote lean/P7_cert_K3_H_tau0_60_ff99SB.lean  (85653 bytes; PairInstance 3 30; 21 leaves)
+   lake env lean: exit 0, 45.4s, output ['true', 'false', 'false', '0', '31'] -> AS EXPECTED (true, false, false, 0)
+wrote lean/P7_cert_L16_P2_tau0_60_ff99SB.lean  (18727 bytes; PairInstance 16 2; 3 leaves)
+   lake env lean: exit 0, 15.8s, output ['true', 'false', 'false', '0', '5'] -> AS EXPECTED (true, false, false, 0)
+wrote lean/P7_cert_LKSE6_E_tau0_60_ff99SB.lean  (97974 bytes; PairInstance 6 27; 13 leaves)
+   lake env lean: exit 0, 54.1s, output ['true', 'false', 'false', '0', '28'] -> AS EXPECTED (true, false, false, 0)
+wrote lean/P7_cert_S6_E_tau0_60_ff03.lean  (50579 bytes; PairInstance 6 9; 9 leaves)
+   lake env lean: exit 0, 39.9s, output ['true', 'false', 'false', '0', '10'] -> AS EXPECTED (true, false, false, 0)
+wrote lean/P7_cert_S6_E_tau0_70_ff03.lean  (50579 bytes; PairInstance 6 9; 9 leaves)
+   lake env lean: exit 0, 37.7s, output ['true', 'false', 'false', '0', '10'] -> AS EXPECTED (true, false, false, 0)
+
+9 of 9 certificates: the theory division's `verify` (run by #eval) returns true for the bound 0, false for the bound 2^-40, false for a single leaf, and the instance has the value 0 at the reference
+[288s] wrote out/p7_07_lean.json
+DONE p7_07_lean
+exit 0

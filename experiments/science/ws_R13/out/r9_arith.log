@@ -1,0 +1,11 @@
+# r13_08_r9_arith.py
+  det [R9.1(e), bridges with 4,5,9,9,11 beads] = 1;  projection to (h3,h8,h11;M): rank 4, gcd of 4x4 minors = 1
+  det [theory report 11.69b(e), 4,5,7,8,10 beads] = 1;  projection to (h3,h8,h11;M): rank 4, gcd of 4x4 minors = 1
+  det [SCI-REV-0011 sec. 4, 10,10,8,10,10 beads] = 1;  projection to (h3,h8,h11;M): rank 4, gcd of 4x4 minors = 1
+  norm A_max = 44, norm B_max = 16, norm (A+B)_max = 60  [(1,9,14;1)]
+  108 = 5*3 + 3*18 + 36 + 3 = 108;  cumulative bound of A+B: (1, 10, 24; 1) -> (1, 10, 24, 1);  168 = 60 + 108: 168
+  bridge of out/certificate.txt with 4 beads: (h3,h8,h11,g; N+3) = (0, 0, 1, 1, 7)
+  bridge of out/certificate.txt with 5 beads: (h3,h8,h11,g; N+3) = (0, 0, 1, 1, 8)
+  bridge of out/certificate.txt with 7 beads: (h3,h8,h11,g; N+3) = (0, 1, 3, 3, 10)
+  bridge of out/certificate.txt with 10 beads: (h3,h8,h11,g; N+3) = (1, 6, 10, 5, 13)
+# END

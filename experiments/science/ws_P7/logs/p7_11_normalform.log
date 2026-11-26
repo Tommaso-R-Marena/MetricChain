@@ -1,0 +1,12 @@
+p7_11_normalform  started 2026-11-26 06:00:09 UTC
+S6/E tau 0.60 split ff03-ff14SB: 9 leaves; largest |least total allowance - (F(anchor) - relaxation value)| = 8.88e-16
+S6/E tau 0.70 split ff03-ff14SB: 9 leaves; largest |least total allowance - (F(anchor) - relaxation value)| = 8.88e-16
+K3/H tau 0.60 split ff99SB-ff14SB: 21 leaves; largest |least total allowance - (F(anchor) - relaxation value)| = 0.00e+00
+L16/P2 tau 0.60 split ff99SB-ff14SB: 3 leaves; largest |least total allowance - (F(anchor) - relaxation value)| = 0.00e+00
+LKSE6/E tau 0.60 split ff99SB-ff14SB: 13 leaves; largest |least total allowance - (F(anchor) - relaxation value)| = 1.42e-14
+
+55 leaves; largest difference 1.42e-14 kcal/mol (floating point; P7.1(c) predicts 0)
+[3s] finished 2026-11-26 06:00:13 UTC
+DONE p7_11_normalform
+[run_capped] peak anonymous resident memory 185 MB (cap 3500 MB); peak file-backed resident memory 47 MB; largest VmPeak 616 MB (ulimit -v not set); 4.3 s; exit 0
+exit 0

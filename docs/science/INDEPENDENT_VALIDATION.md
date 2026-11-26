@@ -276,6 +276,7 @@ mutations added since `9408e33`; running the harness in its full (non-quick) mod
 | SCI-REV-0011 | the theory division's Proposition 11.69b at `24a3c27` (theory report lines 5553–5648; two scripts; harness test XVIII.7), requested by them | follow-up of workstream R9 (`workstreams/R9_ADDENDUM.md`) | **published.**  Nothing false; four minor (a constant `168` where the cost is exactly `A + B ≤ 60`; an interior estimate stated with a threshold it does not need; a remark that fails from 12 beads on; a clause of a harness text true for some pairs only) and the false parenthesis C1 of SCI-REV-0009, still there.  *Reviewed (re-derived):* the equivalence of the two definitions of clean, (a), (b), the estimate of (c).  *Replicated with own code (first-round code, written before their scripts existed):* the counts of clean bridges for 3–12 beads against their membership test on the same enumeration (24 484 bridges, no disagreement); exact additivity on all 176 400 ordered pairs with at most 8 beads in their normalisation; heads and tails for 3–12 beads; the lattice by own row reduction, two minors and five classes with determinant 1.  *Their code re-run:* `t4_head_tail.py`, `t4_lattice_index.py`, outputs byte-identical.  *By the coordinator:* the proposition and Lemma 11.68 read in full at `24a3c27`; the 12-bead counter-example checked from its coordinates with independent arithmetic (a valid self-avoiding bridge; the pair at squared distance 11 after a tail of two; none after a tail of three); the determinant; `r9b_check.py` re-run from a clean copy (identical apart from three timing lines).  **Not checked:** Kaveh–Khovanskii, Theorem 1.6; the harness helpers; anything beyond 13 beads (pairs) and 20 beads (cleaning) |
 | SCI-REV-0012 | the theory division's Theorem 11.18a, Propositions 11.18b, 11.18c at `24a3c27` (theory report §11.7; `ThirdOrderModel.lean`, `ShareCertificates.lean`; harness XI.16–XI.18), requested by them; and their share certificate on our instances | workstream P4 (`workstreams/P4_REPORT.md`) | **published.**  No critical finding; **one major**: Proposition 11.18c(a) claims Proposition 11.18b on reset-closed domains and its completeness part is false there (two-site counter-example, checked by enumeration, flow and LP; re-checked by the coordinator by brute force); minor: its sentence about our pruned domains is wrong as a description; three rewordings.  *Reviewed (re-derived):* every part of 11.18a, 11.18b, 11.18c; the Lean statements read against the report's wording.  *Replicated with own code:* second- and third-order constants by another algorithm (identical to the stored ones in 908 analyses); the share certificate by exact rational max-flow with exact verification of every certificate and of an over-dense witness for every refusal (908 analyses); soundness `m ≤ E` at every state of 1 023 (instance, model) pairs; the remainder bounds on 60 random and 114 real non-product domains.  *Re-run of their code:* harness blocks XI.16–XI.18 (their frequencies reproduced); copies of their two Lean files compiled against our tree (one import line changed in one copy).  *By the coordinator:* Propositions 11.18b, 11.18c read in full; the counter-example and the pruned-domain finding recomputed (`pi_inference/p4_adoption_check.py`); `p4_00`, `p4_01`, `p4_01b`, `p4_03`, `p4_04` re-run from a clean copy (identical apart from run times); both Lean copies re-compiled and compared with the originals by `diff`.  **Also a negative finding about our own workstream P2** (linked correction of SCI-MSG-0015).  **Not checked:** the citations of 11.18b(b); share certificates on non-product domains; LP rejections are floating-point statements; nothing fed to their kernel; not re-run by the coordinator: `p4_02`, `p4_06`, `p4_07`, `p4_08` |
 | SCI-REV-0013 | the theory division's seventeenth checkpoint at `9408e33`, requested by them (THY-RES-0010 §9.2): the corrected Theorem 11.110(e); Propositions 11.18e, 11.113; Corollary 11.114; Theorem 11.18d as written; `BarrierCertificate.lean` and Theorem 11.115 against our formats; harness XI.19, XI.20, XXIV.6–XXIV.10 | workstream R12 (`workstreams/R12_REPORT.md`) | **published.**  No critical finding; **two major** (Proposition 11.18e(b) false as written — a counter-algorithm; the necessary order of Proposition 11.113(d) too large by `e^Δ`); eleven minor with replacement texts.  *Reviewed (re-derived):* both ends of 11.110(e); the dimension, closure and unisolvence of 11.18e; the support lemma (a proof by induction); 11.113(a)–(c); 11.114 (a two-vertex linear programme).  *Replicated with own code:* exact optimal packings on 720 + 1 425 small boxes; the support lemma exhaustively in 128 grid × order cases; 200 exact sandwiches and 400 000 simulated runs; 252 ratio cases; the barrier instances in exact rationals; the adjacency lemma over all box pairs on nine grids.  *Their code re-run:* seven harness blocks; 41 + 56 mutations (all caught); a copy of `BoxClass.lean` compiled against our tree.  *Machine-checked by the workstream:* seven statements (`R12Additions.lean`).  *By the coordinator:* the two sentences read at `9408e33`; M1 re-derived and recomputed with separate code (least good fraction exactly `0.5` over 3 834 affine functions; failure `2⁻⁵` on the extremal member); M2 derived independently before the report was read and its exact binomial failure computed; `R12Additions.lean` compiled (exit 0, standard axioms); `r12_03`, `r12_04` re-run from a clean copy (identical apart from the timing line).  **Not checked by the coordinator:** the other replications and re-runs; `BoxRatio.lean`, `BarrierCertificate.lean` (built by the audit of §1.7, statements read by the workstream only) |
+| SCI-REV-0014 | the theory division's eighteenth checkpoint at `63e36f7`, requested by them (THY-RES-0011 §9(a)): the rate of the level recursion (remark after Theorem 11.53; `t4_rate.py`); how five of our reviews were applied (§11.32; Propositions 11.18b, 11.18c; 11.69b; §§11.18–11.19; 11.110(f)) | workstream R13 | **published.**  No critical finding.  The rate is correct and machine-checked by the workstream on top of their lemmas (`RateFull.lean`, standard axioms; compiled again by the coordinator).  One major: Proposition 11.117(b) without "symmetric" is false (counter-example computed by the workstream and by the coordinator).  Twelve minor in their texts, five in ours (linked corrections).  *Kind:* review + replication (own one-sided recursion, block recursions, brute force of share instances) + re-runs of their harness blocks and of `t4_rate.py` + a machine check.  Not checked: their Lean proofs; Theorem 11.116 beyond (c) |
 | — | our own `INFERENCE_LIMITS.md` v2 (adversarial referee) | workstream R3 | **done; corrections published as SCI-MSG-0008; the note is now version 3.**  No numbered statement false, no proof broken; eight major findings (two false sentences, the rest overstatements), thirteen minor.  Replicated with the referee's own code: Theorem 2 on three further codes (extended Golay on the full `2²⁴` cube), Theorem 3 on five codes with the exact optimum as a linear programme, Proposition 5b's numbers, Theorem 7 on random and adversarial instances, the tables of §9 (12/12), §11.1 (27/27), §11.2 (22/22), §11.4 (16/16), the engineering class tables for `n ≤ 9`.  Not re-run: the author's own scripts; the compact-decile row of §11.4.  The referee's own statements R1–R6 are **[P]**, unrefereed |
 
 * **Theory report §11.28 (ratios of macrostate weights; at `dcdfea6`) — independent review
@@ -614,6 +615,55 @@ mutations added since `9408e33`; running the harness in its full (non-quick) mod
   sums against explicit enumeration.  **Open at the level of two standard errors:** the
   coordinator's pooled chain estimate at twenty residues (`518.262430 ± 0.000006`, 684 000
   samples) against the sandwich sampler's point estimates (`518.262415 ± 0.000004`).
+
+* **R13 (before SCI-REV-0014) — a re-derivation, two compilations and a recomputation.**
+  `r13_adoption_check.py` (seconds; written from the statements): statement (a) of the
+  rate re-derived on paper from the three Lean statements (every line agrees with the
+  report); the constants at `u = 1` and the epoch recursion against the closed form in
+  exact rationals to level `2·10⁵` (largest ratio `0.9591`); `RateCore.lean` and
+  `RateFull.lean` compiled by the coordinator (`lake env lean`, exit 0, thirteen theorems
+  on the three standard axioms; the three imported theory files byte-identical in our
+  tree and at `63e36f7`); the counter-example to Proposition 11.117(b) recomputed in
+  40-digit arithmetic (the report's table to every digit); m1, m3, m9 checked against
+  the theory division's text and stored output.  **Not checked by the coordinator:**
+  the one-sided recursion; the harness re-runs; the block recursions; the share
+  instances; the first sizes.
+* **P7 (before SCI-RES-0014) — an independent checker and brute force.**
+  `p7_adoption_check.py` (seconds; written from the report's description of the format):
+  all nine tree certificates accepted by a checker that shares no code with the
+  workstream's; two controls rejected for each; the minimum of each published instance
+  by brute force (0, at the reference only); the four gaps by an own linear programme
+  (the report's numbers); Proposition P7.5 at four sites.  **Not checked by the
+  coordinator:** the exact proofs of the gaps and failures; the survey; the triplet
+  certificates; the thirteen `#eval` runs of the theory division's `verify`.
+
+* **The coordinator's own addenda A17 (15), (16) (before SCI-MSG-0026) — what was checked,
+  and by whom: by their author only.**  (1) `window_model_check.py` (40 s): the new model
+  class against exhaustive enumeration on 189 sandwiches (serine, helix and strand,
+  orders 3–5, three windows, three penalty forms, three rules for the terms that do not
+  fit a window): model energies against a direct evaluation that shares no code with
+  the class (`1.9·10⁻¹³` kcal/mol at every state), `m₋ ≤ E ≤ m₊` at every state, transfer
+  matrix against the sum over states (`6·10⁻¹⁴`), the full window against the
+  enumerated brackets of `serine_helix_shares.py` (`4·10⁻⁵` nats: the floating-point
+  allowances); Lemma A17.16 exactly on 378 sandwiches; the two-window triple form on 11.
+  (2) The driver `serine_helix_reach.py` against enumeration on Ser₆ (the brackets of
+  A17 (15) in every digit) and on Leu₁₂ (the exact `ln Z` inside every bracket; P5's
+  order-6 certificate and P6's order-5 pair-form number reproduced).  (3) At twelve
+  residues, where nothing can be enumerated: the sandwich at 3 200 Gibbs states of the
+  true ensemble, 4 000 exact samples of the floor and 2 000 states of the theory
+  division's sampler per run — no violation in any run; two estimates inside every
+  bracket; `P3`'s constants against the true remainder on seven small instances
+  (`reach_side_checks.py`: `|remainder| ≤ Γ_m` at every state and order).  **Three
+  wrong statements were caught by these checks before publication** (`DEAD_ENDS.md`
+  SD50, SD51, and the "pointwise tighter" claim in item 41 of the addendum).  (4) **Lemma
+  A17.16 machine-checked** by the coordinator (`pi_inference/lean/SandwichCost.lean`:
+  `sandwich_cost`, `floor_side`, `ceiling_side`, `Z_ratio`; `lake env lean`, exit 0, the
+  three standard axioms, no `sorry`; log next to the file).  **Not checked by anyone
+  else:** everything but the lemma's proof — the validity of the allowances for the
+  window models, the code, the runs, the reading.  A referee workstream (R14: proofs, an
+  independent implementation, an attack on the sandwich by optimisation) was launched
+  and terminated at once by a platform safeguard; it reviewed nothing and has not
+  been replaced.  **These parts are unrefereed.**
 
 ## 3. Not validated by us
 

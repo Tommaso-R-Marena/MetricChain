@@ -1,0 +1,27 @@
+# r13_07_shares_bruteforce.py
+## (I) three binary sites, A = (1,1,1), c12 = c13 = 2, T23(1,1) = 10
+   c23 = 0: L(x) - L(x0) over the 8 configurations (changed sites -> value): -:0, 3:1, 2:1, 23:12, 1:1, 13:0, 12:0, 123:9
+      minimum over configurations = 0 (attained at [(0, 0, 0), (1, 0, 1), (1, 1, 0)]) -> x0 minimises L: True
+      local-polytope relaxation (HiGHS): value -0.500000000000;  site marginals of 'changed': [np.float64(0.5), np.float64(0.5), np.float64(0.5)];  pair marginals of 'both changed' (12, 13, 23): [np.float64(0.5), np.float64(0.5), np.float64(0.0)]
+      the point of the text (every site changed with weight 1/2; 12 and 13 always together, 23 never): locally consistent True, value -1/2
+      exact minimum of the reduced objective on the grid {0, 1/20, ..., 1}^3: -1/2 at p = ('1/2', '1/2', '1/2')
+      state shares: largest uniform cover margin -0.500000 (feasible iff >= 0): exist = False;  exact reason: covers of 12 and 13 need s12+s21+s13+s31 >= 4, loads allow at most 3
+      a joint distribution with weights in {0, 1/2, 1} that has these marginals exists: False  (in general: x1 = x2 and x1 = x3 almost surely force x2 = x3)
+   c23 = 2: L(x) - L(x0) over the 8 configurations (changed sites -> value): -:0, 3:1, 2:1, 23:10, 1:1, 13:0, 12:0, 123:7
+      minimum over configurations = 0 (attained at [(0, 0, 0), (1, 0, 1), (1, 1, 0)]) -> x0 minimises L: True
+      local-polytope relaxation (HiGHS): value -0.500000000000;  site marginals of 'changed': [np.float64(0.5), np.float64(0.5), np.float64(0.5)];  pair marginals of 'both changed' (12, 13, 23): [np.float64(0.5), np.float64(0.5), np.float64(0.0)]
+      the point of the text (every site changed with weight 1/2; 12 and 13 always together, 23 never): locally consistent True, value -1/2
+      exact minimum of the reduced objective on the grid {0, 1/20, ..., 1}^3: -1/2 at p = ('1/2', '1/2', '1/2')
+      state shares: largest uniform cover margin -0.500000 (feasible iff >= 0): exist = False;  exact reason: covers of 12 and 13 need s12+s21+s13+s31 >= 4, loads allow at most 3
+      a joint distribution with weights in {0, 1/2, 1} that has these marginals exists: False  (in general: x1 = x2 and x1 = x3 almost surely force x2 = x3)
+## (II) the Lean witness: two sites, three states, A = (1, 10) at both, c12 = 3, T12(1,1) = 2
+   L - L(x0): (0, 0):0, (0, 1):1, (0, 2):10, (1, 0):1, (1, 1):1, (1, 2):8, (2, 0):10, (2, 1):8, (2, 2):17;  min = 0
+   shares s(1) = 1/2, s(2) = 5/2: cover True, load True;  deficit w12 = 3, Delta = [Fraction(1, 1), Fraction(1, 1)]: constant shares exist: False (LP margin -1.000)
+   where the deficit is realised: [(1, 2), (2, 1), (2, 2)] (the pair of cheapest states (1,1) has deficit 1)
+## (III) 11.18c(a): D = {0,1,2}^2 minus (1,1); additive known part, A = (1, 10); zero star data; c12 = 3
+   rectangles inside D: 5 of 9
+   least value over the class of the energy difference to the reference: (1, 2): 11 + (-3.000000) = 8.000000, (2, 1): 11 + (-3.000000) = 8.000000, (2, 2): 20 + (-3.000000) = 17.000000;  star points: 1, 10, 1, 10
+   x0 certified for every member: True;  over-dense: c12 = 3 > Delta1 + Delta2 = 2: no shares (constant, additive known part)
+## (IV) random instances: state shares exist <=> the relaxation is solved by the reference
+   instances decided (ties within 1e-7 set aside: 5): 395;  reference minimises the model: 158;  relaxation solved by the reference: 155;  state shares exist: 155;  the two agree in 395 of 395;  integrality gaps (reference optimal, relaxation below): 3;  constant shares of deficits: 117 (of which without state shares: 0)
+# END

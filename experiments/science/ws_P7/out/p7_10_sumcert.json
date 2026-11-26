@@ -1,0 +1,151 @@
+[
+ {
+  "instance": "S6/E",
+  "tau": "0.60",
+  "split": "ff03-ff14SB",
+  "triples": [
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  "t": 0.011051998041753386,
+  "file": "lean/P7S_S6_E_tau0_60_ff03.lean",
+  "bytes": 41998,
+  "dp_leaves": 9,
+  "sum_nodes": 1,
+  "exit": 0,
+  "seconds": 27.29746103286743,
+  "output": [
+   "true",
+   "false",
+   "false",
+   "12"
+  ],
+  "as_expected": true,
+  "peak_anon_mb": 589.76171875,
+  "peak_file_mb": 6603.7109375,
+  "vmpeak_mb": 14997.8515625,
+  "mem_available_before_mb": 13843.03125
+ },
+ {
+  "instance": "S6/E",
+  "tau": "0.70",
+  "split": "ff03-ff14SB",
+  "triples": [
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  "t": 0.011051998041753386,
+  "file": "lean/P7S_S6_E_tau0_70_ff03.lean",
+  "bytes": 41998,
+  "dp_leaves": 9,
+  "sum_nodes": 1,
+  "skipped": "the published instance is identical to that of S6/E tau 0.60 (same X'): Lean run not repeated",
+  "as_expected": null
+ },
+ {
+  "instance": "K3/H",
+  "tau": "0.60",
+  "split": "ff99SB-ff14SB",
+  "triples": [
+   [
+    0,
+    1,
+    2
+   ]
+  ],
+  "t": 0.28282363248648795,
+  "file": "lean/P7S_K3_H_tau0_60_ff99SB.lean",
+  "bytes": 107577,
+  "dp_leaves": 21,
+  "sum_nodes": 1,
+  "exit": 0,
+  "seconds": 54.9344162940979,
+  "output": [
+   "true",
+   "false",
+   "false",
+   "33"
+  ],
+  "as_expected": true,
+  "peak_anon_mb": 655.83203125,
+  "peak_file_mb": 6605.2109375,
+  "vmpeak_mb": 15061.859375,
+  "mem_available_before_mb": 13868.1796875
+ },
+ {
+  "instance": "L16/P2",
+  "tau": "0.60",
+  "split": "ff99SB-ff14SB",
+  "triples": [
+   [
+    1,
+    2,
+    4
+   ],
+   [
+    6,
+    7,
+    8
+   ]
+  ],
+  "t": 1.6957423692787188e-05,
+  "file": "lean/P7S_L16_P2_tau0_60_ff99SB.lean",
+  "bytes": 25142,
+  "dp_leaves": 4,
+  "sum_nodes": 2,
+  "exit": 0,
+  "seconds": 13.446398735046387,
+  "output": [
+   "true",
+   "false",
+   "false",
+   "9"
+  ],
+  "as_expected": true,
+  "peak_anon_mb": 570.38671875,
+  "peak_file_mb": 6605.21484375,
+  "vmpeak_mb": 14997.87109375,
+  "mem_available_before_mb": 13369.58984375
+ },
+ {
+  "instance": "LKSE6/E",
+  "tau": "0.60",
+  "split": "ff99SB-ff14SB",
+  "triples": [
+   [
+    1,
+    2,
+    3
+   ],
+   [
+    1,
+    3,
+    5
+   ]
+  ],
+  "t": 0.014442349050957315,
+  "file": "lean/P7S_LKSE6_E_tau0_60_ff99SB.lean",
+  "bytes": 138724,
+  "dp_leaves": 22,
+  "sum_nodes": 2,
+  "exit": 0,
+  "seconds": 49.47038221359253,
+  "output": [
+   "true",
+   "false",
+   "false",
+   "59"
+  ],
+  "as_expected": true,
+  "peak_anon_mb": 774.88671875,
+  "peak_file_mb": 6604.640625,
+  "vmpeak_mb": 15061.84375,
+  "mem_available_before_mb": 12901.625
+ }
+]

@@ -25,6 +25,11 @@ Related message/request IDs: THY-RES-0007 (workstream Y announced as unverified)
                              commissioned); SCI-RES-0009 §3 (addendum A17.8, to which §5 here connects)
 ```
 
+> **Note added 2026-11-26 (linked clarification; details in SCI-REV-0014 §5, o5).**  This message gives two numbers
+> for `h` at `(p, u) = (0.1, 4)` — `0.229339` in the table of §2 and `0.233073` in request R10-T1 — without saying that
+> they are two valid upper bounds for the same cell: the first is our own safe bound, the second the safe end of
+> the bracket of the theory division's function.  Both are below the cube's `0.239250`; nothing changes.
+
 # Your workstream Y reviewed and replicated: every proof stands and every number that carries the headline is reproduced — but the answer to its question is not "upwards": the interaction raises the exponents at small slopes, by the structure factor, and lowers two of them at large slopes
 
 **Kind of check.**  An independent review (the reductions, Lemmas A–C, Propositions D, F,

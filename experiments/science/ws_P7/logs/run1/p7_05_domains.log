@@ -1,0 +1,55 @@
+p7_05_domains  started 2026-11-26 05:35:50 UTC
+[    2s] F10/H tau 0.60: |X_tau| 69846 |D'(x*)| 27840 (product hull 34560): so:- to|pair:S to|site:S (2.2s)
+[    2s] F2/H tau 0.60: |X_tau| 33 |D'(x*)| 30 (product hull 30): so:- (0.1s)
+[    2s] F2/P2 tau 0.60: |X_tau| 41 |D'(x*)| 41 (product hull 42): so:- (0.1s)
+[    3s] F3/E tau 0.60: |X_tau| 75 |D'(x*)| 60 (product hull 60): so:S to|pair:S to|site:S (0.2s)
+[    3s] F3/E tau 0.70: |X_tau| 6 |D'(x*)| 4 (product hull 4): so:S (0.1s)
+[    3s] F3/H tau 0.60: |X_tau| 120 |D'(x*)| 110 (product hull 120): so:- to|pair:S to|site:S (0.2s)
+[    3s] F3/P2 tau 0.60: |X_tau| 239 |D'(x*)| 239 (product hull 252): so:- to|pair:S to|site:- (0.2s)
+[    3s] F4/E tau 0.60: |X_tau| 225 |D'(x*)| 144 (product hull 144): so:S to|pair:S to|site:S (0.2s)
+[    3s] F4/E tau 0.70: |X_tau| 9 |D'(x*)| 4 (product hull 4): so:S (0.2s)
+[    4s] F4/H tau 0.60: |X_tau| 360 |D'(x*)| 330 (product hull 360): so:- to|pair:S to|site:S (0.2s)
+[    4s] F4/P2 tau 0.60: |X_tau| 1335 |D'(x*)| 1335 (product hull 1512): so:- to|pair:S to|site:- (0.2s)
+[    4s] F4/P2 tau 0.70: |X_tau| 12 |D'(x*)| 8 (product hull 8): so:S to|pair:S to|site:S (0.2s)
+[    4s] F5/E tau 0.60: |X_tau| 600 |D'(x*)| 288 (product hull 288): so:S to|pair:S to|site:S (0.3s)
+[    4s] F5/H tau 0.60: |X_tau| 948 |D'(x*)| 660 (product hull 720): so:S to|pair:S to|site:S (0.2s)
+[    5s] F5/P2 tau 0.60: |X_tau| 7385 |D'(x*)| 7385 (product hull 9072): so:- to|pair:S to|site:- (0.2s)
+[    5s] F5/P2 tau 0.70: |X_tau| 18 |D'(x*)| 8 (product hull 8): so:S to|pair:S to|site:S (0.2s)
+[    5s] F6/E tau 0.60: |X_tau| 1600 |D'(x*)| 576 (product hull 576): so:S to|pair:S to|site:S (0.3s)
+[    5s] F6/H tau 0.60: |X_tau| 2460 |D'(x*)| 1740 (product hull 2160): so:- to|pair:S to|site:S (0.3s)
+[    6s] F6/P2 tau 0.60: |X_tau| 40849 |D'(x*)| 40849 (product hull 54432): so:- to|pair:S to|site:- (0.5s)
+[    6s] F6/P2 tau 0.70: |X_tau| 27 |D'(x*)| 8 (product hull 8): so:S to|pair:S to|site:S (0.3s)
+[    7s] F7/E tau 0.60: |X_tau| 4200 |D'(x*)| 1152 (product hull 1152): so:S to|pair:S to|site:S (0.4s)
+[    7s] F7/H tau 0.60: |X_tau| 6006 |D'(x*)| 3480 (product hull 4320): so:- to|pair:S to|site:S (0.3s)
+[    9s] F7/P2 tau 0.60: |X_tau| 225451 |D'(x*)| 225451 (product hull 326592): so:- to|pair:S to|site:- (1.7s)
+[    9s] F7/P2 tau 0.70: |X_tau| 36 |D'(x*)| 8 (product hull 8): so:S to|pair:S to|site:S (0.3s)
+[   10s] F8/E tau 0.60: |X_tau| 11025 |D'(x*)| 2304 (product hull 2304): so:S to|pair:S to|site:S (1.0s)
+[   10s] F8/H tau 0.60: |X_tau| 14014 |D'(x*)| 6960 (product hull 8640): so:- to|pair:S to|site:S (0.5s)
+[   11s] K2/H tau 0.60: |X_tau| 953 |D'(x*)| 953 (product hull 961): so:- (0.2s)
+[   11s] K2/P2 tau 0.60: |X_tau| 954 |D'(x*)| 954 (product hull 961): so:- (0.2s)
+[   11s] K3/E tau 0.60: |X_tau| 27931 |D'(x*)| 25916 (product hull 26908): so:- to|pair:S to|site:S (0.6s)
+[   12s] K3/E tau 0.70: |X_tau| 8400 |D'(x*)| 5712 (product hull 5733): so:- to|pair:S to|site:S (0.6s)
+[   13s] K3/H tau 0.60: |X_tau| 20718 |D'(x*)| 20718 (product hull 21142): so:- to|pair:- to|site:- (0.7s)
+[   13s] K3/P2 tau 0.60: |X_tau| 29357 |D'(x*)| 29357 (product hull 29791): so:- to|pair:S to|site:S (0.6s)
+[   23s] K4/E tau 0.60: |X_tau| 811801 |D'(x*)| 698896 (product hull 753424): so:- to|pair:- to|site:- (9.7s)
+[   26s] K4/E tau 0.70: |X_tau| 160000 |D'(x*)| 73984 (product hull 74529): so:- to|pair:S to|site:S (2.4s)
+[   31s] K4/H tau 0.60: |X_tau| 452821 |D'(x*)| 452821 (product hull 465124): so:- to|pair:- to|site:- (5.2s)
+[   40s] K4/P2 tau 0.60: |X_tau| 898619 |D'(x*)| 898619 (product hull 923521): so:- to|pair:- to|site:- (9.2s)
+[   40s] LKSE4/E tau 0.60: |X_tau| 8694 |D'(x*)| 7722 (product hull 7812): so:- to|pair:S to|site:S (0.3s)
+[   41s] LKSE5/E tau 0.60: |X_tau| 17388 |D'(x*)| 15444 (product hull 15624): so:- to|pair:S to|site:- (1.0s)
+[   45s] LKSE6/E tau 0.60: |X_tau| 512244 |D'(x*)| 441000 (product hull 468720): so:- to|pair:S to|site:- (4.0s)
+[   48s] LKSE6/H tau 0.60: |X_tau| 294840 |D'(x*)| 268164 (product hull 275652): so:- to|pair:S to|site:- (2.9s)
+
+40 analyses of g_GB with a non-product clash-free domain; 108 models on D'(x*)
+model    models x* minimises | shares  GAP degenerate | gap certified by one branching
+so           40           13 |     13    0          0 | 0
+to|pair      34           30 |     30    0          0 | 0
+to|site      34           22 |     22    0          0 | 0
+ALL         108           65 |     65    0          0 | 0
+by family (x* minimises / shares / gap): {'F': '52/52/0', 'K': '8/8/0', 'LKSE': '5/5/0'}
+
+BRUTE FORCE: 65 models enumerated on D'(x*); root certificates accepted 65, violations 0; leaf certificates accepted 0, violations 0; leaves with a negative exact minimum 0; empty leaves 0
+[48s] wrote out/p7_05_domains.json   finished 2026-11-26 05:36:39 UTC
+DONE p7_05_domains
+[run_capped] peak anonymous resident memory 353 MB (cap 3500 MB); peak file-backed resident memory 47 MB; largest VmPeak 732 MB (ulimit -v not set); 49.0 s; exit 0
+exit 0

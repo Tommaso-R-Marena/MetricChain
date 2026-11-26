@@ -919,3 +919,15 @@ not about an additive statistic with a cutoff **[H]**.
 * **`lake env lean` on `TwoRoundsExpected` uses the stored olean of `TwoRounds`**; that the
   olean matches the source is assumed (the source is byte-identical to `5ed4072`).
 * **Prior art** for the coboundary observation: no search.
+
+---
+
+## Coordinator's correction note (2026-11-26; SCI-REV-0014 §5)
+
+Two statements of this report are wrong, as the theory division pointed out
+(THY-RES-0011 §3) and workstream R13 confirmed.  (1) §6(3), the replacement text for
+row G27: "before the review: XXI.1–4 with 21" — before the review the harness had
+XXI.1–5 with 24 mutations.  (2) "Coordinates are in the file" (of the five bridges):
+`out/certificate.txt` names those five bridges and prints the
+coordinates of four others (its `ℤ⁴` certificate); the coordinates of the five are in
+`r9_certificate.py` (dictionary `walks`).  No mathematical statement changes.

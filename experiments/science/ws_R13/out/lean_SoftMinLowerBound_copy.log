@@ -1,0 +1,29 @@
+'MetricChain.softMin_expected_queries_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.softMinLabel_admissible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.renyiG_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.renyiG_le_log_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+@MetricChain.softMin_expected_queries_ge : ∀ {X : Type u_1} [inst : Fintype X] [Nonempty X] {J : Type u_2}
+  [inst_2 : Fintype J] {Ω : Type u_3} [inst_3 : Fintype Ω] {d : X → X → ℝ} (f : X → ℝ)
+  (alg : Ω → MetricChain.QueryAlgorithm X) (P : Ω → ℝ),
+  (∀ (ω : Ω), 0 ≤ P ω) →
+    ∑ ω, P ω = 1 →
+      ∀ {ε δ : ℝ},
+        (∀ (g : X → ℝ),
+            MetricChain.Admissible d g →
+              1 - δ ≤ ∑ ω with |(alg ω).output g - Real.log (∑ x, Real.exp (-1 * (f x + g x)))| ≤ ε / 2, P ω) →
+          ∀ (φ : J → X → ℝ),
+            (∀ (j : J), MetricChain.Admissible d (φ j)) →
+              ∀ {M : J → ℝ},
+                (∀ (j : J), 0 ≤ M j) →
+                  ∑ j, M j = 1 →
+                    ∀ {t : ℝ},
+                      0 < t →
+                        ∀ {r : ℝ},
+                          ε < r →
+                            (1 - 2 * δ) * Real.exp (MetricChain.renyiG f φ M t - t * r) ≤
+                              ∑ ω, P ω * ↑((alg ω).queries (MetricChain.softMinLabel f φ M t)).card
+
+real	0m8.010s
+user	0m6.070s
+sys	0m3.061s
+exit=0
