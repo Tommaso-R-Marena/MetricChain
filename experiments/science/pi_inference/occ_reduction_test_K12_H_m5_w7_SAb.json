@@ -1,0 +1,108 @@
+{
+ "seq": "K12",
+ "bb": "H",
+ "m": 5,
+ "w": 7,
+ "chat": "SAb",
+ "Gamma_kT": 2.4048324206780944,
+ "rules": {
+  "pair": {
+   "width_zero": 0.14139890746810124,
+   "info": {
+    "exact": 350,
+    "reduced": 365,
+    "far_pairs": 10,
+    "reduced_sup": 0.2120259246689784
+   },
+   "S": {
+    "lnZ_lo": 516.8472989640381,
+    "lnZ_hi": 517.4449037597151,
+    "width": 0.5976047956769435,
+    "viol_gibbs": 0
+   },
+   "B": {
+    "lnZ_lo": 517.0189436447163,
+    "lnZ_hi": 517.2393332471256,
+    "width": 0.22038960240934102,
+    "viol_gibbs": 0
+   },
+   "T": {
+    "lnZ_lo": 517.0322039561343,
+    "lnZ_hi": 517.2238320424176,
+    "width": 0.1916280862833446,
+    "viol_gibbs": 0
+   },
+   "floor_viol": 0
+  },
+  "occ": {
+   "width_zero": 0.14100376724354646,
+   "info": {
+    "exact": 350,
+    "reduced": 365,
+    "far_pairs": 10,
+    "reduced_sup": 0.26746509344502556,
+    "first_order": 1.6844679826040954e-05,
+    "far_first_order": 0.0,
+    "far_kind": {
+     "anchored, kept site i": 0,
+     "anchored, kept site j": 0,
+     "P3": 0
+    }
+   },
+   "S": {
+    "lnZ_lo": 516.8473738484395,
+    "lnZ_hi": 517.4444965911857,
+    "width": 0.5971227427462509,
+    "viol_gibbs": 0
+   },
+   "B": {
+    "lnZ_lo": 517.0190389893219,
+    "lnZ_hi": 517.2390094706234,
+    "width": 0.21997048130151597,
+    "viol_gibbs": 0
+   },
+   "T": {
+    "lnZ_lo": 517.0323058750892,
+    "lnZ_hi": 517.223530046479,
+    "width": 0.19122417138987657,
+    "viol_gibbs": 0
+   },
+   "floor_viol": 0
+  },
+  "occ+": {
+   "width_zero": 0.007132567751341412,
+   "info": {
+    "exact": 350,
+    "reduced": 365,
+    "far_pairs": 10,
+    "reduced_sup": 0.26746509344502556,
+    "first_order": 1.6844679826040954e-05,
+    "far_first_order": 0.004434296526749333,
+    "far_kind": {
+     "anchored, kept site i": 1,
+     "anchored, kept site j": 9,
+     "P3": 0
+    }
+   },
+   "S": {
+    "lnZ_lo": 516.9183146928258,
+    "lnZ_hi": 517.3769667731226,
+    "width": 0.45865208029681526,
+    "viol_gibbs": 0
+   },
+   "B": {
+    "lnZ_lo": 517.0883416926577,
+    "lnZ_hi": 517.1732076659482,
+    "width": 0.08486597329056167,
+    "viol_gibbs": 0
+   },
+   "T": {
+    "lnZ_lo": 517.1013638485733,
+    "lnZ_hi": 517.1580584234716,
+    "width": 0.05669457489830165,
+    "viol_gibbs": 0
+   },
+   "floor_viol": 0
+  }
+ }
+}

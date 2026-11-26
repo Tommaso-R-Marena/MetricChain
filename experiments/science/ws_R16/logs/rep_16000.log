@@ -1,0 +1,13 @@
+# R16 replication (own code r16lib.py). u = 1, a = 0.110944, n = 16000, n a = 1775.1051
+# started 2026-11-26T08:59:56Z
+n=16000 phi_1=0.250: two 0.8426 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.7223 [2L+ rungs: 18 of 40 (15-21, 30-40); max(xout - x_l) over them 0] | searched 0.4814 [2L+ rungs: 26 of 40 (15-40); max(xout - x_l) over them 0] |   [2 s]
+n=16000 phi_1=0.275: two 0.8162 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.6992 [2L+ rungs: 18 of 40 (15-21, 30-40); max(xout - x_l) over them 0] | searched 0.4862 [2L+ rungs: 26 of 40 (15-40); max(xout - x_l) over them 0] |   [4 s]
+n=16000 phi_1=0.300: two 0.7904 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.6761 [2L+ rungs: 18 of 40 (15-21, 30-40); max(xout - x_l) over them 0] | searched 0.4782 [2L+ rungs: 26 of 40 (15-40); max(xout - x_l) over them 0] |   [5 s]
+n=16000 phi_1=0.325: two 0.7645 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.6529 [2L+ rungs: 18 of 40 (15-21, 30-40); max(xout - x_l) over them 0] | searched 0.4996 [2L+ rungs: 26 of 40 (15-40); max(xout - x_l) over them 0] |   [7 s]
+n=16000 phi_1=0.350: two 0.7387 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.6298 [2L+ rungs: 17 of 40 (16-21, 30-40); max(xout - x_l) over them 0] | searched 0.4900 [2L+ rungs: 25 of 40 (16-40); max(xout - x_l) over them 0] |   [9 s]
+n=16000 phi_1=0.400: two 0.6864 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.5840 [2L+ rungs: 17 of 40 (16-21, 30-40); max(xout - x_l) over them 0] | searched 0.5281 [2L+ rungs: 25 of 40 (16-40); max(xout - x_l) over them 0] |   [11 s]
+n=16000 phi_1=0.450: two 0.6341 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.5500 [2L+ rungs: 17 of 40 (16-21, 30-40); max(xout - x_l) over them 0] | searched 0.5500 [2L+ rungs: 25 of 40 (16-40); max(xout - x_l) over them 0] |   [12 s]
+n=16000 phi_1=0.500: two 0.5899 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.5899 [2L+ rungs: 17 of 40 (16-21, 30-40); max(xout - x_l) over them 0] | searched 0.5899 [2L+ rungs: 25 of 40 (16-40); max(xout - x_l) over them 0] |   [14 s]
+n=16000 best over these outer fractions: two 0.5899 (phi_1 = 0.5); tuned 0.5500 (phi_1 = 0.45); searched 0.4782 (phi_1 = 0.3)
+# finished 2026-11-26T09:00:10Z; elapsed 14 s
+peak RSS MB 57.33984375

@@ -1,0 +1,17 @@
+[07:46:24] START python3 -B p8_14_exact_terms12.py K12 H 0.70 4
+[07:46:38] END   (exit 0) p8_14_exact_terms12.py K12 H 0.70 4
+[07:46:38] START python3 -B p8_07_estimate.py K12 H 0.70 6
+[07:46:47] END   (exit 0) p8_07_estimate.py K12 H 0.70 6
+[07:46:47] START python3 -B p8_14_exact_terms12.py LKSE:12 H 0.60 4 --budget 1000
+[08:03:30] END   (exit 0) p8_14_exact_terms12.py LKSE:12 H 0.60 4 --budget 1000
+[08:03:30] START python3 -B p8_14_exact_terms12.py LKSE:12 H 0.60 4 --budget 1000 --resume
+[08:18:15] END   (exit 0) p8_14_exact_terms12.py LKSE:12 H 0.60 4 --budget 1000 --resume
+[08:18:15] START python3 -B p8_14_exact_terms12.py LKSE:12 H 0.60 4 --budget 1000 --resume
+[08:18:15] END   (exit 0) p8_14_exact_terms12.py LKSE:12 H 0.60 4 --budget 1000 --resume
+[08:18:15] START python3 -B p8_14_exact_terms12.py LKSE:12 H 0.60 4 --budget 1000 --resume
+[08:18:15] END   (exit 0) p8_14_exact_terms12.py LKSE:12 H 0.60 4 --budget 1000 --resume
+[08:18:15] START python3 -B p8_07_estimate.py LKSE:12 H 0.60 7
+[08:18:26] END   (exit 0) p8_07_estimate.py LKSE:12 H 0.60 7
+[08:18:26] START python3 -B p8_12_certificate.py LKSE:12 H 0.60 5 7 --variant SAb --budget 1000
+[08:22:22] END   (exit 0) p8_12_certificate.py LKSE:12 H 0.60 5 7 --variant SAb --budget 1000
+[08:22:22] QUEUE DONE queue_X2.txt

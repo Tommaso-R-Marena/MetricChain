@@ -1,0 +1,13 @@
+=== p8_14_exact_terms12: K5 on H, tau 0.7: 122 atoms, 5 sites, states per site [14, 14, 12, 7, 7]; anchor (ICM) (10, 10, 8, 3, 3); ball of radius 4
+(1) ball of radius 4: 48324 values read from cache/ball_K5_H_0.70_M4_8b9e31c706.npz
+    48 ball values re-evaluated with P3's own evaluator (GBModel.energy): largest deviation 1.1e-12 kcal/mol
+(2) anchored terms of order <= 4: 31 tables [0s, RSS 125 MB]
+    identity g(x) = sum of the anchored terms over the subsets of S(x), at 200 ball states: largest deviation 0.0e+00 kcal/mol
+(3) the truth in the anchor context, by order: M_T = max_y |d_T(y_T)| (kcal/mol; kT in brackets)
+    order 1:    5 subsets: sum 1.1269e+02 [189 kT], largest 3.104e+01, median 2.200e+01; sum of the rms over the states of T 6.4387e+01
+    order 2:   10 subsets: sum 7.0488e+01 [118.2 kT], largest 1.344e+01, median 6.876e+00; sum of the rms over the states of T 2.0846e+01;  fall of the sum from order 1: 1.6-fold
+    order 3:   10 subsets: sum 1.5844e+00 [2.658 kT], largest 7.734e-01, median 4.274e-02; sum of the rms over the states of T 1.1962e-01;  fall of the sum from order 2: 44.5-fold
+        by span (last - first site): 2: 10.2 %, 3: 10.5 %, 4: 79.3 %
+    order 4:    5 subsets: sum 2.9757e-02 [0.04991 kT], largest 1.694e-02, median 4.084e-03; sum of the rms over the states of T 1.5350e-03;  fall of the sum from order 3: 53.2-fold
+        by span (last - first site): 3: 15.5 %, 4: 84.5 %
+DONE in 0.1 s; peak RSS 151 MB

@@ -1758,3 +1758,132 @@ last section is for us: they fetched our previous commit, reproduced the table b
 the major finding of SCI-REV-0014 and accept it, and offer their new section for
 review.  Answered in SCI-RES-0018: the two pending messages go out unchanged with a
 line in their headers; the review is accepted and not started.
+
+### Cycle 57 — the charged case read and checked before it is published; a theorem tested with a family built to break it; a prediction for the sampler on lysine
+
+**Reading.**  Workstream P8's report (1 695 lines) was read in full between
+08:30 and 08:53 UTC (clock read at the end).  Its claim: workstream P3's cross bound
+does carry the Gaussian factor, the slack is the merging of maxima over host
+rotamers, and with the maximum taken state-wise (P3's own theorem; variant 'Sb')
+plus a new statement about anchored hosts (Theorem AH; variant 'SAb') the constants
+of Lys₁₂ fall from 689 / 145 / 23.4 to 34.0 / 2.40 / 0.136 `k_BT` at orders 4 / 5 / 6
+and the certified bracket of Lys₁₂ on the helix at order 5 is 0.19 nats.
+
+**Prediction for the nested sampler on Lys₁₂, written at 09:04 UTC (clock read),
+before the run is started.**  Outer sandwich: triple form, band 7, 'SAb', `D ≈ 0.19`
+nats.  The inner sandwich pays the envelope only, and P8's first-order estimate of
+the envelope bracket is `2·10⁻⁵` nats, so `E_q ρ ≈ 10⁻⁴`: nearly nothing is left
+for evaluations, and the width is the proposal term.  With `N_f = 400 000`
+proposals and `N = 1 200` evaluations I expect: as stated by the theory division
+(Hoeffding) about `2·10⁻³` nats; two-end form (Hoeffding) about `1·10⁻³`; with
+empirical Bernstein half-widths about `4·10⁻⁴` if the standard deviation of `b`
+under `q` is near 0.2; the plain sampler with the same 1 200 evaluations about
+`0.015` (Hoeffding) and `0.01` (empirical Bernstein).  The point estimate should
+agree with P8's uncertified reweighting estimate `517.1285 ± 0.0009`.  Cost: one
+build of the band-7 models (a minute, 2.3 GB), about `2.3·10⁶` draws of the floor,
+400 000 evaluations of 794 anchored tables, 1 200 evaluations of `g`.
+
+**The prediction for Lys₁₂ against the run** (`nested_sampler_K12_H_m5_w7_T_window_SAb.log`,
+finished 09:26 UTC).  Predicted: about `2·10⁻³` nats as stated, `1·10⁻³` two-end,
+`4·10⁻⁴` with empirical Bernstein half-widths if the standard deviation of `b` were
+0.2; envelope bracket `2·10⁻⁵`.  Measured: `1.88·10⁻³`, `0.95·10⁻³`, `2.2·10⁻⁴`
+(the standard deviation of `b` is 0.097); envelope bracket `9·10⁻⁶`; point estimate
+`517.128535` (P8's reweighting: `517.1285 ± 0.0009`).  **Not predicted:** only 19 of
+the 400 000 proposals are accepted with probability `ρ`, so the run evaluated the
+energy at 19 states, not 1 200, and the "plain sampler with the same number of
+evaluations" in the log is a plain sampler with 19 — my two numbers for a plain
+sampler with 1 200 evaluations were not tested.  The first attempt at this run was
+stopped after sixteen minutes: workstream P3's band sampler recomputes the whole
+transfer-matrix pass at every call, and the sampler calls it once per batch; with the
+messages computed once the proposals take 14 seconds (identical output on Lys₅).
+
+**Prediction for (LKSE)₃, written at 09:26 UTC (clock read), before the run.**
+Outer sandwich: P8's, triple form, band 7, 'SAb', `[654.8638, 659.3505]`, `D = 4.49`
+nats; P8's uncertified estimate `655.79 ± 0.09`, so `E_q W ≈ 0.017`.  The envelope
+bracket is not known: the first-order estimate on Gibbs states is 0.013 nats, but
+the floor's samples sit at nine side chains off the anchor, where the envelope is
+several `k_BT`; my guess is 0.1 nats, i.e. `E_q ρ ≈ 0.003`, about 1 200 accepted
+among 400 000 proposals.  Then: two-end form with empirical Bernstein about
+`0.03–0.04` nats (proposal term; the variance of `b` near its mean 0.017); two-end
+Hoeffding about 0.17; as stated about 0.34; plain sampler with 1 200 evaluations
+about 1 nat (empirical Bernstein) and 2.7 (Hoeffding).  If the envelope bracket is
+above one nat the guess fails and the evaluation term decides.
+
+**(LKSE)₃ against the prediction** (`nested_sampler_LKSEc12_H_m5_w7_T_window_SAb.log`).
+The guess failed where I said it could: the envelope bracket is **1.23 nats**, not
+0.1 (the proposals sit at nine side chains off the anchor, where the envelope is
+tens of `k_BT`), `E_q ρ = 0.058`, 23 148 proposals accepted, 1 200 evaluated.
+Widths: two-end form with empirical Bernstein **0.169 nats** (predicted 0.03–0.04);
+two-end Hoeffding 0.42 (predicted 0.17); as stated 0.64 (predicted 0.34); plain
+sampler with the same 1 200 evaluations 1.18 (empirical Bernstein; predicted about 1)
+and 1.70 (Hoeffding; predicted 2.7 — its lower end is clipped at the certified one).
+Point estimate `655.611`; P8's reweighting estimate `655.79 ± 0.09` is two of its
+standard errors above.  A certified bracket of 4.49 nats becomes 0.17 nats at
+probability 0.95 with 1 200 evaluations.
+
+**Prediction for the larger run, written at 09:34 UTC (clock read) before it starts**
+(`N_f = 4·10⁶` proposals, `N = 12 000` evaluations, outer sandwich with the anchored
+split of the far pairs): the half-width in `W` should fall from `2.0·10⁻³` to about
+`6·10⁻⁴` (both terms by `√10`), i.e. a bracket of about **0.05 nats** (two-end,
+empirical Bernstein), if `D` stays near 4.4.
+
+**The larger (LKSE)₃ run** (`nested_sampler_LKSEc12_H_m5_w7_T_window_SAb_occ.log`):
+predicted 0.05 nats, measured **0.041** — `[655.592089, 655.632643]`, inside the
+interval of the first run.
+
+**What the verification of P8 was, in the order it happened.**  (1) The theorem,
+re-derived: the remainder identity names "the `m` largest elements" of a set and
+nothing else of the order, so any order serves; with a term's hosts last a host
+outside `T` cannot precede `min T`.  The hypothesis can be "at most `m` hosts".
+(2) A test of mine on Gaussian tables passed — and so did its three controls, which
+were meant to fail.  A sum of many maxima against one number is slack on generic
+tables; the test was rewritten on sums of products built so that the bound is
+attained (ratio 1.0000) and every wrong neighbour of the statement is violated,
+`|H| = m + 1` among them.  (`DEAD_ENDS.md` SD59.)  (3) Every state of Lys₄, Lys₅,
+LKSE:5 with my own remainder code; 4 250 uniformly random states of Lys₁₂ — where
+the true fifth-order remainder never exceeds `8·10⁻⁴` kcal/mol: the bound is right
+and still three orders of magnitude above what the ensemble pays.  (4) P8's nine
+brackets by another driver: equal in every printed digit.  (5) P8's validation chain
+for Lys₄, re-run in a scratch copy.  The constants themselves nobody recomputed.
+
+**How the far pairs were found.**  P8 had written that the Lys₁₂ bracket was limited
+by the band, and named the triples `i, i+3/4, i+7`.  I wrote a rule for those terms
+(keep the sub-tuple that rarely leaves the anchor) and, to validate it against
+enumeration, ran Lys₅ with an artificially narrow band.  The rule did nothing
+(3.543 against 3.544 nats).  The fourth line of the table — the same rule plus a
+different split of the pairs beyond the band, added almost as an afterthought — read
+0.046.  The cost had never been the terms.  (`DEAD_ENDS.md` SD60.)  The split around
+the anchor is two lines; workstream P3's split has been in every certificate with a
+band since checkpoint 40.  For apolar and mobile side chains it cost little, which
+is why nobody saw it.
+
+**Two runs stopped for the same kind of reason.**  The Lys₁₂ sampler recomputed the
+transfer-matrix pass once per batch (workstream P3's `sample` does so at every
+call): stopped after sixteen minutes, messages now computed once, 14 seconds.  The
+Ser₂₀ sampler would have computed one closed-form sum per distinct changed set —
+right for frozen ensembles, hours for a mobile one: stopped, a table of all 15 504
+constants instead (`nested_sampler_p3table.py`).  In both cases I had written down
+the *number* of steps before the run and not the *cost of one step*, which is what
+the rule of cycle 56 asks for.  Partial logs: in the scratchpad, not in the tree.
+
+**Workstream R16** handed back at 10:00 UTC (read from the clock when its message
+arrived): the theory division's certified third level is right, and every one of its
+159 certified numbers is reproduced by code that imports nothing of theirs; the one
+major finding is on the other side of their comparison (five two-level worst cases
+are from a design with another ladder), found because the workstream had to decide
+which ladder to implement.  I read the 706 lines, re-read the lines it quotes in
+their export and in the two engineering messages, and re-ran six of its scripts:
+identical.  Two of its logs had not reached their last line (a failed assertion; a
+run it stopped itself) and were moved out of the tree, as were eighteen superseded
+logs of P8.  Published as SCI-REV-0016.
+
+**The theory head `9befefd`** changes no file that their audit builds or runs; the
+documents pass their reference check here.  The full script was not re-run — 41
+minutes of four cores for inputs that are byte-identical to those audited three
+hours earlier.
+
+**Serine at twenty residues** (`8.2·10¹⁵` states): the ball of order 5 took 78
+minutes; certified within 0.287 nats, 0.253 with the split.  The refined rule,
+printed before the ball, said 0.210 — and `0.210 + 0.077` and `0.210 + 0.043`, the
+reductions measured separately, are the two brackets to three decimals.  The sampler
+on it was still building its table when this was written (10:18 UTC, clock read).

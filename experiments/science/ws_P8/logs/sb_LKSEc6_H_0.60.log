@@ -1,0 +1,30 @@
+=== p8_02_signblind: LKSE:6 on H, tau 0.6: atoms 120, sites 6, 217152 states, anchor (1, 14, 1, 7, 1, 7); 42 subsets; NRAND 24, NCAND 4, NRS 4
+    (A) per-subset searches done, 4 s; chain truth <= LS_T <= PP_T <= P3: 126 checks, 0 violations
+    (C) order 3: remainder search at 12 states done, 5 s; largest |remainder| found at a single state: 1.1081e+01
+    (C) order 4: remainder search at 12 states done, 5 s; largest |remainder| found at a single state: 9.4389e-01
+    (C) order 5: remainder search at 12 states done, 6 s; largest |remainder| found at a single state: 9.3762e-02
+    (C) order 6: remainder search at 12 states done, 7 s; largest |remainder| found at a single state: 1.6849e-03
+    patterns evaluated at all 217152 states, 315 s
+--- order 3: 20 subsets (kcal/mol)
+    sums over subsets: truth 2.7958e+00 | all-plus 2.5209e+01 | remainder pattern 2.5651e+01 | (A) best pattern per subset 3.5217e+01 | best pair-by-pair 8.8923e+01 | P3 6.4399e+02
+    (A)/truth >= 12.60 [per subset min/median/max 3.71/11.98/44.53];  (B)/truth >= 9.18;  pair-by-pair/(A) <= 2.53;  P3/(A) <= 18.29;  P3/pair-by-pair = 7.24
+    remainder sup_x|g - I_2g|: truth 8.4727e-01 | all-plus 9.6700e+00 | pattern found 1.1081e+01 (90 % of the charges negative; 43 % as the true signs) | Gamma_3 6.4399e+02
+    (C) every sign-blind bound of the remainder / truth >= 13.08;  Gamma_3 / (C) = 58.1;  Gamma_3 / truth = 760
+--- order 4: 15 subsets (kcal/mol)
+    sums over subsets: truth 2.1016e-01 | all-plus 1.3120e+00 | remainder pattern 1.6005e+00 | (A) best pattern per subset 2.0400e+00 | best pair-by-pair 6.0876e+00 | P3 1.4295e+02
+    (A)/truth >= 9.71 [per subset min/median/max 5.03/10.94/23.72];  (B)/truth >= 7.62;  pair-by-pair/(A) <= 2.98;  P3/(A) <= 70.08;  P3/pair-by-pair = 23.48
+    remainder sup_x|g - I_3g|: truth 6.2693e-02 | all-plus 7.4819e-01 | pattern found 9.5733e-01 (76 % of the charges negative; 49 % as the true signs) | Gamma_4 1.4295e+02
+    (C) every sign-blind bound of the remainder / truth >= 15.27;  Gamma_4 / (C) = 149.3;  Gamma_4 / truth = 2280
+--- order 5: 6 subsets (kcal/mol)
+    sums over subsets: truth 1.1773e-02 | all-plus 6.9076e-02 | remainder pattern 1.0944e-01 | (A) best pattern per subset 1.1575e-01 | best pair-by-pair 2.9806e-01 | P3 1.5916e+01
+    (A)/truth >= 9.83 [per subset min/median/max 6.79/8.59/12.11];  (B)/truth >= 9.30;  pair-by-pair/(A) <= 2.58;  P3/(A) <= 137.50;  P3/pair-by-pair = 53.40
+    remainder sup_x|g - I_4g|: truth 5.7703e-03 | all-plus 6.0864e-02 | pattern found 9.3762e-02 (18 % of the charges negative; 52 % as the true signs) | Gamma_5 1.5916e+01
+    (C) every sign-blind bound of the remainder / truth >= 16.25;  Gamma_5 / (C) = 169.7;  Gamma_5 / truth = 2758
+--- order 6: 1 subsets (kcal/mol)
+    sums over subsets: truth 4.0714e-04 | all-plus 3.9652e-04 | remainder pattern 1.7080e-03 | (A) best pattern per subset 1.7080e-03 | best pair-by-pair 6.8713e-03 | P3 8.0460e-01
+    (A)/truth >= 4.20 [per subset min/median/max 4.20/4.20/4.20];  (B)/truth >= 4.20;  pair-by-pair/(A) <= 4.02;  P3/(A) <= 471.09;  P3/pair-by-pair = 117.10
+    remainder sup_x|g - I_5g|: truth 4.0714e-04 | all-plus 3.9652e-04 | pattern found 1.7080e-03 (44 % of the charges negative; 57 % as the true signs) | Gamma_6 8.0460e-01
+    (C) every sign-blind bound of the remainder / truth >= 4.20;  Gamma_6 / (C) = 471.1;  Gamma_6 / truth = 1976
+    chain checks in all: 210, violations 0
+    P3's Gamma_m against the remainders of the sign-flipped systems (true signs, all-plus, pattern found) at every state: 2605824 state checks, 0 violations; smallest Gamma_m / sup|remainder| = 58.12
+DONE in 315.6 s; peak RSS 1090 MB

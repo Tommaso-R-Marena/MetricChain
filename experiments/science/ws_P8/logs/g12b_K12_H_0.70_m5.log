@@ -1,0 +1,6 @@
+=== p8_04b_gamma12_blocks: K12 on H, tau 0.7: atoms 276, sites 12; anchor (10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3); order 5: 792 subsets
+    subset 792/792 done, checkpoint written, 65 s
+    per-subset chains Sb <= S, SAb <= SA, SAb <= Sb: 2376 comparisons, 0 violations
+    Gamma_5[Sb ] =      1.51444 kcal/mol =      2.54032 kT;  P3 / Sb: sums 57.167; per subset min 8.06, median 47.76, max 796.55;  pair-wise / block-wise: 1.288
+    Gamma_5[SAb] =      1.43367 kcal/mol =      2.40483 kT;  P3 / SAb: sums 60.388; per subset min 8.67, median 54.06, max 1123.31;  pair-wise / block-wise: 1.282
+DONE in 65.4 s

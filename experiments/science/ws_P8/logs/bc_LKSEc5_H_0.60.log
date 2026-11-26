@@ -1,0 +1,12 @@
+=== p8_03c_blockcheck: LKSE:5 on H, tau 0.6: atoms 98, sites 5, 14508 states, anchor (1, 15, 1, 7, 1); 16 subsets, 22 blocks; accumulators at most 0.04 GB
+    row 98/98 done, checkpoint written, 20 s, RSS 163 MB
+    B1 'Sb' block bound >= exact block constant (all contexts; absolute values term by term): 352 comparisons, 0 violations; ratio bound/exact (exact > 1e-10): min 1.0230, median 2.53, max 17.1
+    B2 'SAb' block bound >= exact block constant with the hosts outside T at the anchor: 352 comparisons, 0 violations; ratio bound/exact (exact > 1e-10): min 1.0151, median 2.59, max 17.1
+    (for information: 'SAb' < exact ALL-context block constant in 93 of 352 cases)
+    B3 every state, block and order: sum over the terms of the block of |tau - I_(m-1) tau|(x) <= block envelope: 957528 comparisons per variant; violations Sb: 0, SAb: 0; smallest ratio envelope/exact: Sb 1.0231, SAb 1.0151
+    B4 every state, 5 charge systems (true charges, all charges positive, sign pattern of order 3, sign pattern of order 4, sign pattern of order 5): |g_s - I_(m-1) g_s| <= envelope: 217620 state checks per variant; violations Sb: 0, SAb: 0; smallest ratio envelope/|remainder|: Sb 4.92, SAb 4.78
+    B5 'Sb' against P3's termwise.TermBound in anchored mode (16 subsets): largest relative deviation 5.3e-16;  Sb <= S, SAb <= SA, SAb <= Sb: 48 comparisons, 0 violations
+--- order 3: sums over 10 subsets (kcal/mol): truth 1.1822e+00 | exact block constants 3.5539e+01 (restricted 3.4564e+01) | pair-by-pair 4.9828e+01 | SAb 1.2264e+02 | Sb 1.2632e+02 | SA 1.3189e+02 | S 1.3655e+02 | P3 2.8663e+02;  P3/SAb = 2.34, S/Sb = 1.081, SAb/truth = 103.7
+--- order 4: sums over 5 subsets (kcal/mol): truth 1.0834e-01 | exact block constants 1.8691e+00 (restricted 1.8275e+00) | pair-by-pair 2.7569e+00 | SAb 1.1514e+01 | Sb 1.1669e+01 | SA 1.2212e+01 | S 1.2421e+01 | P3 2.9150e+01;  P3/SAb = 2.53, S/Sb = 1.064, SAb/truth = 106.3
+--- order 5: sums over 1 subsets (kcal/mol): truth 4.4083e-03 | exact block constants 6.8731e-02 (restricted 6.8731e-02) | pair-by-pair 9.5455e-02 | SAb 5.8375e-01 | Sb 5.8375e-01 | SA 6.2808e-01 | S 6.2808e-01 | P3 1.5311e+00;  P3/SAb = 2.62, S/Sb = 1.076, SAb/truth = 132.4
+DONE in 22.2 s; peak RSS 242 MB

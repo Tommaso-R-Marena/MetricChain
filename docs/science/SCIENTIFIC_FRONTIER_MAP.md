@@ -126,6 +126,26 @@ barrier), not totals.
 
 ## Change note
 
+*Note after addendum A17 (18) and workstream P8 (2026-11-26; no new version of the table;
+the frontier named in version 5.4 has moved).*  Version 5.4 named the constants of
+charged side chains as the frontier of the certificate line.  **For the charged
+homopolymer it is passed:** workstream P8 found the slack (the maximum over the
+rotamers of a term's host side chains, taken ingredient by ingredient), removed it
+(workstream P3's theorem state-wise; a new statement on anchored hosts), and the
+coordinator verified the statement and the brackets; a split of the pairs beyond the
+band around the anchor removed three quarters of what was left; Lys₁₂ on the helix
+(`9.5·10¹⁰` states) is certified within 0.057 nats and, with the theory division's
+nested sampler, known to `3·10⁻⁵` nats at probability 0.95.  **The frontier is now:**
+(i) the mixed-charge sequence *deterministically* (4.3 nats certified, 0.04 sampled:
+its constants sit on neutral pairs, where a sign-blind bound cannot be sharp);
+(ii) charged chains beyond twelve residues (the state-wise constants have no closed
+form over the subsets); (iii) unchanged and more pressing with every result: no
+bracket of this line has been checked by an independent implementation, the
+constants rest on paper proofs, and the addenda A17 (13)–(18) are unrefereed.  The
+method remains model-relative: nothing here touches the bottleneck of *meaning* —
+the guarantee is relative to an energy model nobody has validated on these
+peptides.
+
 *Note after addendum A17 (17) (2026-11-26; no new version: no row changes).*  Two
 statements of the theory division were run on real instances.  Their nested sampler
 reaches the envelope at its own price in evaluations and brings the serine helix of

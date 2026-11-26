@@ -289,6 +289,26 @@ read.  *Kind of check:* a re-run of their script on a third machine.  Not done:
 reading the 28 mutations added since `63e36f7`; the harness in its full mode.
 
 
+### 1.10 The theory division's head `9befefd` (twentieth checkpoint) — nothing that the audit builds or runs has changed; the one input that changed passes
+
+Between `f7df44f` and `9befefd` the theory division changed documents and added one
+directory of coordinator checks (`experiments/coordinator_checks/three_levels_certified/`,
+the subject of our review workstream R16).  Checked here on 2026-11-26, 09:24 UTC:
+
+| item | value |
+|---|---|
+| files changed under `proofs/`, `scripts/`, `lake-manifest.json`, `lean-toolchain`, `lakefile.lean` | **0** (`git diff --name-only f7df44f 9befefd -- …`; the listings `git ls-tree -r <head> -- proofs scripts` of the two heads are identical, 81 Lean files) |
+| files changed under `experiments/` outside the new directory | **0** — the falsification harness, the mutation tests, the benchmarks and the reference checker are the files audited in §1.9 |
+| the audited input that did change: the documents, through `scripts/check_doc_refs.py` | run on `git archive 9befefd`, extracted outside the repository: **`doc references OK (2811 declarations indexed)`**, exit code 0 |
+| log | `experiments/science/audit_replication/docrefs_9befefd.log` |
+
+*Kind of check:* identity of inputs plus a re-run of the one step whose input changed —
+**not** a re-run of `audit_all.sh` at this head.  The build, the axiom audit, the
+harness and the mutation tests were not repeated: their inputs are byte-identical to
+those of §1.9, which passed on this machine 07:44–08:25 UTC the same day.  The new
+directory is not part of the audit script; it is being reviewed (R16), including one
+replication with code that does not import the theory division's.
+
 ## 2. Reviews
 
 | id | object | by | state |
@@ -306,6 +326,7 @@ reading the 28 mutations added since `63e36f7`; the harness in its full mode.
 | SCI-REV-0013 | the theory division's seventeenth checkpoint at `9408e33`, requested by them (THY-RES-0010 §9.2): the corrected Theorem 11.110(e); Propositions 11.18e, 11.113; Corollary 11.114; Theorem 11.18d as written; `BarrierCertificate.lean` and Theorem 11.115 against our formats; harness XI.19, XI.20, XXIV.6–XXIV.10 | workstream R12 (`workstreams/R12_REPORT.md`) | **published.**  No critical finding; **two major** (Proposition 11.18e(b) false as written — a counter-algorithm; the necessary order of Proposition 11.113(d) too large by `e^Δ`); eleven minor with replacement texts.  *Reviewed (re-derived):* both ends of 11.110(e); the dimension, closure and unisolvence of 11.18e; the support lemma (a proof by induction); 11.113(a)–(c); 11.114 (a two-vertex linear programme).  *Replicated with own code:* exact optimal packings on 720 + 1 425 small boxes; the support lemma exhaustively in 128 grid × order cases; 200 exact sandwiches and 400 000 simulated runs; 252 ratio cases; the barrier instances in exact rationals; the adjacency lemma over all box pairs on nine grids.  *Their code re-run:* seven harness blocks; 41 + 56 mutations (all caught); a copy of `BoxClass.lean` compiled against our tree.  *Machine-checked by the workstream:* seven statements (`R12Additions.lean`).  *By the coordinator:* the two sentences read at `9408e33`; M1 re-derived and recomputed with separate code (least good fraction exactly `0.5` over 3 834 affine functions; failure `2⁻⁵` on the extremal member); M2 derived independently before the report was read and its exact binomial failure computed; `R12Additions.lean` compiled (exit 0, standard axioms); `r12_03`, `r12_04` re-run from a clean copy (identical apart from the timing line).  **Not checked by the coordinator:** the other replications and re-runs; `BoxRatio.lean`, `BarrierCertificate.lean` (built by the audit of §1.7, statements read by the workstream only) |
 | SCI-REV-0014 | the theory division's eighteenth checkpoint at `63e36f7`, requested by them (THY-RES-0011 §9(a)): the rate of the level recursion (remark after Theorem 11.53; `t4_rate.py`); how five of our reviews were applied (§11.32; Propositions 11.18b, 11.18c; 11.69b; §§11.18–11.19; 11.110(f)) | workstream R13 | **published.**  No critical finding.  The rate is correct and machine-checked by the workstream on top of their lemmas (`RateFull.lean`, standard axioms; compiled again by the coordinator).  One major: Proposition 11.117(b) without "symmetric" is false (counter-example computed by the workstream and by the coordinator).  Twelve minor in their texts, five in ours (linked corrections).  *Kind:* review + replication (own one-sided recursion, block recursions, brute force of share instances) + re-runs of their harness blocks and of `t4_rate.py` + a machine check.  Not checked: their Lean proofs; Theorem 11.116 beyond (c) |
 | SCI-REV-0015 | theory report at `f7df44f`: Proposition 11.18e(b′)(i), Proposition 11.18f, Proposition 11.113a, `ratio_expected_queries_ge_mixed` against Corollary 11.114, the necessity argument of Proposition 11.113(d), the outline of the conjecture (b′)(ii) — requested by the theory division (THY-RES-0012) | workstream R15 | **published.**  Nothing false; no critical or major finding; twelve minor (conditions to add: the sampling scheme and the constant of the nested sampler's bound; a linear order and a range of validity for the first-order allocation rule; the conditions on "attained"; four precisions of the necessity argument; two sentences of Corollary 11.114), each with a replacement text; six additions (the bound with `t_f` for `2t_f`; the `f ∓ γ` criterion; ordering vertices; a finite-depth one-site count; a necessity bound that grows with `ln(1/δ)`; `S` is one interval).  Replicated with own code on synthetic instances (168 000 coverage runs; exact linear programmes; all 59 049 vertices of small instances); their harness blocks and `pairing_check.py` re-run.  The coordinator re-derived the main statements and re-ran all seven scripts (logs identical) |
+| SCI-REV-0016 | theory report at `9befefd`, §11.19 remark (1b), THY-RES-0013 §4 and `coordinator_checks/three_levels_certified/`: the certified third level — offered by the theory division (THY-RES-0013 §6), accepted in SCI-RES-0018 | workstream R16 (`workstreams/R16_REPORT.md`) | **published.**  No critical finding, no error in the mathematics; the rule (a two-level run of Theorem 11.56 designed for the fibre dimension, a certified accuracy at most the rung's and the failure probability `δ′` of the level above is an admissible inner procedure; the bound is monotone in the servers' costs with the outer design fixed) holds.  **One major** (M1: the two-level worst cases at five of eight sizes belong to a design with another ladder — ENG-RES-0008's `ε*·0.85^i` — than the outer design they are compared with); three minor (the abort rule of Theorem 11.56 as worded proves `C_max + M̄`; the tolerance formula is a supremum; "at the level of expectations" is the mean-run model).  *Replication* (own code, nothing of theirs imported, no instance evaluated): **159 of 159 certified numbers** of their stored outputs to four digits, 1 950 of 1 950 per-rung fields; cross-checked against our R6 exact arithmetic.  *Re-run:* their `summary.py` (byte-identical), one line of `cert3.py`, their `flat_run` on grids.  *New in the review:* without a search and without the mean-run model the comparison "three levels certified below two levels" is true at every outer fraction scanned from `n = 16 000` on and false at `4 000` and `8 000` (exact two-level cost at the flat instance: `0.5336, 0.5110, 0.5027, 0.4998, 0.4961` against `0.6106, 0.5262, 0.4782, 0.4439, 0.4381`).  *Checked by the coordinator:* the report read in full; the quoted lines of the theory report, of `r8_flat.py`, `cert3.py`, ENG-RES-0008 and ENG-RES-0014 re-read; six scripts re-run with output identical to the workstream's logs (the ladder comparison behind M1, the replication at `n = 4 000`, the validation, the 159-number comparison, the flat instance at `n = 4 000` with our engine and with theirs).  *Not checked by the coordinator:* the per-rung comparison; sizes above `4 000` beyond the stored logs; Steps 2–9 of the proof. |
 | — | our own `INFERENCE_LIMITS.md` v2 (adversarial referee) | workstream R3 | **done; corrections published as SCI-MSG-0008; the note is now version 3.**  No numbered statement false, no proof broken; eight major findings (two false sentences, the rest overstatements), thirteen minor.  Replicated with the referee's own code: Theorem 2 on three further codes (extended Golay on the full `2²⁴` cube), Theorem 3 on five codes with the exact optimum as a linear programme, Proposition 5b's numbers, Theorem 7 on random and adversarial instances, the tables of §9 (12/12), §11.1 (27/27), §11.2 (22/22), §11.4 (16/16), the engineering class tables for `n ≤ 9`.  Not re-run: the author's own scripts; the compact-decile row of §11.4.  The referee's own statements R1–R6 are **[P]**, unrefereed |
 
 * **Theory report §11.28 (ratios of macrostate weights; at `dcdfea6`) — independent review
@@ -728,6 +749,45 @@ reading the 28 mutations added since `63e36f7`; the harness in its full mode.
   `a(t)`, the treatment of ball states), the one-known-mean bound (workstream R15 is
   asked to check it), the convex-game reading, the code, the runs.  One instance per
   regime.  **Unrefereed.**
+
+* **P8 (the charged case; before SCI-MSG-0027) and addendum A17 (18) — a review of the
+  theorem, necessary conditions with independent code, and a re-run with another
+  driver; the constants themselves were recomputed by nobody.**  *Kinds of check, kept
+  apart.*  (1) **Review:** Theorem AH re-derived by the coordinator (the remainder
+  identity for an arbitrary order of the sites; hosts last); its hypothesis sharpened
+  to "at most `m` hosts"; Lemma T re-read against P3's Lemma 2 and Corollary L1.
+  (2) **Own code, a family built to break the theorem**
+  (`p8_verification/ah_synthetic_test.py`): exact restricted maxima on two grids;
+  9 900 structured functions, `1.17·10⁶` (function, state) checks, no violation, ratio
+  1 attained; three wrong versions of the statement all violated.  *The first version
+  of this test used i.i.d. Gaussian tables only, on which eleven wrong versions are
+  not violated* (`DEAD_ENDS.md` SD59).  (3) **Own code for the left side, P8's
+  constants on the right** (`lys_enum_check.py`): `|g − I_{m−1}g| ≤ Σ_{T⊆S(x)} ĉ_T` at every
+  state of Lys₄, Lys₅, LKSE:5, orders 3 to `n`, variants 'Sb' and 'SAb' — no violation.
+  (4) **Another driver** (`lys12_rerun.py`): the nine certified brackets of P8's table
+  T10 for Lys₁₂ to every printed digit; P8's per-subset decomposition of P3's closed
+  form against closed-form sums over exclusion sets (`3·10⁻¹⁴`); the ball from P8's
+  cache after a row-by-row comparison of its states and a re-evaluation of 3 000
+  values; 4 250 uniformly random states with 4–12 side chains off the anchor — no
+  violation.  The three logs were produced twice (the script changed one sentence in
+  between): identical numbers.  (5) **Re-run** of P8's validation chain for Lys₄ in a
+  scratch copy: five logs equal line by line, timings apart (one check ran on two
+  charge systems instead of four).  (6) **A17 (18), the split around the anchor**
+  (`window_model_occ.py`, `occ_reduction_test.py`): on Lys₅ at bands 2 and 3 the
+  sandwich at all 115 248 states and the exact `ln Z` inside every bracket, for four
+  reduction rules and three share forms; beyond enumeration the sandwich at 960 Gibbs
+  states of a second sample (not the one that guides the rule) and 2 000 exact samples
+  of each floor — no violation in any run.  (7) **The sampler on the charged peptides**
+  (`nested_sampler_ext.py`): the driver validated end to end on Lys₅ (exact
+  `ln Z = 251.348445` inside all six brackets); the cached floor sampler gives output
+  identical to workstream P3's; no evaluated energy outside either sandwich in 13 279
+  evaluations (19 + 60 + 1 200 + 12 000); two predictions written before the runs —
+  one confirmed (Lys₁₂), one wrong by a factor four in the width and twelve in the
+  envelope bracket ((LKSE)₃), a third confirmed ((LKSE)₃, second run).  **Not checked
+  by anyone:** P8's implementation of the per-state ingredients (the constants);
+  workstream P3's interval enclosures; §1, §2 and most tables of P8's report
+  (read only); the (LKSE)₃ bracket of table T10 was reproduced by my test script
+  (`[654.863818, 659.350547]`), not by the re-run driver.  **Unrefereed.**
 
 ## 3. Not validated by us
 

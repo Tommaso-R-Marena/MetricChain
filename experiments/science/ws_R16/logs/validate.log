@@ -1,0 +1,17 @@
+# r16_validate.py started 2026-11-26T08:59:34Z
+(1) Q_300: max |ln B - ln B_exact| = 0.00e+00, ln E: 5.68e-14, ln T: 5.68e-14   ok
+(1) Q_1500: max |ln B - ln B_exact| = 2.27e-13, ln E: 2.27e-13, ln T: 2.27e-13   ok
+(1) Q_2500: max |ln B - ln B_exact| = 2.27e-13, ln E: 4.55e-13, ln T: 6.82e-13   ok
+(2/4) outer level n=4000 phi_1=0.375: J 45202|45202, r-dagger 355|355, m_max 340|340, K 30212|30212, ln nu0 12.258172502|12.258172502, ln Mbar 245.82772925|245.82772925, ln delta' -253.89863534|-253.89863534, x_out 0.871543880063|0.871543880063   ok
+(3/5) outer level n=4000 phi_1=0.375 (two levels): base bracket at 40 rungs in dimension 2500: max |ln cost - ln cost_exact| = 1.09e-04 (enum/sample choices that differ: 0); ln C_max 379.571825 | exact 379.571826, difference -8.77e-07   ok
+      two-level certified bound ln(C_max)/(na): 0.8553 | exact 0.8553   [1 s]
+(2/4) outer level n=4000 phi_1=0.500: J 46934|46934, r-dagger 482|482, m_max 431|431, K 30557|30557, ln nu0 12.341075208|12.341075208, ln Mbar 308.98536512|308.98536512, ln delta' -317.05627121|-317.05627121, x_out 0.871543880063|0.871543880063   ok
+(3/5) outer level n=4000 phi_1=0.500 (two levels): base bracket at 40 rungs in dimension 2000: max |ln cost - ln cost_exact| = 8.72e-05 (enum/sample choices that differ: 0); ln C_max 322.254814 | exact 322.254828, difference -1.38e-05   ok
+      two-level certified bound ln(C_max)/(na): 0.7262 | exact 0.7262   [1 s]
+(2/4) middle bounded d=2500 x=0.5 b=max phi_2=0.5: J 140802|140802, r-dagger 291|291, m_max 295|295, K 496086|496086, ln nu0 12.044659456|12.044659456, ln Mbar 217.37750316|217.37750316, ln delta' -476.06363024|-476.06363024, x_out 0.499999000000|0.499999000000   ok
+(3/5) middle bounded d=2500 x=0.5 b=max phi_2=0.5: base bracket at 30 rungs in dimension 1250: max |ln cost - ln cost_exact| = 5.82e-05 (enum/sample choices that differ: 0); ln C_max 234.796166 | exact 234.796183, difference -1.65e-05   ok
+(2/4) middle extensive d=2500 x=50 phi_2=0.7466: J 6306|6306, r-dagger 659|659, m_max 141|141, K 4892|4892, ln nu0 9.983887442|9.983887442, ln Mbar 106.09814815|106.09814815, ln delta' -364.78427523|-364.78427523, x_out 50.000000000000|50.000000000000   ok
+(3/5) middle extensive d=2500 x=50 phi_2=0.7466: base bracket at 30 rungs in dimension 634: max |ln cost - ln cost_exact| = 7.58e-05 (enum/sample choices that differ: 0); ln C_max 120.240957 | exact 120.240963, difference -5.77e-06   ok
+# checks that differ: 0
+# finished 2026-11-26T08:59:35Z; elapsed 1 s
+peak RSS MB 43.234375

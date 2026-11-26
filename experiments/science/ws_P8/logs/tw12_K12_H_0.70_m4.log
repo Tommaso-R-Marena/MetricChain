@@ -1,0 +1,11 @@
+=== p8_04c_termwise12: K12 on H, tau 0.7: 276 atoms, anchor (10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3); order 4; 8 random subsets of 495
+    T = (0, 1, 6, 8): mine (Sb) 4.1989199514e-03, P3 termwise anchored 4.1989199514e-03, relative deviation 0.0e+00;  P3 closed-form summand (gfbound) 1.1386e-01 = 27.1 x
+    T = (0, 3, 5, 6): mine (Sb) 2.4160184006e-02, P3 termwise anchored 2.4160184006e-02, relative deviation 1.4e-16;  P3 closed-form summand (gfbound) 2.3322e-01 = 9.7 x
+    T = (0, 3, 5, 11): mine (Sb) 1.1729633556e-03, P3 termwise anchored 1.1729633556e-03, relative deviation 9.2e-16;  P3 closed-form summand (gfbound) 1.8967e-02 = 16.2 x
+    T = (0, 3, 6, 11): mine (Sb) 2.8688807657e-03, P3 termwise anchored 2.8688807657e-03, relative deviation 4.5e-16;  P3 closed-form summand (gfbound) 1.0939e-01 = 38.1 x
+    T = (0, 4, 7, 10): mine (Sb) 4.1890588772e-02, P3 termwise anchored 4.1890588772e-02, relative deviation 1.7e-16;  P3 closed-form summand (gfbound) 4.9054e-01 = 11.7 x
+    T = (2, 3, 6, 7): mine (Sb) 1.7428331763e-01, P3 termwise anchored 1.7428331763e-01, relative deviation 1.6e-16;  P3 closed-form summand (gfbound) 3.1405e+00 = 18.0 x
+    T = (5, 6, 8, 9): mine (Sb) 1.7273824930e-01, P3 termwise anchored 1.7273824930e-01, relative deviation 4.8e-16;  P3 closed-form summand (gfbound) 2.7336e+00 = 15.8 x
+    T = (5, 8, 9, 10): mine (Sb) 4.9560930717e-02, P3 termwise anchored 4.9560930717e-02, relative deviation 4.2e-16;  P3 closed-form summand (gfbound) 5.3442e-01 = 10.8 x
+    largest relative deviation over 8 subsets: 9.2e-16;  time per subset: mine 0.41 s, P3's termwise 1.0 s
+DONE in 24.1 s; peak RSS 359 MB

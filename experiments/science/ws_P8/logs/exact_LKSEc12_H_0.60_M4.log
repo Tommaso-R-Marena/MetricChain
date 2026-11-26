@@ -1,0 +1,49 @@
+=== p8_14_exact_terms12: LKSE:12 on H, tau 0.6: 213 atoms, 12 sites, states per site [2, 29, 9, 12, 2, 14, 9, 12, 2, 16, 9, 13]; anchor (ICM) (1, 14, 1, 6, 1, 6, 2, 6, 1, 7, 2, 7); ball of radius 4
+    ball: 105216/3471783 evaluations, checkpoint written, 62 s, RSS 866 MB
+    ball: 199936/3471783 evaluations, checkpoint written, 122 s, RSS 868 MB
+    ball: 283136/3471783 evaluations, checkpoint written, 182 s, RSS 868 MB
+    ball: 369408/3471783 evaluations, checkpoint written, 242 s, RSS 868 MB
+    ball: 481536/3471783 evaluations, checkpoint written, 302 s, RSS 871 MB
+    ball: 602880/3471783 evaluations, checkpoint written, 362 s, RSS 871 MB
+    ball: 723712/3471783 evaluations, checkpoint written, 422 s, RSS 873 MB
+    ball: 843264/3471783 evaluations, checkpoint written, 482 s, RSS 873 MB
+    ball: 954880/3471783 evaluations, checkpoint written, 542 s, RSS 875 MB
+    ball: 1073664/3471783 evaluations, checkpoint written, 603 s, RSS 875 MB
+    ball: 1194752/3471783 evaluations, checkpoint written, 663 s, RSS 877 MB
+    ball: 1312512/3471783 evaluations, checkpoint written, 723 s, RSS 877 MB
+    ball: 1434112/3471783 evaluations, checkpoint written, 783 s, RSS 879 MB
+    ball: 1558016/3471783 evaluations, checkpoint written, 843 s, RSS 879 MB
+    ball: 1678080/3471783 evaluations, checkpoint written, 903 s, RSS 879 MB
+    ball: 1797120/3471783 evaluations, checkpoint written, 963 s, RSS 881 MB
+    ball: 1872640/3471783 evaluations, checkpoint written, 1000 s, RSS 881 MB
+BUDGET REACHED in the ball: checkpoint on disk, run the same command with --resume to continue (not a complete run)
+=== p8_14_exact_terms12: LKSE:12 on H, tau 0.6: 213 atoms, 12 sites, states per site [2, 29, 9, 12, 2, 14, 9, 12, 2, 16, 9, 13]; anchor (ICM) (1, 14, 1, 6, 1, 6, 2, 6, 1, 7, 2, 7); ball of radius 4; RESUMING the ball
+    ball checkpoint read: 1872640 of 3471783 evaluations done
+    ball: 1986816/3471783 evaluations, checkpoint written, 61 s, RSS 897 MB
+    ball: 2099200/3471783 evaluations, checkpoint written, 121 s, RSS 897 MB
+    ball: 2208768/3471783 evaluations, checkpoint written, 181 s, RSS 897 MB
+    ball: 2318336/3471783 evaluations, checkpoint written, 241 s, RSS 897 MB
+    ball: 2433536/3471783 evaluations, checkpoint written, 301 s, RSS 897 MB
+    ball: 2547968/3471783 evaluations, checkpoint written, 361 s, RSS 897 MB
+    ball: 2665728/3471783 evaluations, checkpoint written, 421 s, RSS 897 MB
+    ball: 2786048/3471783 evaluations, checkpoint written, 481 s, RSS 897 MB
+    ball: 2908416/3471783 evaluations, checkpoint written, 541 s, RSS 897 MB
+    ball: 3027456/3471783 evaluations, checkpoint written, 601 s, RSS 897 MB
+    ball: 3137792/3471783 evaluations, checkpoint written, 661 s, RSS 897 MB
+    ball: 3227136/3471783 evaluations, checkpoint written, 721 s, RSS 897 MB
+    ball: 3319296/3471783 evaluations, checkpoint written, 782 s, RSS 897 MB
+    ball: 3415040/3471783 evaluations, checkpoint written, 842 s, RSS 897 MB
+(1) ball of radius 4: 3471783 evaluations of the solvent term [879s]
+    48 ball values re-evaluated with P3's own evaluator (GBModel.energy): largest deviation 5.7e-12 kcal/mol
+(2) anchored terms of order <= 4: 794 tables [881s, RSS 1285 MB]
+    identity g(x) = sum of the anchored terms over the subsets of S(x), at 200 ball states: largest deviation 3.4e-13 kcal/mol
+(3) the truth in the anchor context, by order: M_T = max_y |d_T(y_T)| (kcal/mol; kT in brackets)
+    order 1:   12 subsets: sum 1.6670e+02 [279.6 kT], largest 2.792e+01, median 1.348e+01; sum of the rms over the states of T 9.3379e+01
+    order 2:   66 subsets: sum 1.8331e+02 [307.5 kT], largest 2.493e+01, median 8.887e-01; sum of the rms over the states of T 5.9176e+01;  fall of the sum from order 1: 0.9-fold
+    order 3:  220 subsets: sum 1.0905e+01 [18.29 kT], largest 1.184e+00, median 9.843e-03; sum of the rms over the states of T 2.1077e+00;  fall of the sum from order 2: 16.8-fold
+        by span (last - first site): 2: 4.8 %, 3: 7.5 %, 4: 62.2 %, 5: 8.3 %, 6: 5.7 %, 7: 8.6 %, 8: 1.7 %, 9: 0.6 %, 10: 0.5 %, 11: 0.2 %
+    order 4:  495 subsets: sum 1.4848e+00 [2.491 kT], largest 4.644e-02, median 7.133e-04; sum of the rms over the states of T 2.2180e-01;  fall of the sum from order 3: 7.3-fold
+        by span (last - first site): 3: 3.1 %, 4: 22.2 %, 5: 20.6 %, 6: 19.7 %, 7: 18.3 %, 8: 8.9 %, 9: 3.7 %, 10: 2.5 %, 11: 1.0 %
+        bound >= exact anchor-context term, subset by subset (495 comparisons per variant): violations P3 0, S 0, AH 0, SA 0, Sb 0, SAb 0;  ratio bound/exact: P3 min 58.78, median 1055.5, of the sums 752.3; S min 29.10, median 191.3, of the sums 141.5; AH min 40.52, median 386.2, of the sums 529.6; SA min 27.99, median 171.1, of the sums 132.4; Sb min 24.39, median 171.4, of the sums 125.2; SAb min 23.98, median 157.2, of the sums 118.8
+(4) cross-check: M_T of the 220 triples against p8_06_distance.py (direct evaluation on the grid of the three sites): largest deviation 0.0e+00 kcal/mol
+DONE in 881.5 s; peak RSS 1570 MB

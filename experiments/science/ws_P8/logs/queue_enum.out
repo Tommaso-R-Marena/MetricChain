@@ -1,0 +1,17 @@
+[06:27:43] START python3 -B p8_01_measure.py LKSE:6 H 0.60 --budget 1000
+[06:31:57] END   (exit 0) p8_01_measure.py LKSE:6 H 0.60 --budget 1000
+[06:31:57] START python3 -B p8_01_measure.py LKSE:6 H 0.60 --budget 1000
+[06:31:58] END   (exit 0) p8_01_measure.py LKSE:6 H 0.60 --budget 1000
+[06:31:58] START python3 -B p8_02_signblind.py K5 H 0.70
+[06:34:10] END   (exit 0) p8_02_signblind.py K5 H 0.70
+[06:34:10] START python3 -B p8_03_sr_validate.py K5 H 0.70
+[06:34:13] END   (exit 0) p8_03_sr_validate.py K5 H 0.70
+[06:34:13] START python3 -B p8_02_signblind.py LKSE:4 H 0.60
+[06:34:17] END   (exit 0) p8_02_signblind.py LKSE:4 H 0.60
+[06:34:17] START python3 -B p8_02_signblind.py LKSE:5 H 0.60
+[06:34:28] END   (exit 0) p8_02_signblind.py LKSE:5 H 0.60
+[06:34:28] START python3 -B p8_03_sr_validate.py LKSE:4 H 0.60
+[06:34:29] END   (exit 0) p8_03_sr_validate.py LKSE:4 H 0.60
+[06:34:29] START python3 -B p8_03_sr_validate.py LKSE:5 H 0.60
+[06:34:31] END   (exit 0) p8_03_sr_validate.py LKSE:5 H 0.60
+[06:34:31] START python3 -B p8_01b_restricted.py LKSE:6 H 0.60 --budget 1000

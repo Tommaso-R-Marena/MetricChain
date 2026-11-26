@@ -1,0 +1,12 @@
+# their files read: out_16000.txt, out_16000b.txt, out_32000.txt, out_32000b.txt, out_32000c.txt, out_32000d.txt, out_4000.txt, out_64000.txt, out_64000b.txt, out_64000c.txt, out_8000.txt, out_8000b.txt, out_small.txt
+n =   1000: 21 of 21 numbers equal to the four digits printed
+n =   1400: 21 of 21 numbers equal to the four digits printed
+n =   2000: 21 of 21 numbers equal to the four digits printed
+n =   4000: 21 of 21 numbers equal to the four digits printed
+n =   8000: 21 of 21 numbers equal to the four digits printed
+n =  16000: 24 of 24 numbers equal to the four digits printed
+n =  32000: 20 of 20 numbers equal to the four digits printed
+n =  64000: 10 of 10 numbers equal to the four digits printed
+TOTAL: 159 of 159 certified numbers (two levels, tuned, searched; all (n, phi_1) of their stored outputs) equal to the four digits printed; first difference: None; (n, phi_1) of theirs not in my logs: []
+numbers of mine that their outputs do not contain (not compared): n=32000 phi_1=0.500: searched 0.5646; n=64000 phi_1=0.450: searched 0.5102; n=64000 phi_1=0.500: searched 0.5407
+peak RSS MB 12.5078125

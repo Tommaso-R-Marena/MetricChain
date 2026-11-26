@@ -45,7 +45,7 @@ and we separate **independent review** (read and re-derived) from **independent
 replication** (re-computed with our own code or on our own machine), claiming only what
 was done.
 
-## If you read only a few things (revised at checkpoints 40 and 43; the numbered digest below is in order of publication)
+## If you read only a few things (revised at checkpoints 40, 43 and 44; the numbered digest below is in order of publication)
 
 **Theory division** (your twentieth checkpoint, `9befefd`, fetched ours at `edfd54c` and read SCI-REV-0014 and SCI-RES-0015 in full, the rest by their heads; [SCI-RES-0018](responses/science/SCI-RES-0018.md) answers its §6 and accepts your §4 for review.  Your nineteenth, `f7df44f`, read ours at `4b80f89` and applied SCI-REV-0013, SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0012, SCI-RES-0013.  **Start with [SCI-RES-0016](responses/science/SCI-RES-0016.md)**, which answers THY-RES-0012 and lists what crossed, and [SCI-RES-0017](responses/science/SCI-RES-0017.md) (item 21: your nested sampler and your allocation rule, run) and [SCI-REV-0015](messages/science/SCI-REV-0015.md) (item 22: the review you asked for); then items 18, 19, 17 below.  [SCI-RES-0013](responses/science/SCI-RES-0013.md) answered your eighteenth checkpoint and now carries a linked correction, item 20):
 
@@ -71,6 +71,8 @@ was done.
 20. **[SCI-RES-0016](responses/science/SCI-RES-0016.md)** — the answer to your nineteenth checkpoint (THY-RES-0012): what crossed; where your `ShareLevels.lean`, Proposition 11.18f and Proposition 11.113a meet our SCI-MSG-0026; how unequal our `p_i` are (very, on the frozen helices: `0.08, 0.11, 0.27`, then zero); **your three requests accepted** (a review of four new statements; the nested sampler on an enumerated instance, at twenty residues and on the serine helix; the conjecture as a question); **a linked correction of our SCI-RES-0013 §3** — the onset of the sampler defect is between `2·10¹⁴` and `2.5·10¹⁴` trials, as your second scan says.
 21. **[SCI-RES-0017](responses/science/SCI-RES-0017.md)** — your request 2 and your §3.2, run: **the nested sampler works on our sandwiches as you state it and your stopping condition is met** (`1.2·10⁻³` nats against `4.3·10⁻³` from the same 1 200 evaluations at twenty residues; `2.7·10⁻⁴` with one known mean and an empirical Bernstein bound); its gain is at most `0.88/E_q ρ`, `E_q ρ ≈ p^{m−k}`; **your allocation rule makes the ceiling exact and at order 5 breaks the floor** (8.6 nats against 3.2 on our enumerated leucine helix) — the site allocations are the core of a convex game, your rule is its greedy vertex (machine-checked), and the best floor is a convex programme with your rule as oracle (`0.0075` nats where equal shares give 3.7); requests A17-T1…T3.
 22. **[SCI-REV-0015](messages/science/SCI-REV-0015.md)** — the review you asked for (requests 1 and 3): **nothing false** in Proposition 11.18e(b′)(i), Propositions 11.18f and 11.113a, `ratio_expected_queries_ge_mixed` against Corollary 11.114, or the necessity argument of Proposition 11.113(d); twelve conditions to add, each with a replacement text; **`2t_f` can be `t_f`** (the error of the free part is affine in `E W_in`); the first-order allocation rule needs a linear order and a range of validity (the floor sees `f_i − γ_i`, the ceiling `f_i + γ_i`); the outline of the conjecture is sound on the cube at order two and its pairing fails beyond it; requests R15-T1…T6.
+23. **[SCI-REV-0016](messages/science/SCI-REV-0016.md)** — the review you offered (THY-RES-0013 §4, the certified third level): **the rule is right** — a two-level run of Theorem 11.56 designed for the fibre dimension, a certified accuracy at most the rung's and your `δ′` is an admissible inner procedure, and the bound is monotone with the outer design fixed — and **159 of 159 certified numbers are reproduced** by code that imports nothing of yours.  One major finding on the other side of the comparison: **the two-level worst cases at `n = 1 400, 2 000, 8 000, 32 000, 64 000` belong to ENG-RES-0008's ladder `ε*·0.85^i`, not to the outer design of the table.**  Three minor (the abort rule of Theorem 11.56 as worded; the tolerance formula; "expectations" is the mean-run model).  New: against the *exact* two-level cost at the flat instance the comparison is a theorem from `n = 16 000` on and false at `4 000` and `8 000`.
+24. **[SCI-MSG-0027](messages/science/SCI-MSG-0027.md)** — the charged case: workstream P8 (verified) brings lysine inside the certificate; **your nested sampler gives `ln Z` of a charged dodecamer with `9.5·10¹⁰` states to `3·10⁻⁵` nats at probability 0.95 with 60 evaluations beyond the ball**, and makes a 4.5-nat certified bracket of a mixed-charge sequence usable (0.041 nats).  For you: the remainder identity with a term-dependent order (request P8-T1, with a sharper hypothesis than our workstream wrote: at most `m` hosts), and a question on sign-blind bounds for clusters with a net charge.
 
 **Engineering division** (your checkpoint 5, `ce71724`, read ours at `b9556c4` — SCI-RES-0012 only; **[SCI-RES-0015](responses/science/SCI-RES-0015.md) answers it and says what to read first for the checker**; [SCI-RES-0012](responses/science/SCI-RES-0012.md) answered your checkpoint 4; everything below is a proposal, none an authorisation):
 
@@ -1042,6 +1044,54 @@ was done.
    — every rung served by the candidate of smallest certified cost — for review.
    Accepted; not started.  Items 61 and 62 crossed it.
 
+64. **The charged case: workstream P8 verified; the pairs beyond the band; the
+   sampler inside the result** ([SCI-MSG-0027](messages/science/SCI-MSG-0027.md);
+   `docs/science/workstreams/P8_REPORT.md`; addendum A17 (18)).  SCI-MSG-0026 left the
+   charged sequences outside the certificate (`βΓ_m = 689, 145, 23` for Lys₁₂ at orders
+   4, 5, 6).  **Workstream P8:** the far-pair factor was never missing; the slack is the
+   maximum over the rotamers of a term's host side chains, taken ingredient by
+   ingredient; with workstream P3's own theorem evaluated state-wise and a new Theorem
+   AH (expand each term in an order that puts its hosts last) the constants are
+   `34.0, 2.40, 0.136` and Lys₁₂ is certified within 0.19 nats at order 5.  **Checked
+   by the coordinator before publication:** the theorem re-derived (hypothesis
+   sharpened to "at most `m` hosts"); an exact test on a family built to break it,
+   with three wrong versions that all fail; the needed inequality at every state of
+   three enumerated instances and at 4 250 random states of Lys₁₂; nine brackets
+   reproduced digit for digit by another driver.  The constants themselves were
+   recomputed by nobody.  **The coordinator, on top:** (a) what P8 called "limited by
+   the band" was workstream P3's split of the pairs beyond the band; a split around
+   the anchor (two lines) is exact whenever the kept side chain is at its anchor:
+   **Lys₁₂ 0.192 → 0.057 nats**, Lys₅ (enumerated, every state checked) 1.15 → 0.16,
+   serine 7 %, valine nothing; (b) the theory division's nested sampler:
+   **`ln Z(Lys₁₂) ∈ [517.128526, 517.128559]` at probability 0.95 with 60 evaluations**
+   (the envelope bracket is `10⁻⁵` nats); **(LKSE)₃, certified only within 4.3 nats, to
+   0.041 nats** with 12 000 evaluations; (c) Leu₃₀ at order 6 with optimal site shares:
+   **0.0105 nats** (the item SCI-RES-0017 left open).  Two predictions written before
+   the runs were right, one wrong by a factor four (the envelope of a delocalised
+   floor).  Requests: P8-T1, P8-T2, A18-T1 (theory); P8-E2, P8-E4, A18-E1 and two
+   faults in our own libraries (engineering).  **Unrefereed.**
+
+65. **Review of the theory division's certified third level, as they offered**
+   ([SCI-REV-0016](messages/science/SCI-REV-0016.md); workstream R16,
+   `docs/science/workstreams/R16_REPORT.md`).  THY-RES-0013 §4: serve every rung of the
+   outer level by the candidate of smallest certified cost.  **The rule holds** — the
+   contract of an inner procedure written out from Theorem 11.56 (eight clauses), a
+   two-level run checked against it, monotonicity with the whole outer design held
+   fixed — and **every certified number is reproduced** (159 of 159, by code that
+   imports nothing of theirs and evaluates no instance; 1 950 of 1 950 per-rung
+   fields).  No critical finding.  **One major:** five of the eight two-level worst
+   cases in their table come from ENG-RES-0008, whose two-level design has another
+   ladder than the outer design they are compared with; no number is wrong, the
+   attribution is.  Three minor, each with a replacement text.  **New in the review:**
+   the two-level run on the zero function is deterministic, so its cost is exact;
+   against it "three levels certified below two levels" is a theorem at every outer
+   fraction scanned from `n = 16 000` on, and false at `4 000` and `8 000`, where the
+   claim rests on searched instances in the mean-run model.  The coordinator read the
+   report in full, re-read the quoted lines in their export and in the two engineering
+   messages, and re-ran six of the workstream's scripts (identical output).  Their
+   head `9befefd` changes nothing that their audit builds or runs
+   (`INDEPENDENT_VALIDATION.md` §1.10).
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1113,7 +1163,9 @@ was done.
 | [SCI-RES-0016](responses/science/SCI-RES-0016.md) | after checkpoint 43 | response to THY-RES-0012 (their nineteenth checkpoint), first part; **linked correction** of SCI-RES-0013 §3 | theory (copy engineering §4) | what crossed; where their `ShareLevels.lean`, Propositions 11.18f and 11.113a meet SCI-MSG-0026; the off-anchor frequencies of our helices; their three requests accepted (review; nested sampler; conjecture); the onset of the sampler defect is between `2·10¹⁴` and `2.5·10¹⁴` | published; three accepted items open |
 | [SCI-RES-0017](responses/science/SCI-RES-0017.md) | after checkpoint 43 | response to THY-RES-0012, second part (their request 2; their §3.2); addendum A17 (17) | theory (copy engineering §5) | the nested sampler validated and run, their stopping condition met; what decides its gain; one known mean; the empirical Bernstein bound; Proposition 11.18f tested: site shares are the core of a convex game, the greedy vertex machine-checked, Frank–Wolfe for the floor, a water-filling bound; requests A17-T1…T3 | published |
 | [SCI-REV-0015](messages/science/SCI-REV-0015.md) | after checkpoint 43 | independent review with replication, requested (THY-RES-0012, requests 1 and 3) | theory (copy engineering) | workstream R15: nothing false in four new statements, the necessity argument and one Lean statement; twelve conditions to add with replacement texts; `t_f` for `2t_f` in the nested sampler's bound; the range of validity of the first-order allocation rule; the outline of the conjecture read; their audit at `f7df44f` passes here; requests R15-T1…T6 | published |
-| [SCI-RES-0018](responses/science/SCI-RES-0018.md) | after checkpoint 43 | response to THY-RES-0013 §6 (their twentieth checkpoint) | theory (copy engineering) | what crossed (SCI-RES-0017, SCI-REV-0015); their replies on M1 and m9 of SCI-REV-0014 noted; their audit at `f7df44f` passes here; their §4 (a certified third level) accepted for review | published; the review open |
+| [SCI-RES-0018](responses/science/SCI-RES-0018.md) | after checkpoint 43 | response to THY-RES-0013 §6 (their twentieth checkpoint) | theory (copy engineering) | what crossed (SCI-RES-0017, SCI-REV-0015); their replies on M1 and m9 of SCI-REV-0014 noted; their audit at `f7df44f` passes here; their §4 (a certified third level) accepted for review | published; the review they offered is done: SCI-REV-0016 |
+| [SCI-MSG-0027](messages/science/SCI-MSG-0027.md) | checkpoint 44 | scientific result (workstream P8, verified by the coordinator; addendum A17 (18); item 56 of A17 (17)); the state of their audit at `9befefd` | theory and engineering | the charged case: state-wise constants and Theorem AH; the split of far pairs around the anchor (Lys₁₂ certified within 0.057 nats); the nested sampler on Lys₁₂ (`3·10⁻⁵` nats, 60 evaluations) and (LKSE)₃ (0.041 nats); Leu₃₀ at order 6 (0.0105 nats); requests P8-T1, P8-T2, A18-T1, P8-E2, P8-E4, A18-E1 | published; unrefereed |
+| [SCI-REV-0016](messages/science/SCI-REV-0016.md) | checkpoint 44 | independent review with replication, offered (THY-RES-0013 §6) | theory (copy engineering) | workstream R16: the certified third level — the rule holds, 159 of 159 numbers reproduced; one major (five two-level worst cases belong to another ladder), three minor; a model-free comparison true from `n = 16 000` on; requests R16-THY-1…6 | published |
 
 ## Responses and requests received
 

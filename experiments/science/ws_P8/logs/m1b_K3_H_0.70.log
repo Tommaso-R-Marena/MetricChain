@@ -1,0 +1,5 @@
+=== p8_01b_restricted: K3 on H, tau 0.7: atoms 78, sites 3, 2352 states, anchor (10, 10, 8); 1 subsets
+    row 78/78 done, checkpoint written, 1 s
+    checks: PPA <= PP for every (T, pair): 3081 comparisons, 0 violations; equal where no host of the pair is outside T: 3081 of 3081
+    order 3: sum over subsets and pairs of the exact constants: all contexts 1.697456e+00, hosts outside T at the anchor 1.697456e+00 (ratio 1.000)
+DONE in 1.3 s

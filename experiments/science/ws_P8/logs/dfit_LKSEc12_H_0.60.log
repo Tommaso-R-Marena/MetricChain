@@ -1,0 +1,26 @@
+=== p8_11_distance_fit: LKSE:12 on H, tau 0.6: 12 sites (LKSELKSELKSE)
+(1) 220 triples: M_T from 1.59e-04 to 1.18e+00 kcal/mol; smallest group distance in the maximising states from 0.38 to 1.30 nm
+    all triples: ln M_T = -3.11 ln P + c, rms residual 1.12 (a factor 3.1);  P = min over the groups of the product of its two distances
+    triples with all three distances > 0.6 nm (96): ln M_T = -3.88 ln P + c, rms residual 1.16 (a factor 3.2)
+    by the smallest of the three group distances: triples | median M_T | max M_T | share of the sum
+      0.0-0.4 nm:  11 | 4.024e-02 | 1.309e-01 | 5.2 %
+      0.4-0.6 nm: 113 | 1.495e-02 | 1.184e+00 | 80.9 %
+      0.6-0.8 nm:  51 | 1.284e-02 | 1.408e-01 | 12.6 %
+      0.8-1.0 nm:  32 | 1.444e-03 | 1.635e-02 | 1.1 %
+      1.0-1.3 nm:  13 | 5.508e-04 | 8.633e-03 | 0.2 %
+    by the number of charged side chains in the triple, at comparable smallest distance (0.6-1.0 nm): triples | median M_T
+      0 charged:  15 | 5.998e-03   (all distances: 20 triples, sum 4.938e-01, median 4.952e-03)
+      1 charged:  28 | 4.073e-03   (all distances: 90 triples, sum 2.436e+00, median 9.687e-03)
+      2 charged:  27 | 4.889e-03   (all distances: 90 triples, sum 7.558e+00, median 1.178e-02)
+      3 charged:  13 | 1.629e-02   (all distances: 20 triples, sum 4.180e-01, median 1.820e-02)
+(2) first-order response R1 of a group's own solvation energy to another site, by class: fit ln R1 = a ln d + c, and medians at 0.6-0.8, 0.9-1.2, 1.4-1.8 nm (kcal/mol)
+    bb    (14 groups, mean |net charge| 0.094 e, mean sum|q| 2.090 e; 168 (group, site) pairs): a = -4.44 (rms residual 1.25); beyond 0.8 nm a = -4.91 (1.05); medians 2.13e-02, 4.25e-03, 4.11e-04
+    nsc   (6 groups, mean |net charge| 0.170 e, mean sum|q| 1.529 e; 66 (group, site) pairs): a = -5.62 (rms residual 1.35); beyond 0.8 nm a = -3.41 (1.24); medians 4.44e-02, 9.77e-04, 1.92e-04
+    chain (6 groups, mean |net charge| 0.253 e, mean sum|q| 0.329 e; 66 (group, site) pairs): a = -5.46 (rms residual 1.33); beyond 0.8 nm a = -4.69 (1.38); medians 8.64e-03, 3.93e-04, 5.47e-05
+    head  (6 groups, mean |net charge| 0.733 e, mean sum|q| 1.924 e; 66 (group, site) pairs): a = -5.42 (rms residual 1.35); beyond 0.8 nm a = -5.14 (1.27); medians 2.99e-02, 2.24e-03, 2.68e-04
+(3) second-order response R2[A; j, k] (group fixed, two other sites change): ln R2 = a ln(d_Aj d_Ak) + c
+    bb   : a = -4.48 (rms residual 1.58; 924 cases); median R2 8.73e-05; sum over (j, k) per group 2.946e-01 kcal/mol
+    nsc  : a = -6.70 (rms residual 1.73; 330 cases); median R2 4.53e-06; sum over (j, k) per group 3.318e-02 kcal/mol
+    chain: a = -5.18 (rms residual 1.54; 330 cases); median R2 2.19e-06; sum over (j, k) per group 4.070e-03 kcal/mol
+    head : a = -6.61 (rms residual 2.24; 330 cases); median R2 1.63e-06; sum over (j, k) per group 2.530e-02 kcal/mol
+DONE in 1.0 s; peak RSS 123 MB

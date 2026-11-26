@@ -1,0 +1,18 @@
+=== p8_02_signblind: K4 on H, tau 0.7: atoms 100, sites 4, 16464 states, anchor (10, 10, 8, 3); 5 subsets; NRAND 24, NCAND 4, NRS 4
+    (A) per-subset searches done, 1 s; chain truth <= LS_T <= PP_T <= P3: 15 checks, 0 violations
+    (C) order 3: remainder search at 10 states done, 1 s; largest |remainder| found at a single state: 1.2868e+00
+    (C) order 4: remainder search at 12 states done, 2 s; largest |remainder| found at a single state: 1.9378e-02
+    patterns evaluated at all 16464 states, 13 s
+--- order 3: 4 subsets (kcal/mol)
+    sums over subsets: truth 2.3244e-01 | all-plus 1.4294e+00 | remainder pattern 1.4330e+00 | (A) best pattern per subset 1.6368e+00 | best pair-by-pair 4.3891e+00 | P3 3.3584e+01
+    (A)/truth >= 7.04 [per subset min/median/max 4.84/10.80/13.45];  (B)/truth >= 6.16;  pair-by-pair/(A) <= 2.68;  P3/(A) <= 20.52;  P3/pair-by-pair = 7.65
+    remainder sup_x|g - I_2g|: truth 1.8887e-01 | all-plus 1.1356e+00 | pattern found 1.2868e+00 (11 % of the charges negative; 61 % as the true signs) | Gamma_3 3.3584e+01
+    (C) every sign-blind bound of the remainder / truth >= 6.81;  Gamma_3 / (C) = 26.1;  Gamma_3 / truth = 178
+--- order 4: 1 subsets (kcal/mol)
+    sums over subsets: truth 2.9417e-03 | all-plus 1.2547e-02 | remainder pattern 1.9378e-02 | (A) best pattern per subset 1.9378e-02 | best pair-by-pair 7.7455e-02 | P3 8.5377e-01
+    (A)/truth >= 6.59 [per subset min/median/max 6.59/6.59/6.59];  (B)/truth >= 6.59;  pair-by-pair/(A) <= 4.00;  P3/(A) <= 44.06;  P3/pair-by-pair = 11.02
+    remainder sup_x|g - I_3g|: truth 2.9417e-03 | all-plus 1.2547e-02 | pattern found 1.9378e-02 (38 % of the charges negative; 54 % as the true signs) | Gamma_4 8.5377e-01
+    (C) every sign-blind bound of the remainder / truth >= 6.59;  Gamma_4 / (C) = 44.1;  Gamma_4 / truth = 290
+    chain checks in all: 25, violations 0
+    P3's Gamma_m against the remainders of the sign-flipped systems (true signs, all-plus, pattern found) at every state: 98784 state checks, 0 violations; smallest Gamma_m / sup|remainder| = 26.10
+DONE in 13.5 s

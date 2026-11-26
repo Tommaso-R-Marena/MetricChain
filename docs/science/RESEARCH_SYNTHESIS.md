@@ -12,8 +12,8 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 08:41 UTC.  (The block is rewritten when the state changes; the
-history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–56.)*
+*State at 2026-11-26 10:19 UTC.  (The block is rewritten when the state changes; the
+history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
 
 1. **Fetch and read the two upstream heads** (read-only), **in a command of its own**:
    `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering`, then the
@@ -29,9 +29,11 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–56.)*
      the rest by their heads): THY-RES-0013 (to the engineering division, copy to us)
      read in full; **answered: SCI-RES-0018**.  They accept M1 of SCI-REV-0014 and offer
      their new §4 — a certified third level of the nested algorithm — for review:
-     **accepted, not started** (a review workstream: the monotonicity argument, the
-     admissibility of a two-level run as an inner procedure of Theorem 11.56, one
-     replication of the certified column with own code).  Not audited at this head.
+     **done: SCI-REV-0016** (workstream R16; finding 9o: the rule holds, 159 of 159
+     certified numbers replicated, one major finding on the attribution of five
+     two-level worst cases).  At this head nothing that their audit builds or runs has
+     changed since `f7df44f`; the documents pass their reference check
+     (`INDEPENDENT_VALIDATION.md` §1.10; the full script was not re-run).
      *Before it:* `f7df44f` (their nineteenth checkpoint, commit time 2026-11-26
      06:24 UTC; it read ours at `4b80f89`): THY-RES-0012 read in full by the coordinator
      and **answered: SCI-RES-0016**.  It applies our review SCI-REV-0013 in full,
@@ -71,7 +73,9 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–56.)*
      that up to `4b80f89` (SCI-REV-0013,
      SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0012, SCI-RES-0013 and addenda A17 (14), (15)
      "in part" — all applied or answered in THY-RES-0012).  **Not yet read by them, in
-     the order they should read it:** SCI-RES-0016 (answers THY-RES-0012; says what
+     the order they should read it:** SCI-REV-0016 (the review they offered),
+     SCI-MSG-0027 (the charged case; their nested sampler on two charged peptides;
+     request P8-T1), SCI-RES-0016 (answers THY-RES-0012; says what
      crossed), SCI-RES-0017 (their nested sampler and allocation rule, run),
      SCI-REV-0015 (the review they asked for), SCI-REV-0014 (their rate refereed; Proposition 11.117(b) needs
      "symmetric"), SCI-RES-0014 (shares at the leaves), **SCI-MSG-0026** (the certificate
@@ -95,37 +99,53 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–56.)*
      **done: SCI-REV-0015** (workstream R15; finding 9m); (h) ~~the replication of
      their audit at `f7df44f`~~ — **done, passes** (`INDEPENDENT_VALIDATION.md` §1.9);
      (i) ~~a test of the allocation rule of Proposition 11.18f~~ — **done:
-     SCI-RES-0017** (finding 9l).
-   * **Expect from them:** R15-T1…T6 (SCI-REV-0015: the replacement texts; whether they
+     SCI-RES-0017** (finding 9l).  **Accepted in SCI-RES-0018:** (j) ~~the review of
+     THY-RES-0013 §4~~ — **done: SCI-REV-0016** (finding 9o).  Nothing is owed to
+     them at this checkpoint.
+   * **Expect from them:** R16-THY-1…6 (SCI-REV-0016: which of 1(a), 1(b) they take;
+     whether the flat-instance table enters their remark (1b)); P8-T1, P8-T2, A18-T1
+     (SCI-MSG-0027: the remainder identity with a term-dependent order in Lean, "at
+     most `m` hosts"); R15-T1…T6 (SCI-REV-0015: the replacement texts; whether they
      adopt `t_f + ρ̄t`); A17-T1…T3 (SCI-RES-0017: the one-known-mean variant, the core
      statement and the water-filling bound, an oracle for the pair level); A16-T2 (SCI-MSG-0026:
      the asymmetry of floor and ceiling in their vocabulary); R13-T1…T6 (SCI-REV-0014: whether they adopt `RateFull.lean`;
      whether Proposition 11.117(b) was meant for symmetric envelopes); P7-T1…T5
      (SCI-RES-0014: a domain-split rule, the symmetrised hypothesis).  Answered by
      them at `f7df44f`: R12-T1…T6 (all adopted), P6-T1…T3, P5-T2, P5-T3, P5-T1 in part.
-2. **Workstreams running when this was written: none.  One has handed back and is
-   NOT yet read or published: P8.**  Each writes notes from its first
+2. **Workstreams running when this was written: none.**  (One run of the coordinator
+   was still going: the nested sampler on the twenty-residue serine helix,
+   `pi_inference/nested_sampler_p3table.py S20 H 5 7 T window --reduce occ+`, which first
+   builds a table of 15 504 constants — about half an hour — and caches it in
+   `serine_helix_reach_cache/chat_S20_H_m5.npz`; its log is committed only if it ends
+   with `ALL DONE`.  A first attempt through `nested_sampler.py` was stopped: at twenty
+   mobile residues that script would compute one closed-form sum per distinct changed
+   set, hundreds of thousands of them.)  Each workstream writes notes from its first
    minute to `experiments/science/ws_<ID>/NOTES.md` and a report to
    `docs/science/workstreams/<ID>_REPORT.md`; **a draft is not a statement of the
    division**.  When one reports: read it in full, re-derive or recompute its key
    statements with separate lines, then publish (§5).  If the container was lost, read
    the notes and decide whether to resume from them.
-   * **P8** (`P8_brief.md`; launched 05:38 UTC; **handed back shortly before 08:30 UTC**)
-     — the charged case: why the certified constants of lysine and the patterned
-     sequence are out of reach on the helix, and which lever moves them (finding 9j;
-     `OPEN_PROBLEMS.md` D6 as renamed).  **Its report (`workstreams/P8_REPORT.md`, 1 695
-     lines, generated from `experiments/science/ws_P8/report_parts/`) is a draft: the
-     coordinator has not read it, has recomputed nothing of it, and nothing of it is
-     published or committed.**  By its own summary: P3's cross bound does carry the
-     Gaussian factor (so that lever is closed); the slack is the merging of maxima
-     over host rotamers in P3's closed form; a state-wise bound plus a term-dependent
-     site order ("Theorem AH", a paper proof) lowers `βΓ_m` of Lys₁₂ on the helix from
-     689, 145, 23 to 34, 2.4, 0.14, and the pipeline then brackets its `ln Z` within
-     0.45 nats (band 6) and 0.19 (band 7) at order 5; the patterned sequence is not
-     rescued (4.5 nats).  *Next:* read it in full; re-derive Theorem AH; recompute the
-     new constants on one enumerated instance and the Lys₁₂ bracket with separate
-     lines (its request P8-E1); then publish.  Its directory holds 2 GB of caches —
-     commit the scripts, logs, JSON and tables only.
+   * **P8** (`P8_brief.md`; launched 05:38 UTC; handed back shortly before 08:30 UTC) —
+     the charged case.  **Read in full, verified and published: SCI-MSG-0027**
+     (finding 9n; `workstreams/P8_REPORT.md` with the coordinator's note at its end,
+     which lives in `experiments/science/ws_P8/report_parts/90_coordinator_note.md` —
+     the report is generated by `ws_P8/mk_report.py`).  The coordinator's checks are in
+     `experiments/science/p8_verification/`.  **What of P8's data is in the
+     repository:** `experiments/science/.gitignore` excludes every `.npz` of a
+     workstream as regenerable; the one exception, force-added, is **the result — the
+     per-subset constants** `ws_P8/out/g12_*.npz` and `g12b_*.npz` (24 files, 0.7 MB:
+     four peptides, orders 4–6, six variants).  Not in the repository: P8's balls
+     (`ws_P8/cache/ball_*.npz`, up to 111 MB), its enumerations (`ws_P8/out/m1_*.npz`),
+     checkpoints.  **From a fresh clone:** `nested_sampler_ext.py` and
+     `occ_reduction_test.py` evaluate a missing ball themselves (half an hour for Lys₁₂
+     at order 5); `p8_verification/lys12_rerun.py` insists on P8's own ball — regenerate
+     it with `python3 -B ws_P8/p8_12_certificate.py K12 H 0.70 5 7 --force`; the
+     end-to-end check of `nested_sampler_ext.py` on Lys₅ reads the anchor from
+     `ws_P8/out/m1_K5_H_0.70.npz` (`python3 -B ws_P8/p8_01_measure.py K5 H 0.70`, eight
+     minutes); `lys_enum_check.py` needs only the committed JSON files.
+   * **R16** (`R16_brief.md`; launched 08:45 UTC, handed back 10:00 UTC) — the review of
+     THY-RES-0013 §4 that the theory division offered.  **Done and published:
+     SCI-REV-0016** (`R16_REPORT.md` with a coordinator's note; finding 9o).
    * **R15** (`R15_brief.md`; launched 06:58 UTC) — the review the theory division
      asked for in THY-RES-0012 (requests 1 and 3).  **Done and published:
      SCI-REV-0015** (`R15_REPORT.md` with a coordinator's note; finding 9m).
@@ -137,15 +157,16 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–56.)*
      its work in its place (the harness says so explicitly; the charter says to
      respect platform safeguards).  The brief stands.  **These four addenda are
      unrefereed; whether and how they are reviewed is the research owner's
-     decision.**  (Addendum A17 (17), written since, is unrefereed as well; part of it
-     — the one-known-mean bound — is in R15's brief.)
+     decision.**  (Addenda A17 (17) and A17 (18), written since, are unrefereed as
+     well; one section of (17) — the one-known-mean bound — was reviewed by R15.)
    * **Finished and published in this stretch:** P5 (SCI-MSG-0024), R12 (SCI-REV-0013),
      P6 (SCI-MSG-0025), R13 (SCI-REV-0014), P7 (SCI-RES-0014); the coordinator's own: the audit at `9408e33`, benchmark B10 for
      charged and aromatic side chains (A17 (12) item 25), certified populations
      (A17 (13)), the helix with pair shares (A17 (14)), where the certificate stops
      and how far it reaches (A17 (15), (16); SCI-MSG-0026), the audit at `63e36f7`,
      the theory division's nested sampler and allocation rule on real instances
-     (A17 (17); SCI-RES-0017), R15 (SCI-REV-0015), the audit at `f7df44f`.
+     (A17 (17); SCI-RES-0017), R15 (SCI-REV-0015), the audit at `f7df44f`, P8 and the
+     charged case (A17 (18); SCI-MSG-0027), R16 (SCI-REV-0016).
    * Read-only exports used by the workstreams are in the session scratchpad and are
      **lost with the container** (re-create with `git archive <commit> | tar -x -C <dir>`):
      the theory tree at `63e36f7` (`thy_ro_63e36f7/`), at `9408e33`, at `24a3c27`.
@@ -458,6 +479,40 @@ published statements are linked messages, never silent rewrites.
    begins near `5·10¹⁴` trials, not `10¹⁷` (*and lower still — between `2·10¹⁴` and
    `2.5·10¹⁴` by the theory division's second scan; linked correction SCI-RES-0016 §4*),
    and our "corrected" re-run had never exercised its correction; the sizes of our separation statement were first sizes of a grid.
+9o. **The review the theory division offered at its twentieth checkpoint [P, X;
+   workstream R16]** (SCI-REV-0016).  Their certified third level — serve every rung by
+   the candidate of smallest certified cost — is right: a two-level run of Theorem
+   11.56 designed for the fibre dimension, a *certified* accuracy at most the rung's
+   and the failure probability `δ′` of the level above is an admissible inner
+   procedure, and the bound is monotone in the servers' costs with the whole outer
+   design fixed.  **159 of 159 certified numbers replicated** with code that imports
+   nothing of theirs.  One major finding: five of eight two-level worst cases in their
+   table belong to a two-level design with another ladder (ENG-RES-0008) than the
+   outer design they are compared with.  Three minor.  New: the two-level run on the
+   zero function is deterministic, so its cost is exact — against it the comparison
+   is a theorem from `n = 16 000` on and false at `4 000`, `8 000`.
+9n. **The charged case [P + X for workstream P8's theorem and validation; P + M for the
+   coordinator's additions; unrefereed]** (SCI-MSG-0027; addendum A17 (18);
+   `workstreams/P8_REPORT.md`).  *P8:* the slack of workstream P3's constants for
+   charged side chains is the maximum over host rotamers taken ingredient by
+   ingredient; P3's theorem evaluated state-wise plus Theorem AH (each term expanded
+   in an order with its hosts last) gives `βΓ_m = 34.0, 2.40, 0.136` for Lys₁₂ at
+   orders 4, 5, 6 (was 689, 145, 23.4).  *Verified by the coordinator* (theorem
+   re-derived, hypothesis sharpened to `m` hosts; an exact test with controls; every
+   state of three enumerated instances; 4 250 random states of Lys₁₂; nine brackets by
+   another driver); the constants were recomputed by nobody.  *The coordinator:*
+   (i) what looked like the band's limit was the split of the pairs beyond the band;
+   **split around the anchor** (exact whenever the kept site is at its anchor):
+   Lys₁₂ certified within **0.057 nats** at order 5 (was 0.192); serine gains 7–12 %,
+   valine nothing.  (ii) The theory division's nested sampler: **Lys₁₂ to `3·10⁻⁵`
+   nats at probability 0.95 with 60 evaluations** beyond the ball (`9.5·10¹⁰` states);
+   **(LKSE)₃, certified only within 4.3 nats, to 0.041 nats** with 12 000 evaluations.
+   (iii) Ser₂₀ (`8·10¹⁵` states) certified within 0.253 nats at order 5; Leu₃₀ at order
+   6 with optimal site shares within 0.0105 nats.  **The frontier is now the
+   mixed-charge sequence deterministically (its constants: `βΓ₅ = 43`), charged chains
+   beyond twelve residues (the state-wise constants have no closed form over the
+   subsets), and — unchanged — that every bracket is model-relative and unchecked by
+   an independent implementation.**
 9m. **The review the theory division asked for at its nineteenth checkpoint [P, N;
    workstream R15]** (SCI-REV-0015).  Nothing false in Proposition 11.18e(b′)(i),
    Propositions 11.18f and 11.113a, the Lean statement behind Corollary 11.114, or the
@@ -588,9 +643,10 @@ refereed as statements; in-progress workstream files are snapshots, not statemen
 | R12 | `workstreams/R12_REPORT.md` (brief: `R12_brief.md`) — requested by the theory division (THY-RES-0010 §9.2): review of its corrected Theorem 11.110(e), Propositions 11.18e and 11.113, Corollary 11.114, Theorem 11.18d as written, `BarrierCertificate.lean` and Theorem 11.115 against our workstream K's formats | **done, published as SCI-REV-0013.**  No critical finding; two major (Proposition 11.18e(b) false as written; the necessary order of Proposition 11.113(d) too large by `e^Δ`); eleven minor; seven statements machine-checked on their definitions (`experiments/science/ws_R12/lean/R12Additions.lean`).  Coordinator's check: `pi_inference/r12_adoption_check.py`; the Lean file compiled; two scripts re-run from a clean copy |
 | R13 | `workstreams/R13_REPORT.md` (brief: `R13_brief.md`) — requested by the theory division (THY-RES-0011 §9(a)): referee of its rate for the level recursion; how our five reviews were applied at `63e36f7` | **done, published as SCI-REV-0014.**  The rate is correct and machine-checked by the workstream (`ws_R13/lean/RateFull.lean`); Proposition 11.117(b) needs "symmetric"; twelve corrections of record in their texts, five in ours.  Coordinator: statement (a) re-derived, both Lean files compiled, the counter-example recomputed |
 | P7 | `workstreams/P7_REPORT.md` (brief: `P7_brief.md`) — requested by the theory division (THY-RES-0011 §9(c)): are the instances with an integrality gap certified by shares after branching on one site, or by one triplet constraint | **done, published as SCI-RES-0014.**  Four of five yes, Leu₁₆/PPII at depth two; one or two triplets close all; 18 gaps in 1 732 models; thirteen certificates accepted by the theory division's `verify` under `#eval`.  Coordinator: an independent checker on all nine tree certificates, brute-force minima, the gaps by an own linear programme |
-| P8 | `workstreams/P8_brief.md` — the charged case: P5's measurement for lysine and the patterned sequence; P3's cross bound for far pairs; which lever | **handed back, not yet read or published** (`workstreams/P8_REPORT.md`, a draft; §0 item 2) |
+| P8 | `workstreams/P8_REPORT.md` (brief: `P8_brief.md`) — the charged case: P5's measurement for lysine and the patterned sequence; P3's cross bound for far pairs; which lever | **done, verified, published as SCI-MSG-0027** (finding 9n): the slack is the host step; state-wise constants and Theorem AH; Lys₁₂ certified at order 5 |
 | R14 | `workstreams/R14_brief.md` — adversarial referee of the coordinator's addenda A17 (13)–(16) | **not done** — terminated at launch by a platform safeguard; not relaunched (§0) |
 | R15 | `workstreams/R15_brief.md` — requested by the theory division (THY-RES-0012, requests 1 and 3): review of its Propositions 11.18e(b′)(i), 11.18f, 11.113a, of `ratio_expected_queries_ge_mixed` against Corollary 11.114(d), of the necessity argument of Proposition 11.113(d); our one-known-mean bound; the conjecture (b′)(ii) as a question | **done, published as SCI-REV-0015.**  Nothing false; twelve conditions to add; `t_f` for `2t_f` in the nested sampler's bound; the range of validity of the first-order allocation rule |
+| R16 | `workstreams/R16_REPORT.md` (brief: `R16_brief.md`) — offered by the theory division (THY-RES-0013 §6): review of its certified third level (the admissibility of a two-level run as an inner procedure of Theorem 11.56; the monotonicity argument), with a replication | **done, published as SCI-REV-0016** (finding 9o): the rule holds; 159 of 159 numbers replicated; one major finding (five two-level worst cases attributed to the wrong design), three minor |
 
 Workstream files under `experiments/science/ws_*/` and `*_REPORT.md` are committed as
 snapshots while a workstream runs; they are statements of the division only once the
@@ -612,7 +668,7 @@ buried environment (P2-E1), exact arithmetic for the off-lattice chain at 13 tor
 (R3-E1, R9-E1), the vertex enumeration that decides the crossover of workstream Y
 (R10-E1).
 
-## 7. What to do next, ranked (revised 2026-11-26 after the fifth wave, after addendum A17 (16) and after A17 (17); items 2 and 3 rewritten)
+## 7. What to do next, ranked (revised 2026-11-26 after the fifth wave and after addenda A17 (16), (17), (18); items 2 and 3 rewritten)
 
 1. **Done at checkpoint 43: R10** (the theory division's workstream Y; SCI-REV-0010;
    finding 9d).  Done by the coordinator right after it: the law at *fixed length* for the
@@ -639,25 +695,34 @@ buried environment (P2-E1), exact arithmetic for the off-lattice chain at 13 tor
    (finding 9l) the theory division's nested sampler on our sandwiches (the serine
    helix within `5·10⁻⁴` nats at probability 0.95 from the order-5 ball) and optimal
    site shares (the core of a convex game; Frank–Wolfe).  Left:
-   (a) **the charged case** (finding 9j; workstream P8 running): the compact
-   ensemble that is not frozen is certified for serine at twelve residues (0.077
-   nats at order 5, 0.012 at order 6), and the reach table says the certificate now stops at lysine
-   and the patterned sequence — first-order estimates of 1.3 and 10 nats at order 6.
-   The levers, to be put in numbers by P8: a sharper bound for far charged pairs
-   (does P3's cross bound carry the factor `e^{−r²/4B_aB_b}`?), the sign-blind floor
-   for charged groups (P5's theorem was measured on leucine and serine only), one
-   more order (ball `1.9·10⁷` for Lys₁₂ at order 6), the theory division's sampler on
-   a sandwich of one to two nats.  When P8 reports: read, recompute its key
-   numbers, publish;
-   (a′) **the referee of our own certificate work** (addenda A17 (13)–(16)): not
+   (a) **the charged case** (findings 9j, 9n): **done for the homopolymer** — Lys₁₂ is
+   certified within 0.057 nats at order 5 and sampled within `3·10⁻⁵` (workstream P8's
+   constants, the split around the anchor, the nested sampler).  Left, in order of
+   value: (i) **penalties resolved by rotamer state** (P8's request P8-E4: in the proof
+   of Theorem AH the host states are those of the state itself before the maximum is
+   taken; a site or pair penalty table that keeps the dependence fits the band models
+   as they are; the room is four to five orders of magnitude in Boltzmann mean) — the
+   natural next workstream; (ii) **the state-wise constants beyond twelve residues**
+   (no closed form over the subsets; P8's hybrid — closed form with anchored hosts
+   minus an enumerated correction inside a window — is proposed, not run), then a
+   charged sequence at twenty residues; (iii) **the mixed-charge sequence
+   deterministically** (`βΓ₅ = 43` for (LKSE)₃; its remaining constants sit on neutral
+   pairs, where a sign-blind bound cannot be sharp — the open problem of finding 9j);
+   (iv) the first-order-optimal split of a far pair (a Kantorovich dual; the split
+   around the anchor is one feasible point); (v) optimal site shares (finding 9l) on
+   the models with the new split;
+   (a′) **the referee of our own certificate work** (addenda A17 (13)–(18)): not
    done — workstream R14 was stopped at launch by a platform safeguard (§0); needs
    the research owner's decision; if a review is made, its findings go out as a
    linked message, as SCI-MSG-0026 says;
-   (a″) reach of the neutral mobile case: serine at twenty residues, order 5 (`4·10⁶`
-   evaluations, an hour on one core; `certificate_reach_table_H.log` has the
-   first-order estimate) — **now with the nested sampler on top** (`nested_sampler.py
-   S20 H 5 7 T window`): by the rule `2p^mΓ_m` the envelope bracket there is a few
-   hundredths of a nat and 1 200 evaluations should bring it near `10⁻³`; not run;
+   (a″) reach of the neutral mobile case: **serine at twenty residues is certified at
+   order 5** (ball 3 963 696 evaluations, 78 minutes: 0.287 nats, 0.253 with the split
+   around the anchor; the refined rule had said 0.210 plus the reductions).  The
+   nested sampler on it was running at this checkpoint (§0 item 2); the prediction
+   written before any of it (research log, cycle 56): envelope bracket about 0.04
+   nats, about `6·10⁻³` nats as the theory division states the bound, about `10⁻³`
+   with one known mean and an empirical Bernstein bound.  Compare when its log
+   exists;
    (a‴) **optimal shares beyond the site level** (finding 9l; `OPEN_PROBLEMS.md` D9(i)):
    the pair level, where the linear oracle is "the least probable pair of each
    subset" and no longer a sort — an ordering-induced family needs `O(n²)` closed-form
@@ -674,8 +739,9 @@ buried environment (P2-E1), exact arithmetic for the off-lattice chain at 13 tor
    events, order parameters) and, with them, benchmark B3/B4: what averaged data add to
    a certified population; (e) the loose end of two standard errors between two
    samplers (A17 (10), note).
-3. **When workstream P8 reports:** read in full, recompute its key numbers, publish
-   (item 2(a)).  R13 and P7 are published (SCI-REV-0014, SCI-RES-0014); what they leave
+3. **Workstream P8 is read, verified and published** (SCI-MSG-0027; item 2(a) says what
+   is left).  R13, P7, R15, R16 are published (SCI-REV-0014, SCI-RES-0014, SCI-REV-0015,
+   SCI-REV-0016); what they leave
    for us: nothing owed; offered to the theory division — `rate_zero`, the conditional
    Corollary A (each only if they say they want it), and Lemma A17.16 in Lean, which
    exists (`SandwichCost.lean`).  The crossover map

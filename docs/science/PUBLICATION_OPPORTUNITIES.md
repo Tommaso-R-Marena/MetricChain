@@ -354,6 +354,29 @@ our review R12 found two sentences to replace and no theorem false (SCI-REV-0013
 The charter's rule stands: no manuscript or external representation without the
 owner's authorisation.
 
+*Note after addendum A17 (18) and workstream P8 (2026-11-26; SCI-MSG-0027).*  **The
+arc now has its hardest instance class — charged side chains — and a result that a
+reader outside the programme would notice; it is further than ever from being
+externally defensible, for the same three reasons.**  (1) *What was gained.*  A
+charged dodecapeptide with `9.5·10¹⁰` rotamer states: a deterministic certificate of
+its solvated side-chain free energy within 0.057 nats from 1.6 million evaluations,
+and a probabilistic one within `3·10⁻⁵` nats from 60 more; a mixed-charge sequence
+within 0.04 nats at probability 0.95.  The ingredients are three workstreams' and
+two divisions': the constants (P3's theorem, P8's evaluation of it and Theorem AH),
+the split of far pairs (the coordinator), the nested sampler (the theory division).
+(2) *What a referee would ask first.*  Who has recomputed the constants?  Nobody:
+they exist in one implementation, on top of interval enclosures that one workstream
+wrote and nobody re-implemented; the stand-alone checker requested from the
+engineering division (SCI-MSG-0025 §8) is the answer and does not exist.  Is the
+energy model the object of interest?  No: GBn2 on an ideal helix is a test bed.
+Has anyone refereed the addenda?  No (A17 (13)–(18); the referee workstream was
+stopped by a platform safeguard; the decision is the research owner's).  (3) *Prior
+art not searched:* Theorem AH and the split around the anchor are consequences of
+the anchored (cut-HDMR) decomposition; whether they appear in the literature on
+many-body expansions or on dead-end elimination has not been checked, and no
+novelty is claimed.  **Recommendation unchanged:** no external claim; the next
+investment that would change this assessment is the checker, then a referee.
+
 *Note after addendum A17 (17) (2026-11-26; SCI-RES-0017).*  **The arc gained a
 second mode — a probabilistic certificate — and an optimisation with a clean
 structure; neither is externally defensible yet.**  (1) With the theory division's

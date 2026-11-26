@@ -1,0 +1,60 @@
+{
+ "seq": "K4",
+ "bb": "E",
+ "tau": 0.7,
+ "natoms": 100,
+ "nstates": 74529,
+ "orders": {
+  "3": {
+   "nsub": 4,
+   "truth_sum": 0.5179883570322659,
+   "allplus_sum": 3.66941172181032,
+   "onepattern_sum": 3.9474177982501715,
+   "B_sum": 3.9474177982501715,
+   "A_sum": 4.452852326747407,
+   "PP_sum": 10.201344709400562,
+   "P3_sum": 34.921607441502836,
+   "rem_true": 0.3348784634306412,
+   "rem_allplus": 2.6822367880868114,
+   "rem_pattern": 2.988702517325237,
+   "C_rem": 2.988702517325237,
+   "Gamma": 34.92160744150283,
+   "pattern_minus_fraction": 0.22,
+   "pattern_agrees_with_true_signs": 0.58,
+   "A_ratio_min": 6.626921832537271,
+   "A_ratio_median": 8.092679650375883,
+   "A_ratio_max": 10.067690783150002
+  },
+  "4": {
+   "nsub": 1,
+   "truth_sum": 0.05020144420683437,
+   "allplus_sum": 0.14746281115003512,
+   "onepattern_sum": 0.1806486292334739,
+   "B_sum": 0.1806486292334739,
+   "A_sum": 0.1806486292334739,
+   "PP_sum": 0.4539210298976582,
+   "P3_sum": 2.981455881663497,
+   "rem_true": 0.05020144420666384,
+   "rem_allplus": 0.14746281115003512,
+   "rem_pattern": 0.1806486292334739,
+   "C_rem": 0.1806486292334739,
+   "Gamma": 2.9814558816634973,
+   "pattern_minus_fraction": 0.22,
+   "pattern_agrees_with_true_signs": 0.56,
+   "A_ratio_min": 3.5984747468456417,
+   "A_ratio_median": 3.5984747468456417,
+   "A_ratio_max": 3.5984747468456417
+  }
+ },
+ "checks": {
+  "chain": {
+   "n": 25,
+   "violations": 0
+  },
+  "states": {
+   "n": 447174,
+   "violations": 0,
+   "min_ratio": 11.684537768167104
+  }
+ }
+}

@@ -1,0 +1,15 @@
+=== p8_14_exact_terms12: L12 on H, tau 0.6: 240 atoms, 12 sites, states per site [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]; anchor (ICM) (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1); ball of radius 4
+(1) ball of radius 4: 794 evaluations of the solvent term [1s]
+    48 ball values re-evaluated with P3's own evaluator (GBModel.energy): largest deviation 9.1e-12 kcal/mol
+(2) anchored terms of order <= 4: 794 tables [1s, RSS 146 MB]
+    identity g(x) = sum of the anchored terms over the subsets of S(x), at 200 ball states: largest deviation 0.0e+00 kcal/mol
+(3) the truth in the anchor context, by order: M_T = max_y |d_T(y_T)| (kcal/mol; kT in brackets)
+    order 1:   12 subsets: sum 4.6728e+00 [7.838 kT], largest 8.412e-01, median 4.107e-01; sum of the rms over the states of T 4.6728e+00
+    order 2:   66 subsets: sum 4.0452e+00 [6.785 kT], largest 3.549e-01, median 3.883e-02; sum of the rms over the states of T 4.0452e+00;  fall of the sum from order 1: 1.2-fold
+    order 3:  220 subsets: sum 2.5750e+00 [4.319 kT], largest 7.547e-02, median 5.010e-03; sum of the rms over the states of T 2.5750e+00;  fall of the sum from order 2: 1.6-fold
+        by span (last - first site): 2: 2.7 %, 3: 10.7 %, 4: 23.5 %, 5: 28.5 %, 6: 11.2 %, 7: 14.1 %, 8: 3.0 %, 9: 3.2 %, 10: 2.0 %, 11: 0.9 %
+    order 4:  495 subsets: sum 7.7151e-01 [1.294 kT], largest 2.081e-02, median 3.691e-04; sum of the rms over the states of T 7.7151e-01;  fall of the sum from order 3: 3.3-fold
+        by span (last - first site): 3: 0.9 %, 4: 8.3 %, 5: 20.3 %, 6: 28.2 %, 7: 22.4 %, 8: 7.1 %, 9: 7.3 %, 10: 3.9 %, 11: 1.4 %
+        bound >= exact anchor-context term, subset by subset (495 comparisons per variant): violations P3 0, S 0, AH 0, SA 0, Sb 0, SAb 0;  ratio bound/exact: P3 min 26.12, median 403.2, of the sums 244.5; S min 23.94, median 294.6, of the sums 227.0; AH min 23.58, median 278.8, of the sums 221.1; SA min 23.58, median 278.8, of the sums 221.1; Sb min 23.72, median 290.9, of the sums 225.6; SAb min 23.58, median 278.8, of the sums 221.1
+(4) cross-check: M_T of the 220 triples against p8_06_distance.py (direct evaluation on the grid of the three sites): largest deviation 0.0e+00 kcal/mol
+DONE in 1.1 s; peak RSS 187 MB

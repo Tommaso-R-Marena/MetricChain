@@ -1,0 +1,12 @@
+=== p8_12_certificate: K5 on H, tau 0.7: 122 atoms, 5 sites, states per site [14, 14, 12, 7, 7], 115248 assignments; anchor (ICM) (10, 10, 8, 3, 3), E = -149.201284 kcal/mol; order m = 4, band 4, constants 'SA'; enumerated instance
+(1) 5 constants from sr_K5_H_0.70.json: Gamma_4 = 1.56181 kcal/mol = 2.6198 kT; 10 in-window triple sums [0s]
+(2) ball of radius 3: 9636 values read from ball_K5_H_0.70_M3_8b9e31c706.npz
+    48 ball values re-evaluated with P3's own evaluator (GBModel.energy): largest deviation 1.0e-12 kcal/mol
+    anchored terms of order <= 3: 26 tables [0s, RSS 126 MB]
+(3) form S (site penalties), exact window terms (10 terms of order >= 3 exact, 0 reduced, 0 pairs beyond the band): ln Z(E) in [250.946290, 251.948691], width 1.0024 nats; m_- > E at 0, m_+ < E at 0 of all 115248 states; exact ln Z = 251.348445 inside: True [0s, RSS 137 MB]
+(3) form B (banded pair penalties), exact window terms (10 terms of order >= 3 exact, 0 reduced, 0 pairs beyond the band): ln Z(E) in [251.280585, 251.455801], width 0.175217 nats; m_- > E at 0, m_+ < E at 0 of all 115248 states; exact ln Z = 251.348445 inside: True [0s, RSS 137 MB]
+(3) form T (banded triple penalties), exact window terms (10 terms of order >= 3 exact, 0 reduced, 0 pairs beyond the band): ln Z(E) in [251.338479, 251.365213], width 0.0267344 nats; m_- > E at 0, m_+ < E at 0 of all 115248 states; exact ln Z = 251.348445 inside: True [0s, RSS 137 MB]
+(3b) the same models with ALL PENALTIES SET TO ZERO (not a sandwich): width 3.3548e-07 nats -- the part of the brackets above that comes from the reduction of the 0 evaluated terms that do not fit the band (sum of their sup-norm slacks 0 kcal/mol) and of the 0 pairs beyond it, not from the constants; widths minus this: S 1.002, B 0.1752, T 0.02673 [0s]
+(4) 2000 exact samples of the floor of the triple form (157 distinct; 0.98 sites off the anchor on average): m_- > E at 0, m_+ < E at 0; largest E - m_- = 1.5618, largest m_+ - E = 1.5618 kcal/mol
+    uncertified estimate by reweighting the floor's samples: ln Z(E) = 251.347816 +- 0.001787 (inside the bracket: True)
+DONE in 7.0 s; peak RSS 256 MB

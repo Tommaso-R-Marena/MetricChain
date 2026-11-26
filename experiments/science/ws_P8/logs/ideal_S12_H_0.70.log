@@ -1,0 +1,23 @@
+=== p8_08_ideal: S12 on H, tau 0.7: 3200 Gibbs states, 3192 distinct; changed sites per state: mean 6.324, max 11; corner evaluations needed: 500976
+    200/3192 distinct states, 58832 evaluations, 17 s
+    400/3192 distinct states, 82304 evaluations, 23 s
+    600/3192 distinct states, 133672 evaluations, 38 s
+    800/3192 distinct states, 177336 evaluations, 51 s
+    1000/3192 distinct states, 200736 evaluations, 57 s
+    1200/3192 distinct states, 245824 evaluations, 71 s
+    1400/3192 distinct states, 292624 evaluations, 84 s
+    1600/3192 distinct states, 317760 evaluations, 91 s
+    1800/3192 distinct states, 362296 evaluations, 103 s
+    2000/3192 distinct states, 391352 evaluations, 111 s
+    2200/3192 distinct states, 420184 evaluations, 119 s
+    2400/3192 distinct states, 446520 evaluations, 126 s
+    2600/3192 distinct states, 466168 evaluations, 131 s
+    2800/3192 distinct states, 481560 evaluations, 135 s
+    3000/3192 distinct states, 487576 evaluations, 136 s
+    exact remainders at 3192 distinct states from 500824 evaluations of g, 140 s; states with more than 13 changed sites skipped: 0 of 3200
+    order m | mean |R_m| (kcal/mol) | max |R_m| in the sample | FLOOR of any order-m certificate, 2 beta <|R_m|> (nats) | exact-term envelope 2 beta <A_m> (nats) | fraction of states with >= m changed sites
+      3 | 5.064e-03 | 4.175e-02 | 1.699e-02 (+- 3.5e-04) | 5.865e-02 (+- 9.3e-04) | 0.9875
+      4 | 1.301e-04 | 1.734e-03 | 4.365e-04 (+- 1.1e-05) | 1.271e-03 (+- 2.3e-05) | 0.9481
+      5 | 1.774e-06 | 1.003e-04 | 5.952e-06 (+- 2.0e-07) | 1.667e-05 (+- 4.4e-07) | 0.8559
+      6 | 1.423e-08 | 1.081e-06 | 4.775e-08 (+- 2.5e-09) | 1.280e-07 (+- 6.6e-09) | 0.6900
+DONE in 139.7 s; peak RSS 208 MB

@@ -1,0 +1,12 @@
+=== p8_12_certificate: K12 on H, tau 0.7: 276 atoms, 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], 9.49117e+10 assignments; anchor (ICM) (10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3), E = -307.507549 kcal/mol; order m = 5, band 7, constants 'SAb'
+(1) 792 constants from g12b_K12_H_0.70_m5.npz: Gamma_5 = 1.43367 kcal/mol = 2.4048 kT; 140 in-window triple sums [0s]
+(2) ball of radius 4: 1621056 values read from ball_K12_H_0.70_M4_ebe4086eaa.npz
+    48 ball values re-evaluated with P3's own evaluator (GBModel.energy): largest deviation 2.0e-11 kcal/mol
+    anchored terms of order <= 4: 794 tables [2s, RSS 633 MB]
+(3) form S (site penalties), exact window terms (350 terms of order >= 3 exact, 365 reduced, 10 pairs beyond the band): ln Z(E) in [516.847299, 517.444904], width 0.597605 nats; m_- > E at 0, m_+ < E at 0 of the 1600 Gibbs states of the true ensemble [41s, RSS 1394 MB]
+(3) form B (banded pair penalties), exact window terms (350 terms of order >= 3 exact, 365 reduced, 10 pairs beyond the band): ln Z(E) in [517.018944, 517.239333], width 0.22039 nats; m_- > E at 0, m_+ < E at 0 of the 1600 Gibbs states of the true ensemble [42s, RSS 1406 MB]
+(3) form T (banded triple penalties), exact window terms (350 terms of order >= 3 exact, 365 reduced, 10 pairs beyond the band): ln Z(E) in [517.032204, 517.223832], width 0.191628 nats; m_- > E at 0, m_+ < E at 0 of the 1600 Gibbs states of the true ensemble [44s, RSS 1422 MB]
+(3b) the same models with ALL PENALTIES SET TO ZERO (not a sandwich): width 0.141399 nats -- the part of the brackets above that comes from the reduction of the 365 evaluated terms that do not fit the band (sum of their sup-norm slacks 0.212 kcal/mol) and of the 10 pairs beyond it, not from the constants; widths minus this: S 0.4562, B 0.07899, T 0.05023 [45s]
+(4) 2000 exact samples of the floor of the triple form (301 distinct; 1.18 sites off the anchor on average): m_- > E at 0, m_+ < E at 0; largest E - m_- = 0.2116, largest m_+ - E = 0.1517 kcal/mol
+    uncertified estimate by reweighting the floor's samples: ln Z(E) = 517.128493 +- 0.000932 (inside the bracket: True)
+DONE in 264.9 s; peak RSS 2276 MB

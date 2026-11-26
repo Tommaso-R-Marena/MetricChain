@@ -1,0 +1,12 @@
+=== p8_14_exact_terms12: K12 on H, tau 0.7: 276 atoms, 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7]; anchor (ICM) (10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3); ball of radius 3
+(1) ball of radius 3: 96366 values read from cache/ball_K12_H_0.70_M3_ebe4086eaa.npz
+    48 ball values re-evaluated with P3's own evaluator (GBModel.energy): largest deviation 1.5e-11 kcal/mol
+(2) anchored terms of order <= 3: 299 tables [0s, RSS 138 MB]
+    identity g(x) = sum of the anchored terms over the subsets of S(x), at 200 ball states: largest deviation 0.0e+00 kcal/mol
+(3) the truth in the anchor context, by order: M_T = max_y |d_T(y_T)| (kcal/mol; kT in brackets)
+    order 1:   12 subsets: sum 3.8488e+02 [645.6 kT], largest 3.747e+01, median 3.241e+01; sum of the rms over the states of T 2.5115e+02
+    order 2:   66 subsets: sum 2.6007e+02 [436.2 kT], largest 1.340e+01, median 2.539e+00; sum of the rms over the states of T 8.9806e+01;  fall of the sum from order 1: 1.5-fold
+    order 3:  220 subsets: sum 1.1942e+01 [20.03 kT], largest 8.050e-01, median 2.529e-03; sum of the rms over the states of T 1.0399e+00;  fall of the sum from order 2: 21.8-fold
+        by span (last - first site): 2: 2.0 %, 3: 2.9 %, 4: 61.0 %, 5: 1.5 %, 6: 1.0 %, 7: 30.4 %, 8: 0.7 %, 9: 0.1 %, 10: 0.2 %, 11: 0.1 %
+(4) cross-check: M_T of the 220 triples against p8_06_distance.py (direct evaluation on the grid of the three sites): largest deviation 0.0e+00 kcal/mol
+DONE in 0.3 s; peak RSS 257 MB

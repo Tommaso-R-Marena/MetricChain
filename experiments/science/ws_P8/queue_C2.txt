@@ -1,0 +1,3 @@
+# queue C2: Lys12 with band 7 (the span-7 triples i, i+3/4, i+7 of the helix then fit a window); balls from the cache
+p8_12_certificate.py K12 H 0.70 5 7 --variant SAb
+p8_12_certificate.py K12 H 0.70 4 7 --variant SAb

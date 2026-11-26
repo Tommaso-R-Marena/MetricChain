@@ -1,0 +1,8 @@
+=== p8_05_gibbs: K12 on H, tau 0.7: 276 atoms, 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7]; anchor (ICM) (10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3), E = -307.507549; 16 chains, 150 sweeps, burn-in 50
+    sweep 31/150 done, checkpoint written, 72 s
+    sweep 81/150 done, checkpoint written, 132 s
+    sweep 130/150 done, checkpoint written, 193 s
+    sweep 150/150 done, checkpoint written, 218 s
+    1600 states kept; off the anchor: 1.185 +- 0.024 of 12 (standard error over the 16 chains); by site: 0.392 0.228 0.209 0.039 0.016 0.028 0.024 0.021 0.048 0.056 0.062 0.061
+    against the coordinator's table (certificate_reach_table_H.json): largest difference of an off-anchor frequency 0.00e+00  -- the same sample
+DONE in 217.6 s

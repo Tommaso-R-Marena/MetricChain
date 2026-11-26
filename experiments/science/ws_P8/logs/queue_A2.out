@@ -1,0 +1,21 @@
+[06:31:02] START python3 -B p8_04_gamma12.py LKSE:12 H 0.60 5 --budget 1000
+[06:31:02] END   (exit 0) p8_04_gamma12.py LKSE:12 H 0.60 5 --budget 1000
+[06:31:02] START python3 -B p8_04_gamma12.py LKSE:12 H 0.60 6 --budget 1000
+[06:31:03] END   (exit 0) p8_04_gamma12.py LKSE:12 H 0.60 6 --budget 1000
+[06:31:03] START python3 -B p8_04_gamma12.py S12 H 0.70 4 --budget 1000
+[06:31:13] END   (exit 0) p8_04_gamma12.py S12 H 0.70 4 --budget 1000
+[06:31:13] START python3 -B p8_04_gamma12.py S12 H 0.70 5 --budget 1000
+[06:31:33] END   (exit 0) p8_04_gamma12.py S12 H 0.70 5 --budget 1000
+[06:31:33] START python3 -B p8_04_gamma12.py S12 H 0.70 6 --budget 1000
+[06:32:04] END   (exit 0) p8_04_gamma12.py S12 H 0.70 6 --budget 1000
+[06:32:04] START python3 -B p8_04_gamma12.py L12 H 0.60 4 --budget 1000
+[06:32:15] END   (exit 0) p8_04_gamma12.py L12 H 0.60 4 --budget 1000
+[06:32:15] START python3 -B p8_04_gamma12.py L12 H 0.60 5 --budget 1000
+[06:32:37] END   (exit 0) p8_04_gamma12.py L12 H 0.60 5 --budget 1000
+[06:32:37] START python3 -B p8_04_gamma12.py L12 H 0.60 6 --budget 1000
+[06:33:08] END   (exit 0) p8_04_gamma12.py L12 H 0.60 6 --budget 1000
+[06:33:08] START python3 -B p8_03b_statecheck.py K3 H 0.70
+[06:33:10] END   (exit 0) p8_03b_statecheck.py K3 H 0.70
+[06:33:10] START python3 -B p8_03b_statecheck.py K4 H 0.70
+[06:33:27] END   (exit 0) p8_03b_statecheck.py K4 H 0.70
+[06:33:27] START python3 -B p8_05_gibbs.py K12 H 0.70 --budget 1000

@@ -1,0 +1,5 @@
+[07:52:13] START python3 -B p8_12_certificate.py K12 H 0.70 5 7 --variant SAb
+[07:56:50] END   (exit 0) p8_12_certificate.py K12 H 0.70 5 7 --variant SAb
+[07:56:50] START python3 -B p8_12_certificate.py K12 H 0.70 4 7 --variant SAb
+[07:59:20] END   (exit 0) p8_12_certificate.py K12 H 0.70 4 7 --variant SAb
+[07:59:20] QUEUE DONE queue_C2.txt

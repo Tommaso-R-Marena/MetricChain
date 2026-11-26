@@ -1,0 +1,12 @@
+# R16 replication (own code r16lib.py). u = 1, a = 0.110944, n = 32000, n a = 3550.2103
+# started 2026-11-26T09:00:17Z
+n=32000 phi_1=0.200: two 0.8606 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.7775 [2L+ rungs: 17 of 40 (14-20, 31-40); max(xout - x_l) over them 0] | searched 0.4708 [2L+ rungs: 27 of 40 (14-40); max(xout - x_l) over them 0] |   [6 s]
+n=32000 phi_1=0.250: two 0.8095 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.7300 [2L+ rungs: 17 of 40 (14-20, 31-40); max(xout - x_l) over them 0] | searched 0.4439 [2L+ rungs: 27 of 40 (14-40); max(xout - x_l) over them 0] |   [11 s]
+n=32000 phi_1=0.300: two 0.7580 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.6824 [2L+ rungs: 18 of 40 (14-21, 31-40); max(xout - x_l) over them 0] | searched 0.4611 [2L+ rungs: 27 of 40 (14-40); max(xout - x_l) over them 0] |   [17 s]
+n=32000 phi_1=0.350: two 0.7066 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.6347 [2L+ rungs: 18 of 40 (14-21, 31-40); max(xout - x_l) over them 0] | searched 0.4854 [2L+ rungs: 27 of 40 (14-40); max(xout - x_l) over them 0] |   [22 s]
+n=32000 phi_1=0.400: two 0.6551 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.5874 [2L+ rungs: 18 of 40 (14-21, 31-40); max(xout - x_l) over them 0] | searched 0.4914 [2L+ rungs: 27 of 40 (14-40); max(xout - x_l) over them 0] |   [26 s]
+n=32000 phi_1=0.450: two 0.6034 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.5400 [2L+ rungs: 18 of 40 (14-21, 31-40); max(xout - x_l) over them 0] | searched 0.5147 [2L+ rungs: 27 of 40 (14-40); max(xout - x_l) over them 0] |   [30 s]
+n=32000 phi_1=0.500: two 0.5646 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.5646 [2L+ rungs: 18 of 40 (15-21, 30-40); max(xout - x_l) over them 0] | searched 0.5646 [2L+ rungs: 26 of 40 (15-40); max(xout - x_l) over them 0] |   [33 s]
+n=32000 best over these outer fractions: two 0.5646 (phi_1 = 0.5); tuned 0.5400 (phi_1 = 0.45); searched 0.4439 (phi_1 = 0.25)
+# finished 2026-11-26T09:00:50Z; elapsed 33 s
+peak RSS MB 84.1875

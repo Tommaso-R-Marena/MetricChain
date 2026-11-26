@@ -1,0 +1,156 @@
+{
+ "seq": "K5",
+ "bb": "H",
+ "m": 4,
+ "w": 3,
+ "chat": "SAb",
+ "Gamma_kT": 2.0855550043771904,
+ "rules": {
+  "pair": {
+   "width_zero": 0.9503509483656671,
+   "info": {
+    "exact": 7,
+    "reduced": 3,
+    "far_pairs": 1,
+    "reduced_sup": 1.2793304675434456
+   },
+   "S": {
+    "lnZ_lo": 250.99250526702383,
+    "lnZ_hi": 252.87047488406972,
+    "width": 1.877969617045892,
+    "viol_gibbs": 0,
+    "viol_all": 0,
+    "inside": true
+   },
+   "B": {
+    "lnZ_lo": 251.2303486427968,
+    "lnZ_hi": 252.48108309643612,
+    "width": 1.2507344536393248,
+    "viol_gibbs": 0,
+    "viol_all": 0,
+    "inside": true
+   },
+   "T": {
+    "lnZ_lo": 251.25946345582202,
+    "lnZ_hi": 252.41071441357792,
+    "width": 1.1512509577559058,
+    "viol_gibbs": 0,
+    "viol_all": 0,
+    "inside": true
+   }
+  },
+  "best": {
+   "width_zero": 0.9503509483656671,
+   "info": {
+    "exact": 7,
+    "reduced": 3,
+    "far_pairs": 1,
+    "reduced_sup": 1.2793304675434456
+   },
+   "S": {
+    "lnZ_lo": 250.99250526702383,
+    "lnZ_hi": 252.87047488406972,
+    "width": 1.877969617045892,
+    "viol_gibbs": 0,
+    "viol_all": 0,
+    "inside": true
+   },
+   "B": {
+    "lnZ_lo": 251.2303486427968,
+    "lnZ_hi": 252.48108309643612,
+    "width": 1.2507344536393248,
+    "viol_gibbs": 0,
+    "viol_all": 0,
+    "inside": true
+   },
+   "T": {
+    "lnZ_lo": 251.25946345582202,
+    "lnZ_hi": 252.41071441357792,
+    "width": 1.1512509577559058,
+    "viol_gibbs": 0,
+    "viol_all": 0,
+    "inside": true
+   }
+  },
+  "occ": {
+   "width_zero": 0.9500073870602819,
+   "info": {
+    "exact": 7,
+    "reduced": 3,
+    "far_pairs": 1,
+    "reduced_sup": 1.3222761409834902,
+    "first_order": 0.0003009445605076877,
+    "far_first_order": 0.0,
+    "far_kind": {
+     "anchored, kept site i": 0,
+     "anchored, kept site j": 0,
+     "P3": 0
+    }
+   },
+   "S": {
+    "lnZ_lo": 250.9925361427995,
+    "lnZ_hi": 252.87005340496728,
+    "width": 1.8775172621677712,
+    "viol_gibbs": 0,
+    "viol_all": 0,
+    "inside": true
+   },
+   "B": {
+    "lnZ_lo": 251.23038864335342,
+    "lnZ_hi": 252.48070101036353,
+    "width": 1.2503123670101104,
+    "viol_gibbs": 0,
+    "viol_all": 0,
+    "inside": true
+   },
+   "T": {
+    "lnZ_lo": 251.25950974809052,
+    "lnZ_hi": 252.41037118736642,
+    "width": 1.1508614392759,
+    "viol_gibbs": 0,
+    "viol_all": 0,
+    "inside": true
+   }
+  },
+  "occ+": {
+   "width_zero": 0.018699853460134364,
+   "info": {
+    "exact": 7,
+    "reduced": 3,
+    "far_pairs": 1,
+    "reduced_sup": 1.3222761409834902,
+    "first_order": 0.0003009445605076877,
+    "far_first_order": 0.027233538487374673,
+    "far_kind": {
+     "anchored, kept site i": 0,
+     "anchored, kept site j": 1,
+     "P3": 0
+    }
+   },
+   "S": {
+    "lnZ_lo": 251.00972837367874,
+    "lnZ_hi": 251.8262102221255,
+    "width": 0.816481848446756,
+    "viol_gibbs": 0,
+    "viol_all": 0,
+    "inside": true
+   },
+   "B": {
+    "lnZ_lo": 251.24971853214595,
+    "lnZ_hi": 251.49206675827872,
+    "width": 0.2423482261327763,
+    "viol_gibbs": 0,
+    "viol_all": 0,
+    "inside": true
+   },
+   "T": {
+    "lnZ_lo": 251.27939620898098,
+    "lnZ_hi": 251.44291955948108,
+    "width": 0.1635233505000997,
+    "viol_gibbs": 0,
+    "viol_all": 0,
+    "inside": true
+   }
+  }
+ }
+}

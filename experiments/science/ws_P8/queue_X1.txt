@@ -1,0 +1,9 @@
+# EXTRA queue X1 (starts when the heavy queue H1 has ended): exact anchored terms at twelve residues from the ball -- written 07:32, LKSE:12 moved to X2 at 07:37
+p8_14_exact_terms12.py L12 H 0.60 4
+p8_07_estimate.py L12 H 0.60 11
+p8_14_exact_terms12.py K12 H 0.70 3
+p8_14_exact_terms12.py K5 H 0.70 4
+p8_14_exact_terms12.py LKSE:5 H 0.60 4
+p8_14_exact_terms12.py S12 H 0.70 4 --budget 1000
+p8_14_exact_terms12.py S12 H 0.70 4 --budget 1000 --resume
+p8_07_estimate.py S12 H 0.70 7

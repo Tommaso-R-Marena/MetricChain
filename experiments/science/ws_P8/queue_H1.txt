@@ -1,0 +1,46 @@
+# HEAVY queue (one enumeration pass at a time; all with the gc fix; every log ends with its peak RSS) -- started 06:50
+p8_01b_restricted.py LKSE:6 H 0.60 --budget 1000
+p8_01b_restricted.py LKSE:6 H 0.60 --budget 1000
+p8_02_signblind.py LKSE:6 H 0.60
+p8_03_sr_validate.py LKSE:6 H 0.60
+p8_03c_blockcheck.py K3 H 0.70
+p8_03c_blockcheck.py K4 H 0.70
+p8_03c_blockcheck.py LKSE:4 H 0.60
+p8_03c_blockcheck.py LKSE:5 H 0.60
+p8_03c_blockcheck.py K5 H 0.70 --budget 1000
+p8_03c_blockcheck.py K5 H 0.70 --budget 1000
+p8_03b_statecheck.py LKSE:4 H 0.60
+p8_03b_statecheck.py LKSE:5 H 0.60
+p8_01_measure.py S4 H 0.70
+p8_01b_restricted.py S4 H 0.70
+p8_03_sr_validate.py S4 H 0.70
+p8_03c_blockcheck.py S4 H 0.70
+p8_01_measure.py S5 H 0.70
+p8_01b_restricted.py S5 H 0.70
+p8_03_sr_validate.py S5 H 0.70
+p8_03c_blockcheck.py S5 H 0.70
+p8_01_measure.py L6 H 0.60
+p8_01b_restricted.py L6 H 0.60
+p8_03_sr_validate.py L6 H 0.60
+p8_03c_blockcheck.py L6 H 0.60
+p8_01_measure.py L8 H 0.60
+p8_01b_restricted.py L8 H 0.60
+p8_03_sr_validate.py L8 H 0.60
+p8_03c_blockcheck.py L8 H 0.60
+p8_01_measure.py K3 E 0.70
+p8_01b_restricted.py K3 E 0.70
+p8_02_signblind.py K3 E 0.70
+p8_03_sr_validate.py K3 E 0.70
+p8_01_measure.py LKSE:5 E 0.60
+p8_01b_restricted.py LKSE:5 E 0.60
+p8_02_signblind.py LKSE:5 E 0.60
+p8_03_sr_validate.py LKSE:5 E 0.60
+p8_01_measure.py S6 H 0.70 --budget 1000
+p8_01_measure.py S6 H 0.70 --budget 1000
+p8_01b_restricted.py S6 H 0.70 --budget 1000
+p8_03_sr_validate.py S6 H 0.70
+p8_01_measure.py K4 E 0.70 --budget 1000
+p8_01_measure.py K4 E 0.70 --budget 1000
+p8_01b_restricted.py K4 E 0.70 --budget 1000
+p8_02_signblind.py K4 E 0.70
+p8_03_sr_validate.py K4 E 0.70

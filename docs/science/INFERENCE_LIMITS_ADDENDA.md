@@ -2791,6 +2791,7 @@ site shares as the core of a convex game with its consequences (items 52–54), 
     | **Leu₂₀, order 6** (band 19; ball 21 700) | 24.3 | `2.4·10⁻⁴` | 0.634 | 0.0170 | **0.0087**, `[593.300656, 593.309394]` (31 steps, duality gap `10⁻⁶`) | 0.0160 |
     | Leu₂₀, order 5 (band 19; ball 6 196) | 166.6 | 0.89 | 10.5 | 73.6 | 2.02 after 40 steps (duality gap 1.95) | not run |
     | Leu₃₀, order 5 (band 20; ball 31 931) | 340.6 | 3.46 | 41.8 | 130 | 24.5 after the two steps allowed (the bound already says no) | 0.1015 |
+    | **Leu₃₀, order 6** (band 20; ball 174 437; *added after the first version of this item, when its run had finished*) | 54.8 | `4.6·10⁻⁴` | 0.730 | 0.0837 | **0.0105**, `[866.910485, 866.921008]` (6 steps, duality gap `8.8·10⁻⁴`) | not run |
 
     Three things.  **(i) Where `βΓ_m` fits under the depths** — order 6 at twenty
     residues — the Frank–Wolfe floor reaches the bound of item 54 to six decimals
@@ -2810,10 +2811,16 @@ site shares as the core of a convex game with its consequences (items 52–54), 
     certified bracket is valid, so their intersection is: `[866.911009, 866.980721]`,
     0.070 nats where the pair form alone had 0.10.  Sandwiches checked at 400 Gibbs
     states of the true ensemble and 2 000 exact samples of each floor: no violation.
-    *Not done:* thirty residues at order 6 (the run had not finished when this was
-    written; `βΓ₆ = 54.8` should fit under the depths); exact window terms at twenty
-    and thirty residues (each transfer-matrix pass adds thousands of tables in the
-    present code — too slow for an optimiser).
+    *Thirty residues at order 6* (the run finished after the first version of this
+    item, 45 minutes on one core; row added above): `βΓ₆ = 54.8` does fit under the
+    depths — the bound of item 54 is `4.6·10⁻⁴` nats and the Frank–Wolfe floor
+    `866.921008` is within `8.4·10⁻⁴` of the penalty-free minorant `866.920168` after six
+    steps — and the certified bracket is **0.0105 nats for `1.07·10⁹` states**, where
+    order 5 had 0.070 by intersecting two forms; at most 0.0097 of it is P3's
+    reduction of the evaluated terms.  *Not done:* exact window terms at twenty and
+    thirty residues (each transfer-matrix pass adds thousands of tables in the
+    present code — too slow for an optimiser); the split of part (18), item 59, on
+    these models (leucine is apolar; valine gained nothing from it).
 
 57. **What this part changes** [summary].  (i) The theory division's nested sampler
     works on real sandwiches as stated, and their stopping condition is met; its gain
@@ -2832,6 +2839,209 @@ site shares as the core of a convex game with its consequences (items 52–54), 
     site's penalty stays below the cost of changing it.  (v) Not done: optimal shares
     at the pair level (the oracle is no longer a sort); the nested sampler with an
     optimally allocated outer sandwich; a referee.
+
+### (18) The charged case: workstream P8's constants checked; what "limited by the band" was; the sampler inside the result [P, elementary, for items 59–60; M for the numbers; the constants are workstream P8's; added 2026-11-26]
+
+*Scripts: `experiments/science/p8_verification/` (the checks of item 58);
+`experiments/science/pi_inference/window_model_occ.py`, `occ_reduction_test.py`,
+`nested_sampler_ext.py` (items 59–63).  Nothing in this part has been refereed.*
+
+58. **What workstream P8 found, and what was checked before it was adopted**
+    [K: `workstreams/P8_REPORT.md`, read in full; the checks are the coordinator's].
+    Parts (15)–(16) left the charged sequences outside the certificate: workstream
+    P3's constants gave `βΓ_m = 689, 145, 23.4` for Ace-Lys₁₂-NMe on the helix at
+    orders 4, 5, 6.  P8 was asked whether the factor `e^{−r²/4B_aB_b}` was missing
+    for far pairs.  It is not; the loss is elsewhere: P3's closed form takes the
+    maximum over the rotamers of a term's *host* side chains ingredient by
+    ingredient, and for a long charged side chain the merged maxima never occur
+    together.  With the maximum taken **state-wise** — P3's own theorem, evaluated
+    subset by subset ('Sb') — and a new statement, **Theorem AH**: expanding every
+    term in an order of the sites that puts its own hosts last, a host outside `T` sits at
+    the anchor in every evaluation ('SAb') — the constants become, in `k_BT`:
+
+    | peptide | P3, orders 4, 5, 6 | 'Sb' | **'SAb'** |
+    |---|---|---|---|
+    | Lys₁₂ | 689, 145, 23.4 | 36.3, 2.54, 0.142 | **34.0, 2.40, 0.136** |
+    | (LKSE)₃ | 1 874, 568, 147 | 312, 44.5, 5.00 | **296, 42.8, 4.87** |
+    | Ser₁₂ | 5.44, 0.226, 0.0073 | 3.49, 0.139, 0.0042 | 3.47, 0.138, 0.0042 |
+    | Leu₁₂ | 316, 45.1, 5.01 | 292, 41.4, 4.58 | 286, 40.8, 4.53 |
+
+    (P8's table; the 'P3' and 'SAb' columns at orders 4 and 5 for Lys₁₂ re-read by my
+    own summation.)  **Checked by the coordinator** (the note at the end of the
+    report has the details): the proof of Theorem AH re-derived — sound, and its
+    hypothesis can be weakened from "at most `m − 1` hosts" to "at most `m`", which
+    is sharp; an exact test on a family of functions built to break it (no
+    violation in `1.2·10⁶` checks, the inequality attained with ratio 1, three
+    deliberately wrong versions all violated — while on Gaussian tables eleven wrong
+    versions pass, a warning about that kind of test); the inequality the
+    certificate needs, `|g − I_{m−1}g| ≤ Σ_{T⊆S(x)} ĉ_T`, at **every** state of Lys₄,
+    Lys₅ and LKSE:5 with my own remainder code (no violation; the bound is at least
+    12 times the remainder at every state and `10⁴`–`4·10⁵` times it in Boltzmann
+    mean); the
+    same at 4 250 uniformly random states of Lys₁₂ (no violation; at order 5 the
+    true remainder never exceeds `8.3·10⁻⁴` kcal/mol, even with all twelve side
+    chains off the anchor); P8's nine certified brackets for Lys₁₂ reproduced by
+    another driver to every printed digit; P8's validation chain for Lys₄ re-run.
+    **Not recomputed by anyone but P8: the constants themselves** — the checks are
+    a review of the theorem, necessary conditions, and re-runs.  *What rests on
+    what:* most of the gain is P3's theorem ('Sb'); Theorem AH takes another 4–7 % off
+    the constants, which is 2–4 % of the bracket at order 5 and a factor two at order 4
+    (3.25 against 1.56 nats), where the floor is in its exponential regime.
+
+    With these constants and the pipeline of part (16) (exact window terms, band 7,
+    order 5, ball 1 621 056) Lys₁₂ is certified within **0.598 / 0.220 / 0.192 nats**
+    (site / banded pair / banded triple form), and P8 observed that 0.141 of the
+    0.192 remain when all penalties are set to zero: "limited by the band, not by
+    the constants any more".
+
+59. **What the band's part was: the split of the pairs beyond the band**
+    [P, elementary].  A pair table `P = J_ij + d_ij` with `|i − j| > w` cannot be kept
+    by the transfer matrix and is replaced by one-site functions.  Workstream P3
+    uses `b(x_j)` = column mean, `a^∓(x_i)` = row minimum / maximum of `P − b`.
+
+    *Split around the anchor.*  Put `A(x_i) = P(x_i, x⁰_j)`,
+    `B(x_j) = P(x⁰_i, x_j) − P(x⁰_i, x⁰_j)`, `D = P − A − B`.  Then `D` vanishes on the
+    anchor row and the anchor column, and with `λ(x_i) = min_{x_j} D(x_i, x_j) ≤ 0 ≤
+    μ(x_i) = max_{x_j} D(x_i, x_j)`:
+
+    ```
+    A(x_i) + B(x_j) + λ(x_i)   ≤   P(x_i, x_j)   ≤   A(x_i) + B(x_j) + μ(x_i),          λ(x⁰_i) = μ(x⁰_i) = 0.
+    ```
+
+    (Proof: `λ(x_i) ≤ D(x_i, x_j) ≤ μ(x_i)` by definition; `D(x⁰_i, ·) = 0`.)  The same
+    with the roles of `i` and `j` exchanged.  **Both bounds are exact whenever the
+    kept site is at its anchor**, whatever the other site does; by the first-order
+    law of part (16) (Lemma A17.16) the pair then costs the bracket about
+    `β E[(μ − λ)(x_i)] ≤ β·P(x_i ≠ x⁰_i)·max(μ − λ)` — proportional to how often the
+    *kept* site leaves the anchor, so the kept site should be the rarer one.  P3's
+    split is exact nowhere in general: at the anchor row its slack is the range over
+    `x_j` of the column means of `D` — it charges the non-additive part of a far pair
+    **even in the anchor state itself**, i.e. always.  For two side chains that each
+    leave the anchor a few per cent of the time the two splits differ by that
+    factor.  Any choice is valid (each replaces the pair by a pointwise minorant /
+    majorant), so the choice may be guided by an uncertified sample: for each far
+    pair I take, of the three candidates (around the anchor keeping `i`, keeping `j`,
+    P3's), the one with the least sample mean of `max − min`.
+
+60. **The terms of order ≥ 3 that do not fit a window** [P for validity; M].  The
+    same idea: an anchored term `d_U` reduced to a sub-tuple `K ⊂ U` that fits a
+    window, `min_{x_{U∖K}} d_U`, is non-zero only when all sites of `K` are off the
+    anchor; rule "occ" keeps the maximal sub-tuple with the least sample mean of
+    `max − min` (the rules of part (16) choose by sup-norm).  **It changes nothing
+    measurable on these instances** — those terms cost `3·10⁻⁶` to `2.5·10⁻³` nats
+    to first order — and is reported because it was tried, not because it helps.
+
+61. **Numbers** [M; `occ_reduction_test.py`; every bracket certified, the sandwich
+    checked at 960 Gibbs states of a second sample and 2 000 exact samples of the
+    floor; for Lys₅ at every state, with the exact `ln Z` inside].  "Reductions" is
+    the width of the same models with all penalties zero (not a sandwich: what the
+    band costs by itself).  Widths in nats, banded triple form; constants 'SAb' for
+    the lysine peptides and (LKSE)₃, workstream P3's closed form otherwise.
+
+    | instance | order, band; far pairs | reductions: P3's split | reductions: split around the anchor | certified bracket: P3's split | **certified bracket: split around the anchor** |
+    |---|---|---|---|---|---|
+    | Lys₅ (115 248 states, enumerated; exact `ln Z = 251.348445`) | 4, band 2; 3 | 3.54 | 0.046 | 4.00 | **0.374** `[251.198528, 251.572785]` |
+    | Lys₅ (enumerated) | 4, band 3; 1 | 0.950 | 0.019 | 1.15 | **0.164** `[251.279396, 251.442920]` |
+    | **Lys₁₂** (`9.5·10¹⁰` states) | 5, band 7; 10 | 0.1414 | 0.0071 | 0.1916 | **0.0567** `[517.101364, 517.158058]` |
+    | Lys₁₂ | 5, band 6; 15 | 0.3542 | 0.0211 | 0.4461 | **0.1115** `[517.073860, 517.185350]` |
+    | (LKSE)₃ (`7.1·10¹⁰` states) | 5, band 7; 10 | 0.1721 | 0.0167 | 4.487 | **4.301** `[654.981476, 659.282763]` |
+    | Ser₁₂ (`4.9·10⁹` states; mobile, `p ≈ 0.5`) | 5, band 7; 10 | 0.0160 | 0.0091 | 0.0942 | **0.0872** `[227.325848, 227.413092]` |
+    | **Ser₂₀** (`8.2·10¹⁵` states; mobile; ball 3 963 696 evaluations, 78 minutes on one core) | 5, band 7; 78 | 0.0768 | 0.0431 | 0.2870 | **0.2534** `[347.033552, 347.286942]` |
+    | Val₂₀ / PPII (`3.5·10⁹` states; apolar) | 4, band 8; 66 | `4.3·10⁻⁵` | `1.4·10⁻⁵` | 0.04994 | 0.04991 |
+
+    Site and banded pair forms of Lys₁₂ at band 7: 0.598 → **0.459**, 0.220 →
+    **0.085**.  In every row the far pairs chose the split around the anchor (none
+    chose P3's), and rule "occ" alone (item 60) moved the bracket by less than
+    0.7 %.  **Reading.**  The band's part of the lysine bracket was not the band:
+    it was the way ten pairs of charged side chains more than seven residues apart
+    were split — P3's split paid their non-additive part at every state, the split
+    around the anchor pays it when the kept side chain moves (2–7 % of the time
+    for nine of the twelve).  Where every side chain moves half of the time
+    (serine) the gain is the factor 1.8 on a part that was small; where far pairs
+    carry nothing (valine: apolar) there is nothing to gain.  *Serine at twenty
+    residues* is new in this part (the run of part (16) at a length that cannot be
+    enumerated by eight orders of magnitude): certified within 0.287 nats at order
+    5, 0.253 with the split; the refined rule of part (16) had said 0.210 before the
+    ball was paid for, and the difference is the reductions to the third decimal
+    (`0.210 + 0.077 = 0.287`, `0.210 + 0.043 = 0.253`) — the bracket is the mean
+    penalty plus the mean reduction, as Lemma A17.16 says.  **Lys₁₂ on the helix
+    is now certified within 0.057 nats, deterministically, at order 5** — the same
+    order of magnitude as the neutral helices of parts (10), (16) — and what is left
+    is the constants again (0.050 of the 0.057; the far pairs 0.007).
+
+62. **The nested sampler on Lys₁₂** [M; `nested_sampler_ext.py`; the theory division's
+    Proposition 11.113a as run in part (17), with the outer sandwich of item 61
+    and the envelope from P8's constants; prediction written into the research log
+    before the run].  The inner sandwich pays only the envelope
+    `Σ_{T⊆S(x)} ĉ_T`, whose bracket is `9·10⁻⁶` nats (predicted `2·10⁻⁵` from P8's
+    first-order estimate), so nearly nothing is left for evaluations: of 400 000
+    proposals **19** are accepted for evaluation (60 on the narrower outer
+    sandwich).  With probability at least 0.95, given the sandwich:
+
+    | outer sandwich | `D` | as stated (Hoeffding) | two-end (Hoeffding) | **two-end, empirical Bernstein** | new evaluations of `g` |
+    |---|---|---|---|---|---|
+    | P3's split | 0.1916 | `1.88·10⁻³` (predicted `2·10⁻³`) | `9.5·10⁻⁴` (predicted `1·10⁻³`) | `2.2·10⁻⁴`, `[517.128424, 517.128646]` (predicted `4·10⁻⁴`) | 19 |
+    | split around the anchor | 0.0567 | `5.6·10⁻⁴` | `2.8·10⁻⁴` | **`3.3·10⁻⁵`, `[517.128526, 517.128559]`** | 60 |
+
+    The two runs agree (the second interval lies inside the first); P8's and my
+    uncertified reweighting estimates, `517.1285 ± 0.0009` and `517.1284 ± 0.0010`,
+    contain both.  **The free energy of a charged dodecamer with `9.5·10¹⁰` states is
+    known to `3·10⁻⁵` nats at probability 0.95** from the ball of order 5
+    (1 621 056 evaluations, 24–31 minutes on one core by P8's measurement) plus 60
+    evaluations; the width is the proposal term and falls as `1/√N_f` at a cost of
+    seconds.  *Not predicted:* that so few evaluations would be used — my recorded
+    figures for a plain sampler "with the same 1 200 evaluations" were therefore not
+    tested.  *A practical finding:* workstream P3's band sampler recomputes the
+    transfer-matrix messages at every call; the sampler of part (17) calls it once
+    per batch, and for Lys₁₂ at band 7 the proposals would have taken about an hour
+    (the first run was stopped after sixteen minutes); with the messages computed
+    once (`nested_sampler_ext.py`; identical output on Lys₅) they take 14 seconds.
+
+63. **The patterned sequence** [M].  For (LKSE)₃ P8's constants leave `βΓ₅ = 42.8`
+    and a certified bracket of **4.49 nats** (triple form, band 7) — the floor
+    delocalises (nine side chains off the anchor in its samples, three in the
+    ensemble), and no deterministic combination at an affordable order brings it
+    below one nat.  The sampler does not need the deterministic bracket to be
+    small, only the proposals to be cheap:
+
+    | run | outer `D` | envelope bracket (estimated from the proposals) | `E_q ρ` | proposals; evaluations | two-end, empirical Bernstein, probability 0.95 | plain sampler, same evaluations (empirical Bernstein) |
+    |---|---|---|---|---|---|---|
+    | P3's split | 4.487 | 1.23 | 0.058 | 400 000; 1 200 | **0.169**, `[655.522897, 655.691668]` | 1.18 |
+    | split around the anchor | 4.301 | 1.23 | 0.062 | 4 000 000; 12 000 | **0.041**, `[655.592089, 655.632643]` | 0.182 |
+
+    *The first run against its prediction:* I had guessed an envelope bracket of
+    0.1 nats and a width of 0.03–0.04; the envelope bracket is 1.23 nats — the
+    envelope, the smallest valid penalty, delocalises too — and the width 0.17.
+    The second run was predicted at 0.05 nats before it started and gave 0.041; its
+    interval lies inside the first.  With the same 12 000 evaluations the plain
+    sampler has 0.18 (empirical Bernstein) and 1.0 (Hoeffding).  P8's uncertified
+    reweighting estimate of this `ln Z`, `655.79 ± 0.09`, lies above both intervals,
+    1.9 of its standard errors above their point estimates: reweighting 2 000
+    samples of a delocalised floor has a heavier tail than its standard error says.  **A sequence of mixed
+    charge with `7·10¹⁰` states, 4.5 nats wide deterministically, is within
+    0.041 nats at probability 0.95.**
+
+64. **What this part changes** [summary].  (i) The charged case is inside the
+    certificate: with workstream P8's constants and the split of item 59, Lys₁₂ on
+    the helix is certified within 0.057 nats and sampled within `3·10⁻⁵`; the
+    constants' validity rests on P3's theorem, on P8's Theorem AH (re-derived and
+    tested here, not refereed), and on code nobody has re-implemented.  (ii) Every
+    certificate of parts (10)–(17) whose band is shorter than the chain used P3's
+    split of the far pairs; for apolar and mobile side chains that cost little
+    (valine: nothing; serine: 7 % of the bracket), for charged, mostly frozen ones
+    it was three quarters of the bracket.  (iii) The mixed-charge sequence is
+    reachable by sampling and not deterministically: its constants (`βΓ₅ = 43`,
+    still 119 times the exact four-body terms by P8's measurement) are the open
+    problem; what is left of them sits on neutral pairs, where workstream P5's
+    sign-reversal theorem says a sign-blind bound cannot be sharp.
+    (iv) *Not done:* penalties resolved by rotamer state (P8's request P8-E4: the
+    proof of Theorem AH gives them); the state-wise constants beyond twelve
+    residues (no closed form over the subsets; P8's hybrid, request P8-E2); the
+    first-order-optimal split of a far pair, which is a transport problem (the best
+    additive minorant of `P` against given site marginals is a Kantorovich dual) —
+    the split around the anchor is one feasible point of it; optimal site shares
+    (part (17)) on top of these models; twenty residues with a charged sequence; a
+    referee.
 
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 

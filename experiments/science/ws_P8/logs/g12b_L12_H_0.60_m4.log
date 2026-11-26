@@ -1,0 +1,6 @@
+=== p8_04b_gamma12_blocks: L12 on H, tau 0.6: atoms 240, sites 12; anchor (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1); order 4: 495 subsets
+    subset 495/495 done, checkpoint written, 5 s
+    per-subset chains Sb <= S, SAb <= SA, SAb <= Sb: 1485 comparisons, 0 violations
+    Gamma_4[Sb ] =      174.018 kcal/mol =      291.898 kT;  P3 / Sb: sums 1.084; per subset min 1.00, median 1.15, max 4.39;  pair-wise / block-wise: 1.006
+    Gamma_4[SAb] =      170.573 kcal/mol =      286.118 kT;  P3 / SAb: sums 1.106; per subset min 1.01, median 1.19, max 4.71;  pair-wise / block-wise: 1.000
+DONE in 5.1 s; peak RSS 102 MB

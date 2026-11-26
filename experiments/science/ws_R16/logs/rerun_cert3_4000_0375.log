@@ -1,0 +1,5 @@
+# re-run of the theory division's cert3.py (one line) from the read-only export, through runpy so that the peak RSS can be printed: python3 -I -B cert3.py 4000 0.375 tuned,searched ; started 2026-11-26T08:58:04Z
+n=4000 phi_1=0.375: two levels: flat 0.7994, C_max 0.8553 | three levels, servers chosen at the flat fibre: flat nan, C_max with flat middle costs nan, certified C_max nan | servers chosen by certified cost: flat nan, certified C_max 0.6387 | the same with more middle designs: flat nan, certified C_max 0.6106   [30 s]
+n=4000 best over these outer fractions: two levels: flat 0.7994, C_max 0.8553 | three levels, servers chosen at the flat fibre: flat nan, certified C_max nan | servers chosen by certified cost: flat nan, certified C_max 0.6387 | the same with more middle designs: flat nan, certified C_max 0.6106
+# elapsed 30 s; finished 2026-11-26T08:58:34Z
+peak RSS MB 36.61328125

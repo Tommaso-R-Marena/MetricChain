@@ -1,0 +1,20 @@
+# r16_ladders.py started 2026-11-26T09:15:51Z
+# ln(C_max)/(n a), two levels, u = 1
+n=  1000 phi=0.50: geometric ladder (L=40): 1.1384 | ladder eps*0.85^i (L=31): 1.1380 | difference +0.0003   [0 s]
+n=  1000 phi=0.55: geometric ladder (L=40): 1.1854 | ladder eps*0.85^i (L=30): 1.1720 | difference +0.0134   [0 s]
+n=  1400 phi=0.50: geometric ladder (L=40): 0.9933 | ladder eps*0.85^i (L=33): 0.9913 | difference +0.0020   [0 s]
+n=  1400 phi=0.55: geometric ladder (L=40): 1.0415 | ladder eps*0.85^i (L=32): 1.0314 | difference +0.0100   [0 s]
+n=  2000 phi=0.50: geometric ladder (L=40): 0.8721 | ladder eps*0.85^i (L=35): 0.8700 | difference +0.0021   [0 s]
+n=  2000 phi=0.55: geometric ladder (L=40): 0.9276 | ladder eps*0.85^i (L=35): 0.9207 | difference +0.0069   [0 s]
+n=  4000 phi=0.50: geometric ladder (L=40): 0.7262 | ladder eps*0.85^i (L=39): 0.7228 | difference +0.0034   [0 s]
+n=  4000 phi=0.55: geometric ladder (L=40): 0.7829 | ladder eps*0.85^i (L=39): 0.7792 | difference +0.0036   [0 s]
+n=  8000 phi=0.50: geometric ladder (L=40): 0.6415 | ladder eps*0.85^i (L=41): 0.6387 | difference +0.0028   [0 s]
+n=  8000 phi=0.55: geometric ladder (L=40): 0.6948 | ladder eps*0.85^i (L=41): 0.6930 | difference +0.0018   [0 s]
+n= 16000 phi=0.50: geometric ladder (L=40): 0.5899 | ladder eps*0.85^i (L=41): 0.5887 | difference +0.0011   [0 s]
+n= 16000 phi=0.55: geometric ladder (L=40): 0.6428 | ladder eps*0.85^i (L=41): 0.6418 | difference +0.0010   [0 s]
+n= 32000 phi=0.50: geometric ladder (L=40): 0.5646 | ladder eps*0.85^i (L=41): 0.5596 | difference +0.0050   [0 s]
+n= 32000 phi=0.55: geometric ladder (L=40): 0.6105 | ladder eps*0.85^i (L=41): 0.6101 | difference +0.0004   [1 s]
+n= 64000 phi=0.50: geometric ladder (L=40): 0.5407 | ladder eps*0.85^i (L=41): 0.5419 | difference -0.0012   [1 s]
+n= 64000 phi=0.55: geometric ladder (L=40): 0.5913 | ladder eps*0.85^i (L=41): 0.5899 | difference +0.0014   [2 s]
+# finished 2026-11-26T09:15:53Z
+peak RSS MB 37.7265625

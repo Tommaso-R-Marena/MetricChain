@@ -1,0 +1,12 @@
+=== p8_01b_restricted: K5 on H, tau 0.7: atoms 122, sites 5, 115248 states, anchor (10, 10, 8, 3, 3); 16 subsets
+    row 12/122 done, checkpoint written, 64 s
+    row 27/122 done, checkpoint written, 125 s
+    row 44/122 done, checkpoint written, 186 s
+    row 66/122 done, checkpoint written, 247 s
+    row 99/122 done, checkpoint written, 307 s
+    row 122/122 done, checkpoint written, 324 s
+    checks: PPA <= PP for every (T, pair): 120048 comparisons, 0 violations; equal where no host of the pair is outside T: 79173 of 79173
+    order 3: sum over subsets and pairs of the exact constants: all contexts 1.868123e+01, hosts outside T at the anchor 1.807199e+01 (ratio 1.034)
+    order 4: sum over subsets and pairs of the exact constants: all contexts 5.449224e-01, hosts outside T at the anchor 5.379243e-01 (ratio 1.013)
+    order 5: sum over subsets and pairs of the exact constants: all contexts 6.432041e-03, hosts outside T at the anchor 6.432041e-03 (ratio 1.000)
+DONE in 323.9 s

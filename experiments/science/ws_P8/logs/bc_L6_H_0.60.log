@@ -1,0 +1,13 @@
+=== p8_03c_blockcheck: L6 on H, tau 0.6: atoms 126, sites 6, 64 states, anchor (1, 1, 1, 1, 1, 1); 42 subsets, 29 blocks; accumulators at most 0.00 GB
+    row 126/126 done, checkpoint written, 4 s, RSS 76 MB
+    B1 'Sb' block bound >= exact block constant (all contexts; absolute values term by term): 1218 comparisons, 0 violations; ratio bound/exact (exact > 1e-10): min 1.0260, median 2.52, max 28.1
+    B2 'SAb' block bound >= exact block constant with the hosts outside T at the anchor: 1218 comparisons, 0 violations; ratio bound/exact (exact > 1e-10): min 1.0109, median 2.64, max 28.1
+    (for information: 'SAb' < exact ALL-context block constant in 248 of 1218 cases)
+    B3 every state, block and order: sum over the terms of the block of |tau - I_(m-1) tau|(x) <= block envelope: 7424 comparisons per variant; violations Sb: 0, SAb: 0; smallest ratio envelope/exact: Sb 1.0494, SAb 1.0122
+    B4 every state, 2 charge systems (true charges, all charges positive): |g_s - I_(m-1) g_s| <= envelope: 512 state checks per variant; violations Sb: 0, SAb: 0; smallest ratio envelope/|remainder|: Sb 7.89, SAb 7.77
+    B5 'Sb' against P3's termwise.TermBound in anchored mode (42 subsets): largest relative deviation 6.1e-16;  Sb <= S, SAb <= SA, SAb <= Sb: 126 comparisons, 0 violations
+--- order 3: sums over 20 subsets (kcal/mol): truth 2.6782e-01 | exact block constants 3.5192e+01 (restricted 3.4694e+01) | pair-by-pair 3.7287e+01 | SAb 1.2768e+02 | Sb 1.2927e+02 | SA 1.2768e+02 | S 1.2993e+02 | P3 1.3167e+02;  P3/SAb = 1.03, S/Sb = 1.005, SAb/truth = 476.7
+--- order 4: sums over 15 subsets (kcal/mol): truth 6.0705e-02 | exact block constants 2.2096e+00 (restricted 2.1852e+00) | pair-by-pair 2.3371e+00 | SAb 1.2645e+01 | Sb 1.2732e+01 | SA 1.2645e+01 | S 1.2767e+01 | P3 1.2881e+01;  P3/SAb = 1.02, S/Sb = 1.003, SAb/truth = 208.3
+--- order 5: sums over 6 subsets (kcal/mol): truth 4.1843e-03 | exact block constants 9.5303e-02 (restricted 9.5010e-02) | pair-by-pair 9.7945e-02 | SAb 7.6925e-01 | Sb 7.7161e-01 | SA 7.6925e-01 | S 7.7268e-01 | P3 7.7634e-01;  P3/SAb = 1.01, S/Sb = 1.001, SAb/truth = 183.8
+--- order 6: sums over 1 subsets (kcal/mol): truth 1.2138e-04 | exact block constants 1.9149e-03 (restricted 1.9149e-03) | pair-by-pair 1.9149e-03 | SAb 2.1551e-02 | Sb 2.1551e-02 | SA 2.1551e-02 | S 2.1551e-02 | P3 2.1551e-02;  P3/SAb = 1.00, S/Sb = 1.000, SAb/truth = 177.5
+DONE in 5.5 s; peak RSS 97 MB

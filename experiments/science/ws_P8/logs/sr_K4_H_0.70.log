@@ -1,0 +1,47 @@
+=== p8_03_sr_validate: K4 on H, tau 0.7: atoms 100, sites 4, domain [14, 14, 12, 7], anchor (10, 10, 8, 3); 5 subsets of order 3..4
+    bounds of 5 subsets in the variants ('P3', 'S', 'AH', 'SA') done, 2 s
+    C0 variant 'P3' against P3's own summands: 25250 summands, largest deviation relative to the largest summand 3.5e-16, largest relative deviation of a summand 7.3e-16
+    C1 'S' summand >= exact anchored constant (all contexts), every (T, atom), (T, atom pair): 25250 comparisons, 0 violations; smallest ratio bound/exact (exact > 1e-10): self 1.0004, pair 1.0186; medians 1.18, 2.43
+    C2 'SA' summand >= exact restricted constant (hosts outside T at the anchor): 25250 comparisons, 0 violations; smallest ratio bound/exact (exact > 1e-10): self 1.0004, pair 1.0161; medians 1.17, 2.42
+    C2 'AH' summand >= exact restricted constant: 25250 comparisons, 0 violations; smallest ratio bound/exact (exact > 1e-10): self 1.0004, pair 1.0161; medians 1.44, 4.50
+    (for information: 'SA' summand < exact ALL-context constant in 3986 of 25250 cases -- 'SA' is a bound of the restricted constants only)
+    C3 chains SA <= S <= P3 and SA <= AH <= P3, summand by summand: 101000 comparisons, 0 violations
+    C4 per atom pair and order: sum_T summand >= sup_x |t_pq - I_(m-1) t_pq|: 10100 comparisons per variant; violations P3: 0, S: 0, AH: 0, SA: 0; smallest ratio P3: 1.010, S: 1.004, AH: 1.010, SA: 1.004
+    C5 at every state, |g_s - I_(m-1) g_s|(x) <= envelope sum_(T in S(x)) chat_T, for 4 charge systems (true charges, all charges positive, sign pattern found for order 3, sign pattern found for order 4): 131712 state checks per variant; violations P3: 0, S: 0, AH: 0, SA: 0; smallest ratio envelope/|remainder| P3: 16.44, S: 5.37, AH: 13.68, SA: 5.32
+    C6 closed form total_ah(m) against the sum over subsets of the 'AH' constants: largest relative deviation 2.2e-16
+--- order 3: 4 subsets; sums (kcal/mol): truth 2.3244e-01 | best pair-by-pair 4.3891e+00 (restricted contexts 4.3218e+00) | P3 3.3584e+01 | S 1.0200e+01 | AH 3.2492e+01 | SA 1.0051e+01
+    P3/S = 3.29;  P3/AH = 1.03;  P3/SA = 3.34;   to the truth: P3 144, S 43.9, SA 43.2;  to the best pair-by-pair: P3 7.65, S 2.32, SA/restricted 2.33
+    cross part by host pattern:   best pair-by-pair (all contexts; restricted) | P3 | S | AH | SA | P3/PP | S/PP | SA/PPA
+      0 moving, 0 host(s) in T: 6.4129e-01; 6.4129e-01 | 2.3590e+00 | 2.3590e+00 | 2.3590e+00 | 2.3590e+00 |    3.68 |   3.68 |   3.68
+      1 moving, 0 host(s) in T: 5.9882e-02; 8.7063e-03 | 3.5453e-01 | 1.3708e-01 | 2.3643e-02 | 2.3643e-02 |    5.92 |   2.29 |   2.72
+      1 moving, 1 host(s) in T: 2.6592e+00; 2.6592e+00 | 1.3377e+01 | 5.9619e+00 | 1.3377e+01 | 5.9619e+00 |    5.03 |   2.24 |   2.24
+      2 moving, 0 host(s) in T: 2.0827e-04; 1.0345e-05 | 1.8744e-02 | 4.5373e-04 | 1.5783e-05 | 1.5783e-05 |   90.00 |   2.18 |   1.53
+      2 moving, 1 host(s) in T: 1.8004e-02; 2.1338e-03 | 7.5921e-01 | 3.8736e-02 | 2.0597e-02 | 4.2197e-03 |   42.17 |   2.15 |   1.98
+      2 moving, 2 host(s) in T: 9.1425e-01; 9.1425e-01 | 1.5656e+01 | 1.5820e+00 | 1.5656e+01 | 1.5820e+00 |   17.12 |   1.73 |   1.73
+    by atom class:   best pair-by-pair (all contexts; restricted) | P3 | S | SA | P3/PP | S/PP | SA/PPA
+      bb-bb        6.4129e-01; 6.4129e-01 | 2.3590e+00 | 2.3590e+00 | 2.3590e+00 |    3.68 |   3.68 |   3.68
+      bb-chain     6.8269e-01; 6.7331e-01 | 2.6778e+00 | 2.1825e+00 | 2.1594e+00 |    3.92 |   3.20 |   3.21
+      bb-head      2.0364e+00; 1.9946e+00 | 1.1054e+01 | 3.9164e+00 | 3.8261e+00 |    5.43 |   1.92 |   1.92
+      chain-chain  7.7815e-02; 7.5422e-02 | 4.6166e-01 | 2.3755e-01 | 2.3204e-01 |    5.93 |   3.05 |   3.08
+      chain-head   3.7722e-01; 3.6784e-01 | 4.4867e+00 | 7.2618e-01 | 7.0559e-01 |   11.89 |   1.93 |   1.92
+      head-head    4.7743e-01; 4.7313e-01 | 1.1485e+01 | 6.5742e-01 | 6.4856e-01 |   24.06 |   1.38 |   1.37
+      self:bb      5.2624e-02; 5.2624e-02 | 7.0994e-02 | 7.0994e-02 | 7.0994e-02 |    1.35 |   1.35 |   1.35
+      self:chain   1.6688e-03; 1.6643e-03 | 1.7123e-02 | 2.4698e-03 | 2.4651e-03 |   10.26 |   1.48 |   1.48
+      self:head    4.1906e-02; 4.1845e-02 | 9.7111e-01 | 4.7112e-02 | 4.7032e-02 |   23.17 |   1.12 |   1.12
+--- order 4: 1 subsets; sums (kcal/mol): truth 2.9417e-03 | best pair-by-pair 7.7455e-02 (restricted contexts 7.7455e-02) | P3 8.5377e-01 | S 2.4590e-01 | AH 8.5377e-01 | SA 2.4590e-01
+    P3/S = 3.47;  P3/AH = 1.00;  P3/SA = 3.47;   to the truth: P3 290, S 83.6, SA 83.6;  to the best pair-by-pair: P3 11.02, S 3.17, SA/restricted 3.17
+    cross part by host pattern:   best pair-by-pair (all contexts; restricted) | P3 | S | AH | SA | P3/PP | S/PP | SA/PPA
+      0 moving, 0 host(s) in T: 1.4361e-02; 1.4361e-02 | 6.2373e-02 | 6.2373e-02 | 6.2373e-02 | 6.2373e-02 |    4.34 |   4.34 |   4.34
+      1 moving, 1 host(s) in T: 5.4130e-02; 5.4130e-02 | 3.7814e-01 | 1.6072e-01 | 3.7814e-01 | 1.6072e-01 |    6.99 |   2.97 |   2.97
+      2 moving, 2 host(s) in T: 8.3234e-03; 8.3234e-03 | 4.0860e-01 | 2.1930e-02 | 4.0860e-01 | 2.1930e-02 |   49.09 |   2.63 |   2.63
+    by atom class:   best pair-by-pair (all contexts; restricted) | P3 | S | SA | P3/PP | S/PP | SA/PPA
+      bb-bb        1.4361e-02; 1.4361e-02 | 6.2373e-02 | 6.2373e-02 | 6.2373e-02 |    4.34 |   4.34 |   4.34
+      bb-chain     1.1936e-02; 1.1936e-02 | 7.1762e-02 | 5.5902e-02 | 5.5902e-02 |    6.01 |   4.68 |   4.68
+      bb-head      4.2194e-02; 4.2194e-02 | 3.0638e-01 | 1.0482e-01 | 1.0482e-01 |    7.26 |   2.48 |   2.48
+      chain-chain  1.3118e-03; 1.3118e-03 | 1.1952e-02 | 4.6490e-03 | 4.6490e-03 |    9.11 |   3.54 |   3.54
+      chain-head   4.8246e-03; 4.8246e-03 | 1.2309e-01 | 1.2693e-02 | 1.2693e-02 |   25.51 |   2.63 |   2.63
+      head-head    2.1869e-03; 2.1869e-03 | 2.7356e-01 | 4.5877e-03 | 4.5877e-03 |  125.09 |   2.10 |   2.10
+      self:bb      5.7429e-04; 5.7429e-04 | 7.8962e-04 | 7.8962e-04 | 7.8962e-04 |    1.37 |   1.37 |   1.37
+      self:chain   5.0420e-06; 5.0420e-06 | 5.5139e-05 | 7.0790e-06 | 7.0790e-06 |   10.94 |   1.40 |   1.40
+      self:head    6.1986e-05; 6.1986e-05 | 3.8123e-03 | 7.9963e-05 | 7.9963e-05 |   61.50 |   1.29 |   1.29
+DONE in 2.0 s

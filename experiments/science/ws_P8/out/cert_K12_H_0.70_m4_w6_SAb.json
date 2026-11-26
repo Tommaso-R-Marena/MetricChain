@@ -1,0 +1,72 @@
+{
+ "seq": "K12",
+ "bb": "H",
+ "tau": 0.7,
+ "m": 4,
+ "w": 6,
+ "variant": "SAb",
+ "n": 12,
+ "domain": 94911683664.0,
+ "nball": 96366,
+ "Gamma_kT": 33.98345051221785,
+ "forms": {
+  "S": {
+   "lnZ_lo": 515.790184280886,
+   "lnZ_hi": 526.8409731935767,
+   "width": 11.050788912690678,
+   "viol_lo": 0,
+   "viol_up": 0,
+   "info": {
+    "exact": 110,
+    "reduced": 110,
+    "far_pairs": 15,
+    "reduced_sup": 3.886082336262916
+   },
+   "exact_inside": null,
+   "max_E_minus_lo": 9.565608141211158,
+   "max_up_minus_E": 9.396780271732553
+  },
+  "B": {
+   "lnZ_lo": 516.4971057561161,
+   "lnZ_hi": 520.8747647874843,
+   "width": 4.377659031368239,
+   "viol_lo": 0,
+   "viol_up": 0,
+   "info": {
+    "exact": 110,
+    "reduced": 110,
+    "far_pairs": 15,
+    "reduced_sup": 3.886082336262916
+   },
+   "exact_inside": null,
+   "max_E_minus_lo": 5.4471997468144195,
+   "max_up_minus_E": 5.278371877335587
+  },
+  "T": {
+   "lnZ_lo": 516.5532620157915,
+   "lnZ_hi": 519.3620839420691,
+   "width": 2.8088219262776875,
+   "viol_lo": 0,
+   "viol_up": 0,
+   "info": {
+    "exact": 110,
+    "reduced": 110,
+    "far_pairs": 15,
+    "reduced_sup": 3.886082336262916
+   },
+   "exact_inside": null,
+   "max_E_minus_lo": 3.7670270000021446,
+   "max_up_minus_E": 3.598199130523767
+  }
+ },
+ "lnZ_exact": null,
+ "width_zero_penalties": 0.3538202329859814,
+ "floor_samples": {
+  "N": 2000,
+  "viol_lo": 0,
+  "viol_up": 0,
+  "est": 517.0868155584602,
+  "se": 0.045436883048663106,
+  "mean_off": 7.8165
+ }
+}

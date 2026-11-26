@@ -1,0 +1,6 @@
+=== p8_03b_statecheck: K3 on H, tau 0.7: atoms 78, 2352 states, anchor (10, 10, 8); orders [3]; variants ('SA', 'S', 'P3')
+    row 78/78 done, checkpoint written, 1 s
+    variant SA: 7246512 (pair, state, order) checks, 0 violations (largest excess 0.00e+00 kcal/mol); smallest ratio envelope/|remainder| where the remainder exceeds 1e-9: 1.0064
+    variant S : 7246512 (pair, state, order) checks, 0 violations (largest excess 0.00e+00 kcal/mol); smallest ratio envelope/|remainder| where the remainder exceeds 1e-9: 1.0064
+    variant P3: 7246512 (pair, state, order) checks, 0 violations (largest excess 0.00e+00 kcal/mol); smallest ratio envelope/|remainder| where the remainder exceeds 1e-9: 1.0185
+DONE in 1.3 s

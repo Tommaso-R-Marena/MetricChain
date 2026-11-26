@@ -1,0 +1,11 @@
+[06:24:15] START python3 -B p8_04_gamma12.py K12 H 0.70 4 --budget 1000
+[06:24:54] END   (exit 0) p8_04_gamma12.py K12 H 0.70 4 --budget 1000
+[06:24:54] START python3 -B p8_04_gamma12.py K12 H 0.70 5 --budget 1000
+[06:26:05] END   (exit 0) p8_04_gamma12.py K12 H 0.70 5 --budget 1000
+[06:26:05] START python3 -B p8_04_gamma12.py K12 H 0.70 6 --budget 1000
+[06:27:48] END   (exit 0) p8_04_gamma12.py K12 H 0.70 6 --budget 1000
+[06:27:48] START python3 -B p8_04_gamma12.py LKSE:12 H 0.60 4 --budget 1000
+[06:28:15] END   (exit 0) p8_04_gamma12.py LKSE:12 H 0.60 4 --budget 1000
+[06:28:15] START python3 -B p8_04_gamma12.py LKSE:12 H 0.60 5 --budget 1000
+[06:29:08] END   (exit 0) p8_04_gamma12.py LKSE:12 H 0.60 5 --budget 1000
+[06:29:08] START python3 -B p8_04_gamma12.py LKSE:12 H 0.60 6 --budget 1000

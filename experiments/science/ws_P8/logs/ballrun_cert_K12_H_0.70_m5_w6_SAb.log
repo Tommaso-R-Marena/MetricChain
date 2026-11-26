@@ -1,0 +1,46 @@
+=== p8_12_certificate: K12 on H, tau 0.7: 276 atoms, 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], 9.49117e+10 assignments; anchor (ICM) (10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3), E = -307.507549 kcal/mol; order m = 5, band 6, constants 'SAb'
+(1) 792 constants from g12b_K12_H_0.70_m5.npz: Gamma_5 = 1.43367 kcal/mol = 2.4048 kT; 110 in-window triple sums [0s]
+    ball: 33792/1621056 evaluations, checkpoint written, 60 s, RSS 1312 MB
+    ball: 94208/1621056 evaluations, checkpoint written, 121 s, RSS 1318 MB
+    ball: 156160/1621056 evaluations, checkpoint written, 181 s, RSS 1318 MB
+    ball: 211456/1621056 evaluations, checkpoint written, 241 s, RSS 1319 MB
+    ball: 273152/1621056 evaluations, checkpoint written, 301 s, RSS 1321 MB
+    ball: 338688/1621056 evaluations, checkpoint written, 361 s, RSS 1321 MB
+    ball: 386304/1621056 evaluations, checkpoint written, 421 s, RSS 1321 MB
+    ball: 433664/1621056 evaluations, checkpoint written, 482 s, RSS 1321 MB
+    ball: 474624/1621056 evaluations, checkpoint written, 542 s, RSS 1321 MB
+    ball: 522752/1621056 evaluations, checkpoint written, 602 s, RSS 1323 MB
+    ball: 562432/1621056 evaluations, checkpoint written, 662 s, RSS 1323 MB
+    ball: 606464/1621056 evaluations, checkpoint written, 722 s, RSS 1323 MB
+    ball: 657152/1621056 evaluations, checkpoint written, 782 s, RSS 1323 MB
+    ball: 708864/1621056 evaluations, checkpoint written, 842 s, RSS 1323 MB
+    ball: 759552/1621056 evaluations, checkpoint written, 903 s, RSS 1323 MB
+    ball: 802560/1621056 evaluations, checkpoint written, 963 s, RSS 1325 MB
+    ball: 828416/1621056 evaluations, checkpoint written, 1000 s, RSS 1325 MB
+BUDGET REACHED in the ball: checkpoint on disk, run the same command again to continue (not a complete run)
+=== p8_12_certificate: K12 on H, tau 0.7: 276 atoms, 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], 9.49117e+10 assignments; anchor (ICM) (10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3), E = -307.507549 kcal/mol; order m = 5, band 6, constants 'SAb'; RESUMING the ball
+(1) 792 constants from g12b_K12_H_0.70_m5.npz: Gamma_5 = 1.43367 kcal/mol = 2.4048 kT; 110 in-window triple sums [0s]
+    ball checkpoint read: 828416 of 1621056 evaluations done
+    ball: 854272/1621056 evaluations, checkpoint written, 61 s, RSS 1325 MB
+    ball: 910592/1621056 evaluations, checkpoint written, 121 s, RSS 1330 MB
+    ball: 949248/1621056 evaluations, checkpoint written, 181 s, RSS 1330 MB
+    ball: 988160/1621056 evaluations, checkpoint written, 241 s, RSS 1330 MB
+    ball: 1036288/1621056 evaluations, checkpoint written, 301 s, RSS 1330 MB
+    ball: 1099520/1621056 evaluations, checkpoint written, 361 s, RSS 1330 MB
+    ball: 1162752/1621056 evaluations, checkpoint written, 421 s, RSS 1330 MB
+    ball: 1226496/1621056 evaluations, checkpoint written, 481 s, RSS 1330 MB
+    ball: 1288448/1621056 evaluations, checkpoint written, 541 s, RSS 1330 MB
+    ball: 1348864/1621056 evaluations, checkpoint written, 601 s, RSS 1330 MB
+    ball: 1408768/1621056 evaluations, checkpoint written, 662 s, RSS 1330 MB
+    ball: 1474304/1621056 evaluations, checkpoint written, 722 s, RSS 1330 MB
+    ball: 1539840/1621056 evaluations, checkpoint written, 782 s, RSS 1330 MB
+    ball: 1584640/1621056 evaluations, checkpoint written, 842 s, RSS 1330 MB
+(2) ball of radius 4: 1621056 evaluations of the solvent term (0.0017 % of the domain) [884s]
+    48 ball values re-evaluated with P3's own evaluator (GBModel.energy): largest deviation 2.0e-11 kcal/mol
+    anchored terms of order <= 4: 794 tables [885s, RSS 1530 MB]
+(3) form S (site penalties), exact window terms (245 terms of order >= 3 exact, 470 reduced, 15 pairs beyond the band): ln Z(E) in [516.783538, 517.595434], width 0.811896 nats; m_- > E at 0, m_+ < E at 0 of the 1600 Gibbs states of the true ensemble [3s, RSS 1531 MB]
+(3) form B (banded pair penalties), exact window terms (245 terms of order >= 3 exact, 470 reduced, 15 pairs beyond the band): ln Z(E) in [516.936649, 517.406968], width 0.470319 nats; m_- > E at 0, m_+ < E at 0 of the 1600 Gibbs states of the true ensemble [3s, RSS 1531 MB]
+(3) form T (banded triple penalties), exact window terms (245 terms of order >= 3 exact, 470 reduced, 15 pairs beyond the band): ln Z(E) in [516.947234, 517.393364], width 0.44613 nats; m_- > E at 0, m_+ < E at 0 of the 1600 Gibbs states of the true ensemble [3s, RSS 1531 MB]
+(4) 2000 exact samples of the floor of the triple form (305 distinct; 1.22 sites off the anchor on average): m_- > E at 0, m_+ < E at 0; largest E - m_- = 0.4370, largest m_+ - E = 0.4906 kcal/mol
+    uncertified estimate by reweighting the floor's samples: ln Z(E) = 517.128140 +- 0.001663 (inside the bracket: True)
+DONE in 901.9 s; peak RSS 1608 MB

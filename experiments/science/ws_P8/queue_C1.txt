@@ -1,0 +1,5 @@
+# queue C1: the certificate runs repeated with the added line (3b) (width of the same models with all penalties zero); balls are read from the cache
+p8_12_certificate.py K5 H 0.70 4 4 --variant SA --enum --force
+p8_12_certificate.py K5 H 0.70 5 4 --variant SA --enum --force
+p8_12_certificate.py K12 H 0.70 4 6 --variant SAb --force
+p8_12_certificate.py K12 H 0.70 5 6 --variant SAb --force

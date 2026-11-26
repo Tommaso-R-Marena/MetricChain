@@ -1,0 +1,28 @@
+=== p8_03_sr_validate: K3 on H, tau 0.7: atoms 78, sites 3, domain [14, 14, 12], anchor (10, 10, 8); 1 subsets of order 3..3
+    bounds of 1 subsets in the variants ('P3', 'S', 'AH', 'SA') done, 1 s
+    C0 variant 'P3' against P3's own summands: 3081 summands, largest deviation relative to the largest summand 3.0e-16, largest relative deviation of a summand 6.5e-16
+    C1 'S' summand >= exact anchored constant (all contexts), every (T, atom), (T, atom pair): 3081 comparisons, 0 violations; smallest ratio bound/exact (exact > 1e-10): self 1.0064, pair 1.0338; medians 1.23, 2.27
+    C2 'SA' summand >= exact restricted constant (hosts outside T at the anchor): 3081 comparisons, 0 violations; smallest ratio bound/exact (exact > 1e-10): self 1.0064, pair 1.0338; medians 1.23, 2.27
+    C2 'AH' summand >= exact restricted constant: 3081 comparisons, 0 violations; smallest ratio bound/exact (exact > 1e-10): self 1.0185, pair 1.1197; medians 1.54, 4.01
+    (for information: 'SA' summand < exact ALL-context constant in 0 of 3081 cases -- 'SA' is a bound of the restricted constants only)
+    C3 chains SA <= S <= P3 and SA <= AH <= P3, summand by summand: 12324 comparisons, 0 violations
+    C4 per atom pair and order: sum_T summand >= sup_x |t_pq - I_(m-1) t_pq|: 3081 comparisons per variant; violations P3: 0, S: 0, AH: 0, SA: 0; smallest ratio P3: 1.019, S: 1.006, AH: 1.019, SA: 1.006
+    C5 at every state, |g_s - I_(m-1) g_s|(x) <= envelope sum_(T in S(x)) chat_T, for 3 charge systems (true charges, all charges positive, sign pattern found for order 3): 7056 state checks per variant; violations P3: 0, S: 0, AH: 0, SA: 0; smallest ratio envelope/|remainder| P3: 21.12, S: 6.20, AH: 21.12, SA: 6.20
+    C6 closed form total_ah(m) against the sum over subsets of the 'AH' constants: largest relative deviation 0.0e+00
+--- order 3: 1 subsets; sums (kcal/mol): truth 1.4067e-01 | best pair-by-pair 1.6975e+00 (restricted contexts 1.6975e+00) | P3 1.3637e+01 | S 4.0023e+00 | AH 1.3637e+01 | SA 4.0023e+00
+    P3/S = 3.41;  P3/AH = 1.00;  P3/SA = 3.41;   to the truth: P3 97, S 28.5, SA 28.5;  to the best pair-by-pair: P3 8.03, S 2.36, SA/restricted 2.36
+    cross part by host pattern:   best pair-by-pair (all contexts; restricted) | P3 | S | AH | SA | P3/PP | S/PP | SA/PPA
+      0 moving, 0 host(s) in T: 2.3867e-01; 2.3867e-01 | 1.0137e+00 | 1.0137e+00 | 1.0137e+00 | 1.0137e+00 |    4.25 |   4.25 |   4.25
+      1 moving, 1 host(s) in T: 9.6953e-01; 9.6953e-01 | 5.2359e+00 | 2.2347e+00 | 5.2359e+00 | 2.2347e+00 |    5.40 |   2.30 |   2.30
+      2 moving, 2 host(s) in T: 4.4001e-01; 4.4001e-01 | 6.9237e+00 | 6.9649e-01 | 6.9237e+00 | 6.9649e-01 |   15.74 |   1.58 |   1.58
+    by atom class:   best pair-by-pair (all contexts; restricted) | P3 | S | SA | P3/PP | S/PP | SA/PPA
+      bb-bb        2.3867e-01; 2.3867e-01 | 1.0137e+00 | 1.0137e+00 | 1.0137e+00 |    4.25 |   4.25 |   4.25
+      bb-chain     2.2276e-01; 2.2276e-01 | 9.1708e-01 | 7.1870e-01 | 7.1870e-01 |    4.12 |   3.23 |   3.23
+      bb-head      7.4676e-01; 7.4676e-01 | 4.3188e+00 | 1.5160e+00 | 1.5160e+00 |    5.78 |   2.03 |   2.03
+      chain-chain  2.6347e-02; 2.6347e-02 | 1.6093e-01 | 7.4201e-02 | 7.4201e-02 |    6.11 |   2.82 |   2.82
+      chain-head   1.5837e-01; 1.5837e-01 | 1.8717e+00 | 2.8687e-01 | 2.8687e-01 |   11.82 |   1.81 |   1.81
+      head-head    2.5529e-01; 2.5529e-01 | 4.8911e+00 | 3.3542e-01 | 3.3542e-01 |   19.16 |   1.31 |   1.31
+      self:bb      2.6142e-02; 2.6142e-02 | 3.2040e-02 | 3.2040e-02 | 3.2040e-02 |    1.23 |   1.23 |   1.23
+      self:chain   8.7046e-04; 8.7046e-04 | 8.2809e-03 | 1.0449e-03 | 1.0449e-03 |    9.51 |   1.20 |   1.20
+      self:head    2.2234e-02; 2.2234e-02 | 4.2335e-01 | 2.4306e-02 | 2.4306e-02 |   19.04 |   1.09 |   1.09
+DONE in 0.9 s
