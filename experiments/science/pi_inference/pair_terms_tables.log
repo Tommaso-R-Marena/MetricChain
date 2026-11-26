@@ -1,0 +1,37 @@
+(1) the theory division's pair-term inequality on our routing (pair_term_mixing.py)
+| case | pairs of groups | share of the exact pair term in pairs whose windows overlap (the inequality gives 0) | … disjoint, one common held site | … disjoint, two held sites | conditional product given the held sites / exact, disjoint pairs | the inequality with the true `ψ` / exact, disjoint pairs | **the inequality with the best possible `ψ` recovers, of the whole pair term** |
+|---|---|---|---|---|---|---|---|
+| Lys₅, order 4, band 2 | 15 | 0.950 (7 pairs) | 0.000 (0) | 0.050 (8) | 1.001 | 0.280 | **0.014** |
+| Lys₅, order 4, band 3 | 1 | 1.000 (1 pairs) | 0.000 (0) | 0.000 (0) | — | — | **0.000** |
+| Lys₅, order 5, band 3 | 1 | 1.000 (1 pairs) | 0.000 (0) | 0.000 (0) | — | — | **0.000** |
+| LKSE:5, order 4, band 2 | 15 | 0.072 (7 pairs) | 0.000 (0) | 0.928 (8) | 1.000 | 0.017 | **0.016** |
+| Lys₁₂, order 4, band 4 | 1540 | 0.469 (939 pairs) | 0.117 (24) | 0.414 (577) | not computable from samples | not computable from samples | at most 0.531 (the share of the disjoint pairs) |
+| Lys₁₂, order 4, band 7 | 190 | 1.000 (189 pairs) | 0.000 (0) | 0.000 (1) | not computable from samples | not computable from samples | at most 0.000 (the share of the disjoint pairs) |
+
+(2) certified second-order recovery with two held sites (held_pair_exact.py)
+| case | first-order corrected bracket (width) | quadruples `(h, h′, s, t)`; passes under the ceiling; under the floor | (a), (b): narrowed by | (c): upper end under the floor | **certified bracket (width)** | **narrowed by** (lower end; upper end) | exact `ln Z` |
+|---|---|---|---|---|---|---|---|
+| Lys₅, order 4, band 2 | [251.3475876, 251.3504722] (0.002885) | 637; 4459 (1 s); 679 (0 s) | 0.165 | 251.3492759 | **[251.3476611, 251.3492759] (0.001615)** | **0.440** (+0.025; −0.415) | 251.3484449, inside |
+| Lys₅, order 4, band 3 | [251.3484184, 251.3484828] (6.437e-05) | 98; 686 (0 s); 119 (0 s) | 0.094 | 251.3484702 | **[251.3484202, 251.3484702] (4.997e-05)** | **0.224** (+0.028; −0.196) | 251.3484449, inside |
+| Lys₅, order 5, band 3 | [251.3484424, 251.3484495] (7.104e-06) | 98; 686 (0 s); 119 (0 s) | 0.766 | 251.3484457 | **[251.3484441, 251.3484457] (1.581e-06)** | **0.777** (+0.241; −0.537) | 251.3484449, inside |
+| LKSE:5, order 4, band 2 | [276.4669085, 276.4684663] (0.001558) | 583; 4081 (1 s); 631 (0 s) | 0.022 | 276.4677321 | **[276.4669098, 276.4677321] (0.0008223)** | **0.472** (+0.001; −0.471) | 276.4672934, inside |
+| Lys₁₂, order 4, band 4 | [517.1283300, 517.1289748] (0.0006449) | 4816; 33712 (125 s); 4919 (19 s) | 0.632 | 517.1286523 | **[517.1284375, 517.1286523] (0.0002148)** | **0.667** (+0.167; −0.500) | not known |
+
+(3) the floor route: workstream R24's values against the coordinator's (fractions of the first-order corrected bracket)
+| instance | upper end, pair laws under the floor — the referee (groups; enumeration, samples for Lys₁₂) | — the coordinator (held sites; exact passes) | both ends, floor above and ceiling below — the referee | — the coordinator | certified bracket (width) against the first-order one (width) |
+|---|---|---|---|---|---|
+| Lys₅, order 4, band 2 | 0.415 | **0.415** | 0.440 | **0.440** | [251.3476611, 251.3492759] (0.001615) against (0.002885) |
+| Lys₅, order 4, band 3 | 0.196 | **0.196** | 0.224 | **0.224** | [251.3484202, 251.3484702] (4.997e-05) against (6.437e-05) |
+| Lys₅, order 5, band 3 | 0.538 | **0.537** | 0.779 | **0.777** | [251.3484441, 251.3484457] (1.581e-06) against (7.104e-06) |
+| LKSE:5, order 4, band 2 | 0.470 | **0.471** | 0.471 | **0.472** | [276.4669098, 276.4677321] (0.0008223) against (0.001558) |
+| Lys₁₂, order 4, band 4 | 0.498 ± 0.002 | **0.500** | 0.664 ± 0.002 | **0.667** | [517.1284375, 517.1286523] (0.0002148) against (0.0006449) |
+
+(4) from the states (held_pair_terms.py): what pair terms of held sites under the ceiling would give
+Lys₅, order 4, band 2: pair terms of held sites under the ceiling would narrow the bracket by 0.165 (merging per held site alone 0.016; the exact joint law of the groups 0.166); 42 held states, 637 pairs of held states; 90 % / 99 % of the lower pair term in the largest 15 / 26 pairs of held states, upper: 11 / 22
+Lys₅, order 4, band 3: pair terms of held sites under the ceiling would narrow the bracket by 0.094 (merging per held site alone 0.000; the exact joint law of the groups 0.094); 21 held states, 98 pairs of held states; 90 % / 99 % of the lower pair term in the largest 3 / 13 pairs of held states, upper: 3 / 14
+Lys₅, order 5, band 3: pair terms of held sites under the ceiling would narrow the bracket by 0.766 (merging per held site alone 0.000; the exact joint law of the groups 0.766); 21 held states, 98 pairs of held states; 90 % / 99 % of the lower pair term in the largest 3 / 13 pairs of held states, upper: 2 / 14
+LKSE:5, order 4, band 2: pair terms of held sites under the ceiling would narrow the bracket by 0.022 (merging per held site alone 0.000; the exact joint law of the groups 0.022); 48 held states, 583 pairs of held states; 90 % / 99 % of the lower pair term in the largest 1 / 5 pairs of held states, upper: 3 / 7
+Lys₁₂, order 4, band 4: pair terms of held sites under the ceiling would narrow the bracket by 0.639 (merging per held site alone 0.065; the exact joint law of the groups 0.644); 103 held states, 4816 pairs of held states; 90 % / 99 % of the lower pair term in the largest 258 / 518 pairs of held states, upper: 237 / 508
+Lys₁₂, order 4, band 7: pair terms of held sites under the ceiling would narrow the bracket by 0.246 (merging per held site alone 0.001; the exact joint law of the groups 0.246); 75 held states, 2422 pairs of held states; 90 % / 99 % of the lower pair term in the largest 75 / 147 pairs of held states, upper: 53 / 126
+
+ALL DONE

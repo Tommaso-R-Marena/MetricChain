@@ -1,0 +1,5 @@
+(1) upper end of E f over the sandwich: 1.000000000000; E_mu f = 1.000000000000 (must be equal: the member is a maximiser); f at the fourth state = 1.0 = t*; the member's weights against the box: 0.5 <= 1.0 <= 1.0, 0.5 <= 1.0 <= 1.0, 2.0 <= 2.0 <= 3.0, 1.0 <= 1.5 <= 2.0 (strictly inside at the fourth state)
+(2) ranges of mu(x) over members with the same E f and the same population of the fourth state: 1.1e-16, 1.1e-16, 0.0e+00, 0.0e+00 (must be 0: identified by two means)
+(3) control, the first mean alone: 0.033, 0.033, 0.067, 0.133 (must be positive somewhere)
+    control, a member strictly inside at every state, w = [0.8, 0.7, 2.5, 1.5], the same two functions: ranges 0.091, 0.091, 0.000, 0.000 (must be positive: not identified)
+ALL DONE

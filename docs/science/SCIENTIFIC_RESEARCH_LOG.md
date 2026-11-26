@@ -2813,3 +2813,77 @@ mixing coefficient given the held site turns a pair mean into conditional means.
 been looking for a statement about joint laws of two groups; none is needed.  Whether
 the mixing coefficient is far enough from one on a lysine band model is now a
 computation.  Five things are owed; they are in the handoff, in order.
+
+
+**20:34 UTC — a prediction for the theory division's pair-term inequality on our routing,
+before the script exists.**  THY-MSG-0018 §2: for non-negative group variables,
+`⟨y_g y_h⟩ ≥ Σ_x P(x)(1 − ψ_x)⟨y_g | x⟩⟨y_h | x⟩`, `x` the held site(s), `ψ_x` a lower mixing
+coefficient of the two windows given `x`.  Our groups are (direction, held site, window),
+and on short chains every forward group has the same window (the last `w` sites), every
+backward group the first `w`.  *Predictions:* (i) on the enumerable instances, for pairs
+of groups whose windows are disjoint once the held sites are removed, the conditional
+product with `ψ = 0` is within 20 % of the exact pair mean; (ii) the true `ψ_x` (computed
+by enumeration, on the support of the two variables) is above 0.5 at the held states
+that carry the pair term, so that the inequality with the best possible coefficient
+recovers less than half of the pair term of the pairs it applies to; (iii) on Lys₁₂ at
+band 4 more than two thirds of the exact pair term of the lower end comes from pairs of
+groups whose windows overlap, where the inequality as stated gives nothing.
+
+
+**20:47 UTC — outcome of the 20:34 prediction, and a prediction for the exact alternative on
+Lys₁₂ before it is run.**  *The inequality.*  (i) Met: for pairs of groups with disjoint
+windows the conditional product given the held sites is 1.000 to 1.001 of the exact pair
+mean (Lys₅ and LKSE:5 at band 2).  (ii) Met: the true mixing coefficient on the support,
+weighted as the inequality weights it, is 0.72 and 0.98, and the inequality with it
+recovers 0.28 and 0.017 of the pair term of the pairs it applies to — 1.4 and 1.6 % of
+the whole pair term; the two instances with two groups have one pair, with overlapping
+windows.  (iii) **Missed:** on Lys₁₂ at band 4 pairs with overlapping windows carry 0.47
+of the pair term, not more than two thirds (I had reasoned from the five-residue chains,
+where every forward group has the same window; at twelve residues the windows spread).
+So conditional independence given the held sites is nearly exact *on average* and badly
+false *uniformly*: a lower mixing coefficient is the wrong measure of dependence for
+these variables.
+*What is exact instead.*  With two sites held the tables of their groups fit the band:
+pair terms of held sites are differences of seven clamped partition functions per pair
+of held states, and any subset of them is a valid bound (all monomials are non-negative).
+Checked on LKSE:5 against every state: the terms agree to `3·10⁻¹⁴` and the bracket narrows
+by 0.022 of its width, which is everything the joint law of the groups gives there.
+*Prediction for Lys₁₂ at order 4, band 4* (item 90 says pair terms of groups would take
+0.61 of the bracket): (a) the proposition, evaluated from samples, narrows the bracket by
+at least 0.55 of its width; (b) sixty pairs of held states carry more than 90 % of both
+pair terms; (c) the certified bracket after those sixty (420 passes) is narrower by at
+least 0.45 of its width; (d) at band 7 by at least 0.2.
+
+
+**21:18 UTC — the exact computation, the referee's hand-back, and what I had wrong.**
+*Outcome of the 20:47 prediction.*  (a) Met: from the states the proposition narrows the
+Lys₁₂ bracket at band 4 by 0.639 (certified, with all pairs of held states and the floor
+route: 0.667).  (b) **Missed:** sixty pairs of held states carry 0.555 and 0.606 of
+the two pair terms, not more than 0.9 — 258 are needed for 0.9.  (c) **Missed:** after
+sixty the certified bracket is narrower by 0.399, not 0.45.  (d) Band 7: not run
+(from the states the ceiling route would give 0.246).  What made the missed predictions
+irrelevant was something I had not predicted at all: restricted to one state of each
+held site a pass costs milliseconds, so all 4 816 pairs of held states take two minutes
+— my estimate of 4 s per pass came from passes that penalise the other states of a held
+site instead of removing them.
+*The floor route.*  While writing the upper-end terms I wrote down what the reference
+`Z(m₋ + s₋)` is — `Z(m₋)` times a mean under the floor of a product of numbers in `[0, 1]` —
+and saw that the second Bonferroni sum bounds it from above with pair means under the
+floor: no change of measure.  On LKSE:5 that closed 0.47 of the bracket, the "rest" that
+I had told two divisions "no joint law removes".  Twenty minutes later the referee R24
+handed back with the same statement as its first major finding, with numbers that agree
+with mine to the third digit; its brief — which I wrote — had asked the question.  The
+identity was in my own script, three lines above the place where I computed the
+reference.  Fifth time that I named a cause before decomposing it (SD75).
+*The referee's two other major findings* are mine to own as well: in adopting the
+Ensemble division's theorem I dropped its last clause, and concluded "data pin only
+bang-bang members" — a four-state counterexample, which I re-ran with my own linear
+programmes; and I cited a hardness result for a problem it does not cover, against my
+own open-problem row.  All three are corrected by a linked message; the texts stay as
+published with pointers.  Its thirteen minor findings are adopted with its replacement
+texts.  It found no wrong number among 182.
+*Audit.*  The theory division's twenty-third checkpoint passes on this machine: 575
+mutations, 574 caught, one expected pass.
+*A formatting defect found on the way:* a row I wrote today broke a table through the
+pipes of an absolute value; a scan found the same in nine older rows (repaired) and a
+different cell count in twenty-two more (listed in the handoff).

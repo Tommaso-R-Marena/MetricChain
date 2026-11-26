@@ -1,0 +1,13 @@
+=== K5 on H, tau 0.7: 5 sites, states per site [14, 14, 12, 7, 7], 115248 states, anchor [10, 10, 8, 3, 3]; order m = 4, band 3; 5 raw stage-2 tables of workstream P9 from p9_verification/cache (sum of their maxima 1.0472 kT)
+(0) 2 groups (direction, held site, window start): fwd/0/2, rev/4/2; sites of each group's items: [[0, 2, 3, 4], [0, 1, 2, 4]]; means <y_g> from every state (115248), ceiling weights against the driver's exact means: largest relative deviation 1.5e-14 [37s]
+(1) the exact pair term sum_(g<h) <y_g y_h> = 1.808817e-06 over 1 pairs; ln(1 + A + q) - ln(1 + A) = 1.7969e-06 nats; the plain product of the group means, summed: 4.683748e-09 (0.003 of the exact)
+| category of pairs | pairs | share of the exact pair term | product of means / exact | conditional product given the held sites (psi = 0) / exact | the inequality with the true psi on the support / exact | with psi over all window states / exact |
+|---|---|---|---|---|---|---|
+| windows overlap (the inequality gives 0) | 1 | **1.000** | 0.003 | — | 0 | 0 |
+| disjoint windows, one common held site | 0 | **0.000** | — | — | **—** | — |
+| disjoint windows, two held sites | 0 | **0.000** | — | — | **—** | — |
+(2) **the inequality with the best possible mixing coefficients recovers 0.000 of the exact pair term** (with psi = 0, which no certificate gives: 0.000); the mean true psi over the held states, weighted by their conditional product and then by the pairs' exact term: nan
+(3) checks: bound <= exact for every pair: 0 violations (must be 0); control, twice the conditional product in place of the bound: exceeds the exact value for 0 of the 0 pairs with disjoint windows (no such pair in this instance: the inequality is never applied and the control has nothing to test)
+the five pairs with the largest exact term: fwd/0/2 x rev/4/2: exact 1.809e-06, product 4.684e-09, windows overlap
+(4) pairs of groups with the SAME held site carry 0.000 of the exact pair term (their joint is exact at no extra clamping: merge them); pairs with different held sites: 1.000 (exact only with both sites held: k_h k_h' clamped computations per pair of held sites)
+ALL DONE 37 s; peak RSS 264 MB

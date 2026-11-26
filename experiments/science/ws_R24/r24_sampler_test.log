@@ -1,0 +1,14 @@
+seed 5: ln Z by elimination - enumeration 0.0e+00; max 0.0e+00; arg-max equal: True; sampler: pooled chi2 161.7 for 159 dof (z = +0.15); control at 1.05 beta: z = +137.1
+seed 6: ln Z by elimination - enumeration 1.8e-15; max 1.8e-15; arg-max equal: True; sampler: pooled chi2 78.0 for 82 dof (z = -0.31); control at 1.05 beta: z = +119.6
+seed 7: ln Z by elimination - enumeration 1.8e-15; max 1.8e-15; arg-max equal: True; sampler: pooled chi2 155.0 for 130 dof (z = +1.55); control at 1.05 beta: z = +175.4
+seed 8: ln Z by elimination - enumeration 3.6e-15; max 0.0e+00; arg-max equal: True; sampler: pooled chi2 37.3 for 35 dof (z = +0.27); control at 1.05 beta: z = +96.1
+seed 9: ln Z by elimination - enumeration 3.6e-15; max 5.3e-15; arg-max equal: True; sampler: pooled chi2 74.4 for 58 dof (z = +1.52); control at 1.05 beta: z = +192.2
+seed 10: ln Z by elimination - enumeration 0.0e+00; max 1.8e-15; arg-max equal: True; sampler: pooled chi2 292.6 for 278 dof (z = +0.62); control at 1.05 beta: z = +88.5
+seed 11: ln Z by elimination - enumeration 1.8e-15; max 1.8e-15; arg-max equal: True; sampler: pooled chi2 76.3 for 71 dof (z = +0.45); control at 1.05 beta: z = +206.7
+seed 12: ln Z by elimination - enumeration 1.8e-15; max 0.0e+00; arg-max equal: True; sampler: pooled chi2 120.9 for 110 dof (z = +0.74); control at 1.05 beta: z = +141.5
+seed 13: ln Z by elimination - enumeration 1.8e-15; max 0.0e+00; arg-max equal: True; sampler: pooled chi2 126.0 for 112 dof (z = +0.94); control at 1.05 beta: z = +158.0
+seed 14: ln Z by elimination - enumeration 3.6e-15; max 7.1e-15; arg-max equal: True; sampler: pooled chi2 30.9 for 35 dof (z = -0.49); control at 1.05 beta: z = +147.6
+seed 15: ln Z by elimination - enumeration 3.6e-15; max 3.6e-15; arg-max equal: True; sampler: pooled chi2 46.5 for 45 dof (z = +0.16); control at 1.05 beta: z = +109.6
+seed 16: ln Z by elimination - enumeration 0.0e+00; max 1.8e-15; arg-max equal: True; sampler: pooled chi2 130.4 for 132 dof (z = -0.10); control at 1.05 beta: z = +89.5
+12 random models: largest deviation of the eliminations 7.1e-15; z-scores of the sampler between -0.49 and +1.55 (must be within about 3); control between +88.5 and +206.7 (must be far above 3)
+ALL DONE; peak RSS 110 MB

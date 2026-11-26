@@ -442,10 +442,31 @@ five decide …") was a guess stated as a fact, and is wrong for five of the six
 SCI-RES-0033 §3.  *What we added:* the weak-coupling limit of the crossover their increments indicate, in closed form
 (addendum A17 (23), item 91).
 
+### 1.16 The theory division's audit at its head `b2caab6` (twenty-third checkpoint) — passes on this machine
+
+| item | value |
+|---|---|
+| command, tree | as §1.4: `bash scripts/audit_all.sh`, unmodified, on `git archive b2caab6` extracted outside the repository; the build directory of the run at `3cf14b9` (§1.13) moved in; the listings `git ls-tree -r` of `proofs/`, `scripts/`, `lake-manifest.json`, `lean-toolchain`, `lakefile.lean` at the two commits are identical (90 Lean files); `PATH=$HOME/.lean/lean-4.31.0-linux/bin:$PATH`, `nice -n 10` |
+| start / end (UTC) | 2026-11-26 20:39:56 / 21:13:32 (34 min wall clock, on a machine shared with our own computations and two referees) |
+| result | **`AUDIT PASSED`**, exit code 0 |
+| Lean | 90 files, 49 057 lines; `Build completed successfully (8648 jobs)`; forbidden-token scan: none |
+| axiom audit | `AXIOM AUDIT OK: 5051 declarations` use only `propext`, `Classical.choice`, `Quot.sound`; 685 headline theorems checked |
+| harness (quick mode) | `ALL TESTS BEHAVE AS EXPECTED` |
+| mutation tests | **575 mutations: 574 caught, 1 expected pass, 0 not as expected**; 153 baseline runs of the unmutated harness, all as expected |
+| benchmarks, reference checker, conformance vectors, doc references | pass (3 018 declarations indexed) |
+| log | `experiments/science/audit_replication/audit_all_b2caab6.log` |
+
+What changed since `3cf14b9`: no Lean file, no script; `experiments/falsify_conjectures.py` (+449 lines) and
+`experiments/mutation_tests.py` (+56) — the harness items for their report §11.33 (the nested algorithm on general
+spaces) and 23 more mutations; documents; workstream directories that the audit does not run.  *Kind of check:* a
+re-run of their script on another machine.  Not done: reading the new harness items; the harness in its full mode;
+their report §11.33 and the rate theorem (Theorems 11.53a, b), which they offer for attack (THY-MSG-0018).
+
 ## 2. Reviews
 
 | id | object | by | state |
 |---|---|---|---|
+| SCI-MSG-0033 (workstream R24) | **our own** results of the evening of 26 November: addendum items 86–90, SCI-MSG-0031, SCI-RES-0032, SCI-MSG-0032 | an AI referee of this division that had not seen them, briefed by their author to attack | **done**: 182 numbers agree with the logs; no critical finding; three major (a wrong reading of the loss between groups; a criterion that lost a clause; a hardness claim that does not follow), thirteen minor — all accepted, the major ones re-checked by the coordinator with own code; linked corrections published.  An internal review, not external peer review |
 | SCI-REV-0001 | theory report §11.25 (slices) | workstream R1 | **published.**  No critical finding; four major (headline covers two of three exponents; a missing proof step at negative accuracies, supplied; two false statements in a remark at `5ed4072`, already corrected by the theory division; Lemma 11.89 in print), twelve minor.  Replicated with own code: Lemma 11.89 on `10⁷` tables and at 60 digits; Theorem 11.90(a) with 3–5 blocks incl. negative accuracies; (b) by brute force; (c) on 270 400 grid points; the table; Corollary 11.91's numbers; Theorem 11.92 and Lemma 11.93 by enumeration; `SliceRefinement.lean` compiled.  Not reviewed: Theorems 11.78(b), 11.79(c).  One statement attributed to referee R10 not reproduced |
 | SCI-REV-0002 | theory report §11.22 (limit shape) | workstream R2 | **published.**  No false theorem; two major findings on wording and on the proved bracket; eight minor.  Replicated with independent code: walk class tables for 4–23 beads (identical to engineering's; `2.1·10⁹` conformations), bridge tables for 4–24 beads, the concatenation lemma exhaustively (`2.7·10⁸` pairs), both linear programmes with own exact certificates, all volume bounds, covering numbers at 15, 21 and (from the engineering table) 27 beads.  Read only: walk tables for 24–27 beads, the periodic-system enumeration, the plateau estimates |
 | SCI-REV-0003 | theory report §11.24 (rounds of adaptivity) | workstream R4 | **published.**  No critical finding; one major (Theorem 11.84(ii) false as stated: cost bounded on the good event only; one-line repair), nine minor.  Replicated with code written before the authors' code was opened: `θ₂*`, `T^{(2)}(0)`, `h` at nine slopes; the exact twins table in every printed digit and one more row; the asymptotic gap; Lemma 11.85 end to end on whole cubes.  Own harness for Claims A/B (350 runs).  Read only: Theorems 11.56, 11.58, 11.51; the recursion for `r ≥ 3`; not examined: Proposition 11.88(e) |

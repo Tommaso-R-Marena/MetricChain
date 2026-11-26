@@ -1,0 +1,18 @@
+M1  one reference state, q displaced states of cost c1 = 10 kT and penalty b1 = 1 kT:  q | lambda_gs | lambda_c (half the weight displaced) | ratio | closed forms (c1 + ln(1 + q e^-c1))/b1, (c1 - ln q)/b1
+      1 | 10.00005 | 10.00000 | 1.000 | 10.00005, 10.00000
+      10 | 10.00045 | 7.69741 | 1.299 | 10.00045, 7.69741
+      100 | 10.00453 | 5.39483 | 1.854 | 10.00453, 5.39483
+      1000 | 10.04440 | 3.09224 | 3.248 | 10.04440, 3.09224
+      8103 | 10.31326 | 1.00001 | 10.313 | 10.31326, 1.00001
+      20000 | 10.64605 | 0.09651 | 110.308 | 10.64605, 0.09651
+M2  n independent sites, each with q = 6 displaced states of cost c1 = 3 kT and penalty b1 = 1 kT (a rotamer-like alphabet):  n | lambda_gs | lambda_c (mean displaced = n/2) | ratio | closed forms
+      1 | 3.26138 | 1.20824 | 2.699 | 3.26138, 1.20824
+      2 | 3.26138 | 1.20824 | 2.699 | 3.26138, 1.20824
+      4 | 3.26138 | 1.20824 | 2.699 | 3.26138, 1.20824
+      6 | 3.26138 | 1.20824 | 2.699 | 3.26138, 1.20824
+M3  two states, cost (0, 10), penalty (b0, b0 + 1): a penalty with a constant part.  b0 | lambda_gs | lambda_c | ratio
+      0 | 10.000045 | 10.00000 | 1.00e+00
+      0.01 | 0.004540 | 10.00000 | 4.54e-04
+      0.1 | 0.000454 | 10.00000 | 4.54e-05
+      1 | 0.000045 | 10.00000 | 4.54e-06
+ALL DONE; peak RSS 51 MB

@@ -12,67 +12,57 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 20:28 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 21:18 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
 **Open right now (newest first; everything below this paragraph is older and still true
 unless this paragraph says otherwise).**
-(i) **Referee R24 is running** (launched 19:38 UTC; brief
-`docs/science/workstreams/R24_brief.md`): an adversarial review of the coordinator's
-results of the evening — the least ratio (item 86; SCI-MSG-0031), the answer to the
-Ensemble division (items 87–89; SCI-RES-0032), the split of the loss between groups
-(item 90; SCI-MSG-0032).  Its notes are in `experiments/science/ws_R24/` — **uncommitted
-while it runs**; its report will be `docs/science/workstreams/R24_REPORT.md`.  **When it
-hands back:** read the report in full, re-derive or re-run what decides each finding,
-add a coordinator's note, publish as SCI-MSG-0033 with linked corrections to the
-Ensemble, theory and Complexity divisions wherever a statement of items 86–90 falls,
-and commit `ws_R24/` (complete logs only).  If it reports a declined tool action, do
-not perform it; tell the research owner.
-(ii) **Both answers owed at checkpoint 59 are sent at this commit.**  SCI-RES-0033
-(engineering, copy theory): X-013 re-run and replicated; our request corrected (blocks
-of five cannot decide five of the six cells it named); **the weak-coupling crossover of
-the site-wise optimum in closed form, `u₀ = 1.505534`** (addendum A17 (23), item 91;
-`experiments/science/r10_verification/`).  SCI-RES-0034 (Complexity, copy theory): their
-`λ₁` is our `λ_gs`; **their `λ₀` on our four floors is 0.10 to 0.16 of the measured
-transition, the explicit criterion void, the factor split exactly** (item 92;
-`pi_inference/product_threshold.py`; four JSON exports for them).
-(iii) **Owed, in this order** (each is also in the status file and in the digest's table
-of messages received; the four other branches that moved at the fetch of 20:19 UTC are
-read as far as the pins in `docs/collaboration/status/science.md` say):
-  (a) **A prior-art check of the Geometry division's Theorem L** — a global stability
-  bound of order `n²` for reconstructing a chain from distances of sequence separation at
-  most 4 (GEOMETRY-MSG-0007 §1 and GEOMETRY-RES-0004 §5 on `research/geometric-inference`
-  at `288b2de`; the nearest paper they found is Arias-Castro and Vishwanath, arXiv
-  2310.10900, read by them once).  They ask because our review found one of their
-  theorems in print.  A literature workstream: generic queries only, reading levels for
-  every source, publish as an originality review.
-  (b) **The second look for the Complexity division** (their Theorem 1c in the regime
-  `|x| ≥ |σ|`, Lemma A1 of their appendix; COMPLEXITY-RES-0004; accepted in SCI-RES-0034
-  §6): one referee (R25) after R24 hands back, **on their note at their head** (it has
-  changed since: a new Theorem 1e) — fetch in a command of its own, export
-  `docs/complexity/STRANDS_NN_HARDNESS.md` read-only into the scratchpad; the brief is
-  exactly those two places, a review plus a small exhaustive test, a hand-back of at most
-  forty lines, the declined-tool rule; publish as a review.
-  (c) **To the Ensemble division:** a short confirmation that their question E-S4 is
-  answered by GEOMETRY-RES-0005 §§2–3 in agreement with our Proposition R22-1 (the rank
-  for three torsions is 19, but of interval products; competitors live on `O(2)^r`, hence
-  the half-turn exception).  They had not read our checkpoint 59 when they wrote.
-  (d) **From THY-MSG-0018 §2:** test the theory division's pair-term inequality (a lower
-  mixing coefficient given the held site) on Lys₁₂ at band 4, where pair terms are worth
-  0.61 of the bracket (open problem D15 (a)); compute the class-relative influence
-  between blocks for one of our band models (their Theorem 11.119 (b); with unbounded
-  influence their nested algorithm certifies a false bracket); replicate their audit at
-  their twenty-third checkpoint `b2caab6`.  Their rate theorem (11.53a, b; their
-  Proposition U) is offered for attack — a referee workstream if credits allow.
+(i) **Two workstreams are running; their directories are uncommitted while they run.**
+A4 (launched 20:32 UTC; brief `docs/science/workstreams/A4_brief.md`): prior art for the
+Geometry division's Theorem L — report to come as `workstreams/A4_REPORT.md`, notes in
+`experiments/science/ws_A4/`.  R25 (launched 21:03 UTC; brief `workstreams/R25_brief.md`):
+the second look the Complexity division asked for (their Theorem 1c in one regime, their
+Lemma A1) — `workstreams/R25_REPORT.md`, `experiments/science/ws_R25/`.  **When either
+hands back:** read the report in full, check what decides each finding (for A4: open the
+two or three deciding sources yourself), add a coordinator's note, publish as a review to
+the division that asked (A4: Geometry; R25: Complexity, copy Theory), commit its
+directory (complete logs only).  If it reports a declined tool action, do not perform
+it; tell the research owner.
+(ii) **Published at this commit (checkpoint 61).**  *SCI-MSG-0033* — linked corrections of
+our three messages of the evening after the review by workstream R24 (no number wrong;
+three readings withdrawn or replaced: what joint laws recover of the loss between groups;
+which members of a sandwich averaged data identify; a hardness claim).  *SCI-RES-0035* (to
+theory) — their pair-term inequality tested (nearly powerless on our routing) and
+**Proposition A17.23: second-order recovery with two held sites** (addendum A17 (24),
+item 94; `pi_inference/held_pair_exact.py`): **Lys₁₂ at order 4, band 4, certified within
+`0.0002148` nats instead of `0.0006449`** (`[517.1284375, 517.1286523]`); the five-residue
+brackets narrowed by 0.440, 0.224, 0.777, 0.472.  *SCI-RES-0036* (to Ensemble) — their question E-S4.
+The theory division's audit at its twenty-third checkpoint `b2caab6` passes on this
+machine (validation §1.16).
+(iii) **Owed, in this order.**
+  (a) A4 and R25, as in (i).
+  (b) **Second-order recovery where it is not yet run** (`held_pair_exact.py`): Lys₁₂ at
+  band 7 (the ceiling route takes any subset of quadruples — `--budget`; the floor route
+  needs all 2 422 pairs of held states, and a pass costs more at band 7: time one first),
+  (LKSE)₃ at order 4 (first-order bracket 0.0014 nats; on LKSE:5 the floor route closed
+  0.47), Lys₂₀.  Workstream R24's comonotone upper end from single-group laws under the
+  floor is valid and not implemented.
+  (c) **From THY-MSG-0018:** the class-relative influence between blocks for one of our
+  band models (their Theorem 11.119 (b); unread) — before any nested run on a dependent
+  known part; their rate theorem (11.53a, b; their Proposition U) and their §11.33 are
+  offered for attack — a referee workstream if credits allow.
+  (d) A formatting defect: sixteen older rows of the findings table in
+  `docs/collaboration/status/science.md` (S46–S61) and six index rows of the digest have a
+  cell count different from their header; nine rows with literal pipes in code spans
+  were repaired at this checkpoint.
 (iv) **Next own mathematics** (`OPEN_PROBLEMS.md`): I7 (i) — is `a_cube + (K²/4)F*` the
-expansion of the chain's exponent `a_∞`?  (A proof that site-wise labels are optimal at
-weak coupling would do it; the question is with the theory division, and ours if they
-do not take it.)  D12 (a′) — a certified statement between `λ₀` and `0.8 λ_c`.  D15 (b) an
-upper-end inequality that uses the floor as well as the ceiling; D15 (a) pair terms for
-Lys₁₂; G-3 (tree decompositions), G-5 (continuous variables), D14 (down-closed
-families).  Unrefereed inside the division: addendum A17 (13)–(18) (the research
-owner's decision, as recorded), part (22) (R24 is on it) and part (23).
-(v) Heads read at 20:19 UTC: theory `7f879d4`, engineering `c81166b`, ensemble `32f547a`, geometry `288b2de`, complexity `89114ea` (four of the five had moved).
+expansion of the chain's exponent?  D12 (a′) — a certified statement between `λ₀` and
+`0.8 λ_c`; with workstream R24's remark that `F(λ)` is exact and convex on a band model,
+(b) "a safety factor with every certificate" is one pass.  G-3 (tree decompositions),
+G-5 (continuous variables), D14 (down-closed families).  Unrefereed inside the division:
+addendum A17 (13)–(18) (the research owner's decision, as recorded), part (23) and
+part (24).
+(v) Heads read at 21:16 UTC: theory `4692f59`, engineering `c81166b`, ensemble `8d42f60`, geometry `288b2de`, complexity `12e6d36` (theory, ensemble and complexity had moved; read as far as the pins in the status file say).
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
    (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —

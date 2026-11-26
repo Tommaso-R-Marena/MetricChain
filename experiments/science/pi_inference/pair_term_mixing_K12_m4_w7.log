@@ -1,0 +1,11 @@
+=== K12 on H, tau 0.7: 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], 9.49117e+10 states, anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; order m = 4, band 7; 495 raw stage-2 tables of workstream P9 from ws_P9/cache (sum of their maxima 18.17 kT)
+(0) 20 groups (direction, held site, window start): fwd/0/2, fwd/0/3, fwd/0/4, fwd/0/5, fwd/1/3, fwd/1/4, fwd/1/5, fwd/2/4, fwd/2/5, fwd/3/5, rev/8/5, rev/9/4 ...; sites of each group's items: [[0, 2, 3, 7, 8], [0, 3, 4, 7, 8, 9], [0, 4, 7, 8, 9, 10], [0, 5, 6, 7, 8, 9, 10, 11], [1, 3, 4, 8, 9], [1, 4, 8, 9, 10], [1, 5, 6, 7, 8, 9, 10, 11], [2, 4, 9, 10]] ...; means <y_g> from 400000 exact independent samples of the ceiling model (seed 20261126) against the driver's exact means: largest relative deviation 1.0e-02 [610s]
+(1) the exact pair term sum_(g<h) <y_g y_h> = 3.107294e-06 over 190 pairs; ln(1 + A + q) - ln(1 + A) = 3.0984e-06 nats; the plain product of the group means, summed: 3.054823e-06 (0.983 of the exact)
+| category of pairs | pairs | share of the exact pair term | product of means / exact | conditional product given the held sites (psi = 0) / exact | the inequality with the true psi on the support / exact | with psi over all window states / exact |
+|---|---|---|---|---|---|---|
+| windows overlap (the inequality gives 0) | 189 | **1.000** | 0.983 | — | 0 | 0 |
+| disjoint windows, one common held site | 0 | **0.000** | — | — | — | — |
+| disjoint windows, two held sites | 1 | **0.000** | — | — | — | — |
+the five pairs with the largest exact term: rev/10/5 x rev/11/5: exact 8.592e-07, product 7.981e-07, windows overlap; rev/9/5 x rev/11/5: exact 4.769e-07, product 4.915e-07, windows overlap; rev/9/5 x rev/10/5: exact 3.796e-07, product 3.721e-07, windows overlap; rev/8/5 x rev/11/5: exact 3.123e-07, product 3.054e-07, windows overlap; fwd/3/5 x rev/11/5: exact 2.538e-07, product 2.831e-07, windows overlap
+(4) pairs of groups with the SAME held site carry 0.003 of the exact pair term (their joint is exact at no extra clamping: merge them); pairs with different held sites: 0.997 (exact only with both sites held: k_h k_h' clamped computations per pair of held sites)
+ALL DONE 611 s; peak RSS 2840 MB

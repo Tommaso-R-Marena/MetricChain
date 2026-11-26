@@ -1,0 +1,14 @@
+ M docs/science/SCIENTIFIC_RESEARCH_LOG.md
+?? docs/collaboration/responses/science/SCI-RES-0033.md
+?? docs/science/workstreams/R24_brief.md
+?? experiments/science/pi_inference/product_threshold.py
+?? experiments/science/pi_inference/product_threshold_K12_m3_w7.json
+?? experiments/science/pi_inference/product_threshold_K12_m3_w7.log
+?? experiments/science/pi_inference/product_threshold_K12_m4_w4.json
+?? experiments/science/pi_inference/product_threshold_K12_m4_w4.log
+?? experiments/science/pi_inference/product_threshold_K12_m4_w7.json
+?? experiments/science/pi_inference/product_threshold_K12_m4_w7.log
+?? experiments/science/pi_inference/product_threshold_LKSEc12_m3_w7.json
+?? experiments/science/pi_inference/product_threshold_LKSEc12_m3_w7.log
+?? experiments/science/r10_verification/
+?? experiments/science/ws_R24/

@@ -1,0 +1,33 @@
+[theirs] === K12 on H, tau 0.7: 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], 9.49117e+10 states, anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; order m = 4, band 4; 495 raw stage-2 tables of workstream P9 from ws_P9/cache (sum of their maxima 18.17 kT)
+[theirs] | nothing (the sandwich) | — | — | — | — | [517.1139664, 517.1427360] | **0.02877** | 1.0 |
+[theirs] | far pairs, terms and the allocation of the penalty | 517.1279367 | 517.1283300 | 517.1292235 | 517.1289748 | [517.1283300, 517.1289748] | **0.0006449** | 44.6 |
+(0) 56 groups, 337 plus-items and 337 minus-items with a route; ln Z(m_+): my elimination 517.1139664 (driver 517.1139664); ln Z(m_-): 517.1427360 (driver 517.1427360); corrected bracket [517.1283300, 517.1289748], width 0.000644854; exact first-order means of the driver: A = 1.446724e-02, C' = 1.406584e-02 [189s, peak RSS 1072 MB]
+(1) CEILING: 60 batches of 100000 exact samples of my own sampler (seed 2401) = 6000000 samples [284s, peak RSS 1072 MB]; pointwise C_2-part <= C''-part violated at 0 samples (must be 0)
+    checks against the driver's exact means: A = 1.446118e-02 +- 1.3e-05 (-0.47 s.e. from 1.446724e-02); C' = 1.407016e-02 +- 1.1e-05 (+0.38 s.e. from 1.406584e-02); sum_g P(S+_g > 0) = 1.0674 +- 0.0008; P(two or more) = 1.8627e-01
+| second-order quantity under the ceiling | mean | s.e. from the scatter of batches | s.e. from the within-sample variance | share of the total carried by the 10 / 100 largest samples | largest single sample / total |
+|---|---|---|---|---|---|
+| <q> = sum_(g<h) <y_g y_h> | 1.088585e-04 | 3.37e-07 (0.3 %) | 3.50e-07 | 0.002 / 0.010 | 0.0002 |
+| <d> = <prod(1 + y_g)> - 1 - A | 1.095363e-04 | 3.41e-07 (0.3 %) | 3.55e-07 | 0.002 / 0.011 | 0.0002 |
+| C_2 - C' | 2.887604e-04 | 6.88e-07 (0.2 %) | 7.01e-07 | 0.001 / 0.004 | 0.0001 |
+| C'' - C' | 3.072017e-04 | 7.52e-07 (0.2 %) | 7.66e-07 | 0.001 / 0.005 | 0.0001 |
+(2) FLOOR: 100 batches of 100000 = 10000000 exact samples [375s, peak RSS 1072 MB]; pointwise Bonferroni violated at 0 samples (must be 0); <e^(-beta s_-)> = 0.98601101 +- 8.6e-06; S1 = 1.408351e-02 +- 8.7e-06; S2 = 9.499797e-05 +- 1.8e-07; Bonferroni remainder <(1 - S1 + S2) - prod> = 4.787e-07 +- 2.5e-09; sum_g P_floor(S-_g > 0) = 1.1695; P(two or more) = 1.9756e-01
+(3) (UP) from the driver's exact C' in closed form: 517.1289748 (the driver's upper end 517.1289748); the put-back ln Z(m_- + s_-) from my floor samples: 517.1286483 +- 8.7e-06; reference value given on the command line: 517.128653342 +- 1.2e-06 (mine is -0.58 s.e. from it)
+| column of the table (fraction of the corrected width) | this measurement | its s.e. (batches) |
+|---|---|---|
+| lower end: joint law | 0.1674 | 0.0005 |
+| lower end: pair terms | 0.1664 | 0.0005 |
+| upper end: joint law under the ceiling | 0.4694 | 0.0011 |
+| upper end: pair terms under the ceiling | 0.4412 | 0.0011 |
+| recoverable by the joint law under the ceiling | 0.6368 | 0.0013 |
+| **by pair terms alone (under the ceiling)** | **0.6076** | **0.0012** |
+| with my plain floor estimate of the put-back: the loss | 0.6738 | 0.0135 |
+|   … the rest (after the joint law under the ceiling) | 0.0370 | 0.0135 |
+|   … **upper end recovered by pair laws under the FLOOR (Bonferroni)** | **0.5057** | 0.0135 |
+|   … total recovered with pair laws on both sides (ceiling pair terms below, Bonferroni-floor above) | 0.6721 | 0.0135 |
+| with the reference value of the put-back: the loss | 0.6660 | 0.0019 |
+|   … the rest (after the joint law under the ceiling) | 0.0292 | 0.0022 |
+|   … **upper end recovered by pair laws under the FLOOR (Bonferroni)** | **0.4978** | 0.0019 |
+|   … total recovered with pair laws on both sides (ceiling pair terms below, Bonferroni-floor above) | 0.6642 | 0.0019 |
+| Bonferroni-floor upper end minus the put-back (third order; measured directly) | 0.00075 | 0.00000 |
+| upper end from single-group laws under the floor (comonotone of the empirical laws, batch by batch; biased by the batch size): below (UP) by | -2.0673 | 0.0117 |
+ALL DONE 375 s; peak RSS 1072 MB
