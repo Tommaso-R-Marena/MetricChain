@@ -2276,3 +2276,59 @@ had no route now go through a window inside the chain, and the bracket tightens 
 `8.297·10⁻⁵ → 8.161·10⁻⁵` and `2.786·10⁻⁴ → 2.738·10⁻⁴` — with the new bracket inside
 the old one at both ends.  The right regression statement is: same items, same
 numbers; more items, a bracket inside the old one.
+
+**Lys₂₀: the outcome against the prediction of 14:26 UTC** (`first_order_recovery_K20_m4_w7.log`
+— in the working tree when this was written; committed with part (20) of the addenda —
+finished 15:16:36 UTC, 1 390 s, 5.5 GB; ball 385 566 values; P9's 4 845 order-4 tables through
+`p9_verification/dump_theta2.py`, whose call reproduces P9's own stored tables of Lys₁₂ bit
+for bit on 18 subsets and those of the four small instances).
+
+| quantity | predicted | found |
+|---|---|---|
+| sum of the maxima of the tables, `βΓ₄` | about 35 | **45.2** — a miss: I let it grow "a little faster than the length"; it grew 2.5-fold for 1.67 times the length |
+| the floor stays at the anchor | three chances in four | **yes** |
+| sandwich, window form, band 7 | 0.02 (0.012–0.04) | **0.01814** `[800.505214, 800.523352]` |
+| corrected bracket | `3·10⁻⁴` (`10⁻⁴`–`10⁻³`) | **`4.05·10⁻⁴`** `[800.5150660, 800.5154710]` |
+
+Checks: the two hypotheses at 5 380 states with new evaluations, no violation (every item
+doubled: 8 029; far items exchanged: 3 501); the exact means against 20 000 exact samples
+of the ceiling within 1.4 standard errors; P9's tables entry by entry at 20 000 states
+with exactly four side chains off: no violation, smallest ratio of entry to remainder
+10.9, median 240 (every table replaced by its minimum: 5 556 violations).  6 175 items,
+3 823 with a route (2 029 of them through a window inside the chain), 2 352 without —
+2 240 of those are four-site subsets that would need two held sites; their first-order
+weight is `1.2·10⁻⁵` nats per side.  The Gibbs sample has 1.49 side chains off the anchor
+on average.  So a charged chain of `5.5·10¹⁷` states is bracketed deterministically
+within `4·10⁻⁴` nats from 385 566 evaluations; the method of part (19) carries over to a
+chain longer than twice the band without a new idea, only the general windows.
+
+**15:11 UTC — a supplementary directive of the research owner arrived**
+("Mathematical Generality, Physical Relevance, and Foundational Breakthroughs"; verbatim in
+SCI-MSG-0029 §1).  It keeps the programme and moves its weight: generality, an audit of
+assumptions for every major theorem, obstruction theorems, experiments for the
+mathematics, application-specific benchmarking later; this division is to assess
+assumptions, limits and relevance and to name the gaps; the directive is to be relayed
+to the other divisions.  Done within the hour: the relay (SCI-MSG-0029), and
+`docs/science/ASSUMPTION_AUDIT.md` with Part A — our own certificate line.  What writing
+Part A turned up, in the order it surprised me:
+
+* **The envelope never needed the generalised-Born form.**  P9's proof uses three facts:
+  the remainder identity, hosts enumerated, and that everything else enters through
+  statistics that are *additive over the sites*.  For a term `φ(c + Σ_i a_i(x_i))` the
+  order-`m` mixed difference is an integral of `D^mφ` against the product of the sites'
+  displacements, so the resolved table of a subset is `M_m·Π_{i∈T} δ_i(x_i)` — rank one —
+  and the envelope is `M_m·e_m(δ)`.  "Few sites off the anchor" was a proxy: the
+  quantity is the total displacement of the statistics against the curvature scale.
+* **The two ends of a bracket are not alike, and that is where several modes enter.**  A
+  ceiling can be restricted to one mode and still gives a lower end; a floor must hold on
+  all of the space.  A floor that leaves the anchor is the same fact seen from inside.
+* **For few additive statistics no expansion is needed at all** — a transfer matrix that
+  carries the binned partial sums is exact up to a binning allowance, at a cost
+  exponential in the number of statistics, not in the size (level H2′; in outline only).
+* Three counterexamples were run for the entries classified "false without"
+  (`assumption_audit/aa01_essential.py`); the entries that rest on literature I did not
+  open in this session are marked "from memory" and are an obligation (`G-8`).
+
+No further application-specific run is started in this phase.  Next: the synthetic test
+of the general class (`G-1`), the level H2′ (`G-2`), Part B of the audit (a workstream),
+a referee for parts (19)–(20) and for Part A.

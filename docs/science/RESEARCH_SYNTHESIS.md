@@ -12,9 +12,22 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 15:04 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 15:38 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
+0. **Read the research owner's two governing texts first.**  The charter (its limits are
+   restated under "Rules that bind the division" below) and the **supplementary directive
+   "Mathematical Generality, Physical Relevance, and Foundational Breakthroughs"**, received
+   2026-11-26 at about 15:11 UTC — verbatim in
+   `docs/collaboration/messages/science/SCI-MSG-0029.md` §1 (relayed to both other divisions,
+   as its section 6 asks).  It keeps the programme and shifts its weight: generality of
+   the mathematics; **an audit of assumptions for every major theorem** (six classes;
+   this division's task by its section 6 is to assess assumptions, limits and relevance
+   and to name the gaps); obstruction theorems where generalisation fails; experiments
+   that serve the mathematics, application-specific benchmarking in a later phase;
+   subagents used selectively.  **Where it lives here:** `docs/science/ASSUMPTION_AUDIT.md`
+   (Part A, our certificate line, written; Part B, the theory division's theorems, not
+   yet; open obligations `G-1 … G-8` in its §4) and §7, item 0, below.
 1. **Fetch and read the two upstream heads** (read-only), **in a command of its own**:
    `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering`, then the
    heads in `.git/FETCH_HEAD`, compared with the last row of
@@ -24,7 +37,33 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    commit message.  (Four checkpoints of the other divisions crossed work in progress
    on 2026-11-26; once the fetch was chained with the commit and the commit message
    said "unchanged" when it was not — `DEAD_ENDS.md` SD49.)
-   * **Theory: last read `8ff0667`** (14:46 UTC, work in progress after their
+   * **Theory: head `a844b5a`** (15:33 UTC) — **THY-RES-0016** (commit `1d6dbfb`: their answer
+     to SCI-MSG-0028 — our three statements machine-checked; A19-T2: the comonotone
+     coupling is the exact upper bound from marginals, (LP) is optimal exactly when the
+     events can be made disjoint, pair terms may be added for pairs of groups with a
+     known joint law; P9-T2: a mechanism, a comparison principle — `ln Z` of a
+     further-reduced floor bounds the wanted floor's from above, so a narrow band that
+     stays localised decides for the wide one — and a Finner bound for product
+     references) **read in full; the answer is OWED: SCI-RES-0024**, with the numbers of
+     the narrow-band test from `first_order_recovery_K12_m4_w{4,5,6,7}.log`; the second
+     commit (`a844b5a`: numerics of their level recursion) was not read.
+     **Before it, `3cf14b9`** (15:28 UTC, work in progress (2)): **THY-MSG-0016
+     read in full; answered: SCI-RES-0023.**  They relay the owner's directive too (all
+     three divisions have it from the owner; the three copies agree), **write the
+     assumption audit of their own theorems themselves** (so we do not: `ASSUMPTION_AUDIT.md`
+     Part B), and asked us (G-S1) for the assumptions of their §11 that our instances
+     violate, with quantitative substitutes — **first version sent (SCI-RES-0023 §2); owed:
+     the same list against their theorem numbers, and a review of their audit when it
+     exists.**  At this head they machine-checked **Proposition A17.19**
+     (`GibbsRecovery.lean`) **and workstream P9's Proposition P** with the reduction step and
+     the state-dependent remainder bound (`ResolvedPenalties.lean`); statements read by
+     the coordinator.  **Their audit at `3cf14b9`: replication started 15:31:28 UTC** in
+     `<scratchpad>/audit_3cf14b9/` (log `<scratchpad>/audit_all_3cf14b9.log`; when it ends,
+     copy the log to `experiments/science/audit_replication/` and write
+     `INDEPENDENT_VALIDATION.md` §1.13; if the container was lost, re-run as §1.12
+     describes, with `PATH=$HOME/.lean/lean-4.31.0-linux/bin:$PATH`).  THY-RES-0016
+     (A19-T2, P9-T2) is announced.
+     *Before it:* `8ff0667` (14:46 UTC, work in progress after their
      twenty-second checkpoint; no message; read as far as it mentions us —
      `LE_brief.md`, their Lean task for our P9-T1, P9-T3, A19-T1, whose restatement of
      Proposition A17.19 agrees with ours, and their checks towards A19-T2 and P9-T2;
@@ -92,7 +131,20 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
      eighteenth checkpoint: THY-RES-0011, THY-MSG-0015 read in full, answered by
      SCI-RES-0013; the amended report and the new Lean files read by workstream R13,
      SCI-REV-0014; audit replicated).
-   * **Engineering: last read `ce71724`** (their checkpoint 5, 2026-11-26; it read ours at
+   * **Engineering: last read `88feab9`** (15:25 UTC, their session 4 opens; it read ours at
+     `2b4ccdf` in part): **ENG-MSG-0006 read in full; answered: SCI-RES-0022.**  It relays
+     the owner's supplementary directive (given to them directly; their copy and ours
+     agree paragraph for paragraph), proposes the form of audit candidates (agreed),
+     **accepts our offer to referee ENG-RES-0014 §1 and §4 — owed by us, a workstream to
+     be launched after R17, result as SCI-REV-0018**, takes P7-E2 first for the checker
+     (they were told in SCI-RES-0022 §5 to build nothing on SCI-MSG-0026 §9 or
+     SCI-MSG-0028 §4 until we send a format note), and puts non-flat fibres first.  We
+     deferred our own request A18-E3 (thirty residues) to the later phase the directive
+     names (SCI-RES-0022 §6).  Their `docs/engineering/DIRECTIVES.md` records the owner's
+     directives to them — information for us, not instructions to us; one item worth
+     knowing: the owner told them a consolidation directive will come to all divisions
+     when about $2,000 of the shared credits remain.
+     *Before it:* `ce71724` (their checkpoint 5, 2026-11-26; it read ours at
      `b9556c4`, SCI-RES-0012 only): ENG-MSG-0005 in full, ENG-RES-0014 in part (§0, §4, §5);
      **answered: SCI-RES-0015**.  They closed two points of our review SCI-REV-0008,
      adopted our tree format, and put the stand-alone checker first in their queue
@@ -177,14 +229,22 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
      **Answered by them at `dd067f1`:** R16-THY-1(a), -2, -3, -4, -6 (5 open), R15-T1…T5
      (T6 not taken up), A17-T1…T3, P8-T1, P8-T2, A18-T1 — strike these too.  What they
      have not seen: SCI-MSG-0028, SCI-RES-0020 and SCI-RES-0021.
-2. **Workstreams running when this was written: one, R17** (below).  **Work of the
+2. **Workstreams running when this was written: none.  R17 handed back at 15:31 UTC**
+   (`workstreams/R17_REPORT.md`, 801 lines, and `experiments/science/ws_R17/` are in the
+   working tree, **not committed: a draft until the coordinator has read and checked
+   it** — then SCI-REV-0017).  **Owed to the engineering division:** a referee of
+   ENG-RES-0014 §1 and §4 (accepted in SCI-RES-0022 §4; a workstream, not launched).
+   **Work of the
    coordinator in progress, not in this commit** (research log, cycle 60): held-site
    passes for a window anywhere on the chain (`pi_inference/held_site_laws.py`, with a
    changed `first_order_recovery.py` — in the working tree only; the committed driver
    and its thirteen logs are those of checkpoint 45), the regression re-runs of those
-   thirteen cases with the changed driver, and Lys₂₀ on the helix from its order-3
-   ball with workstream P9's order-4 tables (the prediction is in the research log,
-   written at 14:26 UTC before the run).  If the container was lost: the method is
+   thirteen cases with the changed driver (twelve finished, one running at 15:26 UTC),
+   and Lys₂₀ on the helix from its order-3 ball with workstream P9's order-4 tables —
+   **finished 15:16 UTC: `[800.5150660, 800.5154710]`, `4.05·10⁻⁴` nats, all checks
+   pass; prediction and outcome in the research log, cycle 60; the log file itself is
+   in the working tree and is committed with part (20) of the addenda, which is not
+   yet written**.  If the container was lost: the method is
    described in the research log; the ball takes 19 minutes (`pi_inference/ball_cache.py`
    — also only in the working tree: `L.setup`, `pw.ball_states`, `G.bulk_energy`), the
    tables 26 minutes on two cores (`p9_verification/dump_theta2.py` with `K=m`).
@@ -362,7 +422,13 @@ credits, Modal) are not visible from here and must not be increased; expensive w
 end 2026-11-30 15:00 ET, credits expire 2026-11-30 19:00 ET; no manuscript, preprint or
 external contact; biological sequence engineering, target-specific optimisation and
 experiments are out of scope; never fabricate a citation or a number; corrections of
-published statements are linked messages, never silent rewrites.
+published statements are linked messages, never silent rewrites.  **From the supplementary
+directive (2026-11-26):** guarantees are not weakened to gain generality; a result for a
+restricted model is never presented as a universal conclusion; a general statement that
+is computationally empty is called so; partial results, failed approaches, counterexamples
+and open proof obligations are kept; experiments primarily serve the mathematics, and
+extensive application-specific benchmarking belongs to a later phase; subagents only
+where they bring an independent approach, special expertise or adversarial verification.
 
 ## 1. What exists, and where
 
@@ -891,8 +957,35 @@ engineering — A19-E2 (a proved evaluation tolerance of `g`: first), A19-E3, A1
 P9-E2, P9-E4, A18-E1, P8-E2, and A18-E3 (serine at thirty residues, about 40
 CPU-hours).
 
-## 7. What to do next, ranked (revised 2026-11-26 after the fifth wave and after addenda A17 (16)–(19); items 2 and 3 rewritten; item 2(a) rewritten after (19))
+## 7. What to do next, ranked (revised 2026-11-26 after the fifth wave and after addenda A17 (16)–(19); items 2 and 3 rewritten; item 2(a) rewritten after (19); **item 0 added on the owner's supplementary directive — it goes first**)
 
+0. **Under the supplementary directive (§0, item 0): the order of work from 2026-11-26 15:11 UTC.**
+   (i) **`ASSUMPTION_AUDIT.md` Part B** — changed within the hour: the theory division
+   audits its own theorems (THY-MSG-0016) and asked us for an input (G-S1).  **Owed by
+   us:** the list of SCI-RES-0023 §2 — eight assumptions our instances violate, with the
+   quantitative substitutes — *against their theorem numbers* (a reading of their §11 at
+   their head, or their audit's first version), and a review of their audit when it
+   exists (obligation `G-7`).  Candidates "proved under H, doubted under H′" go to the
+   engineering division as files under `requests/science/` (agreed in SCI-RES-0022).
+   (ii) **The open obligations of Part A, in this order:** `G-1` (Proposition AA.1 and
+   Corollary AA.2 — the envelope for any energy whose many-body terms are smooth
+   functions of site-additive statistics — tested at every state of a synthetic
+   instance that is not generalised Born, with a control; the polynomial transfer
+   matrix for the mean of `e_m(δ)`); `G-2` (level H2′: a transfer matrix that carries
+   binned additive statistics — exact up to a binning allowance, cost exponential in
+   the number of statistics only — stated, implemented, compared with the expansion
+   on the same instance); `G-4` (when a floor stays localised — with the theory
+   division, which has P9-T2 in progress); `G-3` (held-site passes on a tree
+   decomposition); `G-5` (a continuous site variable); `G-8` (examine the sources of the
+   three entries marked "from memory" or remove them).
+   (iii) **Reviews as before:** workstream R17 on Theorem 11.58a (running); a referee
+   for addenda A17 (19)–(20) and for the audit's Part A (adversarial verification is
+   one of the directive's three reasons for a subagent) — not launched.
+   (iv) **Deferred, not abandoned** (the directive puts extensive application-specific
+   benchmarking in a later phase): thirty residues (request A18-E3 stands as a
+   specification), other sequences, the band as a design variable for larger rotamer
+   libraries — items 2(a)(ii), (v), 2(a″) below.  The run on Lys₂₀ that was in its last
+   minutes when the directive arrived was finished (research log, cycle 60).
 1. **Done at checkpoint 43: R10** (the theory division's workstream Y; SCI-REV-0010;
    finding 9d).  Done by the coordinator right after it: the law at *fixed length* for the
    Zimm–Bragg chain with any `s` (it is associated, so R10.2 applies) — a closed form for
