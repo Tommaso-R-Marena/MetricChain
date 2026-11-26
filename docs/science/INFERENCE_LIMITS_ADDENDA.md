@@ -1684,6 +1684,136 @@ expansions, a smaller instance), and the remainder statistics at that size are a
 extrapolation until measured (workstream P3 was told).  Homopeptides only; no charged
 side chains in this part (their domains are not products).
 
+### (10) Beyond enumeration: a chain model, a sampled mean — and what a certificate adds [M; the certificate is workstream P3's; added at checkpoint 40]
+
+Part (9) left two things open: the tables of the chain model came from a full
+enumeration, and the remainder statistics at a size beyond enumeration were an
+extrapolation.  Both are now measured, and a certificate exists for one family.
+
+**The pipeline, without any enumeration** (`experiments/science/pi_inference/beyond_enumeration_chain.py`;
+Ace-X_n-NMe on a fixed ideal backbone, workstream P2's model and evaluator; `E = f + g`,
+`f` the ff14SB vacuum energy, `g` the GBn2 term; 300 K).  Chain model
+`m(x) = c₀ + g(x⁰) + Σ_i [h_i + a_i](x_i) + Σ_{0<j−i≤W} [J_ij + a_ij](x_i, x_j)`: `h_i`, `J_ij` the exact
+tables of `f`; `a_i`, `a_ij` the anchored expansion of `g` at one reference assignment
+`x⁰` — `1 + Σ_i k_i + Σ_{pairs in the window} k_i k_j` evaluations of `g`.  `ln Z(m)` and exact
+samples of `π_m` by a transfer matrix over blocks of `W` sites (unit-tested against
+enumeration for `W = 1 … 4`: `chain_sampler_test.py`).  The remainder `r = β(E − m)` is
+evaluated at 4 000 samples.  Exact identity: `ln Z(E) = ln Z(m) − E_m r + K`, `K ≥ 0`.
+
+| instance | assignments | evaluations for the tables | sd of `r` under `π_m` (`k_BT`) | `ln Z(m) − r̄` (± standard error) | gap `K`: exact, or the exponential-average estimate |
+|---|---|---|---|---|---|
+| Val₁₀, strand, `W = 2` (validation) | `5.9·10⁴` | 184 | `0.0027` | exact `ln Z = 288.9216`; sampled first order − exact `= −1·10⁻⁵` | exact `3.7·10⁻⁶` (exact floor `0.030`) |
+| Val₃₀, strand | `10^{14.3}` | 604 | `0.0053` | `743.1665 ± 0.0001` | est. `1.4·10⁻⁵` |
+| Val₅₀, strand | `10^{23.9}` | 1 024 | `0.0065` | `1197.4086 ± 0.0001` | est. `2.1·10⁻⁵` |
+| Val₁₀, PPII, `W = 2` (validation) | `5.9·10⁴` | 184 | `0.026` | exact `291.3352`; sampled − exact `= −1.1·10⁻³` | exact `3.4·10⁻⁴` (floor `0.036`) |
+| **Val₂₀, PPII** | `3.5·10⁹` | 394 | `0.045` | **`518.2618 ± 0.0007`** | est. `1.0·10⁻³` |
+| Leu₈, helix, `W = 4` (validation) | 256 | 105 | `0.040` | exact `264.6485`; sampled − exact `= +7.5·10⁻⁴` | exact `8.0·10⁻⁴` (floor `0.25`) |
+| Leu₂₀, helix | `10^{6.0}` | 321 | `0.16` | `593.2852 ± 0.0026` | est. `0.014` |
+| Leu₃₀, helix | `10^{9.0}` | 501 | `0.19` | `866.8909 ± 0.0030` | est. `0.020` |
+| Ser₅, strand, `W = 2` (validation) | `5.9·10⁴` | 613 | `0.46` | exact `118.9779`; sampled − exact `= −0.092` | exact `0.104` (floor `2.3`) |
+| Ser₂₀, strand | `10^{19.1}` | 3 178 | `1.75` | `285.985 ± 0.028` | est. `1.3` — **not reliable** |
+| Ser₃₀, strand | `10^{28.6}` | 4 888 | `2.0` | `397.798 ± 0.032` | est. `1.7` — **not reliable** |
+
+11. **For valine, a chain model built from a few hundred evaluations is the solvated
+    side-chain ensemble at fifty residues** — `10²⁴` assignments, 1 024 evaluations for the
+    tables, a remainder of `0.007 k_BT`, first-order perturbation theory accurate to about
+    `10⁻⁵` nats *if* the sampled statistics are the true ones.  For leucine on the helix a
+    window of four does the same within `0.02` nats.  **For serine the anchored tables
+    fail**: the remainder has a standard deviation of `0.5–2 k_BT` and the exponential
+    average is the kind of estimate part (4) warns about.
+
+**The model may be chosen freely — fit it** (`beyond_enumeration_fit.py`).  Only the
+floor and the variance of the remainder under `π_m` matter, so the tables can be
+improved by regression: sample the current model, evaluate `r`, fit it by least squares
+with the same chain form, add the fit, repeat (three rounds of 30 000 evaluations;
+statistics on 4 000 *fresh* samples of the final model; logs `beyond_enumeration_fit_*.log` —
+the helix validation at sixteen residues is `…_L_H_W4_n16.log`, run from a scratch copy of
+the same script so that its output name is distinct).
+
+| instance | sd of `r` before each refit | final sd (exact) | `ln Z(m) − r̄` | gap `K`: exact or estimated | floor `b`: sampled / exact |
+|---|---|---|---|---|---|
+| Ser₅, strand, `W = 2` (validation) | `0.47, 0.0013, 0.0007` | `0.0007` (`0.0007`) | exact `118.9779`; sampled − exact `= −1·10⁻⁵` | exact `2.4·10⁻⁷` | `0.006` / `0.016` |
+| Ser₂₀, strand | `1.76, 0.018, 0.004` | `0.0022` | `287.3297 ± 0.00003` | est. `2.4·10⁻⁶` | `0.015` / — |
+| Ser₃₀, strand | `2.02, 0.027, 0.006` | `0.0029` | `399.5579 ± 0.00005` | est. `4.1·10⁻⁶` | `0.016` / — |
+| Ser₂₀, strand, **`W = 3`** (consistency) | `1.20, 0.007, 0.002` | `0.0012` | `287.3297 ± 0.00002` — the same as with `W = 2` | est. `7·10⁻⁷` | `0.008` / — |
+| Val₁₀, PPII, `W = 2` (validation) | `0.026, 0.0031, 0.0030` | `0.0033` (`0.0031`) | exact `291.3352`; sampled − exact `= −1·10⁻⁵` | exact `4.8·10⁻⁶` | `0.025` / **`0.162`** |
+| **Val₂₀, PPII** | `0.046, 0.0048, 0.0049` | `0.0048` | **`518.2626 ± 0.0001`** | est. `1.1·10⁻⁵` | `0.052` / — |
+| Leu₈, helix, `W = 4` (validation) | `0.040, 0.0001, 0.0001` | **`0.00012` (`0.00036`)** | exact `264.6485` | exact `6.5·10⁻⁸` (sampled estimate `7·10⁻⁹`) | `0.004` / **`0.182`** |
+| **Leu₁₆, helix, `W = 4` (validation, 65 536 states)** | `0.14, 0.0013, 0.0015` | **`0.00015` (`0.00126`)** | exact `483.8466`; sampled − exact `< 10⁻⁵` | exact `7.6·10⁻⁷` (sampled estimate `1·10⁻⁸`) | `0.004` / **`0.923`** |
+| Leu₂₀, helix | `0.17, 0.0005, 0.0011` | `0.0039` (largest sampled `r` `+0.25`) | `593.3030 ± 0.0001` | est. `7·10⁻⁶` | `0.004` / — |
+| Leu₃₀, helix | `0.19, 0.0037, 0.0022` | `0.0022` (largest sampled `r` `+0.14`) | `866.9139 ± 0.00003` | est. `2·10⁻⁶` | `0.004` / — |
+
+12. **With fitted tables a next-nearest-neighbour chain reproduces the solvated serine
+    ensemble at thirty residues (`10^{28.6}` assignments) to a remainder of `0.003 k_BT`** —
+    three orders of magnitude better than the anchored tables — from `10⁵` evaluations.
+    The two routes agree where both are usable (Val₂₀/PPII: `518.2618 ± 0.0007` plus an
+    estimated gap of `0.0010`, against `518.2626 ± 0.0001`), and the fitted values show
+    that the exponential-average estimates of the first table were *low*, as they must
+    be when the remainder is wide (Ser₃₀: true gap `399.558 − 397.798 = 1.76`, estimated
+    `1.69`; a Gaussian remainder of that width would give `2.0`).
+13. **A sampled floor is not a floor, and the fit makes it worse.**  The four
+    validation rows have the exact values next to the sampled ones: the exact floor is
+    `2.7`, `6.5`, **`45` and `230` times** the sampled one; for leucine on the helix the
+    sampled variance is **nine times too small at eight residues and seventy times at
+    sixteen**, and the gap estimated from the samples is too small by the same factors —
+    after 90 000 fitting evaluations on domains of 256 and 65 536 states.  The regression
+    makes the remainder small exactly on the states it has seen; at sixteen residues
+    states of total probability of order `10⁻⁶` (inferred from the exact variance) keep a
+    remainder near `−0.9 k_BT` that no sample shows.  Here it is harmless — the exact gap is
+    `8·10⁻⁷` nats, and Hoeffding's Theorem 3 with the *exact* floor and variance is within
+    a factor `1.5` of it (within `8 %` at eight residues) — but it is the mechanism by which
+    an uncertified surrogate fails silently (part (4); Chatterjee–Diaconis, Theorem 2.1),
+    seen on a real energy function, and it is worst in the compact geometry.  **Nothing
+    in the two tables is a certificate.**
+
+**What a certificate adds [P + M; workstream P3, `workstreams/P3_REPORT.md`, SCI-MSG-0020].**
+The two missing numbers of part (7) — a one-sided floor and a variance bound for the
+remainder, *proved* — exist for one family.  P3 evaluates the solvent term on the
+Hamming ball of radius `m − 1` about an anchor, bounds the tail beyond it term by term
+(a Faà di Bruno bound with interval enclosures of the derivatives, summed over all
+`m`-subsets in closed form), and obtains banded pairwise models with `m₋ ≤ E ≤ m₊` on the
+whole domain; then `ln Z(m₊) ≤ ln Z(E) ≤ ln Z(m₋)`, and for `r = β(E − m₋)`, `u = β(m₊ − m₋)`:
+`0 ≤ r ≤ u`, `b ≤ 𝔼u`, `Var r ≤ 𝔼u²`, both exact by transfer matrix.
+
+| Val₂₀ on PPII (`3.49·10⁹` assignments) | evaluations | result |
+|---|---|---|
+| chain model, anchored tables, first order (this part) | 394 + 4 000 | `518.2618 ± 0.0007` (+ est. gap `0.0010`) — **no guarantee** |
+| chain model, fitted tables, first order (this part) | 90 394 + 4 000 | `518.2626 ± 0.0001` — **no guarantee** |
+| P3, order `m = 4`: sandwich, no sampling | 9 921 | `[517.4843, 519.2199]` — certified |
+| P3, `m = 4`, with 50 000 samples (Hoeffding, `δ = 0.05`) | 59 921 | `[518.2442, 518.2759]` |
+| **P3, `m = 5`: sandwich, no sampling** | 87 441 | **`[518.2332, 518.2937]` — certified** |
+| P3, `m = 5`, with 50 000 samples | 137 441 | `[518.2598, 518.2648]` |
+| P3, `m = 5`, floor-plus-variance bracket of part (7) with certified `b = 0.061`, `s² = 4.8·10⁻³` (`W = 2.4·10⁻³`) | 137 441 | `[518.2608, 518.2659]` |
+
+14. **Two independent pipelines agree to `10⁻⁴` nats at a size where nothing can be
+    enumerated.**  The fitted chain model (this part: P2's evaluator, the coordinator's
+    construction and code) and P3's sandwich (its own evaluator, validated against
+    OpenMM's reference platform to `2·10⁻¹¹` kcal/mol; another construction; other code)
+    give `518.2626 ± 0.0001` and `[518.2608, 518.2648]` (the intersection of its twelve
+    intervals).  At ten residues both enumerate all 59 049 states: `291.3352` and
+    `291.335178`.  The uncertified estimate costs 4 400 evaluations; the certificate
+    costs twenty to thirty times more.  Its floor-plus-variance width at `m = 5`,
+    `W_cert = 2.4·10⁻³`, is two hundred times the gap estimated for the fitted chain
+    (`10⁻⁵`; on enumerated instances P3's `W_cert` is 4–26 times the true gap of its own
+    model) — and still a few thousandths of a nat.
+15. **Certifiability, not accuracy, is what the helix breaks.**  For leucine on the
+    helix the *price* is as small as anywhere — a fitted window-four chain leaves a
+    remainder of `0.002–0.004 k_BT` at twenty and thirty residues — while P3's certified
+    constants fall by only 5–8 per order there and nothing is certified at any
+    affordable order.  The gap between what is true of this energy function and what
+    can be proved about it is widest for compact geometries: the term-by-term bound
+    cannot see the cancellation between the many neighbours inside the range of the
+    solvent kernel.  That is the open problem this addendum ends on
+    (`OPEN_PROBLEMS.md` D6).
+
+*Limits.*  Everything is relative to one force-field model on a three-state rotamer grid
+with a rigid ideal backbone and exposed side chains; homopeptides; one anchor and one
+seed per run; the "certified" brackets rest on paper proofs and unreviewed code
+(SCI-MSG-0020 §4).  The fitted models were not given to P3's sandwich: a certified floor
+and variance for a *fitted* chain — the remainder of any banded model `m` satisfies
+`β(m₋ − m) ≤ r ≤ β(m₊ − m)`, two banded functions — is the obvious next computation and
+has not been run.
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every

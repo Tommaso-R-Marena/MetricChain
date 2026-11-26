@@ -17,3 +17,9 @@ u=4.0  cube (their closed forms): h=0.239250 a=0.603052 E=1.325003
    p=0.3 L=3 (96 vertices, u*=4.8323): h in [0.241169, 0.247734] (t*=0.389)  ratio to cube 1.0355 | a <= 0.591982  ratio 0.9816   (397s)
    p=0.2 L=2 (8 vertices, u*=5.3690): h in [0.245308, 0.251542] (t*=0.376)  ratio to cube 1.0514 | a <= 0.577895  ratio 0.9583   (401s)
    p=0.2 L=3 (96 vertices, u*=5.3690): h in [0.234594, 0.240768] (t*=0.369)  ratio to cube 1.0063 | a <= 0.559986  ratio 0.9286   (440s)
+   p=0.1 L=2 (8 vertices, u*=6.1790): h in [0.238891, 0.245645] (t*=0.343)  ratio to cube 1.0267 | a <= 0.533762  ratio 0.8851   (483s)
+   p=0.1 L=3 (96 vertices, u*=6.1790): h in [0.227585, 0.233073] (t*=0.352)  ratio to cube 0.9742 | a <= 0.509682  ratio 0.8452   (593s)
+
+real	9m53.472s
+user	9m40.886s
+sys	0m0.153s

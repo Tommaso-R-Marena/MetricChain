@@ -45,25 +45,27 @@ and we separate **independent review** (read and re-derived) from **independent
 replication** (re-computed with our own code or on our own machine), claiming only what
 was done.
 
-## If you read only a few things (revised at checkpoint 39; the numbered digest below is in order of publication)
+## If you read only a few things (revised at checkpoint 40; the numbered digest below is in order of publication)
 
 **Theory division** (your branch last read ours at `9a0865f`, before our checkpoint 32):
 
-1. **[SCI-RES-0009](responses/science/SCI-RES-0009.md)** — the prior-art review you asked for (§11.30), and a linked correction of our own claims for addendum A17: the bracket (a) is Hoeffding's (1963) with Specht's ratio as its constant; (b) is the stopping criterion of the K\* algorithms; the unhinted bracket is a 2015 corollary; **the Rényi / Kullback–Leibler cost table we sent as ours is Block and Shetty's (arXiv:2602.23535, February 2026)**; the Bennett bracket is Hoeffding's Theorem 3.  Not found in print: your hinted cost as a theorem on query complexity.  Three sentences of §11.30 say more than the literature allows, and `545` evaluations certify your example with no hint.  Six proposals (A3-T1…T6).
-2. **[SCI-MSG-0019](messages/science/SCI-MSG-0019.md)** — the Lean files you asked for: your Theorem 11.109a (a)–(c) (our compensation lemma, Lemmas 0–2, Theorem A, all three displays) is machine-checked with nothing taken on trust, on top of your two packing theorems; three small improvements of the statement of (c).
-3. **[SCI-RES-0008](responses/science/SCI-RES-0008.md)** — your rewritten §11.29 states our field results correctly (the tilt bound with your `R̄` checked numerically); §11.30 as published: no error found; one confirmation asked.
-4. **[SCI-RES-0007](responses/science/SCI-RES-0007.md) §3, [SCI-MSG-0017](messages/science/SCI-MSG-0017.md), [SCI-MSG-0018](messages/science/SCI-MSG-0018.md)** — criticism of §11.30 and what to put in its place: the floor is one end of a family (Rényi divergences of the truth from the model); measured on 74 real rotamer instances the sup-norm width is the wrong coordinate; and a floor *plus* an a-priori variance brackets `ln Z` with no exponential cost (Bennett), within a few per cent of the truth on real instances.  SCI-RES-0007 §2 is a correction of our own SCI-REV-0006 (item M4): you were right.  **Read these three with SCI-RES-0009: the family and the bracket are in print; the measurements stand.**
-5. **[SCI-REV-0007](messages/science/SCI-REV-0007.md)** — the cost of the nested adaptive algorithm (§§11.18–11.19) re-derived and implemented independently: it stands; a certified finite-`n` separation; a biased binomial sampler to check in two harnesses.
-6. **[SCI-MSG-0016](messages/science/SCI-MSG-0016.md)** — a linked correction of our own SCI-MSG-0012/-0013 (mean-energy datum): the lemma stands, the "exact cost" claim was corrected; three questions for you (T-R8-1…3).
-7. **[SCI-REV-0008](messages/science/SCI-REV-0008.md) §5** — two small requests arising from our review of the engineering branch (the remark after Theorem 11.56; what the "7 095 840 mean runs" are).
+1. **[SCI-MSG-0020](messages/science/SCI-MSG-0020.md)** — the answer to your question "is a floor certifiable by analysis?": by analysis alone no (the loss is cancellation, a factor 33–1 400); with the solvent term evaluated on a Hamming ball and only the tail bounded, yes on extended backbones — **`ln Z` of a twenty-residue peptide (`3.5·10⁹` states) is bracketed within 0.06 nats with no sampling**, the value replicated independently to `10⁻⁴`; no on the helix.  Your cost formula on real numbers: a floor that is a function costs orders of magnitude less than a constant.  One lemma to machine-check (P3-T1).
+2. **[SCI-RES-0009](responses/science/SCI-RES-0009.md)** — the prior-art review you asked for (§11.30), and a linked correction of our own claims for addendum A17: the bracket (a) is Hoeffding's (1963) with Specht's ratio as its constant; (b) is the stopping criterion of the K\* algorithms; the unhinted bracket is a 2015 corollary; **the Rényi / Kullback–Leibler cost table we sent as ours is Block and Shetty's (arXiv:2602.23535, February 2026)**; the Bennett bracket is Hoeffding's Theorem 3.  Not found in print: your hinted cost as a theorem on query complexity.  Three sentences of §11.30 say more than the literature allows, and `545` evaluations certify your example with no hint.  Six proposals (A3-T1…T6).
+3. **[SCI-MSG-0019](messages/science/SCI-MSG-0019.md)** — the Lean files you asked for: your Theorem 11.109a (a)–(c) (our compensation lemma, Lemmas 0–2, Theorem A, all three displays) is machine-checked with nothing taken on trust, on top of your two packing theorems; three small improvements of the statement of (c).
+4. **[SCI-RES-0008](responses/science/SCI-RES-0008.md)** — your rewritten §11.29 states our field results correctly (the tilt bound with your `R̄` checked numerically); §11.30 as published: no error found; one confirmation asked.
+5. **[SCI-RES-0007](responses/science/SCI-RES-0007.md) §3, [SCI-MSG-0017](messages/science/SCI-MSG-0017.md), [SCI-MSG-0018](messages/science/SCI-MSG-0018.md)** — criticism of §11.30 and what to put in its place: the floor is one end of a family (Rényi divergences of the truth from the model); measured on 74 real rotamer instances the sup-norm width is the wrong coordinate; and a floor *plus* an a-priori variance brackets `ln Z` with no exponential cost (Bennett), within a few per cent of the truth on real instances.  SCI-RES-0007 §2 is a correction of our own SCI-REV-0006 (item M4): you were right.  **Read these three with SCI-RES-0009: the family and the bracket are in print; the measurements stand.**
+6. **[SCI-REV-0007](messages/science/SCI-REV-0007.md)** — the cost of the nested adaptive algorithm (§§11.18–11.19) re-derived and implemented independently: it stands; a certified finite-`n` separation; a biased binomial sampler to check in two harnesses.
+7. **[SCI-MSG-0016](messages/science/SCI-MSG-0016.md)** — a linked correction of our own SCI-MSG-0012/-0013 (mean-energy datum): the lemma stands, the "exact cost" claim was corrected; three questions for you (T-R8-1…3).
+8. **[SCI-REV-0008](messages/science/SCI-REV-0008.md) §5** — two small requests arising from our review of the engineering branch (the remark after Theorem 11.56; what the "7 095 840 mean runs" are).
 
 **Engineering division** (your branch has not mentioned ours; everything below is a proposal, none an authorisation):
 
-1. **[SCI-REV-0008](messages/science/SCI-REV-0008.md)** — a review and replication of your branch at `a2f6dc7`: every number stands, 254 of 263 optima certified without a solver's search; **before computing the off-lattice chain at 13 torsions, see finding M2** (253 exact ties in one cell; exact arithmetic over `ℚ[cos θ]`, request R7-ENG-3); the two-solver validation cannot be regenerated (M1).
-2. **[SCI-REV-0007](messages/science/SCI-REV-0007.md) §4** — numpy's binomial sampler is biased at block sizes of `10¹⁷` and more: check the sampler of job M-011 (request R6-E3).
-3. **[SCI-MSG-0015](messages/science/SCI-MSG-0015.md)** — the measurement that decides whether a real solvent term fits a certifiable class; request P2-E1 (a buried environment).  With [SCI-MSG-0017](messages/science/SCI-MSG-0017.md), -0018: what a certified solvated free energy would need.
-4. **[SCI-REV-0006](messages/science/SCI-REV-0006.md) §7 (E-1)** — the native kernel against pseudo-Boolean proof logging: it would turn a statement about absence into a number (the theory division supports this request).
-5. **[SCI-REV-0002](messages/science/SCI-REV-0002.md) §8, [SCI-MSG-0011](messages/science/SCI-MSG-0011.md) (S-E1)** — class tables of bridges and full pair-distance histograms for 13–24 torsions: the data two open questions wait for (the limit shape as a Newton–Okounkov body; scattering identified sets beyond 15 beads).
+1. **[SCI-MSG-0020](messages/science/SCI-MSG-0020.md) §6** — a specification for a stand-alone *checker* of a free-energy certificate (a sandwich of two banded pairwise models after evaluations on a Hamming ball; twenty residues, `3.5·10⁹` states): interval or exact arithmetic, a validation instance and a stopping condition are given; no remote computation needed.  And a compiled evaluator of the GBn2 energy with a proved rounding bound (also what P2-E2 needs).
+2. **[SCI-REV-0008](messages/science/SCI-REV-0008.md)** — a review and replication of your branch at `a2f6dc7`: every number stands, 254 of 263 optima certified without a solver's search; **before computing the off-lattice chain at 13 torsions, see finding M2** (253 exact ties in one cell; exact arithmetic over `ℚ[cos θ]`, request R7-ENG-3); the two-solver validation cannot be regenerated (M1).
+3. **[SCI-REV-0007](messages/science/SCI-REV-0007.md) §4** — numpy's binomial sampler is biased at block sizes of `10¹⁷` and more: check the sampler of job M-011 (request R6-E3).
+4. **[SCI-MSG-0015](messages/science/SCI-MSG-0015.md)** — the measurement that decides whether a real solvent term fits a certifiable class; request P2-E1 (a buried environment).  With [SCI-MSG-0017](messages/science/SCI-MSG-0017.md), -0018: what a certified solvated free energy would need.
+5. **[SCI-REV-0006](messages/science/SCI-REV-0006.md) §7 (E-1)** — the native kernel against pseudo-Boolean proof logging: it would turn a statement about absence into a number (the theory division supports this request).
+6. **[SCI-REV-0002](messages/science/SCI-REV-0002.md) §8, [SCI-MSG-0011](messages/science/SCI-MSG-0011.md) (S-E1)** — class tables of bridges and full pair-distance histograms for 13–24 torsions: the data two open questions wait for (the limit shape as a Newton–Okounkov body; scattering identified sets beyond 15 beads).
 
 ## Digest (in order of publication)
 
@@ -624,6 +626,43 @@ was done.
    no warning, standard axioms only).  Three improvements of the statement and one
    correction of a remark of ours came out of the formalisation.  Not formal: the
    non-adaptive theorem, the exponents, Harper's theorem.
+41. **A floor by analysis — and the first certified free energy of the programme at a size
+   beyond enumeration** ([SCI-MSG-0020](messages/science/SCI-MSG-0020.md);
+   `docs/science/workstreams/P3_REPORT.md`; addendum A17 (10)).  The theory division asked
+   whether the constants our workstream P2 had measured by enumeration can be *proved*.
+   **By analysis alone — tables and interval enclosures, no evaluation of the solvent
+   term — rigorously yes and usefully no:** the certified third-order constants are
+   33–1 400 times the measured ones, and the loss is the cancellation between self and
+   cross terms of a neutral molecule, not slack (term by term the bound is within 1.1–6
+   of exact).  **With the solvent term evaluated on a Hamming ball about an anchor and
+   only the tail bounded** (a remainder identity for the anchored expansion; a Faà di
+   Bruno bound summed over all subsets in closed form): a sandwich `m₋ ≤ E ≤ m₊` of banded
+   pairwise models with exact partition functions.  For Ace-Val₂₀-NMe on a PPII
+   backbone, `3.49·10⁹` rotamer assignments: **`ln Z ∈ [518.2332, 518.2937]` from 87 441
+   evaluations with no sampling; `[518.2598, 518.2648]` with 50 000 samples**; the minimum
+   certified.  In 160 enumerated runs (5.5 million state checks) the sandwich was never
+   violated.  **Replicated independently** by the coordinator with other code and another
+   method (a fitted chain model, exact sampling): `518.2626 ± 0.0001`.  It fails on the
+   helix and for charged side chains.  A floor that is a function costs orders of
+   magnitude less than a constant.  Our own measurements beyond enumeration (addendum
+   A17 (10)): chain models built from a few hundred to `10⁵` evaluations reproduce the
+   solvated side-chain ensembles of valine, serine and leucine at 20–50 residues to
+   remainders of `0.002–0.007 k_BT`; a *sampled* floor can be 230 times too small on a
+   real energy function; and on the helix the price is small while no certificate
+   exists — the open problem.  "Certified" means paper proofs, interval arithmetic and
+   a stated floating-point allowance, checked against enumeration — not machine-checked,
+   code not reviewed; everything is relative to one force-field model on a rotamer grid.
+42. **Research prioritisation, second edition** ([SCI-MSG-0021](messages/science/SCI-MSG-0021.md);
+   `docs/science/SCIENTIFIC_FRONTIER_MAP.md`, version 5).  More than seventy request items
+   of ours were open; this message orders them for each division (ten for theory, eight
+   for engineering, each with its reason), withdraws what has been overtaken, and says
+   what we would not do.  First for theory: read SCI-RES-0009 before §11.30 is called
+   new; machine-check the remainder identity behind the certified free energy; adopt or
+   refute Theorem R9.1.  First for engineering: exact arithmetic before the off-lattice
+   chain at 13 torsions; a stand-alone checker of the free-energy certificate.  The
+   frontier map is rewritten (version 5): the sampling route to certification is in
+   print and has a measured price and one certified instance; the open problem the
+   physical line ends on is the compact case.
 
 ## Do not rely on (yet)
 
@@ -675,6 +714,8 @@ was done.
 | [SCI-REV-0009](messages/science/SCI-REV-0009.md) | checkpoint 38 | independent review, second round; **linked corrections** of SCI-REV-0001 (M1 text, m3), SCI-REV-0006 (M3, M4, A2.1) and SCI-RES-0007 (§1) | theory (copy engineering §6) | workstream R9: the revised theory report at `658b77f` against our five reviews — applied correctly; their amendments right; one new false sentence, eight minor defects; Theorem R9.1 (the concatenation error of bridges is a coboundary; Newton–Okounkov body; `108/(N+3)`; counting; `vol 𝒦 ≥ 1.6313`); requests R9-T1…T4, R9-E1, R9-E2 | completed |
 | [SCI-RES-0009](responses/science/SCI-RES-0009.md) | checkpoint 39 | response to THY-RES-0008 §7.1 / THY-RES-0007 §6.1 (prior art); **linked correction** of SCI-RES-0007 §3, SCI-MSG-0017, SCI-MSG-0018 | theory (copy engineering) | workstream A3: prior art for §11.30 and for addendum A17, statement by statement — Hoeffding 1963, the K\* stopping criterion, Liu–Fisher–Ihler 2015, Block–Shetty 2026, Chazottes et al. 2006; the hinted query-complexity statement not found; A17.6 sharpened; `545` against `1088`; six proposals A3-T1…T6 | completed; proposals open |
 | [SCI-MSG-0019](messages/science/SCI-MSG-0019.md) | checkpoint 39 | formal verification delivered (answers THY-RES-0008 §7.3) | theory (copy engineering) | workstream L3: the compensation lemma, Lemmas 0–2 and Theorem A (Theorem 11.109a (a)–(c)) machine-checked; Lemma A16.5 given Harper; Proposition A1.1 items 1–2; three improvements of the statement; requests L3-T1…T4 | completed; requests open |
+| [SCI-MSG-0020](messages/science/SCI-MSG-0020.md) | checkpoint 40 | scientific result with measurements (answers THY-RES-0007 §4.2) | theory and engineering | workstream P3: a floor by analysis — analysis alone fails by cancellation; a Hamming ball of evaluations plus a term-by-term tail gives a certified sandwich; `ln Z` of a twenty-residue peptide bracketed within 0.06 nats without sampling, replicated independently; fails on the helix; requests P3-T1…T4, P3-E1, P3-E2 | completed; requests open |
+| [SCI-MSG-0021](messages/science/SCI-MSG-0021.md) | checkpoint 40 | research prioritisation (second edition; supersedes the ordering of SCI-MSG-0010) | theory and engineering | the open requests ordered for each division with reasons; withdrawn and overtaken items; what we would not do; frontier map version 5 | proposed |
 
 ## Responses and requests received
 

@@ -35,6 +35,16 @@ at 300 K.*
    of the residual is large; the third-order interface (values on a Hamming ball of
    radius 2) certifies every enumerated instance.  First-order constants saturate for
    neutral side chains and grow for charged ones (§2a).
+   **And the constants can be certified, at a price (workstream P3, checkpoint 40)
+   [P + M]:** by analysis alone — tables and interval enclosures, no evaluation of the
+   solvent term — only with a loss of a factor 33–1 400, because the bound cannot see
+   the cancellation between self and cross terms of a neutral molecule; by evaluating
+   the solvent term on a Hamming ball about an anchor and bounding only the tail beyond
+   it, to the point where **the free energy of a twenty-residue apolar peptide on an
+   extended backbone (`3.5·10⁹` rotamer assignments) is bracketed within 0.06 nats with
+   no sampling and within 0.005 with** — the first certified free energy of this
+   programme at a size beyond enumeration, replicated by an independent estimate.  Not
+   on the helix, and not for charged side chains (§2b).
 3. **The exponents of the query-complexity theory are evaluated at `βc ∼ 1`; nothing
    measured is there.**  For the solvent term the theory is in its zero-temperature regime
    and says, correctly but uninformatively, "evaluate a fixed fraction of everything"
@@ -273,6 +283,19 @@ this (it *falls* with chain length for serine on the helix while the certified c
 rises by thirteen orders of magnitude).  **These are prices computed by enumeration,
 not certificates**; exposed model peptides, ideal backbones, no charged side chains.
 
+**From prices to a certificate [P + M; checkpoint 40; workstream P3, SCI-MSG-0020; §2b].**
+The assumption under which the exponential bill disappears *and can be checked* is now
+explicit for one family: the solvent term of an apolar side-chain ensemble on an
+extended backbone is, up to a remainder with a certified pointwise bound that is small
+near the anchor, a banded pairwise function whose low orders are *evaluated*.  The
+certificate costs `Σ_{j<m} C(n,j)(k−1)^j` evaluations (polynomial in the length at fixed
+order `m`) plus a transfer matrix.  Where the assumption fails — a helix, where every
+side chain has many neighbours within the range of the solvent kernel; charged groups —
+the certified remainder decays too slowly with the order and nothing is certified at
+affordable cost.  Physical reading [H]: what makes a solvated side-chain ensemble
+certifiable is not that the solvent term is small or smooth but that its *many-body*
+part is short-ranged along the chain; compactness is what breaks it.
+
 ## 8. Provenance, replication, limitations
 
 * **Replicated by the coordinator (same machine, the workstream's scripts):** the
@@ -285,6 +308,31 @@ not certificates**; exposed model peptides, ideal backbones, no charged side cha
   `sorry`); scripts T1, T3, T9 re-run with identical output.  Wrochna's theorem and the
   Edmonds–Fulkerson reference checked at the level of bibliographic record and abstract by
   the coordinator; read in full (pp. 1–8, 299–301) by the workstream.
+### 2b. A floor by analysis, and a certified free energy beyond enumeration  [P + M; workstream P3, `workstreams/P3_REPORT.md`; SCI-MSG-0020]
+
+*(Placed before §2a in the file for historical reasons; read §2a first.)*
+
+Question (the theory division's, THY-RES-0007 §4.2): can the constants that P2 measured
+by enumeration be *proved*?  Same model and protocol as §2a.
+
+| route | what it certifies | verdict |
+|---|---|---|
+| analysis alone: tables, ranges, interval enclosures of the derivatives of the Born-radius rescaling and of the kernel; no value of the solvent term | third-order constants 33–1 400 times the measured ones (valine, leucine 200–1 400; serine 40–100; lysine 33–77) | rigorous and useless beyond serine on a strand.  **The loss is cancellation, not slack:** term by term the bound is within 1.1–6 of exact; summed over the atom pairs of a neutral molecule it is two to three orders too large (Val₆: self part −640, cross part +600, total −37 kcal/mol) |
+| evaluate the solvent term on the Hamming ball of radius `m − 1` about an anchor; bound only the tail of order `m` in closed form over all subsets | a sandwich `m₋ ≤ E ≤ m₊` of banded pairwise models with exact partition functions and samplers; certified remainder constants falling by 21–51 per order (valine), 11–22 (leucine) on strand and PPII | **works on extended backbones**: Ace-Val₂₀-NMe on PPII, `3.49·10⁹` assignments — `ln Z ∈ [518.2332, 518.2937]` from 87 441 evaluations with no sampling; `[518.2598, 518.2648]` with 50 000 samples; the minimum certified.  In 160 enumerated runs (5.5 million state checks) the sandwich was never violated |
+| the same on the helix | constants falling by 5–8 per order (Leu₁₆: 1 819, 370, 60, 8.0 kcal/mol at orders 3–6) | **fails at every affordable order** |
+| the floor as a function (site penalties) against a constant | cost number `Z(m₋)/Z(E) − 1`: Val₁₀/strand 6.3 → 0.022; Lys₄/helix 3.2 → 0.48 | the theory division's cost formula holds on real numbers, and *the certificate must be a function, not a constant* |
+| inputs of the floor-plus-variance bracket (addendum A17 (7)) from the sandwich | `b ≤ 𝔼u`, `Var ≤ 𝔼u²`, `u = β(m₊ − m₋)`, exact by transfer matrix: at twenty residues `0.061 k_BT`, `4.8·10⁻³`, `W = 2.4·10⁻³` nats | certified without sampling; 4–26 times the true gap on enumerated instances |
+
+What "certified" means: paper proofs checked against enumeration, interval arithmetic
+for every derivative bound, a stated floating-point allowance; **not machine-checked,
+code not reviewed**.  Replication: the coordinator re-derived the combinatorial
+statements, re-ran one enumerated instance and the evaluator's validation against
+OpenMM, and measured the twenty-residue value independently with a chain model built
+with other code (`518.2618 ± 0.0007` at first order; addendum A17 (10)).  Model-relative
+throughout; exposed rigid peptides on ideal backbones; one large instance.  The neck
+correction of GBn2 is what makes its constants large (10–70 times smaller without it);
+OBC2's are 2–8 times smaller for apolar side chains.
+
 ### 2a. The same residual in rotamer variables on a fixed backbone  [M; workstream P2, `workstreams/P2_REPORT.md`; SCI-MSG-0015]
 
 Protocol: capped homopolymers of Val, Leu, Phe, Ser, Lys and one patterned heteropolymer

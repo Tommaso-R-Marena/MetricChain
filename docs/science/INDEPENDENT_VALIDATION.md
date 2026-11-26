@@ -411,6 +411,33 @@ was in progress; the table was completed at checkpoint 39.)
   imported files were used as compiled in our tree (built on `5ed4072`).  Not read line
   by line: the other declarations; `ChainRuleCube.lean`.  *Kind of check:* machine
   verification plus a reading of the statements by one person.
+* **P3 (a floor by analysis; checkpoint 40) — review, re-runs, and an independent
+  replication of the headline number.**  *Re-derived by the coordinator:* the remainder
+  identity (Proposition 1), the chain rule for mixed differences with its first
+  corollary (Lemma 2, L1), the allocation lemma at order `m`, the sample-range bound
+  (Lemma R), Proposition 6.  *Own script, written independently*
+  (`experiments/science/pi_inference/p3_adoption_check.py`, two seconds): the identity on
+  2 520 cases (`3·10⁻¹⁵`), the allocation lemma on 24 288 pairs, coverage of the
+  sample-range bracket on four laws (miss rate at most `0.0075` at `δ = 0.05`), the corollary
+  on 6 000 cases.  *Re-run in a scratch copy of the workstream's directory:*
+  `t05_identity.py` (`1.8·10⁻¹³`, as reported); `t01_validate.py gbn2` — its evaluator against
+  OpenMM's Reference platform on 14 systems: largest deviation `1.8·10⁻¹¹` kcal/mol, its
+  pruned domains equal to P2's in 26 of 26 comparisons (as reported); `run_floor.py V8 P2
+  0.70 5 --N 20000 --siteres --w 2` — the row of the report's table reproduced digit for
+  digit, 0 violations of the sandwich over 6 561 states, the exact `ln Z = 245.947014`
+  inside `[245.913695, 245.967703]` and inside the sampled brackets.  ***Independent
+  replication* (different method, different code, P2's evaluator instead of P3's):** the
+  coordinator's chain model with exact sampling gives, for Ace-Val₂₀-NMe on PPII,
+  `518.2618 ± 0.0007` at first order with anchored tables and `518.2626 ± 0.0001` with
+  fitted tables; P3's certified deterministic bracket is `[518.2332, 518.2937]` and the
+  intersection of its twelve intervals `[518.2608, 518.2648]`.  At ten residues both
+  pipelines enumerate 59 049 states: `291.3352` and `291.335178`.  *Not checked:* Theorem 3
+  and Proposition 4 beyond reading; the interval enclosures; 159 of the 160 enumerated
+  runs; the twenty-residue certificate itself was not re-run (447 s for the ball) — its
+  *value* is what was replicated.  *Kind of check:* independent review of the
+  combinatorial core, re-runs of the workstream's scripts, and an independent
+  replication of one number; the certificate's validity rests on paper proofs and
+  unreviewed code (SCI-MSG-0020 §4).
 
 ## 3. Not validated by us
 

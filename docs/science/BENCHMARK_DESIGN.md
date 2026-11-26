@@ -208,6 +208,11 @@ reweighting estimator), to show how often they are wrong when `D_2` is large.
 *What success would not show:* that any of the divergences can be bounded a priori for
 a real system — that is workstream P3's question; and nothing about surrogates that
 cannot be sampled exactly.
+*Added at checkpoint 40.*  P3 has answered its question for one family (apolar side chains
+on extended backbones: a certified sandwich, hence a certified floor and variance) and
+negatively for the helix; the benchmark's remaining open instance is therefore the
+compact one, where the measured price is small and no bound is certified
+(`OPEN_PROBLEMS.md` D6).
 
 
 ### B8 — certified kinetics  (tests a new hypothesis H8: tractable cuts certify a useful fraction of barriers on chains)
@@ -266,4 +271,6 @@ definitions against the reference checker (their E-1); replication on independen
 | B10 (H11), planted control only | additive bulk plus a narrow basin on the 12-cube; product surrogates fitted variationally, by least squares, by likelihood; exact sums: the ranking by root-mean-square error and by variational gap is the reverse of the ranking by `D_2`, `D_∞` of the truth from the surrogate (4 parameter pairs) | `experiments/science/pi_inference/surrogate_direction_check.py` (+ log, JSON); addendum A17 |
 | B10 (H11), real instances, part | 45 enumerated rotamer instances of P2 (Val, Leu, Ser; 2–12 residues): `D_1`, `D_2`, `D_∞` of the truth from the known part alone and from its one-body and pairwise least-squares fits, against RMS error, sup-norm width, variational gap and the first-order bound `Σc_i²/2` (135 rows).  **Not run:** the variational and the likelihood fits of the design; charged side chains | `experiments/science/pi_inference/surrogate_divergence_real.py` (+ log, JSON); addendum A17 (6); SCI-MSG-0017 |
 | B10 (H11), real instances, second batch | 29 instances with non-product domains (poly-Lys 2–4, poly-Phe 4–8, LKSELK 3–6; clash-free domain; sparse least-squares fits): the same quantities (87 rows) | `experiments/science/pi_inference/surrogate_divergence_real2.py` (+ log, JSON); addendum A17 (6) items 7–8 |
+| B1 / H3, **certified** constants (workstream P3) | 44 of P2's instances for analysis alone (672 triples); 164 runs of the ball-plus-tail sandwich (Val, Leu, Phe, Ser, Lys, a heteropolymer; 3–16 residues; three backbones; orders 3–6), 160 of them with full enumeration (5 512 504 state checks, no violation); one instance beyond enumeration (Val₂₀ on PPII, `3.49·10⁹` assignments) | `workstreams/P3_REPORT.md`; `experiments/science/ws_P3/`; SCI-MSG-0020 |
+| B10 (H11) beyond enumeration, the coordinator's chain models | anchored and fitted chain models for Val (strand to 50 residues, PPII to 20), Leu (helix to 30), Ser (strand to 30): transfer matrix, exact sampling, 4 000 remainder evaluations each; validation by enumeration at 5–10 residues; **cross-check with P3's certified bracket at twenty residues: `518.2626 ± 0.0001` inside `[518.2608, 518.2648]`** | addendum A17 (10); `experiments/science/pi_inference/beyond_enumeration_chain.py`, `beyond_enumeration_fit.py`, `chain_sampler_test.py` (+ logs) |
 | B2, B5 | nothing yet | — |

@@ -263,3 +263,17 @@ from a scratch copy.
          ranges ended at 1.02p / 1.0p while the optimum is at 1.1-1.2p.  To rerun with a wider
          range.
 * r10_10_map.py crashed on formatting a None (Prop. H rejected by the N=48/96 check); fixed.
+* [r10_14_rerun_their_functions.py, 593 s] RERUN of THEIR functions (ylib: lip_vertices,
+  bsc_block_law_cond, ustar, capacity, h_bracket = their certified bracket over all t) at
+  slopes they did not report: identical numbers to mine.  u=3: a <= 0.495806 (p=0.3, x0.9871),
+  0.467509 (p=0.2), 0.432593 (p=0.1); u=4: a <= 0.591982 (x0.9816), 0.559986, 0.509682;
+  h certified by their interval rule: p=0.1,u=4: h in [0.227585, 0.233073] < cube 0.239250
+  (x0.9742); p=0.2,u=4: upper 0.240768 with THEIR coarse t-grid (x1.006), 0.2346 at t*.
+  => the reversal at large slopes is reproduced with the theory division's own code.
+* [r10_11_small_slope.py, 65 s, final] helix-coil (Zimm-Bragg) chain n=5, all 395094
+  vertices: V_5 = Var(N_helix) exactly, maximiser = uniform field, for (s,sigma) =
+  (1,1e-2), (1,1e-3), (1.3,1e-3), (0.7,1e-2); bulk factor (1+r)/(1-r) = 1/sqrt(sigma) at s=1.
+  Potts q=3 by LP ascent (local maxima, 40 starts; a lower estimate of V_n), n=3,4:
+  ferro J=0.7, 1.5: best = Var(N_a) = product value x finite-n structure-factor sum
+  (1.3793, 1.9086 at n=3; 1.4507, 2.1718 at n=4; bulk 1.676, 3.321);
+  antiferro J=-1: best 0.9356 (n=3), 1.3166 (n=4) against Var(N_a) = 0.461, 0.588.

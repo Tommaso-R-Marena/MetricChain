@@ -122,7 +122,7 @@ def integer_lipschitz(nb):
     return np.array(out)
 
 
-for n in (2, 3):
+for n in (2,):
     pts, nb = hamming_graph(n)
     tt = time.time()
     F = integer_lipschitz(nb).astype(float)
@@ -168,6 +168,7 @@ for n in (2, 3):
 
 # ---------------------------------------------------------------------------------- 4
 print("4. helix-coil chain (Zimm-Bragg weights: coil 1, helix after helix s, helix after coil sigma*s), n = 5, all vertices")
+n = 5
 x = bits(n)                                           # 1 = helix, 0 = coil
 for (sZ, sig) in ((1.0, 1e-2), (1.0, 1e-3), (1.3, 1e-3), (0.7, 1e-2)):
     w = np.ones(1 << n)
@@ -188,4 +189,37 @@ for (sZ, sig) in ((1.0, 1e-2), (1.0, 1e-3), (1.3, 1e-3), (0.7, 1e-2)):
     additive = np.allclose(f, bits(n).astype(float) @ c)
     print("   s=%.1f sigma=%.0e: helicity %.3f; V_5 = %.6f (maximiser additive: %s, signs %s);  Var(N_helix) = %.6f;  bulk factor (1+r)/(1-r) = %.1f  (1/sqrt(sigma) = %.1f)"
           % (sZ, sig, theta, var[k], additive, c.astype(int).tolist(), vNh, (1 + r) / (1 - r), 1 / np.sqrt(sig)))
+# ---------------------------------------------------------------------------------- 3b
+print("3b. Potts chain, n = 3 and 4: V_n by LP ascent (successive linearisation of the variance over the Lipschitz polytope; local maxima, 40 starts) -- a LOWER estimate of V_n")
+from scipy.optimize import linprog
+rng = np.random.default_rng(3)
+for n in (3, 4):
+    pts, nb = hamming_graph(n)
+    X = np.array(pts); N = len(pts)
+    rows = []; 
+    for v in range(N):
+        for w in nb[v]:
+            r = np.zeros(N); r[v] = 1.0; r[w] = -1.0; rows.append(r)
+    A = np.array(rows); b = np.ones(len(rows))
+    Aeq = np.zeros((1, N)); Aeq[0, 0] = 1.0
+    for J in (0.7, 1.5, -1.0):
+        en = J * (X[:, 1:] == X[:, :-1]).sum(axis=1); pi = np.exp(en); pi /= pi.sum()
+        best = 0.0
+        for start in range(40):
+            f = rng.normal(size=N)
+            val = -1.0
+            for it in range(50):
+                g = pi * (f - f @ pi)
+                res = linprog(-g, A_ub=A, b_ub=b, A_eq=Aeq, b_eq=[0.0], bounds=[(None, None)] * N, method="highs")
+                f2 = res.x
+                v2 = float(pi @ f2 ** 2 - (pi @ f2) ** 2)
+                if v2 <= val + 1e-12:
+                    break
+                f, val = f2, v2
+            best = max(best, val)
+        Na = (X == 0).sum(axis=1).astype(float)
+        vNa = float(pi @ Na ** 2 - (pi @ Na) ** 2)
+        lam2 = (np.exp(J) - 1) / (np.exp(J) + 2)
+        print("   n=%d J=%+.1f: best local maximum of the variance %.6f;  Var(N_a) = %.6f;  ratio to the product measure (n 2/9): %.4f;  finite-n structure-factor sum %.4f;  bulk (1+lam2)/(1-lam2) = %.4f"
+              % (n, J, best, vNa, best / (n * 2 / 9), (n + 2 * sum((n - k_) * lam2 ** k_ for k_ in range(1, n))) / n, (1 + lam2) / (1 - lam2)))
 print("time %.0fs" % (time.time() - t0))

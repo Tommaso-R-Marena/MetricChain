@@ -265,4 +265,21 @@ exponent irrelevant; constants in the limit shape.
   certificate for free-energy perturbation is in Decoster (J. Phys. A 37 (2004) 9051),
   which could not be opened.  **P7 (the field theorems) gained a formal core:** Lemmas
   0–3 and Theorem A are machine-checked (SCI-MSG-0019).
+* *Checkpoint 40:* **P10 now has what it lacked — a certified instance — and a sharper
+  open problem.**  Workstream P3 certifies `ln Z` of a twenty-residue apolar peptide on
+  an extended backbone to 0.06 nats without sampling (0.005 with), from `10⁵` energy
+  evaluations among `3.5·10⁹` states, and the coordinator's independent chain-model
+  estimate falls inside the bracket to `10⁻⁴` nats (SCI-MSG-0020; addendum A17 (10)).  With
+  P and P2 this is a complete arc: which class a real solvent term lives in (measured),
+  what certification by reweighting would cost (measured), a certificate at a size
+  beyond enumeration (proved on paper, replicated), and where it stops (the helix:
+  cancellation that pair-by-pair bounds cannot see).  As a methods note this is the most
+  defensible thing in the division's record *as measurement and construction*; its
+  theory is cited, not claimed (SCI-RES-0009).  Before any external use: a machine check
+  of the remainder identity and a stand-alone checker of the certificate (requests
+  P3-T1, P3-E1); a proper prior-art search for the combination "evaluated low orders +
+  a term-by-term tail in closed form" (six abstract-level queries so far); the sentence
+  on Decoster (2004); and at least one instance that is not an exposed homopeptide.
+  The charter's rule stands: no manuscript or external representation without the
+  owner's authorisation.
 

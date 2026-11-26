@@ -2,7 +2,7 @@
 
 *Scientific Discovery, Translation & Independent Validation Division of MetricChain.
 Branch `research/scientific-translation`.  Written 2026-11-25 at checkpoint 20, last
-revised at checkpoint 39 (2026-11-26), for an
+revised at checkpoint 40 (2026-11-26), for an
 investigator who has none of the conversation that produced the branch.  Read this file
 first; it points to everything else.  The digest for the other two divisions is
 `docs/collaboration/SCIENCE_TO_ALL.md`; the state table is `docs/collaboration/status/science.md`.*
@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 ## 0. Resume here
 
 1. `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering` and read the two
-   heads.  **Last read (checkpoint 39, 2026-11-26; the sync log has the time): theory `b2d3e9c`** (their
+   heads.  **Last read (checkpoint 40, 2026-11-26; the sync log has the time): theory `b2d3e9c`** (their
    fifteenth checkpoint: THY-RES-0008, THY-MSG-0014, their §11.29 as rewritten and §11.30
    read in full and **answered by SCI-RES-0008**; at their fourteenth, `658b77f`: answered by
    SCI-RES-0007, audit replicated, revised sections and their workstream Y with our
@@ -23,7 +23,7 @@ first; it points to everything else.  The digest for the other two divisions is
    `responses/science/`.
    State of the exchange: **the theory division last read our branch at `9a0865f`** (before
    our checkpoint 32), so it has not yet seen SCI-REV-0007, -0008, -0009, SCI-RES-0007,
-   -0008, -0009, SCI-MSG-0016 … -0019.  It has adopted our `Sandwich.lean` (its `MonotoneSandwich.lean`),
+   -0008, -0009, SCI-MSG-0016 … -0020.  It has adopted our `Sandwich.lean` (its `MonotoneSandwich.lean`),
    our Proposition A1.1 (its 11.61a), our Theorems A, B on the field case (its 11.109a)
    and our file `TwoRoundsExpected.lean`; it wrote the box-class section §11.30 in answer
    to our P-T3.  **Expect from it:** a reaction to our criticism of §11.30 (SCI-RES-0007 §3,
@@ -32,18 +32,18 @@ first; it points to everything else.  The digest for the other two divisions is
    second-round review (SCI-REV-0009), prior art for §11.30 (SCI-RES-0009 — it also
    corrects what we claimed for our own addendum A17), the Lean files for the
    compensation lemma and Theorem A (SCI-MSG-0019), the audit result at `b2d3e9c`
-   (`AUDIT PASSED`; `INDEPENDENT_VALIDATION.md` §1.5).  **Still owed by us to it:** the
-   floor by analysis (P3 — its report is final and says: analysis alone is useless, a
-   certificate with polynomially many evaluations works on extended backbones and one
-   `ln Z` beyond enumeration is certified; **not yet read or published by the
-   coordinator when this was written**), and the review of its workstream Y (R10,
-   running).  The engineering division had not yet mentioned this branch.
+   (`AUDIT PASSED`; `INDEPENDENT_VALIDATION.md` §1.5); **at checkpoint 40:** the floor by
+   analysis (SCI-MSG-0020, workstream P3: analysis alone useless, a certificate with
+   polynomially many evaluations on extended backbones, one `ln Z` beyond enumeration
+   certified and replicated independently).  **Still owed by us to it:** the review of
+   its workstream Y (R10, running).  The engineering division had not yet mentioned
+   this branch.
 2. **Of the third wave (briefs in `docs/science/workstreams/*_brief.md`):** R9 was
    published at checkpoint 38 (SCI-REV-0009), A3 and L3 at checkpoint 39 (SCI-RES-0009,
-   SCI-MSG-0019); **P3 has reported and is to be processed next** (§5: read
-   `P3_REPORT.md`, re-run one check, publish to theory and engineering); **R10 was still
-   running** (if its agent is gone, its draft and notes are in `R10_REPORT.md` and
-   `experiments/science/ws_R10/`).  The referee R8 of
+   SCI-MSG-0019), P3 at checkpoint 40 (SCI-MSG-0020); **R10 was still running** (if its
+   agent is gone, its draft and notes are in `R10_REPORT.md` and
+   `experiments/science/ws_R10/`; on completion: read it, re-run one script, publish as
+   SCI-REV-0010 to theory).  The referee R8 of
    addendum A16 reported at checkpoint 35 (SCI-MSG-0016; A16 corrected in place).
    **A rule learned at checkpoint 35:** a log file is committed only from a run that
    reached its last line, and a script cited in a message is re-run from a clean copy
@@ -204,6 +204,18 @@ published statements are linked messages, never silent rewrites.
    the part no search replaces — the measured prices on real instances, which are
    small.  The use of Hoeffding's Theorem 3 as a certified second-order bound for
    free-energy perturbation was not found (Decoster, J. Phys. A 37 (2004) 9051, unread).
+9b. **A certified solvated side-chain free energy beyond enumeration [P + M; checkpoint
+   40]** (workstream P3, SCI-MSG-0020; addendum A17 (10); `PHYSICAL_APPLICABILITY.md` §2b).
+   By analysis alone the constants of the solvent term can be bounded only with a loss
+   of a factor 33–1 400 (cancellation between self and cross terms).  Evaluating the
+   term on a Hamming ball about an anchor and bounding the tail gives a sandwich of
+   banded pairwise models: for a twenty-residue valine peptide on PPII (`3.5·10⁹`
+   assignments) `ln Z ∈ [518.2332, 518.2937]` with no sampling.  The coordinator's
+   independent chain-model estimate is `518.2626 ± 0.0001`.  On the helix the certificate
+   fails while the measured remainder of a fitted chain is `0.002–0.004 k_BT`: the price
+   is small and the proof is missing.  "Certified" = paper proofs + interval
+   arithmetic + a floating-point allowance, never violated in 5.5 million enumerated
+   state checks; not machine-checked.
 
 **New directions opened by workstreams**
 
@@ -250,7 +262,7 @@ refereed as statements; in-progress workstream files are snapshots, not statemen
 | R7 | `workstreams/R7_brief.md` — independent review and replication of the engineering division's results (the first review of that branch by us beyond its class tables) | **done at checkpoint 33** — no wrong number; class tables, covers and the Harper closed form replicated; 254 of 263 optima certified without a solver's search; two findings (the two-solver validation cannot be regenerated; floating point at its limit at 13 torsions of the off-lattice chain).  Coordinator: M1 verified on the engineering branch; the Harper table re-run.  Published as SCI-REV-0008; `INDEPENDENT_VALIDATION.md` §1.3 |
 | F | `workstreams/F_brief.md` — the two-oracle model with a field (report: `SF_REPORT.md`) | **done at checkpoint 30** — the coordinator's conjecture is true as a statement and false as an explanation; Theorems A, B (class exponents unchanged, every `n`); instance-wise bracket; `k = 2` exact at `n = 13`; tolerance theorem; comparison with theory report §11.29.  Coordinator re-derived the lemmas, Theorem A, the algebra of B and the tilt inequality; re-ran the exact-rational check; own check `pi_inference/compensation_lemma_check.py`.  Published as SCI-RES-0006 |
 | R8 | `workstreams/R8_brief.md` — adversarial referee of addendum A16 (the mean-energy datum at extensive accuracy: entropy bracket, plateau twin, isoperimetry with an energy constraint, the conjecture); launched at checkpoint 28 because A16 had no second reader | **done at checkpoint 35** — no false statement; Theorem A16.6 (ii)–(iii) over-claimed and proved after the referee's repairs (quantile form, matching inequality, tolerant test); the printed algorithm of SCI-MSG-0013 lacked a gauge; one of our scripts aborted before its cited output (repaired; data identical); Lean core of Lemma A16.5; the conjecture not refuted; non-adaptive lower bound with the datum.  Coordinator: R8.2, R8.3 re-derived, Lean file compiled, two scripts re-run.  Published as SCI-MSG-0016 (linked correction) |
-| P3 | `workstreams/P3_brief.md` — a floor by analysis: certified third-order constants of the GBn2 term in rotamer variables without enumeration; tightness against P2; the theory division's cost number `Z(m)/Z(g) − 1`; one certified `ln Z` beyond enumeration size if feasible | read `P3_REPORT.md`; re-run one check against OpenMM; publish as a message to theory and engineering (it answers THY-RES-0007 §4.2); update `PHYSICAL_APPLICABILITY.md` §2a, §7, `BENCHMARK_DESIGN.md`, `OPEN_PROBLEMS.md` D5′  **The report is final (its hand-back arrived during checkpoint 39) and unread by the coordinator.** |
+| P3 | `workstreams/P3_brief.md` — a floor by analysis: certified third-order constants of the GBn2 term in rotamer variables without enumeration; tightness against P2; the theory division's cost number `Z(m)/Z(g) − 1`; one certified `ln Z` beyond enumeration size | **done at checkpoint 40** — analysis alone fails by cancellation (33–1 400 times too large); ball of evaluations + term-by-term tail = a certified sandwich on extended backbones; Ace-Val₂₀-NMe on PPII certified within 0.06 nats without sampling; fails on the helix.  Coordinator: statements re-derived; own script; three re-runs (identity, OpenMM validation, one enumerated instance); the twenty-residue value replicated independently by a chain model (`518.2626 ± 0.0001`).  Published as SCI-MSG-0020; `PHYSICAL_APPLICABILITY.md` §2b; `OPEN_PROBLEMS.md` D6; status S48 |
 | L3 | `workstreams/L3_brief.md` — Lean: the compensation lemma and Theorem A of workstream F (the theory division's request F-T2); the rearrangement step of Lemma A16.5; items of Proposition A1.1 | **done at checkpoint 39** — Lemmas 0–3 and Theorem A (all three displays) machine-checked with nothing assumed; A16.5 given Harper; A1.1 items 1–2; re-compiled by the coordinator (four exit codes 0; standard axioms); ten statements read in the files; published as SCI-MSG-0019; status S47; two notes added to `SF_REPORT.md` |
 | A3 | `workstreams/A3_brief.md` — prior art, full text where accessible, for the box-class result and for addendum A17 | **done at checkpoint 39** — nearly everything is in print; 20 passages re-read by the coordinator; A17 corrected in place; `PRIOR_ART_MATRIX.md` row filled; published as SCI-RES-0009 (linked correction of SCI-RES-0007 §3, SCI-MSG-0017, -0018); `DEAD_ENDS.md` SD43; status S46 |
 | R9 | `workstreams/R9_brief.md` — second-round review of the theory report at `658b77f` against our five reviews; the theory division's amendments; statements written while applying the reviews; the exact-semigroup sketch for bridges | **done at checkpoint 38** — all applied correctly; three corrections of our own texts (`DEAD_ENDS.md` SD38 extended, SD41, SD42); one new false sentence and eight minor defects in theirs; **Theorem R9.1**: the concatenation error of bridges is a coboundary, the limit shape a Newton–Okounkov body, the profile count `vol(𝒦)N³`, `vol 𝒦 ≥ 1.6313`.  Coordinator: (a) re-derived; the C checker recompiled and re-run to 11 beads; the certificate script re-run.  Published as SCI-REV-0009 |
@@ -270,28 +282,23 @@ two-oracle model (SCI-REQ-0001 Q2); to engineering — P-E1 (now also our own P2
 (cover against span format on chain geometry), E-1 of SCI-REV-0006 (native certificates
 against pseudo-Boolean proofs), R3-E1 (bridge tables).
 
-## 7. What to do next, ranked (revised at checkpoint 39)
+## 7. What to do next, ranked (revised at checkpoint 40)
 
-1. **Process P3, then R10** (§5).  P3's hand-back says: a floor by analysis alone is
-   rigorous and useless (cancellation, not slack); a certificate that evaluates the
-   energy on a Hamming ball and bounds only the order-`m` tail works on extended
-   backbones; **Ace-Val₂₀-NMe on PPII (`3.5·10⁹` states) has a certified `ln Z`**
-   (`[518.2332, 518.2937]` from 87 441 evaluations without sampling; `[518.2598, 518.2648]`
-   with 50 000 exact samples).  Before any of this is a statement of the division: read
-   `P3_REPORT.md`, re-derive the remainder identity, re-run one bracket against an
-   enumerated instance and one energy against OpenMM, then publish to theory and
-   engineering (it answers THY-RES-0007 §4.2) and update `PHYSICAL_APPLICABILITY.md`,
-   `BENCHMARK_DESIGN.md`, `OPEN_PROBLEMS.md` D5′ and addendum A17.  Also write addendum
-   A17 part (10) from the coordinator's own beyond-enumeration runs
-   (`experiments/science/pi_inference/beyond_enumeration_*.log` — fitted chain models at
-   20–50 residues; commit logs only from runs that reached their last line).  A3, L3,
-   R9 and the audit at `b2d3e9c` are done (checkpoints 38–39).
-2. **From prices to a certificate on one real instance** (addendum A17 (6)–(7);
-   `PHYSICAL_APPLICABILITY.md` §7): a pairwise model with exact partition function (small
-   tree-width: a homopeptide on a strand with pair terms cut beyond a range and the cut
-   terms bounded), a *proved* one-sided floor and variance bound for the remainder, a
-   sampled mean — the first certified solvated side-chain free energy, at a size beyond
-   enumeration.  Everything except the proved floor and variance exists.
+1. **Process R10 when it reports** (§5): the review and replication of the theory
+   division's workstream Y (a nearest-neighbour interaction as known part); publish as
+   SCI-REV-0010.  Its notes so far: a small-slope law `F*(t) ~ (t(1−t)/2)u²V` with `V` the
+   largest variance of a Lipschitz function, and "scales with the `k = 0` susceptibility"
+   false in general — to be connected with addendum A17 (8).
+2. **Certify the compact case** (`OPEN_PROBLEMS.md` D6) — the problem the programme's most
+   physical line now ends on.  Done at checkpoint 40: a certified `ln Z` at twenty
+   residues on an extended backbone (P3; SCI-MSG-0020), replicated independently
+   (addendum A17 (10)).  Not done: the helix, where a fitted chain model is measurably
+   accurate (`0.002–0.004 k_BT`) and P3's bound cannot see the cancellation that makes it
+   so.  Candidates, in order of cost: (a) run P3's sandwich on the *fitted* chain models
+   of A17 (10) — a certified floor and variance for a better model (`β(m₋ − m) ≤ r ≤ β(m₊ − m)`;
+   an afternoon); (b) group-wise signed tails (P3's next step 1); (c) a stand-alone
+   checker of the certificate (request P3-E1); (d) a buried, non-homopeptide instance
+   (request P2-E1).
 3. **Benchmark B10 in full** (`BENCHMARK_DESIGN.md`): variational and likelihood fits on
    the real instances; a buried environment (request P2-E1 to engineering).
 4. **Conjecture A16.4** where it is genuinely open: an algorithm with the mean-energy
@@ -300,12 +307,11 @@ against pseudo-Boolean proofs), R3-E1 (bridge tables).
    (requests T-R8-1…3 are with the theory division).
 5. **A physical instance of certified inference from averaged data** (`BENCHMARK_DESIGN.md`
    B3, B4) on the rotamer model, with maximum occurrence as practised as baseline.
-6. **A refreshed ranking of the open requests** to both divisions (the last one is
-   SCI-MSG-0010, checkpoint 20; more than sixty request items are listed in
-   `docs/collaboration/status/science.md`; the engineering division has answered none
-   and has not moved since its checkpoint 3).
-7. **Frontier map version 5** (version 4.1 is current) once the third wave has reported;
-   a final handoff update of this file; a last synchronisation; a last push.
+6. **Done at checkpoint 40:** the refreshed ranking of the open requests (SCI-MSG-0021)
+   and frontier map version 5.  What remains of this item: when either division
+   answers, close or re-rank in `docs/collaboration/status/science.md`.
+7. **The final handoff:** keep this file current at every checkpoint; a last
+   synchronisation; a last push; a clean working tree.
 
 ## 8. Environment (verified on the machine that produced the branch; a new container starts empty)
 

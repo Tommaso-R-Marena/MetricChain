@@ -874,3 +874,39 @@ profile and the gauche count, and its support function is the ground-state energ
   PASSED` (62 Lean files, 3 603 declarations, 374 mutations of which 373 caught and one
   expected pass, 124 baselines, 2 142 documented declarations) — `INDEPENDENT_VALIDATION.md`
   §1.5.
+
+### Cycle 34 — from prices to a certificate (checkpoint 40)
+
+* **Workstream P3 reported.**  The question was the theory division's: can a floor be
+  certified by analysis for the remainder we had measured?  The answer has three parts,
+  and the first is negative.  *Analysis alone* (tables and interval enclosures of the
+  derivatives of the solvent model, no evaluation of it) certifies third-order constants
+  33–1 400 times the measured ones; the workstream showed that this is not slack — term
+  by term the bound is within 1.1–6 of exact — but the cancellation between self and
+  cross terms of a neutral molecule, which no pair-by-pair bound can see.  *Analysis of
+  the tail plus evaluations on a Hamming ball* works on extended backbones: a remainder
+  identity for the anchored expansion, a Faà di Bruno bound summed over all subsets in
+  closed form, and a sandwich of two banded pairwise models.  *On the helix* the
+  certified constants decay too slowly and nothing is certified.
+* **The first certified free energy of the programme beyond enumeration:** Ace-Val₂₀-NMe
+  on PPII, `3.49·10⁹` assignments, `ln Z ∈ [518.2332, 518.2937]` from 87 441 evaluations and
+  no random number.
+* **The coordinator's own experiment (addendum A17 (10)) met it from the other side.**
+  A chain model built from 394 evaluations, exact samples, first-order perturbation
+  theory: `518.2618 ± 0.0007`; with fitted tables `518.2626 ± 0.0001` — inside the
+  intersection of all of the workstream's intervals.  Two pipelines with different
+  evaluators, constructions and code agree to `10⁻⁴` nats at a size where nothing can be
+  enumerated.  The same experiment shows why the certificate is needed: on enumerated
+  validation instances the sampled floor of a fitted model is up to 45 times too
+  small — the regression makes the remainder small exactly where it has looked.
+* **What the two together say.**  For apolar side chains on an extended backbone the
+  chain "known part + evaluated low orders" is certifiably the whole solvated ensemble.
+  For compact geometries it is *measurably* the whole ensemble (a fitted window-four
+  chain leaves `0.002–0.004 k_BT` on a thirty-residue helix) and nobody can prove it.
+  The open problem moved from "is the price small?" (yes) to "can the cancellation be
+  bounded?" (`OPEN_PROBLEMS.md` D6).
+* **Checked before publication:** the combinatorial statements re-derived and tested
+  with an independent script; the workstream's identity test, its validation against
+  OpenMM and one enumerated end-to-end run re-run; the headline number replicated.
+  Published as SCI-MSG-0020 with one request the theory division can machine-check
+  (the remainder identity) and a checker specification for the engineering division.
