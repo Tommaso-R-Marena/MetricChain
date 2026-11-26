@@ -1,0 +1,22 @@
+Gaussian (1 - sqrt e)^2 ; W = 0.8 sqrt(B/b)  (concave) on [0, 0.4500]  (max |M_W - M_W**| = 0.0e+00; hull has 2 vertices)
+   g = 0.00200 : U_W = 0.302500   Llow = 0.340488   R_bf = 0.340491   U_hull = 0.340491    (Llow - U_W)/a = +0.0380   (R_bf - U_hull)/a = +4.4e-09
+   g = 0.01000 : U_W = 0.277770   Llow = 0.315929   R_bf = 0.315930   U_hull = 0.315930    (Llow - U_W)/a = +0.0382   (R_bf - U_hull)/a = +7.6e-09
+   g = 0.05000 : U_W = 0.223514   Llow = 0.259920   R_bf = 0.259920   U_hull = 0.259920    (Llow - U_W)/a = +0.0364   (R_bf - U_hull)/a = +7.6e-09
+   g = 0.15000 : U_W = 0.155495   Llow = 0.185801   R_bf = 0.185801   U_hull = 0.185801    (Llow - U_W)/a = +0.0303   (R_bf - U_hull)/a = +8.0e-11
+Gaussian (1 - sqrt e)^2 ; W = min(1, B(1-B)/(1-2B))  (XVI.7) on [0, 0.5000]  (max |M_W - M_W**| = 0.0e+00; hull has 402 vertices)
+   g = 0.00050 : U_W = 0.327097   Llow = 0.348529   R_bf = 0.348531   U_hull = 0.348531    (Llow - U_W)/a = +0.0214   (R_bf - U_hull)/a = +9.2e-09
+   g = 0.00200 : U_W = 0.320568   Llow = 0.339774   R_bf = 0.339774   U_hull = 0.339774    (Llow - U_W)/a = +0.0192   (R_bf - U_hull)/a = +4.2e-09
+   g = 0.01000 : U_W = 0.303257   Llow = 0.317567   R_bf = 0.317569   U_hull = 0.317569    (Llow - U_W)/a = +0.0143   (R_bf - U_hull)/a = +6.3e-09
+   g = 0.05000 : U_W = 0.259378   Llow = 0.265655   R_bf = 0.265655   U_hull = 0.265655    (Llow - U_W)/a = +0.0063   (R_bf - U_hull)/a = +1.6e-09
+Gaussian (1 - sqrt e)^2 ; W = smooth step 0.9/(1+exp(-(B-0.2)/0.02)) on [0, 0.4000]  (max |M_W - M_W**| = 0.0e+00; hull has 305 vertices)
+   g = 0.00200 : U_W = 0.226553   Llow = 0.316126   R_bf = 0.316126   U_hull = 0.316126    (Llow - U_W)/a = +0.0896   (R_bf - U_hull)/a = +3.5e-09
+   g = 0.01000 : U_W = 0.216101   Llow = 0.297238   R_bf = 0.297239   U_hull = 0.297239    (Llow - U_W)/a = +0.0811   (R_bf - U_hull)/a = +4.0e-09
+   g = 0.05000 : U_W = 0.190950   Llow = 0.252083   R_bf = 0.252083   U_hull = 0.252083    (Llow - U_W)/a = +0.0611   (R_bf - U_hull)/a = +6.6e-09
+cube u=1 ; W = 0.7 sqrt(B/b)  (concave) on [0, 0.0600]  (max |M_W - M_W**| = 0.0e+00; hull has 2 vertices)
+   g = 0.00050 : U_W = 0.040058   Llow = 0.044292   R_bf = 0.044292   U_hull = 0.044292    (Llow - U_W)/a = +0.0382   (R_bf - U_hull)/a = +2.6e-09
+   g = 0.00300 : U_W = 0.034119   Llow = 0.038344   R_bf = 0.038344   U_hull = 0.038344    (Llow - U_W)/a = +0.0381   (R_bf - U_hull)/a = +1.9e-09
+   g = 0.01000 : U_W = 0.026210   Llow = 0.030090   R_bf = 0.030090   U_hull = 0.030090    (Llow - U_W)/a = +0.0350   (R_bf - U_hull)/a = +6.7e-09
+expo a=1 c=0.25 d=0.08 ; W = 0.9 (B/b)^(1/3) on [0, 0.5000]  (max |M_W - M_W**| = 0.0e+00; hull has 2 vertices)
+   g = 0.00300 : U_W = 0.265552   Llow = 0.353233   R_bf = 0.353264   U_hull = 0.353264    (Llow - U_W)/a = +0.0877   (R_bf - U_hull)/a = +4.8e-09
+   g = 0.02000 : U_W = 0.250077   Llow = 0.333314   R_bf = 0.333319   U_hull = 0.333319    (Llow - U_W)/a = +0.0832   (R_bf - U_hull)/a = +1.6e-08
+   g = 0.10000 : U_W = 0.194669   Llow = 0.265312   R_bf = 0.265312   U_hull = 0.265312    (Llow - U_W)/a = +0.0706   (R_bf - U_hull)/a = +9.9e-09

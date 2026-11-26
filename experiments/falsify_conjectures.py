@@ -13952,6 +13952,155 @@ def t_dead_naive_interval(rng, trials):
     return True, {}
 
 
+# ----------------------------------------------------------------------------------------------
+# XXVI. The nested algorithm on a general probability space (theory report 11.33; workstream N)
+# ----------------------------------------------------------------------------------------------
+
+def gs_Phi(x):
+    return 0.5 * math.erfc(-x / math.sqrt(2.0))
+
+
+def gs_Phinv(p):
+    lo, hi = -12.0, 12.0
+    for _ in range(100):
+        mid = 0.5 * (lo + hi)
+        lo, hi = (mid, hi) if gs_Phi(mid) < p else (lo, mid)
+    return 0.5 * (lo + hi)
+
+
+def gs_Xi(L, q):
+    """upper tail function of L-Lipschitz (Euclidean) -ln V on Gauss space: e^{L^2/2 - L t} Phi(L - t) - Phi(-t), t = Phi^{-1}(1 - q)."""
+    t = gs_Phinv(1 - q)
+    return math.exp(L * L / 2 - L * t) * gs_Phi(L - t) - gs_Phi(-t)
+
+
+def gs_Theta(L, p):
+    """lower tail function: p + e^{L c + L^2/2} Phi(-c - L), c = Phi^{-1}(p)."""
+    c = gs_Phinv(p)
+    return p + math.exp(L * c + L * L / 2) * gs_Phi(-c - L)
+
+
+@conjecture("XXVI.1 The level theorem beyond the cube (theory report 11.33).  (a) Theorem 11.120(a): on Gauss space, for -ln V L-Lipschitz, gamma(V > s) <= q implies E(V - s)_+ <= s Xi_L(q) with Xi_L(q) = e^{L^2/2 - L t} Phi(L - t) - Phi(-t), t = Phi^{-1}(1 - q), and gamma(V >= s) >= p implies E min(V, s) >= s Theta_L(p), Theta_L(p) = p + e^{L c + L^2/2} Phi(-c - L), c = Phi^{-1}(p) - tested on random Lipschitz functions of one variable, with equality at the half-space dips; (b) Theorem 11.120(b), the inequality behind the obstruction: for V = e^{L x_1}, E min(V, e^{L t}) = A [Phi(t - L) + e^{L t - L^2/2} Phi(-t)] <= A e^{-(L - t)^2/2} for 0 <= t <= L; (c) Theorem 11.119(b): for conditional laws Bernoulli(p)^k and u-Lipschitz fibres on the k-cube, the ratio of the fibre integrals under p and p' is at most e^iota, iota = k max over the two signs of ln[(1 + p (e^{+-u} - 1))/(1 + p' (e^{+-u} - 1))], attained by the two uniform fields; (d) Proposition 11.121, the instance m = 12, k = 16, u = 1, J = 4, tau = 10.5: A = 1.0747e-3, the 13 points with |a| >= 11 carry more than 99.98 per cent, the largest edge ratio of V is e^{k c} = e^{11.77}, and the tail inequality of the assumed class (slope u, Harper) is violated by the factor 1.7e5; (e) Proposition 11.123(a) on the cube: the profile w = u rho - Lambda_1 as a function of theta = KL(rho || 1/2) has w' <= -1 exactly for rho >= p_u, and w^{-1} is the hinted exponent")
+def t_level_general(rng, trials):
+    quick = trials < 100
+    stats = dict(tu_checks=0, influence=0)
+    # (a) Gaussian tail functions: closed forms against quadrature at the half-space dips, and (TU), (TL) for random functions
+    xs = np.linspace(-11.0, 11.0, 44001)
+    wts = np.exp(-xs * xs / 2) / math.sqrt(2 * math.pi) * (xs[1] - xs[0])
+    for L in (0.7, 1.5, 2.5):
+        for q in (0.3, 0.05, 1e-3):
+            t = gs_Phinv(1 - q)
+            dip = np.exp(L * np.maximum(xs - t, 0.0))
+            quad = float(np.sum((dip - 1.0) * wts))
+            if abs(quad - gs_Xi(L, q)) > 2e-4 * (1 + gs_Xi(L, q)):
+                return False, dict(reason="closed form of the Gaussian upper tail function against quadrature", L=L, q=q, quad=quad, closed=gs_Xi(L, q))
+            c = gs_Phinv(q)
+            low = np.exp(-L * np.maximum(xs - c, 0.0))
+            quad2 = float(np.sum(low * wts))
+            if abs(quad2 - gs_Theta(L, q)) > 2e-4:
+                return False, dict(reason="closed form of the Gaussian lower tail function against quadrature", L=L, p=q, quad=quad2, closed=gs_Theta(L, q))
+    for _ in range(12 if quick else 80):
+        L = float(rng.uniform(0.5, 2.5))
+        nseg = int(rng.integers(3, 12))
+        knots = np.sort(rng.uniform(-4, 4, nseg))
+        slopes = rng.uniform(-L, L, nseg + 1)
+        if rng.uniform() < 0.3:
+            slopes = np.where(rng.uniform(size=nseg + 1) < 0.5, L, -L)
+        seg = np.searchsorted(knots, xs)
+        psi = np.cumsum(slopes[seg]) * (xs[1] - xs[0])
+        V = np.exp(-(psi - psi[len(xs) // 2]))
+        for sq in rng.uniform(0.02, 0.98, 4):
+            s = float(np.quantile(V, sq))
+            q = float(np.sum(wts[V > s]))
+            if 1e-6 < q < 1 - 1e-6:
+                exc = float(np.sum(np.maximum(V - s, 0.0) * wts))
+                if exc > s * gs_Xi(L, min(q * 1.002 + 1e-6, 1 - 1e-9)) * (1 + 2e-3) + 1e-9:
+                    return False, dict(reason="(TU) on Gauss space violated by a Lipschitz function of one variable", L=L, q=q, excess=exc, bound=s * gs_Xi(L, q))
+            pbar = float(np.sum(wts[V >= s]))
+            if 1e-6 < pbar < 1 - 1e-6:
+                trunc = float(np.sum(np.minimum(V, s) * wts))
+                if trunc < s * gs_Theta(L, max(pbar * 0.998 - 1e-6, 1e-9)) * (1 - 2e-3) - 1e-9:
+                    return False, dict(reason="(TL) on Gauss space violated by a Lipschitz function of one variable", L=L, p=pbar, value=trunc, bound=s * gs_Theta(L, pbar))
+            stats["tu_checks"] += 1
+    # (b) the truncated mean of the linear instance
+    for L in (1.0, 2.0, 3.0):
+        A = math.exp(L * L / 2)
+        for t in np.linspace(0.0, L, 7):
+            closed = A * (gs_Phi(t - L) + math.exp(L * t - L * L / 2) * gs_Phi(-t))
+            quad = float(np.sum(np.minimum(np.exp(L * xs), math.exp(L * t)) * wts))
+            if abs(quad - closed) > 1e-4 * closed:
+                return False, dict(reason="E min(e^{L x}, e^{L t}) closed form", L=L, t=float(t), quad=quad, closed=closed)
+            if closed > A * math.exp(-(L - t) ** 2 / 2) * (1 + 1e-12):
+                return False, dict(reason="E min(V, e^{L t}) <= A e^{-(L - t)^2/2} fails", L=L, t=float(t))
+    # (c) class-relative influence for Bernoulli conditional laws
+    for _ in range(40 if quick else 300):
+        k = int(rng.integers(2, 7))
+        u = float(rng.uniform(0.3, 2.0))
+        p, pp = float(rng.uniform(0.02, 0.98)), float(rng.uniform(0.02, 0.98))
+        states = np.array([[(b >> i) & 1 for i in range(k)] for b in range(1 << k)])
+        ones = states.sum(axis=1)
+        mode = int(rng.integers(0, 3))
+        if mode == 0:                                   # McShane envelope of random anchors: u-Lipschitz
+            na = int(rng.integers(1, 5))
+            anchors = states[rng.integers(0, 1 << k, na)]
+            vals = rng.uniform(-2, 2, na)
+            psi = np.min(vals[None, :] + u * (states[:, None, :] != anchors[None, :, :]).sum(axis=2), axis=1)
+        elif mode == 1:                                 # additive with site slopes in [-u, u]
+            psi = states @ rng.uniform(-u, u, k)
+        else:                                           # the two uniform fields (extremal)
+            psi = (u if rng.uniform() < 0.5 else -u) * ones
+        w = np.exp(-psi)
+        num = float(np.sum(w * p ** ones * (1 - p) ** (k - ones)))
+        den = float(np.sum(w * pp ** ones * (1 - pp) ** (k - ones)))
+        iota = k * max(math.log((1 + p * (math.exp(sg * u) - 1)) / (1 + pp * (math.exp(sg * u) - 1))) for sg in (1.0, -1.0))
+        if math.log(num / den) > iota + 1e-9:
+            return False, dict(reason="class-relative influence bound violated", k=k, u=u, p=p, pp=pp, log_ratio=math.log(num / den), iota=iota)
+        if mode == 2 and abs(max(math.log(num / den), 0.0) - max(iota, 0.0)) > 1e-9 and math.log(num / den) > 0:
+            # a uniform field attains one of the two signs; the other sign is attained by the opposite field
+            other = k * math.log((1 + p * (math.exp(-math.copysign(u, psi[-1])) - 1)) / (1 + pp * (math.exp(-math.copysign(u, psi[-1])) - 1)))
+            if abs(math.log(num / den) - other) > 1e-9:
+                return False, dict(reason="uniform field does not attain its sign of the influence formula", k=k, u=u)
+        stats["influence"] += 1
+    # (d) the instance of Proposition 11.121
+    m, k, u, Jc, tau = 12, 16, 1.0, 4.0, 10.5
+    sig = lambda z: 1 / (1 + math.exp(-z))
+    Vj = [(1 - sig(Jc * (tau - j)) * (1 - math.exp(-u))) ** k for j in range(m + 1)]
+    wj = [math.comb(m, j) / 2 ** m for j in range(m + 1)]
+    A = sum(w * v for w, v in zip(wj, Vj))
+    top = sum(wj[j] * Vj[j] for j in (11, 12)) / A
+    edge = max(math.log(Vj[j + 1] / Vj[j]) for j in range(m))
+    cJ = math.log((1 - sig(-Jc / 2) * (1 - math.exp(-u))) / (1 - sig(Jc / 2) * (1 - math.exp(-u))))
+    worst = 0.0
+    for r in range(0, 4):                               # D = {|a| >= m - r}: a Hamming ball of radius r around the all-ones point
+        s = Vj[m - r - 1]
+        exc = sum(wj[j] * (Vj[j] - s) for j in range(m - r, m + 1))
+        harper = sum(math.comb(m, i) * (math.exp(u * (r + 1 - i)) - 1) for i in range(r + 1)) / 2 ** m
+        worst = max(worst, exc / (s * harper))
+    if abs(A / 1.0747e-3 - 1) > 1e-3 or top < 0.9998 or abs(edge - 11.77) > 0.01 or abs(edge - k * cJ) > 1e-9 or not 1.6e5 < worst < 1.9e5:
+        return False, dict(reason="the instance of Proposition 11.121: A, the mass of the top, the edge ratio or the violation of (TU)",
+                           A=A, top=top, edge=edge, k_c=k * cJ, violation=worst)
+    # (e) the profile of the cube
+    for uu in (0.5, 1.0, 2.0):
+        pu, lam, epsstar, a, h = lv_consts(uu)
+        prev = None
+        for rho in np.linspace(pu + 1e-4, 0.5 - 1e-4, 60):
+            th = na_kl(rho, 0.5)
+            w = uu * rho - lam
+            if w > 0 and abs(na_theta_hint(uu, w) - th) > 1e-9:
+                return False, dict(reason="w^{-1} is not the hinted exponent", u=uu, rho=float(rho))
+            if prev is not None:
+                dq = (w - prev[1]) / (th - prev[0])
+                if dq > -1 + 1e-6:
+                    return False, dict(reason="the profile of the cube has a difference quotient above -1 for rho >= p_u", u=uu, rho=float(rho), quotient=dq)
+            prev = (th, w)
+        rho1, rho2 = pu * 0.6, pu * 0.8                  # below p_u the quotient is above -1: the hypothesis is not automatic
+        dq = (uu * (rho2 - rho1)) / (na_kl(rho2, 0.5) - na_kl(rho1, 0.5))
+        if dq <= -1:
+            return True, dict(reason="harness: below p_u the quotient should exceed -1", u=uu, quotient=dq)
+    stats.update(A=A, violation=round(worst), edge=round(edge, 3))
+    return True, stats
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true", help="fewer trials (CI mode)")

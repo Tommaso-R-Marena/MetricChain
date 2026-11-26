@@ -1,0 +1,27 @@
+# Gaussian (1 - sqrt e)^2 : a = 1.000000 h = 0.25000000 L = 0.500000 vartheta = 0.500001 const = 2 pi^2 h^2 vartheta = 0.61685170 ; 1 - h/a = 0.750000
+# s_t = L + 0.05 = 0.550000 ; b_0 = h + 0.001 = 0.251000 ; (1 - s_t) a = 0.450000
+# (C1) Sigma(h, s_t) = 0.562500 < 1: True ; (C2) D(h, s_t) + lambda (1 - s_t - h/a) = 0.300500 < 1 - s_t = 0.450000: True  (sigma_* = 0.541667, lambda = 1.44000, e = 0.20661)
+# B_t(j), m_j for j <= 91: 7 s ; first level in case B: 20
+#    j case  B_t(j)-h      m_j          E_j-h        b_j-h        W_{j+1}(b_{j+1})  j^2(b_j-h)/const  m_{j+1}/m_j  bound
+      0  A   nan  nan  inf  1.000000e-03   0.335113         0.00000          nan      nan
+      1  A   nan  nan  inf  1.000000e-03   0.403218         0.00162          nan      nan
+      2  A   nan  nan  inf  1.000000e-03   0.433199         0.00648          nan      nan
+      3  A   nan  nan  inf  1.000000e-03   0.450496         0.01459          nan      nan
+      4  A   nan  nan  inf  1.000000e-03   0.462056         0.02594          nan      nan
+      5  A   nan  nan  inf  1.000000e-03   0.470558         0.04053          nan      nan
+      6  A   nan  nan  inf  1.000000e-03   0.477263         0.05836          nan      nan
+      8  A   nan  nan  inf  1.000000e-03   0.487708         0.10375          nan      nan
+     10  A   nan  nan  inf  1.000000e-03   0.496248         0.16211          nan      nan
+     15  A   nan  nan  inf  1.000000e-03   0.517835         0.36476          nan      nan
+     20  B   9.921287e-04  1.68941e+02  2.163169e-03  1.000000e-03   0.566002         0.64845          1.1086      1.4493
+     30  B   4.983447e-04  4.16449e+02  9.762512e-04  1.000000e-03   0.777415         1.45902          1.0803      1.4417
+     50  B   2.012856e-04  1.47855e+03  3.363261e-04  3.510950e-04   0.771297         1.42293          1.0529      1.4392
+     75  B   9.535919e-05  4.37032e+03  1.410902e-04  1.452203e-04   0.767811         1.32425          1.0370      1.4391
+# RANGE CONDITION W_{j+1}(b_{j+1}) <= 1 for all j <= 90: True  (largest value 0.777415 at j = 30)
+# Lemma RC, case (beta): sup_j m_{j+1}(E_j - B_t(j+1)) = 0.233855 (at j = 20)  <=  limit bound D(h,s_t) + lambda (1 - s_t - h/a) = 0.300500 ?  True ;  needed: < 1 - s_t = 0.450000 ;  [D(b_0, s_t) = 0.017588, D(h, s_t) = 0.012500]
+# Lemma RC, case (alpha): Sigma(b_0, s_t) = 0.567588  (must be <= 1)
+# slope ratio: max over j of [m_{j+1}/m_j - (1/(e_1 m_j) + theta(e_1)/e_1)] = -3.406e-01  (must be <= 0)
+# Lemma T(b), adaptive sampling of the linear part of W_{j+1} (26 levels, 3120 points): min of (Sigma(B, W_j(B)) - W_{j+1}(B))/max(1, .) = -6.706e-14 ; mutation (slope * 1.005) detected at 26 of 26 levels  [3 s]
+# Lemma T(b) on a grid of 5502 points of [0, b_0], levels j in 0..80 (45 levels): max of (W_{j+1} - Sigma(B, W_j(B)))/max(1, .) = +0.000e+00 (at j = 0)  [24 s]
+#   on the linear parts only (2915 grid points with Sigma finite): min of (Sigma(B, W_j(B)) - W_{j+1}(B))/max(1, .) = +1.966e-07 ; mutation (tangent slope * 1.005) detected at 11 of 26 levels
+# convexity of W_j (uniform grid of 801 points of [0, b_0]): most negative second difference / max(1, |W_j|) = -2.407e-16 (at j = 80)

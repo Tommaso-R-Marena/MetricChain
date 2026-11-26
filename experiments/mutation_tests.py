@@ -1680,6 +1680,28 @@ MUTS["XVI"] += [
      [('    if worst > 1e-5:\n        return False, dict(reason="Proposition U: the level operator exceeds', '    if worst > -1e-3:\n        return False, dict(reason="Proposition U: the level operator exceeds')], 'XVI.8'),
 ]
 
+# The nested algorithm on a general probability space (theory report 11.33)
+MUTS["XXVI"] = [
+    ("XXVI.1 M1: the Gaussian upper tail function with Phi(t - L) in place of Phi(L - t)",
+     [('    return math.exp(L * L / 2 - L * t) * gs_Phi(L - t) - gs_Phi(-t)', '    return math.exp(L * L / 2 - L * t) * gs_Phi(t - L) - gs_Phi(-t)')], 'XXVI.1'),
+    ("XXVI.1 M2: the Gaussian lower tail function with Phi(-c + L) in place of Phi(-c - L)",
+     [('    return p + math.exp(L * c + L * L / 2) * gs_Phi(-c - L)', '    return p + math.exp(L * c + L * L / 2) * gs_Phi(-c + L)')], 'XXVI.1'),
+    ("XXVI.1 M3: the class-relative influence of k inner sites taken as that of one site",
+     [('        iota = k * max(math.log((1 + p * (math.exp(sg * u) - 1)) / (1 + pp * (math.exp(sg * u) - 1))) for sg in (1.0, -1.0))',
+       '        iota = max(math.log((1 + p * (math.exp(sg * u) - 1)) / (1 + pp * (math.exp(sg * u) - 1))) for sg in (1.0, -1.0))')], 'XXVI.1'),
+    ("XXVI.1 M4: the class-relative influence with one sign only",
+     [('        iota = k * max(math.log((1 + p * (math.exp(sg * u) - 1)) / (1 + pp * (math.exp(sg * u) - 1))) for sg in (1.0, -1.0))',
+       '        iota = k * max(math.log((1 + p * (math.exp(sg * u) - 1)) / (1 + pp * (math.exp(sg * u) - 1))) for sg in (1.0,))')], 'XXVI.1'),
+    ("XXVI.1 M5: the tail inequality of the assumed class claimed to hold at the instance of Proposition 11.121",
+     [('or not 1.6e5 < worst < 1.9e5:', 'or not worst <= 1.0:')], 'XXVI.1'),
+    ("XXVI.1 M6: the instance with a weak coupling (J = 1/4) claimed to have the same numbers",
+     [('    m, k, u, Jc, tau = 12, 16, 1.0, 4.0, 10.5', '    m, k, u, Jc, tau = 12, 16, 1.0, 0.25, 10.5')], 'XXVI.1'),
+    ("XXVI.1 M7: the truncated mean of the linear instance bounded by A e^{-(L - t)^2}",
+     [('            if closed > A * math.exp(-(L - t) ** 2 / 2) * (1 + 1e-12):', '            if closed > A * math.exp(-(L - t) ** 2) * (1 + 1e-12):')], 'XXVI.1'),
+    ("XXVI.1 M8: the profile of the cube claimed to have slope at most -1 also below p_u",
+     [('        for rho in np.linspace(pu + 1e-4, 0.5 - 1e-4, 60):', '        for rho in np.linspace(0.6 * pu, 0.5 - 1e-4, 60):')], 'XXVI.1'),
+]
+
 which = sys.argv[1:] or list(MUTS)
 for key in which:
     for item in MUTS[key]:
