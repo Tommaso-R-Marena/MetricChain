@@ -43,6 +43,36 @@
 > Q4(b) read "`(1−η)ν₀ ≥ 1`" for "`ν₁ ≥ 1`"; and the constant `C(u, ε, δ)` of Theorem Q(c) is not
 > `C_*`, which bounds the limsup only — over `2 ≤ n ≤ 10^{12}` the referee finds
 > `sup (bound − nh)/√(n ln n) = 3.8` at `u = 1` and `32` at `u = 4`.
+>
+> **Errata after the review SCI-REV-0017 of the Scientific Discovery Division** (its workstream
+> R17: Theorem Q / Theorem 11.58a "proved as stated, given its inputs"; no critical and no
+> major finding; nine minor ones, of which those that concern this text are listed; the
+> text below is unchanged).
+> (R17-m2) *§0 and §1, the description of a slope step* ("run at an accuracy `x ≫ ln n`, on an
+> outer block of only `≈ x/h` coordinates … the closing radius is `ρ_h·n_o` … costs `e^{n_o h}`").
+> Read: a slope step is built at accuracies `x̂ ≥ X₀(n) = 1 + ln(6(n+1)) + 2u + e^u + h` (a
+> threshold: `13.7` nats at `u = 1`, `n = 470`; below it the accuracy is passed to the inner
+> family), on an outer block of `n_o = ⌊(x̂ − X₀(n))/h⌋ + 1` sites — about `X₀(n)/h` fewer than
+> `x̂/h` —, and "`ρ_h n_o`", "`(n_o + 1)e^{n_o h}`" are *bounds*: the closing radius is at least
+> `min{n_o − 1, ⌊ρ_h n_o⌋ + 1}`, the outer sample at most `e^{P_M}(n_o + 1)e^{n_o h}` points (the exact
+> radius of the level as built is larger: `168` against `152` at `u = 1`, `n = 2000`, `n_o = 400`).
+> (R17-m3) *"`(a/h + 4)·ln n + O(1)`".*  The constant is `O_{u,δ}(1)` and it is large: `31, 39, 60,
+> 178` nats at `u = ½, 1, 2, 4` (`δ = 0.05`); uniform in the level and the epoch under the side
+> condition of the theorem, in `δ` as long as `ln(1/δ) = O(n)`.
+> (R17-m5) *"`k_M` nested levels of Algorithm 2L⁺ over the two-sample bracket".*  There are
+> `k_M − 1`; `k_M` counts the bracket ("13 levels", "43 levels": the bracket included).
+> (R17-m6) *§7.4, the column "drops (`√`-part + rest)".*  Its first number is the whole shift
+> term `Σ_m B_m·ς_m(n)`, not the `√`-term of Proposition Q9a (`238` against `158` at `n = 1.6·10⁴`):
+> read the head as "drops (shift term `B·ς(n)` + rest)".  No total changes.
+> (R17-m7) *§3, "every `K` in the nest is `O(n + k ln n + ln(1/δ_top))`".*  Read
+> `O(η^{−2}(n + k·ln n + ln(1/δ)))`, with `η = ½` in a slope step and `η = c_m` in the drop of
+> epoch `m` (`K = 72 013` at the top drop for `M = 1`, `n = 4000`).  Harmless: only `ln K` enters.
+> (R17-m9) *§7.3, "on every node visited the inequality of the induction … is checked".*  The
+> script checks every slope and drop node, and the base bracket at three accuracies (the
+> two ends and the middle) of every ladder it serves — not at every node.  The least slack
+> `39`–`57` nats is over the nodes checked; over all nodes it is `34.5`–`42.5` (referee R12,
+> 220 million checks) and `41.97` at `u = 1`, `n = 16 000` (the division's referee, 2.8 million
+> nodes, every base bracket included).  No violation in either.
 
 Independent report on the brief `docs/workstreams/Q_brief.md` (twenty-first checkpoint of cycle 10,
 2026-11-26).  Paper proofs with numerical checks; no Lean.  Nothing in the repository was edited;
