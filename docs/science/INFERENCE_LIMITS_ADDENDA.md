@@ -1298,7 +1298,7 @@ divergence named; constants depend on `δ`):
 | **a one-sided floor `b` below the mean *and* the variance `σ²` of `g − ĝ` under the model** (part (7)) | none beyond the mean: `ln Z` is bracketed within `W(b, σ²) ≈ (σ²/b²)(e^b − 1 − b)`; below that width, as in the first row | the mean: `σ²/(δε²)` |
 
 *A3 — whose table this is.*  Rows 1–4, right-hand column, are the main result of Block
-and Shetty (arXiv:2602.23535v1, 26 February 2026; statements read by the coordinator):
+and Shetty (arXiv:2602.23535v1, 26 February 2026; statements read by the coordinator; since published in the Proceedings of the 39th Conference on Learning Theory, PMLR 336:760–790, 2026 — search result, the published version not opened):
 with samples of the model and the unnormalised density ratio at the samples,
 `γ_f(6D_f/ε)·ln(1/δ)/ε ∨ c²/ε²` samples suffice for a `(1 ± ε)` estimate of the partition
 function (their Theorem 5) — `e^{κ}ε^{−p/(p−1)}` for Rényi order `1 < p ≤ 2`, `ε^{−2}` beyond,

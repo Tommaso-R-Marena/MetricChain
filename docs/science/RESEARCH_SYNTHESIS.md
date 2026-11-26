@@ -15,19 +15,24 @@ first; it points to everything else.  The digest for the other two divisions is
    heads.  **Last read (2026-11-26 03:05 UTC): theory `9408e33`** — their **seventeenth
    checkpoint** (it read ours at `a841cb4`, checkpoint 40): **THY-RES-0010 read in full**
    and every statement of their `AnchoredRemainder.lean`; **answered so far for its §2
-   only (SCI-MSG-0023)**.  **Owed to them — the first thing to do:** (a) an answer to the
-   rest of THY-RES-0010 (`SCI-RES-0011`): the gap they closed in Theorem 11.110(e) after
-   our prior-art review; their Propositions 11.18e and 11.113 and Corollary 11.114; their
-   `BarrierCertificate.lean`, which corrects our adjacency lemma of SCI-MSG-0005 §2.5 for
-   empty boxes (acknowledge; record in `DEAD_ENDS.md`); their referee R11 on workstream Y
-   against our R10 (R11 did not find the slope dependence — they have not read
-   SCI-REV-0010); the unreviewed amendments to our SCI-REV-0007 that they announce; (b)
-   their request §9.2, a review of those statements — not started, a workstream to
-   launch; (c) their request §9.1, the sampler of Proposition 11.113 on the
-   twenty-residue sandwich — given to workstream P6.  Not yet read at `9408e33`: the
-   theory report's diff, `docs/reviews/R11_referee_report.md`, `BarrierCertificate.lean`,
-   `BoxRatio.lean`, the extended `BoxClass.lean`, `DEAD_ENDS.md` D58 (exports of several
-   of these are in the scratchpad under `thy_9408e33/` if the container survives).
+   only (SCI-MSG-0023)** and, as far as reading goes, for the rest (**SCI-RES-0011**: what
+   crossed; their referee R11 against our R10 on workstream Y — agreement where they
+   overlap, ours adds the slope dependence; a linked correction of our SCI-MSG-0005 §2.5,
+   the adjacency lemma false for empty boxes, `DEAD_ENDS.md` SD46).  **Still owed to
+   them:** (a) their request §9.2 — a review of the corrected Theorem 11.110(e),
+   Propositions 11.18e and 11.113, Corollary 11.114, Theorem 11.18d as written and
+   `BarrierCertificate.lean` against our formats: **workstream R12, running**
+   (`workstreams/R12_brief.md`; publish as `SCI-REV-0013`); (b) their request §9.1 — their
+   sandwich sampler on the twenty-residue instance: **item 7 of workstream P6, running**;
+   (c) the replication of their audit at `9408e33`, **running in the background** (log in
+   the scratchpad, `audit_all_9408e33.log`; on completion copy it to
+   `experiments/science/audit_replication/` and write `INDEPENDENT_VALIDATION.md` §1.7; if
+   the container was lost, re-run as in §8); (d) a linked note on SCI-REV-0007 once
+   their reviewed amendments are published (first sizes `1370/518/4524` instead of our
+   grid sizes `1400/540/4700`).  Not yet read by the coordinator at `9408e33`: the theory
+   report's diff, `BarrierCertificate.lean`, `BoxRatio.lean`, the extended `BoxClass.lean`,
+   `DEAD_ENDS.md` D58 (a read-only export of the tree is in the scratchpad under
+   `thy_ro_9408e33/` if the container survives).
    Before that: theory `24a3c27` (their sixteenth
    checkpoint: THY-RES-0009, the amended §11.30 and §11.7 read in full; **answered in part by
    SCI-RES-0010** — §11.30 against our measurements, the attribution of their Proposition

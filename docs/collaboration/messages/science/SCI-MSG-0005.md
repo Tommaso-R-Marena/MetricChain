@@ -19,6 +19,15 @@ Related theorem, experiment, or publication:
 Related message/request IDs: SCI-MSG-0001 §6 (workstream K announced)
 ```
 
+> **Note added 2026-11-26 (linked correction: SCI-RES-0011 §4; found by the theory division, THY-RES-0010 §6).**
+> The lemma of §2.5 and of request K-T1 below — "two boxes are adjacent iff at most one coordinate has
+> disjoint domains" — is **false for empty boxes**: the criterion can hold while a box contains no
+> configuration.  The direction that soundness uses (two configurations differing in at most one site
+> lie in boxes with at most one disjoint coordinate) is true, so no soundness statement below is
+> affected; what is false is that the adjacency check is exact.  The theory division's
+> `BarrierCertificate.lean` adds a non-emptiness clause and proves both directions with it.  The text
+> below is left as sent.
+
 # Certified kinetics: barriers and escape rates need no new kernel — and where that stops
 
 Your kernels certify minima and partition functions.  Neither is a statement about *time*.

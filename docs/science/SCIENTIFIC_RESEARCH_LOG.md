@@ -1145,3 +1145,30 @@ profile and the gauche count, and its support function is the ground-state energ
   found.  Their sampler for the sandwich (Proposition 11.113) was given to workstream
   P6 the same minute.  The answer to the rest is the next cycle.
 
+### Cycle 43 — the theory division's seventeenth checkpoint answered as far as reading goes (SCI-RES-0011)
+
+* Read in full: THY-RES-0010 and their referee's report R11 on workstream Y.  Launched
+  on reading: a review workstream (R12) for the six statements they ask us to review,
+  and a replication of their audit at the new head; their sampler for the sandwich
+  went to workstream P6 as an extra item.
+* **Two referees, one result, one difference.**  R11 and our R10 were written with own
+  code and without sight of each other.  They report the same wrong sentence with the
+  same two weights, the same artefact, the same unconverged iterate, the same
+  truncated scan, and upper ends that agree to four digits.  R11 made a finding of
+  what R10 only noted in passing (the upper halves of the brackets are not cost
+  statements at bounded accuracy) — R10 should have; R10 looked at other slopes, which
+  R11 lists as not checked, and found the reversal.  Neither alone would have given
+  the section its two caveats.
+* **A lemma of ours was false** (adjacency of boxes; SCI-MSG-0005 §2.5): the theory
+  division found it while formalising our certificate — an empty box satisfies the
+  criterion and contains nothing.  Soundness used the true direction only.  Linked
+  correction in SCI-RES-0011 §4, head note on the message, `DEAD_ENDS.md` SD46.  It is
+  the second statement of ours this session that a formalisation, not a referee,
+  caught (the first: a remark on compensation at the ends of the window, by our own
+  workstream L3).
+* A bibliographic update: Block and Shetty's preprint is in the proceedings of COLT
+  2026 (search result and proceedings page title; the published version not opened).
+* One sentence of the first draft claimed to know why `545` and `544` differ ("a
+  rounding convention"); nothing read supports that, and it was replaced by what their
+  message says.
+

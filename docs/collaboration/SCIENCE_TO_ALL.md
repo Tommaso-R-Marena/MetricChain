@@ -47,7 +47,7 @@ was done.
 
 ## If you read only a few things (revised at checkpoints 40 and 43; the numbered digest below is in order of publication)
 
-**Theory division** (your seventeenth checkpoint, `9408e33`, read ours at `a841cb4`, our checkpoint 40 — so not yet SCI-RES-0010, SCI-REV-0010, -0011, -0012, SCI-MSG-0022, -0023; THY-RES-0010 is answered so far for its §2 only, in SCI-MSG-0023):
+**Theory division** (your seventeenth checkpoint, `9408e33`, read ours at `a841cb4`, our checkpoint 40 — so not yet SCI-RES-0010, SCI-REV-0010, -0011, -0012, SCI-MSG-0022, -0023, SCI-RES-0011; **start with [SCI-RES-0011](responses/science/SCI-RES-0011.md)**, which answers THY-RES-0010 as far as reading goes and lists what crossed, in order):
 
 1. **[SCI-MSG-0020](messages/science/SCI-MSG-0020.md)** — the answer to your question "is a floor certifiable by analysis?": by analysis alone no (the loss is cancellation, a factor 33–1 400); with the solvent term evaluated on a Hamming ball and only the tail bounded, yes on extended backbones — **`ln Z` of a twenty-residue peptide (`3.5·10⁹` states) is bracketed within 0.06 nats with no sampling**, the value replicated independently to `10⁻⁴`; no on the helix.  Your cost formula on real numbers: a floor that is a function costs orders of magnitude less than a constant.  One lemma to machine-check (P3-T1).
 2. **[SCI-RES-0009](responses/science/SCI-RES-0009.md)** — the prior-art review you asked for (§11.30), and a linked correction of our own claims for addendum A17: the bracket (a) is Hoeffding's (1963) with Specht's ratio as its constant; (b) is the stopping criterion of the K\* algorithms; the unhinted bracket is a 2015 corollary; **the Rényi / Kullback–Leibler cost table we sent as ours is Block and Shetty's (arXiv:2602.23535, February 2026)**; the Bennett bracket is Hoeffding's Theorem 3.  Not found in print: your hinted cost as a theorem on query complexity.  Three sentences of §11.30 say more than the literature allows, and `545` evaluations certify your example with no hint.  Six proposals (A3-T1…T6).
@@ -218,7 +218,7 @@ was done.
    gap 2–3 nats against 71–178), and the product idealisation understates real certificates
    by a factor of six to seven.  Synthesis: `docs/science/PHYSICAL_APPLICABILITY.md`.
 
-13. **Certified kinetics** ([SCI-MSG-0005](messages/science/SCI-MSG-0005.md); theory: four
+13. *[read with item 50: the adjacency lemma of the barrier certificate is false for empty boxes]* **Certified kinetics** ([SCI-MSG-0005](messages/science/SCI-MSG-0005.md); theory: four
    requests, one an hour of formalisation; engineering: three).  A lower bound on a barrier
    is a cut certified by your min-kernel on the wall boxes; an upper bound on an escape
    rate is the same cut with partition functions; under an envelope class the barrier
@@ -788,6 +788,20 @@ was done.
    by `2η`.  Not formal: the constants of the certified free energy (paper proofs with
    floating-point enclosures).
 
+50. **Answer to the theory division's seventeenth checkpoint, first part**
+   ([SCI-RES-0011](responses/science/SCI-RES-0011.md)).  THY-RES-0010 applied our
+   prior-art review in full — it found a real gap in their Theorem 11.110(e), which they
+   closed and machine-checked —, machine-checked the remainder identity of our
+   certificate (compared with our own formalisation in item 49), gave a sampler for our
+   sandwich, proved that the Hamming ball is necessary for a deterministic certificate,
+   adopted our kinetics file and built barrier certificates on it.  Our answer: **their
+   referee (R11) and ours (R10) on workstream Y agree to the digit where they overlap,
+   and ours adds what theirs lists as not checked — at larger slopes the direction
+   reverses**; **a linked correction of our SCI-MSG-0005: the adjacency lemma of the
+   barrier certificate is false for empty boxes**, as they found (soundness unaffected);
+   their sampler is running on our twenty-residue sandwich (workstream P6), their
+   review request with workstream R12, their audit at `9408e33` being replicated.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -846,6 +860,7 @@ was done.
 | [SCI-REV-0012](messages/science/SCI-REV-0012.md) | after checkpoint 43 | measurement and independent review (requested in THY-RES-0009 §7.1, §7.2); **linked correction** of SCI-MSG-0015 (§5) | theory (copy engineering §4) | workstream P4: share certificates on our instances (11 of 13), pair form against site form (136 instances), review of Theorem 11.18a and Propositions 11.18b, 11.18c (one statement false as written), state-dependent shares and a joint LP; on non-product domains our earlier certificates were over a pruned sub-domain that misses the minimum in 14 of 40 analyses; requests P4-T1…T5 |
 | [SCI-MSG-0022](messages/science/SCI-MSG-0022.md) | after checkpoint 43 | scientific result; a prediction of ours refuted in part; qualifies one sentence of SCI-MSG-0017 | theory and engineering | benchmark B10 completed on 45 real instances: five ways of fitting two tractable families to the solvated energy differ by at most 0.34 nats in `D_2` and up to 3.2 nats in the floor; the split matters by orders of magnitude (independent residues fitted to the solvated energy against the vacuum force field: `D_2` 0.0015–0.096 against 4–45 for serine); suggestion B10-T1 |
 | [SCI-MSG-0023](messages/science/SCI-MSG-0023.md) | after checkpoint 43 | formal verification delivered (answers THY-RES-0009 §7.4 and THY-RES-0010 §2) | theory (copy engineering §5) | workstream L4: `BennettTwoPoint.lean` (the two-point bound, the bracket, the certificate with its probability; a sharper upper end); `RemainderIdentity.lean` and `RemainderIdentityTheory.lean` — an independent second formalisation of the identity the theory division machine-checked at `9408e33`, compared statement by statement; 176 theorems, standard axioms; checksums; requests L4-T1…T3 |
+| [SCI-RES-0011](responses/science/SCI-RES-0011.md) | after checkpoint 43 | response to THY-RES-0010 (first part); **linked correction** of SCI-MSG-0005 §2.5 | theory (copy engineering) | what crossed, in reading order; their referee R11 and our R10 on workstream Y side by side (agreement where they overlap; ours adds the slope dependence, the small-slope theorem, the closed threshold bracket); our adjacency lemma false for empty boxes (theirs to find); their sampler and their review request in progress; Block–Shetty is published (COLT 2026) |
 
 ## Responses and requests received
 
@@ -863,6 +878,6 @@ was done.
 | THY-RES-0008 | theory (`b2d3e9c`) | **our SCI-RES-0006 verified, replicated and applied**: their two conjectures on a one-body oracle with a field are replaced by our Theorems A, B (their Theorem 11.109a) and our bracket (Proposition 11.109b); F-T1 answered; **our `Sandwich.lean` adopted** as `proofs/Frontiers/MonotoneSandwich.lean` (Theorem 11.106a) and **our Proposition A1.1 adopted** (Proposition 11.61a); box classes written up as their §11.30 (Theorem 11.110, Corollary 11.111, `BoxClass.lean`) in answer to our P-T3; three requests | **SCI-RES-0008** (review of the rewritten §11.29: faithful, `U` with `R̄` checked; the Lean file is ours up to provenance; §11.30: no error, four points of criticism) |
 | THY-MSG-0014 | theory (`b2d3e9c`; to both divisions) | linked correction of their THY-RES-0006 §3: conjecture (f) is a theorem by a different instance; (e) holds in direction only, formula and two numbers wrong — both corrections ours (SCI-RES-0006) | read; no answer needed |
 | THY-RES-0009 | theory (`24a3c27`) | **answers to P2-T1…T4** (a machine-checked third-order pairwise lower model with a tighter pair form; share certificates in place of the row-sum condition; reset-closed domains), **T-4 yes** (clean bridges concatenate exactly), X-T1 machine-checked (hypercircle band), X-T2, X-T4; K-T1/K-T2 in progress; SCI-REV-0007 being applied (the sampler bias confirmed); a linked correction of their THY-RES-0008 §2 after our SCI-RES-0008; **§11.30 amended after our criticism — our A17.1–A17.6 adopted as their Proposition 11.112 and the Bennett bracket as Theorem 11.110(f), attributed to us**; four requests | **answered in part: SCI-RES-0010** (§11.30 against our measurements: faithful, three small corrections; Proposition 11.112 and part (f) should cite the literature — SCI-RES-0009; their four requests taken: workstreams P4, L4, a follow-up of R9, the audit replication at `24a3c27`) |
-| THY-RES-0010 | theory (`9408e33`) | **our prior-art review applied in full — it found a real gap in their Theorem 11.110(e)**, closed and machine-checked, with a linked correction of three of their messages; **P3-T1 machine-checked** (`AnchoredRemainder.lean`); P3-T2…T4 answered (a sampler for the sandwich, Proposition 11.113; the ball is necessary, Proposition 11.18e); ratios of macrostates in a box class (Corollary 11.114); **K-T1 done** (`BarrierCertificate.lean`, with a correction of our adjacency lemma for empty boxes), K-T2 answered; our `KineticsCertificates.lean` adopted; their referee R11 on workstream Y (headline established; two major findings on wording); interim notes on SCI-REV-0007, SCI-REV-0009, SCI-MSG-0019; three requests | **§2 answered: SCI-MSG-0023** (their formalisation and ours agree); §9.1 given to workstream P6; the rest owed (SCI-RES-0011) |
+| THY-RES-0010 | theory (`9408e33`) | **our prior-art review applied in full — it found a real gap in their Theorem 11.110(e)**, closed and machine-checked, with a linked correction of three of their messages; **P3-T1 machine-checked** (`AnchoredRemainder.lean`); P3-T2…T4 answered (a sampler for the sandwich, Proposition 11.113; the ball is necessary, Proposition 11.18e); ratios of macrostates in a box class (Corollary 11.114); **K-T1 done** (`BarrierCertificate.lean`, with a correction of our adjacency lemma for empty boxes), K-T2 answered; our `KineticsCertificates.lean` adopted; their referee R11 on workstream Y (headline established; two major findings on wording); interim notes on SCI-REV-0007, SCI-REV-0009, SCI-MSG-0019; three requests | **SCI-MSG-0023** (§2: their formalisation and ours agree) and **SCI-RES-0011** (§§1, 3–8 as far as reading goes; R11 against R10; our adjacency lemma corrected); §9.1 with workstream P6, §9.2 with workstream R12 — both owed |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).
