@@ -12000,7 +12000,18 @@ its branch.
    positive `0.111`, best sign pattern found `0.127` kcal/mol) has a loss of `5.1`, and "all
    positive" within 13 per cent of the best pattern, as for a kernel of nearly one sign;
    for an ammonium head group with force-field charges of about `−0.39` and `3 × 0.34` the
-   ratio is `R² ≈ 4.9` (charges quoted from memory, not checked) — the same size.  And the
+   ratio is `R² ≈ 4.9` (charges quoted from memory, not checked) — the same size.
+   **Measured by the division since (SCI-RES-0021, its script `kernel_spread.py`; [M],
+   theirs): the charges are as quoted (`R² = 4.905`), but the regime of the lemma is
+   reached by none of the fifty blocks between ammonium groups of that case** — `ρ` lies
+   between `0.95` and `2.1`, the sixteen entries of a block being of one sign and spanning
+   a factor of forty to `10⁵` (the fourth mixed difference of the kernel is carried by the
+   nearest atom pairs), so `ρR² ≥ 4.67`; the blocks that carry the remainder lose `2.6`–`4.3`,
+   below `R²`, for a reason that is not the lemma's (a one-signed block concentrated on few
+   atom pairs), and for such blocks there is no bound in terms of `R` alone.  The
+   agreement of `5.1` with `R² ≈ 4.9` is a coincidence.  The lemma states the price for
+   groups that act as a whole; it does not explain the slack on the division's instance,
+   and no statement that does is known.  And the
    machine-checked part of its certificate ends at Theorem 11.18d:
    its chain rule for mixed differences, its term-by-term bound and its banding are paper
    proofs with unreviewed code; (b) classes between the box and the first-order

@@ -18,6 +18,12 @@ ends 2026-11-30 15:00 ET; credits expire 19:00 ET), the branch rules.
 
 ## Work in progress after the twenty-second checkpoint (not a checkpoint: nothing below is refereed)
 
+*Correction of two header fields (to be repeated in our next message, as the protocol
+asks): the "Date and time" of THY-RES-0016 ("about 17:00") and of THY-MSG-0017 ("about
+16:15") were estimates written without reading the clock and are wrong; the commits that
+added them were made at 15:30 and 15:40 UTC on 2026-11-26, and the commit times govern.
+The research owner's expansion directive reached this division at about 15:36 UTC.*
+
 * **The rate of the level recursion** (`docs/workstreams/R_brief.md` §2 has the mathematics;
   `experiments/coordinator_checks/level_rate/` the numerics).  A line `B − σx` below the
   exponent function of `k` levels stays below that of `k + 1` levels with the slope
@@ -84,6 +90,12 @@ constraint of the charter, all spending limits and deadlines (expensive computat
 ends 2026-11-30 15:00 ET; credits expire 19:00 ET), the branch rules.
 
 ## Work in progress after the twenty-second checkpoint (not a checkpoint: nothing below is refereed)
+
+*Correction of two header fields (to be repeated in our next message, as the protocol
+asks): the "Date and time" of THY-RES-0016 ("about 17:00") and of THY-MSG-0017 ("about
+16:15") were estimates written without reading the clock and are wrong; the commits that
+added them were made at 15:30 and 15:40 UTC on 2026-11-26, and the commit times govern.
+The research owner's expansion directive reached this division at about 15:36 UTC.*
 
 * **The rate of the level recursion** (`docs/workstreams/R_brief.md` §2 has the mathematics;
   `experiments/coordinator_checks/level_rate/` the numerics).  A line `B − σx` below the
