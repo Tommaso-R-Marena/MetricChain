@@ -141,7 +141,46 @@ def test_arbitrary_relaxation_vectors_cannot_make_the_checker_unsound():
         assert res.accepted and _mp(res.ln_z_lo) <= lnz <= _mp(res.ln_z_hi)
 
 
-def test_the_producer_abstains_when_a_table_would_exceed_the_budget():
+def test_the_producer_abstains_when_a_table_would_exceed_the_budget_and_conditioning_is_not_allowed():
     model = random_pair_model(3, n=7, kmax=4, density=1.0, scale_bits=2, kmin=3)
     with pytest.raises(PartitionBudgetExceeded):
-        certify_partition(model, BETA, tau=None, theta=None, max_entries=50)
+        certify_partition(model, BETA, tau=None, theta=None, max_entries=50, max_leaves=1)
+
+
+@pytest.mark.parametrize("arithmetic", ["exact", "float"])
+def test_conditioning_on_sites_keeps_tables_small_and_still_encloses_ln_z_and_populations(arithmetic):
+    """A `branch` node sums the enclosures of the sub-boxes in which one site is fixed
+    (Z(D) = sum_a Z(D with x_i = a)); each sub-box has its own steps and elimination order."""
+    branched = 0
+    dense = [random_pair_model(100 + s, n=5, kmax=3, density=1.0, scale_bits=2, kmin=3) for s in range(3)]
+    for model in models() + dense:              # the dense ones cannot be eliminated within the budget
+        lnz, marg = truth(model, BETA)
+        cert = certify_partition(model, BETA, tau=None, theta=None, max_entries=6, max_leaves=5000, arithmetic=arithmetic)
+        res = check_partition_certificate(cert, arithmetic=arithmetic, max_entries=6)
+        assert res.accepted, res.reason
+        assert res.stats["largest_table"] <= 6
+        assert _mp(res.ln_z_lo) <= lnz <= _mp(res.ln_z_hi)
+        assert res.ln_z_hi - res.ln_z_lo < Fraction(1, 10 ** 9)
+        branched += cert.branch is not None
+        site = model.n - 1
+        cert = certify_partition(model, BETA, keep=site, tau=40, theta=1, max_entries=6, max_leaves=5000,
+                                 arithmetic=arithmetic)
+        res = check_partition_certificate(cert, arithmetic=arithmetic, max_entries=6)
+        assert res.accepted, res.reason
+        for a in range(model.sizes[site]):
+            lo, hi = res.population(a)
+            assert _mp(lo) <= marg[site][a] <= _mp(hi)
+    assert branched >= 3                     # the small budget really forces conditioning
+
+
+def test_a_branch_without_a_child_for_some_state_is_rejected():
+    for model in models():
+        cert = certify_partition(model, BETA, tau=None, theta=None, max_entries=6, max_leaves=5000)
+        if cert.branch is None or len(cert.children) < 2:
+            continue
+        bad = copy.deepcopy(cert)
+        del bad.children[sorted(bad.children)[0]]
+        bad.claim = {}
+        assert not check_partition_certificate(bad, max_entries=6).accepted
+        return
+    pytest.fail("no branched certificate was produced")

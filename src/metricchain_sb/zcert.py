@@ -31,6 +31,14 @@ A certificate is a *recipe that a checker replays*; it contains no number that i
 3. ``keep`` — optionally one site that is not summed out; the checker then reports an enclosure
    of the restricted sums `Z(B, x_keep = a)` and from them population intervals.
 
+4. ``branch`` / ``children`` — conditioning.  Instead of an ``order`` a node may name a site `i`
+   (not the kept one) and give, for every state `a` of the working domain of `i`, a child node
+   ``{"steps": [...], "order": [...]}`` or ``{"steps": [...], "branch": i', "children": {...}}``.
+   The child is checked on the working model with `D_i = {a}`, starting from the state reached
+   after this node's steps, and `Z(D) = sum_a Z(D with x_i = a)` (the theory division's
+   `WInstance.Z_branch`, [V]).  Conditioning trades one large elimination table for many small
+   ones; each child prunes, relaxes and eliminates on its own.
+
 Result.  With `A_lo`, `A_hi` the accumulated logarithmic factors of the steps,
 
     ln Z(B)  in  [ ln Z'_lo + A_lo ,  ln Z'_hi + A_hi ].
@@ -68,6 +76,16 @@ class ZCertificate:
     keep: int | None = None
     claim: dict = field(default_factory=dict)
     meta: dict = field(default_factory=dict)
+    branch: int | None = None          # conditioning site of the root node (then `order` is empty)
+    children: dict | None = None       # state -> child node (see the module docstring)
+
+    def root_node(self) -> dict:
+        node = {"steps": self.steps}
+        if self.branch is None:
+            node["order"] = self.order
+        else:
+            node["branch"], node["children"] = self.branch, self.children
+        return node
 
 
 def _is_int(v) -> bool:
@@ -88,37 +106,63 @@ def validate_structure(cert: ZCertificate) -> None:
     if cert.keep is not None and ((not _is_int(cert.keep)) or not 0 <= cert.keep < n):
         raise MalformedZCertificate("keep must be a site or None")
     expected = sorted(i for i in range(n) if i != cert.keep)
-    if not isinstance(cert.order, list) or not all(_is_int(v) for v in cert.order) or sorted(cert.order) != expected:
-        raise MalformedZCertificate("order must list every site other than `keep` exactly once")
-    if not isinstance(cert.steps, list):
-        raise MalformedZCertificate("steps must be a list")
-    for step in cert.steps:
-        if not isinstance(step, dict):
-            raise MalformedZCertificate("a step must be an object")
-        op = step.get("op")
-        if op == "prune":
-            if set(step) - {"op", "site", "remove", "dominator"}:
-                raise MalformedZCertificate("prune: unknown field")
-            i = step.get("site")
-            if (not _is_int(i)) or not 0 <= i < n:
-                raise MalformedZCertificate("prune: site out of range")
-            for name in ("remove", "dominator"):
-                a = step.get(name)
-                if (not _is_int(a)) or not 0 <= a < sizes[i]:
-                    raise MalformedZCertificate(f"prune: {name} out of range")
-        elif op == "relax":
-            if set(step) - {"op", "pair", "f", "g"}:
-                raise MalformedZCertificate("relax: unknown field")
-            pair = step.get("pair")
-            if (not isinstance(pair, list)) or len(pair) != 2 or not all(_is_int(v) for v in pair) \
-                    or (pair[0], pair[1]) not in model.pair:
-                raise MalformedZCertificate("relax: pair must be a listed pair [i, j] with i < j")
-            for name, site in (("f", pair[0]), ("g", pair[1])):
-                vec = step.get(name)
-                if (not isinstance(vec, list)) or len(vec) != sizes[site] or not all(_is_int(v) for v in vec):
-                    raise MalformedZCertificate(f"relax: {name} must list one integer per state of site {site}")
+
+    def check_steps(steps):
+        if not isinstance(steps, list):
+            raise MalformedZCertificate("steps must be a list")
+        for step in steps:
+            if not isinstance(step, dict):
+                raise MalformedZCertificate("a step must be an object")
+            op = step.get("op")
+            if op == "prune":
+                if set(step) - {"op", "site", "remove", "dominator"}:
+                    raise MalformedZCertificate("prune: unknown field")
+                i = step.get("site")
+                if (not _is_int(i)) or not 0 <= i < n:
+                    raise MalformedZCertificate("prune: site out of range")
+                for name in ("remove", "dominator"):
+                    a = step.get(name)
+                    if (not _is_int(a)) or not 0 <= a < sizes[i]:
+                        raise MalformedZCertificate(f"prune: {name} out of range")
+            elif op == "relax":
+                if set(step) - {"op", "pair", "f", "g"}:
+                    raise MalformedZCertificate("relax: unknown field")
+                pair = step.get("pair")
+                if (not isinstance(pair, list)) or len(pair) != 2 or not all(_is_int(v) for v in pair) \
+                        or (pair[0], pair[1]) not in model.pair:
+                    raise MalformedZCertificate("relax: pair must be a listed pair [i, j] with i < j")
+                for name, site in (("f", pair[0]), ("g", pair[1])):
+                    vec = step.get(name)
+                    if (not isinstance(vec, list)) or len(vec) != sizes[site] or not all(_is_int(v) for v in vec):
+                        raise MalformedZCertificate(f"relax: {name} must list one integer per state of site {site}")
+            else:
+                raise MalformedZCertificate(f"unknown step {op!r}")
+
+    stack = [cert.root_node()]
+    while stack:
+        node = stack.pop()
+        if not isinstance(node, dict) or set(node) - {"steps", "order", "branch", "children"}:
+            raise MalformedZCertificate("a node is an object with 'steps' and either 'order' or 'branch' and 'children'")
+        check_steps(node.get("steps"))
+        if node.get("branch") is None:
+            order = node.get("order")
+            if "children" in node and node["children"] is not None:
+                raise MalformedZCertificate("children without a branch site")
+            if not isinstance(order, list) or not all(_is_int(v) for v in order) or sorted(order) != expected:
+                raise MalformedZCertificate("order must list every site other than `keep` exactly once")
         else:
-            raise MalformedZCertificate(f"unknown step {op!r}")
+            i = node["branch"]
+            if (not _is_int(i)) or not 0 <= i < n or i == cert.keep:
+                raise MalformedZCertificate("branch: a site other than the kept one")
+            if node.get("order"):
+                raise MalformedZCertificate("a branch node has no elimination order")
+            children = node.get("children")
+            if not isinstance(children, dict):
+                raise MalformedZCertificate("branch: children must be a mapping from states to nodes")
+            for a, child in children.items():
+                if (not _is_int(a)) or not 0 <= a < sizes[i]:
+                    raise MalformedZCertificate("branch: child state out of range")
+                stack.append(child)
     if not isinstance(cert.claim, dict) or set(cert.claim) - {"ln_z_lo", "ln_z_hi"} \
             or not all(isinstance(v, Fraction) for v in cert.claim.values()):
         raise MalformedZCertificate("claim may hold ln_z_lo and ln_z_hi as Fractions")
