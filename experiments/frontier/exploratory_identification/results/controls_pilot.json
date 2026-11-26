@@ -1,0 +1,178 @@
+[
+ {
+  "certificate_checked_exactly": true,
+  "certificate_gap_exact": "2",
+  "certificate_gap_published": "2",
+  "data_recomputed_exactly_equal": true,
+  "expected": "IDENTIFIED",
+  "family": "identified",
+  "id": "B1-01",
+  "max_population_spread_lp": 0.0,
+  "maxent_data_misfit_max": 7.054148746354905e-06,
+  "maxent_support_size": 7,
+  "maxent_tv_to_planted": 1.7e-05,
+  "nnls_data_misfit_max": 2.7755575615628914e-16,
+  "nnls_support_size": 3,
+  "nnls_tv_to_planted": 0.0,
+  "observables": 6,
+  "states": 8,
+  "support_columns_independent_exact": true,
+  "verdict_recomputed": "IDENTIFIED"
+ },
+ {
+  "certificate_checked_exactly": true,
+  "certificate_gap_exact": "2",
+  "certificate_gap_published": "2",
+  "data_recomputed_exactly_equal": true,
+  "expected": "IDENTIFIED",
+  "family": "identified",
+  "id": "B1-02",
+  "max_population_spread_lp": 0.0,
+  "maxent_data_misfit_max": 1.9245618196772618e-05,
+  "maxent_support_size": 11,
+  "maxent_tv_to_planted": 2.3e-05,
+  "nnls_data_misfit_max": 2.220446049250313e-16,
+  "nnls_support_size": 5,
+  "nnls_tv_to_planted": 0.0,
+  "observables": 15,
+  "states": 32,
+  "support_columns_independent_exact": true,
+  "verdict_recomputed": "IDENTIFIED"
+ },
+ {
+  "data_recomputed_exactly_equal": true,
+  "expected": "NOT_IDENTIFIED",
+  "family": "not identified",
+  "id": "B2-01",
+  "max_population_spread_lp": 0.5,
+  "maxent_data_misfit_max": 0.0,
+  "maxent_support_size": 4,
+  "maxent_tv_to_planted": 0.5,
+  "nnls_data_misfit_max": 2.7755575615628914e-16,
+  "nnls_support_size": 2,
+  "nnls_tv_to_planted": 0.0,
+  "observables": 2,
+  "states": 4,
+  "support_columns_independent_exact": true,
+  "verdict_recomputed": "NOT IDENTIFIED"
+ },
+ {
+  "data_recomputed_exactly_equal": true,
+  "expected": "NOT_IDENTIFIED",
+  "family": "not identified",
+  "id": "B2-02",
+  "max_population_spread_lp": 1.0,
+  "maxent_data_misfit_max": 1.5124722538097237e-05,
+  "maxent_support_size": 3,
+  "maxent_tv_to_planted": 1.5e-05,
+  "nnls_data_misfit_max": 0.0,
+  "nnls_support_size": 1,
+  "nnls_tv_to_planted": 0.5,
+  "observables": 1,
+  "states": 3,
+  "support_columns_independent_exact": false,
+  "verdict_recomputed": "NOT IDENTIFIED"
+ },
+ {
+  "data_recomputed_exactly_equal": true,
+  "expected": "NOT_IDENTIFIED",
+  "family": "not identified",
+  "id": "B2-03",
+  "max_population_spread_lp": 0.25,
+  "maxent_data_misfit_max": 1.1285711820741007e-05,
+  "maxent_support_size": 8,
+  "maxent_tv_to_planted": 0.500003,
+  "nnls_data_misfit_max": 4.440892098500626e-16,
+  "nnls_support_size": 4,
+  "nnls_tv_to_planted": 0.0,
+  "observables": 10,
+  "states": 16,
+  "support_columns_independent_exact": true,
+  "verdict_recomputed": "NOT IDENTIFIED"
+ },
+ {
+  "certificate_checked_exactly": true,
+  "certificate_gap_exact": "4",
+  "certificate_gap_published": "4",
+  "expected": "IDENTIFIED",
+  "family": "must abstain",
+  "id": "B4-01",
+  "max_population_spread_lp": 0.0,
+  "maxent_data_misfit_max": 9.869215714719548e-06,
+  "maxent_support_size": 8,
+  "maxent_tv_to_planted": 1.2e-05,
+  "nnls_data_misfit_max": 3.885780586188048e-16,
+  "nnls_support_size": 4,
+  "nnls_tv_to_planted": 0.0,
+  "observables": 28,
+  "states": 128,
+  "support_columns_independent_exact": true,
+  "verdict_recomputed": "IDENTIFIED",
+  "weights_chosen_by_us": [
+   "2/5",
+   "3/10",
+   "1/5",
+   "1/10"
+  ]
+ },
+ {
+  "expected": "INTERVAL",
+  "family": "partial identification",
+  "id": "B5-01",
+  "interval_agrees": true,
+  "interval_published": [
+   "-3/10",
+   "7/10"
+  ],
+  "interval_recomputed": [
+   -0.3,
+   0.7
+  ],
+  "maxent_data_misfit_max": 7.99591675648692e-07,
+  "maxent_support_size": 8,
+  "nnls_data_misfit_max": 3.885780586188048e-16,
+  "nnls_support_size": 4,
+  "observables": 3,
+  "states": 8
+ },
+ {
+  "expected": "INTERVAL",
+  "family": "partial identification",
+  "id": "B5-02",
+  "interval_agrees": true,
+  "interval_published": [
+   "0",
+   "7/20"
+  ],
+  "interval_recomputed": [
+   0.0,
+   0.35
+  ],
+  "maxent_data_misfit_max": 7.99591675648692e-07,
+  "maxent_support_size": 8,
+  "nnls_data_misfit_max": 3.885780586188048e-16,
+  "nnls_support_size": 4,
+  "observables": 3,
+  "states": 8
+ },
+ {
+  "expected": "INTERVAL",
+  "family": "partial identification",
+  "id": "B5-03",
+  "interval_agrees": true,
+  "interval_published": [
+   "-2/5",
+   "4/5"
+  ],
+  "interval_recomputed": [
+   -0.4,
+   0.8
+  ],
+  "maxent_data_misfit_max": 7.99591675648692e-07,
+  "maxent_support_size": 8,
+  "nnls_data_misfit_max": 3.885780586188048e-16,
+  "nnls_support_size": 4,
+  "observables": 3,
+  "states": 8
+ }
+]
