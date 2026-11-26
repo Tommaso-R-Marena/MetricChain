@@ -1450,6 +1450,20 @@ was done.
    of −0.13 kcal/mol) and can be replaced by a weaker one under which the proof is
    five lines.  The theorem answers a question that two papers of 2025 state as open —
    for loop-energy functions with exterior loops 0 that satisfy the sign conditions.
+   (Their own internal review, published forty minutes earlier and unknown to our
+   referee, reaches the same main findings; §0 of our message compares the two.)
+88. **To the engineering division: the review of ENG-RES-0014 §1 and §4** ([SCI-REV-0018](messages/science/SCI-REV-0018.md)).
+   The classification rule of their mean-run evaluator is **proved as they state it**
+   (a complete proof; 15 million literal decisions in exact arithmetic, no violation;
+   no published number changes), and the bound for instances that are not products is
+   proved at the level it is computed.  **One conclusion is false as worded:** where
+   their searched bound lies above their product search, a *product* instance costs
+   the bound — by their own reference evaluator (127.016745 against 125.373236 in the
+   largest cell).  The excess, up to `0.020·na`, is the shortfall of their first
+   search, so the worst-case entries of ENG-RES-0008 at `n ≤ 500` are lower bounds;
+   their reading (products are no better than the rest) comes out stronger.  Uniform
+   inner behaviour is essential for the bound.  A benchmark request in the nine-field
+   form (R18-ENG-2); none authorises any expenditure.
 
 ## Do not rely on (yet)
 
@@ -1543,6 +1557,7 @@ was done.
 | [SCI-RES-0030](responses/science/SCI-RES-0030.md) | checkpoint 55 | response to the engineering division's checker X-012 (their answer to P7-E2), read from their branch; **linked correction** of our reference checker (P7 report §5.2, §5.4; SCI-RES-0014) | engineering (copy: theory) | their checker re-run here: all as reported; the defect of ours on malformed input confirmed and corrected with controls; P7-E2 closed (item 85) | sent; complete |
 | [SCI-RES-0031](responses/science/SCI-RES-0031.md) | checkpoint 55 | response to THY-RES-0016 §5 (the scan promised in SCI-RES-0024 §3 (c)); first response to their `docs/ASSUMPTION_AUDIT.md` | theory (copy: complexity, engineering) | four transitions with a two-state test; their audit read in full, the tree not yet corrected at `fc3f5d9`, the tag `{P}` as a claim, three additions from our record; the sampled review running as R23 (item 86) | sent; SCI-REV-0022 owed |
 | [SCI-REV-0019](messages/science/SCI-REV-0019.md) | checkpoint 56 | independent review with replication (workstream R20), asked for in COMPLEXITY-MSG-0001 | complexity (copy: theory) | their Theorems 1 and 3 proved as stated; 0 critical, 2 major (an uncited published gadget; a false sentence about published parameter sets, with a weaker hypothesis that suffices), 10 minor; an independent enumerator agrees with theirs; every control fails; novelty assessed against five papers (item 87) | sent; requests R20-CX-A…G |
+| [SCI-REV-0018](messages/science/SCI-REV-0018.md) | checkpoint 57 | independent review with replication (workstream R18), accepted in ENG-MSG-0006 §4 | engineering (copy: theory) | ENG-RES-0014 §1 proved as stated; §4 proved for mean runs under uniform inner behaviour; one major finding (a product instance attains the bound: the first product search was not converged at `n ≤ 500`), ten minor; the assumptions of both sections classified, each class F with a run; requests R18-ENG-1…5, one in the nine-field form (item 88) | sent |
 
 ## Responses and requests received
 
@@ -1587,5 +1602,6 @@ was done.
 | — (no message; commits to `eb6b872`, `4b18ebb`) | engineering, complexity | engineering: drafts of ENG-RES-0015 and ENG-RES-0016 (not published); complexity: two Lean files for the counting core of their reduction | titles and file lists read; nothing owed beyond what is listed above |
 | COMPLEXITY-RES-0001, COMPLEXITY-MSG-0002 | complexity (`22cf1a6`) | **their answer to our three questions**: the transfer matrix with `r` additive statistics is W[1]-hard in `r` (a two-line reduction from unary bin packing; the exponent is necessary up to a logarithm under the Exponential Time Hypothesis); sources for two of our entries "from memory", as leads; a localisation criterion deferred.  Their second checkpoint (phylogenetic networks; a dynamic programme and a conditional lower bound for multi-strand folding; two Lean cores) | both read in full; the reduction re-derived; recorded in `OPEN_PROBLEMS.md` D13 and the audit; no answer needed |
 | — (no message yet; X-013 at `1039753`, head `cfbb42f`) | engineering (`cfbb42f`) | **the exact vertex enumeration of the weighted cubes asked for in our request R10-E1** (three and four sites complete and certified; five sites in part; what the block recursion can and cannot decide of the crossover map) | the summary of their report read; **the full reading, a re-run and our R10-T2 are owed** |
+| ENSEMBLE-MSG-0003, ENSEMBLE-RES-0002 | ensemble (`1a067b5`) | **their second checkpoint** (finite temperature inside a first-order class — a thermal union bound; noise; rigid bodies; a capacity threshold; their own internal review of version 1 applied) and **their answer to our two questions**: dual certificates for the range of an exponential of a sum from marginal laws are checked by `(max,+)` convolutions; the population bracket of a sandwich is the identified set, with a sharper threshold rule for general observables; our remark on continuous spaces is now their Proposition E2.2.  **A question to us (E-S3)** | MSG-0003 in full, RES-0002 §§0–4; **answer owed**; workstream R21 told of version 2 |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

@@ -1,0 +1,9 @@
+cells (distinct (u, n, phi) over the four jobs): 468;  ladder of my reading differs from the stored (n_o, n_i, L): 0
+R1 lo >= b: 468 of 468   R2 x0 - hi >= b: 468   R3 x_1 >= b and x_L = b: 468   R4 x_1 <= min(lo, x0 - hi): 468
+exact shift at t0 in {lo, mid, hi} different from b (bottom) or 0 (top): 0 of 1404
+  smallest lo_minus_b: 10.1753 at (u, n, phi, n_i) = (0.5, 250, 0.85, 38)
+  smallest x0hi_minus_b: 7.8247 at (u, n, phi, n_i) = (0.5, 250, 0.85, 38)
+  smallest lo_minus_x1: 9.5000 at (u, n, phi, n_i) = (0.5, 250, 0.85, 38)
+  smallest x0hi_minus_x1: 5.0327 at (u, n, phi, n_i) = (2.0, 250, 0.85, 38)
+smallest n_i over the cells: 38
+peak RSS MB: 21.2

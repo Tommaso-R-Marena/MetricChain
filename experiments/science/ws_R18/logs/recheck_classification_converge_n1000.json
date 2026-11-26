@@ -1,0 +1,60 @@
+{
+ "jobs": {
+  "converge": {
+   "searches": 16,
+   "in_corner": 0,
+   "legacy_reproduces_stored": 16,
+   "max_abs_legacy_minus_stored": 1.4210854715202004e-14,
+   "changed": 0,
+   "max_increase": 0.0,
+   "max_decrease": 0.0,
+   "max_increase_over_na": 0.0,
+   "max_decrease_over_na": 0.0,
+   "violations_exact": 0,
+   "violation_examples": []
+  }
+ },
+ "cells": [
+  {
+   "job": "converge",
+   "u": 1.0,
+   "n": 1000,
+   "phi": 0.5,
+   "seed": 2,
+   "stored_worst": 116.13888440446163,
+   "exact_worst": 116.13888440446162,
+   "na": 110.94407167172734
+  },
+  {
+   "job": "converge",
+   "u": 1.0,
+   "n": 1000,
+   "phi": 0.65,
+   "seed": 2,
+   "stored_worst": 128.04628617468498,
+   "exact_worst": 128.04628617468498,
+   "na": 110.94407167172734
+  },
+  {
+   "job": "converge",
+   "u": 1.0,
+   "n": 1000,
+   "phi": 0.5,
+   "seed": 3,
+   "stored_worst": 116.12326453582837,
+   "exact_worst": 116.12326453582837,
+   "na": 110.94407167172734
+  },
+  {
+   "job": "converge",
+   "u": 1.0,
+   "n": 1000,
+   "phi": 0.65,
+   "seed": 3,
+   "stored_worst": 128.04628617468498,
+   "exact_worst": 128.04628617468498,
+   "na": 110.94407167172734
+  }
+ ],
+ "seconds": 4.189608812332153
+}

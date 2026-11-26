@@ -1,0 +1,33 @@
+r18_mixed.py costs=theirs start 2026-11-26T17:13:53Z
+n=100 u=1 phi=0.5 profile=flat costs=theirs: n_o=50 n_i=50 L=17 K=22036  (560 mean runs, 16 s)
+   uniform bottom: product ln cost 44.483875 (level 503, m 9);  placement-free bound 44.483875
+   uniform top   : product ln cost 36.906359 (level 500, m 9);  placement-free bound 36.906359
+   target = max of the two bounds = 44.483875;  ln C_max = 56.256347
+   best shell-dependent behaviour found: ln cost 45.044595 (level 503, m 10; 'top' on 7 of 51 shells; after thresholds 45.001386; coordinate ascent)
+   EXCESS over the target: +0.560720   (the bound is EXCEEDED by an instance with point-dependent behaviour); below C_max: True
+n=100 u=2 phi=0.5 profile=flat costs=theirs: n_o=50 n_i=50 L=25 K=23783  (371 mean runs, 21 s)
+   uniform bottom: product ln cost 57.840590 (level 1003, m 15);  placement-free bound 57.840590
+   uniform top   : product ln cost 47.374478 (level 1000, m 15);  placement-free bound 47.374478
+   target = max of the two bounds = 57.840590;  ln C_max = 69.733820
+   best shell-dependent behaviour found: ln cost 57.840590 (level 1003, m 15; 'top' on 0 of 51 shells; after thresholds 57.840590; T for the 0 shells of largest W, B below; places ref)
+   EXCESS over the target: +0.000000   (not exceeded (within 1e-6)); below C_max: True
+n=100 u=0.5 phi=0.5 profile=flat costs=theirs: n_o=50 n_i=50 L=8 K=20005  (561 mean runs, 9 s)
+   uniform bottom: product ln cost 31.796049 (level 253, m 7);  placement-free bound 31.796049
+   uniform top   : product ln cost 27.448322 (level 250, m 7);  placement-free bound 27.448322
+   target = max of the two bounds = 31.796049;  ln C_max = 44.003038
+   best shell-dependent behaviour found: ln cost 32.266218 (level 253, m 8; 'top' on 9 of 51 shells; after thresholds 32.218221; coordinate ascent)
+   EXCESS over the target: +0.470169   (the bound is EXCEEDED by an instance with point-dependent behaviour); below C_max: True
+n=100 u=1 phi=0.7 profile=cone costs=theirs: n_o=70 n_i=30 L=14 K=22126  (653 mean runs, 43 s)
+   uniform bottom: product ln cost 46.517772 (level 633, m 34);  placement-free bound 46.654630
+   uniform top   : product ln cost 46.517698 (level 630, m 34);  placement-free bound 46.654610
+   target = max of the two bounds = 46.654630;  ln C_max = 59.182004
+   best shell-dependent behaviour found: ln cost 46.654641 (level 633, m 34; 'top' on 10 of 71 shells; after thresholds 46.654630; coordinate ascent)
+   EXCESS over the target: +0.000011   (the bound is EXCEEDED by an instance with point-dependent behaviour); below C_max: True
+n=100 u=1 phi=0.3 profile=plateau0.4 costs=theirs: n_o=30 n_i=70 L=19 K=21966  (321 mean runs, 10 s)
+   uniform bottom: product ln cost 47.797876 (level 518, m 11);  placement-free bound 47.797876
+   uniform top   : product ln cost 41.810420 (level 515, m 11);  placement-free bound 41.810420
+   target = max of the two bounds = 47.797876;  ln C_max = 59.707626
+   best shell-dependent behaviour found: ln cost 47.797876 (level 518, m 11; 'top' on 0 of 31 shells; after thresholds 47.797876; T for the 0 shells of largest W, B below; places ref)
+   EXCESS over the target: +0.000000   (not exceeded (within 1e-6)); below C_max: True
+cases 5; with the target exceeded by more than 1e-6: 3; largest excess +0.560720
+end 2026-11-26T17:15:31Z  wall 98.9 s  peak RSS MB: 62.0

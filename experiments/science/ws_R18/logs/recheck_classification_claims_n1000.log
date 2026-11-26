@@ -1,0 +1,3 @@
+R18-RUNNER start 2026-11-26T16:22:33Z script=/home/user/MetricChain/experiments/science/ws_R18/rerun_copy/chunks/claims_n1000/experiments/eng/twolevel/recheck_classification.py job=claims chunk=claims_n1000 address-space limit 2.0 GB; python -I -B; kernel: R18 adapter over their meanrun.mean_run
+claims {"searches": 240, "in_corner": 0, "legacy_reproduces_stored": 240, "max_abs_legacy_minus_stored": 4.263256414560601e-14, "changed": 0, "max_increase": 0.0, "max_decrease": 0.0, "max_increase_over_na": 0.0, "max_decrease_over_na": 0.0, "violations_exact": 0, "violation_examples": []}
+R18-RUNNER done 2026-11-26T16:23:37Z exit=0 wall=63.8s mean_runs=480 peak RSS MB=182.5

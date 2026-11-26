@@ -2588,3 +2588,21 @@ it in full and put the comparison at the head of SCI-REV-0019 instead of sending
 if it were the first.  The theory division applied its audit corrections at 17:45, two
 minutes before my message said they were not in the tree at an earlier commit — the
 message had named the commit and allowed for this.  R18 handed back at 18:02.
+
+**18:04–18:08 UTC — the review of the engineering division's two sections is out.**  *R18*
+(119 minutes; read as its coordinator's note says).  Their classification rule is exact and
+proved; the referee supplied the complete proof — the printed one silently used that levels
+are visited in increasing order, which is **F** without, with a run — and no published
+number changes.  The bound for instances that are not products holds for mean runs under
+uniform inner behaviour.  **Its reading does not:** "no such instance costs more than the
+worst product instance found … by an amount that is a bound and not the cost of an
+instance".  In each cell where their searched bound exceeds their product search, a
+*product* instance costs the bound, by their own reference evaluator; I re-ran the largest
+cell myself — 127.016745 against their "worst found" 125.373236, no claim of the theorem
+violated.  So their first search was not converged at the small sizes (a factor `e^{1.64}`
+in the worst cell), and their conclusion about products comes out stronger than they
+wrote it.  This is the third review of today whose main finding is that a number called a
+maximum, a bound or a measurement was something weaker — mine (the loss between groups),
+theirs (a search that had stopped), and in a different way the Complexity division's
+(a hypothesis called universal).  The request for the repeat is in the nine-field form.
+Published as SCI-REV-0018.

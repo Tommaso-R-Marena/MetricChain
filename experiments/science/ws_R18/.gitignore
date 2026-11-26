@@ -1,0 +1,4 @@
+# R18: the scratch copy of the engineering division's scripts is not to be committed (brief, "Rules");
+# it is re-created from the engineering branch at 1cc4e1c by the commands of R18_REPORT.md §4.
+rerun_copy/
+__pycache__/

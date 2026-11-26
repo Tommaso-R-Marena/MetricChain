@@ -1,0 +1,146 @@
+{
+ "jobs": {
+  "cost": {
+   "searches": 48,
+   "in_corner": 0,
+   "legacy_reproduces_stored": 48,
+   "max_abs_legacy_minus_stored": 8.526512829121202e-14,
+   "changed": 0,
+   "max_increase": 0.0,
+   "max_decrease": 0.0,
+   "max_increase_over_na": 0.0,
+   "max_decrease_over_na": 0.0,
+   "violations_exact": 0,
+   "violation_examples": []
+  }
+ },
+ "cells": [
+  {
+   "job": "cost",
+   "u": 0.5,
+   "n": 8000,
+   "phi": 0.3,
+   "seed": 1,
+   "stored_worst": 237.35366434195987,
+   "exact_worst": 237.35366434195987,
+   "na": 242.3988958461274
+  },
+  {
+   "job": "cost",
+   "u": 0.5,
+   "n": 8000,
+   "phi": 0.35,
+   "seed": 1,
+   "stored_worst": 224.49468821104062,
+   "exact_worst": 224.49468821104062,
+   "na": 242.3988958461274
+  },
+  {
+   "job": "cost",
+   "u": 0.5,
+   "n": 8000,
+   "phi": 0.4,
+   "seed": 1,
+   "stored_worst": 211.33928464720475,
+   "exact_worst": 211.33928464720472,
+   "na": 242.3988958461274
+  },
+  {
+   "job": "cost",
+   "u": 0.5,
+   "n": 8000,
+   "phi": 0.45,
+   "seed": 1,
+   "stored_worst": 198.070674194447,
+   "exact_worst": 198.070674194447,
+   "na": 242.3988958461274
+  },
+  {
+   "job": "cost",
+   "u": 0.5,
+   "n": 8000,
+   "phi": 0.5,
+   "seed": 1,
+   "stored_worst": 185.04314833320606,
+   "exact_worst": 185.04314833320606,
+   "na": 242.3988958461274
+  },
+  {
+   "job": "cost",
+   "u": 0.5,
+   "n": 8000,
+   "phi": 0.55,
+   "seed": 1,
+   "stored_worst": 194.82370482954255,
+   "exact_worst": 194.82370482954252,
+   "na": 242.3988958461274
+  },
+  {
+   "job": "cost",
+   "u": 0.5,
+   "n": 8000,
+   "phi": 0.6,
+   "seed": 1,
+   "stored_worst": 208.7676560395781,
+   "exact_worst": 208.7676560395781,
+   "na": 242.3988958461274
+  },
+  {
+   "job": "cost",
+   "u": 0.5,
+   "n": 8000,
+   "phi": 0.65,
+   "seed": 1,
+   "stored_worst": 222.71083221555338,
+   "exact_worst": 222.71083221555338,
+   "na": 242.3988958461274
+  },
+  {
+   "job": "cost",
+   "u": 0.5,
+   "n": 8000,
+   "phi": 0.85,
+   "seed": 1,
+   "stored_worst": 276.4533532195138,
+   "exact_worst": 276.4533532195138,
+   "na": 242.3988958461274
+  },
+  {
+   "job": "cost",
+   "u": 0.5,
+   "n": 8000,
+   "phi": 0.7,
+   "seed": 1,
+   "stored_worst": 235.96189976217025,
+   "exact_worst": 235.96189976217025,
+   "na": 242.3988958461274
+  },
+  {
+   "job": "cost",
+   "u": 0.5,
+   "n": 8000,
+   "phi": 0.75,
+   "seed": 1,
+   "stored_worst": 249.21642138604759,
+   "exact_worst": 249.21642138604759,
+   "na": 242.3988958461274
+  },
+  {
+   "job": "cost",
+   "u": 0.5,
+   "n": 8000,
+   "phi": 0.8,
+   "seed": 1,
+   "stored_worst": 263.17299463472403,
+   "exact_worst": 263.17299463472403,
+   "na": 242.3988958461274
+  }
+ ],
+ "cost_cells": {
+  "cells": 12,
+  "changed": 0,
+  "max_increase_over_na": 0.0,
+  "max_decrease_over_na": -1.1725181062064675e-16
+ },
+ "seconds": 231.22870635986328
+}

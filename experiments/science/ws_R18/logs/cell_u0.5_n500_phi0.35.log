@@ -1,0 +1,15 @@
+cell u=0.5 n=500 phi=0.35: n_o=175 n_i=325 L=20; n a = 15.1499
+  their files: worst product instance found (M-008) ln cost 46.909303; bound searched (M-014) 46.929972 (monotone/bottom); excess +0.020668 = +0.00136 n a
+  (1) my mean run at their bound-maximiser's law: product instance ln cost 46.929972; bound 46.929972 (their stored bound 46.929972; difference +0.00e+00); level 1314, largest sample K 2^10; reference shell d0 = 115, product place 167.8758 in [91.3022, 253.8022]
+      calls per rung, product: ['2.392e+07', '2.392e+07', '2.392e+07'] ...; bound: ['2.392e+07', '2.392e+07', '2.392e+07'] ...; ln C_1 = 9.789, ln C_L = 29.684
+  (2) joint law, the dearest place per shell: ln cost 46.929972 = bound +0.00e+00; with the reference shell at the product's place: 46.929972; above the worst product instance found by +0.020668 = +0.00136 n a
+      places used: [91.302, 167.876]; shells at which the place changes: [115, 116]
+  (3) an actual psi (cone fibres, slopes following (2) under the Lipschitz constraint): largest |psi(x) - psi(y)| over all edges 0.500000000 (u = 0.5); largest |ln W(psi) - ln W(law)| 7.86e-14; |psi_0 - product's| 5.51e-14; places from 126.295 to 167.876
+      mean run of psi: ln cost 46.929972; the product instance with its law: 46.929972; the bound at its law: 46.929972; sample sizes equal to the product's: True; calls of I_1: psi 2.392e+07, product 2.392e+07, bound 2.392e+07
+      psi against the worst product instance FOUND in this cell by their search: +0.020668 in ln cost = +0.00136 n a   (AN INSTANCE THAT IS NOT A PRODUCT COSTS MORE than the worst product instance found); below C_max: True
+      (edges: where the slope changes between shells the largest difference is 0.500000000 <= u (1 - 1e-9); elsewhere the difference is |ln W(d+1) - ln W(d)| <= 0.364343593350 across shells and |sigma| u <= u inside a fibre -- exact; float evaluation gives max - u = -5.0e-10)
+  (4) a PRODUCT instance: every fibre at 91.3022 (c_in = -71.1978), profile F' = the maximiser's profile with a ramp of slope u below the reference shell (176 shells changed, d = 0..175, ln of their probability 0.0); largest |F'(d+1) - F'(d)| = 0.500000 (u = 0.5); monotone: True; runs of constant slope: 2
+      its mean run: ln cost 43.316872 (level 1052, largest sample K 2^24); against the worst product instance found: -3.592431 = -0.23713 n a; against the bound searched: -3.613100
+  (5) THEIR reference: the law of (1) with every fibre at 91.3022 (the psi of (3) up to the shells near the reference): ln cost 46.929972; the product instance of (4): 43.316872 (mine 43.316872); violations of the theorem's claims in that run: []; ln C_max 60.008747
+  instances written to data_cell_u0.5_n500_phi0.35.json
+end 2026-11-26T17:08:27Z  wall 5.7 s  peak RSS MB: 88.6

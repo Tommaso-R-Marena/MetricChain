@@ -1,0 +1,76 @@
+r18_nonproduct.py explicit cases=20 seed=5 start 2026-11-26T16:38:07Z
+
+AN ACTUAL psi THAT IS NOT A PRODUCT: psi(a, b) = sigma(|a|) u |b|, sigma from +1 to -1 (or back) across the outer shells; u-Lipschitz on every edge (checked)
+  u=1 n_o=30 n_i=6 sigma +1 -> -1, F = 0 u d (high W at hi) bottom: places in [3.721, 9.721] of [3.721, 9.721]; distinct shifts 1; closed-unpopulated at level 196; sample sizes equal to the product instance's: True
+      calls per rung: this instance ['1.845e+06', '4.298e+05', '1.54e+04']
+                      product (reference fibre's place) ['1.845e+06', '4.298e+05', '1.54e+04']
+                      bound A0=hi, B0=x0-lo ['1.845e+06', '4.298e+05', '1.54e+04']   holds: True
+                      CONTROL lo/hi exchanged ['4.301e+05', '4.298e+05', '1.54e+04']   violated: True
+      ln cost: instance 21.6310  product 21.6310  bound 21.6310
+  u=1 n_o=30 n_i=6 sigma +1 -> -1, F = 0 u d (high W at hi) top   : places in [3.721, 9.721] of [3.721, 9.721]; distinct shifts 1; closed-unpopulated at level 194; sample sizes equal to the product instance's: True
+      calls per rung: this instance ['1.845e+06', '7634', '7579']
+                      product (reference fibre's place) ['1.845e+06', '7634', '7579']
+                      bound A0=hi, B0=x0-lo ['1.845e+06', '7634', '7579']   holds: True
+                      CONTROL lo/hi exchanged ['8.912e+05', '7634', '7579']   violated: True
+      ln cost: instance 20.4386  product 20.4386  bound 20.4386
+  u=1 n_o=30 n_i=6 sigma +1 -> -1, F = 1 u d (high W at lo) bottom: places in [3.721, 9.721] of [3.721, 9.721]; distinct shifts 1; closed-unpopulated at level 232; sample sizes equal to the product instance's: True
+      calls per rung: this instance ['4.101e+07', '2.272e+05', '3.411e+04']
+                      product (reference fibre's place) ['2.062e+07', '2.272e+05', '3.411e+04']
+                      bound A0=hi, B0=x0-lo ['1.211e+08', '2.272e+05', '3.411e+04']   holds: True
+                      CONTROL lo/hi exchanged ['3.253e+05', '2.272e+05', '3.411e+04']   violated: True
+      ln cost: instance 22.9509  product 22.5562  bound 23.7758
+  u=1 n_o=30 n_i=6 sigma +1 -> -1, F = 1 u d (high W at lo) top   : places in [3.721, 9.721] of [3.721, 9.721]; distinct shifts 1; closed-unpopulated at level 229; sample sizes equal to the product instance's: True
+      calls per rung: this instance ['5.327e+07', '1.091e+04', '1.071e+04']
+                      product (reference fibre's place) ['4.126e+07', '1.091e+04', '1.071e+04']
+                      bound A0=hi, B0=x0-lo ['1.799e+08', '1.091e+04', '1.071e+04']   holds: True
+                      CONTROL lo/hi exchanged ['4.151e+05', '1.091e+04', '1.071e+04']   violated: True
+      ln cost: instance 22.9263  product 22.7070  bound 24.0498
+  u=2 n_o=24 n_i=4 sigma +1 -> -1, F = 0 u d (high W at hi) bottom: places in [5.735, 13.735] of [5.735, 13.735]; distinct shifts 1; closed-unpopulated at level 312; sample sizes equal to the product instance's: True
+      calls per rung: this instance ['9.72e+08', '1.119e+07', '7.667e+05']
+                      product (reference fibre's place) ['9.41e+08', '1.119e+07', '7.667e+05']
+                      bound A0=hi, B0=x0-lo ['9.72e+08', '1.119e+07', '7.667e+05']   holds: True
+                      CONTROL lo/hi exchanged ['3.306e+06', '3.306e+06', '7.667e+05']   violated: True
+      ln cost: instance 26.1372  product 26.1165  bound 26.1372
+  u=2 n_o=24 n_i=4 sigma +1 -> -1, F = 0 u d (high W at hi) top   : places in [5.735, 13.735] of [5.735, 13.735]; distinct shifts 1; closed-unpopulated at level 309; sample sizes equal to the product instance's: True
+      calls per rung: this instance ['9.72e+08', '7521', '7521']
+                      product (reference fibre's place) ['9.713e+08', '7521', '7521']
+                      bound A0=hi, B0=x0-lo ['9.72e+08', '7521', '7521']   holds: True
+                      CONTROL lo/hi exchanged ['1.109e+07', '7521', '7521']   violated: True
+      ln cost: instance 25.7049  product 25.7041  bound 25.7049
+  u=2 n_o=24 n_i=4 sigma +1 -> -1, F = 1 u d (high W at lo) bottom: places in [5.735, 13.735] of [5.735, 13.735]; distinct shifts 1; closed-unpopulated at level 392; sample sizes equal to the product instance's: True
+      calls per rung: this instance ['7.303e+07', '5.142e+05', '6.855e+04']
+                      product (reference fibre's place) ['1.783e+07', '5.142e+05', '6.855e+04']
+                      bound A0=hi, B0=x0-lo ['9.484e+07', '5.142e+05', '6.855e+04']   holds: True
+                      CONTROL lo/hi exchanged ['6.998e+04', '6.998e+04', '6.855e+04']   violated: True
+      ln cost: instance 24.5857  product 24.3967  bound 24.6515
+  u=2 n_o=24 n_i=4 sigma +1 -> -1, F = 1 u d (high W at lo) top   : places in [5.735, 13.735] of [5.735, 13.735]; distinct shifts 1; closed-unpopulated at level 389; sample sizes equal to the product instance's: True
+      calls per rung: this instance ['2.51e+08', '1.149e+04', '1.149e+04']
+                      product (reference fibre's place) ['6.318e+07', '1.149e+04', '1.149e+04']
+                      bound A0=hi, B0=x0-lo ['2.513e+08', '1.149e+04', '1.149e+04']   holds: True
+                      CONTROL lo/hi exchanged ['5.142e+05', '1.149e+04', '1.149e+04']   violated: True
+      ln cost: instance 24.9585  product 24.4418  bound 24.9591
+  u=0.5 n_o=40 n_i=8 sigma -1 -> +1, F = 0 u d (high W at hi) bottom: places in [2.247, 6.247] of [2.247, 6.247]; distinct shifts 1; closed-unpopulated at level 128; sample sizes equal to the product instance's: True
+      calls per rung: this instance ['2.189e+05', '1.093e+05']
+                      product (reference fibre's place) ['2.189e+05', '1.093e+05']
+                      bound A0=hi, B0=x0-lo ['2.189e+05', '1.093e+05']   holds: True
+                      CONTROL lo/hi exchanged ['1.592e+05', '1.093e+05']   violated: True
+      ln cost: instance 19.6973  product 19.6973  bound 19.6973
+  u=0.5 n_o=40 n_i=8 sigma -1 -> +1, F = 0 u d (high W at hi) top   : places in [2.247, 6.247] of [2.247, 6.247]; distinct shifts 1; closed-unpopulated at level 126; sample sizes equal to the product instance's: True
+      calls per rung: this instance ['2.189e+05', '5038']
+                      product (reference fibre's place) ['2.189e+05', '5038']
+                      bound A0=hi, B0=x0-lo ['2.189e+05', '5038']   holds: True
+                      CONTROL lo/hi exchanged ['2.093e+05', '5038']   violated: True
+      ln cost: instance 17.6809  product 17.6809  bound 17.6809
+  u=0.5 n_o=40 n_i=8 sigma +1 -> -1, F = 1 u d (high W at lo) bottom: places in [2.247, 6.247] of [2.247, 6.247]; distinct shifts 1; closed-unpopulated at level 142; sample sizes equal to the product instance's: True
+      calls per rung: this instance ['8.423e+05', '4.63e+04']
+                      product (reference fibre's place) ['7.861e+05', '4.63e+04']
+                      bound A0=hi, B0=x0-lo ['1.586e+06', '4.63e+04']   holds: True
+                      CONTROL lo/hi exchanged ['8.462e+04', '4.63e+04']   violated: True
+      ln cost: instance 19.3944  product 19.3625  bound 19.7427
+  u=0.5 n_o=40 n_i=8 sigma +1 -> -1, F = 1 u d (high W at lo) top   : places in [2.247, 6.247] of [2.247, 6.247]; distinct shifts 1; closed-unpopulated at level 140; sample sizes equal to the product instance's: True
+      calls per rung: this instance ['9.447e+05', '7052']
+                      product (reference fibre's place) ['1.039e+06', '7052']
+                      bound A0=hi, B0=x0-lo ['1.659e+06', '7052']   holds: True
+                      CONTROL lo/hi exchanged ['1.493e+05', '7052']   violated: True
+      ln cost: instance 18.9092  product 18.9912  bound 19.4105
+end 2026-11-26T16:38:08Z  wall 1.0 s  peak RSS MB: 21.2

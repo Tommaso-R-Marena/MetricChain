@@ -1,0 +1,8 @@
+r18_corner.py part2 cases/runs=300 seed=18 start 2026-11-26T16:57:11Z
+PART 2: designs with lo < b or x0 - hi < b; THEIR reference: product instances of their family (place t0 in [lo, hi], c_in = t0 - u n_i) against the pair mode (t0_range = (lo, hi)) for the same law
+  designs 300; (design, law, behaviour) cases 600; the shift depends on the place in 482 of them
+  cases in which a PRODUCT instance (every fibre at one feasible place) costs more than the pair mode returns for its law: 16 (bottom 7, largest ln excess 0.693; top 9, largest 6.834); 39 of 5400 product runs
+  worst example (their reference): {"u": 1.0, "n": 44, "n_o": 42, "n_i": 2, "lam": 0.2, "eta": 0.25, "etap": 0.1, "theta": 2.0, "nu1": 1.0, "b": 2.5, "xs": [4.0, 2.875, 2.5], "cone_radius": 35, "cone_slope": 1.0, "c_in": -0.759770986083445, "psi0": 2.0, "oracle": "top", "lo": 1.240229013916555, "hi": 3.2402290139165553, "place": 1.240229013916555, "c_at_place": 1.259770986083445, "c_pair_mode": 0.0, "lcost_product_at_place": 16.512084371770655, "lcost_pair_mode": 9.677629778520355, "lM_max_product": 16.50088424611409, "lM_max_pair_mode": 8.183118079394745, "j_stop_product": 188, "j_stop_pair_mode": 127, "lCmax": 28.765755979124886}
+  the same with my code: product at the place: ln cost 16.512084 (theirs 16.512084); pair mode (shift 0.0000 from A0 = hi, B0 = x0 - lo): 9.677630 (theirs 9.677630); shift of the fibres at that place 1.2598; union of windows with THAT shift: 16.513467
+  example written to data_corner_example_their_reference.json
+end 2026-11-26T16:57:28Z  wall 17.2 s  peak RSS MB: 63.9

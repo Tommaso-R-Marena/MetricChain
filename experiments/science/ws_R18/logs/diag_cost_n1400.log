@@ -1,0 +1,3 @@
+u=0.5 n=1400 phi=0.3 general/top: stored 69.71347335066929; old convention with the tie rule 69.7134887378372 (difference +1.539e-05); with tie = 0: 69.71347335066929 (difference +0.000e+00); exact rule 69.7134887378372; c_in=np.float64(0.0) d0=420; is the cell's worst stored search: False (cell's worst 74.25226655187545)
+chunk cost_n1400: searches 144; not reproduced within 1e-6: 1
+peak RSS MB: 256.7

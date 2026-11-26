@@ -1,0 +1,7 @@
+r18_nonproduct.py corner cases=40 seed=5 start 2026-11-26T17:00:07Z
+
+OUTSIDE THE RANGE (lo < b or x0 - hi < b): 80 (design, law, behaviour) cases, each with product instances at 9 feasible places
+  the shift c depends on the place in 63 cases; for one and the same law the sample sizes differ between fibres-at-lo and fibres-at-hi in 63 cases
+  product instances (every fibre at one feasible place, c_in = t0 - u n_i) whose cost EXCEEDS what the pair mode returns for their law: 0 (bottom 0, largest ln excess 0.000; top 0, largest 0.000); with a rung's calls or the sample above it: 2
+  largest excess of ln cost: 0.0000
+end 2026-11-26T17:00:50Z  wall 43.0 s  peak RSS MB: 21.0

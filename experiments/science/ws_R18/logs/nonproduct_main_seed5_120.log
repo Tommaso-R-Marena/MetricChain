@@ -1,0 +1,32 @@
+r18_nonproduct.py main cases=120 seed=5 start 2026-11-26T16:35:47Z
+  10 designs, 9 s
+  20 designs, 21 s
+  30 designs, 28 s
+  40 designs, 34 s
+  50 designs, 43 s
+  60 designs, 50 s
+  70 designs, 61 s
+  80 designs, 69 s
+  90 designs, 83 s
+  100 designs, 90 s
+  110 designs, 111 s
+  120 designs, 140 s
+
+ITEM 2 AT THE LEVEL OF MEAN RUNS: 120 designs x (profile, reference, offset) x 2 behaviours; 0 (design, behaviour) pairs left to `corner` because the shift depends on the place
+  instances that are not products: 1680  (946694 levels)
+  (a) sample size of some level differs from the product instance with the same law: 0   (must be 0)
+  (c) calls of a rung above the bound (A0 = hi, B0 = x0 - lo): 0 of 14168 rung checks   (must be 0)
+      cost above the bound's cost: 0   (must be 0);  bound below the product instance at some rung: 0   (must be 0)
+      bound above C_max: 0 runs;  largest ln(bound cost / product cost): 8.9160
+      (design, behaviour) pairs in which the union changes the calls of a rung beyond the first: 16
+  CONTROL lo and hi exchanged (A0 = lo, B0 = x0 - hi): calls above it in 1661 of 14168 rung checks, in 678 of 1680 instances   (must be > 0)
+  pattern: largest ln(cost / product cost);  largest share of the bound's calls attained at a rung where the bound exceeds the product
+    2 places: high W at hi, low W at lo              +6.3163   1.000000
+    2 places: high W at lo, low W at hi              +8.8388   1.000000
+    3 places: lo / mid / hi by rising W              +4.5604   1.000000
+    3 places: hi / mid / lo by rising W              +8.4887   1.000000
+    every shell split 1:2 between lo and hi          +7.8174   1.000000
+    a random place per shell                         +6.9288   1.000000
+    adversarial: the dearest place for every atom    +8.9160   1.000000
+VERDICT: the bound HOLDS on every instance; the control FAILED as it must
+end 2026-11-26T16:38:07Z  wall 139.6 s  peak RSS MB: 22.4

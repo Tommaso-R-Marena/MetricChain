@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 18:04 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 18:08 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
@@ -283,10 +283,11 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
      **Answered by them at `dd067f1`:** R16-THY-1(a), -2, -3, -4, -6 (5 open), R15-T1…T5
      (T6 not taken up), A17-T1…T3, P8-T1, P8-T2, A18-T1 — strike these too.  What they
      have not seen: SCI-MSG-0028, SCI-RES-0020 and SCI-RES-0021.
-2. **Workstreams running when this was written: four — R18 (launched 16:02 UTC), R21
-   (16:53), R22 (17:16), R23 (17:23).  R19 and R20 have handed back and are
-   published (SCI-MSG-0030; SCI-REV-0019 — the Complexity division's Theorems 1 and 3
-   proved as stated, two major findings on the text).**  **R23** (`R23_brief.md`): the
+2. **Workstreams running when this was written: three — R21 (launched 16:53 UTC), R22
+   (17:16), R23 (17:23).  R18, R19 and R20 have handed back and are published
+   (SCI-REV-0018 — the engineering division's rule proved, one conclusion of their
+   §4 false as worded; SCI-MSG-0030; SCI-REV-0019 — the Complexity division's Theorems
+   1 and 3 proved as stated, two major findings on the text).**  **R23** (`R23_brief.md`): the
    review promised to the theory division — a sampled check of its assumption audit
    (`docs/ASSUMPTION_AUDIT.md`, `docs/audit/AA{1,2}_REPORT.md` at `fc3f5d9`): whether its
    tags can be trusted, three of its counterexamples rebuilt, the synthesis against
