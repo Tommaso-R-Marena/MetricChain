@@ -221,3 +221,26 @@ Consensus references:
 - [3] [An Efficient Algorithm to Compute the Minimum Free Energy of Interacting Nucleic Acid Strands](https://consensus.app/papers/details/w:34aabde3-34da-4c84-960d-1c4c88f30840/?utm_source=claude_code) (Shalaby et al., 2024, DROPS, 4 citations)
 
 Create or connect a free Consensus account to return more than 3 results per search in Claude Code.: https://consensus.app/sign-up/?utm_source=claude_code&auth=claude_code
+
+---------------------------------------------------------------------------------------------------------------
+DISPOSITION (by the division, 2026-11-26; the revised note is docs/complexity/STRANDS_NN_HARDNESS.md)
+---------------------------------------------------------------------------------------------------------------
+
+| # | severity | finding (short) | disposition |
+|---|---|---|---|
+| 1 | major | "(H0)–(H2) is the sign pattern of every physical parameter set" is false (Turner-2004 bulge rule) | **Accepted.**  Sentence removed.  Hypothesis weakened to (H2′) as proposed; Theorem 1 re-proved by an accounting over item bonds, gap `min(δ,|σ|)`.  Own exhaustive test with favourable bulges: `test_generalised_hypotheses.py`.  The referee's statement about the five published tables is quoted as the referee's, not repeated by us. |
+| 2 | major | "coaxial stacking as strong as stacking breaks the reduction" is false in general | **Accepted.**  Remark replaced by Theorem 1c (flush coaxial stacking, `|x| < |σ| + min(|σ|,γ)`) with a complete proof written by us from the referee's sketch; tested exhaustively in both regimes with control models.  This theorem is new text and is itself unreviewed. |
+| 3 | major | attribution to Lyngsø 2004 / [DSW] Thm 32 and Boehmer et al. Thm 19 missing from the note | **Accepted.**  §0 "Whose gadget this is"; both passages were read by us in the sources ([DSW] full version App. B.3; Boehmer et al. §4.3).  Novelty worded "apparently unpublished". |
+| 4 | major (Cor. 5) | the 3DM lower bound is not established at the cited source in the form used | **Accepted.**  The citation chain is replaced by Appendix A: a linear-size reduction 3-SAT → 3DM (local garbage collection, `≤ 21m` triples) and Garey–Johnson's 3DM → 4-PARTITION with explicit sizes, both proved in the note and tested against exhaustive search (`test_eth_chain.py`).  Only the sparsification lemma remains a cited fact.  New text, unreviewed. |
+| 5 | minor | NP membership unargued (`k_BT ln R`) | **Accepted.**  Membership claimed only without the symmetry term / for `R = 1`; choice of the threshold `k` discussed. |
+| 6 | minor | #P membership; polynomially bounded sizes; Vandermonde step unnecessary; summary too broad | **Accepted.**  Canonical-representative remark; sizes via Lemma A2; Corollary 4(ii) is now a one-call reduction valid for every `g` satisfying the hypotheses, with magnification `O(N log N)`; summary corrected. |
+| 7 | minor | multiloop hypothesis vacuous | **Accepted.**  Step (a′) proves that the chords are nested (no hairpins, no multiloops); the hypothesis is removed. |
+| 8 | minor | cite the source of `ΔG_exterior = 0` | **Accepted.**  Quoted from [DSW] full version, Appendix A.2 (read by us). |
+| 9 | minor | verification claims not backed by the committed scripts | **Accepted.**  §6 rewritten with the correct numbers (18 instances, up to 1 887 888 structures); `check=True`, stabilisers and physical counts are now exercised by `test_generalised_hypotheses.py` (36 instances including `m = 1`, `B ≤ 2`, items longer than a block); Lean status corrected. |
+| 10 | minor | unit steps cannot reverse | **Accepted.**  Sentence added in step (d). |
+| 11 | minor | which reading of [DSW] Def. 9 | **Accepted.**  Remark 2 states the reading (stack = nick-free face) and that under the literal reading the instances are trivial. |
+| 12 | minor | "expected to be polynomial for boundedly many species" unsupported | **Accepted.**  Replaced by a reference to `STRANDS_ALGORITHM.md` Theorem 1 for the partition function and an explicit statement that the MFE version is not written out. |
+
+The referee's "strongest hostile objection" is reproduced in substance in §7 of the note ("What the result is and is
+not worth").  Not done: we did not repeat the referee's experiments with published parameter tables, dangles and
+simplified coaxial-stacking conventions; they are cited as the referee's evidence about small instances.

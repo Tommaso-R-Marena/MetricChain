@@ -9,14 +9,19 @@ result is recorded as a failed search, not as evidence of novelty.
 
 | # | source | how inspected (date) | what it establishes for us |
 |---|---|---|---|
-| A-I | Ducloz, Shalaby, Woods, *Algorithmic Hardness of the Partition Function for Nucleic Acid Strands*, DNA 31 (2025), doi:10.4230/LIPIcs.DNA.31.1 | conference PDF from drops.dagstuhl.de, **read in full** (2026-11-26); arXiv:2506.19756v1 downloaded, appendix A not yet read | definitions; reduction map; #P-hardness of PF in BPS (1 strand, pseudoknots) and BPM (unbounded strands) **with the temperature/magnification as part of the oracle's input**; five open questions (A1–A5) |
+| A-I | Ducloz, Shalaby, Woods, *Algorithmic Hardness of the Partition Function for Nucleic Acid Strands*, DNA 31 (2025), doi:10.4230/LIPIcs.DNA.31.1 | conference PDF from drops.dagstuhl.de, **read in full** (2026-11-26); arXiv:2506.19756v1: Definition 9, Note 10, Appendix A.2 (loop energies; "∆G_exterior = 0") and Appendix B.3 (Lemma 31, Theorem 32) **read** (2026-11-26, after REV-0001) | definitions; reduction map; #P-hardness of PF in BPS (1 strand, pseudoknots) and BPM (unbounded strands) **with the temperature/magnification as part of the oracle's input**; five open questions (A1–A5) |
 | A-II | Shalaby, Woods, *One partition function call to rule them all*, arXiv:2611.27945v2 (23 Nov 2026) | arXiv PDF, **§§1–3 read** (2026-11-26); §§4–7 skimmed for statements only | resolves A2 (magnifiable PF with rotational symmetry, `O(N³(c−1)!)`); MFE and #SSEL from one call; four new open questions (A5–A7) |
 | A-III | Boehmer, Berkemer, Will, Ponty, *RNA Triplet Repeats: Improved Algorithms for Structure Prediction and Interactions*, WABI 2024, doi:10.4230/LIPIcs.WABI.2024.18 | conference PDF, **§§1, 2, 4, 6 read** (2026-11-26); appendix not read | subset dynamic programme `O(3^m n³)` for multi-strand MFE in a base-pair model without symmetry (Thm 14); remark on PF with per-symmetry terms (Rem. 15); XP algorithm in the number of distinct strands (Thm 16); NP-completeness for triplet repeats (Thm 19); polynomial "strand soup" algorithm (Thm 20) |
 | A-IV | Shalaby, Woods, *An efficient algorithm to compute the minimum free energy of interacting nucleic acid strands*, ICALP 2025, arXiv:2407.09676 | arXiv PDF downloaded; **not yet read** beyond what A-I/A-II quote | MFE with rotational symmetry in `O(N⁴(c−1)!)` |
 | A-V | Condon, Hajiaghayi, Thachuk, *Predicting minimum free energy structures of multi-stranded nucleic acid complexes is APX-hard*, DNA 27 (2021), doi:10.4230/LIPIcs.DNA.27.9 | conference PDF, **§1, §2 (first page), §7 read** (2026-11-26); the reduction itself not read | NP-/APX-hardness of multi-strand unpseudoknotted MFE in the base-pair model ("with at least k base pairs"), "whether or not rotational symmetries are accounted for"; about richer models only the sentence "it would seem unlikely that the prediction problem becomes easier if the energy model is more sophisticated" — no stacking or loop-based multi-strand reduction |
-| A-VI | Lyngsø, *Complexity of pseudoknot prediction in simple models*, ICALP 2004 | **not read**; known through A-I App. B.3 | NP-hardness of pseudoknotted single-strand MFE in BPS |
+| A-VI | Lyngsø, *Complexity of pseudoknot prediction in simple models*, ICALP 2004 | **not read**; known through A-I App. B.3, which reproduces its strand `C^{w(a_1)}A…AAA G^B A G^B…` ("We proceed exactly as Lyngsø") | NP-hardness of pseudoknotted single-strand MFE in BPS by a reduction from BIN PACKING; **the template/item gadget of our CX-T1 is this gadget with the `C`-runs cut into separate strands** |
 | A-VII | Dirks, Bois, Schaeffer, Winfree, Pierce, *Thermodynamic analysis of interacting nucleic acid strands*, SIAM Review 49 (2007) | **not read**; known through A-I, A-II | multi-strand PF, representation theorem, symmetry correction `Q(π) = Q̃(π)/v(π)` |
 | A-VIII | Demaine, Gomez, Grizzell, Hecher, Lynch, Schweller, Shalaby, Woods, *Domain-based nucleic-acid minimum free energy: algorithmic hardness and parameterized bounds*, DNA 30 (2024), doi:10.4230/LIPIcs.DNA.30.2 | conference PDF, **abstract, §1 and Table 1 read** (2026-11-26); proofs not read | domain-level results only: NP-completeness for 2-domain strands, ETH lower bounds `2^{Ω(|S|)}` in the number of strands at the domain level (their Thms 16, 17), P/P-hardness for 1-domain strands; nothing on base-level stacking/NN energies |
+| A-IX | Bansal, Oosterwijk, Vredeveld, van der Zwaan, *Approximating vector scheduling: almost matching upper and lower bounds*, Algorithmica 76 (2016) | **not read by us**; read by the referee (REV-0001, finding 4, PMC version) | states a `2^{o(q)}` ETH lower bound for 3DM with the number of triples of Garey–Johnson's reduction; the linear bound on the triples is only a parenthetical remark there.  We no longer rely on it (Appendix A of the hardness note) |
+| A-X | Impagliazzo, Paturi, Zane, *Which problems have strongly exponential complexity?*, JCSS 63 (2001) | **not read**; the sparsification lemma is cited from memory as a standard fact | under ETH, 3-SAT has no `2^{o(m)}` algorithm in the number `m` of clauses — the only cited ingredient of CX-T14 |
+| A-XI | Garey, Johnson, *Computers and Intractability* (1979), Theorems 3.2, 4.3, 4.4 | **not at hand**; Theorem 4.3 known through the overview in A-I App. B.3; the sizes of the 4-PARTITION instance were written down from memory and **the reduction re-proved** in Appendix A of the hardness note (and tested) | strong NP-completeness of 3DM-based 4-PARTITION / 3-PARTITION |
+| A-XII | NNDB Turner-2004 bulge-loop rules; ViennaRNA parameter files (`rna_turner2004.par` etc.) | **inspected by the referee only** (REV-0001 finding 1) | hypothesis (H2) fails for the Turner-2004 single-nucleotide bulge rule; (H2′) holds on the loop types of our instances according to the referee's computation |
+| A-XIII | Shalaby, PhD thesis, cited in A-II as [43] "Defended Nov. 2026. To appear" | **not public, not inspectable** | an uninspectable risk for the novelty of CX-T1–T4 |
 
 Searches (2026-11-26, web search, "extended" mode):
 1. `"partition function" nucleic acid strands "rotational symmetry" "magnification" OR "magnifiable" polynomial time "#SSEL" OR "density of states" multi-stranded 2026` → found A-II.
@@ -30,13 +35,18 @@ Searches (2026-11-26, web search, "extended" mode):
    results in the simpler base pair matching (BPM) model"), A-IV, A-V, A-III; **no** proof of hardness in the
    nearest-neighbour model found.
 
-Consequence for CX-T1–T4: "we found no proof in print of NP-hardness of multi-strand MFE for stacking or
-nearest-neighbour energies; the question is listed as open in A-I (2025) and the hardness results are still
-described as BPM-only in A-II (Nov 2026)".  The reduction is a variant of Lyngsø's bin-packing reduction for
-single-strand pseudoknotted BPS (A-VI), which A-I adapts for counting (its Theorem 32); that the same idea
-works without pseudoknots once the items are separate strands is the (small) step we add.  Not yet done:
-reading A-VI itself and Dirks et al. (A-VII) for the exact loop conventions; a search of the 2022–2026
-DNA/ICALP/WABI proceedings by title.
+Searches by the referee (REV-0001, Task 4; ten web searches, a Consensus search, and the contents of the
+DNA 32 (2026) proceedings volume): no proof of hardness in the nearest-neighbour model found; [DSW] Table 1
+says the hardness results "are conjectured to hold in the more complex NN model", and A-II (23 Nov 2026)
+still describes them as BPM-only.
+
+Consequence for CX-T1–T4, CX-T15: the result is **apparently unpublished**.  The question is listed as open in
+A-I (2025) and the hardness results are still described as BPM-only in A-II (Nov 2026).  The reduction is
+Lyngsø's bin-packing reduction for single-strand pseudoknotted BPS (A-VI), which A-I adapts for counting (its
+Theorem 32), with the `C`-runs cut into separate strands; that the idea then works without pseudoknots, for
+every nearest-neighbour energy function satisfying (H0), (H1), (H2′), is the step we add.  The closest
+multi-strand precedent is A-III Theorem 19 (triplet repeats, a base-pair/multiloop/association model, several
+complexes).  A failure to find the result is not proof of novelty; A-XIII could not be inspected.
 
 Not yet searched: follow-ups to A-II (it is three days old); approximation complexity of the multi-strand
 partition function.
