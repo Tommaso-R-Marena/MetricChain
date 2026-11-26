@@ -20,28 +20,66 @@ are listed too, because they are part of what a result cost.
 ceiling — it must not be exceeded — and there is no obligation to use it: compute is to be
 used where a computation needs it, not for its own sake.
 
-**Policy that follows (engineering's own rules; they replace the provisional $10 / $50 rule
-of session 1).**  Because no platform limit enforces the ceiling, it is enforced here:
+**Authorisation of the research owner (2026-11-26, session 4; directive D-5 in
+`DIRECTIVES.md`), which replaces the stop line of sessions 2–3:** up to **$1,750 of additional
+Modal expenditure across the whole research programme** (all six divisions; this division
+coordinates), counted from the owner's snapshot (credits granted $2,030.00, consumed $41.41),
+with at least **$200 of credit preserved**, never beyond the remaining credit, **no paid
+charge**, the worst case of active, queued and proposed jobs counted, and no change of any
+billing setting.  The budget "is not a spending quota".
 
-1. every job has a container cap, a per-task timeout and no retries, so that its worst-case
-   cost (every task running to its timeout) is a number, computed and entered below before
-   launch;
-2. a single job's worst case stays below **$60**, and the *sum of worst cases* of everything
-   launched in a session stays below **$250**, unless the research owner is told first;
-3. cumulative engineering spend is read from `modal billing report` after every job and
-   entered here.  **Stop line (kept at $1,500 and tightened in session 3, after the research
-   owner left the choice to this division):** immediately before every launch the
-   workspace's usage of the month, *all projects*, is read from the billing report, and the
-   job is launched only if that usage **plus the job's worst-case bound** is at most
-   **$1,500** — a reserve of about a quarter of the credit for other work on the same
-   workspace, which this division cannot see coming, and for billing lag.  The line is not
-   a target: the whole programme has cost $6.70 in two sessions;
-4. nothing is deployed; apps are ephemeral (`modal run`) and are checked to be stopped at the
-   end of every session;
-5. **at most 50 containers in total** are requested by engineering at any time (half of the
-   workspace limit of 100), jobs are run one after another, not side by side, and no GPU is
-   used without a ledger entry that says why — so that other work on the workspace is never
-   starved by ours.
+**Policy that follows (engineering's rules under that authorisation; they replace the rules
+of sessions 2–3).**  No platform limit enforces any of this, so it is enforced here:
+
+1. **Bounded jobs.**  Every job has a container cap, a per-task timeout and no retries, so
+   that its worst-case cost (every task running to its timeout) is a number, computed and
+   entered below before launch.
+2. **The launch test**, made immediately before every launch with `modal billing summary`
+   (which prints the month's metered cost, the credits applied and the billed cost) and
+   `modal billing report --for "this month"`:
+   * (a) **billed cost is $0.00** — if it is not, nothing is launched, everything of ours
+     is stopped, and the research owner is told;
+   * (b) credits consumed by the whole workspace (all projects) **+ the worst cases of
+     every job of ours that is running or queued + the worst case of this job ≤ $1,791.41**
+     (the snapshot's $41.41 plus $1,750);
+   * (c) the same sum **≤ $1,830.00** (credits granted minus the $200 reserve) — implied by
+     (b) today; kept because (b) moves if the owner changes the authorisation;
+   * (d) the applicable workspace limits (100 containers, 10 GPUs) are respected by rule 5.
+   Usage by other projects of the workspace counts against (b) and (c): the authorisation
+   says "assuming no other spending", and this division cannot see such spending coming.
+3. **Staged scaling.**  A job whose worst case exceeds **$60** is launched only as a later
+   stage of a campaign whose earlier stage (at most $60) has finished and whose measured
+   cost was within a factor two of its prediction; no single job has a worst case above
+   **$250** (larger campaigns are split and re-tested between parts).  The provisional
+   allocations of D-5 — $600 existing MetricChain benchmarking, $350 ensemble, $350
+   geometry, $250 complexity, $200 replication and final verification — are tracked in the
+   table "Allocations" below and are planning guidance, not entitlements.
+4. Nothing is deployed; apps are ephemeral (`modal run`) and are checked to be stopped
+   (`modal app list --json`, keys `state`, `description`, `tasks`; `modal container list
+   --json`) after every job and at the end of every session.
+5. **At most 50 containers in total** are requested by engineering at any time (half of the
+   workspace limit of 100) unless a ledger entry says why more are needed, jobs are run
+   one after another, and no GPU is used without a ledger entry that says why.
+6. **What cannot be verified from here.**  The terms of the Modal credit (in particular its
+   expiry date) are not visible to the CLI; the owner has said not to assume they coincide
+   with the Claude credits'.  Operational substitute: test (a) after every job — the
+   exposure to an unnoticed lapse of the credit is the worst case of one job, which is why
+   rule 3 keeps first stages small.  Hard stop for all computation: **2026-11-30 15:00 US
+   Eastern**.
+
+### Allocations (D-5; planning guidance; updated after every job)
+
+| purpose | provisional | committed (worst cases of running or queued jobs) | spent |
+|---|---|---|---|
+| existing MetricChain certificates and algorithms | $600 | $0 | $0 (jobs after M-014) |
+| ensemble identifiability | $350 | $0 | $0 |
+| geometric inference | $350 | $0 | $0 |
+| complexity investigations, counterexample searches | $250 | $0 | $0 |
+| independent replication, final verification | $200 | $0 | $0 |
+| **total authorised** | **$1,750** | $0 | **$0.07** (the workspace's credits consumed rose from $41.41 to $41.48 between the snapshot and 2026-11-26 17:00 UTC; none of it from a job of ours started after the snapshot — billing lag of M-012 … M-014 or other projects) |
+
+Spend before the authorisation (jobs M-001 … M-014, sessions 1–3): $8.73, inside the
+snapshot's $41.41.
 
 ## Rates (from `modal billing rates`, 2026-11-25)
 

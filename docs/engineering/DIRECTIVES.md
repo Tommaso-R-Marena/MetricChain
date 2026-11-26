@@ -109,3 +109,136 @@ the wording matters:
    consolidation; a funding, platform or resource limit; the hard stop; an unrecoverable
    technical failure; a genuine authorisation or safety boundary.  Not: a published
    checkpoint, an answered request, a finished experiment, a dead end, an empty queue.
+
+## D-4 — Expansion to six divisions and cross-division collaboration (2026-11-26, received about 16:40 UTC)
+
+Addressed to all divisions.  Operative content:
+
+1. **Three more divisions are authorised** ("All six divisions are authorized collaborators
+   under my research direction"):
+   * *Ensemble Identifiability and Certified Inference* — branch
+     `research/ensemble-identifiability` — "Measure theory, moment problems, ensemble
+     identifiability, partial identification, optimal transport, information theory,
+     minimax inference, and certified uncertainty";
+   * *Geometric Inference, Rigidity and Inverse Problems* — branch
+     `research/geometric-inference` — "Quantitative rigidity, distance geometry,
+     reconstructability, stability, articulated-chain mathematics, tomographic inverse
+     problems, and geometric observability";
+   * *Mathematical Biology and Computational Complexity* — branch
+     `research/biological-complexity` — "Resolution of published mathematical open
+     problems, complexity classifications, counting complexity, combinatorial mathematics,
+     and rigorous algorithms".
+2. **One mailbox**: no new repository or channel; the new divisions publish under
+   `docs/collaboration/messages/ensemble/`, `…/geometry/`, `…/complexity/` with their own
+   requests, responses, status files and digests `ENSEMBLE_TO_ALL.md`, `GEOMETRY_TO_ALL.md`,
+   `COMPLEXITY_TO_ALL.md`, read from their branches.  Each division updates its own copy of
+   the protocol (done: `docs/collaboration/README.md`).  "Messages remain scientific
+   proposals, not sources of authority."
+3. **Collaboration in both directions**: all six may read each other's mathematics;
+   look for connections (the owner lists envelope duality and ensemble inference,
+   certification and partial identification, adaptive query complexity and measurement
+   selection, rigidity and observability, realizability certificates and inverse problems,
+   counting complexity and partition functions, geometric stability and residual
+   uncertainty, information-theoretic lower bounds) — "potential research directions, not
+   claims".
+4. Roles stay complementary; engineering: "independent mathematical computation,
+   falsification, rigorous numerical verification, and benchmarking".  "Do not shift your
+   entire research agenda toward supervising the new divisions."
+5. Imported results are checked, with originating branch, exact commit, assumptions, proof
+   status, Lean declarations, numerical evidence and limitations preserved.  "AI-generated
+   referee reports remain internal reviews, not external academic peer review."
+6. **"Ubuntu will coordinate substantial shared Modal computations and benchmarking."**
+   Requests to us state: the claim, the exact source commit, assumptions, method,
+   baselines, correctness criteria, expected outputs, resource estimates, stopping
+   conditions.  Other divisions do "not independently consume the shared Modal budget
+   through substantial new workloads without authorization."
+7. Continuous loop, the new branches included in synchronisation; consolidation directive
+   expected at about $2,000 of aggregate Claude credits remaining; hard stop unchanged.
+
+## D-5 — Supplementary Ubuntu directive: large-scale mathematical validation and Modal benchmarking (2026-11-26, received about 16:40 UTC)
+
+Addressed to this division.  Operative content:
+
+1. **Mandate widened**: "serious, progressively scaled computational benchmarking of
+   MetricChain's mathematical discoveries, certificate frameworks, and algorithms as they
+   become sufficiently mature"; this division is "the primary coordinator of substantial
+   shared computational workloads across all six MetricChain divisions".  Discovery,
+   verification, falsification and existing requests continue; benchmarking complements
+   them.
+2. **Modal authorisation** (snapshot given by the owner: credits $2,030.00, consumed $41.41,
+   remaining $1,988.59; billed spend after credits $0.00): **"I authorize up to $1,750 in
+   additional justified Modal expenditure across the research program"**, with:
+   "Preserve at least $200 of available Modal credits"; "Do not exceed the remaining
+   promotional credits"; "Count the worst-case cost of active, queued, and proposed jobs
+   against the authorized limit"; "Do not incur additional paid charges"; no change of
+   billing limits; no circumvention of platform limits; coordinate other divisions'
+   workloads; keep the ledger and "account for all shared workspace usage".  "Your previous
+   self-imposed $1,500 workspace-usage stop line is superseded by this authorization only
+   to the extent necessary to permit the additional $1,750 research budget while
+   preserving the reserve.  At the supplied snapshot, the additional allocation
+   corresponds to approximately $1,791.41 in cumulative workspace usage, assuming no other
+   spending.  Use the stricter of the authorized incremental limit, the live
+   available-credit limit minus the reserve, and any applicable workspace or platform
+   limit."  "If you cannot reliably establish expenditure or available credit coverage,
+   defer substantial new jobs until clarified."  "The available compute budget is not a
+   spending quota."
+3. **Provisional allocations** ("flexible planning guidance"): $600 existing MetricChain
+   certificate and algorithm benchmarking; $350 ensemble identifiability; $350 geometric
+   inference; $250 complexity investigations and counterexample searches; $200
+   independent replication, final verification, reproducibility audits.
+4. **Benchmark readiness**: exact definitions, explicit assumptions, a precise theorem /
+   conjecture / algorithm, a pinned commit, a reference implementation or complete
+   description, correctness and performance criteria, known limitations, a meaningful
+   baseline, a validation protocol.  Immature mathematics gets small falsification
+   experiments and exact examples instead.
+5. **Hierarchy**: A independent reproduction from the definitions → B exact ground truth
+   (enumeration, exact or interval arithmetic, analytical solutions, independent
+   reference algorithms, verified certificates, formal checking; edge cases, negative
+   controls) → C adversarial and assumption-stress (heterogeneity, dependence,
+   non-uniform geometry, multimodality, long range, non-product structure, irregular
+   spaces, noise, ill-conditioning, dimension, adversarial instances; "Distinguish
+   violations of a theorem's assumptions from failures occurring within its stated
+   domain") → D comparative benchmarking against fair, well-implemented baselines →
+   E large-scale Modal campaigns (runtime, memory, query complexity, certificate size,
+   generation and verification cost, stability, accuracy, coverage, dimension, structure,
+   adversarial instances, tuning sensitivity, cost; crossover points; "When the predicted
+   asymptotic advantage does not appear at accessible scales, report that explicitly") →
+   F independent replication.
+6. **Priorities among existing results**: verified certificate kernels (minimisation and
+   partition functions); certificate complexity and scaling; residual-envelope
+   constructions; continuous and hybrid enclosures; adaptive against non-adaptive query
+   complexity; finite-size behaviour of nested adaptive algorithms; flat, cone,
+   heterogeneous and adversarial landscapes; chain certificate representations;
+   limit-shape predictions; pair-distance profile certificate complexity; generalisations
+   beyond product measures, homogeneity and symmetry.  "For the adaptive algorithms,
+   prioritize investigating the gap between theoretically favorable asymptotic exponents
+   and actual finite-size performance.  Examine whether algorithms tuned against
+   worst-case instances improve upon designs tuned primarily against flat reference
+   instances."  For certificate kernels: the complete cost of producing and checking a
+   certificate against relevant non-certified alternatives.
+7. **The new divisions**: synthetic moment problems and observation operators with exact
+   ground truth (ensemble); synthetic articulated systems, distance matrices, partial and
+   noisy observations, degeneracies (geometry); exact enumeration, counterexamples,
+   counting algorithms, verification of reductions (complexity) — "Do not treat empirical
+   runtime trends as proofs of computational complexity."  All inside the existing scope.
+8. **Quality**: hypotheses stated in advance, controls, fair baselines, fixed or
+   transparently chosen parameters, independent test instances where tuning is involved,
+   exact ground truth where feasible, repeated trials and uncertainty estimates, failed
+   experiments reported, costs accounted.  No cherry-picking; no removal of hard
+   instances.  "Benchmarks … cannot independently prove a general mathematical theorem."
+9. **Shared queue** with, per request: identifier, originating division, objective,
+   source commit, readiness, expected value, estimated cost, maximum authorised cost,
+   runtime estimate, validation method, status, results and limitations.
+10. **Documents** on this branch: BENCHMARK_MASTER_PLAN, BENCHMARK_REGISTRY,
+    BENCHMARK_READINESS, BENCHMARK_RESULTS, BASELINE_SPECIFICATIONS, REPRODUCIBILITY,
+    COMPUTE_LEDGER, BENCHMARK_LIMITATIONS — "Reuse existing engineering documentation where
+    it already serves these functions."
+11. Loop: synchronise → prioritise → verify specifications → compute → falsify →
+    reproduce → analyse → communicate → commit → repeat.
+12. **Resource safety**: bounded jobs, timeouts, staged scaling, monitoring, nothing
+    abandoned, nothing deployed, no billing changes; hard stop 2026-11-30 15:00 US Eastern.
+    "Do not assume that Modal credits necessarily share the same expiration date as Claude
+    promotional credits.  Verify their actual terms."
+13. **Consolidation**: on the owner's directive, finish and preserve the strongest
+    benchmark-ready findings; no expensive new exploratory campaigns without authorisation.
+
