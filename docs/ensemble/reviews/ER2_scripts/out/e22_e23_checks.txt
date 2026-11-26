@@ -1,0 +1,14 @@
+Q1  omega(tau) on [-1,1], x* = 0, rho = |t|
+    observables      tau = 1e-2    1e-3      1e-4      1e-5      local exponent (last two)   expected
+    t^2            0.10000  0.03162  0.01000  0.00315      0.501                      0.500
+    (t, t^2)       0.10000  0.03162  0.01000  0.00315      0.501                      0.500
+    t^4            0.31623  0.17783  0.10000  0.05623      0.250                      0.250
+    |t|^1.5        0.04642  0.01000  0.00215  0.00045      0.682                      0.667
+    (t, t^3)       1.00000  1.00000  1.00000  1.00000      0.000                      omega(0) > 0 (not identified)
+    kappa = sup omega(tau)/tau: omega(1e-5)/1e-5 = 315, 315, 5623, 45, 100000
+Q2  Remark E2.3
+    (i)  X = {x*, y}, model Phi = [0.0, 0.2], true Phi~ = [0.1, 0.1] (sup error 0.1): true data of delta_y and delta_x* differ by 0.0 (tau = 0); model data differ by 0.2 = 2 eta > tau + eta = 0.1
+         rho(y) = 1, kappa = 1/(2 eta) = 5.0: int rho d(delta_y) = 1 > kappa (tau + eta) = 0.5;  = kappa (tau + 2 eta) = 1.0
+    (ii) X = {x*, y}, model Phi = (0, 1), certificate lambda = 1 (gap 1); true Phi~(x*) = 0, |Phi~(y) - 1| <= eta = 0.5; data p Phi~(y) within tau = 0.01 of 0:
+         largest mass off x*: 0.0200 = tau/(1 - eta);  the bound of the remark (tau -> tau + eta): 0.5100;  certificate bound using where the model is poor: ||lam|| (tau + eta_S)/(gamma - ||lam|| (eta - eta_S)) = 0.0200
+[exit 0]

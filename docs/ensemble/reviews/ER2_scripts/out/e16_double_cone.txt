@@ -1,0 +1,27 @@
+E16: max E[M_a^2] over the cube class; optimal face
+  n = 2, b = 0.3, a = ++: LP max = 2.297770067, E_D[M^2] = 2.297770067; D member: True; tight-graph components of D: 1; optimal face: dimension 0, largest weight spread 0.000e+00
+  n = 2, b = 1.0, a = ++: LP max = 2.924234315, E_D[M^2] = 2.924234315; D member: True; tight-graph components of D: 1; optimal face: dimension 0, largest weight spread 3.886e-16
+  n = 2, b = 2.5, a = ++: LP max = 3.696567280, E_D[M^2] = 3.696567280; D member: True; tight-graph components of D: 1; optimal face: dimension 0, largest weight spread 2.054e-15
+  n = 3, b = 0.3, a = ---: LP max = 3.482579536, E_D[M^2] = 3.482579536; D member: True; tight-graph components of D: 2; optimal face: dimension 1, largest weight spread 4.620e-02
+        odd n: tanh(b/2) = 0.148885; E[sign M] on the face in [-0.148885, 0.148885]; end points D_(+-tanh(b/2)) members: True; D_(theta) just beyond is a member: False; largest deviation of a face point from D(1 + theta sign M): 3.6e-16
+  n = 3, b = 1.0, a = +-+: LP max = 4.802935091, E_D[M^2] = 4.802935091; D member: True; tight-graph components of D: 2; optimal face: dimension 1, largest weight spread 2.197e-01
+        odd n: tanh(b/2) = 0.462117; E[sign M] on the face in [-0.462117, 0.462117]; end points D_(+-tanh(b/2)) members: True; D_(theta) just beyond is a member: False; largest deviation of a face point from D(1 + theta sign M): 3.7e-16
+  n = 3, b = 2.5, a = ++-: LP max = 7.419232040, E_D[M^2] = 7.419232040; D member: True; tight-graph components of D: 2; optimal face: dimension 1, largest weight spread 6.807e-01
+        odd n: tanh(b/2) = 0.848284; E[sign M] on the face in [-0.848284, 0.848284]; end points D_(+-tanh(b/2)) members: True; D_(theta) just beyond is a member: False; largest deviation of a face point from D(1 + theta sign M): 1.9e-15
+  n = 4, b = 0.3, a = +---: LP max = 4.965159072, E_D[M^2] = 4.965159072; D member: True; tight-graph components of D: 1; optimal face: dimension 0, largest weight spread 2.082e-16
+  n = 4, b = 1.0, a = ---+: LP max = 7.605870183, E_D[M^2] = 7.605870183; D member: True; tight-graph components of D: 1; optimal face: dimension 0, largest weight spread 2.776e-17
+  n = 4, b = 2.5, a = +--+: LP max = 12.838464081, E_D[M^2] = 12.838464081; D member: True; tight-graph components of D: 1; optimal face: dimension 0, largest weight spread 2.809e-14
+  n = 5, b = 0.3, a = -+++-: LP max = 6.262130801, E_D[M^2] = 6.262130801; D member: True; tight-graph components of D: 2; optimal face: dimension 1, largest weight spread 1.461e-02
+        odd n: tanh(b/2) = 0.148885; E[sign M] on the face in [-0.148885, 0.148885]; end points D_(+-tanh(b/2)) members: True; D_(theta) just beyond is a member: False; largest deviation of a face point from D(1 + theta sign M): 3.2e-15
+  n = 5, b = 1.0, a = +---+: LP max = 10.233838720, E_D[M^2] = 10.233838720; D member: True; tight-graph components of D: 2; optimal face: dimension 1, largest weight spread 1.102e-01
+        odd n: tanh(b/2) = 0.462117; E[sign M] on the face in [-0.462117, 0.462117]; end points D_(+-tanh(b/2)) members: True; D_(theta) just beyond is a member: False; largest deviation of a face point from D(1 + theta sign M): 1.2e-14
+  n = 5, b = 2.5, a = +-++-: LP max = 19.462117706, E_D[M^2] = 19.462117706; D member: True; tight-graph components of D: 2; optimal face: dimension 1, largest weight spread 5.740e-01
+        odd n: tanh(b/2) = 0.848284; E[sign M] on the face in [-0.848284, 0.848284]; end points D_(+-tanh(b/2)) members: True; D_(theta) just beyond is a member: False; largest deviation of a face point from D(1 + theta sign M): 1.4e-12
+  n = 6, b = 0.3, a = ++++++: LP max = 7.893196201, E_D[M^2] = 7.893196201; D member: True; tight-graph components of D: 1; optimal face: dimension 0, largest weight spread 1.494e-15
+  n = 6, b = 1.0, a = +--+--: LP max = 13.850758080, E_D[M^2] = 13.850758080; D member: True; tight-graph components of D: 1; optimal face: dimension 0, largest weight spread 3.168e-15
+  n = 6, b = 2.5, a = +-+---: LP max = 27.693176560, E_D[M^2] = 27.693176560; D member: True; tight-graph components of D: 1; optimal face: dimension 0, largest weight spread 3.363e-15
+  n = 7, b = 1.0, a = +-+--+-: LP max = 17.243164826, E_D[M^2] = 17.243164826; D member: True; tight-graph components of D: 2; optimal face: dimension 1, largest weight spread 5.663e-02
+        odd n: tanh(b/2) = 0.462117; E[sign M] on the face in [-0.462117, 0.462117]; end points D_(+-tanh(b/2)) members: True; D_(theta) just beyond is a member: False; largest deviation of a face point from D(1 + theta sign M): 3.7e-13
+  n = 1: M^2 = 1, every member maximises; the class is {|E x| <= tanh(b/2)} = the segment D_theta: consistent with (b)
+E16: NO COUNTEREXAMPLE   [6 s]
+[exit 0]

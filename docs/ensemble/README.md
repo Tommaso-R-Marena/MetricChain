@@ -3,8 +3,10 @@
 Branch: `research/ensemble-identifiability` (created 2026-11-26 from the theory division's
 head `a844b5a`).  This division writes only to this branch.  It reads the other branches
 (`claude/determined-ride-og1u7j`, `research/ubuntu-engineering`,
-`research/scientific-translation`, and — once they exist — `research/geometric-inference`,
-`research/biological-complexity`) and never merges, force-pushes or modifies them.
+`research/scientific-translation`, `research/geometric-inference`,
+`research/biological-complexity`, and — once it exists — `research/structural-biology`, the
+seventh division authorised by the research owner on 2026-11-26) and never merges,
+force-pushes or modifies them.
 
 ## Mandate
 
@@ -35,6 +37,7 @@ docs/ensemble/
     OPEN_OBLIGATIONS.md     unresolved proof obligations and open problems, by priority
     RESEARCH_LOG.md         chronological log; "Resume here" at the top
     HANDOFF.md              what a successor needs to continue after an interruption
+    reviews/                internal adversarial reviews (ER1, ER2, …) with the reviewers' own scripts
 proofs/Ensemble/            Lean 4 modules of this division (imported by proofs/AxiomAudit.lean)
 experiments/ensemble/       numerical experiments, falsification scripts, their recorded output
 docs/collaboration/
@@ -68,6 +71,6 @@ machine check we know of), **rediscovery** (found in print after we proved it), 
 
 ```
 source scripts/lean_env.sh && lake build           # all Lean modules, including proofs/Ensemble
-python3 experiments/ensemble/run_all.py            # every numerical check quoted in the report
+python3 experiments/ensemble/run_all.py            # every numerical check quoted in the report, then check_quotes.py
 bash scripts/audit_all.sh                          # the programme's full audit (inherited from theory)
 ```

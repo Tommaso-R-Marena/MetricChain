@@ -1,0 +1,28 @@
+U1  log-supermodular references (couplings K_ij e_i e_j with K_ij >= 0 = bonds satisfied by a; any fields)
+    33 references (n = 2, 3, 4; chains, triangles, K4, a three-body term), all log-supermodular: True
+    largest over the class of mu(x_i=a_i) - mu*(x_i=a_i): +2.22e-16
+    largest of TV - sum_i [mu*_i - mu_i]: +3.28e-15;  largest of TV - sum_i [E_mu h_i - mu_i] over all orderings: +2.55e-15
+    -> no counterexample  [191 s]
+U2  a bond violated by the centre
+    two sites, pi ~ exp(-x1 x2 / 2), a = (+,+), b = 1 (uniform slopes): log-supermodular in e: False
+      states e = (e1,e2): [(0, 0), (0, 1), (1, 0), (1, 1)]
+      mu*  = [0.318945 0.318945 0.318945 0.043165];  mu*(x_i = a_i) = [0.63789 0.63789]
+      max over the class of mu(x_1 = a_1) - mu*(x_1 = a_1) = +0.169599
+      max over the class of TV - sum_i [mu*_i - mu_i] = +0.169599, attained at mu = [0.096255 0.711235 0.096255 0.096255]
+    three-site chains, first bond violated (6 cases): (max TV-excess, max population excess) = (+0.354, +0.239), (+0.035, +0.129), (+0.044, +0.056), (+0.051, +0.046), (+0.189, +0.124), (+0.332, +0.201)
+    [194 s]
+U3  is the bound false whenever a bond is violated?  Triangles: K12 = K23 = K (satisfied), K13 = -kappa (violated)
+    K = 4.0, kappa = 0.2, field -2.0, b = 1.0: mu* log-supermodular: False; max population excess +2.22e-16; max TV-excess +1.33e-15; ordered bound, ordering (1,3,2): +2.15e-15; worst ordering: +2.15e-15
+    K = 3.0, kappa = 0.1, field -1.5, b = 0.7: mu* log-supermodular: False; max population excess +1.11e-16; max TV-excess +1.33e-15; ordered bound, ordering (1,3,2): +1.11e-15; worst ordering: +1.50e-15
+    K = 6.0, kappa = 0.5, field -3.0, b = 1.5: mu* log-supermodular: False; max population excess -2.22e-16; max TV-excess -4.44e-16; ordered bound, ordering (1,3,2): +3.01e-15; worst ordering: +3.95e-15
+    K = 2.0, kappa = 0.05, field -1.0, b = 1.0: mu* log-supermodular: False; max population excess +0.00e+00; max TV-excess +8.88e-16; ordered bound, ordering (1,3,2): +4.44e-16; worst ordering: +4.72e-16
+    K = 1.0, kappa = 0.5, field 0.0, b = 1.0: mu* log-supermodular: False; max population excess +2.57e-02; max TV-excess +1.33e-15; ordered bound, ordering (1,3,2): +2.71e-02; worst ordering: +2.71e-02
+    K = 4.0, kappa = 1.5, field -2.0, b = 1.0: mu* log-supermodular: False; max population excess +2.22e-16; max TV-excess +4.44e-16; ordered bound, ordering (1,3,2): +3.89e-16; worst ordering: +4.44e-16
+    => reference with a violated bond (not log-supermodular) for which BOTH statements of E15T(a) hold exactly: (K, kappa, field, b) = (4.0, 0.2, -2.0, 1.0)
+    [214 s]
+U4  the counterexample of finding F1: pi ~ exp(x1 x2 + x2 x3 - x1 x3 / 2), no fields, a = (+,+,+), b = (1,1,1)
+    reference equals the spin form: 8.7e-19;  mu* log-supermodular in e: False
+    max over the class of mu(x_i=a_i) - mu*(x_i=a_i): -1.11e-16;  of TV - sum_i [mu*_i - mu_i]: +8.88e-16
+    ordered bound TV - sum_i [E_mu h_i - mu_i], by ordering: (1, 2, 3): +5.55e-17, (1, 3, 2): +0.00e+00, (2, 1, 3): +5.33e-04, (2, 3, 1): +5.33e-04, (3, 1, 2): +0.00e+00, (3, 2, 1): +5.55e-17
+    [216 s]
+[exit 0]

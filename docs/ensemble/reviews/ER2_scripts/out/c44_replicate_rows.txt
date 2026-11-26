@@ -1,0 +1,18 @@
+n = 10: my LP, 400 fresh instances per K  (stored value in the repository output; binomial standard error of the difference)
+   K =  8: 0.890   (stored 0.875; difference +0.015 = +0.7 s.e.)
+   K =  9: 0.812   (stored 0.787; difference +0.025 = +0.9 s.e.)
+   K = 10: 0.618   (stored 0.613; difference +0.005 = +0.1 s.e.)
+   K = 11: 0.388   (stored 0.383; difference +0.005 = +0.1 s.e.)
+   K = 12: 0.185   (stored 0.253; difference -0.068 = -2.3 s.e.)
+   K = 13: 0.077   (stored 0.072; difference +0.006 = +0.3 s.e.)
+   K = 14: 0.028   (stored 0.022; difference +0.006 = +0.5 s.e.)
+n = 12: my LP, 150 fresh instances per K  (stored value in the repository output; binomial standard error of the difference)
+   K = 10: 0.867   (stored 0.890; difference -0.023 = -0.7 s.e.)
+   K = 11: 0.800   (stored 0.773; difference +0.027 = +0.7 s.e.)
+   K = 12: 0.693   (stored 0.677; difference +0.016 = +0.4 s.e.)
+   K = 13: 0.560   (stored 0.537; difference +0.023 = +0.5 s.e.)
+   K = 14: 0.320   (stored 0.323; difference -0.003 = -0.1 s.e.)
+   K = 16: 0.020   (stored 0.060; difference -0.040 = -2.2 s.e.)
+   K = 17: 0.013   (stored 0.020; difference -0.007 = -0.5 s.e.)
+guessed driver (K outer loop, alphas 0.8..1.4), n = 10: 0.875, 0.787, 0.613, 0.383, 0.253, 0.072, 0.022   stored: 0.875, 0.787, 0.613, 0.383, 0.253, 0.072, 0.022
+[exit 0]

@@ -1,0 +1,16 @@
+three sites, pi ~ exp(J12 x1x2 + J23 x2x3 + J13 x1x3 + h.x), centre a = (+,+,+), slopes b; 38 vertices, 40 digits
+   J12   J23    J13     h              b     max over the class of TV - sum_i[mu*_i - mu_i]    max population excess    vertices with equality
+      1     1   0.25   (0, 0, 0)         1             0.0                                            0.0             1     (all bonds satisfied)
+      1     1      0   (0, 0, 0)         1             0.0                                            0.0             1     (all bonds satisfied)
+      1     1  -0.05   (0.05, -1, 0.05)    1             0.0                                            0.0             1     (violated bond)
+      1     1  -0.05   (0, 0, 0)         1             0.0                                            0.0             1     (violated bond)
+      1     1   -0.1   (0, 0, 0)         1             0.0                                            0.0             1     (violated bond)
+      1     1  -0.25   (0, 0, 0)         1             0.0                                            0.0             1     (violated bond)
+      1     1   -0.5   (0, 0, 0)         1             0.0                                            0.0             1     (violated bond)
+      2     2  -0.25   (0, 0, 0)         1             0.0                                            0.0             1     (violated bond)
+    0.5   0.5   -0.1   (0, 0, 0)         1             0.0                                            0.0             1     (violated bond)
+    0.5   0.5   -0.1   (0, 0, 0)         2             0.0                                            0.0             1     (violated bond)
+      1     1   -0.1   (0, 0, 0)       0.5             0.0                                            0.0             1     (violated bond)
+      0     0   -0.5   (0, 0, 0)         1        0.169599                                       0.169599             2     (violated bond)
+      1  -0.5      0   (0, 0, 0)         1        0.187466                                       0.260288             1     (violated bond)
+[exit 0]

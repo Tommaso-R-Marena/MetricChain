@@ -168,3 +168,69 @@ claimed; the proposition's wording says "on a torus a subtorus of positive dimen
 binary coordinates possibly nothing but the states themselves".  So on finite alphabets
 the Hall condition is sufficient and not necessary for this certificate.
 
+**ED19 (a converse that was never proved, in a title).**  Version 2 called Theorem E15T
+"the bound holds without frustration, **and only then**", and concluded that "frustration
+is a real obstruction, not an artefact of the proof".  The theorem proved the bound for
+references that are log-supermodular in the disagreement variables; the "only then" came
+from five random chains with one violated bond on which the bound failed.  The second
+internal review (ER2, F1) produced a triangle with a violated bond — `π ∝ exp(x₁x₂ + x₂x₃ −
+½x₁x₃)` — on which both bounds hold for every member of the class, exactly; explained why
+(the polarised member is positively associated although not log-supermodular: two
+satisfied bonds induce an attraction that outweighs the direct repulsion); and gave the
+two-line coupling proof under that weaker hypothesis.  The theorem is restated with the
+hypothesis its proof uses.  A third example (population bound false, total-variation
+bound true) shows that positive association is not necessary either: there is no
+characterisation.  *Lessons: five failures are not a converse; a title is a statement;
+and when a proof uses a strong hypothesis (FKG lattice condition) only through a weak
+consequence (positive correlation of two monotone functions), state the weak one.*
+
+**ED20 (quoted numbers that the script did not print — third occurrence, and a remedy).**
+ER1 found it twice (F6, F18); ER2 found it again (F2): the text of check F6 quoted
+`+0.23` to `+0.47` where the script printed `+0.024` to `+0.965`, "`0` to `10⁻¹⁵`" where it
+printed `3·10⁻¹⁴`, and asserted a failure of the population bound that the script computed
+and discarded.  The cause is the same each time: a sentence written from an exploratory
+run, and a script changed afterwards.  The remedy is now mechanical:
+`experiments/ensemble/check_quotes.py` ties sentences of the report to lines of the stored
+output (literal matches, or bounds for round-off-level numbers), and `run_all.py` runs it
+last, so a changed script fails the run until the sentence has been looked at again.
+
+**ED21 (a conditional statement about chains whose two conditions were false).**  After
+the third checkpoint we wrote (ENSEMBLE-RES-0003 §4, report §4c.4) that Proposition E20′ —
+two states on a torus are determined iff they differ in at least two angles — "becomes a
+theorem for chains" if (i) competing ensembles live on the torus of the differing
+torsions and (ii) the mean squared distances span the products over pairs of those
+torsions.  Both fail (GEOMETRY-RES-0005 §§2–3; the science division's SCI-REV-0021):
+competitors live on `O(2)^r` — consecutive rigid segments may also be related by a
+reflection in a plane through the hinge bond — and for three torsions the span contains
+only the products of *adjacent* pairs.  The statement for chains is those divisions'
+(identifiable unless two of `R₁`, `R₂`, `R₁R₂` are half-turns).  Ours remains a statement
+about measures on a torus; the adjacent-pair certificate that survives is the geometry
+division's.  Linked correction: ENSEMBLE-RES-0004 §3.  *Lesson: a conditional statement
+that names its conditions is honest, and still costs the reader who has to check them;
+ask before publishing the conditional.*
+
+**ED22 (the thermal union bound as a falsification test).**  We suggested (ENSEMBLE-MSG-0003,
+E-S3) that Theorem E15 could certify that an ensemble is *not* in a first-order class:
+data showing a distance to the polarised member larger than the bound.  The science
+division tried it on two five-residue instances with exact least envelopes and the most
+favourable datum (the exact total variation) at 232 centres: the test never fires above
+`b = 0.015`, although the truth leaves the class as soon as `b < 1` (SCI-RES-0032 §2).  The
+true ensemble is far from polarised, and as the class shrinks the polarised member moves
+towards it.  For one-body data the exact test is that division's ratio test (the product
+structure of the one-body marginals).  Suggestion withdrawn.
+
+**ED23 (a conjecture refuted before it was stated: random sampling is not an adversary).**
+After finding the exact condition for the thermal union bound (Proposition E15U: one
+inequality per up-set), we observed that for known parts with pair interactions the
+whole condition coincided with its `n` single-site instances — `Cov(e_i, N − e_i) ≥ 0` for
+every site — on every one of 17 000 random pair models on three and four sites, and
+drafted it as a conjecture.  It is false: a direct minimisation of the worst non-dictator
+slack subject to the single-site conditions found a four-site pair model within twenty
+restarts (two strongly bound pairs that repel each other; the up-set "both sites of a
+pair are switched" violates the condition; margin `0.01`).  The region is thin, which is
+why sampling missed it.  For general measures a three-body ("parity") known part on
+three sites is a counterexample in closed form.  On three sites with pair interactions
+no counterexample was found by the same adversarial search (1 650 restarts); that case
+is left open without a conjecture.  *Lesson: before writing "in every instance tried",
+let an optimiser try.*
+

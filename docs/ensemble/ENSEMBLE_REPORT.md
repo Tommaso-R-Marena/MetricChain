@@ -1,19 +1,22 @@
 # Ensemble report — what an ensemble is determined by
 
 **Ensemble Identifiability and Certified Inference Division.**  Branch
-`research/ensemble-identifiability`.  Version 3 (third checkpoint, 2026-11-26: Part VI added;
-version 2 was the second checkpoint, commit `1a067b5`; version 1 the first, commit `a570520`;
-§7 lists what changed).
+`research/ensemble-identifiability`.  Version 3, as corrected at the fourth checkpoint
+(2026-11-26: two reviews applied, Proposition E15U added; version 3 was the third
+checkpoint, commit `32f547a`, which added Part VI; version 2 the second, commit `1a067b5`;
+version 1 the first, commit `a570520`; §7 lists what changed).
 
 Labels: **[V]** machine-checked in Lean 4 + Mathlib (declaration named; axioms `propext`,
 `Classical.choice`, `Quot.sound` only) · **[P]** paper proof given here · **[K]** known, cited
 (the prior-art register `PRIOR_ART.md` says how each source was read) · **[N]** numerical
 evidence only (script named) · **[C]** conjecture.  Review status: Parts I–III (version 1)
-have had one internal adversarial review by a subagent of this division
-(`reviews/ER1_internal_review.md`; an AI review, not academic peer review), whose findings
-are applied here (§7); the science division has contributed one proposition and has a
-review of Part II in progress; Parts IV and V are under a second internal review that has
-not yet reported; Part VI has been read by nobody but its author.
+and Parts IV–V with Theorem E7′, Proposition E2.2 and §4.4 (version 2) have each had one
+internal adversarial review by a subagent of this division
+(`reviews/ER1_internal_review.md`, `reviews/ER2_internal_review.md`; AI reviews, not academic
+peer review), whose findings are applied here (§7); the science division has reviewed
+Part II independently (its SCI-REV-0020; applied) and checked Theorem E15 with its own
+code (SCI-RES-0032); Part VI is under a third internal review that has not yet reported.
+No external peer review of anything.
 "New" below always means "not found in the search documented in `PRIOR_ART.md`".
 
 ---
@@ -32,17 +35,18 @@ how stably, and with what certificate.**
 | E3 | **Finite ensembles, first order.**  For an identified `μ` on a finite metric space, `sup{W₁(ν, μ) : ‖E_νΦ − E_μΦ‖ ≤ τ} = κ_μ·τ` exactly for small `τ`, with `κ_μ = max_{g 1-Lipschitz} min{‖λ‖_* : c + λ·Φ ≥ g on X, = g on supp μ}`; `κ_μ` depends on the support only, not on the weights | P | formulation (`1/κ_μ` is a minimum conic gain on a tangent cone / a Hoffman constant; ER1 F11) |
 | E4 | **Rényi–Heppes for arbitrary observables.**  If two configurations agree on fewer than `r` of `m` features and `m ≥ K(r−1) + 1`, every ensemble with at most `K` conformers is determined by the `m` *laws* of the features among all ensembles; the bound is sharp for every `K ≥ 2`, `r ≥ 2` | V for finite `X` (`renyi_heppes`), P in general | generalisation of a known theorem (Rényi 1952, Heppes 1956); the support step is the frameproof-code lemma of Boneh–Shaw 1998 |
 | E5 | **Splices on a variety.**  For a polynomial feature map `F : ℝ^D → ℝ^m` without constant coordinates: for generic `K`-tuples no vector assembled coordinate-wise from the feature vectors of *different* points lies on the feature variety — for every `K` — **iff the algebraic matroid of the coordinates of `F` is connected**; if it is not, splices are realisable on an open set of pairs | P | new (not found); closest: unlabeled PCA (linear, unknown subspace) and the product lemma of Garamvölgyi–Gortler–Jordán |
-| E6–E8 | **Distributional ensemble rigidity.**  For a graph on at least `d+2` vertices the following are equivalent: `G` is generically globally rigid in `ℝ^d`; every generic finite ensemble of frameworks, *with any number of conformers*, is determined modulo congruence, among all ensembles, by the laws of its edge lengths.  Then `2K` moments of each squared edge length suffice for `K` conformers — `2K|E|` scalar means — with the explicit certificate `Σ_e Π_i (ℓ_e² − ℓ_e(x_i)²)²`.  Mean squared distances alone determine no ensemble at all | P, given two cited theorems (global rigidity is generic; globally rigid ⇒ connected rigidity matroid, 2022) | new (not found) |
+| E6–E8 | **Global rigidity implies distributional ensemble rigidity.**  If a graph on at least `d+2` vertices is generically globally rigid in `ℝ^d`, every finite ensemble of frameworks whose conformers are **jointly** generic, *with any number of conformers*, is determined — each conformer up to congruence — among all ensembles, by the laws of its edge lengths; the converse is the case of one conformer, and if the graph is not generically globally rigid no generic ensemble is determined.  Then `2K` moments of each squared edge length suffice for `K` conformers, with the explicit certificate `Σ_e Π_i (ℓ_e² − ℓ_e(x_i)²)²`.  For conformers that are only individually generic, or that share a rigid part, the conclusion can fail (Examples D1, D2 of the science division).  On the unconstrained configuration space mean squared distances alone determine no ensemble | P, given two cited theorems (global rigidity is generic; globally rigid ⇒ connected rigidity matroid, 2022) | E7: corollary of the cited 2022 theorem through E5/E6; E8: the classical `2K`-moment certificate edge by edge.  Not found in print: the reading — a finite mixture of frameworks identified from one law per edge (searches of this division and eighteen of the science division's referee) |
 | E7′ | **Conformers that share rigid parts, smallest case.**  Two rigid bodies joined by `m` generic legs: for generic attachment points and poses the leg-length laws determine every finite ensemble of relative poses when `m ≥ dim SE(d) + 1` (seven in space, four in the plane), and fail to on an open set when `2 ≤ m ≤ dim SE(d)` — one leg more than rigidity | P, given a K fact on generic lines | new (not found) |
 | E9 | Pair correlations on `{±1}ⁿ`: every ensemble with at most three conformers is determined (explicit certificate, §4c.1); four conformers need not be (explicit) | P (also K: the cut polytope is 3-neighbourly); the example N/P | known; the certificate proof is ours |
 | E10 | **Typical supports.**  For `K ≤ n − 10n/ln n` independent uniform conformers, with probability `1 − O(K³(¾)ⁿ + K²2^{−n})` *every* ensemble supported on them is determined by its pair correlations among all ensembles, with the explicit certificate `‖P^⊥x‖²` | P given K (Odlyzko 1988); self-contained proof for `K < 0.2933 n` | synthesis |
 | E11 | For `K ≥ (2+ε)n` random conformers, with high probability **no** ensemble supported on all of them is determined by pair correlations (any weights); for `K/n → α > 6.338` the pair correlations of every ensemble with positive weights on them are those of a full-support ensemble (explicit for equal weights) | P given K (Cover; Bai–Yin, Sheppard) | (a) synthesis: the classical capacity bound of pair-interaction associative memories read through E1; (b) not found, elementary |
 | E12 | **Adaptivity.**  A fixed set of pairs that determines every two-conformer ensemble must contain *all* `n(n−1)/2` pairs; adaptively, `rn − r(r+1)/2` pair correlations determine the whole correlation matrix of any ensemble of correlation rank `r ≤ K` (certified, no assumption); for typical supports every certificate needs `Ω(Kn/ln(en/K))` pairs | P; K (Cover's counting) | formulation / synthesis |
-| E13 | **Inside a first-order class** (a polytope in the normalised weights): a member is extreme iff its tight graph is connected; it is determined by data *among the members* iff a face exposed by an observable in the span contains it and carries injective data; exact flow certificates | P | formulation (polyhedral geometry; the flow format is the science division's) |
-| E15 | **A thermal union bound.**  For a product reference and a symmetric site-additive envelope, any alphabets, heterogeneous sites: `TV(μ, μ*_a) ≤ Σ_i [1 − μ(x_i = a_i)/μ*_{a,i}(a_i)]` for every member `μ`, `μ*_a` the member most polarised towards `a`; for binary sites `TV(μ, μ*_a) ≤ Σ_i [μ*_{a,i}(a_i) − μ(x_i = a_i)]`, with equality cases — dimension-free, constant one.  On the cube a member is identified by one-body data inside the class iff at most one marginal is unsaturated | P | new (not found) |
-| E15T | **The same with an interacting known part.**  The thermal union bound holds with the same constant for *every* reference that is log-supermodular in the disagreement variables — any Ising-type known part, on any graph and of any range, all of whose bonds are satisfied by the centre; if the centre violates a bond the bound is false (exact counterexamples on chains).  Frustration is the obstruction | P given K (FKG; marginals of log-supermodular measures); the obstruction N | new (not found) |
+| E13 | **Inside a first-order class** (a polytope in the normalised weights): for a finite envelope a member is extreme iff its tight graph is connected; it is determined by data *among the members* iff a face exposed by an observable in the span contains it and carries injective data; exact flow certificates | P | formulation (polyhedral geometry; the flow format is the science division's) |
+| E15 | **A thermal union bound.**  For a product reference and a site-additive envelope (symmetric or one-sided), any alphabets, heterogeneous sites: `TV(μ, μ*_a) ≤ Σ_i [1 − μ(x_i = a_i)/σ_i]` for every member `μ`, where `μ*_a ∝ π e^{−d(·,a)}` is the member most polarised towards `a` and `σ_i` its population of `a_i`; for binary sites `TV(μ, μ*_a) ≤ Σ_i [σ_i − μ(x_i = a_i)]`, with equality cases — dimension-free, constant one; it is a union bound over a monotone coupling.  The one-body marginals of the members are exactly the products of members of the one-site classes (the science division's statement).  On the cube a member is identified by one-body data inside the class iff at most one marginal is unsaturated | P; the inequality for monotone densities on a product space V | formulation (Harris' inequality, Strassen's theorem, a union bound; the combined inequality not found in print); the last statement new, elementary |
+| E15T | **The same with an interacting known part.**  For binary sites the thermal union bound holds with the same constant whenever the polarised member is positively associated in the disagreement variables — in particular for any Ising-type known part, on any graph and of any range, all of whose bonds are satisfied by the centre; then every member dominates the polarised member stochastically.  A violated bond can break the bound (a two-site example in closed form) and need not (a triangle); the exact condition is E15U | P given K (Strassen; FKG; marginals of log-supermodular measures); the triangle N | formulation (corrected after the review ER2: version 2 claimed the converse) |
+| E15U | **The exact condition for the thermal union bound.**  For binary sites and any reference: the bound holds for every member of the class iff `E[N | U] − E[N | U^c] ≥ 1` under the polarised member for every up-set `U` of the disagreement order (`N` the number of disagreements) — conditioning on an increasing event raises the mean number of disagreements by at least one; likewise the population bound iff every site is non-negatively correlated with every up-set, and stochastic domination iff positive association.  Necessary: each site's disagreement is non-negatively correlated with the number of the others; at weak coupling this is also sufficient (frustration is tolerated if every site's bonds are satisfied on balance); in general it is not (a three-body example in closed form; a four-site pair model) | P | new (not found); elementary |
 | E16 | **A bimodal ensemble identified by one pair observable.**  For even `n` the double cone `∝ exp((b/2)|M_a|)` is the unique maximiser of `E[M_a²]` over the cube class; for odd `n` the maximisers are a segment parametrised by the population difference of the two basins | P | new (not found); elementary |
-| E17 | **Noise.**  For a convex class and Gaussian noise `σ` the minimax root-mean-square error of a mean `E_μψ` is between `0.199·ω(2σ)` and `0.5·ω(2σ)`, with `ω(ε) = min_λ{ε‖λ‖₂ + range over the class of ψ − λ·Φ}`: the dual certificate of the identified interval is the near-minimax linear estimator | P (elementary); K (Donoho 1994: factor 1.25) | formulation of a known theory |
+| E17 | **Noise.**  For a convex class and Gaussian noise `σ` the minimax root-mean-square error of a mean `E_μψ` is between `0.335·ω(2σ)` and `0.5·ω(2σ)`, with `ω(ε) = min_λ{ε‖λ‖₂ + range over the class of ψ − λ·Φ}`: the dual certificate of the identified interval is the near-minimax linear estimator | P (elementary: the exact Bayes risk of two points); K (Donoho 1994: factor 1.25) | formulation of a known theory |
 | E18 | **Lifted certificates.**  For a lift `v` with the entries of `vv^*` in the span of the data, `‖P^⊥v(x)‖²` is a non-negative function in the span; if its zero set is finite with linearly independent `v(x)v(x)^*`, every ensemble on the conformers is determined among all ensembles — also when the zero set is larger than the support.  Three conformers on the cube: a self-contained proof of E9(a).  **With a prior on the number of atoms** (finite `X`): flat-isolated supports are determined among ensembles with at most `K` atoms for all weights outside a null set (E18′) | P | elementary; formulation (flat extensions, E10 and the geometry division's certificate are instances) |
 | E19 | **Data of even order `≤ 2d` on the cube.**  `K ≤ (1−ε)n^d/d!` random conformers are the ground states of the explicit energy `‖P^⊥ξ_d(x)‖²` and every ensemble on them is determined among all ensembles; pair data determine up to `(1−ε)n²/2` conformers among ensembles **with at most `K` conformers** (generic weights) but nothing beyond `2n` among all; without a prior nothing is determined beyond `(2+ε)·n^{2d−1}/(2d−1)!`; for four-body data the threshold is numerically 2.6–3.5 times the sum-of-squares range, about that of a Gaussian cloud of the same size | (a) K (Baldi–Vershynin 2019), which we re-derived before finding it; (b)–(d) P given K; (e) N | synthesis; the probabilistic core is a published theorem (rediscovery on our side) |
 | E20 | **Generic conformers on a variety; torsion angles.**  For a lift into `ℂ^N` whose image has projective codimension `c`, generic ensembles of `K ≤ c` conformers are determined among all ensembles; on the torus `𝕋^r` with multilinear trigonometric data: `K ≤ 2^r − r − 1`.  **Two states on a torus** are determined iff they differ in at least two angles, with an explicit product certificate using pairs of angles only (E20′), with quadratic growth, a stability bound `∫ min(d_p², d_q²) dν ≤ Λτ/c*` and recovery of the weights, all constants explicit (E20″) | P given K (generalised trisecant lemma); E20′, E20″ P, their combinatorial cores V (`twoStateCert_eq_zero_iff`, `twoStateCert_growth_three`, `twoStateCert_growth_two`) | synthesis; E20′, E20″ elementary (not searched) |
@@ -60,9 +64,10 @@ stated the sentence without the two conditions; the internal review ER1 showed i
 both directions as written — §7.)
 
 Parts IV and V (added at the second checkpoint) carry the same sentence to finite
-temperature — inside a first-order class the identified ensembles are the exposed members
-of a polytope, with a dimension-free "thermal union bound" for the most polarised member —
-and to noise, where the dual certificate is a near-minimax estimator.
+temperature — inside a first-order class the identified ensembles are the members of the
+exposed faces of a polytope on which the data are injective, with a dimension-free
+"thermal union bound" for the most polarised member — and to noise, where the dual
+certificate is a near-minimax estimator.
 
 What is *not* in this report: anything about real instruments; algorithms with complexity
 guarantees; identification inside classes other than first-order ones.  §8 lists the
@@ -207,9 +212,9 @@ which for a connected graph *is* determined.  The twin above contains the collap
 framework; if degenerate frameworks are to be excluded take `R² ∈ {½, 3/2}` instead, which
 changes `E Q²` by the factor `1.25` and needs `0 < E_μ Q² < ∞`.  ER1 F8.)
 
-Mean squared distances carry the mean *Gram* structure and nothing about fluctuations;
-they cannot even certify that the ensemble is a single conformation.  This is a statement
-about *unconstrained* configurations.  The Geometric Inference Division reached the same
+On the unconstrained configuration space mean squared distances carry the mean *Gram*
+structure and nothing about fluctuations; they cannot even certify that the ensemble is a
+single conformation.  This is a statement about *unconstrained* configurations only.  The Geometric Inference Division reached the same
 obstruction independently (every structure has the mean squared distances of a mixture of
 collinear ones; its `ENSEMBLE_RIGIDITY.md`, Proposition 3.1) and showed what removes it:
 if every state obeys the same bond constraints — the ensemble lives on the configuration
@@ -218,9 +223,15 @@ exactly known chain length on (its Theorems B and C; two generic states from ten
 on, its Theorem I).  The qualifier "no statewise constraint" in (b) was asked for by that
 division (GEOMETRY-RES-0001 §0) and is accepted: the random rescaling of the proof leaves
 a constrained configuration space.  That division now calls determination of a
-conformation by the means of the squared lengths *second-moment rigidity*; it lies
-between global and universal rigidity, whereas determination by the laws (Theorem E7) is
-global rigidity.  In the language of Theorem E1 the
+conformation by the means of the squared lengths *second-moment rigidity*.  Its relation
+to the classical notions is, after that division's own correction (GEOMETRY-MSG-0006,
+M1): with `𝒩(X) = 0` — no conic through the constrained edge directions — universal
+rigidity implies second-moment rigidity, which implies global rigidity; without that
+hypothesis the first implication fails (smallest instance there: a three-point chain with
+its two bonds as constraints and the end-to-end pair measured — the straight and the
+folded chain with weights `½` have the averaged data of a bent one; machine-checked
+there).  Determination by the *laws* (Theorem E7) is implied by global
+rigidity for jointly generic conformers.  In the language of Theorem E1 the
 constraints shrink the configuration space until the zero set of a non-negative quadratic
 form, an affine subspace of `(ℝ^d)^N`, meets it in finitely many points.  The first data that
 can are two different moments of the same distance (equality in Jensen's inequality), and
@@ -303,8 +314,8 @@ data norm; primal and dual values agree to `3·10⁻¹⁵` at four tolerances; w
 so `κ = n`: `E_ν d_H(·, 0) ≤ nτ`, with equality when every site is flipped with probability `τ`.  With errors in `ℓ¹`
 the constant is `1`.  The constant is extensive exactly when the errors are per-observable.
 
-**Proposition E2.2 (on a continuum the modulus is a square root and the certificate is a
-curvature) [P; (a) and the reading are the science division's: SCI-RES-0026 §2(c),
+**Proposition E2.2 (on a continuum the modulus is at best a square root, and the
+certificate is a curvature) [P; (a) and the reading are the science division's: SCI-RES-0026 §2(c),
 SCI-RES-0028 §2(b)].**  Let `X` contain an open subset of a Riemannian manifold around `x⋆`,
 `d` the geodesic distance, and `Φ` of class `C¹` near `x⋆`.
 (a) No energy in the span satisfies the sharp-minimum inequality at `x⋆`: the constant `κ`
@@ -321,20 +332,34 @@ first-order terms cancel) and transport cost `t|v|`.  (b) is Theorem E2(b).  ∎
 
 So Example E1.2 is the rule, not an exception: on a finite configuration space
 identification of a conformation is Lipschitz in the data and certified by a *gap*; on a
-continuous one it is Hölder of exponent `½` and certified by *quadratic growth* of an energy
-in the span — a certified lower bound on a curvature near `x⋆` together with a gap away
-from it.  The Geometric Inference Division's bound `W₂(ν, μ)² ≤ C‖M(ν) − M(μ)‖` for mean
+continuous one, for `C²` observables, it is at best Hölder of exponent `½` — exactly `½` when
+an energy in the span has *quadratic growth* (`κ₂ < ∞`: a certified lower bound on a
+curvature near `x⋆` together with a gap away from it), and worse otherwise.  (Version 2
+said "the modulus is a square root"; the internal review ER2, F3, gave the examples: on
+`[−1, 1]` with the single observable `t⁴` the conformation `δ₀` is identified, `κ₂ = ∞` and
+`ω(τ) = τ^{1/4}` exactly; with the observable `|t|^{3/2}`, which is `C¹` and not `C²`, `ω(τ) = τ^{2/3}`,
+better than a square root — so the lower bound `c√τ` does need `C²`.)  The Geometric Inference Division's bound `W₂(ν, μ)² ≤ C‖M(ν) − M(μ)‖` for mean
 squared distances (its GEOMETRY-MSG-0002, item 6, with the same remark on the exponent) is
 an instance with a finite ensemble in place of `δ_{x⋆}`.
 
 *Remark E2.3 (uncertain measurement operators are a tolerance) [P, immediate].*  If the true
 observables `Φ̃` are known only through a model `Φ` with `sup_x ‖Φ̃(x) − Φ(x)‖ ≤ η`, then
-`‖∫Φ̃ dν − ∫Φ dν‖ ≤ η` for every ensemble, so every statement of this part holds for data
-generated by `Φ̃` with `τ` replaced by `τ + η`, the certificates being computed for the model
-`Φ`.  The error of the forward model enters through its supremum over the configuration
-space, not through its typical size: a certificate cannot use that the ensemble avoids
-the configurations where the model of the measurement is poor, because it does not know
-the ensemble.
+`‖∫Φ̃ dν − ∫Φ dν‖ ≤ η` for every ensemble.  So every statement of this part holds with `τ`
+replaced by `τ + η` when a datum generated by `Φ̃` is compared with data *computed from the
+model* (`Φ(x⋆)`, `Aμ`), the certificates being computed for the model; when two ensembles are
+both seen through `Φ̃` the replacement is `τ + 2η`, and `2η` is attained (`X = {x⋆, y}`,
+`Φ = (0, 2η)`, `Φ̃ = (η, η)`).  The supremum over the whole configuration space is not what a
+certificate needs, however: it controls the mass off the support, so the model error
+there enters multiplied by that mass.  With a certificate `(λ, γ)` for the support `S`,
+`η_S = sup_S ‖Φ̃ − Φ‖` and data generated by `Φ̃` within `τ` of `Aμ`,
+
+    ν(X ∖ S)  ≤  ‖λ‖_* (τ + η_S) / (γ − ‖λ‖_*(η − η_S))        when the denominator is positive
+
+(from `γ·ν(X∖S) ≤ λ·(Aν − Aμ) ≤ ‖λ‖_*(τ + η_S + (η − η_S)ν(X∖S))`).  *Example:* `X = {x⋆, y}`,
+`Φ = (0, 1)`, `λ = 1`, `γ = 1`, the truth exact at `x⋆` and wrong by at most `η = 0.5` at `y`: data
+within `τ = 0.01` force `ν(y) ≤ τ/(1 − η) = 0.02`, where `τ + η` gives `0.51`.  (Version 2 ended
+this remark with "a certificate cannot use that the ensemble avoids the configurations
+where the model of the measurement is poor"; that sentence was false — ER2, F4.)
 
 ### 2.3 Finite ensembles: the first-order constant
 
@@ -466,13 +491,13 @@ points) the **splice** is the vector `q^a = (F_e(x_{a(e)}))_{e∈[m]}`.  It has,
 coordinate, a feature value of one of the points.  A splice with a non-constant colouring
 that is the feature vector of an actual configuration is a **chimera**.
 
-**Theorem E5 (splices and the algebraic matroid).**  Assume no `F_e` is constant.
+**Theorem E5 (splices and the algebraic matroid).**
 (a) If `𝓜(F)` is connected then for every `K ≥ 2` there is a proper algebraic subset
 `B_K ⊂ (ℝ^D)^K`, defined over the field of the coefficients of `F`, such that for every
 `(x_1, …, x_K) ∉ B_K` and every non-constant colouring `a`: `q^a ∉ V`.  In particular there is no
 chimera.
-(b) If `𝓜(F)` is not connected, let `J` be a proper non-empty set with
-`r(J) + r(J^c) = r([m])`.  Then `V = V_J × V_{J^c}` (the closures of the two coordinate
+(b) Assume no `F_e` is constant.  If `𝓜(F)` is not connected, let `J` be a proper non-empty
+set with `r(J) + r(J^c) = r([m])`.  Then `V = V_J × V_{J^c}` (the closures of the two coordinate
 projections), every splice of two points along `(J, J^c)` lies in `V`, and there is a
 non-empty open set of pairs `(x, x') ∈ (ℝ^D)²` for which both splices along `(J, J^c)` are
 chimeras: `(F_J(x), F_{J^c}(x')) = F(y)`, `(F_J(x'), F_{J^c}(x)) = F(y')`.
@@ -553,7 +578,9 @@ dimension the generic rank of the Jacobian, and the splice maps are rational.  T
 every parameter space with a rational parametrisation: tori of torsion angles in half-angle
 coordinates (the rational atlas of the circle of theory report §5), rotation groups
 (Cayley transform), and products of these — in particular the relative poses of rigid
-bodies (Theorem E7′ below).
+bodies (Theorem E7′ below).  (Irreducibility of the parameter space is a hypothesis, not a
+convenience — R21-EN-6 of the science division's review: on a reducible space the feature
+variety is a union and the dimension count must be made on each component.)
 
 ### 3.3 Distributional ensemble rigidity
 
@@ -578,20 +605,41 @@ Here "generic" for a tuple of configurations means: its `dNK` coordinates are al
 independent over `ℚ` (in particular outside every proper algebraic subset defined over `ℚ`,
 and true for Lebesgue-almost every tuple).
 
-**Theorem E7 (distributional ensemble rigidity = global rigidity).**  Let `N ≥ d + 2`.  The following are
-equivalent.
+**Theorem E7 (global rigidity implies distributional ensemble rigidity).**  Let `N ≥ d + 2`.
+The following are equivalent.
 (a) `G` is generically globally rigid in `ℝ^d`.
-(b) For every `K ≥ 1`, every generic `(x_1, …, x_K) ∈ ((ℝ^d)^N)^K` and all weights `w_i > 0`: if
-`ν` is a Borel probability measure on `(ℝ^d)^N` such that, for every edge `e`, the law of the
-length of `e` under `ν` equals its law under `μ = Σ_i w_i δ_{x_i}`, then `ν = μ` modulo
-congruence: `ν` is carried by the congruence classes `[x_i]` and `ν([x_i]) = w_i`.
+(b) For every `K ≥ 1`, every **jointly** generic `(x_1, …, x_K) ∈ ((ℝ^d)^N)^K` (all `dNK`
+coordinates algebraically independent) and all weights `w_i > 0`: if `ν` is a Borel
+probability measure on `(ℝ^d)^N` such that, for every edge `e`, the law of the length of `e`
+under `ν` equals its law under `μ = Σ_i w_i δ_{x_i}`, then `ν = μ` modulo congruence: `ν` is
+carried by the congruence classes `[x_i]` and `ν([x_i]) = w_i`.
+Moreover: (c) if `G` is not generically globally rigid, no finite ensemble with a generic
+conformer is determined by the laws of its edge lengths.
+"Modulo congruence" is: each conformer up to its own congruence, reflections included —
+no handedness of any conformer, and no relative placement of two conformers, is
+determined.
 
 **[P]**, given the two cited theorems.
 
-*Proof.*  (b) ⇒ (a) is `K = 1`.  (a) ⇒ (b): `R_d(G)` is connected and no edge length is
-constant, so Corollary E6 applies (its exceptional set is defined over `ℚ`, hence avoided by
-generic tuples): `ν` is carried by `∪_i F^{-1}(F(x_i))` with the right masses; each `x_i` is
-generic, so `F^{-1}(F(x_i)) = [x_i]`.  ∎
+*Proof.*  (b) ⇒ (a) is `K = 1` and uses no cited theorem.  (a) ⇒ (b): `R_d(G)` is connected
+and no edge length is constant, so Corollary E6 applies (its exceptional set is defined
+over `ℚ`, hence avoided by jointly generic tuples): `ν` is carried by `∪_i F^{-1}(F(x_i))` with
+the right masses; each `x_i` is generic, so `F^{-1}(F(x_i)) = [x_i]`.  (c) By the first cited
+theorem no generic framework of `G` is globally rigid; replace a generic conformer by an
+equivalent framework that is not congruent to it.  ∎
+
+*What is ours and what is not* (the science division's review SCI-REV-0020, M4, accepted).
+E7 is Corollary E6 plus the cited theorem of 2022, four lines; (b) ⇒ (a) is the case of one
+conformer; and the published proof of that theorem already splices the lengths of `p` and
+of `2p` along a separator.  What neither that review's eighteen searches nor ours found in
+print is the reading: a finite mixture of frameworks is identified from one law per edge.
+
+**Corollary E7a (connected rigidity matroids; the science division's remark m9).**  If
+`R_d(G)` is connected — for `d ≥ 2` strictly more graphs than the globally rigid ones, e.g.
+two copies of `K₄` glued along an edge — every jointly generic finite ensemble is determined
+by its edge-length laws *up to replacing each conformer by an equivalent framework*:
+there is no chimera, and what remains undetermined is what a single conformer leaves
+undetermined.  **[P]**: Corollary E6.
 
 **Reading.**  Global rigidity is a statement about one configuration.  The theorem says it
 is automatically a statement about *mixtures of any number of them*: a graph whose edge
@@ -606,6 +654,42 @@ lengths": on the line, the 4-cycle with conformers `x = (8, 0, 3, 5)` and `x' = 
 has edge lengths `(8, 3, 2, 3)` and `(5, 2, 5, 8)`, both splices `(8, 2, 2, 8)` and `(5, 3, 5, 3)`
 close up, and the two chimeras form a twin ensemble (found by the review ER1, F14:
 conformers related by arithmetic coincidences; check R8).
+
+**"Generic" is jointly generic** (the science division's review SCI-REV-0020, M2; both
+examples are its referee's, checked by its coordinator and re-checked here: R9, R10).
+*Example D1.*  `K₄` in the plane, `x₁ = ((½, 2), (3, 3), (−1, 0), (1, 0))`,
+`x₂ = ((½, 3/2), (3/2, −4), (−2, 0), (2, 0))`.  The squared lengths on `01, 02, 03, 12, 13, 23` are
+`29/4, 25/4, 17/4, 25, 13, 4` and `125/4, 17/2, 9/2, 113/4, 65/4, 16` — no length in common.
+Reflecting vertex 1 of each in the line through vertices 2 and 3 exchanges the two values
+of the length `01`: the reflected pair is a different ensemble with the same law on every
+edge.  Such pairs form a family of codimension two that contains pairs in which each
+conformer by itself is generic; so "each conformer generic" does not suffice.
+*Example D2* (conformers that share a rigid part).  `K₅` minus the edge `34` is generically
+globally rigid.  If two conformers share the triangle `012`, exchanging the positions of
+vertex 4 between them gives a second ensemble with the same law on every measured edge:
+**the laws of the distances from a rigid core to two mobile groups never tell whether the
+two motions are correlated**; only a measured distance between the groups does.  So for
+conformers that share rigid parts generic global rigidity of the graph is not the
+criterion (Problem O3).
+
+**Stability** (the science division's Proposition B, re-derived by its coordinator; here
+with attribution, **[P]**).  Let the *chimera gap* `g_∞` of the ensemble be the least
+sup-norm distance from a splice that is not a conformer's vector to the set of realisable
+vectors.  If `ν` is an ensemble such that, for every edge, the law of `ℓ_e²` gives mass at
+least `1 − η_e` to the `τ`-neighbourhood of the atoms of `μ`, and `τ < g_∞`, then all but `Σ_e η_e`
+of the mass of `ν` lies within `τ` (in the vector of squared lengths) of a conformer.
+Conversely, for two conformers, if a colouring and its complement are both realised
+within `τ` (the *switching gap*), there is an ensemble within `τ` of every law with mass on
+two configurations that are not conformers.  (Proof: off a set of mass `Σ η_e` every
+`F_e(y)` is within `τ` of an atom, so `F(y)` is within `τ` of a splice, which is then a
+conformer's vector; conversely move mass `s` from each conformer to the two chimeras.)
+*The gap is small* **[N; the science division's computations, quoted by order of
+magnitude as it asks]**: for random conformers in the plane, in units in which the mean
+squared edge length is 4, the median gap on minimally globally rigid graphs is of the
+order `10⁻²`–`10⁻³` for two conformers and `10⁻³`–`10⁻⁵` for three (`K₄`, wheels), with
+single instances down to `10⁻⁹`; with redundant edges (`K₅`, `K₆`) `10⁻¹`–`10⁻²`.  So the
+theorem is a statement about exact laws, and a band of `10⁻³` of a squared length already
+admits a chimera for three conformers on the sparsest graphs.
 
 **Corollary E8 (finitely many means; an explicit certificate).**  In the situation of
 Theorem E7(a), let `μ = Σ_{i≤K} w_i δ_{x_i}` be generic.  If `ν` is a Borel probability
@@ -637,9 +721,27 @@ nothing but the conformers — as it does for a connected matroid and generic tu
 an exposing function and the ensemble is identified.  (When realisable chimeras exist the
 ensemble may still be identified, by a different exposing function: Example 2 of §3.2.
 Version 1 said "exactly when"; ER1 F2.)  By Corollary E1.3,
-`j = 1` alone (mean squared lengths) identifies nothing; `j ≤ 2` certifies a single
-conformation (`E ℓ⁴ = (E ℓ²)²` forces every measured length to be constant); `j ≤ 2K` resolves
-`K` conformers.
+`j = 1` alone (mean squared lengths) identifies nothing on the unconstrained configuration
+space; `j ≤ 2` certifies a single conformation (`E ℓ⁴ = (E ℓ²)²` forces every measured length to
+be constant) — if the unknown conformation is generic, which data cannot certify; `j ≤ 2K`
+resolves `K` conformers.
+
+*Three remarks from the science division's review* (SCI-REV-0020, m5 and M3; accepted).
+1. The count `2K|E|` is sufficient, not necessary: edges outside a generically globally
+rigid spanning subgraph need no moments; among ensembles with at most `K` conformers
+`2K − 1` moments per edge suffice; and for a single conformation whose framework has a
+positive semidefinite stress matrix of maximal rank, `|E| + d(d+1)/2` means suffice (its
+Proposition C: the certificate `tr(pᵀΩp) + Σ_{e∈E₂}(ℓ_e(p)² − ℓ_e(x)²)²` with `d(d+1)/2` edges
+whose directions lie on no conic at infinity; 9 means instead of 12 on `K₄`).
+2. **The certificate `f` is not sharp:** its minima are quadratic (of order `2K` in the
+squared lengths), so the sharp-minimum bridge of Part I does not apply to Part II and the
+identification is Hölder-½ at best — a conformer split in two at distance `±s` changes
+every moment by `O(s²)`.  In that review's computations, moments known to a relative
+`10⁻⁵` still allow more than a tenth of a generic three-conformer ensemble on `K₄`, or of
+a two-conformer ensemble on a wheel, to be far from every conformer, and evaluating the
+mean of `f` from moments is a cancellation of `10⁴` to `10⁹` for two and three conformers.
+3. E8 identifies; it does not certify at any realistic precision.  A quantitative
+replacement is Problem O4.
 
 **Theorem E7′ (conformers that differ by a rigid-body motion: a platform with `m` legs).**
 Generic tuples exclude the most common situation: conformers that share rigid parts.  The
@@ -652,8 +754,9 @@ For generic attachment points:
 (b) if `m ≥ D_d + 1` (seven legs in space, four in the plane): for generic `K`-tuples of poses
 and all weights, every Borel probability measure on `SE(d)` with the `m` leg-length laws of
 `μ = Σ_i w_i δ_{g_i}` equals `μ` — for every `K`;
-(c) if `2 ≤ m ≤ D_d` there is an open set of pairs of poses whose two-conformer ensembles
-are not determined by the leg-length laws (for `m = 1` not even one pose is determined).
+(c) if `m ≤ D_d` not even one generic pose is determined by its leg lengths; and if
+`2 ≤ m ≤ D_d` there is an open set of pairs of poses for which the ensemble of *leg-length
+vectors* is not determined by the leg-length laws either.
 
 **[P]**, given **[K]**: the line vectors of generic lines are in general linear position
 (any `D_d` of them are independent).
@@ -666,16 +769,38 @@ connected.  (b) By the remark after Corollary E6 (`SE(d)` has a rational paramet
 the feature-space ensemble is determined; it remains to see that, for generic attachment
 points, a generic pose is the only pose with its `m` leg lengths.  Let `B` be the set of
 pairs (attachment points, pose `g`) for which some pose `g' ≠ g` has the same `m` leg
-lengths; it is semialgebraic.  For generic first `D_d` legs and generic `g`, these legs have
-a Jacobian of full rank at `g`, so the fibre through `g` is finite; for each of its other
-points `g'`, the attachment points `(u, v)` of a further leg with `|u − g v| = |u − g' v|` form
+lengths; it is semialgebraic.  For generic first `D_d` legs and generic `g` the fibre
+through `g` of the length map `F` of these legs is finite: `(legs, g) ↦ (legs, F(g))` is a
+polynomial map between irreducible varieties of the same dimension, dominant because its
+Jacobian has full rank at one point (by (a)), so its fibres are finite outside a proper
+algebraic subset of the source.  (Full rank at `g` alone shows only that `g` is isolated in
+its fibre — remark of the review ER2.)  For each of the other points `g'` of the fibre, the attachment points `(u, v)` of a further leg with `|u − g v| = |u − g' v|` form
 a proper algebraic subset (take `v` with `gv ≠ g'v` and `u = gv`).  So the fibres of `B` over
 generic (first `D_d` legs, pose) have positive codimension, hence so has `B`, hence for
 attachment points outside a proper algebraic subset the poses `g` with (points, `g`) `∈ B`
 form a set of positive codimension in `SE(d)`.  (The review ER1 pointed out that version 2
 exchanged the two quantifiers without this argument.)
-(c) For `2 ≤ m ≤ D_d` the matroid is free on at least two elements, hence disconnected, and
-E5(b) applies.  ∎
+(c) For `m < D_d` the fibre of a generic pose has positive dimension.  For `m = D_d` it is
+finite and the number of its real points is even, so the pose is not alone: the complex
+fibre of generic data has 6 points in the plane and 40 in space (**[K]**: the degrees of
+the forward kinematics of the planar three-legged and the spatial six-legged platform —
+known to us through the search summaries of the review ER2, not re-derived), and non-real
+points come in conjugate pairs; in the plane check P4 counts the poses.  For `2 ≤ m ≤ D_d`
+the matroid is free on at least two elements, hence disconnected, and E5(b) applies.  ∎
+
+*What genericity excludes* (review ER2, F6; two of the three cases are common designs).
+(i) **Two planar bodies** — the attachment points of each body in a hyperplane, as in the
+usual Stewart–Gough platform.  With `S` the reflection in that hyperplane (coordinates in
+which both hyperplanes are `{x_d = 0}`), the pose `(SRS, St)` is proper, differs from `(R, t)`
+in general, and has the same leg lengths, for every number of legs:
+`|u − SRSv − St| = |S(u − Rv − t)|` because `Su = u`, `Sv = v`.  The leg matroid is still
+uniform, so (a) holds and the laws still determine the ensemble of leg-length vectors
+(Corollary E6); what fails is the step from leg lengths to poses.  **Connectivity of the
+matroid is not the whole criterion** — to be kept in mind for Problem O3.  (ii) **`d + 1`
+legs at one attachment point**: the matroid disconnects (`d = 2`, `m = 4`: ranks `2 + 1`), and
+there are two-conformer ensembles with the same four laws (an explicit instance is in the
+review).  (iii) Sharing of attachment points that keeps the matroid uniform was harmless
+in the cases the review tried.
 
 Six legs determine finitely many poses of a parallel platform; a seventh leg generically
 determines the pose (this is the generic global rigidity of body–bar frameworks:
@@ -688,6 +813,17 @@ is the connectivity of the body–bar matroid (Problem O3).  *Numerical check* *
 with four or five legs in the plane (264 splices, least-squares residual at least `1.9·10⁻³`
 against `10⁻¹⁴` at a pose) or seven legs in space (80 splices, at least `2.4·10⁻³`); with
 three, respectively six, legs the splices of nearby poses are realised in 20 of 20 cases.
+These three checks (P1–P3) test the matroid and the absence of splices — the half of (b)
+that is Theorem E5(a).  The other half, that a generic pose is the only pose with its
+leg lengths, is tested in the plane by P4 (added after the review ER2): with three
+generic legs the number of real poses with the three lengths is 2, 4 or 6 (38, 59 and 3
+of 100 instances; never one), and a fourth leg singles out the true pose in 100 of 100
+(smallest mismatch of the fourth length at another pose of the fibre `1.1·10⁻³`); with
+collinear attachment points on both bodies the mirror pose has the same six lengths.  In
+space the review found 2 to 6 poses with six given lengths by multi-start (lower bounds)
+and a seventh-leg mismatch of at least `0.58` at the other poses, on four instances.  The
+smallest residuals quoted are samples from a distribution with positive density at zero,
+not gaps.
 
 *Numerical checks* **[N]** (`experiments/ensemble/rigidity_checks.py`).  R1: rank and
 connectivity of the rigidity matroids of `K₄`, `K₅`, the wheel `W₅` in the plane and `K₅`, `K₆`
@@ -697,15 +833,25 @@ the plane and `K₅` in space, with two and three random conformers, the Cayley�
 determinant of every non-constant splice examined (1 240; 2 904; 20 440; 79 998) is at
 least `1.6·10⁻³` in absolute value, against `10⁻¹²` at the conformers.  R3: for the wheel,
 least squares from 25 starts leaves a residual of at least `6·10⁻⁴` on 180 random splices
-(`3·10⁻¹⁵` at a conformer).  R4: the triangle example; for `K₄` plus a vertex of degree two
-the splice along the separator is realised exactly when two circles meet (40 of 40
-agreements, 31 realised).  R5: all 203 zeros of the certificate `f` found from 400 starts
+(`3·10⁻¹⁵` at a conformer); control, added at the science division's request: the same
+search finds 20 of 20 planted realisable vectors — still evidence, not proof, since that
+division's referee met true negatives within a factor five of such a threshold and
+replaced the search by an exhaustive ruler-and-compass method (549 908 splices on seven
+globally rigid graphs: no chimera).  R4: the triangle example; for `K₄` plus a vertex of degree two
+a splice of the three blocks (the `K₄`, each pendant edge) is realised exactly when two
+circles meet (all six non-constant colourings of 40 pairs: 240 of 240 agreements, 192
+realised).  R5: all 203 zeros of the certificate `f` found from 400 starts
 (100 near each conformer, 200 random) for `K₄` with two conformers have the edge lengths of
-one of the conformers (63 and 140).  R7: the example of §3.2 with realisable chimeras and
-20 perturbations of it — the realisable splices are the two conformers and three chimeras
-in all 21 pairs (smallest Cayley–Menger determinant of a mixed block `5.9`, against `10⁻¹³`
-at a conformer; chimeras realised to `4·10⁻¹⁵`), and the largest chimera mass compatible
-with the eight laws is zero.  R8: the 4-cycle on the line.  (Version 1 quoted "22 zeros"
+one of the conformers (128 and 75).  R6: two toy feature maps `ℝ² → ℝ⁴`, one with a
+connected matroid (no splice on the variety: smallest violation of its equations
+`1.5·10⁻³` over 200 pairs) and a direct sum (every splice realisable).  R7: the example of
+§3.2 with realisable chimeras and 20 perturbations of it — the realisable splices are the
+two conformers and three chimeras in all 21 pairs (smallest Cayley–Menger determinant of
+a mixed block `11.3`, against `10⁻¹³` at a conformer; chimeras realised to `3·10⁻¹⁵`), and the
+largest chimera mass compatible with the eight laws is zero.  R8: the 4-cycle on the
+line.  R9: Example D1 in exact rational arithmetic.  R10: Example D2 on 200 random
+instances (the exchanged pair has the same law on every measured edge in all of them;
+the law of the unmeasured edge differs in all of them).  (Version 1 quoted "22 zeros"
 for R5, a number the script did not print; ER1 F6.)
 
 ### 3.4 Continuous ensembles: an obstruction
@@ -830,7 +976,58 @@ Theorem C) and identifiability appears numerically up to about `2n/9` states (it
 GEOMETRY-MSG-0002, item 10); here it certifies up to almost `n`
 conformers and identifiability extends beyond `n` (§4.4) — in both cases the range between
 the two is where the exposing function is non-negative on the constrained space without
-being a positive semidefinite form plus multipliers of the constraints.
+being a positive semidefinite form plus multipliers of the constraints.  The relation is
+closer than an analogy (the science division's review SCI-REV-0020, M1): for a chain of
+unit bonds *on a line* the bond vector is a sign vector, the squared distance between two
+atoms is a sum of products of bond signs, and the mean squared distances are exactly the
+pair correlations of this Part — so Part III is the case `d = 1` of that division's
+setting, and "how many conformers do mean squared distances resolve on a chain in `ℝ^d`"
+is the `d`-dimensional form of Problem O1 (its referee's first data point in the plane,
+unit bonds: two generic conformers are not determined with four to six bonds and are
+determined from seven).  In dimension one the sufficient condition has a name: the
+Laurent–Poljak condition for simplicial faces of the elliptope (1996, as quoted by Tropp;
+found by the science division's referee for the Geometric Inference Division, its
+GEOMETRY-MSG-0007 §2 (b)) — a stronger property than a face of the cut polytope, which is
+what Theorem E10 asserts; `PRIOR_ART.md` §5.
+
+*Deciding exposedness, and the degree of a certificate (the Complexity division:
+COMPLEXITY-RES-0003, -0007, -0008 — its statements, quoted; its Propositions 13, 13′ and
+Theorem 14 are unreviewed by its own account).*  Whether `K` given sign vectors are
+exactly the ground states of some pair energy can be decided in time `2^K·poly(n)`: every
+competing state of a certificate of non-exposedness lies in the span of the `K` vectors
+(the mechanism of E10(a): a competing measure has a pair-moment matrix that is an affine
+combination of the `x^a x^{aT}`, and the range of a positive semidefinite moment matrix
+contains its states), and a `K`-dimensional span contains at most `2^{K−1}` sign vectors.  So the decision is polynomial for `K = O(log n)` (for `K = 4` the rule is explicit:
+exposed unless the site-wise product of the four vectors is constant and four column
+types occur); it is in co-NP, and its hardness for `K ≫ log n` is open — in the regime
+`K ≈ 1.1n` of §4.4 nothing is known.  **A sum-of-squares certificate of degree 2 for some
+exposing pair energy exists iff the span contains no other sign vector** (then the
+projection energy of E10 is one; the "if" is E10(a), the "only if" is that division's
+Proposition 13), and deciding whether a span contains another sign vector is NP-complete
+(its Theorem 14).  So "exposed" splits in two: with the span condition, exposed with a
+certificate of degree 2; without it — in particular for every face with `K ≥ n`
+conformers found in §4.4 — every exposing pair energy needs a certificate of degree at
+least 4.  More generally a sum of squares of degree `d'` that vanishes on the conformers
+forces them into the zero set of a polynomial of degree `d'`, so beyond `n²/2` conformers a
+certificate needs degree at least 6 and beyond `n³/6` at least 8 (COMPLEXITY-RES-0007).
+For the elliptope in place of the cut polytope (**[K]**: Tropp, arXiv 1801.00749, Theorems
+2.9–2.11, read by that division): `K` random sign vectors span a simplicial face of the
+elliptope with probability at least `1 − K² e^{−n/K²}`, and no simplicial face of the
+elliptope has more than about `√(2n)` vertices.  Between `√(2n)` and `n − o(n)` conformers the
+projection energy therefore exposes a simplicial face of the cut polytope — the ensemble
+is determined among ensembles on the cube — while the face of the elliptope that it
+exposes is not a simplex (its dimension is at least `K(K+1)/2 − n`).
+*How much of this is visible at the sizes one can enumerate* **[N]**
+(`experiments/ensemble/degree2_vs_face.py`, exact decisions on random supports): for
+`n = 12`, of 200 random supports with `K = 6` conformers `99.5 %` are faces and `16.5 %` have a
+certificate of degree 2; with `K = 9`, `92 %` and `0.5 %`; with `K = 11`, `81.5 %` and none (for
+`n = 10` the same picture; with `K = 3` the frequency `0.773` of a degree-2 certificate is
+close to `1 − 4(¾)¹⁰ = 0.775`).  No support had a degree-2 certificate without being a face, as E10(a)
+requires.  So on small cubes almost every identified support with more than about `n/2`
+conformers needs a certificate of degree at least 4, although asymptotically the
+degree-2 range is `n − o(n)` (E10(c)): the leading term `4C(K,3)(¾)ⁿ` of the probability of a
+spurious sign vector is still of order `10` at `K = n = 22`.  The cubes of §4.4 are far from
+the asymptotic regime of Theorem E10, and its numbers should be read with that in mind.
 
 **Reading.**  A typical set of up to almost `n` conformers is *exactly* the set of ground
 states of an explicit pairwise energy — the storage problem of associative memories with
@@ -962,10 +1159,14 @@ Theorems E10 and E11 leave the interval `[1, 2]` for the threshold `α*` of Prob
 exact computations narrow it numerically; neither is a proof.
 
 *Faces, exactly, on small cubes* (`experiments/ensemble/capacity_threshold.py`: one linear
-programme over all `2^{n−1}` states; `capacity_cutting_plane.py`: the same decision by
-cutting planes with a full enumeration of the energies after every solve, validated against
-the first at `n = 12`).  Frequency with which `K` random conformers (distinct modulo the
-flip) form a simplicial face of the cut polytope:
+programme over all `2^{n−1}` states, driver `capacity_fine_grid.py`;
+`capacity_cutting_plane.py`: the same decision by cutting planes with a full enumeration
+of the energies after every solve; a solver failure counts as undecided — none occurred —
+and an acceptance is confirmed in double precision).  The review ER2 compared the
+cutting-plane decision instance by instance with a double-precision linear programme
+over all states on 490 instances (`n = 10, 12, 14`): no disagreement, and on every instance
+exactly one of the two certificates of Theorem E1(a) exists.  Frequency with which `K`
+random conformers (distinct modulo the flip) form a simplicial face of the cut polytope:
 
 | `n` (trials) | `K/n ≈ 0.9` | `1.0` | `1.1` | `1.2` | `1.3` | `1.4` |
 |---|---|---|---|---|---|---|
@@ -975,14 +1176,22 @@ flip) form a simplicial face of the cut polytope:
 | 16 (100) | 0.99 | 0.94 | 0.66 | 0.26 | 0.07 | 0.01 |
 | 18 (60) | 1.00 | 0.93 | 0.62 | 0.20 | 0.02 | 0.00 |
 | 20 (40) | — | 1.00 | 0.63 | 0.10 | 0.00 | 0.00 |
+| 22 (24) | — | 1.00 | 0.58 | 0.08 | 0.00 | 0.00 |
 
 (The columns are the nearest integer `K`; exact ratios are in the stored output.)  At
-`K = n` the frequency rises towards one with `n`; the point of frequency one half moves
-from about `1.05n` (`n = 10`) to `1.12n`–`1.15n` (`n = 14, …, 20`), and the transition
-sharpens (at `K ≈ 1.3n`: `0.07, 0.06, 0.06, 0.07, 0.02, 0.00`).  So faces persist beyond `n`,
-where no positive semidefinite certificate can exist, and the threshold is **not** `1`.
+`K = n` the frequency rises towards one with `n`.  The point of frequency one half is at
+about `1.05n` for `n = 10` and between `1.10n` and `1.15n` for `n = 12, …, 22`, without a trend
+(about `1.05, 1.10, 1.13, 1.15, 1.14, 1.12, 1.10`); the transition sharpens (at `K ≈ 1.3n`:
+`0.07, 0.06, 0.06, 0.07, 0.02, 0.00, 0.00`).  So at these sizes faces persist beyond `n`, where
+no certificate that is a sum of squares of linear forms vanishing on the conformers can
+exist (`n` linearly independent conformers span `ℝⁿ`, so such a sum is zero; note that on
+the cube every pair certificate is a positive semidefinite form minus a constant, so
+"positive semidefinite" alone would not be the right restriction).  The data suggest — they do not prove; this is an extrapolation from
+`n ≤ 22` — that the threshold is **not** `1`: at `K ≈ 1.1n` the frequency is flat in `n`
+(`0.66, 0.62, 0.63, 0.58` for `n = 16, 18, 20, 22`).
 
-*A necessary condition at larger sizes* (`symmetric_stability.py`): if the conformers are
+*A necessary condition at larger sizes* (`symmetric_stability.py`; driver for `n = 40, 60`:
+`symmetric_stability_large.py`): if the conformers are
 the ground states of `xᵀQx` they are strict local minima under single flips, a linear
 feasibility problem in the symmetric `Q`.  Frequency of feasibility: `n = 20`: `0.93, 0.80,
 0.17, 0` at `K/n = 1.2, 1.3, 1.5, 1.75`; `n = 30`: `1.0, 0.55, 0` at `1.3, 1.5, 1.73`; `n = 40`:
@@ -1028,7 +1237,12 @@ linear-programming duality.*)  `E_ν f ≤ t` for all `ν ∈ 𝒫` iff there is
 
 **[P]**.  For `d ≡ ∞` off the diagonal, `𝒫` is the simplex and (b) is Theorem E1(a); (a) is
 for finite envelopes only (in the simplex `δ_x` is extreme and its tight graph has no
-edge — remark of the review ER1).
+edge — remark of the review ER1).  (a) is the known criterion for the extreme points of
+the unit ball of Lipschitz functions on a finite metric space (Farmer 1994; Smarzewski
+1997 — **[K]**, known to us only through a search summary of arXiv 1905.07547, found by the
+review ER2), carried from the residual `g` to the weights `w = e^{−g}`.  By (b), *identified*
+members need not be extreme: they are the members of exposed faces on which the data are
+injective (examples: E15(d) with one unsaturated marginal; E16(b)).
 
 *Proof.*  (a) In the weights `w = μ/π` a tight edge reads `w(y) = e^{d(x,y)} w(x)`.  If the
 tight graph is connected, `w` is determined up to a factor, so `μ` is the only point of `𝒫`
@@ -1050,21 +1264,33 @@ programme in `w` (after normalising `Σ π w = 1`) and `Ψ` is its dual solution
 ### 4a.2 One-body data: a thermal union bound
 
 Let `X = Π_i A_i` (finite alphabets, not necessarily equal), `π = ⊗_i π_i` a product reference
-and `d(x, y) = Σ_i δ_i(x_i, y_i)` with every `δ_i` a metric on `A_i` (symmetric).  For `a ∈ X` let
+and `d(x, y) = Σ_i δ_i(x_i, y_i)`, where every `δ_i ≥ 0` vanishes on the diagonal and satisfies
+the triangle inequality.  **Symmetry is not assumed** (measured envelopes are one-sided).
+For `a ∈ X` let
 
-    μ*_a = ⊗_i μ*_{a,i} ,        μ*_{a,i}(s) ∝ π_i(s) e^{−δ_i(a_i, s)} ,
+    μ*_a = ⊗_i μ*_{a,i} ,        μ*_{a,i}(s) ∝ π_i(s) e^{−δ_i(s, a_i)} ,        σ_i = μ*_{a,i}(a_i) ,
 
-the Gibbs ensemble of the residual `d(a, ·)`: the member *most polarised towards `a`*.
+the Gibbs ensemble of the residual `d(·, a)`, the cost of moving *into* the centre: the
+member *most polarised towards `a`*.  The orientation matters.  The class bounds
+`w(a_i, ·) ≤ e^{δ_i(s, a_i)} w(s, ·)` for the weights `w = μ/π`; version 2 of this report wrote
+`δ_i(a_i, s)` in the exponent and assumed symmetry, under which the two coincide.  Without
+symmetry the measure with `δ_i(a_i, s)` need not be a member: for one binary site with
+`δ(0,1) = 2`, `δ(1,0) = ½`, uniform reference and `a = 0` it gives the population `0.881` to `a`,
+while the largest population of `a` in the class is `1/(1 + e^{−1/2}) = 0.622`.  (Pointed out
+independently by the science division, SCI-RES-0032 §1, and by the review ER2.)
 
 **Theorem E15 (one-body populations pin the most polarised member, dimension-free).**
-(a) `μ*_a ∈ 𝒫`, and for every `μ ∈ 𝒫` and every site `i`:  `μ(x_i = a_i) ≤ μ*_{a,i}(a_i)`.
+(a) `μ*_a ∈ 𝒫`, and for every `μ ∈ 𝒫` and every site `i`:  `μ(x_i = a_i) ≤ σ_i`.  More precisely
+(*the science division's statement*, SCI-RES-0032 §1): the tuples of one-body marginals of
+the members of `𝒫(π, d)` are exactly the tuples of members of the one-site classes
+`𝒫(π_i, δ_i)`.
 (b) For every `μ ∈ 𝒫`:
 
-    TV(μ, μ*_a)  ≤  Σ_i [ 1 − μ(x_i = a_i) / μ*_{a,i}(a_i) ] .
+    TV(μ, μ*_a)  ≤  Σ_i [ 1 − μ(x_i = a_i) / σ_i ] .
 
 (c) If all sites are binary:
 
-    TV(μ, μ*_a)  ≤  Σ_i [ μ*_{a,i}(a_i) − μ(x_i = a_i) ] ,
+    TV(μ, μ*_a)  ≤  Σ_i [ σ_i − μ(x_i = a_i) ] ,
 
 with equality for `μ = μ*_{a'}` whenever `a'` differs from `a` in exactly one site.
 (d) On the cube with uniform reference and `d = b·d_H`, `n ≥ 2`: a member is determined
@@ -1083,11 +1309,46 @@ bound `1 − μ({a}) ≤ Σ_i μ(x_i ≠ a_i)`; (c) is its finite-temperature fo
 constant one and no dependence on the number of sites, on the reference, or on the
 strengths `b_i` of the individual sites.
 
-*Proof.*  Write `w = μ/π`, `w* = μ*_a/π ∝ e^{−d(a,·)}`.
-(a) `d(a, x) − d(a, y) ≤ d(x, y)` by the triangle inequality and symmetry, so `μ*_a ∈ 𝒫`.  For
-`μ ∈ 𝒫` and a state `s` of site `i`: `w(s, x_{−i}) ≥ e^{−δ_i(a_i, s)} w(a_i, x_{−i})`, so
-`μ(x_i = s) ≥ (π_i(s)/π_i(a_i)) e^{−δ_i(a_i,s)} μ(x_i = a_i)`; sum over `s`.
-(b) Let `r = μ/μ*_a`.  The same inequality gives *star-monotonicity*:
+*What is known and what is ours* (review ER2, F11).  (c) *is* a union bound, over a monotone
+coupling of `μ` and `μ*_a` (the proof is given after Theorem E15T, which contains (c)): its
+ingredients are Harris' inequality, Strassen's theorem and the union bound, and the
+machine-checked inequality is the `L¹` Efron–Stein (Poincaré) inequality for monotone
+functions on a product space — textbook material.  We did not find the combined
+inequality stated in print, and the review did not either, but two standard steps are not
+a new theorem.  What the report contributes is the observation that every member of a
+first-order class has a density with respect to `μ*_a` that is monotone in the
+disagreement variables — the whole class lies stochastically above its most polarised
+member — and the reading.  Novelty class: **formulation**.
+
+*Sharpness, and what fails beyond binary sites.*  (b) is the general form.  Its constant
+one is not attained, but nearly: the supremum of the ratio of the two sides is `max_i σ_i`
+for binary sites (this is (c)); it is `0.72` to `0.94` on the science division's nine
+classes (alphabets of two to four letters), `0.969` for one ternary site and `0.915` for two
+(review ER2).  The form (c) is false for larger alphabets: one site with three letters,
+uniform reference, `δ = 1` off the diagonal, `a = 0`: `μ*_a = (0.5761, 0.2119, 0.2119)`, and the
+member `μ = (0.4223, 0.4223, 0.1554)` has `TV = 0.2104 > σ − μ(a) = 0.1538` (review ER2; the
+science division found excesses `+0.07` to `+0.25`).
+
+*What the bound is not* (the science division, SCI-RES-0032 §2).  For one-body data the
+exact statement is the product structure of (a): the least scale `b` for which `𝒫(π, b·d)`
+has a member with given marginals `μ_i` is the closed form
+`b_min = max_i max_{s≠t} [ln(μ_i(t)π_i(s)/(μ_i(s)π_i(t)))]₊/δ_i(s, t)`.  (b) and (c) are statements
+about the *polarised* member.  On that division's two five-residue instances with exact
+least envelopes the bound is true and not empty (it overstates the distance to the
+polarised member by a factor `1.4` to `1.5`), and as a test of the class it never fires:
+the true ensemble is far from polarised (total variation `0.43` to `0.64`), and as the class
+shrinks the polarised member moves towards it.  Our suggestion that the bound could
+certify a violation of the class (ENSEMBLE-MSG-0003, E-S3) is withdrawn.
+
+*Proof.*  Write `w = μ/π`, `w* = μ*_a/π ∝ e^{−d(·,a)}`.
+(a) `d(x, a) ≤ d(x, y) + d(y, a)`, so `w*(y) ≤ e^{d(x,y)} w*(x)`: `μ*_a ∈ 𝒫`.  For `μ ∈ 𝒫` and two
+states `s, t` of site `i`, the constraint of the pair `(s, x_{−i})`, `(t, x_{−i})` is
+`w(t, x_{−i}) ≤ e^{δ_i(s,t)} w(s, x_{−i})`; multiplied by `π_{−i}(x_{−i})` and summed over `x_{−i}` it says
+that the marginal `μ_i` satisfies the constraint of the one-site class,
+`μ_i(t)π_i(s) ≤ e^{δ_i(s,t)} μ_i(s)π_i(t)`; conversely a product of members of the one-site
+classes satisfies every pair constraint (multiply the one-site constraints).  With
+`t = a_i`: `μ(x_i = s) ≥ (π_i(s)/π_i(a_i)) e^{−δ_i(s,a_i)} μ(x_i = a_i)`; sum over `s`.
+(b) Let `r = μ/μ*_a`.  The same inequality, before summation, gives *star-monotonicity*:
 `r(s, x_{−i}) ≥ r(a_i, x_{−i})` for all `i`, `s`, `x_{−i}`.  Under `μ*_a` the sites are independent.
 With `d_i = E[r | x_1 … x_i] − E[r | x_1 … x_{i−1}]` (expectations under `μ*_a`), `r − 1 = Σ_i d_i`
 and, `x'` denoting `x` with site `i` resampled independently,
@@ -1113,65 +1374,234 @@ attained simultaneously by a product member), which `m` is not; so `f` is consta
 ensemble and a weakly correlated one).  ∎
 
 *Numerical check* **[N]** (`experiments/ensemble/finite_temperature_checks.py`).  F1: for
-`n = 3` and `b ∈ {0.5, 1, 2}` the maximum of `TV(μ, P_a) − Σ_i τ_i` over the whole class
-polytope, computed exactly by one linear programme per sign pattern, is `0` to `10⁻¹⁵`; 360
-sampled (member, centre) pairs for `n = 4, 5, 6` satisfy (c).  F2: (b) on 96 cases with
-three-letter sites, random site metrics and non-uniform product references.  F3: (d) on 60
-members for `n = 3` by the fibre linear programme.
+`n = 3`, uniform reference and `b ∈ {0.5, 1, 2}`, the maximum over the whole class polytope of
+`TV(μ, μ*_a) − Σ_i [σ_i − μ(x_i = a_i)]`, computed exactly by one linear programme per sign
+pattern, is at most `1.4·10⁻¹⁵`; 360 sampled (member, centre) pairs for `n = 4, 5, 6` satisfy
+(c), with a margin of at least `0.10` — they are far from extremal, so only the `n = 3` part
+tests sharpness.  F2: (a) and (b) on 96 sampled cases with three-letter sites and
+non-uniform product references, for symmetric and for one-sided site envelopes; in the
+one-sided cases the measure with the reversed orientation is a member in only 5 of 96.
+F3: (d) on 60 members for `n = 3` (products, and products times `1 + 0.02x_ix_j`) by the
+fibre linear programme.  *Independent checks*, which cover what ours do not: the review
+ER2 (`docs/ensemble/reviews/ER2_scripts/`: (c) exactly for `n ≤ 4` with heterogeneous slopes
+and non-uniform references; (a), (b) exactly on 30 one-sided instances; (d) on 4 065
+members including all vertices for `n = 2, 3`), and the science division with its own code
+(95 160 linear programmes on nine classes: largest excess of (b) `+3·10⁻¹⁵`, of (c)
+`+2·10⁻¹⁵`; with the constant halved, or the class doubled, the bound fails — its controls).
 
-**Theorem E15T (an interacting known part: the bound holds without frustration, and only
-then).**  Binary sites; the envelope is `d(x, y) = Σ_i b_i [x_i ≠ y_i]`; the reference `π` is
-any positive measure on the configurations; `μ*_a ∝ π e^{−d(a,·)}` is the member most
-polarised towards `a`.  Write `e_i = 1[x_i ≠ a_i]`.  Call `π` **unfrustrated at `a`** if it is
-log-supermodular in the variables `e` (`π(e ∨ e')π(e ∧ e') ≥ π(e)π(e')`).  A Gibbs measure
-`π ∝ exp(Σ_{i<j} J_ij x_i x_j + Σ_i h_i x_i)` on **any graph, with interactions of any range
-and any fields,** is unfrustrated at `a` iff `a` satisfies every bond, `J_ij a_i a_j ≥ 0`;
-many-body terms are allowed as long as the product stays log-supermodular.
-(a) If `π` is unfrustrated at `a`, then for every member `μ` of the class and every site,
-`μ(x_i = a_i) ≤ μ*_a(x_i = a_i)`, and for every ordering of the sites
+**Theorem E15T (an interacting known part: the bound holds when the centre satisfies every
+bond; a violated bond can break it).**  Binary sites; the envelope is
+`d(x, y) = Σ_i b_i [x_i ≠ y_i]`; the reference `π` is any positive measure on the configurations;
+`μ*_a ∝ π e^{−d(·,a)}` is the member most polarised towards `a`.  Write `e_i = 1[x_i ≠ a_i]` (the
+*disagreement variables*); "monotone" refers to the coordinate-wise order of `e`.
+(a) *Positive association suffices.*  If `μ*_a` is positively associated in `e` — `Cov(g, h) ≥ 0`
+under `μ*_a` for all non-decreasing `g`, `h` — then every member `μ` of the class dominates
+`μ*_a` stochastically; in particular `μ(x_i = a_i) ≤ μ*_a(x_i = a_i)` for every site; and
+
+    TV(μ, μ*_a)  ≤  Σ_i [ μ*_a(x_i = a_i) − μ(x_i = a_i) ] .
+
+(b) *An ordered bound.*  If, for an ordering of the sites, every conditional probability
+`μ*_a(x_i ≠ a_i | x_1, …, x_{i−1})` is non-decreasing in `e_{<i}` (`μ*_a` is *conditionally increasing
+in sequence*), then `μ*_a` is positively associated, and
 
     TV(μ, μ*_a)  ≤  Σ_i [ E_μ h_i(x_1, …, x_{i−1}) − μ(x_i = a_i) ]  ≤  Σ_i [ μ*_a(x_i = a_i) − μ(x_i = a_i) ] ,
 
 with `h_i(x_{<i}) = μ*_a(x_i = a_i | x_1, …, x_{i−1})`.  For a nearest-neighbour reference on a
 tree (a chain) ordered with parents first, `h_i` depends on the parent of `i` only, and the
 first bound is linear in the one-body populations.
-(b) If `a` violates a bond, both statements of (a) can fail.
+(c) *When the hypotheses hold.*  Both hold, the second for every ordering, if `π` is
+log-supermodular in `e` (`π(e ∨ e')π(e ∧ e') ≥ π(e)π(e')`); call `π` then **unfrustrated at `a`**.
+A Gibbs measure `π ∝ exp(Σ_{i<j} J_ij x_i x_j + Σ_i h_i x_i)` on **any graph, with interactions of
+any range and any fields,** is unfrustrated at `a` iff `a` satisfies every bond,
+`J_ij a_i a_j ≥ 0`; many-body terms are allowed as long as the product stays log-supermodular.
+(d) *A violated bond can break both conclusions of (a), and need not.*  Two sites,
+`π ∝ exp(−½ x_1 x_2)`, `a = (+,+)`, `b_1 = b_2 = 1`: the member `μ ∝ π e^{−e_1 + e_2}` has
+`μ(x_1 = a_1) = (1 + e²)/(3 + e²) = 0.8075 > μ*_a(x_1 = a_1) = 2/(3 + e^{−2}) = 0.6379`, and
+`TV(μ, μ*_a)` exceeds the sum of (a) by the same `0.1696`.  But for three sites with
+`π ∝ exp(x_1x_2 + x_2x_3 − ½ x_1x_3)`, `a = (+,+,+)`, `b_i = 1`, the bond `{1, 3}` is violated, `μ*_a` is
+not log-supermodular, and it is positively associated all the same: (a) applies.
 
-**[P]** for (a), given **[K]**: the FKG inequality, and the fact that marginals of
-log-supermodular measures are log-supermodular (Karlin–Rinott 1980; a consequence of the
-four-functions theorem).  (b) is **[N]**, by exact maximisation over the class polytope.
+**[P]** for (a)–(c), given **[K]**: Strassen's theorem on stochastic domination; the FKG
+inequality; and the fact that marginals of log-supermodular measures are log-supermodular
+(Karlin–Rinott 1980; a consequence of the four-functions theorem).  (d): the two-site
+example is **[P]** (the four weights are in the proof); the positive association of the
+triangle is an exact finite computation, **[N]** (check F6).  Novelty class: **formulation**
+— monotone density, association, Strassen, union bound, each of them standard (see the
+note after E15).  *Version 2 stated this theorem for unfrustrated references, with the
+title "the bound holds without frustration, and only then", and concluded that
+"frustration is a real obstruction, not an artefact of the proof".  The converse is false
+(the triangle of (d)); found by the review ER2, which also supplied the two-site example
+and the weaker hypothesis.*
 
-*Proof of (a).*  `μ*_a` is `π` times a product function of `e`, hence log-supermodular in
-`e`, and so are its marginals `ν_i` on the first `i` sites.  As in E15, `r = μ/μ*_a` is
-non-decreasing in every `e_i` — the reference cancels in the ratio.  By the FKG inequality
-`μ(e_i = 1) = E_{μ*}[r e_i] ≥ E_{μ*}[r]·μ*(e_i = 1)`: the first claim.  Let `n` be the last
-site and `q(e_{<n}) = μ*(e_n = 1 | e_{<n})`; the lattice condition applied to `(e', 0)` and
-`(e, 1)` with `e ≤ e'` says that `q` is non-decreasing.  Then
-`r̄ := E_{μ*}[r | x_{<n}] = (1 − q)·r(·, a_n) + q·r(·, ā_n)` is the ratio of the marginals of
-`μ` and `μ*_a` on the first `n − 1` sites; it is non-decreasing in every `e_j` (the two values
-of `r` increase, `q` increases, and `r(·, ā_n) ≥ r(·, a_n)`); and
+*Proof.*  As in E15, `r = μ/μ*_a` is non-decreasing in every `e_i` (the reference cancels in
+the ratio: `r(ā_i, ·)/r(a_i, ·) = e^{b_i} w(ā_i, ·)/w(a_i, ·) ≥ 1`).
+(a) For non-decreasing `g`, `E_μ g = E_{μ*}[r g] ≥ E_{μ*}[r]·E_{μ*}[g] = E_{μ*} g` by positive
+association: `μ` dominates `μ*_a` stochastically (`g = e_i` is the claim about populations).  By
+Strassen's theorem there is a coupling `(Y, X)` of `(μ*_a, μ)` with `Y ≤ X` in every
+coordinate of `e`.  Then
+
+    TV(μ, μ*_a) ≤ P(X ≠ Y) ≤ Σ_i P(Y_i = 0, X_i = 1) = Σ_i [ μ(e_i = 1) − μ*_a(e_i = 1) ] ,
+
+because `Y_i ≤ X_i`.  **The thermal union bound is a union bound over a monotone coupling**:
+for stochastically ordered measures on `{0,1}ⁿ` the total variation is at most the
+Hamming transport cost, which equals the sum of the differences of the one-site
+marginals.  For a product reference positive association is Harris' inequality, and this
+is Theorem E15(c) (only the costs of moving *into* the centre enter the argument, so the
+one-sided form is covered).
+(b) Let `ν_i` be the marginal of `μ*_a` on the first `i` sites, `n` the last site and
+`q(e_{<n}) = μ*(e_n = 1 | e_{<n})`, non-decreasing by hypothesis.  For a non-decreasing `g` put
+`ḡ = E_{μ*}[g | x_{<n}] = (1 − q)·g(·, a_n) + q·g(·, ā_n)`; it is non-decreasing (the two values of
+`g` increase, `q` increases, and `g(·, ā_n) ≥ g(·, a_n)`).  *Association:* for non-decreasing
+`g`, `h`, `E[gh | x_{<n}] ≥ ḡ h̄` (two monotone functions of one binary variable), so
+`E[gh] ≥ E_{ν_{n−1}}[ḡ h̄]`, and induction on the number of sites gives `E[gh] ≥ E[g]E[h]` (a
+classical implication, proved here because it is three lines).  *The bound:* `r̄` is the
+ratio of the marginals of `μ` and `μ*_a` on the first `n − 1` sites, it is non-decreasing, and
 
     E_{μ*}|r − r̄| = E[ 2q(1−q)(r(·, ā_n) − r(·, a_n)) ] = 2( E_{μ*}[r e_n] − E_{μ*}[q r̄] )
                   = 2( E_μ h_n(x_{<n}) − μ(x_n = a_n) ) .
 
 Since `E|r − 1| ≤ E|r − r̄| + E_{ν_{n−1}}|r̄ − 1|`, induction on the number of sites gives the
 first bound.  For the second: `h_i = 1 − q_i` is non-increasing in `e_{<i}`, and the marginal
-of `μ` on the first `i − 1` sites has a non-decreasing density with respect to the
-log-supermodular `ν_{i−1}`, so by FKG `E_μ h_i ≤ E_{μ*} h_i = μ*_a(x_i = a_i)`.  ∎
+of `μ` on the first `i − 1` sites has the non-decreasing density `r̄` with respect to the
+positively associated `ν_{i−1}`, so `E_μ h_i ≤ E_{μ*} h_i = μ*_a(x_i = a_i)`.
+(c) `μ*_a` is `π` times a product function of `e`, hence log-supermodular in `e`, hence
+positively associated (FKG); its marginals `ν_i` are log-supermodular, and the lattice
+condition applied to `(e', 0)` and `(e, 1)` with `e ≤ e'` says that `q_i` is non-decreasing.  In
+the variables `e`, `log π = Σ_{i<j} 4J_ij a_i a_j e_i e_j + (terms of degree at most one)`, which is
+supermodular iff every coefficient of a product is non-negative.
+(d) Two sites, in the order `e = (00, 01, 10, 11)`: `π ∝ (e^{−1/2}, e^{1/2}, e^{1/2}, e^{−1/2})`, so
+`μ*_a = (1, 1, 1, e^{−2})/(3 + e^{−2})`; the weights `w = e^{−e_1 + e_2}` are admissible (`e_1 − e_2`
+changes by at most one per flipped site) and give `μ = (1, e², 1, 1)/(3 + e²)`.  The set
+where `μ > μ*_a` is `{e_2 = 1}`, so `TV(μ, μ*_a) = μ(e_2 = 1) − μ*_a(e_2 = 1)`, the term of site 2
+alone; the term of site 1 is `μ*_a(e_1 = 0) − μ(e_1 = 0) = −0.1696`.  ∎
 
 So the thermal union bound is not a statement about independent sites.  It holds with
 the same constant for every known part that is ferromagnetic after the gauge
 transformation by the centre — nearest-neighbour chains (the regime of theory report
 §11.32), lattices in any dimension, mean-field and long-range couplings, attractive
-many-body terms — **and frustration is a real obstruction, not an artefact of the proof.**
+many-body terms — and beyond them whenever the polarised member is positively
+associated.  Frustration *can* break it, and then by a large amount (below); it does not
+always (two satisfied bonds `1–2–3` induce an attraction between `1` and `3` that outweighs
+a weak direct repulsion).  Positive association is not necessary either: for
+`log π = e_1e_2 + e_2e_3 − ½e_1e_3`, `b = 1`, the population bound fails (by `0.026`) and the
+total-variation bound holds (review ER2, exact computation).  **The exact condition is
+Proposition E15U below.**  Two remarks
+of the theory division (THY-MSG-0018 §3): since E15 allows arbitrary alphabets, *blocks*
+of sites can be taken as sites, and bonds inside a block may then be frustrated at no
+cost, the data being the populations of whole blocks; and no bound in terms of one-body
+populations alone can hold with a constant independent of the frustration (for two sites
+with `π ∝ exp(−J x_1x_2)` and the member of (d), as `J → ∞` the sum of (a) tends to zero while
+the total variation tends to `(e² − 1)/(2(e² + 1)) = 0.381`) — whether one holds with a
+constant `e^{O(ι)}`, `ι` that division's class-relative influence, is its question, recorded
+in O7.
 For non-binary alphabets the induction needs the conditional law of the last site, when an
 earlier site leaves its centre state, to put more mass on every non-centre state; we have
 not looked for the right hypothesis (Problem O7).  *Numerical check* **[N]** (F6): chains and
 triangles of three sites with random couplings satisfied by `a`, random fields and slopes:
 the maximum over the class polytope of `TV(μ, μ*_a) − Σ_j [μ*_a(x_j = a_j) − μ(x_j = a_j)]`,
-computed exactly, is `0` to `10⁻¹⁵` (six cases); complete graphs on four to seven sites,
-1 200 vertices and mixtures of the class polytope: `≤ 3·10⁻¹⁵`; chains of three sites with
-one violated bond: `+0.23` to `+0.47`, and there the population bound fails as well.
+computed exactly, is at most `4·10⁻¹⁵` (six cases); complete graphs on four to seven sites,
+1 200 vertices and mixtures of the class polytope: at most `2·10⁻¹⁵`; five chains of three
+sites with one violated bond: the total-variation bound fails by `0.11` to `0.57` and the
+population bound by `0.06` to `0.56`; the two-site example of (d): both exact maxima over
+the class equal the closed form `0.169599`; the triangle of (d): both maxima are zero
+(`≤ 10⁻¹⁵`), the least covariance of the indicators of two of the 20 up-sets is
+non-negative, and the lattice condition fails (defect `−7.8·10⁻³`).
+
+**Proposition E15U (the exact condition: it is enough, and necessary, to test up-sets).**
+Setting of E15T: binary sites, slopes `b_i > 0`, any positive reference, centre `a`.  Write
+`ν = μ*_a` and `N = Σ_i e_i` for the number of disagreements with the centre; an *up-set* is a
+set of configurations closed under switching further sites away from the centre.
+(A) Every member of the class dominates `μ*_a` stochastically  ⟺  `Cov_ν(1_U, 1_W) ≥ 0` for all
+up-sets `U`, `W` (positive association).
+(B) `μ(x_i = a_i) ≤ μ*_a(x_i = a_i)` for every member and every site  ⟺  `Cov_ν(1_U, e_i) ≥ 0` for
+every up-set `U` and every site `i`.
+(C) **The thermal union bound** `TV(μ, μ*_a) ≤ Σ_i [μ*_a(x_i = a_i) − μ(x_i = a_i)]` holds for every
+member  ⟺  for every up-set `U`
+
+    Var_ν(1_U)  ≤  Cov_ν(1_U, N) ,     that is,     E_ν[N | U] − E_ν[N | U^c]  ≥  1     (U ≠ ∅, X) :
+
+conditioning on an event that is increasing in the disagreements raises their expected
+number, compared with the complementary event, by at least one.
+(C′) The ordered bound of E15T(b) for a given ordering holds for every member  ⟺
+`Var_ν(1_U) ≤ Cov_ν(1_U, N − A)` for every up-set, `A = Σ_i ν(e_i = 1 | e_{<i})` the compensator of `N`.
+The conditions involve the slopes only through `μ*_a`.  (A) implies (B) and (C) (this is
+E15T(a)); (C) does not imply (B) (the example above).  With `U = {e_i = 1}`, (C) gives `n`
+necessary conditions:
+
+    (D)     Cov_ν(e_i, N − e_i)  ≥  0     for every site i
+
+— the disagreement of each site is non-negatively correlated with the number of the
+other disagreements.
+
+**[P]**, elementary; new in the sense of not found (two searches, `PRIOR_ART.md` §5a; for a
+product measure (C) is the Poincaré inequality for monotone Boolean functions).  It
+answers the question that the review ER2 left open ("I have no characterisation").
+
+*Proof.*  One principle gives all four.  (1) The density `r = μ/ν` of a member is
+non-decreasing in `e` (proof of E15T).  (2) Conversely, for every up-set `U` and
+`0 < t ≤ e^{2 min_i b_i} − 1`, the measure with density `(1 + t1_U)/(1 + tν(U))` is a member.
+Indeed its weights are `w = μ/π ∝ (1 + t1_U)e^{−Σ_i b_i e_i}`; for two configurations `x, y` let `D⁺`
+be the set of sites at which `y` disagrees with the centre and `x` does not; the constraint
+`w(y) ≤ e^{d(x,y)} w(x)` reads `(1 + t1_U(y))/(1 + t1_U(x)) ≤ e^{2Σ_{D⁺} b_i}`, and the left side is at
+most `1` if `D⁺ = ∅` (then `y ≤ x` in the order of `e`, and `U` is an up-set) and at most `1 + t`
+otherwise.  (3) Each of the four statements is an inequality `Λ(r) ≤ L(r)` for all member
+densities, with `L` linear, `Λ` sublinear, both vanishing on constants: for (C),
+`Λ(r) = ½E_ν|r − E_ν r|` and `L(r) = Cov_ν(r, N) = E_μ N − E_ν N`; for (C′), the same `Λ` and
+`L(r) = Cov_ν(r, N − A)` (the right side of the ordered bound is `Σ_i E_ν[r(e_i − q_i(e_{<i}))]`); for
+(B), `Λ = 0` and `L(r) = Cov_ν(r, e_i)`; for (A), `Λ = 0` and `L(r) = Cov_ν(r, 1_W)` for each up-set
+`W` (a monotone test function is a constant plus a positive combination of indicators of
+up-sets).  (4) A non-decreasing `r` is `c_0 + Σ_k c_k 1_{U_k}` with `c_k > 0` and `U_k` its upper
+level sets, which are up-sets; hence `Λ(r) ≤ Σ_k c_kΛ(1_{U_k})` and `L(r) = Σ_k c_k L(1_{U_k})`, and
+the inequality for indicators of up-sets implies it for every member.  Conversely, by
+(2) and homogeneity, the inequality for all members implies it for every `1_U`.  Finally
+`½E_ν|1_U − ν(U)| = ν(U)ν(U^c) = Var_ν(1_U)` and
+`Cov_ν(1_U, N) = ν(U)ν(U^c)·(E_ν[N | U] − E_ν[N | U^c])`.  ∎
+
+*Three consequences.*
+
+1. **Weak coupling: a site may have violated bonds if its bonds are satisfied on
+   balance.**  For a product measure `ν₀` with `0 < p_i = ν₀(e_i = 1) < 1`, (C) holds with strict
+   inequality for every up-set that is neither trivial nor of the form `{e_i = 1}` (**[K]**:
+   for a monotone Boolean function under a product measure
+   `Var f = Σ_{S≠∅} f̂(S)² ≤ Σ_S |S| f̂(S)² = Σ_i Cov(f, e_i)`, with equality only for functions of
+   one coordinate).  There are finitely many up-sets, so in a neighbourhood of `ν₀`
+   condition (C) is equivalent to the `n` conditions (D).  For
+   `π = π₀·exp(ε Σ_{i<j} J_ij x_i x_j)` with `π₀` a product,
+   `Cov_ν(e_i, e_j) = 4εJ_ij a_i a_j v_i v_j + O(ε²)` with `v_i = p_i(1 − p_i)`.  Hence for all
+   sufficiently small `ε > 0` (how small depends on `n`, `π₀`, the slopes and `J`): the thermal
+   union bound holds if `Σ_{j≠i} J_ij a_i a_j v_j > 0` for every site `i`, and fails if this sum
+   is negative for some site.  At weak coupling the bound tolerates frustration; what it
+   needs is that the bonds of every site are satisfied on balance, each weighted by the
+   variance of the neighbour.
+2. **(D) is not the whole condition: a three-body known part.**  On three sites let
+   `μ*_a(e) = (1 − λ(−1)^{N(e)})/8`, `0 < λ < 1`.  All pair covariances vanish, so (D) holds with
+   equality.  The slack `Cov(1_U, N) − Var(1_U)` is `(1 − 2λ)/16` for `U = {e_i = 1 or e_j = 1}`,
+   `(1 + 2λ)/16` for `{e_i = e_j = 1}`, `(5 + 6λ + λ²)/64` for `{e_i = 1 and (e_j = 1 or e_k = 1)}`,
+   `(5 − λ)(1 − λ)/64` for `{e_i = 1 or e_j = e_k = 1}` and for `{N ≥ 1}`, `(2 + λ²)/16` for `{N ≥ 2}`, and
+   positive for `{N = 3}`.  So the thermal union bound holds iff `λ ≤ ½`.
+3. **Nor for pair interactions.**  We had hoped that for known parts with pair
+   interactions and fields (D) would be the whole condition: the two agreed on all of
+   17 000 random instances on three and four sites.  An adversarial search refuted it on
+   four sites within twenty restarts (`DEAD_ENDS.md` ED23).  An instance, in the variables
+   `e`: couplings `(K_12, K_13, K_14, K_23, K_24, K_34) = (−1.4, 6, −2.6, −0.5, 3.3, 0)`, fields
+   `(0.1, 0.5, −1, 1.4)`, `μ*_a ∝ exp(Σ K_ij e_i e_j + Σ l_i e_i)` — two strongly bound pairs,
+   `{1, 3}` and `{2, 4}`, that repel each other.  Every `Cov(e_i, N − e_i)` is at least `0.0105`, and
+   for `U = {e_2 = e_4 = 1}` one has `E[N | U] − E[N | U^c] = 0.9634 < 1`; with slopes `1` the member
+   with density proportional to `1 + (e² − 1)1_U` has `TV = 0.2621` against a sum of `0.2525`.
+   The event that a bound pair is switched as a whole behaves like a site of its own.  On
+   three sites with pair interactions we found no such instance (1 650 adversarial
+   restarts) and have no proof that there is none.
+
+*Numerical check* **[N]** (F7): on 40 references on three sites with couplings of both
+signs, half of them with one slope per site, the sign of the least slack of (C) agrees
+with the exact maximum of the excess over the class polytope in 40 of 40, and (B) with
+the exact maximal population excess in 40 of 40 ((C) holds in 8 of them, (B) and
+positive association in 5); the three-body example at `λ = 11/13, ½, ⅓` (exact maxima of
+the excess `0.0477`, `0`, `0`); the four-site instance of consequence 3, including the
+membership of the violating member; the weak-coupling rule of consequence 1 at `ε = 0.02`
+on four sites with random couplings, product parts and slopes: the sign of
+`min_i Σ_j J_ij v_j` decides the condition in 228 of 228 instances (those with `|Σ_j J_ij v_j| <
+0.05` for some site were set aside; the bound holds in 57).
 
 ### 4a.3 Pair data: a bimodal ensemble that one observable identifies
 
@@ -1210,14 +1640,28 @@ orbit lies in the minimal face through `D`.  ∎
 
 *Numerical check* **[N]** (F4): the linear programme `max E[M²]` over the class polytope
 returns the value of the double cone for `n = 4, 6, 5`; on the optimal face the weights have
-spread `10⁻¹⁶` for even `n` and exactly the predicted spread `0.1102` for `n = 5`, `b = 1`.
+spread at most `10⁻¹⁵` for even `n`, and `0.110` for `n = 5`, `b = 1` (predicted: `0.1102`), where
+the script also verifies that the two end points `D_{a,±tanh(b/2)}` are optimal members.  It
+does not verify that the optimal face *is* the segment; the review ER2 did (dimension one,
+every point of the face on the segment, for `n = 3, 5, 7`).
 
 **Reading of Part IV.**  Inside a first-order class the ensembles that averaged data can
-identify are again the *exposed* ones, and at finite temperature these are the members
-whose residual is as steep as the envelope allows along a connected set of pairs: the
-polarised basin (one-body data, with a dimension-free constant), the two-basin double cone
-(one pair observable).  Bimodality as such is not an obstacle; what cannot be identified
-are members in the interior of the class.  The science division's Theorem 2 exhibits such
+identify are again those of *exposed faces*: the members of a face exposed by an
+observable in the span on which the data are injective (E13(b)).  The extreme ones among
+them are members whose residual is as steep as the envelope allows along a connected set
+of pairs: the polarised basin (one-body data, with a dimension-free constant), the
+two-basin double cone (one pair observable); identified members that are not extreme
+exist (one unsaturated marginal in E15(d); the family `D_{a,θ}` of E16(b)).  Bimodality as
+such is not an obstacle.  What cannot be identified, with fewer than `|X| − 1` independent
+observables, are members in the interior of the class.  The science division's reading
+of the same theorem for a *certified sandwich* `l ≤ w ≤ u` — a first-order class with
+reference `√(lu)` and the hub metric `d(x, y) = (D(x) + D(y))/2`, `D = ln(u/l)`; in robust
+statistics the density-ratio class (DeRobertis–Hartigan 1981, **[K]** from memory) — is the
+sharpest form of this (SCI-RES-0032 §4, theirs): the face of maximisers of `E f` puts the
+energy at the floor above a threshold of `f` and at the ceiling below it, so **the ensemble
+of a true energy strictly inside its sandwich is never identified by averaged data; data
+shrink the identified set and pin only "bang-bang" members**, with the stability bound
+`TV(μ, μ_f) ≤ (t* − E_μ f)/γ`, `γ = min_x |f(x) − t*|`.  The science division's Theorem 2 exhibits such
 members (mixtures of polarised basins over a code) and the uniform ensemble — the zero
 residual, the hardest instance of the theory division's diagram for algorithms with a hint
 — is the most interior of all.  We state this as an observation, not as a theorem relating
@@ -1239,20 +1683,28 @@ oscillation of `f`), and
 (b) Let `λ` attain the minimum for `ε = 2σ` and `c` be the midpoint of the range of
 `E(ψ − λ·Φ)` over `𝒫`.  The affine estimator `T̂ = λ·y + c` has
 `sup_{μ∈𝒫} E(T̂ − T(μ))² ≤ σ²‖λ‖² + R_𝒫(ψ − λ·Φ)²/4 ≤ ω(2σ)²/4`.
-(c) Every estimator has `sup_{μ∈𝒫} E(T̂ − T(μ))² ≥ Φ_N(−1)·ω(2σ)²/4 ≥ ω(2σ)²/25.3`
-(`Φ_N` the standard normal distribution function).
+(c) Every estimator has `sup_{μ∈𝒫} E(T̂ − T(μ))² ≥ κ·ω(2σ)²/4`, where
+`κ = E sech²(1 + Z) = 0.4496` (`Z` standard normal).
 
-So the minimax root-mean-square error lies between `0.199·ω(2σ)` and `0.5·ω(2σ)`.  **[P]**
-(elementary); **[K]** (Donoho 1994): for convex classes the best affine estimator is within
-a factor `1.25` of the minimax risk, which is determined by the modulus.
+So the minimax root-mean-square error lies between `0.335·ω(2σ)` and `0.5·ω(2σ)`.  **[P]**
+(elementary); **[K]** (Donoho 1994, known to us through P. B. Stark's lecture notes, which
+the review ER2 read; the original not read): for convex classes the minimax affine risk
+is `sup_ε (ω(ε)²/4)·σ²/(σ² + ε²/4)` and is within a factor `1.25` of the minimax risk.  With
+`ε = 2σ` the cited theory gives the lower bound `ω(2σ)²/10`, that is `0.316·ω(2σ)`; the exact
+Bayes risk of two points, used in (c), gives slightly more.  (Version 2 bounded the
+two-point risk by a test and obtained `0.199`; correct but weaker — review ER2, F13.  In
+the toy model `X = {0, 1}`, `T(μ) = μ(1)`, the upper end `0.5·ω` is approached as `σ → ∞`.)
 
 *Proof.*  (a) As in E2(a): `ω(ε) = sup_{μ₀,μ₁} inf_λ [T(μ₁) − T(μ₀) − λ·A(μ₁ − μ₀) + ε‖λ‖₂]`, and
 Sion's theorem on the convex compact `𝒫 × 𝒫`.  (b) The bias is
 `c − E_μ(ψ − λ·Φ)`, at most `R/2` in absolute value; the variance is `σ²‖λ‖²`; and
-`σ²‖λ‖² + R²/4 ≤ (σ‖λ‖ + R/2)²`.  (c) Let `μ₀, μ₁` attain `ω(2σ) =: Δ`.  The events
-`{|T̂ − T(μ_j)| < Δ/2}`, `j = 0, 1`, are disjoint, so the two error probabilities sum to at
-least one minus the total variation of the two Gaussian laws of `y`, which is
-`2Φ_N(‖A(μ₁−μ₀)‖/(2σ)) − 1 ≤ 2Φ_N(1) − 1`.  ∎
+`σ²‖λ‖² + R²/4 ≤ (σ‖λ‖ + R/2)²`.  (c) Let `μ₀, μ₁` attain `ω(2σ) =: Δ` and let
+`s = ‖A(μ₁ − μ₀)‖/(2σ) ≤ 1`.  Put the prior `½, ½` on the two ensembles.  The component of
+`y − A(μ₀ + μ₁)/2` along `A(μ₁ − μ₀)`, in units of `σ`, is a sufficient statistic `z` with the laws
+`N(±s, 1)`; the posterior probability of `μ₁` is `p(z) = 1/(1 + e^{−2sz})`, the Bayes estimator is
+`T(μ₀) + Δ·p(z)`, and its risk is `Δ²·E[p(1 − p)] = (Δ²/4)·E sech²(s(s + Z))`.  The experiment
+with `s < 1` is a garbling of the one with `s = 1` (`z' = sz + √(1 − s²)·Z'`), so this is at least
+its value at `s = 1`; and the supremum of a risk is at least its average.  ∎
 
 **Reading.**  The multiplier `λ` of the dual problem is three things at once: the
 certificate of the identified interval at tolerance `ε` (its second term is a range of
@@ -1261,8 +1713,13 @@ for the model-free class, two flows with gains for an envelope class, two tilted
 functions for a divergence ball); the weights of a linear estimator; and, by (b)–(c), a
 proof that no estimator does better than a constant factor.  The trade-off inside the
 minimum is noise amplification `‖λ‖` against the part of the target that the measured
-observables do not explain.  *Numerical check* **[N]** (F5): the duality with the `ℓ^∞` data
-norm on 200 random instances, gap `5·10⁻¹⁵`.
+observables do not explain.  *Numerical check* **[N]** (F5): the duality (a) with the `ℓ^∞`
+data norm, for the class of all ensembles, on 200 random instances: gap `1.0·10⁻¹⁴`; the
+constant `κ = 0.449600` by two quadratures, and the risk of the Bayes rule under each of
+the two hypotheses, integrated directly: `0.112400 = κ/4`.  (b) and the `ℓ²` form of (a) are
+checked in the scripts of the review ER2 only (`ER2_scripts/e17_noise.py`: 148 instances
+of the duality; the supremum of the risk of `T̂` on 12 instances, exactly and by
+simulation).
 
 ## 4c. Part VI — Lifted supports: what sum-of-squares certificates reach, and what knowing the number of conformers buys
 
@@ -1671,8 +2128,9 @@ a finite space — is the question we put to the theory and complexity divisions
    the gap `γ`, the coefficient norm, the conditioning `σ` of the features on the support,
    and the range `R`).  On continuous
    coordinates the inequality cannot hold for smooth observables; the certificate that
-   plays its role is a lower bound of a second-order quantity, with a square-root modulus
-   (Proposition E2.2), which — on the science division's reading of the theory report, to
+   plays its role is a lower bound of a second-order quantity, with a modulus that is at
+   best a square root (Proposition E2.2; Proposition E20″ is a worked instance with
+   explicit constants), which — on the science division's reading of the theory report, to
    be confirmed by the theory division — no existing kernel checks.
 2. **Identified ensembles are the frustration-free ones.**  With no prior at all, on a
    finite configuration space, what averaged data can determine is exactly the ensembles
@@ -1696,22 +2154,26 @@ a finite space — is the question we put to the theory and complexity divisions
    globally rigid graphs is a theorem of 2022.  A rigidity result of the Geometric
    Inference Division that controls the matroid of a measurement map — for torsion angles,
    for orientational restraints, for bodies and hinges — becomes an ensemble statement
-   through Corollary E6 within its hypotheses: a rational parametrisation, generic
-   conformers (no shared feature values), and a conclusion about the ensemble of feature
-   vectors only.
+   through Corollary E6 within its hypotheses: an irreducible parameter space with a
+   rational parametrisation, jointly generic conformers (in particular no shared feature
+   values, no shared torsion), and a conclusion about the ensemble of feature vectors
+   only.  The first such statement exists: that division's Theorem J (the laws of the
+   distances of sequence separations 3 and 4 determine every generic finite ensemble of
+   chains).
 
 ## 6. Verification status
 
 | item | status |
 |---|---|
-| Lean | `proofs/Ensemble/Exposedness.lean`, `RenyiHeppes.lean`, `ThermalUnionBound.lean`, `TwoStateCertificate.lean`, `PermanentCertificate.lean`: twenty-four headline theorems and seven non-vacuity witnesses listed in `proofs/AxiomAudit.lean`; standard axioms only; no warning; the programme's `scripts/audit_all.sh` passes on this branch (the status file records exactly which tree each stage was run on).  What is machine-checked is named at each theorem; everything else is a paper proof.  Of Part VI only the combinatorial cores of E20′, E20″ and E21 are machine-checked; for finite `X` the last step of E18 is `eq_of_exposing_certificate` applied to the zero set |
-| numerics | `experiments/ensemble/run_all.py` runs the six scripts whose numbers are quoted (output in `experiments/ensemble/output.txt`); the threshold computations of §4.4 and §4c.3 are separate (`capacity_threshold.py`, `capacity_cutting_plane.py`, `symmetric_stability.py`, `kbody_capacity.py`; output in `output_threshold.txt`) |
-| review | an internal adversarial review of version 1 (Parts I–III; `reviews/ER1_internal_review.md`, by a subagent of this division — an AI review, not peer review) found no false numbered statement, five major and thirteen minor defects of wording, citation and scope; all are applied and listed in §7.  The science division has accepted a review of E5, E7, E8, E1.3 and §5 (its workstream R21; SCI-RES-0028) and has already contributed Proposition E2.2.  Parts IV and V, Theorem E7′ and §4.4 (version 2) are under a second internal review, commissioned at the third checkpoint and not yet reported; Part VI (version 3) has been read by nobody but its author.  No external peer review |
-| prior art | `PRIOR_ART.md`: the searches of the first checkpoint and those of the internal review; for Parts IV and V and E7′ two searches (obligation OB10); for Part VI the two cited theorems were read in the sources (§5b), E18′, E20′ and C3 were not searched (OB16) |
+| Lean | `proofs/Ensemble/Exposedness.lean`, `RenyiHeppes.lean`, `ThermalUnionBound.lean`, `TwoStateCertificate.lean`, `PermanentCertificate.lean`: twenty-four headline theorems and eight non-vacuity witnesses listed in `proofs/AxiomAudit.lean`; standard axioms only; no warning; the programme's `scripts/audit_all.sh` passes on this branch (the status file records exactly which tree each stage was run on).  What is machine-checked is named at each theorem; everything else is a paper proof.  Of Part VI only the combinatorial cores of E20′, E20″ and E21 are machine-checked; for finite `X` the last step of E18 is `eq_of_exposing_certificate` applied to the zero set |
+| numerics | `experiments/ensemble/run_all.py` runs the six scripts whose numbers are quoted (output in `experiments/ensemble/output.txt`) and then `check_quotes.py`, which fails the run if a number quoted in a "Numerical check" passage is no longer the one in the stored output (about eighty sentences are tied to output lines; three review findings had been numbers that no script printed); the threshold computations of §4.2, §4.4 and §4c.3 are separate (`capacity_threshold.py`, `capacity_cutting_plane.py`, `symmetric_stability.py`, `kbody_capacity.py`, `degree2_vs_face.py`; output in `output_threshold.txt`) |
+| review | an internal adversarial review of version 1 (Parts I–III; `reviews/ER1_internal_review.md`, by a subagent of this division — an AI review, not peer review) found no false numbered statement, five major and thirteen minor defects of wording, citation and scope; all are applied and listed in §7.  A second internal review (`reviews/ER2_internal_review.md`, with its own scripts in `reviews/ER2_scripts/`; again an AI review) of Parts IV and V, Theorem E7′, Proposition E2.2, Remark E2.3 and §4.4 found no critical defect, four major ones — a false converse in the title and summary of E15T, numbers quoted for check F6 that the script did not print, an overstatement in E2.2, a false sentence and a factor two in E2.3 — and twelve minor ones; all are applied and listed in §7 (item 10).  The science division reviewed Part II independently (SCI-REV-0020, its workstream R21: applied, item 9), contributed Proposition E2.2 and Proposition B, and replicated Theorem E15 with its own code (SCI-RES-0032: applied, item 11).  Part VI (version 3) is under a third internal review, not yet reported.  No external peer review |
+| prior art | `PRIOR_ART.md`: the searches of the first checkpoint and those of the internal reviews ER1 and ER2 (with the level at which each source was read); two searches for E15U; for Part VI the two cited theorems were read in the sources (§5b), E18′, E20′ and C3 were not searched (OB16) |
 
 ## 7. Corrections and changes since version 1 (commit `a570520`)
 
-*(Items 1–6: version 2, commit `1a067b5`.  Item 7: version 3.)*
+*(Items 1–6: version 2, commit `1a067b5`.  Item 7: version 3, commit `32f547a`.  Item 8: commit
+`8d42f60`.  Items 9–12: the fourth checkpoint.)*
 
 1. **Theorem E11 strengthened and restated** (linked correction of ENSEMBLE-MSG-0002 §1,
    in ENSEMBLE-MSG-0003).  Version 1: "beyond `6.34n` random conformers (equal populations)
@@ -1775,6 +2237,78 @@ a finite space — is the question we put to the theory and complexity divisions
    E21 (the permanent certificate for `K` states under a Hall condition), with its zero set
    machine-checked through Mathlib's Hall theorem; the Gaussian control of E19(f) at the
    size of `n = 12`.
+9. **The science division's independent review of Part II applied** (SCI-REV-0020, its
+   workstream R21: every step of E5–E8 and E1.3 re-derived, no gap; 549 908 splices
+   examined by an exhaustive method, no chimera; four major and ten minor findings on
+   what the statements may be read as; linked correction in ENSEMBLE-RES-0004):
+   * *M1.*  Three residues of "mean squared distances determine nothing" now carry "on the
+     unconstrained configuration space".
+   * *M2.*  "Generic" is *jointly* generic throughout; its Examples D1 (no common length,
+     individually generic conformers, a twin) and D2 (a shared triangle on a globally
+     rigid graph, a twin) are in §3.3 with checks R9, R10; the sentence of §8 on
+     contractions is a question.
+   * *M3.*  A stability statement (its Proposition B), the chimera gap and the switching
+     gap, and the orders of magnitude of the gap are in §3.3; E8's certificate is stated
+     not to be sharp.
+   * *M4.*  Novelty classes lowered: E5(a) "elementary; formulation", E7 "corollary of the
+     cited theorem; the reading not found", E8 "classical per-edge certificate plus E7";
+     the headline is an implication, not an equality.
+   * *Minor.*  "No `F_e` constant" moved to E5(b); the full dichotomy E7(c); Corollary E7a
+     for connected rigidity matroids; "modulo congruence" made precise; counts (`2K − 1`
+     moments among ensembles of at most `K` conformers; its Proposition C); `j ≤ 2`
+     presupposes a generic unknown; irreducibility as a hypothesis for rational maps;
+     controls in R3 and R4(b); R6 in the text.
+   Also applied here: the Geometric Inference Division's correction of the hierarchy of
+   rigidity notions (GEOMETRY-MSG-0006) in §2.1, and the relation of Part III to chains in
+   one dimension (§4.2).  Deferred until the internal review of Part VI has reported: the
+   changes that the other divisions' answers require inside Part VI (ENSEMBLE-RES-0004 §3,
+   ENSEMBLE-RES-0005 list them; obligation OB20).
+10. **Internal review ER2 applied** (`reviews/ER2_internal_review.md`; Parts IV and V, E7′,
+   E2.2, E2.3, §4.4).  No critical defect.  Withdrawn or corrected:
+   * *F1 (major).*  **Theorem E15T claimed a converse that is false.**  Title: "the bound
+     holds without frustration, and only then"; summary: "if the centre violates a bond
+     the bound is false … Frustration is the obstruction"; text: "frustration is a real
+     obstruction, not an artefact of the proof".  A violated bond *can* break the bound
+     (now with a two-site example in closed form) and need not (a triangle with a violated
+     bond on which both bounds hold).  The theorem is restated with the hypothesis that
+     its proof needs — positive association of the polarised member; conditional
+     monotonicity for the ordered bound — and with log-supermodularity as the sufficient
+     condition.  `DEAD_ENDS.md` ED19.
+   * *F2 (major).*  The numbers quoted for check F6 (`+0.23` to `+0.47`; "`0` to `10⁻¹⁵`") were
+     not the script's, and the population excess was computed and not printed — the
+     third occurrence of this defect.  The script prints and asserts it now; the text
+     quotes the stored output.
+   * *F3, F4 (major).*  E2.2: "the modulus is a square root" is "at best a square root"
+     (`t⁴` gives exponent `¼`; `|t|^{3/2}` gives `⅔` for a non-smooth observable).  Remark E2.3:
+     its last sentence was false and a constant was off by a factor two; rewritten.
+   * *F9 and the science division.*  E15: the symmetry of the site envelopes was an
+     artefact of the notation, and the formula for the polarised member had the wrong
+     orientation for one-sided envelopes; restated with the cost into the centre.
+   * *F11.*  Novelty class of E15 and E15T lowered from "new (not found)" to
+     "formulation": the inequality is a union bound over a monotone coupling (Harris or
+     FKG, Strassen); the coupling proof is given.
+   * *F13.*  E17: the lower constant `0.199` replaced by `0.335` (exact Bayes risk of two
+     points; the cited theory gives `0.316`).
+   * *Minor.*  E7′: finiteness of the generic fibre (F5), what genericity excludes —
+     planar bodies and `d + 1` legs at a point (F6) — the statement for `m ≤ D_d` (F7), a check
+     of the uniqueness of the pose (P4, F8); E13 and the reading of Part IV: identified
+     members are those of exposed faces with injective data, not only extreme ones (F12);
+     §4.4: instance-wise validation, the row `n = 22`, "the threshold is not 1" marked as an
+     extrapolation, the half-point without a trend, drivers stored (F14); what the checks
+     F1, F3, F4 cover (F15); a non-vacuity witness for the density form of the Lean
+     theorem (F16).
+11. **Answers of other divisions applied in Part IV** (ENSEMBLE-RES-0004, -0005): the
+   science division's exact statement on one-body marginals, its closed form for the
+   least scale, its finding that the thermal bound certifies nothing as a test of the
+   class on its instances (our suggestion E-S3 withdrawn), and its reading of E13 for a
+   certified sandwich; the theory division's remarks on blocks as sites and on constants
+   that must depend on the frustration.
+12. **Added after the review:** Proposition E15U (the exact condition for the thermal
+   union bound, with its weak-coupling corollary and two examples where the single-site
+   conditions do not suffice; unreviewed); in §4.2 the Complexity division's results on
+   deciding exposedness and on the degree of certificates (COMPLEXITY-RES-0003, -0007,
+   -0008), with a table of our own (identified against certified at degree 2 on small
+   cubes); `check_quotes.py`.
 
 ## 8. Limitations
 
@@ -1792,10 +2326,13 @@ a finite space — is the question we put to the theory and complexity divisions
   identified from finitely many smooth observables.  Identification *inside* the
   first-order class is treated in Part IV for one-body data and, in one extremal case, for
   pair data; inside an exponential family with a remainder it is not treated.
-* **Genericity.**  Theorems E5–E8 are for generic tuples of conformers.  Conformers that
-  share rigid parts — the typical case in applications — have coincident edge lengths and
-  are not generic; Theorem E7′ treats two rigid bodies, and the general case is a
-  contraction of the rigidity matroid (Problem O3).
+* **Genericity.**  Theorems E5–E8 are for *jointly* generic tuples of conformers.
+  Conformers that share rigid parts — the typical case in applications — have coincident
+  edge lengths and are not generic, and for them the conclusion can fail even on
+  generically globally rigid graphs (the science division's Example D2; the Geometric
+  Inference Division's three rigid bodies in a row).  Theorem E7′ treats two rigid bodies
+  with generic legs.  No criterion is proved here for the general case; that a contraction
+  of the rigidity matroid decides is Problem O3, a question.
 * **No algorithm with a complexity guarantee.**  Certificates are exhibited; finding them
   (sign vectors in a subspace; the conformers behind `2K` moments per edge) is not
   analysed.  Verifying the gap of the certificate of Theorem E10 is a hard minimisation in
@@ -1823,13 +2360,34 @@ a finite space — is the question we put to the theory and complexity divisions
 * **O3 (conformers with common rigid parts).**  If the conformers agree on a set `J₀` of
   features and are generic otherwise, is the ensemble identified from the laws of the
   remaining features iff the contraction `𝓜/J₀` is connected?  Settled for two rigid
-  bodies (Theorem E7′: `dim SE(d) + 1` legs).  Open: several bodies (connectivity of the
-  body–bar matroid, in terms of the multigraph of bars); hinges and other joints; fibres
-  with several components when the common part is given by distances only.
-* **O4 (quantitative ensemble rigidity).**  Define the *chimera gap* of a tuple as the least
-  distance of a non-constant splice from the measurement variety.  Stability of Theorem E7
-  when the edge-length laws are known up to a transport error `τ`, in terms of the chimera
-  gap and the rigidity eigenvalues.
+  bodies with generic legs (Theorem E7′: `dim SE(d) + 1` legs).  *From the other divisions:*
+  (i) the "if" direction holds on irreducible fibres for generic values of the common
+  lengths, by our own proof run on the fibre (GEOMETRY-RES-0001 §2); (ii) for `k` rigid
+  bodies with bars on their own generic attachment points the matroid is the generic
+  body–bar matroid, the union of `d(d+1)/2` graphic matroids of the multigraph of bars
+  (Tay), with rank `min_𝒫 [D(k − |𝒫|) + e(𝒫)]`; it is disconnected whenever the multigraph of
+  bodies has a cut vertex — three bodies in a row with seven bars between consecutive ones
+  are globally rigid and an open set of ensembles of poses is not determined by the laws —
+  and with one bar more than isostatic it is connected iff every partition of the bodies
+  into at least two classes is crossed by at least `D(|𝒫| − 1) + 1` bars, which is the
+  condition for generic global rigidity of body–bar frameworks (GEOMETRY-RES-0005 §5,
+  citing Tay and Connelly–Jordán–Whiteley from memory); (iii) a rigid core with two mobile
+  groups and no measured distance between the groups is never determined (the science
+  division's Example D2) — in both (ii) and (iii) the contraction is disconnected, as the
+  conjecture requires.  Open: a proof in general; a count for the connectivity of the
+  body–bar matroid over bipartitions of the bars; hinges and other joints; fibres with
+  several components (mirror images) when the common part is given by distances only.
+* **O4 (quantitative ensemble rigidity).**  The *chimera gap* `g_∞` of a tuple is the least
+  sup-norm distance from a splice that is not a conformer's vector to the realisable
+  vectors; the *switching gap* (two conformers) is the least `τ` at which a colouring and
+  its complement are both realised within `τ`.  The science division's Proposition B
+  (§3.3) gives stability below the chimera gap and failure above the switching gap, and
+  its computations put the median chimera gap of random ensembles near
+  `(K^{|E|})^{−1/c}`, `c` the codimension of the measurement variety.  Open: a lower bound on
+  the chimera gap in terms of the conformers (the Geometric Inference Division knows no
+  such constant for globally but not universally rigid frameworks, and points to its
+  Theorem L for graphs with a lateration order — GEOMETRY-RES-0005 §6); a stability
+  statement for moments (E8), whose certificate is not sharp.
 * **O5 (fewer moments).**  Theorem E8 uses `2K` moments per edge, `2K|E|` numbers, for
   `K(dN − d(d+1)/2) + K − 1` unknowns.  How many moments per edge suffice among ensembles
   with at most `K` conformers (generic identifiability of a secant variety)?
@@ -1837,11 +2395,18 @@ a finite space — is the question we put to the theory and complexity divisions
   eigenvalues `λ_1 ≥ λ_2 ≥ …`, how many adaptively chosen pair correlations determine `C` to
   a prescribed accuracy, and what do they certify about other observables?
 * **O7 (finite temperature).**  Answered in part by E13–E16 and E15T.  Open: the thermal
-  union bound for non-binary alphabets with an interacting reference; what replaces it
-  at a frustrated centre (a constant larger than one? a different centre member?);
+  union bound for non-binary alphabets with an interacting reference; a *usable*
+  form of the exact condition of E15U (which quantifies over all up-sets: is there a
+  polynomial family of up-sets, or a condition on low-order correlations, that decides
+  it for pair-interaction known parts beyond weak coupling?  the `n` single-site conditions
+  do not); what
+  replaces it at a frustrated centre — no constant independent of the frustration works
+  (E15T, last paragraph); a constant `e^{O(ι)}` in the theory division's class-relative
+  influence `ι` is that division's question (THY-MSG-0018 §3); a different centre member?;
   which members are identified by `k`-body data for `k ≥ 2` beyond the double cone; the
-  exact constant in total variation for non-binary sites; and whether there is a theorem
-  relating "hard for evaluations" to "interior for ensemble data".
+  sharp constant of E15(b) for non-binary sites (numbers only: `0.72` to `0.97`); and
+  whether there is a theorem relating "hard for evaluations" to "interior for ensemble
+  data".
 * **C1 (conjecture; the obstruction for densities).**  Under the hypotheses of E8.1 with
   smooth `q_i`, every probability measure with a continuous positive density on `D` shares
   the laws of all `q_i` with a different one of the form `(1 + εg)μ`, `g` bounded.

@@ -21,9 +21,19 @@ R7  "No chimera" is sufficient, not necessary (internal review ER1, finding F2):
     every ensemble with the eight edge-length laws puts no mass on a chimera.
 R8  Genericity is needed in Theorem E7 already on the line (review ER1, finding F14): the 4-cycle with
     conformers (8,0,3,5) and (8,3,5,0); both complementary splices close up and form a twin ensemble.
+R9  "Generic" must be jointly generic (science division, SCI-REV-0020, Example D1): two frameworks of K_4 in
+    the plane with no edge length in common whose two-conformer ensemble has a twin; exact rational
+    arithmetic.
+R10 Conformers that share a rigid part (science division, Example D2): on the generically globally rigid
+    graph K_5 minus an edge, two conformers that share a triangle have a twin ensemble with the same law on
+    every measured edge; with the missing edge measured the laws differ.
+Controls added after the science division's review: R3 now also searches for planted realisable vectors
+(lengths of a third random framework) and reports how many the same search finds; R4(b) tests all six
+non-constant colourings of the three blocks against the two-circle criterion.
 Exit code 0 iff every check passes.
 """
 import itertools, sys
+from fractions import Fraction
 import numpy as np
 from scipy.optimize import least_squares, linprog
 
@@ -153,8 +163,15 @@ def test_R3():
                 continue
             q = L[a, range(m)]
             worst = min(worst, realise(wheel, n, d, q))
-    return worst > 1e-6 and worst > 1e6 * sanity and sanity < 1e-8, [f"    wheel W5 in R^2: smallest least-squares residual over 180 random splices "
-                                             f"= {worst:.3e} (true conformer: {sanity:.1e})"]
+    # control: planted realisable vectors (the lengths of a third random framework, starting point not given)
+    planted = found = 0
+    for _ in range(20):
+        z = rng.normal(size=(n, d)); planted += 1
+        found += realise(wheel, n, d, sqlen(z, wheel)) < 1e-9
+    return worst > 1e-6 and worst > 1e6 * sanity and sanity < 1e-8 and found >= 18, \
+        [f"    wheel W5 in R^2: smallest least-squares residual over 180 random splices "
+         f"= {worst:.3e} (true conformer: {sanity:.1e}); control: {found}/{planted} planted realisable vectors "
+         f"found by the same search (a search that misses realisable vectors is not evidence of absence)"]
 
 
 def test_R4():
@@ -172,16 +189,20 @@ def test_R4():
     n, d = 5, 2; cnt = 0; tot = 0; agree = 0
     for t in range(40):
         x1 = rng.normal(size=(n, d)); x2 = x1 + (0.05 if t < 20 else 1.0) * rng.normal(size=(n, d))
-        L = np.array([sqlen(x1, E), sqlen(x2, E)])
-        a = np.array([0] * 6 + [1, 1])                                   # K4 from x1, the pendant edges from x2
-        q = L[a, range(len(E))]
-        # exact criterion: circles of radii r0, r1 about x1[0], x1[1] meet iff |r0 - r1| <= |x1[0]-x1[1]| <= r0 + r1
-        r0, r1 = np.sqrt(q[6]), np.sqrt(q[7]); base = np.linalg.norm(x1[0] - x1[1])
-        exact = abs(r0 - r1) < base < r0 + r1
-        found = realise(E, n, d, q, first=x1) < 1e-9
-        tot += 1; cnt += found; agree += (found == exact)
-    out.append(f"    K4 + degree-2 vertex: {cnt}/{tot} splices along the separator realised "
-               f"(20 nearby pairs, 20 independent pairs); agreement with the two-circle criterion {agree}/{tot}")
+        L = np.array([sqlen(x1, E), sqlen(x2, E)]); conf = (x1, x2)
+        # the three blocks: K4 (six edges), pendant edge 4-0, pendant edge 4-1; all six non-constant colourings
+        for b, i, j in itertools.product(range(2), repeat=3):
+            if b == i == j:
+                continue
+            q = np.concatenate([L[b, :6], [L[i, 6], L[j, 7]]])
+            # exact criterion: circles of radii r0, r1 about the block's vertices 0, 1 meet
+            r0, r1 = np.sqrt(q[6]), np.sqrt(q[7]); base = np.linalg.norm(conf[b][0] - conf[b][1])
+            exact = abs(r0 - r1) < base < r0 + r1
+            found = realise(E, n, d, q, first=conf[b]) < 1e-9
+            tot += 1; cnt += found; agree += (found == exact)
+    out.append(f"    K4 + degree-2 vertex: {cnt}/{tot} splices of the three blocks realised (all six non-constant "
+               f"colourings; 20 nearby pairs, 20 independent pairs); agreement with the two-circle criterion "
+               f"{agree}/{tot}")
     ok &= agree == tot and cnt >= 20
     return ok, out
 
@@ -324,12 +345,52 @@ def test_R8():
                 f"{tuple(int(v) for v in ly)}, no shared length; complementary splices that both close up: {twins}"]
 
 
+def test_R9():
+    """Science division, SCI-REV-0020, Example D1 (exact)."""
+    F = Fraction
+    x1 = [(F(1, 2), F(2)), (F(3), F(3)), (F(-1), F(0)), (F(1), F(0))]
+    x2 = [(F(1, 2), F(3, 2)), (F(3, 2), F(-4)), (F(-2), F(0)), (F(2), F(0))]
+    refl = lambda P: [P[0], (P[1][0], -P[1][1]), P[2], P[3]]            # vertex 1 reflected in the line 2-3
+    y, yp = refl(x1), refl(x2)
+    E = edges_complete(4)
+    sq = lambda P: tuple((P[i][0] - P[j][0]) ** 2 + (P[i][1] - P[j][1]) ** 2 for i, j in E)
+    l1, l2, ly, lyp = sq(x1), sq(x2), sq(y), sq(yp)
+    no_common = all(l1[e] != l2[e] for e in range(6))
+    same_laws = all(sorted([l1[e], l2[e]]) == sorted([ly[e], lyp[e]]) for e in range(6))
+    different = sorted([l1, l2]) != sorted([ly, lyp])
+    return no_common and same_laws and different, \
+        [f"    K4, Example D1: squared lengths {tuple(str(v) for v in l1)} and {tuple(str(v) for v in l2)}: no length "
+         f"in common: {no_common}; the reflected pair has the same law on every edge: {same_laws}; and is a "
+         f"different ensemble: {different}"]
+
+
+def test_R10():
+    """Science division, Example D2: K5 minus the edge 3-4, conformers sharing the triangle 0-1-2."""
+    E = [e for e in edges_complete(5) if e != (3, 4)]
+    same = 0; differ34 = 0; trials = 200
+    for _ in range(trials):
+        T = rng.normal(size=(3, 2)); P3, P4, Q3, Q4 = (rng.normal(size=2) for _ in range(4))
+        x1 = np.vstack([T, P3, P4]); x2 = np.vstack([T, Q3, Q4])
+        y = np.vstack([T, P3, Q4]); yp = np.vstack([T, Q3, P4])
+        A = np.sort(np.array([sqlen(x1, E), sqlen(x2, E)]), axis=0)
+        B = np.sort(np.array([sqlen(y, E), sqlen(yp, E)]), axis=0)
+        same += np.allclose(A, B)
+        d34 = lambda P: np.sum((P[3] - P[4]) ** 2)
+        differ34 += not np.allclose(sorted([d34(x1), d34(x2)]), sorted([d34(y), d34(yp)]))
+    rk = np.linalg.matrix_rank(rigidity_matrix(rng.normal(size=(5, 2)), E), tol=1e-9)
+    return same == trials and differ34 == trials and rk == 7, \
+        [f"    K5 minus an edge (rigidity rank {rk} = 2*5 - 3), two conformers sharing a triangle: the exchanged pair "
+         f"has the same law on every measured edge in {same}/{trials}; the law of the unmeasured edge differs in "
+         f"{differ34}/{trials}"]
+
+
 def main():
     allok = True
     for name, fn in (("R1 rigidity matroids", test_R1), ("R2 chimeras, complete graphs", test_R2),
                      ("R3 chimeras, wheel", test_R3), ("R4 negative controls", test_R4),
                      ("R5 explicit certificate", test_R5), ("R6 toy feature maps", test_R6),
-                     ("R7 identified with chimeras", test_R7), ("R8 non-generic twin on the line", test_R8)):
+                     ("R7 identified with chimeras", test_R7), ("R8 non-generic twin on the line", test_R8),
+                     ("R9 joint genericity (Example D1)", test_R9), ("R10 a shared rigid part (Example D2)", test_R10)):
         ok, out = fn()
         print(f"{name}: {'ok' if ok else 'FAILED'}")
         for line in out:

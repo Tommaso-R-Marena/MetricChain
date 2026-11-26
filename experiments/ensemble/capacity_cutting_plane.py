@@ -9,6 +9,10 @@ of the cut polytope)?  Exact decision by a cutting-plane linear programme:
 after each solve the energy of ALL 2^{n-1} states is evaluated; the answer is "face" as soon as every
 non-conformer state lies above c by a positive margin, and "not a face" as soon as the optimum is t <= 0
 (a relaxation is already infeasible).  Both answers are certified up to floating-point tolerances.
+(The internal review ER2 compared the answers with a double-precision linear programme over all states on
+490 instances with n = 10, 12, 14: no disagreement; smallest margin of a face 1.7e-2.  After that review a
+solver failure is reported as "undecided" instead of "not a face", and an acceptance is confirmed in double
+precision; neither changes any stored result.)
 
 Usage: python3 capacity_cutting_plane.py n trials alpha [alpha ...]
 Numerical evidence only [N].
@@ -68,14 +72,21 @@ def is_face(X, Yall):
         A_ub = np.hstack([-FC, np.ones((len(ck), 1)), np.ones((len(ck), 1))])
         res = linprog(cvec, A_ub=A_ub, b_ub=np.zeros(len(ck)), A_eq=A_eq, b_eq=np.zeros(K),
                       bounds=[(-1, 1)] * D + [(None, None), (None, 10.0)], method="highs")
-        if res.status != 0 or res.x[-1] <= 1e-7:
+        if res.status != 0:
+            return None, it                                   # solver failure: undecided (never observed)
+        if res.x[-1] <= 1e-7:
             return False, it
         Q, c, t = res.x[:D], res.x[D], res.x[D + 1]
         Qm = np.zeros((n, n)); Qm[iu] = Q; Qm = Qm + Qm.T
         E = energies(Yall, Qm)
         E[pat] = np.inf
         if E.min() - c > 1e-5:
-            return True, it
+            # acceptance is confirmed in double precision on the lowest states (the scan above is float32)
+            low = np.argsort(E)[:256]
+            Y = Yall[low].astype(np.float64)
+            E64 = 0.5 * np.einsum("ij,ij->i", Y @ Qm, Y)
+            if E64.min() - c > 1e-6:
+                return True, it
         viol = np.argsort(E)[:60]
         viol = viol[E[viol] < c + t - 1e-6]
         new = set(viol.tolist()) - cons_keys

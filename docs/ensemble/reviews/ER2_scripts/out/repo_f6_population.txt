@@ -1,0 +1,8 @@
+(i)  replayed: max TV excess +2.84e-14, max population excess +1.67e-16   [stored output: +2.84e-14, +1.67e-16]
+(ii) replayed: max TV excess +2.28e-15, max population excess +4.44e-16   [stored output: +2.28e-15, +4.44e-16]
+(iii) replayed, chains of three sites with the first bond violated:
+      TV excess (printed by the script) : +0.965, +0.522, +0.024, +0.062, +0.294   [stored output: +0.965, +0.522, +0.024, +0.062, +0.294]
+      population excess (NOT printed)   : +0.560, +0.426, +0.186, +0.057, +0.173
+      J01 a0 a1 (violated), J12 a1 a2, b: (-1.41, +0.93, 1.86); (-1.03, +0.32, 1.33); (-0.74, +0.50, 1.50); (-0.98, +0.44, 0.45); (-0.45, +1.87, 1.62)
+      range of the TV excess: +0.024 to +0.965   (the report quotes '+0.23 to +0.47')
+[exit 0]

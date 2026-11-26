@@ -69,6 +69,9 @@ interpolating majorants in the transport norm.
 
 | Boneh–Shaw, "Collusion-secure fingerprinting for digital data" (CRYPTO 1995 / IEEE Trans. Inform. Theory 44 (1998)); Staddon–Stinson–Wei (2001); Fernandez–Urroz, arXiv 2103.02341 | *frameproof codes*: a code of length `ℓ` and minimum distance `d > ℓ − ℓ/c` is `c`-frameproof — the support step of E4 with `d = m − r + 1`, `c = K` | summary (the review ER1's search; the lemma is attributed to Boneh–Shaw by the third source) |
 
+| Dokmanić–Parhizkar–Walther–Lu–Vetterli (2013), echo sorting; Hays–Boland–Kasson (separately acquired distance distributions) | the no-chimera property with the genericity on the sensors; the applied problem without a uniqueness statement | named by the science division's referee (SCI-REV-0020); not opened here |
+| Gortler–Healy–Thurston (2010), Definition 1.4 and Corollary 1.15 | the genericity statement used in E7 — opened by the science division's referee (through a fetch), who confirms it is the one we use; Garamvölgyi–Gortler–Jordán Theorem 3.5 likewise, and that its published proof already splices lengths along a separator | read by the science division, not by us |
+
 **Classification.**  E4: a generalisation of Rényi–Heppes whose proof is theirs; the
 support step is, in other words, the frameproof-code lemma (found by the internal review
 ER1: a splice is a descendant of a coalition, "no chimera" is frameproof).  We have not
@@ -77,7 +80,12 @@ sharpness for `r > 2`; "generalisation of a known theorem", plus a formalisation
 theorem is for `K + 1` subspaces any two of which determine the point (Fraiman–Moreno–
 Ransford, Theorem 1.1, at the level of the review's search); version 1 misquoted it.  E5(a), E6: not found.  E5(b) is the product
 lemma of Garamvölgyi–Gortler–Jordán transferred to any polynomial map, with the local
-realisability added.  E7, E8: not found; they rest on two cited theorems.  The
+realisability added.  **After the science division's review (SCI-REV-0020, M4):** E5(a) is
+a dimension count — elementary, a formulation; E7 is a corollary of the cited theorem of
+2022 through E5/E6, and its converse is the case of one conformer; E8 is the classical
+`2K`-moment certificate edge by edge.  What was not found — by us or by that review's
+eighteen searches — is the reading: a finite mixture of frameworks identified from one
+law per edge.  The
 identification of a *mixture* of frameworks from per-edge distance laws was searched for
 directly (§6, search 7) without a hit; unlabeled PCA is the nearest neighbour and differs
 in that its variety (a determinantal variety with an unknown generic subspace) is not
@@ -97,6 +105,9 @@ chimera" claimed in version 1 is false (counterexamples by the review ER1; repor
 | Slawski–Hein–Lutsik, "Matrix factorization with binary components", NeurIPS 2013 | uniqueness of binary factors through Littlewood–Offord / Odlyzko | memory |
 | van der Veen (1997); Talwar–Viberg–Paulraj (1996) | blind separation of binary sources: identifiability iff the row space contains no other sign vectors | memory |
 | Bai–Yin (1993) | smallest singular value of a large random matrix with i.i.d. entries | memory |
+| Laurent–Poljak, "On the facial structure of the set of correlation matrices" (1996), as quoted by Tropp (2018, Fact 3.1) | a sufficient condition for a set of cut matrices to span a simplicial face of the elliptope — the `d = 1` case of the Geometric Inference Division's Theorem B, and a stronger conclusion than the face of the cut polytope of our E10 | named by the science division's referee for the geometry division (GEOMETRY-MSG-0007 §2 (b)); not opened here |
+| Tropp, "Simplicial faces of the set of correlation matrices", arXiv 1801.00749 (2018), Theorems 2.9–2.11; Laurent–Poljak (1995/1996), Theorem 4.2 | `K` random sign vectors span a simplicial face of the *elliptope* with probability at least `1 − K² e^{−n/K²}`; no simplicial face of the elliptope has more than about `√(2n)` vertices; the linear-independence condition of Laurent–Poljak.  Our E10 concerns the cut polytope, where the range is `n − o(n)` | read by the Complexity division (COMPLEXITY-RES-0008 §§1(b), 2(a)); not opened here |
+| The Complexity division's `ISING_GROUND_SETS.md` (its Propositions 5, 13, 13′, Theorem 14) | deciding "exactly the ground states of a pair energy": `2^K·poly(n)`; degree-2 certificates ⇔ no other sign vector in the span; NP-completeness of the span question | COMPLEXITY-RES-0003, -0007, -0008 read in full; the note itself not opened |
 | Sheppard (1899); Grothendieck's identity; Goemans–Williamson (1995) | `E sign g_i sign g_j = (2/π) arcsin R_ij` | memory |
 | Cover (1965); Schläfli | number of linearly separable dichotomies | memory |
 | Gardner, "The space of interactions in neural network models", J. Phys. A 21 (1988); Personnaz–Guyon–Dreyfus (1985); Kanter–Sompolinsky (1987) | capacity `α = 2` of networks with independent couplings per site; the projection (pseudo-inverse) rule, whose energy is the certificate `‖P^⊥x‖²` of E10 | memory (named by the review ER1) |
@@ -126,14 +137,40 @@ argument of the theory of associative memories.
 | Donoho, "Statistical estimation and optimal recovery", Ann. Statist. 22 (1994) 238–270 | modulus of continuity determines minimax risk of linear functionals over convex classes; affine estimators within about `1.25` | summary (abstract and a set of lecture notes) |
 | Stewart–Gough platforms (forward kinematics: up to 40 poses for six legs); Tay (1984), body–bar frameworks; Connelly–Jordán–Whiteley (2013), generic global rigidity of body–bar frameworks | single-pose facts used in E7′ | memory |
 
-**Classification.**  E13: polyhedral geometry; the flow format is the science division's.
-E15, E15T: not found as statements (a search for total-variation bounds by one-dimensional
-marginals under a monotone-likelihood or FKG hypothesis returned nothing relevant); the
-proofs are short and use only classical tools, so "new (not found)" here means a new
-*statement in this setting*, not a new technique.  E16: not found; elementary.  E17: a
-formulation of Donoho's theory with the dual written as a certificate.  E7′: not found;
-it combines E5 with classical facts on parallel platforms.  **No search has yet been made
-for E13, E16, E7′ beyond what is listed here** (obligation OB10).
+*Added by the second internal review (ER2; its list of sources, with the level at which
+each was read, is at the end of `reviews/ER2_internal_review.md`):*
+
+| source | what it has | level |
+|---|---|---|
+| Peres–Winkler, "Can extra updates delay mixing?", arXiv 1112.0603, Lemmas 2.2–2.4 | "monotone likelihood ratio ⇒ stochastic domination" and "the indicator of `{ν > π}` is increasing": the first step of E15/E15T | read by the reviewer (pp. 2–9) |
+| Strassen's theorem (monotone couplings of stochastically ordered measures); Harris' inequality; Holley's inequality | the coupling proof of E15(c) and E15T(a) | memory; confirmed in a summary of S. Roch, *Modern Discrete Probability*, ch. 4 |
+| Poincaré inequality on the cube and `Inf_i[f] = f̂(i)` for monotone `f` (O'Donnell, *Analysis of Boolean Functions*; arXiv 1205.0314) | the machine-checked inequality `E|r − Er| ≤ 2Σ_i Cov(r, e_i)` is the `L¹` form | summary |
+| Farmer (1994); Smarzewski (1997), as cited by arXiv 1905.07547; Bredies–Chirinos Rodriguez–Naldi, arXiv 2304.14039 | extreme points of the Lipschitz unit ball on a finite metric space: E13(a) | summary |
+| P. B. Stark, Statistics 210B lecture notes 6 (restating Donoho 1994, Theorems 1–2, Corollaries 1–2) | minimax affine risk `sup_ε (ω(ε)²/4)σ²/(σ² + ε²/4)`; within `1.25` of the minimax risk | read by the reviewer; Donoho's paper: abstract only |
+| Connelly–Jordán–Whiteley, "Generic global rigidity of body–bar frameworks" (2013) | generically globally rigid ⇔ redundantly rigid: for two bodies, `m ≥ D_d + 1` legs — the single-pose half of E7′(b) | summary |
+| Innocenti (1998), seven in-parallel transducers; Raghavan (1993), Wampler (1996), Dietmaier (1998), Hauenstein–Sottile's certification | seven lengths determine the pose by linear equations; at most 40 poses for six legs, all 40 can be real | summaries |
+| Barlow–Proschan (*Statistical Theory of Reliability and Life Testing*, 1975): conditionally increasing in sequence ⇒ associated | the implication used in E15T(b); proved in the report in three lines | memory |
+
+**Classification (after ER2 and SCI-RES-0032).**  E13(a): known in substance (extreme
+Lipschitz functions), carried to the weights; E13(b), (c): polyhedral geometry and LP
+duality; the flow format is the science division's.  **E15, E15T: formulation** — the
+inequality is a union bound over a monotone coupling (Harris or FKG, then Strassen), and
+the machine-checked core is the `L¹` Efron–Stein inequality for monotone functions; the
+combined inequality "total variation at most the sum of the one-site marginal gaps for
+stochastically ordered measures" was not found stated in print in our search (item 10 of
+the log) or in the reviewer's three, and the reviewer believes it standard in
+mixing-time arguments.  What is ours: the observation that a first-order class lies
+stochastically above its most polarised member, and the reading.  The exact statement
+on one-body marginals and the closed form for the least scale are the science
+division's.  E15(d), E16: not found; elementary.  E17: a formulation of Donoho's theory
+with the dual written as a certificate; the constant `0.335` is the exact Bayes risk of
+two points (elementary; surely known).  E7′: the single-pose half is known
+(Connelly–Jordán–Whiteley; Innocenti); the ensemble statement is a corollary of E5/E6,
+not found.  The sandwich `l ≤ w ≤ u` as a first-order class (hub metric) is the science
+division's observation; the class itself is the density-ratio class of DeRobertis and
+Hartigan (memory).  OB10 is closed at the level "two searches of ours, twelve sources
+consulted by the reviewer"; no source was read in the original except Peres–Winkler and
+Stark's notes.
 
 ## 5b. Part VI (third checkpoint)
 
@@ -197,6 +234,25 @@ interior); Fraiman–Moreno–Ransford (Heppes' theorem for `k + 1` subspaces). 
 by the review: the exact hypotheses of the 1967 text of Vitushkin–Henkin; Odlyzko's
 original (the PDF was unreachable); the theorem number of Garamvölgyi–Gortler–Jordán in
 the journal version.
+
+16a (by the internal review ER2, 2026-11-26; twelve sources, listed with their reading
+level at the end of `reviews/ER2_internal_review.md`): Donoho's theory through Stark's
+lecture notes; Peres–Winkler; body–bar global rigidity; Innocenti; the 40 poses of the
+Stewart–Gough platform; extreme points of Lipschitz balls; the Poincaré inequality for
+monotone Boolean functions; Strassen and Holley.  Three searches for the combined
+inequality of E15 ("total variation at most the sum of marginal gaps for ordered
+measures"): not found stated.
+
+16b (for Proposition E15U, 2026-11-26).  "variance of increasing event bounded by
+covariance with number of ones … non-product measure … positive association weaker
+condition" and "total variation distance stochastically ordered measures hypercube
+bounded by difference of expected Hamming weight necessary and sufficient condition
+monotone density up-sets" — neither returned the criterion `Var(1_U) ≤ Cov(1_U, N)` for
+non-product measures nor the equivalence with the bound on a first-order class; nearest:
+Harris/FKG for product spaces; van den Berg–Gandolfi on covariances of binary FKG
+variables; a 2026 preprint on total variation between Bernoulli products by Hamming
+slices.  For product measures the criterion is the Poincaré inequality for monotone
+Boolean functions (item 16a).  Classification of E15U: new (not found); elementary.
 
 17. "Abbe Shpilka Wigderson Reed-Muller codes random erasures … linearly independent" —
     found; abstract and introduction fetched (Theorem 1.3).

@@ -1,0 +1,23 @@
+'MetricChain.Ensemble.thermal_union_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Ensemble.thermal_union_bound_density' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Ensemble.thermal_union_bound_sharp' depends on axioms: [propext, Classical.choice, Quot.sound]
+thermal_union_bound : ∀ (ps : List ℝ),
+  (∀ p ∈ ps, 0 ≤ p ∧ p ≤ 1) →
+    ∀ (r : List Bool → ℝ),
+      (∀ (pre suf : List Bool), r (pre ++ false :: suf) ≤ r (pre ++ true :: suf)) →
+        (prodE ps fun x => |r x - prodE ps r|) ≤ 2 * deficit ps r
+thermal_union_bound_density : ∀ (ps : List ℝ),
+  (∀ p ∈ ps, 0 ≤ p ∧ p ≤ 1) →
+    ∀ (r : List Bool → ℝ),
+      (∀ (pre suf : List Bool), r (pre ++ false :: suf) ≤ r (pre ++ true :: suf)) →
+        prodE ps r = 1 →
+          (prodE ps fun x => |r x - 1|) ≤
+            2 * ∑ i ∈ Finset.range ps.length, ((prodE ps fun x => r x * siteInd i x) - ps.getD i 0)
+thermal_union_bound_sharp : ∀ (p : ℝ),
+  0 ≤ p →
+    p ≤ 1 →
+      (prodE [p] fun x => |(if x = [true] then 2 else 0) - prodE [p] fun x => if x = [true] then 2 else 0|) =
+        2 * deficit [p] fun x => if x = [true] then 2 else 0
+'er2_density_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ensemble_thermal_union_bound_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+[exit 0]

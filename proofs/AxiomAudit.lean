@@ -2064,9 +2064,32 @@ theorem ensemble_thermal_union_bound_witness :
       intro pre suf
       simp [List.count_append])
 
+/-- Non-vacuity of `Ensemble.thermal_union_bound_density` (asked for by the internal review ER2):
+the same two sites and `r = (6/5) · (number of excited sites)`, which is monotone, is not constant
+and has expectation one. -/
+theorem ensemble_thermal_union_bound_density_witness :
+    Ensemble.prodE [1/2, 1/3] (fun x => |(6/5 : ℝ) * (x.count true : ℝ) - 1|) ≤
+      2 * ∑ i ∈ Finset.range ([1/2, 1/3] : List ℝ).length,
+        (Ensemble.prodE [1/2, 1/3]
+            (fun x => (6/5 : ℝ) * (x.count true : ℝ) * Ensemble.siteInd i x)
+          - ([1/2, 1/3] : List ℝ).getD i 0) :=
+  Ensemble.thermal_union_bound_density [1/2, 1/3]
+    (by
+      intro p hp
+      simp only [List.mem_cons, List.not_mem_nil, or_false] at hp
+      rcases hp with rfl | rfl <;> norm_num)
+    (fun x => (6/5 : ℝ) * (x.count true : ℝ))
+    (by
+      intro pre suf
+      simp [List.count_append])
+    (by
+      simp [Ensemble.prodE]
+      norm_num)
+
 end MetricChain.NonVacuity
 
 #print axioms MetricChain.NonVacuity.ensemble_thermal_union_bound_witness
+#print axioms MetricChain.NonVacuity.ensemble_thermal_union_bound_density_witness
 
 /-! ### Ensemble division, third checkpoint: the zero set of the two-state certificate
 (`docs/ensemble/ENSEMBLE_REPORT.md` §4c.4, Proposition E20′) -/

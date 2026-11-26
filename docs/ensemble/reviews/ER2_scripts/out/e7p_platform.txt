@@ -1,0 +1,53 @@
+G1  matroid of the legs, generic attachment points (ranks of all subsets at a random pose)
+    d = 2, m = 1: uniform of rank min(m, 3): True; connected: True   (m = 1 is connected: U_(1,1))
+    d = 2, m = 2: uniform of rank min(m, 3): True; connected: False
+    d = 2, m = 3: uniform of rank min(m, 3): True; connected: False
+    d = 2, m = 4: uniform of rank min(m, 3): True; connected: True
+    d = 2, m = 5: uniform of rank min(m, 3): True; connected: True
+    d = 3, m = 1: uniform of rank min(m, 6): True; connected: True   (m = 1 is connected: U_(1,1))
+    d = 3, m = 2: uniform of rank min(m, 6): True; connected: False
+    d = 3, m = 5: uniform of rank min(m, 6): True; connected: False
+    d = 3, m = 6: uniform of rank min(m, 6): True; connected: False
+    d = 3, m = 7: uniform of rank min(m, 6): True; connected: True
+    d = 3, m = 8: uniform of rank min(m, 6): True; connected: True
+    -> as claimed   [0 s]
+G2  d = 2: exact number of real poses with the leg lengths of a generic pose
+    m = 3, 300 generic (attachment points, pose): number of real poses in the fibre -> count: {2: 143, 4: 140, 6: 17}; true pose not recovered: 0 (instances re-solved on a finer grid: 1)
+    m = 4: number of poses of the three-leg fibre that also match the fourth leg -> count: {1: 300}; smallest fourth-leg mismatch at another pose of the fibre: 4.278e-03
+    -> as claimed   [1 s]
+G3  d = 2, m = 4: non-constant splices of two random poses (exact: roots of legs 1-3, residual of leg 4)
+    840 splices; first three legs have no real pose in 198; otherwise the smallest |F_4 - q_4| over the real poses: min 3.920e-03, 1% 1.497e-02, 10% 1.194e-01, median 1.111e+00; below 1e-6: 0
+    -> as claimed   [3 s]
+G4  d = 2, m = 3 (= dim SE(2)): complementary splices of two poses along ({1}, {2,3})
+    200 independent random pairs of poses (random attachment points): both complementary splices realised in 107
+    explicit twin ensemble (first hit):
+      u = [[-0.8072743181539008, 1.3260097758110914], [0.8789192716106506, -0.9637183754607955], [1.2939256922197577, 0.07084537197077233]]
+      v = [[0.8006059700069893, -0.9991947798077365], [-1.056453717502159, -1.8594301218600753], [0.831426122057045, -0.3671370521989837]]
+      poses (theta, t):  g1 = [-1.273617 -0.278889 -0.177958],  g2 = [-1.345372 -0.462861  0.217065]
+                         h1 = [-1.06211   2.231389  2.773907],  h2 = [-1.609879 -0.117137 -0.046323]
+      squared leg lengths: g1 [ 6.601283 12.096645  4.149206], g2 [ 4.666223 14.715787  4.277115]; h1 [ 6.601283 14.715787  4.277115], h2 [ 4.666223 12.096645  4.149206]
+      => (1/2)(delta_g1 + delta_g2) and (1/2)(delta_h1 + delta_h2) have the same three leg-length laws
+    -> as claimed   [4 s]
+G5  d = 3
+    m = 6, 4 generic instances, 250 starts each: distinct real poses found with the six leg lengths of the pose: 4, 6, 4, 2   [11 s]
+    m = 7: smallest mismatch of the seventh leg at another pose of the six-leg fibre: 3.76e+00, 5.77e-01, 6.74e-01, 1.23e+00
+    m = 7: 36 non-constant splices of two random poses, 40 starts each: smallest least-squares residual 9.009e-03   [35 s]
+    -> as claimed   [39 s]
+G6  failures of 'generic'
+    (i) d = 2, m = 4, u_1 = u_2 = u_3: rank of legs {1,2,3} = 2, of {4} = 1, of all = 3; connected: False
+        g1 = [ 0.3  0.8 -0.4], g2 = [-0.9 -0.6  1.1]: squared lengths [3.092122 0.562898 1.040355 2.227041] and [0.100749 2.99755  3.777456 3.217239]
+        splice (legs 1-3 of g1, leg 4 of g2): 2 real poses (residual 0.0e+00); splice (legs 1-3 of g2, leg 4 of g1): 2 real poses (residual 2.8e-17)
+        h1 = [-1.543798 -0.600885 -0.662523], h2 = [-1.065024 -0.411145  1.183621]: squared lengths [3.092122 0.562898 1.040355 3.217239] and [0.100749 2.99755  3.777456 2.227041]
+        => twin ensemble with the same four leg-length laws although m = 4 = dim SE(2) + 1
+        100 random pairs of poses with these attachment points: both splices realised in 47
+    (ii) d = 2, m = 6, all u_e and all v_e in a hyperplane: mirror pose (S R S, S t): det = +1.000, different from the pose: True, largest difference of the 6 squared leg lengths: 0.0e+00; leg matroid still uniform of rank 3: True
+    (ii) d = 3, m = 9, all u_e and all v_e in a hyperplane: mirror pose (S R S, S t): det = +1.000, different from the pose: True, largest difference of the 9 squared leg lengths: 0.0e+00; leg matroid still uniform of rank 6: True
+    (iii) d = 3, m = 7, u_1 = ... = u_4: rank of legs {1..4} = 3, of {5,6,7} = 3, of all = 6; connected: False
+        10 pairs of poses at distance ~0.05: both splices along ({1..4}, {5,6,7}) realised in 6
+    -> as claimed   [46 s]
+G7  shared attachment points that do not disconnect the matroid (the theorem's genericity is sufficient, not necessary)
+    d = 2, m = 4, u_1 = u_2: matroid uniform of rank 3: True; poses with the four leg lengths of a random pose -> count {np.int64(1): 40}; smallest fourth-leg residual over 560 non-constant splices: 3.42e-03
+    d = 2, m = 4, u_1 = u_2 and v_3 = v_4: matroid uniform of rank 3: True; poses with the four leg lengths of a random pose -> count {np.int64(1): 40}; smallest fourth-leg residual over 560 non-constant splices: 2.79e-04
+    d = 3, m = 7, three pairs of legs sharing a base point: matroid uniform of rank 6: True; connected: True; 8 real poses found for legs 1-6; smallest seventh-leg mismatch at another one: 3.16e-01
+    -> as claimed   [50 s]
+[exit 0]

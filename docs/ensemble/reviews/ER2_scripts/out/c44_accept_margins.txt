@@ -1,0 +1,5 @@
+n = 12: 91 'face' answers of the script (K in [11, 12, 13, 14, 15], 40 instances each)
+   float64 gap (lowest non-conformer) - (highest conformer) at acceptance: min 5.038e-03, 5% quantile 4.314e-02, median 3.077e-01
+   spread of the conformers' energies at acceptance: max 6.04e-14
+   answers with a non-positive float64 gap: 0
+[exit 0]

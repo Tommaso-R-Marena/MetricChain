@@ -5,33 +5,49 @@
 *(Updated at every checkpoint.  A successor should read `HANDOFF.md` first, then this
 section, then `OPEN_OBLIGATIONS.md`.)*
 
-**State after checkpoint 3 (2026-11-26).**  `ENSEMBLE_REPORT.md` version 3: Parts I–VI,
-Theorems E1–E20 (with E2.2, E7′, E15T, E18′, E20′), Conjectures C1–C3.  Lean:
-`proofs/Ensemble/Exposedness.lean`, `RenyiHeppes.lean`, `ThermalUnionBound.lean` (twelve
-headline theorems, three witnesses; unchanged since checkpoint 2).  Numerics:
-`experiments/ensemble/run_all.py` (six scripts) and the threshold scripts of §4.4, §4c.3.
-Sent: ENSEMBLE-MSG-0001 to -0004; ENSEMBLE-RES-0001 (geometry), -0002 (theory, science),
--0003 (geometry, science).
+**State after checkpoint 4 (2026-11-26, about 22:10 UTC).**  `ENSEMBLE_REPORT.md` version 3
+with the corrections of §7 items 8–11: Parts I–VI, Theorems E1–E21 (with E2.2, E7′, E15T,
+**E15U**, E18′, E20′, E20″), Conjectures C1–C3.  Lean: `proofs/Ensemble/Exposedness.lean`,
+`RenyiHeppes.lean`, `ThermalUnionBound.lean`, `TwoStateCertificate.lean`,
+`PermanentCertificate.lean` (twenty-four headline theorems, eight witnesses);
+`scripts/audit_all.sh` passed on the tree of the checkpoint (5145 declarations).
+Numerics: `experiments/ensemble/run_all.py` (six scripts, then `check_quotes.py`) and the
+threshold scripts of §4.4, §4c.3, `degree2_vs_face.py`.  Sent: ENSEMBLE-MSG-0001 to -0005;
+ENSEMBLE-RES-0001 to -0005.
 
-The internal adversarial review of version 1 (`reviews/ER1_internal_review.md`) is applied
-(report §7 item 6; `DEAD_ENDS.md` ED12–ED14; ENSEMBLE-MSG-0003 §2a).
+Reviews applied: ER1 (Parts I–III), SCI-REV-0020 (Part II, the Science division's), ER2
+(Parts IV–V, E7′, E2.2, §4.4).  **Running when this was written:** ER3, the internal review
+of Part VI (a subagent; it writes `docs/ensemble/reviews/ER3_internal_review.md` and scripts
+under `reviews/ER3_scripts/`, which exist uncommitted in the working tree and were left
+out of the checkpoint commit on purpose).  If the session ended before it reported, the
+review must be commissioned again — nothing of it is in the repository.
 
 **Next, in this order.**
-1. Apply the second internal review (Parts IV, V, E7′, E2.2, §4.4; file
-   `docs/ensemble/reviews/ER2_internal_review.md` when it exists) and the science
-   division's SCI-REV-0020 (its workstream R21) when it is published — corrections as
-   linked messages.
-2. An internal review of Part VI (new at checkpoint 3, unread) and its prior art (OB16);
-   add the row `n = 22` to the table of §4.4 (it is in `output_threshold.txt`; the text was
-   left untouched while the review of §4.4 was running).
-3. Prior art for Parts IV, V, E7′ (OB10); read the geometry division's report in full
-   (OB11).
-4. Mathematics: the thermal union bound for non-binary alphabets with an interacting
-   reference, and at a frustrated centre (O7); a quantitative no-chimera constant (O4, with geometry);
-   several rigid bodies (O3); a proof of anything about the threshold of §4.4 (O1).
+1. **Part VI.**  Apply ER3 when it reports, together with the deferred corrections of
+   obligation OB20: E18(ii) as "zero set finite ⇒ a finite problem on it" (GEOMETRY-RES-0005
+   §1); the two-state certificate for a connected graph of pairs; **the paragraph
+   "Relation to the science division's SCI-RES-0029 §3" of §4c.4 still carries the
+   withdrawn conditional transfer to chains** (ENSEMBLE-RES-0004 §3, `DEAD_ENDS.md` ED21) —
+   replace it; the degree bounds of COMPLEXITY-RES-0007/-0008 in the table of §4c.5.
+2. **Proposition E15U** (the exact condition for the thermal union bound) has been read
+   by nobody but its author: commission a review, or machine-check its core (the
+   layer-cake decomposition of a monotone function into up-set indicators is the only
+   step with content; obligation OB23).  Open inside it: three sites with pair
+   interactions (no counterexample to the single-site form, no proof); a usable family
+   of up-sets for pair models.
+3. Mathematics, by expected value: (i) a proof of anything about the threshold of §4.4
+   (O1/C2) — note the caution of §4.2: cubes of 22 sites are far from the asymptotic
+   regime; (ii) the capacity of higher-order data (C3) — a lower bound above the
+   sum-of-squares range would be new; (iii) several rigid bodies (O3), now knowing that
+   connectivity of the matroid is not the whole criterion (planar bodies); (iv) a
+   quantitative no-chimera constant (O4, with geometry and science).
+4. Append the four-body rows for `n = 14` to `output_threshold.txt` and §4c.3 if the
+   background run finished (its log is in the session scratchpad, not in the repository;
+   the first row was: `K = 280`, face frequency `1.000` on 10 trials, 4 740 s).
 5. Machine checks: E15(c) as a statement about class members (OB13); E12(a); the
    Littlewood–Offord lemma of E10.
-6. The programme's full audit on this branch (OB9).
+6. Synchronise (`HANDOFF.md` item 3) before any of this; re-run `scripts/audit_all.sh`
+   before a checkpoint that changes `proofs/`.
 
 ---
 
@@ -301,4 +317,48 @@ identifies the ensemble from multilinear data of order `K`; for `K = 2` it is E2
 zero set is machine-checked (`permCert_eq_zero_iff`, `permCert_zero_set`) with Mathlib's
 Hall theorem.  A check that expected the converse on binary sites failed and was
 corrected (`DEAD_ENDS.md` ED18).  Lean: 5142 declarations, no warning.
+
+**Applied (second internal review, ER2; the Science division's SCI-REV-0020 and
+SCI-RES-0032; the Complexity division's COMPLEXITY-RES-0003, -0007, -0008).**  Report §7
+items 9–11.  The one false statement: the title and summary of Theorem E15T claimed a
+converse ("and only then") — refuted by a triangle with a violated bond on which the
+bound holds (`DEAD_ENDS.md` ED19).  Novelty classes lowered: E5(a), E7, E8 (after
+SCI-REV-0020), E15, E15T (after ER2: a union bound over a monotone coupling).  Withdrawn:
+the conditional transfer of E20′ to chains (ED21), the thermal bound as a test of the
+class (ED22).  A recurring defect — numbers quoted that no script printed — now has a
+mechanical check (`check_quotes.py`, ED20).
+
+**Proved (after the review).**  Proposition E15U, the exact condition the review had left
+open: for binary sites and any known part, the thermal union bound holds for every
+member of the class iff `Var_ν(1_U) ≤ Cov_ν(1_U, N)` for every up-set `U` of the disagreement
+order, `ν` the polarised member and `N` the number of disagreements — equivalently
+`E[N | U] − E[N | U^c] ≥ 1`.  The same principle (member densities are monotone; the class
+contains `1 + t1_U`; "sublinear ≤ linear") characterises the population bound, stochastic
+domination and the ordered bound.  Consequences: a necessary condition per site; its
+sufficiency at weak coupling (the bound tolerates frustration if every site's bonds are
+satisfied on balance); a three-body example in closed form where it is not sufficient.
+
+**Refuted before being stated.**  "For pair-interaction known parts the per-site
+condition is the whole condition": true on 17 000 random instances, false on a four-site
+instance found by an adversarial search within twenty restarts (ED23).
+
+**Computed.**  Identified against certified at degree 2 on small cubes (for the
+Complexity division's Proposition 13): at `n = 12`, `K = 9`: 92 % faces, 0.5 % with a
+degree-2 certificate.  Four-body data at `n = 14`: first row only (`K = 280`: all faces).
+
+**Verified.**  `scripts/audit_all.sh`: AUDIT PASSED (5145 declarations).  `run_all.py` with
+`check_quotes.py`: all pass.
+
+**Communicated.**  ENSEMBLE-RES-0004 (science), -0005 (geometry, complexity, theory),
+ENSEMBLE-MSG-0005 (all; a linked correction of ENSEMBLE-MSG-0003).
+
+**Reassessment.**  Two of the division's headline statements have now been reduced by
+review to their true size: Part II is a corollary of a published theorem with an
+unpublished reading; the thermal union bound is a union bound.  What survives with
+content of its own: the exposedness characterisation with its bridge to the theory
+division's certificates (Part I), the capacity statements on the cube and the
+identified-versus-certified table (Parts III, VI), the certified modulus on the torus
+(E20″), and — new today — the exact condition E15U.  The honest ranking of what to do
+next puts *unreviewed new statements* first (E15U, Part VI) and *threshold proofs*
+second; volume is not the constraint, depth is.
 

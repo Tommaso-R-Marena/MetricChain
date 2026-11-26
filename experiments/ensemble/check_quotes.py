@@ -1,0 +1,170 @@
+#!/usr/bin/env python3
+"""Do the numbers quoted in docs/ensemble/ENSEMBLE_REPORT.md still agree with the stored outputs?
+
+Three internal-review findings (ER1 F6, ER1 F18, ER2 F2) were sentences of the report that quoted numbers the
+scripts did not print.  This table ties sentences of the report to lines of the stored outputs
+(experiments/ensemble/output.txt, written by run_all.py, and output_threshold.txt):
+
+  ("lit",   file, text in the stored output, text in the report)
+        both texts must occur (white space is normalised);
+  ("bound", file, regular expression with one group, bound, text in the report)
+        the expression must match, every matched number must be at most `bound` in absolute value, and the text
+        must occur in the report.  Used for round-off-level numbers, which differ between machines.
+
+If a script changes what it prints, the first text disappears from the output and this check fails until the
+sentence of the report has been looked at again.  It does not prove that a sentence says what the number means;
+it proves that the number is the one the script printed.  The table is not exhaustive: it covers the passages
+"Numerical check" of the report as of the fourth checkpoint.
+
+Usage: python3 experiments/ensemble/check_quotes.py     (exit code 0 iff every entry holds; run_all.py runs it last)
+"""
+import pathlib, re, sys
+
+here = pathlib.Path(__file__).resolve().parent
+REPORT = here.parent.parent / "docs" / "ensemble" / "ENSEMBLE_REPORT.md"
+norm = lambda t: " ".join(t.split())
+
+O, TH = "output.txt", "output_threshold.txt"
+FLOAT = r"([-+]?[0-9.]+(?:e[-+]?[0-9]+)?)"
+TABLE = [
+    # ---- Part I (exposedness_checks.py)
+    ("lit", O, "1500/1500 agree (965 identifiable instances)", "965 of the instances are identified"),
+    ("bound", O, r"duality gap \(max over 400 instances x 4 tolerances\): " + FLOAT, 3.5e-15,
+     "primal and dual values agree to `3·10⁻¹⁵` at four tolerances"),
+    ("lit", O, "kappa finite in 301", "(301 instances)"),
+    ("bound", O, r"max relative \|omega\(1e-4\)/1e-4 - kappa\|: " + FLOAT, 4.5e-15, "`ω(10⁻⁴)/10⁻⁴ = κ` to `4·10⁻¹⁵`"),
+    ("bound", O, r"sup-min formula for kappa_mu: max relative error " + FLOAT, 7e-15, "to `7·10⁻¹⁵`, no sampled `g` exceeds it"),
+    ("bound", O, r"exact linearity and weight-independence: " + FLOAT, 5e-16, "to `5·10⁻¹⁶`"),
+    # ---- Part II (rigidity_checks.py)
+    ("lit", O, "K_4 in R^2, 2 conformers: 1240 non-constant splices", "(1 240; 2 904; 20 440; 79 998)"),
+    ("lit", O, "K_4 in R^2, 3 conformers: 2904 non-constant splices", "(1 240; 2 904; 20 440; 79 998)"),
+    ("lit", O, "K_5 in R^3, 2 conformers: 20440 non-constant splices, smallest |CM| = 1.623e-03",
+     "least `1.6·10⁻³` in absolute value"),
+    ("lit", O, "K_5 in R^3, 3 conformers: 79998 non-constant splices", "(1 240; 2 904; 20 440; 79 998)"),
+    ("lit", O, "smallest least-squares residual over 180 random splices = 6.007e-04",
+     "a residual of at least `6·10⁻⁴` on 180 random splices"),
+    ("lit", O, "control: 20/20 planted realisable vectors found", "search finds 20 of 20 planted realisable vectors"),
+    ("lit", O, "192/240 splices of the three blocks realised", "240 of 240 agreements, 192 realised"),
+    ("lit", O, "agreement with the two-circle criterion 240/240", "240 of 240 agreements, 192 realised"),
+    ("lit", O, "203 zeros found in 400 starts (100 near each conformer, 200 random); 128 at conformer 1, 75 at conformer 2, 0 elsewhere",
+     "R5: all 203 zeros of the certificate `f` found from 400 starts (100 near each conformer, 200 random)"),
+    ("lit", O, "128 at conformer 1, 75 at conformer 2", "one of the conformers (128 and 75)"),
+    ("lit", O, "smallest violation of the equations of the variety over all splices = 1.53e-03", "`1.5·10⁻³` over 200 pairs"),
+    ("lit", O, "the two conformers and three chimeras in 21/21 pairs", "two conformers and three chimeras in all 21 pairs"),
+    ("lit", O, "11.29 (all 21)", "a mixed block `11.3`"),
+    ("lit", O, "chimeras realised to 3.0e-15", "chimeras realised to `3·10⁻¹⁵`"),
+    ("lit", O, "(LP, 3 weightings) = 0.0e+00", "largest chimera mass compatible with the eight laws is zero"),
+    ("lit", O, "the exchanged pair has the same law on every measured edge in 200/200; the law of the unmeasured edge differs in 200/200",
+     "R10: Example D2 on 200 random instances"),
+    # ---- Part II, platforms (platform_checks.py)
+    ("lit", O, "d = 2, 4 legs: smallest residual over 84 non-constant splices = 1.946e-03",
+     "(264 splices, least-squares residual at least `1.9·10⁻³`"),
+    ("lit", O, "d = 2, 5 legs: smallest residual over 180 non-constant splices", "(264 splices, least-squares residual at least `1.9·10⁻³`"),
+    ("lit", O, "d = 3, 7 legs: smallest residual over 80 non-constant splices = 2.366e-03", "(80 splices, at least `2.4·10⁻³`)"),
+    ("lit", O, "d = 2, 3 legs (free matroid): splices of nearby poses realised in 20/20 cases", "realised in 20 of 20 cases"),
+    ("lit", O, "d = 3, 6 legs (free matroid): splices of nearby poses realised in 20/20 cases", "realised in 20 of 20 cases"),
+    ("lit", O, "number of real poses with the three lengths -> {2: 38, 4: 59, 6: 3}", "(38, 59 and 3 of 100 instances; never one)"),
+    ("lit", O, "a fourth leg singles out the true pose in 100/100; smallest mismatch of the fourth length at another pose of the fibre: 1.07e-03",
+     "a fourth leg singles out the true pose in 100 of 100 (smallest mismatch of the fourth length at another pose of the fibre `1.1·10⁻³`)"),
+    # ---- Part III (pair_capacity_checks.py)
+    ("lit", O, "n = 5: triples containing a fixed vertex that are faces: 105/105; 4-sets: 445/455", "(105 and 465 triples); 10 of 455"),
+    ("lit", O, "n = 6: triples containing a fixed vertex that are faces: 465/465; 4-sets: 1478/1500", "22 of 1 500 sampled four-sets"),
+    ("lit", O, "7296 coefficient vectors with >= 2 non-zero entries: largest probability 3/4", "exhaustively on 7 296"),
+    ("lit", O, "n = 30, K = 10: spurious sign vector in 119/1500 = 0.0793; 4*C(K,3)*(3/4)^n = 0.0857",
+     "`0.079` against `0.086` (`n = 30`, `K = 10`)"),
+    ("lit", O, "n = 36, K = 12: spurious sign vector in 16/600 = 0.0267; 4*C(K,3)*(3/4)^n = 0.0280",
+     "`0.027` against `0.028` (`n = 36`, `K = 12`)"),
+    ("lit", O, "n = 9: 198 random supports (K = 2..6); certificate implies fibre is a point in 198/198",
+     "198 random supports with `K = 2, …, 6`"),
+    ("lit", O, "smallest certificate gap: 0.434", "observed is `0.43`"),
+    ("lit", O, "K = 5.5 n: smallest eigenvalue of sin(pi C/2) = -0.0568", "`−0.057` at `K = 5.5n`"),
+    ("lit", O, "K = 6.34 n: smallest eigenvalue of sin(pi C/2) = +0.0119", "`+0.012` at `6.34n`"),
+    ("lit", O, "K = 7.0 n: smallest eigenvalue of sin(pi C/2) = +0.0403", "`+0.040` at `7n`"),
+    ("lit", O, "8 conformers (rank 8): 444 entries read", "(59, 117, 174, 285, 444 for 1, 2, 3, 5, 8 conformers, against 1 770 pairs)"),
+    ("lit", O, "5 conformers (rank 5): 285 entries read", "(59, 117, 174, 285, 444 for 1, 2, 3, 5, 8 conformers, against 1 770 pairs)"),
+    # ---- Part IV and V (finite_temperature_checks.py)
+    ("bound", O, r"max over the class of TV\(mu, P_a\) - sum_i tau_i = " + FLOAT + r" \(exact", 1.4e-15, "is at most `1.4·10⁻¹⁵`"),
+    ("lit", O, "360 (member, centre) pairs: max of TV - sum_i tau_i = -1.02e-01", "with a margin of at least `0.10`"),
+    ("lit", O, "one-sided site envelopes (quasi-metrics): 96 cases; mu*_a (cost into the centre) is a member in 96/96",
+     "for symmetric and for one-sided site envelopes"),
+    ("lit", O, "with the cost out of the centre the measure is a member in 5/96", "is a member in only 5 of 96"),
+    ("lit", O, "at most one unsaturated marginal: 60/60", "F3: (d) on 60 members"),
+    ("lit", O, "n = 5, b = 1.0: max E[M^2] over the class = 10.233839; double cone: 10.233839; largest spread of a weight on the optimal face = 1.10e-01",
+     "`0.110` for `n = 5`, `b = 1` (predicted: `0.1102`)"),
+    ("lit", O, "predicted spread at the all-plus state 0.110218", "`0.110` for `n = 5`, `b = 1` (predicted: `0.1102`)"),
+    ("bound", O, r"\(200 instances x 4 tolerances\): largest gap " + FLOAT, 1.05e-14, "on 200 random instances: gap `1.0·10⁻¹⁴`"),
+    ("lit", O, "kappa = E sech^2(1 + Z) = 0.449600 (Gauss-Hermite), 0.449600 (trapezoid)", "`κ = 0.449600` by two quadratures"),
+    ("lit", O, "= kappa/4 = 0.112400", "`0.112400 = κ/4`"),
+    ("lit", O, "sqrt(kappa)/2 = 0.3353", "between `0.335·ω(2σ)` and `0.5·ω(2σ)`"),
+    ("bound", O, r"every bond satisfied \(6 cases, exact\): max of TV - sum of deficits = " + FLOAT, 4.05e-15,
+     "computed exactly, is at most `4·10⁻¹⁵` (six cases)"),
+    ("bound", O, r"\(12 references, 1200 members\): max of TV - sum of deficits = " + FLOAT, 2e-15, "at most `2·10⁻¹⁵`"),
+    ("lit", O, "(5 cases, exact): max of TV - sum of deficits = +0.196, +0.573, +0.109, +0.165, +0.254; "
+               "max of mu(x_j = a_j) - mu*(x_j = a_j) = +0.555, +0.482, +0.057, +0.359, +0.328",
+     "the total-variation bound fails by `0.11` to `0.57` and the population bound by `0.06` to `0.56`"),
+    ("lit", O, "max of TV - sum of deficits = +0.169599, max population excess = +0.169599 (closed form +0.169599)",
+     "equal the closed form `0.169599`"),
+    ("lit", O, "(20 up-sets) = +0.00e+00 (positively associated), least lattice defect = -7.753e-03 (not log-supermodular)",
+     "the lattice condition fails (defect `−7.8·10⁻³`)"),
+    ("lit", O, "the up-set criterion (C) agrees with the exact maximum of TV - sum of deficits in 40/40, the criterion (B) with "
+               "the exact maximal population excess in 40/40; (C) holds in 8, (B) in 5, positive association in 5",
+     "agrees with the exact maximum of the excess over the class polytope in 40 of 40, and (B) with the exact maximal "
+     "population excess in 40 of 40 ((C) holds in 8 of them, (B) and positive association in 5)"),
+    ("lit", O, "lam = 11/13: largest pair covariance 0.0e+00; slack of (C) at U = {e_2 or e_3}: -0.043269 (formula (1 - 2 lam)/16 = "
+               "-0.043269), least slack over all up-sets -0.043269; exact max of TV - sum of deficits = +0.047731",
+     "(exact maxima of the excess `0.0477`, `0`, `0`)"),
+    ("lit", O, "least Cov(e_i, N - e_i) = +0.0105 (the conditions (D) hold); at U = {e_2 = e_4 = 1}: E[N | U] - E[N | U^c] = 0.9634 < 1",
+     "Every `Cov(e_i, N − e_i)` is at least `0.0105`, and for `U = {e_2 = e_4 = 1}` one has `E[N | U] − E[N | U^c] = 0.9634 < 1`"),
+    ("lit", O, "(in the class: True) has TV = 0.2621 > sum of deficits = 0.2525", "has `TV = 0.2621` against a sum of `0.2525`"),
+    ("lit", O, "decides the criterion (C) in 228/228 instances (the bound holds in 57 of them)",
+     "decides the condition in 228 of 228 instances"),
+    # ---- Part VI (lifted_checks.py)
+    ("lit", O, "n = 12 (66 pair observables): lift-isolated frequency K = 24: 1.000, K = 33: 1.000, K = 49: 1.000, K = 54: 0.995, K = 66: 0.955",
+     "frequency `1.000, 1.000, 1.000, 0.995, 0.955` at `K = 24, 33, 49, 54, 66`"),
+    ("lit", O, "38 lift-isolated supports with K = 12..24", "38 lift-isolated supports with 12 to 24 conformers"),
+    ("lit", O, "identification confirmed by the fibre LP in 38", "confirmed by a linear programme over all states in all 38"),
+    ("lit", O, "46 random pairs of states: smallest observed f / (c* min(d_p^2, d_q^2)) = 1.25", "is `1.25`"),
+    ("lit", O, "is between 0.147 and 0.297 of the bound", "is between `0.15` and `0.30` of the bound of (b)"),
+    ("lit", O, "the permanent vanishes at a configuration at distance 1.32 from every state", "at distance `1.32` from all of them"),
+    ("lit", O, "cube n = 6, all 41664 triples: Hall condition holds in 30720", "all 41 664 triples of states: the Hall condition holds for 30 720"),
+    ("lit", O, "fails in 10944", "it fails for 10 944"),
+    ("lit", O, "(zero set strictly larger than the triple in 960)", "strictly larger than the triple for 960"),
+    # ---- threshold computations (output_threshold.txt)
+    ("lit", TH, "K = 24 K/n = 1.09 face frequency = 0.583", "| 22 (24) | — | 1.00 | 0.58 | 0.08 | 0.00 | 0.00 |"),
+    ("lit", TH, "K = 22 K/n = 1.10 face frequency = 0.625", "| 20 (40) | — | 1.00 | 0.63 | 0.10 | 0.00 | 0.00 |"),
+    ("lit", TH, "K = 18 K/n = 1.12 face frequency = 0.660", "(`0.66, 0.62, 0.63, 0.58` for `n = 16, 18, 20, 22`)"),
+    ("lit", TH, "K = 6 K/n = 0.50 0.995 0.165 0.830 0.000", "with `K = 6` conformers `99.5 %` are faces and `16.5 %` have a certificate of degree 2"),
+    ("lit", TH, "K = 9 K/n = 0.75 0.920 0.005 0.915 0.000", "with `K = 9`, `92 %` and `0.5 %`"),
+    ("lit", TH, "K = 11 K/n = 0.92 0.815 0.000 0.815 0.000", "with `K = 11`, `81.5 %` and none"),
+    ("lit", TH, "K = 3 K/n = 0.30 1.000 0.773 0.227 0.000", "the frequency `0.773` of a degree-2 certificate"),
+    ("lit", TH, "K = 20 K/n = 1.11 face frequency = 0.617", "(`0.66, 0.62, 0.63, 0.58` for `n = 16, 18, 20, 22`)"),
+]
+
+
+def main():
+    report = norm(REPORT.read_text())
+    texts = {name: norm((here / name).read_text()) for name in (O, TH)}
+    bad = []
+    for entry in TABLE:
+        if entry[0] == "lit":
+            _, name, out_text, rep_text = entry
+            if norm(out_text) not in texts[name]:
+                bad.append(f"not in {name}: {out_text}")
+        else:
+            _, name, pattern, bound, rep_text = entry
+            found = re.findall(pattern, texts[name])
+            if not found:
+                bad.append(f"no match in {name}: {pattern}")
+            elif max(abs(float(v)) for v in found) > bound:
+                bad.append(f"bound {bound:g} exceeded in {name} ({', '.join(found)}): {pattern}")
+        if norm(rep_text) not in report:
+            bad.append(f"not in the report: {rep_text}")
+    print(f"quoted numbers: {len(TABLE)} entries, {len(bad)} failure(s)")
+    for line in bad:
+        print("    " + line)
+    print("PASS" if not bad else "FAIL")
+    return 0 if not bad else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

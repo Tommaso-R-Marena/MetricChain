@@ -3,7 +3,7 @@ T1  characterisation by certificate vs fibre LP: 1500/1500 agree (965 identifiab
 T2  duality gap (max over 400 instances x 4 tolerances): 3.22e-15; kappa finite in 301; max relative |omega(1e-4)/1e-4 - kappa|: 4.13e-15
 T3  sup-min formula for kappa_mu: max relative error 6.50e-15; exact linearity and weight-independence: 4.28e-16 (60 instances)
 PASS
-===== rigidity_checks.py (exit 0, 106 s) =====
+===== rigidity_checks.py (exit 0, 149 s) =====
 R1 rigidity matroids: ok
     K4 in R^2: rank 5, connected = True
     K5 in R^3: rank 9, connected = True
@@ -19,23 +19,27 @@ R2 chimeras, complete graphs: ok
     K_5 in R^3, 2 conformers: 20440 non-constant splices, smallest |CM| = 1.623e-03; largest |CM| at true conformers = 2.6e-12
     K_5 in R^3, 3 conformers: 79998 non-constant splices, smallest |CM| = 1.789e-02; largest |CM| at true conformers = 3.9e-12
 R3 chimeras, wheel: ok
-    wheel W5 in R^2: smallest least-squares residual over 180 random splices = 6.007e-04 (true conformer: 2.7e-15)
+    wheel W5 in R^2: smallest least-squares residual over 180 random splices = 6.007e-04 (true conformer: 2.7e-15); control: 20/20 planted realisable vectors found by the same search (a search that misses realisable vectors is not evidence of absence)
 R4 negative controls: ok
     triangle: {(3,4,5),(4,5,6)} and {(3,5,6),(4,4,5)} have equal edge-length laws: True
-    K4 + degree-2 vertex: 31/40 splices along the separator realised (20 nearby pairs, 20 independent pairs); agreement with the two-circle criterion 40/40
+    K4 + degree-2 vertex: 192/240 splices of the three blocks realised (all six non-constant colourings; 20 nearby pairs, 20 independent pairs); agreement with the two-circle criterion 240/240
 R5 explicit certificate: ok
-    certificate for K4, two conformers: 203 zeros found in 400 starts (100 near each conformer, 200 random); 63 at conformer 1, 140 at conformer 2, 0 elsewhere
+    certificate for K4, two conformers: 203 zeros found in 400 starts (100 near each conformer, 200 random); 128 at conformer 1, 75 at conformer 2, 0 elsewhere
 R6 toy feature maps: ok
-    connected toy map: smallest violation of the equations of the variety over all splices = 3.01e-04
+    connected toy map: smallest violation of the equations of the variety over all splices = 1.53e-03
     direct-sum toy map (x, x^2, y, y^3): the splice of (x1,y1), (x2,y2) along {1,2}|{3,4} is G(x1,y2) (exact)
 R7 identified with chimeras: ok
     K4 + degree-2 vertex, the review's pair and 20 perturbations: realisable splices = the two conformers and three chimeras in 21/21 pairs
-    smallest |Cayley-Menger| of a mixed K4 block = 16.13 (the pair), 10.04 (all 21); smallest margin of the two-circle criterion = 0.46; chimeras realised to 3.6e-15
+    smallest |Cayley-Menger| of a mixed K4 block = 16.13 (the pair), 11.29 (all 21); smallest margin of the two-circle criterion = 0.48; chimeras realised to 3.0e-15
     largest chimera mass compatible with the eight edge-length laws (LP, 3 weightings) = 0.0e+00: identified although chimeras exist
 R8 non-generic twin on the line: ok
     4-cycle on the line, x = (8,0,3,5), x' = (8,3,5,0): lengths (8, 3, 2, 3) and (5, 2, 5, 8), no shared length; complementary splices that both close up: [((8, 2, 2, 8), (5, 3, 5, 3))]
+R9 joint genericity (Example D1): ok
+    K4, Example D1: squared lengths ('29/4', '25/4', '17/4', '25', '13', '4') and ('125/4', '17/2', '9/2', '113/4', '65/4', '16'): no length in common: True; the reflected pair has the same law on every edge: True; and is a different ensemble: True
+R10 a shared rigid part (Example D2): ok
+    K5 minus an edge (rigidity rank 7 = 2*5 - 3), two conformers sharing a triangle: the exchanged pair has the same law on every measured edge in 200/200; the law of the unmeasured edge differs in 200/200
 PASS
-===== pair_capacity_checks.py (exit 0, 22 s) =====
+===== pair_capacity_checks.py (exit 0, 18 s) =====
 C1 Littlewood-Offord lemma: ok
     7296 coefficient vectors with >= 2 non-zero entries: largest probability 3/4 at c = ('-1', '-1', '-1')
 C2 sign vectors in random spans: ok
@@ -65,14 +69,15 @@ C6 adaptivity: ok
     n = 60, 8 conformers (rank 8): 444 entries read (r n - r(r+1)/2 = 444; all pairs: 1770); reconstruction error 4.4e-16
     two two-conformer ensembles: their pair-correlation matrices differ exactly at [(0, 1)]
 PASS
-===== finite_temperature_checks.py (exit 0, 16 s) =====
+===== finite_temperature_checks.py (exit 0, 36 s) =====
 F1 one-body data, cube (Theorem E15): ok
     n = 3, b = 0.5: max over the class of TV(mu, P_a) - sum_i tau_i = +6.66e-16 (exact, 256 LPs)
     n = 3, b = 1.0: max over the class of TV(mu, P_a) - sum_i tau_i = +4.44e-16 (exact, 256 LPs)
     n = 3, b = 2.0: max over the class of TV(mu, P_a) - sum_i tau_i = +1.33e-15 (exact, 256 LPs)
     n = 4..6: 360 (member, centre) pairs: max of TV - sum_i tau_i = -1.02e-01; largest ratio TV/sum tau = 0.8572
 F2 general alphabets (Theorem E15): ok
-    three-letter heterogeneous sites: 96 cases, max of TV - sum_i (1 - mu_i(a_i)/mu*_i(a_i)) = -1.60e-02
+    three-letter heterogeneous sites, symmetric site envelopes (metrics): 96 cases; mu*_a (cost into the centre) is a member in 96/96; max of mu_i(a_i) - mu*_i(a_i) = +0.00e+00; max of TV - sum_i (1 - mu_i(a_i)/mu*_i(a_i)) = -1.60e-02; with the cost out of the centre the measure is a member in 96/96
+    three-letter heterogeneous sites, one-sided site envelopes (quasi-metrics): 96 cases; mu*_a (cost into the centre) is a member in 96/96; max of mu_i(a_i) - mu*_i(a_i) = -1.05e-02; max of TV - sum_i (1 - mu_i(a_i)/mu*_i(a_i)) = -5.76e-02; with the cost out of the centre the measure is a member in 5/96
 F3 members identified by one-body data: ok
     n = 3, b = 1: identified by one-body data inside the class <=> at most one unsaturated marginal: 60/60
 F4 the double cone (Theorem E16): ok
@@ -81,13 +86,23 @@ F4 the double cone (Theorem E16): ok
     n = 5, b = 1.0: max E[M^2] over the class = 10.233839; double cone: 10.233839; largest spread of a weight on the optimal face = 1.10e-01
         odd n: end points D_(+-theta), theta = tanh(b/2), are members and optimal; predicted spread at the all-plus state 0.110218
 F5 modulus duality (Theorem E17): ok
-    modulus duality (200 instances x 4 tolerances): largest gap 4.88e-15
+    modulus duality, l^infinity data norm, class of all ensembles (200 instances x 4 tolerances): largest gap 1.02e-14
+    constant of E17(c): kappa = E sech^2(1 + Z) = 0.449600 (Gauss-Hermite), 0.449600 (trapezoid); risk of the Bayes rule under the two hypotheses = 0.112400, 0.112400 = kappa/4 = 0.112400; sqrt(kappa)/2 = 0.3353; the testing bound of version 2: Phi_N(-1) = 0.1587, sqrt(Phi_N(-1))/2 = 0.1992
 F6 an interacting reference (Theorem E15T): ok
-    three sites, chains and triangles, every bond satisfied (6 cases, exact): max of TV - sum of deficits = +2.84e-14; max of mu(x_j = a_j) - mu*(x_j = a_j) = +1.67e-16
-    complete graphs on 4..7 sites, every bond satisfied (12 references, 1200 members): max of TV - sum of deficits = +2.28e-15; max of mu(x_j = a_j) - mu*(x_j = a_j) = +4.44e-16
-    chains of three sites with one bond violated by the centre (5 cases, exact): max of TV - sum of deficits = +0.965, +0.522, +0.024, +0.062, +0.294
+    three sites, chains and triangles, every bond satisfied (6 cases, exact): max of TV - sum of deficits = +4.00e-15; max of mu(x_j = a_j) - mu*(x_j = a_j) = +2.22e-16
+    complete graphs on 4..7 sites, every bond satisfied (12 references, 1200 members): max of TV - sum of deficits = +1.68e-15; max of mu(x_j = a_j) - mu*(x_j = a_j) = +3.33e-16
+    chains of three sites with one bond violated by the centre (5 cases, exact): max of TV - sum of deficits = +0.196, +0.573, +0.109, +0.165, +0.254; max of mu(x_j = a_j) - mu*(x_j = a_j) = +0.555, +0.482, +0.057, +0.359, +0.328
+    two sites, pi ~ exp(-x1 x2/2), centre (+,+), b = 1: max of TV - sum of deficits = +0.169599, max population excess = +0.169599 (closed form +0.169599)
+    triangle pi ~ exp(x1 x2 + x2 x3 - x1 x3/2), centre (+,+,+), b = 1 (bond 1-3 violated): max of TV - sum of deficits = +8.88e-16, max population excess = +0.00e+00: both bounds hold
+    hypothesis of E15T(a): the triangle's mu*_a: least covariance of two up-set indicators (20 up-sets) = +0.00e+00 (positively associated), least lattice defect = -7.753e-03 (not log-supermodular); the two-site example: least covariance (6 up-sets) = -0.0880 (not positively associated)
+F7 exact criteria on up-sets (Proposition E15U): ok
+    three sites, 40 references with couplings of both signs (half with one slope per site): the up-set criterion (C) agrees with the exact maximum of TV - sum of deficits in 40/40, the criterion (B) with the exact maximal population excess in 40/40; (C) holds in 8, (B) in 5, positive association in 5
+    pure three-body known part on three sites, mu*_a = (1 - lam (-1)^N)/8, slope 1: lam = 11/13: largest pair covariance 0.0e+00; slack of (C) at U = {e_2 or e_3}: -0.043269 (formula (1 - 2 lam)/16 = -0.043269), least slack over all up-sets -0.043269; exact max of TV - sum of deficits = +0.047731; lam = 1/2: largest pair covariance 0.0e+00; slack of (C) at U = {e_2 or e_3}: +0.000000 (formula (1 - 2 lam)/16 = +0.000000), least slack over all up-sets +0.000000; exact max of TV - sum of deficits = +0.000000; lam = 1/3: largest pair covariance 0.0e+00; slack of (C) at U = {e_2 or e_3}: +0.020833 (formula (1 - 2 lam)/16 = +0.020833), least slack over all up-sets -0.000000; exact max of TV - sum of deficits = +0.000000
+    pair-interaction known part on four sites, K = (K12, K13, K14, K23, K24, K34) = (-1.4, 6, -2.6, -0.5, 3.3, 0), fields (0.1, 0.5, -1, 1.4) in e: least Cov(e_i, N - e_i) = +0.0105 (the conditions (D) hold); at U = {e_2 = e_4 = 1}: E[N | U] - E[N | U^c] = 0.9634 < 1, slack of (C) = -0.0080; the member with density ~ 1 + (e^2 - 1) 1_U (in the class: True) has TV = 0.2621 > sum of deficits = 0.2525
+    how often (D) fails to decide (C) for random pair-interaction known parts (couplings of both signs): n = 3 (18 up-sets), 2000 random pair models: (C) and (D) differ in 0; (C) holds in 447, of which positively associated 285; n = 4 (166 up-sets), 1000 random pair models: (C) and (D) differ in 0; (C) holds in 103, of which positively associated 34 — rare, and not never (the instance above)
+    weak coupling, four sites, eps = 0.02: the sign of min_i sum_j J_ij v_j decides the criterion (C) in 228/228 instances (the bound holds in 57 of them)
 PASS
-===== platform_checks.py (exit 0, 97 s) =====
+===== platform_checks.py (exit 0, 151 s) =====
 P1 matroid of the legs: ok
     d = 2, 3 legs: rank 3, connected = False
     d = 2, 4 legs: rank 3, connected = True
@@ -102,8 +117,12 @@ P2 planar platform: ok
 P3 spatial platform: ok
     d = 3, 7 legs: smallest residual over 80 non-constant splices = 2.366e-03 (true pose: 5.5e-15)
     d = 3, 6 legs (free matroid): splices of nearby poses realised in 20/20 cases
+P4 pose uniqueness, and planar bodies: ok
+    d = 2, three generic legs, 100 instances: number of real poses with the three lengths -> {2: 38, 4: 59, 6: 3} (always even, never one)
+    a fourth leg singles out the true pose in 100/100; smallest mismatch of the fourth length at another pose of the fibre: 1.07e-03
+    collinear attachment points on both bodies, six legs, 20 poses: the mirror pose has the same six leg lengths (largest difference 0.0e+00) — no number of legs determines the pose
 PASS
-===== lifted_checks.py (exit 0, 171 s) =====
+===== lifted_checks.py (exit 0, 186 s) =====
 L1 lift isolation on the cube: ok
     n = 10 (45 pair observables): lift-isolated frequency K = 20: 1.000, K = 22: 1.000, K = 33: 0.925, K = 35: 0.950, K = 45: 0.520
     n = 12 (66 pair observables): lift-isolated frequency K = 24: 1.000, K = 33: 1.000, K = 49: 1.000, K = 54: 0.995, K = 66: 0.955
@@ -126,5 +145,8 @@ L7 the permanent certificate: ok
     torus, K = 3, 4 states differing pairwise in every angle (15 random cases, r = K..5): zeros of the permanent that are not states: 0
     three states coinciding in two of four angles (Hall condition fails): the permanent vanishes at a configuration at distance 1.32 from every state (value 0.0e+00)
     cube n = 6, all 41664 triples: Hall condition holds in 30720, zero set of the permanent energy = the triple in all of them: True; fails in 10944, the predicted sub-cube is in the zero set in all of them: True (zero set strictly larger than the triple in 960)
+PASS
+===== check_quotes.py (exit 0) =====
+quoted numbers: 79 entries, 0 failure(s)
 PASS
 ALL PASS
