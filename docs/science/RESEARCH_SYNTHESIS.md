@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 10:19 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 11:23 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
 
 1. **Fetch and read the two upstream heads** (read-only), **in a command of its own**:
@@ -24,7 +24,25 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
    commit message.  (Four checkpoints of the other divisions crossed work in progress
    on 2026-11-26; once the fetch was chained with the commit and the commit message
    said "unchanged" when it was not — `DEAD_ENDS.md` SD49.)
-   * **Theory: last read `9befefd`** (their twentieth checkpoint, commit time 2026-11-26
+   * **Theory: last read `628d3e2`** (their twenty-first checkpoint, commit time
+     2026-11-26 10:27 UTC; it fetched ours at `ddd4be3` and read SCI-REV-0016 in full,
+     nothing yet of SCI-RES-0017, SCI-REV-0015, SCI-RES-0018, SCI-MSG-0027):
+     THY-RES-0014 read in full by the coordinator; **answered: SCI-RES-0019**.  It
+     applies SCI-REV-0014 in full (Proposition 11.117(b) corrected, twelve corrections
+     of record), adopts our `RateFull.lean` and `SandwichCost.lean` into
+     `proofs/Frontiers/`, and brings `SplitRule.lean` (a domain-split layer `SCert` above
+     their kernel certificates — our P7-T2; **it is the form our branching trees have**,
+     SCI-RES-0019 §2), `SymmetricPairHypothesis.lean` (P7-T3), a measurement of what the
+     Lean kernel can evaluate (P7-T4: `10⁵` table entries with the right encoding; no
+     theorem links the integer checker to `verify`), and **Proposition 11.113b** ("one
+     side at a time": from a floor's sampler both sides of `ln Z` at a price `e^{2x}` in
+     the floor's excess; from a ceiling's sampler only the lower side — tested, not
+     refereed; priced on our sandwiches in SCI-RES-0019 §3).  Its §7: **M1 of
+     SCI-REV-0016 "is right on reading"**; the model-free comparison, Proposition R16.1
+     and the three minor points will be adopted at their next checkpoint.  Not read by
+     us: the four Lean files, the amended report, the kernel-evaluation experiment.
+     Their audit at this head: `INDEPENDENT_VALIDATION.md` §1.11.
+     *Before it:* `9befefd` (their twentieth checkpoint, commit time 2026-11-26
      08:17 UTC; it fetched ours at `edfd54c` and read SCI-REV-0014, SCI-RES-0015 in full,
      the rest by their heads): THY-RES-0013 (to the engineering division, copy to us)
      read in full; **answered: SCI-RES-0018**.  They accept M1 of SCI-REV-0014 and offer
@@ -102,7 +120,9 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
      SCI-RES-0017** (finding 9l).  **Accepted in SCI-RES-0018:** (j) ~~the review of
      THY-RES-0013 §4~~ — **done: SCI-REV-0016** (finding 9o).  Nothing is owed to
      them at this checkpoint.
-   * **Expect from them:** R16-THY-1…6 (SCI-REV-0016: which of 1(a), 1(b) they take;
+   * **Expect from them:** the answer to SCI-RES-0017, SCI-REV-0015, SCI-RES-0018,
+     SCI-MSG-0027 and SCI-REV-0016 ("a separate message", THY-RES-0014 §7);
+     R16-THY-1…6 (SCI-REV-0016: which of 1(a), 1(b) they take;
      whether the flat-instance table enters their remark (1b)); P8-T1, P8-T2, A18-T1
      (SCI-MSG-0027: the remainder identity with a term-dependent order in Lean, "at
      most `m` hosts"); R15-T1…T6 (SCI-REV-0015: the replacement texts; whether they
@@ -112,14 +132,12 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
      whether Proposition 11.117(b) was meant for symmetric envelopes); P7-T1…T5
      (SCI-RES-0014: a domain-split rule, the symmetrised hypothesis).  Answered by
      them at `f7df44f`: R12-T1…T6 (all adopted), P6-T1…T3, P5-T2, P5-T3, P5-T1 in part.
-2. **Workstreams running when this was written: none.**  (One run of the coordinator
-   was still going: the nested sampler on the twenty-residue serine helix,
-   `pi_inference/nested_sampler_p3table.py S20 H 5 7 T window --reduce occ+`, which first
-   builds a table of 15 504 constants — about half an hour — and caches it in
-   `serine_helix_reach_cache/chat_S20_H_m5.npz`; its log is committed only if it ends
-   with `ALL DONE`.  A first attempt through `nested_sampler.py` was stopped: at twenty
-   mobile residues that script would compute one closed-form sum per distinct changed
-   set, hundreds of thousands of them.)  Each workstream writes notes from its first
+     **Answered by them at `628d3e2`:** R13-T1…T6 (all applied), P7-T1…T4 (done; P7-T5
+     open on both sides), A16-T1, A16-T2 — strike these from the list above.
+2. **Workstreams running when this was written: one, P9** (below).  No run of the
+   coordinator is going.  (Two runs were finished after SCI-MSG-0027 went out and are
+   in addendum A17 (18) but in no message yet — send them with P9's results: Lys₁₂
+   from the order-4 ball, item 62; Ser₂₀ with the sampler, item 62a.)  Each workstream writes notes from its first
    minute to `experiments/science/ws_<ID>/NOTES.md` and a report to
    `docs/science/workstreams/<ID>_REPORT.md`; **a draft is not a statement of the
    division**.  When one reports: read it in full, re-derive or recompute its key
@@ -143,6 +161,17 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
      end-to-end check of `nested_sampler_ext.py` on Lys₅ reads the anchor from
      `ws_P8/out/m1_K5_H_0.70.npz` (`python3 -B ws_P8/p8_01_measure.py K5 H 0.70`, eight
      minutes); `lys_enum_check.py` needs only the committed JSON files.
+   * **P9** (`P9_brief.md`; **launched 10:25 UTC, running when this was written**) —
+     penalties resolved by rotamer state, the lever workstream P8 named (its request
+     P8-E4): P8's code has every block bound per state of the block's host side chains
+     before it takes the maximum; P9 is to keep the dependence (site, pair and triple
+     tables), prove the tables valid, validate at every state of Lys₄, Lys₅, LKSE:5
+     with a control that must fail, and measure the gain on the certified brackets of
+     Lys₁₂ (orders 4, 5) and (LKSE)₃.  Numbers to beat (triple form, band 7, split
+     around the anchor): 0.0567 nats (Lys₁₂, order 5), 1.4125 (Lys₁₂, order 4), 4.30
+     ((LKSE)₃).  Notes: `experiments/science/ws_P9/NOTES.md`; draft:
+     `workstreams/P9_REPORT.md` — **a draft until the coordinator has read and verified
+     it** (every-state check with own code; re-run).
    * **R16** (`R16_brief.md`; launched 08:45 UTC, handed back 10:00 UTC) — the review of
      THY-RES-0013 §4 that the theory division offered.  **Done and published:
      SCI-REV-0016** (`R16_REPORT.md` with a coordinator's note; finding 9o).
@@ -203,7 +232,24 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
      passed to the user and the agent's work not be done in its place).**  Nothing
      was reviewed.  The coordinator did not relaunch it with other words and did not
      substitute for it.  Those four addenda, and SCI-MSG-0026 which reports two of
-     them, therefore rest on their author's own checks.
+     them, therefore rest on their author's own checks; so do A17 (17) and A17 (18),
+     written since (one section of (17) was reviewed by workstream R15, and two
+     lemmas are machine-checked).  (vii) Workstream P8 ran four enumeration passes far
+     above the 3 GB limit (11.7 GB measured when it killed one, 06:46 UTC, after the
+     coordinator had seen the process); cause found by P8 — a reference cycle in
+     `ws_P5/p5lib.anch_walk` — and worked around in its own wrapper; **the fault is
+     still in `ws_P5/p5lib.py`** (a finished workstream's file, left as published), as
+     is a performance fault in `ws_P3/pwmodel.BandModel.sample` (it recomputes the
+     transfer-matrix messages at every call); both are reported to the engineering
+     division (SCI-MSG-0027 §7) and both have wrappers (`ws_P8/p8lib.py`;
+     `pi_inference/nested_sampler_ext.cached_sampler`).  (viii) Logs of runs that did
+     not reach their last line — two of workstream R16, eighteen superseded ones of
+     P8, several of the coordinator — were moved to the session scratchpad
+     (`stopped_runs/`), not deleted and not committed; they do not survive the
+     container.  (ix) The first replication of the theory division's audit at
+     `628d3e2` stopped in the build step with "failed to create thread": a
+     virtual-memory cap the coordinator had set, not a fault of their files; re-run
+     without the cap (`INDEPENDENT_VALIDATION.md` §1.11).
    * **Rules learned the hard way** (`DEAD_ENDS.md` SD39, SD43, SD45, SD48, SD49): a log
      file is committed only from a run that reached its last line, and a script cited
      in a message is re-run from a clean copy first; mathematics derived quickly in a
@@ -505,7 +551,9 @@ published statements are linked messages, never silent rewrites.
    **split around the anchor** (exact whenever the kept site is at its anchor):
    Lys₁₂ certified within **0.057 nats** at order 5 (was 0.192); serine gains 7–12 %,
    valine nothing.  (ii) The theory division's nested sampler: **Lys₁₂ to `3·10⁻⁵`
-   nats at probability 0.95 with 60 evaluations** beyond the ball (`9.5·10¹⁰` states);
+   nats at probability 0.95 with 60 evaluations** beyond the ball (`9.5·10¹⁰` states) —
+   and to 0.006 nats from the order-4 ball plus 12 000 evaluations (`1.1·10⁵` in all;
+   its interval contains the order-5 ones);
    **(LKSE)₃, certified only within 4.3 nats, to 0.041 nats** with 12 000 evaluations.
    (iii) Ser₂₀ (`8·10¹⁵` states) certified within 0.253 nats at order 5; Leu₃₀ at order
    6 with optimal site shares within 0.0105 nats.  **The frontier is now the
@@ -715,14 +763,20 @@ buried environment (P2-E1), exact arithmetic for the off-lattice chain at 13 tor
    done — workstream R14 was stopped at launch by a platform safeguard (§0); needs
    the research owner's decision; if a review is made, its findings go out as a
    linked message, as SCI-MSG-0026 says;
-   (a″) reach of the neutral mobile case: **serine at twenty residues is certified at
-   order 5** (ball 3 963 696 evaluations, 78 minutes: 0.287 nats, 0.253 with the split
-   around the anchor; the refined rule had said 0.210 plus the reductions).  The
-   nested sampler on it was running at this checkpoint (§0 item 2); the prediction
-   written before any of it (research log, cycle 56): envelope bracket about 0.04
-   nats, about `6·10⁻³` nats as the theory division states the bound, about `10⁻³`
-   with one known mean and an empirical Bernstein bound.  Compare when its log
-   exists;
+   (a″) reach of the neutral mobile case: **done at twenty residues.**  Serine,
+   `8.2·10¹⁵` states, order 5 (ball 3 963 696 evaluations, 78 minutes): certified within
+   0.253 nats (the refined rule had said 0.210 plus the reductions), and with the
+   nested sampler **`[347.155238, 347.156272]`, `1.0·10⁻³` nats at probability 0.95** —
+   the envelope bracket, the width as the theory division states it and the width
+   with one known mean were all predicted before the ball existed (research log,
+   cycles 56 and 58; addendum A17 (18), item 62a).  For a mobile ensemble at this
+   length use `nested_sampler_p3table.py` (a table of all constants: 24 minutes), not
+   `nested_sampler.py` (one closed-form sum per distinct changed set: hours).  Left:
+   **thirty residues — requested from the engineering division (A18-E3, SCI-RES-0019
+   §6) with a registered prediction** (research log, cycle 58: certified bracket about
+   0.5 nats, sampled about `2·10⁻³`, envelope 0.072; `βΓ₅ = 1.0020` measured; ball
+   20 535 246 evaluations, table 142 506 constants, about 40 CPU-hours; the library
+   needs 8-bit states at that size); other neutral sequences;
    (a‴) **optimal shares beyond the site level** (finding 9l; `OPEN_PROBLEMS.md` D9(i)):
    the pair level, where the linear oracle is "the least probable pair of each
    subset" and no longer a sort — an ordering-induced family needs `O(n²)` closed-form

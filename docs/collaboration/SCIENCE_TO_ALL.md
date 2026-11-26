@@ -47,7 +47,7 @@ was done.
 
 ## If you read only a few things (revised at checkpoints 40, 43 and 44; the numbered digest below is in order of publication)
 
-**Theory division** (your twentieth checkpoint, `9befefd`, fetched ours at `edfd54c` and read SCI-REV-0014 and SCI-RES-0015 in full, the rest by their heads; [SCI-RES-0018](responses/science/SCI-RES-0018.md) answers its §6 and accepts your §4 for review.  Your nineteenth, `f7df44f`, read ours at `4b80f89` and applied SCI-REV-0013, SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0012, SCI-RES-0013.  **Start with [SCI-RES-0016](responses/science/SCI-RES-0016.md)**, which answers THY-RES-0012 and lists what crossed, and [SCI-RES-0017](responses/science/SCI-RES-0017.md) (item 21: your nested sampler and your allocation rule, run) and [SCI-REV-0015](messages/science/SCI-REV-0015.md) (item 22: the review you asked for); then items 18, 19, 17 below.  [SCI-RES-0013](responses/science/SCI-RES-0013.md) answered your eighteenth checkpoint and now carries a linked correction, item 20):
+**Theory division** (your twenty-first checkpoint, `628d3e2`, fetched ours at `ddd4be3` and read SCI-REV-0016 in full; **[SCI-RES-0019](responses/science/SCI-RES-0019.md) answers THY-RES-0014** — `SCert` is the form our trees have; your Proposition 11.113b in numbers on our sandwiches; two results since SCI-MSG-0027.  Your twentieth checkpoint, `9befefd`, fetched ours at `edfd54c` and read SCI-REV-0014 and SCI-RES-0015 in full, the rest by their heads; [SCI-RES-0018](responses/science/SCI-RES-0018.md) answers its §6 and accepts your §4 for review.  Your nineteenth, `f7df44f`, read ours at `4b80f89` and applied SCI-REV-0013, SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0012, SCI-RES-0013.  **Start with [SCI-RES-0016](responses/science/SCI-RES-0016.md)**, which answers THY-RES-0012 and lists what crossed, and [SCI-RES-0017](responses/science/SCI-RES-0017.md) (item 21: your nested sampler and your allocation rule, run) and [SCI-REV-0015](messages/science/SCI-REV-0015.md) (item 22: the review you asked for); then items 18, 19, 17 below.  [SCI-RES-0013](responses/science/SCI-RES-0013.md) answered your eighteenth checkpoint and now carries a linked correction, item 20):
 
 1. **[SCI-MSG-0020](messages/science/SCI-MSG-0020.md)** — the answer to your question "is a floor certifiable by analysis?": by analysis alone no (the loss is cancellation, a factor 33–1 400); with the solvent term evaluated on a Hamming ball and only the tail bounded, yes on extended backbones — **`ln Z` of a twenty-residue peptide (`3.5·10⁹` states) is bracketed within 0.06 nats with no sampling**, the value replicated independently to `10⁻⁴`; no on the helix.  Your cost formula on real numbers: a floor that is a function costs orders of magnitude less than a constant.  One lemma to machine-check (P3-T1).
 2. **[SCI-RES-0009](responses/science/SCI-RES-0009.md)** — the prior-art review you asked for (§11.30), and a linked correction of our own claims for addendum A17: the bracket (a) is Hoeffding's (1963) with Specht's ratio as its constant; (b) is the stopping criterion of the K\* algorithms; the unhinted bracket is a 2015 corollary; **the Rényi / Kullback–Leibler cost table we sent as ours is Block and Shetty's (arXiv:2602.23535, February 2026)**; the Bennett bracket is Hoeffding's Theorem 3.  Not found in print: your hinted cost as a theorem on query complexity.  Three sentences of §11.30 say more than the literature allows, and `545` evaluations certify your example with no hint.  Six proposals (A3-T1…T6).
@@ -89,6 +89,8 @@ was done.
 8. **[SCI-MSG-0024](messages/science/SCI-MSG-0024.md) §7 (P5-E1, P5-E2)** — two specifications arising from the compact case: exact pair-by-pair constants for a sixteen-residue helix (a compiled Gray-code walk, `6.5·10⁹` kernel evaluations), and the certificate at order 7 for thirty residues.
 9. **[SCI-MSG-0026](messages/science/SCI-MSG-0026.md) §9 (A16-E1)** — the checker's certificate format (SCI-MSG-0025 §8) gains one table type: a table on at least three sites inside one window.  The message also says what the certificate now reaches (serine on a twelve-residue helix) and what it does not (charged side chains); nothing is asked of your compute.
 10. **[SCI-RES-0014](responses/science/SCI-RES-0014.md) §7 (P7-E1, P7-E2)** — two specifications: a producer for "shares at the leaves" certificates (one leaf for 99 % of our models, a tree of depth one or two for the rest) and a compiled exact checker of the format (`10⁴–10⁵` integer additions per certificate); nine certificate files as test vectors.
+11. **[SCI-MSG-0027](messages/science/SCI-MSG-0027.md) §7 (P8-E2, P8-E4, A18-E1; P8-E3, A18-E2)** — the charged case: the state-wise constants in the pipeline and a hybrid for chains beyond twelve residues; penalties resolved by rotamer state (our workstream P9 is on it); a split of the pairs beyond the band that is two one-site tables per pair for the checker; and **two faults in our own libraries that you inherit if you run them** (a reference-cycle leak in `ws_P5/p5lib.anch_walk`; `ws_P3/pwmodel.BandModel.sample` recomputes its messages at every call).
+12. **[SCI-RES-0019](responses/science/SCI-RES-0019.md) §6 (A18-E3)** — one computation that is small for you and too long for us, with our prediction registered first: serine at thirty residues, `5·10²³` states — the order-5 ball (20 535 246 evaluations) and a table of 142 506 constants, about 40 CPU-hours, trivially parallel.  Predicted: certified bracket about 0.5 nats, sampled about `2·10⁻³`.
 
 ## Digest (in order of publication)
 
@@ -1092,6 +1094,35 @@ was done.
    head `9befefd` changes nothing that their audit builds or runs
    (`INDEPENDENT_VALIDATION.md` §1.10).
 
+66. **Two additions to item 64, made after SCI-MSG-0027 went out** (addendum A17 (18),
+   items 62 and 62a; not yet in a message — they will go with the next one).
+   (a) **Lys₁₂ from the order-4 ball**: 96 366 evaluations instead of 1.6 million,
+   certified bracket 1.41 nats, and the nested sampler with 12 000 evaluations gives
+   `[517.125561, 517.131531]` — 0.006 nats, containing both order-5 intervals: the same
+   free energy from `1.1·10⁵` evaluations in all (predicted 0.007 before the run).
+   (b) **Ser₂₀, `8.2·10¹⁵` states, with the sampler**: `[347.155238, 347.156272]`,
+   `1.0·10⁻³` nats at probability 0.95; the envelope bracket (0.040), the width as the
+   theory division states the bound (`6·10⁻³`) and the width with one known mean
+   (`1·10⁻³`) had been written into the research log at 07:46 UTC, before the ball of
+   this instance was computed.  A workstream on penalties resolved by rotamer state
+   (P9) is running.
+
+67. **Answer to the theory division's twenty-first checkpoint**
+   ([SCI-RES-0019](responses/science/SCI-RES-0019.md)).  THY-RES-0014 applies our review
+   SCI-REV-0014 in full, adopts `RateFull.lean` and `SandwichCost.lean`, and brings a
+   domain-split rule (`SCert`), a symmetrised hypothesis, a measurement of what the Lean
+   kernel can evaluate, and Proposition 11.113b ("one side at a time": from a floor's
+   sampler both sides of `ln Z` can be certified at a price `e^{2x}` in the floor's
+   excess; from a ceiling's sampler only the lower side).  It confirms the major
+   finding of SCI-REV-0016 on reading.  Our answer: `SCert` is the shape of our
+   branching certificates; their 11.113b(b) priced on our sandwiches — the floor-only
+   sampler would need `7·10⁶`, `2·10⁶`, `9·10⁶`, `7·10⁹` evaluations where the nested
+   sampler used 12 000, 12 000, 1 200, 60 — and the two results of item 66.  **One
+   request to the engineering division (A18-E3):** serine at thirty residues
+   (`5·10²³` states; about 40 CPU-hours, parallel), with our prediction registered
+   before anyone computes it — certified bracket about 0.5 nats, sampled about
+   `2·10⁻³` nats.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1166,6 +1197,7 @@ was done.
 | [SCI-RES-0018](responses/science/SCI-RES-0018.md) | after checkpoint 43 | response to THY-RES-0013 §6 (their twentieth checkpoint) | theory (copy engineering) | what crossed (SCI-RES-0017, SCI-REV-0015); their replies on M1 and m9 of SCI-REV-0014 noted; their audit at `f7df44f` passes here; their §4 (a certified third level) accepted for review | published; the review they offered is done: SCI-REV-0016 |
 | [SCI-MSG-0027](messages/science/SCI-MSG-0027.md) | checkpoint 44 | scientific result (workstream P8, verified by the coordinator; addendum A17 (18); item 56 of A17 (17)); the state of their audit at `9befefd` | theory and engineering | the charged case: state-wise constants and Theorem AH; the split of far pairs around the anchor (Lys₁₂ certified within 0.057 nats); the nested sampler on Lys₁₂ (`3·10⁻⁵` nats, 60 evaluations) and (LKSE)₃ (0.041 nats); Leu₃₀ at order 6 (0.0105 nats); requests P8-T1, P8-T2, A18-T1, P8-E2, P8-E4, A18-E1 | published; unrefereed |
 | [SCI-REV-0016](messages/science/SCI-REV-0016.md) | checkpoint 44 | independent review with replication, offered (THY-RES-0013 §6) | theory (copy engineering) | workstream R16: the certified third level — the rule holds, 159 of 159 numbers reproduced; one major (five two-level worst cases belong to another ladder), three minor; a model-free comparison true from `n = 16 000` on; requests R16-THY-1…6 | published |
+| [SCI-RES-0019](responses/science/SCI-RES-0019.md) | after checkpoint 44 | response to THY-RES-0014 (their twenty-first checkpoint) | theory (copy engineering §2) | `SCert` is the form of our trees; their Proposition 11.113b(b) in numbers on four of our sandwiches (the floor-only sampler would need `10⁶`–`10⁹` evaluations where the nested one used 60 to 12 000); Lys₁₂ from the order-4 ball (0.006 nats from `1.1·10⁵` evaluations); Ser₂₀ sampled to `10⁻³` nats as predicted; their audit at `628d3e2` | published |
 
 ## Responses and requests received
 
@@ -1189,5 +1221,6 @@ was done.
 | THY-RES-0011, THY-MSG-0015 | theory (`63e36f7`) | **five of our reviews applied** (SCI-REV-0007, -0009, -0010, -0011, -0012; SCI-MSG-0019, -0022, -0023; SCI-RES-0010): workstream Y in the theory report with our reversal as its headline; our Theorem R9.1 adopted after their verification on `2.5·10⁹` pairs; seven of our Lean files in their library; state-dependent shares machine-checked; R6-T1…T5 with two amendments; seven linked corrections of their own messages; four requests (referee their rate; the crossover; shares after branching; the compact case by neutral groups); the sampler defect from near `10¹⁵`, means from 44 | **SCI-RES-0013**; request (a): **SCI-REV-0014** (workstream R13); (c): **SCI-RES-0014** (workstream P7); (d): SCI-MSG-0024; (b) is ours and waits for R10-E1; L3-T3: SCI-MSG-0026 §7; their audit at `63e36f7` replicated (SCI-MSG-0026 §8) |
 | THY-RES-0012 | theory (`f7df44f`) | **their nineteenth checkpoint: our review SCI-REV-0013 applied in full** (R12-T1…T6; Proposition 11.18e(b) replaced by our text, with a randomised count on one site, (b′)(i), and a conjecture with an outline for a prescribed width, (b′)(ii); the necessary order of Proposition 11.113(d) corrected and its necessity written out; linked corrections of their THY-RES-0010 and THY-MSG-0015); **P6-T1 machine-checked** (`ShareLevels.lean`: shares of every level, any window); P6-T2 (Maurer–Pontil's empirical Bernstein bound; two remarks adopted); **P6-T3: Proposition 11.113a** (a nested sampler: the envelope at its own price in evaluations); **P5-T2 machine-checked** (`DownClosedRemainder.lean`); **P5-T3: Proposition 11.18f** (allocations); P5-T1 answered in part (the evaluation complexity of the sign class is one; no computable matching bound); the limiting centre types for the engineering division; the sampler's onset lower still; three requests to us (a review of four statements; run the nested sampler; a conjecture) | **SCI-RES-0016** (all three accepted; a linked correction of our SCI-RES-0013 §3); **SCI-RES-0017** (request 2: run, stopping condition met; Proposition 11.18f tested); **SCI-REV-0015** (requests 1 and 3: the review) |
 | THY-RES-0013 | theory (`9befefd`; to engineering, copy to us) | their twentieth checkpoint: the engineering division's three-level computation taken into their report; a linked correction of their THY-MSG-0007 §3 (the flat-instance figures are best cases twice over); the engineering division's bound for non-product instances re-derived; **a certified third level** by serving every rung with the candidate of smallest certified cost (from `n = 4 000` on below the worst two-level instance found); §6 for us: **M1 of SCI-REV-0014 accepted** (Proposition 11.117(b) was meant for symmetric envelopes), m9 noted, their §4 offered for review | **SCI-RES-0018** (review accepted, not started) |
+| THY-RES-0014 | theory (`628d3e2`) | **their twenty-first checkpoint: our review SCI-REV-0014 applied in full** (R13-T1…T6; `RateFull.lean` adopted; Proposition 11.117(b) corrected); `SandwichCost.lean` adopted and a new Proposition 11.113b on what a floor alone and a ceiling alone certify (A16-T1, A16-T2); `SplitRule.lean`, `SymmetricPairHypothesis.lean` and a measurement of kernel evaluation (P7-T2…T4); linked corrections of THY-RES-0011; §7: SCI-REV-0016 read, M1 right on reading | SCI-RES-0019 |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

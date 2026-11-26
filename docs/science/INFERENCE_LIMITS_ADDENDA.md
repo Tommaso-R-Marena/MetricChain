@@ -2982,10 +2982,19 @@ site shares as the core of a convex game with its consequences (items 52–54), 
     |---|---|---|---|---|---|
     | P3's split | 0.1916 | `1.88·10⁻³` (predicted `2·10⁻³`) | `9.5·10⁻⁴` (predicted `1·10⁻³`) | `2.2·10⁻⁴`, `[517.128424, 517.128646]` (predicted `4·10⁻⁴`) | 19 |
     | split around the anchor | 0.0567 | `5.6·10⁻⁴` | `2.8·10⁻⁴` | **`3.3·10⁻⁵`, `[517.128526, 517.128559]`** | 60 |
+    | **order 4** (ball 96 366), split around the anchor; `4·10⁶` proposals (*added after the first version of this item*) | 1.4125 | 0.032 | 0.028 | **`6.0·10⁻³`, `[517.125561, 517.131531]`** | 12 000 |
 
     The two runs agree (the second interval lies inside the first); P8's and my
     uncertified reweighting estimates, `517.1285 ± 0.0009` and `517.1284 ± 0.0010`,
-    contain both.  **The free energy of a charged dodecamer with `9.5·10¹⁰` states is
+    contain both.  **One order less** (third row, run after the first version of
+    this item; prediction in the research log, cycle 58: bracket 1.4 nats, width
+    0.007): from the order-4 ball — 96 366 evaluations, two minutes — the certified
+    bracket is 1.41 nats, the envelope's own bracket 0.62 (predicted 0.3–0.5),
+    `E_q ρ = 0.34` (predicted 0.15), and 12 000 evaluations give **0.006 nats**: the
+    same `ln Z` to a hundredth of a nat from `1.1·10⁵` evaluations in all, fifteen
+    times fewer than the order-5 ball, and its interval contains the two of order 5
+    — two balls, two sets of constants, one answer.  The plain sampler with the same
+    12 000 evaluations: 0.025 (empirical Bernstein), 0.063 (Hoeffding).  **The free energy of a charged dodecamer with `9.5·10¹⁰` states is
     known to `3·10⁻⁵` nats at probability 0.95** from the ball of order 5
     (1 621 056 evaluations, 24–31 minutes on one core by P8's measurement) plus 60
     evaluations; the width is the proposal term and falls as `1/√N_f` at a cost of
@@ -2996,6 +3005,31 @@ site shares as the core of a convex game with its consequences (items 52–54), 
     per batch, and for Lys₁₂ at band 7 the proposals would have taken about an hour
     (the first run was stopped after sixteen minutes); with the messages computed
     once (`nested_sampler_ext.py`; identical output on Lys₅) they take 14 seconds.
+
+62a. **The neutral mobile helix at twenty residues, with the sampler** [M;
+    `nested_sampler_p3table.py`; added after the first version of this part; the
+    prediction is in the research log, cycle 56, written at 07:46 UTC before the
+    ball of this instance existed].  Ace-Ser₂₀-NMe on the helix, `8.2·10¹⁵` states,
+    order 5 (ball 3 963 696), outer sandwich of item 61 (`D = 0.2534`), workstream
+    P3's constants from a table of all 15 504 subsets (24 minutes; the proposals
+    have 296 795 distinct changed sets, which is why one closed-form sum per set —
+    the route of part (17) for frozen ensembles — was stopped):
+
+    | | predicted | measured |
+    |---|---|---|
+    | envelope bracket (nats) | 0.040 (the rule `2p^mΓ_m`) | 0.0401 |
+    | `E_q ρ` | 0.19 (for the outer bracket 0.209 of the refined rule) | 0.157 (the outer bracket is 0.253) |
+    | width as the theory division states the bound (Hoeffding) | about `6·10⁻³` | `6.08·10⁻³` |
+    | width with one known mean and empirical Bernstein | about `1·10⁻³` | **`1.03·10⁻³`**, `[347.155238, 347.156272]` |
+
+    with 1 200 evaluations (`E_q ρ = 0.157`; no evaluated energy outside either
+    sandwich); the plain sampler with the same evaluations: `2.0·10⁻²` (Hoeffding),
+    `5.1·10⁻³` (empirical Bernstein).  The uncertified reweighting estimate of the
+    certificate run, `347.1553 ± 0.0010`, contains the interval.  **A neutral,
+    mobile twenty-residue helix is known to `10⁻³` nats at probability 0.95, and
+    the three numbers that describe the run were written down before its ball was
+    computed** — the first-order law of part (16) and the sampler's arithmetic of
+    part (17) are predictive at a size eight orders of magnitude beyond enumeration.
 
 63. **The patterned sequence** [M].  For (LKSE)₃ P8's constants leave `βΓ₅ = 42.8`
     and a certified bracket of **4.49 nats** (triple form, band 7) — the floor

@@ -1887,3 +1887,67 @@ minutes; certified within 0.287 nats, 0.253 with the split.  The refined rule,
 printed before the ball, said 0.210 — and `0.210 + 0.077` and `0.210 + 0.043`, the
 reductions measured separately, are the two brackets to three decimals.  The sampler
 on it was still building its table when this was written (10:18 UTC, clock read).
+
+### Cycle 58 — after the checkpoint: what does one order less cost when the sampler is allowed?
+
+**Prediction, written at 10:22 UTC (clock read) before the run.**  Lys₁₂ from the
+order-4 ball (96 366 evaluations instead of 1 621 056), triple form, band 7, 'SAb',
+split around the anchor: the certified bracket should be about 1.4 nats (P8: 1.56
+with workstream P3's split, of which 0.14 was the far pairs).  The floor's samples
+sit at seven side chains off the anchor, so the envelope bracket will not be the
+first-order `0.004` nats: my guess, from `βΓ₄ = 34` spread over 495 subsets and 35
+of them inside a changed set of seven, is 0.3–0.5 nats and `E_q ρ ≈ 0.15`.  With
+`N_f = 4·10⁶` proposals and `N = 12 000` evaluations: **about 0.007 nats** (two-end
+form, empirical Bernstein), i.e. Lys₁₂ within a hundredth of a nat from about
+`1.1·10⁵` evaluations in all.  This time the guess for the envelope is made from
+the model's own samples and not from the ensemble's (`DEAD_ENDS.md` SD61).
+
+**Outcome** (`nested_sampler_K12_H_m4_w7_T_window_SAb_occ.log`, read at 10:28 UTC).
+Certified bracket at order 4 with the split: **1.4125 nats** (predicted 1.4).
+Envelope bracket 0.62 nats (predicted 0.3–0.5), `E_q ρ = 0.34` (predicted 0.15):
+too low again, by a factor two this time and not twelve.  Width, two-end form with
+empirical Bernstein: **0.0060 nats** (predicted 0.007) — `[517.125561, 517.131531]`,
+which contains both intervals of order 5.  Lys₁₂ to a hundredth of a nat from
+`1.1·10⁵` evaluations.  The width came out right although `E_q ρ` did not because
+the variance of `W_in` is far below my guess (its mean is 0.001: the truth sits at
+the top of a wide inner sandwich, so nearly every evaluated `W_in` is nearly zero).
+
+**Workstream P9 launched** (clock: 10:25 UTC) — penalties resolved by rotamer state
+(`workstreams/P9_brief.md`): workstream P8's code has the block bounds per state of
+the host side chains before it takes their maximum; keep the dependence, prove the
+tables valid, validate at every state of the enumerated instances with a control
+that must fail, and measure the gain on Lys₁₂ (orders 4, 5) and (LKSE)₃.
+
+**The prediction of 07:46 UTC against the run** (`nested_sampler_S20_H_m5_w7_T_window_p3table_occ.log`,
+read at 10:42 UTC).  Serine at twenty residues, `8.2·10¹⁵` states.  Envelope
+bracket: predicted 0.040 nats, measured **0.0401**.  `E_q ρ`: predicted 0.19 for an
+outer bracket of 0.209; the outer bracket is 0.253 and `E_q ρ = 0.157` — the same
+envelope over a wider outer sandwich.  Width as the theory division states the
+bound: predicted about `6·10⁻³`, measured **`6.08·10⁻³`**.  With one known mean and
+empirical Bernstein: predicted about `1·10⁻³`, measured **`1.03·10⁻³`**,
+`[347.155238, 347.156272]`.  Three numbers written three hours before the run, for
+an instance whose ball did not exist yet, all within a few per cent.  What was not
+foreseen was the route: the script of cycle 56 would have needed 296 795
+closed-form sums (one per distinct changed set); the table of all 15 504 constants
+took 24 minutes.
+
+**A prediction registered for a computation nobody has run (11:01 UTC, clock read):
+serine at thirty residues.**  The rules predicted the twenty-residue run to a few per
+cent, so the same arithmetic one size up, before anyone computes it.
+Ace-Ser₃₀-NMe on the helix (`5·10²³` states), order 5, band 7: `βΓ₅ ≈ 0.99`
+(extrapolating `0.226` at twelve and `0.564` at twenty residues linearly in the
+length); envelope bracket `2p⁵Γ₅ ≈ 0.071` nats; triple form by the refined rule about
+0.37 nats, plus reductions of about 0.12 with the split around the anchor (253 pairs
+beyond the band; they cost 0.009 at twelve and 0.043 at twenty residues): **certified
+bracket about 0.5 nats; with the nested sampler, 400 000 proposals and 1 200
+evaluations, about `2·10⁻³` nats** (one known mean, empirical Bernstein).  Cost: a
+ball of about `1.8·10⁷` evaluations and a table of 142 506 constants — some fifteen
+CPU-hours, embarrassingly parallel; too long for a session here, small for the
+engineering division.  To be sent as a request with the next message.
+
+*Measured right after (11:03 UTC), for the request:* `βΓ₅ = 1.0020` for Ser₃₀ by one
+closed-form sum (the extrapolation said 0.99); the ball of radius 4 has 20 535 246
+states at 3.3 ms each on a loaded core (19 CPU-hours), the table 142 506 constants at
+0.46 s each (18 CPU-hours); and the library as written cannot hold the ball (its states
+as 64-bit integers are 4.6 GB — my first probe died on that allocation).  Sent to the
+engineering division as request A18-E3 in SCI-RES-0019 §6, prediction included.

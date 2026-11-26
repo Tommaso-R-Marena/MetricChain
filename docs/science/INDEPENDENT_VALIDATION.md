@@ -309,6 +309,36 @@ those of §1.9, which passed on this machine 07:44–08:25 UTC the same day.  Th
 directory is not part of the audit script; it is being reviewed (R16), including one
 replication with code that does not import the theory division's.
 
+### 1.11 The theory division's audit at its head `628d3e2` (twenty-first checkpoint) — passes on this machine
+
+| item | value |
+|---|---|
+| command, tree | as §1.4: `bash scripts/audit_all.sh`, unmodified, on `git archive 628d3e2` extracted outside the repository; the build directory of the run at `f7df44f` copied in; `lake-manifest.json`, `lean-toolchain`, `lakefile.lean` unchanged since `f7df44f` (`git diff`: empty) |
+| start / end (UTC) | 2026-11-26 10:47:36 / 11:22:03 (34 min wall clock, at low priority on a machine shared with one workstream) |
+| result | **`AUDIT PASSED`**, exit code 0 |
+| Lean | **85 files, 47 197 lines; `Build completed successfully (8643 jobs)`**; forbidden-token scan: none |
+| axiom audit | **`AXIOM AUDIT OK: 4899 declarations`** use only `propext`, `Classical.choice`, `Quot.sound`; 646 headline theorems checked |
+| harness (quick mode) | `ALL TESTS BEHAVE AS EXPECTED` |
+| mutation tests | **503 mutations: 502 caught, 1 expected pass, 0 not as expected**; 146 baseline runs of the unmutated harness, all as expected |
+| benchmarks, reference checker, conformance vectors, doc references | pass (2 911 declarations indexed) |
+| log | `experiments/science/audit_replication/audit_all_628d3e2.log` |
+
+Their status file at this head says 85 Lean files, 180 tests, 503 mutations.  Four files
+are new since `f7df44f` / `9befefd`: `RateFull.lean` and `SandwichCost.lean` — **ours, adopted**
+(written by workstream R13 and by the coordinator; compared here with our originals:
+identical except for a provenance paragraph and the removal of the `#print axioms` and
+`#check` commands, as THY-RES-0014 says) — and `SplitRule.lean`,
+`SymmetricPairHypothesis.lean`, theirs, built and axiom-checked here for the first time
+outside their machine; their statements were not read by us.  *A first attempt of this
+run stopped in the build step* (`failed to create thread`, exit 134, while building
+`SplitRule.lean`): the coordinator had set a virtual-memory limit of 16 GB for the shell,
+under which Lean could not start a thread; the three other new files had built.  The
+run was repeated without the limit; its log is the one named above, and the log of the
+first attempt is not kept in the repository.  *Kind of check:* a re-run of their script
+on a third machine.  Not done: reading the 11 mutations added since `f7df44f`; the
+harness in its full mode; the kernel-evaluation experiment of their §4 (not part of the
+audit script).
+
 ## 2. Reviews
 
 | id | object | by | state |
