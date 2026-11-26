@@ -1,0 +1,364 @@
+# Assumption audit and hierarchy of the theory
+
+*Theoretical Research Division, 2026-11-26.  Written under the research owner's
+supplementary directive of the same day ("Mathematical Generality, Physical Relevance, and
+Foundational Breakthroughs"; relayed verbatim in
+`docs/collaboration/messages/theory/THY-MSG-0016.md`): for every major theorem, say which
+assumptions are essential, which are artefacts of the proof, which are conveniences,
+which can be replaced by weaker quantitative conditions, whose removal changes the
+complexity, and whose removal makes the result false; build the hierarchy from the most
+tractable models to broader classes; "avoid presenting results for restricted models as
+universal conclusions"; and identify general theorems whose guarantees are
+computationally vacuous.*
+
+This file is the synthesis.  The theorem-by-theorem tables are in four reports, which it
+does not repeat:
+
+| source | covers | size |
+|---|---|---|
+| `docs/audit/AA1_REPORT.md` | theory report §§2–6 and §§11.1–11.15: 71 numbered statements | 202 classified assumptions |
+| `docs/audit/AA2_REPORT.md` | theory report §§11.16–11.32: 85 numbered statements | 297 classified assumptions |
+| `docs/workstreams/N_REPORT.md` §6 | the nested adaptive algorithm (Theorems 11.52, 11.54, 11.56, 11.58), from an abstract form of the theorem | 25 rows |
+| `docs/workstreams/R_REPORT.md` §9 | the rate of the level recursion | structural part against the one analytic hypothesis |
+
+**Status.**  The two audits were made by independent internal readers (AI agents briefed
+by the coordinator; internal reviews, not external peer review), each with its own
+scripts (`experiments/audit/AA1`, `experiments/audit/AA2`: 14 scripts).  The coordinator
+re-ran all 14 scripts — every output is identical to the stored one — and verified the
+one error of substance that the audits found (Theorem 11.33(a), §7 below).  The
+corrections to the theory report and the README are recorded item by item in
+`docs/audit/APPLIED_CORRECTIONS.md`.  The table for the nested algorithm rests on workstream
+N, which is under independent review at the time of writing; the rate theorem likewise.
+Classifications are judgements with evidence attached; where the evidence is "not known"
+the reports say so, and §8 collects those cases.
+
+## 1. The categories, and the counts
+
+| label | meaning (the directive's six categories, and one more) | AA1 | AA2 | N (25 rows; two labels possible) |
+|---|---|---|---|---|
+| E | essential to the result | 52 | 63 | 6 |
+| P | required only by the current proof technique | 16 | 62 | 7 |
+| C | introduced for computational or expository convenience | 26 | 29 | 6 |
+| Q | replaceable by a weaker quantitative condition (stated in the entry) | 39 | 28 | 7 |
+| X | removal changes the computational complexity (how, in the entry) | 13 | 18 | 7 |
+| F | removal makes the result false (counterexample in the entry) | 47 | 52 | 3 |
+| ? | not known | 23 | 45 | 7 |
+
+Half of the assumptions are either load-bearing in the strongest sense (F: about one in
+five) or of unknown status (?: one in seven); fewer than one in six is a pure
+convenience.  The theory is a theory of its models much more than its summaries said —
+47 sentences of the report and the README were found to state more than is proved (§7).
+
+## 2. The hierarchy, from the most tractable model outwards
+
+Each level names what holds there, with its label in the theory report — `[V]`
+machine-checked, `[P]` paper proof, `[N]` numerical — and what is lost on the way to the
+next.  Evidence in brackets: D-numbers are entries of `docs/DEAD_ENDS.md`; S-numbers are
+scripts of the two audits (AA1: S1–S7; AA2: S1–S8).
+
+```
+LEVEL 0  THE UNIFORM CUBE, one slope, no known part, exact evaluations, worst case over the class
+         complete at the exponential scale:
+           fixed samples: exponent θ_na; plain Monte Carlo optimal            11.44 [P], 11.45 [V core]
+           adaptive without a hint = hinted: θ_hint (extensive accuracy) 11.54; h (bounded) 11.58  [P]
+           n·h − O(1) ≤ ln N ≤ n·h + O(√(n ln n))                             11.58a [P]
+           rounds of adaptivity; k-body marginal oracle changes no exponent   11.84–11.87, 11.104 [P]
+           k nested levels: exponent h + (2π²h²θ_hint″(0) + o(1))/k²          R_REPORT [P, under review]
+         the only level with an exact tail function (Harper) and a bounded-accuracy adaptive theorem
+    |
+    |  lost: exact isoperimetry (AA2 S1), every bounded-accuracy adaptive bound, the sub-exponential
+    |        term, "the zero residual is the hardest instance"
+    v
+LEVEL 1  A FIELD (p-biased product measure), two letters                      11.59–11.65 [P]
+         single-letter exponents; the right sample is flat in the type; isoperimetry only
+         asymptotically (error 2·n^(−1/8))
+    |
+    |  lost from three letters on: "a field always helps", concavity of the site function,
+    |        "the uniform site law is hardest"
+    v
+LEVEL 2  FINITELY MANY FIXED SITE TYPES, any finite alphabets, asymmetric site envelopes,
+         single-site (product) known part                                      11.95–11.103 [P, by transfer]
+         one-shot product bounds for ARBITRARY site types at every n            11.7, 11.8 [V]
+         exponents as Rényi capacities; one common slope; exponents of types do not add
+    |
+    |  lost: the product measure — hence the independence of blocks on which every nested
+    |        algorithm rests (AA2 S8), and the Σc_i² width of the sandwich (AA1 S2)
+    v
+LEVEL 3  EXCHANGEABLE KNOWN PARTS (functions of the type: mean-field)          11.76–11.82
+         every-n statements by symmetry (stratified sample optimal up to a polynomial factor);
+         single-letter hinted exponent for a convex rate function; not harder than the cube for
+         two of three exponents (two letters); adaptive exponent OPEN; two phases: searched values
+    |
+    |  lost: symmetry — hence the stratified sample, every unconditional upper bound, every
+    |        formula; "ferromagnets are not harder than the cube" becomes false (AA2 S3)
+    v
+LEVEL 4  A NEAREST-NEIGHBOUR CHAIN AS KNOWN PART (one synthetic two-state model)  11.39–11.42, 11.116–11.117
+         lower bounds for every algorithm at every n [V core]; exponents in numerical brackets;
+         every upper bound conditional; no transfer-matrix formula (it is zero on a window: 11.41)
+    |
+    v
+LEVEL 5  NO STRUCTURE: any set, any reference measure, any envelope
+         the exact characterisations of §§2–6 and §§11.1–11.6, 11.12–11.14, 11.22–11.24, 11.26, 11.29 [V];
+         lower bounds 11.43(a), 11.45(a), 11.62, 11.116(c); the abstract nesting theorem (validity
+         on any probability space, given tail functions: N_REPORT Theorem N1 [P, under review])
+         NOT available: any upper bound on the cost of any algorithm for a first-order class
+```
+
+Side ladders, each with its own assumptions (none implied by a first-order envelope):
+
+* **Other classes of ignorance.**  Linear in known features: rank-many evaluations
+  (11.47 `[V]`, general) → a Hilbert ball: the spectrum (11.50a `[V]`) → second order with one
+  reference, a product domain and weak coupling: a star of evaluations (11.16–11.18f) →
+  dense second-order constants: a quadratic law, cost `2^{n − o(n)}` (11.31–11.32) → a box
+  around a sampleable known part with a certified floor: the Boltzmann factor of one
+  free-energy distance, *with the instance as a hint* (11.110).
+* **Continuous variables.**  Voxel enclosures (product measure, pairwise energy; cost
+  growing like `d^{d/2}` in the dimension `d` of a voxel) → the torus with zero known part
+  (11.34) → Gauss space: with the *sum* metric an exact instance of the nesting theory,
+  with the Euclidean metric an obstruction (§3, axis d).
+* **Chain geometry.**  Torsion moves → RMSD → bounded-difference constants (4.6, 4.7 `[V]`)
+  → constants that grow along the chain on every domain (11.36; AA1 S6) → the
+  weighted-Hamming format is empty for long chains (11.37) → pair-distance profiles
+  (11.48–11.49) → limit shapes for lattice bridges at the zero residual (11.69–11.71) →
+  off-lattice: nothing.
+
+## 3. The directive's axes of generalisation, one by one
+
+For each: what is proved, what additional structure it needs, where an obstruction is
+proved, and the computational reading.
+
+**(a) Heterogeneous chains and non-uniform parameters.**
+*Holds:* one-shot lower bounds and product bounds for arbitrary site types at every `n`
+(`[V]`); all three exponents for finitely many fixed types, any alphabets, asymmetric
+envelopes (§11.26, `[P]` by transfer; nothing at finite size, nothing simulated); a
+continuum of slopes through `J = ∫ J_u dν` and, for the nested algorithm, the facts that no
+split of the sites undercuts the hinted exponent and that the best outer block is *not*
+proportional (it prefers steep sites; workstream N §3.2, numerical).
+*Needs:* a fixed finite set of types as `n` grows; the combination of types is through a
+common slope, not a common accuracy.
+*Obstructions:* with one type per site the every-`n` optimality statement of the stratified
+sample is empty (its polynomial factor is exponential; AA2 S7); with margins that shrink
+like `1/n` "one evaluation or exponentially many" fails — every site non-sharp and the
+covering number is `n + 1` exactly (AA1 S3); the exact tail lemma fails for site-dependent
+slopes (weighted balls are not extremal; AA2 S1); from three letters on three comparison
+statements fail (D-entries cited in AA2).
+*Computational reading:* the polynomial factors of Theorems 11.76(a), 11.95 exceed the cost
+they multiply for `n ≤ 50` on the cube and up to `n = 300` for twenty site types.
+
+**(b) Correlated, dependent and strongly interacting variables.**
+*Holds:* lower bounds for every algorithm with any known part (machine-checked cores);
+mean-field known parts by symmetry (Level 3); a nearest-neighbour chain in brackets
+(Level 4); the sandwich with a mixture of `K` product references at the same width with
+`K` averages (new in AA1, S2(D)); the nested algorithm under a *class-relative bounded
+influence* `ι` between blocks — dependence then costs slope, `u → u + ι` (workstream N,
+Theorem N4).
+*Needs:* a product reference or a bounded influence; symmetry with few orbits for every
+every-`n` statement about fixed samples; an additive known part in Theorem 11.33(a).
+*Obstructions:* the `Σc_i²` width of the sandwich fails for every correlation `ρ > 0`, not
+only for perfect correlation (AA1 S2); additivity of the extremal residual fails for
+dependent references (D25, D41); with interactions the fibre averages of a class member
+change by `u(1 + c)` per outer flip, `c` up to 26 with two phases (AA2 S8), so the nested
+algorithm's key fact is lost; with *unbounded* influence the nested algorithm returns a
+**false certificate** (workstream N, Proposition N12: 80 of 80 runs) — the only
+hypothesis of that theorem whose failure costs validity rather than evaluations;
+"ferromagnets are never harder than the cube" is false for the nearest-neighbour
+ferromagnet (`0.0346` against `0.0291` per site at `u = 1`; AA2 S3); Theorem 11.33(a) is false
+for a pairwise known part of ferromagnetic blocks (§7).
+*Open:* the adaptive exponent without a hint for **every** interacting known part.
+
+**(c) Non-ideal and flexible geometry.**
+*Holds:* the torsion-to-RMSD chain rule with inertia inputs (`[V]`); profile envelopes of
+pair-additive residuals for any chain.
+*Obstructions:* the verified first-order constants grow along the chain — at least like
+`m^{3/2}` for extended arms, and at least like `m^{1/2}` on every domain because the inertia
+of any arm of `m` bonds is at least `0.0267·m·b²` (new in AA1, S6) — which empties the
+weighted-Hamming format (11.37; for the zero residual, an additive known part, a product
+domain).
+*Open:* excluded volume and flexible bond geometry in that no-go statement; everything
+off-lattice in the limit-shape theory.
+
+**(d) Continuous and hybrid spaces.**
+*Holds:* voxel enclosures (`[V]`); the torus with zero known part; **Gauss space with the
+sum metric** is an exact instance of the nesting theory at every dimension (exact tail
+functions; the pair of exponent functions is the "Gaussian pair" of the rate theorem);
+on Euclidean Gauss space the tail functions are exact and dimension-free, and the hinted
+lower bound holds in high dimension with ball-shaped perturbations (workstream N,
+Theorem N9, Proposition N11).
+*Obstruction:* for Euclidean-Lipschitz functions on Gauss space, nesting over a fixed
+split of the coordinates **gains nothing** — the level operator is the identity, and
+every run of the algorithm draws at least `exp((L − √(2x))²/2)` outer points at a linear
+instance (Proposition N10).  The dividing line is whether the envelope is additive over
+independent parts, not whether the space is discrete.
+*Open:* a known part on a continuous space; hybrid (basin, angle) sites; the adaptive
+exponent on Euclidean Gauss space (between the hinted and the non-adaptive one); blocks
+that are random subspaces.
+
+**(e) Multimodal landscapes.**
+*Holds:* mixtures of product references (above); barrier certificates (§11.31); box
+classes around a sampleable known part.
+*Obstructions:* with two phases the single-letter theory needs a convex rate function and
+fails without it; the extremal perturbations are no longer cones; every two-phase
+exponent in the report is a searched lower bound.
+
+**(f) Long-range, many-body and non-decomposable interactions.**
+*Holds:* second-order (and order-`m`) classes with one reference on a product domain under
+weak coupling; linear classes; marginal oracles of order `k = o(n/ln n)` change no exponent.
+*Obstructions:* dense second-order constants (the quadratic law, machine-checked
+droplet); domains with exclusions, where the second-order class may contain every
+function (11.18c); stars at several references do not combine (11.31(b)); a known part
+that confines the ensemble to a code makes every bounded-accuracy algorithm exponential
+at every coupling (AA1 S4).
+*Open:* known parts with long-range or many-body interactions other than mean-field ones.
+
+**(g), (j) High dimension and large systems: the accuracy scale.**
+Every "bounded number of evaluations" statement (11.21, 11.25(b), 11.28, 11.34) is at an
+*extensive* accuracy — `0.11` to `0.16` nats per site in the report's examples; every
+exponent needs an accuracy that is `o(n)` and not exponentially small.  At a fixed
+accuracy for a growing system the cost on a first-order class is exponential for every
+algorithm (`n·h − O(1)` on the cube); what is polynomial there belongs to other classes
+(linear; weakly coupled second order with an additive known part; a box with a small
+free-energy distance to its floor).  Below Level 0 every upper bound is asymptotic with
+proved error terms that fall below the exponent itself only at `n ≥ 10¹¹` (a field) and
+`4·10⁹`, `1.7·10¹⁴`, `10¹⁹` (two, three, four letters; AA2 S4, block H).
+
+**(h) Ensembles not concentrated near one reference; (i) no symmetry, exchangeability,
+homogeneity or product structure.**
+What survives with no structure is Level 5: exact characterisations of certificates,
+one-shot lower bounds, and the validity (not the cost) of the nested algorithm given
+tail functions.  Costs at an instance are *verification* costs of an algorithm that is
+handed the instance as a hint (without it `1/ε` becomes `e^w/ε²` in a box class); no single
+algorithm attains the instance-wise costs (the hub family, D26, D37).
+
+## 4. The assumptions that matter most outside the models
+
+1. **The class of ignorance itself** — the full first-order class, nothing more known (E for
+   every lower bound; X when changed).  The exponential price is the price of this class.
+2. **Independent sites / a product reference measure** (E, F, X): every exponent and
+   threshold of §§11.4–11.10; every adaptive upper bound; the sandwich width.
+3. **Additivity of the envelope over independent parts** (the sum metric): cost-only in the
+   proof of the nested algorithm and yet the whole gain (workstream N, row 7).
+4. **Bounded influence between blocks**, with a certified bound: the one hypothesis whose
+   failure yields false certificates.
+5. **The accuracy scale** (E, F): extensive for every bounded-cost statement.
+6. **A hint, free computation, exact samples and certified a-priori constants** (X, E): the
+   theorems count evaluations; slopes, floors, variances and per-pair constants are inputs
+   that nothing in the repository certifies for a concrete residual (one paper
+   certificate of another division excepted).
+7. **Symmetry with few orbits** for every every-`n` statement about fixed samples.
+8. **Two letters** in the comparison theorems; **a function of the type** in "ferromagnets
+   are not harder"; **one phase** in the single-letter formulas.
+9. **Site types fixed as `n` grows and a margin bounded away from zero** for "one evaluation
+   or exponentially many"; the exponent of a two-state site vanishes linearly in the
+   margin (about `0.28·(c/e − 1)`).
+10. **Smoothness and strict convexity of the non-adaptive exponent at its fixed point** for
+    the `1/k²` law of nested levels: with a kink the rate is `1/k`, and the general `O(1/k)`
+    bound is then sharp (`docs/workstreams/R_REPORT.md`, Proposition K).
+
+## 5. General statements whose guarantees are computationally vacuous
+
+The directive asks that these be named.
+
+| statement | why it is vacuous as a cost guarantee | where |
+|---|---|---|
+| Theorem 11.33(a): polynomially many evaluations for `w ≤ 4` | about `n⁵ε⁻²`: `10¹⁰/ε²` at `n = 100`; above `2ⁿ` up to `n ≈ 22`–`40` | AA1, entry E43 |
+| Theorem 11.33(b): exponential for `w > 4` | asymptotic at fixed `w`: at `w = 5` the bound is `e^{3.9}` for `n = 2000` | theory report, scope note of the theorem |
+| the any-reference width `(Σc_i)²` of the sandwich | vacuous once `βΣc_i > 8` | AA1, hierarchy L1 |
+| optimality "up to a polynomial factor" of stratified samples (11.76(a), 11.95) | the factor exceeds the cost for `n ≤ 50` (cube), `n ≤ 300` (twenty types); empty with one type per site | AA2 S7 |
+| asymptotic isoperimetry behind Levels 1–2 | error terms `n^{−1/8}`, `n^{−1/(2q+2)}`: informative from `n ≈ 10¹¹` on | AA2 S4 |
+| cost bounds for profile certificates (11.49) | vacuous at extensive accuracy | AA2, overstatement 24 |
+| voxel enclosures in dimension `d` | cost grows like `d^{d/2}` | AA1, hierarchy L5 |
+| the abstract nesting theorem with a tail function that is valid but not sharp | ball-volume bound: exponent `0.197` for `0.029`; transport bound: closes only at the atom, i.e. enumeration | workstream N §4(e) |
+| the nested adaptive algorithm at bounded accuracy (11.56, 11.58, 11.58a) | the `O(√(n ln n))` term has explicit but large constants; the sizes at which a certified separation from plain Monte Carlo is reported are those of §11.19, remarks (1a), (1b) | theory report §11.19 |
+| the rate theorem for `k` nested levels | asymptotic in `k`; no certified constants at finite `k` | `docs/workstreams/R_REPORT.md` §12 |
+
+## 6. New counterexamples and new positive facts found by the audits
+
+All scripted, stored, and re-run by the coordinator.
+
+* Every site non-sharp and yet `n + 1` evaluations suffice (two-state sites with margin
+  below `1/n`; exhaustive for `n ≤ 12`, with a proof) — AA1 S3.
+* The product width of the sandwich is violated for every correlation `ρ > 0`
+  (two-site and `n`-site Markov references) — AA1 S2.
+* Theorem 11.33(a) without an additive known part: a code landscape (explicit instance:
+  the extended Golay code, `n = 24`, `w = 4` — every algorithm with `ε < 10⁻³` makes
+  `(1 − 2δ)·4096` evaluations; Gilbert–Varshamov codes: exponential at every `w > 0`), and a
+  *pairwise* known part of ferromagnetic blocks (`exp(Θ(n^{1/3}))` at `w = 4`) — AA1 S4.
+* With a `p`-biased measure Hamming balls are not extremal for the tail functional
+  (ratio up to `2.08` on the 4-cube, all 65 534 subsets); with site-dependent slopes
+  weighted balls are not extremal for 17 of 20 slope vectors — AA2 S1.
+* The ratio duality of Theorem 11.105 overestimates without the triangle inequality
+  (`10` against `2` on three states) and is exact after the shortest-path closure — AA2 S2.
+* Degenerate regimes: for a failure probability close to one a single evaluation is
+  correct on the whole class; a marginal oracle of order `k = n` gives the answer with one
+  evaluation — AA2 S6.
+* A class-correct procedure that costs `n + 3` on every cone (Theorem 11.45(d) of the
+  report itself) contradicts the sentence "no procedure that is correct on a first-order
+  class can be cheap on any of its subclasses" — AA1, AA2.
+* Positive: a `K`-component sandwich for mixture references; the inertia bound
+  `≥ 0.0267·m·b²` for any arm; a coNP-hardness reduction for dominance on domains with
+  exclusions (AA1); the hypothesis (E) of the abstract limit theorem behind Theorem 11.69
+  is redundant; a `K`-level lower bound valid for every failure probability below one
+  (AA2).  These are recorded in the audit reports with their arguments and have **not**
+  been refereed or integrated into the theory report.
+
+## 7. Errors and overstatements found, and what was done
+
+* **One error of substance.**  Theorem 11.33(a) (polynomially many evaluations for
+  second-order classes below the Curie–Weiss coupling) was stated without the hypothesis
+  of its source, "the known part is additive"; without it the statement is false (the
+  counterexamples above).  The hypothesis was lost when the workstream's theorem was
+  adopted — the failure mode recorded once before (D62).  Verified by the coordinator
+  against the source and by re-running the audit's script; corrected.
+* **Stale sentences** (ten in AA1, one in AA2): passages that an earlier or later section
+  of the same report contradicts (a question called open that is answered twelve lines
+  later; "under review" for a review that is reported; a statement that an operator is
+  not in Lean when it is).  **Two numbers** of Theorem 11.38 quoted from a sharper formula
+  than the one displayed.  **Status cells** of §0.3 that claimed more refereeing than the
+  referees' scopes.
+* **Overstatements:** 22 in AA1 (8 false as written, 10 with a hypothesis omitted in a
+  summary, 4 of wording) and 25 in AA2 (5 major, 11 moderate, 9 mild).  Almost all are in
+  the summaries (§0.3, §7, §10 of the report, and the README), almost none in the theorems.
+  The worst: the sentence on subclasses quoted in §6; the unqualified dichotomy "one
+  evaluation iff every site is sharp, otherwise exponential"; "a ferromagnetic interaction
+  never makes the problem harder" (mean-field only); "the cost of certifying a free
+  energy in a box class" (with a hint).
+* No machine-checked statement was found false; 264 quoted numbers were recomputed from
+  the printed formulas by the two audits and agree (apart from the two of Theorem 11.38);
+  the 405 Lean names cited in the first part exist.
+* Every item, with the old and the new sentence and the justification, is in
+  `docs/audit/APPLIED_CORRECTIONS.md`.
+
+## 8. What could not be classified — ranked by what hangs on it
+
+1. **Exponents and thresholds at non-additive instances.**  Every single-letter result is
+   at an additive (usually the zero) residual of a homogeneous system; only the one-shot
+   bounds are general.  Everything the theory would say about a real residual hangs on
+   this.
+2. **The adaptive exponent without a hint for any interacting known part** — whether
+   "adaptive = hinted" is a property of product measures or of the problem.
+3. **A bounded-accuracy adaptive upper bound beyond the uniform cube** — it needs a
+   two-sided tail estimate with polynomial precision, known for the uniform cube and
+   Gauss space only (workstream N, rows 8–9).
+4. **A lower bound for adaptive algorithms above the hinted one** — between `n·h + ½ ln n`
+   (numerically) and `n·h + O(√(n ln n))`; and whether nested analyses can reach
+   `n·h + O(n^{1/3})`, which the `1/k²` law suggests and nothing establishes.
+5. **The class threshold and finite-temperature exponents with an interacting known
+   part**; the exponents of Level 4 as costs.
+6. **Upper bounds for genuinely heterogeneous sites** (a number of types growing with `n`).
+7. **A known part on a continuous space; hybrid sites; Euclidean Gauss space.**
+8. **Noisy evaluations and average-case correctness** — bounded errors give accuracy
+   floors by a one-line argument; variance is not treated anywhere.
+9. **Lower bounds for certificates that use the decomposition rules** ("the rules are
+   needed" is proved; "they are enough" is not formulated).
+10. Smaller ones, listed in the two reports (AA1 §6 items 6–10; AA2 §A.3 items 7–14).
+
+## 9. How to use this file
+
+A reader who wants to apply a theorem should (i) find its entry in the audit report that
+covers its section and read the assumptions marked E and F; (ii) locate the model on the
+ladder of §2 — if it is below Level 2, the statement is an exponent with asymptotic error
+terms, at an extensive accuracy, at an additive instance; (iii) check §5 before reading a
+"polynomial" or "optimal" as a cost.  A successor who wants to extend the theory should
+start from §8, items 1–4, and from the two structural facts that the audits isolated:
+additivity of the envelope over independent parts is what nesting exploits, and bounded
+influence is what its validity needs.
