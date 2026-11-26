@@ -401,3 +401,145 @@ queries `Donald BR[Author] AND partition function AND (K* OR …)`, `minimized d
   space."
   (This literature is about sequence design, outside our scope; cited only for the certificate scheme.)
   Not in what I read: sampling with a certificate; any lower bound on the number of evaluations.
+
+### step 10 — sampling with a certificate in graphical models; Rényi-based bounds for importance weights; IBC rates; Hoeffding read; physics abstracts; Crossref checks
+(time of writing is the `date` stamp printed when this entry was appended: see end of entry)
+**Liu, Fisher, Ihler, "Probabilistic variational bounds for graphical models" (NIPS 2015; PDF from
+proceedings.nips.cc; pages 1432–1440 per a search snippet)** `[full text: abstract, §1, related work, §3 with
+Prop. 3.1, Cor. 3.2 and discussion]`.  **Closest precedent found for T3/T4 in unhinted form.**  A convex
+variational upper bound `Z_trw ≥ Z` comes with a mixture-of-trees proposal `q` that can be sampled exactly and
+for which "the importance weight w(x) = f(x;θ)/q(x;θ^T) satisfies w(x) ≤ Z_trw(θ^T), ∀x" (Prop. 3.1 i);
+`var(w) ≤ Z_trw·Z − Z² ≤ Z²_trw/4`.  Cor. 3.2 (empirical Bernstein, Maurer–Pontil):
+`Δ = √(2·v̂ar(w)·log(2/δ)/n) + 7·Z_trw·log(2/δ)/(3(n−1))`; `Ẑ ± Δ` are upper/lower bounds of `Z` w.p. `≥ 1−δ` each.  "The
+second term captures the possibility that the empirical variance is inaccurate; it depends on the
+boundedness of w(x) and decays at rate 1/n."  "one can apply a stopping criterion [e.g., 5, 20] on n to guarantee
+a relative error ε with probability at least 1 − δ, using the bound on w(x); roughly, the expected number of
+samples will depend on Z_trw/Z, the relative accuracy of the variational bound."  Abstract: "provide
+certificates of accuracy given enough samples relative to the error in the initial bound".
+  Dictionary: bounding model ↔ floor `lo` (a *function* floor: a lower model whose Gibbs measure is sampled
+  exactly); `Z_trw ↔ Z(lo)`; `w/Z_trw ↔ X = e^{−(r−lo)} ∈ (0,1]`; `Z_trw/Z ↔ Z(lo)/Z(g)` = T3's cost quantity; the
+  Bernstein bracket = T4's last sentence, almost word for word (width: sample variance; validity: the bound
+  on the weights).  Not there: a hint/verification count, the `1/ε` law, dip-weighted spot checks, lower
+  bounds on the number of evaluations.  Also relevant to A17 "Reading 2" (a lower model on a graph of small
+  tree-width): their §4 "Weighted Mini-bucket Importance Sampling" (not read beyond the heading).
+**Gogate, Bidyuk, Dechter, arXiv:1206.5242 (UAI proceedings p. 141 ff.)** `[full text: abstract, §2.2, §3]`: "high
+confidence lower bounds on probability of evidence but does not have any guarantees in terms of relative or
+absolute error … uses the Markov inequality"; "[Dagum and Luby, 1997] provide an upper bound on the number of
+samples N required to guarantee … relative error ε with probability at least 1 − δ"; "The independence from N
+allows us to use even a single sample to derive lower bounds."  ← the cheap side, validity for free.
+**Metelli, Papini, Faccio, Restelli, arXiv:1809.06098v2 (NeurIPS 2018 per the arXiv record)** `[full text: §3–4
+passages]`: "exponentiated α-Rényi divergence d_α(P‖Q) = exp(D_α(P‖Q))"; `Var w = d_2(P‖Q) − 1`,
+`ess sup w = d_∞(P‖Q)`; `ESS(P‖Q) = N/d_2(P‖Q)` (their (6)); Thm 4.1 (Cantelli): w.p. `≥ 1−δ`,
+`E_P f ≥ (1/N)Σ w f − ‖f‖_∞ √((1−δ)d_2(P‖Q)/(δN))`.  = A17.3(i)'s bracket for `p = 2` (one-sided), with `d_2` known.
+**Heinrich & Novak, arXiv:quant-ph/0105114v1** `[full text: abstract, Thm 4, summary table]`: summation of `N`
+numbers in the unit ball of `L_p^N`, `n < N` queries: randomised minimal error `= (1 + √((N−1)n/(N−n)))⁻¹` for
+`2 ≤ p ≤ ∞` (Mathé 1995, exact), `≍ n^{−1+1/p}` for `1 ≤ p < 2` (`N > βn`); deterministic: `1` (no rate).  = the IBC form
+of A17.3 and of "deterministic certificates need (almost) everything"; mean-square criterion, uniform base
+measure, no hint.
+**Hoeffding, JASA 58 (1963) 13–30 (scanned PDF on a university course page; pp. 13–14 and 20–22 read as page
+images)** `[full text of those pages]`.  Lemma 1 / (4.2): `E e^{hX} ≤ ((b−EX)/(b−a))e^{ha} + ((EX−a)/(b−a))e^{hb}`;
+(4.12)–(4.14): `E e^{h(X_i−μ_i)} ≤ e^{L(h_i)}`, `L(h_i) = −h_i p_i + ln(1 − p_i + p_i e^{h_i})`, `h_i = h(b_i−a_i)`,
+`p_i = (μ_i−a_i)/(b_i−a_i)`; `L″ ≤ ¼` ⇒ (4.15) `L(h_i) ≤ h²(b_i−a_i)²/8`.  **So the upper half of T1 *before* the
+maximisation over the mean is Hoeffding's (4.12)–(4.13) — with the same letter `L` — and is sharper than T1
+whenever the mean is known or estimated**: `ln E e^{Y−EY} ≤ −wp + ln(1−p+pe^w)`, `p = (EY − min Y)/w`.
+**Berend & Kontorovich, arXiv:1210.3248v1** `[full text: abstract, §1, Thm 4]`: Kearns–Saul inequality
+`(1−p)e^{−tp} + pe^{t(1−p)} ≤ exp((1−2p)t²/(4 log((1−p)/p)))`, "optimal in the sense that, for every p, there is a t for
+which equality is achieved" — the sharp constant at fixed `p` (sup over `t`), i.e. the *other* optimisation; it
+is not T1's `L(w)` (sup over `p` at fixed `t`).  Kearns–Saul's own paper (arXiv:1301.7392) and Bentkus
+(arXiv:math/0410159; Ann. Probab. 32 (2004) 1650–1673 per the arXiv record) downloaded, not read.
+**Binette, arXiv:1805.05135v2 (doi:10.1109/TIT.2019.2896192 on the PDF)** `[full text: abstract, Thm 1/Cor. 2
+statements]`: Cor. 2: `sup_{(P,Q)∈B(m,M)} D_f(P‖Q) = ((M−1)f(m) + (1−m)f(M))/(M−m)` (likelihood ratio between `m` and
+`M`).  With `f = −log` and `M/m = e^w`, maximising over `m` gives `m = w/(e^w−1)` and the value `L(w)` (my
+calculus; checked numerically in C3).  A third route to T1.  Sason–Verdú (arXiv:1508.00335v7) has the
+`β₁, β₂` (bounded relative information) theorems 6–11; headings read only.
+**Zuckerman & Woolf, arXiv:physics/0201046v1** `[full text: abstract, introduction, "Divergent Moments Case"]`:
+"the free energy is bounded according to ΔF ≤ ΔF_n, any n.  This inequality results from the convexity of the
+exponential function"; for a Boltzmann factor with tail `z^{−(1+α)}`, `1 < α < 2`: `f_n − f ≈ φ_{α−1}(1/n)^{(α−1)}`
+(15) — power-law convergence governed by the tail index of `e^{−w}` (the physics counterpart of the `p`-th
+moment rows).
+**Hahn & Then, arXiv:0904.0625v3, 0910.2858v2** `[abstracts; statement index]`: convexity of the mean-square error
+of Bennett's method ("state and prove"); a convergence *measure* for the two-sided estimator, explained with
+the neglected-tail model.  No sample-size theorem.
+**Lu & Kofke II, J. Chem. Phys. 115, 6866–6875 (2001), doi:10.1063/1.1405449** `[fetch-tool: automatic reading of
+the abstract page; the tool would not reproduce the abstract verbatim]`: the quantity `M exp(ΔS/k)` (`M`
+independent samples) indicates whether a result is likely accurate — about 100 minimally, 1000 safer; exact
+phrase returned: "such calculations must be performed in the 'insertion' direction".  Heuristic by title.
+Lu & Kofke I (J. Chem. Phys. 114, 7303–7311, doi:10.1063/1.1359181): bibliographic record only.
+**Atar, Chowdhary, Dupuis, arXiv:1310.6391v1** `[abstract; Thm 2.1 formula seen]`: variational formulas for
+exponential integrals with Rényi divergence, "bounding tail properties of an intractable model in terms of
+a tractable one" — the uncertainty-quantification relative of A17's classes (divergence balls around a
+tractable model); no evaluation-cost statement.  Birrell et al., arXiv:1911.09580: title only.
+**Sanz-Alonso, arXiv:1608.08814v1** `[abstract; statement index]` (A1's copy): "necessary conditions on the sample
+size in terms of the Kullback-Leibler and χ² divergences".
+**Crossref API (records only, to avoid citing bibliographic details from memory):** Zwanzig, J. Chem. Phys. 22(8),
+1420–1426 (1954), doi:10.1063/1.1740409 ("High-Temperature Equation of State by a Perturbation Method. I.
+Nonpolar Gases"); DKLR, SIAM J. Comput. 29(5), 1484–1496 (2000); Specht, Math. Z. 74(1), 91–98 (1960); Bahadur &
+Savage, Ann. Math. Statist. 27(4), 1115–1122 (1956); Hoeffding, JASA 58(301), 13–30 (1963); Lu & Kofke I and II
+(above); Kofke, Fluid Phase Equilibria 228–229, 41–48 (2005), doi:10.1016/j.fluid.2004.09.017; Dagum & Luby,
+Artificial Intelligence 93(1–2), 1–27 (1997), doi:10.1016/S0004-3702(97)00013-1; Mathé, J. Complexity 11(4),
+394–415 (1995); Kunsch–Novak–Rudolf, J. Complexity 53, 40–67 (2019), doi:10.1016/j.jco.2018.10.007; Anderson (1969):
+only a technical-report record (doi:10.21236/ad0696676).  No Crossref match for Dong–Durfee–Rogers or
+Block–Polyanskiy (cited by arXiv number).  A DOI I had guessed for Lu–Kofke II turned out to belong to another
+paper — discarded.
+WebSearch (X) `verifying a claimed mean or sum with an untrusted hint: O(1/ε) queries versus Θ(1/ε²) …` → nothing on
+certificate complexity of approximate sums; side hit arXiv:2404.08158 ("On the Power of Interactive Proofs for
+Learning"; snippet: "sample complexity of O(1/ε) for … PAC-verification") `[search snippet]`.
+arXiv API: `abs:"free energy perturbation" AND abs:"confidence interval" AND abs:"rigorous"` → 0;
+`abs:"partition function" AND abs:"confidence interval" AND abs:"importance sampling" AND abs:"upper bound" AND abs:"bounded"` → 0.
+appended at 00:17 UTC
+
+### step 11 — the "not found" searches, and the hit that changes the verdict on O1
+WebSearch (X) `free energy perturbation exponential averaging rigorous finite-sample confidence interval "lower bound"
+on energy difference bounded perturbation concentration inequality certified error bar Zwanzig estimator
+non-asymptotic guarantee` → no rigorous certified error bar for exponential averaging found (summaries of
+applied/heuristic treatments); side hit: Kofke's manuscript (below).
+**Kofke, "On the sampling requirements for exponential-work free-energy calculations" (manuscript "For submission
+to Molecular Physics, issue devoted to the Liblice 2006 conference"; PDF from the author's departmental
+publication page)** `[full text: abstract, §3 passage with eqs. (11), (15)]`: "We review prior research that has
+demonstrated that the necessary amount of sampling scales exponentially with the dissipated work associated
+with the reverse trajectory"; relative entropies `s_F = ∫p_A ln(p_A/p_B)`, `s_R = ∫p_B ln(p_B/p_A)`; "the bias … collapsed
+onto a seemingly universal curve … We took this as the basis for a heuristic … Thus we have stipulated
+`M_F ≥ 1 + 2(· s_R)^{1/2} exp(s_R)`, `M_R ≥ 1 + 2(· s_F)^{1/2} exp(s_F)`" (one symbol inside the root is not legible in the
+text extraction); "for instantaneously deleting a hard sphere … s … is thus literally infinite.  Correspondingly
+no amount of deletion sampling is capable of rendering an accurate result"; "the heuristic … is fail-safe".
+→ forward sampling of A needs `≈ exp(KL(p_B‖p_A))`: stated as a *heuristic* ("stipulated").
+WebSearch (X) `"Rényi divergence" bounded class of targets importance sampling normalizing constant minimax sample
+complexity lower bound … ε^{-p/(p-1)} … heavy-tailed importance weights` → **arXiv:2602.23535**.
+**Block & Shetty, "Partition Function Estimation under Bounded f-Divergence", arXiv:2602.23535v1 (26 Feb 2026)**
+`[full text: abstract, §§1–6, App. D.1 (proof of Thm 8); appendix A–C, E–F not read]`.
+* Setting: i.i.d. samples `X_i ∼ μ` and evaluations of the unnormalised density ratio `λ = Z·dν/dμ` at the samples;
+  goal `(1−ε)Z ≤ Ẑ ≤ (1+ε)Z` w.p. `1−δ`.  (= A17's setting without a hint: `μ ↔ π`, `λ ↔ Y = e^{−r}`, `Z ↔ μ`, `ν ↔ π_g`.)
+* `Cov_M(ν‖μ) = ν{dν/dμ ≥ M}`, `ICov_M = ∫₀^M Cov_t dt`; `γ_f(M) = inf{t ≥ 1 : f(t)/t ≥ M}` (KL: `≍ exp(M)`; Rényi-α:
+  `≍ M^{1/(α−1)}`).
+* Thm 4: `n ≳ M_ε log(1/δ)/ε` with `M_ε⁻¹·ICov_{M_ε} ≤ ε/4`.  Thm 5: `n ≳ γ_f(6D_f(ν‖μ)/ε)·log(1/δ)/ε ∨ c²/ε²` — "for KL
+  divergence … n ≳ exp(c·D_KL(ν‖μ)/ε)/ε samples suffice as well as for α-Renyi divergences with 1 < α ≤ 2, where
+  n ≳ (ε^{−α}·D_f(ν‖μ))^{1/(α−1)} samples suffice … α-Renyi divergences with α > 2, where n ≳ 1/ε² samples suffice".
+  Informal Thm 2: `n = Θ(γ_f(Θ(1)·ε⁻¹·D_f) ∨ D_χ²·ε⁻²)` "necessary and sufficient".
+* **Thm 6 (one-sided):** "an asymmetric approach that is capable of improving the sample complexity scaling in ε
+  for the lower tail at the cost of a significantly worse upper tail bound": if `n ≳ log(1/δ)·M/ε` with
+  `Cov_M(ν‖μ) ≲ ε` then `(1−ε)Z ≤ Ẑ ≤ M·Z`; "it suffices to take M = γ_f(6·D_f(ν‖μ)/ε)"; in the superquadratic case
+  "a sample complexity of estimating Z from below that is significantly smaller than the ε⁻² scaling".
+  For Rényi-p this is `e^{D_p}ε^{−p/(p−1)}·log(1/δ)` for **every** `p > 1` — A17.2's "with a hint" column, as the
+  cost of the guarantee "no mass was missed", without a hint.
+* Lower bounds: Thm 7 (integrated coverage; "for any non-atomic μ"); Prop. 1 (bounded `f′`, e.g. TV, Hellinger:
+  impossible); Thm 8 (`n ≳ γ_f(C/(2ε))/ε` on a class with `D_f ≤ C + f(1−ε)`; "holds for arbitrary f-divergences");
+  Prop. 2 (`‖dν/dμ‖_∞ ≤ 4`: `n ≳ ε⁻²`).  Proof of Thm 8 (read): distinguish `ν₀ = μ` (density ratio ≡ 1 — the
+  *centre*) from `ν_{p,ε}` (ratio `1−ε` w.p. `1−p`, `1+ε(1/p−1)` w.p. `p`): "one must observe at least one sample from
+  the high-density region … which occurs with probability p under μ" — the rare-set detection argument at the
+  centre = A17.2(ii)/A17.4(ii).
+* §3.3: sampling `n ≳ M log(1/ε)` with `Cov_M ≲ ε` (Prop. 3) vs estimation: "at least an ε⁻¹ factor improvement";
+  "'counting' … is strictly harder than … 'sampling' under general f-divergence or coverage constraints" —
+  the factor `1/ε` I found between A17.2 and Block–Polyanskiy (step 7) is their §3.3.
+* Related work as they state it: "Devroye et al. [13] … heavy-tailed mean estimation under polynomial moment
+  constraints; our f-divergence [bounds] recover their results when considering Renyi divergences"; Chatterjee–
+  Diaconis: "exponentially many samples in the KL divergence are necessary and sufficient … do not consider
+  more general f-divergences or coverage".  Their reference list gives: Chatterjee & Diaconis, Ann. Appl. Probab.
+  28(2):1099–1135 (2018); Devroye et al., Ann. Statist. 44(6):2695–2725 (2016); Block & Polyanskiy, COLT 2023, PMLR,
+  pp. 228–273.
+* No occurrence of "hint", "verif…", "certif…" in the text (grep).  Lemma 1 ("generalized Paley–Zygmund"):
+  a non-negative variable exceeds `(1−ε)` times its mean with probability `≥ ε·exp(−O(1)·E[X log X]/(ε E X))`.
+**⇒ Verdict on O1 changes:** A17.3 (no hint; three regimes; lower bounds), A17.4 (KL: `exp(Θ(κ/ε))`) and the first
+half of A17.5 are **in print** (Feb 2026), in the sampling model; A17.2's hinted count equals their one-sided
+count (Thm 6), and its lower bound is their Thm 8 construction.  What is left to A17: reading the one-sided
+cost as the verification cost (query model, hint, finite spaces, explicit constants), A17.5(ii), A17.6.
+appended at 00:20 UTC

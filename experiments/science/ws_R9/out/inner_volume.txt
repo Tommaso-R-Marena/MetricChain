@@ -1,0 +1,5 @@
+(a) hull of h/N: 1.631706; eroded by 168/12044 = 0.013949: 1.563226   (report 1.6317, 1.5632)
+(b1) the same hull eroded by 105/12044 = 0.008718 (profile part of 3R = 108 without the gauche term): 1.588706
+(b2) hull of (h + (1/2, 9/2, 7))/(N+3): 1.631397; eroded by 29.5/12044 = 0.002449: 1.619250
+(c) with A + B known from coordinates the ten points are exact; the hull volume would lie between about 1.631359 and 1.631435 (the two extreme cases A + B = 0 and A + B = (1, 9, 14))
+    outer bound (K_2): 3.125

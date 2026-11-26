@@ -1,0 +1,9 @@
+
+ceiling F*(t) <= t(1-t) D^2/8, D = max d: 280 (site, t) pairs on 40 random sites with asymmetric envelopes, q = 2..4: largest ratio (dual value/ceiling) = 0.7465;  largest h/(D^2/32) = 0.6677
+  u = 0.1: cube h/(u^2/32) = 0.9993;  uniform three-letter site h/(u^2/32) = 0.9033  (below the ceiling by 9.7 %)
+  u = 0.5: cube h/(u^2/32) = 0.9821;  uniform three-letter site h/(u^2/32) = 0.9504  (below the ceiling by 5.0 %)
+  u = 1.0: cube h/(u^2/32) = 0.9325;  uniform three-letter site h/(u^2/32) = 0.9809  (below the ceiling by 1.9 %)
+  u = 2.0: cube h/(u^2/32) = 0.7782;  uniform three-letter site h/(u^2/32) = 0.9416  (below the ceiling by 5.8 %)
+site laws with weight 1/2 on a set of letters (Hamming, q = 3, 4, random u): F* >= F*_cube in 200 of 200 (site, t) pairs
+
+3(a): (I - v)(P) = min_{gamma in L} KL(P||pi_gamma) <= KL(P||Q) <= chi^2(P||Q) for Q = pi_gamma0 in the window

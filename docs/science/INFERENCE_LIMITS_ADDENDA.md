@@ -1362,13 +1362,45 @@ What the numbers say.
    A certificate through first-order constants would price valine at `e^{0.25n}`, the truth
    is `e^{0.002n}`.
 
+**Second batch — charged, aromatic and mixed sequences [M; added after checkpoint 36;
+`surrogate_divergence_real2.py`, two minutes].**  The 29 instances of P2 whose domain is
+not a product (pairs of rotamers that clash are excluded; all Gibbs measures on the
+clash-free domain; fits by sparse least squares on it): poly-lysine (2–4 residues),
+poly-phenylalanine (4–8), the mixed sequence LKSELK (3–6).
+
+| surrogate | family | sup-norm width | RMS error under the surrogate | `D_2` | `D_∞` |
+|---|---|---|---|---|---|
+| known part alone | Lys | `50 – 266` | `1.7–5.4` | `11 – 169` | `30 – 243` |
+| known part alone | Phe | `9 – 26` | `0.16–2.8` | `0.2 – 2.5` | `1.6 – 13` |
+| known part alone | LKS…LKSELK | `30 – 188` | `1.0–8.8` | `4.7 – 103` | `8 – 130` |
+| + one-body fit | Lys / mixed | `25 – 199` / `7 – 136` | `1.3–4.7` / `0.3–4.3` | `1.4 – 40` / `0.2 – 53` | `14 – 108` / `3 – 91` |
+| **+ pairwise fit** | **all 29** | up to `14.8` (Lys₄), `6.2` (LKSELK) | `≤ 0.036` | **`≤ 1.3·10⁻³`** | **`≤ 3.7`** (`≤ 1.8` for Lys, `≤ 0.21` for Phe) |
+
+7. **For charged side chains the split "vacuum force field + solvent term" is as bad as
+   the first-order constants said** (`D_∞ = 30–243` at two to four lysines; the theory
+   division's remark in THY-RES-0008 §5 that no affordable floor exists for it is borne
+   out) — **and moving the pair part of the solvent term into the model repairs it
+   completely in the sense that matters:** with the pairwise fit `D_2 ≤ 1.3·10⁻³` and
+   `D_∞ ≤ 3.7` in all 74 instances of both batches, charged ones included.
+8. **The sharpest instance of "sup norm is the wrong coordinate":** for Lys₄ on the PPII
+   backbone the remainder beyond the pairwise fit is `14.8 k_BT` wide — P2's third-order
+   constants of `2.4–10 kcal/mol` for lysines are real — and the chi-square divergence of
+   the true ensemble from the pairwise model is `10⁻⁴`.  The large many-body terms sit on
+   states of negligible weight, and mostly where the truth is *less* likely than the
+   model says.  A certificate through sup-norm constants would charge `e^{15}`; the
+   truth is a factor `1.0`.  So for this energy term the natural row of the table is
+   `p = 2`, not the floor — and what would have to be proved is a bound on an
+   *exponential moment* of the third-order remainder under the pairwise model.
+
 **What this is not.**  These divergences were computed by enumerating every state: they
 are the *prices* that a certificate would have to pay, not certificates.  Whether an
 a-priori bound of the right size — on `D_∞`, i.e. a floor, or on `D_2` — can be proved for
 this energy term is exactly what is open (workstream P3 for the floor).  Exposed model
-peptides on ideal backbones, rotamer grids, no charged side chains (their domains are
-not products and were skipped), least-squares fits under the uniform measure only (the
-variational and likelihood fits of benchmark B10 were not run on these instances).
+peptides on ideal backbones, rotamer grids, at most four lysines and six residues of a
+mixed sequence, least-squares fits under the uniform measure only (the variational and
+likelihood fits of benchmark B10 were not run on these instances).  In the first batch
+the limitation "no charged side chains" stood until the second batch was run; the
+message SCI-MSG-0017 was sent before it and says so.
 
 ### Reading (kept apart from the statements)
 

@@ -172,3 +172,19 @@ Next: prototype of the term-by-term (Faa di Bruno) bound at orders 2, 3, 4 and i
   Val/E x423-485, Val/P2 x206-218, Leu/E x1320-1420, Leu/P2 x306-382, Leu/H x280-706;
   the self part alone x2-30.  P2's constants are reproduced by my own enumeration
   (x01: S3/E 4.026e-3, V6/E max 5.850e-3, sum 3.075e-2).
+
+## 00:20-00:35  Checks of the statements; tightness of the analysis-only bound; prior-art searches
+
+* `t05_identity.py` (`logs/t05_identity.log`): remainder identity (Proposition 1) holds to 1.8e-13 on
+  g_GB of Val6/PPII (40 random x, every m) and 7e-15 on a random function; Corollary L1 holds on 2000
+  random cases.
+* `t04_tight.py` finished (`out/tight_{apolar,polar,charged}.json`, 44 instances, 562 triples):
+  rigorous analysis-only bound >= P2's measured c_ijk for every triple (asserted).  Ratio of sums:
+    Val x206-485 | Leu x280-1420 | Phe x89-170 | Ser x38-104 | Lys x33-77 | LKSE x89-160.
+  NEGATIVE RESULT: analysis alone is 1.5-3 orders of magnitude too large.
+* Prior art (rule 5): 3 PubMed queries (0, 1, 0 hits) and 3 Consensus queries (3 records each), all
+  read at ABSTRACT level only: Onufriev-Case-Bashford 2002 (perfect radii), Mongan et al. 2007 (R6
+  integral), Onufriev et al. 2011 (gross errors of f_GB), Jain et al. 2017 (sparse residue interaction
+  graphs), Jou et al. 2016 (BWM*, dynamic programming on sparse graphs), Hallen-Donald 2019 (review),
+  Rahman 2014 (errors of truncated referential/anchored decompositions).  None states a sup-norm
+  bound on the many-body remainder of a GB energy; not a novelty claim.

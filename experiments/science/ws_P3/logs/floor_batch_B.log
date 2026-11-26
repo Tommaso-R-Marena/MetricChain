@@ -103,3 +103,13 @@
       ball evaluations 4096/4521  3s
     ball of radius 4: 4521 evaluations of g (7.66 % of the domain) [3.9s]; sum_T max|d_T| (order 3) = 8.843e-02; sum_T max|d_T| (order 4) = 4.609e-03
     models: ln Z(m_-) = 291.382771, ln Z(m_+) = 291.288268: deterministic certified bracket of ln Z(E), width 0.09450 nats; rho_cert = max(m_+ - m_-) = 0.10707 kcal/mol = 0.1796 kT (min 5.52e-02); min m_- = -172.5621, min m_+ = -172.5070 kcal/mol [0.1s]
+    ENUMERATION (59049 states, 48.2s): violations m_- > E: 0, m_+ < E: 0; exact remainder g - I_4 g in [-1.504e-05, 2.559e-05] (certified |.| <= 2.758e-02); ln Z(E) = 291.335178; |lnZ(m_-) DP - enum| = 1.1e-13; rho = max(E - m_-) = 0.06228 kcal/mol = 0.1045 kT; cost number Z(m_-)/Z(E) - 1 = 0.04874; min E = -172.5346 (anchor is the minimiser: True)
+    SAMPLING: N = 20000 exact samples of pi_(m_-) (1294 distinct; mean number of sites off the anchor 1.70), E evaluated at each [17.2s]; W in [0.8356, 1], mean 0.953554, std 2.25e-03; Hoeffding (delta = 0.05, two-sided): ln Z(E) in [291.333554, 291.336866] (width 0.00331 nats); point estimate 291.335211; Gibbs-Bogoliubov lower bound (same confidence) 291.333484; mean gap 2.8355e-02, max sampled gap 4.4517e-02 kcal/mol
+    sample-range bound (delta = 0.05): ln Z(E) in [291.308080, 291.336522] (width 0.02844 nats); W sampled in [0.928047, 0.954796]
+    truth 291.335178 inside the Hoeffding bracket: True; inside the sample-range bracket: True
+    [71s] -> out/floor_V10_P2_t0.70_gbn2_m5.json
+=== V12 on P2, tau 0.7, gbn2, truncation order m = 4: atoms 204, sites 12, states/site 3..3, |X| = 5.31e+05; anchor E = -199.3421 kcal/mol; band w = 11
+    Gamma_4 = 1.41660e+00 kcal/mol (self 9.883e-03, cross 1.407e+00) + floating-point allowance 2.05e-04 = 1.41681e+00 = 2.3766 kT   [1.2s]
+      ball evaluations 2049/2049  4s
+    ball of radius 3: 2049 evaluations of g (0.386 % of the domain) [4.0s]; sum_T max|d_T| (order 3) = 1.130e-01
+    models: ln Z(m_-) = 339.100023, ln Z(m_+) = 334.344577: deterministic certified bracket of ln Z(E), width 4.75545 nats; rho_cert = max(m_+ - m_-) = 2.89536 kcal/mol = 4.8567 kT (min 2.83e+00); min m_- = -200.7589, min m_+ = -197.9253 kcal/mol [0.2s]

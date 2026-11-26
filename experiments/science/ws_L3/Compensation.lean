@@ -902,14 +902,13 @@ theorem oneW_eq_sum_flip (π w : (ι → Bool) → ℝ) (i : ι) :
   · simp [h]
   · simp [h]
 
-/-- **Lemma 0 (window), for any reference weight with site odds `p : 1 − p` at site `i`.**
-If `π > 0` satisfies `π(x^{i←1})·(1 − p) = π(x^{i←0})·p` and `w ∈ 𝒲_u`, then
-`p₋ ≤ μ_w(x_i = 1) ≤ p₊`, `p₋ = p_u`, `p₊ = p_{−u}`. -/
-theorem window_of_site_odds {π w : (ι → Bool) → ℝ} {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1)
-    (i : ι) (hπ0 : ∀ x, 0 < π x)
+/-- **Lemma 0 (window), for any non-negative reference weight with site odds `p : 1 − p` at
+site `i`.**  If `π ≥ 0` satisfies `π(x^{i←1})·(1 − p) = π(x^{i←0})·p`, `w ∈ 𝒲_u` and the mass
+`A(w)` is positive, then `p₋ ≤ μ_w(x_i = 1) ≤ p₊`, `p₋ = p_u`, `p₊ = p_{−u}`. -/
+theorem window_of_site_odds_nonneg {π w : (ι → Bool) → ℝ} {p u : ℝ} (hp0 : 0 < p)
+    (hp1 : p < 1) (i : ι) (hπ0 : ∀ x, 0 ≤ π x) (hmass : 0 < massW π w)
     (hπ : ∀ x, x i = false → π (flipAt x i) * (1 - p) = π x * p) (hw : InCone u w) :
     pTilt p u ≤ margW π w i ∧ margW π w i ≤ pTilt p (-u) := by
-  have hmass : 0 < massW π w := massW_pos hπ0 hw.1
   have hsum := oneW_add_zeroW π w i
   have hflip := oneW_eq_sum_flip π w i
   have hup : (1 - p) * oneW π w i ≤ p * Real.exp u * zeroW π w i := by
@@ -925,7 +924,7 @@ theorem window_of_site_odds {π w : (ι → Bool) → ℝ} {p u : ℝ} (hp0 : 0 
       have h2 := (hw.2 x i).2
       have h3 : π (flipAt x i) * (1 - p) * w (flipAt x i) ≤ π x * p * (Real.exp u * w x) := by
         rw [h1]
-        exact mul_le_mul_of_nonneg_left h2 (mul_pos (hπ0 x) hp0).le
+        exact mul_le_mul_of_nonneg_left h2 (mul_nonneg (hπ0 x) hp0.le)
       linarith
   have hlo : p * Real.exp (-u) * zeroW π w i ≤ (1 - p) * oneW π w i := by
     rw [hflip]
@@ -940,7 +939,7 @@ theorem window_of_site_odds {π w : (ι → Bool) → ℝ} {p u : ℝ} (hp0 : 0 
       have h2 := (hw.2 x i).1
       have h3 : π x * p * (Real.exp (-u) * w x) ≤ π (flipAt x i) * (1 - p) * w (flipAt x i) := by
         rw [h1]
-        exact mul_le_mul_of_nonneg_left h2 (mul_pos (hπ0 x) hp0).le
+        exact mul_le_mul_of_nonneg_left h2 (mul_nonneg (hπ0 x) hp0.le)
       linarith
   constructor
   · unfold margW pTilt
@@ -952,6 +951,14 @@ theorem window_of_site_odds {π w : (ι → Bool) → ℝ} {p u : ℝ} (hp0 : 0 
     unfold tiltZ
     rw [neg_neg]
     nlinarith
+
+/-- **Lemma 0 (window), for any positive reference weight with site odds `p : 1 − p` at
+site `i`.** -/
+theorem window_of_site_odds {π w : (ι → Bool) → ℝ} {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1)
+    (i : ι) (hπ0 : ∀ x, 0 < π x)
+    (hπ : ∀ x, x i = false → π (flipAt x i) * (1 - p) = π x * p) (hw : InCone u w) :
+    pTilt p u ≤ margW π w i ∧ margW π w i ≤ pTilt p (-u) :=
+  window_of_site_odds_nonneg hp0 hp1 i (fun x => (hπ0 x).le) (massW_pos hπ0 hw.1) hπ hw
 
 /-- The Bernoulli reference weight has site odds `p : 1 − p` at every site. -/
 theorem refW_flip_odds (p : ℝ) (x : ι → Bool) (i : ι) (hx : x i = false) :
@@ -992,6 +999,78 @@ theorem lemma0_additive_fill {p u c : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (hu : 0 �
   refine ⟨γ, hγu, tiltW_inCone hp0 hp1 (fun _ => hγu), fun i => ?_⟩
   rw [margW_tiltW hp0 hp1]
   exact hγc
+
+/-! ### Conditional laws (Proposition A1.1, item 1, of `A1_REPORT.md` §2.5) -/
+
+/-- The reference weight restricted to the cylinder `{x : x_j = y_j for j ∈ P}`. -/
+def cylRef (π : (ι → Bool) → ℝ) (P : Finset ι) (y x : ι → Bool) : ℝ :=
+  if ∀ j ∈ P, x j = y j then π x else 0
+
+/-- **The conditional probability** `μ_w(x_i = 1 | x_j = y_j for j ∈ P)`. -/
+def condMarg (π w : (ι → Bool) → ℝ) (P : Finset ι) (y : ι → Bool) (i : ι) : ℝ :=
+  margW (cylRef π P y) w i
+
+/-- `condMarg` is the ratio of the two cylinder masses. -/
+theorem condMarg_eq (π w : (ι → Bool) → ℝ) (P : Finset ι) (y : ι → Bool) (i : ι) :
+    condMarg π w P y i =
+      (∑ x, if x i = true ∧ ∀ j ∈ P, x j = y j then π x * w x else 0) /
+        ∑ x, if ∀ j ∈ P, x j = y j then π x * w x else 0 := by
+  unfold condMarg margW oneW massW cylRef
+  congr 1
+  · refine Finset.sum_congr rfl fun x _ => ?_
+    by_cases h1 : x i = true <;> by_cases h2 : ∀ j ∈ P, x j = y j <;> simp [h1, h2]
+  · refine Finset.sum_congr rfl fun x _ => ?_
+    by_cases h2 : ∀ j ∈ P, x j = y j <;> simp [h2]
+
+/-- **Proposition A1.1, item 1 (conditional laws lie in the window), in the weights.**  For
+every `w ∈ 𝒲_u`, every site `i`, every set `P ∌ i` of conditioning sites and every pattern `y`:
+`p₋ ≤ μ_w(x_i = 1 | x_P = y_P) ≤ p₊`.  ("Every order of the coordinates and every prefix" is the
+case `P = {sites before i}`; `P = ∅` is Lemma 0.) -/
+theorem condMarg_mem_window {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1) {w : (ι → Bool) → ℝ}
+    (hw : InCone u w) (P : Finset ι) (y : ι → Bool) {i : ι} (hi : i ∉ P) :
+    pTilt p u ≤ condMarg (refW p) w P y i ∧ condMarg (refW p) w P y i ≤ pTilt p (-u) := by
+  have hπ := refW_pos (ι := ι) hp0 hp1
+  refine window_of_site_odds_nonneg hp0 hp1 i (fun x => ?_) ?_ (fun x hx => ?_) hw
+  · unfold cylRef
+    split_ifs
+    · exact (hπ x).le
+    · exact le_rfl
+  · -- the pattern `y` itself lies in the cylinder
+    have h1 : 0 < cylRef (refW p) P y y * w y := by
+      unfold cylRef
+      rw [if_pos fun j _ => rfl]
+      exact mul_pos (hπ y) (hw.1 y)
+    have h2 : cylRef (refW p) P y y * w y ≤ massW (cylRef (refW p) P y) w := by
+      refine Finset.single_le_sum (f := fun x => cylRef (refW p) P y x * w x) (fun x _ => ?_)
+        (Finset.mem_univ y)
+      refine mul_nonneg ?_ (hw.1 x).le
+      unfold cylRef
+      split_ifs
+      · exact (hπ x).le
+      · exact le_rfl
+    linarith
+  · have hiff : (∀ j ∈ P, flipAt x i j = y j) ↔ ∀ j ∈ P, x j = y j := by
+      have hne : ∀ j ∈ P, j ≠ i := fun j hj hji => hi (hji ▸ hj)
+      constructor
+      · intro h j hj
+        rw [← flipAt_ne x (hne j hj)]
+        exact h j hj
+      · intro h j hj
+        rw [flipAt_ne x (hne j hj)]
+        exact h j hj
+    unfold cylRef
+    by_cases h : ∀ j ∈ P, x j = y j
+    · rw [if_pos (hiff.mpr h), if_pos h]
+      exact refW_flip_odds p x i hx
+    · rw [if_neg (fun h' => h (hiff.mp h')), if_neg h, zero_mul, zero_mul]
+
+/-- **Proposition A1.1, item 1, in the energies:** for every `ψ ∈ L_u`, every site `i`, every
+`P ∌ i` and every pattern, `ν_ψ(x_i = 1 | x_P = y_P) ∈ [a₀, a₁]`, `a₀ = p₋`, `a₁ = p₊`. -/
+theorem condMarg_mem_window_lipH {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1) {ψ : (ι → Bool) → ℝ}
+    (hψ : LipH u ψ) (P : Finset ι) (y : ι → Bool) {i : ι} (hi : i ∉ P) :
+    pTilt p u ≤ condMarg (refW p) (fun x => Real.exp (-ψ x)) P y i ∧
+      condMarg (refW p) (fun x => Real.exp (-ψ x)) P y i ≤ pTilt p (-u) :=
+  condMarg_mem_window hp0 hp1 (lipH_iff_inCone.mp hψ) P y hi
 
 end Product
 
@@ -1451,6 +1530,9 @@ end ScienceL3
 #print axioms ScienceL3.lemma0_window
 #print axioms ScienceL3.lemma0_window_lipH
 #print axioms ScienceL3.lemma0_additive_fill
+#print axioms ScienceL3.condMarg_eq
+#print axioms ScienceL3.condMarg_mem_window
+#print axioms ScienceL3.condMarg_mem_window_lipH
 #print axioms ScienceL3.excess_mass_bounds
 #print axioms ScienceL3.excess_mean_bound
 #print axioms ScienceL3.baseW_eq

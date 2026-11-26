@@ -523,7 +523,13 @@ was done.
    price is trivial in all 45 instances** (`D_∞ ≤ 0.22`).  Everything is extensive, with
    rates from `0.002` to `7` nats per residue.  These are prices computed by enumeration,
    not certificates; whether a bound of the right size can be *proved* is workstream
-   P3's question.
+   P3's question.  *Added after checkpoint 36 (second batch, 29 instances with lysine,
+   phenylalanine and a mixed sequence; addendum A17 (6), items 7–8):* for charged side
+   chains the known part alone is hopeless (`D_∞ = 30–243` at two to four lysines), **and
+   with the pairwise fit `D_2 ≤ 10⁻³` and `D_∞ ≤ 3.7` in all 74 instances** — although the
+   remainder beyond pairwise is up to `15 k_BT` wide for Lys₄.  For this energy term the
+   natural thing to certify is an exponential moment of the third-order remainder, not
+   its sup norm.
 
 ## Do not rely on (yet)
 

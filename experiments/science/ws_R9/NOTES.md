@@ -134,3 +134,37 @@
   (i) the `4/3` (a looser bound, not a second sharp constant); (ii) that the argument and the extremal conformation
   were in G §2.1(c) too; (iii) `A2_REPORT.md` itself carries no note (lines 40, 286–288, 645 (W6's suggested wording
   "sharp constant `2√2/3` at the centre of a tetrahedral chain"), 661, 739).
+
+### 00:45 — more results
+* `out/cobound13_part{0,1}.txt` (**own code**, `r9_cobound.c`): all 350 026 681 ordered pairs of (bridge, admissible c₁) with
+  N₁, N₂ ≤ 13 (18 709 entries), real concatenations: error = A(x¹,c₁) + B(x²) in all; B(concat) = B(x¹), A(concat) =
+  A(x²) in all; q̂ exactly additive in all.  Maxima of the error vector (1,6,8,1 | 41) = R2's exhaustive maxima.
+* Item 2(b) (**re-ran R4's code** `twins_exact.py`, read-only import; `r9_Eprime.py`, `out/Eprime.txt`): on the rows of the
+  table, E′ − E = 6.06e-5 (u = 2, n = 200: E = 0.1129377, E′ = 0.1129983 → 0.1129 / 0.1130 at four decimals),
+  3.04e-5 (u = 1, n = 400), 1.19e-5 (u = 2, n = 400), ≤ 7.4e-6 from n = 800 on.  So R4's "equals the printed E to four
+  digits" fails in one row; their amendment (E′ − E ≤ 6.3e-5 at n = 200, 400) is right.
+* Items 2(c)(b),(c) and data points of Prop. 11.103(d) (**own code** `r9_sites.py`, `out/sites.txt`; cube closed forms
+  reproduced to 10 digits): u = 0.5: (0.02,0.49,0.49): h = 0.007672224, E = 0.030922047 (both below the cube's 0.0076729,
+  0.0309298), a = 0.030304356 (above 0.0302999) ✓; (0.05,0.5,0.45): h = 0.007675166, a = 0.030321669, E = 0.030931644 ✓;
+  (0.04502,0.45679,0.49819): h = 0.007675293 ✓; uniform 0.007425205 ✓; (0.001,0.4995,0.4995): 0.007672975 (above the
+  cube by 0.0014 %).  u = 1: uniform E = 0.1194991, h = 0.0306536, a = 0.1232845; (0.05,0.5,0.45): E = 0.1201960;
+  (0.3,0.35,0.35): h = 0.0305722, a = 0.1229515 — every printed digit of the report reproduced.
+* Item 2(c)(a): re-derived.  ‖c − n⃗/n‖₁ = Σ_j|f_j − F p_j|/n_i with f_j = frac(φn_j), F = Σf_j; this is < 2m/n_i and
+  exceeds m/n_i for m ≥ 3 (p = (1−2ε, ε, ε), f = (0, ~1, ~1): ≈ 4/n_i > 3/n_i); for m = 2 it is < 2/n_i = m/n_i.  Their "2m" is right.
+* Item 3(a): re-derived the χ² step and all error terms of Theorem 11.97(c) (see report §3.1): correct.  The constant:
+  any c > c_ω := m[q_max e^{D_max}/π_min + ln(1/π_min)]/(2 + m q_max) for n ≥ n₀(c); the q_max/M term enters once (in
+  η_{M,n}, Step 5), not in "I(X;U|T) ≤ α_C + o(1)" (Lemma T′(3) gives α ≤ α_Ã without it).
+* Sampled minors (**own code** `r9_minor.py`, `out/minor.txt`): R1 m3: 0.020200 / 0.144080 (the report's 0.0202 / 0.1441
+  are right; OUR review printed 0.0201 / 0.1439 — last digits off); R1 m11 and the whole table of Thm 11.90 reproduced
+  (centre types 0.471, 0.442, 0.383, 0.325, 0.266; cusp 5.800e-7 at X = 1e-12); R4 m9 witness: terms 0.54015a, 0.54026a,
+  0.54022a ✓; R5 m8: tri = (d01, d12, d02) = (1, 1.5, 2), E, a, h reproduced, slope jump +0.0055..0.0057 by one-sided
+  differences ✓ (+0.0056); R5 m1: E_sp(0.3a) − 0.3a = −0.00817 ✓.
+* Long bridges (`r9_long.py`, `out/long.txt`): 787 random bridges with dense ends (79 with ≥ 1000 beads, max 3970), all
+  become clean with head 2 + tail 3 and with 5 + 5; 1500 concatenations up to 7873 beads: decomposition, inherited
+  ends, q̂ additivity; 250 pairs of clean ones: exact; 25 six-fold self-concatenations: (h,g) = 6(h,g) + 5(A+B).
+  The helix is clean for every N tested (A = B = 0).  Five explicit clean bridges with det ±1 (coordinates in the output).
+* `r9_inner_volume.py`: with the exact semigroup the proved inner volume 1.5632 becomes 1.6192 without coordinates
+  (centres (h + (½, 9/2, 7))/(N+3), radius 29.5/(N+3)), about 1.6314 if A + B is computed from coordinates.
+* Item 5: read the word-diff of all hunks outside §§11.22–11.26 (`r9_diffview.py`): §0, §4.4, §6, §8, §9, §10, §11.6,
+  §11.11, §11.14, §11.17, §12, README passages.  Attributions checked against A2_REPORT: "unverified checker" (van Doren),
+  "searches thin", `L_{H,p}` are ours.  No wrong attribution found so far.
