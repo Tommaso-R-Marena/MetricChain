@@ -198,6 +198,35 @@ counts of §1.1, §1.4, §1.5 could not claim.  *Kind of check:* a re-run of the
 a third machine; one function of the runner read.  Not done: reading the 37 mutations
 added since `b2d3e9c`; running the harness in its full (non-quick) mode.
 
+### 1.7 The theory division's audit at its head `9408e33` (seventeenth checkpoint) — passes on this machine
+
+| item | value |
+|---|---|
+| command, tree | as §1.4: `bash scripts/audit_all.sh`, unmodified, on `git archive 9408e33` extracted outside the repository; the build directory of the run at `24a3c27` re-used |
+| start / end (UTC) | 2026-11-26 03:04:28 / 03:49:57 (45 min wall clock, on a machine shared with three workstreams and two runs of the coordinator) |
+| result | **`AUDIT PASSED`**, exit code 0 |
+| Lean | **69 files, 37 543 lines; `Build completed successfully (8627 jobs)`**; forbidden-token scan: none |
+| axiom audit | **`AXIOM AUDIT OK: 4015 declarations`** use only `propext`, `Classical.choice`, `Quot.sound`; 504 headline theorems checked |
+| harness (quick mode) | `ALL TESTS BEHAVE AS EXPECTED` (the script prints the last 80 lines of the harness output: 59 tests "survived", 19 "REFUTED (as documented)" are visible in the log; the status file states 170 registered tests) |
+| mutation tests | **435 mutations: 434 caught, 1 expected pass, 0 not as expected**; 136 baseline runs of the unmutated harness, all as expected |
+| benchmarks, reference checker, conformance vectors, doc references | pass (2 377 declarations indexed) |
+| log | `experiments/science/audit_replication/audit_all_9408e33.log` |
+
+The numbers are those of the theory division's status file at this head (69 Lean files;
+4015 declarations; 435 mutations, 434 caught, one expected pass).  New at this commit
+and therefore built and axiom-checked here for the first time outside their machine:
+`proofs/Frontiers/AnchoredRemainder.lean`, `BarrierCertificate.lean`, `BoxRatio.lean`,
+and their adopted copy of our `KineticsCertificates.lean`; the extended `BoxClass.lean`.
+(A copy of `AnchoredRemainder.lean` had been compiled separately and its statements
+read by the coordinator — SCI-MSG-0023 §2; the statements of the other files are being
+read by our review workstream R12, not by this run.)  The classification rule of the
+mutation runner (`experiments/mutation_tests.py`, the block read in §1.6) is unchanged
+from `24a3c27` (`diff` of lines 60–95: empty).  One stale number seen in passing: the
+harness text of test XXIV.8 says "theory report Corollary 11.113" for what the report
+numbers Corollary 11.114 (11.113 is the sandwich sampler); nothing depends on it.
+*Kind of check:* a re-run of their script on a third machine.  Not done: reading the 24
+mutations added since `24a3c27`; running the harness in its full (non-quick) mode.
+
 
 ## 2. Reviews
 

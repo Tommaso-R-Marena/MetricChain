@@ -2016,6 +2016,56 @@ the uniform measure), `LSs` (least squares under the surrogate's own measure, it
     proved (part (10)), and a floor-optimal fit computed from samples would be the
     sampled floor of item 13 again.
 
+25. **Charged and aromatic side chains: the same, more strongly — and one exception
+    that shows what a model without the right pairs misses** (`b10_split_charged.py`,
+    `b10_split_phe_pairs.py`; added 2026-11-26).  The 29 instances of part (6) that are
+    not products: poly-lysine (2–4 residues), poly-phenylalanine (4, 6, 8 residues) and
+    the mixed sequence LKSELK cut to 3–6 residues, on three backbones, each on its
+    clash-free domain `X_τ` (taken by mask; 225 to 898 619 states).  Families: independent
+    residues and nearest-neighbour chains *restricted to* `X_τ`, fitted to the solvated
+    energy by maximum likelihood (all 29) and by the floor fit of item 24 (the 23 with
+    at most 60 000 states).  `D_2` of the solvated ensemble from each model, and the floor
+    of the independent-residue model:
+
+    | instances | `m0` (vacuum) | `m1` (`f` + one-body solvent) | **independent residues on `X_τ`** | chain on `X_τ` | `m2` (`f` + pairwise solvent) | `D_∞`, ML fit | `D_∞`, floor fit |
+    |---|---|---|---|---|---|---|---|
+    | poly-Lys (9) | `11 – 169` | `1.4 – 40` | **`2·10⁻⁵ – 0.023`** | `2·10⁻⁶ – 0.023` | `≤ 1.3·10⁻³` | `0.8 – 8.2` | `0.031 – 0.085` (Lys₂, Lys₃) |
+    | LKSELK (12) | `4.7 – 103` | `0.19 – 53` | **`1·10⁻⁴ – 0.082`** | `5·10⁻⁷ – 0.081` | `≤ 1.2·10⁻³` | `0.8 – 4.5` | `0.028 – 0.21` (3–5 residues) |
+    | poly-Phe, strand and helix (6) | `0.20 – 1.9` | `0.002 – 0.047` | `4·10⁻⁶ – 0.0097` | `≤ 1.5·10⁻⁷` | `≤ 3.5·10⁻⁴` | `0.23 – 2.0` | `0.05 – 0.22` |
+    | **poly-Phe, PPII (2)** | `1.7, 2.5` | `0.16, 0.17` | **`0.086, 0.33`** | `0.079, 0.33` | `4·10⁻⁵, 1·10⁻⁴` | `1.1, 3.9` | `0.20, 0.44` |
+
+    **For poly-lysine the vacuum force field is `11–169` nats away (`D_∞` up to `243`: the
+    unscreened repulsion of the charged groups), and the solvated ensemble is within
+    `0.023` nats of independent residues on the clash-free domain** — closer by factors
+    of `6 400` to `490 000` than the vacuum model, and of `1 100` to `60 000` than the vacuum
+    model with a one-body solvent correction.  After the floor fit even the worst state
+    is within `0.03–0.09 k_BT` for two and three lysines.  The mixed sequence behaves the
+    same (`120` to `12 000` times closer than `m1`).
+    **The exception is phenylalanine on PPII:** independent residues are at `0.086`
+    (Phe₄) and `0.33` (Phe₆), a nearest-neighbour chain is no better (`0.079`, `0.33`), and
+    here `m1`, which keeps all pair terms of the vacuum energy, is *better* (`0.17` at Phe₆)
+    — the only one of the 29 where it is.  Pair tables at one sequence separation at a
+    time (`b10_split_phe_pairs.py`) say which pairs: **separation 3 alone gives `0.0066`
+    and `0.0073`; separations 1 and 2 alone change nothing** (`0.079`, `0.086`; `0.328`, `0.333`);
+    1 and 3 together `3.8·10⁻⁴`, `6.1·10⁻⁴`; 1, 2 and 3 `2·10⁻⁶`, `1·10⁻⁵`.  On PPII, with three
+    residues per turn, the side chains of residues `i` and `i + 3` are neighbours in space.
+    On the helix of these short peptides separation 1 does everything (`0.007–0.010 →
+    6–8·10⁻⁸`); on the strand nothing is needed (`≤ 2·10⁻⁵` without pairs).  (Which energy
+    term carries the `i, i + 3` contact was not decomposed.)
+    *Reading.*  The tractable model has to be chosen by the geometry of the backbone:
+    its band must reach the sequence separations that are contacts in space (three on
+    PPII for large side chains), and in 13 of the 29 instances the nearest-neighbour
+    chain gains less than a factor two over independent residues — what is left there is
+    beyond nearest neighbours (at `D_2 ≤ 0.082` except for Phe on PPII).  *What this is
+    not.*  (i) A recipe: on a masked domain these families can be sampled exactly by a
+    transfer matrix only if the mask is itself banded, which was not examined.  (ii) A
+    statement about class constants: workstream P2 found that even with the split
+    `coul + g_GB` the star certificate fails for lysine — a worst case over a class; `D_2`
+    and `D_∞` here belong to one energy function on enumerated domains.  (iii) Beyond four
+    lysines, six residues of the mixed sequence, eight phenylalanines; above 60 000
+    states the floor is that of the maximum-likelihood fit only (which does not control
+    it, item 21).
+
 *Consequences.*  (i) For the design of the tractable model of parts (9)–(10): fit the
 *solvated* energy, as those parts did; never use the vacuum force field as the model
 and the solvent term as the remainder for polar side chains.  (ii) For the theory
@@ -2032,7 +2082,8 @@ expensive while looking adequate in root mean square (part (6); the planted cont
 531 441 states; two families; `VAR` is non-convex (`CHI` is convex, item 24) and both
 were minimised from two starts (one start for the ten instances above 20 000 states) —
 the two starts agreed to `10⁻⁸` in the objective wherever both were run; exact sums, nothing
-sampled; no charged side chains, where the split should matter most.
+sampled.  Charged and aromatic side chains: item 25 (maximum-likelihood and floor fits
+only, on masked domains).
 
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 

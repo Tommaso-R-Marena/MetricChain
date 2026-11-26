@@ -1,0 +1,13 @@
+=== Ace-Val12-NMe on PPII: 531441 states (cache); exact ln Z(E) = 336.721763615
+--- A. the coordinator's chain model (window 2), tables refitted on samples as in the production run
+   built V12 on P2: 204 atoms, states per site [3], window W=2; 226 GB evaluations for the model tables; 1 s
+     the coordinator's energy function against the enumerated table at 200 states: largest difference 5.7e-13 k_BT
+     sd of r before each refit 0.0309, 0.0034, 0.0035; ln Z(m): transfer matrix 336.721776360678, enumeration 336.721776360678 (difference +5.7e-14); exact E_m r = +0.000018907, sd 0.00352, K = 6.161e-06; identity ln Z(m) - E_m r + K - ln Z(E) = +0.0e+00
+     chain sampler: 1000000 samples; z-scores of the 36 site frequencies: max |z| 1.65, rms 0.80; of the 99 neighbour-pair frequencies: max |z| 2.63, rms 0.87  (exact sampler: rms about 1)
+     sampled mean of r over 4000000 samples: +0.000017418 +- 0.000001757; exact +0.000018907; z = -0.85;   estimate ln Z(m) - mean + K = 336.721765103 against exact 336.721763615: difference +1.49e-06 +- 1.8e-06
+--- B. workstream P3's band sampler on workstream P6's banded pair models (order 5, band 8), and the rejection step
+     ln Z(m_-): transfer matrix 336.725574154301, enumeration 336.725574154301; ln Z(m_+): 336.718863427783, 336.718863427783; D = 0.006711; exact E_q W = 0.431348568 (sd 0.1012); identity ln[Z+ + (Z- - Z+) E_q W] - ln Z(E) = +1.1e-13
+     band sampler, pi_(m_-): 1000000 samples; z-scores of the 36 site frequencies: max |z| 2.11, rms 1.00; of the 99 neighbour-pair frequencies: max |z| 2.40, rms 1.03  (exact sampler: rms about 1)
+     accepted points, q: 40223 samples; z-scores of the 36 site frequencies: max |z| 2.23, rms 0.82; of the 99 neighbour-pair frequencies: max |z| 2.79, rms 0.93  (exact sampler: rms about 1)
+     6000000 proposals, 40223 accepted: rate 0.006704 against 1 - e^(-D) = 0.006688 (z = +0.47); mean W = 0.431481 +- 0.000503 against exact 0.431349 (z = +0.26);   estimate 336.721764501 against exact 336.721763615: difference +8.86e-07 +- 3.4e-06
+ALL DONE 25 s

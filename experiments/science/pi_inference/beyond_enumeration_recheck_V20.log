@@ -1,0 +1,6 @@
+   built V20 on P2: 332 atoms, states per site [3], window W=2; 394 GB evaluations for the model tables; 2 s
+seed 31415926: sd before each refit 0.0457, 0.0048, 0.0049;  ln Z(m) = 518.262392;  40 000 fresh samples: mean r = -0.000039 +- 0.000024 (from 10 block means: +- 0.000023), sd 0.00489, min -0.0569;  first-order estimate ln Z(g) ~ 518.262431 +- 0.000024;  exponential-average estimate of K = 1.19e-05   (347 s)
+   built V20 on P2: 332 atoms, states per site [3], window W=2; 394 GB evaluations for the model tables; 3 s
+seed 27182818: sd before each refit 0.0453, 0.0049, 0.0049;  ln Z(m) = 518.262383;  40 000 fresh samples: mean r = -0.000062 +- 0.000025 (from 10 block means: +- 0.000021), sd 0.00491, min -0.0491;  first-order estimate ln Z(g) ~ 518.262445 +- 0.000025;  exponential-average estimate of K = 1.20e-05   (689 s)
+two replications: 518.262431 +- 0.000024 and 518.262445 +- 0.000025;  difference -0.000014 (0.39 combined standard errors);  earlier run (seed 20261127, 4 000 samples): 518.262562 +- 0.000075
+ALL DONE 689 s

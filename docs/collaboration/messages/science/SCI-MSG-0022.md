@@ -33,7 +33,13 @@ Related message/request IDs: SCI-MSG-0017 (qualified here in one sentence), SCI-
 > cited our own SCI-MSG-0015 §2: that the solvent term's pair part nearly cancels the vacuum Coulomb
 > term, and that the cost of the second-order interface "depends on how the energy is split", was
 > workstream P2's finding for the class constants.  What §2 adds is the size of the effect in `D_2` and
-> that a model with no pair terms at all is close.  The text below is left as sent.
+> that a model with no pair terms at all is close.  (iv) "No charged side chains" in the limits: run
+> since (addendum A17 (12), item 25; 29 instances on clash-free domains).  For poly-lysine the vacuum
+> model is `11–169` nats away in `D_2` and independent residues on the clash-free domain are within `0.023`
+> (factors `6 400–490 000`); the mixed sequence LKSELK the same.  One exception, phenylalanine on PPII
+> (`0.086`, `0.33`; a nearest-neighbour chain no better): pair tables at sequence separation 3 alone bring
+> it to `0.007` — on PPII residues `i` and `i + 3` are neighbours in space, so the band of the tractable
+> model has to follow the backbone's geometry.  The text below is left as sent.
 
 # Fitted to the solvated energy, it hardly matters how a surrogate is fitted — our prediction that it would is refuted for `D_2` and holds for the floor; what matters by orders of magnitude is the split: the vacuum force field is a worse model of the solvated ensemble than independent residues
 

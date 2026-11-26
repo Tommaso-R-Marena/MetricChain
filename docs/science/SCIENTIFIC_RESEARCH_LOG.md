@@ -1205,3 +1205,45 @@ profile and the gauche count, and its support function is the ground-state energ
 * The handoff's "Resume here" section was rewritten as a current-state block; the open
   problems and the frontier map were brought up to date.
 
+### Cycle 46 — while three workstreams ran: the audit at `9408e33`, charged side chains, and two samplers that disagreed by two standard errors
+
+**Audit.**  The theory division's `scripts/audit_all.sh` at `9408e33`, unmodified, in a
+scratch export: `AUDIT PASSED` — 69 Lean files, 37 543 lines, 8627 jobs, 4015
+declarations, 504 headline theorems, 435 mutations (434 caught, one expected pass), 136
+baseline runs: the figures of their status file (`INDEPENDENT_VALIDATION.md` §1.7).
+
+**Charged and aromatic side chains (addendum A17 (12), item 25).**  The split finding of
+benchmark B10 on the 29 non-product instances: for poly-lysine the vacuum force field
+is `11–169` nats from the solvated ensemble in `D_2` and independent residues on the
+clash-free domain are within `0.023`.  One exception, phenylalanine on PPII, where
+neither independent residues nor a nearest-neighbour chain is close (`0.33` at six
+residues).  *The reading was tested before it was written down:* PPII has three
+residues per turn, so the guess was the `i, i + 3` contact; pair tables at one sequence
+separation at a time (`b10_split_phe_pairs.py`) gave `0.007` for separation 3 alone and
+no gain for separations 1 and 2 alone.  *Attribution:* while writing this the
+coordinator found that workstream P2 had stated the split dependence for class
+constants (SCI-MSG-0015 §2) and that item 22 and SCI-MSG-0022 had not said so; both
+now do.
+
+**Two samplers.**  Workstream P6's interim notes put the theory division's sandwich
+sampler at `518.262414 ± 0.000005` for the twenty-residue instance; the coordinator's
+fitted chain model had given `518.262573 ± 0.000075` (4 000 samples).  Two new seeds with
+40 000 samples each (`beyond_enumeration_recheck_V20.py`): `518.262443 ± 0.000024` and
+`518.262457 ± 0.000025` — the old value was a fluctuation of 1.6 of its standard errors,
+and all three are inside the certified bracket except the old one; but all three are
+*above* the sandwich sampler's two values (combined 2.3 standard errors, probability
+about 0.02).  Checked: the two energy functions agree to `4·10⁻¹²` on 400 states;
+both samplers against exact enumeration at twelve residues with millions of samples
+(`sampler_precision_check.py`) — the chain sampler's estimate is off by
+`(+1.5 ± 1.8)·10⁻⁶`, the band sampler with the rejection step by `(+0.9 ± 3.4)·10⁻⁶`, site
+and neighbour-pair frequencies of both at `rms z ≈ 1`; so neither is biased at the
+`4·10⁻⁶` level there.  A long run of the chain model at twenty residues (600 000 samples)
+is in progress to decide between a fluctuation and something that appears only at
+twenty.  *Rule kept:* the discrepancy is recorded before it is resolved.
+
+**A by-product prepared, not yet published:** from a certified sandwich one reads off
+certified *populations* (`certified_populations.py`): for an event `A`,
+`P(A) ∈ [Z₊(A)/(Z₊(A) + Z₋(Aᶜ)), Z₋(A)/(Z₋(A) + Z₊(Aᶜ))]`, sharp for the sandwich; validated
+on 1 452 exact populations (no violation); held back until workstream P6's sandwich,
+on which it rests, has been read and checked.
+
