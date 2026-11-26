@@ -1,0 +1,3 @@
+  25 cases, 14 with symmetric structures, ok=True [16s]
+  50 cases, 23 with symmetric structures, ok=True [43s]
+seed 2: 60 random systems (N <= 16), 29 of them with rotationally symmetric structures: ALL OK

@@ -73,14 +73,21 @@ unpseudoknotted structures with loop decomposition (ground truth for everything 
   (so that `d_N` would be an average of tree metrics) cannot work: for the level-2 bloblet the required
   probabilities sum to 3/2 (three quarnets each need probability ½ on mutually exclusive choice patterns).
 
+**Problem A6: done as a validated paper proof.**  `Q_α = (1/c) Σ_{d|gcd} J_{1−α}(d) F_d`; `F_1` by a
+dynamic programme over sub-multisets of species; `F_d` by a bijection (designated nest containing the
+marked nick, top segment) that counts every symmetric structure of every rooted period once; tables at
+magnification `dα`.  The first implementation agreed with exhaustive enumeration on all 280 test systems
+(exact rationals, `α = 0..3`, symmetric structures of orders 2–6).  `STRANDS_ALGORITHM.md`.  Remaining
+doubt: the decoding of MFE/#SSEL from `Q_α` is cited from [SW26], not checked.
+
 ### Resume here
 
 1. Commission an adversarial review of `STRANDS_NN_HARDNESS.md` (COMPLEXITY-REV-0001); fix what it finds.
 2. A1 follow-ups: (i) ETH chain for CX-C1 (find a linear reduction 3SAT → 3DM → 4-PARTITION with
    polynomially bounded numbers, or cite one); (ii) robustness of the reduction to non-zero exterior-loop
    energies; (iii) Lean formalisation of the counting core of Theorem 1.
-3. A6: implement the sub-multiset DP for the magnified NN partition function with symmetry, validate
-   against `ref_enum.py`, write the theorem.
+3. A6: adversarial review of `STRANDS_ALGORITHM.md` (COMPLEXITY-REV-0003); optionally fast subset
+   convolution; read [SW26] §7 properly before relying on the MFE/#SSEL corollary.
 4. B: (i) adversarial review of `NANUQ_LOCAL_CRITERION.md` (COMPLEXITY-REV-0002), in particular Lemma A,
    Lemma B and the completeness of the enumeration of `𝒜_6`; (ii) Lean: the finite check of Lemma 8 and
    Theorem 4 as an abstract statement; (iii) B3, the parametric family — read NANUQ⁺ first; (iv) which

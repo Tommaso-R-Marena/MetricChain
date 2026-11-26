@@ -132,9 +132,13 @@ Algorithms for Structure Prediction and Interactions*, WABI 2024, LIPIcs 312, 18
   the number of non-identical strands"; Theorem 19: NP-completeness for triplet repeats of one pattern
   in a model with disconnected complexes.
 * **Status: OPEN** as posed (preprint of 23 Nov 2026).  Verified on 2026-11-26.
-* Our position: **active (2026-11-26)** — target: a `2^{O(c)}·poly(N)` (indeed number-of-sub-multisets)
-  algorithm for the *magnified* PF of the full NN model including rotational symmetry and
-  connectedness, hence MFE and #SSEL by A-II's decoding; and matching conditional lower bounds.
+* Our position: **OURS-[P], validated [X], unreviewed (2026-11-26)** — `STRANDS_ALGORITHM.md`, CX-T10–T12:
+  the magnified partition function of the full NN model (connectedness, rotational symmetry, all
+  orderings) in `O(N^4 · Π_i C(n_i+2,2))` arithmetic operations: `3^c` instead of `(c−1)!` for distinct
+  strands (question 3), and polynomial time for unboundedly many strands of a bounded number of species
+  (a partial answer to question 4; with CX-T2 the picture is "bounded species: polynomial; unbounded
+  species: NP-hard").  MFE and #SSEL follow by A-II's decoding, which we cite and have not re-derived.
+  Open: `2^c` by fast subset convolution (remark only); ETH-tightness (CX-C1); FPT in the number of species.
 
 ### A7 — Pathways through the landscape (A-II, "Future work" 2)
 
