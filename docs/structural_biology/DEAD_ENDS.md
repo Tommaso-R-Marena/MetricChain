@@ -53,6 +53,19 @@ factors pairwise, the intermediate product was given the scope of the whole buck
 the union of its two operands.  The checker crashed on the next reshape; nothing was accepted.
 *Fix (commit 2976042):* `multiply` computes the union itself.
 
+**SB-DEF-08 — a row that could name a commit later than the code that produced it (found by
+the coordinator on 2026-11-26 while reading the rows of SB-X-004).**  The development drivers
+asked git for the head each time a row was started; a process that runs for minutes while the
+branch moves records the head of that moment, not the code it loaded at its start.  Affected
+rows: the three conditioning rows of SB-X-004 (one process, `src` as at `e82010b`; recorded
+`e82010b`, `e82010b`, `11498f4`) — `git diff e82010b 11498f4 -- src` is empty, so no recorded
+value is wrong about the software — and any population rows the same process appends later,
+whose field will name `b40f903` or later while the code in memory is `e82010b`'s (the
+difference in `src` is the file format of Z certificates, which that process does not use;
+such rows are annotated where they are reported).  *Fix:* the drivers read the commit once,
+when the module is loaded (`START_COMMIT`); regression test
+`tests/structbio/test_provenance.py`, seen to fail before the change.
+
 ## Approaches that do not work as hoped
 
 **SB-D-E-01 — exact elimination with first-order relaxation of weak pairs, for the partition

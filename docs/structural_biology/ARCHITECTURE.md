@@ -190,7 +190,7 @@ per-residue stability of the certified conformation, and robustness of the concl
 rounding and to bounded model error; the exact robustness statement is to be fixed against the
 theory division's `robust_certified_iff`.
 
-### 4.2 C2 — certified enclosures of `Z`, free energy, populations (planned, under construction)
+### 4.2 C2 — certified enclosures of `Z`, free energy, populations (first version implemented at `b40f903`; the text below is the plan it follows — see §4.3 for what exists)
 
 A certificate is a list of exact energy-level steps followed by an exact elimination:
 - thermal dead-end eliminations, each multiplying the upper bound by `1 + exp(−β·margin)`;
@@ -224,3 +224,31 @@ Mathlib only to build the theory division's proofs; nothing of ours is written i
 Non-goals: no services, endpoints, databases or deployment; no network access by the code; no
 sequence design or mutation (the sequence is fixed); no claim about proteins. The kernel's
 `sum` rule and the `split` layer are not implemented.
+
+### 4.3 C2 as implemented (coordinator, 2026-11-26, commit `b40f903`)
+
+| layer (§1) | module | content |
+|---|---|---|
+| computational method (trusted numeric base) | `expo.py` | `exp_bounds`, `exp_bounds_me`, `log_bounds`: rational enclosures in integer arithmetic; the theory division's `expLo`/`expHi` with outward rounding after each squaring |
+| computational method (trusted numeric base) | `itables.py` | interval factor tables with product and sum over one axis; tier `exact` (rationals) and tier `float` (binary64, outward rounding; assumptions F1–F3 stated in the module) |
+| certificate format | `zcert.py` | `ZCertificate`: model, `beta`, root box, a tree of nodes — steps (`prune`, `relax`) followed by an elimination `order` or by a `branch` with one child per state; optional `keep` site; file format `structbio-zcert/1` (strict, detached, canonical rationals) |
+| certificate checker | `zcheck.py` | replays every step in exact integer arithmetic, recomputes margins and residual ranges, encloses the Boltzmann factors, eliminates, sums over branches; returns `[ln_z_lo, ln_z_hi]`, population intervals of the kept site, `full_box`; never raises |
+| certificate producer (untrusted) | `partition.py` | thermal dead-end elimination by a margin `tau`, additive fits and relaxation below `theta`, a greedy elimination order, conditioning when a table exceeds `max_entries` (up to `max_leaves`), abstention otherwise |
+| benchmark orchestration | `experiments/structbio/lnz_dev/run.py` | SB-X-004 |
+
+Ten attributes of the capability (directive §7 G).  *Purpose:* reference values for the
+ensemble of a rotamer table — `ln Z` and populations with a guaranteed interval — against which
+uncertified inference can be judged.  *Mathematical specification:* the docstrings of
+`zcert.py` and `zcheck.py`.  *Assumptions:* nonnegative weights (always true of Boltzmann
+factors); rational `beta`; for the float tier F1–F3.  *Trusted inputs:* the instance (by
+checksum) and `beta`; nothing of the certificate.  *Output:* an interval that the checker
+computed, and a verdict on the claim.  *Failure conditions:* invalid step (rejection), table
+over budget or more leaves than allowed (abstention), overflow of an upper bound (rejection),
+a lower bound that is not positive at the working precision (abstention).  *Reproducibility:*
+re-run the driver at the recorded commit; certificates serialise with `zcert.dumps`.  *Tests:*
+`tests/structbio/test_expo.py`, `test_zcert.py` (60-digit enumeration, both tiers, relaxation,
+pruning, conditioning, populations, strict files, rejection of narrower claims and invalid
+steps).  *Benchmark criteria:* SB-BM-5 and STRUCTBIO-REQ-0004.  *Provenance:* rule semantics —
+branch, prune, elimination with at most two neighbours: theory division [V]; general
+elimination, relaxation, rounded exponential: ours, [P] until our Lean file is checked.
+Label of results: **[CP]**.

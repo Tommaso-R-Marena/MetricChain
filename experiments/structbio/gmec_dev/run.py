@@ -50,13 +50,22 @@ MODEL_PARAMS = dict(eps0=4.0, e_clip=1000.0, max_states_per_site=None, include_n
 PDB_DIR = ROOT / "benchmarks" / "structbio" / "pdb"
 
 
-def git_commit() -> str:
+def _read_commit() -> str:
     try:
         out = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True)
         dirty = subprocess.run(["git", "status", "--porcelain", "--", "src"], cwd=ROOT, capture_output=True, text=True)
         return out.stdout.strip() + ("+dirty" if dirty.stdout.strip() else "")
     except Exception:  # noqa: BLE001
         return "unknown"
+
+
+#: The commit of the code this process has in memory: read once, when the module is loaded, and
+#: never again (SB-DEF-08 — a row must not record a head that moved while the process ran).
+START_COMMIT = _read_commit()
+
+
+def git_commit() -> str:
+    return START_COMMIT
 
 
 def build_model(pdb_id: str):

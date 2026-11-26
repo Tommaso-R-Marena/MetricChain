@@ -181,14 +181,31 @@ below `10⁻⁹` nats):
 | 0.03 | 59 | `1.9·10⁶` | [69.5638, 70.9272] | 1.36 | 1.6 |
 | 0.01 | — | `1.3·10⁹` needed | abstained (budget `3·10⁷` entries) | — | — |
 
+With conditioning (branch nodes; software at `e82010b`; table budget `3·10⁶` entries):
+
+| relaxation threshold (kcal/mol) | leaves | largest table | certified `ln Z` (float tier) | width (nats) | time (s) |
+|---|---|---|---|---|---|
+| 0.01 | 29 | `2.1·10⁶` | [70.0215, 70.4993] | 0.478 | 11 |
+| 0.003 | 222 | `1.9·10⁶` | [70.1732, 70.3106] | 0.137 | 91 |
+| 0.001 | 1373 | `2.6·10⁶` | [70.2177, 70.2715] | 0.054 | 385 |
+
+(The three rows come from one process started at 23:39 UTC with `src` as at `e82010b`; the
+`commit` field of a row is the head at the moment the row was started — `e82010b`, `e82010b`,
+`11498f4` — and `src` is identical at those commits.  That a row could record a commit later
+than the code in memory is defect SB-DEF-08, corrected in the driver.  Tighter thresholds and
+populations of all residues: requested from the engineering division, STRUCTBIO-REQ-0004.)
+
 Exact-rational tier at threshold 1.0: [63.14249423974886, 76.94606796481926] in 9.4 s — inside
 the float tier's [63.14249423974757, 76.94606796482172].  `−β E(x*) = 61.51`.
 
 What it shows.  The pipeline from a deposited structure to a checked two-sided bound on a
-partition function runs, and its two arithmetic tiers agree.  What is unfavourable: the
-enclosure is 1.36 nats wide at the last affordable threshold — entirely first-order loss of the
-266 relaxed pairs — which is useless for populations; the next threshold needs a table of
-`1.3·10⁹` entries; ubiquitin is out of reach (R-3).  No baseline has been run: toulbar2's
+partition function runs, and its two arithmetic tiers agree.  What is unfavourable: without
+conditioning the enclosure is 1.36 nats wide at the last affordable threshold — entirely
+first-order loss of the 266 relaxed pairs; with conditioning, each threefold reduction of
+the threshold reduced the width 3.5 and then 2.6 times and cost 7.7 and then 6.2 times more
+leaves (8.0 and 4.2 times more time) — three points; no scaling law is claimed.  At that rate
+populations to a few per cent for all residues are tens of core-hours even for crambin;
+ubiquitin is out of reach (R-3).  No baseline has been run: toulbar2's
 `Z*ε` and the K\*-family algorithms give floating-point `ε`-brackets without certificates on
 such instances, and we have not compared widths or times with them.
 

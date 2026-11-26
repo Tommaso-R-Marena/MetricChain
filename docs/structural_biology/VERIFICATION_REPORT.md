@@ -279,3 +279,34 @@ only), the converter, the producer, the table construction, the rounding of floa
 instance, and the link between the instance and the force field or the protein. The Lean kernel
 has not been executed on any of our certificates. No component of this division's software may
 be described as formally verified.
+
+## 8. Capability C2 (certified `ln Z` and populations) — verification state (coordinator, 2026-11-26, commit `b40f903`)
+
+- **Exact proposition certified** (when `check_partition_certificate` accepts): for the integer
+  instance with the recorded checksum, rational `β`, and root box `B`,
+  `ln_z_lo ≤ ln Σ_{x∈B} exp(−β E(x)) ≤ ln_z_hi`; and, with a kept site `t`, for every state `a` of
+  `t`, `population(a)` contains `Σ_{x∈B, x_t=a} exp(−βE(x)) / Σ_{x∈B} exp(−βE(x))`.
+- **Deterministic**; no probability of failure.
+- **Trusted inputs:** instance (checksum), `β`, root box.  **Trusted code:** `zcheck.py`,
+  `zcert.py` (validation and parsing), `itables.py`, `expo.py`, `model.py`, CPython integers,
+  and — for the float tier only — numpy's binary64 multiplication and addition.
+- **Arithmetic and rounding:** steps in Python integers (exact); Boltzmann factors by
+  `expo.exp_bounds_me` (integer arithmetic; lower values rounded down, upper values up after
+  every squaring); elimination exact (tier `exact`) or outward-rounded binary64 (tier `float`,
+  assumptions F1–F3 of `itables.py`: a product is moved one representable number outward; a
+  sum of `m` terms is multiplied by `1 ∓ m·2⁻⁵²` and moved outward; values below `1e-300` are
+  treated as 0 from below and `1e-300` from above); logarithms by `expo.log_bounds`, each bound
+  certified through the exponential.
+- **Rule semantics and their status:** `branch` — `WInstance.Z_branch` [V]; `prune` — the
+  inequality inside `zprune_sound` [V], in energy form; elimination of a site with at most two
+  neighbours — `Z_sumOut` [V]; with more neighbours, `relax`, and the rounded exponential —
+  paper arguments of this division (STRUCTBIO-REQ-0003, R-1, R-3, R-4), unrefereed, with a Lean
+  file in progress.  Hence label **[CP]**, not [CK].
+- **Evidence for the implementation:** every interval contains the 60-digit enumerated `ln Z`
+  and every enumerated population on all test instances, in both tiers, with and without
+  relaxation, pruning and conditioning; the float tier's interval contains the exact tier's
+  where both were run (crambin, coarsest threshold); a hand-written relaxation with arbitrary
+  `f`, `g` cannot make the checker unsound (it recomputes the residual range).
+- **Known gaps:** no independent implementation; assumptions F1–F3 are stated, not proved for
+  this platform; the producer's heuristics are untuned; no baseline has been run; the adversarial
+  review STRUCTBIO-REV-0001 covers this code and is recorded in `reviews/`.
