@@ -22,6 +22,12 @@
   checked by the Lean kernel.
 * **Ising ground sets** (`ISING_GROUND_SETS.md`; CX-T16–T19): answer to the Ensemble division's E-C1 for
   fixed `K`; `K` in the input open.  **Unreviewed.**
+* **Penalised models** (`PENALTY_THRESHOLD.md`; CX-T21–T23): answers to the theory and science divisions — a
+  cluster bracket and an explicit criterion for product references, the threshold as a max-flow, NP-hardness
+  of "has the floor left its reference?" for general tables and polynomial cases.  **Unreviewed**; no new
+  mathematics claimed.
+* Two further internal reviews were commissioned at 19:05 UTC (algorithm note and hardness additions;
+  Ising note and NANUQ additions) — to be recorded as COMPLEXITY-REV-0003 and -0004.
 * The two starting problems of the brief changed status when verified: A2 solved elsewhere; B1/B2
   claimed elsewhere.  See `OPEN_PROBLEMS.md`.
 * Next steps: `RESEARCH_LOG.md`, "Resume here".
@@ -56,6 +62,8 @@ python3 test_multiset_dp_random.py 1 200 13           # 200 random systems (seco
 python3 test_multiset_dp_random.py 2 60 16            # 60 larger random systems (about a minute)
 cd ../ising_faces
 python3 table_k4.py; python3 table_k5.py; python3 span_rule.py; python3 test_theory.py   # CX-T16..T19
+cd ../penalty_threshold
+python3 price_bound.py 3; python3 hardness_maxcut.py      # CX-T21..T23 (toy models, exact enumeration)
 cd ../../..
 export PATH="$HOME/.elan/bin:$PATH"                   # Lean (lake exe cache get once)
 lake env lean experiments/complexity/lean/StackPacking.lean

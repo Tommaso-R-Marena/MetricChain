@@ -193,9 +193,15 @@ per vertex, and we are in case (i) with `c ≡ |V| ln(3 + e^{−B})`.  ∎
   `q` lines), so `G(1)` is computed exactly in polynomial time, for arbitrary real factors.  For a band known
   part the inner problem is a `(max,+)` pass with site fields `μ u_i(x_i)`, and the candidates are the
   breakpoints of a parametric pass — at most the number of distinct values of `U(x)`, hence polynomially many
-  when the factors are integers bounded by a polynomial.  For products on `m`-subsets the same works with the
-  power sums `Σ_i u_i(x_i)^r`, `r ≤ m`, as aggregates (a pseudo-polynomial dynamic programme).  We do not know
-  the complexity for a band known part with arbitrary real product tables.
+  when the factors are integers bounded by a polynomial; and in general **at most `n^{1+log₂ Q}` up to a
+  factor depending on `Q`**, where `Q` is the number of states of a window of the band, hence polynomially
+  many for a fixed bandwidth and number of states.  (For fixed states at the two ends of a segment the optimal
+  value is a convex piecewise-linear function of `μ`, the upper envelope of `A(n)` lines; splitting the
+  segment in the middle, it is the maximum over the `Q` states at the cut of a sum of two such functions, so
+  `A(n) ≤ 2Q·A(n/2)`.)  So with pair tables that are products the problem is polynomial for a band known part
+  as well, for arbitrary real factors — with an exponent that is of theoretical interest only.  For products
+  on `m`-subsets, `m ≥ 3`, the power sums `Σ_i u_i(x_i)^r`, `r ≤ m`, serve as aggregates in a
+  pseudo-polynomial dynamic programme; the convexity argument does not apply.
 * *Tables whose maxima decay with the spread:* truncating to spread `w` changes `G(1)` by at most the sum of
   the maxima of the dropped tables.  For pair tables with `max Θ_ij ≤ C e^{−κ|i−j|}` a window
   `w = O(ln(n/ε)/κ)` gives `G(1)` within `ε` in time `n·q^{O(w)}`, polynomial in `n/ε` for fixed `q`, `κ`.  So the

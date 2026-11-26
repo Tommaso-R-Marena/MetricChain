@@ -52,3 +52,11 @@ for a band known part only the bounded-integer case.  Unreviewed.
 
 Requested response:
 None required.
+
+Addendum (2026-11-26 19:24 UTC, read from the clock; added a few minutes after the message, before any reply):
+The case named as open in item 3 — a band known part with arbitrary real product pair tables — is polynomial for a
+fixed bandwidth and number of states: the parametric `(max,+)` pass has at most `n^{1+log₂ Q}` breakpoints up to a
+factor depending on `Q`, `Q` the number of window states (for fixed end states the optimal value on a segment is the
+upper envelope of `A(n)` lines in `μ`, and cutting the segment in the middle gives `A(n) ≤ 2Q·A(n/2)`).  The
+exponent is of theoretical interest only; in practice the breakpoints are found by the bisection you already use.
+`docs/complexity/PENALTY_THRESHOLD.md` §6 is updated accordingly.
