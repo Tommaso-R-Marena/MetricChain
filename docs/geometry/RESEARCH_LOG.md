@@ -5,7 +5,7 @@ Branch `research/geometric-inference`, created 2026-11-26 from the theory checkp
 
 ## Resume here
 
-State at the ninth checkpoint (see `HANDOFF.md` for commands and environment):
+State at the tenth checkpoint (see `HANDOFF.md` for commands and environment):
 
 1. **Cycle 1 result:** `docs/geometry/ENSEMBLE_RIGIDITY.md` — second-moment rigidity of
    conformational ensembles (stacking; conic criterion; identifiability of mixtures among all
@@ -17,25 +17,19 @@ State at the ninth checkpoint (see `HANDOFF.md` for commands and environment):
    Theorem I′: identifiable among all ensembles from 10, 16, 30 atoms for two, three, four
    states, exact witnesses; Conjecture 6.3).  The method is Johnston–Lovitz–Vijayaraghavan's
    (`PRIOR_ART.md` §3b).
-2. **Cycle 2:** `LOCAL_DATA_STABILITY.md` — Theorem K (lower bounds) and Theorem L (global
-   upper bound of order `n²`).  **Its originality was reviewed by Science (SCI-REV-0023):
-   mechanism and exponent known; as stated a statement about the exponent.**  The note has
-   a head note and is to be revised next: *the threshold (S) can very probably be removed
-   altogether* — use complete five-point windows (all ten distances of five consecutive
-   points have separation at most 4) with the Procrustes–Gram inequality
-   `min_R ‖U − XR‖_F² ≤ ‖UUᵀ − XXᵀ‖_F²/(2(√2 − 1)σ_r(X)²)` (short proof: optimal alignment makes
-   `XᵀU` symmetric positive semidefinite; expand), compare the frames of consecutive windows
-   on their shared tetrahedron, telescope.  Worked out on paper in the session of the ninth
-   checkpoint: `‖Y − gX‖_F ≤ 1.3 (b/(s τ)) (n + 3)² ‖η‖₂` for **every** `Y`, `η` the errors of
-   all squared distances of separation at most 4, `s`, `τ` the smallest singular values of
-   the centred five- and four-point windows.  **Not yet written, not yet checked
-   numerically** — do both before quoting it (task 16).  It also gives local constants and
-   a version for any separation `K ≥ 4`, i.e. answers the three questions of SCI-REV-0023 §5.
+2. **Cycle 2:** `LOCAL_DATA_STABILITY.md` — Theorem K (lower bounds); **Theorem L, since the
+   tenth checkpoint without a threshold** (every configuration `Y`; Lemma P on complete
+   five-point windows; frames compared on shared tetrahedra; local constants; any
+   separation `K ≥ 4`); Theorem L⁺ (first-order constant `1/(2μ)` in the range
+   `‖η‖ ≤ μ/(ΛC_L)`); Proposition L₀ (the earlier form).  Originality reviewed by Science
+   (SCI-REV-0023): mechanism and scaling known.  **Proofs of §3 unreviewed.**  The honest
+   size of the guarantee is in §6: certified range `10⁻⁵` ångström or less on idealised
+   traces.  Open: O-16 (close the gap between `C_L` and `1/(2μ)`; random noise; incomplete
+   windows).
 3. **Third note:** `HINGE_ENSEMBLES.md` (states that share rigid segments; the main
    statement is the Science division's Proposition R22-1).  Open: O-12, O-13, O-14,
    R22-GEO-3, -4, -5.
-4. **Owed:** GEOMETRY-RES-0007 to Science (response to SCI-REV-0023: requests A4-GEO-1 … -6,
-   the revised Theorem L, question 1).  **The research owner's supplementary directive**
+4. **Owed:** **the research owner's supplementary directive**
    (about 22:00 UTC): a seventh division, Structural and Computational Biology (branch
    `research/structural-biology`, not on the remote at 22:02 UTC) — send it an orientation
    (seven items), `docs/geometry/IMPLEMENTATION_GUIDE.md` (specifications of what is ready
@@ -51,6 +45,28 @@ State at the ninth checkpoint (see `HANDOFF.md` for commands and environment):
    certificate under noise), O-1, O-3, O-2 (b)–(d), O-4, O-5.
 6. **Next synchronisation:** fetch all six other branches (the sixth is
    `research/structural-biology`) and look for `GEOMETRY` in their `docs/collaboration/`.
+
+## 2026-11-26, tenth checkpoint (work from 22:13 UTC; see the commit time)
+
+**Theorem L without a threshold.**  SCI-REV-0023 §5 computed the necessary size of any
+threshold (`4h⁻h⁺`, from a reflection) and asked whether `(τ/D)²` is forced.  Working on
+that question: the distances of separation at most 4 are all distances of every
+five-point window; Lemma P (Procrustes–Gram, with a ten-line proof) controls such a window
+for arbitrary `Y`; five-point windows share tetrahedra, so consecutive frames differ by at
+most `(δ_j + δ_{j+1})/τ_{j+1}` with no case distinction on determinants; telescoping gives
+`1.2 (b/(s_*τ_*)) (n+2)² ‖η‖₂` for every `Y`, and a local form.  Checked numerically step by
+step on arbitrary competitors (420 pairs; separations 5 to 7 in the local form).
+**Theorem L⁺**: squared distances are exactly quadratic, `η = 2AV + Q(V)`, `‖Q(V)‖ ≤ Λ‖V‖²`;
+with Theorem L excluding the far branch of the quadratic inequality, `d_P ≤ ‖η‖/(μ + √(μ² − Λ‖η‖))`
+for `‖η‖ ≤ μ/(ΛC_L)`.  Its first numerical check "failed" by a factor 29 — round-off in the
+closed form of the Procrustes distance at displacements of `10⁻⁹` (DG-25); with explicit
+residuals the bound is attained to `6·10⁻⁵`.
+**What it is worth** (`local_data_guarantees.py`): on a 20-point helix-like trace
+`C_L = 456` against `1/(2μ) = 0.45`; the certified range is `3·10⁻⁶` ångström in rms distance
+error.  Stated as such in the note, to Science (GEOMETRY-RES-0007) and in O-16.
+**Science's requests A4-GEO-1 … -6** applied: §5 of the note is built from their text with
+"[A4]" on what they read; Theorem K(a) marked known with their better constant.
+Harness: 46 tests, 34 mutations caught.
 
 ## 2026-11-26, ninth checkpoint (work from 20:11 UTC; see the commit time)
 

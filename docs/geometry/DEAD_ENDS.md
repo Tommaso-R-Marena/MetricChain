@@ -240,3 +240,30 @@ which is the value that the structural point explains completely (Proposition 6.
 With 21 or 24 the certificate modulo the structural point would have looked false.  Rank
 *certificates* in this division are computed in exact arithmetic; floating point is used
 for exploration and for recovering states, and its rank counts are reported as [N].
+
+**DG-24 (a threshold that was an artefact of the proof).**  Theorem L was first proved
+(eighth checkpoint) with windows of four consecutive points.  Such windows overlap in a
+triangle, a triangle does not determine on which side the next point lies, and the proof
+excluded the mirror image by a separate estimate, which needed all errors to be below
+`τ⁴/(73D²)`.  The Science division computed what any threshold must respect — a reflection
+changes one squared distance by `4h⁻h⁺ ≥ 4τ²/√3`, four to six orders of magnitude above our
+(S) on its examples — and asked whether the factor `(τ/D)²` is necessary (SCI-REV-0023 §5).
+It is not, and neither is any threshold: the same data are all ten distances of every
+window of *five* consecutive points; complete distance data control a window globally
+(Lemma P, an inequality between Gram matrices with no smallness condition); five-point
+windows overlap in a tetrahedron.  The earlier statement is kept as Proposition L₀ because
+its right-hand side has the errors of separation at most 3 only.  Lesson: when a
+hypothesis of a global theorem is orders of magnitude below the size that the obvious
+counterexample dictates, look at the proof before defending the hypothesis; and use the
+largest windows on which the data are complete.
+
+**DG-25 (round-off in the Procrustes distance).**  `d_procrustes` in
+`experiments/geometry/local_data_upper.py` used the closed form
+`‖A‖² + ‖B‖² − 2Σσ_i(AᵀB)`, which cancels catastrophically when the displacement is below
+about `10⁻⁷` of the size of the configuration.  Found when the first check of Theorem L⁺
+"failed" by a factor of 29 at displacements of `10⁻⁹`: the computed distance was larger than
+the displacement itself.  The residual is now formed explicitly.  Consequence for numbers
+already published: the ratio "left side at most `0.0022` times the right side" quoted for
+the earlier form of Theorem L (GEOMETRY-MSG-0007; the note; the status file) was inflated
+by this round-off; the correct value on the same instances is `0.0003`.  No inequality was
+affected in the wrong direction (the error overestimated distances).

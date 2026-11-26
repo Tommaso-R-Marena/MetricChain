@@ -4,21 +4,16 @@
 upper bound, Theorem L: eighth checkpoint).  Labels as in `ENSEMBLE_RIGIDITY.md`.
 Unrefereed.  Single conformations, no ensembles.
 
-> **Read this first (ninth checkpoint, 2026-11-26).**  The Science division has reviewed
-> the originality of this note at our request (SCI-REV-0023, on its branch; proofs not
-> reviewed).  Until the note is revised — the next commit — its findings take precedence
-> over the text below: (1) Theorem L was not found in print as stated, but **neither its
-> mechanism nor its exponent is new**: they are those of the geometric rigidity estimate
-> in a thin rod (Mora–Müller 2003; Blanchard–Griso), and each step is printed for lattices
-> (Alicandro–Lazzaroni–Palombaro; Schmidt–Zeman); (2) the sentence of §0 "the published
-> perturbation bound for this situation is exponential in `n`" is true of the one *global*
-> bound in the localisation literature only — polynomial first-order bounds for chains of
-> simplices are in print (Daitch–Spielman; Kyng et al.; Lew et al.); (3) Theorem K(a) is a
-> corollary of Lew–Nevo–Peled–Raz, with a better constant there; (4) four corrections to
-> our reading of Arias-Castro–Vishwanath (§5); (5) the threshold (S) is four to six orders
-> of magnitude below the limit that mirror images set, and at its own threshold the bound
-> exceeds the radius of gyration of an α-helix beyond fifteen residues: **as stated,
-> Theorem L is a statement about the exponent, not a usable guarantee**.
+> **Read this first (tenth checkpoint, 2026-11-26).**  The Science division reviewed the
+> originality of this note at our request (SCI-REV-0023; our proofs were not reviewed).
+> Its findings are adopted in §5 and §6: Theorem L was not found in print, but **its
+> mechanism and its exponent are those of the geometric rigidity estimate in a thin rod**,
+> and its ingredients are printed for lattices; polynomial first-order bounds for chains of
+> simplices are in print; Theorem K(a) is in print with a better constant.  Its question
+> about the threshold led to the present form of Theorem L, **which has no threshold**, and
+> to Theorem L⁺.  Its assessment of relevance stands and is sharpened in §6: **these are
+> theorems about the exponent and the first-order constant; for data of realistic accuracy
+> their guarantees are empty.**  §3 was rewritten at the tenth checkpoint and is unreviewed.
 
 ## 0. Summary
 
@@ -34,15 +29,20 @@ is at least of order `n/K^{3/2}` for **every** configuration and every pattern o
 theory report divided by `b·K²/(4√3)` (Theorem K(b): a duality between the lever-arm law
 and the instability of local data; global, not infinitesimal), and at least of order
 `n²/K^{3/2}` on helices and on every chain confined to a thin tube (Theorem K(c), now a
-proof).  **And it is never worse than `n²`** (Theorem L): for a chain whose consecutive
-four-point simplices are uniformly non-degenerate, *every* point configuration whose
-squared distances of sequence separation at most 4 are pointwise close to those of the
-chain is within `6.9 (b/τ²) n(n + 1)` times the `ℓ²` error of it, up to a rigid motion —
-globally, with a smallness threshold that does not depend on `n`.  The published
-perturbation bound for this situation — sequential lateration in which each point is
-attached to its `d + 1` predecessors — is exponential in `n` (§5).  So for rod-like chains
-the stability constant of sequence-local distance data is `Θ(n²)`, with explicit constants
-on both sides.  Consequences: a length-independent stability constant needs measured pairs
+proof).  **And it is never worse than `n²`** (Theorem L): for a chain whose windows of four
+consecutive points are non-degenerate, **every** point configuration — with no smallness
+condition at all — is within `1.2 (b/(s_*τ_*)) (n + 2)²` times the `ℓ²` difference of the
+squared distances of sequence separation at most 4, up to a rigid motion; the constant has
+a local form in which a thin window costs only through its own thickness.  For small
+errors the constant is the first-order one, `1/(2μ)`, in an explicit range (Theorem L⁺).
+The published *global* perturbation bound for this situation in the localisation
+literature (Arias-Castro–Vishwanath) is exponential in `n`; for the first-order problem
+polynomial bounds are in print, and the continuum analogue — the geometric rigidity
+estimate in a thin rod — has exactly this scaling (§5).  So for rod-like chains the
+stability constant of sequence-local distance data is `Θ(n²)`, with explicit constants on
+both sides.  **What this does not give** (§6): the range in which the absence of distant
+solutions is certified is far below any measurement accuracy, so for realistic data these
+are statements about scaling, not guarantees.  Consequences: a length-independent stability constant needs measured pairs
 of sequence separation at least of order `n^{2/3}` for any configuration, whatever the
 number of local measurements; and on a rod-like chain **no** set of pairs has one in this
 normalisation — even complete distance data have a constant of order `√n` at least, because
@@ -143,42 +143,199 @@ one bond; a coherent bending spreads it over all bonds, and its strain is the cu
 `∼ A/L²` times the distance from the axis, which is the proof of (c).  In the rod model the
 displacement of a coherent bending is the free–free beam form of GEOMETRY-RES-0002.
 
-## 3. A matching global upper bound
+## 3. A matching global upper bound — without a threshold
 
-For a configuration `X` of `n ≥ 5` points in `ℝ³` let
-`P_i = [x_{i+1} − x_i, x_{i+2} − x_i, x_{i+3} − x_i]` (`1 ≤ i ≤ n − 3`) be the edge matrices of its
-windows of four consecutive points, and
+*Revised at the tenth checkpoint.*  The form of the eighth checkpoint (Proposition L₀, §3.5)
+had a smallness condition (S).  The Science division asked how small it has to be
+(SCI-REV-0023 §5, question 1).  It is not needed.  The distances of separation at most 4
+are **all** the distances inside every window of five consecutive points, and a point set
+with complete distance data is controlled by an inequality between Gram matrices that has
+no smallness assumption; consecutive five-point windows share a tetrahedron, not a
+triangle, so their frames can be compared without a separate argument about reflections.
 
-    τ = min_i σ_min(P_i)   (thickness),     D = max_i σ_max(P_i),     b = max_i |x_{i+1} − x_i| .
+**Notation.**  For a set `S` of consecutive indices let `X_S` be the matrix whose rows are
+the points `x_i`, `i ∈ S`, `c_S` their centroid, and `σ₃(S)` the third singular value of the
+centred matrix `X_S − 1c_Sᵀ` — the *thickness* of the window,
+`σ₃(S)² = min_{|u| = 1} Σ_{i∈S} ((x_i − c_S)·u)²`, which is non-decreasing in `S`.  For `n ≥ 5`:
 
-`τ > 0` iff no four consecutive points are coplanar.  For a second configuration `Y` write
-`η_jk = |y_j − y_k|² − |x_j − x_k|²`.
+    W_i = {i, …, i+3},   τ_i = σ₃(W_i)   (1 ≤ i ≤ n−3);        F_i = {i, …, i+4},   s_i = σ₃(F_i) ≥ max(τ_i, τ_{i+1})   (1 ≤ i ≤ n−4);
+    τ_* = min_i τ_i ,     s_* = min_i s_i ,     b = max_i |x_{i+1} − x_i| .
 
-**Theorem L (global quantitative rigidity from sequence-local distances) [P].**  Let `τ > 0`
-and let `Y` be **any** configuration of `n` points in `ℝ³` such that
+`τ_* > 0` iff no four consecutive points are coplanar; `τ_*` lies between half of the `τ` of
+§3.5 and that `τ`.  For a second configuration `Y`: `η_jk = |y_j − y_k|² − |x_j − x_k|²`; `‖η‖₂` is
+its norm over **all pairs of separation at most 4**; `e_i` its norm over the ten pairs
+inside `F_i`.
+
+**Lemma P (Procrustes–Gram inequality) [K].**  For `U, X ∈ ℝ^{m×r}` with `X` of rank `r`,
+
+    min_{R ∈ O(r)} ‖U − XR‖_F²  ≤  ‖UUᵀ − XXᵀ‖_F² / ( 2(√2 − 1) σ_r(X)² ) .
+
+(Tu, Boczar, Simchowitz, Soltanolkotabi and Recht, 2016, Lemma 5.4 — cited from memory; the
+proof here is self-contained.)
+
+*Proof.*  Replace `X` by `XR` for an optimal `R`; then `XᵀU` is symmetric positive
+semidefinite (`R` is the orthogonal polar factor of `XᵀU`).  Put `Δ = U − X`, `A = ΔᵀΔ ⪰ 0` and
+`B = XᵀΔ = XᵀU − XᵀX`, a symmetric matrix with `B ⪰ −XᵀX`.  From
+`UUᵀ − XXᵀ = ΔXᵀ + XΔᵀ + ΔΔᵀ`, expanding the square of the Frobenius norm,
+
+    ‖UUᵀ − XXᵀ‖_F² = 2 tr(XᵀX·A) + [ tr A² + 4 tr(AB) + 2 tr B² ] .
+
+Since `tr (A + √2 B)² ≥ 0`, the bracket is at least `(4 − 2√2) tr(AB) ≥ −(4 − 2√2) tr(A·XᵀX)`.
+Hence `‖UUᵀ − XXᵀ‖_F² ≥ (2√2 − 2) tr(XᵀX·A) ≥ 2(√2 − 1) σ_r(X)² ‖Δ‖_F²`.  ∎
+
+**Lemma Q (a window with complete distance data) [P].**  Let `S` be a set of at least four
+indices with `s = σ₃(S) > 0`, let `Y` be **any** configuration and `e` the `ℓ²` norm of `η` over
+the pairs in `S`.  Then there are `R ∈ O(3)` and `t ∈ ℝ³` with
+
+    ‖Y_S − X_S R − 1tᵀ‖_F ≤ κ e / s ,        κ = 1/(2√(√2 − 1)) < 0.777 .
+
+*Proof.*  The Gram matrix of a centred configuration is `−½ J D J` (`D` the matrix of squared
+distances, `J` the centring projection).  So the Gram matrices of the two centred windows
+differ by `−½ J E J`, `E = (η_jk)_{j,k∈S}`, of Frobenius norm at most `½‖E‖_F = e/√2`.  Apply
+Lemma P to the centred windows.  ∎
+
+*The lemma is sharp up to a constant where it matters.*  Mirror one end point of `F_i` in
+the plane of its three middle points: exactly one squared distance changes, by `4h⁻h⁺`
+(`h^±` the heights of the two end points over that plane — the computation of SCI-REV-0023
+§5 (a)), and the window moves by `2 min(h⁻, h⁺)` up to a rigid motion.  The lemma gives
+`3.11 h⁻h⁺/s`, and `s ≤ √2 max(h⁻, h⁺)`.
+
+**Theorem L (global quantitative rigidity from sequence-local distances; no threshold)
+[P].**  Let `τ_* > 0`.  For **every** configuration `Y` of `n` points in `ℝ³` there is an
+isometry `g` (possibly improper) such that for every `k`, with `i(k) = min(k, n − 4)`,
+`δ_j = κ e_j/s_j` and `c_{j+1}` the centroid of `W_{j+1}`,
+
+    (local)      |y_k − g(x_k)|  ≤  δ_{i(k)} + Σ_{j < i(k)} (δ_j + δ_{j+1}) · ( |x_k − c_{j+1}| / τ_{j+1} + ½ ) ,
+
+and consequently
+
+    (uniform)    ‖Y − gX‖_F  ≤  1.2 · (b / (s_* τ_*)) · (n + 2)² · ‖η‖₂ .
+
+Nothing is assumed about `Y`: no closeness to `X`, no bound on the errors, no chain
+structure.
+
+*Proof.*  Points are row vectors; an isometry is `x ↦ xR + t`.
+*Step 1 (windows).*  Lemma Q for each `F_i` gives `R_i ∈ O(3)`, `t_i` and a residual
+`ε_i = Y_{F_i} − X_{F_i}R_i − 1t_i` with `‖ε_i‖_F ≤ δ_i`.
+*Step 2 (consecutive frames).*  `F_j` and `F_{j+1}` share the four points of `W = W_{j+1}`, and on
+these rows `X_W R_j + 1t_j + ε_j = X_W R_{j+1} + 1t_{j+1} + ε_{j+1}`.  Centring the rows:
+`(X_W − 1c_W)(R_j − R_{j+1})` is the centred difference of two residuals, of norm at most
+`δ_j + δ_{j+1}`; the matrix `X_W − 1c_W` has full column rank and smallest singular value
+`τ_{j+1}`; so `‖R_j − R_{j+1}‖_F ≤ (δ_j + δ_{j+1})/τ_{j+1}`.  Averaging the rows instead:
+`t_{j+1} − t_j = c_W(R_j − R_{j+1}) + m_j`, where `m_j` is the difference of the means of the
+two residuals over `W`, `|m_j| ≤ (δ_j + δ_{j+1})/2` (a mean of four vectors has norm at most
+half the Frobenius norm).  No statement about determinants is needed: if two consecutive
+frames had opposite orientation, `‖R_j − R_{j+1}‖_F ≥ 2` would simply be a large term.
+*Step 3 (telescoping).*  Let `g(x) = xR_1 + t_1` and `i = i(k)`, so that `k ∈ F_i`.  Then
+
+    y_k − g(x_k) = ε_i(k) + Σ_{j<i} [ x_k(R_{j+1} − R_j) + t_{j+1} − t_j ] = ε_i(k) + Σ_{j<i} [ (x_k − c_{j+1})(R_{j+1} − R_j) + m_j ] ,
+
+and taking norms gives (local).
+*Step 4 (uniform constants).*  `|x_k − c_{j+1}| ≤ b(k − j + ½)` for `j < i(k)`.  A pair lies in
+at most four of the windows `F_i`, so `Σ_j e_j² ≤ 4‖η‖₂²` and
+`Σ_j (δ_j + δ_{j+1})² ≤ (4κ‖η‖₂/s_*)²`.  By the Cauchy–Schwarz inequality and
+`Σ_{u<k}(u + ½)² ≤ (k + ½)³/3`:
+
+    |y_k − g(x_k)| ≤ (κ‖η‖₂/s_*) · [ 4b(k + ½)^{3/2}/(√3 τ_*) + 2√k + 1 ] .
+
+Summing the squares over `k` (`Σ_k (k + ½)³ ≤ (n + 3/2)⁴/4`, `(2√k + 1)² ≤ 9k`), using
+`τ_* ≤ 1.3 b` (the centred tetrahedron has `Σ|x_p − c|² = ¼Σ_{p<q}|x_p − x_q|² ≤ 5b²`) and `n ≥ 5`:
+`‖Y − gX‖_F ≤ 1.18 (b/(s_*τ_*)) (n + 3/2)² ‖η‖₂`.  ∎
+
+**Corollary L.1 (any estimator that fits as well as the truth; any noise level) [P].**  Let
+`q_jk = |x_j − x_k|² + ε_jk` for `|j − k| ≤ 4` and let `Ŷ` be any configuration with
+`Σ(|ŷ_j − ŷ_k|² − q_jk)² ≤ Σ ε_jk²` — for instance a global minimiser of this stress.  Then
+`min_g ‖Ŷ − gX‖_F ≤ 2.4 (b/(s_*τ_*)) (n + 2)² ‖ε‖₂`.  (`‖η(Ŷ)‖₂ ≤ 2‖ε‖₂`.)
+
+**Corollary L.2 (an error bar computed from the estimate alone) [P].**  Let `Ŷ` be *any*
+configuration with `τ_*(Ŷ) > 0` — the output of any algorithm — and let the data be
+`q_jk = |x_j − x_k|² + ε_jk` for an unknown configuration `X`, with `‖ε‖₂ ≤ ν`.  Then
+
+    min_g ‖X − gŶ‖_F ≤ C(Ŷ) · ( ‖r‖₂ + ν ),     r_jk = |ŷ_j − ŷ_k|² − q_jk ,     C(Ŷ) = 1.2 b(Ŷ)(n + 2)² / (s_*(Ŷ) τ_*(Ŷ)) .
+
+Every quantity on the right is computed from the estimate, the data and the noise bound;
+nothing is assumed about `X`.  (Theorem L with `Ŷ` as the reference configuration and `X` as
+the arbitrary one.)  This is possible only because the theorem has no smallness condition
+to verify.
+
+**Corollary L.3 (the exponent is sharp; `Θ(n²)` on helices; infinitesimal rigidity with a
+constant) [P].**  (a) For ideal helices of fixed geometry and distances of separation at
+most `K`, `4 ≤ K` fixed, the first-order constant for *distance* errors is at least
+`h²n²/(139 ρ b K^{3/2})` (Theorem K(c)) and at most `9.6 (b²/(s_*τ_*)) (n + 2)²` (Theorem L:
+for distance errors `δ`, `η_jk = δ_jk(2|x_j − x_k| + δ_jk)` and `|x_j − x_k| ≤ 4b`; more measured
+pairs can only lower the constant).  (b) For every chain with `τ_* > 0` the
+smallest non-zero singular value `μ` of the matrix `A` of Theorem L⁺ satisfies
+`μ ≥ s_*τ_*/(2.4 b (n + 2)²)`: apply the theorem to `Y = X + tV` and let `t → 0`.
+
+**Theorem L⁺ (the sharp constant, in a certified range) [P].**  Let `A` be the matrix with one
+row per pair of separation at most 4 — `(x_j − x_k)ᵀ` in the block of `j`, its negative in the
+block of `k`: half the Jacobian of the squared distances — and `μ > 0` its smallest non-zero
+singular value (the `(3n − 6)`-th).  Let `Λ` be the largest Laplacian eigenvalue of the graph
+of measured pairs (`Λ < 11.04`) and `C_L` any constant for which Theorem L holds for `X`.  For
+every `Y` with `‖η‖₂ ≤ μ/(ΛC_L)`:
+
+    d_P(X, Y) ≤ ‖η‖₂ / ( μ + √(μ² − Λ‖η‖₂) )    if ‖η‖₂ ≤ μ²/Λ ,        and    d_P(X, Y) ≤ ‖η‖₂/μ    in any case.
+
+As `‖η‖₂ → 0` the constant tends to `1/(2μ)`, the first-order constant, which is attained
+along the softest mode; at finite amplitude `1/(2μ)` alone is not a bound.
+
+*Proof.*  Let `g` be optimal, `X′ = gX`, `V = Y − X′`, `v = ‖V‖_F = d_P(X, Y)`.  Optimality gives
+`Σ v_k = 0` and `Σ x′_k × v_k = 0`, i.e. `V` is orthogonal to the infinitesimal isometries of
+`X′`, which are the kernel of `A_{X′}` (rank `3n − 6`).  Squared distances are quadratic in
+the configuration, so exactly `η = 2A_{X′}V + Q(V)` with `Q(V)_jk = |v_j − v_k|²`.  Now
+`‖A_{X′}V‖₂ ≥ μ v` (`A_{gX}` and `A_X` have the same singular values) and
+`‖Q(V)‖₂ ≤ Σ|v_j − v_k|² ≤ Λ v²`.  Hence `2μv − Λv² ≤ ‖η‖₂`.  By Theorem L,
+`v ≤ C_L‖η‖₂ ≤ μ/Λ`, and on `[0, μ/Λ]` the function `v ↦ 2μv − Λv²` is increasing with
+`2μv − Λv² ≥ μv`: `v` is at most the smaller root, and at most `‖η‖₂/μ`.
+`Λ < 11.04`: the Laplacian of the finite band graph is dominated by the compression of
+the infinite one, whose symbol `8 − 2Σ_{s≤4} cos sθ` is at most `11.04`.  ∎
+
+The local half of this argument — a radius of validity from the smallest singular value of
+the rigidity matrix and a bound on the second-order term — is standard (for instance
+Holmes-Cerfon, Theran and Gortler, arXiv 1908.03802, as described in SCI-REV-0023's report;
+not opened by us).  What Theorem L adds is that the statement holds for **every** `Y` whose
+data are within the range, not for `Y` in a neighbourhood of `X`: there is no distant
+configuration with nearly the same local distances.  The range is small (§6).
+
+**Remarks.**
+1. *Where the threshold of the earlier form came from.*  Windows of four points share
+   triangles, a triangle does not see on which side the next point lies, and the earlier
+   proof excluded the mirror image by a separate estimate that needed the errors to be
+   small against `τ⁴/D²`.  Five-point windows share tetrahedra and the question does not
+   arise.  The data are the same.
+2. *Why not exponential.*  Position errors of a sequential reconstruction multiply; errors
+   of orthogonal frames add.  The proof never reconstructs positions step by step.
+3. *Local constants (question 2 of SCI-REV-0023 §5).*  In (local) a thin window `j` costs
+   `1/(s_jτ_{j+1})` times the lever arm of the points beyond it, not `1/τ_*²` everywhere.
+4. *Larger separations (question 3 there).*  With distances of separation at most `K ≥ 4`
+   use windows of `K` and `K + 1` consecutive points: (local) holds verbatim with `½`
+   replaced by `1/√K`, and the thicknesses can only grow with the window (checked on
+   instances for `K = 5, 6, 7`; the uniform constant was written out for `K = 4` only).
+5. *The constants are crude.*  On the instances of §4 the left side is at most `0.064`
+   times the local bound and `0.002` times the uniform one.
+6. *Other dimensions.*  In `ℝ^d`: windows of `d + 1` and `d + 2` points, distances of
+   separation at most `d + 1`.
+
+### 3.5 The earlier form (eighth checkpoint): errors of separation at most 3 on the right
+
+Kept because its right-hand side involves the errors of separation at most 3 only (those
+of separation 4 enter through a threshold), which Theorem L does not give.  Notation of
+this subsection: `P_i = [x_{i+1} − x_i, x_{i+2} − x_i, x_{i+3} − x_i]`, `τ = min_i σ_min(P_i)`,
+`D = max_i σ_max(P_i)`.
+
+**Proposition L₀ [P].**  Let `τ > 0` and let `Y` be any configuration of `n` points in `ℝ³` such
+that
 
     (S)    |η_jk| ≤ τ⁴/(73 D²)    for all pairs with |j − k| ≤ 4.
 
-Then there is an isometry `g` of `ℝ³` (possibly improper) with
+Then there is an isometry `g` with `‖Y − gX‖_F ≤ 6.9 (b/τ²) n(n + 1) ‖η‖_{2, ≤3}`, the norm over the
+pairs of separation at most 3.  For this form some condition on the separation-4 data is
+necessary: reflecting the points beyond a window in the plane of three consecutive points
+changes no distance of separation at most 3.  The size of (S) is far from necessary: the
+reflection changes one squared distance of separation 4 by `4h⁻h⁺ ≥ 4τ²/√3`, a factor of at
+least `169 (D/τ)²` above (S) (Science division, SCI-REV-0023 §5 (a)).
 
-    ‖Y − gX‖_F ≤ 6.9 · (b/τ²) · n(n + 1) · ‖η‖₂ ,       ‖η‖₂² = Σ_{|j−k| ≤ 3} η_jk² .
-
-The distances of separation 4 enter through (S) only, and (S) cannot be dropped: reflecting
-the points beyond a window in the plane of three consecutive points changes no distance of
-separation at most 3.
-
-**Corollary L.1 (noisy data; any estimator that fits as well as the truth) [P].**  Let
-`q_jk = |x_j − x_k|² + ε_jk` for `|j − k| ≤ 4`, with `‖ε‖₂ ≤ τ⁴/(146 D²)`, and let `Ŷ` be any
-configuration with `Σ(|ŷ_j − ŷ_k|² − q_jk)² ≤ Σ ε_jk²` — for instance a global minimiser of
-this stress.  Then `min_g ‖Ŷ − gX‖_F ≤ 13.8 (b/τ²) n(n + 1) ‖ε‖₂`.
-
-**Corollary L.2 (the exponent is sharp; `Θ(n²)` on helices) [P].**  For ideal helices of
-fixed geometry (`τ`, `D`, `b`, `ρ`, `h` independent of `n`) and distances of separation at
-most `K`, `4 ≤ K` fixed: the infinitesimal constant is at least `h²n²/(139 ρ b K^{3/2})`
-(Theorem K(c)), and for all `Y` with distance errors `|δ_jk| ≤ τ⁴/(160 D³)` on these pairs
-`d_P(X, Y) ≤ 13.9 (bD/τ²) n(n + 1) ‖δ‖₂`.
-
-*Proof of Theorem L.*  *Step 1 (one window).*  Let `Q_i` be the edge matrix of the `i`-th
+*Proof.*  *Step 1 (one window).*  Let `Q_i` be the edge matrix of the `i`-th
 window of `Y`, `M_i = Q_iP_i^{-1}` (the linear map taking differences of points of the
 window of `X` to those of `Y`), and `Δ_i = Q_iᵀQ_i − P_iᵀP_i`.  The entries of `Δ_i` are
 `η_{i,i+a}` on the diagonal and `½(η_{i,i+a} + η_{i,i+b} − η_{i+a,i+b})` off it, so
@@ -210,27 +367,6 @@ vector lies in a window: `y_{j+1} − y_j = M_{ω(j)}(x_{j+1} − x_j)`, `ω(j) 
 `‖Y − gX‖_F ≤ 1.97 b n(n + 1)‖ξ‖₂`.  Finally a pair of separation `s ≤ 3` lies in `4 − s ≤ 3`
 windows, so `‖ξ‖₂ ≤ (2√3/τ²)‖η‖₂`.  ∎
 
-*Proof of L.1.*  `η(Ŷ) = (|ŷ_j − ŷ_k|² − q_jk) + ε_jk`, so `‖η‖₂ ≤ 2‖ε‖₂` over the pairs of
-separation at most 4, which gives (S) and the bound.  *Proof of L.2.*
-`η_jk = δ_jk(2|x_j − x_k| + δ_jk)`, `|x_j − x_k| ≤ D` for `|j − k| ≤ 3` and `≤ 2D` for separation
-4; for `|δ| ≤ τ⁴/(160D³)` this gives (S) and `‖η‖₂ ≤ 2.01 D‖δ‖₂`.  ∎
-
-**Remarks.**
-1. *Global, with a threshold independent of `n`.*  Nothing is assumed about `Y` except the
-   pointwise condition (S) on its local distances: no closeness to `X`, no chain structure.
-   If (S) fails, some squared distance of separation at most 4 is off by more than
-   `τ⁴/(73D²)`; for two chains with bonds at most `b` the trivial bound `d_P ≤ 2b n^{3/2}` then
-   gives `d_P ≤ max(6.9 (b/τ²) n(n+1), 146 b D² n^{3/2}/τ⁴)·‖η‖₂` (norm over separations at
-   most 4) for **all** pairs of chains with `X` thick: a global constant of order `n²`.
-2. *Why not exponential.*  Position errors of a sequential reconstruction multiply; errors
-   of orthogonal frames add.  The proof never reconstructs positions step by step.
-3. *The constants are crude.*  On the instances of §4 the left side is at most `0.0022`
-   times the right side; along the softest modes of helices the ratio `d_P/‖η‖₂` is between
-   `0.1 n²` and `0.4 n²` where the bound is `72 n²`.  The exponent, not the constant, is the
-   content.  The dependence `τ^{-2}` is that of a single window and is attained there.
-4. *Other dimensions.*  The proof works verbatim in `ℝ^d` with windows of `d + 1` points and
-   distances of separation at most `d + 1` (constants depending on `d`).
-
 ## 4. Checks
 
 `experiments/geometry/local_data_bounds.py`: (a) on 60 random instances (random point clouds
@@ -238,90 +374,189 @@ and chains, random sub-patterns of range `K ≤ 7`) the ratio `s_7/bound` is at 
 (b) on 200 random torsion moves (`δ ∈ [0.05, π]`) the ratio of `‖Δd‖₂` to the bound is at most
 `0.67`, and the largest `d_P/‖Δd‖₂` seen is 219; (c) the helix exponent.
 `local_data_stability.py`: the table of `s_7` against `n` and the three upper bounds.
-`local_data_upper.py`: Theorem L on 360 pairs `(X, Y)` (thick random chains and helices with
-10 to 90 points; `Y` a random displacement, a softest mode, a smooth bending field or a
-change of torsions, scaled to satisfy (S)): the left side is at most `0.0022` times the
-right side; reflecting the tail of a chain in the plane of three consecutive atoms leaves
-the separation-3 data unchanged to `10⁻¹⁴`, changes separation-4 data by `3.35` (violating
-(S)) and moves the chain by `d_P = 16.2`; the tube bound of Theorem K(c) on helices
-(`s_7 n²`: 63 against 825; 8.8 against 278; 81 against 1365).
+`local_data_upper.py`:
+* Lemma P on 20 000 pairs of matrices (arbitrary, including collapsed and reflected ones):
+  the ratio of the two sides is at most `0.76`;
+* **Theorem L on 420 pairs `(X, Y)` with `Y` arbitrary** — noise of any size, softest modes
+  of any amplitude, tails reflected in the plane of three consecutive points, unrelated
+  chains, random point sets, mirror images, heads rotated about an axis through two
+  points: no step of the proof and no bound is violated; the Procrustes distance is at
+  most `0.064` times the local bound and `0.002` times the uniform one; the local form
+  also for separations at most 5, 6, 7 (105 pairs each);
+* Theorem L⁺ on 360 pairs inside its range: `d_P` is at most `0.99` times the bound, and
+  along the softest mode of `A` (harness test) within `6·10⁻⁵` of it;
+* Proposition L₀ on 360 pairs satisfying (S): the left side is at most `0.0003` times the
+  right side (earlier versions of this note said `0.0022`: that number was inflated by
+  round-off in the Procrustes distance, `DEAD_ENDS.md` DG-25);
+* a reflected tail: separation-3 data unchanged to `10⁻¹⁴`, one separation-4 distance
+  changed by `2.99`, `d_P = 5.06`, local bound 265;
+* the tube bound of Theorem K(c) on helices (`s_7 n²`: 63 against 825; 8.8 against 278; 81
+  against 1365).
+`local_data_guarantees.py`: the table of §6.
 Tests in `run_checks.py`: `local_data_bound_a`, `local_data_bound_b`, `helix_beam_law`,
-`tube_bound_helix`, `local_procrustes_lemma` (Step 1 of the proof on thin and thick windows,
-with adversarial perturbations), `theorem_L_instances`; each has a planted error in
-`mutation_checks.py`.
+`tube_bound_helix`, `procrustes_gram_lemma`, `theorem_L_any_Y`, `theorem_L_sharp_constant`,
+`local_procrustes_lemma` and `theorem_L0_instances` (the earlier form); each has a planted
+error in `mutation_checks.py` (among them: the factor `√2 − 1` of Lemma P dropped; the
+separation-4 errors left out of `‖η‖`; the first-order constant used as a bound).
 
 ## 5. Prior art, and what is claimed
 
-**Theorem K.**  (a) is the statement that the `d`-dimensional algebraic connectivity of a
-graph is at most its ordinary algebraic connectivity (Jordán–Tanigawa; Lew–Nevo–Peled–Raz)
-together with the elementary bound `O(K³/n²)` for graphs of bandwidth `K`; the accumulation
-of errors in sequential (trilateration) localisation is classical in the sensor-network
-literature (Cramér–Rao analyses).  **No novelty is claimed for (a).**  [From memory of the
-literature; no full text read.]  The beam scaling in (c) is that of the lowest bending mode
-of a truss (`DEAD_ENDS.md` DG-4); the proof is the standard test field of rod theory.  What
-we did not find stated is (b): the per-torsion superposition constant as a lower bound for
-the stability of local distance data — elementary, and the point is the link, not the
-difficulty.
+The originality of this note was reviewed at our request by the Science division
+(SCI-REV-0023, workstream A4: 123 logged queries and addresses, 33 texts opened, one in
+full; an internal review by an AI session, not peer review; our proofs were not reviewed).
+Where an attribution below carries "[A4]" the source was read by that review, at the level
+its report states, and not by us.
 
-**Theorem L.**  Searched on 2026-11-26 (two web searches; one paper read through a fetch of
-its arXiv HTML version).
-* *The closest published result:* E. Arias-Castro and S. Vishwanath, "Stability of
-  Sequential Lateration and of Stress Minimization in the Presence of Noise" (arXiv
-  2310.10900, 2023–24).  Setting: noisy squared distances on a lateration graph (an ordering
-  in which every point is adjacent to at least `p + 1` earlier ones), configuration in
-  general position.  Their Theorem 2.1: if `Σε² ≤ σ²` then sequential lateration returns
-  points with `min_g Σ|y_i − g(x_i)|² ≤ A Σε²`; Theorem 3.1: the same for stress minimisers;
-  Proposition 3.2: a lower bound linear in `Σε²` with a constant that does not depend on
-  `n`.  Their constant (their equations (2.30), (2.33), as read from the HTML version by our
-  fetch) is `A_n ≤ (1 + C_2α)^{n−p−1}·(…)`, `α` the largest squared aspect ratio of a
-  landmark set — **exponential in `n`** — in exactly the case of Theorem L, each point
-  attached to its `p + 1` predecessors, which they call the worst case; the admissible noise
-  level shrinks exponentially as well.  They state that the bound is unlikely to be tight
-  and give no polynomial one.  **[K; from one automated reading of the paper — statement
-  numbers and formulas should be confirmed by a second reader.]**
-* *What Theorem L adds for this graph:* a constant polynomial in `n` — `n²` for the error,
-  `n⁴` for the squared error — under a *uniform* non-degeneracy of the windows (their
-  general-position hypothesis is not uniform, ours is quantitative: `τ`, `D`); a smallness
-  threshold independent of `n` and pointwise; a statement about every configuration
-  consistent with the data rather than about the output of one algorithm (Corollary L.1
-  covers stress minimisers); and the matching lower bound `n²` on rod-like chains, which
-  shows that polynomial growth is real.  It does not cover general lateration graphs.
-* *Related theory:* geometric rigidity estimates in nonlinear elasticity (Friesecke, James,
-  Müller 2002: the deformation gradient is close to one rotation, with a constant that
-  degenerates for thin domains; rod theories built on it; a recent proof with explicit
-  constants by Conti and Zwicknagl) **[K, from search summaries and memory]**.  Theorem L is
-  a discrete analogue for a chain of simplices observed through its local distances, with
-  the rod scaling `L²` and an elementary proof; "errors of frames add" is the discrete form
-  of the argument that passes from local rotations to a global one.  The gross errors
-  ("flips") of one trilateration step studied in the sensor-network literature (Moore et
-  al. 2004) are what condition (S) excludes.
-* **Novelty assessment.**  The polynomial bound for band lateration graphs was not found;
-  the one published bound we found for this case is exponential.  Two searches and one paper
-  are a thin basis: the statement is elementary enough to be folklore in rod theory or in
-  the literature on discretizable distance geometry.  An independent search is requested
-  (GEOMETRY-MSG-0007).
+**Theorem K.**  (a) is the inequality `a_d(G) ≤ a(G)` between the `d`-dimensional and the
+ordinary algebraic connectivity — Jordán and Tanigawa (SIAM J. Discrete Math. 36 (2022),
+Theorem 4.2, for `d = 2`, as cited); for all `d`, Lew, Nevo, Peled and Raz, "Rigidity expander
+graphs", arXiv 2304.01306, Theorem 1.6, and independently Presenza, Mas, Giribet and
+Alvarez-Hamelin, arXiv 2209.14893 — together with the spectral gap of a band graph, which
+the first of these computes for the "generalized path graph" (proof of Proposition 7.7):
+`s_7² ≤ 2π²K(K+1)(2K+1)/(3n²)`, **a better constant than ours** [A4].  That proposition also
+shows that the order `n` of (a) is attained over all configurations (at prisms wider than
+long), which does not decide our open end on compact chains of fixed window geometry.
+**No novelty is claimed for (a).**  The beam scaling in (c) is that of the lowest bending
+mode of a truss (`DEAD_ENDS.md` DG-4); the proof is the standard test field of rod theory.
+What we did not find stated is (b): the per-torsion superposition constant as a lower bound
+for the stability of local distance data — elementary; the point is the link.
+
+**Theorem L.**  Searched by us (two web searches, one paper) and then by the Science
+division [A4].  **The statement was not found; it is not new in mechanism or in scaling.**
+
+* *The published global bound for this graph.*  E. Arias-Castro and S. Vishwanath,
+  "Stability of Sequential Lateration and of Stress Minimization in the Presence of Noise",
+  arXiv 2310.10900v3; SIAM J. Math. Data Sci. 7(3) (2025) 1077–1097 [arXiv version read in
+  full by A4 and once, through a fetch, by us; the journal version by nobody].  Noisy
+  squared distances on a lateration graph, configuration in general position.  Theorem 2.1:
+  if `Σε² ≤ σ²`, sequential lateration returns points with `min_g Σ|y_i − g(x_i)|² ≤ AΣε²`;
+  Theorem 3.1: the same for every stress minimiser; Proposition 3.2: a lower bound of the
+  same form with constant `1/(8δ)`, `δ` the maximum degree (realised by a dilation, and blind
+  to bending [A4]).  The explicit constant (their (2.6); (2.30) in the arXiv HTML rendering,
+  which is what our earlier text quoted) is
+  `A_n ≤ (1 + C_2α)^{n−p−1}/((p+1)ω²)·max{C_1α, C_2/(1 + C_2α)}`, with `α` the largest squared
+  aspect ratio and `ω` the smallest width of a landmark set — quantities of the same kind as
+  our thicknesses — and the admissible noise ((2.7)) decreases like `(1 + C_2α)^{−(n−p−2)}`.
+  They write that the bound "takes into account the worst case scenario where … each node
+  `v_k` is connected to precisely the preceding `p + 1` nodes" — the graph of Theorem L — that
+  the constant "is unlikely to be tight in more friendly (and less contrived) settings", and
+  that their analysis "can only be accurate, if at all, in the very worst case"; they
+  neither claim nor deny that the exponential growth is real there.  No polynomial bound.
+  The paper that introduced lateration graphs (Aspnes et al. 2006) states, for the graphs
+  of its hardness construction, the "suspicion … that edge-length errors accumulate at most
+  polynomially across the graph", without proof [A4].
+* *The mechanism is that of thin-rod theory.*  Theorem L is a discrete version, for a chain
+  of points observed through its distances, of the geometric rigidity estimate of nonlinear
+  elasticity in a thin rod: Friesecke, James and Müller (2002) [not opened by anyone here];
+  in a thin plate the constant "degenerates like h⁻²" (Friesecke–James–Müller 2006,
+  Theorem 10) [A4]; for rods, Mora and Müller (Calc. Var. PDE 18 (2003), proof of Theorem
+  2.1) take one rotation per cell of the size of the thickness, compare overlapping cells
+  and obtain `∫|R(x_1+ξ) − R(x_1)|² ≤ C(|ξ|/h + 1)² ∫dist²(∇_h y, SO(3))` [A4] — our Steps 1–3
+  in the continuum; Blanchard and Griso (Anal. Appl. 7 (2009), as restated in arXiv
+  1010.3614, Theorem 3.2) give a rotation field with `‖dR/ds‖_{L²} ≤ (C/δ²)‖dist(∇v, SO(3))‖_{L²}`,
+  `C` independent of thickness and length [A4].  With cell size of the order of the bond and
+  of the thickness these give our `(b/τ²)n²` up to constants.
+* *The discrete ingredients are in print too.*  Lemma P: Tu et al. 2016 (above; from our
+  memory).  The Gram matrix of one window controls the window up to an orthogonal map,
+  with constant `1/σ_min`: Arias-Castro, Javanmard and Pelletier (J. Mach. Learn. Res. 21
+  (2020), Theorem 1); for lattice simplices Alicandro, Lazzaroni and Palombaro (arXiv
+  1601.05968, Lemma 1.2) and Lazzaroni, Palombaro and Schlömerkemper (arXiv 1501.07505,
+  Lemma 3.2) [A4].  Two neighbouring simplices of opposite orientation violate the bond
+  between the two vertices opposite to their common facet — the role of the separation-4
+  distances, and the "flips" of Moore et al. (2004): Alicandro–Lazzaroni–Palombaro, Lemma
+  1.3 [A4].  Rotations of overlapping cells compared and accumulated on lattices: Schmidt
+  and Zeman (arXiv 2208.04199, Theorem 2.4) [A4]; that errors of orthogonal alignments
+  add, by "norm preservation by orthogonal matrices", is stated for sequential stitching in
+  arXiv 2604.21094 (proof of Lemma 18) [A4].
+* *Polynomial bounds for the first-order problem exist.*  Daitch and Spielman (arXiv
+  cs/0703119, Lemma 3.2: a path of `k` well-shaped triangles, `O(k³)`); Kyng, Peng,
+  Schwieterman and Zhang (arXiv 1805.09442, Lemma 3.3: `λ_min = Ω(n⁻¹Δ⁻⁴)` for tetrahedral
+  trusses), who remark that their three-dimensional analogue of the path lemma loses a
+  factor exponential in the hop distance "due to the accumulation of rotational operators"
+  and that they "are not sure whether this exponential increase is simply due to an
+  algebraic artifact"; Lew et al. (Proposition 7.7: `Θ_d(1/n²)` for the best rigidity
+  eigenvalue of the band graph over all configurations) [A4].  Corollary L.3 (b) is a
+  statement of this kind, `μ ≳ s_*τ_*/(b n²)`, for chains with uniformly thick windows; for
+  such chains the comparison of frames answers the question of Kyng et al.: the loss is
+  polynomial.
+* *Other global or finite-perturbation results, not for this graph:* Javanmard and
+  Montanari (Found. Comput. Math. 13 (2013), Theorem 1.1; the lower bound by a bending
+  map); Chaudhury, Khoo and Singer (SIAM J. Optim. 25 (2015), Theorem 13); Holmes-Cerfon,
+  Theran and Gortler (arXiv 1908.03802: explicit but local radii from the smallest singular
+  value of the rigidity matrix — the local half of Theorem L⁺); Alestalo, Trotsenko and
+  Väisälä (complete distance data; constant governed by diameter over thickness) [A4].
+* **What is claimed.**  A global stability inequality — for *every* configuration, with no
+  smallness condition, with a constant of order `n²` that is explicit and local — for the
+  distances of sequence separation at most 4 of a chain with non-degenerate windows; the
+  matching order `n²` on rod-like chains; and the first-order constant `1/(2μ)` for all
+  configurations whose data lie in an explicit range.  We did not find these stated.  They
+  are a transfer of a known argument to distance data, assembled from known lemmas — not a
+  new mechanism, and not the first polynomial bound of any kind for chains of simplices.
+  With respect to the published global bound for band lateration graphs the constant
+  improves from exponential to `n⁴` (squared error) and the admissible noise from
+  exponentially small to unrestricted.  **The search has gaps** [A4]: not read are
+  B. Schrader, "Propagation of errors in schematic chains of triangles in space with
+  measured distances", Bull. Géodésique 86 (1967) and the classical geodesy of
+  trilateration chains; Luo and Wu, J. Optim. Theory Appl. 149 (2011); Anderson, Shames, Mao
+  and Fidan, SIAM J. Discrete Math. 24 (2010); the journal version of Arias-Castro–
+  Vishwanath; Friesecke–James–Müller 2002 itself; no search in zbMATH or MathSciNet.  The
+  threshold-free form and Theorem L⁺ were written after that search and were not searched
+  for separately.
 
 Sources: [arXiv 2310.10900](https://arxiv.org/abs/2310.10900),
-[Moore et al., SenSys 2004](https://people.csail.mit.edu/teller/pubs/MooreEtAlSensys2004.pdf),
-[arXiv 2006.08840](https://arxiv.org/pdf/2006.08840),
-[arXiv 2608.00863](https://arxiv.org/pdf/2608.00863).
+[Moore et al., SenSys 2004](https://people.csail.mit.edu/teller/pubs/MooreEtAlSensys2004.pdf);
+all other references as given in the Science division's report
+`docs/science/workstreams/A4_REPORT.md` on its branch.
 
-## 6. Limitations and open ends
+## 6. What the theorems do and do not guarantee; limitations and open ends
 
-* Theorem L is for `ℝ³`, exact windows of four consecutive points and distances of
-  separation at most 4; its constants are loose by two to three orders of magnitude on the
-  instances computed; (S) is pointwise and small (`τ⁴/(73D²)` is `6·10⁻⁶` for a typical
-  random chain with unit bonds and about `10⁻⁵` to `2·10⁻⁵` for the helices of §4).  A sharp
-  constant, and the right dependence on `τ` for chains with a few thin windows, are open.
+**On idealised traces the certified range is empty in practice.**  The table
+(`experiments/geometry/local_data_guarantees.py`; lengths in ångström; traces of constant
+radius, rise and turn — the geometries of SCI-REV-0023 §5, not structures from a database)
+gives, for squared distances of separation at most 4: the constant `C_L` of Theorem L; the
+sharp first-order constant `1/(2μ)`; the range `‖η‖₂ ≤ μ/(ΛC_L)` in which Theorem L⁺ certifies
+it, expressed as a root-mean-square error of the distances; and the worst-case first-order
+RMSD per unit root-mean-square distance error.
+
+| trace | `n` | `C_L` | `1/(2μ)` | certified range (rms distance error) | first-order RMSD per unit rms distance error, worst case |
+|---|---|---|---|---|---|
+| helix-like (radius 2.3, rise 1.5, 100° per point) | 12 | 185 | 0.23 | `2·10⁻⁵` | 4.2 |
+| | 20 | 456 | 0.45 | `3·10⁻⁶` | 9.0 |
+| | 100 | 9 800 | 9.5 | `2·10⁻⁹` | 207 |
+| strand-like (radius 0.94, rise 3.3, 160° per point) | 12 | 1 780 | 3.3 | `9·10⁻⁸` | 58 |
+| | 20 | 4 410 | 7.3 | `1·10⁻⁸` | 140 |
+| | 100 | 94 700 | 168 | `9·10⁻¹²` | 3 460 |
+| strand-like, 175° per point | 20 | 65 100 | 42 | `1·10⁻¹⁰` | 753 |
+
+Reading.  (i) *First order:* on a helix-like trace of 20 points, distance errors of
+root-mean-square size `σ` move the reconstruction by at most `9σ` (RMSD) to first order; the
+factor grows like `n²` and is one to two orders of magnitude larger on strand-like traces.
+This is the instability of local data that Theorem K describes, with its true constant.
+(ii) *Globally:* the range in which we can **certify** that no distant configuration fits
+the data is `10⁻⁵` ångström or less.  Above it Theorem L still holds, but its constant is a
+thousand times the first-order one and its bound exceeds the size of the molecule.  So, as
+the Science division's review says of the earlier form, **these are theorems about the
+exponent and about the first-order constant; as a guarantee for data of realistic accuracy
+they are empty**, and nothing in this note shows that sequence-local distances of
+realistic accuracy determine a fold.  The gap between `C_L` and `1/(2μ)` — between "no
+distant solution" and "the nearby solution is well conditioned" — is the open problem
+(`PROOF_OBLIGATIONS.md` O-16).  (iii) Corollary L.2 gives an error bar from an estimate
+alone; with the present constants it is valid and useless for the same reason.
+
+**Other limitations.**
+
+* Theorems L, L⁺ are for `ℝ³`, exact windows and complete data of separation at most 4 (a
+  missing pair inside a five-point window breaks Lemma Q for that window; the Proposition
+  L₀ route needs fewer pairs but has a threshold).  Deterministic bounded errors only: no
+  Cramér–Rao or minimax statement for random noise, where the typical error is far below
+  the worst case.
 * For compact (globular) chains the true constant is smaller than `n²`: Theorem K(a) gives
   `n/K^{3/2}` and (c) gives `L²/(ρ…)` with `L ∼ n^{1/3}`; where between `n` and `n²` typical
   compact chains lie is not studied (one sample per size gave exponents between `−1.7` and
   `−2.1` for `s_7` of random coils).
-* (b) uses bonds of length at most `b` and nothing else; with fixed bond angles the levers
-  are shorter by the factor `sin(θ/2)` on extended arms.
-* Nothing here uses long-range pairs; the complementary question — how few long-range
-  pairs improve the constant, and by how much — is a measurement-selection problem (an
-  E-optimal design; known approximation results apply to the infinitesimal constant).  By
-  Corollary K.1 they cannot make it length-independent on a rod.
-* No statistics: the noise is deterministic and bounded; a Cramér–Rao or minimax statement
-  for random noise is not derived.
+* Theorem K(b) uses bonds of length at most `b` and nothing else; with fixed bond angles the
+  levers are shorter by the factor `sin(θ/2)` on extended arms.
+* Nothing here uses long-range pairs; how few long-range pairs improve the constant, and by
+  how much, is a measurement-selection problem (an E-optimal design; known approximation
+  results apply to the first-order constant).  By Corollary K.1 they cannot make it
+  length-independent on a rod.

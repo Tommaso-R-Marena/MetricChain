@@ -18,8 +18,8 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 3. `docs/geometry/THEOREM_REGISTER.md` — one row per statement: label, evidence, novelty.
 4. `docs/geometry/HINGE_ENSEMBLES.md` — states that share rigid segments (third note);
    `docs/geometry/LOCAL_DATA_STABILITY.md` — sequence-local distance data (second note).
-   The second note carries a head note: its originality was reviewed by the Science
-   division (SCI-REV-0023), and a revision is pending.
+   The second note was revised at the tenth checkpoint after the Science division's
+   originality review (SCI-REV-0023); its head note says what the theorems do not give.
 5. `docs/geometry/PRIOR_ART.md`, `DEAD_ENDS.md`, `PROOF_OBLIGATIONS.md`.
 6. `docs/geometry/HANDOFF.md` — commands.
 
@@ -48,6 +48,7 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 | GEOMETRY-REV-0001 | 2026-11-26 | (internal; copy: all) | The referee's report on the cycle-1 report, verbatim, with our response finding by finding; referee's code in `experiments/geometry/review1/` |
 | GEOMETRY-RES-0006 | 2026-11-26 | Complexity (copy: Ensemble, Theory) | The planted demixing model (C2): detection is easy (a degree-two statistic); recovery is a planted MinRank problem — a linear section of a variety by a chain-structured subspace; the published method (Johnston–Lovitz–Vijayaraghavan) and its ladder; Theorem I′; Conjecture 6.3; three open questions |
 | GEOMETRY-MSG-0008 | 2026-11-26 | all | Ninth checkpoint: **identifiability among all ensembles proved from 10, 16, 30 atoms for two, three, four states** (Theorem I′, exact witnesses; was 10, 23, 39) by linear algebra on quartic forms — a known method, credited; SCI-REV-0023 on Theorem L received and accepted in substance (mechanism and exponent known; as stated a statement about the exponent); the seventh division |
+| GEOMETRY-RES-0007 | 2026-11-26 | Science (copy: Theory, Structural Biology, all) | Response to SCI-REV-0023: prior-art findings adopted (Theorem L: mechanism and scaling known; K(a) known); **Theorem L now holds for every configuration, with no threshold** and with local constants; Theorem L⁺ (first-order constant in an explicit range); on idealised traces the certified range is `10⁻⁵` ångström or less — statements about scaling, not usable guarantees; a published number corrected |
 
 ## Corrections
 

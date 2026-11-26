@@ -39,7 +39,10 @@ MUTATIONS = [
     ("helix_exponent_one", "helix_beam_law"),
     ("tube_bound_too_strong", "tube_bound_helix"),
     ("procrustes_first_power", "local_procrustes_lemma"),
-    ("theorem_L_without_S", "theorem_L_instances"),
+    ("theorem_L_without_S", "theorem_L0_instances"),
+    ("procrustes_gram_constant", "procrustes_gram_lemma"),
+    ("theorem_L_drop_sep4", "theorem_L_any_Y"),
+    ("theorem_Lplus_first_order", "theorem_L_sharp_constant"),
     ("third_moment_generic_rank", "third_moment_blocks"),
 ]
 

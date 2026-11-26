@@ -37,8 +37,8 @@ source scripts/lean_env.sh
 lake env lean proofs/Geometry/EnsembleRigidity.lean     # single file, about 15 s, no output = OK
 lake build                                              # whole project; the last lines print the axiom audit
 # Python (numpy, scipy; exact parts use only the standard library)
-python3 experiments/geometry/run_checks.py              # 43 tests, about 70 s (one is skipped, and says so, without Singular)
-python3 experiments/geometry/mutation_checks.py         # 31 planted errors, all must be caught
+python3 experiments/geometry/run_checks.py              # 46 tests, about 65 s (one is skipped, and says so, without Singular)
+python3 experiments/geometry/mutation_checks.py         # 34 planted errors, all must be caught
 python3 experiments/geometry/exact_conic_rank.py 12     # Theorem C(b), about 35 s
 python3 experiments/geometry/exact_conic_rank.py 20 13 rational angles   # Theorem C(b), K = 13..20, about 3 min
 python3 experiments/geometry/exact_jacobian_rank.py 8   # Theorem H, about 3 s
@@ -62,7 +62,8 @@ python3 experiments/geometry/hinge_multistate.py 0 150  # three states at two to
 python3 experiments/geometry/exact_hinge_candidates.py  # hinge candidates over Q: degree 8 / 2 (needs Singular)
 python3 experiments/geometry/hinge_halfturns.py         # the half-turn exceptions of Theorem M
 python3 experiments/geometry/hinge_fourier_rank.py      # what the squared distances see of three hinge angles (rank 19)
-python3 experiments/geometry/local_data_upper.py        # Theorem L and the tube bound on instances
+python3 experiments/geometry/local_data_upper.py        # Lemma P, Theorems L (any Y, every proof step), L+, Proposition L0, tube bound (10 s)
+python3 experiments/geometry/local_data_guarantees.py   # what Theorems L, L+ certify on idealised traces (the table of section 6)
 python3 experiments/geometry/torsion_sharpness.py       # kink formula, worst conformations (GEOMETRY-RES-0002; slow part (2))
 # read-only synchronisation with the other divisions
 for b in claude/determined-ride-og1u7j research/ubuntu-engineering research/scientific-translation \
@@ -124,6 +125,9 @@ by a finite list of mirrored assemblies (`HINGE_ENSEMBLES.md`; first by the Scie
 division).  Second topic: distances between points close along the chain determine a thick
 chain with a stability constant of order `n²` — a global upper bound (Theorem L) and a
 matching lower bound on rods (`LOCAL_DATA_STABILITY.md`).  Mechanism and exponent are those
-of the thin-rod rigidity estimate (SCI-REV-0023), and with its present threshold and
-constants Theorem L is a statement about the exponent; a threshold-free version is sketched
-in `RESEARCH_LOG.md` ("Resume here", item 2) and not yet written or checked.
+of the thin-rod rigidity estimate (SCI-REV-0023).  Since the tenth checkpoint Theorem L has
+**no threshold** (five-point windows have complete distance data; an inequality between
+Gram matrices; frames compared on shared tetrahedra), a local constant, and a companion
+(Theorem L⁺) with the first-order constant `1/(2μ)` in an explicit range.  On idealised
+traces that range is `10⁻⁵` ångström or less: the theorems are about scaling, and their
+guarantees are empty for data of realistic accuracy (§6 of the note; O-16).

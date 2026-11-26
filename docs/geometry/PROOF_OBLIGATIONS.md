@@ -155,3 +155,22 @@ many others; no statement for a given other angle, none for position-dependent a
 (v) DEMIX-4 at `n = 6K − 2` (extraction through `c²g`) is described, not implemented.
 (vi) Noise: nothing.  The certificate is a rank; its stability constant is the smallest
 singular value of a matrix of size `C(m + 3, 4)` and was not studied.
+
+**O-16.  Local distance data: between "no distant solution" and "the nearby solution is
+well conditioned"** (`LOCAL_DATA_STABILITY.md` §6).  Theorem L excludes distant
+configurations with a constant `C_L ≈ 1.2 b n²/(s_*τ_*)`; Theorem L⁺ gives the first-order
+constant `1/(2μ)` when `‖η‖₂ ≤ μ/(ΛC_L)`.  On idealised traces `C_L` is about a thousand times
+`1/(2μ)` and the range is `10⁻⁵` ångström or less, so for data of realistic accuracy nothing
+is certified.  Open: (i) a global bound whose constant is within a moderate factor of
+`1/(2μ)` — the loss is in the conversion of window errors to frame rotations (worst case
+over all ten distances of a window, where bending changes them coherently) and in the
+crude bound `Λv²` for the second-order term, which is far from attained on smooth
+displacements; a two-scale argument (linearise inside windows, compare frames between
+them) is the natural attempt; (ii) an instance-specific *computed* radius of injectivity
+(interval arithmetic or a sum-of-squares certificate for one chain) — a computation to be
+specified for Engineering, not requested; (iii) random noise: a statement in expectation
+(the typical error is far below the worst case); (iv) incomplete windows: a missing pair
+inside a five-point window; general lateration graphs; (v) Lemma P is cited from memory
+(Tu et al. 2016) — the proof in the note is self-contained, the attribution should be
+checked; (vi) the proofs of Theorems L, L⁺ have not been read by anyone outside this
+session.

@@ -779,10 +779,11 @@ def local_procrustes_lemma():
 
 
 @test
-def theorem_L_instances():
-    """Theorem L: ||Y - gX||_F <= 6.9 (b/tau^2) n (n+1) ||eta||_2 for every Y satisfying the
-    pointwise condition (S) on the squared distances of separation <= 4; and (S) is needed: a
-    tail reflected in the plane of three consecutive atoms keeps the separation-3 data."""
+def theorem_L0_instances():
+    """Proposition L0 (the earlier form of Theorem L): ||Y - gX||_F <= 6.9 (b/tau^2) n (n+1) ||eta||_2,
+    eta over separations <= 3, for every Y satisfying the pointwise condition (S) on the squared
+    distances of separation <= 4; and (S) is needed for this form: a tail reflected in the plane
+    of three consecutive atoms keeps the separation-3 data."""
     import local_data_upper as U
     rng = np.random.default_rng(32)
     worst, used = 0.0, 0
@@ -792,7 +793,7 @@ def theorem_L_instances():
         tau, D = U.thickness(X)
         V = rng.normal(size=X.shape) if trial % 2 == 0 else U.softest_mode(X)[0]
         Y = X + 0.05 * tau ** 4 / (73 * D ** 2) * V / np.abs(V).max()
-        S, left, right, _, _ = U.theorem_L_sides(X, Y)
+        S, left, right, _, _ = U.theorem_L0_sides(X, Y)
         if S:
             used += 1
             worst = max(worst, left / right)
@@ -803,7 +804,7 @@ def theorem_L_instances():
     nrm /= np.linalg.norm(nrm)
     Y = X.copy()
     Y[i + 4:] = X[i + 4:] - 2 * np.outer((X[i + 4:] - p0) @ nrm, nrm)
-    S, left, right, _, _ = U.theorem_L_sides(X, Y)
+    S, left, right, _, _ = U.theorem_L0_sides(X, Y)
     if MUT == "theorem_L_without_S":
         S = True                                            # planted error: the hypothesis is dropped
     if S:
@@ -812,6 +813,103 @@ def theorem_L_instances():
     ok = worst <= 1.0 and used >= 20 and not S and left > 0.5
     return ok, (f"{used} pairs satisfying (S): largest left/right = {worst:.4f}; reflected tail: (S) "
                 f"{'holds' if S else 'fails'}, d_P = {left:.1f}")
+
+
+@test
+def procrustes_gram_lemma():
+    """Lemmas P and Q of LOCAL_DATA_STABILITY.md: min_R ||U - XR||_F^2 <= ||UU^T - XX^T||_F^2 /
+    (2 (sqrt 2 - 1) sigma_r(X)^2) for arbitrary U; and a five-point window with squared-distance
+    errors of norm e is within kappa e / s of a congruent copy -- for any competitor, including
+    one tetrahedron mirrored against the other and collapsed windows."""
+    import local_data_upper as U
+    rng = np.random.default_rng(33)
+    c = 1.0 if MUT == "procrustes_gram_constant" else np.sqrt(2) - 1      # planted error: the factor dropped
+    worst = U.procrustes_gram_ratio(rng, 3000 if QUICK else 12000) * (np.sqrt(2) - 1) / c
+    kappa = 1 / (2 * np.sqrt(c))
+    worst_w = 0.0
+    for trial in range(300):
+        X = rng.normal(size=(5, 3)) * rng.uniform(0.2, 2, size=3)
+        kind = trial % 4
+        if kind == 0:
+            Y = rng.normal(size=(5, 3)) * rng.uniform(0.05, 4)
+        elif kind == 1:                                   # last point mirrored in the plane of points 1, 2, 3
+            nrm = np.cross(X[2] - X[1], X[3] - X[1])
+            nrm /= np.linalg.norm(nrm)
+            Y = X.copy()
+            Y[4] = X[4] - 2 * ((X[4] - X[1]) @ nrm) * nrm
+        elif kind == 2:                                   # collapsed towards a plane
+            Y = X * np.array([1, 1, rng.uniform(-1, 1)])
+        else:
+            Y = X + rng.normal(size=(5, 3)) * 10 ** rng.uniform(-5, 0)
+        e = float(np.linalg.norm(U.sq_errors(X, Y, [(a, b) for a in range(5) for b in range(a + 1, 5)])))
+        res = U.best_fit(X, Y)[2]
+        if e > 0:
+            worst_w = max(worst_w, res / (kappa * e / U.csig3(X)))
+    ok = worst <= 1 + 1e-9 and worst_w <= 1 + 1e-9
+    return ok, f"largest ratio to the bound: Lemma P {worst:.3f}, five-point windows {worst_w:.3f}"
+
+
+@test
+def theorem_L_any_Y():
+    """Theorem L (no threshold): for every configuration Y, d_P(X, Y) <= local bound <= 1.2 (b/(s tau))
+    (n+2)^2 ||eta||_2 with eta over separations <= 4, and every step of the proof holds (windows,
+    consecutive frames, telescoping); competitors of any size, reflected tails, unrelated chains,
+    random points, mirror images, rotated heads; local form also for separations <= 5, 6."""
+    import local_data_upper as U
+    rng = np.random.default_rng(34)
+    sep = 3 if MUT == "theorem_L_drop_sep4" else None      # planted error: separation-4 errors not counted
+    nviol, wl, wg, tot = 0, 0.0, 0.0, 0
+    for K, trials in ((4, 42 if QUICK else 140), (5, 14 if QUICK else 35), (6, 14 if QUICK else 35)):
+        for trial in range(trials):
+            n = int(rng.integers(K + 2, 50))
+            X = U.helix(n, 1.3) if trial % 3 == 0 else U.thick_chain(n, rng)[0]
+            Y = U.competitor(X, trial % 7, rng)
+            r = U.theorem_L_bounds(X, Y, K=K, sep_in_eta=(sep if K == 4 else None), check_steps=True)
+            tot += 1
+            tol = lambda x: x * (1 + 1e-9) + 1e-12
+            bad = bool(r["viol"]) or r["left"] > tol(r["right_local"])
+            if K == 4:
+                bad |= r["right_local"] > tol(r["right"])
+                wg = max(wg, r["left"] / r["right"] if r["right"] > 0 else (np.inf if r["left"] > 1e-9 else 0.0))
+            nviol += bad
+            if r["right_local"] > 0:
+                wl = max(wl, r["left"] / r["right_local"])
+    return nviol == 0, f"{tot} pairs (X, Y): violations {nviol}; largest left/local bound = {wl:.3f}, left/uniform bound = {wg:.4f}"
+
+
+@test
+def theorem_L_sharp_constant():
+    """Theorem L+: inside the range ||eta|| <= mu / (Lambda C_L), d_P(X, Y) <= ||eta|| / (mu +
+    sqrt(mu^2 - Lambda ||eta||)); along the softest mode the first-order constant 1/(2 mu) is
+    attained in the limit and exceeded at finite amplitude (so the quadratic term is needed)."""
+    import local_data_upper as U
+    rng = np.random.default_rng(35)
+    first_order = MUT == "theorem_Lplus_first_order"       # planted error: the bound eta / (2 mu)
+    worst, attained, used = 0.0, 0.0, 0
+    for trial in range(10 if QUICK else 24):
+        n = int(rng.integers(8, 30))
+        X = U.helix(n, [1.0, 1.3, 2.0][trial % 3]) if trial % 2 == 0 else U.thick_chain(n, rng)[0]
+        mu, Lam, CL = U.sharp_constants(X)
+        pairs = U.band_pairs(n)
+        A = U.sq_rigidity(X, pairs)
+        Vt = np.linalg.svd(A)[2]
+        for V in (Vt[3 * n - 7].reshape(n, 3), rng.normal(size=X.shape)):
+            V = V / np.linalg.norm(V)
+            for frac in (0.95, 0.2):
+                amp = frac * mu / (Lam * CL) / (2 * np.linalg.norm(A @ V.ravel()))
+                for sign in (1, -1):
+                    Y = X + sign * amp * V
+                    eta = float(np.linalg.norm(U.sq_errors(X, Y, pairs)))
+                    bound = U.theorem_Lplus_bound(mu, Lam, CL, eta, quadratic=not first_order)
+                    if bound is None:
+                        continue
+                    used += 1
+                    dP = U.d_procrustes(X, Y)
+                    worst = max(worst, dP / bound)
+                    attained = max(attained, dP / (eta / (2 * mu)))
+    ok = worst <= 1 + 1e-9 and used >= 40 and attained > 1 + 1e-7
+    return ok, (f"{used} pairs in range: largest d_P / bound = {worst:.6f}; largest d_P / (||eta|| / 2mu) = "
+                f"{attained:.6f} (above 1: the first-order constant alone is not a bound)")
 
 
 @test
