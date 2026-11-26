@@ -18,3 +18,8 @@ items=[4, 4, 2] m=2 B=5 model=stack sigma=1: connected structures=762294 MFE=-6 
 items=[4, 4, 2] m=2 B=5 model=random sigma=3: connected structures=762294 MFE=-18 target=-21 #MFE-structures=64 labelled tilings=0 OK [16.2s]
 items=[3, 3, 4] m=2 B=5 model=stack sigma=1: connected structures=836544 MFE=-6 target=-7 #MFE-structures=38 labelled tilings=0 OK [16.2s]
 items=[3, 3, 4] m=2 B=5 model=random sigma=3: connected structures=836544 MFE=-18 target=-21 #MFE-structures=32 labelled tilings=0 OK [17.1s]
+items=[3, 2, 3, 2] m=2 B=5 model=stack sigma=1: connected structures=1887888 MFE=-6 target=-6 #MFE-structures=16 labelled tilings=16 OK [54.2s]
+items=[3, 2, 3, 2] m=2 B=5 model=random sigma=3: connected structures=1887888 MFE=-18 target=-18 #MFE-structures=16 labelled tilings=16 OK [55.4s]
+items=[4, 3, 3] m=2 B=5 model=stack sigma=1: connected structures=836544 MFE=-6 target=-7 #MFE-structures=38 labelled tilings=0 OK [16.9s]
+items=[4, 3, 3] m=2 B=5 model=random sigma=3: connected structures=836544 MFE=-18 target=-21 #MFE-structures=32 labelled tilings=0 OK [17.0s]
+ALL OK

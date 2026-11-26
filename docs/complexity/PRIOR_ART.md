@@ -54,5 +54,9 @@ partition function.
 Searches (2026-11-26, "extended" mode):
 1. `"NANUQ" metric "circular decomposable" level-3 OR "level-2" outer-labeled planar galled networks conjecture 2026` → B-I, B-II, B-III; no peer-reviewed or arXiv resolution of B1/B2 found.
 
+2. `NANUQ distance "not circular decomposable" OR "fails" non-galled "outer-labeled planar" level-2 network counterexample quartet distance Kalmanson "galled" necessary`
+   → B-I (arXiv, journal, PMC), a *Correction* to B-I dated 2026-01-14 (a figure; PMC12804282, title only),
+   the NANUQ and NANUQ⁺ papers; **nothing** on whether "galled" is necessary and no non-galled example.
+
 Consequences for novelty statements: any statement of ours about B1/B2 must say "independently of,
 and after, the unreviewed claim B-II, whose proof we have not seen".

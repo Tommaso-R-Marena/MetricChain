@@ -50,6 +50,29 @@ pushed.  Other branches at that moment: theory `a844b5a8`, science `2b4ccdf7`, e
 **Tooling.**  `experiments/complexity/strands/ref_enum.py`: exhaustive enumerator of multi-strand
 unpseudoknotted structures with loop decomposition (ground truth for everything in Problem A).
 
+**Problem B, the same day: a local-to-global proof, and a counterexample without "galled".**
+* Decomposition: for a non-trivial split, `α/2 = Φ4 + Σ_z Φ5(z) + Σ_{z,w} Φ6(z,w)`, each term a function of
+  the displayed quartets on at most six leaves (for trivial splits `α/2 = n − 2 + ΣΨ`).  The 5-point terms
+  are non-negative for *every* tree-generated system.  So everything hinges on `Φ6`.
+* `Φ6 < 0` iff a "union property" fails (Lemma 5).  For planar trees with twin leaves (class 𝒜 — exactly
+  the galled planar networks whose hybrids have leaf children) the union property has a five-line proof:
+  all displayed trees are restrictions of ONE tree with independent choices, and two edges of a tree
+  whose sides meet and miss a common leaf are nested.
+* General galled planar networks are substitutions of 𝒜-systems; restrictions of substitutions are
+  substitutions of restrictions; on six leaves the closure has 108 systems, all satisfying the criterion.
+  Hence the theorem for all levels and any number of blobs (`NANUQ_LOCAL_CRITERION.md`).
+* Looking at which six-point systems violate the criterion while being fine on their own (14 of them),
+  one — all nine splits except one 2-split — turned out to be displayed by a level-2 planar network that
+  is NOT galled.  Doubling leaves makes the negative `Φ6` terms win: a 7-leaf non-galled level-2 bloblet
+  whose NANUQ metric is not Kalmanson for any circular order (checked from the explicit DAG by a second
+  program).  So "galled" is necessary — a question the paper does not raise and the third-party summary
+  does not mention.
+* Sharpness: 150 tree-generated / 141 globally good / 127 locally good / 108 network systems on six
+  points; every excluded system fails after a small blow-up.
+* A first attempt to explain the level-2 theorem by a single correlated measure on hybrid choices
+  (so that `d_N` would be an average of tree metrics) cannot work: for the level-2 bloblet the required
+  probabilities sum to 3/2 (three quarnets each need probability ½ on mutually exclusive choice patterns).
+
 ### Resume here
 
 1. Commission an adversarial review of `STRANDS_NN_HARDNESS.md` (COMPLEXITY-REV-0001); fix what it finds.
@@ -58,7 +81,9 @@ unpseudoknotted structures with loop decomposition (ground truth for everything 
    energies; (iii) Lean formalisation of the counting core of Theorem 1.
 3. A6: implement the sub-multiset DP for the magnified NN partition function with symmetry, validate
    against `ref_enum.py`, write the theorem.
-4. B: write the structural lemma; enumerate all galled planar networks (multi-blob) on ≤ 6 leaves; try
-   the local (six-point) positivity argument; test non-galled planar networks.
+4. B: (i) adversarial review of `NANUQ_LOCAL_CRITERION.md` (COMPLEXITY-REV-0002), in particular Lemma A,
+   Lemma B and the completeness of the enumeration of `𝒜_6`; (ii) Lean: the finite check of Lemma 8 and
+   Theorem 4 as an abstract statement; (iii) B3, the parametric family — read NANUQ⁺ first; (iv) which
+   non-galled planar networks still satisfy the criterion?
 5. A3′ (fixed-temperature #P-hardness): no approach yet beyond "probe strands" (see session notes in
    the working paper to come).

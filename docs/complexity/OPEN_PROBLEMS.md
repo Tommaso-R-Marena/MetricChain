@@ -211,11 +211,17 @@ arXiv:2507.17308v2 (13 Oct 2025) on 2026-11-26.
     6 points (`DEAD_ENDS.md` CX-D2).
   - [X] B2 holds for every network in `B_3` with at most 8 leaves, and Theorem 4.7 is reproduced for
     `B_1`, `B_2` up to 7 leaves (`experiments/complexity/nanuq/test_bloblets.py`).
-* Our position: **active (2026-11-26)** as an *independent* derivation, with three aims that go beyond
-  what the public summary claims: (i) a proof that can be read without a computer, or a
-  machine-checked finite core; (ii) whether "galled" can be dropped; (iii) an intrinsic
-  characterisation of the split systems for which the statement holds.  Priority for the all-level
-  theorem, if the third-party proof is correct, is theirs.
+* Our position (2026-11-26, later the same day): **OURS-[P]+[X], unreviewed** — `NANUQ_LOCAL_CRITERION.md`,
+  `THEOREMS.md` CX-T5–CX-T9:
+  - B1 and B2 hold, as special cases of a statement for every level and any number of blobs (CX-T6).
+    Independent of, and later than, the third-party claim; priority for the all-level statement, if the
+    third-party proof is correct, is theirs.
+  - What we believe is new: a network-free local criterion (CX-T5); the structural reason — all displayed
+    trees of a galled planar network are restrictions of one planar tree with independent choices, which
+    gives a "union property" (CX-T9); **"galled" cannot be dropped** — an explicit 7-leaf level-2
+    outer-labeled planar bloblet that is not galled and whose NANUQ metric is not circular decomposable
+    (CX-T7); and the criterion is sharp (CX-T8).
+  - B3 (parametric family): open for us; not yet read ([All+25a]).
 
 ---
 
