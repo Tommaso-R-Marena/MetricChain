@@ -17,11 +17,12 @@ enum { POP = 0, NEG = 1, STOP_POP = 2, STOP_UNPOP = 3 };
 enum { ST_CLOSED_POP = 0, ST_CLOSED_UNPOP = 1, ST_ABORT_LEVELS = 2, ST_ABORT_SAMPLE = 3 };
 
 typedef struct {
-    int n, n_o, J, m_max, L, harper, enforce_abort, oracle; /* oracle: 0 bottom, 1 top */
+    int n, n_o, J, m_max, L, harper, enforce_abort, oracle; /* oracle: unused since the positions are passed in (kept for the layout) */
     double u, lam, b, eta, lth, lK, lnu, psi0, t0;     /* lth = ln(theta) */
     /* constants needed for the claims */
     double lpi_dag, lM_bar, lMneg_cap, lcount_factor, x_out, lcnt_const; /* lcnt(x) = max(lK, lcnt_const + x) */
     double tie; /* weights within tie of a level (in the logarithm) are treated as equal to it */
+    double c_class; /* a sample point is HIGH at the level s iff W > s e^{-c_class} (meanrun.rung_positions) */
 } mr_params;
 
 /* results: indices into res[] */
@@ -78,6 +79,7 @@ static int radius(const double *lball, int m, double lq) {
 
 int mr_run(const mr_params *p, int natoms, const double *lw, const double *lpr, const double *ltail_ge,
            const double *lE, const double *lball, const double *lT, const double *xs, const double *lC,
+           const double *posA, const double *posB, /* nested distances A_l, B_l of the value from the ends of its rung-l bracket, l = 0..L */
            int n_grid, const double *grid,
            double *lM, signed char *kind, double *lq_rec, double *lMneg_rec, double *lcalls, double *res) {
     const int n_o = p->n_o, J = p->J, L = p->L;
@@ -88,7 +90,6 @@ int mr_run(const mr_params *p, int natoms, const double *lw, const double *lpr, 
     const double nln2 = n_o * LN2;
     const double ls0 = -p->psi0 - u * p->n;
     double lell = -p->psi0 + p->n * log((1 + exp(-u)) / 2);
-    const double theta_z = p->oracle == 0 ? 1.0 : 0.0;
     const int m_empty = (int)floor(n_o - l1me / LN2 + 1e-12) + 1;
     const double l_e_lam_m1 = log(expm1(lam)), l_1_m_e = log(-expm1(-lam));
     double lA = -INFINITY;
@@ -111,7 +112,7 @@ int mr_run(const mr_params *p, int natoms, const double *lw, const double *lpr, 
     int idx = 0; /* number of atoms with lw <= threshold (thresholds increase with j) */
     for (int j = 0; j <= J; j++) {
         const double lsj = ls0 + lam * j;
-        const double thr = lsj - b * theta_z;
+        const double thr = lsj - p->c_class;
         while (idx < natoms && lw[idx] <= thr + p->tie) idx++;
         const double lph = ltail_ge[idx];
         double mpop;
@@ -257,16 +258,12 @@ int mr_run(const mr_params *p, int natoms, const double *lw, const double *lpr, 
 
     /* ---- evaluations ---------------------------------------------------------------------- */
     if (n_i > 0) {
-        const double x0 = xs[0], t0 = p->t0;
         int *dq = (int *)malloc(sizeof(int) * (size_t)(j_stop + 2));
         if (!dq) return 1;
         double lcost = logaddexp(0.0, lM_max);
         lcalls[0] = -INFINITY;
         for (int l = 0; l < L; l++) {
-            double alpha, beta;
-            if (l == 0) { alpha = t0; beta = x0 - t0; }
-            else if (p->oracle == 0) { alpha = 0.0; beta = xs[l] < x0 - t0 ? xs[l] : x0 - t0; }
-            else { alpha = xs[l] < t0 ? xs[l] : t0; beta = 0.0; }
+            const double alpha = posA[l], beta = posB[l];
             /* sliding-window maximum of lM over [lo(w), hi(w)], both nondecreasing in the atom index */
             int head = 0, tail = 0, next = 0;
             double acc = -INFINITY;

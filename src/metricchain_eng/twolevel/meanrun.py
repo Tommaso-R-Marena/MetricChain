@@ -17,6 +17,24 @@ t0 = ln(W / lower end) is a property of the fibre (the same for every fibre of a
 instance; u n_i for a flat fibre).  Under "bottom" every point of the tolerance zone
 (s e^-b, s] is HIGH, under "top" none is; these are the two extreme trajectories.
 
+General positions and the exact classification (``rung_positions``; added at checkpoint 4b).
+Brackets are intersected from rung to rung, so after rung l a point has the bracket
+[W e^{-A_l}, W e^{B_l}] with A_0 = t0, B_0 = x_0 - t0, A_l = min(A_{l-1}, alpha_l),
+B_l = min(B_{l-1}, beta_l), where (alpha_l, beta_l) is where the rung-l inner bracket puts the
+value ("bottom": (0, x_l); "top": (x_l, 0); any pair with alpha_l + beta_l <= x_l is allowed).
+A point leaves the refinement loop HIGH at the first rung with L > s e^-b while U > s, and
+LOW at the first rung with U <= s; since B_l decreases, it is HIGH iff
+
+    W > s e^{-c},        c = max_{0 <= l <= L} min(b - A_l, B_l)        (0 <= c <= b).
+
+For "bottom" with x_0 - t0 >= b this is c = b and for "top" with t0 >= b it is c = 0 -- the two
+conventions above.  **They differ from the algorithm in two corners**: "top" with t0 < b
+(the value lies within the tolerance of the lower end of the trivial bracket, so points with
+W in (s e^{-(b - t0)}, s] are classified HIGH at rung 0 without a call; c = b - t0) and
+"bottom" with x_0 - t0 < b (c = x_0 - t0).  The runs of experiment X-005 as published at
+checkpoints 3 and 4 used c = b / c = 0 everywhere; ``legacy_classification=True`` reproduces
+them.
+
 Evaluations.  A point a_i is moved from rung l to rung l + 1 at level j when it is among the
 points used at that level (i <= M_j) and its rung-l bracket [L, U] has U > s_j and
 L <= s_j e^-b, i.e. when  s_j  lies in  [L e^b, U).  These windows are nested in l for l >= 1
@@ -203,12 +221,58 @@ def _range_max(arr: np.ndarray, lo: np.ndarray, hi: np.ndarray, cache: dict) -> 
 # ---------------------------------------------------------------------------------------------
 # The mean run
 # ---------------------------------------------------------------------------------------------
+def rung_positions(P: Params, t0: float, oracle: str = "bottom", positions: tuple | None = None,
+                   legacy_classification: bool = False) -> tuple[np.ndarray, np.ndarray, float]:
+    """(A, B, c): the nested logarithmic distances A_l, B_l (l = 0..L) of a fibre average from the two ends of
+    its bracket after rung l, and the classification shift c -- a sample point is HIGH at the level s iff
+    W > s e^{-c} (module docstring).  ``positions = (alpha, beta)`` gives the rung brackets for l = 1..L
+    explicitly (each alpha_l, beta_l >= 0 with alpha_l + beta_l <= x_l); otherwise they come from ``oracle``.
+    For n_i = 0 (outer loop alone) the conventions c = b ("bottom") and c = 0 ("top") are returned.
+
+    ``t0`` may be a pair (lo, hi): then A_0 = hi and B_0 = x_0 - lo, the *union* over t0 in [lo, hi] of the
+    refinement windows of every rung.  The mean run with these positions counts, for every atom of the law, the
+    largest number of calls that any placement of its fibre in its trivial bracket can cause -- an upper bound
+    on the evaluations of every instance with this law of fibre averages whose fibres have t0 in [lo, hi],
+    product or not (the sample sizes depend on the law and on c only)."""
+    if oracle not in ("bottom", "top"):
+        raise ValueError("oracle must be 'bottom' or 'top'")
+    L, b = P.L, P.b
+    if P.n_i == 0:
+        return np.zeros(L + 1), np.zeros(L + 1), (b if oracle == "bottom" else 0.0)
+    x0 = P.xs[0]
+    t0_lo, t0_hi = (t0, t0) if np.isscalar(t0) else (float(t0[0]), float(t0[1]))
+    if positions is None:
+        alpha = [0.0 if oracle == "bottom" else P.xs[l] for l in range(1, L + 1)]
+        beta = [P.xs[l] if oracle == "bottom" else 0.0 for l in range(1, L + 1)]
+    else:
+        alpha, beta = (list(map(float, v)) for v in positions)
+        if len(alpha) != L or len(beta) != L:
+            raise ValueError("positions must give (alpha_l, beta_l) for l = 1..L")
+        for l in range(1, L + 1):
+            if alpha[l - 1] < 0 or beta[l - 1] < 0 or alpha[l - 1] + beta[l - 1] > P.xs[l] + 1e-9:
+                raise ValueError("a rung bracket must contain the value and have ratio at most e^{x_l}")
+    A, B = [float(t0_hi)], [float(x0 - t0_lo)]
+    for l in range(1, L + 1):
+        A.append(min(A[-1], alpha[l - 1]))
+        B.append(min(B[-1], beta[l - 1]))
+    if legacy_classification:
+        if positions is not None:
+            raise ValueError("the legacy classification exists for the two oracles only")
+        c = b if oracle == "bottom" else 0.0
+    else:
+        c = max(min(b - A[l], B[l]) for l in range(L + 1))
+    return np.array(A), np.array(B), float(c)
+
+
 def mean_run(P: Params, outer: CubeTables, inst: Instance, oracle: str = "bottom", *, C: Constants | None = None,
              lC: np.ndarray | None = None, harper: bool = True, record: bool = False,
-             count_grid: tuple = (), enforce_abort: bool = True, tie: float = TIE) -> Run:
+             count_grid: tuple = (), enforce_abort: bool = True, tie: float = TIE,
+             positions: tuple | None = None, legacy_classification: bool = False) -> Run:
     """Run Algorithm 2L+ on ``inst`` with counts replaced by their means.
 
     oracle   "bottom" or "top" (see the module docstring)
+    positions  (alpha, beta) for the rungs l = 1..L instead of an oracle (``rung_positions``)
+    legacy_classification  True: c = b / c = 0 regardless of t0 (X-005 as published; module docstring)
     lC       ln C_l, l = 0..L (default: the base family inside); ignored when n_i = 0
     harper   False removes the Harper term from the lower bound (a mutation, for controls)
     enforce_abort  False lets the sample grow beyond K 2^{m_max} (only for comparison with scripts
@@ -233,9 +297,9 @@ def mean_run(P: Params, outer: CubeTables, inst: Instance, oracle: str = "bottom
     if law.lw[0] < ls0 - 1e-9 or law.lw[-1] > ls0 + 2 * u * n + 1e-9:
         raise ValueError("the law is not supported in [s_0, s_0 e^{2un}]: psi0 does not belong to this instance")
 
-    theta_z = 1.0 if oracle == "bottom" else 0.0
+    A_pos, B_pos, c_class = rung_positions(P, inst.t0, oracle, positions, legacy_classification)
     ls = ls0 + lam * np.arange(J + 1)
-    ph = law.ltail_gt(ls - b * theta_z, tie)                    # ln P(HIGH) at each level
+    ph = law.ltail_gt(ls - c_class, tie)                        # ln P(HIGH) at each level
     with np.errstate(divide="ignore", invalid="ignore"):
         m_pop = np.where(ph >= 0.0, 0.0, np.ceil(-ph / LN2 - 1e-12))
     m_pop_l = m_pop.tolist()
@@ -367,12 +431,7 @@ def mean_run(P: Params, outer: CubeTables, inst: Instance, oracle: str = "bottom
         cache: dict = {}
         lcalls = np.full(P.L + 1, -np.inf)
         for l in range(P.L):                                     # calls of I_{l+1}: windows of the rung-l bracket
-            if l == 0:
-                alpha, beta = t0, x0 - t0
-            elif oracle == "bottom":
-                alpha, beta = 0.0, min(P.xs[l], x0 - t0)
-            else:
-                alpha, beta = min(P.xs[l], t0), 0.0
+            alpha, beta = float(A_pos[l]), float(B_pos[l])
             lo = np.ceil((law.lw + b - alpha - ls0) / lam - 1e-12).astype(np.int64)
             hi = np.ceil((law.lw + beta - ls0) / lam - 1e-12).astype(np.int64) - 1
             lo = np.maximum(lo, 0)

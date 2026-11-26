@@ -59,6 +59,13 @@ class Params:
     ltheta: float | None = None     # ln(theta), for designs whose theta overflows a double (the extensive regime of
                                     # theory report §11.18: theta = e^{x-b} - ...); then pass theta=math.inf
 
+    ldelta: float | None = None     # ln(delta), for runs nested inside another one (delta' = delta/(4 L M_bar) underflows)
+
+    @property
+    def l_inv_delta(self) -> float:
+        """ln(1/delta); every computation uses this, never ``delta`` itself."""
+        return -math.log(self.delta) if self.ldelta is None else -self.ldelta
+
     @property
     def lth(self) -> float:
         """ln(theta); every computation uses this, never ``theta`` itself."""
@@ -120,7 +127,7 @@ def constants(P: Params, outer: CubeTables) -> Constants:
     r_dag = outer.r_dagger(P.eta, None, nu0, lth=P.lth)
     lpi = outer.lpi_dagger(r_dag)
     m_max = math.ceil((math.log(2 * (1 + P.eta) * nu0 / (1 - P.eta)) + P.lam - lpi) / LN2)
-    K = math.ceil(3 * (1 + P.eta) / P.eta ** 2 * math.log(2 * (J + 1) * (m_max + 1) * (P.L + 2) / P.delta))
+    K = math.ceil(3 * (1 + P.eta) / P.eta ** 2 * (math.log(2 * (J + 1) * (m_max + 1) * (P.L + 2)) + P.l_inv_delta))
     lK = math.log(K)
     lnu = lK + math.log(nu0)
     lM_dag = lK - math.log(1 - P.eta) - lpi
@@ -130,7 +137,7 @@ def constants(P: Params, outer: CubeTables) -> Constants:
                        P.b + logsumexp([P.lam + math.log((1 + P.eta) / (1 - P.eta)), math.log(P.etap), P.lth])])
     return Constants(
         J=J, nu0=nu0, r_dag=r_dag, lpi_dag=lpi, m_max=m_max, K=K, lK=lK, lnu=lnu, lM_dag=lM_dag, lM_bar=lM_bar,
-        l_inv_delta_p=math.log(4 * P.L / P.delta) + lM_bar, x_out=x_out,
+        l_inv_delta_p=math.log(4 * P.L) + P.l_inv_delta + lM_bar, x_out=x_out,
         lMneg_cap=math.log((1 + P.eta) * nu0) + P.lam + lM_dag,
         lcount_factor=math.log((1 + P.eta) / (1 - P.eta)) + P.lam + lnu,
     )

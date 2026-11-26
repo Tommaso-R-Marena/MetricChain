@@ -437,3 +437,71 @@ def test_invalid_inner_behaviour_cannot_exceed_the_cost_bound():
         assert R.lqueries <= ev.lCmax + 1e-9, (R.status, R.lqueries, ev.lCmax)
         aborted += R.status == "abort-query budget"
     assert aborted == 3
+
+
+# ------------------------------------------------------------------------------------------------ 7. bracket positions
+from metricchain_eng.twolevel.meanrun import rung_positions  # noqa: E402
+
+
+def test_rung_positions_reduce_to_the_two_oracles_and_handle_the_corners():
+    P = run_sampled.params(1.0, 120, 6)                       # x_0 = 12, b = 0.5
+    x0, b = P.xs[0], P.b
+    A, B, c = rung_positions(P, 6.0, "bottom")
+    assert c == pytest.approx(b) and A[1:].max() == 0.0 and B[-1] == pytest.approx(b)
+    A, B, c = rung_positions(P, 6.0, "top")
+    assert c == pytest.approx(0.0) and B[1:].max() == 0.0 and A[-1] == pytest.approx(b)
+    # the two corners: the value within the tolerance of an end of the trivial bracket
+    assert rung_positions(P, 0.2, "top")[2] == pytest.approx(b - 0.2)
+    assert rung_positions(P, x0 - 0.2, "bottom")[2] == pytest.approx(0.2)
+    assert rung_positions(P, 0.2, "top", legacy_classification=True)[2] == 0.0
+    # a centred bracket at every rung: half of the last rung's width
+    pos = ([0.5 * x for x in P.xs[1:]], [0.5 * x for x in P.xs[1:]])
+    assert rung_positions(P, 6.0, positions=pos)[2] == pytest.approx(b / 2)
+    with pytest.raises(ValueError):
+        rung_positions(P, 6.0, positions=([x for x in P.xs[1:]], [0.1] * P.L))        # wider than the rung allows
+
+
+@pytest.mark.parametrize("oracle,t0_of", [(0.5, lambda P: P.u * P.n_i), (0.3, lambda P: 0.1), ("top", lambda P: 0.2),
+                                          ("bottom", lambda P: P.xs[0] - 0.2), ("top", lambda P: P.u * P.n_i)])
+def test_mean_run_with_general_positions_agrees_with_literal_runs(oracle, t0_of):
+    """The exact classification rule against the step-by-step simulation, also where the trivial bracket decides
+    (value within the tolerance of an end) and for brackets that put the value in the middle."""
+    u, n_o, n_i = 1.0, 120, 6
+    P = run_sampled.params(u, n_o, n_i)
+    ev = Evaluator(P)
+    rng = np.random.default_rng(13)
+    profs = run_sampled.profiles(u, n_o, ev.C.r_dag, ev.outer)
+    t0 = t0_of(P)
+    for name in ("cone", "random monotone", "flat"):
+        F = profs[name]
+        inst = Instance(radial_law(F, ev.outer), psi0=float(F[n_o // 2]), t0=t0)
+        if isinstance(oracle, float):
+            pos = ([oracle * x for x in P.xs[1:]], [(1 - oracle) * x for x in P.xs[1:]])
+            Rm = ev.run(inst, "bottom", positions=pos)
+            Rp = mean_run(P, ev.outer, inst, "bottom", C=ev.C, lC=ev.lC, positions=pos)
+        else:
+            Rm = ev.run(inst, oracle)
+            Rp = mean_run(P, ev.outer, inst, oracle, C=ev.C, lC=ev.lC)
+        assert Rp.j_stop == Rm.j_stop and Rp.lcost == pytest.approx(Rm.lcost, abs=1e-9)      # kernel = reference
+        same = 0
+        for _ in range(3):
+            Rs = simulate(P, ev.outer, ev.C, F, inst.psi0, t0, 0.0, oracle, rng, lC=ev.lC, lCmax=ev.lCmax)
+            assert Rs.status.startswith("closed") and Rs.valid and Rs.good_event and Rs.violations == []
+            assert abs(Rs.lqueries - Rm.lcost) < 0.75, (name, Rs.lqueries, Rm.lcost)
+            same += (Rs.j_stop == Rm.j_stop and abs(math.log(Rs.M_max) - Rm.lM_max) < 1e-9)
+        assert same >= 2, (name, oracle, t0)
+
+
+def test_the_search_family_cannot_reach_the_corners_of_the_classification_rule():
+    """For a u-Lipschitz fibre, t0 lies in [n_i (u - Lambda_1), n_i (2u - Lambda_1)]; the corners of
+    ``rung_positions`` (t0 < b or x_0 - t0 < b) are outside it for every design used in X-005, so the convention
+    c = b / c = 0 of the published runs and the exact rule coincide there."""
+    for u in (0.5, 1.0, 2.0):
+        c = cube_constants(u)
+        for n, phi in ((250, 0.8), (250, 0.2), (128000, 0.5)):
+            P, _ = run_search.design_params(n, u, phi)
+            lo, hi = P.n_i * (u - c.Lambda1), P.n_i * (2 * u - c.Lambda1)
+            assert lo >= P.b and P.xs[0] - hi >= P.b
+            for t0 in (lo, hi):
+                assert rung_positions(P, t0, "bottom")[2] == pytest.approx(P.b)
+                assert rung_positions(P, t0, "top")[2] == pytest.approx(0.0)

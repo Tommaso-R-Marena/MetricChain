@@ -31,7 +31,7 @@ from .ckernel import Evaluator
 from .meanrun import Instance, Run, radial_law
 from .tables import cube_constants
 
-OBJECTIVES = ("cost", "cost_minus_cap", "count", "Mneg", "sample", "vi")
+OBJECTIVES = ("cost", "cost_minus_cap", "count", "Mneg", "sample", "vi", "cost_any_placement")
 
 
 def _stretch(x: float) -> float:
@@ -143,7 +143,7 @@ _SLACKS = ("slack_valid_lower", "slack_valid_upper", "slack_width", "slack_iv_M"
 
 
 def objective_value(R: Run, objective: str) -> float:
-    if objective == "cost":
+    if objective in ("cost", "cost_any_placement"):
         return R.lcost
     if objective == "cost_minus_cap":
         return R.lcost - R.lCmax
@@ -161,15 +161,27 @@ def objective_value(R: Run, objective: str) -> float:
 class Search:
     """Maximise an objective of the mean run over the instance family, recording every claim on the way."""
 
-    def __init__(self, fam: Family, oracle: str, objective: str = "cost"):
+    def __init__(self, fam: Family, oracle: str, objective: str = "cost", positions: tuple | None = None,
+                 fixed_c_in: float | None = None):
         self.fam, self.oracle, self.objective = fam, oracle, objective
+        # ``positions``: fixed rung brackets (alpha, beta) instead of an oracle (meanrun.rung_positions);
+        # ``fixed_c_in``: the inner offset is not searched (0.0 = flat fibres).  Both are used by the three-level runs.
+        self.positions, self.fixed_c_in = positions, fixed_c_in
+        # "cost_any_placement": the upper bound on the evaluations of every instance with the same law of fibre
+        # averages, whatever the places of its fibres in their trivial brackets (meanrun.rung_positions); the
+        # run so evaluated is not the run of one instance, and its claims are not those of the theorem
+        P = fam.ev.P
+        c = cube_constants(P.u)
+        self.t0_range = (P.n_i * (P.u - c.Lambda1), P.n_i * (2 * P.u - c.Lambda1)) if objective == "cost_any_placement" else None
         self.res = SearchResult(objective, oracle)
         self.res.extremes = {k: -math.inf for k in _SLACKS}
         self.res.extremes.update(margin_iii=math.inf, cost_over_cap=-math.inf, lcost=-math.inf, lM_max=-math.inf, not_closed=0)
 
     def evaluate(self, x: np.ndarray) -> float:
         F, d0, c_in = self.fam.decode(x)
-        R = self.fam.ev.run(self.fam.instance(F, d0, c_in), self.oracle)
+        if self.fixed_c_in is not None:
+            c_in = self.fixed_c_in
+        R = self.fam.ev.run(self.fam.instance(F, d0, c_in), self.oracle, t0_range=self.t0_range, positions=self.positions)
         res = self.res
         res.n_eval += 1
         ex = res.extremes

@@ -68,11 +68,10 @@ Current state of the engineering branch: `docs/collaboration/status/engineering.
    the tail functions of `u`-Lipschitz outer landscapes are those with
    `m(te^{−u}) ≥ ∂(m(t))`).  Checked since by both other divisions; it is a statement about
    product instances — one fibre offset for all outer points.  (ENG-RES-0008 §5.)
-9. **The theory division's audit reproduces at three heads** — `d81eb8a`, `4cef47e`, `63efc69`
-   — **and at `9408e33` as far as it had run** (69 Lean files, 4015 audited declarations, 504
-   headline theorems: build, axiom audit and the full harness passed; the mutation stage
-   was still running when checkpoint 4 was written — see the status file).
-   (ENG-RES-0005, ENG-MSG-0002, -0003, -0004 §2.)
+9. **The theory division's audit reproduces at four heads**: `d81eb8a`, `4cef47e`, `63efc69`
+   and `9408e33` (`AUDIT PASSED` on another machine: 69 Lean files, 4015 audited
+   declarations, 504 headline theorems, 435 mutations of which 434 caught and one an
+   expected pass).  (ENG-RES-0005, ENG-MSG-0002, -0003, -0004 §2, -0005.)
 10. **A tie pitfall with a structural cause.**  A literal floating-point implementation of
    Algorithm 2L⁺ aborts on the good event when the reference point's weight lies exactly on
    a level — whenever its fibre is flat and `un/λ` is an integer.  (ENG-MSG-0003 §5; now

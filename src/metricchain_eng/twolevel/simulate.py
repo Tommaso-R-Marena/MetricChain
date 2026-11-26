@@ -13,7 +13,8 @@ brackets -- a valid, if correlated, inner behaviour (the device of K_REPORT §6.
 
     "bottom"  [W, W e^x]        "top"  [W e^-x, W]        "random"  [W e^{-t x}, W e^{(1-t) x}], t uniform per call
 
-and one INVALID inner behaviour, for the claim that the cost bound holds in every run (requested by the
+A number t in [0, 1] as oracle gives [W e^{-t x}, W e^{(1-t) x}] at every rung (t = 0.0 is "bottom", 1.0 is "top").
+There is also one INVALID inner behaviour, for the claim that the cost bound holds in every run (requested by the
 Scientific Discovery Division, SCI-REV-0007 R6-E2):
 
     "dear"    [s_j e^{-(x+b)/2}, s_j e^{(x-b)/2}] at the level s_j at which the point is refined -- a bracket that
@@ -146,7 +147,7 @@ def simulate(P: Params, outer: CubeTables, C: Constants, F: np.ndarray, psi0: fl
                     gl[d] = lsj - (x + b) / 2
                     gu[d] = lsj + (x - b) / 2
                     continue
-                t = 0.0 if oracle == "bottom" else 1.0 if oracle == "top" else float(rng.random())
+                t = 0.0 if oracle == "bottom" else 1.0 if oracle == "top" else float(oracle) if isinstance(oracle, float) else float(rng.random())
                 gl[d] = max(gl[d], lw[d] - t * x)
                 gu[d] = min(gu[d], lw[d] + (1.0 - t) * x)
         return int(cnt[gu > lsj + tie].sum())

@@ -16,7 +16,7 @@ from pathlib import Path
 import numpy as np
 
 from .alg2l import Constants, Params, constants, inner_costs, lC_max
-from .meanrun import Instance, Law, Run
+from .meanrun import Instance, Law, Run, rung_positions
 from .tables import TIE, CubeTables
 
 _SRC = Path(__file__).with_name("meanrun_kernel.c")
@@ -29,7 +29,7 @@ _RES = ("status", "j_stop", "r_close", "lM_last", "lM_max", "lL", "lU", "lA", "n
 class _MrParams(ct.Structure):
     _fields_ = [(k, ct.c_int) for k in ("n", "n_o", "J", "m_max", "L", "harper", "enforce_abort", "oracle")] + \
                [(k, ct.c_double) for k in ("u", "lam", "b", "eta", "lth", "lK", "lnu", "psi0", "t0", "lpi_dag", "lM_bar",
-                                           "lMneg_cap", "lcount_factor", "x_out", "lcnt_const", "tie")]
+                                           "lMneg_cap", "lcount_factor", "x_out", "lcnt_const", "tie", "c_class")]
 
 
 _lib = None
@@ -53,7 +53,7 @@ def load_library(rebuild: bool = False):
         os.replace(tmp, out)
     lib = ct.CDLL(str(out))
     dp = np.ctypeslib.ndpointer(dtype=np.float64, flags="C_CONTIGUOUS")
-    lib.mr_run.argtypes = [ct.POINTER(_MrParams), ct.c_int, dp, dp, dp, dp, dp, dp, dp, dp, ct.c_int, dp,
+    lib.mr_run.argtypes = [ct.POINTER(_MrParams), ct.c_int, dp, dp, dp, dp, dp, dp, dp, dp, dp, dp, ct.c_int, dp,
                            dp, np.ctypeslib.ndpointer(dtype=np.int8, flags="C_CONTIGUOUS"), dp, dp, dp, dp]
     lib.mr_run.restype = ct.c_int
     _lib = lib
@@ -94,9 +94,14 @@ class Evaluator:
             n=P.n, n_o=P.n_o, J=J, m_max=C.m_max, L=P.L, harper=int(harper), enforce_abort=int(enforce_abort), oracle=0,
             u=P.u, lam=P.lam, b=P.b, eta=P.eta, lth=P.lth, lK=C.lK, lnu=C.lnu, psi0=0.0, t0=0.0,
             lpi_dag=C.lpi_dag, lM_bar=C.lM_bar, lMneg_cap=C.lMneg_cap, lcount_factor=C.lcount_factor, x_out=C.x_out,
-            lcnt_const=math.log(2 * (1 + P.eta) ** 2 / (1 - P.eta)) + P.lam + C.lnu, tie=tie)
+            lcnt_const=math.log(2 * (1 + P.eta) ** 2 / (1 - P.eta)) + P.lam + C.lnu, tie=tie, c_class=0.0)
 
-    def run(self, inst: Instance, oracle: str = "bottom", record: bool = False) -> Run:
+    def run(self, inst: Instance, oracle: str = "bottom", record: bool = False, *, positions: tuple | None = None,
+            legacy_classification: bool = False, t0_range: tuple | None = None) -> Run:
+        """``positions`` and ``legacy_classification``: see ``meanrun.rung_positions`` and ``meanrun.mean_run``.
+        ``t0_range = (lo, hi)``: the union of the refinement windows over all placements t0 in [lo, hi] of a fibre
+        in its trivial bracket -- an upper bound on the evaluations of every instance with this law of fibre
+        averages, product or not (``rung_positions``)."""
         P, law = self.P, inst.law
         ls0 = -inst.psi0 - P.u * P.n
         if law.lw[0] < ls0 - 1e-9 or law.lw[-1] > ls0 + 2 * P.u * P.n + 1e-9:
@@ -106,9 +111,10 @@ class Evaluator:
         par = self._par
         par.oracle = {"bottom": 0, "top": 1}[oracle]
         par.psi0, par.t0 = inst.psi0, inst.t0
+        posA, posB, par.c_class = rung_positions(P, inst.t0 if t0_range is None else t0_range, oracle, positions, legacy_classification)
         rc = self.lib.mr_run(ct.byref(par), len(law.lw), np.ascontiguousarray(law.lw), np.ascontiguousarray(law.lpr),
                              np.ascontiguousarray(law.ltail_ge), self._lE, self._lball, self._lT, self.xs, self.lC,
-                             self.n_grid, self.count_grid, self._lM, self._kind, self._lq, self._lMneg, self._lcalls, self._res)
+                             np.ascontiguousarray(posA), np.ascontiguousarray(posB), self.n_grid, self.count_grid, self._lM, self._kind, self._lq, self._lMneg, self._lcalls, self._res)
         if rc != 0:
             raise MemoryError("mr_run failed")
         v = dict(zip(_RES, self._res.tolist()))

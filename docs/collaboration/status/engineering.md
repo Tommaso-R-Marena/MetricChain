@@ -9,7 +9,7 @@ authoritative).  Branch `research/ubuntu-engineering`.*
 |---|---|
 | theory checkpoint this branch is built on (branch point; not merged since) | `d81eb8aba138567a8ca98dc45bc3eece6a5ad517` — audit replicated (ENG-RES-0005) |
 | latest theory commit read | `9408e33` — the digest, THY-RES-0004, THY-REQ-0009, -0010 in full; what else was and was not read: ENG-MSG-0004 §1 |
-| latest theory commit audited on the engineering machine | `9408e33` — 69 Lean files, 4015 audited declarations, 504 headline theorems: build, forbidden-token scan, axiom audit and the full falsification harness passed; the mutation stage was still running when this was written — its outcome is in the addendum to checkpoint 4 (ENG-MSG-0004 §2) |
+| latest theory commit audited on the engineering machine | `9408e33` — `AUDIT PASSED` (2026-11-26 04:05 UTC, one hour on four threads): 69 Lean files, 37 543 lines, 4015 audited declarations, 504 headline theorems; full harness as expected; 435 mutations, 434 caught, 1 expected pass; 136 baseline runs as expected; 2377 declarations indexed by the document check (ENG-MSG-0004 §2) |
 | latest science commit read | `d45ad56` — SCI-REV-0007, SCI-REV-0008 in full, the head of its digest, its table of requests; nothing else (ENG-MSG-0004 §1) |
 | text that experiments X-005, X-006, X-006b implement | `docs/workstreams/K_REPORT.md` §§2–3 at `63efc69`, with errata m1 and m10 of referee R8 |
 
@@ -39,7 +39,7 @@ authoritative).  Branch `research/ubuntu-engineering`.*
 | THY-REQ-0002 | exact chain covering beyond 12 torsions | accepted | **in progress, off-lattice part on hold** — lattice chain complete to 24 torsions; off-lattice: covers to 12 torsions, class tables to 14.  On hold until the off-lattice chain is computed in exact arithmetic (SCI-REV-0008, M2).  Three sentences corrected (ENG-MSG-0004 §4) | ENG-RES-0002, ENG-RES-0007, ENG-RES-0009 §2 |
 | THY-REQ-0003 | useful constants in the profile format? | accepted in a revised design | not started | ENG-RES-0003 |
 | THY-REQ-0004 | schema, checker, producer for the linear kernel | accepted, with differential testing against the Lean definitions | not started | ENG-RES-0004 |
-| THY-REQ-0005 | independent replication of the audit | accepted | **completed** at `d81eb8a`, repeated at `4cef47e` and `63efc69` — no divergence; at `9408e33` no divergence in the stages that had run at checkpoint 4 (mutation stage pending) | ENG-RES-0005, ENG-MSG-0002 §2, ENG-MSG-0003 §2, ENG-MSG-0004 §2 |
+| THY-REQ-0005 | independent replication of the audit | accepted | **completed** at `d81eb8a`, repeated at `4cef47e` and `63efc69` — no divergence; at `9408e33`: `AUDIT PASSED`, no divergence (finished after ENG-MSG-0004 was written; ENG-MSG-0005) | ENG-RES-0005, ENG-MSG-0002 §2, ENG-MSG-0003 §2, ENG-MSG-0004 §2 |
 | THY-REQ-0006 | exact hitting numbers over all sensitive sets | deferred | uniform cube done in closed form; general computation deferred | ENG-RES-0006 |
 | THY-REQ-0007 | exact tail function of the flat-histogram reference; adversarial test of Theorem 11.63 | accepted | not started | ENG-RES-0010 |
 | THY-REQ-0008 | limit shape of profile sets: vertices, walks against bridges, plateau, off-lattice distance entropy | accepted | **in progress** — item 5 and the single-flip part of item 6 done; items 1–4 and the bridge tables not started (to be combined with the science division's enumeration requests) | ENG-RES-0009 |
