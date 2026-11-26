@@ -1745,6 +1745,31 @@ MUTS["XVI"] += [
      [("            if ftop[j0 + i + 1] - h > h * (1 - h / a) / (i + h / a) + 2e-3 * h:", "            if ftop[j0 + i + 1] - h > h * (1 - h / a) / (2 * i + h / a) + 2e-3 * h:")], 'XVI.10'),
 ]
 
+MUTS["XVI"] += [
+    ("XVI.11 M1: the certified pairs carry a theta that is three per cent too small (an invalid pair: thbar < theta_na(e'))",
+     [("return math.nextafter(float(kl(r, pu).b), math.inf), shrink * max(0.0,", "return math.nextafter(float(kl(r, pu).b), math.inf), 0.97 * shrink * max(0.0,")], 'XVI.11'),
+    ("XVI.11 M2: the rate of a certified pair is taken three per cent too small (theta_na is nonincreasing: the pair is invalid)",
+     [("return math.nextafter(float(kl(r, pu).b), math.inf), shrink * max(0.0,", "return 0.97 * float(kl(r, pu).b), shrink * max(0.0,")], 'XVI.11'),
+    ("XVI.11 M3: the slope of the image line without its leading one ([B thbar alpha - ...]/e' instead of [B (1 + thbar alpha) - ...]/e')",
+     [("al, be = (1.0 + th_ * a0) / e_, th_ * (1.0 + b0) / e_", "al, be = (th_ * a0) / e_, th_ * (1.0 + b0) / e_")], 'XVI.11'),
+    ("XVI.11 M4: the intercept of the image line without its leading one (thbar beta/e' instead of thbar (1 + beta)/e': a line above the slope map)",
+     [("al, be = (1.0 + th_ * a0) / e_, th_ * (1.0 + b0) / e_", "al, be = (1.0 + th_ * a0) / e_, th_ * b0 / e_")], 'XVI.11'),
+    ("XVI.11 M5: the cap line through (c, 1) with the least slope over the vertices instead of the largest (not below the hull)",
+     [("mstar = max((1 - V) / (Cn - X) for X, V in cz_vertices(H, cn)[:-1])", "mstar = min((1 - V) / (Cn - X) for X, V in cz_vertices(H, cn)[:-1])")], 'XVI.11'),
+    ("XVI.11 M6: lines with a value up to two at the top are kept under the cap",
+     [("if Fraction(l[0]) * Cn - Fraction(l[1]) <= 1] + [(m, bL)]", "if Fraction(l[0]) * Cn - Fraction(l[1]) <= 2] + [(m, bL)]")], 'XVI.11'),
+    ("XVI.11 M7: the tops computed from 0.97 a instead of an upper bound of a (the next top may then lie below the regular region)",
+     [("new, cn = cz_step(u_s, pu, abar, lines, c, K)", "new, cn = cz_step(u_s, pu, 0.97 * abar, lines, c, K)")], 'XVI.11'),
+    ("XVI.11 M8: no cap at one (the image curve is used as it is)",
+     [("def cz_step(u_s, pu, abar, lines, c, K, shrink=1.0, top_scale=1.0, cap=True):", "def cz_step(u_s, pu, abar, lines, c, K, shrink=1.0, top_scale=1.0, cap=False):")], 'XVI.11'),
+    ("XVI.11 M9: two levels: the closed form taken as a^2/(a + 1.2 x) instead of a^2/(a + x), theta_na(x) = a - x",
+     [("tau2 = a * a / (a + 0.5 * (lo + hi))", "tau2 = a * a / (a + 0.6 * (lo + hi))")], 'XVI.11'),
+    ("XVI.11 M10: the certified majorant evaluated at twice the rate (max_B (B - 2 V(B) g) claimed to bound T_j(g))",
+     [("m = max(X - Fraction(g) * V for X, V in cz_vertices(lines, c))", "m = max(X - 2 * Fraction(g) * V for X, V in cz_vertices(lines, c))")], 'XVI.11'),
+    ("XVI.11 M11: the negative control with invalid pairs is run with valid ones (the control must then report that nothing failed)",
+     [("bad, _cb = cz_step(u_s, pu, abar, l2, c2_, K, shrink=0.98)", "bad, _cb = cz_step(u_s, pu, abar, l2, c2_, K, shrink=1.0)")], 'XVI.11'),
+]
+
 # The nested algorithm on a general probability space (theory report 11.33)
 MUTS["XXVI"] = [
     ("XXVI.1 M1: the Gaussian upper tail function with Phi(t - L) in place of Phi(L - t)",

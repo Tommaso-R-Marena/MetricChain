@@ -8512,6 +8512,237 @@ def t_envelope_assembly(rng, trials):
     return True, stats
 
 
+def cz_pair(u_s, rho, shrink=1.0):
+    """Doubles (e', thbar) with thbar >= theta_na(e') for the cube at slope u (given as a string): e' >= KL(rho || p_u),
+    thbar >= KL(rho || 1/2), by interval arithmetic rounded outwards (theta_na is nonincreasing, theta_na(KL(rho || p_u)) =
+    KL(rho || 1/2)).  `shrink` < 1 makes the pair INVALID on purpose (negative control)."""
+    from mpmath import iv
+    iv.dps = 30
+    pu = 1 / (1 + iv.exp(iv.mpf(u_s)))
+    half = iv.mpf(1) / 2
+    kl = lambda r, p: r * iv.log(r / p) + (1 - r) * iv.log((1 - r) / (1 - p))
+    if rho >= 0.5:
+        return math.nextafter(float(kl(half, pu).b), math.inf), 0.0
+    r = iv.mpf(rho)
+    return math.nextafter(float(kl(r, pu).b), math.inf), shrink * max(0.0, math.nextafter(float(kl(r, half).b), math.inf))
+
+
+def cz_hull(lines, c):
+    """Exact upper hull on [0, c] of the zero line and the lines al*B - be (doubles, al > 0, be >= 0): the hull lines by slope."""
+    best = {}
+    for al, be in lines:
+        if al not in best or be < best[al]:
+            best[al] = be
+    L = [(Fraction(0), Fraction(0), 0.0, 0.0)] + [(Fraction(al), Fraction(best[al]), al, best[al]) for al in sorted(best) if al > 0]
+    st = []
+    for ln in L:
+        while len(st) >= 2 and (ln[1] - st[-2][1]) * (st[-1][0] - st[-2][0]) <= (st[-1][1] - st[-2][1]) * (ln[0] - st[-2][0]):
+            st.pop()
+        st.append(ln)
+    C, out = Fraction(c), [st[0]]
+    for i in range(1, len(st)):
+        if (st[i][1] - st[i - 1][1]) < C * (st[i][0] - st[i - 1][0]):          # the crossing is left of c
+            out.append(st[i])
+        else:
+            break
+    return [(o[2], o[3]) for o in out[1:]]
+
+
+def cz_val(lines, B):
+    """floating-point values of V = max(0, lines) at the points B, and the index of the active line (-1: the zero line)"""
+    B = np.asarray(B, dtype=float)
+    if not lines:
+        return np.zeros(B.shape), np.full(B.shape, -1, dtype=int)
+    al = np.array([l[0] for l in lines]); be = np.array([l[1] for l in lines])
+    M = al[None, :] * B[:, None] - be[None, :]
+    i = np.argmax(M, axis=1)
+    v = M[np.arange(len(B)), i]
+    return np.where(v > 0, v, 0.0), np.where(v > 0, i, -1)
+
+
+def cz_val_exact(lines, B):
+    B = Fraction(B)
+    return max([Fraction(0)] + [Fraction(al) * B - Fraction(be) for al, be in lines])
+
+
+def cz_vertices(lines, c):
+    """exact vertices (X, V(X)) of the hull on [0, c]"""
+    C = Fraction(c)
+    A = [Fraction(0)] + [Fraction(l[0]) for l in lines]
+    Bt = [Fraction(0)] + [Fraction(l[1]) for l in lines]
+    vs = [(Fraction(0), Fraction(0))]
+    for i in range(1, len(A)):
+        X = (Bt[i] - Bt[i - 1]) / (A[i] - A[i - 1])
+        if X < C:
+            vs.append((X, A[i] * X - Bt[i]))
+    vs.append((C, A[-1] * C - Bt[-1]))
+    return vs
+
+
+def cz_M_upper(lines, c, g):
+    """a double >= max over [0, c] of B - V(B) g  (exact maximum over the vertices, rounded up)"""
+    m = max(X - Fraction(g) * V for X, V in cz_vertices(lines, c))
+    f = float(m)
+    while Fraction(f) < m:
+        f = math.nextafter(f, math.inf)
+    return f
+
+
+def cz_step(u_s, pu, abar, lines, c, K, shrink=1.0, top_scale=1.0, cap=True):
+    """One step of the certified multi-rate sequence (experiments/workstreams/Z/z6_certified_tops.py): from V_j = max(0, lines)
+    on [0, c] to V_{j+1} on [0, c'].  Every new line is  [B (1 + thbar alpha) - thbar (1 + beta)]/e'  for a line (alpha, beta) of
+    V_j and a certified pair (e', thbar): a line below Sigma(B, V_j(B)); slope rounded down, intercept rounded down.  The top
+    c' satisfies c' + abar V_j(c') >= abar exactly (or c' = c); the cap at one is the tangent from (c', 1) to the exact hull."""
+    A, C = Fraction(top_scale * abar), Fraction(c)
+    if C + A * cz_val_exact(lines, c) < A:
+        cn = c
+    else:
+        lo, hi = 0.0, c
+        for _ in range(100):
+            mid = 0.5 * (lo + hi)
+            lo, hi = (lo, mid) if mid + top_scale * abar * float(cz_val(lines, np.array([mid]))[0][0]) >= top_scale * abar else (mid, hi)
+        cn = hi
+        while Fraction(cn) + A * cz_val_exact(lines, cn) < A:
+            cn = math.nextafter(cn, math.inf)
+        cn = min(cn, c)
+    Bs = np.unique(np.concatenate([np.linspace(0.0, cn, K + 1)[1:], cn * (1.0 - np.geomspace(1e-8, 0.25, K // 4))]))
+    s, idx = cz_val(lines, Bs)
+    e_of = lambda r: r * np.log(r / pu) + (1 - r) * np.log((1 - r) / (1 - pu))
+    th_of = lambda r: np.maximum(0.0, r * np.log(2 * r) + (1 - r) * np.log(2 * (1 - r)))
+    F = lambda w: (Bs - (1 - s) * th_of(pu + (0.5 - pu) * w * w)) / e_of(pu + (0.5 - pu) * w * w)
+    gold = (math.sqrt(5.0) - 1) / 2
+    lo, hi = np.full(Bs.shape, 1e-6), np.ones(Bs.shape)
+    for _ in range(70):
+        x1, x2 = hi - gold * (hi - lo), lo + gold * (hi - lo)
+        left = F(x1) > F(x2)
+        hi, lo = np.where(left, x2, hi), np.where(left, lo, x1)
+    w = 0.5 * (lo + hi)
+    w = np.where(F(np.ones(Bs.shape)) >= F(w), 1.0, w)
+    Fv, rho = F(w), np.minimum(0.5, pu + (0.5 - pu) * w * w)
+    new, cache = [], {}
+    for k in range(len(Bs)):
+        if not (s[k] < 1.0 and 0.0 < Fv[k] < 50.0):
+            continue
+        r = float(rho[k])
+        if r not in cache:
+            cache[r] = cz_pair(u_s, r, shrink)
+        e_, th_ = cache[r]
+        a0, b0 = lines[idx[k]] if idx[k] >= 0 else (0.0, 0.0)
+        al, be = (1.0 + th_ * a0) / e_, th_ * (1.0 + b0) / e_
+        for _ in range(4):
+            al, be = math.nextafter(al, -math.inf), math.nextafter(be, math.inf)
+        new.append((al, be))
+    H = cz_hull(new, cn)
+    Cn = Fraction(cn)
+    if cap and H and Fraction(H[-1][0]) * Cn - Fraction(H[-1][1]) > 1:
+        mstar = max((1 - V) / (Cn - X) for X, V in cz_vertices(H, cn)[:-1])
+        m = float(mstar)
+        while Fraction(m) < mstar:
+            m = math.nextafter(m, math.inf)
+        bL = float(Fraction(m) * Cn - 1)
+        while Fraction(bL) < Fraction(m) * Cn - 1:
+            bL = math.nextafter(bL, math.inf)
+        H = cz_hull([l for l in H if Fraction(l[0]) * Cn - Fraction(l[1]) <= 1] + [(m, bL)], cn)
+    return H, cn
+
+
+@conjecture("XVI.11 Certified upper bounds for the exponent of j nested levels (theory report Theorem 11.58e(e); docs/workstreams/Z_ADDENDUM.md; experiments/workstreams/Z/z6_certified_tops.py).  A 'multi-rate' admissible sequence is built in a form whose admissibility is checked by exact rational and interval arithmetic: V_j is a maximum of finitely many lines; every new line is [B (1 + thbar alpha) - thbar (1 + beta)]/e' for a line of V_j and a pair with thbar >= theta_na(e') (interval arithmetic), which lies below Sigma(B, V_j(B)); the cap at one is the tangent from (c, 1) to the exact hull; the top c' satisfies c' + abar V_j(c') >= abar exactly.  Tested: (a) the pairs are valid and tight; (b) exact invariants: values at most one at the top, zero at zero, tops nonincreasing, c_1 >= a; (c) V_{j+1} <= Sigma(., V_j) at random points (floating-point slope map); (d) sandwich: the certified tops are above the floating-point envelope tops (up to its grid error) and within 3 per cent of their distance to h; (e) two levels: the certified top c_2 agrees with the closed form tau_2 = a^2/(a + x), theta_na(x) = a - x - the minimum over phi of max((1 - phi) a, phi a + (1 - phi) theta_na(phi a/(1 - phi))) - to 2 10^-6 a from above (for two levels the envelope bound is exact); (f) the certified majorant M_j(g) = max_B (B - V_j(B) g) is at least theta_hint(g), nonincreasing in j, and M_j(0) = c_j; (g) negative controls: pairs with theta lowered by two per cent, a top computed from 0.97 a, and a step without the cap are each detected")
+def t_certified_tops(rng, trials):
+    quick = trials < 100
+    stats = dict(pairs=0, pair_slack=0.0, levels=0, s2_checks=0, s2_excess=-math.inf, sandwich=0, worst_rel=0.0, least_rel=math.inf,
+                 tau2_gap=None, majorant_checks=0, control_theta=0, control_top=0, control_cap=0)
+    us = ["1"] if quick else ["1", "2"]
+    J, K, NG = (5, 240, 800) if quick else (8, 400, 1600)
+    for u_s in us:
+        u = float(u_s)
+        pu, lam, estar, a, h = lv_consts(u)
+        P = RtPair(u)
+        # (a) valid, tight pairs
+        for _ in range(12 if quick else 40):
+            rho = pu + (0.5 - pu) * float(rng.random()) ** 2 * 0.999 + 1e-6
+            e_, th_ = cz_pair(u_s, rho)
+            ex = na_theta_na(u, e_)
+            if th_ < ex - 1e-12 or th_ > ex + 1e-9:
+                return False, dict(reason="a certified pair (e', thbar) is not valid and tight", u=u, rho=rho, thbar=th_, theta=ex)
+            stats["pairs"] += 1
+            stats["pair_slack"] = max(stats["pair_slack"], th_ - ex)
+        from mpmath import iv
+        iv.dps = 30
+        a_iv = (lambda p, q: p * iv.log(p / q) + (1 - p) * iv.log((1 - p) / (1 - q)))(1 / (1 + iv.exp(iv.mpf(u_s))), iv.mpf(1) / 2)
+        abar = math.nextafter(float(a_iv.b), math.inf)
+        if not (abar >= a and abar - a < 1e-12):
+            return False, dict(reason="the interval value of a = KL(p_u || 1/2) disagrees with the harness constant", abar=abar, a=a)
+        # (b)-(f) the sequence
+        curves, tops, _raw = ez_env_sequence(P, J, NG)
+        lines, c = [], abar
+        seq = [(lines, c)]
+        Mprev = None
+        gs = [0.0, 0.1 * h, 0.5 * h, h, 0.5 * estar]
+        for j in range(1, J + 1):
+            new, cn = cz_step(u_s, pu, abar, lines, c, K)
+            if cn > c or (j == 1 and cn < a) or cz_val_exact(new, cn) > 1 or any(be < 0 or al <= 0 for al, be in new):
+                return False, dict(reason="exact invariants of the certified sequence fail", u=u, j=j, top=cn)
+            # (c) sub-solution at random points
+            for B in rng.random(40 if quick else 80) * cn:
+                B = float(B)
+                sig = P.sigma(B, float(cz_val(lines, np.array([B]))[0][0]))
+                v = float(cz_val(new, np.array([B]))[0][0])
+                stats["s2_checks"] += 1
+                if math.isfinite(sig):
+                    stats["s2_excess"] = max(stats["s2_excess"], v - sig)
+                    if v > sig + 1e-9:
+                        return False, dict(reason="V_{j+1} exceeds Sigma(B, V_j(B))", u=u, j=j, B=B, V=v, sigma=sig)
+            # (d) sandwich against the floating-point envelope sequence
+            bj = tops[j]
+            rel = (cn - bj) / (bj - h) if j >= 2 else 0.0
+            stats["worst_rel"], stats["least_rel"] = max(stats["worst_rel"], rel), min(stats["least_rel"], rel)
+            stats["sandwich"] += 1
+            if rel < -2e-3 or rel > 0.03:
+                return False, dict(reason="a certified top is not just above the floating-point envelope top", u=u, j=j, certified=cn, envelope=bj, rel=rel)
+            # (f) the certified majorant
+            Mj = [cz_M_upper(new, cn, g) for g in gs]
+            if abs(Mj[0] - cn) > 1e-15 or any(Mj[i] < na_theta_hint(u, gs[i]) - 1e-12 for i in range(1, len(gs))) \
+                    or (Mprev is not None and any(Mj[i] > Mprev[i] + 1e-12 for i in range(len(gs)))):
+                return False, dict(reason="the certified majorant is not above theta_hint, nonincreasing in j, with M_j(0) = c_j", u=u, j=j, M=Mj)
+            stats["majorant_checks"] += len(gs)
+            Mprev = Mj
+            lines, c = new, cn
+            seq.append((lines, c))
+            stats["levels"] += 1
+        # (e) two levels: the closed form  tau_2 = a^2/(a + x),  theta_na(x) = a - x  (the crossing of the two branches of
+        #     min over phi of max((1 - phi) a, phi a + (1 - phi) theta_na(phi a/(1 - phi)));  x = phi a/(1 - phi))
+        lo, hi = 1e-9, estar
+        for _ in range(100):
+            mid = 0.5 * (lo + hi)
+            lo, hi = (mid, hi) if na_theta_na(u, mid) + mid < a else (lo, mid)
+        tau2 = a * a / (a + 0.5 * (lo + hi))
+        phis = np.linspace(0.002, 0.998, 1993)
+        grid2 = min(max((1 - p) * a, p * a + (1 - p) * na_theta_na(u, p * a / (1 - p))) for p in phis)
+        c2 = seq[2][1]
+        stats["tau2_gap"] = (c2 - tau2) / a
+        if not (-1e-9 * a <= c2 - tau2 < 2e-6 * a and 0.0 <= grid2 - tau2 < 1e-4 * a):
+            return False, dict(reason="two levels: the certified top is not the closed form (it should be: tau_2 = b_2)", u=u, tau2=tau2 / a, c2=c2 / a, grid=grid2 / a)
+        # (g) negative controls, each on the step from level 2 to level 3
+        l2, c2_ = seq[2]
+        bad, _cb = cz_step(u_s, pu, abar, l2, c2_, K, shrink=0.98)
+        for B in np.linspace(0.05, 0.95, 60) * _cb:
+            sig = P.sigma(float(B), float(cz_val(l2, np.array([B]))[0][0]))
+            if math.isfinite(sig) and float(cz_val(bad, np.array([B]))[0][0]) > sig + 1e-9:
+                stats["control_theta"] += 1
+        _l, ctop = cz_step(u_s, pu, abar, l2, c2_, K, top_scale=0.97)
+        if ctop < tops[3] * (1 - 1e-3):
+            stats["control_top"] += 1
+        nocap, cc = cz_step(u_s, pu, abar, l2, c2_, K, cap=False)
+        if cz_val_exact(nocap, cc) > 1:
+            stats["control_cap"] += 1
+    n_u = len(us)
+    if not (stats["pairs"] >= 12 and stats["levels"] >= 5 * n_u and stats["s2_checks"] >= 200 and stats["sandwich"] >= 5
+            and stats["control_theta"] >= 5 * n_u and stats["control_top"] == n_u and stats["control_cap"] == n_u
+            and stats["worst_rel"] < 0.03 and stats["tau2_gap"] is not None and stats["majorant_checks"] >= 25):
+        return False, dict(reason="cases not exercised or a control did not fail", **stats)
+    return True, stats
+
+
 # ----------------------------------------------------------------------------------------------
 # XVII. With a known part (a field): the p-biased cube (theory report 11.20)
 # ----------------------------------------------------------------------------------------------
