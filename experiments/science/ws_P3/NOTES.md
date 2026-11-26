@@ -188,3 +188,30 @@ Next: prototype of the term-by-term (Faa di Bruno) bound at orders 2, 3, 4 and i
   graphs), Jou et al. 2016 (BWM*, dynamic programming on sparse graphs), Hallen-Donald 2019 (review),
   Rahman 2014 (errors of truncated referential/anchored decompositions).  None states a sup-norm
   bound on the many-body remainder of a GB energy; not a novelty claim.
+
+## 00:22-00:32  Val20/PPII beyond enumeration; coordinator's addition (Bennett inputs)
+
+* `logs/floor_big_V20.log`, first run (m = 4, site penalties, band w = 8, seed 2026):
+  |X| = 3^20 = 3.49e9; ball of radius 3 = 9 921 evaluations (2.85e-6 of the domain);
+  Gamma_4 = 2.82 kcal/mol, gamma_i <= 0.175; deterministic certified bracket
+  ln Z(E) in [517.483, 519.221] (1.74 nats); N = 50 000 exact samples of pi_{m_-} (29 321 distinct,
+  mean 4.27 sites off the anchor): Hoeffding (delta = .05) ln Z(E) in [518.2442, 518.2759], width
+  0.032 nats; Gibbs-Bogoliubov lower bound 518.104.  177 s wall.  The m = 5 run is in progress.
+* Coordinator's message (received ~00:26): asks in addition for (a) a certified one-sided floor of
+  r = beta(g - m) for a stated pairwise model m and b_cert = (upper bound of the mean of r under
+  pi_m) - lo, (b) a certified upper bound of Var_{pi_m}(r), (c) W(b_cert, s2_cert) next to
+  enumerated values (Bennett bracket, addendum A17 part 7; coordinator's logs in
+  `experiments/science/pi_inference/bennett_bracket_real.{py,log}`, read: header and ~25 lines).
+* ANSWER (all three are available, exactly computable, no sampling): with the certified sandwich
+  m_- <= E <= m_+ and u := beta (m_+ - m_-) >= 0 (an explicit banded pairwise function):
+    model m = m_-:  r = beta(E - m_-) in [0, u]  =>  lo = 0;  E r <= E u =: b_cert;  Var r <= E r^2 <= E u^2 =: s2_cert;
+    model m_0 = (m_- + m_+)/2:  |r_0| <= u/2  =>  lo = -beta rho_cert/2;  b_cert = (E u + beta rho_cert)/2;  s2_cert = E u^2 / 4;
+  E u and E u^2 under pi_m by a transfer matrix over degree-2 polynomials (`BandModel.moments`).
+  Implemented in `run_floor.py` (block 4b; enumerated b, s2, K, W in block 5; Bennett bracket with
+  Chebyshev + certified variance in block 6).  A bug of mine (lnZE used before assignment) made two
+  runs of batch C fail between 00:27:40 and 00:28:54 (L8/H m = 4, 5 site-resolved); fixed, to be re-run.
+* First numbers [M]: Val6/PPII, m = 5, site penalties: certified b = 4.4e-3 kT, s2 = 4.3e-5,
+  W_cert = 2.1e-5 nats; enumerated b = 2.2e-3, s2 = 7.4e-6, true Jensen gap K = 3.7e-6 (W_enum 3.7e-6).
+  Bennett bracket with N = 5000: width 8.5e-4 nats.  With the CONSTANT remainder bound (m = 4) the
+  same route gives b_cert = 1.26, s2_cert = 1.58, W = 0.64 nats: useless -- the bounds [0, u] cannot
+  see that r is nearly constant; site penalties are essential for this route.

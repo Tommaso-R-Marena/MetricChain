@@ -19,6 +19,13 @@ report (COMMON rule 3: numerics before theory).
   C6  The constants connecting T3 to the [0,1]-valued mean-estimation problem: for X in [0,1] with mean m,
       max Var = m(1-m), so (worst-case variance term)/(eps m)^2 = (1-m)/(eps^2 m) and T3's (1/m - 1)/eps
       is exactly eps times it.
+  C7  At the centre of a constant box the hint is not needed: the stopping rule "draw N(m) =
+      ceil(ln(1/delta) max((1-m)/(eps m), 1/eps)) + 1 samples of X = e^{-(r-lo)}; if they all equal the first
+      value m, output m" fails with probability <= delta on every [0,1]-valued law (exact worst case over
+      two- and three-level alternatives), and N(m) is the hinted count of T3 up to the factor ln(1/delta).
+  C8  Hoeffding's (4.12)-(4.13): ln E e^{Y-EY} <= -w p + ln(1 - p + p e^w), p = (EY - min Y)/w, on random laws;
+      it is never larger than L(w) and equals it only at the extremal p.
+  C5 also checks the refined bound D_p <= (p-1)K/8 + sum_i L(c_i)   (bounded range => zCDP, composed).
 
 Run:  python3 check_math.py            (about 40 s; writes check_math.out next to this file when redirected)
 """
@@ -221,6 +228,7 @@ def member(states, n, a, kind):
 orders = [1.0, 1.01, 1.5, 2.0, 3.0, 6.0]
 best = {p: 0.0 for p in orders}
 best_a17 = {p: 0.0 for p in orders if p > 1}
+best_ref = {p: 0.0 for p in orders}
 ntest = 0
 for (n, a) in [(4, 2), (6, 2), (8, 2), (3, 3), (5, 3)]:
     states = all_states(n, a)
@@ -235,13 +243,16 @@ for (n, a) in [(4, 2), (6, 2), (8, 2), (3, 3), (5, 3)]:
             pg = pi * np.exp(-(r - r.min()))
             pg /= pg.sum()
             ntest += 1
+            sumL = float(sum(L(float(ci)) for ci in c if ci > 0))
             for p in orders:
                 d = renyi(pg, pi, p)
                 best[p] = max(best[p], d / (p * K / 8))
+                best_ref[p] = max(best_ref[p], d / ((p - 1) * K / 8 + sumL))
                 if p > 1:
                     best_a17[p] = max(best_a17[p], d / (p * p * K / (8 * (p - 1))))
 print(f"    {ntest} random members; largest D_p/(pK/8):   " + "  ".join(f"p={p}: {best[p]:.4f}" for p in orders))
 print("                   largest D_p/(p^2K/(8(p-1))): " + "  ".join(f"p={p}: {best_a17[p]:.4f}" for p in best_a17))
+print("       largest D_p/((p-1)K/8 + sum_i L(c_i)): " + "  ".join(f"p={p}: {best_ref[p]:.4f}" for p in orders))
 
 # hill-climb: try to violate D_2 <= K/4 on {0,1}^n with the uniform and with a biased product measure
 print("    hill-climb on r (cube), objective D_p/(pK/8):")
@@ -303,6 +314,36 @@ for (n, p, bias) in [(3, 2.0, 0.5), (4, 2.0, 0.5), (4, 2.0, 0.2), (5, 2.0, 0.5),
             top, top_r = cur, r.copy()
     ex, Kex = obj_exact(top_r)
     print(f"      n={n}, p={p}, P(x_i=1)={bias}: best ratio found {top:.6f}  (50-digit re-evaluation: {ex:.6f}, K = {Kex:.3g})")
+# general (non-product) reference: the same bound with c~_i = sup_{x_<i} osc_{x_i} F_i(x_<=i),
+# F_i = -ln E_pi[e^{-r} | x_<=i]  (remark after A3.2); random pi, random r, exact enumeration
+print("    non-product reference pi (random), ranges c~_i of the conditional free energy of the remainder:")
+worst_np = {p: 0.0 for p in orders}
+cnt_np = 0
+for n in [3, 4, 5, 6]:
+    states = all_states(n, 2)
+    N = len(states)
+    for _ in range(60):
+        pi = dirichlet(N, float(rng.choice([0.3, 1.0, 5.0])))
+        r = rng.normal(0, float(rng.choice([0.3, 1.0, 3.0])), N)
+        y = np.exp(-(r - r.min()))
+        ct = []
+        for i in range(n):
+            # group states by the prefix x_<=i  (states are in lexicographic order: prefix = index >> (n-i-1))
+            key = np.arange(N) >> (n - i - 1)
+            num = np.bincount(key, weights=pi * y, minlength=2 ** (i + 1))
+            den = np.bincount(key, weights=pi, minlength=2 ** (i + 1))
+            F = -np.log(num / den)                       # F_i(x_<=i), length 2^(i+1)
+            ct.append(float(np.max(np.abs(F[0::2] - F[1::2]))))   # osc over x_i at fixed x_<i
+        pg = pi * y
+        pg /= pg.sum()
+        K_t = sum(c * c for c in ct)
+        sumL = sum(L(c) for c in ct if c > 0)
+        cnt_np += 1
+        for p in orders:
+            d = renyi(pg, pi, p)
+            worst_np[p] = max(worst_np[p], d / ((p - 1) * K_t / 8 + sumL))
+print(f"      {cnt_np} instances; largest D_p/((p-1)K~/8 + sum_i L(c~_i)): "
+      + "  ".join(f"p={p}: {worst_np[p]:.4f}" for p in orders))
 u = 0.3
 for n in [4, 12]:
     exact = n * math.log(1 + math.tanh(u / 2) ** 2)
@@ -317,4 +358,54 @@ for m, eps in [(0.5, 0.1), (math.exp(-3.0), 0.2), (math.exp(-3.7), 0.1), (math.e
     second = 1 / (eps * m)
     print(f"    m={m:.3e}, eps={eps}: (1/m-1)/eps = {hinted:.4g};  1/(eps m) = {second:.4g};"
           f"  max-variance term (1-m)/(eps^2 m) = {var_term:.4g};  ratio var/hinted = {var_term / hinted:.4g} = 1/eps")
+# ----------------------------------------------------------------------------------------------- C7
+print("C7  no-hint stopping rule at the centre of a constant box (exact failure probabilities)")
+for (m, eps, delta) in [(math.exp(-3.0), 0.2, 0.05), (math.exp(-3.7), 0.1, 0.05), (0.5, 0.1, 0.01)]:
+    N = math.ceil(math.log(1 / delta) * max((1 - m) / (eps * m), 1 / eps)) + 1
+    worst = 0.0
+    # alternatives: X = m with prob 1-q-q2, X = 1 with prob q (dip), X = 0 with prob q2 (bump)
+    for q in np.linspace(0, 1, 2001):
+        for q2 in np.linspace(0, 1 - q, 41):
+            mean = (1 - q - q2) * m + q
+            if not ((1 - eps) * m <= mean <= (1 + eps) * m):
+                # the rule outputs m only if the first sample is m and the next N-1 agree with it
+                worst = max(worst, (1 - q - q2) ** N)
+    hinted = (1 / m - 1) / eps
+    print(f"    m={m:.4f}, eps={eps}, delta={delta}: N = {N}; worst failure probability over alternatives = {worst:.4f}"
+          f" (<= delta: {worst <= delta});  N / (hinted count (1/m-1)/eps) = {N / hinted:.2f}  [ln(1/delta) = {math.log(1 / delta):.2f}]")
+
+# the theory division's own example (rho_- = rho_+ = 3, eps = 0.2 i.e. detection threshold eta = 0.1, delta = 0.05)
+rho, eta, delta = 3.0, 0.1, 0.05
+U, V = math.expm1(rho), -math.expm1(-rho)
+p_thy = 0.5 * min(math.expm1(eta) / U, -math.expm1(-eta) / V)
+N_thy = math.ceil(math.log(1 / delta) / p_thy)
+m = math.exp(-rho)
+q_dip = math.expm1(eta) * m / (1 - m)          # least pi-mass of a dip that raises ln Z by more than eta
+q_bump = -math.expm1(-eta)                     # least pi-mass of a bump that lowers ln Z by more than eta
+N_nohint = math.ceil(math.log(1 / delta) / min(q_dip, q_bump)) + 1
+print(f"    theory division's example: hinted spot check with the half-half sampler: N = {N_thy} (they state 1088);"
+      f" no-hint rule 'all N samples of pi agree': N = {N_nohint}"
+      f"  [least detectable masses: dip {q_dip:.6f}, bump {q_bump:.6f}]")
+
+# ----------------------------------------------------------------------------------------------- C8
+print("C8  Hoeffding (4.12)-(4.13) with the mean position p: gap <= -w p + ln(1-p+p e^w) <= L(w)")
+mxh = 0.0
+ratios = []
+skipped = 0
+for _ in range(20000):
+    w = float(rng.choice([0.5, 2.0, 6.0]))
+    k = int(rng.integers(2, 8))
+    y = np.sort(rng.uniform(0, w, k))
+    y[0], y[-1] = 0.0, w
+    pr = dirichlet(k, float(rng.choice([0.1, 1.0])))
+    gap = math.log(float(np.dot(pr, np.exp(y)))) - float(np.dot(pr, y))
+    p = float(np.dot(pr, y)) / w
+    hb = -w * p + math.log1p(p * math.expm1(w))
+    if hb < 1e-6:          # nearly degenerate law: gap and bound are both rounding noise
+        skipped += 1       # (an unguarded first version reported a ratio 1.001 from such a case)
+        continue
+    mxh = max(mxh, gap / hb)
+    ratios.append(hb / L(w))
+print(f"    {20000 - skipped} laws ({skipped} nearly degenerate ones skipped): largest gap/Hoeffding bound = {mxh:.6f} (<= 1);"
+      f" Hoeffding bound / L(w): median {float(np.median(ratios)):.3f}, max {max(ratios):.6f} (<= 1)")
 print("done")

@@ -531,6 +531,20 @@ was done.
    natural thing to certify is an exponential moment of the third-order remainder, not
    its sup norm.
 
+37. **A floor and a variance: the bracket without the bill** ([SCI-MSG-0018](messages/science/SCI-MSG-0018.md);
+   addendum A17 (7)).  The theory division's box-class theorem charges `e^{floor}/ε`
+   evaluations.  That is the price of not knowing the *variance* of the remainder under
+   the model: with a one-sided floor `b` and an a-priori variance bound `σ²`, Bennett's
+   inequality brackets the free energy within `(σ²/b²)(e^b − 1 − b)` of first-order
+   perturbation theory, and only a mean has to be sampled.  On 53 enumerated rotamer
+   instances with the pairwise fit of the solvent term this bracket is `≤ 3·10⁻³` nats
+   and within a factor `1.0–5.2` of the truth, where the range-only bound is up to `11`
+   nats.  So the two numbers a certificate for a solvated side-chain free energy needs
+   are a floor of a few `k_BT` and a variance of `(0.04 k_BT)²` for the remainder beyond
+   pairwise — the first by analysis of the energy function (workstream P3), the second
+   computable for explicit local remainders.  The instance values were obtained by
+   enumeration: a test of sharpness, not a certificate.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -577,6 +591,7 @@ was done.
 | [SCI-MSG-0016](messages/science/SCI-MSG-0016.md) | checkpoint 35 | **linked correction** of SCI-MSG-0012 and SCI-MSG-0013, after an internal adversarial review | theory (copy engineering §5) | workstream R8: addendum A16 refereed — no false statement; the "exact cost" claim corrected (quantile form R8.2, matching R8.3, tolerant test R8.4); the printed algorithm lacked a gauge; an evidence-trail fault repaired; Lean core of Lemma A16.5; the conjecture not refuted; non-adaptive lower bound with the datum; requests T-R8-1…3, E-R8-1 | completed |
 | [SCI-MSG-0017](messages/science/SCI-MSG-0017.md) | checkpoint 36 | measurement | theory (copy engineering) | the divergences `D_2`, `D_∞` of the solvated rotamer ensemble from the vacuum model and from its one-body and pairwise fits on 45 enumerated instances: prices for the floor theorem and the Rényi family; four points for the theory division's §11.30 | completed |
 | [SCI-RES-0008](responses/science/SCI-RES-0008.md) | checkpoint 36 | response to THY-RES-0008, THY-MSG-0014 | theory (copy engineering) | their rewritten §11.29 states our results correctly (statement by statement; `U` with `R̄` checked numerically); `MonotoneSandwich.lean` is our file up to a provenance paragraph; §11.30 as published: no error found, criticism as in SCI-RES-0007 and SCI-MSG-0017 | completed; one confirmation asked |
+| [SCI-MSG-0018](messages/science/SCI-MSG-0018.md) | checkpoint 37 | message | theory (copy engineering) | a one-sided floor plus an a-priori variance bound brackets `ln Z` with no exponential cost (Bennett; addendum A17 (7)); sharpness on 53 real instances; the second batch of measured prices (charged, aromatic, mixed sequences); requests A17-T4, A17-T5 | proposed |
 
 ## Responses and requests received
 

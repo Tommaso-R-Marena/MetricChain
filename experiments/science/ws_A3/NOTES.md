@@ -163,8 +163,8 @@ Thm 3.9, Thm 3.10 with proofs, Remark 3.11, §3.4 to Prop. 3.13, Cor. 3.14]`
 * classes: cones `Y_{p,q,K} = {‖Y−EY‖_q ≤ K‖Y−EY‖_p}`, intersected with balls of the *central* `L_q̃` norm,
   `q̃ = min(q,2)`; absolute error ε, confidence 1−δ.
 * upper bound (their (5), Thm 2.17): expected cost `≤ C_q K^{pq/(q−p)} (1 + (‖Y−EY‖₁/ε)^{max{1+1/(q−1), 2}}) log δ⁻¹`.
-* lower bounds: Thm 3.9 (`q ≥ 2`): `n̄^wor ≥ (4 log 3)⁻¹ (σ/ε)² log((4/3)δ)⁻¹`; Thm 3.10 (`1 < q ≤ 2`):
-  `n̄^wor ≥ c_{q,K} (τ/ε)^{1+1/(q−1)} log((4/3)δ)⁻¹`; **Cor. 3.14: the same lower bounds for general randomised
+* lower bounds: Thm 3.9 (`q ≥ 2`): `n̄^wor ≥ (4 log 3)⁻¹ (σ/ε)² log(3/(4δ))`; Thm 3.10 (`1 < q ≤ 2`):
+  `n̄^wor ≥ c_{q,K} (τ/ε)^{1+1/(q−1)} log(3/(4δ))`; **Cor. 3.14: the same lower bounds for general randomised
   algorithms using function values** (when π has no atoms; Prop. 3.13: "no general randomized algorithm is better
   than the best possible i.i.d.-based algorithm in distinguishing F(1) from F(2)").
 * ⇒ A17.3 ("without a hint: `Θ(e^κ/ε^{max(2, p/(p−1))})`; variance term needed") is, in absolute error and with

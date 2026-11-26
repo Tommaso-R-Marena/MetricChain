@@ -22,6 +22,6 @@
 'ScienceL3.theoremA_group_div' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.theoremA_fin' depends on axioms: [propext, Classical.choice, Quot.sound]
 
-real	0m31.781s
-user	0m20.529s
-sys	0m2.636s
+real	0m29.918s
+user	0m23.361s
+sys	0m2.304s

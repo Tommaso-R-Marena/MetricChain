@@ -13,3 +13,8 @@ S5 Theorem A, every finite ingredient, 184 parameter sets over 7 site groups (Z2
     S3, 0.3, 1, 0.2, 4, 2.186, 1.39, 54.6, 1.463, 15, 90, 15
     S3, 0.7, 3, 3, 4, 1.538, 2.01, 48.3, 0.9327, 15, 90, 15
 S6 A16.5 [20000 cases]: identity (a): rel. error 3.77e-15; concavity violation -9.23e-10; grid max of f minus f(clipped level), all t* > 0: 5.74e-16; rearrangement sum H(rho) - sum H(rho') over 20000 dominated pairs: max 3.55e-15
+S7 A1.1 [300 random class members, n <= 5]: item 1 (all conditioning sets): worst violation 3.33e-16; item 2: max of KL - n*R(r) = 4.44e-16; equality at the two cones to 3.55e-15
+
+real	0m6.520s
+user	0m5.133s
+sys	0m0.033s

@@ -196,6 +196,30 @@ class BandModel:
     def lnZ(self, beta=BETA):
         return self.dp(-beta, "logsumexp")
 
+    def moments(self, other, beta=BETA):
+        """(E[other], E[other^2]) under the Gibbs measure exp(-beta * self)/Z, `other` a BandModel on the same sites and
+        band.  Transfer matrix over truncated polynomials: besides the log-message, the conditional means of the
+        partial sum of `other` and of its square are propagated (exact up to double rounding; sums of positive terms)."""
+        n = self.n
+        msg = mu1 = mu2 = None
+        for i in range(n):
+            A = self._A(i, msg, -beta)
+            U = other._A(i, None, 1.0)
+            if mu1 is None:
+                a1, a2 = U, U * U
+            else:
+                ext = (1,) * (A.ndim - mu1.ndim)
+                m1 = mu1.reshape(mu1.shape + ext); m2 = mu2.reshape(mu2.shape + ext)
+                a1 = m1 + U
+                a2 = m2 + 2.0 * m1 * U + U * U
+            mx = A.max(axis=0)
+            P = np.exp(A - mx[None]); S = P.sum(axis=0)
+            msg = mx + np.log(S)
+            P = P / S[None]
+            mu1 = (P * a1).sum(axis=0); mu2 = (P * a2).sum(axis=0)
+        c = other.const
+        return float(mu1) + c, float(mu2) + 2.0 * c * float(mu1) + c * c
+
     def minimum(self):
         return -self.dp(-1.0, "max")
 
@@ -277,3 +301,11 @@ def build_band_models(k, x0, c0, h, J, d, w, Gamma, M, gam=None):
                 red = arr.min(axis=other) if sense < 0 else arr.max(axis=other)
                 mdl.one[U[0]] = mdl.one[U[0]] + red
     return lo, up
+
+
+def bennett_W(b, s2):
+    """ln of the extremal two-point moment generating function at s = 1: for Y <= b, E Y = 0, Var Y <= s2,
+    ln E e^Y <= W(b, s2) = ln[(b^2 e^{-s2/b} + s2 e^b)/(b^2 + s2)]   (Bennett's inequality, sharp form)."""
+    if b <= 0.0 or s2 <= 0.0:
+        return 0.0
+    return math.log1p((b * b * math.expm1(-s2 / b) + s2 * math.expm1(min(b, 700.0))) / (b * b + s2))

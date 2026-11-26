@@ -10,7 +10,25 @@ import math, sys
 import numpy as np
 from scipy.optimize import minimize
 sys.dont_write_bytecode = True
-from r9_minor import KL, F, lrange, shell_value
+# (the four helpers are copied from r9_minor.py, whose module body would otherwise run on import)
+def KL(x, k):
+    s = 0.0
+    if x > 0: s += x * math.log(x / k)
+    if x < 1: s += (1 - x) * math.log((1 - x) / (1 - k))
+    return s
+
+def F(l, m, k):
+    return m * KL(k + l / (2 * m), k) + (1 - m) * KL(k - l / (2 * (1 - m)), k)
+
+def lrange(m, k):
+    return max(-2 * m * k, -2 * (1 - m) * (1 - k)), min(2 * m * (1 - k), 2 * (1 - m) * k)
+
+def shell_value(l, m, k, u, e=0.0):
+    b = (e + F(l, m, k)) / u
+    lo, hi = lrange(m, k)
+    a, c = max(l - b, lo), min(l + b, hi)
+    if a <= 0 <= c: return 0.0
+    return F(a, m, k) if a > 0 else F(c, m, k)
 
 rng = np.random.default_rng(11)
 
@@ -96,7 +114,7 @@ for (k, u, e) in ((0.3, 1.0, -0.03), (0.3, 1.0, -0.1), (0.5, 1.0, -0.05), (0.2, 
 P(f"total: {tot} profiles, violations of r_mu(e) <= R2(e) (beyond 2e-6): {viol}")
 # a feasible mixture with infeasible two-point components (the phenomenon behind M2)
 k, e = 0.3, -0.1
-lamA, muA = [0.5, 0.5], [0.05, 0.55]          # two-point law with mean 0.3, MI small?
+lamA, muA = [0.5, 0.5], [0.25, 0.35]          # two-point law with mean 0.3 and small MI: infeasible at e = -0.1
 lamB, muB = [0.7, 0.3], [0.0001, 0.9997]      # nearly pure profile
 for nm, lam, mu in (("A", lamA, muA), ("B", lamB, muB)):
     P(f"two-point law {nm}: mean {np.dot(lam, mu):.4f}, MI = {MI(lam, mu, k):.4f}, feasible at e = {e}: {e + MI(lam, mu, k) >= 0}")

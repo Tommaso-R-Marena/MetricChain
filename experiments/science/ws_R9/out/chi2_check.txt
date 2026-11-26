@@ -1,0 +1,3 @@
+two letters, 400 random (pi, asymmetric d, P): max |v_grid - v_dual| and |(I - v) - min_gamma KL(P||pi_gamma)| = 5.10e-07 (grid resolution 5e-7); violations (beyond 2e-06) of 0 <= I - v <= chi^2(P||Q) over all window points Q: 0; largest (I - v)/min_Q chi^2 = 0.7985; 172 cases have P inside the window (I - v = 0); most negative I - v_grid = -5.1e-07 (grid error)
+(first run of this script used the tolerance 1e-7 and reported 93 'violations': all of them cases with P in the window,
+ where I - v_grid = -5e-7 from the grid; a false alarm of mine, recorded in NOTES.md)

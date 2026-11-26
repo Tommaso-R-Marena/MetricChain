@@ -1213,6 +1213,76 @@ theorem window_of_equal_marginals {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1)
   rw [(margW_add_eq_iff hAw hAΔ i).mp h]
   exact lemma0_window hp0 hp1 hw₀ i
 
+/-- **Remark (1) after Lemma 3, at the upper end of the window: no compensation.**  If a base
+`w ∈ 𝒲_u` plus a non-negative multiple of a class member `v` has a one-body marginal equal to
+the end `p₊` of the window, then `w` already has that marginal there.  So when `c_Δ = p₊ ≠ c_w`
+no compensation by class members is possible: the "iff `c_Δ ∈ [p₋, p₊]`" of the remark holds
+with the *open* window. -/
+theorem no_compensation_at_upper_end {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1)
+    {w v : (ι → Bool) → ℝ} (hw : InCone u w) (hv : InCone u v) {b : ℝ} (hb : 0 ≤ b) (i : ι)
+    (h : margW (refW p) (fun x => w x + b * v x) i = pTilt p (-u)) :
+    margW (refW p) w i = pTilt p (-u) := by
+  have hπ := refW_pos (ι := ι) hp0 hp1
+  have hAw := massW_pos hπ hw.1
+  have hAv := massW_pos hπ hv.1
+  have hmw := (lemma0_window hp0 hp1 hw i).2
+  have hmv := (lemma0_window hp0 hp1 hv i).2
+  have e1 : oneW (refW p) w i = margW (refW p) w i * massW (refW p) w := by
+    unfold margW
+    field_simp
+  have e2 : oneW (refW p) v i = margW (refW p) v i * massW (refW p) v := by
+    unfold margW
+    field_simp
+  have hA : 0 < massW (refW p) (fun x => w x + b * v x) :=
+    massW_pos hπ (hw.add_smul hv hb).1
+  have e3 : oneW (refW p) (fun x => w x + b * v x) i =
+      pTilt p (-u) * massW (refW p) (fun x => w x + b * v x) := by
+    rw [← h]
+    unfold margW
+    field_simp
+  rw [oneW_add, oneW_smul, massW_add, massW_smul, e1, e2] at e3
+  have h1 : 0 ≤ b * massW (refW p) v * (pTilt p (-u) - margW (refW p) v i) :=
+    mul_nonneg (mul_nonneg hb hAv.le) (by linarith)
+  have h2 : massW (refW p) w * (pTilt p (-u) - margW (refW p) w i) ≤ 0 := by nlinarith
+  have h3 : pTilt p (-u) - margW (refW p) w i ≤ 0 := by
+    by_contra hpos
+    have h4 := mul_pos hAw (not_le.mp hpos)
+    linarith
+  linarith
+
+/-- **Remark (1) after Lemma 3, at the lower end of the window: no compensation.** -/
+theorem no_compensation_at_lower_end {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1)
+    {w v : (ι → Bool) → ℝ} (hw : InCone u w) (hv : InCone u v) {b : ℝ} (hb : 0 ≤ b) (i : ι)
+    (h : margW (refW p) (fun x => w x + b * v x) i = pTilt p u) :
+    margW (refW p) w i = pTilt p u := by
+  have hπ := refW_pos (ι := ι) hp0 hp1
+  have hAw := massW_pos hπ hw.1
+  have hAv := massW_pos hπ hv.1
+  have hmw := (lemma0_window hp0 hp1 hw i).1
+  have hmv := (lemma0_window hp0 hp1 hv i).1
+  have e1 : oneW (refW p) w i = margW (refW p) w i * massW (refW p) w := by
+    unfold margW
+    field_simp
+  have e2 : oneW (refW p) v i = margW (refW p) v i * massW (refW p) v := by
+    unfold margW
+    field_simp
+  have hA : 0 < massW (refW p) (fun x => w x + b * v x) :=
+    massW_pos hπ (hw.add_smul hv hb).1
+  have e3 : oneW (refW p) (fun x => w x + b * v x) i =
+      pTilt p u * massW (refW p) (fun x => w x + b * v x) := by
+    rw [← h]
+    unfold margW
+    field_simp
+  rw [oneW_add, oneW_smul, massW_add, massW_smul, e1, e2] at e3
+  have h1 : 0 ≤ b * massW (refW p) v * (margW (refW p) v i - pTilt p u) :=
+    mul_nonneg (mul_nonneg hb hAv.le) (by linarith)
+  have h2 : massW (refW p) w * (margW (refW p) w i - pTilt p u) ≤ 0 := by nlinarith
+  have h3 : margW (refW p) w i - pTilt p u ≤ 0 := by
+    by_contra hpos
+    have h4 := mul_pos hAw (not_le.mp hpos)
+    linarith
+  linarith
+
 /-- **Remark (1) after Lemma 3, "if".**  When `c_Δ` is in the open window `(p₋, p₊)`,
 compensation is always possible with an extreme additive instance: there are `γ₂ ∈ {−u, +u}`
 and `b ≥ 0` such that `w + b·w̃_{γ₂}` and `w + Δ + b·w̃_{γ₂}` are class members with all one-body
@@ -1526,6 +1596,8 @@ end ScienceL3
 #print axioms ScienceL3.lemma3_compensation_bernoulli
 #print axioms ScienceL3.window_of_equal_marginals
 #print axioms ScienceL3.lemma3_compensation_exists
+#print axioms ScienceL3.no_compensation_at_upper_end
+#print axioms ScienceL3.no_compensation_at_lower_end
 #print axioms ScienceL3.window_of_site_odds
 #print axioms ScienceL3.lemma0_window
 #print axioms ScienceL3.lemma0_window_lipH

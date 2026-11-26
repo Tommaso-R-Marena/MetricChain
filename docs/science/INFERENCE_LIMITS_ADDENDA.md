@@ -1244,7 +1244,10 @@ unbounded as `q → 0` at fixed budget (`σ = 0.1 k_BT` in root mean square allo
 So the answer to our own request P-T3 is: **a "typical norm" that certifies must be an
 exponential moment of the remainder under the model — a Rényi or Kullback–Leibler
 bound on the true ensemble relative to the model — and the root-mean-square remainder
-that fits report is not one.**
+that fits report is not one — *on its own*.**  (Refined after checkpoint 36, part (7)
+below: an a-priori bound on the variance of the remainder under the model **together
+with a one-sided floor** is an exponential-moment bound, by Bennett's inequality, and
+then brackets `ln Z` with no exponential cost at all.)
 
 ### (4) The table
 
@@ -1258,6 +1261,7 @@ divergence named; constants depend on `δ`):
 | a Rényi divergence of order `1 < p ≤ 2` | `e^{κ}/ε^{p/(p−1)}` | the same order |
 | the Kullback–Leibler divergence `D_1(π_g‖π)` | `e^{Θ(κ/ε)}` | at least that |
 | mean, variance or any polynomial moment of `g − ĝ` under the model | the number of states | the number of states |
+| **a one-sided floor `b` below the mean *and* the variance `σ²` of `g − ĝ` under the model** (part (7)) | none beyond the mean: `ln Z` is bracketed within `W(b, σ²) ≈ (σ²/b²)(e^b − 1 − b)`; below that width, as in the first row | the mean: `σ²/(δε²)` |
 
 **The direction matters [P, trivial; reading H].**  Every row is a divergence of the
 *true ensemble from the model*, `D(π_g‖π)`.  The variational (Gibbs–Bogoliubov) principle
@@ -1402,6 +1406,70 @@ likelihood fits of benchmark B10 were not run on these instances).  In the first
 the limitation "no charged side chains" stood until the second batch was run; the
 message SCI-MSG-0017 was sent before it and says so.
 
+### (7) A floor and a variance: a bracket with no exponential bill [P, K; M for the numbers; added after checkpoint 36]
+
+The measurement of (6) says that for the remainder beyond the pairwise fit the
+chi-square divergence is `10⁻³` while the sup-norm width is up to `15 k_BT`.  The
+elementary reason has a certificate attached.
+
+**Proposition A17.7 (Bennett bracket) [K for the inequality — Bennett 1962, Hoeffding 1963,
+from memory; the sharp form checked on 20 000 random laws: no violation, equality at
+the two-point law].**  Let `r = g − m`, expectations under `π_m`.  Write
+`ln Z(g) − ln Z(m) = −E r + K`, `K = ln E e^{−(r − E r)} ≥ 0` (the Jensen gap; it is also
+`D_1(π_m‖π_g)`).  If `r ≥ E r − b` (a one-sided floor `b > 0` below the mean) and `Var r ≤ σ²`, then
+
+    0  ≤  K  ≤  W(b, σ²) := ln[ (b² e^{−σ²/b} + σ² e^{b}) / (b² + σ²) ]  ≤  (σ²/b²)(e^{b} − 1 − b),
+
+and `W` is attained by the law with a state at the floor of probability `σ²/(b² + σ²)`: *a
+rare deep dip is the extremal remainder, and the variance bounds how rare it must be.*
+**Corollary (a certificate).**  Given a certified floor `lo ≤ r` and a certified variance
+bound `σ²`: draw `N` points from `π_m`, let `r̄` be the mean of `r` on them and
+`η = σ/√(Nδ)`.  With probability at least `1 − δ`,
+
+    ln Z(m) − r̄ − η   ≤   ln Z(g)   ≤   ln Z(m) − r̄ + η + W(r̄ + η − lo, σ²).
+
+`N` evaluations, a bracket of width `2η + W`, **no term exponential in anything unless `W`
+is**: the bill of the box class, `e^{b}/ε`, is the price of *not* knowing the variance —
+of allowing a dip at the floor on a set of probability up to one.  With `Var r ≤ σ²` such
+a dip has probability at most `σ²/b²` and contributes at most `(σ²/b²)e^{b}` whether or not
+it is ever sampled.  Below the width `W` the first row of the table applies again.
+*Against Theorem 11.110(a) of the theory report:* its bound `L(w)` on the same gap uses
+the two-sided width only; `W` uses the one-sided floor and the variance, and reduces to
+a bound of the same kind when the variance is as large as the range allows.
+
+**On the real instances [M; `experiments/science/pi_inference/bennett_bracket_real.py`,
+exact sums; 53 instances of both batches, three surrogates, 159 rows; `b` and `σ²` are the
+exact values of each instance, so this measures how sharp the bracket is — it is not a
+certificate].**
+
+| surrogate | floor `b` (`k_BT`) | `σ` (`k_BT`) | true gap `K` (nats) | Bennett `W(b, σ²)` | `W/K` | range-only `L(w)` |
+|---|---|---|---|---|---|---|
+| pairwise fit, 42 instances with a non-zero remainder | `≤ 3.7` (`≤ 0.22` neutral, `≤ 1.8` Lys) | `≤ 0.036` | `≤ 6.3·10⁻⁴` | `≤ 3.3·10⁻³` | median `1.04`, at most `5.2` | up to `11` (median `L/K = 735`) |
+| one-body fit | up to `124` | up to `4.7` | up to `23` | up to `117` | median `2.9` | up to `192` |
+| known part alone | up to `257` | up to `8.8` | up to `26` | up to `247` | median `4.9` | up to `259` |
+| known part alone, Val₁₂ on the strand | `0.08` | `0.19` | `0.0159` | `0.0162` | `1.02` | `4.3` |
+
+So **first-order perturbation theory from the pairwise model — `ln Z(g) ≈ ln Z(m) − E_m r` — is
+accurate to better than `10⁻³ k_BT` in every instance measured, and a one-sided floor of a
+few `k_BT` with a variance bound of `(0.04 k_BT)²` would certify that to within a factor
+five.**  Where the floor is tens of `k_BT` (charged or polar side chains without the pair
+terms) `W` is as useless as every other bound: Bennett's inequality is exponential in
+`b`, and nothing in this addendum removes the need for a moderate floor.
+
+**Where the two inputs would come from.**  (i) *The variance.*  For a remainder that is
+an explicit sum of local tables (third-order terms obtained from triples: `O(n³k³)`
+evaluations instead of `kⁿ`) and a model with tractable marginals, `E_m r` and `Var_m r` are
+exact finite sums — no sampling, no assumption.  For a product reference and one-site
+oscillations `c_i`: `Var r ≤ ¼Σc_i²` (Efron–Stein **[K, from memory]**); for a reference with
+interactions a Poincaré constant of the model enters.  A variance *estimated* from
+samples is not such a bound (it misses the rare state that matters; with a two-sided
+range `B` its sampling error costs `e^{2b}` samples to make harmless).  (ii) *The floor.*
+One-sided, for the remainder beyond pairwise: by analysis of the energy function —
+workstream P3 — or, for an explicit local sum, `lo = Σ_T min r_T`.  (iii) What stays
+uncertified in every such scheme is the part of the true energy that is in neither the
+model nor the explicit remainder (fourth order and beyond): the same question one order
+up, with — if the pattern of (6) continues — a smaller floor.
+
 ### Reading (kept apart from the statements)
 
 1. **"Independent of the size of the system" is true of a constant box and moves the
@@ -1446,5 +1514,8 @@ message SCI-MSG-0017 was sent before it and says so.
 No second reader.  No prior-art search by the coordinator (A3).  The lower bound of
 A17.3(iii) is a sketch.  A17.4 is proved at the centre only.  The instance-optimal
 sampler for `p < ∞` (the analogue of the dip-weighted sampler of the box) was not looked
-for.  A17.6 for non-product references is a pointer, not a statement.  Nothing here has
-been compared with a measurement.
+for.  A17.6 for non-product references is a pointer, not a statement.  Parts (6), (7)
+compare with exact enumerations of a force-field model on rotamer grids, not with a
+laboratory measurement; their floors, variances and divergences are computed by
+enumeration and are prices, not certificates.  Bennett's and the Efron–Stein inequality
+are quoted from memory (the first is checked numerically in its sharp form).

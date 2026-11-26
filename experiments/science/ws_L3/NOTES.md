@@ -90,3 +90,21 @@ Lean 4.31.0 + pinned Mathlib (v4.31.0, rev fabf563a).  Compile command (single f
   (+ `_ge` form), `tail_of_harper` (η = 0), `f_concaveOn`, `F_eq_clip` (every level, hills included), `F_zero`,
   `sum_eq_sum_f_add`.  Numerics S6 re-written and passing (20 000 cases).
   Small generalisation found: the plateau needs only `φ(t_pl) ≥ 0`, not `= 0`.
+* 00:19 — item 6, part 1: `condMarg_mem_window` in `Compensation.lean` (A1.1 item 1 in the explicit two-letter form,
+  any conditioning set `P ∌ i`, any pattern): Lemma 0 generalised to a non-negative reference weight with positive
+  mass (`window_of_site_odds_nonneg`) and applied to the reference weight restricted to a cylinder.
+  Also added: `window_of_equal_marginals`, `lemma3_compensation_exists` (Remark (1) after Lemma 3, both directions).
+* 00:22 — item 6, part 2: `ChainRuleCube.lean` compiles (exit 0, no warning): Part 0 = L2's chain rule verbatim
+  (lines 69–93 and 421–757 of `ws_L2/Window.lean`, extracted by script), Part 1 new: `klB_le_max` (binary KL is
+  largest at an end of an interval, from `Real.convexOn_mul_log`), `klDivFin_bern`, `klBound_bool`, `a1_item2`,
+  `a1_item2_lip` (the bound of A1.1 item 2), `a1_item2_cone0/1` (equality at the two cones), `a1_item2_isGreatest`
+  (the supremum over the class).  Numerics S7 added (300 members, all conditioning sets): no violation.
+* 00:23 — `TheoremA.lean` re-assembled from the current `Compensation.lean` and recompiled.
+* 00:25 — `no_compensation_at_upper_end/_lower_end` (finding F1: Remark (1) of Lemma 3 holds with the open window).
+* 00:33 — first complete state: report written (`docs/science/workstreams/L3_REPORT.md`), `check_all.sh` run:
+  four files, exit 0 each, 0 warnings, 33 + 23 + 8 + 11 axioms lines all standard, `TheoremA.lean` identical to the
+  output of `assemble.py`.
+* Next (optional in the brief): the Chernoff form `H_{k,r} ≤ (n+1) e^{tr} ρ_t(k/n;γ)ⁿ`.  Plan: (A) Markov with real
+  powers pointwise; (B) `Σ_s Bern(m)ⁿ(s) ∏ ratio^t = ∏_i [...]` by `sum_prodW`; (C) `refW m s = m^k(1−m)^{n−k}` on `T_k`;
+  (D) `|T_k| = C(n,k)`; (E) binomial mode bound `1 ≤ (n+1)·C(n,k)(k/n)^k(1−k/n)^{n−k}` by the ratio argument and
+  `add_pow`.

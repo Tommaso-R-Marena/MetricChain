@@ -1,9 +1,30 @@
-=== 1. finite-k identity of Prop. I against the definition ===
-   27 cases (L,k) in {(3,2),(3,3),(2,4)}, random asymmetric M_L: largest |definition - formula| = 1.21e-15  (0.3s)
 === 2. lower ends of h from block-wise labels with <= 2 walls per block ===
-p=0.4 L=12 t=0.459: 134 labels; G_L=0.4089032  Lambda_blk=-0.0004206 (N=96: -0.0004206; exact increments k=2,3: -0.0004206 -0.0004206)  lam_Q=1.000000000000
-Terminated
+p=0.4 L=12 t=0.459: 134 labels; G_L=0.4089007  Lambda_blk=-0.0004207 (N=96: -0.0004207; exact increments k=2,3: -0.0004207 -0.0004207)  lam_Q=1.000000000000
+        bound at Y's (L,t): 0.034040 (Y: 0.034026);  max over t at this L: 0.034040 at t=0.459;  ratio to cube 1.1682
+        L=8, t=0.459: 0.033899
+        L=10, t=0.459: 0.033990
+        L=14, t=0.459: 0.034049
+        L=16, t=0.459: 0.034001
+p=0.3 L=14 t=0.434: 184 labels; G_L=0.5652516  Lambda_blk=-0.0032499 (N=96: -0.0032499; exact increments k=2,3: -0.0032499 -0.0032499)  lam_Q=1.000000000000
+        bound at Y's (L,t): 0.040143 (Y: 0.040115);  max over t at this L: 0.040143 at t=0.434;  ratio to cube 1.3776
+        L=8, t=0.434: 0.039776
+        L=10, t=0.434: 0.039921
+        L=12, t=0.434: 0.040059
+        L=16, t=0.434: 0.040166
+p=0.2 L=14 t=0.409: 184 labels; G_L=0.6385223  Lambda_blk=-0.0138697 (N=96: -0.0138697; exact increments k=2,3: -0.0138696 -0.0138697)  lam_Q=1.000000000000
+        bound at Y's (L,t): 0.044618 (Y: 0.044599);  max over t at this L: 0.044618 at t=0.409;  ratio to cube 1.5312
+        L=8, t=0.409: 0.043810
+        L=10, t=0.409: 0.044267
+        L=12, t=0.409: 0.044431
+        L=16, t=0.409: 0.044739
+p=0.1 L=14 t=0.380: 184 labels; G_L=0.6693809  Lambda_blk=-0.0481711 (N=96: -0.0481711; exact increments k=2,3: -0.0481863 -0.0481711)  lam_Q=1.000003036468
+        bound at Y's (L,t): 0.044372 (Y: 0.044378);  max over t at this L: 0.044372 at t=0.380;  ratio to cube 1.5228
+        L=8, t=0.380: 0.042054
+        L=10, t=0.380: 0.043469
+        L=12, t=0.380: 0.044167
+        L=16, t=0.380: 0.044732
+time 491.0s
 
-real	16m41.305s
-user	28m54.169s
-sys	0m1.641s
+real	8m11.205s
+user	4m41.760s
+sys	0m3.924s

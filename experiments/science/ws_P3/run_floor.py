@@ -64,9 +64,19 @@ def main():
     gam = None
     if "--siteres" in a and m <= n:
         gam, _ = GF.site_penalties(m)
-        res.update(gamma_sites=[float(v) for v in gam], Gamma_const=Gamma)
-        print(f"    site penalties gamma_i (kcal/mol) = {np.round(gam, 4)}; sum = {gam.sum():.5e} (= Gamma_{m} up to rounding)", flush=True)
-        Gamma = eps_fp                      # the constant part of the remainder bound is then only the fp allowance
+        # floating-point allowance, site-resolved as well: d_U is exactly zero (also in floating point) unless U is
+        # inside the changed set, so the rounding error of the model at x is at most
+        # eps_g * sum_{U subset S(x)} 2^|U| <= eps_g + sum_{i in S(x)} eps_i,  eps_i = eps_g * sum_{U ni i} 2^|U| / |U|
+        eps_site = np.zeros(n)
+        for U, _b in blocks:
+            for i in U:
+                eps_site[i] += EPS_G * (2 ** len(U)) / len(U)
+        res.update(gamma_sites=[float(v) for v in gam], Gamma_const=Gamma, eps_sites=[float(v) for v in eps_site])
+        print(f"    site penalties gamma_i (kcal/mol) = {np.round(gam, 4)}; sum = {gam.sum():.5e} (= Gamma_{m} up to rounding); "
+              f"floating-point allowance per site <= {eps_site.max():.2e}", flush=True)
+        gam = gam + eps_site
+        Gamma = EPS_G                       # the constant part of the remainder bound is then only the allowance for g(x0)
+        eps_fp = EPS_G
     res.update(Gamma_self=gs, Gamma_cross=gc, eps_fp=eps_fp, Gamma=Gamma, nball=int(nball), t_gamma=time.time() - t1)
     print(f"    Gamma_{m} = {gs + gc:.5e} kcal/mol (self {gs:.3e}, cross {gc:.3e}) + floating-point allowance {eps_fp:.2e} "
           f"= {Gamma:.5e} = {Gamma * BETA:.4f} kT   [{time.time() - t1:.1f}s]", flush=True)
@@ -101,6 +111,27 @@ def main():
     print(f"    models: ln Z(m_-) = {lnZlo:.6f}, ln Z(m_+) = {lnZup:.6f}: deterministic certified bracket of ln Z(E), width {lnZlo - lnZup:.5f} nats; "
           f"rho_cert = max(m_+ - m_-) = {rho_cert:.5f} kcal/mol = {rho_cert * BETA:.4f} kT (min {gap_min:.2e}); "
           f"min m_- = {res['minE_lower']:.4f}, min m_+ = {res['minE_upper']:.4f} kcal/mol [{time.time() - t1:.1f}s]", flush=True)
+    # ---- 4b. certified inputs of the Bennett bracket (coordinator's addition; report 2.10): for the model m and
+    # r = beta (E - m): a one-sided floor of r, an upper bound of its mean and of its variance under pi_m, all from the
+    # certified sandwich m_- <= E <= m_+ and exact transfer-matrix moments of the explicit function u = beta (m_+ - m_-).
+    t1 = time.time()
+    Eu, Eu2 = lo.moments(diff)                                   # under pi_{m_-}
+    b0, s20 = BETA * Eu, BETA * BETA * Eu2                       # model m_-: 0 <= r <= u, so E r - inf r <= E u, Var r <= E u^2
+    W0 = pw.bennett_W(b0, s20)
+    mid = pw.BandModel(k, w)
+    mid.const = 0.5 * (lo.const + up.const)
+    mid.one = [0.5 * (lo.one[i] + up.one[i]) for i in range(n)]
+    for key in set(lo.pair) | set(up.pair):
+        mid.pair[key] = 0.5 * (up.pair.get(key, 0.0) + lo.pair.get(key, 0.0))
+    lnZmid = mid.lnZ()
+    Eum, Eu2m = mid.moments(diff)                                # under pi_{m_0}, m_0 = (m_- + m_+)/2: |r_0| <= u/2
+    bh, s2h = 0.5 * BETA * Eum + 0.5 * BETA * rho_cert, 0.25 * BETA * BETA * Eu2m
+    Wh = pw.bennett_W(bh, s2h)
+    res.update(bennett=dict(lower=dict(b_cert=b0, s2_cert=s20, W_cert=W0, mean_u=BETA * Eu),
+                            mid=dict(b_cert=bh, s2_cert=s2h, W_cert=Wh, lnZ_mid=lnZmid, mean_u=BETA * Eum)))
+    print(f"    BENNETT inputs, certified (kT units): model m_-: floor lo = 0 of r = beta(E - m_-), b_cert = E u = {b0:.4e}, "
+          f"s2_cert = E u^2 = {s20:.4e}, W(b, s2) = {W0:.4e} nats | midpoint model m_0: b_cert = {bh:.4e}, s2_cert = {s2h:.4e}, W = {Wh:.4e} nats "
+          f"(ln Z(m_0) = {lnZmid:.6f}) [{time.time() - t1:.1f}s]", flush=True)
     # ---- 5. enumeration (validation)
     if size <= 3.0e6 and "--noenum" not in a:
         t1 = time.time()
@@ -113,6 +144,28 @@ def main():
         rem = g - pw.expansion_value(d, st)
         rem2 = g - pw.expansion_value(d, st, M=2)
         res.update(rem2_min=float(rem2.min()), rem2_max=float(rem2.max()))
+        lnZE = float(np.log(np.exp(-BETA * (E - E.min())).sum()) - BETA * E.min())
+        for nm, mm, lz in (("lower", ml, lnZlo), ("mid", 0.5 * (ml + mu), lnZmid)):
+            rr = BETA * (E - mm)
+            pm = np.exp(-BETA * (mm - mm.min())); pm /= pm.sum()
+            Er = float((pm * rr).sum()); var = float((pm * (rr - Er) ** 2).sum())
+            be = Er - float(rr.min())
+            K = lnZE - lz + Er
+            We = pw.bennett_W(be, var)
+            bd = res["bennett"][nm]
+            bd.update(b_enum=be, s2_enum=var, W_enum=We, K_true=K, Er=Er)
+            uu = BETA * (mu - ml)                    # the transfer-matrix moments of u against direct sums
+            dev1 = abs(float((pm * uu).sum()) - bd["mean_u"]); dev2 = abs(float((pm * uu * uu).sum()) - (bd["s2_cert"] if nm == "lower" else 4.0 * bd["s2_cert"]))
+            assert dev1 < 1e-9 * (1.0 + bd["mean_u"]) and dev2 < 1e-9 * (1.0 + float((pm * uu * uu).sum())), (nm, dev1, dev2)
+            bd["moments_dev"] = max(dev1, dev2)
+            assert be <= bd["b_cert"] * (1 + 1e-9) + 1e-9 and var <= bd["s2_cert"] * (1 + 1e-9) + 1e-12, (nm, be, var, bd)
+            assert -1e-9 <= K <= We + 1e-9 and K <= bd["W_cert"] + 1e-9, (nm, K, We, bd["W_cert"])
+        bl, bm = res["bennett"]["lower"], res["bennett"]["mid"]
+        print(f"    BENNETT, enumerated (kT): m_-: b = {bl['b_enum']:.4e} (cert {bl['b_cert']:.4e}), s2 = {bl['s2_enum']:.4e} (cert {bl['s2_cert']:.4e}), "
+              f"true Jensen gap K = {bl['K_true']:.4e}, W(enum) = {bl['W_enum']:.4e}, W(cert) = {bl['W_cert']:.4e} | m_0: b = {bm['b_enum']:.4e} (cert {bm['b_cert']:.4e}), "
+              f"s2 = {bm['s2_enum']:.4e} (cert {bm['s2_cert']:.4e}), K = {bm['K_true']:.4e}, W(enum) = {bm['W_enum']:.4e}, W(cert) = {bm['W_cert']:.4e}", flush=True)
+        remg = rem.reshape(k)
+        res["osc_rem"] = [float(np.ptp(remg, axis=i).max()) for i in range(n)]      # exact one-site oscillations of g - I_M g
         bw = np.exp(-BETA * (E - E.min()))
         lnZE = float(np.log(bw.sum()) - BETA * E.min())
         lnZlo_enum = float(np.log(np.exp(-BETA * (ml - ml.min())).sum()) - BETA * ml.min())
@@ -122,7 +175,8 @@ def main():
                    minE=float(E.min()), E_anchor_is_min=bool(abs(E.min() - E0) < 1e-9),
                    mean_gap=float((bw / bw.sum() * (E - ml)).sum()))
         print(f"    ENUMERATION ({len(st)} states, {time.time() - t1:.1f}s): violations m_- > E: {res['viol_lower']}, m_+ < E: {res['viol_upper']}; "
-              f"exact remainder g - I_{M} g in [{rem.min():.3e}, {rem.max():.3e}] (certified |.| <= {Gamma:.3e}); "
+              f"exact remainder g - I_{M} g in [{rem.min():.3e}, {rem.max():.3e}] (certified: |.| <= {res['Gamma_self'] + res['Gamma_cross'] + eps_fp:.3e}"
+              + (", and <= sum of gamma_i over the changed sites" if gam is not None else "") + "); "
               f"ln Z(E) = {lnZE:.6f}; |lnZ(m_-) DP - enum| = {abs(lnZlo - lnZlo_enum):.1e}; rho = max(E - m_-) = {res['rho_exact']:.5f} kcal/mol = {res['rho_exact'] * BETA:.4f} kT; "
               f"cost number Z(m_-)/Z(E) - 1 = {res['cost']:.5f}; min E = {E.min():.4f} (anchor is the minimiser: {res['E_anchor_is_min']})", flush=True)
     # ---- 6. sampling
@@ -150,6 +204,12 @@ def main():
         rng_hi = Wmax_s + (1.0 - Wmax_s) * eN
         br2 = (lnZlo + math.log(rng_lo), lnZlo + math.log(rng_hi))
         res.update(range_bracket_lo=br2[0], range_bracket_hi=br2[1], W_min_sampled=Wmin_s, W_max_sampled=Wmax_s, eN=eN)
+        # Bennett bracket with the certified (b, s2) of the model m_-: ln Z(E) = ln Z(m_-) - E r + K, 0 <= K <= W_cert;
+        # the mean E r from the samples with Chebyshev's inequality and the CERTIFIED variance bound
+        rbar = BETA * float(gap.mean())
+        tch = math.sqrt(s20 / (N * delta))
+        br3 = (lnZlo - rbar - tch, lnZlo - rbar + tch + W0)
+        res.update(bennett_bracket_lo=br3[0], bennett_bracket_hi=br3[1], cheb_halfwidth=tch)
         gbar = float(gap.mean())
         gb = lnZlo - BETA * (gbar + rho_cert * math.sqrt(math.log(1.0 / (delta / 2)) / (2.0 * N)))
         res.update(Wbar=Wbar, Wstd=float(Wv.std(ddof=1)), hoeffding_halfwidth=hoef, bracket_lo=br[0], bracket_hi=br[1],
@@ -162,7 +222,10 @@ def main():
               f"point estimate {lnZlo + math.log(Wbar):.6f}; Gibbs-Bogoliubov lower bound (same confidence) {gb:.6f}; mean gap {gbar:.4e}, max sampled gap {gap.max():.4e} kcal/mol", flush=True)
         print(f"    sample-range bound (delta = {delta}): ln Z(E) in [{br2[0]:.6f}, {br2[1]:.6f}] (width {br2[1] - br2[0]:.5f} nats); "
               f"W sampled in [{Wmin_s:.6f}, {Wmax_s:.6f}]", flush=True)
+        print(f"    Bennett bracket (certified b, s2; mean by Chebyshev, delta = {delta}): ln Z(E) in [{br3[0]:.6f}, {br3[1]:.6f}] "
+              f"(width {br3[1] - br3[0]:.5f} nats = W_cert {W0:.2e} + 2 x {tch:.2e})", flush=True)
         if res.get("enum"):
+            res["truth_in_bennett_bracket"] = bool(br3[0] <= res["lnZ_E"] <= br3[1])
             res["truth_in_bracket"] = bool(br[0] <= res["lnZ_E"] <= br[1])
             res["truth_in_range_bracket"] = bool(br2[0] <= res["lnZ_E"] <= br2[1])
             print(f"    truth {res['lnZ_E']:.6f} inside the Hoeffding bracket: {res['truth_in_bracket']}; inside the sample-range bracket: {res['truth_in_range_bracket']}", flush=True)

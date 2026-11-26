@@ -136,3 +136,30 @@ from a scratch copy.
   golden search was far too slow (my mistake); first line it printed: p=0.4, L=12, t=0.459,
   134 labels: G_L=0.4089032, Lambda_blk=-0.0004206 (operator N=64 = N=96 = exact increments
   k=2,3), lam_Q=1  => bound 0.034040 (Y: 0.034026).  Restructured below.
+* [r10_08_sandwich.py, 185 s] REPL of Prop. D numerics and of tables 6.1, 6.2 of Y.
+  F+_2-2F+_1 = -0.0415,-0.0497,-0.0420 (p=0.4; t=0.3,0.45,0.7), -0.0982,-0.1136,-0.0889 (p=0.3);
+  F+_3-F+_1-F+_2 = -0.0421..-0.1150; F-_2-2F-_1 = +0.0196,+0.0229,+0.0189; F-_3-F-_1-F-_2 =
+  +0.0310,+0.0351,+0.0274; (F+_3-F-_3)/(tC) = 0.096,0.069,0.035 (p=0.4)  == Y 4.2.
+  Table 6.1 (U), 36 entries: largest deviation 4.9e-6 (rounding).  Table 6.2 (L'): all 19
+  entries incl. the best gaps m identical.  |V| = 2, 6, 120 for the slack blocks.
+  REVIEW of Prop. D (a)-(d): re-derived; correct, with the caveat already in Y that F-_L at
+  m=0 needs u > K (u > 2K for L=1); (c) needs d^- >= 0 for "phi^- ignores the end letters,
+  hence is in the d^- class".
+* [r10_09_markov_types.py 1 s, r10_09b] REPL of the negative result 8.3.
+  - Y's explicit example verified literally for n=5..9: class(x)={110..0} singleton, t(x)=3;
+    class(y) has n-2 members 0^a 1 0^b, psi values {0,2}, t(y)=0 for q<1/(n-2); d(x,y)=1;
+    t(x)-t(y)=3 > 1.  (In weights: e^-3 vs 1: "t_y = 1 > t_x e = e^-2" as Y writes.)
+    BUT in that example the TRUNCATED residual is unchanged (psi^tr(x)-psi^tr(y) = 1 = d):
+    it shows that the level function is inadmissible, not that the truncation leaves the class.
+  - brute force n=9, 74 Markov-type classes (Y: 74), 200 own random residuals x 3 quantiles:
+    level function inadmissible in 599/600 (Y: 598/600), largest excess 6 flips (Y: 6);
+    cube type classes: 0.  NEW: the truncated residual max(psi,t) itself is inadmissible in
+    464/600 (largest excess 4 flips); cube: 0.
+  - NEW explicit example for the truncated residual, by hand (n=4, u=1, q=1/2):
+    psi = d_H(., 0100); a=1101, class {1101, 1011}, psi = {2, 4}, level 4, psi^tr(a)=4;
+    b=0101, singleton class, psi^tr(b)=1; d(a,b)=1; 4-1 = 3 > 1.
+* [r10_05_block_labels.py h] Prop. I REPL (identity vs definition at n=6,9,8 with random
+  asymmetric M_L: 1e-15; Lambda_blk by operator N=64/96 and exact increments k=2,3 agree to
+  1e-7).  Bound at Y's (L,t): p=0.4: 0.034040 (Y 0.034026); p=0.3: 0.040143 (Y 0.040115);
+  p=0.2: 0.044618 (Y 0.044599).  Mine are 1.4e-5..2.8e-5 HIGHER (both are valid lower bounds;
+  to be explained after reading their code).  L=16 at p=0.3: 0.040166.

@@ -81,8 +81,9 @@
   class counts = R2's `enum_bridge.log`, and `r9_semigroup_analysis.py` (1): my class tables = R2's tables
   (profiles and gauche masks) for N = 3..22).
   - head 5 + tail 5 (their claim (2)): every one of the 21.5 million (bridge, c₁) with N ≤ 20 becomes clean; no failure.
-  - head 2 + tail 3 already suffices (0 failures, N ≤ 20) — and is minimal: head 1 + tail 3 fails (first at N = 8),
-    head 2 + tail 2 fails (first at N = 16: 1308 cases), head 0 fails, tail 0 fails.
+  - head 2 + tail 3 already suffices (0 failures, N ≤ 20) — and is minimal: head 1 + tail 3 fails (first at N = 8,
+    2 cases), head 2 + tail 2 fails (first at N = 12, 4 cases; 1308 at N = 16 — corrected 01:40, I had first written
+    "first at N = 16"), head 0 fails, tail 0 fails.  Total (x, c₁) with N ≤ 20: 21 220 319.
   - cost of head+tail = A + B (asserted for every case with head ≥ 3, tail ≥ 3); componentwise maxima up to N = 20:
     (1, 8, 12, 1), norm 51 (N = 18); A-part max (1,6,10,1 | 44) at N = 21, 22; B-part max (0,3,4 | 16) (= proved bound).
   - 18.8 million from-scratch profile checks of the incremental counts; 18 364 O(n²) brute-force checks.
@@ -168,3 +169,20 @@
 * Item 5: read the word-diff of all hunks outside §§11.22–11.26 (`r9_diffview.py`): §0, §4.4, §6, §8, §9, §10, §11.6,
   §11.11, §11.14, §11.17, §12, README passages.  Attributions checked against A2_REPORT: "unverified checker" (van Doren),
   "searches thin", `L_{H,p}` are ours.  No wrong attribution found so far.
+
+### 01:15 — false alarm of mine, recorded
+* `r9_chi2_check.py` (two letters, solver-free grid computation of `v`) first reported "93 violations" of
+  `0 ≤ I − v ≤ χ²(P‖Q)`.  All 93 are cases with P inside the window, where `I − v = 0` and the grid value is `−5e-7`
+  (grid step 5e-7 against my tolerance 1e-7).  Outside the window the largest excess over all window points is 0.
+  Tolerance set to 2e-6; no violation.  (Same kind of trap as R1's NOTES steps 4, 11.)
+* `r9_sites2.py` (`out/sites2.txt`): ceiling `F*(t) ≤ t(1−t)D²/8` on 40 random asymmetric sites: largest ratio 0.7465;
+  three-letter uniform site below the ceiling by 9.7 / 5.0 / 1.9 / 5.8 % at u = 0.1 / 0.5 / 1 / 2 (report: 11 % as u→0,
+  5.0, 1.9, 5.8 ✓); weight-½ laws: F* ≥ F*_cube in 200 of 200; `(I − v)` formula: primal (couplings) = dual (γ ∈ L) to
+  4e-15 in 120 cases, q = 2..4, asymmetric; `0 ≤ I − v ≤ KL(P‖Q) ≤ χ²(P‖Q)` in all; on the set G of the proof
+  `(I − v)/ω′ ≤ 0.0147` in 300 random chains (the bound is far from tight).
+* `r9_slices.py` (`out/slices.txt`): 360 random feasible profiles with 3–5 blocks at six (κ, u, e<0): none exceeds the
+  two-block supremum (largest r_μ − R2 = −1.7e-4); R2(κ=½, u=1, e=−0.05) = 0.059050 = the report's 0.0590497.
+* `r9_certificate.py`: five clean bridges (4, 5, 9, 9, 11 beads) with determinant 1; four with determinant −1 for the
+  projection; a clean 9-bead bridge off the hyperplane g = 9p₃ − 3p₈ + p₁₁ (exact interior certificate for K^br in R⁴).
+* Theorem 11.56 read (export lines 4277–4350) for the good event: δ′ = δ/(4LM̄), "every potential inner call valid" —
+  so the batched schedule's extra inner calls are covered and the stopping rule cannot fire on the good event.

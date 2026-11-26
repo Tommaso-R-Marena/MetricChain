@@ -1,0 +1,1 @@
+18709 (bridge, c1) with 3..13 beads: head 2 + tail 3 is clean, has N+5 beads and (h,g) = (h,g) + A + B exactly; the third site below never has an extra pair

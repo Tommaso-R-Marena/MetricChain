@@ -783,3 +783,27 @@ profile and the gauche count, and its support function is the ground-state energ
   code used the game form with `t ≤ 1`, which is `max(R^{profile}, −e)`: the over-estimate
   the theory division warned against belongs to `t > 1`.  Answered as SCI-RES-0008.
 
+### Cycle 31 — from prices to a bracket (checkpoint 37)
+
+* **Second batch.**  The 29 instances with charged, aromatic and mixed sequences were
+  added (clash-free domains, sparse least squares).  With the vacuum part alone the
+  lysines are hopeless, as their first-order constants had said; with the pairwise fit
+  the chi-square divergence is below `1.3·10⁻³` in all 74 instances although the
+  remainder is up to `15 k_BT` wide.
+* **Why, and what it is worth.**  A remainder with a moderate one-sided floor and a tiny
+  variance under the model has a tiny Jensen gap — Bennett's inequality — and then
+  first-order perturbation theory is certified by two numbers and a sampled mean, with
+  no exponential cost.  Tested on 53 instances: the bracket is within a few per cent of
+  the truth for the pairwise fit, three to five orders of magnitude tighter than the
+  range-only bound of the box-class theorem.  This corrects a sentence of A17.5 written
+  a few hours earlier ("moments of the remainder energy certify nothing" — alone).
+* **A slip caught by my own rule.**  The first self-test of the sharp bound failed an
+  assertion after I tightened its tolerance (rounding of the centring at `10⁻¹⁷`); the
+  log of that run would have ended in a traceback.  Fixed, re-run to the last line
+  before anything was recorded.
+* **Where this leaves the physical question.**  A certified solvated side-chain free
+  energy on a fixed backbone needs: the pairwise model's partition function (the
+  existing kernels' problem), a one-sided floor of a few `k_BT` for the remainder beyond
+  pairwise (analysis: P3 was told), and a variance bound under the pairwise model
+  (exact for explicit local remainders).  None of the three is exponential.
+

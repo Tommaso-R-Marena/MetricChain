@@ -330,6 +330,50 @@ def check_a16(trials=20000):
           f"rearrangement sum H(rho) - sum H(rho') over {n_rearr} dominated pairs: max {worst_rearr:.2e}")
 
 
+# ----------------------------------------------------------------------------- S7: Proposition A1.1, items 1-2
+def klb(a, r):
+    return a * (math.log(a) - math.log(r)) + (1 - a) * (math.log(1 - a) - math.log(1 - r))
+
+
+def check_a1(trials=300):
+    worst_cond = worst_kl = -1.0
+    worst_cone = 0.0
+    for _ in range(trials):
+        n = int(rng.integers(1, 6))
+        p = rng.uniform(0.05, 0.95)
+        u = rng.uniform(0.1, 2.5)
+        r = rng.uniform(0.05, 0.95)
+        X = cube(n)
+        pi = bern_ref(n, p)
+        w = random_cone_member(n, u)
+        lo, hi = p_tilt(p, u), p_tilt(p, -u)
+        # item 1: every site, every conditioning set P not containing it, every pattern
+        for i in range(n):
+            others = [j for j in range(n) if j != i]
+            for mask in range(1 << len(others)):
+                P = [others[b] for b in range(len(others)) if mask >> b & 1]
+                y = tuple(int(v) for v in rng.integers(0, 2, n))
+                num = sum(pi[x] * w[x] for x in X if x[i] == 1 and all(x[j] == y[j] for j in P))
+                den = sum(pi[x] * w[x] for x in X if all(x[j] == y[j] for j in P))
+                worst_cond = max(worst_cond, lo - num / den, num / den - hi)
+        # item 2
+        Z = sum(pi[x] * w[x] for x in X)
+        nu = {x: pi[x] * w[x] / Z for x in X}
+        Q = bern_ref(n, r)
+        kl = sum(nu[x] * (math.log(nu[x]) - math.log(Q[x])) for x in X)
+        R = max(klb(lo, r), klb(hi, r))
+        worst_kl = max(worst_kl, kl - n * R)
+        # equality at the two cones
+        for (cone, a) in ((lambda x: u * sum(x), lo), (lambda x: u * (n - sum(x)), hi)):
+            wc = {x: math.exp(-cone(x)) for x in X}
+            Zc = sum(pi[x] * wc[x] for x in X)
+            nuc = {x: pi[x] * wc[x] / Zc for x in X}
+            klc = sum(nuc[x] * (math.log(nuc[x]) - math.log(Q[x])) for x in X)
+            worst_cone = max(worst_cone, abs(klc - n * klb(a, r)))
+    print(f"S7 A1.1 [{trials} random class members, n <= 5]: item 1 (all conditioning sets): worst violation "
+          f"{worst_cond:.2e}; item 2: max of KL - n*R(r) = {worst_kl:.2e}; equality at the two cones to {worst_cone:.2e}")
+
+
 if __name__ == "__main__":
     check_lemma3()
     check_transitive_set_not_group()
@@ -337,3 +381,4 @@ if __name__ == "__main__":
     check_lemma2()
     check_theoremA()
     check_a16()
+    check_a1()
