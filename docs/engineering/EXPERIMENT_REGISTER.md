@@ -188,3 +188,47 @@ commit that adds or last changes the files named).  Costs are in
 | Validation | 113 587 conformations and 13 012 classes at 13 torsions, the two numbers published in `P_REPORT.md` |
 | Code | `experiments/eng/chain_cover/generic_entropy.py`; blocks `flip_bounds`, `flip_scaling`, `generic_entropy`, `generic_entropy_growth` of `experiments/eng/chain_cover/make_tables.py` |
 | Result, interpretation, limitations | ENG-RES-0009 |
+
+## X-011  Nested runs of Algorithm 2L⁺ designed by certified cost: the bound, the best case, the worst case found; literal nested runs
+
+| field | value |
+|---|---|
+| Scientific purpose | The research owner's question (directive D-3): why do the nested algorithms deteriorate on non-flat fibres, and do designs tuned against the worst case improve on designs tuned at the flat instance?  THY-RES-0013 §4 items 2, 3; THY-RES-0015 §6 (R16-THY-1(b)).  Campaign BM-1 |
+| Source commit | theory `dd067f1` (remark (1b) of §11.19: the rule "servers by certified cost"; `experiments/coordinator_checks/three_levels_certified/` read as text for the candidate designs), `63efc69` (the text of Theorem 11.56 implemented); engineering: the commit stored in every result row (`55bec29` for M-016, M-017) |
+| Mathematical dependencies | Theorem 11.56 applied to itself to any depth **[P; theory; the rule reviewed by the science division, SCI-REV-0016]**; Proposition K0 **[P]**; Theorem 11.25(a) for the lower bound **[V on the theory branch]**; Proposition P of ENG-RES-0015 §5 (dovetailing) **[P; ours; not refereed]** |
+| Parts | (a) the certified bound to six levels, two design families, nine sizes — job M-016; (b) the designs selected at ten outer fractions run in the mean-run model at the flat instance and on searched outer landscapes with flat and cone fibres, and two levels at three more sizes — job M-017; (c) designs against global cones as a game, local; (d) per-rung anatomy of two runs, local; (e) cone fibres of intermediate slope for the selected designs, local; (f) three nested levels run literally end to end on 15-site cubes — job M-019 |
+| Protocol | `docs/engineering/benchmarks/protocols/BM-1_X-011.md`: hypotheses H1–H7 committed before M-016/M-017, H8 before M-019 |
+| Configuration | `u = 1`; top level `b = 0.5`, `λ = 0.2`, `η = η′ = θ = 0.05`, `δ = 0.05`, 40 rungs (certified accuracy `0.8715`); families "theory" and "wide" of `certified.py`; searches as in X-010 (differential evolution over monotone and general radial outer landscapes, 4000 + 2000 evaluations, 2500 + 1250 from `n = 8000`), seed 1 |
+| Outputs | `experiments/eng/twolevel/results/x011_certified1.jsonl`, `x011_instances1.jsonl`, `x011_portfolio.json`, `x011_rungs.json`, `x011_fibre_slopes.jsonl`, `x011f_nested1.jsonl` |
+| Validation | seven published numbers of the theory division's table reproduced to four digits; the pruned search equals the plain recursion to nine digits; two-level cells reproduce ENG-RES-0014 (`0.9839`, `1.0114`, `1.0461` at `n = 1000`); the flat-tuned trees reproduce the referee's flat costs and served-rung counts (`portfolio.py --check`); `tests/eng/test_certified.py` |
+| Code | `src/metricchain_eng/twolevel/certified.py`; `experiments/eng/twolevel/nested_bench.py`, `portfolio.py`, `rung_anatomy.py`, `fibre_slopes.py`, `nested_literal.py`, `make_tables_x011.py`; `modal_jobs/bench_app.py`, `bench_collect.py` |
+| Limitation stated up front | costs on instances are in the mean-run model (literal nested runs only at 15 sites); searched worst cases are lower bounds within radial outer landscapes and cone fibres; finite design families; one slope and one accuracy |
+| Result, interpretation, limitations | ENG-RES-0015 (and its addendum for `n ≥ 32 000`) |
+
+## X-012  An exact checker for "shares at the leaves" certificates
+
+| field | value |
+|---|---|
+| Scientific purpose | Request P7-E2 of the science division (SCI-RES-0014 §7): a compiled exact checker of the certificate format of its workstream P7 — the rule `leaf`/`branch` of the Lean `verify` — where the Lean kernel cannot evaluate.  Campaign BM-2, stages A and B |
+| Source commit | science `2b4ccdf` (`docs/science/workstreams/P7_REPORT.md` §§2.1, 5.1–5.4; nine certificate files and their checksums) |
+| Mathematical dependencies | none beyond integer arithmetic; the soundness argument is `REPORT.md` §3.1 (the argument of `leaf_sound`/`verify_sound` **[V on the theory branch]**) |
+| How it was made | by an independent subagent of this division from the text, without opening the science division's code before the checker was frozen; checked by the coordinator (a third thirty-line checker; tests re-run; core read) |
+| Outputs | `src/metricchain_eng/leafcert/`; `experiments/eng/leafcert/REPORT.md`, `results/vectors.json` |
+| Validation | nine files accepted by both engines with matching checksums; 27 controls and 472 exchanges rejected on an inequality; counts equal the published table in every cell; enumeration of all nine domains; 24 092 fuzz certificates with no unsound acceptance; 26 865 integer mutants; 41 broken copies of the checkers all detected; `tests/eng/test_leafcert.py` (182 tests) |
+| Limitation stated up front | tested, not verified; says nothing about the link between the published integer instance and a real-valued model; no producer on this branch |
+| Result, interpretation, limitations | `experiments/eng/leafcert/REPORT.md`; reported to the science division in ENG-MSG-0007 |
+
+## X-014  Site-dependent slopes at finite `n`: type-aligned nesting, an exact lower bound, literal runs
+
+| field | value |
+|---|---|
+| Scientific purpose | The research owner's directive on generality (D-2, first item): what do the two-level theorem and its nestings give, with finite-size constants, when the sites of the cube have different slopes?  Own initiative; campaign BM-6 |
+| Source commit | theory `8ff0667` (theory report §11.26, Theorems 11.95–11.101, for the asymptotic exponent; `K_REPORT.md` §§1.2, 2.2–2.4 for the proof that is transferred) |
+| Mathematical dependencies | **Theorem K1 with an outer block of one site type [P; ours; ENG-RES-0016 §2; not refereed]**; the lower bound by weighted dips **[P; ours, by the argument of Theorem 11.25(a)]**; `h = max_t Σλ_jF_j(t)` **[P; theory, Theorems 11.98, 11.99]** |
+| Parts | (a) bounds on 75 mixtures of two site types — job M-018; (b) literal runs of the algorithm with the transferred constants on cubes of 11–16 sites, with two negative controls — local; (c) end to end with three slopes inside X-011(f) |
+| Protocol | `docs/engineering/benchmarks/protocols/BM-6_X-014.md` (hypotheses H1–H4, written after five preliminary cells and before M-018) |
+| Outputs | `experiments/eng/twolevel/results/x014_hetero1.jsonl`, `x014_literal.json` |
+| Validation | with one site type the module returns the constants, the bounds and the lower bound of the homogeneous module to the last digit; the lower bound against a brute-force scan on eleven sites; the dip is in the class and has the stated excess (exhaustive on six sites); `tests/eng/test_hetero.py` |
+| Code | `src/metricchain_eng/twolevel/hetero.py`; `experiments/eng/twolevel/hetero_bench.py`, `hetero_literal.py` |
+| Limitation stated up front | the certified status of (a) is conditional on a proof transfer by one author; two site types, binary sites; no mixed outer blocks; bounds, not runs |
+| Result, interpretation, limitations | ENG-RES-0016 |
