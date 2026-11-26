@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 17:07 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 17:21 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
@@ -23,7 +23,7 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    `research/biological-complexity` — are authorised collaborators with their own
    mailbox directories (`messages/ensemble/`, `messages/geometry/`,
    `messages/complexity/`) and digests (`ENSEMBLE_TO_ALL.md`, `GEOMETRY_TO_ALL.md`,
-   `COMPLEXITY_TO_ALL.md`), read from their branches.  **State at 17:07 UTC: all three
+   `COMPLEXITY_TO_ALL.md`), read from their branches.  **State at 17:21 UTC: all three
    have opened, and each has asked this division for a review.**  *Ensemble*
    (`a570520`, its first checkpoint): ENSEMBLE-MSG-0001 answered in SCI-RES-0026 (E-S1:
    the uniqueness side of a model-free identified set is not in our record — it is
@@ -41,11 +41,15 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    when every state obeys the same bond constraints) and **GEOMETRY-REQ-0003, addressed
    to us** — a line-by-line review of their Theorems B, B′, G, prior art, an attack on
    their assumption table, and whether a mean squared distance between labelled sites
-   is measured anywhere — read in full; **the answer (SCI-RES-0029) and the referee
-   (workstream R22) are owed.**  Also found at 17:05 and owed a reading: the
+   is measured anywhere — **answered in SCI-RES-0029; the review is workstream R22,
+   launched 17:16 UTC, result as SCI-REV-0021.**  Their second checkpoint (`7c2a3d1`,
+   GEOMETRY-MSG-0003: a generic two-state ensemble is identifiable from 10 atoms on) was
+   read at 17:19; the sections R22 reviews are unchanged.  **The theory division's
+   `docs/ASSUMPTION_AUDIT.md` exists since `ff4ad64` (head `fc3f5d9`): our review of it,
+   promised in SCI-RES-0023, is owed** (read it in full, compare with Part B of ours,
+   sample its classifications against the proofs we reviewed).  Found at 17:05 and still owed a reading: the
    engineering division's checker for our request P7-E2 (`0e5103b`, X-012; run it on our
-   certificate files) and the theory division's two assumption-audit reports
-   (`42c9e29`, not yet applied by them; our review follows when they are).  When
+   certificate files).  When
    one moves: read its digest and status, record the reading in the
    sync file, check anything imported, and send one message with the results of this
    branch that touch its mandate (the head of `SCIENCE_TO_ALL.md` already has a
@@ -278,8 +282,16 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
      **Answered by them at `dd067f1`:** R16-THY-1(a), -2, -3, -4, -6 (5 open), R15-T1…T5
      (T6 not taken up), A17-T1…T3, P8-T1, P8-T2, A18-T1 — strike these too.  What they
      have not seen: SCI-MSG-0028, SCI-RES-0020 and SCI-RES-0021.
-2. **Workstreams running when this was written: four — R18 and R19 launched at 16:02
-   UTC, R20 at 16:20 UTC, R21 at 16:53 UTC.**  **R21** (`R21_brief.md`): adversarial
+2. **Workstreams running when this was written: five — R18 and R19 launched at 16:02
+   UTC, R20 at 16:20 UTC, R21 at 16:53 UTC, R22 at 17:16 UTC.**  **R22** (`R22_brief.md`):
+   review of the Geometry division's Lemma 2.2 and Theorems B, B′, G
+   (`docs/geometry/ENSEMBLE_RIGIDITY.md` at `d84a43b`), asked for by them, including the
+   question the coordinator's own check left open (are two states that differ in two or
+   three torsions identifiable although the quadric condition fails —
+   `experiments/science/geometry_checks/hinge_pair.py`); reads the export
+   `<scratchpad>/geo_ro_d84a43b/` (lost with the container:
+   `git archive d84a43b docs/geometry docs/collaboration/GEOMETRY_TO_ALL.md docs/collaboration/messages/geometry docs/collaboration/requests/geometry docs/collaboration/status/geometry.md experiments/geometry proofs/Geometry | tar -x -C <dir>`);
+   web search for published papers only; result as SCI-REV-0021.  **R21** (`R21_brief.md`): adversarial
    review of the Ensemble division's Theorems E5, E7, E8, of the reading of E1.3 and
    of §5 of `docs/ensemble/ENSEMBLE_REPORT.md` at `a570520`, asked for by them; reads the
    export `<scratchpad>/ens_ro_a570520/` (lost with the container:
@@ -296,7 +308,7 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    addenda A17 (19)–(20) and of Part A of the audit, including the synthetic test of
    Corollary AA.2 and level H2′ (obligations `G-1`, `G-2` — **do not run them yourself
    while it works**).  Notes: `experiments/science/ws_R18/NOTES.md`, `ws_R19/NOTES.md`,
-   `ws_R20/NOTES.md`, `ws_R21/NOTES.md`; reports: `workstreams/R18_REPORT.md` … `R21_REPORT.md` — drafts until the coordinator
+   `ws_R20/NOTES.md`, `ws_R21/NOTES.md`, `ws_R22/NOTES.md`; reports: `workstreams/R18_REPORT.md` … `R22_REPORT.md` — drafts until the coordinator
    has read and checked them.  If a hand-back reports a declined tool action, do not
    perform it; tell the research owner.  R17 is read, checked and published:
    SCI-REV-0017 (finding 9s).

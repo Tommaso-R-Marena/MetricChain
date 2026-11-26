@@ -2441,3 +2441,45 @@ sides of one fact: mean squared distances determine nothing about an unconstrain
 ensemble (the Ensemble division's E1.3, by a random scaling) and determine a mixture
 uniquely when every state obeys the same bond constraints (the Geometry division's item 3)
 — the scaling of the first breaks the constraints of the second.  To be said to both.
+
+**17:07–17:21 UTC — the Geometry division answered; a boundary of its main theorem; one
+inequality behind three divisions' stability statements.**  The Geometry division's first
+checkpoint (`d84a43b`): for chains with fixed bond lengths and angles, the matrix `M` of
+ensemble-averaged squared distances determines a `K`-state mixture among *all* probability
+measures when the only quadrics through the constrained edge directions of the "stacked"
+framework in `ℝ^{3K}` are `K − 1` trivial ones (their (CC)), with a stability bound
+`W₂² ≤ C‖ΔM‖`.  They ask for a review (accepted: R22, launched 17:16), prior art, an attack
+on their assumption table, and whether such an average is measured at all.
+*Relevance* (answered from general knowledge and three searches, summaries only): the
+low-angle limit of a two-label interference experiment is exactly `⟨r²⟩`, and the Guinier
+radius of a labelled block is a block sum of `M`; such experiments exist (neutron label
+triangulation, X-ray interferometry between gold labels, deuterated blocks in polymers);
+the usual restraints (relaxation rates, transfer efficiencies, couplings) average other
+functions.  So the observable is real, rare in its labelled form, and naturally a block
+sum.
+*My own check, before the referee* (`geometry_checks/hinge_pair.py`, four seconds; I
+expected only to confirm that states sharing rigid parts are "non-generic" and found how
+large that set is).  (a) Two states that differ in one torsion are never identified: a
+point rotating about an axis has squared distance `a + b cos φ + c sin φ` to a fixed one,
+so `M` sees a measure on that circle only through its first Fourier coefficient, and every
+chord through the mixture's coefficient is a competing two-state ensemble (60 competitors,
+agreement `10⁻¹⁴`, control passes).  (b) (CC) fails whenever two states differ in at most
+three torsions: the stacked edge vectors of a shared rigid segment lie in a 3-dimensional
+subspace of `ℝ⁶`, two such subspaces meet in a line, so `s` segments give at most
+`6s − s(s−1)/2` conditions on the 21-dimensional space of quadrics — dimension at least 10,
+6, 3 for one, two, three differing torsions; numerically exactly that, and 1 from four on.
+(c) Every squared distance is multilinear in `(1, cos φ_k, sin φ_k)`: `M` is a linear image
+of the Fourier coefficients of the torsion distribution with all indices in `{−1, 0, 1}`.
+*Not known:* whether two states that differ in two or three torsions are identifiable
+without (CC); my sketch (a rank-2 moment matrix on `{1, z₁, z₂, z₁z₂}` with two bilinear
+kernel polynomials) says yes for two; the referee is asked to decide by a linear
+programme.  I made no prediction in writing before running (a)–(c); the count in (b) was
+derived after seeing the dimensions 10, 6, 3, 1, which it then reproduced — so it is a
+fitted explanation with a proof of the inequality, not a prediction.
+*One inequality, three divisions.*  For `f = c₀ + λ·Φ ≥ 0` vanishing on the support of `μ`:
+`∫f dν ≤ ‖λ‖_*τ`.  A certified gap gives the Ensemble division's bound on the mass off the
+support, sharp growth their `W₁` bound (and the theory division's robust optimality),
+quadratic growth the Geometry division's Theorem G — and my remark to the Ensemble
+division of 16:22 (no sharp certificate at an interior point of a manifold) is the
+general form of Geometry's lower bound (e).  Three sessions wrote instances of it within
+two hours without seeing one another's; said to all three in SCI-RES-0029.
