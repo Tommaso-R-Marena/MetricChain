@@ -56,6 +56,13 @@ class Params:
     b: float        # tolerance (= accuracy of the finest inner brackets), b > 0
     delta: float    # failure probability
     xs: tuple       # inner accuracies x_0 > x_1 > ... > x_L
+    ltheta: float | None = None     # ln(theta), for designs whose theta overflows a double (the extensive regime of
+                                    # theory report §11.18: theta = e^{x-b} - ...); then pass theta=math.inf
+
+    @property
+    def lth(self) -> float:
+        """ln(theta); every computation uses this, never ``theta`` itself."""
+        return math.log(self.theta) if self.ltheta is None else self.ltheta
 
     def __post_init__(self) -> None:
         if not (self.n >= 1 and 1 <= self.n_o <= self.n):
@@ -110,7 +117,7 @@ def constants(P: Params, outer: CubeTables) -> Constants:
         raise ValueError("outer tables do not match the parameters")
     J = math.ceil((2 * P.u * P.n + P.b + P.n_o * LN2) / P.lam)
     nu0 = max((J + 1) * math.expm1(P.lam) / P.etap, P.nu1) / (1 - P.eta)
-    r_dag = outer.r_dagger(P.eta, P.theta, nu0)
+    r_dag = outer.r_dagger(P.eta, None, nu0, lth=P.lth)
     lpi = outer.lpi_dagger(r_dag)
     m_max = math.ceil((math.log(2 * (1 + P.eta) * nu0 / (1 - P.eta)) + P.lam - lpi) / LN2)
     K = math.ceil(3 * (1 + P.eta) / P.eta ** 2 * math.log(2 * (J + 1) * (m_max + 1) * (P.L + 2) / P.delta))
@@ -119,7 +126,8 @@ def constants(P: Params, outer: CubeTables) -> Constants:
     lM_dag = lK - math.log(1 - P.eta) - lpi
     lM_bar = math.log(2 * (1 + P.eta) * nu0) + P.lam + lM_dag
     c = cube_constants(P.u)
-    x_out = math.log((2 * c.p_u) ** P.n + math.exp(P.b) * (math.exp(P.lam) * (1 + P.eta) / (1 - P.eta) + P.etap + P.theta))
+    x_out = logsumexp([P.n * math.log(2 * c.p_u),
+                       P.b + logsumexp([P.lam + math.log((1 + P.eta) / (1 - P.eta)), math.log(P.etap), P.lth])])
     return Constants(
         J=J, nu0=nu0, r_dag=r_dag, lpi_dag=lpi, m_max=m_max, K=K, lK=lK, lnu=lnu, lM_dag=lM_dag, lM_bar=lM_bar,
         l_inv_delta_p=math.log(4 * P.L / P.delta) + lM_bar, x_out=x_out,

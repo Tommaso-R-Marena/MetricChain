@@ -84,7 +84,7 @@ def simulate(P: Params, outer: CubeTables, C: Constants, F: np.ndarray, psi0: fl
     m_max = C.m_max
     m_cap = 61 - math.ceil(math.log2(K))                     # samples are stored as int64 counts: K 2^m < 2^61
     nln2 = n_o * LN2
-    lth = math.log(P.theta)
+    lth = P.lth
     lpmf = outer.lbinom - nln2
     lpmf = lpmf - float(np.logaddexp.reduce(lpmf))
     lw = shift - np.asarray(F, dtype=float)                  # ln W per shell

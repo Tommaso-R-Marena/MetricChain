@@ -41,9 +41,22 @@ the z-score of the sample mean and of the sample variance, and in bold the cells
 either exceeds 5 (with the relative error of the mean).
 
 <!-- TABLE:binomial_bias -->
+| trials `n` | mean 29 | mean 60 | mean 92 | mean 500 | mean 5000 | mean 100000 | mean 1e+07 |
+|---|---|---|---|---|---|---|---|
+| `1e+09` | +1.5 / -0.4 | -0.6 / -1.1 | +0.5 / +0.2 | +0.3 / +1.0 | +0.6 / -0.7 | -0.2 / -0.5 | +0.4 / +0.1 |
+| `2.15e+09` | -1.9 / +0.9 | -0.1 / -0.7 | +0.7 / +0.4 | -1.3 / +1.1 | +0.4 / -0.7 | +0.9 / +0.9 | +0.2 / -0.3 |
+| `1e+12` | +1.1 / -0.8 | -0.8 / -0.3 | +0.7 / +2.2 | -0.1 / +0.3 | -0.0 / -0.8 | -2.2 / -0.2 | +1.5 / +0.3 |
+| `1e+14` | +1.9 / -0.4 | +1.0 / +1.2 | +0.7 / +1.9 | -0.9 / -0.2 | -1.1 / -0.3 | +1.5 / +0.2 | +1.1 / +1.7 |
+| `1e+15` | +0.1 / +0.7 | +0.1 / +0.2 | +1.1 / +2.8 | **+0.3 / +5.2 (+0.00 %)** | +2.2 / -0.4 | -0.6 / -1.0 | +1.5 / -1.2 |
+| `9.01e+15` | -0.5 / +1.0 | **-2.4 / -11.4 (-0.05 %)** | **-0.8 / -27.7 (-0.01 %)** | **+7.3 / -27.6 (+0.05 %)** | **+3.1 / -8.2 (+0.01 %)** | +1.3 / -3.6 | +1.2 / -1.4 |
+| `1e+16` | -0.1 / -1.5 | **+0.5 / +6.2 (+0.01 %)** | -1.7 / +1.7 | **-4.2 / -5.7 (-0.03 %)** | -1.5 / -4.0 | -0.1 / -1.2 | -0.6 / -0.8 |
+| `1e+17` | +0.1 / +0.8 | **+2.8 / -5.9 (+0.06 %)** | **+0.9 / -29.0 (+0.02 %)** | **-10.8 / +25.9 (-0.08 %)** | **-0.9 / +9.1 (-0.00 %)** | +0.2 / -0.5 | -0.4 / +0.2 |
+| `1e+18` | +0.7 / -0.9 | **+0.9 / +81.0 (+0.02 %)** | **-36.6 / -3.0 (-0.60 %)** | **-29.1 / -11.5 (-0.21 %)** | **+2.8 / +10.8 (+0.01 %)** | -1.0 / +0.4 | -0.3 / +1.1 |
+| `2.31e+18` | -0.3 / -1.1 | **-27.4 / +23.7 (-0.56 %)** | **-47.8 / +34.1 (-0.79 %)** | **-42.5 / +6.1 (-0.30 %)** | **+0.8 / -10.3 (+0.00 %)** | +0.3 / -2.1 | -0.9 / -1.0 |
 <!-- /TABLE:binomial_bias -->
 
 <!-- TABLE:binomial_summary -->
+numpy 2.5.5, 400,000 draws per cell.  numpy's sampler: 19 of 92 cells have a z-score above 5 in absolute value, all of them at `n ≥ 1e+15`; the largest relative error of the mean is `-0.79 %` (`n = 2.31e+18`, mean 92); at `n ≤ 10¹⁴` the largest z-score is 2.2 in 64 scores.  The exact sampler on the same grid: largest z-score **4.2** in 184 scores (cell `n = 2.15e+09`, mean 5000, branch `numpy`); that cell is numpy's own sampler at `n = 2³¹`, and 5 further streams of 20,000,000 draws each give z-scores of the mean between -1.0 and +0.6 — a fluctuation.  Chi-square tests of the Poissonisation step against the exact law, 8 cases from `n = 12` to `n = 2⁶¹`: p-values between 0.12 and 0.89.
 <!-- /TABLE:binomial_summary -->
 
 Two things beyond what you reported.  (i) **The defect starts earlier than `10¹⁷`**: at
@@ -66,12 +79,30 @@ a draw is half the largest sample.  From the re-run (the sample sizes are a prop
 the algorithm, not of the sampler):
 
 <!-- TABLE:exposure -->
+| `u` | `n_o` | `K` scale | largest sample of a run | largest block drawn from | cases with a block of `10¹⁵` points or more |
+|---|---|---|---|---|---|
+| 0.5 | 300 | 1 | `4.2e+12` | `2.1e+12` | 0 of 39 |
+| 0.5 | 300 | 1/4 | `1.1e+12` | `5.3e+11` | 0 of 39 |
+| 0.5 | 300 | 1/16 | `2.6e+11` | `1.3e+11` | 0 of 39 |
+| 0.5 | 300 | 1/64 | `6.4e+10` | `3.2e+10` | 0 of 39 |
+| 0.5 | 300 | 1/256 | `1.7e+10` | `8.6e+09` | 0 of 39 |
+| 1 | 120 | 1 | `6.8e+16` | `3.4e+16` | 15 of 39 |
+| 1 | 120 | 1/4 | `1.7e+16` | `8.5e+15` | 15 of 39 |
+| 1 | 120 | 1/16 | `4.2e+15` | `2.1e+15` | 15 of 39 |
+| 1 | 120 | 1/64 | `1.1e+15` | `5.3e+14` | 0 of 39 |
+| 1 | 120 | 1/256 | `2.8e+14` | `1.4e+14` | 0 of 39 |
+| 2 | 48 | 1 | `5.4e+17` | `2.7e+17` | 18 of 39 |
+| 2 | 48 | 1/4 | `1.3e+17` | `6.7e+16` | 18 of 39 |
+| 2 | 48 | 1/16 | `3.4e+16` | `1.7e+16` | 15 of 39 |
+| 2 | 48 | 1/64 | `8.4e+15` | `4.2e+15` | 15 of 39 |
+| 2 | 48 | 1/256 | `2.3e+15` | `1.1e+15` | 15 of 39 |
 <!-- /TABLE:exposure -->
 
-So your estimate was right: the two sizes `(u, n_o) = (1, 120)` and `(2, 48)` drew from
-blocks in the defective range, down to `K/64`; the size `(½, 300)` did not.  The counts that
-matter there — points inside the closing ball, of the order of `K` — have means of a few
-hundred to a few thousand: the window of the defect.
+So your estimate was right.  The size `(u, n_o) = (2, 48)` drew from blocks in the defective
+range at every value of `K`, the size `(1, 120)` down to `K/16`, in 15 to 18 of the 39 cases
+of each such cell; the size `(½, 300)` stayed below `2.2·10¹²` and did not.  With the theorem's
+`K` the counts that decide a level — points inside the closing ball, of the order of `K` —
+sit in the window of the defect; with `K` scaled down to 15 or 4 they are below it.
 
 ### 1.3 The replacement: an exact sampler **[P for exactness; N for the tests]**
 
@@ -106,27 +137,77 @@ theorem's value down to `K/256`, the same numbers of runs and the same seeds —
 exact sampler.
 
 <!-- TABLE:sampledb_headline -->
+With the theorem's `K` (953–979): **585,000 literal runs** on 13 landscapes, three sizes and three inner behaviours; runs in which the good event failed, a bracket was invalid, the width bound was exceeded, a claim was violated or the run aborted: **0**.  With no failure in 585,000 runs, the frequency of each of these events is below `5.1e-06` at 95 % confidence (pooled over cases).
 <!-- /TABLE:sampledb_headline -->
 
 <!-- TABLE:sampledb -->
+| `u` | `n_o` | `K` (scale) | runs | good event failed | bracket invalid | of these on the good event | width bound exceeded | another claim violated on the good event | aborted | mean `ln(evaluations)` minus mean run: bottom / top |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 0.5 | 300 | 979 (1) | 195,000 | 0 | 0 | 0 | 0 | 0 | 0 | +0.00 / +0.00 |
+| 0.5 | 300 | 245 (1/4) | 39,000 | 78 | 0 | 0 | 0 | 0 | 0 | — |
+| 0.5 | 300 | 61 (1/16) | 39,000 | 14,731 | 0 | 0 | 0 | 0 | 0 | — |
+| 0.5 | 300 | 15 (1/64) | 39,000 | 29,418 | 7 | 0 | 0 | 0 | 0 | — |
+| 0.5 | 300 | 4 (1/256) | 39,000 | 31,698 | 1,212 | 0 | 0 | 0 | 0 | — |
+| 1 | 120 | 968 (1) | 195,000 | 0 | 0 | 0 | 0 | 0 | 0 | -0.00 / +0.00 |
+| 1 | 120 | 242 (1/4) | 39,000 | 45 | 0 | 0 | 0 | 0 | 0 | — |
+| 1 | 120 | 60 (1/16) | 39,000 | 13,924 | 0 | 0 | 0 | 0 | 0 | — |
+| 1 | 120 | 15 (1/64) | 39,000 | 30,093 | 21 | 0 | 0 | 0 | 0 | — |
+| 1 | 120 | 4 (1/256) | 39,000 | 32,152 | 1,104 | 0 | 0 | 0 | 0 | — |
+| 2 | 48 | 953 (1) | 195,000 | 0 | 0 | 0 | 0 | 0 | 0 | -0.00 / -0.00 |
+| 2 | 48 | 238 (1/4) | 39,000 | 67 | 0 | 0 | 0 | 0 | 0 | — |
+| 2 | 48 | 60 (1/16) | 39,000 | 13,047 | 0 | 0 | 0 | 0 | 0 | — |
+| 2 | 48 | 15 (1/64) | 39,000 | 32,080 | 62 | 0 | 0 | 0 | 0 | — |
+| 2 | 48 | 4 (1/256) | 39,000 | 34,414 | 941 | 0 | 0 | 0 | 0 | — |
 <!-- /TABLE:sampledb -->
+
+The worst case per value of `K`:
+
+<!-- TABLE:sampledb_worst -->
+| `K` scale | cases | runs per case | largest fraction of runs with the good event failed (landscape, inner behaviour, `u`) | largest fraction of runs with an invalid bracket (landscape, inner behaviour, `u`) | cases with at least one invalid bracket |
+|---|---|---|---|---|---|
+| 1 | 117 | 5,000 | 0 | 0 | 0 |
+| 1/4 | 117 | 1,000 | 0.9 % (dip R=1.1 Lambda1 n_o/u, bottom, 0.5) | 0 | 0 |
+| 1/16 | 117 | 1,000 | 65.9 % (cone, random, 0.5) | 0 | 0 |
+| 1/64 | 117 | 1,000 | 100.0 % (cone, random, 0.5) | 2.7 % (random walk, bottom, 2) | 10 |
+| 1/256 | 117 | 1,000 | 100.0 % (cone, top, 0.5) | 21.7 % (random monotone, bottom, 2) | 87 |
+<!-- /TABLE:sampledb_worst -->
 
 Old against new, per size and per value of `K` (z: two-sample test of the pooled
 frequencies):
 
 <!-- TABLE:sampled_compare -->
+| `u` | `n_o` | `K` scale | runs (each version) | good event failed: numpy sampler → exact sampler | z | bracket invalid: numpy → exact | z | invalid on the good event (both) | largest per-case z (good event, invalid) |
+|---|---|---|---|---|---|---|---|---|---|
+| 0.5 | 300 | 1 | 195,000 | 0 → 0 | +0.0 | 0 → 0 | +0.0 | 0 | 0.0, 0.0 |
+| 0.5 | 300 | 1/4 | 39,000 | 82 → 78 | +0.3 | 0 → 0 | +0.0 | 0 | 2.9, 0.0 |
+| 0.5 | 300 | 1/16 | 39,000 | 14,668 → 14,731 | -0.5 | 0 → 0 | +0.0 | 0 | 2.3, 0.0 |
+| 0.5 | 300 | 1/64 | 39,000 | 29,408 → 29,418 | -0.1 | 10 → 7 | +0.7 | 0 | 1.9, 1.0 |
+| 0.5 | 300 | 1/256 | 39,000 | 31,698 → 31,698 | +0.0 | 1,188 → 1,212 | -0.5 | 0 | 0.0, 2.5 |
+| 1 | 120 | 1 | 195,000 | 0 → 0 | +0.0 | 0 → 0 | +0.0 | 0 | 0.0, 0.0 |
+| 1 | 120 | 1/4 | 39,000 | 47 → 45 | +0.2 | 0 → 0 | +0.0 | 0 | 1.7, 0.0 |
+| 1 | 120 | 1/16 | 39,000 | 14,013 → 13,924 | +0.7 | 0 → 0 | +0.0 | 0 | 2.3, 0.0 |
+| 1 | 120 | 1/64 | 39,000 | 30,082 → 30,093 | -0.1 | 18 → 21 | -0.5 | 0 | 1.4, 1.0 |
+| 1 | 120 | 1/256 | 39,000 | 32,152 → 32,152 | +0.0 | 1,106 → 1,104 | +0.0 | 0 | 0.0, 1.9 |
+| 2 | 48 | 1 | 195,000 | 0 → 0 | +0.0 | 0 → 0 | +0.0 | 0 | 0.0, 0.0 |
+| 2 | 48 | 1/4 | 39,000 | 67 → 67 | +0.0 | 0 → 0 | +0.0 | 0 | 2.2, 0.0 |
+| 2 | 48 | 1/16 | 39,000 | 13,080 → 13,047 | +0.3 | 0 → 0 | +0.0 | 0 | 2.1, 0.0 |
+| 2 | 48 | 1/64 | 39,000 | 32,031 → 32,080 | -0.5 | 65 → 62 | +0.3 | 0 | 1.9, 1.0 |
+| 2 | 48 | 1/256 | 39,000 | 34,413 → 34,414 | -0.0 | 868 → 941 | -1.7 | 0 | 0.0, 3.4 |
 <!-- /TABLE:sampled_compare -->
 
 <!-- TABLE:sampled_compare_summary -->
+585 cases were run with both samplers (126 of them drew from blocks of `10¹⁵` points or more, 459 did not).  With the theorem's `K`: numpy sampler 0 failures of the good event or invalid brackets in 585,000 runs, exact sampler 0 in 585,000.  Over all cases and both statistics, 275 per-case comparisons are not 0 against 0; their largest two-sample z-score is 3.4, and 1 exceed 3 (expected by chance among 275: 0.7).
 <!-- /TABLE:sampled_compare_summary -->
 
 **Reading.**  The sentence you asked us to re-check — "runs in which the good event
 failed: 0 of 585 000" — is now a statement about runs with an exact sampler, and it has
 the same value.  The frequencies with `K` scaled down agree between the two samplers
-within sampling error, in the exposed cells as in the others.  That is what one expects
-after the fact: the defect shifts a count of the order of `K` by less than one per cent,
-and the good event tolerates 25 %.  It could not be known before the re-run, and the
-published number was not entitled to the word "exact sample" until now.
+within sampling error, in the exposed cells as in the others: no pooled comparison
+exceeds two standard errors, and the one per-case comparison above three is what chance
+gives among so many.  That is what one expects after the fact: the defect shifts a count
+of the order of `K` by less than one per cent, and the good event tolerates 25 %.  It
+could not be known before the re-run, and the published number was not entitled to the
+words "exact sample" until now.
 
 ### 1.5 What this changes in the record
 
@@ -146,14 +227,33 @@ runs with `n_i = 20, 40, 80`, where the last rung costs up to `e^{55}` evaluatio
 `K`, 13 landscapes, three sizes, 500 runs per case.
 
 <!-- TABLE:sampledb_dear -->
+| `u` | `n_o` | `n_i` | cost of the last rung `ln C_L` | `ln C_max` | cases | runs | closed | stopped by the query budget | stopped otherwise | runs above `C_max` | largest `ln(evaluations) − ln C_max` |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0.5 | 300 | 6 | 4.2 | 40.3 | 13 | 6,500 | 6,500 | 0 | 0 | 0 | -11.23 |
+| 0.5 | 300 | 20 | 13.9 | 49.1 | 13 | 6,500 | 6,500 | 0 | 0 | 0 | -6.17 |
+| 0.5 | 300 | 40 | 16.9 | 50.6 | 13 | 6,500 | 6,500 | 0 | 0 | 0 | -4.65 |
+| 0.5 | 300 | 80 | 18.5 | 58.7 | 13 | 6,500 | 6,500 | 0 | 0 | 0 | -11.22 |
+| 1 | 120 | 6 | 4.2 | 49.6 | 13 | 6,500 | 6,500 | 0 | 0 | 0 | -10.81 |
+| 1 | 120 | 20 | 13.9 | 57.9 | 13 | 6,500 | 6,500 | 0 | 0 | 0 | -5.18 |
+| 1 | 120 | 40 | 26.4 | 59.5 | 13 | 6,500 | 3,500 | 3,000 | 0 | 0 | -0.03 |
+| 1 | 120 | 80 | 32.1 | 72.9 | 13 | 6,500 | 6,500 | 0 | 0 | 0 | -1.99 |
+| 2 | 48 | 6 | 4.2 | 52.7 | 13 | 6,500 | 6,500 | 0 | 0 | 0 | -10.23 |
+| 2 | 48 | 20 | 13.9 | 60.2 | 13 | 6,500 | 6,500 | 0 | 0 | 0 | -4.75 |
+| 2 | 48 | 40 | 27.7 | 62.6 | 13 | 6,500 | 6,500 | 0 | 0 | 0 | -19.63 |
+| 2 | 48 | 80 | 55.5 | 96.4 | 13 | 6,500 | 6,500 | 0 | 0 | 0 | -25.76 |
 <!-- /TABLE:sampledb_dear -->
 
 <!-- TABLE:sampledb_dear_summary -->
+78,000 runs with the invalid inner behaviour in 156 cases: 3,000 were stopped by the abort rule on the query budget, 75,000 closed, and **0** spent more than `C_max` evaluations; with valid inner behaviours and the theorem's `K`: 0 of 585,000.
 <!-- /TABLE:sampledb_dear_summary -->
 
-The abort rule (the test before each inner call, erratum m1 of referee R8) is what keeps
-the cost below `C_max` here, as in your 142 of 260 runs.  The brackets returned by these
-runs mean nothing and are not counted anywhere else.
+The budget binds in one of the twelve configurations — `(u, n_o, n_i) = (1, 120, 40)`, where
+six of the thirteen landscapes are stopped in every run, within `e^{−0.03}` of `C_max` — and
+there the abort rule (the test before each inner call, erratum m1 of referee R8) is what
+keeps the cost below `C_max`, as in your 142 of 260 runs.  In the other eleven
+configurations the runs close before the budget is reached.  The brackets returned by
+these runs mean nothing and are not counted anywhere else.  This is a weaker exercise of
+the rule than yours: one configuration in twelve.
 
 ## 3. `C_max` against the non-adaptive lower bound (R6-E1) **[X]**
 
@@ -162,12 +262,21 @@ radius with `D_R > x_out`, `D_R = n ln(1 + e^{−u}) − ln Σ_j C(n, j)e^{−u 
 tables and our own `C_max`; none of your code was opened.
 
 <!-- TABLE:separation_validation -->
+All 60 numbers of the table of SCI-REV-0007 §5 / `R6_REPORT.md` §2.9 (15 sizes; `ln C_max` at `φ = 0.5`, `ln LB_na`, the plain bracket, the hinted lower bound) are reproduced to the digit given: 60 of 60 identical after rounding to one decimal.  The 12 numbers of its table with the lowered cap (`φ = 0.55`): 12 of 12 identical after rounding to two decimals.
 <!-- /TABLE:separation_validation -->
 
 A finer window (steps of 10, 5 and 25 in `n` for `u = 1, 2, ½`; outer fractions 0.35 … 0.70 in
 steps of 0.05) and sizes beyond it:
 
 <!-- TABLE:separation_window -->
+| `u` | cost bound | sizes examined | least size with the bound below `LB_na` (margin in `ln`, best `φ`) | larger sizes at which it is above again | below at every examined size from | their first grid size |
+|---|---|---|---|---|---|---|
+| 0.5 | `C_max` (Theorem 11.56) | 3700–16000 (54) | **4550** (0.26, 0.50) | none | **4550** | 4700 |
+| 0.5 | `C_max` with the lowered cap | 3700–16000 (54) | **4075** (0.39, 0.55) | none | **4075** | 4150 |
+| 1 | `C_max` (Theorem 11.56) | 1150–16000 (44) | **1370** (0.12, 0.50) | 1380, 1390 | **1400** | 1400 |
+| 1 | `C_max` with the lowered cap | 1150–16000 (44) | **1270** (0.10, 0.55) | 1280 | **1290** | 1300 |
+| 2 | `C_max` (Theorem 11.56) | 420–4000 (44) | **525** (0.14, 0.50) | 530 | **535** | 540 |
+| 2 | `C_max` with the lowered cap | 420–4000 (44) | **495** (0.38, 0.55) | none | **495** | 500 |
 <!-- /TABLE:separation_window -->
 
 Two remarks.  (i) **The inequality is not monotone in `n` near the crossover**: for `u = 1`
@@ -192,18 +301,37 @@ event.  `alg2l.lowered_sample_cap` implements it (with the theory division's con
 *Expectation level (X-005).*
 
 <!-- TABLE:lowered_cap_x005 -->
+All 3,936 stored instances of X-005 re-evaluated (the maximisers of 2,624 searches under every objective, and the flat instances): samples at or above the lowered cap: **0**; samples above `M†`: 22; the largest sample is `1.77·M†`, which is 0.356 of the lowered cap there (`u = 0.5`, `n = 350`, `φ = 0.45`).  Over the cells the lowered cap is between `3.3·M†` and `212·M†`, and the theorem's `M̄` is at least `394` times larger than it.
 <!-- /TABLE:lowered_cap_x005 -->
 
 *With real fluctuations (X-006b), including `K` scaled down to 4 and the invalid inner
 behaviour.*
 
 <!-- TABLE:sampledb_cap -->
+| `u` | `n_o` | `K` scale | cases | largest sample `/ M†` | lowered cap `/ M†` | largest sample / lowered cap | theorem's `M̄ / M†` | cases with a sample at or above the lowered cap |
+|---|---|---|---|---|---|---|---|---|
+| 0.5 | 300 | 1 | 52 | 1.46 | 4.26 | 0.342 | `5.4e+04` | 0 |
+| 0.5 | 300 | 1/4 | 39 | 1.46 | 4.26 | 0.342 | `5.4e+04` | 0 |
+| 0.5 | 300 | 1/16 | 39 | 1.46 | 4.26 | 0.342 | `5.4e+04` | 0 |
+| 0.5 | 300 | 1/64 | 39 | 1.46 | 4.26 | 0.342 | `5.4e+04` | 0 |
+| 0.5 | 300 | 1/256 | 39 | 1.46 | 4.26 | 0.342 | `5.4e+04` | 0 |
+| 1 | 120 | 1 | 52 | 1.45 | 10.24 | 0.142 | `3.6e+04` | 0 |
+| 1 | 120 | 1/4 | 39 | 1.45 | 10.24 | 0.142 | `3.6e+04` | 0 |
+| 1 | 120 | 1/16 | 39 | 1.45 | 10.24 | 0.142 | `3.6e+04` | 0 |
+| 1 | 120 | 1/64 | 39 | 1.45 | 10.24 | 0.142 | `3.6e+04` | 0 |
+| 1 | 120 | 1/256 | 39 | 1.45 | 10.24 | 0.142 | `3.6e+04` | 0 |
+| 2 | 48 | 1 | 52 | 1.50 | 3.30 | 0.455 | `3.9e+04` | 0 |
+| 2 | 48 | 1/4 | 39 | 1.50 | 3.30 | 0.455 | `3.9e+04` | 0 |
+| 2 | 48 | 1/16 | 39 | 1.50 | 3.30 | 0.455 | `3.9e+04` | 0 |
+| 2 | 48 | 1/64 | 39 | 1.50 | 3.30 | 0.455 | `3.9e+04` | 0 |
+| 2 | 48 | 1/256 | 39 | 1.50 | 3.30 | 0.455 | `3.9e+04` | 0 |
 <!-- /TABLE:sampledb_cap -->
 
 <!-- TABLE:sampledb_cap_summary -->
+In the 1,072,500 literal runs of X-006b with `n_i = 6` (624 cases, valid and invalid inner behaviours, `K` from the theorem's value down to 4) the largest sample reached 0.455 of the lowered cap; cases with a sample at or above it: **0**.
 <!-- /TABLE:sampledb_cap_summary -->
 
-No run comes near the lowered cap.  The corner you closed (`r† < Δ`, a pass with `M = M‡`
+No run reaches half of the lowered cap.  The corner you closed (`r† < Δ`, a pass with `M = M‡`
 exactly) does not occur in these designs (`r†` is far above `Δ = 1`), so these runs say
 nothing about it.
 
@@ -247,9 +375,15 @@ R7-ENG-3 comes first.
 of the X-005 data:
 
 <!-- TABLE:trend_fit -->
+| `u` | sizes fitted | least-squares slope of `ln(excess)` against `ln n` | local slopes between consecutive sizes (least, largest) | fit `A/√n + B/n`: `A`, `B` | largest relative residual of that fit |
+|---|---|---|---|---|---|
+| 0.5 | 250–128000 (13) | -0.76 | -0.90, -0.63 | 11.82, 917 | 8 % |
+| 1 | 250–128000 (13) | -0.68 | -0.84, -0.46 | 7.33, 265 | 8 % |
+| 2 | 250–128000 (13) | -0.63 | -0.88, -0.39 | 4.56, 95 | 8 % |
 <!-- /TABLE:trend_fit -->
 
 <!-- TABLE:trend_fit_summary -->
+Fitted over all sizes of the grid, the excess over the claimed exponent decays like `n^(−p)` with `p` between 0.63 and 0.76 for the three slopes — faster than `1/√n`.
 <!-- /TABLE:trend_fit_summary -->
 
 The digest now says: the excess decreases with `n` at every step, with an effective

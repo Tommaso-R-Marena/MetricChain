@@ -101,6 +101,50 @@ commit that adds or last changes the files named).  Costs are in
 | Correction (checkpoint 4) | **Superseded by X-006b**: the shell counts were drawn with numpy's binomial sampler, which is biased from about `10¹⁵` trials on (SCI-REV-0007 §4); two of the three sizes drew from such blocks.  The file stays as produced; `--sampler numpy` reproduces it |
 | Result, interpretation, limitations | ENG-RES-0008 §6 |
 
+## X-006b  Algorithm 2L⁺ with real fluctuations — the cases of X-006 with an exact sampler; an invalid inner behaviour
+
+| field | value |
+|---|---|
+| Scientific purpose | (i) Do the statistics of X-006 survive when the shell counts are drawn exactly?  numpy's binomial sampler is biased for counts drawn from about `10¹⁵` trials and more (reported by the Scientific Discovery Division, SCI-REV-0007 §4, request R6-E3), and X-006 drew from blocks of up to `2.7·10¹⁷` points.  (ii) Does the cost stay below `C_max` in every run when the inner procedure misbehaves (their request R6-E2)?  (iii) Does any run reach the lowered sample cap of THY-RES-0004 §3? |
+| Source commit | engineering `26029c9` (stored in every row, with the job id); algorithm text as X-005 (`K_REPORT.md` §§2–3 at theory `63efc69`, errata m1, m10); the cap: THY-RES-0004 §3 at theory `9408e33` |
+| Mathematical dependencies | Theorem 11.56 **[P; refereed R8; reviewed SCI-REV-0007]** (statement under test); the remark after it (lowered cap) **[P; unrefereed, reviewed SCI-REV-0007 §2]**; exactness of the sampler: the Poissonisation argument in the docstring of `sampling.py` **[P; ours; unrefereed]** |
+| Execution environment | Modal job M-012 (741 tasks, one core each, numpy 2.5.5, 16.9 core-hours, $1.01); the sampler measurement locally (2 minutes) |
+| Configuration | the 585 cases of X-006 unchanged (sizes, design, landscapes, valid inner behaviours, values of `K`, runs per case, seeds); in addition 156 cases with the invalid inner behaviour "dear" (every refined point is sent to the last rung by brackets that ignore the fibre) at the theorem's `K`, inner dimensions 6, 20, 40, 80, 500 runs each |
+| Random seeds | as X-006 (`numpy.random.default_rng([1, …case…])`; for `n_i ≠ 6` the inner dimension enters the seed).  The streams are consumed differently by the two samplers, so runs are not comparable one by one |
+| Outputs | `experiments/eng/twolevel/results/x006b_sampled.jsonl` (741 rows), `x006b_binomial_bias.json` (the sampler grid), `x005_lowered_cap.json` (the cap on the stored instances of X-005) |
+| Validation | the exact sampler: chi-square against the exact law in the three regimes of its collision step (8 cases, `n = 12 … 2⁶¹`), mean and variance on a grid of 92 cells, a regression test that documents numpy's defect; `--sampler numpy` reproduces three stored rows of X-006 bit for bit; the invalid behaviour triggers the abort rule in a unit test |
+| Code | `src/metricchain_eng/twolevel/sampling.py`, `simulate.py`; `experiments/eng/twolevel/binomial_bias.py`, `run_sampled.py`, `lowered_cap.py`; `modal_jobs/twolevel_app.py::sampled`; blocks `binomial_*`, `exposure`, `sampledb*`, `sampled_compare*`, `lowered_cap_x005` of `make_tables.py` |
+| Limitation stated up front | as X-006: oracle inner brackets, so the event (V1) is not tested; one design; three sizes.  One branch of the sampler (means above `10⁹` at more than `2³¹` trials) still uses numpy and is not exact.  The invalid behaviour makes the budget bind in one of twelve configurations only |
+| Result, interpretation, limitations | ENG-RES-0013 §§1, 2, 4 |
+
+## X-008  Smallest sensitive balls on a type class of the cube, exactly, up to `n = 10 000`
+
+| field | value |
+|---|---|
+| Scientific purpose | THY-REQ-0010, question 2: do the exact finite-`n` values of `−ln q*_ball(1)/n` on the type classes `κ = 0.5, 0.4, 0.3` approach the theory division's limits, and at which rate?  Is the best centre outside the class for `κ ≠ ½` at accessible sizes? |
+| Source commit | theory `9408e33` (THY-REQ-0010; the limits `0.029139`, `0.028005`, `0.024588` are quoted from it, not recomputed) |
+| Mathematical dependencies | the definitions of the request; the distance of a point of a ball to its complement inside the class, `2(i − i₀ + 1)` **[P; ours; checked by brute force on five small classes]** |
+| Execution environment | local, single core, five seconds |
+| Configuration | `u = 1`, `ε = 1`, `n ∈ {20, …, 10 000}` (10 sizes), all centre types `0 ≤ m ≤ n`, all radii |
+| Outputs | `experiments/eng/slices/results/ball_exponents.json` |
+| Validation | the request's target (`n = 8`, `k = 4`: 17 points, `Φ = ((e⁴−1) + 16(e²−1))/70`); for `n ≤ 400` (18 cases) the optimum recomputed with exact integer weights and a 60-digit comparison selects the same ball |
+| Code | `experiments/eng/slices/ball_exponents.py`, `make_tables.py`; `tests/eng/test_slices.py` |
+| Result, interpretation, limitations | ENG-RES-0012 |
+
+## X-009  `C_max` of Theorem 11.56 against the non-adaptive lower bound: from which size on is two-level adaptivity certified to win?
+
+| field | value |
+|---|---|
+| Scientific purpose | Independent recomputation of the Scientific Discovery Division's table (SCI-REV-0007 §5; request R6-E1), with and without the lowered sample cap, on a finer grid around each crossover |
+| Source commit | science `d45ad56` (their numbers; definitions from `R6_REPORT.md` §7); theory `9408e33` (Theorem 11.45(b), THY-RES-0004 §3) |
+| Mathematical dependencies | Theorem 11.56 **[P]**, Theorem 11.45(b) **[V given two finite sums]**, the lowered cap **[P; unrefereed]** |
+| Execution environment | local, three seconds |
+| Configuration | the design of X-005; `u ∈ {½, 1, 2}`; windows of 49, 36 and 37 sizes around the crossovers and 5–8 sizes beyond; outer fractions 0.35 … 0.70 |
+| Outputs | `experiments/eng/twolevel/results/x009_separation.json` |
+| Validation | the 60 + 12 numbers of their two tables, reproduced to the digit given |
+| Code | `experiments/eng/twolevel/separation.py`; blocks `separation_*` of `make_tables.py` |
+| Result, interpretation, limitations | ENG-RES-0013 §3 |
+
 ## X-007  Off-lattice chain: distance entropy of profile classes, 5–14 torsions; single-flip constants against Proposition 11.74
 
 | field | value |

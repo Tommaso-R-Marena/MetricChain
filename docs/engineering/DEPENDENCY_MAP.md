@@ -64,6 +64,28 @@ of that commit).
 | "`14d_j − 15 ≤ c_j ≤ 70(d_j + 3)` in all 36 cases" | Proposition 11.74 (statement under test) | [P], no separate referee | exact single-flip constants of X-002 |
 | the distance entropy `σ(ρ)` | definition in THY-REQ-0008 item 5; the profile distance of `P_REPORT.md` Proposition 2 | [P] | enumeration of X-004, extended to 14 torsions; 13 torsions reproduce the published counts |
 
+## Exact sampling and the literal runs repeated (ENG-RES-0013 §§1, 2, 4; `src/metricchain_eng/twolevel/sampling.py`)
+
+| result | depends on | status of the dependency |
+|---|---|---|
+| X-006b: 585 000 literal runs without a failure; frequencies with `K` scaled down | Theorem 11.56 (statement under test); the exact sampler; oracle inner brackets | **[P; refereed R8; reviewed SCI-REV-0007]**; the sampler's exactness is a paper argument of ours (Poissonisation with collision thinning), tested against exact laws, **not reviewed by anyone**; one of its branches (means above `10⁹` at more than `2³¹` trials) still calls numpy |
+| that X-006 was exposed and X-006b is not | the measurement of numpy's defect (`binomial_bias.py`) | measured here; first reported by the Scientific Discovery Division (SCI-REV-0007 §4) |
+| the cost bound under an invalid inner behaviour | the abort rule before each inner call (erratum m1 of referee R8) | **[P]** |
+| the lowered cap on stored runs | THY-RES-0004 §3 | **[P; unrefereed; reviewed with one gap closed in SCI-REV-0007 §2]** |
+
+## `C_max` against the non-adaptive lower bound (ENG-RES-0013 §3; X-009)
+
+| result | depends on | status of the dependency |
+|---|---|---|
+| the separation table and its crossovers | Theorem 11.56 (`C_max`); Theorem 11.45(b) (`LB_na`); the science division's definitions (`R6_REPORT.md` §7) | **[P]**; **[V given two finite sums]**; the two implementations are independent and agree in 72 numbers |
+
+## Type classes (ENG-RES-0012; X-008)
+
+| result | depends on | status of the dependency |
+|---|---|---|
+| exact `q*_ball` on `T_k` | the definitions of THY-REQ-0010; the distance of a ball's point to its complement in the class | the distance formula is ours, **[P]**, brute-forced on five small classes |
+| comparison with the limits | the three limits quoted in THY-REQ-0010 | theirs, **[P]** (theory report §11.25, not read here) |
+
 ## Not yet connected (stated so that nobody assumes otherwise)
 
 * The mean runs of X-005 say nothing about fluctuations of the counts; X-006 addresses the

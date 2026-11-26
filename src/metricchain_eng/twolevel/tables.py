@@ -106,13 +106,13 @@ class CubeTables:
         """ln G2(r) for r = 0..m."""
         return self.lE - self.lT[self.kappa(eta)]
 
-    def r_dagger(self, eta: float, theta: float, nu0: float) -> int:
+    def r_dagger(self, eta: float, theta: float | None, nu0: float, lth: float | None = None) -> int:
         """The largest r in 0..m-1 such that for every r' <= r
 
             [N]  Gt(r') <= theta (1 - eta) nu0     and     [P]  min{ Gt(r')/c_eta, G2(r') } <= theta ;
 
-        -1 if this fails at r' = 0."""
-        lth = math.log(theta)
+        -1 if this fails at r' = 0.  ``lth`` = ln(theta) may be given instead of ``theta`` (huge theta)."""
+        lth = math.log(theta) if lth is None else lth
         lceta = math.log((1.0 - eta) / (1.0 + eta))
         okN = self.lGt <= lth + math.log((1.0 - eta) * nu0)
         okP = np.minimum(self.lGt - lceta, self.lG2(eta)) <= lth

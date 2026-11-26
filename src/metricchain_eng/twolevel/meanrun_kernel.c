@@ -18,7 +18,7 @@ enum { ST_CLOSED_POP = 0, ST_CLOSED_UNPOP = 1, ST_ABORT_LEVELS = 2, ST_ABORT_SAM
 
 typedef struct {
     int n, n_o, J, m_max, L, harper, enforce_abort, oracle; /* oracle: 0 bottom, 1 top */
-    double u, lam, b, eta, theta, lK, lnu, psi0, t0;
+    double u, lam, b, eta, lth, lK, lnu, psi0, t0;     /* lth = ln(theta) */
     /* constants needed for the claims */
     double lpi_dag, lM_bar, lMneg_cap, lcount_factor, x_out, lcnt_const; /* lcnt(x) = max(lK, lcnt_const + x) */
     double tie; /* weights within tie of a level (in the logarithm) are treated as equal to it */
@@ -84,7 +84,7 @@ int mr_run(const mr_params *p, int natoms, const double *lw, const double *lpr, 
     const int n_i = p->n - p->n_o;
     const double u = p->u, lam = p->lam, b = p->b, eta = p->eta;
     const double lK = p->lK, lnu = p->lnu;
-    const double lth = log(p->theta), l1me = log(1 - eta), l1pe = log(1 + eta);
+    const double lth = p->lth, l1me = log(1 - eta), l1pe = log(1 + eta);
     const double nln2 = n_o * LN2;
     const double ls0 = -p->psi0 - u * p->n;
     double lell = -p->psi0 + p->n * log((1 + exp(-u)) / 2);

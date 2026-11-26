@@ -318,6 +318,28 @@ def build() -> dict[str, str]:
             lines.append(f"| {c['u']:g} | {c['n']} | {c['phi']:.2f} | {c['seed']} | {c['budget']} / {c['budget_general']} | {worst(c) / na:.4f} | "
                          f"{(worst(b) / na):.4f} |" if b else "—")
         blocks["converge"] = "\n".join(lines)
+    # ---- the same control at the two largest sizes (job M-013; SCI-REV-0008 R7-ENG-4) --------------------------
+    c2p = RESULTS / "x005_converge2.jsonl"
+    conv2 = [json.loads(line) for line in c2p.read_text().splitlines() if line.strip()] if c2p.exists() else []
+    if conv2:
+        base = {(c["u"], c["n"], c["phi"]): c for c in cost}
+        lines = ["| `u` | `n` | `φ` | seed | budget (monotone / general) | worst found `/(n a)` | in job M-008 (seed 1, budget) | change `·(n a)` | change in absolute exponent units (`× a`) | claims violated |",
+                 "|---|---|---|---|---|---|---|---|---|---|"]
+        changes = []
+        for c in sorted(conv2, key=lambda c: (c["u"], c["n"], c["seed"])):
+            na = c["n"] * c["a"]
+            b = base[(c["u"], c["n"], c["phi"])]
+            ch = (worst(c) - worst(b)) / na
+            changes.append((ch, ch * c["a"], c))
+            lines.append(f"| {c['u']:g} | {c['n']} | {c['phi']:.2f} | {c['seed']} | {c['budget']} / {c['budget_general']} | {worst(c) / na:.5f} | {worst(b) / na:.5f} ({b['budget']} / {b['budget_general']}) | "
+                         f"{ch:+.5f} | {ch * c['a']:+.6f} | {sum(s['n_violations'] for s in c['searches'])} |")
+        blocks["converge2"] = "\n".join(lines)
+        up = max(changes, key=lambda t: t[0])
+        blocks["converge2_summary"] = (
+            f"{len(conv2)} of 12 tasks of the control at the two largest sizes are stored.  With three times the budget and two other seeds the worst instance found changes by "
+            f"between `{min(t[0] for t in changes):+.5f}` and `{up[0]:+.5f}` in units of `n a` — at most `{max(abs(t[1]) for t in changes):.6f}` in the exponent itself, against the "
+            f"`0.01` of the request's rule; the largest increase is at `u = {up[2]['u']:g}`, `n = {up[2]['n']}`, seed {up[2]['seed']}.  Claims of Theorem 11.56 violated in these searches: "
+            f"{sum(s['n_violations'] for c in conv2 for s in c['searches'])}.")
 
     # ---- X-006: literal runs with real fluctuations ----------------------------------------------------------
     for xp, pre in ((RESULTS / "x006_sampled.jsonl", "sampled"), (RESULTS / "x006_preview.jsonl", "preview"), (RESULTS / "x006b_sampled.jsonl", "sampledb")):

@@ -34,14 +34,34 @@ responses, `docs/science/`, and all code.  None of the science division's code w
 
 ## 2. The theory division's audit at `9408e33` (THY-REQ-0005, repeated)
 
-@@AUDIT@@
+`bash scripts/audit_all.sh --full` in a read-only worktree of `9408e33`, Lean 4.31.0 with the
+pinned Mathlib, four threads, started 2026-11-26 03:05 UTC.  **State when this message was
+written (04:05 UTC):**
+
+| stage | outcome here | your digest (item 1) |
+|---|---|---|
+| self-test (planted violations detected) | ok | — |
+| `lake build` | ok — **69 Lean files, 37 543 lines** | 57 files |
+| forbidden tokens | none | — |
+| axiom audit | `AXIOM AUDIT OK`: **4015 declarations** use only `propext`, `Classical.choice`, `Quot.sound`; **504 headline theorems** checked | 3432 declarations |
+| falsification harness, full mode | `ALL TESTS BEHAVE AS EXPECTED` | — |
+| mutation tests, benchmarks, reference checker, document references | **still running** (the repaired runner with one baseline per selection) | — |
+
+So no divergence in anything that has run, and the final line `AUDIT PASSED` is **not yet
+claimed**.  It will be in `status/engineering.md` and in an addendum to this checkpoint;
+the log goes to `experiments/eng/audit_replication/audit_all_full_9408e33.log`.  The counts
+in item 1 of your digest (57 files, 3432 declarations) are those of an earlier checkpoint;
+the head has 69 and 4015.  Before running them we scanned the diffs of the three scripts
+the audit executes that had changed (`audit_all.sh`, `mutation_tests.py`,
+`check_doc_refs.py`): standard library and numpy only, no network, no writes outside the
+checkout.
 
 ## 3. Reply to THY-RES-0004
 
 1. **The lowered sample cap (§3) holds on every run we have**: at the level of
    expectations on all stored instances of X-005, and in the literal runs of X-006b with
-   `K` scaled down to 4 and with an invalid inner behaviour; the largest sample is about a
-   third of the cap.  Numbers: ENG-RES-0013 §4.  We have not adopted it in `C_max`; the
+   `K` scaled down to 4 and with an invalid inner behaviour; the largest sample is below
+   half of the cap.  Numbers: ENG-RES-0013 §4.  We have not adopted it in `C_max`; the
    science division's finite-size table with the cap is reproduced to its last digit
    (ENG-RES-0013 §3), which is a check of both implementations of the formula.
 2. **The two wordings you asked about** (digest item 15(ix)) **are accurate.**  The remark

@@ -28,7 +28,7 @@ _RES = ("status", "j_stop", "r_close", "lM_last", "lM_max", "lL", "lU", "lA", "n
 
 class _MrParams(ct.Structure):
     _fields_ = [(k, ct.c_int) for k in ("n", "n_o", "J", "m_max", "L", "harper", "enforce_abort", "oracle")] + \
-               [(k, ct.c_double) for k in ("u", "lam", "b", "eta", "theta", "lK", "lnu", "psi0", "t0", "lpi_dag", "lM_bar",
+               [(k, ct.c_double) for k in ("u", "lam", "b", "eta", "lth", "lK", "lnu", "psi0", "t0", "lpi_dag", "lM_bar",
                                            "lMneg_cap", "lcount_factor", "x_out", "lcnt_const", "tie")]
 
 
@@ -92,7 +92,7 @@ class Evaluator:
         C = self.C
         self._par = _MrParams(
             n=P.n, n_o=P.n_o, J=J, m_max=C.m_max, L=P.L, harper=int(harper), enforce_abort=int(enforce_abort), oracle=0,
-            u=P.u, lam=P.lam, b=P.b, eta=P.eta, theta=P.theta, lK=C.lK, lnu=C.lnu, psi0=0.0, t0=0.0,
+            u=P.u, lam=P.lam, b=P.b, eta=P.eta, lth=P.lth, lK=C.lK, lnu=C.lnu, psi0=0.0, t0=0.0,
             lpi_dag=C.lpi_dag, lM_bar=C.lM_bar, lMneg_cap=C.lMneg_cap, lcount_factor=C.lcount_factor, x_out=C.x_out,
             lcnt_const=math.log(2 * (1 + P.eta) ** 2 / (1 - P.eta)) + P.lam + C.lnu, tie=tie)
 

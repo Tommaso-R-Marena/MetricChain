@@ -218,47 +218,161 @@ Algorithm 2L⁺, and sent two new requests.  Answers: ENG-MSG-0003, ENG-RES-0008
   mean run on the fibre), but the design of the middle level at each accuracy has to be
   taken from the referee's script (`experiments/reviews/R8/r8_flat3.py`, not read).
 
+## Session 3 — 2026-11-26 (UTC), 03:00 onwards
+
+### 3.1 Authorisation and limits (research owner, this session)
+
+* The owner answered the open question of session 2: the workspace's usage limit cannot be
+  changed for this programme; the credit line is to be respected as it stands (`$1,990.63`
+  left of `$2,030.00` on the billing page the owner showed), and whether this division's own
+  stop line should be lower or higher is left to this division.
+* What followed (`COMPUTE_LEDGER.md`, "Policy", rule 3): the stop line stays at `$1,500` of
+  workspace usage and now *includes* the worst case of the job about to be launched, checked
+  immediately before every launch.  Nothing was changed on the platform; the Modal CLI has
+  no command that changes a budget, and none was looked for beyond `modal billing --help`.
+
+### 3.2 Synchronisation: the theory head `9408e33` and a third division
+
+* The theory branch had moved nine checkpoints (`63efc69 → 9408e33`).  Its protocol file now
+  describes **three divisions**: a "Scientific Discovery, Translation & Independent
+  Validation Division" on `research/scientific-translation`, introduced by the research
+  owner on 2026-11-25 according to that file.  The instructions of this division name one
+  collaborator; the third was adopted as described in ENG-MSG-0004 §5 — same rules, more
+  mail.  Its branch had 46 messages, among them two reviews of engineering work
+  (SCI-REV-0007 in part, SCI-REV-0008 in full) and about thirty requests to engineering.
+* What was read and what was not: ENG-MSG-0004 §1.  The audit of `9408e33` on this machine:
+  ENG-MSG-0004 §2.
+* The theory division had answered checkpoint 3 (THY-RES-0004): the flat-instance cost
+  table is now labelled as a best case in its report, with the engineering numbers; the
+  sample cap `M̄` can be lowered to `2·max{e^λM†, M‡}` (their proof); the reduction of
+  ENG-RES-0008 §5 was checked and stands.
+
+### 3.3 What was done, in order
+
+1. **The sampler** (highest priority: a published frequency depended on it).  The science
+   division's report that numpy's binomial sampler is biased for counts drawn from `10¹⁷`
+   trials and more was reproduced, and found to start near `10¹⁵` and to affect the variance
+   before the mean (`binomial_bias.py`).  The stored runs of X-006 were shown to have drawn
+   from blocks of up to `2.7·10¹⁷` points in two of three sizes.  An exact sampler was
+   written (`sampling.py`: Poissonisation with collision thinning), tested against exact
+   laws, and all 585 cases were run again (X-006b, job M-012, $1.01): **no statistic
+   changes beyond sampling error.**
+2. Folded into the same job: an **invalid inner behaviour** (the science division's R6-E2).
+   The cost stays below `C_max` in all 78 000 runs; the abort rule fires in one
+   configuration of twelve.
+3. **The lowered cap** tested on every stored instance of X-005 and on the literal runs:
+   no sample reaches half of it.
+4. **The science division's finite-size separation table** (`C_max` against the
+   non-adaptive lower bound) recomputed from the definitions: identical in all 72 numbers;
+   on a finer grid the crossover is not monotone in `n` (X-009).
+5. **THY-REQ-0010, question 2** (X-008): exact values to `n = 10 000`; the limits are
+   approached from above with excess `≈ 0.45·ln n/n`; for `κ ≠ ½` the best centre is outside
+   the class at every size from 40 on.
+6. **The record** — five corrections, each found by the science division and verified here
+   (ENG-MSG-0004 §4): the sampler; the two-solver validation (withdrawn); "certified lower
+   bound" (10 of 25 open brackets are solver bounds); "about like `1/√n`" (the effective
+   exponent is 0.63–0.76); three numbers computed from rounded entries.
+7. Requests answered: THY-REQ-0009 (ENG-RES-0011, accepted, not started), THY-REQ-0010
+   (ENG-RES-0012), the two reviews (ENG-RES-0013), THY-RES-0004 and the synchronisation
+   (ENG-MSG-0004).
+8. Job M-013: the convergence control at the two largest sizes of X-005 that the science
+   division asked for (R7-ENG-4).  Its outcome is recorded in the ledger and in the
+   addendum to checkpoint 4, not here, if it finished after this text was written.
+
+### 3.4 Mistakes made and what they changed (kept on purpose)
+
+* **A random-number routine used outside the regime in which it had been tested**
+  (`DEAD_ENDS.md` ED-8).  The only test of the sampler had a resolution of 3–4 % where the
+  defect is below 1 %.  Found by another division.  Rule: test a sampler at the largest `n`
+  and at the means that matter, against exact moments, before publishing a frequency.
+* **A validation claim that the committed code could not regenerate** (the two-solver
+  sentence).  The rows had been written by a driver that was replaced after job M-004 was
+  stopped; the sentence survived the replacement.  Rule adopted: result rows carry the
+  commit and the job that produced them (from X-006b on), and a validation claim is
+  re-derived from the stored files when the code that produced them changes.
+* **A lower end described as "certified" that was the larger of two bounds.**  The table
+  generator took the maximum; the prose described one of the two.
+* **The digest said "about like `1/√n`" where the message it indexed did not.**  A digest
+  line is prose with numbers and gets no generated table; it is now checked against a
+  generated block (`trend_fit`) like any other sentence.
+* **Three numbers computed from rounded table entries**, although session 2 had made the
+  rule that numbers in prose come from artifacts.  The rule was followed for tables and
+  summary sentences and not for arithmetic done on them by hand.
+* In this session: a factorial table off by one (`gammaln(j)` for `ln j!`), caught at once by
+  the exact cross-check; `resolution of 12 %` typed into ED-8 before computing it (3–4 %);
+  a first draft of ENG-RES-0013 that said the exposed cells went "down to `K/64`" before
+  the exposure table existed (it is every value of `K` at one size and down to `K/16` at
+  the other); `modal run` on an app with two entry points without naming one.
+
+### 3.5 Open observations that are not yet results
+
+* The exact values of X-008 exceed the limits by `c·ln n/n` with `c` between 0.44 and 0.47 for
+  `n ≥ 1000`, as a density `q* ≈ C·n^{−1/2}e^{−nθ}` would give; whether the power is ½ is open.
+  The best centre type at `κ = 0.4` and `0.3` is near `0.455` and `0.405`: numbers the theory's
+  closed form can be held against.
+* At `u = 1`, `n = 64 000` and `128 000`, `φ = 0.5`, the optimiser gains `0.0035` and `0.0031·na` over
+  the best structured instance, against `0.0005` and `0.0004` at `n = 16 000` and `32 000`
+  (`x005_seeds.json`).  Either the structured family misses something at these sizes or
+  the reduced budgets did not converge; job M-013 was launched to tell.
+* The inequality `C_max < LB_na` is not monotone in `n` near its crossover (integer effects
+  of `R` and `⌊φn⌋`).  Any statement "from `n₀` on" for it needs a proof or a grid without
+  gaps.
+* numpy's defect depends on the bits of `n` (nothing at `2⁵⁰`, `2⁵²`; present at `10¹⁵`, `2⁵³`):
+  consistent with a cancellation in the acceptance test of its rejection sampler; not
+  confirmed in the source.
+
 ---
 
 ## Resume here
 
-State at the end of session 2: see `docs/collaboration/status/engineering.md` for the table
-of requests; the list below is the order of work.
+State at the end of session 3: see `docs/collaboration/status/engineering.md` for the table
+of requests (two other divisions now); the list below is the order of work
+(ENG-MSG-0004 §6).
 
-0. **First: the synchronisation that session 2 left unfinished.**  The theory head moved
-   to `5ed4072` (two commits after `63efc69`) while checkpoint 3 was being prepared.
-   THY-REQ-0009 and THY-REQ-0010 were read but not answered; THY-MSG-0009 was not read and
-   THY-MSG-0010 only in part; the head is not audited.  Audit it in a worktree, read both
-   messages, and answer the two requests (`ENG-RES-0011`, `-0012`) before new computations.
-   Note that THY-REQ-0009 item 4(c) (the batched schedule of Theorem 11.84) is an addition
-   to THY-REQ-0001, and that the theory division will by then have reacted to ENG-RES-0008.
-
-1. **THY-REQ-0001, what is left** (ENG-RES-0008 "Decision"): (a) **three nested levels on
-   non-flat instances** — read
-   `experiments/reviews/R8/r8_flat3.py` and `docs/reviews/R8_referee_report.md` on a worktree of
-   the theory head for the design of the middle level, then nest `Evaluator` (inner cost of
-   rung `l` = mean run of the two-level algorithm on the fibre at accuracy `x_l`); (b) the
-   extensive regime of §11.18 (`λ = 1`, `η = ½`, `η′ = 1`, `ν₁ = 1`, `θ = e^{Gn−b} − …`): `Params.theta`
-   must become a logarithm first, `θ` overflows a double at `n = 10⁵`; (c) real inner brackets
-   beyond 13 coordinates in the form of `DEAD_ENDS.md` ED-7 (small outer cube, large inner
-   cube, a few hundred runs).
-2. **THY-REQ-0003** in the revised design of ENG-RES-0003, with the remainder
-   `η(1 + ‖λ‖₁)` as confirmed in THY-MSG-0005 §3(b).
-3. **THY-REQ-0002, what is left**: covers of the generic chain at 13 and 14 torsions (class
-   tables exist; primal heuristic + `profile_cover.certified_lower_bound`), its questions
-   3(a), 3(b), questions 4 and 5, sampling for question 2.
-4. **THY-REQ-0008, items 1–4**: an optimiser over lattice walks (pivot, end moves, backbites;
-   by the site-set lemma of THY-RES-0001 the profile depends on the site set only) with a
-   recount from coordinates; walks against bridges; the plateau by set cover; bridge
-   tables for 25–27 beads (the enumerator fixes the first two bonds by symmetry, and the
-   bridge condition singles out one coordinate — read `S_REPORT.md` for the convention
-   before restricting it).
-5. **THY-REQ-0007** as fixed in ENG-RES-0010.
-6. **E-1 / THY-REQ-0004**, then **E-2**.
-7. At every session start: `git fetch origin claude/determined-ride-og1u7j`, follow
-   `docs/collaboration/UPSTREAM_SYNC.md`, read new THY-MSG/REQ/RES, update the digest and
-   status; read `COMPUTE_LEDGER.md` ("Policy") before any remote job; `modal app list` must
-   show no engineering app running.
+0. **At the start of every session:** `git fetch origin claude/determined-ride-og1u7j
+   research/scientific-translation`; follow `docs/collaboration/UPSTREAM_SYNC.md` for both;
+   read new THY-/SCI- messages addressed to engineering (the science digest
+   `SCIENCE_TO_ALL.md` has a section "Engineering division"); read `COMPUTE_LEDGER.md`
+   ("Policy") before any remote job; `modal app list` must show no engineering app
+   running.  If job M-013 is not marked completed in the ledger, its rows are in
+   `experiments/eng/twolevel/results/x005_converge2.jsonl` (the job resumes from that file)
+   and its outcome still has to be written up (table block `converge` takes them once
+   `make_tables.py` reads the file).
+1. **THY-REQ-0001, what is left** (the theory division's first wish, THY-RES-0004 §7):
+   (a) **three levels at the worst instance.**  Design: a nested mean run in which, at
+   every rung, the cost of an inner call and the position of the fibre average inside
+   the returned bracket come from a two-level mean run on the fibre.  First deliverable:
+   the sandwich "inner cost = flat instance" / "inner cost = worst instance per rung"
+   at one slope and three sizes; read `experiments/reviews/R8/r8_flat3.py` on the theory
+   branch for the design of the middle level first.  The evaluator needs a per-rung
+   position `t_l` instead of the two oracles "bottom"/"top" (Python reference first, then
+   the C kernel).  (b) **Instances that are not products**: fibres at different places of
+   their trivial brackets (per-atom `t0` in the law of the outer landscape) — the first
+   thing a hostile referee would attack (SCI-REV-0008 §4).  (c) the extensive regime of
+   §11.18 (`Params.theta` must become a logarithm first).  (d) real inner brackets
+   (`DEAD_ENDS.md` ED-7) with the batched schedule of Theorem 11.84 **and its stopping
+   rule** (THY-MSG-0013 §3).
+2. **The off-lattice chain in exact arithmetic over `ℚ[cos θ]`** (SCI-REV-0008, R7-ENG-3;
+   specification in the science branch, `docs/science/workstreams/R7_REPORT.md` §7, not
+   read yet).  Nothing off-lattice at 13 torsions or beyond before it.  Then what is left
+   of THY-REQ-0002, with both lower ends printed and the covers stored (R7-ENG-2), and a
+   certified branch and bound for the nine optima that rest on one solver (R7-ENG-5).
+3. **THY-REQ-0003** in the revised design of ENG-RES-0003, remainder `η(1 + ‖λ‖₁)`.
+4. Small accepted items: SCI-REV-0004 §6 (three proposals at the cone with a field);
+   SCI-REV-0010 R10-E1 (vertices of two weighted cubes); the design search of
+   ENG-RES-0013 §3 if the science division wants it.  None of the three messages has
+   been read beyond its request line.
+5. THY-REQ-0009 (plan in ENG-RES-0011); THY-REQ-0010 questions 1 and 3; THY-REQ-0007
+   (ENG-RES-0010); THY-REQ-0008 items 1–4 together with the science division's
+   enumeration requests (class tables of bridges, full pair-distance histograms: one
+   remote job, to be bounded in the ledger first).
+6. **E-1** in the form the science division gave it (the native kernel against
+   pseudo-Boolean proof logging), with THY-REQ-0004; then the checker of SCI-MSG-0020 §6.
+7. The science division's requests on real peptides (rotamers, an implicit-solvent
+   energy): inside the scope the research owner authorised (fixed-sequence structural
+   characterisation; no sequence design, no optimisation of function), but each needs
+   external inputs that must be reviewed before use; none has been read.  Decide per
+   request after reading.
 
 Worktree of the theory branch (read only; never end a shell command inside it):
 `git worktree add --detach ../MetricChain-theory-<sha> <sha>`, then
