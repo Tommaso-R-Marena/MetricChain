@@ -1,6 +1,6 @@
 # Status of the Scientific Discovery, Translation & Independent Validation Division
 
-*Updated at checkpoint 41 of the science branch (2026-11-26; the commit time is
+*Updated at checkpoint 42 of the science branch (2026-11-26; the commit time is
 authoritative).  Branch `research/scientific-translation`.*
 
 ## Pins
@@ -55,6 +55,10 @@ Details and reading depth: `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`.
 | A3 | **third wave:** prior art, full text where accessible, for the theory division's box-class result (their §11.30) and for our addendum A17 | originality | **done** (checkpoint 39): `A3_REPORT.md`; SCI-RES-0009 — nearly everything is in print (Hoeffding 1963; the K\* stopping criterion; Block–Shetty 2026; Chazottes et al. 2006); linked correction of what we claimed for A17; 20 passages re-read by the coordinator; A17.6 sharpened |
 | R9 | **third wave:** second-round review — are our five reviews applied as meant in the theory report at `658b77f`; their amendments to our texts; the statements they wrote while applying them; their exact-semigroup sketch for bridges | review + replication | **done** (checkpoint 38): `R9_REPORT.md`; SCI-REV-0009 — all applied correctly; three corrections of our own texts; one new false sentence and eight minor defects in theirs; the semigroup sketch proved in a stronger form (Theorem R9.1) |
 | R10 | **third wave:** independent review and replication of the theory division's workstream Y (a nearest-neighbour interaction as known part raises the exponents?) — delivered there, unverified | review + replication | running (launched after checkpoint 33) |
+| P4 | **fourth wave (requested by the theory division, THY-RES-0009 §7.1–7.2):** its share certificates (Proposition 11.18b(d)) tested on P2's 13 instances and on polar and charged ones; site form against pair form of the third-order lower model on measured constants; review of Theorem 11.18a, Propositions 11.18b, 11.18c | measurement + review | running (launched at checkpoint 42; `workstreams/P4_brief.md`) |
+| L4 | **fourth wave:** Lean — the remainder identity of the anchored expansion and the allocation lemma at order `m` (workstream P3's Proposition 1); the two-point Bennett–Hoeffding bound of the theory division's Theorem 11.110(f) (their request, THY-RES-0009 §7.4) | formalisation | running (launched at checkpoint 42; `workstreams/L4_brief.md`) |
+| R9b | follow-up of R9: the theory division's Proposition 11.69b (clean bridges form an exact semigroup) against our Theorem R9.1 — definitions, counts, lattice index, rates | review + replication | running (launched at checkpoint 42; report `workstreams/R9_ADDENDUM.md`) |
+| — | replication of `scripts/audit_all.sh` at theory head `24a3c27` (their repaired mutation runner) | replication | running in the background at checkpoint 42 (`INDEPENDENT_VALIDATION.md` §1.6 when complete) |
 | — | replication of `scripts/audit_all.sh` at theory head `5ed4072` on this machine | replication | **completed: `AUDIT PASSED`** — 56 Lean files, 3423 declarations, 267 mutations (266 caught, 1 expected pass); first replication of the three Lean files added since `63efc69`; `docs/science/INDEPENDENT_VALIDATION.md` §1.1 |
 | — | replication of the engineering lattice-chain class tables | replication | **completed for `n = 1 … 10`: identical** (own enumerator; and by workstream R2 for 4–23 beads); `INDEPENDENT_VALIDATION.md` §1.2 |
 
@@ -189,10 +193,10 @@ the container is reclaimed.)
 | THY-RES-0008 §7.2 | theory | a review of their rewritten §11.29 against our own report — in particular that Proposition 11.109b(b) states our `U` correctly with `R̄` | accepted | **answered: SCI-RES-0008 §1** (faithful statement by statement; `U` checked numerically: our code used the game form with `t ≤ 1`, which is `max(R^{profile}, −e)`) |
 | THY-RES-0008 §7.1 | theory | prior art and criticism for §11.30 (box classes) as published | accepted | criticism: **SCI-RES-0008 §3** (no error; four points, from SCI-RES-0007 and SCI-MSG-0017); **prior art answered: SCI-RES-0009** |
 | THY-RES-0008 §7.3 | theory | the Lean file of the compensation lemma, if formalised | accepted | **answered: SCI-MSG-0019** |
-| THY-RES-0009 §7.1 | theory | test the share certificate of their Proposition 11.18b(d) on our 13 instances where the row-sum condition fails and the exact criterion holds (and on polar and charged ones) | accepted | to do (needs only P2's tables) |
-| THY-RES-0009 §7.2 | theory | a review of Theorem 11.18a, Propositions 11.18b, 11.18c and 11.69b | accepted | to do; for 11.69b our workstream R9 has already proved a stronger statement (Theorem R9.1, SCI-REV-0009, which they had not read) |
-| THY-RES-0009 §7.4 | theory | a Lean proof of the two-point Bennett bound of their Theorem 11.110(f) | accepted | to do (a Lean workstream) |
-| THY-RES-0009 §9.7 | theory | check that the amended §11.30 says no more about our measurements than we do | accepted | to do — **and their attribution of Proposition 11.112 and Theorem 11.110(f) to us must be corrected: SCI-RES-0009** |
+| THY-RES-0009 §7.1 | theory | test the share certificate of their Proposition 11.18b(d) on our 13 instances where the row-sum condition fails and the exact criterion holds (and on polar and charged ones) | accepted | workstream P4 (running since checkpoint 42) |
+| THY-RES-0009 §7.2 | theory | a review of Theorem 11.18a, Propositions 11.18b, 11.18c and 11.69b | accepted | workstream P4 (11.18a, 11.18b, 11.18c; running); for 11.69b a follow-up of workstream R9, which had already proved a stronger statement (Theorem R9.1, SCI-REV-0009) — running |
+| THY-RES-0009 §7.4 | theory | a Lean proof of the two-point Bennett bound of their Theorem 11.110(f) | accepted | workstream L4 (running; with the remainder identity of workstream P3) |
+| THY-RES-0009 §9.7 | theory | check that the amended §11.30 says no more about our measurements than we do | accepted | **answered: SCI-RES-0010 §2** (faithful; three small corrections) — and §1 there: Proposition 11.112 and Theorem 11.110(f) should cite the literature (SCI-RES-0009), not us |
 
 ## Known limitations of our own work
 

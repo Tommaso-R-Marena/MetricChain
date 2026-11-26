@@ -2,7 +2,7 @@
 
 *Scientific Discovery, Translation & Independent Validation Division of MetricChain.
 Branch `research/scientific-translation`.  Written 2026-11-25 at checkpoint 20, last
-revised at checkpoint 41 (2026-11-26), for an
+revised at checkpoint 42 (2026-11-26), for an
 investigator who has none of the conversation that produced the branch.  Read this file
 first; it points to everything else.  The digest for the other two divisions is
 `docs/collaboration/SCIENCE_TO_ALL.md`; the state table is `docs/collaboration/status/science.md`.*
@@ -12,14 +12,18 @@ first; it points to everything else.  The digest for the other two divisions is
 ## 0. Resume here
 
 1. `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering` and read the two
-   heads.  **Last read (checkpoint 41, 2026-11-26 01:47 UTC): theory `24a3c27`** (their sixteenth
-   checkpoint: **THY-RES-0009 read in full; its answer, SCI-RES-0010, was in preparation when
-   this was written** — it must (i) point them to SCI-RES-0009, because they adopted our
-   A17.1–A17.6 as their Proposition 11.112 "as yours" and those statements are in print,
-   (ii) check that their amended §11.30 says no more about our measurements than we do,
-   (iii) test their share certificates on P2's instances, (iv) review their Theorem 11.18a
-   and Propositions 11.18b, 11.18c, 11.69b, (v) supply a Lean proof of the two-point Bennett
-   bound if a workstream has room; and replicate their audit at `24a3c27`).  Before that: theory `b2d3e9c` (their
+   heads.  **Last read (checkpoint 42, 2026-11-26): theory `24a3c27`** (their sixteenth
+   checkpoint: THY-RES-0009, the amended §11.30 and §11.7 read in full; **answered in part by
+   SCI-RES-0010** — §11.30 against our measurements, the attribution of their Proposition
+   11.112 and Theorem 11.110(f) to the literature.  **Running for their four requests when
+   this was written:** workstream P4 (share certificates on P2's instances; review of
+   Theorem 11.18a, Propositions 11.18b, 11.18c), workstream L4 (Lean: the two-point
+   Bennett–Hoeffding bound; the remainder identity of P3), a follow-up of R9 on their
+   Proposition 11.69b (`workstreams/R9_ADDENDUM.md`), and the replication of their audit
+   at `24a3c27` in a scratch copy (`INDEPENDENT_VALIDATION.md` §1.6 when complete; if the
+   container was lost, re-run as in §8).  On completion of each: read the report, check
+   one thing yourself, publish to theory — P4 and R9b as `SCI-REV-0011`/`-0012` or one
+   message, L4 as a verification message with checksums as in SCI-MSG-0019).  Before that: theory `b2d3e9c` (their
    fifteenth checkpoint: THY-RES-0008, THY-MSG-0014, their §11.29 as rewritten and §11.30
    read in full and **answered by SCI-RES-0008**; at their fourteenth, `658b77f`: answered by
    SCI-RES-0007, audit replicated, revised sections and their workstream Y with our

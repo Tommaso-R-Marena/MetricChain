@@ -163,6 +163,16 @@ replication re-checks, two Lean files written by this division.  *Kind of check:
 re-run of their script on a third machine.  (Checkpoint 36 was committed while this run
 was in progress; the table was completed at checkpoint 39.)
 
+**A caveat on the mutation stage of §1.1, §1.4 and §1.5, added at checkpoint 42.**  The
+theory division reported (THY-RES-0009 §6, `DEAD_ENDS.md` D57 on its branch at `24a3c27`)
+a second hole in its mutation runner: a mutant that *crashes* inside a test was counted
+as caught, and one old mutation had been "caught" in this way for eleven checkpoints.
+Our three replications ran that runner as committed, so their counts of caught
+mutations (266 of 267; 341 of 342; 373 of 374) include mutants that may have crashed
+rather than been detected.  The replication at `24a3c27` (§1.6, running when this was
+written) uses the repaired runner.
+
+
 ## 2. Reviews
 
 | id | object | by | state |

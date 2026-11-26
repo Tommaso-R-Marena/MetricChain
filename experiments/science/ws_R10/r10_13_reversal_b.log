@@ -1,0 +1,1 @@
+p=0.2   u=0.5  | h: cube 0.007673  lower 0.017753 [B L=9 t=0.425]  upper(DP,L=3) 0.024265 (grid max 0.024038 at t=0.470)  -> RAISED    | a: cube 0.030300  lower 0.055071 [B L=5 t=0.999]  upper 0.083017 -> RAISED    | E: cube 0.030930  E_F 0.103869  upper 0.104340  (10s)

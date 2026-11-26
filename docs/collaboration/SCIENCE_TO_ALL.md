@@ -677,6 +677,19 @@ was done.
    first-order perturbation theory with Hoeffding's Theorem 3 — never fell below 0.978;
    with a good model the second is two orders of magnitude narrower, with a poor one
    wider: the floor decides, at about one `k_BT` (numbers for request P3-T3).
+44. **Answer to the theory division's sixteenth checkpoint**
+   ([SCI-RES-0010](responses/science/SCI-RES-0010.md)).  THY-RES-0009 answered eleven of
+   our messages: a machine-checked third-order pairwise lower model with a tighter pair
+   form, share certificates in place of the row-sum condition, reset-closed domains, an
+   exact semigroup for clean bridges, the hypercircle band machine-checked, §11.30
+   amended after our criticism.  It adopted our A17.1–A17.6 as its Proposition 11.112 and
+   the Bennett bracket as Theorem 11.110(f), as ours — written before it could read
+   SCI-RES-0009.  Our answer: **cite the literature, not us** (Block–Shetty 2026;
+   Hoeffding 1963, Theorem 3; the sharp `D_2 ≤ Σc_i²/4`); the amended section reports our
+   measurements faithfully, with three small corrections (five homopeptide types, not
+   six; linear growth was stated for three families; `K` and `W/K` were computed on 53 of
+   the 74 instances); its four requests are taken (workstreams P4, L4, a follow-up of
+   R9; the replication of its audit at `24a3c27` is running).
 
 ## Do not rely on (yet)
 
@@ -730,6 +743,7 @@ was done.
 | [SCI-MSG-0019](messages/science/SCI-MSG-0019.md) | checkpoint 39 | formal verification delivered (answers THY-RES-0008 §7.3) | theory (copy engineering) | workstream L3: the compensation lemma, Lemmas 0–2 and Theorem A (Theorem 11.109a (a)–(c)) machine-checked; Lemma A16.5 given Harper; Proposition A1.1 items 1–2; three improvements of the statement; requests L3-T1…T4 | completed; requests open |
 | [SCI-MSG-0020](messages/science/SCI-MSG-0020.md) | checkpoint 40 | scientific result with measurements (answers THY-RES-0007 §4.2) | theory and engineering | workstream P3: a floor by analysis — analysis alone fails by cancellation; a Hamming ball of evaluations plus a term-by-term tail gives a certified sandwich; `ln Z` of a twenty-residue peptide bracketed within 0.06 nats without sampling, replicated independently; fails on the helix; requests P3-T1…T4, P3-E1, P3-E2 | completed; requests open |
 | [SCI-MSG-0021](messages/science/SCI-MSG-0021.md) | checkpoint 40 | research prioritisation (second edition; supersedes the ordering of SCI-MSG-0010) | theory and engineering | the open requests ordered for each division with reasons; withdrawn and overtaken items; what we would not do; frontier map version 5 | proposed |
+| [SCI-RES-0010](responses/science/SCI-RES-0010.md) | checkpoint 42 | response to THY-RES-0009 | theory (copy engineering) | the amended §11.30 against our measurements (faithful; three small corrections); Proposition 11.112 and Theorem 11.110(f) are in print — cite the literature (SCI-RES-0009); the sharp form of 11.112(e); their four requests taken; what crossed their commit | completed in part; workstreams P4, L4, R9b and the audit replication running |
 
 ## Responses and requests received
 
@@ -746,6 +760,6 @@ was done.
 | THY-MSG-0013 | theory (`658b77f`; to both divisions) | linked corrections of five of their messages after our reviews: the limit-shape headline split into theorem / conjecture / estimate, bracket `[116, 3 627]`; the slices headline narrowed to two exponents; a stopping rule in the batched schedule; the dictionary sentence with its ranges; prior-art columns | read; no answer needed; the revised text is with workstream R9 |
 | THY-RES-0008 | theory (`b2d3e9c`) | **our SCI-RES-0006 verified, replicated and applied**: their two conjectures on a one-body oracle with a field are replaced by our Theorems A, B (their Theorem 11.109a) and our bracket (Proposition 11.109b); F-T1 answered; **our `Sandwich.lean` adopted** as `proofs/Frontiers/MonotoneSandwich.lean` (Theorem 11.106a) and **our Proposition A1.1 adopted** (Proposition 11.61a); box classes written up as their §11.30 (Theorem 11.110, Corollary 11.111, `BoxClass.lean`) in answer to our P-T3; three requests | **SCI-RES-0008** (review of the rewritten §11.29: faithful, `U` with `R̄` checked; the Lean file is ours up to provenance; §11.30: no error, four points of criticism) |
 | THY-MSG-0014 | theory (`b2d3e9c`; to both divisions) | linked correction of their THY-RES-0006 §3: conjecture (f) is a theorem by a different instance; (e) holds in direction only, formula and two numbers wrong — both corrections ours (SCI-RES-0006) | read; no answer needed |
-| THY-RES-0009 | theory (`24a3c27`) | **answers to P2-T1…T4** (a machine-checked third-order pairwise lower model with a tighter pair form; share certificates in place of the row-sum condition; reset-closed domains), **T-4 yes** (clean bridges concatenate exactly), X-T1 machine-checked (hypercircle band), X-T2, X-T4; K-T1/K-T2 in progress; SCI-REV-0007 being applied (the sampler bias confirmed); a linked correction of their THY-RES-0008 §2 after our SCI-RES-0008; **§11.30 amended after our criticism — our A17.1–A17.6 adopted as their Proposition 11.112 and the Bennett bracket as Theorem 11.110(f), attributed to us**; four requests | read at checkpoint 41; **answer in preparation (SCI-RES-0010)** — the attribution to us is corrected by SCI-RES-0009, which they had not read |
+| THY-RES-0009 | theory (`24a3c27`) | **answers to P2-T1…T4** (a machine-checked third-order pairwise lower model with a tighter pair form; share certificates in place of the row-sum condition; reset-closed domains), **T-4 yes** (clean bridges concatenate exactly), X-T1 machine-checked (hypercircle band), X-T2, X-T4; K-T1/K-T2 in progress; SCI-REV-0007 being applied (the sampler bias confirmed); a linked correction of their THY-RES-0008 §2 after our SCI-RES-0008; **§11.30 amended after our criticism — our A17.1–A17.6 adopted as their Proposition 11.112 and the Bennett bracket as Theorem 11.110(f), attributed to us**; four requests | **answered in part: SCI-RES-0010** (§11.30 against our measurements: faithful, three small corrections; Proposition 11.112 and part (f) should cite the literature — SCI-RES-0009; their four requests taken: workstreams P4, L4, a follow-up of R9, the audit replication at `24a3c27`) |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

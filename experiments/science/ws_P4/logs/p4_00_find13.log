@@ -1,0 +1,23 @@
+GB              : analyses with >= 2 sites  184; star exact  110; row-sum holds   97; both   97; exact & row-sum fails  13; row-sum holds & not exact 0
+coul+GB         : analyses with >= 2 sites  180; star exact  145; row-sum holds  132; both  132; exact & row-sum fails  13; row-sum holds & not exact 0
+ff03-ff14SB     : analyses with >= 2 sites  184; star exact  156; row-sum holds  119; both  113; exact & row-sum fails  43; row-sum holds & not exact 6
+ff15ipq-ff14SB  : analyses with >= 2 sites  180; star exact  155; row-sum holds  145; both  144; exact & row-sum fails  11; row-sum holds & not exact 1
+ff99SB-ff14SB   : analyses with >= 2 sites  180; star exact  180; row-sum holds  180; both  180; exact & row-sum fails   0; row-sum holds & not exact 0
+
+The instances of g_GB with the star exact and P2's plain row-sum condition failing:
+tag                          tau   shape (X′)                                   size  half rowsum max min excit.  P2 pairwise margin
+fb_F2_P2_R3_t0.60            0.70  [2, 2]                                          4           0.0699     0.0673             -0.0381
+fb_F3_P2_R3_t0.60            0.70  [2, 2, 2]                                       8           0.1878     0.0079             -0.1207
+fb_F4_E_R3_t0.60             0.60  [4, 3, 3, 4]                                  144           0.4925     0.0430             -0.3378
+fb_F4_H_R3_t0.60             0.60  [5, 5, 4, 3]                                  300           0.6067     0.3784             -0.5721
+fb_F4_P2_R3_t0.60            0.70  [1, 2, 2, 2]                                    8           0.1952     0.0379             -0.0442
+fb_F5_E_R3_t0.60             0.60  [4, 3, 1, 4, 4]                               192           0.3853     0.0328             -0.1732
+fb_F5_H_R3_t0.60             0.60  [5, 5, 4, 3, 2]                               600           0.7335     0.4436             -0.7350
+fb_F6_E_R3_t0.60             0.60  [4, 3, 1, 2, 4, 4]                            384           0.5550     0.0412             -0.3520
+fb_F7_E_R3_t0.60             0.60  [4, 3, 1, 2, 2, 4, 4]                         768           0.5587     0.0445             -0.3439
+fb_L14_H_R3_t0.60            0.60  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]    16384           1.0390     0.5266              0.2098
+fb_L16_H_R3_t0.60            0.60  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]    65536           1.1549     0.5209              0.1842
+fb_L5_H_R3_t0.60             0.60  [2, 2, 2, 2, 2]                                32           0.2195     0.0007             -0.0403
+fb_LKSEc2_H_R3_t0.60         0.60  [2, 31]                                        62           0.5538     0.4250             -0.0936
+
+wrote out/p4_00_find13.json;  DONE p4_00_find13

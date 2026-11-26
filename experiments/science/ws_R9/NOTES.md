@@ -227,3 +227,11 @@ had estimated without looking, about an hour too late; they are replaced by step
 * `r9_extremal.c` / `r9_extremal.py`: the first 21-bead bridge with A = (1,6,10;1) and the first 14-bead bridge with
   B = (0,3,4) from the enumeration; their real concatenation (38 beads), counted by the O(n²) definition, has the
   error vector (1, 9, 14, 1), norm 60: the constants of Lemma 11.68 are attained.
+
+## Follow-up (coordinator's message after the first hand-back): review of the theory division's own statement
+
+EXPORT2 = `/tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_24a3c27` (theory tree at `24a3c27`, read-only).
+New files of this follow-up are named `r9b_*`; the deliverable is `docs/science/workstreams/R9_ADDENDUM.md`.
+
+### b-step 1 — start (time read from `date -u` in the command that wrote this entry)
+Thu Nov 26 01:53:38 UTC 2026

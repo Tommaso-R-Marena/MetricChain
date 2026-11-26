@@ -29,3 +29,23 @@ p     u     | h_cube    a_cube    E_cube    | h >= (Prop. H; t, c)             h
 0.01  0.25  | 0.001944  0.007752  0.007792  | 0.007826 (0.306, 1.547) x4.025   0.008631 (25, 0.291) x4.439 | 0.028472 x14.644 | RAISED     | 14.798    17.670   (95s)
 0.01  0.5   | 0.007673  0.030300  0.030930  | 0.013381 (0.272, 1.225) x1.744   0.014704 (13, 0.263) x1.916 | 0.058002 x7.559 | RAISED     | 7.763    9.667   (96s)
 0.01  1     | 0.029139  0.110944  0.120115  | 0.023164 (0.243, 0.915) x0.795   0.018455 ( 2, 0.366) x0.633 | 0.112374 x3.856 | undecided  | 4.080    5.230   (97s)
+0.01  2     | 0.097281  0.327813  0.433781  | 0.041889 (0.225, 0.590) x0.431   (operator check failed)       | 0.202756 x2.084 | undecided  | 2.282    2.953   (103s)
+0.01  3     | 0.172831  0.502282  0.855440  | 0.061457 (0.225, 0.376) x0.356   (operator check failed)       | 0.272052 x1.574 | undecided  | 1.742    2.238   (111s)
+0.01  4     | 0.239250  0.603052  1.325003  | 0.082451 (0.231, 0.204) x0.345   (operator check failed)       | 0.325027 x1.359 | undecided  | 1.502    1.908   (121s)
+
+verdict matrix for h (rows p, columns u = [0.05, 0.1, 0.25, 0.5, 1.0, 2.0, 3.0, 4.0]):
+  p=0.3   RAISED     RAISED     RAISED     RAISED     RAISED     RAISED     undecided  undecided
+  p=0.05  RAISED     RAISED     RAISED     RAISED     RAISED     undecided  undecided  undecided
+  p=0.02  RAISED     RAISED     RAISED     RAISED     RAISED     undecided  undecided  undecided
+  p=0.01  RAISED     RAISED     RAISED     RAISED     undecided  undecided  undecided  undecided
+ratio (best lower bound)/cube for h:
+  p=0.3   2.260      2.210      2.028      1.751      1.353      1.007      0.925      0.928    
+  p=0.05  14.368     10.887     5.501      2.717      1.288      0.697      0.542      0.534    
+  p=0.02  23.098     13.466     5.129      2.266      1.029      0.508      0.421      0.410    
+  p=0.01  25.386     12.786     4.439      1.916      0.795      0.431      0.356      0.345    
+ratio (upper bound DP L=1)/cube for h:
+  p=0.3   2.331      2.326      2.289      2.174      1.882      1.461      1.258      1.159    
+  p=0.05  18.014     15.909     10.482     6.334      3.511      1.980      1.518      1.320    
+  p=0.02  37.878     26.736     13.429     7.216      3.759      2.054      1.557      1.346    
+  p=0.01  53.867     32.638     14.644     7.559      3.856      2.084      1.574      1.359    
+time 121s

@@ -928,3 +928,25 @@ profile and the gauche count, and its support function is the ground-state energ
   that it has the 45 instances.  A second version left a warning on standard error;
   the committed log is from a third run that reached its last line with an empty error
   stream.
+
+### Cycle 36 — the theory division's sixteenth checkpoint (checkpoint 42)
+
+* Their commit `24a3c27` (01:44 UTC) crossed our checkpoints 38–41: they had read us at
+  `1b0c276`.  THY-RES-0009 answers eleven of our messages — every theory request of the
+  rotamer measurement (a machine-checked third-order pairwise lower model with a pair
+  form that is tighter than ours; share certificates; reset-closed domains), the exact
+  semigroup for bridges (their own version; ours, stronger, was already published and
+  unread), the hypercircle band, the amended §11.30 — and corrects one sentence of
+  their own after our question.
+* **The crossing produced exactly the situation SCI-RES-0009 was written to prevent:**
+  they adopted our A17 statements as "the division's" in their report, eighteen minutes
+  after we had published that those statements are in print.  Their own prior-art
+  paragraph was careful ("no novelty is claimed for any of them by either division"),
+  so the damage is an attribution, not a claim.  SCI-RES-0010 asks for the citation.
+* Their request to check §11.30 against our measurements: faithful, with three small
+  over-readings (six side-chain types for five; "linear in every family"; `K` "in all
+  74 instances" for 53).
+* Three bounded workstreams were started for their requests (P4: share certificates on
+  our instances and a review of three statements; L4: Lean for the two-point bound and
+  for our remainder identity; a follow-up of R9 on their bridge proposition), and the
+  replication of their audit at the new head.
