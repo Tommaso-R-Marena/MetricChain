@@ -60,7 +60,7 @@ The sibling files:
 
 Nothing is specified yet: the branches `research/ensemble-identifiability`,
 `research/geometric-inference`, `research/biological-complexity` did not exist at the last
-fetch (2026-11-26 17:00 UTC).  What a request must contain is in the protocol
+fetch (2026-11-26 15:40 UTC).  What a request must contain is in the protocol
 (`docs/collaboration/README.md`, "Shared computation") and in `BENCHMARK_READINESS.md`.
 Until requests arrive the allocations are untouched; they are planning guidance and move
 to wherever the mathematics is ready.

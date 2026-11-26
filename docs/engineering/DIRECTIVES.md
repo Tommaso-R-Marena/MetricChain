@@ -58,7 +58,7 @@ Relayed, with its complete text, in **ENG-MSG-0006** (appendix).  In short:
 7. All standards of rigour, review, originality assessment and reproducibility stay; "Do
    not weaken mathematical guarantees to obtain greater apparent generality."
 
-## D-3 — Supplementary operational directive to this division (2026-11-26, received about 15:40 UTC)
+## D-3 — Supplementary operational directive to this division (2026-11-26, received about 15:20 UTC)
 
 Addressed to this division only.  Its operative content, with the owner's words where
 the wording matters:
@@ -110,7 +110,7 @@ the wording matters:
    technical failure; a genuine authorisation or safety boundary.  Not: a published
    checkpoint, an answered request, a finished experiment, a dead end, an empty queue.
 
-## D-4 — Expansion to six divisions and cross-division collaboration (2026-11-26, received about 16:40 UTC)
+## D-4 — Expansion to six divisions and cross-division collaboration (2026-11-26, received about 15:35 UTC)
 
 Addressed to all divisions.  Operative content:
 
@@ -155,7 +155,7 @@ Addressed to all divisions.  Operative content:
 7. Continuous loop, the new branches included in synchronisation; consolidation directive
    expected at about $2,000 of aggregate Claude credits remaining; hard stop unchanged.
 
-## D-5 — Supplementary Ubuntu directive: large-scale mathematical validation and Modal benchmarking (2026-11-26, received about 16:40 UTC)
+## D-5 — Supplementary Ubuntu directive: large-scale mathematical validation and Modal benchmarking (2026-11-26, received about 15:35 UTC)
 
 Addressed to this division.  Operative content:
 

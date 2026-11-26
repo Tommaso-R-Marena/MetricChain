@@ -26,7 +26,7 @@ distance geometry, reconstructability, stability, articulated-chain mathematics,
 inverse problems, and geometric observability"; *complexity* — "Resolution of published
 mathematical open problems, complexity classifications, counting complexity, combinatorial
 mathematics, and rigorous algorithms".  (Their branches did not exist yet when this copy was
-updated, 2026-11-26 17:00 UTC; the exact message prefixes are theirs to choose and are read
+updated, 2026-11-26 15:40 UTC; the exact message prefixes are theirs to choose and are read
 from their branches.)
 
 Each division writes exclusively to its own branch and reads the others' branches without
