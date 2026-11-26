@@ -106,30 +106,47 @@ mean-run model: at the flat instance, and on the worst outer landscape a search 
 (differential evolution over monotone and over general radial landscapes, as in X-005)
 with flat fibres, with cone fibres and the base brackets' own answers, and with cone
 fibres and every base bracket at the bottom or at the top of what it promised.  Readings
-as in ENG-RES-0014: **(B)** the algorithm as built — the larger of flat and cone fibres with
-own answers; **(A)** also the assumed placements.  Every searched number is the cost of one
-instance: a lower bound on the worst case of its design.
+as in ENG-RES-0014: **(B)** the algorithm as built — the largest over flat and cone fibres
+with the base brackets' own answers; **(A)** also the assumed placements.  Every searched
+number is the cost of one instance: a lower bound on the worst case of its design.
+
+*The design with the least certified bound on the grid of ten fractions* (the finer grid
+of §2 has slightly lower bounds); for it, cone fibres of three more slopes were run:
 
 <!-- TABLE:x011_runs -->
 <!-- /TABLE:x011_runs -->
 
-"Selected design": the fraction with the least certified bound on the grid of ten (the
-finer grid of §2 has slightly lower bounds).  "Least worst instance found": minimised over
-the ten fractions, which is how ENG-RES-0014 reported the flat-tuned design (last three
-columns, from its artifacts).  Four levels have no flat-tuned counterpart.
+Among the fibres tried, the worst for these designs is not the cone of full slope but
+the **gentle cone of slope `¼u`**; at `n = 16 000` it reaches exactly what reading (A) gives —
+there the "assumed placement" of ENG-RES-0014 is the algorithm's own answer on a real
+instance.
+
+*Minimised over the fractions*, which is how ENG-RES-0014 reported the flat-tuned design
+(right-hand columns, from its artifacts; fibres flat or cones of full slope on both
+sides):
+
+<!-- TABLE:x011_runs_min -->
+<!-- /TABLE:x011_runs_min -->
 
 <!-- TABLE:x011_h4 -->
 <!-- /TABLE:x011_h4 -->
 
 So the answer to "does tuning against the worst case improve on tuning at the flat
-instance" is: **yes on every non-flat instance we built, by `0.07`–`0.11` in these units for
-three levels, and no at the flat instance itself, by `0.03`–`0.09`** — and at `n = 16 000` four
+instance" is: **yes on every non-flat instance we built — for three levels by `0.06`–`0.11` in
+these units — and no at the flat instance itself, by `0.03`–`0.09`**; and at `n = 16 000` four
 levels chosen by certified cost are below the flat-tuned three levels even there (§5).
 
 Consistency and tightness:
 
 <!-- TABLE:x011_consistency -->
 <!-- /TABLE:x011_consistency -->
+
+<!-- TABLE:x011_tightness -->
+<!-- /TABLE:x011_tightness -->
+
+For two levels the certified bound is nearly attained from `n = 4000` on: the worst
+instance found is within `0.033` of it there, `0.023` at `8000` and `0.006` at `64 000` (`0.09` at
+`n = 1000`).  For three levels `0.05` and `0.013` remain at `n = 4000` and `16 000`.
 
 The flat instance is not the best case of these designs:
 
@@ -138,16 +155,10 @@ The flat instance is not the best case of these designs:
 
 ENG-RES-0014 §3 said "the flat instance understates the three-level cost by a factor
 `1.37`–`1.42` in the exponent that does not decay with `n`".  That sentence is true of the
-design it was computed for and should not be read as a property of three levels: for the
-designs of this message the factor between the worst instance found and the flat
-instance is `1.02`–`1.10` at `n = 4000` and `16 000` (last column of the next table).
-
-<!-- TABLE:x011_tightness -->
-<!-- /TABLE:x011_tightness -->
-
-For two levels the certified bound is nearly attained from `n = 4000` on: the worst
-instance found is within `0.033` of it there, `0.023` at `8000` and `0.006` at `64 000` (`0.09` at
-`n = 1000`).  For three levels `0.05` and `0.013` remain at `n = 4000` and `16 000`.
+design it was computed for and should not be read as a property of three levels: for
+the designs of this message the factor between the worst instance found and the flat
+instance is `1.05`–`1.10` for three levels at `n = 4000` and `16 000` (last column of the table
+above).
 
 ## 4. Why: the anatomy of two runs **[N]**
 
