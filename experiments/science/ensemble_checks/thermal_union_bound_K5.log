@@ -1,0 +1,25 @@
+=== PART B: K5 on H, tau 0.7: 5 sites, states per site [14, 14, 12, 7, 7], 115248 states (all evaluated), anchor [10, 10, 8, 3, 3], beta = 1.6774 per kcal/mol [24s]
+(0) exact ln Z - (-beta E(x0)) = 1.078424; population of the anchor conformation 0.3401; mean number of sites off the anchor 0.9233; the rest g = beta (E - first-order interpolant): range [-1.69, 25.83] kT, Gibbs mean +0.013, Gibbs mean of |g| 0.020
+=== symmetric envelope: single-site constraints violated at 0 of 20000 random pairs (must be 0; control, the same pairs against half the envelope: 1137, must be positive); triangle inequality violated by at most 0.0e+00 (must be <= 0)
+--- symmetric envelope, centre [10, 10, 8, 3, 3]: constants delta_i(s, a_i) (kT): per site max 16.5, 12.9, 11.7, 8.1, 14.8; median over s != a_i 3.2, 6.8, 1.4, 1.2, 7.9; largest delta_i(s, t) over all pairs 17.9
+    sigma_i = polarised member's population of a_i: 0.9488, 0.9900, 0.9564, 0.9592, 0.9580; p_i = true population: 0.7014, 0.7792, 0.7125, 0.9441, 0.9395; (a) p_i <= sigma_i: True
+    tau_i = 1 - p_i / sigma_i: 0.2608, 0.2129, 0.2550, 0.0158, 0.0194; **sum tau = 0.7639**; the binary form sum (sigma_i - p_i) = 0.7358; **TV(mu, mu*_a) = 0.5356** (exact); (b) holds: True; the bound is 1.43 times the truth
+    hard limit (union bound): 1 - mu(a) = 0.6599 <= sum_i mu(x_i != a_i) = 0.9233
+    as a falsification test of the class b*d (the truth needs b = 1): one-site ratio test certifies b >= **0.0824** (site 2, states 8 -> 9); the caps of (a), any centre: b >= 0.0710; at this centre: a cap fails up to b = 0.0100, and (b) with the total variation as the extra datum certifies b >= **0.0150** (grid of 200)
+    symmetric: (b) at 232 centres (the 32 combinations of the two most populated states of each site, 200 random), grid of 40: the largest b at which (b) is violated with every cap of that centre satisfied: **0.000**; the largest b at which a cap of the centre fails: 0.050; at b = 1 the least ratio (sum tau) / TV over these centres: 1.43
+    the anchor is also the centre with the least sum tau
+    at half the envelope (the truth is NOT a member of that class; a finding, not a control): (a) notices it at 0 of 5 sites of this centre; (b): TV - sum tau = -0.2231 (negative = not noticed)
+=== one-sided envelope: single-site constraints violated at 0 of 20000 random pairs (must be 0; control, the same pairs against half the envelope: 2140, must be positive); triangle inequality violated by at most 0.0e+00 (must be <= 0)
+--- one-sided envelope, centre [10, 10, 8, 3, 3]: constants delta_i(s, a_i) (kT): per site max 16.5, 12.9, 11.7, 8.1, 14.8; median over s != a_i 3.2, 6.8, 1.4, 1.2, 7.9; largest delta_i(s, t) over all pairs 17.9
+    sigma_i = polarised member's population of a_i: 0.8319, 0.9900, 0.9564, 0.9572, 0.9521; p_i = true population: 0.7014, 0.7792, 0.7125, 0.9441, 0.9395; (a) p_i <= sigma_i: True
+    tau_i = 1 - p_i / sigma_i: 0.1568, 0.2129, 0.2550, 0.0137, 0.0132; **sum tau = 0.6517**; the binary form sum (sigma_i - p_i) = 0.6108; **TV(mu, mu*_a) = 0.4275** (exact); (b) holds: True; the bound is 1.52 times the truth
+    hard limit (union bound): 1 - mu(a) = 0.6599 <= sum_i mu(x_i != a_i) = 0.9233
+    as a falsification test of the class b*d (the truth needs b = 1): one-site ratio test certifies b >= **0.3861** (site 4, states 3 -> 1); the caps of (a), any centre: b >= 0.3843; at this centre: a cap fails up to b = 0.0250, and (b) with the total variation as the extra datum certifies b >= **0.0000** (grid of 200)
+    one-sided: (b) at 232 centres (the 32 combinations of the two most populated states of each site, 200 random), grid of 40: the largest b at which (b) is violated with every cap of that centre satisfied: **0.000**; the largest b at which a cap of the centre fails: 0.375; at b = 1 the least ratio (sum tau) / TV over these centres: 1.52
+--- one-sided (centre with the least sum tau) envelope, centre [10, 10, 1, 3, 3]: constants delta_i(s, a_i) (kT): per site max 16.5, 12.9, 6.8, 8.1, 14.8; median over s != a_i 3.2, 6.8, 0.2, 1.2, 7.9; largest delta_i(s, t) over all pairs 17.9
+    sigma_i = polarised member's population of a_i: 0.8319, 0.9900, 0.2853, 0.9572, 0.9521; p_i = true population: 0.7014, 0.7792, 0.2413, 0.9441, 0.9395; (a) p_i <= sigma_i: True
+    tau_i = 1 - p_i / sigma_i: 0.1568, 0.2129, 0.1545, 0.0137, 0.0132; **sum tau = 0.5511**; the binary form sum (sigma_i - p_i) = 0.4110; **TV(mu, mu*_a) = 0.2867** (exact); (b) holds: True; the bound is 1.92 times the truth
+    hard limit (union bound): 1 - mu(a) = 0.8799 <= sum_i mu(x_i != a_i) = 1.3945
+    as a falsification test of the class b*d (the truth needs b = 1): one-site ratio test certifies b >= **0.3861** (site 4, states 3 -> 1); the caps of (a), any centre: b >= 0.3843; at this centre: a cap fails up to b = 0.0250, and (b) with the total variation as the extra datum certifies b >= **0.0000** (grid of 200)
+    at half the envelope (the truth is NOT a member of that class; a finding, not a control): (a) notices it at 0 of 5 sites of this centre; (b): TV - sum tau = -0.1648 (negative = not noticed)
+ALL DONE 41 s

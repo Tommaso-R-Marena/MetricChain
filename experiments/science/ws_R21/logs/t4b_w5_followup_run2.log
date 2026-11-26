@@ -1,0 +1,17 @@
+T4b start 2026-11-26T18:06:21Z
+x = [[ 0.6241 -1.006 ] [ 0.933  -1.9912] [-1.0669  0.6775] [ 0.4477 -0.4424] [ 0.2976 -0.4415]]
+singular values of the rigidity matrix at x: [5.4706e+00 3.3227e+00 2.3110e+00 1.7991e+00 5.9324e-01 3.6900e-01
+ 1.7478e-01 1.9761e-16]  stress rank test: (2, 1)
+   area of hub triangle (0,1,2) = -5.7295e-01
+   area of hub triangle (0,2,3) = -3.2799e-01
+   area of hub triangle (0,3,4) = 4.2220e-02
+   area of hub triangle (0,1,4) = -7.3654e-02
+   flip pattern 0: feasible True, check-edge deviation [-0.], distance D to x 0.6354
+   flip pattern 1: feasible True, check-edge deviation [-0.326], distance D to x 0.6205
+   flip pattern 2: feasible True, check-edge deviation [0.], distance D to x 0.0000
+   flip pattern 3: feasible True, check-edge deviation [-0.812], distance D to x 1.1587
+LM on ||t(p)-t(x)||, 3000 starts, 300 iters: reach x (D<1e-5, res<1e-9): 781 ; other points with residual < 1e-3: 1013
+    distinct residual values among them: [7.7071e-05] ; best: residual 7.7071124432e-05 (f = 5.9400e-09), D = 0.6348, grad 4.8e-14, J singular values min 2.886e-01 max 1.064e+01
+LM on ||t(p)-t(x)||, 3000 starts, 3000 iters: reach x (D<1e-5, res<1e-9): 817 ; other points with residual < 1e-3: 1020
+    distinct residual values among them: [7.7071e-05] ; best: residual 7.7071124432e-05 (f = 5.9400e-09), D = 0.6348, grad 4.0e-14, J singular values min 2.886e-01 max 1.064e+01
+DONE t4b_w5_followup 2026-11-26T18:06:52Z

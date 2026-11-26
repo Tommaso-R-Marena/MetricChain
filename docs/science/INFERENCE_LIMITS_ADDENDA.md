@@ -3767,6 +3767,115 @@ enumerated instances compared with our own logs.  All of its findings are accept
     ground-state problem (put to the Complexity division, SCI-MSG-0031 §2).  Limits:
     four cases of one family; double precision; the 3 % is measured, not bounded.
 
+### (22) Statements of the Ensemble division on our instances: a thermal union bound, a threshold rule — and a sandwich as a class of ensembles; where the loss between groups is [P for items 87 (the exact one-body statement), 89; M for the numbers; imported statements with their provenance; added 2026-11-26]
+
+*Provenance of what is imported.*  Branch `research/ensemble-identifiability`, commit `1a067b5`:
+Theorem E15 (`docs/ensemble/ENSEMBLE_REPORT.md`, version 2, l.1036–1099; their label [P], core
+machine-checked there; their proof re-derived by the coordinator, their Lean file not compiled,
+their scripts not run) and the threshold rule of ENSEMBLE-RES-0002 §4 (their label [P, elementary;
+K for the rule: DeRobertis–Hartigan 1981, cited from memory there and not opened here]).
+*Scripts (ours):* `experiments/science/ensemble_checks/thermal_union_bound.py`,
+`sandwich_class.py` (five logs); `experiments/science/pi_inference/group_coupling.py` (six logs).
+Predictions in the research log (18:20 and 18:49 UTC), outcomes there.  Sent as SCI-RES-0032 and
+SCI-MSG-0032.  Model-relative as everything in this addendum.
+
+87. **Their thermal union bound holds on everything tried, is not empty on two rotamer
+    instances, and certifies nothing as a falsification test there; for one-body data the
+    exact test is the one-site ratio test** [review + replication; M by enumeration].
+    (a) *Checked:* `TV(μ, μ*_a) ≤ Σ_i [1 − μ(x_i = a_i)/σ_i]` by exact maximisation over the class
+    polytope — 95 160 linear programmes, nine classes, largest violation `3·10⁻¹⁵`; controls
+    (half the constant in the binary form; a class twice as large) fail as they must.
+    (b) *Hypotheses:* symmetry of the site envelopes is a convenience — for one-sided
+    envelopes (the class of Theorem 8) the statement holds with the polarised member
+    `∝ π e^{−d(·, a)}`, and fails with `d(a, ·)`; the binary form `Σ(σ_i − p_i)` fails on sites
+    with three or four states (by 0.07 to 0.25).  (c) **[P]** *The one-body marginal vectors
+    of a first-order class with a product reference are exactly the products of the
+    one-site classes* (sum the pair constraint over the other sites; conversely multiply).
+    Hence, for one-body data, `b_min = max_i max_{s≠t} [ln(μ_i(t)π_i(s)/(μ_i(s)π_i(t)))]₊/δ_i(s, t)`,
+    exactly, with an explicit flow — the structured family that `INFERENCE_LIMITS.md` §8
+    listed as missing, for this kind of data.  (d) *On Lys₅ and LKSE:5* (every state; the
+    product of the anchored one-body weights as reference; the exact least site-additive
+    envelope of the rest, so the true scale is 1): `Στ = 0.76, 0.65` (symmetric, one-sided)
+    against a total variation of `0.54, 0.43` for Lys₅; `0.98, 0.90` against `0.64` for
+    LKSE:5.  As a test of the class scaled by `b`: the one-site ratio test certifies
+    `b ≥ 0.08, 0.39, 0.34, 0.41`; the union bound with the total variation itself as the
+    extra datum, at 232 centres, never fires above `b = 0.015`.  The largest first-order
+    constants are 18 and 23 `kT` where `|g|` has a Gibbs mean of 0.02 to 0.04 `kT`: a
+    first-order class with honest constants is a loose description of these ensembles.
+    *Predictions:* three of five met (missed: "the polarised member has more than 0.95 of
+    every site at its anchor state" — 0.67 to 0.74 at two sites; "the bound is empty on
+    LKSE:5" — 0.90 to 0.98).
+
+88. **Their threshold rule gives the exact range of any observable over a sandwich; the
+    intervals of item 27 for the mean number of displaced side chains narrow three- to
+    fourfold** [K per them; checked here against brute force over the vertices of 168
+    boxes, `7·10⁻¹⁶`; M for the numbers].  The upper end of `E ψ` over `m₋ ≤ E ≤ m₊` is the `t`
+    with `Σ e^{−m₋}(ψ − t)₊ = Σ e^{−m₊}(ψ − t)₋`.  For a count the two sums need its law under
+    floor and ceiling: a transfer matrix with a counter (`count_law`; equal to enumeration
+    to `10⁻⁹` on Val₈).
+
+    | sandwich | published (sum of the single-site intervals) | exact range over the sandwich | narrower by |
+    |---|---|---|---|
+    | Val₂₀/PPII, order 4: site, pair, triple form | [0.64, 11.62], [2.64, 4.73], [3.355, 3.751] | [2.56, 5.04], [3.305, 3.851], **[3.485, 3.613]** | 4.4, 3.8, 3.1 |
+    | Val₂₀/PPII, order 5: site, pair, triple form | [3.355, 3.738], [3.488, 3.597], [3.512, 3.573] | [3.499, 3.586], [3.528, 3.556], **[3.534, 3.550]** | 4.4, 3.9, 3.7 |
+    | Val₈/PPII, order 4: site, pair form (exact value 1.3341) | [0.853, 2.007], [1.227, 1.458] | [1.154, 1.564], [1.283, 1.396] | 2.8, 2.0 |
+    | Lys₅, order 4, band 2 (exact value 0.9233) | [0.878, 0.984] | [0.907, 0.954] | 2.3 (predicted 1.3 – 2.2: missed by a little) |
+
+    The intervals of item 27 remain valid and are superseded for this observable.  *Not a
+    re-examination of part (13):* its other statements are as they were, unrefereed inside
+    this division; the Ensemble division's ENSEMBLE-RES-0002 §4 independently confirms one
+    of them (the population bracket is the identified set).
+
+89. **A sandwich is a first-order class of the Ensemble division's kind, for a "hub"
+    metric — so their Theorem E13 says which ensembles averaged data can pin inside it**
+    [P, elementary; exact checks in `sandwich_class.py synthetic`].  Weights `l ≤ w ≤ u`
+    (`l = e^{−m₊}`, `u = e^{−m₋}`).  (a) With `π = √(lu)` and `d(x, y) = (D(x) + D(y))/2`,
+    `D = m₊ − m₋`, the class `{μ : μ(y)π(x) ≤ e^{d(x,y)}μ(x)π(y)}` is the sandwich.  (b) By their
+    E13 (b) and the threshold rule, a member is identified by the means of `Φ` inside the
+    sandwich iff for some `f ∈ span{1, Φ}` its energy is at the floor where `f` exceeds a
+    threshold and at the ceiling below it: **the ensemble of the true energy, strictly
+    inside its sandwich, is never identified by averaged data.**  (c) *Stability:* with `t*`
+    the upper end for `f`, `μ_f` the threshold member and `γ = min_x |f(x) − t*|`:
+    `TV(μ, μ_f) ≤ (t* − E_μ f)/γ` for every member; for a population
+    `TV(μ, μ_A) ≤ [μ_A(A) − μ(A)]/min(P, 1 − P)`, and the constant is approached (0.97).
+    *Proof:* `Σ w(t* − f) = Σ (w − v)(t* − f) ≥ γ Σ|w − v|` for the threshold weights `v`, and
+    `TV ≤ Σ|w − v|/Σw`.  ∎  (d) *Sandwich plus data:* for members with `E_μΦ = m`, `E_μψ ≤ t`
+    whenever some `λ` has `Σ u(ψ − t − λ·(Φ − m))₊ ≤ Σ l(ψ − t − λ·(Φ − m))₋`, with equality at the
+    best `λ` (linear-programming duality; 30 cases against the programme).  On a band model
+    this needs the law of `ψ − λ·Φ`, a counter per additive statistic — W[1]-hard in their
+    number by the Complexity division's COMPLEXITY-RES-0001.  This is a fourth version of
+    `INFERENCE_LIMITS.md` §8 ("model within a sandwich").  No prior-art search; the class is
+    the density-ratio class of robust Bayesian analysis and (c), (d) are likely in print.
+
+90. **Where the loss between groups is: two parts, one of them not about groups**
+    [M: exact for the five-residue instances; Lys₁₂ from exact means plus samples;
+    prediction of 18:49 UTC: one of three parts missed].  The quantity workstream R19
+    measured (item 83; corrected width minus the width with the routed items put back
+    exactly) split by where Proposition A17.19 loses:
+
+    | instance | groups | `Σ_g P(S⁺_g > 0)` | lower end: joint law (pair terms) | upper end: joint law (pair terms) | the loss | recoverable by the joint law of the groups | by pair terms alone | the rest |
+    |---|---|---|---|---|---|---|---|---|
+    | Lys₅, order 4, band 2 | 6 | 0.19 | 0.026 (0.025) | 0.140 (0.104) | **0.441** | **0.166** | **0.129** | 0.275 |
+    | Lys₅, order 4, band 3 | 2 | 0.06 | 0.028 (0.028) | 0.066 (0.019) | **0.224** | **0.094** | **0.047** | 0.130 |
+    | Lys₅, order 5, band 3 | 2 | 0.06 | 0.241 (0.241) | 0.525 (0.148) | **0.779** | **0.766** | **0.389** | 0.013 |
+    | LKSE:5, order 4, band 2 | 6 | 0.39 | 0.001 (0.001) | 0.022 (0.021) | **0.475** | **0.022** | **0.021** | 0.452 |
+    | Lys₁₂, order 4, band 4 | 56 | 1.07 | 0.169 (0.168) | 0.475 (0.446) | **0.708** ± 0.020 | **0.644** | **0.614** | 0.064 ± 0.020 |
+    | Lys₁₂, order 4, band 7 | 20 | 0.60 | 0.038 (0.038) | 0.208 (0.205) | **0.346** ± 0.058 | **0.246** | **0.243** | 0.100 ± 0.058 |
+
+    (Fractions of the corrected bracket's width.)  (i) **[P]** (LP) is exactly the optimum
+    from the group laws when `Σ_g P(S⁺_g > 0) ≤ 1` (the theory and Ensemble divisions'
+    statement; three lines in the script's header): 5 of six cases
+    (predicted six; missed for Lys₁₂, order 4, band 4).  (ii) The lower end loses little (0.001 to 0.24) and
+    pair terms give 99 to 100 % of it (predicted more than 90 %: met).  (iii) **The upper
+    end carries the loss, and what joint laws cannot recover is the price of bounding a
+    mean under the true ensemble through the ceiling** — up to 0.45 of the bracket
+    (LKSE:5), 0.01 at the other extreme (Lys₅, order 5).  (iv) **On Lys₁₂ at band 4, pair
+    terms alone would take 0.61 of the bracket** (band 7: 0.24): for that
+    instance D15 is worth building; on LKSE:5 it is not.  (v) The group laws are
+    heavy-tailed; a grid quadrature and a shuffled control both failed on this before the
+    script computed the comonotone and product couplings exactly.  *Refines* the wording
+    of item 83 and of SCI-MSG-0030 §2 (a) ("the loss between groups"): SCI-MSG-0032.
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every

@@ -1,0 +1,67 @@
+===== exposedness_checks.py (exit 0, 41 s) =====
+T1  characterisation by certificate vs fibre LP: 1500/1500 agree (965 identifiable instances)
+T2  duality gap (max over 400 instances x 4 tolerances): 3.22e-15; kappa finite in 301; max relative |omega(1e-4)/1e-4 - kappa|: 4.13e-15
+T3  sup-min formula for kappa_mu: max relative error 6.50e-15; exact linearity and weight-independence: 4.28e-16 (60 instances)
+PASS
+===== rigidity_checks.py (exit 0, 113 s) =====
+R1 rigidity matroids: ok
+    K4 in R^2: rank 5, connected = True
+    K5 in R^3: rank 9, connected = True
+    wheel W5 in R^2: rank 9, connected = True
+    K3 in R^2: rank 3, connected = False
+    K4 + degree-2 vertex in R^2: rank 7, connected = False
+    K4 - e in R^2: rank 5, connected = False
+    K5 in R^2: rank 7, connected = True
+    K6 in R^3: rank 12, connected = True
+R2 chimeras, complete graphs: ok
+    K_4 in R^2, 2 conformers: 1240 non-constant splices, smallest |CM| = 9.556e-03; largest |CM| at true conformers = 1.8e-13
+    K_4 in R^2, 3 conformers: 2904 non-constant splices, smallest |CM| = 1.462e-02; largest |CM| at true conformers = 4.9e-13
+    K_5 in R^3, 2 conformers: 20440 non-constant splices, smallest |CM| = 1.623e-03; largest |CM| at true conformers = 2.6e-12
+    K_5 in R^3, 3 conformers: 79998 non-constant splices, smallest |CM| = 1.789e-02; largest |CM| at true conformers = 3.9e-12
+R3 chimeras, wheel: ok
+    wheel W5 in R^2: smallest least-squares residual over 180 random splices = 6.007e-04 (true conformer: 2.7e-15)
+R4 negative controls: ok
+    triangle: {(3,4,5),(4,5,6)} and {(3,5,6),(4,4,5)} have equal edge-length laws: True
+    K4 + degree-2 vertex: 31/40 splices along the separator realised (20 nearby pairs, 20 independent pairs); agreement with the two-circle criterion 40/40
+R5 explicit certificate: ok
+    certificate for K4, two conformers: 82 zeros found in 400 starts; 1 at conformer 1, 81 at conformer 2, 0 elsewhere
+R6 toy feature maps: ok
+    connected toy map: smallest violation of the equations of the variety over all splices = 3.01e-04
+    direct-sum toy map (x, x^2, y, y^3): the splice of (x1,y1), (x2,y2) along {1,2}|{3,4} is G(x1,y2) (exact)
+PASS
+===== pair_capacity_checks.py (exit 0, 13 s) =====
+C1 Littlewood-Offord lemma: ok
+    7296 coefficient vectors with >= 2 non-zero entries: largest probability 3/4 at c = ('-1', '-1', '-1')
+C2 sign vectors in random spans: ok
+    n = 16, K = 5: spurious sign vector in 1111/4000 = 0.2777; 4*C(K,3)*(3/4)^n = 0.4009
+    n = 20, K = 6: spurious sign vector in 803/4000 = 0.2008; 4*C(K,3)*(3/4)^n = 0.2537
+    n = 24, K = 8: spurious sign vector in 351/2000 = 0.1755; 4*C(K,3)*(3/4)^n = 0.2248
+    n = 30, K = 10: spurious sign vector in 119/1500 = 0.0793; 4*C(K,3)*(3/4)^n = 0.0857
+    n = 36, K = 12: spurious sign vector in 16/600 = 0.0267; 4*C(K,3)*(3/4)^n = 0.0280
+C3 projector certificate: ok
+    n = 9: 198 random supports (K = 2..6); certificate implies fibre is a point in 198/198; identified by the fibre LP: 195; smallest certificate gap: 0.434
+C4 worst case (cut polytope): ok
+    n = 5: triples containing a fixed vertex that are faces: 105/105; 4-sets: 445/455; a 4-set that is not a face: ['+++++', '+---+', '+--+-', '+++--']
+    n = 6: triples containing a fixed vertex that are faces: 465/465; 4-sets: 1478/1500; a 4-set that is not a face: ['++++++', '+--+--', '+-+-++', '++----']
+C5 Gaussian rounding: ok
+    n = 300, K = 2.0 n: smallest eigenvalue of sin(pi C/2) = -0.4365 (first-order prediction -0.4360)
+    n = 300, K = 4.0 n: smallest eigenvalue of sin(pi C/2) = -0.1961 (first-order prediction -0.1781)
+    n = 300, K = 5.5 n: smallest eigenvalue of sin(pi C/2) = -0.0568 (first-order prediction -0.0540)
+    n = 300, K = 6.34 n: smallest eigenvalue of sin(pi C/2) = +0.0119 (first-order prediction +0.0001)
+    n = 300, K = 7.0 n: smallest eigenvalue of sin(pi C/2) = +0.0403 (first-order prediction +0.0370)
+    n = 300, K = 9.0 n: smallest eigenvalue of sin(pi C/2) = +0.1332 (first-order prediction +0.1273)
+    n = 300, K = 12.0 n: smallest eigenvalue of sin(pi C/2) = +0.2150 (first-order prediction +0.2240)
+C6 adaptivity: ok
+    n = 60, 1 conformers (rank 1): 59 entries read (r n - r(r+1)/2 = 59; all pairs: 1770); reconstruction error 0.0e+00
+    n = 60, 2 conformers (rank 2): 117 entries read (r n - r(r+1)/2 = 117; all pairs: 1770); reconstruction error 2.2e-16
+    n = 60, 3 conformers (rank 3): 174 entries read (r n - r(r+1)/2 = 174; all pairs: 1770); reconstruction error 6.7e-16
+    n = 60, 5 conformers (rank 5): 285 entries read (r n - r(r+1)/2 = 285; all pairs: 1770); reconstruction error 1.0e-15
+    n = 60, 8 conformers (rank 8): 444 entries read (r n - r(r+1)/2 = 444; all pairs: 1770); reconstruction error 4.4e-16
+    two two-conformer ensembles: their pair-correlation matrices differ exactly at [(0, 1)]
+PASS
+ALL PASS
+
+
+real	2m47.233s
+user	2m44.420s
+sys	0m0.755s

@@ -2656,3 +2656,84 @@ met and is an identity where the minimiser is the same state (0.213, 0.246, 0.02
 first case only (0.997) and 0.2 to 1.3 % above it in the other three — the scan's `λ_c` is
 defined by half the chain displaced, not by equal weights, so the three numbers
 `λ_kink`, `λ_c`, `λ_gs` agree to 3 % and their order is not fixed.
+
+**18:49 UTC — the Ensemble division's checks, outcomes; and a prediction for the next run.**
+*Outcomes against the predictions of 18:20* (`ensemble_checks/thermal_union_bound.py`,
+`sandwich_class.py`; all logs from the final code).  (i) "largest first-order constant
+above `10 kT`": met (17.9 and 22.8).  "The polarised member has more than 0.95 of every
+site at its anchor state": **missed** — 0.72 and 0.74 at two sites of LKSE:5, 0.83 at one
+site of Lys₅ with the one-sided envelope: the *median* constant of a site is 0.5 to 8
+`kT`, not the maximum, and a member that is as steep as the class allows is still spread
+over the states that are cheap to reach.  (ii) Lys₅: `Στ = 0.76` (symmetric envelope),
+0.65 (one-sided), total variation 0.54 and 0.43: met.  (iii) "LKSE:5: `Στ ≥ 1`, an empty
+bound": **missed** — 0.98 and 0.90 against a total variation of 0.64; not empty, by a
+little.  (iv) one-body data certify 0.08 to 0.41 of the true constant: met.  (v) the
+exact range of the mean number of displaced sites over the Lys₅ sandwich is narrower
+than the sum of the single-site intervals by a factor 2.29 — predicted 1.3 to 2.2:
+**missed, by a little**; on Val₂₀ the factor is 3.1 to 4.4.  *What I had not predicted and
+is the answer to their question:* as a falsification test their bound (b) certifies
+nothing on these instances — at 232 centres, with the total variation itself as the
+extra datum, it is never violated for any class scale on the grid although the truth
+leaves the class below scale 1 — while the one-site ratio test, which I can show is
+the exact test for one-body data, certifies 0.08 to 0.41.  *A flaw of mine on the way:*
+the first version of check A8 violated a constraint by `10⁻⁶` and asked a linear
+programme for infeasibility; the solver's feasibility tolerance is `10⁻⁷` absolute and
+half the cases came back feasible.  The violation is now 0.01, with a control (the
+unmodified marginals must be feasible).
+*Prediction for `pi_inference/group_coupling.py`, written before it exists.*  The
+Ensemble division's answer (ENSEMBLE-RES-0002 §1) and the theory division's
+(THY-RES-0016 §4) say that our lower end (LP) is the exact optimum from the group laws
+exactly when the events "group `g` has slack" can be made disjoint, i.e. when
+`Σ_g P(S⁺_g > 0) ≤ 1` under the ceiling.  I predict: (a) that sum is below one in all six
+cases (Lys₅ at three settings, LKSE:5, Lys₁₂ at order 4 with bands 4 and 7) — so no
+certificate built from the group laws alone can improve (LP), and their `(max,+)`
+checker has nothing to gain there; (b) the second-order term `Σ_{g<h}⟨y_g y_h⟩`,
+`y_g = e^{βS⁺_g} − 1`, recovers more than nine tenths of what the exact joint law of the
+groups would add in every case; (c) for Lys₁₂ at band 4 that addition is between one
+tenth and six tenths of the corrected bracket.
+
+**19:27 UTC — three reviews out, the answer to the Ensemble division, and the outcome of the
+group-coupling prediction.**
+*`group_coupling.py`, against the prediction of 18:49* (six logs from the final code).
+(a) "`Σ_g P(S⁺_g > 0) < 1` in all six cases": **missed for Lys₁₂ at band 4 (1.07)**; below one in
+the other five (0.06 to 0.60).  (b) "pair terms recover more than nine tenths of what the
+joint law adds" — met on the lower end (0.991 to 1.000), which is where I had it in mind;
+on the upper end, which I had not thought about, they recover 28 to 99 %.  (c) "between
+one tenth and six tenths of the bracket for Lys₁₂ at band 4": met (0.169).
+*What I had not predicted and is the result:* the lower end is not where the loss is.  The
+loss that R19 measured sits on the upper end, and part of it — from 0.01 to 0.45 of the
+bracket — is not about groups at all but about bounding a mean under the true ensemble
+through the ceiling.  So the name "loss between groups", which I passed on to three
+divisions this afternoon, described a measurement correctly and its cause loosely
+(SCI-MSG-0032).  For Lys₁₂ at band 4 the practical conclusion of SCI-MSG-0030 survives and
+gets a number: pair terms would take 0.61 of the bracket (0.24 at band 7).
+*Three errors of mine on the way.*  Two of the same kind, both now rules (SD71, SD72): a
+linear programme asked to detect a violation smaller than its own tolerance; a quadrature
+and a shuffle that could not see states of probability `10⁻⁷` carrying most of a mean — the
+second caught only because the result violated an inequality that cannot fail.  The third
+a quarter of an hour ago: the script that fills the table of the two messages parsed two
+bold numbers of the driver's header as the upper-end column; I saw it because the printed
+rows did not add up, before anything was committed.
+*The reviews.*  R22 (Geometry) decided the question I had left open in SCI-RES-0029: two
+states that differ in two torsions are identifiable although the conic condition fails —
+I had expected that — except when both are half-turns, which I had not; I checked its
+eight-image statement with my own chain builder and a search over all re-hingings before
+sending it.  R21 (Ensemble) found two clean examples showing that "generic" must be
+joint; its Proposition A turned out to be the Geometry division's Theorem A, which it says.
+R23 (theory audit) put numbers on what my first response had said in words: of twelve
+sampled "needed only by the proof" tags six stand, and the two that are false when removed
+had only words behind them.  One referee (R21) reported a declined file write; I did not
+perform it and wrote the comparison with their version 2 myself from its hand-back and
+from the lines I read.
+*From the fetch of 19:22.*  Two checkpoints crossed this one.  The Geometry division's own
+internal review (19:11) found, without knowing of R22, that `κ` is not its local value and
+the wrong constant, and their new Theorem G′ has R22's hypothesis word for word; for two
+hinges they count "at most 8 candidate chains" and have not run the programme — R22 and I
+have.  SCI-REV-0021 now begins with that comparison, as SCI-REV-0019 did for the
+Complexity division.  The Complexity division applied SCI-REV-0019 request by request
+(our statement on dangles is their Theorem 1d, credited) and **answered the localisation
+question** with a polymer bound for product references and a threshold that is a max-flow
+(COMPLEXITY-RES-0005); it had read our branch before SCI-MSG-0031, so it does not know yet
+that its `λ₁` is the `λ_gs` we computed.  Its offer — to compute its threshold on one of
+our cases — I can take up myself by enumeration over the 4 096 site sets: owed, next.
+

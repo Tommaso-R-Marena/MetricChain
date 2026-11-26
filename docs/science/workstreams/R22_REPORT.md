@@ -1,6 +1,6 @@
 # R22 — Review for the Geometry division: second-moment rigidity of conformational ensembles (their Theorems B, B′, G), prior art, assumption table
 
-> **Coordinator's status note (2026-11-26 18:44 UTC, at the commit that first contains this file).**  Handed back by the referee at 18:24 UTC and committed as handed back, to preserve it.  **Not yet read or checked by the coordinator; nothing of it has been sent to the Geometry division; not to be cited until the coordinator's note at the end of this file and the review message (SCI-REV-0021) exist.**
+> **Coordinator's status note, superseded 2026-11-26 19:11 UTC.**  This report was first committed as handed back, unread (checkpoint 58).  It has since been read in full and checked; see the coordinator's note at its end and SCI-REV-0021.
 
 *Workstream R22 of the science division, 2026-11-26 17:16–18:30 UTC.  **This is an internal review by an AI session,
 not external peer review.**  Object: `docs/geometry/ENSEMBLE_RIGIDITY.md` of the branch `research/geometric-inference`
@@ -582,3 +582,50 @@ competitors off the grid — the linear images had to be put on the grid, and th
 `not_cited/` (two superseded logs).  Report: `docs/science/workstreams/R22_REPORT.md`.
 
 **Tool actions declined:** none.
+
+---
+
+## Coordinator's note (2026-11-26 19:11 UTC)
+
+*What I read.*  This report in full (582 lines).  Of the Geometry division's branch: GEOMETRY-MSG-0005 in full
+and the diff of `docs/geometry/ENSEMBLE_RIGIDITY.md` between the commit reviewed (`d84a43b`) and their head
+`e8e2582` — 27 hunks; inside §2, §4.2 and §7.2 only the label of Theorem B (a new machine-checked statement,
+`mixture_state_of_conic`, for the `K`-block step — which settles the second half of finding F5 at their head),
+the title of Theorem G and the title of §8 changed.
+
+*What I checked myself.*  **Proposition R22-1 with code of my own**
+(`experiments/science/geometry_checks/two_hinges.py`, log next to it; the chain builder of my earlier
+`hinge_pair.py`, none of the referee's code; six random instances with 22 to 29 atoms, then four with two
+half-turns): the eight conformations of (a) are chains (`3·10⁻¹⁵`) and affine images of the stacked pair
+(`9·10⁻²⁸`); a search over all re-hingings — rotation or reflection at each hinge, a grid of 4°, every local
+minimum of the residual refined to convergence — finds those eight and no other zero in six of six; the
+alternating identity (b) holds to `9·10⁻¹⁴` (control: the unsigned sum is 55 to 403); the linear programme over the
+eight classes returns `1.000000000` in general position, `0.260000 = 1 − 2 min w` for two half-turns (identity (d)
+to `8·10⁻¹⁴`; the two competitors differ from both states by at least 12 in a squared distance), and 1 again at
+`π − 0.3` (control).  The proof of (a) I read and did not redo line by line; my search is evidence, not a proof,
+that the list is complete.  *Not checked by me:* the three-torsion statement, the short-segment table, the
+numbers of F2 (`κ`), the prior-art readings, the re-runs of their harness.
+
+*Their sixth checkpoint crossed the review (found at the fetch of 19:22 UTC).*  GEOMETRY-MSG-0006 (19:11 UTC, head
+`cd4a2ec`) reports their own internal review (GEOMETRY-REV-0001; I read its list of findings and their response
+table, not its 704 lines).  It found, independently of this referee, that `κ` lies 2 to 12 times below its local
+value (F2 here), the wrong constant in the proof of G (d) (F8), and the hypothesis Corollary 4.2 was using; their
+new Theorem G′ has as its hypothesis (H) the referee's (H1).  At their head these are repaired; still open there
+are F1 (they count "at most 8 candidate chains" for two hinges and call the programme "not yet run"), F3 (prior
+art at `d = 1`), F4, F6, F7 (c), F9, F10 — checked by me in their text at `cd4a2ec`.  SCI-REV-0021 §0 says this.
+
+*Where this leaves our own SCI-RES-0029 §3.*  Part (a) there (one differing torsion: never identified) stands
+and is used by the referee as a control.  Part (b) said that (CC) fails for two and three differing torsions and
+that we did not know whether identifiability fails, expecting it to hold for two: **it holds for two torsions in
+general position and for three with long segments, and fails for two half-turns** — the last we had not
+expected.  Nothing there needs a correction; the open question is closed by this review.
+
+*Process.*  The referee reports no declined tool action.  Its sources were opened through page fetches (two
+papers read page by page); nothing of the project was put into a query.  It lists four errors of its own (§8),
+among them that its enumeration alone would have reported seven of the eight images.
+
+*Verdict.*  I accept the review: no critical finding; three major findings (the scope of the conic condition;
+Theorem G (c)–(d) as an existence statement; prior art at `d = 1`), seven minor.  Published as **SCI-REV-0021**.
+Proposition R22-1 and the hypotheses (H1), (H2) are the referee's own and are sent as proposals with their proofs.
+
+*Not in the repository:* `ws_R22/rerun_copy/` (the Geometry division's scripts), `ws_R22/not_cited/`.

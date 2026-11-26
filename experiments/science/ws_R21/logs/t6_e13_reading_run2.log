@@ -1,0 +1,11 @@
+T6 E1.3 and its reading  start 2026-11-26T18:20:28Z
+(a) E1.3(b), N=5, K=2, all 10 pairs: max |mean sq. length under nu - under mu| = 5.3e-15; P_mu(Q=0) = 0.00, P_nu(Q=0) = 0.50
+    affine mechanism (A1 with weight 0.225, A2 with weight 0.775, t*A1A1^T + (1-t)*A2A2^T = I): max |difference of mean sq. lengths| = 1.8e-15; smallest max-difference of the distance vectors between a conformer of nu and one of mu = 2.523
+(b) observables r^-6 on all pairs: scaling by R with R^-6 in {0.5, 1.5} (R = 1.1225, 0.9347): max relative difference of <r^-6> = 8.9e-16
+(c) planar chains with unit bonds; observables: mean squared distance of every pair of chain atoms
+    2 bonds (directions always on a conic): 20 random conformations x 400 minimisations of f over the chain space; zeros of f that are NOT congruent to x: 8000 (control: minimisations that reach a zero congruent to x: 0/8000); f is an affine function of the pair squared distances on the chain space to 5.9e-31
+    3 bonds: 20 random conformations x 400 minimisations of f over the chain space; zeros of f that are NOT congruent to x: 0 (control: minimisations that reach a zero congruent to x: 8000/8000); f is an affine function of the pair squared distances on the chain space to 2.7e-15
+    4 bonds: 20 random conformations x 400 minimisations of f over the chain space; zeros of f that are NOT congruent to x: 0 (control: minimisations that reach a zero congruent to x: 8000/8000); f is an affine function of the pair squared distances on the chain space to 6.2e-15
+    6 bonds: 20 random conformations x 400 minimisations of f over the chain space; zeros of f that are NOT congruent to x: 0 (control: minimisations that reach a zero congruent to x: 8000/8000); f is an affine function of the pair squared distances on the chain space to 1.7e-14
+    degenerate conformation (3 bonds, bonds 1 and 3 parallel): two chains p(+t), p(-t) = x (I +- tS)^(1/2), t = 0.4: max |bond length^2 - 1| = 6.7e-16; max |mean sq. distance of the 50/50 mixture - that of x| over all pairs = 2.7e-15; max |sq. distance of p(+t) - that of x| = 1.328  => delta_x NOT determined
+DONE t6_e13_reading 2026-11-26T18:21:22Z

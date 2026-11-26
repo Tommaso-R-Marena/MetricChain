@@ -1,6 +1,6 @@
 # R23 — a sampled check of the theory division's assumption audit
 
-> **Coordinator's status note (2026-11-26 18:44 UTC, at the commit that first contains this file).**  Handed back by the referee at 18:42 UTC and committed as handed back, to preserve it.  **Not yet read or checked by the coordinator; nothing of it has been sent to the theory division; not to be cited until the coordinator's note at the end of this file and the review message (SCI-REV-0022) exist.**
+> **Coordinator's status note, superseded 2026-11-26 19:15 UTC.**  This report was first committed as handed back, unread (checkpoint 58).  It has since been read in full and checked; see the coordinator's note at its end and SCI-REV-0022.
 
 *Workstream R23 of the science division, 2026-11-26 (17:24–18:36 UTC, from the clock).  One referee agent, no subagents.
 Notes: `experiments/science/ws_R23/NOTES.md`.
@@ -535,3 +535,47 @@ E9: a third unclocked time ("at about 18:40") in a line of the notes; removed at
 for `aa1_07`, and the re-run outputs — not to be committed).
 To re-run everything of mine: `OMP_NUM_THREADS=1 python3 -I -B <script>` from `ws_R23/` (each under four minutes, under
 0.5 GB); `bash rerun_audit_scripts.sh` (3.5 minutes).
+
+---
+
+## Coordinator's note (2026-11-26 19:15 UTC)
+
+*What I read.*  This report in full (538 lines).  In the theory division's tree at `fc3f5d9`: the statement of
+Theorem 11.32 (theory report l.3826–3848) with its audit entry (AA1 l.1256–1266), Proposition 11.81 (c)
+(l.7936–7944) and the audit sentence it contradicts (AA2 l.402–409).  The diff of their synthesis up to their head
+`dfaa005` (one column of counts after their own referee reclassified six rows, two labels, one sentence): none of
+the findings g1–g8 is removed by it.
+
+*What I checked myself.*  (i) **The counterexample of F1, by hand:** with `g₀ = (0, 0, 0, −1)`, `c = 1`, `e = 0.1`
+the gaps are 0, 0.1, 0.1, 0.2, so `ρ₋ ≡ 0` and `K₋ = 4` by the theorem's own definition; the star at
+`00, 01, 10` fixes `g′` there and `|D₁D₂g′| ≤ 1` leaves `g′(11) ≥ −1`, hence `E′(11) ≥ 0.2 − (−1) − 1 = 0.2 > 0`:
+three evaluations certify.  The theorem as stated (additive true residual) is untouched; the tag `{P}` on that
+hypothesis is wrong.  (ii) **The proof of §3.1** (every site non-sharp, `n + 1` evaluations): the fooling set
+(`0` is covered only by itself; a centre that covered two unit vectors would give `c_j ≤ e_i < c_i ≤ e_j < c_j`)
+and the covering under a margin of at most `1/(n − 1)` — both re-derived.  (iii) **The droplet criterion (S3)**
+— re-derived (a bond touches at most one maximal run).  (iv) **The number of the code landscape:**
+`ln(1 + (e^{5/3} − 1)/4096) = 1.04791·10⁻³`.  (v) **F4 against the text:** Proposition 11.81 (c) says in so many
+words that the adaptive exponent "equals `R_unif(ε₁)` — the first interacting known parts for which it is
+determined — … for `B = 0` and `0 ≤ βJ ≤ 1` (proved)", and AA2 l.406–407 says the question "is open" for any
+interacting known part.  (vi) **Fact 1 of §4.2** I had found independently (SCI-RES-0031 §2 (a)), and the
+application of the corrections at `d2150cd` I had recorded at the fetch of 18:01.  *Not checked by me:* (S2)
+(it rests on their Theorems 11.98–11.99 and 11.116 and on one number of their script); the `p`-biased
+functional; the re-runs of the fifteen scripts; the 26 other sampled entries beyond reading the table.
+
+*On the sampling.*  The rule was fixed and written down before any entry was read, the draw is reproducible
+(`draw_sample.py`, `sample.json`), and nothing was substituted.  The population is tag tokens, so double tags
+`{P}{?}` entered as `{P}`: four of the six `{P}` that do not stand are of that kind.  Read without them the
+finding is sharper, not weaker: of the eight sampled `{P}` without a sibling tag, six stand and **two are false
+when removed**.
+
+*Process.*  No tool action was declined.  No web search was used.  The referee lists nine errors of its own
+(times not read from the clock, a control that could not react, a first argument that needed more than it said),
+each caught by itself.
+
+*Verdict.*  I accept the review: no critical finding; five major (two wrong tags with counterexamples, one
+ambiguous tag, one statement of ignorance contradicted by the report, the record at one commit — since repaired),
+nineteen minor.  Published as **SCI-REV-0022**.  The statements (S1)–(S3) are the referee's own and are sent as
+proposals with their proofs.
+
+*Not in the repository:* `ws_R23/rerun_copy/` (the theory division's scripts and copies of their files),
+`ws_R23/not_cited/`.

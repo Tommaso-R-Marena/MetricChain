@@ -1,0 +1,18 @@
+T2b start 2026-11-26T17:57:11Z
+colouring with the smallest exact defect: #56110  2211222020   exact defect 2.331861e-06
+conformer squared lengths used: [0.592597 0.537349 1.939982 2.369316 0.150969 0.981986 1.280998 0.892393
+ 8.28828  3.070451]
+LM iters=  120, 400 starts: min residual 7.9229962226e-07 ; #starts within 1% of it: 109 ; grad norm at it 7.64e-15 ; singular values of J: max 9.129e+00 min 2.828e-01
+LM iters= 1000, 400 starts: min residual 7.9229962226e-07 ; #starts within 1% of it: 127 ; grad norm at it 5.84e-15 ; singular values of J: max 9.129e+00 min 2.828e-01
+LM iters= 5000, 400 starts: min residual 7.9229962223e-07 ; #starts within 1% of it: 96 ; grad norm at it 2.67e-14 ; singular values of J: max 9.129e+00 min 2.828e-01
+Gauss-Newton polish, residual every 10 steps: ['7.9229962223e-07', '7.9229962256e-07', '7.9229962263e-07', '7.9229962243e-07', '7.9229962250e-07', '7.9229962258e-07']
+final residual vector (per edge): [ 4.466e-07  2.843e-08 -5.716e-08 -1.557e-07  5.604e-07 -6.321e-08
+ -2.692e-07 -5.493e-08  4.426e-08  6.659e-08]
+control: conformer 0, 400 starts, 1000 iters: min residual 7.109e-16, starts reaching <1e-9: 79/400
+control: conformer 1, 400 starts, 1000 iters: min residual 1.144e-16, starts reaching <1e-9: 198/400
+control: conformer 2, 400 starts, 1000 iters: min residual 1.665e-16, starts reaching <1e-9: 48/400
+DONE t2b_w6_followup 2026-11-26T17:57:25Z
+
+real	0m15.352s
+user	0m14.560s
+sys	0m0.107s

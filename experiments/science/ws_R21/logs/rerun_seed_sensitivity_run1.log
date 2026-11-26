@@ -1,0 +1,28 @@
+seed sensitivity of their R5 and R3  start 2026-11-26T18:30:21Z
+R5 seed  1: ok     |certificate for K4, two conformers: 107 zeros found in 400 starts; 104 at conformer 1, 3 at conformer 2, 0 elsewhere
+R5 seed  2: ok     |certificate for K4, two conformers: 67 zeros found in 400 starts; 60 at conformer 1, 7 at conformer 2, 0 elsewhere
+R5 seed  3: ok     |certificate for K4, two conformers: 46 zeros found in 400 starts; 39 at conformer 1, 7 at conformer 2, 0 elsewhere
+R5 seed  4: ok     |certificate for K4, two conformers: 28 zeros found in 400 starts; 9 at conformer 1, 19 at conformer 2, 0 elsewhere
+R5 seed  5: ok     |certificate for K4, two conformers: 68 zeros found in 400 starts; 42 at conformer 1, 26 at conformer 2, 0 elsewhere
+R5 seed  6: FAILED |certificate for K4, two conformers: 82 zeros found in 400 starts; 0 at conformer 1, 82 at conformer 2, 0 elsewhere
+R5 seed  7: FAILED |certificate for K4, two conformers: 7 zeros found in 400 starts; 0 at conformer 1, 7 at conformer 2, 0 elsewhere
+R5 seed  8: FAILED |certificate for K4, two conformers: 33 zeros found in 400 starts; 0 at conformer 1, 33 at conformer 2, 0 elsewhere
+R5 seed  9: ok     |certificate for K4, two conformers: 43 zeros found in 400 starts; 10 at conformer 1, 33 at conformer 2, 0 elsewhere
+R5 seed 10: ok     |certificate for K4, two conformers: 18 zeros found in 400 starts; 13 at conformer 1, 5 at conformer 2, 0 elsewhere
+R5 seed 11: ok     |certificate for K4, two conformers: 26 zeros found in 400 starts; 23 at conformer 1, 3 at conformer 2, 0 elsewhere
+R5 seed 12: ok     |certificate for K4, two conformers: 57 zeros found in 400 starts; 53 at conformer 1, 4 at conformer 2, 0 elsewhere
+R5 seed 13: ok     |certificate for K4, two conformers: 78 zeros found in 400 starts; 3 at conformer 1, 75 at conformer 2, 0 elsewhere
+R5 seed 14: ok     |certificate for K4, two conformers: 30 zeros found in 400 starts; 20 at conformer 1, 10 at conformer 2, 0 elsewhere
+R5 seed 15: ok     |certificate for K4, two conformers: 48 zeros found in 400 starts; 47 at conformer 1, 1 at conformer 2, 0 elsewhere
+R5 seed 16: ok     |certificate for K4, two conformers: 56 zeros found in 400 starts; 21 at conformer 1, 35 at conformer 2, 0 elsewhere
+R5 seed 17: ok     |certificate for K4, two conformers: 36 zeros found in 400 starts; 32 at conformer 1, 4 at conformer 2, 0 elsewhere
+R5 seed 18: ok     |certificate for K4, two conformers: 88 zeros found in 400 starts; 34 at conformer 1, 54 at conformer 2, 0 elsewhere
+R5 seed 19: ok     |certificate for K4, two conformers: 81 zeros found in 400 starts; 29 at conformer 1, 52 at conformer 2, 0 elsewhere
+R5 seed 20: ok     |certificate for K4, two conformers: 30 zeros found in 400 starts; 27 at conformer 1, 3 at conformer 2, 0 elsewhere
+R5: passed with 17 of 20 seeds
+R3 seed  1: ok     |wheel W5 in R^2: smallest least-squares residual over 180 random splices = 5.871e-04 (true conformer: 2.3e-15)  (127 s)
+R3 seed  2: ok     |wheel W5 in R^2: smallest least-squares residual over 180 random splices = 3.928e-03 (true conformer: 1.9e-15)  (157 s)
+R3 seed  3: ok     |wheel W5 in R^2: smallest least-squares residual over 180 random splices = 9.959e-04 (true conformer: 2.7e-15)  (147 s)
+R3 seed  4: ok     |wheel W5 in R^2: smallest least-squares residual over 180 random splices = 9.315e-03 (true conformer: 2.8e-15)  (115 s)
+R3: passed with 4 of 4 seeds
+DONE rerun_seed_sensitivity 2026-11-26T18:41:41Z

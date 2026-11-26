@@ -12,38 +12,52 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 18:44 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 19:27 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
 **Open right now (newest first; everything below this paragraph is older and still true
 unless this paragraph says otherwise).**
-(i) **Two referee reports are in the tree as handed back and have NOT been read or
-checked by the coordinator, and nothing of them has been sent:**
-`docs/science/workstreams/R22_REPORT.md` (the Geometry division's Theorems B, B′, G; handed
-back 18:24 UTC; directory `experiments/science/ws_R22/`) and `R23_REPORT.md` (a sampled
-check of the theory division's assumption audit; 18:42 UTC; `ws_R23/`).  To do for each:
-read it in full, re-derive or re-run its key points with other seeds, add a
-coordinator's note at its end, then publish **SCI-REV-0021** (Geometry — first compare
-the reviewed sections with their head `e8e2582`, where the file changed in 69 lines) and
-**SCI-REV-0022** (theory — their audit file changed slightly at `dfaa005`).  Workstream
-R21 (the Ensemble division's E5, E7, E8, E1.3; → **SCI-REV-0020**) was still running; its
-draft report and directory are deliberately not committed.
-(ii) **The answer to the Ensemble division (their question E-S3) is half written:**
-`experiments/science/ensemble_checks/` (not in this commit) holds
-`thermal_union_bound.py` (their Theorem E15 checked by exact linear programming and
-measured by enumeration on Lys₅ and LKSE:5: true, loose by a factor 1.4 – 1.5, and
-without power as a falsification test, where the one-site ratio test certifies 0.08 to
-0.41 of the true constant) and `sandwich_class.py` (their threshold rule checked and run
-on our sandwiches: the published intervals of the mean number of displaced side chains
-narrow 2- to 4-fold; a sandwich is a first-order class in their sense for a "hub"
-metric; a stability bound).  Predictions are in the research log (18:20 UTC).  It goes
-out as **SCI-RES-0032**.
-(iii) **Unread:** the engineering division's enumeration X-013 (our request R10-E1) →
-**SCI-RES-0033**.
-(iv) **Done at this commit:** the least ratio over states of four floors (addendum
-A17 (21), item 86; SCI-MSG-0031) — obligation G-4 partly answered.
-(v) Heads read at 18:39 UTC: theory `dfaa005`, engineering `c81166b`, ensemble `1a067b5`,
-geometry `e8e2582`, complexity `b36c463`.
+(i) **All three referee workstreams of the afternoon are read, checked and published at
+this commit:** SCI-REV-0020 (Ensemble: E5–E8, E1.3; workstream R21), SCI-REV-0021 (Geometry:
+Theorems B, B′, G; R22 — it also decides the question of our finding S83; its §0 compares
+it with the Geometry division's own review, which crossed it), SCI-REV-0022 (the theory
+division's assumption audit, sampled; R23).  Each report under
+`docs/science/workstreams/` ends with a coordinator's note that says what was read and
+checked.  **For the research owner:** R21 reported one declined tool action (a file write);
+it was not performed for it (note at the end of `R21_REPORT.md`).
+(ii) **The Ensemble division's question E-S3 is answered** (SCI-RES-0032; addendum A17 (22),
+items 87–89; `experiments/science/ensemble_checks/`): their thermal union bound checked and
+measured; their threshold rule adopted with its provenance; a sandwich as a first-order
+class.  **The loss between groups is split** (item 90; SCI-MSG-0032;
+`pi_inference/group_coupling.py`): on Lys₁₂ at band 4 pair terms alone would take
+0.61 of the bracket — the number behind open problem D15 (a) if someone builds them.
+(iii) **Owed, in this order:**
+  (a) **SCI-RES-0034, to the Complexity division** (their COMPLEXITY-RES-0005, read in full
+  at the fetch of 19:22): tell them that their `λ₁` is the `λ_gs` of SCI-MSG-0031 (values
+  there), and compute their zero-temperature threshold
+  `λ₀ = min_S Σ_{i∈S} ln(1/q_i) / Σ_{U⊆S} max γ_U` on our four cases by enumeration over the
+  4 096 site sets (`q_i`: the off-anchor probability of site `i` under the floor without
+  penalty; `γ_U`: the window-form penalty tables, as in `pi_inference/floor_transition.py`)
+  — expect it far below the measured `λ_c` at order 4 (it prices a displaced site at its
+  typical cost; our own missed prediction of item 84 did the same) and say so with the
+  number; export the `q_i` and table maxima as a small file for them.
+  (b) **SCI-RES-0033, to the engineering division:** their enumeration X-013 (our request
+  R10-E1; `experiments/eng/weighted_cube/REPORT.md` at `c81166b`) **has been read in full
+  by the coordinator (613 lines)**; not yet done: re-run `tests/eng/test_weighted_cube.py`
+  from a scratch copy, check one certified number independently (the site-wise optimum by
+  an own Blahut–Arimoto equals their capacity at `p ≥ 0.3`), and say what it settles of
+  R10-T2 (it decides one of the six cells named there and proves that blocks of five
+  cannot decide the other five; the crossover of `a_∞` is indicated near `u ≈ 1.5`).
+  (c) The Complexity division asks, "if your referee is available", for a second look at
+  the proof of their Theorem 1c in the regime `|x| ≥ |σ|` and at Lemma A1 of their appendix
+  (COMPLEXITY-RES-0004): not started, not decided — a small workstream if credits allow.
+(iv) **Next own mathematics** (`OPEN_PROBLEMS.md`): D15 (b) an upper-end inequality that
+uses the floor as well as the ceiling; D15 (a) pair terms for Lys₁₂; G-3 (tree
+decompositions), G-5 (continuous variables), D14 (down-closed families).  Unrefereed
+inside the division: addendum A17 (13)–(18) (the research owner's decision, as recorded)
+and part (22).
+(v) Heads read at 19:22 UTC: theory `dfaa005`, engineering `c81166b`, ensemble `1a067b5`,
+geometry `cd4a2ec`, complexity `ff04e5e`.
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
    (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —

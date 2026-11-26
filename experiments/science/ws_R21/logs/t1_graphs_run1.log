@@ -1,0 +1,22 @@
+T1 graphs  start 2026-11-26T17:10:42Z
+graph       N   m rank 2N-3 rigid redund kappa stress_rk N-3 GGR(stress) GGR(JJ) #separators connected
+K3          3   3    3    3  True  False     2         0   0        True    True           3     False
+K4          4   6    5    5  True   True     3         1   1        True    True           0      True
+K4-e        4   5    5    5  True  False     2         0   1       False   False          15     False
+K5          5  10    7    7  True   True     4         2   2        True    True           0      True
+K5-e        5   9    7    7  True   True     3         2   2        True    True           0      True
+W5          5   8    7    7  True   True     3         2   2        True    True           0      True
+K4+deg2     5   8    7    7  True  False     2         1   2       False   False           3     False
+K6          6  15    9    9  True   True     5         3   3        True    True           0      True
+W6          6  10    9    9  True   True     3         3   3        True    True           0      True
+K33         6   9    9    9  True  False     3         0   3       False   False         255     False
+K33+e       6  10    9    9  True   True     3         3   3        True    True           0      True
+2K4_edge    6  11    9    9  True   True     2         2   3       False   False           0      True
+2K4_2sum    6  10    9    9  True   True     2         2   3       False   False           0      True
+prism       6   9    9    9  True  False     3         0   3       False   False         255     False
+violations of the consistency checks: 0
+DONE t1_graphs 2026-11-26T17:10:46Z
+
+real	0m3.996s
+user	0m2.937s
+sys	0m0.060s

@@ -1,0 +1,11 @@
+T5 gap  graph=W5 N=5 m=8 codim of the measurement variety=1 K=3 ensembles=8 LM starts=12 seed=2105 start 2026-11-26T18:07:29Z
+ens 0: 6558 colourings (all); g1 = 2.416e-05 (re-checked 2.416e-05; sup-norm 2.103e-05; relative to mean sq. length 5.94e-06); min exact defect 4.017e-04
+ens 1: 6558 colourings (all); g1 = 9.277e-05 (re-checked 9.277e-05; sup-norm 6.777e-05; relative to mean sq. length 1.95e-05); min exact defect 1.270e-04
+ens 2: 6558 colourings (all); g1 = 1.021e-06 (re-checked 1.021e-06; sup-norm 9.946e-07; relative to mean sq. length 3.98e-07); min exact defect 6.306e-06
+ens 3: 6558 colourings (all); g1 = 2.402e-05 (re-checked 2.402e-05; sup-norm 2.381e-05; relative to mean sq. length 6.03e-06); min exact defect 1.027e-03
+ens 4: 6558 colourings (all); g1 = 4.171e-06 (re-checked 4.171e-06; sup-norm 3.126e-06; relative to mean sq. length 6.84e-07); min exact defect 2.913e-05
+ens 5: 6558 colourings (all); g1 = 1.487e-04 (re-checked 1.487e-04; sup-norm 8.073e-05; relative to mean sq. length 1.19e-05); min exact defect 7.064e-04
+ens 6: 6558 colourings (all); g1 = 3.434e-04 (re-checked 3.434e-04; sup-norm 3.233e-04; relative to mean sq. length 6.96e-05); min exact defect 7.836e-04
+ens 7: 6558 colourings (all); g1 = 4.208e-06 (re-checked 4.208e-06; sup-norm 3.476e-06; relative to mean sq. length 1.19e-06); min exact defect 3.913e-05
+SUMMARY graph=W5 m=8 codim=1 K=3 splices=6558: g1 median 2.409e-05, min 1.021e-06, max 3.434e-04; sup-norm gap relative to the mean squared length: median 5.98e-06, min 3.98e-07; heuristic splices^(-1/codim) = 1.525e-04
+DONE t5_gap_scaling W5 3 2026-11-26T18:08:27Z

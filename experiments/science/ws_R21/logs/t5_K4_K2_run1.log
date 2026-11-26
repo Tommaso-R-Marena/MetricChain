@@ -1,0 +1,11 @@
+T5 gap  graph=K4 N=4 m=6 codim of the measurement variety=1 K=2 ensembles=8 LM starts=12 seed=2105 start 2026-11-26T18:05:09Z
+ens 0: 62 colourings (all); g1 = 1.472e-01 (re-checked 1.472e-01; sup-norm 9.833e-02; relative to mean sq. length 2.51e-02); min exact defect 3.910e-01; switching gap g2 = 3.811e-01
+ens 1: 62 colourings (all); g1 = 4.703e-02 (re-checked 4.703e-02; sup-norm 2.026e-02; relative to mean sq. length 4.38e-03); min exact defect 9.738e-02; switching gap g2 = 1.809e-01
+ens 2: 62 colourings (all); g1 = 3.199e-02 (re-checked 3.199e-02; sup-norm 1.939e-02; relative to mean sq. length 3.91e-03); min exact defect 7.276e-02; switching gap g2 = 3.535e-01
+ens 3: 62 colourings (all); g1 = 7.309e-02 (re-checked 7.309e-02; sup-norm 5.357e-02; relative to mean sq. length 1.47e-02); min exact defect 1.134e-01; switching gap g2 = 9.471e-02
+ens 4: 62 colourings (all); g1 = 2.737e-02 (re-checked 2.737e-02; sup-norm 1.602e-02; relative to mean sq. length 4.70e-03); min exact defect 1.272e-01; switching gap g2 = 2.646e-01
+ens 5: 62 colourings (all); g1 = 1.951e-02 (re-checked 1.951e-02; sup-norm 1.145e-02; relative to mean sq. length 4.77e-03); min exact defect 4.576e-02; switching gap g2 = 9.880e-02
+ens 6: 62 colourings (all); g1 = 1.861e-02 (re-checked 1.861e-02; sup-norm 1.532e-02; relative to mean sq. length 4.25e-03); min exact defect 5.487e-02; switching gap g2 = 1.920e-01
+ens 7: 62 colourings (all); g1 = 3.159e-02 (re-checked 3.159e-02; sup-norm 2.128e-02; relative to mean sq. length 5.58e-03); min exact defect 2.857e-01; switching gap g2 = 2.411e-01
+SUMMARY graph=K4 m=6 codim=1 K=2 splices=62: g1 median 3.179e-02, min 1.861e-02, max 1.472e-01; sup-norm gap relative to the mean squared length: median 4.73e-03, min 3.91e-03; g2 median 2.165e-01, min 9.471e-02; heuristic splices^(-1/codim) = 1.613e-02
+DONE t5_gap_scaling K4 2 2026-11-26T18:05:11Z

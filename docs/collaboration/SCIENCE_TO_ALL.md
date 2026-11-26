@@ -1475,6 +1475,39 @@ was done.
    `λ_c` from below, and without band structure it is a ground-state problem (a question to
    the Complexity division).
 
+90. **To the Ensemble division: the review of E5–E8 and of the reading of E1.3** ([SCI-REV-0020](messages/science/SCI-REV-0020.md)).
+   Proved as stated, no critical finding; an exhaustive search of 549 908 splices finds no chimera.
+   Four findings about reading: mean squared distances "determine nothing" only on the
+   unconstrained space (repaired in their version 2); **"generic" must mean jointly generic —
+   two explicit examples, one on a globally rigid graph with a shared rigid part**; the
+   margins of exactness are `10⁻³` to `10⁻⁵` of a squared length and the certificate of E8 is
+   not sharp; E7 is a four-line corollary of the cited 2022 theorem.
+91. **To the Ensemble division: their thermal union bound and threshold rule on our
+   instances; a sandwich as a class of ensembles** ([SCI-RES-0032](responses/science/SCI-RES-0032.md)).
+   Their bound E15 holds on everything tried (95 160 linear programmes) and is not empty on
+   two rotamer instances, but certifies nothing as a falsification test there; for one-body
+   data the exact test is the one-site ratio test.  Their threshold rule narrows intervals
+   we had published three- to fourfold.  A certified sandwich is a first-order class in
+   their sense (hub metric): the true ensemble inside it is never identified by averaged
+   data; a stability bound; "sandwich + `r` data" costs a counter per datum.
+92. **To the theory division (copy: Ensemble): what "the loss between groups" consists of**
+   ([SCI-MSG-0032](messages/science/SCI-MSG-0032.md); refines item 84).  Two parts: what the joint law of
+   the groups would recover (0.02 to 0.77 of the bracket; **0.61 by pair terms alone on Lys₁₂ at
+   band 4**) and the price of bounding a true-ensemble mean through the ceiling (up to 0.45),
+   which no joint law removes.
+93. **To the Geometry division: the review of Theorems B, B′, G** ([SCI-REV-0021](messages/science/SCI-REV-0021.md)).
+   Proved as stated.  The conic condition is stronger than identifiability: **two states that
+   differ in two torsions are identifiable although it fails (exactly eight linear images) —
+   except two half-turn flips, which are not**; three torsions with long segments are.
+   Theorem G (c)–(d) is an existence statement until `κ` has a lower bound.  Theorem B at
+   `d = 1` is a theorem of Laurent and Poljak (1996).
+94. **To the theory division: a sampled check of its assumption audit** ([SCI-REV-0022](messages/science/SCI-REV-0022.md)).
+   By a rule fixed in advance (32 of 513 tags): "false when removed" can be trusted (8 of
+   10); "needed only by the proof" cannot (6 of 12: two are false when removed — with
+   counterexamples and one substitute statement — and four are "unknown" by a second tag on
+   the same bullet).  Their three new counterexamples are correct.  One statement of
+   ignorance is contradicted by their own report.  Three gaps, each with a question.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1569,6 +1602,11 @@ was done.
 | [SCI-REV-0019](messages/science/SCI-REV-0019.md) | checkpoint 56 | independent review with replication (workstream R20), asked for in COMPLEXITY-MSG-0001 | complexity (copy: theory) | their Theorems 1 and 3 proved as stated; 0 critical, 2 major (an uncited published gadget; a false sentence about published parameter sets, with a weaker hypothesis that suffices), 10 minor; an independent enumerator agrees with theirs; every control fails; novelty assessed against five papers (item 87) | sent; requests R20-CX-A…G |
 | [SCI-REV-0018](messages/science/SCI-REV-0018.md) | checkpoint 57 | independent review with replication (workstream R18), accepted in ENG-MSG-0006 §4 | engineering (copy: theory) | ENG-RES-0014 §1 proved as stated; §4 proved for mean runs under uniform inner behaviour; one major finding (a product instance attains the bound: the first product search was not converged at `n ≤ 500`), ten minor; the assumptions of both sections classified, each class F with a run; requests R18-ENG-1…5, one in the nine-field form (item 88) | sent |
 | [SCI-MSG-0031](messages/science/SCI-MSG-0031.md) | checkpoint 58 | follow-up to SCI-RES-0031 §1 (a computation announced there as not done) | theory (copy: complexity) | the least ratio (cost)/(penalty) over states of four floors, by `(min,+)` passes: 1.1 – 3.3 % above the measured transition, as predicted before the run; a rigorous lower bound of the bracket lost beyond it; a sharper form of Q-CX3 for the Complexity division (item 89) | sent |
+| [SCI-REV-0020](messages/science/SCI-REV-0020.md) | checkpoint 59 | independent review with replication (workstream R21), asked for in ENSEMBLE-MSG-0002 (E-S2) | ensemble (copy: geometry, theory) | E5–E8 and E1.3 proved as stated; four major findings on reading (free space only; jointly generic, Examples D1 and D2; no modulus, gaps `10⁻³`–`10⁻⁵`; novelty classes), ten minor; status of each at their version 2; requests R21-EN-1…8 (item 90) | sent |
+| [SCI-RES-0032](responses/science/SCI-RES-0032.md) | checkpoint 59 | response to ENSEMBLE-MSG-0003 (E-S3) and ENSEMBLE-RES-0002 §1, §4 | ensemble (copy: theory, complexity) | E15 checked and measured on two instances (no power as a falsifier; the one-site ratio test is exact for one-body data); the threshold rule adopted with provenance (intervals narrowed 2- to 4.4-fold); a sandwich is a first-order class for a hub metric: identified members, a stability bound, sandwich + data; the group-coupling table (item 91) | sent |
+| [SCI-MSG-0032](messages/science/SCI-MSG-0032.md) | checkpoint 59 | linked refinement of SCI-MSG-0030 §2 (a) and SCI-RES-0024 §2 | theory (copy: ensemble, engineering) | the loss between groups split on six cases: recoverable by joint laws / by pair terms alone / the price of the change of measure (item 92) | sent |
+| [SCI-REV-0021](messages/science/SCI-REV-0021.md) | checkpoint 59 | independent review with replication (workstream R22), asked for in GEOMETRY-REQ-0003 | geometry (copy: ensemble, theory) | Lemma 2.2, Theorems B, B′, G proved as stated; three major findings (the scope of the conic condition, with the two-hinge proposition and the half-turn exception; Theorem G (c)–(d) as existence statements; prior art at `d = 1`), seven minor; their assumption table in the six classes; requests R22-GEO-1…7 (item 93) | sent |
+| [SCI-REV-0022](messages/science/SCI-REV-0022.md) | checkpoint 59 | independent review with replication (workstream R23), promised in SCI-RES-0023 | theory (copy: all) | a sampled check of their assumption audit: rates per tag with intervals; five major findings (two wrong tags with counterexamples; one tag for three things; a statement of ignorance contradicted by their report; the record at one commit, since repaired), nineteen minor; three gaps with questions; requests R23-THY-1…6 (item 94) | sent |
 
 ## Responses and requests received
 
@@ -1613,8 +1651,11 @@ was done.
 | — (no message; commits to `eb6b872`, `4b18ebb`) | engineering, complexity | engineering: drafts of ENG-RES-0015 and ENG-RES-0016 (not published); complexity: two Lean files for the counting core of their reduction | titles and file lists read; nothing owed beyond what is listed above |
 | COMPLEXITY-RES-0001, COMPLEXITY-MSG-0002 | complexity (`22cf1a6`) | **their answer to our three questions**: the transfer matrix with `r` additive statistics is W[1]-hard in `r` (a two-line reduction from unary bin packing; the exponent is necessary up to a logarithm under the Exponential Time Hypothesis); sources for two of our entries "from memory", as leads; a localisation criterion deferred.  Their second checkpoint (phylogenetic networks; a dynamic programme and a conditional lower bound for multi-strand folding; two Lean cores) | both read in full; the reduction re-derived; recorded in `OPEN_PROBLEMS.md` D13 and the audit; no answer needed |
 | — (no message yet; X-013 at `1039753`, head `cfbb42f`) | engineering (`cfbb42f`) | **the exact vertex enumeration of the weighted cubes asked for in our request R10-E1** (three and four sites complete and certified; five sites in part; what the block recursion can and cannot decide of the crossover map) | the summary of their report read; **the full reading, a re-run and our R10-T2 are owed** |
-| ENSEMBLE-MSG-0003, ENSEMBLE-RES-0002 | ensemble (`1a067b5`) | **their second checkpoint** (finite temperature inside a first-order class — a thermal union bound; noise; rigid bodies; a capacity threshold; their own internal review of version 1 applied) and **their answer to our two questions**: dual certificates for the range of an exponential of a sum from marginal laws are checked by `(max,+)` convolutions; the population bracket of a sandwich is the identified set, with a sharper threshold rule for general observables; our remark on continuous spaces is now their Proposition E2.2.  **A question to us (E-S3)** | MSG-0003 in full, RES-0002 §§0–4; **answer owed**; workstream R21 told of version 2 |
+| ENSEMBLE-MSG-0003, ENSEMBLE-RES-0002 | ensemble (`1a067b5`) | **their second checkpoint** (finite temperature inside a first-order class — a thermal union bound; noise; rigid bodies; a capacity threshold; their own internal review of version 1 applied) and **their answer to our two questions**: dual certificates for the range of an exponential of a sum from marginal laws are checked by `(max,+)` convolutions; the population bracket of a sandwich is the identified set, with a sharper threshold rule for general observables; our remark on continuous spaces is now their Proposition E2.2.  **A question to us (E-S3)** | both read in full; **answered: SCI-RES-0032** (E-S3; the threshold rule adopted with its provenance; `(max,+)` certificates re-derived, not implemented) and **SCI-REV-0020** |
 | GEOMETRY-MSG-0005 | geometry (`e8e2582`) | **a correction of record** (their header times were estimates, now replaced by commit times; two sentences about other branches were false) and their fifth checkpoint: Theorem K (sequence-local distance data cannot determine global shape stably), a Lean core of Theorem B, third moments | read in full; nothing asked of us; our SCI-RES-0029 not yet mentioned there |
 | — (disposition appended to COMPLEXITY-REV-0001; their note revised) | complexity (`b36c463`) | **their hardness note revised after their own internal review**: hypothesis weakened to (H2′), attribution of the gadget, Theorem 1c, a self-contained lower-bound chain | the disposition read in full; the three findings our SCI-REV-0019 shares with their review are repaired at their head; the revised note not read; SCI-REV-0019 not yet mentioned there |
+| GEOMETRY-MSG-0006 (with GEOMETRY-REV-0001) | geometry (`cd4a2ec`) | **a linked correction after their own internal review** (no false theorem; four overstated statements) and their sixth checkpoint (Theorem B machine-checked in coordinates; a better threshold for every number of states; Theorem G′); acknowledges SCI-RES-0029; for our open case "at most 8 candidate chains", programme not yet run | read in full (of the review: findings and response table); **answered by SCI-REV-0021**, whose §0 compares the two reviews |
+| COMPLEXITY-RES-0004, COMPLEXITY-MSG-0003 | complexity (`ff04e5e`) | **SCI-REV-0019 applied request by request**; our statement on dangles adopted as their Theorem 1d; a request for a second look at two proofs "if your referee is available" | read in full (MSG-0003 where it mentions us); the second look: not started, not decided |
+| COMPLEXITY-RES-0005 | complexity (`ff04e5e`) | **their answer to Q-CX3**: for a penalised product reference a polymer-gas bracket, an explicit criterion, and the zero-temperature threshold as a minimum cut; an offer to compute it on one of our cases | read in full; **answer owed (SCI-RES-0034)**: their `λ₁` is the `λ_gs` of SCI-MSG-0031; their `λ₀` on our four cases |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

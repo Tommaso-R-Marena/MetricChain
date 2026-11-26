@@ -1,0 +1,4 @@
+T6d two-conformer chains  bonds=6 instances=12 starts=2000  start 2026-11-26T18:22:48Z
+     6 bonds: dim of the space of quadrics through the bond vectors c_u = [4]; instances with a chain other than x1, x2 (mod congruence) among the solutions: 12/12; distinct extra solutions per instance (median, max; capped at 600) = 600, 600; runs reaching a solution: 23993/24000 (x1: 0, x2: 0); IDENTIFICATION (weights 0.4/0.6): largest mass an ensemble with the same mean squared distances can put on the other chains found: median 1.000, max 1.000; instances where it is > 1e-6: 12/12; solutions affinely independent in 0/12
+    control: instances in which x1 or x2 was NOT reached by any start: 12/12
+DONE t6d_two_conformer_chains 6 2026-11-26T18:23:43Z

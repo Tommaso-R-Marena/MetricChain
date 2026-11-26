@@ -1,0 +1,23 @@
+T8 table criterion  start 2026-11-26T18:35:46Z  pairs per graph: 400
+K4+deg2 (edges [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3), (0, 4), (1, 4)]): 400 random pairs, weights [0.4 0.6]
+    realisable chimeras:  0; determined: True ; pairs:    1; example of the chimera colourings [] (largest mass on chimeras -0.000)
+    realisable chimeras:  1; determined: True ; pairs:   26; example of the chimera colourings ['11111101'] (largest mass on chimeras -0.000)
+    realisable chimeras:  2; determined: False; pairs:   26; example of the chimera colourings ['00000001', '11111110'] (largest mass on chimeras 0.800)
+    realisable chimeras:  2; determined: True ; pairs:   29; example of the chimera colourings ['00000001', '00000011'] (largest mass on chimeras -0.000)
+    realisable chimeras:  3; determined: False; pairs:   22; example of the chimera colourings ['00000001', '00000011', '11111100'] (largest mass on chimeras 0.800)
+    realisable chimeras:  3; determined: True ; pairs:   66; example of the chimera colourings ['00000001', '00000011', '11111101'] (largest mass on chimeras -0.000)
+    realisable chimeras:  4; determined: False; pairs:  111; example of the chimera colourings ['00000001', '00000010', '00000011', '11111101'] (largest mass on chimeras 0.800)
+    realisable chimeras:  5; determined: False; pairs:   52; example of the chimera colourings ['00000001', '00000010', '00000011', '11111101', '11111110'] (largest mass on chimeras 1.000)
+    realisable chimeras:  6; determined: False; pairs:   67; example of the chimera colourings ['00000001', '00000010', '00000011', '11111100', '11111101', '11111110'] (largest mass on chimeras 1.000)
+    pairs with at least one chimera: 399; of these determined all the same: 121; not determined: 278
+W5 (edges [(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 4), (2, 3), (3, 4)]): 400 random pairs, weights [0.4 0.6]
+    realisable chimeras:  0; determined: True ; pairs:  400; example of the chimera colourings [] (largest mass on chimeras -0.000)
+    pairs with at least one chimera: 0; of these determined all the same: 0; not determined: 0
+K5-e (edges [(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4)]): 400 random pairs, weights [0.4 0.6]
+    realisable chimeras:  0; determined: True ; pairs:  400; example of the chimera colourings [] (largest mass on chimeras -0.000)
+    pairs with at least one chimera: 0; of these determined all the same: 0; not determined: 0
+DONE t8_table_criterion 2026-11-26T18:35:49Z
+
+real	0m3.880s
+user	0m3.784s
+sys	0m0.048s
