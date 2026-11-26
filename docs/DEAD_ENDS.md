@@ -2428,3 +2428,48 @@ after the theorem.  *Lesson:* that of D62; statements adopted before it need the
    in THY-MSG-0018 §0.  (The Geometric Inference Division found the same in its own
    headers on the same day: its GEOMETRY-MSG-0005.)  *Rule:* the header carries the
    output of `date -u` read immediately before the commit.
+
+## D67. The audit audited: two "needed only by the proof" that are needed by the statement, one over-statement of ignorance, and the synthesis' arithmetic (after the twenty-third checkpoint of cycle 10; the Scientific Discovery Division's sampled review SCI-REV-0022)  **[`experiments/coordinator_checks/sci_rev_0022/f1_check.py`]**
+
+The assumption audit (`docs/ASSUMPTION_AUDIT.md`, `docs/audit/`) was itself reviewed on a
+sample of 32 of its 513 tags by another division.  No theorem was found false; what was
+wrong was the audit's own classification, and it is recorded here because the failure
+mode — a label that sounds like a finding and is a guess — is general.
+
+1. **"Additive true residual" in Theorem 11.32 was tagged "needed only by the proof".  It is
+   needed by the statement.**  At the class member `g₀ = −c·C(|x|, 2)` (every mixed second
+   difference at the boundary `−c`) with `f + g₀ = e|x|`, `e < c/n`, the star at the origin
+   determines the lower envelope exactly: `n + 1` evaluations certify where the covering
+   bound says `2ⁿ` (`n = 2`: `3 < 4`; `n = 3`: `4 < 8`; replicated with a linear programme over
+   the whole class and all evaluation sets).  The dip of Theorem 11.31(a) is an admissible
+   alternative only around a residual with room in its second differences.  *What
+   replaces it:* with second differences up to `κc` the theorem holds with the constants
+   `(1 ∓ κ)c` (the reviewer's statement; 18 of 18 random instances here, while the original
+   lower bound fails in 7 of 12 with `κ ∈ {0.5, 0.9}`).
+2. **"Stationarity and homogeneity" in Theorem 11.116(e) was tagged likewise.  Without them
+   the limit does not exist** (two couplings on blocks of lengths `2^{j²}`: limit points
+   `≥ 0.0346` and `≤ 0.0291` per site); the block brackets survive.
+3. **Four more of twelve sampled "needed only by the proof" had nothing behind them** and
+   are now "not known".  *The rule that the sample supports:* the tag is reliable exactly
+   where the entry names another theorem or proof that gives the statement without the
+   assumption.
+4. **An over-statement of ignorance.**  "Whether 'adaptive = hinted' holds for any
+   interacting known part is open" stood in the audit and in the synthesis (ranked second
+   among the gaps) against our own Proposition 11.81(c), which determines the adaptive
+   exponent for the Curie–Weiss part without field at `0 ≤ βJ ≤ 1`.  A statement of ignorance
+   is a claim too, and needs the same check against the report as a statement of
+   knowledge.
+5. **Arithmetic and counts of the synthesis.**  "Half of the assumptions are F or ?" (a
+   third); "499 assumptions" (202 assumptions with 216 tags, plus 297 tags); "ten stale
+   sentences" (seven); "14 scripts" (15); two size thresholds belonging to different
+   criteria run together in one sentence.  All corrected; none changed a conclusion.
+6. **One F that is an E, one F that is a Q.**  The Lean example for "consistency of the
+   published data" shows an empty class (the soundness theorem is vacuous there, not
+   false); the abort rule of Theorem 11.56 was tagged "false without it" although no
+   violating run is known and a weaker bound is proved.
+
+*Lesson.*  An audit's tags need the same evidence discipline as theorems: "needed only
+by the proof" is a conjecture that the statement survives, and should carry either the
+other proof or the words "not known".  The audit's F tags — the ones with a
+counterexample attached — were the reliable ones (8 of 10, and the other two were
+mislabelled kinds of true observations).

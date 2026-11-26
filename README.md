@@ -146,9 +146,12 @@ the rest are paper proofs, among them the matching upper bound of the exponent b
 threshold, which an independent referee checked.  For minima and their certificates — not for
 free energies — a known part turns out to be nothing but the
 gradient part of an asymmetric envelope (normal form, machine-checked).  Second-order
-structure does not rescue certification when its constants are dense: the uncertainty left by
-any set of evaluations grows quadratically with the distance to it (machine-checked), so the
-price is exponential unless the excitation energies are of the order of `c·n`.
+structure does not rescue certification when its constants are dense: around a residual
+whose second differences vanish, the uncertainty left by any set of evaluations grows
+quadratically with the distance to it (machine-checked), so the price is exponential unless
+the excitation energies are of the order of `c·n` (for a residual with second differences
+up to `κc`, `κ < 1`, the same with the constants `(1 ∓ κ)c`; at a residual on the boundary of
+the class it fails — theory report, the remark after Theorem 11.32).
 The exponential price is a property of the *class*, not of a certificate format and not
 of worst-case reasoning as such: every instance has its own lower bound, which holds for
 every procedure that is correct on the first-order class, so no such procedure can be cheap

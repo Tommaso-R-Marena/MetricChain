@@ -16,22 +16,31 @@ does not repeat:
 
 | source | covers | size |
 |---|---|---|
-| `docs/audit/AA1_REPORT.md` | theory report §§2–6 and §§11.1–11.15: 71 numbered statements | 202 classified assumptions |
-| `docs/audit/AA2_REPORT.md` | theory report §§11.16–11.32: 85 numbered statements | 297 classified assumptions |
+| `docs/audit/AA1_REPORT.md` | theory report §§2–6 and §§11.1–11.15: 71 numbered statements | 202 assumptions carrying 216 tags |
+| `docs/audit/AA2_REPORT.md` | theory report §§11.16–11.32: 85 numbered statements | 297 tags (the report counts tags, not assumptions) |
 | `docs/workstreams/N_REPORT.md` §6 | the nested adaptive algorithm (Theorems 11.52, 11.54, 11.56, 11.58), from an abstract form of the theorem | 25 rows |
 | `docs/workstreams/R_REPORT.md` §9 | the rate of the level recursion | structural part against the one analytic hypothesis |
 
 **Status.**  The two audits were made by independent internal readers (AI agents briefed
 by the coordinator; internal reviews, not external peer review), each with its own
-scripts (`experiments/audit/AA1`, `experiments/audit/AA2`: 14 scripts).  The coordinator
-re-ran all 14 scripts — every output is identical to the stored one — and verified the
-one error of substance that the audits found (Theorem 11.33(a), §7 below).  The
+scripts (`experiments/audit/AA1`, `experiments/audit/AA2`: 15 scripts — seven and eight; an
+earlier version of this file said 14).  The coordinator re-ran them — every output was
+identical to the stored one; on a second run at the time of the corrections below, 14 are
+identical again and the fifteenth, which cross-checks the Lean names cited in the theory
+report, differs only through the report's later growth — and verified the one error of
+substance that the audits found (Theorem 11.33(a), §7 below).  The
 corrections to the theory report and the README are recorded item by item in
 `docs/audit/APPLIED_CORRECTIONS.md`.  The table for the nested algorithm rests on workstream
 N, which has since been refereed internally (`docs/workstreams/N_REVIEW.md`: the level theorem
 correct as stated; six rows of its table reclassified — the counts below are the revised
 ones); the rate theorem has been refereed internally in both halves (no error of
 substance).
+**The audit has itself been reviewed on a sample** by the Scientific Discovery Division
+(its SCI-REV-0022 and `docs/science/workstreams/R23_REPORT.md` on its branch
+`research/scientific-translation`, commit `88c9a90`: 32 of the 513 tags drawn by a rule fixed
+in advance, all 15 scripts re-run, a third replicated with independent code; an internal
+review by an AI session).  Its verdict, its corrections and what was done about them are
+§1a below; the counts of §1 are the corrected ones.
 Classifications are judgements with evidence attached; where the evidence is "not known"
 the reports say so, and §8 collects those cases.  Line numbers in the two audit reports
 and in the record of corrections refer to the theory report and the README as the audits
@@ -39,20 +48,34 @@ read them (commit `020e990`); the corrections made both files longer.
 
 ## 1. The categories, and the counts
 
+Counts of tags (an assumption can carry two), after the corrections of §1a; in brackets
+the counts as the audits delivered them, where different.
+
 | label | meaning (the directive's six categories, and one more) | AA1 | AA2 | N (25 rows; two labels possible) |
 |---|---|---|---|---|
-| E | essential to the result | 52 | 63 | 4 |
-| P | required only by the current proof technique | 16 | 62 | 5 |
-| C | introduced for computational or expository convenience | 26 | 29 | 6 |
-| Q | replaceable by a weaker quantitative condition (stated in the entry) | 39 | 28 | 7 |
-| X | removal changes the computational complexity (how, in the entry) | 13 | 18 | 9 |
+| E | essential to the result | 53 (52) | 63 | 4 |
+| P | required only by the current proof technique — **see the note below the table** | 13 (16) | 59 (62) | 5 |
+| C | introduced for computational or expository convenience | 27 (26) | 29 | 6 |
+| Q | replaceable by a weaker quantitative condition (stated in the entry) | 39 | 29 (28) | 7 |
+| X | removal changes the computational complexity (how, in the entry) | 14 (13) | 18 | 9 |
 | F | removal makes the result false (counterexample in the entry) | 47 | 52 | 3 |
-| ? | not known | 23 | 45 | 9 |
+| ? | not known | 23 | 47 (45) | 9 |
+| | all tags | 216 | 297 | |
 
-Half of the assumptions are either load-bearing in the strongest sense (F: about one in
-five) or of unknown status (?: one in seven); fewer than one in six is a pure
-convenience.  The theory is a theory of its models much more than its summaries said —
-47 sentences of the report and the README were found to state more than is proved (§7).
+*What the row P contains* (SCI-REV-0022, finding F3).  The audits used the tag for three
+different things: (i) another proof of the statement without the assumption is on record
+and named in the entry; (ii) the present proof uses the assumption at a named step and
+nothing is known about the statement without it; (iii) an ingredient that is itself a
+theorem (Harper's theorem, the binomial median) and not a hypothesis on the model.  Only
+(i) supports "the statement survives".  The entries have not been re-sorted beyond the
+sample; a reader should apply the rule of §1a.
+
+A third of the classifications are either load-bearing in the strongest sense (F: about
+one in five) or of unknown status (?: about one in seven); with E it is more than half;
+fewer than one in six is a pure convenience.  (An earlier version said "half … are F or
+?"; that was wrong arithmetic — SCI-REV-0022, g1.)  The theory is a theory of its models
+much more than its summaries said — 47 sentences of the report and the README were found
+to state more than is proved (§7).
 
 **The label P is itself a claim** (a point of the Scientific Discovery Division's first
 reading of this file, SCI-RES-0031 §2(b), taken as it stands).  "Required only by the
@@ -60,10 +83,79 @@ current proof" says that the statement survives without the assumption — a con
 unless the entry attaches another proof, a check or an argument.  The entries of the two
 audit reports say what they attach; where an entry attaches nothing, read P as "believed
 removable, not shown".  The research owner's sentence "Do not assume that these
-generalizations are necessarily possible" applies to exactly this label.  That division
-has announced a sampled review of twelve P-entries, ten F, six Q and four of unknown
-status, with three of the new counterexamples rebuilt (its SCI-REV-0022; not received
-when this was written).
+generalizations are necessarily possible" applies to exactly this label.  That division's
+sampled review has since put numbers on it:
+
+## 1a. The sampled review of this audit (SCI-REV-0022), and what was done
+
+| tag | sampled | stand | do not stand |
+|---|---|---|---|
+| F, false when removed | 10 | 8 — real counterexamples (two rebuilt with independent code, five more by the reviewer's own argument or computation) | 1 refutes a lemma of the proof, not the theorem; 1 shows vacuity, not falsity |
+| P, needed only by the present proof | 12 | 6 | **2 are false when removed; 4 are "not known"** by a second tag on the same bullet |
+| Q, replaceable by a weaker quantitative condition | 6 | 4 (one only after the reviewer stated and proved the condition) | 1 states no condition; 1 rests on a sketch quoted without its caveat |
+| ?, not known | 4 | 3 | 1 is decided in part by our own report |
+
+(Small samples: the reviewer's 95 per cent intervals for "stand" are 44–97, 21–79, 22–96 and
+19–99 per cent.)  **The rule a reader can use, which matches our own reading of the two
+reports:** an F of this audit can be trusted as "a counterexample exists"; a P is reliable
+where the entry names the *other* theorem or proof that gives the statement without the
+assumption — every such P in the sample stands — and where it names only the proof step,
+read "not known".  Neither of the two false P and none of the four others had a proof or
+a check behind it.  The three new counterexamples of §6 that the reviewer rebuilt are
+correct; all five sampled citations of that division's reviews report them correctly.
+
+*The two P that are false when removed* (both theorems are stated with the hypothesis, so
+neither theorem is wrong — the audit's classification was):
+
+* **Theorem 11.32, "the true residual is additive"** (AA1 entry E42): F, with a quantitative
+  substitute — at a residual with second differences up to `κc`, `κ < 1`, the covering
+  sandwich holds with the constants `(1 ∓ κ)c`; at the boundary of the class three
+  evaluations certify where the sandwich says four (`n = 2`).  Replicated by the coordinator
+  with code of its own (`experiments/coordinator_checks/sci_rev_0022/f1_check.py`: the
+  counterexample at `n = 2, 3`; the substitute in 18 of 18 random instances; the original
+  lower bound violated in 7 of 12 instances with `κ ∈ {0.5, 0.9}`).  Now a remark after the
+  theorem, and qualifications in row G14, §11.7 and the README.
+* **Theorem 11.116(e), stationarity and homogeneity** (AA2 entry 73): F for the existence of
+  the limit — couplings on blocks of lengths `2^{j²}`, alternately those of `p = 0.3` and none,
+  give limit points at least `0.0346` and at most `0.0291` per site; what holds without
+  homogeneity is the bracket block by block.  The argument was read and checked given
+  parts (a), (b) of the theorem and one number of AA2's script S3; now a remark in (e).
+
+*The other corrections* (tags changed in place in the two reports, each marked there with
+its old tag; listed in an appendix at the end of each report): AA1 — E15 and E25 `P ?` → `?`;
+E14 `F` → `E` (the Lean example shows an empty class: without consistency the soundness
+theorem is vacuously true, not false); E31 `Q` → `C`, `X` (no quantitative condition was
+stated); E48: the weaker condition is now stated (the reviewer's droplet criterion with
+site-dependent constants, proved in its report); E37: Harper's theorem marked as an
+ingredient.  AA2 — entry 40 (`βJ ≥ 0` in Proposition 11.81(c)) and entry 56 (extensive
+accuracy in Theorem 11.101) `P` → `?`; entry 15: the abort test before every query `F` → `Q`
+(without it the proved bound is `C_max + M̄`; no violating run is known — that division's
+SCI-REV-0016) and the binomial median marked as an ingredient; entry 11: the script
+refutes fact (F2) of the proof, the failing certificate is workstream N's Proposition
+N12, and the conclusion of the theorem without a product measure is "not known" (entry
+13); entry 64 (exact oracle): `?` with a field, `Q` on the uniform cube with that division's
+Theorem 4-τ; entry 13 and §§A.2, A.3: the sentence on interacting known parts (below);
+entry 17 now cites SCI-REV-0017; entry 36 now names that division's bounded-accuracy bound
+for product landscapes with site types (its Proposition A1.2; unrefereed here).
+
+*An over-statement of ignorance* (finding F4).  "Whether 'adaptive = hinted' holds for any
+interacting known part is open" contradicted our own Proposition 11.81(c): for the
+Curie–Weiss known part without field at `0 ≤ βJ ≤ 1` the adaptive exponent without a hint is
+determined and equals the hinted one, `R_H = R_unif` ([P]; part (c) is the workstream's
+sketch with the referee's completion, checked by the coordinator and not refereed in
+turn).  It is open in general; "adaptive = hinted" is not a property of product measures
+alone.  Corrected in §2 (Level 3), §3(b) and §8 item 2.
+
+*Not done.*  The other 481 tags are unreviewed.  Of the reviewer's coverage list, the
+following were audited by nobody as statements: §§7–9 and 12 of the theory report;
+nineteen rows of §10 by row (G18, G20–G22, G24, G26, G27, G29–G40); the Scientific
+Discovery Division's Conjecture R10.3; and everything added to the report after the
+audits (Theorems 11.53a, 11.53b, Lemma 11.58b – Theorem 11.58d, §11.33, the remarks after
+Theorems 11.32, 11.33 and in 11.116(e)).  Of its three questions (a product reference in
+the adaptive upper bounds — the antiferromagnetic Curie–Weiss known part; a two-sided
+tail estimate for the `p`-biased cube; site types growing with `n` and chains without
+homogeneity) the third is taken up in part (the remark in Theorem 11.116(e)); the other
+two are, in our judgement too, the right questions, and are in §8.
 
 ## 2. The hierarchy, from the most tractable model outwards
 
@@ -103,7 +195,9 @@ LEVEL 2  FINITELY MANY FIXED SITE TYPES, any finite alphabets, asymmetric site e
 LEVEL 3  EXCHANGEABLE KNOWN PARTS (functions of the type: mean-field)          11.76–11.82
          every-n statements by symmetry (stratified sample optimal up to a polynomial factor);
          single-letter hinted exponent for a convex rate function; not harder than the cube for
-         two of three exponents (two letters); adaptive exponent OPEN; two phases: searched values
+         two of three exponents (two letters); adaptive exponent: determined (= hinted = the cube's)
+         for the ferromagnetic Curie–Weiss part without field, 0 ≤ βJ ≤ 1 (11.81(c) [P]), OPEN
+         otherwise (antiferromagnets: nothing); two phases: searched values
     |
     |  lost: symmetry — hence the stratified sample, every unconditional upper bound, every
     |        formula; "ferromagnets are not harder than the cube" becomes false (AA2 S3)
@@ -117,7 +211,8 @@ LEVEL 5  NO STRUCTURE: any set, any reference measure, any envelope
          the exact characterisations of §§2–6 and §§11.1–11.6, 11.12–11.14, 11.22–11.24, 11.26, 11.29 [V];
          lower bounds 11.43(a), 11.45(a), 11.62, 11.116(c); the abstract nesting theorem (validity
          on any probability space, given tail functions: theory report Theorem 11.118 [P, refereed internally])
-         NOT available: any upper bound on the cost of any algorithm for a first-order class
+         NOT available: any upper bound, without a hint, on the cost of any algorithm for a
+         first-order class other than enumeration (with the instance as a hint: 11.22–11.26)
 ```
 
 Side ladders, each with its own assumptions (none implied by a first-order envelope):
@@ -125,7 +220,8 @@ Side ladders, each with its own assumptions (none implied by a first-order envel
 * **Other classes of ignorance.**  Linear in known features: rank-many evaluations
   (11.47 `[V]`, general) → a Hilbert ball: the spectrum (11.50a `[V]`) → second order with one
   reference, a product domain and weak coupling: a star of evaluations (11.16–11.18f) →
-  dense second-order constants: a quadratic law, cost `2^{n − o(n)}` (11.31–11.32) → a box
+  dense second-order constants: a quadratic law, cost `2^{n − o(n)}`, at true residuals
+  strictly inside the class in second order (11.31–11.32 with the remark after 11.32) → a box
   around a sampleable known part with a certified floor: the Boltzmann factor of one
   free-energy distance, *with the instance as a hint* (11.110).
 * **Continuous variables.**  Voxel enclosures (product measure, pairwise energy; cost
@@ -182,7 +278,11 @@ are validity hypotheses too);
 "ferromagnets are never harder than the cube" is false for the nearest-neighbour
 ferromagnet (`0.0346` against `0.0291` per site at `u = 1`; AA2 S3); Theorem 11.33(a) is false
 for a pairwise known part of ferromagnetic blocks (§7).
-*Open:* the adaptive exponent without a hint for **every** interacting known part.
+*Open:* the adaptive exponent without a hint for interacting known parts in general — it
+is determined for one family, the ferromagnetic Curie–Weiss part without field at
+`0 ≤ βJ ≤ 1`, a positive mixture of field-tilted product measures (Proposition 11.81(c)); for
+a known part that is not such a mixture (the antiferromagnetic Curie–Weiss part, where the
+hinted exponent is the cube's) nothing is known.
 
 **(c) Non-ideal and flexible geometry.**
 *Holds:* the torsion-to-RMSD chain rule with inertia inputs (`[V]`); profile envelopes of
@@ -236,8 +336,11 @@ accuracy for a growing system the cost on a first-order class is exponential for
 algorithm (`n·h − O(1)` on the cube); what is polynomial there belongs to other classes
 (linear; weakly coupled second order with an additive known part; a box with a small
 free-energy distance to its floor).  Below Level 0 every upper bound is asymptotic with
-proved error terms that fall below the exponent itself only at `n ≥ 10¹¹` (a field) and
-`4·10⁹`, `1.7·10¹⁴`, `10¹⁹` (two, three, four letters; AA2 S4, block H).
+proved error terms: for a field the term `2·n^{−1/8}` falls below the exponent itself only
+from `n ≈ 4.9·10¹⁴` on at `u = 1` (exponent `0.0291`; from `10¹¹` on at `u = 2`, exponent `0.0839`),
+and for two, three and four letters the term `q·n^{−1/(2q+2)}` falls below the fixed number
+`0.05` only from `4·10⁹`, `1.7·10¹⁴`, `10¹⁹` on (AA2 S4, block H — two different criteria, which an
+earlier version of this sentence ran together).
 
 **(h) Ensembles not concentrated near one reference; (i) no symmetry, exchangeability,
 homogeneity or product structure.**
@@ -297,24 +400,32 @@ The directive asks that these be named.
 | Theorem 11.33(b): exponential for `w > 4` | asymptotic at fixed `w`: at `w = 5` the bound is `e^{3.9}` for `n = 2000` | theory report, scope note of the theorem |
 | the any-reference width `(Σc_i)²` of the sandwich | vacuous once `βΣc_i > 8` | AA1, hierarchy L1 |
 | optimality "up to a polynomial factor" of stratified samples (11.76(a), 11.95) | the factor exceeds the cost for `n ≤ 50` (cube), `n ≤ 300` (twenty types); empty with one type per site | AA2 S7 |
-| asymptotic isoperimetry behind Levels 1–2 | error terms `n^{−1/8}`, `n^{−1/(2q+2)}`: informative from `n ≈ 10¹¹` on | AA2 S4 |
+| asymptotic isoperimetry behind Levels 1–2 | error terms `2n^{−1/8}`, `q·n^{−1/(2q+2)}`: below the exponent from `n ≈ 10¹¹` (`u = 2`) to `5·10¹⁴` (`u = 1`) on for a field; below `0.05` from `4·10⁹` on for two letters | AA2 S4 |
 | cost bounds for profile certificates (11.49) | vacuous at extensive accuracy | AA2, overstatement 24 |
 | voxel enclosures in dimension `d` | cost grows like `d^{d/2}` | AA1, hierarchy L5 |
 | the abstract nesting theorem with a tail function that is valid but not sharp | ball-volume bound: exponent `0.197` for `0.029`; transport bound: the certified cap on the sample is `10^{14}`–`10^{24}` on the cubes of dimension 30 and 60 (runs may close much earlier, but below the threshold rate `u²/8` they do not close before the atom) | workstream N §4(e), corrected by its referee |
 | the nested adaptive algorithm at bounded accuracy (11.56, 11.58, 11.58a) | the `O(√(n ln n))` term has explicit but large constants; the sizes at which a certified separation from plain Monte Carlo is reported are those of §11.19, remarks (1a), (1b); the schedule of Theorem 11.58a itself costs more than the non-adaptive bound `n·a` up to `n ≈ 2·10⁴` at `u = 1` (our referee R12: `2.1·10⁴`; the science division's SCI-REV-0017: `2.04·10⁴`) | theory report §11.19 |
-| the rate theorem for `k` nested levels | asymptotic in `k`; no certified constants at finite `k` | `docs/workstreams/R_REPORT.md` §12 |
+| the rate theorem for `k` nested levels | asymptotic in `k`; no certified upper constants at finite `k` (exact lower bounds exist for the Gaussian pair) | `docs/workstreams/R_REPORT.md` §12 |
 
 ## 6. New counterexamples and new positive facts found by the audits
 
-All scripted, stored, and re-run by the coordinator.
+Scripted, stored and re-run by the coordinator where a script is named; the positive
+facts of the last bullet and the `n + 3` contradiction are arguments in the entries.  The
+first, third and fourth were rebuilt by the Scientific Discovery Division with code of
+its own before it opened ours (SCI-REV-0022 §1): correct.
 
 * Every site non-sharp and yet `n + 1` evaluations suffice (two-state sites with margin
-  below `1/n`; exhaustive for `n ≤ 12`, with a proof) — AA1 S3.
+  below `1/n`; exhaustive for `n ≤ 12`, with a proof; that division's proof gives the exact
+  condition for identical sites, a margin of at most `1/(n − 1)`) — AA1 S3.  It is a
+  counterexample to the summary sentence "one evaluation or exponentially many", not to
+  Theorem 11.9, whose hypothesis is finitely many site types fixed as `n` grows.
 * The product width of the sandwich is violated for every correlation `ρ > 0`
   (two-site and `n`-site Markov references) — AA1 S2.
-* Theorem 11.33(a) without an additive known part: a code landscape (explicit instance:
+* Theorem 11.33(a) without an additive known part: a code landscape (an illustration:
   the extended Golay code, `n = 24`, `w = 4` — every algorithm with `ε < 10⁻³` makes
-  `(1 − 2δ)·4096` evaluations; Gilbert–Varshamov codes: exponential at every `w > 0`), and a
+  `(1 − 2δ)·4096` evaluations, which at `n = 24` is still below the theorem's own polynomial
+  `n⁵ε⁻²`; the refutation is the family — Gilbert–Varshamov codes: exponential at every
+  `w > 0`), and a
   *pairwise* known part of ferromagnetic blocks (`exp(Θ(n^{1/3}))` at `w = 4`) — AA1 S4.
 * With a `p`-biased measure Hamming balls are not extremal for the tail functional
   (ratio up to `2.08` on the 4-cube, all 65 534 subsets); with site-dependent slopes
@@ -342,7 +453,7 @@ All scripted, stored, and re-run by the coordinator.
   counterexamples above).  The hypothesis was lost when the workstream's theorem was
   adopted — the failure mode recorded once before (D62).  Verified by the coordinator
   against the source and by re-running the audit's script; corrected.
-* **Stale sentences** (ten in AA1, one in AA2): passages that an earlier or later section
+* **Stale sentences** (seven in AA1, one in AA2): passages that an earlier or later section
   of the same report contradicts (a question called open that is answered twelve lines
   later; "under review" for a review that is reported; a statement that an operator is
   not in Lean when it is).  **Two numbers** of Theorem 11.38 quoted from a sharper formula
@@ -366,12 +477,29 @@ All scripted, stored, and re-run by the coordinator.
 1. **Exponents and thresholds at non-additive instances.**  Every single-letter result is
    at an additive (usually the zero) residual of a homogeneous system; only the one-shot
    bounds are general.  Everything the theory would say about a real residual hangs on
-   this.
-2. **The adaptive exponent without a hint for any interacting known part** — whether
-   "adaptive = hinted" is a property of product measures or of the problem.
+   this.  (Closed in part by sandwiches at interior instances: a residual that is
+   `κ`-Lipschitz for the envelope leaves the envelope `(1 − κ)d` — machine-checked,
+   `slack_ge_of_lipschitz` — and a residual with second differences up to `κc` leaves the
+   second-order theory with the constants `(1 ∓ κ)c` — SCI-REV-0022, the remark after Theorem
+   11.32.  The exponents then hold with changed constants; at the boundary of a class they
+   fail.)
+2. **The adaptive exponent without a hint for interacting known parts beyond one family** —
+   it equals the hinted exponent for the ferromagnetic Curie–Weiss part without field at
+   `0 ≤ βJ ≤ 1` (Proposition 11.81(c)), which is a positive mixture of product measures;
+   whether "adaptive = hinted" holds for a known part with no product structure in any
+   disguise is open.  *The smallest question* (the Scientific Discovery Division's,
+   SCI-REV-0022 §5): the antiferromagnetic Curie–Weiss part without field, where the hinted
+   exponent is the cube's — is there an adaptive algorithm without a hint at that
+   exponent?  A first computation: the class-relative influence between an outer block and
+   the rest as a function of the split, and whether it vanishes as the block shrinks
+   (with Theorem 11.119 a bounded influence gives a valid nested algorithm at a larger
+   slope; the question is whether that loss is real).
 3. **A bounded-accuracy adaptive upper bound beyond the uniform cube** — it needs a
    two-sided tail estimate with polynomial precision, known for the uniform cube and
-   Gauss space only (workstream N, rows 8–9).
+   Gauss space only (workstream N, rows 8–9).  *The smallest question* (same source): for
+   the `p`-biased cube, a comparison `Ξ_H(q) ≤ θ·n^C·Θ_H(cq)` of the upper tail functional of
+   Lemma 11.62 with its lower counterpart — the analogue of Lemma 11.55(b), (c); a first
+   computation: both functionals over all subsets of the 4-cube.
 4. **A lower bound for adaptive algorithms above the hinted one** — between `n·h + ½ ln n`
    (numerically) and `n·h + O(√(n ln n))`; and whether nested analyses can reach
    `n·h + O(n^{1/3})`, which the `1/k²` law suggests and nothing establishes.

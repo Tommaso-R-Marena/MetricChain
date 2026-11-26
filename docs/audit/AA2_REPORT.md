@@ -350,7 +350,7 @@ of the theorem" — is not machine-checked (L4721–4723).
 *Cube-specific ingredients* (brief; the full table is workstream N's, item N6):
 - product structure of the reference measure over the two blocks, hence fact (F2), `−ln W` is
   `u`-Lipschitz on the outer block (`fibre_sum_le` [V]) — `{F}` without it: for an interacting known
-  part the constant is `u + osc φ′` and depends on the instance (L8093–8101; D49 item 6).
+  part the constant is `u + osc φ′` and depends on the instance (L8093–8101; D49 item 6).  [SCI-REV-0022, f6: this `{F}` is for fact (F2) of the proof; the failing *certificate* is workstream N's Proposition N12 (theory report, Proposition 11.121); for the conclusion of the theorem without a product measure: `{?}`, Entry 13.]
   Confirmed in one screen, **`S8`**: for a Curie–Weiss known part the member `γ|b| ± u|a|` of `L_u` has
   a fibre average that changes by `u(1 + c)` per outer flip, with `c = 0.3`–`0.6` in one phase away
   from criticality and for antiferromagnets (stable in `n`: a weakening of the slope — `{Q}`, the
@@ -403,8 +403,8 @@ Refereed (R7, SCI-REV-0007).
 - uniform cube, one slope, two letters — `{P}` for the upper bound: relaxed to a field (Theorem
   11.64) and to site types and alphabets (Theorem 11.101) by separate asymptotic isoperimetric
   theorems.
-- product reference measure — `{?}` for the *statement*, `{F}` for the *proof* (Entry 11): whether
-  "adaptive = hinted" holds for any interacting known part is open (O4 of Conjecture 11.83).
+- product reference measure — `{?}` for the *statement*, `{F}` for the *proof* (Entry 11): [corrected after SCI-REV-0022, F4; was: "whether 'adaptive = hinted' holds for any interacting known part is open"] open in general (O4 of Conjecture 11.83); settled [P: Proposition 11.81(a), (c); (c) not refereed in turn] for the Curie–Weiss known part without field at `0 ≤ βJ ≤ 1`, where the adaptive exponent without a hint equals `R_H = R_unif`, and numerically up to the junction.
+  So "adaptive = hinted" is not a property of product measures alone.
 - extensive accuracy — `{P}`: removed on the cube by Theorem 11.58; beyond the cube it remains.
 - worst case over the class — `{E}` for "= the hinted exponent": instance by instance the question
   is open (L5134–5138).
@@ -443,8 +443,8 @@ in every run.
 - the *lower* isoperimetric bound, Lemma 11.43(c), inside the algorithm (the Harper term) — `{P}`
   on the cube, `{?}` elsewhere: no lower tail function is available for any other measure in the
   report, so **no bounded-accuracy adaptive statement exists beyond the uniform cube** (L6505–6507).
-- the binomial median (Lemma 11.55(b)) — `{P}`.
-- the abort test before *every* query, inner calls counted with their bounds — `{F}` without it:
+- the binomial median (Lemma 11.55(b)) — `{P}` [an ingredient that is a theorem, not a hypothesis: any constant lower bound of that binomial tail changes only the constant 2 — SCI-REV-0022, f10].
+- the abort test before *every* query, inner calls counted with their bounds — `{Q}` [was `{F}`; SCI-REV-0022, f11: without it the proved bound is `C_max + M̄`, and no run exceeding `C_max` is known — none among the 2 648 stored runs of SCI-REV-0016]:
   "the previous wording … proves `C_max + M̄`, not `C_max`" (L5310–5313; corrected three times: R7,
   R8, SCI-REV-0016).
 - `0 < λ ≤ 1` — `{P}` (used once, in the lowered sample cap, L5372–5373).
@@ -487,7 +487,7 @@ of an extensive family: nothing one would run" (L5688–5689).
 *Overstatement.*  The title (L5185) and L5670–5671 ("*The picture for the cube class, complete at the
 exponential scale*") are accurate for the worst case over the class on the uniform cube and say so.
 
-### Entry 17 — Theorem 11.58a (`n·h + O(√(n ln n))`)  [P, refereed (R12); epoch arithmetic V]  (L5483–5668)
+### Entry 17 — Theorem 11.58a (`n·h + O(√(n ln n))`)  [P, refereed (R12); epoch arithmetic V]  (L5483–5668)  [added after SCI-REV-0022, f14: reviewed by the Scientific Discovery Division, SCI-REV-0017 — proved as stated, given Theorem 11.56; the `O(1)` of a slope step is 31 to 178 nats at `u = ½ … 4`; "every hypothesis in it is the cube with one slope and no known part"]
 
 *Statement.*  `ln N(n; ε, δ) ≤ nB_M + 𝓔_M` for an explicit schedule of `k_M` nested levels;
 `limsup (ln N − nh)/√(n ln n) ≤ C_*(u)`; and `ln N ≥ nh − max{1,(ε+ln 2)/u}ln((1−ρ_h)/ρ_h) − ln(1/(1−2δ))`.
@@ -821,7 +821,7 @@ that preserve `π`.
   `8N_orb ln(2N_orb/δ)/(1−2δ)` exceeds the cost `e^{0.25n}` it multiplies up to `n = 300`; for one
   type per site it is the cost of enumeration.
 - the accuracy offset `ln(4/δ)` (`4.4` nats at `δ = 0.05`) — `{Q}`: below it (a) claims nothing; at
-  bounded accuracy only Proposition 11.61a (a field) has an upper bound.
+  bounded accuracy an upper bound exists for a field (Proposition 11.61a) and — [added after SCI-REV-0022, f15] by the Scientific Discovery Division's Proposition A1.2 (its SCI-MSG-0014; unrefereed here; items 1–3 machine-checked in its `Window.lean`) — for product landscapes with site types.
 - `p_t > 0` known and free uniform sampling in every type class — `{X}` (computation; trivial for
   functions of the type, the whole difficulty for a general order parameter, L8132–8136).
 - symmetric instances in (b)–(d) — `{?}`: that `H` is the hardest of *all* instances is O4.
@@ -884,7 +884,7 @@ Curie–Weiss known parts an adaptive algorithm without a hint has exponent at m
   flip probability `0.3` at `u = 1` every algorithm needs `e^{0.0346n − O(1)}` evaluations at every
   bounded accuracy (`0.0309n` at `p = 0.4`), against the cube's `e^{0.029139n + o(n)}`; the report's own
   §11.32 has `h_∞ ∈ [0.0401, 0.0450]` (L11401) and harness XXV.2 `0.0328`.
-- `βJ ≥ 0` in (c) — `{P}`: the Hubbard–Stratonovich mixture of fields ("nothing for
+- `βJ ≥ 0` in (c) — `{?}` [was `{P}`, with "`{?}` otherwise"; SCI-REV-0022, sample no. 10: the proof needs it, and nothing is known about the statement without it]: the Hubbard–Stratonovich mixture of fields ("nothing for
   antiferromagnets: a negative coupling is not a positive mixture of fields", L7968–7969);
   `{?}` otherwise (Conjecture 11.94).
 - the junction formula in (b) — `{F}` as a general statement (R10 M1; DEAD.25: at `u = 8`, `e = 0`,
@@ -1096,7 +1096,7 @@ without proof.
   does not care; no upper bound exists when the number of types grows with `n`.
 - `λ_j > 0` — `{P}`, possibly `{C}`: "neither the reviewer nor we see where the argument uses it"
   (L9383–9385).
-- extensive accuracy — `{P}`; bounded accuracy `{?}` ("Upper bounds at bounded accuracy" not done).
+- extensive accuracy — `{?}` [was `{P}`; SCI-REV-0022, sample no. 11]: at bounded accuracy nothing is proved ("Upper bounds at bounded accuracy" not done; lower bounds only).
 - the orientation of an asymmetric envelope — `{F}` if transposed ("2 582 violations of the tail
   lemma in 13 328 brute-force cases", L9135).
 - the count of Theorem 11.52 — `{P}`, "inherited", not re-examined by the review.
@@ -1230,8 +1230,8 @@ one-body oracle makes at least `(1−2δ)/(n·H_{k,r})` evaluations; with the up
 - the class is a convex cone in the weights (closed under sums and maxima) — `{E}` for the
   compensation by an admixture.
 - `κ = ω_m − 1/(e^r − 1) > 0` — `{E}` (forces `u > 0`, `1 ≤ k ≤ n−1`).
-- exact oracle — `{Q}`: "with all marginals … known only to an absolute precision `τ` the adaptive
-  bound loses a factor polynomial in `1/τ`" (the division's, not checked, L10270–10271).
+- exact oracle — `{?}` with a field [was `{Q}`; SCI-REV-0022, f8]: "with all marginals … known only to an absolute precision `τ` the adaptive
+  bound loses a factor polynomial in `1/τ`" is a sketch of the Scientific Discovery Division (its SCI-RES-0006 §3: "… and logarithmic in `n` (ingredients checked, not the whole)"; not checked here, L10270–10271); on the uniform cube `{Q}`: the bound of Theorem 11.25(a) divided by `(2n)^{⌈(k_τ−1)/2⌉}` (its SCI-MSG-0006, Theorem 4-τ, [P]; not checked here).
 *Computational reading.*  The every-`n` bound carries the factors `n(n+1)C_m`: its exponent is
 `0.00069`, `0.00889`, `0.01044` at `n = 400, 1600, 3200` against `R^max = 0.012210` (L10190–10192) — 6 %
 of the limit at `n = 400`.
@@ -1383,7 +1383,7 @@ brackets of the limit `F_∞`.  Refereed (R11; SCI-REV-0010).
 - a non-empty reduced class in (b): `u > κ_m` — `{E}`.
 - the one-sided slack in (d) — `{F}` without it ("the left side is `0.667` and the product without
   slack `0.866`", L11357–11359; XXV.2).
-- stationarity and homogeneity in (e) — `{P}` (exact sub-/super-additivity).
+- stationarity and homogeneity in (e) — `{F}` for the limit [was `{P}`; SCI-REV-0022, F2]: with two couplings on blocks of lengths `2^{j²}` the ratio `F*_n/n` has no limit (theory report, the remark in (e)); `{?}` for stationary ergodic sequences (the sub-additive ergodic theorem; not proved); the block brackets of (a), (b) need neither.
 - for upper bounds on costs: Theorems 11.95, 11.98(d), 11.101(b) applied to blocks of `L` sites as
   super-sites of alphabet `q^L`, extensive accuracy, limits iterated — `{P}`, and `{?}` at bounded
   accuracy: "**at bounded accuracy no upper bound on the cost of any algorithm for the chain is
@@ -1464,7 +1464,7 @@ LEVEL 3   exchangeable known parts (functions of the type: mean-field), two lett
           hinted exponent at symmetric instances: a supremum over block profiles   11.78 [P]
           convex rate function: game function, pair identity                11.80 [P]
           <= uniform cube for two of the three exponents                    11.91 [P]
-          adaptive exponent: OPEN (ferromagnetic Curie-Weiss: <= cube, 11.81(c))
+          adaptive exponent: OPEN in general; = hinted = cube for Curie-Weiss, B = 0, 0 <= bJ <= 1 (11.81(c)) [corrected, SCI-REV-0022 F4]
           two phases: values from searches only                             11.82 [N]
    3'     any finite symmetry group with few orbits                         GroupSampling.lean [V]
    |
@@ -1507,9 +1507,9 @@ beyond Level 0; minima in box classes; any statement on computation as opposed t
 ### A.2 The ten assumptions whose classification matters most outside the models of the report
 
 1. **A product reference measure in every adaptive upper bound** (Entries 11, 13, 15, 25, 56): false
-   for the proof without it (fact (F2); `S8`), unknown for the statement.  Consequence: for no known
-   part with interactions is the adaptive cost known, except "at most the cube's" for mean-field
-   ferromagnets.
+   for the proof without it (fact (F2); `S8`), unknown for the statement in general.  Consequence: for no known
+   part with interactions is the adaptive cost known, except for mean-field ferromagnets: "at most the cube's", and [corrected after SCI-REV-0022, F4] equal to the hinted exponent for the Curie–Weiss part without field at `0 ≤ βJ ≤ 1`
+   (Proposition 11.81(c)).
 2. **The model of ignorance itself — worst case over a first-order class, exact evaluations —
    and the hint** (Entries 9, 13, 66): essential for the exponential lower bounds, which are
    properties of the class; and every "cost" stated at an instance (§§11.20, 11.23, 11.26, 11.30)
@@ -1546,9 +1546,9 @@ envelope and an associated law in the small-slope law (Entry 74); `δ < ½` (rep
 
 ### A.3 Where no classification was possible, ranked by how much hangs on it
 
-1. **The adaptive exponent without a hint for any interacting known part** (O4 of Conjecture 11.83;
-   Conjecture 11.94(iii)).  Whether "adaptive = hinted" is a property of product measures or of
-   the problem.  Everything about adaptivity at Levels 3–5 hangs on it.
+1. **The adaptive exponent without a hint for interacting known parts beyond one family** (O4 of Conjecture 11.83;
+   Conjecture 11.94(iii)).  [Corrected after SCI-REV-0022, F4: it is determined, and equal to the hinted exponent, for the Curie–Weiss part without field at `0 ≤ βJ ≤ 1` — a positive mixture of product measures.]  Whether "adaptive = hinted" holds for a known part with no product structure in any disguise is open.
+   Everything about adaptivity at Levels 3–5 hangs on it.
 2. **A bounded-accuracy adaptive upper bound beyond the uniform cube** — needs a lower tail
    function for a non-uniform measure; without it Levels 1–2 say nothing at the accuracies one
    would use.
@@ -1700,3 +1700,30 @@ re-derived (workstream N; referees R7, R8, R12).  The two-phase numbers of Propo
 the numbers of Theorem 11.71(c) other than the polytopes, the `ln C_max` column of remark (1a)
 and the tables of remark (1b) were not recomputed.  Prior-art statements were not checked.  The
 harness was not re-run; its stored output `docs/falsification_output.txt` was read.
+
+## Appendix (coordinator, 2026-11-26): tags corrected after the sampled review SCI-REV-0022
+
+The Scientific Discovery Division reviewed a sample of this report's tags (its SCI-REV-0022;
+`docs/science/workstreams/R23_REPORT.md` at commit `88c9a90` of its branch).  The following
+were changed in place, each marked in its entry; no line was added above this appendix,
+so the line numbers that the review cites remain valid.  §A.7 has the counts *as
+delivered*; the corrected ones are in `docs/ASSUMPTION_AUDIT.md` §1.
+
+| entry (line) | assumption | was | is | why |
+|---|---|---|---|---|
+| 11 (352) | product structure → fact (F2) | F | F for the lemma; pointer to the failing certificate (Proposition 11.121) and to `?` for the conclusion | the script refutes a lemma of the proof (f6) |
+| 13 (406) | product reference measure, for "adaptive = hinted" | ? "open for any interacting known part" | ? "open in general; settled for one family" | **contradicted by Proposition 11.81(c)** (F4); also §A.1, §A.2 item 1, §A.3 item 1 |
+| 15 (446) | the binomial median | P | P, marked as an ingredient | a cited theorem (f10) |
+| 15 (447) | the abort test before every query | F | Q | no violating run exists; the weaker bound `C_max + M̄` is proved (f11) |
+| 17 (490) | — | — | cites SCI-REV-0017 | (f14) |
+| 36 (824) | bounded-accuracy upper bounds | "only a field" | a field, and site types by that division's Proposition A1.2 | (f15) |
+| 40 (887) | `βJ ≥ 0` in Proposition 11.81(c) | P (`?` otherwise) | ? | nothing supports survival (sample no. 10) |
+| 56 (1099) | extensive accuracy, Theorem 11.101 | P | ? | nothing supports survival (sample no. 11) |
+| 64 (1233) | exact oracle | Q | ? with a field; Q on the uniform cube | the condition was a sketch quoted without its caveat (f8) |
+| 73 (1386) | stationarity and homogeneity, Theorem 11.116(e) | P | **F for the limit**; ? for stationary ergodic sequences | **the limit need not exist** (F2) |
+
+Tag counts after these changes: E 63, P 59, C 29, Q 29, X 18, F 52, ? 47 (297).
+The review's rule for the remaining tags: an F can be trusted as "a counterexample
+exists"; a P is reliable where the entry names the other theorem that gives the statement
+without the assumption, and should be read as "not known" where it names only the proof
+step.

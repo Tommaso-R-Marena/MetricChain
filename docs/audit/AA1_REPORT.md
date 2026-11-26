@@ -488,8 +488,8 @@ classical (lines 66–79); that classification is not disputed here.
 2. **Setting.**  Rational pairwise instances, box domains, certificate trees
    (leaf / branch / prune / sum); residual class = bounded differences `c_i` plus anchors.
 3. **Assumptions.**
-   * **{F}** consistency of the published data, if it is not checked: the bound `41/4` is
-     accepted on a problem whose minimum is `1` (`inconsistentResidual_unguarded`; D15).  The
+   * **{E}** [was **{F}**; corrected after SCI-REV-0022, f5] consistency of the published data, if it is not checked: without it the soundness theorem is vacuously true and the accepted bound means nothing — the bound `41/4` is
+     accepted on data that no residual satisfies (the exact class is empty; "minimum `1`" is the minimum of the pairwise part alone) (`inconsistentResidual_unguarded`; D15).  The
      top-level kernel checks it.
    * **{C}** pairwise instances and box domains (no 3-body rule; non-product domains only by
      branching).  **{C}** the weighted-Hamming residual class (the second-order and third-order
@@ -519,7 +519,7 @@ classical (lines 66–79); that classification is not disputed here.
 3. **Assumptions.**
    * **{F}** the leaf rule is the pairwise (local-polytope) LP.  A leaf with triplet consistency
      certifies `m` triangles at once (line 982–984), so "necessary" is relative to the rule set.
-   * **{P}{?}** a disconnected family.  For connected families the report has no exponential
+   * **{?}** [was **{P}{?}**; SCI-REV-0022: nothing on record supports "the statement survives"] a disconnected family.  For connected families the report has no exponential
      lower bound: a ring family needs linear depth (the Scientific Discovery Division's
      Proposition P7.5, not re-derived), and "a connected family with a unique minimiser whose
      `sum`-free certificates need exponentially many leaves" is open (§12 item 6).
@@ -759,7 +759,7 @@ number of evaluations** — computation, and everything that is known about `f`,
      `ε = e^{−λn}` only a bracket is known — **{?}** (§12 item 1(c′)).
    * **{Q}** `ε_n = o(n)`: at extensive accuracy the entropy bound of Theorem 11.13(b) applies
      with its term `−tε₁/β` (line 2174–2177).
-   * **{P}{?}** identical sites.  The lower bound tensorises for arbitrary sites; an upper bound
+   * **{?}** [was **{P}{?}**; SCI-REV-0022: the lower bound tensorises, an upper bound is not known] identical sites.  The lower bound tensorises for arbitrary sites; an upper bound
      for several site types is not stated here (for `ln Z` and randomised algorithms it is
      §11.26, reader AA2).  Interacting known parts: "the finite-temperature exponents of a
      chain" are open (§12 item 1).
@@ -924,8 +924,8 @@ number of evaluations** — computation, and everything that is known about `f`,
    first-order optimal (**[V]** `greedy_optimal`, the division's file).  **[P]**; reviewed in
    part (SCI-REV-0015); (c″) "beyond the parts the science division stated" is unrefereed
    (research log, "Resume here").
-2.–3. **{E}** the law of the changed set under the evaluated model is known.  **{Q}** independent
-   sites, for the closed forms; for other laws the best order is a search that contains a
+2.–3. **{E}** the law of the changed set under the evaluated model is known.  **{C}** [was **{Q}**; SCI-REV-0022, f7: no quantitative condition is stated] independent
+   sites, for the closed forms (the general statements hold for any law); **{X}** for the best order: for other laws it is a search that contains a
    minimum-weight hitting-set problem (line 2886–2888, "not re-derived by us") — **{?}** as a
    complexity statement.
 4.–6. Elementary convexity, nothing claimed new (line 2849–2850); the summary "in evaluations
@@ -1112,7 +1112,7 @@ name is given.
    * **{Q}** equal constants `c_i = c`: the threshold of a product of site types is the average
      of the site thresholds (Theorem 11.28, remark (ii), **[P]**); the exponents do not add
      (D31).
-   * **{P}** Harper's theorem (**[K]**; "the step that uses it is checked exhaustively for
+   * **{P}** [an ingredient that is a theorem, not a hypothesis on the model — SCI-REV-0022, f10; the other route gives exponents for `ln(1/ε) = o(n)`, not the every-`n` bracket of (c)] Harper's theorem (**[K]**; "the step that uses it is checked exhaustively for
      `n ≤ 4`", line 1360–1361).  Beyond the cube the upper bound has another proof (inherently
      typical subsets; R4).
    * **{X}** the hint.  Without it non-adaptive algorithms have the larger exponent `θ_na`
@@ -1259,7 +1259,7 @@ name is given.
    * **{Q}** dense, equal constants.  For sparse constants the class is finite-dimensional and
      the cost lies between an exponential in the clique number and the number of cliques
      (11.32(v), **[P]**).
-   * **{P}** an additive true residual (the star then reproduces it).
+   * **{F}{Q}** [was **{P}**; SCI-REV-0022, F1, replicated by the coordinator: `experiments/coordinator_checks/sci_rev_0022/`] an additive true residual: false if dropped (`n = 2`: `N₂ = 3 < K₋ = 4` at a member on the boundary of the class; generic for second differences up to `c/2`); with `|D_iD_jg| ≤ κc`, `κ < 1`: `K₋[(1−κ)c] ≤ N₂ ≤ (n+1)K₊[(1+κ)c] + 1`.
    * **{C}** `f = e|x|`, zero residual, in (i)–(iv).
    * **{?}** the best `n + 1` evaluations (the spider is conjecturally optimal; §12 item 4).
 4. **Generalises.**  Order `m` (threshold `2^{1−m}/m!`); free energies: Theorem 11.33.
@@ -1435,8 +1435,8 @@ name is given.
 3. **Assumptions.**  **{E}** nearest-neighbour interactions (the criterion is a min-plus
    transfer-matrix computation); for longer range or two dimensions the sharp-minimum condition
    of Theorem 2.4 still characterises one evaluation, but no droplet reduction is stated —
-   **{?}**.  **{Q}** a uniform constant `c` (site-dependent constants give a weighted ratio; not
-   stated).  **{C}** the Hamming envelope.
+   **{?}**.  **{Q}** a uniform constant `c` (site-dependent constants give a weighted ratio; [stated and proved in SCI-REV-0022, (S3): with constants `c_i` the single evaluation at the minimiser `x̂` certifies iff `Σ_{i∈I} c_i ≤ f(y) − f(x̂)` for every interval `I` and every `y` that differs from `x̂` exactly on `I`; the "exponential otherwise" half is not covered by it]
+   ).  **{C}** the Hamming envelope.
 4. **Generalises.**  Theorem 11.7 from independent sites to chains; functions of the type are
    §11.23, a chain at finite temperature §11.32 (reader AA2).
 5. **Computational reading.**  Useful as a test (`O(nk²)`), and sobering: at zero field no chain
@@ -1764,3 +1764,28 @@ are facts the repository did not have: the nearly sharp product family with `N_c
 super-polynomial at and below the Curie–Weiss coupling (S4).  Two
 positive statements are new as well: the `K`-component sandwich for multimodal references
 (S2(D)) and the lower bound `0.0267·m b²` on the inertia of any arm (S6(c)).
+
+## Appendix (coordinator, 2026-11-26): tags corrected after the sampled review SCI-REV-0022
+
+The Scientific Discovery Division reviewed a sample of this report's tags (its SCI-REV-0022;
+`docs/science/workstreams/R23_REPORT.md` at commit `88c9a90` of its branch).  The following
+tags were changed in place, each marked in its entry with the old tag; no line was added
+above this appendix, so the line numbers that the review cites remain valid.  The counts
+of §10 and the count tables of this report are the counts *as delivered*; the corrected
+ones are in `docs/ASSUMPTION_AUDIT.md` §1.
+
+| entry (line) | assumption | was | is | why |
+|---|---|---|---|---|
+| E14 (491) | consistency of the published data | F | E | the Lean example shows an empty class: vacuity, not a false bound (f5) |
+| E15 (522) | a disconnected family | P ? | ? | nothing on record supports survival (sample no. 2) |
+| E25 (762) | identical sites | P ? | ? | lower bound tensorises; no upper bound (sample no. 4) |
+| E31 (927) | independent sites, closed forms | Q | C, X | no quantitative condition is stated (f7) |
+| E37 (1115) | Harper's theorem | P | P, marked as an ingredient | a cited theorem, not a hypothesis (f10) |
+| E42 (1262) | an additive true residual, Theorem 11.32 | P | **F Q** | **false if dropped** (F1; replicated by the coordinator); substitute with constants `(1 ∓ κ)c` |
+| E48 (1438) | a uniform constant | Q | Q, condition now stated | the review's droplet criterion with site-dependent constants (f9) |
+
+Tag counts after these changes: E 53, P 13, C 27, Q 39, X 14, F 47, ? 23 (216).
+The review's rule for the remaining tags: an F can be trusted as "a counterexample
+exists"; a P is reliable where the entry names the other theorem that gives the statement
+without the assumption, and should be read as "not known" where it names only the proof
+step.
