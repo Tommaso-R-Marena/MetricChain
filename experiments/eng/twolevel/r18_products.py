@@ -215,12 +215,20 @@ def search_cell(task: dict) -> dict:
     return out
 
 
-def cell_data(key: tuple) -> dict:
+def cell_data(key: tuple, later_rounds: bool = False) -> dict:
     """What a search of one cell takes from the two earlier jobs: budgets, the number of knots, the constants used
-    for reporting, and the stored maximisers of both (starting points)."""
+    for reporting, and the stored maximisers of both (starting points).  ``later_rounds``: also the maximisers that
+    the jobs "search" and "seeds" of this experiment found in the cell, so that a further round starts from the best
+    known point of either objective and can only move up."""
     cost, anyp = load("x005_cost.jsonl")[key], load("x005_anyplacement.jsonl")[key]
+    sources = [cost, anyp]
+    if later_rounds:
+        for name in ("x005c_search.jsonl", "x005c_seeds.jsonl"):
+            if (RES / name).exists():
+                sources += [json.loads(line) for line in (RES / name).read_text().splitlines()
+                            if (lambda r: (r["u"], r["n"], r["phi"]) == key)(json.loads(line))]
     return dict(a=cost["a"], lCmax=cost["constants"]["lCmax"], budget=cost["budget"], budget_general=cost["budget_general"], k=cost["k"],
-                stored={name: [s["best_x"] for r in (cost, anyp) for s in r["searches"] if s["family"] == name]
+                stored={name: [s["best_x"] for r in sources for s in r["searches"] if s["family"] == name]
                         for name in ("monotone", "general")})
 
 
@@ -231,6 +239,9 @@ def task_list(job: str) -> list[dict]:
         return [dict(u=u, n=n, phi=phi, seed=1, mult=1) for u in run_search.US for n in (1000, 4000) for phi in (0.35, 0.5)]
     if job == "seeds":
         return [dict(u=u, n=n, phi=phi, seed=seed, mult=3) for u in run_search.US for n in SMALL for phi in (0.5, 0.85) for seed in (2, 3)]
+    if job == "round2":
+        # a second round on every cell of the three sizes: two more seeds, starting from every maximiser found so far
+        return [dict(u=u, n=n, phi=phi, seed=seed, mult=3) for u in run_search.US for n in SMALL for phi in run_search.PHIS for seed in (4, 5)]
     raise ValueError(job)
 
 
@@ -240,7 +251,8 @@ def task_id(job: str, t: dict) -> str:
 
 def tasks(job: str) -> list[dict]:
     """Driver interface of modal_jobs/bench_app.py: one task per cell, with what it needs from the stored files."""
-    return [dict(t, id=task_id(job, t), tier="m", cell=cell_data((t["u"], t["n"], t["phi"]))) for t in task_list(job)]
+    return [dict(t, id=task_id(job, t), tier="m", cell=cell_data((t["u"], t["n"], t["phi"]), later_rounds=(job == "round2")))
+            for t in task_list(job)]
 
 
 def run_task(task: dict) -> dict:
@@ -266,6 +278,64 @@ def run_searches(job: str, workers: int) -> None:
             fh.flush()
             if k % 12 == 0 or k == len(todo):
                 print(f"[{k}/{len(todo)}] {time.time() - t0:.0f} s", flush=True)
+
+
+# ------------------------------------------------------------------ cross-evaluation of the two searches
+
+def cross_cell(key: tuple) -> dict:
+    """Every maximiser found in the cell by any search of either objective (jobs M-008, M-014, and the jobs of this
+    experiment), evaluated under *both* objectives and both inner behaviours.  The best known value of each is the
+    maximum over all of them; the bound at a law is at least the cost of the product instance with that law, so
+    after this step the bound is never below the product value."""
+    u, n, phi = key
+    cost, anyp = load("x005_cost.jsonl")[key], load("x005_anyplacement.jsonl")[key]
+    rows = [("M-008", cost), ("M-014", anyp)]
+    for name in ("search", "seeds", "round2"):
+        path = RES / f"x005c_{name}.jsonl"
+        if path.exists():
+            rows += [(name, r) for r in (json.loads(line) for line in path.read_text().splitlines()) if (r["u"], r["n"], r["phi"]) == key]
+    P, _ = run_search.design_params(n, u, phi)
+    ev = Evaluator(P)
+    c = cube_constants(u)
+    t0_range = (P.n_i * (u - c.Lambda1), P.n_i * (2 * u - c.Lambda1))
+    fams = {"monotone": Family(ev, k=cost["k"], monotone=True), "general": Family(ev, k=cost["k"], monotone=False)}
+    best = dict(product=(-math.inf, None), bound=(-math.inf, None))
+    searched = dict(product=-math.inf, bound=-math.inf)        # the best value any search reported for its own objective
+    n_points, nviol = 0, 0
+    for source, r in rows:
+        for srch in r["searches"]:
+            own = "product" if srch["objective"] == "cost" else "bound"
+            searched[own] = max(searched[own], srch["best_value"])
+            fam = fams[srch["family"]]
+            F, d0, c_in = fam.decode(np.asarray(srch["best_x"], dtype=float))
+            inst = fam.instance(F, d0, c_in)
+            n_points += 1
+            for orc in ORACLES:
+                R = ev.run(inst, orc)
+                nviol += len(R.violations())
+                if R.lcost > best["product"][0]:
+                    best["product"] = (R.lcost, f"{source}, {srch['objective']}, {srch['family']}, maximiser of '{srch['oracle']}' run under '{orc}'")
+                B = ev.run(inst, orc, t0_range=t0_range)
+                if B.lcost > best["bound"][0]:
+                    best["bound"] = (B.lcost, f"{source}, {srch['objective']}, {srch['family']}, maximiser of '{srch['oracle']}' run under '{orc}'")
+    return dict(u=u, n=n, phi=phi, na=n * cost["a"], lCmax=cost["constants"]["lCmax"], points=n_points, n_violations=nviol,
+                old_product=max(s["best_value"] for s in cost["searches"]), old_bound=max(s["best_value"] for s in anyp["searches"]),
+                searched_product=searched["product"], searched_bound=searched["bound"],
+                product=best["product"][0], product_source=best["product"][1], bound=best["bound"][0], bound_source=best["bound"][1],
+                flat=max(cost["flat"][o]["lcost"] for o in ORACLES), flat_bottom=cost["flat"]["bottom"]["lcost"])
+
+
+def run_cross(workers: int) -> None:
+    keys = [(u, n, phi) for u in run_search.US for n in SMALL for phi in run_search.PHIS]
+    t0 = time.time()
+    with mp.Pool(workers) as pool:
+        rows = pool.map(cross_cell, keys, chunksize=2)
+    (RES / "x005c_cross.json").write_text(json.dumps(dict(commit=_commit(), seconds=time.time() - t0, rows=rows), indent=1))
+    gap = [(r["bound"] - r["product"]) / r["na"] for r in rows]
+    rise = [(r["product"] - r["old_product"]) / r["na"] for r in rows]
+    print(f"{len(rows)} cells, {sum(r['points'] for r in rows)} maximisers cross-evaluated in {time.time() - t0:.0f} s; violations {sum(r['n_violations'] for r in rows)}")
+    print(f"bound - product after cross-evaluation: min {min(gap):+.6f}, max {max(gap):+.6f} (in na); cells above 1e-4: {sum(g > 1e-4 for g in gap)}")
+    print(f"product now - M-008: max {max(rise):+.5f} na; cells above 1e-4: {sum(x > 1e-4 for x in rise)}, above 1e-3: {sum(x > 1e-3 for x in rise)}")
 
 
 # ------------------------------------------------------------------ the review's stored product instances
@@ -307,7 +377,7 @@ def _commit() -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("job", choices=("stored", "search", "seeds", "large", "science"))
+    ap.add_argument("job", choices=("stored", "search", "seeds", "large", "round2", "cross", "science"))
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--dir", type=Path)
     args = ap.parse_args()
@@ -315,6 +385,8 @@ def main() -> int:
         run_stored(args.workers)
     elif args.job == "science":
         run_science(args.dir)
+    elif args.job == "cross":
+        run_cross(args.workers)
     else:
         run_searches(args.job, args.workers)
     return 0

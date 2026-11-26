@@ -92,21 +92,29 @@ def check_class(psi: np.ndarray, us: np.ndarray) -> float:
 # The algorithm (K_REPORT.md §2.2), literal
 # ---------------------------------------------------------------------------------------------
 def run_2l(psi: np.ndarray, n_o: int, C: H.HConstants, T, oracle: str, rng, K_scale: float = 1.0) -> dict:
-    """One run.  ``T``: the tables of the outer cube used by the algorithm (normally slope C.u_o).  Everything in logs."""
+    """One run on an explicit energy table over the whole cube (uniform reference measure).  ``T``: the tables of the
+    outer cube used by the algorithm (normally slope C.u_o).  Everything in logs."""
     n = int(round(math.log2(len(psi))))
     n_i = n - n_o
+    # exact fibre averages (the truth; the algorithm sees them only through oracle brackets)
+    tab = psi.reshape(2 ** n_i, 2 ** n_o).T                    # tab[a, y]: outer coordinates are the low bits
+    lW = np.logaddexp.reduce(-tab, axis=1) - n_i * LN2
+    return run_2l_fibres(lW, tab[:, 0], float(psi[0]), n_o, C, T, oracle, rng, K_scale)
+
+
+def run_2l_fibres(lW: np.ndarray, psi_ref: np.ndarray, psi0: float, n_o: int, C: H.HConstants, T, oracle: str, rng,
+                  K_scale: float = 1.0) -> dict:
+    """The same run when the instance is given by its fibre averages: ``lW[a] = ln W(a)`` for every point of the
+    outer cube (uniform outer marginal), ``psi_ref[a]`` the reference value of the fibre (the centre of its trivial
+    bracket) and ``psi0`` the reference value of the instance.  The inner block can then be anything -- in
+    particular a block whose law depends on the outer point (``false_certificate.py``)."""
     lam, eta, etap, b = C.lam, C.eta, C.etap, C.b
     xs = C.xs
     L = len(xs) - 1
     J = C.J
     K = max(1, int(math.ceil(K_scale * C.K)))
     lnu = math.log(K) + math.log(C.nu0)
-    # exact fibre averages (the truth; the algorithm sees them only through oracle brackets)
-    tab = psi.reshape(2 ** n_i, 2 ** n_o).T                    # tab[a, y]: outer coordinates are the low bits
-    lW = np.logaddexp.reduce(-tab, axis=1) - n_i * LN2
     lA = float(np.logaddexp.reduce(lW) - n_o * LN2)
-    psi_ref = tab[:, 0]                                        # psi(a, 0)
-    psi0 = float(psi[0])
     ls0 = -psi0 - C.omega
     # the first lower bound: l = e^-psi0 prod_i (1 + e^-u_i)/2, and (1 + e^-u)/2 = e^-u / (2 p_u), so ln l = -psi0 - Omega - ln prod 2 p_u
     lell = -psi0 - C.omega - C.l2p
