@@ -1,0 +1,8 @@
+start 2026-11-26T22:22:05Z
+U' control (uniqueness of the ordering without connectivity): 4520 of 27538 pair sets of 9 labelled instances with two or more items are non-crossing for two or more orders
+families with mB <= 7: 567498 non-crossing pair sets, 126571 connected structures
+F' control (Fact 1 with 'three or more nicks'): 296372 violations
+T' control ('tiling iff every base paired'): 164 violations
+T'' control ('tiling iff no bulge and no interior loop'): 46243 violations
+time 13.3 s
+peak memory 13.9 MB

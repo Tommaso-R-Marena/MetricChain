@@ -3020,3 +3020,57 @@ standard I am about to apply to others, our headline number is "removes sampling
 division accepted SCI-REV-0023 in substance twenty-three minutes after it was sent and put a head note over its
 own text.
 
+
+**22:28 UTC — a prediction for the discretisation term on a real force field, before the script exists.**
+The caveat of item 99 and of the first limitation sent to the new division is "no real energy function was put
+through it".  The tools of workstream P2 are on this machine (its builder of capped peptides with rotatable
+side chains; ff14SB with the GBn2 term through OpenMM).  Plan: valine dipeptide and tripeptide blocks on the
+ideal helix and strand backbones of P2, the side-chain torsion `χ₁` of every residue on a grid of a few degrees
+(the "continuum"), everything else rigid as in P2; then (a) the difference between the free energy of the
+three-rotamer model — each rotamer standing for a third of the circle — and that of the grid, and (b) the
+bracket of Proposition A17.24 from `k` cells per angle, with the whole energy as one term.
+**Predictions.**  (1) `ln Z_rot − ln Z_grid` is positive and between 0.5 and 2 nats per residue (a rotamer sits at
+the bottom of its well and is given the weight of a whole cell).  (2) It differs between helix and strand by at
+least 0.1 nats per residue — so it is not a constant that cancels.  (3) The best bracket of A17.24 is wider than
+2 nats per residue at three cells per angle, wider than 0.5 at twelve, and still wider than 0.05 at seventy-two
+(5°): steric walls are steep on the scale of a few degrees even where the weight is.  (4) Every bracket
+contains the grid value (it must).  I am least sure of (2).
+
+**22:35 UTC — first outcomes on the real force field; and a prediction for the next step, before its code exists.**
+Valine dipeptide block (`χ₁` of two residues on a 2.5° grid; ff14SB + GBn2; rigid otherwise): the three-rotamer
+model's `ln Z` exceeds the grid's by **2.0006 nats per residue on the helix and 1.857 on the strand**.  Prediction
+(1) (0.5 to 2) — **missed at the upper end, by 0.0006**; (2) (helix and strand differ by at least 0.1 per residue)
+— **met: 0.143**; (3) (bracket wider than 2, 0.5, 0.05 at 3, 12, 72 cells) — **met: 10.5, 3.4, 0.083 on the helix**;
+(4) every bracket contains the grid value — as it must.  Then single residues with two torsions, which I had
+not planned: for **leucine the rigid rotamer model names the wrong dominant rotamer** — on the helix the grid has
+(300°, 180°) at 0.55 and (180°, 60°) at 0.35, the rigid model 0.17 and 0.83 (total variation 0.48); the ideal
+positions are strained by 5.9 and 3.8 `kT` against the minima of their cells, and two cells with 4–6 % of the
+weight have their ideal rotamer inside a steric clash.  With cell-minimised energies the populations agree to
+0.04.  Serine: total variation 0.06 (helix) and 0.15 (strand).  Valine: below 0.01.
+**Prediction for the next step.**  Put each residue's own energy into the cell weights (one-body slices through
+the grid minimum as reference measure — remark 2 of item 97) and keep only the coupling between residues as
+the term to be discretised.  For the valine di- and tripeptide blocks at three cells per angle: **(5)** the
+Jensen end of that model — cell free energies for each residue, cell-averaged coupling — is within 0.05 nats
+per residue of the grid; **(6)** the certified upper end at three cells is still wider than 1 nat per residue,
+because the oscillation is a supremum over cells that contain clashes between the two side chains.
+
+**22:51 UTC — a fourth directive; the second look for the Complexity division is out; two answers that came back within the hour.**
+*D-4* (22:41 UTC; verbatim in `OWNER_DIRECTIVES.md`): an eighth division, Frontier Benchmarking, designs and
+guards independent evaluations; ours stays "physical relevance, assumptions, novelty, and scientific validity".
+The CASP17 results are announced for 29 November: blind, pre-leaderboard and retrospective evidence are to be
+kept apart, and I have written down what that means for this division — nothing about held-out references into
+a message to a developing division before predictions are frozen, and no looking for them.
+*R25* handed back at 22:38: both places of the Complexity division's note stand; its best finding is positive —
+their proof throws away a factor `B − 1`, and keeping it gives the exact range `|x| < min(B|σ|, |σ| + γ)` for every
+block length, so their hardness corollary for coaxial models needs less than they assume.  I checked the three
+smallest instances by hand (`GAG` + `CC` for block length one is a five-base system), re-ran two scripts,
+verified its one citation in the public index and compared it with the Complexity division's own referee, which
+it had not seen: agreement wherever they overlap.  SCI-REV-0024.  The agent overran memory once (12 GB, killed
+inside its own cgroup); a notes file at the repository root turned out to be R26's, which moved it when told.
+*What came back.*  The Geometry division answered the question I had put in SCI-REV-0023 — how small must the
+threshold of their theorem be? — with "it is not needed": five-point windows have complete distance data, and
+an inequality without a smallness condition does the rest.  They ask for a referee of the new proof; R27 is
+running.  The Ensemble division found that my withdrawn sentence had entered their report in bold, and replaced
+it.  The Structural Biology division made its first commit (22:30): certified minimum-energy conformations of a
+pairwise model, with docstrings that claim nothing about a molecule.
+

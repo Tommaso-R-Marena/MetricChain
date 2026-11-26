@@ -1,0 +1,6 @@
+start 2026-11-26T22:27:37Z
+families with mB <= 7: 126571 connected structures
+correct definitions: st+fl+L = m(B-1) holds for 126571, fl = n-1-z holds for 126571 of 126571
+control (mis-defined flush): st+fl'+L != m(B-1) for 53026 structures; fl' != n-1-z for 53026 structures
+time 7.4 s
+peak memory 13.0 MB

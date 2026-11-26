@@ -1,0 +1,31 @@
+start 2026-11-26T21:32:30Z
+  family m=1 B=9: compositions 256, connected structures 1883167, elapsed 0.2 s
+  family m=9 B=1: compositions 256, connected structures 1883167, elapsed 0.4 s
+  family m=1 B=10: compositions 512, connected structures 12066626, elapsed 1.2 s
+  family m=2 B=5: compositions 512, connected structures 12066626, elapsed 2.1 s
+  family m=5 B=2: compositions 512, connected structures 12066626, elapsed 2.9 s
+  family m=10 B=1: compositions 512, connected structures 12066626, elapsed 3.3 s
+  family m=1 B=11: compositions 1024, connected structures 77699128, elapsed 5.9 s
+  family m=11 B=1: compositions 1024, connected structures 77699128, elapsed 7.0 s
+  family m=1 B=12: compositions 2048, connected structures 502355984, elapsed 14.3 s
+  family m=2 B=6: compositions 2048, connected structures 502355984, elapsed 22.3 s
+  family m=3 B=4: compositions 2048, connected structures 502355984, elapsed 30.7 s
+  family m=4 B=3: compositions 2048, connected structures 502355984, elapsed 39.2 s
+  family m=6 B=2: compositions 2048, connected structures 502355984, elapsed 45.8 s
+  family m=12 B=1: compositions 2048, connected structures 502355984, elapsed 48.7 s
+DP families (m,B): [(1, 9), (9, 1), (1, 10), (2, 5), (5, 2), (10, 1), (1, 11), (11, 1), (1, 12), (2, 6), (3, 4), (4, 3), (6, 2), (12, 1)]; max_parts None; compositions (ordered instances) 16896
+DP B1_nontiling_structures: 594004901
+DP ctrl_B>=2_sep_ineq_without_L: 273170612
+DP ctrl_B>=2_sep_ineq_without_r: 8641884
+DP ctrl_B>=2_sep_ineq_without_z: 31292644
+DP structures: 3221566998
+DP structures_B>=2: 2627562093
+DP tilings: 5988
+DP viol_bond_count: 0
+DP viol_nick_count: 0
+DP viol_sep_ineq_B1: 594001065
+DP viol_sep_ineq_B>=2: 0
+DP viol_tiling_iff_L0_nobulge: 0
+DP viol_tiling_signature: 0
+DP wrote sig_dp_q9to12.json; time 50.7 s
+peak memory 115.9 MB

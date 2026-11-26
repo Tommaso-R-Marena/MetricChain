@@ -1,0 +1,14 @@
+start 2026-11-26T21:59:22Z
+[exh nv=4 m<=2] formulas 13694 (satisfiable 13658, unsatisfiable 36); largest instance: q = |W| = 12, |T| = 42; perfect matchings counted 756896
+[exh nv=4 m<=2] coverage: unit_clause 1292, two_clause 5310, repeated_literal 9324, complementary_pair 5310, var_once 11152, var_only_positive 9755, var_only_negative 9755, duplicate_clause 164
+[exh nv=4 m<=2] violations: S sizes 0; E satisfiable-but-no-matching 0, unsatisfiable-but-matching 0; N counting identity 0; F recipe of the proof 0 of 77896; B decoding 0 of 468304
+[exh nv=4 m<=2] control K4 (identity without (l-1)!): fails on 12640 formulas
+[exh nv=4 m<=2] control drop:true: satisfiable-but-no-matching 1512, unsatisfiable-but-matching 0; first disagreement [(1,)]
+[exh nv=4 m<=2] control drop:false: satisfiable-but-no-matching 1512, unsatisfiable-but-matching 0; first disagreement [(-1,)]
+[exh nv=4 m<=2] control drop:clause: satisfiable-but-no-matching 1348, unsatisfiable-but-matching 0; first disagreement [(1,)]
+[exh nv=4 m<=2] control drop:garbage_p: satisfiable-but-no-matching 24, unsatisfiable-but-matching 0; first disagreement [(1,), (-1, 2)]
+[exh nv=4 m<=2] control drop:garbage_n: satisfiable-but-no-matching 48, unsatisfiable-but-matching 0; first disagreement [(-1,), (1, -1)]
+[exh nv=4 m<=2] control add_wrong_clause: satisfiable-but-no-matching 0, unsatisfiable-but-matching 36; first disagreement [(1,), (-1,)]
+[exh nv=4 m<=2] control unlinked: satisfiable-but-no-matching 0, unsatisfiable-but-matching 36; first disagreement [(1,), (-1,)]
+[exh nv=4 m<=2] time 19.2 s
+peak memory 14.3 MB

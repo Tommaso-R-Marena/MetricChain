@@ -1,0 +1,23 @@
+start 2026-11-26T21:24:34Z
+  family m=3 B=3: compositions 256, connected structures 1883167, elapsed 314.0 s
+PART2 families (m,B): [(3, 3)]
+PART2 number of families 1; compositions (ordered instances) 256
+PART2 B1_nontiling_structures: 0
+PART2 ctrl_B>=2_sep_ineq_without_L: 85170
+PART2 ctrl_B>=2_sep_ineq_without_r: 960
+PART2 ctrl_B>=2_sep_ineq_without_z: 1344
+PART2 noncrossing_pair_sets: 12446720
+PART2 structures: 1883167
+PART2 structures_B>=2: 1883167
+PART2 tilings: 64
+PART2 viol_bond_count: 0
+PART2 viol_nick_count: 0
+PART2 viol_sep_ineq_B1: 0
+PART2 viol_sep_ineq_B>=2: 0
+PART2 viol_tiling_iff_L0_nobulge: 0
+PART2 viol_tiling_iff_all_item_bonds_stacked: 0
+PART2 viol_tiling_signature: 0
+PART2 violations: Fact 1 (connected iff no face with >= 2 nicks) 0; DP LB != LA on a composition 0
+PART2 control (mutant DP differs from LA): detected on 255 of 256 compositions
+PART2 wrote sig_levelA_3x3.json; time 314.0 s
+peak memory 16.5 MB

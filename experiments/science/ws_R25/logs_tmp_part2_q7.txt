@@ -1,0 +1,40 @@
+  family m=1 B=1: compositions 1, connected structures 1, elapsed 0.0 s
+  family m=1 B=2: compositions 2, connected structures 6, elapsed 0.0 s
+  family m=1 B=3: compositions 4, connected structures 34, elapsed 0.0 s
+  family m=1 B=4: compositions 8, connected structures 200, elapsed 0.0 s
+  family m=1 B=5: compositions 16, connected structures 1211, elapsed 0.1 s
+  family m=1 B=6: compositions 32, connected structures 7476, elapsed 0.7 s
+  family m=1 B=7: compositions 64, connected structures 46782, elapsed 5.7 s
+  family m=2 B=1: compositions 2, connected structures 6, elapsed 5.7 s
+  family m=2 B=2: compositions 8, connected structures 200, elapsed 5.7 s
+  family m=2 B=3: compositions 32, connected structures 7476, elapsed 6.3 s
+  family m=3 B=1: compositions 4, connected structures 34, elapsed 6.3 s
+  family m=3 B=2: compositions 32, connected structures 7476, elapsed 7.0 s
+  family m=4 B=1: compositions 8, connected structures 200, elapsed 7.0 s
+  family m=5 B=1: compositions 16, connected structures 1211, elapsed 7.1 s
+  family m=6 B=1: compositions 32, connected structures 7476, elapsed 7.8 s
+  family m=7 B=1: compositions 64, connected structures 46782, elapsed 14.2 s
+PART2 families (m,B) with mB <= 7: 16; compositions (ordered instances) 325
+PART2 B1_nontiling_structures: 55703
+PART2 ctrl_B>=2_sep_ineq_without_L: 2380
+PART2 ctrl_B>=2_sep_ineq_without_r: 212
+PART2 ctrl_B>=2_sep_ineq_without_z: 308
+PART2 noncrossing_pair_sets: 567498
+PART2 structures: 126571
+PART2 structures_B>=2: 70861
+PART2 tilings: 161
+PART2 viol_bond_count: 0
+PART2 viol_nick_count: 0
+PART2 viol_sep_ineq_B1: 55583
+PART2 viol_sep_ineq_B>=2: 0
+PART2 viol_tiling_iff_L0_nobulge: 0
+PART2 viol_tiling_iff_all_item_bonds_stacked: 0
+PART2 viol_tiling_signature: 0
+PART2 violations: Fact 1 (connected iff no face with >= 2 nicks) 0; DP LB != LA on a composition 0
+PART2 control (mutant DP differs from LA): detected on 303 of 325 compositions
+PART2 wrote tmp_trial_q7.json; time 14.3 s
+peak memory 15.3 MB
+
+real	0m14.298s
+user	0m14.194s
+sys	0m0.016s

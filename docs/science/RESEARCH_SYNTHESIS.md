@@ -12,88 +12,95 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 22:27 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 22:51 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–61.)*
 
 **Open right now (newest first; everything below this paragraph is older and still true
 unless this paragraph says otherwise).**
-(o) **A third directive of the research owner arrived at about 22:00 UTC on 26 November
-(D-3, verbatim in `docs/science/OWNER_DIRECTIVES.md`): a seventh division — *Structural &
+(oo) **A fourth directive of the research owner arrived at about 22:41 UTC on 26 November
+(D-4, verbatim in `docs/science/OWNER_DIRECTIVES.md`): an eighth division — *Frontier
+Benchmarking, Experimental Evidence and Scientific Evaluation*, branch
+`research/frontier-benchmarks`, digest `docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md` —
+designs independent evaluations, guards benchmark integrity and assesses comparative
+evidence.**  This division's role is unchanged and stated by the owner: "physical
+relevance, assumptions, novelty, and scientific validity".  Do not design or run their
+benchmarks; answer their questions; if an evaluation exposes a mathematical limitation,
+ask whether it calls for a stronger theorem, an algorithm, a generalisation or an
+obstruction.  **Evidence hygiene:** the official CASP17 results are announced for
+2026-11-29; blind, pre-leaderboard and retrospective evidence are kept apart in every
+text; nothing learned about held-out references or results goes into a message to a
+developing division before the predictions concerned are frozen; we do not look for
+such references.  The branch did not exist at 22:43:01 UTC; it is the seventh branch of
+the fetch loop.  A short note to them is owed when the branch exists or the next
+checkpoint is written, whichever comes first (what on this branch bears on their
+mandate: `BENCHMARK_DESIGN.md`, `SOFTWARE_EVALUATION_PROTOCOL.md`, the scoping statement
+that nothing in MetricChain is a structure predictor).
+(o) **The third directive (D-3, about 22:00 UTC): a seventh division — *Structural &
 Computational Biology, Software Development and Applications*, branch
-`research/structural-biology`, digest `docs/collaboration/STRUCTURAL_BIOLOGY_TO_ALL.md` —
-will build research software and benchmark specifications on MetricChain's mathematics;
+`research/structural-biology` — builds research software and benchmark specifications;
 the engineering division tests and benchmarks it; this division evaluates it,
-independently.**  Read D-3 in full before touching anything of theirs: no advocacy; a
-guarantee about a model is not evidence about a molecule; benchmark specifications are
-reviewed here with eight questions; prior art for every capability; computations through
-the engineering division; internal AI review is not peer review; all earlier limits
-stand.  *Done:* the orientation it asks for is **SCI-MSG-0034** (six parts, a table of
-what is mature enough to translate, six requests S-1 … S-6).  *State of their branch:*
-it appeared between 22:00:26 and 22:09:54 UTC, points at the theory division's commit
-`b2caab6` and has no commit, digest or mailbox of its own.  **At every synchronisation:
-fetch it (it is the sixth branch of the fetch loop); when it has a digest, read digest
-and status first, then their first benchmark specification; answer with a review
-(SCI-REV), not with help.**  **The standard for those reviews is written down:
-`docs/science/SOFTWARE_EVALUATION_PROTOCOL.md`** (claim sheet; the directive's nine applicability
-questions with what this branch has on each; a four-line error budget, worked on our own best
-certificate; observation models and the prerequisites of a retrospective validation; the eight
-benchmark questions; novelty classes; the form of a review; a readiness register of our own
-results).  The Complexity, Ensemble and (announced) Geometry divisions send them orientations of
-their own (COMPLEXITY-MSG-0005, ENSEMBLE-MSG-0006: skimmed); **the readiness grades in those are
-claims our reviews will have to check when software exists.**
+independently.**  Read D-3 in full before touching anything of theirs.  *Done:* the
+orientation SCI-MSG-0034; the standard for our reviews,
+`docs/science/SOFTWARE_EVALUATION_PROTOCOL.md`.  *State of their branch:* **first commit
+`720e0ec` (22:30 UTC)** — a producer and an independent checker of certified global
+minimum-energy conformations of an exact pairwise model (dead-end elimination, a dual
+bound, branch and bound), with a certificate format convertible to the theory division's.
+Their docstrings claim nothing about a molecule.  They read us at `71bc661`, before the
+orientation.  No digest, no benchmark specification yet.  **Owed to them next: a first
+review (SCI-REV) of that capability with the force-field measurement of item (ii)** —
+for a single leucine on an ideal helix the minimum-energy state of the rigid-rotamer
+table is not the rotamer well that holds the minimum of the same energy with continuous
+torsions.  At every synchronisation: fetch their branch; read digest and status first
+when they exist; answer with reviews, not with help.
 (i) **Two workstreams are running; their directories are uncommitted while they run.**
-R25 (launched 21:03 UTC; brief `docs/science/workstreams/R25_brief.md`): the second look
-the Complexity division asked for (their Theorem 1c in one regime, their Lemma A1) —
-`workstreams/R25_REPORT.md`, `experiments/science/ws_R25/` (it writes result files of
-several megabytes there: commit scripts, logs and the report, not those).  R26 (launched
-21:51 UTC; brief `workstreams/R26_brief.md`): a referee of the theory division's §11.33
-(nesting on general spaces; first of all the class-relative influence between blocks
-computed for band models) — `workstreams/R26_REPORT.md`, `experiments/science/ws_R26/`.
-**When one hands back:** read the report in full, check what decides each finding, add a
-coordinator's note, publish as a review (R25: SCI-REV-0024 to Complexity, copy Theory;
-R26: the next SCI-REV to Theory), commit its directory.  If it reports a declined tool
-action, do not perform it; tell the research owner.  For R25: **their note has changed
-since the version it reads** (`1ba144d`, after their own review: Lemma A1 now for clauses
-of between one and three literals; Corollary 4 (ii); a new §9a), COMPLEXITY-MSG-0004 §4
-says our look "is no longer the only check" — compare its findings with the new version
-and with COMPLEXITY-REV-0003 before publishing, and say in the same message that their
-CX-T27 (an outside check they would value) has not been taken up.  Never more than two
+R26 (launched 21:51 UTC; brief `docs/science/workstreams/R26_brief.md`): a referee of the
+theory division's §11.33 (nesting on general spaces; first of all the class-relative
+influence between blocks computed for band models) — `workstreams/R26_REPORT.md`,
+`experiments/science/ws_R26/`.  R27 (launched 22:46 UTC; brief
+`workstreams/R27_brief.md`): a referee, asked for by the Geometry division, of their
+Theorem L in its new threshold-free form — `workstreams/R27_REPORT.md`,
+`experiments/science/ws_R27/`.  **When one hands back:** read the report in full, check
+what decides each finding, add a coordinator's note, publish as the next SCI-REV to the
+division concerned, commit its directory without large data files.  If it reports a
+declined tool action, do not perform it; tell the research owner.  Never more than two
 agents at once.
-(ii) **Published at checkpoint 64:** *SCI-RES-0038* — the Ensemble division's Proposition E15U re-derived and
-replicated (item (iii)(c)).  **Published at checkpoint 63.**  *SCI-MSG-0034* (to the Structural
-Biology division): the orientation.  *SCI-RES-0037* (to Ensemble): their fourth
-checkpoint applied our review SCI-REV-0020 and accepted SCI-RES-0032 — and quoted a
-sentence of ours that SCI-MSG-0033 had withdrawn 47 minutes earlier; the counterexample
-and the replacement text again.  **Proposition A17.24 — continuous site variables**
-(addendum A17 (25), items 97–99; `pi_inference/continuous_cells.py`; closes the audit
-obligation G-5): a cell-wise sandwich of discrete models (Jensen below, bounded
-differences or cell minima above), second order in the cell size; on a toy chain 1.3
-nats per angle at three cells per angle and `10⁻³` at about 150 — **the certificates of
-this branch are certificates of the discrete model** (`OPEN_PROBLEMS.md` D16).
+(ii) **In progress on this machine (own work): the discretisation term on a real force
+field** (`pi_inference/continuous_cells_real.py`; addendum item 100 to be written; task
+list of the session).  Capped blocks of valine, leucine, serine with alanine spacers,
+ff14SB + GBn2 through workstream P2's builder, side-chain torsions on a 2.5° grid as the
+"continuum", everything else rigid.  First results (trial runs; a background batch
+recomputes all twelve cases with the final script into
+`<scratch>/ccr/final_*.log`, to be copied into `pi_inference/` when complete): the
+three-rotamer model's `ln Z` is off the grid's by about **+2 nats per torsion for valine**
+(1.86 on the strand, 2.00 on the helix: it does not cancel between backbones), and for
+**leucine the rigid model names the wrong dominant rotamer** (total variation 0.48 on
+the helix); the certified bracket of Proposition A17.24 is 8–10 nats per torsion at three
+cells; **but with each residue's own energy inside the cell weights the bracket for the
+coupling between valines is 0.0004 to 0.02 nats per torsion at three cells** — the
+discretisation error is almost entirely intra-residue, and that part is a
+low-dimensional integral.  Predictions logged at 22:28 and 22:36 UTC (research log).
+(ii′) **Published at checkpoint 66:** *SCI-REV-0024* (to Complexity; workstream R25) — their
+Theorem 1c and Lemma A1 stand; one positive finding (the exact range of the stacking
+energy for every block length).  **Checkpoints 63–65:** SCI-MSG-0034, SCI-RES-0037,
+SCI-RES-0038, Proposition A17.24, the evaluation protocol.
 (iii) **Owed, in this order.**
-  (a) R25 and R26, as in (i).
-  (b) **The Structural Biology division, as in (o)** — nothing to review yet.
-  (c) *Done at checkpoint 64:* the Ensemble division's Proposition E15U — re-derived (six lines) and
-  replicated by enumeration on two to four sites (SCI-RES-0038; `ensemble_checks/e15u_check.py`); holds as
-  stated for positive slopes; their own proof and the consequences they draw from it were not read.
+  (a) Item (ii): final logs, addendum item 100, a message to the Structural Biology
+  division (their first capability) with copies to all.
+  (b) R26 and R27, as in (i).
+  (c) The note to the eighth division, as in (oo).
   (d) **The engineering division's X-005c** checks our finding M1 of SCI-REV-0018 (their
-  commit `96c4fd2`; result files and a draft, no message yet): read it when their message
-  arrives.
-  (e) **Second-order recovery where it is not yet run** (`held_pair_exact.py`): at band 7 a
-  pass costs about three seconds (a trial with sixty quadruples — 420 passes — was stopped
-  unfinished after 35 minutes; its partial log is in the scratch space and is not
-  committed), so the full computation is hours on this machine for a bracket that is
-  already `8·10⁻⁵` nats: **not worth running at Lys₁₂ band 7.**  Worth running: (LKSE)₃ at
-  order 4 (first-order bracket 0.0014 nats; on LKSE:5 the floor route closed 0.47) — time
-  one pass first; Lys₂₀.  Workstream R24's comonotone upper end from single-group laws
-  under the floor is valid and not implemented.
+  commits `96c4fd2`–`c683fde`; result files and drafts of a correction, no message yet):
+  read it when their message arrives.
+  (e) **Second-order recovery where it is not yet run** (`held_pair_exact.py`): not worth
+  running at Lys₁₂ band 7 (about three seconds a pass).  Worth running: (LKSE)₃ at order 4
+  (first-order bracket 0.0014 nats) — time one pass first; Lys₂₀.  Workstream R24's
+  comonotone upper end is valid and not implemented.
   (f) A formatting defect: sixteen older rows of the findings table in
   `docs/collaboration/status/science.md` (S46–S61) and six index rows of the digest have a
   cell count different from their header.
   (g) `PUBLICATION_OPPORTUNITIES.md` (version 2, 25 November) and the body of
   `PRIOR_ART_MATRIX.md` (version 1) predate the new divisions: a new version of each is
-  owed — and D-3 makes the prior-art matrix a working document for the new division's
-  capabilities.
+  owed.
 (iv) **Next own mathematics** (`OPEN_PROBLEMS.md`): I7 (i) — is `a_cube + (K²/4)F*` the
 expansion of the chain's exponent?  D12 (a′) — a certified statement between `λ₀` and
 `0.8 λ_c`; with workstream R24's remark that `F(λ)` is exact and convex on a band model,
@@ -101,7 +108,7 @@ expansion of the chain's exponent?  D12 (a′) — a certified statement between
 D14 (down-closed families), D16 (a certified discretisation term; G-5 is answered).  Unrefereed inside the division:
 addendum A17 (13)–(18) (the research owner's decision, as recorded), parts (23), (24)
 and (25).
-(v) Heads read at 22:26 UTC: theory `6ebcccd`, engineering `c683fde`, ensemble `d7cbd91`, geometry `b0734aa`, complexity `75266b2`, structural biology `b2caab6` (only engineering had moved since 22:21: drafts of their correction after our SCI-REV-0018, by title; read as far as the pins in the status file say).  **The Geometry division accepted SCI-REV-0023 in substance within 23 minutes (GEOMETRY-MSG-0008 §3) and announces an answer to our question on the threshold as GEOMETRY-RES-0007: read it when it comes — `OPEN_PROBLEMS.md` C6.**
+(v) Heads read at 22:43 UTC: theory `6ebcccd`, engineering `c683fde`, ensemble `2d2054d`, geometry `9f164f9`, complexity `75266b2`, structural biology `720e0ec`, frontier benchmarks absent (ensemble, geometry and structural biology had moved; read as far as the pins in the status file say).  **The Geometry division answered our question on the threshold with a threshold-free theorem and asked for a referee (R27); the Ensemble division removed our withdrawn sentence from its report.**
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
    (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —

@@ -1,0 +1,22 @@
+  family m=2 B=5: compositions 512, connected structures 12066626, elapsed 0.8 s
+  family m=5 B=2: compositions 512, connected structures 12066626, elapsed 1.5 s
+DP families (m,B): [(2, 5), (5, 2)]; max_parts None; compositions (ordered instances) 1024
+DP B1_nontiling_structures: 0
+DP ctrl_B>=2_sep_ineq_without_L: 5172166
+DP ctrl_B>=2_sep_ineq_without_r: 240816
+DP ctrl_B>=2_sep_ineq_without_z: 681416
+DP structures: 24133252
+DP structures_B>=2: 24133252
+DP tilings: 288
+DP viol_bond_count: 0
+DP viol_nick_count: 0
+DP viol_sep_ineq_B1: 0
+DP viol_sep_ineq_B>=2: 0
+DP viol_tiling_iff_L0_nobulge: 0
+DP viol_tiling_signature: 0
+DP wrote tmp_trial_dp_q10.json; time 1.5 s
+peak memory 18.9 MB
+
+real	0m1.601s
+user	0m1.595s
+sys	0m0.001s

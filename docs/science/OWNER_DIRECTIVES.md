@@ -12,6 +12,7 @@ charter and the explicit resource and authorisation boundaries win.
 | D-1 | 2026-11-26, about 15:11 | "Supplementary Research Directive — Mathematical Generality, Physical Relevance, and Foundational Breakthroughs" | verbatim in `docs/collaboration/messages/science/SCI-MSG-0029.md` §1 (also relayed, with the same words, by the other two divisions: ENG-MSG-0006 appendix, THY-MSG-0016 §1) |
 | D-2 | 2026-11-26, about 15:36 | "MetricChain — Authorized Research Expansion and Cross-Division Collaboration Directive" (six divisions) | verbatim below |
 | D-3 | 2026-11-26, about 22:00 | "MetricChain — Supplementary Research Directive: Scientific Evaluation of Structural Biology Software" (a seventh division; this division's added duty of independent scientific evaluation) | verbatim below, after D-2 |
+| D-4 | 2026-11-26, about 22:41 | "MetricChain — Supplementary Directive: Frontier Scientific Evaluation and Eighth-Division Coordination" (an eighth division, Frontier Benchmarking; the division of responsibilities restated) | verbatim below, after D-3 |
 
 ## D-1 in one paragraph (the text is in SCI-MSG-0029 §1)
 
@@ -427,3 +428,107 @@ per paragraph as received; the words, the lists and their order are the owner's.
    15:00 US Eastern; internal AI review is not external peer review.  At consolidation: synthesis, novelty
    assessments, verification of central claims, documentation of limitations, internal reports of publication
    quality.
+
+## D-4 — the directive on frontier scientific evaluation and an eighth division [the research owner's text, verbatim]
+
+*Received in the conversation of this division on 2026-11-26 at about 22:41 UTC (this division's clock: the message
+surfaced with the result of a command; the next command printed 22:42:07 UTC).*
+
+> **METRICCHAIN — SUPPLEMENTARY DIRECTIVE**
+>
+> **Frontier Scientific Evaluation and Eighth-Division Coordination**
+>
+> Continue your existing research mission, branch restrictions, autonomous research loop, scientific scope, safety requirements, and resource limitations.
+>
+> I am authorizing an eighth independent MetricChain division:
+>
+> Frontier Benchmarking, Experimental Evidence and Scientific Evaluation Division
+>
+> Branch:
+>
+> `research/frontier-benchmarks`
+>
+> Its purpose is to establish rigorous scientific evaluations of MetricChain's mathematical and computational innovations against the strongest relevant contemporary approaches and appropriately scoped experimental evidence.
+>
+> The existing division of responsibilities remains intact:
+>
+> * The mathematical divisions develop foundational mathematics.
+> * Structural Biology develops research software.
+> * Ubuntu independently reviews implementations, executes substantial computations, and coordinates Modal.
+> * Scientific Discovery evaluates physical relevance, assumptions, novelty, and scientific validity.
+> * Frontier Benchmarking designs independent evaluations, maintains benchmark integrity, assesses comparative evidence, and communicates scientifically consequential deficiencies.
+>
+> The official CASP17 results are scheduled for release on November 29, 2026.
+>
+> The official modeling season has already ended. We are not claiming official participation.
+>
+> The Frontier Benchmarking Division will investigate whether scientifically defensible pre-reference-release evaluations remain feasible for appropriately scoped public benchmarks.
+>
+> Maintain strict distinctions between genuine blind assessment, pre-leaderboard assessment, and retrospective evaluation.
+>
+> Do not assume that all CASP17 references remain confidential.
+>
+> Respect frozen predictions, contamination controls, and separation between development and held-out evidence.
+>
+> The new division will also investigate broader scientific evaluation opportunities involving structural characterization, conformational ensembles, intrinsic disorder, thermodynamics, structural uncertainty, geometric inference, and other authorized mathematical and physical questions.
+>
+> Read its published findings directly through the existing collaboration protocol.
+>
+> Its digest will be:
+>
+> `docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md`
+>
+> Update your copy of the collaboration protocol to recognize all eight divisions.
+>
+> Respond to relevant scientific questions and requests according to your existing responsibilities.
+>
+> If frontier evaluation exposes a mathematical limitation, investigate whether it motivates a stronger theorem, a constructive algorithm, a generalization, or a rigorous obstruction.
+>
+> Do not abandon your primary research responsibilities.
+>
+> Do not duplicate the new division's evaluation mandate.
+>
+> Ubuntu remains responsible for substantial shared computation.
+>
+> Do not create additional repositories, modify other divisions' branches, expand spending limits, circumvent safeguards, or undertake work outside the existing research charter.
+>
+> Our overarching objective is to determine whether genuinely new mathematical principles can produce superior computational structural biology methods.
+>
+> Scientific rigor, independence, empirical accuracy, computational efficiency, and reproducibility take precedence over favorable appearances.
+>
+> Continue autonomously.
+
+(Formatting only, as for D-3: the title in bold, the text indented as a quotation, one sentence per paragraph as
+received; the words, the list and their order are the owner's.)
+
+### What D-4 changes here, item by item
+
+1. **An eighth division and an eighth branch**: *Frontier Benchmarking, Experimental Evidence and Scientific
+   Evaluation* on `research/frontier-benchmarks`, with the digest `docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md`.
+   **At 22:42:07 UTC on 2026-11-26 the branch did not exist on the remote.**  It is the seventh branch of the
+   fetch loop from now on; our copy of the protocol (head of `docs/collaboration/SCIENCE_TO_ALL.md`) names all
+   eight divisions.
+2. **The division of responsibilities, in the owner's words:** this division "evaluates physical relevance,
+   assumptions, novelty, and scientific validity"; the new one "designs independent evaluations, maintains
+   benchmark integrity, assesses comparative evidence, and communicates scientifically consequential
+   deficiencies".  So: **we do not design their benchmarks and do not run comparisons**; we review what a
+   comparison means physically, which assumptions it rests on, whether a claimed capability is new, and whether
+   the conclusion drawn is valid — and we answer their questions.  `SOFTWARE_EVALUATION_PROTOCOL.md` §5 (our
+   benchmark questions, written under D-3) stays our instrument for *criticism of specifications*, not a second
+   benchmark programme.
+3. **Evidence hygiene around CASP17** (results announced for 2026-11-29; the modelling season is over; no official
+   participation is claimed): three kinds of evidence are kept apart in everything we write — *genuine blind
+   assessment*, *pre-leaderboard assessment*, *retrospective evaluation*; references are not assumed to be
+   confidential; frozen predictions, contamination controls and the separation of development from held-out
+   evidence are respected.  **For this division that means:** nothing we learn about held-out references or
+   results — in a literature search, on a public page, from another division — goes into any message to a
+   developing division before the predictions concerned are frozen, and any such exposure is recorded with its
+   time.  We do not look for such references.
+4. **A limitation exposed by a frontier evaluation is a mathematical question for us**: does it call for a
+   stronger theorem, a constructive algorithm, a generalisation, or a rigorous obstruction?  That is this
+   division's existing work, pointed at new evidence.
+5. **Unchanged:** the primary research; no new repository; no writing to any other branch; computation of any
+   size through the engineering division; the resource limits and the deadline; the scope of the charter (no
+   biological sequence engineering, no target-specific functional optimisation, no experiments); internal AI
+   review is not peer review.  "Scientific rigor, independence, empirical accuracy, computational efficiency, and
+   reproducibility take precedence over favorable appearances."
