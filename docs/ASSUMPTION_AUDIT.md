@@ -28,7 +28,10 @@ re-ran all 14 scripts — every output is identical to the stored one — and ve
 one error of substance that the audits found (Theorem 11.33(a), §7 below).  The
 corrections to the theory report and the README are recorded item by item in
 `docs/audit/APPLIED_CORRECTIONS.md`.  The table for the nested algorithm rests on workstream
-N, which is under independent review at the time of writing; the rate theorem likewise.
+N, which has since been refereed internally (`docs/workstreams/N_REVIEW.md`: the level theorem
+correct as stated; six rows of its table reclassified — the counts below are the revised
+ones); the rate theorem is refereed in its lower half and under review in its upper half
+at the time of writing.
 Classifications are judgements with evidence attached; where the evidence is "not known"
 the reports say so, and §8 collects those cases.  Line numbers in the two audit reports
 and in the record of corrections refer to the theory report and the README as the audits
@@ -38,13 +41,13 @@ read them (commit `020e990`); the corrections made both files longer.
 
 | label | meaning (the directive's six categories, and one more) | AA1 | AA2 | N (25 rows; two labels possible) |
 |---|---|---|---|---|
-| E | essential to the result | 52 | 63 | 6 |
-| P | required only by the current proof technique | 16 | 62 | 7 |
+| E | essential to the result | 52 | 63 | 4 |
+| P | required only by the current proof technique | 16 | 62 | 5 |
 | C | introduced for computational or expository convenience | 26 | 29 | 6 |
 | Q | replaceable by a weaker quantitative condition (stated in the entry) | 39 | 28 | 7 |
-| X | removal changes the computational complexity (how, in the entry) | 13 | 18 | 7 |
+| X | removal changes the computational complexity (how, in the entry) | 13 | 18 | 9 |
 | F | removal makes the result false (counterexample in the entry) | 47 | 52 | 3 |
-| ? | not known | 23 | 45 | 7 |
+| ? | not known | 23 | 45 | 9 |
 
 Half of the assumptions are either load-bearing in the strongest sense (F: about one in
 five) or of unknown status (?: one in seven); fewer than one in six is a pure
@@ -102,7 +105,7 @@ LEVEL 4  A NEAREST-NEIGHBOUR CHAIN AS KNOWN PART (one synthetic two-state model)
 LEVEL 5  NO STRUCTURE: any set, any reference measure, any envelope
          the exact characterisations of §§2–6 and §§11.1–11.6, 11.12–11.14, 11.22–11.24, 11.26, 11.29 [V];
          lower bounds 11.43(a), 11.45(a), 11.62, 11.116(c); the abstract nesting theorem (validity
-         on any probability space, given tail functions: N_REPORT Theorem N1 [P, under review])
+         on any probability space, given tail functions: theory report Theorem 11.118 [P, refereed internally])
          NOT available: any upper bound on the cost of any algorithm for a first-order class
 ```
 
@@ -161,8 +164,10 @@ only for perfect correlation (AA1 S2); additivity of the extremal residual fails
 dependent references (D25, D41); with interactions the fibre averages of a class member
 change by `u(1 + c)` per outer flip, `c` up to 26 with two phases (AA2 S8), so the nested
 algorithm's key fact is lost; with *unbounded* influence the nested algorithm returns a
-**false certificate** (workstream N, Proposition N12: 80 of 80 runs) — the only
-hypothesis of that theorem whose failure costs validity rather than evaluations;
+**false certificate** (workstream N, Proposition N12: 80 of 80 runs; 120 of 120 in the
+referee's reproduction) — the validity hypothesis that a dependent known part breaks
+(the lower tail function, the a-priori bounds, the inner brackets and the sampling law
+are validity hypotheses too);
 "ferromagnets are never harder than the cube" is false for the nearest-neighbour
 ferromagnet (`0.0346` against `0.0291` per site at `u = 1`; AA2 S3); Theorem 11.33(a) is false
 for a pairwise known part of ferromagnetic blocks (§7).
@@ -239,8 +244,9 @@ algorithm attains the instance-wise costs (the hub family, D26, D37).
    threshold of §§11.4–11.10; every adaptive upper bound; the sandwich width.
 3. **Additivity of the envelope over independent parts** (the sum metric): cost-only in the
    proof of the nested algorithm and yet the whole gain (workstream N, row 7).
-4. **Bounded influence between blocks**, with a certified bound: the one hypothesis whose
-   failure yields false certificates.
+4. **Bounded influence between blocks**, with a certified bound: among the validity
+   hypotheses of the level theorem, the one that a dependent known part breaks — its
+   failure yields false certificates, not a higher cost.
 5. **The accuracy scale** (E, F): extensive for every bounded-cost statement.
 6. **A hint, free computation, exact samples and certified a-priori constants** (X, E): the
    theorems count evaluations; slopes, floors, variances and per-pair constants are inputs
@@ -269,7 +275,7 @@ The directive asks that these be named.
 | asymptotic isoperimetry behind Levels 1–2 | error terms `n^{−1/8}`, `n^{−1/(2q+2)}`: informative from `n ≈ 10¹¹` on | AA2 S4 |
 | cost bounds for profile certificates (11.49) | vacuous at extensive accuracy | AA2, overstatement 24 |
 | voxel enclosures in dimension `d` | cost grows like `d^{d/2}` | AA1, hierarchy L5 |
-| the abstract nesting theorem with a tail function that is valid but not sharp | ball-volume bound: exponent `0.197` for `0.029`; transport bound: closes only at the atom, i.e. enumeration | workstream N §4(e) |
+| the abstract nesting theorem with a tail function that is valid but not sharp | ball-volume bound: exponent `0.197` for `0.029`; transport bound: the certified cap on the sample is `10^{14}`–`10^{24}` on the cubes of dimension 30 and 60 (runs may close much earlier, but below the threshold rate `u²/8` they do not close before the atom) | workstream N §4(e), corrected by its referee |
 | the nested adaptive algorithm at bounded accuracy (11.56, 11.58, 11.58a) | the `O(√(n ln n))` term has explicit but large constants; the sizes at which a certified separation from plain Monte Carlo is reported are those of §11.19, remarks (1a), (1b) | theory report §11.19 |
 | the rate theorem for `k` nested levels | asymptotic in `k`; no certified constants at finite `k` | `docs/workstreams/R_REPORT.md` §12 |
 

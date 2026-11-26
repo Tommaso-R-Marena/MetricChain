@@ -74,7 +74,7 @@ models and non-decomposable residuals; (ii) temperature-aware dominance and voxe
 *certificate rules* (D1, D3, D4); (iii) finite-angle torsion-to-RMSD certificates and the
 resulting envelope for SE(3)-invariant residuals (C4); and (iv) a machine-checked certificate
 algebra and library covering all of it, including formalizations (to our knowledge new in Lean)
-of several known results.  The results of the later research phases (§§10–12; rows G1–G41 of §10), which
+of several known results.  The results of the later research phases (§§10–12; rows G1–G42 of §10), which
 were developed in response to that assessment and were reviewed by further independent
 referees (`reviews/R2` – `R12`), are classified separately there; §0.3 is a map of them.
 
@@ -98,6 +98,7 @@ referees (`reviews/R2` – `R12`), are classified separately there; §0.3 is a m
 | a **one-body marginal oracle with a field** (the second question of that division) | **for the class nothing changes**: with a free exact one-body oracle the adaptive exponent is `R^max` and the non-adaptive one `θ_na` (the lower bounds hold for every `n`; the exponents are limits) — the hard instance is a mixture of two product ensembles whose one-body averages equal those of the same mixture with a hidden dip (the division's compensation lemma); **at a given instance the oracle helps**: at the zero residual the exponent drops, by between `5.3 %` and `7.6 %` at `p = ¼`, `u = 1`, `e = 0.02` and by most of it for strong fields (a bracket; the exact value is open) | §11.29 | our criterion (paper proof, brute force on `Q_10`); **the two consequences are the division's theorems (SCI-RES-0006), which replaced two conjectures of ours — one true for another reason, one with a wrong formula and two wrong numbers**; every step re-derived and the finite statements and numbers replicated with our own code (harness XXIII.7); **the class statement (compensation lemma, excess of a dip, the lower bound for adaptive algorithms) is machine-checked — by the division, its files adopted at the eighteenth checkpoint**; the instance-wise bracket is not |
 | **sup-norm (box) classes around a known part whose Gibbs measure can be sampled exactly** (the division's request P-T3: a certificate theory for remainders that are small in a typical norm) | the cost of certifying `ln Z` with the instance as a hint is `Θ((Z(lo)/Z(r) − 1)/ε + (1 − Z(hi)/Z(r))/ε)` (for accuracies `ε ≲ 1`, where no single state can change `ln Z` by `ε`, and up to an additive constant) — the Boltzmann factor of the free-energy distance from the instance to the floor of the class, divided by the accuracy, plus a term from the ceiling of at most `1/ε` that is the whole cost near the floor — with matching bounds for all randomised algorithms: **the system enters only through that one free-energy distance, not through the number of states or variables** (for a remainder that is a sum over a growing system the distance is extensive — the science division's correction of our earlier headline "independent of the size of the system"); the Gibbs–Bogoliubov side costs `w² ln(1/δ)/(2ε²)` samples; deterministic certificates cost the entropy of the known part; minima do not share the benefit; a sup-norm bound caps the cost of every first-order class; the typical norm sets the width of the bracket, the floor sets the number of samples below which nothing is certified; **from the science division:** with a certified variance next to a one-sided floor `ln Z` is bracketed within `W(b, σ²) ≤ (σ²/b²)(e^b − 1 − b)` with no exponential bill (Bennett; Theorem 11.110(f)), and the floor is the end `p = ∞` of a family — an a-priori bound `κ` on a Rényi divergence of order `p` of the true ensemble from the model costs `e^κ/ε^{p/(p−1)}` with a hint, a Kullback–Leibler bound `e^{κ/(1−e^{−ε})}`, polynomial moments of the remainder alone certify nothing (Proposition 11.112; in print without a hint, as that division then found); **added at the seventeenth checkpoint:** at a flat instance a hint is worth nothing, in general it buys the variance term; a sandwich of two sampleable models is certified without a hint by sampling in proportion to the width of the bracket (Proposition 11.113); a ratio of two macrostate weights costs the larger of the two macrostates' own distances to the floor (Corollary 11.114); **at the nineteenth checkpoint, after the science division's review SCI-REV-0013:** two sentences of ours corrected (without a hint a wide sandwich costs the order `sinh²(Δ/2)/ε²`, not `(e^Δ − 1)²/ε²`, so that a hint is worth at most `1/ε`; the cost of a ratio has a ceiling term as well), a variance-sensitive bracket, and **nested sandwiches: an inner bracket that can only be computed state by state is reached at its own price in evaluations by free rejection from any solvable outer model (Proposition 11.113a) — all share forms of the anchored expansion cost the evaluations of the envelope** | §11.30 | the dip and bump bounds, the detection lemma, the spot check on every class inside the box, and the lower bound for all algorithms machine-checked (`BoxClass.lean`, including the lower bound from the ceiling; `BoxRatio.lean` for ratios; `BoxAdditions.lean`: detection at the floor and at the ceiling, the weighted sampler and the bump alternatives for ratios, machine-checked by the science division and adopted, and the ratio lower bound with dips and bumps); the rest elementary paper proofs; Theorem 11.110(f) and Proposition 11.112 are the science division's, re-derived and tested here (harness XXIV.6, XXIV.7), not machine-checked; harness XXIV (twelve tests), DEAD.28; reviewed in part by the science division (SCI-REV-0013: Theorem 11.110(e), Proposition 11.113, Corollary 11.114 — two sentences replaced); otherwise not refereed; **every ingredient is in print** (the science division's full-text search, SCI-RES-0009: Hoeffding 1963, the stopping criterion of provable partition-function algorithms, importance sampling against an upper-bounding model, Block–Shetty 2026) and the hinted two-sided statement as a theorem was not found; elementary and classical in spirit — no novelty claimed beyond the placement; prior art at search-summary level (`docs/prior_art/L10_box_classes.md`) |
 | a **known part with interactions along the chain** (a nearest-neighbour Gibbs measure; our workstream Y, examined by our referee R11 and by the Scientific Discovery Division) | **the exponents are not those of independent sites, in either direction.**  For the symmetric two-state chain without a field: at a weak envelope (slope `u = 1`) all three numbers are above the uniform cube's — the hinted exponent by 38 % to 54 % at flip probability `0.3`, the threshold by a factor `1.94` — and to second order in `u`, at a fixed length `n`, by the factor `Var(Σs_i)/n`, whose limit is the structure factor `(1−p)/p` (proved from above for the limit game function, exactly for the threshold); at a strong envelope and a coupling that is not weak the non-adaptive exponent at vanishing accuracy (`p ≤ 0.3`, from `u = 3`) and the hinted one (`p ≤ 0.2`, from `u = 4`) are *below* the cube's, in the cells computed; the threshold rises at every slope.  The lower bounds hold for every algorithm, every chain length and every accuracy; the game function is a regularised (multi-letter) quantity known in brackets | §11.32 | paper proofs by one workstream, re-derived by two independent reviewers, numbers replicated by three codes; harness XXV (15 mutations); **the direction at strong envelopes and the small-slope law are the division's findings (SCI-REV-0010) — our first summary said "upwards"**; upper bounds on costs conditional on §11.26 and for extensive accuracies only; machine-checked: the lower bound for every algorithm in terms of a law on labels (`SoftMinLowerBound.lean`), nothing else; one synthetic model |
+| the **nested algorithm in the structure it uses** (the research owner's directive on generality) | the level theorem on any probability space, given tail functions; dependence under a certified class-relative influence costs slope; **obstructions**: on Euclidean Gauss space nesting over a fixed split of the coordinates gains nothing; unbounded influence yields a false certificate; an exponential moment is necessary for any certified upper bound; the assumptions of Theorems 11.52–11.58 classified | §11.33 | paper proofs by a workstream, simulated, refereed internally (correct as stated; one proposition a plan; one claim corrected); nothing machine-checked |
 
 What none of this establishes is listed in §8; the strongest open questions are in §12 and,
 in priority order, in `docs/RESEARCH_LOG.md` ("Resume here").
@@ -1546,6 +1547,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G39 | **A known part with interactions along the chain** (a nearest-neighbour Gibbs measure as reference).  Two exact reductions to products of blocks — cut interactions move into the residual at the price of a slack in the envelope at the block ends; blocks with gaps embed exactly with a reduced envelope — make the block site functions exactly sub- and super-additive, so a limit game function exists with monotone brackets; the whole chain as one super-site gives a lower bound for every algorithm at every length and accuracy; a Markov recursion bounds the game function with a slack at one end only.  For the symmetric two-state chain without a field the three numbers of the game function are above the uniform cube's at slope `u = 1` (the hinted one by 38–54 % at flip probability `0.3`, the threshold by `×1.94`), by the factor `Var(Σs_i)/n` at a fixed length to second order in the slope — its limit is the structure factor `(1−p)/p`; for any finite space with a symmetric envelope the factor is the largest variance of a Lipschitz function —, and **two of them are below the cube's at strong envelopes where the coupling is not weak (the non-adaptive one for `p ≤ 0.3` from `u = 3`, the hinted one for `p ≤ 0.2` from `u = 4`, in the cells computed)**; the threshold rises at every slope; the stratified fixed sample of §11.26 does not transfer (class-wise quantile truncations leave the class) | `softMin_expected_queries_ge`, `softMinLabel_admissible`, `renyiG_eq`, `renyiG_le_log_card` **[V]** (Theorem 11.116(c): the lower bound for every algorithm from any law on labels, for any reference measure); `cut_coupling_admissible`, `cut_coupling_partition`, `gap_embedding_admissible`, `gap_embedding_partition` **[V]** (the two reductions (a), (b) in their two-block form; the iteration over the cuts on paper); the rest of Theorem 11.116 and Proposition 11.117 **[P]**, their evaluation **[N]** with duality brackets; harness XXV.1–XXV.3 with 15 mutations | cycle 10, workstream Y; **refereed by R11 (no critical finding; what the brackets are brackets of) and reviewed and replicated by the Scientific Discovery Division (SCI-REV-0010), which found that the direction of the effect depends on the slope — our first summary said "upwards" — and proved the small-slope law that the workstream had observed numerically**; upper bounds on costs are conditional on Theorems 11.95, 11.98(d), 11.101(b) for super-sites and hold for extensive accuracies in an iterated limit; one synthetic model; prior art not searched systematically (the ingredients — transfer matrices, association, Rényi capacities of channels with memory, moment Lyapunov exponents — are classical) |
 | G40 | **The sub-exponential term of the adaptive cost without a hint.**  At every bounded accuracy the least number of evaluations of an adaptive algorithm without a hint on the cube class is between `exp(n·h − O(1))` and `exp(n·h + O(√(n ln n)))` (Theorem 11.58a): an explicit schedule of about `√(n/ln n)` nested levels, built on the epochs of the machine-checked rate (each level as in the proof; the choice of servers by certified cost is optional).  Two kinds of level: a *slope step* is built at accuracies `x̂ ≥ X₀(n) = 1 + ln(6(n+1)) + 2u + e^u + h` on an outer block of `⌊(x̂ − X₀(n))/h⌋ + 1` sites with the closure threshold `e^{x̂ − O(1)}`, where the closing radius is at least `ρ_h·n_o` and the outer sample costs at most `e^{n_o h}` up to polynomial factors (Lemma 11.55(d)) — it loses `(a/h + 4)·ln n + O_{u,δ}(1)` nats (`39` at `u = 1`); a *drop* works at a bounded threshold and loses `e^{O(√n)}` (Lemma 11.55(c), with the leading constant `u`), one per epoch, with summable constants.  The failure probabilities handed down are uniform over the depth because the outer block's `n_o ln 2` is taken out of the dimension.  The earlier text called `n^{3/4}` the heuristic limit of the method; that was wrong | the epoch arithmetic **[V]** (`RateFull.lean`, the Scientific Discovery Division's); the hinted lower bound **[V]** (Theorem 11.25(a)) with three lines **[P]**; Lemmas 11.55(c), (d), the two steps, the induction over epochs and the choice of the depth **[P]**; harness XVI.5 (the two lemmas on exact tables, the arithmetic, the accuracies of both kinds of level, the lower bound) **[N]**; the formula and nests of up to seven levels evaluated exactly by the workstream and by the referee **[N]** | cycle 10, workstream Q (commissioned at the twenty-first checkpoint), every step re-derived by the coordinator; **refereed (`reviews/R12`: "the main claim survives, with the constants as stated", no major finding, six minor points applied)**; **reviewed with replication by the Scientific Discovery Division (SCI-REV-0017: "proved as stated, given its inputs", nine minor points applied; the bound reproduced from the text alone)**; rests on Theorem 11.56 (paper, refereed, replicated in part by two divisions) in a regime that no run with real inner procedures covers (the outer loop of a slope step has been run against a simulated inner oracle); not machine-checked; **prior art not searched** (the question is internal to this report's algorithm family) |
 | G41 | **The rate of the level recursion.**  The exponent of `k` nested levels at accuracy zero is `h + (2π²h²θ_hint″(0) + o(1))/k²` (Theorem 11.53b; `0.641·a/k²` on the cube at `u = 1`, `(π²/16)/k²` for the Gaussian pair), for every convex non-adaptive exponent function whose dual has a twice differentiable maximum; with a kink at the fixed point the rate is `1/k`, so the general `O(1/k)` bound cannot be improved over the class of all convex pairs.  The recursion acts on lines through a one-dimensional map with a saddle-node at the hinted exponent (Theorem 11.53a); the lower bound is the passage time of the orbit of a minorant line; the upper bound needs that a *convex* family of lines moves line by line (a minimax theorem) and a convex sub-solution cut from the orbit curves.  A statement about the analysis of nested algorithms at the level of exponents: no cost at finite `n` follows, and no constant at finite `k` is certified from above | Lemmas L and M, the iteration of the lower bound, the Gaussian slope map and three instances **[V]** (`LineDynamics.lean`); the slope map, the passage time, one level for convex families, the sub-solution and the range condition **[P]**; harness XVI.6, XVI.8 (13 mutations) and exact rational lower bounds for the Gaussian pair **[N]** | cycle 10, after the twenty-second checkpoint: the coordinator's proof (`docs/workstreams/R_REPORT.md`), written after the workstream commissioned for it ended without output; under independent internal review when this row was written; the law was first seen numerically ("`0.65/k²`", workstream H); the mathematics is a classical slow passage through a saddle-node combined with a minimax argument — no novelty claimed for either; **prior art for the recursion itself not searched** (it is internal to this report's algorithm family) |
+| G42 | **The nested algorithm in the structure it uses** (§11.33).  The level theorem holds for an outer integrand on any probability space with an upper and a lower *tail function* (Theorem 11.118; the cube with identical constants); for two blocks, and for a dependent known part with a certified *class-relative influence* between the blocks — dependence costs slope (Theorem 11.119).  **Obstructions:** on Gauss space with Euclidean-Lipschitz functions the tail functions are exact and dimension-free and nesting over a fixed split of the coordinates gains nothing, while the hinted lower bound holds in high dimension (Theorem 11.120) — the dividing line is additivity of the envelope over independent parts, not discreteness; with unbounded influence the algorithm returns a **false certificate** (Proposition 11.121); an exponential moment is necessary and sufficient for any certified upper bound (Proposition 11.122).  A tail profile whose relative exponent does not increase gives a pair of exponent functions (Proposition 11.123); the assembly of the levels into an adaptive bound in the abstract setting is a plan, not a proof; 25 assumptions of the level theorems classified | nothing machine-checked (the machine-checked `HintPair` theorem is quoted for Proposition 11.123(a)); paper proofs **[P]**; 2 624 simulated runs of the outer loop in valid settings, the invalid brackets of Proposition 11.121 in 80 of 80 runs **[N]** | cycle 10, after the twenty-second checkpoint, under the research owner's directive on generality: workstream N (`docs/workstreams/N_REPORT.md`); **refereed internally (`docs/workstreams/N_REVIEW.md`): the level theorem and its variants correct as stated, the false certificate reproduced with independent code (120 of 120 runs), one proposition a plan, one claim on a non-sharp tail function wrong — corrected in §11.33**; Gaussian isoperimetry and a spherical cap bound quoted from memory; prior art not searched |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -5379,13 +5381,16 @@ ingredient is special, and so is the fact that on the cube every query point is 
 point.  The small-slope limit of the two exponent functions, `(1 − √e)²` and `(1 − e)²/4`, looks
 like a statement about Lipschitz functions on Gaussian space, and it is **not** one: there
 a block of coordinates has the same Euclidean Lipschitz constant as the whole space, so
-the two-level construction gains nothing as it stands; and the extremal sets of the
-isoperimetric inequality are half-spaces, which an algorithm can detect with a few
-evaluations far from the bulk, so that even the hinted lower bound does not transfer.
-Nothing is claimed for continuous spaces.  Product reference measures and larger alphabets
-with a weighted Hamming distance have all three ingredients at the exponential scale
-(asymptotic isoperimetry of product measures; from memory, not read) and are not worked
-out.
+the two-level construction gains nothing — now a proposition, for every fixed split of
+the coordinates: Theorem 11.120(b).  The extremal sets of the isoperimetric inequality
+are half-spaces, which an algorithm can detect with a few evaluations far from the
+bulk; but dips on large *balls* are not detected that way, and the hinted lower bound
+does hold in high dimension (Theorem 11.120(c); the first version of this remark said
+that it does not transfer).  With the sum of the coordinate distances as metric, Gauss
+space is an exact instance of the abstract level theorem (Theorem 11.118).  Product
+reference measures and larger alphabets with a weighted Hamming distance are worked out
+at the exponential scale in §§11.20 and 11.26; what the level theorem uses, in general,
+is §11.33.
 (4) Worst case over the class.  One consequence concerns algorithms *with* a hint: an
 algorithm with a hint may ignore it, so by Theorem 11.54 no instance of the class costs a
 hinted algorithm more than `exp(nθ_hint(ε₁) + o(n))` — **the zero function is the hardest
@@ -6940,7 +6945,8 @@ in the class, and fibre averages are Lipschitz relative to the reference (Lemma 
 Then, in each of the models in which this has been carried out (the uniform cube, a field,
 several site types: §§11.16–11.20, 11.26), non-adaptive algorithms have the exponent
 `R ∘ S^{-1}` and adaptive ones `R`; as an abstract implication from (I1)–(I3) it is not proved
-(the commission of workstream N).  The first
+(§11.33: a tail profile gives the pair, Proposition 11.123(a); the assembly of the levels in
+the abstract setting is a plan, not a proof).  The first
 half of that sentence needs (I1), (I2) and a truncation argument, the second (I1)–(I3), the
 nested algorithm, and Theorem 11.66.  The least favourable instance is the reference, and
 the optimal fixed sample is its Gibbs law.
@@ -11877,6 +11883,209 @@ factor); fifteen mutations.  The workstream's own numbers are reproduced by
 `experiments/reviews/R11/` (22 scripts) and by the division's `experiments/science/ws_R10/` on
 its branch.
 
+### 11.33 The nested algorithm on an arbitrary probability space: what the level theorem needs, where it works, where it cannot
+
+*Origin and status.*  The level theorems of §§11.18–11.19 (Theorems 11.52, 11.56) are stated
+for the cube.  Under the research owner's directive on generality a workstream was asked
+which properties of the cube their proofs use, and for the theorem in the structure it
+uses (`docs/workstreams/N_REPORT.md`, workstream N: paper proofs; the outer loop simulated on
+2 624 runs in valid settings without a violation; no Lean).  **Refereed internally**
+(`docs/workstreams/N_REVIEW.md`; the referee's own code throughout): the abstract level
+theorem and its variants "correct as stated"; the false-certificate example below
+reproduced from its description alone; one proposition found to be a plan and not a
+proof (the assembly of the levels — stated here as a plan); one claim about a non-sharp
+tail function wrong (corrected here); one proof incomplete for randomised procedures
+(repaired by the referee).  The audit of the cube's proof finds 31 uses of the cube, 15 of
+them in validity or in the probability of the good event; every one of those is an
+instance of four facts about an *outer integrand* on a probability space.
+
+**Tail functions.**  Let `V > 0` be measurable on a probability space `(X, μ)`.  An *upper tail
+function* `Ξ` and a nondecreasing *lower tail function* `Θ` of `V` satisfy, for all `s > 0`, `0 < q ≤ 1`:
+
+    (TU)   μ(V > s) ≤ q   ⟹   E(V − s)₊ ≤ s·Ξ(q),            (TL)   μ(V ≥ s) ≥ q   ⟹   E min(V, s) ≥ s·Θ(q)
+
+(`Θ(q) = q` is always admissible).  For an envelope `ρ` on `X` (`V(x) ≤ V(z)e^{ρ(x,z)}`: the class of a
+Lipschitz condition) the functions `Ξ_ρ(q) = sup{∫_D (e^{ρ(x→Dᶜ)} − 1)dμ : μ(D) ≤ q}` and
+`Θ_ρ(p) = inf{∫ e^{−ρ(S→x)}dμ : μ(S) ≥ p}` are tail functions of the class, the best ones when `ρ`
+satisfies the triangle inequality: tail functions are isoperimetric profiles.  On the cube
+they are Lemma 11.43 (Harper) and the lower tail lemma of Theorem 11.56.
+
+**Theorem 11.118 (one more level, on any probability space) [P: workstream N, Theorem N1 —
+the proof of Theorem 11.56 with its uses of the cube replaced; refereed: correct as
+stated].**  Let `V > 0` on `(X_o, μ_o)` with `A = ∫V dμ_o < ∞` have tail functions `Ξ`, `Θ`; let numbers
+`0 < ℓ₀ ≤ A` and a cap `V ≤ V_max` be known; let independent points of the law of `(X_o, μ_o)` be available;
+and let `V(a)` have refinable brackets — a trivial one of ratio `e^{x₀}`, and for accuracies
+`x₁ > … > x_L ≤ b` randomised procedures with failure probability `δ′` and costs `C_l` in every
+run.  Then Algorithm 2L⁺ — with the tail term `s_j·Ξ(q)`, the lower-tail update
+`s_je^{−b}·max(p̲, Θ(p̲))`, and a stop when the ladder passes the cap — returns `L ≤ A ≤ U ≤ e^{x_out}L`,
+`x_out = ln[κ₀ + e^b(e^λ(1+η)/(1−η) + η′ + θ)]`, except with probability `δ`, at the cost formula of
+Theorem 11.56 with `M̄ ∝ 1/π_*`, where the **closing level**
+
+    π_*  =  sup{ π : Ξ(q) ≤ θ(1−η)ν₀·q   and   Ξ(q) ≤ θ·max(c_ηq, Θ(c_ηq))   for all q < π }
+
+takes the place of the closing radius.  *Validity uses (TU), (TL), `ℓ₀ ≤ A`, the cap, valid
+inner brackets and independent outer points — nothing else; the cost uses the two
+ratios `Ξ(q)/q` and `Ξ(q)/Θ(c_ηq)` on all `q` below the closing level — nothing else.*  A tail
+function that is too large costs evaluations; one that is too small costs validity.
+Atoms, integrality of radii and the convention `s₀ ≤ min W` of the cube are not used.  With
+the cube's conventions every constant of Theorem 11.56 is reproduced (ten parameter
+sets, against the evaluator of workstream Q).  *Without a cap* (an unbounded integrand)
+the theorem holds with an upper bound `u₀ ≥ A` and termination through the closing level
+(Theorem N1′ of the workstream).
+*What `π_*` is and is not* (the referee's correction): it is a design constant, a supremum
+over **all** smaller `q`, and bounds the sample in every run; a run may close far earlier.
+With the transport bound as tail function on the cubes of dimension `m = 30` and `60` (`u = 1`), `π_* = 2^{−m}` and the cap on
+the sample is `10^{14}`–`10^{24}`, yet runs close validly with about `10³` points at threshold
+rates above `u²/8`; below that rate they do not close before the atom.  The workstream's
+sentence "at every accuracy rate below `0.589u` the algorithm does not close before the
+atom" confused the two and is withdrawn.
+
+**Theorem 11.119 (two blocks; dependence under bounded influence) [P: workstream N,
+Theorems N3, N4; refereed: correct as stated].**
+(a) *Product measures.*  For a class of functions on `X_o × X_i` with `μ_o ⊗ μ_i`, the level
+theorem applies to `V_ψ(a) = ∫e^{−ψ(a,b)}μ_i(db)` as soon as the fibres `ψ(a, ·)` lie in a class with
+inner bracket procedures and the fibre averages have known tail functions under the outer measure.
+For a Lipschitz class of a quasi-metric `d` on the product the envelope of the fibre average is
+`ρ_o(a, a′) = sup_b d((a′, b), (a, b))`.  *Nothing here asks the metric to be a sum over the
+blocks* — that is needed for the cost (Theorem 11.120).
+(b) *A known part that is not a product.*  Let `μ` on `X_o × X_i` have the outer marginal `μ_o(da)` and
+conditional laws `μ(·|a)`, let the inner procedures be valid under every conditional
+law, let `ψ` be Lipschitz in the outer variable for a quasi-metric `d_o(a′, a)`, and let `ι ≥ 0` satisfy
+
+    ∫ w dμ(·|a)  ≤  e^{ι(a,a′)}·∫ w dμ(·|a′)        for all a, a′ and all fibre weights w = e^{−ψ(a″,·)} of the class
+
+(the **class-relative influence**).  Then `V_ψ(a) = ∫e^{−ψ(a,b)}μ(db|a)` has the envelope
+`d_o(a′, a) + ι(a, a′)`, and the level theorem applies with tail functions of that envelope:
+**dependence costs slope** — on the cube, `u ↦ u + ι` per outer flip.  The class-relative
+form is sharp where the pointwise bound `dμ(·|a)/dμ(·|a′) ≤ e^{ι}` is not: for conditional
+laws `Bernoulli(p(a))^{⊗k}` and `u`-Lipschitz fibres,
+`ι(a, a′) = k·max_± ln[(1 + p(a)(e^{±u} − 1))/(1 + p(a′)(e^{±u} − 1))]`, attained by a uniform field (the
+largest slope of `−ln V` in a simulation: `1.3120`, where the pointwise bound gives `1.754`).
+For a nearest-neighbour chain the nesting is valid without cutting the chain, with a
+one-sided slack at the boundary site.
+
+**Theorem 11.120 (Gauss space: where nesting gains nothing) [P, given the Gaussian
+isoperimetric inequality (Sudakov–Tsirel'son, Borell; quoted from memory) and, for (c), a
+spherical cap bound; workstream N, Theorem N9, Propositions N10, N11; refereed: correct
+as stated, with the precisions given].**  Let `−ln V` be `L`-Lipschitz for the Euclidean norm
+on `(ℝⁿ, γ_n)`.
+(a) *Exact, dimension-free tail functions.*  With `t = Φ^{−1}(1 − q)`, `c = Φ^{−1}(p)`:
+
+    Ξ_L(q) = e^{L²/2 − Lt}·Φ(L − t) − Φ(−t),        Θ_L(p) = p + e^{Lc + L²/2}·Φ(−c − L),
+
+attained by `e^{L(x₁ − t)₊}` and `e^{−L(x₁ − c)₊}`: the same in every dimension.  At the scale `L²/2` the
+exponent functions are those of the Gaussian pair: `Θ_hint(e) = (L/2 − e/L)²/2`,
+`Θ_na(X) = (L − √(2X))₊²/2`.
+(b) **Obstruction.**  Split the coordinates into two fixed blocks and consider the linear
+instance `ψ(a, b) = −L⟨a, ω⟩`, `ω` a unit vector of the outer block.  For every dimension of
+the blocks, any valid tail functions, any inner procedures and any parameters with
+`x_out < L²/2`, every run of the algorithm on its good event draws at least
+
+    (2K/(1+η))·exp( (L − √(2x_out))²/2 )
+
+outer points: the outer problem is a full copy of the original one, at any dimension.
+(The bound counts outer points; it counts evaluations when each outer point costs at
+least one — the referee's precision.)  In the analysis of the levels the operator
+satisfies `R_G[T] ≥ max(T, Θ_na)` for every `T`: the recursion is the identity.  **Nesting over a
+fixed split of the coordinates gains nothing** when the envelope is not additive over
+the blocks.  Not excluded: blocks that are random subspaces.
+(c) *The hinted lower bound does hold in high dimension.*  For `0 < t ≤ L` and
+`n ≥ max{4t², L(L + 1.2816)²t}`, every randomised algorithm that is `(ε/2, δ)`-correct for
+`ε < ln(1 + 0.112·e^{L²/2 − Lt} − ½Φ(−t))` — adaptive, with any hint — makes at least `(1 − 2δ)·e^{t²/2}`
+evaluations in expectation at `ψ ≡ 0`: the alternatives are dips on balls of radius about
+`n/t` centred at distance `n/t`, which a query hits with probability at most `e^{−t²/2}`
+(half-space dips would be detected from far away).
+(d) *With the sum metric* (`ψ` Lipschitz for `Σ_i |x_i − z_i|`) Gauss space is an exact instance
+of Theorem 11.118 at every `n` — exact tail functions, extensive, and the pair of exponent
+functions is the Gaussian pair of Theorem 11.53b exactly; a lower bound is open there.
+So on Euclidean Gauss space the adaptive exponent without a hint lies between
+`Θ_hint(ε + O(1))` and `Θ_na(ε)` — the situation of the cube before Theorem 11.54 — and the
+tool that closed the gap on the cube provably does not close it here.  **The dividing
+line is whether the envelope is additive over independent parts, not whether the space
+is discrete or continuous.**
+
+**Proposition 11.121 (unbounded influence: a false certificate) [(a)–(c) P, (d) N:
+workstream N, Proposition N12; reproduced by the referee with independent code].**
+Let the outer block be the cube of dimension `m` with the uniform marginal and the inner block the cube of dimension `k` with the
+conditional law `Bernoulli(p(a))^{⊗k}`, `p(a) = σ(J(τ − |a|))` — a complete bipartite coupling of
+strength `J` per pair — and let the residual be `ψ(a, b) = u|b|`, a member of the cube class.
+(a) `V(a) = (1 − p(a) + p(a)e^{−u})^k`, and across the threshold `|a| = τ` its logarithm jumps by
+`k·c(J, u)`, `c ↑ u` as `J → ∞`: `−ln V` has no Lipschitz constant below `k·c`, and the hypothesis on
+fibre averages fails by the factor `e^{kc − u}`, exponential in the size of the inner block.
+(b) The tail inequality (TU) for the slope `u` is violated as soon as `kc > u(m − τ + ½)`.
+(c) *What the algorithm then does* (`m = 12`, `k = 16`, `u = 1`, `J = 4`, `τ = 10.5`: `A = 1.0747·10⁻³`, of
+which the 13 points with `|a| ≥ 11` carry `99.99` per cent; largest edge ratio `e^{11.77}`; (TU)
+violated by the factor `1.7·10⁵`).  Run with the tail function of the assumed class it
+**returns an invalid bracket in every run** — 80 of 80 (workstream), 120 of 120 (referee) —
+with the certified upper end below `A` by factors of about `300` (threshold `θ = 20`) and
+`2 800`–`4 600` (`θ = 1`).  Every certificate obtained by sampling is true and the Chernoff
+events hold in every run: the false step is the tail bound, and the run closes below
+the spike.  Run with the tail function of the true class it is valid, at `25` to more
+than `1 000` times the cost of enumerating the outer cube.
+(d) Not a counterexample: an unbounded influence of boundedly many outer sites (condition
+on them).
+*This is the hypothesis whose failure a dependent known part produces, and it yields a
+false certificate, not a higher cost.*  (It is not the only validity hypothesis — the
+lower tail function, the bound `ℓ₀`, the cap, the inner brackets and the sampling law are
+validity hypotheses as well; the referee's correction to the workstream's "the only".)
+A certificate format built on the level theorem must carry the bound on the influence.
+
+**Proposition 11.122 (unbounded oscillation) [P: workstream N, Proposition N13, with the
+referee's repair for procedures that may fail with probability `δ`].**  For the class
+`{ψ : ψ(z) − ψ(x) ≤ d(z, x)}` on `(X, μ)`: `sup{A(ψ) : ψ(x₀) = ψ₀} = e^{−ψ₀}∫e^{d(x₀,x)}μ(dx)`.  If this exponential
+moment is infinite, no procedure can return a finite upper bound after finitely many
+evaluations; if it is finite, one evaluation gives a two-sided bracket.  The level
+theorem then needs no cap on the integrand: an upper bound of `A` and a positive closing
+level suffice.
+
+**Proposition 11.123 (from a tail profile to a pair of exponent functions; which sites
+the outer block takes) [P: workstream N, Propositions N7, N8; refereed: correct as
+stated].**
+(a) Let `w` be a continuous profile (the exponent of `Ξ_m(e^{−mθ})` per site) with `w(0) > 0` and
+`w(θ) + θ` nonnegative, nonincreasing, strictly decreasing down to its zero `a`.  Then
+`θ_hint := w^{−1}` and `θ_na(x) := min{θ : w(θ) + θ ≤ x}` satisfy (11.18.1) and every field of the
+structure `HintPair`, so the level recursion built on `θ_na` converges to `θ_hint` (Theorem
+11.53).  If `w` is convex, `J(t) = min_θ[θ + t·w(θ)]` is a game function (Theorem 11.66) and is
+the dual function of Theorem 11.53a.  The condition `w′ ≤ −1` is a hypothesis, not a
+tautology: the relative tail exponent must not increase as the set gets smaller, and
+for a transport-type profile it does.
+(b) For families whose game functions are additive over blocks of sites of several
+kinds (§11.26): no split of the sites between the blocks undercuts the hinted exponent,
+and the proportional split has it as a fixed point — in the limit of many levels it
+does not matter which sites the outer block takes.  At two levels it does: the best
+outer block is not proportional, it prefers the steep sites (numerical: `0.5051·a` against
+`0.5129·a` in one example).
+**Not proved — a plan.**  That the levels assemble, for a family with a uniform tail
+profile, into an adaptive algorithm of cost `exp(n·θ_hint(ξ) + o(n))` at the accuracy `ξn`
+(Proposition N6 of the workstream) is the induction of Theorem 11.54 with substitutions
+that the workstream checked step by step and did not rewrite; the referee names two
+items that even the plan lacks (the tail function must be one of the class itself for
+the base family; the last step needs the Lipschitz continuity of `θ_hint`).  The adaptive
+theorems of this report beyond the uniform cube remain those of §§11.20 and 11.26.
+
+**Instances** (the workstream's §4, with the referee's corrections).
+
+| instance | tail functions | what follows |
+|---|---|---|
+| uniform cube | exact (Harper), every `n` | Theorems 11.52–11.58a, with identical constants |
+| Gauss space, sum metric | exact, every `n`; atomless, unbounded | the level theorem without a cap; the Gaussian pair; lower bound open |
+| Gauss space, Euclidean metric | exact, dimension-free | Theorem 11.120: nesting over a fixed split gains nothing |
+| biased cubes; finite alphabets and site types | sharp at the exponential scale (Theorems 11.63, 11.97(c)), relative to the flat-histogram reference | the level theorem at extensive accuracy as a corollary; **bounded accuracy open** — it needs a two-sided tail estimate with polynomial precision |
+| site-dependent slopes | a sorted-slope Harper bound: valid for every `n`, not sharp (`0.0974` against `0.0525` in the example) | exponents through site types (§11.26); nothing sharp at finite `n` |
+| continuous sites | ball-volume and transport bounds: valid, not sharp (`0.197` for `0.029` at `u = 1` on the cube) | valid brackets at a higher cost; concentration alone gives no useful closing level |
+| nearest-neighbour chain | none for Markov measures | validity of the nesting (Theorem 11.119(b)); no cost statement beyond §11.32 |
+
+**The assumptions of the level theorems, classified** (25 rows in the workstream's §6; the
+referee reclassified six; counts after that: essential 4, proof technique only 5,
+convenience 6, replaceable by a weaker quantitative condition 7, removal changes the
+complexity 9, removal makes the result false 3; `docs/ASSUMPTION_AUDIT.md`).  The three
+that matter most: **the sum metric** — cost-only in the proof and yet the whole gain
+(changes the complexity of the algorithm; whether it changes the complexity of the
+problem is not known); **the tail function of the true class of fibre averages** — what
+a dependent known part breaks, at the price of validity; **the isoperimetric input** —
+exact isoperimetry is not needed, concentration is not enough (the method needs the
+tail of *small* sets relative to their measure, uniformly), and a bounded accuracy
+needs a two-sided estimate that exists for the uniform cube and Gauss space only.
 
 ## 12. Strongest unresolved questions, and what a publication would need
 
@@ -12045,8 +12254,9 @@ its branch.
    The conjecture of the earlier checkpoints, that the minimax fixed sample is the
    normalised-maximum-likelihood mixture of the field-tilted Gibbs measures, is right
    about the ensemble only for convex rate functions (D49).  For Euclidean Lipschitz functions on Gaussian space
-   neither the lower bound (half-spaces are detected from far away) nor the algorithm (blocks
-   are not cheaper) transfers, and no exponent is known to us; (vi) **a machine-checked
+   the algorithm does not transfer (a fixed split of the coordinates gains nothing: Theorem
+   11.120(b)), the hinted lower bound does, with ball-shaped dips in high dimension (Theorem
+   11.120(c)), and the adaptive exponent between the two is open; (vi) **a machine-checked
    count** — the number of evaluations of the two-level algorithms (Theorems 11.52, 11.56) is
    a paper proof, in a part of the argument where five wrong versions preceded the right
    one; the Computational Research Division has been asked to attack it with real inner
