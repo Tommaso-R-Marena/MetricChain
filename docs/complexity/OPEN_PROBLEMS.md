@@ -278,17 +278,45 @@ exact statement and status have been verified.
 > answer is always yes.)"
 
 * Reformulation: do `K` given vertices of the cut polytope form a face?
-* **Status** (after the internal review COMPLEXITY-REV-0004, 2026-11-26):
+* **Status** (after the internal reviews COMPLEXITY-REV-0004 and -0005, 2026-11-26):
   - fixed `K`: linear time, because the answer depends only on the set of column types
     (`ISING_GROUND_SETS.md` Theorem 2, CX-T16) — **[P], reviewed**; the `K = 4` rule and the tables up to five
     types are **KNOWN** (literature on small cut polytopes);
-  - `K = O(log n)`: polynomial, by an algorithm of time `2^K·poly(n)` (Corollary 5a, the referee's
-    observation);
-  - `K` part of the input: in co-NP; **hardness OPEN** — neither we nor the referee found a reduction or an
+  - `K = O(log n)`: polynomial, by an algorithm of time `2^{O(K)}·poly(n)` (Corollary 5a, the fourth referee's
+    observation; the bound was written `2^K·poly(n)` until REV-0005);
+  - `K` part of the input: in co-NP; **hardness OPEN** — neither we nor two referees found a reduction or an
     algorithm; the sufficient condition CX-T18/Cor. 7 is **KNOWN** (Laurent–Poljak 1995/96);
-  - the variant "exposed by an energy with a sum-of-squares certificate of degree 2" is **classified**:
-    equivalent to "no other sign vector in the span" (CX-T28) and **co-NP-complete**, with a `2^K` algorithm
-    that is optimal under ETH up to the constant in the exponent (CX-T29) — **OURS-[P] with the referee's
-    reduction, unreviewed**.
+  - the variant "exposed by an energy with a sum-of-squares certificate of degree 2": equivalent to "no other
+    sign vector in the span" — **KNOWN in substance** (a corollary of Laurent–Poljak's Theorems 2.7 and 2.9;
+    REV-0005, finding 8), and for random states this holds with probability `1 − 4C(K,3)(3/4)^n − …` for every
+    `K ≤ n − 1` — **KNOWN** (Odlyzko 1988; Irmatov 2024).  Deciding it is **co-NP-complete**, with a `2^K`
+    algorithm that is optimal under ETH up to the constant in the exponent (CX-T29) — the fourth referee's
+    reduction, **[P], reviewed in REV-0005**, no source found.
   Prior art: `PRIOR_ART.md` §C.  Verified on 2026-11-26.
 
+### D2 — C1 and C2 (Geometry division, GEOMETRY-REQ-0004; their answer GEOMETRY-RES-0006)
+
+> "C1 — realizability of averaged data. … for chains with complete data it is, by duality, equivalent to
+> maximising `Σ c_ij |x_i − x_j|²` over single conformations …  *Asked:* the complexity of (c) for chains (with
+> and without bond angles), exactly or approximately; in particular whether the freely jointed case inherits
+> the hardness of the rank-3 Grothendieck problem and whether the linear order of a chain helps."
+
+* **Status of C1** (`CHAIN_GEOMETRY_HARDNESS.md`, CX-T32, CX-T33; **unreviewed**, 2026-11-26):
+  - the optimisation problem for freely jointed chains *is* the ground-state problem of the classical
+    Heisenberg model (linear bijection between data and couplings): the linear order does not help — **[P]**;
+  - that problem is NP-hard, and hard to approximate within some constant — **KNOWN** since 2024/2025
+    (Kallaugher–Parekh–Thompson–Wang–Yirka for `ℝ^3`; Piddock for every dimension), not known to the
+    sources cited in the request (E.-Nagy–Laurent–Varvitsiotis 2012: "it is believed"); we give two short
+    self-contained proofs and claim no novelty for the statement;
+  - with a fixed bond angle the problem stays strongly NP-hard, for every angle — **[P]**, elementary;
+  - realizability itself, with complete data, for freely jointed chains: NP-hard in the weak sense under
+    Turing reductions — **[P] given the Grötschel–Lovász–Schrijver equivalence [K, from memory]**;
+  - tractable regime: data of range `w` along the chain, exponential in `w` only; no `2^{o(w)}` under ETH — **[P]**.
+  - **OPEN:** realizability with a fixed bond angle (technical conditions not checked); random or planted data;
+    steric constraints.
+* **Status of C2** (the gap between identifiability and certification): the Geometry division formulated the
+  planted model (GEOMETRY-RES-0006): a planted MinRank problem for rank 3 in a subspace cut out by rank-one
+  conditions along a chain; detection is easy; their open questions are (1) a rank conjecture for the first level,
+  (2) low-degree hardness of recovery, (3) whether the chain structure helps, (4) the worst case for dimension 3
+  (our span problem, CX-T29, is the worst case for dimension 1).  **Not attempted by us yet**; our first comments
+  are in COMPLEXITY-RES-0009.

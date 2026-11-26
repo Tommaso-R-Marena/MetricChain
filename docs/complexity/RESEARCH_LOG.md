@@ -175,20 +175,69 @@ witnesses through selector functions before the case split.
 * Fourth checkpoint COMPLEXITY-MSG-0004 (six linked corrections; five new statements); COMPLEXITY-RES-0008 to
   the Ensemble division.  SCI-RES-0034 read: two sentences of the penalty note corrected.
 
+## Session 1, continued — the fifth review; two directives; chain geometry and a near miss (2026-11-26 23:09 UTC)
+
+* **Two supplementary directives from the research owner.**  About 22:02 UTC: a seventh division (Structural &
+  Computational Biology) and seven tasks on algorithmic feasibility — answered first by COMPLEXITY-MSG-0005 (written
+  before their branch existed).  About 22:40 UTC: an eighth division (Frontier Benchmarking); our copy of the
+  collaboration protocol (`docs/collaboration/README.md`) now names all eight.  Recorded in `HANDOFF.md`,
+  "Directives in force".
+* **NANUQ beyond level 2.**  Blob-locality holds at every level (`NANUQ_HIGHER_LEVELS.md`, Theorem A: a six-leaf
+  restriction that is not 6-locally good comes from six positions of one blob; the weight of a split that cuts a
+  blob is a quadratic polynomial in the sizes of the positions).  Survey of six-leaf outer-labeled planar
+  networks by hybrid insertion: with at most three hybrid nodes exactly 114 of the 150 tree-generated systems
+  occur — the 108 of `𝒞_6` and the six images of "all but one 2-split"; no system with a negative weight or a
+  wrong support beyond these.  Four hybrid nodes: running.
+* **Chain geometry (CX-T32, CX-T33).**  The directive asks for tractability of articulated systems, and the
+  Geometry division's C1 was only half answered.  Found: an orthogonality gadget (two auxiliary spins with
+  couplings `3Λ, ±4Λ` give `Λ(|3p+4q| + |3p−4q|) ≤ Λ(10 − t²)`), hence a reduction from Max-Cut to the Heisenberg
+  ground-state problem in `ℝ^3` with an exact optimum; fixed bond angles do not help (every `m`-th bond is free);
+  short-range data are tractable by dynamic programming over torsions.
+* **A near miss, recorded in full.**  A search then showed that the hardness of linear optimisation over the
+  rank-constrained elliptope was called "believed" in 2012 and that Lovász conjectured NP-hardness of vector
+  Max-Cut in every dimension, proved for dimension 3 only in 2024 (Kallaugher et al.).  Thinking about
+  antiferromagnetic couplings only, I found the triangle with multiplicities 3, 4, 5 (a right angle), the blow-up
+  argument and an exact lifting `OPT_{k+1}(H') = 25nL + 9·OPT_k(H)` — a proof for every dimension on unweighted
+  graphs — and for about an hour took it for a proof of the open cases of the conjecture.  One more search, with
+  the name "vector Max-Cut", found Piddock's preprint of October 2025, which proves the statement for every
+  dimension with hardness of approximation.  Nothing had been written into the repository.  The note presents
+  the statement as known and the two proofs as self-contained derivations.  **This is the third time today that
+  a search after a proof changed its status; the search has to come first, and it has to use the classical name
+  of the problem, not ours.**
+* **COMPLEXITY-REV-0005** (22:43 UTC): no stated theorem false; Theorem 12 survived the referee's own code on 1.4
+  million explicit networks.  Five attribution findings: Proposition 13 of the Ising note is Laurent–Poljak in
+  two lines; Proposition 13′ is a weak form of Odlyzko (1988), which also answers "up to which `K`" (every
+  `K ≤ n − 1`, with Irmatov 2024); the dichotomy of Lemma C is Huber et al. (arXiv:2408.12997, Lemma 4.2);
+  Theorem 6 of Boehmer et al. is not about the base-pair model, and they call the Turner extension free of
+  algorithmic challenges.  One narrowing: Corollary 14(v) is about the induced circular order.  All processed
+  the same hour (dispositions in the file); three citations re-checked by a page-reading agent.
+* **GEOMETRY-RES-0006 read** (the planted model for C2: a planted MinRank problem for rank 3 along a chain).
+  Answered in COMPLEXITY-RES-0009 together with C1: corrections of what they quote from us, the dimension-one
+  random case (Odlyzko), a caution on low-degree analyses of noiseless problems (lattice methods), the worst
+  case for dimension 3 is open.  Not taken up.
+
 ### Resume here
 
-1. *(done)* COMPLEXITY-REV-0003 and -0004 are processed; dispositions in the two files; the referees'
-   programs are in `experiments/complexity/reviews/rev3_strands_algorithm/`, `rev4_ising_nanuq/`.
-2. **Have the unreviewed items reviewed**: §7.1 and §7.2 of the NANUQ note (CX-T26, CX-T27 — the most
-   valuable outside check), Propositions 13, 13′ and Theorem 14(a),(b) of the Ising note, Proposition 5 of the
-   algorithm note, `PENALTY_THRESHOLD.md`.  A Lean check of Corollary 5′ on six points and of the two finite
-   facts of Theorem 12, Step 1, would be cheap.
-3. E-C1 for `K` in the input: now "polynomial for `K = O(log n)`, open beyond"; the degree-2 variant is
-   co-NP-complete (CX-T29) but its hard instances are exposed.  A hardness proof has to make the
-   diagonal-combination condition of Theorem 6 hard.  Read Deza–Laurent (not yet read by us) first.
-4. A3′ (fixed-temperature #P-hardness of the partition function): no approach yet.
-5. Hardness note: read Lyngsø (2004) and Shalaby–Woods §7; W[1]-hardness in the number of species (C2).
-6. NANUQ: level 3 blobs that are not galled (list the generators, as in Lemma C); Lean: define the closure
-   inside Lean so that the list `C6` is no longer imported.
-7. Unanswered mail: SCI-RES-0031 §1 (numbers for Q-CX3, not yet read); theory's THY-MSG-0017 §5 item 1;
-   R20-CX-G.
+1. *(done)* All five internal reviews are processed; dispositions in the five `COMPLEXITY-REV` files; the
+   referees' programs are in `experiments/complexity/reviews/`.
+2. **Publish the fifth checkpoint (COMPLEXITY-MSG-0006)** with the linked corrections for all divisions: the
+   attribution corrections of REV-0005 (they change statements made in COMPLEXITY-MSG-0004, -0005 and
+   COMPLEXITY-RES-0003, -0008: Proposition 13 and 13′ known; `2^{O(K)}` instead of `2^K`; Boehmer et al.'s sentence;
+   Corollary 14(v)), the chain-geometry result with its attribution, and the six-leaf survey.
+3. **Unreviewed:** `CHAIN_GEOMETRY_HARDNESS.md` (CX-T32, CX-T33), `NANUQ_HIGHER_LEVELS.md` (Theorem A and the
+   survey), `PENALTY_THRESHOLD.md`.  The first two are short; one review could take all three.
+4. `NANUQ_HIGHER_LEVELS.md` §2.1: fill in the survey results (three hybrid nodes: done, 114 systems; four: read
+   `six_leaf_survey_k4_sym.log` when the run has ended), register them (CX-T31 for Theorem A, CX-X3 for the
+   survey), and state plainly what a survey of bounded depth does and does not show.
+5. **Other divisions.**  Structural biology (`research/structural-biology`, `720e0ec`): read
+   `docs/structural_biology/RESEARCH_INTAKE.md` and their intake report on us; they read our branch before
+   COMPLEXITY-MSG-0005 existed.  Frontier benchmarking: branch absent at 22:46 UTC; fetch again.  Geometry: C2 /
+   GEOMETRY-RES-0006 §6 (low-degree hardness of recovery; worst case for dimension 3) — not started.  Theory:
+   THY-MSG-0017 §5 item 1 still unanswered.
+6. E-C1 for `K` in the input: "polynomial for `K = O(log n)`, open beyond".  A hardness proof has to make the
+   diagonal-combination condition of Theorem 6 hard; the span condition alone cannot do it (Theorem 14(c)).
+7. A3′ (fixed-temperature #P-hardness of the partition function): no approach yet.  W[1]-hardness in the number of
+   species (C2 of `OPEN_PROBLEMS.md`).  NANUQ: generators of level 3 that are not galled; whether a network that
+   violates Corollary 14(i) has a blow-up that is Kalmanson for no circular order (270 instances say yes).
+8. **Before any novelty statement:** search under the classical name of the nearest known problem, and read the
+   journal version of every source (`ASSUMPTION_AUDIT.md` §6, the rule adopted after REV-0005).

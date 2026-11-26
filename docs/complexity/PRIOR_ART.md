@@ -126,3 +126,39 @@ Corollary 7 are **known**; **CX-T28 is known in substance** (Proposition 13 from
 Proposition 13′ is superseded by C-VIII and C-IX) — until COMPLEXITY-REV-0005 we listed it under "no source
 found"; for Theorem 6, Lemma 9, CX-T19 and CX-T29 no source was found, which is not evidence of novelty.
 
+---
+
+## §D  Unit vectors in a fixed dimension maximising a quadratic form (vector Max-Cut; chain geometry, question C1 of the Geometry division)
+
+Searches and readings of 2026-11-26.  **Order of events, recorded because it matters:** the proofs of
+`CHAIN_GEOMETRY_HARDNESS.md` §2 (about 21:30 UTC) and §2a (about 22:35 UTC) were found first; searches 1–2 (before
+§2) found nothing; searches 3–4 (after §2a, before anything was written into the repository) found D-I and D-II,
+which contain the hardness statements.  For about an hour the lifting of §2a was taken for a possible proof of
+an open conjecture of Lovász.
+
+| # | source | how inspected | what it establishes for us |
+|---|---|---|---|
+| D-I | J. Kallaugher, O. Parekh, K. Thompson, Y. Wang, J. Yirka, *Complexity classification of product state problems for local Hamiltonians*, arXiv:2401.06725v2 (6 Jan 2025; conference version reported as ITCS 2025) | abstract page and ar5iv HTML through a page-reading sub-agent; **its report read, not the paper**; the HTML was truncated after about 40 000 of 169 000 characters (abstract and §1 covered; quotations of at most 125 characters) | Theorem 1.5 "MC_3 is NP-complete" (vector Max-Cut in `ℝ^3`, unit weights, by a reduction from 3-colouring); "it has been conjectured by Lovász that MC_k is NP-complete for all constants k≥1, in [Lov19, p. 236] and earlier, no proof has been given for any k>1"; "the first published proof that MC_k is NP-complete for some k>1"; open question "Can our proof be generalized to other values of k?"; a complete classification of product-state problems for 2-local Hamiltonians with couplings of both signs (the Heisenberg interaction gives exactly the classical Heisenberg ground-state problem); a footnote that an unpublished proof by Wright existed earlier.  **Contains our Theorem 1 (CX-T32)** |
+| D-II | S. Piddock, *Quantum Max-Cut is NP hard to approximate*, arXiv:2510.07995v1 (9 Oct 2025; 19 pages; no journal reference) | abstract page and HTML of v1 through a page-reading sub-agent, which reports having read the full text; **its report read, not the paper** | Theorem 3: "There is a PTAS reduction from Max-Cut_k to Max-Cut_{k+1}.  Therefore Max-Cut_k is APX-complete for all (constant) k≥1" (unweighted graphs); gadgets: for every vertex and every incident edge copy a unit triangle with the vertex, and a constant-degree bipartite expander that pins the reference vectors; the triangle forces the angle `2π/3`, not a right angle ("almost any gadget will do, as long as it is not a bipartite graph"); "no other hardness results are known for k≠1,3".  **Contains the hardness statement of our Proposition 1a, with approximation.**  Our lifting uses a different gadget (a triangle with multiplicities 3, 4, 5, which forces a right angle; a blow-up; many parallel poles) and gives an exact identity instead of an approximation-preserving reduction |
+| D-III | M. E.-Nagy, M. Laurent, A. Varvitsiotis, *Complexity of the positive semidefinite matrix completion problem with a rank constraint*, arXiv:1203.6602 | ar5iv HTML through a page-reading sub-agent (about 40 000 of 61 000 characters: abstract, §§1–3; Theorem 4.2 and §5 from a summary only); **its report read** | membership in the rank-`k` elliptope `E_k(G)` is NP-hard for every fixed `k ≥ 2` (Theorems 3.2, 3.3), also in its convex hull; "It is believed that linear optimization over conv E_k(G) is also hard for any fixed k (cf., e.g., the quote of Lovász …)"; the hardness of linear optimisation was open there.  This is the source the Geometry division cited in GEOMETRY-REQ-0004 |
+| D-IV | L. Lovász, *Graphs and Geometry*, AMS Colloquium Publications 65 (2019), p. 236 | **not read**; known through D-I and D-II | the conjecture |
+| D-V | J. Briët, F. de Oliveira Filho, F. Vallentin, *The positive semidefinite Grothendieck problem with rank constraint* (2010) and *Grothendieck inequalities for semidefinite programs with rank constraint* (2014) | **from memory** (as in COMPLEXITY-RES-0002); the first is cited by D-I and D-II for the approximation algorithm of vector Max-Cut | constant approximation ratios for positive semidefinite objectives; unique-games hardness of doing better |
+| D-VI | M. Grötschel, L. Lovász, A. Schrijver, *Geometric Algorithms and Combinatorial Optimization* (1988) | **from memory**, no text consulted | the polynomial-time equivalence of weak membership and weak optimisation for centred well-bounded convex bodies — used for Corollary 5 of the chain note |
+| D-VII | distance geometry of protein-like chains: J. Saxe (1979); C. Lavor, L. Liberti, N. Maculan and co-authors (the discretizable molecular distance geometry problem) | search summaries only | NP-hardness of the *feasibility* problem for exact distances; a different problem |
+
+Searches (WebSearch, 2026-11-26): (1) classical Heisenberg / vector spin glass ground state NP-hard — the Ising case
+(Barahona; Bachas 1984 by title) only; (2) chain conformation, squared distances, fixed bond angle, NP-hard —
+distance-geometry feasibility only; (3) `"rank constraint" Grothendieck problem unit vectors fixed dimension NP-hard`
+— the thesis chapter of Briët and D-I among the results; (4) `"rank-constrained" elliptope NP-hard linear
+optimization fixed rank` — D-III; (5) `"Vector Max-Cut" OR "rank-k Max-Cut" NP-hard every fixed k Lovász conjecture`
+(extended mode) — D-II.
+
+Consequences for novelty statements: **CX-T32 is known** as a hardness statement (D-I for dimension 3, D-II for
+every dimension and with approximation); ours are the translation to chains (elementary), two short proofs, and
+the corollary on realizability, for which no search was made beyond the above.  For CX-T33 (fixed bond angles;
+short range) no source was found in a search that was not aimed at it; both statements are elementary.
+
+**Lesson (the same as in §A-III(j) and §C, for the third time in one day):** search for the nearest classical
+formulation of a statement — here "vector Max-Cut", "rank-constrained Grothendieck problem" — *before* working
+on a proof, not after.
+
