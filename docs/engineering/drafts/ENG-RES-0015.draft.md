@@ -46,8 +46,8 @@ results: designs are selected by their certified bound only.
 
 ## 1. What was fixed in advance, and how it came out
 
-The protocol (`docs/engineering/benchmarks/protocols/BM-1_X-011.md`, committed before jobs
-M-016 and M-017 were launched) states seven hypotheses.
+The protocol (`docs/engineering/benchmarks/protocols/BM-1_X-011.md`; H1–H7 committed before jobs
+M-016 and M-017, H8 before M-019, H9–H12 before M-020 and M-021) states twelve hypotheses.
 
 | hypothesis | outcome |
 |---|---|
@@ -58,6 +58,11 @@ M-016 and M-017 were launched) states seven hypotheses.
 | H5 — every searched cost lies between the flat-instance cost and the certified bound | **upper half holds without exception; the lower half is false** — and that is finding 4 (§3) |
 | H6 — tightness of the certificate: no prediction | reported in §3 |
 | H7 — your expectation for R16-THY-1(b) | **holds** (§6) |
+| H8 — literal nested runs: no invalid or over-wide bracket, no abort, cost within the nested bound | **holds without exception** (§7) |
+| H9 — as H4(a) at `u = ½` and `u = 2` | **holds at `u = 2`, refuted at `u = ½`** (`n = 4000`; §6a) |
+| H10 — the flat-tuned numbers of ENG-RES-0014 reproduced by other code | **holds** for the flat instance and reading (B) at `n = 4000` (§6a) |
+| H11 — the worst fibre is the cone of slope `¼u` for certified-cost designs, the full cone for flat-tuned ones | **too simple**: flat fibres are the worst at most fractions (§6a) |
+| H12 — saturation after four levels at `u = ½`, `2` | job M-021, not yet run |
 
 ## 2. The certified recursion to six levels **[X]** (THY-RES-0013 §4, item 3)
 
@@ -280,6 +285,48 @@ Your expectation was "within `0.006` of `0.619`, `0.550`, `0.537`" (ENG-RES-0008
 ladder) and "far above the certified three-level bounds `0.5262`, `0.4439`, `0.4341`".  Both
 hold.  One fraction at `n = 64 000` had not returned when this was written; the minimum is
 at `0.5` and its neighbours are in the table.
+
+## 6a. Other slopes, and both rules of design run by the same code **[N]** (stage 2; `n = 4000`)
+
+Stage 1 compared our certified-cost designs with the flat-tuned numbers of ENG-RES-0014,
+which came from other code and fewer fibres.  Stage 2 (job M-020, hypotheses H9–H11
+written before it) builds *both* kinds of design in one code path and runs them on the
+same instances — the flat instance; the worst outer landscape found with flat fibres and
+with cone fibres of slope `¼u`, `½u`, `u`; reading (A) — at `u = ½, 1, 2`.  This message has
+`n = 4000`; `n = 16 000` follows with the addendum.
+
+<!-- TABLE:x011_stage2 -->
+<!-- /TABLE:x011_stage2 -->
+
+"(B)": the largest over flat fibres and the three cone slopes, base brackets' own
+answers.  Every column is minimised over the twelve fractions separately.
+
+<!-- TABLE:x011_h9 -->
+<!-- /TABLE:x011_h9 -->
+
+<!-- TABLE:x011_h11 -->
+<!-- /TABLE:x011_h11 -->
+
+<!-- TABLE:x011_stage2_consistency -->
+<!-- /TABLE:x011_stage2_consistency -->
+
+Three things to take from it.
+
+1. **Replication (H10).**  At `u = 1` the flat-tuned design run by the new code gives the
+   numbers of ENG-RES-0014 for the flat instance and for cone fibres of full slope to the
+   digit.  Reading (A) is lower here because stage 2 places the base brackets on cones of
+   full slope only.
+2. **The answer depends on the slope (H9 is refuted at `u = ½`).**  At `u = 1` and `u = 2`
+   servers chosen by certified cost have the smaller worst instance found.  At `u = ½` and
+   this size they do not: no nested run is *certified* below the base bracket it would
+   replace, so the certified-cost design is two levels, while the flat-tuned design nests
+   anyway and its worst instance found is lower — with a certified bound that is higher.
+   A design can be better on every instance anyone has found and worse in what it
+   guarantees; which of the two one wants is not a mathematical question.  The portfolio
+   of §5 has both.
+3. **Which fibre is worst (H11 was too simple).**  For designs chosen by certified cost it
+   is never the cone of full slope: flat fibres at most fractions, gentle cones at the
+   others.  For the flat-tuned design it is the flat fibre or the full cone.
 
 ## 7. Three nested levels run literally, end to end **[L]** (stage B for nested runs)
 

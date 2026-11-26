@@ -493,9 +493,72 @@ def nested_literal_blocks() -> dict[str, str]:
     return blocks
 
 
+def stage2_blocks() -> dict[str, str]:
+    """X-011 stage 2 (job M-020): both rules of design on the same instances, three slopes."""
+    rows = jl("x011_instances2.jsonl")
+    if not rows:
+        return {}
+    cells = defaultdict(list)
+    for r in rows:
+        cells[(r["u"], r["n"], r["rule"], r["nested_levels"])].append(r)
+
+    def Bq(r):
+        return max([r["worst_flat_fibres"]] + list(r["worst_B"].values()))
+
+    def Aq(r):
+        return max(Bq(r), r["worst_A"])
+
+    def worst_slope(r):
+        d = dict(r["worst_B"])
+        d["0"] = r["worst_flat_fibres"]
+        return max(d, key=d.get)
+
+    lines = ["| `u` | `n` | design | fractions run | least certified bound (fraction) | least cost at the flat instance (fraction) | least worst instance found, (B) (fraction; the fibre that is worst there) | (A) (fraction) |",
+             "|---|---|---|---|---|---|---|---|"]
+    label = {("certified", 1): "two levels", ("certified", 2): "three levels, by certified cost", ("certified", 3): "four levels, by certified cost",
+             ("flat", 2): "three levels, chosen at the flat fibre"}
+    summary = defaultdict(dict)
+    for (u, n, rule, k) in sorted(cells, key=lambda c: (c[0], c[1], c[2] != "certified", c[3])):
+        rs = cells[(u, n, rule, k)]
+        c = min(rs, key=lambda r: r["certified"])
+        f = min(rs, key=lambda r: r["flat_instance"])
+        b = min(rs, key=Bq)
+        a_ = min(rs, key=Aq)
+        fib = {"0": "flat", "0.25": "cone `¼u`", "0.5": "cone `½u`", "1": "cone `u`"}[worst_slope(b)]
+        lines.append(f"| {u:g} | {n} | {label[(rule, k)]} | {len(rs)} | {c['certified']:.4f} ({c['phi']:g}) | {f['flat_instance']:.4f} ({f['phi']:g}) | "
+                     f"{Bq(b):.4f} ({b['phi']:g}; {fib}) | {Aq(a_):.4f} ({a_['phi']:g}) |")
+        summary[(u, n)][(rule, k)] = dict(B=Bq(b), A=Aq(a_), flat=f["flat_instance"], cert=c["certified"], fib=worst_slope(b), count=len(rs))
+    blocks = {"x011_stage2": "\n".join(lines)}
+    # H9: three levels, certified against flat-tuned, reading (B)
+    parts, h9_fail = [], []
+    for (u, n) in sorted(summary):
+        s = summary[(u, n)]
+        if ("certified", 2) in s and ("flat", 2) in s:
+            c, f = s[("certified", 2)], s[("flat", 2)]
+            parts.append(f"`u = {u:g}`, `n = {n}`: `{c['B']:.4f}` against `{f['B']:.4f}` in reading (B), `{c['A']:.4f}` against `{f['A']:.4f}` in (A); at the flat instance `{c['flat']:.4f}` against `{f['flat']:.4f}`")
+            if not c["B"] < f["B"]:
+                h9_fail.append((u, n))
+    blocks["x011_h9"] = ("Three levels, servers by certified cost against servers chosen at the flat fibre (least worst instance found over the fractions): " + "; ".join(parts)
+                         + (".  H9 fails at " + ", ".join(f"`u = {u:g}`, `n = {n}`" for u, n in h9_fail) + "." if h9_fail else ".  H9 holds in every cell run."))
+    # H11: the worst fibre
+    wc = defaultdict(lambda: defaultdict(int))
+    for r in rows:
+        if r["levels_used"] >= 2:
+            wc[r["rule"]][worst_slope(r)] += 1
+    names = {"0": "flat", "0.25": "`¼u`", "0.5": "`½u`", "1": "`u`"}
+    blocks["x011_h11"] = "Which fibre is the worst (designs with at least one nested run; one count per design and fraction): " + "; ".join(
+        f"{'by certified cost' if rule == 'certified' else 'chosen at the flat fibre'}: " + ", ".join(f"{names[s]} {wc[rule][s]}" for s in ("0", "0.25", "0.5", "1") if wc[rule][s])
+        for rule in ("certified", "flat") if wc[rule]) + "."
+    viol = sum(s["violations"] for r in rows for s in r["searches"])
+    above = sum(1 for r in rows if Aq(r) > r["certified"] + 1e-9)
+    blocks["x011_stage2_consistency"] = (f"{len(rows)} designs run, {sum(len(r['searches']) for r in rows)} searches, {sum(s['n_eval'] for r in rows for s in r['searches']):,} mean runs: "
+                                         f"{above} searched costs above the certified bound of their design; {viol} runs with a violated claim.")
+    return blocks
+
+
 def build() -> dict[str, str]:
     blocks = {}
-    for fn in (bounds_blocks, runs_blocks, rung_blocks, cone_blocks, nested_literal_blocks, hetero_blocks):
+    for fn in (bounds_blocks, runs_blocks, rung_blocks, cone_blocks, nested_literal_blocks, stage2_blocks, hetero_blocks):
         blocks.update(fn())
     return blocks
 
