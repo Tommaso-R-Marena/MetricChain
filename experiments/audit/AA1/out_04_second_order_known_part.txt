@@ -1,0 +1,40 @@
+Part A: the droplet -c2 T(r - d_H(x,y)) is in the class (all mixed second differences in [-c2, 0])
+    n = 10, all radii r = 1..11, all pairs and base points: mixed differences lie in [-1, 0] * c2
+PASS  (A) droplets belong to G2(c2)
+Part B: extended binary Golay code, n = 24, w = beta c2 n = 4
+    |C| = 4096, weight enumerator = {0: 1, 8: 759, 12: 2576, 16: 759, 24: 1}, dmin = 8
+PASS  (B1) the code has 4096 words and minimum distance 8
+    r = 4: beta c2 T(r) = 1.6667;  ln Z(f + g_y) - ln Z(f) = 1.047910e-03
+    supports B(y, 3) are pairwise disjoint (2*3 < dmin = 8); each query point detects at most one droplet
+    => every (eps/2, delta)-correct algorithm with eps < 1.0479e-03 has E|Q(0)| >= (1 - 2 delta) * 4096   (2^n = 16777216)
+PASS  (B2) every one of the 4096 droplets is sensitive at eps = 1e-3 and no point lies in two supports
+Part C: Gilbert-Varshamov asymptotics; exponent of E|Q(0)| at any bounded accuracy
+      w     delta*    R_code(w) = ln2 - h(delta*) = w delta*^2/8     [f additive: exponent 0 for w <= 4 by Theorem 11.33(a)]
+     0.25   0.4445    0.00617
+     1.00   0.4003    0.02003
+     2.00   0.3700    0.03422
+     4.00   0.3344    0.05591
+     8.00   0.2947    0.08685
+PASS  (C) R_code(w) > 0 for every w tested, in particular for w <= 4
+    (for a rate R < R_code(w) take a sub-code of a Gilbert-Varshamov code with relative distance delta*, r = floor((dmin+1)/2):
+     |C| = e^{Rn}, effect of one droplet >= ln(1 + e^{(w delta*^2/8 - R) n}(1 - o(1))) -> infinity, supports disjoint.)
+Part D: a PAIRWISE known part: ferromagnetic blocks of size b (m = n/b blocks, no coupling between blocks)
+    f(x) = 2 J sum_blocks k_I (b - k_I), k_I = number of ones in block I  (a complete-graph ferromagnet in each block);
+    for beta J large the Gibbs measure of f is uniform on the 2^m block-constant configurations, pairwise distance >= b.
+    brute force, n = 12, b = 4, r = 2, beta c2 = 1, beta J = 6: effect 1.219558; closed form ln(1 + (e^(beta c2 T(r)) - 1)/2^m) = 1.219558;
+    block-constant configurations inside the support B(y, r-1): 1 (only y itself); 2(r-1) = 2 < b = 4
+PASS  (D1) the closed form of the droplet effect agrees with exact enumeration for the pairwise block known part
+    w = beta c2 n = 4 (the boundary of Theorem 11.33(a)); r = floor((b+1)/2); closed form:
+         n        b     m = n/b    codewords 2^m    beta c2 T(r)    ln Z change of one droplet    E|Q(0)| >= (1-2delta) *
+           64       16        4      2^4                  2.25              0.466                 2^4
+          512       96        5      2^5                  9.19              5.725                 2^5
+         4096      384       10      2^10                18.09             11.162                 2^10
+        32256     1536       21      2^21                36.62             22.063                 2^21
+       262144     6144       42      2^42                72.02             42.911                 2^42
+      2097152    24576       85      2^85               144.01             85.094                 2^85
+PASS  (D2) with b ~ 1.5 n^(2/3) every droplet is sensitive at eps = 1 from n = 32256 on, and the number of disjoint droplets 2^(n/b) grows like exp(c n^(1/3))
+    => with a pairwise (block-ferromagnetic) known part and w = 4 every algorithm needs exp(Theta(n^(1/3))) evaluations at bounded accuracy:
+       super-polynomial, where Theorem 11.33(a) as stated in the theory report promises polynomially many.
+       (In block variables the class has the effective coupling w * b: far above the Curie-Weiss value.)
+
+ALL CHECKS PASSED

@@ -1,0 +1,13 @@
+AA2 / S2: Theorem 11.105(a) needs the triangle inequality (or the shortest-path closure)
+
+three states: A = {a}, B = {b}, c outside;  d(b,a) = d(a,b) = 10, d(b,c) = d(c,a) = d(a,c) = d(c,b) = 1
+  triangle inequality holds: False
+  ln R+ over the full class (all constraints)            = 2.000000
+  ln of the bipartite programme of Theorem 11.105(a)     = 10.000000   (formula (d): d(b,a) = 10)
+  after the shortest-path closure: full = 2.000000, bipartite = 2.000000
+  => without the triangle inequality part (a) overestimates the range by a factor e^8.000;
+     with the closed envelope the two agree (the class is unchanged by the closure)
+
+random instances (300, 4-6 states, raw tables uniform in [0.2, 3]):
+  closed envelope: bipartite programme = full programme in 300 of 300
+  raw table:       bipartite programme > full programme in 188 of 300 (never smaller: 0 violations); largest overestimate of ln R+: 1.5330

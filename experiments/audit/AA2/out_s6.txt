@@ -1,0 +1,24 @@
+AA2 / S6: two hypotheses whose removal makes one evaluation suffice
+
+(i) confidence close to one: cube Q_8, u = 1.0
+    after one evaluation: ln A + psi(x0) in [-3.0391, 4.9609], length 8.0000 = n u = 8.0000
+    eps = 0.5: grid of J = 16 points; over 400 random members the success probability of a uniformly random grid point is at least 0.0625 (>= 1/J = 0.0625); value always inside the interval: True
+             => (eps/2, delta)-correct with ONE evaluation for every delta >= 0.9375; the lower bound (1 - 2 delta) 2^n/|B(n, k*)| of Theorem 11.25(a) is void there, and cannot be repaired
+    eps = 1.0: grid of J = 8 points; over 400 random members the success probability of a uniformly random grid point is at least 0.1250 (>= 1/J = 0.1250); value always inside the interval: True
+             => (eps/2, delta)-correct with ONE evaluation for every delta >= 0.8750; the lower bound (1 - 2 delta) 2^n/|B(n, k*)| of Theorem 11.25(a) is void there, and cannot be repaired
+    eps = 2.0: grid of J = 4 points; over 400 random members the success probability of a uniformly random grid point is at least 0.2500 (>= 1/J = 0.2500); value always inside the interval: True
+             => (eps/2, delta)-correct with ONE evaluation for every delta >= 0.7500; the lower bound (1 - 2 delta) 2^n/|B(n, k*)| of Theorem 11.25(a) is void there, and cannot be repaired
+
+(ii) a marginal oracle of full order k = n: cube Q_8
+    largest |ln A_reconstructed - ln A| over 400 random members: 1.78e-15  (one evaluation, zero error)
+    => the hypothesis 'k small' of Proposition 11.104 cannot be dropped: between k = o(n / ln n) (exponents unchanged)
+       and k = n (one evaluation) the complexity must fall from exponential to 1; where is not known.
+
+(iii) what the proof of Proposition 11.104 still gives for k = kappa n (arithmetic; our remark, not in the report):
+      a linear code C whose dual has minimum distance > k exists with |C| = 2^{n h2(k/n)} at most (dual of rate
+      1 - h2(k/n), Gilbert-Varshamov); the proposition then loses ln|C| = n ln2 h2(kappa) in the count AND in the accuracy.
+      kappa = 0.001: loss per site 0.0079  against  a = 0.1109 (u = 1): the bound keeps a positive exponent at vanishing accuracy
+      kappa = 0.005: loss per site 0.0315  against  a = 0.1109 (u = 1): the bound keeps a positive exponent at vanishing accuracy
+      kappa = 0.01: loss per site 0.0560  against  a = 0.1109 (u = 1): the bound keeps a positive exponent at vanishing accuracy
+      kappa = 0.02: loss per site 0.0980  against  a = 0.1109 (u = 1): the bound keeps a positive exponent at vanishing accuracy
+      kappa = 0.05: loss per site 0.1985  against  a = 0.1109 (u = 1): the bound is void

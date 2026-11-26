@@ -1,0 +1,75 @@
+AA2 / S8: fibre averages are not u-Lipschitz when the known part has interactions
+excess := largest |ln W(a) - ln W(a')| over one outer flip, divided by u, for the member psi(a, b) = gamma |b| of L_u
+(gamma = -u or +u), which ignores the outer block; for a product reference the excess is 0.
+The member psi(a, b) = gamma |b| + s u |a| (s = +1 or -1, also in L_u) then has a fibre average that changes by
+u (1 + excess) per outer flip: fact (F2) of Theorem 11.52, with the constant u, fails as soon as the excess is positive;
+with excess <= c it holds with the constant (1 + c) u ('bounded influence'), and where the excess grows with n it
+holds with no constant of the order of u.
+
+  n_o  n_i  beta J     u    excess(gamma=-u)  excess(gamma=+u)
+    8    8     0.0   0.2           0.0000            0.0000
+    8    8     0.0   1.0           0.0000            0.0000
+    8    8     0.5   0.2           0.3158            0.3158
+    8    8     0.5   1.0           0.3037            0.3037
+    8    8     1.0   0.2           0.8248            0.8248
+    8    8     1.0   1.0           0.7591            0.7591
+    8    8     1.5   0.2           1.6204            1.6204
+    8    8     1.5   1.0           1.4403            1.4403
+    8    8     3.0   0.2           4.4446            4.4446
+    8    8     3.0   1.0           4.3238            4.3238
+    8    8    -1.0   0.2           0.3428            0.3428
+    8    8    -1.0   1.0           0.3403            0.3403
+    8    8    -3.0   0.2           0.6173            0.6173
+    8    8    -3.0   1.0           0.6171            0.6171
+   20   20     0.0   0.2           0.0000            0.0000
+   20   20     0.0   1.0           0.0000            0.0000
+   20   20     0.5   0.2           0.3255            0.3255
+   20   20     0.5   1.0           0.3122            0.3122
+   20   20     1.0   0.2           0.9091            0.9091
+   20   20     1.0   1.0           0.8254            0.8254
+   20   20     1.5   0.2           2.0981            2.0981
+   20   20     1.5   1.0           1.6622            1.6622
+   20   20     3.0   0.2          12.6020           12.6020
+   20   20     3.0   1.0           5.4281            5.4281
+   20   20    -1.0   0.2           0.3369            0.3369
+   20   20    -1.0   1.0           0.3349            0.3349
+   20   20    -3.0   0.2           0.6072            0.6072
+   20   20    -3.0   1.0           0.6064            0.6064
+   50   50     0.0   0.2           0.0000            0.0000
+   50   50     0.0   1.0           0.0000            0.0000
+   50   50     0.5   0.2           0.3298            0.3298
+   50   50     0.5   1.0           0.3157            0.3157
+   50   50     1.0   0.2           0.9577            0.9577
+   50   50     1.0   1.0           0.8545            0.8545
+   50   50     1.5   0.2           2.4539            2.4539
+   50   50     1.5   1.0           1.7610            1.7610
+   50   50     3.0   0.2          22.1939           22.1939
+   50   50     3.0   1.0           5.5243            5.5243
+   50   50    -1.0   0.2           0.3347            0.3347
+   50   50    -1.0   1.0           0.3327            0.3327
+   50   50    -3.0   0.2           0.6028            0.6028
+   50   50    -3.0   1.0           0.6021            0.6021
+  200  200     0.0   0.2           0.0000            0.0000
+  200  200     0.0   1.0           0.0000            0.0000
+  200  200     0.5   0.2           0.3319            0.3319
+  200  200     0.5   1.0           0.3175            0.3175
+  200  200     1.0   0.2           0.9839            0.9839
+  200  200     1.0   1.0           0.8690            0.8690
+  200  200     1.5   0.2           2.7347            2.7347
+  200  200     1.5   1.0           1.8093            1.8093
+  200  200     3.0   0.2          26.2305           26.2305
+  200  200     3.0   1.0           5.5566            5.5566
+  200  200    -1.0   0.2           0.3336            0.3336
+  200  200    -1.0   1.0           0.3316            0.3316
+  200  200    -3.0   0.2           0.6007            0.6007
+  200  200    -3.0   1.0           0.5999            0.5999
+
+direct check, n_o = n_i = 8, beta J = 1.5, u = 0.2: the member gamma |b| + s u |a| has a fibre average that changes by 2.6204 u per outer flip  (1 + excess = 2.6204)
+
+largest excess found: 26.231
+Reading: beta J = 0 (a product measure): excess 0, (F2) holds with u.  One phase away from criticality (beta J = 0.5)
+and antiferromagnets: excess 0.3 to 0.6, stable in n -- (F2) holds with a constant below 2u, a quantitative weakening.
+At the critical coupling (beta J = 1) the excess is 0.76 to 0.98 and still rising with n.  Two phases
+(beta J = 1.5, 3): the excess grows with n at a small slope (the conditional law of the inner block switches wells) and
+saturates only at osc(phi')/u -- the closure test of the two-level algorithm, which applies the tail lemma to W with the
+slope u, then certifies nothing.

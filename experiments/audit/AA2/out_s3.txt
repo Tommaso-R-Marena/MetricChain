@@ -1,0 +1,39 @@
+AA2 / S3: a nearest-neighbour ferromagnet that is harder than the uniform cube
+
+(1) two blocks of 4 sites, no gap, p = 0.3, u = 1.0, end slope u - K = 0.1527; 60 random pairs of labels
+    largest single-flip change of psi = phi_a + phi_b + ln rho_0 on the chain of 8 sites: 1.000000  (must be <= u = 1.0)
+    largest |A_chain(psi)/(A_block(phi_a) A_block(phi_b)) - 1|: 3.33e-16;  largest deviation of the Gibbs law from the product: 4.16e-17
+
+(2) lower bound per site for every algorithm, max over t of G_t(M)/(L + m)
+    uniform cube at u = 1: h = 0.029139  (theory report: 0.029139; exact exponent of the cube at bounded accuracy, Theorem 11.58)
+    p=0.3 L= 6 gap m=0 (end slope 0.1527, 32 labels): bound = 0.028003 at t=0.45  (uniform label law: 0.022387)   ratio to cube h: 0.9610
+    p=0.3 L= 6 gap m=1 (end slope 0.6772, 32 labels): bound = 0.029393 at t=0.45  (uniform label law: 0.023709)   ratio to cube h: 1.0087
+    p=0.3 L= 6 gap m=2 (end slope 0.8718, 32 labels): bound = 0.028126 at t=0.45  (uniform label law: 0.023022)   ratio to cube h: 0.9652
+    p=0.3 L= 8 gap m=0 (end slope 0.1527, 58 labels): bound = 0.030853 at t=0.45  (uniform label law: 0.027090)   ratio to cube h: 1.0588
+    p=0.3 L= 8 gap m=1 (end slope 0.6772, 58 labels): bound = 0.031961 at t=0.45  (uniform label law: 0.027943)   ratio to cube h: 1.0968
+    p=0.3 L= 8 gap m=2 (end slope 0.8718, 58 labels): bound = 0.030725 at t=0.45  (uniform label law: 0.027049)   ratio to cube h: 1.0544
+    p=0.3 L=10 gap m=0 (end slope 0.1527, 92 labels): bound = 0.032886 at t=0.45  (uniform label law: 0.030266)   ratio to cube h: 1.1286
+    p=0.3 L=10 gap m=1 (end slope 0.6772, 92 labels): bound = 0.033526 at t=0.45  (uniform label law: 0.030833)   ratio to cube h: 1.1505
+    p=0.3 L=10 gap m=2 (end slope 0.8718, 92 labels): bound = 0.032348 at t=0.45  (uniform label law: 0.029868)   ratio to cube h: 1.1101
+    p=0.3 L=12 gap m=0 (end slope 0.1527, 134 labels): bound = 0.034154 at t=0.45  (uniform label law: 0.032400)   ratio to cube h: 1.1721
+    p=0.3 L=12 gap m=1 (end slope 0.6772, 134 labels): bound = 0.034624 at t=0.45  (uniform label law: 0.032772)   ratio to cube h: 1.1882
+    p=0.3 L=12 gap m=2 (end slope 0.8718, 134 labels): bound = 0.033540 at t=0.45  (uniform label law: 0.031800)   ratio to cube h: 1.1510
+    => p=0.3: best bound 0.034624 at (L, m, t) = (12, 1, 0.45), i.e. 18.8 % above the cube's exponent
+    p=0.4 L= 6 gap m=0 (end slope 0.5945, 32 labels): bound = 0.027374 at t=0.45  (uniform label law: 0.025081)   ratio to cube h: 0.9394
+    p=0.4 L= 6 gap m=1 (end slope 0.9200, 32 labels): bound = 0.027762 at t=0.45  (uniform label law: 0.025709)   ratio to cube h: 0.9527
+    p=0.4 L= 6 gap m=2 (end slope 0.9840, 32 labels): bound = 0.025149 at t=0.45  (uniform label law: 0.023350)   ratio to cube h: 0.8631
+    p=0.4 L= 8 gap m=0 (end slope 0.5945, 58 labels): bound = 0.029135 at t=0.45  (uniform label law: 0.027702)   ratio to cube h: 0.9999
+    p=0.4 L= 8 gap m=1 (end slope 0.9200, 58 labels): bound = 0.029214 at t=0.45  (uniform label law: 0.027930)   ratio to cube h: 1.0026
+    p=0.4 L= 8 gap m=2 (end slope 0.9840, 58 labels): bound = 0.026976 at t=0.45  (uniform label law: 0.025819)   ratio to cube h: 0.9258
+    p=0.4 L=10 gap m=0 (end slope 0.5945, 92 labels): bound = 0.030172 at t=0.45  (uniform label law: 0.029280)   ratio to cube h: 1.0354
+    p=0.4 L=10 gap m=1 (end slope 0.9200, 92 labels): bound = 0.030147 at t=0.45  (uniform label law: 0.029327)   ratio to cube h: 1.0346
+    p=0.4 L=10 gap m=2 (end slope 0.9840, 92 labels): bound = 0.028204 at t=0.45  (uniform label law: 0.027450)   ratio to cube h: 0.9679
+    p=0.4 L=12 gap m=0 (end slope 0.5945, 134 labels): bound = 0.030864 at t=0.45  (uniform label law: 0.030268)   ratio to cube h: 1.0592
+    p=0.4 L=12 gap m=1 (end slope 0.9200, 134 labels): bound = 0.030786 at t=0.45  (uniform label law: 0.030207)   ratio to cube h: 1.0565
+    p=0.4 L=12 gap m=2 (end slope 0.9840, 134 labels): bound = 0.029073 at t=0.45  (uniform label law: 0.028527)   ratio to cube h: 0.9977
+    => p=0.4: best bound 0.030864 at (L, m, t) = (12, 0, 0.45), i.e. 5.9 % above the cube's exponent
+
+    Reading: at slope u = 1 the symmetric ferromagnetic chain needs at least (1 - 2 delta) exp(n * bound - O(1)) evaluations
+    of every algorithm at every bounded accuracy, more than the uniform cube's exp(n h + o(n)).  So the comparison
+    'a ferromagnetic interaction never makes the problem harder than no interaction' is FALSE outside the class of
+    known parts that are functions of the type (mean-field models), for which it is proved.

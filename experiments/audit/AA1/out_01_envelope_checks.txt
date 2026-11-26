@@ -1,0 +1,24 @@
+(a) contact-set and sharp-minimum criteria applied to a table that is not transitively closed
+    raw table: contact condition holds = True; an admissible g making x optimal exists = False
+    closed table d*(y,x) = 2.0: contact condition holds = False
+PASS  (a1) raw contact condition holds but no admissible residual makes x optimal (Thm 2.3 '<=' fails without the triangle inequality)
+PASS  (a2) with the shortest-path closure the criterion agrees with the LP
+    sharp minimum: raw condition = False, closed condition = True, x optimal for every admissible g = True
+PASS  (a3) x is optimal for every admissible g although the raw sharp-minimum condition fails (Thm 2.4 '=>' fails without the triangle inequality)
+(b) Theorem 2.7: 'y is sigma-separated' must be read as d(anchor, y) >= sigma
+    envelope ok = True, g admissible = True, A = {a} is an exact certificate = True, gap(y) = 1/10
+    correct reading: sigma <= d(a,y) = 0: forces y iff gap(y) < sigma, i.e. False
+    transposed reading: sigma <= d(y,a) = 1: would force y iff True
+PASS  (b) transposed reading would force y into A although A = {a} certifies without it
+(c) Theorem 2.1: transport map two-to-one; negative beta
+    Z(A) = 0.735759,  e^(-beta gamma) Z(S) = 0.367879,  with fibre size m = 2: 0.735759
+PASS  (c1) a two-to-one map violates Z(A) <= e^{-beta gamma} Z(S) and attains the fibre bound m e^{-beta gamma} Z(S)
+PASS  (c2) for beta < 0 the inequality fails for an injective map
+(d) Theorem 2.2: scope of 'the gauge does not help'
+    largest single-site Goldstein margin = -2 (a state is dominated iff some margin >= 0)
+    largest pair margin for eliminating (1,1) on adjacent sites = -1
+PASS  (d1) no single-site dominance, the pair (1,1) is never dominated, yet x -> 0...0 is improving
+    3-body difference energy: exact margin = 1, nested sum-of-minima = -1
+PASS  (d2) with a 3-body term the term-wise (nested) rule is strictly below the exact margin (exact > 0 >= nested)
+
+ALL CHECKS PASSED

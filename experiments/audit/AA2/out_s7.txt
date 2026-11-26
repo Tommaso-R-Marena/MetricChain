@@ -1,0 +1,40 @@
+AA2 / S7: the polynomial factors of Theorems 11.76(a) and 11.95 (delta = 0.05)
+accuracy offset of both theorems: ln(4/delta) = 4.382 nats  -> nothing is claimed for accuracies below it
+
+(a) uniform cube / any exchangeable known part, two letters (Theorem 11.76(a)); cost scale exp(n a), a = 0.110944 (u = 1)
+     n    ln(factor)   n*a     factor exceeds the cost it multiplies?
+     20       7.14      2.22    YES (vacuous)
+     50       8.15      5.55    YES (vacuous)
+    100       8.92     11.09    no
+    200       9.68     22.19    no
+    500      10.69     55.47    no
+   1000      11.45    110.94    no
+
+(b) heteropolymer product landscapes (Theorem 11.95): m site types, q letters each, n/m sites per type
+    cost scale exp(n a) with a = 0.25 per site (the example sites of section 11.26 have a = 0.095 ... 0.295)
+     m    q      n    ln N_orb   ln(factor)    n*a    n ln q   verdict
+     1    2     100       4.62        8.92      25.0      69.3   informative
+     1    2     300       5.71       10.13      75.0     207.9   informative
+     1    2    1000       6.91       11.45     250.0     693.1   informative
+     1    2   10000       9.21       13.95    2500.0    6931.5   informative
+     2    3     100      14.38       19.46      25.0     109.9   informative
+     2    3     300      18.70       23.99      75.0     329.6   informative
+     2    3    1000      23.48       28.97     250.0    1098.6   informative
+     2    3   10000      32.68       38.46    2500.0   10986.1   informative
+     5    3     100      27.21       32.83      25.0     109.9   vacuous: factor > exp(n a)
+     5    3     300      37.72       43.63      75.0     329.6   informative
+     5    3    1000      49.59       55.75     250.0    1098.6   informative
+     5    3   10000      72.55       79.07    2500.0   10986.1   informative
+    20    3     100      60.89       67.24      25.0     109.9   vacuous: factor > exp(n a)
+    20    3     300      98.25      105.06      75.0     329.6   vacuous: factor > exp(n a)
+    20    3    1000     143.80      150.98     250.0    1098.6   informative
+    20    3   10000     234.84      242.50    2500.0   10986.1   informative
+    20    4     100      80.51       87.12      25.0     138.6   vacuous: factor > exp(n a)
+    20    4     300     134.09      141.20      75.0     415.9   vacuous: factor > exp(n a)
+    20    4    1000     201.23      208.74     250.0    1386.3   informative
+    20    4   10000     337.28      345.30    2500.0   13862.9   informative
+
+(c) every site its own type (m = n; site-dependent parameters without repetition): the symmetry group is trivial,
+    N_orb = number of configurations, and the factor is the cost of complete enumeration:
+    n = 30, q = 3: ln N_orb = 33.0 = ln |X|, ln(factor) = 38.7  -> the every-n statement is empty
+    n = 100, q = 3: ln N_orb = 109.9 = ln |X|, ln(factor) = 116.8  -> the every-n statement is empty

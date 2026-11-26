@@ -1,0 +1,68 @@
+AA2 / S1: exact tail lemma on Q_4, all 65 534 proper non-empty subsets
+
+CONTROL  uniform measure, one slope u (Lemma 11.43(b) must hold with equality at balls)
+  u=0.5 r=0 |B(r)|= 1  max over |D|<=|B(r)| = 0.6487212707   ball value = 0.6487212707   ok
+  u=0.5 r=1 |B(r)|= 5  max over |D|<=|B(r)| = 4.3131669113   ball value = 4.3131669113   ok
+  u=0.5 r=2 |B(r)|=11  max over |D|<=|B(r)| = 14.2471440084   ball value = 14.2471440084   ok
+  u=0.5 r=3 |B(r)|=15  max over |D|<=|B(r)| = 33.2203884338   ball value = 33.2203884338   ok
+  u=1.0 r=0 |B(r)|= 1  max over |D|<=|B(r)| = 1.7182818285   ball value = 1.7182818285   ok
+  u=1.0 r=1 |B(r)|= 5  max over |D|<=|B(r)| = 13.2621834128   ball value = 13.2621834128   ok
+  u=1.0 r=2 |B(r)|=11  max over |D|<=|B(r)| = 54.9514522897   ball value = 54.9514522897   ok
+  u=1.0 r=3 |B(r)|=15  max over |D|<=|B(r)| = 175.1477616333   ball value = 175.1477616333   ok
+  u=2.0 r=0 |B(r)|= 1  max over |D|<=|B(r)| = 6.3890560989   ball value = 6.3890560989   ok
+  u=2.0 r=1 |B(r)|= 5  max over |D|<=|B(r)| = 79.1543744289   ball value = 79.1543744289   ok
+  u=2.0 r=2 |B(r)|=11  max over |D|<=|B(r)| = 655.1557302189   ball value = 655.1557302189   ok
+  u=2.0 r=3 |B(r)|=15  max over |D|<=|B(r)| = 4936.8182856073   ball value = 4936.8182856073   ok
+  control PASSED
+
+TEST A  p-biased product measure, one slope u, reference psi_0 = 0
+  Xi_0(q) = max{Phi(D): pi(D) <= q}  against  (i) Hamming balls, (ii) balls with type-dependent radii
+  families: 64 Hamming balls, 1310 type-dependent balls
+  p=0.5 u=0.5  max_q Xi_0/best Hamming ball = 1.000000   max_q Xi_0/best type-dependent ball = 1.000000
+  p=0.5 u=1.0  max_q Xi_0/best Hamming ball = 1.000000   max_q Xi_0/best type-dependent ball = 1.000000
+  p=0.5 u=2.0  max_q Xi_0/best Hamming ball = 1.000000   max_q Xi_0/best type-dependent ball = 1.000000
+  p=0.5 u=4.0  max_q Xi_0/best Hamming ball = 1.000000   max_q Xi_0/best type-dependent ball = 1.000000
+  p=0.4 u=0.5  max_q Xi_0/best Hamming ball = 1.000000   max_q Xi_0/best type-dependent ball = 1.000000
+  p=0.4 u=1.0  max_q Xi_0/best Hamming ball = 1.000000   max_q Xi_0/best type-dependent ball = 1.000000
+  p=0.4 u=2.0  max_q Xi_0/best Hamming ball = 1.000000   max_q Xi_0/best type-dependent ball = 1.000000
+  p=0.4 u=4.0  max_q Xi_0/best Hamming ball = 1.000000   max_q Xi_0/best type-dependent ball = 1.000000
+  p=0.3 u=0.5  max_q Xi_0/best Hamming ball = 1.085029   max_q Xi_0/best type-dependent ball = 1.000000   [q=0.240100: D={0011,0101,0110,0111,1011,1101,1110,1111}, Phi(D)=0.169002, best ball 0.155758]
+  p=0.3 u=1.0  max_q Xi_0/best Hamming ball = 1.205304   max_q Xi_0/best type-dependent ball = 1.000000   [q=0.240100: D={0011,0111,1001,1010,1011,1101,1110,1111}, Phi(D)=0.497260, best ball 0.412559]
+  p=0.3 u=2.0  max_q Xi_0/best Hamming ball = 1.389865   max_q Xi_0/best type-dependent ball = 1.044051   [q=0.240100: D={0101,0111,1001,1011,1100,1101,1110,1111}, Phi(D)=2.654682, best ball 1.910029]
+  p=0.3 u=4.0  max_q Xi_0/best Hamming ball = 1.418857   max_q Xi_0/best type-dependent ball = 1.015491   [q=0.240100: D={0110,0111,1010,1011,1100,1101,1110,1111}, Phi(D)=90.588916, best ball 63.846386]
+  p=0.2 u=0.5  max_q Xi_0/best Hamming ball = 1.309135   max_q Xi_0/best type-dependent ball = 1.056170   [q=0.409600: D={0001,0010,0011,0100,0101,0110,0111,1011,1101,1110}, Phi(D)=0.347858, best ball 0.265716]
+  p=0.2 u=1.0  max_q Xi_0/best Hamming ball = 1.509678   max_q Xi_0/best type-dependent ball = 1.123018   [q=0.409600: D={0001,0010,0011,0100,0101,0110,0111,1011,1101,1110}, Phi(D)=1.062524, best ball 0.703808]
+  p=0.2 u=2.0  max_q Xi_0/best Hamming ball = 2.082706   max_q Xi_0/best type-dependent ball = 1.096904   [q=0.409600: D={0001,0010,0011,0100,0101,0110,0111,1011,1101,1110}, Phi(D)=6.242616, best ball 2.997358]
+  p=0.2 u=4.0  max_q Xi_0/best Hamming ball = 1.927748   max_q Xi_0/best type-dependent ball = 1.029478   [q=0.588800: D={0001,0010,0011,0100,0101,0110,0111,1000,1001,1010,1011,1101,1110,1111}, Phi(D)=2492.090944, best ball 1292.747407]
+  p=0.1 u=0.5  max_q Xi_0/best Hamming ball = 1.000000   max_q Xi_0/best type-dependent ball = 1.000000
+  p=0.1 u=1.0  max_q Xi_0/best Hamming ball = 1.000000   max_q Xi_0/best type-dependent ball = 1.000000
+  p=0.1 u=2.0  max_q Xi_0/best Hamming ball = 1.000000   max_q Xi_0/best type-dependent ball = 1.000000
+  p=0.1 u=4.0  max_q Xi_0/best Hamming ball = 1.045763   max_q Xi_0/best type-dependent ball = 1.000000   [q=0.155700: D={0001,0011,0101,0110,0111,1001,1010,1011,1100,1101,1110,1111}, Phi(D)=33.515403, best ball 32.048747]
+  RESULT A: largest ratio to the best Hamming ball 2.082706 at (p,u)=(0.2, 2.0); to the best type-dependent ball 1.123018 at (p,u)=(0.2, 1.0)
+  (ratio 1.000000 at p = 0.5 is Lemma 11.43(b); a ratio > 1 for p != 0.5 means: with a field, Hamming balls are
+   NOT the extremal sets of the tail lemma relative to psi_0 = 0 -- the every-n form of the lemma is specific to the uniform measure)
+
+TEST B  uniform measure, site-dependent slopes u_i (weighted Hamming metric)
+  max{Phi(D): |D| <= m}  against balls {x: d_w(x,s) <= rho} of the weighted metric, m = the sizes of such balls
+  slopes=(1.0, 1.0, 1.0, 1.0)  max_m ratio to best weighted ball = 1.000000
+  slopes=(0.5, 1.0, 1.5, 2.0)  max_m ratio to best weighted ball = 1.144273   [m=9: D={0000,0001,0010,0011,0100,0101,0110,0111,1000}, Phi=56.554608, best ball 49.424032]
+  slopes=(0.2, 0.2, 2.0, 2.0)  max_m ratio to best weighted ball = 1.596992   [m=10: D={0000,0001,0010,0011,0100,0101,1000,1001,1010,1011}, Phi=54.827169, best ball 34.331520]
+  slopes=(0.3, 0.6, 1.2, 2.4)  max_m ratio to best weighted ball = 1.000000
+  slopes=(1.0, 1.0, 1.0, 3.0)  max_m ratio to best weighted ball = 1.000000
+  slopes=(2.266, 0.253, 1.271, 0.932)  max_m ratio to best weighted ball = 2.363187   [m=8: D={0000,0010,0100,0110,1000,1010,1100,1110}, Phi=69.126084, best ball 29.251218]
+  slopes=(1.342, 1.083, 1.048, 1.201)  max_m ratio to best weighted ball = 1.140982   [m=8: D={0011,0111,1001,1010,1011,1101,1110,1111}, Phi=30.092716, best ball 26.374410]
+  slopes=(2.154, 1.504, 2.445, 1.823)  max_m ratio to best weighted ball = 1.341405   [m=4: D={0000,0010,1000,1010}, Phi=30.477066, best ball 22.720255]
+  slopes=(2.078, 1.723, 1.48, 1.247)  max_m ratio to best weighted ball = 1.199726   [m=4: D={0000,0100,1000,1100}, Phi=18.405229, best ball 15.341197]
+  slopes=(1.292, 0.231, 1.398, 0.657)  max_m ratio to best weighted ball = 1.332463   [m=10: D={0000,0001,0010,0011,0100,0110,1000,1001,1010,1011}, Phi=33.754255, best ball 25.332231]
+  slopes=(1.958, 1.455, 0.585, 1.727)  max_m ratio to best weighted ball = 1.687563   [m=4: D={0000,0010,0100,0110}, Phi=18.495029, best ball 10.959608]
+  slopes=(1.288, 1.936, 0.689, 0.995)  max_m ratio to best weighted ball = 1.533020   [m=10: D={0000,0001,0010,0100,0101,0110,1000,1001,1100,1101}, Phi=74.488013, best ball 48.589056]
+  slopes=(1.317, 2.06, 1.911, 1.245)  max_m ratio to best weighted ball = 1.586292   [m=4: D={0000,0001,1000,1001}, Phi=23.039381, best ball 14.524047]
+  slopes=(2.041, 0.74, 0.35, 0.833)  max_m ratio to best weighted ball = 1.330700   [m=4: D={0000,0010,0100,0110}, Phi=5.200836, best ball 3.908345]
+  slopes=(1.22, 0.743, 0.763, 1.725)  max_m ratio to best weighted ball = 1.392387   [m=4: D={0000,0010,0100,0110}, Phi=9.548751, best ball 6.857826]
+  slopes=(2.215, 1.12, 1.975, 2.342)  max_m ratio to best weighted ball = 1.653919   [m=4: D={0000,0010,0100,0110}, Phi=32.645636, best ball 19.738348]
+  slopes=(0.513, 1.947, 1.363, 1.046)  max_m ratio to best weighted ball = 1.675806   [m=4: D={0000,0001,1000,1001}, Phi=11.631598, best ball 6.940897]
+  slopes=(1.381, 0.291, 1.445, 1.602)  max_m ratio to best weighted ball = 1.702350   [m=4: D={0000,0001,0010,0011}, Phi=12.967409, best ball 7.617356]
+  slopes=(2.34, 2.049, 2.349, 0.829)  max_m ratio to best weighted ball = 1.994175   [m=4: D={0000,0010,1000,1010}, Phi=37.524946, best ball 18.817280]
+  slopes=(1.921, 1.468, 2.291, 0.521)  max_m ratio to best weighted ball = 2.116080   [m=4: D={0000,0010,1000,1010}, Phi=23.311131, best ball 11.016188]
+  RESULT B: weighted balls fail to be extremal for 17 of 20 slope vectors; largest ratio 2.363187 at slopes (2.266, 0.253, 1.271, 0.932)
+  (the first vector, equal slopes, is the control and must give 1.000000)

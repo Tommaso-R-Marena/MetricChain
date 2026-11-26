@@ -1,0 +1,6 @@
+lines 41-1072 and 1737-4091 of docs/THEORY_REPORT.md
+back-ticked identifiers with an underscore: 447
+found as declarations in proofs/: 405
+not found (42): ['A_i', 'A_j', 'DEAD_ENDS.md', 'D_A', 'D_ij', 'D_j', 'F_j', 'I_red', 'N_ball', 'N_cov', 'N_frac', 'N_value', 'P_ij', 'Pat_ij', 'Q_10', 'RESEARCH_LOG.md', 'R_i', 'R_j', 'T_P', 'T_Q', 'T_ij', 'U_ij', 'W_d', 'W_ij', 'W_ji', 'base_i', 'c_T', 'c_i', 'c_ij', 'c_k', 'g_j', 'h_a', 'h_i', 'k_BT', 'k_i', 'm_k', 'n_B', 'native_decide', 'p_i', 'u_i', 'w_ij', 'x_p']
+not found and long enough to be a Lean name: []
+ALL CITED LEAN NAMES EXIST

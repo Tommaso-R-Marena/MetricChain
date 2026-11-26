@@ -1,0 +1,49 @@
+== 1. joint convexity and monotonicity of Sigma
+  Gaussian pair: Sigma(mid) - mean  (max over 4000)          ok  0.00e+00;  monotone violation 0.00e+00
+  cube u = 1: Sigma(mid) - mean  (max over 4000)             ok  0.00e+00;  monotone violation 0.00e+00
+  cube u = 2: Sigma(mid) - mean  (max over 4000)             ok  0.00e+00;  monotone violation 0.00e+00
+== 2. orbit curves p_j convex and nondecreasing in B (second differences on a grid, j <= 40)
+  Gaussian pair: most negative second difference             ok  0.00e+00 (j = 0)
+  cube u = 1: most negative second difference                ok  0.00e+00 (j = 0)
+  cube u = 2: most negative second difference                ok  0.00e+00 (j = 0)
+== 3. (Sigma6): D(h + delta, L + v) * h / (delta + v^2/(2 vartheta))
+  Gaussian pair
+     delta/h = 1e-03 : 0.8937  0.9625  0.9891  1.0010  1.0132  1.0428  1.1377
+     delta/h = 1e-05 : 0.8929  0.9615  0.9882  1.0000  1.0122  1.0417  1.1364
+     delta/h = 1e-07 : 0.8929  0.9615  0.9881  1.0000  1.0121  1.0417  1.1364
+  Gaussian pair: ratio at v = 0, delta/h = 1e-7              ok  
+  cube u = 1
+     delta/h = 1e-03 : 0.8922  0.9616  0.9888  1.0011  1.0136  1.0439  1.1400
+     delta/h = 1e-05 : 0.8918  0.9611  0.9880  1.0000  1.0123  1.0422  1.1380
+     delta/h = 1e-07 : 0.8918  0.9611  0.9880  1.0000  1.0123  1.0421  1.1380
+  cube u = 1: ratio at v = 0, delta/h = 1e-7                 ok  
+  cube u = 2
+     delta/h = 1e-03 : 0.8879  0.9590  0.9880  1.0012  1.0148  1.0471  1.1471
+     delta/h = 1e-05 : 0.8886  0.9598  0.9874  1.0000  1.0129  1.0437  1.1434
+     delta/h = 1e-07 : 0.8886  0.9599  0.9876  1.0000  1.0127  1.0436  1.1434
+  cube u = 2: ratio at v = 0, delta/h = 1e-7                 ok  
+== 4. Lemma PT: sqrt(delta) N_t(delta) / (pi h sqrt(2 vartheta)),  s_t = L + 0.05
+  Gaussian pair  delta/h = 1e-2 .. 1e-6 : 0.76394  0.90593  0.96766  0.99048  0.99695
+  Gaussian pair: within 1 per cent at delta/h = 1e-6, increasing to 1 ok  
+  cube u = 1  delta/h = 1e-2 .. 1e-6 : 0.76796  0.91069  0.96635  0.98962  0.99707
+  cube u = 1: within 1 per cent at delta/h = 1e-6, increasing to 1 ok  
+  cube u = 2  delta/h = 1e-2 .. 1e-6 : 0.78025  0.90471  0.96882  0.99106  0.99678
+  cube u = 2: within 1 per cent at delta/h = 1e-6, increasing to 1 ok  
+== 5. Proposition U by brute force: R[M_{W,b}](g) against U(g) = sup_B (B - Sigma(B, W(B)) g)
+  Gaussian: (R_ref - U)/a  (max, min over 180 cases)         ok  max +2.009e-06  min +3.429e-11
+  cube u = 1: (R_ref - U)/a  (max, min over 60 cases)        ok  max +1.305e-06  min +4.184e-11
+     (R_ref is an upper estimate of R[T](g); Proposition U says R <= U, and its proof gives equality for the
+      choice beta -> 0: R_ref should agree with U up to the discretisation of W, 1e-5 a)
+  R_ref <= U + 1e-5 a in all cases (Proposition U)           ok  
+  R_ref >= U - 1e-5 a in all cases (the bound is attained)   ok  
+  NEGATIVE CONTROL, concave W (Gaussian, 90 cases): the line-by-line value is exceeded ok  max (R_ref - U)/a = +6.827e-02  (convexity of W cannot be dropped)
+== 6. Proposition K: the kinked pair theta = max(1 - 3e, 1/2 - e, 0)
+  delta = 1e-02: D = delta/h on [L1, s_max]; n* = 5; p_n finite for n <= 7 of 10 computed; p_{n*} = 0.680000 <= s_max = 0.740000
+  delta = 1e-03: D = delta/h on [L1, s_max]; n* = 61; p_n finite for n <= 63 of 66 computed; p_{n*} = 0.742000 <= s_max = 0.749000
+  delta = 1e-04: D = delta/h on [L1, s_max]; n* = 623; p_n finite for n <= 626 of 628 computed; p_{n*} = 0.749000 <= s_max = 0.749900
+  kinked pair: D = delta/h exactly; p_n finite up to n*      ok  
+  k =    5: B_inf(k) - h = 1.666667e-02,  k (B_inf - h) = 0.08333   (Proposition K: >= (L2 - L1) h k/(k + 2) = 0.04464)
+  k =   20: B_inf(k) - h = 3.333333e-03,  k (B_inf - h) = 0.06667   (Proposition K: >= (L2 - L1) h k/(k + 2) = 0.05682)
+  k =   80: B_inf(k) - h = 7.936508e-04,  k (B_inf - h) = 0.06349   (Proposition K: >= (L2 - L1) h k/(k + 2) = 0.06098)
+  k =  320: B_inf(k) - h = 1.960784e-04,  k (B_inf - h) = 0.06275   (Proposition K: >= (L2 - L1) h k/(k + 2) = 0.06211)
+ALL CHECKS PASS
