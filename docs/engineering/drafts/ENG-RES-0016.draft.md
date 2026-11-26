@@ -151,6 +151,9 @@ is `h = max_{0 ≤ t ≤ 1} Σ_j λ_j F_j(t)` (Theorem 11.98(b): one common `t`)
 single type is `t_j = u_j^{−1} ln((1 − ρ_j)/ρ_j)` with `ρ_j = Λ₁(u_j)/u_j`, `Λ₁(u) = ln(2/(1 + e^{−u}))`:
 
 <!-- TABLE:x014_tstar -->
+| slope `u` | 0.25 | 0.5 | 1 | 2 | 4 |
+|---|---|---|---|---|---|
+| maximising `t` of a chain of that type alone | 0.499 | 0.497 | 0.490 | 0.465 | 0.399 |
 <!-- /TABLE:x014_tstar -->
 
 It tends to `½` as `u → 0` and moves slowly: the types nearly agree on `t`, so `h` is nearly
@@ -160,6 +163,83 @@ alphabets at extensive accuracies; this is the binary, bounded-accuracy corner.)
 ## 5. Bounds on 75 mixtures **[X]**
 
 <!-- TABLE:x014_table -->
+| `(u_H, u_L)` | heavy sites | `n` | exponent `h` (asymptotic) | lower bound at this `n` | homogeneous algorithm with `u_H`: 2 / 3 / 4 levels | type-aligned nesting: 2 / 3 / 4 levels | top outer block of the best design | aligned / homogeneous | aligned / lower bound |
+|---|---|---|---|---|---|---|---|---|---|
+| (4, 1) | 0.1 | 1000 | 0.04970 | 0.05269 | 0.4257 / 0.3939 / 0.3934 | 0.1793 / 0.1608 / 0.1608 | 100 sites of slope 4 | 0.41 | 3.05 |
+| (4, 1) | 0.1 | 4000 | 0.04970 | 0.05064 | 0.3846 / 0.3408 / 0.3239 | 0.1281 / 0.0867 / 0.0867 | 400 sites of slope 4 | 0.27 | 1.71 |
+| (4, 1) | 0.1 | 16000 | 0.04970 | 0.04997 | 0.3663 / 0.3186 / 0.3003 | 0.1109 / 0.0798 / 0.0798 | 1600 sites of slope 4 | 0.27 | 1.60 |
+| (4, 1) | 0.25 | 1000 | 0.08111 | 0.08442 | 0.4257 / 0.3939 / 0.3934 | 0.2113 / 0.2038 / 0.2038 | 750 sites of slope 1 | 0.52 | 2.41 |
+| (4, 1) | 0.25 | 4000 | 0.08111 | 0.08210 | 0.3846 / 0.3408 / 0.3239 | 0.1815 / 0.1582 / 0.1483 | 1000 sites of slope 1 | 0.46 | 1.81 |
+| (4, 1) | 0.25 | 16000 | 0.08111 | 0.08140 | 0.3663 / 0.3186 / 0.3003 | 0.1642 / 0.1398 / 0.1233 | 4000 sites of slope 1 | 0.41 | 1.52 |
+| (4, 1) | 0.5 | 1000 | 0.13375 | 0.13720 | 0.4257 / 0.3939 / 0.3934 | 0.3845 / 0.2780 / 0.2635 | 200 sites of slope 4 | 0.67 | 1.92 |
+| (4, 1) | 0.5 | 4000 | 0.13375 | 0.13471 | 0.3846 / 0.3408 / 0.3239 | 0.3415 / 0.2126 / 0.2106 | 2000 sites of slope 1 | 0.65 | 1.56 |
+| (4, 1) | 0.5 | 16000 | 0.13375 | 0.13404 | 0.3663 / 0.3186 / 0.3003 | 0.3190 / 0.1932 / 0.1880 | 8000 sites of slope 1 | 0.63 | 1.40 |
+| (4, 1) | 0.75 | 1000 | 0.18648 | 0.19001 | 0.4257 / 0.3939 / 0.3934 | 0.4262 / 0.3583 / 0.3497 | 150 sites of slope 4 | 0.89 | 1.84 |
+| (4, 1) | 0.75 | 4000 | 0.18648 | 0.18750 | 0.3846 / 0.3408 / 0.3239 | 0.3894 / 0.3021 / 0.2716 | 600 sites of slope 4 | 0.84 | 1.45 |
+| (4, 1) | 0.75 | 16000 | 0.18648 | 0.18680 | 0.3663 / 0.3186 / 0.3003 | 0.3729 / 0.2841 / 0.2462 | 4000 sites of slope 1 | 0.82 | 1.32 |
+| (4, 1) | 0.9 | 1000 | 0.21814 | 0.22185 | 0.4257 / 0.3939 / 0.3934 | 0.4253 / 0.3950 / 0.3916 | 150 sites of slope 4 | 1.00 | 1.77 |
+| (4, 1) | 0.9 | 4000 | 0.21814 | 0.21919 | 0.3846 / 0.3408 / 0.3239 | 0.3858 / 0.3425 / 0.3165 | 600 sites of slope 4 | 0.98 | 1.44 |
+| (4, 1) | 0.9 | 16000 | 0.21814 | 0.21844 | 0.3663 / 0.3186 / 0.3003 | 0.3685 / 0.3166 / 0.2912 | 3200 sites of slope 4 | 0.97 | 1.33 |
+| (4, 0.25) | 0.1 | 1000 | 0.02561 | 0.02810 | 0.4257 / 0.3939 / 0.3934 | 0.1056 / 0.1056 / 0.1056 | 100 sites of slope 4 | 0.27 | 3.76 |
+| (4, 0.25) | 0.1 | 4000 | 0.02561 | 0.02640 | 0.3846 / 0.3408 / 0.3239 | 0.0788 / 0.0595 / 0.0586 | 3600 sites of slope 0.25 | 0.18 | 2.22 |
+| (4, 0.25) | 0.1 | 16000 | 0.02561 | 0.02585 | 0.3663 / 0.3186 / 0.3003 | 0.0695 / 0.0436 / 0.0410 | 14400 sites of slope 0.25 | 0.14 | 1.59 |
+| (4, 0.25) | 0.25 | 1000 | 0.06121 | 0.06420 | 0.4257 / 0.3939 / 0.3934 | 0.2105 / 0.1760 / 0.1751 | 750 sites of slope 0.25 | 0.45 | 2.73 |
+| (4, 0.25) | 0.25 | 4000 | 0.06121 | 0.06213 | 0.3846 / 0.3408 / 0.3239 | 0.1813 / 0.1170 / 0.1097 | 3000 sites of slope 0.25 | 0.34 | 1.77 |
+| (4, 0.25) | 0.25 | 16000 | 0.06121 | 0.06148 | 0.3663 / 0.3186 / 0.3003 | 0.1640 / 0.0994 / 0.0883 | 12000 sites of slope 0.25 | 0.29 | 1.44 |
+| (4, 0.25) | 0.5 | 1000 | 0.12056 | 0.12386 | 0.4257 / 0.3939 / 0.3934 | 0.3725 / 0.2743 / 0.2692 | 150 sites of slope 4 | 0.68 | 2.17 |
+| (4, 0.25) | 0.5 | 4000 | 0.12056 | 0.12156 | 0.3846 / 0.3408 / 0.3239 | 0.3382 / 0.2121 / 0.1909 | 400 sites of slope 4 | 0.59 | 1.57 |
+| (4, 0.25) | 0.5 | 16000 | 0.12056 | 0.12085 | 0.3663 / 0.3186 / 0.3003 | 0.3183 / 0.1927 / 0.1677 | 8000 sites of slope 0.25 | 0.56 | 1.39 |
+| (4, 0.25) | 0.75 | 1000 | 0.17990 | 0.18339 | 0.4257 / 0.3939 / 0.3934 | 0.4286 / 0.3571 / 0.3452 | 150 sites of slope 4 | 0.88 | 1.88 |
+| (4, 0.25) | 0.75 | 4000 | 0.17990 | 0.18094 | 0.3846 / 0.3408 / 0.3239 | 0.3757 / 0.3003 / 0.2692 | 600 sites of slope 4 | 0.83 | 1.49 |
+| (4, 0.25) | 0.75 | 16000 | 0.17990 | 0.18021 | 0.3663 / 0.3186 / 0.3003 | 0.3615 / 0.2830 / 0.2461 | 4000 sites of slope 0.25 | 0.82 | 1.37 |
+| (4, 0.25) | 0.9 | 1000 | 0.21551 | 0.21906 | 0.4257 / 0.3939 / 0.3934 | 0.4271 / 0.3979 / 0.3886 | 150 sites of slope 4 | 0.99 | 1.77 |
+| (4, 0.25) | 0.9 | 4000 | 0.21551 | 0.21658 | 0.3846 / 0.3408 / 0.3239 | 0.3800 / 0.3406 / 0.3133 | 600 sites of slope 4 | 0.97 | 1.45 |
+| (4, 0.25) | 0.9 | 16000 | 0.21551 | 0.21582 | 0.3663 / 0.3186 / 0.3003 | 0.3630 / 0.3167 / 0.2849 | 2400 sites of slope 4 | 0.95 | 1.32 |
+| (2, 1) | 0.1 | 1000 | 0.03593 | 0.03889 | 0.2637 / 0.2361 / 0.2309 | 0.1776 / 0.1491 / 0.1491 | 500 sites of slope 1 | 0.65 | 3.83 |
+| (2, 1) | 0.1 | 4000 | 0.03593 | 0.03679 | 0.2042 / 0.1718 / 0.1611 | 0.1276 / 0.0846 / 0.0748 | 400 sites of slope 2 | 0.46 | 2.03 |
+| (2, 1) | 0.1 | 16000 | 0.03593 | 0.03620 | 0.1834 / 0.1513 / 0.1393 | 0.1107 / 0.0625 / 0.0622 | 1600 sites of slope 2 | 0.45 | 1.72 |
+| (2, 1) | 0.25 | 1000 | 0.04614 | 0.04919 | 0.2637 / 0.2361 / 0.2309 | 0.1624 / 0.1593 / 0.1593 | 750 sites of slope 1 | 0.69 | 3.24 |
+| (2, 1) | 0.25 | 4000 | 0.04614 | 0.04701 | 0.2042 / 0.1718 / 0.1611 | 0.1125 / 0.1095 / 0.0937 | 1200 sites of slope 1 | 0.58 | 1.99 |
+| (2, 1) | 0.25 | 16000 | 0.04614 | 0.04642 | 0.1834 / 0.1513 / 0.1393 | 0.0950 / 0.0869 / 0.0742 | 4000 sites of slope 1 | 0.53 | 1.60 |
+| (2, 1) | 0.5 | 1000 | 0.06318 | 0.06617 | 0.2637 / 0.2361 / 0.2309 | 0.2609 / 0.1988 / 0.1951 | 250 sites of slope 2 | 0.84 | 2.95 |
+| (2, 1) | 0.5 | 4000 | 0.06318 | 0.06412 | 0.2042 / 0.1718 / 0.1611 | 0.2013 / 0.1245 / 0.1175 | 600 sites of slope 2 | 0.73 | 1.83 |
+| (2, 1) | 0.5 | 16000 | 0.06318 | 0.06345 | 0.1834 / 0.1513 / 0.1393 | 0.1793 / 0.1016 / 0.0975 | 1600 sites of slope 2 | 0.70 | 1.54 |
+| (2, 1) | 0.75 | 1000 | 0.08023 | 0.08361 | 0.2637 / 0.2361 / 0.2309 | 0.2635 / 0.2339 / 0.2221 | 300 sites of slope 2 | 0.96 | 2.66 |
+| (2, 1) | 0.75 | 4000 | 0.08023 | 0.08123 | 0.2042 / 0.1718 / 0.1611 | 0.2039 / 0.1624 / 0.1465 | 1000 sites of slope 1 | 0.91 | 1.80 |
+| (2, 1) | 0.75 | 16000 | 0.08023 | 0.08051 | 0.1834 / 0.1513 / 0.1393 | 0.1860 / 0.1372 / 0.1191 | 4000 sites of slope 1 | 0.85 | 1.48 |
+| (2, 1) | 0.9 | 1000 | 0.09046 | 0.09387 | 0.2637 / 0.2361 / 0.2309 | 0.2637 / 0.2368 / 0.2278 | 350 sites of slope 2 | 0.99 | 2.43 |
+| (2, 1) | 0.9 | 4000 | 0.09046 | 0.09146 | 0.2042 / 0.1718 / 0.1611 | 0.2058 / 0.1719 / 0.1612 | 600 sites of slope 2 | 1.00 | 1.76 |
+| (2, 1) | 0.9 | 16000 | 0.09046 | 0.09075 | 0.1834 / 0.1513 / 0.1393 | 0.1853 / 0.1521 / 0.1347 | 2400 sites of slope 2 | 0.97 | 1.48 |
+| (2, 0.5) | 0.1 | 1000 | 0.01662 | 0.01895 | 0.2637 / 0.2361 / 0.2309 | 0.0985 / 0.0985 / 0.0985 | 100 sites of slope 2 | 0.43 | 5.20 |
+| (2, 0.5) | 0.1 | 4000 | 0.01662 | 0.01741 | 0.2042 / 0.1718 / 0.1611 | 0.0556 / 0.0477 / 0.0477 | 3600 sites of slope 0.5 | 0.30 | 2.74 |
+| (2, 0.5) | 0.1 | 16000 | 0.01662 | 0.01686 | 0.1834 / 0.1513 / 0.1393 | 0.0416 / 0.0356 / 0.0356 | 14400 sites of slope 0.5 | 0.26 | 2.11 |
+| (2, 0.5) | 0.25 | 1000 | 0.03005 | 0.03270 | 0.2637 / 0.2361 / 0.2309 | 0.1622 / 0.1505 / 0.1504 | 750 sites of slope 0.5 | 0.65 | 4.60 |
+| (2, 0.5) | 0.25 | 4000 | 0.03005 | 0.03090 | 0.2042 / 0.1718 / 0.1611 | 0.1117 / 0.0766 / 0.0689 | 3000 sites of slope 0.5 | 0.43 | 2.23 |
+| (2, 0.5) | 0.25 | 16000 | 0.03005 | 0.03030 | 0.1834 / 0.1513 / 0.1393 | 0.0938 / 0.0544 / 0.0509 | 12000 sites of slope 0.5 | 0.37 | 1.68 |
+| (2, 0.5) | 0.5 | 1000 | 0.05246 | 0.05551 | 0.2637 / 0.2361 / 0.2309 | 0.2603 / 0.2004 / 0.1956 | 500 sites of slope 0.5 | 0.85 | 3.52 |
+| (2, 0.5) | 0.5 | 4000 | 0.05246 | 0.05339 | 0.2042 / 0.1718 / 0.1611 | 0.2009 / 0.1241 / 0.1082 | 2000 sites of slope 0.5 | 0.67 | 2.03 |
+| (2, 0.5) | 0.5 | 16000 | 0.05246 | 0.05273 | 0.1834 / 0.1513 / 0.1393 | 0.1792 / 0.1002 / 0.0828 | 8000 sites of slope 0.5 | 0.59 | 1.57 |
+| (2, 0.5) | 0.75 | 1000 | 0.07487 | 0.07800 | 0.2637 / 0.2361 / 0.2309 | 0.2637 / 0.2366 / 0.2223 | 300 sites of slope 2 | 0.96 | 2.85 |
+| (2, 0.5) | 0.75 | 4000 | 0.07487 | 0.07580 | 0.2042 / 0.1718 / 0.1611 | 0.2068 / 0.1625 / 0.1462 | 1000 sites of slope 0.5 | 0.91 | 1.93 |
+| (2, 0.5) | 0.75 | 16000 | 0.07487 | 0.07515 | 0.1834 / 0.1513 / 0.1393 | 0.1857 / 0.1367 / 0.1190 | 4000 sites of slope 0.5 | 0.85 | 1.58 |
+| (2, 0.5) | 0.9 | 1000 | 0.08832 | 0.09156 | 0.2637 / 0.2361 / 0.2309 | 0.2638 / 0.2354 / 0.2257 | 350 sites of slope 2 | 0.98 | 2.46 |
+| (2, 0.5) | 0.9 | 4000 | 0.08832 | 0.08930 | 0.2042 / 0.1718 / 0.1611 | 0.2068 / 0.1727 / 0.1610 | 800 sites of slope 2 | 1.00 | 1.80 |
+| (2, 0.5) | 0.9 | 16000 | 0.08832 | 0.08861 | 0.1834 / 0.1513 / 0.1393 | 0.1864 / 0.1503 / 0.1349 | 2400 sites of slope 2 | 0.97 | 1.52 |
+| (1, 0.5) | 0.1 | 1000 | 0.00982 | 0.01211 | 0.1263 / 0.1263 / 0.1263 | 0.0831 / 0.0831 / 0.0831 | 900 sites of slope 0.5 | 0.66 | 6.86 |
+| (1, 0.5) | 0.1 | 4000 | 0.00982 | 0.01055 | 0.0806 / 0.0689 / 0.0659 | 0.0452 / 0.0394 / 0.0394 | 1800 sites of slope 0.5 | 0.60 | 3.74 |
+| (1, 0.5) | 0.1 | 16000 | 0.00982 | 0.01004 | 0.0654 / 0.0531 / 0.0494 | 0.0334 / 0.0220 / 0.0208 | 1600 sites of slope 1 | 0.42 | 2.07 |
+| (1, 0.5) | 0.25 | 1000 | 0.01304 | 0.01527 | 0.1263 / 0.1263 / 0.1263 | 0.0873 / 0.0873 / 0.0873 | 250 sites of slope 1 | 0.69 | 5.71 |
+| (1, 0.5) | 0.25 | 4000 | 0.01304 | 0.01380 | 0.0806 / 0.0689 / 0.0659 | 0.0482 / 0.0422 / 0.0422 | 3000 sites of slope 0.5 | 0.64 | 3.05 |
+| (1, 0.5) | 0.25 | 16000 | 0.01304 | 0.01327 | 0.0654 / 0.0531 / 0.0494 | 0.0351 / 0.0301 / 0.0259 | 5600 sites of slope 0.5 | 0.53 | 1.95 |
+| (1, 0.5) | 0.5 | 1000 | 0.01841 | 0.02090 | 0.1263 / 0.1263 / 0.1263 | 0.1241 / 0.1078 / 0.1078 | 350 sites of slope 1 | 0.85 | 5.16 |
+| (1, 0.5) | 0.5 | 4000 | 0.01841 | 0.01919 | 0.0806 / 0.0689 / 0.0659 | 0.0793 / 0.0579 / 0.0542 | 800 sites of slope 1 | 0.82 | 2.83 |
+| (1, 0.5) | 0.5 | 16000 | 0.01841 | 0.01865 | 0.0654 / 0.0531 / 0.0494 | 0.0644 / 0.0383 / 0.0334 | 8000 sites of slope 0.5 | 0.68 | 1.79 |
+| (1, 0.5) | 0.75 | 1000 | 0.02377 | 0.02624 | 0.1263 / 0.1263 / 0.1263 | 0.1262 / 0.1247 / 0.1247 | 500 sites of slope 1 | 0.99 | 4.75 |
+| (1, 0.5) | 0.75 | 4000 | 0.02377 | 0.02457 | 0.0806 / 0.0689 / 0.0659 | 0.0806 / 0.0688 / 0.0645 | 1200 sites of slope 1 | 0.98 | 2.63 |
+| (1, 0.5) | 0.75 | 16000 | 0.02377 | 0.02402 | 0.0654 / 0.0531 / 0.0494 | 0.0654 / 0.0503 / 0.0444 | 3200 sites of slope 1 | 0.90 | 1.85 |
+| (1, 0.5) | 0.9 | 1000 | 0.02699 | 0.02958 | 0.1263 / 0.1263 / 0.1263 | 0.1262 / 0.1262 / 0.1262 | 500 sites of slope 1 | 1.00 | 4.27 |
+| (1, 0.5) | 0.9 | 4000 | 0.02699 | 0.02780 | 0.0806 / 0.0689 / 0.0659 | 0.0806 / 0.0689 / 0.0651 | 1200 sites of slope 1 | 0.99 | 2.34 |
+| (1, 0.5) | 0.9 | 16000 | 0.02699 | 0.02724 | 0.0654 / 0.0531 / 0.0494 | 0.0656 / 0.0534 / 0.0491 | 2400 sites of slope 1 | 0.99 | 1.80 |
 <!-- /TABLE:x014_table -->
 
 "Levels": base brackets count as one, as in ENG-RES-0015; the family of designs is "wide"
@@ -171,11 +251,20 @@ The ratio of the type-aligned bound to the homogeneous one (smallest and largest
 five pairs of slopes), and to the lower bound:
 
 <!-- TABLE:x014_ratios -->
+| heavy sites | `n = 1000` | `n = 4000` | `n = 16000` |
+|---|---|---|---|
+| 0.1 | 0.27 – 0.66 | 0.18 – 0.60 | 0.14 – 0.45 |
+| 0.25 | 0.45 – 0.69 | 0.34 – 0.64 | 0.29 – 0.53 |
+| 0.5 | 0.67 – 0.85 | 0.59 – 0.82 | 0.56 – 0.70 |
+| 0.75 | 0.88 – 0.99 | 0.83 – 0.98 | 0.82 – 0.90 |
+| 0.9 | 0.98 – 1.00 | 0.97 – 1.00 | 0.95 – 0.99 |
+| **bound / lower bound, all mixtures** | 1.77 – 6.86 | 1.44 – 3.74 | 1.32 – 2.11 |
 <!-- /TABLE:x014_ratios -->
 
 The hypotheses of the protocol (written after five preliminary cells, before the job):
 
 <!-- TABLE:x014_summary -->
+75 cells stored (0 with a search that reached its time limit, marked *).  H1: the type-aligned bound is above the homogeneous one in 10 cell-levels (`(4, 1)`, heavy 0.9, `n = 1000`, 3 levels: 0.3950 against 0.3939; `(4, 1)`, heavy 0.9, `n = 4000`, 3 levels: 0.3425 against 0.3408; `(4, 0.25)`, heavy 0.9, `n = 1000`, 3 levels: 0.3979 against 0.3939; `(2, 1)`, heavy 0.9, `n = 1000`, 3 levels: 0.2368 against 0.2361; `(2, 1)`, heavy 0.9, `n = 4000`, 3 levels: 0.1719 against 0.1718; `(2, 1)`, heavy 0.9, `n = 4000`, 4 levels: 0.1612 against 0.1611).  H2: the lower bound exceeds `h` and the excess shrinks with `n` in 25 of 25 mixtures.  H3: at `n = 16 000` the ratio of the best type-aligned bound to the lower bound lies between `1.32` and `2.11` (25 cells).  H4: `h` differs from the average of the one-type exponents by at most `0.900` per cent.
 <!-- /TABLE:x014_summary -->
 
 H1 is refuted where nine tenths of the sites are steep: there a family without mixed
@@ -192,9 +281,30 @@ slopes: `tests/eng/test_hetero.py`).  With these tables a *mixed* outer block �
 fraction of every type, the split of Theorem 11.101 — is a candidate like any other:
 
 <!-- TABLE:x014_mixed -->
+| `(u_H, u_L)` | heavy sites | levels | homogeneous with `u_H` | outer blocks of one type (exact tables) | mixed outer blocks (sorted-slope tables) | both |
+|---|---|---|---|---|---|---|
+| (2, 0.5) | 0.1 | 2 | 0.2042 | 0.0556 | 0.1837 | 0.0556 |
+| (2, 0.5) | 0.1 | 3 | 0.1718 | 0.0477 | 0.1620 | 0.0477 |
+| (2, 0.5) | 0.25 | 2 | 0.2042 | 0.1117 | 0.2039 | 0.1117 |
+| (2, 0.5) | 0.25 | 3 | 0.1718 | 0.0766 | 0.1785 | 0.0766 |
+| (2, 0.5) | 0.5 | 2 | 0.2042 | 0.2009 | 0.2068 | 0.2009 |
+| (2, 0.5) | 0.5 | 3 | 0.1718 | 0.1241 | 0.1774 | 0.1241 |
+| (2, 0.5) | 0.75 | 2 | 0.2042 | 0.2068 | 0.2077 | 0.2068 |
+| (2, 0.5) | 0.75 | 3 | 0.1718 | 0.1625 | 0.1795 | 0.1617 |
+| (2, 0.5) | 0.9 | 2 | 0.2042 | 0.2068 | 0.2053 | 0.2053 |
+| (2, 0.5) | 0.9 | 3 | 0.1718 | 0.1747 | 0.1757 | 0.1747 |
+| (1, 0.5) | 0.25 | 2 | 0.0806 | 0.0482 | 0.0806 | 0.0482 |
+| (1, 0.5) | 0.25 | 3 | 0.0689 | 0.0422 | 0.0687 | 0.0422 |
+| (1, 0.5) | 0.75 | 2 | 0.0806 | 0.0806 | 0.0806 | 0.0806 |
+| (1, 0.5) | 0.75 | 3 | 0.0689 | 0.0688 | 0.0689 | 0.0688 |
+| (4, 1) | 0.25 | 2 | 0.3846 | 0.1815 | 0.3789 | 0.1815 |
+| (4, 1) | 0.25 | 3 | 0.3408 | 0.1582 | 0.3393 | 0.1582 |
+| (4, 1) | 0.75 | 2 | 0.3846 | 0.3894 | 0.3772 | 0.3772 |
+| (4, 1) | 0.75 | 3 | 0.3408 | 0.3021 | 0.3384 | 0.3021 |
 <!-- /TABLE:x014_mixed -->
 
 <!-- TABLE:x014_mixed_summary -->
+`n = 4000`, nats per site; 9 mixtures, 18 rows.  Mixed outer blocks with the sorted-slope tables against the homogeneous bound: between `0.981` and `1.045` of it where at least a quarter of the sites is steep, `0.899`–`0.943` where a tenth is.  Blocks of one type against mixed blocks: `0.29`–`1.03` of the mixed bound.  The union of the two families is better than blocks of one type alone in 5 of 18 rows.
 <!-- /TABLE:x014_mixed_summary -->
 
 So at finite `n`, as at the exponential scale (your remark after Lemma N14), the
@@ -212,9 +322,22 @@ slope of its class: the binned class contains the original one, so its certified
 is a bound for the original (your Proposition N19 does this at the level of exponents).
 
 <!-- TABLE:x014_profile -->
+| `n` | classes `m` | exponent of the binned class | certified bound per site with 2 / 3 / 4 / 5 levels | best / exponent of the profile |
+|---|---|---|---|---|
+| 4000 | 1 | 0.09727 | 0.2042 / 0.1756 / 0.1652 / 0.1652* | 3.54 |
+| 4000 | 2 | 0.07054 | 0.2008 / 0.1363 / 0.1334 / 0.1334* | 2.85 |
+| 4000 | 3 | 0.06228 | 0.1799 / 0.1470 / 0.1225 / 0.1225* | 2.62 |
+| 4000 | 4 | 0.05827 | 0.2219 / 0.1301 / 0.1241 / 0.1241* | 2.65 |
+| 4000 | 6 | 0.05434 | 0.2685 / 0.1910 / 0.1359 / 0.1359* | 2.91 |
+| 4000 | 8 | 0.05240 | 0.2937 / 0.2336 / 0.1833 / 0.1833* | 3.92 |
+| 16000 | 1 | 0.09728 | 0.1834 / 0.1548 / 0.1429 / 0.1429* | 3.06 |
+| 16000 | 2 | 0.07055 | 0.1793 / 0.1212 / 0.1070 / 0.1070* | 2.29 |
+| 16000 | 4 | 0.05828 | 0.2001 / 0.1135 / 0.1000 / 0.1000* | 2.14 |
+| 16000 | 6 | 0.05434 | 0.2453 / 0.1628 / 0.1111 / 0.1111* | 2.38 |
 <!-- /TABLE:x014_profile -->
 
 <!-- TABLE:x014_profile_caption -->
+Slopes equally spaced on `[0.5, 2]`; asymptotic exponent of the profile itself `0.04673` per site.  An asterisk: the search reached its time limit; the number is the best bound found.
 <!-- /TABLE:x014_profile_caption -->
 
 ## 6. Literal runs on small cubes **[L]**
@@ -231,9 +354,32 @@ The outer sample is drawn; nothing is replaced by its mean.  Two parameter sets 
 the theorem's range, chosen so that the constant `K` keeps literal samples feasible.
 
 <!-- TABLE:x014_literal -->
+| what | outer block | inner slopes | parameters | runs | closed | bracket misses the truth | wider than certified | aborted | over the cost bound | false certificate | widest bracket (certified accuracy) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| theorem's constants | 8 sites of slope 0.5 | 2, 2, 2, 2 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 4800 | 4800 | 0 | 0 | 0 | 0 | 0 | 2.934 (3.318) |
+| theorem's constants | 8 sites of slope 0.5 | 2, 2, 2, 2 | lam=1/2, eta=eta'=theta=1/4, b=1/2 | 4800 | 4800 | 0 | 0 | 0 | 0 | 0 | 1.497 (1.678) |
+| theorem's constants | 8 sites of slope 2 | 0.5, 0.5, 0.5, 0.5 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 4800 | 4800 | 0 | 0 | 0 | 0 | 0 | 3.160 (3.318) |
+| theorem's constants | 8 sites of slope 2 | 0.5, 0.5, 0.5, 0.5 | lam=1/2, eta=eta'=theta=1/4, b=1/2 | 4800 | 4800 | 0 | 0 | 0 | 0 | 0 | 1.510 (1.678) |
+| theorem's constants | 10 sites of slope 1 | 0.4, 0.4, 2.5 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 4800 | 4800 | 0 | 0 | 0 | 0 | 0 | 3.082 (3.318) |
+| theorem's constants | 10 sites of slope 1 | 0.4, 0.4, 2.5 | lam=1/2, eta=eta'=theta=1/4, b=1/2 | 4800 | 4800 | 0 | 0 | 0 | 0 | 0 | 1.513 (1.678) |
+| theorem's constants | 9 sites of slope 0.3 | 1, 1, 3, 0.7 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 4800 | 4800 | 0 | 0 | 0 | 0 | 0 | 2.658 (3.318) |
+| theorem's constants | 9 sites of slope 0.3 | 1, 1, 3, 0.7 | lam=1/2, eta=eta'=theta=1/4, b=1/2 | 4800 | 4800 | 0 | 0 | 0 | 0 | 0 | 1.447 (1.679) |
+| theorem's constants | 10 sites of slope 1.5 | 0.2, 0.2, 0.2, 0.2, 0.2, 0.2 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 4800 | 4800 | 0 | 0 | 0 | 0 | 0 | 3.182 (3.318) |
+| theorem's constants | 10 sites of slope 1.5 | 0.2, 0.2, 0.2, 0.2, 0.2, 0.2 | lam=1/2, eta=eta'=theta=1/4, b=1/2 | 4800 | 4800 | 0 | 0 | 0 | 0 | 0 | 1.510 (1.678) |
+| theorem's constants | 7 sites of slope 1 | 1.7 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 4800 | 4800 | 0 | 0 | 0 | 0 | 0 | 3.052 (3.318) |
+| theorem's constants | 7 sites of slope 1 | 1.7 | lam=1/2, eta=eta'=theta=1/4, b=1/2 | 4800 | 4800 | 0 | 0 | 0 | 0 | 0 | 1.489 (1.679) |
+| negative control: outer tables for a quarter of the slope | 8 sites of slope 0.5 | 2, 2, 2, 2 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 540 | 540 | 0 | 0 | 0 | 0 | 0 | 2.400 (3.318) |
+| negative control: K divided by 64 | 8 sites of slope 0.5 | 2, 2, 2, 2 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 540 | 540 | 1 | 0 | 0 | 0 | 2 | 2.941 (3.318) |
+| negative control: outer tables for a quarter of the slope | 8 sites of slope 2 | 0.5, 0.5, 0.5, 0.5 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 540 | 540 | 10 | 0 | 0 | 0 | 2 | 2.578 (3.318) |
+| negative control: K divided by 64 | 8 sites of slope 2 | 0.5, 0.5, 0.5, 0.5 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 540 | 540 | 7 | 0 | 0 | 0 | 43 | 3.099 (3.318) |
+| negative control: outer tables for a quarter of the slope | 10 sites of slope 1 | 0.4, 0.4, 2.5 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 540 | 540 | 6 | 0 | 0 | 0 | 0 | 2.637 (3.318) |
+| negative control: K divided by 64 | 10 sites of slope 1 | 0.4, 0.4, 2.5 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 540 | 540 | 2 | 0 | 0 | 0 | 10 | 3.090 (3.318) |
+| negative control: outer tables for a quarter of the slope | 9 sites of slope 0.3 | 1, 1, 3, 0.7 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 540 | 540 | 22 | 0 | 0 | 0 | 22 | 2.184 (3.318) |
+| negative control: K divided by 64 | 9 sites of slope 0.3 | 1, 1, 3, 0.7 | lam=1, eta=1/2, eta'=1, theta=1, b=1 | 540 | 540 | 1 | 0 | 0 | 0 | 1 | 2.651 (3.318) |
 <!-- /TABLE:x014_literal -->
 
 <!-- TABLE:x014_literal_summary -->
+With the theorem's constants: 57,600 literal runs on cubes of 8–16 sites, 57,600 closed, 0 brackets that miss the truth, 0 wider than the certified accuracy, 0 aborted, 0 above the cost bound, 0 false certificates.  Negative controls: outer tables for a quarter of the slope (8 outer sites of slope 0.5): 0 of 540 brackets miss the truth, 0 aborted, 0 false certificates; K divided by 64 (8 outer sites of slope 0.5): 1 of 540 brackets miss the truth, 0 aborted, 2 false certificates; outer tables for a quarter of the slope (8 outer sites of slope 2): 10 of 540 brackets miss the truth, 0 aborted, 2 false certificates; K divided by 64 (8 outer sites of slope 2): 7 of 540 brackets miss the truth, 0 aborted, 43 false certificates; outer tables for a quarter of the slope (10 outer sites of slope 1): 6 of 540 brackets miss the truth, 0 aborted, 0 false certificates; K divided by 64 (10 outer sites of slope 1): 2 of 540 brackets miss the truth, 0 aborted, 10 false certificates; outer tables for a quarter of the slope (9 outer sites of slope 0.3): 22 of 540 brackets miss the truth, 0 aborted, 22 false certificates; K divided by 64 (9 outer sites of slope 0.3): 1 of 540 brackets miss the truth, 0 aborted, 1 false certificates.
 <!-- /TABLE:x014_literal_summary -->
 
 **An error of ours that the theorem caught.**  The first version of the simulator returned

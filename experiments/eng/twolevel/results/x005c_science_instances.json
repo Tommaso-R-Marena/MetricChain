@@ -1,0 +1,131 @@
+{
+ "commit": "2259daac6e7cd8ec893d94f5ff51b698b579e290",
+ "rows": [
+  {
+   "file": "data_cell_u0.5_n250_phi0.5.json",
+   "u": 0.5,
+   "n": 250,
+   "phi": 0.5,
+   "oracle": "bottom",
+   "lcost_kernel": 37.797268524908894,
+   "lcost_review": 37.797268524908894,
+   "bound_searched": 37.797268524908894,
+   "worst_product_found": 37.7518294224718,
+   "lipschitz_violation": 0.0,
+   "monotone": false,
+   "c_in": -27.383774547479838,
+   "c_in_range": [
+    -27.383774547479835,
+    35.11622545252016
+   ],
+   "violations": [],
+   "cost_over_cap": -12.49568889512691,
+   "d_ref": 0
+  },
+  {
+   "file": "data_cell_u0.5_n350_phi0.5.json",
+   "u": 0.5,
+   "n": 350,
+   "phi": 0.5,
+   "oracle": "bottom",
+   "lcost_kernel": 38.31232603705912,
+   "lcost_review": 38.312326037059115,
+   "bound_searched": 40.7359708712456,
+   "worst_product_found": 40.70611824676992,
+   "lipschitz_violation": 0.0,
+   "monotone": false,
+   "c_in": -38.33728436647178,
+   "c_in_range": [
+    -38.33728436647177,
+    49.16271563352822
+   ],
+   "violations": [],
+   "cost_over_cap": -15.085520234013998,
+   "d_ref": 0
+  },
+  {
+   "file": "data_cell_u0.5_n350_phi0.55.json",
+   "u": 0.5,
+   "n": 350,
+   "phi": 0.55,
+   "oracle": "bottom",
+   "lcost_kernel": 40.036027159468915,
+   "lcost_review": 40.03602715946891,
+   "bound_searched": 40.09949986779184,
+   "worst_product_found": 40.08331100112918,
+   "lipschitz_violation": 0.0,
+   "monotone": false,
+   "c_in": -34.613091028014516,
+   "c_in_range": [
+    -34.61309102801451,
+    44.386908971985484
+   ],
+   "violations": [],
+   "cost_over_cap": -12.905815913099154,
+   "d_ref": 0
+  },
+  {
+   "file": "data_cell_u0.5_n500_phi0.35.json",
+   "u": 0.5,
+   "n": 500,
+   "phi": 0.35,
+   "oracle": "bottom",
+   "lcost_kernel": 43.31687190226992,
+   "lcost_review": 43.316871902269924,
+   "bound_searched": 46.92997173671497,
+   "worst_product_found": 46.90930338053017,
+   "lipschitz_violation": 0.0,
+   "monotone": false,
+   "c_in": -71.19781382344758,
+   "c_in_range": [
+    -71.19781382344758,
+    91.30218617655242
+   ],
+   "violations": [],
+   "cost_over_cap": -16.691875205504147,
+   "d_ref": 0
+  },
+  {
+   "file": "data_cell_u2_n250_phi0.85.json",
+   "u": 2.0,
+   "n": 250,
+   "phi": 0.85,
+   "oracle": "top",
+   "lcost_kernel": 127.01674510864507,
+   "lcost_review": 127.01674510864507,
+   "bound_searched": 127.01674510864507,
+   "worst_product_found": 125.37323571266823,
+   "lipschitz_violation": 0.0,
+   "monotone": true,
+   "c_in": -21.516328441644966,
+   "c_in_range": [
+    -21.516328441644962,
+    54.483671558355034
+   ],
+   "violations": [],
+   "cost_over_cap": -18.899684256303118,
+   "d_ref": 212
+  },
+  {
+   "file": "data_cell_u2_n350_phi0.85.json",
+   "u": 2.0,
+   "n": 350,
+   "phi": 0.85,
+   "oracle": "bottom",
+   "lcost_kernel": 161.9516374526417,
+   "lcost_review": 161.9516374526417,
+   "bound_searched": 161.9516374526417,
+   "worst_product_found": 161.1750516308415,
+   "lipschitz_violation": 0.0,
+   "monotone": true,
+   "c_in": -30.00961598439956,
+   "c_in_range": [
+    -30.009615984399552,
+    75.99038401560044
+   ],
+   "violations": [],
+   "cost_over_cap": -18.201347146749555,
+   "d_ref": 297
+  }
+ ]
+}

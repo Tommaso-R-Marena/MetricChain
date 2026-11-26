@@ -34,7 +34,15 @@ def f4(x) -> str:
 # X-011a: certified bounds
 # ---------------------------------------------------------------------------------------------
 def bounds_blocks() -> dict[str, str]:
-    rows = jl("x011_certified1.jsonl")
+    """ENG-RES-0015 has the sizes up to 8000 (blocks x011_bounds, ...); the larger sizes of job M-016, which were
+    still running when it was published, are in blocks with the suffix _large (the addendum)."""
+    allrows = jl("x011_certified1.jsonl")
+    out = _bounds_blocks([r for r in allrows if r["n"] <= 8000], "")
+    out.update(_bounds_blocks([r for r in allrows if r["n"] > 8000], "_large"))
+    return out
+
+
+def _bounds_blocks(rows: list[dict], suffix: str) -> dict[str, str]:
     if not rows:
         return {}
     by = {(r["n"], r["family"]): r for r in rows}
@@ -78,7 +86,7 @@ def bounds_blocks() -> dict[str, str]:
         done = [all(final.get((fam, k), (None, False))[1] for fam in ("theory", "wide")) for k in range(1, kmax + 1)]
         ksat = None
         for k in range(1, kmax + 1):
-            if all(done[:kmax]) and all(vals[j] is not None and vals[j] > vals[kmax - 1] - 1e-4 for j in range(k - 1, kmax)):
+            if all(done[:kmax]) and all(vals[j] is not None and vals[j] < vals[kmax - 1] + 1e-4 for j in range(k - 1, kmax)):
                 ksat = k
                 break
         sat[n] = ksat
@@ -86,9 +94,9 @@ def bounds_blocks() -> dict[str, str]:
         na = n * r0["a"]
         excess[n] = ((vbest - r0["lower_bound"]) * na, vbest / r0["lower_bound"], vbest, all(done))
         lines.append(f"| {n} | {r0['lower_bound']:.4f} | {r0['base_bracket']:.4f} | " + " | ".join(cells) + f" | {('%d' % (ksat + 1)) if ksat else 'not determined (unfinished)'} |")
-    blocks = {"x011_bounds": "\n".join(lines)}
+    blocks = {"x011_bounds" + suffix: "\n".join(lines)}
     r0 = rows[0]
-    blocks["x011_bounds_caption"] = (
+    blocks["x011_bounds_caption" + suffix] = (
         f"`ln(bound)/(n a)`, `u = 1` (`a = {r0['a']:.5f}`; the exponent of every algorithm is `h/a = {r0['h_over_a']:.4f}` in these units, enumeration costs "
         f"`{r0['enumeration']:.3f}`).  \"`k` levels\" = `k − 1` nested runs of Algorithm 2L⁺ above base brackets, every server chosen by certified cost; "
         "the least bound over 18 outer fractions of the top level.  Where two numbers are given: candidate family \"theory\" / family \"wide\".  "
@@ -98,27 +106,49 @@ def bounds_blocks() -> dict[str, str]:
         ex, ratio, vbest, complete = excess[n]
         r0 = by.get((n, "theory")) or by.get((n, "wide"))
         lines.append(f"| {n} | {vbest:.4f}{'' if complete else '*'} | {r0['lower_bound']:.4f} | {ratio:.2f} | {ex:.0f} | {ex / math.sqrt(n * math.log(n)):.2f} |")
-    blocks["x011_excess"] = "\n".join(lines)
-    # finite-size overhead against the asymptotic exponents of two and three levels (theory division: tau_2/a = 0.500, tau_3/a = 0.361)
-    TAU = {1: 0.500, 2: 0.361}
-    lines = ["| `n` | two levels: bound − `τ₂`, in units of `n a`; in nats | three levels: bound − `τ₃`; in nats | nats per `√n`: two levels; three levels |", "|---|---|---|---|"]
+    blocks["x011_excess" + suffix] = "\n".join(lines)
+    # finite-size overhead against the asymptotic exponents of the same number of levels.  C_UP[k] is the theory
+    # division's certified upper bound of tau_{k+1}/a at u = 1 (its workstream Z, file
+    # experiments/workstreams/Z/out_z6_certified_u1_J400.txt at its commit ddc6c32: interval arithmetic, "tau_j <= c_j";
+    # not recomputed here).  Its floating-point values are 0.500 and 0.361 for two and three levels, so
+    # "bound - c" understates the overhead to tau itself by at most 0.0023.
+    C_UP = {1: 0.5004, 2: 0.3633, 3: 0.3128, 4: 0.2914, 5: 0.2813}
+    kshow = [k for k in range(1, kmax + 1) if k in C_UP][:4]
+    lines = ["| `n` | " + " | ".join(f"{k + 1} levels: bound − `c_{k + 1}`; in nats" for k in kshow) + " |", "|---|" + "---|" * len(kshow)]
+    over = {}
     for n in sizes:
         r0 = by.get((n, "theory")) or by.get((n, "wide"))
         na = n * r0["a"]
         cells = []
-        per = []
-        for k in (1, 2):
-            vs = [best(by[(n, fam)], k)[0] for fam in ("theory", "wide") if (n, fam) in by]
-            vs = [v for v in vs if v is not None]
-            if not vs:
+        for k in kshow:
+            got = [best(by[(n, fam)], k) for fam in ("theory", "wide") if (n, fam) in by]
+            got = [(v, c) for v, _, c in got if v is not None]
+            if not got:
                 cells.append("—")
-                per.append("—")
                 continue
-            d = min(vs) - TAU[k]
-            cells.append(f"{d:.4f}; {d * na:.0f}")
-            per.append(f"{d * na / math.sqrt(n):.2f}")
-        lines.append(f"| {n} | {cells[0]} | {cells[1]} | {per[0]}; {per[1]} |")
-    blocks["x011_overhead"] = "\n".join(lines)
+            v, complete = min(got)
+            d = v - C_UP[k]
+            over[(n, k)] = d * na
+            cells.append(f"{d:.4f}{'' if complete else '*'}; {d * na:.0f}")
+        lines.append(f"| {n} | " + " | ".join(cells) + " |")
+    blocks["x011_overhead" + suffix] = "\n".join(lines)
+    # what one more level gains in the limit, and how much of it the certified designs realise
+    lines = ["| `n` | " + " | ".join(f"level {k + 2}: gain in the limit, `n a (c_{k + 1} − c_{k + 2})`; realised; share" for k in kshow[:-1]) + " |",
+             "|---|" + "---|" * (len(kshow) - 1)]
+    for n in sizes:
+        r0 = by.get((n, "theory")) or by.get((n, "wide"))
+        na = n * r0["a"]
+        cells = []
+        for k in kshow[:-1]:
+            if (n, k) not in over or (n, k + 1) not in over:
+                cells.append("—")
+                continue
+            gain = (C_UP[k] - C_UP[k + 1]) * na
+            realised = gain - (over[(n, k + 1)] - over[(n, k)])
+            realised = 0.0 if abs(realised) < 0.5 else realised
+            cells.append(f"{gain:.0f}; {realised:.0f}; {max(0.0, realised) / gain:.2f}")
+        lines.append(f"| {n} | " + " | ".join(cells) + " |")
+    blocks["x011_level_gain" + suffix] = "\n".join(lines)
     return blocks
 
 
@@ -494,8 +524,15 @@ def nested_literal_blocks() -> dict[str, str]:
 
 
 def stage2_blocks() -> dict[str, str]:
-    """X-011 stage 2 (job M-020): both rules of design on the same instances, three slopes."""
-    rows = jl("x011_instances2.jsonl")
+    """X-011 stage 2 (job M-020): both rules of design on the same instances, three slopes.  ENG-RES-0015 has
+    n = 4000 (complete when it was published); n = 16 000 is in blocks with the suffix _16k (the addendum)."""
+    allrows = jl("x011_instances2.jsonl")
+    out = _stage2_blocks([r for r in allrows if r["n"] <= 4000], "")
+    out.update(_stage2_blocks([r for r in allrows if r["n"] > 4000], "_16k"))
+    return out
+
+
+def _stage2_blocks(rows: list[dict], suffix: str) -> dict[str, str]:
     if not rows:
         return {}
     cells = defaultdict(list)
@@ -528,9 +565,9 @@ def stage2_blocks() -> dict[str, str]:
         lines.append(f"| {u:g} | {n} | {label[(rule, k)]} | {len(rs)} | {c['certified']:.4f} ({c['phi']:g}) | {f['flat_instance']:.4f} ({f['phi']:g}) | "
                      f"{Bq(b):.4f} ({b['phi']:g}; {fib}) | {Aq(a_):.4f} ({a_['phi']:g}) |")
         summary[(u, n)][(rule, k)] = dict(B=Bq(b), A=Aq(a_), flat=f["flat_instance"], cert=c["certified"], fib=worst_slope(b), count=len(rs))
-    blocks = {"x011_stage2": "\n".join(lines)}
+    blocks = {"x011_stage2" + suffix: "\n".join(lines)}
     sizes_ = sorted({(r["u"], r["n"], r["a"]) for r in rows})
-    blocks["x011_stage2_caption"] = ("Units `n a` with `a = a(u)`; the size in nats: " + ", ".join(f"`u = {u:g}`, `n = {n}`: `n a = {n * a_:.0f}`" for u, n, a_ in sizes_)
+    blocks["x011_stage2_caption" + suffix] = ("Units `n a` with `a = a(u)`; the size in nats: " + ", ".join(f"`u = {u:g}`, `n = {n}`: `n a = {n * a_:.0f}`" for u, n, a_ in sizes_)
                                      + ".  For comparison, `u = 1`: `n a = 111` at `n = 1000`, `444` at `4000`, `1775` at `16 000`.")
     # H9: three levels, certified against flat-tuned, reading (B)
     parts, h9_fail = [], []
@@ -541,7 +578,7 @@ def stage2_blocks() -> dict[str, str]:
             parts.append(f"`u = {u:g}`, `n = {n}`: `{c['B']:.4f}` against `{f['B']:.4f}` in reading (B), `{c['A']:.4f}` against `{f['A']:.4f}` in (A); at the flat instance `{c['flat']:.4f}` against `{f['flat']:.4f}`")
             if not c["B"] < f["B"]:
                 h9_fail.append((u, n))
-    blocks["x011_h9"] = ("Three levels, servers by certified cost against servers chosen at the flat fibre (least worst instance found over the fractions): " + "; ".join(parts)
+    blocks["x011_h9" + suffix] = ("Three levels, servers by certified cost against servers chosen at the flat fibre (least worst instance found over the fractions): " + "; ".join(parts)
                          + (".  H9 fails at " + ", ".join(f"`u = {u:g}`, `n = {n}`" for u, n in h9_fail) + "." if h9_fail else ".  H9 holds in every cell run."))
     # H11: the worst fibre
     wc = defaultdict(lambda: defaultdict(int))
@@ -549,12 +586,12 @@ def stage2_blocks() -> dict[str, str]:
         if r["levels_used"] >= 2:
             wc[r["rule"]][worst_slope(r)] += 1
     names = {"0": "flat", "0.25": "`¼u`", "0.5": "`½u`", "1": "`u`"}
-    blocks["x011_h11"] = "Which fibre is the worst (designs with at least one nested run; one count per design and fraction): " + "; ".join(
+    blocks["x011_h11" + suffix] = "Which fibre is the worst (designs with at least one nested run; one count per design and fraction): " + "; ".join(
         f"{'by certified cost' if rule == 'certified' else 'chosen at the flat fibre'}: " + ", ".join(f"{names[s]} {wc[rule][s]}" for s in ("0", "0.25", "0.5", "1") if wc[rule][s])
         for rule in ("certified", "flat") if wc[rule]) + "."
     viol = sum(s["violations"] for r in rows for s in r["searches"])
     above = sum(1 for r in rows if Aq(r) > r["certified"] + 1e-9)
-    blocks["x011_stage2_consistency"] = (f"{len(rows)} designs run, {sum(len(r['searches']) for r in rows)} searches, {sum(s['n_eval'] for r in rows for s in r['searches']):,} mean runs: "
+    blocks["x011_stage2_consistency" + suffix] = (f"{len(rows)} designs run, {sum(len(r['searches']) for r in rows)} searches, {sum(s['n_eval'] for r in rows for s in r['searches']):,} mean runs: "
                                          f"{above} searched costs above the certified bound of their design; {viol} runs with a violated claim.")
     return blocks
 
