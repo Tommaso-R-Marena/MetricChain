@@ -210,7 +210,7 @@ proofs above are paper proofs, unreviewed.
    can be done in `O(2^c c²)` instead of `3^c` (fast subset convolution), giving `O*(2^c)` for distinct
    strands.  Not implemented; stated as a remark, not a theorem.
 2. *Lower bound.*  By `STRANDS_NN_HARDNESS.md` the problem is NP-hard for unboundedly many species.  A
-   bound `2^{o(c)}` under ETH is conjectural for us (CX-C1).  Whether the problem is fixed-parameter
+   bound `2^{o(c)}` under ETH holds conditionally on two cited facts (CX-T14).  Whether the problem is fixed-parameter
    tractable in the number of species `k` (our bound is `c^{O(k)}`) is open (`OPEN_PROBLEMS.md` C2).
 3. *MFE and density of states.*  We rely on [SW26, §7] for the decoding of `Q_α`; we have read the
    statements (their Theorems 2, 3 and Lemma 39), not checked the proofs, and the decoding needs

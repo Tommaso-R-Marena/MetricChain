@@ -138,7 +138,7 @@ Algorithms for Structure Prediction and Interactions*, WABI 2024, LIPIcs 312, 18
   strands (question 3), and polynomial time for unboundedly many strands of a bounded number of species
   (a partial answer to question 4; with CX-T2 the picture is "bounded species: polynomial; unbounded
   species: NP-hard").  MFE and #SSEL follow by A-II's decoding, which we cite and have not re-derived.
-  Open: `2^c` by fast subset convolution (remark only); ETH-tightness (CX-C1); FPT in the number of species.
+  Open: `2^c` by fast subset convolution (remark only); FPT in the number of species.  ETH-tightness: conditional statement CX-T14.
 
 ### A7 — Pathways through the landscape (A-II, "Future work" 2)
 

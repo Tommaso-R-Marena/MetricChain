@@ -92,7 +92,7 @@ general); the identity check caught it.
 ### Resume here
 
 1. Commission an adversarial review of `STRANDS_NN_HARDNESS.md` (COMPLEXITY-REV-0001); fix what it finds.
-2. A1 follow-ups: (i) ETH chain for CX-C1 (find a linear reduction 3SAT → 3DM → 4-PARTITION with
+2. A1 follow-ups: (i) ETH chain: now CX-T14, conditional on two citations to be verified at the source (was: find a linear reduction 3SAT → 3DM → 4-PARTITION with
    polynomially bounded numbers, or cite one); (ii) robustness of the reduction to non-zero exterior-loop
    energies; (iii) Lean formalisation of the counting core of Theorem 1.
 3. A6: adversarial review of `STRANDS_ALGORITHM.md` (COMPLEXITY-REV-0003); optionally fast subset

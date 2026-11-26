@@ -35,8 +35,12 @@ Labels as in `README.md`.  "Review" names the COMPLEXITY-REV file of the indepen
 | CX-X1 | The NANUQ metric of a network depends only on the circular split system `Split(T(N))`; for arbitrary circular split systems on 6 points it can fail to be Kalmanson (33 systems; 3 of them unions of binary-tree split systems) | [X] | `experiments/complexity/nanuq/exhaust_all_systems.py`, `exhaust_tree_generated.py` |
 | CX-X2 | For every outer-labeled planar galled bloblet with `k` hybrids and `n` leaves, `(k,n)` ∈ {1,2}×{4..7}, {3}×{4..8}, {4}×{4..8}, {5}×{5,6,7}, {6}×{6,7}: the NANUQ metric is circular decomposable with support exactly the displayed splits | [X] | `experiments/complexity/nanuq/test_bloblets.py` (generator `networks.py`) |
 
+## Conditional statements
+
+| id | statement | depends on | where |
+|---|---|---|---|
+| CX-T14 | Under ETH, MFE in the models of CX-T2 has no `2^{o(c)}·poly(N)` algorithm (`c` = number of strands) | CX-T1 [P]; a `2^{Ω(q)}` ETH lower bound for 3DM with linearly many triples (Bansal et al. 2016, **known to us only through its citation in Demaine et al. 2024**); the size of Garey–Johnson's reduction 3DM → 4-PARTITION (**known to us through the summary in Ducloz–Shalaby–Woods App. B.3**) | `STRANDS_NN_HARDNESS.md` §5, Cor. 5 |
+
 ## Conjectures
 
-| id | statement | evidence |
-|---|---|---|
-| CX-C1 | Under ETH there is no `2^{o(c)}·poly(N)` algorithm for MFE in the models of CX-T2 (`c` = number of strands) | follows from CX-T1 **if** 4-PARTITION with polynomially bounded numbers has no `2^{o(n)}` algorithm under ETH; that chain is not verified |
+None registered at present.  (CX-C1 of the first checkpoint became the conditional statement CX-T14.)

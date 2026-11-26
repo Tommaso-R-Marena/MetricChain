@@ -240,11 +240,20 @@ What is **not** shown: #P-hardness of the partition function at a *fixed* temper
 
 ## 5. Consequences and what remains
 
-* With `OPEN_PROBLEMS.md` A6 (algorithms whose exponential part depends only on the number of strands):
-  the instances have `c = n + 1` strands, so an algorithm with running time `2^{o(c)}·poly(N)` for MFE in
-  any model satisfying (H0)–(H2) would solve 4-PARTITION with polynomially bounded numbers in time
-  `2^{o(n)}·poly`.  Whether that contradicts the Exponential Time Hypothesis depends on a linear-size
-  chain of reductions to 4-PARTITION, which we have **not** verified ([C] for now).
+* **Corollary 5 [P, conditional on two cited facts not verified by us at the source].**  Unless the
+  Exponential Time Hypothesis fails, no algorithm decides `MFE ≤ k` for models satisfying (H0)–(H2) in time
+  `2^{o(c)}·poly(N)`, `c` the number of strands.
+  *Proof.*  (i) [K, as cited in Demaine et al., DNA 30 (2024), proofs of their Theorem 17 and Lemma 25, which
+  we read; the source — Bansal, Oosterwijk, Vredeveld, van der Zwaan, Algorithmica 76 (2016) — we did not
+  open]: under ETH, 3-DIMENSIONAL MATCHING with `q` elements per class and `O(q)` triples has no `2^{o(q)}`
+  algorithm.  (ii) [K, Garey–Johnson's proof of Theorem 4.3 as summarised in Ducloz–Shalaby–Woods,
+  Appendix B.3, which we read; the book not opened in this session]: a 3DM instance with triple set `T`
+  maps to a 4-PARTITION instance with `4|T|` items and sizes polynomial in `q`.  (iii) Theorem 1 maps that
+  to a system with `c = 4|T| + 1` strands and `N = poly(q)` bases.  An algorithm running in
+  `2^{o(c)}·poly(N)` would decide 3DM in time `2^{o(q)}·poly(q)`.  ∎
+  With `STRANDS_ALGORITHM.md` (`O(N⁴·3^c)` arithmetic operations): the single-exponential dependence on
+  the number of strands is optimal up to the constant in the exponent, under ETH and in the unit-cost
+  model of that algorithm.
 * The instances use `n + 1` different strand *species* in general.  For a bounded number of species the
   problem is expected to be polynomial (A6/C2); the template is essential.
 * The single-strand pseudoknotted half of A1 is not addressed: the nearest-neighbour model of the
