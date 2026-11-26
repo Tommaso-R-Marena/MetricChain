@@ -19,7 +19,10 @@ family at the non-adaptive exponent `a`, with no restart and no range condition 
 its top values decrease to `h` (A4) at the sharp rate `c_*²/j²` (A5), and that at the exponent
 level they bound the level recursion from the first level on, `τ_j ≤ b_j` (A6).  Theorem Z then
 holds for the schedule "envelope levels over the chain on the base bracket" (A7), which as
-a formula improves on every earlier bound from `n ≈ 10⁵` on at `u = 1` (A8).
+a formula improves on every earlier bound from `n ≈ 3·10⁴` on at `u = 1` (A8).  **At extensive
+accuracies the same schedule gives `ln N(n; g·n, δ) ≤ n·θ_hint(g) + O((ln n)²)`** (A9), because at a
+positive accuracy rate its exponent converges to the hinted one geometrically in the
+number of levels.
 
 ## A1. Admissible sequences
 
@@ -214,10 +217,98 @@ claimed for one: 66 cases).  At early levels the outer block chosen by the proxy
 be far from the block with the least certified bound (up to `51` nats): there a design
 should choose by certified bound, which Proposition Z3 allows.
 
-## A9. What is not proved
+## A9. Extensive accuracies: geometric convergence, and a sub-exponential term `O((ln n)²)`
+
+Proposition Z4 gives the type of the `k`-th family at *every* accuracy, so the envelope
+schedule also bounds the cost at an extensive accuracy `x̂ = g·n`: by `n·M_{W_k, b_k}(g)` plus the
+same errors.  At a positive rate `g` the majorant `M_{W_k, b_k}(g)` does not approach `θ_hint(g)` like
+`1/k²` but **geometrically**: the bottleneck of the slope map is at the intercept `B = h`, and
+the lines that matter at the rate `g > 0` have intercepts bounded away from `h`.
+
+*Hypotheses of this section:* (H0), (H1), `θ(e) → 0` as `e → ∞`, and `J` differentiable on `(0, L)` (the
+cube at every slope; the Gaussian pair).  Then `J` is continuous, concave and strictly
+increasing from `J(0) = 0` to `J(L) = h` on `[0, L]`; for `0 ≤ B < h` let `t₁(B) ∈ [0, L)` be the solution of
+`J(t) = B` — the smaller fixed point of `s ↦ Σ(B, s)` (a fixed point `s = Σ(B, s)` is a solution of
+`J(s) = B`: `Σ = t′(1 − s)/(1 − t′)` with `J(t′)/(1 − t′) = B/(1 − s)`, and `s = t′`).  `t₁` is continuous and increasing,
+`t₁(B) → L` as `B → h`, and `θ_hint(g) = sup_t [J(t) − t·g] ≥ B − t₁(B)·g` for every `B < h`.
+
+**Lemma A9 (below `h` the orbits converge geometrically) [P].**  *For `η ∈ (0, h)`, `B ≤ h − η` and `i ≥ 0`:*
+
+    0  ≤  t₁(B) − p_i(B)  ≤  t₁(B)·λ_η^i,        λ_η := hL/(hL + η)  <  1.
+
+*Proof.*  `F(s) := Σ(B, s)` is convex and nondecreasing, `F(0) ≥ 0`, `F(t₁) = t₁`.  So `p_i = F^i(0)` is
+nondecreasing and at most `t₁`, and for `s ≤ t₁`: `t₁ − F(s) = F(t₁) − F(s) ≤ κ·(t₁ − s)` for every subgradient
+`κ` of `F` at `t₁`.  By (Σ4) of `R_REPORT.md`, `κ = θ(e₁)/e₁` is one, with `e₁ = J + (1 − t₁)J′`, `θ(e₁) = J − t₁J′` at
+`t₁ = t₁(B)` (`J = B`, `J′ = J′(t₁)`): `κ = 1 − J′/(B + (1 − t₁)J′)`.  By concavity `J′(t₁) ≥ (h − B)/(L − t₁) ≥ η/L`, and
+`x ↦ x/(B + (1 − t₁)x)` is increasing, so `1 − κ ≥ (η/L)/(h + η/L) = η/(hL + η)`.  ∎
+
+**Lemma A10 (near the bottom the envelope is the image itself) [P].**  *For the envelope
+sequence of A3, `η ∈ (0, h)` and every `k ≥ 1` with `b_k − h < η(1 − L)/L`:  `W_k = Σ(·, W_{k−1}(·))` on `[0, h − η]`.
+Hence, if `k(η)` is the first such `k`, `W_{k(η)+i} ≥ p_{i+1}` on `[0, h − η]` for all `i ≥ 0`.*
+*Proof.*  `H := Σ(·, W_{k−1}(·))` is convex and nondecreasing on `[0, b_k)` (a jointly convex function,
+nondecreasing in its second argument, of a convex function), `H(0) = 0`, and
+`H(h) ≤ Σ(h, p_{k−1}(h)) = p_k(h) ≤ L` ((P2)).  The function enveloped is `f = min(1, H)`: equal to `H` up to
+the point `β` where `H` reaches one, and to one beyond.  Its lower convex envelope is `H` on
+`[0, B_t]` and, on `[B_t, b_k]`, the line through `(b_k, 1)` that supports `H` at `B_t`, where `B_t` is the
+last point whose tangent line has a value at most one at `b_k` (that function is convex,
+below `f`, and every convex minorant of `f` is below it: on `[B_t, b_k]` by the chord).  For
+`B ≤ h − η` the right derivative of `H` is at most `(H(h) − H(B))/(h − B) ≤ L/η`, and the tangent line at `B`
+has at `b_k` the value `[H(B) + H′(B+)(h − B)] + H′(B+)(b_k − h) ≤ H(h) + (L/η)(b_k − h) < 1`.  So `B_t > h − η`.
+The second claim: `W_{k(η)−1} ≥ 0 = p₀`, `Σ` is nondecreasing in the slope, and `b_k` is nonincreasing.  ∎
+
+**Proposition A11 (geometric convergence at a positive accuracy rate) [P].**  *For every `g > 0`
+there are `η > 0` and `k₁` such that for all `k ≥ k₁`*
+
+    θ_hint(g)  ≤  M_{W_k, b_k}(g)  ≤  θ_hint(g) + g·λ_η^{k − k₁}.
+
+*Proof.*  The left inequality: `M_{W_k, b_k} ≥ T_k ≥ θ_hint` (A6; the recursion stays above the hinted
+exponent).  Let `m := θ_hint(g) − (h − L·g)`; `m > 0` because `θ_hint` is convex with `θ_hint(0) = h`,
+`θ_hint′(0) = −L` and `θ_hint″(0) > 0`.  Choose `η` with `(L − t₁(h − η))·g ≤ m/3`, and `k₁ ≥ k(η)` such that `b_k − h ≤ m/3`
+and `g·λ_η^{k − k(η)} ≤ m/3` for `k ≥ k₁` (Proposition A6).  Let `k ≥ k₁`, `i = k − k(η)`.  By Lemmas A9, A10,
+`W_k ≥ p_{i+1} ≥ t₁ − λ_η^{i}` on `[0, h − η]`.  *Lines with `B ≤ h − η`:* `B − W_k(B)g ≤ B − t₁(B)g + gλ_η^i ≤ θ_hint(g) + gλ_η^i`.
+*Lines with `h − η ≤ B ≤ b_k`:* `W_k(B) ≥ W_k(h − η) ≥ t₁(h − η) − λ_η^i`, so
+`B − W_k(B)g ≤ b_k − t₁(h − η)g + gλ_η^i = (h − Lg) + (b_k − h) + (L − t₁(h − η))g + gλ_η^i ≤ h − Lg + m = θ_hint(g)`.
+Finally `λ_η^{k − k(η)} ≤ λ_η^{k − k₁}` because `k(η) ≤ k₁`.  ∎
+
+**Theorem Z″ (extensive accuracies) [P, conditional as Theorem Z′].**  *Fix `u`, `δ` and an accuracy
+rate `g > 0`.  There are `n₀` and `C = C(u, g)` such that for all `n ≥ n₀`*
+
+    ln N(n; g·n, δ)  ≤  n·θ_hint(g) + C·(ln n)².
+
+*Proof.*  The family `𝔉̂_k` of the envelope schedule has, at the accuracy `x̂ = g·n ≥ 𝒳` and the
+dimension `n`, a certified cost of at most `max_{𝔏_k}[n·B − σ·x̂] + Ê_k ≤ n·M_{W_k, b_k}(g) + k·c_Z·ln n + C′ln n`
+(Proposition Z4; §6 of `Z_REPORT.md`).  Take `k = k₁ + ⌈ln(g·n)/ln(1/λ_η)⌉` in Proposition A11: then
+`n·g·λ_η^{k − k₁} ≤ 1` and `k = O(ln n)`.  ∎
+
+Theorem 11.54 of the theory report has `exp(n·θ_hint(g) + o(n))` at extensive accuracies; this is
+`exp(n·θ_hint(g) + O((ln n)²))`, against the hinted lower bound.  The constant grows like `1/g` as
+`g → 0` (`1 − λ_η ≈ η/(hL)`, and `η` of the order of `m ≈ ½θ_hint″(0)g²`… — heuristically the defect is
+`≈ 2θ_hint″(0)·g²·e^{−kg/h}` for `kg/h ≫ 1`, from the profile of `R_REPORT.md` §8a, which would give
+`C ≈ (h/g)·c_Z`); the proof above does not track it.  In between — accuracies `x̂` with
+`1 ≪ x̂ ≪ n` — the same schedule interpolates, heuristically
+`n·θ_hint(x̂/n) + O(min{n^{1/3}(ln n)^{2/3}, (n/x̂)·(ln n)²})`; only the two ends are proved.
+
+*Numerically* (`z5_extensive.py`; cube, `u = 1`; floating point): `k²(M_{W_k, b_k}(g) − θ_hint(g))/c_*²` —
+
+| `k` | `g = 0` | `0.01h` | `0.1h` | `0.5h` | `h` | `0.5ε*` |
+|---|---|---|---|---|---|---|
+| 2 | 1.48 | 1.47 | 1.40 | 1.04 | 0.55 | 0.02 |
+| 5 | 1.12 | 1.07 | 0.59 | 0.10 | 0.017 | `1·10⁻⁴` |
+| 10 | 1.001 | 0.79 | 0.30 | 0.019 | `4·10⁻⁴` | `< 10⁻⁴` |
+| 20 | 0.996 | 0.63 | 0.15 | `4·10⁻⁴` | `< 10⁻⁴` | |
+| 40 | 0.997 | 0.50 | 0.039 | `< 10⁻⁴` | | |
+| 80 | 0.997 | 0.35 | 0.002 | | | |
+
+— constant at `g = 0`, and falling off like `2ζ²e^{−ζ}/(2π²)`, `ζ = kg/h`, at positive rates (at `ζ = 8`:
+`0.0022` predicted by the profile, `0.002` computed).
+
+## A10. What is not proved
 
 * Everything listed in §9 of `Z_REPORT.md`.
 * This addendum is unrefereed.  Its exponent-level statements (A1–A8) are short and
   self-contained given `R_REPORT.md`; the numerical values of the tops are floating point.
 * That the envelope dynamics is the *exact* dynamics of the best convex majorant of `T_k`
   (so that `b_j = τ_j`) is not proved; A6 gives `τ_j ≤ b_j`.
+* In A9 the constant `C(u, g)` is not tracked, the intermediate accuracies are a heuristic,
+  and the matching lower bound at extensive accuracies is the hinted one of the theory
+  report (Theorems 11.25(a), 11.54), not re-derived here.
