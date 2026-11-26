@@ -224,6 +224,18 @@ by the reviewer).  E20a (five generic states on `𝕋³`) and E22 (three states 
 never determined): the reviewer's, not found in print.  E21: on finite product spaces
 weaker than Kahle's theorem; on tori not found.  OB16 is closed at this level.
 
+## 5c. Part VII (data that are not linear in the ensemble)
+
+No search was made.  From memory: the reduction of a linear-fractional programme to a
+linear one is Charnes and Cooper (1962); the NP-hardness of deciding the consistency of
+quadratic data by a reduction from the partition problem is standard in the literature
+on phase and sign retrieval; the uniqueness of the nearest point of a convex set and the
+exposedness of farthest points are textbook facts.  Not searched and not known to us in
+print: the criterion for identification up to an unknown factor (E23(b): Theorem E1 with
+the constant removed from the span), and the two moduli of E25(d) (support linear,
+weights square root) for an ensemble identified by the least length of a mean vector.
+Classification of E23–E26: elementary; formulation for ensembles; obligation OB27.
+
 ## 6. Search log (2026-11-26)
 
 1. "globally rigid graphs M-connected rigidity matroid higher dimensions" — found

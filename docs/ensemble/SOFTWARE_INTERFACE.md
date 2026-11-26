@@ -288,6 +288,44 @@ of use.  For one-body data the exact feasibility test is that division's ratio t
 on up-sets holds; a violated bond can break it.  The condition is checkable by
 enumeration for about five sites only — **R1** (E15U is unreviewed).
 
+## 5a. Data that are not means (report Part VII) — **R1: unreviewed**
+
+These cards are for data that are functions of finitely many means.  The statements are
+elementary and have numerical checks, but nobody except their author has read them.
+
+### N1 — Ratios of means; one unknown calibration factor  (Proposition E23)
+
+*Ratios.*  `E_μφ/E_μψ ∈ [y − τ, y + τ]` with `ψ > 0` is the pair of linear constraints
+`E_μ(φ − (y + τ)ψ) ≤ 0 ≤ E_μ(φ − (y − τ)ψ)`: feed them to F1–F4 as they are.
+*A common unknown positive factor on all data.*  Drop the normalisation: the data
+constrain the unnormalised measure.  The ensemble is determined up to the factor iff its
+features are **linearly** independent on the support and some combination of the
+observables **without a constant term** is non-negative with the support as its zero
+set.  Same linear programme as F1 with the constant removed; ranges of targets by one
+linear-fractional programme.  *Trap (control B8-01):* an ensemble that is identified
+with the factor known can cease to be when it is unknown.
+
+### N2 — The length of a mean vector  (Theorem E25)
+
+*An upper bound* `‖E_μΦ‖ ≤ ρ` is the tolerance constraint of F3 around the data `0`: nothing
+new.  *A lower bound* is a union over unit directions `u` of the linear constraints
+`u·E_μΦ ≥ ρ`: a net of directions with every constraint relaxed by `R·h` (`R = max‖Φ‖`, `h` the
+mesh) gives a certified outer bound; the cost is `(1/h)^{m−1}` linear programmes for a
+vector of `m` means.  *What a length alone identifies:* only at its least or largest
+possible value — there with an explicit linear certificate, a linear modulus for the
+support and, at the least value, only a square-root modulus for the weights (control
+B8-03); in between nothing (control B8-02).
+
+### N3 — Squares of means  (Theorem E26)
+
+`m` data `(E_μφ_i)² = y_i` are a union over `2^m` sign vectors of linear problems; the set of
+values of a target is then a union of up to `2^m` intervals, not an interval.  Deciding
+whether such data are consistent with any ensemble is NP-complete, also when all numbers
+are small.  A tool must
+enumerate the signs (feasible for a handful of such data), or abstain; given the signs,
+everything is F1–F4 and its certificates.  *Trap (control B8-04):* a local fit proves
+neither consistency nor inconsistency.
+
 ## 6. What an algorithm must establish, and whether checking is easier than constructing
 
 **To certify identification** (any space): (1) an observable combination `f` that is
@@ -332,7 +370,9 @@ hence no stability constant.
 | missing observables, restricted designs | covered: every statement is for an arbitrary set of observables; fewest pair correlations: P2 |
 | an observation function known up to a uniform error `δ_i` | **exactly** equivalent to enlarging the tolerance of that datum by `δ_i` (Proposition E17.1(b)): F1–F4 with the nominal functions and the tolerances `τ + δ` are valid for the truth, and nothing smaller is |
 | an observation function with unknown parameters (`φ_θ`) | a certified **outer** bound (Proposition E17.1(c)): the compatible set is a union over `θ`, not convex; if `φ_θ` is Lipschitz in `θ` (constant `L`, uniformly on `X`), F3 on a grid of mesh `h` with every tolerance enlarged by `Lh` contains the exact range and converges to it.  Cost: one LP per grid point — practical for a few parameters only |
-| data that are not linear in the ensemble (ratios or squares of averages, quantities averaged on a time scale) | **not covered.**  The feasible set is not convex; nothing above applies as stated |
+| a ratio of two means with a positive denominator; all data known up to one unknown positive factor | **linear after rewriting** (N1; Proposition E23).  An earlier version of this file listed ratios as not covered: that was wrong |
+| the length of a vector of means; squares of means | N2, N3 (Theorems E25, E26): a union of linear problems over directions or signs; a certified outer bound by a net; NP-complete consistency in general |
+| an average taken on the time scale of a measurement; any datum that is not a function of finitely many means of known functions | **not covered** by anything we have |
 | laws (distributions) of an observable instead of means | Part II: exact laws only; no noise model; R1 |
 | unknown number of conformers | F1–F5 need no such number: they quantify over all ensembles.  A known bound on the number of conformers is a *prior* that can enlarge what is identified (Theorem E18′, R1) — never needed for validity |
 | model misspecification | F3 certifies infeasibility; F2 is model-free.  Class-based statements (H1, F6) are only as good as the class |
@@ -347,7 +387,7 @@ hence no stability constant.
 * P1: no certificate format between the projection certificate and exhaustive
   enumeration (E-T4); the numerical thresholds of §4.4 are conjectural (C2).
 * Proposition E17.1 (correlated noise; imperfect and parametric observation functions)
-  is immediate and unreviewed.
+  is immediate and unreviewed.  Part VII (N1–N3: data that are not means) is unreviewed.
 * Nothing here has had external peer review.
 
 ## 9. Where to find things

@@ -4,8 +4,9 @@ Branch: `research/ensemble-identifiability` (created 2026-11-26 from the theory 
 head `a844b5a`).  This division writes only to this branch.  It reads the other branches
 (`claude/determined-ride-og1u7j`, `research/ubuntu-engineering`,
 `research/scientific-translation`, `research/geometric-inference`,
-`research/biological-complexity`, and — once it exists — `research/structural-biology`, the
-seventh division authorised by the research owner on 2026-11-26) and never merges,
+`research/biological-complexity`, `research/structural-biology` — the seventh division,
+authorised by the research owner on 2026-11-26 — and, once it exists,
+`research/frontier-benchmarks`, the eighth, authorised the same day) and never merges,
 force-pushes or modifies them.
 
 ## Mandate

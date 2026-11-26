@@ -1,9 +1,9 @@
-===== exposedness_checks.py (exit 0, 38 s) =====
+===== exposedness_checks.py (exit 0, 42 s) =====
 T1  characterisation by certificate vs fibre LP: 1500/1500 agree (965 identifiable instances)
 T2  duality gap (max over 400 instances x 4 tolerances): 3.22e-15; kappa finite in 301; max relative |omega(1e-4)/1e-4 - kappa|: 4.13e-15
 T3  sup-min formula for kappa_mu: max relative error 6.50e-15; exact linearity and weight-independence: 4.28e-16 (60 instances)
 PASS
-===== rigidity_checks.py (exit 0, 130 s) =====
+===== rigidity_checks.py (exit 0, 147 s) =====
 R1 rigidity matroids: ok
     K4 in R^2: rank 5, connected = True
     K5 in R^3: rank 9, connected = True
@@ -39,7 +39,7 @@ R9 joint genericity (Example D1): ok
 R10 a shared rigid part (Example D2): ok
     K5 minus an edge (rigidity rank 7 = 2*5 - 3), two conformers sharing a triangle: the exchanged pair has the same law on every measured edge in 200/200; the law of the unmeasured edge differs in 200/200
 PASS
-===== pair_capacity_checks.py (exit 0, 17 s) =====
+===== pair_capacity_checks.py (exit 0, 15 s) =====
 C1 Littlewood-Offord lemma: ok
     7296 coefficient vectors with >= 2 non-zero entries: largest probability 3/4 at c = ('-1', '-1', '-1')
 C2 sign vectors in random spans: ok
@@ -69,7 +69,7 @@ C6 adaptivity: ok
     n = 60, 8 conformers (rank 8): 444 entries read (r n - r(r+1)/2 = 444; all pairs: 1770); reconstruction error 4.4e-16
     two two-conformer ensembles: their pair-correlation matrices differ exactly at [(0, 1)]
 PASS
-===== finite_temperature_checks.py (exit 0, 36 s) =====
+===== finite_temperature_checks.py (exit 0, 37 s) =====
 F1 one-body data, cube (Theorem E15): ok
     n = 3, b = 0.5: max over the class of TV(mu, P_a) - sum_i tau_i = +6.66e-16 (exact, 256 LPs)
     n = 3, b = 1.0: max over the class of TV(mu, P_a) - sum_i tau_i = +4.44e-16 (exact, 256 LPs)
@@ -102,7 +102,7 @@ F7 exact criteria on up-sets (Proposition E15U): ok
     how often (D) fails to decide (C) for random pair-interaction known parts (couplings of both signs): n = 3 (18 up-sets), 2000 random pair models: (C) and (D) differ in 0; (C) holds in 447, of which positively associated 285; n = 4 (166 up-sets), 1000 random pair models: (C) and (D) differ in 0; (C) holds in 103, of which positively associated 34 — rare, and not never (the instance above)
     weak coupling, four sites, eps = 0.02: the sign of min_i sum_j J_ij v_j decides the criterion (C) in 228/228 instances (the bound holds in 57 of them)
 PASS
-===== platform_checks.py (exit 0, 146 s) =====
+===== platform_checks.py (exit 0, 153 s) =====
 P1 matroid of the legs: ok
     d = 2, 3 legs: rank 3, connected = False
     d = 2, 4 legs: rank 3, connected = True
@@ -122,7 +122,7 @@ P4 pose uniqueness, and planar bodies: ok
     a fourth leg singles out the true pose in 100/100; smallest mismatch of the fourth length at another pose of the fibre: 1.07e-03
     collinear attachment points on both bodies, six legs, 20 poses: the mirror pose has the same six leg lengths (largest difference 0.0e+00) — no number of legs determines the pose
 PASS
-===== lifted_checks.py (exit 0, 191 s) =====
+===== lifted_checks.py (exit 0, 193 s) =====
 L1 lift isolation on the cube: ok
     n = 10 (45 pair observables): lift-isolated frequency K = 20: 1.000, K = 22: 1.000, K = 33: 0.925, K = 35: 0.950, K = 45: 0.520
     n = 12 (66 pair observables): lift-isolated frequency K = 24: 1.000, K = 33: 1.000, K = 49: 1.000, K = 54: 0.995, K = 66: 0.955
@@ -146,11 +146,26 @@ L7 the permanent certificate: ok
     three states coinciding in two of four angles (Hall condition fails): the permanent vanishes at a configuration at distance 1.32 from every state (value 0.0e+00)
     cube n = 6, all 41664 triples: Hall condition holds in 30720, zero set of the permanent energy = the triple in all of them: True; fails in 10944, the predicted sub-cube is in the zero set in all of them: True (zero set strictly larger than the triple in 960)
 PASS
+===== nonlinear_data_checks.py (exit 0, 45 s) =====
+Q1 ratio data are linear (Proposition E23): ok
+    ratio data: 60 instances; the optimal ensembles of the linear programme satisfy the ratio constraint; 40 instances with tolerance compared with 40 000 sampled ensembles each: no sampled feasible ensemble outside the LP range (largest excess +0.0e+00)
+Q2 the norm of a mean vector (Theorem E25): ok
+    least norm: 40 clouds in dimension 2 and 3; certificate z*.Phi - r^2 >= 0 on every cloud; features affinely independent on its zero set in 40 (then the ensemble of least norm is unique)
+    stability at the least norm (tau = 1e-3, 1e-2): largest (mass off the zero set)/(r tau/gamma) = 1.000; largest |mean - z*|/sqrt(2 r tau + tau^2) = 1.000 (with a face of positive dimension: 1.000 — the square root is attained)
+    largest norm: largest (mass off the farthest configuration)/(tau/gamma') over the clouds = 0.966
+    in between: corners of a square, |E Phi| = 1: the ensembles (1/2, 1/2, 0, 0) and (1/2, 0, 1/2, 0) both have it: True
+Q3 squared means and subset sums (Theorem E26): ok
+    squared means: 60 random instances (3 to 8 integers): consistency of the data, decided by up to 2^(m-1) linear feasibility problems, agrees with the subset-sum table in 60/60 (24 consistent); four fixed instances: True
+Q4 a reverse-convex constraint as a union over directions (Proposition E24): ok
+    lower bound on the norm of a mean vector in the plane, 12 feasible instances: the net of 24 or 96 directions with the certified enlargement never falls below the fine search (1 440 directions); largest overestimate with 96 directions: 0.139
+Q5 data known up to a factor (Proposition E23(b)): ok
+    data known up to a factor: 388 random instances with integer observables (12 with zero data set aside): the direct test (is another ensemble compatible?) and the criterion of E23(b) agree in 388/388 (62 determined up to the factor); the three-point example of the text: True
+PASS
 ===== benchmark_controls.py (exit 0, 1 s) =====
-benchmark controls: 18 instances, 27 verifications, 0 failure(s)
+benchmark controls: 22 instances, 33 verifications, 0 failure(s)
 written: experiments/ensemble/benchmarks/controls_v1.json
 PASS
 ===== check_quotes.py (exit 0) =====
-quoted numbers: 80 entries, 0 failure(s)
+quoted numbers: 87 entries, 0 failure(s)
 PASS
 ALL PASS

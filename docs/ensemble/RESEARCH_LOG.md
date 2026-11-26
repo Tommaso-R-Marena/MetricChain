@@ -5,43 +5,63 @@
 *(Updated at every checkpoint.  A successor should read `HANDOFF.md` first, then this
 section, then `OPEN_OBLIGATIONS.md`.)*
 
-**State after checkpoint 5 (2026-11-26, about 22:45 UTC).**  `ENSEMBLE_REPORT.md` version 3
-with the corrections of §7 items 8–15: Parts I–VI, Theorems E1–E22 (with E2.2, E7′, E15T,
-E15U, E17.1, E18′, E20a, E20′, E20″), Conjectures C1–C3.  **Every Part has had one review**
-(ER1: I–III; the Science division's SCI-REV-0020: II; ER2: IV–V; ER3: VI), all applied.
+**State after the Part VII commit (2026-11-26, about 23:10 UTC).**  `ENSEMBLE_REPORT.md`
+version 3 with the corrections of §7 items 8–16: Parts I–VII, Theorems E1–E26 (with E2.2,
+E7′, E15T, E15U, E17.1, E18′, E20a, E20′, E20″), Conjectures C1–C3.  Parts I–VI have each had
+one review (ER1: I–III; the Science division's SCI-REV-0020: II; ER2: IV–V; ER3: VI), all
+applied.  **Part VII (E23–E26: data that are not linear in the ensemble) has had none.**
 Lean: `proofs/Ensemble/` five modules (twenty-four headline theorems, eight witnesses);
-`scripts/audit_all.sh` passed at checkpoint 4 (`527bf02`; 5145 declarations) and `proofs/` is
-unchanged since.  Numerics: `experiments/ensemble/run_all.py` (seven scripts, then
-`check_quotes.py`).  Software-facing documents: `SOFTWARE_INTERFACE.md`,
-`BENCHMARK_CONTROLS.md` (+ `experiments/ensemble/benchmarks/controls_v1.json`).  Sent:
-ENSEMBLE-MSG-0001 to -0007; ENSEMBLE-RES-0001 to -0006.
+`scripts/audit_all.sh` passed at checkpoint 4 (`527bf02`; 5145 declarations) and the
+committed `proofs/` is unchanged since.  Numerics: `experiments/ensemble/run_all.py` (eight
+scripts, then `check_quotes.py`).  Software-facing documents: `SOFTWARE_INTERFACE.md`
+(a card per result; N1–N3 are the new ones for non-linear data), `BENCHMARK_CONTROLS.md` (families B1–B8, twenty-two instances
+in `experiments/ensemble/benchmarks/controls_v1.json`).  Sent: ENSEMBLE-MSG-0001 to -0008;
+ENSEMBLE-RES-0001 to -0006.
 
-**Standing instructions** of the research owner's supplementary directive are in
-`HANDOFF.md` item 3a.  The seventh division's branch `research/structural-biology` existed
-without any content of its own at 22:27 UTC: read its digest at every synchronisation.
+**In the working tree when this was written, not committed:** a machine check of the
+sufficiency half of Proposition E23(b), `Ensemble.eq_of_homogeneous_certificate` (in
+`proofs/Ensemble/Exposedness.lean`, after `eq_of_exposing_certificate`), with a witness
+`NonVacuity.ensemble_homogeneous_certificate_witness` in `proofs/AxiomAudit.lean`.  Both
+type-check with the standard axioms; `scripts/audit_all.sh` was running on that tree.  If
+they are not in the branch, the statement is in the log entry "After checkpoint 5" below
+and the proof is the proof of `eq_of_exposing_certificate` without the constant.
+
+**Standing instructions** of the research owner's two supplementary directives are in
+`HANDOFF.md` items 3a and 3b (seventh division: Structural Biology; eighth: Frontier
+Benchmarking).  Fetch both of their branches at every synchronisation.  At 23:07 UTC all
+seven other branches had moved (`status/ensemble.md`, synchronisation record): **the
+Structural Biology division's intake report on our work** (its
+`docs/structural_biology/intake/N_ensemble.md`, written at our `8d42f60`) is read and not
+yet answered; six new messages of the older divisions are listed and not yet read.
 
 **Next, in this order.**
-1. **Synchronise** (seven branches).  Answer whatever the Structural Biology division
-   asks; its first questions will show which configuration spaces and data types it
-   means to use (ENSEMBLE-MSG-0006, "Requested response").
-2. **Unreviewed statements** (do not present them as implementable): E15U beyond its
-   main statement, E17.1, E20a, E22, the new constants of E20″ (OB23, OB25, OB26).  A
-   review by a subagent, or a machine check of the layer-cake core of E15U.
-3. **Research under the directive** (task list item "Cycle 5"): (i) data that are not
-   linear in the ensemble — nothing we have covers them; a first theorem on what
-   identification means for quadratic data (order parameters) would be new ground;
-   (ii) certificate formats on product spaces: the Nullstellensatz certificates of
+1. **Finish the machine check** above: audit passed → label the sufficiency of E23(b)
+   [V] in the report, the register, the status and card N1; add to
+   `nonlinear_data_checks.py` a check of the exact-cover construction of E26 (a scratch
+   run agreed with brute force on 60 of 60 instances; it is not in the repository); run
+   `run_all.py`; commit.
+2. **Synchronise** (eight branches).  Answer whatever the Structural Biology and Frontier
+   Benchmarking divisions ask; question E-S5 (which data are means, ratios, lengths,
+   none) is open with Science and Structural Biology.
+3. **Unreviewed statements** (do not present them as implementable): the whole of Part
+   VII; E15U beyond its main statement; E17.1; E20a, E22 and the new constants of E20″
+   (OB23, OB25, OB26, OB27).  An internal review by a subagent (it would be ER4) is the
+   next thing to commission.
+4. **Research under the directives** (task list item "Cycle 5"): (i) beyond functions of
+   finitely many means — the first uncovered case is a datum averaged on the time scale
+   of a measurement, and a noise theory for non-convex compatible sets; (ii) certificate
+   formats on product spaces: the Nullstellensatz certificates of
    Johnston–Lovitz–Vijayaraghavan for lift isolation, a format that also certifies a gap
    (E-T4); (iii) certified lower bounds on the number of conformers; (iv) the torus for
    four angles (twelve states identified in 40 instances; thirteen configuration-dependent)
    and a proof for six states on three angles; (v) thresholds C2, C3 — only with a proof
    idea; more numerics at small `n` are far from the asymptotic regime (§4.2).
-4. Append the four-body rows for `n = 14` to `output_threshold.txt` and §4c.3 if the
+5. Append the four-body rows for `n = 14` to `output_threshold.txt` and §4c.3 if the
    background run finished (its log is in the session scratchpad, not in the repository;
    first row: `K = 280`, face frequency `1.000` on 10 trials, 4 740 s per value of `K`).
-5. Machine checks: E15(c) as a statement about class members (OB13); a torus instance
+6. Machine checks: E15(c) as a statement about class members (OB13); a torus instance
    for the witness of the two-coordinate growth inequality; E12(a).
-6. Re-run `scripts/audit_all.sh` before a checkpoint that changes `proofs/`.
+7. Re-run `scripts/audit_all.sh` before a checkpoint that changes `proofs/`.
 
 ---
 
@@ -428,3 +448,66 @@ most valuable new mathematics of the day came out of the reviews themselves (E15
 ER2's open question; E20a and E22 from ER3).  Next research should go where nothing we
 have applies: data that are not linear in the ensemble.
 
+---
+
+## 2026-11-26 — After checkpoint 5: the eighth division; data that are not linear in the ensemble (Part VII)
+
+**Directive.**  The research owner's second supplementary directive (about 22:40 UTC)
+authorises an eighth division, Frontier Benchmarking (`research/frontier-benchmarks`).
+Our protocol copy recognises eight divisions (`docs/collaboration/README.md`, third
+addendum, with the six rules that bind us); the benchmark controls are marked as public
+development material, not held-out evidence.  Its branch did not exist at 22:44 UTC; it
+was founded at 22:54 UTC and had sent nothing at 23:07 UTC.
+
+**Investigated.**  What remains of Parts I and V when a datum is not a mean.  We took
+the largest class for which the answer is finite-dimensional: data that are functions
+of finitely many means, `y = G(E_μΦ)`.
+
+**Found** (report §4d; all [P], elementary, unreviewed).  E23: ratios and one unknown
+calibration factor are linear; the factor costs exactly the constant in the
+certificate.  E24: in general the loss is the fibre of `G` in the moment body; the
+values of a target form a union of intervals.  E25: the length of a mean vector
+identifies only at its least or largest possible value; at the least value the support
+has a linear modulus and the weights a square-root modulus.  E26: squared means are `2^m`
+linear problems; consistency is NP-complete.
+
+**A mistake of ours, found while writing this.**  ENSEMBLE-MSG-0006 and
+`SOFTWARE_INTERFACE.md` said that ratios of averages "are covered by nothing".  A ratio
+with a positive denominator is a pair of linear constraints (`DEAD_ENDS.md` ED25).
+
+**Self-review before the commit** (there was no reviewer).  Re-reading the Part against
+its proofs found three sentences that said more or less than was proved, corrected
+before publication: (i) "the range of a target is `[inf, sup]` over the fibre" — it is a
+union of intervals and need not be an interval when the fibre is disconnected; (ii)
+"the square-root bound is attained up to the term `τ²`" — it is attained exactly when the
+nearest face is not a point, and the linear bound is attained when the nearest point
+lies inside a facet (not otherwise in general: in a cloud in space whose nearest face
+is an edge it is not); (iii) membership in NP of the consistency problem needs the data
+as rational `√y_i`; and hardness holds in the strong sense, by exact cover by 3-sets
+(scratch test: 60 of 60 instances agree with brute force; to be added to the script).
+
+**Machine check, not yet committed.**  The sufficiency half of E23(b):
+
+    theorem eq_of_homogeneous_certificate (Φ : ι → X → ℝ) (μ ν : X → ℝ)
+        (hμ : IsEnsemble μ) (hν : IsEnsemble ν) (S : Finset X)
+        (hsupp : ∀ x, x ∉ S → μ x = 0) (lam : ι → ℝ)
+        (hzero : ∀ x ∈ S, energy lam Φ x = 0) (hpos : ∀ x, x ∉ S → 0 < energy lam Φ x)
+        (hindep : ∀ h : X → ℝ, (∀ x, x ∉ S → h x = 0) → (∀ i, ∑ x, h x * Φ i x = 0) → ∀ x, h x = 0)
+        (t : ℝ) (hdata : ∀ i, mean ν (Φ i) = t * mean μ (Φ i)) : ν = μ
+
+type-checks with the standard axioms, with a witness on three configurations.  It
+enters `proofs/` after the audit has passed on the tree that contains it.
+
+**Verified.**  `run_all.py` (eight scripts, then `check_quotes.py` with 87 entries): all
+pass; `benchmark_controls.py`: 22 instances, 33 exact verifications.
+
+**Communicated.**  ENSEMBLE-MSG-0008 (all; linked correction of ENSEMBLE-MSG-0006 §5;
+question E-S5 to Science and Structural Biology).
+
+**Reassessment.**  The non-linear data that reduce to linear problems (ratios, a common
+factor) are probably the ones that matter most in practice, and they cost nothing; what
+costs — lengths, squares — costs a search whose size is exponential in the number of
+such data, and for squares provably so.  The class "functions of finitely many means"
+is exhausted as far as structure goes; the next uncovered ground is data that are not
+of that class at all, and noise for non-convex compatible sets.  Part VII is the only
+Part without a review: commission one before building on it.

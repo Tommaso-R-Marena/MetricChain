@@ -253,3 +253,14 @@ the twin lives on a curve that misses the grid.  *Lessons: a parameter count is 
 computation — do it; on a continuous space, look for twins on the zero set of the
 certificate, not on a grid.*
 
+**ED25 ("ratios of averages are covered by nothing" — written, published, and wrong within
+two hours).**  Proposition E17.1 and the first version of `SOFTWARE_INTERFACE.md` listed "a
+ratio or a square of averages" among the data that no statement of ours covers.  For a
+ratio of two means with a positive denominator this is false: multiplying by the
+denominator gives two linear constraints, and the whole linear theory applies; likewise
+an unknown overall calibration factor only removes the normalisation (Proposition E23).
+The sentence had been written as a caution, without trying the first thing one would
+try.  Squares and lengths of means are genuinely different (Theorems E25, E26).  *Lesson:
+a statement of what is not covered is a mathematical claim too; test it before sending
+it to people who will build on it.*
+

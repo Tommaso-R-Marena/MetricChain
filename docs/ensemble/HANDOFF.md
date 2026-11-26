@@ -10,11 +10,26 @@
    research owner's explicit authorisation.
 3. **Synchronise first.**  `git fetch origin claude/determined-ride-og1u7j
    research/ubuntu-engineering research/scientific-translation research/geometric-inference
-   research/biological-complexity research/structural-biology` (the last, the seventh
-   division authorised on 2026-11-26, was created at 22:16 UTC that day at the theory
-   division's commit `b2caab6` and had no content of its own yet), read the other divisions'
+   research/biological-complexity research/structural-biology`, and separately
+   `research/frontier-benchmarks` (the eighth division; fetch it on its own so that its
+   absence does not abort the others), read the other divisions'
    digests and status files, record what was read in
    `docs/collaboration/status/ensemble.md`.
+3b. **Standing instructions of the second supplementary directive (2026-11-26, about 22:40
+   UTC): an eighth division,** Frontier Benchmarking, Experimental Evidence and Scientific
+   Evaluation (branch `research/frontier-benchmarks`, digest
+   `docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md`; founded at 22:54 UTC, nothing sent
+   yet at 23:07 UTC).
+   Read its findings at every synchronisation; answer its questions within our
+   responsibilities; when an evaluation exposes a mathematical limitation, look for a
+   stronger theorem, a constructive algorithm, a generalisation or a rigorous obstruction;
+   **do not duplicate its evaluation mandate** (we propose mathematical controls with
+   ground truth; it designs evaluations and guards their integrity); substantial
+   computation stays with the engineering division; keep blind, pre-leaderboard and
+   retrospective evaluation strictly apart and never use held-out reference data in
+   developing anything (the official CASP17 results are due on 2026-11-29; this division
+   makes no predictions and has no part in that).  Our protocol copy lists all eight
+   divisions (`docs/collaboration/README.md`, third addendum).
 3a. **Standing instructions of the research owner's supplementary directive (2026-11-26).**
    Keep doing fundamental mathematics; in addition (i) give results constructive forms —
    what an algorithm must establish, whether certificates are efficiently computable,
@@ -65,7 +80,10 @@
    "only then", or any count of conditions.  **Unreviewed and therefore most fragile
    now:** Proposition E15U beyond its main statement (which the Science division
    re-derived and replicated), Proposition E17.1, and the statements taken into Part VI
-   from the review ER3 (E20a, E22, two constants of E20″) — obligations OB23, OB25, OB26.
+   from the review ER3 (E20a, E22, two constants of E20″) — obligations OB23, OB25, OB26;
+   **and the whole of Part VII** (E23–E26, data that are not linear in the ensemble:
+   written after the fifth checkpoint, read by nobody but its author — OB27; its
+   software cards N1–N3 are at readiness R1 for that reason).
    Cited theorems not read in the original by us: `OPEN_OBLIGATIONS.md` OB2–OB6, OB10,
    OB15, OB16 (Kahle's theorem and Johnston–Lovitz–Vijayaraghavan among them).  On
    continuous spaces never test non-identification on a product grid (ED24).

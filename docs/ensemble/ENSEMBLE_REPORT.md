@@ -56,6 +56,10 @@ how stably, and with what certificate.**
 | E19 | **Data of even order `≤ 2d` on the cube.**  `K ≤ (1−ε)n^d/d!` random conformers are the ground states of the explicit energy `‖P^⊥ξ_d(x)‖²` and every ensemble on them is determined among all ensembles; pair data determine up to `(1−ε)n²/2` conformers among ensembles **with at most `K` conformers** (generic weights) but nothing beyond `2n` among all; without a prior nothing is determined beyond `(2+ε)·n^{2d−1}/(2d−1)!`; for four-body data the threshold is numerically 2.6–3.5 times the sum-of-squares range, within a few per cent of the known threshold of a Gaussian cloud of the same size.  Worst case (known: Kahle 2010): any `2^{2d} − 1` conformers are determined | (a) K (Baldi–Vershynin 2019), which we re-derived before finding it; (b)–(d) P given K; (e), (f) N; (g) K | synthesis; the probabilistic core is a published theorem (rediscovery on our side); (d) is Cover's capacity bound read through E1 |
 | E20 | **Generic conformers on a variety; torsion angles.**  For a lift into `ℂ^N` whose image has projective codimension `c`, generic ensembles of `K ≤ c` conformers are determined among all ensembles; on the torus `𝕋^r` with multilinear trigonometric data: `K ≤ 2^r − r − 1`, and five generic states on `𝕋³` (E20a).  **Two states on a torus** are determined iff they differ in at least two angles, with an explicit product certificate using pairs of angles only (E20′), with quadratic growth, a stability bound `∫ min(d_p², d_q²) dν ≤ Λτ/c*` and recovery of the weights to order `τ`, all constants explicit (E20″).  **Three states on a torus of two angles are never determined by bilinear data** (E22) | P given K (generalised trisecant lemma; Carathéodory–Toeplitz for E22); E20a P given one computation; E20′, E20″ P, their combinatorial cores V (`twoStateCert_eq_zero_iff`, `twoStateCert_growth_three`, `twoStateCert_growth_two`) | synthesis; E20′, E20″ elementary, new (not found); E20a, E22 and two of the constants of E20″ are the internal review's (ER3) |
 | E21 | **`K` states on a product space: the permanent certificate.**  If every set `I` of at least two states has at least `|I|` coordinates at which its states do not all coincide (for instance: pairwise at least `K` differing coordinates), the permanent of the matrix of coordinate-wise distances to the states vanishes exactly at the states; on a torus the ensemble is then determined by multilinear data of order `K`.  For `K = 2`: E20′.  On finite product spaces this is weaker than a published theorem (Kahle 2010: `2^K − 1` states, no condition) | P; the zero set V (`permCert_eq_zero_iff`, `permCert_zero_set`, via Hall's theorem) | elementary (Hall / Frobenius–König); on tori not found; on finite product spaces superseded, except for the explicit formula |
+| E23 | **Ratios and an unknown scale are linear.**  A ratio of two means with a positive denominator, exact or within a tolerance, is a pair of linear constraints.  Data known up to one unknown positive factor: the ensemble is determined up to the factor iff its features are *linearly* independent on the support and a combination of the observables *without a constant term* is non-negative with the support as zero set — the factor costs exactly the constant function | P (immediate) | elementary; written for the software division; unreviewed |
+| E24 | **Functions of finitely many means: the loss is a fibre.**  For data `y = G(E_μΦ)` the compatible ensembles are a union of convex sets over the fibre of `G` in the moment body; such data never determine more than the means would; a cover of the fibre gives a certified outer bound for the range of any target, at one linear programme per ball | P (immediate) | elementary; unreviewed |
+| E25 | **The length of a mean vector.**  An upper bound on `‖E_μΦ‖` is a convex (tolerance) constraint; a lower bound is a union over directions.  For a moment body of dimension at least two the length determines the mean vector only at its least value, or at its largest with a unique farthest point; in between infinitely many ensembles share it.  The largest length certifies a conformation (mass elsewhere `≤ τ/γ′`); the least length certifies the ensemble on the face nearest to the origin, with a linear modulus for the support (`≤ r_min τ/γ`) and a square-root modulus for the weights (`√(2r_min τ + τ²)`); both bounds are attained | P | elementary; not searched; unreviewed |
+| E26 | **Squared means.**  With `m` data of the form `(E_μφ_i)²` everything is decided by `2^m` linear programmes — and deciding whether the data are consistent with any ensemble is NP-complete, already on `2m` configurations (the partition problem) and in the strong sense (exact cover by 3-sets): the difficulty is the choice of signs, and an answer with its signs is checked in polynomial time | P | elementary; the reductions are the standard ones (sign retrieval is NP-hard); unreviewed |
 
 The thread through the report is one sentence, stated with its two conditions: **on a
 finite configuration space an ensemble is determined by a family of observables exactly
@@ -1794,10 +1798,12 @@ the union over `θ ∈ Θ` with tolerance `τ + Lh`, and the range of a continuo
 that union decreases to its value at tolerance `τ` as `h → 0` (the sets are compact and
 decrease to their intersection; `Θ` and the set of ensembles on a compact `X` are compact).  ∎
 
-What is **not** covered by any statement of this report: data that are not linear in the
-ensemble (a ratio or a square of averages; an average taken on the time scale of the
-measurement).  Then the set of compatible ensembles is not convex even for exactly known
-functions, and neither the duality nor the certificates above apply as stated.
+Data that are not linear in the ensemble are the subject of Part VII (§4d): ratios of
+means and an unknown overall factor turn out to be linear after rewriting; lengths and
+squares of means are not, and there the set of compatible ensembles is not convex.
+(Version 3 as corrected at the fourth checkpoint said here that "a ratio … of averages"
+is covered by nothing; that was wrong for a ratio with a positive denominator.)  An
+average taken on the time scale of a measurement is covered by nothing in this report.
 
 ## 4c. Part VI — Lifted supports: what sum-of-squares certificates reach, and what knowing the number of conformers buys
 
@@ -2414,6 +2420,216 @@ vector, which at the sizes one can enumerate is the exception (§4.2).
 
 ---
 
+## 4d. Part VII — Data that are not linear in the ensemble
+
+Everything above takes the data to be means, `y_i = ∫φ_i dμ`: linear in the ensemble.  The
+research owner's supplementary directive asks what remains when an observation is not of
+that kind — an unknown calibration factor, a ratio of averages, the length of an averaged
+vector, the square of an average.  This Part answers for data that are **functions of
+finitely many means**, `y = G(E_μΦ)`.  It is written for use: each statement says what a
+computation has to do.  *Status:* paper proofs, elementary, **read by nobody but their
+author**; numerical checks in `experiments/ensemble/nonlinear_data_checks.py` (Q1–Q5).
+Nothing here is about a particular instrument: whether a measurement is of one of these
+forms is a modelling question for other divisions.
+
+Throughout `𝒦 = conv Φ(X) ⊂ ℝ^m` is the moment body and `X` is compact (finite in the
+computational statements).
+
+### 4d.1 What costs nothing: ratios and an unknown scale
+
+**Proposition E23 (ratios of means, and data known up to a factor, are linear).**
+(a) *Ratios.*  Let `ψ > 0` on `X`.  For every ensemble,
+`E_μφ/E_μψ ∈ [y − τ, y + τ]` iff `E_μ(φ − (y + τ)ψ) ≤ 0 ≤ E_μ(φ − (y − τ)ψ)`.  So a ratio of two means
+with a positive denominator, known exactly or within a tolerance, is a pair of linear
+constraints, and Parts I and V apply to the observables `φ − (y ± τ)ψ` unchanged
+(conditional populations `μ(A | B) = μ(A ∩ B)/μ(B)` are of this form).
+(b) *An unknown positive factor (finite `X`).*  Let the data be `y = c·E_μΦ` with an unknown
+`c > 0` (one calibration constant for all `m` observables) and `y ≠ 0`.  The ensembles compatible with
+`y` are those with `E_νΦ ∈ (0, ∞)·y`, a convex set.  An ensemble `μ` with support `S` is the only
+one — it is *determined up to the factor* — iff
+ (i) the vectors `Φ(x)`, `x ∈ S`, are **linearly** independent, and
+ (ii) some `f = λ·Φ` **without a constant term** is non-negative on `X` with zero set `S`.
+So the price of an unknown factor is exactly the constant function: it leaves the span
+in which the certificate must be found.  With a tolerance, `|y_i − c·E_νφ_i| ≤ τ_i` for some
+`c > 0`, the compatible set is still convex, and the range of a target is one linear
+programme.
+(c) *A ratio as target.*  The range of `E_να/E_νβ` (`β > 0`) over a set of ensembles given by
+linear constraints is the value of one linear programme (the Charnes–Cooper
+transformation, **[K]**).
+
+**[P]**, immediate.  *Proof.*  (a) Multiply by `E_μψ > 0`.  (b) `ν` is compatible iff
+`E_νΦ = t·E_μΦ` for some `t > 0`, i.e. iff `h = ν − tμ` satisfies `Σ_x h(x)Φ(x) = 0` and `h ≥ 0` off `S`;
+`μ` is determined iff the only such `h` are multiples of `μ`, and since `E_μΦ ≠ 0` this means: the
+cone `{h : Σ hΦ = 0, h ≥ 0 off S}` is `{0}`.  That is the cone of the proof of Theorem E1(a)
+with `span{Φ}` in place of `span{1, Φ}`, and the same separation argument gives (i) and
+(ii).  With a tolerance, put `w = cν`: the constraints are linear in the positive measure
+`w`, the set of `w` is convex, and `ν = w/w(X)` is its image under a projective map, which
+preserves convexity; a target `E_νψ = Σwψ/Σw` is linear-fractional.  ∎
+
+*Example (the factor can destroy identification).*  `X = {a, b, c}`, `Φ(a) = (1, 0)`,
+`Φ(b) = (0, 1)`, `Φ(c) = (1, 1)`.  The ensemble `½δ_a + ½δ_b` has means `(½, ½)` and is determined
+by them (three equations, three unknowns).  Up to a factor it is not: `δ_c` has means
+`(1, 1)`.  The ensemble `δ_a` is determined up to the factor, by the certificate `f = φ_2`.
+
+### 4d.2 The general principle: the loss is a fibre
+
+**Proposition E24 (functions of finitely many means).**  Let the data be `y = G(E_μΦ)` for a
+known map `G` on `𝒦`, and `F_y = {z ∈ 𝒦 : G(z) = y}` (with a tolerance: the set of `z` whose image is
+within the tolerance of `y`).
+(a) The ensembles compatible with the data are `∪_{z∈F_y} {ν : E_νΦ = z}`, a union of convex
+sets.  An ensemble is determined by the data iff `F_y` is the single point `E_μΦ` **and** `μ` is
+determined by the means of `Φ` (Theorem E1).  Data of this kind never determine more than
+the `m` means themselves would.
+(b) The set of values of a target `ψ` over the compatible ensembles is
+`∪_{z∈F_y} [v⁻(z), v⁺(z)]`, where `v⁺(z) = sup{E_νψ : E_νΦ = z}` is concave and `v⁻` convex on `𝒦`
+(the two value functions of the linear problem of Theorem E2(a)).  Its infimum and
+supremum are `inf_{F_y} v⁻` and `sup_{F_y} v⁺`; **it need not be an interval** when the fibre is
+not connected (for squared means, one interval for each choice of signs: Theorem E26).
+(c) *A certified outer bound.*  If `F_y ⊆ ∪_{k≤N} B(z_k, ρ)` for a norm on `ℝ^m`, the set of values
+of every target over the compatible ensembles is contained in the union of the `N`
+intervals of the linear problems with data `z_k` and tolerance `ρ`, each with its dual
+certificates; if every ball meets `F_y` and `X` is finite, that union converges to the
+closure of the exact set as `ρ → 0` (the value functions are continuous on a polytope).
+The cost is one linear programme per ball: it grows exponentially with the dimension of
+the fibre and polynomially with `|X|`.
+
+**[P]**, immediate; (c) is Proposition E17.1(c) in the space of means.
+
+So non-linearity of this kind costs neither new mathematics nor new certificates — it
+costs a search over the fibre of `G`.  What is specific to a given `G` is the shape of that
+fibre.  The two theorems that follow treat the most common case, a Euclidean norm, where
+the fibre is a piece of a sphere.
+
+### 4d.3 The length of a mean vector
+
+**Theorem E25 (the norm of a mean vector as the datum).**  Let the datum be
+`r = ‖E_μΦ‖₂`; put `r_min = min_𝒦‖z‖`, `r_max = max_𝒦‖z‖`, `d = dim 𝒦`.
+(a) *One side is convex.*  `{ν : ‖E_νΦ‖ ≤ ρ}` is convex — it is the tolerance constraint of
+Theorems E2(a) and E17(a) around the data `0` — while
+`{ν : ‖E_νΦ‖ ≥ ρ} = ∪_{‖u‖=1} {ν : u·E_νΦ ≥ ρ}` is a union of half-spaces.  An upper bound on such a
+length costs nothing; a lower bound costs a search over directions.
+(b) *Which values determine the mean vector.*  The set `L_r = {z ∈ 𝒦 : ‖z‖ = r}` is a single
+point for `r = r_min`; consists of exposed points of `𝒦` for `r = r_max`; and **for `d ≥ 2` and
+`r_min < r < r_max` it is infinite.**  So, for `d ≥ 2`, the length determines the mean vector
+iff it is the least possible, or the largest possible with a unique farthest point.
+(c) *The largest length identifies a conformation.*  If `z* = Φ(x*)` is the unique farthest
+point of `𝒦` from the origin and `x*` its only preimage, `δ_{x*}` is the only ensemble with
+`‖E_μΦ‖ = r_max`, and with `γ′ = r_max − sup_{x≠x*}‖Φ(x)‖ > 0` every ensemble with
+`‖E_νΦ‖ ≥ r_max − τ` has `ν(X ∖ {x*}) ≤ τ/γ′`.
+(d) *The least length identifies an ensemble, with two moduli.*  Let `r_min > 0`, `z*` the
+point of `𝒦` nearest to the origin, `f(x) = z*·Φ(x) − r_min²` and `Z = {f = 0}`.  Then `f ≥ 0` on `X`;
+every ensemble with `‖E_μΦ‖ = r_min` has mean `z*` and is carried by `Z`; and it is determined by
+the datum iff it is determined by the means of `Φ` among ensembles on `Z` — in particular
+it is unique if `Φ` is affinely independent on `Z`.  For every ensemble `ν` with
+`‖E_νΦ‖ ≤ r_min + τ`:
+
+    ν(X ∖ Z)  ≤  r_min·τ / γ      (γ = inf_{X∖Z} f) ,        ‖E_νΦ − z*‖  ≤  √(2 r_min τ + τ²) .
+
+The first bound is linear in the error and the second is a square root, and both are
+attained: the second whenever the face `𝒦 ∩ {z : z*·z = r_min²}` contains a point at distance
+`√(2r_min τ + τ²)` from `z*` (so for all small `τ` unless that face is the single point `z*`);
+the first, for finite `X` and all small `τ`, if `𝒦` has interior points and `z*` lies in the
+relative interior of a facet.  **The support is stable with a linear modulus and the
+weights with a square-root modulus.**
+(e) *In between, nothing.*  For `d ≥ 2` and `r_min < r < r_max` infinitely many mean vectors,
+hence infinitely many ensembles, have the datum.  Example: the corners `(±1, ±1)` of a
+square and `r = 1`: the ensembles `½δ_{(1,1)} + ½δ_{(1,−1)}` and `½δ_{(1,1)} + ½δ_{(−1,1)}`.
+
+**[P]**; elementary.  If `r_min = 0` the least length says `E_μΦ = 0`, which is linear data.
+
+*Proof.*  (a) `‖z‖ ≤ ρ` is a convex constraint on `z = E_νΦ`, and `‖z‖ = max_{‖u‖=1} u·z`.
+(b) The nearest point of a closed convex set is unique.  A farthest point `z*` is exposed by
+the functional `z ↦ z*·z`, since `z*·z ≤ ‖z*‖‖z‖ ≤ ‖z*‖²` on `𝒦` with equality only at `z*`.  For
+`r_min < r < r_max` the sets `{‖z‖ < r} ∩ 𝒦` and `{‖z‖ > r} ∩ 𝒦` are non-empty, disjoint and
+relatively open, and their union is `𝒦 ∖ L_r`; a convex set of dimension at least two
+minus finitely many points is connected, so `L_r` is not finite.
+(c) An ensemble with mean `z*` is carried by `Φ^{-1}(z*)` because `z*` is an extreme point.  By
+the triangle inequality `‖E_νΦ‖ ≤ ν(x*)·r_max + (1 − ν(x*))(r_max − γ′)`.
+(d) `z*·(z − z*) ≥ 0` on `𝒦` (projection), which is `f ≥ 0`.  If `‖E_μΦ‖ = r_min` then `E_μΦ = z*` and
+`E_μ f = 0`.  If `‖E_νΦ‖ ≤ r_min + τ`:
+`E_ν f = z*·E_νΦ − r_min² ≤ r_min(r_min + τ) − r_min² = r_min τ`, and
+`‖E_νΦ − z*‖² = ‖E_νΦ‖² − 2z*·E_νΦ + r_min² ≤ (r_min + τ)² − r_min²`.  Sharpness of the second
+bound: a point `z′ ∈ 𝒦` on the supporting hyperplane at distance `δ` from `z*` has
+`‖z′‖² = r_min² + δ²`, which is `(r_min + τ)²` for `δ² = 2r_min τ + τ²`.  Of the first: let `f(x₁) = γ`,
+write `Φ(x₁) = (1 + γ/r_min²)z* + w` with `w ⊥ z*`, and put `ε = r_min τ/γ`; the point
+`z″ = z* − (ε/(1 − ε))w` is in the facet for small `τ`, and an ensemble with mass `ε` at `x₁` and the
+rest on `Z` with mean `z″` has mean `(1 − ε)z″ + εΦ(x₁) = (1 + τ/r_min)z*`, of length `r_min + τ`.
+(e) (b).  ∎
+
+*Reading.*  A length of an averaged vector is the prototype of an order parameter.  The
+theorem says when such a number, alone, is informative about the ensemble: at its two
+extremes, each with an explicit linear certificate and explicit constants — the largest
+value certifies a single conformation, the smallest a unique "most disordered" ensemble
+on the face nearest to the origin — and never in between.  In between it restricts the
+ensemble to a union of half-spaces (a), and what it leaves open can be computed
+(E24(c)), at a cost exponential in `m − 1`.
+
+### 4d.4 Squares of means: where the cost becomes a complexity class
+
+**Theorem E26 (squared means).**  Let the data be `(E_μφ_i)² = y_i`, `i = 1, …, m`, possibly with
+further linear data.
+(a) The compatible ensembles are the union, over the sign vectors `s ∈ {±1}^m`, of the convex
+sets `{ν : E_νφ_i = s_i√y_i for all i}` (and the linear data).  So consistency of the data,
+identification, and the exact range of any target are decided by at most `2^m` linear
+programmes, each of whose answers has a certificate that is checked as in Part I.
+(b) **Deciding whether such data are consistent with any ensemble is NP-complete**
+(rational observables; the data given as the rational numbers `√y_i`, i.e. as `|E_μφ_i|`),
+already for `m + 1` data on `2m` configurations.  It is NP-complete **in the strong sense** —
+with every number of the instance bounded by the number of configurations — so there
+is no pseudo-polynomial algorithm either, unless P = NP.
+(c) Hence, unless P = NP, no polynomial-time procedure decides consistency — and so none
+computes the exact range of a target or describes the compatible ensembles — for
+squared-mean data in general.  The whole difficulty is the choice of the signs: a
+claimed answer *with its signs* is checked in polynomial time.
+
+**[P]**; the reductions in (b) are the standard ones, from the partition problem and from
+exact cover by 3-sets; elementary, and surely known in substance (sign and phase
+retrieval are NP-hard), stated here for ensembles.
+
+*Proof.*  (a) `(E φ_i)² = y_i` iff `E φ_i = ±√y_i`.  (b) Membership in NP: the signs and a
+solution of the linear feasibility problem.  Hardness: given positive integers
+`a_1, …, a_m` with sum `A`, let `X = {1, …, m} × {+, −}`, `φ_i(j, ±) = ±A·[i = j]`, and take the data
+`(E_μφ_i)² = a_i²` for all `i` together with `(E_μ Σ_iφ_i)² = 0`.  If an ensemble has these data,
+`E_μφ_i = s_ia_i` for signs `s_i` and `Σ_i s_ia_i = 0`: the integers split into two parts of equal
+sum.  Conversely, for such signs the ensemble `μ(i, s_i) = a_i/A` has the data.
+*In the strong sense.*  The partition problem is hard only for large integers.  Take
+instead a family `T_1, …, T_n` of 3-element subsets of a set `U` (exact cover by 3-sets: is `U`
+the disjoint union of some of them? — NP-complete with no numbers at all).  On the same
+space `X = {1, …, n} × {+, −}` let `φ_j(k, ±) = ±n·[j = k]` with the data `(E_μφ_j)² = 1`, and for `u ∈ U`
+let `ψ_u = Σ_{j : u∈T_j} φ_j − (2 − deg u)` with the data `(E_μψ_u)² = 0`, where `deg u` is the number
+of sets containing `u`.  The first `n` data force `μ(j, s_j) = 1/n` for signs `s_j` (the `n`
+numbers `μ(j, +) + μ(j, −) ≥ |μ(j, +) − μ(j, −)| = 1/n` sum to one); the others then say
+`Σ_{j∋u} s_j = 2 − deg u`, i.e. exactly one set with `s_j = +1` contains `u`.  Every number in the
+instance is at most `2n`.  ∎
+
+*Numerical checks* **[N]** (`experiments/ensemble/nonlinear_data_checks.py`).  Q1: ratio data
+on 60 random instances — the optimal ensembles of the linear programme satisfy the
+ratio constraint, and on the 40 instances with a tolerance no ensemble among 40 000
+sampled ones that satisfies the ratio constraint lies outside the range computed by
+linear programming.  Q2: 40 random point clouds in the plane and in space whose hull
+misses the origin — the certificate of E25(d) is non-negative on every cloud and the
+features are affinely independent on its zero set in all 40; over ensembles with
+`‖E_νΦ‖ ≤ r_min + τ`, `τ = 10⁻³, 10⁻²`, the largest mass off the zero set is `1.000` of the bound
+`r_min τ/γ` and the largest displacement of the mean is `1.000` of `√(2r_min τ + τ²)` (both
+bounds are attained); at the largest length the largest mass off the farthest
+configuration is `0.966` of `τ/γ′`; the twins of (e).  Q3: the construction of E26(b) on 60
+random lists of 3 to 8 integers — consistency of the data, decided by sign enumeration
+and linear feasibility, agrees with a subset-sum table in 60 of 60 (24 consistent).  Q4:
+E24(c) for a lower bound on the length of a mean vector in the plane — the net of 24 or
+96 directions with the certified enlargement never falls below a fine search over 1 440
+directions (12 instances).  Q5: the criterion of E23(b) against a direct test by linear
+programming (is another ensemble compatible with the data up to a factor?) on 388 random
+instances with integer observables: agreement in 388 of 388 (62 determined up to the
+factor), and the three-point example.
+
+**What this Part does not cover.**  Data that are not functions of finitely many means of
+known functions: an average taken on the time scale of a measurement, a datum that
+depends on the ensemble through a dynamical quantity, a law of a non-linear functional.
+And for the data it does cover it gives no noise theory beyond tolerances: there is no
+analogue of Theorem E17 here, because the set of compatible ensembles is not convex.
+
+---
+
 ## 5. What this says inside the programme
 
 1. **One certificate, two readings.**  The inequality `d(x⋆, y) ≤ E(y) − E(x⋆)` certifies, for
@@ -2473,7 +2689,7 @@ vector, which at the sizes one can enumerate is the exception (§4.2).
 
 *(Items 1–6: version 2, commit `1a067b5`.  Item 7: version 3, commit `32f547a`.  Item 8: commit
 `8d42f60`.  Items 9–12: the fourth checkpoint, commit `527bf02`.  Item 13: commit `d7cbd91`.
-Items 14–15: the fifth checkpoint.)*
+Items 14–15: the fifth checkpoint, commit `2d2054d`.  Item 16: after it.)*
 
 1. **Theorem E11 strengthened and restated** (linked correction of ENSEMBLE-MSG-0002 §1,
    in ENSEMBLE-MSG-0003).  Version 1: "beyond `6.34n` random conformers (equal populations)
@@ -2667,6 +2883,14 @@ Items 14–15: the fifth checkpoint.)*
    * The literature of the checking problem for lifted certificates
      (Johnston–Lovitz–Vijayaraghavan 2023; pointed out by the Geometric Inference
      Division) is cited in §4c.4, and that division's new thresholds in §4c.5.
+16. **Part VII added** (§4d: Propositions E23, E24, Theorems E25, E26), in answer to the
+   research owner's supplementary directive on observation models: data that are
+   functions of finitely many means.  Ratios and an unknown calibration factor are linear;
+   a length of a mean vector identifies only at its extremes, with explicit certificates
+   and moduli; squared means make consistency NP-complete.  Paper proofs, unreviewed;
+   check script `nonlinear_data_checks.py`.  It corrects a sentence of Proposition E17.1
+   and of `SOFTWARE_INTERFACE.md`, which listed "a ratio … of averages" among the data
+   that nothing covers: ratios with a positive denominator are covered.
 
 ## 8. Limitations
 

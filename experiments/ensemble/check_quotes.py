@@ -131,6 +131,20 @@ TABLE = [
     ("lit", O, "cube n = 6, all 41664 triples: Hall condition holds in 30720", "all 41 664 triples of states: the Hall condition holds for 30 720"),
     ("lit", O, "fails in 10944", "it fails for 10 944"),
     ("lit", O, "(zero set strictly larger than the triple in 960)", "strictly larger than the triple for 960"),
+    # ---- Part VII (nonlinear_data_checks.py)
+    ("lit", O, "ratio data: 60 instances; the optimal ensembles of the linear programme satisfy the ratio constraint; 40 instances "
+               "with tolerance compared with 40 000 sampled ensembles each",
+     "Q1: ratio data on 60 random instances"),
+    ("lit", O, "least norm: 40 clouds in dimension 2 and 3; certificate z*.Phi - r^2 >= 0 on every cloud; features affinely "
+               "independent on its zero set in 40", "features are affinely independent on its zero set in all 40"),
+    ("lit", O, "largest (mass off the zero set)/(r tau/gamma) = 1.000; largest |mean - z*|/sqrt(2 r tau + tau^2) = 1.000",
+     "the largest mass off the zero set is `1.000` of the bound `r_min τ/γ` and the largest displacement of the mean is `1.000` of"),
+    ("lit", O, "largest (mass off the farthest configuration)/(tau/gamma') over the clouds = 0.966", "configuration is `0.966` of `τ/γ′`"),
+    ("lit", O, "agrees with the subset-sum table in 60/60 (24 consistent)", "agrees with a subset-sum table in 60 of 60 (24 consistent)"),
+    ("lit", O, "12 feasible instances: the net of 24 or 96 directions with the certified enlargement never falls below the fine "
+               "search (1 440 directions)", "directions (12 instances)"),
+    ("lit", O, "agree in 388/388 (62 determined up to the factor); the three-point example of the text: True",
+     "agreement in 388 of 388 (62 determined up to the factor)"),
     # ---- threshold computations (output_threshold.txt)
     ("lit", TH, "K = 24 K/n = 1.09 face frequency = 0.583", "| 22 (24) | — | 1.00 | 0.58 | 0.08 | 0.00 | 0.00 |"),
     ("lit", TH, "K = 22 K/n = 1.10 face frequency = 0.625", "| 20 (40) | — | 1.00 | 0.63 | 0.10 | 0.00 | 0.00 |"),

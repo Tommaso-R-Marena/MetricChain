@@ -163,3 +163,37 @@ reviews, reproduces and benchmarks its implementations, the science division eva
 relevance and assumptions.  Nothing is renamed and no rule changes: that division writes
 only to its branch, everyone reads it, and benchmark execution stays with engineering.
 For software, the ensemble division's entry point is `docs/ensemble/SOFTWARE_INTERFACE.md`.
+
+*Third addendum of the Ensemble division's copy (2026-11-26): eight divisions.*  By a
+further directive of the research owner (received about 22:40 UTC) an eighth independent
+division exists: the **Frontier Benchmarking, Experimental Evidence and Scientific
+Evaluation Division** (branch `research/frontier-benchmarks`, digest
+`docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md`).  The complete table on this copy:
+
+| division | branch (writes only here) | digest | responsibility (the owner's wording, abridged) |
+|---|---|---|---|
+| theory | `claude/determined-ride-og1u7j` | `THEORY_TO_ENGINEERING.md` | foundational mathematics |
+| engineering ("Ubuntu") | `research/ubuntu-engineering` | `ENGINEERING_TO_THEORY.md`, `UPSTREAM_SYNC.md` | independent review of implementations; substantial computation; coordination of Modal |
+| science | `research/scientific-translation` | `SCIENCE_TO_ALL.md` | physical relevance, assumptions, novelty, scientific validity |
+| ensemble (this division) | `research/ensemble-identifiability` | `ENSEMBLE_TO_ALL.md` | foundational mathematics: identifiability and certified inference of ensembles |
+| geometry | `research/geometric-inference` | `GEOMETRY_TO_ALL.md` | foundational mathematics: geometric inference, rigidity, inverse problems |
+| complexity | `research/biological-complexity` | `COMPLEXITY_TO_ALL.md` | foundational mathematics: complexity and algorithmic feasibility |
+| structural biology | `research/structural-biology` | `STRUCTURAL_BIOLOGY_TO_ALL.md` | research software and benchmark specifications |
+| **frontier benchmarks** | `research/frontier-benchmarks` | `FRONTIER_BENCHMARKS_TO_ALL.md` | independent evaluations against the strongest contemporary approaches and appropriately scoped experimental evidence; benchmark integrity; comparative evidence; communication of scientifically consequential deficiencies |
+
+Rules that the directive adds, as they bind this division.  (1) We read the eighth
+division's published findings through this protocol and answer its scientific questions
+within our existing responsibilities.  (2) If its evaluations expose a mathematical
+limitation, we investigate whether it motivates a stronger theorem, a constructive
+algorithm, a generalisation or a rigorous obstruction — and say which.  (3) We do not
+duplicate its evaluation mandate: designing comparative evaluations, keeping benchmarks
+intact, and judging comparative evidence are its work; our synthetic controls
+(`docs/ensemble/BENCHMARK_CONTROLS.md`) are mathematical instances with ground truth,
+offered as material.  (4) Substantial shared computation remains with the engineering
+division.  (5) The distinctions between genuine blind assessment, assessment before a
+public leaderboard, and retrospective evaluation are to be kept strictly; frozen
+predictions, contamination controls and the separation of development from held-out
+evidence are to be respected.  This division produces no structure predictions and holds
+no held-out reference data; if it is ever shown such data it will not use them in
+developing statements or controls.  (6) No additional repositories, no change to another
+division's branch, no enlarged spending limit, no work outside the research charter.

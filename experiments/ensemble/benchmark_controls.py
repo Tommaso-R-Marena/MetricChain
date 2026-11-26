@@ -456,6 +456,80 @@ add(id="B7-01", family="noise", title="Two configurations, one noisy mean",
     source="section 4b (E17); check F5")
 
 # ================================================================================================================
+# B8  data that are not linear in the ensemble (report Part VII)
+# ================================================================================================================
+Phi_abc2 = [[Fr(1), Fr(0), Fr(1)], [Fr(0), Fr(1), Fr(1)]]                     # configurations a, b, c
+mu_ab = {0: Fr(1, 2), 1: Fr(1, 2)}; mu_c = {2: Fr(1)}
+za, zc = means(Phi_abc2, mu_ab), means(Phi_abc2, mu_c)
+cert_ab = exact_certificate(Phi_abc2, [0, 1])
+check("B8-01 with the factor known the ensemble is determined (exact certificate with a constant term, affine independence)",
+      cert_ab is not None and affinely_independent(Phi_abc2, [0, 1]))
+check("B8-01 no certificate without a constant term: lambda.Phi vanishing at a and b is identically zero",
+      sympy.Matrix([[Phi_abc2[i][x] for i in range(2)] for x in (0, 1)]).rank() == 2)
+check("B8-01 the twin has proportional means", zc[0] * za[1] == zc[1] * za[0] and zc != za)
+add(id="B8-01", family="non-linear data", title="An unknown calibration factor destroys an identification",
+    space={"type": "finite", "description": "three configurations a, b, c", "states": ["a", "b", "c"]},
+    observables={"names": ["phi1", "phi2"], "table": [frac_list(r) for r in Phi_abc2]},
+    ensemble={"support": ["a", "b"], "weights": ["1/2", "1/2"]}, data=frac_list(za),
+    question="(a) Is the ensemble determined by its two means?  (b) Is it determined if the two data are known only up to one common unknown positive factor?",
+    expected={"(a)": {"verdict": "IDENTIFIED", "reason": "nu(a) + nu(c) = 1/2, nu(b) + nu(c) = 1/2 and total mass 1 force nu(c) = 0"},
+              "(b)": {"verdict": "NOT_IDENTIFIED", "twin": {"support": ["c"], "weights": ["1"], "its means": frac_list(zc)},
+                      "reason": "no combination of phi1, phi2 WITHOUT a constant term is non-negative with zero set {a, b}"},
+              "control": "the ensemble concentrated on a IS determined up to the factor (certificate phi2)"},
+    why="With an unknown factor the constant function leaves the span in which a certificate must be found (Proposition E23(b)).",
+    source="section 4d.1 (E23); check Q5")
+
+sq_corners = [(1, 1), (1, -1), (-1, 1), (-1, -1)]
+m1 = (Fr(1, 2) * 1 + Fr(1, 2) * 1, Fr(1, 2) * 1 + Fr(1, 2) * (-1)); m2 = (Fr(1, 2) * 1 + Fr(1, 2) * (-1), Fr(1, 2) * 1 + Fr(1, 2) * 1)
+check("B8-02 both ensembles have a mean vector of length one", m1[0] ** 2 + m1[1] ** 2 == 1 and m2[0] ** 2 + m2[1] ** 2 == 1 and m1 != m2)
+add(id="B8-02", family="non-linear data", title="The length of a mean vector between its extremes determines nothing",
+    space={"type": "finite", "description": "the four corners (+-1, +-1) of a square; the observable is the position vector", "states": ["(1,1)", "(1,-1)", "(-1,1)", "(-1,-1)"]},
+    observables={"names": ["the length |E Phi| of the mean position"]},
+    ensemble={"support": ["(1,1)", "(1,-1)"], "weights": ["1/2", "1/2"]}, data={"length of the mean vector": "1"},
+    question="Is the ensemble determined by the length of its mean vector?  (Lengths range from 0 to sqrt 2.)",
+    expected={"verdict": "NOT_IDENTIFIED", "twin": {"support": ["(1,1)", "(-1,1)"], "weights": ["1/2", "1/2"]},
+              "what_is_determined": "at length sqrt 2 a single corner (up to the symmetry of the square: four ensembles have it); at length 0 only that the mean vanishes",
+              "remark": "for a moment body of dimension at least two a length strictly between the least and the largest is shared by infinitely many mean vectors"},
+    why="Theorem E25(b), (e).", source="section 4d.3 (E25); check Q2")
+
+P8 = [(Fr(1), Fr(0)), (Fr(0), Fr(1)), (Fr(2), Fr(2)), (Fr(3), Fr(1))]          # the hull misses the origin; nearest point (1/2, 1/2)
+zs8 = (Fr(1, 2), Fr(1, 2)); r2 = zs8[0] ** 2 + zs8[1] ** 2
+f8 = [zs8[0] * p[0] + zs8[1] * p[1] - r2 for p in P8]
+check("B8-03 certificate of the least length", f8[0] == 0 and f8[1] == 0 and all(v > 0 for v in f8[2:]))
+add(id="B8-03", family="non-linear data", title="The least possible length of a mean vector identifies an ensemble",
+    space={"type": "finite", "description": "four points of the plane: (1,0), (0,1), (2,2), (3,1)", "states": ["(1,0)", "(0,1)", "(2,2)", "(3,1)"]},
+    observables={"names": ["the length |E Phi| of the mean position"]},
+    ensemble={"support": ["(1,0)", "(0,1)"], "weights": ["1/2", "1/2"]}, data={"squared length of the mean vector": fr(r2)},
+    question="(a) Is the ensemble determined by the length of its mean vector?  (b) If the length is known within tau, how much mass can be on the other two points, and how far can the weights move?",
+    expected={"verdict": "IDENTIFIED", "certificate": {"f": "z*.Phi(x) - |z*|^2 with z* = (1/2, 1/2)", "values at the four points": frac_list(f8),
+              "gamma": fr(min(f8[2:]))},
+              "stability": {"mass off the support": "at most r tau / gamma with r = sqrt(1/2), gamma = 3/2",
+                            "weights": "the mean moves by at most sqrt(2 r tau + tau^2): a SQUARE ROOT of the error, attained along the segment between the two support points"}},
+    why="The length is at its minimum over all ensembles; Theorem E25(d).", source="section 4d.3 (E25); check Q2")
+
+def partition_signs(a):
+    for s in itertools.product((1, -1), repeat=len(a) - 1):
+        s = (1,) + s
+        if sum(si * ai for si, ai in zip(s, a)) == 0:
+            return s
+    return None
+yes_a, no_a = [3, 1, 1, 2, 2, 1], [5, 4, 2]
+sy = partition_signs(yes_a)
+check("B8-04 consistent instance has a split, inconsistent has none", sy is not None and partition_signs(no_a) is None)
+A_yes = sum(yes_a)
+add(id="B8-04", family="non-linear data", title="Squared means: consistency of the data is a partition problem",
+    space={"type": "finite", "description": "2m configurations (i, +) and (i, -), i = 1..m; observable phi_i equals +A at (i, +), -A at (i, -), 0 elsewhere, A = a_1 + ... + a_m"},
+    observables={"names": ["(E phi_i)^2 for i = 1..m", "(E (phi_1 + ... + phi_m))^2"]},
+    data={"instance 1": {"a": yes_a, "(E phi_i)^2": [v * v for v in yes_a], "(E sum phi_i)^2": 0},
+          "instance 2": {"a": no_a, "(E phi_i)^2": [v * v for v in no_a], "(E sum phi_i)^2": 0}},
+    question="Is there any ensemble with these data?",
+    expected={"instance 1": {"verdict": "CONSISTENT", "signs": list(sy),
+                             "an ensemble": {f"({i + 1},{'+' if sy[i] > 0 else '-'})": f"{yes_a[i]}/{A_yes}" for i in range(len(yes_a))}},
+              "instance 2": {"verdict": "INCONSISTENT", "reason": "5, 4, 2 cannot be split into two parts of equal sum"},
+              "trap": "a local fit of an ensemble to squared data can stall on instance 2 without proving anything; the certified answer enumerates signs (2^m linear programmes) or abstains"},
+    why="Deciding consistency of squared-mean data is NP-complete (Theorem E26).", source="section 4d.4 (E26); check Q3")
+
+# ================================================================================================================
 bad = [d for d, ok in checks if not ok]
 print(f"benchmark controls: {len(controls)} instances, {len(checks)} verifications, {len(bad)} failure(s)")
 for d in bad:

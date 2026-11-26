@@ -1,8 +1,34 @@
 # Status of the Ensemble Identifiability and Certified Inference Division
 
-*Updated 2026-11-26, about 22:45 UTC (fifth checkpoint; see the commit time).  Branch `research/ensemble-identifiability`.*
+*Updated 2026-11-26, about 23:10 UTC (after the fifth checkpoint: Part VII added; see the commit time).  Branch `research/ensemble-identifiability`.*
 
 ## State
+
+**After the fifth checkpoint — data that are not linear in the ensemble** (ENSEMBLE-MSG-0008;
+report §4d = Part VII, §7 item 16; **unreviewed**, obligation OB27).  For data that are
+functions of finitely many means: ratios of means and one unknown calibration factor are
+linear problems (E23: the factor costs exactly the constant in the certificate; an
+ensemble identified with the factor known can cease to be when it is unknown); in
+general the loss is the fibre of the function in the moment body, and the values of a
+target form a union of intervals (E24); the length of a mean vector identifies only at
+its least or largest possible value, with a linear modulus for the support and a
+square-root modulus for the weights, both attained (E25); squared means are `2^m` linear
+problems, and deciding whether such data are consistent with any ensemble is
+NP-complete, also in the strong sense (E26).  A sentence of ENSEMBLE-MSG-0006 and of
+`SOFTWARE_INTERFACE.md` ("ratios … are covered by nothing") was wrong and is corrected
+(`DEAD_ENDS.md` ED25).  Software cards N1–N3 (readiness R1); control family B8
+(twenty-two reference instances, thirty-three exact verifications in all).
+
+**Second supplementary directive of the research owner (received about 22:40 UTC):** an
+eighth division — Frontier Benchmarking, Experimental Evidence and Scientific Evaluation,
+branch `research/frontier-benchmarks`, digest `FRONTIER_BENCHMARKS_TO_ALL.md`.  Our protocol
+copy recognises all eight divisions (`docs/collaboration/README.md`, third addendum, with
+the rules that bind us: read its findings, answer within our responsibilities, turn an
+exposed limitation into a theorem, an algorithm or an obstruction, do not duplicate its
+evaluation mandate, leave substantial computation to engineering, respect blind /
+pre-leaderboard / retrospective distinctions and held-out data).  The branch was founded
+at 22:54 UTC; at 23:07 UTC (`626fd13`) its digest said that nothing had been sent yet.  Our
+benchmark controls are marked as public development material, not held-out evidence.
 
 **Fifth checkpoint** (ENSEMBLE-MSG-0007, ENSEMBLE-RES-0006; report §7 items 14, 15):
 
@@ -125,7 +151,9 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
 | engineering | `research/ubuntu-engineering` | `c683fde` | the change of its protocol copy (seven divisions; how software benchmarks are reviewed before execution); its queue not read |
 | geometry | `research/geometric-inference` | `b0734aa` | GEOMETRY-RES-0005 and GEOMETRY-MSG-0008 in full; GEOMETRY-MSG-0006 §1 and GEOMETRY-MSG-0007 §2 in full; GEOMETRY-RES-0006 header only; its report only through these messages |
 | complexity | `research/biological-complexity` | `75266b2` | COMPLEXITY-RES-0003, -0007, -0008 in full; COMPLEXITY-MSG-0004 where it names us; COMPLEXITY-MSG-0005 (its orientation for the new division) header only |
-| structural biology | `research/structural-biology` | `b2caab6` (the theory division's commit at which the branch was created) | absent at 22:00 UTC; present at 22:16 and 22:27 UTC with no commit of its own and no `STRUCTURAL_BIOLOGY_TO_ALL.md`; nothing to read yet |
+| structural biology | `research/structural-biology` | `aec72df` | its first checkpoint (23:07 UTC).  Read in full: `STRUCTURAL_BIOLOGY_TO_ALL.md`; STRUCTBIO-MSG-0002 (its maturity statement to the Frontier division); **its intake report on our work** (`docs/structural_biology/intake/N_ensemble.md`, written at our `8d42f60` — before our fourth and fifth checkpoints, the reviews ER2 and ER3 and ENSEMBLE-MSG-0006) and the entries A15, A16 of its theorem-to-software register (capability C3, "ensemble partial identification", planned, not started).  STRUCTBIO-MSG-0001 only where it names us; STRUCTBIO-REQ-0001 to -0003 (to engineering, science, theory) by their subjects in the digest.  **To be answered** (ENSEMBLE-RES-0007): what has changed in the statements it registered, its table of data types, its prior-art observation |
+| frontier benchmarks | `research/frontier-benchmarks` | `626fd13` | founded at 22:54 UTC on the theory division's `b2caab6`.  Read in full: `FRONTIER_BENCHMARKS_TO_ALL.md` (nothing sent yet) and `status/frontier-benchmarks.md` (checkpoint 0: scaffolding; a CASP17 feasibility assessment and evaluation-integrity tooling in progress; no result claimed).  Its protocol copy and code not read |
+| *all five older branches moved between 22:27 and 23:07 UTC* | | theory `07cde81`, engineering `640cd9c`, science `169c6b1`, geometry `d3375f7`, complexity `48412d8` | **listed, not yet read** at the time of this commit: THY-MSG-0019, -0020; SCI-REV-0024; GEOMETRY-MSG-0009 (cites our messages), GEOMETRY-RES-0007; COMPLEXITY-REV-0005; the engineering protocol copy.  The rows above describe what was read at the earlier heads |
 
 ## Verified state at the head of the branch
 
@@ -141,9 +169,10 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
   re-run after the last edits of the documents.  Files of other divisions changed here:
   only `proofs/AxiomAudit.lean` (imports, `#print axioms` lines and witnesses appended) and
   `docs/collaboration/README.md` (an addendum).
-* Numerics: `python3 experiments/ensemble/run_all.py` — seven scripts (the last regenerates
-  and verifies the benchmark controls), then `check_quotes.py` (every number quoted in a
-  "Numerical check" passage of the report is the one in the stored output): all pass
+* Numerics: `python3 experiments/ensemble/run_all.py` — eight scripts (the seventh,
+  `nonlinear_data_checks.py`, is new; the last regenerates and verifies the benchmark
+  controls), then `check_quotes.py` (every number quoted in a "Numerical check" passage of
+  the report is the one in the stored output; 87 entries): all pass
   (`experiments/ensemble/output.txt`).  Threshold computations and the degree-2 table:
   `output_threshold.txt`.  `proofs/` is unchanged since the audit of the fourth checkpoint.
 
@@ -156,6 +185,7 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
 | Parts IV, V, E7′, E2.2, E2.3, §4.4 (version 2) | internal adversarial review ER2 (same kind): no critical defect; four major findings — among them a false converse in E15T — and twelve minor, **all applied**; E15 replicated by the Science division with its own code (SCI-RES-0032) |
 | Proposition E15U | main statement re-derived and replicated by the Science division (SCI-RES-0038); the other three characterisations and the consequences **read by nobody but the author** |
 | Proposition E17.1 (observation models) | immediate; **read by nobody but the author** |
+| Part VII (E23–E26; data not linear in the ensemble) | paper proofs, elementary; numerical checks Q1–Q5; **read by nobody but the author** (OB27); no prior-art search |
 | Part VI (version 3; E18–E21) | internal adversarial review ER3: no numbered statement false; two major and nine minor findings, **all applied**; five cited sources read in the original by the reviewer.  The statements taken from the review (E20a, E22, two constants of E20″) were re-derived by us and **read by nobody else** |
 | prior art | `PRIOR_ART.md`: first-checkpoint searches; the sources of ER1 and ER2 with the level at which each was read; two searches for E15U; Part VI: two cited theorems read in the sources, the rest unsearched (OB16) |
 
@@ -175,4 +205,4 @@ bound (COMPLEXITY-RES-0003, -0007, -0008).  See `ENSEMBLE_TO_ALL.md`.
 No shared Modal computation requested or used.  Local computation only (several
 CPU-hours in total, most of it the exact threshold decisions of §4.4 and §4c.3; one such
 run, four-body data at `n = 14`, is still in progress on one core).  Three internal
-reviews by subagents of this division (ER1, ER2 reported; ER3 running).
+reviews by subagents of this division (ER1, ER2, ER3: all reported and applied).

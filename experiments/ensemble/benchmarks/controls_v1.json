@@ -2104,6 +2104,260 @@
    },
    "why": "Theorem E17: the dual vector of the identified interval is a near-minimax estimator; lower constant sqrt(E sech^2(1+Z))/2.",
    "source": "section 4b (E17); check F5"
+  },
+  {
+   "id": "B8-01",
+   "family": "non-linear data",
+   "title": "An unknown calibration factor destroys an identification",
+   "space": {
+    "type": "finite",
+    "description": "three configurations a, b, c",
+    "states": [
+     "a",
+     "b",
+     "c"
+    ]
+   },
+   "observables": {
+    "names": [
+     "phi1",
+     "phi2"
+    ],
+    "table": [
+     [
+      "1",
+      "0",
+      "1"
+     ],
+     [
+      "0",
+      "1",
+      "1"
+     ]
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "a",
+     "b"
+    ],
+    "weights": [
+     "1/2",
+     "1/2"
+    ]
+   },
+   "data": [
+    "1/2",
+    "1/2"
+   ],
+   "question": "(a) Is the ensemble determined by its two means?  (b) Is it determined if the two data are known only up to one common unknown positive factor?",
+   "expected": {
+    "(a)": {
+     "verdict": "IDENTIFIED",
+     "reason": "nu(a) + nu(c) = 1/2, nu(b) + nu(c) = 1/2 and total mass 1 force nu(c) = 0"
+    },
+    "(b)": {
+     "verdict": "NOT_IDENTIFIED",
+     "twin": {
+      "support": [
+       "c"
+      ],
+      "weights": [
+       "1"
+      ],
+      "its means": [
+       "1",
+       "1"
+      ]
+     },
+     "reason": "no combination of phi1, phi2 WITHOUT a constant term is non-negative with zero set {a, b}"
+    },
+    "control": "the ensemble concentrated on a IS determined up to the factor (certificate phi2)"
+   },
+   "why": "With an unknown factor the constant function leaves the span in which a certificate must be found (Proposition E23(b)).",
+   "source": "section 4d.1 (E23); check Q5"
+  },
+  {
+   "id": "B8-02",
+   "family": "non-linear data",
+   "title": "The length of a mean vector between its extremes determines nothing",
+   "space": {
+    "type": "finite",
+    "description": "the four corners (+-1, +-1) of a square; the observable is the position vector",
+    "states": [
+     "(1,1)",
+     "(1,-1)",
+     "(-1,1)",
+     "(-1,-1)"
+    ]
+   },
+   "observables": {
+    "names": [
+     "the length |E Phi| of the mean position"
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "(1,1)",
+     "(1,-1)"
+    ],
+    "weights": [
+     "1/2",
+     "1/2"
+    ]
+   },
+   "data": {
+    "length of the mean vector": "1"
+   },
+   "question": "Is the ensemble determined by the length of its mean vector?  (Lengths range from 0 to sqrt 2.)",
+   "expected": {
+    "verdict": "NOT_IDENTIFIED",
+    "twin": {
+     "support": [
+      "(1,1)",
+      "(-1,1)"
+     ],
+     "weights": [
+      "1/2",
+      "1/2"
+     ]
+    },
+    "what_is_determined": "at length sqrt 2 a single corner (up to the symmetry of the square: four ensembles have it); at length 0 only that the mean vanishes",
+    "remark": "for a moment body of dimension at least two a length strictly between the least and the largest is shared by infinitely many mean vectors"
+   },
+   "why": "Theorem E25(b), (e).",
+   "source": "section 4d.3 (E25); check Q2"
+  },
+  {
+   "id": "B8-03",
+   "family": "non-linear data",
+   "title": "The least possible length of a mean vector identifies an ensemble",
+   "space": {
+    "type": "finite",
+    "description": "four points of the plane: (1,0), (0,1), (2,2), (3,1)",
+    "states": [
+     "(1,0)",
+     "(0,1)",
+     "(2,2)",
+     "(3,1)"
+    ]
+   },
+   "observables": {
+    "names": [
+     "the length |E Phi| of the mean position"
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "(1,0)",
+     "(0,1)"
+    ],
+    "weights": [
+     "1/2",
+     "1/2"
+    ]
+   },
+   "data": {
+    "squared length of the mean vector": "1/2"
+   },
+   "question": "(a) Is the ensemble determined by the length of its mean vector?  (b) If the length is known within tau, how much mass can be on the other two points, and how far can the weights move?",
+   "expected": {
+    "verdict": "IDENTIFIED",
+    "certificate": {
+     "f": "z*.Phi(x) - |z*|^2 with z* = (1/2, 1/2)",
+     "values at the four points": [
+      "0",
+      "0",
+      "3/2",
+      "3/2"
+     ],
+     "gamma": "3/2"
+    },
+    "stability": {
+     "mass off the support": "at most r tau / gamma with r = sqrt(1/2), gamma = 3/2",
+     "weights": "the mean moves by at most sqrt(2 r tau + tau^2): a SQUARE ROOT of the error, attained along the segment between the two support points"
+    }
+   },
+   "why": "The length is at its minimum over all ensembles; Theorem E25(d).",
+   "source": "section 4d.3 (E25); check Q2"
+  },
+  {
+   "id": "B8-04",
+   "family": "non-linear data",
+   "title": "Squared means: consistency of the data is a partition problem",
+   "space": {
+    "type": "finite",
+    "description": "2m configurations (i, +) and (i, -), i = 1..m; observable phi_i equals +A at (i, +), -A at (i, -), 0 elsewhere, A = a_1 + ... + a_m"
+   },
+   "observables": {
+    "names": [
+     "(E phi_i)^2 for i = 1..m",
+     "(E (phi_1 + ... + phi_m))^2"
+    ]
+   },
+   "data": {
+    "instance 1": {
+     "a": [
+      3,
+      1,
+      1,
+      2,
+      2,
+      1
+     ],
+     "(E phi_i)^2": [
+      9,
+      1,
+      1,
+      4,
+      4,
+      1
+     ],
+     "(E sum phi_i)^2": 0
+    },
+    "instance 2": {
+     "a": [
+      5,
+      4,
+      2
+     ],
+     "(E phi_i)^2": [
+      25,
+      16,
+      4
+     ],
+     "(E sum phi_i)^2": 0
+    }
+   },
+   "question": "Is there any ensemble with these data?",
+   "expected": {
+    "instance 1": {
+     "verdict": "CONSISTENT",
+     "signs": [
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1
+     ],
+     "an ensemble": {
+      "(1,+)": "3/10",
+      "(2,+)": "1/10",
+      "(3,+)": "1/10",
+      "(4,-)": "2/10",
+      "(5,-)": "2/10",
+      "(6,-)": "1/10"
+     }
+    },
+    "instance 2": {
+     "verdict": "INCONSISTENT",
+     "reason": "5, 4, 2 cannot be split into two parts of equal sum"
+    },
+    "trap": "a local fit of an ensemble to squared data can stall on instance 2 without proving anything; the certified answer enumerates signs (2^m linear programmes) or abstains"
+   },
+   "why": "Deciding consistency of squared-mean data is NP-complete (Theorem E26).",
+   "source": "section 4d.4 (E26); check Q3"
   }
  ]
 }

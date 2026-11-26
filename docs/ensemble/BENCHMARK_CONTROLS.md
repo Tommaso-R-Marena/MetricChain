@@ -2,10 +2,20 @@
 
 *Proposed by the Ensemble division to the Structural & Computational Biology, Software
 Development and Applications Division (which implements), to the engineering division
-(which reproduces and benchmarks) and to the science division (which judges relevance).
-This is a specification with reference instances.  **It is not a benchmark harness**:
-running tools against it, timing and scoring them is the engineering division's work, and
-we do not build a system of our own for that.*
+(which reproduces and benchmarks), to the science division (which judges relevance) and
+to the Frontier Benchmarking, Experimental Evidence and Scientific Evaluation Division
+(which designs independent evaluations and guards their integrity).  This is a
+specification with reference instances.  **It is not a benchmark harness and not an
+evaluation**: running tools against it, timing and scoring them is the engineering
+division's work; deciding what a fair comparison is, which instances are held out, and
+what the evidence shows is the Frontier Benchmarking division's.  We build no system of
+our own for either.*
+
+*On contamination.*  Everything in this file and in the reference file is public
+development material: the instances and their answers are in the repository.  They must
+not be counted as held-out evidence.  The constructions of §3 take a seed or free
+parameters, so an evaluator can generate fresh instances with known ground truth that
+appear in no repository; we will not look at such instances.
 
 Every instance is a mathematical object — a configuration space, a set of observables, an
 ensemble, the data it produces — with a verdict that is a theorem or an exact
@@ -13,7 +23,7 @@ computation.  None is a model of a molecule or of an instrument.
 
 ## 1. What the controls are for
 
-A tool that infers an ensemble from averaged data can fail in five ways that ordinary
+A tool that infers an ensemble from averaged data can fail in several ways that ordinary
 accuracy tests do not see.  Each family below is built to catch one.
 
 | family | the failure it catches | a sound tool must |
@@ -25,12 +35,13 @@ accuracy tests do not see.  Each family below is built to catch one.
 | **B5** partial identification | having nothing to say when identification fails | return the exact range of the quantity asked for, with a dual certificate for each end |
 | **B6** a hypothesis that must be checked | applying a bound outside its hypothesis | check the hypothesis or abstain |
 | **B7** noise | reporting a point estimate without a risk bound | report the bracket for the minimax risk |
+| **B8** non-linear data | treating a calibration factor, a length or a square of an average as if it were a mean | use the right convex or union structure (report Part VII); enumerate signs or abstain; never return a single local fit as the answer |
 
 ## 2. The reference instances
 
 File: `experiments/ensemble/benchmarks/controls_v1.json`, written by
 `experiments/ensemble/benchmark_controls.py`, which verifies every claim before writing it
-(27 verifications: twins by equality of the data in exact rational arithmetic;
+(33 verifications: twins by equality of the data in exact rational arithmetic;
 certificates by evaluating `c + λ·Φ` at every configuration in exact arithmetic after the
 linear programme's output has been rounded inside the exact solution space of the
 equalities; intervals against closed forms).  Numbers in quotes are exact rationals.
@@ -55,6 +66,10 @@ equalities; intervals against closed forms).  Numbers in quotes are exact ration
 | B6-01 | two sites, known part `∝ exp(−½x₁x₂)`; the thermal union bound | the bound is **false** here by `0.1696` | a violated bond can break it (E15T(d)); the hypothesis is E15U |
 | B6-02 | three sites, uniform reference; one-body populations of a polarised member | `BOUND 2σ − 1`, attained | E15(c), equality case |
 | B7-01 | two configurations, one mean with Gaussian noise `σ = ½` | minimax root-mean-square error between `0.335` and `0.5` | E17 |
+| B8-01 | three configurations, two means; the same data known only up to one unknown positive factor | with the factor known: `IDENTIFIED`; with it unknown: `NOT IDENTIFIED` (twin: the third configuration alone) | an unknown factor removes the constant from the span of certificates (E23(b)) |
+| B8-02 | the corners of a square; datum: the length of the mean position, equal to 1 | `NOT IDENTIFIED`; explicit twin | a length strictly between its extremes determines nothing (E25) |
+| B8-03 | four points of the plane; datum: the length of the mean position at its least possible value | `IDENTIFIED`; certificate `z*·Φ − ‖z*‖²`; mass off the support `≤ rτ/γ`, weights only to order `√τ` | E25(d): two moduli |
+| B8-04 | `2m` configurations; `m + 1` squared means built from integers `a_1 … a_m` | `CONSISTENT` for `(3,1,1,2,2,1)` with explicit signs; `INCONSISTENT` for `(5,4,2)` | consistency of squared-mean data is the partition problem: NP-complete (E26) |
 
 ## 3. Families at scale (generators with ground truth)
 
