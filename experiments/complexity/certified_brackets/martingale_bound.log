@@ -1,0 +1,21 @@
+dense weak pairs on few sites (the regime where the site-wise bounds cannot help) (exhaustive enumeration; all numbers are the excess over the first-order value -beta<V>_0):
+   n=6 d=2 weak pairs=6  beta*sum o_e=  2.69 | gap above -beta<V>:  exact= 0.1265  beta^2 Var/2= 0.1354  variance form= 0.2461  exact ranges= 0.3039  column form= 0.7232  Gamma form= 0.8718  total range= 0.9033  ok
+   n=6 d=3 weak pairs=8  beta*sum o_e=  6.86 | gap above -beta<V>:  exact= 0.3335  beta^2 Var/2= 0.3471  variance form= 1.2063  exact ranges= 0.9951  column form= 4.4408  Gamma form= 6.9696  total range= 5.8825  ok
+   n=7 d=3 weak pairs=12  beta*sum o_e=  6.72 | gap above -beta<V>:  exact= 0.1627  beta^2 Var/2= 0.1714  variance form= 0.8469  exact ranges= 0.8854  column form= 3.5793  Gamma form= 5.2783  total range= 5.6490  ok
+   n=8 d=2 weak pairs=14  beta*sum o_e=  8.91 | gap above -beta<V>:  exact= 0.2652  beta^2 Var/2= 0.3215  variance form= 1.2335  exact ranges= 1.5621  column form=10.5958  Gamma form=13.7508  total range= 9.9191  ok
+   n=8 d=3 weak pairs=16  beta*sum o_e=  6.98 | gap above -beta<V>:  exact= 0.1537  beta^2 Var/2= 0.1618  variance form= 0.4791  exact ranges= 0.5856  column form= 5.5160  Gamma form= 7.5006  total range= 6.0946  ok
+   n=9 d=2 weak pairs=20  beta*sum o_e= 15.30 | gap above -beta<V>:  exact= 1.3228  beta^2 Var/2= 1.1334  variance form= 3.5817  exact ranges= 2.4934  column form=10.9934  Gamma form=16.5877  total range=29.2549  ok
+   n=10 d=2 weak pairs=24  beta*sum o_e= 10.03 | gap above -beta<V>:  exact= 0.3723  beta^2 Var/2= 0.3740  variance form= 1.4088  exact ranges= 1.4744  column form= 4.7876  Gamma form= 6.7496  total range=12.5715  ok
+   n=7 d=3 weak pairs=10  beta*sum o_e= 10.52 | gap above -beta<V>:  exact= 0.0225  beta^2 Var/2= 0.0286  variance form= 2.6092  exact ranges= 2.6940  column form=18.1233  Gamma form=22.4761  total range=13.8349  ok
+   24 models: exact <= variance form; exact <= exact-range bound <= column form <= Gamma form; exact <= total-range bound: True
+   medians of (bound gap)/(total-range gap):  exact ranges 0.157,  column form 0.807,  Gamma form 1.026,  variance form 0.123;   median of (exact gap)/(bound gap): exact ranges 0.177, variance form 0.204
+sparse weak pairs on more sites, weakly correlated reference (exhaustive enumeration; all numbers are the excess over the first-order value -beta<V>_0):
+   n=12 d=2 weak pairs=8  beta*sum o_e=  4.19 | gap above -beta<V>:  exact= 0.2589  beta^2 Var/2= 0.2712  variance form= 0.4538  exact ranges= 0.3988  column form= 1.2595  Gamma form= 1.4470  total range= 2.1943  ok
+   n=12 d=2 weak pairs=12  beta*sum o_e=  5.64 | gap above -beta<V>:  exact= 0.3169  beta^2 Var/2= 0.3191  variance form= 0.7044  exact ranges= 0.5860  column form= 1.4767  Gamma form= 1.7310  total range= 3.9832  ok
+   n=13 d=2 weak pairs=10  beta*sum o_e=  7.21 | gap above -beta<V>:  exact= 0.5877  beta^2 Var/2= 0.5735  variance form= 1.0635  exact ranges= 0.8754  column form= 2.6476  Gamma form= 2.9566  total range= 6.5031  ok
+   n=14 d=2 weak pairs=14  beta*sum o_e=  5.69 | gap above -beta<V>:  exact= 0.3119  beta^2 Var/2= 0.3159  variance form= 0.6519  exact ranges= 0.5615  column form= 1.4637  Gamma form= 1.9179  total range= 4.0484  ok
+   n=9 d=3 weak pairs=8  beta*sum o_e=  9.12 | gap above -beta<V>:  exact= 0.4674  beta^2 Var/2= 0.4317  variance form= 2.7125  exact ranges= 2.2428  column form= 5.8851  Gamma form= 8.6913  total range=10.3864  ok
+   n=14 d=2 weak pairs=14  beta*sum o_e=  7.98 | gap above -beta<V>:  exact= 0.4290  beta^2 Var/2= 0.4873  variance form= 1.1047  exact ranges= 0.8925  column form= 2.6848  Gamma form= 3.7738  total range= 7.9536  ok
+   18 models: exact <= variance form; exact <= exact-range bound <= column form <= Gamma form; exact <= total-range bound: True
+   medians of (bound gap)/(total-range gap):  exact ranges 0.113,  column form 0.366,  Gamma form 0.466,  variance form 0.138;   median of (exact gap)/(bound gap): exact ranges 0.499, variance form 0.420
+ALL OK
