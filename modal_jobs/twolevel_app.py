@@ -10,7 +10,7 @@ interrupted run loses nothing that finished.
     modal run modal_jobs/twolevel_app.py::main --job cost
     modal run modal_jobs/twolevel_app.py::main --job claims
     modal run modal_jobs/twolevel_app.py::main --job converge
-    modal run modal_jobs/twolevel_app.py::sampled                 # X-006: literal runs with real fluctuations
+    modal run modal_jobs/twolevel_app.py::sampled                 # X-006b: literal runs with real fluctuations (exact sampler)
 
 Resource bounds: one core and 1 GiB per task, at most ``MAX_CONTAINERS`` containers,
 ``TIMEOUT_S`` seconds per task, no retries.  The task lists and their expected core-seconds
@@ -29,6 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MAX_CONTAINERS = 50          # half of the workspace-wide limit of 100 concurrent containers (COMPUTE_LEDGER, "limits"):
                              # engineering jobs are run one at a time and never fill the workspace
 TIMEOUT_S = 3600
+SAMPLED_TIMEOUT_S = 1500    # literal runs: the longest task of job M-011 took 456 s; the exact sampler costs up to 1.7 times more
 USD_PER_CORE_HOUR = 0.0473 + 1.0 * 0.0080        # one core + 1 GiB (rates of 2026-11-25, docs/engineering/COMPUTE_LEDGER.md)
 
 app = modal.App("metricchain-eng-twolevel")
@@ -57,38 +58,52 @@ def search_task(task: dict) -> dict:
     return run_search.cell(**kw)
 
 
-@app.function(image=image, cpu=1.0, memory=1024, timeout=TIMEOUT_S, max_containers=MAX_CONTAINERS, retries=0)
-def sampled_task(case: dict, runs: int, seed: int) -> dict:
+@app.function(image=image, cpu=1.0, memory=1024, timeout=SAMPLED_TIMEOUT_S, max_containers=MAX_CONTAINERS, retries=0)
+def sampled_task(case: dict, runs: int, seed: int, sampler: str = "exact", meta: dict | None = None) -> dict:
     sys.path.insert(0, "/root/src")
     sys.path.insert(0, "/root/experiments/eng/twolevel")
     import run_sampled
 
-    return run_sampled.run_case(case, runs, seed)
+    return run_sampled.run_case(case, runs, seed, sampler, meta)
 
 
 @app.local_entrypoint()
-def sampled(runs_full: int = 10000, runs_reduced: int = 2000, seed: int = 1, limit: int = 0):
-    """X-006: literal runs with real fluctuations (``run_sampled.cases``); ``runs_full`` runs per case with the
-    theorem's K, ``runs_reduced`` with K scaled down.  ``--limit N`` runs the first N cases only (smoke test)."""
+def sampled(runs_full: int = 5000, runs_reduced: int = 1000, runs_invalid: int = 500, seed: int = 1, limit: int = 0,
+            sampler: str = "exact", tag: str = "x006b", job: str = ""):
+    """X-006b: literal runs with real fluctuations (``run_sampled.cases``); ``runs_full`` runs per case with the
+    theorem's K, ``runs_reduced`` with K scaled down, ``runs_invalid`` with the invalid inner behaviour "dear".
+    ``--limit N`` runs N cases spread over the list (smoke test).  ``--sampler numpy --tag x006`` is the first
+    version (job M-011: 585 cases, numpy's binomial at every block size)."""
+    import subprocess
+
     sys.path.insert(0, str(ROOT / "src"))
     sys.path.insert(0, str(ROOT / "experiments" / "eng" / "twolevel"))
     import run_sampled
 
-    cases = run_sampled.cases()
+    cases = run_sampled.cases(invalid=(sampler == "exact"))
     if limit:
-        cases = cases[:limit]
-    out = ROOT / "experiments" / "eng" / "twolevel" / "results" / ("x006_sampled.jsonl" if not limit else "x006_smoke.jsonl")
+        cases = cases[:: max(1, len(cases) // limit)][:limit]
+    out = ROOT / "experiments" / "eng" / "twolevel" / "results" / (f"{tag}_sampled.jsonl" if not limit else f"{tag}_smoke.jsonl")
     out.parent.mkdir(parents=True, exist_ok=True)
+    key = lambda r: (r["u"], r["n_o"], r["n_i"], r["profile"], r["oracle"], r["k_scale"])       # noqa: E731
     done = set()
     if out.exists():
         for line in out.read_text().splitlines():
-            r = json.loads(line)
-            done.add((r["u"], r["n_o"], r["profile"], r["oracle"], r["k_scale"]))
-    cases = [c for c in cases if (c["u"], c["n_o"], c["profile"], c["oracle"], c["k_scale"]) not in done]
-    args = [(c, runs_full if c["k_scale"] == 1.0 else runs_reduced, seed) for c in cases]
-    expected = sum(a[1] for a in args) * 0.09 / 3600.0            # about 90 ms per run on a Modal core
-    print(f"sampled: {len(args)} cases ({len(done)} already stored), {sum(a[1] for a in args):,} runs; expected {expected:.1f} core-hours = "
-          f"${expected * USD_PER_CORE_HOUR:.2f}; worst case ${len(args) * TIMEOUT_S / 3600.0 * USD_PER_CORE_HOUR:.2f}", flush=True)
+            done.add(key(json.loads(line)))
+    cases = [c for c in cases if key(c) not in done]
+    # provenance stored with every row: the commit of the code that ran, and whether the tree differed from it
+    commit = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+    dirty = bool(subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain", "--", "src", "experiments/eng/twolevel/run_sampled.py",
+                                 "modal_jobs/twolevel_app.py"], capture_output=True, text=True).stdout.strip())
+    meta = dict(commit=commit, tree_dirty=dirty, job=job)
+
+    def runs_of(c: dict) -> int:
+        return runs_invalid if c["oracle"] == "dear" else runs_full if c["k_scale"] == 1.0 else runs_reduced
+    args = [(c, runs_of(c), seed, sampler, meta) for c in cases]
+    expected = sum(a[1] for a in args) * 0.13 / 3600.0            # about 130 ms per run on a Modal core with the exact sampler
+    print(f"sampled[{sampler}] at {commit[:7]}{' (tree differs)' if dirty else ''}: {len(args)} cases ({len(done)} already stored), "
+          f"{sum(a[1] for a in args):,} runs; expected {expected:.1f} core-hours = ${expected * USD_PER_CORE_HOUR:.2f}; "
+          f"worst case ${len(args) * SAMPLED_TIMEOUT_S / 3600.0 * USD_PER_CORE_HOUR:.2f}", flush=True)
     if not args:
         return
     n_done = 0
@@ -97,9 +112,9 @@ def sampled(runs_full: int = 10000, runs_reduced: int = 2000, seed: int = 1, lim
             fh.write(json.dumps(r) + "\n")
             fh.flush()
             n_done += 1
-            print(f"[{n_done}/{len(args)}] u={r['u']} n_o={r['n_o']} {r['profile'][:28]:28s} {r['oracle']:6s} K={r['K']:5d}: closed {r['closed']}/{r['runs']}"
+            print(f"[{n_done}/{len(args)}] u={r['u']} n_o={r['n_o']} n_i={r['n_i']} {r['profile'][:28]:28s} {r['oracle']:6s} K={r['K']:5d}: closed {r['closed']}/{r['runs']}"
                   f" good-event failures {r['good_event_failed']} invalid {r['invalid']} claim violations {r['claim_violations_on_good_event']}"
-                  f" ({r['seconds']:.0f} s)", flush=True)
+                  f" cost bound exceeded {r['cost_bound_exceeded']} ({r['seconds']:.0f} s)", flush=True)
 
 
 @app.local_entrypoint()

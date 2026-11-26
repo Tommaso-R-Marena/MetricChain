@@ -12,6 +12,12 @@ The inner procedures are oracles returning valid brackets ("bottom", "top", "ran
 (block, shell) group share their brackets), so the event (V1) of the proof -- validity of the inner
 brackets -- is true by construction and is NOT tested here.
 
+Two versions of the data exist.  X-006 (job M-011, ``results/x006_sampled.jsonl``) drew the shell counts with
+numpy's binomial sampler, which is biased for blocks of 10^15 points and more (SCI-REV-0007 §4; measured in
+``binomial_bias.py``); ``--sampler numpy`` reproduces it.  X-006b (``results/x006b_sampled.jsonl``) uses the
+exact sampler of ``metricchain_eng.twolevel.sampling`` and adds, at the theorem's K, the invalid inner
+behaviour "dear" (every refined point goes to the last rung) as a test of the cost bound in every run.
+
     python experiments/eng/twolevel/run_sampled.py --case 0 --runs 200
 """
 from __future__ import annotations
@@ -40,6 +46,8 @@ SIZES = ((0.5, 300, 6), (1.0, 120, 6), (2.0, 48, 6))          # (u, n_o, n_i): s
 DESIGN = dict(b=0.5, lam=0.5, eta=0.25, etap=0.1, theta=0.1, delta=0.05, rates=(0.9, 0.45, 0.2))
 K_SCALES = (1.0, 1 / 4, 1 / 16, 1 / 64, 1 / 256)
 ORACLES = ("bottom", "top", "random")
+INVALID_ORACLES = ("dear",)                                   # at the theorem's K only; index 3 in the seed
+DEAR_NI = (6, 20, 40, 80)                                     # inner dimensions for "dear": the last rung costs up to e^55 evaluations
 
 
 def params(u: float, n_o: int, n_i: int) -> Params:
@@ -68,7 +76,8 @@ def profiles(u: float, n_o: int, r_dag: int, tables) -> dict[str, np.ndarray]:
     return out
 
 
-def cases() -> list[dict]:
+def cases(invalid: bool = True) -> list[dict]:
+    """``invalid=False``: the 585 cases of X-006 (job M-011)."""
     out = []
     for (u, n_o, n_i) in SIZES:
         ev = Evaluator(params(u, n_o, n_i))
@@ -76,11 +85,18 @@ def cases() -> list[dict]:
             for oracle in ORACLES:
                 for scale in K_SCALES:
                     out.append(dict(u=u, n_o=n_o, n_i=n_i, profile=name, oracle=oracle, k_scale=scale))
+    if invalid:
+        for (u, n_o, _) in SIZES:
+            names = list(profiles(u, n_o, 1, Evaluator(params(u, n_o, 6)).outer))
+            for n_i in DEAR_NI:
+                for name in names:
+                    out.append(dict(u=u, n_o=n_o, n_i=n_i, profile=name, oracle="dear", k_scale=1.0))
     return out
 
 
-def run_case(case: dict, runs: int, seed: int) -> dict:
+def run_case(case: dict, runs: int, seed: int, sampler: str = "exact", meta: dict | None = None) -> dict:
     t_start = time.time()
+    all_oracles = ORACLES + INVALID_ORACLES
     u, n_o, n_i = case["u"], case["n_o"], case["n_i"]
     P = params(u, n_o, n_i)
     ev = Evaluator(P)
@@ -89,17 +105,25 @@ def run_case(case: dict, runs: int, seed: int) -> dict:
     psi0, t0 = float(F[n_o // 2]), u * n_i
     K = max(4, int(round(C.K * case["k_scale"])))
     full = case["k_scale"] == 1.0
-    mean = ev.run(Instance(radial_law(F, ev.outer), psi0=psi0, t0=t0), "bottom" if case["oracle"] == "random" else case["oracle"])
+    mean = ev.run(Instance(radial_law(F, ev.outer), psi0=psi0, t0=t0), case["oracle"] if case["oracle"] in ("bottom", "top") else "bottom")
     # zlib.crc32, not hash(): the built-in hash of a string changes from process to process
-    rng = np.random.default_rng([seed, int(u * 10), n_o, zlib.crc32(case["profile"].encode()), ORACLES.index(case["oracle"]), K])
+    key = [seed, int(u * 10), n_o, zlib.crc32(case["profile"].encode()), all_oracles.index(case["oracle"]), K]
+    rng = np.random.default_rng(key if n_i == 6 else key + [n_i])           # n_i = 6: the streams of X-006
     out = dict(case, K=K, K_theorem=C.K, runs=runs, seed=seed, closed=0, skipped=0, aborted=0, good_event_failed=0, invalid=0,
                invalid_on_good_event=0, width_violations=0, claim_violations_on_good_event=0, violation_examples=[],
-               trivial_returned=0, last_rung_ties=0,
-               mean_run_lcost=mean.lcost, mean_run_status=mean.status, lCmax=ev.lCmax)
+               trivial_returned=0, last_rung_ties=0, sampler=sampler, M_max=0, abort_reasons={}, cost_bound_exceeded=0,
+               lqueries_max_all=-math.inf,
+               mean_run_lcost=mean.lcost, mean_run_status=mean.status, lCmax=ev.lCmax, **(meta or {}))
     lq = []
     for _ in range(runs):
         R = simulate(P, ev.outer, C, F, psi0, t0, 0.0, case["oracle"], rng, lC=ev.lC, lCmax=ev.lCmax if full else math.inf,
-                     K_override=None if full else K)
+                     K_override=None if full else K, sampler=sampler)
+        out["M_max"] = max(out["M_max"], int(R.M_max))
+        if full:                                             # the cost bound is a statement about every run, aborted or not
+            out["lqueries_max_all"] = max(out["lqueries_max_all"], R.lqueries)
+            out["cost_bound_exceeded"] += R.lqueries > ev.lCmax + 1e-9
+        if R.status.startswith("abort"):
+            out["abort_reasons"][R.status] = out["abort_reasons"].get(R.status, 0) + 1
         if R.status.startswith("skipped"):
             out["skipped"] += 1
             continue
@@ -133,13 +157,14 @@ def main() -> int:
     ap.add_argument("--runs", type=int, default=100)
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--list", action="store_true")
+    ap.add_argument("--sampler", choices=("exact", "numpy"), default="exact")
     args = ap.parse_args()
     cs = cases()
     if args.list:
         print(len(cs), "cases")
         return 0
     for i in (args.case if args.case else range(len(cs))):
-        r = run_case(cs[i], args.runs, args.seed)
+        r = run_case(cs[i], args.runs, args.seed, args.sampler)
         print(json.dumps({k: v for k, v in r.items() if k not in ("violation_examples",)}), flush=True)
     return 0
 

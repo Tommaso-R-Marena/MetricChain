@@ -13,6 +13,13 @@ brackets -- a valid, if correlated, inner behaviour (the device of K_REPORT §6.
 
     "bottom"  [W, W e^x]        "top"  [W e^-x, W]        "random"  [W e^{-t x}, W e^{(1-t) x}], t uniform per call
 
+and one INVALID inner behaviour, for the claim that the cost bound holds in every run (requested by the
+Scientific Discovery Division, SCI-REV-0007 R6-E2):
+
+    "dear"    [s_j e^{-(x+b)/2}, s_j e^{(x-b)/2}] at the level s_j at which the point is refined -- a bracket that
+              ignores W and straddles the level at every rung, so that every refined point is refined down to the
+              last (dearest) rung.  The returned bracket of such a run means nothing; only its cost is examined.
+
 The trivial bracket of rung 0 is [W e^{-t0}, W e^{x_0 - t0}].
 """
 from __future__ import annotations
@@ -23,29 +30,8 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from .alg2l import Constants, Params, logsumexp
+from .sampling import stable_multinomial
 from .tables import LN2, TIE, CubeTables
-
-
-def stable_multinomial(rng: np.random.Generator, size: int, lpmf: np.ndarray) -> np.ndarray:
-    """Counts of ``size`` i.i.d. draws from the law with log-probabilities ``lpmf`` (int64).
-
-    Sequential binomials with conditional probabilities p_j / (p_j + p_{j+1} + ...), the tail sums
-    accumulated in the log domain from the far end, so that cells of mass 1e-18 are sampled
-    correctly (numpy's ``multinomial`` loses them: K_REPORT §6.8, R8 ``r8_numpy_tail.py``)."""
-    ltail = np.logaddexp.accumulate(lpmf[::-1])[::-1]
-    out = np.zeros(len(lpmf), dtype=np.int64)
-    left = int(size)
-    for j in range(len(lpmf)):
-        if left == 0:
-            break
-        if j == len(lpmf) - 1:
-            out[j] = left
-            break
-        pc = math.exp(min(0.0, float(lpmf[j] - ltail[j])))
-        c = int(rng.binomial(left, pc))
-        out[j] = c
-        left -= c
-    return out
 
 
 @dataclass
@@ -71,7 +57,7 @@ class SimResult:
 
 def simulate(P: Params, outer: CubeTables, C: Constants, F: np.ndarray, psi0: float, t0: float, shift: float, oracle: str,
              rng: np.random.Generator, lC: np.ndarray | None = None, lCmax: float = math.inf,
-             K_override: int | None = None, literal_ties: bool = False) -> SimResult:
+             K_override: int | None = None, literal_ties: bool = False, sampler: str = "exact") -> SimResult:
     """One run.  ``F``: radial profile (ln W = shift - F(d)); ``psi0``: reference value; ``t0``: position of W in
     the trivial bracket.  ``K_override`` replaces K (and nu = K nu0, M_dagger, M_bar, cnt) to see where the
     probabilistic events start to fail; the claims are then tested with the constants so changed.
@@ -79,7 +65,10 @@ def simulate(P: Params, outer: CubeTables, C: Constants, F: np.ndarray, psi0: fl
     Ties.  Comparisons of a bracket end with a level treat logarithms within TIE as equal, and a point at the
     last rung is classified by its upper end alone (its bracket has ratio at most e^b, so U > s_j implies
     L > s_j e^-b): this is what exact arithmetic does.  ``literal_ties=True`` switches both off -- plain floating
-    point comparisons and the abort of step 3 -- to exhibit the pitfall recorded by referee R8 (m10)."""
+    point comparisons and the abort of step 3 -- to exhibit the pitfall recorded by referee R8 (m10).
+
+    ``sampler``: "exact" (``sampling.binomial_exact``) or "numpy" (numpy's binomial at every block size -- the
+    first version, biased for blocks of 10^15 points and more; kept to reproduce job M-011)."""
     tie = 0.0 if literal_ties else TIE
     n, n_o, n_i, u, b, lam, eta = P.n, P.n_o, P.n_i, P.u, P.b, P.lam, P.eta
     L = P.L
@@ -121,7 +110,7 @@ def simulate(P: Params, outer: CubeTables, C: Constants, F: np.ndarray, psi0: fl
 
     def draw_block(k: int) -> None:
         size = K if k == 0 else K * 2 ** (k - 1)
-        counts.append(stable_multinomial(rng, size, lpmf))
+        counts.append(stable_multinomial(rng, size, lpmf, sampler))
         rung.append(np.zeros(n_o + 1, dtype=np.int64))
         glL.append(lw - t0)
         glU.append(lw + x0 - t0)
@@ -153,6 +142,10 @@ def simulate(P: Params, outer: CubeTables, C: Constants, F: np.ndarray, psi0: fl
                 rg[d] = l
                 calls[l] += int(cnt[d])
                 x = xs[l]
+                if oracle == "dear":                          # invalid on purpose: straddles the level until the last rung
+                    gl[d] = lsj - (x + b) / 2
+                    gu[d] = lsj + (x - b) / 2
+                    continue
                 t = 0.0 if oracle == "bottom" else 1.0 if oracle == "top" else float(rng.random())
                 gl[d] = max(gl[d], lw[d] - t * x)
                 gu[d] = min(gu[d], lw[d] + (1.0 - t) * x)

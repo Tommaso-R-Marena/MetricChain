@@ -353,3 +353,84 @@ def test_literal_run_with_random_oracle_and_small_K_stays_within_the_width_bound
         assert Rs.status.startswith("closed") and "width" not in Rs.violations
         off_good_event += not Rs.good_event
     assert off_good_event >= 10          # with K = 15 the Chernoff events of the proof do fail
+
+
+# ------------------------------------------------------------------------------------------------ 6. the exact sampler
+from metricchain_eng.twolevel import sampling  # noqa: E402
+
+
+@pytest.mark.parametrize("n,p", [(12, 0.3), (2000, 0.05), (10 ** 8, 3e-7), (2 ** 61, 92 / 2 ** 61)])
+def test_poissonisation_reproduces_the_binomial_law(n, p):
+    """The collision step in its three regimes (dense, thinning with many collisions, thinning with few) against
+    the exact probability mass function: a chi-square test with a fixed seed."""
+    from scipy import stats
+    rng = np.random.default_rng([7, n % 1000003])
+    draws = 20000
+    mu = -math.log1p(-p)
+    x = np.array([sampling._distinct(rng, int(rng.poisson(n * mu)), n) for _ in range(draws)])
+    ks = np.arange(max(0, int(x.min())), int(x.max()) + 1)
+    e = stats.binom.pmf(ks, n, p) * draws
+    keep = e >= 5
+    o = np.array([(x == k).sum() for k in ks], dtype=float)
+    chi2 = float(((o[keep] - e[keep]) ** 2 / e[keep]).sum()) + (o[~keep].sum() - (draws - e[keep].sum())) ** 2 / max(draws - e[keep].sum(), 1e-9)
+    assert stats.chi2.sf(chi2, int(keep.sum())) > 1e-4, chi2
+
+
+def test_binomial_exact_is_unbiased_where_numpy_is_not():
+    """n = 2^61, mean 92: numpy's sampler gives a mean near 91.3; the exact one must give 92 and the variance 92.
+    The first half of the assertion documents the defect; if a future numpy repairs it, only that half fails."""
+    n, mean, draws = 2 ** 61, 92.0, 40000
+    lp, lq = math.log(mean / n), math.log1p(-mean / n)
+    rng = np.random.default_rng(3)
+    y = np.array([sampling.binomial_exact(rng, n, lp, lq) for _ in range(draws)], dtype=float)
+    assert sampling.branch(n, lp, lq) == "poisson"
+    assert abs(y.mean() - mean) < 5 * math.sqrt(mean / draws)
+    assert abs(y.var() - mean) < 5 * math.sqrt((2 * mean * mean + mean) / draws)
+    x = np.random.default_rng(3).binomial(n, mean / n, size=400000).astype(float)
+    assert (x.mean() - mean) / math.sqrt(mean / 400000) < -20, "numpy's binomial is no longer biased at n = 2^61: update sampling.py and the records"
+
+
+def test_binomial_exact_branches_and_symmetry():
+    rng = np.random.default_rng(1)
+    assert sampling.binomial_exact(rng, 0, math.log(0.3), math.log(0.7)) == 0
+    assert sampling.binomial_exact(rng, 10 ** 18, -math.inf, 0.0) == 0
+    assert sampling.binomial_exact(rng, 10 ** 18, 0.0, -math.inf) == 10 ** 18
+    assert sampling.branch(1000, math.log(0.3), math.log(0.7)) == "numpy"
+    assert sampling.branch(1000, math.log(1e-12), math.log1p(-1e-12)) == "poisson"
+    assert sampling.branch(10 ** 17, math.log(1e-14), math.log1p(-1e-14)) == "poisson"
+    assert sampling.branch(10 ** 17, math.log(0.3), math.log(0.7)) == "bulk"
+    # p > 1/2 is drawn through the complement: failures of mean 50 among 10^17 trials
+    n, q = 10 ** 17, 50 / 10 ** 17
+    y = np.array([n - sampling.binomial_exact(rng, n, math.log1p(-q), math.log(q)) for _ in range(4000)], dtype=float)
+    assert abs(y.mean() - 50) < 5 * math.sqrt(50 / 4000)
+
+
+def test_the_first_sampler_is_still_available():
+    """``sampler="numpy"`` must consume the stream exactly as the first version did (job M-011 is reproduced with
+    it: three stored rows were recomputed bit for bit when the sampler was replaced)."""
+    lp = np.log(np.array([0.5, 0.3, 0.2 - 3e-9, 2e-9, 1e-9]))
+    a = sampling.stable_multinomial(np.random.default_rng(9), 2 ** 40, lp, "numpy")
+    rng = np.random.default_rng(9)
+    ltail = np.logaddexp.accumulate(lp[::-1])[::-1]
+    left, ref = 2 ** 40, []
+    for j in range(4):
+        c = int(rng.binomial(left, math.exp(min(0.0, float(lp[j] - ltail[j])))))
+        ref.append(c)
+        left -= c
+    assert a.tolist() == ref + [left]
+
+
+def test_invalid_inner_behaviour_cannot_exceed_the_cost_bound():
+    """"dear": every refined point is sent to the last rung by brackets that ignore W.  With a costly last rung
+    (n_i = 40) the abort rule must stop the run, and the evaluations spent must stay below C_max."""
+    u, n_o, n_i = 1.0, 120, 40
+    P = run_sampled.params(u, n_o, n_i)
+    ev = Evaluator(P)
+    F = run_sampled.profiles(u, n_o, ev.C.r_dag, ev.outer)["cone"]
+    rng = np.random.default_rng(2)
+    aborted = 0
+    for _ in range(3):
+        R = simulate(P, ev.outer, ev.C, F, float(F[n_o // 2]), u * n_i, 0.0, "dear", rng, lC=ev.lC, lCmax=ev.lCmax)
+        assert R.lqueries <= ev.lCmax + 1e-9, (R.status, R.lqueries, ev.lCmax)
+        aborted += R.status == "abort-query budget"
+    assert aborted == 3
