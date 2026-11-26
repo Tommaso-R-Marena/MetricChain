@@ -18,11 +18,12 @@ verification, documentation and preservation.
 |---|---|
 | cycle-1 results with proofs | `docs/geometry/ENSEMBLE_RIGIDITY.md` |
 | cycle 2, first note: sequence-local distance data | `docs/geometry/LOCAL_DATA_STABILITY.md` |
+| third note: states that share rigid segments (hinges, reflections, interval moments) | `docs/geometry/HINGE_ENSEMBLES.md` |
 | every statement with label, evidence, review, novelty | `docs/geometry/THEOREM_REGISTER.md` |
 | what is known / not found, with the search log | `docs/geometry/PRIOR_ART.md` |
 | withdrawn or weakened claims | `docs/geometry/DEAD_ENDS.md` |
 | the internal review, verbatim, with our response | `docs/collaboration/messages/geometry/GEOMETRY-REV-0001.md`; the referee's code: `experiments/geometry/review1/` |
-| open proof obligations (O-1 … O-11) | `docs/geometry/PROOF_OBLIGATIONS.md` |
+| open proof obligations (O-1 … O-14) | `docs/geometry/PROOF_OBLIGATIONS.md` |
 | chronology and "Resume here" | `docs/geometry/RESEARCH_LOG.md` |
 | Lean | `proofs/Geometry/EnsembleRigidity.lean` (imported by `proofs/AxiomAudit.lean`) |
 | experiments, exact computations, harness | `experiments/geometry/` |
@@ -36,8 +37,8 @@ source scripts/lean_env.sh
 lake env lean proofs/Geometry/EnsembleRigidity.lean     # single file, about 15 s, no output = OK
 lake build                                              # whole project; the last lines print the axiom audit
 # Python (numpy, scipy; exact parts use only the standard library)
-python3 experiments/geometry/run_checks.py              # 34 tests, about 50 s (one is skipped, and says so, without Singular)
-python3 experiments/geometry/mutation_checks.py         # 22 planted errors, all must be caught
+python3 experiments/geometry/run_checks.py              # 36 tests, about 50 s (one is skipped, and says so, without Singular)
+python3 experiments/geometry/mutation_checks.py         # 24 planted errors, all must be caught
 python3 experiments/geometry/exact_conic_rank.py 12     # Theorem C(b), about 35 s
 python3 experiments/geometry/exact_conic_rank.py 20 13 rational angles   # Theorem C(b), K = 13..20, about 3 min
 python3 experiments/geometry/exact_jacobian_rank.py 8   # Theorem H, about 3 s
@@ -50,6 +51,8 @@ python3 experiments/geometry/demix.py                   # DEMIX on synthetic ens
 python3 experiments/geometry/hierarchy_example.py       # Theorem E(d), numerical instance
 python3 experiments/geometry/er_not_ur_instance.py A    # second-moment rigid, not universally rigid (numerical; 3 min)
 python3 experiments/geometry/matroid_connectivity.py 12 # Theorem J and the table of measurement patterns (exact)
+python3 experiments/geometry/hinge_pairs.py 0 150       # Theorem M: the cube of eight candidates, LP, search (2 to 3 min)
+python3 experiments/geometry/hinge_multistate.py 0 150  # three states at two to four hinges (exploration, 2 min)
 python3 experiments/geometry/torsion_sharpness.py       # kink formula, worst conformations (GEOMETRY-RES-0002; slow part (2))
 # read-only synchronisation with the other divisions
 for b in claude/determined-ride-og1u7j research/ubuntu-engineering research/scientific-translation \

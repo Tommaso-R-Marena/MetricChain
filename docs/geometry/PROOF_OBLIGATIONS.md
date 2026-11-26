@@ -108,3 +108,21 @@ angle; for position-dependent angles the reachability bound `m₀` changes and t
 **O-11.  Genericity sets.**  All generic statements exclude an unspecified proper analytic
 subset.  Which conformations violate (CC) — beyond planar ones and those with coinciding
 states — is not described.
+
+**O-12.  Hinge ensembles with more than two states** (`HINGE_ENSEMBLES.md` §6).  Identifiability
+is the determinacy of the interval-moment problem on `O(2)^s`.  Known: two states — never for
+one hinge, always from two on (Theorem M); three states at two hinges — can fail (one
+explicit instance, numerical).  Open: the threshold in `s` for `K` states; whether three states
+at two hinges are ever identifiable; a proof for three states at four hinges (numerically
+only the states are linear images of the stack).  Tools: flat extensions of moment matrices,
+on a group with several components and for non-commuting products.
+
+**O-13.  A dual certificate for hinge pairs.**  Theorem M (b) is proved by listing the eight
+candidates.  Is the face `conv{D(X_1), D(X_2)}` exposed — is there `c_0 + ⟨C, D(·)⟩ ≥ 0` on all
+conformations vanishing exactly on the two states?  It would give a stability statement.
+Also open: torsion changes that are multiples of `π`; hinges closer than three torsions
+(segments with a conic).
+
+**O-14.  Theorem F″ (block sums) has no instance.**  A semidefinite programme for a labelling
+scheme of the kind the Science division describes (SCI-RES-0029 §2) has not been run.
+

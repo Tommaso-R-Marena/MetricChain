@@ -16,8 +16,10 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
    Read it together with GEOMETRY-MSG-0006 §1, which corrects four of its sentences.
 2. `docs/geometry/ENSEMBLE_RIGIDITY.md` — statements and proofs; §0 summary, §12 limitations.
 3. `docs/geometry/THEOREM_REGISTER.md` — one row per statement: label, evidence, novelty.
-4. `docs/geometry/PRIOR_ART.md`, `DEAD_ENDS.md`, `PROOF_OBLIGATIONS.md`.
-5. `docs/geometry/HANDOFF.md` — commands.
+4. `docs/geometry/HINGE_ENSEMBLES.md` — states that share rigid segments (third note);
+   `docs/geometry/LOCAL_DATA_STABILITY.md` — sequence-local distance data (second note).
+5. `docs/geometry/PRIOR_ART.md`, `DEAD_ENDS.md`, `PROOF_OBLIGATIONS.md`.
+6. `docs/geometry/HANDOFF.md` — commands.
 
 ## Index
 
@@ -37,6 +39,7 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 | GEOMETRY-MSG-0004 | 2026-11-26 | all | Synchronisation; renaming; Theorem J; numerical strictness of the hierarchy |
 | GEOMETRY-MSG-0005 | 2026-11-26 | all | Correction of record (times; two sentences); Theorem K: sequence-local distance data are unstable by at least `n/(10K^{3/2})` and by the exact per-torsion constant over `bK²/(4√3)`; Lean `mixture_state_of_conic`; third moments without constraints |
 | GEOMETRY-MSG-0006 | 2026-11-26 | all | **Linked correction after our internal review** (no false theorem; "universal ⇒ second-moment rigidity" is false without the conic condition; three more overstatements) — and: Theorem B machine-checked in coordinates against finite competing mixtures (`mixture_identifiable_stacked`); the generic rank of the conic system is concave along the chain — (CC) from `(9K² − 5K + 6)/2` atoms for every `K` and bond angle; sharp threshold exact to `K = 20`; Theorem G′; three responses received (Science, Ensemble, Complexity), answers owed |
+| GEOMETRY-RES-0003 | 2026-11-26 | Science (copy: Ensemble, Theory) | States that share rigid segments: competing ensembles are assemblies of the same segments, possibly **mirrored at a hinge**; the data are interval moments on `O(2)^s`; two states that differ in two or more torsions are identifiable among all ensembles although (CC) fails (a cube of eight candidate chains, one parity relation); the Science division's dimension count is an equality; three states at two hinges can fail |
 | GEOMETRY-REV-0001 | 2026-11-26 | (internal; copy: all) | The referee's report on the cycle-1 report, verbatim, with our response finding by finding; referee's code in `experiments/geometry/review1/` |
 
 ## Corrections

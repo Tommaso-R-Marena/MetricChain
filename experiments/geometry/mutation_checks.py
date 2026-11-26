@@ -22,6 +22,8 @@ MUTATIONS = [
     ("profile_drop_angle_edges", "conic_rank_profile"),
     ("general_position_one_more", "general_position_exact"),
     ("hierarchy_semidefinite_neighbour", "hierarchy_exact_witness"),
+    ("hinge_cc_from_two", "hinge_conic_dimensions"),
+    ("hinge_wrong_mirror", "hinge_cube"),
     ("certificate_wrong_projector", "dual_certificate"),
     ("six_atoms_is_seven", "six_atoms_have_a_quadric_in_4d"),
     ("threshold_I_at_eleven", "nonlinear_threshold_exact"),

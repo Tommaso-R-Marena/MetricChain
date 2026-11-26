@@ -32,6 +32,7 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
 | Theorem I (two states identifiable among all ensembles from 10 atoms; three thresholds) | **not found** | determinantal varieties and structural low-rank points: classical tools |
 | Theorem J (laws of separations 3 and 4) | **application** of the Ensemble division's E5/E6 (its report, 2026-11-26) | its remark on prior art: Garamvölgyi–Gortler–Jordán 2022 (Lemma 3.1), unlabeled PCA |
 | Corollary 9.1 (second moment suffices under bond constraints) | **instance of a known principle** with a specific prior | Bandeira–Blum-Smith–Kileel–Perry–Weed–Wein (moments and sample complexity for orbit recovery); Bendory–Edidin and co-authors: sparse priors, generic semi-algebraic priors, non-uniform rotations make the second moment sufficient [confirmed at summary level] |
+| Hinge ensembles (`HINGE_ENSEMBLES.md`): reduction to a moment problem on `O(2)^s` with interval moments; two states at two or more hinges identifiable, the cube of eight candidates (Theorem M) | **not found** (three summary-level searches); ingredients classical | composition of rotations by reflections; reflection branching in discretizable distance geometry; truncated (matricial) trigonometric moment problems and flat extensions (Curto–Fialkow); ghost orientations of domains from residual dipolar couplings (a different observable) |
 
 ## 2. Related work that is *not* the same problem
 
@@ -58,7 +59,7 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
 * **Simplicial faces of the elliptope** (Tropp 2018): faces spanned by rank-one sign
   matrices; ours are faces of the hull of rank-3 chain Gram matrices.
 
-## 3. Search log (2026-11-26; web search, summaries only)
+## 3. Search log (2026-11-26; web search, summaries only; searches 9–11 for `HINGE_ENSEMBLES.md`)
 
 1. "identifiability conformational ensemble from ensemble-averaged squared distances mixture
    Euclidean distance matrices bond length constraints" — nothing on the question; pointers to
@@ -85,6 +86,21 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
 8. "neighborly convex hull rank-constrained correlation matrices faces simplices Grothendieck
    ground states vector spin" — Saunderson et al. (arXiv 1204.1220), Tropp (simplicial faces),
    arXiv 1205.2040.
+9. "identifiability two conformations hinge domain motion from ensemble-averaged squared
+   distances rigid domains reflection ambiguity mixture" — nothing on the question; general
+   remarks on averaging (distance distributions from pulsed dipolar spectroscopy against
+   averaged values; loss of the signature of multiple conformations in solution scattering).
+10. "truncated moment problem on torus product of rotation matrices moments determine
+    finitely atomic measure O(2) reflections rigid body chain" — the truncated
+    multidimensional trigonometric moment problem (arXiv 2601.08551), truncated matricial
+    moment problems and a matricial Richter–Tchakaloff theorem (arXiv 2310.00957,
+    2311.10179), flat extensions; nothing on products of rotations about different axes or
+    on `O(2)`.
+11. "multi-domain protein relative orientation ensemble averaged data degeneracy mirror image
+    domain positions residual dipolar couplings four-fold degeneracy averaging tensor
+    ensemble" — the fourfold degeneracy of fragment orientations from one alignment medium
+    and its removal by a second; "ghost orientations" of domains; nothing on averaged
+    squared distances.
 
 Sources returned by the searches and used above:
 [arXiv 1203.6602](https://arxiv.org/pdf/1203.6602),
@@ -100,7 +116,12 @@ Sources returned by the searches and used above:
 [arXiv 2602.20590](https://arxiv.org/html/2602.20590v1),
 [arXiv 1710.02590](https://arxiv.org/pdf/1710.02590),
 [Shi–Thirumalai, Nat. Commun. 2023](https://www.nature.com/articles/s41467-023-36412-4.pdf),
-[Sefer–Duggal–Kingsford](https://pmc.ncbi.nlm.nih.gov/articles/PMC4904159).
+[Sefer–Duggal–Kingsford](https://pmc.ncbi.nlm.nih.gov/articles/PMC4904159),
+[arXiv 2601.08551](https://arxiv.org/html/2601.08551v1),
+[arXiv 2310.00957](https://arxiv.org/pdf/2310.00957),
+[arXiv 2311.10179](https://arxiv.org/pdf/2311.10179),
+[PMC3280151](https://pmc.ncbi.nlm.nih.gov/articles/PMC3280151),
+[PMC3328396](https://pmc.ncbi.nlm.nih.gov/articles/PMC3328396).
 
 ## 4. What a referee should check first
 

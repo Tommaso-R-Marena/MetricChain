@@ -46,12 +46,18 @@ means that no one but the author has checked the statement.  The Science divisio
 | G2.2 | torsion–distance duality: one torsion move changes the range-`K` distances by at most `2 sin(δ/2) b √T_K`, `T_K ≤ K⁴/48`; hence `C_glob ≥ κ_p(δ)/(b√T_K)` with `κ_p` the exact per-torsion superposition constant | Theorem K(b) | P | `local_data_bounds.py`, test `local_data_bound_b` | not reviewed | not found (elementary) |
 | G2.3 | helices with all pairs of separation `≤ K`: `s_7 = c/n²`; the softest mode is torsional | Theorem K(c) | N | `local_data_stability.py`, test `helix_beam_law` | not reviewed | beam scaling known |
 | G2.4 | long-range data are necessary for a length-independent constant: `K ≳ n^{2/3}` always, `n^{3/4}`–`n^{4/5}` on extended chains | Corollary K.1 | P from G2.1, G2.2; last clause N | — | not reviewed | — |
+| G3.1 | hinge families: every squared distance of an assembly of rigid segments is affine in the interval products `g_p⋯g_q` of the hinge transformations; `M(ρ)` is equivalent to the interval moments | `HINGE_ENSEMBLES.md` Lemma M1 | P | `hinge_pairs.py` (used throughout) | not reviewed | not found (three summary-level searches) |
+| G3.2 | if all shared segments are conic-free, every ensemble with the averaged data of a hinge ensemble is carried by the hinge family `O(2)^s` (reflections included); identifiability ⇔ determinacy of the interval-moment problem | Proposition M2 | P (from Theorem A) | `hinge_pairs.py` part B (search over all chains) | not reviewed | not found |
+| G3.3 | two states: one hinge — never identifiable (Science division), with the full solution set on `O(2)`; two hinges — exactly eight linear images of the stack (a cube of mirror assemblies), one parity relation, **identifiable among all ensembles** although `dim 𝒩(z) = 6`; more hinges — identifiable | Theorem M | P | `hinge_pairs.py`; tests `hinge_cube` | not reviewed | not found; one hinge: Science division, SCI-RES-0029 |
+| G3.4 | `dim 𝒩(z) = 10, 6` for two states differing in one, two torsions (equality in the Science division's bound); `3`, then `1` from four torsions on | Proposition M3 | P (`s ≤ 2`); N (`s = 3, 4, 5`) | test `hinge_conic_dimensions` | not reviewed | the bound is the Science division's |
+| G3.5 | three states at two hinges can fail to be identifiable (an explicit competing ensemble of 13 chains in one of three instances); three states at four hinges: only the states are linear images | §6 | N | `hinge_multistate.py` | not reviewed | — |
+| G3.6 | stress certificate for data that are linear functionals `⟨C_a, M⟩` (block sums) | Theorem F″ | P (as Theorem F); no instance | — | not reviewed | — |
 
 ## Counts
 
 Lean: 1 file, 16 declarations cited above (plus definitions and lemmas); full build, zero warnings,
 axiom audit OK on 5110 declarations.
-Harness: 34 tests (`run_checks.py`), 22 mutations (`mutation_checks.py`), all caught.
+Harness: 36 tests (`run_checks.py`), 24 mutations (`mutation_checks.py`), all caught.
 Exact computations: `exact_conic_rank.py` (96 witnesses for `K ≤ 12`, 8 more for `13 ≤ K ≤ 20`), `exact_jacobian_rank.py`
 (30 witnesses for `K ≤ 8`), `exact_4d_extreme.py` (1 witness), `exact_nonlinear_threshold.py`
 (1 witness over ℚ, 4 modulo a prime; needs Singular).

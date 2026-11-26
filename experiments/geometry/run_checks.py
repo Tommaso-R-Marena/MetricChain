@@ -541,6 +541,59 @@ def hierarchy_instance():
 
 
 @test
+def hinge_conic_dimensions():
+    """HINGE_ENSEMBLES.md, Proposition M3: dim N(z) = 10, 6, 3, 1 for two states that differ in
+    1, 2, 3, 4 torsions (the Science division's count; (CC) only from four hinges on)."""
+    import hinge_pairs as H
+    rng = np.random.default_rng(21)
+    want = {1: 10, 2: 6, 3: 3, 4: 1}
+    if MUT == "hinge_cc_from_two":
+        want[2] = 1
+    bad = []
+    for s in (1, 2, 3, 4):
+        hinges = [4 + 5 * j for j in range(s)]
+        n = hinges[-1] + 8
+        X1, X2, _, _ = H.hinge_states(n, hinges, rng)
+        dimN = nullity(conic_matrix(stack([X1, X2], [0.4, 0.6])), 21)
+        if dimN != want[s]:
+            bad.append((s, dimN, want[s]))
+    return not bad, f"mismatches (s, dim, expected) {bad}" if bad else "dim N(z) = 10, 6, 3, 1"
+
+
+@test
+def hinge_cube():
+    """HINGE_ENSEMBLES.md, Theorem M(b): two states that differ in two torsions; the eight chains
+    of the cube are conformations and affine images of the stack, satisfy the parity relation
+    and no other, and the linear programme leaves only the two states."""
+    import hinge_pairs as H
+    rng = np.random.default_rng(22)
+    n, hinges = 11, [2, 5]
+    X1, X2, _, _ = H.hinge_states(n, hinges, rng)
+    w = np.array([0.3, 0.7])
+    zc = stack([X1, X2], w)
+    zc = zc - zc.mean(0)
+    cand, ident, _ = H.cube_candidates(X1, X2, hinges, wrong_mirror=(MUT == "hinge_wrong_mirror"))
+    keys = list(cand)
+    Ds = {k: edm(Y) for k, Y in cand.items()}
+    valid = all(H.e0_ok(Y) for Y in cand.values())
+    aff = max(H.affine_residual(Y - Y.mean(0), zc) for Y in cand.values())
+    parity = np.abs(sum((-1) ** sum(k) * Ds[k] for k in keys)).max()
+    iu = np.triu_indices(n, 1)
+    rank_aff = np.linalg.matrix_rank(np.array([Ds[k][iu] - Ds[keys[0]][iu] for k in keys[1:]]), tol=1e-8)
+    M = w[0] * edm(X1) + w[1] * edm(X2)
+    rngs = H.lp_unique([Ds[k] for k in keys], M, None, w)
+    if rngs is None:
+        return False, "linear programme infeasible"
+    off = max(hi for k, (lo, hi) in zip(keys, rngs) if k not in ((0, 0, 0), (1, 1, 1)))
+    w1 = rngs[keys.index((0, 0, 0))]
+    ok = (ident < 1e-9 and valid and aff < 1e-8 and parity < 1e-8 and rank_aff == 6 and off < 1e-7
+          and abs(w1[0] - w[0]) < 1e-7 and abs(w1[1] - w[0]) < 1e-7
+          and np.abs(Ds[(1, 1, 1)] - edm(X2)).max() < 1e-8)
+    return ok, (f"identities {ident:.0e}, affine images {aff:.0e}, parity {parity:.0e}, affine rank {rank_aff}, "
+                f"weight off the states <= {off:.0e}, w1 in [{w1[0]:.4f}, {w1[1]:.4f}]")
+
+
+@test
 def hierarchy_exact_witness():
     """Theorem E(d): the exact rational witness (rigidity rank 12, indefinite stress matrix of
     rank 2, no conic through the constrained edge directions)."""

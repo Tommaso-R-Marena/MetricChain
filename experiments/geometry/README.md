@@ -25,6 +25,8 @@
 | `explore_er2.py seed trials` | exploration: search for second-moment rigid, not universally rigid 7-atom chains (O-3) | floating point |
 | `exact_hierarchy_witness.py` | Theorem E(d): exact rational witness (rigidity rank 12, indefinite stress matrix of rank 2, no conic); `--mutate` uses a neighbour with a semidefinite stress and must fail | exact (fractions) |
 | `exact_general_position.py [Kmax]` | hypothesis of Theorem F′: every `3K + 1` consecutive stacked points affinely independent, with (CC) at `n₀(K)` | exact (mod p) |
+| `hinge_pairs.py [seed] [nstart]` | `HINGE_ENSEMBLES.md` Theorem M: two states that differ in two torsions — the cube of eight linear images of the stack, the parity relation, the linear programme, a search over all chains; `dim 𝒩(z)` for one to five hinges | floating point |
+| `hinge_multistate.py [seed] [nstart]` | exploration: three states at two to four hinges (candidates by search, linear programme) | floating point |
 | `review1/` | the internal referee's own scripts, logs and Lean checks (GEOMETRY-REV-0001), unmodified; see its README | — |
 
 Requirements: Python 3 with `numpy`, `scipy` (the exact scripts need only the standard library

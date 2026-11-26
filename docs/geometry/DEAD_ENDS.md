@@ -170,3 +170,15 @@ register's review column said "REV-0001" in twenty rows while the review was sti
 and the report cited a review file that did not exist.  Rule adopted: a review column is
 filled from the review, never before it.
 
+## After the sixth checkpoint
+
+**DG-18 (a wrong count for several states at the same hinges).**  While writing
+`HINGE_ENSEMBLES.md` we guessed that `K` states at `s` hinges have finitely many candidate
+chains (hence, presumably, an identifiable mixture) iff `s ≥ ⌈3(K − 1)/2⌉`, by counting
+`9(K − 1)` unknowns of a matrix-affine combination against `6s` orthogonality conditions.
+The conditions are not independent: the kernel of the block moment matrix contains the `s`
+hinge relations, which every assembly satisfies, so for `3K ≥ 2s + 3` *every* assembly is a
+candidate.  The computation (`hinge_multistate.py`) contradicts the guess at `K = 3, s = 3`
+(a continuum of candidates).  The guess was written into a draft of the note and removed
+before any commit; it is recorded here because the corrected statement is in the note.
+
