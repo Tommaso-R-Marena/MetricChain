@@ -24,7 +24,7 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
 | Theorem D(a) freely jointed: `𝒦 = 𝒮` for at most 9 bonds | **known** | extreme correlation matrices have rank `r` with `r(r+1)/2 ≤ n` (Grone–Pierce–Watkins 1990; Li–Tam 1994); Barvinok 1995, Pataki 1998 for general spectrahedra [from memory] |
 | Theorem D(a) with bond angles (`n ≤ 6`), D(b) (strict from `n = 7`, exact witness) | **application of the known bound + new witness**; the reading "semidefinite feasibility = ensemble realizability" not found | extreme Gram dimension: E.-Nagy, Laurent, Varvitsiotis 2014 [definition confirmed at summary level: the smallest `r` with `ℰ(G) = π_E(conv ℰ_{n,r})`] |
 | Membership in the realizable set is NP-hard for general pair sets (star constraints) | **known** | E.-Nagy, Laurent, Varvitsiotis 2012/2013: membership in the convex hull of the rank-constrained elliptope is NP-hard for every fixed `k ≥ 2` [confirmed at summary level] |
-| Theorem E (second-moment rigidity between global and universal rigidity) | **not found** as a notion; the Ensemble division's "ensemble rigidity" (laws of edge lengths = global rigidity, its E7) is a different notion | universal rigidity: Connelly; Gortler–Thurston 2014; Connelly–Gortler 2015; global rigidity: Gortler–Healy–Thurston 2010 |
+| Theorem E (second-moment rigidity; between global and universal rigidity once the conic condition is added to both) | **not found** as a notion; the Ensemble division's "ensemble rigidity" (laws of edge lengths = global rigidity, its E7) is a different notion | universal rigidity: Connelly; Gortler–Thurston 2014; Connelly–Gortler 2015; global rigidity: Gortler–Healy–Thurston 2010 |
 | Theorem F for `K = 1` | **known** | Connelly's sufficient condition (positive semidefinite stress of maximal rank + no conic at infinity) [confirmed at summary level] |
 | Theorem F for `K ≥ 2`, Theorem G (global `W₂` bound with explicit certificate) | **not found** | Hölder-½ error bounds for semidefinite feasibility at singularity degree one (Sturm 2000; Drusvyatskiy–Pataki–Wolkowicz 2015) are the single-configuration analogue [from memory] |
 | Theorem H (local identifiability from separation `K + 3`; complete data from `n = 2K + 3`) | **not found** | — |
@@ -39,10 +39,12 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
   2022; Cifuentes, Draisma, Henriksson, Korchmaros, Kubjas, Bull. Math. Biol. 2024).  Two
   homologous chains in one frame; the data are sums over the four homolog pairs of a power
   of the distance, i.e. they contain inter-chain terms.  Results: non-identifiability from
-  the ambiguous sums alone; identifiability with distances between neighbouring loci and
-  higher-order contacts (2022); finite identifiability for exponent `−2` from 12 ambiguous
-  pairs, and *no* finite identifiability for exponent `2` in the fully ambiguous setting
-  (2024) [summary level].  Our model is a mixture: each state is observed in its own frame,
+  the ambiguous sums alone, in particular *no* finite identifiability for exponent `2` in
+  the fully ambiguous setting (2022 — so cited on p. 3 of the 2024 paper, which the internal
+  referee read; an earlier version of this register attributed it to 2024); identifiability
+  with distances between neighbouring loci and higher-order contacts (2022); finite
+  identifiability for exponent `−2` from at least 12 loci (2024) [the first two from the
+  referee's reading of the 2024 paper; the rest summary level].  Our model is a mixture: each state is observed in its own frame,
   only intra-state squared distances are averaged, and with statewise bond data the exponent
   `2` case *is* identifiable for long enough chains.  The shared idea — distances between
   neighbours restore identifiability — should be credited to that line of work.

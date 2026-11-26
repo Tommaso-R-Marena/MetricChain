@@ -3,17 +3,40 @@
 Each item: what is claimed, at which label, what would discharge it, who could do it.
 
 **O-1.  Sharp conic threshold for every `K` (Theorem C(d)).**  Claimed: [C].  Have: exact
-witnesses for `K ≤ 12` at two bond geometries; a proof for every `K` with the weaker threshold
-`m₀(D_K − 1) + 2`; a complete proof for freely jointed chains.  Needed: an induction on the
-number of atoms showing that each new atom cuts the space of non-trivial quadrics by two
-dimensions until none is left.  What we know (working notes, not in the report): in terms of
-the invariants of a quadric `S` at the last bond `p` — its block gradient `G_S` (the
-components of `(Sp)_k` orthogonal to the bond of state `k`) and its compression `Q_S` to the
-planes orthogonal to the bonds — the two new conditions are `⟨G_S, e⟩ = 0` and `eᵀQ_Se = 0`
-for a generic point `e` of a product of `K` circles; the quadrics invisible from `p` form a
-space of dimension `(5K + 2)(K − 1)/2` modulo trivial ones, so a one-step argument is not
-enough and the two-step freedom must be used.  Could be attempted by a workstream with a
-distinct approach (e.g. a degeneration in which the states take turns).
+witnesses for `K ≤ 20` (cos −5/13) and `K ≤ 12` (tetrahedral angle, and both constraint sets);
+a complete proof for freely jointed chains; and, for every `K` and every bond angle
+(Theorem C(c), sixth checkpoint): the generic rank `r_N` is **concave** in the number of bonds
+`N`, strictly increasing until it reaches `D_K`, and equal to `2N − 1` for `N ≤ 3K`; hence the
+threshold `(9K² − 5K + 6)/2`, twice the sharp one for large `K`.  By concavity the conjecture
+is equivalent to one statement: **the last increment before saturation is 2**, i.e.
+`r_N = 2N − 1` at `N = ⌊(D_K + 1)/2⌋`.
+What is known beyond the report (working notes, not checked by anyone else):
+(1) *Monotonicity in `K`*: if the conditions of `K − 1` chains are independent, so are those of
+`K` chains; with (b), `r_N = 2N − 1` for `N ≤ 906` for every `K ≥ 20` at the rational geometry.
+(2) *Structure at the first defect.*  Let `N` be the first length with increment `≤ 1` and
+`dim 𝒩/𝒯 ≥ 2`, `p = p_N` the last point, `q = γp + σu(φ)` on the torus `A(p)`.  For
+`S ∈ 𝒩(π)`: `pᵀSq = σ g_S(φ)`, `qᵀSq = 2γσ g_S(φ) + σ² h_S(φ)` with
+`g_S = Σ_k G_S^{(k)}·u_k(φ_k)` (`G_S` = the components of `(Sp)^{(k)}` orthogonal to `p^{(k)}`) and
+`h_S = uᵀQ_Su` (`Q_S` = the compression of `S` to `V(p)`).  Increment `≤ 1` means that the
+pairs `(g_S, h_S)`, `S ∈ 𝒩(π)`, are pairwise proportional as functions on the torus, which
+leaves three types for the generic path: (A) `G_S = 0` on `𝒩(π)` — equivalently every quadric
+through the path is, modulo trivial ones, singular at the last point (`Sp_N = 0`);
+(B) `h_S ≡ 0` on `𝒩(π)` — modulo trivial quadrics `V(p_N)` is totally isotropic;
+(C) `h_S = (c·u) g_S` for one vector `c ∈ V(p_N)` (after a coprimality argument in the ring
+of Laurent polynomials; linear forms `Σ_k(A_kz_k + Ā_k/z_k)` in two variables factor only if
+`|A_1| = |A_2|`).  By shift invariance each type propagates along longer paths: under (A)
+the surviving quadric at the last unsaturated length is singular, modulo `𝒯`, at about
+`D_K − 2N` consecutive points at each end, which a parameter count allows only if
+`D_K − 2N ≲ 2.25K`.  So a defect, if it exists, appears only within `O(K)` conditions of
+the sharp threshold; types (B), (C) not worked out.
+(3) *Reformulations* (report, remark after Theorem C): Jacobi matrices with a totally
+isotropic chain subspace; Schur squares of chain codes.
+(4) The quadrics invisible from `p` (`G_S = 0`, `Q_S` trivial) form a space of dimension
+`(5K + 2)(K − 1)/2` modulo trivial ones, so a one-step argument is not enough.
+Needed: either the exclusion of the three types at the last step, or a degeneration with a
+triangular structure (candidates: complex chains running to isotropic directions; nearly
+straight chains expanded in the bending angle).  Could be attempted by a workstream with a
+distinct approach.
 
 **O-2.  Identifiability among all ensembles below the conic threshold.**  **Discharged for
 two states** (Theorem I, G1.25): exact elimination with Singular, installed in our own
@@ -56,10 +79,17 @@ not explicit in the smoothness constant of the conformation space.
 extension in `n` is proved.  Needed: an induction on `K`, or a structural reason why the
 Jacobian is generically of full rank exactly from the parameter count on.
 
-**O-7.  Lean.**  Not formalised: Lemma 2.2 for finite mixtures (the linear isometry from equal
-Gram matrices), hence the end-to-end statements of Theorems A and B; Theorem B′; Theorem G.
-Formalising Lemma 2.2 and Theorem B for finite mixtures is the natural next step (the two
-cores `block_rigidity` and `stress_certificate` are in place).
+**O-7.  Lean.**  Done: Lemma 2.2 for finite mixtures (`exists_linearMap_of_gram_eq`,
+`state_is_linear_image`); Theorem B against finite competing mixtures with abstract blocks
+(`finite_mixture_identifiable`) and in coordinates, with the stacked configuration of states
+`X_k` and weights `w_k` and the conclusion "every state of positive weight has the distance
+matrix of some `X_{k₀}`" (`mixture_identifiable_stacked`); a two-state instance on the line in
+which all hypotheses hold, used end to end (`line_mixture_example`).  Not formalised: (b) the
+weights of the competing mixture; (c) competing ensembles that are not finitely supported;
+(d) Theorem B′; (e) Theorem G; (f) the conic and spanning conditions for an actual
+three-dimensional chain (they are exact rank computations of size `D_K × D_K` — `20 × 20`
+for two states — and could be checked by `decide`-free rational linear algebra in Lean; not
+attempted).
 
 **O-8.  Measure theory in Lemma 2.2 and Theorem B′.**  The proofs use: representatives of
 `L²` classes chosen simultaneously for finitely many indices (fine); Tchakaloff's theorem for

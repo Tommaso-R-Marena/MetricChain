@@ -1,0 +1,21 @@
+bond angle 97.0 deg, gamma = u_a.u_(a+1) = 0.121869
+== n = 6: chains in R^4 and R^5 decompose into chains in R^3 (Theorem D(a)) ==
+  R^4 chain (singular values [1.928, 1.306, 0.692, 0.372]): quadric space dim 1; mixture of 2 chains in R^3, weights [0.233, 0.767], ranks [np.int64(3), np.int64(3)]; max|D(Y) - sum w D(X)| = 5.3e-15; bond/1-3 deviation 5.3e-15
+  R^4 chain (singular values [2.471, 1.012, 0.428, 0.383]): quadric space dim 1; mixture of 2 chains in R^3, weights [0.6943, 0.3057], ranks [np.int64(3), np.int64(3)]; max|D(Y) - sum w D(X)| = 2.1e-14; bond/1-3 deviation 7.1e-15
+  R^4 chain (singular values [2.053, 1.103, 0.721, 0.3]): quadric space dim 1; mixture of 2 chains in R^3, weights [0.5538, 0.4462], ranks [np.int64(3), np.int64(3)]; max|D(Y) - sum w D(X)| = 5.3e-15; bond/1-3 deviation 4.9e-15
+  R^4 chain (singular values [1.49, 1.227, 0.994, 0.283]): quadric space dim 1; mixture of 2 chains in R^3, weights [0.9098, 0.0902], ranks [np.int64(3), np.int64(3)]; max|D(Y) - sum w D(X)| = 1.6e-14; bond/1-3 deviation 2.2e-14
+  R^5 chain (singular values [2.201, 1.109, 0.706, 0.305, 0.119]): quadric space dim 6; mixture of 4 chains in R^3, weights [0.1129, 0.362, 0.1566, 0.3684], ranks [np.int64(3), np.int64(3), np.int64(3), np.int64(3)]; max|D(Y) - sum w D(X)| = 1.4e-14; bond/1-3 deviation 1.0e-14
+  R^5 chain (singular values [1.63, 1.348, 0.741, 0.527, 0.04]): quadric space dim 6; mixture of 4 chains in R^3, weights [0.219, 0.2949, 0.2769, 0.2092], ranks [np.int64(3), np.int64(3), np.int64(3), np.int64(3)]; max|D(Y) - sum w D(X)| = 6.7e-15; bond/1-3 deviation 4.9e-15
+  R^5 chain (singular values [2.314, 1.08, 0.691, 0.488, 0.014]): quadric space dim 6; mixture of 4 chains in R^3, weights [0.2549, 0.2541, 0.2567, 0.2343], ranks [np.int64(3), np.int64(3), np.int64(3), np.int64(3)]; max|D(Y) - sum w D(X)| = 1.2e-14; bond/1-3 deviation 7.5e-15
+  R^5 chain (singular values [2.124, 1.064, 0.779, 0.453, 0.179]): quadric space dim 6; mixture of 4 chains in R^3, weights [0.2472, 0.2748, 0.2271, 0.2509], ranks [np.int64(3), np.int64(3), np.int64(3), np.int64(3)]; max|D(Y) - sum w D(X)| = 6.2e-15; bond/1-3 deviation 1.1e-14
+== n = 7: a random chain in R^4 has no quadric through its 11 edge directions (Theorem D(b)) ==
+  4D chain 0: singular values of the 11x10 quadric system: min 1.734e-03, max 3.929e+00 (nullity 0); min over 3D chains of ||Pi_perp X||^2 = 3.960e-07 > 0 (300 starts)  => D(Y) is separated from conv D(C)
+  4D chain 1: singular values of the 11x10 quadric system: min 1.285e-01, max 5.059e+00 (nullity 0); min over 3D chains of ||Pi_perp X||^2 = 1.950e-03 > 0 (300 starts)  => D(Y) is separated from conv D(C)
+  4D chain 2: singular values of the 11x10 quadric system: min 2.167e-02, max 4.177e+00 (nullity 0); min over 3D chains of ||Pi_perp X||^2 = 1.173e-04 > 0 (300 starts)  => D(Y) is separated from conv D(C)
+  4D chain 3: singular values of the 11x10 quadric system: min 5.218e-02, max 4.299e+00 (nullity 0); min over 3D chains of ||Pi_perp X||^2 = 7.555e-04 > 0 (300 starts)  => D(Y) is separated from conv D(C)
+  4D chain 4: singular values of the 11x10 quadric system: min 3.031e-01, max 4.549e+00 (nullity 0); min over 3D chains of ||Pi_perp X||^2 = 7.455e-03 > 0 (300 starts)  => D(Y) is separated from conv D(C)
+  4D chain 5: singular values of the 11x10 quadric system: min 1.359e-01, max 4.580e+00 (nullity 0); min over 3D chains of ||Pi_perp X||^2 = 1.861e-03 > 0 (300 starts)  => D(Y) is separated from conv D(C)
+
+real	0m55.114s
+user	0m54.294s
+sys	0m0.048s

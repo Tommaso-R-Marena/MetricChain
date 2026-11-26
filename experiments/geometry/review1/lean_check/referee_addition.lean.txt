@@ -1,0 +1,58 @@
+/-! ### Referee's addition (file outside the repository): with the definitions above,
+universal rigidity of `(F ∪ E₀, x)` does NOT imply `F`-second-moment rigidity.
+Three points in `ℂ = ℝ²`: `x = (1, 0, i)`, statewise constraints `E₀` = the path `0–1–2`
+(two unit bonds at a right angle), measured pair `F = {(0,2)}`.  `F ∪ E₀` is the complete
+graph, so the framework is universally rigid; but the straight and the folded chain,
+`(1, 0, -1)` and `(1, 0, 1)`, with weights `1/2`, have the same bond lengths and the same
+*average* squared distance `2 = ‖1 - i‖²` on `F`. -/
+
+namespace MetricChain.Geometry
+
+theorem referee_universal_not_secondMoment :
+    ∃ (x : Fin 3 → ℂ) (E₀ F : Set (Fin 3 × Fin 3)),
+      UniversallyRigid (F ∪ E₀) x ∧ ¬ SecondMomentRigid E₀ F x := by
+  refine ⟨![1, 0, Complex.I], {(0, 1), (1, 2)}, {(0, 2)}, ?_, ?_⟩
+  · intro E' _ _ y hy i j
+    have h01 := hy (0, 1) (by simp)
+    have h12 := hy (1, 2) (by simp)
+    have h02 := hy (0, 2) (by simp)
+    have h10 : ‖(![1, 0, Complex.I] : Fin 3 → ℂ) 1 - (![1, 0, Complex.I] : Fin 3 → ℂ) 0‖ = ‖y 1 - y 0‖ := by
+      rw [norm_sub_rev, norm_sub_rev (y 1)]; exact h01
+    have h21 : ‖(![1, 0, Complex.I] : Fin 3 → ℂ) 2 - (![1, 0, Complex.I] : Fin 3 → ℂ) 1‖ = ‖y 2 - y 1‖ := by
+      rw [norm_sub_rev, norm_sub_rev (y 2)]; exact h12
+    have h20 : ‖(![1, 0, Complex.I] : Fin 3 → ℂ) 2 - (![1, 0, Complex.I] : Fin 3 → ℂ) 0‖ = ‖y 2 - y 0‖ := by
+      rw [norm_sub_rev, norm_sub_rev (y 2)]; exact h02
+    fin_cases i <;> fin_cases j
+    · simp
+    · exact h01
+    · exact h02
+    · exact h10
+    · simp
+    · exact h12
+    · exact h20
+    · exact h21
+    · simp
+  · intro h
+    have key := h Bool (fun _ => (1 / 2 : ℝ))
+      (fun b => if b then (![1, 0, -1] : Fin 3 → ℂ) else ![1, 0, 1])
+      (fun _ => by norm_num) (by simp) ?_ ?_ false (by norm_num) 0 2
+    · -- the folded state has ‖Y 0 - Y 2‖ = 0 but ‖x 0 - x 2‖ = ‖1 - i‖ ≠ 0
+      simp at key
+      have : (1 : ℂ) - Complex.I = 0 := by simpa using key
+      have h1 := congrArg Complex.re this
+      simp at h1
+    · intro b p hp
+      rcases hp with rfl | rfl <;> cases b <;> simp
+    · intro p hp
+      have hp' : p = (0, 2) := hp
+      subst hp'
+      have h2 : ‖(1 : ℂ) - Complex.I‖ ^ 2 = 2 := by
+        rw [← Complex.normSq_eq_norm_sq]
+        simp [Complex.normSq_apply]
+        norm_num
+      simp [h2]
+      norm_num
+
+end MetricChain.Geometry
+
+#print axioms MetricChain.Geometry.referee_universal_not_secondMoment

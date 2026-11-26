@@ -309,6 +309,48 @@ def lemma_R_reachability():
     return not bad, f"failures {bad}" if bad else "full sphere exactly from m0 steps on"
 
 
+@test
+def conic_rank_profile():
+    """Theorem C(c): the rank r_N of the conic system of K generic chains with N bonds is
+    2N - 1 for N <= 3K, has non-increasing increments, and grows strictly until it is D_K
+    (numerically it is min(2N - 1, D_K): the sharp profile of (b), (d))."""
+    rng = np.random.default_rng(11)
+    bad = []
+    for K in (1, 2) if QUICK else (1, 2, 3):
+        dim = 3 * K * (3 * K + 1) // 2
+        DK = dim - (K - 1)
+        nmax = -(-(9 * K * K + K + 8) // 4) + 3
+        w, Xs = rand_ensemble(K, nmax, rng, theta=np.deg2rad(rng.uniform(95.0, 125.0)))
+        Z = stack(Xs, w)
+        ranks = []
+        for n in range(2, nmax + 1):                    # N = n - 1 bonds
+            A = conic_matrix(Z[:n], angles=(MUT != "profile_drop_angle_edges"))
+            ranks.append(dim - nullity(A, dim))
+        inc = [b - a for a, b in zip(ranks, ranks[1:])]
+        free = all(ranks[N - 1] == 2 * N - 1 for N in range(1, min(3 * K, len(ranks)) + 1))
+        concave = all(x >= y for x, y in zip(inc, inc[1:]))
+        strict = all(d >= 1 for r, d in zip(ranks, inc) if r < DK)
+        sharp = all(r == min(2 * N - 1, DK) for N, r in enumerate(ranks, start=1))
+        if not (free and concave and strict and sharp and ranks[-1] == DK):
+            bad.append((K, ranks))
+    return not bad, f"profiles violate (i)-(iii) or min(2N-1, D_K): {bad}" if bad else \
+        "r_N = min(2N - 1, D_K); increments non-increasing"
+
+
+@test
+def general_position_exact():
+    """Hypothesis of Theorem F': every 3K + 1 consecutive stacked points of generic chains are
+    affinely independent (exact, modulo a prime, at n0(K), together with (CC))."""
+    import exact_general_position as G
+    bad = []
+    for geometry in ("rational", "tetrahedral"):
+        for K in (1, 2) if QUICK else (1, 2, 3):
+            n, s, good = G.check(K, geometry, extra=(1 if MUT == "general_position_one_more" else 0))
+            if not good:
+                bad.append((geometry, K, n))
+    return not bad, f"failures {bad}" if bad else "every window of 3K + 1 stacked points affinely independent"
+
+
 # ------------------------------------------------------------------ section 5.5
 @test
 def nonlinear_threshold_exact():
@@ -496,6 +538,20 @@ def hierarchy_instance():
     same averaged data on F)."""
     ok, checks = hierarchy_example.main(0, verbose=False)
     return ok, f"mixture deviation on F {checks['max_dev_mixture_vs_X_on_F']:.1e}; states differ from X on F by {checks['Xp_differs_from_X_on_F']:.2f}, {checks['Xm_differs_from_X_on_F']:.2f}"
+
+
+@test
+def hierarchy_exact_witness():
+    """Theorem E(d): the exact rational witness (rigidity rank 12, indefinite stress matrix of
+    rank 2, no conic through the constrained edge directions)."""
+    import subprocess
+    here = os.path.dirname(os.path.abspath(__file__))
+    cmd = [sys.executable, os.path.join(here, "exact_hierarchy_witness.py")]
+    if MUT == "hierarchy_semidefinite_neighbour":
+        cmd.append("--mutate")
+    r = subprocess.run(cmd, capture_output=True, text=True, cwd=here)
+    line = [l for l in r.stdout.splitlines() if l.startswith("sum of principal")]
+    return r.returncode == 0 and "WITNESS OK" in r.stdout, (line[0] if line else r.stdout[-200:])
 
 
 @test

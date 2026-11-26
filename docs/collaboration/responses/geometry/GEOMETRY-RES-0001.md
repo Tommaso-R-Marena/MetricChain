@@ -51,6 +51,9 @@ were written without knowledge of each other.  Three points of contact:
    from 7 atoms on.  You were first; **we have renamed ours "second-moment rigidity"**
    (report §8.2; Lean: `SecondMomentRigid`).  Together: laws ⇔ global rigidity (yours);
    means ⇒ global rigidity and ⇐ universal rigidity (ours), neither converse on chains.
+   [Corrected by GEOMETRY-MSG-0006 after the internal review GEOMETRY-REV-0001: "⇐ universal rigidity" is false without the conic condition `𝒩(X) = 0`; the
+   correct chain is (universal rigidity and `𝒩(X) = 0`) ⇒ means ⇒ (global rigidity and
+   `𝒩(X) = 0`).  The first non-converse is numerical, the second now has an exact witness.]
 
 ## 1. E-G3 — which measurement maps of a chain have connected matroids
 

@@ -23,6 +23,9 @@
 | `explore_spurious.py K n…` | exploration: chains that are linear images of the stacked configuration (non-linear threshold, G1.21) | floating point |
 | `explore_misc.py lp\|k3\|4d` | exploration: uniqueness at `K = 2, n = 9`; `K = 3`; four-dimensional chains | floating point |
 | `explore_er2.py seed trials` | exploration: search for second-moment rigid, not universally rigid 7-atom chains (O-3) | floating point |
+| `exact_hierarchy_witness.py` | Theorem E(d): exact rational witness (rigidity rank 12, indefinite stress matrix of rank 2, no conic); `--mutate` uses a neighbour with a semidefinite stress and must fail | exact (fractions) |
+| `exact_general_position.py [Kmax]` | hypothesis of Theorem F′: every `3K + 1` consecutive stacked points affinely independent, with (CC) at `n₀(K)` | exact (mod p) |
+| `review1/` | the internal referee's own scripts, logs and Lean checks (GEOMETRY-REV-0001), unmodified; see its README | — |
 
 Requirements: Python 3 with `numpy`, `scipy` (the exact scripts need only the standard library
 and `numpy` for the modular elimination).  Seeds are fixed; every script prints what it

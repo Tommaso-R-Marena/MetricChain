@@ -106,3 +106,67 @@ since 15:59 and 16:17 — and "forty minutes before our first commit" should hav
 None of this touches a mathematical statement.  Rule adopted: a header time is either
 `date -u` at the moment of writing or "the commit that adds this file"; every statement
 about another branch names the fetch it rests on.  GEOMETRY-MSG-0005.
+
+## Found by the internal review GEOMETRY-REV-0001 (2026-11-26, 18:55 UTC)
+
+No stated theorem was found false.  What was wrong:
+
+**DG-13 (a false slogan: "universal rigidity ⇒ second-moment rigidity ⇒ global rigidity").**
+Written in the Summary (item 7: "a new rigidity notion between global and universal
+rigidity"), in §9, in register row G1.18, in the heading of section 5 of the Lean file, and
+sent in GEOMETRY-MSG-0002 (item 8), GEOMETRY-RES-0001 and GEOMETRY-REQ-0006.  Theorem E(a)
+itself has the hypothesis `𝒩(X) = 0`, and the Lean theorem `secondMomentRigid_of_universal`
+the hypothesis `SecondMomentRigid E₀ univ x`; the summaries dropped it.  Without it the
+implication is false: when measurements and constraints together form the complete graph
+the framework is universally rigid for a trivial reason, and a cis/trans mixture reproduces
+the averaged data (Example 3.3 with `F = {14}`; three points `(1, 0, i)` with the path as
+constraints — now `universal_not_secondMomentRigid` in Lean, the referee's proof).  Correct:
+(universal rigidity and `𝒩(X) = 0`) ⇒ second-moment rigidity ⇒ (global rigidity and
+`𝒩(X) = 0`).  "For chains with at most 6 atoms the first is an equivalence" is true in this
+form only.  Lesson: a slogan in a summary is a statement and gets the hypotheses of the
+theorem it summarises; the non-vacuity of each hypothesis should have been tested by trying
+to drop it.
+
+**DG-14 (sentences that claimed more than Theorem H proves).**  Theorem H is local (full
+column rank of a Jacobian) and its sufficiency part is exact for `K ≤ 8` at two bond
+geometries.  We wrote "identifiable if the number of states is known (`n ≥ 7`)" and "the
+number of states is exactly the prior that restores identifiability" (local injectivity
+only; global uniqueness among two-state ensembles is numerical); "the minimal separation is
+exactly `K + 3`: each additional state costs one more unit of range, and nothing else"
+(false for `K = 1`, where separation 3 suffices; unproved for `K ≥ 9`); "separation `K + 2`
+never is" (needs `K ≥ 2`).  All corrected; GEOMETRY-MSG-0002 item 9 and GEOMETRY-MSG-0003
+carry notes.
+
+**DG-15 (a gap in the proof of Theorem E(d)).**  The proof invoked theorems about generic
+frameworks (global rigidity from a stress matrix of maximal rank; a positive semidefinite
+stress for generic universally rigid frameworks) and supported the existence of a generic
+framework with an indefinite stress by a floating-point instance with unit bonds and one
+bond angle — which is not generic, so the theorems did not apply to it, and whose global
+rigidity was not shown at all.  Filled by an exact rational witness found by the referee
+(six integer points; rigidity rank 12, stress matrix of rank 2 with the sum of principal
+`2 × 2` minors `−5761/128`, conic rank 6) together with the openness of these conditions;
+re-verified by an independent implementation (`exact_hierarchy_witness.py`).
+
+**DG-16 (Corollary 9.1: "the constraints lower the order from `q = 3` to `q = 2`").**  Wrong
+or ambiguous for both groups: second moments are blind to a reflection of each state, so
+for proper rotations order 2 leaves the `2^K` handedness assignments open (order 3 is still
+needed for them), and for rotations with reflections the unconstrained order is at least 4,
+not 3.  The corollary now names the group and the estimand.
+
+**DG-17 (sixteen minor defects, corrected).**  A false constant in the proof of Theorem G(d)
+(`‖D(Δ)‖ ≤ 4‖Δ‖²`; correct `2n‖Δ‖²` in the Frobenius norm); Summary item 3 without "spans
+space"; "every geometry" where only one bond angle at all positions is covered; Corollary
+4.2 with an unstated hypothesis; Proposition 3.1 weaker than the truth in (a) and with a
+wrong dimension in (b) (the weights are free without constraints: 10, not 9, for two states);
+Theorem F without any instance; the hypotheses of Theorem F′ dropped in the Summary and the
+genericity of one of them unproved (now proved for every `K`); "4 to 6" extra points at
+`n = 9` (2 to 10); "a surface" for a four-dimensional family; `dim L` at `n = 12`; a claim
+about the Kipnis–Shamir linearisation in Remark 5.1 that the count does not support
+(**withdrawn**); real chimeras claimed for a single separation `s ≥ 4`; missing limitations
+(helices never satisfy (CC); constraints must hold exactly and identically; `κ` is 2 to 12
+times smaller than its local values); a misattributed result in `PRIOR_ART.md`; two Lean
+lemmas called "non-vacuity" that instantiate no hypothesis; and a **process error**: the
+register's review column said "REV-0001" in twenty rows while the review was still running,
+and the report cited a review file that did not exist.  Rule adopted: a review column is
+filled from the review, never before it.
+

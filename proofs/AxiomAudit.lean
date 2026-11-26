@@ -1967,9 +1967,18 @@ end MetricChain.NonVacuity
 #print axioms MetricChain.Geometry.block_coeff_nonneg
 #print axioms MetricChain.Geometry.block_rigidity
 #print axioms MetricChain.Geometry.mixture_state_of_conic
+#print axioms MetricChain.Geometry.exists_linearMap_of_gram_eq
+#print axioms MetricChain.Geometry.state_is_linear_image
+#print axioms MetricChain.Geometry.finite_mixture_identifiable
+#print axioms MetricChain.Geometry.conic_condition_line
+#print axioms MetricChain.Geometry.mixture_identifiable_stacked
+#print axioms MetricChain.Geometry.line_conic
+#print axioms MetricChain.Geometry.line_states_differ
+#print axioms MetricChain.Geometry.line_mixture_example
 #print axioms MetricChain.Geometry.sqdist_midpoint_of_conic
 #print axioms MetricChain.Geometry.globallyRigid_of_secondMomentRigid
 #print axioms MetricChain.Geometry.secondMomentRigid_of_universal
+#print axioms MetricChain.Geometry.universal_not_secondMomentRigid
 #print axioms MetricChain.Geometry.fourAtom_virtual_value_witness
 #print axioms MetricChain.Geometry.block_rigidity_nonvacuous
 

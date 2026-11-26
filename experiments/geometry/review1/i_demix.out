@@ -1,0 +1,24 @@
+DEMIX on exact data (own implementation):
+   K=1 n= 5 unit   : recovered K=1; max|D(state) - D(true)| = 1.8e-15; max weight error 0.0e+00; s* = 1.2e-01
+   K=2 n=12 unit   : recovered K=2; max|D(state) - D(true)| = 2.3e-11; max weight error 3.9e-14; s* = 6.3e-04
+   K=2 n=12 unequal: recovered K=2; max|D(state) - D(true)| = 1.6e-11; max weight error 4.7e-15; s* = 1.9e-03
+   K=2 n=15 unequal: recovered K=2; max|D(state) - D(true)| = 1.0e-12; max weight error 5.7e-15; s* = 2.0e-02
+   K=3 n=23 unit   : recovered K=3; max|D(state) - D(true)| = 4.3e-12; max weight error 2.4e-14; s* = 6.5e-04
+   K=3 n=26 unequal: recovered K=3; max|D(state) - D(true)| = 4.4e-12; max weight error 9.2e-15; s* = 9.3e-03
+   K=4 n=39 unit   : recovered K=4; max|D(state) - D(true)| = 1.8e-11; max weight error 1.9e-14; s* = 1.4e-04
+below the threshold / degenerate inputs:
+   K=2 n=11 random: REFUSED: certificate fails: nullity 2, expected 1
+   K=2 n=8 random: REFUSED: certificate fails: nullity 8, expected 1
+   K=2 n=14 helices: REFUSED: rank 5 not a multiple of 3
+   K=2 n=14 one planar state: REFUSED: rank 5 not a multiple of 3
+   K=2 n=14 equal states: returned K=1
+s* (smallest non-trivial singular value / largest) at bond angle 111 deg, K = 2, 20 instances each:
+   n=12: s* (absolute) min 5.5e-04, median 9.0e-03, max 1.1e-01
+   n=13: s* (absolute) min 6.1e-03, median 3.3e-02, max 1.0e-01
+   n=14: s* (absolute) min 6.6e-03, median 6.3e-02, max 1.6e-01
+   n=16: s* (absolute) min 3.4e-02, median 1.0e-01, max 1.8e-01
+   n=20: s* (absolute) min 9.7e-02, median 2.4e-01, max 4.1e-01
+
+real	0m0.968s
+user	0m0.785s
+sys	0m0.025s

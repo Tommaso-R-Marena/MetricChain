@@ -53,9 +53,16 @@ constraints of an articulated chain (fixed bond lengths, fixed bond angles) buy.
    conic condition); a globally rigid 6-atom chain whose data on four measured pairs are
    reproduced to `10⁻¹⁵` by a two-state ensemble of other chains is in
    `experiments/geometry/hierarchy_example.py`.
+   [Corrected by GEOMETRY-MSG-0006 after the internal review GEOMETRY-REV-0001: the first inclusion needs the conic condition `𝒩(X) = 0` as a hypothesis —
+   (universal rigidity and `𝒩(X) = 0`) ⇒ second-moment rigidity ⇒ (global rigidity and
+   `𝒩(X) = 0`); universal rigidity alone does not imply it (machine-checked counterexample
+   `universal_not_secondMomentRigid`).  The strictness of the second implication now has an
+   exact witness.]
 9. **[P-exact for `K ≤ 8`]** Within `K`-state ensembles, complete averaged data are locally
    identifying exactly from `n = 2K + 3` on, and averaged distances of sequence separation
    at most `K + 3` are locally identifying while separation `K + 2` never is.
+   [Corrected by GEOMETRY-MSG-0006 after the internal review GEOMETRY-REV-0001: "never" holds for `K ≥ 2`; for one state separation 3 suffices.  The statement is
+   local and its sufficiency part is exact for `K ≤ 8` at two bond geometries.]
 10. **[N for `K = 2, 3`; C]** Identifiability among all ensembles appears to start at
     `n = ⌊9K/2⌋ + 1` (10, 14), well below the threshold of item 4 — between the two our
     only certificate is non-linear.

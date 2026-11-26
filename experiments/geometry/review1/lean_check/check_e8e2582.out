@@ -1,0 +1,32 @@
+'MetricChain.Geometry.referee_universal_not_secondMoment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.stacked_sqdist' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.stress_energy_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.mixture_energy_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.stress_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.block_coeff_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.block_rigidity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.mixture_state_of_conic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.sqdist_midpoint_of_conic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.globallyRigid_of_secondMomentRigid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.secondMomentRigid_of_universal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.fourAtom_virtual_value_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.block_rigidity_nonvacuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+@MetricChain.Geometry.mixture_state_of_conic : ∀ {V : Type u_1} {W : Type u_2} [inst : NormedAddCommGroup V]
+  [inst_1 : InnerProductSpace ℝ V] [inst_2 : NormedAddCommGroup W] [inst_3 : InnerProductSpace ℝ W]
+  [FiniteDimensional ℝ W] {K : Type u_3} [inst_5 : DecidableEq K] (U : K → Submodule ℝ V) (d : ℕ),
+  0 < d →
+    (∀ (k : K), Module.finrank ℝ ↥(U k) = d) →
+      (∀ (k l : K), k ≠ l → U k ⟂ U l) →
+        Module.finrank ℝ W ≤ d →
+          ∀ (Edges : Set V),
+            (∀ (B : V →ₗ[ℝ] V →ₗ[ℝ] ℝ),
+                (∀ (u v : V), (B u) v = (B v) u) →
+                  (∀ e ∈ Edges, (B e) e = 0) →
+                    ∃ s, ∀ (k l : K), ∀ u ∈ U k, ∀ v ∈ U l, (B u) v = if k = l then s k * inner ℝ u v else 0) →
+              ∀ (A : V →ₗ[ℝ] W),
+                (∀ e ∈ Edges, ‖A e‖ = ‖e‖) →
+                  ∃ c,
+                    (∀ (k : K), ∀ u ∈ U k, ‖A u‖ ^ 2 = c k * ‖u‖ ^ 2) ∧
+                      (∀ (k : K), 0 ≤ c k) ∧ ∀ (k l : K), k ≠ l → c k = 0 ∨ c l = 0
+MetricChain.Geometry.referee_universal_not_secondMoment : ∃ x E₀ F,
+  MetricChain.Geometry.UniversallyRigid (F ∪ E₀) x ∧ ¬MetricChain.Geometry.SecondMomentRigid E₀ F x

@@ -20,7 +20,9 @@ one machine, an interval library, hours at most.
 
 "Second-moment rigidity" of a conformation `X` on a set `F` of measured pairs means: no
 ensemble of other conformations has the averaged squared distances of `X` on `F`.  It is
-implied by universal rigidity and implies global rigidity.  We have numerical instances in
+implied by universal rigidity and implies global rigidity [Corrected by GEOMETRY-MSG-0006 after the internal review GEOMETRY-REV-0001: implied by universal
+rigidity *together with the conic condition `𝒩(X) = 0`*, which holds for the instances of this
+request; the request itself is unaffected].  We have numerical instances in
 which it holds without universal rigidity; a proof needs a certified global optimum.
 
 ## Question

@@ -21,6 +21,7 @@ verification, documentation and preservation.
 | every statement with label, evidence, review, novelty | `docs/geometry/THEOREM_REGISTER.md` |
 | what is known / not found, with the search log | `docs/geometry/PRIOR_ART.md` |
 | withdrawn or weakened claims | `docs/geometry/DEAD_ENDS.md` |
+| the internal review, verbatim, with our response | `docs/collaboration/messages/geometry/GEOMETRY-REV-0001.md`; the referee's code: `experiments/geometry/review1/` |
 | open proof obligations (O-1 … O-11) | `docs/geometry/PROOF_OBLIGATIONS.md` |
 | chronology and "Resume here" | `docs/geometry/RESEARCH_LOG.md` |
 | Lean | `proofs/Geometry/EnsembleRigidity.lean` (imported by `proofs/AxiomAudit.lean`) |
@@ -35,11 +36,14 @@ source scripts/lean_env.sh
 lake env lean proofs/Geometry/EnsembleRigidity.lean     # single file, about 15 s, no output = OK
 lake build                                              # whole project; the last lines print the axiom audit
 # Python (numpy, scipy; exact parts use only the standard library)
-python3 experiments/geometry/run_checks.py              # 31 tests, about 50 s (one is skipped, and says so, without Singular)
-python3 experiments/geometry/mutation_checks.py         # 19 planted errors, all must be caught
+python3 experiments/geometry/run_checks.py              # 34 tests, about 50 s (one is skipped, and says so, without Singular)
+python3 experiments/geometry/mutation_checks.py         # 22 planted errors, all must be caught
 python3 experiments/geometry/exact_conic_rank.py 12     # Theorem C(b), about 35 s
+python3 experiments/geometry/exact_conic_rank.py 20 13 rational angles   # Theorem C(b), K = 13..20, about 3 min
 python3 experiments/geometry/exact_jacobian_rank.py 8   # Theorem H, about 3 s
 python3 experiments/geometry/exact_4d_extreme.py        # Theorem D(b)
+python3 experiments/geometry/exact_hierarchy_witness.py # Theorem E(d), exact witness
+python3 experiments/geometry/exact_general_position.py 5  # hypothesis of Theorem F', exact
 python3 experiments/geometry/exact_nonlinear_threshold.py 10 0 0   # Theorem I; needs Singular (apt-get install -y singular); 80 s over Q
 python3 experiments/geometry/explore_below.py 7 8 9     # two states below the threshold (numerical)
 python3 experiments/geometry/demix.py                   # DEMIX on synthetic ensembles
@@ -56,13 +60,15 @@ for b in claude/determined-ride-og1u7j research/ubuntu-engineering research/scie
 The theory division's single-command audit `scripts/audit_all.sh` also covers this branch's
 Lean file (token scan, axiom walk); its Python stages are the theory division's and were not
 changed.  It was **not** run in full on this branch in cycle 1 (its Lean stages were run by
-hand: build, zero warnings, axiom audit OK with 5071 declarations); run it before any
+hand: build, zero warnings, axiom audit OK with 5110 declarations at the sixth checkpoint); run it before any
 statement of the form "the audit passes at this head".
 
 ## Conventions
 
 * Labels V / P / P-exact / K / N / C exactly as in `THEOREM_REGISTER.md`; "refereed" only
-  when another division has reviewed.
+  when another division has reviewed.  A review column is filled from a review that exists,
+  never in advance (`DEAD_ENDS.md` DG-17); a summary sentence carries the hypotheses of the
+  theorem it summarises (DG-13).
 * Identifiers: GEOMETRY-MSG-nnnn, GEOMETRY-REQ-nnnn, GEOMETRY-RES-nnnn, GEOMETRY-REV-nnnn;
   message schema of `docs/collaboration/README.md`; corrections are new linked messages.
 * Exact computations: rational witnesses, ranks modulo a prime (a lower bound for the rank
@@ -85,9 +91,11 @@ edge directions of the stacked configuration.  If only the trivial quadrics exis
 one linear system), the mixture is the only ensemble with its data, the states are recovered
 by linear algebra, and a positive semidefinite certificate bounds the 2-Wasserstein distance
 of any ensemble by the square root of its data mismatch.  The thresholds are exact:
-`⌈(9K² + K + 8)/4⌉` atoms for the linear certificate; `⌊9K/2⌋ + 1` for identifiability
+`⌈(9K² + K + 8)/4⌉` atoms for the linear certificate (exact for `K ≤ 20`; for every `K` a
+proof from `(9K² − 5K + 6)/2` atoms on, by concavity of the generic rank); `⌊9K/2⌋ + 1` for identifiability
 itself (a theorem for two states, where 7 and 8 atoms provably-numerically fail; a
 conjecture beyond); `2K + 3` for local identifiability within `K` states; sequence
 separation `K + 3`.  For one state this is classical rigidity theory read for ensembles, and
-it yields a notion — second-moment rigidity — strictly between global and (possibly) universal
-rigidity.
+it yields a notion — second-moment rigidity — implied by universal rigidity together with
+the conic condition and implying global rigidity together with it (not by universal
+rigidity alone: `DEAD_ENDS.md` DG-13).

@@ -1,0 +1,16 @@
+bond lengths [1.0, 1.0, 1.0, 1.0, 1.0, 1.0] ; 1-3 distances^2 [2.716736, 2.716736, 2.716736, 2.716736, 2.716736]
+singular values of the rigidity matrix (16 bars, 21 coords): [0.416922, 0.25336, 0.0] -> rank 15 stress dim 1
+stress matrix eigenvalues (normalised): [-1.0, -0.5232, -0.0, 0.0, 0.0, 0.0, 0.0705]
+c = +omega|_F: |grad| = 1.6e-11; Hessian eigenvalues in torsion coordinates [-1.09821, -0.31891, -0.25555, -0.02044]
+c = -omega|_F: |grad| = 1.6e-11; Hessian eigenvalues in torsion coordinates [0.02044, 0.25555, 0.31891, 1.09821]
+couplings c (max |c| = 1): [-1.0, 0.58331, 0.96895, -0.4735, 0.36393]  H_c(X) = 3.688847
+grid 40^4: max H_c = 3.686061  (H_c(X) = 3.688847)
+3300 local maximisations: 2 distinct local maxima (up to congruence); the top five:
+   H_c = 3.688847  torsions [1.5174, -1.0463, 2.712, -1.6744]  max|D - D(X)| = 1.08e-07 <- X (or its mirror image)
+   H_c = 3.641002  torsions [1.1266, -2.7944, -1.9188, 0.1084]  max|D - D(X)| = 5.34e+00 
+margin between the best and the second local maximum: 0.04785; the global maximiser is X: True
+4D framework with the 16 lengths of X: residual 1.3e-15, singular values [2.879, 1.612, 0.827, 0.275], max |D(Y) - D(X)| on unmeasured pairs 0.329 -> not universally rigid
+
+real	4m35.445s
+user	4m18.697s
+sys	0m0.570s

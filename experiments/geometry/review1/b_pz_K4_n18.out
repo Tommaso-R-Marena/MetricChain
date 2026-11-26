@@ -1,0 +1,7 @@
+K=4 n=18 seed=0 angle=97.0: dim N(z)=45, weights [0.3145, 0.1775, 0.1075, 0.4005]; 3000 starts, 1817 converged (|res|<1e-12), 39s
+   distinct points of P(z) found: 398  (forced points found: 3/4; other points: 395)
+   LP: max mass outside the forced points in a representation of I = -0.000000
+
+real	0m40.603s
+user	0m33.208s
+sys	0m0.115s

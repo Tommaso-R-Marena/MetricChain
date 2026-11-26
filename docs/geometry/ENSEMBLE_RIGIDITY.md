@@ -5,9 +5,14 @@ Branch `research/geometric-inference`.  Labels as in `docs/collaboration/README.
 **[V]** machine-checked in Lean (declaration named), **[P]** paper proof in this file,
 **[P, exact]** paper proof whose finite part is an exact computation (script named; rational or
 modular arithmetic, no floating point), **[K]** known result (cited), **[N]** numerical evidence
-only, **[C]** conjecture.  Nothing in this file has been refereed by another division; the
-internal adversarial review is `docs/collaboration/messages/geometry/GEOMETRY-REV-0001.md`, and
-the novelty assessment (what is known, what is a reformulation, what we did not find in print)
+only, **[C]** conjecture.  Nothing in this file has been refereed by another division (the
+Science division's review is running: its SCI-RES-0029).  An internal adversarial review of
+the fifth-checkpoint version (commit `e8e2582`) is preserved verbatim in
+`docs/collaboration/messages/geometry/GEOMETRY-REV-0001.md`; it found no false theorem, four
+statements that said more than was proved and sixteen minor defects, all corrected here and
+listed in `docs/geometry/DEAD_ENDS.md` DG-13 … DG-17 (the text added after `e8e2582` — Theorem
+G′, the new form of Theorem C(c), the corrections themselves — has not been reviewed).  The
+novelty assessment (what is known, what is a reformulation, what we did not find in print)
 is §9 and `docs/geometry/PRIOR_ART.md`.
 
 Scope: mathematics of abstract articulated systems.  "Chain" means a sequence of points with
@@ -31,18 +36,19 @@ every conformation obeys the same local constraints (bond lengths, bond angles)?
    `K`-state mixture sits in an `O(3K)`-orbit of equivalent mixtures.  This is an obstruction
    for distributions that is absent for single configurations.
 3. **Statewise constraints restore identifiability, and the mechanism is a conic condition**
-   (§4, Theorems A, B).  A single conformation is the only ensemble with its `M` iff its
-   constrained edge directions lie on no conic at infinity (for `K = 1` this is a
-   reinterpretation of a classical lemma of rigidity theory).  A `K`-state mixture is the only
+   (§4, Theorems A, B).  A single conformation that spans space (is not planar) is the only
+   ensemble with its `M` iff its constrained edge directions lie on no conic at infinity (for
+   `K = 1` this is a reinterpretation of a classical lemma of rigidity theory).  A `K`-state mixture is the only
    ensemble — among **all** probability distributions on conformations, with any number of
    states — with its `M`, as soon as the only quadrics through the constrained edge
    directions of the stacked framework are the `K − 1` trivial ones.
 4. **Sharp thresholds** (§5, Theorem C).  For freely jointed chains the conic condition holds
    generically iff the chain has at least `(9K² + K + 2)/2` bonds [P, all `K`].  For chains
    with fixed bond lengths and bond angles it holds generically iff
-   `n ≥ ⌈(9K² + K + 8)/4⌉` atoms: 5, 12, 23, 39, 60, … [P, exact for `K ≤ 12` at two bond
-   geometries; a weaker threshold of the same order for every `K` and every geometry; the
-   sharp threshold for all `K` is a conjecture].
+   `n ≥ ⌈(9K² + K + 8)/4⌉` atoms: 5, 12, 23, 39, 60, … [P, exact for `K ≤ 20` at one bond
+   geometry and `K ≤ 12` at a second; the threshold `(9K² − 5K + 6)/2` — twice the sharp
+   one for large `K` — for every `K` and every bond angle, the same at all positions; the
+   sharp threshold for all `K`, and anything for position-dependent bond angles, is open].
 5. **A polynomial-time demixing algorithm with a certificate** (§6): eigen-decomposition of the
    centred `M`, one linear system, one symmetric eigenproblem.  The certificate of uniqueness
    is a rank.
@@ -52,30 +58,44 @@ every conformation obeys the same local constraints (bond lengths, bond angles)?
    averaged data, a positive semidefinite stress of the stacked framework supported on the
    measured pairs certifies identifiability (Theorem F) — for `K = 1` this is the classical
    sufficient condition for universal rigidity.
-7. **A new rigidity notion between global and universal rigidity** (§8, Theorem E):
-   *second-moment rigidity*.  Universal rigidity ⇒ second-moment rigidity ⇒ global rigidity; the
-   second implication is strict (a rigid conformation whose averaged data are reproduced
-   exactly by a two-state ensemble of other conformations); for chains with at most 6 atoms
-   the first is an equivalence, because there every Hilbert-space chain is an ensemble
-   average of chains in `ℝ³` (Theorem D); from 7 atoms on the set of realizable averaged data
-   is strictly smaller than its semidefinite relaxation [P, exact witness], and the first
-   implication is strict as well — a 7-atom chain that is second-moment rigid although a
-   four-dimensional framework has the same measured lengths [N].
+7. **A rigidity notion for averaged data** (§8, Theorem E): *second-moment rigidity* — no
+   ensemble of other conformations has the averaged squared distances of `X` on the measured
+   pairs.  With (C₁) the conic condition of the single conformation (`𝒩(X) = 0`),
+
+       universal rigidity and (C₁)  ⇒  second-moment rigidity  ⇒  global rigidity and (C₁).
+
+   (C₁) cannot be dropped on the left: if measurements and constraints together form a
+   complete graph the framework is universally rigid for a trivial reason, while a cis/trans
+   mixture has the same averaged data (Example 3.3; machine-checked instance
+   `universal_not_secondMomentRigid`).  The second implication is strict [P, exact witness]:
+   a globally rigid conformation with (C₁) whose averaged data are reproduced by an ensemble
+   of other conformations.  For chains with at most 6 atoms the first is an equivalence,
+   because there every Hilbert-space chain is an ensemble average of chains in `ℝ³`
+   (Theorem D); from 7 atoms on the set of realizable averaged data is strictly smaller than
+   its semidefinite relaxation [P, exact witness], and numerically the first implication is
+   strict as well — a 7-atom chain that is second-moment rigid although a four-dimensional
+   framework has the same measured lengths [N].
 8. **How little data suffices** (§5.3–5.5): within the family of `K`-state ensembles, complete
-   averaged data are generically locally identifying exactly from the parameter count
+   averaged data are generically *locally* identifying exactly from the parameter count
    `n ≥ 2K + 3` on, and averaged distances of sequence separation at most `K + 3` are
-   locally identifying, while separation `K + 2` never is [P, exact for `K ≤ 8`]; among all
-   ensembles a separation of `3K + 1` suffices [P].
+   locally identifying, while for `K ≥ 2` separation `K + 2` never is (for one state
+   separation 3 suffices) [P, exact for `K ≤ 8` at two bond geometries]; among all ensembles
+   a separation of `3K + 1` suffices for mixtures that satisfy (CC) and whose stacked
+   configuration has every `3K + 1` consecutive points affinely independent [P; the second
+   hypothesis is generic for every `K`, by the proof of Theorem C(c)].
 9. **Two states, completely** (§5.5, Theorem I).  A generic two-state ensemble is identifiable
    among all ensembles from `n = 10` atoms on [P, exact: a Gröbner-basis computation shows
    that the only chains that are linear images of the stacked configuration are the two
    states]; at `n = 7, 8` it is **not** — explicit ensembles of 9 to 11 *other* chains have
    the same averaged data to `10⁻¹⁴` [N] — although it is locally identifiable among
    two-state ensembles there; `n = 9` is identifiable in every instance computed [N]; the
-   linear certificate needs `n ≥ 12`.  So "identifiable", "identifiable if the number of
-   states is known" and "certifiable by linear algebra" are three different thresholds
-   (10, 7, 12).  For `K = 3` the first is numerically 14; in general `⌊9K/2⌋ + 1` is a
-   conjecture.
+   linear certificate needs `n ≥ 12`.  So "identifiable among all ensembles" (10 proved; 9 in
+   every instance computed), "locally identifiable among two-state ensembles" (7) and
+   "certifiable by linear algebra" (12) are three different thresholds.  Whether a two-state
+   ensemble with 7 to 9 atoms is the only *two-state* ensemble with its data globally, not
+   only locally, is not proved (direct searches found no other [N]).  For `K = 3` the first
+   threshold is numerically 14 (at 13 atoms it depends on the instance); in general
+   `⌊9K/2⌋ + 1` is a conjecture.
 
 Machine-checked core: `proofs/Geometry/EnsembleRigidity.lean` (§10).  Scripts:
 `experiments/geometry/` (§11).
@@ -117,7 +137,8 @@ connected, `𝒞` modulo translations is compact.
 
 ## 2. Stacking: an ensemble is a framework in a higher dimension
 
-**Lemma 2.1 (stacking) [V: `MetricChain.Geometry.stacked_sqdist`].**  For a finite mixture
+**Lemma 2.1 (stacking) [V for finite mixtures: `MetricChain.Geometry.stacked_sqdist`; the `L²`
+form P].**  For a finite mixture
 `μ = Σ_k w_k δ_{X_k}` put `z_i = (√w_k · x_i^{(k)})_{k=1..K} ∈ ℝ^{dK}`.  Then
 `M(μ)_ij = |z_i − z_j|²`.  For an arbitrary ensemble the same holds with
 `z_i = (x ↦ x_i) ∈ L²(μ; ℝ^d)` (after fixing `x_1 = 0`).  ∎
@@ -132,7 +153,8 @@ Hence `𝒩(z)` always contains the `(K − 1)`-dimensional space of **trivial q
 
     𝒯 = { Σ_k s_k E_k : Σ_k w_k s_k = 0 }.
 
-**Lemma 2.2 (every competing ensemble consists of linear images of `z`) [P].**  Let
+**Lemma 2.2 (every competing ensemble consists of linear images of `z`) [P; for finite
+competing mixtures V: `MetricChain.Geometry.state_is_linear_image`, `exists_linearMap_of_gram_eq`].**  Let
 `z ∈ (ℝ^m)^n` span `ℝ^m` affinely, with `|z_i − z_j| = ℓ_ij` on `E₀`, and let `ν` be an ensemble
 on `𝒞` with `M(ν) = D(z)`.  Then there is a measurable `A : 𝒞 → ℝ^{d×m}` such that for
 `ν`-almost every `x`
@@ -165,15 +187,17 @@ these points (Theorem B′).
 
 **Proposition 3.1 [P; elementary].**
 (a) For every configuration `X` in `ℝ^d`, `D(X) = (1/d) Σ_{c=1}^d D(√d · X^{(c)})`, where
-`X^{(c)}` is the collinear configuration given by the `c`-th coordinates.  So, with no
-statewise constraint, no configuration of affine dimension `≥ 2` is determined by its squared
-distances among ensembles — although it is determined among configurations.
+`X^{(c)}` is the collinear configuration given by the `c`-th coordinates; and
+`D(X) = ½D(√2·X) + ½D(point)`.  So, with no statewise constraint, no configuration with two
+distinct points is determined by its squared distances among ensembles — although it is
+determined among configurations.
 (b) Let `μ = Σ w_k δ_{X_k}` with stacked configuration `z` spanning `ℝ^{dK}`, `K ≥ 2`.  For every
-`Q ∈ O(dK)` the blocks of `zQ` define a `K`-state mixture `μ_Q` with `M(μ_Q) = M(μ)`; the
-family `{[μ_Q]}` has dimension `dim O(dK) − K·dim O(d) = d²K(K − 1)/2` (9 for two states
-in space).
-(c) With statewise constraints `E₀`, `μ_Q` is an ensemble on `𝒞` iff every block projection
-`Q E_k Qᵀ / w'_k` lies in `𝒫(z)`.  ∎
+`Q ∈ O(dK)` and all weights `w'_k > 0` with sum one, the blocks of `zQ` divided by `√w'_k`
+are the states of a `K`-state mixture `μ_{Q,w'}` with `M(μ_{Q,w'}) = M(μ)`; the family of their
+classes has dimension `dim O(dK) − K·dim O(d) + (K − 1) = d²K(K − 1)/2 + K − 1` (10 for two
+states in space).
+(c) With statewise constraints `E₀`, `μ_{Q,w'}` is an ensemble on `𝒞` iff every block projection
+`Q E_k Qᵀ / w'_k` lies in `𝒫(z)` (which fixes the weights).  ∎
 
 (a) and (b) are the factor-rotation indeterminacy of a second-moment statistic.  They are
 the reason why §4 needs statewise constraints, and (c) is how the constraints enter.
@@ -223,14 +247,15 @@ last sentence of the proof — the images are not congruent to `X` — is on pap
 
 **Corollary 4.1 (chains) [P, exact].**  `Sym(3)` has dimension 6, a chain with fixed bond
 lengths and angles has `2n − 3` constrained edges.  Every chain with 4 atoms violates (ii)
-(Example 3.3); a generic chain with `n ≥ 5` atoms satisfies it (witness:
-`experiments/geometry/exact_conic_rank.py`, `K = 1`).  A generic freely jointed chain
-satisfies it iff it has at least 6 bonds.
+(Example 3.3); a generic chain with `n ≥ 5` atoms satisfies it, for every bond angle in
+`(0, π)` that is the same at all positions and any bond lengths (Theorem C(c) with `K = 1`;
+exact witnesses at two bond geometries: `experiments/geometry/exact_conic_rank.py`).  A
+generic freely jointed chain satisfies it iff it has at least 6 bonds.
 
 ### 4.2 Finite mixtures
 
-**Theorem B (identifiability of a mixture among all ensembles) [P; algebraic core V:
-`MetricChain.Geometry.mixture_state_of_conic`, `block_rigidity`].**  Let `μ = Σ_{k=1}^K w_k δ_{X_k}`, `w_k > 0`, with
+**Theorem B (identifiability of a mixture among all ensembles) [P; the statement on states
+against finite competing mixtures V: `MetricChain.Geometry.mixture_identifiable_stacked`].**  Let `μ = Σ_{k=1}^K w_k δ_{X_k}`, `w_k > 0`, with
 stacked configuration `z ∈ (ℝ^{dK})^n`, and assume the **conic condition**
 
     𝒩(z) = 𝒯          (the only quadrics through the constrained edge directions of z
@@ -249,13 +274,27 @@ and `√w_κ A(x)` restricted to block `κ` is orthogonal, so
 `x_i − x_1 = R(x)(x_i^{(κ)} − x_1^{(κ)})` with `R(x) ∈ O(d)`.  Finally
 `I = ∫ AᵀA dν = Σ_k ν(κ = k) E_k / w_k` gives `ν(κ = k) = w_k`.  ∎
 
-Machine-checked **[V]** (`mixture_state_of_conic`): for pairwise orthogonal blocks of
-dimension `d ≥ 1` and a set of edge vectors satisfying (CC) — every symmetric bilinear form
-vanishing on them is block-scalar — a linear map `A` into a space of dimension at most `d`
-that preserves the lengths of the edge vectors satisfies `|Au|² = c_k|u|²` on each block,
-`c_k ≥ 0`, with at most one `c_k ≠ 0`.  This is the proof above from "`P ∈ I + 𝒯`" on; what
-remains on paper is Lemma 2.2 (the competing states are linear images) and the
-bookkeeping of the weights.
+Machine-checked **[V]** (`finite_mixture_identifiable`): let `z` be a configuration whose
+differences from a base point span an inner product space carrying pairwise orthogonal
+blocks of dimension `d ≥ 1` with component maps, and assume (CC) in the form "every symmetric
+bilinear form vanishing on the constrained edge vectors of `z` is block-scalar".  If a
+**finite** mixture of configurations in a space of dimension at most `d` has the squared
+distances of `z` on average (all pairs) and each of its states of positive weight has the
+edge lengths of `z` on the constrained pairs, then every such state `Y` satisfies
+`|Y_i − Y_{i'}|² = c·|comp_{k₀}(z_i − z_{i'})|²` for one block `k₀` and one `c ≥ 0`.  In
+coordinates **[V]** (`mixture_identifiable_stacked`): for states `X_k` in a space of dimension
+`d ≥ 1` with weights `w_k > 0`, `Σ w_k = 1`, common lengths on the constrained pairs (one of
+them non-zero), and `z` their stacked configuration in the `ℓ²` product with its coordinate
+blocks, every state of positive weight of a competing finite mixture has all pairwise
+distances equal to those of one `X_{k₀}`.  The hypotheses are satisfiable with two different
+states, and the theorem is used end to end, in `line_mixture_example` (the straight and the
+folded three-point unit chain on the line, weights ½; (CC) and the spanning condition are
+proved in Lean for this instance: `line_conic`, `line_span`).  The proof in Lean follows the
+proof above: the linear isometry from equal Gram matrices (`exists_linearMap_of_gram_eq`),
+its components (`state_is_linear_image`), and the block argument (`mixture_state_of_conic`,
+`block_rigidity`).  What remains on paper: competing ensembles that are not finitely
+supported (the `L²` version of Lemma 2.2), the weights of the competing mixture, and (CC)
+itself for three-dimensional chains (an exact computation outside Lean, Theorem C).
 
 **Theorem B′ (exact criterion) [P].**  Let `μ` be a `K`-mixture whose stacked configuration `z`
 spans `ℝ^{dK}` affinely.  Then `μ` is identifiable from averaged squared distances iff the
@@ -276,16 +315,18 @@ congruent to `X_k` iff `P_j − E_k/w_k` vanishes on all differences of `z`, i.e
 `P_j = E_k/w_k`.  So `ν' = Σ c_j δ_{Y_j}` has `M(ν') = M(μ)` and `[ν'] ≠ [μ]`.  ∎
 
 **Corollary 4.2 (simplicial faces; neighbourliness of the hull of the chain variety) [P].**
-If `μ = Σ w_k δ_{X_k}` is identifiable (in particular under (CC)), then
-`D(X_1), …, D(X_K)` are affinely independent and their convex hull is a face of
-`𝒦 = conv D(𝒞)`.
+If `μ = Σ w_k δ_{X_k}`, with pairwise non-congruent states and positive weights, is
+identifiable (in particular under (CC), which implies both), then `D(X_1), …, D(X_K)` are
+affinely independent and their convex hull is a face of `𝒦 = conv D(𝒞)`.
 
 *Proof.*  If `Σ a_k D(X_k) = 0`, `Σ a_k = 0`, then `μ_t = Σ (w_k + t a_k)δ_{X_k}` is an ensemble
 with `M(μ_t) = M(μ)` for small `t`, so `[μ_t] = [μ]`, and `a = 0` because the `X_k` are pairwise
 non-congruent.  Let `Φ` be the smallest face of `𝒦` containing `M(μ)`; `M(μ)` is in its
 relative interior, so for `y ∈ Φ` there are `y' ∈ Φ` and `t ∈ (0, 1]` with
 `M(μ) = t y + (1 − t) y'`; `y = M(ν_y)`, `y' = M(ν_{y'})`, and identifiability of `μ` forces
-`ν_y` to be carried by the classes `[X_k]`, i.e. `y ∈ conv{D(X_k)}`.  ∎
+`ν_y` to be carried by the classes `[X_k]`, i.e. `y ∈ conv{D(X_k)}`.  Conversely
+`conv{D(X_k)} ⊂ Φ`: a face that contains a relative interior point of a simplex contains the
+simplex.  ∎
 
 ---
 
@@ -303,17 +344,24 @@ of the `K`-tuple of conformations.
 (a) *Freely jointed chains, every `K`* **[P]**.  For `K` generic freely jointed chains (CC)
 holds iff the number of bonds satisfies `n − 1 ≥ D_K = (9K² + K + 2)/2` (6, 20, 43, 75, 116, …).
 (b) *Bond lengths and angles, sharp* **[P, exact]**.  For unit bonds and bond angle with cosine
-`−5/13` (112.6°) or `−1/3` (109.47°), and `1 ≤ K ≤ 12`: (CC) holds for generic `K`-tuples of
-chains iff `2n − 3 ≥ D_K`, i.e.
+`−5/13` (112.6°) and `1 ≤ K ≤ 20`, or cosine `−1/3` (109.47°) and `1 ≤ K ≤ 12`: (CC) holds for
+generic `K`-tuples of chains iff `2n − 3 ≥ D_K`, i.e.
 
-    n ≥ n₀(K) = ⌈(9K² + K + 8)/4⌉ = 5, 12, 23, 39, 60, 85, 114, 148, 187, 230, 277, 329.
+    n ≥ n₀(K) = ⌈(9K² + K + 8)/4⌉ = 5, 12, 23, 39, 60, 85, 114, 148, 187, 230, 277, 329, …, 907 (K = 20).
 
 The same holds for bond geometries outside a proper analytic subset of the space of bond
 geometries.
-(c) *Bond lengths and angles, every `K` and every homogeneous non-degenerate geometry*
-**[P]**.  Let `α = π −` (bond angle), `β = min(α, π − α)`, `m₀ = max(2, ⌈π/β⌉)` (`m₀ = 3` for
-bond angles between 60° and 120°).  Then (CC) holds for generic `K`-tuples as soon as
-`n ≥ m₀(D_K − 1) + 2`.
+(c) *Bond lengths and angles, every `K` and every bond angle in `(0, π)`* **[P]**.  Let `r_N`
+be the generic rank of the conic system of `K` chains with `N = n − 1` bonds (one bond angle
+for all positions and states).  Then
+(i) the increments `r_{N+1} − r_N ∈ {0, 1, 2}` are non-increasing in `N`;
+(ii) `r_{N+1} > r_N` as long as `r_N < D_K`;
+(iii) `r_N = 2N − 1` for `N ≤ 3K`.
+Hence `r_N ≥ min(N + 3K − 1, D_K)`, and (CC) holds for generic `K`-tuples as soon as
+
+    n ≥ D_K − 3K + 2 = (9K² − 5K + 6)/2 = 5, 16, 36, 65, 103, …
+
+(sharp for `K = 1`; twice the sharp value of (b) for large `K`).
 (d) **[C]** The threshold `n₀(K)` of (b) is valid for every `K` and every non-degenerate bond
 geometry.
 
@@ -331,7 +379,7 @@ some minor, an analytic function that is not identically zero: it holds on an op
 Unequal bond lengths rescale rows.  ∎
 
 *Proof of (b).*  `rank ≤ D_K` always.  `experiments/geometry/exact_conic_rank.py` exhibits, for
-each `K ≤ 12` and each of the two geometries, chains with rational torsion half-angle tangents
+each `K` in these ranges, chains with rational torsion half-angle tangents
 at which the rank of the conic system, computed modulo a prime after an exact evaluation in
 `ℚ` respectively `ℚ(√2)`, equals `D_K` at `n = n₀(K)`.  A ring homomorphism to a field cannot
 increase a rank, so the rank over the number field is `D_K`.  The rank is attained on the
@@ -339,18 +387,71 @@ complement of a proper analytic subset of the torus of torsions (and of the spac
 geometries, on which the entries depend analytically as well); adding atoms adds conditions,
 so the rank stays `D_K` for `n > n₀(K)`.  For `2n − 3 < D_K` the count forbids (CC).  ∎
 
-*Proof of (c).*  **Lemma R.**  For `u, v ∈ S²` and `m ≥ m₀` there is a sequence
-`u = û_0, …, û_m = v` with consecutive angles `α`.  *Proof.*  The set reachable from `u` in
-`m` steps is `{v : ∠(u, v) ∈ J_m}` with `J_1 = {α}` and
+*Proof of (c).*  Notation.  `M = (S²)^K`; `γ` the cosine of the angle `α ∈ (0, π)` between
+consecutive bond vectors, `σ = sin α`; for `p ∈ M`, `A(p) = {q ∈ M : q^{(k)}·p^{(k)} = γ for all k}`
+(a product of `K` circles), `V(p) = ⊕_k (p^{(k)})^⊥` (dimension `2K`), so that
+`A(p) = (γp + V(p)) ∩ M` and the differences of points of `A(p)` span `V(p)`.  The stacked bond
+vectors of `K` chains are the points of the path space
+`𝒫_N = {(p_1, …, p_N) : p_{i+1} ∈ A(p_i)}`, a compact connected real-analytic manifold (an
+iterated bundle of tori over `M`); dropping the first or the last point is a surjective
+submersion `𝒫_{N+1} → 𝒫_N`.  Given the bond conditions, the second-neighbour conditions are
+`p_iᵀSp_{i+1} = 0`; so the conic system of a path `π` is the set of functionals
+`λ_{p_i}: S ↦ p_iᵀSp_i` (`i ≤ N`) and `λ_{p_ip_{i+1}}: S ↦ p_iᵀSp_{i+1}` (`i < N`), with span
+`W(π)` and common kernel `𝒩(π) ⊇ 𝒯`.  `r_N = max_π dim W(π)` is attained on an open dense
+subset `U_N ⊂ 𝒫_N` (the complement of a proper analytic subset), and preimages of the `U`'s
+under the submersions are open and dense.
+
+**Lemma R (reachability).**  For `u, v ∈ S²` and `m ≥ m₀ := max(2, ⌈π/min(α, π − α)⌉)` there is
+a sequence `u = û_0, …, û_m = v` with consecutive angles `α`.  *Proof.*  The set reachable from
+`u` in `m` steps is `{v : ∠(u, v) ∈ J_m}` with `J_1 = {α}` and
 `J_{m+1} = ∪_{ρ ∈ J_m} [|ρ − α|, min(ρ + α, 2π − ρ − α)]` (spherical triangle inequality,
 all intermediate values attained by continuity).  By induction, for `α ≤ π/2`,
 `J_m = [0, min(mα, π)]` for `m ≥ 2`; for `α > π/2`, with `β = π − α`,
 `J_m = [0, min(mβ, π)]` for even `m` and `[max(0, π − mβ), π]` for odd `m`.  In both cases
-`J_m = [0, π]` iff `m ≥ max(2, ⌈π/β⌉)`.  ∎
-Hence the bond directions with indices `0, m₀, 2m₀, …` of each of the `K` chains can be
-prescribed arbitrarily and independently.  By the argument of (a), `D_K` of these stacked
-directions can be chosen with independent evaluations; this needs `m₀(D_K − 1) + 1` bonds.
-The rank is then `D_K` at one point of the torus of torsions, hence generically.  ∎
+`J_m = [0, π]` iff `m ≥ m₀`.  ∎
+
+*(i).*  Take a path `(p_1, …, p_{N+2})` such that it, `(p_1, …, p_{N+1})`,
+`σ = (p_2, …, p_{N+1})` and `(σ, p_{N+2})` have the generic ranks of their lengths (open dense
+conditions).  Let `Y` be the span of the two functionals at the new end,
+`λ_{p_{N+2}}` and `λ_{p_{N+1}p_{N+2}}`.  For subspaces `A ⊂ A'`,
+`dim(A' + Y) − dim A' ≤ dim(A + Y) − dim A`.  With `A = W(σ) ⊂ A' = W(p_1, …, p_{N+1})` the left
+side is `r_{N+2} − r_{N+1}` and the right side is `r_{N+1} − r_N`.  (The generic ranks form the
+rank function of a matroid on the conditions that is invariant under shifts along the chain;
+(i) is its submodularity.)
+
+*(ii).*  Suppose `r_{N+1} = r_N`.  By (i), `r_{N'} = r_N` for all `N' ≥ N`.  Let `π ∈ U_N` and let
+`(π, q_1, …, q_m)` be any continuation.  Its rank is at most `r_{N+m} = r_N = dim W(π)`, so its
+span is `W(π)`: every `S ∈ 𝒩(π)` satisfies `q_jᵀSq_j = 0`.  By Lemma R every point of `M` is
+some `q_m`.  So `F_S ≡ 0` on `M`, i.e. `S ∈ 𝒯` (proof of (a)): `𝒩(π) = 𝒯`, `r_N = D_K`.
+
+*(iii).*  It suffices to find, for `N ≤ 3K`, one path with linearly independent
+`p_1, …, p_N ∈ ℝ^{3K}`: then `Σ a_ip_ip_iᵀ + Σ c_i(p_ip_{i+1}ᵀ + p_{i+1}p_iᵀ) = PCPᵀ` with `P`
+injective and `C` tridiagonal vanishes only for `C = 0`.  Induction on the length `j < 3K`:
+paths with independent points form a non-empty open set `O_j`; we show that for some path in
+`O_j` the torus `A(p_j)` is not contained in `Π_j = span(p_1, …, p_j)`.  Otherwise
+`V(p_j) ⊂ Π_j` on `O_j`.  Then `j ≥ dim(V(p_j) + ℝp_j) = 2K + 1`, and every `ν ⊥ Π_j` is
+orthogonal to `V(p_j)`, i.e. `ν^{(k)} = μ_kp_j^{(k)}`, with `Γμ = 0` for the `j × K` matrix
+`Γ_{ik} = p_i^{(k)}·p_j^{(k)}`; as `dim Π_j^⊥ = 3K − j ≥ 1`, `Γ` has a kernel on `O_j`.  But `Γ`
+has rank `K` on a non-empty open set of `𝒫_j` (which meets `O_j`): build the path backwards
+from `p_j`; the row `i = j` is `(1, …, 1)`, and for `m ≥ 2` the entry `Γ_{j−m,k}` ranges, as
+`p_{j−m}^{(k)}` moves on its circle about `p_{j−m+1}^{(k)}`, over a non-degenerate interval
+(for `m = 2` the interval `[cos 2α, 1]`; for `m ≥ 3` whenever `p_j^{(k)} ≠ ±p_{j−m+1}^{(k)}`),
+independently for each `k`.  A box in `ℝ^K` is not contained in a proper subspace, so the
+rows `j, j − 2, …, j − K` can be made independent (`j − K ≥ 1`).  Contradiction.
+
+*Conclusion.*  By (iii) `r_{3K} = 6K − 1`; by (ii) the rank then grows by at least one per
+bond until it is `D_K`, which happens at the latest for `N = D_K − 3K + 1` bonds.  ∎
+
+**Remark (two equivalent forms of the conic condition).**  (1) *Jacobi matrices.*  A linear
+relation among the `2N − 1` conditions is a symmetric tridiagonal `N × N` matrix `J` with
+`PJPᵀ = 0`, `P` the `3K × N` matrix of stacked bond vectors: the row space of `P` — the span of
+the `3K` coordinate sequences of the bond vectors — is totally isotropic for `J`.  So
+`r_N = 2N − 1 − dim{J tridiagonal : PJPᵀ = 0}`, and (d) says that no Jacobi matrix has this
+property as long as `2N − 1 ≤ D_K`.  (2) *Squares of codes.*  `r_N` is the dimension of the
+componentwise (Schur) square of the `3K`-dimensional space of functions on the constrained
+pairs spanned by the coordinates of the stacked edge vectors; for a generic `3K`-dimensional
+code of length `2N − 1` this is `min(2N − 1, 3K(3K + 1)/2)`, and (d) says that chain codes
+behave like generic ones apart from the `K − 1` relations `|e^{(k)}|² = |e^{(1)}|²`.
 
 Evidence for (d): the exact computation of (b); numerically the same threshold at bond angle
 111° for `K ≤ 4` (`experiments/geometry/run_checks.py`, test `conic_threshold_float`).
@@ -367,7 +468,12 @@ The middle row is where the set `𝒫(z)` of chains that are linear images of th
 configuration is expected to contain nothing but the `K` states: counting the unknowns of
 `A` modulo `O(3)` against the equations, `9K − 3 < 2n − 3`.  This count is a heuristic — the
 affine space `I + 𝒩(z)` is not generic, and the complex solution set is larger than the real
-one (§5.5) — but it gives the right numbers where we can check them.  Between the second
+one (§5.5).  Where we can check it, it predicts correctly where `𝒫(z)` reduces to the states
+(`K = 2`: `n = 10`, Theorem I; `K = 3`: `n = 14` numerically), but identifiability itself can
+start earlier: for `K = 2` at `n = 9`, `𝒫(z)` has 2 to 10 further points and the ensemble is
+still identifiable in every instance computed (6 by us, 18 by the referee, GEOMETRY-REV-0001);
+for `K = 3` at `n = 13` the referee found one instance that is not identifiable and one
+without an alternative.  The observed values 5, 9, 14 for `K = 1, 2, 3` equal `⌈9K/2⌉`.  Between the second
 and the third row identifiability holds but the certificate is not linear: a gap between
 what the data determine and what the algorithm of §6 extracts.
 
@@ -376,10 +482,11 @@ memory of the literature].**  Finding the states from `M` below the conic thresh
 *find the matrices of rank at most 3 in the affine space `I + 𝒩(z)` of symmetric `3K × 3K`
 matrices* — the MinRank problem with target rank 3.  Its dimension `dim 𝒩(z) = 9K(K+1)/2 −
 (2n − 3)` runs from about `4.5K² − 9K` at the (conjectured) identifiability threshold down to
-`K − 1` at the conic threshold, where the problem is linear.  The linearisation of the
-kernel formulation (`P·[I; X]ᵀ = 0`, Kipnis–Shamir) has at least as many equations as
-monomials exactly when `dim 𝒩(z) ≤ K − 1`: the conic threshold is where this cheapest
-algebraic method starts to work.  MinRank is NP-hard in general (Buss–Frandsen–Shallit
+`K − 1` at the conic threshold, where the problem is linear (the rank-3 points are read off
+the eigenspaces of one element of `𝒩(z)`, §6).  (An earlier version claimed that the
+Kipnis–Shamir linearisation of the kernel formulation becomes determined exactly at the conic
+threshold; the count does not support this — GEOMETRY-REV-0001, m15 — and the sentence is
+withdrawn.)  MinRank is NP-hard in general (Buss–Frandsen–Shallit
 1999); for zero-dimensional instances of fixed target rank `r` on `N × N` matrices the known
 bounds on the degree of regularity of the minors system are of order `r(N − r)`
 (Faugère–Safey El Din–Spaenlehauer), here `≈ 9K`, i.e. a cost `K^{O(K)}`: polynomial for a
@@ -420,8 +527,14 @@ function that is not identically zero on a connected analytic manifold, so they 
 somewhere, and then `J_{n+1}` has full column rank.  More data at the same `n` only add rows.
 (c) is the inverse function theorem applied to a square subsystem.  ∎
 
-So the minimal sequence separation of averaged data that can identify `K` states (locally)
-is exactly `K + 3`: **each additional state costs one more unit of range**, and nothing else.
+So for `2 ≤ K ≤ 8`, at the two bond geometries, the minimal sequence separation of averaged
+data that identifies `K` states locally is `K + 3`: from two states on, **each additional
+state costs one more unit of range**.  The step from one state to two costs two units: for
+`K = 1` separation `3 = K + 2` already gives a square Jacobian of full rank
+(`d²_{i,i+3} = A_i − B_i cos θ_i`).  For `K ≥ 9` and for other bond geometries sufficiency is
+not proved.  Theorem H is local: it says nothing about `K`-state ensembles far from the given
+one (mirror images and permutations of states give the same shape distribution; other
+coincidences are not excluded by the argument).
 
 ### 5.4 Sequence-local data, among all ensembles
 
@@ -439,8 +552,25 @@ to `𝔸` and the distance from `𝔸`, which is zero).  Point `dK + 2` has pres
 its `dK + 1` predecessors; inductively `ζ = z` up to isometry, `M(ν) = M(μ)`, and Theorem B
 applies.  ∎
 
+The second hypothesis of Theorem F′ (every `3K + 1` consecutive stacked points affinely
+independent, i.e. every `3K` consecutive stacked bond vectors linearly independent) is
+generic for chains with fixed bond lengths and one bond angle in `(0, π)`, for every `K`
+**[P]**: by the proof of Theorem C(c)(iii) a generic path of `3K` stacked bond vectors is
+linearly independent, and a generic `K`-tuple of chains has this property in each of its
+finitely many windows.  (An earlier version did not prove this; the referee pointed it out
+and checked it exactly for `K ≤ 4`, GEOMETRY-REV-0001 m8; our exact check, together with
+(CC) at `n₀(K)` for `K ≤ 5` at two bond geometries: `exact_general_position.py`.)  It fails,
+like (CC), when all states are helices (§12).
+
 Between `K + 3` (local, within `K`-state ensembles) and `3K + 1` (global, among all
-ensembles) we know nothing; see `PROOF_OBLIGATIONS.md`, O-4.
+ensembles) we know nothing; see `PROOF_OBLIGATIONS.md`, O-4.  The stress certificates of
+Theorem F (§7.1) cannot help here: **a stress supported on pairs of sequence separation at
+most `dK` vanishes** whenever every `dK + 1` consecutive stacked points are affinely
+independent [P; the referee's observation].  Indeed the first row of a banded `Ω` with
+`Ω𝟙 = 0` and `Ωz = 0` is an affine dependency among the points `1, …, w + 1 ≤ dK + 1`, hence
+zero; by symmetry the first column vanishes, and the argument repeats with row 2.  So on
+sequence-local data Theorem F needs separation `dK + 1` at least, where Theorem F′ already
+applies.
 
 ### 5.5 Two states: the complete picture
 
@@ -449,7 +579,7 @@ rescale the blocks): a chain that is a linear image of the stacked configuration
 to a symmetric `6 × 6` matrix `P` of rank at most 3 with `ẽᵀPẽ = ℓ_e²` on the `2n − 3`
 constrained edge vectors, and the two states are the block projectors `E_1, E_2`.  Let
 `L = {P : ẽᵀPẽ = c·ℓ_e² for some scalar c}`, a linear space of dimension `25 − 2n`
-generically, and `V = {[P] ∈ ℙ(L) : rank P ≤ 3}`, a projective scheme cut out by the
+generically for `n ≤ 11` (and 2 from `n = 12` on, by (CC)), and `V = {[P] ∈ ℙ(L) : rank P ≤ 3}`, a projective scheme cut out by the
 `4 × 4` minors.
 
 **Theorem I (two states, identifiability among all ensembles) [P, exact].**  Unit bonds,
@@ -484,20 +614,25 @@ For `n = 11, 12` two hyperplanes cannot contain the ten or eleven stacked bond v
 the same script finds `deg V = 2`: the two block projectors, reduced, and nothing else.
 
 **What happens below [N].**
-* `n = 9`: `V` is finite in the affine chart; 4 to 6 further real, positive semidefinite
-  points exist (further chains that are linear images of `z`), but in all six instances
-  computed no mixture representing the identity puts mass on them (linear program,
-  `explore_below.py 9`): the ensemble is still identifiable.
-* `n = 7, 8`: `𝒫(z)` is a surface (dimension `18 − 2n`), its convex hull has the identity in
-  its interior, and **the ensemble is not identifiable**: in all six instances computed a
+* `n = 9`: `V` is finite in the affine chart (48 complex points for the referee's witnesses);
+  a few further real, positive semidefinite points exist (further chains that are linear
+  images of `z`) — 4 to 6 in our six instances at 111°, between 2 and 10 in the referee's
+  nine instances at 97° — but in all instances computed no mixture representing the identity
+  puts mass on them (linear program, `explore_below.py 9`): the ensemble is still
+  identifiable.
+* `n = 7, 8`: `𝒫(z)` has dimension `18 − 2n` (a surface for `n = 8`, four-dimensional for
+  `n = 7`), its convex hull has the identity in its interior, and **the ensemble is not
+  identifiable**: in all six instances computed a
   mixture of 9 (`n = 8`) or 11 (`n = 7`) chains, none of them one of the two states,
   reproduces every averaged squared distance to `10⁻¹⁴` with bond lengths correct to
-  `10⁻¹⁵` (`explore_below.py 7 8`).  By Theorem H the same ensemble is locally the only
-  *two-state* ensemble with its data: here the number of states is exactly the prior that
-  restores identifiability.
+  `10⁻¹⁵` (`explore_below.py 7 8`; reproduced by the referee with independent code).  By
+  Theorem H the same ensemble is *locally* the only two-state ensemble with its data; whether
+  it is the only two-state ensemble globally is not proved (the referee's direct search over
+  two-state ensembles at `n = 7, 8, 9` found no other [N]).  So the number of states is a
+  prior that restores at least local identifiability.
 
-So for two states the three notions separate: identifiable when the number of states is
-known (`n ≥ 7`), identifiable outright (`n ≥ 10`, and 9 in the instances computed),
+So for two states three notions separate: locally identifiable among two-state ensembles
+(`n ≥ 7`), identifiable among all ensembles (`n ≥ 10`, and 9 in the instances computed),
 certifiable by the linear system of §6 (`n ≥ 12`).
 
 For `K ≥ 3` the scheme at infinity is positive-dimensional at the conjectured threshold
@@ -527,8 +662,12 @@ ensemble of chains, with any number of states and any weights, is determined mod
 congruence, among all ensembles of chains, by the laws of the distances `d_{i,i+3}` and
 `d_{i,i+4}`.
 (b) For a single separation `s ≥ 3` the squared distances `d_{i,i+s}` are algebraically
-independent functions of the torsions: the matroid is free, there are chimeras, and no
-ensemble with two or more generic states is determined by the laws of these distances.
+independent functions of the torsions: the matroid is free, and no ensemble with two or
+more generic states is determined by the laws of these distances — for `s = 3` because every
+splice of two states is again a chain (the signs of the torsions are free as well); for
+`s ≥ 4` already because one separation does not determine a single generic chain up to
+congruence (whether *real* chimeras exist for `s ≥ 4` depends on the image of the real chain
+variety, which is not a product, and is not claimed).
 
 *Proof.*  (a) `d²_{i,i+3} = A_i − B_i cos θ_i` with `B_i ≠ 0`: the `n − 3` features `b_i = (i, i+3)`
 form a basis.  `e_i = (i, i+4)` depends on `θ_i` and `θ_{i+1}` only, and on each of them (the
@@ -540,7 +679,9 @@ fundamental graph with respect to one basis is connected is connected.  Injectiv
 `d_{i,i+3}` gives `|θ_i|` and `d_{i,i+4}` the relative sign of `θ_i` and `θ_{i+1}`.
 (b) `d²_{i,i+s}` depends on the torsions `θ_i, …, θ_{i+s−3}` and, generically, on `θ_i`; the
 Jacobian of the `n − s` features with respect to `θ_1, …, θ_{n−s}` is triangular with non-zero
-diagonal.  E5(b) gives the chimeras.  ∎
+diagonal.  For `s = 3` the image of the chain variety is the product of the intervals
+`[A_i − |B_i|, A_i + |B_i|]`, so splices are realised (E5(b)); for `s ≥ 4` the `n − s`
+distances cannot determine the `n − 3` torsions.  ∎
 
 `experiments/geometry/matroid_connectivity.py` decides connectivity for other patterns by an
 exact computation (the matroid of a rational witness modulo a prime is a weak image of the
@@ -571,10 +712,26 @@ separation 4 suffices for every `K`.  The price of a mean is exactly the depende
 The cost is one eigen-decomposition of order `n`, a linear system with `|E₀|` equations in
 `dK(dK + 1)/2` unknowns and an eigen-decomposition of order `dK`.
 
+Moreover the certificate is sound for every realizable input [P; the referee's observation,
+GEOMETRY-REV-0001 m10]: if `M = M(ν)` for *some* ensemble `ν` on `𝒞`, `rank G = dK`, and the
+solution space of step 2 has dimension `K − 1`, then `ν` is a `K`-mixture satisfying (CC) and
+DEMIX returns it.  (Step 1 refuses inputs whose stacked configuration does not have rank
+`dK`, e.g. mixtures of ideal helices — §12.)
+
 *Proof.*  `G` is the Gram matrix of the centred stacked configuration, so `Z = z_c Q₀` for some
 `Q₀ ∈ O(dK)`, and `𝒩(Z) = Q₀ᵀ 𝒩(z) Q₀ = Q₀ᵀ 𝒯 Q₀`.  A generic element is
 `T = Q₀ᵀ(Σ s_k E_k)Q₀` with distinct `s_k`, whose eigenspaces are the images of the blocks; so
-`Z Q_k = √w_k X_k R_k` with `R_k ∈ O(d)`, and (2.1) gives the weights.  ∎
+`Z Q_k = √w_k X_k R_k` with `R_k ∈ O(d)`, and (2.1) gives the weights.
+Soundness.  By Lemma 2.2 (with `Z` in the place of `z`) the identity is the barycentre of a
+probability measure on the compact set `𝒫(Z) ⊂ I + 𝒩(Z)`, an affine space of dimension `K − 1`;
+by Carathéodory `I = Σ_{j=1}^{m} v_jP_j` with `m ≤ K`, `v_j > 0`, `P_j ∈ 𝒫(Z)`.  Each `P_j` has
+rank at most `d` and the sum has rank `dK`, so `m = K`, the ranks are `d` and the ranges are
+independent.  A vector orthogonal to the ranges of `P_j`, `j ≠ 1`, satisfies `u = v_1P_1u`; such
+vectors form a space of dimension `d` inside the range of `P_1`, hence equal to it: the
+ranges are mutually orthogonal and `v_jP_j` are the orthogonal projections onto them.  So `Z`
+is, up to a rotation, the stacked configuration of the `K`-mixture with states
+`Y_j = ZA_jᵀ` (`A_jᵀA_j = P_j`) and weights `v_j`, whose trivial quadrics already fill the
+`(K − 1)`-dimensional space `𝒩(Z)`: it satisfies (CC), and Theorem B identifies `ν` with it.  ∎
 
 Floating-point behaviour (`experiments/geometry/demix.py`, test `demix_recovers`): exact
 recovery at the thresholds `n₀(K)` for `K = 2, 3, 4` (state RMSD `≤ 2·10⁻⁷`, weights to
@@ -615,6 +772,16 @@ identifiable if its stacked framework is super-stable in `ℝ^{dK}` up to the bl
 group.*  `(Ω, rank of the conic system)` is an independently checkable certificate: one
 `LDLᵀ` factorisation and two ranks in exact arithmetic.
 
+*Instances with incomplete data* **[N; the referee's semidefinite programme,
+`experiments/geometry/review1/k_stress.py`]**.  The first versions of this report had no
+instance of Theorem F with incomplete data.  For two generic states with `n = 14` and `16`
+atoms such a stress exists when `F` is the band `3 ≤ |i − j| ≤ 7` or `≤ 8` (smallest non-zero
+eigenvalue `3·10⁻⁴` to `5·10⁻²`, kernel exactly `span(𝟙, z)`), and for 45 or 55 random pairs
+out of the 66 unconstrained ones at `n = 14`; it does not exist for the bands `≤ 5` and
+`≤ 6` — in agreement with §5.4: no stress at all is supported within separation `dK = 6`.
+So for sequence-local data Theorem F starts exactly where Theorem F′ does; its use is for
+*scattered* measured pairs.
+
 ### 7.2 Complete data: a global stability theorem
 
 Let `d_P(X, Y) = min_g ‖X − gY‖_F` (minimum over isometries; `√n ·` RMSD after optimal
@@ -653,7 +820,7 @@ is supported on block `k` with a skew block: `V` is an infinitesimal isometry.  
 `φ ≥ κ min_k d_P(·, X_k)²`.
 (d) Write `η = ‖M(ν) − M(μ)‖_F`, `Q = ∫ min_k d_P² dν ≤ C₁η`, and let `ν_k` be the mass of the
 `k`-th nearest-state cell.  For `X` in cell `k`, optimally aligned, `X = X_k + Δ`,
-`D(X) − D(X_k) = L_k(Δ) + D(Δ)` with `L_k` linear and `‖D(Δ)‖ ≤ 4‖Δ‖²`; and
+`D(X) − D(X_k) = L_k(Δ) + D(Δ)` with `L_k` linear and `‖D(Δ)‖_F ≤ 2n‖Δ‖²`; and
 `Δ = τ + O(‖Δ‖²)` with `τ` tangent to `𝒞` at `X_k` (smoothness).  Hence
 `M(ν) − M(μ) = Σ_k (ν_k − w_k)D(X_k) + Σ_k L_k(τ̄_k) + R`, `‖R‖ ≤ C₂Q`, with `τ̄_k` tangent.  The
 linear map `(a, τ̄) ↦ Σ a_k D(X_k) + Σ L_k(τ̄_k)` on `{Σ a_k = 0} × ∏(T_{X_k}𝒞 ⊖ isometries)` is
@@ -668,12 +835,41 @@ move the excess mass between states (cost at most `diam² · ½Σ|ν_k − w_k|`
 (e) Replace the state `X_1 = X(θ)` by the two states `X(θ ± εv)` with weights `w_1/2`: `M`
 changes by `O(ε²)` (the first-order terms cancel) and `W₂² = w_1 ε² |∂_v X|²(1 + o(1))`.  ∎
 
+**Theorem G′ (the same conclusions without the conic condition) [P; for two states P, exact].**
+The proof of Theorem G uses (CC) in three places only, and each can be replaced by a weaker
+hypothesis on the mixture `μ` with stacked configuration `z` spanning `ℝ^{dK}`, `n − 1 > dK`:
+
+  (H)  `𝒫(z) = {E_k/w_k}` — the only chains that are linear images of `z` are the states
+       (this is (a));
+  (H′) `𝒩(z) ∩ T_k = {0}` for every `k`, where `T_k` is the space of symmetric matrices whose
+       blocks `(l, l')` with `l, l' ≠ k` vanish — the states are *reduced* points of the
+       rank-`d` locus of `I + 𝒩(z)` (this gives (b): the symmetric part of `Π_kᵀB` lies in
+       `𝒩(z) ∩ T_k`);
+  (J)  the Jacobian of the `K`-state parametrisation is injective modulo isometries (this is
+       the bracketed step of (d)).
+
+Under (H), (H′), (J) all of Theorem G(a)–(e) holds with the same certificate `φ`.  (CC)
+implies the three ((H) by Theorem B; `𝒯 ∩ T_k = 0`; (J) by the bracketed argument).  **For two
+states and generic chains with `n ≥ 10` atoms the three hold without (CC):** (H) is
+Theorem I; (H′) is the reducedness of the two points established in its proof (the rank-3
+locus is smooth at a point of rank exactly 3, so the tangent space of the scheme there is
+`𝒩(z) ∩ T_k`); (J) is Theorem H(a).  So the global bound `W₂² ≤ C‖ΔM‖` holds from 10 atoms
+on, two atoms before the linear certificate exists.  (For `n = 9` we do not know; for
+`n ≤ 8` there is no identifiability to stabilise.)
+
 The certificate `φ` is linear in the data: `∫ φ dν` is computed from `M(ν)` alone, it vanishes
 for `μ`, and it bounds the mean squared distance of `ν` from the `K` states.  It is the
 ensemble analogue of the energy of a positive semidefinite stress.  `κ` is defined by a global
 infimum; its local value at `X_k` — the smallest eigenvalue of `Π^⊥` on the flex space of
 `X_k` — is a linear-algebra quantity, a certified global lower bound is a global optimisation
-over `𝒞` (not attempted; `PROOF_OBLIGATIONS.md`, O-5).
+over `𝒞` (not attempted; `PROOF_OBLIGATIONS.md`, O-5).  **The local value is not an estimate of
+`κ`** [N; the referee's computation, `review1/d_certificate.py`]: in six two-state instances
+with 12 to 18 atoms the smallest ratio `φ/min_k d_P²` found by global search is attained at a
+chain *far* from both states (a near-affine image of the stack) and is 2 to 12 times smaller
+than the smaller local value (e.g. `0.0023` against `0.028` at `n = 14`); the constant
+`√(n − 1 − 3K)/(2κ)` of (c) is then between 47 and 570 in these instances.  Until `κ` has a
+certified lower bound, (c) and (d) are qualitative statements.  The smoothness of `𝒞` near the
+states is used in (d) only; (a)–(c) hold without it (referee's remark).
 
 ---
 
@@ -747,13 +943,32 @@ with the same lengths is a one-state ensemble; and if `0 ≠ S ∈ 𝒩(X)`, the
 affine images `X_±` of Theorem A has the same averaged data on all pairs.  (c) If `X` is
 `F`-second-moment rigid and `y` is a Hilbert-space configuration with the lengths of `X` on
 `F ∪ E₀`, then `D(y) ∈ 𝒮 = 𝒦` is the averaged data of an ensemble of conformations, which
-agrees with `X` on `F`; so that ensemble is `δ_{[X]}` and `D(y) = D(X)`.  (d) By (c): take
-`n = 6` and `F` such that `(F ∪ E₀, X)` is globally but not universally rigid — a generic
-framework with a one-dimensional space of equilibrium stresses whose stress matrix has rank
-`n − 4` but is indefinite (Gortler–Healy–Thurston; Gortler–Thurston).  An explicit instance
-with `F = {14, 25, 36, 16}` and a two-state ensemble of other chains with the same averaged
-data, computed to 12 digits, is in `experiments/geometry/hierarchy_example.py` **[N for the
-instance]**.  ∎
+agrees with `X` on `F`; so that ensemble is `δ_{[X]}` and `D(y) = D(X)`.  (d) By (c), for chains with six atoms (bond lengths and angles are those of `X`; `|E₀| = 9`)
+it suffices to find `X` with `𝒩(X) = 0` such that `(F ∪ E₀, X)` is globally rigid and not
+universally rigid.  Take `F = {14, 25, 36, 16}`, 13 bars in all.  For the rational
+configuration
+
+    X⁰ = (0,0,0), (1,0,0), (1,2,0), (3,1,2), (2,−1,3), (4,2,1)
+
+exact arithmetic gives **[P, exact: `experiments/geometry/exact_hierarchy_witness.py`]**:
+the rigidity matrix has rank 12, so the equilibrium stress is unique up to scale; its stress
+matrix has rank `2 = n − 4` and is indefinite (diagonal entries `−2` and `55/8`; sum of the
+principal `2 × 2` minors `−5761/128`); the nine `E₀`-edge vectors lie on no conic.  These are
+open conditions, so they hold for every configuration `X` near `X⁰`, in particular for one
+with algebraically independent coordinates.  For such a generic `X`: a stress matrix of rank
+`n − d − 1` implies global rigidity (Connelly 2005); a generic universally rigid framework
+has a positive semidefinite stress matrix of rank `n − d − 1` (Gortler–Thurston 2014), which
+is impossible when the only stress is indefinite.  So `(F ∪ E₀, X)` is globally rigid, not
+universally rigid, `𝒩(X) = 0`, and by (c) `X` is not `F`-second-moment rigid.  ∎
+
+(The first versions of this proof asserted the existence of such a generic framework and
+gave only a floating-point instance with unit bonds, which is not generic, so that the cited
+theorems did not apply to it; the gap was found, and the exact witness supplied, by the
+referee — GEOMETRY-REV-0001, M3.)  An explicit instance with unit bonds, `F` as above, and a
+two-state ensemble of other chains with the same averaged data, computed to 12 digits, is in
+`experiments/geometry/hierarchy_example.py` **[N]**; for a second such instance the referee
+found numerically that the four measured-pair equations have exactly two solutions on the
+torus of torsions, `X` and its mirror image.
 
 **Second-moment rigidity is strictly weaker than universal rigidity [N; O-3].**  A sufficient
 condition for `F`-second-moment rigidity that does not involve other dimensions: `X` is the
@@ -825,33 +1040,51 @@ before our first commit (16:54 UTC); read by us at 17:19 UTC, after our second).
   as soon as every state obeys statewise constraints: on a chain variety the mean squared
   distances do determine generic single conformations (`n ≥ 5`) and generic mixtures.
 * Its Theorem E7 (determination by the *laws* of the edge lengths = generic global rigidity)
-  and our Theorem E (determination by the *means* of the squared lengths lies between global
-  and universal rigidity) fit together: laws ⇔ global rigidity; means ⇒ global rigidity,
-  ⇐ universal rigidity, and neither converse holds on chains.
+  and our Theorem E fit together: laws ⇔ global rigidity; means ⇒ global rigidity together
+  with the conic condition `𝒩(X) = 0`, and means ⇐ universal rigidity together with
+  `𝒩(X) = 0`.  The converse of the first fails on chains [P, exact witness: Theorem E(d)];
+  that of the second fails numerically [N: instance A].  (Earlier versions of this paragraph,
+  of the Summary and of the register said "universal ⇒ second-moment ⇒ global" without the
+  conic condition; that is false — GEOMETRY-REV-0001, M1; `DEAD_ENDS.md` DG-13.)
 
 *Not found in print (searches of 2026-11-26; an absence in searches is not a proof of
 novelty).*  Theorem B and B′ (identifiability of a mixture among all ensembles from averaged
 squared distances via the trivial-quadric condition); the thresholds of Theorem C; the
 algorithm DEMIX; Theorem G (global `W₂` stability with the explicit certificate); Theorem F for
-`K ≥ 2`; second-moment rigidity as a notion between global and universal rigidity, Theorem E;
+`K ≥ 2`; second-moment rigidity as a notion, and Theorem E (its place between global and
+universal rigidity once the conic condition is added to both);
 Theorem D for chains with bond angles and the exact rank-4 witness; Theorem H (range `K + 3`); Theorem I and the separation of the three thresholds for two states.
 
 **Corollary 9.1 (a consequence for reconstruction with unknown orientations) [P, given K].**
 Observe `y = g·X_κ + σξ`: a conformation drawn from `μ`, rotated by a Haar-random `g ∈ O(3)`
 (or `SO(3)`), labelled atoms, Gaussian noise.  Then `E[y_i y_jᵀ] = ⅓⟨⟨x_i, x_j⟩⟩_μ I₃ + σ²δ_ij I₃`:
 the second moment of the data determines exactly `M(μ)` (for centred conformations), and
-nothing else.  Hence under (CC) the shape distribution is a function of the second moment,
-whereas without statewise constraints no mixture with `K ≥ 2` is (Proposition 3.1).  In the
-framework of Bandeira, Blum-Smith, Kileel, Perry, Weed and Wein — the number of samples needed
-at noise level `σ` grows like `σ^{2q}` with `q` the smallest moment order that determines the
-orbit — the constraints lower the order from `q = 3` (Proposition 9.2) to `q = 2`.  We did
-not re-derive the sample-complexity theorem; the statement is conditional on it.
+nothing else.  Hence under (CC) the distribution of shapes — conformations modulo rotations
+*and reflections* — is a function of the second moment, whereas without statewise
+constraints no mixture with `K ≥ 2` is (Proposition 3.1).  The second moment is blind to an
+independent reflection of each state, so what it can determine depends on the group:
+* *rotations and reflections, `O(3)`:* the estimand is the shape distribution; without
+  constraints moments of order at least 4 are needed (the third moment vanishes), with
+  (CC) order 2 suffices;
+* *proper rotations, `SO(3)`:* the estimand of Proposition 9.2 is `μ` up to a proper
+  rotation of each state.  Order 2 with (CC) gives it up to a reflection of each state — `2^K`
+  assignments of handedness remain — and the third moment is still needed for those; only
+  for the reflection-blind estimand do the constraints lower the order from 3 to 2.
+In the framework of Bandeira, Blum-Smith, Kileel, Perry, Weed and Wein the number of samples
+needed at noise level `σ → ∞` grows like `σ^{2q}` with `q` the smallest moment order that
+determines the orbit of the signal; their `q` is defined for a group orbit, so the statements
+above are about `q` for the estimands named.  We did not re-derive the sample-complexity
+theorem; the statement is conditional on it (hypotheses as listed by the Ensemble division,
+ENSEMBLE-RES-0001 §5: additive Gaussian noise, uniformly random group elements, fixed
+dimension, the high-noise limit, generic signals).  (An earlier version said "the constraints
+lower the order from `q = 3` to `q = 2`" without naming group or estimand; GEOMETRY-REV-0001,
+M4.)
 
 **Proposition 9.2 (without constraints the third moment is needed, and suffices) [P].**  In
 the same model with proper rotations and **no** statewise constraints, let `μ = Σ w_k δ_{X_k}`
 be a mixture of labelled configurations (anchored at a common origin) whose stacked points
-span `ℝ^{3K}`.  The second moment determines `M(μ)` only (Proposition 3.1: a
-`9K(K−1)/2`-dimensional family of mixtures).  The third moment,
+span `ℝ^{3K}`.  The second moment determines `M(μ)` only (Proposition 3.1: a family of
+mixtures of dimension `9K(K−1)/2 + K − 1`).  The third moment,
 `E[y_i ⊗ y_j ⊗ y_l] = (τ_ijl/6)·ε` with `τ_ijl = Σ_k w_k det(x_i^{(k)}, x_j^{(k)}, x_l^{(k)})` and `ε`
 the alternating tensor, determines in addition the alternating 3-form
 `T = Σ_k w_k^{-1/2} vol_k` on the stacked space (`vol_k` the volume form of block `k`), and
@@ -877,7 +1110,7 @@ states, `T` restricted to a block gives `w_k^{-1/2}` and the orientation.  ∎
 
 `proofs/Geometry/EnsembleRigidity.lean` (Lean 4.31, Mathlib v4.31.0; zero warnings; axioms
 `propext`, `Classical.choice`, `Quot.sound` only; imported by `proofs/AxiomAudit.lean`, which
-now walks 5072 declarations).
+now walks 5110 declarations).
 
 | declaration (namespace `MetricChain.Geometry`) | statement | used in |
 |---|---|---|
@@ -885,14 +1118,20 @@ now walks 5072 declarations).
 | `stress_energy_eq`, `mixture_energy_eq` | for symmetric `Ω` with zero row sums, `yᵀΩy = −½ Σ Ω_ij (y_i − y_j)²`; the `Ω`-energy of a finite mixture is linear in its averaged squared distances | Theorems F, G |
 | `stress_certificate` | `Ω ⪰ 0`, zero row sums, annihilating a reference mixture; a second finite mixture with the same averaged squared distances on the support of `Ω` has every coordinate of every state of positive weight in `ker Ω` | Theorem F (first half of the proof) |
 | `block_coeff_nonneg`, `block_rigidity` | a linear map into a space of dimension `≤ d` whose squared norm is `c₁‖u‖² + c₂‖u'‖²` on two orthogonal blocks of dimension `d ≥ 1` has `c₁ = 0` or `c₂ = 0` (and `c_k ≥ 0`) | Theorems B, F, G ("one block only") |
+| `exists_linearMap_of_gram_eq`, `state_is_linear_image` | families with equal Gram matrices are related by a linear inner-product-preserving map; every state of positive weight of a finite mixture with the averaged squared distances of a spanning configuration `z` is a linear image of `z` | Lemma 2.2 (finite mixtures) |
+| `finite_mixture_identifiable` | Theorem B against finite competing mixtures, end to end, with abstract orthogonal blocks: every state of positive weight lives on one block | Theorem B |
+| `mixture_identifiable_stacked` | Theorem B in coordinates: states `X_k`, weights `w_k`, stacked configuration in the `ℓ²` product; every state of positive weight of a competing finite mixture has the distance matrix of some `X_{k₀}` | Theorem B |
+| `line_mixture_example` (`line_conic`, `line_span`, `line_states_differ`) | all hypotheses of `mixture_identifiable_stacked` hold for two different states (straight and folded three-point unit chains on the line), and the theorem applies | non-vacuity, two states |
+| `conic_condition_line` | the conic hypothesis is satisfiable (one block, the line) | non-vacuity |
 | `mixture_state_of_conic` | under the conic condition (every symmetric bilinear form vanishing on the edge vectors is block-scalar) a linear map into dimension `≤ d` that preserves the edge lengths is a scaled isometry on one block and zero on the others | Theorem B, from Lemma 2.2 on |
 | `sqdist_midpoint_of_conic` | affine flexes: maps `A_±` preserving edge lengths with the midpoint identity | Theorem A (iii)⇒(ii), Theorem E(b) |
 | `globallyRigid_of_secondMomentRigid` | second-moment rigidity (finite mixtures) implies global rigidity on `F ∪ E₀` | Theorem E(b) |
-| `secondMomentRigid_of_universal` | universal rigidity of `(F ∪ E₀, x)` reduces `F`-second-moment rigidity to second-moment rigidity for complete averaged data | Theorem E(a) |
-| `fourAtom_virtual_value_witness`, `block_rigidity_nonvacuous` | non-vacuity | Example 3.3 |
+| `secondMomentRigid_of_universal` | universal rigidity of `(F ∪ E₀, x)` reduces `F`-second-moment rigidity to second-moment rigidity for complete averaged data (the hypothesis `SecondMomentRigid E₀ univ x` is the conic condition and cannot be dropped) | Theorem E(a) |
+| `universal_not_secondMomentRigid` | three points `(1, 0, i)` in the plane, constraints the path, measured pair the ends: universally rigid on `F ∪ E₀` and **not** `F`-second-moment rigid — the hypothesis above is necessary (the referee's counterexample, GEOMETRY-REV-0001 M1) | Theorem E(a), sharpness |
+| `fourAtom_virtual_value_witness`, `block_rigidity_nonvacuous` | two elementary identities (a number between `a` and `b` is a convex combination of them; `‖u‖² = 1·‖u‖² + 0·‖u'‖²`); they illustrate Example 3.3 and the conclusion of `block_rigidity` but do not instantiate the hypotheses of a theorem — the instance that does is `line_mixture_example` | Example 3.3 |
 
-Not machine-checked: Lemma 2.2 (the linear isometry from equal Gram matrices; the measurable
-version), the weights in Theorem B, Theorem B′, everything about genericity and thresholds (Theorems C,
+Not machine-checked: the measure-theoretic (`L²`) version of Lemma 2.2 and hence Theorem B
+against arbitrary ensembles; the weights of the competing mixture in Theorem B; Theorem B′; everything about genericity and thresholds (Theorems C,
 D, H: exact computations outside Lean), Theorem G.  `UniversallyRigid` in the Lean file
 quantifies over inner product spaces of one universe; `SameShape` is equality of all pairwise
 distances (for point configurations in Euclidean spaces: congruence).
@@ -909,6 +1148,9 @@ python3 experiments/geometry/exact_4d_extreme.py     # Theorem D(b)
 python3 experiments/geometry/exact_nonlinear_threshold.py 10 0 0   # Theorem I (needs Singular; 80 s over Q)
 python3 experiments/geometry/explore_below.py 7 8 9  # two states below the threshold [N]
 python3 experiments/geometry/demix.py                # algorithm DEMIX on synthetic ensembles
+python3 experiments/geometry/exact_hierarchy_witness.py   # Theorem E(d), exact witness
+python3 experiments/geometry/exact_general_position.py 5  # hypothesis of Theorem F' (exact)
+python3 experiments/geometry/exact_conic_rank.py 20 13 rational angles   # Theorem C(b), K = 13..20 (3 min)
 python3 experiments/geometry/hierarchy_example.py    # Theorem E(d), numerical instance
 python3 experiments/geometry/er_not_ur_instance.py A # second-moment rigid, not universally rigid [N; 3 minutes]
 python3 experiments/geometry/matroid_connectivity.py 12   # Theorem J and the table of patterns (exact)
@@ -919,18 +1161,45 @@ python3 experiments/geometry/mutation_checks.py      # the tests detect planted 
 
 * Averaged *squared* distances are one specific linear observable.  Nothing here applies to
   averages of other functions of distance (inverse sixth powers, contact frequencies,
-  scattering curves); for those the stacked configuration is not a Euclidean framework.
-* Identifiability is for exact data.  The quantitative theorem (G) has a constant defined by a
-  global infimum that we do not compute, holds under the conic condition only, and its
-  exponent means that a symmetric broadening of a state by `ε` is invisible at order `ε`.
-* Generic statements exclude a proper analytic subset of conformations that we do not
-  describe.  Planar and other symmetric conformations can violate (CC) at any length.
-* The sharp threshold of Theorem C(b) is proved for twelve values of `K` at two bond
-  geometries by exact computation; for all `K` it is a conjecture.  Identifiability among all
-  ensembles below the conic threshold is proved for two states only (Theorem I, one bond
-  geometry and generic ones); for three states it is numerical, beyond that a conjecture.
-  The non-identifiability at `n = 7, 8` and the identifiability at `n = 9` are numerical
-  (six instances each).
+  scattering curves beyond their low-angle limit); for those the stacked configuration is not
+  a Euclidean framework.  Where the observable is measured (low-angle scattering with pairs
+  of labels) the datum is usually a block sum `⟨C, M⟩`, not single entries (Science division,
+  SCI-RES-0029 §2).
+* **The mechanism needs the statewise constraints to hold exactly and identically in all
+  states.**  Nothing is proved for bond data known to finite accuracy or varying between
+  states.
+* **Finite mixtures only.**  (CC) needs `3K ≤ n − 1`; an ensemble with any continuous spread is
+  outside every identifiability theorem of this report (Theorem G only bounds its distance
+  to a mixture that satisfies (CC), and its exponent means that a symmetric broadening of a
+  state by `ε` is invisible at order `ε`).
+* Identifiability is for exact data.  The quantitative theorem (G) has a constant defined by
+  a global infimum that we do not compute; numerically it is 2 to 12 times smaller than its
+  local values (§7.2), so (c)–(d) are qualitative until it is certified.
+* **Which conformations are excluded by "generic".**  Generic statements exclude a proper
+  analytic subset that we do not describe completely.  Known members:
+  (i) *planar* conformations (for one state `𝒩(X) ≠ 0`);
+  (ii) *helices*: for `K ≥ 2` states of constant torsion the stacked configuration has rank
+  `2K + 1`, not `3K` (the coordinates of the bond vectors of a helix are spanned by a
+  constant and one harmonic), and `dim 𝒩(z) = 7` for two helices at every length checked
+  (`n = 12, …, 40`): (CC), DEMIX and Theorem G never apply to mixtures of ideal helices
+  (a single helix has `𝒩 = 0`; a helix plus a generic chain satisfies (CC); a two-helix
+  mixture was still identifiable in the referee's computations — `review1/m_helix.py`);
+  (iii) *states that share rigid segments*: two states that differ in a single torsion are
+  never identified, at any length, and (CC) fails whenever two states differ in at most
+  three torsions (Science division, SCI-RES-0029 §3: `dim 𝒩(z) ≥ 21 − 6s + s(s − 1)/2` for
+  `s ≤ 4` shared segments).  These are the commonest two-state motions; the theorems of this
+  report are about states that differ everywhere.
+* The sharp threshold of Theorem C(b) is proved for `K ≤ 20` at one bond geometry and
+  `K ≤ 12` at a second by exact computation; for all `K` it is a conjecture (a threshold twice
+  as large is proved).  Identifiability among all ensembles below the conic threshold is
+  proved for two states only (Theorem I, one bond geometry and generic ones); for three
+  states it is numerical, beyond that a conjecture.  The non-identifiability at `n = 7, 8` and
+  the identifiability at `n = 9` are numerical (six instances each by us; three and eighteen
+  by the referee).
 * Theorem H is local and within the `K`-state family; it says nothing about ensembles with a
-  different number of states or far away.
+  different number of states or far away, and its sufficiency part is an exact computation
+  for `K ≤ 8` at two bond geometries.
 * No noise model, no statistics, no algorithmic guarantee for DEMIX under perturbation.
+* The parts of this text written after commit `e8e2582` (Theorem G′, the present form of
+  Theorem C(c), the corrections made after the internal review) have been checked by their
+  author only.

@@ -17,6 +17,10 @@ A ring homomorphism to a field cannot increase the rank, so
       rank_p  <=  rank_Q  <=  dim Sym(3K) - (K-1),
 and rank_p = dim Sym(3K) - (K-1) proves the claim at the witness; the set of torsion vectors
 at which the rank is maximal is then a non-empty Zariski-open subset of the torus.
+
+Usage:  exact_conic_rank.py [Kmax [Kmin [rational|tetrahedral|both [angles|bonds|both]]]]
+  exact_conic_rank.py 12                     all four families, K = 1..12  (about 35 s)
+  exact_conic_rank.py 20 13 rational angles  K = 13..20, bond lengths and angles (about 3 min)
 """
 import sys
 import random
@@ -70,11 +74,15 @@ def check(K, geometry, angles, seed=0):
 
 
 if __name__ == "__main__":
+    # usage: exact_conic_rank.py [Kmax [Kmin [rational|tetrahedral|both [angles|bonds|both]]]]
     Kmax = int(sys.argv[1]) if len(sys.argv) > 1 else 6
+    Kmin = int(sys.argv[2]) if len(sys.argv) > 2 else 1
+    geoms = sys.argv[3] if len(sys.argv) > 3 else "both"
+    cons = sys.argv[4] if len(sys.argv) > 4 else "both"
     ok = True
-    for geometry in ("rational", "tetrahedral"):
-        for angles in (True, False):
-            for K in range(1, Kmax + 1):
+    for geometry in (("rational", "tetrahedral") if geoms == "both" else (geoms,)):
+        for angles in ((True, False) if cons == "both" else (cons == "angles",)):
+            for K in range(Kmin, Kmax + 1):
                 n, dim, r, s, good = check(K, geometry, angles)
                 ok &= good
                 print(f"{geometry:11s} {'bond+angle' if angles else 'bonds only':10s} K={K:2d} "

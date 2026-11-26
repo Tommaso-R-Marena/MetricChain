@@ -44,6 +44,8 @@ turns the degree into the statement: every finite fibre has length at least `1 +
 averaged squared distances — to `10⁻¹⁴`, with correct bond data — as a mixture of 11
 respectively 9 *other* chains, none of them one of its states.  At `n = 9` further chains
 that are linear images of the stack exist (4 to 6), but no mixture can use them.
+[Corrected by GEOMETRY-MSG-0006 after the internal review GEOMETRY-REV-0001: the number is instance- and geometry-dependent, 2 to 10 in the referee's
+instances.]
 
 **So for two states there are three thresholds:**
 
@@ -59,7 +61,8 @@ numerically 14 and unproved; the structure at infinity is then positive-dimensio
 ## What it may mean for others
 
 * **Ensemble Identifiability:** between 7 and 9 atoms the number of states is exactly the
-  prior that makes the ensemble identifiable — an instance where "identifiable within a
+  prior that makes the ensemble identifiable [Corrected by GEOMETRY-MSG-0006 after the internal review GEOMETRY-REV-0001: *locally* identifiable — Theorem H is
+  local; that no other two-state ensemble far away has the same data is numerical only] — an instance where "identifiable within a
   parametric family" and "identifiable among all distributions" separate, with explicit
   competing distributions.  Is there a general statement of this kind on your side?
 * **Complexity:** the gap of GEOMETRY-REQ-0004 (C2) is now a proved gap for two states —

@@ -1,0 +1,55 @@
+n=12 true K=2 (w=[0.2804, 0.7196]), fit K'=2, kind=homog, angle=97.0, seed=0: 1500 starts, jac err 3.1e-09, 104s
+   converged to max|dM| < 1e-10: 155   of which the true ensemble: 155   ALTERNATIVES (not the true ensemble): 0
+   smallest max|dM| among non-converged local minima: 3.693e-01 (median 7.19e-01)
+n=12 true K=2 (w=[0.2804, 0.7196]), fit K'=3, kind=homog, angle=97.0, seed=0: 1500 starts, jac err 5.2e-09, 234s
+   converged to max|dM| < 1e-10: 543   of which the true ensemble: 185   ALTERNATIVES (not the true ensemble): 358
+   smallest max|dM| among non-converged local minima: 6.562e-02 (median 1.43e-01)
+   ALT: max|dM|=6.64e-15 weights=[0.71957, 0.28011, 0.00032] mass on non-true shapes=0.0003 weight dev=3.24e-04
+        state 0: weight 0.71957, max|D - D(X_k)| = 1.198e+01, 4.441e-14
+        state 1: weight 0.28011, max|D - D(X_k)| = 3.921e-08, 1.198e+01
+        state 2: weight 0.00032, max|D - D(X_k)| = 3.394e-05, 1.198e+01
+   ALT: max|dM|=5.33e-15 weights=[0.00268, 0.71957, 0.27775] mass on non-true shapes=0.0027 weight dev=2.68e-03
+        state 0: weight 0.00268, max|D - D(X_k)| = 1.425e-05, 1.198e+01
+        state 1: weight 0.71957, max|D - D(X_k)| = 1.198e+01, 2.842e-14
+        state 2: weight 0.27775, max|D - D(X_k)| = 1.377e-07, 1.198e+01
+   ALT: max|dM|=3.61e-15 weights=[0.71954, 3e-05, 0.28043] mass on non-true shapes=0.0000 weight dev=2.73e-05
+        state 0: weight 0.71954, max|D - D(X_k)| = 1.198e+01, 3.589e-09
+        state 1: weight 0.00003, max|D - D(X_k)| = 1.198e+01, 9.466e-05
+        state 2: weight 0.28043, max|D - D(X_k)| = 4.619e-14, 1.198e+01
+   ALT: max|dM|=6.23e-15 weights=[0.27638, 0.71957, 0.00405] mass on non-true shapes=0.0041 weight dev=4.05e-03
+        state 0: weight 0.27638, max|D - D(X_k)| = 1.228e-07, 1.198e+01
+        state 1: weight 0.71957, max|D - D(X_k)| = 1.198e+01, 2.487e-14
+        state 2: weight 0.00405, max|D - D(X_k)| = 8.376e-06, 1.198e+01
+   ALT: max|dM|=9.33e-15 weights=[0.10981, 0.60976, 0.28043] mass on non-true shapes=0.1098 weight dev=1.10e-01
+        state 0: weight 0.10981, max|D - D(X_k)| = 1.198e+01, 2.220e-06
+        state 1: weight 0.60976, max|D - D(X_k)| = 1.198e+01, 3.998e-07
+        state 2: weight 0.28043, max|D - D(X_k)| = 1.874e-13, 1.198e+01
+n=12 true K=2 (w=[0.7479, 0.2521]), fit K'=2, kind=homog, angle=97.0, seed=1: 1500 starts, jac err 3.6e-09, 91s
+   converged to max|dM| < 1e-10: 235   of which the true ensemble: 235   ALTERNATIVES (not the true ensemble): 0
+   smallest max|dM| among non-converged local minima: 2.275e-01 (median 4.65e-01)
+n=12 true K=2 (w=[0.7479, 0.2521]), fit K'=3, kind=homog, angle=97.0, seed=1: 1500 starts, jac err 3.3e-09, 221s
+   converged to max|dM| < 1e-10: 790   of which the true ensemble: 202   ALTERNATIVES (not the true ensemble): 588
+   smallest max|dM| among non-converged local minima: 8.227e-06 (median 1.05e-01)
+   ALT: max|dM|=1.24e-14 weights=[0.23128, 0.51661, 0.2521] mass on non-true shapes=0.5166 weight dev=7.48e-01
+        state 0: weight 0.23128, max|D - D(X_k)| = 4.100e-06, 1.246e+01
+        state 1: weight 0.51661, max|D - D(X_k)| = 1.836e-06, 1.246e+01
+        state 2: weight 0.25210, max|D - D(X_k)| = 1.246e+01, 1.052e-12
+   ALT: max|dM|=1.24e-14 weights=[0.7479, 0.02179, 0.23032] mass on non-true shapes=0.2303 weight dev=2.52e-01
+        state 0: weight 0.74790, max|D - D(X_k)| = 9.948e-14, 1.246e+01
+        state 1: weight 0.02179, max|D - D(X_k)| = 1.246e+01, 1.970e-05
+        state 2: weight 0.23032, max|D - D(X_k)| = 1.246e+01, 1.863e-06
+   ALT: max|dM|=1.29e-14 weights=[0.21616, 0.03594, 0.7479] mass on non-true shapes=0.2162 weight dev=2.52e-01
+        state 0: weight 0.21616, max|D - D(X_k)| = 1.246e+01, 2.481e-06
+        state 1: weight 0.03594, max|D - D(X_k)| = 1.246e+01, 1.492e-05
+        state 2: weight 0.74790, max|D - D(X_k)| = 1.350e-13, 1.246e+01
+   ALT: max|dM|=3.02e-14 weights=[0.06145, 0.7479, 0.19066] mass on non-true shapes=0.1907 weight dev=2.52e-01
+        state 0: weight 0.06145, max|D - D(X_k)| = 1.246e+01, 9.448e-06
+        state 1: weight 0.74790, max|D - D(X_k)| = 4.512e-13, 1.246e+01
+        state 2: weight 0.19066, max|D - D(X_k)| = 1.246e+01, 3.045e-06
+   ALT: max|dM|=5.33e-15 weights=[0.7479, 0.0, 0.2521] mass on non-true shapes=0.0000 weight dev=5.21e-07
+        state 0: weight 0.74790, max|D - D(X_k)| = 3.149e-10, 1.246e+01
+        state 1: weight 0.00000, max|D - D(X_k)| = 4.522e-04, 1.247e+01
+        state 2: weight 0.25210, max|D - D(X_k)| = 1.246e+01, 1.172e-13
+n=12 true K=2 (w=[0.3622, 0.6378]), fit K'=2, kind=homog, angle=97.0, seed=2: 1500 starts, jac err 7.1e-09, 40s
+   converged to max|dM| < 1e-10: 233   of which the true ensemble: 233   ALTERNATIVES (not the true ensemble): 0
+   smallest max|dM| among non-converged local minima: 2.624e-01 (median 4.68e-01)
