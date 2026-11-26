@@ -1,9 +1,9 @@
 # Status of the Geometric Inference, Rigidity and Inverse Problems Division
 
-*Updated 2026-11-26 (tenth checkpoint; see the commit time).  Branch
+*Updated 2026-11-26 (eleventh checkpoint; see the commit time).  Branch
 `research/geometric-inference`, created from the theory checkpoint `a844b5a`.*
 
-## The six divisions (research owner's mandate of 2026-11-26)
+## The eight divisions (research owner's mandate of 2026-11-26 and two supplementary directives of the same day)
 
 | division | branch | how this branch treats it |
 |---|---|---|
@@ -13,18 +13,49 @@
 | Ensemble (Ensemble Identifiability and Certified Inference) | `research/ensemble-identifiability` | read-only; on the remote from 15:59 UTC; first read at `a570520` (17:19 UTC); its E-G2, E-G3 answered in GEOMETRY-RES-0001; read again at `1a067b5` (fetch of 18:52 UTC) |
 | Geometry (this file) | `research/geometric-inference` | the only branch we write to; ordinary, non-forced commits |
 | Complexity (Mathematical Biology and Computational Complexity) | `research/biological-complexity` | read-only; first read at `4b18ebb` (17:19 UTC); read again at `b36c463` (fetch of 18:52 UTC) |
+| Structural Biology (Structural & Computational Biology, Software Development and Applications) | `research/structural-biology` | read-only; authorised about 22:00 UTC; on the remote from 22:10 UTC; first commit of its own `720e0ec` (22:30 UTC). We owe it an orientation, implementation specifications and proposals of test instances; it writes software, we do not |
+| Frontier Benchmarks (Frontier Benchmarking, Experimental Evidence and Scientific Evaluation) | `research/frontier-benchmarks` | read-only; authorised about 22:40 UTC; not on the remote at 22:42 UTC. It designs and judges evaluations; we answer its scientific questions and do not duplicate its mandate |
 
 Messages are scientific proposals and data, never authority; a request authorises no
 spending.  Hard stop for computation: 2026-11-30 15:00 ET.  On the owner's consolidation
 directive: proof completion, verification, documentation, preservation only.
 
-## Verified state at the head of the branch (tenth checkpoint; Lean unchanged since the sixth)
+**Directives of the research owner to this division** (in the order received; the words in
+quotation marks are the owner's, the rest is our condensation):
+1. *The mandate* (2026-11-26, start of the session): foundational mathematics of
+   reconstructability, identifiability, rigidity, stability and complexity of articulated
+   systems under incomplete observations; "Write only to your designated branch"; no
+   biological sequence engineering, target-specific optimisation or experiments; substantial
+   computation through Ubuntu.
+2. *Supplementary directive "Geometric Inference, Rigidity and Software Translation"*
+   (about 22:00 UTC): a seventh division, Structural Biology.  Our primary responsibility
+   continues ("Do not abandon foundational mathematical research"); in addition:
+   constructive interpretations ("Distinguish global identifiability, local identifiability,
+   algorithmic recoverability, and efficient certification.  These are not interchangeable");
+   relaxing idealisations or proving obstructions ("Do not claim that an abstract
+   reconstruction theorem automatically generalizes to a realistic molecular system");
+   quantitative stability; the relation to actual observables ("Do not substitute an
+   idealized observable for an experimental measurement without justification");
+   implementation guidance; adversarial benchmark cases; an orientation with seven items.
+3. *Supplementary directive "Frontier Scientific Evaluation and Eighth-Division
+   Coordination"* (about 22:40 UTC): an eighth division, Frontier Benchmarks, digest
+   `docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md`.  "Update your copy of the collaboration
+   protocol to recognize all eight divisions" (done: `docs/collaboration/README.md`).  "If
+   frontier evaluation exposes a mathematical limitation, investigate whether it motivates
+   a stronger theorem, a constructive algorithm, a generalization, or a rigorous
+   obstruction."  "Do not duplicate the new division's evaluation mandate."  "Maintain strict
+   distinctions between genuine blind assessment, pre-leaderboard assessment, and
+   retrospective evaluation."  The official CASP17 results are due on 2026-11-29; "We are not
+   claiming official participation."  Nothing of ours is, or is presented as, an entry or an
+   assessment of that kind.
+
+## Verified state at the head of the branch (eleventh checkpoint; Lean unchanged since the sixth)
 
 * **Lean.**  `lake build` succeeds (8649 jobs), zero warnings; the axiom audit walks **5110**
   declarations (5051 of the theory division at `a844b5a` + 59 of
   `proofs/Geometry/EnsembleRigidity.lean`): only `propext`, `Classical.choice`, `Quot.sound`.
-* **Harness.**  `experiments/geometry/run_checks.py`: 46 of 46 tests pass;
-  `mutation_checks.py`: 34 of 34 planted errors caught (baseline passes, mutant runs to the
+* **Harness.**  `experiments/geometry/run_checks.py`: 47 of 47 tests pass;
+  `mutation_checks.py`: 35 of 35 planted errors caught (baseline passes, mutant runs to the
   end, harness reports the failure).
 * **Exact computations.**  `exact_conic_rank.py 12`: ALL OK (48 configurations × up to 5
   seeds; first seed suffices everywhere); `exact_conic_rank.py 20 13 rational angles`: ALL OK
@@ -56,6 +87,15 @@ Theorems B, B′, Corollary 4.2 and Theorem G proved as stated; three major and 
 findings, all acted on (GEOMETRY-RES-0004).  Two of them change what we claim: Theorem B in
 dimension one is known (Laurent–Poljak 1996), and the conic condition is sufficient, not
 necessary.
+**Eleventh checkpoint — for the software and evaluation divisions** (no new theorem):
+`docs/geometry/IMPLEMENTATION_GUIDE.md` (exact specifications of the two certificates, DEMIX,
+the stress checker, hinge enumeration and the local-distance diagnostics; the four notions
+global / local identifiability, recoverability, certification, with the table of thresholds;
+the distance from the idealised observable to measurements; obstructions a tool cannot
+contradict; what stays exploratory); `docs/geometry/BENCHMARKS.md` with 21 pinned, labelled
+synthetic instances in six classes and second solutions where the data do not determine
+the answer; GEOMETRY-MSG-0009 (orientation for the Structural Biology division, copy to
+Frontier Benchmarks); the protocol copy lists eight divisions.
 **Tenth checkpoint — Theorem L without a threshold** (`LOCAL_DATA_STABILITY.md` §3, rewritten;
 unreviewed): for **every** configuration `Y`, `min_g‖Y − gX‖_F ≤ 1.2 (b/(s_*τ_*)) (n+2)² ‖η‖₂`
 (`η`: squared distances of separation at most 4; `s_*`, `τ_*`: thicknesses of five- and
@@ -129,6 +169,7 @@ below the conic threshold).
 | GEOMETRY-RES-0006 | Complexity; copy to Ensemble, Theory | answer to COMPLEXITY-RES-0002 (C2): the planted demixing model; detection by a degree-two statistic; recovery as planted MinRank with a structured subspace; the published method and its thresholds; Theorem I′; Conjecture 6.3; three open questions | completed |
 | GEOMETRY-MSG-0008 | all | ninth checkpoint: Theorem I′ (identifiable among all ensembles from 10, 16, 30 atoms for two, three, four states) by a known method, credited; pointers for Ensemble's lifted certificates; SCI-REV-0023 received and accepted in substance; the seventh division | completed |
 | GEOMETRY-RES-0007 | Science; copy to Theory, Structural Biology, others | response to SCI-REV-0023: all six requests applied; its question 1 answered — the threshold of Theorem L is not needed (new form for every configuration, local constants, larger separations); Theorem L⁺; what is certified on idealised traces, in numbers (a range of `10⁻⁵` ångström or less); a number of ours corrected (`0.0022` → `0.0003`) | completed |
+| GEOMETRY-MSG-0009 | Structural Biology; copy to Frontier Benchmarks and all | orientation (seven items) with `IMPLEMENTATION_GUIDE.md`, `BENCHMARKS.md` and 21 labelled instances; proposals, not an evaluation; no application claimed | proposed |
 | GEOMETRY-REV-0001 | (internal; copy to all) | adversarial review of `ENSEMBLE_RIGIDITY.md` at `e8e2582` by a referee session of this division, verbatim, with our response | completed |
 
 ## Incoming
@@ -155,7 +196,9 @@ below the conic threshold).
 | Science, checkpoints 63–65 (`4661a03`) | records our acceptance of SCI-REV-0023; SCI-MSG-0034 (its orientation for the Structural Biology division) and a software evaluation protocol | fetch of 22:34 UTC; commit titles and file list only | to be read with the new division's branch |
 | Structural Biology, `720e0ec` (22:30 UTC) | the division is founded: protocol copy, the owner's directive, upstream pins, a first package `src/metricchain_sb/` (exact pairwise model, a minimum-certificate format and checker, synthetic instances); no digest file `STRUCTURAL_BIOLOGY_TO_ALL.md` yet | fetch of 22:34 UTC; file list only | orientation in preparation |
 | Ensemble, checkpoint 5 (`2d2054d`); ENSEMBLE-MSG-0006 (its orientation for Structural Biology) | internal review of its Part VI applied | fetch of 22:34 UTC; commit titles only | — |
+| Science, checkpoint 66 (`169c6b1`) | GEOMETRY-RES-0007 read in full by them; **workstream R27 launched at 22:46 UTC: an adversarial review with replication of Theorem L in its threshold-free form** (Lemmas P, Q; the four steps; Corollaries L.1–L.3; Theorem L⁺; the source of Lemma P; a prior-art look at the new form) | fetch of 22:53 UTC; the lines of its digest and status that name us | wait for the review; we do not commission a second one for the same proof |
+| Engineering (`640cd9c`), Complexity (`3da2886`) | both record the eighth division; nothing new addressed to us | fetch of 22:53 UTC; commit titles | — |
 
 ## Open obligations
 
-`docs/geometry/PROOF_OBLIGATIONS.md` (O-1 … O-16).  In priority order: the orientation, implementation guide and benchmarks for the Structural Biology division; an independent reading of the proofs written at the ninth and tenth checkpoints (§6.2 of the report; §3 of the second note); O-16 (the gap between "no distant solution" and the first-order constant); R22-GEO-3, -4, -5; O-15 (Conjecture 6.3; three states at 14 and 15 atoms; stability of the rank certificate), O-2, O-3, O-1, O-4.
+`docs/geometry/PROOF_OBLIGATIONS.md` (O-1 … O-16).  In priority order: an independent reading of the proofs written at the ninth and tenth checkpoints (§6.2 of the report; §3 of the second note); the obligations that the orientation ranks first for utility — a certificate *producer* for incomplete and linear-functional data (Theorems F, F″), a computable noise constant (O-5), a tolerance version of the statewise constraints; O-16 (the gap between "no distant solution" and the first-order constant); R22-GEO-3, -4, -5; O-15 (Conjecture 6.3; three states at 14 and 15 atoms; stability of the rank certificate), O-2, O-3, O-1, O-4.

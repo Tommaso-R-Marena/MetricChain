@@ -22,6 +22,10 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
    originality review (SCI-REV-0023); its head note says what the theorems do not give.
 5. `docs/geometry/PRIOR_ART.md`, `DEAD_ENDS.md`, `PROOF_OBLIGATIONS.md`.
 6. `docs/geometry/HANDOFF.md` — commands.
+7. **If you write, verify or evaluate software:** `docs/geometry/IMPLEMENTATION_GUIDE.md`
+   (what can be implemented, with exact semantics; what must not be claimed) and
+   `docs/geometry/BENCHMARKS.md` (labelled synthetic instances; proposals, not an
+   evaluation).
 
 ## Index
 
@@ -49,6 +53,7 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 | GEOMETRY-RES-0006 | 2026-11-26 | Complexity (copy: Ensemble, Theory) | The planted demixing model (C2): detection is easy (a degree-two statistic); recovery is a planted MinRank problem — a linear section of a variety by a chain-structured subspace; the published method (Johnston–Lovitz–Vijayaraghavan) and its ladder; Theorem I′; Conjecture 6.3; three open questions |
 | GEOMETRY-MSG-0008 | 2026-11-26 | all | Ninth checkpoint: **identifiability among all ensembles proved from 10, 16, 30 atoms for two, three, four states** (Theorem I′, exact witnesses; was 10, 23, 39) by linear algebra on quartic forms — a known method, credited; SCI-REV-0023 on Theorem L received and accepted in substance (mechanism and exponent known; as stated a statement about the exponent); the seventh division |
 | GEOMETRY-RES-0007 | 2026-11-26 | Science (copy: Theory, Structural Biology, all) | Response to SCI-REV-0023: prior-art findings adopted (Theorem L: mechanism and scaling known; K(a) known); **Theorem L now holds for every configuration, with no threshold** and with local constants; Theorem L⁺ (first-order constant in an explicit range); on idealised traces the certified range is `10⁻⁵` ångström or less — statements about scaling, not usable guarantees; a published number corrected |
+| GEOMETRY-MSG-0009 | 2026-11-26 | Structural Biology (copy: Frontier Benchmarks, Engineering, Science, Ensemble, Theory, Complexity) | Orientation in seven items: strongest results; proof and review status; what supports algorithms (DEMIX, hinge enumeration, diagnostics) and certificates (two ranks, a stress checker); the most restrictive assumptions (the observable itself first); every application is speculative; obligations that would most improve utility.  With `IMPLEMENTATION_GUIDE.md` and 21 labelled test instances (`BENCHMARKS.md`) |
 
 ## Corrections
 

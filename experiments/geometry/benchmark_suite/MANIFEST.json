@@ -1,0 +1,128 @@
+[
+ {
+  "id": "A1",
+  "category": "A uniquely determined; linear certificate",
+  "title": "2 generic states, 12 points (at or above the conic threshold)",
+  "sha256": "d98af27136f7eec914ef6a995a5024e9a88234f181626f4649185f1ac2faa706"
+ },
+ {
+  "id": "A2",
+  "category": "A uniquely determined; linear certificate",
+  "title": "2 generic states, 16 points (at or above the conic threshold)",
+  "sha256": "0b2307e92738b8a283a72a181d1befe40e99b88f9b2b9281918665bdbccc8e42"
+ },
+ {
+  "id": "A3",
+  "category": "A uniquely determined; linear certificate",
+  "title": "3 generic states, 23 points (at or above the conic threshold)",
+  "sha256": "fa2e15b66c55337de4c5bea825e7b0699cdea622aa4c51189c2e97424d7192a4"
+ },
+ {
+  "id": "B1",
+  "category": "B uniquely determined; quartic certificate only",
+  "title": "2 generic states, 11 points (below the conic threshold): h_4 = K",
+  "sha256": "fd22529965329dad48cb109542146ffd76f86210d7ac3ca6c608f5ccf372ebe0"
+ },
+ {
+  "id": "B2",
+  "category": "B uniquely determined; quartic certificate only",
+  "title": "2 generic states, 10 points (below the conic threshold): h_4 = K + dim L (structural point)",
+  "sha256": "374bed79c77b748757da55bd4c74d636488d5991184d3513edc0b6a0caa17a13"
+ },
+ {
+  "id": "B3",
+  "category": "B uniquely determined; quartic certificate only",
+  "title": "3 generic states, 17 points (below the conic threshold): h_4 = K",
+  "sha256": "eb9bb327e6e297440713f25929d272004f010170959c2d306f913604d6ca97a2"
+ },
+ {
+  "id": "C1",
+  "category": "C not determined; D determined only locally",
+  "title": "2 states, 8 points: a 9-state ensemble of other chains has the same averaged data",
+  "sha256": "8899c4844fabcad3d7a4a75098465737a84f0888164e4cb1f74f434df3b06775"
+ },
+ {
+  "id": "C2",
+  "category": "C not determined",
+  "title": "2 states that differ in one torsion (one hinge)",
+  "sha256": "afad5eda52465be578ce83caeb2f6e3cad3a764c91e890f8aae9dff4045bdbd8"
+ },
+ {
+  "id": "C3",
+  "category": "C not determined",
+  "title": "2 states that differ by half-turns at two hinges",
+  "sha256": "8c3a442261c88dc733ca7d409fbf6cac50c5bb94e56de7bacca81759334d42d9"
+ },
+ {
+  "id": "C4",
+  "category": "C not determined; G outside the assumptions (no statewise constraints supplied)",
+  "title": "one conformation; the tool is NOT told the bond lengths",
+  "sha256": "7ee6c3001a02b01ed97902b6c4ddd2818a81b2364eb4141eb21b344bab163105"
+ },
+ {
+  "id": "C5",
+  "category": "C not determined (separation <= 3); A determined (separation <= 4)",
+  "title": "one conformation, 20 points; distances between points at sequence separation at most 3, or at most 4",
+  "sha256": "8f34c9acc6807e874ad5c3d77b0adfc9fa0f2380e9c621fd3016c777951e824b"
+ },
+ {
+  "id": "E1",
+  "category": "E determined (numerical evidence or conjecture); no efficient certificate known",
+  "title": "2 generic states, 9 points",
+  "sha256": "874a18d32c952d0bb7204eb58106a1be70426d4f8c9a9f1cc7eef0c19858f634"
+ },
+ {
+  "id": "E2",
+  "category": "E determined (numerical evidence or conjecture); no efficient certificate known",
+  "title": "3 generic states, 15 points",
+  "sha256": "19b8dc2a91f563cb512e1f9bc7738874be84b10d2b72be219dede1b43be73050"
+ },
+ {
+  "id": "F1a",
+  "category": "F ill-conditioned",
+  "title": "2 states that differ by torsion changes of size 0.1, 12 points",
+  "sha256": "a5759a9da755cad0a313c34a0bec9e433a29860a6ca79fb84ce75c8317c0c343"
+ },
+ {
+  "id": "F1b",
+  "category": "F ill-conditioned",
+  "title": "2 states that differ by torsion changes of size 0.001, 12 points",
+  "sha256": "7cb4588f3737395cf7df49aeb0b9d0e427406ee16f8ff8e5c9a3451263a283d3"
+ },
+ {
+  "id": "F2",
+  "category": "F ill-conditioned",
+  "title": "one conformation, 20 points, one nearly planar window; distances of separation <= 4",
+  "sha256": "8731f7c1828636b60c2953b720c9c284784b686cd44fa44d185e3387742ea1b1"
+ },
+ {
+  "id": "F3",
+  "category": "F ill-conditioned (by length)",
+  "title": "one helical conformation, 100 points; distances of separation <= 4",
+  "sha256": "cec509152a444b4b786395f11b10f03bfe2f374eded71d0acde8f8abf090c0b6"
+ },
+ {
+  "id": "G1",
+  "category": "G outside the assumptions",
+  "title": "2 states with different bond angles (111 and 104 degrees); the tool is told 111",
+  "sha256": "85b13aa5888703929b99c772b87a92617370258793d8438560c1d16c14441c26"
+ },
+ {
+  "id": "G2",
+  "category": "G outside the assumptions; C not determined",
+  "title": "a continuous one-parameter family of conformations (201 quadrature states on an arc)",
+  "sha256": "1bbae513071d76cfda9ed89ca9e37ac50170b5fd5b68dc1e041e25794c8546f9"
+ },
+ {
+  "id": "G3",
+  "category": "G outside the assumptions",
+  "title": "2 planar states (all torsions 0 or 180 degrees)",
+  "sha256": "ccf3a9d6259eecf823869d19c431af8014cd052d50c212ef8ab9a4ea3a042bd0"
+ },
+ {
+  "id": "G4",
+  "category": "G outside the assumptions (noise)",
+  "title": "instance like A1 with symmetric noise of relative size 1e-2 on the averaged data",
+  "sha256": "a0c49ddb5bc309b0aee6aea8911549cdfe53dbb031021c3e5ca309f319473583"
+ }
+]

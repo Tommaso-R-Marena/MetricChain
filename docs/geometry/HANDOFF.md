@@ -23,7 +23,10 @@ verification, documentation and preservation.
 | what is known / not found, with the search log | `docs/geometry/PRIOR_ART.md` |
 | withdrawn or weakened claims | `docs/geometry/DEAD_ENDS.md` |
 | the internal review, verbatim, with our response | `docs/collaboration/messages/geometry/GEOMETRY-REV-0001.md`; the referee's code: `experiments/geometry/review1/` |
-| open proof obligations (O-1 … O-14) | `docs/geometry/PROOF_OBLIGATIONS.md` |
+| open proof obligations (O-1 … O-16) | `docs/geometry/PROOF_OBLIGATIONS.md` |
+| **for software and evaluation:** exact specifications of what can be implemented, with proof status, Lean names, assumptions, conditioning, validation criteria; the four notions (global / local identifiability, recoverability, certification); the distance from the idealised observable to measurements | `docs/geometry/IMPLEMENTATION_GUIDE.md` |
+| labelled test instances in six classes, with second solutions where the data do not determine the answer; ways to falsify our claims | `docs/geometry/BENCHMARKS.md`; `experiments/geometry/benchmark_instances.py`, `benchmark_suite/` |
+| the research owner's three directives to this division, condensed | `docs/collaboration/status/geometry.md` ("Directives of the research owner") |
 | chronology and "Resume here" | `docs/geometry/RESEARCH_LOG.md` |
 | Lean | `proofs/Geometry/EnsembleRigidity.lean` (imported by `proofs/AxiomAudit.lean`) |
 | experiments, exact computations, harness | `experiments/geometry/` |
@@ -37,8 +40,8 @@ source scripts/lean_env.sh
 lake env lean proofs/Geometry/EnsembleRigidity.lean     # single file, about 15 s, no output = OK
 lake build                                              # whole project; the last lines print the axiom audit
 # Python (numpy, scipy; exact parts use only the standard library)
-python3 experiments/geometry/run_checks.py              # 46 tests, about 65 s (one is skipped, and says so, without Singular)
-python3 experiments/geometry/mutation_checks.py         # 34 planted errors, all must be caught
+python3 experiments/geometry/run_checks.py              # 47 tests, about 65 s (one is skipped, and says so, without Singular)
+python3 experiments/geometry/mutation_checks.py         # 35 planted errors, all must be caught
 python3 experiments/geometry/exact_conic_rank.py 12     # Theorem C(b), about 35 s
 python3 experiments/geometry/exact_conic_rank.py 20 13 rational angles   # Theorem C(b), K = 13..20, about 3 min
 python3 experiments/geometry/exact_jacobian_rank.py 8   # Theorem H, about 3 s
@@ -65,10 +68,13 @@ python3 experiments/geometry/hinge_fourier_rank.py      # what the squared dista
 python3 experiments/geometry/local_data_upper.py        # Lemma P, Theorems L (any Y, every proof step), L+, Proposition L0, tube bound (10 s)
 python3 experiments/geometry/local_data_guarantees.py   # what Theorems L, L+ certify on idealised traces (the table of section 6)
 python3 experiments/geometry/torsion_sharpness.py       # kink formula, worst conformations (GEOMETRY-RES-0002; slow part (2))
+python3 experiments/geometry/benchmark_instances.py     # labelled test instances for software (BENCHMARKS.md): self-check of every label (1 min); --write regenerates benchmark_suite/
 # read-only synchronisation with the other divisions
 for b in claude/determined-ride-og1u7j research/ubuntu-engineering research/scientific-translation \
-         research/ensemble-identifiability research/biological-complexity research/structural-biology; do git fetch origin "$b"; done
-# (research/structural-biology: the seventh division, authorised 2026-11-26; not on the remote at 22:02 UTC)
+         research/ensemble-identifiability research/biological-complexity research/structural-biology \
+         research/frontier-benchmarks; do git fetch origin "$b"; done
+# (the seventh and eighth divisions were authorised on 2026-11-26; research/frontier-benchmarks was not on the remote at 22:42 UTC;
+#  digests: docs/collaboration/STRUCTURAL_BIOLOGY_TO_ALL.md, docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md on those branches)
 # the Ensemble division's report: git show origin/research/ensemble-identifiability:docs/ensemble/ENSEMBLE_REPORT.md
 ```
 

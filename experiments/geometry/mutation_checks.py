@@ -43,6 +43,7 @@ MUTATIONS = [
     ("procrustes_gram_constant", "procrustes_gram_lemma"),
     ("theorem_L_drop_sep4", "theorem_L_any_Y"),
     ("theorem_Lplus_first_order", "theorem_L_sharp_constant"),
+    ("benchmark_second_solution_weights", "benchmark_suite_labels"),
     ("third_moment_generic_rank", "third_moment_blocks"),
 ]
 

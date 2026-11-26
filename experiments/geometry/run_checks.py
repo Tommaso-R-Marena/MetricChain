@@ -913,6 +913,48 @@ def theorem_L_sharp_constant():
 
 
 @test
+def benchmark_suite_labels():
+    """docs/geometry/BENCHMARKS.md: the pinned instances of benchmark_suite/ are what MANIFEST.json
+    says (SHA-256); the truth of every instance with averaged data reproduces the data; every
+    'second solution' satisfies the statewise constraints, differs from the truth, and has the
+    same data (averaged squared distances, or distances of separation <= 3 for C5)."""
+    import hashlib
+    import json
+    from geomlib import edm, kabsch_rmsd
+    here = os.path.join(os.path.dirname(os.path.abspath(__file__)), "benchmark_suite")
+    manifest = json.load(open(os.path.join(here, "MANIFEST.json")))
+    ok, nsec, worst = len(manifest) == 21, 0, 0.0
+    for entry in manifest:
+        raw = open(os.path.join(here, entry["id"] + ".json")).read()
+        ok &= hashlib.sha256(raw.encode()).hexdigest() == entry["sha256"]
+        d = json.loads(raw)
+        Xs = [np.array(X) for X in d["truth"]["states"]]
+        w = np.array(d["truth"]["weights"])
+        c = d["chain"]["second_neighbour_distance"]
+        if "matrix" in d["data"] and d["id"] not in ("G2", "G4"):
+            ok &= np.abs(sum(wk * edm(X) for wk, X in zip(w, Xs)) - np.array(d["data"]["matrix"])).max() < 1e-9
+        for key in ("second_solution", "second_solution_variant_a"):
+            if key not in d:
+                continue
+            nsec += 1
+            S = [np.array(X) for X in d[key]["states"]]
+            v = np.array(d[key]["weights"])
+            if MUT == "benchmark_second_solution_weights" and len(v) > 1:
+                v = v[::-1].copy() if abs(v[0] - v[-1]) > 1e-6 else v * np.linspace(0.9, 1.1, len(v)) / (v * np.linspace(0.9, 1.1, len(v))).sum()
+            if d["id"] == "C5":
+                gap = max(abs(np.linalg.norm(Xs[0][j] - Xs[0][k]) - np.linalg.norm(S[0][j] - S[0][k])) for j, k in d["data"]["pairs_a"])
+            else:
+                gap = np.abs(sum(vk * edm(X) for vk, X in zip(v, S)) - np.array(d["data"]["matrix"])).max()
+            worst = max(worst, gap)
+            ok &= gap < 1e-9 and abs(v.sum() - 1) < 1e-9 and v.min() > 0
+            if d["id"] != "C4":                             # C4's second solution deliberately violates the constraints
+                ok &= all(max(abs(np.linalg.norm(Y[i + 1] - Y[i]) - 1) for i in range(len(Y) - 1)) < 1e-8 for Y in S)
+                ok &= all(max(abs(np.linalg.norm(Y[i + 2] - Y[i]) - c) for i in range(len(Y) - 2)) < 1e-8 for Y in S)
+            ok &= max(min(kabsch_rmsd(X, Y) for X in Xs) for Y in S) > 1e-2
+    return ok and nsec == 5, f"21 instances match the manifest; {nsec} second solutions reproduce the data to {worst:.0e}"
+
+
+@test
 def third_moment_blocks():
     """Proposition 9.2: the 3-form of mean triple products is determined by the data and its
     contractions have rank 2 exactly on block vectors."""

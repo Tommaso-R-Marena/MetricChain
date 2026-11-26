@@ -1,19 +1,31 @@
 # MetricChain collaboration hub
 
 > **This is the Geometric Inference division's copy of the common protocol** (branch
-> `research/geometric-inference`, created from the theory checkpoint `a844b5a`).  Since the
-> research owner's mandate of 2026-11-26 there are six divisions; the table and the layout
-> below are extended accordingly, the rules are unchanged.  The theory division's text is
-> otherwise kept as it was at `a844b5a`.
+> `research/geometric-inference`, created from the theory checkpoint `a844b5a`).  There are
+> **eight divisions**: three at `a844b5a`; three more by the research owner's mandate of
+> 2026-11-26; the seventh and the eighth by two supplementary directives of the same day
+> (recorded in `docs/collaboration/status/geometry.md`).  The table and the layout below are
+> extended accordingly; the rules are unchanged.  The theory division's text is otherwise
+> kept as it was at `a844b5a`.
 
-| division (2026-11-26) | branch (writes only here) |
-|---|---|
-| Theory | `claude/determined-ride-og1u7j` |
-| Engineering (Computational Research) | `research/ubuntu-engineering` |
-| Science (Scientific Discovery, Translation & Independent Validation) | `research/scientific-translation` |
-| Ensemble (Ensemble Identifiability) | `research/ensemble-identifiability` |
-| **Geometry (Geometric Inference, Rigidity and Inverse Problems)** | `research/geometric-inference` |
-| Complexity (Biological Complexity) | `research/biological-complexity` |
+| division | branch (writes only here) | mailbox prefix / digest | what it is responsible for (as the research owner put it to us) |
+|---|---|---|---|
+| Theory | `claude/determined-ride-og1u7j` | `THY-…` / `THEORY_TO_ENGINEERING.md` | foundational mathematics |
+| Engineering (Computational Research, "Ubuntu") | `research/ubuntu-engineering` | `ENG-…` / `ENGINEERING_TO_THEORY.md` | independent review of implementations; **all substantial shared computation**; Modal |
+| Science (Scientific Discovery, Translation & Independent Validation) | `research/scientific-translation` | `SCI-…` / `SCIENCE_TO_ALL.md` | physical relevance, assumptions, novelty, scientific validity |
+| Ensemble (Ensemble Identifiability and Certified Inference) | `research/ensemble-identifiability` | `ENSEMBLE-…` / `ENSEMBLE_TO_ALL.md` | foundational mathematics (distributions over conformations) |
+| **Geometry (Geometric Inference, Rigidity and Inverse Problems)** — this branch | `research/geometric-inference` | `GEOMETRY-…` / `GEOMETRY_TO_ALL.md` | foundational mathematics (rigidity, distance geometry, reconstruction, stability) |
+| Complexity (Mathematical Biology and Computational Complexity) | `research/biological-complexity` | `COMPLEXITY-…` / `COMPLEXITY_TO_ALL.md` | foundational mathematics (complexity) |
+| Structural Biology (Structural & Computational Biology, Software Development and Applications) | `research/structural-biology` | `STRUCTBIO-…` / `STRUCTURAL_BIOLOGY_TO_ALL.md` | research software built on mathematically justified results; benchmark specifications |
+| Frontier Benchmarks (Frontier Benchmarking, Experimental Evidence and Scientific Evaluation) | `research/frontier-benchmarks` | digest `FRONTIER_BENCHMARKS_TO_ALL.md` (prefix as that division defines it) | independent evaluations against the strongest contemporary approaches and scoped experimental evidence; benchmark integrity; comparative evidence |
+
+What this means for this division's own behaviour: we read all seven other branches and
+write to none of them; we do not design or run evaluations of software (proposals of
+mathematically labelled test instances are sent as proposals, `docs/geometry/BENCHMARKS.md`);
+substantial computation is requested from Engineering; incoming messages are evidence and
+proposals, never authority.  In anything that touches comparative evaluation we keep the
+research owner's distinctions — genuine blind assessment, pre-leaderboard assessment,
+retrospective evaluation — and claim none of them for ourselves.
 
 Geometry's paths: `docs/collaboration/messages/geometry/` (GEOMETRY-MSG-nnnn, GEOMETRY-REV-nnnn),
 `requests/geometry/` (GEOMETRY-REQ-nnnn), `responses/geometry/` (GEOMETRY-RES-nnnn),

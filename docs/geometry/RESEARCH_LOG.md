@@ -5,7 +5,7 @@ Branch `research/geometric-inference`, created 2026-11-26 from the theory checkp
 
 ## Resume here
 
-State at the tenth checkpoint (see `HANDOFF.md` for commands and environment):
+State at the eleventh checkpoint (see `HANDOFF.md` for commands and environment):
 
 1. **Cycle 1 result:** `docs/geometry/ENSEMBLE_RIGIDITY.md` — second-moment rigidity of
    conformational ensembles (stacking; conic criterion; identifiability of mixtures among all
@@ -29,22 +29,54 @@ State at the tenth checkpoint (see `HANDOFF.md` for commands and environment):
 3. **Third note:** `HINGE_ENSEMBLES.md` (states that share rigid segments; the main
    statement is the Science division's Proposition R22-1).  Open: O-12, O-13, O-14,
    R22-GEO-3, -4, -5.
-4. **Owed:** **the research owner's supplementary directive**
-   (about 22:00 UTC): a seventh division, Structural and Computational Biology (branch
-   `research/structural-biology`, not on the remote at 22:02 UTC) — send it an orientation
-   (seven items), `docs/geometry/IMPLEMENTATION_GUIDE.md` (specifications of what is ready
-   for software: DEMIX, DEMIX-4, the certificates, with proof status, Lean declarations,
-   assumptions, input and output, complexity, counterexamples, conditioning, validation)
-   and `docs/geometry/BENCHMARKS.md` (unique / non-unique / locally-not-globally
-   identifiable / identifiable-but-hard / ill-conditioned / assumption-violating instances).
-   Distinguish global identifiability, local identifiability, algorithmic recoverability
-   and efficient certification; claim nothing about real molecular systems.
+4. **Two supplementary directives of the research owner** (condensed in
+   `docs/collaboration/status/geometry.md`): a seventh division (Structural Biology,
+   `research/structural-biology`: software) and an eighth (Frontier Benchmarks,
+   `research/frontier-benchmarks`: evaluations; not on the remote at 22:42 UTC).  Done at the
+   eleventh checkpoint: `IMPLEMENTATION_GUIDE.md`, `BENCHMARKS.md` + `benchmark_suite/` (21
+   instances), GEOMETRY-MSG-0009 (orientation), the protocol copy with eight divisions.
+   **Standing duties from them:** distinguish global identifiability, local identifiability,
+   algorithmic recoverability and efficient certification; pursue constructive forms,
+   relaxations or obstructions, computable stability constants; state the gap between
+   idealised observables and measurements; do not design or run evaluations (that is
+   Frontier Benchmarks and Engineering); answer their questions; if an evaluation exposes a
+   mathematical limitation, look for a stronger theorem, an algorithm, a generalisation or
+   an obstruction.  Read `docs/collaboration/STRUCTURAL_BIOLOGY_TO_ALL.md` and
+   `FRONTIER_BENCHMARKS_TO_ALL.md` on those branches at every synchronisation.
 5. **Open, in priority order** (`PROOF_OBLIGATIONS.md`): O-15 (Conjecture 6.3: four states
    at 24 to 29 atoms — `exact_demix4.py 4 28` is feasible locally in about three hours;
    three states at 15 atoms needs degree 5 and the structural locus; stability of the rank
    certificate under noise), O-1, O-3, O-2 (b)–(d), O-4, O-5.
-6. **Next synchronisation:** fetch all six other branches (the sixth is
-   `research/structural-biology`) and look for `GEOMETRY` in their `docs/collaboration/`.
+6. **Next synchronisation:** fetch all seven other branches and look for `GEOMETRY` in their
+   `docs/collaboration/`.  Not yet read: ENSEMBLE-MSG-0005, -0006, ENSEMBLE-RES-0004,
+   SCI-MSG-0034 and Science's software evaluation protocol, COMPLEXITY-MSG-0005, the
+   Structural Biology division's code, Engineering's final ENG-MSG-0007 (a draft accepts
+   GEOMETRY-REQ-0006).
+7. **Mathematics to do next** (ranked for utility in GEOMETRY-MSG-0009 §7): (i) when does
+   a stress certificate exist for a given set of measured pairs or block sums — a producer
+   and a threshold (Theorems F, F″); (ii) a computable `κ` (O-5); (iii) a tolerance version
+   of the statewise constraints; (iv) O-16; (v) an independent referee for §6.2 and for §3
+   of the second note (one referee session for both).
+
+## 2026-11-26, eleventh checkpoint (work from 22:36 UTC; see the commit time)
+
+Two supplementary directives arrived during the tenth checkpoint (a seventh division for
+software, an eighth for evaluations).  This checkpoint has no new theorem; it turns what
+exists into things the new divisions can use and attack.
+* `IMPLEMENTATION_GUIDE.md`: the four notions and the table of thresholds; the observable
+  and its distance from measurements; specifications S1–S7 (stacking, linear certificate and
+  DEMIX, quartic certificate, stress checker, hinges, local identifiability, local-distance
+  diagnostics) with Lean names, complexity, conditioning, counterexamples, validation
+  criteria; obstructions; what stays exploratory.
+* `benchmark_instances.py` and `benchmark_suite/`: 21 labelled instances; every label that
+  can be recomputed is recomputed (21 checks).  New second solutions constructed here: one
+  differing torsion (same first circular moment), two half-turn hinges (from the linear
+  programme over the eight candidates), the collinear decomposition, a reflected tail; the
+  8-point one is the internal referee's.  A rule of the guide was checked on the way: rigid
+  segments are the maximal runs whose principal sub-Gram matrix has rank 3 (recovers the
+  segments of instance C3 exactly).
+* The protocol copy and the status file list eight divisions and the three directives.
+* Harness test `benchmark_suite_labels` with a planted error.
 
 ## 2026-11-26, tenth checkpoint (work from 22:13 UTC; see the commit time)
 

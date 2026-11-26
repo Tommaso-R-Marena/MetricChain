@@ -63,7 +63,7 @@ means that no one but the author has checked the statement.  The Science divisio
 
 Lean: 1 file, 16 declarations cited above (plus definitions and lemmas); full build, zero warnings,
 axiom audit OK on 5110 declarations.
-Harness: 46 tests (`run_checks.py`), 34 mutations (`mutation_checks.py`), all caught.
+Harness: 47 tests (`run_checks.py`), 35 mutations (`mutation_checks.py`), all caught.
 Exact computations: `exact_conic_rank.py` (48 witnesses for `K ≤ 12` — two geometries, two constraint sets; an earlier "96" was a miscount, SCI-REV-0021 F10 — and 8 more for `13 ≤ K ≤ 20`), `exact_jacobian_rank.py`
 (30 witnesses for `K ≤ 8`), `exact_4d_extreme.py` (1 witness), `exact_nonlinear_threshold.py`
 (1 witness over ℚ, 4 modulo a prime; needs Singular), `exact_demix4.py` (10 witnesses: `K = 2` at 10 and 11 atoms and `K = 3` at 16 and 17, two bond angles each; `K = 4` at 30 and 32, one angle).
