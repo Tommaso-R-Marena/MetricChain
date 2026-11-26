@@ -453,27 +453,83 @@ def x010_blocks() -> dict[str, str]:
     wp = RESULTS / "x010_three_levels.jsonl"
     rows = [json.loads(line) for line in wp.read_text().splitlines() if line.strip()] if wp.exists() else []
     if rows:
-        lines = ["| `n` | `φ₁` | two levels: flat | two levels: worst found | three levels: flat | three levels: worst outer landscape, flat fibres (**lower bound**) | "
-                 "three levels: worst outer landscape, middle level at its cost bound (**upper bound**, two inner behaviours) | certified `C_max` of three levels | hinted lower bound |",
-                 "|---|---|---|---|---|---|---|---|---|"]
+        def load(name):
+            pth = RESULTS / name
+            return [json.loads(line) for line in pth.read_text().splitlines() if line.strip()] if pth.exists() else []
+        two_flat = {(r["n"], r["phi"]): r["worst2_flat_fibres"] for r in load("x010_two_levels_flat_fibres.jsonl")}
+        cone_rows = load("x010_three_levels_cone.jsonl")
+        cone = {}
+        for r in cone_rows:
+            k = (r["n"], r["phi"])
+            if k not in cone or r["worst3_cone_fibres"] > cone[k]["worst3_cone_fibres"]:
+                cone[k] = r
+        n_variants = len({(r["slope"], r["oracle"]) for r in cone_rows})
+
+        def real3(r):                                         # the largest cost of three levels found on a real instance
+            k = (r["n"], r["phi"])
+            return max(r["worst3_flat_fibres"], cone[k]["worst3_cone_fibres"]) if k in cone else r["worst3_flat_fibres"]
+
+        def fmt(v):
+            return "—" if v is None else f"{v:.4f}"
+        lines = ["| `n` | `φ₁` | two levels: flat | two levels, (B): worst outer landscape, flat fibres | two levels, (A): worst found | three levels: flat | "
+                 "three levels, (B): worst outer landscape, flat fibres | three levels, (A): the largest of the six runs with cone fibres (slope of the cone, placement by the base brackets) | "
+                 "three levels: middle level charged its cost bound | certified `C_max` of three levels |",
+                 "|---|---|---|---|---|---|---|---|---|---|"]
         for r in sorted(rows, key=lambda r: (r["n"], r["phi"])):
-            lines.append(f"| {r['n']} | {r['phi']:.2f} | {r['flat2']:.4f} | {r['worst2']:.4f} | {r['flat3']:.4f} | {r['worst3_flat_fibres']:.4f} | {r['worst3_capped_middle']:.4f} | "
-                         f"{r['cmax3_certified']:.4f} | {r['lower']:.4f} |")
+            k = (r["n"], r["phi"])
+            c = cone.get(k)
+            lines.append(f"| {r['n']} | {r['phi']:.2f} | {r['flat2']:.4f} | {fmt(two_flat.get(k))} | {r['worst2']:.4f} | {r['flat3']:.4f} | {r['worst3_flat_fibres']:.4f} | "
+                         + (f"{c['worst3_cone_fibres']:.4f} ({c['slope']:g}`u`, {c['oracle']})" if c else "—")
+                         + f" | {r['worst3_capped_middle']:.4f} | {r['cmax3_certified']:.4f} |")
         blocks["three_worst"] = "\n".join(lines)
-        lines = ["| `n` | cells | two levels: flat (best `φ₁`) | two levels: worst (best `φ₁`) | three levels: flat (best `φ₁`) | three levels, lower bound of the worst case (best `φ₁`) | "
-                 "three levels, upper bound (best `φ₁`) | hinted lower bound |", "|---|---|---|---|---|---|---|---|"]
+        lines = ["| `n` | two levels: flat | two levels, (B) | two levels, (A) | three levels: flat | three levels, (B) | **three levels, (A)** | "
+                 "three levels: middle level charged its cost bound | certified `C_max` of three levels | hinted lower bound |",
+                 "|---|---|---|---|---|---|---|---|---|---|"]
+        summ = []
         for n in sorted({r["n"] for r in rows}):
             rs = [r for r in rows if r["n"] == n]
 
-            def best(key):
-                r = min(rs, key=lambda r: r[key])
-                return f"{r[key]:.4f} ({r['phi']:.2f})"
-            lines.append(f"| {n} | {len(rs)} | {best('flat2')} | {best('worst2')} | {best('flat3')} | {best('worst3_flat_fibres')} | {best('worst3_capped_middle')} | {rs[0]['lower']:.4f} |")
+            def best(f):
+                r = min(rs, key=f)
+                return f(r), r["phi"]
+
+            def cell(f):
+                v, ph = best(f)
+                return f"{v:.4f} ({ph:.2f})"
+            have2 = all((r["n"], r["phi"]) in two_flat for r in rs)
+            lines.append(f"| {n} | {cell(lambda r: r['flat2'])} | " + (cell(lambda r: two_flat[(r['n'], r['phi'])]) if have2 else "—") + f" | {cell(lambda r: r['worst2'])} | "
+                         f"{cell(lambda r: r['flat3'])} | {cell(lambda r: r['worst3_flat_fibres'])} | **{cell(real3)}** | {cell(lambda r: r['worst3_capped_middle'])} | "
+                         f"{cell(lambda r: r['cmax3_certified'])} | {rs[0]['lower']:.4f} |")
+            summ.append((n, best(lambda r: r["flat2"])[0], best(lambda r: r["worst2"])[0], best(lambda r: r["flat3"])[0], best(real3)[0],
+                         best(lambda r: r["worst3_capped_middle"])[0], sum((r["n"], r["phi"]) in cone for r in rs), len(rs),
+                         best(lambda r: two_flat[(r["n"], r["phi"])])[0] if have2 else None, best(lambda r: r["worst3_flat_fibres"])[0]))
         blocks["three_worst_best"] = "\n".join(lines)
+        lines = ["| `n` | three levels over two levels at the flat instance | the same under (B) | the same under (A) | flat → worst, two levels: (B), (A) | "
+                 "flat → worst, three levels: (B), (A) | three levels with the middle level at its bound over two levels (A) |", "|---|---|---|---|---|---|---|"]
+        for (n, f2, w2, f3, w3, cap, nc, nt, w2b, w3b) in summ:
+            lines.append(f"| {n} | {f3 / f2:.2f} | " + (f"{w3b / w2b:.2f}" if w2b else "—") + f" | {w3 / w2:.2f}" + ("" if nc == nt else f" (cone fibres in {nc} of {nt} cells)")
+                         + " | " + (f"{w2b / f2:.2f}" if w2b else "—") + f", {w2 / f2:.2f} | {w3b / f3:.2f}, {w3 / f3:.2f} | {cap / w2:.2f} |")
+        blocks["three_worst_ratios"] = "\n".join(lines)
         nviol = sum(s["violations"] for r in rows for s in r["searches"])
         nsearch = sum(len(r["searches"]) for r in rows)
-        neval = sum(s["n_eval"] for r in rows for s in r["searches"])
-        blocks["three_worst_summary"] = (f"{len(rows)} cells, {nsearch} searches, {neval:,} mean runs; searches in which a claim of Theorem 11.56 was violated by the outer run: {nviol}.")
+        neval = sum(s["n_eval"] for r in rows for s in r["searches"]) + sum(r["n_eval"] for r in cone_rows) + sum(r["n_eval"] for r in load("x010_two_levels_flat_fibres.jsonl"))
+        blocks["three_worst_summary"] = (
+            f"{len(rows)} cells; {nsearch + 2 * len(cone_rows) + 2 * len(two_flat):,} searches, {neval:,} mean runs of the outer level; searches in which a claim of Theorem 11.56 was "
+            f"violated by the outer run: {nviol + sum(r['outer_violations'] for r in cone_rows)}.  Cone fibres: {len(cone_rows)} runs ({n_variants} combinations of slope and inner behaviour "
+            f"per cell); middle-level runs on a cone that did not close or violated a claim: {sum(r['middle_runs_not_closed_or_violating'] for r in cone_rows)}; the largest ratio of a "
+            f"middle run's cost on a cone to its cost on the flat fibre at the same rung: `e^{{{max((r['largest_middle_cost_ratio'] for r in cone_rows), default=0.0):.1f}}}`."
+            if cone_rows else
+            f"{len(rows)} cells, {nsearch} searches, {neval:,} mean runs; searches in which a claim of Theorem 11.56 was violated by the outer run: {nviol}.")
+        if cone_rows:
+            lines = ["| `n` | slope of the cone fibres | inner behaviour of the base brackets | cells in which this combination gives the largest three-level cost among the cone runs | "
+                     "largest excess over the flat-fibre run of the same cell (units of `n a`) |", "|---|---|---|---|---|"]
+            base = {(r["n"], r["phi"]): r["worst3_flat_fibres"] for r in rows}
+            for n in sorted({r["n"] for r in cone_rows}):
+                for (sl, orc) in sorted({(r["slope"], r["oracle"]) for r in cone_rows}):
+                    rs = [r for r in cone_rows if r["n"] == n and r["slope"] == sl and r["oracle"] == orc]
+                    wins = sum(cone[(r["n"], r["phi"])] is r for r in rs)
+                    lines.append(f"| {n} | {sl:g}`u` | {orc} | {wins} of {len(rs)} | `{max(r['worst3_cone_fibres'] - base[(r['n'], r['phi'])] for r in rs):+.4f}` |")
+            blocks["three_cone"] = "\n".join(lines)
     npth = RESULTS / "x005_nonproduct_bound.json"
     if npth.exists():
         d = json.loads(npth.read_text())

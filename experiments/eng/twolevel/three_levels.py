@@ -73,6 +73,48 @@ def k0_flat(d: int, u: float, x: float, l_inv_delta: float) -> tuple[float, floa
     return lcost, alpha, beta, "K0"
 
 
+def k0_cone(d: int, u: float, x: float, l_inv_delta: float, slope: float) -> tuple[float, float, float, str]:
+    """Proposition K0 on the cone psi(z) = slope u |z| of dimension d, at the level of expectations: the answer the
+    two-sample bracket itself gives, not an assumed placement.  K0 draws two samples of size M; t_hat is the K-th
+    largest weight of the first, A_hat the mean of min(w, t_hat) over the second, and it returns
+    [A_hat/(1 + eta), A_hat/(1 - eta) + t_hat 2^-d E_rhat(d)].  With every count at its mean, t_hat is the weight
+    e^{-slope u r_t} of the shell r_t that holds the quantile K/M, and A_hat = E min(w, t_hat).  Returns
+    (ln cost, alpha, beta, kind) with the bracket [A e^-alpha, A e^beta]; ``slope = 0`` is ``k0_flat``."""
+    if slope == 0.0:
+        return k0_flat(d, u, x, l_inv_delta)
+    t = tables(d, u)
+    eta = min(0.5, math.tanh(x / 4))
+    K = math.ceil(3 * (1 + eta) / eta ** 2 * (math.log(4) + l_inv_delta))
+    budget = x - math.log((1 + eta) / (1 - eta))
+    ok = np.logaddexp(0.0, t.lG2(eta)[:d]) <= budget
+    if not ok[0]:
+        return d * LN2, 0.0, 0.0, "enum"
+    bad = np.flatnonzero(~ok)
+    rstar = (int(bad[0]) - 1) if bad.size else d - 1
+    lM = max(math.log(K) + d * LN2 - math.log(1 - eta) - float(t.lball[rstar]), math.log(K / (1 - eta)))
+    lcost = LN2 + lM
+    if lcost >= d * LN2:
+        return d * LN2, 0.0, 0.0, "enum"
+    r = np.arange(d + 1, dtype=float)
+    lw = -slope * u * r
+    lp = t.lbinom - d * LN2
+    # the K-th largest of M weights: the shell r_t with P(|z| <= r_t) >= K/M > P(|z| <= r_t - 1)
+    r_t = int(np.searchsorted(t.lball - d * LN2, math.log(K) - lM - 1e-12, side="left"))
+    lt = -slope * u * min(r_t, d)
+    lEmin = float(np.logaddexp.reduce(lp + np.minimum(lw, lt)))
+    lA = float(np.logaddexp.reduce(lp + lw))
+    lq = math.log(K) - math.log(1 - eta) - lM
+    if d * LN2 + lq < -1e-12:
+        ltail = -math.inf
+    else:
+        ltail = lt + float(t.lE[min(t.radius(lq), rstar)]) - d * LN2
+    lL = lEmin - math.log(1 + eta)
+    lU = float(np.logaddexp(lEmin - math.log(1 - eta), ltail))
+    alpha, beta = lA - lL, lU - lA
+    assert alpha >= -1e-12 and beta >= -1e-12 and alpha + beta <= x + 1e-9, (alpha, beta, x)
+    return lcost, max(alpha, 0.0), max(beta, 0.0), "K0"
+
+
 def flat_run(u: float, n: int, phi: float, *, lam: float = 0.2, eta: float = 0.05, etap: float = 0.05, theta: float = 0.05,
              ltheta: float | None = None, b: float = 0.5, Lr: int = 40, bounded: bool = True, l_inv_delta: float = math.log(20.0),
              inner=None) -> dict:
@@ -255,7 +297,9 @@ def cone_run(u: float, n: int, phi: float, slope: float, oracle: str, *, lam: fl
     """Algorithm 2L+ with base brackets inside, at the level of expectations, on the cone psi(z) = slope u |z| of
     dimension n (reference point at the apex).  The cone is additive over coordinates, so it is a product instance
     for *every* split into an outer and an inner block: the outer landscape is the cone on the outer block and every
-    fibre is the cone on the inner block.  Inner behaviour ``oracle`` ("bottom"/"top") for the base brackets.
+    fibre is the cone on the inner block.  Inner behaviour ``oracle`` for the base brackets: "bottom", "top", or
+    "k0" -- the answer Proposition K0 itself gives on the cone fibre (``k0_cone``), which makes the run that of
+    the concrete algorithm on a concrete instance.
     Returns the cost and where the average sits in the returned bracket (alpha, beta)."""
     from metricchain_eng.twolevel.meanrun import radial_law
 
@@ -274,7 +318,12 @@ def cone_run(u: float, n: int, phi: float, slope: float, oracle: str, *, lam: fl
     ev = Evaluator(P, outer, lC=lC)
     c_in = n_i * math.log((1 + math.exp(-slope * u)) / 2)
     F = slope * u * np.arange(n_o + 1, dtype=float)
-    R = ev.run(Instance(radial_law(F, outer, shift=c_in), psi0=0.0, t0=u * n_i + c_in), oracle)
+    inst = Instance(radial_law(F, outer, shift=c_in), psi0=0.0, t0=u * n_i + c_in)
+    if oracle == "k0":
+        ans = [k0_cone(n_i, u, xs[l], C.l_inv_delta_p, slope) for l in range(1, Lr + 1)]
+        R = ev.run(inst, "bottom", positions=([a[1] for a in ans], [a[2] for a in ans]))
+    else:
+        R = ev.run(inst, oracle)
     return dict(lcost=R.lcost, alpha=R.lA - R.lL, beta=R.lU - R.lA, lA=R.lA, width=R.lU - R.lL, xout=C.x_out, lCmax=R.lCmax, closed=R.closed,
                 violations=R.violations(), status=R.status)
 
@@ -308,6 +357,11 @@ def worst_case_cone_fibres(u: float, n: int, phi: float, slope: float, oracle: s
             betas.append(max(m["beta"], 0.0))
             mid_cost_flat.append(r["middle"][0])
             mid_cost_cone.append(m["lcost"])
+        elif oracle == "k0":
+            c0, a0, b0, _ = k0_cone(n_i, u, x, C.l_inv_delta_p, slope)
+            lC.append(c0)
+            alphas.append(a0)
+            betas.append(b0)
         else:
             lC.append(r["k0"][0])
             alphas.append(0.0 if oracle == "bottom" else x)

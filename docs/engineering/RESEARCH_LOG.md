@@ -276,8 +276,24 @@ Algorithm 2L⁺, and sent two new requests.  Answers: ENG-MSG-0003, ENG-RES-0008
    (ENG-RES-0012), the two reviews (ENG-RES-0013), THY-RES-0004 and the synchronisation
    (ENG-MSG-0004).
 8. Job M-013: the convergence control at the two largest sizes of X-005 that the science
-   division asked for (R7-ENG-4).  Its outcome is recorded in the ledger and in the
-   addendum to checkpoint 4, not here, if it finished after this text was written.
+   division asked for (R7-ENG-4).  Outcome: ENG-RES-0014 §5.
+
+*After checkpoint 4 (`c2ad4f8`), towards checkpoint 5:*
+
+9. The audit of theory `9408e33` finished: `AUDIT PASSED` (ENG-MSG-0005).
+10. **The evaluator generalised** for what three levels need: where each rung's bracket
+    puts the value (`positions`), the exact classification threshold
+    `c = max_l min(b − A_l, B_l)`, `θ` and `δ` as logarithms.  Validated against literal runs.
+    On the way a suspected modelling error (item 3.4 below) turned out to be unreachable:
+    all 2 624 stored maximisers of X-005 evaluate identically.
+11. **Three nested levels at the flat instance**: the referee's 48 published numbers
+    reproduced to the digit, on the first run of new code (X-010).
+12. **Three levels at the worst outer landscape** (`u = 1`, three sizes): flat fibres (a real
+    instance), cone fibres (real, adversarial, and a product instance for every split), and
+    the middle level charged its own cost bound.  ENG-RES-0014 §3.
+13. **Instances that are not products** (the first objection of SCI-REV-0008 §4): a bound by
+    the union of refinement windows over all places of a fibre, evaluated at the stored
+    maximisers and used as a search objective (job M-014).  ENG-RES-0014 §4.
 
 ### 3.4 Mistakes made and what they changed (kept on purpose)
 
@@ -298,6 +314,25 @@ Algorithm 2L⁺, and sent two new requests.  Answers: ENG-MSG-0003, ENG-RES-0008
 * **Three numbers computed from rounded table entries**, although session 2 had made the
   rule that numbers in prose come from artifacts.  The rule was followed for tables and
   summary sentences and not for arithmetic done on them by hand.
+* **A false alarm that cost an hour and was worth it.**  While generalising the evaluator
+  it became clear that the published mean runs classified sample points by a convention
+  (`W > s e^{−b}` or `W > s`) and not by the brackets the algorithm holds, and that the two
+  differ when a fibre's value lies within the tolerance of an end of its trivial bracket.
+  A first count said 825 of the 2 624 stored maximisers sat in that corner — because the
+  stored field `c_in` had been read as `t₀` (it is `t₀ − u n_i`).  Read correctly, none does,
+  and none can: a Lipschitz fibre has `t₀ ∈ [n_i(u − Λ₁), n_i(2u − Λ₁)]`.  The literal runs
+  that "disagreed with the old convention" had used infeasible `t₀`.  What remains: the
+  exact rule in the code, a test that the search family cannot reach the corners, and a
+  recheck file.  Lesson: before announcing a defect in published numbers, re-evaluate the
+  stored instances — it took two minutes and was done second instead of first.
+* **`pkill -f <script name>` killed the shell that issued it** (the pattern occurs in its own
+  command line), although the memory of session 2 says exactly this.  Processes are now
+  stopped by PID.
+* **Local runs started from an uncommitted tree** would have stored a commit that does not
+  contain their code; they were stopped after six minutes, the code committed, and the
+  runs restarted.  Rule: commit before launching anything whose rows carry a commit.
+* **An estimate off by a factor five**: the local placement-free search was planned at 17
+  minutes and was heading for 90; it went to Modal instead.
 * In this session: a factorial table off by one (`gammaln(j)` for `ln j!`), caught at once by
   the exact cross-check; `resolution of 12 %` typed into ED-8 before computing it (3–4 %);
   a first draft of ENG-RES-0013 that said the exposed cells went "down to `K/64`" before
@@ -320,6 +355,14 @@ Algorithm 2L⁺, and sent two new requests.  Answers: ENG-MSG-0003, ENG-RES-0008
 * numpy's defect depends on the bits of `n` (nothing at `2⁵⁰`, `2⁵²`; present at `10¹⁵`, `2⁵³`):
   consistent with a cancellation in the acceptance test of its rejection sampler; not
   confirmed in the source.
+* Three levels: on a cone fibre the middle level can cost `e^{30}` times what it costs on a
+  flat fibre at the same rung (`n = 1000`), yet the three-level total moves little, because
+  the rungs where that happens are not the ones that dominate.  Which rung dominates, as
+  a function of the outer fraction, is the thing to understand before designing the
+  middle level against the worst case instead of at the flat fibre.
+* For the base bracket K0 on a non-flat fibre the evaluator uses the two extreme valid
+  placements; K0's own placement at the level of expectations is computable and would
+  remove an adversarial freedom the real procedure does not have.
 
 ---
 

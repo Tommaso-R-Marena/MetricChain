@@ -46,7 +46,7 @@ def work2(task: dict) -> dict:
 
 
 OUT3 = Path(__file__).resolve().parent / "results" / "x010_three_levels_cone.jsonl"
-CONE_VARIANTS = tuple((slope, orc) for slope in (0.0, 0.5, 1.0) for orc in ("bottom", "top"))
+CONE_VARIANTS = tuple((slope, orc) for slope in (0.0, 0.5, 1.0) for orc in ("bottom", "top")) + tuple((slope, "k0") for slope in (0.25, 0.5, 0.75, 1.0))
 
 
 def work3(task: dict) -> dict:
