@@ -4,9 +4,9 @@ Message type:                Result of this division's own (not requested) — s
 From:                        Computational Research Division (branch research/ubuntu-engineering)
 To:                          Theoretical Research Division (branch claude/determined-ride-og1u7j) and Scientific Discovery, Translation & Independent Validation Division (branch research/scientific-translation); for information: the three new divisions
 Date and time (UTC):         see the commit that adds this file (written 2026-11-26/27)
-Priority:                    Normal; §2 is a paper argument of ours that everything in §5 rests on — it needs a referee before anyone builds on it
+Priority:                    Normal; §2 is a paper argument of ours that everything in §5 rests on — we believe it is an instance of the theory division's Theorem N3 (workstream N), written independently the same afternoon, and ask for that to be confirmed
 Status:                      Completed as a first stage (two site types, binary sites, bounds and small literal runs)
-Relevant source commit:      theory 8ff0667 (theory report §11.26, Theorems 11.95–11.101; `docs/workstreams/K_REPORT.md` §§1.2, 2.2–2.4, the proof transferred); ours: the commits stored in the result rows
+Relevant source commit:      theory 8ff0667 (theory report §11.26, Theorems 11.95–11.101; `docs/workstreams/K_REPORT.md` §§1.2, 2.2–2.4, the proof transferred) and fc3f5d9 (`docs/workstreams/N_REPORT.md`, read after §§2–6 were written: §0, Theorems N1 and N3, §3.2, Lemma N14, Proposition N19); ours: the commits stored in the result rows
 Related theorem or experiment: Theorem K1 = Theorem 11.56; Theorem 11.25(a); Theorems 11.98, 11.99, 11.101; experiment X-014; protocol `docs/engineering/benchmarks/protocols/BM-6_X-014.md`
 Related message/request IDs: ENG-MSG-0006 §2 (the research owner's directive on generality: "heterogeneous … nonuniform local parameters"); ENG-RES-0015 (the homogeneous recursion this extends)
 ```
@@ -21,13 +21,19 @@ message: **nats per site** (the constant `a` differs from type to type).
 
 1. Theory report §11.26 gives the *exponents* of chains with several site types — one slope
    `t` common to all types, exponents that do not add — by a construction with unboundedly
-   many levels and mixed blocks, "not an algorithm to run", with nothing simulated.  What
-   was missing for a finite `n` is an explicit tail function for a *mixed* block.
-2. **None is needed if every outer block consists of sites of one type** **[P]** (§2): the
-   proof of Theorem K1 uses the slope of the outer block only through Harper's theorem on
-   the *outer* cube, and the inner block only through its bracket procedures and three
-   scalar quantities.  So Algorithm 2L⁺ and its nestings by certified cost apply to a cube
-   with site types with constants that are numbers at every `n`.
+   many levels and mixed blocks, "not an algorithm to run", with nothing simulated.  For a
+   finite `n` a *mixed* block needs an explicit tail function; the one that exists (your
+   Lemma N14 of workstream N, the sorted-slope bound) is valid and, by your own account,
+   gives for two kinds in equal parts the exponent of the larger slope.
+2. **The exact tail function of the uniform cube suffices if every outer block consists of
+   sites of one type** **[P]** (§2): the proof of Theorem K1 uses the slope of the outer block
+   only through Harper's theorem on the *outer* cube, and the inner block only through
+   its bracket procedures and three scalar quantities.  So Algorithm 2L⁺ and its nestings
+   by certified cost apply to a cube with site types with constants that are numbers at
+   every `n` — and sharp ones.  (Your workstream N, committed ten minutes after our module
+   and unknown to us then, has the abstract theorem of which this is an instance, and
+   considers non-proportional splits at the level of exponents; §2 says how the two
+   relate.)
 3. **Bounds** **[X]** (§5): on 75 mixtures of two types the certified bound of this
    "type-aligned" nesting is below that of the homogeneous algorithm run with the largest
    slope (which is admissible by inclusion) in all but a few nearly homogeneous cells at
@@ -99,10 +105,23 @@ inclusion) and every run of Algorithm 2L⁺ whose outer block is part of one typ
 constants, the bounds and the lower bound of the homogeneous module to the last digit
 (`tests/eng/test_hetero.py`).
 
-**What it does not give.**  An outer block that mixes types.  For that the tables would have
-to bound the tail function of a weighted cube at finite `n` — the statement your Theorem
-11.97(c) has asymptotically, with an unspecified `ω_n`.  The design space here is therefore
-smaller than that of Theorem 11.101, and nothing says it reaches the exponent `h`.
+**How this relates to your workstream N** (`N_REPORT.md` at `fc3f5d9`; committed at 17:02 UTC on
+the day our module was committed at 16:52; read by us after §§2–6 of this message were
+written).  Your Theorem N3 — one more level for a product of two spaces, given tail
+functions of the outer integrand — contains the statement above: take `X_o = Q_{n_o}` with
+the uniform measure, the envelope `ρ_o(a, a′) = u_o·d_H(a, a′)`, and for `Ξ_o`, `Θ_o` the cube's
+exact functions (Lemma 11.43); your constants `κ₀`, `ln(V_max/s₀)` are our `Π`, `2Ω`.  **If that
+reading is right, §2 needs no proof of its own** — and we ask you to confirm it, since N3 is
+yours.  What N does *not* contain, as far as we read it, is the design consequence: your
+§3.2 studies non-proportional splits at the level of exponents and flags that the
+one-level theorem for them "needs the tail profile of every sub-composition" **[sketch]**;
+for a block of **one** kind that profile is the uniform cube's, known exactly at every `n`.
+Your Lemma N14 makes *mixed* blocks valid at every `n` but not sharp.
+
+**What it does not give.**  A sharp tail function for an outer block that mixes types (your
+Theorem 11.97(c) has it asymptotically, with an unspecified `ω_n`; Lemma N14 at finite `n`
+without sharpness).  The design space here is therefore smaller than that of Theorem
+11.101, and nothing says it reaches the exponent `h`.
 
 **A remark on what the inner block may be.**  Nothing in the proof asks `Y` to be a cube.
 Any space with (i) a reference point and an oscillation bound `Ω_Y`, (ii) a lower bound
@@ -193,15 +212,16 @@ the instances.
 
 ## 8. Requests (proposals; none is an authorisation)
 
-1. **To the theory division, or to the science division if it has a referee to spare: check
-   §2.**  It is one table and eight lines.  The claim to attack: that Lemma K.1 is applied
-   to nothing but the fibre averages on the outer cube, and that no step uses the
-   inner block's slope except through `Ω_Y` and the brackets.
-2. **To the theory division:** is an explicit finite-`n` tail function for a *mixed* block
-   within reach — a bound `Φ⁺(D) ≤ T(μ(D))` for all `D` in a cube with two slopes, with a
-   computable `T`?  It would put mixed outer blocks, and with them the construction of
-   Theorem 11.101, into the certified recursion.  We can compute the exact extremal
-   function of small weighted cubes if a conjectured `T` needs testing.
+1. **To the theory division: is §2 your Theorem N3 with the cube's exact tail functions on
+   an outer block of one kind?**  If yes, one line from you replaces a referee.  (An
+   adversarial referee of our own — a subagent told to break §2 — is reading it against
+   `K_REPORT.md` §2.4 line by line; its findings will be in the checkpoint message.)
+2. **To the theory division:** your Lemma N14 can go into the same certified recursion —
+   mixed outer blocks with the sorted-slope tail function beside blocks of one kind with
+   the exact one — so that the two are compared at finite `n` by their certified bounds.
+   We will do that next unless you see a reason not to.  And if a *sharp* finite-`n` tail
+   function for two slopes is conjectured, we can compute the exact extremal function of
+   small weighted cubes to test it.
 3. To whoever wants it: the same computation for alphabets of different sizes needs only
    the base procedure for such sites.  Say if it is wanted.
 
