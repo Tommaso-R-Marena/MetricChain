@@ -1,0 +1,14 @@
+=== K12 on H, tau 0.7: 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; order m = 3, band 7; 220 raw stage-2 tables of workstream P9 (sum of their maxima 272.11 kT)
+(1) floor without penalty built (0 evaluated terms exact in a window, 0 reduced, 10 pairs beyond the band); K(T): workstream P9's stored choice; penalty tables in the window form: 3 on one site, 32 on pairs, 140 on larger sub-tuples; sum of their maxima 271.58 kT [128s, peak RSS 1007 MB]
+(a) off-probabilities q_i under the floor without penalty (exact, one restricted pass per site): 0.372, 0.221, 0.214, 0.0264, 0.0223, 0.0232, 0.0246, 0.0258, 0.0399, 0.0516, 0.0587, 0.0673; mean number of sites off: 1.147; against 20000 exact samples: largest deviation 3.20 standard errors (must be below 5) [274s]
+(b) 175 window-form tables on site sets of sizes [1, 2, 3]; sum of their maxima 271.58 kT (the driver printed 271.58); site graph: degrees 7 to 11
+(c) **lambda_0 = 0.1264** (both implementations agree to 0.0e+00); minimising set: 12 of 12 sites [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], sum ln(1/q_i) = 34.319, table maxima inside it 271.6 kT; at the full set the ratio is 0.1264
+(d) their explicit criterion: q_max = 0.3715, 1/(e Delta) = 0.0334: the entropy factor is -2.432 -> VOID (q_max >= 1/(e Delta))
+(e) from floor_ground_state_K12_m3_w7.log: measured lambda_c = 1.3176, least ratio over states lambda_gs = 1.3556 (extremal state: 10 sites off, penalty 64.002 kT, cost 86.76 kT);  **lambda_0 / lambda_c = 0.096**, lambda_0 / lambda_gs = 0.093
+(f) the extremal state recomputed here (one (min,+) pass at 1.0005 lambda_gs): state [3, 3, 1, 6, 6, 6, 5, 5, 5, 1, 3, 3], displaced sites S* = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; penalty 64.002 kT, cost 86.76 kT, ratio 1.3556 (the committed log: 64.002, 86.76, 1.3556; must agree to 2e-4)
+(g) lambda_gs / lambda_0 = 10.727 = A x B x C exactly, with
+    A = 1.127: the binary ratio at the extremal state's own displaced set, sum_(S*) ln(1/q_i) / (table maxima inside S*) = 28.785 / 202.06 = 0.14246, against its minimum lambda_0 = 0.12637;
+    B = 3.014: the cost of the state, 86.76, against sum_(S*) ln(1/q_i) = 28.785; of it  B1 = 0.996: ln(1 / P_0(all of S* off)) = 28.656 against that sum (1 for a product reference; below 1: displaced sites come together under the band reference),  B2 = 3.028: one state against all states with that displaced set;
+    C = 3.157: the table maxima inside S*, 202.06 kT, against the penalty the state pays, 64.002 kT
+(h) the product assumption at the full set: ln(1 / P_0(all 12 sites off)) = 34.196 against sum ln(1/q_i) = 34.319; with the true probability the binary ratio at the full set is 0.12591 (with the product of the one-site probabilities: 0.12637); control of the restricted pass: one site against ln(1/q_0): 6.2e-13
+ALL DONE 295 s; peak RSS 1921 MB

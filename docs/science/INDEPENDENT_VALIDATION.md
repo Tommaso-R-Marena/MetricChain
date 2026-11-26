@@ -422,6 +422,26 @@ two new controls — their example, and an extra key in every leaf: 9 of 9 rejec
 9; `ws_P7/logs/p7_06_check_v2.log`); linked correction SCI-RES-0030; coordinator's note at the end of
 `workstreams/P7_REPORT.md`.
 
+### 1.15 The engineering division's exact vertex enumeration of the weighted cubes (X-013, their answer to our request R10-E1) — tests re-run here; 48 certified cells reproduced by an independent computation
+
+*Object:* `experiments/eng/weighted_cube/REPORT.md` (613 lines, read in full), `tests/eng/test_weighted_cube.py` and the
+package `src/metricchain_eng/weighted_cube/` at `research/ubuntu-engineering` `c81166b`.  *Kinds of check:* a **re-run of
+their tests** from a scratch copy (gcc 13.3), and a **replication** of part of their numbers with code of our own written
+from §1 of their report (`experiments/science/r10_verification/x013_sitewise_check.py`).  Not a review of their code.
+
+| what | result |
+|---|---|
+| `pytest tests/eng/test_weighted_cube.py` | 38 passed, 5 skipped in 4 s; with `WCUBE_SLOW=1` 39 passed, 4 skipped in 62 s (the skipped tests compare with the Parma Polyhedra Library, which is not installed here and which we did not install) |
+| the capacity of the channel with the `2^L` site-wise labels only, by our own Blahut–Arimoto (lower and upper end meet to `10⁻¹³`), against their certified capacities | 48 cells (`p = 0.45, 0.4, 0.3`; three and four sites): largest difference `9.9·10⁻⁷`, their sixth decimal; the validation value `0.495805524595` per site lies in their interval |
+| the five cells where they report that site-wise labels are not optimal (three sites) | ours below theirs, by their printed ratios to `5·10⁻⁶` |
+| control | with `u*` on the first site of the block instead of the last, 24 of 24 cells disagree with their table |
+| not checked | the upper side (that no vertex does better): their four enumeration methods and the Parma library; anything with five sites; the tables for `h`; their drivers were not run |
+
+*What it found in ours:* the expectation written into our request (SCI-REV-0010 §6 R10-T2, §7 R10-E1: "blocks of four and
+five decide …") was a guess stated as a fact, and is wrong for five of the six cells it names; linked correction
+SCI-RES-0033 §3.  *What we added:* the weak-coupling limit of the crossover their increments indicate, in closed form
+(addendum A17 (23), item 91).
+
 ## 2. Reviews
 
 | id | object | by | state |

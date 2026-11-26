@@ -12,52 +12,67 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 19:27 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 20:28 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
 **Open right now (newest first; everything below this paragraph is older and still true
 unless this paragraph says otherwise).**
-(i) **All three referee workstreams of the afternoon are read, checked and published at
-this commit:** SCI-REV-0020 (Ensemble: E5–E8, E1.3; workstream R21), SCI-REV-0021 (Geometry:
-Theorems B, B′, G; R22 — it also decides the question of our finding S83; its §0 compares
-it with the Geometry division's own review, which crossed it), SCI-REV-0022 (the theory
-division's assumption audit, sampled; R23).  Each report under
-`docs/science/workstreams/` ends with a coordinator's note that says what was read and
-checked.  **For the research owner:** R21 reported one declined tool action (a file write);
-it was not performed for it (note at the end of `R21_REPORT.md`).
-(ii) **The Ensemble division's question E-S3 is answered** (SCI-RES-0032; addendum A17 (22),
-items 87–89; `experiments/science/ensemble_checks/`): their thermal union bound checked and
-measured; their threshold rule adopted with its provenance; a sandwich as a first-order
-class.  **The loss between groups is split** (item 90; SCI-MSG-0032;
-`pi_inference/group_coupling.py`): on Lys₁₂ at band 4 pair terms alone would take
-0.61 of the bracket — the number behind open problem D15 (a) if someone builds them.
-(iii) **Owed, in this order:**
-  (a) **SCI-RES-0034, to the Complexity division** (their COMPLEXITY-RES-0005, read in full
-  at the fetch of 19:22): tell them that their `λ₁` is the `λ_gs` of SCI-MSG-0031 (values
-  there), and compute their zero-temperature threshold
-  `λ₀ = min_S Σ_{i∈S} ln(1/q_i) / Σ_{U⊆S} max γ_U` on our four cases by enumeration over the
-  4 096 site sets (`q_i`: the off-anchor probability of site `i` under the floor without
-  penalty; `γ_U`: the window-form penalty tables, as in `pi_inference/floor_transition.py`)
-  — expect it far below the measured `λ_c` at order 4 (it prices a displaced site at its
-  typical cost; our own missed prediction of item 84 did the same) and say so with the
-  number; export the `q_i` and table maxima as a small file for them.
-  (b) **SCI-RES-0033, to the engineering division:** their enumeration X-013 (our request
-  R10-E1; `experiments/eng/weighted_cube/REPORT.md` at `c81166b`) **has been read in full
-  by the coordinator (613 lines)**; not yet done: re-run `tests/eng/test_weighted_cube.py`
-  from a scratch copy, check one certified number independently (the site-wise optimum by
-  an own Blahut–Arimoto equals their capacity at `p ≥ 0.3`), and say what it settles of
-  R10-T2 (it decides one of the six cells named there and proves that blocks of five
-  cannot decide the other five; the crossover of `a_∞` is indicated near `u ≈ 1.5`).
-  (c) The Complexity division asks, "if your referee is available", for a second look at
-  the proof of their Theorem 1c in the regime `|x| ≥ |σ|` and at Lemma A1 of their appendix
-  (COMPLEXITY-RES-0004): not started, not decided — a small workstream if credits allow.
-(iv) **Next own mathematics** (`OPEN_PROBLEMS.md`): D15 (b) an upper-end inequality that
-uses the floor as well as the ceiling; D15 (a) pair terms for Lys₁₂; G-3 (tree
-decompositions), G-5 (continuous variables), D14 (down-closed families).  Unrefereed
-inside the division: addendum A17 (13)–(18) (the research owner's decision, as recorded)
-and part (22).
-(v) Heads read at 19:22 UTC: theory `dfaa005`, engineering `c81166b`, ensemble `1a067b5`,
-geometry `cd4a2ec`, complexity `ff04e5e`.
+(i) **Referee R24 is running** (launched 19:38 UTC; brief
+`docs/science/workstreams/R24_brief.md`): an adversarial review of the coordinator's
+results of the evening — the least ratio (item 86; SCI-MSG-0031), the answer to the
+Ensemble division (items 87–89; SCI-RES-0032), the split of the loss between groups
+(item 90; SCI-MSG-0032).  Its notes are in `experiments/science/ws_R24/` — **uncommitted
+while it runs**; its report will be `docs/science/workstreams/R24_REPORT.md`.  **When it
+hands back:** read the report in full, re-derive or re-run what decides each finding,
+add a coordinator's note, publish as SCI-MSG-0033 with linked corrections to the
+Ensemble, theory and Complexity divisions wherever a statement of items 86–90 falls,
+and commit `ws_R24/` (complete logs only).  If it reports a declined tool action, do
+not perform it; tell the research owner.
+(ii) **Both answers owed at checkpoint 59 are sent at this commit.**  SCI-RES-0033
+(engineering, copy theory): X-013 re-run and replicated; our request corrected (blocks
+of five cannot decide five of the six cells it named); **the weak-coupling crossover of
+the site-wise optimum in closed form, `u₀ = 1.505534`** (addendum A17 (23), item 91;
+`experiments/science/r10_verification/`).  SCI-RES-0034 (Complexity, copy theory): their
+`λ₁` is our `λ_gs`; **their `λ₀` on our four floors is 0.10 to 0.16 of the measured
+transition, the explicit criterion void, the factor split exactly** (item 92;
+`pi_inference/product_threshold.py`; four JSON exports for them).
+(iii) **Owed, in this order** (each is also in the status file and in the digest's table
+of messages received; the four other branches that moved at the fetch of 20:19 UTC are
+read as far as the pins in `docs/collaboration/status/science.md` say):
+  (a) **A prior-art check of the Geometry division's Theorem L** — a global stability
+  bound of order `n²` for reconstructing a chain from distances of sequence separation at
+  most 4 (GEOMETRY-MSG-0007 §1 and GEOMETRY-RES-0004 §5 on `research/geometric-inference`
+  at `288b2de`; the nearest paper they found is Arias-Castro and Vishwanath, arXiv
+  2310.10900, read by them once).  They ask because our review found one of their
+  theorems in print.  A literature workstream: generic queries only, reading levels for
+  every source, publish as an originality review.
+  (b) **The second look for the Complexity division** (their Theorem 1c in the regime
+  `|x| ≥ |σ|`, Lemma A1 of their appendix; COMPLEXITY-RES-0004; accepted in SCI-RES-0034
+  §6): one referee (R25) after R24 hands back, **on their note at their head** (it has
+  changed since: a new Theorem 1e) — fetch in a command of its own, export
+  `docs/complexity/STRANDS_NN_HARDNESS.md` read-only into the scratchpad; the brief is
+  exactly those two places, a review plus a small exhaustive test, a hand-back of at most
+  forty lines, the declined-tool rule; publish as a review.
+  (c) **To the Ensemble division:** a short confirmation that their question E-S4 is
+  answered by GEOMETRY-RES-0005 §§2–3 in agreement with our Proposition R22-1 (the rank
+  for three torsions is 19, but of interval products; competitors live on `O(2)^r`, hence
+  the half-turn exception).  They had not read our checkpoint 59 when they wrote.
+  (d) **From THY-MSG-0018 §2:** test the theory division's pair-term inequality (a lower
+  mixing coefficient given the held site) on Lys₁₂ at band 4, where pair terms are worth
+  0.61 of the bracket (open problem D15 (a)); compute the class-relative influence
+  between blocks for one of our band models (their Theorem 11.119 (b); with unbounded
+  influence their nested algorithm certifies a false bracket); replicate their audit at
+  their twenty-third checkpoint `b2caab6`.  Their rate theorem (11.53a, b; their
+  Proposition U) is offered for attack — a referee workstream if credits allow.
+(iv) **Next own mathematics** (`OPEN_PROBLEMS.md`): I7 (i) — is `a_cube + (K²/4)F*` the
+expansion of the chain's exponent `a_∞`?  (A proof that site-wise labels are optimal at
+weak coupling would do it; the question is with the theory division, and ours if they
+do not take it.)  D12 (a′) — a certified statement between `λ₀` and `0.8 λ_c`.  D15 (b) an
+upper-end inequality that uses the floor as well as the ceiling; D15 (a) pair terms for
+Lys₁₂; G-3 (tree decompositions), G-5 (continuous variables), D14 (down-closed
+families).  Unrefereed inside the division: addendum A17 (13)–(18) (the research
+owner's decision, as recorded), part (22) (R24 is on it) and part (23).
+(v) Heads read at 20:19 UTC: theory `7f879d4`, engineering `c81166b`, ensemble `32f547a`, geometry `288b2de`, complexity `89114ea` (four of the five had moved).
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
    (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —

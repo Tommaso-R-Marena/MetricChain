@@ -3876,6 +3876,137 @@ SCI-MSG-0032.  Model-relative as everything in this addendum.
     script computed the comonotone and product couplings exactly.  *Refines* the wording
     of item 83 and of SCI-MSG-0030 §2 (a) ("the loss between groups"): SCI-MSG-0032.
 
+### (23) Two answers to other divisions' computations: the crossover of the chain against the cube at weak coupling, in closed form; the Complexity division's zero-temperature threshold on our four floors [item 91: a derivation at fixed block length, checked numerically — about the site-wise optimum; item 92: N; both unrefereed]
+
+*Why this part exists.*  Two computations of other divisions were owed an answer at
+checkpoint 59: the engineering division's exact vertex enumeration of the weighted cubes
+(X-013, our request R10-E1) and the Complexity division's localisation criterion for
+product references (COMPLEXITY-RES-0005, their answer to our question Q-CX3).  Sent as
+SCI-RES-0033 and SCI-RES-0034.  Code and logs: `experiments/science/r10_verification/`
+(`x013_sitewise_check.py`, `x013_weak_coupling_crossover.py`);
+`experiments/science/pi_inference/product_threshold.py` (four logs, four JSON exports),
+`product_threshold_support.py` (four logs), `product_threshold_tables.py` (the tables of
+SCI-RES-0034 generated from the exports).
+
+91. **The two-state chain against the cube: block bounds cannot locate the crossover; at
+    weak coupling the site-wise optimum crosses at `u₀ = 1.505534`** [(a): re-run and
+    replication; (b): the engineering division's result, with a correction of ours; (c):
+    our derivation at fixed block length, checked numerically; (d): open].
+    (a) *X-013 re-run and checked.*  From a scratch copy of the engineering branch at
+    `c81166b` their tests pass here (38 passed, 5 skipped; with the slow tests 39 and 4; the
+    skipped ones need a library this machine does not have).  An independent computation —
+    the capacity of the channel whose only inputs are the `2^L` site-wise labels, by
+    Blahut–Arimoto with a lower and an upper end that meet to `10⁻¹³` — reproduces their
+    certified capacities in all 48 cells with `p ∈ {0.45, 0.4, 0.3}`, `L = 3, 4` to
+    `9.9·10⁻⁷` (their sixth decimal), lies below them by the ratios they print in the five
+    cells where they report that site-wise labels are not optimal (largest deviation
+    `5·10⁻⁶`), and disagrees in 24 of 24 cells when `u*` is put on the first site of the
+    block instead of the last (the control).
+    (b) *What X-013 decides.*  Our request said that blocks of four and five decide six
+    named cells of the crossover map (SCI-REV-0010, R10-T2 and R10-E1) — a guess written as
+    a fact.  Blocks of four decide one of them (`a` at `(p, u) = (0.3, 2.5)`: below the
+    cube) and `h` at `u = 3` for `p = 0.1`; for the other five `a`-cells a certified lower
+    bound of the five-site block quantity lies above the cube, so **no enumeration of
+    five-site blocks can decide them**.  Linked correction: SCI-RES-0033 §3.  Their brackets
+    for the first slope at which the chain is below the cube: for `a`, `(1, 3.71]`,
+    `(1, 2.25]`, `(1, 1.98]`, `(1, 1.76]` at `p = 0.4, 0.3, 0.2, 0.1`; for `h`, `(2, 3.46]`,
+    `(2, 3.14]`, `(1.5, 2.88]` at `p = 0.3, 0.2, 0.1`.
+    (c) *The weak-coupling limit in closed form.*  Spins `s_i` for the configuration and
+    `τ_i` for the label, `h = u/2`, `K = ln((1−p)/p)`, `J = K/2`, `t = tanh(u/2)`; the channel is
+    `W(s|τ) ∝ exp(J Σ s_{i−1}s_i + h Σ τ_i s_i)`.  For an input
+    `M = 2^{−L}(1 + J·g(τ) + O(J²))`: the entropy given the label is that of a chain in a
+    uniform field with couplings `Jτ_{i−1}τ_i` (second-order cumulants of independent spins
+    of mean `t`) and depends on `g` only through its Fourier coefficients `α` on the bonds;
+    the entropy of the output is `L ln 2 − ½E[δ²]` with
+    `δ = J Σ_A [ĝ(A)t^{|A|} + (1 − t⁴)·1{A a bond}] s_A`, so every other coefficient of `g`
+    only lowers it.  Per bond the mutual information is `a_cube + J²F(α)`,
+    `F(α) = −½(αt² + 1 − t⁴)² + ut(1 − t²)α + ½(1 − t⁴) − ut³(1 − t²)`, maximal at
+    `α* = (1 − t²)(u − t(1 + t²))/t³ > 0`:
+
+        sw_{L+1} − sw_L = a_cube(u) + (K²/4)·F*(u) + …,
+        F*(u) = t⁴(1 − t⁴)/2 − u t³(1 − t²) + (1 − t²)²(u − t(1 + t²))²/(2t²).
+
+    At a fixed block length this is the second-order coefficient of the maximum: at
+    `J = 0` the maximiser (the uniform input) is interior and the mutual information
+    strictly concave there, and the two ends of the block contribute terms that do not
+    depend on its length (the steps are in SCI-RES-0033 §4a).  **The first term of `F*` is
+    what independent labels give, and it is negative at every slope** (it is
+    `t³(1 − t²)[t(1 + t²)/2 − u]`): it is the correlation of the optimal labels, `α*J` per
+    bond, that lifts the coupled chain above the cube below `u₀`.
+    *Checks* (`x013_weak_coupling_crossover.log`): at `p = 0.499` and eleven slopes from
+    0.5 to 6 the numerical coefficient equals `F*/4` to `5·10⁻⁷`, and the nearest-neighbour
+    correlation of the numerically optimal input equals `α*K/2` to six decimals; control,
+    the formula for independent labels: off by up to 0.11.  `F*` has one sign change on
+    `(0.02, 40)`, at `u₀ = 1.505534`.  The remainder divided by `K⁴` is the same at
+    `p = 0.49, 0.48, 0.45` (`−0.009, +0.004, +0.013` at `u = 1.2, 1.5, 1.8`): the next term is
+    of order `K⁴` — read off the numbers, not derived — and the root of the increment is
+    `u₀ + 0.044K²` there (`1.50555` to `1.50727`, the same to `10⁻⁵` for block lengths 3 to 7).
+    **Not uniform as `u → 0`**: the expansion needs `α*K/2 ≈ K/(2t²)` small; at `p = 0.45`,
+    `u = 0.1` the coefficient is 0.006 and the formula says 0.124.
+    (d) *What this does not say.*  The site-wise optimum is a lower bound of the block
+    capacity and equals it where X-013 certifies it (`p ≥ 0.3`, at most four sites, their
+    slopes).  Whether site-wise labels stay optimal at weak coupling for every block
+    length, and whether the increment converges to the exponent `a_∞` of the chain, is
+    not shown.  If both hold, `a_∞ = a_cube + (K²/4)F* + O(K⁴)`: at weak coupling the chain is
+    above the cube exactly below `u₀` — consistent with every bracket of (b) and with the
+    cells proved by workstream R10 (above for `u ≤ 1`).  Nothing here for `h`.
+    `OPEN_PROBLEMS.md` I7.
+
+92. **The Complexity division's zero-temperature threshold on our four floors: 0.10 to
+    0.16 of the measured transition, the explicit criterion void in all four; the factor
+    is one costly off state per site against all of them, and the table maxima — not the
+    band** [N; their theorem for product
+    references used on band references — a heuristic, with the mismatch measured;
+    prediction of 19:30 UTC: three of three parts met].
+    (a) *Their statements* (COMPLEXITY-RES-0005 and `docs/complexity/PENALTY_THRESHOLD.md`
+    on `research/biological-complexity` at `ff04e5e`: Theorems 1, 2, Propositions 3, 4,
+    labelled [P] by them and "unreviewed"; read here in full, the proofs of Theorems 1
+    and 2 followed; none of their code used).  For a **product** reference with
+    off-probabilities `q_i` and non-negative tables that vanish unless all their sites are
+    off: a polymer bracket `max(λ⟨G⟩₀, ln(1 + W)) ≤ gain ≤ W`; the zero-temperature threshold
+    `λ₀ = min_S Σ_{i∈S} ln(1/q_i) / Σ_{U⊆S} max γ_U` (a minimum cut), with the explicit
+    criterion `λ* = λ₀(1 − ln(eΔ)/ln(1/q_max))`; and `λ₁ = min_x ln(1/P₀(x))/G(x)` with
+    `gain ≥ (λ/λ₁ − 1)·ln(1/P₀(x*))` above it — **which is the `λ_gs` of item 86 with its
+    bound**, reached independently (their message cites a commit of ours older than
+    SCI-MSG-0031).
+    (b) *On our floors.*  With the band floor's own one-site off-probabilities (exact) and
+    the maxima of the window-form penalty tables — which satisfy their hypothesis: 802
+    tables in the four cases, no entry with a site at the anchor, a planted one reported —
+    by brute force over the 4 095 site sets, two implementations:
+
+    | case | `λ₀` | measured `λ_c` | `λ₀/λ_c` | `λ_gs/λ₀` | `A` | `B1` | `B2` | `C` | their explicit criterion |
+    |---|---|---|---|---|---|---|---|---|---|
+    | Lys₁₂, order 4, band 4 | 2.047 | 15.324 | **0.134** | 7.57 | 1.117 | 0.993 | 3.39 | 2.01 | void: `q_max` = 0.372 against `1/(eΔ)` = 0.0460; 6 of 12 sites above it |
+    | Lys₁₂, order 4, band 7 | 1.922 | 18.805 | **0.102** | 9.94 | 1.088 | 0.995 | 3.25 | 2.82 | void: `q_max` = 0.372 against `1/(eΔ)` = 0.0334; 7 of 12 sites above it |
+    | Lys₁₂, order 3, band 7 | 0.1264 | 1.3176 | **0.096** | 10.73 | 1.127 | 0.996 | 3.03 | 3.16 | void: `q_max` = 0.372 against `1/(eΔ)` = 0.0334; 7 of 12 sites above it |
+    | (LKSE)₃, order 3, band 7 | 0.03106 | 0.19835 | **0.157** | 6.60 | 1.000 | 1.097 | 3.16 | 1.91 | void: `q_max` = 0.565 against `1/(eΔ)` = 0.0334; 10 of 12 sites above it |
+
+    `λ_gs/λ₀ = A·B1·B2·C` exactly (asserted in the code), at the extremal state `x*` with
+    displaced sites `S*`: `A` — `S*` is not the minimiser of the binary ratio (which is the
+    whole chain in all four); `B1 = ln(1/P₀(all of S* off))/Σ_{S*} ln(1/q_i)` — the band
+    against a product; `B2 = ln(1/P₀(x*))/ln(1/P₀(all of S* off))` — one state against all
+    states with that displaced set; `C` — the table maxima inside `S*` against the penalty
+    the state pays.
+    (c) *Reading.*  (i) The band is not the issue: where the formula uses it, the band
+    floor of lysine is a product to within 1 %, that of (LKSE)₃ to 10 %.  (ii) The factor
+    is `B2` times `C`.  `B2`: `ln(1/q_i)` is the price of any off state of a site, the
+    extremal state uses one, and not a likely one — the mere number of off states accounts
+    for 1.5 to 1.7, the rarity of the off states that carry the penalty for 1.8 to 2.1
+    (per displaced site: 2.8–3.5 `kT` for being off, 4.8–5.3 with the count, 8.7–11.1 for
+    the state; `product_threshold_tables.py`).  `C`: the maxima (over all displaced entries the tables are at
+    0.10, 0.06, 0.09, 0.28 of their maxima on average, in the four cases).  (iii) The criterion is void
+    because the unpenalised floor is not a dilute gas of displaced sites.  The "eight to
+    nine `kT` per displaced residue" of SCI-RES-0031 was the cost per site of the extremal
+    *state*; `ln(1/q_i)` is between 0.6 and 3.8 on all sites but two.  (iv) And yet the
+    exact gain stays below 0.08 nats up to `0.76`–`0.85 λ_c`, five to eight times `λ₀` (the
+    committed scans of item 84) — a range no criterion at hand certifies.  (v) Resolving
+    the states (activities per off state, tables at their values) moves the threshold of
+    their Theorem 2 from `λ₀` towards `λ₁` at the price of counting off states, and leaves
+    the condition `q_max < 1/(eΔ)` at `λ = 0` (three lines along their proof, in
+    SCI-RES-0034 §4; ours, unreviewed).
+    (d) *Open* (`OPEN_PROBLEMS.md` D12 (a′)): a certified statement for `λ` between `λ₀`
+    and `0.8 λ_c` on a floor whose sites are commonly off.
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every

@@ -1,0 +1,35 @@
+the fast iteration against x013_sitewise_check.sitewise_capacity at three points: largest difference 9.0e-13 (must be below 1e-10)
+control, p = 1/2 (no coupling): increment minus a_cube at u = 1, 1.5, 2 for L = 3: +1.8e-16, -5.6e-17, -3.9e-16 (must vanish)
+| p | K | root in u of the increment (L -> L+1) minus a_cube, for L = 3, 4, 5, 6, 7 | second-order coefficient near the root: [increment - a_cube] / K^2 at u = 1.2, 1.5, 1.8 (L = 6) |
+|---|---|---|---|
+| 0.495 | 0.0200 | 1.50555, 1.50555, 1.50555, 1.50555, 1.50555 | +0.03311, +0.00056, -0.02665 | [1s]
+| 0.49 | 0.0400 | 1.50560, 1.50560, 1.50560, 1.50560, 1.50560 | +0.03310, +0.00057, -0.02664 | [2s]
+| 0.48 | 0.0800 | 1.50581, 1.50581, 1.50581, 1.50581, 1.50581 | +0.03305, +0.00059, -0.02657 | [5s]
+| 0.45 | 0.2007 | 1.50727, 1.50726, 1.50726, 1.50726, 1.50726 | +0.03274, +0.00072, -0.02612 | [18s]
+second-order coefficient: [increment (L = 5 -> 6) - a_cube] / K^2 at p = 0.499 against Fstar(u) / 4, and against the same formula with independent inputs (control):
+| u | numerical | Fstar(u) / 4 | independent inputs (control) | nearest-neighbour correlation of the optimal input (interior bond, L = 6) | predicted alpha*(u) K / 2 |
+|---|---|---|---|---|---|
+| 0.5 | +0.105128 | +0.105128 | -0.001278 | +0.030762 | +0.030762 |
+| 0.8 | +0.077712 | +0.077713 | -0.006836 | +0.011394 | +0.011394 |
+| 1.0 | +0.055871 | +0.055871 | -0.013962 | +0.007000 | +0.007000 |
+| 1.2 | +0.033110 | +0.033110 | -0.023533 | +0.004668 | +0.004668 |
+| 1.5 | +0.000560 | +0.000560 | -0.040291 | +0.002834 | +0.002834 |
+| 1.8 | -0.026658 | -0.026658 | -0.056284 | +0.001898 | +0.001898 |
+| 2.0 | -0.040730 | -0.040731 | -0.064855 | +0.001515 | +0.001515 |
+| 2.5 | -0.060959 | -0.060959 | -0.075770 | +0.000957 | +0.000957 |
+| 3.0 | -0.063798 | -0.063798 | -0.072922 | +0.000660 | +0.000660 |
+| 4.0 | -0.045506 | -0.045506 | -0.048581 | +0.000338 | +0.000338 |
+| 6.0 | -0.011976 | -0.011976 | -0.012174 | +0.000081 | +0.000081 |
+largest |numerical - Fstar / 4| = 5.1e-07 (must be below 1e-4: the next order is K^2 = 1.6e-05 times a coefficient of order one); control, independent inputs: 0.11 (must be far from zero)
+the root of Fstar: u_0 = 1.505534  (Fstar > 0 below it: the coupling raises the site-wise capacity; < 0 above it)
+sign changes of Fstar on the grid u = 0.02 ... 40 (step 0.001), from Fstar / (1 - t^2): 1 (must be 1; this form against Fstar at five slopes: 1.2e-16); Fstar(0.02) = 0.4999 (its limit at u -> 0 is 1/2); Fstar / (1 - t^2) at u = 40: -39.000 (its limit at large u is 1 - u)
+the remainder [increment - a_cube] / K^2 - Fstar / 4, divided by K^2 (constant in K if the next term is of order K^4), at u = 1.2, 1.5, 1.8, and the shift of the root, (root - u_0) / K^2:
+| p | K | remainder / K^4 at u = 1.2, 1.5, 1.8 | (root - u_0) / K^2 (L = 7) |
+|---|---|---|---|
+| 0.49 | 0.0400 | -0.0090, +0.0042, +0.0136 | +0.0438 |
+| 0.48 | 0.0800 | -0.0090, +0.0042, +0.0135 | +0.0437 |
+| 0.45 | 0.2007 | -0.0091, +0.0041, +0.0134 | +0.0430 |
+not uniform as u -> 0: at p = 0.45 (K / 2 = 0.100), u = 0.1 (t^2 = 0.0025, predicted alpha* K / 2 = 40.1, not small): numerical [increment - a_cube] / K^2 = +0.00631 against Fstar / 4 = +0.12417 (must differ: by 0.118)
+weak-coupling limit (p = 0.495, L = 7 -> 8): u_0 = 1.50555; change from p = 0.49: -5.3e-05; change from L = 6: +0.0e+00
+for comparison: the root of u tanh(u/2) = 1 (the inflection point of a_cube) is 1.54340; u_0 / 1.54340 = 0.97547
+ALL DONE 22 s
