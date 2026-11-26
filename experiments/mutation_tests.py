@@ -1716,6 +1716,35 @@ MUTS["XVI"] += [
      [("                    if cst > max(excess, bottom) + 1e-9:", "                    if cst > bottom + 1e-9:")], 'XVI.9'),
 ]
 
+# The 1/k^2 law at finite n: the envelope sequence and one level over a grid of lines (theory report Theorem 11.58e)
+MUTS["XVI"] += [
+    ("XVI.10 M1: the next curve taken as min(1, Sigma) itself, without the convex envelope",
+     [("        e = ez_envelope(xn, f)\n        e[-1] = min(1.0, e[-2] + (e[-2] - e[-3]) * (xn[-1] - xn[-2]) / (xn[-2] - xn[-3]))",
+       "        e = f.copy()\n        e[-1] = min(1.0, e[-2] + (e[-2] - e[-3]) * (xn[-1] - xn[-2]) / (xn[-2] - xn[-3]))")], 'XVI.10'),
+    ("XVI.10 M2: the tops lowered by two per cent at every level (lines dropped that the level does not kill)",
+     [("        bn = min(ez_root(x, W, a), b)\n        xn = bn * (1.0 - (1.0 - np.linspace(0.0, 1.0, NG + 1)) ** 2)",
+       "        bn = 0.98 * min(ez_root(x, W, a), b)\n        xn = bn * (1.0 - (1.0 - np.linspace(0.0, 1.0, NG + 1)) ** 2)")], 'XVI.10'),
+    ("XVI.10 M3: the minimax step claimed against the curve two levels on",
+     [("                M1 = float(np.max(xn - Wn * g))\n", "                M1 = float(np.max(xn2 - Wn2 * g))\n")], 'XVI.10'),
+    ("XVI.10 M4: the fixed-rate sequence without its scaling (values above one)",
+     [("        G = max(1.0, cn * (1.0 / h - 1.0 / a))\n        xn = np.linspace(0.0, cn, NG + 1)", "        G = 1.0\n        xn = np.linspace(0.0, cn, NG + 1)")], 'XVI.10'),
+    ("XVI.10 M5: the bracket claimed (a/2)-Lipschitz in the outer fraction",
+     [("            if abs(v1 - v2) > a * (p2 - p1) + 1e-9:", "            if abs(v1 - v2) > 0.5 * a * (p2 - p1) + 1e-9:")], 'XVI.10'),
+    ("XVI.10 M6: the accuracy offset X_0 lowered by 1.5",
+     [("        X0 = 2 + math.log(3 * (d + 1)) + 2 * u + math.exp(u)\n        if xout > X0 + y + 1e-9:",
+       "        X0 = 0.5 + math.log(3 * (d + 1)) + 2 * u + math.exp(u)\n        if xout > X0 + y + 1e-9:")], 'XVI.10'),
+    ("XVI.10 M7: one level claimed to have the type of the next curve without any loss",
+     [("                slack = typ + X0 + dmin * math.log(2) + 2 + ell0 - lC\n", "                slack = typ - lC\n")], 'XVI.10'),
+    ("XVI.10 M8: the optimum over k claimed as (2c)^{1/3} l^{2/3} n^{1/3} (the factor 3/2 dropped)",
+     [("        cl = 1.5 * (2 * c) ** (1 / 3) * l ** (2 / 3) * n ** (1 / 3)", "        cl = 1.0 * (2 * c) ** (1 / 3) * l ** (2 / 3) * n ** (1 / 3)")], 'XVI.10'),
+    ("XVI.10 M9: the constant of the rate doubled (the tops compared with 4 pi^2 h^2 theta_hint''(0)/j^2)",
+     [("                stats[key][j] = round(j * j * (tops[j] - h) / P.const, 4)", "                stats[key][j] = round(j * j * (tops[j] - h) / (2 * P.const), 4)")], 'XVI.10'),
+    ("XVI.10 M11: the comparison with the cut chain claimed ten levels early (b_{k_1 + i - 10} <= b^cut_i; the envelope sequence leads by about seven levels, not ten)",
+     [("                if tops[k1 + i] > bc + 1e-4:", "                if i >= 10 and tops[k1 + i - 10] > bc + 1e-4:")], 'XVI.10'),
+    ("XVI.10 M10: the fixed-rate tops claimed to converge twice as fast",
+     [("            if ftop[j0 + i + 1] - h > h * (1 - h / a) / (i + h / a) + 2e-3 * h:", "            if ftop[j0 + i + 1] - h > h * (1 - h / a) / (2 * i + h / a) + 2e-3 * h:")], 'XVI.10'),
+]
+
 # The nested algorithm on a general probability space (theory report 11.33)
 MUTS["XXVI"] = [
     ("XXVI.1 M1: the Gaussian upper tail function with Phi(t - L) in place of Phi(L - t)",

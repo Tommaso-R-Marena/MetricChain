@@ -1,3 +1,22 @@
 # cube u = 2: h = 0.097281, a = 0.327813; envelope sequence from b_0 = a; horizon N = 3000, k = 2 levels; curves with values in [0, 1]: True
 # (b_j - h)/h, j = 0..2: 2.3698 2.3698 0.7038;   X = X_0(N) + 1 = 23.49
 # blocks of the chains (top first): [454, 238];  levels of a chain started at N: [6, 12]
+#      d      x     ln cost     type(W_k)   cost - type   error bound E_k   cost - d h    d (a - h)
+    3000     1.0      761.92      496.24      265.68         592.98        470.08      691.60
+    3000    23.5      582.82      473.75      109.07         592.98        290.97      691.60
+    3000    83.5      455.48      413.75       41.73         592.98        163.63      691.60
+    1500     1.0      525.99      247.62      278.37         583.32        380.07      345.80
+# levels of section 4 evaluated: [2139, 11] (per family, base first);  chain levels: [28, 9];  checks: 8934;  evaluators differ by at most 5.7e-14
+#   level family 1: measured loss (ln C_max - type of W_1) between -161.4 and 27.7 nats over 2139 evaluations
+#   level family 2: measured loss (ln C_max - type of W_2) between 41.7 and 148.4 nats over 11 evaluations
+least slack per inequality:
+   T: accuracy                                        0.006   (37 checks)
+   T: ln(1/pi_dagger) <= varpi                       37.028   (37 checks)
+   Z3: (U-infinity)                                   5.820   (2150 checks)
+   Z3: accuracy                                       1.001   (2150 checks)
+   Z3: the type                                      25.312   (2150 checks)
+   Z4: the type of the combined family              102.561   (2360 checks)
+   induction T                                       89.593   (50 checks)
+violations: 0   [must be 0]
+time 13 s
+ALL CHECKS PASS

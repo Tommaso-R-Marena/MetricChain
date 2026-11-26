@@ -17,7 +17,10 @@ and chains, the error functions, the chain over a family that is itself a level 
 What it does not test: the real base (Theorem A of Q2: forty levels more), sizes at which the bound is below N a.
 Two sequences of curves (argument `mode`): 'cut' - the cut orbit curves from b_0 = h + eps1 (base: saturating flat type b_0);
 'env' - the envelope sequence from b_0 = a (base: saturating flat type a; Z_ADDENDUM.md).
-Usage: python3 z3_nest.py [u] [eps1] [N] [k] [mode]        (default 2.0 0.02 6000 2 cut)
+Base (argument `base`): 'sat' - a family that saturates the flat type b_0 with error 0 (an idealisation);
+'real' (mode env only) - the design of Theorem A of Q2 with no epoch: the chain of Proposition T over the base bracket
+(q2lib.HiBase, q2lib.ChainFam), flat type a - then the number printed is the certified cost of an explicit algorithm.
+Usage: python3 z3_nest.py [u] [eps1] [N] [k] [mode] [base]        (default 2.0 0.02 6000 2 cut sat)
 """
 import math
 import sys
@@ -34,6 +37,8 @@ eps1 = float(sys.argv[2]) if len(sys.argv) > 2 else 0.02
 N = int(sys.argv[3]) if len(sys.argv) > 3 else 6000
 k = int(sys.argv[4]) if len(sys.argv) > 4 else 2
 mode = sys.argv[5] if len(sys.argv) > 5 else "cut"
+base = sys.argv[6] if len(sys.argv) > 6 else "sat"
+assert base == "sat" or mode == "env"
 t0 = time.time()
 C = Z.make_chain(mode, u, k + 2, eps1)
 ev = Q2.Ev(u, both=True)
@@ -57,7 +62,12 @@ for j in range(k, 0, -1):
 print("# blocks of the chains (top first): %s;  levels of a chain started at N: %s"
       % ([blocks[j][0] for j in range(k, 0, -1)], [Q2.Chain(cu, N, C.b[j], calX, 1.0, blocks[j][0]).j(N) for j in range(k, 0, -1)]))
 
-fam = Z.SatFlat(C.b[0])
+if base == "sat":
+    fam = Z.SatFlat(C.b[0])
+else:
+    hib = Q2.HiBase(cu, N, st)
+    fam = Q2.ChainFam(ev, hib, 1.0, N, st, Lam)          # entered with the value of Lambda reached by the unrolling above
+    print("# base: the chain over the base bracket (block %d, %d levels from N), flat type a" % (fam.ch.m, fam.ch.j(N)))
 zs, chs = [], []
 for j in range(k):
     z = Z.ZLevelFam(ev, fam, C.grid(j, N), C.grid(j + 1, N), C.b[j + 1], N, st)

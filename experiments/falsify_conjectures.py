@@ -8274,6 +8274,244 @@ def t_lines_level_chain(rng, trials):
     return True, stats
 
 
+def ez_envelope(x, y):
+    """lower convex envelope of the points (x_i, y_i), x increasing: its values at the x_i"""
+    hull = []
+    for i in range(len(x)):
+        while len(hull) >= 2:
+            i1, i2 = hull[-2], hull[-1]
+            if (y[i2] - y[i1]) * (x[i] - x[i1]) >= (y[i] - y[i1]) * (x[i2] - x[i1]):
+                hull.pop()
+            else:
+                break
+        hull.append(i)
+    return np.interp(x, x[hull], y[hull])
+
+
+def ez_root(x, W, a):
+    """the root of W(B) = 1 - B/a on the grid (W nondecreasing): the next top"""
+    g = W - (1.0 - x / a)
+    if g[-1] <= 0:
+        return float(x[-1])
+    k = int(np.argmax(g > 0))
+    return float(x[k - 1] - g[k - 1] * (x[k] - x[k - 1]) / (g[k] - g[k - 1]))
+
+
+def ez_env_sequence(P, J, NG):
+    """The envelope sequence (theory report Theorem 11.58e; docs/workstreams/Z_ADDENDUM.md): W_0 = 0 on [0, a],
+    b_{j+1} = the root of W_j(B) = 1 - B/a, W_{j+1} = the lower convex envelope of min(1, Sigma(B, W_j(B))) on [0, b_{j+1}].
+    Floating point on a grid (finer near the top).  Returns ([(x, W)], [b_j], [(x, f)]) with f the function enveloped."""
+    a = P.a
+    x, W, b = np.linspace(0.0, a, NG + 1), np.zeros(NG + 1), a
+    curves, tops, raw = [(x, W)], [b], [None]
+    for _ in range(J):
+        bn = min(ez_root(x, W, a), b)
+        xn = bn * (1.0 - (1.0 - np.linspace(0.0, 1.0, NG + 1)) ** 2)
+        Win = np.interp(xn, x, W)
+        f = np.array([min(1.0, P.sigma(float(B), float(s))) for B, s in zip(xn, Win)])
+        f[0], f[-1] = 0.0, 1.0                                # Sigma(0, 0) = 0 exactly; at the top the slope map is infinite
+        e = ez_envelope(xn, f)
+        e[-1] = min(1.0, e[-2] + (e[-2] - e[-3]) * (xn[-1] - xn[-2]) / (xn[-2] - xn[-3]))
+        e = np.clip(e, 0.0, 1.0)
+        b, x, W = bn, xn, e
+        curves.append((x, W))
+        tops.append(b)
+        raw.append((xn, f))
+    return curves, tops, raw
+
+
+def ez_fixed_rate(P, J, NG):
+    """The fixed-rate sequence: V_{j+1} = (V_j + B/h - 1)_+ / G_j on [0, c_{j+1}], c_{j+1} = the root of V_j(B) = 1 - B/a,
+    G_j = max(1, c_{j+1} (1/h - 1/a)) - an admissible sequence in closed form."""
+    a, h = P.a, P.h
+    x, V, c = np.linspace(0.0, a, NG + 1), np.zeros(NG + 1), a
+    curves, tops = [(x, V)], [c]
+    for _ in range(J):
+        cn = min(ez_root(x, V, a), c)
+        G = max(1.0, cn * (1.0 / h - 1.0 / a))
+        xn = np.linspace(0.0, cn, NG + 1)
+        Vn = np.maximum(np.interp(xn, x, V) + xn / h - 1.0, 0.0) / G
+        c, x, V = cn, xn, Vn
+        curves.append((x, V))
+        tops.append(c)
+    return curves, tops
+
+
+@conjecture("XVI.10 The 1/k^2 law at finite n (theory report Theorem 11.58e; docs/workstreams/Z_REPORT.md, Z_ADDENDUM.md): ln N(n; eps, delta) <= n b_k + k c_Z ln n + O(ln n) with b_k - h ~ 2 pi^2 h^2 theta_hint''(0)/k^2, hence n h + O(n^{1/3} (ln n)^{2/3}).  Ingredients, each tested: (a) the ENVELOPE SEQUENCE W_0 = 0 on [0, a], b_{j+1} = root of W_j(B) = 1 - B/a, W_{j+1} = lower convex envelope of min(1, Sigma(B, W_j(B))): every W_j is convex, nondecreasing, with values in [0, 1] and W_j(0) = 0, W_{j+1} <= Sigma(., W_j), the tops decrease and stay above h, b_1 = a, and for the Gaussian pair b_j >= 1/(4 cos^2(pi/(2j + 1))) (the lower bound for tau_j) while j^2 (b_j - h) is within 3 per cent of pi^2/16 at j = 20, 30; (b) comparison: the tops of the fixed-rate sequence V_{j+1} = (V_j + B/h - 1)_+/G_j dominate those of the envelope sequence, and once they are below a h/(a - h) they obey c - h <= h (1 - h/a)/(i + h/a): the tops converge to h; and from the level k_1 at which the envelope top is below h + eps_1 the tops of the cut orbit curves restarted at h + eps_1 dominate, b_{k_1 + i} <= b^cut_i (this transfers the sharp rate); (c) the minimax step: for every g, min over the outer fraction phi of max over the lines (B, W_j(B)) of (1 - phi) B + (1 - W_j(B)) phi theta_na(g/phi) is at most max_B [B - W_{j+1}(B) g] - and NOT at most the same with W_{j+2} (two levels' gain cannot be claimed for one); (d) the bracket is a-Lipschitz in phi; (e) the accuracy of the level with n_o e = y, theta = 3 (n_o + 1) e^{2u + e^u + y} and tolerance 1 is at most X_0(d) + y, X_0(d) = 2 + ln(3 (d + 1)) + 2u + e^u; (f) one level on exact tables of the cube: over a saturating family whose lines are the grid of W_j, with the outer block chosen by the proxy, ln C_max <= max over the grid of W_{j+1} of [d B - sigma xhat] + X_0(d) + d_min ln 2 + 2 + ell_0(d, Lambda); (g) min_k [n c/k^2 + k l] = (3/2) (2c)^{1/3} l^{2/3} n^{1/3} (1 + o(1))")
+def t_envelope_assembly(rng, trials):
+    quick = trials < 100
+    stats = dict(levels_env=0, sub_solution_excess=-math.inf, gauss_ratio={}, cube_ratio={}, fixed_rate_checks=0, minimax=0,
+                 minimax_excess=-math.inf, control_two_levels=0, lipschitz=0, accuracy=0, accuracy_control=0, exact_levels=0,
+                 type_slack=math.inf, type_without_losses_fails=0)
+    pairs = [(RtPair(None), 30, 500 if quick else 1200), (RtPair(2.0), 5 if quick else 9, 160 if quick else 400)]
+    seqs = {}
+    for P, J, NG in pairs:
+        a, h = P.a, P.h
+        curves, tops, raw = ez_env_sequence(P, J, NG)
+        seqs[P.u] = (curves, tops)
+        if abs(tops[1] - a) > 1e-9 * a:
+            return False, dict(reason="b_1 is not a", pair=P.u)
+        for j in range(1, J + 1):
+            x, W = curves[j]
+            xf, f = raw[j]
+            d1 = np.diff(W) / np.diff(x)
+            if W[0] != 0.0 or W.min() < 0 or W.max() > 1 + 1e-12 or (d1 < -1e-9).any() or (np.diff(d1) < -1e-6 * max(1.0, abs(d1).max())).any():
+                return False, dict(reason="an envelope curve is not convex, nondecreasing, zero at zero with values in [0, 1]", pair=P.u, j=j)
+            ex = float(np.max(W[:-1] - f[:-1]))
+            stats["sub_solution_excess"] = max(stats["sub_solution_excess"], ex)
+            if ex > 1e-9:
+                return False, dict(reason="W_{j+1} exceeds min(1, Sigma(B, W_j(B))) on the grid", pair=P.u, j=j, excess=ex)
+            if not (h < tops[j] <= tops[j - 1] + 1e-12):
+                return False, dict(reason="the tops are not nonincreasing and above h", pair=P.u, j=j, top=tops[j])
+            stats["levels_env"] += 1
+            if P.u is None:
+                lb = 1 / (4 * math.cos(math.pi / (2 * j + 1)) ** 2) if j >= 1 else 1.0
+                if tops[j] < lb - 2e-4:
+                    return False, dict(reason="Gaussian pair: an envelope top is below the lower bound for tau_j", j=j, top=tops[j], lower=lb)
+        key = "gauss_ratio" if P.u is None else "cube_ratio"
+        for j in (2, 3, 5, 10, 20, 30):
+            if j <= J:
+                stats[key][j] = round(j * j * (tops[j] - h) / P.const, 4)
+        # (b) the fixed-rate sequence dominates, and converges
+        Jf = 60 if P.u is None else 40
+        fcur, ftop = ez_fixed_rate(P, Jf, NG)
+        cstar = a * h / (a - h)
+        for j in range(min(J, Jf) + 1):
+            if ftop[j] < tops[j] - 1e-3 * a:
+                return False, dict(reason="a top of the fixed-rate sequence is below the top of the envelope sequence", pair=P.u, j=j)
+            xv, V = fcur[j]
+            xw, Wj = curves[j]
+            if (np.interp(xw[xw <= ftop[j]], xv, V) > Wj[xw <= ftop[j]] + 2e-3).any():
+                return False, dict(reason="the fixed-rate curve is above the envelope curve", pair=P.u, j=j)
+        j0 = next((j for j in range(Jf + 1) if ftop[j] <= cstar + 1e-12), None)
+        if j0 is None:
+            return False, dict(reason="the fixed-rate tops do not reach a h/(a - h)", pair=P.u, tops=ftop[-3:])
+        for i in range(1, Jf - j0):
+            if ftop[j0 + i + 1] - h > h * (1 - h / a) / (i + h / a) + 2e-3 * h:
+                return False, dict(reason="fixed-rate tops: c - h exceeds h (1 - h/a)/(i + h/a)", pair=P.u, i=i)
+            stats["fixed_rate_checks"] += 1
+        # (b') the cut orbit curves restarted at h + eps_1 (Theorem 11.53b) dominate the envelope sequence from the level
+        #      at which its top is below h + eps_1: this is how the sharp rate is transferred
+        if P.u is None:
+            eps1 = 0.02
+            k1 = next(j for j in range(J + 1) if tops[j] <= h + eps1)
+            worstW, cut_tops, _ = rt_chain(P, P.L + 0.05, h + eps1, J - k1)
+            if worstW > 1 + 1e-9:
+                return False, dict(reason="the range condition of the cut chain fails at the restart used", worst=worstW)
+            for (i, bc) in cut_tops:
+                if tops[k1 + i] > bc + 1e-4:
+                    return False, dict(reason="an envelope top exceeds the top of the cut chain restarted above it", k1=k1, i=i,
+                                       envelope=tops[k1 + i], cut=bc)
+                stats["cut_comparisons"] = stats.get("cut_comparisons", 0) + 1
+        # (c) the minimax step on the envelope curves
+        for j in ((1, 2, 4, 8, 15) if P.u is None else (1, 2, 3)):
+            if j + 2 > J:
+                continue
+            x, W = curves[j]
+            sel = np.unique(np.concatenate((np.arange(0, len(x), max(1, len(x) // 150)), [len(x) - 1])))
+            LB, Ls = x[sel], W[sel]
+            xn, Wn = curves[j + 1]
+            xn2, Wn2 = curves[j + 2]
+            for g in (0.02 * a, 0.08 * a, 0.25 * a, 0.7 * a):
+                best = math.inf
+                for phi in np.concatenate((np.linspace(0.004, 0.996, 125), np.geomspace(1e-4, 4e-3, 6))):
+                    th = P.theta_na(g / phi)
+                    best = min(best, float(np.max((1 - phi) * LB + (1 - Ls) * phi * th)))
+                M1 = float(np.max(xn - Wn * g))
+                M2 = float(np.max(xn2 - Wn2 * g))
+                stats["minimax_excess"] = max(stats["minimax_excess"], (best - M1) / a)
+                if best > M1 + 4e-3 * a:
+                    return False, dict(reason="the minimax step: min over phi of the worst line exceeds the majorant of the next curve",
+                                       pair=P.u, j=j, g=g, value=best, majorant=M1)
+                if best > M2 + 4e-3 * a:
+                    stats["control_two_levels"] += 1
+                stats["minimax"] += 1
+        # (d) Lipschitz in phi
+        for _ in range(40):
+            B, s = float(rng.uniform(0, a)), float(rng.uniform(0, 1))
+            g = float(rng.uniform(0.01, 1.0)) * a
+            p1, p2 = sorted(rng.uniform(0.002, 0.999, size=2))
+            v1 = (1 - p1) * B + (1 - s) * p1 * P.theta_na(g / p1)
+            v2 = (1 - p2) * B + (1 - s) * p2 * P.theta_na(g / p2)
+            if abs(v1 - v2) > a * (p2 - p1) + 1e-9:
+                return False, dict(reason="the bracket is not a-Lipschitz in the outer fraction", pair=P.u, B=B, s=s, g=g, p1=p1, p2=p2)
+            stats["lipschitz"] += 1
+    if not (abs(stats["gauss_ratio"].get(20, 0) - 1) < 0.03 and abs(stats["gauss_ratio"].get(30, 0) - 1) < 0.03):
+        return False, dict(reason="Gaussian pair: j^2 (b_j - h) is not within 3 per cent of pi^2/16 at j = 20, 30", **stats)
+    # (e) the accuracy of a level
+    c3 = 3 * math.e + 1
+    for _ in range(200):
+        u = float(rng.choice([0.25, 0.5, 1.0, 2.0, 4.0]))
+        pu = 1 / (1 + math.exp(u))
+        dmin = int(math.floor(1 / (2 * u))) + 2
+        d = int(rng.integers(dmin + 1, 5000))
+        n_o = int(rng.integers(1, d - dmin + 2))
+        y = float(rng.choice([1.0, 1.5, 7.0, 40.0, 0.2 * d]))
+        if y > 600:
+            y = 600.0
+        ltheta = math.log(3 * (n_o + 1)) + 2 * u + math.exp(u) + y
+        xout = 1 + ltheta + math.log1p((c3 + math.exp(d * math.log(2 * pu) - 1)) * math.exp(-ltheta))
+        X0 = 2 + math.log(3 * (d + 1)) + 2 * u + math.exp(u)
+        if xout > X0 + y + 1e-9:
+            return False, dict(reason="the accuracy of the level exceeds X_0(d) + y", u=u, d=d, n_o=n_o, y=y, xout=xout)
+        stats["accuracy"] += 1
+        if xout > X0 - 1.5 + y:                               # control: the offset cannot be lowered by 1.5 (long outer blocks)
+            stats["accuracy_control"] += 1
+    # (f) one level on exact tables: the cube at u = 2, the envelope curves W_1, W_2
+    u = 2.0
+    P = RtPair(u)
+    curves, tops = seqs[u]
+    pu, lam1, epsstar, a, h = lv_consts(u)
+    dmin = int(math.floor(1 / (2 * u))) + 2
+    for d in ((150,) if quick else (150, 190)):
+        X0 = 2 + math.log(3 * (d + 1)) + 2 * u + math.exp(u)
+        Lam = math.log(20.0) + d * math.log(2)
+        ell0 = lu_ell0(u, d, Lam)
+
+        def grid(j):
+            x, W = curves[j]
+            Bs = [i / d for i in range(int(math.floor(d * tops[j] + 1e-12)) + 1)]
+            if Bs[-1] < tops[j]:
+                Bs.append(tops[j])
+            return [(B, float(min(1.0, max(0.0, np.interp(B, x, W))))) for B in Bs]
+
+        for j in (1, 2):
+            lines, nxt = grid(j), grid(j + 1)
+            for y in (1.0, 6.0, 25.0, 70.0):
+                xh = X0 + y
+                best = (math.inf, None, None)
+                for n_o in range(1, d - dmin + 2):
+                    th = na_theta_na(u, y / n_o)
+                    pi = max((d - n_o) * B + (1 - s) * n_o * th for (B, s) in lines)
+                    if pi < best[0]:
+                        best = (pi, n_o, th)
+                pi, n_o, th = best
+                n_i = d - n_o
+                par = dict(lam=1.0, eta=0.5, etap=1.0, theta=3 * (n_o + 1) * math.exp(2 * u + math.exp(u) + y), nu1=1.0, b=1.0, delta=0.05)
+                xs = lu_ladder(u, n_i, 1.0, n_o * th)
+                lnC = [max(0.0, max(n_i * B - s * x for (B, s) in lines)) for x in xs[1:]]
+                lC = lu_level(d, n_o, u, par, xs, lnC)[0]
+                typ = max(d * B - s * xh for (B, s) in nxt)
+                slack = typ + X0 + dmin * math.log(2) + 2 + ell0 - lC
+                if slack < -1e-9:
+                    return False, dict(reason="one level over the grid of an envelope curve: ln C_max exceeds the type of the next curve with its error",
+                                       d=d, j=j, y=y, n_o=n_o, lC=lC, typ=typ)
+                stats["type_slack"] = min(stats["type_slack"], slack)
+                stats["type_without_losses_fails"] += int(lC > typ + 1e-9)
+                stats["exact_levels"] += 1
+    # (g) the arithmetic of the optimum
+    for n, c, l in ((1e9, 0.07, 700.0), (1e12, 0.07, 1400.0), (1e15, 0.23, 1700.0)):
+        best = min(n * c / k ** 2 + k * l for k in range(1, 20000))
+        cl = 1.5 * (2 * c) ** (1 / 3) * l ** (2 / 3) * n ** (1 / 3)
+        if not (cl <= best * (1 + 1e-9) and best <= cl * 1.01):
+            return False, dict(reason="min_k [n c/k^2 + k l] is not (3/2)(2c)^{1/3} l^{2/3} n^{1/3} up to one per cent", n=n, best=best, closed=cl)
+    if not (stats["levels_env"] >= 30 and stats["fixed_rate_checks"] >= 40 and stats["minimax"] >= 20 and stats["control_two_levels"] >= 3
+            and stats["lipschitz"] >= 80 and stats["accuracy"] >= 150 and stats["accuracy_control"] >= 10 and stats["exact_levels"] >= 8
+            and stats["type_without_losses_fails"] >= 4 and stats.get("cut_comparisons", 0) >= 15):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
 # ----------------------------------------------------------------------------------------------
 # XVII. With a known part (a field): the p-biased cube (theory report 11.20)
 # ----------------------------------------------------------------------------------------------
