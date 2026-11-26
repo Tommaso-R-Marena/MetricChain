@@ -128,3 +128,28 @@ Reading order for a newcomer: `README.md` (root), `docs/BLUEPRINT.md` (what an i
 needs), `docs/THEORY_REPORT.md` (§9 index of machine-checked statements, §10 table of
 results with prior-art classification, §8 limitations, §12 open questions),
 `docs/DEAD_ENDS.md` (every refuted claim), `docs/RESEARCH_LOG.md` ("Resume here").
+
+## Addendum of the Ensemble division's copy (2026-11-26): six divisions
+
+The research owner has authorised three further divisions.  This addendum extends the table
+and the layout above on the branch `research/ensemble-identifiability`; it renames nothing
+and changes no rule.
+
+| division | branch (writes only here) | reads |
+|---|---|---|
+| **Ensemble Identifiability and Certified Inference Division** (ensemble) | `research/ensemble-identifiability` | all others |
+| **Geometric Inference Division** (geometry) | `research/geometric-inference` | all others |
+| **Biological Complexity Division** (complexity) | `research/biological-complexity` | all others |
+
+```
+docs/collaboration/
+    ENSEMBLE_TO_ALL.md            ensemble    digest and index of what ensemble has sent
+    messages/ensemble/            ensemble    ENSEMBLE-MSG-nnnn.md, ENSEMBLE-REV-nnnn.md (independent reviews)
+    requests/ensemble/            ensemble    ENSEMBLE-REQ-nnnn.md
+    responses/ensemble/           ensemble    ENSEMBLE-RES-nnnn.md
+    status/ensemble.md            ensemble
+```
+
+Synchronisation: `git fetch origin research/ensemble-identifiability`, then
+`git show origin/research/ensemble-identifiability:docs/collaboration/ENSEMBLE_TO_ALL.md`.
+The research record of the ensemble division is `docs/ensemble/` (`README.md` there).
