@@ -9,7 +9,9 @@ independent evaluators, q2lib.Ev) for every admissible outer block n_o.  Checked
  (A) accuracy:      the accuracy of every level is at most xhat;
  (B) (U-infinity):  ln C_max(n_o) <= d * max_{lines of W_j} Psi_g(n_o/d) + ell_0(d, Lambda)          for every n_o;
  (C) exponent:      min_{n_o} d * max Psi_g(n_o/d)  <=  d * M_{W_{j+1}, b_{j+1}}(g) + 1 + a d_min    (Proposition Z1(2) + Lemma Z1a);
- (D) the type:      min_{n_o} ln C_max(n_o) <= max_{grid of W_{j+1}} [d B - sigma xhat] + X_0(d) + d_min ln 2 + 2 + ell_0(d, Lambda).
+ (D) the type:      ln C_max at the n_o of the design (the minimiser of the proxy Pi_j(n_o) = d * max Psi_g(n_o/d))
+                    <= max_{grid of W_{j+1}} [d B - sigma xhat] + X_0(d) + d_min ln 2 + 2 + ell_0(d, Lambda);
+                    (the least ln C_max over all n_o is recorded as well: how much the proxy gives away).
 
 Controls (each must FAIL somewhere): (D) without ell_0 and X_0; (C) with the curve W_{j+2} in place of W_{j+1}
 (two levels' gain claimed for one); (C) for a NON-CONVEX family (the two lines (b_j, 0) and (h, 1) only are a
@@ -39,6 +41,7 @@ viol = {k: 0 for k in "ABCD"}
 ctrl = {"D_no_losses": 0, "C_two_levels": 0}
 worst = {k: -1e18 for k in "BCD"}
 nlev = 0
+gave = 0.0
 rows = []
 for d in (300, 1000, 3000, 10000):
     N = d
@@ -54,7 +57,7 @@ for d in (300, 1000, 3000, 10000):
             y = xh - X0
             g = y / d
             stride = max(1, (d - dm) // 400)
-            best_lC, best_psi, best_no = math.inf, math.inf, None
+            best_lC, best_psi, best_no, lC_at_proxy = math.inf, math.inf, None, None
             for n_o in sorted(set(list(range(1, d - dm + 2, stride)) + [1, 2, 3, d - dm + 1])):
                 phi = n_o / d
                 e = y / n_o
@@ -69,9 +72,9 @@ for d in (300, 1000, 3000, 10000):
                 worst["B"] = max(worst["B"], exB)
                 if exB > 1e-9:
                     viol["B"] += 1
-                if r['lC'] < best_lC:
-                    best_lC, best_no = r['lC'], n_o
-                best_psi = min(best_psi, psi)
+                best_lC = min(best_lC, r['lC'])
+                if psi < best_psi:
+                    best_psi, best_no, lC_at_proxy = psi, n_o, r['lC']
             M1 = d * Z.Mval(nxt, g)
             M2 = d * Z.Mval(nxt2, g)
             exC = best_psi - (M1 + 1 + a * dm + stride * a)       # a scan with a stride misses the best n_o by < stride
@@ -81,13 +84,14 @@ for d in (300, 1000, 3000, 10000):
             if best_psi - (M2 + 1 + a * dm + stride * a) > 1e-9:
                 ctrl["C_two_levels"] += 1
             typ = max(d * B - s * xh for (B, s) in nxt)
-            exD = best_lC - (typ + X0 + dm * math.log(2) + 2 + ell0 + stride * a)
+            exD = lC_at_proxy - (typ + X0 + dm * math.log(2) + 2 + ell0 + stride * a)
             worst["D"] = max(worst["D"], exD)
             if exD > 1e-9:
                 viol["D"] += 1
-            if best_lC - typ > 1e-9:
+            if lC_at_proxy - typ > 1e-9:
                 ctrl["D_no_losses"] += 1
-            rows.append((d, j, xh, best_no, best_lC, typ, best_lC - typ, X0 + ell0, best_psi - M1))
+            gave = max(gave, lC_at_proxy - best_lC)
+            rows.append((d, j, xh, best_no, lC_at_proxy, typ, lC_at_proxy - typ, X0 + ell0, best_psi - M1))
 print("# %d levels evaluated exactly; largest disagreement of the two evaluators %.2e" % (nlev, ev.maxdiff))
 print("#      d   j      xhat   n_o*   ln C_max   type(j+1)   excess   X_0+ell_0   d*(min Psi - M_{j+1})")
 for r in rows:
@@ -96,6 +100,7 @@ for r in rows:
 print("violations: (A) accuracy %d, (B) (U-infinity) %d, (C) exponent %d, (D) the type %d   [each must be 0]"
       % (viol["A"], viol["B"], viol["C"], viol["D"]))
 print("largest excess: (B) %.3f, (C) %.3f, (D) %.3f   [each must be <= 0]" % (worst["B"], worst["C"], worst["D"]))
+print("the proxy choice of n_o costs at most %.3f nats more than the n_o with the least certified bound" % gave)
 print("controls: (D) without its losses fails in %d cases; (C) with W_{j+2} for W_{j+1} fails in %d cases   [each must be > 0]"
       % (ctrl["D_no_losses"], ctrl["C_two_levels"]))
 ok = all(v == 0 for v in viol.values()) and all(v > 0 for v in ctrl.values()) and C.range_ok

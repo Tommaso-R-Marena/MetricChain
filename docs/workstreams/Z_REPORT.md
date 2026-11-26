@@ -162,13 +162,19 @@ It contains the zero line (`W_j(0) = 0`), all its points lie in `𝓔(W_j, b_j)`
 
 (for `B ≤ b_j` take the grid point `B′ ≤ B` with `B − B′ ≤ 1/N`; `W_j(B′) ≤ W_j(B)`).
 
-**The family `Z[𝔉]`.**  Let `𝔉` be a certified family up to `N` with least accuracy at most one.
-For `1 ≤ d ≤ N`, `x̂ ≥ 𝒳` and `δ`:
+**The family `Z[𝔉] = Z_j[𝔉]`.**  Let `𝔉` be a certified family up to `N` with least accuracy at most
+one (in the application: of type `𝓗_N^∞(𝔏_j; E)`; the design uses the lines `𝔏_j`, not the
+certified bounds of `𝔉`).  For `1 ≤ d ≤ N`, `x̂ ≥ 𝒳` and `δ`:
 
 * `d ≤ d_min`: enumeration (`2^d` evaluations, exact).
-* `d > d_min`: put `y := x̂ − X₀(d) ≥ 1`.  For `1 ≤ n_o ≤ d − d_min + 1` let `e(n_o) := y/n_o`.  `Z[𝔉](d, x̂, δ)` is the
-  level `𝖫(d; n_o, e(n_o))` of Lemma Z2 over `𝔉`, for the `n_o` in that range that minimises the
-  certified bound `C_max` (a finite computation from the certified bounds of `𝔉`).
+* `d > d_min`: put `y := x̂ − X₀(d) ≥ 1`.  For `1 ≤ n_o ≤ d − d_min + 1` let `e(n_o) := y/n_o` and
+
+      Π_j(n_o) := max_{(B,σ) ∈ 𝔏_j} [ (d − n_o)·B + (1 − σ)·n_o·θ_na(y/n_o) ]
+
+  (the main term of (U∞); a computation with the curve `W_j` alone).  `Z[𝔉](d, x̂, δ)` is the level
+  `𝖫(d; n_o, e(n_o))` of Lemma Z2 over `𝔉` for an `n_o` that minimises `Π_j` over that range.  (A design
+  may instead take the `n_o` with the least certified bound `C_max`; it obeys the same
+  inequality.)
 
 **Proposition Z3 [P, from Lemma Z2, Proposition Z1(2), Lemma Z1a].**  *Let `𝔉` have the type
 `𝓗_N^∞(𝔏_j; E)` and least accuracy at most one.  Then `Z[𝔉]` is a certified family up to `N` with least
@@ -185,7 +191,7 @@ is at most `X₀(d) + y = x̂`.  Enumeration is exact.
 *The type.*  Let `d > d_min`, `Λ ≥ ln(1/δ) + d ln 2`, `g := y/d > 0`.  By (U∞), for each admissible `n_o`, with
 `φ = n_o/d` and `e(n_o) = g/φ`:
 
-    ln C_max(n_o)  ≤  d·max_{(B,σ)∈𝔏_j} Ψ_g(φ; B, σ)  +  ℓ₀(d, Λ)  +  E(d, 1; Λ + q(d, Λ)),
+    ln C_max(n_o)  ≤  Π_j(n_o)  +  ℓ₀(d, Λ)  +  E(d, 1; Λ + q(d, Λ)),          Π_j(n_o) = d·max_{(B,σ)∈𝔏_j} Ψ_g(φ; B, σ),
 
 because `n_i·B + (1 − σ)·n_o·θ(e) = d·[(1 − φ)B + (1 − σ)φ·θ(g/φ)]`.  By Proposition Z1(2) with `η = 1/d` there is
 `φ* ∈ (0, 1)` with `max_{𝓔(W_j, b_j)} Ψ_g(φ*; ·) ≤ M_{W_{j+1}, b_{j+1}}(g) + 1/d`.  The admissible fractions are the multiples
@@ -194,7 +200,7 @@ and since `𝔏_j ⊂ 𝓔(W_j, b_j)`:
 
     max_{𝔏_j} Ψ_g(φ; ·)  ≤  max_{𝓔(W_j, b_j)} Ψ_g(φ*; ·) + a·d_min/d  ≤  M_{W_{j+1}, b_{j+1}}(g) + (1 + a·d_min)/d.
 
-The design takes the `n_o` with the least certified bound, so with (4.1) for `j + 1`
+The design takes an `n_o` with the least `Π_j`, so with (4.1) for `j + 1`
 
     b_{Z[𝔉]}(d, x̂, δ)  ≤  d·max_{B∈G_{j+1}} [B − W_{j+1}(B)·g]  +  d/N + 1 + a·d_min  +  ℓ₀(d, Λ) + E(d, 1; Λ + q(d, Λ)),
 
@@ -342,16 +348,16 @@ chain levels `j ∈ {0, 3, 5, 6, 8, 11}` and nine target accuracies from `𝒳` 
 | (A) the accuracy of every level is at most the target | 0 violations |
 | (B) (U∞): `ln C_max(n_o) ≤ d·max_{𝔏_j} Ψ_g(n_o/d) + ℓ₀(d, Λ)` for every `n_o` | 0 violations; least slack `13.9` nats |
 | (C) exponent level: `min_{n_o} d·max_{𝔏_j} Ψ_g ≤ d·M_{W_{j+1}, b_{j+1}}(g) + 1 + a·d_min` | 0 violations; least slack `1.2`; equality to `10⁻³` where the orbit part of the curve is active |
-| (D) the type of Proposition Z3 | 0 violations; least slack `28.2` nats |
+| (D) the type of Proposition Z3, at the `n_o` of the design (the minimiser of `Π_j`) | 0 violations; least slack `25.4` nats; the design's `n_o` costs at most `6.4` nats more than the `n_o` with the least certified bound |
 | control: (D) without `X₀ + ℓ₀ + …` | fails in 216 cases |
 | control: (C) with `W_{j+2}` in place of `W_{j+1}` (two levels' gain claimed for one) | fails in 5 cases |
 
-The measured loss of a level — certified cost minus the type of the next curve — is `23`–`34`
+The measured loss of a level — certified cost minus the type of the next curve — is `23`–`35`
 nats at `d = 10³ … 10⁴`, about half of the `52`–`64` that `X₀ + ℓ₀` allows there.
 
 ## 8. Remarks
 
-1. **Why `n^{1/3}`, and why not less by this method.**  The bound is `min_k [n·β_k + k·ℓ]` with a loss
+1. **Why `n^{1/3}`, and why not less by this method [a heuristic remark].**  The bound is `min_k [n·β_k + k·ℓ]` with a loss
    `ℓ = Θ(ln n)` per level.  `β_k ≥ τ_{k₁+k} − h ≥ c/(k + k₁)²` for *every* chain of families of this kind
    (the lower bound of the rate theorem is for the exact recursion), and a level of
    Algorithm 2L⁺ multiplies the certified cost by at least a constant.  So no schedule
