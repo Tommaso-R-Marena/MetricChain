@@ -1,0 +1,39 @@
+import took 157ms
+elaboration took 106ms
+type checking took 3.61s
+'check_is_false' does not depend on any axioms
+cumulative profiling times:
+	attribute application 0.255ms
+	blocked (unaccounted) 3.61s
+	compilation (IR) 1.08ms
+	compilation (LCNF base) 9.44ms
+	compilation (LCNF impure) 4.86ms
+	compilation (LCNF mono) 6.21ms
+	elaboration 231ms
+	fix level params 0.358ms
+	import 157ms
+	initialization 42.4ms
+	instantiate metavars 0.211ms
+	interpretation 3.6ms
+	let-to-have transformation 4.65ms
+	linting 12.9ms
+	parsing 13.3ms
+	process pre-definitions 18.4ms
+	share common exprs 2.47ms
+	tactic execution 0.445ms
+	type checking 3.61s
+	typeclass inference 37.4ms
+MEASURE command: timeout 600 lean --profile experiments/coordinator_checks/kernel_eval/generated/E3_n8_k2_negL.lean
+MEASURE wall_seconds: 4.17
+MEASURE user_seconds: 3.83
+MEASURE sys_seconds: 0.34
+MEASURE max_rss_kb: 1106360
+MEASURE polled_peak_rss_kb: 1108648
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 0
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E3_n8_k2_negL.lean
+RUN bytes: 13376
+RUN sha256: 4bef0a09fa070a89327fc36ef702dd9207636de3510ca1ae7403accfe0ab0eed
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 600 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 0

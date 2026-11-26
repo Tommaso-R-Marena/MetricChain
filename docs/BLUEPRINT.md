@@ -199,6 +199,24 @@ evaluates `E(witness)` and reports the certified gap `E(witness) − lower_bound
 relaxations (drop nonnegative terms).  It is *necessary*: without it certificates for `m`
 independent frustrated components need `≥ 2^m` leaves (§9).
 
+*A domain-split node — a layer above this kernel, machine-checked, not yet in the reference
+checker or its conformance vectors* (`SCert`, `verifyS`, `verifyS_sound`; `SplitRule.lean`;
+requested by the Scientific Discovery Division for its "shares at the leaves"
+certificates).  `split`: `site i`, `states B`, `inside`, `outside` — check `inside` with
+`D_i := D_i ∩ B` and `outside` with `D_i := D_i ∖ B`.  A leaf accepted on a box is accepted on
+every sub-box (`leafOK_mono`), so a split of two leaves is accepted exactly when the `branch`
+with the two leaves repeated is (`split_leaves_iff_branch`): three nodes instead of `1 + k`,
+no new proving power.  A `split` may sit above any `min` certificate, not below one of its
+`branch`, `prune` or `sum` nodes; putting it into `Cert` itself is a change of the kernel
+type, to be made together with the reference checker when a producer exists.
+
+*Pair tables stored once.*  The energy and the leaf check use the two orientations of a
+pair table only through `J_ij(a,b) + J_ji(b,a)`.  A published instance may therefore store
+each unordered pair in one orientation: for soundness against a real model, and against
+the lower model of a second-order envelope, it suffices that this sum lies below the
+model's (`verify_sound_real_symm`, `verify_sound_secondOrder_symm`); the termwise condition of
+`verify_sound_real` is sufficient and not necessary.
+
 ### 4.2 `kind = "residual"` — energy with a non-decomposable residual (`RCert`, `verifyR`)
 
 `"instance": {"h":…, "J":…, "c": [q × n], "anchors": [A, …]}` where each anchor `A` is either
@@ -1240,7 +1258,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 492 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 503 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  Before the first mutant of a test it runs the unmutated test in

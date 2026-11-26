@@ -13,7 +13,10 @@ Put B_k := sup T_k (the value "at accuracy zero", tau_k in the report).
          B_k - h <= c1/(k + c2),   kappa = h^2 a/((a-h)(a+h)(2a-h)),  c1 = h (1 + kappa)/kappa,  c2 = (a+h)(2a-h)/(h a) - 2,
      and limsup k (B_k - h) <= a.
  (b) Every accuracy.  For 0 < g < E, m_k := sup_{0<y<=g} (T_k(y) - theta_h(y))_+ and s := g + theta_h(g):
-         m_{k+1} <= max{ B_{k+1} - h ,  m_k (B_{k+1} - h + L s)/(m_k + L s) },
+         m_{k+1} <= max{ 0 ,  m_k (B_{k+1} - h + L s)/(m_k + L s) },
+     (an earlier version of this line had "B_{k+1} - h" as the first entry of the maximum, which is not needed and
+     makes the display false in a degenerate case of the abstract statement, B_{k+1} < h - L s; the final bound is
+     unaffected - Scientific Discovery Division, SCI-REV-0014, m8)
      hence, for all k >= 1,
          T_k(g) - theta_h(g) <= A(g)/(k + c2),      A(g) = max{ c1 + L s , (1 + c2)(a - h + L g) }.
 

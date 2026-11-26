@@ -1,0 +1,41 @@
+import took 216ms
+experiments/coordinator_checks/kernel_eval/generated/E2h_n16_k2_tac_rfl.lean:130:73: warning: exponent 2048 exceeds the threshold 256, exponentiation operation was not evaluated, use `set_option exponentiation.threshold <num>` to set a new threshold
+experiments/coordinator_checks/kernel_eval/generated/E2h_n16_k2_tac_rfl.lean:130:73: error: maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information
+'check_ok' depends on axioms: [sorryAx]
+cumulative profiling times:
+	attribute application 0.261ms
+	blocked (unaccounted) 8.4ms
+	compilation (IR) 1.47ms
+	compilation (LCNF base) 11.9ms
+	compilation (LCNF impure) 8.23ms
+	compilation (LCNF mono) 8.08ms
+	elaboration 152ms
+	fix level params 0.191ms
+	import 216ms
+	initialization 43.4ms
+	instantiate metavars 0.117ms
+	interpretation 3.78ms
+	let-to-have transformation 0.228ms
+	linting 12.6ms
+	parsing 8.74ms
+	process pre-definitions 10.5ms
+	share common exprs 0.835ms
+	tactic execution 6.89ms
+	type checking 3.99ms
+	typeclass inference 7.86ms
+MEASURE command: timeout 120 lean --profile experiments/coordinator_checks/kernel_eval/generated/E2h_n16_k2_tac_rfl.lean
+MEASURE wall_seconds: 0.53
+MEASURE user_seconds: 0.46
+MEASURE sys_seconds: 0.06
+MEASURE max_rss_kb: 465556
+MEASURE polled_peak_rss_kb: 467136
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 1
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E2h_n16_k2_tac_rfl.lean
+RUN bytes: 33910
+RUN sha256: 4a24e386874a908bc80c8bb5b653d271494c54437abe008d8d40bcff4392d419
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 120 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 1

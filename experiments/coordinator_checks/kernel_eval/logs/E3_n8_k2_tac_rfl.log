@@ -1,0 +1,40 @@
+import took 176ms
+experiments/coordinator_checks/kernel_eval/generated/E3_n8_k2_tac_rfl.lean:181:66: error: maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information
+'check_ok' depends on axioms: [sorryAx]
+cumulative profiling times:
+	attribute application 0.146ms
+	blocked (unaccounted) 18.8ms
+	compilation (IR) 1.2ms
+	compilation (LCNF base) 8.19ms
+	compilation (LCNF impure) 5.42ms
+	compilation (LCNF mono) 5.83ms
+	elaboration 146ms
+	fix level params 0.245ms
+	import 176ms
+	initialization 51.1ms
+	instantiate metavars 0.144ms
+	interpretation 4.59ms
+	let-to-have transformation 2.85ms
+	linting 17.3ms
+	parsing 12.3ms
+	process pre-definitions 13.4ms
+	share common exprs 1.76ms
+	tactic execution 13.7ms
+	type checking 6.43ms
+	typeclass inference 22.6ms
+MEASURE command: timeout 120 lean --profile experiments/coordinator_checks/kernel_eval/generated/E3_n8_k2_tac_rfl.lean
+MEASURE wall_seconds: 0.53
+MEASURE user_seconds: 0.47
+MEASURE sys_seconds: 0.08
+MEASURE max_rss_kb: 473460
+MEASURE polled_peak_rss_kb: 469252
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 1
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E3_n8_k2_tac_rfl.lean
+RUN bytes: 13355
+RUN sha256: d2746771ddde601b4f97058bc4d7eb9e67c61f88e404d33771032a502b563ba4
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 120 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 1

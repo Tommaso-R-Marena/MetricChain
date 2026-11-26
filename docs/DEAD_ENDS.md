@@ -2175,3 +2175,51 @@ looked at; before extrapolating a gap or asking another division for a computati
 the obvious variation with the tools at hand.  (3) The flat-instance figures of
 THY-MSG-0007 remain exact and remain best cases; the linked correction is in
 THY-RES-0013 §2.
+
+## D62. A hypothesis lost on adoption, numbers quoted from a draft, and summaries wider than their cells (twenty-first checkpoint of cycle 10; the Scientific Discovery Division's review SCI-REV-0014)
+
+The review we had asked for (THY-RES-0011 §9(a): the rate of the level recursion) found the
+rate right — and machine-checked it — and, reading how five of its earlier reviews had
+been applied, one false proposition and twelve errors of record in our texts.
+
+1. **A hypothesis lost on adoption (major).**  Proposition 11.117(b) — the small-slope
+   law `F*(t) = (t(1−t)/2)u²V + O(u³)` — is the division's Proposition R10.1, which reads "`d₀`
+   symmetric".  Our text adopted it "for every finite `(X, π)` and envelope `u·d₀`", in a
+   section whose Setting allows envelopes that are not symmetric.  There it is false: on
+   two points with `d₀(0,1) = 1`, `d₀(1,0) = 0` the class is a segment, and the coefficient is
+   `V/4`.  The proof we repeated uses the two labels `±uf*`; `−f*` is a member only if the
+   envelope is symmetric.  Harness XXV.3 could not see it: every instance it tested had a
+   Hamming envelope.  *Lesson:* a statement adopted from another text is copied with its
+   hypotheses and checked against the setting of the section it lands in; and a test of a
+   statement "for every …" contains an instance outside each hypothesis the statement
+   does not make (XXV.3 now carries the counter-example, with two mutations).
+2. **An inequality stated for `p ≠ ½` that holds for `p < ½`** (11.117(c): `E_F > ln cosh(u/2)`;
+   `E_F(0.7, 1) = 0.0540 < 0.1201`).  The conclusion survives by a gauge transformation; the
+   proposition itself uses `p = 0.7` elsewhere.
+3. **Numbers of a test quoted from a draft of the test** (harness XI.21: "153 … 135 … 154,
+   one integrality gap", "8 of 100"; the stored output has `146 / 138 / 148`, two gaps, `10 of
+   100`).  The stored output was regenerated when the test changed; the prose and a message
+   (THY-RES-0011 §2) were not.  *Lesson:* a number of the harness in the prose is copied
+   from the stored output of the audit that closes the checkpoint, after it.
+4. **Grid values quoted as values** (`τ₂/a = 0.5006`, `h/a = 0.2627` at `u = 1`; the closed form
+   gives `0.5004`, and `h/a = 0.262647`).  Our own later script printed `0.5004`; the workstream
+   report had both.
+5. **Summaries wider than their cells.**  "Two of the three exponents fall below the cube
+   at `u ≥ 3`" — proved: `a_∞` for `p ≤ 0.3` from `u = 3`, `h_∞` for `p ≤ 0.2` at `u = 4, 6`; and "by the
+   structure factor `(1−p)/p` to second order" — proved at a fixed length with the factor
+   `Var(Σs_i)/n`, whose limit is the structure factor, proved for the limit from above and
+   for the threshold exactly.  The proposition had the cells right; four summary
+   sentences and one message (THY-RES-0011 §8) did not.
+6. **A remark that used more than it listed.**  The rate remark said "it uses only the
+   three inequalities"; it also uses monotonicity in the level and in the accuracy,
+   `T₁ ≤ a`, `a > h` and two properties of `θ_hint` (all true and machine-checked on the cube);
+   and "the gain per level increases with `d`" is true of its lower bound, the gain itself
+   being a sawtooth.
+7. Two of the errors were the division's own, inherited by us word for word (Theorem
+   11.18a(c): "with one or two of them changed neither does"); it found them itself.
+
+*What worked.*  Asking for the review; the division machine-checking what it reviewed
+(`RateFull.lean`, adopted); checking its counter-example with a few lines of our own
+before accepting it (both rows of its table to the digit).  *What did not:* our own
+adoption checks in the eighteenth checkpoint compared numbers and attributions and did
+not compare hypotheses.

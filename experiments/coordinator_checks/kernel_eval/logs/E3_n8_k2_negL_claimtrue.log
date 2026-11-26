@@ -1,0 +1,41 @@
+import took 201ms
+experiments/coordinator_checks/kernel_eval/generated/E3_n8_k2_negL_claimtrue.lean:181:66: error: [Error pretty printing: maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information]
+type checking took 3.86s
+'check_ok' depends on axioms: [sorryAx]
+cumulative profiling times:
+	attribute application 0.229ms
+	blocked (unaccounted) 3.87s
+	compilation (IR) 1.07ms
+	compilation (LCNF base) 7.04ms
+	compilation (LCNF impure) 5.02ms
+	compilation (LCNF mono) 5.94ms
+	elaboration 208ms
+	fix level params 0.355ms
+	import 201ms
+	initialization 52.5ms
+	instantiate metavars 0.201ms
+	interpretation 4.87ms
+	let-to-have transformation 4.85ms
+	linting 21.3ms
+	parsing 13.2ms
+	process pre-definitions 21.8ms
+	share common exprs 2.93ms
+	tactic execution 0.934ms
+	type checking 3.87s
+	typeclass inference 32.5ms
+MEASURE command: timeout 600 lean --profile experiments/coordinator_checks/kernel_eval/generated/E3_n8_k2_negL_claimtrue.lean
+MEASURE wall_seconds: 4.51
+MEASURE user_seconds: 4.26
+MEASURE sys_seconds: 0.22
+MEASURE max_rss_kb: 1106916
+MEASURE polled_peak_rss_kb: 1108764
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 1
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E3_n8_k2_negL_claimtrue.lean
+RUN bytes: 13394
+RUN sha256: 8887120703bcfd2353d484bd2a44cb2cf0289976b55c905bb8095c260d3987bd
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 600 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 1

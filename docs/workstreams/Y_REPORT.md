@@ -27,10 +27,13 @@
 > conditional on both sides (R11, m17).
 > (e3) **The contrast with §11.25** (R11, M2): Corollary 11.91 covers the hinted exponent of
 > symmetric instances and fixed samples, not adaptive algorithms without a hint.
-> (e4) **Small slopes** (§0.2, §6.5): "multiplied by `(1−p)/p`" is a theorem at second order for
-> finite chains — the largest variance of a Lipschitz function, which for an associated law is
-> that of the magnetisation (SCI-REV-0010, R10.1, R10.2) — and "the susceptibility" is right
-> for this chain only; for `a` the report had an upper bound only (R11, m14).
+> (e4) **Small slopes** (§0.2, §6.5): the factor `Var(Σs_i)/n` is a theorem at second order for a
+> chain of `n` sites — for a symmetric envelope in general the largest variance of a Lipschitz
+> function, which for an associated law is that of the magnetisation (SCI-REV-0010, R10.1,
+> R10.2); its limit `(1−p)/p` is proved for `F_∞` from above and for `E_∞` exactly (the first
+> version of this erratum said "multiplied by `(1−p)/p` is a theorem at second order for
+> finite chains": SCI-REV-0014, m2) — and "the susceptibility" is right for this chain only;
+> for `a` the report had an upper bound only (R11, m14).
 > (e5) **Numbers.**  The four headline lower ends of `h` depend in the fifth decimal on an
 > unstated iteration cap (R11, m1: any `M_L` is valid; best found `0.034040, 0.040143, 0.044622,
 > 0.044513`).  At `p = 0.1` the upper ends were not optimised: `h ≤ 0.0628`, `a ≤ 0.1730` (R11, m2;
@@ -39,7 +42,8 @@
 > SCI-REV-0010, m7, m8).  §6.3: the "restricted" value `0.04435` is the open end of a bracket
 > that closes at `0.044357`.  §7.1 compares an upper with a lower bound; the exact `F*_5` over all
 > 395 094 vertices is `0.1965988` (SCI-REV-0010, m9).  "Nothing is decided for `p ≤ 0.05`":
-> `h ≥ 0.0375` at `p = 0.05` and `≥ 0.0300` at `p = 0.02` are above the cube (its m10).
+> `h ≥ 0.0375` at `p = 0.05` and `≥ 0.02997` at `p = 0.02` are above the cube (its m10; the first
+> version of this line rounded the second bound upwards, to `0.0300`: SCI-REV-0014, m4).
 > (e6) **Sentences.**  §7.2, "for short chains the optimal labels are the two uniform fields":
 > false at `p = 0.4` (four labels; R11, m11; SCI-REV-0010, m1); the support sizes of §6.4 are
 > `4, 8, 18` (R11, m12).  "Domains of about `2K/u` sites": 3 to 5 sites at `u = 1` (R11, m10).

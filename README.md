@@ -580,6 +580,26 @@ showed with a machine-checked core — and survives only on one site and, as a
 conjecture, for a bracket of prescribed width.  Paper proofs and small synthetic tests
 for the sampler and the allocation; nothing run on a real energy term by us.
 
+(xxi) *Nesting by certified cost; a rate machine-checked by a reviewer; one side of a
+sandwich at a time* (theory report §11.19 remark (1b); the remark after Theorem 11.53;
+Propositions 11.113b and 11.18b(e)).  The cost bound of the nested adaptive algorithm
+is monotone in the cost bounds of the procedures it calls, so if every step is served by
+the procedure with the smallest *certified* cost, a further level can never raise the
+certified bound — and with that rule three levels are certified below the worst case
+found for two levels from four thousand sites on (exact evaluations of the bound by the
+coordinator; a design chosen on the benign instance had shown no certified gain; not
+refereed).  The rate `τ_k − h ≤ c₁/(k + c₂)` at which the level recursion approaches the
+hinted exponent is machine-checked for the cube — by the Scientific Discovery Division,
+whose review also found one proposition of ours false as worded (the small-slope law
+for chains needs a symmetric envelope; a hypothesis lost when its statement was
+adopted) and twelve errors of record, all corrected.  What a floor alone and a ceiling
+alone certify is a proposition now: without evaluations the ceiling is the safe bound
+and the floor the one that can lose arbitrarily much; as samplers it is the reverse —
+from the floor both sides can be bought, at the price of the floor's own loss, and
+from the ceiling the upper side cannot be bought at all.  The certificate kernel has a
+domain-split rule and a soundness theorem for instances that store each pair table
+once, both asked for by that division for its "shares at the leaves" certificates.
+
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
 interval evaluation of force-field terms over voxels, and any claim of practical solver

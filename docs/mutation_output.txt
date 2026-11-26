@@ -224,6 +224,10 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] M8: an allocation that distributes only nine tenths of every constant claimed to cover
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.22 M8: with two equally deep states and a width below ln 2 only one of the two skips claimed to fail
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.22 M9: a width of 0.6, below ln 2, claimed to suffice for the bracket returned after a skip
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.14 M1: normal form built from the known part itself instead of its Pasch-Hausdorff envelope
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.14 M2: client form compared with the transposed centre form
@@ -952,6 +956,20 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXIV.12 M4: the free part of the outer variable measured from the lower model
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.13 M1: the floor's excess bounded by <a> + <a^2>/2, without the factor e^A (false for wide bands)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.13 M2: the ceiling's defect claimed to be at least its mean band (it is at most that)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.13 M3: the floor's excess claimed to be at most five times its mean band
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.13 M4: half the Hoeffding radius for the floor's sampler
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.13 M5: the truncated mean of the ceiling's weights claimed to be an upper bound of Z(E)/Z(m_up)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.13 M6: a needle of depth D claimed to raise ln Z by D (the true probability of its state forgotten)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.13 M7: the weights of the floor's sampler with the wrong sign (e^{E - m_lo}, unbounded)
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] M1: the upper reduction with the slack at the site left of a cut only (the site right of it needs delta^+ as well)
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] M2: the upper reduction without the known constant ln A_rho(g)
@@ -982,6 +1000,10 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] M4: the variance bound claimed for antiferromagnetic couplings (association is needed)
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXV.3 M5: the one-sided envelope claimed to obey the small-slope law (the segment replaced by the symmetric class)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXV.3 M6: the coefficient V/4 claimed for the symmetric envelope
+                  exit=1  1 TEST(S) MISBEHAVED
 
-492 mutations: 491 caught, 1 expected pass, 0 not as expected
-145 baseline runs of the unmutated harness (one per selection): 145 behave as expected, 0 misbehave
+503 mutations: 502 caught, 1 expected pass, 0 not as expected
+146 baseline runs of the unmutated harness (one per selection): 146 behave as expected, 0 misbehave

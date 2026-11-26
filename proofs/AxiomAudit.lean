@@ -78,6 +78,10 @@ import proofs.Frontiers.DownClosedRemainder
 import proofs.Frontiers.BoxAdditions
 import proofs.Frontiers.AffineHalf
 import proofs.Frontiers.BlockReductions
+import proofs.Frontiers.RateFull
+import proofs.Frontiers.SandwichCost
+import proofs.Frontiers.SymmetricPairHypothesis
+import proofs.Frontiers.SplitRule
 import proofs.AuditCommand
 
 /-!
@@ -740,6 +744,48 @@ import proofs.AuditCommand
 #print axioms MetricChain.gap_embedding_admissible
 #print axioms MetricChain.gap_embedding_partition
 #print axioms MetricChain.cut_coupling_witness
+
+-- The rate of the level recursion (remark after Theorem 11.53), machine-checked by the Scientific Discovery Division
+-- in its review SCI-REV-0014 on top of `StepLE.of_limit`, `StepLE.of_macro`, `StepLE.at_hint_fraction`; adopted
+#print axioms ScienceR13.epoch_gain
+#print axioms ScienceR13.closed_form
+#print axioms ScienceR13.rate_of_epochs
+#print axioms ScienceR13.lemma1
+#print axioms ScienceR13.lemma2
+#print axioms ScienceR13.epoch_of_stepLE
+#print axioms ScienceR13.rate_top0
+#print axioms ScienceR13.rate_all0
+#print axioms ScienceR13.cube_exactRec_rate_top
+#print axioms ScienceR13.cube_exactRec_rate_all
+#print axioms ScienceR13.rate_zero
+
+-- What a sandwich costs in terms of the true ensemble (the division's Lemma A17.16, SCI-MSG-0026; adopted; theory
+-- report Proposition 11.113b(a))
+#print axioms ScienceA17.floor_side
+#print axioms ScienceA17.ceiling_side
+#print axioms ScienceA17.Z_ratio
+#print axioms ScienceA17.sandwich_cost
+
+-- Kernel soundness for real models under the symmetrised pair hypothesis (an instance may store each pair table
+-- once; requested by the Scientific Discovery Division, SCI-RES-0014, P7-T3, its Lemma P7.7)
+#print axioms MetricChain.PairInstance.cast_energy_le_symm
+#print axioms MetricChain.verify_sound_real_symm
+#print axioms MetricChain.verify_sound_secondOrder_symm
+#print axioms MetricChain.symm_of_termwise
+#print axioms MetricChain.symm_hypothesis_witness
+
+-- A domain-split rule as a layer over the kernel (one child for the states of a site in a list, one for the others;
+-- requested by the Scientific Discovery Division, SCI-RES-0014, P7-T2), with a witness on which no single leaf
+-- certifies and the split of two leaves does
+#print axioms MetricChain.verifyS_sound
+#print axioms MetricChain.verifyS_sound_real
+#print axioms MetricChain.leafOK_mono
+#print axioms MetricChain.split_leaves_imp_branch
+#print axioms MetricChain.split_leaves_iff_branch
+#print axioms MetricChain.splitTriangle_verified
+#print axioms MetricChain.splitTriangle_lower_bound
+#print axioms MetricChain.splitTriangle_optimum
+#print axioms MetricChain.splitTriangle_no_leaf
 
 -- Residuals in a Hilbert ball: the hypercircle band as a certificate (theory report Proposition 11.50a)
 #print axioms MetricChain.Hypercircle.cauchy_schwarz

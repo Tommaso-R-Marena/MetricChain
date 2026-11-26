@@ -1,0 +1,16 @@
+import took 173ms
+libc++abi: terminating due to uncaught exception of type std::bad_alloc: std::bad_alloc
+MEASURE command: timeout 120 lean --profile experiments/coordinator_checks/kernel_eval/pitfall_thunk_forced.lean
+MEASURE wall_seconds: 21.96
+MEASURE user_seconds: 20.93
+MEASURE sys_seconds: 0.57
+MEASURE max_rss_kb: 1646464
+MEASURE polled_peak_rss_kb: 1648140
+MEASURE rss_watchdog_killed: no
+MEASURE result: killed by signal 6
+RUN file: experiments/coordinator_checks/kernel_eval/pitfall_thunk_forced.lean
+RUN bytes: 882
+RUN sha256: 5737156cba60b17fe6f73999cf9f5d572a8fd254674e7200c0e85484dd998dbb
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 120 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 134

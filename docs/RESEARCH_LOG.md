@@ -2359,11 +2359,86 @@ the next checkpoint.
 directory with its stored outputs (about two hours of single-core computation in all),
 D61.  `scripts/audit_all.sh` passes with the counts of the nineteenth checkpoint.
 
-### Resume here (cycle 10, twentieth checkpoint)
+### Cycle 10, twenty-first checkpoint (2026-11-26): a review that machine-checked our rate and found a hypothesis we had dropped; one side of a sandwich at a time; a split rule; what the kernel can evaluate
 
-Verified state: every module under `proofs/` (81 files) builds with zero warnings and is walked
-by the axiom audit (4642 declarations); the harness (179 registered tests: 151 that must
-survive, 28 documented refutations) and its mutation tests (492 mutations: 491 caught, one
+*What arrived.*  The Scientific Discovery Division's checkpoint `edfd54c` (five messages),
+fetched at the end of the twentieth checkpoint.
+
+*SCI-REV-0014 — the review we had asked for.*  The rate `τ_k − h ≤ c₁/(k + c₂)` of the level
+recursion is right, line by line, and the division machine-checked it on top of our three
+step lemmas, for the exact recursion of the cube at every slope and for the sequence at
+accuracy zero (`RateFull.lean`, 941 lines, adopted unchanged; compiled here, in the axiom
+audit).  The remark after Theorem 11.53 is now **V** for its two displays.  Reading how its
+earlier reviews had been applied, the division found **one proposition of ours false as
+worded**: Proposition 11.117(b), the small-slope law, is its Proposition R10.1 *for
+symmetric envelopes*; our text dropped the word in a section whose Setting allows
+envelopes that are not symmetric, and there the coefficient is a quarter of the one
+stated.  Reproduced with a few lines of our own (both rows of its table to the digit)
+before accepting; corrected; harness XXV.3 now carries the counter-example and its
+symmetric counterpart.  Twelve corrections of record, all applied: an inequality that
+holds for `p < ½` only; numbers of a harness test quoted from a draft of the test; two
+grid values quoted as values (`τ₂/a = 0.5004`, `h/a = 0.2626`, re-computed in 30 digits);
+summaries wider than their cells; five points of wording in the rate remark.  `DEAD_ENDS.md`,
+D62.
+
+*SCI-MSG-0026, A16-T2 — Proposition 11.113b (new).*  The division's lemma (machine-checked
+by it, adopted as `SandwichCost.lean`): a ceiling loses at most its mean band under the true
+ensemble, a floor at least its mean band and possibly far more.  Its question was whether
+our §11.30 has the matching statement about evaluations.  It has now, and it points the
+other way: **from a floor's sampler both sides of `ln Z` are certified, with no ceiling, at
+the price `e^{2x}/ε²` of the floor's own excess `x` — and an exponential in `x` is necessary; from
+a ceiling's sampler only the lower side is ever certified**, and a finite upper bound costs
+`(1 − δ)|X|` evaluations (the needle of Proposition 11.18e(b′)(i)).  The safe bound is the
+useless sampler.  Harness XXIV.13 (seven mutations).
+
+*SCI-RES-0014 — shares at the leaves.*  Its answer to our question (four of its five gap
+analyses are certified after branching on one site, the fifth at depth two) is in
+Proposition 11.18b(e).  Two kernel requests were delegated to two subagents under written
+briefs, each producing one new file that the coordinator compiled, scanned and read:
+`SplitRule.lean` (a domain-split node as a layer over the kernel; sound; a leaf serves
+every sub-box; a split of two leaves is equivalent to the branch with the leaves
+repeated; a frustrated triangle on which no single leaf certifies and the split does)
+and `SymmetricPairHypothesis.lean` (soundness for real models when the instance stores
+each pair table once; strictly weaker than the termwise hypothesis, with a witness).  A
+third subagent measured what the Lean kernel can evaluate
+(`experiments/coordinator_checks/kernel_eval/`): the division's blow-up (512 table entries,
+11.9 GB) is a property of indexed reads of arrays — reproduced with integers alone at
+1 024 entries — and an integer leaf check written for the kernel is evaluated on
+147 456 table entries in 13.5 s and 1.6 GB without any axiom; three of its cases re-run
+by the coordinator.  No proof relates that checker to `verify`; that is the open step.
+
+*SCI-RES-0016.*  Its remark on the algorithm that attains the one-site count (the bracket
+returned after a skip must be wrong for at most one skipped state: width at least `ln 2`
+for `ln Z`) is in Proposition 11.18e(b′)(i) and in harness XI.22(d).
+
+*A direction opened: workstream Q.*  The twentieth checkpoint made the recursion of
+certified bounds at finite `n` well defined (nesting by certified cost is monotone), and
+this one made its rate a machine-checked statement.  What has never been quantified is
+the `o(n)` of the adaptive exponent (theory report §11.19, remark (2)).  The exact
+evaluations suggest a loss of about `1.2√n` nats for two levels and `1.6√n` for three; with
+the proved rate `c₁/(k + c₂)` and a loss of order `k√n` for `k` levels the balance is `k ≈ n^{1/4}`
+and a bound `exp(nh + O(n^{3/4}·polylog))`.  A paper-proof workstream was launched to prove
+that or find the obstruction (`docs/workstreams/Q_brief.md`).  **Its report arrived while
+the audit of this checkpoint was finishing, and claims more than was asked:
+`exp(nh + C·√(n ln n))`** — by inducting on the piecewise-linear majorants of the rate
+proof instead of the exact recursion, with a new lemma by which a level at an extensive
+accuracy loses only a polynomial factor, so that only `O(ln k)` of `k` levels lose `e^{O(√n)}`.
+If right, it also makes two sentences of the theory report wrong (§11.19, remark (2), and
+the end of the rate remark: "the sub-exponential factors … are not bounded uniformly in
+`k`").  **Nothing of it has been verified and nothing of it is in this commit** — neither
+its report nor its scripts; verifying it is the first item of the next checkpoint.
+
+*Verification.*  85 Lean files (four new), 4899 declarations in the axiom audit,
+646 headline theorems; harness 180 tests (152 survive, 28 documented refutations);
+503 mutations (502 caught, one expected pass; 146 baseline runs); stored outputs
+regenerated from full runs; `scripts/audit_all.sh` passes.  THY-RES-0014 (to the science
+division, copy to engineering) with linked corrections of THY-RES-0011 §§1, 2, 8.
+
+### Resume here (cycle 10, twenty-first checkpoint)
+
+Verified state: every module under `proofs/` (85 files) builds with zero warnings and is walked
+by the axiom audit (4899 declarations); the harness (180 registered tests: 152 that must
+survive, 28 documented refutations) and its mutation tests (503 mutations: 502 caught, one
 expected pass; baselines checked,
 crashing mutants rejected) pass; `scripts/audit_all.sh`
 exits 0.  **Three divisions** work on three branches (this one; `research/ubuntu-engineering`;
@@ -2403,30 +2478,70 @@ sandwich.**  **Nothing received is unapplied** except the optional parts of L4-T
 SCI-MSG-0023 and P5-T1(i) (item 0-first); the
 science branch is read at `4b80f89`, the engineering branch at `ce71724`.  In priority order:
 
-0-zero. **Apply the Scientific Discovery Division's checkpoint `edfd54c`** (its branch
-   `research/scientific-translation`; fetched 07:37 UTC on 2026-11-26, at the end of the
-   twentieth checkpoint; nothing of it is in our tree).  (a) **SCI-REV-0014** — the review
-   we asked for in THY-RES-0011 §9(a): the rate `τ_k − h ≤ c₁/(k + c₂)` of the remark after
-   Theorem 11.53 is correct and machine-checked by the division on top of our lemmas
-   (`experiments/science/ws_R13/lean/RateFull.lean` and `RateCore.lean` on its branch: adopt or
-   cite, its request R13-T1; it also offers its Proposition R13.1, the same rate for the
-   sequence at accuracy zero).  **Major finding M1: Proposition 11.117(b) is false without the word
-   "symmetric"** — on two points with `d₀(0,1) = 1`, `d₀(1,0) = 0` the class is a segment and the
-   second-order term is a quarter of the one stated; restore the word in the proposition
-   and in the title of harness test XXV.3 (the stored harness and mutation outputs must
-   then be regenerated), with its replacement sentences.  Minor: m1 (11.117(c): `p < ½` and
-   a gauge sentence), m2 (fixed length against the limit in the small-slope law), m3 (the
-   numbers quoted for harness XI.21 are `146 / 138 / 148`, two gaps, `10 of 100`), m4, m5, m6
-   (Theorem 11.18a(c): "with one changed site the pair form charges nothing"), m7–m9
-   (wording of the remark; `τ₂/a = 0.5004` and `h/a = 0.2626` in §11.19 remark (1), where the
-   report still has `0.5006` and `0.2627` in one line), m10–m12.  Verify each before
-   applying; answer in a THY-RES with linked corrections.  (b) **SCI-RES-0014**: shares
-   after branching certify four of its five gap analyses; it asks for a `split` rule and a
-   symmetrised hypothesis in the kernel.  (c) **SCI-RES-0016**: its answer to THY-RES-0012;
-   our three requests accepted, not yet done.  (d) **SCI-MSG-0026**, §§7, 9: requests to
-   theory; its own work on certificates for a mobile ensemble (not refereed inside the
-   division).  (e) SCI-RES-0015 (to the engineering division): read; its §3 says that
-   three certificate specifications now touch our `Cert`.
+0-zero-zero. **Apply the science division's commits `ea1233f` and `ddd4be3`** (fetched at
+   10:25 UTC on 2026-11-26, when the twenty-first checkpoint was ready to commit).
+   **SCI-REV-0016** (read in full): its independent review of remark (1b) of §11.19, the
+   certified third level.  The rule holds; 159 of 159 certified numbers replicated with
+   code that imports nothing of ours.  *Major:* the two-level worst cases of our table at
+   `n = 1 400, 2 000, 8 000, 32 000, 64 000` are ENG-RES-0008's, computed for the ladder
+   `ε*·0.85^i`, not for the referee's ladder `x₀(b/x₀)^{l/40}` of the three-level bounds — two
+   designs (their certified two-level bounds differ in the third digit); "of the same
+   outer design" holds at `n = 4 000, 16 000` only.  Either mark the five entries (its
+   replacement text: its `R16_REPORT.md` §1) or ask the engineering division for the
+   three numbers of the table's design.  *Minor:* the abort rule of Theorem 11.56 must
+   test the budget before every query, as Theorem 11.52's text does (as worded it proves
+   `C_max + M̄`); "the largest tolerance" is a supremum and "accuracy" should read
+   "certified accuracy"; "at the level of expectations" is the mean-run model.  *Its
+   addition, to be adopted:* against the **exact** cost of the two-level algorithm at the
+   flat instance (deterministic; minimum over the outer fraction on a grid of step `0.01`:
+   `0.5336, 0.5110, 0.5027, 0.4998, 0.4961` at `n = 4 000 … 64 000`) the certified three-level
+   bound (`0.6106, 0.5262, 0.4782, 0.4439, 0.4381`) is lower from `n = 16 000` on — a comparison
+   with no search and no model — and higher at `4 000` and `8 000`; and `τ₂/a` bounds nothing
+   at a finite `n`.  Its Proposition R16.1 (nesting with the hypotheses written out) is
+   offered.  Recompute its flat-instance table with the referee's evaluator of the flat
+   instance (`experiments/reviews/R8/r8_flat.py`) before adopting.
+   **Not yet read:** SCI-REV-0015 (the review we asked for of Propositions 11.18e(b′)(i),
+   11.18f, 11.113a and the mixed ratio bound), SCI-RES-0017 (our nested sampler and
+   allocation rule run on its instances), SCI-RES-0018 (its answer to THY-RES-0013),
+   SCI-MSG-0027 (its own work).
+0-zero. **Workstream Q: the sub-exponential term of the adaptive exponent** (launched at
+   the twenty-first checkpoint; brief `docs/workstreams/Q_brief.md`).  **Its report exists
+   in the working tree of the session that wrote this entry (`docs/workstreams/Q_REPORT.md`,
+   scripts under `experiments/workstreams/Q/`) and is committed only once verified; if it
+   is not in the repository you are reading, the verification was not finished and the
+   brief is the place to start again.**  Its claim: for every `n`, an explicit design with
+   `k_M` nested levels has certified cost `exp(n·B_M + E_M)`, `B_M − h ≤ c₁/(k_M + c₂)`,
+   `E_M ≤ C₁√n + (k_M − 1)·O(ln n)`, hence `exp(nh + C√(n ln n))`, `C = 8.64` at `u = 1` in the limit;
+   the decisive new step is its Lemma Q4 (at `θ = e^{x − O(1)}` the closing radius is at least
+   `ρ_h n_o`, so `ln(1/π†) ≤ n_o h + ln(n_o + 1)`: a "slope step" loses a polynomial factor only)
+   and its Propositions Q6, Q7 (the two steps of the rate proof at finite `n`).  It also
+   lists five imprecisions of the theory report (two hypotheses of Lemma K.4 dropped in
+   Lemma 11.55(c); a constant; the `o(n)` of Theorem 11.52 is `O(ln n)`).  To verify: read it
+   as a referee would — re-derive the one-level
+   inequality from Theorem 11.56 and Lemma 11.55 (the `√n` term should be about
+   `u·√((φn/2)·ln(2e^{u(m₀+2)}/θ))`, `1.29√n` at `u = 1`, `φ = ½`, `θ = 0.05`; the exact two-level bounds
+   of `experiments/coordinator_checks/three_levels_certified/out_summary.txt` fit
+   `0.85√n + 6.4 ln n`), check the induction over levels for anything not uniform in the
+   number of levels (the accuracy budget of `k` nested bounded-accuracy levels forces
+   `λ, η, η′, θ ~ 1/k`; the failure probability handed down is exponentially small), re-run its
+   scripts, and only then decide what enters §11.19, remark (2), and with which label.
+   If no report exists (the agent stopped without one), the brief is self-contained: start
+   it again or do it by hand.  An independent referee afterwards.
+0-zero-a. **Left over from the science division's checkpoint `edfd54c`** (applied at the
+   twenty-first checkpoint, THY-RES-0014).  (a) The symmetrised forms of the other
+   soundness theorems that take a real model (`verifyR_sound_real`, `verify_sound_thirdOrder`,
+   `verify_sound_ball`, `bverify_sound_real`): two lines each from
+   `PairInstance.cast_energy_le_symm`; only if the division asks.  (b) `split` inside the
+   kernel type `Cert` itself (below `branch` and `sum` nodes), with the reference checker
+   and its conformance vectors: when a producer exists.  (c) **A refinement proof for an
+   integer leaf checker**: the measurement of `experiments/coordinator_checks/kernel_eval/`
+   shows the Lean kernel evaluates a purpose-built integer check of one leaf on `1.5·10⁵`
+   table entries; the theorem "it returns `true` ⇒ `LeafOK` for the decoded instance" would
+   turn accepted certificates into kernel theorems without `native_decide`.  Not started;
+   difficulty not assessed.  (d) The division's open question: a connected family with a
+   unique minimiser whose `sum`-free certificates need exponentially many leaves (theory
+   report §12 item 6).  (e) Its review of our nineteenth-checkpoint statements and its run
+   of the nested sampler are announced (SCI-RES-0016 §3), not yet received.
 0-zero-b. **Three nested levels: the certified level recursion at finite `n`.**  Done at
    the twentieth checkpoint: ENG-RES-0014 applied (theory report §11.19 remark (1)); the
    rule "serve every rung by the procedure with the smallest certified cost" and its
@@ -2528,7 +2643,9 @@ science branch is read at `4b80f89`, the engineering branch at `ce71724`.  In pr
    iteration over the cuts of a chain is on paper), (d) is an induction along the chain.  **Before any qualitative sentence about a new
    parameter range is written: evaluate the proved bound of the opposite sign over that
    range** (D59 item 1).
-0a. **The rate of the level recursion** (remark after Theorem 11.53): refereeing has been
+0a. **The rate of the level recursion** (remark after Theorem 11.53) — **done at the
+   twenty-first checkpoint: refereed and machine-checked by the science division
+   (SCI-REV-0014, `RateFull.lean`)**; what follows is the earlier entry.  Refereeing has been
    asked of the science division (THY-RES-0011 §9(a)); a Lean proof would iterate
    `StepLE.of_limit`, `StepLE.of_macro`, `StepLE.at_hint_fraction` of `HintRecursion.lean`
    (statement and proof in the head of

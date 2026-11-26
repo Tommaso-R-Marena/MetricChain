@@ -1,0 +1,39 @@
+import took 165ms
+tactic execution of Lean.Parser.Tactic.eqRefl took 570ms
+type checking took 369ms
+'check_ok' does not depend on any axioms
+cumulative profiling times:
+	attribute application 0.349ms
+	blocked (unaccounted) 956ms
+	compilation (IR) 1.04ms
+	compilation (LCNF base) 10.2ms
+	compilation (LCNF impure) 5.32ms
+	compilation (LCNF mono) 6.78ms
+	elaboration 497ms
+	fix level params 0.576ms
+	import 165ms
+	initialization 53.6ms
+	instantiate metavars 2.42ms
+	interpretation 3.55ms
+	let-to-have transformation 2.47ms
+	linting 33.7ms
+	parsing 34.7ms
+	process pre-definitions 49.7ms
+	share common exprs 8.95ms
+	tactic execution 571ms
+	type checking 392ms
+	typeclass inference 88ms
+MEASURE command: timeout 120 lean --profile experiments/coordinator_checks/kernel_eval/generated/E1_n16_k2_tac_rfl.lean
+MEASURE wall_seconds: 1.92
+MEASURE user_seconds: 1.87
+MEASURE sys_seconds: 0.14
+MEASURE max_rss_kb: 547128
+MEASURE polled_peak_rss_kb: 549444
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 0
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E1_n16_k2_tac_rfl.lean
+RUN bytes: 47711
+RUN sha256: 1a0f143d8070d1529800c1ae0ea3082848ea3bdac535730af6987f590ee6a169
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 120 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 0

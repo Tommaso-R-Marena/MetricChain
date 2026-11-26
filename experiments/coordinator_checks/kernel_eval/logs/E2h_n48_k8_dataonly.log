@@ -1,0 +1,35 @@
+import took 204ms
+cumulative profiling times:
+	attribute application 5.43ms
+	compilation (IR) 33.2ms
+	compilation (LCNF base) 200ms
+	compilation (LCNF impure) 119ms
+	compilation (LCNF mono) 153ms
+	elaboration 10.5s
+	fix level params 3.82ms
+	import 204ms
+	initialization 39.3ms
+	instantiate metavars 3.04ms
+	interpretation 4.84ms
+	let-to-have transformation 3.44ms
+	linting 118ms
+	parsing 163ms
+	process pre-definitions 132ms
+	share common exprs 21.8ms
+	type checking 61.4ms
+	typeclass inference 139ms
+MEASURE command: timeout 600 lean --profile experiments/coordinator_checks/kernel_eval/generated/E2h_n48_k8_dataonly.lean
+MEASURE wall_seconds: 11.58
+MEASURE user_seconds: 12.09
+MEASURE sys_seconds: 0.34
+MEASURE max_rss_kb: 531460
+MEASURE polled_peak_rss_kb: 533544
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 0
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E2h_n48_k8_dataonly.lean
+RUN bytes: 2745089
+RUN sha256: 9ef86518697d8178560862eb25080c5daf06be38e3a68726c7e81f3ab1c76286
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 600 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 0
+RUN note: generated file deleted after the run (regenerable with gen.py)

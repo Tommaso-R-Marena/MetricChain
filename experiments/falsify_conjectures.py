@@ -3841,9 +3841,9 @@ def t_state_shares(rng, trials):
     return True, stats
 
 
-@conjecture("XI.22 Randomised algorithms and the Hamming ball (theory report Proposition 11.18e(b), (b'), (c) as corrected after the Scientific Discovery Division's review SCI-REV-0013, findings M1 and m8; the counter-algorithm and the support bound for unequal alphabets are that division's).  (a) On the cube every affine function h satisfies |h(s)| >= ||h||_inf/(n + 1) on at least half of the points, with equality for h = 1 + s_1, and n + 1 cannot be replaced by n; (b) hence for g = h + R with |R| <= C every such point x gives ||g||_inf <= (|g(x)| + C)(n + 1) + C (attained), so that ceil(log2(1/delta)) uniformly random evaluations yield a valid finite bound with probability 1 - delta whatever n - five evaluations at delta = 0.05 where the deterministic count is n + 1 - while at a point where h is small the bound fails; (c) on a grid with k_i states at site i the least support of a non-zero function of order below m is exactly |X| / (product of the m - 1 largest k_i) (exhaustive on small grids), attained by a cylinder on the largest sites, so that k_max^-(m-1) is not attained for unequal alphabets; (d) on one site with k states the count of the ball holds for randomised algorithms as well: the algorithm that skips one uniformly random state with probability r and returns a bracket of width L fails with probability exactly r/k on an instance with a needle deeper than L, so failure delta allows k delta skipped evaluations on average and no more")
+@conjecture("XI.22 Randomised algorithms and the Hamming ball (theory report Proposition 11.18e(b), (b'), (c) as corrected after the Scientific Discovery Division's review SCI-REV-0013, findings M1 and m8; the counter-algorithm and the support bound for unequal alphabets are that division's).  (a) On the cube every affine function h satisfies |h(s)| >= ||h||_inf/(n + 1) on at least half of the points, with equality for h = 1 + s_1, and n + 1 cannot be replaced by n; (b) hence for g = h + R with |R| <= C every such point x gives ||g||_inf <= (|g(x)| + C)(n + 1) + C (attained), so that ceil(log2(1/delta)) uniformly random evaluations yield a valid finite bound with probability 1 - delta whatever n - five evaluations at delta = 0.05 where the deterministic count is n + 1 - while at a point where h is small the bound fails; (c) on a grid with k_i states at site i the least support of a non-zero function of order below m is exactly |X| / (product of the m - 1 largest k_i) (exhaustive on small grids), attained by a cylinder on the largest sites, so that k_max^-(m-1) is not attained for unequal alphabets; (d) on one site with k states the count of the ball holds for randomised algorithms as well: the algorithm that skips one uniformly random state with probability r and returns a bracket of width L fails with probability exactly r/k on an instance with a needle deeper than L, so failure delta allows k delta skipped evaluations on average and no more - provided the bracket returned after a skip is wrong for at most one skipped state: for ln Z its width must be at least ln 2, and with two equally deep states and a smaller width both skips fail (the Scientific Discovery Division's remark, SCI-RES-0016)")
 def t_random_ball(rng, trials):
-    stats = dict(affine=0, least_good=math.inf, sharp_n=0, tight=math.inf, bad_fails=0, grids=0, unequal_gap=0, one_site=0)
+    stats = dict(affine=0, least_good=math.inf, sharp_n=0, tight=math.inf, bad_fails=0, grids=0, unequal_gap=0, one_site=0, twin=0)
     # (a), (b): affine functions on the cube
     for n in range(2, 9):
         S = np.array(list(itertools.product((-1.0, 1.0), repeat=n)))
@@ -3982,6 +3982,21 @@ def t_random_ball(rng, trials):
                     fail += r / k
             if abs(fail - expect) > 1e-12:
                 return False, dict(reason="one site: the failure probability of the algorithm that skips a random state", k=k, fail=fail, expect=expect)
+        # the bracket returned after a skip must be wrong for at most one skipped state: with two equally deep states
+        # and a width below ln 2 both skips fail (failure probability 2 r/k); from the width ln 2 on neither does
+        twin = np.zeros(k)
+        twin[a0] = twin[(a0 + 1) % k] = -depth
+        for width, expect in ((0.5, 2 * r / k), (math.log(2.0) + 1e-9, 0.0)):
+            lnZ = math.log(float(np.exp(-twin).sum()))
+            fail = 0.0
+            for a in range(k):
+                seen = math.log(float(np.exp(-np.delete(twin, a)).sum()))
+                if not (seen - 1e-12 <= lnZ <= seen + width + 1e-12):
+                    fail += r / k
+            if abs(fail - expect) > 1e-12:
+                return False, dict(reason="one site, two equally deep states: the width ln 2 of the bracket returned after a skip",
+                                   k=k, width=width, fail=fail, expect=expect)
+        stats["twin"] += 1
         # failure at most delta on every needle instance forces r <= k delta: the expected number of evaluations
         # k - r is at least (1 - delta) k, the count of Proposition 11.18e(b')
         delta = 0.05
@@ -3989,7 +4004,8 @@ def t_random_ball(rng, trials):
             return False, dict(reason="arithmetic of the one-site count")
         stats["one_site"] += 1
     if not (stats["affine"] >= 40 and abs(stats["least_good"] - 0.5) < 1e-12 and stats["sharp_n"] >= 3 and abs(stats["tight"]) < 1e-9
-            and stats["bad_fails"] >= 7 and stats["grids"] >= 8 and stats["unequal_gap"] >= 2 and stats["one_site"] >= 5):
+            and stats["bad_fails"] >= 7 and stats["grids"] >= 8 and stats["unequal_gap"] >= 2 and stats["one_site"] >= 5
+            and stats["twin"] >= 5):
         return False, dict(reason="cases not exercised: the half is not attained, the bound not tight, or a constructed case missing", **stats)
     return True, stats
 
@@ -11730,6 +11746,116 @@ def mk_cube(u):
     return -v, math.log(2) + pu * math.log(pu) + (1 - pu) * math.log(1 - pu), Psi(u)
 
 
+@conjecture("XXIV.13 One side at a time: what a floor alone and a ceiling alone certify (theory report Proposition 11.113b; an answer to the Scientific Discovery Division's question A16-T2; part (a) is its Lemma A17.16, machine-checked by it and adopted as SandwichCost.lean).  For m_lo <= E <= m_up on a finite set, means under the true ensemble: (a) the ceiling's defect ln Z(E) - ln Z(m_up) lies between <b> - <b^2>/2 and <b>, b = m_up - E; the floor's excess ln Z(m_lo) - ln Z(E) = ln <e^a> lies between <a> and <a> + (e^A/2) <a^2>, a = E - m_lo <= A, and is not bounded by any multiple of its mean band - a state of true probability 1/D with band D has mean band 1 and excess at least D - ln D - while the ceiling's defect never exceeds its mean band; (b) under the floor's Gibbs measure W = e^{-(E - m_lo)} lies in (0, 1] and has mean Z(E)/Z(m_lo), so N samples give a two-sided Hoeffding bracket with radius sqrt(ln(2/delta)/(2N)) - exact binomial coverage at least 1 - delta, and with half the radius not - at a relative accuracy eps for N = ln(2/delta) e^{2x}/(2 eps^2), x the excess; (c) under the ceiling's Gibbs measure W = e^{m_up - E} >= 1 has mean Z(E)/Z(m_up) and every truncation min(W, c) has a smaller mean, so the lower side is certified from samples, but lowering the energy at one unevaluated state by D stays below the ceiling, leaves every evaluated value unchanged and raises ln Z by at least D + ln of the true probability of that state: no finite upper bound without evaluating every state")
+def t_one_side(rng, trials):
+    stats = dict(lemma=0, floor_slack=0.0, ceil_slack=0.0, big_band=0, families=0, coverage=1.0, half_fails=0, trunc=0, needles=0)
+    lnz = lambda f: float(np.log(np.exp(-(f - f.min())).sum()) - f.min())
+    # (a) the two free bounds on random instances; some with a large band, where the factor e^A / 2 matters
+    for it in range(max(60, trials // 2)):
+        n = int(rng.integers(2, 9))
+        E = rng.normal(0, 1.5, n)
+        scale = float(rng.choice([0.2, 1.0, 4.0]))
+        a = rng.uniform(0, scale, n)
+        b = rng.uniform(0, scale, n)
+        if it % 5 == 0:
+            a[int(rng.integers(n))] = float(rng.uniform(6.0, 9.0))               # one state with a large band below
+            stats["big_band"] += 1
+        lo, up = E - a, E + b
+        w = np.exp(-(E - E.min()))
+        w /= w.sum()
+        A = float(a.max())
+        excess = lnz(lo) - lnz(E)
+        defect = lnz(E) - lnz(up)
+        ma, ma2, mb, mb2 = float(w @ a), float(w @ a ** 2), float(w @ b), float(w @ b ** 2)
+        if abs(excess - math.log(float(w @ np.exp(a)))) > 1e-9 or abs(defect + math.log(float(w @ np.exp(-b)))) > 1e-9:
+            return False, dict(reason="the excess of the floor is not ln <e^a>, or the defect of the ceiling not -ln <e^-b>")
+        if not (ma - 1e-10 <= excess <= ma + (math.exp(A) / 2) * ma2 + 1e-10):
+            return False, dict(reason="floor: <a> <= excess <= <a> + (e^A/2) <a^2> fails", excess=excess, ma=ma, ma2=ma2, A=A)
+        if not (mb - mb2 / 2 - 1e-10 <= defect <= mb + 1e-10):
+            return False, dict(reason="ceiling: <b> - <b^2>/2 <= defect <= <b> fails", defect=defect, mb=mb, mb2=mb2)
+        stats["floor_slack"] = max(stats["floor_slack"], excess - ma)
+        stats["ceil_slack"] = max(stats["ceil_slack"], mb - defect)
+        stats["lemma"] += 1
+    # a state of true probability 1/D with band D: mean band 1; the floor loses D - ln D, the ceiling at most 1
+    for D in (5.0, 10.0, 20.0, 40.0):
+        w = np.array([1 - 1 / D, 1 / D])
+        band = np.array([0.0, D])
+        mean_band = float(w @ band)
+        excess = math.log(float(w @ np.exp(band)))
+        defect = -math.log(float(w @ np.exp(-band)))
+        if not (abs(mean_band - 1) < 1e-12 and excess >= D - math.log(D) and defect <= mean_band and defect < 2 / D + 1e-12):
+            return False, dict(reason="the two-state family: mean band, excess of the floor, defect of the ceiling", D=D,
+                               excess=excess, defect=defect)
+        if D >= 20 and not excess > 5 * mean_band:
+            return False, dict(reason="the floor's excess should not be bounded by a multiple of its mean band", D=D)
+        stats["families"] += 1
+    # (b) the floor's sampler: identity, exact binomial coverage of the Hoeffding bracket, and the sample size
+    delta = 0.05
+    for it in range(12):
+        n = int(rng.integers(2, 7))
+        E = rng.normal(0, 1.0, n)
+        a = rng.uniform(0, 3.0, n)
+        lo = E - a
+        qlo = np.exp(-(lo - lo.min()))
+        qlo /= qlo.sum()
+        W = np.exp(-a)
+        if abs(float(qlo @ W) - math.exp(lnz(E) - lnz(lo))) > 1e-10 or W.max() > 1 + 1e-12 or W.min() <= 0:
+            return False, dict(reason="E_{q_lo} e^{-(E - m_lo)} is not Z(E)/Z(m_lo), or W is not in (0, 1]")
+    for N, p1 in ((200, 0.5), (400, 0.3), (120, 0.5)):
+        # W takes the values 1 (probability p1 under the floor's measure) and e^{-30} (essentially 0): the mean is K/N
+        mu = p1 + (1 - p1) * math.exp(-30.0)
+        t = math.sqrt(math.log(2 / delta) / (2 * N))
+        pmf = np.exp(bx_binom_logpmf(N, p1))
+        means = (np.arange(N + 1) + (N - np.arange(N + 1)) * math.exp(-30.0)) / N
+        cover = float(pmf[np.abs(means - mu) <= t + 1e-15].sum())
+        cover_half = float(pmf[np.abs(means - mu) <= t / 2 + 1e-15].sum())
+        if cover < 1 - delta:
+            return False, dict(reason="the two-sided Hoeffding bracket of the floor's sampler covers with probability below 1 - delta",
+                               N=N, p1=p1, cover=cover)
+        stats["coverage"] = min(stats["coverage"], cover)
+        stats["half_fails"] += int(cover_half < 1 - delta)
+    for x, eps in ((0.5, 0.1), (3.0, 0.1), (6.0, 0.05)):
+        N = math.ceil(math.log(2 / delta) * math.exp(2 * x) / (2 * eps * eps))
+        t = math.sqrt(math.log(2 / delta) / (2 * N))
+        if not (t / math.exp(-x) <= eps + 1e-12 and math.log(1 + eps) <= eps and -math.log(1 - eps) <= eps / (1 - eps)):
+            return False, dict(reason="the sample size of the floor's sampler at relative accuracy eps", x=x, eps=eps)
+    # (c) the ceiling's sampler: the truncated mean is a lower bound; a needle below the ceiling is invisible
+    for it in range(max(40, trials // 4)):
+        n = int(rng.integers(3, 9))
+        E = rng.normal(0, 1.5, n)
+        b = rng.uniform(0, float(rng.choice([0.5, 3.0])), n)
+        up = E + b
+        qup = np.exp(-(up - up.min()))
+        qup /= qup.sum()
+        W = np.exp(b)
+        ratio = math.exp(lnz(E) - lnz(up))
+        if abs(float(qup @ W) - ratio) > 1e-9 * ratio or W.min() < 1 - 1e-12:
+            return False, dict(reason="E_{q_up} e^{m_up - E} is not Z(E)/Z(m_up), or W is below 1")
+        for c in (1.0, 1.5, 4.0, 50.0):
+            tm = float(qup @ np.minimum(W, c))
+            if not (1 - 1e-12 <= tm <= ratio + 1e-12):
+                return False, dict(reason="the truncated mean of the ceiling's weights is not between 1 and Z(E)/Z(m_up)", c=c, tm=tm, ratio=ratio)
+            stats["trunc"] += 1
+        # the needle: one state, not evaluated, lowered by D
+        a0 = int(rng.integers(n))
+        w = np.exp(-(E - E.min()))
+        w /= w.sum()
+        for D in (5.0, 30.0):
+            E2 = E.copy()
+            E2[a0] -= D
+            if not ((E2 <= up + 1e-12).all() and (np.delete(E2, a0) == np.delete(E, a0)).all()):
+                return False, dict(reason="the needle leaves the class below the ceiling or changes an evaluated value")
+            if not lnz(E2) - lnz(E) >= D + math.log(float(w[a0])) - 1e-9:
+                return False, dict(reason="a needle of depth D raises ln Z by less than D + ln of the true probability of its state",
+                                   D=D, rise=lnz(E2) - lnz(E), bound=D + math.log(float(w[a0])))
+        stats["needles"] += 1
+    if not (stats["lemma"] >= 60 and stats["big_band"] >= 10 and stats["floor_slack"] > 1.0 and stats["ceil_slack"] > 0.05
+            and stats["families"] == 4 and stats["coverage"] < 0.999 and stats["half_fails"] >= 2 and stats["trunc"] >= 160
+            and stats["needles"] >= 40):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
 @conjecture("XXV.1 Nearest-neighbour chains as known parts: the two exact reductions to products of blocks, and the lower bound for every algorithm (theory report Theorem 11.116(a)-(c); workstream Y, Theorems Y1, Y3 and Lemma A; re-derived by referee R11 and by the Scientific Discovery Division, SCI-REV-0010).  (U) With cuts between blocks, pi = rho e^{-g}/E_rho e^{-g} for the product rho of the free-boundary block laws and g the cut interactions, ln A_pi(psi) = ln A_rho(psi + g) - ln A_rho(g), and psi + g lies in the class of the envelope with the slacks delta^-(a, a') = max_b [J(a, b) - J(a', b)] at the site left of a cut and delta^+(b, b') = max_a [J(a, b) - J(a, b')] at the site right of it - and not in the class without them; (L') for blocks with gaps, the marginal on the blocks is the product of the block marginals times prod rho_j, and for every psi' in the class of the envelope reduced by eps^-/+ at the block ends, psi' + sum ln rho_j is a member of the chain's class with A_pi = A_product(psi') exactly; (A) for any label law M and 0 < t < 1 the soft minimum gamma* of the normalised labels is a member, sum_phi M(phi) (pi_phi/pi_gamma*)^t is the constant e^{-G_t(M)}, and gamma* - (r - Phi_phi)_+ is a member that raises ln A by at least r")
 def t_markov_reductions(rng, trials):
     stats = dict(chains=0, U=0, U_needs_slack=0, Lp=0, Lp_needs_reduction=0, A=0, worst=0.0)
@@ -12029,9 +12155,9 @@ def t_markov_symmetric(rng, trials):
     return True, stats
 
 
-@conjecture("XXV.3 The small-slope law (theory report Proposition 11.117(b): Propositions R10.1, R10.2 of the Scientific Discovery Division, SCI-REV-0010).  For a finite space with law pi and envelope u d_0, F*(t) = (t(1-t)/2) u^2 V + O(u^3) with V the largest variance of a function that is 1-Lipschitz for d_0; for binary sites with the Hamming envelope and an associated law (a ferromagnetic chain with any fields) V = Var(sum_i s_i)/4, attained by the uniform field; for an antiferromagnetic chain it is the staggered field and Var(sum s_i)/4 is strictly smaller, so the factor is the structure factor at zero wave vector for ferromagnetic chains only; for the symmetric chain Var(sum s_i)/n tends to (1-p)/p")
+@conjecture("XXV.3 The small-slope law (theory report Proposition 11.117(b): Propositions R10.1, R10.2 of the Scientific Discovery Division, SCI-REV-0010).  For a finite space with law pi and a SYMMETRIC envelope u d_0, F*(t) = (t(1-t)/2) u^2 V + O(u^3) with V the largest variance of a function that is 1-Lipschitz for d_0 (without symmetry the law fails: on two points with d_0(0,1) = 1, d_0(1,0) = 0 the class is a segment and the coefficient is V/4 - the division's counter-example, SCI-REV-0014, M1; the first version of this test and of the proposition had dropped the word); for binary sites with the Hamming envelope and an associated law (a ferromagnetic chain with any fields) V = Var(sum_i s_i)/4, attained by the uniform field; for an antiferromagnetic chain it is the staggered field and Var(sum s_i)/4 is strictly smaller, so the factor is the structure factor at zero wave vector for ferromagnetic chains only; for the symmetric chain Var(sum s_i)/n tends to (1-p)/p")
 def t_markov_small_slope(rng, trials):
-    stats = dict(chains=0, random_f=0, closest=0.0, expansion=[])
+    stats = dict(chains=0, random_f=0, closest=0.0, expansion=[], asym=[])
     s_of = lambda n: np.array([[1 if (x >> i) & 1 else -1 for i in range(n)] for x in range(2 ** n)], float)
     for n in (2, 3, 4):
         H = mk_heights(n)
@@ -12082,13 +12208,45 @@ def t_markov_small_slope(rng, trials):
             stats["expansion"].append((round(lo / coef / V, 4), round(up / coef / V, 4)))
             if not ((1 - 2.5 * u) * V * coef < lo <= up + 1e-15 and up < (1 + 2.5 * u) * V * coef):
                 return False, dict(reason="F*(t) is not (t(1-t)/2) u^2 V to second order", u=u, t=t, lower=lo / coef, upper=up / coef, V=V)
+    # without symmetry the law fails (Scientific Discovery Division, SCI-REV-0014, M1): two points, d_0(0, 1) = 1,
+    # d_0(1, 0) = 0; the class is the segment {c 1[x = 0] : 0 <= c <= u}, V = q (1 - q), and the coefficient is V/4;
+    # with the symmetric envelope on the same two points it is V.  On two points every law is a tilt of pi, so the
+    # minimum over centres is a one-dimensional minimisation.
+    for q, t in ((0.5, 0.3), (0.3, 0.5)):
+        for u in (0.1, 0.05):
+            coef = t * (1 - t) * u * u / 2 * q * (1 - q)
+            pi2 = np.array([q, 1 - q])
+            tilt = lambda c: mk_rows(pi2, np.array([[c, 0.0]]))[0]
+            cost = lambda P, Q: -math.log(float((P ** t * Q ** (1 - t)).sum()))
+
+            def radius(cs):
+                # min over centres pi_psi of the largest cost: a grid to bracket the minimum, golden section inside
+                Ps = [tilt(c) for c in cs]
+                worst = lambda psi: max(cost(P, tilt(psi)) for P in Ps)
+                grid = np.linspace(-1.5 * u, 2.5 * u, 201)
+                i = int(np.argmin([worst(x) for x in grid]))
+                a_, b_ = float(grid[max(i - 1, 0)]), float(grid[min(i + 1, 200)])
+                for _ in range(45):
+                    m1, m2 = a_ + 0.382 * (b_ - a_), a_ + 0.618 * (b_ - a_)
+                    if worst(m1) <= worst(m2):
+                        b_ = m2
+                    else:
+                        a_ = m1
+                return worst(0.5 * (a_ + b_))
+
+            seg = radius(np.linspace(0.0, u, 11))              # the envelope that is not symmetric: labels c in [0, u]
+            sym = radius(np.linspace(-u, u, 21))               # the symmetric envelope: labels c in [-u, u]
+            stats["asym"].append((round(seg / coef, 4), round(sym / coef, 4)))
+            if not (0.25 - 0.3 * u < seg / coef < 0.25 + 0.05 * u and 1 - 1.2 * u < sym / coef < 1 + 0.3 * u):
+                return False, dict(reason="two points: the coefficient is not V/4 for the one-sided envelope and V for the symmetric one",
+                                   q=q, t=t, u=u, one_sided=seg / coef, symmetric=sym / coef)
     # the structure factor of the symmetric chain
     for p in (0.1, 0.3, 0.45):
         lam, n = 1 - 2 * p, 4000
         varm = n + 2 * sum((n - k) * lam ** k for k in range(1, n))
         if abs(varm / n - (1 - p) / p) > 0.01 * (1 - p) / p:
             return False, dict(reason="Var(sum s)/n does not tend to (1-p)/p", p=p, got=varm / n)
-    if not (stats["chains"] == 15 and stats["random_f"] >= 100 and stats["closest"] > 0.3):
+    if not (stats["chains"] == 15 and stats["random_f"] >= 100 and stats["closest"] > 0.3 and len(stats["asym"]) == 4):
         return False, dict(reason="cases not exercised", **stats)
     return True, stats
 

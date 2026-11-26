@@ -1,0 +1,91 @@
+name	enc	n	k	variant	status	outcome	wall	kernel_s	elab_s	rss_mb	axioms	bytes	error
+E1_n8_k2	E1	8	2	pos	0	ok	0.78	0.12	0.28	477	none	15886	-
+E1_n16_k2_negJ	E1	16	2	negJ	0	ok	1.56	0.32	0.68	519	none	47732	-
+E1_n16_k2_negJ0	E1	16	2	negJ0	0	ok	1.09	0.02	0.58	476	none	47733	-
+E1_n16_k2_negL	E1	16	2	negL	0	ok	1.41	0.43	0.53	525	none	47732	-
+E1_n16_k2_negL_claimtrue	E1	16	2	negL_claimtrue	1	rejected, as it must be	1.82	0.42	0.46	536	[sorryAx]	47750	Tactic `decide` proved that the proposition
+E1_n16_k2_negP	E1	16	2	negP	0	ok	1.01	0.05	0.50	477	none	47732	-
+E1_n16_k2_negU	E1	16	2	negU	0	ok	1.14	0.28	0.46	512	none	47732	-
+E1_n16_k2_plainnumerals	E1	16	2	plainnumerals	1	FAIL: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached	18.02	0.02	2.57	490	[sorryAx]	26338	(deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+E1_n16_k2	E1	16	2	pos	0	ok	1.61	0.40	0.66	525	none	47717	-
+E1_n16_k2_tac_decide	E1	16	2	tac_decide	0	ok	1.76	0.37	0.48	538	none	47717	-
+E1_n16_k2_tac_rfl	E1	16	2	tac_rfl	0	ok	1.92	0.39	0.50	537	none	47711	-
+E1_n16_k4_plaindef	E1	16	4	plaindef	1	FAIL: maximum recursion depth has been reached	4.54	1.22	1.79	697	none	123968	maximum recursion depth has been reached
+E1_n16_k4	E1	16	4	pos	0	ok	3.02	0.96	1.30	628	none	135304	-
+E1_n32_k4	E1	32	4	pos	0	ok	12.51	4.48	5.67	1151	none	537373	-
+E1_n32_k4_randmsg	E1	32	4	randmsg	0	ok	17.60	6.16	7.90	1201	none	584257	-
+E1_n32_k8_dataonly	E1	32	8	dataonly	0	ok	28.70	0.53	20.20	1025	-	1913446	-
+E1_n32_k8	E1	32	8	pos	0	ok	42.41	17.50	17.70	2673	none	1913517	-
+E1_n48_k8	E1	48	8	pos	137	FAIL: resident memory above 5 GB, killed	78.82	-	-	4888	-	4341391	-
+E4_n8_k2	E4	8	2	pos	0	ok	0.68	0.07	0.21	469	none	14959	-
+E4_n16_k2_negJ	E4	16	2	negJ	0	ok	1.20	0.28	0.43	506	none	46000	-
+E4_n16_k2_negJ0	E4	16	2	negJ0	0	ok	1.09	0.02	0.54	468	none	46001	-
+E4_n16_k2_negL	E4	16	2	negL	0	ok	1.20	0.23	0.47	506	none	46000	-
+E4_n16_k2_negL_claimtrue	E4	16	2	negL_claimtrue	1	rejected, as it must be	1.77	0.34	0.62	517	[sorryAx]	46018	Tactic `decide` proved that the proposition
+E4_n16_k2_negP	E4	16	2	negP	0	ok	0.94	0.04	0.44	470	none	46000	-
+E4_n16_k2_negU	E4	16	2	negU	0	ok	0.94	0.18	0.37	496	none	46000	-
+E4_n16_k2	E4	16	2	pos	0	ok	1.26	0.26	0.52	510	none	45985	-
+E4_n16_k2_tac_decide	E4	16	2	tac_decide	0	ok	1.45	0.28	0.42	519	none	45985	-
+E4_n16_k2_tac_rfl	E4	16	2	tac_rfl	0	ok	1.61	0.29	0.50	513	none	45979	-
+E4_n16_k4	E4	16	4	pos	0	ok	2.24	0.66	0.98	580	none	126276	-
+E4_n32_k4_oneliteral	E4	32	4	oneliteral	0	ok	19.60	3.84	10.20	1249	none	453620	-
+E4_n32_k4	E4	32	4	pos	0	ok	8.90	2.97	4.00	942	none	502470	-
+E4_n32_k4_randmsg	E4	32	4	randmsg	0	ok	10.80	3.28	4.94	962	none	502472	-
+E4_n32_k4_tac_decide	E4	32	4	tac_decide	0	ok	11.86	2.72	4.27	985	none	502470	-
+E4_n32_k4_tac_rfl	E4	32	4	tac_rfl	0	ok	13.76	3.91	4.86	986	none	502464	-
+E4_n32_k8_oneliteral	E4	32	8	oneliteral	1	FAIL: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached	35.12	0.03	24.90	1692	[sorryAx]	1556808	(deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+E4_n32_k8	E4	32	8	pos	0	ok	28.03	8.56	13.50	1913	none	1729756	-
+E4_n48_k8_dataonly	E4	48	8	dataonly	0	ok	48.31	0.99	33.30	1468	-	3923271	-
+E4_n48_k8	E4	48	8	pos	0	ok	77.21	23.00	37.70	3760	none	3923347	-
+E2_n8_k2	E2	8	2	pos	0	ok	0.54	0.03	0.08	459	none	11465	-
+E2_n16_k2_negJ	E2	16	2	negJ	0	ok	0.47	0.04	0.13	460	none	33675	-
+E2_n16_k2_negJ0	E2	16	2	negJ0	0	ok	0.63	0.12	0.17	470	none	33676	-
+E2_n16_k2_negL	E2	16	2	negL	0	ok	0.52	0.10	0.12	474	none	33675	-
+E2_n16_k2_negL_claimtrue	E2	16	2	negL_claimtrue	1	rejected, as it must be	0.78	0.14	0.16	485	[sorryAx]	33693	Tactic `decide` proved that the proposition
+E2_n16_k2_negP	E2	16	2	negP	0	ok	0.47	0.03	0.13	460	none	33675	-
+E2_n16_k2_negU	E2	16	2	negU	0	ok	0.41	0.02	0.12	459	none	33675	-
+E2_n16_k2	E2	16	2	pos	0	ok	0.91	0.24	0.22	473	none	33660	-
+E2_n16_k2_randmsg	E2	16	2	randmsg	0	ok	0.58	0.11	0.14	476	none	33662	-
+E2_n16_k2_tac_decide	E2	16	2	tac_decide	0	ok	0.73	0.12	0.15	483	none	33660	-
+E2_n16_k2_tac_rfl	E2	16	2	tac_rfl	0	ok	0.73	0.14	0.14	487	none	33654	-
+E2_n16_k4	E2	16	4	pos	0	ok	1.36	0.51	0.47	564	none	92397	-
+E2_n32_k4	E2	32	4	pos	0	ok	6.07	4.12	1.43	1739	none	355775	-
+E2_n32_k4_tac_decide	E2	32	4	tac_decide	0	ok	9.41	3.46	1.58	2896	none	355775	-
+E2_n32_k4_tac_rfl	E2	32	4	tac_rfl	0	ok	9.89	3.74	1.58	2940	none	355769	-
+E2_n32_k8	E2	32	8	pos	134	FAIL: out of memory under `ulimit -v` (GNU MP: Cannot allocate memory (size=198688))	17.48	-	-	3244	-	1223444	GNU MP: Cannot allocate memory (size=198688)
+E2h_n8_k2	E2h	8	2	pos	0	ok	0.42	0.03	0.06	459	none	11721	-
+E2h_n16_k2_negJ	E2h	16	2	negJ	0	ok	0.47	0.03	0.14	461	none	33931	-
+E2h_n16_k2_negJ0	E2h	16	2	negJ0	0	ok	0.52	0.09	0.12	469	none	33932	-
+E2h_n16_k2_negL	E2h	16	2	negL	0	ok	0.58	0.09	0.14	469	none	33931	-
+E2h_n16_k2_negL_claimtrue	E2h	16	2	negL_claimtrue	1	rejected, as it must be	0.58	0.10	0.18	472	[sorryAx]	33949	[Error pretty printing: maximum recursion depth has been reached
+E2h_n16_k2_negP	E2h	16	2	negP	0	ok	0.47	0.04	0.15	461	none	33931	-
+E2h_n16_k2_negU	E2h	16	2	negU	0	ok	0.42	0.01	0.12	461	none	33931	-
+E2h_n16_k2_oneliteral	E2h	16	2	oneliteral	0	ok	0.73	0.10	0.33	468	none	33614	-
+E2h_n16_k2	E2h	16	2	pos	0	ok	0.57	0.10	0.15	471	none	33916	-
+E2h_n16_k2_tac_decide	E2h	16	2	tac_decide	1	FAIL: maximum recursion depth has been reached	0.47	0.01	0.14	459	[sorryAx]	33916	maximum recursion depth has been reached
+E2h_n16_k2_tac_rfl	E2h	16	2	tac_rfl	1	FAIL: maximum recursion depth has been reached	0.53	0.00	0.15	456	[sorryAx]	33910	maximum recursion depth has been reached
+E2h_n16_k4_oneliteral	E2h	16	4	oneliteral	0	ok	3.51	0.38	2.80	493	none	91470	-
+E2h_n16_k4	E2h	16	4	pos	0	ok	1.10	0.29	0.42	493	none	92653	-
+E2h_n32_k4_oneliteral	E2h	32	4	oneliteral	0	ok	46.34	1.52	44.50	616	none	350800	-
+E2h_n32_k4	E2h	32	4	pos	0	ok	3.04	1.34	1.31	617	none	356031	-
+E2h_n32_k4_randmsg	E2h	32	4	randmsg	0	ok	3.07	1.40	1.28	616	none	356033	-
+E2h_n32_k8	E2h	32	8	pos	0	ok	10.72	5.08	4.89	961	none	1223700	-
+E2h_n48_k8_dataonly	E2h	48	8	dataonly	0	ok	11.58	0.06	10.50	521	-	2745089	-
+E2h_n48_k8	E2h	48	8	pos	0	ok	24.98	13.50	10.40	1640	none	2745166	-
+E3_n8_k2_negJ	E3	8	2	negJ	0	ok	1.51	0.90	0.22	596	none	13378	-
+E3_n8_k2_negJ0	E3	8	2	negJ0	0	ok	4.21	3.69	0.17	1077	none	13377	-
+E3_n8_k2_negL	E3	8	2	negL	0	ok	4.17	3.61	0.23	1083	none	13376	-
+E3_n8_k2_negL_claimtrue	E3	8	2	negL_claimtrue	1	rejected, as it must be	4.51	3.87	0.21	1083	[sorryAx]	13394	[Error pretty printing: maximum recursion depth has been reached
+E3_n8_k2_negP	E3	8	2	negP	0	ok	2.45	1.95	0.17	752	none	13376	-
+E3_n8_k2_negU	E3	8	2	negU	0	ok	0.94	0.50	0.14	555	none	13376	-
+E3_n8_k2	E3	8	2	pos	0	ok	4.55	4.02	0.18	1084	none	13361	-
+E3_n8_k2_randmsg	E3	8	2	randmsg	0	ok	3.99	3.51	0.15	1085	none	14668	-
+E3_n8_k2_tac_decide	E3	8	2	tac_decide	1	FAIL: maximum recursion depth has been reached	0.68	0.01	0.21	464	[sorryAx]	13361	maximum recursion depth has been reached
+E3_n8_k2_tac_rfl	E3	8	2	tac_rfl	1	FAIL: maximum recursion depth has been reached	0.53	0.01	0.15	462	[sorryAx]	13355	maximum recursion depth has been reached
+E3_n16_k2	E3	16	2	pos	137	FAIL: resident memory above 5 GB, killed	22.49	-	-	4886	-	42907	-
+baseline_empty	-	-	-	-	0	ok	0.31	-	0.00	441	-	88	-
+baseline_empty_ulimit6000000	-	-	-	-	134	FAIL: libc++abi: terminating due to uncaught exception of type lean::exception: failed to create thread	0.26	-	-	442	-	88	libc++abi: terminating due to uncaught exception of type lean::exception: failed to create thread
+pitfall_thunk_chain	-	-	-	-	0	ok	24.68	24.30	0.02	1260	-	876	-
+pitfall_thunk_forced	-	-	-	-	0	ok	17.92	17.60	0.01	1486	-	1057	-
+pitfall_thunk_forced_4theorems_aborted	-	-	-	-	134	FAIL: libc++abi: terminating due to uncaught exception of type std::bad_alloc: std::bad_alloc	21.96	-	-	1610	-	882	libc++abi: terminating due to uncaught exception of type std::bad_alloc: std::bad_alloc
+pitfall_thunk_forced_single	-	-	-	-	0	ok	9.27	9.01	0.01	1362	-	654	-

@@ -11,8 +11,8 @@ branch: `docs/collaboration/status/theory.md`.
 ## Digest (most important first)
 
 1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
-   (`bash scripts/audit_all.sh` exits 0; at the nineteenth checkpoint: 81 Lean files, 4642
-   audited declarations, 179 harness tests, 492 mutations — the counts of every checkpoint
+   (`bash scripts/audit_all.sh` exits 0; at the twenty-first checkpoint: 85 Lean files, 4899
+   audited declarations, 180 harness tests, 503 mutations — the counts of every checkpoint
    are in `status/theory.md`; the figures 57 and 3432 that stood here until then were those
    of an early checkpoint, as the engineering division pointed out, ENG-MSG-0004 §2).  A map of
    the established results with exact Lean declarations and their epistemic status is in
@@ -346,6 +346,23 @@ branch: `docs/collaboration/status/theory.md`.
    your table `three_worst` agree).  Proposals, inside THY-REQ-0001 (THY-RES-0013 §4):
    reproduce the two certified-cost columns; the cost of those designs on your
    instances; further levels by the same rule; other slopes.
+16d. **Twenty-first checkpoint (THY-RES-0014, to the science division, copy to
+   engineering).**  The science division's review SCI-REV-0014 is applied: the rate of the
+   level recursion is machine-checked (its `RateFull.lean`, adopted); **Proposition
+   11.117(b) holds for symmetric envelopes only** (corrected; harness XXV.3 carries the
+   counter-example); twelve corrections of record.  *For a checker of "shares at the
+   leaves" (your P7-E1, P7-E2):* (i) a **domain-split node** exists as a layer over the
+   kernel (`SCert`, `verifyS`, `verifyS_sound` in `SplitRule.lean`): children for "the states of
+   site `i` in `B`" and "the others"; it is not in the reference checker or the conformance
+   vectors yet; (ii) an instance may **store each pair table once** — soundness needs only
+   the sum of the two orientations below the model's (`verify_sound_real_symm`,
+   `verify_sound_secondOrder_symm`); (iii) **kernel evaluation**: `verify` as written does not
+   scale inside the Lean kernel, an integer checker of one leaf written for the kernel
+   does (`147 456` table entries in `13.5` s, `1.6` GB, no axioms; arrays with indexed reads
+   exceed `5` GB at `1 024` entries) — a measurement,
+   `experiments/coordinator_checks/kernel_eval/`, with no proof relating that checker to
+   `verify`.  New Proposition 11.113b: from a floor's sampler both sides of `ln Z` are
+   certified at the price of the floor's own excess; from a ceiling's only the lower side.
 17. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
@@ -377,9 +394,21 @@ branch: `docs/collaboration/status/theory.md`.
    near `10¹⁵`" (it begins between `2·10¹⁴` and `2.5·10¹⁴`); the three-level cost figures
    `0.712, 0.460, 0.405, 0.379` of THY-MSG-0007 §3 as anything but costs at the flat
    instance (ENG-RES-0014; THY-RES-0013 §2); Proposition 11.117(b) (the small-slope law
-   of §11.32) for an envelope that is not symmetric — false there, a quarter of the
-   stated term on two points (the science division's SCI-REV-0014, M1; the word
-   "symmetric" returns to the proposition at our twenty-first checkpoint).**
+   of §11.32) as it stood before the twenty-first checkpoint, for an envelope that is
+   not symmetric — false there, a quarter of the stated term on two points (the science
+   division's SCI-REV-0014, M1; corrected); the numbers "153, 135, one integrality gap"
+   and "8 of 100" of THY-RES-0011 §2 (the stored harness output has 146, 138, two gaps,
+   10 of 100) and "two of the three exponents fall below the cube at `u ≥ 3`" of
+   THY-RES-0011 §8 without the cells (THY-RES-0014 §6); in theory report §11.19, remark
+   (1b), and THY-RES-0013 §4: the words "of the same outer design" for the two-level worst
+   cases at `n = 1 400, 2 000, 8 000, 32 000, 64 000` — those five are your ENG-RES-0008
+   numbers, for the ladder `ε*·0.85^i`, while the three-level bounds and the entries at
+   `n = 1 000, 4 000, 16 000` are for the referee's ladder (the science division's
+   SCI-REV-0016, M1, received as this checkpoint closed; where both ladders were searched
+   the worst cases differ by at most `0.006`; to be corrected at our next checkpoint,
+   together with the model-free comparison that review supplies: from `n = 16 000` on the
+   certified three-level bound is below the exact cost of two levels at the flat
+   instance).**
 
 ## Index
 
@@ -429,3 +458,4 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-RES-0011](responses/theory/THY-RES-0011.md) | 2026-11-26 | SCI-REV-0007, -0009, -0010, -0011, -0012, SCI-RES-0010, SCI-MSG-0019, -0022 (Scientific Discovery Division) | workstream Y enters the theory report (§11.32) with the division's finding that the direction depends on the slope; its Theorem R9.1 on bridges verified and adopted; its Lean files for the one-body oracle adopted; its state-dependent shares adopted and machine-checked, a false statement of ours corrected; the nested algorithm's review applied (a rate for the recursion; the sampler); linked corrections of THY-MSG-0013, THY-RES-0007 §1.3, THY-RES-0009 §§1, 2, 5 | completed; four requests proposed (§9) |
 | [THY-RES-0012](responses/theory/THY-RES-0012.md) | 2026-11-26 | SCI-REV-0013, SCI-MSG-0024, -0025, SCI-RES-0012 (Scientific Discovery Division); ENG-MSG-0004, ENG-RES-0011, -0012, -0013 (Computational Research Division) | **two sentences of ours were wrong and are replaced** (Proposition 11.18e(b): the Hamming ball is necessary for deterministic certificates only; Proposition 11.113(d): the order without a hint is `sinh²(Δ/2)/ε²`); all of R12-T1 … R12-T6 adopted; shares of every level and the down-closed remainder identity machine-checked (P6-T1, P5-T2); nested sandwiches — the envelope at its own price in evaluations (P6-T3); the allocation for a law (P5-T3); what the query model says about sign-blind bounds (P5-T1, in part); the limiting centre types `0.454`, `0.408` (ENG-RES-0012); the onset of the sampler defect; linked corrections of THY-RES-0010 and THY-MSG-0015 | completed, except P5-T1(i) and the conjecture at prescribed width |
 | [THY-RES-0013](responses/theory/THY-RES-0013.md) | 2026-11-26 | ENG-RES-0014, ENG-MSG-0005 (Computational Research Division) | three nested levels beyond the flat instance: your numbers taken into theory report §11.19 remark (1); linked correction of THY-MSG-0007 §3 (the flat-instance three-level figures are best cases twice over); your bound for non-product instances re-derived; **a certified third level: with servers chosen by certified cost the certified three-level bound is below your two-level worst case from `n = 4 000` on** (ours; unrefereed); four proposals | completed; four proposals open; a note to the science division on its checkpoint `edfd54c` |
+| [THY-RES-0014](responses/theory/THY-RES-0014.md) | 2026-11-26 | SCI-REV-0014, SCI-RES-0014, SCI-RES-0016, SCI-MSG-0026 (Scientific Discovery Division) | the review of the rate applied in full — the rate adopted as machine-checked, **Proposition 11.117(b) corrected (symmetric envelopes only)**, twelve corrections of record; a domain-split rule and soundness under the symmetrised pair hypothesis machine-checked (P7-T2, P7-T3); what the Lean kernel can evaluate (P7-T4, a measurement); Proposition 11.113b: what a floor alone and a ceiling alone certify (A16-T2); `SandwichCost.lean` adopted (A16-T1); linked corrections of THY-RES-0011 §§1, 2, 8 | completed |

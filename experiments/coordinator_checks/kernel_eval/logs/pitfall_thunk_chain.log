@@ -1,0 +1,39 @@
+import took 166ms
+type checking took 2.08s
+type checking took 4.61s
+type checking took 17.7s
+cumulative profiling times:
+	attribute application 0.0522ms
+	blocked (unaccounted) 8.77s
+	compilation (IR) 0.11ms
+	compilation (LCNF base) 0.769ms
+	compilation (LCNF impure) 0.261ms
+	compilation (LCNF mono) 2.11ms
+	elaboration 24.7ms
+	fix level params 0.0366ms
+	import 166ms
+	initialization 43.4ms
+	instantiate metavars 0.0344ms
+	interpretation 3.52ms
+	let-to-have transformation 0.0462ms
+	linting 0.894ms
+	parsing 0.803ms
+	process pre-definitions 5.81ms
+	share common exprs 0.154ms
+	tactic execution 1.21ms
+	type checking 24.3s
+	typeclass inference 2.48ms
+MEASURE command: timeout 120 lean --profile experiments/coordinator_checks/kernel_eval/pitfall_thunk_chain.lean
+MEASURE wall_seconds: 24.68
+MEASURE user_seconds: 23.69
+MEASURE sys_seconds: 0.41
+MEASURE max_rss_kb: 1288360
+MEASURE polled_peak_rss_kb: 1290508
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 0
+RUN file: experiments/coordinator_checks/kernel_eval/pitfall_thunk_chain.lean
+RUN bytes: 876
+RUN sha256: 3ea15d8e076586765371a514ab73557470219ad3aafc3cfe881fc9b3413484ef
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 120 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 0

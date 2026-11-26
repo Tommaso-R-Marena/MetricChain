@@ -1466,6 +1466,45 @@ MUTS["XXIV"] += [
      [('        beta = (np.exp(-ehi) - np.exp(-mhi)) / wq', '        beta = (np.exp(-mlo) - np.exp(-ehi)) / wq')], 'XXIV.12'),
 ]
 
+# twenty-first checkpoint of cycle 10: the review SCI-REV-0014 (the small-slope law needs a symmetric envelope), the
+# remark of SCI-RES-0016 on the algorithm that attains the one-site count, and Proposition 11.113b (one side at a time)
+MUTS["XXV"] += [
+    ("XXV.3 M5: the one-sided envelope claimed to obey the small-slope law (the segment replaced by the symmetric class)",
+     [('            seg = radius(np.linspace(0.0, u, 11))              # the envelope that is not symmetric: labels c in [0, u]',
+       '            seg = radius(np.linspace(-u, u, 11))              # the envelope that is not symmetric: labels c in [0, u]')], 'XXV.3'),
+    ("XXV.3 M6: the coefficient V/4 claimed for the symmetric envelope",
+     [('            sym = radius(np.linspace(-u, u, 21))               # the symmetric envelope: labels c in [-u, u]',
+       '            sym = radius(np.linspace(0.0, u, 21))               # the symmetric envelope: labels c in [-u, u]')], 'XXV.3'),
+]
+MUTS["XI"] += [
+    ("XI.22 M8: with two equally deep states and a width below ln 2 only one of the two skips claimed to fail",
+     [('        for width, expect in ((0.5, 2 * r / k), (math.log(2.0) + 1e-9, 0.0)):',
+       '        for width, expect in ((0.5, r / k), (math.log(2.0) + 1e-9, 0.0)):')], 'XI.22'),
+    ("XI.22 M9: a width of 0.6, below ln 2, claimed to suffice for the bracket returned after a skip",
+     [('        for width, expect in ((0.5, 2 * r / k), (math.log(2.0) + 1e-9, 0.0)):',
+       '        for width, expect in ((0.5, 2 * r / k), (0.6, 0.0)):')], 'XI.22'),
+]
+MUTS["XXIV"] += [
+    ("XXIV.13 M1: the floor's excess bounded by <a> + <a^2>/2, without the factor e^A (false for wide bands)",
+     [('        if not (ma - 1e-10 <= excess <= ma + (math.exp(A) / 2) * ma2 + 1e-10):',
+       '        if not (ma - 1e-10 <= excess <= ma + 0.5 * ma2 + 1e-10):')], 'XXIV.13'),
+    ("XXIV.13 M2: the ceiling's defect claimed to be at least its mean band (it is at most that)",
+     [('        if not (mb - mb2 / 2 - 1e-10 <= defect <= mb + 1e-10):',
+       '        if not (mb - 1e-10 <= defect <= mb + mb2 + 1e-10):')], 'XXIV.13'),
+    ("XXIV.13 M3: the floor's excess claimed to be at most five times its mean band",
+     [('        if D >= 20 and not excess > 5 * mean_band:', '        if D >= 20 and not excess <= 5 * mean_band:')], 'XXIV.13'),
+    ("XXIV.13 M4: half the Hoeffding radius for the floor's sampler",
+     [('        t = math.sqrt(math.log(2 / delta) / (2 * N))\n        pmf = np.exp(bx_binom_logpmf(N, p1))',
+       '        t = 0.5 * math.sqrt(math.log(2 / delta) / (2 * N))\n        pmf = np.exp(bx_binom_logpmf(N, p1))')], 'XXIV.13'),
+    ("XXIV.13 M5: the truncated mean of the ceiling's weights claimed to be an upper bound of Z(E)/Z(m_up)",
+     [('            if not (1 - 1e-12 <= tm <= ratio + 1e-12):', '            if not (ratio - 1e-12 <= tm):')], 'XXIV.13'),
+    ("XXIV.13 M6: a needle of depth D claimed to raise ln Z by D (the true probability of its state forgotten)",
+     [('            if not lnz(E2) - lnz(E) >= D + math.log(float(w[a0])) - 1e-9:',
+       '            if not lnz(E2) - lnz(E) >= D - 1e-9:')], 'XXIV.13'),
+    ("XXIV.13 M7: the weights of the floor's sampler with the wrong sign (e^{E - m_lo}, unbounded)",
+     [('        W = np.exp(-a)\n        if abs(float(qlo @ W)', '        W = np.exp(a)\n        if abs(float(qlo @ W)')], 'XXIV.13'),
+]
+
 which = sys.argv[1:] or list(MUTS)
 for key in which:
     for item in MUTS[key]:

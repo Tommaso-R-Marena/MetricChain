@@ -119,6 +119,12 @@
 > **(s4) A rate** for the recursion of Proposition K5, asked for by the division: `τ_k − h ≤ c₁/(k + c₂)`
 > and `T_k(g) − θ_hint(g) ≤ A(g)/(k + c₂)` with explicit constants are proved (theory report, remark
 > after Theorem 11.53); the `0.65/k²` of K5(d) remains numerical.
+>
+> **Erratum after the review SCI-REV-0014 of the Scientific Discovery Division** (its m9).  The
+> values "`τ₂/a = 0.5006`" and "`h/a = 0.2627`" at `u = 1`, wherever they occur below, are grid
+> values: the closed form `τ₂ = min_φ max{(1−φ)a, φa + (1−φ)θ_na(φa/(1−φ))}` gives `τ₂/a = 0.5004`
+> (as the table of §6 of this report has it in one place), and `h/a = 0.2626` (`0.262647`).
+> Both re-computed by the coordinator; corrected in theory report §11.19, remark (1).
 
 Independent report.  All scripts and outputs named below were produced in the workstream's
 scratch directory (`python3 <script>`, numpy only, `ulimit -v 4000000`, each run under ten
