@@ -17,7 +17,18 @@
 > no critical or major finding).  The text below is unchanged; the following points of it
 > are corrected in the theory report §11.19.  (m1) The abort test must be made *before* an
 > inner call (otherwise the cost bound is `C_max + max_l C_l`), and off the good event the
-> returned pair can have `L > U` (return the trivial bracket then).  (m2) In Theorem K2,
+> returned pair can have `L > U` (return the trivial bracket then).  **Sharpened after the
+> review SCI-REV-0016 of the Scientific Discovery Division (its m1):** the test must be
+> made before *every query* — the one query that gives a new outer point its trivial
+> bracket as well as every inner call, counted with its cost bound — as in Theorem 11.52;
+> tested before inner calls only, the bound that holds in every run is `C_max + M̄` (the
+> point queries of a doubling after the last admitted call are untested).  Read step 3 of
+> §2.2 below accordingly.  On the good event no test fails, so no number changes.
+> **The ladder of §6.4** ("a geometric ladder of 40 rungs") is the ladder of inner rates
+> `ε*·0.85^i` (`flat_cost_bounded.py`); the referee's `r8_flat.py` and the certified three-level
+> check use `x_l = x₀(b/x₀)^{l/40}` — two designs with the same constants (certified two-level
+> bound at the outer fraction `0.50`, `n = 16 000`: `0.5887` against `0.5899` in units of `na`); the
+> same review, M1.  (m2) In Theorem K2,
 > "`T′(ξ) = T(ξ)` for `ξ > 0`" is not nonincreasing; read `T′(ξ) = min(T(ξ), T′(0))`.  (m3) The
 > hypotheses `λ ≤ 1`, `η′ ≤ 1` of Theorem K1 are not used in its proof (§2.4); `λ ≤ 1` **is** used,
 > in the form `e^λ < n_o + 2`, by the proof of the lowered cap (e3) below — the first version of

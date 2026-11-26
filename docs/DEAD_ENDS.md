@@ -2155,7 +2155,14 @@ design.  The flat-instance advantage lives exactly in these rungs.
 inner procedures, so choosing every server **by certified cost** makes the certified
 bound of three levels at most that of two — and it is then strictly below the two-level
 *worst case found* from `n = 4 000` on (theory report §11.19, remark (1b);
-`experiments/coordinator_checks/three_levels_certified/`).  The certified gain comes from
+`experiments/coordinator_checks/three_levels_certified/`).  (*Added at the twenty-second
+checkpoint, after the Scientific Discovery Division's review SCI-REV-0016:* the rule was
+re-derived and all 159 certified numbers were replicated; but five of the two-level worst
+cases in that comparison were for another ladder — two designs that our texts describe
+by the same words, "a geometric ladder of 40 rungs", had been treated as one — and the
+two-level side is a mean-run model.  The comparison that
+needs neither is with the exact cost of two levels at the flat instance, and there the
+certified three-level bound is lower from `n = 16 000` on, not from `4 000`.)  The certified gain comes from
 other rungs (the finest ones) and another middle design (the bounded-accuracy one) than
 the flat-instance gain.
 
@@ -2223,3 +2230,79 @@ been applied, one false proposition and twelve errors of record in our texts.
 before accepting it (both rows of its table to the digit).  *What did not:* our own
 adoption checks in the eighteenth checkpoint compared numbers and attributions and did
 not compare hypotheses.
+
+## D63. A heuristic that counted the wrong levels, two designs under one name, and a lower bound quoted from a theorem that does not state it (twenty-second checkpoint of cycle 10; workstream Q and its referee R12; the Scientific Discovery Division's reviews SCI-REV-0015 and SCI-REV-0016)
+
+1. **"Heuristically not better than `n^{3/4}`" — wrong.**  Theory report §11.19, remark (2),
+   the last sentence of the rate remark after Theorem 11.53 ("the sub-exponential factors
+   of a family with `k` nested levels would have to be bounded uniformly in `k`, and they
+   are not"), §12, `K_REPORT.md` §7 and the brief of workstream Q all said that the `o(n)` of
+   the adaptive cost at a bounded accuracy cannot be better than `n^{3/4}` by this method:
+   `≈ 1/η` levels, each losing `e^{O(√n)}`.  The count of levels was right and the loss per
+   level was not.  In the recursion whose rate is proved only one level per epoch is a
+   bounded level (`O(ln(1/η))` of them, with summable `√`-losses); the others are run at an
+   accuracy `x ≫ ln n` with a closure threshold `e^{x − O(1)}`, where the closing radius is
+   `ρ_h·n_o` and the outer sample costs `e^{n_o h}` up to a polynomial factor (Lemma 11.55(d)).
+   The result is `exp(n·h + O(√(n ln n)))` (Theorem 11.58a).  *How the heuristic survived
+   four checkpoints:* nobody had written the finite-`n` form of one level at an extensive
+   threshold; "each level loses `e^{O(√n)}`" was true of the one kind of level that had
+   been computed (the bounded one of Proposition 11.57(b)) and was extended to all.
+   *Lesson:* a heuristic about what "each level" loses is a statement about every kind of
+   level in the schedule; before publishing a limit of a method, compute one instance of
+   each kind.  The brief asked for `n^{3/4}` "or the precise step at which the proof
+   fails"; the workstream answered a better question than it was asked.
+2. **Two designs under one name** (SCI-REV-0016, M1).  Remark (1b) compared the certified
+   three-level bound with "the worst instance found for the two-level algorithm of the
+   same outer design" at five sizes.  At three of them the two-level numbers were the
+   Computational Research Division's for the ladder of inner rates `ε*·0.85^i`
+   (ENG-RES-0008), while the bound was for the referee's ladder `x₀(b/x₀)^{l/40}`
+   (ENG-RES-0014): our texts call both "a geometric ladder of 40 rungs".  No number was
+   wrong; the attribution was, and the margins `e^{82}, e^{377}, e^{702}` were differences
+   between quantities of two designs.  It could have been caught from our own report:
+   remark (1a) gives `ln C_max = 153.96` at `n = 1 400` for one ladder and the table of (1b)
+   `0.9933·na = 154.28` for the other.  *Lesson:* a design is its parameters, not its
+   description; a table that takes numbers from two messages states both designs in full
+   and compares one common number first.
+3. **A theorem set against a model.**  The same comparison set a certified bound (true in
+   every run on every instance) against costs of *mean runs* on searched instances, and
+   called the latter "at the level of expectations".  The Scientific Discovery Division
+   supplied the comparison that needs neither: the exact, deterministic cost of two levels
+   at the flat instance.  By that measure three levels are certified below two from
+   `n = 16 000` on, not from `4 000` as we wrote.  The earlier claim is not refuted — at
+   `4 000` and `8 000` it rests on the model — but it was stated as more than it was.
+4. **The abort rule as worded proved `C_max + M̄`** (SCI-REV-0016, m1; R12, m2).  Theorem 11.56
+   said "before every inner call"; the queries of new outer points were untested.  It
+   had been corrected once already (referee R8, m1: before, not after, an inner call) —
+   and corrected one step short.  It matters exactly where a run is charged its bound as
+   an inner procedure, which is where remark (1b) and Theorem 11.58a use it.
+5. **A lower bound quoted from a theorem that does not state it** (R12, m1).  The
+   workstream's Theorem Q(c), and the first draft of Theorem 11.58a, had
+   "`n·h − O(ln n) ≤ ln N` for `0 < δ < 1`, by Theorem 11.25(a),(d)".  Theorem 11.25(a) is a
+   finite inequality that is void for `δ ≥ ½`; (d) gives an exponent.  The truth is better
+   — `n·h − O(1)` for `δ < ½`, three lines from (a) — and was found by the referee, not by
+   the coordinator's own reading of the report.
+6. **Lemma 11.55(c) had dropped two hypotheses of the workstream lemma it quotes**
+   (`θ ≤ 2e^{u(m₀+2)}`; the radius at least `p_u m/2` for the size of the ball), and carried
+   "`O(√m)`" where an explicit bound with the leading constant `u` holds.  Harmless for
+   exponents, which is why it went unnoticed; not harmless for an explicit error term.
+7. **The first-order allocation rule published without its range** (SCI-REV-0015, m4, m5;
+   SCI-RES-0017).  Proposition 11.18f(c) said "charge every constant to its least probable
+   sub-pattern" and gave a formula that, read with ties, charges a shared constant to
+   every tied site.  On the division's leucine helix the rule raised one end of the
+   bracket from 3.2 to 8.6 nats.  The statement was labelled first order and was true as
+   such; what was missing is where first order ends (a penalty above the free-energy cost
+   of its site is paid nat for nat).  And the sampler bound of Proposition 11.113a had a
+   factor two that the affine dependence on the inner mean removes.
+
+*What worked.*  Commissioning the question that the heuristic was about, with the request
+to find the step at which it fails; an independent referee told to break the answer, and
+not to import its code (220 million checks, and the two findings — the lower bound, the
+abort rule — that the coordinator's own line-by-line reading had passed over); asking the
+other division to attack the certified third level rather than its arithmetic.  *What did
+not:* the coordinator's reading of the workstream report accepted its quotation of the
+lower bound without opening Theorem 11.25; and the coordinator integrated the referee's
+report from a draft that lay in the repository while its last runs were going — the
+final version corrected one condition (the lower bound is proved with the constant
+`max{1, (ε + ln 2)/u}`, not `(ε + ln 2)/u`, at small sizes) and two numbers that had been
+copied from it.  *Lesson:* a referee's report is integrated when the referee hands it
+back, not when its file appears.

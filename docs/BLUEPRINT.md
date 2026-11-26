@@ -571,19 +571,28 @@ do not evaluate every accepted point:
 
 ```
 NESTED-SAMPLER(solvable m₋ ≤ m₊ with known Z; pointwise e₋ ≤ e₊ between them; energy oracle E; N_f; δ):
+  N_f is fixed in advance; which accepted points are evaluated may depend on the acceptance indicators only
   for each of N_f accepted draws x of the ENVELOPE-SAMPLER (no evaluation yet):
       β(x) ← (e^{−e₊(x)} − e^{−m₊(x)}) / (e^{−m₋(x)} − e^{−m₊(x)})
       ρ(x) ← (e^{−e₋(x)} − e^{−e₊(x)}) / (e^{−m₋(x)} − e^{−m₊(x)})
       with probability ρ(x):   evaluate E(x);   W_in(x) ← (e^{−E(x)} − e^{−e₊(x)}) / (e^{−e₋(x)} − e^{−e₊(x)})
   β̄, ρ̄ ← means over all N_f draws;   W̄ ← mean of W_in over the N evaluated draws
   t_f ← sqrt( ln(6/δ) / (2 N_f) );   t ← sqrt( ln(6/δ) / (2 N) )
-  return   | Z(E) − Z(m₊) − (Z(m₋) − Z(m₊))·(β̄ + ρ̄·W̄) |   ≤   (Z(m₋) − Z(m₊))·(2 t_f + ρ̄·t)          paper (Hoeffding, three times)
+  return   | Z(E) − Z(m₊) − (Z(m₋) − Z(m₊))·(β̄ + ρ̄·W̄) |   ≤   (Z(m₋) − Z(m₊))·(t_f + ρ̄·t)          paper (Hoeffding, three times)
 ```
 
 In evaluations the price is that of the inner pair — states with fewer than `m` changed
 sites are never evaluated, and **every share form of Step 3b costs the same
 evaluations**; the solvable pair buys the bracket without sampling and the acceptance
-rate.  Unrefereed, and not yet run on a real instance.  (11) **A free-energy difference between two macrostates**
+rate.  (The bound with `t_f` — the first version had `2t_f` — and the condition on the
+sampling scheme are the Scientific Discovery Division's, review SCI-REV-0015: drawing
+proposals *until* `N` are accepted is not covered.  Against rule (10) at equal
+evaluations the nested bracket is narrower iff `√(N/N_f) + ρ̄ < √(ln(2/δ)/ln(6/δ))`, `0.878` at
+`δ = 0.05`: what decides is the acceptance rate `ρ̄`, about `p^{m−k}` for share models of level
+`k` at order `m`.  With variance-sensitive half-widths use the form with one known mean,
+`c = β + ρ/2`.  The division has run it: on its instances the variance-sensitive bound is
+worth more than the nesting, and a sandwich several nats wide is usable when proposals
+are cheap.)  (11) **A free-energy difference between two macrostates**
 is certified by the same spot check with half of the samples from each macrostate's own
 sampler (Corollary 11.114, `proofs/Frontiers/BoxRatio.lean`): the detection level is the
 same as for one partition sum, the price is a factor two, the cost is the larger of the
@@ -812,14 +821,34 @@ Theorem 11.18d(c′), Proposition 11.18f; `proofs/Frontiers/ShareLevels.lean`, v
 the highest level whose model can still be solved exactly — the Scientific Discovery
 Division finds that order 4 with triples does what order 5 with sites did.  Where the
 sites differ in mobility, charge each constant to its least probable sub-pattern (for
-sites: the most frozen site of `T`), which is optimal to first order and lowered both ends
-of the bracket about tenfold in a constructed instance; on a homogeneous instance keep
-equal shares for the upper end, and note that the lower end always prefers a one-sided
-allocation — the two ends may use different ones.  For `m ≥ 4` they contain the evaluated terms of orders
+sites: the most frozen site of `T`, in one fixed linear order of the sites — read with
+ties, the formula would charge a shared constant to every tied site), which is optimal to
+first order (`proofs/Frontiers/CoreGreedy.lean`, verified, the Scientific Discovery
+Division's) and lowered both ends of the bracket about tenfold in a constructed
+instance.  **The rule is safe for the lower end of `ln Z` and, for the upper end, only
+while each charged site's penalty stays below the free-energy cost `ln((1 − p_i)/p_i)` of
+changing that site**: beyond it the penalty is paid nat for nat (on the division's
+leucine helix the rule raised the upper end from 3.2 to 8.6 nats at order 5).  For the
+upper end take the convex optimum over the allocations instead — Frank–Wolfe with the
+rule, applied to the tilted site probabilities, as its linear step; every iterate is a
+valid allocation — and check beforehand whether the site level can work at all: no site
+allocation has an upper end below `ln(1 + Σ_i (λ − p_i)⁺)`, `λ` the water level with
+`Σ_i ln(λ/p_i)⁺ = Σ_T c_T` (theory report Proposition 11.18f(c′), (c″)).  On a homogeneous
+instance keep equal shares for the upper end.  The two ends may use different
+allocations.  *When the constants are computed term by term,* expand each term in an
+order of the sites that puts its host sites — at most `m` of them — last: the hosts
+outside `T` then sit at the anchor in every evaluation and need no maximum over their
+states (theory report Theorem 11.18d(a″); `proofs/Frontiers/TermOrders.lean`, verified; with
+`m + 1` hosts this fails).  For `m ≥ 4` they contain the evaluated terms of orders
 three and above and are not pairwise: to obtain models the kernels accept, replace those
 terms (and the pairs beyond a band, for a chain) by pointwise minorants on the lower side
 and majorants on the upper side — the division's construction, a paper proof of its own,
-which then gives a sandwich for rule (10) of §6.4.  The number of evaluations,
+which then gives a sandwich for rule (10) of §6.4.  For a pair table `P` beyond the band
+use the split around the anchor: `A(x_i) = P(x_i, x⁰_j)`, `B(x_j) = P(x⁰_i, x_j) − P(x⁰_i, x⁰_j)`, and the
+row minimum (maximum) of `P − A − B` on the lower (upper) side, keeping as `i` the site that
+moves less — it is exact whenever the kept site is at its anchor (Theorem 11.18d(d′),
+`TermOrders.lean`, verified; the division's, which measured a bracket of `0.057` nats where
+the split by column means gave `0.19`).  The number of evaluations,
 `Σ_{j<m} C(n,j)(k−1)^j`, cannot be reduced by any deterministic procedure unless the terms of
 order below `m` are bounded in advance (Proposition 11.18e; a randomised procedure gets a
 finite but useless bound from `⌈k^{m−1} ln(1/δ)⌉` random evaluations — the division's
@@ -1258,7 +1287,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 503 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 538 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  Before the first mutant of a test it runs the unmutated test in

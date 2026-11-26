@@ -587,8 +587,8 @@ is monotone in the cost bounds of the procedures it calls, so if every step is s
 the procedure with the smallest *certified* cost, a further level can never raise the
 certified bound — and with that rule three levels are certified below the worst case
 found for two levels from four thousand sites on (exact evaluations of the bound by the
-coordinator; a design chosen on the benign instance had shown no certified gain; not
-refereed).  The rate `τ_k − h ≤ c₁/(k + c₂)` at which the level recursion approaches the
+coordinator; a design chosen on the benign instance had shown no certified gain;
+reviewed and replicated since — item (xxii), which corrects what that comparison is).  The rate `τ_k − h ≤ c₁/(k + c₂)` at which the level recursion approaches the
 hinted exponent is machine-checked for the cube — by the Scientific Discovery Division,
 whose review also found one proposition of ours false as worded (the small-slope law
 for chains needs a symmetric envelope; a hypothesis lost when its statement was
@@ -599,6 +599,37 @@ from the floor both sides can be bought, at the price of the floor's own loss, a
 from the ceiling the upper side cannot be bought at all.  The certificate kernel has a
 domain-split rule and a soundness theorem for instances that store each pair table
 once, both asked for by that division for its "shares at the leaves" certificates.
+
+(xxii) *The sub-exponential term of the adaptive cost; two reviews applied; one order of
+the sites per term* (theory report Theorem 11.58a and Lemma 11.55(d); §11.19 remark (1b);
+Propositions 11.18f, 11.113a; Theorem 11.18d(a″), (d′)).  Without a hint, adaptive
+algorithms on the cube class need between `exp(n·h − O(1))` and
+`exp(n·h + O(√(n ln n)))` evaluations at every bounded accuracy: an explicit schedule of
+about `√(n/ln n)` nested levels, chosen by certified cost, whose levels are of two kinds —
+most of them run at a large accuracy with an exponentially large closure threshold and
+lose only a polynomial factor (a new lemma), and the few that work at a bounded
+threshold lose `e^{O(√n)}` with summable constants.  Our earlier text had called `n^{3/4}` the
+heuristic limit of the method; that was wrong.  A paper proof by a workstream,
+re-derived by the coordinator and refereed (R12: no major finding; every statement
+re-derived and tested with independent code); it rests on the refereed but not
+machine-checked level theorem, used far from where that theorem was simulated, and its
+design is not competitive at any size where it can be evaluated.  The Scientific Discovery Division reviewed and replicated the
+certified third level of item (xxi) — the rule holds, all 159 certified numbers were
+reproduced with independent code — and found that five of the two-level numbers it was
+compared with belonged to another design; **the comparison that needs neither a search
+nor a model shows three levels certified below the exact cost of two levels from
+sixteen thousand sites on, not four thousand.**  Its second review found nothing false
+in our statements on randomised certificates, allocations and nested samplers, and
+twelve conditions to add; the sampler's bound lost a factor two, and the allocation
+rule "charge the most frozen site" now has its range of validity (safe for one end of
+the bracket, and for the other only while a penalty stays below the free-energy cost of
+its site), the structure behind it (the core of a convex game; its greedy vertex is
+machine-checked by that division) and a lower bound that no site allocation can beat.
+At that division's request the remainder identity of the anchored expansion is
+machine-checked with a separate order of the sites for every term — which removes a
+maximum over the states of a term's host sites, for at most `m` hosts and not for
+`m + 1` — together with the anchored split of a pair table; and a lemma bounds what a
+bound that ignores the signs of charges loses on a cluster with a net charge.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
@@ -616,9 +647,14 @@ but has been run with three nested levels only at toy sizes; evaluated at the le
 expectations by the Computational Research Division, a third level as our referee
 designed it — its servers chosen at the flat instance — gains little beyond the flat
 instance and nothing that is certified, while with every server chosen by its certified
-cost the certified bound of three levels is below the worst case found for two levels
-from four thousand sites on (theory report §11.19, remarks (1) and (1b); the second is
-the coordinator's computation, not refereed and not yet reproduced by another division); its
+cost the certified bound of three levels is below the exact cost of the two-level
+algorithm at the flat instance from sixteen thousand sites on, and below the worst case
+found for two levels — a search in a mean-run model, in part for a neighbouring design —
+from four thousand (theory report §11.19, remarks (1) and (1b); the coordinator's
+computation, reviewed and replicated by the Scientific Discovery Division); the explicit
+sub-exponential term `O(√(n ln n))` of Theorem 11.58a is a refereed paper proof for a
+schedule that has been evaluated exactly only at depths and sizes where it is not yet
+better than the plain bracket; its
 extension to a field as known part is refereed but its nested algorithm has never been
 simulated end to end, and its
 algorithms are

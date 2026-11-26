@@ -1458,8 +1458,8 @@ MUTS["XXIV"] += [
      [('        w2 = w1 + math.expm1(2 * eps) * (cc + w1)', '        w2 = w1 + math.expm1(0.5 * eps) * (cc + w1)')], 'XXIV.11'),
     ("XXIV.12 M1: the acceptance probability of the nested sampler measured up to the outer ceiling",
      [('        rho = (np.exp(-elo) - np.exp(-ehi)) / wq', '        rho = (np.exp(-elo) - np.exp(-mhi)) / wq')], 'XXIV.12'),
-    ("XXIV.12 M2: the free-sampling term 2 t_f dropped from the bracket of the nested sampler",
-     [('            miss = np.abs(estz - ZE) > A * (2 * tf + rbar * te) * (1 + 1e-12)', '            miss = np.abs(estz - ZE) > A * (rbar * te) * (1 + 1e-12)')], 'XXIV.12'),
+    ("XXIV.12 M2: the free-sampling term t_f dropped from the bracket of the nested sampler",
+     [('            miss = np.abs(estz - ZE) > A * (tf + rbar * te) * (1 + 1e-12)', '            miss = np.abs(estz - ZE) > A * (rbar * te) * (1 + 1e-12)')], 'XXIV.12'),
     ("XXIV.12 M3: accepted draws claimed to have the law of the outer sampler",
      [('            q_in = q * rho / rate', '            q_in = q')], 'XXIV.12'),
     ("XXIV.12 M4: the free part of the outer variable measured from the lower model",
@@ -1503,6 +1503,116 @@ MUTS["XXIV"] += [
        '            if not lnz(E2) - lnz(E) >= D - 1e-9:')], 'XXIV.13'),
     ("XXIV.13 M7: the weights of the floor's sampler with the wrong sign (e^{E - m_lo}, unbounded)",
      [('        W = np.exp(-a)\n        if abs(float(qlo @ W)', '        W = np.exp(a)\n        if abs(float(qlo @ W)')], 'XXIV.13'),
+]
+
+# twenty-second checkpoint of cycle 10: the review SCI-REV-0015 of the Scientific Discovery Division (conditions on the
+# one-site count, the allocation beyond first order, the two-end bound of the nested sampler) and its SCI-RES-0017
+MUTS["XI"] += [
+    ("XI.22 M10: one state fewer allowed to make the bracket of width W wrong (k equally deep states attain the count)",
+     [('            cap = min(k, math.ceil(1.0 / (1.0 - math.exp(-width))) - 1)',
+       '            cap = min(k, math.ceil(1.0 / (1.0 - math.exp(-width))) - 2)')], 'XI.22'),
+    ("XI.22 M11: k equally deep states claimed to defeat every width below 2 ln(k/(k - 1))",
+     [('            if np.ptp(inst) == 0 and nfail != (k if width < thr else 0):',
+       '            if np.ptp(inst) == 0 and nfail != (k if width < 2 * thr else 0):')], 'XI.22'),
+    ("XI.22 M12: the bound for the minimum after a skip taken as the least evaluated value plus the slack (wrong for every state but the minimiser)",
+     [('                nfail = sum(1 for a in range(k) if float(np.delete(inst, a).min()) - w_ > true_min + 1e-12)',
+       '                nfail = sum(1 for a in range(k) if float(np.delete(inst, a).min()) + w_ > true_min + 1e-12)')], 'XI.22'),
+    ("XI.22 M13: needles of L depths claimed to allow the skip probability delta (L + 2)/L",
+     [('        s_skip = 0.05 * (Ld + 1) / Ld', '        s_skip = 0.05 * (Ld + 2) / Ld')], 'XI.22'),
+    ("XI.23 M9: the upper end of independent sites written with f + gamma (the lower end's combination)",
+     [('        U_closed = sum(sp(gs[i] - f[i]) - sp(-f[i]) for i in range(n))',
+       '        U_closed = sum(sp(-f[i]) - sp(-f[i] - gs[i]) for i in range(n))')], 'XI.23'),
+    ("XI.23 M10: a site claimed to pay its whole penalty at the upper end (the depth ln(1/p) forgotten)",
+     [('            if not (max(p_ * g_, g_ - math.log(1 / p_)) - 1e-12 <= up_i <= p_ * math.expm1(g_) + 1e-12) \\',
+       '            if not (max(p_ * g_, g_) - 1e-12 <= up_i <= p_ * math.expm1(g_) + 1e-12) \\')], 'XI.23'),
+    ("XI.23 M11: the lower end of every allocation claimed to be at most that of equal shares (without the factor C(m, k))",
+     [('                if L_lam > math.comb(m, k) * L_eq + 1e-12:', '                if L_lam > L_eq + 1e-12:')], 'XI.23'),
+    ("XI.23 M12: the water level fixed by twice the sum of the constants",
+     [('            if sum(max(0.0, math.log(mid / q_)) for q_ in pm) < Gam:',
+       '            if sum(max(0.0, math.log(mid / q_)) for q_ in pm) < 2 * Gam:')], 'XI.23'),
+    ("XI.23 M13: the greedy vertex claimed optimal for the ordering by decreasing probability",
+     [('        if float(p_sorted @ gstar) > float(p_sorted @ gcov) + 1e-12:',
+       '        if float(p_sorted[::-1] @ gstar) > float(p_sorted[::-1] @ gcov) + 1e-12:')], 'XI.23'),
+    ("XI.23 M14: with ties, equal shares over all sites of a subset claimed to give the least upper end",
+     [('    share = {(T, frozenset([i])): (c[T] / len(T & frozen) if i in frozen else 0.0) for T in subs_m for i in T}',
+       '    share = {(T, frozenset([i])): c[T] / m for T in subs_m for i in T}')], 'XI.23'),
+]
+MUTS["XXIV"] += [
+    ("XXIV.12 M5: the error of the free part bounded by the smaller of the two end errors",
+     [('            two_end = np.maximum(np.abs(bbar - float(q @ beta)), np.abs(bbar + rbar - float(q @ (beta + rho)))) \\',
+       '            two_end = np.minimum(np.abs(bbar - float(q @ beta)), np.abs(bbar + rbar - float(q @ (beta + rho)))) \\')], 'XXIV.12'),
+    ("XXIV.12 M6: the variant with one known mean centred at the upper end (W_in - 1 instead of W_in - 1/2)",
+     [('rate * (float(q_in @ Win) - 0.5))) > 1e-10:', 'rate * (float(q_in @ Win) - 1.0))) > 1e-10:')], 'XXIV.12'),
+    ("XXIV.12 M7: the comparison with the plain sampler with the old factor two on the free term",
+     [('        if (nested < plain) != (math.sqrt(Ne_ / Nf_) + rb_ < kap[d_]):',
+       '        if (nested < plain) != (2 * math.sqrt(Ne_ / Nf_) + rb_ < kap[d_]):')], 'XXIV.12'),
+]
+
+MUTS["XI"] += [
+    ("XI.24 M1: the base point of a remainder term already switched at the first site of its subset",
+     [('    return tuple(y[i] if (y[i] != x0[i] and rank[i] < first) else x0[i] for i in range(len(y)))',
+       '    return tuple(y[i] if (y[i] != x0[i] and rank[i] <= first) else x0[i] for i in range(len(y)))')], 'XI.24'),
+    ("XI.24 M2: the anchored interpolant of order m - 1 with the terms of order m included",
+     [('    return sum(to_mixed_diff(g, idx, x0, U, y) for r in range(min(m, len(S) + 1)) for U in itertools.combinations(S, r))',
+       '    return sum(to_mixed_diff(g, idx, x0, U, y) for r in range(min(m + 1, len(S) + 1)) for U in itertools.combinations(S, r))')], 'XI.24'),
+    ("XI.24 M3: constants taken in the anchor context alone (every site outside the subset at the reference)",
+     [('        consts = [to_host_constants(g, idx, ks, x0, m, lambda T, H=H: [i for i in range(n) if i not in T and i not in H])',
+       '        consts = [to_host_constants(g, idx, ks, x0, m, lambda T, H=H: [])')], 'XI.24'),
+    ("XI.24 M4: the roles of hosts and other sites exchanged in the constants (hosts free, the others at the reference)",
+     [('        consts = [to_host_constants(g, idx, ks, x0, m, lambda T, H=H: [i for i in range(n) if i not in T and i not in H])',
+       '        consts = [to_host_constants(g, idx, ks, x0, m, lambda T, H=H: [i for i in H if i not in T])')], 'XI.24'),
+    ("XI.24 M5: m + 1 hosts claimed to stay at the reference",
+     [('            if hsize <= m and moved:', '            if hsize <= m + 1 and moved:')], 'XI.24'),
+    ("XI.24 M6: the anchor row of the split not centred at the anchor",
+     [('        B = Pt[a, :] - Pt[a, b]\n        D = Pt - A[:, None] - B[None, :]', '        B = Pt[a, :]\n        D = Pt - A[:, None] - B[None, :]')], 'XI.24'),
+    ("XI.24 M7: the row maximum of the remainder used for the lower model and the minimum for the upper",
+     [('        lo, hi = D.min(axis=1), D.max(axis=1)', '        lo, hi = D.max(axis=1), D.min(axis=1)')], 'XI.24'),
+]
+
+MUTS["XI"] += [
+    ("XI.25 M1: the sign-blind loss claimed to grow like the first power of R = sum |q| / |sum q|",
+     [('        factor = (1 + e / abs(mbar)) / (1 - (e / abs(mbar)) * R ** 2) * R ** 2',
+       '        factor = (1 + e / abs(mbar)) / (1 - (e / abs(mbar)) * R ** 2) * R')], 'XI.25'),
+    ("XI.25 M2: the variation of the kernel not amplified by R^2 in the denominator",
+     [('        factor = (1 + e / abs(mbar)) / (1 - (e / abs(mbar)) * R ** 2) * R ** 2',
+       '        factor = (1 + e / abs(mbar)) / (1 - (e / abs(mbar))) * R ** 2')], 'XI.25'),
+    ("XI.25 M3: two clusters: the loss claimed to be the larger of the two ratios instead of their product",
+     [('        f2 = (1 + e2) / (1 - e2 * Ra * Rb) * Ra * Rb', '        f2 = (1 + e2) / (1 - e2 * Ra * Rb) * max(Ra, Rb)')], 'XI.25'),
+    ("XI.25 M4: the counter-instance replaced by a constant kernel (for which the true value does not vanish)",
+     [('    Mx = np.array([[1.0, -1.0], [-1.0, 1.0]])', '    Mx = np.array([[1.0, 1.0], [1.0, 1.0]])')], 'XI.25'),
+    ("XI.25 M5: constant kernel: the sign-blind bound claimed to be R times the true value",
+     [('        if abs(sb_max(Mc, w) - R ** 2 * abs(float(q @ Mc @ q))) > 1e-9 * (1 + R ** 2):',
+       '        if abs(sb_max(Mc, w) - R * abs(float(q @ Mc @ q))) > 1e-9 * (1 + R ** 2):')], 'XI.25'),
+]
+
+MUTS["XVI"] += [
+    ("XVI.5 M1: the one-sided ratio bounded without the slack e^{2u + e^u} (only the factor m + 1 and e^{m e})",
+     [('                cap = math.log(m + 1) + 2 * u + math.exp(u) + m * e', '                cap = math.log(m + 1) + m * e')], 'XVI.5'),
+    ("XVI.5 M2: the outer sample claimed to cost e^{m theta_na(e)} without the factor m + 1",
+     [('                    rhs = m * na_theta_na(u, e) + math.log(m + 1)', '                    rhs = m * na_theta_na(u, e)')], 'XVI.5'),
+    ("XVI.5 M3: at a bounded threshold the closing radius claimed to be within half the proved distance of p_u m",
+     [('        r_plus = math.floor(pu * m - sq)\n        if rdag < r_plus:', '        r_plus = math.floor(pu * m - 0.5 * sq)\n        if rdag < r_plus:')], 'XVI.5'),
+    ("XVI.5 M4: the epoch recursion with h in place of h d_m in the denominator",
+     [('        d.append(d[m] * (J[m] * a + h) / (J[m] * a - h * d[m]))', '        d.append(d[m] * (J[m] * a + h) / (J[m] * a - h))')], 'XVI.5'),
+    ("XVI.5 M5: the constant of the order with a/h + 3 in place of a/h + 4",
+     [('        cstar[u] = 2 * math.sqrt((1 + rbar) * c1 * (a / h + 4))', '        cstar[u] = 2 * math.sqrt((1 + rbar) * c1 * (a / h + 3))')], 'XVI.5'),
+    ("XVI.5 M6: the outer block of a slope step with x/h sites (the polynomial slack of the threshold not taken out)",
+     [('            n_o = math.floor((x - 1 - clog) / h)', '            n_o = math.floor(x / h)')], 'XVI.5'),
+    ("XVI.5 M7: the accuracy taken by a drop without its last term (w(c) = ln(e^c (1 + c)/(1 - c) + 2c))",
+     [('        w = math.log(math.exp(c) * (1 + c) / (1 - c) + 2 * c) + c', '        w = math.log(math.exp(c) * (1 + c) / (1 - c) + 2 * c)')], 'XVI.5'),
+]
+
+MUTS["XI"] += [
+    ("XI.23 M15: the pair penalty of the two most frozen sites as a first difference (the term of the sets without both sites forgotten)",
+     [('                closed = gam(after | {i, j}) - gam(after | {i}) - gam(after | {j}) + gam(after)',
+       '                closed = gam(after | {i, j}) - gam(after | {i}) - gam(after | {j})')], 'XI.23'),
+]
+
+MUTS["XVI"] += [
+    ("XVI.5 M8: the hinted lower bound claimed to be n h without the constant ((eps + ln 2)/u) ln((1 - rho_h)/rho_h)",
+     [('                rhs = n * h - ((eps + math.log(2)) / u) * math.log((1 - rho_h) / rho_h)', '                rhs = n * h + 3.0')], 'XVI.5'),
+    ("XVI.5 M9: the radius k* claimed to be below rho_h n",
+     [('                if not kstar < rho_h * n + (eps + math.log(2)) / u:', '                if not kstar < rho_h * n:')], 'XVI.5'),
 ]
 
 which = sys.argv[1:] or list(MUTS)

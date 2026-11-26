@@ -1,0 +1,15 @@
+# Referee R12, check 5 (mode B): exact certified cost of the design G_M against Theorem Q8 and the induction
+# Part B1: every n from 2 to 200; M = 0..3; eps in {1e-6, 0.01, 0.8715, 50}; delta in {0.999, 0.05, 1e-9, e^-n}
+#   u    designs   nodes    violations   least slack of Theorem Q8 [nats] at (n, M, eps, ln delta)   least slack of the induction   levels built and checked: S / D shift / D no shift   designs whose top drop chose a level   least Q7(no shift) slack   least Lemma Q3 slack   largest cost - n ln 2 (must be <= 0)
+  0.1    12736     97920      0      18.191 at (134, 0, 50.0, -134.0)      17.971   0 / 0 / 10472   0     125.678      29.897   0.00e+00   [3 s]
+  1.0    12736    290280      0      67.881 at (198, 0, 50.0, -198.0)      45.839   0 / 0 / 32568   0     278.480     106.452   0.00e+00   [10 s]
+  4.0    12736   1147424      0    7602.696 at (200, 0, 50.0, -0.001)     187.994   0 / 0 / 34232   0   16882.973    8947.923   0.00e+00   [27 s]
+#
+# Part B2: the first sizes at which the slope step S[G_0] is built (x-hat = h n >= X_0(n)), called directly at
+#          x in {X_0(n), (X_0 + h n)/2, h n, 3 h n}, delta in {0.999, 0.05, e^-n}; and the design G_1, G_2 at the top around these sizes
+#   u    first n   sizes   levels built (S)   violations   least slack: induction / Q6 level / Lemma Q4   least n_o   | G_1, G_2 at the top: designs, violations, least slack of Theorem Q8
+  0.5     1678     64      744      0     32.157 /   67.767 /  0.0077   1   | 68, 0, 220.11   [27 s]
+  1.0      470     64      744      0     38.924 /   88.519 /  0.0291   1   | 68, 0, 281.56   [27 s]
+  2.0      202     64      744      0     60.514 /  388.080 /  0.0973   1   | 68, 0, 907.07   [28 s]
+  4.0      299     64      744      0    208.099 / 7630.959 /  0.2392   1   | 68, 0, 14330.46   [28 s]
+# total: 1722415 node checks, 0 violations of proved inequalities   [28 s]

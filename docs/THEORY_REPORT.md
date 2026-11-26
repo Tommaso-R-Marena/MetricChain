@@ -85,7 +85,7 @@ referees (`reviews/R2` – `R9`), are classified separately there; §0.3 is a ma
 | certification geometry | certificates = coverings by slack balls; exponents on product landscapes at zero and finite temperature; hardness; best-first search | §§11.1–11.9 | machine-checked cores; refereed (R2) |
 | query complexity of all algorithms | lower bounds for every randomised algorithm (dips, generalised dips), thresholds, the accuracy diagram on the cube, the exact exponent with a hint | §11.10 | one-shot lower bounds machine-checked; the rest paper proofs, refereed (R3, R4) |
 | second-order and correlated uncertainty | quadratic law for dense second-order classes; classes that are linear in features; pair-distance profiles for chains and their kernel | §§11.7, 11.12, 11.17 | inequalities and kernel machine-checked; refereed (R6, R_P) |
-| algorithms **without a hint** on the cube | non-adaptive exponent `θ_na` (Monte Carlo is optimal); adaptive exponent = the hinted one, at extensive and at every bounded accuracy | §§11.16, 11.18, 11.19 | recursion and bracket algebra machine-checked; algorithms paper proofs, refereed (R5, R7, R8) |
+| algorithms **without a hint** on the cube | non-adaptive exponent `θ_na` (Monte Carlo is optimal); adaptive exponent = the hinted one, at extensive and at every bounded accuracy; **at a bounded accuracy the cost is `exp(n·h + O(√(n ln n)))`, against `exp(n·h − O(1))` from below** (Theorem 11.58a) | §§11.16, 11.18, 11.19 | recursion and bracket algebra machine-checked; algorithms paper proofs, refereed (R5, R7, R8); the sub-exponential term a paper proof, refereed (R12) |
 | a **known part** (field) | single-letter exponents; the right sample is flat in the order parameter; the hardest instance is additive, not the zero residual; a new asymptotic isoperimetric theorem | §11.20 | paper proofs, refereed (R9); shift identity machine-checked |
 | the common structure | the shear law; every game function yields a pair, and the level recursion converges | §11.21 | machine-checked |
 | **chains in the thermodynamic limit** | a convex limit shape for profile sets of bridges; certificate sizes of bridges converge to its covering number off a countable, unidentified set of accuracies; every limit point of the certificate sizes of all walks at `(L, ε₁) = (1, ½)` lies between 116 and 3 627 (first version: "bounds `50 … 3 627`"); rate exactly `N^{-1/3}` at the compact end of the shape, `N^{-1/2}` or better at interior points | §11.22 | abstract limit theorems machine-checked; lattice lemmas paper proofs checked with independent code; reviewed by the Scientific Discovery Division (SCI-REV-0002: no false theorem; headline reworded; lower bound raised from 50 to 116 with the section's own tools); conjecture for unrestricted walks |
@@ -1443,6 +1443,8 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/AffineHalf.lean` (namespace `ScienceR12`; **written by the Scientific Discovery Division, adopted unchanged**) | `sgn`, `aff`, `flipAt`, `negAll`, `aff_flip`, `aff_negAll`, `abs_aff_le`, `card_le_two_mul_of_involution`, `affine_half_large` (Proposition 11.18e(b): an affine function on the cube is at least `1/(n + 1)` of its maximum in absolute value on half of the points — the core of the division's counter-algorithm to the first version of that statement) |
 | `proofs/Frontiers/BlockReductions.lean` | `cut_coupling_admissible`, `cut_coupling_partition`, `cut_coupling_normalised`, `gap_embedding_admissible`, `gap_embedding_partition`, `cut_coupling_witness` (Theorem 11.116(a), (b) in abstract two-block form: a coupling between two blocks moves into the residual at the price of slacks in the envelopes, and a positive correction to a product of block laws embeds the product problem exactly; the chain statements iterate these over the cuts, on paper) |
 | `proofs/Frontiers/RateFull.lean` (namespace `ScienceR13`; **written by the Scientific Discovery Division, adopted unchanged**) | `kappa`, `c1`, `c2`, `kappa_pos`, `kappa_lt_d0`, `c2_eq`, `gain_poly`, `epoch_gain`, `closed_form`, `epochSeq`, `rate_of_epochs`, `lemma1_top`, `lemma1`, `lemma2`, `epoch_of_stepLE`, `rate_top`, `c1_pos`, `one_add_c2_pos`, `rate_top0`, `rate_all0`, `cube_exactRec_rate_top`, `cube_exactRec_rate_all`, `le_of_forall_lt_frac`, `slope_of_stepLE`, `rate_zero` (the rate `τ_k − h ≤ c₁/(k + c₂)` of the level recursion and the rate at every accuracy — the two displays of the remark after Theorem 11.53 — for the exact recursion of the cube at every slope, with nothing assumed, and for the sequence at accuracy zero; the division's review SCI-REV-0014 of that remark, on top of our `StepLE.of_limit`, `StepLE.of_macro`, `StepLE.at_hint_fraction`) |
+| `proofs/Frontiers/CoreGreedy.lean` (namespace `ScienceA17`; **written by the Scientific Discovery Division, adopted unchanged**) | `sum_mul_eq_sum_increments`, `greedy_cost_le`, `marginal_tight`, `greedy_cost_eq`, `greedy_optimal` (Proposition 11.18f(c′): among the vectors that cover the nested sets of an ordering by nondecreasing off-anchor probability, the marginal vector `γ_j = Γ(R_j) − Γ(R_{j+1})` has the least first-order cost — Abel summation; the greedy vertex of the core of a convex game) |
+| `proofs/Frontiers/TermOrders.lean` | `sitesBefore_notMem_of_few_after`, `remainderBase_host_anchor`, `card_after_lt_of_hosts_last`, `mixedDiff_finset_sum`, `anchoredInterp_finset_sum`, `anchored_remainder_identity_orders`, `anchored_remainder_bound_orders`, `exists_linearOrder_hosts_last`, `exists_linearOrder_few_after`, `anchored_remainder_bound_hosts`, `tripleResidual_eq_zero_of_site`, `term_orders_sharp`, `term_orders_sharp_host_moves`, `anchoredSplitA`, `anchoredSplitB`, `anchoredSplitD`, `anchoredSplit_row`, `anchoredSplit_col`, `anchoredSplit_sandwich`, `anchoredSplitLo`, `anchoredSplitHi`, `anchoredSplit_extrema`, `anchoredSplit_sandwich_extrema`, `anchoredSplit_exact_at_anchor` (Theorem 11.18d(a″): the remainder identity with a separate order of the sites for every term; hosts put last stay at the anchor, so the constants of a term with at most `m` hosts need no maximum over the states of a host outside `T`, and `m + 1` hosts are too many; Theorem 11.18d(d′): the anchored split of a pair table into one-site functions, exact on the anchor row — statements of the Scientific Discovery Division, SCI-MSG-0027, requests P8-T1 and A18-T1; proofs ours) |
 | `proofs/Frontiers/SandwichCost.lean` (namespace `ScienceA17`; **written by the Scientific Discovery Division, adopted unchanged**) | `exp_neg_le_quadratic`, `exp_le_quadratic_mul_exp`, `exp_mean_le_mean_exp`, `floor_side`, `ceiling_side`, `Z`, `gibbs`, `Z_pos`, `gibbs_nonneg`, `gibbs_sum`, `Z_ratio`, `sandwich_cost` (Proposition 11.113b(a), the division's Lemma A17.16: for `lo ≤ E ≤ up` the excess of the floor is between its mean band under the true ensemble and that plus `(e^A/2)` times the mean squared band, the defect of the ceiling between its mean band minus half the mean squared band and its mean band) |
 | `proofs/Frontiers/SplitRule.lean` | `Dom.keep`, `Dom.drop`, `Dom.mem_keep`, `Dom.mem_drop`, `Dom.keep_subset`, `Dom.drop_subset`, `inBox_keep_iff`, `inBox_drop_iff`, `inBox_keep`, `inBox_drop`, `inBox_keep_or_drop`, `SCert`, `verifyS`, `SCert.size`, `verifyS_base`, `verifyS_split`, `verifyS_sound`, `verifyS_sound_real`, `leafOK_mono`, `Dom.fix_self`, `Dom.fix_of_ne`, `Dom.fix_subset`, `Dom.fix_subset_keep`, `Dom.fix_subset_drop`, `Dom.fix_keep`, `Dom.fix_drop`, `leafOK_of_fix`, `leafOK_iff_fix`, `split_leaves_imp_branch`, `branch_leaves_imp_split`, `split_leaves_iff_branch`, `split_leaves_size`, `branch_leaves_size`, `splitTriangle`, `splitTriangleKeepLeaf`, `splitTriangleDropLeaf`, `splitTriangleCert`, `splitTriangle_verified`, `splitTriangle_lower_bound`, `splitTriangle_optimum`, `splitTriangle_rejects`, `splitTriangle_keepLeaf_rejected`, `splitTriangle_exchanged_rejected`, `splitTriangle_leaf_gap`, `splitTriangle_no_leaf`, `splitTriangle_branch_verified` (Proposition 11.18b(e): a domain-split rule as a layer over the kernel — sound; a leaf certificate serves every sub-box; a split of two leaves is equivalent to the branch with the leaves repeated; a witness on which no single leaf certifies and the split does; requested by the Scientific Discovery Division, SCI-RES-0014, P7-T2) |
 | `proofs/Frontiers/SymmetricPairHypothesis.lean` | `sum_erase_swap_fin`, `PairInstance.cast_energy_le_symm`, `verify_sound_real_symm`, `verify_sound_secondOrder_symm`, `symm_of_termwise`, `onceModel`, `onceResidual`, `onceBound`, `onceRef`, `onceInstance`, `onceResidual_mixedDiffBound`, `onceInstance_h_le`, `onceInstance_symm_le`, `onceInstance_not_termwise`, `symm_hypothesis_witness` (Proposition 11.18b(e): kernel soundness for real models, and with a second-order envelope, under the symmetrised pair hypothesis — an instance may store each pair table in one orientation; strictly weaker than the termwise hypothesis, with a witness; the division's Lemma P7.7, request P7-T3) |
@@ -1528,6 +1530,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G37 | **The anchored expansion at every order: remainder identity, anchored constants, shares of every level; the ball is necessary for deterministic certificates.**  `g(y) − I_{m−1}g(y) = Σ_{T ⊆ S, |T| = m} Δ_T g(z_T; y_T)` with base points equal to the reference on `T`; hence a remainder bound by anchored constants, site penalties `γ_i = (1/m)Σ_{T∋i}c_T` that cover every set of sites, and a sandwich of `g` from its values on the Hamming ball of radius `m − 1`.  On a class closed under adding functions of order below `m`, every deterministic algorithm that certifies a minimum or a free energy evaluates at least as many configurations as that ball contains, on every input; with a hint, `k^{m−1}ln(1/δ)` random evaluations refute a wrong function of order below `m`.  **Since the nineteenth checkpoint:** the identity for every down-closed family of evaluated subsets; shares of every level `k`, ordered from the envelope to the constant, with windows and arbitrary allocations; the allocation for a law (the upper end convex, the lower end concave, to first order "charge the least probable sub-pattern"); **and the necessity of the ball does not extend to randomised algorithms as first claimed — a finite bound of unspecified width costs `⌈k^{m−1} ln(1/δ)⌉` random evaluations whatever the number of sites (the science division's counter-algorithm), the count survives on one site, and for a prescribed width it is a conjecture** | `anchored_remainder_identity`, `anchored_remainder_bound`, `cover_of_site_shares_order`, `cover_of_equal_shares`, `anchored_remainder_site_penalties`, and since the nineteenth checkpoint `downClosed_remainder_identity`, `mixedDiff_context_bound`, `cover_of_level_shares`, `level_shares_antitone`, `level_window_le`, `cover_of_subset_shares`, `affine_half_large` (the science division's) **[V]**; the necessity of the ball for deterministic algorithms, the one-site count for randomised ones, the allocation for a law **[P]**; the randomised count at prescribed width **[C]**; harness XI.19, XI.20, XI.22, XI.23 **[N]** | cycle 10; **the first version of the randomised statement was false as written (the science division's review SCI-REV-0013; `DEAD_ENDS.md` D60)**; **the identity and the allocation are the science division's (workstream P3), machine-checked here at its request; the necessity statement is ours, a dimension count; anchored (cut-HDMR) expansions are classical — no novelty claimed for the identity by either division, prior art read at abstract level by the division only** |
 | G38 | **Barrier and trap certificates on top of the kernels.**  A lower bound on a minimax barrier is a cut whose wall is certified by the min kernel (or the residual kernel); a decision tree with inside, wall and outside leaves is checked by three tests and certifies that every walk of single-site moves between two configurations visits energy at least `L`; box adjacency is decided exactly; a tree cut can certify a barrier that no box cut sees; for every stationary dynamics the survival probability in a basin is bounded below by wall and basin weights from the partition kernel.  The soundness proof of the partition kernel does not use more of the rationals than an ordered commutative semiring | `cut_sound`, `box_cut_barrier`, `certified_trap_height`, `trap_certificate`, `box_trap_certificate` (the science division's file, adopted) and `bverify_sound`, `bverifyR_sound`, `bverifyR_trap_height`, `bverifyOn_sound`, `Dom.adjacent_iff`, `maze_barrier_exact`, `maze_boxCut_start_le` **[V]**; the semiring statement: a compiled copy of the proof, not in the library | cycle 10; **the observation, the statements and the certificate format are the science division's (workstream K); the tree checker and its proof are ours (workstream BK); the cut criterion for bottleneck paths is classical; not refereed; no harness test, the checkers are tested by kernel-evaluated instances** |
 | G39 | **A known part with interactions along the chain** (a nearest-neighbour Gibbs measure as reference).  Two exact reductions to products of blocks — cut interactions move into the residual at the price of a slack in the envelope at the block ends; blocks with gaps embed exactly with a reduced envelope — make the block site functions exactly sub- and super-additive, so a limit game function exists with monotone brackets; the whole chain as one super-site gives a lower bound for every algorithm at every length and accuracy; a Markov recursion bounds the game function with a slack at one end only.  For the symmetric two-state chain without a field the three numbers of the game function are above the uniform cube's at slope `u = 1` (the hinted one by 38–54 % at flip probability `0.3`, the threshold by `×1.94`), by the factor `Var(Σs_i)/n` at a fixed length to second order in the slope — its limit is the structure factor `(1−p)/p`; for any finite space with a symmetric envelope the factor is the largest variance of a Lipschitz function —, and **two of them are below the cube's at strong envelopes where the coupling is not weak (the non-adaptive one for `p ≤ 0.3` from `u = 3`, the hinted one for `p ≤ 0.2` from `u = 4`, in the cells computed)**; the threshold rises at every slope; the stratified fixed sample of §11.26 does not transfer (class-wise quantile truncations leave the class) | `softMin_expected_queries_ge`, `softMinLabel_admissible`, `renyiG_eq`, `renyiG_le_log_card` **[V]** (Theorem 11.116(c): the lower bound for every algorithm from any law on labels, for any reference measure); `cut_coupling_admissible`, `cut_coupling_partition`, `gap_embedding_admissible`, `gap_embedding_partition` **[V]** (the two reductions (a), (b) in their two-block form; the iteration over the cuts on paper); the rest of Theorem 11.116 and Proposition 11.117 **[P]**, their evaluation **[N]** with duality brackets; harness XXV.1–XXV.3 with 15 mutations | cycle 10, workstream Y; **refereed by R11 (no critical finding; what the brackets are brackets of) and reviewed and replicated by the Scientific Discovery Division (SCI-REV-0010), which found that the direction of the effect depends on the slope — our first summary said "upwards" — and proved the small-slope law that the workstream had observed numerically**; upper bounds on costs are conditional on Theorems 11.95, 11.98(d), 11.101(b) for super-sites and hold for extensive accuracies in an iterated limit; one synthetic model; prior art not searched systematically (the ingredients — transfer matrices, association, Rényi capacities of channels with memory, moment Lyapunov exponents — are classical) |
+| G40 | **The sub-exponential term of the adaptive cost without a hint.**  At every bounded accuracy the least number of evaluations of an adaptive algorithm without a hint on the cube class is between `exp(n·h − O(1))` and `exp(n·h + O(√(n ln n)))` (Theorem 11.58a): an explicit schedule of about `√(n/ln n)` nested levels chosen by certified cost, built on the epochs of the machine-checked rate.  Two kinds of level: a *slope step* runs at an accuracy `x ≫ ln n` with the closure threshold `e^{x − O(1)}`, where the closing radius is `ρ_h·n_o` and the outer sample costs `e^{n_o h}` up to the factor `n_o + 1` (Lemma 11.55(d)) — it loses `(a/h + 4)·ln n + O(1)` nats; a *drop* works at a bounded threshold and loses `e^{O(√n)}` (Lemma 11.55(c), with the leading constant `u`), one per epoch, with summable constants.  The failure probabilities handed down are uniform over the depth because the outer block's `n_o ln 2` is taken out of the dimension.  The earlier text called `n^{3/4}` the heuristic limit of the method; that was wrong | the epoch arithmetic **[V]** (`RateFull.lean`, the Scientific Discovery Division's); the hinted lower bound **[V]** (Theorem 11.25(a)) with three lines **[P]**; Lemmas 11.55(c), (d), the two steps, the induction over epochs and the choice of the depth **[P]**; harness XVI.5 (the two lemmas on exact tables, the arithmetic, the accuracies of both kinds of level, the lower bound) **[N]**; the formula and nests of up to seven levels evaluated exactly by the workstream and by the referee **[N]** | cycle 10, workstream Q (commissioned at the twenty-first checkpoint), every step re-derived by the coordinator; **refereed (`reviews/R12`: "the main claim survives, with the constants as stated", no major finding, six minor points applied)**; rests on Theorem 11.56 (paper, refereed, replicated in part by two divisions) in a regime no simulation covers; not machine-checked; **prior art not searched** (the question is internal to this report's algorithm family) |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -1624,6 +1627,14 @@ What it buys is a change of target — from the total `ln Z`, which no experimen
 to differences between macrostates — and a certificate format for it.  The duality is
 very likely known in the language of density-ratio classes or of generalised flows;
 we have not searched.
+(xxi) the sub-exponential term of the adaptive cost (G40): `exp(n·h + O(√(n ln n)))` against
+`exp(n·h − O(1))`.  A second-order statement about a first-order result that an
+independent assessment calls plausibly original (G20/G21, below); the question is
+internal to this report's family of nested algorithms, and **no prior art was searched
+for it**.  Its content is a bookkeeping theorem on top of Theorem 11.56 — which levels of
+a nested schedule lose polynomial factors and which lose `e^{O(√n)}` — with one new lemma
+about Hamming balls (the closing radius at an exponentially large threshold); it
+corrects a heuristic of ours, and it does not determine the true order.
 Each rests on textbook tools (type covering, Hölder, telescoping, linear-programming duality);
 the proofs are short.  The second referee's verdict on G1–G10 — "a coherent note, not a
 theorem-driven paper" — is reproduced in §12 together with what a publication would still
@@ -2541,7 +2552,7 @@ the pair form of Theorem 11.18a in 30 of 34.
 
 **Theorem 11.18d (the remainder of the anchored expansion as an identity; anchored
 constants; shares of every level) [V] (`AnchoredRemainder.lean`, `DownClosedRemainder.lean`,
-`ShareLevels.lean`; harness XI.19, XI.23).**
+`ShareLevels.lean`, `TermOrders.lean`; harness XI.19, XI.23, XI.24).**
 *Parts (a) and (b) are Proposition 1 of the Scientific Discovery Division's workstream P3
 and its "Consequently", part (c) its allocation lemma, part (d) in the site-penalty form
 the bracketed option of its Theorem 5 (SCI-MSG-0020); parts (a′) and (b′) are Propositions
@@ -2577,6 +2588,38 @@ used for near and for far sites.  The division built the lemma for a certificate
 inside a window, bounds outside", found that for its solvent model the many-body terms
 are too long-ranged for that (triples spanning sixteen residues still carry bounds of
 0.01–0.2 kcal/mol each), and reports it as correct and so far unused.
+(a″) *Every term in its own order* (`anchored_remainder_identity_orders`,
+`anchored_remainder_bound_orders`, `anchored_remainder_bound_hosts`, `term_orders_sharp`,
+`term_orders_sharp_host_moves` in `TermOrders.lean`; the statement is Theorem AH of the
+division's workstream P8, SCI-MSG-0027, with the hypothesis as its coordinator sharpened
+it; machine-checked here at its request P8-T1, the Lean proofs ours).  The order enters
+the identity through the base points only, and the interpolant is additive in the
+function.  So if `g = Σ_τ g_τ` and every term is given its own linear order of the sites,
+
+    g(y) − I_{m−1}g(y)  =  Σ_τ Σ_{T ⊆ S, |T| = m}  Δ_T g_τ(z^τ_T(y); y_T),
+
+`z^τ_T` the base point of the order of `τ`.  If a term has a set `H_τ` of at most `m` *hosts*
+— sites on whose states its constants depend strongly — and its order puts them last,
+then every host outside `T` is at the reference in every configuration that enters the
+mixed difference over `T` (`remainderBase_host_anchor`, `card_after_lt_of_hosts_last`: fewer
+than `m = |T|` sites follow a host, so it cannot precede all of `T`).  Hence
+`|g(y) − I_{m−1}g(y)| ≤ Σ_τ Σ_{T ⊆ S, |T| = m} c_{τ,T}` for constants that bound the mixed
+differences of `g_τ` over `T` at the base points that agree with the reference on `T` **and
+at the hosts of `τ` outside `T`**: no maximum over the states of a host outside `T`.  In
+the form without an order: for terms with at most `m` hosts each
+(`anchored_remainder_bound_hosts`; every set of sites can be put last).  **`m` hosts cannot
+be replaced by `m + 1`**: for the triple coupling on three binary sites with all three
+sites as hosts and `m = 2` the host-anchored constants are `0` and the remainder is `1`,
+and whatever the order a host outside some pair leaves the reference (harness XI.24
+tests the identity with random orders, the bound, and three false variants — the anchor
+context alone, `m + 1` hosts, hosts and non-hosts exchanged — on functions built to break
+them).  *What it is for* (the division's finding and numbers, SCI-MSG-0027 §1): a pair
+term of its solvent model moves with the side chains that host its atoms, and bounding
+each ingredient by its maximum over all host states separately lost factors of 12 to 313
+on head-to-head pairs of a charged sequence; with the maximum taken after the bound is
+assembled, and hosts kept at the anchor, its order-`m` constants for a twelve-residue
+lysine sequence fall from `689, 145, 23` to `34.0, 2.40, 0.136` `k_BT` at orders 4, 5, 6 —
+most of it from the state-wise maximum, 4 to 7 per cent from this identity.
 (b) *Anchored constants* (`anchored_remainder_bound`).  Hence
 `|g(y) − I_{m−1}g(y)| ≤ Σ_{T ⊆ S, |T| = m} c_T` as soon as `c_T` bounds the mixed differences over
 `T` at the base points that agree with the reference on `T` — not at all base points, as
@@ -2638,6 +2681,24 @@ functions are not pairwise — they contain the evaluated terms of orders `3, �
 division's certificate replaces those, and the pairs beyond a band along the chain, by
 pointwise minorants and majorants and so obtains two banded pairwise models with exact
 partition functions (its Theorem 5: its own paper proof, not checked here).
+(d′) *The anchored split of a pair table* (`anchoredSplit_row`, `anchoredSplit_col`,
+`anchoredSplit_sandwich`, `anchoredSplit_sandwich_extrema`, `anchoredSplit_exact_at_anchor`
+in `TermOrders.lean`; the division's, SCI-MSG-0027 §3, request A18-T1; two lines).  A pair
+table `P(x_i, x_j)` that a banded model cannot keep has to be replaced by one-site
+functions.  With the anchor states `x⁰_i`, `x⁰_j` put `A(x_i) = P(x_i, x⁰_j)`,
+`B(x_j) = P(x⁰_i, x_j) − P(x⁰_i, x⁰_j)` and `D = P − A − B`.  Then `D` vanishes on the anchor
+row and on the anchor column, and
+
+    A(x_i) + B(x_j) + min_{x_j} D(x_i, ·)   ≤   P(x_i, x_j)   ≤   A(x_i) + B(x_j) + max_{x_j} D(x_i, ·),
+
+**exact whenever `x_i = x⁰_i`**.  By Proposition 11.113b(a) the pair then costs the bracket
+about `P(x_i ≠ x⁰_i)·range(D)`: keep the site that moves less.  A split by column means is
+exact nowhere — the non-additive part of a far pair is then paid in the anchor state
+itself.  (The division: on its charged twelve-residue instance this takes the certified
+bracket from `0.19` to `0.057` nats, three quarters of the old bracket having been ten
+pairs of charged side chains beyond the band; an apolar sequence gains nothing.  The
+first-order-optimal split against given site marginals is a transport problem — its
+remark, not built.)
 *Not machine-checked and not checked by us:* how constants `c_T` are obtained for a given
 energy term — the division's chain rule for mixed differences, its term-by-term bound
 for a generalised-Born term with interval enclosures of derivatives, and its closed form
@@ -2688,24 +2749,46 @@ random set defeats every fixed direction with probability `ρ` per point.  The b
 valid and useless — `c` is small — so **the count `N_ball` is a statement about
 deterministic certificates**, and nothing here makes a useful certificate cheaper
 (`DEAD_ENDS.md` D60).
-(b′) *What remains true, and what is open.*  (i) **[P]** Where the class is closed under
-adding *every* function — one site with `k` states, or `m > n` — the count holds for
-randomised algorithms on every instance, even for a bracket of unspecified width: if a
-state `a` is not evaluated, the run is the same on `g` and on `g` with a needle of depth
-`D` at `a`, for which the returned bracket is invalid once `D` exceeds its upper end; so
-`P_g(a` is not evaluated`) ≤ δ` for every `a` and every `g`, and `E|Q(g)| ≥ (1 − δ)·|X|`.  It is
-attained by skipping one uniformly random state with probability `kδ` (so `kδ ≤ 1`),
-provided the bracket returned after a skip is wrong for at most one skipped state — the
-failure probability of that algorithm is `δ` times the number of states whose omission
-makes the returned bracket wrong.  For the minimum any positive width does it.  For `ln Z`
-the bracket `[ln Σ_{x≠a}e^{−g(x)}, the same + W]` needs `W ≥ ln 2`: it is wrong iff `a` carries
-more than the fraction `1 − e^{−W}` of `Z`, which only one state can do when `W ≥ ln 2`; with two
-equally deep states and a smaller width both skips fail and the failure probability is
-`2δ` (the Scientific Discovery Division's remark on a first reading, SCI-RES-0016 §3 — a
-condition on the attaining algorithm, not on the count, since the task leaves the width
-free; harness XI.22(d)).  The saving of (b) on more than one site therefore comes from evaluations
-outside the ball alone: a function of order below `m` cannot hide from a random point, a
-needle can.  (ii) **[C]** For a bracket of *prescribed* width we conjecture
+(b′) *What remains true, and what is open.*  (i) **[P]** (**reviewed by the Scientific
+Discovery Division, SCI-REV-0015: correct; the weaker hypothesis, the conditions on
+"attained" and the last paragraph are its findings m1–m3.**)  Where, for every `g ∈ 𝒢`
+and every state `a`, the class contains `g − D·1_a` for arbitrarily large `D` — in
+particular where it is closed under adding *every* function, `m > n` (one site with `k`
+states and `m ≥ 2` is the case `n = 1`); a box class without a floor is another such class
+— the count holds for randomised algorithms on every instance, even for a bracket of
+unspecified width: if a state `a` is not evaluated, the run is the same on `g` and on `g`
+with a needle of depth `D` at `a`, for which the returned bracket is invalid once `D`
+exceeds its upper end (this uses that the returned upper end of the bracket of `ln Z`, or
+the returned lower bound of the minimum, is finite; a run that returns no finite bound
+counts as a failure); so `P_g(a` is not evaluated`) ≤ δ` for every `a` and every `g`, and
+`E|Q(g)| ≥ (1 − δ)·|X|`, `|Q(g)|` the number of distinct states evaluated.  The bound is
+attained on every instance, for every width and every `δ`, by the trivial mixture "with
+probability `δ` evaluate nothing, otherwise everything".  For `kδ ≤ 1` it is also attained
+by skipping one uniformly random state with probability `kδ`, provided the bracket
+returned after a skip is wrong for at most one skipped state — the failure probability
+of that algorithm is `δ` times the number of states whose omission makes the returned
+bracket wrong.  For the minimum, the lower bound "least evaluated value minus `w`" does
+it with any slack `w ≥ 0`.  For `ln Z` the bracket `[ln Σ_{x≠a}e^{−g(x)}, the same + W]` needs
+`W ≥ ln 2`: it is wrong iff `a` carries more than the fraction `1 − e^{−W}` of `Z`, which at most
+`min(k, ⌈1/(1 − e^{−W})⌉ − 1)` states can do — one when `W ≥ ln 2`; with two equally deep
+states and a smaller width both skips fail and the failure probability is `2δ`, and with
+`k` equal states and `W < ln(k/(k − 1))` it is `kδ` (the division's remark on a first reading,
+SCI-RES-0016 §3, and the general count of its review — conditions on the attaining
+algorithm, not on the count, since the task leaves the width free; harness XI.22(d)).
+*With needles of finitely many depths* (the division's addition A1, re-derived): if the
+class contains, with `g`, needles at `a` of `L` depths such that no output is valid for two
+of the `L + 1` instances, then `P_g(a` is not evaluated`) ≤ δ(L + 1)/L` — on that event the run
+and its output are the same on all `L + 1` instances, the output is valid for at most one
+of them and invalid with probability at most `δ` on each.
+*The saving of (b) on more than one site comes from evaluations outside the ball* — a
+consequence of the proof of (i), not of its statement (on several sites with `m ≤ n` the
+class does not contain the needles).  An algorithm that evaluates only inside a fixed
+unisolvent set `B` — the ball, say — has `P_g(a` is not evaluated`) ≤ δ` for every `a ∈ B`,
+hence `E|Q(g)| ≥ (1 − δ)·N_ball`: let `h_a` be the function of order below `m` that is `1` at `a`
+and `0` on the rest of `B` (it exists because `B` is unisolvent); if `a` is not evaluated the
+run is the same on `g` and on `g + t·h_a`, and `min(E₀ + g + t·h_a) → −∞` as `t → −∞`.  A function
+of order below `m` cannot hide from a random point; inside a unisolvent set it can, as a
+needle does.  (ii) **[C]** For a bracket of *prescribed* width we conjecture
 `sup_{g∈𝒢} E|Q(g)| ≥ (1 − δ)·N_ball − o(1)` (the division's formulation).  A Gaussian prior
 does not prove it: for one site with two states and independent Gaussian values, stopping
 after one evaluation whenever its value is so low that the other state is higher with
@@ -2790,16 +2873,99 @@ order `m` reaches `ε` when `2p^kΓ_m ≲ ε`".
 `P⁺_λ ∝ P·e^{pen_λ}` (for `L`: under `P·e^{−pen_λ}`).  Hence an allocation minimises `U` iff every
 constant sits on those `k`-subsets of its `T` that are least often changed under `P⁺_λ` — on
 an exchangeable instance: equal shares, the choice of Theorem 11.18a and of the division
-— while **the minimum of `L` is attained at a vertex: every constant charged to one
-`k`-subset of its `T`.**  The two ends want different allocations, and each may have its
-own.
+— while **the minimum of `L` is attained at a vertex — at an ordering vertex: every
+constant charged to the first `k`-subset of its `T` in one linear order of the
+`k`-subsets** (`pen_λ` depends on `λ` only through the charges `μ_K = Σ_{T ⊇ K} λ_{T,K}`; the
+achievable charge vectors form a sum of simplices — the base polytope of a polymatroid —
+whose vertices are given by the linear orders; and `L` is concave in `μ`.  The precision
+"an ordering vertex" is the Scientific Discovery Division's, review SCI-REV-0015, m6).
+Not every vertex is a local minimum — up to ties a vertex is one iff every constant sits
+on the `k`-subset of its `T` that is least often changed under the tilted law `P·e^{−pen}` of
+the vertex itself — and there can be many local minima (the division counted between 1
+and 60 among the 59 049 vertices of small instances).  For independent sites and
+exchangeable constants the order "most frozen first" is the global minimiser of `L`; in
+general finding the best order is a search — it contains a minimum-weight hitting-set
+problem (the division's two statements, not re-derived by us).  The two ends want
+different allocations, and each may have its own.
 (c) *First order.*  To first order in the constants both ends are
 `Σ_T Σ_K λ_{T,K}·P(K ⊆ S)`: **charge every constant to its least probable sub-pattern.**  For
 independent sites and `k = 1` that is the most frozen site of `T`, and the penalties are
-differences of one function on nested sets of sites: with the sites ordered by `p_i`,
-`γ_i = Γ(R_i) − Γ(R_i ∖ {i})`, `R_i` the sites at least as mobile as `i` and
-`Γ(R) = Σ_{T ⊆ R} c_T` — no subset is enumerated wherever `Γ(R)` has a closed form (the
-division's Lemma B gives `Γ` with sites excluded).
+differences of one function on nested sets of sites: with the sites in a linear order
+by `p_i` (ties broken in any fixed way) and `R_i` consisting of `i` and the sites after it
+— the sites at least as mobile — `γ_i = Γ(R_i) − Γ(R_i ∖ {i})`, `Γ(R) = Σ_{T ⊆ R} c_T` — no subset
+is enumerated wherever `Γ(R)` has a closed form (the division's Lemma B gives `Γ` with
+sites excluded).  (Read with ties as `R_i = {j : p_j ≥ p_i}`, the formula charges a shared
+constant to every tied site: a valid cover, not an allocation — in the first instance
+of the numbers below `γ = (1, 1, 1, 1, 0, 0)`, sum `4` against `Γ = 2`.  Where sites are tied
+the first-order optimum is not unique and the two ends already disagree: the upper end
+is least when the tied sites share a constant — `0.0259` against the vertex's `0.0298` in
+that instance — the lower end when one of them takes it.  The division's review
+SCI-REV-0015, m4.)
+(c′) *The site allocations are the core of a convex game, and the rule of (c) is its
+greedy vertex* (the Scientific Discovery Division's, SCI-RES-0017 §3 (iii); the
+game-theoretic facts are classical — Shapley 1971 on the cores of convex games, Edmonds
+1970 on the greedy rule — and are cited from memory by both divisions, opened by
+neither).  `Γ(R) = Σ_{T ⊆ R} c_T` is supermodular; the level-one allocations
+`γ_i = Σ_{T ∋ i} λ_{T,i}` are exactly the vectors with `Σ_i γ_i = Γ` and `Σ_{i∈R} γ_i ≥ Γ(R)` for
+every `R` — the core of the game `Γ` — whose vertices are the marginal vectors of the
+orderings, the formula of (c); equal shares are the Shapley value.  **Among all vectors
+that cover the nested sets `R_j` of an ordering by nondecreasing `p`, the marginal vector
+has the least first-order cost `Σ_i p_i γ_i`** — **[V]** `ScienceA17.greedy_optimal` (Abel
+summation; written and machine-checked by the division, adopted unchanged as
+`proofs/Frontiers/CoreGreedy.lean`; it uses the covering property on the nested sets
+only).  Since `U` is convex in the penalties with the tilted site marginals as gradient,
+the best upper end over the core is a convex programme whose linear oracle is the rule
+of (c) applied to the tilted marginals (Frank–Wolfe: every step is a sort and `n + 1`
+closed-form sums, so it runs beyond enumeration, and the duality gap bounds what any
+site allocation can still gain), and the best lower end is an ordering.  The
+floating-point allowance of the evaluated terms is a game of the same kind and is
+allocated by the same rule (the division's §3 (v)).
+*The pair level* (an answer to its question A17-T3; harness XI.23).  For a product law
+the least probable pair of `T` is its two most frozen sites, and the pair penalties of
+that vertex are second differences of the same function on sets of sites: with the sites
+in the order of `p`, `i` before `j`, and `A_j` the sites after `j`,
+`μ_{ij} = Γ(A_j ∪ {i, j}) − Γ(A_j ∪ {i}) − Γ(A_j ∪ {j}) + Γ(A_j)` — four closed-form sums per pair, no
+subset enumerated.  For a law that is not a product — the tilted law of a pair model is
+not — the linear oracle is the least probable pair of `T` in an arbitrary order of the
+pairs, and the penalty of a pair is then a sum over the `m`-sets that contain it and are
+independent in the graph of the earlier pairs: no closed form in general.  A vertex
+induced by an order of the *sites* is always an allocation with the closed form above, so
+a step that uses it keeps every bracket valid, and gives up only the duality gap.
+(c″) *Beyond first order: the range of validity of "the most frozen site"* (the
+division's review SCI-REV-0015, m5, and its measurement SCI-RES-0017 §3; the formulas
+re-derived here).  For independent sites and level 1, with `f_i = ln((1 − p_i)/p_i)` the
+free-energy cost of changing site `i` and `sp(z) = ln(1 + e^z)`:
+
+    U = Σ_i [ sp(γ_i − f_i) − sp(−f_i) ],          L = Σ_i [ sp(−f_i) − sp(−f_i − γ_i) ] :
+
+**the upper end sees the net cost `f_i − γ_i`, the lower end `f_i + γ_i`.**  A site with
+penalty `γ_i` costs between `max(p_iγ_i, γ_i − ln(1/p_i))` and `p_i(e^{γ_i} − 1)` at the upper end —
+beyond `ln(1/p_i)` a penalty is paid nat for nat — and at most `min(p_iγ_i, −ln(1 − p_i))` at the
+lower end.  By (b), the vertex of (c) minimises `U` iff in every `T` the charged site still
+has the largest `f_i − γ_i` of its `T`; the minimiser of `U` equalises `f − γ` over the sites
+that share constants.  There is no bound of `U` at the vertex by a multiple of `U` at equal
+shares (a tied pair with one constant `2 ln(1/p)`: about `ln(1/p)` against `2 ln 2`), while
+at the lower end every allocation of level `k` is within the factor `C(m, k)` of equal
+shares, for any law (`pen_λ ≤ C(m, k)·pen_equal` pointwise, and
+`E e^{−C·pen} ≥ (E e^{−pen})^C`).  So **the rule is safe for the lower end and, for the upper
+end, only while each charged site's penalty stays below its cost.**  On the division's
+enumerated twelve-residue leucine helix (its numbers) the rule brings the lower end from
+`0.5` nats to `2·10⁻⁵` at every order from 4 on and, at order 5, raises the upper end from
+`3.2` nats to `8.6` — `20.2 k_BT` charged to a site whose cheapest change costs `14.1` — where
+the convex optimum over the core gives `0.0075`.
+*A bound that no site allocation can beat* (the division's, SCI-RES-0017 §3 (iv);
+re-derived).  For any law of the changed set with site marginals `p_i`, and any site
+penalties `γ ≥ 0`: `e^{Σ_{i∈S} γ_i} = Π_{i∈S}(1 + (e^{γ_i} − 1)) ≥ 1 + Σ_{i∈S}(e^{γ_i} − 1)`, so
+`U ≥ ln(1 + Σ_i p_i(e^{γ_i} − 1))`; a covering vector has `Σ_i γ_i ≥ Γ`; and the minimum of the
+right-hand side under that constraint is water-filling, `γ_i = ln(λ/p_i)⁺` with `λ` fixed by
+`Σ_i ln(λ/p_i)⁺ = Γ` — each site is charged what its rarity can pay:
+
+    U(γ)  ≥  ln( 1 + Σ_i (λ − p_i)⁺ )          for every covering vector of site penalties.
+
+The site level can work only if `Γ` fits under the depths `ln(1/p_i)`; where it does, the
+water-filling vector is the optimum to first order (it need not cover; on the division's
+instance it does, and the bound, the closed-form vector and 2 000 Frank–Wolfe steps give
+`0.00742`, `0.00744`, `0.00752` nats at order 5; harness XI.23).
 *Numbers* (harness XI.23; exact enumeration; six sites, triples, equal constants).  Four
 nearly frozen sites (`p = 0.01`) and two mobile ones (`p = 0.3`), constants `0.1`: equal site
 shares give `(U, L) = (0.240, 0.189)`; charging every triple to its most frozen site
@@ -4865,9 +5031,12 @@ At `u = 1`: `κ = 0.0427`, `c₁ = 0.712 = 6.4a`, `c₂ = 6.35`.  So the exponen
 a rate, not the rate — numerically `(τ_k − h)/a ≈ 0.65/k²` (§11.19, remark (1)) —, and a one-sided
 evaluation of the recursion of the cube on a grid, an upper bound of every `T_k`, stays below it
 at all `40` levels computed, for `u = ½, 1, 2` (`experiments/coordinator_checks/nested_review_R6/t4_rate.py`,
-which has the proof in full).  **It does not make the `o(n)` of Theorems 11.54 and 11.58
-explicit:** for that the sub-exponential factors of a family with `k` nested levels would have
-to be bounded uniformly in `k`, and they are not (§11.19, remark (2)).
+which has the proof in full).  By itself the rate does not make the `o(n)` of Theorems 11.54
+and 11.58 explicit: for that the sub-exponential factors of a family with `k` nested levels
+have to be bounded uniformly in `k`.  The first version of this remark said that they are
+not.  **For an explicit schedule built on the epochs of this proof they are, and the
+`o(n)` of Theorem 11.58 is `O(√(n ln n))` — Theorem 11.58a.**  (At extensive accuracies the
+term of Theorem 11.54 is still unquantified.)
 
 **Theorem 11.54 (the adaptive exponent without a hint) [P: Theorems 11.25(a), 11.44, 11.52, 11.53].**
 For every `u > 0`, `0 < ε₁ < ε*` and `0 < δ < ½`, the least number of evaluations with which a
@@ -5066,8 +5235,38 @@ coordinator].**  Let `m ≥ 1`, `0 < η ≤ ½`, `m₀ = ⌈u^{-1} ln(1/c_η)⌉
 `min_{r≥1} Γ̃(r) = 4e^u(e^u−1)(1−o(1))` (numerical; slightly below the limit at finite `m`, and
 `Γ̃(0) = e^u − 1`), and `Γ̃(⌊p_u m⌋) ≍ √m` (numerical; `≈ 2.6√m` at `u = 1`).
 (b) For `0 ≤ r ≤ p_u m`:  `Γ″(r) ≤ 2e^{u(m₀+2)}·P(Bin(m, p_u) ≤ r) ≤ 2e^{u(m₀+2)}·exp(−2(p_u m − r)²/m)`.
-(c) Hence for every constant `θ > 0`: `Γ″(r) ≤ θ` for all `r ≤ p_u m − √((m/2)ln(2e^{u(m₀+2)}/θ))`, and
-the corresponding ball has `2^{-m}|B(m,r)| ≥ exp(−m·a − O(√m))`.
+(c) Hence for every `0 < θ ≤ 2e^{u(m₀+2)}`: `Γ″(r) ≤ θ` for all `0 ≤ r ≤ p_u m − s`,
+`s = √((m/2)·ℓ)`, `ℓ = ln(2e^{u(m₀+2)}/θ)` (for larger `θ` read `s = 0`); and if `s ≤ p_u m/2 − 1` — true
+for `m ≥ ((√(ℓ/2) + √(ℓ/2 + 2p_u))/p_u)²` — the ball of radius `⌊p_u m − s⌋` has
+
+    ln( 2^m/|B(m, ⌊p_u m − s⌋)| )   ≤   m·a + u·(1 + s) + (4/(3p_u))·(ℓ + 2/m) + ln(m+1).
+
+(The first version of (c) had neither hypothesis and "`exp(−m·a − O(√m))`"; the explicit
+form, with the leading constant `u` where Lemma K.4(d) has `u + ln 4`, is Lemma Q3 of
+workstream Q: Taylor's formula for `KL(·‖½)` at `p_u`, whose slope there is `−u`.)  The `√m` is
+really there: on exact tables the closing radius of Theorem 11.56 at a bounded threshold
+lies between `0.5s` and `0.7s` below `p_u m` in five of the six cases of harness XVI.5.
+(d) **At an extensive threshold the loss is a polynomial factor** (workstream Q, Lemma Q4;
+re-derived by the coordinator; referee R12; harness XVI.5).  For `e ≥ 0` let `ρ_e ∈ [p_u, ½]` be
+the solution of `KL(ρ‖p_u) = min(e, ε*)`, so that `θ_na(e) = KL(ρ_e‖½)`.  Then
+
+    Γ̃(r)  ≤  (m+1)·e^{2u + e^u}·e^{m·e}          for 0 ≤ r ≤ min(m, ρ_e m + 1),
+
+and therefore, for `θ ≥ c_η^{-1}·(m+1)·e^{2u + e^u + m·e}` and any `ν₁ ≥ 1`, the radius `r†` of Theorem
+11.56 on `Q_m` and its ball satisfy
+
+    r† ≥ min{m − 1, ⌊ρ_e m⌋ + 1},          ln(1/π†)  ≤  m·θ_na(e) + ln(m+1).
+
+(*Proof.*  `E_r ≤ e^{u(r+1)}(1+e^{-u})^m` and `|B(m, r−1)| ≥ C(m, r−1) ≥ (m+1)^{-1}e^{mH((r−1)/m)}` give, by
+(11.18.1), `Γ̃(r) ≤ (m+1)·e^{2u}·exp(m·KL((r−1)/m ‖ p_u))`.  For `(r−1)/m` between `p_u` and `ρ_e` the
+divergence is at most `e`; just below `p_u`, within `(1−p_u)/m`, it is at most `e^u/m²` by the
+`χ²` bound; and for `r ≤ p_u(m+1)`, (a) applies.  So `Γ̃(r′) ≤ c_ηθ` for every `r′` up to the stated
+radius: [P] holds through its first entry and [N] because `(1−η)ν₀ ≥ ν₁ ≥ 1 ≥ c_η`.  The ball:
+`C(m, r) ≥ (m+1)^{-1}e^{mH(ρ_e)}` for `ρ_e m < r ≤ m/2`.  ∎)  At `e = h`: `θ_na(h) = h`, because
+`KL(ρ_h‖p_u) = KL(ρ_h‖½) = h` at `ρ_h = Λ₁/u`.  The lemma is sharp at `m = 1` and has a slack of
+`5` to `18` nats at `m = 64 000` (the workstream's tables).  **This is the fact that separates
+a level run at an extensive accuracy from a bounded level: `e^{O(ln m)}` against
+`e^{O(√m)}`.**
 *Proof idea.*  (a) Ratios of consecutive binomial coefficients are at most `e^{-u}` up to
 `p_u(m+1)`, so `E_r ≤ (r+1)e^uC(m,r)`.  (b) `C(m,j)e^{-uj} = (1+e^{-u})^m P(Bin(m,p_u) = j)` turns `E_r` into a
 lower binomial tail and `T_m(k)` into an upper one, which is at least `½` for `k ≤ p_u m` (median of
@@ -5104,10 +5303,16 @@ probability `δ`,
 where `J = ⌈(2un + b + n_o ln 2)/λ⌉`, `K = O(η^{-2} ln(nL/δ))`, `cnt(x) = max{K, 2(1+η)²(1−η)^{-1}e^λ·ν·e^x}`,
 `M̄ = 2(1+η)e^λν₀·K/((1−η)π†)`, `π† = 2^{-n_o}|B(n_o, r†)|`, and `r†` is the largest radius `≤ n_o − 1` such that
 `Γ̃(r′) ≤ θ(1−η)ν₀` and `min{Γ̃(r′)/c_η, Γ″(r′)} ≤ θ` for all `r′ ≤ r†`.  (The cost bound holds always:
-before every inner call the algorithm checks that the call does not take the number of
-queries beyond `C_max`, and aborts with the trivial bracket otherwise; a pair with `L > U`,
-which can only arise off the good event, is replaced by the trivial bracket as well —
-referee R8, m1.)  On an event of probability
+before every query — the one query that gives a new outer point its trivial bracket, and
+every inner call, counted with its cost bound `C_l` — the algorithm checks that it does
+not take the number of queries beyond `C_max`, and aborts with the trivial bracket
+otherwise; a pair with `L > U`, which can only arise off the good event, is replaced by
+the trivial bracket as well — referee R8, m1.  The previous wording tested before inner
+calls only, which proves `C_max + M̄`, not `C_max`: the point queries of a doubling after the
+last admitted inner call were untested.  The rule for every query, which is the rule of
+Theorem 11.52, is the Scientific Discovery Division's finding (SCI-REV-0016, m1).  On the
+good event no test fails, so no number changes; it matters where a run is charged exactly
+`C_max` as an inner procedure — remark (1b).)  On an event of probability
 `≥ 1 − δ`: no abort; every certificate is true; and for every level reached and every `x > 0`
 the count below holds.  *For every run, on or off that event* (the referee's observation):
 every level that is left has closing radius above `r†`, every sample has at most `M̄` points,
@@ -5275,6 +5480,193 @@ the base family (`t₀ ≤ a`) and apply Proposition 11.57(b) with two rungs `m`
 so `t_m ≤ η + max{h + η, (1−φ)^m a}` (`two_rung_bound` **[V]**), which is at most `h + 2η` for
 `m ≥ ln(a/h)/φ`.  The midpoint of the logarithms of a bracket of ratio `e^ε` is `(ε/2, δ)`-correct.  ∎
 
+**Theorem 11.58a (an explicit sub-exponential term: `n·h + O(√(n ln n))`) [P: workstream Q,
+`docs/workstreams/Q_REPORT.md`, Theorems Q8 and Q9 — every step re-derived by the
+coordinator; **refereed (R12, `docs/reviews/R12_referee_report.md`): "the main claim survives,
+with the constants as stated", no major finding, every new statement re-derived; with
+independent code about 220 million node checks of the nested design, 523 000 one-level
+checks with worst-case inner families and 0.9 million checks in exact arithmetic,
+without a violation; six minor points — applied here**; rests on Theorem 11.56 with its abort test before every query (paper, refereed R8,
+reviewed by the Scientific Discovery Division), Lemma 11.55, Proposition 11.57(a) and the
+epoch arithmetic of the rate (**V**, `RateFull.lean`); harness XVI.5 for the two lemmas, the
+arithmetic and the lower bound; not machine-checked].**
+Fix `u > 0`.  Let `N(n; ε, δ)` be the least `C` such that some randomised adaptive algorithm
+without a hint makes at most `C` evaluations in every run at every member of `L_u(Q_n)` and
+is `(ε/2, δ)`-correct on the class.  Let `d_0 = h/(a−h)`, `J_m = ⌈d_m⌉`,
+`d_{m+1} = d_m(J_m a + h)/(J_m a − h d_m)`, `k_0 = 1`, `k_{m+1} = k_m + J_m + 1` be the epoch sequences of the
+rate, and `B_m = h(1 + 1/d_m)`, so that `B_0 = a`, `B_{m+1} = B_m·J_m a/(J_m a + h)` and
+`B_m − h ≤ c₁/(k_m + c₂)`.
+(a) *Explicit, for every `n`.*  For every `n ≥ 1`, `ε > 0`, `0 < δ < 1` and every number of
+epochs `M ≥ 0` there is an explicit design with `k_M` nested levels of Algorithm 2L⁺ over
+the two-sample bracket — every parameter a closed formula in `(u, n, ε, δ, M)`, every rung
+served by the admissible procedure with the smaller certified bound (remark (1b)) — with
+
+    ln N(n; ε, δ)  ≤  n·B_M + 𝓔_M(n, ε, δ),
+    𝓔_M  ≤  C₁(u, ε)·√n  +  (k_M − 1 − M)·[ (a/h + 4)·ln n + O(1) ]  +  M·O(ln n + ln(1/ε) + ln M)  +  O(ln n + ln(1/ε)),
+
+the second line as long as `(k_M − 1)·O(ln n) ≤ n` (the explicit `𝓔_M`, a sum of one term per
+level, and every `O`: the workstream's (5.2) and Proposition Q9a).  `C₁` is a convergent
+series that does not depend on the number of levels — about `5.5` at `u = 1`, `ε = 1`.
+(b) *The order.*  For every fixed `ε > 0` and `0 < δ < 1`,
+
+    limsup_{n→∞} ( ln N(n; ε, δ) − n·h ) / √(n ln n)   ≤   C_*(u) = 2·√( (1 + r̄)·c₁·(a/h + 4) ),     r̄ = (2a−h)/(a−h)
+
+(`C_* = 4.65, 8.64, 13.5` at `u = ½, 1, 2`), and there is `C(u, ε, δ)` with
+`ln N(n; ε, δ) ≤ n·h + C·√(n ln n)` for all `n ≥ 2`; the same holds for accuracies `ε_n ≥ n^{−A}`, with
+constants that depend on `A`.  `C` is not `C_*`: `C_*` bounds the limsup only (the referee:
+over `2 ≤ n ≤ 10^{12}` the ratio `(bound − nh)/√(n ln n)` is at most `3.8` at `u = 1`, `ε = 1`,
+`δ = 0.05`, but `32` at `u = 4`, where the error terms carry a factor of order `e^{2u}` and the
+formula beats enumeration only from `n ≈ 5.6·10⁴`; and beyond `10^{12}` the ratio keeps falling
+towards about `2√((a−h)(a/h + 4))`, a fifth of `C_*` — numerical).
+(c) *Against the lower bound.*  For `0 < δ < ½`, `ε > 0` and every `n` with `k*(ε) ≤ n/2`,
+
+    ln N(n; ε, δ)  ≥  n·h − max{1, (ε + ln 2)/u}·ln((1−ρ_h)/ρ_h) − ln(1/(1 − 2δ)),        ρ_h = Λ₁/u,
+
+and with `(ε + ln 2)/u` in place of the maximum whenever `(ρ_h − p_u)·n ≥ 1 − (ε + ln 2)/u`; so
+that for fixed `ε` and `δ < ½`
+
+    n·h − O(1)   ≤   ln N(n; ε, δ)   ≤   n·h + O(√(n ln n)).
+
+(The lower bound is Theorem 11.25(a) — machine-checked: `(1 − 2δ)·2ⁿ/|B(n, k*)|` distinct
+evaluations in expectation at the zero function — and three lines on paper, the
+referee's (its finding m1; re-derived): for `k ≥ p_u n` the binomial median gives
+`2^{-n}E_k(n) > ½e^{u(k+1) − nΛ₁} − 1`, so the dip of radius `k` changes `ln Z` by more than `ε` as
+soon as `k ≥ p_u n` and `k + 1 ≥ ρ_h n + (ε + ln 2)/u`; the least such `k` exceeds `ρ_h n` by less
+than `max{1, (ε + ln 2)/u}` — by less than `(ε + ln 2)/u` if that radius is already at least
+`p_u n` — and `k*` is at most that; then `|B(n, k)| ≤ e^{nH(k/n)}` and the convexity of `KL(·‖½)`,
+whose slope at `ρ_h` is `−ln((1−ρ_h)/ρ_h)`.  Without the maximum the bound is confirmed
+numerically wherever it was tested, the small sizes at which the proviso fails included
+(the referee: 19 839 cases with `n ≤ 200`; harness XVI.5(f)).  The first version of this
+theorem quoted "`n·h − O(ln n)`" for every `δ < 1` from Theorem 11.25(a),(d), which states
+neither.  Numerically the hinted lower bound is `n·h + ½ ln n − O(1)`.  The upper bound
+holds for every `0 < δ < 1`.)
+
+*Why `√(n ln n)` and not `n^{3/4}`.*  The earlier heuristic (remark (2), first version)
+counted `≈ 1/η` bounded levels, each losing `e^{O(√n)}`.  In the recursion whose rate is
+proved there are two kinds of level, and only one of them is a bounded level.
+A **slope step** (step (i) of the proof of the rate: outer fraction `g/h` at the accuracy
+rate `g`) is run at an accuracy `x ≫ ln n`, on an outer block of only `≈ x/h` sites, with the
+closure threshold `θ = e^{x − O(1)}`; by Lemma 11.55(d) its outer sample costs `e^{n_o h}` up to
+the factor `n_o + 1`, and the whole step loses a *polynomial* factor,
+`(a/h + 4)·ln n + O(1)` nats.  A **drop** (step (ii): a fixed outer fraction) works at a
+bounded threshold and loses `e^{O(√n_o)}` by Lemma 11.55(c) — but there is one drop per
+epoch, the number of epochs up to level `k` is `O(ln k)`, and the outer fractions of the
+drops decrease geometrically, so all the `√`-losses together are `C₁√n`.  Hence `k` levels
+lose `C₁√n + O(k·ln n)`, uniformly in `k`, and `n·c₁/k + k·ln n` is least at `k ≈ √(n/ln n)`.
+
+*Proof* (the workstream's report has every constant; here the statements that carry it).
+Call a family of bracket procedures with certified cost bounds `e^{b(d, x, δ)}` (dimension `d`,
+accuracy `x`, failure probability `δ`) *of type* `(B, σ, R; E)` if for all `d`, all admissible
+`x`, all `δ` and all `Λ ≥ ln(1/δ) + d·ln 2`
+
+    b(d, x, δ)  ≤  d·B − σ·min(x, R·d) + E(d, x; Λ),
+
+`E` nondecreasing in `d` and `Λ` and nonincreasing in `x`: a piecewise-linear majorant, as in
+the proof of the rate, with an error term.  By Proposition 11.57(a) and Lemma 11.55(c) the
+base family is of type `(a, 0, ∞; E_base)` with `E_base = u√((d/2)·ℓ⁰_x) + O(ln d + ln(1 + Λ))`,
+`ℓ⁰_x ≤ ln(4/x) + 3u + ½` for `x ≤ 1`.
+*1. One level, exactly* (Proposition Q1).  With `Λ_lev = ln 2M̄ = P_M + ln(1/π†)` and
+`ln((J+1)·cnt(x)) = x + P_cnt`, where `P_M ≤ P_cnt` are the logarithms of the polynomial factors
+`J`, `ν₀`, `K` of Theorem 11.56:  `ln C_max ≤ ln(L+2) + max{Λ_lev, max_l [min(Λ_lev, x_{l−1} + P_cnt) + ln C_l]}`.
+*2. The failure probability handed down* (Lemma Q2):
+`ln(1/δ′) + n_i·ln 2 ≤ [ln(1/δ) + n·ln 2] + ln(4L) + P_M`.  The `n_o·ln 2` that the outer sample adds
+to `ln(1/δ′)` is taken out of the dimension, so the quantity `ln(1/δ) + (dimension)·ln 2` grows
+by `O(ln n)` per level and by nothing else; every `K` in a nest of any depth is
+`O(n + k·ln n + ln(1/δ))`.
+*3. The slope step* (Proposition Q6).  Let a family be of type `(B, σ, R; E)` with `B ≥ h`,
+`0 ≤ σ ≤ 1`, and `R ≤ h` or `R = ∞`, `σ = 0`.  For the accuracy `x̂ = min(x, R′n)`, `R′ = Rh/(h + R)`
+(`h` if `R = ∞`), take Algorithm 2L⁺ with `n_o = ⌊(x̂ − 1 − c_log(n))/h⌋`,
+`c_log(n) = ln(6(n+1)) + 2u + e^u`, `λ = 1`, `η = ½`, `η′ = 1`, `ν₁ = 1`, `b = 1`,
+`θ = e^{x̂−1} − (3e+1) − (2p_u)^n/e` and the ladder `2un_i > ⌈x̂⌉ > ⌈x̂⌉ − 1 > … > 1` (capped at
+`⌈2un_i⌉ − 1`), served by the family; and pass the accuracy through if `x̂ < 1 + c_log(n) + h`.
+Its certified accuracy is exactly `x̂`; `θ ≥ e^{x̂−1}/2` meets the threshold of Lemma 11.55(d)
+at `e = h`, so `Λ_lev ≤ x̂ − 1 + P_M`; `R·n_i ≥ x̂`, so every rung is in the range of the
+majorant; each rung costs its gap `1`; and the result is of type
+`(B, σ + B/h − 1, R′; E′)` with `E′ = E + (1 + c_log(n) + h)·B/h + 1 + P_cnt + ln(n+3)`
+`= E + (B/h + 4)·ln n + O(1)` for `Λ = O(n)`, where `E` is taken at the accuracy `min(x, 1)` and
+with `Λ` raised by `ln(4L) + P_M = O(ln n)` (step 2): the outer block is short by
+`(1 + c_log)/h` sites, which buys the polynomial slack of the lemma.
+*4. The drop* (Proposition Q7).  Let a family be of type `(B, 1, R; E)` with `0 < R ≤ h ≤ B`.
+With the outer fraction `φ = R/(a + R)` — at which the outer sample `e^{φna}` equals the
+largest accuracy `R·n_i` of slope one — `λ = η = η′ = θ = c ≤ ⅓`, `ν₁ = 2e^un_o/c`, a ladder of step
+one below `⌈R·n_i⌉` and the tolerance `β = α − w(c)`, `w(c) = ln(e^c(1+c)/(1−c) + 2c) + c ≤ 6.25c`,
+every rung has the same exponent `n_i·B`, the accuracy is at most `α`, and the result is
+of type `(B·a/(a + R), 0, ∞; E′)` with
+`E′ = E + u√(φn·ℓ_c/2)·B′/a + O(ln n + ln(1/c))`, `ℓ_c = ln 2 + 3u + 2.25c + ln(1/c)` (`E` at the
+accuracy `β`, `Λ` raised as in step 3): the
+`√`-overhead of Lemma 11.55(c), moved from the cost into the dimension by a shift of the
+outer block.
+*5. The epochs* (Theorem Q8).  In epoch `m`, `J_m` slope steps raise the slope from `0` to
+`J_m/d_m ≥ 1` on the range `h/J_m` (each adds `B_m/h − 1 = 1/d_m`), and one drop with `R = h/J_m`
+turns `B_m` into `B_m·J_m a/(J_m a + h) = B_{m+1}`.  The accuracies: the drop of epoch `m` takes
+`w(c_m)` with `c_m = ε̂/(13(m+1)(m+2))`, `ε̂ = min(ε, 1)`, so that the base family is called at an
+accuracy above `0.519·ε̂` whatever `M` (the proof of Theorem 11.58 halves the accuracy at
+every bounded level).  Unrolling the error terms gives (a): `k_M − 1 − M` slope steps, `M`
+drops whose `√`-terms are `u√(φ_m n ℓ_{c_m}/2)·B_{m+1}/a` with `φ_m = h/(J_m a + h) ≤ r̄^{-1}(1+κ)^{-m}` — a
+convergent series — and the base.
+*6. The number of levels* (Theorem Q9).  `k_{m+1} < (1 + r̄)k_m`; with `ℓ_S = (a/h + 4) ln n + O(1)`,
+`k† = √((1 + r̄)c₁n/ℓ_S)` and `M` the last epoch with `k_M ≤ k†`:
+`n(B_M − h) + k_M ℓ_S ≤ 2√((1 + r̄)c₁nℓ_S)`, and `M = O(ln n)`.  For `n` below the threshold of
+the asymptotics, `N ≤ 2ⁿ`.  ∎
+
+*Numbers.*  Evaluated from the formula of (a) at `u = 1`, `ε = 1`, `δ = 0.05` and the best `M`
+(the workstream's table, formula evaluation only; `h = 0.2626a`): the bound is `0.71·na` at
+`n = 6.4·10⁴` (13 levels), `0.37·na` at `10⁶` (43 levels), `0.273·na` at `10⁸` and `0.2637·na` at
+`10^{10}`; it is below the non-adaptive exponent `n·a` from `n ≈ 2.1·10⁴` on (the referee's scan;
+the workstream says `3·10⁴`);
+`(bound − nh)/√(n ln n)` lies between `2.4` and `3.8` for `1.6·10⁴ ≤ n ≤ 10^{12}`, while
+`(bound − nh)/n^{3/4}` falls from `1.0` to `0.013`.  The exact certified cost of the design was
+evaluated by the workstream for three nested levels up to `n = 6.4·10⁴`, five up to
+`1.6·10⁴` and seven up to `4·10³`: on the `3.8·10⁶` nodes of these nests every inequality of
+the induction holds.  The referee, with an implementation of its own: all twelve rows of
+the formula table and every number of the nest tables reproduced; the two inductive
+steps on `523 000` levels with worst-case inner families, far outside the epoch schedule
+(least slack `2.2` nats for the slope step, against error terms of `48` to `8 096`: the step is
+nearly sharp); nests of up to seven levels on `220` million nodes, awkward sizes
+`n = 2 … 200` and extreme `ε`, `δ`, `u` included; the two lemmas of the closing radius in exact
+arithmetic.
+*What it is not.*  (i) **Not a competitive design at any size where it can be evaluated:**
+three levels of this schedule are certified at `0.83·na` at `n = 6.4·10⁴` where the tuned
+two-level design of remark (1b) has `0.54` and three tuned levels `0.43`; the schedule
+copies the proof of the rate, which spends seven levels on what the exact recursion does
+with two, and its slope steps treat the base family as if it cost `e^{da}` at every
+accuracy.  Its purpose is the order of the error term.  (ii) **Not the true order:**
+`√(n ln n)` is an upper bound for this method.  With a rate `C/k²` *for an explicit schedule
+whose levels lose `O(ln n)`* the level term would drop to `O(n^{1/3}(ln n)^{2/3})` and the bound
+would be `n·h + O(√n)` — a conjecture; the observed `0.65a/k²` concerns the exact recursion,
+for which no such schedule is known.  The `C₁√n` of *this schedule* comes from its drops,
+which work at a bounded threshold on an outer block of positive fraction (Lemma
+11.55(c)); the workstream's report takes a `√n` to be unavoidable for the family, because
+the finest rung of the top level calls a bounded-accuracy procedure.  We do not think it
+is, and state the reason as a sketch only (**the coordinator's; not written out, not
+refereed, nothing in the theorem depends on it**): a drop run at the accuracy `C·ln n`
+with a polynomially large threshold closes above `p_u·n_o` and loses a polynomial factor
+(Lemma 11.55(d) with `e·n_o = O(ln n)`); and from the accuracy `C·ln n` a bounded accuracy is
+reached by levels whose outer block has only `Θ(ln n)` sites and is enumerated — every
+such level multiplies the cost by `e^{O(ln n)}` at its fine rungs and removes `Θ(ln n)` sites
+from the dimension, which pays for it once the block is long enough, so that a chain of
+`n/ln n` of them adds `O(ln n)` in all.  What limits the order of this method is then the
+rate alone.  (iii) **No lower bound**
+beyond the hinted one of (c), `n·h − O(1)`.  (iv) **Extensive accuracies** — the `o(n)` of Theorem 11.54 — are not
+treated: the step at an accuracy rate `g` has outer accuracy rate `g + θ_hint(g) ≥ h`, again
+bounded away from zero, so `n·θ_hint(g) + O(√(n ln n))` is expected by the same method
+(conjecture; not written).  (v) **It rests on Theorem 11.56 far from the parameters at
+which that theorem was simulated** — thresholds `e^{Θ(n)}` together with ladders of `Θ(n)`
+rungs that end at `x_L = b` exactly, up to `√(n/ln n)` nested levels, inner failure
+probabilities `e^{−Θ(n)}`, and the abort rule in the form "before every query, every inner
+call counted with its certified bound" (with that rule a nested run costs exactly its
+certified bound in every run and the test never fires on the good event; with the rule
+as it was worded before this checkpoint the theorem would lose `ln(1 + k_M/2)` nats and
+nothing else — the referee's argument).  The statement of Theorem 11.56 covers all this;
+no simulation does, and none can: the smallest slope step exists at `n = 187` (`u = 2.5`;
+at `n = 202` for `u = 2`, `470` for `u = 1`), its certified bound there is `e^{142}` (`e^{125}`, `e^{101}`),
+and a run of it that does not abort makes at least `e^{49}` (`e^{43}`, `e^{36}`) evaluations (the
+referee's computation); the checks of this theorem evaluate bounds, not runs.  (vi) **The
+composition at depth is not evaluated:** exact evaluation reaches seven levels and
+`n ≤ 6.4·10⁴`, where the design is not yet better than the base family; where the theorem
+says something new (`M = 5 … 32` epochs for `n = 6.4·10⁴ … 10^{12}`) it rests on the paper
+induction and on one-level checks.
+
 *The picture for the cube class, complete at the exponential scale down to accuracies
 `e^{-o(n)}`:*
 
@@ -5352,8 +5744,9 @@ worst case; the certified bound of the whole three-level run, `1.155, 0.726, 0.5
 below that of two levels at any of the three sizes).  This is one design — the server of
 each rung and the split of the middle level chosen at the flat fibre — at one slope and
 three sizes, and (iii) is a property of that choice, not of a third level: **with the
-server of each rung chosen by certified cost, a certified third level pays from
-`n = 4 000` on** (remark (1b)).  The limits `τ₃ = 0.361a < τ₂ = 0.500a` are worst-case exponents
+server of each rung chosen by certified cost, a certified third level pays** — below the
+exact cost of the two-level algorithm at the flat instance from `n = 16 000` on, and below
+the worst instance found for two levels from `n = 4 000` on (remark (1b)).  The limits `τ₃ = 0.361a < τ₂ = 0.500a` are worst-case exponents
 of designs that balance the worst case and are not contradicted.  For instances that are
 *not* products — fibres at different
 places of their trivial brackets — the division bounds the cost by a mean run with the
@@ -5405,13 +5798,22 @@ for `n` large enough, without a threshold.  With the lowered cap of the remark a
 at two levels; X: exact evaluation of its bound with the referee's routines —
 `experiments/coordinator_checks/three_levels_certified/`, whose README has the commands, the
 checks and the caveats; N: the two-level worst cases it is compared with are the
-Computational Research Division's searches (ENG-RES-0008, ENG-RES-0014).  Coordinator; not
-refereed; not yet reproduced by another division].**
+Computational Research Division's searches (ENG-RES-0008, ENG-RES-0014).  Coordinator;
+**reviewed and replicated by the Scientific Discovery Division (SCI-REV-0016): the rule
+holds, and 159 of 159 certified numbers were reproduced with code that imports none of
+ours and evaluates no instance; one attribution was wrong (five two-level entries belong
+to another ladder) and three sentences stated a rule or a formula differently from what
+the proof and the code need — all corrected below, with the comparison that needs no
+model, which is the division's**].**
 Theorem 11.56 bounds the cost of a level through the cost bounds `C_l` of its inner
 procedures and through nothing else about them, and its own bound holds in every run.
-Two consequences.  *Nesting:* a two-level run designed for the fibre dimension, an accuracy
-at most `x_l` and the failure probability `δ′` is an admissible inner procedure, with `C_l` its own
-`C_max`; so the theorem applies again one level up.  *Monotonicity:* `M̄`, `J`, `cnt` and `δ′` depend on
+Two consequences.  *Nesting:* a two-level run (Algorithm 2L⁺ with its abort rule, in the
+form "before every query") designed for the fibre dimension, a **certified** accuracy
+`x_out ≤ x_l` and a failure probability at most `δ′` is an admissible inner procedure, with `C_l`
+its own `C_max` — through Theorem 11.56, which holds at every member of `L_u(Q_{n_i})` for every
+`n_i ≥ 2` (not through Theorem 11.52, whose failure bound is for `n ≥ n₀`); so the theorem
+applies again one level up.  The failure probability to design for is the `δ′ = δ/(4LM̄)` of
+the level above, per call: the union over all calls of all rungs is already inside it.  *Monotonicity:* `M̄`, `J`, `cnt` and `δ′` depend on
 the outer design only, so `C_max` is nondecreasing in every `C_l`.  Hence **if every rung is
 served by the procedure with the smallest certified cost** — the base bracket, whose cost
 is fixed by its design, unless a two-level run designed for the rung has a smaller
@@ -5425,6 +5827,18 @@ at `n = 4 000`, outer fraction `0.40`, the rung of accuracy `9.8` gets a two-lev
 `e^{0.512na}` — and the certified bound of three levels then exceeds that of two (`1.155`
 against `1.138` at `n = 1 000`).  That, and not a weakness of a third level, is what the
 certified column of remark (1) shows (`DEAD_ENDS.md`, D61).
+*The statement with its hypotheses* (the division's Proposition R16.1; two applications
+of Theorem 11.56).  Let `D` be an outer design.  For each rung `l` let `𝒫_l` be a finite set of
+bracket procedures for (dimension `n_i`, accuracy `x_l`, failure probability `δ′(D)`), each
+with a cost bound valid in every run — the base bracket of Proposition 11.57(a), or
+Algorithm 2L⁺ in dimension `n_i` with a design `D′` that satisfies the hypotheses of Theorem
+11.56, has `x_out(D′) ≤ x_l` and `δ(D′) ≤ δ′(D)`, tests its budget before every query, and is
+itself served by admissible procedures.  Let `c_l` be the smallest cost bound in `𝒫_l`.  Then
+the algorithm with design `D` and those servers (1) makes at most
+`1 + 2M̄ + Σ_l min{2M̄, (J+1)·cnt(x_{l−1})}·c_l` evaluations in every run on every member;
+(2) returns a bracket of ratio `e^{x_out(D)}` with probability `1 − δ`; (3) has a bound that is
+nondecreasing in every `c_l`, so that enlarging any `𝒫_l` cannot raise it, and it is at most
+the two-level bound of `D` as soon as every `𝒫_l` contains the base bracket.
 `ln(bound)/(na)` at `u = 1`; the outer level has `b = 0.5`, `λ = 0.2`, `η = η′ = θ = 0.05`, `δ = 0.05` and a
 geometric ladder of 40 rungs (certified accuracy `0.8715`, for two and for three levels);
 each column at the best outer fraction of its grid (shown for the last design):
@@ -5432,32 +5846,84 @@ each column at the best outer fraction of its grid (shown for the last design):
 | `n` | two levels: certified | two levels: worst instance found by the division (algorithm as built / inner answers placed adversarially) | three levels, certified: servers chosen at the flat fibre | servers by certified cost, the referee's two middle designs | the same with more middle designs (outer fraction) | cost of that last design at the flat instance |
 |---|---|---|---|---|---|---|
 | `1 000` | `1.1384` | `1.0114` / `1.0461` | `1.1554` | `1.1384` | **`1.1384`** (`0.5`) | `0.9839` |
-| `1 400` | `0.9933` | — / `0.924` | `0.9873` | `0.9669` | **`0.9659`** (`0.45`) | `0.7707` |
-| `2 000` | `0.8721` | — / `0.822` | `0.8686` | `0.8120` | **`0.8118`** (`0.45`) | `0.6400` |
+| `1 400` | `0.9933` | — / `0.924`† | `0.9873` | `0.9669` | **`0.9659`** (`0.45`) | `0.7707` |
+| `2 000` | `0.8721` | — / `0.822`† | `0.8686` | `0.8120` | **`0.8118`** (`0.45`) | `0.6400` |
 | `4 000` | `0.7262` | `0.6829` / `0.6940` | `0.7261` | `0.6331` | **`0.6106`** (`0.375`) | `0.5253` |
-| `8 000` | `0.6415` | — / `0.619` | `0.6415` | `0.5890` | **`0.5262`** (`0.3`) | `0.4756` |
+| `8 000` | `0.6415` | — / `0.619`† | `0.6415` | `0.5890` | **`0.5262`** (`0.3`) | `0.4756` |
 | `16 000` | `0.5899` | `0.5749` / `0.5753` | `0.5899` | `0.5500` | **`0.4782`** (`0.3`) | `0.4237` |
-| `32 000` | `0.5646` | — / `0.550` | `0.5646` | `0.5400` | **`0.4439`** (`0.25`) | not computed |
-| `64 000` | `0.5407` | — / `0.537` | `0.5407` | `0.5325` | **`0.4381`** (`0.25`) | not computed |
+| `32 000` | `0.5646` | — / `0.550`† | `0.5646` | `0.5400` | **`0.4439`** (`0.25`) | not computed |
+| `64 000` | `0.5407` | — / `0.537`† | `0.5407` | `0.5325` | **`0.4341`** (`0.275`) | not computed |
+
+† *Another ladder* (the division's finding M1).  The entries from ENG-RES-0008 are for the
+two-level algorithm with the same constants and the ladder of inner rates `ε*·0.85^i` — the
+ladder of remark (1a) and of `K_REPORT.md` §6.4 — not the ladder `x_l = x₀(b/x₀)^{l/40}` of this
+table; both are "geometric ladders of 40 rungs" in our texts, which is how they came to be
+treated as one.  That they are two designs is a computation: the certified two-level
+bound at the outer fraction `0.50` is `0.9913, 0.8700, 0.7228, 0.6387, 0.5887, 0.5596, 0.5419` at
+`n = 1 400, …, 64 000` with that ladder (the division's numbers; `0.9912` and `0.5888` at
+`n = 1 400` and `16 000` from the values `ln C_max = 153.96`, `1045.1` of remark (1a)) against the
+`0.9933, …, 0.5407` of this table.  Where both ladders were searched (`n = 1 000, 4 000,
+16 000`, adversarial reading) the two worst cases are `1.040 / 1.0461`, `0.694 / 0.6940`,
+`0.576 / 0.5753`.  The entry at `n = 64 000` of the last certified column was `0.4381` (`0.25`) in
+the first version; the outer fraction `0.275`, found by the division with its own code, is
+confirmed with ours (`out_64000d.txt`).
 
 ("More middle designs": the bounded-accuracy design of Proposition 11.57(b),
 `λ = η = η′ = θ = c = min(x/12, ⅓)`, offered at every accuracy `x` — the referee offers it below
-`x = 8` only — with tolerance `x/2` or the largest its accuracy allows,
-`b = x − ln(e^c(1+c)/(1−c) + 2c)`, and with its own outer fraction found by descent from `0.50` in
-steps of `0.05`.  The costs at the flat instance of two and of three levels and the
+`x = 8` only — with tolerance `x/2` or the largest its accuracy allows — any `b` with
+`(2p_u)^d + e^b(e^c(1+c)/(1−c) + 2c) ≤ e^x`, `d` the fibre dimension; the computation takes
+`b = x − ln(e^c(1+c)/(1−c) + 2c) − 10⁻⁶` (without the `10⁻⁶` the certified accuracy would be
+`ln[(2p_u)^d + e^x] > x`: the division's finding m2) — and with its own outer fraction found
+by descent from `0.50` in steps of `0.05`.  The costs at the flat instance of two and of three levels and the
 flat-chosen certified bound agree with the division's per-fraction table in all 54
 numbers where the grids overlap.)
 So: (α) chosen by certified cost, a third level never raises the certified bound and
-lowers it from `n = 1 400` on; (β) **from `n = 4 000` on the certified bound of three levels is
-below the worst instance found for two levels** — whatever its outer fraction on the
-division's grid, the two-level algorithm of the same outer design has an instance on
-which it needs more evaluations (at the level of expectations) than three levels need
-on any instance in any run — by `0.07, 0.09, 0.10, 0.11, 0.10` in these units at
-`n = 4 000, 8 000, 16 000, 32 000, 64 000`, that is by factors `e^{32}, e^{82}, e^{172}, e^{377}, e^{702}`; at
-`n = 2 000` the two numbers agree within the resolution of the grids, and at `n ≤ 1 400` three
-levels are not certified below the two-level worst case; (γ) from `n = 16 000` on the
-certified three-level bound is below `τ₂/a = 0.500`, the limit that the two-level worst case
-approaches from above (`0.526` at `n = 128 000`).
+lowers it from `n = 1 400` on.
+(β) **From `n = 16 000` on the certified bound of three levels is below what the two-level
+algorithm of this design costs at the flat instance — a comparison that needs neither a
+search nor a model** (the Scientific Discovery Division's, SCI-REV-0016, m3; recomputed by
+us with the referee's routine on a finer scan, `flat_two_level.py`).  On the zero function
+a two-level run with base brackets inside is deterministic, so its number of evaluations
+is exact:
+
+| `n` | certified three-level bound | two levels at the flat instance, exact: least over the outer fractions `0.30, 0.31, …, 0.85` (at) | least over the block sizes scanned near it | outer fractions at which two levels at the flat instance cost no more than the three-level bound |
+|---|---|---|---|---|
+| `4 000` | `0.6106` | `0.5336` (`0.63`) | `0.5322` (every size within `±0.03n`) | `0.56 … 0.71` |
+| `8 000` | `0.5262` | `0.5110` (`0.59`) | `0.5080` (every 2nd) | `0.58 … 0.60` |
+| `16 000` | `0.4782` | `0.5027` (`0.56`) | `0.4991` (every 4th) | none |
+| `32 000` | `0.4439` | `0.4998` (`0.54`) | `0.4980` (every 8th) | none |
+| `64 000` | `0.4341` | `0.4961` (`0.53`) | `0.4954` (every 16th) | none |
+
+So at `n = 16 000, 32 000, 64 000`, at every outer block size scanned, **the two-level
+algorithm as built makes, in every run on the zero function, more evaluations than
+three levels make in any run on any instance** — by factors `e^{37}`, `e^{192}`, `e^{435}` at the
+least favourable size found.  This is a statement about one two-level design (these
+constants and this ladder) at the block sizes scanned, not about two levels as a class:
+the exact cost is not smooth in the block size (at `n = 4 000` neighbouring sizes differ by
+up to `0.005` in these units, about two nats — far less than the margins), and other
+ladders are not covered.
+(β′) **At `n = 4 000` and `8 000` the flat instance does not suffice** — two levels with an
+outer fraction near `0.6` are cheap at the zero function and expensive elsewhere — **and
+the comparison is with the worst instance found for two levels, in a model.**  The
+Computational Research Division's two-level numbers are costs of *mean runs* (every
+random count replaced by its mean; the agreement with literal runs was measured at small
+outer blocks only), on instances found by search.  At `n = 4 000` and `16 000` they are for
+the two-level algorithm of the same outer design, at every outer fraction of the
+division's grid (ENG-RES-0014; margins `0.07`, `0.10` in these units, factors `e^{32}`, `e^{172}`).  At
+`n = 8 000, 32 000, 64 000` they are for the two-level algorithm of ENG-RES-0008, with the
+other ladder (†) and inner answers placed adversarially: margins `0.09, 0.11, 0.10`,
+differences between quantities of two designs.  Very plausible at these margins, and not
+a theorem: that would need a lower bound, with positive probability, for the evaluations
+of the two-level algorithm at those instances, within a factor `e^{−81}` of the mean-run
+cost (the Scientific Discovery Division's request R16-THY-5; open), or the three numbers
+for the design of this table (asked of the Computational Research Division, THY-RES-0015).
+At `n = 2 000` the two numbers agree within the resolution of the grids, and at `n ≤ 1 400`
+three levels are not certified below the two-level worst case.
+(γ) From `n = 16 000` on the certified three-level bound is below `τ₂/a = 0.500`, the limit of
+the two-level exponent.  This is a remark about a limit: `τ₂` bounds nothing at a finite `n`
+— at the flat instance two levels cost `e^{0.4998na}` and `e^{0.4961na}` at `n = 32 000` and `64 000`,
+below `e^{τ₂n}` — and its finite-`n` content is the table of (β) (the division's observation
+o1).
 *Where the gain comes from* (the rung-by-rung tables of that directory).  At `n = 16 000`, outer
 fraction `0.30` (fibres of dimension `11 200`), 26 of the 40 rungs are served by two-level
 runs: the bounded-accuracy design at accuracies `0.5` to `106`, with an outer fraction of its
@@ -5469,31 +5935,36 @@ accuracy `500`, where the multiplier of Theorem 11.56 changes from the sample ca
 count.  The flat-instance advantage of the referee's table came from the extensive
 design at accuracies `10` to `100`, where its certified bound is poor; the certified
 advantage comes from other rungs and mostly from the other design.
-*What this does not show.*  The two-level side is a search at the level of expectations,
-by another division, over the outer fraction of one outer design (no lower bound for
-two-level algorithms as a class is known); where only the adversarial reading exists
-(`n = 1 400, 2 000, 8 000, 32 000, 64 000`) the comparison is with an algorithm the theorem covers, not
-with the algorithm as built (the two readings differ by `0.035, 0.011, 0.0004` where both
-exist).  One slope.  For the designs chosen by certified cost only the bound and the cost
+*What this does not show.*  Outside the table of (β) the two-level side is a search in
+the mean-run model, by another division, over the outer fraction of one outer design (no
+lower bound for two-level algorithms as a class is known); where only the adversarial
+reading exists (`n = 1 400, 2 000, 8 000, 32 000, 64 000`) the comparison is with an algorithm the
+theorem covers, with another ladder, not with the algorithm as built (the two readings
+differ by `0.035, 0.011, 0.0004` where both exist).  One slope.  For the designs chosen by certified cost only the bound and the cost
 at the flat instance are computed, not the cost on bad instances.  Nothing is optimised
 (outer fractions on a grid, the outer ladder and constants untouched, a handful of middle
 designs, the lowered cap of the remark after Theorem 11.56 unused), and four or more
 levels — the same rule gives a certified level recursion at finite `n` — are not
-evaluated.  The limit `τ₃ = 0.361a` is far: at `n = 64 000` the certified bound is `0.438a` per site
-(two outer fractions computed at that size).
-Reproduction, the cost of these designs on the division's instances, other slopes and
-further levels are asked of the Computational Research Division (THY-RES-0013 §4).
+evaluated.  The limit `τ₃ = 0.361a` is far: at `n = 64 000` the certified bound is `0.434a` per site
+(three outer fractions computed at that size).
+Reproduction of the certified columns is done (the Scientific Discovery Division,
+SCI-REV-0016).  The cost of these designs on the Computational Research Division's
+instances, other slopes, further levels (THY-RES-0013 §4) and the two-level worst case of
+this table's design at `n = 8 000, 32 000, 64 000` (THY-RES-0015) are asked of that division.
+How far a nest of many levels chosen by this rule reaches is the subject of remark (2).
 (2) **Below the exponential scale nothing is known.**  With a hint the cost at the zero
 function is `2ⁿ/|B(n, k*)|` up to a polynomial factor — exactly `2ⁿ/|D_min|` up to the factor
 `1 − 2δ`, with `D_min` the complement of the largest initial segment of the simplicial order that
 is still sensitive (Harper; observed and verified by exhaustive search for `n ≤ 4` by the
 Computational Research Division, ENG-RES-0006).  Without a hint the upper bound is
-`e^{nh + o(n)}` with an unquantified `o(n)` (heuristically not better than `n^{3/4}`: each bounded
-level loses `e^{O(√n)}`, and `η → 0` needs `≈ 1/η` levels — the number of levels is now proved, at
-most `A(g)/η` for the recursion of Theorem 11.53: remark after that theorem, written when the
-Scientific Discovery Division asked for a rate in SCI-REV-0007; the first version had the
-`≈ 1/η` as a heuristic only, and what each level loses remains unquantified).  Whether
-`e^{nh + O(√n)}` or even
+`e^{nh + O(√(n ln n))}` (**Theorem 11.58a**, twenty-second checkpoint).  Earlier versions of
+this remark called the `o(n)` unquantified and "heuristically not better than `n^{3/4}`: each
+bounded level loses `e^{O(√n)}`, and `η → 0` needs `≈ 1/η` levels".  The count of levels was
+right (at most `A(g)/η`, remark after Theorem 11.53); the loss per level was not: of those
+levels only `O(ln(1/η))` are bounded levels — one per epoch of the proof of the rate — and
+their `√`-losses are summable; the others close at a threshold `e^{Θ(x)}` and lose
+polynomial factors (Lemma 11.55(d)).  The same heuristic is in `K_REPORT.md` §7, open
+problem 1 (`DEAD_ENDS.md`, D63).  Whether `e^{nh + O(√n)}` or even
 `poly(n)·2ⁿ/|B(n,k*)|` can be reached without a hint, and whether a restricted class
 (a bounded number of levels, or of rounds of adaptivity) has a lower bound matching `τ_k`, is
 open.  (For rounds see §11.24: two rounds lie strictly between `h` and `a`; no lower bound
@@ -10143,12 +10614,27 @@ elsewhere: a member with `W = 1_D` and `E_q W = q(D)`, which is within `o(1)` of
 probability `1 − o(1)`.  Whatever an algorithm does, adaptively or not, a state that it
 evaluates for the first time shows it one fresh bit of probability `w`; so on this
 random member the output of an algorithm with at most `N` evaluations is a randomised
-function of `N` independent bits.  Take `w′ = w + (e^{2ε} − 1)(c + w)`, `c = 1/(e^Δ − 1)`: the
-values of `ln Z` under `w` and under `w′` differ by `2ε`, so an algorithm that is within `ε`
-with probability `1 − δ` on every member tells the two laws of bits apart with total
-variation at least `1 − 2δ − o(1)`, and by Pinsker's inequality
+function of `N` independent bits.  Let `c = 1/(e^Δ − 1)` and take `w′` with
+`c + w′ = e^{2ε + η}(c + w)` for a small `η > 0` (possible, with `w′ ≤ 1`, while
+`e^{2ε + η} ≤ (e^Δ + 1)/2` at `w = c/(1 + 2c)`): the values of `ln Z` under `w` and under `w′` differ
+by `2ε + η`, and once the fluctuation of `ln Z` on the random member — of standard
+deviation `√(w(1 − w)·Σ_x q(x)²)/(c + w)` — is small against `η`, an algorithm that is within
+`ε` with probability `1 − δ` on every member tells the two laws of bits apart with total
+variation at least `1 − 2δ − o(1)`; by Pinsker's inequality, in either direction of the
+divergence, and letting `η → 0`,
 
-    N  ≥  2(1 − 2δ)² / KL(w ‖ w′)   ≈   (1 − 2δ)²·sinh²(Δ/2)/ε²     at  w = c/(1 + 2c),  for small ε.
+    N  ≥  2(1 − 2δ)² / min(KL(w‖w′), KL(w′‖w))   ≈   (1 − 2δ)²·sinh²(Δ/2)/ε²     at  w = c/(1 + 2c),  for ε ≪ (1 − e^{−Δ})/4.
+
+("Fine-grained" is, with its quantity, `Σ_x q(x)² ≪ ε²/sinh²(Δ/2)` — at `w = c/(1 + 2c)` the
+standard deviation above is `sinh(Δ/2)·√(Σ_x q(x)²)` — so the sampler must have many more
+effective states than the count itself.  The four precisions — `w′` a little beyond, the
+condition for `w′ ≤ 1`, the range of the "≈", the quantity behind "fine-grained" — are the
+division's, review SCI-REV-0015, m11, which found the argument right and reproduced the
+fifteen numbers of our table; at `Δ = 0.0605`, `ε = 0.01` the exact Pinsker bound is `5.7`
+where the formula gives `7.4`.  Pinsker's bound saturates at `2/KL` as `δ → 0`; the
+Bretagnolle–Huber inequality, `TV ≤ √(1 − e^{−KL})`, gives
+`N ≥ ln(1/(4δ(1 − δ)))/min KL`, which grows like the sufficient count — the division's
+remark; the inequality is classical and cited from memory, not opened.)
 
 (For the *expected* number of evaluations: at least `(1 − 2δ)³/(8·KL(w‖w′))`, by stopping
 the algorithm at `4/(1 − 2δ)` times its expectation.)  The first version of this part called the order
@@ -10191,18 +10677,55 @@ probability `ρ(x)` has the law of the inner sandwich's own sampler.  So the inn
 runs by **free rejection**: propose from the outer sampler, compute `ρ`, evaluate `E` only
 if accepted — at the fraction `E_q ρ = (Z(e₋) − Z(e₊))/(Z(m₋) − Z(m₊))` of the proposals — and
 the two partition functions of the inner sandwich are estimated from the proposals alone.
-(c) With `N_f` proposals (no evaluation; sample means `β̄`, `ρ̄`) and `N` evaluated draws (mean
-`W̄_in`), with probability at least `1 − δ`
+(c) (**Sharpened and made precise by the division's review SCI-REV-0015, m7 and m8:
+the first version had `2t_f` and did not state the sampling scheme.**)  Let `N_f` be fixed
+in advance, the proposals independent draws of `q` (no evaluation; sample means `β̄`, `ρ̄`),
+and let the proposals that are evaluated be chosen among the accepted ones by a rule
+that looks at the acceptance indicators only — all of them, the first `N`, or an
+independent stream of `N` accepted draws; `N` is the number evaluated and `W̄_in` their mean.
+Then, with probability at least `1 − δ`,
 
-    | Z(E) − Z(m₊) − A·(β̄ + ρ̄·W̄_in) |   ≤   A·( 2 t_f + ρ̄·t ),       t_f = √(ln(6/δ)/(2N_f)),   t = √(ln(6/δ)/(2N))
+    | Z(E) − Z(m₊) − A·(β̄ + ρ̄·W̄_in) |   ≤   A·( t_f + ρ̄·t ),       t_f = √(ln(6/δ)/(2N_f)),   t = √(ln(6/δ)/(2N))
 
-(three applications of Hoeffding's inequality and `|E_q ρ·E W_in − ρ̄·W̄_in| ≤ t_f + ρ̄·t`).  The
-term `2t_f` cannot be dropped; it costs proposals only.
+(Hoeffding's inequality for `β`, for `β + ρ` — the two ends `Z(e₊)`, `Z(e₋)` of the inner
+bracket, both variables in `[0, 1]` — and for `W_in`, the last conditionally on the
+acceptance pattern: the error is `(E_qβ − β̄) + (E_qρ − ρ̄)·μ + ρ̄·(μ − W̄_in)` with
+`μ = E W_in ∈ [0, 1]`, and its first two terms are affine in `μ`, hence at most the larger of
+their values at `μ = 0` and `μ = 1`).  With any three two-sided confidence half-widths the
+bound is `max(h_β, h_{β+ρ}) + ρ̄·h_W`.  A free term cannot be dropped altogether (the
+division's simulation: 20 112 misses in 28 000 runs without it; in 168 000 runs at
+`δ = 0.05` and `0.3`, 12 misses of this bound and none of the first version's, both far
+inside the allowance; harness XXIV.12); it costs proposals only.  The bound is not proved if proposals are
+drawn *until* `N` have been accepted (`N_f` is then a stopping time and `ρ̄` is biased, of
+relative order `1/N`), nor for a stopping rule that looks at the running bracket.
+*A variant for variance-sensitive half-widths* (the division's, SCI-RES-0017 §2 (iii);
+its review found the proof right; re-derived).  `c = β + ρ/2` needs no evaluation and
+`E_q W = E_q c + E_q ρ·(μ − ½)`, so
+`|E_q W − (c̄ + ρ̄(W̄_in − ½))| ≤ h_c + h_ρ·(|W̄_in − ½| + h_W) + ρ̄·h_W`.  With Hoeffding half-widths
+the two-end form is never wider; with the empirical Bernstein bound of Proposition
+11.113(c′) this one is narrower wherever `c` varies less than either end — on the
+division's instances in every row (standard deviations under `q` on one of them: `β` 0.18,
+`β + ρ` 0.19, `ρ` 0.37, `c` 0.012).
 (d) **In evaluations the price is that of the inner sandwich.**  As `N_f → ∞` the half-width
-is `(Z(e₋) − Z(e₊))·t`, that of Proposition 11.113(c) for the inner sandwich, and in the
-worst case over the box `{e₋ ≤ E ≤ e₊}` no algorithm does better in order (Proposition
-11.113(d)).  The outer sandwich determines the free computation — about `4/(E_q ρ)²`
-proposals per evaluation for the two errors to balance — and nothing else.
+is `(Z(e₋) − Z(e₊))·t`, that of Proposition 11.113(c) for the inner sandwich up to the factor
+`√(ln(6/δ)/ln(2/δ))` (`1.14` at `δ = 0.05`), which disappears if a vanishing share of `δ` is
+given to the two free events; and, where the inner sampler is fine-grained and the inner
+bracket of bounded width, no algorithm does better in order over the box `{e₋ ≤ E ≤ e₊}`
+(Proposition 11.113(d)).  The outer sandwich determines the free computation — about
+`1/(E_q ρ)²` proposals per evaluation for the two errors to balance, which needs the second
+or third sampling scheme of (c): if every accepted proposal is evaluated there are
+`1/E_q ρ` proposals per evaluation — and nothing else.
+*Against the plain sampler* (the division's review, m9 and m10; the arithmetic
+re-derived for the bound of (c)).  At equal numbers of evaluations the bound of (c) is
+narrower than that of Proposition 11.113(c) on the outer sandwich iff
+`√(N/N_f) + ρ̄ < κ(δ) := √(ln(2/δ)/ln(6/δ))` (`0.855`, `0.878`, `0.910` at `δ = 0.1, 0.05, 0.01`): never
+for `ρ̄ ≥ κ`; otherwise for `N_f > N/(κ − ρ̄)²`; and if every accepted proposal is evaluated
+(`N = ρ̄N_f`), only for `ρ̄ < ((√(1 + 4κ) − 1)/2)²`, which is `0.316` at `δ = 0.05`.  So with
+Hoeffding half-widths the gain over the plain sampler is at most `κ/E_q ρ`, and **whether
+the nested sampler is worth its proposals is decided by `E_q ρ`** — about `p^{m−k}` for an
+outer form of level `k` at order `m` in a nearly frozen ensemble (the ratio of the two laws
+`2p^kΓ` of Proposition 11.18f(a); the division measured `0.55, 0.57, 0.20, 0.14` on four
+instances where this rule gives `0.54, 0.54, 0.28, 0.18`).
 *For the anchored expansion* (Theorem 11.18d): `e_∓ = I_{m−1}E ∓ Σ_{T ⊆ S(x)} c_T`, the envelope —
 computable at a state from the evaluated ball and the constants of the subsets of its
 changed sites — and `m_∓` any share model of Theorem 11.18d(c′) with exact partition
@@ -10218,8 +10741,30 @@ half-width at a fixed number of evaluations would fall about seven times; for se
 a helix at order 4, where the division finds that no allocation certifies beyond
 enumeration (its addendum A17 (15): at six residues sites, pairs, triples give `1.54`,
 `0.85`, `0.48` nats and the envelope `0.27`), the envelope is what a sampled bracket would
-pay for.  **This has not been run, by us or by the division.**  What is given up: with free sampling the bracket
-is probabilistic before the first evaluation.
+pay for.  **The division has since run it** (SCI-RES-0017, SCI-MSG-0027 §4; its
+numbers on its own instances, not re-run by us).  Validated by enumeration on two
+instances: the identities of (b) to `3·10⁻¹⁴`, and the truth inside the bracket in 100 of
+100 repetitions at each of three budgets.  At twenty residues and order 4, from the same
+1 200 evaluations: a bracket of `1.2·10⁻³` nats with the first version of (c), `9.4·10⁻⁴`
+with the two-end form, against `4.3·10⁻³` for the plain sampler of Proposition 11.113 —
+and `2.7·10⁻⁴` with one known mean and empirical Bernstein half-widths, which on its
+instances is worth more than the nesting (the energy sits in the middle of the
+envelope: the true remainder is `0.0003` to `0.0024` of it at the evaluated states).  On a
+charged twelve-residue sequence whose certified bracket is `0.057` nats the sampler
+brackets `ln Z` within `3·10⁻⁵` nats, with probability `0.95` given the sandwich, from 60
+evaluations beyond the ball; on a mixed-charge sequence whose certified bracket is `4.3`
+nats, within `0.041` from 12 000 — a sandwich several nats wide is usable when proposals
+are cheap.  Since then (SCI-RES-0019 §4): the charged sequence again from the ball of one
+order lower — 96 366 evaluations instead of 1.6 million, a certified bracket of `1.41`
+nats, the sampled bracket `0.0060` nats with 12 000 evaluations, containing both earlier
+intervals — and a twenty-residue serine sequence (`8.2·10¹⁵` states) within `1.0·10⁻³` nats,
+with the envelope bracket, the width of the bound of (c) and the width of the
+variance-sensitive variant all predicted in its log before the ball existed, to a few
+per cent.  A practical point of the division's for mobile ensembles: nearly every
+proposal has its own changed set (296 795 distinct sets among 400 000 proposals), so
+the envelope has to come from a table of all constants rather than from one closed-form
+sum per set.  What is given up: with free sampling the bracket is probabilistic before
+the first evaluation.
 
 **Proposition 11.113b (one side at a time: what a floor alone and a ceiling alone
 certify) [(a) V — the Scientific Discovery Division's Lemma A17.16, `ScienceA17.sandwich_cost`,
@@ -10276,6 +10821,15 @@ when the sandwich is narrow, where the cost falls from `1/ε²` to `(x + y)²/ε
 vocabulary of Theorem 11.110 the floor's excess is the dip weight `Z(lo)/Z(r) − 1` and (b) is
 its term `(Z(lo)/Z(r) − 1)/ε`; the ceiling's term is at most `1/ε` because a bump can only
 remove mass that the sampler of the instance sees.
+*Which sampler, in the Scientific Discovery Division's data* (SCI-RES-0019 §3; arithmetic
+with the formula of (b) on its logged brackets, the floor-only sampler not run).  On four
+of its sandwiches — floor's excess `3.67, 1.21, 0.131, 0.030` nats — the floor-only sampler
+of (b) would need `6.9·10⁶, 2.3·10⁶, 9·10⁶, 7·10⁹` evaluations for the widths
+`0.041, 0.0060, 0.0010, 3.3·10⁻⁵` that the nested sampler of Proposition 11.113a reached
+with `12 000, 12 000, 1 200, 60`.  An outer ceiling is worth little where the floor is far
+(the first two rows, as the factor `(1 − e^{−(x+y)})²` says); what makes the difference is
+the *inner* sandwich — evaluations are spent only where the envelope leaves room.  Its
+criterion: the ratio of the envelope's own bracket to the floor's excess.
 
 **Corollary 11.114 (a ratio of two macrostate weights in a box class) [(a)–(c) V; (d) P]
 (`BoxRatio.lean`, `BoxAdditions.lean`; harness XXIV.8).**  Let `A`, `B` be disjoint sets of
@@ -10298,16 +10852,25 @@ macrostate, disjoint from the other, whose dip weight exceeds `(e^ε − 1)W_M` 
 log-ratio by more than `ε` when lowered to the floor, and so does one whose bump weight
 exceeds `(1 − e^{−ε})W_M` when raised to the ceiling (the two bump lemmas are the division's,
 machine-checked in its review and adopted — m5); pairwise disjoint such sets, of either
-kind and in either macrostate, force `(1 − 2δ)` evaluations each of every randomised
-algorithm that is `(ε/2, δ)`-correct for the log-ratio on the box.
-(d) Hence, where no single state has that much dip or bump weight, **the cost of
-certifying a free-energy difference between two macrostates in a box class is, up to a
-factor depending on `ε`, `δ` and an additive constant,
+kind and in either macrostate, force of every randomised algorithm that is
+`(ε/2, δ)`-correct for the log-ratio on the box, **at the instance `r` at which they are
+heavy, `(1 − 2δ)` evaluations each in expectation** (the division's review SCI-REV-0015
+read the Lean statement and its proof term and found the sentence faithful once "at
+`r`, in expectation" is said).
+(d) Hence, for `ε ≲ 1`, where no single state has that much dip or bump weight and
+`U_M, V_M > 0` in both macrostates, **the cost of certifying a free-energy difference
+between two macrostates in a box class is, up to a factor depending on `δ` only and an
+additive constant,
 
     max_{M∈{A,B}} [ (W_M(lo)/W_M(r) − 1)/ε  +  (1 − W_M(hi)/W_M(r))/ε ]
 
 — the larger of the two macrostates' own costs**, each computed inside its macrostate;
-the second term, at most `1/ε`, is the whole cost near the floor of a macrostate.  (The
+the second term, at most `1/ε`, is the whole cost near the floor of a macrostate.  (With
+`a_M = W_M(lo)/W_M − 1` and `b_M = 1 − W_M(hi)/W_M`, for `ε ≤ 1` the division's review gives
+`(1 − 2δ)·(max_M (a_M + b_M)/(6.9ε) − 1) ≤ cost ≤ ln(1/δ)·(10.7·max_M (a_M + b_M)/ε + 1) + 1` — its
+constants, not re-derived by us.  The machine-checked lower bound of (c) is the sum over
+the two macrostates of the larger of the dip and the bump packing, within a factor 2 of
+the display on either side; the sampler of (b) is governed by the worse macrostate.)  (The
 first version of this display had the dip term alone and the bumps in a parenthesis —
 the defect that had just been removed from Theorem 11.110(e): at the floor of both
 macrostates it was zero, while bumps force `(1 − 2δ)·10, 40, 200` evaluations at
@@ -11067,9 +11630,14 @@ its branch.
    11.54, refereed) and at every bounded accuracy down to `e^{-o(n)}` (`h = θ_hint(0)`, Theorem
    11.58, refereed: R8).  Open: (i) **below the exponential scale** — with a hint the cost
    at the zero function is `2ⁿ/|B(n,k*)|` up to a polynomial factor; without one the upper
-   bound is `e^{nh + o(n)}` with an unquantified `o(n)` (heuristically not better than `n^{3/4}`).
-   Can `e^{nh + O(√n)}`, or `poly(n)·2ⁿ/|B(n,k*)|`, be reached without a hint, or is there a
-   lower bound `e^{nh + ω(log n)}`?  Any such bound must come from non-flat instances (on the
+   bound is `e^{nh + O(√(n ln n))}` (Theorem 11.58a, twenty-second checkpoint: an explicit
+   schedule of `≈ √(n/ln n)` levels; the earlier versions of this item had an unquantified
+   `o(n)` and the heuristic `n^{3/4}`).  Between the hinted lower bound — `n·h − O(1)` proved,
+   `n·h + ½ ln n − O(1)` numerically — and `n·h + O(√(n ln n))` nothing is known: can
+   `e^{nh + O(√n)}`, or `poly(n)·2ⁿ/|B(n,k*)|`, be reached without a hint — the
+   first would follow from a rate `C/k²` for an explicit schedule whose levels lose
+   `O(ln n)` — or is there a lower bound `e^{nh + ω(log n)}`?  And the same term at extensive
+   accuracies (Theorem 11.54), where the method should give `O(√(n ln n))` as well.  Any such bound must come from non-flat instances (on the
    flat one the doubling two-sample bracket stops at the hinted cost up to a polynomial
    factor).  (ii) **Depth** — `k` nested levels have the exponent `τ_k > h` at bounded accuracy,
    `(τ_k − h)/a ≈ 0.65/k²` numerically; is there a lower bound for a restricted class (a bounded
@@ -11408,7 +11976,31 @@ its branch.
    which one generic evaluation identifies the member, since the values `sᵀA(x)s` of a
    generic symmetric matrix separate the sign patterns up to a global sign — so the
    obstruction is one of analysis and computation, not of information, and our query
-   bounds have nothing to say about it (an answer to its question P5-T1(ii)).  And the
+   bounds have nothing to say about it (an answer to its question P5-T1(ii)).
+   *For a cluster with a net charge the loss is bounded, by the square of
+   `R = Σ|q|/|Σq|`* **[P, elementary; harness XI.25]** (an answer to the division's question
+   P8-T2, SCI-MSG-0027: "is there a statement `SB ≤ C·(Σ|q|/|Σq|)²·truth` for charges
+   dominated by one sign?").  Let the remainder be a quadratic form `t = qᵀMq` in the
+   charges (`M` a mixed difference of the kernel), `w = |q|`, and `SB = max_s |(s∘w)ᵀM(s∘w)|`
+   over all sign patterns — the least bound that sees the charges through their
+   magnitudes only.  For any reference value `m̄ ≠ 0` put `e = max_{ij}|M_ij − m̄|` and
+   `ρ = e/|m̄|`.  Then `SB ≤ (|m̄| + e)(Σw)²` and `|t| ≥ |m̄|(Σq)² − e(Σw)²`, hence
+
+       SB  ≤  (1 + ρ)/(1 − ρR²) · R² · |t|          whenever ρR² < 1,
+
+   with equality `SB = R²|t|` for a constant kernel — the square cannot be improved — and
+   for two clusters and a bilinear form the factor `(1 + ρ)/(1 − ρR_aR_b)·R_aR_b`.  A neutral
+   cluster has `R = ∞`: the division's unbounded loss.  **Without a bound on the variation
+   of the kernel there is no such statement, even for charges of one sign**:
+   `M = [[1, −1], [−1, 1]]`, `q = (1, 1)` has `t = 0` and `SB = 4` — and a mixed difference of a
+   positive kernel does change sign in general.  So the answer is yes exactly where the
+   remainder kernel is nearly constant over the atoms in range, relative to its mean
+   and to `1/R²` — two compact charged groups far apart compared with their size.  The
+   division's validation case (five lysine residues, order 4: truth `0.0250`, all charges
+   positive `0.111`, best sign pattern found `0.127` kcal/mol) has a loss of `5.1`, and "all
+   positive" within 13 per cent of the best pattern, as for a kernel of nearly one sign;
+   for an ammonium head group with force-field charges of about `−0.39` and `3 × 0.34` the
+   ratio is `R² ≈ 4.9` (charges quoted from memory, not checked) — the same size.  And the
    machine-checked part of its certificate ends at Theorem 11.18d:
    its chain rule for mixed differences, its term-by-term bound and its banding are paper
    proofs with unreviewed code; (b) classes between the box and the first-order

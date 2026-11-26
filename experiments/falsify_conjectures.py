@@ -3841,9 +3841,10 @@ def t_state_shares(rng, trials):
     return True, stats
 
 
-@conjecture("XI.22 Randomised algorithms and the Hamming ball (theory report Proposition 11.18e(b), (b'), (c) as corrected after the Scientific Discovery Division's review SCI-REV-0013, findings M1 and m8; the counter-algorithm and the support bound for unequal alphabets are that division's).  (a) On the cube every affine function h satisfies |h(s)| >= ||h||_inf/(n + 1) on at least half of the points, with equality for h = 1 + s_1, and n + 1 cannot be replaced by n; (b) hence for g = h + R with |R| <= C every such point x gives ||g||_inf <= (|g(x)| + C)(n + 1) + C (attained), so that ceil(log2(1/delta)) uniformly random evaluations yield a valid finite bound with probability 1 - delta whatever n - five evaluations at delta = 0.05 where the deterministic count is n + 1 - while at a point where h is small the bound fails; (c) on a grid with k_i states at site i the least support of a non-zero function of order below m is exactly |X| / (product of the m - 1 largest k_i) (exhaustive on small grids), attained by a cylinder on the largest sites, so that k_max^-(m-1) is not attained for unequal alphabets; (d) on one site with k states the count of the ball holds for randomised algorithms as well: the algorithm that skips one uniformly random state with probability r and returns a bracket of width L fails with probability exactly r/k on an instance with a needle deeper than L, so failure delta allows k delta skipped evaluations on average and no more - provided the bracket returned after a skip is wrong for at most one skipped state: for ln Z its width must be at least ln 2, and with two equally deep states and a smaller width both skips fail (the Scientific Discovery Division's remark, SCI-RES-0016)")
+@conjecture("XI.22 Randomised algorithms and the Hamming ball (theory report Proposition 11.18e(b), (b'), (c) as corrected after the Scientific Discovery Division's review SCI-REV-0013, findings M1 and m8; the counter-algorithm and the support bound for unequal alphabets are that division's).  (a) On the cube every affine function h satisfies |h(s)| >= ||h||_inf/(n + 1) on at least half of the points, with equality for h = 1 + s_1, and n + 1 cannot be replaced by n; (b) hence for g = h + R with |R| <= C every such point x gives ||g||_inf <= (|g(x)| + C)(n + 1) + C (attained), so that ceil(log2(1/delta)) uniformly random evaluations yield a valid finite bound with probability 1 - delta whatever n - five evaluations at delta = 0.05 where the deterministic count is n + 1 - while at a point where h is small the bound fails; (c) on a grid with k_i states at site i the least support of a non-zero function of order below m is exactly |X| / (product of the m - 1 largest k_i) (exhaustive on small grids), attained by a cylinder on the largest sites, so that k_max^-(m-1) is not attained for unequal alphabets; (d) on one site with k states the count of the ball holds for randomised algorithms as well: the algorithm that skips one uniformly random state with probability r and returns a bracket of width L fails with probability exactly r/k on an instance with a needle deeper than L, so failure delta allows k delta skipped evaluations on average and no more - provided the bracket returned after a skip is wrong for at most one skipped state: for ln Z its width must be at least ln 2, and with two equally deep states and a smaller width both skips fail (the Scientific Discovery Division's remark, SCI-RES-0016); in general the bracket of width W is wrong for at most min(k, ceil(1/(1 - e^-W)) - 1) skipped states, k equally deep states attain this, and for the minimum the bound 'least evaluated value minus w' is wrong for at most one skipped state for every slack w >= 0, ties included (that division's review SCI-REV-0015, m1); with needles of L depths that no output serves two at a time, a skip probability above delta (L + 1)/L forces a failure probability above delta on one of the L + 1 instances whatever is returned after a skip")
 def t_random_ball(rng, trials):
-    stats = dict(affine=0, least_good=math.inf, sharp_n=0, tight=math.inf, bad_fails=0, grids=0, unequal_gap=0, one_site=0, twin=0)
+    stats = dict(affine=0, least_good=math.inf, sharp_n=0, tight=math.inf, bad_fails=0, grids=0, unequal_gap=0, one_site=0, twin=0,
+                 count_attained=0, min_slack=0, ladder=0)
     # (a), (b): affine functions on the cube
     for n in range(2, 9):
         S = np.array(list(itertools.product((-1.0, 1.0), repeat=n)))
@@ -3997,6 +3998,49 @@ def t_random_ball(rng, trials):
                 return False, dict(reason="one site, two equally deep states: the width ln 2 of the bracket returned after a skip",
                                    k=k, width=width, fail=fail, expect=expect)
         stats["twin"] += 1
+        # the general count (review SCI-REV-0015, m1): after a skip the bracket [ln Z_seen, ln Z_seen + W] is wrong for at
+        # most min(k, ceil(1/(1 - e^-W)) - 1) skipped states; k equally deep states attain it (all k skips fail iff
+        # W < ln(k/(k - 1)))
+        thr = math.log(k / (k - 1.0))
+        cases = [(np.full(k, -depth), w_) for w_ in (0.5 * thr, thr - 1e-9, thr + 1e-9, 1.0)]
+        cases += [(rng.normal(0, 2, k), float(rng.uniform(0.02, 2.0))) for _ in range(6)]
+        for inst, width in cases:
+            shift = float(inst.min())
+            lnZ = math.log(float(np.exp(-(inst - shift)).sum())) - shift
+            nfail = 0
+            for a in range(k):
+                seen = math.log(float(np.exp(-(np.delete(inst, a) - shift)).sum())) - shift
+                nfail += not (seen - 1e-12 <= lnZ <= seen + width + 1e-12)
+            cap = min(k, math.ceil(1.0 / (1.0 - math.exp(-width))) - 1)
+            if nfail > cap:
+                return False, dict(reason="one site: more skipped states make the bracket wrong than min(k, ceil(1/(1 - e^-W)) - 1)",
+                                   k=k, width=width, nfail=nfail, cap=cap)
+            if np.ptp(inst) == 0 and nfail != (k if width < thr else 0):
+                return False, dict(reason="one site, k equally deep states: all skips fail iff W < ln(k/(k - 1))", k=k, width=width,
+                                   nfail=nfail)
+            stats["count_attained"] += int(nfail == cap and nfail == k)
+        # the minimum: 'least evaluated value minus w' is wrong for at most one skipped state, for every slack w >= 0 and
+        # with ties (a tied minimiser is still seen); a single needle makes exactly one skip wrong
+        for inst in (needle, twin, hvals, np.round(hvals)):
+            for w_ in (0.0, 0.3):
+                true_min = float(inst.min())
+                nfail = sum(1 for a in range(k) if float(np.delete(inst, a).min()) - w_ > true_min + 1e-12)
+                if nfail > 1 or (inst is needle and nfail != 1) or (inst is twin and nfail != 0):
+                    return False, dict(reason="one site, the minimum: the bound returned after a skip is wrong for more than one skipped state",
+                                       k=k, slack=w_, nfail=nfail)
+        stats["min_slack"] += 1
+        # needles of L depths (review SCI-REV-0015, addition A1): if after a skip the answer for instance j is returned
+        # with probability pi_j, the failure probability on instance j is s (1 - pi_j); these sum to s L, so one of
+        # them is at least s L/(L + 1): failure at most delta on all L + 1 instances forces s <= delta (L + 1)/L, and
+        # the uniform guess attains it
+        Ld = k - 1
+        pi_guess = rng.dirichlet(np.ones(Ld + 1))
+        s_skip = 0.05 * (Ld + 1) / Ld
+        if (s_skip * (1 - pi_guess)).max() < 0.05 - 1e-12 or abs((s_skip * (1 - 1.0 / (Ld + 1))) - 0.05) > 1e-12:
+            return False, dict(reason="needles of finitely many depths: the bound delta (L + 1)/L on the skip probability", L=Ld)
+        if (1.01 * s_skip * (1 - pi_guess)).max() <= 0.05:
+            return False, dict(reason="needles of finitely many depths: a skip probability above delta (L + 1)/L was not punished", L=Ld)
+        stats["ladder"] += 1
         # failure at most delta on every needle instance forces r <= k delta: the expected number of evaluations
         # k - r is at least (1 - delta) k, the count of Proposition 11.18e(b')
         delta = 0.05
@@ -4005,7 +4049,7 @@ def t_random_ball(rng, trials):
         stats["one_site"] += 1
     if not (stats["affine"] >= 40 and abs(stats["least_good"] - 0.5) < 1e-12 and stats["sharp_n"] >= 3 and abs(stats["tight"]) < 1e-9
             and stats["bad_fails"] >= 7 and stats["grids"] >= 8 and stats["unequal_gap"] >= 2 and stats["one_site"] >= 5
-            and stats["twin"] >= 5):
+            and stats["twin"] >= 5 and stats["count_attained"] >= 10 and stats["min_slack"] >= 5 and stats["ladder"] >= 5):
         return False, dict(reason="cases not exercised: the half is not attained, the bound not tight, or a constructed case missing", **stats)
     return True, stats
 
@@ -4039,7 +4083,7 @@ def sl_lower(law, pen):
     return -math.log(sum(law[S] * math.exp(-pen[S]) for S in law))
 
 
-@conjecture("XI.23 Shares of every level, and the allocation for a law (theory report Theorem 11.18d(c'), Proposition 11.18f; ShareLevels.lean; the pair and triple forms with a band are Lemmas A, A' of the Scientific Discovery Division's workstream P6, SCI-MSG-0025; the questions P6-T1, P5-T3 are that division's).  For constants c_T >= 0 on the m-subsets: (a) charging each constant in equal parts to the k-subsets of T gives penalties pen_k(S) = sum_T c_T C(|T and S|, k)/C(m, k) with env = pen_m <= pen_{m-1} <= ... <= pen_1 <= pen_0 = sum of all constants, pointwise in the changed set S, with equality for the set of all sites and strict inequality elsewhere; (b) shares of level k + 1 outside a window, pushed down in equal parts to their k-subsets, give a penalty between the levels k + 1 and k; (c) every allocation lam_{T,K} >= 0 with sum_K lam_{T,K} = c_T covers; (d) for a law of the changed set the upper end ln E e^{pen} is convex and the lower end -ln E e^{-pen} is concave in the allocation, with gradient the tilted probability that K is changed; so the upper end of an exchangeable instance is least at equal shares, while the lower end is least at a vertex - each constant charged to one k-subset - and the two ends want different allocations; (e) to first order both ends are sum_T sum_K lam_{T,K} P(K changed): charge every constant to its least probable sub-pattern; with independent sites that is the allocation gamma_i = Gamma(sites at least as mobile as i) - Gamma(sites more mobile than i), Gamma(R) the sum of the constants inside R, and on an instance with four nearly frozen sites among six it lowers the upper end 8 times and the lower end 13 times, while on a homogeneous instance it raises the upper end and lowers the lower one - the two ends want different allocations")
+@conjecture("XI.23 Shares of every level, and the allocation for a law (theory report Theorem 11.18d(c'), Proposition 11.18f; ShareLevels.lean; the pair and triple forms with a band are Lemmas A, A' of the Scientific Discovery Division's workstream P6, SCI-MSG-0025; the questions P6-T1, P5-T3 are that division's).  For constants c_T >= 0 on the m-subsets: (a) charging each constant in equal parts to the k-subsets of T gives penalties pen_k(S) = sum_T c_T C(|T and S|, k)/C(m, k) with env = pen_m <= pen_{m-1} <= ... <= pen_1 <= pen_0 = sum of all constants, pointwise in the changed set S, with equality for the set of all sites and strict inequality elsewhere; (b) shares of level k + 1 outside a window, pushed down in equal parts to their k-subsets, give a penalty between the levels k + 1 and k; (c) every allocation lam_{T,K} >= 0 with sum_K lam_{T,K} = c_T covers; (d) for a law of the changed set the upper end ln E e^{pen} is convex and the lower end -ln E e^{-pen} is concave in the allocation, with gradient the tilted probability that K is changed; so the upper end of an exchangeable instance is least at equal shares, while the lower end is least at a vertex - each constant charged to one k-subset - and the two ends want different allocations; (e) to first order both ends are sum_T sum_K lam_{T,K} P(K changed): charge every constant to its least probable sub-pattern; with independent sites that is the allocation gamma_i = Gamma(sites at least as mobile as i) - Gamma(sites more mobile than i), Gamma(R) the sum of the constants inside R, and on an instance with four nearly frozen sites among six it lowers the upper end 8 times and the lower end 13 times, while on a homogeneous instance it raises the upper end and lowers the lower one - the two ends want different allocations; (f) beyond first order (the Scientific Discovery Division's review SCI-REV-0015, m4, m5, and its message SCI-RES-0017): for independent sites and site penalties the two ends are sums of softplus differences in f_i -+ gamma_i, f_i = ln((1 - p_i)/p_i), a site pays between max(p gamma, gamma - ln(1/p)) and p (e^gamma - 1) at the upper end and at most min(p gamma, -ln(1 - p)) at the lower; for any law and any allocation of level k the lower end is at most C(m, k) times that of equal shares; for any law every covering vector of site penalties has an upper end at least ln(1 + sum_i (lam - p_i)^+), lam the water level with sum_i ln(lam/p_i)^+ = Gamma; among vectors covering the nested sets of an ordering by nondecreasing p the marginal vector has the least first-order cost (CoreGreedy.lean), and not for another ordering; with tied sites the formula read with ties double-charges (sum 4 against Gamma = 2), the upper end is least when the tied sites share (0.0259 against 0.0298 at the vertex), and the upper end of a vertex is not bounded by a multiple of that of equal shares; at the pair level under a product law the least probable pair of T is its two most frozen sites, and the pair penalties of that vertex are second differences Gamma(A + i + j) - Gamma(A + i) - Gamma(A + j) + Gamma(A), A the sites after j (an answer to that division's question A17-T3)")
 def t_share_levels(rng, trials):
     stats = dict(cases=0, strict_levels=0, strict_window=0, convex_strict=0, concave_strict=0, vertex_below_uniform=0,
                  greedy_gain_upper=None, greedy_gain_lower=None, two_ends_differ=0)
@@ -4183,9 +4227,397 @@ def t_share_levels(rng, trials):
             stats["greedy_gain_upper"], stats["greedy_gain_lower"] = Uu / Ug, Lu / Lg2
         else:
             stats["two_ends_differ"] = int(Ug > Uu + 1e-9 and Lg2 < Lu - 1e-9)
+    # (f) beyond first order (Proposition 11.18f(c'), (c''))
+    sp = lambda z: math.log1p(math.exp(z))
+    stats.update(site_forms=0, lower_ratio=0.0, waterfill=0, waterfill_strict=0, greedy_core=0, greedy_unsorted_fails=0)
+    for _ in range(12):
+        n = 5
+        p = rng.uniform(0.02, 0.6, n)
+        gs = rng.exponential(1.0, n) * (rng.random(n) < 0.8)
+        law = sl_law(n, p)
+        pen = {S: sum(gs[i] for i in S) for S in law}
+        f = np.log((1 - p) / p)
+        U_closed = sum(sp(gs[i] - f[i]) - sp(-f[i]) for i in range(n))
+        L_closed = sum(sp(-f[i]) - sp(-f[i] - gs[i]) for i in range(n))
+        if abs(U_closed - sl_upper(law, pen)) > 1e-10 or abs(L_closed - sl_lower(law, pen)) > 1e-10:
+            return False, dict(reason="independent sites: the two ends are not the softplus sums in f_i -+ gamma_i")
+        for i in range(n):
+            g_, p_ = float(gs[i]), float(p[i])
+            up_i = math.log1p(p_ * math.expm1(g_))
+            lo_i = -math.log(1 - p_ + p_ * math.exp(-g_))
+            if not (max(p_ * g_, g_ - math.log(1 / p_)) - 1e-12 <= up_i <= p_ * math.expm1(g_) + 1e-12) \
+                    or lo_i > min(p_ * g_, -math.log(1 - p_)) + 1e-12:
+                return False, dict(reason="independent sites: the bounds for what one site pays at either end", p=p_, gamma=g_)
+        stats["site_forms"] += 1
+    n, m = 5, 3
+    subs_m = [frozenset(T) for T in itertools.combinations(range(n), m)]
+    allS = sl_subsets(n)
+
+    def water(pm, Gam):
+        lo, hi = min(pm), max(pm) * math.exp(Gam) + 1.0
+        for _ in range(200):
+            mid = 0.5 * (lo + hi)
+            if sum(max(0.0, math.log(mid / q_)) for q_ in pm) < Gam:
+                lo = mid
+            else:
+                hi = mid
+        lam_ = 0.5 * (lo + hi)
+        return lam_, [max(0.0, math.log(lam_ / q_)) for q_ in pm]
+
+    for it in range(10):
+        c = {T: float(rng.exponential(0.7)) for T in subs_m}
+        if it % 2:
+            law = sl_law(n, rng.uniform(0.02, 0.5, n))
+        else:
+            law = {S: float(w_) for S, w_ in zip(allS, rng.dirichlet(np.full(len(allS), 0.3)))}     # any law, not a product
+        for k in (1, 2):
+            equal = {(T, frozenset(K)): c[T] / math.comb(m, k) for T in subs_m for K in itertools.combinations(sorted(T), k)}
+            L_eq = sl_lower(law, sl_alloc_pen(n, equal))
+            for _ in range(6):
+                lam = {}
+                for T in subs_m:
+                    Ks = [frozenset(K) for K in itertools.combinations(sorted(T), k)]
+                    for K, wi in zip(Ks, rng.dirichlet(np.full(len(Ks), 0.2))):
+                        lam[(T, K)] = c[T] * float(wi)
+                L_lam = sl_lower(law, sl_alloc_pen(n, lam))
+                if L_lam > math.comb(m, k) * L_eq + 1e-12:
+                    return False, dict(reason="the lower end of an allocation exceeds C(m, k) times that of equal shares", k=k)
+                stats["lower_ratio"] = max(stats["lower_ratio"], L_lam / L_eq)
+        # the water-filling bound: no covering vector of site penalties has a smaller upper end
+        pm = [sum(law[S] for S in allS if i in S) for i in range(n)]
+        Gam = sum(c.values())
+        lam_w, g_w = water(pm, Gam)
+        floor_w = math.log1p(sum(max(0.0, lam_w - q_) for q_ in pm))
+        if abs(sum(g_w) - Gam) > 1e-9 or abs(sum(q_ * math.expm1(g_) for q_, g_ in zip(pm, g_w)) - sum(max(0.0, lam_w - q_) for q_ in pm)) > 1e-9:
+            return False, dict(reason="the water-filling vector does not sum to Gamma, or its first-order cost is not sum (lam - p_i)^+")
+        for _ in range(8):
+            lam = {}
+            for T in subs_m:
+                for i, wi in zip(sorted(T), rng.dirichlet(np.full(m, 0.3))):
+                    lam[(T, frozenset([i]))] = c[T] * float(wi)
+            gvec = [sum(v for (T, K), v in lam.items() if K == frozenset([i])) for i in range(n)]
+            Uv = sl_upper(law, sl_alloc_pen(n, lam))
+            mid_b = math.log1p(sum(q_ * math.expm1(g_) for q_, g_ in zip(pm, gvec)))
+            if Uv < mid_b - 1e-12 or mid_b < floor_w - 1e-9:
+                return False, dict(reason="a covering vector of site penalties has an upper end below the water-filling bound",
+                                   U=Uv, middle=mid_b, floor=floor_w)
+            stats["waterfill"] += 1
+            stats["waterfill_strict"] += int(Uv > floor_w + 1e-9)
+    # the greedy vertex (CoreGreedy.lean): among vectors that cover the nested sets of an ordering by nondecreasing p the
+    # marginal vector has the least first-order cost; for an ordering that is not by p it need not
+    for _ in range(40):
+        n = int(rng.integers(2, 8))
+        G = np.append(rng.normal(0, 1, n), 0.0)                    # G_j = Gamma(R_j), G_n = 0; no sign or monotonicity is used
+        gstar = G[:-1] - G[1:]
+        tails = np.append(rng.exponential(0.5, n) * (rng.random(n) < 0.7), 0.0)
+        gcov = gstar + (tails[:-1] - tails[1:])                    # tail sums of gcov exceed G_j by tails_j >= 0: it covers
+        if any(G[j] > gcov[j:].sum() + 1e-12 for j in range(n)):
+            return False, dict(reason="harness: the covering vector does not cover")
+        p_sorted = np.sort(rng.uniform(0, 1, n))
+        if float(p_sorted @ gstar) > float(p_sorted @ gcov) + 1e-12:
+            return False, dict(reason="the marginal vector of the ordering by nondecreasing p does not have the least first-order cost")
+        stats["greedy_core"] += 1
+        stats["greedy_unsorted_fails"] += int(float(p_sorted[::-1] @ gstar) > float(p_sorted[::-1] @ gcov) + 1e-9)
+    # the pair level for a product law (an answer to the division's question A17-T3): the least probable pair of T is its
+    # two most frozen sites, and the pair penalties of that vertex are second differences of Gamma on sets of sites
+    for _ in range(6):
+        n, m = 6, int(rng.integers(3, 5))
+        subs_m = [frozenset(T) for T in itertools.combinations(range(n), m)]
+        c = {T: float(rng.exponential(0.7)) for T in subs_m}
+        p = np.sort(rng.uniform(0.02, 0.6, n))                      # sites numbered most frozen first
+        gam = lambda R: sum(v for T, v in c.items() if T <= R)
+        first_order = 0.0
+        for i in range(n):
+            for j in range(i + 1, n):
+                after = frozenset(range(j + 1, n))
+                closed = gam(after | {i, j}) - gam(after | {i}) - gam(after | {j}) + gam(after)
+                direct = sum(v for T, v in c.items() if sorted(T)[:2] == [i, j])
+                if abs(closed - direct) > 1e-10:
+                    return False, dict(reason="pair level: the penalty of the two most frozen sites is not the second difference of Gamma", i=i, j=j)
+                first_order += direct * p[i] * p[j]
+        lp_min = sum(v * min(p[a] * p[b] for a, b in itertools.combinations(sorted(T), 2)) for T, v in c.items())
+        if abs(first_order - lp_min) > 1e-10:
+            return False, dict(reason="pair level, product law: the two most frozen sites are not the least probable pair")
+        stats["pair_level"] = stats.get("pair_level", 0) + 1
+    # ties (review SCI-REV-0015, m4): four tied frozen sites among six, equal constants on the triples
+    n, m = 6, 3
+    subs_m = [frozenset(T) for T in itertools.combinations(range(n), m)]
+    p = [0.01, 0.01, 0.01, 0.01, 0.3, 0.3]
+    c = {T: 0.1 for T in subs_m}
+    law = sl_law(n, p)
+    gam = lambda R: sum(v for T, v in c.items() if T <= R)
+    tie = [gam(frozenset(j for j in range(n) if p[j] >= p[i])) - gam(frozenset(j for j in range(n) if p[j] >= p[i]) - {i}) for i in range(n)]
+    pen_tie = {S: sum(tie[i] for i in S) for S in law}
+    if np.abs(np.array(tie) - np.array([1, 1, 1, 1, 0, 0])).max() > 1e-12 or abs(gam(frozenset(range(n))) - 2.0) > 1e-12 \
+            or abs(sl_upper(law, pen_tie) - 0.068) > 5e-4 or abs(sl_lower(law, pen_tie) - 0.025) > 5e-4:
+        return False, dict(reason="ties: the formula read with ties should charge (1, 1, 1, 1, 0, 0), sum 4 against Gamma = 2")
+    frozen = {0, 1, 2, 3}
+    share = {(T, frozenset([i])): (c[T] / len(T & frozen) if i in frozen else 0.0) for T in subs_m for i in T}
+    pos = {i: r for r, i in enumerate(sorted(range(n), key=lambda i: (p[i], i)))}
+    vertex = {(T, frozenset([i])): (c[T] if i == min(T, key=lambda j: pos[j]) else 0.0) for T in subs_m for i in T}
+    p_sh, p_vx = sl_alloc_pen(n, share), sl_alloc_pen(n, vertex)
+    U_sh, U_vx, L_sh, L_vx = sl_upper(law, p_sh), sl_upper(law, p_vx), sl_lower(law, p_sh), sl_lower(law, p_vx)
+    zt = sum(law[S] * math.exp(p_sh[S]) for S in law)
+    tilt = [sum(law[S] * math.exp(p_sh[S]) for S in law if i in S) / zt for i in range(n)]
+    if abs(U_sh - 0.0259) > 5e-5 or abs(U_vx - 0.0298) > 5e-5 or not (U_sh < U_vx and L_vx < L_sh) \
+            or max(tilt[:4]) - min(tilt[:4]) > 1e-12 or max(tilt[:4]) >= min(tilt[4:]):
+        return False, dict(reason="ties: the upper end should be least when the tied sites share (first-order condition of (b)), the lower end at the vertex",
+                           U_share=U_sh, U_vertex=U_vx, L_share=L_sh, L_vertex=L_vx)
+    stats["tie_upper"], stats["tie_vertex"] = U_sh, U_vx
+    # no bound of the upper end of a vertex by a multiple of that of equal shares: a tied pair with one constant 2 ln(1/p)
+    ratios = []
+    for pp in (1e-3, 1e-6):
+        cc = 2 * math.log(1 / pp)
+        ratios.append(math.log1p(pp * math.expm1(cc)) / (2 * math.log1p(pp * math.expm1(cc / 2))))
+    if not (4.9 < ratios[0] < 5.1 and 9.9 < ratios[1] < 10.1):
+        return False, dict(reason="the tied pair: the ratio of the upper ends should grow like ln(1/p)/(2 ln 2)", ratios=ratios)
     if not (stats["cases"] >= 8 and stats["strict_levels"] > 50 and stats["strict_window"] > 5 and stats["convex_strict"] >= 4
             and stats["concave_strict"] >= 4 and stats["vertex_below_uniform"] == 1 and 7.5 < stats["greedy_gain_upper"] < 8.5
-            and 12.5 < stats["greedy_gain_lower"] < 13.5 and stats["two_ends_differ"] == 1):
+            and 12.5 < stats["greedy_gain_lower"] < 13.5 and stats["two_ends_differ"] == 1 and stats["site_forms"] >= 12
+            and stats["lower_ratio"] > 1.05 and stats["waterfill"] >= 80 and stats["waterfill_strict"] >= 40
+            and stats["greedy_core"] >= 40 and stats["greedy_unsorted_fails"] >= 5):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
+def to_mixed_diff(g, idx, z, T, y):
+    """Delta_T g(z; y_T): the sum over U inside T of (-1)^(|T| - |U|) g(z with the sites of U set to their states in y)"""
+    T = list(T)
+    tot = 0.0
+    for r in range(len(T) + 1):
+        for U in itertools.combinations(T, r):
+            x = list(z)
+            for i in U:
+                x[i] = y[i]
+            tot += (-1) ** (len(T) - r) * g[idx[tuple(x)]]
+    return tot
+
+
+def to_interp(g, idx, x0, y, m):
+    """anchored interpolant of order m - 1: the mixed differences at the reference over the subsets of fewer than m changed sites"""
+    S = [i for i in range(len(y)) if y[i] != x0[i]]
+    return sum(to_mixed_diff(g, idx, x0, U, y) for r in range(min(m, len(S) + 1)) for U in itertools.combinations(S, r))
+
+
+def to_base(x0, y, T, rank):
+    """base point of the remainder term of T for the order with ranks rank[i]: the states of y at the changed sites that
+    precede every site of T, the reference elsewhere"""
+    first = min(rank[t] for t in T)
+    return tuple(y[i] if (y[i] != x0[i] and rank[i] < first) else x0[i] for i in range(len(y)))
+
+
+def to_host_constants(g, idx, ks, x0, m, free_of):
+    """c_T = max |Delta_T g(z; y_T)| over the target states and over the base points z that are at the reference on T and
+    everywhere except on the sites free_of(T)"""
+    n = len(ks)
+    out = {}
+    for T in itertools.combinations(range(n), m):
+        free = free_of(T)
+        best = 0.0
+        for zf in itertools.product(*[range(ks[i]) for i in free]):
+            z = list(x0)
+            for i, v in zip(free, zf):
+                z[i] = v
+            for yT in itertools.product(*[range(1, ks[i]) for i in T]):
+                y = list(x0)
+                for i, v in zip(T, yT):
+                    y[i] = v
+                best = max(best, abs(to_mixed_diff(g, idx, z, T, y)))
+        out[T] = best
+    return out
+
+
+@conjecture("XI.24 Every term in its own order of the sites, and the anchored split of a pair table (theory report Theorem 11.18d(a''), (d'); TermOrders.lean; the statements are the Scientific Discovery Division's, workstream P8 and SCI-MSG-0027, requests P8-T1 and A18-T1).  (a) For g = sum of terms g_t on a product of finite sets, with a separate linear order of the sites for every term: g(y) - I_{m-1} g(y) = sum_t sum over the m-subsets T of the changed sites of Delta_T g_t at the base point of the order of t; (b) if the order of a term puts a set of at most m hosts last, every host outside T is at the reference in the base point of T, and with m + 1 hosts one of them is not; (c) hence the remainder is at most the sum of constants that bound the mixed differences at base points that are at the reference on T and at the hosts outside T - attained with ratio one by products of off-anchor indicators that contain the hosts - while three variants are false on that family: the anchor context alone, m + 1 hosts, and the roles of hosts and other sites exchanged; (d) for a pair table P with anchors a, b: A(x) = P(x, b), B(y) = P(a, y) - P(a, b), D = P - A - B vanishes on the anchor row and column, A + B + min_y D <= P <= A + B + max_y D, exactly on the anchor row, where the split by column means loses the range of the centred anchor row")
+def t_term_orders(rng, trials):
+    stats = dict(identity=0, hosts_anchor=0, host_moves=0, bound=0, bound_tight=0, ctrl_anchor=0, ctrl_hosts=0, ctrl_swap=0,
+                 split=0, colmeans_loss=0)
+    for it in range(max(24, trials // 16)):
+        n = int(rng.integers(3, 5))
+        ks = [int(rng.integers(2, 4)) for _ in range(n)]
+        confs = list(itertools.product(*[range(k) for k in ks]))
+        idx = {x: t for t, x in enumerate(confs)}
+        x0 = tuple([0] * n)
+        m = int(rng.integers(1, n + 1))
+        # (a) the identity, random tables, a random order for every term
+        nt = int(rng.integers(1, 4))
+        tabs = [rng.normal(0, 1, len(confs)) for _ in range(nt)]
+        ranks = []
+        for _ in range(nt):
+            perm = list(rng.permutation(n))
+            ranks.append({int(site): r for r, site in enumerate(perm)})
+        total = np.sum(tabs, axis=0)
+        for y in confs:
+            S = [i for i in range(n) if y[i] != 0]
+            lhs = float(total[idx[y]]) - to_interp(total, idx, x0, y, m)
+            rhs = sum(to_mixed_diff(tabs[t], idx, to_base(x0, y, T, ranks[t]), T, y)
+                      for t in range(nt) for T in itertools.combinations(S, m))
+            if abs(lhs - rhs) > 1e-9:
+                return False, dict(reason="the remainder identity with a separate order for every term", n=n, m=m, y=y, lhs=lhs, rhs=rhs)
+            stats["identity"] += 1
+        # (b) hosts that are last stay at the reference; with m + 1 hosts one of them moves
+        for hsize in (int(rng.integers(0, m + 1)), m + 1):
+            if hsize > n:
+                continue
+            H = [int(i) for i in rng.choice(n, size=hsize, replace=False)]
+            others = [i for i in range(n) if i not in H]
+            order = [int(i) for i in rng.permutation(others)] + [int(i) for i in rng.permutation(H)] if others else \
+                [int(i) for i in rng.permutation(H)]
+            rank = {site: r for r, site in enumerate(order)}
+            moved = False
+            for y in confs:
+                S = [i for i in range(n) if y[i] != 0]
+                for T in itertools.combinations(S, m):
+                    base = to_base(x0, y, T, rank)
+                    if any(base[h] != 0 for h in H if h not in T):
+                        moved = True
+            if hsize <= m and moved:
+                return False, dict(reason="a host that the order puts last left the reference in a base point", n=n, m=m, hosts=H)
+            if hsize <= m:
+                stats["hosts_anchor"] += 1
+            elif moved:
+                stats["host_moves"] += 1
+            elif all(k > 1 for k in ks):
+                return False, dict(reason="with m + 1 hosts no host left the reference", n=n, m=m, hosts=H)
+        # (c) the bound with host-anchored constants: products of off-anchor indicators that contain the hosts, and a
+        #     random table with arbitrary hosts
+        terms = []
+        for _ in range(2):
+            hsize = int(rng.integers(0, m + 1))
+            H = sorted(int(i) for i in rng.choice(n, size=hsize, replace=False))
+            usize = int(rng.integers(max(hsize, 1), n + 1))
+            U = sorted(set(H) | set(int(i) for i in rng.choice([i for i in range(n) if i not in H], size=usize - hsize, replace=False))) \
+                if usize > hsize else list(H)
+            cval = float(rng.choice([-1, 1]) * rng.uniform(0.5, 2.0))
+            g = np.array([cval if all(x[i] != 0 for i in U) else 0.0 for x in confs])
+            terms.append((g, H, U))
+        Hr = sorted(int(i) for i in rng.choice(n, size=int(rng.integers(0, m + 1)), replace=False))
+        terms.append((rng.normal(0, 1, len(confs)), Hr, None))
+        consts = [to_host_constants(g, idx, ks, x0, m, lambda T, H=H: [i for i in range(n) if i not in T and i not in H])
+                  for g, H, U in terms]
+        total = np.sum([g for g, H, U in terms], axis=0)
+        for y in confs:
+            S = [i for i in range(n) if y[i] != 0]
+            rem = abs(float(total[idx[y]]) - to_interp(total, idx, x0, y, m))
+            bnd = sum(c[T] for c in consts for T in itertools.combinations(S, m))
+            if rem > bnd + 1e-9:
+                return False, dict(reason="the remainder exceeds the sum of the host-anchored constants", n=n, m=m, y=y, rem=rem, bound=bnd)
+            stats["bound"] += 1
+        # one product term alone: the bound is attained when the term has exactly m sites, and three variants fail
+        g, H, U = terms[0]
+        c_host = consts[0]
+        c_anchor = to_host_constants(g, idx, ks, x0, m, lambda T: [])
+        c_swap = to_host_constants(g, idx, ks, x0, m, lambda T: [i for i in H if i not in T])
+        for y in confs:
+            S = [i for i in range(n) if y[i] != 0]
+            rem = abs(float(g[idx[y]]) - to_interp(g, idx, x0, y, m))
+            b_host = sum(c_host[T] for T in itertools.combinations(S, m))
+            if rem > 1e-9 and abs(rem - b_host) < 1e-9:
+                stats["bound_tight"] += 1
+            stats["ctrl_anchor"] += int(rem > sum(c_anchor[T] for T in itertools.combinations(S, m)) + 1e-9)
+            stats["ctrl_swap"] += int(rem > sum(c_swap[T] for T in itertools.combinations(S, m)) + 1e-9)
+        if m + 1 <= n:
+            # m + 1 hosts inside the term: every host-anchored constant vanishes and the remainder does not
+            Hbig = [int(i) for i in rng.choice(n, size=m + 1, replace=False)]
+            gbig = np.array([1.0 if all(x[i] != 0 for i in Hbig) else 0.0 for x in confs])
+            c_big = to_host_constants(gbig, idx, ks, x0, m, lambda T: [i for i in range(n) if i not in T and i not in Hbig])
+            y = tuple(1 for _ in range(n))
+            rem = abs(float(gbig[idx[y]]) - to_interp(gbig, idx, x0, y, m))
+            if max(c_big.values()) < 1e-12 and rem > 0.5:
+                stats["ctrl_hosts"] += 1
+            else:
+                return False, dict(reason="m + 1 hosts: the host-anchored constants should vanish while the remainder is one", n=n, m=m)
+        # (d) the anchored split of a pair table
+        kx, ky = int(rng.integers(2, 6)), int(rng.integers(2, 6))
+        Pt = rng.normal(0, 1, (kx, ky))
+        a, b = int(rng.integers(kx)), int(rng.integers(ky))
+        A = Pt[:, b]
+        B = Pt[a, :] - Pt[a, b]
+        D = Pt - A[:, None] - B[None, :]
+        lo, hi = D.min(axis=1), D.max(axis=1)
+        if np.abs(D[a, :]).max() > 1e-12 or np.abs(D[:, b]).max() > 1e-12:
+            return False, dict(reason="the remainder of the anchored split does not vanish on the anchor row and column")
+        if (A[:, None] + B[None, :] + lo[:, None] > Pt + 1e-12).any() or (Pt > A[:, None] + B[None, :] + hi[:, None] + 1e-12).any() \
+                or abs(lo[a]) > 1e-12 or abs(hi[a]) > 1e-12:
+            return False, dict(reason="the anchored split is not a sandwich, or is not exact on the anchor row")
+        stats["split"] += 1
+        cm = Pt.mean(axis=0)                                        # the split by column means: b(y) plus row extrema of P - b
+        stats["colmeans_loss"] += int(np.ptp(Pt[a, :] - cm) > 1e-6)
+    if not (stats["identity"] > 100 and stats["hosts_anchor"] >= 10 and stats["host_moves"] >= 3 and stats["bound"] > 100
+            and stats["bound_tight"] >= 3 and stats["ctrl_anchor"] >= 3 and stats["ctrl_hosts"] >= 3 and stats["ctrl_swap"] >= 3
+            and stats["split"] >= 10 and stats["colmeans_loss"] >= 8):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
+def sb_max(M, w):
+    """the least sign-blind bound of the quadratic form: max over sign patterns s of |(s w)^T M (s w)| (exact, by enumeration)"""
+    N = len(w)
+    best = 0.0
+    for mask in range(1 << (N - 1)):                               # a global sign does not matter
+        sgn = np.array([1.0 if (mask >> i) & 1 == 0 else -1.0 for i in range(N - 1)] + [1.0])
+        v = sgn * w
+        best = max(best, abs(float(v @ M @ v)))
+    return best
+
+
+@conjecture("XI.25 The sign-blind loss of a quadratic form in the charges, for a cluster with a net charge (theory report section 12, item 13(a); an answer to the Scientific Discovery Division's question P8-T2, SCI-MSG-0027).  For a symmetric kernel M, charges q with magnitudes w, t = q^T M q and SB = max over sign patterns of |(s w)^T M (s w)| - the least bound that sees the charges through their magnitudes only: with any reference value mbar, e = max |M_ij - mbar| and R = sum |q| / |sum q|, (i) SB <= (|mbar| + e)(sum w)^2 and |t| >= |mbar| (sum q)^2 - e (sum w)^2, so that (ii) SB <= (1 + rho)/(1 - rho R^2) R^2 |t| whenever rho R^2 < 1, rho = e/|mbar|; (iii) for a constant kernel SB = R^2 |t| exactly, so the square of R cannot be replaced by a smaller power; (iv) for two clusters and a bilinear form the loss is at most (1 + rho)/(1 - rho R_a R_b) R_a R_b; (v) without a bound on the variation of the kernel there is no such statement, even for charges of one sign: M = [[1, -1], [-1, 1]], q = (1, 1) has t = 0 and SB = 4")
+def t_sign_blind(rng, trials):
+    stats = dict(cases=0, tight=0.0, constant=0, bilinear=0, bilinear_tight=0.0, power_one_fails=0)
+    for _ in range(max(40, trials // 4)):
+        N = int(rng.integers(2, 9))
+        mbar = float(rng.choice([-1, 1]) * rng.uniform(0.5, 2.0))
+        q = rng.uniform(0.05, 1.0, N) * np.where(rng.random(N) < 0.75, 1.0, -1.0)
+        if abs(q.sum()) < 0.05:
+            continue
+        w = np.abs(q)
+        R = float(w.sum() / abs(q.sum()))
+        rho = float(rng.uniform(0.0, 0.9)) / R ** 2                # so that rho R^2 < 1
+        E = rng.uniform(-1, 1, (N, N))
+        E = (E + E.T) / 2
+        E *= rho * abs(mbar) / np.abs(E).max()
+        M = mbar + E
+        t = float(q @ M @ q)
+        SB = sb_max(M, w)
+        e = float(np.abs(M - mbar).max())
+        if SB > (abs(mbar) + e) * w.sum() ** 2 + 1e-9 or abs(t) < abs(mbar) * q.sum() ** 2 - e * w.sum() ** 2 - 1e-9:
+            return False, dict(reason="the two elementary bounds for the sign-blind maximum and for the true value", N=N)
+        factor = (1 + e / abs(mbar)) / (1 - (e / abs(mbar)) * R ** 2) * R ** 2
+        if SB > factor * abs(t) + 1e-9:
+            return False, dict(reason="the sign-blind bound exceeds (1 + rho)/(1 - rho R^2) R^2 times the true value", N=N, R=R,
+                               rho=e / abs(mbar), SB=SB, t=t)
+        stats["tight"] = max(stats["tight"], SB / (factor * abs(t)))
+        stats["power_one_fails"] += int(SB > (1 + e / abs(mbar)) / (1 - (e / abs(mbar)) * R ** 2) * R * abs(t) + 1e-9)
+        # (iii) the constant kernel: equality
+        Mc = np.full((N, N), mbar)
+        if abs(sb_max(Mc, w) - R ** 2 * abs(float(q @ Mc @ q))) > 1e-9 * (1 + R ** 2):
+            return False, dict(reason="constant kernel: the sign-blind bound is not R^2 times the true value")
+        stats["constant"] += 1
+        # (iv) two clusters, a bilinear form q_a^T K q_b: the loss is at most (1 + rho)/(1 - rho R_a R_b) R_a R_b
+        Na, Nb = int(rng.integers(1, 5)), int(rng.integers(1, 5))
+        qa = rng.uniform(0.05, 1.0, Na) * np.where(rng.random(Na) < 0.75, 1.0, -1.0)
+        qb = rng.uniform(0.05, 1.0, Nb) * np.where(rng.random(Nb) < 0.75, 1.0, -1.0)
+        if abs(qa.sum()) < 0.05 or abs(qb.sum()) < 0.05:
+            continue
+        Ra, Rb = float(np.abs(qa).sum() / abs(qa.sum())), float(np.abs(qb).sum() / abs(qb.sum()))
+        rho2 = float(rng.uniform(0.0, 0.9)) / (Ra * Rb)
+        K = mbar * (1 + rho2 * rng.uniform(-1, 1, (Na, Nb)))
+        tb = float(qa @ K @ qb)
+        SBb = max(abs(float((np.array(sa) * np.abs(qa)) @ K @ (np.array(sb_) * np.abs(qb))))
+                  for sa in itertools.product((1.0, -1.0), repeat=Na) for sb_ in itertools.product((1.0, -1.0), repeat=Nb))
+        e2 = float(np.abs(K - mbar).max()) / abs(mbar)
+        f2 = (1 + e2) / (1 - e2 * Ra * Rb) * Ra * Rb
+        if SBb > f2 * abs(tb) + 1e-9:
+            return False, dict(reason="two clusters: the sign-blind bound exceeds (1 + rho)/(1 - rho R_a R_b) R_a R_b times the true value")
+        stats["bilinear"] += 1
+        stats["bilinear_tight"] = max(stats["bilinear_tight"], SBb / (f2 * abs(tb)))
+        stats["cases"] += 1
+    # (v) no statement without a bound on the variation of the kernel, even for charges of one sign
+    Mx = np.array([[1.0, -1.0], [-1.0, 1.0]])
+    qx = np.array([1.0, 1.0])
+    if abs(float(qx @ Mx @ qx)) > 1e-12 or abs(sb_max(Mx, qx) - 4.0) > 1e-12:
+        return False, dict(reason="the counter-instance: t should vanish and the sign-blind maximum be 4")
+    if not (stats["cases"] >= 30 and stats["tight"] > 0.5 and stats["constant"] >= 30 and stats["bilinear"] >= 30
+            and stats["power_one_fails"] >= 5):
         return False, dict(reason="cases not exercised", **stats)
     return True, stats
 
@@ -6861,6 +7293,190 @@ def t_two_level_plus_sample_sizes(rng, trials):
     if stats["runs"] < 40 or stats["samples_above_M_dag"] < 5 or stats["largest_over_new_cap"] < 0.4:
         return False, dict(reason="the test has no power", **stats)
     return True, stats
+
+
+def q_rho(u, e1):
+    """rho_e in [p_u, 1/2] with KL(rho_e || p_u) = min(e1, eps*)"""
+    pu = 1 / (1 + math.exp(u))
+    if e1 >= na_kl(0.5, pu):
+        return 0.5
+    lo, hi = pu, 0.5
+    for _ in range(200):
+        mid = (lo + hi) / 2
+        lo, hi = (mid, hi) if na_kl(mid, pu) <= e1 else (lo, mid)
+    return lo
+
+
+def q_epochs(u, M):
+    """the epoch sequences of the rate (RateFull.lean): d_0 = h/(a - h), J_m = ceil(d_m),
+    d_{m+1} = d_m (J_m a + h)/(J_m a - h d_m), k_0 = 1, k_{m+1} = k_m + J_m + 1"""
+    pu, lam, epsstar, a, h = lv_consts(u)
+    d, J, k = [h / (a - h)], [], [1]
+    for m in range(M):
+        J.append(math.ceil(d[m]))
+        d.append(d[m] * (J[m] * a + h) / (J[m] * a - h * d[m]))
+        k.append(k[m] + J[m] + 1)
+    return d, J, k
+
+
+@conjecture("XVI.5 The closing radius at an extensive threshold, and the arithmetic of the epoch schedule (theory report Theorem 11.58a and its lemmas; workstream Q, Lemmas Q3, Q4, Propositions Q6, Q7, Theorem Q9; refereed R12).  (a) On exact tables of Q_m: Gamma~(r) <= (m + 1) e^{2u + e^u} e^{m e} for 0 <= r <= min(m, rho_e m + 1), rho_e in [p_u, 1/2] with KL(rho_e || p_u) = min(e, eps*); (b) hence for a threshold theta >= ((1 + eta)/(1 - eta)) (m + 1) e^{2u + e^u + m e} the conditions [N], [P] of Theorem 11.56 hold up to r_1 = min(m - 1, floor(rho_e m) + 1), and ln(2^m/|B(m, r_1)|) <= m theta_na(e) + ln(m + 1): the outer sample of a level with such a threshold costs e^{m theta_na(e)} up to the factor m + 1, and theta_na(h) = h; (c) at a bounded threshold theta = c, with s = sqrt((m/2) ln(2 e^{u(m_0 + 2)}/theta)) <= p_u m/2 - 1, the closing radius is at least floor(p_u m - s) and ln(1/pi) <= m a + u(1 + s) + (4/(3 p_u))(s^2 2/m + 2/m) + ln(m + 1) - a loss of order sqrt(m), which half the s would understate; (d) the epoch sequences satisfy B_0 = a, B_{m+1} = B_m J_m a/(J_m a + h) for B_m = h(1 + 1/d_m), B_m - h <= c_1/(k_m + c_2), phi_m = h/(J_m a + h) <= (1 + kappa)^{-m}/rbar, k_{m+1} < (1 + rbar) k_m, and C_* = 2 sqrt((1 + rbar) c_1 (a/h + 4)) is 4.65, 8.64, 13.5 at u = 1/2, 1, 2; (e) a slope step (lambda = 1, eta = 1/2, eta' = 1, b = 1, theta = e^{x - 1} - (3e + 1) - (2 p_u)^n/e) has certified accuracy exactly x, its theta is at least e^{x-1}/2 and satisfies the hypothesis of (b) at e = h with n_o = floor((x - 1 - c_log(n))/h) outer sites; a drop (lambda = eta = eta' = theta = c <= 1/3, b = alpha - w(c), w(c) = ln(e^c (1 + c)/(1 - c) + 2c) + c <= 6.25 c) has certified accuracy at most alpha once (2 p_u)^n <= 5c/6; (f) the hinted lower bound is n h - O(1) (referee R12, finding m1): with k* the least radius whose dip changes ln Z by more than eps, k* < rho_h n + (eps + ln 2)/u and ln(2^n/|B(n, k*)|) >= n h - ((eps + ln 2)/u) ln((1 - rho_h)/rho_h), rho_h = Lambda_1/u - and numerically it exceeds n h by about (1/2) ln n")
+def t_extensive_threshold(rng, trials):
+    stats = dict(part_a=0, least_slack_a=math.inf, part_b=0, least_slack_b=math.inf, part_c=0, radius_gap=0.0, half_s_fails=0,
+                 epochs=0, slope_steps=0, drops=0)
+    quick = trials < 100
+    for u in (0.5, 1.0, 2.0):
+        pu, lam, epsstar, a, h = lv_consts(u)
+        if abs(na_theta_na(u, h) - h) > 1e-9:
+            return False, dict(reason="theta_na(h) is not h", u=u)
+        for m in ((1, 2, 3, 5, 8, 21, 55) if quick else (1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233)):
+            for e in (0.0, 0.25 * epsstar, 0.5 * epsstar, h, 0.9 * epsstar, epsstar, 1.5 * epsstar):
+                rho = q_rho(u, e)
+                r1 = min(m - 1, math.floor(rho * m) + 1)
+                rtop = min(m, math.floor(rho * m + 1))
+                binom, ball, E, T = ba_exact_tables(m, u, rtop)
+                cap = math.log(m + 1) + 2 * u + math.exp(u) + m * e
+                for r in range(rtop + 1):
+                    lg = math.log(math.exp(u) - 1) if r == 0 else math.log(E[r]) - math.log(ball[r])
+                    if lg > cap + 1e-9:
+                        return False, dict(reason="Gamma~(r) exceeds (m + 1) e^{2u + e^u + m e} at a radius up to rho_e m + 1",
+                                           u=u, m=m, e=e, r=r)
+                    stats["least_slack_a"] = min(stats["least_slack_a"], cap - lg)
+                    stats["part_a"] += 1
+                # (b) the ball that the level may close with
+                if r1 >= 0:
+                    lhs = m * math.log(2) - math.log(ball[r1 + 1])
+                    rhs = m * na_theta_na(u, e) + math.log(m + 1)
+                    if lhs > rhs + 1e-9:
+                        return False, dict(reason="ln(2^m/|B(m, r_1)|) exceeds m theta_na(e) + ln(m + 1)", u=u, m=m, e=e, r1=r1)
+                    stats["least_slack_b"] = min(stats["least_slack_b"], rhs - lhs)
+                    stats["part_b"] += 1
+    # (c) a bounded threshold: the closing radius from the definition, on exact tables
+    for u, m, c in ((0.5, 120, 0.05), (0.5, 300, 1 / 3), (1.0, 250, 0.05)) + (() if quick else ((0.5, 500, 0.05), (1.0, 700, 0.05), (1.0, 400, 1 / 3))):
+        pu, lam, epsstar, a, h = lv_consts(u)
+        eta = theta = c
+        c_eta = (1 - eta) / (1 + eta)
+        cfrac = (1 - Fraction(c).limit_denominator(10 ** 6)) / (1 + Fraction(c).limit_denominator(10 ** 6))
+        m0 = math.ceil(math.log(1 / c_eta) / u)
+        ell = math.log(2 * math.exp(u * (m0 + 2)) / theta)
+        sq = math.sqrt(m * ell / 2)
+        if sq > pu * m / 2 - 1:
+            return False, dict(reason="harness: the size is below the range of the refined bound", u=u, m=m, c=c)
+        nu0 = 2 * math.exp(u) * m / (theta * (1 - eta))
+        rmax = int(pu * m)
+        binom, ball, E, T = ba_exact_tables(m, u, rmax)
+        rdag = -1
+        while rdag + 1 <= rmax:
+            r = rdag + 1
+            g1 = (math.exp(u) - 1) if r == 0 else E[r] / ball[r]
+            g2 = E[r] / T(ba_kappa(ball, cfrac, r))
+            if not (g1 <= theta * (1 - eta) * nu0 and min(g1 / c_eta, g2) <= theta):
+                break
+            rdag += 1
+        r_plus = math.floor(pu * m - sq)
+        if rdag < r_plus:
+            return False, dict(reason="bounded threshold: the closing radius is below floor(p_u m - s)", u=u, m=m, c=c, rdag=rdag,
+                               r_plus=r_plus)
+        ln_inv_pi = m * math.log(2) - math.log(ball[rdag + 1])
+        bound = m * a + u * (1 + sq) + (4 / (3 * pu)) * (ell + 2 / m) + math.log(m + 1)
+        if ln_inv_pi > bound + 1e-9:
+            return False, dict(reason="bounded threshold: ln(1/pi) exceeds m a + u(1 + s) + (4/(3 p_u))(l + 2/m) + ln(m + 1)", u=u, m=m, c=c)
+        stats["part_c"] += 1
+        stats["radius_gap"] = max(stats["radius_gap"], (pu * m - rdag) / sq)
+        stats["half_s_fails"] += int(rdag < math.floor(pu * m - 0.5 * sq))
+    # (d) the epoch sequences and the constant of the order
+    cstar = {}
+    for u in (0.5, 1.0, 2.0, 5.0):
+        pu, lam, epsstar, a, h = lv_consts(u)
+        kappa = h * h * a / ((a - h) * (a + h) * (2 * a - h))
+        c1, c2, rbar = h * (1 + kappa) / kappa, (a + h) * (2 * a - h) / (h * a) - 2, (2 * a - h) / (a - h)
+        d, J, k = q_epochs(u, 24 if quick else 36)
+        B = [h * (1 + 1 / x) for x in d]
+        if abs(B[0] - a) > 1e-12 * a or c2 < 0:
+            return False, dict(reason="B_0 is not a, or c_2 is negative", u=u)
+        for m in range(len(J)):
+            if not (d[m] <= J[m] < d[m] + 1 and J[m] * a - h * d[m] > 0):
+                return False, dict(reason="J_m is not the ceiling of d_m, or the recursion is not defined", u=u, m=m)
+            if abs(B[m + 1] - B[m] * J[m] * a / (J[m] * a + h)) > 1e-10 * a:
+                return False, dict(reason="B_{m+1} is not B_m J_m a/(J_m a + h)", u=u, m=m)
+            if B[m] - h > c1 / (k[m] + c2) * (1 + 1e-10):
+                return False, dict(reason="B_m - h exceeds c_1/(k_m + c_2)", u=u, m=m)
+            if h / (J[m] * a + h) > (1 + kappa) ** (-m) / rbar * (1 + 1e-10):
+                return False, dict(reason="the outer fraction of the drop of epoch m exceeds (1 + kappa)^{-m}/rbar", u=u, m=m)
+            if not k[m + 1] < (1 + rbar) * k[m]:
+                return False, dict(reason="k_{m+1} is not below (1 + rbar) k_m", u=u, m=m)
+            stats["epochs"] += 1
+        cstar[u] = 2 * math.sqrt((1 + rbar) * c1 * (a / h + 4))
+    if abs(cstar[0.5] - 4.65) > 0.01 or abs(cstar[1.0] - 8.64) > 0.01 or abs(cstar[2.0] - 13.5) > 0.05:
+        return False, dict(reason="the constant C_* of the order sqrt(n ln n)", values=cstar)
+    # (e) the accuracies of the two kinds of level
+    for _ in range(60):
+        u = float(rng.choice([0.5, 1.0, 2.0]))
+        pu, lam, epsstar, a, h = lv_consts(u)
+        n = int(rng.integers(2, 4000))
+        clog = math.log(n + 1) + math.log(6) + 2 * u + math.exp(u)
+        x0n = 1 + clog + h
+        if h * n >= x0n:
+            x = float(rng.uniform(x0n, h * n))
+            theta = math.exp(x - 1) - (3 * math.e + 1) - (2 * pu) ** n / math.e
+            xout = math.log((2 * pu) ** n + math.e * (3 * math.e + 1 + theta))
+            n_o = math.floor((x - 1 - clog) / h)
+            if abs(xout - x) > 1e-9 or theta < math.exp(x - 1) / 2 or not 1 <= n_o <= n - 1:
+                return False, dict(reason="slope step: the accuracy is not exactly x, theta is not at least e^{x-1}/2, or the outer block is not admissible",
+                                   u=u, n=n, x=x, xout=xout, n_o=n_o)
+            if math.log(3 * (n_o + 1)) + 2 * u + math.exp(u) + n_o * h > math.log(theta) + 1e-9:
+                return False, dict(reason="slope step: theta is below the threshold of the lemma at e = h", u=u, n=n, x=x)
+            stats["slope_steps"] += 1
+        c = float(rng.uniform(0.001, 1 / 3))
+        alpha = float(rng.uniform(0.05, 1.0))
+        w = math.log(math.exp(c) * (1 + c) / (1 - c) + 2 * c) + c
+        if w > 6.25 * c + 1e-12 or 5 * c / 6 > 1 - math.exp(-c) + 1e-15:
+            return False, dict(reason="drop: w(c) <= 6.25 c or 5c/6 <= 1 - e^{-c} fails", c=c)
+        nmin = max(2, math.ceil(math.log(6 / (5 * c)) / math.log((1 + math.exp(u)) / 2)))
+        nd = nmin + int(rng.integers(0, 50))
+        beta = alpha - w
+        xout = math.log((2 * pu) ** nd + math.exp(beta) * (math.exp(c) * (1 + c) / (1 - c) + 2 * c))
+        if xout > alpha + 1e-12:
+            return False, dict(reason="drop: the certified accuracy exceeds alpha", u=u, n=nd, c=c, alpha=alpha, xout=xout)
+        stats["drops"] += 1
+    # (f) the hinted lower bound of Theorem 11.25(a) is n h - O(1): exact tables of Q_n
+    stats.update(lower=0, lower_min_excess=math.inf, lower_excess_large_n=0.0)
+    for u in (0.5, 1.0, 2.0):
+        pu, lam, epsstar, a, h = lv_consts(u)
+        rho_h = lam / u
+        for n in ((10, 40, 160) if quick else (10, 40, 160, 640, 2500)):
+            binom = [math.comb(n, j) for j in range(n + 1)]
+            ball = list(itertools.accumulate(binom))
+            lbin = [math.log(b) for b in binom]                    # logarithms of exact integers: no overflow at large n
+            for eps in (0.01, 0.1, 1.0, 10.0):
+                target = n * math.log(2) + math.log(math.expm1(eps))
+                kstar = None
+                for k in range(n // 2 + 1):
+                    terms = [lbin[j] + u * (k + 1 - j) + math.log1p(-math.exp(-u * (k + 1 - j))) for j in range(k + 1)]
+                    top = max(terms)
+                    lE = top + math.log(math.fsum(math.exp(t_ - top) for t_ in terms))
+                    if lE > target:
+                        kstar = k
+                        break
+                if kstar is None:
+                    continue                                       # the accuracy is too coarse for this size
+                if not kstar < rho_h * n + (eps + math.log(2)) / u:
+                    return False, dict(reason="hinted lower bound: k* is not below rho_h n + (eps + ln 2)/u", u=u, n=n, eps=eps, kstar=kstar)
+                lhs = n * math.log(2) - math.log(ball[kstar])
+                rhs = n * h - ((eps + math.log(2)) / u) * math.log((1 - rho_h) / rho_h)
+                if lhs < rhs - 1e-9:
+                    return False, dict(reason="hinted lower bound: ln(2^n/|B(n, k*)|) is below n h - ((eps + ln 2)/u) ln((1 - rho_h)/rho_h)",
+                                       u=u, n=n, eps=eps)
+                stats["lower"] += 1
+                stats["lower_min_excess"] = min(stats["lower_min_excess"], lhs - rhs)
+                if n >= 160 and eps == 1.0 and u == 1.0:
+                    stats["lower_excess_large_n"] = max(stats["lower_excess_large_n"], lhs - n * h)
+    if not (stats["part_a"] > 500 and stats["least_slack_a"] < 3.0 and stats["part_b"] > 100 and stats["least_slack_b"] < 1e-9
+            and stats["lower"] >= 20 and stats["lower_excess_large_n"] > 1.0
+            and stats["part_c"] >= 3
+            and stats["half_s_fails"] >= 2 and stats["epochs"] >= 90 and stats["slope_steps"] >= 30 and stats["drops"] >= 60):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
 
 
 # ----------------------------------------------------------------------------------------------
@@ -11514,10 +12130,23 @@ def t_sandwich_refinements(rng, trials):
     return True, stats
 
 
-@conjecture("XXIV.12 Nested sandwiches: the inner bracket at the price of free rejections (theory report Proposition 11.113a; an answer to the Scientific Discovery Division's question P6-T3, SCI-MSG-0025).  Let m- <= e- <= E <= e+ <= m+ pointwise, with Z(m-), Z(m+) known, the Gibbs measure of m- sampleable and e-, e+ computable pointwise without an evaluation of E.  With q proportional to e^{-m-} - e^{-m+}, beta = (e^{-e+} - e^{-m+})/(e^{-m-} - e^{-m+}), rho = (e^{-e-} - e^{-e+})/(e^{-m-} - e^{-m+}) and W_in = (e^{-E} - e^{-e+})/(e^{-e-} - e^{-e+}): (a) beta, rho, beta + rho lie in [0, 1] and the variable of the outer sampler is W = beta + rho W_in; (b) Z(e+) = Z(m+) + (Z(m-) - Z(m+)) E_q beta, Z(e-) - Z(e+) = (Z(m-) - Z(m+)) E_q rho, and a draw of q accepted with probability rho has the law of the inner sandwich's own sampler - so E is evaluated at a fraction E_q rho of the proposals only; (c) with N_f free draws and N evaluated draws, |Z(E) - Z(m+) - A(beta_bar + rho_bar W_bar)| <= A(2 t_f + rho_bar t) with probability 1 - delta, A = Z(m-) - Z(m+), t_f = sqrt(ln(6/delta)/(2 N_f)), t = sqrt(ln(6/delta)/(2 N)) (coverage simulated), and the term 2 t_f cannot be dropped; (d) at equal numbers of evaluations the half-width is that of the outer sampler times E_q rho = (Z(e-) - Z(e+))/(Z(m-) - Z(m+)) in the limit of many free draws - 0.1 in a constructed instance where the outer model is loose on states at which the inner bracket has no width")
+@conjecture("XXIV.12 Nested sandwiches: the inner bracket at the price of free rejections (theory report Proposition 11.113a; an answer to the Scientific Discovery Division's question P6-T3, SCI-MSG-0025).  Let m- <= e- <= E <= e+ <= m+ pointwise, with Z(m-), Z(m+) known, the Gibbs measure of m- sampleable and e-, e+ computable pointwise without an evaluation of E.  With q proportional to e^{-m-} - e^{-m+}, beta = (e^{-e+} - e^{-m+})/(e^{-m-} - e^{-m+}), rho = (e^{-e-} - e^{-e+})/(e^{-m-} - e^{-m+}) and W_in = (e^{-E} - e^{-e+})/(e^{-e-} - e^{-e+}): (a) beta, rho, beta + rho lie in [0, 1] and the variable of the outer sampler is W = beta + rho W_in; (b) Z(e+) = Z(m+) + (Z(m-) - Z(m+)) E_q beta, Z(e-) - Z(e+) = (Z(m-) - Z(m+)) E_q rho, and a draw of q accepted with probability rho has the law of the inner sandwich's own sampler - so E is evaluated at a fraction E_q rho of the proposals only; (c) with N_f free draws and N evaluated draws, |Z(E) - Z(m+) - A(beta_bar + rho_bar W_bar)| <= A(t_f + rho_bar t) with probability 1 - delta, A = Z(m-) - Z(m+), t_f = sqrt(ln(6/delta)/(2 N_f)), t = sqrt(ln(6/delta)/(2 N)) (coverage simulated; the two-end form of the Scientific Discovery Division's review SCI-REV-0015, m8, which replaced our 2 t_f: in every run the error is at most the larger of the errors of the means of beta and of beta + rho, plus rho_bar times the error of the inner mean), and a free term cannot be dropped; the variant with one known mean, E_q W = E_q(beta + rho/2) + E_q rho (E_in W_in - 1/2) (that division's, SCI-RES-0017); against the plain sampler at equal evaluations the bound is narrower iff sqrt(N/N_f) + rho_bar < kappa(delta) = sqrt(ln(2/delta)/ln(6/delta)), which is 0.855, 0.878, 0.910 at delta = 0.1, 0.05, 0.01, and with every accepted draw evaluated only for rho_bar < 0.316 at delta = 0.05; (d) at equal numbers of evaluations the half-width is that of the outer sampler times E_q rho = (Z(e-) - Z(e+))/(Z(m-) - Z(m+)) in the limit of many free draws - 0.1 in a constructed instance where the outer model is loose on states at which the inner bracket has no width")
 def t_nested_sandwich(rng, trials):
-    stats = dict(cases=0, runs=0, misses=0, misses_without_free_term=0, runs_few_free=0, least_rho=math.inf, gain=None)
+    stats = dict(cases=0, runs=0, misses=0, misses_without_free_term=0, runs_few_free=0, least_rho=math.inf, gain=None,
+                 two_end_tight=0.0)
     delta = 0.1
+    # against the plain sampler (review SCI-REV-0015, m10, for the two-end bound)
+    kap = {d_: math.sqrt(math.log(2 / d_) / math.log(6 / d_)) for d_ in (0.1, 0.05, 0.01)}
+    if any(abs(kap[d_] - v_) > 5e-4 for d_, v_ in ((0.1, 0.855), (0.05, 0.878), (0.01, 0.910))) \
+            or abs(((math.sqrt(1 + 4 * kap[0.05]) - 1) / 2) ** 2 - 0.316) > 5e-4:
+        return False, dict(reason="the constants of the comparison with the plain sampler")
+    for _ in range(200):
+        d_ = float(rng.choice([0.1, 0.05, 0.01]))
+        Ne_, Nf_, rb_ = int(rng.integers(10, 5000)), int(rng.integers(10, 500000)), float(rng.uniform(0, 1))
+        nested = math.sqrt(math.log(6 / d_) / (2 * Nf_)) + rb_ * math.sqrt(math.log(6 / d_) / (2 * Ne_))
+        plain = math.sqrt(math.log(2 / d_) / (2 * Ne_))
+        if (nested < plain) != (math.sqrt(Ne_ / Nf_) + rb_ < kap[d_]):
+            return False, dict(reason="the criterion sqrt(N/N_f) + rho_bar < kappa(delta) for the nested bound to be the narrower one")
     for it in range(max(40, trials // 3)):
         N = int(rng.integers(8, 50))
         E = rng.normal(0, 1.5, N)
@@ -11556,6 +12185,9 @@ def t_nested_sandwich(rng, trials):
             q_in = q * rho / rate
             if np.abs(q_in - inner / (Zelo - Zehi)).max() > 1e-10:
                 return False, dict(reason="accepted draws do not have the law of the inner sandwich's sampler")
+            # one known mean: c = beta + rho/2 needs no evaluation, and E_q W = E_q c + E_q rho (E_in W_in - 1/2)
+            if abs(float(q @ W) - (float(q @ (beta + rho / 2)) + rate * (float(q_in @ Win) - 0.5))) > 1e-10:
+                return False, dict(reason="the identity of the variant with one known mean")
             if abs(Zehi + (Zelo - Zehi) * float(q_in @ Win) - ZE) > 1e-10 * ZE:
                 return False, dict(reason="Z(E) is not Z(e+) + (Z(e-) - Z(e+)) E W_in")
         else:
@@ -11575,7 +12207,14 @@ def t_nested_sandwich(rng, trials):
             ev = rng.choice(N, size=(reps, Ne), p=q_in)
             bbar, rbar, wbar = beta[free].mean(axis=1), rho[free].mean(axis=1), Win[ev].mean(axis=1)
             estz = Zhi + A * (bbar + rbar * wbar)
-            miss = np.abs(estz - ZE) > A * (2 * tf + rbar * te) * (1 + 1e-12)
+            # the two-end inequality, run by run: the error of the free part is affine in the inner mean
+            mu_in = float(q_in @ Win)
+            two_end = np.maximum(np.abs(bbar - float(q @ beta)), np.abs(bbar + rbar - float(q @ (beta + rho)))) \
+                + rbar * np.abs(wbar - mu_in)
+            if (np.abs(estz - ZE) > A * two_end * (1 + 1e-9) + 1e-12 * ZE).any():
+                return False, dict(reason="the error exceeds the larger of the two end errors plus rho_bar times the inner error")
+            stats["two_end_tight"] = max(stats["two_end_tight"], float((np.abs(estz - ZE) / (A * two_end + 1e-300)).max()))
+            miss = np.abs(estz - ZE) > A * (tf + rbar * te) * (1 + 1e-12)
             stats["runs"] += reps
             stats["misses"] += int(miss.sum())
             if key == "few":
@@ -11585,7 +12224,7 @@ def t_nested_sandwich(rng, trials):
     if stats["misses"] > delta * stats["runs"]:
         return False, dict(reason="the bracket of the nested sampler misses more often than delta", **stats)
     if not (stats["cases"] >= 30 and stats["gain"] is not None and abs(stats["gain"] - 0.1) < 1e-12
-            and stats["misses_without_free_term"] > 0.3 * stats["runs_few_free"]):
+            and stats["misses_without_free_term"] > 0.3 * stats["runs_few_free"] and stats["two_end_tight"] > 0.9):
         return False, dict(reason="cases not exercised, or the free-sampling term was never needed", **stats)
     return True, stats
 

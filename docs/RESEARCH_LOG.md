@@ -2434,23 +2434,112 @@ its report nor its scripts; verifying it is the first item of the next checkpoin
 regenerated from full runs; `scripts/audit_all.sh` passes.  THY-RES-0014 (to the science
 division, copy to engineering) with linked corrections of THY-RES-0011 §§1, 2, 8.
 
-### Resume here (cycle 10, twenty-first checkpoint)
+### Cycle 10, twenty-second checkpoint (2026-11-26): the sub-exponential term of the adaptive cost; two reviews by the science division applied; one order of the sites per term
 
-Verified state: every module under `proofs/` (85 files) builds with zero warnings and is walked
-by the axiom audit (4899 declarations); the harness (180 registered tests: 152 that must
-survive, 28 documented refutations) and its mutation tests (503 mutations: 502 caught, one
+**The result of the checkpoint: Theorem 11.58a** (theory report §11.19).  Without a hint,
+the least number of evaluations of an adaptive algorithm on the cube class at a bounded
+accuracy is between `exp(n·h − O(1))` and `exp(n·h + O(√(n ln n)))`.  The upper bound is an
+explicit schedule of about `√(n/ln n)` nested levels of Algorithm 2L⁺, chosen by certified
+cost, built on the epochs of the machine-checked rate (`RateFull.lean`).  Workstream Q
+(commissioned at the twenty-first checkpoint with the brief "prove `n^{3/4}` or find the
+step where it fails") delivered `docs/workstreams/Q_REPORT.md`: it found that the heuristic
+`n^{3/4}` of our report counted the wrong levels — only one level per epoch works at a
+bounded threshold and loses `e^{O(√n)}`; the others run at an accuracy `x ≫ ln n` with the
+closure threshold `e^{x − O(1)}`, where the closing radius is `ρ_h·n_o` (its Lemma Q4, our
+Lemma 11.55(d)) and the loss is a polynomial factor.
+
+*How it was verified.*  (1) The coordinator read the report as a referee and re-derived
+Lemmas Q3, Q4, Propositions Q6 (slope step), Q7 (drop), Theorem Q8 (the induction over
+epochs, the invariant `ln(1/δ) + dimension·ln 2`), Proposition Q9a and Theorem Q9 (the
+depth), and recomputed `C_*`; re-ran its quick scripts (outputs identical up to timing
+fields).  (2) An independent referee (R12; brief `docs/reviews/R12_brief.md`, report
+`docs/reviews/R12_referee_report.md`, code `experiments/reviews/R12/`), told to break the
+claims with code of its own: **no major finding**; every statement re-derived; no
+violation in about 220 million node checks of the nested design (up to seven levels),
+`523 000` levels with worst-case inner families and 0.9 million checks of the two lemmas
+in exact arithmetic; the formula table reproduced.  Its two findings that the coordinator's reading had missed:
+the lower bound quoted in the workstream's theorem (`n·h − O(ln n)` for every `δ < 1`, "by
+Theorem 11.25(a),(d)") is stated by neither part of that theorem — the truth, three
+lines from (a), is `n·h − O(1)` for `δ < ½`; and the nesting needs the abort rule in the form
+"before every query, every inner call counted with its certified bound".  (The
+coordinator integrated the referee's report from a draft while its last runs were
+going; its final hand-back corrected a condition of the lower bound — the constant is
+`max{1, (ε + ln 2)/u}` at small sizes — two numbers and the count of checks, all applied
+before the commit: D63.)  Four further
+minor points (a crossover at `2.1·10⁴` not `3·10⁴`; two auxiliary numbers; a table that uses
+the refined bound; "proved `1.83√n_o`" is a leading term) are errata at the head of the
+workstream report.  (3) Harness XVI.5: both lemmas on exact tables, the epoch arithmetic,
+the accuracies of the two kinds of level, the lower bound; nine mutations.
+*What it is not:* a competitive design (three levels of the schedule are certified at
+`0.83·na` at `n = 6.4·10⁴`, where the tuned two- and three-level designs have `0.54` and `0.43`);
+the true order; a statement at extensive accuracies; machine-checked.  It rests on
+Theorem 11.56 in a regime no simulation covers.
+
+**The science division's commits `ea1233f` and `ddd4be3`, applied in full (THY-RES-0015).**
+* *SCI-REV-0016* (the certified third level, remark (1b)).  The rule holds, 159 of 159
+  certified numbers replicated.  Applied: the five two-level entries that belong to the
+  ladder `ε*·0.85^i` are marked (the error is visible in our own report: remark (1a) has
+  `0.9912·na` at `n = 1 400` for one ladder, the table `0.9933·na` for the other); the abort
+  rule of Theorem 11.56; "certified accuracy", the admissible tolerance; its Proposition
+  R16.1; and its model-free comparison, recomputed on a finer scan
+  (`three_levels_certified/flat_two_level.py`): **three levels are certified below the
+  exact cost of two levels at the flat instance from `n = 16 000` on** (margins `e^{37}`,
+  `e^{192}`, `e^{435}`), not from `4 000`, where the comparison rests on searched instances in
+  a mean-run model.  `0.4341` at the outer fraction `0.275` confirmed for `n = 64 000`.
+* *SCI-REV-0015* (Propositions 11.18e(b′)(i), 11.18f, 11.113a, 11.113(d), Corollary 11.114):
+  nothing false, twelve conditions, all taken; `t_f + ρ̄t` replaces `2t_f + ρ̄t` (the error of
+  the free part is affine in the inner mean); the allocation rule has its range of
+  validity (new part (c″): the upper end sees `f_i − γ_i`); the first block of the review's
+  table reproduced with independent code
+  (`experiments/coordinator_checks/allocation_beyond_first_order/`).
+* *SCI-RES-0017*: its `CoreGreedy.lean` adopted (the greedy vertex of the core); the
+  water-filling bound `U ≥ ln(1 + Σ_i (λ − p_i)⁺)` re-derived for any law; the pair-level
+  question answered (second differences for a product law; no closed form in general).
+* *SCI-MSG-0027*: `TermOrders.lean` — the remainder identity with one order of the sites
+  per term, hosts that are last stay at the anchor (at most `m`; sharp), the bound with
+  host-anchored constants, the anchored split of a pair table.  Written by a subagent
+  from a written brief; read line by line, compiled and axiom-checked by the coordinator.
+  A lemma answers its question on sign-blind bounds: the loss is at most
+  `(1 + ρ)/(1 − ρR²)·R²`, `R = Σ|q|/|Σq|`, when the kernel varies by the relative amount `ρ`
+  with `ρR² < 1`, with equality `R²` for a constant kernel, and unbounded without such a
+  hypothesis even for charges of one sign (§12 item 13(a); harness XI.25).
+
+**Numbers of the audit that closes the checkpoint.**  87 Lean files (47657 lines), 4937
+declarations walked by the axiom audit, 659 headline theorems; harness: 183 tests (155
+survive, 28 documented refutations); mutations: 538 (537 caught, one expected pass; 149
+baseline runs).  New tests: XI.24 (term orders, three false variants on a family built to
+break them, the anchored split), XI.25 (sign-blind loss), XVI.5 (the lemmas of Theorem
+11.58a); extended: XI.22(d), XI.23(f), XXIV.12(c).
+
+**What was withdrawn or corrected:** `DEAD_ENDS.md` D63 (seven items: the heuristic
+`n^{3/4}`; two designs under one name; a theorem set against a model; the abort rule one
+step short; a lower bound quoted from a theorem that does not state it; two hypotheses
+dropped from Lemma 11.55(c); the allocation rule without its range).
+
+**Subagents of this checkpoint** (each with a written brief, each checked by the
+coordinator): the referee R12; the Lean file `TermOrders.lean`.  Both other branches were
+fetched at the start (unchanged) and before the commit (science `08ec47c`, engineering `ce71724`).
+
+### Resume here (cycle 10, twenty-second checkpoint)
+
+Verified state: every module under `proofs/` (87 files) builds with zero warnings and is walked
+by the axiom audit (4937 declarations); the harness (183 registered tests: 155 that must
+survive, 28 documented refutations) and its mutation tests (538 mutations: 537 caught, one
 expected pass; baselines checked,
 crashing mutants rejected) pass; `scripts/audit_all.sh`
 exits 0.  **Three divisions** work on three branches (this one; `research/ubuntu-engineering`;
 `research/scientific-translation`); the other two are read-only for us and are fetched at
 every checkpoint (`docs/collaboration/status/theory.md`).  Refereed or independently reviewed:
-theory report §§11.16–11.17 (R5, R6, R_P), §11.18 (R7; SCI-REV-0007), §11.19 (R8; SCI-REV-0007),
+theory report §§11.16–11.17 (R5, R6, R_P), §11.18 (R7; SCI-REV-0007), §11.19 (R8; SCI-REV-0007;
+remark (1b): SCI-REV-0016; Theorem 11.58a: R12),
 §11.20 (R9), §11.23 (R10), §11.32 (R11; SCI-REV-0010), and — by the Scientific Discovery
 Division — §11.22 (SCI-REV-0002, -0009, -0011), §11.24 (SCI-REV-0003), §11.25 (SCI-REV-0001),
 Theorems 11.99 and 11.101 of §11.26 (SCI-REV-0005), Theorem 11.18a and Propositions 11.18b,
 11.18c (SCI-REV-0012), Theorem 11.110(e) as corrected, Theorem 11.18d as written,
 Propositions 11.18e and 11.113, Corollary 11.114 and Theorem 11.115(c)–(e) (SCI-REV-0013:
-two sentences wrong and replaced at the nineteenth checkpoint), the prior-art columns
+two sentences wrong and replaced at the nineteenth checkpoint), Propositions 11.18e(b′)(i),
+11.18f, 11.113a, the necessity part of 11.113(d) and Corollary 11.114(c), (d) (SCI-REV-0015:
+nothing false, twelve conditions added at the twenty-second checkpoint), the prior-art columns
 (SCI-REV-0004, -0006).  Machine-checked: §11.21; Theorem 11.18d with its parts (a′), (b′),
 (c′); the core of the counter-algorithm of Proposition 11.18e(b); Theorem 11.116(a), (b)
 in two-block form;
@@ -2466,74 +2555,95 @@ Proposition 11.81(c) in its completed form, the remark on sample sizes after The
 the `χ²` bound and the rate in Theorem 11.97(c); **the rate `O(1/k)` for the level recursion
 (remark after Theorem 11.53) and the duality statement of Proposition 11.18b(e)**.  **Not
 refereed:** the revised Theorem 11.44,
-Proposition 11.50, Propositions 11.100, 11.102, 11.103(a)–(c); Propositions 11.18e(b′),
-11.18f, 11.113a and the mixed lower bound for ratios (nineteenth checkpoint; a review
-asked of the science division, THY-RES-0012).  **Not checked by anyone:** the
+Proposition 11.50, Propositions 11.100, 11.102, 11.103(a)–(c); Proposition 11.113b(b), (c);
+Proposition 11.18f(c″) beyond the parts the science division stated; the sign-blind lemma
+of §12 item 13(a).  **Not checked by anyone:** Theorem 11.56 at the parameters at which
+Theorem 11.58a uses it (thresholds `e^{Θ(n)}`, ladders of `Θ(n)` rungs, depth `√(n/ln n)`), and the
+composition beyond seven levels; the
 two-level algorithms in the extensive regime under an adversarial
 search, or in the batched schedule (three levels beyond the flat instance have been
 evaluated by the engineering division at one slope, on flat and cone fibres: ENG-RES-0014); the nested algorithm with a field or with several
 site types end to end; Theorem 11.63 on sets without symmetry for `n > 6`; parts (f), (g) of
-the bridge theorem (read only); **the nested sampler of Proposition 11.113a on any real
-sandwich.**  **Nothing received is unapplied** except the optional parts of L4-T3 of
-SCI-MSG-0023 and P5-T1(i) (item 0-first); the
-science branch is read at `4b80f89`, the engineering branch at `ce71724`.  In priority order:
+the bridge theorem (read only).  **Nothing received is unapplied** except the optional
+parts of L4-T3 of SCI-MSG-0023, P5-T1(i) (item 0-first), R16-THY-5 and R15-T6 (items below);
+the science branch is read at `08ec47c`, the engineering branch at `ce71724`.  In priority order:
 
-0-zero-zero. **Apply the science division's commits `ea1233f` and `ddd4be3`** (fetched at
-   10:25 UTC on 2026-11-26, when the twenty-first checkpoint was ready to commit).
-   **SCI-REV-0016** (read in full): its independent review of remark (1b) of §11.19, the
-   certified third level.  The rule holds; 159 of 159 certified numbers replicated with
-   code that imports nothing of ours.  *Major:* the two-level worst cases of our table at
-   `n = 1 400, 2 000, 8 000, 32 000, 64 000` are ENG-RES-0008's, computed for the ladder
-   `ε*·0.85^i`, not for the referee's ladder `x₀(b/x₀)^{l/40}` of the three-level bounds — two
-   designs (their certified two-level bounds differ in the third digit); "of the same
-   outer design" holds at `n = 4 000, 16 000` only.  Either mark the five entries (its
-   replacement text: its `R16_REPORT.md` §1) or ask the engineering division for the
-   three numbers of the table's design.  *Minor:* the abort rule of Theorem 11.56 must
-   test the budget before every query, as Theorem 11.52's text does (as worded it proves
-   `C_max + M̄`); "the largest tolerance" is a supremum and "accuracy" should read
-   "certified accuracy"; "at the level of expectations" is the mean-run model.  *Its
-   addition, to be adopted:* against the **exact** cost of the two-level algorithm at the
-   flat instance (deterministic; minimum over the outer fraction on a grid of step `0.01`:
-   `0.5336, 0.5110, 0.5027, 0.4998, 0.4961` at `n = 4 000 … 64 000`) the certified three-level
-   bound (`0.6106, 0.5262, 0.4782, 0.4439, 0.4381`) is lower from `n = 16 000` on — a comparison
-   with no search and no model — and higher at `4 000` and `8 000`; and `τ₂/a` bounds nothing
-   at a finite `n`.  Its Proposition R16.1 (nesting with the hypotheses written out) is
-   offered.  Recompute its flat-instance table with the referee's evaluator of the flat
-   instance (`experiments/reviews/R8/r8_flat.py`) before adopting.
-   **Not yet read:** SCI-REV-0015 (the review we asked for of Propositions 11.18e(b′)(i),
-   11.18f, 11.113a and the mixed ratio bound), SCI-RES-0017 (our nested sampler and
-   allocation rule run on its instances), SCI-RES-0018 (its answer to THY-RES-0013),
-   SCI-MSG-0027 (its own work).
-0-zero. **Workstream Q: the sub-exponential term of the adaptive exponent** (launched at
-   the twenty-first checkpoint; brief `docs/workstreams/Q_brief.md`).  **Its report exists
-   in the working tree of the session that wrote this entry (`docs/workstreams/Q_REPORT.md`,
-   scripts under `experiments/workstreams/Q/`) and is committed only once verified; if it
-   is not in the repository you are reading, the verification was not finished and the
-   brief is the place to start again.**  Its claim: for every `n`, an explicit design with
-   `k_M` nested levels has certified cost `exp(n·B_M + E_M)`, `B_M − h ≤ c₁/(k_M + c₂)`,
-   `E_M ≤ C₁√n + (k_M − 1)·O(ln n)`, hence `exp(nh + C√(n ln n))`, `C = 8.64` at `u = 1` in the limit;
-   the decisive new step is its Lemma Q4 (at `θ = e^{x − O(1)}` the closing radius is at least
-   `ρ_h n_o`, so `ln(1/π†) ≤ n_o h + ln(n_o + 1)`: a "slope step" loses a polynomial factor only)
-   and its Propositions Q6, Q7 (the two steps of the rate proof at finite `n`).  It also
-   lists five imprecisions of the theory report (two hypotheses of Lemma K.4 dropped in
-   Lemma 11.55(c); a constant; the `o(n)` of Theorem 11.52 is `O(ln n)`).  To verify: read it
-   as a referee would — re-derive the one-level
-   inequality from Theorem 11.56 and Lemma 11.55 (the `√n` term should be about
-   `u·√((φn/2)·ln(2e^{u(m₀+2)}/θ))`, `1.29√n` at `u = 1`, `φ = ½`, `θ = 0.05`; the exact two-level bounds
-   of `experiments/coordinator_checks/three_levels_certified/out_summary.txt` fit
-   `0.85√n + 6.4 ln n`), check the induction over levels for anything not uniform in the
-   number of levels (the accuracy budget of `k` nested bounded-accuracy levels forces
-   `λ, η, η′, θ ~ 1/k`; the failure probability handed down is exponentially small), re-run its
-   scripts, and only then decide what enters §11.19, remark (2), and with which label.
-   If no report exists (the agent stopped without one), the brief is self-contained: start
-   it again or do it by hand.  An independent referee afterwards.
+0-zero-zero. **Below the exponential scale: what is between `n·h + ½ ln n` and
+   `n·h + O(√(n ln n))`** (Theorem 11.58a; theory report §12 item (d)(i)).  Proved at the
+   twenty-second checkpoint: the upper bound, by a schedule of `≈ √(n/ln n)` levels
+   (workstream Q, referee R12).  Lower bound: the hinted one, `n·h − O(1)` proved and
+   `n·h + ½ ln n − O(1)` numerically.  Directions, in the order we would take them:
+   (a) **`O(√n)`**: the level term is `min_k [n·ρ(k) + k·ℓ_S]`; with a rate `ρ(k) = C/k²` *for an
+   explicit schedule whose levels lose `O(ln n)`* it would be `O(n^{1/3}(ln n)^{2/3})`, below the
+   `C₁√n` of the bounded levels.  The observed `0.65a/k²` is for the exact recursion; no
+   schedule realising it is known.  What makes a level cheap is an outer accuracy rate
+   bounded away from zero (Proposition Q6 of `docs/workstreams/Q_REPORT.md`); the epochs of
+   the rate proof have it by construction, the exact recursion's optimal `(φ, β)` are
+   unknown (its §6.3).  (b) **The `C₁√n` of the drops is probably not needed — a sketch to
+   write out and check.**  A bounded level on an outer block of positive fraction closes
+   at `p_u m − Θ(√m)` (Lemma 11.55(c); harness XVI.5 measures `0.5s … 0.7s`), which is the
+   `C₁√n` of the schedule; the workstream's report (§6.2) takes a `√n` to be unavoidable for
+   the family.  The coordinator's sketch (theory report, Theorem 11.58a, "what it is not",
+   (ii)): *(1)* run each drop at the accuracy `X = C·ln n` with `λ = 1`, `η = ½`, `η′ = 1` and a
+   polynomially large threshold; by Lemma 11.55(d) with `e·n_o = O(ln n)` the closing radius
+   is above `p_u n_o` and `ln(1/π†) ≤ n_o·a + ln(n_o + 1)` — no `√`; the family that results has
+   least accuracy `X`.  *(2)* Bring the least accuracy back to a bounded one by a chain of
+   bounded levels `T_j` whose outer block has `n_o = Θ(ln n)` sites (so small that it may be
+   enumerated: `ln 2M̄ = O(ln n)`): the rungs `≥ X` of `T_j` are served by the family of (1) in
+   dimension `d − n_o`, the one fine rung `X → β_j` by `T_{j+1}` in dimension `d − n_o`.  With
+   `t_j(d)` the logarithm of the certified cost,
+   `t_j(d) ≤ ln(L+2) + max{ (d − n_o)B′ + 1 + P_cnt + E , X + P_cnt + t_{j+1}(d − n_o) }`, and if
+   `n_o·B′ ≥ X + P_cnt + ln(L+2)` the maximum over the chain is at its first term:
+   `t(d) ≤ d·B′ + E`.  Accuracies `c_j ∝ 1/((j+1)(j+2))` as in the schedule of the theorem
+   (`ln(1/c_j) = O(ln n)` over a chain of `n/ln n` levels); the invariant
+   `ln(1/δ) + dimension·ln 2` grows by `O(ln n)` per level, `O(n)` over a chain.  *(3)* Slope
+   steps as before, with tolerance `1`.  If right, `𝓔_M = (k_M − 1)·O(ln n)` with no `√n`
+   term; the order `√(n ln n)` does not change, because it comes from the rate.  To do:
+   write the two propositions in the style of Q6/Q7 (admissibility of every level, the
+   least accuracies, the pass-through at small dimensions), test them with the exact
+   one-level evaluator (`experiments/reviews/R12/r12lib.py` or `experiments/workstreams/Q/qlib.py`),
+   and have it refereed before it replaces the sketch.  Careful: if drops are run at the
+   accuracy `X` *without* step (2), the least accuracy grows by `ln n + O(1)` per epoch and
+   the slope steps above lose `(B/h)·X = O(ln² n)` each — worse than the theorem.  (c) **Extensive accuracies** (the `o(n)` of Theorem 11.54): the
+   finite-`n` form of step (iii) of the rate proof (outer fraction `g/(g + θ_hint(g))`),
+   whose outer accuracy rate `g + θ_hint(g) ≥ h` is again bounded away from zero; expected
+   `n·θ_hint(g) + O(√(n ln n))`; not written.  (d) **A machine check** of Lemma 11.55(d) and
+   of the slope step: finite algebra, the entropy bound `C(m, r) ≥ (m+1)^{-1}e^{mH(r/m)}`, the
+   `χ²` bound for the divergence, and the constants of Theorem 11.56 as definitions; the
+   theorem itself would remain conditional on Theorem 11.56.  (e) **Many tuned levels at
+   computable sizes**: the schedule of Theorem 11.58a is not competitive below `n ≈ 10⁵`
+   (the referee: its formula beats `n·a` from `2.1·10⁴`, the exact nests are far worse than
+   the tuned designs); `three_levels_certified/cert3.py` would need `run2` to take an inner
+   family to try four tuned levels.  (f) The constant `C(u, ε, δ)` of "for all `n ≥ 2`" is not
+   explicit, and at large slopes it is far above `C_*` (the referee: `32` at `u = 4`).
+0-zero. **Left over from the science division's commits `ea1233f`, `ddd4be3`** (applied at
+   the twenty-second checkpoint, THY-RES-0015).  (a) R16-THY-5: a theorem for "three
+   levels below two" at `n = 4 000`, `8 000` needs a lower bound, with positive probability,
+   for the evaluations of the two-level algorithm at the engineering division's worst
+   instances (outer fractions `0.60, 0.65, 0.70` at `4 000`, `0.60` at `8 000`), within `e^{−81}` of
+   the mean-run cost; alternatively its three numbers for the table's own design
+   (asked, THY-RES-0015 §6).  (b) R15-T6: the conjecture of Proposition 11.18e(b′)(ii) — the
+   science division's reading of our outline: "same transcript" always; signs equal
+   except at `k` needs `r_i > 2`, the involution `r_i > 3`; `S` is one interval on the fibre for
+   every `β` (so "`S` into its complement" needs no separation); the density ratio is
+   `1 + o(1)` off a set of prior probability about `d·ln(2/ε)/Λ`, so the prior needs a dynamic
+   range of `e^{thousands}`; beyond order two or two states the pairing itself fails (one
+   site with three states: reflecting the smaller coefficient does not move the
+   minimiser); the outline gives `(1 − 2δ)(n + 1)`.  The proposition's text still has our
+   outline as first written; rewriting it with these precisions is a small task, proving
+   it is not.  (c) The constants `6.9`, `10.7` of the two-sided bound in Corollary 11.114(d)
+   are quoted from SCI-REV-0015, not re-derived.  (d) The first-order-optimal split of a
+   far pair against given site marginals is a transport problem (its remark; not built).
+   (e) Whether the regime `ρR² < 1` of the sign-blind lemma is where its charged
+   head-to-head pairs are (asked).  (f) The partial charges quoted in §12
+   item 13(a) are from memory.
 0-zero-a. **Left over from the science division's checkpoint `edfd54c`** (applied at the
-   twenty-first checkpoint, THY-RES-0014).  (a) The symmetrised forms of the other
-   soundness theorems that take a real model (`verifyR_sound_real`, `verify_sound_thirdOrder`,
-   `verify_sound_ball`, `bverify_sound_real`): two lines each from
-   `PairInstance.cast_energy_le_symm`; only if the division asks.  (b) `split` inside the
-   kernel type `Cert` itself (below `branch` and `sum` nodes), with the reference checker
-   and its conformance vectors: when a producer exists.  (c) **A refinement proof for an
+   twenty-first checkpoint, THY-RES-0014).  (a), (b) **closed by SCI-RES-0019** (read at
+   the twenty-second checkpoint): the division's branching certificates are `split` above
+   `base`, nested — our `SCert` — and no change of the kernel type is asked; the
+   symmetrised forms of the other four soundness theorems are not needed by anything it
+   has.  (If a producer is ever built, a split below `sum` could save tens of leaf checks
+   in its triplet certificates; not asked.)  (c) **A refinement proof for an
    integer leaf checker**: the measurement of `experiments/coordinator_checks/kernel_eval/`
    shows the Lean kernel evaluates a purpose-built integer check of one leaf on `1.5·10⁵`
    table entries; the theorem "it returns `true` ⇒ `LeafOK` for the decoded instance" would
@@ -2546,9 +2656,12 @@ science branch is read at `4b80f89`, the engineering branch at `ce71724`.  In pr
    the twentieth checkpoint: ENG-RES-0014 applied (theory report §11.19 remark (1)); the
    rule "serve every rung by the procedure with the smallest certified cost" and its
    evaluation (remark (1b); `experiments/coordinator_checks/three_levels_certified/`): a
-   certified third level pays from `n = 4 000` on at `u = 1`.  Open: (a) reproduction by the
-   engineering division, and the cost of the certified-cost designs on its instances
-   (asked, THY-RES-0013 §4); (b) **four and more levels by the same rule** — in `cert3.py`
+   certified third level pays from `n = 4 000` on at `u = 1` — **corrected at the
+   twenty-second checkpoint: from `n = 16 000` on against the exact flat-instance cost of
+   two levels; at `4 000`, `8 000` against searched instances in a mean-run model.**  Open:
+   (a) the cost of the certified-cost designs on the engineering division's instances
+   (asked, THY-RES-0013 §4; the reproduction of the certified columns was done by the
+   science division, SCI-REV-0016); (b) **four and more levels by the same rule** — in `cert3.py`
    the function `run2` would have to take an inner family; with the referee's routines
    each further level costs a factor of about forty in time, the division's evaluator is
    faster (asked as well); (c) what carries the bound: coarse rungs near the accuracy

@@ -82,6 +82,8 @@ import proofs.Frontiers.RateFull
 import proofs.Frontiers.SandwichCost
 import proofs.Frontiers.SymmetricPairHypothesis
 import proofs.Frontiers.SplitRule
+import proofs.Frontiers.CoreGreedy
+import proofs.Frontiers.TermOrders
 import proofs.AuditCommand
 
 /-!
@@ -1902,6 +1904,20 @@ end MetricChain.NonVacuity
 #print axioms MetricChain.maze_boxCut_target_le
 #print axioms MetricChain.ferroWellR_trap
 #print axioms MetricChain.scan_barrier_exact
+
+#print axioms ScienceA17.sum_mul_eq_sum_increments
+#print axioms ScienceA17.greedy_cost_le
+#print axioms ScienceA17.marginal_tight
+#print axioms ScienceA17.greedy_optimal
+#print axioms MetricChain.remainderBase_host_anchor
+#print axioms MetricChain.card_after_lt_of_hosts_last
+#print axioms MetricChain.anchored_remainder_identity_orders
+#print axioms MetricChain.anchored_remainder_bound_orders
+#print axioms MetricChain.anchored_remainder_bound_hosts
+#print axioms MetricChain.term_orders_sharp
+#print axioms MetricChain.term_orders_sharp_host_moves
+#print axioms MetricChain.anchoredSplit_sandwich_extrema
+#print axioms MetricChain.anchoredSplit_exact_at_anchor
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions
 used by the witnesses above) -/

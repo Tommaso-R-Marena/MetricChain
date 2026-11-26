@@ -228,6 +228,52 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.22 M9: a width of 0.6, below ln 2, claimed to suffice for the bracket returned after a skip
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.22 M10: one state fewer allowed to make the bracket of width W wrong (k equally deep states attain the count)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.22 M11: k equally deep states claimed to defeat every width below 2 ln(k/(k - 1))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.22 M12: the bound for the minimum after a skip taken as the least evaluated value plus the slack (wrong for every state but the minimiser)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.22 M13: needles of L depths claimed to allow the skip probability delta (L + 2)/L
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.23 M9: the upper end of independent sites written with f + gamma (the lower end's combination)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.23 M10: a site claimed to pay its whole penalty at the upper end (the depth ln(1/p) forgotten)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.23 M11: the lower end of every allocation claimed to be at most that of equal shares (without the factor C(m, k))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.23 M12: the water level fixed by twice the sum of the constants
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.23 M13: the greedy vertex claimed optimal for the ordering by decreasing probability
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.23 M14: with ties, equal shares over all sites of a subset claimed to give the least upper end
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.24 M1: the base point of a remainder term already switched at the first site of its subset
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.24 M2: the anchored interpolant of order m - 1 with the terms of order m included
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.24 M3: constants taken in the anchor context alone (every site outside the subset at the reference)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.24 M4: the roles of hosts and other sites exchanged in the constants (hosts free, the others at the reference)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.24 M5: m + 1 hosts claimed to stay at the reference
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.24 M6: the anchor row of the split not centred at the anchor
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.24 M7: the row maximum of the remainder used for the lower model and the minimum for the upper
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.25 M1: the sign-blind loss claimed to grow like the first power of R = sum |q| / |sum q|
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.25 M2: the variation of the kernel not amplified by R^2 in the denominator
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.25 M3: two clusters: the loss claimed to be the larger of the two ratios instead of their product
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.25 M4: the counter-instance replaced by a constant kernel (for which the true value does not vanish)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.25 M5: constant kernel: the sign-blind bound claimed to be R times the true value
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.23 M15: the pair penalty of the two most frozen sites as a first difference (the term of the sets without both sites forgotten)
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.14 M1: normal form built from the known part itself instead of its Pasch-Hausdorff envelope
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.14 M2: client form compared with the transposed centre form
@@ -467,6 +513,24 @@
 [         caught] XVI.3 M5: no Harper term in the running lower bound
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XVI.3 M6: lower end without the tolerance e^{-b}
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.5 M1: the one-sided ratio bounded without the slack e^{2u + e^u} (only the factor m + 1 and e^{m e})
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.5 M2: the outer sample claimed to cost e^{m theta_na(e)} without the factor m + 1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.5 M3: at a bounded threshold the closing radius claimed to be within half the proved distance of p_u m
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.5 M4: the epoch recursion with h in place of h d_m in the denominator
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.5 M5: the constant of the order with a/h + 3 in place of a/h + 4
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.5 M6: the outer block of a slope step with x/h sites (the polynomial slack of the threshold not taken out)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.5 M7: the accuracy taken by a drop without its last term (w(c) = ln(e^c (1 + c)/(1 - c) + 2c))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.5 M8: the hinted lower bound claimed to be n h without the constant ((eps + ln 2)/u) ln((1 - rho_h)/rho_h)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.5 M9: the radius k* claimed to be below rho_h n
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XVII.1 M1: closed form of the game function with a wrong normalisation
                   exit=1  1 TEST(S) MISBEHAVED
@@ -950,7 +1014,7 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXIV.12 M1: the acceptance probability of the nested sampler measured up to the outer ceiling
                   exit=1  1 TEST(S) MISBEHAVED
-[         caught] XXIV.12 M2: the free-sampling term 2 t_f dropped from the bracket of the nested sampler
+[         caught] XXIV.12 M2: the free-sampling term t_f dropped from the bracket of the nested sampler
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXIV.12 M3: accepted draws claimed to have the law of the outer sampler
                   exit=1  1 TEST(S) MISBEHAVED
@@ -969,6 +1033,12 @@
 [         caught] XXIV.13 M6: a needle of depth D claimed to raise ln Z by D (the true probability of its state forgotten)
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXIV.13 M7: the weights of the floor's sampler with the wrong sign (e^{E - m_lo}, unbounded)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.12 M5: the error of the free part bounded by the smaller of the two end errors
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.12 M6: the variant with one known mean centred at the upper end (W_in - 1 instead of W_in - 1/2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.12 M7: the comparison with the plain sampler with the old factor two on the free term
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] M1: the upper reduction with the slack at the site left of a cut only (the site right of it needs delta^+ as well)
                   exit=1  1 TEST(S) MISBEHAVED
@@ -1005,5 +1075,5 @@
 [         caught] XXV.3 M6: the coefficient V/4 claimed for the symmetric envelope
                   exit=1  1 TEST(S) MISBEHAVED
 
-503 mutations: 502 caught, 1 expected pass, 0 not as expected
-146 baseline runs of the unmutated harness (one per selection): 146 behave as expected, 0 misbehave
+538 mutations: 537 caught, 1 expected pass, 0 not as expected
+149 baseline runs of the unmutated harness (one per selection): 149 behave as expected, 0 misbehave

@@ -1,0 +1,22 @@
+# Referee R12, check 7: one level -- Proposition Q1, Lemma Q2, Corollary Q4a; tables of Q_REPORT 7.1 recomputed
+# u = 1: a = 0.110944, tau_2/a = 0.500410 (report: 0.5004), at phi = 0.499590
+
+# Part A: K_REPORT 6.4 design, b = 0.5, lam = 0.2, eta = eta' = theta = 0.05, delta = 0.05, 40 rungs
+#      n   ln C_max  ln C_max - M*  largest term (rung: x_{l-1} -> x_l)  Lam      P_M     P_cnt   ln(1/delta')  over    over/sqrt(n_o)  Q3 refined/sqrt  K.4(d)/sqrt  Q3 uniform/sqrt | agrees with the report
+    1000    126.30    0.91        rung 40:      0.6 ->      0.5         112.65   22.86   31.59     120.0     34.32    1.535         3.64           4.75         5.23     | yes
+    4000    322.25    2.41        rung 12:    337.8 ->    269.9         309.68   24.35   34.47     317.1     63.44    1.418         2.76           4.59         2.98     | yes
+   16000   1047.08    1.00        rung 11:   1196.3 ->    923.0        1033.09   25.84   37.34    1040.5    119.69    1.338         2.31           4.49         2.42     | yes
+   64000   3839.07    0.00        rung 10:   4540.0 ->   3383.6        3809.49   27.33   40.21    3816.9    231.95    1.297         2.08           4.44         2.13     | yes
+#
+# Part A (continued): the inequality (2.3) of Corollary Q4a (bounded theta, omega = a)
+#      n   ln C_max - max{n_o a, max_l[min(n_o a, x_{l-1}) + ln C_l]}   Err of (2.3) with the refined Lemma Q3   with cbar_pi (as Corollary Q4a is stated)   ln C_max - n tau_2   /sqrt(n)   finest rung: ln cost - n_i a   E_base | agrees with the report (which uses the refined form)
+    1000     32.49                                                         107.89                                143.47                               70.78       2.24        37.73                 104.46 | yes
+    4000     37.91                                                         151.65                                161.56                              100.18       1.58        61.83                 129.66 | yes
+   16000     51.57                                                         236.30                                246.22                              158.80       1.26       107.31                 204.35 | yes
+   64000     92.35                                                         402.74                                412.66                              285.95       1.13       195.85                 351.29 | yes
+# rows that differ from the report or violate an inequality: 0
+
+# Part B: Proposition Q1 and Lemma Q2 on random admissible levels
+  3000 random levels, 9 relations each: 0 failures
+
+# done in 1 s

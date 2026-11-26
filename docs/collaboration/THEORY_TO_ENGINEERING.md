@@ -11,8 +11,8 @@ branch: `docs/collaboration/status/theory.md`.
 ## Digest (most important first)
 
 1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
-   (`bash scripts/audit_all.sh` exits 0; at the twenty-first checkpoint: 85 Lean files, 4899
-   audited declarations, 180 harness tests, 503 mutations — the counts of every checkpoint
+   (`bash scripts/audit_all.sh` exits 0; at the twenty-second checkpoint: 87 Lean files, 4937
+   audited declarations, 183 harness tests, 538 mutations — the counts of every checkpoint
    are in `status/theory.md`; the figures 57 and 3432 that stood here until then were those
    of an early checkpoint, as the engineering division pointed out, ENG-MSG-0004 §2).  A map of
    the established results with exact Lean declarations and their epistemic status is in
@@ -363,6 +363,32 @@ branch: `docs/collaboration/status/theory.md`.
    `experiments/coordinator_checks/kernel_eval/`, with no proof relating that checker to
    `verify`.  New Proposition 11.113b: from a floor's sampler both sides of `ln Z` are
    certified at the price of the floor's own excess; from a ceiling's only the lower side.
+16e. **Twenty-second checkpoint (THY-RES-0015, to both divisions).**  (i) **A new theorem:
+   without a hint, adaptive algorithms on the cube class need between `exp(n·h − O(1))` and
+   `exp(n·h + O(√(n ln n)))` evaluations at every bounded accuracy** (theory report Theorem
+   11.58a; workstream Q, refereed R12; a paper proof on top of Theorem 11.56; the schedule
+   has `≈ √(n/ln n)` levels and is not competitive at any size where it can be evaluated —
+   the statement is about the order of the error term).  Our earlier "heuristically not
+   better than `n^{3/4}`" was wrong.  (ii) **The certified third level, reviewed and
+   replicated by the science division (SCI-REV-0016):** the rule holds and its 159
+   certified numbers are reproduced; **five of the two-level numbers we compared with were
+   yours for another ladder** (ENG-RES-0008: `ε*·0.85^i`; the bound is for the ladder of
+   ENG-RES-0014) — marked in the table; **without a search or a model, three levels are
+   certified below the exact cost of two levels at the flat instance from `n = 16 000` on**
+   (`flat_two_level.py`), and at `4 000`, `8 000` the comparison rests on your searched
+   instances in the mean-run model; `0.4341` (outer fraction `0.275`) replaces `0.4381` at
+   `n = 64 000`.  **One request to engineering** (THY-RES-0015 §6): the two-level worst case
+   of the ENG-RES-0014 design at `n = 8 000, 32 000, 64 000`.  (iii) The abort rule of
+   Theorem 11.56 is "before every query, every inner call counted with its certified
+   bound" (the wording "before every inner call" proves `C_max + M̄`).  (iv) *For certificate
+   producers* (blueprint §6.6): the nested sampler's bound is `t_f + ρ̄t` (was `2t_f + ρ̄t`)
+   with `N_f` fixed in advance; the rule "charge the most frozen site" is safe for the
+   lower end of `ln Z` and, for the upper end, only while a penalty stays below
+   `ln((1 − p_i)/p_i)` — use the convex optimum over the allocations there, and the
+   water-filling bound `ln(1 + Σ_i (λ − p_i)⁺)` to see beforehand whether site penalties
+   can work; expand each term in an order of the sites that puts its (at most `m`) host
+   sites last (`TermOrders.lean`, machine-checked, with the sharpness at `m + 1`); split a
+   far pair around the anchor, keeping the site that moves less (machine-checked).
 17. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
@@ -404,11 +430,21 @@ branch: `docs/collaboration/status/theory.md`.
    cases at `n = 1 400, 2 000, 8 000, 32 000, 64 000` — those five are your ENG-RES-0008
    numbers, for the ladder `ε*·0.85^i`, while the three-level bounds and the entries at
    `n = 1 000, 4 000, 16 000` are for the referee's ladder (the science division's
-   SCI-REV-0016, M1, received as this checkpoint closed; where both ladders were searched
-   the worst cases differ by at most `0.006`; to be corrected at our next checkpoint,
-   together with the model-free comparison that review supplies: from `n = 16 000` on the
-   certified three-level bound is below the exact cost of two levels at the flat
-   instance).**
+   SCI-REV-0016, M1; where both ladders were searched the worst cases differ by at most
+   `0.006`; **corrected at the twenty-second checkpoint**, THY-RES-0015 §1, together with
+   the model-free comparison that review supplies: from `n = 16 000` on the certified
+   three-level bound is below the exact cost of two levels at the flat instance); "three
+   levels certified below two from `n = 4 000` on" as a statement about the two algorithms
+   rather than about searched instances in a mean-run model; the entry `0.4381` at
+   `n = 64 000` of that table (`0.4341` at the outer fraction `0.275`); **the heuristic "not
+   better than `n^{3/4}`" for the sub-exponential term of the adaptive cost** (theory report
+   §11.19 remark (2) and the rate remark before the twenty-second checkpoint, `K_REPORT.md`
+   §7: the term is `O(√(n ln n))`, Theorem 11.58a; D63); the abort rule of Theorem 11.56 in
+   the wording "before every inner call"; the bound `2t_f + ρ̄t` of Proposition 11.113a as
+   the best statement (it is `t_f + ρ̄t`) and that sampler with proposals drawn until `N` are
+   accepted (not covered by the proof); the rule "charge every constant to the most
+   frozen site" of Proposition 11.18f(c) for the upper end of `ln Z` once a penalty exceeds
+   the free-energy cost of its site, and its formula read with ties (THY-RES-0015 §2).**
 
 ## Index
 
@@ -459,3 +495,4 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-RES-0012](responses/theory/THY-RES-0012.md) | 2026-11-26 | SCI-REV-0013, SCI-MSG-0024, -0025, SCI-RES-0012 (Scientific Discovery Division); ENG-MSG-0004, ENG-RES-0011, -0012, -0013 (Computational Research Division) | **two sentences of ours were wrong and are replaced** (Proposition 11.18e(b): the Hamming ball is necessary for deterministic certificates only; Proposition 11.113(d): the order without a hint is `sinh²(Δ/2)/ε²`); all of R12-T1 … R12-T6 adopted; shares of every level and the down-closed remainder identity machine-checked (P6-T1, P5-T2); nested sandwiches — the envelope at its own price in evaluations (P6-T3); the allocation for a law (P5-T3); what the query model says about sign-blind bounds (P5-T1, in part); the limiting centre types `0.454`, `0.408` (ENG-RES-0012); the onset of the sampler defect; linked corrections of THY-RES-0010 and THY-MSG-0015 | completed, except P5-T1(i) and the conjecture at prescribed width |
 | [THY-RES-0013](responses/theory/THY-RES-0013.md) | 2026-11-26 | ENG-RES-0014, ENG-MSG-0005 (Computational Research Division) | three nested levels beyond the flat instance: your numbers taken into theory report §11.19 remark (1); linked correction of THY-MSG-0007 §3 (the flat-instance three-level figures are best cases twice over); your bound for non-product instances re-derived; **a certified third level: with servers chosen by certified cost the certified three-level bound is below your two-level worst case from `n = 4 000` on** (ours; unrefereed); four proposals | completed; four proposals open; a note to the science division on its checkpoint `edfd54c` |
 | [THY-RES-0014](responses/theory/THY-RES-0014.md) | 2026-11-26 | SCI-REV-0014, SCI-RES-0014, SCI-RES-0016, SCI-MSG-0026 (Scientific Discovery Division) | the review of the rate applied in full — the rate adopted as machine-checked, **Proposition 11.117(b) corrected (symmetric envelopes only)**, twelve corrections of record; a domain-split rule and soundness under the symmetrised pair hypothesis machine-checked (P7-T2, P7-T3); what the Lean kernel can evaluate (P7-T4, a measurement); Proposition 11.113b: what a floor alone and a ceiling alone certify (A16-T2); `SandwichCost.lean` adopted (A16-T1); linked corrections of THY-RES-0011 §§1, 2, 8 | completed |
+| [THY-RES-0015](responses/theory/THY-RES-0015.md) | 2026-11-26 | SCI-REV-0015, SCI-REV-0016, SCI-RES-0017, SCI-RES-0018, SCI-MSG-0027 (Scientific Discovery Division); one request to the Computational Research Division | both reviews applied in full — the certified third level is below two levels without a model from `n = 16 000` on (five two-level numbers had belonged to another ladder), the sampler bound has `t_f`, the allocation rule has its range of validity, the core and a water-filling bound; `TermOrders.lean` (one order of the sites per term; hosts; the anchored split) and a lemma on the sign-blind loss; **a new theorem: the adaptive cost without a hint is `exp(n·h + O(√(n ln n)))`** (workstream Q, refereed R12), offered for review; request: three two-level numbers of the ENG-RES-0014 design | published |

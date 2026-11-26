@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 """Collect the output files of cert3.py in this directory into one table (best outer fraction per column).
 
-usage:  python3 summary.py            (reads out_*.txt next to this file, except out_terms_* and out_summary.txt)
+usage:  python3 summary.py            (reads out_*.txt next to this file, except out_terms_*, out_flat_* and
+                                       out_summary.txt)
 
 The last columns are NOT computed here: they are the worst instances found for TWO levels by the Computational
 Research Division, copied from its messages (branch research/ubuntu-engineering): ENG-RES-0014, table
 "three_worst_best" (n = 1000, 4000, 16000; reading (B), the algorithm as built, and reading (A), base brackets'
 answers placed adversarially) and ENG-RES-0008, table "main_u1", column "best phi against the worst instance"
 (reading (A); the other sizes).  All numbers are ln(.)/(n a) at u = 1.
+
+The two messages are about two outer designs (the Scientific Discovery Division's review SCI-REV-0016, finding M1):
+ENG-RES-0014 uses the design of this directory (the referee's ladder x_l = x_0 (b/x_0)^(l/40)); ENG-RES-0008 uses the
+same constants with the ladder of inner rates eps* 0.85^i (the ladder of the report's remark (1a) and of K_REPORT.md
+section 6.4).  Its entries are marked with a dagger below.  Both ladders were searched at n = 1000, 4000, 16000, where
+the two worst cases (reading (A)) are 1.040 / 1.0461, 0.694 / 0.6940, 0.576 / 0.5753.
 """
 import glob
 import math
@@ -73,7 +80,7 @@ KEYS = ('two_flat', 'two_cmax', 'ref_flat', 'ref_cmax_flat', 'cert', 'tuned_flat
 def main():
     rows = {}
     files = sorted(f for f in glob.glob(os.path.join(HERE, 'out_*.txt'))
-                   if not os.path.basename(f).startswith(('out_terms', 'out_summary')))
+                   if not os.path.basename(f).startswith(('out_terms', 'out_summary', 'out_flat')))
     for f in files:
         for line in open(f):
             m = PAT.match(line)
@@ -122,8 +129,9 @@ def main():
     print("| n | outer fractions computed | two levels: certified bound | three levels, servers chosen at the flat fibre: "
           "certified bound | three levels, servers by certified cost (referee's middle designs): certified bound | the same "
           "with more middle designs: certified bound | cost of that design at the flat instance (same fraction) | two "
-          "levels: worst instance found by the Computational Research Division, reading (B) / (A) | margin: two-level "
-          "worst found (smaller reading) minus the certified three-level bound, in units of n a; in nats |")
+          "levels: worst instance found by the Computational Research Division, reading (B) / (A); a dagger: for the "
+          "other ladder (ENG-RES-0008) | margin: two-level worst found (smaller reading) minus the certified three-level "
+          "bound, in units of n a; in nats (with a dagger: a difference between two outer designs) |")
     print("|---|---|---|---|---|---|---|---|---|")
     pu = 1 / (1 + math.e)                            # a = ln 2 - H(1/(1+e)) = 0.11094
     compact = []
@@ -138,13 +146,13 @@ def main():
         three = sea if sea is not None else tun
         w = min(v for v in (wb, wa) if v is not None)
         margin = w - three
-        print("| %d | %s | %s | %s | %s | %s | %s | %s / %s (%s) | %+.3f; %+.0f |"
+        print(("| %d | %s | %s | %s | %s | %s | %s | %s / %s (%s) | %+.3f; %+.0f" + ('†' if src == 'ENG-RES-0008' else '') + " |")
               % (n, ", ".join('%.3g' % p for p in sorted(rows[n])), fmt(two, two_phi), fmt(cert, cert_phi), fmt(tun, tun_phi),
-                 fmt(sea, sea_phi), fmt(sflat), fmt(wb), ('%.3f' % wa) if src == 'ENG-RES-0008' else fmt(wa), src, margin,
+                 fmt(sea, sea_phi), fmt(sflat), fmt(wb), ('%.3f†' % wa) if src == 'ENG-RES-0008' else fmt(wa), src, margin,
                  margin * n * a))
         compact.append("| `%s` | `%.4f` | %s / `%s` | `%.4f` | `%.4f` | %s | %s |"
                        % (format(n, ',').replace(',', ' '), two, ('`%.4f`' % wb) if wb is not None else '—',
-                          ('%.3f' % wa) if src == 'ENG-RES-0008' else '%.4f' % wa, cert, tun,
+                          ('%.3f†' % wa) if src == 'ENG-RES-0008' else '%.4f' % wa, cert, tun,
                           ('**`%.4f`** (`%.3g`)' % (sea, sea_phi)) if sea is not None else 'not computed',
                           ('`%.4f`' % sflat) if sflat is not None else 'not computed'))
     print()
@@ -156,6 +164,13 @@ def main():
     print("|---|---|---|---|---|---|---|")
     for line in compact:
         print(line)
+    print()
+    print("† ENG-RES-0008: the same constants with the ladder of inner rates eps* 0.85^i, not the ladder "
+          "x_l = x_0 (b/x_0)^(l/40) of this table (SCI-REV-0016, M1).  The certified two-level bound of that design at "
+          "the outer fraction 0.50 is 0.9913, 0.8700, 0.7228, 0.6387, 0.5887, 0.5596, 0.5419 at n = 1400, ..., 64000 (the "
+          "Scientific Discovery Division's computation; ENG-RES-0008 prints 0.991, 0.870, 0.723, 0.639, 0.589, 0.560, "
+          "0.542; our remark (1a) has ln C_max = 153.96 at n = 1400 and 1045.1 at n = 16000, i.e. 0.9912 and 0.5888), where "
+          "this table has 0.9933, ..., 0.5407.")
 
 
 if __name__ == '__main__':
