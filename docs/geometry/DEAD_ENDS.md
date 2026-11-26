@@ -182,3 +182,31 @@ candidate.  The computation (`hinge_multistate.py`) contradicts the guess at `K 
 (a continuum of candidates).  The guess was written into a draft of the note and removed
 before any commit; it is recorded here because the corrected statement is in the note.
 
+**DG-19 (an unsupported exponent in Corollary K.1).**  The fifth-checkpoint version of
+`LOCAL_DATA_STABILITY.md` and GEOMETRY-MSG-0005 said that a length-independent stability
+constant needs sequence separation "`n^{4/5}` on helices".  This came from a scaling
+`C ∼ n²/K^{5/2}` argued in a remark ("spreading a bend divides the strain per pair by
+`n/K`"), which was a heuristic and is not what the computations show (`s_7n² = 63` and `81`
+for `K = 4` and `6`).  Replaced by a proof: in a tube `s_7 ≤ 14π²ρbK^{3/2}/(h²n²)`, whence no set
+of pairs — not even the complete one — has a length-independent constant on an ideal helix.
+The correction strengthens the statement; the error was to print an exponent that had been
+neither proved nor measured.
+
+**DG-20 (a result published as an answer after the questioner had answered it; and a
+misclassified source).**  (i) `HINGE_ENSEMBLES.md` and GEOMETRY-RES-0003 were committed at
+19:41 UTC as the answer to an open question of the Science division's SCI-RES-0029.  That
+division's referee had settled the question by 18:24 UTC and published it at 19:28 UTC
+(SCI-REV-0021, Proposition R22-1), with a case our note left open (two half-turns: not
+identifiable).  We had not fetched since 18:52.  Nothing in our note was false, but it
+presented as new a statement that was thirteen minutes old on another branch, and its
+"requested response" asked for something already done.  Corrected by GEOMETRY-RES-0004,
+GEOMETRY-MSG-0007 and a head note in both files.  **Rule adopted: fetch all five branches
+immediately before committing a result, and always before answering another division's
+question.**  (ii) Our prior-art search 8 had returned Tropp's paper on simplicial faces of
+the elliptope; we listed it as "a relative, not a consequence" without reading it.  Its
+Fact 3.1 (Laurent–Poljak 1996) is Theorem B with Corollary 4.2 in dimension one (found by
+the Science division's referee, SCI-REV-0021 F3).  The claim "Theorem B: not found" in
+GEOMETRY-MSG-0002 and in the report was therefore too strong; it now reads "known for
+`d = 1`; the extension not found".  **Rule adopted: a paper returned by a search is opened
+before it is classified as not containing the result.**
+

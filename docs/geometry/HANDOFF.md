@@ -37,8 +37,8 @@ source scripts/lean_env.sh
 lake env lean proofs/Geometry/EnsembleRigidity.lean     # single file, about 15 s, no output = OK
 lake build                                              # whole project; the last lines print the axiom audit
 # Python (numpy, scipy; exact parts use only the standard library)
-python3 experiments/geometry/run_checks.py              # 36 tests, about 50 s (one is skipped, and says so, without Singular)
-python3 experiments/geometry/mutation_checks.py         # 24 planted errors, all must be caught
+python3 experiments/geometry/run_checks.py              # 41 tests, about 50 s (one is skipped, and says so, without Singular)
+python3 experiments/geometry/mutation_checks.py         # 29 planted errors, all must be caught
 python3 experiments/geometry/exact_conic_rank.py 12     # Theorem C(b), about 35 s
 python3 experiments/geometry/exact_conic_rank.py 20 13 rational angles   # Theorem C(b), K = 13..20, about 3 min
 python3 experiments/geometry/exact_jacobian_rank.py 8   # Theorem H, about 3 s
@@ -53,6 +53,10 @@ python3 experiments/geometry/er_not_ur_instance.py A    # second-moment rigid, n
 python3 experiments/geometry/matroid_connectivity.py 12 # Theorem J and the table of measurement patterns (exact)
 python3 experiments/geometry/hinge_pairs.py 0 150       # Theorem M: the cube of eight candidates, LP, search (2 to 3 min)
 python3 experiments/geometry/hinge_multistate.py 0 150  # three states at two to four hinges (exploration, 2 min)
+python3 experiments/geometry/exact_hinge_candidates.py  # hinge candidates over Q: degree 8 / 2 (needs Singular)
+python3 experiments/geometry/hinge_halfturns.py         # the half-turn exceptions of Theorem M
+python3 experiments/geometry/hinge_fourier_rank.py      # what the squared distances see of three hinge angles (rank 19)
+python3 experiments/geometry/local_data_upper.py        # Theorem L and the tube bound on instances
 python3 experiments/geometry/torsion_sharpness.py       # kink formula, worst conformations (GEOMETRY-RES-0002; slow part (2))
 # read-only synchronisation with the other divisions
 for b in claude/determined-ride-og1u7j research/ubuntu-engineering research/scientific-translation \
@@ -78,6 +82,9 @@ statement of the form "the audit passes at this head".
   over the number field), never floating point for a statement labelled P-exact.
 * Zero Lean warnings; no `sorry`, no extra axioms; every Lean file imported by
   `proofs/AxiomAudit.lean` and its headline theorems listed there.
+* **Fetch all five branches immediately before committing a result, and always before
+  answering another division's question** (`DEAD_ENDS.md` DG-20); open a paper returned by a
+  search before classifying it as not containing the result.
 * Times: a header time is `date -u` at the moment of writing or "the commit that adds this
   file" — never an estimate (`DEAD_ENDS.md` DG-12); a statement about another branch names
   the fetch it rests on.
@@ -101,4 +108,10 @@ conjecture beyond); `2K + 3` for local identifiability within `K` states; sequen
 separation `K + 3`.  For one state this is classical rigidity theory read for ensembles, and
 it yields a notion — second-moment rigidity — implied by universal rigidity together with
 the conic condition and implying global rigidity together with it (not by universal
-rigidity alone: `DEAD_ENDS.md` DG-13).
+rigidity alone: `DEAD_ENDS.md` DG-13).  The conic condition is sufficient, not necessary, and
+Theorem B is known in dimension one (Laurent–Poljak 1996; `PRIOR_ART.md` §3a).  For states
+that share rigid segments (hinges) the conic condition fails and identifiability is decided
+by a finite list of mirrored assemblies (`HINGE_ENSEMBLES.md`; first by the Science
+division).  Second topic: distances between points close along the chain determine a thick
+chain with a stability constant of order `n²` — a global upper bound (Theorem L) and a
+matching lower bound on rods (`LOCAL_DATA_STABILITY.md`).

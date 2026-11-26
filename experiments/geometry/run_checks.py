@@ -594,6 +594,40 @@ def hinge_cube():
 
 
 @test
+def hinge_candidates_exact():
+    """HINGE_ENSEMBLES.md, Theorem M (b)(i) and (c): the scheme of candidate assemblies has degree
+    8 (reduced) for two hinges and degree 2 for three, over Q (Singular)."""
+    import shutil
+    import subprocess
+    if shutil.which("Singular") is None:
+        return True, "SKIPPED: Singular is not installed (apt-get install singular)"
+    here = os.path.dirname(os.path.abspath(__file__))
+    cmd = [sys.executable, os.path.join(here, "exact_hinge_candidates.py")]
+    if MUT == "hinge_two_candidates":
+        cmd.append("--mutate")
+    r = subprocess.run(cmd, capture_output=True, text=True, cwd=here)
+    return r.returncode == 0 and "ALL OK" in r.stdout, "degree 8 (two hinges, three instances), degree 2 (three hinges)" \
+        if r.returncode == 0 else r.stdout[-300:]
+
+
+@test
+def hinge_halfturns():
+    """HINGE_ENSEMBLES.md, Theorem M (b)(iii), (d) (the Science division's R22-1 (d)): the mixture
+    is identifiable for generic torsion changes and for one half-turn, and not for two."""
+    import hinge_halfturns as HH
+    rng = np.random.default_rng(41)
+    n, hinges = 14, [3, 7]
+    w = np.array([0.37, 0.63])
+    t1 = rng.uniform(-np.pi, np.pi, n - 3)
+    res = {}
+    for name, a, b in (("generic", 1.1, -1.9), ("one", np.pi, 1.3), ("two", np.pi, np.pi)):
+        res[name] = HH.off_state_weight(n, t1, hinges, a, b, w)[0]
+    want_two = 0.0 if MUT == "halfturns_identifiable" else 2 * w.min()
+    ok = abs(res["generic"]) < 1e-6 and abs(res["one"]) < 1e-6 and abs(res["two"] - want_two) < 1e-4
+    return ok, f"largest weight off the states: generic {res['generic']:.4f}, one half-turn {res['one']:.4f}, two {res['two']:.4f}"
+
+
+@test
 def hierarchy_exact_witness():
     """Theorem E(d): the exact rational witness (rigidity rank 12, indefinite stress matrix of
     rank 2, no conic through the constrained edge directions)."""
@@ -650,6 +684,100 @@ def helix_beam_law():
     e, c = local_data_bounds.helix_exponent()
     target = -1.0 if MUT == "helix_exponent_one" else -2.0
     return abs(e - target) < 0.1, f"exponent {e:.3f}, s_7 n^2 = {c:.1f}"
+
+
+@test
+def tube_bound_helix():
+    """LOCAL_DATA_STABILITY.md, Theorem K(c): for an ideal helix (radius rho, rise h, L = n h)
+    s_7(R)^2 <= 196 pi^4 rho^2 sum_F |x_j - x_k|^2 / (n L^4) for every pattern F."""
+    import local_data_upper as U
+    from local_data_bounds import rigidity_matrix
+    bad, tight = [], []
+    for tors, K in ((np.deg2rad(60.0), 4), (np.deg2rad(150.0), 5)):
+        for n in (30, 60) if QUICK else (30, 60, 120):
+            X = U.helix(n, tors)
+            ax, h, rho, spread = U.helix_axis_frame(X)
+            edges = [(i, j) for i in range(n) for j in range(i + 1, min(n, i + K + 1))]
+            s7 = np.sort(np.linalg.svd(rigidity_matrix(X, edges), compute_uv=False))[6]
+            sumsq = sum(((X[i] - X[j]) ** 2).sum() for i, j in edges)
+            bound = np.sqrt(196 * np.pi ** 4 * rho ** 2 * sumsq / (n * (n * h) ** 4))
+            if MUT == "tube_bound_too_strong":
+                bound /= 50.0
+            tight.append(bound / s7)
+            if not (s7 <= bound and spread < 1e-8):
+                bad.append((round(float(np.rad2deg(tors))), K, n, float(s7), float(bound)))
+    return not bad, f"violations {bad}" if bad else f"s_7 <= bound; bound/s_7 between {min(tight):.0f} and {max(tight):.0f}"
+
+
+@test
+def local_procrustes_lemma():
+    """Theorem L, Step 1: for two four-point windows with edge matrices P, Q and squared-distance
+    errors eta, ||Q^T Q - P^T P||_F <= 2 ||eta|| and ||Q P^{-1} - R|| <= 2 ||eta|| / tau^2 with R the
+    orthogonal polar factor; thin and thick windows, random and adversarial perturbations."""
+    rng = np.random.default_rng(31)
+    worst_gram, worst_polar = 0.0, 0.0
+    for trial in range(400):
+        U_, _ = np.linalg.qr(rng.normal(size=(3, 3)))
+        V_, _ = np.linalg.qr(rng.normal(size=(3, 3)))
+        sv = np.sort(rng.uniform(0.02, 2.5, 3))[::-1]
+        if trial % 2 == 0:
+            sv[2] = rng.uniform(0.01, 0.1)                      # a thin window
+        P = U_ @ np.diag(sv) @ V_.T
+        tau, D = sv[2], sv[0]
+        X = np.vstack([np.zeros(3), P.T])                       # the four points
+        if trial % 4 < 2:
+            E = rng.normal(size=(4, 3))
+        else:                                                   # displace along the thin direction
+            E = np.outer(rng.normal(size=4), U_[:, 2])
+        Y = X + 1e-3 * tau ** 2 / D * E / np.abs(E).max()
+        Y = Y @ np.linalg.qr(rng.normal(size=(3, 3)))[0]        # an arbitrary orthogonal map
+        Q = (Y[1:] - Y[0]).T
+        eta = [((Y[a] - Y[b]) ** 2).sum() - ((X[a] - X[b]) ** 2).sum() for a in range(4) for b in range(a + 1, 4)]
+        e = float(np.linalg.norm(eta))
+        M = Q @ np.linalg.inv(P)
+        Uu, _, Vt = np.linalg.svd(M)
+        R = Uu @ Vt
+        bound = 2 * e / (tau * D) if MUT == "procrustes_first_power" else 2 * e / tau ** 2
+        worst_gram = max(worst_gram, np.linalg.norm(Q.T @ Q - P.T @ P) / (2 * e))
+        worst_polar = max(worst_polar, np.linalg.norm(M - R, 2) / bound)
+    ok = worst_gram <= 1 + 1e-9 and worst_polar <= 1 + 1e-9
+    return ok, f"largest ||dG||_F / (2||eta||) = {worst_gram:.3f}, largest ||M - R|| / bound = {worst_polar:.3f}"
+
+
+@test
+def theorem_L_instances():
+    """Theorem L: ||Y - gX||_F <= 6.9 (b/tau^2) n (n+1) ||eta||_2 for every Y satisfying the
+    pointwise condition (S) on the squared distances of separation <= 4; and (S) is needed: a
+    tail reflected in the plane of three consecutive atoms keeps the separation-3 data."""
+    import local_data_upper as U
+    rng = np.random.default_rng(32)
+    worst, used = 0.0, 0
+    for trial in range(30 if QUICK else 80):
+        n = int(rng.integers(10, 60))
+        X = U.helix(n, 1.3) if trial % 3 == 0 else U.thick_chain(n, rng)[0]
+        tau, D = U.thickness(X)
+        V = rng.normal(size=X.shape) if trial % 2 == 0 else U.softest_mode(X)[0]
+        Y = X + 0.05 * tau ** 4 / (73 * D ** 2) * V / np.abs(V).max()
+        S, left, right, _, _ = U.theorem_L_sides(X, Y)
+        if S:
+            used += 1
+            worst = max(worst, left / right)
+    X, _ = U.thick_chain(30, rng)
+    i = 12
+    p0 = X[i + 1]
+    nrm = np.cross(X[i + 2] - p0, X[i + 3] - p0)
+    nrm /= np.linalg.norm(nrm)
+    Y = X.copy()
+    Y[i + 4:] = X[i + 4:] - 2 * np.outer((X[i + 4:] - p0) @ nrm, nrm)
+    S, left, right, _, _ = U.theorem_L_sides(X, Y)
+    if MUT == "theorem_L_without_S":
+        S = True                                            # planted error: the hypothesis is dropped
+    if S:
+        used += 1
+        worst = max(worst, left / right if right > 0 else np.inf)
+    ok = worst <= 1.0 and used >= 20 and not S and left > 0.5
+    return ok, (f"{used} pairs satisfying (S): largest left/right = {worst:.4f}; reflected tail: (S) "
+                f"{'holds' if S else 'fails'}, d_P = {left:.1f}")
 
 
 @test

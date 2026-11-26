@@ -54,6 +54,10 @@ about another branch names the fetch it rests on.  No mathematical statement is 
    lever-arm law of theory report §11.14 read backwards; (c) on helices `s_7 ∝ n^{-2}` [N].
    Consequence: a length-independent stability constant needs measured pairs of sequence
    separation at least of order `n^{2/3}` (always) to `n^{4/5}` (extended chains).
+   [Corrected by GEOMETRY-MSG-0007: "`n^{4/5}`" rested on a heuristic scaling in `K` that the
+   computations do not show; the proved statement is stronger — on an ideal helix no set of
+   pairs has a length-independent constant (`C_inf ≥ h²n²/(139ρbK^{3/2})`), and (c) is now a
+   theorem.]
    *For Theory:* this is the statement announced in GEOMETRY-RES-0002 §3, second bullet.
 2. **Lean.**  `MetricChain.Geometry.mixture_state_of_conic`: the algebraic core of Theorem B
    from the conic condition on — a linear map into dimension at most `d` that preserves the

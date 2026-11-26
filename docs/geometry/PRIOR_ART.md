@@ -17,8 +17,8 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
 | Example 3.3 ("virtual structures" under averaging) | **known** as a phenomenon | ensemble- and time-averaged restraints in NMR refinement (Jardetzky 1980; Torda–Scheek–van Gunsteren 1989) [from memory]; the exact cis/trans identity is elementary |
 | Theorem A (ii)⇔(iii): no conic at infinity ⇔ no affine flex | **known** | Connelly 1982, 2005 (affine motions and conics at infinity); Alfakih (dimensional rigidity); Gortler–Thurston 2014 [definitions confirmed at summary level] |
 | Theorem A (i): reading as "no ensemble has the same averaged squared distances" | **reinterpretation**, not found stated | the proof is the standard face argument for Gram matrices |
-| Theorem B, B′ (mixtures identifiable among all ensembles iff only trivial quadrics / unique barycentric representation on rank-`d` quadrics) | **not found** | relatives: Saunderson–Chandrasekaran–Parrilo–Willsky 2012 (faces of the elliptope ↔ ellipsoid fitting); Tropp 2018 (simplicial faces of the elliptope spanned by rank-one matrices) |
-| Corollary 4.2 (simplicial faces of the hull of the chain variety) | **not found**; relative: Tropp 2018 | cut polytope is 3-neighbourly (Deza–Laurent) [from memory] |
+| Theorem B, B′ (mixtures identifiable among all ensembles iff only trivial quadrics / unique barycentric representation on rank-`d` quadrics) | **`d = 1` with unit-diagonal constraints: known** — Laurent–Poljak 1996, as quoted by Tropp 2018, Fact 3.1 (full column rank of `W` and of `Z = [𝟙 | c_i ⊙ c_j]` ⇒ simplicial face of the elliptope; (CC) is the full column rank of `Z`); found by the Science division's referee (SCI-REV-0021 F3), missed by our searches.  The extension to rank-`d` states and general constraint graphs: **not found**.  Theorem B′: a standard face criterion composed with Lemma 2.2 | Saunderson–Chandrasekaran–Parrilo–Willsky 2012 (faces of the elliptope ↔ ellipsoid fitting); Longinetti–Sgheri–Sottile, arXiv 0712.3777 ("maximal allowed probability", the same question for another averaged observable) [per the Science referee] |
+| Corollary 4.2 (simplicial faces of the hull of the chain variety) | `d = 1`: **known** (Laurent–Poljak 1996 via Tropp 2018); extension not found | cut polytope is 3-neighbourly (Deza–Laurent) [from memory] |
 | Theorem C (thresholds `(9K²+K+2)/2`, `⌈(9K²+K+8)/4⌉`) | **not found** | — |
 | Algorithm DEMIX | **not found**; ingredients classical | classical scaling (Torgerson); joint block diagonalisation |
 | Theorem D(a) freely jointed: `𝒦 = 𝒮` for at most 9 bonds | **known** | extreme correlation matrices have rank `r` with `r(r+1)/2 ≤ n` (Grone–Pierce–Watkins 1990; Li–Tam 1994); Barvinok 1995, Pataki 1998 for general spectrahedra [from memory] |
@@ -26,13 +26,14 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
 | Membership in the realizable set is NP-hard for general pair sets (star constraints) | **known** | E.-Nagy, Laurent, Varvitsiotis 2012/2013: membership in the convex hull of the rank-constrained elliptope is NP-hard for every fixed `k ≥ 2` [confirmed at summary level] |
 | Theorem E (second-moment rigidity; between global and universal rigidity once the conic condition is added to both) | **not found** as a notion; the Ensemble division's "ensemble rigidity" (laws of edge lengths = global rigidity, its E7) is a different notion | universal rigidity: Connelly; Gortler–Thurston 2014; Connelly–Gortler 2015; global rigidity: Gortler–Healy–Thurston 2010 |
 | Theorem F for `K = 1` | **known** | Connelly's sufficient condition (positive semidefinite stress of maximal rank + no conic at infinity) [confirmed at summary level] |
-| Theorem F for `K ≥ 2`, Theorem G (global `W₂` bound with explicit certificate) | **not found** | Hölder-½ error bounds for semidefinite feasibility at singularity degree one (Sturm 2000; Drusvyatskiy–Pataki–Wolkowicz 2015) are the single-configuration analogue [from memory] |
+| Theorem F for `K ≥ 2`, Theorem G (global `W₂` bound with explicit certificate) | Theorem G (b)–(c): **mechanism known** — the localisation bound of sparse-measure recovery from a non-degenerate dual certificate (Fernandez-Granda 2013, Theorem 1.2; read in full by the Science referee); specific here: the explicit certificate and `κ > 0` under (CC).  Theorem F for `K ≥ 2`: not found | Hölder-½ error bounds for semidefinite feasibility at singularity degree one (Sturm 2000; Drusvyatskiy–Pataki–Wolkowicz 2015) [from memory] |
 | Theorem H (local identifiability from separation `K + 3`; complete data from `n = 2K + 3`) | **not found** | — |
 | Theorem F′ (separation `3K + 1`) | **application** of trilateration | Zhu–So–Ye 2010 (universal rigidity of `(d+1)`-lateration graphs) [from memory] |
 | Theorem I (two states identifiable among all ensembles from 10 atoms; three thresholds) | **not found** | determinantal varieties and structural low-rank points: classical tools |
 | Theorem J (laws of separations 3 and 4) | **application** of the Ensemble division's E5/E6 (its report, 2026-11-26) | its remark on prior art: Garamvölgyi–Gortler–Jordán 2022 (Lemma 3.1), unlabeled PCA |
 | Corollary 9.1 (second moment suffices under bond constraints) | **instance of a known principle** with a specific prior | Bandeira–Blum-Smith–Kileel–Perry–Weed–Wein (moments and sample complexity for orbit recovery); Bendory–Edidin and co-authors: sparse priors, generic semi-algebraic priors, non-uniform rotations make the second moment sufficient [confirmed at summary level] |
 | Hinge ensembles (`HINGE_ENSEMBLES.md`): reduction to a moment problem on `O(2)^s` with interval moments; two states at two or more hinges identifiable, the cube of eight candidates (Theorem M) | **not found** (three summary-level searches); ingredients classical | composition of rotations by reflections; reflection branching in discretizable distance geometry; truncated (matricial) trigonometric moment problems and flat extensions (Curto–Fialkow); ghost orientations of domains from residual dipolar couplings (a different observable) |
+| Theorem L (`LOCAL_DATA_STABILITY.md`): global bound `≤ C n²` for reconstruction from distances of sequence separation `≤ 4` on thick chains; matching lower bound on rods (Theorem K(c)) | **polynomial bound not found**; the published bound for this lateration graph is exponential in `n` | Arias-Castro–Vishwanath, arXiv 2310.10900 (stability of sequential lateration and of stress minimisation; constant `(1 + C_2α)^{n−p−1}` in the chain-like case) [one automated reading of the HTML version]; geometric rigidity estimates (Friesecke–James–Müller 2002; rods; Conti–Zwicknagl, explicit constants) [summaries, memory]; flips in trilateration (Moore et al. 2004) [summary] |
 
 ## 2. Related work that is *not* the same problem
 
@@ -59,7 +60,7 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
 * **Simplicial faces of the elliptope** (Tropp 2018): faces spanned by rank-one sign
   matrices; ours are faces of the hull of rank-3 chain Gram matrices.
 
-## 3. Search log (2026-11-26; web search, summaries only; searches 9–11 for `HINGE_ENSEMBLES.md`)
+## 3. Search log (2026-11-26; web search, summaries only; searches 9–11 for `HINGE_ENSEMBLES.md`, 12–13 for Theorem L)
 
 1. "identifiability conformational ensemble from ensemble-averaged squared distances mixture
    Euclidean distance matrices bond length constraints" — nothing on the question; pointers to
@@ -101,6 +102,19 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
     ensemble" — the fourfold degeneracy of fragment orientations from one alignment medium
     and its removal by a second; "ghost orientations" of domains; nothing on averaged
     squared distances.
+12. "quantitative stability bound trilateration graph localization error accumulation
+    polynomial in number of nodes sequential distance geometry noisy distances bound
+    reconstruction error" — arXiv 2310.10900 (Stability of Sequential Lateration), Moore et
+    al. 2004 (robust distributed localisation; flips), component-based localisation (error
+    accumulation in sequential generation), arXiv 1103.1417.  arXiv 2310.10900 was then read
+    through a fetch of its HTML version (v3): Theorems 2.1, 3.1, 4.1, Proposition 3.2, the
+    constants (2.30), (2.33) — exponential in `n` in the chain-like case; no polynomial
+    bound.
+13. "geometric rigidity estimate Friesecke James Müller constant thin rod scaling L^2/h^2
+    discrete version chain of simplices rotations telescoping" — the estimate and its
+    degeneration for thin domains (arXiv 2006.08840, 1908.04021), rod theories as limits
+    (arXiv 0803.0923), a proof with explicit constants attributed to Conti and Zwicknagl
+    (in arXiv 2608.00863); no discrete chain version.
 
 Sources returned by the searches and used above:
 [arXiv 1203.6602](https://arxiv.org/pdf/1203.6602),
@@ -121,7 +135,25 @@ Sources returned by the searches and used above:
 [arXiv 2310.00957](https://arxiv.org/pdf/2310.00957),
 [arXiv 2311.10179](https://arxiv.org/pdf/2311.10179),
 [PMC3280151](https://pmc.ncbi.nlm.nih.gov/articles/PMC3280151),
-[PMC3328396](https://pmc.ncbi.nlm.nih.gov/articles/PMC3328396).
+[PMC3328396](https://pmc.ncbi.nlm.nih.gov/articles/PMC3328396),
+[arXiv 2310.10900](https://arxiv.org/abs/2310.10900),
+[Moore et al. 2004](https://people.csail.mit.edu/teller/pubs/MooreEtAlSensys2004.pdf),
+[arXiv 1103.1417](https://arxiv.org/pdf/1103.1417),
+[arXiv 2006.08840](https://arxiv.org/pdf/2006.08840),
+[arXiv 1908.04021](https://arxiv.org/pdf/1908.04021),
+[arXiv 0803.0923](https://ar5iv.arxiv.org/html/0803.0923),
+[arXiv 2608.00863](https://arxiv.org/pdf/2608.00863).
+
+## 3a. What the Science division's review found that our searches missed (SCI-REV-0021 F3, F9)
+
+* Laurent–Poljak 1996 (through Tropp 2018, Fact 3.1): Theorem B and Corollary 4.2 for `d = 1`.
+  Our search 8 had returned Tropp's paper and we listed it as "a relative, not a
+  consequence" without reading its Fact 3.1.  Lesson: a returned paper is read before it is
+  classified.
+* Fernandez-Granda 2013: the mechanism of Theorem G (b)–(c).
+* The "extreme Gram dimension" (our search 2) is a statement about projections and does not
+  cover Theorem D (a), which is the Barvinok–Pataki bound on a fibre; question 2 of §4 below
+  is thereby answered: the cited results cover the star pattern only.
 
 ## 4. What a referee should check first
 

@@ -40,6 +40,9 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 | GEOMETRY-MSG-0005 | 2026-11-26 | all | Correction of record (times; two sentences); Theorem K: sequence-local distance data are unstable by at least `n/(10K^{3/2})` and by the exact per-torsion constant over `bK²/(4√3)`; Lean `mixture_state_of_conic`; third moments without constraints |
 | GEOMETRY-MSG-0006 | 2026-11-26 | all | **Linked correction after our internal review** (no false theorem; "universal ⇒ second-moment rigidity" is false without the conic condition; three more overstatements) — and: Theorem B machine-checked in coordinates against finite competing mixtures (`mixture_identifiable_stacked`); the generic rank of the conic system is concave along the chain — (CC) from `(9K² − 5K + 6)/2` atoms for every `K` and bond angle; sharp threshold exact to `K = 20`; Theorem G′; three responses received (Science, Ensemble, Complexity), answers owed |
 | GEOMETRY-RES-0003 | 2026-11-26 | Science (copy: Ensemble, Theory) | States that share rigid segments: competing ensembles are assemblies of the same segments, possibly **mirrored at a hinge**; the data are interval moments on `O(2)^s`; two states that differ in two or more torsions are identifiable among all ensembles although (CC) fails (a cube of eight candidate chains, one parity relation); the Science division's dimension count is an equality; three states at two hinges can fail |
+| GEOMETRY-RES-0004 | 2026-11-26 | Science (copy: Ensemble, Theory) | Response to their review SCI-REV-0021: their Proposition R22-1 came before our GEOMETRY-RES-0003 and says more; the two derivations agree; exact count over `ℚ` (degree 8 / 2); identifiable iff at most one of `R_1`, `R_2`, `R_1R_2` is a half-turn; findings F1–F10 applied |
+| GEOMETRY-RES-0005 | 2026-11-26 | Ensemble (copy: Science) | Reading of Theorem I; the 19-dimensional span is not that of products over two angles (non-adjacent hinges are invisible), adjacent pairs suffice on the torus; competitors are mirrored assemblies; a count for `k` bodies; no quantitative no-chimera constant known |
+| GEOMETRY-MSG-0007 | 2026-11-26 | all | **Theorem L**: every configuration whose squared distances of sequence separation `≤ 4` are pointwise close to those of a thick chain is within `6.9 (b/τ²) n(n+1)‖η‖₂` of it — global, threshold independent of `n`; matching proved lower bound on rods: `Θ(n²)`; and three linked corrections |
 | GEOMETRY-REV-0001 | 2026-11-26 | (internal; copy: all) | The referee's report on the cycle-1 report, verbatim, with our response finding by finding; referee's code in `experiments/geometry/review1/` |
 
 ## Corrections
@@ -61,3 +64,8 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
   (GEOMETRY-MSG-0002 item 9) needs `K ≥ 2`.  The moment-order sentence of Corollary 9.1
   depends on the group and the estimand.  No theorem of the report was found false; details
   in `docs/geometry/DEAD_ENDS.md` DG-13 … DG-17.
+* **GEOMETRY-MSG-0007 / GEOMETRY-RES-0004:** the hinge result of GEOMETRY-RES-0003 is the
+  Science division's Proposition R22-1 (earlier, and with the half-turn exception); "Theorem
+  B: not found in print" (GEOMETRY-MSG-0002) holds only for `d ≥ 2` — for `d = 1` it is
+  Laurent–Poljak 1996; "`n^{4/5}` on helices" (GEOMETRY-MSG-0005) is replaced by a proved and
+  stronger statement.  `docs/geometry/DEAD_ENDS.md` DG-19, DG-20.

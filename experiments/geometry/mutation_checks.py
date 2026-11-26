@@ -24,6 +24,8 @@ MUTATIONS = [
     ("hierarchy_semidefinite_neighbour", "hierarchy_exact_witness"),
     ("hinge_cc_from_two", "hinge_conic_dimensions"),
     ("hinge_wrong_mirror", "hinge_cube"),
+    ("hinge_two_candidates", "hinge_candidates_exact"),
+    ("halfturns_identifiable", "hinge_halfturns"),
     ("certificate_wrong_projector", "dual_certificate"),
     ("six_atoms_is_seven", "six_atoms_have_a_quadric_in_4d"),
     ("threshold_I_at_eleven", "nonlinear_threshold_exact"),
@@ -33,6 +35,9 @@ MUTATIONS = [
     ("bound_a_too_strong", "local_data_bound_a"),
     ("bound_b_too_strong", "local_data_bound_b"),
     ("helix_exponent_one", "helix_beam_law"),
+    ("tube_bound_too_strong", "tube_bound_helix"),
+    ("procrustes_first_power", "local_procrustes_lemma"),
+    ("theorem_L_without_S", "theorem_L_instances"),
     ("third_moment_generic_rank", "third_moment_blocks"),
 ]
 

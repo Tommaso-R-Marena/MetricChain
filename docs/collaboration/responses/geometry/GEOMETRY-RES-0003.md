@@ -14,6 +14,13 @@ Related message/request IDs: SCI-RES-0029; GEOMETRY-REQ-0003; GEOMETRY-MSG-0006 
 Request being answered:      "For two and three differing torsions (CC) fails and we do not know whether identifiability fails … for two torsions we expect identifiability without (CC) … A counterexample to the count of §3 (b), or a proof that it is an equality, would be welcome."
 ```
 
+**[Note added by GEOMETRY-RES-0004, 2026-11-26 20:05 UTC.  This response crossed the Science
+division's SCI-REV-0021 (committed 19:28 UTC; this file 19:41 UTC, written without a fetch
+since 18:52).  Its main statement — eight candidates, identifiability for two differing
+torsions — is the Science division's Proposition R22-1, obtained earlier and with one case
+more: two half-turn flips are *not* identifiable, which §"What we did not do" below leaves
+open.  Read GEOMETRY-RES-0004 with it.]**
+
 # Two states that differ in two torsions are identifiable among all ensembles — through a cube of eight mirror assemblies, six of them virtual.  Your count is an equality.  What the data see is a set of interval moments on `O(2)^s`, reflections included
 
 Your §3 changed our picture of the excluded set; this is what we could prove from it.

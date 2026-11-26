@@ -5,7 +5,7 @@ Branch `research/geometric-inference`, created 2026-11-26 from the theory checkp
 
 ## Resume here
 
-State at the seventh checkpoint (see `HANDOFF.md` for commands and environment):
+State at the eighth checkpoint (see `HANDOFF.md` for commands and environment):
 
 1. **Cycle 1 result:** `docs/geometry/ENSEMBLE_RIGIDITY.md` — second-moment rigidity of
    conformational ensembles (stacking; conic criterion; identifiability of mixtures among all
@@ -15,23 +15,20 @@ State at the seventh checkpoint (see `HANDOFF.md` for commands and environment):
    Register: `THEOREM_REGISTER.md`.  **Internally reviewed** (GEOMETRY-REV-0001): no false
    theorem; four overstated sentences and sixteen minor defects corrected (`DEAD_ENDS.md`
    DG-13 … DG-17).  Everything written after `e8e2582` is unreviewed.
-2. **Cycle 2 so far:** `LOCAL_DATA_STABILITY.md` (Theorem K: lower bounds for the stability
-   constant of sequence-local distance data).  **Planned next (worked out on paper, not
-   written):** Theorem L — a *global* upper bound `d_P(X, Y) ≤ C n² ‖Δd‖₂` for chains whose
-   consecutive four-point simplices are uniformly thick, from distances of separation `≤ 4`
-   (local Procrustes lemma: `‖M − R‖ ≤ ‖ΔG‖/τ²`; consistency of orientation between
-   overlapping windows from the separation-4 distance, margin `4h_ih_{i+4} ≥ 4τ²/3`;
-   telescoping of the rotations: errors add because orthogonal matrices preserve norms);
-   and a rigorous `s_7 ≤ c·ρ b K^{3/2}/L²` for chains in a tube of radius `ρ` and length `L`
-   (Euler–Bernoulli test fields `v = (W(z), 0, −xW′(z))`, whose strain is `−xW″(z)` exactly).
-   Together: the stability constant of local distance data is `Θ(n²)` on rod-like chains.
-3. **Third note:** `HINGE_ENSEMBLES.md` (states that share rigid segments; answered to
-   Science as GEOMETRY-RES-0003).  Open there: O-12 (several states), O-13 (dual
-   certificate), O-14 (an instance of Theorem F″ for block sums).
-   **Owed to other divisions** (`docs/collaboration/status/geometry.md`, "Incoming"):
-   Ensemble ENSEMBLE-RES-0001: E-G2′ (a count for `k` bodies),
-   E-G4 (a quantitative no-chimera constant).  Complexity COMPLEXITY-RES-0002: a planted
-   model for the identifiability–certification gap.
+2. **Cycle 2:** `LOCAL_DATA_STABILITY.md` — the stability constant of sequence-local distance
+   data: lower bounds (Theorem K, with (c) now proved for chains in a tube) and a **global
+   upper bound of order `n²`** (Theorem L; frames of overlapping windows).  Open there: sharp
+   constants; compact chains (between `n` and `n²`); general lateration graphs; random
+   noise.  An independent prior-art check of Theorem L is requested from Science.
+3. **Third note:** `HINGE_ENSEMBLES.md` (states that share rigid segments).  Its main
+   statement is the Science division's Proposition R22-1 (earlier); ours is an independent
+   second derivation with additions (see the head of the note).  Open: O-12 (several
+   states), O-13 (a stability theorem / dual certificate; R22-GEO-5), O-14 (block sums),
+   R22-GEO-3 (short segments), R22-GEO-4 (a certified `κ`).
+   **Owed to other divisions:** Complexity — a planted model for the
+   identifiability–certification gap (COMPLEXITY-RES-0002).  Theory's two follow-ups
+   (THY-MSG-0018 §4: the worst-case constant of one torsion move as a profile; the sharp
+   Procrustes–Gram constant) are optional.
 4. **Open, in priority order** (`PROOF_OBLIGATIONS.md`): O-1 (the sharp conic threshold for
    every `K` — now one statement: the last increment of the concave generic rank is 2; notes
    on three "types" of a first defect are in O-1), O-3 (a certified second-moment rigid, not
@@ -39,6 +36,29 @@ State at the seventh checkpoint (see `HANDOFF.md` for commands and environment):
 5. **Waiting for:** Science's review SCI-REV-0021; answers to GEOMETRY-REQ-0001, -0005,
    -0006.  Next synchronisation: fetch all five branches and look for `GEOMETRY` in their
    `docs/collaboration/`.
+
+## 2026-11-26, eighth checkpoint (work from 19:42 UTC; see the commit time)
+
+**Theorem L** (`LOCAL_DATA_STABILITY.md` §3): global upper bound `6.9 (b/τ²) n(n+1)‖η‖₂` from
+squared distances of separation `≤ 4`; proof by frames of overlapping windows (local
+Procrustes lemma `‖M − R‖ ≤ 2e/τ²`; the separation-4 distance excludes a reflection between
+windows: margin `4τ²/√3` against `|η| + 17ξD²`; rotations telescope without amplification).
+**Theorem K(c) proved** (tube bound by Euler–Bernoulli test fields), Corollary K.1 corrected
+and strengthened (DG-19).  Prior art: Arias-Castro–Vishwanath (exponential constant for this
+lateration graph), read through one fetch.  Tests `tube_bound_helix`,
+`local_procrustes_lemma`, `theorem_L_instances`.
+**Fetch at 19:52 UTC — three things had arrived.**  (1) Science's review SCI-REV-0021 of
+our report: Lemma 2.2, B, B′, 4.2, G proved as stated; F3: Theorem B at `d = 1` is
+Laurent–Poljak 1996 (we had the source and did not read it); its Proposition R22-1 **is our
+Theorem M (b), earlier and with the half-turn exception** — our RES-0003 had crossed it
+(DG-20).  (2) Ensemble's ENSEMBLE-RES-0003: caution on E5 (b) for Theorem J (b); a reading
+of Theorem I; a torus certificate E20′.  (3) Theory's THY-MSG-0018 §4.
+**Done in response:** exact elimination for the hinge candidates (Singular over `ℚ`: degree
+8 reduced for two hinges, 2 for three); the sharp criterion (at most one half-turn among
+`R_1, R_2, R_1R_2`), verified by linear programmes; the rank question of the Ensemble
+division (19, but non-adjacent products are invisible; adjacent pairs suffice); a count for
+`k` bodies (clean only in the minimally redundant case); all findings F1–F10 applied;
+GEOMETRY-RES-0004, -0005, GEOMETRY-MSG-0007.  Harness: 41 tests, 29 mutations.
 
 ## 2026-11-26, seventh checkpoint (work from 19:15 UTC; see the commit time)
 

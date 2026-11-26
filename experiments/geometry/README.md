@@ -27,6 +27,10 @@
 | `exact_general_position.py [Kmax]` | hypothesis of Theorem F′: every `3K + 1` consecutive stacked points affinely independent, with (CC) at `n₀(K)` | exact (mod p) |
 | `hinge_pairs.py [seed] [nstart]` | `HINGE_ENSEMBLES.md` Theorem M: two states that differ in two torsions — the cube of eight linear images of the stack, the parity relation, the linear programme, a search over all chains; `dim 𝒩(z)` for one to five hinges | floating point |
 | `hinge_multistate.py [seed] [nstart]` | exploration: three states at two to four hinges (candidates by search, linear programme) | floating point |
+| `exact_hinge_candidates.py` | Theorem M: the scheme of candidate assemblies has degree 8 (two hinges) and 2 (three hinges), reduced, over `ℚ` | exact (Singular) |
+| `hinge_halfturns.py` | Theorem M (b)(iii), (d): identifiable iff at most one of `R_1`, `R_2`, `R_1R_2` is a half-turn (linear programme over the eight candidates) | floating point |
+| `hinge_fourier_rank.py` | Lemma M1: the squared distances span `2s² + 1` functions of `s` hinge angles; products of non-adjacent hinges are not among them | floating point |
+| `local_data_upper.py` | `LOCAL_DATA_STABILITY.md` Theorem L (global upper bound) and Theorem K(c) (tube bound) on instances | floating point |
 | `review1/` | the internal referee's own scripts, logs and Lean checks (GEOMETRY-REV-0001), unmodified; see its README | — |
 
 Requirements: Python 3 with `numpy`, `scipy` (the exact scripts need only the standard library

@@ -5,8 +5,13 @@ Branch `research/geometric-inference`.  Labels as in `docs/collaboration/README.
 **[V]** machine-checked in Lean (declaration named), **[P]** paper proof in this file,
 **[P, exact]** paper proof whose finite part is an exact computation (script named; rational or
 modular arithmetic, no floating point), **[K]** known result (cited), **[N]** numerical evidence
-only, **[C]** conjecture.  Nothing in this file has been refereed by another division (the
-Science division's review is running: its SCI-RES-0029).  An internal adversarial review of
+only, **[C]** conjecture.  **Reviewed by another division:** the Science division's
+SCI-REV-0021 (workstream R22; an internal review by an AI session with its own code, of the
+first-checkpoint text `d84a43b`) found Lemma 2.2, Theorems B, B′, Corollary 4.2 and Theorem G
+proved as stated, with three major findings (the scope of the conic condition; the constant
+`κ`; prior art for Theorem B at `d = 1` and for Theorem G) and seven minor ones, all acted on
+here (GEOMETRY-RES-0004).  Everything else has not been refereed by another division.  An
+internal adversarial review of
 the fifth-checkpoint version (commit `e8e2582`) is preserved verbatim in
 `docs/collaboration/messages/geometry/GEOMETRY-REV-0001.md`; it found no false theorem, four
 statements that said more than was proved and sixteen minor defects, all corrected here and
@@ -41,7 +46,12 @@ every conformation obeys the same local constraints (bond lengths, bond angles)?
    `K = 1` this is a reinterpretation of a classical lemma of rigidity theory).  A `K`-state mixture is the only
    ensemble — among **all** probability distributions on conformations, with any number of
    states — with its `M`, as soon as the only quadrics through the constrained edge
-   directions of the stacked framework are the `K − 1` trivial ones.
+   directions of the stacked framework are the `K − 1` trivial ones.  This conic condition
+   holds for `K`-tuples of conformations in general position; it is *sufficient, not
+   necessary* (it says that the simplex of the states is a face of the semidefinite
+   relaxation, not only of the realizable set — Science division, SCI-REV-0021 F1), and it
+   fails for the commonest two-state motions, states that share rigid segments
+   (`HINGE_ENSEMBLES.md`).
 4. **Sharp thresholds** (§5, Theorem C).  For freely jointed chains the conic condition holds
    generically iff the chain has at least `(9K² + K + 2)/2` bonds [P, all `K`].  For chains
    with fixed bond lengths and bond angles it holds generically iff
@@ -174,6 +184,14 @@ and `vᵀv' = ⟨Tv, Tv'⟩ = ∫ vᵀAᵀAv' dν`.  For `ij ∈ E₀` and almos
 `ℓ_ij² = |x_j − x_i|² = eᵀA(x)ᵀA(x)e` with `e = z_j − z_i`, and `|e|² = ℓ_ij²`; so
 `A(x)ᵀA(x) − I ∈ 𝒩(z)`.  `AᵀA` is positive semidefinite of rank at most `d`.  ∎
 
+*A second proof, with `A` linear in `x`* (Science division's referee, SCI-REV-0021 F4).  Let
+`Π^⊥` be the orthogonal projector of `ℝⁿ` onto `span(𝟙, columns of z)^⊥` and
+`φ(x) = tr(xᵀΠ^⊥x) = −½⟨Π^⊥, D(x)⟩ ≥ 0`.  Then `∫φ dν = −½⟨Π^⊥, M(ν)⟩ = −½⟨Π^⊥, D(z)⟩ = 0`, so
+`φ = 0` on the support of `ν` (`φ` is continuous): every `x` in the support is `𝟙tᵀ + zA(x)ᵀ`
+with `A(x) = (Z₀⁺X₀(x))ᵀ`, `Z₀ = z − 𝟙z_1ᵀ`, `X₀ = x − 𝟙x_1ᵀ`, a linear function of `x`; the two
+other properties follow as above.  No measurable selection is needed, and the statement
+holds on the whole support.  This is Theorem G (c) with zero data error.
+
 **Remark 2.3 (ellipsoid fitting).**  `P ∈ 𝒫(z)` says that the degenerate quadric
 `{v : vᵀPv = 1}` — an elliptic cylinder with a `d`-dimensional cross-section — passes through
 the normalised edge vectors `e/ℓ_e`.  The states of a mixture are `K` such cylinders,
@@ -305,10 +323,13 @@ identity `I_{dK}` has exactly one representation as the barycentre of a probabil
 `𝒫(z)` with barycentre `I`; if `ρ = Σ w_k δ_{E_k/w_k}` the last three sentences of the previous
 proof apply.  (⇒) Let `ρ' ≠ Σ w_k δ_{E_k/w_k}` have barycentre `I`.  If `supp ρ'` were contained
 in `{E_k/w_k}`, the linear independence of the `E_k` would give `ρ' = Σ w_kδ_{E_k/w_k}`; so
-`supp ρ'` contains a point outside, and by Tchakaloff's theorem (applied separately to `ρ'`
-restricted to a small closed ball `B` around that point, disjoint from `{E_k/w_k}`, and to its
-complement) there is a finitely supported `ρ'' = Σ_j c_j δ_{P_j}` on `𝒫(z)` with barycentre `I`
-and `ρ''(B) > 0`.  Choose `A_j ∈ ℝ^{d×dK}` with `A_jᵀA_j = P_j` and let
+`supp ρ'` contains a point outside.  `𝒫(z)` is compact (closed, and bounded because the
+`E₀`-edge vectors of the spanning `z` span `ℝ^m`: `λ_min(Σ_e eeᵀ)·tr P ≤ Σ_e eᵀPe = Σ_e ℓ_e²`).
+Take a small closed ball `B` around that point, disjoint from `{E_k/w_k}`: the barycentres of
+the normalised restrictions of `ρ'` to `B` and to its complement lie in `conv(𝒫(z) ∩ B)` and in
+`conv 𝒫(z)`, so by Carathéodory's theorem there is a finitely supported
+`ρ'' = Σ_j c_j δ_{P_j}` on `𝒫(z)` with barycentre `I` and `ρ''(B) > 0`.  (Earlier versions cited
+Tchakaloff's theorem here; both referees pointed out that Carathéodory is what is used.)  Choose `A_j ∈ ℝ^{d×dK}` with `A_jᵀA_j = P_j` and let
 `Y_j = (A_j(z_i − z_1))_i`.  `Y_j ∈ 𝒞` because `eᵀP_je = |e|² = ℓ_e²`, and
 `Σ_j c_j D(Y_j)_{ii'} = (z_i − z_{i'})ᵀ(Σ c_jP_j)(z_i − z_{i'}) = M(μ)_{ii'}`.  `Y_j` is
 congruent to `X_k` iff `P_j − E_k/w_k` vanishes on all differences of `z`, i.e. iff
@@ -327,6 +348,18 @@ relative interior, so for `y ∈ Φ` there are `y' ∈ Φ` and `t ∈ (0, 1]` wi
 `ν_y` to be carried by the classes `[X_k]`, i.e. `y ∈ conv{D(X_k)}`.  Conversely
 `conv{D(X_k)} ⊂ Φ`: a face that contains a relative interior point of a simplex contains the
 simplex.  ∎
+
+*Complements* **[P; Science division's referee, SCI-REV-0021 F7, F1]**.  (a) Converse: if the
+smallest face of `𝒦` containing `M(μ)` meets `D(𝒞)` exactly in the affinely independent points
+`D(X_k)`, then `μ` is identifiable.  ("Is a face" alone is not enough: a point of `D(𝒞)` need
+not be extreme — Example 3.3.)  (b) Hence `K ≤ 1 + dim aff 𝒦 ≤ 1 + (n − 2)(n − 3)/2` for an
+identifiable mixture of chains with bond angles.  (c) By Carathéodory every `M(μ)` is the
+datum of an ensemble with at most `1 + (n − 2)(n − 3)/2` states, so **an ensemble with more
+shapes than that — in particular any ensemble with a continuous part — is never
+identifiable** from averaged squared distances.  (d) For spanning `z`, (CC) holds iff
+`conv{D(X_k)}` is a face of the *relaxation* `𝒮` of §8.1 (the smallest face of `𝒮` at `M(μ)` is
+`{D(zP^{1/2}) : P ⪰ 0, P ∈ I + 𝒩(z)}`, of dimension `dim 𝒩(z)`), whereas identifiability is the
+same statement for `𝒦`; the gap between the two conditions is the gap between `𝒦` and `𝒮`.
 
 ---
 
@@ -680,8 +713,13 @@ fundamental graph with respect to one basis is connected is connected.  Injectiv
 (b) `d²_{i,i+s}` depends on the torsions `θ_i, …, θ_{i+s−3}` and, generically, on `θ_i`; the
 Jacobian of the `n − s` features with respect to `θ_1, …, θ_{n−s}` is triangular with non-zero
 diagonal.  For `s = 3` the image of the chain variety is the product of the intervals
-`[A_i − |B_i|, A_i + |B_i|]`, so splices are realised (E5(b)); for `s ≥ 4` the `n − s`
-distances cannot determine the `n − 3` torsions.  ∎
+`[A_i − |B_i|, A_i + |B_i|]`, so every splice of two states is a chain: if two states `x, y`
+differ in the features of two disjoint non-empty index sets `A`, `B`, the four chains with
+features `(x_A, x_B), (x_A, y_B), (y_A, x_B), (y_A, y_B)` and weights `w², w(1−w), (1−w)w, (1−w)²`
+have the same law of every single feature as `wδ_x + (1 − w)δ_y`.  (We do not use the Ensemble
+division's E5(b) here: its general form holds on an open set of pairs only —
+ENSEMBLE-RES-0003 §1 (b).)  For `s ≥ 4` the `n − s` distances cannot determine the `n − 3`
+torsions.  ∎
 
 `experiments/geometry/matroid_connectivity.py` decides connectivity for other patterns by an
 exact computation (the matroid of a rational witness modulo a prime is a weak image of the
@@ -735,9 +773,10 @@ is, up to a rotation, the stacked configuration of the `K`-mixture with states
 
 Floating-point behaviour (`experiments/geometry/demix.py`, test `demix_recovers`): exact
 recovery at the thresholds `n₀(K)` for `K = 2, 3, 4` (state RMSD `≤ 2·10⁻⁷`, weights to
-`10⁻¹³`), errors proportional to the perturbation of `M` with a constant governed by the
+`6·10⁻¹²`), errors proportional to the perturbation of `M` with a constant governed by the
 smallest non-trivial singular value `s*` of the linear system, which is small exactly at the
-threshold (`s* ≈ 7·10⁻³` at `K = 2, n = 12` against `9·10⁻²` at `n = 16`).  This is a statement
+threshold (`s* ≈ 7·10⁻³` at `K = 2, n = 12` against `8·10⁻²` at `n = 16`; two of these numbers
+were misquoted in earlier versions — SCI-REV-0021 F10).  This is a statement
 about one implementation on synthetic instances, not a stability theorem; the stability
 theorem is §7.
 
@@ -807,7 +846,8 @@ of `z`; on `𝒞` the proof of Theorem B applies.
 (b) By compactness of `𝒞` modulo congruence and continuity it suffices to exclude a sequence
 `X_j → [X_k]` with `φ(X_j)/ρ_j² → 0`, `ρ_j = d_P(X_j, X_k)`.  Align optimally:
 `X_j = X_k + ρ_j V_j`, `‖V_j‖ = 1`, `V_j` orthogonal to the infinitesimal isometries at `X_k`
-(first-order optimality of the alignment); pass to a limit `V`.  The constraints give
+(first-order optimality of the alignment gives orthogonality at `X_j`; it holds at `X_k` as
+well because `⟨V_j, V_jΞᵀ⟩ = 0` for skew `Ξ`); pass to a limit `V`.  The constraints give
 `2 e·(V_j)_e + ρ_j |(V_j)_e|² = 0` on `E₀`, so `V` is an infinitesimal flex of `(E₀, X_k)`.
 `φ(X_j) = ρ_j²‖Π^⊥V_j‖²` because `Π^⊥X_k = 0`, so `Π^⊥V = 0`: `V = zBᵀ + 𝟙tᵀ` with
 `B ∈ ℝ^{d×dK}`.  For a stacked edge vector `e`, the edge of `X_k` is `Π_k e/√w_k` (`Π_k` the
@@ -820,7 +860,7 @@ is supported on block `k` with a skew block: `V` is an infinitesimal isometry.  
 `φ ≥ κ min_k d_P(·, X_k)²`.
 (d) Write `η = ‖M(ν) − M(μ)‖_F`, `Q = ∫ min_k d_P² dν ≤ C₁η`, and let `ν_k` be the mass of the
 `k`-th nearest-state cell.  For `X` in cell `k`, optimally aligned, `X = X_k + Δ`,
-`D(X) − D(X_k) = L_k(Δ) + D(Δ)` with `L_k` linear and `‖D(Δ)‖_F ≤ 2n‖Δ‖²`; and
+`D(X) − D(X_k) = L_k(Δ) + D(Δ)` with `L_k` linear and `‖D(Δ)‖_F ≤ 4√n‖Δ‖²`; and
 `Δ = τ + O(‖Δ‖²)` with `τ` tangent to `𝒞` at `X_k` (smoothness).  Hence
 `M(ν) − M(μ) = Σ_k (ν_k − w_k)D(X_k) + Σ_k L_k(τ̄_k) + R`, `‖R‖ ≤ C₂Q`, with `τ̄_k` tangent.  The
 linear map `(a, τ̄) ↦ Σ a_k D(X_k) + Σ L_k(τ̄_k)` on `{Σ a_k = 0} × ∏(T_{X_k}𝒞 ⊖ isometries)` is
@@ -833,7 +873,8 @@ kills the off-diagonal blocks of `Ξ`, and the trace condition of `𝒯` gives `
 move the excess mass between states (cost at most `diam² · ½Σ|ν_k − w_k|`):
 `W₂² ≤ 2Q + diam²·C₃(η + Q) ≤ C_μ η`.
 (e) Replace the state `X_1 = X(θ)` by the two states `X(θ ± εv)` with weights `w_1/2`: `M`
-changes by `O(ε²)` (the first-order terms cancel) and `W₂² = w_1 ε² |∂_v X|²(1 + o(1))`.  ∎
+changes by `O(ε²)` (the first-order terms cancel) and `W₂² = w_1 ε² |∂_v X|²(1 + o(1))`, with
+`∂_vX` taken orthogonal to the infinitesimal isometries.  ∎
 
 **Theorem G′ (the same conclusions without the conic condition) [P; for two states P, exact].**
 The proof of Theorem G uses (CC) in three places only, and each can be replaced by a weaker
@@ -903,9 +944,13 @@ in `ℝ⁴` with rational coordinates (unit quaternions), bond vectors spanning 
 `rank = 10 = dim Sym(4)` for the 11 conditions `eᵀSe = 0`: a rank-4 extreme point of `𝒮`.
 Longer chains: prolong it.  ∎
 
-(a) is the statement that the extreme Gram dimension of the constraint pattern is at most
-`d`; for freely jointed chains it is the classical fact that correlation matrices of order at
-most 9 are mixtures of correlation matrices of rank at most 3 (§9).  The chain version, and
+(a) is the Barvinok–Pataki bound applied to the fibre of the statewise constraints; for
+freely jointed chains it is the classical fact that correlation matrices of order at most 9
+are mixtures of correlation matrices of rank at most 3 (§9).  (Earlier versions called (a)
+a statement about the *extreme Gram dimension*; that notion of E.-Nagy, Laurent and
+Varvitsiotis concerns projections onto a pair set under unit-diagonal constraints — in our
+terms `π_F(𝒦) = π_F(𝒮)` for star-shaped `E₀`, the hypothesis of Theorem E (c) in projected
+form — and does not cover chain patterns: SCI-REV-0021 F9.)  The chain version, and
 the reading "semidefinite feasibility = ensemble realizability for short chains", are the
 contribution.  For a general pair set `F` deciding membership in the projection of `𝒦` is
 NP-hard already for star-shaped statewise constraints, by the theorem of E.-Nagy, Laurent and
@@ -1008,10 +1053,28 @@ universally rigid.  What is missing for a theorem is a certified global maximum 
   matrices: Grone–Pierce–Watkins 1990, Li–Tam 1994.  Convex hull of the rank-constrained
   elliptope, extreme Gram dimension, NP-hardness of membership: E.-Nagy, Laurent,
   Varvitsiotis 2012–2014.  Theorem D(a) for freely jointed chains is a case of these.  **[K]**
-* Simplicial faces of the elliptope spanned by rank-one matrices: Tropp 2018; the link between
-  faces of the elliptope and ellipsoid fitting: Saunderson, Chandrasekaran, Parrilo, Willsky
-  2012.  Our Remark 2.3 and Corollary 4.2 are relatives (rank-`d` generators, structured
-  point sets), not consequences.  **[K, related]**
+* **Theorem B and Corollary 4.2 at `d = 1` with unit-diagonal constraints are a theorem of
+  Laurent and Poljak (1996)**, as quoted by Tropp (2018, Fact 3.1): for sign vectors
+  `c_1, …, c_r`, if `W = [c_1 … c_r]` and `Z = [𝟙 | c_i ⊙ c_j (i < j)]` have full column rank, then
+  `conv{c_ic_iᵀ}` is a simplicial face of the elliptope; in our notation **(CC) is the full
+  column rank of `Z`**.  Found by the Science division's referee (SCI-REV-0021 F3; Tropp read
+  in full text by the referee, Laurent–Poljak not opened), after our own searches had
+  missed it.  Theorem B is the extension of that statement to rank-`d` states and an
+  arbitrary connected constraint graph, by the same mechanism (the minimal face of a
+  spectrahedron).  **[K for `d = 1`]**
+* The link between faces of the elliptope and ellipsoid fitting: Saunderson, Chandrasekaran,
+  Parrilo, Willsky 2012 (Remark 2.3 is a relative).  **[K, related]**
+* **Theorem G (b)–(c)** is, in mechanism and in the form of its conclusion, the localisation
+  bound of sparse-measure recovery from a non-degenerate dual certificate (Fernandez-Granda
+  2013, Theorem 1.2 — read in full by the Science division's referee): a certificate that is
+  linear in the data, vanishes on the true support and grows quadratically bounds the mass
+  far from the support and the squared distance to it.  Specific to our setting: the
+  explicit certificate `φ` and `κ > 0` under (CC).  **[K in mechanism]**
+* **Theorem B′** is the standard fact "a point of the convex hull of a compact set has a
+  unique representing probability measure iff its minimal face meets the set in affinely
+  independent points", composed with Lemma 2.2; the same question for another averaged
+  observable is the "maximal allowed probability" of an orientation (Longinetti, Sgheri,
+  Sottile, arXiv 0712.3777; per the Science division's referee).  **[K in substance]**
 * Non-uniqueness of distributions with given mean squared distances without statewise
   constraints: e.g. the maximum-entropy construction of Shi and Thirumalai 2023 notes it;
   Proposition 3.1 is elementary.  **[K]**
@@ -1047,13 +1110,15 @@ before our first commit (16:54 UTC); read by us at 17:19 UTC, after our second).
   of the Summary and of the register said "universal ⇒ second-moment ⇒ global" without the
   conic condition; that is false — GEOMETRY-REV-0001, M1; `DEAD_ENDS.md` DG-13.)
 
-*Not found in print (searches of 2026-11-26; an absence in searches is not a proof of
-novelty).*  Theorem B and B′ (identifiability of a mixture among all ensembles from averaged
-squared distances via the trivial-quadric condition); the thresholds of Theorem C; the
-algorithm DEMIX; Theorem G (global `W₂` stability with the explicit certificate); Theorem F for
-`K ≥ 2`; second-moment rigidity as a notion, and Theorem E (its place between global and
-universal rigidity once the conic condition is added to both);
-Theorem D for chains with bond angles and the exact rank-4 witness; Theorem H (range `K + 3`); Theorem I and the separation of the three thresholds for two states.
+*Not found in print (our searches of 2026-11-26 and the Science division's twelve; an absence
+in searches is not a proof of novelty).*  The extension of the Laurent–Poljak condition to
+rank-`d` states and general statewise constraints (Theorems B, B′ for `d ≥ 2`, with the
+reading for ensembles); the thresholds of Theorem C; the algorithm DEMIX; the non-degeneracy
+`κ > 0` under (CC) and the explicit certificate of Theorem G; Theorem F for `K ≥ 2`;
+second-moment rigidity as a notion, and Theorem E (its place between global and universal
+rigidity once the conic condition is added to both); Theorem D for chains with bond angles
+and the exact rank-4 witness; Theorem H (range `K + 3`); Theorem I and the separation of the
+three thresholds for two states.
 
 **Corollary 9.1 (a consequence for reconstruction with unknown orientations) [P, given K].**
 Observe `y = g·X_κ + σξ`: a conformation drawn from `μ`, rotated by a Haar-random `g ∈ O(3)`
@@ -1141,7 +1206,7 @@ distances (for point configurations in Euclidean spaces: congruence).
 ## 11. Reproduction
 
 ```
-python3 experiments/geometry/run_checks.py           # all tests below (about one minute)
+python3 experiments/geometry/run_checks.py           # all tests below (about 25 seconds)
 python3 experiments/geometry/exact_conic_rank.py 12  # Theorem C(b)
 python3 experiments/geometry/exact_jacobian_rank.py 8# Theorem H
 python3 experiments/geometry/exact_4d_extreme.py     # Theorem D(b)
@@ -1184,11 +1249,17 @@ python3 experiments/geometry/mutation_checks.py      # the tests detect planted 
   (`n = 12, …, 40`): (CC), DEMIX and Theorem G never apply to mixtures of ideal helices
   (a single helix has `𝒩 = 0`; a helix plus a generic chain satisfies (CC); a two-helix
   mixture was still identifiable in the referee's computations — `review1/m_helix.py`);
-  (iii) *states that share rigid segments*: two states that differ in a single torsion are
-  never identified, at any length, and (CC) fails whenever two states differ in at most
-  three torsions (Science division, SCI-RES-0029 §3: `dim 𝒩(z) ≥ 21 − 6s + s(s − 1)/2` for
-  `s ≤ 4` shared segments).  These are the commonest two-state motions; the theorems of this
-  report are about states that differ everywhere.
+  (iii) *states that share rigid segments* — the commonest two-state motions, at every chain
+  length (Science division, SCI-RES-0029 §3 and SCI-REV-0021 F1; `HINGE_ENSEMBLES.md`): (CC)
+  fails whenever two states differ in at most three torsions
+  (`dim 𝒩(z) = 10, 6, 3` for one, two, three differing torsions), and on this set
+  identifiability itself varies — it fails for one differing torsion and for two half-turn
+  flips, and holds, by Theorem B′ and a finite list of candidates rather than by (CC), for
+  two torsions in general position and for three or more with long segments; with a
+  four-atom segment between the hinges it depends on the instance.  Theorem I ("a generic
+  two-state ensemble is identifiable from ten atoms on") excludes these pairs as well.
+  A chirality constraint on the segments would change this picture (the competing states are
+  mirrored assemblies); our assumption table has no row for it.
 * The sharp threshold of Theorem C(b) is proved for `K ≤ 20` at one bond geometry and
   `K ≤ 12` at a second by exact computation; for all `K` it is a conjecture (a threshold twice
   as large is proved).  Identifiability among all ensembles below the conic threshold is
