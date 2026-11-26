@@ -228,6 +228,39 @@ numbers Corollary 11.114 (11.113 is the sandwich sampler); nothing depends on it
 mutations added since `24a3c27`; running the harness in its full (non-quick) mode.
 
 
+### 1.8 The theory division's audit at its head `63e36f7` (eighteenth checkpoint) — passes on this machine
+
+| item | value |
+|---|---|
+| command, tree | as §1.4: `bash scripts/audit_all.sh`, unmodified, on `git archive 63e36f7` extracted outside the repository; the build directory of the run at `9408e33` re-used |
+| start / end (UTC) | 2026-11-26 04:42:44 / 05:16:55 (34 min wall clock, on a machine shared with two workstreams and runs of the coordinator) |
+| result | **`AUDIT PASSED`**, exit code 0 |
+| Lean | **76 files, 43 498 lines; `Build completed successfully (8634 jobs)`**; forbidden-token scan: none |
+| axiom audit | **`AXIOM AUDIT OK: 4527 declarations`** use only `propext`, `Classical.choice`, `Quot.sound`; 574 headline theorems checked |
+| harness (quick mode) | `ALL TESTS BEHAVE AS EXPECTED` (the script prints the last 80 lines of the harness output: 59 tests "survived" and 19 "REFUTED (as documented)" are visible in the log; the status file states 175 registered tests) |
+| mutation tests | **464 mutations: 463 caught, 1 expected pass, 0 not as expected**; 141 baseline runs of the unmutated harness, all as expected |
+| benchmarks, reference checker, conformance vectors, doc references | pass (2 728 declarations indexed) |
+| log | `experiments/science/audit_replication/audit_all_63e36f7.log` |
+
+The numbers are those of the theory division's status file at this head (76 Lean files;
+4527 declarations; 464 mutations, 463 caught, one expected pass; 141 baseline runs).
+Seven files are new since `9408e33` and were built and axiom-checked here for the first
+time outside their machine: `StateShares.lean`, `SoftMinLowerBound.lean`, `BoxBennett.lean`
+(theirs; the first and third build on results of ours and say so in their headers) and
+`OracleCompensation.lean`, `OracleLowerBound.lean`, `ProductSamplerChainRule.lean`,
+`BennettTwoPoint.lean` (their adopted copies of files written by our workstreams L3, R6
+and L4; each header says so).  *Read here:* the file list and the header comments;
+the statements of the new files are being read by our review workstream R13, not by
+this run, and whether the adopted copies are declaration-for-declaration ours has not
+been diffed by the coordinator (their response says "declarations unchanged").  The
+classification rule of the mutation runner (`experiments/mutation_tests.py`, the block
+read in §1.6) is unchanged from `9408e33` (`diff` of lines 60–95: empty).  The stale
+number noted in §1.7 is still there (the harness text of test XXIV.8 says "Corollary
+11.113" for what the report numbers Corollary 11.114); nothing depends on it.
+*Kind of check:* a re-run of their script on a third machine.  Not done: reading the 29
+mutations added since `9408e33`; running the harness in its full (non-quick) mode.
+
+
 ## 2. Reviews
 
 | id | object | by | state |
