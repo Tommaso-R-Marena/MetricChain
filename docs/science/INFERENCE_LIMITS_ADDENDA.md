@@ -2186,6 +2186,53 @@ population is, and the same certificate bounds it — sharply, in the sense abov
 further cost.
 
 
+### (14) The leucine helix with pair shares: two workstreams combined [P for validity: workstream P6's Proposition P6.1 on workstream P3's constants; M for the numbers; added 2026-11-26]
+
+*Script:* `experiments/science/pi_inference/helix_pair_form.py` (+ three logs, JSON).
+Workstream P5 (SCI-MSG-0024) certified Ace-Leu_n-NMe on the helix with P3's unchanged
+pipeline at order 6 and *site* penalties; workstream P6 (SCI-MSG-0025) proved the banded
+*pair* form of the same penalties and found it decisive on the enumerated
+sixteen-residue helix (0.523 → 0.015 nats at order 6).  Neither ran the pair form
+beyond sixteen residues.  Here it is applied to the balls P5 had evaluated and
+cached — **no new evaluation of the solvent term for the deterministic brackets** (the
+ball of radius 4 is a prefix of the ball of radius 5).  What is whose: the certified
+constants, band models, transfer matrix and evaluator are P3's; the closed-form sums
+with excluded sites and the pair allocation are P6's; the evaluations are P5's; the
+driver, the comparison and the sampled checks are the coordinator's.
+
+31. **Twenty and thirty residues** [M; certified in the sense of the sandwich].
+
+    | Ace-Leu_n-NMe, helix | assignments | order; band; evaluations | site form (P3/P5) | **pair form (P6), no sampling** | sandwich sampler, 1 200 accepted (prob. ≥ 0.95) | uncertified chain estimate, part (10) |
+    |---|---|---|---|---|---|---|
+    | `n = 20` | `1.05·10⁶` | 6; 19; 21 700 | `[593.065327, 593.699191]`; 0.634 | **`[593.297430, 593.313404]`; 0.0160** | `[593.302430, 593.303686]`; point estimate `593.303058` | `593.3030 ± 0.0001` |
+    | **`n = 30`** | **`1.07·10⁹`** | 6; 20; 174 437 | `[866.650699, 867.380406]`; 0.730 | **`[866.899704, 866.932637]`; 0.0329** | `[866.912609, 866.915197]`; point estimate `866.913904` | `866.9139 ± 0.00003` |
+    | `n = 30` | `1.07·10⁹` | 5; 20; 31 931 | *(running when this part was first committed; the row is completed below when the run has reached its last line)* | | | |
+
+    The site-form brackets are those of workstream P5's run of P3's pipeline **in every
+    digit** — two drivers of the same core.  60 of the cached ball values re-evaluated
+    in each run: identical.  1 000 exact samples of the pair-form floor in each run (8
+    distinct assignments; 0.47–0.48 sites off the anchor on average): `m₋ ≤ E ≤ m₊` at all.
+    The sandwich sampler (the theory division's Proposition 11.113) evaluates five and
+    eight distinct assignments for its 1 200 accepted points; `W` never outside `[0, 1]`.
+32. **Reading.**  For this ensemble — leucine, two rotamers per site, 95 % of the weight
+    on assignments with at most one side chain off the anchor — the compact case is now
+    at the precision of the extended backbones: **0.033 nats at thirty residues without
+    a random number**, 0.003 with a few evaluations more, and the point estimate of the
+    sampler agrees with the uncertified fitted-chain value of part (10) to `4·10⁻⁶` (to
+    `6·10⁻⁵` at twenty residues, where that estimate carries `± 10⁻⁴`).  The certified
+    tail constant is unchanged — `Γ₆ = 32.7` kcal/mol at thirty residues, hundreds of
+    times the true remainder: the gain is entirely in which assignments are charged.
+    Workstream P5's request P5-E2 (order 7, to bring thirty residues below 0.1 nats) is
+    thereby met at order 6 and withdrawn.
+33. *What this is not.*  A statement about helices in general: for serine, lysine and
+    the patterned sequence on the helix the pair and triple forms gain less than a
+    factor two or leave several hundredths of a nat at orders where the ball is
+    already most of the domain (workstream P6, §6).  A state-by-state check: none is
+    possible at these sizes (P6 validated the pair form on the enumerated
+    sixteen-residue helix at orders 4–6: 2.4 million checks, no violation).  A
+    certificate beyond P3's constants and two floating-point allowances.
+
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every

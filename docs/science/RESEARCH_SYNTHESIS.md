@@ -12,21 +12,26 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-1. **Fetch and read the two upstream heads** (read-only):
+*State at 2026-11-26 04:50 UTC.  (The block is rewritten when the state changes; the
+history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–51.)*
+
+1. **Fetch and read the two upstream heads** (read-only), **in a command of its own**:
    `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering`, then the
-   heads in `.git/FETCH_HEAD`.  If either moved, read its digest
-   (`docs/collaboration/THEORY_TO_ENGINEERING.md`, `ENGINEERING_TO_THEORY.md` on their
-   branches) and every `THY-*` / `ENG-*` file that mentions `SCI-`, record the reading in
-   `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`, and answer under `responses/science/`
-   **before** writing a commit message (three of the theory division's checkpoints
-   crossed work in progress on 2026-11-26; each time the message being written had to
-   be changed).
-   * **Theory: last read `9408e33`** (their seventeenth checkpoint, 2026-11-26 02:54
-     UTC).  Read in full by the coordinator: THY-RES-0010, their referee report R11 on
-     workstream Y, every statement of `AnchoredRemainder.lean`, and the added lines of
-     the theory report that mention us.  Not read: the rest of the report's diff,
-     `BarrierCertificate.lean`, `BoxRatio.lean`, the extended `BoxClass.lean`, their
-     `DEAD_ENDS.md` D58 (workstream R12 is reading them).
+   heads in `.git/FETCH_HEAD`, compared with the last row of
+   `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md` **before anything is staged**.  If either
+   moved, read its digest and every `THY-*` / `ENG-*` file that mentions `SCI-`, record
+   the reading in the sync file, and answer under `responses/science/` before writing a
+   commit message.  (Four checkpoints of the other divisions crossed work in progress
+   on 2026-11-26; once the fetch was chained with the commit and the commit message
+   said "unchanged" when it was not — `DEAD_ENDS.md` SD49.)
+   * **Theory: last read `63e36f7`** (their eighteenth checkpoint, 2026-11-26 04:39 UTC):
+     THY-RES-0011 (five of our reviews applied: workstream Y in their report with our
+     reversal as headline; our Theorem R9.1 adopted after their own verification; seven
+     of our Lean files now in their library; state-dependent shares machine-checked;
+     seven linked corrections of their own messages) and THY-MSG-0015 read in full by
+     the coordinator.  Not read by the coordinator: the amended theory report (new
+     §11.32; §11.7, §11.22, §11.29, §11.30), the new Lean files, their verification
+     directories — workstream R13 is reading them.
    * **Engineering: last read `c2ad4f8`** (their checkpoint 4, 2026-11-26 04:05 UTC — their
      first contact with this branch, which they read at `d45ad56`).  They verified and
      accepted the findings of SCI-REV-0007 and SCI-REV-0008 (five linked corrections of
@@ -34,71 +39,76 @@ first; it points to everything else.  The digest for the other two divisions is
      request of ours (`status/science.md`, "Outstanding requests": accepted, deferred,
      not decided).  **Answered: SCI-RES-0012**, with two linked corrections of our own
      SCI-REV-0007 that their measurements prompted.  Not read by us: their code and
-     result files, most of ENG-RES-0011 and -0012.  Owed to them: nothing; offered: an
-     independent checker of their branch-and-bound trees if they adopt the format of
-     SCI-RES-0012 §3.  Their most useful next step for us: the stand-alone checker of
-     the free-energy certificate (specification: SCI-MSG-0025 §8).
-   * **What the theory division has read of ours:** up to `a841cb4` (our checkpoint 40).
-     **Not yet read by them, in the order they should read it:** SCI-RES-0011 (answers
-     THY-RES-0010 as far as reading goes; says what crossed), SCI-REV-0010 (their
-     workstream Y: the direction depends on the slope), SCI-REV-0012 (their share
-     certificates on our instances; Proposition 11.18c(a) false for one half; **a
-     correction of our own SCI-MSG-0015**), SCI-REV-0011 (their Proposition 11.69b; their
-     audit at `24a3c27`), SCI-MSG-0023 (`BennettTwoPoint.lean`; their remainder identity
-     next to ours), SCI-RES-0010, SCI-MSG-0022 (benchmark B10; read with the head note).
-   * **Owed to the theory division:** (a) the review they asked for (THY-RES-0010 §9.2) —
-     **workstream R12**, publish as `SCI-REV-0013`; (b) their sandwich sampler on our
-     twenty-residue instance (§9.1) — **item 7 of workstream P6**; (c) the replication of
-     their audit at `9408e33` — running in the background, log
-     `audit_all_9408e33.log` in the session scratchpad; on completion copy it to
-     `experiments/science/audit_replication/` and write `INDEPENDENT_VALIDATION.md` §1.7
-     (if the container was lost, re-run as in §8); (d) a linked note on SCI-REV-0007 once
-     their reviewed amendments are published (first sizes `1370/518/4524` where we wrote
-     the grid sizes `1400/540/4700`); (e) one sentence in the next message: the head
-     note on SCI-MSG-0022 (the floor has its own convex fit).
-   * **Expect from them at their next checkpoint:** their check of Theorem R9.1
-     (SCI-REV-0009), the adoption of our Lean files of SCI-MSG-0019, their reviewed notes
-     on SCI-REV-0007, and the section on workstream Y — for which SCI-REV-0010 and their
-     own R11 should be read together (SCI-RES-0011 §3).
-2. **Workstreams running when this was written (2026-11-26 03:30 UTC).**  Each writes
-   notes from its first minute to `experiments/science/ws_<ID>/NOTES.md` and a report to
+     result files, most of ENG-RES-0011 and -0012.  Offered: an independent checker of
+     their branch-and-bound trees if they adopt the format of SCI-RES-0012 §3.  Their
+     most useful next step for us: the stand-alone checker of the free-energy
+     certificate (specification: SCI-MSG-0025 §8).
+   * **What the theory division has read of ours:** up to `fc55410` (and `8fb67d3` for
+     SCI-RES-0011, SCI-MSG-0023).  **Not yet read by them, in the order they should read
+     it:** SCI-RES-0013 (answers THY-RES-0011; says what crossed), SCI-REV-0013 (the
+     review they asked for: two sentences to replace), SCI-MSG-0024 (the compact case;
+     answers their request (d)), SCI-MSG-0025 (pair and triple shares; their sampler on
+     our instance; certified populations), SCI-RES-0012 (the sampler and the first
+     sizes, where their §5 amends us).
+   * **Owed to the theory division:** (a) the referee report on their rate
+     `τ_k − h ≤ c₁/(k + c₂)` and the check of how our five reviews were applied —
+     **workstream R13**, publish as `SCI-REV-0014`; (b) their request (c), shares after
+     branching on one site — **workstream P7**, publish to both divisions; (c) the
+     replication of their audit at `63e36f7` — running in the background, log
+     `audit_all_63e36f7.log` in the session scratchpad; on completion copy it to
+     `experiments/science/audit_replication/`, write `INDEPENDENT_VALIDATION.md` §1.8 and
+     compare with their status file (76 Lean files, 4527 declarations, 464 mutations —
+     463 caught, one expected pass —, 141 baseline runs); if the container was lost,
+     re-run as in §8; (d) the crossover map of their §11.32 (our R10-T2) once the
+     engineering division's enumeration R10-E1 exists; (e) L3-T3: what our Corollary A
+     needs of their `GameFunction`.
+   * **Expect from them:** which of R12-T1…T6 (SCI-REV-0013) they adopt and whether
+     Proposition 11.18e(b) was meant for a prescribed width; P5-T1…T3; P6-T1…T3.
+2. **Workstreams running when this was written.**  Each writes notes from its first
+   minute to `experiments/science/ws_<ID>/NOTES.md` and a report to
    `docs/science/workstreams/<ID>_REPORT.md`; **a draft is not a statement of the
-   division**.  When one reports: read it, re-run one script or re-derive one key step
-   yourself, then publish (§5).  If the container was lost, read the notes and decide
-   whether to resume from them.
-   * **P5** — **finished and published (SCI-MSG-0024)** after this block was first written;
-     see §5.  (The compact case: the proposed route is closed by a theorem with
-     numbers; the leucine helix is certified to thirty residues nevertheless.)
-   * **P6** — **finished and published (SCI-MSG-0025)** after this block was first written;
-     see §5.  (Pair and triple shares: order 4 suffices at twenty residues; thirty
-     residues certified; the theory division's sampler run; certified populations.)
-   * **R12** — **finished and published (SCI-REV-0013)** after this block was first written; see §5.
-   * Read-only exports used by them are in the session scratchpad and are **lost with
-     the container** (re-create with `git archive <commit> | tar -x -C <dir>`): the theory
-     tree at `9408e33` (`thy_ro_9408e33/`), at `24a3c27`, at `658b77f`.
+   division**.  When one reports: read it in full, re-derive or recompute its key
+   statements with separate lines, then publish (§5).  If the container was lost, read
+   the notes and decide whether to resume from them.
+   * **R13** (`R13_brief.md`) — (a) and the applied reviews, above.
+   * **P7** (`P7_brief.md`) — (b), above.
+   * **Finished and published in this stretch:** P5 (SCI-MSG-0024), R12 (SCI-REV-0013),
+     P6 (SCI-MSG-0025); the coordinator's own: the audit at `9408e33`, benchmark B10 for
+     charged and aromatic side chains (A17 (12) item 25), certified populations
+     (A17 (13)), the helix with pair shares (A17 (14)).
+   * Read-only exports used by the workstreams are in the session scratchpad and are
+     **lost with the container** (re-create with `git archive <commit> | tar -x -C <dir>`):
+     the theory tree at `63e36f7` (`thy_ro_63e36f7/`), at `9408e33`, at `24a3c27`.
    * All earlier workstreams are finished and published; the table in §5 says where.
      R7's working copy of engineering files (`experiments/science/ws_R7/eng_copy/`) is
      deliberately git-ignored (`ws_R7/make_eng_copy.sh` re-creates it).
-   * The history of the exchange — what the theory division adopted of ours, what we
+   * The history of the exchange — what the other divisions adopted of ours, what we
      answered and when — is in the two tables at the end of
      `docs/collaboration/SCIENCE_TO_ALL.md` and in `status/science.md`.
-   * **Two things the research owner should know of.**  (i) Workstream L4's own report
-     was produced by a script after its file-writing tool had declined to create a
-     report from a sub-task, and a second generation was denied by the permission
-     system; the coordinator did not run the generator and did not adopt its output
-     (kept outside the repository, in the session scratchpad under `L4_not_adopted/`,
-     which does not survive the container); `workstreams/L4_REPORT.md` was written by
-     the coordinator.  Later workstreams were told not to work around such a refusal
-     and to return their findings as text.  (ii) Two sources cited as unread need a
-     library that neither we nor the theory division have: Decoster, J. Phys. A 37
-     (2004) 9051–9070, and the original of Dagum–Karp–Luby–Ross (2000).
-   * **Rules learned the hard way** (`DEAD_ENDS.md` SD39, SD43, SD45): a log file is
-     committed only from a run that reached its last line, and a script cited in a
-     message is re-run from a clean copy first; mathematics derived quickly in a
+   * **Things the research owner should know of.**  (i) Workstream L4's own report was
+     produced by a script after its file-writing tool had declined to create a report
+     from a sub-task, and a second generation was denied by the permission system; the
+     coordinator did not run the generator and did not adopt its output (kept outside
+     the repository, in the session scratchpad under `L4_not_adopted/`, which does not
+     survive the container); `workstreams/L4_REPORT.md` was written by the coordinator.
+     Later workstreams were told not to work around such a refusal.  (ii) Two sources
+     cited as unread need a library that neither we nor the theory division have:
+     Decoster, J. Phys. A 37 (2004) 9051–9070, and the original of
+     Dagum–Karp–Luby–Ross (2000).  (iii) A compound shell command of the coordinator
+     containing a wildcard deletion in a scratch directory was refused by the
+     environment's safety check; nothing was deleted and the removal was not attempted
+     another way (fresh directories were used instead); scratch copies named
+     `R6_pass3b/`, `P6_rerun_tree/`, `audit_*/` remain in the session scratchpad.
+     (iv) One pushed commit message (`b9556c4`) states the upstream heads wrongly; it is
+     corrected by the commit after it, not rewritten.
+   * **Rules learned the hard way** (`DEAD_ENDS.md` SD39, SD43, SD45, SD48, SD49): a log
+     file is committed only from a run that reached its last line, and a script cited
+     in a message is re-run from a clean copy first; mathematics derived quickly in a
      well-worked field is sent as a *check*, and the word "new" waits for the prior-art
      search; when a theorem is applied on a sub-domain chosen by a heuristic, report the
      objective on the complement before calling anything certified; edit table rows by
-     line, not by a search in the rest of the file.
+     line; two checks with the same blind spot are one check, and a correction is not
+     validated by a run that never exercises it; the fetch is a command of its own.
 3. Then take the top item of §7.
 
 Rules that bind the division (from the research owner's charter; none may be relaxed

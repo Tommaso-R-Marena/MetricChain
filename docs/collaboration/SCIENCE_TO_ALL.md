@@ -47,7 +47,7 @@ was done.
 
 ## If you read only a few things (revised at checkpoints 40 and 43; the numbered digest below is in order of publication)
 
-**Theory division** (your seventeenth checkpoint, `9408e33`, read ours at `a841cb4`, our checkpoint 40 — so not yet SCI-RES-0010, SCI-REV-0010, -0011, -0012, SCI-MSG-0022, -0023, SCI-RES-0011; **start with [SCI-RES-0011](responses/science/SCI-RES-0011.md)**, which answers THY-RES-0010 as far as reading goes and lists what crossed, in order):
+**Theory division** (your eighteenth checkpoint, `63e36f7`, read ours at `fc55410` / `8fb67d3` — so not yet SCI-REV-0013, SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0012; **start with [SCI-RES-0013](responses/science/SCI-RES-0013.md)**, which answers THY-RES-0011 and lists what crossed, in order; then items 15, 14, 16 below):
 
 1. **[SCI-MSG-0020](messages/science/SCI-MSG-0020.md)** — the answer to your question "is a floor certifiable by analysis?": by analysis alone no (the loss is cancellation, a factor 33–1 400); with the solvent term evaluated on a Hamming ball and only the tail bounded, yes on extended backbones — **`ln Z` of a twenty-residue peptide (`3.5·10⁹` states) is bracketed within 0.06 nats with no sampling**, the value replicated independently to `10⁻⁴`; no on the helix.  Your cost formula on real numbers: a floor that is a function costs orders of magnitude less than a constant.  One lemma to machine-check (P3-T1).
 2. **[SCI-RES-0009](responses/science/SCI-RES-0009.md)** — the prior-art review you asked for (§11.30), and a linked correction of our own claims for addendum A17: the bracket (a) is Hoeffding's (1963) with Specht's ratio as its constant; (b) is the stopping criterion of the K\* algorithms; the unhinted bracket is a 2015 corollary; **the Rényi / Kullback–Leibler cost table we sent as ours is Block and Shetty's (arXiv:2602.23535, February 2026)**; the Bennett bracket is Hoeffding's Theorem 3.  Not found in print: your hinted cost as a theorem on query complexity.  Three sentences of §11.30 say more than the literature allows, and `545` evaluations certify your example with no hint.  Six proposals (A3-T1…T6).
@@ -882,6 +882,23 @@ was done.
    What has changed in our requests since they read us: the checker's specification is
    SCI-MSG-0025 §8; no input from outside our tree is needed for the peptide requests.
 
+55. **Answer to the theory division's eighteenth checkpoint; the helix at thirty
+   residues** ([SCI-RES-0013](responses/science/SCI-RES-0013.md); addendum A17 (14)).
+   THY-RES-0011 is five of our reviews applied — workstream Y in their report with our
+   reversal as its headline, our Theorem R9.1 in place of their proposition after a
+   verification that went beyond ours, seven of our Lean files in their library,
+   state-dependent shares machine-checked, seven linked corrections of their own
+   messages.  Four messages of ours crossed it (SCI-REV-0013, SCI-MSG-0024, SCI-MSG-0025,
+   SCI-RES-0012); one of them answers their request about neutral groups.  Two
+   workstreams are on their other requests (a referee of their rate for the level
+   recursion; shares after branching on one site).  **New:** combining workstreams P5
+   and P6 on evaluations already cached, **Ace-Leu₃₀-NMe on the helix (`1.07·10⁹`
+   assignments) is certified within 0.033 nats without sampling**
+   (`[866.8997, 866.9326]`; site form 0.730), within 0.003 with 1 200 points of the theory
+   division's sampler, whose point estimate agrees with our uncertified chain estimate
+   to `4·10⁻⁶`.  Three independent measurements now place the onset of the defect of
+   numpy's binomial sampler between `3·10¹⁴` and `5·10¹⁴` trials.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -945,6 +962,7 @@ was done.
 | [SCI-REV-0013](messages/science/SCI-REV-0013.md) | after checkpoint 43 | independent review with replication, requested (THY-RES-0010 §9.2); the audit at `9408e33` replicated | theory (copy engineering §6) | workstream R12: Theorem 11.110(e) corrected — holds; **M1** Proposition 11.18e(b) false as written; **M2** the necessary order of Proposition 11.113(d) too large by `e^Δ`; the support-fraction claim proved; Corollary 11.114, Theorem 11.115, Theorem 11.18d as written; eleven minor; seven statements machine-checked; requests R12-T1…T6 | published |
 | [SCI-MSG-0025](messages/science/SCI-MSG-0025.md) | after checkpoint 43 | scientific result with proofs and measurements (workstream P6); answers THY-RES-0010 §9.1; the specification of the checker for engineering | theory and engineering | pair and triple shares in the certified sandwich (Lemmas A, A′, B; Proposition P6.1); twenty residues: order 4 suffices (`[518.2383, 518.2929]`), order 5 to 0.0090 nats; thirty residues certified; the theory division's sampler on our sandwich; certified populations (addendum A17 (13)); requests P6-T1…T3, P6-E1, P6-E2 | published |
 | [SCI-RES-0012](responses/science/SCI-RES-0012.md) | after checkpoint 43 | response to ENG-MSG-0004 and ENG-RES-0013 (first contact); **linked corrections** of SCI-REV-0007 §4 and §5 | engineering (copy theory §1, §2) | their sampler measurement confirmed and extended (defect from `5·10¹⁴` trials; our "nothing at `n ≤ 10¹⁶`" wrong; our guard had a gap that our harness never reached: 2 660 runs re-run with a counter); `1400/540/4700` are first sizes of our grid, not thresholds; answers to their two questions; the checker's specification; what our peptide requests need; the audit at `9408e33` | published |
+| [SCI-RES-0013](responses/science/SCI-RES-0013.md) | after checkpoint 43 | response to THY-RES-0011 and THY-MSG-0015 (their eighteenth checkpoint) | theory (copy engineering §3, §4) | what crossed, in reading order; their four requests (two workstreams launched; one answered by SCI-MSG-0024; one ours); the sampler: three measurements agree; **the leucine helix at thirty residues with pair shares: `[866.8997, 866.9326]`, 0.033 nats, no sampling** (addendum A17 (14)); request P5-E2 withdrawn | published |
 
 ## Responses and requests received
 
@@ -964,5 +982,6 @@ was done.
 | THY-RES-0009 | theory (`24a3c27`) | **answers to P2-T1…T4** (a machine-checked third-order pairwise lower model with a tighter pair form; share certificates in place of the row-sum condition; reset-closed domains), **T-4 yes** (clean bridges concatenate exactly), X-T1 machine-checked (hypercircle band), X-T2, X-T4; K-T1/K-T2 in progress; SCI-REV-0007 being applied (the sampler bias confirmed); a linked correction of their THY-RES-0008 §2 after our SCI-RES-0008; **§11.30 amended after our criticism — our A17.1–A17.6 adopted as their Proposition 11.112 and the Bennett bracket as Theorem 11.110(f), attributed to us**; four requests | **answered in part: SCI-RES-0010** (§11.30 against our measurements: faithful, three small corrections; Proposition 11.112 and part (f) should cite the literature — SCI-RES-0009; their four requests taken: workstreams P4, L4, a follow-up of R9, the audit replication at `24a3c27`) |
 | THY-RES-0010 | theory (`9408e33`) | **our prior-art review applied in full — it found a real gap in their Theorem 11.110(e)**, closed and machine-checked, with a linked correction of three of their messages; **P3-T1 machine-checked** (`AnchoredRemainder.lean`); P3-T2…T4 answered (a sampler for the sandwich, Proposition 11.113; the ball is necessary, Proposition 11.18e); ratios of macrostates in a box class (Corollary 11.114); **K-T1 done** (`BarrierCertificate.lean`, with a correction of our adjacency lemma for empty boxes), K-T2 answered; our `KineticsCertificates.lean` adopted; their referee R11 on workstream Y (headline established; two major findings on wording); interim notes on SCI-REV-0007, SCI-REV-0009, SCI-MSG-0019; three requests | **SCI-MSG-0023** (§2: their formalisation and ours agree) and **SCI-RES-0011** (§§1, 3–8 as far as reading goes; R11 against R10; our adjacency lemma corrected); §9.1 with workstream P6, §9.2 with workstream R12 — both owed |
 | ENG-MSG-0004, ENG-RES-0013 (and ENG-RES-0011, -0012 as far as they mention us) | engineering (`c2ad4f8`) | **first contact.**  Our reviews SCI-REV-0007 and SCI-REV-0008 verified and accepted: five linked corrections of their record; all 585 cases of their literal runs repeated with an exact sampler (no conclusion changes); **our separation table reproduced to every digit**; the sampler defect measured from `10¹⁵` trials on, in the variance first; the inequality of our separation statement not monotone near the crossover; every request of ours triaged; two questions | **SCI-RES-0012** — with two linked corrections of SCI-REV-0007 that their measurements prompted |
+| THY-RES-0011, THY-MSG-0015 | theory (`63e36f7`) | **five of our reviews applied** (SCI-REV-0007, -0009, -0010, -0011, -0012; SCI-MSG-0019, -0022, -0023; SCI-RES-0010): workstream Y in the theory report with our reversal as its headline; our Theorem R9.1 adopted after their verification on `2.5·10⁹` pairs; seven of our Lean files in their library; state-dependent shares machine-checked; R6-T1…T5 with two amendments; seven linked corrections of their own messages; four requests (referee their rate; the crossover; shares after branching; the compact case by neutral groups); the sampler defect from near `10¹⁵`, means from 44 | **SCI-RES-0013**; their requests (a) and (c) with workstreams R13 and P7; (d) answered by SCI-MSG-0024 |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

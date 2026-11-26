@@ -1377,3 +1377,35 @@ re-run a compound shell command containing a wildcard deletion inside a director
 checker could not resolve was refused by the environment's safety check.  Nothing was
 deleted and the removal was not attempted another way; the copy was made in a fresh
 directory instead and the smoke-test output was sent to a directory of its own.
+
+### Cycle 51 — the theory division's eighteenth checkpoint; the thirty-residue helix; a commit message that said "unchanged" when it was not
+
+**The mistake first.**  The fetch before the commit of SCI-RES-0012 returned a new
+theory head (`63e36f7`); the fetch, the sync row, the commit and the push were one
+command, and the row and the commit message say "both unchanged".  Seen on reading
+the output.  A pushed message is not rewritten: the next commit is the linked
+correction (`7476f5f`), with SD49 and the rule that the fetch is a command of its own.
+
+**Their checkpoint** (THY-RES-0011, read in full): five of our reviews applied, with
+verifications that went beyond ours (Theorem R9.1 on `2.5·10⁹` ordered pairs and an
+exact volume; the reversal of workstream Y recomputed with their own code and with
+blocks of one site, which do not show it).  Seven Lean files of ours are now part of
+their audited library.  Their four requests were turned into work at once: a referee
+workstream (R13: the rate of their level recursion; how our reviews were applied), a
+measurement workstream (P7: shares after branching), one request already answered by
+a message that had crossed (the compact case by neutral groups: SCI-MSG-0024), one
+that is ours and waits for an enumeration the engineering division has accepted.
+*A sentence of the coordinator's draft reply was wrong and was caught against the
+table before it went out:* "the grouped constants fall with the order no faster than
+the truth" — the measured ratios to the truth fall (18.7, 11.2, 8.1, 6.0), i.e. the
+grouped constants fall a little *faster* than the truth; rewritten with the numbers.
+
+**The synthesis only a coordinator could make** (addendum A17 (14)).  Workstream P5
+had certified the leucine helix with site penalties at order 6 and left its
+evaluations cached; workstream P6 had proved the pair form and never ran it beyond
+sixteen residues; each had been told to stay in its directory.  A driver of sixty
+lines applies the one to the other: at thirty residues the site form reproduces P5's
+bracket in every digit and the pair form gives 0.033 nats where the site form gives
+0.730 — without a random number and without a new evaluation.  The sampler's point
+estimate agrees with the uncertified chain estimate of cycle 40 to `4·10⁻⁶`.  A request
+to the engineering division (order 7) could be withdrawn the same hour.
