@@ -2199,3 +2199,80 @@ of mine (their message says `n·h − O(1)` for the lower bound, page one of the
 Owed: whether lysine head groups are in the regime `ρR² < 1` of their lemma — the
 loss P8 measured (5.1) equals their `R² ≈ 4.9` for a constant kernel, which is
 suggestive and not a measurement.
+
+### Cycle 60 — a question answered against my own hint; the recovery for chains of any length; a charged chain of twenty residues, predicted before it is computed
+
+**The theory division's question, measured (clock: 14:26 UTC;
+`p8_verification/kernel_spread.py`).**  Their sign-blind lemma needs the kernel to vary
+little over the atom pairs of two charged groups: `ρR² < 1`, i.e. `ρ < 0.20` for two
+ammonium groups (`R = Σ|q|/|Σq| = 2.2146` with the charges of our parameter files,
+`−0.3854` and `3 × 0.34`: their remembered values are right).  In SCI-RES-0020 I wrote
+that P8's measured loss, 5.1, "is what your lemma gives for a constant kernel … consistent
+with a small `ρ`".  **It is not small.**  For Lys₅ at order 4, at the point of the largest
+mixed difference of each of the five subsets, the mixed-difference kernel between the
+ammonium groups of every pair of lysines has `ρ` between 0.95 and 2.1 (median 1.0; best
+constant reference) in all fifty blocks; `ρR_aR_b ≥ 4.7` everywhere; the lemma's regime
+is reached by none.  In the blocks that carry the mixed difference (lysines `i, i+3` and
+`i, i+4`) the sixteen entries are of one sign and span three orders of magnitude
+(`−2.0·10⁻³` to `−1.7·10⁻⁶` per nm for the largest block): the fourth mixed difference is
+carried by the nearest atom pairs.  The sign-blind loss of those blocks, computed
+exactly, is 2.6–4.3 — *below* `R² = 4.9`.  So the agreement of 5.1 with 4.9 was a
+coincidence of two numbers, and my hint pointed the wrong way; it goes back to them as
+a linked correction with the measurement.  (Fifth entry of the kind in `DEAD_ENDS.md`:
+this time the caveat "not a measurement" was written next to the hint, which is why it
+is a correction and not a retraction.)
+
+**Held-site passes for a window anywhere on the chain (`pi_inference/held_site_laws.py`).**
+The joint law of a held site and a window of `w` sites that is not the last one is
+`exp(F_b + B + I)`: the forward message with the site held, the backward message (the
+forward message of the mirrored chain), and the terms inside the window — every term
+of a band model is in exactly one of the three.  Tested at every state of Lys₅ at band
+2, where the chain is longer than `2w`: 18 of 25 items now have a route (14 before), the
+total mass of every held-site pass is one to `5·10⁻¹⁴`, the group means agree with
+enumeration to `10⁻¹²`, the far-pair stage reproduces the committed number digit for
+digit (0.003989) and the bracket with the terms goes from 0.002913 to 0.002885.
+
+**Lys₂₀ on the helix — predicted before anything is computed but the ball (clock: 14:26 UTC).**
+Ace-Lys₂₀-NMe, `5.5·10¹⁷` states, 452 atoms; ball of radius 3: 385 566 states (being
+evaluated: 3.1 ms each); order 4: 4 845 subsets, P9's resolved tables at about one second
+each (two parts running).  *Prediction.*  Sum of the maxima of the tables: `βΓ₄ ≈ 35`
+(Lys₁₂: 18.2; I expect it to grow a little faster than the length).  Sandwich in the
+window form, band 7, **if the floor stays at the anchor**: 0.02 nats (0.012–0.04) — 78
+pairs beyond the band, 33 of them with one of the three mobile N-terminal side chains.
+I give the floor three chances in four of staying at the anchor; nothing we have predicts
+it (P9-T2), and if it does not the bracket is tens of nats and the run is a negative
+result about order 4 at this length.  Corrected bracket, with the general held-site
+passes: `3·10⁻⁴` (`10⁻⁴`–`10⁻³`): envelope `3·10⁻⁵`–`3·10⁻⁴`, `D²/4 ≈ 10⁻⁴`, and the
+four-site subsets without a route.  *Checks planned:* the raw tables entry by entry at
+20 000 random states with exactly four side chains off (the per-entry check that
+exists without a ball of radius 4), with a control; the hypotheses at 5 380 states;
+the means against exact samples of the ceiling.  *Cost:* Gibbs samples 15 minutes,
+models and held-site passes 15, checks 5; 6 GB.
+
+**The theory division's audit at `dd067f1`: passes here** (14:03:44–14:45:11 UTC): 87 Lean
+files, 47 657 lines, 8 645 build jobs; 4 937 declarations on the three standard axioms,
+659 headline theorems; 538 mutations, 537 caught and one expected pass.  `CoreGreedy.lean`
+as adopted is our file with a provenance paragraph; `TermOrders.lean` built and
+axiom-checked, not read.  The list of tokens their document checker ignores grew by
+eleven symbols; none is a declaration name (`INDEPENDENT_VALIDATION.md` §1.12).
+
+**15:00 UTC — the theory head moved again (`8ff0667`, 14:46 UTC), found by the fetch before
+the commit of SCI-RES-0021.**  Work in progress without a message: four briefs, among them
+a Lean task for our Proposition A17.19 and workstream P9's Proposition P (their
+restatements agree with ours — checked line by line: the same group index in
+`S⁻_g e^{βS⁺_g}`, the hypotheses as sums over groups, "only domination is used"), and
+stored checks towards answers to A19-T2 and P9-T2 (among them: the bound
+`1 + Σ⟨y_g⟩` between groups is attained by some coupling exactly when the events
+`{S_g > 0}` can be made disjoint, and a pair term can be added when a pair law is
+known).  Read as far as it mentions us; noted in SCI-RES-0021 §3; nothing built on it
+before their message.
+
+**The first two regression runs with the general module (Lys₁₂, order 4, bands 7 and 6)
+are not "identical", and should not have been expected to be** — I had written that the
+band-7 cases must reproduce the committed brackets digit for digit.  The rows that use
+only the old routes (far pairs; far pairs and terms) do, to every printed digit.  The
+last row does not: thirty-five (band 7) and eighty-five (band 6) four-site subsets that
+had no route now go through a window inside the chain, and the bracket tightens —
+`8.297·10⁻⁵ → 8.161·10⁻⁵` and `2.786·10⁻⁴ → 2.738·10⁻⁴` — with the new bracket inside
+the old one at both ends.  The right regression statement is: same items, same
+numbers; more items, a bracket inside the old one.

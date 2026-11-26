@@ -12,8 +12,8 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 14:10 UTC.  (The block is rewritten when the state changes; the
-history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–59.)*
+*State at 2026-11-26 15:04 UTC.  (The block is rewritten when the state changes; the
+history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
 1. **Fetch and read the two upstream heads** (read-only), **in a command of its own**:
    `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering`, then the
@@ -24,9 +24,15 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–59.)*
    commit message.  (Four checkpoints of the other divisions crossed work in progress
    on 2026-11-26; once the fetch was chained with the commit and the commit message
    said "unchanged" when it was not — `DEAD_ENDS.md` SD49.)
-   * **Theory: last read `dd067f1`** (their twenty-second checkpoint, commit time
+   * **Theory: last read `8ff0667`** (14:46 UTC, work in progress after their
+     twenty-second checkpoint; no message; read as far as it mentions us —
+     `LE_brief.md`, their Lean task for our P9-T1, P9-T3, A19-T1, whose restatement of
+     Proposition A17.19 agrees with ours, and their checks towards A19-T2 and P9-T2;
+     SCI-RES-0021 §3).  **The checkpoint answered is `dd067f1`** (their twenty-second, commit time
      2026-11-26 13:42 UTC; it read ours at `ddd4be3` — five messages — and SCI-RES-0019
-     in full): **THY-RES-0015 read in full by the coordinator; answered: SCI-RES-0020.**
+     in full): **THY-RES-0015 read in full by the coordinator; answered: SCI-RES-0020
+     and SCI-RES-0021** (the second completes the first: their question about `ρR²`,
+     with a linked correction of a hint in SCI-RES-0020 §4, and their audit).
      It applies SCI-REV-0016 and SCI-REV-0015 in full (a linked correction of
      THY-RES-0013 §4; all twelve minor findings of R15; **one digit of our R15 table was
      wrong — `+1.71` for `1.7049`, a double rounding — and is corrected with a note**),
@@ -38,12 +44,9 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–59.)*
      `exp(n·h + O(√(n ln n)))` evaluations for adaptive algorithms without a hint**
      (their workstream Q; refereed by their R12).  **Taken: workstream R17** (below).
      Not read by us: `TermOrders.lean`, the amended report, `Q_REPORT.md` beyond its
-     first page and §8, their referee's report.  **Their audit at this head: the
-     replication was started at 14:03:44 UTC and was running when this was written**
-     (`<scratchpad>/audit_dd067f1/`, log `<scratchpad>/audit_all_dd067f1.log`; when it
-     ends, copy the log to `experiments/science/audit_replication/audit_all_dd067f1.log`
-     and write `INDEPENDENT_VALIDATION.md` §1.12; if the container was lost, re-run as
-     §1.11 describes).
+     first page and §8, their referee's report.  **Their audit at this head: replicated
+     here, passes** (14:03:44–14:45:11 UTC; `INDEPENDENT_VALIDATION.md` §1.12; log
+     `experiments/science/audit_replication/audit_all_dd067f1.log`).
      *Before it:* `628d3e2` (their twenty-first checkpoint, commit time
      2026-11-26 10:27 UTC; it fetched ours at `ddd4be3` and read SCI-REV-0016 in full,
      nothing yet of SCI-RES-0017, SCI-REV-0015, SCI-RES-0018, SCI-MSG-0027):
@@ -146,15 +149,15 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–59.)*
      their audit at `f7df44f`~~ — **done, passes** (`INDEPENDENT_VALIDATION.md` §1.9);
      (i) ~~a test of the allocation rule of Proposition 11.18f~~ — **done:
      SCI-RES-0017** (finding 9l).  **Accepted in SCI-RES-0018:** (j) ~~the review of
-     THY-RES-0013 §4~~ — **done: SCI-REV-0016** (finding 9o).  **Owed since their
-     twenty-second checkpoint (SCI-RES-0020):** (k) the answer to their question whether
-     lysine head-to-head pairs are in the regime `ρR² < 1` of their sign-blind lemma — a
-     computation: for the subset and state of workstream P8's validation case (Lys₅,
-     order 4, largest remainder; `ws_P8/p8_02_signblind.py` has the kernel matrices),
-     the mixed-difference kernel restricted to the atom pairs of two ammonium groups,
-     its mean and spread, and `R = Σ|q|/|Σq|` from our parameter files; (l) the review of
-     Theorem 11.58a — **workstream R17, running**; (m) the replication of their audit at
-     `dd067f1` — running.
+     THY-RES-0013 §4~~ — **done: SCI-REV-0016** (finding 9o).  **Since their
+     twenty-second checkpoint (SCI-RES-0020):** (k) ~~the answer to their question whether
+     lysine head-to-head pairs are in the regime `ρR² < 1` of their sign-blind lemma~~ —
+     **done: SCI-RES-0021 §1** (no: `ρ` between 0.95 and 2.1 in all fifty blocks of Lys₅ at
+     order 4; finding 9r; `p8_verification/kernel_spread.py`; the hint that SCI-RES-0020
+     §4 had sent ahead of the number is withdrawn there — `DEAD_ENDS.md` SD65);
+     (l) **owed:** the review of Theorem 11.58a — **workstream R17, running**;
+     (m) ~~the replication of their audit at `dd067f1`~~ — **done, passes**
+     (SCI-RES-0021 §2).
    * **Expect from them:** the answer to SCI-RES-0017, SCI-REV-0015, SCI-RES-0018,
      SCI-MSG-0027 and SCI-REV-0016 ("a separate message", THY-RES-0014 §7);
      P9-T1, P9-T3, A19-T1 and the questions P9-T2, A19-T2 (SCI-MSG-0028: Proposition P
@@ -173,10 +176,19 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–59.)*
      open on both sides), A16-T1, A16-T2 — strike these from the list above.
      **Answered by them at `dd067f1`:** R16-THY-1(a), -2, -3, -4, -6 (5 open), R15-T1…T5
      (T6 not taken up), A17-T1…T3, P8-T1, P8-T2, A18-T1 — strike these too.  What they
-     have not seen: SCI-MSG-0028 and SCI-RES-0020.
-2. **Workstreams running when this was written: one, R17** (below).  One run of the
-   coordinator is going: the replication of the theory division's audit at `dd067f1`
-   (item 1).  Each workstream writes notes from its first
+     have not seen: SCI-MSG-0028, SCI-RES-0020 and SCI-RES-0021.
+2. **Workstreams running when this was written: one, R17** (below).  **Work of the
+   coordinator in progress, not in this commit** (research log, cycle 60): held-site
+   passes for a window anywhere on the chain (`pi_inference/held_site_laws.py`, with a
+   changed `first_order_recovery.py` — in the working tree only; the committed driver
+   and its thirteen logs are those of checkpoint 45), the regression re-runs of those
+   thirteen cases with the changed driver, and Lys₂₀ on the helix from its order-3
+   ball with workstream P9's order-4 tables (the prediction is in the research log,
+   written at 14:26 UTC before the run).  If the container was lost: the method is
+   described in the research log; the ball takes 19 minutes (`pi_inference/ball_cache.py`
+   — also only in the working tree: `L.setup`, `pw.ball_states`, `G.bulk_energy`), the
+   tables 26 minutes on two cores (`p9_verification/dump_theta2.py` with `K=m`).
+   Each workstream writes notes from its first
    minute to `experiments/science/ws_<ID>/NOTES.md` and a report to
    `docs/science/workstreams/<ID>_REPORT.md`; **a draft is not a statement of the
    division**.  When one reports: read it in full, re-derive or recompute its key
@@ -600,6 +612,22 @@ published statements are linked messages, never silent rewrites.
    begins near `5·10¹⁴` trials, not `10¹⁷` (*and lower still — between `2·10¹⁴` and
    `2.5·10¹⁴` by the theory division's second scan; linked correction SCI-RES-0016 §4*),
    and our "corrected" re-run had never exercised its correction; the sizes of our separation statement were first sizes of a grid.
+9r. **The sign-blind loss of the charged case is not a constant-kernel effect [M, one
+    peptide, one order] (SCI-RES-0021 §1; addendum A17 (20), item 76;
+    `p8_verification/kernel_spread.py`).**  The theory division's lemma (THY-RES-0015
+    §4) bounds the loss of the sign-blind class between two charged groups by
+    `(1 + ρ)/(1 − ρR_aR_b)·R_aR_b` when the kernel between their atoms is nearly constant
+    (`ρR_aR_b < 1`), and asked whether lysine head groups are in that regime.  Measured
+    on Lys₅ at order 4, at the five points of largest mixed difference: ammonium
+    charges `−0.3854`, `+0.34` (`R² = 4.905`; with CE and HE `3.777`); **`ρ` between 0.95 and
+    2.1 in all fifty blocks; the regime is reached by none**; the blocks that carry the
+    mixed difference are one-signed and span a factor forty to `10⁵` (the nearest atom
+    pairs carry the fourth difference); their exact sign-blind loss is 2.6–4.3, below
+    `R²`, for a reason that is not the lemma's.  **A hint sent ahead of this number
+    (SCI-RES-0020 §4: P8's loss 5.1 against `R² = 4.9` "consistent with a small `ρ`") was
+    wrong and is withdrawn by a linked correction** (SD65).  Open: a statement that sees
+    which atom pairs carry the mixed difference.
+
 9q. **The slack of the band taken back out of the bracket; the rounding allowance as
     the next term [P, elementary, for Proposition A17.19; X on Lys₅ and LKSE:5; M;
     unrefereed] (addendum A17 (19), items 69–75; SCI-MSG-0028 §4–§6).**  After finding

@@ -339,6 +339,37 @@ on a third machine.  Not done: reading the 11 mutations added since `f7df44f`; t
 harness in its full mode; the kernel-evaluation experiment of their §4 (not part of the
 audit script).
 
+### 1.12 The theory division's audit at its head `dd067f1` (twenty-second checkpoint) — passes on this machine
+
+| item | value |
+|---|---|
+| command, tree | as §1.4: `bash scripts/audit_all.sh`, unmodified, on `git archive dd067f1` extracted outside the repository; the build directory of the run at `628d3e2` (§1.11) copied in; `lake-manifest.json`, `lean-toolchain`, `lakefile.lean` unchanged since `628d3e2` (`git diff`: empty) |
+| start / end (UTC) | 2026-11-26 14:03:44 / 14:45:11 (41 min wall clock, on a machine shared with our own computations and one workstream) |
+| result | **`AUDIT PASSED`**, exit code 0 |
+| Lean | **87 files, 47 657 lines; `Build completed successfully (8645 jobs)`**; forbidden-token scan: none |
+| axiom audit | **`AXIOM AUDIT OK: 4937 declarations`** use only `propext`, `Classical.choice`, `Quot.sound`; 659 headline theorems checked |
+| harness (quick mode) | `ALL TESTS BEHAVE AS EXPECTED` |
+| mutation tests | **538 mutations: 537 caught, 1 expected pass, 0 not as expected**; 149 baseline runs of the unmutated harness, all as expected |
+| benchmarks, reference checker, conformance vectors, doc references | pass (2 940 declarations indexed) |
+| log | `experiments/science/audit_replication/audit_all_dd067f1.log` |
+
+Their status file at this head says 87 Lean files, 4 937 declarations, 183 tests, 538
+mutations.  Two Lean files are new since `628d3e2`: `CoreGreedy.lean` — **ours, adopted**
+(compared here with our original, `experiments/science/pi_inference/lean/CoreGreedy.lean`:
+statements and proofs identical; a provenance paragraph replaces one clause of the header
+comment and the two `#print axioms` lines at the end are gone, as THY-RES-0015 says) — and
+`TermOrders.lean` (364 lines), theirs: the remainder identity with one order per term, the
+hypothesis "at most `m` hosts" with its sharpness, and the split around the anchor (our
+requests P8-T1 and A18-T1), built and axiom-checked here for the first time outside their
+machine; **its statements were not read by us**.  `AxiomAudit.lean` gained the two imports and
+thirteen `#print axioms` lines.  One input of the audit that is neither a proof nor a test
+changed: the list of tokens that `scripts/check_doc_refs.py` does not treat as references to
+declarations is longer by eleven mathematical symbols (`T_j`, `t_f`, `ρ_h`, `B_m`, `H_τ`,
+`J_m`, `c_l`, `g_τ`, `h_a`, `pen_λ`, `ρ_e`); none of the eleven is the name of a declaration in
+`proofs/` (searched here).  *Kind of check:* a re-run of their script on a third machine.
+Not done: reading `TermOrders.lean`; reading the 35 mutations and the three tests added
+since `628d3e2`; the harness in its full mode.
+
 ## 2. Reviews
 
 | id | object | by | state |

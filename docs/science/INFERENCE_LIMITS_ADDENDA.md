@@ -3379,6 +3379,66 @@ this part has been read by a referee; the part continues (18), whose items are n
     of the stage-2 tables; **a referee** — parts (13)–(19) have had none except for Lemma
     A17.16, the greedy lemma and one section of SCI-RES-0017.
 
+### (20) After part (19): why the sign-blind bound is slack on lysine — the theory division's question, measured [M; one peptide, one order; added 2026-11-26; further items follow as they are finished]
+
+76. **Between two ammonium groups the mixed-difference kernel is not nearly constant**
+    [M; `experiments/science/p8_verification/kernel_spread.py`, `kernel_spread_K5.log`;
+    the kernel is workstream P5's, the stored `g` workstream P8's; SCI-RES-0021 §1].
+    *The question.*  Workstream P8's sign-blind class bounds a mixed difference
+    `Δ_T g = ½·pre·qᵀ(Δ_T M)q` by the same form with the charges replaced by their
+    absolute values and the worst signs, and on lysine that loses a factor 3–7 (part
+    (18)).  We had asked the theory division (P8-T2) whether a statement
+    `SB ≤ C·R²·Φ(g)` holds for charges dominated by one sign.  Its answer (THY-RES-0015
+    §4) is a lemma: for a bilinear form `t = q_aᵀMq_b` between two groups, a reference
+    value `m̄ ≠ 0`, `ρ = max|M_pq − m̄|/|m̄|` and `R = Σ|q|/|Σq|`,
+
+        SB  ≤  (1 + ρ)/(1 − ρR_aR_b) · R_aR_b · |t|        whenever  ρR_aR_b < 1,
+
+    with equality `SB = R_aR_b|t|` for a constant kernel — and the question back whether
+    lysine head-to-head pairs are in that regime.
+    *The measurement.*  Ace-Lys₅-NMe on the helix, order 4, each of the five 4-subsets
+    at the context and states where `|Δ_T g|` is largest; `Δ_T M` from sixteen kernel
+    evaluations (`Δ_T g` recomputed from it agrees with the mixed difference of the
+    stored `g` to `10⁻⁸` kcal/mol in all five); for every pair of lysines the block
+    between their ammonium groups (NZ, HZ1–3) and between the groups extended by CE,
+    HE2, HE3; `ρ` for the best constant reference (the midrange); the block's exact
+    sign-blind value by enumeration of all sign patterns.
+
+    | | ammonium (4 atoms) | with CE, HE2, HE3 (7 atoms) |
+    |---|---|---|
+    | charges | NZ `−0.3854`, HZ `+0.34` each; net `+0.6346` | CE `−0.0143`, HE `+0.1135` each; net `+0.8473` |
+    | `R`; `R²`; the regime needs `ρ` below | 2.2146; 4.905; 0.204 | 1.9435; 3.777; 0.265 |
+    | `ρ` in the fifty blocks: smallest, median, largest | 0.953, 1.00, 2.11 | 0.999, 1.01, 4.23 |
+    | blocks with `ρR_aR_b < 1` | **0 of 50** | **0 of 50** |
+    | exact sign-blind value over the absolute value of the block's `t`: median; in the four blocks that carry the mixed difference | 3.88; 2.62–4.28 | 2.82; 2.18–3.71 |
+
+    In the four blocks whose `t` is at least a tenth of the largest, the sixteen
+    entries are **of one sign and span a factor of forty to a factor of `10⁵`** (for the
+    largest: mean `−4.4·10⁻⁴`, from `−2.0·10⁻³` to `−1.7·10⁻⁶` per nm): the fourth mixed
+    difference of the kernel is carried by the nearest atom pairs of the two groups,
+    and `ρ ≈ 1` says "from nearly zero to the maximum".  **The lemma's regime is not
+    where this instance is.**  The loss in those blocks is nevertheless below `R²`
+    (2.6–4.3 against 4.9): a one-signed block concentrated on few atom pairs has
+    `SB = w_aᵀ|M|w_b` and a `t` in which the charges of the dominant atoms hardly cancel.
+    That is a property of these blocks, not a bound: for a one-signed block with weight
+    on one N–H pair and one H–H pair in the ratio of the charges `t` vanishes and the
+    ratio is unbounded.
+    *What it means.*  The slack of the sign-blind class on lysine is not explained by a
+    group acting as a point charge with internal cancellation; a statement that covers
+    it has to see which atom pairs carry the mixed difference.  We have none.  (Since
+    part (19) the question matters less for the certificate — the resolved penalties
+    and the recovery do not go through the sign-blind class beyond the stage-2 tables —
+    but the stage-2 tables are sign-blind bounds, and the envelope they give is still
+    255–880 times the remainder in Boltzmann mean: item 75 (iv).)
+    *A hint that was wrong.*  SCI-RES-0020 §4, sent forty minutes before this
+    computation, said that P8's measured loss `0.127/0.0250 = 5.1` against `R² ≈ 4.9` was
+    "consistent with a small `ρ` for the pairs that carry the remainder".  It is a
+    coincidence of two numbers.  Withdrawn by a linked correction in SCI-RES-0021 §1;
+    `DEAD_ENDS.md` SD65.
+    *Limits.*  One peptide, one order, five points (the maxima), two definitions of the
+    head group; the sign-blind values are exact for the blocks, not for the whole
+    remainder.
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every
