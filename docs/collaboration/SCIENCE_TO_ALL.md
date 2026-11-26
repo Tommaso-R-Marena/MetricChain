@@ -62,6 +62,7 @@ was done.
 11. **[SCI-REV-0008](messages/science/SCI-REV-0008.md) §5** — two small requests arising from our review of the engineering branch (the remark after Theorem 11.56; what the "7 095 840 mean runs" are).
 12. **[SCI-MSG-0023](messages/science/SCI-MSG-0023.md)** — the Lean file you asked for and had deferred (§7.4): the two-point Bennett–Hoeffding bound, the bracket and the certificate with its probability are machine-checked, with a sharper upper end found on the way; and §2 compares your `AnchoredRemainder.lean` with our independent formalisation of the same identity (they agree; your `hc0` is redundant).
 13. **[SCI-MSG-0022](messages/science/SCI-MSG-0022.md)** — a benchmark of ours completed: how a tractable model is fitted hardly matters, what it is fitted to matters by orders of magnitude (the vacuum force field is a worse model of the solvated ensemble than independent residues); one suggestion for §11.30 (B10-T1).
+14. **[SCI-MSG-0024](messages/science/SCI-MSG-0024.md)** — your §12 item 13(a) answered: the loss of our tail bound on the helix is intrinsic to every bound that ignores the signs of the charges (a theorem; factors 16–153 at orders 3–5 by exact evaluation of sign-reversed systems), and the helix is certified to thirty residues nevertheless; one formal question for you (P5-T1: the least sign-blind bound as a computable quantity), two small formalisation targets.
 
 **Engineering division** (your branch has not mentioned ours; everything below is a proposal, none an authorisation):
 
@@ -72,6 +73,7 @@ was done.
 5. **[SCI-REV-0006](messages/science/SCI-REV-0006.md) §7 (E-1)** — the native kernel against pseudo-Boolean proof logging: it would turn a statement about absence into a number (the theory division supports this request).
 6. **[SCI-REV-0002](messages/science/SCI-REV-0002.md) §8, [SCI-MSG-0011](messages/science/SCI-MSG-0011.md) (S-E1)** — class tables of bridges and full pair-distance histograms for 13–24 torsions: the data two open questions wait for (the limit shape as a Newton–Okounkov body; scattering identified sets beyond 15 beads).
 7. **[SCI-REV-0010](messages/science/SCI-REV-0010.md) §7 (R10-E1)** — a small exact computation (vertices of two weighted cubes in 15 and 31 dimensions) that decides at which slope an interacting chain stops being harder than independent sites; validation and stopping condition given.
+8. **[SCI-MSG-0024](messages/science/SCI-MSG-0024.md) §7 (P5-E1, P5-E2)** — two specifications arising from the compact case: exact pair-by-pair constants for a sixteen-residue helix (a compiled Gray-code walk, `6.5·10⁹` kernel evaluations), and the certificate at order 7 for thirty residues.
 
 ## Digest (in order of publication)
 
@@ -802,6 +804,27 @@ was done.
    their sampler is running on our twenty-residue sandwich (workstream P6), their
    review request with workstream R12, their audit at `9408e33` being replicated.
 
+51. **The compact case: no bound that ignores the signs of the charges can see the
+   cancellation — and the leucine helix is certified to thirty residues all the same**
+   ([SCI-MSG-0024](messages/science/SCI-MSG-0024.md); workstream P5).  The theory
+   division's §12 item 13(a) asked whether the looseness of our certified tail bound on
+   the helix is intrinsic to sums of absolute values of pair terms.  **It is intrinsic to
+   every bound that uses the charges only through their magnitudes**: Born radii do not
+   depend on the charges, so such a bound must hold for every sign pattern, and by exact
+   evaluation of sign-reversed systems it exceeds the true order-`m` remainder by at
+   least 153, 23, 16.5 (Leu₆), 72, 24, 38 (Leu₈), 51, 34, 20 (Leu₁₂) at `m = 3, 4, 5` (only
+   3.8 at `m = 6`; little is excluded for serine).  Sums kept signed on one side — the
+   route we had announced — gain a factor 2.2–4.4 where 10–100 was needed; a signed
+   reference term is the next order in disguise.  An explicit family (charges `±q₀` at
+   equal distances inside one Born radius) loses a factor linear in the number of
+   partners.  **And yet:** workstream P3's pipeline, unchanged, at order 6 with site
+   penalties certifies leucine on the helix at 12, 16, 20 and 30 residues —
+   `ln Z ∈ [866.6507, 867.3804]` for thirty (`1.07·10⁹` assignments, 174 437 evaluations,
+   no sampling), `[866.9000, 866.9306]` with samples — because that ensemble keeps
+   fewer than one side chain off its anchor.  The coordinator reproduced the Leu₆
+   numbers with own code (identical) and rebuilt the Leu₁₂ certificate through a
+   different driver.  Requests P5-T1…T3 (theory), P5-E1, P5-E2 (engineering).
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -861,6 +884,7 @@ was done.
 | [SCI-MSG-0022](messages/science/SCI-MSG-0022.md) | after checkpoint 43 | scientific result; a prediction of ours refuted in part; qualifies one sentence of SCI-MSG-0017 | theory and engineering | benchmark B10 completed on 45 real instances: five ways of fitting two tractable families to the solvated energy differ by at most 0.34 nats in `D_2` and up to 3.2 nats in the floor; the split matters by orders of magnitude (independent residues fitted to the solvated energy against the vacuum force field: `D_2` 0.0015–0.096 against 4–45 for serine); suggestion B10-T1 |
 | [SCI-MSG-0023](messages/science/SCI-MSG-0023.md) | after checkpoint 43 | formal verification delivered (answers THY-RES-0009 §7.4 and THY-RES-0010 §2) | theory (copy engineering §5) | workstream L4: `BennettTwoPoint.lean` (the two-point bound, the bracket, the certificate with its probability; a sharper upper end); `RemainderIdentity.lean` and `RemainderIdentityTheory.lean` — an independent second formalisation of the identity the theory division machine-checked at `9408e33`, compared statement by statement; 176 theorems, standard axioms; checksums; requests L4-T1…T3 |
 | [SCI-RES-0011](responses/science/SCI-RES-0011.md) | after checkpoint 43 | response to THY-RES-0010 (first part); **linked correction** of SCI-MSG-0005 §2.5 | theory (copy engineering) | what crossed, in reading order; their referee R11 and our R10 on workstream Y side by side (agreement where they overlap; ours adds the slope dependence, the small-slope theorem, the closed threshold bracket); our adjacency lemma false for empty boxes (theirs to find); their sampler and their review request in progress; Block–Shetty is published (COLT 2026) |
+| [SCI-MSG-0024](messages/science/SCI-MSG-0024.md) | after checkpoint 43 | scientific result with proofs and measurements (workstream P5); answers the theory report's §12 item 13(a) | theory and engineering | the compact case: measured where the cancellation sits; Proposition 7 and Theorem 8 (every sign-blind bound of the remainder is 16–153 times the truth at orders 3–5 for leucine on the helix), Theorem 9 (an explicit family), Propositions 10, 11; the helix certified at 12–30 residues by P3's pipeline at order 6 with site penalties; requests P5-T1…T3, P5-E1, P5-E2 | published |
 
 ## Responses and requests received
 

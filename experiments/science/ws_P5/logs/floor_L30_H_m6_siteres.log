@@ -1,0 +1,14 @@
+=== L30 on H, tau 0.6, gbn2, truncation order m = 6: atoms 582, sites 30, states/site 2..2, |X| = 1.07e+09; anchor E = -516.4958 kcal/mol; band w = 20
+    site penalties gamma_i (kcal/mol) = [0.2678 0.3836 0.4729 0.6241 0.8181 0.9531 1.0729 1.2015 1.3085 1.3878
+ 1.4562 1.512  1.5508 1.5771 1.5922 1.5936 1.581  1.5574 1.5214 1.4686
+ 1.4025 1.3258 1.2225 1.0979 0.9835 0.8561 0.6691 0.5132 0.4158 0.2873]; sum = 3.26742e+01 (= Gamma_6 up to rounding); floating-point allowance per site <= 1.68e-02
+    Gamma_6 = 3.26742e+01 kcal/mol (self 1.129e-02, cross 3.266e+01) + floating-point allowance 1.00e-07 = 1.00000e-07 = 0.0000 kT   [364.8s]
+      ball values read from ball_L30_H_t0.60_gbn2_M5_20f5b82d67.npz
+    ball of radius 5: 174437 evaluations of g (0.0162 % of the domain) [123.9s]; sum_T max|d_T| (order 3) = 1.287e+01; sum_T max|d_T| (order 4) = 4.373e+00; sum_T max|d_T| (order 5) = 1.163e+00
+    models: ln Z(m_-) = 867.380406, ln Z(m_+) = 866.650699: deterministic certified bracket of ln Z(E), width 0.72971 nats; rho_cert = max(m_+ - m_-) = 84.76462 kcal/mol = 142.1841 kT (min 6.38e-04); min m_- = -516.4958, min m_+ = -516.4951 kcal/mol [63.2s]
+    BENNETT inputs, certified (kT units): model m_-: floor lo = 0 of r = beta(E - m_-), b_cert = E u = 1.1860e+00, s2_cert = E u^2 = 2.5349e+00, W(b, s2) = 7.6437e-01 nats | midpoint model m_0: b_cert = 7.1443e+01, s2_cert = 3.2386e-01, W = 6.1778e+01 nats (ln Z(m_0) = 866.915149) [10.1s]
+    sampled remainder r = beta(E - m_-) under pi_(m_-): mean 5.9606e-01, variance 2.9211e-01, min 1.6774e-07, max 4.3253e+00 kT (certified: 0 <= r <= u, E u = 1.1860e+00, E u^2 = 2.5349e+00)
+    SAMPLING: N = 20000 exact samples of pi_(m_-) (19 distinct; mean number of sites off the anchor 0.79), E evaluated at each [127.2s]; W in [0.0000, 1], mean 0.628161, std 2.98e-01; Hoeffding (delta = 0.05, two-sided): ln Z(E) in [866.900041, 866.930620] (width 0.03058 nats); point estimate 866.915447; Gibbs-Bogoliubov lower bound (same confidence) 865.418922; mean gap 3.5535e-01, max sampled gap 2.5786e+00 kcal/mol
+    sample-range bound (delta = 0.05): ln Z(E) in [863.054887, 867.380406] (width 4.32552 nats); W sampled in [0.013229, 1.000000]
+    Bennett bracket (certified b, s2; mean by Chebyshev, delta = 0.05): ln Z(E) in [866.734000, 867.599066] (width 0.86507 nats = W_cert 7.64e-01 + 2 x 5.03e-02)
+    [694s] -> out/floor_L30_H_t0.60_gbn2_m6_siteres.json

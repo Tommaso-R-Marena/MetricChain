@@ -1,0 +1,18 @@
+=== s2_signblind: S4 on H, tau 0.7: atoms 56, sites 4, domain [9, 9, 6, 6] = 2916 states; anchor (7, 7, 4, 2)
+    check: quadratic form with the real charges = P3's evaluator at all 2916 states to 1.46e-12 kcal/mol
+    per-subset searches done, 2 s; chain checks (truth <= LS <= pair optimum <= P3; all-plus <= P3): 20 checks, 0 violations
+    remainder searches done, 3 s
+--- order 3: 4 subsets (kcal/mol)
+    sum over subsets:  truth 7.0852e-02 | all-plus charges 4.2142e-01 | one pattern for all T 4.4340e-01 | best pattern per T (local search), a lower bound of the sign-blind optimum 4.5227e-01 | pair-level optimum 8.0880e-01 | P3 4.1323e+00
+    every sign-blind per-subset bound / truth >= 6.4 (sums); per subset min/median/max 4.3 / 10.3 / 18.0;  P3 / lower bound of the sign-blind optimum <= 9.1
+    remainder sup_x |g - I_2 g|:  truth 4.6752e-02 | all-plus 1.9813e-01 | pattern found 2.0137e-01 (2% of the charges negative) | P3's Gamma_3 4.1323e+00
+    every sign-blind bound of the remainder / truth >= 4.3;  Gamma_3 / that lower bound = 20.5
+    checks c_T(g_s) <= chat_T for the remainder pattern, and lower bound <= pair-level optimum: 8 checks, 0 violations
+--- order 4: 1 subsets (kcal/mol)
+    sum over subsets:  truth 1.3175e-04 | all-plus charges 1.3856e-03 | one pattern for all T 2.5206e-03 | best pattern per T (local search), a lower bound of the sign-blind optimum 2.5206e-03 | pair-level optimum 6.2206e-03 | P3 3.9109e-02
+    every sign-blind per-subset bound / truth >= 19.1 (sums); per subset min/median/max 19.1 / 19.1 / 19.1;  P3 / lower bound of the sign-blind optimum <= 15.5
+    remainder sup_x |g - I_3 g|:  truth 1.3175e-04 | all-plus 1.3856e-03 | pattern found 2.5206e-03 (5% of the charges negative) | P3's Gamma_4 3.9109e-02
+    every sign-blind bound of the remainder / truth >= 19.1;  Gamma_4 / that lower bound = 15.5
+    checks c_T(g_s) <= chat_T for the remainder pattern, and lower bound <= pair-level optimum: 2 checks, 0 violations
+    P3's Gamma_m against the remainders of sign-flipped systems (true signs, all-plus, pattern found) at every state: 17496 state checks, 0 violations; smallest ratio Gamma_m / sup|remainder| = 15.52
+DONE in 2.7 s

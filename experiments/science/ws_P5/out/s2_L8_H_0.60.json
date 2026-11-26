@@ -1,0 +1,73 @@
+{
+ "seq": "L8",
+ "bb": "H",
+ "tau": 0.6,
+ "natoms": 164,
+ "n": 8,
+ "nstates": 256,
+ "orders": {
+  "3": {
+   "n_subsets": 56,
+   "truth_sum": 1.232781339170657,
+   "allplus_sum": 25.291537846067513,
+   "onepattern_sum": 29.027177929559684,
+   "LS_sum": 59.15309832507882,
+   "pair_sum": 105.79135670524774,
+   "P3_sum": 356.6398855056668,
+   "rem_true": 0.24891454248066935,
+   "rem_allplus": 6.252778185917123,
+   "rem_LS": 17.86004267594967,
+   "Gamma": 356.6398855056668,
+   "pattern_minus_fraction": 0.4146341463414634,
+   "per_subset_search": true,
+   "LS_ratio_min": 20.274454761101467,
+   "LS_ratio_median": 41.8593677831178,
+   "LS_ratio_max": 190.941867135338
+  },
+  "4": {
+   "n_subsets": 70,
+   "truth_sum": 0.28632184797358917,
+   "allplus_sum": 2.8283448303627665,
+   "onepattern_sum": 2.797394866363902,
+   "LS_sum": 6.055023480807008,
+   "pair_sum": 10.123382860008215,
+   "P3_sum": 49.30931248559129,
+   "rem_true": 0.08817408115857006,
+   "rem_allplus": 1.7981988421342976,
+   "rem_LS": 2.0986677731052623,
+   "Gamma": 49.30931248559129,
+   "pattern_minus_fraction": 0.8536585365853658,
+   "per_subset_search": true,
+   "LS_ratio_min": 6.018388683971965,
+   "LS_ratio_median": 25.02414346752379,
+   "LS_ratio_max": 131.78672612691562
+  },
+  "5": {
+   "n_subsets": 56,
+   "truth_sum": 0.02919150200996512,
+   "allplus_sum": 0.10571359709501849,
+   "onepattern_sum": 0.20014373215508385,
+   "LS_sum": 0.44941705373476626,
+   "pair_sum": 0.7139975429950635,
+   "P3_sum": 4.9750814094843925,
+   "rem_true": 0.0028608022237932573,
+   "rem_allplus": 0.018208818291896023,
+   "rem_LS": 0.10805444604466174,
+   "Gamma": 4.975081409484391,
+   "pattern_minus_fraction": 0.24390243902439024,
+   "per_subset_search": true,
+   "LS_ratio_min": 7.237244444142615,
+   "LS_ratio_median": 14.103541386994255,
+   "LS_ratio_max": 73.21533231159849
+  }
+ },
+ "chain_checks": {
+  "n": 1092,
+  "violations": 0
+ },
+ "state_checks": {
+  "n": 2304,
+  "violations": 0,
+  "min_ratio": 19.968590891774184
+ }
+}

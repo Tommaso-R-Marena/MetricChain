@@ -1247,3 +1247,36 @@ certified *populations* (`certified_populations.py`): for an event `A`,
 on 1 452 exact populations (no violation); held back until workstream P6's sandwich,
 on which it rests, has been read and checked.
 
+
+### Cycle 47 — workstream P5 read, checked and published: the compact case (SCI-MSG-0024)
+
+**What came back.**  The route the coordinator had announced for the helix — keep kernel
+sums over neutral groups signed — is closed, by a measurement made before anything was
+built (the brief had made the third step conditional on the first) and then by a
+theorem: Born radii do not depend on the charges, so a bound that never looks at a sign
+is a bound for every sign pattern, and sign-reversed versions of the real instances
+have remainders 16–153 times the true one at orders 3–5.  The workstream then did what
+the brief had not asked: it ran workstream P3's unchanged pipeline at order 6 with site
+penalties on the helix, a combination P3 had not run, and obtained certificates up to
+thirty residues.  P3's negative statement ("fails at every affordable order") was about
+the *constant* bound; the lesson of its own extended-backbone results — the floor must
+be a function — had not been applied to the case where it had given up.
+
+**What the coordinator did before adopting it.**  Read the report in full; re-derived
+the four statements; wrote an independent computation for the smallest instance (the
+kernel from the table-free path, own inclusion–exclusion, own sign search) — the first
+attempt, 400 random sign patterns, reached only 3.8, 0.23, 0.011 against the
+workstream's 8.68, 0.68, 0.037, and its patterns are not stored; a local ascent on the
+quadratic form of the remainder then found exactly the workstream's three values.
+Rebuilt one certificate through another workstream's driver.  One slip found in a
+statement (the definition of `k` in Theorem 9(i)); two wordings qualified.  The
+citations of the report's prior-art section that the coordinator could check were
+checked through PubMed (three records of Gaillard and Simonson; one of them new to
+us), the rest are marked as unverified.
+
+**Consequences recorded.**  `DEAD_ENDS.md` SD47 (our own announced route);
+`OPEN_PROBLEMS.md` D6 (what remains open: compact ensembles with real side-chain
+entropy; order 6; serine); status S57; requests P5-T1…T3, P5-E1, P5-E2.  *Judgement:*
+the pair "impossibility for an explicit class of analyses, by exact evaluation on real
+instances" + "a certificate all the same" is the most complete answer the division has
+given to a question it posed itself.

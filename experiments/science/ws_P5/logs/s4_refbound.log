@@ -1,0 +1,16 @@
+  L6/H m = 3: sum_T c_T = 2.6782e-01; sum_T max|d_T| (signed reference terms) = 1.6475e-01; (**) with exact (m+1)-constants = 4.0757e-01; certified version sum max|d_T| + (m+1) Gamma_(m+1) = 5.1689e+01  vs  Gamma_m = 1.3167e+02  and  Gamma_(m+1) = 1.2881e+01 kcal/mol
+  L6/H m = 4: sum_T c_T = 6.0705e-02; sum_T max|d_T| (signed reference terms) = 5.0705e-02; (**) with exact (m+1)-constants = 7.1627e-02; certified version sum max|d_T| + (m+1) Gamma_(m+1) = 3.9324e+00  vs  Gamma_m = 1.2881e+01  and  Gamma_(m+1) = 7.7634e-01 kcal/mol
+  L6/H: 64 states; (*) checked for every (T, y_T) against the sup over all contexts (220 (T, y_T, context) triples)
+  L8/H m = 3: sum_T c_T = 1.2328e+00; sum_T max|d_T| (signed reference terms) = 7.4929e-01; (**) with exact (m+1)-constants = 1.8946e+00; certified version sum max|d_T| + (m+1) Gamma_(m+1) = 1.9799e+02  vs  Gamma_m = 3.5664e+02  and  Gamma_(m+1) = 4.9309e+01 kcal/mol
+  L8/H m = 4: sum_T c_T = 2.8632e-01; sum_T max|d_T| (signed reference terms) = 2.3553e-01; (**) with exact (m+1)-constants = 3.8149e-01; certified version sum max|d_T| + (m+1) Gamma_(m+1) = 2.5111e+01  vs  Gamma_m = 4.9309e+01  and  Gamma_(m+1) = 4.9751e+00 kcal/mol
+  L8/H: 256 states; (*) checked for every (T, y_T) against the sup over all contexts (2912 (T, y_T, context) triples)
+  S4/H m = 3: sum_T c_T = 7.0852e-02; sum_T max|d_T| (signed reference terms) = 7.0605e-02; (**) with exact (m+1)-constants = 7.1132e-02; certified version sum max|d_T| + (m+1) Gamma_(m+1) = 2.2704e-01  vs  Gamma_m = 4.1323e+00  and  Gamma_(m+1) = 3.9109e-02 kcal/mol
+  S4/H: 2916 states; (*) checked for every (T, y_T) against the sup over all contexts (11664 (T, y_T, context) triples)
+  S5/H m = 3: sum_T c_T = 1.2634e-01; sum_T max|d_T| (signed reference terms) = 1.2236e-01; (**) with exact (m+1)-constants = 1.2953e-01; certified version sum max|d_T| + (m+1) Gamma_(m+1) = 9.7216e-01  vs  Gamma_m = 8.9760e+00  and  Gamma_(m+1) = 2.1245e-01 kcal/mol
+  S5/H m = 4: sum_T c_T = 1.7943e-03; sum_T max|d_T| (signed reference terms) = 1.7247e-03; (**) with exact (m+1)-constants = 1.8746e-03; certified version sum max|d_T| + (m+1) Gamma_(m+1) = 1.3658e-02  vs  Gamma_m = 2.1245e-01  and  Gamma_(m+1) = 2.3867e-03 kcal/mol
+  S5/H: 17496 states; (*) checked for every (T, y_T) against the sup over all contexts (262440 (T, y_T, context) triples)
+  S6/H m = 3: sum_T c_T = 2.0181e-01; sum_T max|d_T| (signed reference terms) = 1.9298e-01; (**) with exact (m+1)-constants = 2.1356e-01; certified version sum max|d_T| + (m+1) Gamma_(m+1) = 3.5885e+00  vs  Gamma_m = 1.6970e+01  and  Gamma_(m+1) = 8.4889e-01 kcal/mol
+  S6/H m = 4: sum_T c_T = 5.1435e-03; sum_T max|d_T| (signed reference terms) = 4.9723e-03; (**) with exact (m+1)-constants = 5.4162e-03; certified version sum max|d_T| + (m+1) Gamma_(m+1) = 1.0290e-01  vs  Gamma_m = 8.4889e-01  and  Gamma_(m+1) = 1.9585e-02 kcal/mol
+  S6/H: 104976 states; (*) checked for every (T, y_T) against the sup over all contexts (3674160 (T, y_T, context) triples)
+checks of (*) and (**): 59084, violations: 0; ratio bound/exact in [1, 1.81e+03]
+DONE in 62.4 s

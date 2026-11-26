@@ -1,0 +1,16 @@
+=== L12 on H, tau 0.6, gbn2, truncation order m = 6: atoms 240, sites 12, states/site 2..2, |X| = 4.1e+03; anchor E = -222.8539 kcal/mol; band w = 11
+    site penalties gamma_i (kcal/mol) = [0.1399 0.1891 0.2173 0.2678 0.3193 0.3296 0.3327 0.3284 0.2834 0.2327
+ 0.2008 0.147 ]; sum = 2.98800e+00 (= Gamma_6 up to rounding); floating-point allowance per site <= 2.94e-04
+    Gamma_6 = 2.98800e+00 kcal/mol (self 1.630e-03, cross 2.986e+00) + floating-point allowance 1.00e-07 = 1.00000e-07 = 0.0000 kT   [7.4s]
+      ball evaluations 1586/1586  1s
+    ball of radius 5: 1586 evaluations of g (38.7 % of the domain) [1.8s]; sum_T max|d_T| (order 3) = 2.575e+00; sum_T max|d_T| (order 4) = 7.715e-01; sum_T max|d_T| (order 5) = 1.251e-01
+    models: ln Z(m_-) = 374.527667, ln Z(m_+) = 374.209097: deterministic certified bracket of ln Z(E), width 0.31857 nats; rho_cert = max(m_+ - m_-) = 9.45462 kcal/mol = 15.8592 kT (min 2.00e-07); min m_- = -222.8539, min m_+ = -222.8539 kcal/mol [0.2s]
+    BENNETT inputs, certified (kT units): model m_-: floor lo = 0 of r = beta(E - m_-), b_cert = E u = 4.1099e-01, s2_cert = E u^2 = 3.8093e-01, W(b, s2) = 1.5405e-01 nats | midpoint model m_0: b_cert = 8.0873e+00, s2_cert = 6.7678e-02, W = 1.4709e+00 nats (ln Z(m_0) = 374.346923) [0.0s]
+    BENNETT, enumerated (kT): m_-: b = 2.0834e-01 (cert 4.1099e-01), s2 = 5.6264e-02 (cert 3.8093e-01), true Jensen gap K = 2.6015e-02, W(enum) = 2.7315e-02, W(cert) = 1.5405e-01 | m_0: b = 3.3595e-01 (cert 8.0873e+00), s2 = 5.6801e-05 (cert 6.7678e-02), K = 2.8003e-05, W(enum) = 3.1865e-05, W(cert) = 1.4709e+00
+    ENUMERATION (4096 states, 2.9s): violations m_- > E: 0, m_+ < E: 0; exact remainder g - I_5 g in [-4.246e-04, 9.188e-03] (certified: |.| <= 2.988e+00, and <= sum of gamma_i over the changed sites); ln Z(E) = 374.345343; |lnZ(m_-) DP - enum| = 1.7e-13; rho = max(E - m_-) = 5.12149 kcal/mol = 8.5908 kT; cost number Z(m_-)/Z(E) - 1 = 0.20000; min E = -222.8539 (anchor is the minimiser: True)
+    sampled remainder r = beta(E - m_-) under pi_(m_-): mean 2.1170e-01, variance 5.7421e-02, min 1.6774e-07, max 1.2324e+00 kT (certified: 0 <= r <= u, E u = 4.1099e-01, E u^2 = 3.8093e-01)
+    SAMPLING: N = 20000 exact samples of pi_(m_-) (10 distinct; mean number of sites off the anchor 0.61), E evaluated at each [14.0s]; W in [0.0000, 1], mean 0.830969, std 1.79e-01; Hoeffding (delta = 0.05, two-sided): ln Z(E) in [374.330881, 374.353995] (width 0.02311 nats); point estimate 374.342505; Gibbs-Bogoliubov lower bound (same confidence) 374.163672; mean gap 1.2620e-01, max sampled gap 7.3469e-01 kcal/mol
+    sample-range bound (delta = 0.05): ln Z(E) in [373.295119, 374.527667] (width 1.23255 nats); W sampled in [0.291603, 1.000000]
+    Bennett bracket (certified b, s2; mean by Chebyshev, delta = 0.05): ln Z(E) in [374.296454, 374.489534] (width 0.19308 nats = W_cert 1.54e-01 + 2 x 1.95e-02)
+    truth 374.345343 inside the Hoeffding bracket: True; inside the sample-range bracket: True
+    [27s] -> out/floor_L12_H_t0.60_gbn2_m6_siteres.json

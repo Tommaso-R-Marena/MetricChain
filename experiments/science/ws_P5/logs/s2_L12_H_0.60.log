@@ -1,0 +1,32 @@
+=== s2_signblind: L12 on H, tau 0.6: atoms 240, sites 12, domain [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] = 4096 states; anchor (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+    check: quadratic form with the real charges = P3's evaluator at all 4096 states to 1.22e-11 kcal/mol
+    per-subset searches done, 164 s; chain checks (truth <= LS <= pair optimum <= P3; all-plus <= P3): 9724 checks, 0 violations
+    remainder searches done, 296 s
+--- order 3: 220 subsets (kcal/mol)
+    sum over subsets:  truth 3.9213e+00 | all-plus charges 7.3655e+01 | one pattern for all T 7.4820e+01 | best pattern per T (local search), a lower bound of the sign-blind optimum 1.6818e+02 | pair-level optimum 3.1019e+02 | P3 1.0335e+03
+    every sign-blind per-subset bound / truth >= 42.9 (sums); per subset min/median/max 15.2 / 39.0 / 253.0;  P3 / lower bound of the sign-blind optimum <= 6.1
+    remainder sup_x |g - I_2 g|:  truth 7.7918e-01 | all-plus 1.7435e+01 | pattern found 3.9905e+01 (55% of the charges negative) | P3's Gamma_3 1.0335e+03
+    every sign-blind bound of the remainder / truth >= 51.2;  Gamma_3 / that lower bound = 25.9
+    checks c_T(g_s) <= chat_T for the remainder pattern, and lower bound <= pair-level optimum: 440 checks, 0 violations
+--- order 4: 495 subsets (kcal/mol)
+    sum over subsets:  truth 1.0653e+00 | all-plus charges 9.9736e+00 | one pattern for all T 9.2834e+00 | best pattern per T (local search), a lower bound of the sign-blind optimum 2.2629e+01 | pair-level optimum 3.9864e+01 | P3 1.8866e+02
+    every sign-blind per-subset bound / truth >= 21.2 (sums); per subset min/median/max 5.4 / 21.6 / 120.2;  P3 / lower bound of the sign-blind optimum <= 8.3
+    remainder sup_x |g - I_3 g|:  truth 1.7447e-01 | all-plus 5.1324e+00 | pattern found 5.9721e+00 (84% of the charges negative) | P3's Gamma_4 1.8866e+02
+    every sign-blind bound of the remainder / truth >= 34.2;  Gamma_4 / that lower bound = 31.6
+    checks c_T(g_s) <= chat_T for the remainder pattern, and lower bound <= pair-level optimum: 990 checks, 0 violations
+--- order 5: 792 subsets (kcal/mol)
+    (order 5 > --lsmax 4: no per-subset search; 'best pattern per T' = max(all-plus, remainder pattern) only)
+    sum over subsets:  truth 1.7566e-01 | all-plus charges 5.4495e-01 | one pattern for all T 7.9545e-01 | best pattern per T (local search), a lower bound of the sign-blind optimum 9.0900e-01 | pair-level optimum 3.9878e+00 | P3 2.6900e+01
+    every sign-blind per-subset bound / truth >= 5.2 (sums); per subset min/median/max 1.0 / 4.8 / 46.4;  P3 / lower bound of the sign-blind optimum <= 29.6
+    remainder sup_x |g - I_4 g|:  truth 1.5810e-02 | all-plus 3.4725e-02 | pattern found 3.2098e-01 (44% of the charges negative) | P3's Gamma_5 2.6900e+01
+    every sign-blind bound of the remainder / truth >= 20.3;  Gamma_5 / that lower bound = 83.8
+    checks c_T(g_s) <= chat_T for the remainder pattern, and lower bound <= pair-level optimum: 1584 checks, 0 violations
+--- order 6: 924 subsets (kcal/mol)
+    (order 6 > --lsmax 4: no per-subset search; 'best pattern per T' = max(all-plus, remainder pattern) only)
+    sum over subsets:  truth 2.1994e-02 | all-plus charges 3.6385e-02 | one pattern for all T 7.8028e-02 | best pattern per T (local search), a lower bound of the sign-blind optimum 8.2636e-02 | pair-level optimum 3.3189e-01 | P3 2.9880e+00
+    every sign-blind per-subset bound / truth >= 3.8 (sums); per subset min/median/max 1.0 / 3.6 / 92.5;  P3 / lower bound of the sign-blind optimum <= 36.2
+    remainder sup_x |g - I_5 g|:  truth 9.1877e-03 | all-plus 3.2399e-03 | pattern found 3.4701e-02 (38% of the charges negative) | P3's Gamma_6 2.9880e+00
+    every sign-blind bound of the remainder / truth >= 3.8;  Gamma_6 / that lower bound = 86.1
+    checks c_T(g_s) <= chat_T for the remainder pattern, and lower bound <= pair-level optimum: 1848 checks, 0 violations
+    P3's Gamma_m against the remainders of sign-flipped systems (true signs, all-plus, pattern found) at every state: 49152 state checks, 0 violations; smallest ratio Gamma_m / sup|remainder| = 25.90
+DONE in 296.6 s

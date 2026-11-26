@@ -1,0 +1,9 @@
+=== s1_cancel: L12 on H, tau 0.6: atoms 240, sites 12, domain [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] = 4096 states; anchor x0 = argmin E = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1); ROWS [0, 240]
+    grouping 'residue': 14 groups; |group charge|: max 0.0000, mean 0.0000 e
+    grouping 'rigid': 26 groups; |group charge|: max 0.1842, mean 0.1700 e
+    grouping 'peptide': 39 groups; |group charge|: max 0.1842, mean 0.1207 e
+    grouping 'united': 88 groups; |group charge|: max 0.3170, mean 0.1094 e
+    2431 subsets of order 3..6; rows 0..239 in blocks of 61 atoms (4 blocks)
+    block 1/4 done, 148 s
+    block 4/4 done, 509 s
+DONE in 509.3 s

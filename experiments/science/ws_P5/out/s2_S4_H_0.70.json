@@ -1,0 +1,55 @@
+{
+ "seq": "S4",
+ "bb": "H",
+ "tau": 0.7,
+ "natoms": 56,
+ "n": 4,
+ "nstates": 2916,
+ "orders": {
+  "3": {
+   "n_subsets": 4,
+   "truth_sum": 0.07085226885297402,
+   "allplus_sum": 0.42142125776808825,
+   "onepattern_sum": 0.4433950676557288,
+   "LS_sum": 0.4522747009745324,
+   "pair_sum": 0.8088033746390438,
+   "P3_sum": 4.132348729918301,
+   "rem_true": 0.04675235453764515,
+   "rem_allplus": 0.19812907084997278,
+   "rem_LS": 0.20137421098297636,
+   "Gamma": 4.1323487299183,
+   "pattern_minus_fraction": 0.017857142857142856,
+   "per_subset_search": true,
+   "LS_ratio_min": 4.300859416126573,
+   "LS_ratio_median": 10.341707707144467,
+   "LS_ratio_max": 17.967065437658338
+  },
+  "4": {
+   "n_subsets": 1,
+   "truth_sum": 0.0001317525676327591,
+   "allplus_sum": 0.0013856298955943203,
+   "onepattern_sum": 0.0025205944239132805,
+   "LS_sum": 0.0025205944239132805,
+   "pair_sum": 0.006220583819631739,
+   "P3_sum": 0.03910892059898198,
+   "rem_true": 0.0001317525676327591,
+   "rem_allplus": 0.0013856298955943203,
+   "rem_LS": 0.0025205944239132805,
+   "Gamma": 0.039108920598981974,
+   "pattern_minus_fraction": 0.05357142857142857,
+   "per_subset_search": true,
+   "LS_ratio_min": 19.131273638165947,
+   "LS_ratio_median": 19.131273638165947,
+   "LS_ratio_max": 19.131273638165947
+  }
+ },
+ "chain_checks": {
+  "n": 30,
+  "violations": 0
+ },
+ "state_checks": {
+  "n": 17496,
+  "violations": 0,
+  "min_ratio": 15.5157530414054
+ }
+}

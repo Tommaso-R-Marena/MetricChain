@@ -527,6 +527,27 @@ mutations added since `24a3c27`; running the harness in its full (non-quick) mod
   combinatorial core, re-runs of the workstream's scripts, and an independent
   replication of one number; the certificate's validity rests on paper proofs and
   unreviewed code (SCI-MSG-0020 §4).
+* **P5 (the compact case; before SCI-MSG-0024) — a recomputation with independent lines, not
+  a re-run** (`experiments/science/pi_inference/p5_adoption_check.py`, 7 s).  (1) Ace-Leu₆-NMe on
+  the helix, 64 states: the kernel matrices from workstream P3's table-free path
+  (`energy_direct`'s formulas; the workstream used the tables; the two energies agree to
+  `5·10⁻¹²` kcal/mol), the coordinator's own inclusion–exclusion for the anchored
+  interpolation, and the coordinator's own sign search (1-flip ascent at every state, both
+  signs, six starts; the twelve best candidates evaluated at all states).  True remainder
+  `0.056866, 0.030119, 0.002221` and all-charges-positive `3.600712, 0.573930, 0.004578` kcal/mol at
+  orders 3, 4, 5: the workstream's values to `10⁻⁹`.  **Sign patterns found here give
+  remainders `8.6845, 0.6848, 0.0367` — the workstream's values — so every sign-blind bound
+  exceeds the truth by at least 152.7, 22.7, 16.5**, and P3's `Γ_m` (131.7, 12.9, 0.776) bounds
+  all of them.  (2) The Leu₁₂ helix certificate at order 6 with site penalties, rebuilt
+  through workstream P6's `make_models`: `ln Z(m₋) = 374.5276673543`, `ln Z(m₊) = 374.2090967932`,
+  exact `ln Z(E) = 374.345343432`, no violation of the sandwich at 4 096 states, cost number
+  `0.200003` — identical to the workstream's run of P3's pipeline.  (3) `diff`:
+  `ws_P5/floor_p3copy.py` is `ws_P3/run_floor.py` plus four lines.  Re-derived by hand:
+  Proposition 7, Theorem 9 (i)–(iv), Propositions 10, 11 (one slip in the statement of
+  Theorem 9(i), noted at the end of the report).  **Not checked by the coordinator:** the
+  sign searches for Leu₈, Leu₁₂, serine; the family script; the locality and
+  reference-term scripts; the certificates at 16, 20, 30 residues (the last two contain
+  the coordinator's earlier fitted-chain values — a check of the value only).
 
 ## 3. Not validated by us
 

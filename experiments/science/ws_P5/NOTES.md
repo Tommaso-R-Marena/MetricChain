@@ -238,3 +238,58 @@ at most two processes; `OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1`; no run longer
   subsets is 0.332 = 36 times the true remainder sup 0.0092, so the least sign-blind bound is in [3.8, 36] there).
 - Second run with a stronger remainder search (`--ncand 6 --nrandrem 30`: 13 candidate states, 32 starts each),
   started 03:30.
+
+## 03:31–03:40  Leu12 sign search (final), Proposition 11 numbers, family (final), report sections written
+- Second s2 run on L12 (296.6 s; `--lsmax 4 --nrand 4 --ncand 6 --nrandrem 30`): the stronger remainder search found
+  the same values: (C) >= 51 / 34 / 20 / 3.8 at m = 3 / 4 / 5 / 6.  P3's Gamma_m at every state of the sign-reversed
+  systems: 49 152 state checks, 0 violations.  So: at orders 3-5 no sign-blind bound of the remainder is within a
+  factor ten on Leu6, Leu8, Leu12 (16.5-153); at order 6 (Leu12) only >= 3.8 is shown and the pair-by-pair optimum is
+  15 x sum of constants = 36 x remainder sup: OPEN at the order the helix needs.  (Per-subset search at orders 5, 6 of
+  Leu12 not run: it would take ~15 min.)
+- s4_refbound.py (62.4 s): (*) and (**) of Proposition 11: 59 084 checks, 0 violations, bound/exact in [1, 1.8e3].
+  Certified version sum max|d_T| + (m+1) Gamma_{m+1} vs Gamma_m vs Gamma_{m+1} (kcal/mol):
+    L6 m=3: 51.7 / 131.7 / 12.9;  m=4: 3.93 / 12.9 / 0.776;   L8 m=3: 198 / 357 / 49.3;  m=4: 25.1 / 49.3 / 4.98;
+    S4 m=3: 0.227 / 4.13 / 0.0391;  S5 m=3: 0.972 / 8.98 / 0.212;  m=4: 0.0137 / 0.212 / 0.00239;
+    S6 m=3: 3.59 / 17.0 / 0.849;  m=4: 0.103 / 0.849 / 0.0196.
+  => 1.8-3.3 times better than Gamma_m for Leu, 4.7-18 for Ser, and always 4-6 times worse than Gamma_{m+1}, which
+     needs the same evaluations.
+- s2_family.py final (0.6 s): 6 811 checks, 0 violations.  Part C at r = 0.123 nm: 44.6 / 13.8 / 25.8 (m = 3/4/5).
+  Part D: 240 random neutral clusters, remark's bounds hold.  Part E (two dipoles at distance R, common Born radius,
+  m = 3): parallel 16, 14, 21, 29, 25, 22 at R = 0.2 ... 2.0 nm; antiparallel 108, 3851, 35, 28, 24, 22.
+- run_rest.sh re-ran the four small s1 instances (L6 restored: 1.8 s; L8 12.6 s; S4 5.6 s; S5 110.0 s), then s4,
+  s2_family, and is re-running s2 on the five instances.
+- L30: ball part 1 done (87 219 evaluations), merge: 24 random ball states re-evaluated with P3's own evaluator,
+  largest deviation 4.2e-11 kcal/mol; pipeline started 03:36:10.
+
+## 03:40–03:47  All short runs final; Leu30 deterministic bracket
+- run_rest.sh finished (03:45): s1 small instances restored, s4, s2_family, s2 on five instances re-run (5.3, 43.3,
+  2.7, 43.6, 322.8 s): Table 2 identical to the earlier one (same seed, same data).
+- Totals of checks.  s1: 129 804 states enumerated, 121 780 inequality checks, 0 violations.  s2: 16 296 chain checks,
+  0 violations; 1 171 776 state checks of P3's Gamma_m on sign-reversed systems, 0 violations, Gamma_m/sup|rem| from
+  15.2 to 2 315.  (I had written 27 114 chain checks in the report draft: wrong sum, corrected to 16 296.)
+- L30 pipeline (started 03:36:10): Gamma_6 = 32.674 kcal/mol, gamma_i up to 1.594 kcal/mol (2.67 kT) [364.8 s];
+  "ball values read from ball_L30_H_t0.60_gbn2_M5_20f5b82d67.npz" (the checkpointed ball was accepted: identical
+  state list); 174 437 evaluations = 0.0162 % of 1.07e9;
+    DETERMINISTIC bracket [866.6507, 867.3804] (0.730 nats); coordinator's fitted chain 866.9139 +- 0.00003: inside;
+    midpoint model (not a certificate) 866.9151; min m_- = -516.4958, min m_+ = -516.4951 kcal/mol.
+  Sampling (20 000) in progress.
+
+## 03:47–03:53  Leu30 done; report finished; nothing left running
+- L30 pipeline finished (694 s; log logs/floor_L30_H_m6_siteres.log complete): Hoeffding (20 000 samples, delta 0.05)
+  [866.9000, 866.9306] (0.0306 nats); deterministic [866.6507, 867.3804]; Bennett 0.865; 0.79 sites off the anchor;
+  19 distinct sampled states; E >= m_- at every sample.  Coordinator's fitted chain 866.9139: inside both brackets.
+  Total for Leu30: ball 552.9 + 716.2 s, merge 10.4 s, pipeline 694 s (four runs, each < 20 min).
+- Sandwich checks by enumeration inside the pipeline (L12, L16): 139 264 state checks, 0 violations; largest E - m_-
+  5.12 / 12.00 kcal/mol vs certified max(m_+ - m_-) 9.45 / 22.77.
+- Family, part B: (exact factor)/(bound (iii)) between 1.0 and 15.8 over the 111 cases with a positive bound.
+- Coordinator's commits seen (read-only): 8ad0a24 (snapshot of my notes and scripts), 3959dce (pruned-domain note at
+  the head of P3_REPORT: for Val, Leu, Ser the pruned product is the whole clash-free domain => my instances are
+  unaffected; said so in the report header).
+- Report `docs/science/workstreams/P5_REPORT.md` complete (written with the normal Write/Edit tool throughout; no
+  indirect writing).  All "(pending)" markers gone; ranges in the text taken from out/tables.md (block `ranges`).
+- Final state of processes: none of mine running (checked with ps at 03:51 and 03:52).  out/tmp/ is empty.
+- Files: p5lib.py, s1_cancel.py, s2_signblind.py, s2_family.py, s3_locality.py, s4_refbound.py, ball_precompute.py,
+  floor_p3copy.py (verbatim copy of P3's run_floor.py + 1 import), mk_tables.py, run_*.sh; logs/, out/, cache/.
+- NOT done / open (also in the report, sections 9-10): exact enumeration of Leu20 (~40 CPU-min); per-subset sign
+  search at orders 5-6 of Leu12; breakdown of P3's slack by type of pair; a compact ensemble that is not frozen
+  (patterned sequence on the helix); order 7.

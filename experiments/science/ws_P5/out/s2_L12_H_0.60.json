@@ -1,0 +1,91 @@
+{
+ "seq": "L12",
+ "bb": "H",
+ "tau": 0.6,
+ "natoms": 240,
+ "n": 12,
+ "nstates": 4096,
+ "orders": {
+  "3": {
+   "n_subsets": 220,
+   "truth_sum": 3.9213003469631147,
+   "allplus_sum": 73.65466410718363,
+   "onepattern_sum": 74.81993831678255,
+   "LS_sum": 168.17897915779787,
+   "pair_sum": 310.1872941525004,
+   "P3_sum": 1033.515532409236,
+   "rem_true": 0.7791752986654288,
+   "rem_allplus": 17.434683242274332,
+   "rem_LS": 39.904590543545055,
+   "Gamma": 1033.5155324092357,
+   "pattern_minus_fraction": 0.55,
+   "per_subset_search": true,
+   "LS_ratio_min": 15.216701772049028,
+   "LS_ratio_median": 38.95119209097461,
+   "LS_ratio_max": 253.0294079795896
+  },
+  "4": {
+   "n_subsets": 495,
+   "truth_sum": 1.0652917353311295,
+   "allplus_sum": 9.973604024642555,
+   "onepattern_sum": 9.283416257087083,
+   "LS_sum": 22.628665625067836,
+   "pair_sum": 39.86406589609846,
+   "P3_sum": 188.6575986283522,
+   "rem_true": 0.1744679073702855,
+   "rem_allplus": 5.132396446897474,
+   "rem_LS": 5.9720609568976215,
+   "Gamma": 188.65759862835225,
+   "pattern_minus_fraction": 0.8416666666666667,
+   "per_subset_search": true,
+   "LS_ratio_min": 5.411513584078938,
+   "LS_ratio_median": 21.62503889378394,
+   "LS_ratio_max": 120.20186399661624
+  },
+  "5": {
+   "n_subsets": 792,
+   "truth_sum": 0.17566119305622863,
+   "allplus_sum": 0.5449517980814562,
+   "onepattern_sum": 0.7954506433488859,
+   "LS_sum": 0.9090019470653345,
+   "pair_sum": 3.987798488420689,
+   "P3_sum": 26.899622013542068,
+   "rem_true": 0.015809673295642312,
+   "rem_allplus": 0.034725018733297475,
+   "rem_LS": 0.3209764872183314,
+   "Gamma": 26.89962201354208,
+   "pattern_minus_fraction": 0.44166666666666665,
+   "per_subset_search": false,
+   "LS_ratio_min": 1.0,
+   "LS_ratio_median": 4.7678692599270445,
+   "LS_ratio_max": 46.40471465863307
+  },
+  "6": {
+   "n_subsets": 924,
+   "truth_sum": 0.021994085493226123,
+   "allplus_sum": 0.036385494233400095,
+   "onepattern_sum": 0.07802778504401431,
+   "LS_sum": 0.08263562847609052,
+   "pair_sum": 0.3318870217985253,
+   "P3_sum": 2.9879976085334365,
+   "rem_true": 0.00918768945710724,
+   "rem_allplus": 0.003239949779526796,
+   "rem_LS": 0.03470054370609432,
+   "Gamma": 2.9879976085334365,
+   "pattern_minus_fraction": 0.375,
+   "per_subset_search": false,
+   "LS_ratio_min": 1.0,
+   "LS_ratio_median": 3.6273670308333634,
+   "LS_ratio_max": 92.5438725141351
+  }
+ },
+ "chain_checks": {
+  "n": 14586,
+  "violations": 0
+ },
+ "state_checks": {
+  "n": 49152,
+  "violations": 0,
+  "min_ratio": 25.899665134552208
+ }
+}
