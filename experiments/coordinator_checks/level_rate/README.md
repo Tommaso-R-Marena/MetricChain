@@ -16,6 +16,7 @@ The recursion: `T_1 = θ_na`, `T_{k+1} = min(T_k, R[T_k])`, `τ_k = sup T_k` (th
 | `ode_f0.py` | the similarity profile: `ζf′²/2 + ζf′ + (ζ−2)f = 0` through its folded saddle `(3, 3/2)`; `f(0) = 19.7392088 = 2π²` | `out_ode_f0.txt` |
 | `dual_ub_gauss.py` | the upper-bound dynamics in dual variables for the Gaussian pair (`R_brief.md` §2.5 made concrete: a convex majorant is described by `S(B)`, the least slope of a line with intercept `B` below it; one level sends `S` to the lower convex envelope of `min(1, Σ_B(S(B)))` on `[0, τ′]`, `τ′` the root of `S(B) = 1 − B/a`) — on a grid, **not one-sided** | `out_dual_ub_gauss.txt` |
 | `dual_ub_cube.py [u]` | the same dual upper-bound dynamics for the cube (slope map through `J`; start `hull(θ_na) = max(θ_na(x), a − x)`) — a grid approximation, **not one-sided** | `out_dual_ub_cube_u1.txt` |
+| `ub_subsolution.py pair [s_t − L_h] [κ₀]` | a candidate **convex sub-solution** of the dual upper-bound dynamics: `W_k` = the orbit of the flat line after `k − κ₀` steps up to the point where it reaches the slope level `s_t`, continued by its tangent line.  Checks on grids: convexity below `s_t`; (S1) `W_{k+1} ≤ min(1, Σ_B(W_k))` on the regular range; the top condition (the tangent line of `W_{k+1}` reaches slope `1` no earlier than `W_k` reaches the dropping slope); and `S_k ≥ W_k` for the grid dynamics.  By the comparison lemma (in the docstring) these give `τ_{k+1} ≤ E(W_k)`, the point where `W_k` reaches the dropping slope | `out_ub_subsolution_gauss.txt`, `out_ub_subsolution_cube1.txt` |
 | `lines_lb_general.py` | the lower bound from lines for a pair given by its dual function `J` alone (`h = max J`, `a = lim J(t)/(1−t)`, slope map `t′ = Q^{−1}(B/(1−σ))`, `σ′ = t′(1−σ)/(1−t′)` with `Q = J/(1−t)`; the tangent line of `θ_na` with intercept `B` is the image of the flat line): Gaussian pair, cube, and four **biased cubes** (`J` = the game function `F*` of §11.20) | `out_lines_lb_general.txt` |
 | `epochs.py` | single-line epochs with optimised outer rates (the calculus of Theorem 11.58a with the rate of every slope step chosen freely): `k²(B_k − h)` grows linearly in `k` — this schedule has the rate `C/k` only | `out_epochs.txt` |
 
@@ -42,6 +43,15 @@ Readings (2026-11-26):
   bound is like `const/(k + ½)²` and the grid recursion like `const/(k + ¼)²`.  The top of the dynamics is
   controlled with a margin on the cube: `2θ_hint″(0)h²/(a(1 − L_h − h/a)²) = 1 + u²/16 + O(u⁴) > 1`
   (`1.062` at `u = 1`), with equality in the Gaussian limit.
+* A proof route for the upper half of the conjecture (`ub_subsolution.py`; grid numerics, not certified).
+  With a delay of two levels and the tangent at the slope level `L_h + 0.1`, the candidate satisfies all
+  four conditions at every level `4 ≤ k ≤ 120` for the Gaussian pair and the cube at `u = 1, 2` (with a
+  delay of one or none the comparison `S_k ≥ W_k` fails), and the resulting bound is
+  `k²(E(W_{k−1}) − h)/const = 1.34, 1.18, 1.09, 1.06` at `k = 20, 40, 80, 120` — like `const/(k − 3.6)²`.  What a
+  proof still needs: (S1) on the tangent part (it follows from the monotonicity of the partial
+  derivatives of the slope map and the convexity of the orbit curve), convexity of the orbit curve and
+  the top condition for all `k` (asymptotically self-similar in the top band; checked to `k = 120`), and
+  the base case at `k = 4`.
 * Universality (lower-bound side, `lines_lb_general.py`): for the biased cubes `(p, u) = (0.3, 1), (0.1, 1),
   (0.1, 2), (0.02, 2)` the ratio `k²(τ_k^{LB} − h)/(2π²h²θ_hint″(0))` is `0.992, 0.998, 0.993, 0.993` at `k = 160` and
   increasing in `k`, as for the cube (`0.994`) and the Gaussian pair (`0.994`): the law depends on the pair
