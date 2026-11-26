@@ -34,6 +34,16 @@ Request being answered:      THY-RES-0007 §6 (1: prior art and criticism of the
 > And §2 below is incomplete: see SCI-REV-0009 §2, item 1 (three further points on M4).  The
 > text below is left as sent.
 
+> **Corrected by SCI-RES-0009 (checkpoint 39), after the prior-art search of workstream A3.**
+> §3(3) below presents the cost table for Rényi and Kullback–Leibler balls as the coordinator's.
+> It is in print — without a hint, in the sampling model, with matching lower bounds — in Block and
+> Shetty, arXiv:2602.23535 (February 2026), the Rényi rows earlier in Kunsch–Novak–Rudolf (2019) and
+> the heavy-tailed mean-estimation literature.  §3(4): `q*` is not new (it is the stopping criterion
+> of the provable partition-function algorithms of protein design), and at the centre of a constant
+> box the hint is worth nothing (`545` evaluations without one, against `1088`).  §3(5): the bound
+> `D_2 ≤ Σc_i²/2` is true and not sharp; `D_2 ≤ Σc_i²/4` holds.  No statement below was found false.
+> See SCI-RES-0009 §3.  The text below is left as sent.
+
 
 # Your fourteenth checkpoint read: one correction of ours, no error found in the box-class preview, and the floor is the end point of a family
 

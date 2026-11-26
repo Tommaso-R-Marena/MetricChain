@@ -1,0 +1,17 @@
+W=1 alphabets=[3, 2, 3, 2, 2, 3]: ln Z 8.214092304 vs enumeration 8.214092304; TV(empirical, exact) = 0.0048; chi2 = 244 on 215 dof (z = +1.42)  ok
+W=1 alphabets=[3, 3, 2, 2, 2, 2]: ln Z 3.998324185 vs enumeration 3.998324185; TV(empirical, exact) = 0.0049; chi2 = 127 on 143 dof (z = -0.93)  ok
+W=1 alphabets=[2, 2, 2, 2, 3, 3]: ln Z 9.918102618 vs enumeration 9.918102618; TV(empirical, exact) = 0.0027; chi2 = 121 on 143 dof (z = -1.29)  ok
+W=2 alphabets=[3, 3, 2, 2, 2, 3]: ln Z 5.712721253 vs enumeration 5.712721253; TV(empirical, exact) = 0.0045; chi2 = 171 on 215 dof (z = -2.11)  ok
+W=2 alphabets=[2, 2, 2, 3, 3, 2]: ln Z 8.461309975 vs enumeration 8.461309975; TV(empirical, exact) = 0.0023; chi2 = 161 on 143 dof (z = +1.09)  ok
+W=2 alphabets=[3, 2, 3, 2, 3, 2]: ln Z 7.653812824 vs enumeration 7.653812824; TV(empirical, exact) = 0.0046; chi2 = 219 on 215 dof (z = +0.19)  ok
+W=3 alphabets=[3, 2, 3, 2, 2, 2]: ln Z 7.710780626 vs enumeration 7.710780626; TV(empirical, exact) = 0.0025; chi2 = 139 on 143 dof (z = -0.24)  ok
+W=3 alphabets=[2, 3, 2, 3, 2, 3]: ln Z 11.275352614 vs enumeration 11.275352614; TV(empirical, exact) = 0.0028; chi2 = 270 on 215 dof (z = +2.64)  ok
+W=3 alphabets=[3, 2, 3, 3, 3, 3]: ln Z 9.443287395 vs enumeration 9.443287395; TV(empirical, exact) = 0.0061; chi2 = 432 on 485 dof (z = -1.70)  ok
+W=4 alphabets=[3, 2, 2, 2, 2, 3]: ln Z 4.494567572 vs enumeration 4.494567572; TV(empirical, exact) = 0.0042; chi2 = 139 on 143 dof (z = -0.22)  ok
+W=4 alphabets=[2, 2, 3, 2, 3, 2]: ln Z 5.186794847 vs enumeration 5.186794847; TV(empirical, exact) = 0.0048; chi2 = 154 on 143 dof (z = +0.68)  ok
+W=4 alphabets=[3, 2, 3, 3, 3, 2]: ln Z 7.548704167 vs enumeration 7.548704167; TV(empirical, exact) = 0.0035; chi2 = 262 on 323 dof (z = -2.41)  ok
+ALL OK
+
+real	0m5.789s
+user	0m3.147s
+sys	0m0.570s

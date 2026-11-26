@@ -72,7 +72,7 @@ Next: own evaluator (per-atom tables, self/cross split), validation against Open
   (seed 20261125; half raw R3 states, half from the pruned product at tau = 0.60):
   worst |tables - direct| = 5.8e-12, |tables - OpenMM Reference (double)| = 1.8e-11,
   |tables - P2 block evaluator| = 1.6e-11 kcal/mol.  pruned_domain reproduces P2's `shape_pruned`
-  in all 24 comparisons (incl. the EMPTY ones).  [M]
+  in all 26 comparisons (incl. the EMPTY ones) [first written as 24; corrected from the log].  [M]
 
 ## 00:40  Exploration 1 (`x01_explore.py`, `logs/x01_explore.log`): what must be bounded
 
@@ -178,7 +178,7 @@ Next: prototype of the term-by-term (Faa di Bruno) bound at orders 2, 3, 4 and i
 * `t05_identity.py` (`logs/t05_identity.log`): remainder identity (Proposition 1) holds to 1.8e-13 on
   g_GB of Val6/PPII (40 random x, every m) and 7e-15 on a random function; Corollary L1 holds on 2000
   random cases.
-* `t04_tight.py` finished (`out/tight_{apolar,polar,charged}.json`, 44 instances, 562 triples):
+* `t04_tight.py` finished (`out/tight_{apolar,polar,charged}.json`, 44 instances, 672 triples [first written as 562: a miscount of mine, corrected 01:27 from the JSON files]):
   rigorous analysis-only bound >= P2's measured c_ijk for every triple (asserted).  Ratio of sums:
     Val x206-485 | Leu x280-1420 | Phe x89-170 | Ser x38-104 | Lys x33-77 | LKSE x89-160.
   NEGATIVE RESULT: analysis alone is 1.5-3 orders of magnitude too large.
@@ -232,7 +232,7 @@ Next: prototype of the term-by-term (Faa di Bruno) bound at orders 2, 3, 4 and i
   inside numexpr was not attempted -> "what I did not check".
 * `t06_pairtest.py` (`logs/t06_pairtest.log`): all charges zero except one pair (or one atom): the
   certified bound of that single term against its exact anchored constant, all subsets of order 3, 4:
-  Val5/E 60 random terms, Ser4/H 48: NO violation in 1 268 cases; bound/exact minimum 1.00-2.0,
+  Val5/E 60 random terms, Ser4/H 48: NO violation in 1 118 cases [first written as 1 268: a miscount, corrected 01:28]; bound/exact minimum 1.00-2.0,
   median 1.1 (self, fixed atom), 1.8-2.5 (self, side-chain atom), 1.8-2.3 (fixed-fixed pair),
   2.7-3.9 (fixed-side), 3.0-6.3 (same side chain), 4.2-5.5 (two side chains).
   => term by term the bound is nearly sharp; the factor 100-1400 of the full bound is entirely the
@@ -282,3 +282,44 @@ Next: prototype of the term-by-term (Faa di Bruno) bound at orders 2, 3, 4 and i
   `mk_report.py --fill`) written.  Batches F (site penalties, final script), G (Val20 with bands 1, 2, 8
   + enumerated analogues), A2/B2 (constant bound: Leu, Ser, Phe, Lys, LKSE), H (OBC2) are running under
   load 13; machine shared.
+
+## 01:00-01:25  All batches finished; tables; report complete
+
+* Final dataset (`out/floor_*.json`): 164 runs of `run_floor.py`, 160 with full enumeration:
+  5 512 504 state checks of m_- <= E <= m_+, 0 violations; transfer-matrix ln Z = enumeration to 5e-13;
+  coordinate-descent anchor = global minimiser of E in 160/160; true ln Z inside the Hoeffding bracket
+  160/160, sample-range 160/160, Bennett 132/132.  Three runs aborted in the reporting step (after
+  their enumeration checks) because e^{-beta rho_cert} underflows: L8/H, L12/H, LKSE:5/H at m = 3
+  (guard added afterwards; not re-run -- hopeless cases, Gamma_3 = 357, 1034 kcal/mol).
+* Val20/PPII, final runs (`logs/floor_big_V20.log`, `logs/floor_batch_G.log`), delta = 0.05, N = 50 000:
+    m=4, band 8: deterministic [517.4843, 519.2199]; Hoeffding [518.2442, 518.2759]; Bennett useless (W_cert = 1.5)
+    m=5, band 8: deterministic [518.2332, 518.2937]; Hoeffding [518.2598, 518.2648]; Bennett [518.2608, 518.2659]
+    m=5, band 2: deterministic [518.1350, 518.3458]; Hoeffding [518.2584, 518.2662]; Bennett [518.2576, 518.2906]
+    m=5, band 1: deterministic [517.8792, 518.3699]; Hoeffding [518.2575, 518.2670]; Bennett [518.2516, 518.3892]
+  intersection of all 16 brackets and 4 Gibbs-Bogoliubov bounds: [518.2608, 518.2648].
+  Certified minimum: min m_- = -306.568720 <= min E <= E(x0) = -306.568715 kcal/mol (band 8, m = 4 and 5).
+* Certified minima (site penalties): min m_- attained at the anchor in 5/21 runs at m = 3 (Ser4,5,6/E,
+  Val4/E, Leu8/E), 19/23 at m = 4, 13/14 at m = 5.
+* Bennett (coordinator's request): certified b within x2 of enumerated, s2 within x4-15, W_cert within
+  x4-26 of the true gap (model m_-, all pairs in band, m >= 4).  At n = 20: b_cert = 0.061 kT,
+  s2_cert = 4.8e-3, W = 2.4e-3 nats (band 8); band 2: 0.21, 0.049, 0.024; band 1: 0.49, 0.25, 0.12.
+* Remainder statistics extrapolate linearly (Val/PPII, m = 5, r = beta(E - m_-) under pi_{m_-}):
+  predicted from n = 10, 12 (enumerated) vs sampled at n = 20: band 2 mean 0.0819 / 0.0838,
+  variance 4.5e-4 / 4.9e-4, min 0.0468 / 0.0475; band 1: 0.106 / 0.108, 1.41e-3 / 1.51e-3, 0.0484 / 0.0484.
+* OBC2 (batch H, 9 runs, no violation): constants 2-8 times smaller than GBn2 for Val/Leu, equal for Ser.
+  `x05_neck.py`: GBn2 with the neck term switched off (ablation): Gamma_3,4,5 smaller by 10, 26, 74 (Val6/E),
+  12, 27, 69 (Leu8/E), 6, 12 (Ser4/E).  The neck dominates the size of the constants.
+* Sum_i c_i^2 of certified oscillations (c_i <= 2 m gamma_i): Val20/PPII 0.109 kT^2 at m = 5, 79 at m = 4.
+* Report written: `docs/science/workstreams/P3_REPORT.md` (tables filled by `mk_report.py --fill`; text
+  blocks inserted by `fill_text.py`, `fill_text2.py`).  Full tables: `out/report_tables.md`, `out/tables.md`.
+* Housekeeping: `experiments/science/ws_P2/__pycache__/` (anlib 23:57:50, fbmodel 00:47:02) was NOT
+  written by me (all my runs use `python3 -B` and p3core sets `sys.dont_write_bytecode` before importing
+  P2's modules; I never import anlib); the time stamps coincide with the coordinator's
+  `pi_inference` scripts, two of which import fbmodel.  Superseded results are in `out/intermediate/`
+  and `out/prebennett/`.  No git state was changed; nothing outside `ws_P3/` and the report was written.
+
+## What I did not check (also in the report)
+* no proof machine-checked; the 1e-7 kcal/mol floating-point allowance per evaluation of g is not
+  proved for numexpr's summation order (measured error <= 2e-12); mpmath.iv trusted; code unreviewed;
+* one large instance, one anchor, one seed; helices and charged chains beyond 4-6 residues fail or
+  were not run; continuous chi not treated; prior art at abstract level only (one PubMed hit unopened).

@@ -249,4 +249,20 @@ exponent irrelevant; constants in the limit shape.
   numbers.  As a methods note with the P/P2 measurements this is the most physical
   thing the programme has; what it lacks is the proof of those two numbers (P3) and a
   buried, non-homopeptide instance.
+* *Checkpoint 39:* **the prior-art search removes a candidate and sharpens another.**
+  Addendum A17 as a *theory* note is not a publication: its cost table is the main
+  result of a preprint of February 2026 (Block and Shetty, arXiv:2602.23535), its
+  bracket is Hoeffding's Theorem 3, its chain version is in print since 2006
+  (SCI-RES-0009; `DEAD_ENDS.md` SD43).  The same holds, piece by piece, for the theory
+  division's §11.30 — except its hinted cost as a statement of query complexity, which
+  was not found.  **What survives for P10 is exactly the part that was always the
+  physical one:** which row of a known table real remainders are in, measured — and the
+  recipe that follows (a chain model, a sampled mean, Hoeffding's Theorem 3 with two
+  certified numbers).  A methods note would have to *cite* the table, not derive it,
+  and would stand on the measurements and on a certified instance (workstream P3
+  reports one at twenty residues; unread when this was written).  One sentence to
+  check before any such note: whether the use of Hoeffding's Theorem 3 as a second-order
+  certificate for free-energy perturbation is in Decoster (J. Phys. A 37 (2004) 9051),
+  which could not be opened.  **P7 (the field theorems) gained a formal core:** Lemmas
+  0–3 and Theorem A are machine-checked (SCI-MSG-0019).
 

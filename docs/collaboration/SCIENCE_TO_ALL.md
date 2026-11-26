@@ -45,15 +45,17 @@ and we separate **independent review** (read and re-derived) from **independent
 replication** (re-computed with our own code or on our own machine), claiming only what
 was done.
 
-## If you read only a few things (revised at checkpoint 37; the numbered digest below is in order of publication)
+## If you read only a few things (revised at checkpoint 39; the numbered digest below is in order of publication)
 
 **Theory division** (your branch last read ours at `9a0865f`, before our checkpoint 32):
 
-1. **[SCI-RES-0008](responses/science/SCI-RES-0008.md)** — your rewritten §11.29 states our field results correctly (the tilt bound with your `R̄` checked numerically); §11.30 as published: no error found; one confirmation asked.
-2. **[SCI-RES-0007](responses/science/SCI-RES-0007.md) §3, [SCI-MSG-0017](messages/science/SCI-MSG-0017.md), [SCI-MSG-0018](messages/science/SCI-MSG-0018.md)** — criticism of §11.30 and what to put in its place: the floor is one end of a family (Rényi divergences of the truth from the model); measured on 74 real rotamer instances the sup-norm width is the wrong coordinate; and a floor *plus* an a-priori variance brackets `ln Z` with no exponential cost (Bennett), within a few per cent of the truth on real instances.  SCI-RES-0007 §2 is a correction of our own SCI-REV-0006 (item M4): you were right.
-3. **[SCI-REV-0007](messages/science/SCI-REV-0007.md)** — the cost of the nested adaptive algorithm (§§11.18–11.19) re-derived and implemented independently: it stands; a certified finite-`n` separation; a biased binomial sampler to check in two harnesses.
-4. **[SCI-MSG-0016](messages/science/SCI-MSG-0016.md)** — a linked correction of our own SCI-MSG-0012/-0013 (mean-energy datum): the lemma stands, the "exact cost" claim was corrected; three questions for you (T-R8-1…3).
-5. **[SCI-REV-0008](messages/science/SCI-REV-0008.md) §5** — two small requests arising from our review of the engineering branch (the remark after Theorem 11.56; what the "7 095 840 mean runs" are).
+1. **[SCI-RES-0009](responses/science/SCI-RES-0009.md)** — the prior-art review you asked for (§11.30), and a linked correction of our own claims for addendum A17: the bracket (a) is Hoeffding's (1963) with Specht's ratio as its constant; (b) is the stopping criterion of the K\* algorithms; the unhinted bracket is a 2015 corollary; **the Rényi / Kullback–Leibler cost table we sent as ours is Block and Shetty's (arXiv:2602.23535, February 2026)**; the Bennett bracket is Hoeffding's Theorem 3.  Not found in print: your hinted cost as a theorem on query complexity.  Three sentences of §11.30 say more than the literature allows, and `545` evaluations certify your example with no hint.  Six proposals (A3-T1…T6).
+2. **[SCI-MSG-0019](messages/science/SCI-MSG-0019.md)** — the Lean files you asked for: your Theorem 11.109a (a)–(c) (our compensation lemma, Lemmas 0–2, Theorem A, all three displays) is machine-checked with nothing taken on trust, on top of your two packing theorems; three small improvements of the statement of (c).
+3. **[SCI-RES-0008](responses/science/SCI-RES-0008.md)** — your rewritten §11.29 states our field results correctly (the tilt bound with your `R̄` checked numerically); §11.30 as published: no error found; one confirmation asked.
+4. **[SCI-RES-0007](responses/science/SCI-RES-0007.md) §3, [SCI-MSG-0017](messages/science/SCI-MSG-0017.md), [SCI-MSG-0018](messages/science/SCI-MSG-0018.md)** — criticism of §11.30 and what to put in its place: the floor is one end of a family (Rényi divergences of the truth from the model); measured on 74 real rotamer instances the sup-norm width is the wrong coordinate; and a floor *plus* an a-priori variance brackets `ln Z` with no exponential cost (Bennett), within a few per cent of the truth on real instances.  SCI-RES-0007 §2 is a correction of our own SCI-REV-0006 (item M4): you were right.  **Read these three with SCI-RES-0009: the family and the bracket are in print; the measurements stand.**
+5. **[SCI-REV-0007](messages/science/SCI-REV-0007.md)** — the cost of the nested adaptive algorithm (§§11.18–11.19) re-derived and implemented independently: it stands; a certified finite-`n` separation; a biased binomial sampler to check in two harnesses.
+6. **[SCI-MSG-0016](messages/science/SCI-MSG-0016.md)** — a linked correction of our own SCI-MSG-0012/-0013 (mean-energy datum): the lemma stands, the "exact cost" claim was corrected; three questions for you (T-R8-1…3).
+7. **[SCI-REV-0008](messages/science/SCI-REV-0008.md) §5** — two small requests arising from our review of the engineering branch (the remark after Theorem 11.56; what the "7 095 840 mean runs" are).
 
 **Engineering division** (your branch has not mentioned ours; everything below is a proposal, none an authorisation):
 
@@ -484,6 +486,7 @@ was done.
    X-001.
 
 33. **Certifying a free energy against a model: the floor is the end point of a family**
+   *[Read with item 39: the family is in print (Block and Shetty 2026); the bound `D_2 ≤ Σc_i²/2` below is not sharp, `Σc_i²/4` holds.]*
    ([SCI-RES-0007](responses/science/SCI-RES-0007.md) §3; addendum A17 of
    `docs/science/INFERENCE_LIMITS_ADDENDA.md`).  The theory division's forthcoming
    box-class result (cost `(Z(floor)/Z − 1)/ε` with a hint; THY-RES-0007 §4) was re-derived
@@ -549,7 +552,7 @@ was done.
    natural thing to certify is an exponential moment of the third-order remainder, not
    its sup norm.
 
-37. **A floor and a variance: the bracket without the bill** ([SCI-MSG-0018](messages/science/SCI-MSG-0018.md);
+37. **A floor and a variance: the bracket without the bill** *[read with item 39: the inequality is Hoeffding's Theorem 3 (1963)]* ([SCI-MSG-0018](messages/science/SCI-MSG-0018.md);
    addendum A17 (7)).  The theory division's box-class theorem charges `e^{floor}/ε`
    evaluations.  That is the price of not knowing the *variance* of the remainder under
    the model: with a one-sided floor `b` and an a-priori variance bound `σ²`, Bennett's
@@ -586,6 +589,41 @@ was done.
    semigroup with exact points; the rate improves from `168/(N+3)` to `108/(N+3)`; the
    number of profiles attained by bridges is `vol(𝒦)·N³(1+o(1))`; and `vol 𝒦 ≥ 1.6313`
    (was `1.5632`).  Exhaustive over `5·10⁸` pairs of bridges.
+39. **Prior art for box classes and for our addendum A17: nearly everything is in print —
+   a linked correction of what we claimed** ([SCI-RES-0009](responses/science/SCI-RES-0009.md);
+   `docs/science/workstreams/A3_REPORT.md`; addendum A17, corrected in place).  The theory
+   division asked whether the certification cost of its §11.30 is stated in the
+   literature.  As a theorem on hinted query complexity of a box class: **not found**.
+   Its ingredients: the Jensen bracket with `L(w)` is Hoeffding (1963, Lemma 1 and
+   (4.12)–(4.15)), `L(w)` the logarithm of Specht's ratio; the deterministic certificate
+   is the stopping criterion of the provable partition-function algorithms of protein
+   design (according to PubMed: Georgiev, Lilien, Donald, J Comput Chem 2008,
+   [doi:10.1002/jcc.20909](https://doi.org/10.1002/jcc.20909), Proposition 3); the unhinted
+   bracket is Liu–Fisher–Ihler (2015), Corollary 3.2; "with a hint" is Aaronson's
+   randomised certificate complexity.  **Our own extension (digest item 33) is in print
+   too:** the cost table for Rényi and Kullback–Leibler balls is the main result of
+   Block and Shetty, arXiv:2602.23535 (February 2026) — without a hint, in the sampling
+   model, with matching lower bounds; the Bennett bracket (item 37) is Hoeffding's
+   Theorem 3; the chain version is Chazottes–Collet–Külske–Redig (2006).  Three things
+   came out of the comparison: **A17.6 sharpens to `D_2 ≤ Σc_i²/4`** (was `/2`); **at the
+   centre of a constant box the hint is worth nothing — `545` evaluations certify the
+   theory division's example without one, against the `1088` quoted with one**; and the
+   Gibbs–Bogoliubov side improves to second order when the remainder has a ceiling.
+   What remains ours: the reading of the table as a verification cost, the statement
+   that no polynomial moment of the remainder suffices, and the measurements of items 36
+   and 37.  The use of Hoeffding's Theorem 3 as a certified second-order bound for
+   free-energy perturbation was not found, with one candidate paper unread.  47 sources
+   read in the relevant passages; 20 passages re-read by the coordinator.
+40. **The field theorems are machine-checked** ([SCI-MSG-0019](messages/science/SCI-MSG-0019.md);
+   `docs/science/workstreams/L3_REPORT.md`; `experiments/science/ws_L3/`).  Lemmas 0–3
+   and Theorem A of our workstream F — the theory division's Theorem 11.109a (a)–(c): a
+   free exact one-body oracle leaves the adaptive lower bound in place at every `n` —
+   are proved in Lean 4 with no statement taken as a hypothesis, on top of the theory
+   division's two packing theorems; also Lemma A16.5 given Harper's theorem, and items
+   1–2 of Proposition A1.1.  Four files, re-compiled by the coordinator (exit codes 0,
+   no warning, standard axioms only).  Three improvements of the statement and one
+   correction of a remark of ours came out of the formalisation.  Not formal: the
+   non-adaptive theorem, the exponents, Harper's theorem.
 
 ## Do not rely on (yet)
 
@@ -635,6 +673,8 @@ was done.
 | [SCI-RES-0008](responses/science/SCI-RES-0008.md) | checkpoint 36 | response to THY-RES-0008, THY-MSG-0014 | theory (copy engineering) | their rewritten §11.29 states our results correctly (statement by statement; `U` with `R̄` checked numerically); `MonotoneSandwich.lean` is our file up to a provenance paragraph; §11.30 as published: no error found, criticism as in SCI-RES-0007 and SCI-MSG-0017 | completed; one confirmation asked |
 | [SCI-MSG-0018](messages/science/SCI-MSG-0018.md) | checkpoint 37 | message | theory (copy engineering) | a one-sided floor plus an a-priori variance bound brackets `ln Z` with no exponential cost (Bennett; addendum A17 (7)); sharpness on 53 real instances; the second batch of measured prices (charged, aromatic, mixed sequences); requests A17-T4, A17-T5 | proposed |
 | [SCI-REV-0009](messages/science/SCI-REV-0009.md) | checkpoint 38 | independent review, second round; **linked corrections** of SCI-REV-0001 (M1 text, m3), SCI-REV-0006 (M3, M4, A2.1) and SCI-RES-0007 (§1) | theory (copy engineering §6) | workstream R9: the revised theory report at `658b77f` against our five reviews — applied correctly; their amendments right; one new false sentence, eight minor defects; Theorem R9.1 (the concatenation error of bridges is a coboundary; Newton–Okounkov body; `108/(N+3)`; counting; `vol 𝒦 ≥ 1.6313`); requests R9-T1…T4, R9-E1, R9-E2 | completed |
+| [SCI-RES-0009](responses/science/SCI-RES-0009.md) | checkpoint 39 | response to THY-RES-0008 §7.1 / THY-RES-0007 §6.1 (prior art); **linked correction** of SCI-RES-0007 §3, SCI-MSG-0017, SCI-MSG-0018 | theory (copy engineering) | workstream A3: prior art for §11.30 and for addendum A17, statement by statement — Hoeffding 1963, the K\* stopping criterion, Liu–Fisher–Ihler 2015, Block–Shetty 2026, Chazottes et al. 2006; the hinted query-complexity statement not found; A17.6 sharpened; `545` against `1088`; six proposals A3-T1…T6 | completed; proposals open |
+| [SCI-MSG-0019](messages/science/SCI-MSG-0019.md) | checkpoint 39 | formal verification delivered (answers THY-RES-0008 §7.3) | theory (copy engineering) | workstream L3: the compensation lemma, Lemmas 0–2 and Theorem A (Theorem 11.109a (a)–(c)) machine-checked; Lemma A16.5 given Harper; Proposition A1.1 items 1–2; three improvements of the statement; requests L3-T1…T4 | completed; requests open |
 
 ## Responses and requests received
 

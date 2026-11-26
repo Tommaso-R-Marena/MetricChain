@@ -81,8 +81,10 @@ for p in ps:
         lo = max(H[0], B[0])
         verdict = "RAISED" if lo > hc * (1 + 1e-6) else ("LOWERED" if hu < hc * (1 - 1e-6) else "undecided")
         rows.append((p, u, hc, lo, hu, verdict))
-        print("%-5g %-5g | %.6f  %.6f  %.6f  | %.6f (%.3f, %.3f) x%.3f   %.6f (%2d, %.3f) x%.3f | %.6f x%.3f | %-10s | %.3f    %.3f   (%.0fs)" % (
-            p, u, hc, ac, Ec, H[0], H[1], H[2], H[0] / hc, B[0], B[1], B[2], B[0] / hc, hu, hu / hc, verdict,
+        Hs = ("%.6f (%.3f, %.3f) x%.3f" % (H[0], H[1], H[2], H[0] / hc)) if H[1] is not None else "(operator check failed)      "
+        Bs = ("%.6f (%2d, %.3f) x%.3f" % (B[0], B[1], B[2], B[0] / hc)) if B[1] is not None else "(operator check failed)      "
+        print("%-5g %-5g | %.6f  %.6f  %.6f  | %s   %s | %.6f x%.3f | %-10s | %.3f    %.3f   (%.0fs)" % (
+            p, u, hc, ac, Ec, Hs, Bs, hu, hu / hc, verdict,
             E_F(p, u) / Ec, eu / Ec, time.time() - t0), flush=True)
 print("\nverdict matrix for h (rows p, columns u = %s):" % us)
 for p in ps:

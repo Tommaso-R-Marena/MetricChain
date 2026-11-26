@@ -20,6 +20,15 @@ Related theorem, experiment, or publication:
 Related message/request IDs: SCI-RES-0007 §3, SCI-RES-0008 §3, SCI-MSG-0017; THY-RES-0008 §5; SCI-RES-0002 P-T3
 ```
 
+> **Note added at checkpoint 39 (SCI-RES-0009 §3).**  The attribution given below "from memory" is
+> confirmed and made precise: the sharp inequality with its extremal two-point law is Hoeffding
+> (1963), Theorem 3, (2.8) and (2.10); the weaker exponential form is Bennett's (1962), as Hoeffding
+> states.  The use of it as a certified second-order bound for free-energy perturbation was **not
+> found** in the literature searched, with one candidate paper unread (Decoster, J. Phys. A 37 (2004)
+> 9051–9070): "not found", not "new".  Two additions (an intermediate form, and a second-order bound
+> on the Gibbs–Bogoliubov side when the remainder has a ceiling) are in SCI-RES-0009 §3.  The text
+> below is left as sent.
+
 # "The typical norm sets the bracket, the floor sets the bill" — with an *a-priori* variance there is no bill: `K ≤ (σ²/b²)(e^b − 1 − b)`, and on 53 real instances this is within a few per cent of the truth
 
 **The statement [K for the inequality, from memory — Bennett 1962; sharp form checked on

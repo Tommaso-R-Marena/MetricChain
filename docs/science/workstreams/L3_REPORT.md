@@ -15,7 +15,8 @@ Labels: **[V]** machine-checked here (declaration named; the file compiled with 
     export PATH="$HOME/.lean/lean-4.31.0-linux/bin:$PATH"; cd /home/user/MetricChain; lake env lean <absolute path>
 
 exit code 0, no error, no warning; `#print axioms` is run at the end of each file for every headline
-theorem and printed `[propext, Classical.choice, Quot.sound]` each time (§ Appendix).  No `sorry`,
+theorem, and no line lists an axiom other than `propext`, `Classical.choice`, `Quot.sound` (90 of the
+91 lines list exactly these three; `addRight_fin_val` lists `propext`, `Quot.sound`) (§ Appendix).  No `sorry`,
 `admit`, `native_decide` or `axiom` occurs in any file.  Nothing was written outside
 `experiments/science/ws_L3/` and this report; no state-changing git command; `lake build`, `lake update`,
 `lake clean` were never run.  All declarations are in the namespace `ScienceL3` (`ScienceL3.A16`,
@@ -86,8 +87,8 @@ displayed bound at one instance; the display is nevertheless true as stated, wit
 
 | file | lines | theorems | imports | content |
 |---|---|---|---|---|
-| `Compensation.lean` | 1 825 | 106 | **Mathlib only** | the cone `𝒲_u` and the class `L_u`; Lemma 3 (i), (ii) and its Remark (1); Lemma 0 complete, also for conditional laws (A1.1 item 1); Lemma 2 |
-| `TheoremA.lean` | 3 362 | 166 | Mathlib + the theory division's `proofs.Frontiers.QueryLowerBound` and `proofs.Frontiers.NonAdaptive` (read-only: `MetricChain.QueryAlgorithm`, `expected_queries_ge_packing`, `nonadaptive_expected_queries_ge`) | Parts 1–6 = `Compensation.lean` verbatim; Part 7: Lemma 1 (a), (b); Part 8: the family of alternatives; Part 9: Theorem A, first display; Part 10: Chernoff form; Part 11: last display |
+| `Compensation.lean` | 1 948 | 119 | **Mathlib only** | the cone `𝒲_u` and the class `L_u`; Lemma 3 (i), (ii) and its Remark (1); Lemma 0 complete, also for conditional laws (A1.1 item 1); Lemma 2 |
+| `TheoremA.lean` | 3 408 | 169 | Mathlib + the theory division's `proofs.Frontiers.QueryLowerBound` and `proofs.Frontiers.NonAdaptive` (read-only: `MetricChain.QueryAlgorithm`, `expected_queries_ge_packing`, `nonadaptive_expected_queries_ge`) | Parts 1–6 = `Compensation.lean` verbatim; Part 7: Lemma 1 (a), (b); Part 8: the family of alternatives; Part 9: Theorem A, first display; Part 10: Chernoff form; Part 11: last display |
 | `A16Rearrangement.lean` | 344 | 22 | **Mathlib only** | Part 0 = the needed declarations of R8's `A16Core.lean`, verbatim; Part 1 (new): rearrangement, Lemma A16.5 given Harper |
 | `ChainRuleCube.lean` | 655 | 34 | **Mathlib only** | Part 0 = L2's chain rule (`ws_L2/Window.lean`, lines 69–93, 421–757), verbatim; Part 1 (new): A1.1 item 2 |
 
@@ -103,7 +104,7 @@ displayed bound at one instance; the display is nevertheless true as stated, wit
 | Lemma 1 (b) | `lemma1b` (`lemma1b_weighted`) | `TheoremA` |
 | Lemma 2, `e^r − 1 ≤ E_{k,r} ≤ e^r` | `lemma2_mass` (`excess_mass_bounds`) | `Compensation` |
 | Lemma 2, `|c_{k,r} − c₀(k/n)| ≤ 1/(e^r − 1)` | `lemma2_dens`, `densW_coneW` (`excess_mean_bound`; site by site: `lemma2_site`) | `Compensation` |
-| Lemma 2, "depend on `(k,r)` only"; the dip is in the class; `D_{s,r}` | `massW_densW_dipW_of_wt_eq`; `baseW_add_dipW_inCone`; `dipW_pos_iff` | `TheoremA`; `Compensation`; `TheoremA` |
+| Lemma 2, "depend on `(k,r)` only"; the dip is in the class; `D_{s,r}` | `massW_densW_dipW_of_wt_eq`; `baseW_add_dipW_inCone`; `dipW_pos_iff` | `Compensation` |
 | Lemma 3 (i) | `lemma3_i` (`margW_eq_densW`, `margW_add`) | `Compensation` |
 | Lemma 3 (ii) | `lemma3_compensation`, `lemma3_compensation_bernoulli` (`oneW_compensated`, `massW_compensated`) | `Compensation` |
 | Lemma 3, Remark (1) | `window_of_equal_marginals`, `lemma3_compensation_exists`, `no_compensation_at_upper_end`, `no_compensation_at_lower_end` | `Compensation` |
@@ -169,6 +170,7 @@ That my `coneW` and `baseW` are the report's `c̃_s` and `w̃_γ` is itself mach
 | statement (SF §2.0) | Lean | remarks |
 |---|---|---|
 | `ψ ∈ L_u ⟺ e^{−ψ} ∈ 𝒲_u` | `lipH_iff_inCone`; `inCone_iff_lipH_log` (`w ∈ 𝒲_u ⟺ −ln w ∈ L_u`, for `w > 0`) | through `lipH_iff_flip`: `L_u` = "changes by at most `u` under every single flip" (induction on the Hamming distance, `sub_le_mul_hammingDist`); no sign condition on `u` |
+| `L_u` is the theory division's class | `lipH_iff_sub_le` | `LipH u ψ ⟺ ∀ x y, ψ x − ψ y ≤ u·d_H(x,y)`, i.e. `MetricChain.Admissible (fun x y => u * hammingDist x y) ψ` unfolded (the form used by L1's `HammingLip` and in `Chain.a1_item2_lip`) |
 | `𝒲_u` closed under sums | `InCone.add`, `InCone.sum` (finite non-empty sums) | |
 | … positive multiples | `InCone.smul`; `InCone.add_smul` (`w + b·v`, `b ≥ 0`) | |
 | … pointwise max and min | `inCone_max`, `inCone_min` | |
@@ -324,9 +326,11 @@ For the dips (Part 6): `lemma2_mass` (`e^r − 1 ≤ massW (refW p) (dipW p u γ
 `u, γ, r`), `lemma2_dens` (`|densW (refW p) (dipW …) − densW (refW p) (coneW p u s)| ≤ 1/(e^r − 1)`,
 `r > 0`), `densW_coneW` (`dens(c̃_s) = (k·p₊ + (n − k)·p₋)/n = c₀(k/n)`, `k = wt s`),
 `baseW_add_dipW` and `baseW_add_dipW_inCone` (`w̃_γ + Δ_{s,r} = max(w̃_γ, e^r c̃_s) ∈ 𝒲_u` for `|γ| ≤ u`,
-`u ≥ 0`), `refW_mul_dipW` (`π·Δ_{s,r} = (e^r π_s − π_γⁿ)₊`); in `TheoremA.lean`:
+`u ≥ 0`), `refW_mul_dipW` (`π·Δ_{s,r} = (e^r π_s − π_γⁿ)₊`), `dipW_pos_iff`
+(`D_{s,r} = {Δ_{s,r} > 0} = {π_γⁿ < e^r π_s}`), and
 `massW_densW_dipW_of_wt_eq` (mass and density are the same for any two centres with the same number
-of ones — through `exists_perm_of_wt_eq`, `dipW_perm`).
+of ones — through `exists_perm_of_wt_eq`: two configurations with the same number of ones differ by a
+site permutation, and `dipW_perm`: `Δ_{s∘σ,r}(x∘σ) = Δ_{s,r}(x)`).
 
 **Differences.**  (1) The two bounds hold for any two probability vectors and any `[0,1]`-valued
 observable; the product structure enters only in "`π_s` and `π_γⁿ` are probability vectors" and in the
@@ -477,7 +481,7 @@ proved with the explicit depth `r = ln C_m + ε`: then `e^r − 1 ≥ 2/m̲ + 2/
 
 **Differences from the paper statement.**
 1. *Sites.*  `theoremA_fin` is the paper's setting; the translations `i ↦ i + a` of `Fin n` are the
-   cyclic shifts.  `theoremA_group` is more general: any group structure on the set of sites gives a
+   cyclic shifts (`addRight_fin_val`: `(i + a).val = (i.val + a.val) % n`).  `theoremA_group` is more general: any group structure on the set of sites gives a
    transitive group of order `n` (e.g. `ℤ₂ × ℤ₂`, `S₃`; checked numerically, §3).
 2. *Hypotheses dropped* because they follow from the others: `u > 0`, `n ≥ 2`, `1 ≤ k ≤ n − 1`
    (finding F3).  Kept: `0 < p < 1`, `|γ| ≤ u`, `r > 0`, `k ≤ n`, `(e^r − 1)ω_m > 1`; `[NeZero n]`.
@@ -487,7 +491,10 @@ proved with the explicit depth `r = ln C_m + ε`: then `e^r − 1 ≥ 2/m̲ + 2/
    finite seed space; the oracle answer is the vector `oracle1 (refW p) ψ ∈ Fin n → ℝ`; correctness
    is required on `L_u` only.  "With any hint" is the order of the quantifiers (`∃ ψ₀ … ∀ alg`: the
    algorithm may depend on `ψ₀`).
-5. `ε`, `δ` are arbitrary reals (for `δ ≥ ½` the bound is vacuous).
+5. `ε`, `δ` are arbitrary reals (for `δ ≥ ½` the bound is vacuous).  The correctness hypothesis is
+   satisfiable for `ε, δ ≥ 0` (`exists_correct_oracle_algorithm`: evaluate everywhere), and the
+   hypothesis `(e^r − 1)ω_m > 1` is satisfiable for every `0 < p < 1`, `u > 0`, `0 < k < n` (it is
+   derived for `r = ln C_m + ε` inside `theoremA_group_Cm`): the theorem is not vacuous.
 6. `H_{k,r}` is defined by counting: the maximum over `x` of `#{s : |s| = k, Δ_{s,r}(x) > 0}`, divided by
    `|T_k|` (`|T_k| = C(n,k)`: `card_wt_eq`).
 7. *Second display.*  Stated division-free, `1 − 2δ ≤ E|Q(ψ₀)|·n(n+1)·e^{tr}·ρ_t(k/n;γ)ⁿ`; the powers
@@ -704,10 +711,38 @@ A16.5 for every support.
     python3 experiments/science/ws_L3/assemble.py          # regenerates TheoremA.lean from its parts
     python3 experiments/science/ws_L3/sanity_numerics.py   # §3
 
-or `bash experiments/science/ws_L3/check_all.sh` (writes `check_log.txt`).  Each file ends with
-`#print axioms` for its headline theorems (35 + 32 + 8 + 11 = 86 lines); every line of the last run
-(`check_log.txt`, 2026-11-26 00:53–00:57 UTC: four exit codes 0, no warning) reads
-`… depends on axioms: [propext, Classical.choice, Quot.sound]`.
+or `bash experiments/science/ws_L3/check_all.sh` (writes `check_log.txt`; it also checks that
+`TheoremA.lean` is identical to the output of `assemble.py` and counts forbidden tokens).  Each file
+ends with `#print axioms` for its headline theorems (38 + 34 + 8 + 11 = 91 lines).  In the last run
+(`check_log.txt`, 2026-11-26 01:13–01:15 UTC: four exit codes 0, no error, no warning) 90 lines read
+`'ScienceL3.<name>' depends on axioms: [propext, Classical.choice, Quot.sound]` and one reads
+`'ScienceL3.addRight_fin_val' depends on axioms: [propext, Quot.sound]`; no other axiom occurs.  The
+names:
+
+* `Compensation.lean` — `lipH_iff_sub_le`, `lipH_iff_inCone`, `inCone_iff_lipH_log`, `InCone.add`, `InCone.smul`,
+  `inCone_max`, `inCone_min`, `margW_eq_densW`, `margW_add`, `lemma3_i`, `oneW_compensated`,
+  `massW_compensated`, `lemma3_compensation`, `lemma3_compensation_bernoulli`,
+  `window_of_equal_marginals`, `lemma3_compensation_exists`, `no_compensation_at_upper_end`,
+  `no_compensation_at_lower_end`, `window_of_site_odds`, `lemma0_window`, `lemma0_window_lipH`,
+  `lemma0_additive_fill`, `lemma0_rigidity`, `lemma0_rigidity_lipH`, `condMarg_eq`,
+  `condMarg_mem_window`, `condMarg_mem_window_lipH`, `excess_mass_bounds`, `excess_mean_bound`,
+  `baseW_eq`, `coneW_eq`, `baseW_add_dipW_inCone`, `lemma2_mass`, `lemma2_site`, `lemma2_dens`,
+  `densW_coneW`, `dipW_pos_iff`, `massW_densW_dipW_of_wt_eq`.
+* `TheoremA.lean` — `lemma3_i`, `lemma3_compensation`, `lemma3_compensation_bernoulli`,
+  `lemma0_window_lipH`, `lemma2_mass`, `lemma2_dens`, `lemma1a_weighted`, `lemma1a`, `lemma1a_div`,
+  `lemma1b_weighted`, `lemma1b`, `oracle_packing_weights`, `exists_correct_oracle_algorithm`,
+  `massW_densW_dipW_of_wt_eq`, `dipW_pos_iff`, `addRight_fin_val`, `barW_invariant`, `massW_barW`, `densW_barW`,
+  `baseW_add_barW_inCone`, `card_barW_ne_zero_le`, `exists_compensator`, `theoremA_group_sharp`,
+  `theoremA_group`, `Hkr_pos`, `theoremA_group_div`, `theoremA_fin`, `binomial_mode_bound`,
+  `card_wt_eq`, `Hkr_le_chernoff`, `theoremA_group_chernoff`, `theoremA_fin_chernoff`,
+  `theoremA_group_Cm`, `theoremA_fin_Cm`.
+* `A16Rearrangement.lean` — `A16.sum_eq_sum_f_add`, `A16.f_concaveOn`, `A16.F_eq_clip`, `A16.F_zero`,
+  `A16.sum_comp_le_of_card_le`, `A16.lemmaA16_5_of_harper`, `A16.tail_of_harper`,
+  `A16.lemmaA16_5_of_harper_ge`.
+* `ChainRuleCube.lean` — `Chain.klBound_pi`, `Chain.kl_additive_pi`, `Chain.klB_le_max`,
+  `Chain.klDivFin_bern`, `Chain.klBound_bool`, `Chain.a1_item2`, `Chain.a1_item2_lip`,
+  `Chain.a1_item2_additive`, `Chain.a1_item2_cone0`, `Chain.a1_item2_cone1`,
+  `Chain.a1_item2_isGreatest`.
 
 | file | content |
 |---|---|

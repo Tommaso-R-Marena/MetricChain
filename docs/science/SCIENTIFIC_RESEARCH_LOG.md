@@ -833,3 +833,44 @@ profile and the gauche count, and its support function is the ground-state energ
   to `1.63` with the data already in the repository.  Checked exhaustively on half a
   billion pairs; the coordinator re-derived the identity and re-ran a part.
 
+
+### Cycle 33 — what was already known, and what a compiler can vouch for (checkpoint 39)
+
+* **Workstream A3 reported (prior art for the theory division's box classes and for our
+  addendum A17).**  The outcome is the opposite of what the coordinator expected for
+  his own addendum: **the cost table of A17 is in print** — as the main result of a
+  preprint of February 2026 (Block and Shetty), the Rényi rows earlier — and so are the
+  Bennett bracket (Hoeffding's Theorem 3, 1963) and the chain version (Chazottes et al.,
+  2006).  The theory division's statements are in print piece by piece (Hoeffding;
+  Specht's ratio; the K\* stopping criterion; Liu–Fisher–Ihler's bracket), and what was
+  *not* found is their hinted cost as a theorem on query complexity.
+* **What we did with it.**  Twenty quoted passages were re-read by the coordinator in
+  the sources (all agree); A17 was corrected in place (marks "A3") with a section saying
+  what is in print and what remains ours; SCI-RES-0009 answers the theory division's
+  request and corrects our own SCI-RES-0007 §3, SCI-MSG-0017, -0018; `DEAD_ENDS.md` SD43
+  records the over-claim and its lesson.  The lesson: the coordinator had marked the
+  *positioning* "from memory" and still presented the table as "[P, coordinator]" and as
+  an extension of the collaborator's result — a claim of novelty whatever the caveat
+  said.  The search should have come back first.
+* **What the comparison produced.**  Three statements that are not in what was read,
+  all small: A17.6 sharpens by the factor `p/(p − 1)` (`D_2 ≤ Σc_i²/4`), through the
+  dictionary "the conditional law of a site in the true ensemble is a bounded-range
+  pair with the model's marginal"; at the centre of a constant box a hint is worth
+  nothing (`545` evaluations against `1088`), i.e. a hint buys the variance term of the
+  estimation problem and nothing else; and the Gibbs–Bogoliubov side improves to second
+  order under a ceiling.  All three re-derived and checked independently.
+* **What remains ours in A17** is the part no search could have replaced: the measured
+  prices on force-field instances (parts (6), (7), (9)) and the experiment beyond
+  enumeration that is running.
+* **Workstream L3 reported (Lean).**  Lemmas 0–3 and Theorem A of workstream F — the
+  theory division's Theorem 11.109a (a)–(c) — are machine-checked with nothing assumed,
+  on top of the theory division's two packing theorems; Lemma A16.5 given Harper's
+  theorem; Proposition A1.1 items 1–2.  Re-compiled by the coordinator.  The
+  formalisation found one remark of ours false at an end point, one limit that was not
+  needed, a sharper constant and three redundant hypotheses — the usual yield of
+  writing a proof for a reader who accepts nothing.  SCI-MSG-0019 delivers the files
+  the theory division asked for.
+* **The theory division's audit at `b2d3e9c`** was replicated on this machine: `AUDIT
+  PASSED` (62 Lean files, 3 603 declarations, 374 mutations of which 373 caught and one
+  expected pass, 124 baselines, 2 142 documented declarations) — `INDEPENDENT_VALIDATION.md`
+  §1.5.

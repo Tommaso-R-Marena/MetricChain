@@ -1102,10 +1102,23 @@ if the conjecture holds, at every accuracy.
 
 *Added at checkpoint 34.  Everything in this addendum is the coordinator's; it has been
 read by nobody else.  Labels as elsewhere: **[P]** proved here (with the check named),
-**[P-sketch]**, **[K]**, **[N]**, **[H]**.  Prior art has **not** been searched by the
-coordinator; a workstream (A3) is doing that, and every reference below is from memory
-and marked so.  Script: `experiments/science/pi_inference/renyi_ball_check.py` (two
-seconds; log and JSON next to it).*
+**[P-sketch]**, **[K]**, **[N]**, **[H]**.  Script:
+`experiments/science/pi_inference/renyi_ball_check.py` (two seconds; log and JSON next to
+it).*
+
+***Prior art — revised at checkpoint 39 (marks "A3").***  *Parts (0)–(9) were written
+before any literature search, with every reference "from memory".  Workstream A3 has now
+done the search (`workstreams/A3_REPORT.md`: 47 sources read in the passages that matter),
+and the coordinator has checked five of its citations against the sources.  The outcome
+is in the section **"What is in print, and what remains ours"** near the end of this
+addendum, and it changes what may be claimed: **the cost table of part (4) is in print —
+without a hint and in the sampling model — in a preprint of February 2026 (Block and
+Shetty, arXiv:2602.23535), the Rényi rows earlier (Kunsch–Novak–Rudolf 2019; heavy-tailed
+mean estimation); the inequality of part (7) is Hoeffding's Theorem 3 of 1963; part (8)
+is an inequality of Chazottes, Collet, Külske and Redig (2006).**  No mathematical
+statement of the addendum was found wrong; A17.6 is replaced by a sharper form.  The
+sentences that said "from memory" are corrected in place and carry the mark "A3"; the
+first wording is kept where a published message of ours quoted it.*
 
 **Why.**  We asked the theory division (P-T3) for "a certified typical-norm remainder
 for `ln Z`": our force-field pilot had found a solvent term close to a tractable class
@@ -1153,6 +1166,20 @@ numbers: `1088` evaluations at `ρ = 3`, `ε = 0.2`, `δ = 0.05` (ours: `1088`);
 floor of `3.7` and "about `7·10⁸`" at `15.6` for `ε = 0.1` (ours: `4 610`, `6.96·10⁸`); below
 `e^{0.0291n}` from `n ≈ 240` (ours: `240`).  **No error found.**  Two remarks on scope are in
 "Reading" below.
+*A3:* (a) is in print as stated — the right-hand inequality before the maximisation over
+the mean is Hoeffding (1963), Lemma 1 and eqs. (4.12)–(4.13) (with the same letter `L`), and
+`L(w) = ln S(e^w)` is the logarithm of Specht's ratio; a sharper form is free when the mean
+is known: `ln μ + E_π r ≤ −wp + ln(1 − p + pe^w)`, `p = (max r − E_π r)/w`.  (b) is the stopping
+criterion of the provable partition-function algorithms of computational protein design
+(Georgiev, Lilien and Donald 2008, Proposition 3) specialised to a constant floor.  And
+the count `1088` of (c)–(e) carries a factor two from mixing the two samplers half and
+half, **and the hint is not needed for it**: at the centre of a constant box the rule
+"stop when the first `N(v) = ⌈ln(1/δ)/q(v)⌉ + 1` values of the remainder are all equal to
+`v`", `q(v) = min{η_η/(e^{ρ₋+v} − 1), s_η}`, certifies with **`545` evaluations and no hint**
+(A3.3(a); our own check `a3_adoption_check.py`: exact failure probability over
+three-level members of the box `0.031 ≤ δ = 0.05`).  What a hint buys in general is the
+variance term of the estimation problem, and nothing at instances that are constant
+on the bulk.
 
 ### (1) Rényi balls: the floor is the case `p = ∞`
 
@@ -1202,8 +1229,10 @@ bound].**  (i) For `p ≥ 2` the plain estimator `μ̂ = N^{−1}Σ Y(x_i)`, `x_
 `[μ̂ − B/√(Nδ), μ̂ + B/√(Nδ)]` **is a certificate valid for every member and every `N`**
 (simulation on a log-normal instance: miss rate `0.006` at `δ = 0.1`), and relative
 accuracy `ε` needs about `e^{κ}/(δ s_ε²)` evaluations (`‖Y‖₂²/μ² ≤ (B/μ)^{p/(p−1)} = e^{κ}`).  (ii) For `1 < p < 2` the median of block means gives accuracy
-`ε` with `O(ln(1/δ)·e^{κ}/ε^{p/(p−1)})` evaluations (von Bahr–Esseen moment inequality and
-the usual median argument; standard — **[from memory]**).  (iii) In the worst case over
+`ε` with `O(ln(1/δ)·e^{κ}/ε^{p/(p−1)})` evaluations (the median of means under a moment of
+order `p ∈ (1, 2]` — *A3:* Bubeck, Cesa-Bianchi and Lugosi, arXiv:1209.1727, Lemma 2, read
+by the workstream in full; the matching lower bound is Devroye, Lerasle, Lugosi and
+Oliveira, arXiv:1509.05845, Theorem 3.1).  (iii) In the worst case over
 the class the variance term is needed without a hint: for instances `Y = 1 + a1_S` with
 `S` a random set of mass `q` the mean can only be learned by estimating `q`, which costs
 `σ²/(εμ)²`.  Hence
@@ -1212,11 +1241,16 @@ the class the variance term is needed without a hint: for instances `Y = 1 + a1_
     the hint saves the factor ε^{−(p−2)/(p−1)} for p > 2 and nothing for p ≤ 2.
 
 For `p = ∞` these are the two terms `σ²/(εμ)²` and `1/(εμ)` of the optimal stopping-rule
-theorem for `[0,1]`-valued variables (Dagum, Karp, Luby and Ross — **[from memory —
-unverified; workstream A3 is reading it]**) applied to `X = e^{−(r − lo)}` under the floor
-measure, whose mean is `Z(g)/Z(lo)`.  *If that reading is right, the hinted cost of the
-box-class theorem is the second term of a known bound and the new content is the
-query model, the hint, and the deterministic count.*
+theorem for `[0,1]`-valued variables (Dagum, Karp, Luby and Ross, SIAM J. Comput. 29
+(2000) 1484–1496) applied to `X = e^{−(r − lo)}` under the floor measure, whose mean is
+`Z(g)/Z(lo)`.  *A3:* the original could not be opened (eight routes tried); the theorem
+was read in three restatements — `T ≍ max(σ², εμ)·ln(2/δ)/(εμ)²` samples are sufficient
+and, for every stopping rule, necessary (Mnih, Szepesvári and Audibert, ICML 2008, §3) —
+and one of them reports that the published *proof* of the upper tail has a gap while
+the statement holds (Chen, arXiv:0711.2801, Appendix D): cite the theorem, not the proof.
+So the reading stands: **the hinted cost of the box-class theorem is the second term of
+a known bound; a hint removes the variance term and nothing else.**  And the whole of
+this proposition is in print: see "What is in print" below.
 
 ### (2) A Kullback–Leibler bound: possible, at an exponential price in the accuracy
 
@@ -1263,7 +1297,28 @@ divergence named; constants depend on `δ`):
 | mean, variance or any polynomial moment of `g − ĝ` under the model | the number of states | the number of states |
 | **a one-sided floor `b` below the mean *and* the variance `σ²` of `g − ĝ` under the model** (part (7)) | none beyond the mean: `ln Z` is bracketed within `W(b, σ²) ≈ (σ²/b²)(e^b − 1 − b)`; below that width, as in the first row | the mean: `σ²/(δε²)` |
 
-**The direction matters [P, trivial; reading H].**  Every row is a divergence of the
+*A3 — whose table this is.*  Rows 1–4, right-hand column, are the main result of Block
+and Shetty (arXiv:2602.23535v1, 26 February 2026; statements read by the coordinator):
+with samples of the model and the unnormalised density ratio at the samples,
+`γ_f(6D_f/ε)·ln(1/δ)/ε ∨ c²/ε²` samples suffice for a `(1 ± ε)` estimate of the partition
+function (their Theorem 5) — `e^{κ}ε^{−p/(p−1)}` for Rényi order `1 < p ≤ 2`, `ε^{−2}` beyond,
+`exp(c·κ/ε)/ε` for Kullback–Leibler — with lower bounds `γ_f(C/(2ε))/ε` (Theorem 8), `ε^{−2}`
+under a bounded density ratio (Proposition 2) and impossibility when `f` is linear
+(Proposition 1).  So the fourth row should read `exp(Θ(κ/ε))/ε` in both columns, proved
+there beyond the centre.  The exponent `max{2, p/(p−1)}` with lower bounds for all
+randomised algorithms that use function values is earlier: Kunsch, Novak and Rudolf
+(arXiv:1805.08637; J. Complexity 53 (2019)), Theorems 3.9, 3.10 and Corollary 3.14, for
+absolute error and central norms.  The left-hand column is their Theorem 6 re-read: a
+one-sided estimator, `(1 − ε)Z ≤ Ẑ ≤ M·Z`, from `ln(1/δ)·M/ε` samples with `M = γ_f(6D_f/ε)` —
+"no mass was missed" at the hinted cost, *without* a hint; a hint replaces their loose
+upper tail by the claimed value.  The fifth row was not found stated and is elementary;
+the sixth is part (7).
+
+**The direction matters [P, trivial; reading H].**  (*A3:* in print — "exclusive"
+divergences "exclude parts of the target", Minka, MSR-TR-2005-173 (2005); as an estimate
+of sample sizes in free-energy perturbation, Jarzynski, arXiv:cond-mat/0603185, eq. (45);
+as a theorem at one pair of ensembles, Chatterjee and Diaconis, arXiv:1511.01437,
+Theorem 1.1.)  Every row is a divergence of the
 *true ensemble from the model*, `D(π_g‖π)`.  The variational (Gibbs–Bogoliubov) principle
 minimises the opposite one, `D_1(π‖π_g) = ln μ + E_π r`, which is the gap of the *cheap* side
 of the bracket.  A model chosen variationally is optimal for the side that costs a mean
@@ -1287,34 +1342,68 @@ two columns do not see the basin at all.
 
 ### (5) Where a divergence bound comes from: first-order classes on product measures
 
-**Proposition A17.6 [P; 600 random members of the cube class by enumeration, three
-orders: no violation, largest ratio `0.67`].**  Let `π` be a product measure on a product
-space and let `r` have one-site oscillations `c_i` (changing coordinate `i` changes `r` by
-at most `c_i`); `K := Σ_i c_i²`.  Then for every `p > 1`
+**Proposition A17.6 — sharp form, replacing the first one at checkpoint 39 [P by
+workstream A3 (its A3.2), proof read and re-derived by the coordinator; a direct
+corollary of two statements in the differential-privacy literature, see below; checked
+twice independently: A3's `check_math.py` C5 (1 200 members) and our
+`a3_adoption_check.py` (898 members, seven orders, 50 digits): no violation, largest
+ratio `0.993`].**  Let `π` be a product measure on a product space and let `r` have
+one-site oscillations `c_i` (changing coordinate `i` changes `r` by at most `c_i`);
+`K := Σ_i c_i²`; `L` as in part (0).  Then for every `p > 1`
 
-    D_p(π_g ‖ π)  ≤  p²K / (8(p − 1)),        in particular   D_2 ≤ K/2,
+    D_p(π_g ‖ π)  ≤  Σ_i [ (p − 1)c_i²/8 + L(c_i) ]  ≤  pK/8,       and      D_1(π_g ‖ π)  ≤  Σ_i L(c_i)  ≤  K/8;
 
-so plain sampling from `π` certifies `ln Z` within `ε` with at most `e^{K/2}/(δ s_ε²)`
-evaluations, by the bracket of A17.3(i) with `B = exp(−E_π r + K/4)` (`E_π r` itself is a mean
-of a function with bounded differences and costs `O(K ln(1/δ)/ε²)` more).
-*Proof.*  McDiarmid's bound on the moment generating function (Hoeffding's lemma along
-the martingale of coordinates **[K, standard]**): `E_π e^{−p(r − E_π r)} ≤ e^{p²K/8}`; and
-`μ ≥ e^{−E_π r}`.  ∎
+in particular `D_2 ≤ K/4`.  So plain sampling from `π` certifies `ln Z` within `ε` with at
+most `e^{K/4}/(δ s_ε²)` evaluations: `‖Y‖₂ = μ·e^{D_2/2} ≤ μ·e^{K/8}`, so by Chebyshev's
+inequality `|μ̂ − μ| ≤ t·μ` with probability at least `1 − δ`, `t := e^{K/8}/√(Nδ)` — a bracket in
+relative form, `μ̂/(1 + t) ≤ μ ≤ μ̂/(1 − t)`, that needs nothing but `K` (not even `E_π r`).
+*Proof (A3).*  (i) *One site.*  If `P ∝ Q e^{−ρ}` with `osc ρ ≤ c`, then `Λ = ln(dP/dQ)` has
+range at most `c`; `D_p(P‖Q) = (p−1)^{−1} ln E_P e^{(p−1)Λ}`; by Hoeffding's lemma under `P`,
+`ln E_P e^{(p−1)(Λ − E_PΛ)} ≤ (p−1)²c²/8`, and `E_P Λ = D_1(P‖Q)` is the Jensen gap of `−Λ` under `P`
+(because `E_P e^{−Λ} = 1`), hence at most `L(c)`.  (ii) *Conditionals are one-site tilts.*
+`π_g(x_i | x_{<i}) ∝ π_i(x_i)·ψ_i(x_{≤i})`, `ψ_i = E_{π_{>i}} e^{−r(x_{≤i}, ·)}`, and `ψ_i` changes by a factor
+at most `e^{c_i}` when `x_i` changes, because `r` changes by at most `c_i` pointwise.
+(iii) *Chain rule.*  `E_π (dπ_g/dπ)^p = E_π Π_i ρ_i^p` with `ρ_i` the conditional density ratios;
+integrate out the last coordinate first and use (i) conditionally.  ∎
+*In print (A3; both passages read by the workstream, the first also by the
+coordinator).*  Step (i) is "an `α`-bounded-range mechanism" has privacy-loss moment
+generating function `≤ e^{λ²α²/8}` and mean privacy loss `≤ α/(e^α − 1) − 1 − ln(α/(e^α − 1))`
+(Cesar and Rogers, arXiv:2004.07223, Lemma 3.2 — the second expression is `L(α)`); step
+(iii) is the composition property of Rényi divergences (Bun and Steinke,
+arXiv:1605.02065, Lemma 2.2).  The dictionary is step (ii): *the conditional law of a
+site in the true ensemble, given the earlier sites, is a bounded-range pair with the
+model's marginal.*
+*The first form, and what changed.*  As first written (checkpoint 34, quoted in
+SCI-RES-0007 §3 and in the digest) the proposition read `D_p ≤ p²K/(8(p − 1))`, `D_2 ≤ K/2`,
+by McDiarmid's bound `E_π e^{−p(r − E_π r)} ≤ e^{p²K/8}` and `μ ≥ e^{−E_π r}`.  That is true and
+weaker by the factor `p/(p − 1)` — two at `p = 2`, unbounded as `p → 1`, where the first form
+diverges and the sharp one tends to the classical `K/8`.  The first form discards the
+term `−p·ln E_π e^{−(r − E_π r)}`; the composition route keeps it.
 *Sharpness.*  At the additive instance `r = u|x|` on the uniform cube
-`D_2 = n ln(1 + tanh²(u/2)) ≈ K/4` (exact; checked at `n = 12`), so the bound loses a factor
-two in the exponent there.
+`D_2 = n ln(1 + tanh²(u/2))`, and the sharp bound is `n(u²/8 + L(u))`: ratio `0.997` at `u = 0.1`,
+`0.93` at `u = 0.5`, `0.78` at `u = 1` — attained as `u → 0` (exact; `a3_adoption_check.py`).
 *What it says and does not say.*  At a fixed slope per site `K = nu²` and the cost is
-`e^{nu²/2}` — exponential, with a worse exponent than the optimal non-adaptive sampler
+`e^{nu²/4}` — exponential, with a worse exponent than the optimal non-adaptive sampler
 of the theory report (`a(u) ≈ u²/8` at small `u`): **nothing new about the exponents.**  What
 it adds is the regime the fixed-slope asymptotics never see: **if the first-order
 constants are square-summable, `Σ_i c_i² ≤ K` independently of the size, certification by
-plain reweighting is polynomial — `e^{K/2}/ε²` evaluations — with no hint, no adaptivity
+plain reweighting is polynomial — `e^{K/4}/ε²` evaluations — with no hint, no adaptivity
 and a certificate that is two lines long.**  A remainder made of many weak site terms
-(`c_i ≈ 0.1 k_BT` on 200 sites: `K = 2`, a factor `e`) is of this kind; a remainder with `c_i ≈ 1 k_BT`
-is not beyond about 30 sites (`e^{15} ≈ 3·10⁶`).  For a known part with interactions `π` is
-not a product; the same bound with a constant depending on the mixing of `π` is known
-for Gibbs measures in the uniqueness regime (**[from memory — unverified]**), and is
-exactly the theory division's open request P2-T3 in another form.
+(`c_i ≈ 0.1 k_BT` on 200 sites: `K = 2`, a factor `e^{0.5}`) is of this kind; a remainder with
+`c_i ≈ 1 k_BT` is not beyond about 60 sites (`e^{15} ≈ 3·10⁶`; "30 sites" with the first form).
+*A reference with interactions.*  `π` is then not a product.  Two things are known
+(A3, §4.11 and the remark after its A3.2).  (a) The *first* form survives with a
+mixing constant: by the coupling inequality of Chazottes, Collet, Külske and Redig
+(arXiv:math/0503483, Theorem 1 and its proof, eqs. (9)–(10); read by the coordinator),
+`ln E_π e^{λ(r − E_π r)} ≤ λ²‖Dδr‖²/8` with `D` the matrix of coupling probabilities, so
+`D_p(π_g‖π) ≤ p²‖D‖²K/(8(p − 1))`; for Gibbs fields under Dobrushin's condition the
+statement is attributed there to Külske (Comm. Math. Phys. 239 (2003); not opened).
+Part (8) is this inequality for a Markov chain.  (b) The *sharp* form holds for any
+reference with `c_i` replaced by `c̃_i := sup_{x_{<i}} osc_{x_i} F_i`, `F_i = −ln E_π[e^{−r} | x_{≤i}]` the
+conditional free energy of the remainder — but `c̃_i` is an exponential functional that a
+coupling matrix does not bound, so for interacting references the citable bound keeps
+the factor `p/(p − 1)`.  How large the `c̃_i` are along a real chain model is not known
+(the theory division's open request P2-T3 in another form).
 
 ### (6) The prices on real instances [M, exact enumeration; added at checkpoint 36]
 
@@ -1364,7 +1453,9 @@ What the numbers say.
    135 rows (it is not a theorem here: the reference is pairwise, not a product) by a
    factor of at least `3.6`, typically 10–100: for Val₁₂ on the strand `2.96` against `0.024`.
    A certificate through first-order constants would price valine at `e^{0.25n}`, the truth
-   is `e^{0.002n}`.
+   is `e^{0.002n}`.  (*A3:* with the sharp constant of A17.6, `K/4` in place of `K/2`, every
+   factor in this item halves — at least `1.8`, `1.48` against `0.024` for Val₁₂, a price of
+   `e^{0.12n}` — and the conclusion is the same.)
 
 **Second batch — charged, aromatic and mixed sequences [M; added after checkpoint 36;
 `surrogate_divergence_real2.py`, two minutes].**  The 29 instances of P2 whose domain is
@@ -1412,8 +1503,13 @@ The measurement of (6) says that for the remainder beyond the pairwise fit the
 chi-square divergence is `10⁻³` while the sup-norm width is up to `15 k_BT`.  The
 elementary reason has a certificate attached.
 
-**Proposition A17.7 (Bennett bracket) [K for the inequality — Bennett 1962, Hoeffding 1963,
-from memory; the sharp form checked on 20 000 random laws: no violation, equality at
+**Proposition A17.7 (Bennett bracket) [K for the inequality — *A3:* Hoeffding 1963,
+Theorem 3: inequality (2.8), "the best that can be obtained" under a one-sided bound and
+a variance, with the extremal two-point distribution (2.10); the weaker exponential
+form (2.9) "is due to Bennett" (1962, his inequality (8b)), as Hoeffding writes — page 16
+of the original read by the workstream and by the coordinator; at the level of the
+moment generating function, with the extremal law: Fan, Grama and Liu, arXiv:1109.4359,
+Lemma 3.1.  The sharp form checked on 20 000 random laws: no violation, equality at
 the two-point law].**  Let `r = g − m`, expectations under `π_m`.  Write
 `ln Z(g) − ln Z(m) = −E r + K`, `K = ln E e^{−(r − E r)} ≥ 0` (the Jensen gap; it is also
 `D_1(π_m‖π_g)`).  If `r ≥ E r − b` (a one-sided floor `b > 0` below the mean) and `Var r ≤ σ²`, then
@@ -1435,7 +1531,35 @@ a dip has probability at most `σ²/b²` and contributes at most `(σ²/b²)e^{b
 it is ever sampled.  Below the width `W` the first row of the table applies again.
 *Against Theorem 11.110(a) of the theory report:* its bound `L(w)` on the same gap uses
 the two-sided width only; `W` uses the one-sided floor and the variance, and reduces to
-a bound of the same kind when the variance is as large as the range allows.
+a bound of the same kind when the variance is as large as the range allows.  (*A3:*
+the two are the two moment-generating-function lemmas of one paper — range and mean,
+Hoeffding's Theorem 2; a one-sided bound and the variance, his Theorem 3.)
+
+**Two additions from the search [K → P; A3 §4.11(c′); both checked by A3 (C9) and by us
+(`a3_adoption_check.py`, 29 107 random laws: no violation)].**  (i) Between the two forms
+of the upper bound sits a third: `W(b, σ²) ≤ ln(1 + (σ²/b²)(e^{b} − 1 − b)) ≤ (σ²/b²)(e^{b} − 1 − b)`.
+(ii) **The cheap side improves to second order as well, if the remainder also has a
+ceiling:** if `r ≤ E r + a` everywhere, then
+
+    K  ≥  ln( 1 + Var(r)·(e^{−a} − 1 + a)/a² ),
+
+so with a floor *and* a ceiling the error of first-order perturbation theory is
+bracketed from both sides at second order — `K ≈ Var(r)/2` with certified corrections —
+where Gibbs–Bogoliubov alone says only `K ≥ 0`.  (This side needs the variance itself,
+or a lower bound on it, not an upper bound.)  Both are the theorem of Liao and Berg
+("Sharpening Jensen's inequality", arXiv:1707.08644, Theorem 1 with Lemma 1) applied to
+the exponential function.
+
+**Its use as a certificate was not found in the free-energy literature [A3: two
+extended web searches, four PubMed queries, one Consensus query, eleven arXiv
+queries].**  There the rigorous bracket is the two-sided Bogoliubov inequality, which
+needs averages under *both* ensembles; the second-order ("mean–variance") truncation
+computed from the reference alone is called an approximation that "we cannot expect …
+to provide an upper or lower bound" (Delle Site and Hartmann, arXiv:2403.10918, §3.3, as
+quoted by the workstream), and its convergence is judged empirically.  **"Not found" is
+all that is claimed:** one paper that states rigorous generalisations of the
+Gibbs–Bogoliubov inequality to higher order — Decoster, J. Phys. A 37 (2004) 9051–9070 —
+could not be opened, and has to be read before this use is called new.
 
 **On the real instances [M; `experiments/science/pi_inference/bennett_bracket_real.py`,
 exact sums; 53 instances of both batches, three surrogates, 159 rows; `b` and `σ²` are the
@@ -1460,8 +1584,11 @@ terms) `W` is as useless as every other bound: Bennett's inequality is exponenti
 an explicit sum of local tables (third-order terms obtained from triples: `O(n³k³)`
 evaluations instead of `kⁿ`) and a model with tractable marginals, `E_m r` and `Var_m r` are
 exact finite sums — no sampling, no assumption.  For a product reference and one-site
-oscillations `c_i`: `Var r ≤ ¼Σc_i²` (Efron–Stein **[K, from memory]**); for a reference with
-interactions a Poincaré constant of the model enters.  A variance *estimated* from
+oscillations `c_i`: `Var r ≤ ¼Σc_i²` (the tensorization of the variance, "sometimes called
+the Efron–Stein inequality", with the bounded-differences corollary — *A3:* van Handel,
+*Probability in High Dimension*, lecture notes of 21 December 2016, Theorem 2.3 and
+Corollary 2.4, read by the workstream; Efron and Stein's own paper was not opened); for
+a reference with interactions a mixing constant of the model enters (part (8)).  A variance *estimated* from
 samples is not such a bound (it misses the rare state that matters; with a two-sided
 range `B` its sampling error costs `e^{2b}` samples to make harmless).  (ii) *The floor.*
 One-sided, for the remainder beyond pairwise: by analysis of the energy function —
@@ -1476,9 +1603,18 @@ A17.6 and the variance bound of (7) assumed a product reference.  A known part w
 nearest-neighbour couplings along the chain is a Markov chain, and the martingale
 method gives the same statements with computable constants.
 
-**Proposition A17.8 (Markov-chain reference) [P — the martingale method; in the
-literature for Markov chains under the names of Marton and of Kontorovich–Ramanan,
-**from memory, unverified**; 700 random chains and remainders by exact enumeration, `n ≤ 9`,
+**Proposition A17.8 (Markov-chain reference) [P — the martingale method.  *A3: in
+print.*  The bound on the moment generating function is inequality (10) in the proof
+of Theorem 1 of Chazottes, Collet, Külske and Redig, "Concentration inequalities for
+random fields via coupling", arXiv:math/0503483 — `exp(λ²‖Dδg‖²/8)` with `D` the matrix of
+coupling probabilities; for a Markov chain coupled as in the proof below `(Dδr)_i ≤ C_i`,
+which is the statement here (passage read by the coordinator).  In the uniform form,
+with `M_n = max_i(1 + θ_i + θ_iθ_{i+1} + ⋯)` and a constant that is not sharp by a factor
+four: Kontorovich and Ramanan, Ann. Probab. 36 (2008) 2126–2158, Theorem 1.2 (read by the
+coordinator in the arXiv version math/0609835).  Marton's papers of 1995–1998, which
+both cite for contracting chains, were not opened.  The variance bound with the
+constant `¼` is the same martingale with "range `C_i` ⇒ variance `≤ C_i²/4`"; their Theorem 2
+has another constant.  700 random chains and remainders by exact enumeration, `n ≤ 9`,
 alphabets of 2–4 letters: no violation, largest ratios `0.98` for the variance and the
 moment generating function].**  Let `π` be a Markov chain on `S_1 × … × S_n` with kernels
 `P_k` from `x_k` to `x_{k+1}` and Dobrushin coefficients
@@ -1487,7 +1623,10 @@ moment generating function].**  Let `π` be a Markov chain on `S_1 × … × S_n
     C_i := Σ_{j ≥ i} c_j · θ_i θ_{i+1} ⋯ θ_{j−1}        (C_i = c_i for a product measure; C_i = Σ_{j≥i} c_j if nothing mixes).
 
 Then `Var_π r ≤ ¼ Σ_i C_i²` and `ln E_π e^{λ(r − E r)} ≤ λ² Σ_i C_i²/8` for every real `λ`; hence, for
-`π_g ∝ π e^{−r}`, `D_p(π_g‖π) ≤ p² Σ_i C_i²/(8(p−1))`, in particular `D_2 ≤ Σ_i C_i²/2`.
+`π_g ∝ π e^{−r}`, `D_p(π_g‖π) ≤ p² Σ_i C_i²/(8(p−1))`, in particular `D_2 ≤ Σ_i C_i²/2`.  (*A3:* this
+divergence bound keeps the factor `p/(p − 1)` that the sharp form of A17.6 removes for
+product references; the sharp route does not pass through a coupling — see the last
+paragraph of part (5).)
 *Proof.*  Let `M_i = E[r | x_1 … x_i]`.  For two values `a, a′` of `x_i` and the same past, couple
 the two futures by the maximal coupling of each transition, staying together once
 they meet: `P(x_j ≠ x′_j) ≤ θ_i ⋯ θ_{j−1}`.  Since `r(x) − r(x′) ≤ Σ_j c_j 1[x_j ≠ x′_j]`, the two
@@ -1500,8 +1639,8 @@ and (7) hold for a chain with `c` replaced by `c/(1 − θ)` — a correlation l
 of sites.  Everything is computed from the transfer matrices of the known part; no
 sampling and no enumeration.  For a known part of bounded tree-width, block the sites.
 *What it does not give.*  The size of the bound: on the real instances of (6) even the
-product-measure form is 4–100 times above the measured `D_2`, and `1/(1−θ)²` makes it
-worse.  It is a certificate of the right kind with the wrong constant for apolar side
+product-measure form is 4–100 times above the measured `D_2` (2–50 times with the sharp
+constant of A17.6), and `1/(1−θ)²` makes it worse.  It is a certificate of the right kind with the wrong constant for apolar side
 chains; the sharper inputs remain the one-sided floor and the variance of (7).
 
 ### (9) Is a chain enough as the tractable model? [M, exact enumeration; added after checkpoint 37]
@@ -1545,6 +1684,69 @@ expansions, a smaller instance), and the remainder statistics at that size are a
 extrapolation until measured (workstream P3 was told).  Homopeptides only; no charged
 side chains in this part (their domains are not products).
 
+### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
+
+`workstreams/A3_REPORT.md` has the statements side by side, the reading level of every
+source, the search log, and what could not be accessed.  The coordinator checked
+against the sources: Block–Shetty (Theorems 5, 6, 8, Propositions 1, 2), Hoeffding 1963
+(pages 16, 20–22 of the scanned original: Theorem 3 with (2.8)–(2.10) and the sentence on
+Bennett; Lemma 1; (4.12)–(4.16)), Georgiev–Lilien–Donald 2008 (Proposition 3 in the PubMed
+Central text; record according to PubMed: J Comput Chem 29(10):1527–42,
+[doi:10.1002/jcc.20909](https://doi.org/10.1002/jcc.20909)), Cesar–Rogers (Lemma 3.2),
+Chazottes–Collet–Külske–Redig (Theorem 1 and (9)–(10)), Kontorovich–Ramanan (Theorem 1.2),
+and fourteen shorter passages (the list of all twenty is in SCI-RES-0009 §4).  Every
+quotation agreed.  A3's own three statements (its A3.1–A3.3)
+were re-derived and re-checked (`a3_adoption_check.py`), and its script was re-run from
+a clean state to its last line with identical output.
+
+| statement of this addendum | status after the search | the source to cite |
+|---|---|---|
+| (0)(a) Jensen bracket with `L(w)`, two-point law extremal | **in print as stated** | Hoeffding 1963, Lemma 1, (4.12)–(4.15); `L(w) = ln` of Specht's ratio (Specht 1960, as quoted by Fujii–Lee–Seo 2002); the "maxkl" of bounded-range mechanisms (Dong–Durfee–Rogers, arXiv:1909.13830) |
+| (0)(b) deterministic certificate on a box; `q*` | known special case; the necessity half elementary | Georgiev–Lilien–Donald 2008, Proposition 3 |
+| (0)(c)–(e) hinted cost `Θ((Z(lo)/Z − 1)/ε)` (the theory division's theorem) | the cost quantity and both mechanisms are corollaries of known statements; **not found as a theorem on hinted query complexity of a box class** | Liu–Fisher–Ihler (NeurIPS 2015), Proposition 3.1, Corollary 3.2; Aaronson, arXiv:quant-ph/0210020, Definition 3, Lemma 5 (randomised certificate complexity — the framework of "with a hint"); Dagum–Karp–Luby–Ross 2000 through restatements; Block–Shetty, Theorem 6 |
+| A17.1 (detection lemma) | Hölder; analogues in print | Block–Polyanskiy, arXiv:2302.04658, Lemma 27 |
+| A17.2 (hinted cost `e^{κ}/ε^{p/(p−1)}`) | **direct corollary**: the count is Block–Shetty's Theorem 6, the lower-bound instance their Theorem 8 | Block–Shetty |
+| A17.3 (unhinted, `ε^{−max(2, p/(p−1))}`), A17.4 (Kullback–Leibler, `exp(Θ(κ/ε))`) | **in print** (sampling model; A17.4 there beyond the centre and with one more factor `1/ε`) | Block–Shetty, Theorems 5, 8, Propositions 1, 2; Kunsch–Novak–Rudolf 2019; Bubeck et al.; Devroye et al. |
+| A17.5(i) | in print in spirit (linear `f`) | Block–Shetty, Proposition 1 |
+| A17.5(ii) (no polynomial moment of the remainder energy suffices) | elementary; not found stated; in the sampling model an instance of Bahadur–Savage 1956 (not opened; via Wang–Ramdas) | — |
+| "the direction matters" | in print | Minka 2005; Jarzynski 2006, eq. (45); Chatterjee–Diaconis, Theorem 1.1 |
+| A17.6 (product reference) | **direct corollary**, in the sharp form now stated | Cesar–Rogers, Lemma 3.2; Bun–Steinke, Lemma 2.2 |
+| A17.7 (Bennett bracket): the inequality, its extremal law, the variance input | **in print as stated** | Hoeffding 1963, Theorem 3, (2.8)–(2.10); Fan–Grama–Liu, Lemma 3.1; van Handel's notes, Theorem 2.3, Corollary 2.4 |
+| A17.7 used as a certified second-order bound for free-energy perturbation | **not found** (Decoster 2004 unread) | set against Delle Site–Hartmann 2024 |
+| A17.8 (Markov-chain reference) | **in print** | Chazottes–Collet–Külske–Redig, proof of Theorem 1, (9)–(10); Kontorovich–Ramanan, Theorem 1.2 |
+| parts (6), (7), (9), (10): the measured prices on force-field instances | ours (measurements; no prior-art question) | — |
+
+**What remains ours, stated without inflation.**  (1) The *reading* of the table as a
+verification cost: with a hint the one-sided cost is the whole cost, so verification is
+cheaper than estimation exactly for `p > 2`; and its converse, which is A3's: at an
+instance that is constant on the bulk the hint is worth nothing (`545` evaluations
+against the `1088` quoted with a hint).  (2) The negative statement A17.5(ii) and its
+consequence for what a fit may claim.  (3) A17.6 in the sharp form — a two-line corollary
+of the differential-privacy literature that we did not find applied to remainders of a
+force field.  (4) The use of Hoeffding's Theorem 3 as a certificate for first-order
+perturbation theory — "not found", pending Decoster.  (5) **The measurements**: which row
+of the table real remainders are in (parts (6), (7), (9), (10)).  That last item is the
+part of this addendum that no search could have replaced.
+
+**Three sentences of ours and of the theory division that say more than the literature
+allows (A3 §4.8).**  (i) "What must be certified is the floor, and nothing else can
+replace it" (THY-RES-0007 §4) — contradicted as a literal statement by the heavy-tail
+literature and by Block–Shetty; what is true, and is Bahadur–Savage, is that *some*
+a-priori control of the upper tail of the Boltzmann factor is indispensable.  This
+addendum said so; the literature said it first.  (ii) "With a hint" overstates what the
+hint does (above).  (iii) The headline `Θ((Z(lo)/Z(g) − 1)/ε)` drops the bump term
+`(1 − Z(hi)/Z(g))/(1 − e^{−ε})`, which is the whole cost near the floor, where the headline
+reads zero.  And one of ours: "(the lower bound) costs a mean" is the cost of the
+Gibbs–Bogoliubov bound, which is not `ε`-tight; an `ε`-tight lower bound on `Z` costs the
+variance term — in `ε`, the "expensive" side of the certificate is the cheap one
+(Block–Shetty, Theorems 5–6, Proposition 2).
+
+**Not accessed (so nothing here rests on them):** the original of Dagum–Karp–Luby–Ross;
+Bennett 1962; pages 23–30 of Hoeffding 1963 (the proof of Theorem 3); Specht 1960;
+Bahadur–Savage 1956; Külske 2003; Marton's papers; Efron–Stein 1981; Decoster 2004;
+Block–Shetty's appendices (their Theorems 6 and 8 are taken as stated in a preprint
+nine months old).
+
 ### Reading (kept apart from the statements)
 
 1. **"Independent of the size of the system" is true of a constant box and moves the
@@ -1586,11 +1788,15 @@ side chains in this part (their domains are not products).
 
 ### What is not done
 
-No second reader.  No prior-art search by the coordinator (A3).  The lower bound of
-A17.3(iii) is a sketch.  A17.4 is proved at the centre only.  The instance-optimal
-sampler for `p < ∞` (the analogue of the dip-weighted sampler of the box) was not looked
-for.  A17.6 for non-product references is a pointer, not a statement.  Parts (6), (7)
-compare with exact enumerations of a force-field model on rotamer grids, not with a
-laboratory measurement; their floors, variances and divergences are computed by
-enumeration and are prices, not certificates.  Bennett's and the Efron–Stein inequality
-are quoted from memory (the first is checked numerically in its sharp form).
+No second reader of the proofs of A17.1–A17.5 (workstream A3 compared statements with
+the literature and did not referee them; it re-derived A17.6 in a sharper form).  The
+prior-art search is A3's, with its limits listed above ("Not accessed").  The lower
+bound of A17.3(iii) is a sketch — in print as a theorem in the sampling model
+(Block–Shetty; Kunsch–Novak–Rudolf), not proved here in the query model on a finite
+space with atoms.  A17.4 is proved here at the centre only (in print beyond it).  The
+instance-optimal sampler for `p < ∞` (the analogue of the dip-weighted sampler of the
+box) was not looked for.  For non-product references the sharp form of A17.6 needs the
+ranges of the conditional free energy of the remainder, which nobody has measured on a
+real chain model.  Parts (6), (7), (9) compare with exact enumerations of a force-field
+model on rotamer grids, not with a laboratory measurement; their floors, variances and
+divergences are computed by enumeration and are prices, not certificates.

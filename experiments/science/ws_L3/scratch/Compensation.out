@@ -1,3 +1,4 @@
+'ScienceL3.lipH_iff_sub_le' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.lipH_iff_inCone' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.inCone_iff_lipH_log' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.InCone.add' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -33,3 +34,5 @@
 'ScienceL3.lemma2_site' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.lemma2_dens' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.densW_coneW' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.dipW_pos_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.massW_densW_dipW_of_wt_eq' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -139,16 +139,29 @@ blocks XXII–XXIII, XIV.5, XX.5, XXI.6, DEAD.25–27.  *Kind of check:* a re-ru
 script on a third machine — a replication of the computation, not a review of what the
 statements say (workstream R9 reads two of the new Lean files against the prose).
 
-### 1.5 The theory division's audit at its head `b2d3e9c` (fifteenth checkpoint)
+### 1.5 The theory division's audit at its head `b2d3e9c` (fifteenth checkpoint) — passes on this machine
 
-Started 2026-11-26 00:01 UTC on this machine, the same way as §1.4 (their script,
-unmodified, on an export of their tree; the build directory of the run at `658b77f`
-re-used).  **Still running when checkpoint 36 was committed**; the result is added at the
-next checkpoint.  New at this commit: `proofs/Frontiers/BoxClass.lean` and
-`MonotoneSandwich.lean` — the latter is our `experiments/science/ws_L2/Sandwich.lean` as
-published at `9a0865f`: compared with `diff` by the coordinator, the only differences are
-their provenance paragraph (8 lines) and the removal of our closing `#print axioms` block
-(71 lines).
+| item | value |
+|---|---|
+| command, tree | as §1.4: `bash scripts/audit_all.sh`, unmodified, on `git archive b2d3e9c` extracted outside the repository; the build directory of the run at `658b77f` re-used |
+| start / end (UTC) | 2026-11-26 00:09:02 / 01:04:13 (55 min wall clock on a machine with a load average of 12–14; 31 min of CPU) |
+| result | **`AUDIT PASSED`**, exit code 0 |
+| Lean | **62 files, 34 078 lines; `Build completed successfully (8620 jobs)`**; forbidden-token scan: none |
+| axiom audit | **`AXIOM AUDIT OK: 3603 declarations`** use only `propext`, `Classical.choice`, `Quot.sound`; 434 headline theorems checked |
+| harness (quick mode) | `ALL TESTS BEHAVE AS EXPECTED` |
+| mutation tests | **374 mutations: 373 caught, 1 expected pass, 0 not as expected**; 124 baseline runs of the unmutated harness, all as expected |
+| benchmarks, reference checker, conformance vectors, doc references | pass (2 142 declarations indexed) |
+| log | `experiments/science/audit_replication/audit_all_b2d3e9c.log` |
+
+The numbers are those of the theory division's status file at this head (62 files; 3603
+declarations; 374 mutations, 373 caught, one expected pass).  New at this commit:
+`proofs/Frontiers/BoxClass.lean` (their §11.30) and `MonotoneSandwich.lean` — the latter is
+our `experiments/science/ws_L2/Sandwich.lean` as published at `9a0865f`: compared with `diff` by
+the coordinator, the only differences are their provenance paragraph (8 lines) and the
+removal of our closing `#print axioms` block (71 lines).  So the audit now walks, and this
+replication re-checks, two Lean files written by this division.  *Kind of check:* a
+re-run of their script on a third machine.  (Checkpoint 36 was committed while this run
+was in progress; the table was completed at checkpoint 39.)
 
 ## 2. Reviews
 
@@ -200,6 +213,7 @@ their provenance paragraph (8 lines) and the removal of our closing `#print axio
 | SCI-REV-0004 | theory report rows G11, G18, G20–G23, G25–G27 | workstream A1 | published; follow-up on THY-REQ-0011 B1, B2 running |
 | SCI-REV-0006 | theory report rows E1, D3, D4, C4, G1, G4, G7, G13, G16, G19, G24 | workstream A2 | published |
 | SCI-MSG-0002 | our own `INFERENCE_LIMITS.md` | workstream M | published; follow-up on Theorems 7, 8 running |
+| SCI-RES-0009 | theory report §11.30 (box classes), statements (a)–(e), and our own addendum A17 (A17.1–A17.8) | workstream A3 | published (checkpoint 39): 47 sources read in the relevant passages, about 93 located; classification statement by statement; **20 quoted passages re-read by the coordinator in the downloaded sources — all agree** (list in SCI-RES-0009 §4); what could not be accessed is listed there and in `A3_REPORT.md`.  *Kind of check:* an originality review with full-text reading; the workstream compared statements and did not referee proofs |
 
 ### Replications made by workstreams, read by the coordinator
 
@@ -373,6 +387,30 @@ their provenance paragraph (8 lines) and the removal of our closing `#print axio
   `ε/2` and gap `> ε`; the bound without division; the expectation at the uniform oracle
   answer; the oracle-indexed model of an algorithm; Theorem 7 in its Pinsker form).
   Not read line by line: the remaining declarations of the eight files.
+* **A3 (prior art; checkpoint 39):** besides the 20 passages, the three statements of the
+  workstream's own that addendum A17 adopts were re-derived by the coordinator and
+  checked with a script written independently of the workstream's
+  (`experiments/science/pi_inference/a3_adoption_check.py`, half a minute: A3.2 on 898
+  random members and product measures in 50-digit arithmetic, largest ratio `0.993`; the
+  second-order sandwich of the Jensen gap on 29 107 random laws; the unhinted rule at the
+  centre of a constant box — `545` evaluations, exact failure probability `0.031 ≤ 0.05`
+  over three-level members).  The workstream's `check_math.py` was re-run from a clean
+  state to its last line; output identical to `check_math.out` up to timings.
+* **L3 (Lean; checkpoint 39):** the four files of `experiments/science/ws_L3/` re-compiled
+  by the coordinator one at a time with `lake env lean <absolute path>` (Lean 4.31.0;
+  20, 38, 7 and 9 seconds): **four exit codes 0, no error, no warning; no `sorry`, `admit`,
+  `native_decide`, `axiom`, `unsafe` in any file; 91 `#print axioms` lines, 90 with exactly
+  `[propext, Classical.choice, Quot.sound]` and one with `[propext, Quot.sound]`.**
+  Checksums of the compiled files are in SCI-MSG-0019 §3.  Read in the files against
+  `SF_REPORT.md` §2.0–§2.2 and addendum A16: the definitions (`refW`, `tiltW`, `baseW`, `coneW`,
+  `dipW`, `Hkr`, `barW`, `omegaM`, `kappaA`, `betaA`, `oracle1`, `logA`, `LipH`, `InCone`) and the
+  statements `theoremA_fin`, `theoremA_group_sharp`, `theoremA_fin_Cm`, `lemma1a`,
+  `lemma0_window_lipH`, `lemma2_mass`, `lemma2_dens`, `densW_coneW`,
+  `exists_correct_oracle_algorithm`, `A16.lemmaA16_5_of_harper` — they say what the report
+  says, with the differences listed in SCI-MSG-0019 §2.  The theory division's two
+  imported files were used as compiled in our tree (built on `5ed4072`).  Not read line
+  by line: the other declarations; `ChainRuleCube.lean`.  *Kind of check:* machine
+  verification plus a reading of the statements by one person.
 
 ## 3. Not validated by us
 

@@ -198,14 +198,15 @@ def main():
         Wbar = float(Wv.mean())
         hoef = (1.0 - wmin) * math.sqrt(math.log(2.0 / delta) / (2.0 * N))
         lo_mu, hi_mu = max(Wbar - hoef, wmin), min(Wbar + hoef, 1.0)
-        br = (lnZlo + math.log(lo_mu), lnZlo + math.log(hi_mu))
+        tiny = 1e-300                      # e^{-beta rho_cert} underflows for absurdly loose floors (Leu helix, m = 3)
+        br = (lnZlo + math.log(max(lo_mu, tiny)), lnZlo + math.log(max(hi_mu, tiny)))
         # sample-range (zero-failure tolerance) bound: with prob. >= 1 - delta/2 the mass above the sample maximum is
         # <= e_N = 1 - (delta/2)^(1/N), and likewise below the sample minimum (report 2.7, Lemma R)
         eN = 1.0 - (delta / 2.0) ** (1.0 / N)
         Wmin_s, Wmax_s = float(Wv.min()), float(Wv.max())
         rng_lo = Wmin_s - (Wmin_s - wmin) * eN
         rng_hi = Wmax_s + (1.0 - Wmax_s) * eN
-        br2 = (lnZlo + math.log(rng_lo), lnZlo + math.log(rng_hi))
+        br2 = (lnZlo + math.log(max(rng_lo, 1e-300)), lnZlo + math.log(max(rng_hi, 1e-300)))
         res.update(range_bracket_lo=br2[0], range_bracket_hi=br2[1], W_min_sampled=Wmin_s, W_max_sampled=Wmax_s, eN=eN)
         # Bennett bracket with the certified (b, s2) of the model m_-: ln Z(E) = ln Z(m_-) - E r + K, 0 <= K <= W_cert;
         # the mean E r from the samples with Chebyshev's inequality and the CERTIFIED variance bound

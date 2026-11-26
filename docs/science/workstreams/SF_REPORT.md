@@ -136,7 +136,7 @@ mixture of `μ_w` and `πΔ/A_Δ` with weights `A_w : A_Δ`.  (ii) The cone prop
 `πw₀ = πw + b·π_{γ₂}ⁿ` is `(A_w c_w + b p₂)/(A_w + b)`, which equals `c_Δ` iff `b(p₂ − c_Δ) = A_w(c_Δ − c_w)`; then `μ_{w₁}` is a
 mixture of two measures of density `c_Δ`.  `A(w₀) = A_w + b = A_w(p₂ − c_w)/(p₂ − c_Δ)`.  ∎
 *Remarks.*  (1) By Lemma 0 no class member has a marginal outside the window, so compensation by class members is
-possible **iff `c_Δ ∈ [p₋, p₊]`**; taking `γ₂ = ∓u` it is always possible when `c_Δ` is in the open window.  (2) The
+possible **iff `c_Δ ∈ [p₋, p₊]`**; taking `γ₂ = ∓u` it is always possible when `c_Δ` is in the open window.  *[Note added by the coordinator at checkpoint 39, from workstream L3 (machine-checked, `ws_L3/Compensation.lean`: `window_of_equal_marginals`, `lemma3_compensation_exists`, `no_compensation_at_upper_end`, `no_compensation_at_lower_end`): the "iff" is wrong at the two end points.  "Only if" holds for the closed window and "if" for the open one; at an end, `c_Δ = p_± ≠ c_w`, no base plus a non-negative multiple of a class member has that marginal.  Nothing downstream uses the end points: in Theorems A and B `c_Δ` is at distance at least `κ` from them.]*  (2) The
 excess `Δ` does not depend on `b`: the equation is linear and needs no intermediate-value argument.  This is the
 difference from moving the base along the additive instances and taking its deepest dip each time, where the
 mismatch vanishes at both ends without a sign change (the "trap" of theory report §11.29, `DEAD_ENDS` D54 item 3 at
@@ -174,6 +174,7 @@ gives `(1−2δ)/(n H_{k,r})`.  For the second form: `Unif(T_k)` is `Bern(m)^{�
 `≥ 1/(n+1)`, and for `s ∼ Bern(m)^{⊗n}`, with `Φ_s(x) := Σ_i ln(π_γ(x_i)/π_{s_i}(x_i))`, Markov's inequality gives
 `P(Φ_s(x) < r) ≤ e^{tr} E e^{−tΦ_s(x)} = e^{tr} Π_i [(1−m)(π_0(x_i)/π_γ(x_i))^t + m(π_1(x_i)/π_γ(x_i))^t] ≤ e^{tr}ρ_t(m;γ)ⁿ`.
 For the last display take `r := ln(1 + max{2/ω_m, (1 + 2/m̲)(e^ε − 1)}) + η`, `η ↓ 0`: then `κ ≥ ω_m/2`, `β ≤ 2/m̲`,
+*[Note added by the coordinator at checkpoint 39, from workstream L3: "`η ↓ 0`" must be read as "a fixed small `η > 0`" — the instance `ψ₀` depends on `η` through `b` and `γ₂`, so a limit does not give one instance.  There is room for a fixed `η`: `(1 + max{…})e^{η} ≤ C_m e^{ε}` for small `η`.  Machine-checked with the explicit depth `e^r = C_m e^{ε}` (`ws_L3/TheoremA.lean`, `theoremA_fin_Cm`): the display holds at one instance for all `t ∈ [0, 1]` at once.  The same reading applies to "`η ↓ 0`" in the proof of Theorem B, which is not formalised.]*
 `ε < ln(1 + (e^r − 1)/(1+β))`, and `e^{tr} ≤ e^{tη}[(1 + 2/m̲)e^{ε} + 2/ω_m]^t ≤ e^{tη}·e^{tε}·C_m` for `t ≤ 1`.  ∎
 
 **Corollary A (the class exponent) [P for the lower bound; the upper bound is Theorem 11.64, black box].**  For

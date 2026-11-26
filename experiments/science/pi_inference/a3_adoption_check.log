@@ -1,0 +1,23 @@
+# (1) A3.2 on product measures: D_p <= sum[(p-1)c_i^2/8 + L(c_i)] <= pK/8
+   898 random members (tables, additive, minima of two additive functions, chains of pair tables) on {0,1}^n, n <= 6, and {0,1,2}^n, n <= 5; random product measures; exact enumeration, 50 digits
+   order p:                              1    1.05     1.5       2       3       6      12
+   largest D_p / refined bound:     0.9928  0.9927  0.9917  0.9903  0.9862  0.9810  0.9625
+   largest D_p / (pK/8):            0.9925  0.9924  0.9915  0.9902  0.9861  0.9810  0.9625
+   largest D_p / (p^2 K/(8(p-1))):     -    0.0473  0.3305  0.4951  0.6574  0.8175  0.8823     (the bound of A17.6 as first written)
+   additive instance r = u|x| on the uniform cube (per site, exact):
+      u =  0.01:  D_2 = 2.499927e-05,  refined bound = 2.499998e-05 (ratio 1.0000),  K/4 = 2.500000e-05,  K/2 = 5.000000e-05
+      u =  0.10:  D_2 = 2.492730e-03,  refined bound = 2.499826e-03 (ratio 0.9972),  K/4 = 2.500000e-03,  K/2 = 5.000000e-03
+      u =  0.50:  D_2 = 5.825490e-02,  refined bound = 6.239209e-02 (ratio 0.9337),  K/4 = 6.250000e-02,  K/2 = 1.250000e-01
+      u =  1.00:  D_2 = 1.935518e-01,  refined bound = 2.483016e-01 (ratio 0.7795),  K/4 = 2.500000e-01,  K/2 = 5.000000e-01
+      u =  2.00:  D_2 = 4.574411e-01,  refined bound = 9.744746e-01 (ratio 0.4694),  K/4 = 1.000000e+00,  K/2 = 2.000000e+00
+      u =  4.00:  D_2 = 6.571827e-01,  refined bound = 3.669850e+00 (ratio 0.1791),  K/4 = 4.000000e+00,  K/2 = 8.000000e+00
+# (2) second-order sandwich of the Jensen gap under a floor b and a ceiling a (both measured from the mean)
+   29107 random laws with 2-7 atoms:  largest lower/gap = 0.999990,  largest gap/W = 1.000000,  largest W/middle = 1.000000,  largest middle/weak = 1.000000   (all must be <= 1)
+   two-point law with a state at the floor, b = 0.5, variance 0.01: gap = 0.0058936790, W = 0.0058936790
+   two-point law with a state at the floor, b = 2.0, variance 0.3: gap = 0.2747291376, W = 0.2747291376
+   two-point law with a state at the floor, b = 5.0, variance 1.0: gap = 1.8711003208, W = 1.8711003208
+# (3) A3.3(a): certification at the centre of a constant box without a hint
+   rho- = 3.0, rho+ = 3.0, eta = 0.1, delta = 0.05:  N(0) = 545 evaluations without a hint  (hinted spot check with a half-and-half mixture: 1088);  largest exact failure probability over three-level members = 0.0309  (must be <= 0.05)
+   rho- = 1.0, rho+ = 1.0, eta = 0.05, delta = 0.05:  N(0) = 102 evaluations without a hint  (hinted spot check with a half-and-half mixture: 201);  largest exact failure probability over three-level members = 0.0451  (must be <= 0.05)
+   rho- = 5.0, rho+ = 2.0, eta = 0.2, delta = 0.01:  N(0) = 3068 evaluations without a hint  (hinted spot check with a half-and-half mixture: 6133);  largest exact failure probability over three-level members = 0.0088  (must be <= 0.01)
+ALL OK

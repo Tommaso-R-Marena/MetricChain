@@ -219,88 +219,6 @@ theorem exists_correct_oracle_algorithm (π : (ι → Bool) → ℝ) (u : ℝ) {
   rw [hfil, Finset.sum_const, Finset.card_univ, Fintype.card_unit, one_smul]
   linarith
 
-/-! ### Site permutations: number of ones, masses, densities, dips -/
-
-omit [DecidableEq ι] in
-theorem wt_perm (σ : Equiv.Perm ι) (x : ι → Bool) : wt (x ∘ σ) = wt x := by
-  unfold wt
-  exact Finset.card_equiv σ fun i => by simp
-
-/-- A site permutation that preserves `π` and carries `w'` to `w` preserves the mass. -/
-theorem massW_perm {π w w' : (ι → Bool) → ℝ} (σ : Equiv.Perm ι) (hπ : ∀ x, π (x ∘ σ) = π x)
-    (hw : ∀ x, w' (x ∘ σ) = w x) : massW π w' = massW π w := by
-  unfold massW
-  symm
-  refine Fintype.sum_equiv (permCube σ) _ _ fun x => ?_
-  show π x * w x = π (x ∘ σ) * w' (x ∘ σ)
-  rw [hπ, hw]
-
-theorem wtsum_perm {π w w' : (ι → Bool) → ℝ} (σ : Equiv.Perm ι) (hπ : ∀ x, π (x ∘ σ) = π x)
-    (hw : ∀ x, w' (x ∘ σ) = w x) :
-    ∑ x, π x * w' x * (wt x : ℝ) = ∑ x, π x * w x * (wt x : ℝ) := by
-  symm
-  refine Fintype.sum_equiv (permCube σ) _ _ fun x => ?_
-  show π x * w x * (wt x : ℝ) = π (x ∘ σ) * w' (x ∘ σ) * (wt (x ∘ σ) : ℝ)
-  rw [hπ, hw, wt_perm]
-
-/-- … and the density. -/
-theorem densW_perm {π w w' : (ι → Bool) → ℝ} (σ : Equiv.Perm ι) (hπ : ∀ x, π (x ∘ σ) = π x)
-    (hw : ∀ x, w' (x ∘ σ) = w x) : densW π w' = densW π w := by
-  unfold densW
-  rw [wtsum_perm σ hπ hw, massW_perm σ hπ hw]
-
-omit [DecidableEq ι] in
-theorem coneW_perm (p u : ℝ) (s : ι → Bool) (σ : Equiv.Perm ι) (x : ι → Bool) :
-    coneW p u (s ∘ σ) (x ∘ σ) = coneW p u s x :=
-  tiltW_perm p (coneField u s) σ x
-
-omit [DecidableEq ι] in
-theorem baseW_perm (p γ : ℝ) (σ : Equiv.Perm ι) (x : ι → Bool) :
-    baseW p γ (x ∘ σ) = baseW p γ x :=
-  tiltW_perm p (fun _ => γ) σ x
-
-omit [DecidableEq ι] in
-/-- Covariance of the dips: `Δ_{s∘σ, r}(x∘σ) = Δ_{s,r}(x)`. -/
-theorem dipW_perm (p u γ r : ℝ) (s : ι → Bool) (σ : Equiv.Perm ι) (x : ι → Bool) :
-    dipW p u γ r (s ∘ σ) (x ∘ σ) = dipW p u γ r s x := by
-  unfold dipW
-  rw [coneW_perm, baseW_perm]
-
-theorem massW_dipW_perm (p u γ r : ℝ) (s : ι → Bool) (σ : Equiv.Perm ι) :
-    massW (refW p) (dipW p u γ r (s ∘ σ)) = massW (refW p) (dipW p u γ r s) :=
-  massW_perm σ (refW_perm p σ) fun x => dipW_perm p u γ r s σ x
-
-theorem densW_dipW_perm (p u γ r : ℝ) (s : ι → Bool) (σ : Equiv.Perm ι) :
-    densW (refW p) (dipW p u γ r (s ∘ σ)) = densW (refW p) (dipW p u γ r s) :=
-  densW_perm σ (refW_perm p σ) fun x => dipW_perm p u γ r s σ x
-
-omit [DecidableEq ι] in
-/-- Two configurations with the same number of ones differ by a site permutation. -/
-theorem exists_perm_of_wt_eq {s s' : ι → Bool} (h : wt s = wt s') :
-    ∃ σ : Equiv.Perm ι, s' = s ∘ σ := by
-  have hcard : Fintype.card {i // s' i = true} = Fintype.card {i // s i = true} := by
-    rw [Fintype.card_subtype, Fintype.card_subtype]
-    exact h.symm
-  let e : {i // s' i = true} ≃ {i // s i = true} := Fintype.equivOfCardEq hcard
-  refine ⟨e.extendSubtype, ?_⟩
-  funext i
-  show s' i = s (e.extendSubtype i)
-  rw [Bool.eq_iff_iff]
-  constructor
-  · intro hi
-    exact e.extendSubtype_mem i hi
-  · intro hi
-    by_contra hni
-    exact e.extendSubtype_not_mem i hni hi
-
-/-- **`E_{k,r}` and `c_{k,r}` depend on `(k, r)` only**: the mass and the density of the excess
-of a dip are the same for all centres with the same number of ones. -/
-theorem massW_densW_dipW_of_wt_eq (p u γ r : ℝ) {s s' : ι → Bool} (h : wt s = wt s') :
-    massW (refW p) (dipW p u γ r s') = massW (refW p) (dipW p u γ r s) ∧
-      densW (refW p) (dipW p u γ r s') = densW (refW p) (dipW p u γ r s) := by
-  obtain ⟨σ, rfl⟩ := exists_perm_of_wt_eq h
-  exact ⟨massW_dipW_perm p u γ r s σ, densW_dipW_perm p u γ r s σ⟩
-
 /-- There is a configuration with exactly `k` ones, for every `k ≤ n`. -/
 theorem exists_wt_eq {k : ℕ} (hk : k ≤ Fintype.card ι) : ∃ s : ι → Bool, wt s = k := by
   have hk' : k ≤ (univ : Finset ι).card := by
@@ -343,26 +261,6 @@ theorem card_filter_subtype {α : Type*} [Fintype α] (p q : α → Prop) [Decid
     rw [Finset.mem_filter] at ha
     exact ⟨⟨a, ha.2.1⟩, Finset.mem_filter.mpr ⟨Finset.mem_univ _, ha.2.2⟩, rfl⟩
 
-omit [DecidableEq ι] in
-/-- `D_{s,r} = {Δ_{s,r} > 0} = {x : π_γⁿ(x) < e^r π_s(x)}`. -/
-theorem dipW_pos_iff {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (u γ r : ℝ) (s x : ι → Bool) :
-    0 < dipW p u γ r s x ↔
-      refW p x * baseW p γ x < Real.exp r * (refW p x * coneW p u s x) := by
-  unfold dipW
-  have hπ := refW_pos hp0 hp1 x
-  rw [lt_max_iff]
-  constructor
-  · rintro (h | h)
-    · have h1 := mul_lt_mul_of_pos_left (sub_pos.mp h) hπ
-      linarith
-    · exact absurd h (lt_irrefl 0)
-  · intro h
-    left
-    rw [sub_pos]
-    by_contra hle
-    have h1 := mul_le_mul_of_nonneg_left (not_lt.mp hle) hπ.le
-    linarith
-
 /-- The number of centres `s ∈ T_k` with `x ∈ D_{s,r}`. -/
 def dipCount (p u γ r : ℝ) (k : ℕ) (x : ι → Bool) : ℕ :=
   (univ.filter fun s : ι → Bool => wt s = k ∧ 0 < dipW p u γ r s x).card
@@ -387,6 +285,11 @@ theorem shiftSet_transitive : SiteTransitive (shiftSet ι) := fun i j =>
   ⟨Equiv.addRight (-i + j), ⟨_, rfl⟩, by
     show i + (-i + j) = j
     rw [add_neg_cancel_left]⟩
+
+/-- On `Fin n` the translations are the cyclic shifts `i ↦ i + a mod n`. -/
+theorem addRight_fin_val {n : ℕ} [NeZero n] (a i : Fin n) :
+    ((Equiv.addRight a : Equiv.Perm (Fin n)) i).val = (i.val + a.val) % n :=
+  Fin.val_add i a
 
 /-- **The averaged excess** `Δ̄_s = n⁻¹ Σ_a Δ_{σ^a s, r}`, the average of the excess of the dip
 over the `n` translates of its centre. -/
@@ -1575,6 +1478,7 @@ end ScienceL3
 #print axioms ScienceL3.exists_correct_oracle_algorithm
 #print axioms ScienceL3.massW_densW_dipW_of_wt_eq
 #print axioms ScienceL3.dipW_pos_iff
+#print axioms ScienceL3.addRight_fin_val
 #print axioms ScienceL3.barW_invariant
 #print axioms ScienceL3.massW_barW
 #print axioms ScienceL3.densW_barW

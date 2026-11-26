@@ -204,3 +204,62 @@ from a scratch copy.
   (2/9)(2+2 lam2); J=-1: V_2 = 0.563 > Var(N_a) = 0.326.  Ratio check u->0 at J=0.7:
   0.59698, 0.57909, 0.56839, 0.56267 -> 0.55670.  (n=3 enumeration ran out of memory:
   replaced by LP ascent, see below.)
+* [reading THEIR code, after all of the above] `ydp3.py` (conservative tilt recursion):
+  nodes mu_k, cells [mu_k - D/2, mu_k + D/2]; feasibility of a grid triple enlarged by
+  eps = 1.5 D, justified because theta_+- are 1-Lipschitz in each of (lam, mu+, mu-):
+  |d theta| <= D/2 (1 + A' + B') <= 1.5 D  -- CORRECT; stage factors = extremes over the
+  cell -- CORRECT (tau(b,+) increasing, tau(b,-) decreasing in lam); KL reward convex ->
+  cell ends -- CORRECT; Shannon reward: max of 3 points + 2 D^2 (ample: |f''| <= ~1.3, needed
+  slack <= D^2/25; in fact KL(tau||q) is convex in tau(+) and tau(+) monotone, so the max is at
+  a cell end and no slack is needed); W <= 0 with minimal transition weights -- CORRECT.
+  => their discretisation IS on the safe side (REVIEW, plus my independent implementation
+  agrees: my safe values are everywhere slightly BELOW theirs).
+  Their cells overhang the tilt range [-u*, u*] by D/2; the reward at the end cell is taken
+  at u* + D/2.  That overhang alone is the "margin 1.0, 1.4, 1.9e-4" of 5.4(c): with
+  k'_+(u*) = 0.215, k'_-(u*) = 0.363 (p=0.3), D/2 = 4.8e-4: average excess 1.4e-4.  With
+  cells inside the range the safe value IS E_F (mine: E_F + 3e-11 at p=0.3, + 1e-11 at 0.4).
+  Their "grid-restricted" Renyi value 0.04435 (p=0.3,t=0.43) is the -ln(min ratio) end of a
+  bracket that does not close ([0.0439975, 0.0443495] at G=1601 in their own output
+  y15_dp3_controls.txt) -- it is not a certified lower bound of the relaxed value; my
+  midpoint-restricted grid gives a closed bracket 0.044357, so the statement "finer grids
+  would lower the h-bound to about 0.0446" stands.
+  `y07_block_labels.py`: M_L from `renyi_F(..., itmax=min(40000, 300+3e8/size))` = 400
+  iterations at L=14: not converged; this is why their Prop. I numbers are 1-3e-5 below mine.
+  Valid either way (any M_L).  a-bounds use t <= 0.99 and L <= 10.
+  `y08_validate.py` (c): tests the LEVEL function (ln t_y - ln t_x - d <= 0), as I guessed.
+* Prior art searches (reading levels in the report): Rached-Alajaji-Campbell 2001 (Renyi
+  divergence rate of Markov sources, Perron-Frobenius) [search snippet]; Vanneste
+  arXiv:0911.2161 (generalised Lyapunov exponents) [search snippet]; Holliday-Goldsmith-Glynn
+  2006 (entropies of finite-state channels = top Lyapunov exponents) [search snippet];
+  Newman 1980 CMP 74 [search snippet]; Bulinski-Shabanovich 1998 Fundam. Prikl. Mat. 4(2)
+  479-492 [metadata only]; Galvin 2003 Israel J. Math. 138 [search snippet].
+  The Lipschitz covariance inequality needed for the small-slope law has a 3-line proof for
+  binary spins (g +- f increasing with g = sum L_i s_i; association gives Cov(g+f,g-f)>=0),
+  so no citation is needed.
+* !!! [r10_06_markov_recursion.py 3 4 6 8] LARGE SLOPES: the Markov recursion (Prop. F) with
+  L=3 (96 vertices, duality brackets 1e-12) gives upper bounds BELOW the cube:
+    u=4: cube h=0.239250, a=0.603052.  h <= 0.234594 (p=0.2; x0.981), 0.227585 (p=0.1; x0.951);
+         a <= 0.591982 (p=0.3; x0.982), 0.559986 (p=0.2), 0.509682 (p=0.1).
+    u=3: cube h=0.172831, a=0.502282.  a <= 0.495806 (p=0.3; x0.987), 0.467509 (p=0.2),
+         0.432593 (p=0.1);  h: ratios 1.018..1.046 (undecided with L=3).
+    u=6: a <= 0.674273 (p=0.3, L=2) < cube 0.675836.
+  => "a nearest-neighbour interaction raises all three exponents" is FALSE as a general
+  statement: at slopes u >= 3 it LOWERS the capacity exponent a (p <= 0.3) and at u=4 also h
+  (p <= 0.2).  E stays raised for every u (E_F > ln cosh(u/2)).  Y had said: "u >= 2
+  undecided for h" and nothing about a at other slopes.  To do: rigorous sup over t
+  (interval rule), a finer (p,u) map, re-run with THEIR functions as a cross-check.
+  Heuristic that predicted it (written in these notes before the computation): at large u
+  the labels pin configurations; the leak of a pinned site is e^{-u} r, r in
+  {e^{2K},1,e^{-2K}} (prob 1/4,1/2,1/4 for uniform label laws), so
+  F ~ (1-t) ln 2 - e^{-tu} cosh^2(Kt) against the cube's (1-t) ln 2 - e^{-tu}.
+* [r10_07d p=0.4, 0.2, 0.1] own safe tilt recursion (G=801):
+  p=0.4: E <= 0.169127 (= E_F + 1e-11); a <= 0.120996 (Y 0.121446); h <= 0.036028 (Y 0.036163).
+  p=0.2: E <= 0.310766 (= E_F + 5e-11); a <= 0.161310 (Y 0.160745; my q~ scan stopped at p);
+         h <= 0.054121 (Y 0.054353).
+  p=0.1: E <= 0.428235 with Q=pi (Y: 0.4307 at G=801), but 0.410675 with the reference
+         Markov(q~=0.11) -- BELOW Y's best upper end 0.417991 (their DP, L=3): a reference
+         chain other than pi improves the threshold bound at strong coupling (Y used Q=pi only).
+         h <= 0.071208 and a <= 0.201298: WEAKER than Y's 0.066765 / 0.192774 because my q~
+         ranges ended at 1.02p / 1.0p while the optimum is at 1.1-1.2p.  To rerun with a wider
+         range.
+* r10_10_map.py crashed on formatting a None (Prop. H rejected by the N=48/96 check); fixed.

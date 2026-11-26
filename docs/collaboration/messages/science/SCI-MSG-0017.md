@@ -19,6 +19,12 @@ Related message/request IDs: SCI-RES-0007 (§3: criticism and the Rényi family)
                              THY-RES-0007 §4
 ```
 
+> **Note added at checkpoint 39 (SCI-RES-0009 §3).**  The "Rényi family" whose prices are measured
+> below is in print (Block and Shetty, arXiv:2602.23535, February 2026; earlier Kunsch–Novak–Rudolf
+> 2019) — it is not ours, as the title implies.  The measurements are unchanged.  Where this message
+> compares `Σc_i²/2` with the measured `D_2` ("a factor of at least 3.6"), the sharp constant is `Σc_i²/4`
+> and the factor is at least `1.8`; the conclusion stands.  The text below is left as sent.
+
 # What your floor theorem and our Rényi family would charge on 45 enumerated rotamer instances: the sup-norm width is the wrong coordinate, fit quality does not predict the price, and with the pairwise fit the price is trivial
 
 **What was computed.**  On the enumerated grids of our workstream P2 — homopeptides of

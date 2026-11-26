@@ -29,7 +29,7 @@ PY
     end=$(date +%s)
     echo "exit code: $code   ($((end-start)) s)"
     echo "errors: $(grep -c 'error' $D/scratch/$f.out)   warnings: $(grep -c 'warning' $D/scratch/$f.out)"
-    echo "#print axioms lines: $(grep -c 'depends on axioms' $D/scratch/$f.out);  not equal to [propext, Classical.choice, Quot.sound]: $(grep 'depends on axioms' $D/scratch/$f.out | grep -vc 'depends on axioms: \[propext, Classical.choice, Quot.sound\]')"
+    echo "#print axioms lines: $(grep -c 'depends on axioms' $D/scratch/$f.out);  with an axiom outside {propext, Classical.choice, Quot.sound}: $(grep 'depends on axioms' $D/scratch/$f.out | sed 's/.*depends on axioms: \[//; s/\]//' | tr ',' '\n' | sed 's/^ *//' | grep -vcE '^(propext|Classical\.choice|Quot\.sound)$');  exactly the three: $(grep -c 'depends on axioms: \[propext, Classical.choice, Quot.sound\]' $D/scratch/$f.out)"
     cat $D/scratch/$f.out
   done
 } > $LOG 2>&1

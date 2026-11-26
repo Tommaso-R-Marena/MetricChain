@@ -114,7 +114,20 @@ def floor_table(siteres, kind="gbn2"):
     return "\n".join(lines)
 
 
+def floor_table_sel():
+    """condensed constant-bound table for the report: selected chain lengths per class."""
+    keep = {"V": (6, 10, 12), "L": (8, 12, 16), "S": (4, 5, 6), "F": (6,), "K": (3, 4), "LKSE": (4, 5, 6)}
+    full = floor_table(False).split("\n")
+    out = full[:2]
+    for line in full[2:]:
+        mm = re.match(r"\| ([A-Z]+):?(\d+)/", line)
+        if mm and int(mm.group(2)) in keep.get(mm.group(1), ()):
+            out.append(line)
+    return "\n".join(out)
+
+
 frag["floor_const"] = floor_table(False)
+frag["floor_const_sel"] = floor_table_sel()
 frag["floor_site"] = floor_table(True)
 frag["obc2"] = floor_table(False, "obc2") + "\n\n" + floor_table(True, "obc2")
 # ------------------------------------------------------------------ the instance beyond enumeration
@@ -137,6 +150,44 @@ for r in sorted(bn, key=lambda r: (order.get(r["res"], 9), r["bb"], r["tau"], r[
         lines.append(f"| {r['seq']}/{r['bb']} τ{r['tau']:.2f} | {r['m']} | {r['w']} | {lab} | {f(bd['b_cert'])} | {f(bd['b_enum']) if e_ else '—'} | {f(bd['s2_cert'])} | "
                      f"{f(bd['s2_enum']) if e_ else '—'} | {f(bd['W_cert'])} | {f(bd['W_enum']) if e_ else '—'} | {f(bd['K_true']) if e_ else '—'} | {smp} |")
 frag["bennett"] = "\n".join(lines)
+# condensed selection for the report (the full table is frag["bennett"], written to out/report_tables.md)
+want = [("V8", "E", 5), ("V10", "E", 4), ("V6", "P2", 5), ("V8", "P2", 5), ("V10", "P2", 5), ("V12", "P2", 5), ("V10", "P2", 4), ("V20", "P2", 4), ("V20", "P2", 5),
+        ("S6", "E", 3), ("S6", "E", 4), ("S5", "E", 5), ("S5", "H", 4), ("S5", "H", 5), ("L16", "E", 5), ("L16", "P2", 5), ("L8", "H", 5), ("F4", "E", 4), ("K4", "H", 4), ("LKSE:4", "H", 4), ("V6", "E", 3)]
+sel_lines = lines[:2]
+for r in sorted(bn, key=lambda r: (order.get(r["res"], 9), r["bb"], r["tau"], r["nres"], r["m"], r["w"])):
+    if (r["seq"], r["bb"], r["m"]) not in want:
+        continue
+    for nm, lab in (("lower", "m₋"), ("mid", "m₀")):
+        bd = r["bennett"][nm]
+        e_ = "b_enum" in bd
+        smp = f"{f(r['r_mean'])}; {f(r['r_var'])}; {f(r['r_min'])} ({r['N']})" if nm == "lower" and "r_mean" in r else "—"
+        sel_lines.append(f"| {r['seq']}/{r['bb']} τ{r['tau']:.2f} | {r['m']} | {r['w']} | {lab} | {f(bd['b_cert'])} | {f(bd['b_enum']) if e_ else '—'} | {f(bd['s2_cert'])} | "
+                         f"{f(bd['s2_enum']) if e_ else '—'} | {f(bd['W_cert'])} | {f(bd['W_enum']) if e_ else '—'} | {f(bd['K_true']) if e_ else '—'} | {smp} |")
+frag["bennett_sel"] = "\n".join(sel_lines)
+# ------------------------------------------------------------------ do the remainder statistics extrapolate?  (Val on PPII, m = 5, site penalties, model m_-)
+lines = ["| band | quantity (kT) | n = 6 (enum.) | 8 (enum.) | 10 (enum.) | 12 (enum.) | linear extrapolation of the last two to n = 20 | n = 20 (50 000 samples) | certified at n = 20: `b_cert`; `s²_cert` |", "|---|---|---|---|---|---|---|---|---|"]
+vp = {(r["nres"], r["w"] if r["wtag"] else "all"): r for r in runs if r["res"] == "V" and r["bb"] == "P2" and r["m"] == 5 and r["siteres"] and r["kind"] == "gbn2" and "bennett" in r}
+for wlab, wkey in (("1", 1), ("2", 2), ("all pairs (8 at n = 20)", "all")):
+    def stat(n):
+        r = vp.get((n, wkey))
+        if r is None:
+            return None
+        bd = r["bennett"]["lower"]
+        if "b_enum" in bd:
+            return (bd["Er"], bd["s2_enum"], bd["Er"] - bd["b_enum"])
+        return (r["r_mean"], r["r_var"], r["r_min"])
+    big_ = vp.get((20, wkey))
+    for qi, qn in enumerate(("mean of r", "variance of r", "smallest r")):
+        vals = [stat(n) for n in (6, 8, 10, 12)]
+        have = [(n, v[qi]) for n, v in zip((6, 8, 10, 12), vals) if v is not None]
+        ext = None
+        if len(have) >= 2:
+            (n1, v1), (n2, v2) = have[-2], have[-1]
+            ext = v2 + (20 - n2) * (v2 - v1) / (n2 - n1)
+        s20 = stat(20)
+        cert = f"{f(big_['bennett']['lower']['b_cert'])}; {f(big_['bennett']['lower']['s2_cert'])}" if big_ is not None and qi == 0 else ""
+        lines.append(f"| {wlab} | {qn} | " + " | ".join(f(v[qi]) if v is not None else "—" for v in vals) + f" | {f(ext)} | {f(s20[qi]) if s20 else '—'} | {cert} |")
+frag["extrap"] = "\n".join(lines)
 # ------------------------------------------------------------------ one-site oscillations
 lines = ["| instance | m | max certified `c_i = 2mγ_i` (kT) | `Σ_i c_i²` certified (kT²) | max exact `c_i` (kT) | `Σ_i c_i²` exact (kT²) |", "|---|---|---|---|---|---|"]
 for r in sorted([r for r in runs if r["siteres"] and r["kind"] == "gbn2" and not r["wtag"]], key=lambda r: (order.get(r["res"], 9), r["bb"], r["tau"], r["nres"], r["m"])):

@@ -120,3 +120,34 @@ Lean 4.31.0 + pinned Mathlib (v4.31.0, rev fabf563a).  Compile command (single f
   "`r = ln(1 + max{…}) + η`, `η ↓ 0`" (finding F4: there the instance depends on `η`).  Checks used:
   `e^r − 1 ≥ 2/m̲ + 2/ω_m` ⇒ `(e^r−1)ω_m > 2`, `κ > ω_m/2`, `β < 2/m̲`; `C_m e^ε − 1 ≥ (1 + 2/m̲)(e^ε − 1)`;
   `e^{tr} = C_m^t e^{tε} ≤ C_m e^{tε}`.  Compiled exit 0, no warning.  So all three displays of Theorem A are [V].
+* 00:45 — **Lemma 0, third sentence (rigidity)** machine-checked: `flip_eq_of_marg_eq_upper/_lower`, `lemma0_rigidity`,
+  `lemma0_rigidity_lipH` (`Compensation.lean`; compiled first time).  Lemma 0 is complete.
+* 00:53 — **Lemma 1 (b)** from `MetricChain.nonadaptive_expected_queries_ge` (`lemma1b_weighted`, `lemma1b`);
+  `TheoremA.lean` now also imports `proofs.Frontiers.NonAdaptive`.
+* 01:03 — `exists_correct_oracle_algorithm` (the correctness hypothesis of Theorem A is satisfiable).
+* 01:06 — **final check** (`check_all.sh`, log `check_log.txt`, 01:02–01:06 UTC): `Compensation.lean` (1 825 lines,
+  106 theorems, 35 axioms lines), `TheoremA.lean` (3 386, 167, 33), `A16Rearrangement.lean` (344, 22, 8),
+  `ChainRuleCube.lean` (655, 34, 11): four exit codes 0, 0 errors, 0 warnings, all 87 axioms lines
+  `[propext, Classical.choice, Quot.sound]`, 0 forbidden tokens, `TheoremA.lean` identical to the output of
+  `assemble.py`.  `sanity_numerics.py` re-run (S1–S8 pass).  Report finished.
+
+* 01:10 — moved the permutation-covariance block (`wt_perm` … `massW_densW_dipW_of_wt_eq`, `dipW_pos_iff`) from the
+  tail of `TheoremA.lean` into `Compensation.lean` (Part 6), so that the Mathlib-only file contains all of Lemma 2.
+  Re-ran `check_all.sh` (01:06–01:10 UTC): `Compensation.lean` 1 931 lines, 118 theorems, 37 axioms lines;
+  `TheoremA.lean` 3 386, 167, 33; `A16Rearrangement.lean` 344, 22, 8; `ChainRuleCube.lean` 655, 34, 11; four exit
+  codes 0, no warning, all 89 axioms lines standard.  (The figures of the 01:06 entry above are superseded.)
+
+* 01:15 — added `lipH_iff_sub_le` (bridge to the theory division's one-sided class) and `addRight_fin_val`
+  (translations of `Fin n` are the cyclic shifts); `check_all.sh` now tests that no axiom outside
+  {propext, Classical.choice, Quot.sound} occurs.  **Final check 01:13–01:15 UTC:** `Compensation.lean` 1 948 lines,
+  119 theorems, 38 axioms lines; `TheoremA.lean` 3 408, 169, 34 (one of them, `addRight_fin_val`, lists only
+  `propext`, `Quot.sound`); `A16Rearrangement.lean` 344, 22, 8; `ChainRuleCube.lean` 655, 34, 11.  Four exit codes 0,
+  0 errors, 0 warnings.  These figures supersede the earlier ones.
+
+## State at the end
+
+Done: SF Lemmas 0–3 (all parts) and Theorem A (all three displays); Lemma A16.5 conditional on Harper; A1.1 items 1–2.
+Findings: F1 (open window in Remark (1) of Lemma 3), F2 (`1 + b ≤ β`), F3 (redundant hypotheses), F4 (explicit depth
+`e^r = C_m e^ε` instead of `η ↓ 0`), plus small generalisations (report §2.9).  Nothing found false.
+Not done: Corollary A, Theorem B, Harper's theorem, A1.1 items 3–4.
+Machine load made compile times vary between 10 s and 3 min for the same file.

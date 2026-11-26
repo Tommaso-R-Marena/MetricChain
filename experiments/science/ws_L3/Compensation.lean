@@ -28,7 +28,9 @@ hypotheses where they are used); the product measure enters in Part 4.
 * Part 6 — the statements with the objects of the report: `lemma3_compensation_bernoulli`,
   Remark (1) of Lemma 3 (`window_of_equal_marginals`, `lemma3_compensation_exists`,
   `no_compensation_at_upper_end`, `no_compensation_at_lower_end`), the cones and dips
-  (`coneW_eq`, `baseW_eq`), `lemma2_mass`, `lemma2_site`, `lemma2_dens`, `densW_coneW`.
+  (`coneW_eq`, `baseW_eq`, `dipW_pos_iff`), `lemma2_mass`, `lemma2_site`, `lemma2_dens`, `densW_coneW`,
+  `massW_densW_dipW_of_wt_eq` (mass and density of a dip depend on the number of ones of its
+  centre only).
 -/
 
 set_option autoImplicit false
@@ -252,6 +254,22 @@ theorem lipH_iff_flip {u : ℝ} {ψ : (ι → Bool) → ℝ} :
     · have h1 := sub_le_mul_hammingDist (fun x i => (abs_le.mp (h x i)).2) y x
       rw [hammingDist_comm] at h1
       linarith
+
+omit [DecidableEq ι] in
+/-- `L_u` in the one-sided form used by the theory division (`MetricChain.Admissible` for the
+envelope `u·d_H`): `ψ x − ψ y ≤ u·d_H(x, y)` for all `x, y`. -/
+theorem lipH_iff_sub_le {u : ℝ} {ψ : (ι → Bool) → ℝ} :
+    LipH u ψ ↔ ∀ x y, ψ x - ψ y ≤ u * hammingDist x y := by
+  constructor
+  · intro h x y
+    exact (le_abs_self _).trans (h x y)
+  · intro h x y
+    rw [abs_le]
+    constructor
+    · have h1 := h y x
+      rw [hammingDist_comm] at h1
+      linarith
+    · exact h x y
 
 /-- **`ψ ∈ L_u` iff `e^{−ψ} ∈ 𝒲_u`.** -/
 theorem lipH_iff_inCone {u : ℝ} {ψ : (ι → Bool) → ℝ} :
@@ -1782,12 +1800,115 @@ theorem densW_coneW {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (u : ℝ) (s : ι → 
   unfold wt
   ring
 
+omit [DecidableEq ι] in
+/-- `D_{s,r} = {Δ_{s,r} > 0} = {x : π_γⁿ(x) < e^r π_s(x)}`. -/
+theorem dipW_pos_iff {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (u γ r : ℝ) (s x : ι → Bool) :
+    0 < dipW p u γ r s x ↔
+      refW p x * baseW p γ x < Real.exp r * (refW p x * coneW p u s x) := by
+  unfold dipW
+  have hπ := refW_pos hp0 hp1 x
+  rw [lt_max_iff]
+  constructor
+  · rintro (h | h)
+    · have h1 := mul_lt_mul_of_pos_left (sub_pos.mp h) hπ
+      linarith
+    · exact absurd h (lt_irrefl 0)
+  · intro h
+    left
+    rw [sub_pos]
+    by_contra hle
+    have h1 := mul_le_mul_of_nonneg_left (not_lt.mp hle) hπ.le
+    linarith
+
+/-! ### Site permutations: number of ones, masses, densities, dips -/
+
+omit [DecidableEq ι] in
+theorem wt_perm (σ : Equiv.Perm ι) (x : ι → Bool) : wt (x ∘ σ) = wt x := by
+  unfold wt
+  exact Finset.card_equiv σ fun i => by simp
+
+/-- A site permutation that preserves `π` and carries `w'` to `w` preserves the mass. -/
+theorem massW_perm {π w w' : (ι → Bool) → ℝ} (σ : Equiv.Perm ι) (hπ : ∀ x, π (x ∘ σ) = π x)
+    (hw : ∀ x, w' (x ∘ σ) = w x) : massW π w' = massW π w := by
+  unfold massW
+  symm
+  refine Fintype.sum_equiv (permCube σ) _ _ fun x => ?_
+  show π x * w x = π (x ∘ σ) * w' (x ∘ σ)
+  rw [hπ, hw]
+
+theorem wtsum_perm {π w w' : (ι → Bool) → ℝ} (σ : Equiv.Perm ι) (hπ : ∀ x, π (x ∘ σ) = π x)
+    (hw : ∀ x, w' (x ∘ σ) = w x) :
+    ∑ x, π x * w' x * (wt x : ℝ) = ∑ x, π x * w x * (wt x : ℝ) := by
+  symm
+  refine Fintype.sum_equiv (permCube σ) _ _ fun x => ?_
+  show π x * w x * (wt x : ℝ) = π (x ∘ σ) * w' (x ∘ σ) * (wt (x ∘ σ) : ℝ)
+  rw [hπ, hw, wt_perm]
+
+/-- … and the density. -/
+theorem densW_perm {π w w' : (ι → Bool) → ℝ} (σ : Equiv.Perm ι) (hπ : ∀ x, π (x ∘ σ) = π x)
+    (hw : ∀ x, w' (x ∘ σ) = w x) : densW π w' = densW π w := by
+  unfold densW
+  rw [wtsum_perm σ hπ hw, massW_perm σ hπ hw]
+
+omit [DecidableEq ι] in
+theorem coneW_perm (p u : ℝ) (s : ι → Bool) (σ : Equiv.Perm ι) (x : ι → Bool) :
+    coneW p u (s ∘ σ) (x ∘ σ) = coneW p u s x :=
+  tiltW_perm p (coneField u s) σ x
+
+omit [DecidableEq ι] in
+theorem baseW_perm (p γ : ℝ) (σ : Equiv.Perm ι) (x : ι → Bool) :
+    baseW p γ (x ∘ σ) = baseW p γ x :=
+  tiltW_perm p (fun _ => γ) σ x
+
+omit [DecidableEq ι] in
+/-- Covariance of the dips: `Δ_{s∘σ, r}(x∘σ) = Δ_{s,r}(x)`. -/
+theorem dipW_perm (p u γ r : ℝ) (s : ι → Bool) (σ : Equiv.Perm ι) (x : ι → Bool) :
+    dipW p u γ r (s ∘ σ) (x ∘ σ) = dipW p u γ r s x := by
+  unfold dipW
+  rw [coneW_perm, baseW_perm]
+
+theorem massW_dipW_perm (p u γ r : ℝ) (s : ι → Bool) (σ : Equiv.Perm ι) :
+    massW (refW p) (dipW p u γ r (s ∘ σ)) = massW (refW p) (dipW p u γ r s) :=
+  massW_perm σ (refW_perm p σ) fun x => dipW_perm p u γ r s σ x
+
+theorem densW_dipW_perm (p u γ r : ℝ) (s : ι → Bool) (σ : Equiv.Perm ι) :
+    densW (refW p) (dipW p u γ r (s ∘ σ)) = densW (refW p) (dipW p u γ r s) :=
+  densW_perm σ (refW_perm p σ) fun x => dipW_perm p u γ r s σ x
+
+omit [DecidableEq ι] in
+/-- Two configurations with the same number of ones differ by a site permutation. -/
+theorem exists_perm_of_wt_eq {s s' : ι → Bool} (h : wt s = wt s') :
+    ∃ σ : Equiv.Perm ι, s' = s ∘ σ := by
+  have hcard : Fintype.card {i // s' i = true} = Fintype.card {i // s i = true} := by
+    rw [Fintype.card_subtype, Fintype.card_subtype]
+    exact h.symm
+  let e : {i // s' i = true} ≃ {i // s i = true} := Fintype.equivOfCardEq hcard
+  refine ⟨e.extendSubtype, ?_⟩
+  funext i
+  show s' i = s (e.extendSubtype i)
+  rw [Bool.eq_iff_iff]
+  constructor
+  · intro hi
+    exact e.extendSubtype_mem i hi
+  · intro hi
+    by_contra hni
+    exact e.extendSubtype_not_mem i hni hi
+
+/-- **`E_{k,r}` and `c_{k,r}` depend on `(k, r)` only**: the mass and the density of the excess
+of a dip are the same for all centres with the same number of ones. -/
+theorem massW_densW_dipW_of_wt_eq (p u γ r : ℝ) {s s' : ι → Bool} (h : wt s = wt s') :
+    massW (refW p) (dipW p u γ r s') = massW (refW p) (dipW p u γ r s) ∧
+      densW (refW p) (dipW p u γ r s') = densW (refW p) (dipW p u γ r s) := by
+  obtain ⟨σ, rfl⟩ := exists_perm_of_wt_eq h
+  exact ⟨massW_dipW_perm p u γ r s σ, densW_dipW_perm p u γ r s σ⟩
+
 end Report
 
 end ScienceL3
 
 /-! ## Axioms -/
 
+#print axioms ScienceL3.lipH_iff_sub_le
 #print axioms ScienceL3.lipH_iff_inCone
 #print axioms ScienceL3.inCone_iff_lipH_log
 #print axioms ScienceL3.InCone.add
@@ -1823,3 +1944,5 @@ end ScienceL3
 #print axioms ScienceL3.lemma2_site
 #print axioms ScienceL3.lemma2_dens
 #print axioms ScienceL3.densW_coneW
+#print axioms ScienceL3.dipW_pos_iff
+#print axioms ScienceL3.massW_densW_dipW_of_wt_eq

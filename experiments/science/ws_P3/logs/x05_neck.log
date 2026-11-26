@@ -1,0 +1,12 @@
+V6:E:0.70
+   GBn2: Gamma_3,4,5 = 1.296e+01, 4.323e-01, 6.628e-03 kcal/mol; largest single-flip change of ln B at the anchor 0.269
+   GBn2 without neck: Gamma_3,4,5 = 1.237e+00, 1.660e-02, 8.996e-05 kcal/mol; largest single-flip change of ln B at the anchor 0.062
+   OBC2: Gamma_3,4,5 = 4.489e+00, 8.360e-02, 7.938e-04 kcal/mol; largest single-flip change of ln B at the anchor 0.151
+L8:E:0.60
+   GBn2: Gamma_3,4,5 = 9.537e+01, 7.294e+00, 3.127e-01 kcal/mol; largest single-flip change of ln B at the anchor 0.474
+   GBn2 without neck: Gamma_3,4,5 = 8.178e+00, 2.697e-01, 4.533e-03 kcal/mol; largest single-flip change of ln B at the anchor 0.156
+   OBC2: Gamma_3,4,5 = 4.077e+01, 2.071e+00, 6.651e-02 kcal/mol; largest single-flip change of ln B at the anchor 0.365
+S4:E:0.70
+   GBn2: Gamma_3,4,5 = 7.294e-01, 6.849e-03, 0.000e+00 kcal/mol; largest single-flip change of ln B at the anchor 0.118
+   GBn2 without neck: Gamma_3,4,5 = 1.178e-01, 5.514e-04, 0.000e+00 kcal/mol; largest single-flip change of ln B at the anchor 0.049
+   OBC2: Gamma_3,4,5 = 7.550e-01, 4.832e-03, 0.000e+00 kcal/mol; largest single-flip change of ln B at the anchor 0.131
