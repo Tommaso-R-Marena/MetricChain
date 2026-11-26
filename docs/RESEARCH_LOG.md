@@ -2618,19 +2618,171 @@ stays 2026-11-30 15:00 ET.  Done here: `docs/collaboration/README.md` and
 divisions with three questions each; replies to ENG-MSG-0006 and SCI-RES-0021).  The
 sync routine now fetches five branches.
 
-### Resume here (cycle 10, twenty-second checkpoint)
+### Cycle 10, twenty-third checkpoint (2026-11-26, evening): the rate of the nested levels is a theorem; what nesting needs in general and where it provably fails; an audit of every assumption
 
-Verified state: every module under `proofs/` (87 files) builds with zero warnings and is walked
-by the axiom audit (4937 declarations); the harness (183 registered tests: 155 that must
-survive, 28 documented refutations) and its mutation tests (538 mutations: 537 caught, one
-expected pass; baselines checked,
+**The result of the checkpoint: Theorem 11.53b** (theory report §11.18; proof in
+`docs/workstreams/R_REPORT.md`).  For every convex nonincreasing non-adaptive exponent
+function `θ_na` with a finite value at zero and a dual function `J` with a twice
+differentiable maximum, the exponent `τ_k` of `k` nested levels at accuracy zero satisfies
+
+    lim k²·(τ_k − h) = 2π²·h²·θ_hint″(0)
+
+(cube at `u = 1`: `0.6413·a`; Gaussian pair: `π²/16`).  The entry "After the twenty-second
+checkpoint" below has how it was found (a saddle-node of the slope map at `B = h`); what
+was missing then was the upper bound.  Its three ingredients, all the coordinator's:
+*(i)* the slope map `Σ(B, σ) = sup_e [B − (1 − σ)θ_na(e)]/e` is **jointly convex** (a supremum of
+functions affine in `(B, σ)`), so the orbit curves `p_{j+1}(B) = Σ(B, p_j(B))` are convex;
+*(ii)* **Proposition U**: for a *convex* family of lines `{B − W(B)x}` (with `W` convex,
+nondecreasing, values in `[0, 1]`) one level maps the family line by line — Lemma M and
+Sion's minimax theorem; both adjectives are necessary (D64 was the non-convex case);
+*(iii)* **Lemma T**: an orbit curve cut where it reaches a slope level and continued by
+its tangent line stays a sub-solution, so a chain of such curves started from a flat
+family at height `h + ε₁` passes the bottleneck in `πh√(2θ_hint″(0)/δ)·(1 + o(1))` levels (Lemma
+PT) — provided a *range condition* holds (the continued curves stay below slope one),
+which is Lemma RC for a cut level near `L` and `ε₁` small.  Also in the report: Corollary E (if
+`|θ_na′(0+)| ≤ 1` the recursion is solved exactly by the orbit curves), Proposition K (a kink
+of `θ_na` at its fixed point gives the rate `Θ(1/k)`: the general bound `O(1/k)` of the
+machine-checked `RateFull.lean` is sharp over all convex pairs), Proposition G (Gaussian
+pair: `τ_k ≥ 1/(4cos²(π/(2k + 1)))`, exact rational arithmetic), Proposition S (a closed
+form of the scaled defect at positive accuracy; a sketch, [N]).
+
+*How it was verified.*  (1) Two independent referees (briefs `docs/workstreams/R_review_brief.md`;
+reports `R_REVIEW_A.md` — upper bound — and `R_REVIEW_B.md` — lower bound, slope map, the
+side results; their code under `experiments/workstreams/R/review_{A,B}/`): **no error of
+substance**; eight expository corrections applied (attainment in (Σ3) only below
+`(1 − s)a`; the count of fixed points in (Σ5); a remark on "exact dynamics" that holds only
+for infinite slope at zero; "equality in Proposition U" is equality of the minimax value,
+not of `R[T]`; two unwritten steps of Lemma RC written out; `T ≥ 0` in Proposition U; the
+case `θ(e) = 0` of Lemma M).  (2) Numerics by the coordinator
+(`experiments/workstreams/R/`): Proposition U on random convex families (violation
+`≤ 2·10⁻⁶·a`, at the resolution of the search); the chain with its range condition to
+`1000` levels (Gaussian) and `600` (cube); the passage-time lemma to `δ/h = 10⁻⁶`; a wide
+start (`b₀ = h + 0.15`) at which the range condition **fails** (kept: `out_r2_chain_gauss_wide.txt`).
+(3) Harness XVI.8 (nine parts; 15 mutations, all caught).  (4) Lean: the line lemmas, the
+iteration and the Gaussian slope map are `LineDynamics.lean` (written by a subagent from
+a brief, read and compiled by the coordinator); Proposition U, Lemma T, the range
+condition and the passage time are **not** machine-checked.
+*What it is not:* a statement about algorithms outside the nested family; a cost at
+finite `n` (that is Theorem C below — a plan); a certified upper constant at finite `k`.
+
+**The abstract nesting theorem and its obstructions (theory report §11.33, new).**
+Workstream N (brief `docs/workstreams/N_brief.md`, written under the research owner's
+directive on generality) delivered `N_REPORT.md`; an independent referee (`N_REVIEW.md`,
+code `experiments/workstreams/N/review/`) found Theorem N1 and its variants correct as
+stated, reproduced the false certificate from the description alone, and found four
+things to change (a claim about the algorithm that was only about its analysis —
+withdrawn; "(F2) is the only validity hypothesis" — false; Proposition N6, the assembly
+over the levels, is a plan and not a proof; Proposition N13 needed a repair, given).  As
+integrated: Theorem 11.118 (the level theorem on any probability space with upper and
+lower tail functions), 11.119 (two blocks; a dependent known part under a certified
+class-relative influence `ι`, at slope `u + ι`), 11.120 (**Euclidean Gauss space: the tail
+functions are exact and dimension-free, a fixed coordinate split gains nothing, every
+run draws at least `exp((L − √(2x))²/2)` outer points at a linear instance**; the hinted
+lower bound holds in high dimension), Proposition 11.121 (**unbounded influence: the
+algorithm returns a false bracket** — a 28-site instance, every run of two
+implementations), 11.122 (an exponential moment of the envelope is necessary and
+sufficient for any certified upper bound), 11.123 (profiles and splits).  Harness XXVI.1
+(five parts; 8 mutations, all caught).  Two earlier sentences of ours about Gauss space
+(§11.18 remark (3), §12) were wrong in the light of 11.120 and are corrected.
+
+**The assumption audit (`docs/ASSUMPTION_AUDIT.md`; `docs/audit/`).**  Two independent readers
+(AA1: Parts I–II and §§11.1–11.17; AA2: §§11.18–11.32), each with code
+(`experiments/audit/`, 14 scripts, re-run by the coordinator with identical outputs),
+classified **499 assumptions of 156 numbered statements** in the directive's six
+categories (plus "not known").  **One error of substance: Theorem 11.33(a) had lost its
+hypothesis "the known part is additive"** on adoption from workstream D — false without
+it (a known part confining the ensemble to the extended Golay code; Gilbert–Varshamov
+codes; pairwise ferromagnetic blocks: `exp(Θ(n^{1/3}))` evaluations).  Restored (D65).  47
+sentences of the summaries stated more than is proved and 11 were stale; an editor
+agent applied 61 of 62 items (one declined, with the reason), each recorded in
+`docs/audit/APPLIED_CORRECTIONS.md` and reviewed by the coordinator with a word-level diff;
+seven further qualifications were added on that reading.  The synthesis has the
+hierarchy of assumptions (from the uniform cube outwards), the ten most consequential
+ones, a table of computationally vacuous guarantees, and the classifications still open.
+
+**The science division's review SCI-REV-0017 of Theorem 11.58a, applied in full.**  Proved
+as stated given its inputs; nine minor findings; six requests (the class of algorithms
+in the definition of `N`; "`k_M − 1` nested levels, each built as in the proof"; the slope
+step with its threshold `X₀(n)` and the size of its `O_{u,δ}(1)`: `31, 39, 60, 178` nats;
+`O(η⁻²(…))`; the wording of the checks; the outer loop has now been run against a simulated
+inner oracle, by that division).  Errata at the head of `Q_REPORT.md`.  That division also
+ran our full audit at `3cf14b9` on its own machine (passed).
+
+**Workstream Q2 (`docs/workstreams/Q2_REPORT.md`) — delivered and refereed internally; not yet
+integrated.**  It claims that the `C₁√n` term of Theorem 11.58a is not needed (drops at a
+logarithmic accuracy; a chain of levels with outer blocks of `Θ(ln n)` sites back to a
+bounded accuracy at an additive cost paid once) and proves a one-level lemma for inner
+families whose certified cost is a maximum of finitely many lines.  The coordinator has
+read §§1–5 line by line.  The referee's report (`docs/workstreams/Q2_REVIEW.md`, code under
+`experiments/workstreams/Q2/review/`; handed back at 18:58 UTC, while the audit of this
+checkpoint ran): **no substantive error or gap** — every statement re-derived, about a
+million levels and 3.5 million chain levels evaluated with an evaluator of its own, the
+nested design reproduced to the last digit up to three epochs; six findings of wording,
+none of which changes a statement, **not yet applied**; and its answer to the
+coordinator's question is yes (Lemma U holds for lines valid at all accuracies, provided
+the maximum is nonnegative — what item 0-C needs).  **Nothing of the report is in the
+theory report yet**: integrating it is the first task after this checkpoint.
+
+**Lean files new since the twenty-second checkpoint** (all in the audit): `LineDynamics.lean`
+(Lemma L and its iteration, the Gaussian slope map), `ResolvedPenalties.lean` and
+`GibbsRecovery.lean` (three statements asked by the science division in SCI-MSG-0028;
+THY-RES-0016).  Each written by a subagent from a written brief, read line by line and
+compiled by the coordinator.
+
+**Six divisions.**  Five other branches are fetched read-only at every checkpoint; read at
+engineering `eb6b872`, science `5c233cc`, ensemble `a570520`, geometry `d84a43b`, complexity
+`4b18ebb`.  THY-MSG-0018 (to all five) carries the results above, the answers to
+GEOMETRY-REQ-0005, to the ensemble division's E-T1, E-T2, to the complexity division's
+orbit-sum question, to SCI-RES-0023/-0024/-0025 (with a three-line bound for pair terms
+through a lower mixing coefficient), candidates for the engineering division in its
+"proved under `H` / believed under `H′`" format, and a linked correction of two header
+times of ours.  Nothing of the new divisions is used on this branch.
+
+**Numbers of the audit that closes the checkpoint.**  90 Lean files (49057 lines), 5051
+declarations walked by the axiom audit, 685 headline theorems; harness: 187 tests (158
+survive, 29 documented refutations); mutations: 575 (574 caught, one expected pass; 153
+baseline runs).  New tests since the twenty-second checkpoint: XVI.6 (line lemmas, slope
+map, the Gaussian closed form, duality), XVI.7 (a documented refutation: lines of a
+non-convex family propagated one by one), XVI.8 (the rate theorem: joint convexity of
+the slope map, convex orbit curves, the bottleneck, the passage time, Proposition U on
+convex families, the chain with its range condition, the kink, the exact solution for
+slopes at most one), XXVI.1 (§11.33: the Gaussian tail functions, the truncated mean of
+the linear instance, the class-relative influence, the instance of the false
+certificate, the profile of the cube).
+
+**What was withdrawn or corrected:** `DEAD_ENDS.md` D65 (Theorem 11.33(a)), D66 (an agent
+that returned nothing; five sentences of the rate report corrected by its referees;
+four of workstream N; two header times), closing notes on D25 and D32.
+
+**Subagents of this checkpoint** (each with a written brief in the repository, each
+checked by the coordinator; none had authority beyond its brief): workstream R (failed:
+no output; the coordinator wrote the proof), workstreams N and Q2, the audits AA1 and
+AA2, the editor that applied the audit's corrections, the referees of R (two), of N and
+of Q2, the Lean tasks LD and LE.
+
+### Resume here (cycle 10, twenty-third checkpoint)
+
+Verified state: every module under `proofs/` (90 files) builds with zero warnings and is walked
+by the axiom audit (5051 declarations); the harness (187 registered tests: 158 that must
+survive, 29 documented refutations) and its mutation tests (575 mutations: 574 caught, one
+expected pass;
+baselines checked,
 crashing mutants rejected) pass; `scripts/audit_all.sh`
-exits 0.  **Three divisions** work on three branches (this one; `research/ubuntu-engineering`;
-`research/scientific-translation`); the other two are read-only for us and are fetched at
-every checkpoint (`docs/collaboration/status/theory.md`).  Refereed or independently reviewed:
-theory report §§11.16–11.17 (R5, R6, R_P), §11.18 (R7; SCI-REV-0007), §11.19 (R8; SCI-REV-0007;
-remark (1b): SCI-REV-0016; Theorem 11.58a: R12),
-§11.20 (R9), §11.23 (R10), §11.32 (R11; SCI-REV-0010), and — by the Scientific Discovery
+exits 0.  **Six divisions** work on six branches (this one; `research/ubuntu-engineering`;
+`research/scientific-translation`; `research/ensemble-identifiability`;
+`research/geometric-inference`; `research/biological-complexity`); the other five are read-only
+for us and are fetched at every checkpoint (`docs/collaboration/status/theory.md`).  **A
+mandatory consolidation directive of the research owner is expected** (at about $2,000 of
+aggregate credits remaining): from then on proof completion, verification, integration,
+documentation, preservation only; the computational hard stop is 2026-11-30 15:00 ET.
+**Read first, in this order:** this section; `docs/ASSUMPTION_AUDIT.md` (what every theorem
+assumes; where the summaries overstated); `docs/workstreams/R_REPORT.md` (the rate) and
+`docs/workstreams/Q2_REPORT.md` with its review; `docs/collaboration/status/theory.md`.
+Refereed or independently reviewed:
+theory report §§11.16–11.17 (R5, R6, R_P), §11.18 (R7; SCI-REV-0007; **Theorems 11.53a, 11.53b:
+two internal referees, `docs/workstreams/R_REVIEW_A.md`, `R_REVIEW_B.md`**), §11.19 (R8; SCI-REV-0007;
+remark (1b): SCI-REV-0016; Theorem 11.58a: R12 and SCI-REV-0017),
+§11.20 (R9), §11.23 (R10), §11.32 (R11; SCI-REV-0010), **§11.33 (`docs/workstreams/N_REVIEW.md`)**, and — by the Scientific Discovery
 Division — §11.22 (SCI-REV-0002, -0009, -0011), §11.24 (SCI-REV-0003), §11.25 (SCI-REV-0001),
 Theorems 11.99 and 11.101 of §11.26 (SCI-REV-0005), Theorem 11.18a and Propositions 11.18b,
 11.18c (SCI-REV-0012), Theorem 11.110(e) as corrected, Theorem 11.18d as written,
@@ -2666,8 +2818,115 @@ evaluated by the engineering division at one slope, on flat and cone fibres: ENG
 site types end to end; Theorem 11.63 on sets without symmetry for `n > 6`; parts (f), (g) of
 the bridge theorem (read only).  **Nothing received is unapplied** except the optional
 parts of L4-T3 of SCI-MSG-0023, P5-T1(i) (item 0-first), R16-THY-5 and R15-T6 (items below);
-the science branch is read at `08ec47c`, the engineering branch at `ce71724`.  In priority order:
+the other branches are read at engineering `c81166b`, science `32bcd7f`, ensemble `1a067b5`, geometry `e8e2582`, complexity `61fb68b`.  In priority order (items 0-C to 0-X are those of the twenty-third checkpoint; in item 0-zero-zero below, (a) is superseded by 0-C and (b) by 0-Q2):
 
+0-C. **Theorem C (not established; the strongest open step of the programme).**  *Claim:*
+   on the cube class, at every bounded accuracy, `ln N(n; ε, δ) ≤ n·h + O(n^{1/3}(ln n)^{2/3})`
+   (Theorem 11.58a has `O(√(n ln n))`).  *Why it should be true:* the rate theorem gives
+   `τ_k − h ≈ C/k²`; if every level loses `O(ln n)` in the logarithm of the certified cost,
+   `k` levels cost `n·h + n·C/k² + k·O(ln n)`, minimal at `k ≈ (n/ln n)^{1/3}`.  *What Theorem
+   11.58a lacks:* its schedule follows the epochs of the `O(1/k)` proof (one line per
+   epoch); the `1/k²` law needs a **convex family of lines** carried through every level
+   (Proposition U of `docs/workstreams/R_REPORT.md`; a single line gives `C/k` whatever is
+   done: D64).  *The plan as it stood when the checkpoint was closed (the coordinator's;
+   worked out against the texts of `R_REPORT.md` §§5–8 and `Q2_REPORT.md` §§2, 4):*
+   (I) **Exponent level — available, refereed.**  Fix the cut level and the restart height
+   `b₀ = h + ε₁` of Lemma RC (*fixed*, not tending to `h`: for an order statement the sharp
+   constant is not needed).  The cut orbit curves give `(W_j, b_j)`, `j ≥ 0`: each `W_j` convex,
+   nondecreasing, continuous from `[0, b_j]` to `[0, 1]` with `W_j(0) = 0`; `W₀ ≡ 0`;
+   `b_{j+1} = sup{B ≤ b_j : Σ(B, W_j(B)) < ∞}`; `sup_j j²(b_j − h) < ∞` (§8 of the report); and for
+   every `g > 0`, with `𝓔_j = {(B, s) : 0 ≤ B ≤ b_j, W_j(B) ≤ s ≤ 1}`,
+   `inf_{e>g} max_{𝓔_j} [B − (g/e)(B − (1 − s)θ_na(e))] ≤ max_{B ≤ b_{j+1}} [B − W_{j+1}(B)·g]`
+   (the minimax identity inside the proof of Proposition U, then Corollary U′).
+   (II) **One level at finite `n`.**  A family has the type "lines `𝔏` with error `E`" if its
+   certified cost in every dimension `d ≤ N` and at every accuracy `x̂` above its least one
+   is at most `max_{(B,σ)∈𝔏} [d·B − σ·x̂] + E`.  Take `𝔏_j = {(B_i, W_j(B_i))}` on a grid of spacing
+   `1/N` in `B` (the zero line is in it: `W_j(0) = 0`).  Lemma U of `Q2_REPORT.md` §2 bounds one
+   level with outer block `n_o` and outer rate `e` over such a family by
+   `max_i [(d − n_o)B_i + (1 − σ_i)·n_o·θ_na(e)] + ℓ₀ + E`, at the accuracy `≈ n_o·e + X₀′`
+   (`X₀′ ≈` least accuracy of the inner family `+ ln n`).  Its convention (C3) excludes
+   positive slopes with an unbounded range; its proof uses the range only to find a line
+   that is nonnegative at the dominant rung — the zero line does that.  **Confirmed by
+   the referee of Q2** (`Q2_REVIEW.md` §1.4: yes, with the cap `n_o·θ_na(e)`; 353 184 levels
+   with such families, no violation; what the proof uses of the inner majorant is only
+   that it is nonincreasing with slopes at least `−1`).  All lines of `𝔏_j`
+   lie in `𝓔_j`, so with `(n_o, e)` chosen for each `(d, x̂)` as a near-minimiser of the left
+   side of (I) at `g = (x̂ − X₀′)/d` — rounding `n_o` costs at most `a·(d_min + 1)`, the grid at
+   most one — the new family has the type `𝔏_{j+1}` with error `E + ℓ₀ + X₀′ + O(ln N)`.  (The
+   image lines of slope above one never need to be realised: a smaller slope is a
+   weaker bound.  No hull, no chords.)
+   (III) **The least accuracy must be brought back after every level.**  A level is
+   `≈ ln n` less accurate than its inner family at best, and a family that is `ξ` behind
+   costs `e^{σξ}` more at every later level: without repair the loss after `j` levels is
+   `≈ j²·ln n/2`, which gives back `√(n ln n)`.  Proposition T of `Q2_REPORT.md` §4 (a chain of
+   levels with outer blocks of `Θ(ln N)` sites) turns a family of flat type `b_{j+1}` with
+   least accuracy `𝒳 = O(ln N)` into one with accuracy one at the additive cost
+   `A_T ≈ (a/b_{j+1})·(𝒳 + 4 ln N)`; the two together (chain below `𝒳`, level above) have the
+   type `𝔏_{j+1}` with error `+ A_T + 𝒳 + 1`.  So every level loses `ℓ̄·ln n` with a constant `ℓ̄`
+   of order `6 + 8a/h`.
+   (IV) **The base.**  A family of flat type `h + ε₁` with bounded least accuracy: the
+   schedule of Theorem 11.58a (or Theorem A of Q2) with a *fixed* number of epochs.
+   (V) **Total.**  `n·h + n·C″/k² + k·ℓ̄·ln n + O(ln² n)` for every `k`; at `k ≈ (n/ln n)^{1/3}`:
+   `n·h + O(n^{1/3}(ln n)^{2/3})`.  The constant is not the sharp `2π²h²θ_hint″(0)` (fixed `ε₁`).
+   *What has to be done before it is a theorem:* (a) done — the referee of Q2 found
+   Lemma U and Proposition T correct as stated and answered the question on (C3);
+   (b) the proof written out (begun: `docs/workstreams/Z_REPORT.md`, with a first exact test
+   of the one-level step, `experiments/workstreams/Z/` — work in progress, not part of
+   this checkpoint) — the type for
+   *all* dimensions `d ≤ N` (small dimensions by enumeration), the bookkeeping of the
+   failure probabilities through `k` levels and `k` chains (`Λ` grows by at most `N·a` per
+   chain, which enters only logarithmically), the horizon `N`; (c) numerics with the exact
+   one-level evaluator (`experiments/workstreams/Q2/q2lib.py`) on grid families of the
+   curves `W_j` (`experiments/workstreams/R/rlib.py`); (d) an independent referee.
+   *A lower bound for this family of analyses:* `τ_k − h ≥ c/k²` is proved, and each level
+   multiplies the certified cost by at least a constant, so no analysis of nested levels
+   of this kind gives `n·h + o(n^{1/3})`.
+0-Q2. **Workstream Q2** (`docs/workstreams/Q2_REPORT.md`; brief `Q2_brief.md`; scripts
+   `experiments/workstreams/Q2/`): delivered 18:02 UTC, **refereed internally at 18:58 UTC
+   (`Q2_REVIEW.md`, brief `Q2_review_brief.md`, code `experiments/workstreams/Q2/review/`): no
+   substantive error; six findings of wording** (its §0: the exclusion in convention (C3)
+   is not needed; a side condition in Proposition A′; remark (2) of Proposition D′; the
+   least block for small `N`; two provisos in §6.2; what (C2) is used for).  To do: apply
+   the six findings as errata at the head of the report; then integrate — Theorem 11.58a without the `C₁√n` of the
+   drops (Theorems A, B of the report: `ln N ≤ n·h + 2√((1 + r̄)c₁·n·ℓ̄_S) + O(ln² n)`, constant
+   `3√(2(1 + r̄)c₁)` in the limsup), Lemma U, Proposition D′, Proposition T, Proposition
+   Q6(e) with its corollary for maxima of lines — with harness coverage for whatever
+   enters the theory report.  Lemma U and Proposition T are the inputs of item 0-C.
+0-R. **Left over from the rate theorem** (`docs/workstreams/R_REPORT.md` §12).  (a) Certified
+   two-sided constants at finite `k` (interval arithmetic for the orbit curves and for
+   the chain of §6 from a certified restart value; the Gaussian lower bound is exact
+   rational: `experiments/workstreams/R/r3_gauss_exact_lb.py`); proposed to the engineering
+   division as optional (THY-MSG-0018 §6).  (b) Proposition S (the scaled defect at
+   positive accuracy, `f(ζ) = sup_z [2z² + 2ζz·cot z] − ζ²/2`) is a sketch; a proof needs the
+   chain at positive accuracy.  (c) Degenerate maxima of the dual function: `h − J ≍ |t − L|^p`
+   should give `k^{−p/(p−1)}` (heuristic); a corner gives geometric convergence or faster
+   (lower bound proved, upper bound believed).  (d) A machine check: the joint convexity
+   of the slope map and Lemma T are finite-dimensional convex analysis; Proposition U
+   needs a minimax theorem (Mathlib has none in the form needed — check before starting).
+0-N. **Left over from §11.33** (`docs/workstreams/N_REPORT.md`, `N_REVIEW.md`).  (a) Proposition N6:
+   assembling abstract levels into a recursion for an exponent is a plan (it needs a
+   scaling limit of the tail functions).  (b) Nesting on Euclidean Gauss space with blocks
+   that are random subspaces, or with a rotation between levels: open — the obstruction
+   is for a fixed split of the coordinates.  (c) The influence `ι` of a band model: the
+   science division's instances have a transfer operator from which it is computable;
+   whether it is small there decides whether nesting is valid on them (THY-MSG-0018 §2).
+0-AA. **From the assumption audit** (`docs/ASSUMPTION_AUDIT.md` §8): 68 of 499 assumptions have
+   unknown status; the ranked list there says what hangs on each.  The label P is a
+   claim (§1 of that file); the science division's sampled review of it (SCI-REV-0022) is
+   announced and has to be applied when it arrives.
+0-X. **Inbound that is open.**  The science division's SCI-REV-0022 (above); its four narrower
+   items of SCI-RES-0025; the geometry division's two offered follow-ups (the exact
+   worst-case constant of one torsion move as a function of the position; the sharp
+   Procrustes–Gram constant on pairs of chains) — accepted as useful, not urgent
+   (THY-MSG-0018 §4); the ensemble division's `(max,+)` checker for the range of a mean
+   given group laws (ENSEMBLE-RES-0002 §1 item 4) is a leaf rule our kernel could host —
+   not built.  The engineering branch has unpublished drafts that use our workstream N
+   (mixed outer blocks with the sorted-slope tail bound); read them when published.
+   **Fetched at 19:21 UTC, after the audit and before the commit, and not yet read:**
+   geometry `cd4a2ec` (GEOMETRY-MSG-0006; its internal review), complexity `ff04e5e`
+   (COMPLEXITY-MSG-0003 with linked corrections; COMPLEXITY-RES-0005, an answer to our
+   question on a localisation criterion); science `a217c7d` (SCI-MSG-0031, read in part:
+   the transition of a floor computed as a least ratio).  Read and answer them first.
 0-zero-zero. **Below the exponential scale: what is between `n·h + ½ ln n` and
    `n·h + O(√(n ln n))`** (Theorem 11.58a; theory report §12 item (d)(i)).  Proved at the
    twenty-second checkpoint: the upper bound, by a schedule of `≈ √(n/ln n)` levels

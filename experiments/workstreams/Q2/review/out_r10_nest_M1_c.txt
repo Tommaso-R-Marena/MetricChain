@@ -1,0 +1,5 @@
+u = 1.0 n = 16000  proof: ln cost/(n a) = 0.8699   bound of Theorem A (M = 1) = 1.0895   blocks m_1 = 850 (18 levels), m_0 = 778
+      node checks: {'base': 17908, 'chain0': 21210, 'S': 6326, 'D': 36, 'chain1': 19}  (levels built: {'S': 3024, 'D': 18});  violations 0;  least slack of the induction by family: {'base': 5.5, 'chain0': 89.8, 'S': 111.1, 'D': 181.4, 'chain1': 261.4}   [38 s]
+u = 1.0 n = 16000  min  : ln cost/(n a) = 0.8576   bound of Theorem A (M = 1) = 1.0895   blocks m_1 = 850 (18 levels), m_0 = 778
+      node checks: {'base': 49035, 'chain0': 55381, 'S': 6346, 'D': 36, 'chain1': 19}  (levels built: {'S': 3026, 'D': 18});  violations 0;  least slack of the induction by family: {'base': 5.5, 'chain0': 89.8, 'S': 111.1, 'D': 206.5, 'chain1': 286.6}   [119 s]
+      report (section 7.4), proof / min / bound: -

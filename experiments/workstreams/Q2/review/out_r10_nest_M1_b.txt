@@ -1,0 +1,24 @@
+u = 1.0 n = 4000  proof: ln cost/(n a) = 1.2634   bound of Theorem A (M = 1) = 1.8436   blocks m_1 = 735 (5 levels), m_0 = 670
+      node checks: {'base': 309, 'chain0': 519, 'S': 354, 'D': 10, 'chain1': 6}  (levels built: {'S': 144, 'D': 5});  violations 0;  least slack of the induction by family: {'base': 5.3, 'chain0': 82.2, 'S': 100.1, 'D': 155.4, 'chain1': 232.4}   [0 s]
+u = 1.0 n = 4000  min  : ln cost/(n a) = 1.1955   bound of Theorem A (M = 1) = 1.8436   blocks m_1 = 735 (5 levels), m_0 = 670
+      node checks: {'base': 657, 'chain0': 1016, 'S': 359, 'D': 10, 'chain1': 6}  (levels built: {'S': 144, 'D': 5});  violations 0;  least slack of the induction by family: {'base': 5.3, 'chain0': 82.2, 'S': 100.1, 'D': 177.7, 'chain1': 283.6}   [1 s]
+      report (section 7.4), proof / min / bound: 1.263 / 1.196 / 1.844
+u = 1.0 n = 8000  proof: ln cost/(n a) = 1.0154   bound of Theorem A (M = 1) = 1.3538   blocks m_1 = 794 (10 levels), m_0 = 726
+      node checks: {'base': 2420, 'chain0': 3264, 'S': 1551, 'D': 20, 'chain1': 11}  (levels built: {'S': 707, 'D': 10});  violations 0;  least slack of the induction by family: {'base': 5.5, 'chain0': 86.3, 'S': 108.7, 'D': 186.4, 'chain1': 264.1}   [3 s]
+u = 1.0 n = 8000  min  : ln cost/(n a) = 0.9885   bound of Theorem A (M = 1) = 1.3538   blocks m_1 = 794 (10 levels), m_0 = 726
+      node checks: {'base': 6094, 'chain0': 7655, 'S': 1561, 'D': 20, 'chain1': 11}  (levels built: {'S': 707, 'D': 10});  violations 0;  least slack of the induction by family: {'base': 5.5, 'chain0': 86.3, 'S': 108.7, 'D': 207.1, 'chain1': 284.8}   [8 s]
+      report (section 7.4), proof / min / bound: 1.015 / 0.989 / 1.354
+u = 2.0 n = 2000  proof: ln cost/(n a) = 1.1057   bound of Theorem A (M = 1) = 1.4539   blocks m_1 = 282 (7 levels), m_0 = 247
+      node checks: {'base': 968, 'chain0': 1430, 'S': 799, 'D': 14, 'chain1': 8}  (levels built: {'S': 337, 'D': 7});  violations 0;  least slack of the induction by family: {'base': 8.8, 'chain0': 60.6, 'S': 81.5, 'D': 154.5, 'chain1': 214.8}   [0 s]
+u = 2.0 n = 2000  min  : ln cost/(n a) = 1.0746   bound of Theorem A (M = 1) = 1.4539   blocks m_1 = 282 (7 levels), m_0 = 247
+      node checks: {'base': 2192, 'chain0': 2998, 'S': 806, 'D': 14, 'chain1': 8}  (levels built: {'S': 337, 'D': 7});  violations 0;  least slack of the induction by family: {'base': 8.8, 'chain0': 60.6, 'S': 81.5, 'D': 171.9, 'chain1': 232.1}   [1 s]
+      report (section 7.4), proof / min / bound: 1.106 / 1.075 / 1.454
+u = 2.0 n = 4000  proof: ln cost/(n a) = 0.9215   bound of Theorem A (M = 1) = 1.1354   blocks m_1 = 302 (13 levels), m_0 = 265
+      node checks: {'base': 7283, 'chain0': 9129, 'S': 3435, 'D': 26, 'chain1': 14}  (levels built: {'S': 1589, 'D': 13});  violations 0;  least slack of the induction by family: {'base': 9.1, 'chain0': 65.0, 'S': 83.0, 'D': 141.2, 'chain1': 207.2}   [5 s]
+u = 2.0 n = 4000  min  : ln cost/(n a) = 0.9024   bound of Theorem A (M = 1) = 1.1354   blocks m_1 = 302 (13 levels), m_0 = 265
+      node checks: {'base': 18626, 'chain0': 22075, 'S': 3449, 'D': 26, 'chain1': 14}  (levels built: {'S': 1590, 'D': 13});  violations 0;  least slack of the induction by family: {'base': 9.1, 'chain0': 65.0, 'S': 83.0, 'D': 164.7, 'chain1': 244.5}   [12 s]
+      report (section 7.4), proof / min / bound: 0.922 / 0.902 / 1.135
+
+real	0m30.637s
+user	0m30.319s
+sys	0m0.234s

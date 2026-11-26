@@ -1,0 +1,5 @@
+u = 0.5 done [7 s]
+u = 1.0 done [14 s]
+u = 2.0 done [22 s]
+levels of Q6 as built: 5776, violations of the bound with c_S' 0, least slack 3.617 at (u, n, n_o, x-hat, B/h, sigma, R/h, ln delta) = (2.0, 3000, 1271, 145.92, 11.0, 1.0, 1.0, -150000.0)
+largest c_S - c_S' over the cases: 26.9 nats

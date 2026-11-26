@@ -532,6 +532,64 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XVI.5 M9: the radius k* claimed to be below rho_h n
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.6 M1: a minorant line claimed to keep its slope under one level (B - sigma g instead of B - Sigma_B(sigma) g)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.6 M2: the slope map without the factor 1 - sigma in front of theta_na
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.6 M3: the dual function J without its linear term (Lambda(t u) instead of Lambda(t u) - t Lambda(u))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.6 M4: the Moebius map of the Gaussian pair with the denominator 1 - sigma
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.6 M5: the closed form of the Gaussian lower bound with k rotations instead of k - 1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.6 M6: Lemma M without the term (1 - sigma) mu (the line claimed to keep its intercept times 1 - phi only)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.6 M7: duality claimed with the generating lines only (no convex combinations): the naive line propagation
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.6 M8: the bottleneck expansion with (sigma - L_h)^2/theta_hint'' in place of (sigma - L_h)^2/(2 theta_hint'')
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.6 M9: lines of the cube followed up to slope 1 instead of 1 - B/a (beyond the regular range)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.6 M10: the intercept of the tangent line of theta_na with slope s claimed to be (1 + s) J(s)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.6 M11: the constant of the rate claimed to be pi^2 h^2 theta_hint'' (half of 2 pi^2 h^2 theta_hint'')
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.6 M12: the Gaussian lower bound compared with (pi^2/16)/k^2 instead of (pi^2/16)/(k + 1/2)^2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.7 M1: the naive formula evaluated without propagating the slopes (the refutation disappears)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.7 M2: the lower bound of tau_3 computed without the value 1/2 of the second level at accuracy zero
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M1: Proposition U with a bound that is too small (image slopes multiplied by 1.1)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M2: Proposition U claimed for families of lines that are not convex
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M3: the passage time with the constant pi h sqrt(theta_hint''(0)) (a factor sqrt 2 missing)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M4: the bottleneck expansion with v^2/theta_hint''(0) instead of v^2/(2 theta_hint''(0))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M5: the range condition claimed from the wide start b_0 = h + 0.15 (no restart near h)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M6: consecutive slopes at the cut claimed not to grow (bound 1 instead of the multiplier)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M7: the kinked pair with twice the lower bound, 2 (L_2 - L_1) h/(k + 2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M8: theta_hint''(0) = theta_na''(h)/(1 + |theta_na'(h)|)^2 (wrong power)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M9: the slope map claimed jointly concave
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M10: the chain bound claimed below the constant, j^2 (b_j - h) < 2 pi^2 h^2 theta_hint''(0)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M11: the orbit curves claimed concave in B
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M12: the kinked pair with the step 2 delta/h on the flat part
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M14: the Gaussian lower bound claimed as 1/(4 cos^2(pi/(2k))) (the offset 1/2 in k + 1/2 dropped)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M15: the closed form of the Gaussian orbit curve with sin((2j+2) alpha) in the numerator
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVI.8 M13: Proposition U claimed with strict slack (the bound never attained: R <= U - 1e-3 a)
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XVII.1 M1: closed form of the game function with a wrong normalisation
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XVII.1 M2: shift identity of the uniform cube claimed with a field (the term KL(P_X || pi) dropped)
@@ -1074,6 +1132,22 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXV.3 M6: the coefficient V/4 claimed for the symmetric envelope
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVI.1 M1: the Gaussian upper tail function with Phi(t - L) in place of Phi(L - t)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVI.1 M2: the Gaussian lower tail function with Phi(-c + L) in place of Phi(-c - L)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVI.1 M3: the class-relative influence of k inner sites taken as that of one site
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVI.1 M4: the class-relative influence with one sign only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVI.1 M5: the tail inequality of the assumed class claimed to hold at the instance of Proposition 11.121
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVI.1 M6: the instance with a weak coupling (J = 1/4) claimed to have the same numbers
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVI.1 M7: the truncated mean of the linear instance bounded by A e^{-(L - t)^2}
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVI.1 M8: the profile of the cube claimed to have slope at most -1 also below p_u
+                  exit=1  1 TEST(S) MISBEHAVED
 
-538 mutations: 537 caught, 1 expected pass, 0 not as expected
-149 baseline runs of the unmutated harness (one per selection): 149 behave as expected, 0 misbehave
+575 mutations: 574 caught, 1 expected pass, 0 not as expected
+153 baseline runs of the unmutated harness (one per selection): 153 behave as expected, 0 misbehave

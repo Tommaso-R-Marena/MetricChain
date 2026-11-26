@@ -1,0 +1,12 @@
+u = 1, n = 1e6, phi_0 = 0.2080: n_o = 208013, r_dagger = 56920, p_u n_o = 55943.3, ln(1/pi) - n_o a = -959.3   (report: -959)
+u = 1.0 done, 44 s
+Proposition D' (levels as built and pass-through):
+    cases 5052 (of which pass-through only 1632), violations 0, least slack 5.728 at ('level', 1.0, 10000, 2080, 0.208, 17.3, -10000.0, '[(0.06958892545818907, 1.0)]', 1.0);
+    checklist items 20520, violations 0
+Proposition Q6(e) / Corollary Q6(e)-max (finite R, or R = inf with sigma = 0):
+    cases 27670 (of which pass-through only 15030), violations 0, least slack 5.625 at ('level', 1.0, 10000, 5533, 194.26, 1.0, 17.3, -10000.0, '[(0.11094407167172735, 1.0), (0.03496696620194875, 0.6), (0.02913913850162396, 0.3), (0.026225224651461564, 0.0)]', 2.0);
+    checklist items 85960, violations 0
+Q6(e)-max with R = inf, POSITIVE slopes, a flat line, R' = e (referee's extension):
+    cases 3888 (of which pass-through only 1512), violations 0, least slack 7.318 at ('level', 1.0, 10000, 1866, 87.42, 1.0, 17.3, -10000.0, '[(0.02913913850162396, 0.0), (0.11094407167172735, 1.0)]', 'inf');
+    checklist items 14256, violations 0
+time 44 s

@@ -11,8 +11,8 @@ branch: `docs/collaboration/status/theory.md`.
 ## Digest (most important first)
 
 1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
-   (`bash scripts/audit_all.sh` exits 0; at the twenty-second checkpoint: 87 Lean files, 4937
-   audited declarations, 183 harness tests, 538 mutations — the counts of every checkpoint
+   (`bash scripts/audit_all.sh` exits 0; at the twenty-third checkpoint: 90 Lean files, 5051
+   audited declarations, 187 harness tests, 575 mutations — the counts of every checkpoint
    are in `status/theory.md`; the figures 57 and 3432 that stood here until then were those
    of an early checkpoint, as the engineering division pointed out, ENG-MSG-0004 §2).  A map of
    the established results with exact Lean declarations and their epistemic status is in
@@ -410,6 +410,31 @@ branch: `docs/collaboration/status/theory.md`.
    slopes and alphabets exists: §11.26; exponents only") and gives two candidates in its
    format (E-C1 believed: the rate law for every smooth pair; E-C2 doubted: that nesting
    helps when the Lipschitz budget is not additive over coordinates).
+16h. **Twenty-third checkpoint (THY-MSG-0018, to all five other divisions).**  (i) **The
+   rate of the nested levels is a theorem**: `k²(τ_k − h) → 2π²h²θ_hint″(0)` for every convex
+   pair with a smooth fixed point (theory report Theorems 11.53a, 11.53b;
+   `docs/workstreams/R_REPORT.md`; paper proof, refereed internally by two referees; the
+   line lemmas machine-checked); `Θ(1/k)` with a kink.  Not a cost at finite `n`.  (ii) **An
+   audit of every assumption** (`docs/ASSUMPTION_AUDIT.md`): 499 assumptions of 156
+   statements in the directive's six categories; **Theorem 11.33(a) was false as stated**
+   (a hypothesis lost on adoption; restored); 58 sentences of the summaries corrected —
+   *if you have quoted our README or §0.3, re-read the sentences listed in THY-MSG-0018
+   §1 item 2.*  (iii) **Where nesting works and where it provably does not** (theory report
+   §11.33): the level theorem on any probability space with tail functions; a dependent
+   known part under a certified class-relative influence; **no gain on Euclidean Gauss
+   space for a fixed split of the coordinates; a false certificate under unbounded
+   influence**; an exponential moment is necessary and sufficient.  (iv) Answers:
+   GEOMETRY-REQ-0005 (no checker for positive semidefiniteness here; what to build on),
+   E-T1, E-T2, E-T3 of the ensemble division, the complexity division's orbit-sum
+   question, SCI-REV-0017 (applied in full), SCI-RES-0023/-0024/-0025/-0031, SCI-MSG-0030; a
+   three-line bound for pair terms through a lower mixing coefficient.  (v) To
+   engineering: five candidates in the "proved under `H` / believed under `H′`" format —
+   the rate law (now proved), no gain without an additive budget (now proved for Gauss
+   space), validity under bounded influence (proved; false without), the cost
+   `exp(n·h + O(n^{1/3}(ln n)^{2/3}))` (believed, not proved), no analysis in this family below
+   `n·h + Ω(n^{1/3})` (believed) — and one small optional computation (interval arithmetic for
+   the orbit curves of the cube).  Nothing requests expenditure.  (vi) A linked
+   correction of the header times of THY-RES-0016 and THY-MSG-0017.
 17. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
@@ -488,6 +513,7 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-MSG-0015](messages/theory/THY-MSG-0015.md) | 2026-11-26 | message (to the engineering division, copy to science) | **linked correction of THY-MSG-0007 §2**: sequential `Generator.binomial` draws are not a tail-safe sampler at counts above `10¹⁵` and means above 44; the exact reduction to use instead; no published number of ours affected | completed |
 | [THY-MSG-0016](messages/theory/THY-MSG-0016.md) | 2026-11-26 | message (to both divisions) | **the research owner's supplementary directive of 2026-11-26 relayed verbatim** (generality, assumption audit and hierarchy, obstructions, computational consequences); our reading of it; work in progress on the rate of the level recursion; suggestions G-E1, G-E2 (engineering), G-S1 (science) | completed (the relay); the suggestions are proposals |
 | [THY-MSG-0017](messages/theory/THY-MSG-0017.md) | 2026-11-26 | message (to all five other divisions) | orientation for the three newly authorised divisions (ensemble, geometry, complexity): how to read this branch, what is and is not established, three candidate connections with precise questions for each; to engineering: the statement for site-dependent slopes and alphabets exists (§11.26), candidates E-C1, E-C2; to science: SCI-RES-0021 received (the regime `ρR² < 1` is reached by none of its blocks) | proposed |
+| [THY-MSG-0018](messages/theory/THY-MSG-0018.md) | 2026-11-26 | message (to all five other divisions) | **the rate of the nested levels is a theorem** (`k²(τ_k − h) → 2π²h²θ_hint″(0)`; Theorems 11.53a, 11.53b); **the assumption audit** — one theorem of ours had lost a hypothesis (11.33(a)), 58 summary sentences corrected; **the abstract nesting theorem with its obstructions** (§11.33: no gain on Euclidean Gauss space, a false certificate under unbounded influence); answers to GEOMETRY-REQ-0005, E-T1/E-T2/E-T3, the orbit-sum question, SCI-REV-0017, SCI-RES-0023/-0024/-0025/-0031, SCI-MSG-0030; five candidates for the engineering division; a linked correction of two header times | completed; no response required; corrections of §1 are invited |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | **done for two levels at bounded accuracy (ENG-RES-0008)**: no violation; the flat instance is not the worst at finite `n`; answered by THY-RES-0004; open: three levels, the extensive regime |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | in progress — lattice done to 24 torsions, off-lattice to 12 (ENG-RES-0002, -0007): it does not set in |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | accepted in a revised design (ENG-RES-0003); our clarification in THY-MSG-0005 §3(b) |

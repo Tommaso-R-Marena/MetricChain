@@ -1,0 +1,18 @@
+u = 0.5 done, 58 s
+u = 1.0 done, 127 s
+u = 2.0 done, 203 s
+
+parts (b), (c): 8763012 checks, 0 violations []
+CONTROL (type violated): R=inf, slope 1, cut at 0                      levels   17124  violations    531  least slack of (U)  -8551.428
+      at (u, n, n_o, e/h, extra ln theta, b, Xi, ln delta, family, ln C_max, bound) = (2.0, 40000, 32000, 0.0, 0.0, 1.0, 10490.03, -40000.0, ('-',), 9917.01, 1365.581)
+R=inf, positive slopes, flat line                                      levels  244512  violations      0  least slack of (U)      2.450
+      at (u, n, n_o, e/h, extra ln theta, b, Xi, ln delta, family, ln C_max, bound) = (2.0, 40000, 22000, 0.0, 0.0, 1.0, 40000.0, -40000.0, ('E=0', '[(0.019456181549322257, 0.0), (0.09728090774661127, 0.15), (0.32781332547273767, 0.6), (0.6556266509454753, 1.0)]'), 11853.157, 11855.608)
+R=inf, positive slopes, no flat line, B_i >= 2u sigma_i                levels  108672  violations      0  least slack of (U)      1.986
+      at (u, n, n_o, e/h, extra ln theta, b, Xi, ln delta, family, ln C_max, bound) = (2.0, 40000, 32000, 0.0, 0.0, 1.0, 40000.0, -40000.0, ('E=0', '[(4.0, 1.0)]'), 32052.342, 32054.328)
+finite R: 1line                                                        levels  453536  violations      0  least slack of (U)      3.323
+      at (u, n, n_o, e/h, extra ln theta, b, Xi, ln delta, family, ln C_max, bound) = (1.0, 2, 1, 5.771, 0.0, 1.0, 0.0, -27.63, (0.3333333333333333, 'E=0', '[(0.02913913850162396, 0.0)]'), 14.476, 17.799)
+finite R: max2                                                         levels   74912  violations      0  least slack of (U)      3.335
+      at (u, n, n_o, e/h, extra ln theta, b, Xi, ln delta, family, ln C_max, bound) = (1.0, 2, 1, 3.998, 0.0, 1.0, 0.0, -27.63, (0.3333333333333333, 'E=0', '[(0.04370870775243594, 1.0), (0.02913913850162396, 0.2)]'), 14.479, 17.814)
+finite R: max3                                                         levels   74912  violations      0  least slack of (U)      3.367
+      at (u, n, n_o, e/h, extra ln theta, b, Xi, ln delta, family, ln C_max, bound) = (1.0, 2, 1, 3.998, 0.0, 1.0, 0.0, -27.63, (0.3333333333333333, 'E=0', '[(0.11094407167172735, 1.0), (0.08875525733738188, 0.5), (0.06656644300303641, 0.0)]'), 14.514, 17.881)
+total levels: 973668;  time 203 s

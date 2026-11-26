@@ -1,0 +1,5 @@
+u = 0.25: all checks ok;  max (B_m - h)(k_m + c2)/c1 = 0.8526;  max k_{m+1}/k_m = 3.000 (1 + rbar = 3.335);  max [J(J+1)/(2d) - J/2]/(a/h) = 0.624;  c2 = 6.723 >= 0;  B_0 = a: True
+u = 0.50: all checks ok;  max (B_m - h)(k_m + c2)/c1 = 0.8509;  max k_{m+1}/k_m = 3.000 (1 + rbar = 3.339);  max [J(J+1)/(2d) - J/2]/(a/h) = 0.620;  c2 = 6.645 >= 0;  B_0 = a: True
+u = 1.00: all checks ok;  max (B_m - h)(k_m + c2)/c1 = 0.8443;  max k_{m+1}/k_m = 3.000 (1 + rbar = 3.356);  max [J(J+1)/(2d) - J/2]/(a/h) = 0.606;  c2 = 6.352 >= 0;  B_0 = a: True
+u = 2.00: all checks ok;  max (B_m - h)(k_m + c2)/c1 = 0.8192;  max k_{m+1}/k_m = 3.000 (1 + rbar = 3.422);  max [J(J+1)/(2d) - J/2]/(a/h) = 0.555;  c2 = 5.443 >= 0;  B_0 = a: True
+u = 4.00: all checks ok;  max (B_m - h)(k_m + c2)/c1 = 0.7370;  max k_{m+1}/k_m = 3.000 (1 + rbar = 3.658);  max [J(J+1)/(2d) - J/2]/(a/h) = 0.561;  c2 = 3.644 >= 0;  B_0 = a: True

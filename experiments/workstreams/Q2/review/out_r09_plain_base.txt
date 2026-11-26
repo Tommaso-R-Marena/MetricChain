@@ -1,0 +1,6 @@
+# plain two-sample bracket (base family) at a BOUNDED accuracy, u = 1, delta = 0.05: ln cost - d a, and /sqrt(d)
+d =    1000  x = 1.0  r* =    243 (p_u d =    268.9)  ln cost - d a =    37.41  = 1.183 sqrt(d)   ln cost/(d a) = 1.3372
+d =    4000  x = 1.0  r* =   1023 (p_u d =   1075.8)  ln cost - d a =    64.95  = 1.027 sqrt(d)   ln cost/(d a) = 1.1464
+d =   16000  x = 1.0  r* =   4198 (p_u d =   4303.1)  ln cost - d a =   117.91  = 0.932 sqrt(d)   ln cost/(d a) = 1.0664
+d =   64000  x = 1.0  r* =  17003 (p_u d =  17212.3)  ln cost - d a =   222.76  = 0.881 sqrt(d)   ln cost/(d a) = 1.0314
+d =  256000  x = 1.0  r* =  68431 (p_u d =  68849.0)  ln cost - d a =   432.20  = 0.854 sqrt(d)   ln cost/(d a) = 1.0152

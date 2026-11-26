@@ -54,6 +54,17 @@ five) or of unknown status (?: one in seven); fewer than one in six is a pure
 convenience.  The theory is a theory of its models much more than its summaries said —
 47 sentences of the report and the README were found to state more than is proved (§7).
 
+**The label P is itself a claim** (a point of the Scientific Discovery Division's first
+reading of this file, SCI-RES-0031 §2(b), taken as it stands).  "Required only by the
+current proof" says that the statement survives without the assumption — a conjecture
+unless the entry attaches another proof, a check or an argument.  The entries of the two
+audit reports say what they attach; where an entry attaches nothing, read P as "believed
+removable, not shown".  The research owner's sentence "Do not assume that these
+generalizations are necessarily possible" applies to exactly this label.  That division
+has announced a sampled review of twelve P-entries, ten F, six Q and four of unknown
+status, with three of the new counterexamples rebuilt (its SCI-REV-0022; not received
+when this was written).
+
 ## 2. The hierarchy, from the most tractable model outwards
 
 Each level names what holds there, with its label in the theory report — `[V]`
@@ -235,6 +246,17 @@ one-shot lower bounds, and the validity (not the cost) of the nested algorithm g
 tail functions.  Costs at an instance are *verification* costs of an algorithm that is
 handed the instance as a hint (without it `1/ε` becomes `e^w/ε²` in a box class); no single
 algorithm attains the instance-wise costs (the hub family, D26, D37).
+*A quantitative instance from another division* (Scientific Discovery Division,
+SCI-RES-0031 §1 at its commit `32bcd7f`; its label [M], exact transfer-matrix values; not
+recomputed here): a floor built around one reference state certifies `ln Z` up to a sharp
+transition in the size `λ` of its penalty tables — below a critical size the floor's
+ensemble is the reference state and first order is accurate, above it the chain is
+displaced as a whole; the critical sizes are `15.3, 18.8, 1.32, 0.198` in its four cases
+(the certificate is `λ = 1`), so
+its order-4 floors are a factor 15–19 inside their own transition and one order-3 floor
+is beyond it.  The position is, to first approximation, the least ratio of the cost of
+a state to its penalty — an extremal quantity, which criteria built from means under
+the reference bound from one side only.
 
 ## 4. The assumptions that matter most outside the models
 
@@ -251,7 +273,10 @@ algorithm attains the instance-wise costs (the hub family, D26, D37).
 6. **A hint, free computation, exact samples and certified a-priori constants** (X, E): the
    theorems count evaluations; slopes, floors, variances and per-pair constants are inputs
    that nothing in the repository certifies for a concrete residual (one paper
-   certificate of another division excepted).
+   certificate of another division excepted — and what that certificate is has since
+   been stated by that division's own referee, SCI-MSG-0030 §4: constants bounded by a
+   paper proof, arithmetic in double precision with stated margins, the evaluation
+   tolerance assumed, one implementation).
 7. **Symmetry with few orbits** for every every-`n` statement about fixed samples.
 8. **Two letters** in the comparison theorems; **a function of the type** in "ferromagnets
    are not harder"; **one phase** in the single-letter formulas.
@@ -276,7 +301,7 @@ The directive asks that these be named.
 | cost bounds for profile certificates (11.49) | vacuous at extensive accuracy | AA2, overstatement 24 |
 | voxel enclosures in dimension `d` | cost grows like `d^{d/2}` | AA1, hierarchy L5 |
 | the abstract nesting theorem with a tail function that is valid but not sharp | ball-volume bound: exponent `0.197` for `0.029`; transport bound: the certified cap on the sample is `10^{14}`–`10^{24}` on the cubes of dimension 30 and 60 (runs may close much earlier, but below the threshold rate `u²/8` they do not close before the atom) | workstream N §4(e), corrected by its referee |
-| the nested adaptive algorithm at bounded accuracy (11.56, 11.58, 11.58a) | the `O(√(n ln n))` term has explicit but large constants; the sizes at which a certified separation from plain Monte Carlo is reported are those of §11.19, remarks (1a), (1b) | theory report §11.19 |
+| the nested adaptive algorithm at bounded accuracy (11.56, 11.58, 11.58a) | the `O(√(n ln n))` term has explicit but large constants; the sizes at which a certified separation from plain Monte Carlo is reported are those of §11.19, remarks (1a), (1b); the schedule of Theorem 11.58a itself costs more than the non-adaptive bound `n·a` up to `n ≈ 2·10⁴` at `u = 1` (our referee R12: `2.1·10⁴`; the science division's SCI-REV-0017: `2.04·10⁴`) | theory report §11.19 |
 | the rate theorem for `k` nested levels | asymptotic in `k`; no certified constants at finite `k` | `docs/workstreams/R_REPORT.md` §12 |
 
 ## 6. New counterexamples and new positive facts found by the audits

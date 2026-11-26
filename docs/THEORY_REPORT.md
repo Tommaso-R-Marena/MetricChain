@@ -4040,7 +4040,26 @@ Theorem 4.6(d) the limit is larger by the factor `√2` when the other arm is mu
 values independently, `SCI-REV-0006` M4 — our first wording, "`c_i ≥ 0.824…`", hid that this is
 an asymptotic equality.)  The smallest constants for which the weighted-Hamming envelope is
 valid are at least `0.186·Λ b m_i^{3/2}` (computed for `m ≤ 10⁵`; a proved bound has the same
-power with a smaller constant).  The cause is geometric — the moment of inertia of an arm of
+power with a smaller constant).  (*Received from the Geometric Inference Division* —
+GEOMETRY-RES-0002 and GEOMETRY-MSG-0005 §2 item 4, branch `research/geometric-inference` at
+`e8e2582`; its labels; unrefereed there, not machine-checked.  **[N: a local optimisation
+from 40 starts, hence a lower bound on a maximum]** As worst cases over conformations
+the verified constants are nearly attained: the largest superposition distance of a
+`120°` move of the central torsion found over all other torsions is `0.614·b·m^{3/2}` for arms
+of `m = 8` atoms and `0.622·b·m^{3/2}` for `m = 16`, against the verified constants `0.750` and
+`0.785` at those conformations (hairpins, where the coaxial superposition is optimal by
+symmetry) — so the `0.186` above can be raised to about `0.6`, within a factor `1.3` of the
+verified constants.  **[P in the rod model, small angles]** On *extended* chains the
+verified constants overestimate by a factor `2` to `2√2`: a kink of angle `φ` at position `s`
+of a straight uniform rod of length `L` costs `φ²s³(L − s)³/(3L³)` after optimal superposition,
+a quarter of the coaxial cost at the middle, and several kinks cost the quadratic form
+of `G(s, s′) = s²(L − s′)²(3Ls′ − Ls − 2ss′)/(6L³)`, `s ≤ s′` (the free–free beam).  The two rod
+formulas were recomputed here with independent code — a discretised rod superposed by
+singular value decomposition, ratio to the formulas `1 + O(1/N)`:
+`experiments/coordinator_checks/geometry_res_0002/`; the worst-case search was not
+repeated.  Theorems 11.37–11.38 use only the power `3/2` and are unaffected; that
+division's Theorem K reads the same law backwards — data local along the sequence
+cannot determine the global shape stably.)  The cause is geometric — the moment of inertia of an arm of
 `m` atoms about a torsion axis grows like `m³` on every domain that contains extended arms —
 and it is not a finding of this report: per-joint lever arms as weights of a weighted-`ℓ¹`
 displacement bound are a published certificate in robot motion planning
@@ -6044,7 +6063,17 @@ places of their trivial brackets — the division bounds the cost by a mean run 
 union of the refinement windows; searched directly, the bound exceeds the worst product
 instance by at most `0.02` in these units at `n = 250`, `0.007` at `n = 350` and `0.0014` from
 `n = 500` on (its paper argument, for uniform inner behaviours; re-derived by us,
-THY-RES-0013 §3).
+THY-RES-0013 §3).  **That excess is a shortfall of the product search, not a property
+of instances that are not products** (the Scientific Discovery Division's review of that
+computation, SCI-REV-0018 finding M1, at its commit `32bcd7f`; replicated by it with the
+engineering division's reference evaluator; read by us, not recomputed): in each of
+the six cells where it is above `0.001·na` a *product* instance has exactly the cost of
+the bound, so at the level of these searches no difference between products and other
+instances is visible, and the "worst instance found" entries at `n = 250, 350, 500` are
+lower bounds, exceeded by up to `0.02·na`.  The bound itself is proved at the level it
+is computed (mean runs, uniform inner behaviour, a range condition); with an inner
+behaviour that differs from fibre to fibre it fails (by `0.56` in `ln cost` in that
+review's example).  No claim of Theorem 11.56 is touched: every cost is below `C_max`.
 Its searches at `n = 64 000` and `128 000` are converged: three times the budget and two
 more seeds give the same worst instance to six digits.
 (1a) **A certified separation at finite `n`** — *an observation of the Scientific Discovery

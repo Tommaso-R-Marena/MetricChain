@@ -2370,3 +2370,61 @@ to a code (extended Golay code, `n = 24`, `w = 4`: `(1 − 2δ)·4096` evaluatio
 Gilbert–Varshamov codes: exponentially many at every `w > 0`) or a pairwise one of ferromagnetic
 blocks (`exp(Θ(n^{1/3}))` at `w = 4`) makes disjoint droplets sensitive.  Restored, with a remark
 after the theorem.  *Lesson:* that of D62; statements adopted before it need the same check.
+
+## D66. An agent that only thought, a synthesis that said "corrected" before the corrections had landed, and sentences that the referees of the rate proof and of the abstract nesting theorem removed (twenty-third checkpoint of cycle 10)
+
+1. **An agent that returned nothing.**  Workstream R (the rate of the level recursion) was
+   given to a subagent with a full brief; it produced four answers that were cut off at
+   the output limit while it was still reasoning, and wrote no file — the second such
+   failure of the project (workstream V was the first).  The coordinator wrote the proof
+   (`workstreams/R_REPORT.md`).  *Rule since:* every brief says "create your file in the
+   first few tool calls, append as you go, never spend a whole answer without a tool
+   call"; no agent has failed that way after it.
+2. **"Corrected" before it was.**  The synthesis `ASSUMPTION_AUDIT.md` was committed at 17:07 UTC
+   (`ff4ad64`) saying that the audit's corrections "are recorded item by item in
+   `audit/APPLIED_CORRECTIONS.md`" and that Theorem 11.33(a) "is corrected"; the commit that
+   applied them (`d2150cd`) followed at 17:45.  The Scientific Discovery Division read the
+   tree in between and reported exactly this (SCI-RES-0031 §2(a)).  *Lesson:* a document
+   that says "done" is committed with, or after, the thing done; frequent commits do not
+   excuse a tree that contradicts itself.
+3. **Sentences of the rate report that were false or too strong** (found by its two
+   referees, `workstreams/R_REVIEW_A.md`, `R_REVIEW_B.md`; none is used by the proof).
+   "The supremum defining the slope map is attained" — only for `B < (1 − s)a`.  "For `B < h`
+   the slope map has two fixed points" — not in boundary cases.  "The exact dynamics of
+   the best convex majorant is: apply the slope map, cut by the tangent line through the
+   new top value" — only when `θ_na` has infinite slope at zero; for a finite slope the rule
+   is wrong as stated (the referee's example: `θ = (1 − 0.8e)₊`), and for a slope of at most
+   one in absolute value the exact statement is Corollary E, without any cut.
+   "Proposition U holds with equality" — the minimax value over the outer rate is
+   attained, but the level operator itself can be strictly smaller (`R[T](g) ≤ T(g−)`).
+   Lemma RC had two steps that were asserted, not written.
+4. **The coordinator's own numerics on the way.**  A first check of Proposition U "failed"
+   by `1.3·10⁻³` for the Gaussian pair: the infimum over the outer rate is approached as
+   the rate tends to the accuracy, outside the bracket that was searched; and a scan with
+   8 000 points showed violations that were artefacts of V-shaped minima narrower than
+   the grid.  After a reparametrisation and a golden-section refinement the largest
+   excess is `2·10⁻⁶·a`.  *Lesson:* an apparent counterexample to an inequality between an
+   infimum and a closed form is first a question about the minimisation.
+5. **A restart far from the fixed point fails.**  The chain of cut orbit curves (Lemma T)
+   started from a flat family at height `h + 0.15` (Gaussian pair) violates its range
+   condition (the continued curve reaches slope `1.064`); with `h + 0.02` it holds to a
+   thousand levels.  The theorem takes the restart height to `h` after the number of
+   levels has gone to infinity; there is no uniform statement for a fixed restart.
+   Kept: `experiments/workstreams/R/out_r2_chain_gauss_wide.txt`.
+6. **Workstream N, as corrected by its referee** (`workstreams/N_REVIEW.md`).  A statement
+   about the *algorithm* ("with the transport tail function it closes at …") that the
+   analysis gives only as an upper bound on its certified cap — withdrawn.  "(F2) is the
+   only hypothesis for validity" — false: closure under fibres and the trivial bracket
+   are used as well.  Proposition N6 (assembling the levels into a recursion for the
+   exponent) is a plan, not a proof, and is stated as such in §11.33.  Proposition N13
+   needed a repair (given by the referee).  The lower bound of Proposition N10(b) counts
+   outer points, not evaluations.
+7. **Two sentences of ours about Gauss space** (§11.18 remark (3); §12) suggested that
+   the nested algorithm carries over to Lipschitz functions on Gaussian space.  For the
+   Euclidean-Lipschitz class and a fixed split of the coordinates it gains nothing
+   (Theorem 11.120); what carries over is the sum-metric class.  Corrected.
+8. **Header times that were estimates.**  THY-RES-0016 ("about 17:00") and THY-MSG-0017
+   ("about 16:15") were committed at 15:30 and 15:40 UTC; corrected by a linked paragraph
+   in THY-MSG-0018 §0.  (The Geometric Inference Division found the same in its own
+   headers on the same day: its GEOMETRY-MSG-0005.)  *Rule:* the header carries the
+   output of `date -u` read immediately before the commit.
