@@ -331,6 +331,14 @@ Algorithm 2L⁺, and sent two new requests.  Answers: ENG-MSG-0003, ENG-RES-0008
 * **Local runs started from an uncommitted tree** would have stored a commit that does not
   contain their code; they were stopped after six minutes, the code committed, and the
   runs restarted.  Rule: commit before launching anything whose rows carry a commit.
+* **A check that could not fail.**  Between jobs, "no engineering app is running" was read from
+  `modal app list --json` with the key names `State` and `Description`; the keys are `state` and
+  `description`, so the filter matched nothing and the answer was always "none".  The check
+  at the start of the session and the one at its end were written correctly (the last one
+  also counts containers: 0); in between, the statement rested on each job's own
+  completion line and on the billing report.  Nothing was running that should not have
+  been — but the check did not show it.  Rule: a negative result is recorded only from a
+  check that has been seen to give a positive one (here: run it while a job is up).
 * **An estimate off by a factor five**: the local placement-free search was planned at 17
   minutes and was heading for 90; it went to Modal instead.
 * In this session: a factorial table off by one (`gammaln(j)` for `ln j!`), caught at once by
