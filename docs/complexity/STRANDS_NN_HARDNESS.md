@@ -2,13 +2,15 @@
 
 Working paper of the complexity division.  Status of every statement is given by its label; the
 register is `THEOREMS.md`.  First version 2026-11-26; **revised 2026-11-26 after the internal adversarial
-review `COMPLEXITY-REV-0001`** (what changed: §9).
+review `COMPLEXITY-REV-0001` and the science division's independent review `SCI-REV-0019`** (what changed:
+§9).  The two reviews did not know of each other and agree on the main points.
 
 **Question addressed** (`OPEN_PROBLEMS.md` A1; Ducloz–Shalaby–Woods, DNA 31, "Future work" 1; cited as
 [DSW]): "Is MFE NP-hard for […] NN O(n)-strands unpseudoknotted? If so, can the reduction map be
 leveraged to show hardness results for PF and #SSEL in the NN model?"  The known hardness results for
-unboundedly many strands (Condon–Hajiaghayi–Thachuk 2021; [DSW] 2025) are for the base-pair-matching
-model, in which the energy is minus the number of base pairs and disconnected structures are allowed.
+unboundedly many strands (Condon–Hajiaghayi–Thachuk 2021, cited as [CHT]; [DSW] 2025) are for base-pair
+models, in which the energy is minus the number of base pairs (in [CHT] plus an association term per strand
+joined, with several complexes allowed).
 
 ## 0. Summary, attribution, status
 
@@ -22,10 +24,12 @@ unpseudoknotted and without rotational symmetry, so the association and symmetry
 play no role.
 
 1. **Theorem 1, Corollary 2** [P]: strong NP-hardness of the decision version of MFE.
-2. **Theorem 1c** [P]: the same instances work if a nicked "flush" stack between two helices that are
+2. **Theorems 1c, 1d** [P]: the same instances work if a nicked "flush" stack between two helices that are
    adjacent on the template is rewarded with an energy `x` (coaxial stacking), provided
-   `|x| < |σ| + min(|σ|, γ)`, where `σ` is the stack energy and `γ` the least bulge/interior-loop penalty.
-   With `x = σ` and free bulges the reduction fails.
+   `|x| < |σ| + min(|σ|, γ)`, where `σ` is the stack energy and `γ` the least bulge/interior-loop penalty
+   (with `x = σ` and free bulges the reduction fails); and if unpaired bases next to a helix end in an
+   exterior loop are rewarded (dangles), provided the rewards of a `G` and a `C` together are smaller than
+   `|σ|` (the science division's statement).
 3. **Theorem 3, Corollary 4** [P]: the number of minimum-energy structures is the number of tilings;
    `#SSEL` is #P-hard; the partition function is #P-hard when the magnification (or the temperature, for a
    temperature-independent energy function) is part of the input, by a one-call reduction.
@@ -33,7 +37,8 @@ play no role.
    of reductions is written out with linear size in Appendix A.
 
 What is **not** shown: #P-hardness of the partition function at a fixed temperature for a fixed model
-(problem A3′); anything about energy models with dangling ends (§8).
+(problem A3′); anything about dangle rules other than the abstract one of Theorem 1d, or about dangles and
+coaxial stacking together, or about any published parameter table as implemented (§8).
 
 **Whose gadget this is.**  The template `G^B A G^B A … A G^B` with runs `C^{a_i}` is the gadget of Lyngsø's
 reduction from BIN PACKING to pseudoknotted single-strand folding in the base-pair-stacking model (ICALP
@@ -57,7 +62,9 @@ relevant source (a 2026 PhD thesis cited as "to appear" in Shalaby–Woods 2026)
 **Strands and structures.**  A *strand* is a non-empty word over `{A,C,G,T}`, written 5′→3′.  A
 *system* is a finite sequence `(s_1,…,s_c)` of strands; the *bases* are the pairs `(t,i)`, `1 ≤ t ≤ c`,
 `1 ≤ i ≤ |s_t|`, and `N = Σ|s_t|`.  Two bases are *complementary* if their letters are `{A,T}` or
-`{C,G}` (Watson–Crick pairs only).  A *secondary structure* is a set `S` of unordered pairs of
+`{C,G}` (Watson–Crick pairs; the instances below contain only the letters `A`, `C`, `G`, and all that is
+used of the pairing rule is that among these the only complementary pair is `{C,G}` — allowing `G·T` wobble
+pairs changes nothing).  A *secondary structure* is a set `S` of unordered pairs of
 complementary bases in which every base occurs at most once.  Two bases `(t,i)`, `(t,i+1)` are joined by
 a *covalent bond*.  `S` is *connected* if the graph on the bases with the covalent bonds and the pairs of
 `S` as edges is connected (one complex containing all strands).
@@ -98,12 +105,14 @@ minimum of `ΔG_g` over connected unpseudoknotted structures; `#SSEL(k)` is the 
 Definition 11 of [DSW] and Definition 7 of Shalaby–Woods.  That a loop with a nick is an exterior loop of
 energy zero is part of that model: "Exterior loops do not contribute to the free energy because by
 definition [8], ∆G_exterior = 0" ([DSW], full version arXiv:2506.19756, Appendix A.2, read by us;
-the referee confirmed the same convention in Dirks et al. 2007, in Shalaby–Woods 2026 and in the
-pseudocode of Shalaby–Woods ICALP 2025).
+the two referees confirmed the same convention in Dirks et al. 2007, Appendix B note 3, in Shalaby–Woods
+2026, footnote 19, and in the pseudocode of Shalaby–Woods ICALP 2025; the *implementation* described by
+Dirks et al. adds dangle energies, which their exposition omits).
 
 **Hypotheses on `g`.**
 
-* **(H0)** `g(f) = 0` for every exterior loop.
+* **(H0)** `g(f) = 0` for every exterior loop.  (A constant `e_0` instead of `0` only shifts all energies
+  by `c·e_0`, every connected structure having exactly `c` exterior loops.)
 * **(H1)** There is `σ < 0` such that `g(f) = σ` for every stack whose two pairs are `G–C` pairs with
   the two `G` on one strand and the two `C` on another (the stack `5′-GG-3′ / 3′-CC-5′`).
 * **(H2′)** There is `δ > 0` such that every bulge or interior loop `f` closed by two `G–C` pairs with
@@ -132,8 +141,8 @@ that adds dangling-end or coaxial-stacking terms to exterior loops; see Theorem 
 **EXACT BIN PACKING.**  Input: positive integers `a_1,…,a_n`, `m`, `B` in unary with `Σ a_i = m·B`.
 Question: is there a map `β : {1,…,n} → {1,…,m}` with `Σ_{β(i)=t} a_i = B` for every `t`?  It contains
 3-PARTITION (`n = 3m`, `B/4 < a_i < B/2`) and 4-PARTITION (`n = 4m`, `B/5 < a_i < B/3`), which are
-NP-complete in the strong sense (Garey–Johnson 1979, Theorems 4.3, 4.4; [K]; a proof for 4-PARTITION with
-explicit sizes is in Appendix A).
+NP-complete in the strong sense (Garey–Johnson 1979, Theorem 4.4 and Theorem 4.3 respectively — numbers
+from memory; [K]; a proof for 4-PARTITION with explicit sizes is in Appendix A).
 
 **The system `I(a, m, B)`.**
 
@@ -238,12 +247,28 @@ REV-0001, finding 5).
    connectedness only for items of length one.  Under the literal reading of [DSW] Definition 9 applied to
    a concatenation of strands — `BPS(S) = |{(i,j) ∈ S : (i+1,j−1) ∈ S}|`, which also counts a "stack"
    across a nick — the instances are trivial (this is the case `x = σ`, `γ = 0` of Theorem 1c).
-3. In the base-pair-matching model the instances `I(a,m,B)` are trivial (all `mB` pairs can always be
-   formed); this is why the reduction of Condon–Hajiaghayi–Thachuk had to be elaborate, and why it
-   does not answer the question for stacking energies.
+3. *Why the base-pair result does not already answer the question* (SCI-REV-0019, F11).  On the connected
+   ensemble the base-pair model is itself a loop model: a connected unpseudoknotted `S` has `|S| + 1` faces,
+   `c` of them exterior, so `−|S| = Σ_f g(f) − (c − 1)` with `g = −1` on every non-exterior loop.  It satisfies
+   (H0), (H1) and violates (H2′) — a bulge is as favourable as a stack — and for it the instances `I(a,m,B)`
+   are trivial (all `mB` pairs can always be formed), which is why the reduction of [CHT] is elaborate.
+   Conversely [CHT] already gives hardness for that one loop function (their yes-instances have a
+   single-complex optimum, according to the science referee's reading of their paper; we have not checked
+   this).  What is shown here is hardness when loops with unpaired bases are less favourable than the stacks
+   they replace, for every fixed such function.
 4. The number of strands of the instances is `c = n + 1`, with `N = 2mB + m − 1`; for 3-PARTITION
    `c = Θ(N/B)`, which is unbounded and polynomial in `N`, but `o(N)`.  The instances use one long strand
    and, in general, `n + 1` different strand species.
+5. *Several complexes* (SCI-REV-0019, F9 and statement (P4); proof re-derived by us).  Theorem 1 is about
+   the one complex containing all strands, as in [DSW] and Shalaby–Woods.  If strands may be left out — a
+   structure being a set `J` of items in one complex with the template, the other items free, with energy
+   `Σ_f g(f) + |J|·ΔG_assoc` — the equivalence can fail (`a = (2,2,2)`, `m = 2`, `B = 3`, `ΔG_assoc ≥ |σ|`:
+   binding two items is at least as good as any structure with three).  It holds for instances with
+   `|σ|(a_i − 1) > ΔG_assoc` for every `i`: with `J` bound, the accounting of step (c) gives
+   `Σ_f g(f) ≥ σ·Σ_{i∈J}(a_i − 1)`, so the energy is at least
+   `E* + Σ_{i∉J}(|σ|(a_i − 1) − ΔG_assoc) > E*` unless `J` is everything, and then Theorem 1 applies.
+   Multiplying all `a_i` and `B` by a constant preserves solvability, so the problem is strongly NP-hard in
+   this formulation as well, for every fixed `ΔG_assoc`.
 
 ---
 
@@ -340,6 +365,31 @@ flush stack equals that of the corresponding stack, `x = σ`, as in the usual ne
 coaxial stacking, Theorem 1c applies as soon as every bulge and interior loop of the instances costs a
 positive amount: `γ > 0`.
 
+**Dangles.**  Replace (H0) by
+
+* **(D0)** the energy of an exterior loop `f` is `Σ_u d(u)` over the unpaired bases `u` of `f` that are
+  covalent neighbours of a paired base of `f` (one term per base), with `−D_G ≤ d(u) ≤ 0` for a template
+  `G`, `−D_C ≤ d(u) ≤ 0` for an item `C`, and `e_A ≤ d(u) ≤ 0` for an `A`, where `e_A` is the value taken by
+  an `A` both of whose neighbours are paired.
+
+**Theorem 1d [P; the statement and its proof are statement (P3) of the science division's review
+SCI-REV-0019, re-derived and tested by us].**  Let `g` satisfy (D0), (H1), (H2) and `|σ| > D_G + D_C`.  Then
+every connected unpseudoknotted structure of `I(a,m,B)` has energy `σM + (m−1)e_A + nΔG_assoc` if it is a
+tiling structure, and at least `|σ| − D_G − D_C` more otherwise.
+
+*Proof.*  Let `j = M − st(S)` be the number of item bonds that are not on a stack, and `u` the number of
+unpaired item bases; it equals the number of unpaired template `G`'s.  An item with `r` unpaired bases has a
+paired base (connectedness), so at least `r` of its bonds have an unpaired end — a maximal run of `ℓ`
+unpaired bases touches `ℓ − 1` bonds inside it and at least one at its border — and none of these bonds
+lies on a stack.  Hence `j ≥ u`.  Bulges and interior loops cost `≥ 0`, each unpaired `G` and `C`
+contributes at least `−D_G`, `−D_C`, and the `A`'s together at least `(m−1)e_A`; so
+`Σ_f g(f) ≥ σ(M − j) − u(D_G + D_C) + (m−1)e_A ≥ σM + (m−1)e_A + j(|σ| − D_G − D_C)`.  A tiling structure has
+`j = 0`, no unpaired `G` or `C`, and each separator between two paired `G`'s: equality.  A structure that
+is not a tiling has `j ≥ 1` (step (d)).  ∎
+
+Theorems 1c and 1d treat coaxial stacking and dangles separately; we have no statement for both together,
+nor for dangle rules in which an unpaired base between two helices is counted for both.
+
 ---
 
 ## 4. Counting: #SSEL and the partition function
@@ -416,9 +466,10 @@ bin-packing instance with `4|T|` items and sizes polynomial in the instance; The
 system with `c = 4|T| + 1 ≤ 84m + 1` strands and `N = poly(m)` bases.  An algorithm running in time
 `2^{o(c)}·poly(N)` would decide 3-SAT in time `2^{o(m)}`.  ∎
 
-With `STRANDS_ALGORITHM.md` (`O(N⁴·3^c)` arithmetic operations): the single-exponential dependence on
-the number of strands is optimal up to the constant in the exponent, under ETH and in the unit-cost
-model of that algorithm.
+With `STRANDS_ALGORITHM.md` (`O(N⁴·3^c)` arithmetic operations for the partition function): the
+single-exponential dependence on the number of strands is optimal up to the constant in the exponent,
+under ETH and in the unit-cost model of that algorithm — provided the decision version of MFE is obtained
+from the partition function as in Shalaby–Woods 2026, §7, a step we have not re-derived.
 
 (In the first version step one was a citation of a `2^{Ω(q)}` bound for 3DM that the cited source states
 without the linear bound on the number of triples it needs — REV-0001, finding 4.  Appendix A removes the
@@ -447,9 +498,9 @@ Further remarks.
   structure occurs under exactly one circular ordering.
 * **[X], ours, added in the revision.**  `test_generalised_hypotheses.py` (logs `generalised_run.log`,
   `generalised_run_big.log`): 36 instances with `1 ≤ m ≤ 3`, `1 ≤ B ≤ 5`, including `m = 1`, `B ≤ 2` and
-  items longer than a block (up to 762 294 structures); 14 models satisfying the hypotheses of Theorem 1
-  with (H2′) (bulge and interior loops as favourable as `σ·ι + δ`) or of Theorem 1c (both cases), and five
-  control models violating them.  For every model satisfying the hypotheses: tiling structures have
+  items longer than a block (up to 762 294 structures); 18 models satisfying the hypotheses of Theorem 1
+  with (H2′) (bulge and interior loops as favourable as `σ·ι + δ`), of Theorem 1c (both cases) or of
+  Theorem 1d, and seven control models violating them.  For every model satisfying the hypotheses: tiling structures have
   energy exactly `E*` (resp. `E*_x`), their number is `Til`, every other structure is at least `ε`
   (resp. `ε_x`) above; for the controls the statement fails on some instance.  The same runs check Fact 1
   against union–find on every structure (`check=True`), that every structure has trivial stabiliser under
@@ -461,12 +512,20 @@ Further remarks.
   brute force over 134 instances (413.5 million connected labelled structures, 14 models satisfying
   (H0)–(H2)) and a second exact method (a transfer-matrix dynamic programme) on a further 867 instances
   including 3-PARTITION- and 4-PARTITION-shaped ones: no failure of Theorem 1 or Theorem 3.
+* **[X], the science division's referee, a third independent enumerator** (their branch,
+  `experiments/science/ws_R20/`, SCI-REV-0019): 74 instances, 12.6 million connected structures over all
+  strand orders, five loop-energy functions inside (H0)–(H2) and seven for the generalisations: no
+  violation; the controls fail; their numbers equal ours on the thirteen shared instances.
+* Memory: `test_partition_reduction_big.py` kept every structure in a set and needed more than 2 GB for
+  its largest case (found by the science referee); it now keeps 64-bit hashes.
 * **[V]** `experiments/complexity/lean/StackPacking.lean` (register CX-V1): the counting core of step (d) —
   if all item bases are paired injectively with template `G`'s, consecutive bases with adjacent positions,
   then the items pack into the blocks.  The model of structures and loops around it is not formalised.
-* Review: `COMPLEXITY-REV-0001` (internal, adversarial; verdict "correct with gaps", no critical finding;
-  all findings and what was done about them are listed at the end of that file).  An internal AI review is
-  not academic peer review.
+* Reviews: `COMPLEXITY-REV-0001` (internal, adversarial; verdict "correct with gaps", no critical finding;
+  all findings and what was done about them are listed at the end of that file) and `SCI-REV-0019` (the
+  science division's, independent of ours; "Theorems 1 and 3 are proved as stated", 0 critical, 2 major,
+  10 minor findings; our answer is `COMPLEXITY-RES-0004`).  Reviews by AI sessions are not academic peer
+  review.
 
 ## 7. What the result is and is not worth
 
@@ -479,18 +538,20 @@ statement about synthetic instances and says nothing about typical instances.
 ## 8. Limitations (read before citing)
 
 1. (H0) is an assumption about the model.  Energy functions that give exterior loops context-dependent
-   energies are covered only in the one case of Theorem 1c (flush coaxial stacks, with the stated
-   inequality).  **Dangling-end terms are not covered** by any theorem here.  The referee's numerical
-   experiments with simplified re-implementations of dangle and coaxial-stacking conventions (dangles of
-   strength up to `0.30|σ|` harmless, `0.34|σ|` not; five published parameter tables valid on 112 small
-   instances) are evidence about small instances, not proofs, and we have not repeated them.
+   energies are covered only in the two cases of Theorem 1c (flush coaxial stacks) and Theorem 1d (one
+   dangle term per unpaired base next to a helix end, total strength below `|σ|`), **separately**.  Whether
+   a published table with dangles and coaxial stacking, as implemented, satisfies the hypotheses of either
+   has been checked by nobody.  Our referee's numerical experiments with simplified re-implementations of
+   such conventions (five published parameter tables valid on 112 small instances) are evidence about
+   small instances, not proofs, and we have not repeated them.
 2. (H2′) excludes energy functions in which a bulge or interior loop is at least as favourable as the
    stacks it displaces; the control models show that the reduction then fails.
 3. Corollary 4(ii) lets the magnification grow with the instance; Corollary 5 is conditional on ETH and
    uses the sparsification lemma as a cited fact.
 4. The proofs are paper proofs by this division.  "Reviewed" in `THEOREMS.md` means the internal
-   adversarial review named there, which is not academic peer review.  Theorem 1c, the one-call form of
-   Corollary 4(ii) and Appendix A were written **after** that review and have not been reviewed.
+   adversarial review named there, which is not academic peer review.  Theorem 1c (our proof), the
+   one-call form of Corollary 4(ii), Appendix A and our write-up of Theorem 1d and of Remark 5 were written
+   **after** the reviews and have not been reviewed in this form.
 
 ## 9. Changes after the review COMPLEXITY-REV-0001
 
@@ -508,6 +569,20 @@ statement about synthetic instances and says nothing about typical instances.
 | 10: unit steps cannot reverse | sentence added in (d) |
 | 11: which reading of the BPS definition | Remark 2 |
 | 12: "expected to be polynomial for boundedly many species" unsupported | replaced by a reference to `STRANDS_ALGORITHM.md` and an explicit statement of what is not written out |
+
+**SCI-REV-0019** (the science division's independent review; its findings F1–F6 and F10 coincide with
+findings 3, 1, 2, 6, 5, 6 and 9 above).  What it added:
+
+| finding | change |
+|---|---|
+| F7: exactly what (H0) is used for; sources | constant `e_0` remark under (H0); sources with their places in §1 |
+| F8: the pairing rule the theorem needs | §1: only "`{C,G}` is the one complementary pair among `A`, `C`, `G`" is used |
+| F9, (P4): several complexes | Remark 5, with the condition `|σ|(a_i − 1) > ΔG_assoc` and the counterexample |
+| F10: memory of the larger test | the test keeps hashes; §6 |
+| F11: why the base-pair result does not answer the question | Remark 3 |
+| F12: small slips | the two Garey–Johnson theorem numbers; the energy of [CHT]; the place of the quotation on exterior loops; times in message headers (corrected in COMPLEXITY-MSG-0003) |
+| (P3): a sufficient condition for dangles | Theorem 1d |
+| their remark on Corollary 5 (the closing sentence on optimality) | qualified in §5 |
 
 ---
 

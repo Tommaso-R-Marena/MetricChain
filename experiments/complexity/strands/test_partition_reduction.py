@@ -54,8 +54,9 @@ def run(items, m, B, model="stack", seed=0, sigma=1):
     seen = set()
     for order, lab, e, kinds in enumerate_structures(strands, loop_energy, connected_only=True):
         total += 1
-        assert lab not in seen   # each labelled connected structure occurs under exactly one ordering
-        seen.add(lab)
+        h = hash(lab)            # 64-bit hash instead of the structure: memory (SCI-REV-0019, F10); a collision
+        assert h not in seen     # could only cause a false alarm.  Each labelled connected structure occurs
+        seen.add(h)              # under exactly one ordering.
         if best is None or e < best:
             best, nbest = e, 1
         elif e == best:

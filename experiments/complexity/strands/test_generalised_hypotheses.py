@@ -6,7 +6,11 @@ internal review COMPLEXITY-REV-0001):
  (B) Theorem 1c: flush coaxial stacks (two pairs, one template bond, one nick, no unpaired base) have energy
      x <= 0, all other exterior loops 0, bulge / interior loops >= gamma >= 0, and
          |x| < |sigma| + min(|sigma|, gamma)    (B >= 2 if |x| >= |sigma|);
- (C) Fact 1 (connected iff no face has two nicks), R(S) = 1, and #physical minima = Til / prod mu_s!.
+ (C) Fact 1 (connected iff no face has two nicks), R(S) = 1, and #physical minima = Til / prod mu_s!;
+ (D) Theorem 1d (dangles; statement (P3) of the science division's review SCI-REV-0019): an exterior loop has
+     energy  sum of d(u)  over its unpaired bases u that are covalent neighbours of a paired base of the loop,
+     d(G) = -D_G, d(C) = -D_C, d(A) = e_A <= 0, bulge / interior loops >= 0, and |sigma| > D_G + D_C;
+     then E* = sigma*M + (m-1)*e_A and eps = |sigma| - D_G - D_C.
 
 For every instance all connected unpseudoknotted structures over all circular orderings are enumerated once
 and the energies of all models are accumulated together (integers).  For each model:
@@ -38,6 +42,10 @@ def models():
     for x, gamma in ((-6, 1), (-6, 3), (-6, 9), (-7, 2), (-8, 3), (-11, 6), (-11, 9)):
         d = -x + SIGMA
         out.append((f"coax x={x} gamma={gamma}", "B2", (x, gamma, 1), min(-SIGMA, gamma) - d))
+    for DG, DC, eA in ((1, 1, -2), (2, 3, -1), (0, 5, 0), (5, 0, -3)):
+        out.append((f"dangles D_G={DG} D_C={DC} e_A={eA}", "D", (DG, DC, eA, 1), -SIGMA - DG - DC))
+    out.append(("control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|)", "D", (3, 3, 0, 0), None))
+    out.append(("control: dangles D_G=4 D_C=3 e_A=-1", "D", (4, 3, -1, 0), None))
     out.append(("control: coax x=sigma, gamma=0", "B", (-6, 0, 0), None))
     out.append(("control: coax x=-9, gamma=3 (d = min)", "B", (-9, 3, 0), None))
     out.append(("control: coax x=-12, gamma=9 (d = |sigma|)", "B", (-12, 9, 0), None))
@@ -51,8 +59,21 @@ def run(items, m, B, MODELS, rng):
     cache = {}
     nm = len(MODELS)
 
-    def loop_energy(kind, face, seq):
+    def loop_energy(kind, face, seq, owner):
         e = np.zeros(nm, dtype=np.int64)
+        if kind == "exterior":
+            ends = set()
+            for i, j in face["pairs"]:
+                ends.add(i); ends.add(j)
+            nG = nC = nA = 0
+            for p_ in face["unpaired"]:
+                if any(0 <= q_ < len(seq) and owner[q_] == owner[p_] and q_ in ends for q_ in (p_ - 1, p_ + 1)):
+                    if seq[p_] == "G":
+                        nG += 1
+                    elif seq[p_] == "C":
+                        nC += 1
+                    else:
+                        nA += 1
         if kind == "hairpin" or kind == "multi":
             raise AssertionError("hairpins and multiloops cannot occur in these instances")
         flush = kind == "exterior" and len(face["pairs"]) == 2 and len(face["unpaired"]) == 0
@@ -69,6 +90,12 @@ def run(items, m, B, MODELS, rng):
                 if kind in ("bulge", "interior"):
                     delta, rmax = par
                     e[q] = SIGMA * iota + delta + int(u * (rmax + 1))
+            elif typ == "D":
+                DG, DC, eA, rmax = par
+                if kind == "exterior":
+                    e[q] = -DG * nG - DC * nC + eA * nA
+                elif kind in ("bulge", "interior"):
+                    e[q] = int(u * (rmax + 1))
             else:
                 x, gamma, rmax = par
                 if flush:
@@ -81,21 +108,40 @@ def run(items, m, B, MODELS, rng):
     energies = []
     labs = []
     seen = set()
-    for order, lab, e, kinds in enumerate_structures(strands, loop_energy, connected_only=True, check=True):
-        assert lab not in seen
-        seen.add(lab)
-        energies.append(e)
-        labs.append(lab)
+    c = len(strands)
+    for rest in itertools.permutations(range(1, c)):
+        order = (0,) + rest
+        seq, owner, idx, nick_after = concat(strands, order)
+        N = len(seq)
+        can_pair = lambda i, j: (seq[i], seq[j]) in COMPLEMENT
+        for pairs in noncrossing_matchings(seq, 0, N, can_pair):
+            fs = faces(N, pairs, nick_after)
+            kinds = [classify(f) for f in fs]
+            conn = "disconnected" not in kinds
+            assert conn == connected_uf(N, pairs, owner), (order, pairs)          # Fact 1
+            if not conn:
+                continue
+            e = 0
+            for f, kd in zip(fs, kinds):
+                e = e + loop_energy(kd, f, seq, owner)
+            lab = frozenset(((owner[i], idx[i]), (owner[j], idx[j])) for i, j in pairs)
+            assert lab not in seen
+            seen.add(lab)
+            energies.append(e)
+            labs.append(lab)
     E = np.array(energies)
     til = count_labelled_tilings(items, m, B)
     feasible = til > 0
     allok = True
     report = []
     for q, (name, typ, par, eps) in enumerate(MODELS):
-        x = 0 if typ == "A" else par[0]
         if typ == "B2" and B < 2:
             continue
-        Estar = SIGMA * M + x * (n - m)
+        if typ == "D":
+            Estar = SIGMA * M + (m - 1) * par[2]
+        else:
+            x = 0 if typ == "A" else par[0]
+            Estar = SIGMA * M + x * (n - m)
         col = E[:, q]
         mn = int(col.min())
         nmin = int((col == mn).sum())
