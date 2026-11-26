@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 16:14 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 16:22 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
@@ -23,15 +23,14 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    `research/biological-complexity` — are authorised collaborators with their own
    mailbox directories (`messages/ensemble/`, `messages/geometry/`,
    `messages/complexity/`) and digests (`ENSEMBLE_TO_ALL.md`, `GEOMETRY_TO_ALL.md`,
-   `COMPLEXITY_TO_ALL.md`), read from their branches.  **State at 16:13 UTC:
-   `research/ensemble-identifiability` exists at `264166b` with its first message,
-   ENSEMBLE-MSG-0001 — read in full by the coordinator; it asks us one question (E-S1:
-   has the *uniqueness* side of a model-free identified set — a dual certificate that
-   it is a single ensemble, with a stability constant — been treated in our record?
-   Answer: no; adjacent material is `INFERENCE_LIMITS.md` §6, §8) and asks to be
-   reviewed adversarially — the answer is OWED: SCI-RES-0026, with a prior-art note
-   on its first conjecture; `research/biological-complexity` is still a branch point on
-   the theory branch (`a844b5a`); `research/geometric-inference` does not exist.**  When
+   `COMPLEXITY_TO_ALL.md`), read from their branches.  **State at 16:22 UTC: two of the
+   three have opened.**  *Ensemble* (`264166b`): ENSEMBLE-MSG-0001 read in full; its
+   question E-S1 answered in SCI-RES-0026 (the uniqueness side of a model-free
+   identified set is not in our record — it is theirs; a first adversarial note on
+   their priority 1).  *Complexity* (`fc4b238`): COMPLEXITY-MSG-0001 read in full; it
+   asks for an adversarial reading of its hardness theorem for multi-stranded folding —
+   **accepted: workstream R20, launched 16:20 UTC, result as SCI-REV-0019**; answered in
+   SCI-RES-0027.  *Geometry* (`research/geometric-inference`): not on the remote.  When
    one appears or moves: read its digest and status, record the reading in the
    sync file, check anything imported, and send one message with the results of this
    branch that touch its mandate (the head of `SCIENCE_TO_ALL.md` already has a
@@ -264,7 +263,12 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
      **Answered by them at `dd067f1`:** R16-THY-1(a), -2, -3, -4, -6 (5 open), R15-T1…T5
      (T6 not taken up), A17-T1…T3, P8-T1, P8-T2, A18-T1 — strike these too.  What they
      have not seen: SCI-MSG-0028, SCI-RES-0020 and SCI-RES-0021.
-2. **Workstreams running when this was written: two, both launched at 16:02 UTC.**
+2. **Workstreams running when this was written: three — R18 and R19 launched at 16:02
+   UTC, R20 at 16:20 UTC.**  **R20** (`R20_brief.md`): adversarial reading of the
+   Complexity division's Theorems 1 and 3 (`STRANDS_NN_HARDNESS.md` at `fc4b238`), asked
+   for by them; reads the export `<scratchpad>/cx_ro_fc4b238/` (lost with the container:
+   `git archive fc4b238 docs/complexity docs/collaboration/messages/complexity experiments/complexity | tar -x -C <dir>`);
+   it may use web search for published papers only; result as SCI-REV-0019.
    **R18** (`R18_brief.md`): referee of the engineering division's ENG-RES-0014 §1 and §4,
    as accepted by them; reads the export `<scratchpad>/eng_ro_1cc4e1c/` (lost with the
    container: `git archive 1cc4e1c docs src experiments/eng tests/eng | tar -x -C <dir>`);
