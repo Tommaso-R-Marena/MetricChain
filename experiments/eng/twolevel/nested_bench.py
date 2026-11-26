@@ -231,6 +231,67 @@ def instance_cell(u: float, n: int, phi: float, family: str, nested_levels: int,
     return out
 
 
+def instance_cell2(u: float, n: int, phi: float, rule: str = "certified", family: str = "theory", nested_levels: int = 2,
+                   slopes=(0.25, 0.5, 1.0), budget: int = 4000, budget_general: int = 2000, seed: int = 1, k: int = 8) -> dict:
+    """Stage 2 of X-011: one design run on one family of instances, for any slope u and either rule of design.
+
+    rule "certified": servers by certified cost (``family``, at most ``nested_levels`` nested levels);
+    rule "flat":      the referee's three levels, servers chosen at the flat fibre (``portfolio.flat_tuned_tree``).
+    Instances: the flat instance; the worst outer landscape found with flat fibres; with cone fibres of each slope in
+    ``slopes`` (times u) and the base brackets' own answers; and reading (A) — with at least one nested run: cone
+    fibres of full slope and base brackets at the bottom or the top of their promise; with none: any fibre, the
+    inner offset searched.  Same searches as ``instance_cell``."""
+    from metricchain_eng.twolevel.adversary import Family
+    from metricchain_eng.twolevel.adversary import Search as AdvSearch
+
+    cc = cube_constants(u)
+    na = n * cc.a
+    t0 = time.time()
+    if rule == "flat":
+        import portfolio
+
+        lb = portfolio.flat_tuned_tree(u, n, phi)
+    elif rule == "certified":
+        lb = Search(u, family).top(n, top_design(phi), LID, nested_levels)
+    else:
+        raise ValueError(rule)
+    out = dict(kind="instance2", u=u, n=n, phi=phi, rule=rule, family=family if rule == "certified" else None,
+               nested_levels=nested_levels if rule == "certified" else 2, slopes=list(slopes), budget=budget, budget_general=budget_general,
+               seed=seed, a=cc.a, certified=lb.lCmax / na, levels_used=lb.depth(), tree=tree_summary(lb, na), searches=[],
+               design_seconds=time.time() - t0)
+    P, outer, C, ev, pos, c_in, ok = level_setup(lb, u, LID, 0.0, "k0")
+    R = ev.run(Instance(Law(np.array([0.0]), np.array([0.0])), psi0=0.0, t0=u * P.n_i), "bottom", positions=pos)
+    out.update(x_out=C.x_out, flat_instance=R.lcost / na, flat_ok=bool(ok and R.closed and not R.violations()),
+               lower_bound=hinted_lower_bound(n, u, C.x_out, 0.05) / na)
+
+    def search(name, ev, orc, positions, fixed, good):
+        best = -math.inf
+        for monotone, bud in ((True, budget), (False, budget_general)):
+            S = AdvSearch(Family(ev, k=k, monotone=monotone), orc, "cost", positions=positions, fixed_c_in=fixed)
+            res = S.run(bud, seed=seed)
+            out["searches"].append(dict(name=name, family="monotone" if monotone else "general", best=res.best_value / na, n_eval=res.n_eval,
+                                        violations=len(res.violations), status=res.best_run.status, servers_ok=bool(good)))
+            best = max(best, res.best_value)
+        return best / na
+
+    out["worst_flat_fibres"] = search("flat fibres", ev, "bottom", pos, 0.0, ok)
+    out["worst_B"] = {}
+    for s in slopes:
+        _, _, _, evB, posB, cB, okB = level_setup(lb, u, LID, s, "k0")
+        out["worst_B"][f"{s:g}"] = search(f"cone fibres slope {s:g}, own answers", evB, "bottom", posB, cB, okB)
+    vals = []
+    for orc in ("bottom", "top"):
+        if lb.depth() == 1:
+            lC = np.array([-math.inf] + [k0_lcost(P.n_i, u, P.xs[l], C.l_inv_delta_p)[0] for l in range(1, P.L + 1)])
+            vals.append(search(f"any fibre, base brackets at the {orc}", Evaluator(P, outer, lC=lC), orc, None, None, True))
+        else:
+            _, _, _, evA, posA, cA, okA = level_setup(lb, u, LID, 1.0, orc)
+            vals.append(search(f"cone fibres slope 1, base brackets at the {orc}", evA, "bottom", posA, cA, okA))
+    out["worst_A"] = max(vals)
+    out["seconds"] = time.time() - t0
+    return out
+
+
 # ---------------------------------------------------------------------------------------------
 # Job lists (shared by the Modal app and the local driver)
 # ---------------------------------------------------------------------------------------------
@@ -270,6 +331,26 @@ def tasks(job: str) -> list[dict]:
             for phi in (0.65, 0.60, 0.55, 0.50, 0.45, 0.40):
                 out.append(dict(func="instance_cell", tier="l" if n <= 32000 else "xl",
                                 kwargs=dict(u=1.0, n=n, phi=phi, family="theory", nested_levels=1, readings=["B", "A"], budget=b, budget_general=bg)))
+    elif job == "smoke3":
+        out.append(dict(func="instance_cell2", tier="s", kwargs=dict(u=2.0, n=1000, phi=0.5, rule="flat", budget=100, budget_general=50)))
+        out.append(dict(func="instance_cell2", tier="s", kwargs=dict(u=0.5, n=1000, phi=0.5, rule="certified", nested_levels=2, budget=100, budget_general=50)))
+    elif job == "certified2":
+        # stage 2 of Q-01 (registry Q-10): slopes 1/2 and 2
+        for u in (0.5, 2.0):
+            for n in (1000, 4000, 16000, 64000):
+                for fam in ("theory", "wide"):
+                    tier = "l" if n <= 4000 else "xl" if n <= 16000 else "xxl"
+                    limit = {"l": 10800, "xl": 21600, "xxl": 43200}[tier] - 900
+                    out.append(dict(func="certified_cell", tier=tier, kwargs=dict(u=u, n=n, family=fam, max_levels=5, time_limit=limit)))
+    elif job == "instances2":
+        # stage 2 of Q-02: three slopes, both rules of design on the same instances with the same code
+        for u in (0.5, 1.0, 2.0):
+            for n in (4000, 16000):
+                b, bg = BUDGETS.get(n, BUDGET_LARGE)
+                for rule, k in (("certified", 1), ("certified", 2), ("certified", 3), ("flat", 2)):
+                    for phi in (0.80, 0.70, 0.60, 0.55, 0.50, 0.45, 0.40, 0.35, 0.30, 0.25, 0.20, 0.15):
+                        out.append(dict(func="instance_cell2", tier="m" if n <= 4000 else "l",
+                                        kwargs=dict(u=u, n=n, phi=phi, rule=rule, nested_levels=k, budget=b, budget_general=bg)))
     else:
         raise ValueError(job)
     for t_ in out:
@@ -279,7 +360,7 @@ def tasks(job: str) -> list[dict]:
 
 
 def run_task(task: dict) -> dict:
-    fn = {"certified_cell": certified_cell, "instance_cell": instance_cell}[task["func"]]
+    fn = {"certified_cell": certified_cell, "instance_cell": instance_cell, "instance_cell2": instance_cell2}[task["func"]]
     return fn(**task["kwargs"])
 
 
