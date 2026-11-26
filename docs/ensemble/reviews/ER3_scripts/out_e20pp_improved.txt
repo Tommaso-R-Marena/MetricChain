@@ -1,0 +1,9 @@
+|D| = 3: gaps -> c_D (report), c_D' (improved), c_true (grid 161^3 + polishing)
+   gaps (0.001, 3.1416, 3.1416): c_D = 2.500e-07, c_D' = 8.333e-02, c_true = 2.000e+00  (c_true/c_D = 8000002.2, c_true/c_D' = 24.0)
+   gaps (0.01, 3.0, 2.5): c_D = 2.500e-05, c_D' = 7.467e-02, c_true = 1.577e+00  (c_true/c_D = 63077.0, c_true/c_D' = 21.1)
+   gaps (0.05, 0.05, 3.1): c_D = 6.249e-04, c_D' = 6.249e-04, c_true = 2.499e-03  (c_true/c_D = 4.0, c_true/c_D' = 4.0)
+   gaps (0.3, 2.0, 2.9): c_D = 2.233e-02, c_D' = 5.815e-02, c_true = 1.242e+00  (c_true/c_D = 55.6, c_true/c_D' = 21.4)
+   gaps (0.01, 0.01, 3.1416): c_D = 2.500e-05, c_D' = 2.500e-05, c_true = 1.000e-04  (c_true/c_D = 4.0, c_true/c_D' = 4.0)
+   gaps (1.0, 1.0, 1.0): c_D = 2.298e-01, c_D' = 2.298e-01, c_true = 4.897e-01  (c_true/c_D = 2.1, c_true/c_D' = 2.1)
+   gaps (3.1416, 3.1416, 3.1416): c_D = 1.000e+00, c_D' = 1.000e+00, c_true = 4.000e+00  (c_true/c_D = 4.0, c_true/c_D' = 4.0)
+PASS

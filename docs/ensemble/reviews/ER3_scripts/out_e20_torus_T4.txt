@@ -1,0 +1,15 @@
+T4. four angles (Segre fourfold in P^15, codimension 11, degree 24)
+   K = 10: 12 random instances; four random combinations of the 6 equations have 24 solutions (incomplete solves: 1); common zeros of all equations that are not given points: 0
+   K = 11: 12 random instances; four random combinations of the 5 equations have 24 solutions (incomplete solves: 2); common zeros of all equations that are not given points: 0
+   K = 12: 40 random instances (3 incomplete solves discarded); 24 complex solutions each; Euler-Jacobi residual (relative) at most 1.2e-11
+           number of solutions on the torus -> instances: {16: 1, 18: 15, 20: 12, 22: 7, 24: 2}
+           fewer than 24 on the torus: smallest singular value of the rank-one matrices on the torus zeros: min 1.17e-03, median 2.12e-02  (independent: E18(ii) applies)
+           all 24 on the torus: smallest singular value max 2.67e-14 (dependent, as the Euler-Jacobi identity predicts: E18(ii) does NOT apply)
+              relations: 1; coefficients on the 12 extra zeros: 4 positive, 8 negative -> a relation that is non-negative off the states (a twin) exists: False
+              relations: 1; coefficients on the 12 extra zeros: 6 positive, 6 negative -> a relation that is non-negative off the states (a twin) exists: False
+   K = 13: on 240 slices z4 = const of the torus the certificate has 1010 zeros in total: a curve of zeros
+PASS
+
+real	0m57.573s
+user	1m42.166s
+sys	0m7.067s

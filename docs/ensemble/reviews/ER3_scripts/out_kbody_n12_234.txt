@@ -1,0 +1,1 @@
+n = 12, four-body data, K = 234: face in 11 of 16 supports (undecided 0); frequency 0.688   (154 s)

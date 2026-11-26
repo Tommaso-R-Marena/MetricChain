@@ -1,0 +1,27 @@
+L1 lift isolation on the cube: ok
+    n = 10 (45 pair observables): lift-isolated frequency K = 20: 1.000, K = 22: 1.000, K = 33: 0.925, K = 35: 0.950, K = 45: 0.520
+    n = 12 (66 pair observables): lift-isolated frequency K = 24: 1.000, K = 33: 1.000, K = 49: 1.000, K = 54: 0.995, K = 66: 0.955
+L2 four-body data: ok
+    n = 8, 4-body data (99 features): 38 lift-isolated supports with K = 12..24 (the pair-data capacity is below 2n = 16): identification confirmed by the fibre LP in 38; 10 supports not isolated (skipped)
+L3 a prior on the number of conformers: ok
+    n = 5, K = 6, 7: 3 supports flat-isolated but not faces (not identified among all ensembles), 6 faces; random weights with a twin of at most K atoms: 0 (expected 0); non-faces for which SOME weights have such a twin: 3 of 3
+L4 torus: ok
+    two-state certificate on the r-torus, r = 2..5, 40 random pairs (some angles shared): every zero found is one of the two states; smallest value at distance > 0.3 from both: 0.007
+    2-torus, 24 x 24 grid, nine product observables: two states differing in both angles identified in 9 sampled cases; differing in one angle: not identified in 3 case(s)
+    r = 3, K = 4 generic points: 4 zeros of the projector certificate found (expected 4); rank-one matrices on the zero set linearly independent: True
+    r = 3, K = 5 generic points: 6 zeros of the projector certificate found (expected 6); rank-one matrices on the zero set linearly independent: True
+    r = 4, K = 11 generic points: 11 zeros of the projector certificate found (expected 11); rank-one matrices on the zero set linearly independent: True
+L5 three conformers: ok
+    n = 6: 4960 triples of conformers; sign vectors in the span beyond the three: at most 1 (present in 2880 triples); zero sets with affinely dependent pair features: 0
+L6 certified stability on the torus: ok
+    growth inequality, r = 2..5, 46 random pairs of states: smallest observed f / (c* min(d_p^2, d_q^2)) = 1.25 (must be >= 1)
+    2-torus, 30 x 30 grid, four pairs of states, tau = 1e-3 and 1e-2: largest int min(d_p^2, d_q^2) dnu over data-compatible measures is between 0.147 and 0.297 of the bound Lambda tau / c* (must be <= 1)
+L7 the permanent certificate: ok
+    torus, K = 3, 4 states differing pairwise in every angle (15 random cases, r = K..5): zeros of the permanent that are not states: 0
+    three states coinciding in two of four angles (Hall condition fails): the permanent vanishes at a configuration at distance 1.32 from every state (value 0.0e+00)
+    cube n = 6, all 41664 triples: Hall condition holds in 30720, zero set of the permanent energy = the triple in all of them: True; fails in 10944, the predicted sub-cube is in the zero set in all of them: True (zero set strictly larger than the triple in 960)
+PASS
+
+real	3m5.883s
+user	3m21.947s
+sys	0m1.204s

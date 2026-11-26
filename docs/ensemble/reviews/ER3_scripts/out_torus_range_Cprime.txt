@@ -1,0 +1,9 @@
+C'. the instances of C with data matched up to tau (l_inf), mass farther than 0.05 from the states
+   instance 1: tau = 0: -0.00e+00, tau = 1e-08: nan, tau = 1e-06: 1.82e-02, tau = 0.0001: 4.20e-01, tau = 0.01: 1.00e+00
+   instance 2: tau = 0: 5.73e-11, tau = 1e-08: 1.16e-03, tau = 1e-06: 6.50e-02, tau = 0.0001: 7.41e-01, tau = 0.01: 1.00e+00
+   instance 3: tau = 0: 1.00e+00, tau = 1e-08: 1.00e+00, tau = 1e-06: 1.00e+00, tau = 0.0001: 1.00e+00, tau = 0.01: 1.00e+00
+   instance 4: tau = 0: 1.00e+00, tau = 1e-08: 1.00e+00, tau = 1e-06: 1.00e+00, tau = 0.0001: 1.00e+00, tau = 0.01: 1.00e+00
+
+real	4m19.542s
+user	3m57.330s
+sys	0m3.071s

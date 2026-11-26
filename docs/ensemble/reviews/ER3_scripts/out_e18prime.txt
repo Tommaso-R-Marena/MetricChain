@@ -1,0 +1,29 @@
+A. cube, n = 4: 8 states modulo flip, 6 pair observables, symmetry group acting through 192 permutations of the states
+   K | supports (orbits) | affinely dependent | aff. indep., not flat-isolated | flat-isolated: faces | flat-isolated non-faces | of these: twin for random w / for uniform w / for SOME w > 0 | faces with a twin for some w (must be 0)
+    2 |     28 (   2) |      0 (  0) |      0 (  0) [twin frequency over random w: -] |     28 (  2) |      0 (  0) | 0 (0) / 0 (0) / 0 (0) | 0
+    3 |     56 (   2) |      0 (  0) |      0 (  0) [twin frequency over random w: -] |     56 (  2) |      0 (  0) | 0 (0) / 0 (0) / 0 (0) | 0
+    4 |     70 (   4) |      0 (  0) |      0 (  0) [twin frequency over random w: -] |     68 (  3) |      2 (  1) | 0 (0) / 2 (1) / 2 (1) | 0
+    5 |     56 (   2) |      0 (  0) |      0 (  0) [twin frequency over random w: -] |     48 (  1) |      8 (  1) | 0 (0) / 8 (1) / 8 (1) | 0
+    6 |     28 (   2) |      0 (  0) |      0 (  0) [twin frequency over random w: -] |     16 (  1) |     12 (  1) | 0 (0) / 12 (1) / 12 (1) | 0
+A. cube, n = 5: 16 states modulo flip, 10 pair observables, symmetry group acting through 1920 permutations of the states
+   K | supports (orbits) | affinely dependent | aff. indep., not flat-isolated | flat-isolated: faces | flat-isolated non-faces | of these: twin for random w / for uniform w / for SOME w > 0 | faces with a twin for some w (must be 0)
+    2 |    120 (   2) |      0 (  0) |      0 (  0) [twin frequency over random w: -] |    120 (  2) |      0 (  0) | 0 (0) / 0 (0) / 0 (0) | 0
+    3 |    560 (   3) |      0 (  0) |      0 (  0) [twin frequency over random w: -] |    560 (  3) |      0 (  0) | 0 (0) / 0 (0) / 0 (0) | 0
+    4 |   1820 (   8) |      0 (  0) |      0 (  0) [twin frequency over random w: -] |   1780 (  7) |     40 (  1) | 0 (0) / 40 (1) / 40 (1) | 0
+    5 |   4368 (  11) |      0 (  0) |      0 (  0) [twin frequency over random w: -] |   3872 (  8) |    496 (  3) | 0 (0) / 480 (2) / 496 (3) | 0
+    6 |   8008 (  18) |      0 (  0) |      0 (  0) [twin frequency over random w: -] |   5592 ( 11) |   2416 (  7) | 0 (0) / 2400 (6) / 2416 (7) | 0
+    7 |  11440 (  19) |      0 (  0) |    160 (  1) [twin frequency over random w: 1.0..1.0] |   5040 (  8) |   6240 ( 10) | 0 (0) / 6240 (10) / 6240 (10) | 0
+    8 |  12870 (  25) |     20 (  1) |   1280 (  2) [twin frequency over random w: 1.0..1.0] |   2440 (  6) |   9130 ( 16) | 0 (0) / 9130 (16) / 9130 (16) | 0
+    9 |  11440 (  19) |    160 (  1) |   4880 (  8) [twin frequency over random w: 1.0..1.0] |    400 (  2) |   6000 (  8) | 0 (0) / 6000 (8) / 6000 (8) | 0
+   10 |   8008 (  18) |    600 (  4) |   6320 (  9) [twin frequency over random w: 1.0..1.0] |     16 (  1) |   1072 (  4) | 0 (0) / 1072 (4) / 1072 (4) | 0
+B. random finite instances, integer features (not injective)
+   flat-isolated and affinely independent: 356 instances, twin with <= K atoms for a random weight: 0 (E18': must be 0)
+   affinely independent, NOT flat-isolated: 859 instances; a twin for at least one of 20 random weights in 859, for all 20 in 859
+   affinely dependent on S: 285 instances; second ensemble on the same support in 285
+   explicit X = 6 points, Phi = (0,0),(1,0),(0,1),(2,2),(2,2),(1,0); S = (0, 2): flat-isolated True; twins found for 5 random weights: [None, None, None, None, None]
+   explicit X = 6 points, Phi = (0,0),(1,0),(0,1),(2,2),(2,2),(1,0); S = (0, 1): flat-isolated False; twins found for 5 random weights: [(0, 5), (0, 5), (0, 5), (0, 5), (0, 5)]
+PASS
+
+real	2m18.102s
+user	2m12.227s
+sys	0m3.663s

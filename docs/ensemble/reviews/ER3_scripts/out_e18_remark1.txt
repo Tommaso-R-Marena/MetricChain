@@ -1,0 +1,15 @@
+A. Remark 1 to Theorem E18, exhaustive
+   n = 3: 4 triples; dependent: 0; fewer than three patterns: 0; more than one extra sign vector: 0; extra vertex present in 4 (wrong prediction of its presence or of y: 0); dependent x x^T on Z_S: 0; smallest non-zero squared residual inf (>= 1/n^3 = 0.0370); LP: 4 triples, ensemble on 3 not identified: 0, on a pair: 0, on the 4 points of Z_S: 0   [ok]
+   n = 4: 56 triples; dependent: 0; fewer than three patterns: 0; more than one extra sign vector: 0; extra vertex present in 48 (wrong prediction of its presence or of y: 0); dependent x x^T on Z_S: 0; smallest non-zero squared residual 1.0000 (>= 1/n^3 = 0.0156); LP: 56 triples, ensemble on 3 not identified: 0, on a pair: 0, on the 4 points of Z_S: 0   [ok]
+   n = 5: 560 triples; dependent: 0; fewer than three patterns: 0; more than one extra sign vector: 0; extra vertex present in 400 (wrong prediction of its presence or of y: 0); dependent x x^T on Z_S: 0; smallest non-zero squared residual 1.1429 (>= 1/n^3 = 0.0080); LP: 560 triples, ensemble on 3 not identified: 0, on a pair: 0, on the 4 points of Z_S: 0   [ok]
+   n = 6: 4960 triples; dependent: 0; fewer than three patterns: 0; more than one extra sign vector: 0; extra vertex present in 2880 (wrong prediction of its presence or of y: 0); dependent x x^T on Z_S: 0; smallest non-zero squared residual 1.2000 (>= 1/n^3 = 0.0046); LP: 4960 triples, ensemble on 3 not identified: 0, on a pair: 0, on the 4 points of Z_S: 0   [ok]
+   n = 7: 41664 triples; dependent: 0; fewer than three patterns: 0; more than one extra sign vector: 0; extra vertex present in 19264 (wrong prediction of its presence or of y: 0); dependent x x^T on Z_S: 0; smallest non-zero squared residual 1.2308 (>= 1/n^3 = 0.0029); LP: 1953 triples, ensemble on 3 not identified: 0, on a pair: 0, on the 4 points of Z_S: 0   [ok]
+B. Theorem E18 on random finite instances
+   3000 instances; hypothesis of E18 holds in 1393, identification confirmed by LP in 1393; dependent matrices on Z_S in 1607 (full-support ensemble on Z_S then not identified in 1440); instances with a state of S having v = 0: 104   [ok]
+   edge case 1: X = {x0,x1,x2}, v = 0, e1, e2, S = {x0,x1}: Z_S = S, the column spaces {0}, span(e1) are independent as subspaces, yet v(x0)v(x0)^* = 0 (the matrices are dependent); ensemble on S identified: True (by the constant observable, not by the lift)
+   edge case 2: X = {x0,x0',x1}, v = 0, 0, 1, S = {x0,x0'}: f_S = |v|^2 has zero set [0, 1] = S, the column spaces {0}, {0} have direct sum; ensemble on S identified: False  -> case (i) of E18 needs v(x) != 0 on S
+PASS
+
+real	0m55.112s
+user	0m54.028s
+sys	0m0.623s

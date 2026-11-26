@@ -1,0 +1,9 @@
+B. four angles, twelve states, instances in which all 24 solutions lie on the torus
+   instance 1 (after 17 tries): relations among the 24 rank-one matrices: 1; coefficients on the 12 extra zeros: 4 positive, 8 negative -> a twin exists: False; LP on the 24 zeros, largest mass off the states: -0.00e+00
+   instance 2 (after 63 tries): relations among the 24 rank-one matrices: 1; coefficients on the 12 extra zeros: 9 positive, 3 negative -> a twin exists: False; LP on the 24 zeros, largest mass off the states: 3.49e-14
+   instance 3 (after 76 tries): relations among the 24 rank-one matrices: 1; coefficients on the 12 extra zeros: 7 positive, 5 negative -> a twin exists: False; LP on the 24 zeros, largest mass off the states: -0.00e+00
+   (3 such instances in 110 tries)
+
+real	6m33.040s
+user	5m18.594s
+sys	0m15.261s

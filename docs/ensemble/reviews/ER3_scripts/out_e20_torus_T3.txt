@@ -1,0 +1,17 @@
+T3. three angles (Segre threefold in P^7, codimension 4, degree 6)
+   K = 4: 2000 random 4-tuples; det M(z3) has degree 4 and its roots are the four given z3 in all but 0 cases -> the zero set is the 4 points (no search needed)
+   K = 5: 5000 random 5-tuples; complex solutions per instance: 6; number on the torus: {6: 5000}; instances without exactly one extra solution: 0; largest | |z_k| - 1 | of the sixth point: 2.3e-11; largest residual 1.4e-09
+          smallest singular value of the six normalised rank-one matrices: min 4.12e-05, median 3.06e-01; smallest distance of the sixth point from the five: 7.83e-05
+   adversarial search (12 Nelder-Mead runs, five points kept >= 0.5 apart in every angle): smallest singular value reached 5.61e-08; at that configuration: smallest singular value of the five lifted vectors 3.87e-01, distance of the sixth point from the nearest given point 1.00e-07
+   special configurations (K = 5):
+      two points share one angle: 6 distinct zeros on the torus; smallest singular value of their rank-one matrices 2.43e-01
+      two points share two angles (differ in one): the degree-6 resultant vanishes identically -> the certificate vanishes on a curve (Z_S infinite; E18 does not apply)
+      two points 1e-3 apart: 6 distinct zeros on the torus; smallest singular value of their rank-one matrices 8.47e-04
+      all on the subgroup phi3 = phi1 + phi2: 6 distinct zeros on the torus; smallest singular value of their rank-one matrices 5.87e-01
+      all five share the first angle: the five lifted vectors are linearly dependent (E18 does not apply)
+   K = 6: for z3 on a grid of 3600 points of the unit circle the certificate has 7128 zeros on the torus (two per z3 on arcs of total length 0.99 of the circle): a curve of zeros
+PASS
+
+real	9m23.120s
+user	7m8.340s
+sys	0m0.180s
