@@ -987,3 +987,27 @@ profile and the gauche count, and its support function is the ground-state energ
   computed set `p = 0.3, 0.2, 0.1` — the report's shorthand would have claimed cells that
   were not computed.
 
+### Cycle 38 — after checkpoint 43: an audit, a table for peptides, a stale document
+
+* The replication of the theory division's audit at `24a3c27` finished: `AUDIT PASSED`
+  with their counts (65 files, 3655 declarations, 411 mutations) — the first with the
+  runner that no longer counts a crashing mutant as caught; the coordinator read the
+  six lines that implement the repair.
+* **The infinite-chain factor is not the factor of a peptide.**  The review of
+  workstream Y left "`σ^{−1/2}` for a helix–coil chain at its midpoint".  Exact transfer
+  matrices for 10–1 000 residues (checked by enumeration to 12; R10's `V_5` reproduced
+  to six digits) show the factor limited by the length — `11.5` at 20 residues for
+  `σ = 10⁻³` — and the second-order regime ending near `0.14 k_BT` per residue.  The
+  closed form `(1+s)/√((1−s)²+4σs)` for the infinite chain was checked at 20 000
+  residues.  One reference added, at abstract level through PubMed (Best and Hummer
+  2009); the size of their corrections is not in the abstract and is not quoted.
+* Workstream P5 (the compact case) launched with the brief of checkpoint 42.
+* `ALTERNATIVE_FRAMEWORKS.md` had not been touched since checkpoint 20 and still said
+  "nothing was computed on a real chain".  Version 2 adds the two models of ignorance
+  that the programme actually ended up using (a higher-order envelope with values on a
+  Hamming ball; a divergence bound against a sampleable model), what the measurements
+  decided, and what became of its three recommendations.  A first draft said a
+  remainder "with a good root-mean-square fit can cost `e^{45}`"; the measured case has
+  an error of `1.2 k_BT`, which is not good — reworded to what was measured (the error
+  improves while the cost exponent rises).
+
