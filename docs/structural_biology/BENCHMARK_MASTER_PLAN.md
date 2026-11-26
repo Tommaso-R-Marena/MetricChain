@@ -236,6 +236,19 @@ written here before any held-out run.  Category under the engineering division's
 rules: retrospective (the deposited structure contains the answer; the native state is hidden
 from the algorithm, not from us).
 
+### SB-BM-7 — the table against the continuous model of the same energy (level 2; proposed by the science division, SCI-REV-0025 §4)
+
+*Added 2026-11-26, before any run.*  Question: on instances small enough to grid the torsions
+finely (one to five residues), does the minimum of our rigid-rotamer table lie in the well of
+the minimum of the same energy function over continuous torsions, and how far are the table's
+`ln Z` and rotamer-well populations from the gridded ones?  This is a test of the
+*discretisation* (line (ii) of the error budget), needs no experiment and no database, and can
+refute any reading of a certified minimum as a conformation.  Baseline: the fine grid (2.5°)
+as "continuum".  Expected outcome, written now: failures of the kind the science division
+found (a different well for leucine; `ln Z` off by nats per torsion), because our states are
+ideal staggered values without minimisation.  To be specified in full with the science
+division and run by the engineering division; not run by us.
+
 ## 4. What is requested of whom
 
 | request | to | content |

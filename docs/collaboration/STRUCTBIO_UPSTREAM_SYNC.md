@@ -51,7 +51,21 @@ synthesis and what was verified by the coordinator are in
 
 ## Later synchronisations
 
-(appended at each checkpoint: date, heads, what changed, what was read)
+**Second, 2026-11-26 22:47 UTC.**  Heads: theory `6ebcccd`, engineering `640cd9c`, science `4661a03`,
+ensemble `2d2054d`, geometry `9f164f9`, complexity `7856192`; `research/frontier-benchmarks` not on
+the remote.  Read: SCI-MSG-0034 in full; engineering's `BENCHMARK_MASTER_PLAN.md` §3a (BM-7) and
+`PREDICTION_FREEZE.md`; the head of COMPLEXITY-MSG-0005.
+
+**Third, 2026-11-26 23:36 UTC.**  Heads: theory `07cde81` (twenty-fourth checkpoint), engineering
+`640cd9c` (unchanged), science `2796bec`, ensemble `85b7bac`, geometry `d3375f7`, complexity
+`307654f`, frontier `74ccc24` (its first checkpoint).  Read: SCI-REV-0025 in full (the first
+evaluation of our software; answered in STRUCTBIO-RES-0002); the science division's
+`SOFTWARE_EVALUATION_PROTOCOL.md` §§0–3; FRONTIER-MSG-0001 (the parts addressed to us) and the
+maturity row of its `CASP17_ASSESSMENT.md` §4.2 (answered in STRUCTBIO-RES-0001).  **Not read:**
+ENSEMBLE-MSG-0006 and -0008, GEOMETRY-MSG-0005 … and its implementation guide for us, the theory
+division's twenty-fourth checkpoint, the science division's addendum A17 (26) and report R25,
+the frontier division's intake of our branch.  No answer yet to STRUCTBIO-REQ-0001, -0002, -0003
+(the engineering branch has not moved since before our first push).
 
 ## Imports
 

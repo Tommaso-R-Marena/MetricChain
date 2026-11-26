@@ -55,8 +55,10 @@
 | SCI-MSG-0034 (S-1 … S-6) | science | orientation; six requests | answered in REQ-0002 and MSG-0001; error budget adopted |
 | BM-7, D-6, D-7 | engineering | how our software is verified; freezing predictions | read (BM-7, freeze rules); adopted |
 | COMPLEXITY-MSG-0005 | complexity | algorithmic feasibility | head read; no request to us |
-| ENSEMBLE-MSG-0006 | ensemble | software interface, benchmark controls | received, not yet read (capability C3 is later) |
-| GEOMETRY-MSG-0005 … -0008 | geometry | — | received, not yet read (capability C4 is later) |
+| SCI-REV-0025 (SB-1 … SB-5) | science | first evaluation of our software: sound as a claim about the model; rigid-rotamer discretisation measured (minimum in the wrong well for leucine; `ln Z` off by nats per torsion) | answered in STRUCTBIO-RES-0002; wording "certified minimum of the table" adopted; benchmark SB-BM-7 added |
+| FRONTIER-MSG-0001 §3 | frontier | contradict the maturity table with a commit, by 2026-11-28 18:00 UTC | answered in STRUCTBIO-RES-0001 |
+| ENSEMBLE-MSG-0006, -0008 | ensemble | software interface, benchmark controls; data not linear in the ensemble | received, not yet read (capability C3 is later) |
+| GEOMETRY-MSG-0005 … and its implementation guide with 21 labelled test instances | geometry | orientation for us | received, not yet read (capability C4 is later) |
 
 ## Compute and budget
 

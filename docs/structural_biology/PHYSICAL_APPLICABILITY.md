@@ -29,7 +29,7 @@ protein.
 | line | value | source |
 |---|---|---|
 | (i) certified width | 0 for all six structures, for the integer tables | SB-X-001 rows, `certified_gap_kcal = "0"` |
-| (ii) discretisation | not quantified; the claim is about the discrete state set, not continuous torsions | — |
+| (ii) discretisation | not bounded for our tables; the claim is about the discrete state set, not continuous torsions.  **Measured by the science division on capped blocks** (SCI-REV-0025 §3; ff14SB with a solvent term, ideal backbones, rigid geometry; [M], unrefereed, not our energy model): a rigid ideal-rotamer table puts `ln Z` off the continuous value by −3.2 to +2.0 nats per torsion, moves rotamer-well populations by up to 0.48 in total variation, and for one capped leucine puts the table's minimum in a different well from the continuous minimum | SCI-REV-0025 (science `2796bec`) |
 | (iii) energy model | refits within one force-field lineage change single-residue terms by 1.1 to 4.4 `kT` (SCI-MSG-0034 §2.3); a vacuum model with `ε = 4r` is cruder than that | science division [M]; this division's model choice |
 | (iv) evaluation and rounding | ≤ 4·10⁻¹¹ kcal/mol observed disagreement with OpenMM on low-energy configurations [N]; rounding moves a configuration's energy by at most `(n + n(n−1)/2)·2⁻²¹` kcal/mol (1.0·10⁻³ for ubiquitin) | `MOLECULAR_LAYER_REPORT.md` §3; `model.from_float` |
 
@@ -115,3 +115,23 @@ Adopted from SCI-MSG-0034 §4 where applicable, and specific to our software:
 - that development results predict held-out performance: no held-out result exists;
 - that a correct implementation, a passing test suite or a machine-checked theorem makes a
   scientific conclusion — each verifies a statement about the model.
+
+## Addendum, 2026-11-26 (after the science division's first review, SCI-REV-0025)
+
+1. **Wording.**  What capability C1 returns is the **certified minimum of the table** — of the
+   integer rotamer tables of a stated model.  "GMEC" and "global minimum" in earlier text of
+   ours mean this and nothing more.
+2. **The discretisation line is no longer "unknown".**  The science division's measurement
+   (line (ii) above) says a rigid-rotamer table can place its minimum in the wrong well and
+   misstate free energies by nats per torsion.  Our tables use the same ideal staggered values
+   and no minimisation inside a cell, so the finding applies; two differences that we have not
+   measured are that we rotate the deposited geometry and include the deposited state.
+3. **What our own certified numbers add to that picture** (RESULTS R-6): in the tables
+   themselves the minimum is nearly degenerate — second-best within 0.004 to 0.11 kcal/mol,
+   61 to 81 % of residues able to change state below `3RT`.  A certified minimum of such a
+   table is a weak description even of the table's own ensemble.
+4. **A constructive direction named by the science division**: states that are cells carrying
+   their own free energy, pair tables that are cell averages, and one allowance table in the
+   certificate (its addendum A17 (26), item 101 (b); unrefereed; tested on valine pairs).  For
+   us this would change the table builder and leave certificates and checkers as they are.
+   Not started; recorded as open problem SB-OP-04.

@@ -44,6 +44,12 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("ids", nargs="*", default=["1CRN"])
     ap.add_argument("--exact-check", action="store_true")
+    ap.add_argument("--thetas", type=float, nargs="*", default=list(THETAS))
+    ap.add_argument("--max-leaves", type=int, default=1,
+                    help="allow conditioning (branch nodes) up to this many leaves; 1 = none")
+    ap.add_argument("--max-entries", type=int, default=MAX_ENTRIES)
+    ap.add_argument("--populations", action="store_true",
+                    help="also certify population intervals of every residue at the last threshold")
     args = ap.parse_args()
     with open(HERE / "results.jsonl", "a") as out:
         for pdb_id in args.ids:
@@ -52,34 +58,61 @@ def main() -> int:
             cert_path = ROOT / "experiments" / "structbio" / "gmec_dev" / "certs" / f"{pdb_id}.mincert.json"
             if cert_path.exists():
                 e_star = model.energy(mincert.loads(cert_path.read_text(), model=model).witness)
-            runs = [(theta, "float") for theta in THETAS] + ([(THETAS[0], "exact")] if args.exact_check else [])
+            runs = [(theta, "float") for theta in args.thetas] + ([(args.thetas[0], "exact")] if args.exact_check else [])
             for theta, tier in runs:
                 row = {"experiment": "SB-X-004", "split": "development", "pdb_id": pdb_id, "commit": dev.git_commit(),
                        "model_sha256": mincert.model_sha256(model), "beta_per_kcal": str(BETA), "tau_kcal": TAU,
-                       "theta_kcal": theta, "arithmetic": tier, "max_entries": MAX_ENTRIES}
+                       "theta_kcal": theta, "arithmetic": tier, "max_entries": args.max_entries,
+                       "max_leaves": args.max_leaves}
                 t0 = time.perf_counter()
                 try:
-                    cert = certify_partition(model, BETA, tau=TAU, theta=theta, arithmetic=tier, max_entries=MAX_ENTRIES)
+                    cert = certify_partition(model, BETA, tau=TAU, theta=theta, arithmetic=tier,
+                                             max_entries=args.max_entries, max_leaves=args.max_leaves)
                 except PartitionBudgetExceeded as exc:
                     row.update(outcome="abstained", reason=str(exc), seconds=round(time.perf_counter() - t0, 2))
                 else:
-                    res = check_partition_certificate(cert, arithmetic=tier, max_entries=MAX_ENTRIES)
-                    prunes = sum(1 for s in cert.steps if s["op"] == "prune")
+                    res = check_partition_certificate(cert, arithmetic=tier, max_entries=args.max_entries)
                     row.update(outcome="certified" if res.accepted else "REJECTED", full_box=bool(res.full_box),
                                ln_z_lo=str(res.ln_z_lo), ln_z_hi=str(res.ln_z_hi),
                                ln_z_lo_float=float(res.ln_z_lo), ln_z_hi_float=float(res.ln_z_hi),
                                width_nats=float(res.ln_z_hi - res.ln_z_lo),
-                               step_slack_nats=float(res.slack_hi - res.slack_lo),
-                               prunes=prunes, relaxed_pairs=len(cert.steps) - prunes,
-                               exact_pairs=len(model.pair) - (len(cert.steps) - prunes),
+                               leaves=res.stats["leaves"], prune_steps=res.stats["prune"], relax_steps=res.stats["relax"],
+                               conditioned=cert.branch is not None,
                                largest_table=res.stats["largest_table"], seconds=round(time.perf_counter() - t0, 2))
                     if e_star is not None:
                         row["minus_beta_E_min"] = float(-BETA * e_star)
                 out.write(json.dumps(row, sort_keys=True) + "\n")
                 out.flush()
                 print(json.dumps({k: row.get(k) for k in ("pdb_id", "theta_kcal", "arithmetic", "outcome", "ln_z_lo_float",
-                                                           "ln_z_hi_float", "width_nats", "exact_pairs", "largest_table",
+                                                           "ln_z_hi_float", "width_nats", "leaves", "largest_table",
                                                            "seconds", "reason")}), flush=True)
+            if args.populations:
+                theta = args.thetas[-1]
+                for site in range(model.n):
+                    row = {"experiment": "SB-X-004", "kind": "population", "split": "development", "pdb_id": pdb_id,
+                           "commit": dev.git_commit(), "model_sha256": mincert.model_sha256(model), "site": site,
+                           "theta_kcal": theta, "tau_kcal": TAU, "beta_per_kcal": str(BETA), "arithmetic": "float",
+                           "max_entries": args.max_entries, "max_leaves": args.max_leaves}
+                    t0 = time.perf_counter()
+                    try:
+                        cert = certify_partition(model, BETA, keep=site, tau=TAU, theta=theta, arithmetic="float",
+                                                 max_entries=args.max_entries, max_leaves=args.max_leaves)
+                    except PartitionBudgetExceeded as exc:
+                        row.update(outcome="abstained", reason=str(exc))
+                    else:
+                        res = check_partition_certificate(cert, arithmetic="float", max_entries=args.max_entries)
+                        pops = {int(a): [float(lo), float(hi)] for a, (lo, hi) in sorted(res.populations.items())}
+                        widths = [hi - lo for lo, hi in pops.values()]
+                        row.update(outcome="certified" if res.accepted else "REJECTED", populations=pops,
+                                   removed_states_upper=float(res.removed_upper), n_states=model.sizes[site],
+                                   max_width=max(widths), leaves=res.stats["leaves"],
+                                   most_populated_state=max(pops, key=lambda a: pops[a][0]),
+                                   most_populated_lower=max(lo for lo, _ in pops.values()))
+                    row["seconds"] = round(time.perf_counter() - t0, 2)
+                    out.write(json.dumps(row, sort_keys=True) + "\n")
+                    out.flush()
+                    print(json.dumps({k: row.get(k) for k in ("pdb_id", "site", "outcome", "max_width", "most_populated_state",
+                                                               "most_populated_lower", "leaves", "seconds", "reason")}), flush=True)
     return 0
 
 
