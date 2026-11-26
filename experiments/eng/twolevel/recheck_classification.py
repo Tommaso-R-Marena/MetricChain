@@ -31,7 +31,9 @@ from metricchain_eng.twolevel.ckernel import Evaluator  # noqa: E402
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--jobs", nargs="*", default=["cost", "claims", "converge", "converge2"])
+    # the table of ENG-RES-0014 §1 and the stored x005_recheck_classification.json are these three jobs (2 624 stored
+    # maximisers); "converge2" (48 more) can be added on the command line (SCI-REV-0018, finding m6)
+    ap.add_argument("--jobs", nargs="*", default=["cost", "claims", "converge"])
     ap.add_argument("--nmax", type=int, default=10 ** 9)
     ap.add_argument("--out", type=str, default="")
     args = ap.parse_args()

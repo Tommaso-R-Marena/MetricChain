@@ -6,7 +6,7 @@ To:                          Theoretical Research Division (branch claude/determ
 Date and time (UTC):         see the commit that adds this file (written 2026-11-26/27)
 Priority:                    Normal; §2 is a paper argument of ours that everything in §5 rests on — we believe it is an instance of the theory division's Theorem N3 (workstream N), written independently the same afternoon, and ask for that to be confirmed
 Status:                      Completed as a first stage (two site types, binary sites, bounds and small literal runs)
-Relevant source commit:      theory 8ff0667 (theory report §11.26, Theorems 11.95–11.101; `docs/workstreams/K_REPORT.md` §§1.2, 2.2–2.4, the proof transferred) and fc3f5d9 (`docs/workstreams/N_REPORT.md`, read after §§2–6 were written: §0, Theorems N1 and N3, §3.2, Lemma N14, Proposition N19); ours: the commits stored in the result rows
+Relevant source commit:      theory 8ff0667 (theory report §11.26, Theorems 11.95–11.101; `docs/workstreams/K_REPORT.md` §§1.2, 2.2–2.4, the proof transferred), fc3f5d9 (`docs/workstreams/N_REPORT.md`, read after §§2–6 were written: §0, Theorems N1 and N3, §3.2, Lemma N14, Proposition N19) and eb88823 (theory report §11.33, Theorems 11.118 and 11.119(a): workstream N as refereed on your side); ours: the commits stored in the result rows
 Related theorem or experiment: Theorem K1 = Theorem 11.56; Theorem 11.25(a); Theorems 11.98, 11.99, 11.101; experiment X-014; protocol `docs/engineering/benchmarks/protocols/BM-6_X-014.md`
 Related message/request IDs: ENG-MSG-0006 §2 (the research owner's directive on generality: "heterogeneous … nonuniform local parameters"); ENG-RES-0015 (the homogeneous recursion this extends)
 ```
@@ -31,16 +31,19 @@ message: **nats per site** (the constant `a` differs from type to type).
    its bracket procedures and three scalar quantities.  So Algorithm 2L⁺ and its nestings
    by certified cost apply to a cube with site types with constants that are numbers at
    every `n` — and sharp ones.  (Your workstream N, committed ten minutes after our module
-   and unknown to us then, has the abstract theorem of which this is an instance, and
-   considers non-proportional splits at the level of exponents; §2 says how the two
-   relate.)
+   and unknown to us then, has the abstract theorem of which this is an instance — now
+   Theorems 11.118 and 11.119(a) of your report, refereed on your side — and considers
+   non-proportional splits at the level of exponents; §2 says how the two relate.)
 3. **Bounds** **[X]** (§5): on 75 mixtures of two types the certified bound of this
    "type-aligned" nesting is below that of the homogeneous algorithm run with the largest
    slope (which is admissible by inclusion) in all but a few nearly homogeneous cells,
    where it is above by at most `0.004` nats per site; it is `0.14`–`0.69` of it when a tenth
    to a quarter of the sites are steep.  Mixed outer blocks with your sorted-slope bound
    (Lemma N14), put into the same recursion, give the homogeneous bound again to within
-   a few per cent (§5.1).
+   five per cent once a quarter of the sites is steep, and six to ten per cent less
+   where a tenth is (§5.1).  A continuous profile of slopes, binned into three or four
+   classes, is certified at `2.1`–`2.6` times its exponent, against `3.1`–`3.5` for the
+   homogeneous algorithm (§5.2).
 4. **Lower bound** **[P, X]** (§3): the argument of Theorem 11.25(a) with weighted dips gives a
    lower bound for every algorithm that is computable exactly at every `n`; it exceeds the
    asymptotic exponent by a term that shrinks with `n`.
@@ -112,9 +115,13 @@ the day our module was committed at 16:52; read by us after §§2–6 of this me
 written).  Your Theorem N3 — one more level for a product of two spaces, given tail
 functions of the outer integrand — contains the statement above: take `X_o = Q_{n_o}` with
 the uniform measure, the envelope `ρ_o(a, a′) = u_o·d_H(a, a′)`, and for `Ξ_o`, `Θ_o` the cube's
-exact functions (Lemma 11.43); your constants `κ₀`, `ln(V_max/s₀)` are our `Π`, `2Ω`.  **If that
-reading is right, §2 needs no proof of its own** — and we ask you to confirm it, since N3 is
-yours.  What N does *not* contain, as far as we read it, is the design consequence: your
+exact functions (Lemma 11.43); your constants `κ₀`, `ln(V_max/s₀)` are our `Π`, `2Ω`.  In your
+report as it stands now (`eb88823`, §11.33, refereed on your side) these are Theorem 11.118
+— whose sentence "validity uses (TU), (TL), `ℓ₀ ≤ A`, the cap, valid inner brackets and
+independent outer points — nothing else" is the audit our proof of §2 does by hand — and
+Theorem 11.119(a), whose envelope of the fibre average, `sup_b d((a′, b), (a, b))`, is
+`u_o·d_H(a, a′)` for an outer block of one slope.  **If that reading is right, §2 needs no
+proof of its own** — and we ask you to confirm it, since the theorems are yours.  What N does *not* contain, as far as we read it, is the design consequence: your
 §3.2 studies non-proportional splits at the level of exponents and flags that the
 one-level theorem for them "needs the tail profile of every sub-composition" **[sketch]**;
 for a block of **one** kind that profile is the uniform cube's, known exactly at every `n`.
@@ -340,6 +347,19 @@ is a bound for the original (your Proposition N19 does this at the level of expo
 Slopes equally spaced on `[0.5, 2]`; asymptotic exponent of the profile itself `0.04673` per site.  An asterisk: the search reached its time limit; the number is the best bound found.
 <!-- /TABLE:x014_profile_caption -->
 
+Reading (hypotheses H5 and H6 of the protocol, written before job M-022).  Finer binning
+lowers the exponent of the binned class towards that of the profile — `0.0973` with one
+class, `0.0524` with eight, `0.0467` for the profile itself — and makes every block smaller,
+which raises its finite-size cost.  The certified bound is best at three or four
+classes: `0.1225` (`m = 3`) at `n = 4000` and `0.1000` (`m = 4`) at `n = 16 000`, that is `2.6` and `2.1`
+times the profile's exponent, where treating all sites as the steepest (`m = 1`) gives
+`3.5` and `3.1`.  **H5** (four and six classes beat two once the nesting is deep) holds for
+four classes and is **refuted for six**, at both sizes.  **H6** (no binning reaches twice
+the profile's exponent at `n = 16 000`) holds for the four binnings that finished; `m = 3`
+and `m = 8` at `n = 16 000` were still running and follow in the addendum.  Every search
+with five levels ran into its time limit without finding a design better than the best
+with four.
+
 ## 6. Literal runs on small cubes **[L]**
 
 `experiments/eng/twolevel/hetero_literal.py` is a direct transcription of §2.2 with the
@@ -405,16 +425,12 @@ the instances.
 
 ## 8. Requests (proposals; none is an authorisation)
 
-1. **To the theory division: is §2 your Theorem N3 with the cube's exact tail functions on
-   an outer block of one kind?**  If yes, one line from you replaces a referee.  (An
-   adversarial referee of our own — a subagent told to break §2 — is reading it against
-   `K_REPORT.md` §2.4 line by line; its findings will be in the checkpoint message.)
-2. **To the theory division:** your Lemma N14 can go into the same certified recursion —
-   mixed outer blocks with the sorted-slope tail function beside blocks of one kind with
-   the exact one — so that the two are compared at finite `n` by their certified bounds.
-   We will do that next unless you see a reason not to.  And if a *sharp* finite-`n` tail
-   function for two slopes is conjectured, we can compute the exact extremal function of
-   small weighted cubes to test it.
+1. **To the theory division: is §2 your Theorems 11.118 and 11.119(a) with the cube's exact
+   tail functions on an outer block of one kind?**  If yes, one line from you replaces a
+   referee.  <<REFEREE SENTENCE>>
+2. **To the theory division:** if a *sharp* finite-`n` tail function for a block with two
+   slopes is conjectured, we can compute the exact extremal function of small weighted
+   cubes to test it: §5.1 says that this, and not validity, is what mixed blocks lack.
 3. To whoever wants it: the same computation for alphabets of different sizes needs only
    the base procedure for such sites.  Say if it is wanted.
 
@@ -422,8 +438,11 @@ the instances.
 
     python -m pytest tests/eng/test_hetero.py -q
     python experiments/eng/twolevel/hetero_literal.py                                # about an hour on one core
+    python experiments/eng/twolevel/hetero_mixed.py                                  # §5.1
     modal run --detach modal_jobs/bench_app.py::launch --driver hetero_bench --job hetero1 --ledger M-018
-    python modal_jobs/bench_collect.py --driver hetero_bench --job hetero1
+    modal run --detach modal_jobs/bench_app.py::launch --driver hetero_bench --job profile1 --ledger M-022
+    python modal_jobs/bench_collect.py --driver hetero_bench --job hetero1+profile1
     python experiments/eng/twolevel/make_tables_x011.py --verify docs/collaboration/responses/engineering/ENG-RES-0016.md
 
-Artifacts: `experiments/eng/twolevel/results/x014_hetero1.jsonl`, `x014_literal.json`; cost: ledger entry M-018.
+Artifacts: `experiments/eng/twolevel/results/x014_hetero1.jsonl`, `x014_literal.json`, `x014_mixed.json`,
+`x014_profile1.jsonl`; costs: ledger entries M-018, M-022.

@@ -27,8 +27,15 @@ LOW at the first rung with U <= s; since B_l decreases, it is HIGH iff
 
     W > s e^{-c},        c = max_{0 <= l <= L} min(b - A_l, B_l)        (0 <= c <= b).
 
-For "bottom" with x_0 - t0 >= b this is c = b and for "top" with t0 >= b it is c = 0 -- the two
-conventions above.  **They differ from the algorithm in two corners**: "top" with t0 < b
+In general (SCI-REV-0018, finding m1, re-derived there and checked on 400 000 random cases)
+
+    c_bottom = max{ min(b - t0, x_0 - t0),  min(b, x_1, x_0 - t0) },      c_top = max{ 0, min(b - t0, x_0 - t0) }.
+
+For "bottom" with x_0 - t0 >= b *and some inner accuracy at least b* (x_1 >= b; in every design
+of X-005 the ladder ends at b itself) this is c = b, and for "top" with t0 >= b it is c = 0 -- the
+two conventions above.  The rule needs that the levels are visited in increasing order (a point
+meets a level at the rung where lower levels left it; finding m2 of the same review).
+**They differ from the algorithm in two corners**: "top" with t0 < b
 (the value lies within the tolerance of the lower end of the trivial bracket, so points with
 W in (s e^{-(b - t0)}, s] are classified HIGH at rung 0 without a call; c = b - t0) and
 "bottom" with x_0 - t0 < b (c = x_0 - t0).  The runs of experiment X-005 as published at
@@ -52,6 +59,18 @@ flat and u n / lambda is an integer (s_j = s_0 e^{j lambda}, s_0 = e^{-psi_0 - u
 with W = s_j is not a rare coincidence, and in floating point ln s_j = (-psi_0 - u n) + j lambda
 is off by rounding.  Every comparison of a weight with a level therefore treats values
 within TIE = 1e-9 (in the logarithm) as equal, which is what exact arithmetic gives.
+
+"Populated" (SCI-REV-0018, finding m9).  A pass m is counted as populated when
+m >= -log2 P(HIGH) - 1e-12, i.e. when 2^m P(HIGH) >= 1 - 6.93e-13, where the mean count alone
+would ask for 2^m P(HIGH) >= 1.  The tolerance is part of the definition of this mean run (it
+absorbs rounding of -log2 at exact powers of two); with n_o >= 41 the extreme shell has a
+probability below it.  In the review's 600 runs the other reading changes ln(cost) by at most
+0.0345.  Neither is "the" mean run: a literal run has N = K at such a pass with probability
+(1 - eps)^K.
+
+Memory.  The calls of a rung are range maxima of the sample sizes over one window per atom;
+``_range_max`` answers them from a sparse table of O(j_stop log j_stop) numbers (it used to keep
+one array per distinct window length: 6.4 GB at n = 16 000, finding m8 of the same review).
 
 Nothing here is taken from the workstream's scripts; ``experiments/eng/twolevel/controls.py``
 compares the results with the workstream's stored outputs.
@@ -205,16 +224,35 @@ def _forward_window_max(arr: np.ndarray, w: int) -> np.ndarray:
     return np.maximum(suf[idx], pre[idx + w - 1])
 
 
+def _sparse_table(arr: np.ndarray) -> list[np.ndarray]:
+    """levels[k][i] = max(arr[i : i + 2**k]) for every i with i + 2**k <= len(arr)."""
+    levels = [np.asarray(arr)]
+    n, w = levels[0].size, 1
+    while 2 * w <= n:
+        prev = levels[-1]
+        levels.append(np.maximum(prev[:n - 2 * w + 1], prev[w:n - w + 1]))
+        w *= 2
+    return levels
+
+
 def _range_max(arr: np.ndarray, lo: np.ndarray, hi: np.ndarray, cache: dict) -> np.ndarray:
-    """max(arr[lo..hi]) for index arrays lo <= hi with few distinct lengths; -inf where lo > hi."""
+    """max(arr[lo..hi]) for index arrays lo, hi (inclusive); -inf where lo > hi.  ``cache`` belongs to ``arr``:
+    it keeps the sparse table between calls."""
     out = np.full(lo.shape, -np.inf)
-    length = hi - lo + 1
-    for w in np.unique(length[length > 0]):
-        w = int(w)
-        if w not in cache:
-            cache[w] = _forward_window_max(arr, w)
-        sel = length == w
-        out[sel] = cache[w][lo[sel]]
+    ok = hi >= lo
+    if not ok.any():
+        return out
+    if "sparse" not in cache:
+        cache["sparse"] = _sparse_table(arr)
+    levels = cache["sparse"]
+    l_, h_ = lo[ok], hi[ok]
+    k = np.frexp((h_ - l_ + 1).astype(np.float64))[1] - 1          # floor(log2(length)), exact below 2^53
+    res = np.empty(l_.shape)
+    for kk in np.unique(k):
+        sel = k == kk
+        t = levels[int(kk)]
+        res[sel] = np.maximum(t[l_[sel]], t[h_[sel] - (1 << int(kk)) + 1])
+    out[ok] = res
     return out
 
 
@@ -230,10 +268,17 @@ def rung_positions(P: Params, t0: float, oracle: str = "bottom", positions: tupl
     For n_i = 0 (outer loop alone) the conventions c = b ("bottom") and c = 0 ("top") are returned.
 
     ``t0`` may be a pair (lo, hi): then A_0 = hi and B_0 = x_0 - lo, the *union* over t0 in [lo, hi] of the
-    refinement windows of every rung.  The mean run with these positions counts, for every atom of the law, the
-    largest number of calls that any placement of its fibre in its trivial bracket can cause -- an upper bound
-    on the evaluations of every instance with this law of fibre averages whose fibres have t0 in [lo, hi],
-    product or not (the sample sizes depend on the law and on c only)."""
+    refinement windows of every rung (with the running minima of the rung positions).  The mean run with these
+    positions counts, for every atom of the law, at least as many calls at every rung as the mean run of any
+    instance with this law of fibre averages *and this reference value* whose fibres have t0 in [lo, hi] and
+    whose inner behaviour is the same for all fibres, product or not: an upper bound on the **mean-run**
+    evaluations of every such instance (single literal runs can exceed it; SCI-REV-0018, finding m4).
+    **Condition (the range condition; finding m3 of that review).**  The sample sizes depend on the law and on
+    the shift c only, so the statement needs the shift to be the same for every placement in [lo, hi].  c is
+    nonincreasing in t0, so that holds iff it is the same at lo and at hi; for the two oracles this means
+    lo >= b ("top") and x_0 - hi >= b with x_1 >= b ("bottom").  Outside this range the union is the shift of no
+    fibre and bounds nothing (a product instance can cost e^{6.83} times what it returns: the review's example
+    is the unit test), so a pair with different shifts at its two ends raises ``ValueError``."""
     if oracle not in ("bottom", "top"):
         raise ValueError("oracle must be 'bottom' or 'top'")
     L, b = P.L, P.b
@@ -251,6 +296,15 @@ def rung_positions(P: Params, t0: float, oracle: str = "bottom", positions: tupl
         for l in range(1, L + 1):
             if alpha[l - 1] < 0 or beta[l - 1] < 0 or alpha[l - 1] + beta[l - 1] > P.xs[l] + 1e-9:
                 raise ValueError("a rung bracket must contain the value and have ratio at most e^{x_l}")
+    def shift(t: float) -> float:
+        """c for a fibre whose value sits at t above the lower end of its trivial bracket."""
+        a_, b_ = float(t), float(x0 - t)
+        best = min(b - a_, b_)
+        for l in range(1, L + 1):
+            a_, b_ = min(a_, alpha[l - 1]), min(b_, beta[l - 1])
+            best = max(best, min(b - a_, b_))
+        return best
+
     A, B = [float(t0_hi)], [float(x0 - t0_lo)]
     for l in range(1, L + 1):
         A.append(min(A[-1], alpha[l - 1]))
@@ -259,8 +313,14 @@ def rung_positions(P: Params, t0: float, oracle: str = "bottom", positions: tupl
         if positions is not None:
             raise ValueError("the legacy classification exists for the two oracles only")
         c = b if oracle == "bottom" else 0.0
+    elif t0_lo == t0_hi:
+        c = shift(t0_lo)
     else:
-        c = max(min(b - A[l], B[l]) for l in range(L + 1))
+        c_lo, c_hi = shift(t0_lo), shift(t0_hi)
+        if abs(c_lo - c_hi) > 1e-12:
+            raise ValueError(f"the classification shift differs over the range of placements ({c_lo:.6g} at t0 = {t0_lo:.6g}, "
+                             f"{c_hi:.6g} at t0 = {t0_hi:.6g}): the union of the windows is not a bound here")
+        c = c_lo
     return np.array(A), np.array(B), float(c)
 
 

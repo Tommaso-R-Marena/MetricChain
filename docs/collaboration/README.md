@@ -5,10 +5,10 @@ own copy (`git show origin/claude/determined-ride-og1u7j:docs/collaboration/READ
 sections "Layout and ownership", "Rules", "Message format" and "Synchronisation" are kept
 consistent with it, and everything below "Engineering addendum" is specific to this branch.*
 
-Six independent research divisions work on this repository under one research owner (two
+Seven independent research divisions work on this repository under one research owner (two
 at the start; the third introduced by the owner on 2026-11-25 and confirmed to this division
-on 2026-11-26; three more authorised by the owner on 2026-11-26 — `docs/engineering/DIRECTIVES.md`,
-D-3 and D-4):
+on 2026-11-26; three more authorised by the owner on 2026-11-26, and a seventh later the same
+day — `docs/engineering/DIRECTIVES.md`, D-3, D-4 and D-6):
 
 | division | branch (writes only here) | mailbox prefix / digest |
 |---|---|---|
@@ -18,6 +18,7 @@ D-3 and D-4):
 | **Ensemble Identifiability and Certified Inference** (ensemble) | `research/ensemble-identifiability` | `messages/ensemble/` / `ENSEMBLE_TO_ALL.md` |
 | **Geometric Inference, Rigidity and Inverse Problems** (geometry) | `research/geometric-inference` | `messages/geometry/` / `GEOMETRY_TO_ALL.md` |
 | **Mathematical Biology and Computational Complexity** (complexity) | `research/biological-complexity` | `messages/complexity/` / `COMPLEXITY_TO_ALL.md` |
+| **Structural & Computational Biology, Software Development and Applications** (structural biology) | `research/structural-biology` | its own prefix, read from its branch / `STRUCTURAL_BIOLOGY_TO_ALL.md` |
 
 Mandates of the three new divisions, in the owner's words: *ensemble* — "Measure theory, moment
 problems, ensemble identifiability, partial identification, optimal transport, information
@@ -29,21 +30,44 @@ mathematics, and rigorous algorithms".  (Their branches did not exist yet when t
 updated, 2026-11-26 15:40 UTC; the exact message prefixes are theirs to choose and are read
 from their branches.)
 
+The seventh division (owner's directive of 2026-11-26, about 22:00 UTC; D-6) "will translate
+MetricChain's mathematics into scientifically useful research software, develop
+implementations, design benchmarks, investigate general physical applicability, and
+integrate relevant discoveries from the other divisions".  Its branch did not exist yet when
+this copy was updated (2026-11-26 22:05 UTC).  **The roles around its software are fixed by
+the owner:** it develops the implementations and the initial benchmark specifications; the
+engineering division independently examines "the implementations, benchmark methodology,
+computational correctness, and performance" — with tests of its own that could falsify the
+claims, differential testing against exact references, and held-out cases for final
+comparisons; the science division evaluates physical relevance, assumptions, novelty and
+interpretation; the mathematical divisions the foundations.  Engineering does not modify
+that branch: fixes and alternative implementations stay on `research/ubuntu-engineering`.
+The earlier boundary of scope (no biological sequence engineering, no target-specific
+functional optimisation, no experimental execution without separate authorisation) is
+unchanged.
+
 Each division writes exclusively to its own branch and reads the others' branches without
 modifying them.  No automatic merges, no force pushes, no changes to `main`, no pull requests
-without the research owner's explicit authorisation.  All six may read each other's
+without the research owner's explicit authorisation.  All seven may read each other's
 mathematics directly; imported results are checked, not accepted, and are cited with their
 originating branch, exact commit, assumptions, proof status and limitations.
 
 **Shared computation.**  By the owner's directive of 2026-11-26 (D-5) the engineering division
-coordinates substantial shared Modal computations and benchmarking for all six divisions.
+coordinates substantial shared Modal computations and benchmarking for all seven divisions
+(D-6 extends D-5 to the seventh).
 A request for computation is sent through the mailbox and states: the mathematical claim,
 the exact source commit, the assumptions, the proposed method, baselines, correctness
 criteria, expected outputs, a resource estimate and a stopping condition.  The queue, with
 its readiness assessment, is `docs/engineering/BENCHMARK_REGISTRY.md` on this branch.  No
 division consumes the shared Modal budget through substantial workloads of its own; a
 request authorises no spending — engineering accepts, defers, revises or declines by
-readiness, value and budget, and says which.
+readiness, value and budget, and says which.  A *benchmark of software* is reviewed before
+any substantial execution (D-6): are the baselines appropriate, the comparison fair, the
+success criteria meaningful, the inputs more than favourable synthetic examples, the
+accuracies and guarantees comparable across methods, all material costs counted, the
+reference values independently justified, and can the benchmark come out unfavourably?
+Inadequate specifications are revised or returned.  Code received from another branch is
+read — source, dependencies, expected resources — before any of it is run.
 
 ## Layout and ownership
 
@@ -66,6 +90,7 @@ docs/collaboration/
     ENSEMBLE_TO_ALL.md,   messages/ensemble/   and its requests, responses, status   ensemble
     GEOMETRY_TO_ALL.md,   messages/geometry/   and its requests, responses, status   geometry
     COMPLEXITY_TO_ALL.md, messages/complexity/ and its requests, responses, status   complexity
+    STRUCTURAL_BIOLOGY_TO_ALL.md and the mailbox directories that division chooses  structural biology
 ```
 
 Every message names its recipients.  `ENGINEERING_TO_THEORY.md` keeps its name and is this

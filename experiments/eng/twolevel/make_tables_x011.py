@@ -426,7 +426,22 @@ def hetero_blocks() -> dict[str, str]:
             + f".  Blocks of one type against mixed blocks: `{min(d[2] for d in diffs):.2f}`–`{max(d[2] for d in diffs):.2f}` of the mixed bound.  "
             f"The union of the two families is better than blocks of one type alone in {sum(1 for d in diffs if d[5])} of {len(diffs)} rows.")
     pp = RESULTS / "x014_profile1.jsonl"
-    prof = jl("x014_profile1.jsonl")
+    allprof = jl("x014_profile1.jsonl")
+    # ENG-RES-0016 has the ten binnings finished when it was published; the two that were still running
+    # (n = 16 000 with m = 3 and m = 8) go into the block x014_profile_late of the addendum
+    late = {(16000, 3), (16000, 8)}
+    prof = [r for r in allprof if (r["n"], r["m"]) not in late]
+    prof_late = [r for r in allprof if (r["n"], r["m"]) in late]
+    if prof_late:
+        pl = ["| `n` | classes `m` | exponent of the binned class | certified bound per site with 2 / 3 / 4 / 5 levels | best / exponent of the profile |", "|---|---|---|---|---|"]
+        for r in sorted(prof_late, key=lambda r: (r["n"], r["m"])):
+            vals, cur = [], None
+            for x in r["rows"]:
+                if x.get("bound") is not None:
+                    cur = x["bound"] if cur is None else min(cur, x["bound"])
+                vals.append(("—" if cur is None else f"{cur:.4f}") + ("" if x["complete"] else "*"))
+            pl.append(f"| {r['n']} | {r['m']} | {r['h_binned']:.5f} | " + " / ".join(vals) + f" | {(cur / r['h_profile']):.2f} |")
+        blocks["x014_profile_late"] = "\n".join(pl)
     if prof:
         pl = ["| `n` | classes `m` | exponent of the binned class | certified bound per site with 2 / 3 / 4 / 5 levels | best / exponent of the profile |", "|---|---|---|---|---|"]
         for r in sorted(prof, key=lambda r: (r["n"], r["m"])):

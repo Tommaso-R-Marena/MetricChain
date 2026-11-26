@@ -505,3 +505,101 @@ def test_the_search_family_cannot_reach_the_corners_of_the_classification_rule()
             for t0 in (lo, hi):
                 assert rung_positions(P, t0, "bottom")[2] == pytest.approx(P.b)
                 assert rung_positions(P, t0, "top")[2] == pytest.approx(0.0)
+
+
+# ---------------------------------------------------------------------------------------------
+# SCI-REV-0018 (the science division's review R18 of ENG-RES-0014 §§1, 4): findings m3, m7, m8 and the
+# unit test of ``t0_range`` that did not exist
+# ---------------------------------------------------------------------------------------------
+from metricchain_eng.twolevel.meanrun import _range_max, _sparse_table  # noqa: E402
+
+
+def test_range_max_sparse_table_against_brute_force():
+    rng = np.random.default_rng(5)
+    for n in (1, 2, 3, 7, 64, 65, 1000):
+        arr = rng.normal(size=n)
+        arr[rng.integers(0, n, size=max(1, n // 7))] = -np.inf
+        lo = rng.integers(0, n, size=400)
+        hi = rng.integers(-1, n, size=400)
+        got = _range_max(arr, lo, hi, {})
+        for a, b_, g in zip(lo, hi, got):
+            assert g == (-np.inf if b_ < a else np.max(arr[a:b_ + 1]))
+    # finding m8: O(n log n) numbers, where one array per window length was up to n^2
+    assert sum(t.size for t in _sparse_table(np.zeros(100_000))) <= 17 * 100_000
+
+
+def test_every_cell_of_x005_is_inside_the_range_condition():
+    """Finding m7: in every cell of X-005 (all 468, the extreme one included) the fibre placements stay away from
+    both corners -- lo - b >= 10.17 and x_0 - hi - b >= 7.82, the smallest at u = 1/2, n = 250, phi = 0.85 -- and some
+    inner accuracy is at least b; so the conventions c = b / c = 0 are the exact rule on the whole search family,
+    and the guard of the pair mode passes."""
+    least_lo, least_hi = (math.inf, None), (math.inf, None)
+    cells = 0
+    for u in run_search.US:
+        c = cube_constants(u)
+        for n in run_search.NS_COST:
+            for phi in run_search.PHIS:
+                P, _ = run_search.design_params(n, u, phi)
+                lo, hi = P.n_i * (u - c.Lambda1), P.n_i * (2 * u - c.Lambda1)
+                least_lo = min(least_lo, (lo - P.b, (u, n, phi)))
+                least_hi = min(least_hi, (P.xs[0] - hi - P.b, (u, n, phi)))
+                assert P.xs[1] >= P.b
+                assert rung_positions(P, (lo, hi), "bottom")[2] == pytest.approx(P.b)
+                assert rung_positions(P, (lo, hi), "top")[2] == pytest.approx(0.0)
+                cells += 1
+    assert cells == 468
+    assert least_lo[1] == (0.5, 250, 0.85) and least_lo[0] == pytest.approx(10.176, abs=2e-3)
+    assert least_hi[1] == (0.5, 250, 0.85) and least_hi[0] == pytest.approx(7.824, abs=2e-3)
+
+
+def test_pair_mode_refuses_a_range_of_placements_with_two_shifts():
+    """Finding m3, with the review's own example (a design outside the range condition: lo < b).  The shift is
+    b - lo at the lowest placement and 0 at the highest; the union of the windows with the shift of no fibre
+    returned e^{9.68} evaluations for a law whose product instance at the lowest placement costs e^{16.51}."""
+    P = Params(n=44, n_o=42, u=1.0, lam=0.2, eta=0.25, etap=0.1, theta=2.0, nu1=1.0, b=2.5, delta=0.05, xs=(4.0, 2.875, 2.5))
+    c = cube_constants(1.0)
+    lo, hi = P.n_i * (1.0 - c.Lambda1), P.n_i * (2.0 - c.Lambda1)
+    assert lo == pytest.approx(1.240229013916555) and hi == pytest.approx(3.2402290139165553)
+    assert rung_positions(P, lo, "top")[2] == pytest.approx(1.259770986083445)
+    assert rung_positions(P, hi, "top")[2] == pytest.approx(0.0)
+    with pytest.raises(ValueError, match="shift"):
+        rung_positions(P, (lo, hi), "top")
+    ev = Evaluator(P)
+    F = np.minimum(np.arange(P.n_o + 1), 35).astype(float)          # cone of slope u to radius 35, then flat
+    inst = Instance(radial_law(F, ev.outer, shift=lo - P.u * P.n_i), psi0=2.0, t0=lo)
+    assert ev.run(inst, "top").lcost == pytest.approx(16.512084371770655, abs=1e-6)
+    assert mean_run(P, ev.outer, inst, "top").lcost == pytest.approx(16.512084371770655, abs=1e-6)
+    with pytest.raises(ValueError, match="shift"):
+        ev.run(inst, "top", t0_range=(lo, hi))
+
+
+@pytest.mark.parametrize("cell", [(1.0, 250, 0.5), (0.5, 350, 0.55), (2.0, 250, 0.85)])
+def test_union_of_windows_bounds_every_placement_at_the_same_law_and_reference(cell):
+    """``t0_range``: at a law of fibre averages and a reference value, the mean run with the union of the windows
+    has the same sample sizes and at least as many calls at every rung as the mean run with any single placement
+    in the range, for both uniform inner behaviours (Proposition R18.1 of the review; inside the range condition)."""
+    u, n, phi = cell
+    P, _ = run_search.design_params(n, u, phi)
+    ev = Evaluator(P)
+    c = cube_constants(u)
+    lo, hi = P.n_i * (u - c.Lambda1), P.n_i * (2 * u - c.Lambda1)
+    rng = np.random.default_rng(11)
+    strict = 0
+    for monotone in (True, False):
+        fam = Family(ev, k=8, monotone=monotone)
+        for _ in range(5):
+            F, d0, c_in = fam.decode(rng.random(fam.dim))
+            law, psi0 = radial_law(F, ev.outer, shift=c_in), float(F[d0])
+            for orc in ("bottom", "top"):
+                R_any = ev.run(Instance(law, psi0=psi0, t0=u * P.n_i + c_in), orc, t0_range=(lo, hi))
+                for t in np.linspace(lo, hi, 5):
+                    R = ev.run(Instance(law, psi0=psi0, t0=float(t)), orc)
+                    assert R.lM_max == pytest.approx(R_any.lM_max, abs=1e-9) and R.j_stop == R_any.j_stop
+                    assert np.all(R_any.lcalls[1:] >= R.lcalls[1:] - 1e-9)
+                    assert R_any.lcost >= R.lcost - 1e-9
+                    strict += R_any.lcalls[1] > R.lcalls[1] + 1e-6
+    # the union is not vacuous: in the cell where the review found the largest shortfall of the product search some
+    # placement causes strictly fewer calls of the first inner procedure (by up to e^{44.8} on these instances); on
+    # random instances of the other two cells the place does not matter at all
+    if cell == (2.0, 250, 0.85):
+        assert strict > 0

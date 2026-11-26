@@ -242,3 +242,109 @@ Addressed to this division.  Operative content:
 13. **Consolidation**: on the owner's directive, finish and preserve the strongest
     benchmark-ready findings; no expensive new exploratory campaigns without authorisation.
 
+
+## D-6 — Seventh division; independent verification of its software by this division (2026-11-26, received about 22:00 UTC)
+
+Addressed to this division.  "All previous research directives, branch restrictions,
+spending limits, collaboration requirements, and computational deadlines remain in force
+except where explicitly supplemented below."  Operative content:
+
+1. **A seventh division is authorised**: "Structural & Computational Biology, Software
+   Development and Applications Division", branch `research/structural-biology`, digest
+   `docs/collaboration/STRUCTURAL_BIOLOGY_TO_ALL.md` on its branch.  It "will translate
+   MetricChain's mathematics into scientifically useful research software, develop
+   implementations, design benchmarks, investigate general physical applicability, and
+   integrate relevant discoveries from the other divisions".  "It is an independent
+   collaborator.  You are not being replaced, and your existing responsibilities remain
+   active."
+2. **This division's additional central responsibility**: "the independent computational
+   verification, software testing, reproduction, adversarial evaluation, and substantial
+   benchmarking of the new division's research software".  The division of labour "is
+   deliberate": Structural Biology develops implementations and initial benchmark
+   specifications; this division examines "the implementations, benchmark methodology,
+   computational correctness, and performance"; Science evaluates "physical relevance,
+   assumptions, novelty, and scientific interpretation"; the mathematical divisions the
+   foundations and proof obligations.  "Do not merely run whatever scripts the new
+   division sends you."
+3. **Software review**, for substantial implementations: correspondence between
+   specification and code; correctness of assumptions; numerical stability;
+   floating-point behaviour; error propagation; certificate semantics; failure handling;
+   reproducibility; complexity; memory; hidden preprocessing costs; dependency
+   correctness; robustness to invalid inputs; discrepancies between claimed and actual
+   behaviour.  "Where scientifically valuable, independently reimplement critical
+   computational components.  Use differential testing against exact reference
+   implementations, established libraries, or independently derived calculations.  Do
+   not treat the structural biology division's own test suite as sufficient evidence.
+   Create additional tests that are capable of falsifying its claims.  Do not execute
+   imported code blindly.  Inspect it, its dependencies, and its expected resource
+   consumption before execution."
+4. **Benchmark independence**: review each proposed benchmark before substantial
+   execution (baselines appropriate; comparison fair; success criteria meaningful; inputs
+   more than favourable synthetic examples; accuracy comparable across methods; all
+   material costs counted; guarantees actually comparable; reference values independently
+   justified; unfavourable outcomes possible).  "Revise inadequate specifications.  You
+   are authorized to reject poorly justified benchmark requests and request clarification
+   or correction through the existing GitHub collaboration system."  "Maintain
+   independence between development experiments and final comparative benchmarks.  Where
+   feasible, use held-out public test cases that the software-development division has
+   not tuned against.  Preserve all benchmark outcomes, including failures."
+5. **Modal**: "Continue coordinating the shared Modal computational resources", now for
+   seven divisions; prioritise "by scientific value, mathematical readiness, falsification
+   potential, reproducibility, and computational cost"; "Do not automatically execute
+   every requested job."  "Maintain your existing resource ledger and spending
+   safeguards.  The existing workspace ceiling and internal $1,500 workspace-usage stop
+   line, if still operative, are not raised by this directive."  Hard stop unchanged
+   (2026-11-30 15:00 US Eastern).  "Do not independently increase authorized resource
+   limits."  For substantial jobs: the claim tested; pinned commits; the benchmark
+   specification; the maximum cost; stopping conditions; expected artifacts; a cheap smoke
+   test; bounded launch; monitoring; collection and verification; actual consumption;
+   communication of results.  "Do not spend resources merely to exhaust available
+   credits.  Use the available computational resources aggressively where they can
+   generate genuinely important, scientifically rigorous evidence."
+6. **The loop continues**: "Do not stop after launching Modal jobs.  Do not wait idly for
+   remote computations when other scientifically valuable work is available."  "At every
+   checkpoint, inspect the latest relevant messages from all six other divisions."
+   "Maintain the existing collaboration protocol and update your copy to include the
+   seventh division.  Do not create a new repository or communication system."
+7. **Communication with the new division**: read its branch directly; answer with ENG
+   identifiers in our directories, stating what was reviewed, exact commits, what was
+   reproduced, the tests run, which claims survived and which failed, which assumptions
+   were violated, actual costs, remaining concerns, proposed corrections.  "Do not modify
+   its branch.  All fixes or alternative implementations developed by you must remain on
+   your own branch unless separately authorized."
+8. **Priorities**: "Retain your existing foundational mathematical computation work.
+   However, as the structural biology software becomes sufficiently mature, allocate
+   substantial attention to establishing whether it provides genuine practical benefits.
+   Do not allow abstract mathematical benchmarking to indefinitely postpone testing
+   scientifically useful software.  Conversely, do not allow enthusiasm about biological
+   applications to undermine mathematical verification standards."  "Your objective is to
+   identify what works, what fails, and why."
+9. **At consolidation** (the directive that will come near the reasoning-credit
+   threshold): independent replication; correctness verification; completion of
+   high-value benchmarks; preservation of numerical artifacts; reproducibility;
+   documentation of negative results; final ledgers; complete handoff.  "Do not initiate
+   major new exploratory programs during consolidation."
+10. **Immediate**: continue without restarting; recognise the seventh division in the
+    collaboration infrastructure; "Prepare to receive and independently evaluate its
+    software and benchmark requests"; "Assess which existing mathematical verification
+    components can support this new responsibility."
+
+**How this division reads two points** (our interpretation, recorded so that it can be
+corrected):
+
+* *The spending line.*  D-5 superseded the earlier $1,500 stop line "only to the extent
+  necessary to permit the additional $1,750 research budget" and fixed the ceiling at
+  about $1,791.41 of cumulative workspace usage with a $200 reserve.  D-6 says that the
+  ceiling and the $1,500 line, "if still operative, are not raised by this directive".
+  We read: nothing changes — the ceiling of D-5 stands.  Because the wording leaves open
+  whether the owner regards the $1,500 line as still operative, this division adds a
+  rule of its own: **no job is launched whose worst case would take cumulative workspace
+  usage above $1,500 without first asking the research owner** (usage when this was
+  written: $50.70).
+* *Scope.*  The earlier boundary — "Biological sequence engineering, target-specific
+  functional optimization, and experimental execution are outside the current
+  authorization and require separate review and authorization" — is not lifted by D-6.
+  Verifying research software (correctness, numerics, certificates, benchmarks on public
+  or synthetic data) is inside our mandate; a request to design or optimise sequences or
+  to optimise against a specific biological target would be outside it, and would be
+  declined with a reference to this paragraph and reported to the research owner.
