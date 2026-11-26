@@ -26,6 +26,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from metricchain_eng.twolevel import certified as cert  # noqa: E402
 from metricchain_eng.twolevel import hetero as H  # noqa: E402
@@ -102,15 +103,26 @@ def tasks(job: str = "hetero1") -> list[dict]:
                     tier = "m" if n <= 4000 else "l"
                     out.append(dict(func="cell", tier=tier, kwargs=dict(uH=uH, uL=uL, frac=f, n=n, max_levels=3,
                                                                        time_limit={"m": 3000.0, "l": 9900.0}[tier])))
+    elif job == "profile1":
+        # X-014c: slopes equally spaced on [1/2, 2], binned into m classes; up to four nested levels
+        for n in (4000, 16000):
+            for m in (1, 2, 3, 4, 6, 8):
+                out.append(dict(func="profile", tier="l", kwargs=dict(n=n, m=m, u_min=0.5, u_max=2.0, max_levels=4, time_limit=9900.0)))
     else:
         raise ValueError(job)
     for t_ in out:
         kw = t_["kwargs"]
-        t_["id"] = "cell:" + ",".join(f"{k}={kw[k]}" for k in sorted(kw) if k != "time_limit")
+        t_["id"] = t_.get("func", "cell") + ":" + ",".join(f"{k}={kw[k]}" for k in sorted(kw) if k != "time_limit")
     return out
 
 
 def run_task(task: dict) -> dict:
+    if task.get("func") == "profile":
+        import hetero_profile
+
+        r = hetero_profile.cell(**task["kwargs"])
+        r["kind"] = "profile"
+        return r
     return cell(**task["kwargs"])
 
 
