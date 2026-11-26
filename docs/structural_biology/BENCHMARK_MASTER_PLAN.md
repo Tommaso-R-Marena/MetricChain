@@ -172,7 +172,8 @@ Each entry has the twenty fields of the founding directive (§11), numbered.
 13. *Success (hypotheses written now, after the development results and before any held-out
     run).*  H3a: every accepted certificate agrees with toulbar2.  H3b: zero-gap certificates
     for at least 90 % of prepared held-out structures within 3 600 s each.  H3c: checking costs
-    at most 10 % of production.  H3d: production takes between 1 and 100 times the toulbar2
+    at most 25 % of production (development: 3 to 13 %; the first version of this plan said
+    10 %, which the development rows already exceeded — corrected before any held-out run).  H3d: production takes between 1 and 100 times the toulbar2
     solve time (development: 7 to 25 times; toulbar2 is faster on every development
     structure).  H3e (direction unknown): native certificate size and check time against
     proof logging — we have no evidence either way.

@@ -150,6 +150,66 @@ new workstreams; complete, fix, reproduce, document, preserve.  Thirteen final d
 **27–28. Immediate execution.**  "Begin substantive work immediately."  "Do not return merely a
 plan and await further instruction."  "Proceed autonomously within the authorized scope."
 
+---
+
+## SB-D-2 — Supplementary directive: frontier scientific evaluation and eighth-division coordination (received 2026-11-26, about 22:40 UTC)
+
+Addressed to this division (the same directive reached the other divisions in their own
+wording: engineering D-7).  Operative content:
+
+1. "Continue your existing research mission, branch restrictions, autonomous research loop,
+   scientific scope, safety requirements, and resource limitations."
+2. **An eighth division is authorised**: "Frontier Benchmarking, Experimental Evidence and
+   Scientific Evaluation Division", branch `research/frontier-benchmarks`, digest
+   `docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md`.  "Its purpose is to establish rigorous
+   scientific evaluations of MetricChain's mathematical and computational innovations against
+   the strongest relevant contemporary approaches and appropriately scoped experimental
+   evidence."
+3. **Responsibilities remain as they are**: "The mathematical divisions develop foundational
+   mathematics.  Structural Biology develops research software.  Ubuntu independently reviews
+   implementations, executes substantial computations, and coordinates Modal.  Scientific
+   Discovery evaluates physical relevance, assumptions, novelty, and scientific validity.
+   Frontier Benchmarking designs independent evaluations, maintains benchmark integrity,
+   assesses comparative evidence, and communicates scientifically consequential deficiencies."
+4. **CASP17**: "The official CASP17 results are scheduled for release on November 29, 2026.  The
+   official modeling season has already ended.  We are not claiming official participation."
+   The new division investigates "whether scientifically defensible pre-reference-release
+   evaluations remain feasible for appropriately scoped public benchmarks".  "Maintain strict
+   distinctions between genuine blind assessment, pre-leaderboard assessment, and
+   retrospective evaluation.  Do not assume that all CASP17 references remain confidential.
+   Respect frozen predictions, contamination controls, and separation between development and
+   held-out evidence."
+5. "Update your copy of the collaboration protocol to recognize all eight divisions."  (Done:
+   `docs/collaboration/README.md`.)  "Respond to relevant scientific questions and requests
+   according to your existing responsibilities."  "If frontier evaluation exposes a
+   mathematical limitation, investigate whether it motivates a stronger theorem, a constructive
+   algorithm, a generalization, or a rigorous obstruction."  "Do not abandon your primary
+   research responsibilities.  Do not duplicate the new division's evaluation mandate."
+6. Unchanged limits: "Ubuntu remains responsible for substantial shared computation.  Do not
+   create additional repositories, modify other divisions' branches, expand spending limits,
+   circumvent safeguards, or undertake work outside the existing research charter."
+7. To this division specifically: "Coordinate immediately with the Frontier Benchmarking
+   Division.  Identify which existing or forthcoming MetricChain implementations are
+   sufficiently mature for scientifically meaningful independent evaluation.  Provide exact
+   mathematical specifications, source commits, implementation details, reproducibility
+   procedures, and known limitations.  Maintain separation between development evidence and
+   frozen held-out assessment.  Do not access withheld reference answers or tune frozen
+   predictions against subsequent assessment results.  Do not rush scientifically unjustified
+   implementations to meet the CASP17 release date.  Continue developing genuinely novel
+   mathematical and computational approaches rather than merely benchmarking existing models.
+   Use independently discovered performance deficiencies to motivate substantive algorithmic
+   and mathematical improvements."
+8. "Our overarching objective is to determine whether genuinely new mathematical principles can
+   produce superior computational structural biology methods.  Scientific rigor, independence,
+   empirical accuracy, computational efficiency, and reproducibility take precedence over
+   favorable appearances."
+
+**How this division applies it.**  The maturity statement and the specifications are
+STRUCTBIO-MSG-0002 (to the frontier division).  Our development structures are listed there and
+in `BENCHMARK_MASTER_PLAN.md`; every other structure is held out, and the held-out list is to
+be fixed and hashed by the frontier and engineering divisions, not by us.  We hold no CASP17
+reference data and will not fetch any.
+
 ### What this division cannot see
 
 The balance of aggregate Claude credits and the Modal workspace balance are not visible from

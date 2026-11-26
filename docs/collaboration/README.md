@@ -9,12 +9,14 @@ engineering division's copy
 (`git show origin/research/ubuntu-engineering:docs/collaboration/README.md`); everything below
 "Structural-biology addendum" is specific to this branch.*
 
-Seven independent research divisions work on this repository under one research owner (two
+Eight independent research divisions work on this repository under one research owner (two
 at the start; the third introduced on 2026-11-25; three more authorised on 2026-11-26 by the
 directive "Authorized research expansion and cross-division collaboration"; the seventh
 founded on 2026-11-26 by the research owner's "Founding directive — Structural &
-Computational Biology, Software Development and Applications Division", recorded in
-`docs/structural_biology/OWNER_DIRECTIVES.md` on this branch):
+Computational Biology, Software Development and Applications Division"; the eighth
+authorised on 2026-11-26 by the "Supplementary directive — Frontier scientific evaluation and
+eighth-division coordination"; both recorded in `docs/structural_biology/OWNER_DIRECTIVES.md`
+on this branch, SB-D-1 and SB-D-2):
 
 | division | branch (writes only here) | mailbox prefix / digest |
 |---|---|---|
@@ -25,6 +27,7 @@ Computational Biology, Software Development and Applications Division", recorded
 | **Geometric Inference, Rigidity and Inverse Problems** (geometry) | `research/geometric-inference` | `GEOMETRY-…` / `GEOMETRY_TO_ALL.md` |
 | **Mathematical Biology and Computational Complexity** (complexity) | `research/biological-complexity` | `COMPLEXITY-…` / `COMPLEXITY_TO_ALL.md` |
 | **Structural & Computational Biology, Software Development and Applications** (structural biology, "STRUCTBIO"; this branch) | `research/structural-biology` | `STRUCTBIO-…` / `STRUCTURAL_BIOLOGY_TO_ALL.md` |
+| **Frontier Benchmarking, Experimental Evidence and Scientific Evaluation** (frontier) | `research/frontier-benchmarks` | its own prefix (read from its branch) / `FRONTIER_BENCHMARKS_TO_ALL.md` |
 
 Each division writes exclusively to its own branch and reads the others' branches without
 modifying them.  No automatic merges, no force pushes, no changes to `main`, no pull requests,
@@ -32,6 +35,16 @@ releases, deployments or publications without the research owner's explicit auth
 second repository and no competing communication system.  The divisions are equal,
 intellectually independent collaborators with complementary responsibilities and draw on one
 shared allocation of resources.
+
+**Division of responsibilities** (the research owner's, SB-D-2): the mathematical divisions
+develop foundational mathematics; structural biology develops research software; engineering
+independently reviews implementations, executes substantial computations and coordinates
+Modal; science evaluates physical relevance, assumptions, novelty and scientific validity;
+frontier benchmarking designs independent evaluations, maintains benchmark integrity,
+assesses comparative evidence and communicates scientifically consequential deficiencies.
+"Maintain strict distinctions between genuine blind assessment, pre-leaderboard assessment,
+and retrospective evaluation."  We use the three words as the engineering division defines
+them (`docs/engineering/benchmarks/PREDICTION_FREEZE.md` on its branch).
 
 **Shared computation.**  By the research owner's directives the engineering division
 coordinates substantial shared Modal computations, independent replication and benchmarking
@@ -56,6 +69,7 @@ docs/collaboration/
     ENSEMBLE_TO_ALL.md,   messages/ensemble/   and its requests, responses, status   ensemble
     GEOMETRY_TO_ALL.md,   messages/geometry/   and its requests, responses, status   geometry
     COMPLEXITY_TO_ALL.md, messages/complexity/ and its requests, responses, status   complexity
+    FRONTIER_BENCHMARKS_TO_ALL.md and its messages, requests, responses, status      frontier
     STRUCTURAL_BIOLOGY_TO_ALL.md     structural biology   digest and index of what we have sent
     STRUCTBIO_UPSTREAM_SYNC.md       structural biology   which commits of the other six branches
                                                           were examined, and what was adopted
@@ -170,7 +184,8 @@ requests to the science division follow its template
 
 ```
 for b in claude/determined-ride-og1u7j research/ubuntu-engineering research/scientific-translation \
-         research/ensemble-identifiability research/geometric-inference research/biological-complexity; do
+         research/ensemble-identifiability research/geometric-inference research/biological-complexity \
+         research/frontier-benchmarks; do          # a branch may not exist yet
     git fetch origin "$b:refs/remotes/origin/$b" && git log -1 --format='%H %ad %s' "origin/$b"
 done
 git show origin/research/ubuntu-engineering:docs/collaboration/ENGINEERING_TO_THEORY.md
@@ -179,6 +194,7 @@ git show origin/research/ensemble-identifiability:docs/collaboration/ENSEMBLE_TO
 git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.md
 git show origin/research/biological-complexity:docs/collaboration/COMPLEXITY_TO_ALL.md
 git show origin/claude/determined-ride-og1u7j:docs/collaboration/THEORY_TO_ENGINEERING.md
+git show origin/research/frontier-benchmarks:docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md
 ```
 
 and symmetrically `git fetch origin research/structural-biology` for the other divisions.  No
