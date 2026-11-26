@@ -1,0 +1,25 @@
+files read: out_16000.txt, out_16000b.txt, out_32000.txt, out_32000b.txt, out_32000c.txt, out_32000d.txt, out_4000.txt, out_64000.txt, out_64000b.txt, out_64000c.txt, out_8000.txt, out_8000b.txt, out_small.txt
+cross-check with ENG-RES-0014, table three_worst (two levels flat; three levels flat; certified C_max of three levels, servers chosen at the flat fibre): 54 of 54 numbers agree to the four digits given
+ln(cost or bound)/(n a), u = 1; in brackets the outer fraction phi_1 of the grid at which the minimum is taken
+| n | outer fractions computed | two levels: certified bound | three levels, servers chosen at the flat fibre: certified bound | three levels, servers by certified cost (referee's middle designs): certified bound | the same with more middle designs: certified bound | cost of that design at the flat instance (same fraction) | two levels: worst instance found by the Computational Research Division, reading (B) / (A) | margin: two-level worst found (smaller reading) minus the certified three-level bound, in units of n a; in nats |
+|---|---|---|---|---|---|---|---|---|
+| 1000 | 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6 | 1.1384 (0.5) | 1.1554 (0.5) | 1.1384 (0.5) | 1.1384 (0.5) | 0.9839 | 1.0114 / 1.0461 (ENG-RES-0014) | -0.127; -14 |
+| 1400 | 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6 | 0.9933 (0.5) | 0.9873 (0.5) | 0.9669 (0.45) | 0.9659 (0.45) | 0.7707 | - / 0.924 (ENG-RES-0008) | -0.042; -7 |
+| 2000 | 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6 | 0.8721 (0.5) | 0.8686 (0.5) | 0.8120 (0.45) | 0.8118 (0.45) | 0.6400 | - / 0.822 (ENG-RES-0008) | +0.010; +2 |
+| 4000 | 0.3, 0.35, 0.375, 0.4, 0.425, 0.45, 0.5 | 0.7262 (0.5) | 0.7261 (0.5) | 0.6331 (0.4) | 0.6106 (0.375) | 0.5253 | 0.6829 / 0.6940 (ENG-RES-0014) | +0.072; +32 |
+| 8000 | 0.25, 0.275, 0.3, 0.35, 0.4, 0.45, 0.5 | 0.6415 (0.5) | 0.6415 (0.5) | 0.5890 (0.4) | 0.5262 (0.3) | 0.4756 | - / 0.619 (ENG-RES-0008) | +0.093; +82 |
+| 16000 | 0.25, 0.275, 0.3, 0.325, 0.35, 0.4, 0.45, 0.5 | 0.5899 (0.5) | 0.5899 (0.5) | 0.5500 (0.45) | 0.4782 (0.3) | 0.4237 | 0.5749 / 0.5753 (ENG-RES-0014) | +0.097; +172 |
+| 32000 | 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5 | 0.5646 (0.5) | 0.5646 (0.5) | 0.5400 (0.45) | 0.4439 (0.25) | - | - / 0.550 (ENG-RES-0008) | +0.106; +377 |
+| 64000 | 0.2, 0.25, 0.45, 0.5 | 0.5407 (0.5) | 0.5407 (0.5) | 0.5325 (0.45) | 0.4381 (0.25) | - | - / 0.537 (ENG-RES-0008) | +0.099; +702 |
+
+the same, as in theory report section 11.19, remark (1b) (the division's numbers with the digits it gives):
+| `n` | two levels: certified | two levels: worst instance found by the division (algorithm as built / inner answers placed adversarially) | three levels, certified: servers chosen at the flat fibre | servers by certified cost, the referee's two middle designs | the same with more middle designs (outer fraction) | cost of that last design at the flat instance |
+|---|---|---|---|---|---|---|
+| `1 000` | `1.1384` | `1.0114` / `1.0461` | `1.1554` | `1.1384` | **`1.1384`** (`0.5`) | `0.9839` |
+| `1 400` | `0.9933` | — / `0.924` | `0.9873` | `0.9669` | **`0.9659`** (`0.45`) | `0.7707` |
+| `2 000` | `0.8721` | — / `0.822` | `0.8686` | `0.8120` | **`0.8118`** (`0.45`) | `0.6400` |
+| `4 000` | `0.7262` | `0.6829` / `0.6940` | `0.7261` | `0.6331` | **`0.6106`** (`0.375`) | `0.5253` |
+| `8 000` | `0.6415` | — / `0.619` | `0.6415` | `0.5890` | **`0.5262`** (`0.3`) | `0.4756` |
+| `16 000` | `0.5899` | `0.5749` / `0.5753` | `0.5899` | `0.5500` | **`0.4782`** (`0.3`) | `0.4237` |
+| `32 000` | `0.5646` | — / `0.550` | `0.5646` | `0.5400` | **`0.4439`** (`0.25`) | not computed |
+| `64 000` | `0.5407` | — / `0.537` | `0.5407` | `0.5325` | **`0.4381`** (`0.25`) | not computed |

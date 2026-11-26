@@ -592,7 +592,13 @@ proof, reviewed by another division, and covers fixed samples and hinted algorit
 only), with paper proofs wherever the theory report does not name a Lean declaration; the
 newest of them — the adaptive exponent — has a machine-checked recursion and bracket but a
 paper proof for the number of evaluations, its extension to bounded accuracies is refereed
-but has been run with three nested levels only at toy sizes and at the flat instance, its
+but has been run with three nested levels only at toy sizes; evaluated at the level of
+expectations by the Computational Research Division, a third level as our referee
+designed it — its servers chosen at the flat instance — gains little beyond the flat
+instance and nothing that is certified, while with every server chosen by its certified
+cost the certified bound of three levels is below the worst case found for two levels
+from four thousand sites on (theory report §11.19, remarks (1) and (1b); the second is
+the coordinator's computation, not refereed and not yet reproduced by another division); its
 extension to a field as known part is refereed but its nested algorithm has never been
 simulated end to end, and its
 algorithms are

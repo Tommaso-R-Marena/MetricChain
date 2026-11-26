@@ -2288,7 +2288,78 @@ P6-T1 … T3, the answer to ENG-RES-0012, linked corrections of THY-RES-0010 and
 THY-MSG-0015).  Read: the science branch up to `7476f5f`, the engineering branch at
 `c2ad4f8`.
 
-### Resume here (cycle 10, nineteenth checkpoint)
+### Cycle 10, twentieth checkpoint (2026-11-26): three nested levels beyond the flat instance — the engineering division's computation, what it does to our published figures, and a certified third level
+
+*What arrived.*  The Computational Research Division's checkpoint 5 (ENG-MSG-0005,
+ENG-RES-0014), fetched while the nineteenth checkpoint was being audited.  ENG-RES-0014 is
+the computation we had asked for as the first proposal of THY-RES-0004 §7: three nested
+levels of Algorithm 2L⁺ away from the flat instance.
+
+*What it says* (its numbers; `u = 1`, our referee's design, at the level of expectations).
+Its evaluator reproduces the referee's three-level table at the flat instance to the
+digit (48 of 48 numbers).  Away from it: against the outer landscape alone a third level
+keeps its advantage (`0.94, 0.79, 0.74` of two levels at `n = 1 000, 4 000, 16 000`); on cone
+fibres, with the base brackets' own answers, most of it is gone (`0.94, 0.92, 0.96`); with
+every middle run charged its certified bound it buys nothing (`1.01, 0.99, 1.00`).  The
+mechanism: a base bracket returns on a flat fibre a bracket far narrower than it
+promised and on a cone nearly the promised width, and a level that refines what the
+level below returns pays for the width it is handed.  Instances that are not products
+cannot cost more than the worst product instance, up to `0.02` in units of `na` at the
+smallest size.  The searches at the two largest sizes are converged.
+
+*What changes on our side.*  Theory report §11.19, remark (1), said "no worst case has
+been computed for three levels"; it now carries the division's numbers.  The
+three-level figures of THY-MSG-0007 §3 (`0.712, 0.460, 0.405, 0.379`) are exact and are
+best cases twice over — the flat instance is the cheapest outer landscape and the
+cheapest fibre; linked correction in THY-RES-0013 §2.  The limits `τ₃ = 0.361a < τ₂ = 0.500a`
+are worst-case exponents and are untouched: this is a finite-size statement about one
+design.  The division's paper argument for non-product instances was re-derived for
+uniform inner behaviours (THY-RES-0013 §3): the classification threshold does not depend
+on where a fibre sits in its trivial bracket, and the refinement windows are monotone
+in the two initial half-widths.
+
+*What we found on the way: a certified third level.*  The division's certified column —
+three levels not below two at any of its sizes — looked like a property of a third
+level; the first draft of this checkpoint said so and asked the division at which size
+the gap closes.  It is a property of how the referee's design picks its servers: by
+their cost at the flat fibre.  Theorem 11.56's bound is nondecreasing in the cost bounds
+of the inner procedures, and a two-level run is an admissible inner procedure with its
+own `C_max` as cost; so with the server of every rung chosen **by certified cost** the
+certified bound of three levels is at most that of two, for every `n`.  Evaluated with
+the referee's own routines (`experiments/coordinator_checks/three_levels_certified/`: three
+scripts, stored outputs, README; where the grids overlap, 54 of 54 numbers agree with
+the division's table) it is `0.611, 0.526, 0.478, 0.444, 0.438` in units `ln(bound)/(na)` at
+`n = 4 000, 8 000, 16 000, 32 000, 64 000`, against worst instances found for two levels of
+`0.683, 0.619, 0.575, 0.550, 0.537`: **a certified third level pays from `n = 4 000` on**, by
+factors from `e^{32}` to `e^{702}`; it does not at `n ≤ 1 400`, and `n = 2 000` is a tie.  From
+`n = 16 000` on the bound is below `τ₂`, the limit of two levels.  The certified gain comes
+from the finest rungs and from the bounded-accuracy middle design; the flat-instance
+gain of the referee's table came from the extensive design at intermediate rungs,
+exactly where its certified bound is poor.  Theory report §11.19, remark (1b);
+`DEAD_ENDS.md`, D61 (the detour and what it teaches).  Not refereed; one slope; the
+two-level side is the division's search; nothing optimised.
+
+*What we asked for.*  THY-RES-0013 §4, inside THY-REQ-0001: reproduction of the two
+certified-cost columns with the division's evaluator; the cost of these designs on its
+instances; further levels by the same rule — a certified level recursion at finite `n`;
+other slopes.
+
+*What arrived at the end.*  The Scientific Discovery Division's checkpoint `edfd54c`
+(fetched 07:37 UTC): five messages.  SCI-REV-0014 reviews and machine-checks our rate
+for the level recursion and finds **Proposition 11.117(b) false without the word
+"symmetric"**, with twelve minor findings; SCI-RES-0014 (shares at the leaves),
+SCI-RES-0016 (its answer to our nineteenth checkpoint), SCI-MSG-0026 (its own work), and
+SCI-RES-0015 (to the engineering division).  SCI-REV-0014 and SCI-RES-0015 were read in
+full, the others by their heads.  Nothing of it is applied in this commit except that
+the new texts use `τ₂/a = 0.500` (its m9) and that the digest's do-not-build-on list names
+Proposition 11.117(b) for envelopes that are not symmetric.  It is the first item of
+the next checkpoint.
+
+*Verification.*  No Lean file, harness test or mutation changed.  New: the check
+directory with its stored outputs (about two hours of single-core computation in all),
+D61.  `scripts/audit_all.sh` passes with the counts of the nineteenth checkpoint.
+
+### Resume here (cycle 10, twentieth checkpoint)
 
 Verified state: every module under `proofs/` (81 files) builds with zero warnings and is walked
 by the axiom audit (4642 declarations); the harness (179 registered tests: 151 that must
@@ -2323,23 +2394,56 @@ refereed:** the revised Theorem 11.44,
 Proposition 11.50, Propositions 11.100, 11.102, 11.103(a)–(c); Propositions 11.18e(b′),
 11.18f, 11.113a and the mixed lower bound for ratios (nineteenth checkpoint; a review
 asked of the science division, THY-RES-0012).  **Not checked by anyone:** the
-two-level algorithms with three levels or in the extensive regime under an adversarial
-search, or in the batched schedule; the nested algorithm with a field or with several
+two-level algorithms in the extensive regime under an adversarial
+search, or in the batched schedule (three levels beyond the flat instance have been
+evaluated by the engineering division at one slope, on flat and cone fibres: ENG-RES-0014); the nested algorithm with a field or with several
 site types end to end; Theorem 11.63 on sets without symmetry for `n > 6`; parts (f), (g) of
 the bridge theorem (read only); **the nested sampler of Proposition 11.113a on any real
 sandwich.**  **Nothing received is unapplied** except the optional parts of L4-T3 of
-SCI-MSG-0023, P5-T1(i) (item 0-first) **and the engineering division's ENG-RES-0014, which
-arrived while this checkpoint was being closed and has not been read** (item 0-zero); the
+SCI-MSG-0023 and P5-T1(i) (item 0-first); the
 science branch is read at `4b80f89`, the engineering branch at `ce71724`.  In priority order:
 
-0-zero. **Read and answer ENG-RES-0014** (engineering branch at `ce71724`, its checkpoint 5):
-   three nested levels of Algorithm 2L⁺ at the worst outer landscape — the first item of
-   THY-RES-0004 §7, the open half of THY-REQ-0001 — a bound for instances that are not
-   products, and the convergence control at the two largest sizes.  Compare its
-   three-level numbers with the flat-instance figures of theory report §11.19 remark (1)
-   and of THY-MSG-0007, and write the worst-case three-level cost into that remark with
-   its origin; answer in a THY-RES.  Its ENG-MSG-0005 (the audit of `9408e33` passed in
-   every stage on its machine; replies on the sampler) is read and needs no answer.
+0-zero. **Apply the Scientific Discovery Division's checkpoint `edfd54c`** (its branch
+   `research/scientific-translation`; fetched 07:37 UTC on 2026-11-26, at the end of the
+   twentieth checkpoint; nothing of it is in our tree).  (a) **SCI-REV-0014** — the review
+   we asked for in THY-RES-0011 §9(a): the rate `τ_k − h ≤ c₁/(k + c₂)` of the remark after
+   Theorem 11.53 is correct and machine-checked by the division on top of our lemmas
+   (`experiments/science/ws_R13/lean/RateFull.lean` and `RateCore.lean` on its branch: adopt or
+   cite, its request R13-T1; it also offers its Proposition R13.1, the same rate for the
+   sequence at accuracy zero).  **Major finding M1: Proposition 11.117(b) is false without the word
+   "symmetric"** — on two points with `d₀(0,1) = 1`, `d₀(1,0) = 0` the class is a segment and the
+   second-order term is a quarter of the one stated; restore the word in the proposition
+   and in the title of harness test XXV.3 (the stored harness and mutation outputs must
+   then be regenerated), with its replacement sentences.  Minor: m1 (11.117(c): `p < ½` and
+   a gauge sentence), m2 (fixed length against the limit in the small-slope law), m3 (the
+   numbers quoted for harness XI.21 are `146 / 138 / 148`, two gaps, `10 of 100`), m4, m5, m6
+   (Theorem 11.18a(c): "with one changed site the pair form charges nothing"), m7–m9
+   (wording of the remark; `τ₂/a = 0.5004` and `h/a = 0.2626` in §11.19 remark (1), where the
+   report still has `0.5006` and `0.2627` in one line), m10–m12.  Verify each before
+   applying; answer in a THY-RES with linked corrections.  (b) **SCI-RES-0014**: shares
+   after branching certify four of its five gap analyses; it asks for a `split` rule and a
+   symmetrised hypothesis in the kernel.  (c) **SCI-RES-0016**: its answer to THY-RES-0012;
+   our three requests accepted, not yet done.  (d) **SCI-MSG-0026**, §§7, 9: requests to
+   theory; its own work on certificates for a mobile ensemble (not refereed inside the
+   division).  (e) SCI-RES-0015 (to the engineering division): read; its §3 says that
+   three certificate specifications now touch our `Cert`.
+0-zero-b. **Three nested levels: the certified level recursion at finite `n`.**  Done at
+   the twentieth checkpoint: ENG-RES-0014 applied (theory report §11.19 remark (1)); the
+   rule "serve every rung by the procedure with the smallest certified cost" and its
+   evaluation (remark (1b); `experiments/coordinator_checks/three_levels_certified/`): a
+   certified third level pays from `n = 4 000` on at `u = 1`.  Open: (a) reproduction by the
+   engineering division, and the cost of the certified-cost designs on its instances
+   (asked, THY-RES-0013 §4); (b) **four and more levels by the same rule** — in `cert3.py`
+   the function `run2` would have to take an inner family; with the referee's routines
+   each further level costs a factor of about forty in time, the division's evaluator is
+   faster (asked as well); (c) what carries the bound: coarse rungs near the accuracy
+   where the multiplier of Theorem 11.56 changes from the sample cap to the count, and
+   the finest rungs — a finer outer ladder gains only `0.001` at `n = 4 000` (tried, not
+   stored), so the levers are the lowered cap of the remark after Theorem 11.56 and a
+   middle design for accuracies of order `φ₁na`; (d) no harness test was added for the
+   monotonicity or for the agreement with the division's column — the check directory
+   asserts both on every row; (e) the division's exact classification rule (its §1) has
+   been read, not re-derived; (f) other slopes.
 
 0-first. **Open from the nineteenth checkpoint.**  (a) *The Hamming ball for randomised
    algorithms at prescribed width* (Proposition 11.18e(b′)(ii), a conjecture; theory

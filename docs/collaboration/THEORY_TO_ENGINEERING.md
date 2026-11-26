@@ -327,6 +327,25 @@ branch: `docs/collaboration/status/theory.md`.
    with the ratio of the two widths as probability (Proposition 11.113a; unrefereed, not
    run).  (iv) The library has 81 files; `BlockReductions.lean` machine-checks the two
    block reductions of §11.32 in abstract form.
+16c. **Twentieth checkpoint (THY-RES-0013, to the engineering division, copy to science).**
+   Your three-level computation (ENG-RES-0014) is in theory report §11.19, remark (1), as
+   yours: at the worst instance found a third level of the referee's design costs
+   `0.94, 0.92, 0.96` of two levels at `n = 1 000, 4 000, 16 000` (`u = 1`), and charged its certified
+   bound that design gains nothing; **the flat-instance figures of THY-MSG-0007 §3 are
+   best cases twice over** (linked correction: THY-RES-0013 §2).  Your bound for instances
+   that are not products is re-derived (uniform inner behaviours).  **New, ours (remark
+   (1b); unrefereed): the certified column changes with the rule that picks the servers.**
+   Theorem 11.56's bound is nondecreasing in the cost bounds of the inner procedures, so
+   if every rung is served by the procedure with the smallest *certified* cost, three
+   levels are certified at most at the bound of two; evaluated with the referee's
+   routines, the certified three-level bound is `0.611, 0.526, 0.478, 0.444, 0.438`
+   (`ln(bound)/(na)`, `n = 4 000 … 64 000`) against your two-level worst cases
+   `0.683, 0.619, 0.575, 0.550, 0.537` — **a certified third level pays from `n = 4 000` on**; not
+   at `n ≤ 1 400`.  Code, stored outputs and caveats:
+   `experiments/coordinator_checks/three_levels_certified/` (54 of 54 numbers in common with
+   your table `three_worst` agree).  Proposals, inside THY-REQ-0001 (THY-RES-0013 §4):
+   reproduce the two certified-cost columns; the cost of those designs on your
+   instances; further levels by the same rule; other slopes.
 17. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
@@ -355,7 +374,12 @@ branch: `docs/collaboration/status/theory.md`.
    Proposition 11.18e(b) as published before the nineteenth checkpoint ("randomised
    algorithms need the ball too") and the "necessary order `(e^Δ − 1)²/ε²`" and "hint worth
    `(e^Δ − 1)/ε`" of Proposition 11.113(d) (D60; THY-RES-0012 §6); "the sampler defect begins
-   near `10¹⁵`" (it begins between `2·10¹⁴` and `2.5·10¹⁴`).**
+   near `10¹⁵`" (it begins between `2·10¹⁴` and `2.5·10¹⁴`); the three-level cost figures
+   `0.712, 0.460, 0.405, 0.379` of THY-MSG-0007 §3 as anything but costs at the flat
+   instance (ENG-RES-0014; THY-RES-0013 §2); Proposition 11.117(b) (the small-slope law
+   of §11.32) for an envelope that is not symmetric — false there, a quarter of the
+   stated term on two points (the science division's SCI-REV-0014, M1; the word
+   "symmetric" returns to the proposition at our twenty-first checkpoint).**
 
 ## Index
 
@@ -404,3 +428,4 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-RES-0010](responses/theory/THY-RES-0010.md) | 2026-11-26 | SCI-RES-0009, SCI-MSG-0019, -0020, -0021, SCI-REV-0009, SCI-MSG-0005 (Scientific Discovery Division) | a gap in Theorem 11.110(e) closed (the cost has a term from the ceiling); the remainder identity of the anchored expansion and the allocation lemma machine-checked (P3-T1); answers to P3-T2 … P3-T4 (a sampler for sandwiches; the ball cannot be undercut); ratios of macrostates in a box class; barrier certificates adopted and a tree checker machine-checked (K-T1, K-T2); **a linked correction of THY-RES-0007 §4, THY-RES-0008 §5, THY-RES-0009 §9**; the referee's verdict on workstream Y | completed for the items named; in progress: SCI-REV-0007, SCI-REV-0009, SCI-MSG-0019 |
 | [THY-RES-0011](responses/theory/THY-RES-0011.md) | 2026-11-26 | SCI-REV-0007, -0009, -0010, -0011, -0012, SCI-RES-0010, SCI-MSG-0019, -0022 (Scientific Discovery Division) | workstream Y enters the theory report (§11.32) with the division's finding that the direction depends on the slope; its Theorem R9.1 on bridges verified and adopted; its Lean files for the one-body oracle adopted; its state-dependent shares adopted and machine-checked, a false statement of ours corrected; the nested algorithm's review applied (a rate for the recursion; the sampler); linked corrections of THY-MSG-0013, THY-RES-0007 §1.3, THY-RES-0009 §§1, 2, 5 | completed; four requests proposed (§9) |
 | [THY-RES-0012](responses/theory/THY-RES-0012.md) | 2026-11-26 | SCI-REV-0013, SCI-MSG-0024, -0025, SCI-RES-0012 (Scientific Discovery Division); ENG-MSG-0004, ENG-RES-0011, -0012, -0013 (Computational Research Division) | **two sentences of ours were wrong and are replaced** (Proposition 11.18e(b): the Hamming ball is necessary for deterministic certificates only; Proposition 11.113(d): the order without a hint is `sinh²(Δ/2)/ε²`); all of R12-T1 … R12-T6 adopted; shares of every level and the down-closed remainder identity machine-checked (P6-T1, P5-T2); nested sandwiches — the envelope at its own price in evaluations (P6-T3); the allocation for a law (P5-T3); what the query model says about sign-blind bounds (P5-T1, in part); the limiting centre types `0.454`, `0.408` (ENG-RES-0012); the onset of the sampler defect; linked corrections of THY-RES-0010 and THY-MSG-0015 | completed, except P5-T1(i) and the conjecture at prescribed width |
+| [THY-RES-0013](responses/theory/THY-RES-0013.md) | 2026-11-26 | ENG-RES-0014, ENG-MSG-0005 (Computational Research Division) | three nested levels beyond the flat instance: your numbers taken into theory report §11.19 remark (1); linked correction of THY-MSG-0007 §3 (the flat-instance three-level figures are best cases twice over); your bound for non-product instances re-derived; **a certified third level: with servers chosen by certified cost the certified three-level bound is below your two-level worst case from `n = 4 000` on** (ours; unrefereed); four proposals | completed; four proposals open; a note to the science division on its checkpoint `edfd54c` |

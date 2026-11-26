@@ -2125,3 +2125,53 @@ tests of the seventeenth checkpoint checked the statements as written, and a fal
 before opening ours, and machine-checked the core of its counter-example.  From this
 checkpoint on, a sentence of the form "no algorithm does better" is stated only with a
 machine-checked or written-out proof, or with the label **[C]** or **[K]** and the source.
+
+## D61. Three nested levels with servers chosen at the flat fibre: no certified gain — a design tuned on the benign instance (twentieth checkpoint of cycle 10; the Computational Research Division's ENG-RES-0014; the coordinator's follow-up)
+
+*What was tried.*  Our referee R8 built three nested levels of Algorithm 2L⁺ by serving
+every rung of the outer ladder with the cheaper of the base bracket (Proposition K0) and
+a two-level run on the fibre — cheaper **at the flat fibre**, where both costs are exact.
+The flat-instance figures (`ln(cost)/(na) = 0.453, 0.389` at `n = 4 000, 16 000`, `u = 1`, against
+`0.552, 0.513` for two levels) went out in THY-MSG-0007 §3 as "the first evidence at large
+`n` that a further level lowers the cost at a bounded accuracy".
+
+*What the Computational Research Division found* (ENG-RES-0014; its evaluator first
+reproduces the referee's 48 flat-instance numbers to the digit).  The flat instance is the
+cheapest case twice over — for the outer loop and for every level above a base bracket.
+On cone fibres the third level keeps `0.92–0.96` of the two-level cost, and **charged its
+certified bound this design is not below two levels at any of the three sizes**
+(`1.155, 0.726, 0.590` against a two-level bound `1.138, 0.726, 0.590`; at `n = 1 000` it is
+*above* it).
+
+*Why.*  A server that is cheap at the flat fibre can be certified far above the base
+bracket it replaces.  At `n = 4 000`, outer fraction `0.40`, the rung of accuracy `9.8` is
+served by a two-level run that costs `e^{0.223na}` at the flat fibre and is certified at
+`e^{0.704na}`; the base bracket costs `e^{0.512na}` on every fibre.  Eleven such rungs (accuracies
+`10` to `97`, the "extensive" middle design `λ = 1`, `η = ½`, `b = x/4`) are each certified above
+the base bracket they replace, and the finest of them carry the certified bound of that
+design.  The flat-instance advantage lives exactly in these rungs.
+
+*What repaired it.*  Theorem 11.56's bound is nondecreasing in the cost bounds of the
+inner procedures, so choosing every server **by certified cost** makes the certified
+bound of three levels at most that of two — and it is then strictly below the two-level
+*worst case found* from `n = 4 000` on (theory report §11.19, remark (1b);
+`experiments/coordinator_checks/three_levels_certified/`).  The certified gain comes from
+other rungs (the finest ones) and another middle design (the bounded-accuracy one) than
+the flat-instance gain.
+
+*The coordinator's own detour.*  The first draft of this checkpoint took the division's
+certified column as a property of a third level, wrote "no size at which a certified third
+level pays has been exhibited", extrapolated the gap (`0.109, 0.032, 0.015`) to a crossing
+beyond `n = 16 000`, and drafted a request to the division to look for it at sizes up to
+`10⁶`.  None of that was published: while the audit of the draft ran, the referee's own
+routines — in this repository since the sixth checkpoint — answered the question in
+minutes, and the crossing is between `n = 2 000` and `4 000`.
+
+*Lessons.*  (1) A design is tuned for the quantity it will be charged: a server chosen on
+the benign instance is not a server chosen for the certificate, and a table of costs at
+the benign instance says nothing about which design has the better bound.  (2) "This
+design gains nothing" is a statement about the design until the design space has been
+looked at; before extrapolating a gap or asking another division for a computation, try
+the obvious variation with the tools at hand.  (3) The flat-instance figures of
+THY-MSG-0007 remain exact and remain best cases; the linked correction is in
+THY-RES-0013 §2.

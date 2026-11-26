@@ -5257,7 +5257,37 @@ the plain bracket from `n ≈ 500` on at `u = 1` (from `n ≈ 250` at the flat i
 `n ≈ 1000` if `φ` is left at its flat-tuned value) and from `n ≈ 2000` on at `u = ½`**, where
 either needs more than `e^{45}` evaluations.  The limit `τ₂` is a worst-case exponent and is
 not affected; the three-level numbers at the flat instance quoted in THY-MSG-0007 carry
-the same caveat, and no worst case has been computed for three levels.
+the same caveat — **twice over, as the Computational Research Division has since
+computed** (ENG-RES-0014; `u = 1`, our referee's design, at the level of expectations; its
+evaluator first reproduces all 48 flat-instance numbers of the referee's three-level
+table to the digit, a second independent implementation of the nested run).
+`ln(cost)/(na)` at the best outer fraction, at `n = 1 000, 4 000, 16 000`: two levels
+`0.694, 0.552, 0.513` at the flat instance and `1.011, 0.683, 0.575` at the worst instance
+found; three levels `0.694, 0.453, 0.389` at the flat instance, `0.949, 0.625, 0.553` at the
+worst instance found — a searched outer landscape with cone fibres and the base
+brackets' own answers — and `1.054, 0.686, 0.575` when every middle run is charged its
+certified bound.  So (i) against the outer landscape alone a third level keeps its
+advantage (flat fibres: `0.94, 0.79, 0.74` of two levels); (ii) **on cone fibres most of it
+is gone (`0.94, 0.92, 0.96`)**: a base bracket uses on a cone most of the width it promised
+and on a flat fibre a small part of it, and a level that refines what the level below
+returns pays for the width it is handed — the flat instance is the cheap case for the
+outer loop and again for every level above a base bracket; (iii) **charged its certified
+bound, this design buys nothing at these sizes** (`1.01, 0.99, 1.00` of the two-level
+worst case; the certified bound of the whole three-level run, `1.155, 0.726, 0.590`, is not
+below that of two levels at any of the three sizes).  This is one design — the server of
+each rung and the split of the middle level chosen at the flat fibre — at one slope and
+three sizes, and (iii) is a property of that choice, not of a third level: **with the
+server of each rung chosen by certified cost, a certified third level pays from
+`n = 4 000` on** (remark (1b)).  The limits `τ₃ = 0.361a < τ₂ = 0.500a` are worst-case exponents
+of designs that balance the worst case and are not contradicted.  For instances that are
+*not* products — fibres at different
+places of their trivial brackets — the division bounds the cost by a mean run with the
+union of the refinement windows; searched directly, the bound exceeds the worst product
+instance by at most `0.02` in these units at `n = 250`, `0.007` at `n = 350` and `0.0014` from
+`n = 500` on (its paper argument, for uniform inner behaviours; re-derived by us,
+THY-RES-0013 §3).
+Its searches at `n = 64 000` and `128 000` are converged: three times the budget and two
+more seeds give the same worst instance to six digits.
 (1a) **A certified separation at finite `n`** — *an observation of the Scientific Discovery
 Division (SCI-REV-0007 §5; its `R6_REPORT.md`, Theorem R6.1 and Corollary R6.2); both sides
 recomputed by us with independent code, with the same digits* **[P: Theorems 11.56, 11.45(b),
@@ -5296,6 +5326,88 @@ for `n` large enough, without a threshold.  With the lowered cap of the remark a
 (reproduced; if the cap is also used in `m_max` and `δ′`, as that remark allows, `1275` for
 `u = 1`).  What this is not: an algorithm one would run (`e^{154}` evaluations), a statement about
 `h` (two levels have the exponent `≈ a/2`), or an optimised crossover (one design, one ladder).
+(1b) **A certified third level, and the size from which it pays** **[P: Theorem 11.56 applied
+at two levels; X: exact evaluation of its bound with the referee's routines —
+`experiments/coordinator_checks/three_levels_certified/`, whose README has the commands, the
+checks and the caveats; N: the two-level worst cases it is compared with are the
+Computational Research Division's searches (ENG-RES-0008, ENG-RES-0014).  Coordinator; not
+refereed; not yet reproduced by another division].**
+Theorem 11.56 bounds the cost of a level through the cost bounds `C_l` of its inner
+procedures and through nothing else about them, and its own bound holds in every run.
+Two consequences.  *Nesting:* a two-level run designed for the fibre dimension, an accuracy
+at most `x_l` and the failure probability `δ′` is an admissible inner procedure, with `C_l` its own
+`C_max`; so the theorem applies again one level up.  *Monotonicity:* `M̄`, `J`, `cnt` and `δ′` depend on
+the outer design only, so `C_max` is nondecreasing in every `C_l`.  Hence **if every rung is
+served by the procedure with the smallest certified cost** — the base bracket, whose cost
+is fixed by its design, unless a two-level run designed for the rung has a smaller
+`C_max` — **the certified bound of three levels is at most that of two levels** at the same
+outer design, for every `n`, and offering more candidate designs can only lower it.  (This
+is the finite-`n` form of the `min(T(ξ), T′(0))` of Proposition 11.57(b): the exponent calculus
+always chose by worst case.)  A server chosen by its cost *at the flat fibre*, as in our
+referee's three-level design, can be certified far above the base bracket it replaces —
+at `n = 4 000`, outer fraction `0.40`, the rung of accuracy `9.8` gets a two-level run that costs
+`e^{0.223na}` at the flat fibre and is certified at `e^{0.704na}`, where the base bracket costs
+`e^{0.512na}` — and the certified bound of three levels then exceeds that of two (`1.155`
+against `1.138` at `n = 1 000`).  That, and not a weakness of a third level, is what the
+certified column of remark (1) shows (`DEAD_ENDS.md`, D61).
+`ln(bound)/(na)` at `u = 1`; the outer level has `b = 0.5`, `λ = 0.2`, `η = η′ = θ = 0.05`, `δ = 0.05` and a
+geometric ladder of 40 rungs (certified accuracy `0.8715`, for two and for three levels);
+each column at the best outer fraction of its grid (shown for the last design):
+
+| `n` | two levels: certified | two levels: worst instance found by the division (algorithm as built / inner answers placed adversarially) | three levels, certified: servers chosen at the flat fibre | servers by certified cost, the referee's two middle designs | the same with more middle designs (outer fraction) | cost of that last design at the flat instance |
+|---|---|---|---|---|---|---|
+| `1 000` | `1.1384` | `1.0114` / `1.0461` | `1.1554` | `1.1384` | **`1.1384`** (`0.5`) | `0.9839` |
+| `1 400` | `0.9933` | — / `0.924` | `0.9873` | `0.9669` | **`0.9659`** (`0.45`) | `0.7707` |
+| `2 000` | `0.8721` | — / `0.822` | `0.8686` | `0.8120` | **`0.8118`** (`0.45`) | `0.6400` |
+| `4 000` | `0.7262` | `0.6829` / `0.6940` | `0.7261` | `0.6331` | **`0.6106`** (`0.375`) | `0.5253` |
+| `8 000` | `0.6415` | — / `0.619` | `0.6415` | `0.5890` | **`0.5262`** (`0.3`) | `0.4756` |
+| `16 000` | `0.5899` | `0.5749` / `0.5753` | `0.5899` | `0.5500` | **`0.4782`** (`0.3`) | `0.4237` |
+| `32 000` | `0.5646` | — / `0.550` | `0.5646` | `0.5400` | **`0.4439`** (`0.25`) | not computed |
+| `64 000` | `0.5407` | — / `0.537` | `0.5407` | `0.5325` | **`0.4381`** (`0.25`) | not computed |
+
+("More middle designs": the bounded-accuracy design of Proposition 11.57(b),
+`λ = η = η′ = θ = c = min(x/12, ⅓)`, offered at every accuracy `x` — the referee offers it below
+`x = 8` only — with tolerance `x/2` or the largest its accuracy allows,
+`b = x − ln(e^c(1+c)/(1−c) + 2c)`, and with its own outer fraction found by descent from `0.50` in
+steps of `0.05`.  The costs at the flat instance of two and of three levels and the
+flat-chosen certified bound agree with the division's per-fraction table in all 54
+numbers where the grids overlap.)
+So: (α) chosen by certified cost, a third level never raises the certified bound and
+lowers it from `n = 1 400` on; (β) **from `n = 4 000` on the certified bound of three levels is
+below the worst instance found for two levels** — whatever its outer fraction on the
+division's grid, the two-level algorithm of the same outer design has an instance on
+which it needs more evaluations (at the level of expectations) than three levels need
+on any instance in any run — by `0.07, 0.09, 0.10, 0.11, 0.10` in these units at
+`n = 4 000, 8 000, 16 000, 32 000, 64 000`, that is by factors `e^{32}, e^{82}, e^{172}, e^{377}, e^{702}`; at
+`n = 2 000` the two numbers agree within the resolution of the grids, and at `n ≤ 1 400` three
+levels are not certified below the two-level worst case; (γ) from `n = 16 000` on the
+certified three-level bound is below `τ₂/a = 0.500`, the limit that the two-level worst case
+approaches from above (`0.526` at `n = 128 000`).
+*Where the gain comes from* (the rung-by-rung tables of that directory).  At `n = 16 000`, outer
+fraction `0.30` (fibres of dimension `11 200`), 26 of the 40 rungs are served by two-level
+runs: the bounded-accuracy design at accuracies `0.5` to `106`, with an outer fraction of its
+own that falls from `0.50` at the finest rungs to `0.30`, and the extensive design of the
+paragraph before Proposition 11.57 (`λ = 1`, `η = ½`, `b = x/4`) at accuracies `138` to `404`.  At the
+finest rung the base bracket costs `e^{0.769na}`; the two-level run is certified at `e^{0.432na}`
+and costs `e^{0.416na}` at the flat fibre.  The bound is carried by the coarse rungs near
+accuracy `500`, where the multiplier of Theorem 11.56 changes from the sample cap to the
+count.  The flat-instance advantage of the referee's table came from the extensive
+design at accuracies `10` to `100`, where its certified bound is poor; the certified
+advantage comes from other rungs and mostly from the other design.
+*What this does not show.*  The two-level side is a search at the level of expectations,
+by another division, over the outer fraction of one outer design (no lower bound for
+two-level algorithms as a class is known); where only the adversarial reading exists
+(`n = 1 400, 2 000, 8 000, 32 000, 64 000`) the comparison is with an algorithm the theorem covers, not
+with the algorithm as built (the two readings differ by `0.035, 0.011, 0.0004` where both
+exist).  One slope.  For the designs chosen by certified cost only the bound and the cost
+at the flat instance are computed, not the cost on bad instances.  Nothing is optimised
+(outer fractions on a grid, the outer ladder and constants untouched, a handful of middle
+designs, the lowered cap of the remark after Theorem 11.56 unused), and four or more
+levels — the same rule gives a certified level recursion at finite `n` — are not
+evaluated.  The limit `τ₃ = 0.361a` is far: at `n = 64 000` the certified bound is `0.438a` per site
+(two outer fractions computed at that size).
+Reproduction, the cost of these designs on the division's instances, other slopes and
+further levels are asked of the Computational Research Division (THY-RES-0013 §4).
 (2) **Below the exponential scale nothing is known.**  With a hint the cost at the zero
 function is `2ⁿ/|B(n, k*)|` up to a polynomial factor — exactly `2ⁿ/|D_min|` up to the factor
 `1 − 2δ`, with `D_min` the complement of the largest initial segment of the simplicial order that
@@ -5411,7 +5523,10 @@ with real brackets, two levels (`ln(cost)/(na) = 0.514` at `n = 64 000`, `u = 1`
 levels: `0.712, 0.460, 0.405, 0.379` at `n = 10³, 4·10³, 1.6·10⁴, 6.4·10⁴`** (limits
 `τ₂/a = 0.500`, `τ₃/a = 0.361`; hinted lower bound `0.263`, never undercut) — the first evidence
 at large `n` that a further level lowers the cost at a bounded accuracy, at the one instance
-where the lower bound is proved; the same at target accuracies down to `0.05`.  *Not
+where the lower bound is proved; the same at target accuracies down to `0.05`.  (That
+instance is the cheapest one for a third level twice over, and beyond it the advantage
+mostly disappears at these sizes: the Computational Research Division's computation,
+ENG-RES-0014, in remark (1) of this section.)  *Not
 checked:* the Lean proofs line by line; Harper's theorem and the binomial median in the
 original papers; non-radial outer landscapes beyond `n_o = 9`; three levels at large `n`
 other than at the flat instance, and four levels; accuracies tending to zero other than on

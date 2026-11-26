@@ -908,7 +908,10 @@ well as procedures with a hint, exponent `KL((Λ₁+ε₁)/u ‖ ½)` — theory
 nested algorithm that shows this is not something to run: at every size that can be
 simulated it needs more evaluations than the two-sample bracket above.  What carries over
 to practice is its idea: certify how *few* configurations lie above a level before spending
-accuracy on them.)  *With a known part that has an order parameter* (theory report §§11.20,
+accuracy on them — and one rule for anyone who nests procedures with certified costs:
+choose the procedure that serves a step by the cost it is *certified* for, not by its cost
+on a benign instance; only then can a further level not raise the certified bound
+(theory report §11.19, remark (1b); `DEAD_ENDS.md`, D61).)  *With a known part that has an order parameter* (theory report §§11.20,
 11.23): stratify the sample by the order parameter — the same number of uniform points in
 every level set, weighted with the known weights of the level sets — instead of sampling
 the Gibbs measure of the known part.  For every known part that is a function of the
