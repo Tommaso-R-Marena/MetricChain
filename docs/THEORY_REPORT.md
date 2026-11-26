@@ -5,7 +5,12 @@ SE(3) heteropolymer chains.**
 
 Scope: mathematics, statistical physics, general-purpose certified computation, synthetic
 evaluation.  No biological sequence engineering, no target-specific optimisation, no experimental
-data.  Every theorem marked **[V]** is machine-checked in Lean 4 + Mathlib (`proofs/`, zero
+data.  *Where the words of the subtitle apply* (a sentence asked for by the review of our
+assumption audit, SCI-REV-0022): chains enter through §4.4, §§11.14–11.15, 11.17, 11.22 and
+11.32; the exponents and thresholds of §§11.4–11.10 are for independent sites and the adaptive
+theory of §§11.18–11.19 for the uniform cube (`docs/ASSUMPTION_AUDIT.md` has the hierarchy of
+models); the group `SE(3)` itself is not defined in the Lean development — invariance is
+proved for a subgroup of isometries given as a parameter (§4).  Every theorem marked **[V]** is machine-checked in Lean 4 + Mathlib (`proofs/`, zero
 `sorry`, axioms `propext`, `Classical.choice`, `Quot.sound` only); **[P]** marks statements proved
 here on paper only; **[K]** marks known results that are cited.  The falsification status of every
 claim is in `experiments/falsify_conjectures.py`; refuted or repaired claims are in
