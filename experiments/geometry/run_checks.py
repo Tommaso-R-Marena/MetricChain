@@ -24,6 +24,7 @@ import exact_nonlinear_threshold
 import explore_below
 import matroid_connectivity
 import torsion_sharpness
+import local_data_bounds
 
 MUT = os.environ.get("GEOM_MUT", "")
 QUICK = "--quick" in sys.argv
@@ -510,6 +511,35 @@ def second_moment_of_rotated_data():
     Mom = np.einsum("ni,nj->ij", ga, gb) / N
     dev = np.abs(Mom - (a @ b) / 3 * np.eye(3)).max()
     return dev < 2e-2, f"deviation {dev:.1e}"
+
+
+# ------------------------------------------------------------------ LOCAL_DATA_STABILITY.md
+@test
+def local_data_bound_a():
+    """Theorem K(a): s_7 <= pi sqrt(5 K(K+1)(2K+1)/3)/n for random configurations and patterns."""
+    w = local_data_bounds.check_a(trials=20 if QUICK else 60)
+    if MUT == "bound_a_too_strong":
+        w *= 40.0          # pretend the bound were 40 times smaller
+    return w <= 1.0, f"max of s_7 / bound = {w:.3f}"
+
+
+@test
+def local_data_bound_b():
+    """Theorem K(b): one torsion move changes the range-K distances by at most
+    2 sin(delta/2) b sqrt(T_K) in l2, and T_K <= K^4/48."""
+    w, ex = local_data_bounds.check_b(trials=80 if QUICK else 200)
+    tk = all(local_data_bounds.T(K) <= K ** 4 / 48 for K in range(3, 400))
+    if MUT == "bound_b_too_strong":
+        w *= 2.0           # pretend the bound were half as large
+    return w <= 1.0 and tk, f"max ratio {w:.3f}; T_K <= K^4/48 for K < 400: {tk}; largest d_P/||dd|| seen {ex:.0f}"
+
+
+@test
+def helix_beam_law():
+    """Theorem K(c) [N]: s_7 ~ c/n^2 on a helix (exponent within 0.1 of -2)."""
+    e, c = local_data_bounds.helix_exponent()
+    target = -1.0 if MUT == "helix_exponent_one" else -2.0
+    return abs(e - target) < 0.1, f"exponent {e:.3f}, s_7 n^2 = {c:.1f}"
 
 
 def main():

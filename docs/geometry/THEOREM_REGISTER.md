@@ -37,11 +37,15 @@ see `PRIOR_ART.md`; "not found" is an absence in summary-level searches.
 | G1.24 | second-moment rigid conformations that are not universally rigid exist (`n = 7`) | §8.2 | N (two instances: unique 3D maximiser by grid `24⁴` + 2 000 local searches, indefinite stress, explicit 4D realisation); a certified optimum is requested (GEOMETRY-REQ-0006) | `explore_er3.py`, `er_not_ur_instance.py A B` | — | not found |
 | G1.27 | laws of the distances of separations 3 and 4 determine every generic finite ensemble of chains (any `K`); a single separation never does | Theorem J | P, given the Ensemble division's E5/E6 (unrefereed) | `matroid_connectivity.py` (exact), test `matroid_patterns` | — | E5/E6 are the Ensemble division's; the chain statement is an application |
 | G1.28 | exact small-angle Kabsch cost of one kink on a straight rod: `I_red φ² (1 − 3x(1−x))`; the coaxial cost of theory report Theorem 4.6 overestimates it by up to 4, the min-inertia bound by up to 8 (in cost); at the worst conformation (arms perpendicular to the axis, parallel) the verified constant is within `√2` | GEOMETRY-RES-0002 | P (rod model, small angle), N (discrete chains; worst conformations by optimisation) | `torsion_sharpness.py`, test `kink_formula` | — | free–free beam; elementary |
+| G2.1 | any configuration, any pattern of sequence range `K`: `s_7(R)² ≤ (5π²/3)K(K+1)(2K+1)/n²`, so `C_inf ≥ n/(10K^{3/2})` | `LOCAL_DATA_STABILITY.md` Theorem K(a) | P | tests `local_data_bound_a` | — | known in substance (algebraic connectivity of banded graphs; `a_d ≤ a_1`) |
+| G2.2 | torsion–distance duality: one torsion move changes the range-`K` distances by at most `2 sin(δ/2) b √T_K`, `T_K ≤ K⁴/48`; hence `C_glob ≥ κ_p(δ)/(b√T_K)` with `κ_p` the exact per-torsion superposition constant | Theorem K(b) | P | `local_data_bounds.py`, test `local_data_bound_b` | — | not found (elementary) |
+| G2.3 | helices with all pairs of separation `≤ K`: `s_7 = c/n²`; the softest mode is torsional | Theorem K(c) | N | `local_data_stability.py`, test `helix_beam_law` | — | beam scaling known |
+| G2.4 | long-range data are necessary for a length-independent constant: `K ≳ n^{2/3}` always, `n^{3/4}`–`n^{4/5}` on extended chains | Corollary K.1 | P from G2.1, G2.2; last clause N | — | — | — |
 
 ## Counts
 
 Lean: 1 file, 11 declarations cited above (plus 6 definitions), zero warnings.
-Harness: 27 tests (`run_checks.py`), 15 mutations (`mutation_checks.py`), all caught.
+Harness: 30 tests (`run_checks.py`), 18 mutations (`mutation_checks.py`), all caught.
 Exact computations: `exact_conic_rank.py` (96 witnesses for `K ≤ 12`), `exact_jacobian_rank.py`
 (30 witnesses for `K ≤ 8`), `exact_4d_extreme.py` (1 witness), `exact_nonlinear_threshold.py`
 (1 witness over ℚ, 4 modulo a prime; needs Singular).

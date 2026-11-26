@@ -29,6 +29,17 @@ State at the end of cycle 1 (see `HANDOFF.md` for commands and environment):
    data); (d) averaged observables other than squared distances — which statements survive
    for `⟨f(d_ij)⟩` (none of the stacking survives; what does?).
 
+## 2026-11-26, cycle 2 begins (after 20:50 UTC)
+
+**Theorem K** (`LOCAL_DATA_STABILITY.md`): sequence-local distance data and global shape.
+(a) Courant–Fischer with nine cosine-times-translation fields: `s_7² ≤ (5π²/3)K(K+1)(2K+1)/n²`
+for every configuration (known in substance).  (b) One torsion move changes only the
+`(K−1)(K−2)/2` straddling distances, each by at most `2 sin(δ/2)` times the smaller lever:
+`‖Δd‖₂ ≤ 2 sin(δ/2) b √T_K`, `T_K ≤ K⁴/48` — so the exact per-torsion superposition constant of
+the theory report is a *lower* bound for the instability of local data (global).  (c) Helices:
+`s_7 n²` constant (exponent `−1.98`), softest mode torsional.  The hinge bound scales like
+`n^{-3/2}`, coherent bending like `n^{-2}`.  Random coils not understood (noisy exponents).
+
 ## 2026-11-26, cycle 1, third checkpoint (18:30–20:50 UTC)
 
 **Synchronisation.**  All five other branches fetched at 18:30 UTC (theory `f0e5a62`,

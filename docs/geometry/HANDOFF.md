@@ -17,6 +17,7 @@ verification, documentation and preservation.
 | what | where |
 |---|---|
 | cycle-1 results with proofs | `docs/geometry/ENSEMBLE_RIGIDITY.md` |
+| cycle 2, first note: sequence-local distance data | `docs/geometry/LOCAL_DATA_STABILITY.md` |
 | every statement with label, evidence, review, novelty | `docs/geometry/THEOREM_REGISTER.md` |
 | what is known / not found, with the search log | `docs/geometry/PRIOR_ART.md` |
 | withdrawn or weakened claims | `docs/geometry/DEAD_ENDS.md` |
@@ -34,8 +35,8 @@ source scripts/lean_env.sh
 lake env lean proofs/Geometry/EnsembleRigidity.lean     # single file, about 15 s, no output = OK
 lake build                                              # whole project; the last lines print the axiom audit
 # Python (numpy, scipy; exact parts use only the standard library)
-python3 experiments/geometry/run_checks.py              # 27 tests, about 20 s (one is skipped, and says so, without Singular)
-python3 experiments/geometry/mutation_checks.py         # 15 planted errors, all must be caught
+python3 experiments/geometry/run_checks.py              # 30 tests, about 50 s (one is skipped, and says so, without Singular)
+python3 experiments/geometry/mutation_checks.py         # 18 planted errors, all must be caught
 python3 experiments/geometry/exact_conic_rank.py 12     # Theorem C(b), about 35 s
 python3 experiments/geometry/exact_jacobian_rank.py 8   # Theorem H, about 3 s
 python3 experiments/geometry/exact_4d_extreme.py        # Theorem D(b)

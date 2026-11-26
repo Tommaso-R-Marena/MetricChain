@@ -23,8 +23,8 @@ directive: proof completion, verification, documentation, preservation only.
 * **Lean.**  `lake build` succeeds (8649 jobs), zero warnings; the axiom audit walks **5071**
   declarations (5051 of the theory division at `a844b5a` + 20 of
   `proofs/Geometry/EnsembleRigidity.lean`): only `propext`, `Classical.choice`, `Quot.sound`.
-* **Harness.**  `experiments/geometry/run_checks.py`: 27 of 27 tests pass;
-  `mutation_checks.py`: 15 of 15 planted errors caught (baseline passes, mutant runs to the
+* **Harness.**  `experiments/geometry/run_checks.py`: 30 of 30 tests pass;
+  `mutation_checks.py`: 18 of 18 planted errors caught (baseline passes, mutant runs to the
   end, harness reports the failure).
 * **Exact computations.**  `exact_conic_rank.py 12`: ALL OK (48 configurations × up to 5
   seeds; first seed suffices everywhere); `exact_jacobian_rank.py 8`: ALL OK;
@@ -39,6 +39,9 @@ directive: proof completion, verification, documentation, preservation only.
 
 `docs/geometry/ENSEMBLE_RIGIDITY.md`; register `docs/geometry/THEOREM_REGISTER.md`
 (28 rows: 9 with a machine-checked part, 7 with exact computations, 2 conjectures).
+**Cycle 2, first note** (`docs/geometry/LOCAL_DATA_STABILITY.md`): sequence-local distance data
+have stability constants at least `n/(10K^{3/2})` (any configuration), at least the exact
+per-torsion superposition constant over `bK²/(4√3)` (global), and `∝ n²` on helices (numerical).
 **Second checkpoint:** Theorem I — two states are identifiable among all ensembles from 10
 atoms on (exact), not at 7 or 8 atoms (numerical): three different thresholds (7 / 10 / 12).
 
