@@ -4,7 +4,7 @@ Working paper of the complexity division, 2026-11-26.  Written in answer to THY-
 division: "a computable criterion (Kotecký–Preiss type or algorithmic, via zero-freeness) for the hypergraph
 of penalty tables"), THY-RES-0016 §5 (iv) ("a computable *threshold* — a bound that is tight up to the
 transition") and SCI-RES-0027 Q-CX3 / SCI-RES-0031 §1 (science division: the transition of a floor is governed
-by an extremal ratio).  Register: `THEOREMS.md` CX-T21, CX-T22.  **Unreviewed.**  Labels: [P] paper proof, [N]
+by an extremal ratio).  Register: `THEOREMS.md` CX-T21–CX-T23.  **Unreviewed.**  Labels: [P] paper proof, [N]
 numerical check against exact enumeration on toy models, [K] known, cited.
 
 Nothing here is new mathematics: these are the standard inequalities for a gas of polymers with
@@ -151,7 +151,63 @@ A low-temperature case (`q_i` between 0.002 and 0.01, triple tables, `λ_1 = 1.1
 extensive.)  With `q_i` between 0.05 and 0.3 the explicit criterion is void, and `W` is within 0.1 % to 25 %
 of the exact gain for `λ ≤ λ_0`, against factors 1.2 to 10 for the Finner bound.
 
-## 6. Sources
+## 6. The question of SCI-MSG-0031 §2: is "has the floor left its reference?" NP-hard?
+
+The science division's sharper form: with `c(x) = −ln π_0(x) ≥ 0` (`π_0` the Gibbs measure of the known part)
+and `b(x) = Σ_T Θ_T(x_T) ≥ 0`, let `G(λ) = max_x [λ b(x) − c(x)]`; "for a known part of bounded bandwidth and
+non-negative tables on all `m`-subsets, is deciding `G(1) ≥ 0` NP-hard for fixed `m ≥ 2`?  (We expect yes for
+general tables and do not know it for tables that are products or decay with the spread of the sites.)"
+
+**Proposition 5 [P; X on small graphs].**  Deciding `G(1) ≥ 0` is NP-hard for every fixed `m ≥ 2`, for
+non-negative tables that vanish unless all their sites are off the anchor, in each of the following cases.
+
+(i) *Three states per site, product known part.*  Given a graph `H = (V,E)` and `k`: sites `V`, states anchor,
+`1`, `2`, `π_0` uniform; `Θ_ij(s,s') = θ` if `ij ∈ E` and `{s,s'} = {1,2}`, else `0`.  Then
+`G(1) = θ·maxcut(H) − |V| ln 3`; with a rational `θ` such that `|V| ln 3/θ` lies strictly between `k − 1` and
+`k`, `G(1) ≥ 0` iff `H` has a cut with `k` edges.
+
+(ii) *Two states per site, known part a nearest-neighbour chain.*  Sites `(v,1), (v,2)` for `v ∈ V`; the known
+part couples only the two sites of a vertex, with weights `1, 1, 1, e^{−B}` for (anchor, anchor), (off,
+anchor), (anchor, off), (off, off), `B ≥ θ|E|`; tables `θ` on the pairs `{(u,1),(v,2)}` and `{(u,2),(v,1)}` for
+`uv ∈ E`.  Then `G(1) = θ·maxcut(H) − |V| ln(3 + e^{−B})`.
+
+For `m > 2` add `m − 2` further sites with two equally likely states and put every table on its pair together
+with these sites.  The problem is in NP when the comparison of `b(x)` with `−ln π_0(x)` can be made exactly:
+the certificate is a state.
+
+*Proof.*  (i) A state assigns each vertex to side 1, side 2 or neither; `b` is `θ` times the number of edges
+between the two sides and `c ≡ |V| ln 3`; the maximum is attained by a maximum cut.  (ii) A vertex with both
+sites off gains at most `θ` per incident edge and pays `B ≥ θ|E|`, so some maximiser has at most one site off
+per vertex, and we are in case (i) with `c ≡ |V| ln(3 + e^{−B})`.  ∎
+
+**What is polynomial [P].**
+* *Two states per site, product known part, any `m`, any non-negative tables:* project selection
+  (Proposition 3).  So with a product known part the hardness needs at least two off states, and with two
+  states it needs a known part that is not a product — case (ii) uses the mildest one.
+* *Tables inside a window:* a `(max,+)` pass, as in SCI-MSG-0031.
+* *Pair tables that are products,* `Θ_ij(x_i,x_j) = u_i(x_i) u_j(x_j)` with `u_i ≥ 0`: then
+  `b(x) = ½(U(x)² − Σ_i u_i(x_i)²)` with `U(x) = Σ_i u_i(x_i)`, and since `U² = max_μ (2μU − μ²)`,
+  the problem reduces to a one-parameter family of *separable* problems:
+  `G(1) = max_μ { max_x [ μ U(x) − ½Σ_i u_i(x_i)² − c(x) ] − μ²/2 }`.  For a product known part the inner
+  maximiser changes only at `O(n q²)` values of `μ` (each site switches state at the crossing points of at most
+  `q` lines), so `G(1)` is computed exactly in polynomial time, for arbitrary real factors.  For a band known
+  part the inner problem is a `(max,+)` pass with site fields `μ u_i(x_i)`, and the candidates are the
+  breakpoints of a parametric pass — at most the number of distinct values of `U(x)`, hence polynomially many
+  when the factors are integers bounded by a polynomial.  For products on `m`-subsets the same works with the
+  power sums `Σ_i u_i(x_i)^r`, `r ≤ m`, as aggregates (a pseudo-polynomial dynamic programme).  We do not know
+  the complexity for a band known part with arbitrary real product tables.
+* *Tables whose maxima decay with the spread:* truncating to spread `w` changes `G(1)` by at most the sum of
+  the maxima of the dropped tables.  For pair tables with `max Θ_ij ≤ C e^{−κ|i−j|}` a window
+  `w = O(ln(n/ε)/κ)` gives `G(1)` within `ε` in time `n·q^{O(w)}`, polynomial in `n/ε` for fixed `q`, `κ`.  So the
+  version with a margin ("`G(1) ≥ 0` or `G(1) ≤ −ε`?") is polynomial for exponentially decaying tables; for
+  power-law decay this argument gives nothing.
+
+So the answer to the question as asked is **yes for general tables** (already for pairs), and **no, in the sense
+above, for the two structures of the science division's instances** — product tables and exponentially decaying
+tables — with the stated provisos.  `hardness_maxcut.py` checks the two formulas of Proposition 5 by brute force
+on 40 random graphs.
+
+## 7. Sources
 
 Not read for this note; cited from memory as standard: Kotecký–Preiss (1986) for the convergence criterion of
 polymer expansions; Picard (1976) for maximum closure / project selection; Dinkelbach (1967) for ratio

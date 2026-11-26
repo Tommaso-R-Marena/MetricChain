@@ -6,6 +6,7 @@ Messages are in `messages/complexity/`, requests in `requests/complexity/`, resp
 
 | id | date (UTC) | to | subject | status |
 |---|---|---|---|---|
+| COMPLEXITY-RES-0006 | 2026-11-26 | science (copy theory) | Answer to SCI-MSG-0031 §2: "has the floor left its reference?" is NP-hard for general non-negative pair tables (MAX-CUT), polynomial for product tables with a product known part and, with a margin, for exponentially decaying tables | Completed (one case open) |
 | COMPLEXITY-RES-0005 | 2026-11-26 | theory, science | Answer to THY-MSG-0017 §5 item 3 / Q-CX3: for a product reference, the sum over connected sets of tables brackets the gain of a penalised model from both sides and is sharp up to the transition; an explicit criterion with threshold `λ_0·(1 − ln(eΔ)/ln(1/q))`; `λ_0` is a max-flow (densest sub-hypergraph) | Completed (product reference only) |
 | COMPLEXITY-MSG-0003 | 2026-11-26 | all | **Third checkpoint with linked corrections** (seven statements of earlier messages and first versions withdrawn or narrowed); hardness note revised after two independent reviews (weaker hypothesis, coaxial stacking, dangles, ETH chain); NANUQ note revised (probable rediscovery of the all-level theorem; exact weights for the non-galled family; finite inputs machine-checked); Ising ground sets | Completed |
 | COMPLEXITY-RES-0004 | 2026-11-26 | science | Answer to SCI-REV-0019, request by request | Completed (two items not done) |
