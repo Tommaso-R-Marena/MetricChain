@@ -29,6 +29,10 @@ networks of the class (B1) and circular decomposability for level-3 bloblets (B2
    the largest one on which the NANUQ metric is circular decomposable (for the given order) with exact
    support: each of the 23 six-point systems it excludes is, or becomes after doubling a few leaves, a
    system whose metric fails.
+5. **Theorem 11 (the parametric family, problem B3)** [P + X].  For the four-parameter family of quartet
+   distances of NANUQ⁺ the conclusion holds on the whole class exactly when `ρ_o = ρ_s` and
+   `ρ_c + ρ_s ≤ 2ρ_a < 2ρ_s`; the *Modified NANUQ* distance is outside this set and fails on an explicit
+   level-1 network with eight leaves, but it works when every hybrid node has a leaf child.
 
 Labels: [P] paper proof (ours, internally reviewed only), [X] exact finite computation with integer
 arithmetic (programs in `experiments/complexity/nanuq/`, listed in §9).  Nothing here is machine-checked.
@@ -377,16 +381,87 @@ displayed by any network of that class on six leaves.
 
 ---
 
-## 8. What is not shown
+## 8. The parametric family of quartet distances (problem B3)
+
+Allman, Baños, Rhodes and Wicke (NANUQ⁺, Algorithms Mol. Biol. 2025, Def. 3.1; read in the published HTML
+version) define, for `ρ = (ρ_c, ρ_s, ρ_a, ρ_o) ∈ (ℝ_{≥0})^4`,
+`d_ρ(x,y) = 2 Σ_{z,w} ρ_xy(Q_xyzw) + 2n − 4`, where `ρ_xy` is `ρ_c` if the quarnet is a tree with cherry `xy`,
+`ρ_s` if it is a tree separating `x` from `y`, `ρ_a` if it has a 4-cycle with `x,y` adjacent, `ρ_o` if it has a
+4-cycle with `x,y` opposite.  NANUQ is `(0, 1, ½, 1)`; their *Modified NANUQ* distance is `(½, 1, ½, 1)`.
+[HABIMRW] §6 asks "whether some of our results can be extended to a parametric family of distances, as
+introduced in [All+25a]".  For planar quartet systems we read "4-cycle" as "both planar quartets are
+displayed" (for level-1 networks this is the original definition).
+
+**Theorem 11 [P + X].**  Let `ρ ∈ (ℝ_{≥0})^4`.
+
+(a) `d_ρ` is circular decomposable, for the induced circular order, with support exactly `Split(T(N))`, for
+**every** binary semi-directed outer-labeled planar galled network `N` (all levels, any number of blobs)
+**if and only if**
+
+```
+ρ_o = ρ_s     and     ρ_c + ρ_s ≤ 2 ρ_a < 2 ρ_s .
+```
+
+(b) The same holds for every such network **whose hybrid nodes all have a leaf child** (class 𝒜; it
+contains all bloblets) if and only if  `ρ_o = ρ_s`,  `ρ_c ≤ ρ_a`  and  `ρ_s ≤ 2ρ_a < 2ρ_s`.
+
+(c) NANUQ satisfies (a), on its boundary (`ρ_c + ρ_s = 2ρ_a`).  Modified NANUQ satisfies (b) (on its
+boundary, `ρ_c = ρ_a`) but **not** (a): for the level-1 network on eight leaves consisting of a 5-cycle whose
+hybrid node has a cherry below it and which carries cherries at two of its other four positions, the
+Modified NANUQ distance gives the displayed split "hybrid cherry | rest" the weight `−2`, and is Kalmanson
+for none of the 2520 circular orders (`modified_nanuq_witness.py`, from the explicit rooted network).
+
+*Proof.*  The decomposition of Proposition 2 holds verbatim with `ρ_xy` in place of the NANUQ values
+(`α/2 = T4 + ΣT5 + ΣT6 + ΣTM`, where `TM` is the term of a mixed pair `z ∈ U`, `w ∈ V`, which no longer
+vanishes; for a trivial split `α/2 = n − 2 + ΣTQ + ΣTP`, `TQ` being the term of the 4-sets through the three
+leaves `a,u,b`); checked [X] on 2122 split weights of blow-ups with up to 18 leaves.  Every local term is a
+linear form in `ρ` determined by the restriction to at most six leaves, hence (Lemma 7) by a system of
+`𝒞_{≤6}`, resp. `𝒜_{≤6}`.  The forms that occur are [X]:
+
+| term | forms on `𝒞_{≤6}` (the forms on `𝒜_{≤6}` are the same except the one marked †) |
+|---|---|
+| `T4`, split displayed | `2(ρ_s − ρ_c)`, `2(ρ_o − ρ_a)` |
+| `T5` | `0`, `ρ_s − ρ_c`, `ρ_o − ρ_a`, `(ρ_s − ρ_c) − (ρ_o − ρ_a)`, twice the latter |
+| `T6` | `0`, `ρ_s − ρ_c`, `ρ_a − ρ_c`, `ρ_s − ρ_a`, `2ρ_a − ρ_c − ρ_s` † |
+| `TM` | `0`, `ρ_o − ρ_s`, `ρ_s − ρ_o`, `2(ρ_s − ρ_o)` |
+| `TP`, `TQ` (trivial splits) | `ρ_c`, `ρ_s`, `ρ_a`, `2ρ_a − ρ_s`, `2ρ_a − ρ_o` |
+| every term of a split that is not displayed | `0`, identically in `ρ` |
+
+*Sufficiency.*  Under the conditions of (a), resp. (b), every form is `≥ 0` and both `T4` forms are `> 0`;
+so `α > 0` on displayed splits, `α = 0` on the others (for **every** `ρ`), and trivial splits have
+`α/2 ≥ n − 2 > 0`.
+
+*Necessity.*  `ρ_a < ρ_o`: the 4-cycle network has `α = 4(ρ_o − ρ_a)` on its two non-trivial splits.  For
+each of the forms `F ∈ {ρ_s − ρ_o, ρ_o − ρ_s, ρ_a − ρ_c}`, and `2ρ_a − ρ_c − ρ_s` in case (a), there is a
+structure of the class on six leaves with a displayed split and a pair `z,w` of **non-hybrid** leaves
+whose local term is `F` (`parametric_witnesses_A.py`, `parametric_theorem.py`).  Replacing `z` and `w` by
+clades of `m` leaves stays in the class; the `m²` pairs `(z',w')` all have local term `F`, pairs inside a
+clade have local term `0`, and all other terms number `O(m)`.  So the weight of that split is
+`2m²F(ρ) + O(m)`, negative for large `m` if `F(ρ) < 0`.  `ρ_s ≤ 2ρ_a` (given `ρ_o = ρ_s`): in the `n`-sunlet
+the trivial split of the hybrid leaf has `α/2 = n − 2 + ((n−3) + C(n−3,2))·(2ρ_a − ρ_s)`.  ∎
+
+So the question of [HABIMRW] has a sharp answer for the class of that paper: the conclusion of its
+Theorem 4.7 extends to exactly a three-dimensional cone in the four-dimensional parameter space
+(`ρ_s = ρ_o`, `ρ_c ≥ 0`, `ρ_a ∈ [(ρ_c+ρ_s)/2, ρ_s)`; two free parameters after normalising `ρ_s = 1`),
+of which NANUQ is the vertex `(ρ_c, ρ_a) = (0, ½)`.
+
+*Relation to the third-party summary (B-II).*  That page states, for a "local four-score family", the
+domain "s = o = 1, 1/2 ≤ a ≤ 1, 0 ≤ c ≤ a" of an "anchor-positivity" property.  We cannot tell from the
+summary what property that is.  For circular decomposability with exact support, that domain (with
+`a < 1`) is our condition (b) for networks whose hybrids have leaf children; for the full class with any
+number of blobs it is not sufficient — Modified NANUQ lies in it and fails on a level-1 network.
+
+## 9. What is not shown
 
 * Nothing about networks that are not outer-labeled planar.
 * Theorem 9 gives one family; we have not classified the non-galled planar networks for which the
   statement survives (it does on six leaves for `N(1,1)`).
-* The parametric family of distances (problem B3) is not treated here.
+* For the class of bloblets alone the exact parameter domain is not determined (condition (b) of Theorem 11
+  is sufficient; our necessity witnesses use pendant clades).
 * The finite checks are computations by this division; the proofs are internally reviewed only.
 * Theorem 7 was reached independently, but after a third-party claim of the same statement.
 
-## 9. Reproduction (`experiments/complexity/nanuq/`, Python 3 + `networkx`)
+## 10. Reproduction (`experiments/complexity/nanuq/`, Python 3 + `networkx`)
 
 | program | what it establishes | time |
 |---|---|---|
@@ -397,3 +472,6 @@ displayed by any network of that class on six leaves.
 | `test_bloblets.py k n…`, `test_multiblob.py n` | direct test of the conclusion of Theorem 7 on all bloblets of level `k` / all networks with `n` leaves | minutes |
 | `counterexample7.py`, `verify_nongalled.py`, `verify_nongalled2.py`, `nongalled_family.py` | Theorem 9 | seconds–minutes |
 | `exhaust_all_systems.py`, `exhaust_tree_generated.py` | CX-D2 | seconds |
+| `parametric_theorem.py` | Theorem 11(a): parametric decomposition identity, local forms on `𝒞_{≤6}`, witnesses | ≈ 2 min |
+| `parametric_classA.py`, `parametric_witnesses_A.py`, `parametric_o_gt_s_witness.py` | Theorem 11(b): local forms on `𝒜_{≤6}`, witnesses with non-hybrid `z,w` | minutes |
+| `modified_nanuq_witness.py` | Theorem 11(c), from the explicit rooted network | seconds |

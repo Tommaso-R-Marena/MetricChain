@@ -225,7 +225,11 @@ arXiv:2507.17308v2 (13 Oct 2025) on 2026-11-26.
     gives a "union property" (CX-T9); **"galled" cannot be dropped** — an explicit 7-leaf level-2
     outer-labeled planar bloblet that is not galled and whose NANUQ metric is not circular decomposable
     (CX-T7); and the criterion is sharp (CX-T8).
-  - B3 (parametric family): open for us; not yet read ([All+25a]).
+  - B3 (parametric family): **OURS-[P]+[X], unreviewed** (CX-T13): the conclusion of Theorem 4.7 holds for
+    the four-parameter family of NANUQ⁺ on the whole class exactly when `ρ_o = ρ_s` and
+    `ρ_c + ρ_s ≤ 2ρ_a < 2ρ_s`; the Modified NANUQ distance `(½,1,½,1)` is outside and fails on an explicit
+    level-1 network, although it works when every hybrid node has a leaf child.  NANUQ⁺ read in the
+    published HTML version (definition 3.1, 3.11 and the surrounding text).
 
 ---
 

@@ -80,6 +80,15 @@ magnification `dα`.  The first implementation agreed with exhaustive enumeratio
 (exact rationals, `α = 0..3`, symmetric structures of orders 2–6).  `STRANDS_ALGORITHM.md`.  Remaining
 doubt: the decoding of MFE/#SSEL from `Q_α` is cited from [SW26], not checked.
 
+**Problem B3 (parametric family): settled for the class of the paper.**  With `ρ_xy ∈ {ρ_c,ρ_s,ρ_a,ρ_o}`
+every local term is a linear form in `ρ`; only eleven forms occur on `𝒞_{≤6}`; those of undisplayed splits
+vanish identically.  Sufficiency = all forms non-negative; necessity = blow up a pair of non-hybrid leaves
+carrying the form (weight `2m²F(ρ) + O(m)`), plus sunlets and the 4-cycle.  Result: `ρ_o = ρ_s`,
+`ρ_c + ρ_s ≤ 2ρ_a < 2ρ_s`.  The Modified NANUQ distance of NANUQ⁺ fails on a level-1 network with a cherry
+below the hybrid (checked from the explicit DAG, all 2520 orders).  A first version of the trivial-split
+formula omitted the 4-sets through the three leaves `a,u,b` (they contribute 0 for NANUQ but not in
+general); the identity check caught it.
+
 ### Resume here
 
 1. Commission an adversarial review of `STRANDS_NN_HARDNESS.md` (COMPLEXITY-REV-0001); fix what it finds.

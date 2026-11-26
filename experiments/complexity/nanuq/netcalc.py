@@ -217,3 +217,29 @@ def is_galled(net):
         if p not in G or q not in G or not nx.has_path(G, p, q):
             return False
     return True
+
+
+def parametric_metric(net, rho):
+    """The parametric quartet distance of NANUQ+ (Def. 3.1), rho = (rho_c, rho_s, rho_a, rho_o), extended to
+    networks all of whose quarnets display one or two quartets: with one displayed quartet, cherry pairs get
+    rho_c and the other pairs rho_s; with two, the pairs that are a cherry in one of them ("adjacent") get rho_a
+    and the two pairs that are a cherry in neither ("opposite") get rho_o."""
+    rc, rs, ra, ro = rho
+    L = leaves_of(net)
+    n = len(L)
+    Q, splits = displayed_quartets(net)
+    d = {}
+    for x, y in combinations(L, 2):
+        tot = Fraction(2 * n - 4)
+        for z, w in combinations([l for l in L if l not in (x, y)], 2):
+            qs = Q[tuple(sorted((x, y, z, w)))]
+            assert len(qs) in (1, 2)
+            cherry = any(frozenset([x, y]) in quart for quart in qs)
+            if len(qs) == 1:
+                tot += 2 * (rc if cherry else rs)
+            else:
+                tot += 2 * (ra if cherry else ro)
+        d[(x, y)] = d[(y, x)] = tot
+    for x in L:
+        d[(x, x)] = Fraction(0)
+    return d, splits
