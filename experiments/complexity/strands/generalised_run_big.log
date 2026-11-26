@@ -33,6 +33,11 @@ items=[2, 1] m=3 B=1: NO  structures=14 orbits=14 tilings=0 OK [0.0s]
 items=[2] m=1 B=2: YES structures=5 orbits=5 tilings=1 OK [0.0s]
       control: H2' with delta=0: statement holds here
       control: H2' with delta=-1: statement holds here
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: statement holds here
@@ -41,6 +46,11 @@ items=[2] m=1 B=2: YES structures=5 orbits=5 tilings=1 OK [0.0s]
 items=[1, 1] m=1 B=2: YES structures=2 orbits=1 tilings=2 OK [0.0s]
       control: H2' with delta=0: statement holds here
       control: H2' with delta=-1: statement holds here
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): statement holds here
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): statement holds here
       control: dangles D_G=4 D_C=3 e_A=-1: statement holds here
       control: coax x=sigma, gamma=0: statement holds here
@@ -49,6 +59,11 @@ items=[1, 1] m=1 B=2: YES structures=2 orbits=1 tilings=2 OK [0.0s]
 items=[3] m=1 B=3: YES structures=19 orbits=19 tilings=1 OK [0.0s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: statement holds here
@@ -57,6 +72,11 @@ items=[3] m=1 B=3: YES structures=19 orbits=19 tilings=1 OK [0.0s]
 items=[1, 2] m=1 B=3: YES structures=14 orbits=14 tilings=2 OK [0.0s]
       control: H2' with delta=0: statement holds here
       control: H2' with delta=-1: statement holds here
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: statement holds here
@@ -65,6 +85,11 @@ items=[1, 2] m=1 B=3: YES structures=14 orbits=14 tilings=2 OK [0.0s]
 items=[1, 1, 1] m=1 B=3: YES structures=6 orbits=1 tilings=6 OK [0.0s]
       control: H2' with delta=0: statement holds here
       control: H2' with delta=-1: statement holds here
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): statement holds here
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): statement holds here
       control: dangles D_G=4 D_C=3 e_A=-1: statement holds here
       control: coax x=sigma, gamma=0: statement holds here
@@ -73,6 +98,9 @@ items=[1, 1, 1] m=1 B=3: YES structures=6 orbits=1 tilings=6 OK [0.0s]
 items=[2, 2] m=1 B=4: YES structures=82 orbits=41 tilings=2 OK [0.0s]
       control: H2' with delta=0: statement holds here
       control: H2' with delta=-1: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: statement holds here
@@ -81,6 +109,9 @@ items=[2, 2] m=1 B=4: YES structures=82 orbits=41 tilings=2 OK [0.0s]
 items=[1, 3] m=1 B=4: YES structures=62 orbits=62 tilings=2 OK [0.0s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: statement holds here
@@ -89,6 +120,11 @@ items=[1, 3] m=1 B=4: YES structures=62 orbits=62 tilings=2 OK [0.0s]
 items=[2, 2] m=2 B=2: YES structures=82 orbits=41 tilings=2 OK [0.0s]
       control: H2' with delta=0: statement holds here
       control: H2' with delta=-1: statement holds here
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: statement holds here
@@ -97,6 +133,11 @@ items=[2, 2] m=2 B=2: YES structures=82 orbits=41 tilings=2 OK [0.0s]
 items=[1, 1, 2] m=2 B=2: YES structures=54 orbits=27 tilings=4 OK [0.0s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
@@ -105,6 +146,11 @@ items=[1, 1, 2] m=2 B=2: YES structures=54 orbits=27 tilings=4 OK [0.0s]
 items=[1, 1, 1, 1] m=2 B=2: YES structures=24 orbits=1 tilings=24 OK [0.0s]
       control: H2' with delta=0: statement holds here
       control: H2' with delta=-1: statement holds here
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): statement holds here
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): statement holds here
       control: dangles D_G=4 D_C=3 e_A=-1: statement holds here
       control: coax x=sigma, gamma=0: statement holds here
@@ -113,6 +159,11 @@ items=[1, 1, 1, 1] m=2 B=2: YES structures=24 orbits=1 tilings=24 OK [0.0s]
 items=[3, 1] m=2 B=2: NO  structures=62 orbits=62 tilings=0 OK [0.0s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
@@ -121,6 +172,11 @@ items=[3, 1] m=2 B=2: NO  structures=62 orbits=62 tilings=0 OK [0.0s]
 items=[4] m=2 B=2: NO  structures=69 orbits=69 tilings=0 OK [0.0s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): statement holds here
       control: dangles D_G=4 D_C=3 e_A=-1: statement holds here
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
@@ -129,14 +185,24 @@ items=[4] m=2 B=2: NO  structures=69 orbits=69 tilings=0 OK [0.0s]
 items=[3, 3] m=2 B=3: YES structures=1514 orbits=757 tilings=2 OK [0.1s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: statement holds here
       control: coax x=-9, gamma=3 (d = min): statement holds here
       control: coax x=-12, gamma=9 (d = |sigma|): statement holds here
-items=[1, 2, 1, 2] m=2 B=3: YES structures=2040 orbits=510 tilings=16 OK [0.2s]
+items=[1, 2, 1, 2] m=2 B=3: YES structures=2040 orbits=510 tilings=16 OK [0.3s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
@@ -145,6 +211,11 @@ items=[1, 2, 1, 2] m=2 B=3: YES structures=2040 orbits=510 tilings=16 OK [0.2s]
 items=[2, 2, 2] m=2 B=3: NO  structures=2262 orbits=377 tilings=0 OK [0.1s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
@@ -153,6 +224,11 @@ items=[2, 2, 2] m=2 B=3: NO  structures=2262 orbits=377 tilings=0 OK [0.1s]
 items=[4, 2] m=2 B=3: NO  structures=1374 orbits=1374 tilings=0 OK [0.1s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
@@ -161,22 +237,37 @@ items=[4, 2] m=2 B=3: NO  structures=1374 orbits=1374 tilings=0 OK [0.1s]
 items=[3, 2, 1] m=2 B=3: YES structures=1716 orbits=1716 tilings=4 OK [0.1s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
       control: coax x=-9, gamma=3 (d = min): STATEMENT FAILS HERE (expected for a control)
       control: coax x=-12, gamma=9 (d = |sigma|): statement holds here
-items=[5, 1] m=2 B=3: NO  structures=912 orbits=912 tilings=0 OK [0.0s]
+items=[5, 1] m=2 B=3: NO  structures=912 orbits=912 tilings=0 OK [0.1s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
       control: coax x=-9, gamma=3 (d = min): STATEMENT FAILS HERE (expected for a control)
       control: coax x=-12, gamma=9 (d = |sigma|): statement holds here
-items=[6] m=2 B=3: NO  structures=923 orbits=923 tilings=0 OK [0.0s]
+items=[6] m=2 B=3: NO  structures=923 orbits=923 tilings=0 OK [0.1s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): statement holds here
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): statement holds here
       control: dangles D_G=4 D_C=3 e_A=-1: statement holds here
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
@@ -185,6 +276,11 @@ items=[6] m=2 B=3: NO  structures=923 orbits=923 tilings=0 OK [0.0s]
 items=[2, 2, 2] m=3 B=2: YES structures=2262 orbits=377 tilings=6 OK [0.1s]
       control: H2' with delta=0: statement holds here
       control: H2' with delta=-1: statement holds here
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: statement holds here
@@ -193,6 +289,11 @@ items=[2, 2, 2] m=3 B=2: YES structures=2262 orbits=377 tilings=6 OK [0.1s]
 items=[3, 3] m=3 B=2: NO  structures=1514 orbits=757 tilings=0 OK [0.1s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): statement holds here
       control: dangles D_G=4 D_C=3 e_A=-1: statement holds here
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
@@ -201,14 +302,24 @@ items=[3, 3] m=3 B=2: NO  structures=1514 orbits=757 tilings=0 OK [0.1s]
 items=[1, 2, 3] m=3 B=2: NO  structures=1716 orbits=1716 tilings=0 OK [0.1s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
       control: coax x=-9, gamma=3 (d = min): STATEMENT FAILS HERE (expected for a control)
       control: coax x=-12, gamma=9 (d = |sigma|): STATEMENT FAILS HERE (expected for a control)
-items=[2, 2, 1, 1] m=3 B=2: YES structures=2040 orbits=510 tilings=12 OK [0.2s]
+items=[2, 2, 1, 1] m=3 B=2: YES structures=2040 orbits=510 tilings=12 OK [0.3s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
@@ -217,74 +328,105 @@ items=[2, 2, 1, 1] m=3 B=2: YES structures=2040 orbits=510 tilings=12 OK [0.2s]
 items=[4, 2] m=3 B=2: NO  structures=1374 orbits=1374 tilings=0 OK [0.1s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): statement holds here
       control: dangles D_G=4 D_C=3 e_A=-1: statement holds here
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
       control: coax x=-9, gamma=3 (d = min): STATEMENT FAILS HERE (expected for a control)
       control: coax x=-12, gamma=9 (d = |sigma|): STATEMENT FAILS HERE (expected for a control)
-items=[4, 4] m=2 B=4: YES structures=23762 orbits=11881 tilings=2 OK [1.3s]
+items=[4, 4] m=2 B=4: YES structures=23762 orbits=11881 tilings=2 OK [1.6s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: statement holds here
       control: coax x=-9, gamma=3 (d = min): statement holds here
       control: coax x=-12, gamma=9 (d = |sigma|): statement holds here
-items=[3, 3, 2] m=2 B=4: NO  structures=46002 orbits=23001 tilings=0 OK [2.6s]
+items=[3, 3, 2] m=2 B=4: NO  structures=46002 orbits=23001 tilings=0 OK [3.4s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
       control: coax x=-9, gamma=3 (d = min): STATEMENT FAILS HERE (expected for a control)
       control: coax x=-12, gamma=9 (d = |sigma|): statement holds here
-items=[5, 3] m=2 B=4: NO  structures=22838 orbits=22838 tilings=0 OK [1.1s]
+items=[5, 3] m=2 B=4: NO  structures=22838 orbits=22838 tilings=0 OK [1.5s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
       control: coax x=-9, gamma=3 (d = min): STATEMENT FAILS HERE (expected for a control)
       control: coax x=-12, gamma=9 (d = |sigma|): statement holds here
-items=[2, 2, 3, 1] m=2 B=4: YES structures=66552 orbits=33276 tilings=8 OK [6.2s]
+items=[2, 2, 3, 1] m=2 B=4: YES structures=66552 orbits=33276 tilings=8 OK [6.8s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
       control: coax x=-9, gamma=3 (d = min): STATEMENT FAILS HERE (expected for a control)
       control: coax x=-12, gamma=9 (d = |sigma|): statement holds here
-items=[2, 2, 2, 2] m=2 B=4: YES structures=87576 orbits=3649 tilings=24 OK [7.0s]
+items=[2, 2, 2, 2] m=2 B=4: YES structures=87576 orbits=3649 tilings=24 OK [8.1s]
       control: H2' with delta=0: statement holds here
       control: H2' with delta=-1: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: statement holds here
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: statement holds here
       control: coax x=-9, gamma=3 (d = min): statement holds here
       control: coax x=-12, gamma=9 (d = |sigma|): statement holds here
-items=[3, 3, 1, 1] m=2 B=4: YES structures=50568 orbits=12642 tilings=16 OK [5.3s]
+items=[3, 3, 1, 1] m=2 B=4: YES structures=50568 orbits=12642 tilings=16 OK [5.9s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
       control: coax x=-9, gamma=3 (d = min): STATEMENT FAILS HERE (expected for a control)
       control: coax x=-12, gamma=9 (d = |sigma|): statement holds here
-items=[2, 2, 2, 3] m=3 B=3: NO  structures=409488 orbits=68248 tilings=0 OK [35.2s]
+items=[2, 2, 2, 3] m=3 B=3: NO  structures=409488 orbits=68248 tilings=0 OK [40.8s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=2 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=1 e_A=0, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
       control: coax x=-9, gamma=3 (d = min): STATEMENT FAILS HERE (expected for a control)
       control: coax x=-12, gamma=9 (d = |sigma|): statement holds here
-items=[4, 4, 2] m=2 B=5: NO  structures=762294 orbits=381147 tilings=0 OK [58.2s]
+items=[4, 4, 2] m=2 B=5: NO  structures=762294 orbits=381147 tilings=0 OK [69.6s]
       control: H2' with delta=0: STATEMENT FAILS HERE (expected for a control)
       control: H2' with delta=-1: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=-6 with dangles D_G=3 D_C=2 e_A=-1, gamma=1 [hypothesis fails for this B]: statement holds here
+      control: coax x=sigma, dangles 1,1, e_A=0, gamma=0: STATEMENT FAILS HERE (expected for a control)
+      control: coax x=sigma, dangles 3,3 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|): STATEMENT FAILS HERE (expected for a control)
       control: dangles D_G=4 D_C=3 e_A=-1: STATEMENT FAILS HERE (expected for a control)
       control: coax x=sigma, gamma=0: STATEMENT FAILS HERE (expected for a control)
       control: coax x=-9, gamma=3 (d = min): STATEMENT FAILS HERE (expected for a control)
       control: coax x=-12, gamma=9 (d = |sigma|): statement holds here
-controls: number of instances on which the statement fails: {"control: H2' with delta=0": 25, "control: H2' with delta=-1": 25, 'control: coax x=sigma, gamma=0': 21, 'control: coax x=-9, gamma=3 (d = min)': 21, 'control: coax x=-12, gamma=9 (d = |sigma|)': 10, 'control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|)': 25, 'control: dangles D_G=4 D_C=3 e_A=-1': 25}
+controls: number of instances on which the statement fails: {"control: H2' with delta=0": 25, "control: H2' with delta=-1": 25, 'control: coax x=sigma, gamma=0': 21, 'control: coax x=-9, gamma=3 (d = min)': 21, 'control: coax x=-12, gamma=9 (d = |sigma|)': 10, 'control: coax x=sigma, dangles 3,3 (sum = |sigma|)': 28, 'control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|)': 25, 'control: dangles D_G=4 D_C=3 e_A=-1': 25, 'control: coax x=sigma, dangles 1,1, e_A=0, gamma=0': 19}
 ALL OK

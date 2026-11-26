@@ -29,7 +29,7 @@ play no role.
    `|x| < |σ| + min(|σ|, γ)`, where `σ` is the stack energy and `γ` the least bulge/interior-loop penalty
    (with `x = σ` and free bulges the reduction fails); and if unpaired bases next to a helix end in an
    exterior loop are rewarded (dangles), provided the rewards of a `G` and a `C` together are smaller than
-   `|σ|` (the science division's statement).
+   `|σ|` (the science division's statement).  **Theorem 1e** [P]: both together, with `σ ≤ x ≤ 0`.
 3. **Theorem 3, Corollary 4** [P]: the number of minimum-energy structures is the number of tilings;
    `#SSEL` is #P-hard; the partition function is #P-hard when the magnification (or the temperature, for a
    temperature-independent energy function) is part of the input, by a one-call reduction.
@@ -37,8 +37,8 @@ play no role.
    of reductions is written out with linear size in Appendix A.
 
 What is **not** shown: #P-hardness of the partition function at a fixed temperature for a fixed model
-(problem A3′); anything about dangle rules other than the abstract one of Theorem 1d, or about dangles and
-coaxial stacking together, or about any published parameter table as implemented (§8).
+(problem A3′); anything about dangle rules other than the abstract one of Theorems 1d and 1e, or about any
+published parameter table as implemented (§8).
 
 **Whose gadget this is.**  The template `G^B A G^B A … A G^B` with runs `C^{a_i}` is the gadget of Lyngsø's
 reduction from BIN PACKING to pseudoknotted single-strand folding in the base-pair-stacking model (ICALP
@@ -387,8 +387,58 @@ contributes at least `−D_G`, `−D_C`, and the `A`'s together at least `(m−1
 `j = 0`, no unpaired `G` or `C`, and each separator between two paired `G`'s: equality.  A structure that
 is not a tiling has `j ≥ 1` (step (d)).  ∎
 
-Theorems 1c and 1d treat coaxial stacking and dangles separately; we have no statement for both together,
-nor for dangle rules in which an unpaired base between two helices is counted for both.
+**Coaxial stacking and dangles together.**
+
+**Theorem 1e [P; written 2026-11-26 after both reviews, unreviewed].**  Let flush faces have energy `x` with
+`σ ≤ x ≤ 0`, let every other exterior loop have the dangle energy of (D0), let bulges and interior loops cost
+at least `γ ≥ 0` (C2), and assume (H1), `B ≥ 2`,
+
+```
+D_G + D_C  <  |σ| − |x|/B        and        |σ| − |x| + γ + |e_A|  >  0 .
+```
+
+Then every connected unpseudoknotted structure of `I(a,m,B)` has energy
+`E** = σM + x(n−m) + (m−1)e_A + nΔG_assoc` if it is a tiling structure, and at least
+`min( |σ| − |x|/B − D_G − D_C ,  |σ| − |x| + γ + |e_A| )` more otherwise.
+
+In particular this covers a flush stack as strong as a stack (`x = σ`) together with dangles, as soon as the
+bulge over a separator costs something or a dangling separator is favourable.  For a fixed model with
+`D_G + D_C < |σ|` the first condition holds for all instances with `B > |x|/(|σ| − D_G − D_C)`, and multiplying
+all sizes of a bin-packing instance by a constant preserves solvability; so Corollary 2 extends to every such
+model.
+
+*Proof.*  Let `u` be the number of unpaired item bases (equal to the number of unpaired template `G`'s),
+`j = M − st` the number of item bonds not on a stack, `fl` the number of flush faces and `L` the number of
+template `GG` bonds on neither a stack nor a flush face.  As in the proof of Theorem 1c,
+`st + fl + L = M + n − m`, so `fl = n − m + j − L`, and with `P` the energy of the bulges and interior loops
+and `Dng` the total dangle energy,
+
+```
+E − E** = (|σ| − |x|)·j + |x|·L + P + Dng − (m−1)e_A .
+```
+
+`j ≥ u` (proof of Theorem 1d).  `L ≥ u − β`, where `β` is the number of blocks all of whose `G`'s are
+unpaired: a maximal run of `ℓ` unpaired `G`'s in a block touches `ℓ − 1` bonds inside it and, unless it is the
+whole block, at least one bond to a paired `G`; all these bonds are loose and different runs touch different
+bonds.  `β ≤ u/B`.  `Dng ≥ −(D_G + D_C)u + e_A·a`, with `a ≤ m − 1` the number of separators that get a dangle
+term.  Hence
+
+```
+E − E**  ≥  u·( |σ| − |x|/B − D_G − D_C )  +  P  +  |e_A|·(m − 1 − a) .
+```
+
+If `u ≥ 1` this is at least `|σ| − |x|/B − D_G − D_C`.  If `u = 0`, every base is paired; then every template
+`GG` bond lies between two chords whose item ends are consecutive positions, so it is on a stack or a flush
+face and `L = 0`; an item bond is on a stack or on a bulge whose template side is one separator (a
+*straddle*); with `r` straddles, `j = r`, the `r` straddled separators get no dangle term and the others get
+`e_A`, and `E − E** = (|σ| − |x|)r + P + |e_A| r ≥ r(|σ| − |x| + γ + |e_A|)`.  A structure with `u = 0` and
+`r = 0` has every item bond on a stack and is a tiling structure (step (d)); a tiling structure has
+`u = j = L = 0`, `a = m − 1`, `P = 0`.  ∎
+
+In our exhaustive tests the conclusion also held for `|σ| − |x|/B ≤ D_G + D_C < |σ|` and failed at
+`D_G + D_C = |σ|`; so the term `|x|/B` may be an artefact of the proof.  What remains uncovered: dangle rules
+in which an unpaired base between two helices is counted for both, terminal mismatches, and coaxial stacking
+across an intervening unpaired base.
 
 ---
 
@@ -498,9 +548,10 @@ Further remarks.
   structure occurs under exactly one circular ordering.
 * **[X], ours, added in the revision.**  `test_generalised_hypotheses.py` (logs `generalised_run.log`,
   `generalised_run_big.log`): 36 instances with `1 ≤ m ≤ 3`, `1 ≤ B ≤ 5`, including `m = 1`, `B ≤ 2` and
-  items longer than a block (up to 762 294 structures); 18 models satisfying the hypotheses of Theorem 1
-  with (H2′) (bulge and interior loops as favourable as `σ·ι + δ`), of Theorem 1c (both cases) or of
-  Theorem 1d, and seven control models violating them.  For every model satisfying the hypotheses: tiling structures have
+  items longer than a block (up to 762 294 structures); 26 models satisfying the hypotheses of Theorem 1
+  with (H2′) (bulge and interior loops as favourable as `σ·ι + δ`), of Theorem 1c (both cases), of
+  Theorem 1d or of Theorem 1e (for the latter, on the instances whose `B` satisfies its hypothesis), and nine
+  control models violating them.  For every model satisfying the hypotheses: tiling structures have
   energy exactly `E*` (resp. `E*_x`), their number is `Til`, every other structure is at least `ε`
   (resp. `ε_x`) above; for the controls the statement fails on some instance.  The same runs check Fact 1
   against union–find on every structure (`check=True`), that every structure has trivial stabiliser under
@@ -538,8 +589,9 @@ statement about synthetic instances and says nothing about typical instances.
 ## 8. Limitations (read before citing)
 
 1. (H0) is an assumption about the model.  Energy functions that give exterior loops context-dependent
-   energies are covered only in the two cases of Theorem 1c (flush coaxial stacks) and Theorem 1d (one
-   dangle term per unpaired base next to a helix end, total strength below `|σ|`), **separately**.  Whether
+   energies are covered only in the cases of Theorem 1c (flush coaxial stacks), Theorem 1d (one dangle
+   term per unpaired base next to a helix end, total strength below `|σ|`) and Theorem 1e (both, with the
+   flush stack no stronger than a stack).  Whether
    a published table with dangles and coaxial stacking, as implemented, satisfies the hypotheses of either
    has been checked by nobody.  Our referee's numerical experiments with simplified re-implementations of
    such conventions (five published parameter tables valid on 112 small instances) are evidence about
@@ -550,8 +602,9 @@ statement about synthetic instances and says nothing about typical instances.
    uses the sparsification lemma as a cited fact.
 4. The proofs are paper proofs by this division.  "Reviewed" in `THEOREMS.md` means the internal
    adversarial review named there, which is not academic peer review.  Theorem 1c (our proof), the
-   one-call form of Corollary 4(ii), Appendix A and our write-up of Theorem 1d and of Remark 5 were written
-   **after** the reviews and have not been reviewed in this form.
+   one-call form of Corollary 4(ii), Appendix A, our write-up of Theorem 1d and of Remark 5, and Theorem 1e
+   were written **after** the reviews and have not been reviewed in this form (a further internal review of
+   everything except Theorem 1e was commissioned at 19:05 UTC).
 
 ## 9. Changes after the review COMPLEXITY-REV-0001
 

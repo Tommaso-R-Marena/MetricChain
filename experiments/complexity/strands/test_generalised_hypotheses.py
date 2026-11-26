@@ -7,6 +7,9 @@ internal review COMPLEXITY-REV-0001):
      x <= 0, all other exterior loops 0, bulge / interior loops >= gamma >= 0, and
          |x| < |sigma| + min(|sigma|, gamma)    (B >= 2 if |x| >= |sigma|);
  (C) Fact 1 (connected iff no face has two nicks), R(S) = 1, and #physical minima = Til / prod mu_s!;
+ (E) Theorem 1e: flush stacks of energy x in [sigma, 0] together with dangles as in (D), bulge / interior loops
+     >= gamma, B >= 2, D_G + D_C < |sigma| - |x|/B and |sigma| - |x| + gamma + |e_A| > 0;
+     E* = sigma*M + x*(n-m) + (m-1)*e_A, eps = min(|sigma| - |x|/B - D_G - D_C, |sigma| - |x| + gamma + |e_A|).
  (D) Theorem 1d (dangles; statement (P3) of the science division's review SCI-REV-0019): an exterior loop has
      energy  sum of d(u)  over its unpaired bases u that are covalent neighbours of a paired base of the loop,
      d(G) = -D_G, d(C) = -D_C, d(A) = e_A <= 0, bulge / interior loops >= 0, and |sigma| > D_G + D_C;
@@ -44,6 +47,14 @@ def models():
         out.append((f"coax x={x} gamma={gamma}", "B2", (x, gamma, 1), min(-SIGMA, gamma) - d))
     for DG, DC, eA in ((1, 1, -2), (2, 3, -1), (0, 5, 0), (5, 0, -3)):
         out.append((f"dangles D_G={DG} D_C={DC} e_A={eA}", "D", (DG, DC, eA, 1), -SIGMA - DG - DC))
+    # (E): flush energy x in [sigma, 0], dangles, bulge/interior = gamma + r   (Theorem 1e)
+    # the hypothesis D_G + D_C < |sigma| - |x|/B depends on B: eps is computed per instance (marker "perB");
+    # an instance on which the hypothesis fails is treated as a control for that model
+    for x, DG, DC, eA, gamma in ((-6, 1, 1, -1, 0), (-6, 2, 0, 0, 1), (-6, 0, 2, -3, 0), (-3, 2, 2, -2, 0), (-4, 1, 2, 0, 2),
+                                 (-6, 2, 2, -1, 1), (-6, 3, 1, 0, 1), (-6, 3, 2, -1, 1)):
+        out.append((f"coax x={x} with dangles D_G={DG} D_C={DC} e_A={eA}, gamma={gamma}", "E", (x, DG, DC, eA, gamma, 1), "perB"))
+    out.append(("control: coax x=sigma, dangles 1,1, e_A=0, gamma=0", "E", (-6, 1, 1, 0, 0, 0), None))
+    out.append(("control: coax x=sigma, dangles 3,3 (sum = |sigma|)", "E", (-6, 3, 3, -1, 1, 0), None))
     out.append(("control: dangles D_G=3 D_C=3 e_A=0 (sum = |sigma|)", "D", (3, 3, 0, 0), None))
     out.append(("control: dangles D_G=4 D_C=3 e_A=-1", "D", (4, 3, -1, 0), None))
     out.append(("control: coax x=sigma, gamma=0", "B", (-6, 0, 0), None))
@@ -96,6 +107,14 @@ def run(items, m, B, MODELS, rng):
                     e[q] = -DG * nG - DC * nC + eA * nA
                 elif kind in ("bulge", "interior"):
                     e[q] = int(u * (rmax + 1))
+            elif typ == "E":
+                x, DG, DC, eA, gamma, rmax = par
+                if flush:
+                    e[q] = x
+                elif kind == "exterior":
+                    e[q] = -DG * nG - DC * nC + eA * nA
+                elif kind in ("bulge", "interior"):
+                    e[q] = gamma + int(u * (rmax + 1))
             else:
                 x, gamma, rmax = par
                 if flush:
@@ -137,7 +156,11 @@ def run(items, m, B, MODELS, rng):
     for q, (name, typ, par, eps) in enumerate(MODELS):
         if typ == "B2" and B < 2:
             continue
-        if typ == "D":
+        if typ == "E" and B < 2:
+            continue
+        if typ == "E":
+            Estar = SIGMA * M + par[0] * (n - m) + (m - 1) * par[3]
+        elif typ == "D":
             Estar = SIGMA * M + (m - 1) * par[2]
         else:
             x = 0 if typ == "A" else par[0]
@@ -145,9 +168,16 @@ def run(items, m, B, MODELS, rng):
         col = E[:, q]
         mn = int(col.min())
         nmin = int((col == mn).sum())
+        if eps == "perB":
+            x_, DG, DC, eA, gamma, _ = par
+            margin = -SIGMA + x_ / B - DG - DC
+            eps = min(margin, -SIGMA + x_ + gamma - eA) if margin > 0 else None
+            if eps is None:
+                name = name + " [hypothesis fails for this B]"
         if eps is None:
             holds = (mn == Estar and nmin == til) if feasible else (mn > Estar)
-            report.append((name, "statement holds here" if holds else "STATEMENT FAILS HERE (expected for a control)"))
+            report.append(("control: " + name if not name.startswith("control") else name,
+                           "statement holds here" if holds else "STATEMENT FAILS HERE (expected for a control)"))
             continue
         if feasible:
             others = col[col != Estar]
