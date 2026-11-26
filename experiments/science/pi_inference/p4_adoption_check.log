@@ -1,0 +1,12 @@
+(1) Counterexample P4.4
+    D reset-closed: True;  -3*[both changed] in the class on D: True;  anchored rectangles inside D force g' >= -3 at [(1, 2), (2, 1), (2, 2)]
+    L - L(x0) on D: (0, 0): 0, (0, 1): 1, (0, 2): 10, (1, 0): 1, (1, 2): 8, (2, 0): 10, (2, 1): 8, (2, 2): 17  -> x0 minimises: True
+    shares: need s12 + s21 >= 3 with s12 <= Delta_1 = 1, s21 <= Delta_2 = 1: possible = False
+    on the full product the point (1,1) has L - L(x0) = -1: criterion fails there, consistent with the 'iff' on products
+(2) poly-Phe on the strand, tau = 0.60: minimum of E = f + g_GB (kcal/mol) over the clash-free domain X_tau and over P2's pruned product X'
+    Phe4: |X_tau| = 225, |X'| = 144 (shape (4, 3, 3, 4));  min over X_tau = -34.221, min over X' = -32.297, difference = 1.92;  minimiser of X_tau lies in X': False
+    Phe5: |X_tau| = 600, |X'| = 192 (shape (4, 3, 1, 4, 4));  min over X_tau = -33.955, min over X' = -23.505, difference = 10.45;  minimiser of X_tau lies in X': False
+    Phe6: |X_tau| = 1600, |X'| = 384 (shape (4, 3, 1, 2, 4, 4));  min over X_tau = -33.687, min over X' = -21.784, difference = 11.90;  minimiser of X_tau lies in X': False
+    Phe7: |X_tau| = 4200, |X'| = 768 (shape (4, 3, 1, 2, 2, 4, 4));  min over X_tau = -33.417, min over X' = -20.216, difference = 13.20;  minimiser of X_tau lies in X': False
+    Phe8: |X_tau| = 11025, |X'| = 1728 (shape (4, 3, 1, 2, 2, 3, 4, 3));  min over X_tau = -33.146, min over X' = -19.898, difference = 13.25;  minimiser of X_tau lies in X': False
+ALL OK

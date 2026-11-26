@@ -70,7 +70,7 @@ adds the other kinds, and the question of meaning.
    order.*  In backbone torsions nothing closes (F8).  In residue-rotamer variables the
    known part is exactly pairwise, the solvent term is pairwise to `10⁻²–10⁻¹` kcal/mol
    for neutral side chains, the second-order interface has real instances for apolar
-   side chains only, and the third-order interface certifies every enumerated instance
+   side chains only, and the third-order interface certifies every enumerated instance (on the product domains; on pruned non-product ones see SCI-REV-0012 §5)
    — *given constants obtained by enumeration*.  **And the constants can be certified
    (workstream P3, checkpoint 40): on extended backbones, with polynomially many
    evaluations — a certified free energy at twenty residues; not on the helix, not for

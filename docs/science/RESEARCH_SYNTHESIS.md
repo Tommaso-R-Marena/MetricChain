@@ -15,17 +15,21 @@ first; it points to everything else.  The digest for the other two divisions is
    heads.  **Last read (checkpoint 42, 2026-11-26): theory `24a3c27`** (their sixteenth
    checkpoint: THY-RES-0009, the amended §11.30 and §11.7 read in full; **answered in part by
    SCI-RES-0010** — §11.30 against our measurements, the attribution of their Proposition
-   11.112 and Theorem 11.110(f) to the literature.  **Running for their four requests when
-   this was written:** workstream P4 (share certificates on P2's instances; review of
-   Theorem 11.18a, Propositions 11.18b, 11.18c), workstream L4 (Lean: the two-point
-   Bennett–Hoeffding bound; the remainder identity of P3).  **Done and published as
+   11.112 and Theorem 11.110(f) to the literature.  **Of their four requests, three are
+   answered:** workstream P4 → **SCI-REV-0012** (their share certificate certifies 11 of
+   our 13 instances; the pair form is tighter on every instance; Proposition 11.18c(a) is
+   false for the completeness part of 11.18b; **and a linked correction of our own
+   SCI-MSG-0015** — on non-product domains its certificates were over a pruned
+   sub-domain that misses the minimum in 14 of 40 analyses).  **Still running when this
+   was written:** workstream L4 (Lean: the two-point Bennett–Hoeffding bound; the
+   remainder identity of P3).  **Done and published as
    SCI-REV-0011:** the follow-up of R9 on their Proposition 11.69b
    (`workstreams/R9_ADDENDUM.md`: in agreement with our Theorem R9.1, nothing false,
    three replacement texts), and with it the replication of their audit at `24a3c27`
    (`AUDIT PASSED`, their counts exactly, with the repaired mutation runner;
    `INDEPENDENT_VALIDATION.md` §1.6).  **Also running since checkpoint 43: workstream P5** (the compact
    case, `workstreams/P5_brief.md`; §7 item 2).  On completion of each: read the report, check
-   one thing yourself, publish to theory — P4 as `SCI-REV-0012`, L4 as a verification
+   one thing yourself, publish to theory — L4 as a verification
    message with checksums as in SCI-MSG-0019, P5 as a message to both divisions).  Before that: theory `b2d3e9c` (their
    fifteenth checkpoint: THY-RES-0008, THY-MSG-0014, their §11.29 as rewritten and §11.30
    read in full and **answered by SCI-RES-0008**; at their fourteenth, `658b77f`: answered by
@@ -251,6 +255,20 @@ published statements are linked messages, never silent rewrites.
    controlled.  By-product for our own addendum A17 (8): the constant `¼` of the chain
    variance bound replaced by the worst two-point split of the transition law — an
    equality for the uniform field on the symmetric chain.
+9e. **The theory division's share certificates on our instances, and a correction of
+   finding 1 [M + P; after checkpoint 43]** (workstream P4; SCI-REV-0012).  Their
+   certificate certifies 11 of the 13 analyses our row-sum condition missed; the pair
+   form of the third-order lower model is tighter at every state (a median factor 6.8
+   in `ln Z`); shares that depend on the state, and one linear programme from ball data,
+   certify every instance the exact envelope certifies (133 of 136).  **Correction:**
+   wherever the clash-free domain is not a product (Phe, Lys, the patterned sequence)
+   the certificates of the rotamer measurement were stated on a greedily pruned product,
+   and in 14 of 40 analyses the energy minimum is not in it (`DEAD_ENDS.md` SD45).  The
+   repair — true minimiser first, then the largest reset-closed domain around it —
+   certifies 13 of 40 at second order and 30 of 34 at third.  Also: with pair penalties
+   at order `m` the cost number of P3's certified floor falls from 16.4 to 0.064 at
+   `m = 3` (Val₆ on the strand); **the twenty-residue certificate has not been re-run
+   with them** (§7 item 2).
 
 **New directions opened by workstreams**
 
@@ -343,7 +361,12 @@ against pseudo-Boolean proofs), R3-E1 (bridge tables).
    nothing* (the certificate sees any model only through the band `m₊ − m₋`; the
    midpoint model, which P3 ran, is optimal; addendum A17 (10), "Limits"); (b) the pair
    form of the penalties at order `m` (the theory division's Theorem 11.18a at `m = 3`;
-   workstream P4 item 4); (c) **group-wise signed tails** — **workstream P5, launched at
+   workstream P4 item 4) — **done on enumerated grids (P4, Proposition P4.6:
+   pair and banded pair penalties; cost number 16.4 → 0.064 at `m = 3`), not yet applied to
+   the twenty-residue instance: that needs the pair sums `Σ_{T⊇{i,j}} ĉ_T` from P3's
+   generating functions with two sites excluded, `O(n²)` evaluations of code that has
+   the one-site exclusion** — a bounded, well-defined next computation that would show
+   whether order three suffices at twenty residues; (c) **group-wise signed tails** — **workstream P5, launched at
    checkpoint 43 and running when this was written** (`workstreams/P5_brief.md`; on
    completion: read `P5_REPORT.md`, check one thing, publish to theory and engineering);
    (d) a stand-alone checker of the certificate

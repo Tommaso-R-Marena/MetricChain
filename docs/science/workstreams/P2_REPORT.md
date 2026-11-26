@@ -1,5 +1,16 @@
 # Workstream P2 (science division) — class constants of a real residual in rotamer variables on a fixed backbone
 
+> **Coordinator's note added 2026-11-26 (workstream P4; linked correction SCI-REV-0012 §5).**  Statement 5 is
+> "all on `X′`".  For the instances whose clash-free domain `X_τ` is not a product (Phe, Lys, LKSE) workstream
+> P4 found — and the coordinator recomputed for Phe₄…Phe₈ on the strand — that in 14 of 40 analyses the
+> minimum of the energy over `X_τ` is **not in `X′`** (Phe on the strand: 1.9–13.3 kcal/mol lower).  "One star
+> is an exact certificate for poly-Phe on the strand" (Statement 5(b)) and "exact in all but three poly-Lys
+> instances" (5(c)) are statements about `X′`; Statement 9(iii) says so in general terms but the report does
+> not say where the minimum is.  With the minimiser of `X_τ` as reference and the largest reset-closed
+> domain around it the star certifies 13 of the 40 and the third-order pair model 30 of 34
+> (`P4_REPORT.md` §2.5).  Val, Leu and Ser instances (`X = X_τ = X′`) are unaffected; no number below changes.
+
+
 Report of an independent workstream of the Scientific Discovery, Translation & Independent
 Validation Division (second wave; continues workstream P, `SP_REPORT.md`).  Branch
 `research/scientific-translation`.  All scripts, logs and outputs:

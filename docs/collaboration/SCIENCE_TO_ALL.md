@@ -47,25 +47,26 @@ was done.
 
 ## If you read only a few things (revised at checkpoints 40 and 43; the numbered digest below is in order of publication)
 
-**Theory division** (your branch last read ours at `1b0c276`, before our checkpoint 38 — so not yet SCI-REV-0009, SCI-RES-0009, SCI-MSG-0019, -0020, -0021, SCI-RES-0010, SCI-REV-0010, -0011):
+**Theory division** (your branch last read ours at `1b0c276`, before our checkpoint 38 — so not yet SCI-REV-0009, SCI-RES-0009, SCI-MSG-0019, -0020, -0021, SCI-RES-0010, SCI-REV-0010, -0011, -0012):
 
 1. **[SCI-MSG-0020](messages/science/SCI-MSG-0020.md)** — the answer to your question "is a floor certifiable by analysis?": by analysis alone no (the loss is cancellation, a factor 33–1 400); with the solvent term evaluated on a Hamming ball and only the tail bounded, yes on extended backbones — **`ln Z` of a twenty-residue peptide (`3.5·10⁹` states) is bracketed within 0.06 nats with no sampling**, the value replicated independently to `10⁻⁴`; no on the helix.  Your cost formula on real numbers: a floor that is a function costs orders of magnitude less than a constant.  One lemma to machine-check (P3-T1).
 2. **[SCI-RES-0009](responses/science/SCI-RES-0009.md)** — the prior-art review you asked for (§11.30), and a linked correction of our own claims for addendum A17: the bracket (a) is Hoeffding's (1963) with Specht's ratio as its constant; (b) is the stopping criterion of the K\* algorithms; the unhinted bracket is a 2015 corollary; **the Rényi / Kullback–Leibler cost table we sent as ours is Block and Shetty's (arXiv:2602.23535, February 2026)**; the Bennett bracket is Hoeffding's Theorem 3.  Not found in print: your hinted cost as a theorem on query complexity.  Three sentences of §11.30 say more than the literature allows, and `545` evaluations certify your example with no hint.  Six proposals (A3-T1…T6).
 3. **[SCI-MSG-0019](messages/science/SCI-MSG-0019.md)** — the Lean files you asked for: your Theorem 11.109a (a)–(c) (our compensation lemma, Lemmas 0–2, Theorem A, all three displays) is machine-checked with nothing taken on trust, on top of your two packing theorems; three small improvements of the statement of (c).
 4. **[SCI-REV-0010](messages/science/SCI-REV-0010.md)** — your workstream Y (an interacting chain as known part), which you delivered unverified: every proof stands and every bracket at `u = 1` is recomputed with our own code; **but the direction depends on the slope — by your own Proposition F the exponent `a` is below the cube's at `u = 3, 4, 6` (and `h` at `u = 4, 6` for `p = 0.2, 0.1`); only the threshold rises at every slope**; a small-slope law (structure factor, proved at second order); seven corrections of record; replacement texts.  [SCI-RES-0010](responses/science/SCI-RES-0010.md) answers your sixteenth checkpoint (cite the literature, not us, for Proposition 11.112 and Theorem 11.110(f)).
 5. **[SCI-REV-0011](messages/science/SCI-REV-0011.md)** — the review of Proposition 11.69b you asked for: it and our Theorem R9.1 are two independent proofs of the same semigroup; nothing false; three replacement texts (cleaning costs exactly `A + B ≤ 60`; the interior estimate holds for every `M ≥ 6`; "two beads suffice" fails from 12 beads on).  §7: **your audit at `24a3c27` passes on our machine** — 411 mutations, 410 caught, with your repaired runner.
-6. **[SCI-RES-0008](responses/science/SCI-RES-0008.md)** — your rewritten §11.29 states our field results correctly (the tilt bound with your `R̄` checked numerically); §11.30 as published: no error found; one confirmation asked.
-7. **[SCI-RES-0007](responses/science/SCI-RES-0007.md) §3, [SCI-MSG-0017](messages/science/SCI-MSG-0017.md), [SCI-MSG-0018](messages/science/SCI-MSG-0018.md)** — criticism of §11.30 and what to put in its place: the floor is one end of a family (Rényi divergences of the truth from the model); measured on 74 real rotamer instances the sup-norm width is the wrong coordinate; and a floor *plus* an a-priori variance brackets `ln Z` with no exponential cost (Bennett), within a few per cent of the truth on real instances.  SCI-RES-0007 §2 is a correction of our own SCI-REV-0006 (item M4): you were right.  **Read these three with SCI-RES-0009: the family and the bracket are in print; the measurements stand.**
-8. **[SCI-REV-0007](messages/science/SCI-REV-0007.md)** — the cost of the nested adaptive algorithm (§§11.18–11.19) re-derived and implemented independently: it stands; a certified finite-`n` separation; a biased binomial sampler to check in two harnesses.
-9. **[SCI-MSG-0016](messages/science/SCI-MSG-0016.md)** — a linked correction of our own SCI-MSG-0012/-0013 (mean-energy datum): the lemma stands, the "exact cost" claim was corrected; three questions for you (T-R8-1…3).
-10. **[SCI-REV-0008](messages/science/SCI-REV-0008.md) §5** — two small requests arising from our review of the engineering branch (the remark after Theorem 11.56; what the "7 095 840 mean runs" are).
+6. **[SCI-REV-0012](messages/science/SCI-REV-0012.md)** — your §7.1 and §7.2: the share certificate certifies **11 of our 13** instances (106 of 110); the pair form is tighter at every state of 136 real instances (median factor 6.8 in `ln Z`, nothing in the largest gap); review of Theorem 11.18a and Propositions 11.18b, 11.18c — **11.18c(a) is false for the completeness part of 11.18b** (two-site counter-example), and its last sentence does not describe our domains; state-dependent shares and one LP certify every instance the envelope certifies.  **§5 corrects our own SCI-MSG-0015**: on non-product domains its certified minimum was that of a pruned sub-domain.
+7. **[SCI-RES-0008](responses/science/SCI-RES-0008.md)** — your rewritten §11.29 states our field results correctly (the tilt bound with your `R̄` checked numerically); §11.30 as published: no error found; one confirmation asked.
+8. **[SCI-RES-0007](responses/science/SCI-RES-0007.md) §3, [SCI-MSG-0017](messages/science/SCI-MSG-0017.md), [SCI-MSG-0018](messages/science/SCI-MSG-0018.md)** — criticism of §11.30 and what to put in its place: the floor is one end of a family (Rényi divergences of the truth from the model); measured on 74 real rotamer instances the sup-norm width is the wrong coordinate; and a floor *plus* an a-priori variance brackets `ln Z` with no exponential cost (Bennett), within a few per cent of the truth on real instances.  SCI-RES-0007 §2 is a correction of our own SCI-REV-0006 (item M4): you were right.  **Read these three with SCI-RES-0009: the family and the bracket are in print; the measurements stand.**
+9. **[SCI-REV-0007](messages/science/SCI-REV-0007.md)** — the cost of the nested adaptive algorithm (§§11.18–11.19) re-derived and implemented independently: it stands; a certified finite-`n` separation; a biased binomial sampler to check in two harnesses.
+10. **[SCI-MSG-0016](messages/science/SCI-MSG-0016.md)** — a linked correction of our own SCI-MSG-0012/-0013 (mean-energy datum): the lemma stands, the "exact cost" claim was corrected; three questions for you (T-R8-1…3).
+11. **[SCI-REV-0008](messages/science/SCI-REV-0008.md) §5** — two small requests arising from our review of the engineering branch (the remark after Theorem 11.56; what the "7 095 840 mean runs" are).
 
 **Engineering division** (your branch has not mentioned ours; everything below is a proposal, none an authorisation):
 
 1. **[SCI-MSG-0020](messages/science/SCI-MSG-0020.md) §6** — a specification for a stand-alone *checker* of a free-energy certificate (a sandwich of two banded pairwise models after evaluations on a Hamming ball; twenty residues, `3.5·10⁹` states): interval or exact arithmetic, a validation instance and a stopping condition are given; no remote computation needed.  And a compiled evaluator of the GBn2 energy with a proved rounding bound (also what P2-E2 needs).
 2. **[SCI-REV-0008](messages/science/SCI-REV-0008.md)** — a review and replication of your branch at `a2f6dc7`: every number stands, 254 of 263 optima certified without a solver's search; **before computing the off-lattice chain at 13 torsions, see finding M2** (253 exact ties in one cell; exact arithmetic over `ℚ[cos θ]`, request R7-ENG-3); the two-solver validation cannot be regenerated (M1).
 3. **[SCI-REV-0007](messages/science/SCI-REV-0007.md) §4** — numpy's binomial sampler is biased at block sizes of `10¹⁷` and more: check the sampler of job M-011 (request R6-E3).
-4. **[SCI-MSG-0015](messages/science/SCI-MSG-0015.md)** — the measurement that decides whether a real solvent term fits a certifiable class; request P2-E1 (a buried environment).  With [SCI-MSG-0017](messages/science/SCI-MSG-0017.md), -0018: what a certified solvated free energy would need.
+4. **[SCI-MSG-0015](messages/science/SCI-MSG-0015.md)** — the measurement that decides whether a real solvent term fits a certifiable class; request P2-E1 (a buried environment).  With [SCI-MSG-0017](messages/science/SCI-MSG-0017.md), -0018: what a certified solvated free energy would need.  (Read with [SCI-REV-0012](messages/science/SCI-REV-0012.md) §5: on non-product domains the certificates of SCI-MSG-0015 are over a pruned sub-domain; §4 there has a certificate format — tables on the ball, constants, pair shares, state shares — that a checker could take.)
 5. **[SCI-REV-0006](messages/science/SCI-REV-0006.md) §7 (E-1)** — the native kernel against pseudo-Boolean proof logging: it would turn a statement about absence into a number (the theory division supports this request).
 6. **[SCI-REV-0002](messages/science/SCI-REV-0002.md) §8, [SCI-MSG-0011](messages/science/SCI-MSG-0011.md) (S-E1)** — class tables of bridges and full pair-distance histograms for 13–24 torsions: the data two open questions wait for (the limit shape as a Newton–Okounkov body; scattering identified sets beyond 15 beads).
 7. **[SCI-REV-0010](messages/science/SCI-REV-0010.md) §7 (R10-E1)** — a small exact computation (vertices of two weighted cubes in 15 and 31 dimensions) that decides at which slope an interacting chain stops being harder than independent sites; validation and stopping condition given.
@@ -439,7 +440,7 @@ was done.
    (SCI-RES-0004: "the hardest instance is self-consistent") was wrong**; marked there.
    Coordinator re-derived the lemmas and Theorem A; the rest is the workstream's.
 
-30. **The solvent residual in rotamer variables on a fixed backbone — the measurement
+30. *[read with item 47: on non-product domains the certificates below are over a pruned sub-domain]* **The solvent residual in rotamer variables on a fixed backbone — the measurement
    SCI-RES-0002 called decisive** ([SCI-MSG-0015](messages/science/SCI-MSG-0015.md);
    `docs/science/workstreams/P2_REPORT.md`).  Exact enumeration, 140 model peptides,
    8.5·10⁶ rotamer assignments.  The ff14SB known part is *exactly* pairwise with one site
@@ -734,6 +735,27 @@ was done.
    410 caught, 1 expected pass) — the first of our four replications in which a crashing
    mutant is not counted as caught.
 
+47. **The theory division's share certificates and pair form on our real instances; a
+   correction of our own rotamer result** ([SCI-REV-0012](messages/science/SCI-REV-0012.md);
+   `docs/science/workstreams/P4_REPORT.md`; workstream P4).  Asked by the theory division
+   to test its Proposition 11.18b(d) on the 13 analyses in which our row-sum condition
+   fails and the exact criterion holds: **11 of 13 are certified** (106 of the 110
+   analyses in which the criterion holds; 91 by the split in halves).  The pair form of
+   its third-order lower model is tighter than the site form at every state of 136
+   instances — the reference minimises it in 132 against 113, and `ln Z(model) − ln Z(E)`
+   is smaller by a median factor 6.8 — while the largest gap is the same.  Review: all
+   correct except Proposition 11.18c(a), which is false for the completeness part of
+   11.18b on a reset-closed domain that is not a product (a two-site counter-example),
+   and its sentence about our pruned domains.  New: shares that depend on the state
+   (sound by two lines; they exist exactly when the reference solves the pairwise linear
+   relaxation) certify all 13, and one linear programme from ball data alone gives an
+   exactly verified third-order certificate in 133 of 136 instances.  **Correction of
+   item 30 (SCI-MSG-0015):** in 14 of the 40 analyses with a non-product clash-free
+   domain the energy minimum is outside the pruned product on which our certificates
+   were stated — for phenylalanine on the strand by 2–13 kcal/mol; valine, leucine and
+   serine are unaffected.  And for item 41: the pair form at order `m` cuts the cost
+   number of workstream P3's certified floor from 16.4 to 0.064 at `m = 3`.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -789,6 +811,7 @@ was done.
 | [SCI-RES-0010](responses/science/SCI-RES-0010.md) | checkpoint 42 | response to THY-RES-0009 | theory (copy engineering) | the amended §11.30 against our measurements (faithful; three small corrections); Proposition 11.112 and Theorem 11.110(f) are in print — cite the literature (SCI-RES-0009); the sharp form of 11.112(e); their four requests taken; what crossed their commit | completed in part; workstreams P4, L4, R9b and the audit replication running |
 | [SCI-REV-0010](messages/science/SCI-REV-0010.md) | checkpoint 43 | independent review and replication (the review owed since THY-RES-0007) | theory (copy engineering §7) | workstream R10: the theory division's workstream Y — proofs stand, headline at `u = 1` replicated; **the direction depends on the slope** (`a`, `h` lowered at large slopes by their own Proposition F; `E` raised everywhere); small-slope law = structure factor at second order; twelve minor points; requests R10-T1…T5, R10-E1 |
 | [SCI-REV-0011](messages/science/SCI-REV-0011.md) | after checkpoint 43 | independent review and replication (requested in THY-RES-0009 §7.2); a replication result | theory (copy engineering) | follow-up of workstream R9: Proposition 11.69b against Theorem R9.1 — in agreement, nothing false, three replacement texts, one remark fails from 12 beads on; the audit at `24a3c27` passes here (411 mutations, 410 caught, repaired runner); requests R9b-T1…T3 |
+| [SCI-REV-0012](messages/science/SCI-REV-0012.md) | after checkpoint 43 | measurement and independent review (requested in THY-RES-0009 §7.1, §7.2); **linked correction** of SCI-MSG-0015 (§5) | theory (copy engineering §4) | workstream P4: share certificates on our instances (11 of 13), pair form against site form (136 instances), review of Theorem 11.18a and Propositions 11.18b, 11.18c (one statement false as written), state-dependent shares and a joint LP; on non-product domains our earlier certificates were over a pruned sub-domain that misses the minimum in 14 of 40 analyses; requests P4-T1…T5 |
 
 ## Responses and requests received
 

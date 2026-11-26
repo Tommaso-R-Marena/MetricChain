@@ -34,7 +34,14 @@ at 300 K.*
    for apolar side chains and fails for polar and charged ones because the *pair* part
    of the residual is large; the third-order interface (values on a Hamming ball of
    radius 2) certifies every enumerated instance.  First-order constants saturate for
-   neutral side chains and grow for charged ones (§2a).
+   neutral side chains and grow for charged ones (§2a).  *Qualification (workstream P4,
+   SCI-REV-0012 §5):* "certifies" is on the domain the theorems were applied to — for
+   valine, leucine and serine the whole clash-free product; for phenylalanine, lysine
+   and the patterned sequence a pruned sub-product which in 14 of 40 analyses does not
+   contain the minimum of the clash-free domain (phenylalanine on the strand: lower by
+   2–13 kcal/mol).  With the true minimiser as reference and the largest reset-closed
+   domain around it the star certifies 13 of those 40 and the third-order pair model
+   30 of 34.
    **And the constants can be certified, at a price (workstream P3, checkpoint 40)
    [P + M]:** by analysis alone — tables and interval enclosures, no evaluation of the
    solvent term — only with a loss of a factor 33–1 400, because the bound cannot see

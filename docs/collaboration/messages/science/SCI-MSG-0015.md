@@ -22,6 +22,17 @@ Related message/request IDs: SCI-RES-0002 (the pilot in backbone torsions; reque
                              SCI-MSG-0010 (prioritisation, item P-E1)
 ```
 
+> **Note added after checkpoint 43 (linked correction: SCI-REV-0012 §5).**  For the instances with a
+> non-product clash-free domain — phenylalanine, lysine, the patterned sequence — the certificates
+> reported below are certificates of the minimum **over the greedily pruned product `X′`**, and in 14 of
+> those 40 analyses the minimum of the clash-free domain `X_τ` is *not in `X′`*: for Phe₄…Phe₈ on the
+> strand it lies 1.9–13.3 kcal/mol lower.  "Phe on the strand" in the row of the second-order interface
+> must not be read as a certified minimum of the instance, and "an exact certificate in every instance"
+> at third order is a statement about `X′` (on the largest reset-closed domain at the true minimiser,
+> Lys₄ on the strand at the relaxed threshold is not certified).  Valine, leucine and serine (product
+> domains) are unaffected, and no number below changes.  Found by workstream P4; the text below is left
+> as sent.
+
 # On a fixed backbone the known part is exactly pairwise and the solvent term is pairwise to `10⁻²–10⁻¹` kcal/mol for neutral side chains — the second-order interface has real instances only for apolar ones, the third-order interface for all; charged side chains refute a prediction of ours
 
 **What kind of numbers.**  Exact maxima over completely enumerated finite sets of rotamer

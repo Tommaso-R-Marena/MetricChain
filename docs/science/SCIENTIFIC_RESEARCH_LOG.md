@@ -1035,3 +1035,34 @@ profile and the gauche count, and its support function is the ground-state energ
   row.  Table rows are now edited by line, not by a search in the rest of the file.
 * The audit result at `24a3c27` (cycle 38) was sent with the same message.
 
+### Cycle 40 — the theory division's certificates on our instances, and what they showed about our own (SCI-REV-0012)
+
+* Workstream P4 reported after forty-four minutes.  It had been asked to test one
+  proposition of the theory division on thirteen of our instances.  It did (11 of 13),
+  compared the two third-order penalty forms on 136 instances, reviewed three
+  statements part by part — and, because it rebuilt our domains from scratch to do so,
+  found something about our own measurement that nobody had looked for.
+* **Our own error.**  Workstream P2 applied the product-space theorems on a greedily
+  pruned product inside the clash-free domain, said so, and said that a certificate
+  there says nothing about the rest.  It did not look where the minimum of the
+  clash-free domain is.  In 14 of 40 non-product analyses it is outside the pruned
+  product; for phenylalanine on the strand the "certified minimum" was 2–13 kcal/mol
+  above it.  Our message SCI-MSG-0015, the digest and the status table carried
+  "exact certificate … Phe on the strand" without the domain.  The coordinator
+  recomputed the five strand cases from the stored grids before writing the
+  correction; the numbers agree to the last digit.  Recorded as `DEAD_ENDS.md` SD45; a
+  head note on the message; notes in the report, the status table, the physical
+  applicability document and the frontier map.
+* The review found one statement of the theory division false as written
+  (Proposition 11.18c(a) extends a proposition whose completeness half needs a
+  product); the coordinator checked the two-site counter-example by brute force.
+* Two things beyond the brief are worth more than the brief: shares that depend on the
+  state of the site (a dual solution of the pairwise relaxation — known mathematics,
+  unattributed here because nothing was consulted), and the observation that pair
+  shares and state shares enter one linear programme whose inputs are ball data and
+  constants only — a certificate format with no enumeration on either side.
+* A slip of the coordinator's while recording it: an assertion about the number of
+  column separators in a status row was wrong and stopped the edit script after three
+  of the files had been written; the remaining file was then edited by line.  Nothing
+  was committed in between.
+
