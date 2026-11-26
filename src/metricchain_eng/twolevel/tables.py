@@ -103,8 +103,16 @@ class CubeTables:
         return np.maximum(np.searchsorted(self.lball, t, side="right") - 1, 0)
 
     def lG2(self, eta: float) -> np.ndarray:
-        """ln G2(r) for r = 0..m."""
-        return self.lE - self.lT[self.kappa(eta)]
+        """ln G2(r) for r = 0..m (cached per eta; callers must not modify the array)."""
+        cache = self.__dict__.setdefault("_lg2_cache", {})
+        out = cache.get(eta)
+        if out is None:
+            out = self.lE - self.lT[self.kappa(eta)]
+            out.setflags(write=False)
+            if len(cache) >= 3:                 # a few values of eta recur (1/2, 1/3, the top level's); keep memory bounded
+                cache.pop(next(iter(cache)))
+            cache[eta] = out
+        return out
 
     def r_dagger(self, eta: float, theta: float | None, nu0: float, lth: float | None = None) -> int:
         """The largest r in 0..m-1 such that for every r' <= r

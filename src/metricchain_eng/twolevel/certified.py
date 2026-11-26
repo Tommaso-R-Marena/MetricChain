@@ -25,6 +25,7 @@ published table can be reproduced; "wide" is this module's own, larger family.
 from __future__ import annotations
 
 import math
+import time
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -33,13 +34,26 @@ from .alg2l import Params, constants
 from .meanrun import lC_max
 from .tables import LN2, CubeTables, cube_constants, theta_hint
 
-_tables: dict = {}
+_tables: dict = {}          # (d, u) -> CubeTables, least recently used first; bounded by the total of the dimensions
+_tables_total = 0
+TABLES_BUDGET = 4_000_000   # sum of d over the cached tables (each table holds about ten arrays of d + 1 doubles: 320 MB)
 
 
 def tables(d: int, u: float) -> CubeTables:
-    if (d, u) not in _tables:
-        _tables[(d, u)] = CubeTables(d, u)
-    return _tables[(d, u)]
+    """Tables of the d-cube, cached with a bound on memory (a deep search visits thousands of dimensions)."""
+    global _tables_total
+    key = (d, u)
+    t = _tables.pop(key, None)
+    if t is None:
+        t = CubeTables(d, u)
+        _tables_total += d
+        while _tables_total > TABLES_BUDGET and _tables:
+            old_key = next(iter(_tables))
+            _tables.pop(old_key)
+            _k0cache.pop(old_key, None)
+            _tables_total -= old_key[0]
+    _tables[key] = t
+    return t
 
 
 # ---------------------------------------------------------------------------------------------
@@ -62,6 +76,43 @@ def k0_lcost(d: int, u: float, x: float, l_inv_delta: float) -> tuple[float, str
     if lcost >= d * LN2:
         return d * LN2, "enum"
     return lcost, "K0"
+
+
+_k0cache: dict = {}
+
+
+def _k0_half(d: int, u: float):
+    """For eta = 1/2 (every accuracy x >= 4 artanh(1/2) = 2.197): the running maximum of ln(1 + G2(r)), r = 0..d-1,
+    so that the first radius that fails the budget is found by bisection."""
+    key = (d, u)
+    t = tables(d, u)                    # touches the table (and may evict others together with their entries here)
+    hit = _k0cache.get(key)
+    if hit is None:
+        hit = np.maximum.accumulate(np.logaddexp(0.0, t.lG2(0.5)[:d]))
+        _k0cache[key] = hit
+    return hit
+
+
+def k0_lcost_vec(d: int, u: float, xs, l_inv_delta: float) -> np.ndarray:
+    """``k0_lcost`` for an array of accuracies (the costs only)."""
+    xs = np.asarray(xs, dtype=float)
+    out = np.empty(xs.size)
+    half = xs / 4 >= math.atanh(0.5)
+    if half.any():
+        t = tables(d, u)
+        gmax = _k0_half(d, u)
+        eta = 0.5
+        K = math.ceil(3 * (1 + eta) / eta ** 2 * (math.log(4) + l_inv_delta))
+        budget = xs[half] - math.log((1 + eta) / (1 - eta))
+        first_bad = np.searchsorted(gmax, budget, side="right")          # first r with ln(1 + G2(r)) > budget
+        rstar = np.minimum(first_bad, d) - 1
+        lball = np.where(rstar >= 0, t.lball[np.maximum(rstar, 0)], 0.0)
+        lM = np.maximum(math.log(K) + d * LN2 - math.log(1 - eta) - lball, math.log(K / (1 - eta)))
+        lcost = LN2 + lM
+        out[half] = np.where((rstar < 0) | (lcost >= d * LN2), d * LN2, lcost)
+    for i in np.flatnonzero(~half):
+        out[i] = k0_lcost(d, u, float(xs[i]), l_inv_delta)[0]
+    return out
 
 
 # ---------------------------------------------------------------------------------------------
@@ -224,22 +275,16 @@ class Recursion:
         self.family = family
         self.prefilter = prefilter
         self.cc = cube_constants(u)
-        self.cache: dict = {}
         self.calls = 0
 
     # -- one rung ------------------------------------------------------------------------------
     def best(self, d: int, x: float, lid: float, depth: int):
-        key = (d, round(x, 10), round(lid, 8), depth)
-        hit = self.cache.get(key)
-        if hit is not None:
-            return hit
         c0, kind0 = k0_lcost(d, self.u, x, lid)
         out = (c0, kind0)
         if depth > 0 and not (x / d >= 0.9 * self.cc.eps_star or d < 50):
             bestlb = self._best_level(d, x, lid, depth, cutoff=c0)
             if bestlb is not None and bestlb.lCmax < c0:
                 out = (bestlb.lCmax, bestlb)
-        self.cache[key] = out
         return out
 
     def _server(self, depth: int):
@@ -342,3 +387,136 @@ def describe(lb: LevelBound, na: float, indent: int = 0, max_depth: int = 2) -> 
     if isinstance(s, LevelBound):
         lines += describe(s, na, indent + 2, max_depth)
     return lines
+
+
+# ---------------------------------------------------------------------------------------------
+# The same recursion as an exact search with pruning (any depth, any candidate family)
+# ---------------------------------------------------------------------------------------------
+def theory_candidates(u: float, d: int, x: float):
+    """Every design ``cert3.py`` can try for a rung, as one flat list: the referee's and the bounded design with
+    tolerance x/2 or maximal at the outer fractions 0.50, 0.45, ..., 0.20.  (``cert3.py`` walks the fractions
+    downwards and stops at the first that does not improve; the minimum over the whole list can only be lower.)"""
+    out = list(referee_candidates(u, d, x))
+    for chain in bounded_chains(u, d, x):
+        out += chain
+    return out
+
+
+FAMILIES = {"theory": theory_candidates, "wide": wide_candidates}
+
+
+class Search:
+    """min over a candidate family of the certified cost of at most ``depth`` nested levels above base brackets.
+
+    The search is exact for the family: a candidate is discarded only when a lower bound of its cost — its outer
+    sample ``2 M_bar``, or the terms of ``C_max`` accumulated so far over rungs whose servers are already known —
+    is at least the best value found so far (or the cutoff the caller passes).  Candidates are tried in the order
+    of their value with base brackets as servers, which is an upper bound of their value at any depth.
+    """
+
+    def __init__(self, u: float, family: str = "wide", coarse_rule: bool = True):
+        self.u = u
+        self.cands = FAMILIES[family]
+        self.family = family
+        self.cc = cube_constants(u)
+        self.coarse_rule = coarse_rule      # the referee's rule: no nested run where x/d >= 0.9 eps* or d < 50
+        self.nodes = 0
+        self.levels = 0
+        self.deadline: float | None = None  # time.time() after which ``best`` raises TimeoutError (the caller keeps what is finished)
+
+    def _prepare(self, d: int, D: Design, lid: float):
+        P = level_params(self.u, d, D, lid)
+        if P is None:
+            return None
+        C = constants(P, tables(P.n_o, self.u))
+        return P, C
+
+    def _mult(self, P: Params, C) -> np.ndarray:
+        return np.array([min(LN2 + C.lM_bar, math.log(C.J + 1) + C.lcnt(P.xs[l - 1], P)) for l in range(1, P.L + 1)])
+
+    def best(self, d: int, x: float, lid: float, depth: int, cutoff: float = math.inf):
+        """(ln C, description).  Exact whenever the value is below ``cutoff``; otherwise the base bracket's cost or
+        some value >= cutoff is returned and only ">= cutoff" may be used."""
+        self.nodes += 1
+        if self.deadline is not None and (self.nodes & 255) == 0 and time.time() > self.deadline:
+            raise TimeoutError("search deadline reached")
+        c0, kind0 = k0_lcost(d, self.u, x, lid)
+        if depth == 0 or (self.coarse_rule and (x / d >= 0.9 * self.cc.eps_star or d < 50)):
+            return c0, kind0
+        inc, desc = c0, kind0
+        ranked = []
+        bound = min(inc, cutoff)
+        for D in self.cands(self.u, d, x):
+            pc = self._prepare(d, D, lid)
+            if pc is None:
+                continue
+            P, C = pc
+            if C.x_out > x + 1e-9 or LN2 + C.lM_bar >= bound:
+                continue
+            lC0 = k0_lcost_vec(P.n_i, self.u, P.xs[1:], C.l_inv_delta_p)
+            mult = self._mult(P, C)
+            base = float(np.logaddexp(0.0, LN2 + C.lM_bar))
+            shallow = float(np.logaddexp(base, np.logaddexp.reduce(mult + lC0)))
+            ranked.append((shallow, len(ranked), D, P, C, lC0, mult, base))
+        ranked.sort(key=lambda t: t[:2])
+        for shallow, _, D, P, C, lC0, mult, base in ranked:
+            bound = min(inc, cutoff)
+            if base >= bound:
+                continue
+            self.levels += 1
+            if depth == 1:
+                val, lC, servers = shallow, lC0, None
+            else:
+                res = self._deep(P, C, lC0, mult, base, depth, bound)
+                if res is None:
+                    continue
+                val, lC, servers = res
+            if val < inc:
+                inc = val
+                desc = LevelBound(lCmax=val, xout=C.x_out, design=D, n_o=P.n_o, n_i=P.n_i, lM_bar=C.lM_bar,
+                                  l_inv_delta_p=C.l_inv_delta_p, xs=P.xs, lC=np.concatenate([[-np.inf], lC]),
+                                  servers=servers if servers is not None else ["K0/enum"] * P.L, lterm=mult + lC)
+        return inc, desc
+
+    def _deep(self, P: Params, C, lC0: np.ndarray, mult: np.ndarray, base: float, depth: int, bound: float):
+        """C_max of the level with rungs served by the best procedures of depth - 1, or None if it is >= bound."""
+        order = np.argsort(-(mult + lC0), kind="stable")
+        lC = lC0.copy()
+        servers = [None] * P.L
+        acc = base
+        for l in order:
+            if acc >= bound:
+                return None
+            rem = bound + math.log(-math.expm1(acc - bound)) if math.isfinite(bound) else math.inf
+            c, s = self.best(P.n_i, P.xs[l + 1], C.l_inv_delta_p, depth - 1, cutoff=rem - mult[l])
+            acc = float(np.logaddexp(acc, mult[l] + c))
+            lC[l] = c
+            servers[l] = s
+        if acc >= bound:
+            return None
+        return acc, lC, servers
+
+    def top(self, n: int, D: Design, lid: float, depth: int, cutoff: float = math.inf) -> LevelBound | None:
+        """The certified bound of ``depth`` nested levels with top design ``D`` (None if it is >= cutoff or the design
+        is infeasible)."""
+        pc = self._prepare(n, D, lid)
+        if pc is None:
+            return None
+        P, C = pc
+        lC0 = k0_lcost_vec(P.n_i, self.u, P.xs[1:], C.l_inv_delta_p)
+        mult = self._mult(P, C)
+        base = float(np.logaddexp(0.0, LN2 + C.lM_bar))
+        if base >= cutoff:
+            return None
+        if depth == 1:
+            val, lC, servers = float(np.logaddexp(base, np.logaddexp.reduce(mult + lC0))), lC0, None
+            if val >= cutoff:
+                return None
+        else:
+            res = self._deep(P, C, lC0, mult, base, depth, cutoff)
+            if res is None:
+                return None
+            val, lC, servers = res
+        return LevelBound(lCmax=val, xout=C.x_out, design=D, n_o=P.n_o, n_i=P.n_i, lM_bar=C.lM_bar,
+                          l_inv_delta_p=C.l_inv_delta_p, xs=P.xs, lC=np.concatenate([[-np.inf], lC]),
+                          servers=servers if servers is not None else ["K0/enum"] * P.L, lterm=mult + lC)
