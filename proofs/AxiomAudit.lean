@@ -1966,6 +1966,7 @@ end MetricChain.NonVacuity
 #print axioms MetricChain.Geometry.stress_certificate
 #print axioms MetricChain.Geometry.block_coeff_nonneg
 #print axioms MetricChain.Geometry.block_rigidity
+#print axioms MetricChain.Geometry.mixture_state_of_conic
 #print axioms MetricChain.Geometry.sqdist_midpoint_of_conic
 #print axioms MetricChain.Geometry.globallyRigid_of_secondMomentRigid
 #print axioms MetricChain.Geometry.secondMomentRigid_of_universal

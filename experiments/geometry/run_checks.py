@@ -25,6 +25,7 @@ import explore_below
 import matroid_connectivity
 import torsion_sharpness
 import local_data_bounds
+import third_moment
 
 MUT = os.environ.get("GEOM_MUT", "")
 QUICK = "--quick" in sys.argv
@@ -540,6 +541,17 @@ def helix_beam_law():
     e, c = local_data_bounds.helix_exponent()
     target = -1.0 if MUT == "helix_exponent_one" else -2.0
     return abs(e - target) < 0.1, f"exponent {e:.3f}, s_7 n^2 = {c:.1f}"
+
+
+@test
+def third_moment_blocks():
+    """Proposition 9.2: the 3-form of mean triple products is determined by the data and its
+    contractions have rank 2 exactly on block vectors."""
+    r = third_moment.run(2, seed=3)
+    want_generic = 2 if MUT == "third_moment_generic_rank" else 4
+    ok = (r["fit_residual"] < 1e-9 and r["rank_of_system"] == 20 and set(map(int, r["block_ranks"])) == {2}
+          and set(map(int, r["two_block_ranks"])) == {4} and set(map(int, r["generic_ranks"])) == {want_generic})
+    return ok, f"block ranks {sorted(set(map(int, r['block_ranks'])))}, generic ranks {sorted(set(map(int, r['generic_ranks'])))}"
 
 
 def main():

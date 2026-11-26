@@ -229,8 +229,8 @@ satisfies it iff it has at least 6 bonds.
 
 ### 4.2 Finite mixtures
 
-**Theorem B (identifiability of a mixture among all ensembles) [P; core V:
-`MetricChain.Geometry.block_rigidity`].**  Let `μ = Σ_{k=1}^K w_k δ_{X_k}`, `w_k > 0`, with
+**Theorem B (identifiability of a mixture among all ensembles) [P; algebraic core V:
+`MetricChain.Geometry.mixture_state_of_conic`, `block_rigidity`].**  Let `μ = Σ_{k=1}^K w_k δ_{X_k}`, `w_k > 0`, with
 stacked configuration `z ∈ (ℝ^{dK})^n`, and assume the **conic condition**
 
     𝒩(z) = 𝒯          (the only quadrics through the constrained edge directions of z
@@ -249,9 +249,13 @@ and `√w_κ A(x)` restricted to block `κ` is orthogonal, so
 `x_i − x_1 = R(x)(x_i^{(κ)} − x_1^{(κ)})` with `R(x) ∈ O(d)`.  Finally
 `I = ∫ AᵀA dν = Σ_k ν(κ = k) E_k / w_k` gives `ν(κ = k) = w_k`.  ∎
 
-The step "a positive semidefinite block-scalar form of rank at most `d` is supported on one
-block" is the machine-checked `block_rigidity`: stated without matrices, for a linear map
-`A` into a `d`-dimensional space whose quadratic form `|Av|²` is `Σ_k c_k |E_k v|²`.
+Machine-checked **[V]** (`mixture_state_of_conic`): for pairwise orthogonal blocks of
+dimension `d ≥ 1` and a set of edge vectors satisfying (CC) — every symmetric bilinear form
+vanishing on them is block-scalar — a linear map `A` into a space of dimension at most `d`
+that preserves the lengths of the edge vectors satisfies `|Au|² = c_k|u|²` on each block,
+`c_k ≥ 0`, with at most one `c_k ≠ 0`.  This is the proof above from "`P ∈ I + 𝒯`" on; what
+remains on paper is Lemma 2.2 (the competing states are linear images) and the
+bookkeeping of the weights.
 
 **Theorem B′ (exact criterion) [P].**  Let `μ` be a `K`-mixture whose stacked configuration `z`
 spans `ℝ^{dK}` affinely.  Then `μ` is identifiable from averaged squared distances iff the
@@ -366,6 +370,23 @@ affine space `I + 𝒩(z)` is not generic, and the complex solution set is large
 one (§5.5) — but it gives the right numbers where we can check them.  Between the second
 and the third row identifiability holds but the certificate is not linear: a gap between
 what the data determine and what the algorithm of §6 extracts.
+
+**Remark 5.1 (the gap is a MinRank problem) [the reduction P; the complexity statements K, from
+memory of the literature].**  Finding the states from `M` below the conic threshold is:
+*find the matrices of rank at most 3 in the affine space `I + 𝒩(z)` of symmetric `3K × 3K`
+matrices* — the MinRank problem with target rank 3.  Its dimension `dim 𝒩(z) = 9K(K+1)/2 −
+(2n − 3)` runs from about `4.5K² − 9K` at the (conjectured) identifiability threshold down to
+`K − 1` at the conic threshold, where the problem is linear.  The linearisation of the
+kernel formulation (`P·[I; X]ᵀ = 0`, Kipnis–Shamir) has at least as many equations as
+monomials exactly when `dim 𝒩(z) ≤ K − 1`: the conic threshold is where this cheapest
+algebraic method starts to work.  MinRank is NP-hard in general (Buss–Frandsen–Shallit
+1999); for zero-dimensional instances of fixed target rank `r` on `N × N` matrices the known
+bounds on the degree of regularity of the minors system are of order `r(N − r)`
+(Faugère–Safey El Din–Spaenlehauer), here `≈ 9K`, i.e. a cost `K^{O(K)}`: polynomial for a
+fixed number of states — this is how Theorem I was proved for two — and, by the known
+general-purpose algorithms, not polynomial in `K`.  Whether the structure of `𝒩(z)` (it
+contains `𝒯`; the solutions are orthogonal projectors) allows better is a question for the
+Complexity division (GEOMETRY-REQ-0004, C2).
 
 ### 5.3 Local identifiability within `K`-state ensembles
 
@@ -790,8 +811,8 @@ universally rigid.  What is missing for a theorem is a certified global maximum 
   instance with a specific, non-generic prior and a mixture.  **[K, related]**
 
 *Relation to the Ensemble Identifiability Division's first checkpoint* (branch
-`research/ensemble-identifiability`, commit `a570520`, 2026-11-26 16:48 UTC — forty minutes
-before our first commit; read by us at 18:30 UTC, after our second).
+`research/ensemble-identifiability`, commit `a570520`, 2026-11-26 16:48 UTC — six minutes
+before our first commit (16:54 UTC); read by us at 17:19 UTC, after our second).
 * Its Theorem E1 (an ensemble is determined by means of observables iff its support is the
   ground-state set of an energy in their span, with affinely independent features) is the
   general principle of which our Corollary 4.2 and Theorem G(a) are instances; our
@@ -823,8 +844,32 @@ nothing else.  Hence under (CC) the shape distribution is a function of the seco
 whereas without statewise constraints no mixture with `K ≥ 2` is (Proposition 3.1).  In the
 framework of Bandeira, Blum-Smith, Kileel, Perry, Weed and Wein — the number of samples needed
 at noise level `σ` grows like `σ^{2q}` with `q` the smallest moment order that determines the
-orbit — the constraints lower the order from `q ≥ 3` to `q = 2`.  We did not re-derive the
-sample-complexity theorem; the statement is conditional on it.
+orbit — the constraints lower the order from `q = 3` (Proposition 9.2) to `q = 2`.  We did
+not re-derive the sample-complexity theorem; the statement is conditional on it.
+
+**Proposition 9.2 (without constraints the third moment is needed, and suffices) [P].**  In
+the same model with proper rotations and **no** statewise constraints, let `μ = Σ w_k δ_{X_k}`
+be a mixture of labelled configurations (anchored at a common origin) whose stacked points
+span `ℝ^{3K}`.  The second moment determines `M(μ)` only (Proposition 3.1: a
+`9K(K−1)/2`-dimensional family of mixtures).  The third moment,
+`E[y_i ⊗ y_j ⊗ y_l] = (τ_ijl/6)·ε` with `τ_ijl = Σ_k w_k det(x_i^{(k)}, x_j^{(k)}, x_l^{(k)})` and `ε`
+the alternating tensor, determines in addition the alternating 3-form
+`T = Σ_k w_k^{-1/2} vol_k` on the stacked space (`vol_k` the volume form of block `k`), and
+`{v : rank(i_v T) ≤ 2}` is the union of the coordinate blocks.  Hence second and third
+moments together determine `μ` up to a proper rotation of each state.  (For rotations *and*
+reflections the third moment vanishes and order four is needed.)
+
+*Proof.*  The only `SO(3)`-invariant 3-tensors are multiples of `ε`, and contracting with `ε`
+gives the determinant; Gaussian noise contributes terms with a factor `E[g x] = 0`.
+`det(x_i^{(k)}, x_j^{(k)}, x_l^{(k)}) = w_k^{-3/2} vol_k(z_i, z_j, z_l)`, so `τ_ijl = T(z_i, z_j, z_l)`, and a
+3-form is determined by its values on a spanning set.  For `v = Σ_k v_k` with `v_k` in block
+`k`, `i_v T = Σ_k w_k^{-1/2} i_{v_k} vol_k` is a sum of 2-forms of rank 2 with supports in
+different blocks, so its rank is twice the number of non-zero `v_k`.  The blocks give the
+states, `T` restricted to a block gives `w_k^{-1/2}` and the orientation.  ∎
+
+`experiments/geometry/third_moment.py`: for `K = 2, 3` the linear system for `T` has full rank
+(20, 84) and the contraction ranks are `2` on block vectors, `4` on two-block vectors and
+`4` respectively `6` on generic vectors.
 
 ---
 
@@ -832,7 +877,7 @@ sample-complexity theorem; the statement is conditional on it.
 
 `proofs/Geometry/EnsembleRigidity.lean` (Lean 4.31, Mathlib v4.31.0; zero warnings; axioms
 `propext`, `Classical.choice`, `Quot.sound` only; imported by `proofs/AxiomAudit.lean`, which
-now walks 5 0xx declarations — the exact number is in `docs/collaboration/status/geometry.md`).
+now walks 5072 declarations).
 
 | declaration (namespace `MetricChain.Geometry`) | statement | used in |
 |---|---|---|
@@ -840,14 +885,14 @@ now walks 5 0xx declarations — the exact number is in `docs/collaboration/stat
 | `stress_energy_eq`, `mixture_energy_eq` | for symmetric `Ω` with zero row sums, `yᵀΩy = −½ Σ Ω_ij (y_i − y_j)²`; the `Ω`-energy of a finite mixture is linear in its averaged squared distances | Theorems F, G |
 | `stress_certificate` | `Ω ⪰ 0`, zero row sums, annihilating a reference mixture; a second finite mixture with the same averaged squared distances on the support of `Ω` has every coordinate of every state of positive weight in `ker Ω` | Theorem F (first half of the proof) |
 | `block_coeff_nonneg`, `block_rigidity` | a linear map into a space of dimension `≤ d` whose squared norm is `c₁‖u‖² + c₂‖u'‖²` on two orthogonal blocks of dimension `d ≥ 1` has `c₁ = 0` or `c₂ = 0` (and `c_k ≥ 0`) | Theorems B, F, G ("one block only") |
+| `mixture_state_of_conic` | under the conic condition (every symmetric bilinear form vanishing on the edge vectors is block-scalar) a linear map into dimension `≤ d` that preserves the edge lengths is a scaled isometry on one block and zero on the others | Theorem B, from Lemma 2.2 on |
 | `sqdist_midpoint_of_conic` | affine flexes: maps `A_±` preserving edge lengths with the midpoint identity | Theorem A (iii)⇒(ii), Theorem E(b) |
 | `globallyRigid_of_secondMomentRigid` | second-moment rigidity (finite mixtures) implies global rigidity on `F ∪ E₀` | Theorem E(b) |
 | `secondMomentRigid_of_universal` | universal rigidity of `(F ∪ E₀, x)` reduces `F`-second-moment rigidity to second-moment rigidity for complete averaged data | Theorem E(a) |
 | `fourAtom_virtual_value_witness`, `block_rigidity_nonvacuous` | non-vacuity | Example 3.3 |
 
 Not machine-checked: Lemma 2.2 (the linear isometry from equal Gram matrices; the measurable
-version), the conclusion of Theorem A (ii)⇒(i) and of Theorem B from `block_rigidity`
-(assembling the blocks), Theorem B′, everything about genericity and thresholds (Theorems C,
+version), the weights in Theorem B, Theorem B′, everything about genericity and thresholds (Theorems C,
 D, H: exact computations outside Lean), Theorem G.  `UniversallyRigid` in the Lean file
 quantifies over inner product spaces of one universe; `SameShape` is equality of all pairwise
 distances (for point configurations in Euclidean spaces: congruence).

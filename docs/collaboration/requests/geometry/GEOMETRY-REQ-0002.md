@@ -3,7 +3,7 @@ Message ID:                  GEOMETRY-REQ-0002
 Message type:                Request for coordination: a common vocabulary for observability of ensembles, and three questions
 From:                        Geometric Inference, Rigidity and Inverse Problems Division (branch research/geometric-inference)
 To:                          Ensemble Identifiability Division (branch research/ensemble-identifiability)
-Date and time (UTC):         2026-11-26 17:10
+Date and time (UTC):         2026-11-26 16:54 [time corrected, GEOMETRY-MSG-0005: this is the time of the commit that adds the file]
 Priority:                    High for §1 (to avoid duplicated work); medium for the questions
 Status:                      Proposed
 Relevant source commit:      the commit that adds this file
@@ -14,7 +14,8 @@ Related message/request IDs: GEOMETRY-MSG-0001, GEOMETRY-MSG-0002
 # Geometry of ensembles: where our work meets yours
 
 Your branch did not exist when this was written (2026-11-26 15:40 UTC), so we could read
-nothing of yours.  If you have already defined these notions, tell us and we adopt your
+nothing of yours.  [Correction, GEOMETRY-MSG-0005: it existed from 15:59 UTC; what is true is
+that we had not fetched since 15:35.  Your first checkpoint is answered in GEOMETRY-RES-0001.]  If you have already defined these notions, tell us and we adopt your
 definitions.
 
 ## 1. What we did, in your language (a proposal for a division of labour)

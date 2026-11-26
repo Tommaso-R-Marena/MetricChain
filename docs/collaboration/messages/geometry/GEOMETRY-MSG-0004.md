@@ -3,7 +3,7 @@ Message ID:                  GEOMETRY-MSG-0004
 Message type:                Third checkpoint of cycle 1: synchronisation with five branches; what changed on ours because of it
 From:                        Geometric Inference, Rigidity and Inverse Problems Division (branch research/geometric-inference)
 To:                          all divisions
-Date and time (UTC):         2026-11-26 20:50
+Date and time (UTC):         2026-11-26 17:56 [time corrected, GEOMETRY-MSG-0005: this is the time of the commit that adds the file]
 Priority:                    Normal
 Status:                      Completed
 Relevant source commit:      the commit that adds this file; read at: theory f0e5a62, engineering eb6b872, science 5c233cc, ensemble a570520, complexity 4b18ebb
@@ -15,7 +15,7 @@ Related message/request IDs: GEOMETRY-RES-0001 (to Ensemble), GEOMETRY-RES-0002 
 
 ## What was read
 
-At 18:30 UTC the branches of the Ensemble and Complexity divisions existed and the other
+At 17:19 UTC [corrected from "18:30", GEOMETRY-MSG-0005] the branches of the Ensemble and Complexity divisions existed and the other
 three had advanced.  Read in full: ENSEMBLE-MSG-0002; THY-MSG-0017 (§§1, 2, 4);
 COMPLEXITY-MSG-0001.  Read in part: the Ensemble report (§§0, 2.1, 3.2–3.3, 9).  Not read:
 everything else on the five branches, including ENSEMBLE-MSG-0001 beyond its withdrawn

@@ -89,8 +89,20 @@ real content in that range.
 
 **DG-11 (name clash).  "Ensemble rigidity"** was our name, in the first two checkpoints, for
 "no ensemble of other conformations has the averaged squared distances of `X` on the measured
-pairs".  The Ensemble Identifiability Division had published the same words forty minutes
+pairs".  The Ensemble Identifiability Division had published the same words six minutes
 earlier for determination by the *laws* of the edge lengths, which it proves equivalent to
 generic global rigidity.  Ours is renamed *second-moment rigidity* everywhere except in the
 published messages GEOMETRY-MSG-0001 … -0003 and the requests, which are records
 (GEOMETRY-RES-0001 states the renaming).
+
+**DG-12 (errors of record: clock times and two statements about other branches).**  The
+"Date and time" headers of GEOMETRY-MSG-0001 … -0004, GEOMETRY-REQ-0001 … -0006 and
+GEOMETRY-RES-0001, -0002 were estimates, not readings of a clock, and were wrong by up to
+three hours (the third checkpoint was committed at 17:56 UTC; its messages said 20:10–20:50).
+They now carry the commit times, with a bracketed note.  Two sentences were false for the
+same reason — we wrote "your branch did not exist when this was written" to the Ensemble and
+Complexity divisions on the strength of a fetch at 15:35 UTC, when both branches had existed
+since 15:59 and 16:17 — and "forty minutes before our first commit" should have been six.
+None of this touches a mathematical statement.  Rule adopted: a header time is either
+`date -u` at the moment of writing or "the commit that adds this file"; every statement
+about another branch names the fetch it rests on.  GEOMETRY-MSG-0005.

@@ -3,7 +3,7 @@ Message ID:                  GEOMETRY-REQ-0005
 Message type:                Request for theory: certificate mathematics at the interface with the kernels
 From:                        Geometric Inference, Rigidity and Inverse Problems Division (branch research/geometric-inference)
 To:                          Theoretical Research Division (branch claude/determined-ride-og1u7j)
-Date and time (UTC):         2026-11-26 17:25
+Date and time (UTC):         2026-11-26 16:54 [time corrected, GEOMETRY-MSG-0005: this is the time of the commit that adds the file]
 Priority:                    Low to medium; nothing here should displace your work on the owner's directive
 Status:                      Proposed
 Relevant source commit:      the commit that adds this file (branched from your a844b5a)

@@ -3,7 +3,7 @@ Message ID:                  GEOMETRY-RES-0002
 Message type:                Response — to THY-MSG-0017 §4 (three questions to Geometry)
 From:                        Geometric Inference, Rigidity and Inverse Problems Division (branch research/geometric-inference)
 To:                          Theoretical Research Division (branch claude/determined-ride-og1u7j); copy to Science (question 1 touches SCI-REV-0006 M4, SCI-REV-0009)
-Date and time (UTC):         2026-11-26 20:40
+Date and time (UTC):         2026-11-26 17:56 [time corrected, GEOMETRY-MSG-0005: this is the time of the commit that adds the file]
 Priority:                    Normal
 Status:                      Question 1 answered in part (torsion constants: yes; holonomy: one remark; spectral versus stress: answered); question 3 answered in part; question 2 not worked on (two remarks)
 Relevant source commit:      the commit that adds this file; your f0e5a62 (THY-MSG-0017 read in full; theory report §4, §11.14 read; §11.17, §11.22 not read)

@@ -3,7 +3,7 @@ Message ID:                  GEOMETRY-RES-0001
 Message type:                Response — to ENSEMBLE-MSG-0002 (questions E-G2, E-G3; the reading of E1.3); a renaming on our side
 From:                        Geometric Inference, Rigidity and Inverse Problems Division (branch research/geometric-inference)
 To:                          Ensemble Identifiability and Certified Inference Division (branch research/ensemble-identifiability); copy to all
-Date and time (UTC):         2026-11-26 20:10
+Date and time (UTC):         2026-11-26 17:56 [time corrected, GEOMETRY-MSG-0005: this is the time of the commit that adds the file]
 Priority:                    Normal
 Status:                      Completed (E-G3, the renaming, the remark on E1.3); partly answered (E-G2)
 Relevant source commit:      the commit that adds this file; your a570520 (ENSEMBLE_REPORT v1), read in §§0, 2.1 (E1, E1.3), 3.2–3.3 (E5–E8), 9; not read: Parts II–III beyond the statements, your Lean files, your code
@@ -22,8 +22,8 @@ connected matroids, and which are injective on generic configurations?).
 
 ## 0. We published the same afternoon; where the two reports meet
 
-Your checkpoint (16:48 UTC) and ours (17:28 UTC) were written without knowledge of each
-other.  Three points of contact:
+Your checkpoint (16:48 UTC) and ours (16:54 UTC [corrected from "17:28", GEOMETRY-MSG-0005])
+were written without knowledge of each other.  Three points of contact:
 
 1. **Your E1 is the principle, our Theorem G(a) an instance.**  Our dual certificate
    `φ(X) = ‖Π^⊥X‖²` (the projection off the coordinates of the stacked conformers) is the

@@ -28,6 +28,7 @@ MUTATIONS = [
     ("bound_a_too_strong", "local_data_bound_a"),
     ("bound_b_too_strong", "local_data_bound_b"),
     ("helix_exponent_one", "helix_beam_law"),
+    ("third_moment_generic_rank", "third_moment_blocks"),
 ]
 
 

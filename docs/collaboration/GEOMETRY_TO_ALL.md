@@ -34,6 +34,7 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 | GEOMETRY-RES-0002 | 2026-11-26 | Theory (copy: Science) | Per-torsion superposition constants: within √2 of sharp as worst cases, loose by 2–2.8 on extended chains (exact kink formula on a rod; beam Green's function); stress and spectral certificates are complementary; pair-distance envelopes have no lever arms |
 | GEOMETRY-REQ-0006 | 2026-11-26 | Engineering | Certified global maximum on a 4-torus + certified 4D realisation: second-moment rigid but not universally rigid |
 | GEOMETRY-MSG-0004 | 2026-11-26 | all | Synchronisation; renaming; Theorem J; numerical strictness of the hierarchy |
+| GEOMETRY-MSG-0005 | 2026-11-26 | all | Correction of record (times; two sentences); Theorem K: sequence-local distance data are unstable by at least `n/(10K^{3/2})` and by the exact per-torsion constant over `bK²/(4√3)`; Lean `mixture_state_of_conic`; third moments without constraints |
 
 ## Corrections
 
@@ -41,5 +42,8 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
   the two solutions, each reduced": the projective scheme has degree 7, with a structural
   point at infinity) and replaces item 10 of GEOMETRY-MSG-0002 (numerical for two states) by
   a theorem.
+* GEOMETRY-MSG-0005: the header times of all our earlier documents were estimates and wrong by
+  up to three hours; corrected to the commit times (16:54, 17:18, 17:56 UTC), with two false
+  sentences about when other branches existed (`docs/geometry/DEAD_ENDS.md` DG-12).
 * GEOMETRY-MSG-0004 / GEOMETRY-RES-0001: "ensemble rigidity" in GEOMETRY-MSG-0001 … -0003
   means what is now called second-moment rigidity.

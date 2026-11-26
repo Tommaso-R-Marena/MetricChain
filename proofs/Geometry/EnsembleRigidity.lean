@@ -25,6 +25,10 @@ ensembles, genericity, or the thresholds (which are exact computations, see `exp
   dimension at most `d` has `‖A (u + u')‖² = c k ‖u‖² + c l ‖u'‖²` on two orthogonal blocks of
   dimension `d ≥ 1`, then `c k = 0` or `c l = 0`; and `c k ≥ 0` (`block_coeff_nonneg`).  Hence a
   positive semidefinite block-scalar form of rank at most `d` is supported on a single block.
+* **Theorem B, algebraic core end to end** (`mixture_state_of_conic`): under the conic condition —
+  every symmetric bilinear form vanishing on the edge vectors is block-scalar — a linear map into
+  a space of dimension at most `d` that preserves the lengths of the edge vectors is a scaled
+  isometry on one block and vanishes on the others.
 * **Affine flexes give mixtures** (`sqdist_midpoint_of_conic`, Theorem A (iii)⇒(ii)): if a symmetric
   matrix `S` vanishes on a set of edge vectors and `1 ± S` are positive semidefinite, there are
   linear maps `A₊, A₋` preserving the lengths of the edge vectors with
@@ -246,6 +250,51 @@ theorem block_rigidity [FiniteDimensional ℝ W] (U₁ U₂ : Submodule ℝ V) (
   have hdisj : U₁ ⊓ U₂ = ⊥ := horth.disjoint.eq_bot
   rw [hdisj, finrank_bot, add_zero, h₁, h₂] at hsum
   omega
+
+/-- **Theorem B, algebraic core end to end.**  Let `V` carry pairwise orthogonal blocks `U k` of
+dimension `d ≥ 1` and let `Edges ⊆ V` satisfy the *conic condition*: every symmetric bilinear form
+that vanishes on the edge vectors is block-scalar (`B u v = s k ⟪u, v⟫` on `U k × U k`, zero
+between different blocks).  If a linear map `A` into a space of dimension at most `d` preserves
+the lengths of the edge vectors (a competing state that is a linear image of the stacked
+configuration and satisfies the statewise constraints), then `‖A u‖² = c k ‖u‖²` on every block
+with `c k ≥ 0`, and at most one `c k` is non-zero: the state lives on a single block. -/
+theorem mixture_state_of_conic [FiniteDimensional ℝ W] {K : Type*} [DecidableEq K]
+    (U : K → Submodule ℝ V)
+    (d : ℕ) (hd : 0 < d) (hdim : ∀ k, Module.finrank ℝ (U k) = d)
+    (horth : ∀ k l, k ≠ l → U k ⟂ U l) (hW : Module.finrank ℝ W ≤ d) (Edges : Set V)
+    (hCC : ∀ B : V →ₗ[ℝ] V →ₗ[ℝ] ℝ, (∀ u v, B u v = B v u) → (∀ e ∈ Edges, B e e = 0) →
+      ∃ s : K → ℝ, ∀ k l, ∀ u ∈ U k, ∀ v ∈ U l,
+        B u v = if k = l then s k * @inner ℝ V _ u v else 0)
+    (A : V →ₗ[ℝ] W) (hA : ∀ e ∈ Edges, ‖A e‖ = ‖e‖) :
+    ∃ c : K → ℝ, (∀ k, ∀ u ∈ U k, ‖A u‖ ^ 2 = c k * ‖u‖ ^ 2) ∧ (∀ k, 0 ≤ c k) ∧
+      ∀ k l, k ≠ l → c k = 0 ∨ c l = 0 := by
+  -- the symmetric bilinear form `⟪A u, A v⟫ - ⟪u, v⟫`
+  let B : V →ₗ[ℝ] V →ₗ[ℝ] ℝ := (innerₗ W).compl₁₂ A A - innerₗ V
+  have hB : ∀ u v, B u v = @inner ℝ W _ (A u) (A v) - @inner ℝ V _ u v := fun u v => by
+    simp [B, LinearMap.sub_apply, LinearMap.compl₁₂_apply, innerₗ_apply_apply]
+  have hsymm : ∀ u v, B u v = B v u := fun u v => by
+    rw [hB, hB, real_inner_comm (A u), real_inner_comm u]
+  have hedge : ∀ e ∈ Edges, B e e = 0 := fun e he => by
+    rw [hB, real_inner_self_eq_norm_sq, real_inner_self_eq_norm_sq, hA e he, sub_self]
+  obtain ⟨s, hs⟩ := hCC B hsymm hedge
+  have hnorm : ∀ k, ∀ u ∈ U k, ‖A u‖ ^ 2 = (1 + s k) * ‖u‖ ^ 2 := by
+    intro k u hu
+    have h := hs k k u hu u hu
+    rw [if_pos rfl, hB, real_inner_self_eq_norm_sq, real_inner_self_eq_norm_sq] at h
+    linarith
+  have hcross : ∀ k l, k ≠ l → ∀ u ∈ U k, ∀ u' ∈ U l, @inner ℝ W _ (A u) (A u') = 0 := by
+    intro k l hkl u hu u' hu'
+    have h := hs k l u hu u' hu'
+    rw [if_neg hkl, hB] at h
+    have horth' : @inner ℝ V _ u u' = 0 :=
+      Submodule.isOrtho_iff_inner_eq.mp (horth k l hkl) u hu u' hu'
+    linarith
+  refine ⟨fun k => 1 + s k, hnorm, fun k => ?_, fun k l hkl => ?_⟩
+  · exact block_coeff_nonneg (U k) (hdim k ▸ hd) A (1 + s k) (hnorm k)
+  · refine block_rigidity (U k) (U l) (horth k l hkl) d hd (hdim k) (hdim l) hW A (1 + s k) (1 + s l) ?_
+    intro u hu u' hu'
+    rw [map_add, @norm_add_sq_real, hnorm k u hu, hnorm l u' hu', hcross k l hkl u hu u' hu']
+    ring
 
 end Block
 

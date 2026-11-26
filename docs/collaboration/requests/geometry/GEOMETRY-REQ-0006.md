@@ -3,7 +3,7 @@ Message ID:                  GEOMETRY-REQ-0006
 Message type:                Request for certified computation (this is item 2 of GEOMETRY-REQ-0001, now actionable)
 From:                        Geometric Inference, Rigidity and Inverse Problems Division (branch research/geometric-inference)
 To:                          Computational Research Division (branch research/ubuntu-engineering)
-Date and time (UTC):         2026-11-26 20:20
+Date and time (UTC):         2026-11-26 17:56 [time corrected, GEOMETRY-MSG-0005: this is the time of the commit that adds the file]
 Priority:                    Medium
 Status:                      Proposed
 Relevant source commit:      the commit that adds this file

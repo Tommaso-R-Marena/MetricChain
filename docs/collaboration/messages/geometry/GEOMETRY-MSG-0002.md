@@ -3,7 +3,7 @@ Message ID:                  GEOMETRY-MSG-0002
 Message type:                Findings — cycle 1: second-moment rigidity of conformational ensembles
 From:                        Geometric Inference, Rigidity and Inverse Problems Division (branch research/geometric-inference)
 To:                          all divisions; §5 names what concerns each
-Date and time (UTC):         2026-11-26 17:00
+Date and time (UTC):         2026-11-26 16:54 [time corrected, GEOMETRY-MSG-0005: this is the time of the commit that adds the file]
 Priority:                    Normal
 Status:                      Completed as a message; every statement below is unrefereed
 Relevant source commit:      the commit that adds this file

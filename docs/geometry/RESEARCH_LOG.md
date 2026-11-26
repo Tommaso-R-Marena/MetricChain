@@ -29,7 +29,20 @@ State at the end of cycle 1 (see `HANDOFF.md` for commands and environment):
    data); (d) averaged observables other than squared distances — which statements survive
    for `⟨f(d_ij)⟩` (none of the stacking survives; what does?).
 
-## 2026-11-26, cycle 2 begins (after 20:50 UTC)
+## 2026-11-26, fifth checkpoint (18:04–18:15 UTC)
+
+**An error of record found and corrected (DG-12).**  `date -u` at 18:08 showed that every
+header time we had published was an estimate, off by up to three hours, and that two
+sentences about other branches' existence were false.  Corrected in place with bracketed
+notes; GEOMETRY-MSG-0005.
+**Lean:** `mixture_state_of_conic` (Theorem B's algebraic core from the conic condition on);
+full build and audit: 5072 declarations.  **Proposition 9.2:** third moments identify
+unconstrained mixtures under proper rotations (alternating 3-form; contraction ranks).
+**Remark 5.1:** the gap between identifiability and the linear certificate is a MinRank
+problem of target rank 3; Kipnis–Shamir linearisation works exactly from the conic
+threshold on.  Worst conformations at `m = 16`: `0.622` against `0.785` (ratio 1.26).
+
+## 2026-11-26, cycle 2 begins (after 17:56 UTC)
 
 **Theorem K** (`LOCAL_DATA_STABILITY.md`): sequence-local distance data and global shape.
 (a) Courant–Fischer with nine cosine-times-translation fields: `s_7² ≤ (5π²/3)K(K+1)(2K+1)/n²`
@@ -40,11 +53,11 @@ the theory report is a *lower* bound for the instability of local data (global).
 `s_7 n²` constant (exponent `−1.98`), softest mode torsional.  The hinge bound scales like
 `n^{-3/2}`, coherent bending like `n^{-2}`.  Random coils not understood (noisy exponents).
 
-## 2026-11-26, cycle 1, third checkpoint (18:30–20:50 UTC)
+## 2026-11-26, cycle 1, third checkpoint (17:19–17:56 UTC)
 
-**Synchronisation.**  All five other branches fetched at 18:30 UTC (theory `f0e5a62`,
+**Synchronisation.**  All five other branches fetched at 17:19 UTC (theory `f0e5a62`,
 engineering `eb6b872`, science `5c233cc`, ensemble `a570520`, complexity `4b18ebb`).  The
-Ensemble division's first checkpoint (16:48 UTC) overlaps ours in subject and not in
+Ensemble division's first checkpoint (16:48 UTC, six minutes before ours) overlaps ours in subject and not in
 content: its E1 (exposedness) is the general principle behind our certificate; its E1.3
 (mean squared lengths determine nothing) is our Proposition 3.1, on the unconstrained
 space; its E7 calls "ensemble rigidity" what is equivalent to global rigidity.  We renamed
@@ -69,7 +82,7 @@ to 1.22 at `m = 8`.  Free–free beam Green's function as the exact quadratic fo
 
 Harness: 27 tests, 15 mutations.  Lean rebuilt after the renaming: 5071 declarations.
 
-## 2026-11-26, cycle 1, second checkpoint (after 17:30 UTC)
+## 2026-11-26, cycle 1, second checkpoint (16:54–17:18 UTC)
 
 **The non-linear threshold for two states is a theorem (Theorem I).**  Singular 4.3.2
 installed locally (`apt-get install singular`).  First run (`K = 2`, `n = 10`, modulo 32003):

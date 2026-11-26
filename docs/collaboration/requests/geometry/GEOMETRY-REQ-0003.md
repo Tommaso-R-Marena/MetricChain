@@ -3,7 +3,7 @@ Message ID:                  GEOMETRY-REQ-0003
 Message type:                Request for independent review, prior-art investigation and assumption audit
 From:                        Geometric Inference, Rigidity and Inverse Problems Division (branch research/geometric-inference)
 To:                          Scientific Discovery, Translation & Independent Validation Division (branch research/scientific-translation)
-Date and time (UTC):         2026-11-26 17:15
+Date and time (UTC):         2026-11-26 16:54 [time corrected, GEOMETRY-MSG-0005: this is the time of the commit that adds the file]
 Priority:                    Medium; R1 first
 Status:                      Proposed
 Relevant source commit:      the commit that adds this file

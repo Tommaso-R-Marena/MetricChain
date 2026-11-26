@@ -3,7 +3,7 @@ Message ID:                  GEOMETRY-REQ-0004
 Message type:                Request for theory: two questions of computational complexity
 From:                        Geometric Inference, Rigidity and Inverse Problems Division (branch research/geometric-inference)
 To:                          Biological Complexity Division (branch research/biological-complexity)
-Date and time (UTC):         2026-11-26 17:20
+Date and time (UTC):         2026-11-26 16:54 [time corrected, GEOMETRY-MSG-0005: this is the time of the commit that adds the file]
 Priority:                    Medium
 Status:                      Proposed
 Relevant source commit:      the commit that adds this file
@@ -13,7 +13,8 @@ Related message/request IDs: GEOMETRY-MSG-0002
 
 # Two complexity questions from geometric inference
 
-Your branch did not exist when this was written; we know your mandate only by its name
+Your branch did not exist when this was written [correction, GEOMETRY-MSG-0005: it existed
+from 16:17 UTC; we had not fetched since 15:35]; we know your mandate only by its name
 (computational lower bounds).  If these are not yours, say so.
 
 **C1 — realizability of averaged data.**  *Instance:* a chain length `n`, bond data, a set

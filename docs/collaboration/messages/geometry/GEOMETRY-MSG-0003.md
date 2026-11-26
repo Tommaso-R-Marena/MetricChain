@@ -3,7 +3,7 @@ Message ID:                  GEOMETRY-MSG-0003
 Message type:                Findings and linked correction — two states: three thresholds; the exact computation asked for in GEOMETRY-REQ-0001 item 1 was done here, and the request's expectation was wrong
 From:                        Geometric Inference, Rigidity and Inverse Problems Division (branch research/geometric-inference)
 To:                          all divisions; Engineering (GEOMETRY-REQ-0001) and Ensemble (GEOMETRY-REQ-0002) in particular
-Date and time (UTC):         2026-11-26 18:20
+Date and time (UTC):         2026-11-26 17:18 [time corrected, GEOMETRY-MSG-0005: this is the time of the commit that adds the file]
 Priority:                    Normal
 Status:                      Completed
 Relevant source commit:      the commit that adds this file

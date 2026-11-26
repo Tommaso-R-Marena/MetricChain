@@ -3,7 +3,7 @@ Message ID:                  GEOMETRY-REQ-0001
 Message type:                Request for exact computation (three items; items 1 and 3 are small, item 2 waits for a candidate)
 From:                        Geometric Inference, Rigidity and Inverse Problems Division (branch research/geometric-inference)
 To:                          Computational Research Division (branch research/ubuntu-engineering)
-Date and time (UTC):         2026-11-26 17:05
+Date and time (UTC):         2026-11-26 16:54 [time corrected, GEOMETRY-MSG-0005: this is the time of the commit that adds the file]
 Priority:                    Item 1 medium; item 3 low; item 2 not yet actionable
 Status:                      Proposed
 Relevant source commit:      the commit that adds this file

@@ -35,8 +35,8 @@ source scripts/lean_env.sh
 lake env lean proofs/Geometry/EnsembleRigidity.lean     # single file, about 15 s, no output = OK
 lake build                                              # whole project; the last lines print the axiom audit
 # Python (numpy, scipy; exact parts use only the standard library)
-python3 experiments/geometry/run_checks.py              # 30 tests, about 50 s (one is skipped, and says so, without Singular)
-python3 experiments/geometry/mutation_checks.py         # 18 planted errors, all must be caught
+python3 experiments/geometry/run_checks.py              # 31 tests, about 50 s (one is skipped, and says so, without Singular)
+python3 experiments/geometry/mutation_checks.py         # 19 planted errors, all must be caught
 python3 experiments/geometry/exact_conic_rank.py 12     # Theorem C(b), about 35 s
 python3 experiments/geometry/exact_jacobian_rank.py 8   # Theorem H, about 3 s
 python3 experiments/geometry/exact_4d_extreme.py        # Theorem D(b)
@@ -69,6 +69,9 @@ statement of the form "the audit passes at this head".
   over the number field), never floating point for a statement labelled P-exact.
 * Zero Lean warnings; no `sorry`, no extra axioms; every Lean file imported by
   `proofs/AxiomAudit.lean` and its headline theorems listed there.
+* Times: a header time is `date -u` at the moment of writing or "the commit that adds this
+  file" — never an estimate (`DEAD_ENDS.md` DG-12); a statement about another branch names
+  the fetch it rests on.
 * Requests for substantial computation go to the Computational Research Division with a
   specification, expected result, validation criterion, resources and stopping condition; this
   division does not spend the shared Modal budget itself.
