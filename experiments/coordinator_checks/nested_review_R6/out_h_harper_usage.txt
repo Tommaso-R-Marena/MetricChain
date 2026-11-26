@@ -1,0 +1,37 @@
+How often harness tests XVI.3, XVI.4 exercise the Harper step of Algorithm 2L+ (seed 20261124 as in the harness)
+XVI.3, quick mode (60 trials): test result True   (2 s)
+  XVI.3 quick: 9 runs of the outer loop, 9 completed
+    populated passes 413 (unpopulated level-ending passes 20)
+    Harper term active (strict maximum) at 51 populated passes, in 7 of 9 runs
+    runs that close at a populated pass: 2; of these, the Harper term decides the closure (fails with the Markov-only bound of that pass): 1
+    populated passes with r <= r_dagger at which [P] holds through Gamma'' only: 1, in 1 of 9 runs
+    the same runs without the Harper term: trajectory or bracket changes in 5 of 9 runs; a claim of Theorem 11.56 is violated in 1 of 9
+      violated claims: {'a level was left although its closing radius is at most r_dagger': 1}
+    per (n_o, u): runs / runs with the Harper term active / closure decided by it / mutant detected: (6, 0.5): 3/3/1/1; (6, 1): 1/1/0/0; (6, 2): 2/2/0/0; (24, 1): 2/0/0/0; (40, 1): 1/1/0/0
+XVI.3, full mode (400 trials): test result True   (7 s)
+  XVI.3 full: 46 runs of the outer loop, 46 completed
+    populated passes 1357 (unpopulated level-ending passes 52)
+    Harper term active (strict maximum) at 150 populated passes, in 34 of 46 runs
+    runs that close at a populated pass: 12; of these, the Harper term decides the closure (fails with the Markov-only bound of that pass): 2
+    populated passes with r <= r_dagger at which [P] holds through Gamma'' only: 6, in 6 of 46 runs
+    the same runs without the Harper term: trajectory or bracket changes in 22 of 46 runs; a claim of Theorem 11.56 is violated in 3 of 46
+      violated claims: {'a level was left although its closing radius is at most r_dagger': 3}
+    per (n_o, u): runs / runs with the Harper term active / closure decided by it / mutant detected: (6, 0.5): 14/11/1/2; (6, 1): 13/10/1/1; (6, 2): 13/12/0/0; (20, 1): 1/0/0/0; (24, 1): 2/0/0/0; (28, 1): 1/0/0/0; (40, 1): 1/1/0/0; (40, 2): 1/0/0/0
+XVI.4, quick mode (60 trials): test result True   (24 s)
+  XVI.4 quick: 160 runs of the outer loop, 79 completed
+    populated passes 1978 (unpopulated level-ending passes 122)
+    Harper term active (strict maximum) at 327 populated passes, in 57 of 79 runs
+    runs that close at a populated pass: 16; of these, the Harper term decides the closure (fails with the Markov-only bound of that pass): 1
+    populated passes with r <= r_dagger at which [P] holds through Gamma'' only: 8, in 8 of 79 runs
+    the same runs without the Harper term: trajectory or bracket changes in 24 of 79 runs; a claim of Theorem 11.56 is violated in 5 of 79
+      violated claims: {'a level was left although its closing radius is at most r_dagger': 5}
+    per (n_o, u): runs / runs with the Harper term active / closure decided by it / mutant detected: (20, 1): 20/16/0/0; (20, 2): 3/0/0/0; (24, 0.5): 40/27/1/5; (24, 1): 16/14/0/0
+XVI.4, full mode (400 trials): test result True   (40 s)
+  XVI.4 full: 280 runs of the outer loop, 129 completed
+    populated passes 3045 (unpopulated level-ending passes 162)
+    Harper term active (strict maximum) at 512 populated passes, in 96 of 129 runs
+    runs that close at a populated pass: 29; of these, the Harper term decides the closure (fails with the Markov-only bound of that pass): 1
+    populated passes with r <= r_dagger at which [P] holds through Gamma'' only: 13, in 13 of 129 runs
+    the same runs without the Harper term: trajectory or bracket changes in 50 of 129 runs; a claim of Theorem 11.56 is violated in 9 of 129
+      violated claims: {'a level was left although its closing radius is at most r_dagger': 9}
+    per (n_o, u): runs / runs with the Harper term active / closure decided by it / mutant detected: (20, 0.5): 40/30/0/4; (20, 1): 20/16/0/0; (20, 2): 2/1/0/0; (24, 0.5): 40/27/1/5; (24, 1): 16/14/0/0; (28, 1): 11/8/0/0

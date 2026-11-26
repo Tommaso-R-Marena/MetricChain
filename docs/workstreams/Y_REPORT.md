@@ -6,6 +6,52 @@
 > that the verification does not depend on a session's scratch directory.  Its brief is
 > `docs/workstreams/Y_brief.md`.  Until it is verified, cite nothing from it.
 
+> **Errata after two independent reviews (coordinator, eighteenth checkpoint, 2026-11-26).**  The
+> report has been refereed by R11 (`docs/reviews/R11_referee_report.md`, replication in
+> `experiments/reviews/R11/`) and reviewed and replicated by the Scientific Discovery Division
+> (SCI-REV-0010; its report `docs/science/workstreams/R10_REPORT.md` on the branch
+> `research/scientific-translation`).  Both re-derived every statement labelled *[proved]* and
+> found none false; both reproduced the numbers.  **The text below is unchanged; read it with
+> these corrections, and cite the theory report, §11.32, not this file.**
+> (e1) **§0.2, first line, "Yes — upwards": not the answer to the question.**  It holds at
+> `u = 1`.  By Proposition F of this report with blocks of three sites the capacity exponent `a`
+> is *below* the cube's at `u = 3, 4, 6` (`p = 0.3, 0.2, 0.1`), at `u = 2.5` (`p = 0.2, 0.1`) and at
+> `u = 2` (`p = 0.1`), and `h` at `u = 4, 6` (`p = 0.2, 0.1`); only the threshold rises at every
+> slope (SCI-REV-0010, finding M1; re-computed by the coordinator with `ylib.py`).  The last
+> sentence of the slope paragraph of §6.5 ("not decided") is superseded accordingly.
+> (e2) **What the brackets are brackets of** (R11, M1).  Lower ends of `h`, `E`: unconditional
+> lower bounds for every algorithm at every `n` and every accuracy.  Upper ends: bounds for the
+> game-function numbers `h_∞`, `a_∞`, `E_∞`; as bounds on costs they are conditional on Theorems
+> 11.95, 11.98(d), 11.101(b) for super-sites, hold for extensive accuracies only and in the
+> iterated limit; at bounded accuracy no upper bound on a cost is proved.  The `a`-column is
+> conditional on both sides (R11, m17).
+> (e3) **The contrast with §11.25** (R11, M2): Corollary 11.91 covers the hinted exponent of
+> symmetric instances and fixed samples, not adaptive algorithms without a hint.
+> (e4) **Small slopes** (§0.2, §6.5): "multiplied by `(1−p)/p`" is a theorem at second order for
+> finite chains — the largest variance of a Lipschitz function, which for an associated law is
+> that of the magnetisation (SCI-REV-0010, R10.1, R10.2) — and "the susceptibility" is right
+> for this chain only; for `a` the report had an upper bound only (R11, m14).
+> (e5) **Numbers.**  The four headline lower ends of `h` depend in the fifth decimal on an
+> unstated iteration cap (R11, m1: any `M_L` is valid; best found `0.034040, 0.040143, 0.044622,
+> 0.044513`).  At `p = 0.1` the upper ends were not optimised: `h ≤ 0.0628`, `a ≤ 0.1730` (R11, m2;
+> SCI-REV-0010, m6).  `E_∞ = E_F` for `p ≥ 0.14` at `u = 1` without the margins `1–2·10⁻⁴` of §5.4(c)
+> (an artefact of the end cells), and `E_∞ ∈ [0.401719, 0.403619]` at `p = 0.1` (R11, m4;
+> SCI-REV-0010, m7, m8).  §6.3: the "restricted" value `0.04435` is the open end of a bracket
+> that closes at `0.044357`.  §7.1 compares an upper with a lower bound; the exact `F*_5` over all
+> 395 094 vertices is `0.1965988` (SCI-REV-0010, m9).  "Nothing is decided for `p ≤ 0.05`":
+> `h ≥ 0.0375` at `p = 0.05` and `≥ 0.0300` at `p = 0.02` are above the cube (its m10).
+> (e6) **Sentences.**  §7.2, "for short chains the optimal labels are the two uniform fields":
+> false at `p = 0.4` (four labels; R11, m11; SCI-REV-0010, m1); the support sizes of §6.4 are
+> `4, 8, 18` (R11, m12).  "Domains of about `2K/u` sites": 3 to 5 sites at `u = 1` (R11, m10).
+> §8.3: the example shows that the quantile *levels* are not Lipschitz; that the truncated
+> residual leaves the class is shown by the example of SCI-REV-0010, m2 (theory report,
+> Proposition 11.117(e)).  Lemma A uses Theorem 11.27(a) as well as (b); "the threshold of the
+> `n`-chain is exactly `E_n`" needs three more lines (R11, m6); Proposition D presupposes a
+> stationary chain and, where `u < 2κ₀`, starts at `L = 2` (R11, m7); Theorem E(a) holds with
+> `C = 2(u + K)` for every `p` (R11, m5); `E_n ≥ ln Z_n(h)/Z_n(0)` is the every-`n` statement and
+> `E_∞ ≥ E_F` its limit (R11, m9); Theorems 11.99 and 11.101 have since been reviewed
+> (SCI-REV-0005), so "unrefereed" stands for 11.95 and 11.98(d) only (R11, m15).
+
 # Workstream Y — known parts with interactions along the chain (Markov chains): reduction to product landscapes of blocks, a regularised formula, and what a nearest-neighbour interaction does to the exponents
 
 Independent workstream of the MetricChain theory programme; synthetic models only.  Everything here was written in

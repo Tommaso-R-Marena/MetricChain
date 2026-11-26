@@ -1,0 +1,88 @@
+Calls of numpy's Generator.binomial with a count >= 1e14 in the published run of sim_grouped.py (first-version sampler)
+suite 'main': 1440 runs (1325 completed), 93402 binomial calls with n >= 1e14 in 328 runs
+    regime A  :      0 calls in    0 runs (0 of them completed)
+    regime B  :      0 calls in    0 runs (0 of them completed)
+    regime C  :      0 calls in    0 runs (0 of them completed)
+    regime D  :  54984 calls in  289 runs (174 of them completed)
+    regime inv:      0 calls in    0 runs (0 of them completed)
+    regime ok :  38418 calls in  328 runs (213 of them completed)
+    per cell (u, n_o): runs, completed, largest block of a completed run, completed runs with a block >= 1e15, runs with a call in regime A / A or B / A, B or C
+      u = 0.5, n_o = 300: 160 160   4.01e+12     0     0 /   0 /   0
+      u = 0.5, n_o = 400: 160 160   6.22e+14     0     0 /   0 /   0
+      u = 0.5, n_o = 600: 160 160   1.40e+18    54     0 /   0 /   0
+      u = 1.0, n_o = 100: 160 160   5.27e+14     0     0 /   0 /   0
+      u = 1.0, n_o = 150: 160 154   2.23e+18    52     0 /   0 /   0
+      u = 1.0, n_o = 200: 160 112   2.27e+18     7     0 /   0 /   0
+      u = 2.0, n_o =  36: 160 160   6.38e+13     0     0 /   0 /   0
+      u = 2.0, n_o =  48: 160 160   2.69e+17    54     0 /   0 /   0
+      u = 2.0, n_o =  60: 160  99   5.47e+17     7     0 /   0 /   0
+    runs of the main suite with at least one call in regime A, B or C: 0; of these completed: 0
+    the calls of regime A with the smallest means (n, p, n p, run): 
+suite 'noharper': 216 runs (191 completed), 19112 binomial calls with n >= 1e14 in 59 runs
+    regime A  :      0 calls in    0 runs (0 of them completed)
+    regime B  :      2 calls in    2 runs (2 of them completed)
+    regime C  :     29 calls in    9 runs (9 of them completed)
+    regime D  :  11226 calls in   51 runs (26 of them completed)
+    regime inv:      0 calls in    0 runs (0 of them completed)
+    regime ok :   7855 calls in   59 runs (34 of them completed)
+    per cell (u, n_o): runs, completed, largest block of a completed run, completed runs with a block >= 1e15, runs with a call in regime A / A or B / A, B or C
+      u = 0.5, n_o = 300:  24  24   5.10e+14     0     0 /   0 /   0
+      u = 0.5, n_o = 400:  24  24   4.22e+16     5     0 /   0 /   5
+      u = 0.5, n_o = 600:  24  18   2.22e+18     3     0 /   0 /   0
+      u = 1.0, n_o = 100:  24  24   1.01e+16     4     0 /   2 /   4
+      u = 1.0, n_o = 150:  24  20   2.12e+18     2     0 /   0 /   0
+      u = 1.0, n_o = 200:  24  16   1.69e+16     1     0 /   0 /   0
+      u = 2.0, n_o =  36:  24  24   6.35e+13     0     0 /   0 /   0
+      u = 2.0, n_o =  48:  24  24   2.58e+17    10     0 /   0 /   0
+      u = 2.0, n_o =  60:  24  17   5.18e+17     1     0 /   0 /   0
+suite 'maxform': 216 runs (200 completed), 13356 binomial calls with n >= 1e14 in 46 runs
+    regime A  :      0 calls in    0 runs (0 of them completed)
+    regime B  :      0 calls in    0 runs (0 of them completed)
+    regime C  :      0 calls in    0 runs (0 of them completed)
+    regime D  :   7529 calls in   42 runs (26 of them completed)
+    regime inv:      0 calls in    0 runs (0 of them completed)
+    regime ok :   5827 calls in   46 runs (30 of them completed)
+    per cell (u, n_o): runs, completed, largest block of a completed run, completed runs with a block >= 1e15, runs with a call in regime A / A or B / A, B or C
+      u = 0.5, n_o = 300:  24  24   3.93e+12     0     0 /   0 /   0
+      u = 0.5, n_o = 400:  24  24   5.24e+14     0     0 /   0 /   0
+      u = 0.5, n_o = 600:  24  24   2.23e+18     9     0 /   0 /   0
+      u = 1.0, n_o = 100:  24  24   5.02e+14     0     0 /   0 /   0
+      u = 1.0, n_o = 150:  24  23   1.29e+18     5     0 /   0 /   0
+      u = 1.0, n_o = 200:  24  17   1.72e+16     1     0 /   0 /   0
+      u = 2.0, n_o =  36:  24  24   6.36e+13     0     0 /   0 /   0
+      u = 2.0, n_o =  48:  24  24   2.69e+17    10     0 /   0 /   0
+      u = 2.0, n_o =  60:  24  16   1.24e+15     1     0 /   0 /   0
+suite 'neg_tol': 216 runs (199 completed), 13132 binomial calls with n >= 1e14 in 43 runs
+    regime A  :      0 calls in    0 runs (0 of them completed)
+    regime B  :      0 calls in    0 runs (0 of them completed)
+    regime C  :      0 calls in    0 runs (0 of them completed)
+    regime D  :   7422 calls in   40 runs (23 of them completed)
+    regime inv:      0 calls in    0 runs (0 of them completed)
+    regime ok :   5710 calls in   43 runs (26 of them completed)
+    per cell (u, n_o): runs, completed, largest block of a completed run, completed runs with a block >= 1e15, runs with a call in regime A / A or B / A, B or C
+      u = 0.5, n_o = 300:  24  24   3.93e+12     0     0 /   0 /   0
+      u = 0.5, n_o = 400:  24  24   5.24e+14     0     0 /   0 /   0
+      u = 0.5, n_o = 600:  24  24   2.23e+18     9     0 /   0 /   0
+      u = 1.0, n_o = 100:  24  24   5.02e+14     0     0 /   0 /   0
+      u = 1.0, n_o = 150:  24  23   1.29e+18     5     0 /   0 /   0
+      u = 1.0, n_o = 200:  24  17   1.72e+16     1     0 /   0 /   0
+      u = 2.0, n_o =  36:  24  24   6.36e+13     0     0 /   0 /   0
+      u = 2.0, n_o =  48:  24  24   2.69e+17     7     0 /   0 /   0
+      u = 2.0, n_o =  60:  24  15   1.03e+16     1     0 /   0 /   0
+suite 'q_plain': 216 runs (201 completed), 10262 binomial calls with n >= 1e14 in 42 runs
+    regime A  :      0 calls in    0 runs (0 of them completed)
+    regime B  :      0 calls in    0 runs (0 of them completed)
+    regime C  :      0 calls in    0 runs (0 of them completed)
+    regime D  :   5728 calls in   35 runs (20 of them completed)
+    regime inv:      0 calls in    0 runs (0 of them completed)
+    regime ok :   4534 calls in   42 runs (27 of them completed)
+    per cell (u, n_o): runs, completed, largest block of a completed run, completed runs with a block >= 1e15, runs with a call in regime A / A or B / A, B or C
+      u = 0.5, n_o = 300:  24  24   2.06e+12     0     0 /   0 /   0
+      u = 0.5, n_o = 400:  24  24   2.62e+14     0     0 /   0 /   0
+      u = 0.5, n_o = 600:  24  24   5.81e+17     6     0 /   0 /   0
+      u = 1.0, n_o = 100:  24  24   5.02e+14     0     0 /   0 /   0
+      u = 1.0, n_o = 150:  24  24   2.14e+18     6     0 /   0 /   0
+      u = 1.0, n_o = 200:  24  17   2.10e+09     0     0 /   0 /   0
+      u = 2.0, n_o =  36:  24  24   6.38e+13     0     0 /   0 /   0
+      u = 2.0, n_o =  48:  24  24   1.28e+17     6     0 /   0 /   0
+      u = 2.0, n_o =  60:  24  16   1.64e+17     2     0 /   0 /   0

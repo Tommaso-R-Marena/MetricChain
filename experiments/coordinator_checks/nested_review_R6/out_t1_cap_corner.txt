@@ -1,0 +1,14 @@
+Part A: exact tables
+  (A1) E_(r-1) <= e^-u E_r in 1260 cases and E_1 >= (n_o + 2) E_0 in 72 tables: 0 violations
+  cells (n_o, u, eta, theta, nu_0, lambda <= 1): 31104
+  (A2) main branch r_dagger >= Delta: 11486 cells, 101707 radii r <= r_dagger - Delta; largest e^lambda E_r/(theta F*) = 0.9896 (<= 1)
+  (A3) corner 1 <= r_dagger < Delta: 1890 cells; e^lambda E_0 < E_(r_dagger) <= theta F* in 1890 of them; largest e^lambda E_0/(theta F*) = 0.4880
+  (A4) r_dagger in {0, -1}: 17728 cells; M_dag >= M_ddag in all; e^lambda E_0 > theta F* (the pass with M = M_ddag need not close) in 9468 of them
+  (A5) lambda in {1.5, 2, 3, 5} (outside the theorem), 1 <= r_dagger < Delta: 8522 cells; e^lambda E_0 > theta F* in 1101 of them
+  Part A passed: True
+Part B: 4500 runs of the harness's outer loop with eta = 1/2 on Q_3 ... Q_9 (0 skipped: sample beyond the cap of the test)   (35 s)
+  completed 4500; by branch (runs, unpopulated passes with M = M_ddag exactly, closed, not closed): {'r_dag >= Delta': [1309, 0, 0, 0], '1 <= r_dag < Delta': [613, 56, 56, 0], 'r_dag in {0,-1}': [2578, 2299, 1016, 1283]}
+  runs with r_dagger < Delta in which the largest sample is exactly 2 M_ddag: 1243; larger than 2 M_ddag: 0
+  samples (other than K) at or above the cap 2 max(e^lambda M_dag, M_ddag): 0 runs; largest sample/cap = 0.906
+  Part B as predicted (cap never reached; no sample above 2 M_ddag when r_dagger < Delta; the corner pass always closes for r_dagger >= 1): True
+all checks passed: True

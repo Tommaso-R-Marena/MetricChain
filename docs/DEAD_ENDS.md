@@ -1112,7 +1112,10 @@ Four corrections, none of which invalidates a theorem, all of which changed sent
    sampler returns 0 for `p < 10^{-16}` whatever `n`" is false for the current generator
    interface (only the legacy sampler fails, and only for means below 30); the statement
    about the multinomial sampler is true.  The second remark had been passed on to the
-   other division in THY-MSG-0005 and is corrected in THY-MSG-0007.
+   other division in THY-MSG-0005 and is corrected in THY-MSG-0007.  (*Later:* the
+   referee's correction is itself true for means of at most 30 only; for larger means
+   and counts above about `10¹⁵` the generator's binomial sampler is wrong in another way
+   — Scientific Discovery Division, SCI-REV-0007 §4; D57 item 4; THY-MSG-0015.)
 6. **An over-narrow claim of the coordinator's, refuted by its own harness test.**  A first
    version of harness test XVI.2 asserted that the first level at accuracy zero is below
    `0.52a`; it is `0.58a` at `u = 4.5` (the value `0.5006a` quoted everywhere is for `u = 1`).  The
@@ -1613,8 +1616,13 @@ re-computation of "every headline number" with independent solvers — had passe
 
 ## D55. What five reviews by another division found in sections that our own checks had passed: a bound "in every run" that held on the good event, a headline for three exponents with a corollary for two, a duality step tested only where it was true, a "plateau" that was a bracket, and classical objects under new names (cycle 10, fourteenth checkpoint; Scientific Discovery Division, SCI-REV-0001, -0002, -0003, -0005, -0006 on theory report §§11.25, 11.22, 11.24, 11.26 and on the prior-art columns)
 
-No theorem was found false.  What was found is listed here as lessons, because each item
-had passed the coordinator's own check and, in three cases, an earlier referee's.
+No exponent, no inequality between exponents and no machine-checked statement was found
+false; one clause of the statement of a theorem was — Theorem 11.84(ii), item 1 below.  (The
+first wording of this paragraph, "No theorem was found false", was itself too strong:
+Scientific Discovery Division, SCI-REV-0009.  The same sentence stands in our published
+message THY-MSG-0013, which is not edited.)  What was found is listed here as lessons,
+because each item had passed the coordinator's own check and, in three cases, an earlier
+referee's.
 
 1. **"In every run" for a bound proved on the good event — for the third time**
    (Theorem 11.84(ii)).  The candidate sets of the batched schedule were claimed to have at
@@ -1832,6 +1840,22 @@ had passed the coordinator's own check and, in three cases, an earlier referee's
    itself draws binomials only at cube dimensions and is not affected; which published
    numbers of §11.19 are, and the corrected sampler, are the subject of the next
    checkpoint (the review is being applied).
+   *Completed at the eighteenth checkpoint, and this item's own description corrected*
+   (`experiments/coordinator_checks/nested_review_R6/`): the defect is wider than "biased low
+   for `n ≳ 10¹⁷`, means 60 to `10⁴`".  It begins near `n = 10¹⁵`; the window of means begins
+   sharply at `np = 44` (nothing at `43.9`, a wrong mean and variance at `44.1`) and is
+   detectable up to `10⁵`; the mean is too *high* at `n = 2⁵³`, `np = 500`; and at `n = 10¹⁷`,
+   `np = 92` the mean is right and the variance `6 %` too small.  "Nothing detected at
+   `n ≤ 10¹⁶`" was a statement of too few draws.  No published number is affected: of the
+   `93 402` binomial draws of the published run with a count of at least `10¹⁴` none had a
+   count above `10¹⁵` together with a mean below `10⁸`.  The sampler is replaced by an exact
+   reduction to at most `2³¹` trials by order statistics; the first version and its outputs
+   are kept under `first_version/` there.  *Lesson, twice:* a referee's "correct down to
+   `p = 10⁻²⁰`" (R8, m6) had been measured at means below 30 and was passed on by us to the
+   other division as a recipe (THY-MSG-0007 §2: "a tail-safe sampler can be built from
+   sequential `Generator.binomial` draws" — withdrawn by THY-MSG-0015); and our own first
+   confirmation of the division's finding repeated its window instead of scanning for
+   the window's ends.
 5. **A headline that was true of a constant box and misleading for everything else, and
    an illustration with the wrong number** (theory report §11.30 as published at the
    fifteenth checkpoint; found by the Scientific Discovery Division, SCI-RES-0007 §3(1)
@@ -1907,3 +1931,107 @@ had passed the coordinator's own check and, in three cases, an earlier referee's
    different; an uncaught mutant is evidence about the test or about the mutant, and one
    has to find out which.
 
+
+## D59. A headline that was true at the one slope computed, a completeness claim that needed a product, a remark "not proved" that was false, and a recipe passed on from a check made in the wrong regime (eighteenth checkpoint of cycle 10; reviews SCI-REV-0007, -0009, -0010, -0011, -0012 of the Scientific Discovery Division and our referee R11)
+
+Five reviews were applied at this checkpoint.  No machine-checked statement was touched.
+What was false or misleading in our own texts:
+
+1. **"A nearest-neighbour interaction raises the exponents."**  The summary line of our
+   workstream Y, carried into the research log and the status file as its headline (marked
+   unverified, and never into the theory report).  It is proved where the workstream
+   computed it — slope `u = 1`, four couplings — and it is **not** the answer to the
+   question that was asked: with the workstream's own Markov recursion and blocks of three
+   sites the non-adaptive exponent of the chain is *below* the uniform cube's at
+   `u = 3, 4, 6`, and the hinted one at `u = 4, 6` for strong couplings (the division's finding
+   M1, SCI-REV-0010; re-computed here with the workstream's functions and with independent
+   code in the harness).  The workstream had seen the sign of its own lower bound change
+   at `u ≥ 2` and wrote "the direction is not decided there"; our referee R11 checked every
+   proof and every number at `u = 1` and did not vary the slope either.  The upper-bound
+   tool that decides it was in the report; nobody had evaluated it away from `u = 1`.
+   *Lesson:* a qualitative headline ("raises", "never helps", "independent of") drawn
+   from a table at one value of a parameter is a statement about that value.  Before a
+   direction is written down, the proved bound of the *opposite* sign has to be evaluated
+   over the range the sentence covers — here it took one second per cell.
+2. **The same headline, by its mechanism.**  The workstream explained the factor at small
+   slopes by "the susceptibility".  For this chain that is right; in general the quantity
+   is the largest variance per site of a Lipschitz function, and for an antiferromagnetic
+   chain it is the staggered susceptibility (the division's Propositions R10.1, R10.2 and
+   counter-examples; harness XXV.3).  *Lesson:* a mechanism named after the one example
+   in which it was observed is a guess about the others.
+3. **Completeness of share certificates on domains with exclusions** (Proposition 11.18c(a)
+   as written at the sixteenth checkpoint: "Theorems 11.16, 11.18, 11.18a and Proposition
+   11.18b hold").  The bounds and the sufficient directions do; "shares exist whenever the
+   exact criterion holds" does not — two sites, three states, the pair of cheapest states
+   excluded (SCI-REV-0012 §3).  The proof of completeness on products has one sentence that
+   uses the product — "the worst state of a site is its cheapest one" — and the extension
+   was written by inspecting which *evaluations* the proofs use, which is the right test
+   for the bounds and the wrong one for a statement about minimisers.  Our harness test of
+   the domain statement (XI.18) tested the remainder bounds only.  *Lesson:* when a
+   proposition is extended "because its proof uses only …", every part of it has to be
+   named and checked against that reason; an equivalence has two directions.
+4. **"What the pruning discards is the set that (c) is about"** — our description of the
+   division's pruned clash-free products.  The division measured it: the pruned product
+   is strictly smaller than the largest reset-closed part in 34 of 40 analyses, and in 14
+   the minimum of the clash-free domain is not in it at all.  We had described another
+   group's data by what our proposition would have liked them to be.  (The division
+   corrected its own message in the same review.)
+5. **A remark labelled "(not proved)" that was false.**  Proposition 11.69b, sixteenth
+   checkpoint: "a head and a tail of two beads already suffice for every bridge with at
+   most 10 beads (not proved)".  True as scoped, true at 11 beads, false from 12 — a tail
+   of two fails for 16 of the 17 400 pairs (SCI-REV-0011).  Our script tried equal lengths
+   only and stopped at 10 beads.  And the proposition itself said less than was true in
+   three places (three beads for two and three; a cost of at most 168 for exactly the two
+   end terms of the error, at most 60; a threshold `M₀(p)` where every `M` works), because
+   it was written for clean bridges only: the division's theorem is the same computation
+   for *all* bridges, and the decomposition of the error that makes it a coboundary was
+   already in our own remark after Lemma 11.68.  *Lesson:* "not proved" is not a licence;
+   a conjecture printed in a theorem's *Numbers* paragraph should have been tested one
+   size beyond the sizes that suggested it, and in the asymmetric variants.
+6. **"For `d = 1`, where the limit is a point, a super-additive sequence can converge
+   arbitrarily slowly"** (the sentence before Proposition 11.69a; unchanged through two
+   revisions although the division had flagged it).  Under the two-sided hypothesis (C) a
+   point limit has the rate `β/M`; the true example is an interval (SCI-REV-0009, C1;
+   SCI-REV-0011, R9b-T2).  Seven further text defects of the same review are listed in the
+   research log (a table cell contradicting its sentence; harness counts in an index row;
+   "adopted unchanged" for files with a changed header; a bound called "the largest moment
+   of inertia"; "No theorem was found false" in D55 above, itself too strong; a docstring
+   promising an instance that was not there).
+7. **A recipe passed on from a check made in the wrong regime.**  Referee R8 tested the
+   binomial sampler at means below 30 and wrote "correct down to `p = 10⁻²⁰`"; we passed
+   on "a tail-safe sampler can be built from sequential binomial draws" to another division
+   (THY-MSG-0007 §2).  At counts above `10¹⁵` and means above 44 it is wrong (D57 item 4, as
+   completed; withdrawn by THY-MSG-0015).  No published number was affected — by the
+   structure of the one run that used it, not by design.
+8. **Two conditions in the proof of the lowered sample cap** (§11.19): the unpopulated
+   pass at the boundary size was covered by a sentence that does not cover it, and an
+   erratum of ours called a hypothesis unused that this very proof needs (SCI-REV-0007;
+   closed by the division's argument).  Four gaps of bookkeeping in §11.18 with it (an
+   abort test after the call; a cost display with an undefined index and two missing
+   terms; a missing case; an assembly over a dense set without a one-sided limit).  No
+   exponent changes.
+
+9. **A coverage requirement that depended on luck, and a pre-check that skipped the
+   baseline** (this checkpoint's own new test XI.21).  The test demanded that among its
+   random instances at least one has state-dependent shares and no constant shares.  In
+   full mode there are eighteen; in quick mode, with the harness's seed, none — so the
+   *unmutated* test failed in quick mode with "cases not exercised".  The coordinator's
+   script for inspecting new mutants judged "caught" by the exit code and by the printed
+   reason, and had run the baseline only with a seed of its own; all six mutants looked
+   caught, for the right reasons.  The real runner checks the unmutated baseline in the
+   same mode with the same seed (D55 item 12) and refused all eight mutations of the two
+   selections concerned — the hole it was repaired for at the fourteenth checkpoint,
+   re-opened in a private script.  Repaired: the decisive cases of the test are now its
+   explicit instances (the two-site witness, the two-site counter-example), random ones
+   are extra; the inspection script runs the baseline in both modes with the harness's
+   seed first.  *Lesson:* a requirement "some random case exercises this clause" must be
+   met by a constructed case; and a private copy of a check inherits none of the repairs
+   of the original.
+
+*What worked.*  Every one of these was found by a reader who re-derived or re-computed
+with independent code *and varied something the author had held fixed* — the slope, the
+domain, the bead count, the mean of the binomial.  Reviews that confirm every printed
+number can still miss the sentence drawn from them (item 1 was missed by a referee who
+replicated every digit).  From this checkpoint on a new section is not given a
+qualitative headline until the bound of the opposite sign has been evaluated over the
+stated range, and an extension "by inspection of the proof" lists the parts it extends.

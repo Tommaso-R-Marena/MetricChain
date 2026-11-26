@@ -66,6 +66,13 @@ import proofs.Frontiers.BoxRatio
 import proofs.Frontiers.AnchoredRemainder
 import proofs.Frontiers.KineticsCertificates
 import proofs.Frontiers.BarrierCertificate
+import proofs.Frontiers.OracleCompensation
+import proofs.Frontiers.OracleLowerBound
+import proofs.Frontiers.ProductSamplerChainRule
+import proofs.Frontiers.StateShares
+import proofs.Frontiers.SoftMinLowerBound
+import proofs.Frontiers.BennettTwoPoint
+import proofs.Frontiers.BoxBennett
 import proofs.AuditCommand
 
 /-!
@@ -567,6 +574,38 @@ import proofs.AuditCommand
 #print axioms ScienceL2.cube_sandwich_strict_witness
 #print axioms ScienceL2.cube_sandwich_fails_negative_beta
 
+-- The compensation lemma and the lower bound for adaptive algorithms with an exact one-body oracle (theory report
+-- §11.29, Theorem 11.109a (a)–(c); §11.20, Proposition 11.61a (i), (ii); the Scientific Discovery Division's files
+-- of its message SCI-MSG-0019, adopted)
+-- Theorem 11.109a (a), the compensation lemma; Proposition 11.109 (a), (b); Proposition 11.61a (i)
+#print axioms ScienceL3.lemma3_i
+#print axioms ScienceL3.lemma3_compensation
+#print axioms ScienceL3.lemma3_compensation_bernoulli
+#print axioms ScienceL3.oneW_compensated
+#print axioms ScienceL3.lemma0_window_lipH
+#print axioms ScienceL3.condMarg_mem_window_lipH
+#print axioms ScienceL3.lemma0_additive_fill
+#print axioms ScienceL3.lemma0_rigidity_lipH
+-- Theorem 11.109a (b), the excess of a dip
+#print axioms ScienceL3.lemma2_mass
+#print axioms ScienceL3.lemma2_dens
+#print axioms ScienceL3.densW_coneW
+-- the packing bounds with an oracle; Theorem 11.109a (c)
+#print axioms ScienceL3.lemma1a
+#print axioms ScienceL3.lemma1b
+#print axioms ScienceL3.theoremA_fin
+#print axioms ScienceL3.theoremA_group
+#print axioms ScienceL3.theoremA_group_sharp
+#print axioms ScienceL3.theoremA_fin_chernoff
+#print axioms ScienceL3.theoremA_fin_Cm
+-- Proposition 11.61a (ii), the chain-rule bound
+#print axioms ScienceL3.Chain.a1_item2_lip
+#print axioms ScienceL3.Chain.a1_item2_isGreatest
+-- non-vacuity of the correctness hypothesis; the two remarks on the ends of the window
+#print axioms ScienceL3.exists_correct_oracle_algorithm
+#print axioms ScienceL3.no_compensation_at_upper_end
+#print axioms ScienceL3.window_of_equal_marginals
+
 -- Third-order residual classes reduce to pairwise lower models (theory report Theorem 11.18a)
 #print axioms MetricChain.anchoredInterp_three
 #print axioms MetricChain.thirdOrderLowerModel_energy
@@ -582,6 +621,62 @@ import proofs.AuditCommand
 #print axioms MetricChain.pairSum_le_of_shares
 #print axioms MetricChain.secondOrder_certified_of_shares
 #print axioms MetricChain.secondOrder_certified_of_rowSum
+-- state-dependent shares for a pairwise known part (Proposition 11.18b (d), (e); proposed by the Scientific
+-- Discovery Division, SCI-REV-0012)
+#print axioms MetricChain.energy_sub_eq_excitations_add_secondDiff
+#print axioms MetricChain.secondOrder_certified_of_state_shares
+#print axioms MetricChain.secondOrder_certified_of_deficit_shares
+#print axioms MetricChain.stateShare_witness
+
+-- A lower bound for every algorithm from any law on labels, for any reference measure (theory report §11.32,
+-- Theorem 11.116(c); workstream Y, Lemma A)
+#print axioms MetricChain.softMinLabel_admissible
+#print axioms MetricChain.exp_softMinLabel
+#print axioms MetricChain.renyiG_eq
+#print axioms MetricChain.softMin_expected_queries_ge
+#print axioms MetricChain.renyiG_le_log_card
+
+-- The two-point Bennett–Hoeffding bound and the floor-plus-variance bracket (theory report §11.30, Theorem
+-- 11.110(f); the Scientific Discovery Division's file of its message SCI-MSG-0023, adopted), and the bracket in the
+-- vocabulary of box classes
+#print axioms ScienceL4.Bennett.key_exp_ineq
+#print axioms ScienceL4.Bennett.exp_le_parabola
+#print axioms ScienceL4.Bennett.parabola_le_exp
+#print axioms ScienceL4.Bennett.mgf_le_one_add
+#print axioms ScienceL4.Bennett.mgf_le_bennettB
+#print axioms ScienceL4.Bennett.integral_exp_le_bennettB
+#print axioms ScienceL4.Bennett.twoPoint_mean
+#print axioms ScienceL4.Bennett.twoPoint_sq
+#print axioms ScienceL4.Bennett.twoPoint_mgf
+#print axioms ScienceL4.Bennett.bennettB_isGreatest
+#print axioms ScienceL4.Bennett.bennettB_mono
+#print axioms ScienceL4.Bennett.one_le_bennettB
+#print axioms ScienceL4.Bennett.bennettB_le_one_add
+#print axioms ScienceL4.Bennett.bennettB_le_exp_mul
+#print axioms ScienceL4.Bennett.bennettW_nonneg
+#print axioms ScienceL4.Bennett.bennettW_mono
+#print axioms ScienceL4.Bennett.bennettW_le_log_one_add
+#print axioms ScienceL4.Bennett.bennettW_le
+#print axioms ScienceL4.Bennett.bennettW_sub_antitone
+#print axioms ScienceL4.Bennett.remainder_bracket
+#print axioms ScienceL4.Bennett.remainder_bracket_attained
+#print axioms ScienceL4.Bennett.deterministic_bracket_of_lt
+#print axioms ScienceL4.Bennett.log_mean_exp_neg_le
+#print axioms ScienceL4.Bennett.bennettW_zero_left
+#print axioms ScienceL4.Bennett.deterministic_bracket
+#print axioms ScienceL4.Bennett.deterministic_bracket_sharp
+#print axioms ScienceL4.Bennett.deterministic_bracket_sharp_le
+#print axioms ScienceL4.Bennett.bracket_of_bounds
+#print axioms ScienceL4.Bennett.bracket_of_pointwise_bounds
+#print axioms ScienceL4.Bennett.bracket_of_midpoint
+#print axioms ScienceL4.Bennett.ceiling_lower_bound
+#print axioms ScienceL4.Bennett.bennett_bracket_weights
+#print axioms ScienceL4.Bennett.chebyshev_sum
+#print axioms ScienceL4.Bennett.certificate_of_mse
+#print axioms ScienceL4.Bennett.iid_sample_mean_mse
+#print axioms ScienceL4.Bennett.iid_certificate
+#print axioms ScienceL4.Bennett.iid_certificate_delta
+#print axioms MetricChain.BoxClass.bennett_bracket
 
 -- Residuals in a Hilbert ball: the hypercircle band as a certificate (theory report Proposition 11.50a)
 #print axioms MetricChain.Hypercircle.cauchy_schwarz

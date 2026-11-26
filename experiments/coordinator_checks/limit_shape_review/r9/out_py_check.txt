@@ -1,0 +1,10 @@
+part 1: 2621 lines (bridge, c1) of the C dump, per N {3: 1, 4: 2, 5: 6, 6: 14, 7: 34, 8: 90, 9: 230, 10: 614, 11: 1630}: (h,g) [two Python counts], A, B and the clean flag all agree with the C program   [0.4 s]
+part 2: FULL set, N1, N2 <= 7: 392 bridges (per N {3: 8, 4: 16, 5: 40, 6: 96, 7: 232}); 178752 concatenations from coordinates, 207936 ordered pairs ((x1,c1),(x2,c1'')), 107584 pairs of clean bridges: every identity of (a) and (b) holds; error maxima (0, 0, 1, 1), norm 2   [59.5 s]
+part 3: 600 random bridges from 669 walks (seed 20261126); beads: min 12, median 124, max 4057, 65 with >= 1000; with A != 0: 103, with B != 0: 141, clean as they stand: 381; max A (1, 4, 7, 1), max B (0, 3, 4, 0)
+   (c): 616 pairs (bridge, c1): head 2 + tail 3 is a clean bridge with (h,g) = q-hat in every case; head 1 + tail 3 not clean in 87, head 2 + tail 2 not clean in 7   [4.8 s]
+   (a): 1800 random ordered pairs concatenated from coordinates (longest concatenation 8022 beads): every identity holds; nonzero error vector in 681; both bridges clean in 707   [16.0 s]
+   37 six-fold self-concatenations (same c1 carried along): (h,g) = 6 (h,g)(x) + 5 (A + B) exactly   [0.4 s]
+
+real	1m21.253s
+user	1m20.884s
+sys	0m0.034s

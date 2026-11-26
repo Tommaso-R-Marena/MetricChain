@@ -182,6 +182,18 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.20 M3: the functions of order m counted among those of order below m
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] M1: completeness of shares claimed on reset-closed domains (Proposition 11.18c(a) as first written: false, the two-site counter-example)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M2: the cover condition with the wrong sign of the known pair term (c + T in place of c - T)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M3: the load of a state compared with the largest excitation energy of its site instead of its own
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M4: shares of either sign admitted (the step from the changed sites to all sites needs nonnegative shares)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M5: state-dependent shares claimed to exist whenever the reference minimises the lower model (false: the frustrated triangle)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M6: constant shares of the deficits claimed to exist whenever state-dependent shares do (false: the two-site witness)
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.14 M1: normal form built from the known part itself instead of its Pasch-Hausdorff envelope
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.14 M2: client form compared with the transposed centre form
@@ -501,6 +513,22 @@
 [         caught] XVIII.7 M4: every bridge claimed to be clean
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XVIII.7 M5: bridges that are not clean claimed to concatenate without error as well
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M1: the end corrections count pairs at chain separation at least 2 (the second chain neighbour of the first linker site is then counted, and the first identity fails)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M2: the error of the concatenation lemma is taken to be the term of the first bridge alone, without B(x2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M3: the lower end of a concatenation is claimed to be that of the second bridge
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M4: a tail of two beads is claimed to clean every bridge (false from 12 beads on: the explicit example)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M5: a head of one bead is claimed to clean every bridge (false from 8 beads on)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M6: the gauche term of the upper end correction dropped (a down-bond before the last bond makes the first new torsion gauche)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M7: the upper end correction is claimed to be at most (1, 6, 9; 1) (it attains (1, 6, 10; 1) at 21 beads)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M8: the one-sided rate claimed with the constant 12 in place of 108 (a bridge with at most 9 beads is at 15.3/(N + 3))
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIX.1 M1: the flat-histogram instance claimed hardest without any factor (Phi_g^+ <= Phi_H^+)
                   exit=1  1 TEST(S) MISBEHAVED
@@ -868,6 +896,36 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXIV.10 M4: the gain over plain sampling claimed to be the square of E d/max d
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] M1: the upper reduction with the slack at the site left of a cut only (the site right of it needs delta^+ as well)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M2: the upper reduction without the known constant ln A_rho(g)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M3: the exact embedding with the full envelope at the block ends (it needs the envelope reduced by eps^-, eps^+)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M4: the exact embedding without the correction ln rho between the blocks
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M5: the hard instance taken as the arithmetic mean of the labels instead of their soft minimum
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M6: an alternative claimed to raise ln A by twice its depth
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M1: the Markov recursion claimed without slack (false: the uniform field on a strongly coupled chain)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M2: the threshold of the chain claimed to be the cube's, n ln cosh(u/2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M3: the closed form E_F with p in place of p^2 under the root
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M4: block labels with the full slope at the block ends (the product is then not the Gibbs law of a member of the chain's class)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M5: the interaction claimed to raise the capacity exponent at every slope (false at (p, u) = (0.2, 3))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M1: the largest Lipschitz variance claimed to be Var(sum s)/4 for every chain (false for antiferromagnetic chains: the staggered field)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M2: the second-order coefficient t(1-t)/4 in place of t(1-t)/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M3: the small-slope factor 1/(4p(1-p)) in place of the structure factor (1-p)/p
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M4: the variance bound claimed for antiferromagnetic couplings (association is needed)
+                  exit=1  1 TEST(S) MISBEHAVED
 
-435 mutations: 434 caught, 1 expected pass, 0 not as expected
-136 baseline runs of the unmutated harness (one per selection): 136 behave as expected, 0 misbehave
+464 mutations: 463 caught, 1 expected pass, 0 not as expected
+141 baseline runs of the unmutated harness (one per selection): 141 behave as expected, 0 misbehave

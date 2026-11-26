@@ -1,0 +1,4 @@
+Every run of the published suite of sim_grouped.py repeated from the same generator state with the corrected sampler (main)
+  stats: {'runs': 1322, 'good': 1322, 'bad_event': 0, 'widest': 3.125, 'width_slack': 0.016, 'tightest_count': 0.7264, 'largest_M_over_Mdag': 3.8758, 'populated': 357898, 'negligible': 864, 'closed_empty': 73, 'closed_populated': 115, 'closed_unpopulated': 1134, 'runs_with_negligible_levels': 115, 'neg_share': 0.0054, 'skipped': 118, 'closed_at_r<=p_u*n_o': 365, 'closed_at_r<=r_dagger': 133, 'log10_M(min,median,max)': (5.17, 7.58, 18.66), 'runs_with_M>1e12': 380}
+  failures: 0
+  suite 'main': 1440 runs; outcome identical to the first-version run in 1013, different in 427   (402 s)

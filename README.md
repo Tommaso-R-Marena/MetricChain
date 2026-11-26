@@ -539,6 +539,29 @@ bound on the barrier between two configurations is a cut whose wall is certified
 kernels that already exist; the same cut with partition sums bounds how long a sampler
 stays trapped.  Negative results of that division come with it: no transfer matrix for
 barriers exists, and discrete rates are relative to the move set.
+(xviii) *When the known part itself has interactions along the chain* (theory report
+§11.32; our workstream Y, examined by our referee R11 and by the Scientific Discovery
+Division).  Everything above about exponents is for known parts whose sites are
+independent.  For a nearest-neighbour chain as known part two exact reductions to products
+of blocks give a limit with monotone brackets, and a lower bound holds for every
+algorithm at every length.  For the simplest such chain the cost exponents are **not**
+those of independent sites, in either direction: where the uncertainty per site is weak
+they are larger — to second order by the structure factor of the chain, i.e. by its
+cooperative response — and where it is strong two of the three are smaller, because the
+coupling removes hiding places; the accuracy threshold rises throughout.  Our own first
+summary said "an interaction raises the exponents"; the direction at strong envelopes
+was found by the other division's review.  One synthetic two-state model, brackets
+rather than formulas, paper proofs re-derived by two reviewers; machine-checked is the
+lower bound for every algorithm around an arbitrary reference measure, nothing else.
+(xix) *Certificates as dual solutions* (theory report Proposition 11.18b(e); proposed and
+measured by the Scientific Discovery Division, soundness machine-checked here).  The
+row-sum condition for "the reference is the minimum for every admissible remainder" has
+a sharper form in which every site, in every state, takes a share of each pair it belongs
+to; such shares exist exactly when the reference solves the pairwise linear relaxation —
+they are its dual solution — and checking them is additions and comparisons on tables.
+On that division's instances they certify every case in which the exact criterion holds.
+One of our statements about domains with excluded pairs of states was false and was
+corrected by its review (completeness of shares needs a product domain).
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

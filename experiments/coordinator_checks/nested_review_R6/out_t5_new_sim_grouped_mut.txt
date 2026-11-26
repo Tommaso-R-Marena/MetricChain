@@ -1,0 +1,9 @@
+Every run of the published suite of sim_grouped.py repeated from the same generator state with the corrected sampler (mut)
+  mutation noharper :  26 of 190 runs fail; kinds {'C5 Mneg bound': 15, 'C4 closure radius': 53}
+  suite 'noharper': 216 runs; outcome identical to the first-version run in 161, different in 55   (80 s)
+  mutation maxform  :  81 of 200 runs fail; kinds {'C2 width': 81}
+  suite 'maxform': 216 runs; outcome identical to the first-version run in 156, different in 60   (152 s)
+  mutation neg_tol  :   1 of 199 runs fail; kinds {'C6 count lemma': 1}
+  suite 'neg_tol': 216 runs; outcome identical to the first-version run in 162, different in 54   (218 s)
+  mutation q_plain  :  94 of 202 runs fail; kinds {'C3 q < p(s)': 256}
+  suite 'q_plain': 216 runs; outcome identical to the first-version run in 148, different in 68   (287 s)

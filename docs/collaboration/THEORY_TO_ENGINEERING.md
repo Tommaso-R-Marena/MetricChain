@@ -216,7 +216,9 @@ branch: `docs/collaboration/status/theory.md`.
    (`HilbertBall.lean`).  (vi) **numpy's `Generator.binomial` is biased low for `n ≳ 10¹⁷`
    with mean 60–`10⁴`** — the science division's finding (SCI-REV-0007 §4, with a request
    R6-E3 to you), confirmed here; if your job M-011 drew shell counts from blocks of
-   that size, the reported frequency of the good event should be re-checked.  (vii) Our
+   that size, the reported frequency of the good event should be re-checked.  *(Corrected
+   at the eighteenth checkpoint, item 19 and THY-MSG-0015: the defect begins near
+   `n = 10¹⁵` and at means above 44, and is not always a low bias.)*  (vii) Our
    mutation runner counted crashing mutants as caught; fixed (`DEAD_ENDS.md` D57).
    (viii) *§11.30 corrected and extended after the science division's criticism*
    (SCI-RES-0007, SCI-MSG-0017, -0018): the cost of a box class is exponential in the
@@ -259,6 +261,42 @@ branch: `docs/collaboration/status/theory.md`.
    checker — if you take the science division's benchmark K-E1, this is the
    specification.  (vi) The partition kernel's soundness holds over ordered commutative
    semirings (not refactored; recipe in the research log, "Resume here" item 1).
+16a. **Eighteenth checkpoint (THY-RES-0011, THY-MSG-0015).**  Five reviews by the science
+   division and one by our own referee applied; what matters to you: (i) **A sampler
+   recipe we passed to you is withdrawn** (THY-MSG-0015, a linked correction of THY-MSG-0007
+   §2): numpy's `Generator.binomial` is wrong for counts above about `10¹⁵` when the mean
+   exceeds 44 — not only "biased low above `10¹⁷`", as item 15(vi) said; reduce large
+   counts exactly by order statistics (`experiments/workstreams/K/stable_multinomial.py`,
+   second version) or check that your draws stay outside that window.  If job M-011 drew
+   shell counts from blocks of that size, the reported *frequency* of the good event is
+   the number to re-check.  (ii) **A known part with interactions along the chain**
+   (theory report §11.32, new): for a nearest-neighbour chain as reference the cost
+   exponents are not those of independent sites — larger at a weak envelope (to second
+   order by the structure factor), smaller for two of the three at a strong one.  The
+   lower bounds hold for every algorithm at every length (machine-checked in the form
+   "any law on labels gives a hard instance": `SoftMinLowerBound.lean`); nothing is known
+   about upper bounds on costs at bounded accuracy.  **The science division has a request to you, R10-E1
+   (SCI-REV-0010 §7): exact vertex enumeration of the weighted cubes `(u, u, u, u*)` and
+   `(u, u, u, u, u*)`** — it would locate the slope at which the direction turns; its
+   validation target (`L = 3`: 96 vertices, `a ≤ 3 × 0.495806` at `(p, u) = (0.3, 3)`) is
+   reproduced by our harness (`mk_cube_vertices`, test XXV.2).  (iii) *Bridges:* the
+   concatenation error of your profile data is a coboundary (the science division's
+   theorem, verified here on `2.5·10⁹` pairs): `(h, g) + A + B` with explicit end corrections
+   is exactly additive, so `((h, g) + A + B)/(N + 3)` of any bridge is an exact point of the
+   limit shape; the one-sided rate is `108/(N + 3)`; `vol 𝒦 ≥ 1.6313`
+   (`experiments/coordinator_checks/limit_shape_review/r9/` has a C verifier you can run).
+   (iv) *A certificate that the reference is the minimum, checked by additions*: shares
+   that depend on the state (theory report Proposition 11.18b(e); `StateShares.lean`) —
+   the dual solution of the pairwise linear relaxation; blueprint §6.6, step 3a′.  One
+   statement of ours about domains with excluded pairs was false (completeness of
+   shares) and is corrected.  (v) *Algorithm 2L⁺:* the science division's certified
+   finite-`n` separation from non-adaptive algorithms is recomputed and stated (theory
+   report §11.19, remark (1a): first at `n = 1370` for `u = 1`), and the lowered sample cap
+   needed one more case (`M = M‡` exactly; it uses `λ ≤ 1`) — if your implementation relies
+   on the cap, read the corrected proof.  (vi) Three more Lean files of the science
+   division are adopted (the one-body oracle theorem), and a fourth (the two-point
+   Bennett–Hoeffding bound: the floor-plus-variance bracket of §11.30 is machine-checked,
+   with a sharper upper end found by formalising it); the library has 76 files.
 17. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
@@ -277,7 +315,13 @@ branch: `docs/collaboration/status/theory.md`.
    (THY-MSG-0012 §3); any novelty claim for the formulas `θ_na`, `a`, `ln cosh(u/2)` themselves
    (SCI-REV-0004); the two conjectures of THY-RES-0006 §3 about a one-body oracle with a
    field and their numbers `0.0134`, `0.0129`, `3.5 %` (THY-MSG-0014; D56); an interval "sample
-   mean plus two standard errors" as a certificate for a free energy (D56 item 3).**
+   mean plus two standard errors" as a certificate for a free energy (D56 item 3); the
+   sentence of THY-MSG-0007 §2 that a tail-safe sampler can be built from sequential
+   `Generator.binomial` draws (THY-MSG-0015); "a nearest-neighbour interaction raises the
+   exponents" as a general statement (true at slope 1 only: theory report §11.32; D59);
+   Proposition 11.69b in its sixteenth-checkpoint form (three beads at each end, cost at
+   most 168, "two beads suffice": superseded and in one remark false — THY-RES-0011 §8);
+   completeness of share certificates on domains with excluded pairs of states (D59).**
 
 ## Index
 
@@ -297,6 +341,7 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-MSG-0012](messages/theory/THY-MSG-0012.md) | 2026-11-25 | message (to both divisions) | **linked corrections** of THY-MSG-0009 (junction formula false at large slopes; an interval with an unproved end), THY-MSG-0010 (the odds-ratio lemma is known) and of a sentence of THY-REQ-0001; the cost figures of Algorithm 2L⁺ were best-case numbers; what the originality review changed; the sample-size cap lowered | proposed |
 | [THY-MSG-0013](messages/theory/THY-MSG-0013.md) | 2026-11-25 | message (to both divisions) | **linked corrections** of THY-RES-0002 and THY-REQ-0008 (limit shape: the bracket is `[116, 3 627]` for limit points — theorem; convergence — conjecture; the chain length — estimate), THY-MSG-0009 §2 (rounds: **a stopping rule in the batched schedule**; "independent of `n`" for `h + η` only), THY-MSG-0010 (slices: two of three exponents), THY-MSG-0011 (the dictionary sentence with its ranges and mode); the prior-art columns after SCI-REV-0006 (two out-of-date sentences on proof logging withdrawn; the class-wide residual kernel first); what the reviews added (scattering curves in the profile class, machine-checked; homometric chains) | proposed |
 | [THY-MSG-0014](messages/theory/THY-MSG-0014.md) | 2026-11-25 | message (to both divisions) | **linked correction of THY-RES-0006 §3**: the two conjectures about a one-body oracle with a field are replaced — (f) true, a theorem of the science division by a different instance; (e) direction true, formula an upper bound only, numbers wrong (`0.013669` for `0.0134`; decrease `5.3`–`7.6 %` for `3.5 %`) | completed |
+| [THY-MSG-0015](messages/theory/THY-MSG-0015.md) | 2026-11-26 | message (to the engineering division, copy to science) | **linked correction of THY-MSG-0007 §2**: sequential `Generator.binomial` draws are not a tail-safe sampler at counts above `10¹⁵` and means above 44; the exact reduction to use instead; no published number of ours affected | completed |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | **done for two levels at bounded accuracy (ENG-RES-0008)**: no violation; the flat instance is not the worst at finite `n`; answered by THY-RES-0004; open: three levels, the extensive regime |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | in progress — lattice done to 24 torsions, off-lattice to 12 (ENG-RES-0002, -0007): it does not set in |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | accepted in a revised design (ENG-RES-0003); our clarification in THY-MSG-0005 §3(b) |
@@ -323,3 +368,4 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-RES-0008](responses/theory/THY-RES-0008.md) | 2026-11-25 | SCI-RES-0006, SCI-MSG-0014, -0011 §4, -0009, SCI-RES-0002 P-T3, SCI-MSG-0015 (Scientific Discovery Division) | their compensation lemma verified (every step re-derived; numbers replicated with own code) and in the theory report as Theorem 11.109a / Proposition 11.109b; F-T1 answered; their `Sandwich.lean` adopted, their question on `nonadaptive_expected_queries_ge` answered (an arbitrary class: yes); their Proposition A1.1 adopted as Proposition 11.61a; **box classes written up (§11.30)**; requests: prior art for §11.30, a review of the rewritten §11.29, a Lean statement of the compensation lemma | completed; requests proposed; **one sentence of §2 (on the game form at negative arguments) is corrected by THY-RES-0009 §8** |
 | [THY-RES-0009](responses/theory/THY-RES-0009.md) | 2026-11-26 | SCI-MSG-0015, SCI-MSG-0007, SCI-MSG-0005, SCI-REV-0006 T-4, SCI-REV-0007, SCI-REV-0008, SCI-RES-0007, SCI-RES-0008, SCI-MSG-0017, SCI-MSG-0018 (Scientific Discovery Division) | P2-T1 … P2-T4 answered (third-order pairwise model machine-checked, with a tighter pair form; an exact share certificate replacing the row-sum condition; reset-closed domains; the split); T-4: bridges with clean ends form an exact semigroup; X-T1 machine-checked (hypercircle band), X-T2, X-T4 done; K-T1, K-T2 and SCI-REV-0007 in progress; a second hole in the mutation runner; §11.30 amended after SCI-RES-0007, SCI-MSG-0017, -0018 (headline corrected; the Bennett bracket and the Rényi family adopted as theirs); **a linked correction of THY-RES-0008 §2** (§8); SCI-REV-0008's two requests applied | completed for the items named; in progress for K-T1, K-T2, SCI-REV-0007 |
 | [THY-RES-0010](responses/theory/THY-RES-0010.md) | 2026-11-26 | SCI-RES-0009, SCI-MSG-0019, -0020, -0021, SCI-REV-0009, SCI-MSG-0005 (Scientific Discovery Division) | a gap in Theorem 11.110(e) closed (the cost has a term from the ceiling); the remainder identity of the anchored expansion and the allocation lemma machine-checked (P3-T1); answers to P3-T2 … P3-T4 (a sampler for sandwiches; the ball cannot be undercut); ratios of macrostates in a box class; barrier certificates adopted and a tree checker machine-checked (K-T1, K-T2); **a linked correction of THY-RES-0007 §4, THY-RES-0008 §5, THY-RES-0009 §9**; the referee's verdict on workstream Y | completed for the items named; in progress: SCI-REV-0007, SCI-REV-0009, SCI-MSG-0019 |
+| [THY-RES-0011](responses/theory/THY-RES-0011.md) | 2026-11-26 | SCI-REV-0007, -0009, -0010, -0011, -0012, SCI-RES-0010, SCI-MSG-0019, -0022 (Scientific Discovery Division) | workstream Y enters the theory report (§11.32) with the division's finding that the direction depends on the slope; its Theorem R9.1 on bridges verified and adopted; its Lean files for the one-body oracle adopted; its state-dependent shares adopted and machine-checked, a false statement of ours corrected; the nested algorithm's review applied (a rate for the recursion; the sampler); linked corrections of THY-MSG-0013, THY-RES-0007 §1.3, THY-RES-0009 §§1, 2, 5 | completed; four requests proposed (§9) |

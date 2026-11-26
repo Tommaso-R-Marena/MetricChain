@@ -19,11 +19,20 @@
 > inner call (otherwise the cost bound is `C_max + max_l C_l`), and off the good event the
 > returned pair can have `L > U` (return the trivial bracket then).  (m2) In Theorem K2,
 > "`T′(ξ) = T(ξ)` for `ξ > 0`" is not nonincreasing; read `T′(ξ) = min(T(ξ), T′(0))`.  (m3) The
-> hypotheses `λ ≤ 1`, `η′ ≤ 1` of Theorem K1 are not used; claims (iii), (iv) hold for every run,
-> not only on the good event.  (m5) "`Γ̃` is never below `4e^u(e^u−1)`" (§0, §3.2, §5) is false at
+> hypotheses `λ ≤ 1`, `η′ ≤ 1` of Theorem K1 are not used in its proof (§2.4); `λ ≤ 1` **is** used,
+> in the form `e^λ < n_o + 2`, by the proof of the lowered cap (e3) below — the first version of
+> this erratum said "are not used" without that restriction; corrected after the review
+> SCI-REV-0007 of the Scientific Discovery Division, see (s1) below; claims (iii), (iv) hold
+> for every run, not only on the good event.
+> (m5) "`Γ̃` is never below `4e^u(e^u−1)`" (§0, §3.2, §5) is false at
 > `r = 0` and, by a fraction of a per cent, at finite `n`: `min_{r≥1} Γ̃(r) = 4e^u(e^u−1)(1−o(1))`.
 > (m6) The remark in §6.8 that numpy's `binomial` returns `0` for `p < 10^{-16}` is false for the
-> current generator interface; the remark on `multinomial` is true.  (m7) The non-adaptive
+> current generator interface; the remark on `multinomial` is true.  (The referee's sentence
+> behind this erratum, "`Generator.binomial` is correct down to `p = 10^{-20}` (`n = 2^59`)", holds
+> for means `np ≤ 30` only — in its table from `p = 3·10^{-17}` down; for larger means and counts
+> `n ≳ 10^{15}` that sampler is wrong in another way, see (s2) below.  Added after the review
+> SCI-REV-0007 of the Scientific Discovery Division; the first version of this erratum ended
+> at "is true".)  (m7) The non-adaptive
 > lower bound at accuracies tending to zero needs the line given in the theory report's
 > table.  (m8) The last sentence of Corollary K3′ presupposes that `lim ε_n/n` exists.
 > (m9) Remark (2) after Theorem K3: the Lean theorems named there formalise Proposition
@@ -58,6 +67,58 @@
 > Harper's theorem the tail functions of all `u`-Lipschitz outer landscapes are those of
 > landscapes whose level sets are initial segments of the simplicial order (the division's
 > argument, same remark).
+
+> **Errata after the independent review SCI-REV-0007 of the Scientific Discovery Division**
+> (branch `research/scientific-translation`: `docs/collaboration/messages/science/SCI-REV-0007.md`
+> and `docs/science/workstreams/R6_REPORT.md` — an accounting of Theorem K1 written before §2.4
+> was read, with the same constants, and an own implementation; no critical and no major
+> finding).  Every point was checked by the coordinator: scripts and outputs in
+> `experiments/coordinator_checks/nested_review_R6/`.  The text below is unchanged.
+> **(s1) The lowered cap (e3) uses `λ ≤ 1`.**  Its first proof did not cover the unpopulated pass
+> with `M = M‡ = K·2^{n_o}/(1−η)` exactly in the case `r† < ⌈λ/u⌉` (that size is in the doubling
+> sequence for `η = ½`): there `2^{n_o}q = 1`, the closing radius is `0` and the tail is not empty.
+> For `r† ≥ 1` the pass closes, by `E_1 ≥ (n_o+2)E_0` and `e^λ < n_o + 2`; for `r† ∈ {0, −1}` it need not
+> close, the sample can reach `2M‡` exactly, and the cap holds because `M† ≥ M‡` there (the
+> division's finding and repair; theory report §11.19, the corrected proof of the remark; in
+> our harness's outer loop that pass fails to close in `1283` of `2299` cases with `r† ∈ {0, −1}`
+> and closes in all `56` with `1 ≤ r† < ⌈λ/u⌉`).
+> **(s2) §6.8, the sampler.**  numpy's `Generator.binomial(n, p)`, to which the first version of
+> `stable_multinomial.py` sent every node with `np > 30`, is wrong for counts `n ≳ 10^{15}` and means
+> above `44` (the division: a mean that is too low for `n ≳ 10^{17}` and means between `60` and
+> `10⁴`; our measurement: `91.28` instead of `92` at `n = 2^{61}`, too high by about `0.06 %` at
+> `n = 2^{53}`, `np = 500`, the right mean and a variance `6 %` too small at `n = 10^{17}`, `np = 92`,
+> a sharp lower end — nothing at `np = 43.9`, wrong at `44.1` —,
+> nothing for `n ≤ 3·10^{14}` or for means of `10⁶` and more).  The published run was repeated with a
+> recording generator.  Of its `93 402` binomial draws with a count of at least `10^{14}` none had a
+> count above `10^{15}` together with a mean below `10⁸`; the worst cell found, counts of `5·10^{14}`
+> with mean `2·10⁴`, has its mean low by `0.4` points (`2·10^{-5}` of the mean).  **So no number of
+> §6.8 is affected.**  In the mutation run "no Harper term" `31` draws had counts between `10^{15}`
+> and `10^{16}` with means between `3.7·10⁴` and `10⁶`.  The sampler was replaced nevertheless: the
+> second version never calls numpy's binomial with more than `2^{31}` trials and reduces larger
+> counts exactly, by order statistics (no Poisson approximation).  Each of the `1440` runs,
+> repeated with it from the same generator state:
+> `1322` completed instead of `1325` (three more exceed `2^{62}` points), the good event in all, no
+> violation, `864` negligible levels in `115` runs as before, `357 898` populated levels (`358 790`),
+> closures `73`/`115`/`1134` (`74`/`111`/`1140`); `1013` of the `1440` outcomes are identical, among them
+> all `868` runs without a block of more than `2^{31}` points, which use the generator exactly as
+> before; mutations detected in `26` of `190`, `81` of `200`, `94` of `202`, `1` of `199` runs (`27` of
+> `191`, `81` of `200`, `93` of `201`, `1` of `199`).  The stored outputs
+> `out_sim_grouped.txt` and `out_stable_multinomial.txt` are now those of the second version, run
+> as in §6.8 (its random stream differs from the first one's from the first block of more than
+> `2^{31}` points on, so the later instances differ): `1334` runs completed, `106` skipped, the good
+> event in all, no violation, `361 847` populated and `958` negligible levels (in `124` runs),
+> closures `68`/`133`/`1133`, largest sample `4.5·10^{18}`, widest bracket `3.11`; mutations detected in
+> `25` of `190`, `78` of `196`, `100` of `206`, `5` of `198` runs; six minutes, the self-test one minute.
+> The outputs and the sampler of the first version are kept in
+> `experiments/coordinator_checks/nested_review_R6/first_version/`.
+> **(s3) A comparison §6.4 does not make** (the division's): against the non-adaptive *lower*
+> bound of Theorem 11.45(b) at the same accuracy and `δ`, the bound `C_max` of Theorem K1 with base
+> brackets inside, in the design of §6.4 with `n_o = ⌊n/2⌋`, is the smaller one at `n = 1400` (`u = 1`),
+> `540` (`u = 2`), `4700` (`u = ½`) — `ln C_max = 153.96`, `173.93`, `139.61` against `155.02`, `176.48`,
+> `141.54`; recomputed by us with the same digits; theory report §11.19, remark (1a).
+> **(s4) A rate** for the recursion of Proposition K5, asked for by the division: `τ_k − h ≤ c₁/(k + c₂)`
+> and `T_k(g) − θ_hint(g) ≤ A(g)/(k + c₂)` with explicit constants are proved (theory report, remark
+> after Theorem 11.53); the `0.65/k²` of K5(d) remains numerical.
 
 Independent report.  All scripts and outputs named below were produced in the workstream's
 scratch directory (`python3 <script>`, numpy only, `ulimit -v 4000000`, each run under ten

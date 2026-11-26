@@ -1311,6 +1311,93 @@ MUTS["XI"] += [
      [('            for j in range(m):\n                for U in itertools.combinations(range(n), j):\n                    for a in itertools.product(*[[s for s in range(k) if s != x0[i]] for i in U]):', '            for j in range(m + 1):\n                for U in itertools.combinations(range(n), j):\n                    for a in itertools.product(*[[s for s in range(k) if s != x0[i]] for i in U]):')], 'XI.20'),
 ]
 
+# XVIII.8: the concatenation error of bridges is a coboundary (Proposition 11.69b as adopted from the Scientific
+# Discovery Division's Theorem R9.1).  Each mutant states something false about the lattice.
+MUTS["XVIII"] += [
+    ("M1: the end corrections count pairs at chain separation at least 2 (the second chain neighbour of the first linker site is then counted, and the first identity fails)",
+     [('                if abs(index_of_site(j) - p) >= 3:                    # chain separation at least 3',
+       '                if abs(index_of_site(j) - p) >= 2:                    # chain separation at least 3')], 'XVIII.8'),
+    ("M2: the error of the concatenation lemma is taken to be the term of the first bridge alone, without B(x2)",
+     [('        if hy != vsum(hg1, hg2, As1[k1], B2):', '        if hy != vsum(hg1, hg2, As1[k1]):')], 'XVIII.8'),
+    ("M3: the lower end of a concatenation is claimed to be that of the second bridge",
+     [('        if B_of(y) != B1:', '        if B_of(y) != B2:')], 'XVIII.8'),
+    ("M4: a tail of two beads is claimed to clean every bridge (false from 12 beads on: the explicit example)",
+     [('    if is_clean(extend(x12, c12, 2, 2)) or not is_clean(extend(x12, c12, 2, 3)):',
+       '    if not is_clean(extend(x12, c12, 2, 2)) or not is_clean(extend(x12, c12, 2, 3)):')], 'XVIII.8'),
+    ("M5: a head of one bead is claimed to clean every bridge (false from 8 beads on)",
+     [('            head, tail = 2, 3                                            # the claim of (c): two and three beads',
+       '            head, tail = 1, 3                                            # the claim of (c): two and three beads')], 'XVIII.8'),
+    ("M6: the gauche term of the upper end correction dropped (a down-bond before the last bond makes the first new torsion gauche)",
+     [("        return tuple(end_counts(x, above(x, c1), lambda j: N + j)) + (int(down),)",
+       "        return tuple(end_counts(x, above(x, c1), lambda j: N + j)) + (0,)")], 'XVIII.8'),
+    ("M7: the upper end correction is claimed to be at most (1, 6, 9; 1) (it attains (1, 6, 10; 1) at 21 beads)",
+     [("    if A_of(xa, ca) != (1, 6, 10, 1) or B_of(xb) != (0, 3, 4, 0):",
+       "    if any(a > m for a, m in zip(A_of(xa, ca), (1, 6, 9, 1))) or B_of(xb) != (0, 3, 4, 0):")], 'XVIII.8'),
+    ("M8: the one-sided rate claimed with the constant 12 in place of 108 (a bridge with at most 9 beads is at 15.3/(N + 3))",
+     [('            if dist > 108 / (N + 3) + 1e-12:', '            if dist > 12 / (N + 3) + 1e-12:')], 'XVIII.8'),
+]
+
+
+# XI.21: share certificates after the review SCI-REV-0012 (state-dependent shares; reset-closed domains)
+MUTS["XI"] += [
+    ("M1: completeness of shares claimed on reset-closed domains (Proposition 11.18c(a) as first written: false, the two-site counter-example)",
+     [('    if not (len(D) == 8 and crit and not sh and not crit_full):', '    if not (len(D) == 8 and crit and sh and not crit_full):')], 'XI.21'),
+    ("M2: the cover condition with the wrong sign of the known pair term (c + T in place of c - T)",
+     [('                        rows.append(r); rhs.append(-(c[i][j] - T[i][j][a][b]))',
+       '                        rows.append(r); rhs.append(-(c[i][j] + T[i][j][a][b]))')], 'XI.21'),
+    ("M3: the load of a state compared with the largest excitation energy of its site instead of its own",
+     [('                rows.append(r); rhs.append(A[i][a])', '                rows.append(r); rhs.append(max(A[i][1:]))')], 'XI.21'),
+    ("M4: shares of either sign admitted (the step from the changed sites to all sites needs nonnegative shares)",
+     [('                      bounds=[(None if signed else 0, None)] * len(idx), method="highs")',
+       '                      bounds=[(None, None)] * len(idx), method="highs")')], 'XI.21'),
+    ("M5: state-dependent shares claimed to exist whenever the reference minimises the lower model (false: the frustrated triangle)",
+     [('    if not (mn >= 0 and not st and lp < -0.4):', '    if not (mn >= 0 and st):')], 'XI.21'),
+    ("M6: constant shares of the deficits claimed to exist whenever state-dependent shares do (false: the two-site witness)",
+     [('    if not (st and not cs and mn >= 0):', '    if not (st and cs and mn >= 0):')], 'XI.21'),
+]
+
+# XXV: known parts with interactions along the chain (Markov reference measures; theory report 11.32)
+MUTS["XXV"] = [
+    ("M1: the upper reduction with the slack at the site left of a cut only (the site right of it needs delta^+ as well)",
+     [('            if not mk_in_class(psi + g, Dplus):', '            if not mk_in_class(psi + g, Dhalf):')], 'XXV.1'),
+    ("M2: the upper reduction without the known constant ln A_rho(g)",
+     [('            rhs = math.log(float(rho @ np.exp(-psi - g))) - math.log(float(rho @ np.exp(-g)))',
+       '            rhs = math.log(float(rho @ np.exp(-psi - g)))')], 'XXV.1'),
+    ("M3: the exact embedding with the full envelope at the block ends (it needs the envelope reduced by eps^-, eps^+)",
+     [('                    Db = mk_dist(bc, [(dred if reduced else d)[i] for i in B1 + B2])',
+       '                    Db = mk_dist(bc, [d[i] for i in B1 + B2])')], 'XXV.1'),
+    ("M4: the exact embedding without the correction ln rho between the blocks",
+     [('                        psi = psib[proj] + corr', '                        psi = psib[proj]')], 'XXV.1'),
+    ("M5: the hard instance taken as the arithmetic mean of the labels instead of their soft minimum",
+     [('        gamma = -(1 / t) * np.log(sum(Mk * np.exp(-t * ph) for Mk, ph in zip(M, tilde)))',
+       '        gamma = sum(Mk * ph for Mk, ph in zip(M, tilde))')], 'XXV.1'),
+    ("M6: an alternative claimed to raise ln A by twice its depth",
+     [('            if math.log(float(pi @ np.exp(-alt))) - math.log(Ag) < r - 1e-9:',
+       '            if math.log(float(pi @ np.exp(-alt))) - math.log(Ag) < 2 * r - 1e-9:')], 'XXV.1'),
+    ("M1: the Markov recursion claimed without slack (false: the uniform field on a strongly coupled chain)",
+     [('    if lhs < with_slack * (1 - 1e-9):', '    if lhs < without * (1 - 1e-9):')], 'XXV.2'),
+    ("M2: the threshold of the chain claimed to be the cube's, n ln cosh(u/2)",
+     [('            target = math.log(float(pi @ np.exp(u / 2 * m)))             # ln Z_n(u/2)/Z_n(0)',
+       '            target = n * math.log(math.cosh(u / 2))')], 'XXV.2'),
+    ("M3: the closed form E_F with p in place of p^2 under the root",
+     [('        EF = math.log((1 - p) * math.cosh(u / 2) + math.sqrt((1 - p) ** 2 * math.sinh(u / 2) ** 2 + p ** 2))',
+       '        EF = math.log((1 - p) * math.cosh(u / 2) + math.sqrt((1 - p) ** 2 * math.sinh(u / 2) ** 2 + p))')], 'XXV.2'),
+    ("M4: block labels with the full slope at the block ends (the product is then not the Gibbs law of a member of the chain's class)",
+     [('    ok, prodok = end_to_end(4, (u - K) / 2)', '    ok, prodok = end_to_end(4, u / 2)')], 'XXV.2'),
+    ("M5: the interaction claimed to raise the capacity exponent at every slope (false at (p, u) = (0.2, 3))",
+     [('    if not (upc / 3 < 0.95 * ac and upc - lowc < 1e-6):', '    if not (upc / 3 > ac and upc - lowc < 1e-6):')], 'XXV.2'),
+    ("M1: the largest Lipschitz variance claimed to be Var(sum s)/4 for every chain (false for antiferromagnetic chains: the staggered field)",
+     [('            want = var(pi, m if p < 0.5 else stag) / 4', '            want = var(pi, m) / 4')], 'XXV.3'),
+    ("M2: the second-order coefficient t(1-t)/4 in place of t(1-t)/2",
+     [('            coef = t * (1 - t) * u * u / 2', '            coef = t * (1 - t) * u * u / 4')], 'XXV.3'),
+    ("M3: the small-slope factor 1/(4p(1-p)) in place of the structure factor (1-p)/p",
+     [('        if abs(varm / n - (1 - p) / p) > 0.01 * (1 - p) / p:',
+       '        if abs(varm / n - 1 / (4 * p * (1 - p))) > 0.01 / (4 * p * (1 - p)):')], 'XXV.3'),
+    ("M4: the variance bound claimed for antiferromagnetic couplings (association is needed)",
+     [('        coup = [np.array([[0.0, k], [k, 0.0]]) for k in rng.uniform(0.0, 1.5, n - 1)]   # a penalty on unequal neighbours',
+       '        coup = [np.array([[0.0, k], [k, 0.0]]) for k in rng.uniform(-1.5, 0.0, n - 1)]   # a penalty on unequal neighbours')], 'XXV.3'),
+]
+
 which = sys.argv[1:] or list(MUTS)
 for key in which:
     for item in MUTS[key]:

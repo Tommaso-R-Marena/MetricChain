@@ -219,7 +219,7 @@ theorem anchored_remainder_bound [Fintype ι] [DecidableEq ι] [LinearOrder ι]
 nonnegative shares `lam T i` of the sites of `T`, the constants of the `m`-subsets of any set `S`
 add up to at most the shares carried by the sites of `S`. -/
 theorem cover_of_site_shares_order [Fintype ι] [DecidableEq ι] (m : ℕ) (c : Finset ι → ℝ)
-    (lam : Finset ι → ι → ℝ) (hlam : ∀ T i, 0 ≤ lam T i)
+    (lam : Finset ι → ι → ℝ) (hlam : ∀ T : Finset ι, T.card = m → ∀ i, 0 ≤ lam T i)
     (hshare : ∀ T : Finset ι, T.card = m → c T ≤ ∑ i ∈ T, lam T i) (S : Finset ι) :
     ∑ T ∈ S.powersetCard m, c T ≤
       ∑ i ∈ S, ∑ T ∈ (univ : Finset ι).powersetCard m, (if i ∈ T then lam T i else 0) := by
@@ -238,37 +238,43 @@ theorem cover_of_site_shares_order [Fintype ι] [DecidableEq ι] (m : ℕ) (c : 
     _ ≤ ∑ i ∈ S, ∑ T ∈ (univ : Finset ι).powersetCard m, (if i ∈ T then lam T i else 0) := by
         refine Finset.sum_le_sum fun i _ => ?_
         refine Finset.sum_le_sum_of_subset_of_nonneg
-          (Finset.powersetCard_mono (Finset.subset_univ S)) fun T _ _ => ?_
+          (Finset.powersetCard_mono (Finset.subset_univ S)) fun T hT _ => ?_
         split_ifs
-        · exact hlam T i
+        · exact hlam T (Finset.mem_powersetCard.mp hT).2 i
         · exact le_rfl
 
 /-- The site penalty of equal shares: `γ i = (1/m) ∑_{T ∋ i, |T| = m} c T`. -/
 noncomputable def sitePenalty [Fintype ι] [DecidableEq ι] (m : ℕ) (c : Finset ι → ℝ) (i : ι) : ℝ :=
   ∑ T ∈ (univ : Finset ι).powersetCard m, (if i ∈ T then c T / m else 0)
 
-/-- **Equal shares.**  For `m ≥ 1` and nonnegative constants, the site penalties
-`γ i = (1/m) ∑_{T ∋ i} c T` cover the `m`-subsets of every set of sites. -/
+/-- **Equal shares.**  For `m ≥ 1` and constants that are nonnegative on the `m`-subsets, the site
+penalties `γ i = (1/m) ∑_{T ∋ i} c T` cover the `m`-subsets of every set of sites.  (Only the
+constants of `m`-subsets enter; nonnegativity is asked of those alone — a remark of the Scientific
+Discovery Division, SCI-MSG-0023.) -/
 theorem cover_of_equal_shares [Fintype ι] [DecidableEq ι] {m : ℕ} (hm : 0 < m) (c : Finset ι → ℝ)
-    (hc : ∀ T, 0 ≤ c T) (S : Finset ι) :
+    (hc : ∀ T : Finset ι, T.card = m → 0 ≤ c T) (S : Finset ι) :
     ∑ T ∈ S.powersetCard m, c T ≤ ∑ i ∈ S, sitePenalty m c i := by
   unfold sitePenalty
   refine cover_of_site_shares_order m c (fun T _ => c T / m)
-    (fun T _ => div_nonneg (hc T) (Nat.cast_nonneg m)) (fun T hT => ?_) S
+    (fun T hT _ => div_nonneg (hc T hT) (Nat.cast_nonneg m)) (fun T hT => ?_) S
   rw [Finset.sum_const, hT, nsmul_eq_mul, mul_div_cancel₀]
   exact_mod_cast hm.ne'
 
-/-- **A sandwich from the Hamming ball.**  With anchored constants `c ≥ 0` of order `m ≥ 1` the
+/-- **A sandwich from the Hamming ball.**  With anchored constants `c` of order `m ≥ 1` the
 anchored interpolant of order `m - 1` — which uses the values of `g` at configurations with fewer
 than `m` changed sites only — approximates `g` up to the sum of the site penalties over the
-changed sites. -/
+changed sites.  (No nonnegativity hypothesis: an anchored constant of an `m`-subset bounds an
+absolute value, at the base point `x₀`, and no other constant enters the penalties.  The first
+version asked `0 ≤ c T` for all `T`; the redundancy was found by the Scientific Discovery Division
+when it compared this file with its own formalisation, SCI-MSG-0023.) -/
 theorem anchored_remainder_site_penalties [Fintype ι] [DecidableEq ι] [LinearOrder ι]
     [∀ i, DecidableEq (σ i)] {m : ℕ} (hm : 0 < m) (g : (∀ i, σ i) → ℝ) (c : Finset ι → ℝ)
-    (hc0 : ∀ T, 0 ≤ c T) (x₀ y : ∀ i, σ i)
+    (x₀ y : ∀ i, σ i)
     (hc : ∀ T : Finset ι, T.card = m → ∀ z : ∀ i, σ i, (∀ t ∈ T, z t = x₀ t) →
       |mixedDiff g z T y| ≤ c T) :
     |g y - anchoredInterp m g x₀ y| ≤ ∑ i ∈ supp x₀ y, sitePenalty m c i :=
-  (anchored_remainder_bound m g c x₀ y hc).trans (cover_of_equal_shares hm c hc0 _)
+  (anchored_remainder_bound m g c x₀ y hc).trans
+    (cover_of_equal_shares hm c (fun T hT => (abs_nonneg _).trans (hc T hT x₀ fun _ _ => rfl)) _)
 
 /-! ### Non-vacuity -/
 

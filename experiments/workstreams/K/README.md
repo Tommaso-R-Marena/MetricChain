@@ -18,6 +18,6 @@ Run from this directory, numpy only, e.g. `ulimit -v 4000000; python3 recursion_
 | `flat_cost_bounded.py`, `crosscheck_flat.py` | exact cost at the flat instance, `n ≤ 64 000` (§6.4) | 49 s | `out_flat_cost_bounded.txt`, `out_crosscheck_flat.txt` |
 | `e2e_small.py` | the whole algorithm with real inner two-sample brackets on `Q_12`–`Q_14` (§6.5) | 5 min | `out_e2e_small.txt` |
 | `radial_trajectory.py` | outer loop in expectation on radial and additive landscapes, `n_o ≤ 16 000` (§6.6) | 145 s | `out_radial_trajectory.txt` |
-| `sim_grouped.py`, `stable_multinomial.py` | outer loop in the bounded regime with exact samples of up to `4.6·10^{18}` points (§6.8) | 5 min | `out_sim_grouped.txt`, `out_stable_multinomial.txt` |
+| `sim_grouped.py`, `stable_multinomial.py` | outer loop in the bounded regime with exact samples of up to `4.6·10^{18}` points (§6.8).  **`stable_multinomial.py` is a second version** (after the review SCI-REV-0007 of the Scientific Discovery Division: numpy's binomial is wrong for counts above about `10^{15}`; errata (s2) of the report), and the two stored outputs are those of the second version; the first version, its outputs — the numbers of §6.8 — and the comparison run by run are in `experiments/coordinator_checks/nested_review_R6/` | 6 min; self-test 1 min | `out_sim_grouped.txt`, `out_stable_multinomial.txt` |
 
 The Lean files of §6.7 are merged into `proofs/Frontiers/BoundedAccuracy.lean`.

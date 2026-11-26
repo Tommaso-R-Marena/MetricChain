@@ -1,0 +1,37 @@
+1. the ten explicit bridges, from coordinates
+   _0_0_1__coplanar_W64           N =  12041  (h,g) = (67, 939, 12182, 1329)  b' up  admissible c1: [(1, 1, 1)]  A = [(0, 0, 0, 0)]  B = (0, 0, 0, 0)  clean: True  | beads within 2 height units of the top/bottom bead: 154/52  | head 2 + tail 3: clean, (h,g) = q-hat  [0.7 s]
+   _0_12_5_22_5__g_4_5_W128       N = 166199  (h,g) = (1717, 376013, 687789, 131710)  b' up  admissible c1: [(1, 1, 1)]  A = [(0, 0, 0, 0)]  B = (0, 0, 0, 0)  clean: True  | beads within 2 height units of the top/bottom bead: 29/8  | head 2 + tail 3: clean, (h,g) = q-hat  [4.8 s]
+   _0_12_5_22_5__g_4_5_W64        N =  21235  (h,g) = (606, 45769, 82876, 16567)  b' up  admissible c1: [(-1, 1, -1)]  A = [(0, 0, 0, 0)]  B = (0, 0, 0, 0)  clean: True  | beads within 2 height units of the top/bottom bead: 57/6  | head 2 + tail 3: clean, (h,g) = q-hat  [0.4 s]
+   _0_1_2_9_4__g_1_W64            N =  12767  (h,g) = (128, 6369, 26941, 12379)  b' up  admissible c1: [(1, 1, 1)]  A = [(0, 0, 0, 0)]  B = (0, 0, 0, 0)  clean: True  | beads within 2 height units of the top/bottom bead: 24/280  | head 2 + tail 3: clean, (h,g) = q-hat  [0.3 s]
+   _0_1_3__checkerboard_W64       N =  17796  (h,g) = (660, 18651, 50084, 2192)  b' up  admissible c1: [(-1, 1, -1)]  A = [(0, 0, 0, 0)]  B = (0, 0, 0, 0)  clean: True  | beads within 2 height units of the top/bottom bead: 227/235  | head 2 + tail 3: clean, (h,g) = q-hat  [0.5 s]
+   _0_3_4__W3_W64                 N =  22351  (h,g) = (382, 60150, 83122, 2349)  b' up  admissible c1: [(-1, 1, 1)]  A = [(0, 0, 1, 0)]  B = (0, 0, 0, 0)  clean: False  | beads within 2 height units of the top/bottom bead: 449/31  | head 2 + tail 3: clean, (h,g) = q-hat  [0.7 s]
+   _1_2_2_5_2__W64                N =  17245  (h,g) = (7778, 31236, 39648, 1565)  b' up  admissible c1: [(-1, 1, 1)]  A = [(0, 0, 0, 0)]  B = (0, 0, 0, 0)  clean: True  | beads within 2 height units of the top/bottom bead: 371/189  | head 2 + tail 3: clean, (h,g) = q-hat  [0.4 s]
+   _1_2_4_9_2__W64                N =  27144  (h,g) = (12436, 98046, 113574, 2722)  b' up  admissible c1: [(1, 1, 1)]  A = [(0, 0, 0, 0)]  B = (0, 0, 0, 0)  clean: True  | beads within 2 height units of the top/bottom bead: 38/15  | head 2 + tail 3: clean, (h,g) = q-hat  [0.7 s]
+   _1_3_5_3_3__g_2_3_W64          N =  16238  (h,g) = (5001, 25514, 45530, 10743)  b' up  admissible c1: [(-1, 1, 1)]  A = [(0, 0, 0, 0)]  B = (0, 0, 0, 0)  clean: True  | beads within 2 height units of the top/bottom bead: 275/14  | head 2 + tail 3: clean, (h,g) = q-hat  [0.4 s]
+   _1_5_6__full_W64               N =  33988  (h,g) = (30825, 155368, 187735, 3006)  b' up  admissible c1: [(-1, 1, -1)]  A = [(0, 0, 0, 0)]  B = (0, 0, 0, 0)  clean: True  | beads within 2 height units of the top/bottom bead: 10/274  | head 2 + tail 3: clean, (h,g) = q-hat  [0.9 s]
+   clean as built: 9 of 10;  not clean: ['_0_3_4__W3_W64']
+
+2. volumes of hulls of profile points (exact rationals)
+   old points h/N (the hull C of the report; stored value 1.6317, vol C = 1.631706): exact brute-force hull: 18 facets (18 triangles), 11 vertices; vol = 1.631706
+      Qhull facet list with exact arithmetic: 18 triangles, 11 vertices; vol = 1.631706; agree exactly: True; Qhull's float volume 1.631706
+      points that are not vertices (index in the list of 14): [4, 6, 13]
+      vol as a fraction: 7519845747305846809757542831/4608578267404509405329382060
+   EXACT points q-hat/(N+3), choice of c1 (0, 0, 0, 0, 0, 0, 0, 0, 0, 0): exact brute-force hull: 18 facets (18 triangles), 11 vertices; vol = 1.631346
+      Qhull facet list with exact arithmetic: 18 triangles, 11 vertices; vol = 1.631346; agree exactly: True; Qhull's float volume 1.631346
+      points that are not vertices (index in the list of 14): [4, 6, 13]
+      vol as a fraction: 2619011457030694352909567141327/1605429925208285555087509268160
+   => vol K >= 1.631346 (largest over the admissible choices; smallest 1.631346);  >= 1.6313: True;  >= 1.63134: True;  >= 1.63135: False
+   for comparison: h/(N+3) without end corrections (NOT all exact points): exact brute-force hull: 18 facets (18 triangles), 11 vertices; vol = 1.631359
+      Qhull facet list with exact arithmetic: 18 triangles, 11 vertices; vol = 1.631359; agree exactly: True; Qhull's float volume 1.631359
+      points that are not vertices (index in the list of 14): [4, 6, 13]
+      vol as a fraction: 2619032753504679105165853944287/1605429925208285555087509268160
+
+3. the reviewer's four packings on the exact vertices, all radii zero (exact rationals)
+   (L, eps1) = (1, 1/2): 116 points (claimed 116); pairwise condition with zero radii holds exactly: True; smallest margin 2.172e-03
+   (L, eps1) = (1, 1/4): 451 points (claimed 451); pairwise condition with zero radii holds exactly: True; smallest margin 1.263e-03
+   (L, eps1) = (1/5, 1/2): 8 points (claimed 8); pairwise condition with zero radii holds exactly: True; smallest margin 2.491e-02
+   (L, eps1) = (1/5, 1/4): 19 points (claimed 19); pairwise condition with zero radii holds exactly: True; smallest margin 5.590e-03
+
+real	0m14.341s
+user	0m10.571s
+sys	0m0.186s

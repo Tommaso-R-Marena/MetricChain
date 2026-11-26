@@ -1,0 +1,23 @@
+theta = 109.4712 deg: sin^2(theta/2)/3 = 0.222222
+   m =    12: I-bar/m^3 = 0.257131;  I/m^3 of the one-kink arm = 0.251543;  I/I-bar: one gauche (+60) then trans: 0.978267, one gauche (-60) then trans: 0.978267, all-trans: 0.364099;  angle(zigzag axis, torsion axis) = 90.0000 deg, sin^2 = 1.000000
+   m =    50: I-bar/m^3 = 0.230438;  I/m^3 of the one-kink arm = 0.228978;  I/I-bar: one gauche (+60) then trans: 0.993662, one gauche (-60) then trans: 0.993662, all-trans: 0.340993;  angle(zigzag axis, torsion axis) = 90.0000 deg, sin^2 = 1.000000
+   m =   200: I-bar/m^3 = 0.224267;  I/m^3 of the one-kink arm = 0.223894;  I/I-bar: one gauche (+60) then trans: 0.998340, one gauche (-60) then trans: 0.998340, all-trans: 0.335266;  angle(zigzag axis, torsion axis) = 90.0000 deg, sin^2 = 1.000000
+   m =  1000: I-bar/m^3 = 0.222631;  I/m^3 of the one-kink arm = 0.222556;  I/I-bar: one gauche (+60) then trans: 0.999664, one gauche (-60) then trans: 0.999664, all-trans: 0.333721;  angle(zigzag axis, torsion axis) = 90.0000 deg, sin^2 = 1.000000
+   m =  4000: I-bar/m^3 = 0.222324;  I/m^3 of the one-kink arm = 0.222306;  I/I-bar: one gauche (+60) then trans: 0.999916, one gauche (-60) then trans: 0.999916, all-trans: 0.333430;  angle(zigzag axis, torsion axis) = 90.0000 deg, sin^2 = 1.000000
+theta = 111.0000 deg: sin^2(theta/2)/3 = 0.226395
+   m =    12: I-bar/m^3 = 0.261627;  I/m^3 of the one-kink arm = 0.255611;  I/I-bar: one gauche (+60) then trans: 0.977006, one gauche (-60) then trans: 0.977006, all-trans: 0.350872;  angle(zigzag axis, torsion axis) = 88.2266 deg, sin^2 = 0.999042
+   m =    50: I-bar/m^3 = 0.234687;  I/m^3 of the one-kink arm = 0.232966;  I/I-bar: one gauche (+60) then trans: 0.992663, one gauche (-60) then trans: 0.992663, all-trans: 0.328296;  angle(zigzag axis, torsion axis) = 88.2266 deg, sin^2 = 0.999042
+   m =   200: I-bar/m^3 = 0.228458;  I/m^3 of the one-kink arm = 0.227858;  I/I-bar: one gauche (+60) then trans: 0.997375, one gauche (-60) then trans: 0.997375, all-trans: 0.322703;  angle(zigzag axis, torsion axis) = 88.2266 deg, sin^2 = 0.999042
+   m =  1000: I-bar/m^3 = 0.226807;  I/m^3 of the one-kink arm = 0.226513;  I/I-bar: one gauche (+60) then trans: 0.998705, one gauche (-60) then trans: 0.998705, all-trans: 0.321194;  angle(zigzag axis, torsion axis) = 88.2266 deg, sin^2 = 0.999042
+   m =  4000: I-bar/m^3 = 0.226498;  I/m^3 of the one-kink arm = 0.226262;  I/I-bar: one gauche (+60) then trans: 0.998958, one gauche (-60) then trans: 0.998958, all-trans: 0.320911;  angle(zigzag axis, torsion axis) = 88.2266 deg, sin^2 = 0.999042
+
+prefix search at theta = 111 deg (torsions after the axis bond, then all-trans): best asymptotic ratio sin^2(angle)
+   prefix length 1: best sin^2 = 0.999042 (1 - 9.58e-04), prefix ['g+']
+   prefix length 2: best sin^2 = 0.999999 (1 - 1.35e-06), prefix ['g+', 'g+']
+   prefix length 3: best sin^2 = 0.999999 (1 - 1.35e-06), prefix ['g+', 'g+', 't']
+   prefix length 4: best sin^2 = 0.999999 (1 - 1.25e-06), prefix ['g+', 'g-', 'g-', 'g-']
+   prefix length 5: best sin^2 = 1.000000 (1 - 1.76e-09), prefix ['g+', 'g+', 'g+', 'g-', 'g-']
+   prefix length 6: best sin^2 = 1.000000 (1 - 1.76e-09), prefix ['g+', 'g+', 'g+', 'g-', 'g-', 't']
+   prefix length 7: best sin^2 = 1.000000 (1 - 1.76e-09), prefix ['t', 't', 'g+', 'g+', 'g+', 'g-', 'g-']
+   prefix length 8: best sin^2 = 1.000000 (1 - 1.76e-09), prefix ['t', 't', 'g+', 'g+', 'g+', 'g-', 'g-', 't']
+   prefix length 9: best sin^2 = 1.000000 (1 - 1.76e-09), prefix ['t', 't', 't', 't', 'g+', 'g+', 'g+', 'g-', 'g-']

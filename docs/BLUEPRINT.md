@@ -712,6 +712,37 @@ Discovery Division: for polar and charged side chains in rotamer variables the s
 for this reason and the ball certifies).  And the pairwise model is a relaxation, not the
 exact envelope (which is a three-body function).  As everywhere: the constants are the
 producer's obligation; measured maxima over an enumerated domain are not certified bounds.
+Use the pair form unless the model must stay banded: on the Scientific Discovery
+Division's 136 measured instances it is the larger lower bound at every state, the
+reference minimises it in 132 instances against 113 for the site form, and it loses a
+median factor `6.8` less in `ln Z` (theory report, Theorem 11.18a, "Site form against pair
+form").  For a banded model keep the share of every pair inside the band and give the
+share of every other pair in halves to its two sites.
+
+**Step 3a′ — a certificate that the reference is the minimum, checked by additions**
+(theory report Proposition 11.18b(d), (e); `proofs/Frontiers/ShareCertificates.lean`,
+`StateShares.lean`).  For a second-order class with pair constants `c_ij`, a pairwise known
+part with second differences `T_ij(a, b)` at the reference, and measured single-site
+excitation energies `A_i(a)` of the full energy, publish *shares*
+
+```
+s_ij(a) ≥ 0 ,      s_ij(a) + s_ji(b) ≥ c_ij − T_ij(a, b)   for all changed states a of i, b of j ,      Σ_{j≠i} s_ij(a) ≤ A_i(a)      verified
+```
+
+(`secondOrder_certified_of_state_shares`): then the reference minimises the true energy for
+every admissible residual.  The checker does `O(n²k²)` additions and comparisons and no
+search.  The producer finds the shares by one linear programme — they are a dual solution
+of the pairwise relaxation, so they exist exactly when the relaxation is tight at the
+reference — and the pair shares of third-order constants enter the same programme
+linearly.  Shares that do not depend on the state (`secondOrder_certified_of_deficit_shares`,
+a maximum flow) are the cheaper special case and fail when the pair of states with the
+largest deficit is not the pair of cheapest states.  **On a domain with excluded pairs of
+states the certificate remains sound, but its absence proves nothing** (completeness
+needs a product domain), and a certificate over a pruned product is a certificate of the
+minimum over that product only: choose the reference first — the minimiser of the
+clash-free domain — and then the largest reset-closed domain around it (theory report
+Proposition 11.18c; the division's measurement: in 14 of 40 analyses the minimum of the
+clash-free domain was outside the pruned product).
 
 **Step 3b — any order: the ball of radius `m − 1` and site penalties** (theory report Theorem
 11.18d, Proposition 11.18e; `proofs/Frontiers/AnchoredRemainder.lean`; the recipe is the
@@ -1077,6 +1108,8 @@ against a "bound" of `0.0076`; `reviews/R1`, item 10)
 | every algorithm that evaluates the residual, deterministic or randomised | the instance-wise deterministic cost equals the size of a value certificate; a randomised algorithm with error probability `δ` pays `(1 − 2δ)` times every fractional covering bound; for `ln Z` on the cube class, exponentially many evaluations at the zero residual below the accuracy `n ln cosh(βc/2)` (a worst-case statement), and `(1 − 2δ) 2ⁿ` for exact answers | `instance_query_complexity`, `expected_queries_ge_exp_weights_min`, `binary_randomized_exponential`, `thermal_expected_queries_ge`, `cube_thermal_randomized_bound`, `cube_exact_dip_randomized`, `cube_exact_randomized` |
 | free energies on product landscapes beyond the cube | every slack-Lipschitz centre function gives a perturbation that must be detected; at an additive instance the cost is bounded above the single-site game value `min_Q max_Φ[βE_QΦ − Λ(Φ)]` per site and exponential below it; single dips underestimate both when sites have three or more states | `genDip_expected_queries_ge`, `twoMeasureBound_pow`, `product_mass_ge`; `DEAD_ENDS.md` D38 |
 | pure dual certificates | incomplete: the frustrated triangle has LP bound 0, optimum 1 | `triangle_no_leaf_certificate` |
+| share certificates for "the reference is the minimum" | sound; complete exactly for the pairwise linear relaxation (state-dependent shares) and, with constant shares and an additive known part, on product domains only; an integrality gap or an excluded pair of states defeats completeness | `secondOrder_certified_of_state_shares`, `stateShare_witness`; theory report Propositions 11.18b(e), 11.18c(a) |
+| a known part with interactions along the chain | do not use the exponents of independent sites: at a weak envelope the cost exponents are larger (to second order by the largest variance per site of a Lipschitz function — the structure factor for a ferromagnetic chain), at a strong envelope two of the three are smaller; lower bounds hold for every algorithm, upper bounds on costs are conditional; one two-state model, brackets only | theory report §11.32 (paper; harness XXV); the lower bound in terms of a law on labels: `softMin_expected_queries_ge` |
 | certificates without `sum` | exactly `2^m` leaves on `m` independent frustrated triangles; `2m` with `sum`; the gap persists in total description length (at most `147 m³` against at least `2^m`, hence smaller for `m ≥ 21`) | `sumFree_exponential`, `sumFree_tight`, `sum_linear`, `sum_rule_separation_dataSize` |
 | free-energy sandwich | product reference: constant `1/8` is optimal and the worst residual is additive two-level; the `Σ c_i²` width is false for correlated references; gap is extensive | `mcdiarmid_no_better_constant`, `exists_two_level_worst_residual`, `DEAD_ENDS.md` D14 |
 | inconsistent residual data | every claim about them is vacuous; they must be rejected | `IProblem.consistent_iff_nonempty`, `inconsistentResidual_rejected`, `inconsistentInterval_rejected` |
@@ -1154,7 +1187,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 435 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 464 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  Before the first mutant of a test it runs the unmutated test in

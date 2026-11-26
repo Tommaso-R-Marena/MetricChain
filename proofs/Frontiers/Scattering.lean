@@ -216,9 +216,10 @@ theorem debye_eq_of_matching {ι : Type*} [Fintype ι] (N : ℕ) (q : ℝ) (s s'
   rw [hz, mul_zero] at hb
   exact sub_eq_zero.mp (abs_nonpos_iff.mp hb)
 
-/-- Non-vacuity and sharpness at the origin: the bound is an equality in the limit of small arguments, in the sense that
-`1 − sinc t ≤ t²/6` (the case `a = 0` of `abs_sinc_sub_le`) cannot hold with a constant below `1/6` — here only the
-inequality itself is recorded, together with a concrete instance. -/
+/-- The case `a = 0` of `abs_sinc_sub_le`: `1 − sinc t ≤ t²/6` for `t ≥ 0`.  The constant `1/6` cannot be lowered (the
+bound is an equality in the limit of small arguments), but that is **not formalised**: this theorem is the inequality
+only, and no instance is recorded.  (The first docstring was headed "Non-vacuity and sharpness"; Scientific
+Discovery Division, SCI-REV-0009.) -/
 theorem one_sub_sinc_le (t : ℝ) (ht : 0 ≤ t) : 1 - sinc t ≤ t ^ 2 / 6 := by
   have h := abs_sinc_sub_le (le_refl (0 : ℝ)) ht
   rw [sinc_zero] at h

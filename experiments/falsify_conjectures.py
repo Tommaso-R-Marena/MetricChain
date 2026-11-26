@@ -3628,6 +3628,219 @@ def t_ball_necessary(rng, trials):
     return True, stats
 
 
+@conjecture("XI.21 Share certificates after the Scientific Discovery Division's review SCI-REV-0012 (theory report Propositions 11.18b (d), (e) and 11.18c (a) as corrected; StateShares.lean).  (a) State-dependent shares s_ij(a) >= 0 with s_ij(a) + s_ji(b) >= c_ij - T_ij(a, b) for changed states and loads sum_j s_ij(a) <= A_i(a) certify that the reference minimises the pairwise lower model L(x) - L(x0) = sum_{i changed} A_i(x_i) + sum_{i<j changed} [T_ij(x_i, x_j) - c_ij]; constant shares of the deficits are a special case and strictly weaker (an instance with two sites and three states, the one of stateShare_witness); (b) such shares exist exactly when the reference solves the pairwise linear relaxation (local polytope) of the minimisation of L - they are a dual solution - so they can fail although the reference minimises L (an explicit frustrated triangle with an integrality gap); (c) on a reset-closed domain that is not a product the sound direction survives (shares imply that the reference minimises the lower model over the domain) and completeness does not: two sites with states {0, 1, 2}, the pair of states (1, 1) excluded, excitation energies (1, 10), pair constant 3 - the reference is certified for every member of the class on the domain (linear programme over the class) although the set of both sites is over-dense, 3 > 1 + 1")
+def t_state_shares(rng, trials):
+    from scipy.optimize import linprog
+    stats = dict(instances=0, state=0, const=0, state_not_const=0, minimiser=0, gap=0, domains=0, nonproduct=0,
+                 complete_fails=0, sound_domain=0)
+
+    def model_gap(n, k, A, c, T, x):
+        S = [i for i in range(n) if x[i] != 0]
+        return sum(A[i][x[i]] for i in S) + sum(T[i][j][x[i]][x[j]] - c[i][j] for a, i in enumerate(S) for j in S[a + 1:])
+
+    def state_shares_exist(n, k, A, c, T, signed=False):
+        """feasibility of: s_ij(a) >= 0, s_ij(a) + s_ji(b) >= c_ij - T_ij(a, b), sum_j s_ij(a) <= A_i(a)"""
+        idx = {}
+        for i in range(n):
+            for j in range(n):
+                if i != j:
+                    for a in range(1, k):
+                        idx[(i, j, a)] = len(idx)
+        rows, rhs = [], []
+        for i in range(n):
+            for j in range(i + 1, n):
+                for a in range(1, k):
+                    for b in range(1, k):
+                        r = np.zeros(len(idx)); r[idx[(i, j, a)]] = -1; r[idx[(j, i, b)]] = -1
+                        rows.append(r); rhs.append(-(c[i][j] - T[i][j][a][b]))
+        for i in range(n):
+            for a in range(1, k):
+                r = np.zeros(len(idx))
+                for j in range(n):
+                    if j != i:
+                        r[idx[(i, j, a)]] = 1
+                rows.append(r); rhs.append(A[i][a])
+        res = linprog(np.zeros(len(idx)), A_ub=np.array(rows), b_ub=np.array(rhs),
+                      bounds=[(None if signed else 0, None)] * len(idx), method="highs")
+        return res.status == 0
+
+    def const_shares_exist(n, w, load):
+        idx = {(i, j): t for t, (i, j) in enumerate((i, j) for i in range(n) for j in range(n) if i != j)}
+        rows, rhs = [], []
+        for i in range(n):
+            for j in range(i + 1, n):
+                r = np.zeros(len(idx)); r[idx[(i, j)]] = -1; r[idx[(j, i)]] = -1
+                rows.append(r); rhs.append(-w[i][j])
+        for i in range(n):
+            r = np.zeros(len(idx))
+            for j in range(n):
+                if j != i:
+                    r[idx[(i, j)]] = 1
+            rows.append(r); rhs.append(load[i])
+        res = linprog(np.zeros(len(idx)), A_ub=np.array(rows), b_ub=np.array(rhs), bounds=[(0, None)] * len(idx), method="highs")
+        return res.status == 0
+
+    def relaxation_value(n, k, A, c, T):
+        """min over the local polytope of sum theta_i mu_i + sum theta_ij mu_ij; 0 iff the reference is optimal"""
+        ui = {(i, a): i * k + a for i in range(n) for a in range(k)}
+        pairs = [(i, j) for i in range(n) for j in range(i + 1, n)]
+        pi = {(p, a, b): n * k + t * k * k + a * k + b for t, p in enumerate(pairs) for a in range(k) for b in range(k)}
+        nv = n * k + len(pairs) * k * k
+        cost = np.zeros(nv)
+        for i in range(n):
+            for a in range(1, k):
+                cost[ui[(i, a)]] = A[i][a]
+        for (i, j) in pairs:
+            for a in range(1, k):
+                for b in range(1, k):
+                    cost[pi[((i, j), a, b)]] = T[i][j][a][b] - c[i][j]
+        rows, rhs = [], []
+        for i in range(n):
+            r = np.zeros(nv)
+            for a in range(k):
+                r[ui[(i, a)]] = 1
+            rows.append(r); rhs.append(1.0)
+        for (i, j) in pairs:
+            for a in range(k):
+                r = np.zeros(nv); r[ui[(i, a)]] = -1
+                for b in range(k):
+                    r[pi[((i, j), a, b)]] = 1
+                rows.append(r); rhs.append(0.0)
+            for b in range(k):
+                r = np.zeros(nv); r[ui[(j, b)]] = -1
+                for a in range(k):
+                    r[pi[((i, j), a, b)]] = 1
+                rows.append(r); rhs.append(0.0)
+        res = linprog(cost, A_eq=np.array(rows), b_eq=np.array(rhs), bounds=[(0, None)] * nv, method="highs")
+        return float(res.fun)
+
+    def analyse(n, k, A, c, T):
+        confs = list(itertools.product(range(k), repeat=n))
+        mn = min(model_gap(n, k, A, c, T, x) for x in confs)
+        st = state_shares_exist(n, k, A, c, T)
+        w = [[max(0.0, max(c[i][j] - T[i][j][a][b] for a in range(1, k) for b in range(1, k))) if i != j else 0.0
+              for j in range(n)] for i in range(n)]
+        cs = const_shares_exist(n, w, [min(A[i][1:]) for i in range(n)])
+        lp = relaxation_value(n, k, A, c, T)
+        return mn, st, cs, lp
+
+    half = lambda lo, hi, size=None: rng.integers(int(2 * lo), int(2 * hi) + 1, size=size) / 2.0
+    for it in range(max(60, trials // 2)):
+        n, k = int(rng.integers(2, 5)), int(rng.integers(2, 4))
+        A = [[0.0] + [float(v) for v in half(0.5, 4.0, k - 1)] for _ in range(n)]
+        c = [[0.0] * n for _ in range(n)]
+        T = [[[[0.0] * k for _ in range(k)] for _ in range(n)] for _ in range(n)]
+        for i in range(n):
+            for j in range(i + 1, n):
+                c[i][j] = c[j][i] = float(half(0.0, 3.0)) if rng.random() < 0.8 else 0.0
+                if rng.random() < 0.6:
+                    for a in range(1, k):
+                        for b in range(1, k):
+                            T[i][j][a][b] = T[j][i][b][a] = float(half(-1.0, 2.5))
+        mn, st, cs, lp = analyse(n, k, A, c, T)
+        stats["instances"] += 1
+        stats["state"] += int(st); stats["const"] += int(cs); stats["minimiser"] += int(mn >= -1e-9)
+        stats["state_not_const"] += int(st and not cs); stats["gap"] += int(mn >= -1e-9 and not st)
+        if st and mn < -1e-7:
+            return False, dict(reason="state-dependent shares exist although the reference does not minimise the lower model",
+                               n=n, k=k, mn=mn)
+        if cs and not st:
+            return False, dict(reason="constant shares of the deficits exist but state-dependent shares do not", n=n, k=k)
+        if st != (lp >= -1e-6):
+            return False, dict(reason="state-dependent shares do not exist exactly when the reference solves the linear relaxation",
+                               n=n, k=k, shares=st, relaxation=lp)
+
+    # the witness of StateShares.lean: two sites, three states, the pair (1, 1) raised by 2 by the known part
+    A = [[0.0, 1.0, 10.0], [0.0, 1.0, 10.0]]
+    c = [[0.0, 3.0], [3.0, 0.0]]
+    T = [[[[0.0] * 3 for _ in range(3)] for _ in range(2)] for _ in range(2)]
+    T[0][1][1][1] = T[1][0][1][1] = 2.0
+    mn, st, cs, lp = analyse(2, 3, A, c, T)
+    if not (st and not cs and mn >= 0):
+        return False, dict(reason="the two-site witness: state-dependent shares should exist and constant shares of the deficits not",
+                           state=st, const=cs, mn=mn)
+    stats["state_not_const"] += 1                                  # the witness is the decisive case; random ones are extra
+    # an integrality gap: a frustrated triangle of binary sites; the reference minimises the model and no shares exist
+    A = [[0.0, 1.0], [0.0, 1.0], [0.0, 1.0]]
+    c = [[0.0, 2.0, 2.0], [2.0, 0.0, 0.0], [2.0, 0.0, 0.0]]
+    T = [[[[0.0] * 2 for _ in range(2)] for _ in range(3)] for _ in range(3)]
+    T[1][2][1][1] = T[2][1][1][1] = 10.0
+    mn, st, cs, lp = analyse(3, 2, A, c, T)
+    if not (mn >= 0 and not st and lp < -0.4):
+        return False, dict(reason="the frustrated triangle: the reference should minimise the model, the relaxation should be negative and no shares should exist",
+                           mn=mn, state=st, relaxation=lp)
+
+    # (c) reset-closed domains that are not products: additive known part, constants c_ij
+    def domain_case(n, k, A, c, forbidden):
+        D = [x for x in itertools.product(range(k), repeat=n)
+             if not any(((i, x[i]), (j, x[j])) in forbidden for i in range(n) for j in range(i + 1, n))]
+        Z = [[[[0.0] * k for _ in range(k)] for _ in range(n)] for _ in range(n)]
+        crit = min(model_gap(n, k, A, c, Z, x) for x in D) >= -1e-9          # the reference minimises the lower model over D
+        sh = const_shares_exist(n, c, [min(A[i][1:]) for i in range(n)])
+        return D, crit, sh
+
+    for it in range(max(40, trials // 4)):
+        n, k = 3, 3
+        A = [[0.0] + [float(v) for v in half(0.5, 4.0, k - 1)] for _ in range(n)]
+        c = [[0.0] * n for _ in range(n)]
+        for i in range(n):
+            for j in range(i + 1, n):
+                c[i][j] = c[j][i] = float(half(0.0, 3.0))
+        forbidden = set()
+        for i in range(n):
+            for j in range(i + 1, n):
+                for a in range(1, k):
+                    for b in range(1, k):
+                        if rng.random() < 0.3:
+                            forbidden.add(((i, a), (j, b)))
+        D, crit, sh = domain_case(n, k, A, c, forbidden)
+        if any(tuple(0 if t in R else x[t] for t in range(n)) not in D for x in D for r in range(n + 1)
+               for R in itertools.combinations(range(n), r)):
+            return False, dict(reason="a product minus forbidden pairs of changed states is not reset-closed")
+        stats["domains"] += 1
+        stats["nonproduct"] += int(len(D) < k ** n)
+        if sh and not crit:
+            return False, dict(reason="shares exist on a reset-closed domain although the reference does not minimise the lower model over it")
+        stats["sound_domain"] += int(sh)
+        stats["complete_fails"] += int(crit and not sh)
+
+    # the counter-example to completeness (SCI-REV-0012, section 3), with the class on the domain as a linear programme
+    A = [[0.0, 1.0, 10.0], [0.0, 1.0, 10.0]]
+    c = [[0.0, 3.0], [3.0, 0.0]]
+    D, crit, sh = domain_case(2, 3, A, c, {((0, 1), (1, 1))})
+    Dfull, crit_full, _ = domain_case(2, 3, A, c, set())
+    if not (len(D) == 8 and crit and not sh and not crit_full):
+        return False, dict(reason="the two-site counter-example: the criterion should hold on the domain, fail on the product, and no shares should exist",
+                           crit=crit, shares=sh, crit_full=crit_full)
+    # least value over the class on D of (E0 + g')(x) - (E0 + g')(x0): g' = 0 on the star, mixed differences over the
+    # rectangles inside D bounded by c
+    pos = {x: t for t, x in enumerate(D)}
+    rows, rhs = [], []
+    for a, a2 in itertools.combinations(range(3), 2):
+        for b, b2 in itertools.combinations(range(3), 2):
+            corners = [(a, b), (a, b2), (a2, b), (a2, b2)]
+            if all(x in pos for x in corners):
+                r = np.zeros(len(D)); r[pos[(a2, b2)]] += 1; r[pos[(a2, b)]] -= 1; r[pos[(a, b2)]] -= 1; r[pos[(a, b)]] += 1
+                rows += [r, -r]; rhs += [3.0, 3.0]
+    star = [x for x in D if x[0] == 0 or x[1] == 0]
+    eq = [np.eye(len(D))[pos[x]] for x in star]
+    worst = math.inf
+    for x in D:
+        obj = np.eye(len(D))[pos[x]]
+        res = linprog(obj, A_ub=np.array(rows), b_ub=np.array(rhs), A_eq=np.array(eq), b_eq=np.zeros(len(eq)),
+                      bounds=[(None, None)] * len(D), method="highs")
+        if res.status != 0:
+            return False, dict(reason="the class on the domain is empty or unbounded at a point of the domain", x=x, status=res.status)
+        worst = min(worst, A[0][x[0]] + A[1][x[1]] + float(res.fun))
+    if worst < -1e-7:
+        return False, dict(reason="on the two-site domain the reference is not a minimiser for some member of the class", worst=worst)
+    stats["complete_fails"] += 1                                   # the explicit counter-example; random domains are extra
+    if not (stats["state"] > 5 and stats["instances"] - stats["state"] > 5 and stats["nonproduct"] > 10
+            and stats["sound_domain"] > 0):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
 @conjecture("XI.14 Normal form: with f^d = min_x [f(x) + d(x, .)], sigma(a,y) = d(a,y) + f^d(a) - f^d(y) >= 0 and E^d = f^d + g, min(f + g') = min(f^d + g') on the admissible class, and for every evaluated set A the certified lower bound and the value upper bound of (d, f, g) are the lower bound and the incumbent of the instance (sigma, 0, E^d) without known part; s(a,y) - gap^d(y) = sigma(a,y) - gap^d(a)")
 def t_normal_form(rng, trials):
     stats = dict(sets=0, instances=0, strict_point_gap=0)
@@ -6924,7 +7137,7 @@ def t_ls_concatenation(rng, trials):
     return True, stats
 
 
-@conjecture("XVIII.7 Bridges with clean ends form an exact semigroup (theory report Proposition 11.69b; request T-4 of the Scientific Discovery Division's review SCI-REV-0006): call a bridge clean if the bond before its last bond is an up-bond and neither the linker of Lemma 11.68 placed above it nor the one placed below it has a pair within the cutoff with the bridge beyond the chain neighbours (equivalently: concatenating a three-bead bridge above it, or below it, changes (h, g) by nothing); then the concatenation of two clean bridges is a clean bridge with N1 + N2 + 3 beads and exactly additive (h3, h8, h11, g); every bridge becomes clean when a three-bead bridge is concatenated below and above it, at a cost within the constants of Lemma 11.68; not every bridge is clean, and for bridges that are not clean the concatenation error does not vanish")
+@conjecture("XVIII.7 Bridges with clean ends form an exact semigroup (theory report Proposition 11.69b; request T-4 of the Scientific Discovery Division's review SCI-REV-0006): call a bridge clean if the bond before its last bond is an up-bond and neither the linker of Lemma 11.68 placed above it nor the one placed below it has a pair within the cutoff with the bridge beyond the chain neighbours (equivalently: concatenating a three-bead bridge above it, or below it, changes (h, g) by nothing); then the concatenation of two clean bridges is a clean bridge with N1 + N2 + 3 beads and exactly additive (h3, h8, h11, g); every bridge becomes clean when a three-bead bridge is concatenated below and above it, at a cost within the constants of Lemma 11.68; not every bridge is clean, and for some pairs of bridges that are not clean the concatenation error does not vanish (not for all: Scientific Discovery Division, SCI-REV-0011)")
 def t_ls_exact_semigroup(rng, trials):
     nmax = 8              # up to 7 beads a bridge is clean iff the bond before its last bond is an up-bond; from 8 beads on not
     br = {N: ls_enum(N, bridge=True) for N in range(3, nmax + 1)}
@@ -6993,6 +7206,235 @@ def t_ls_exact_semigroup(rng, trials):
         stats["dirty_pairs_with_error"] += int(diff(prof(y), prof(x1), prof(x2)) != (0, 0, 0, 0))
     if stats["dirty_pairs_with_error"] == 0:
         return False, dict(reason="no concatenation error among bridges that are not clean: the restriction would be empty", **stats)
+    return True, stats
+
+
+@conjecture("XVIII.8 The concatenation error of bridges is a coboundary (theory report Proposition 11.69b as adopted at the eighteenth checkpoint: Theorem R9.1(a)-(e) of the Scientific Discovery Division, SCI-REV-0009; verified exhaustively up to 14 and 22 beads in experiments/coordinator_checks/limit_shape_review/r9/).  For a bridge x with last bond b and bond before it b', a bond c1 is admissible if c1 = b' when b' is an up-bond and if c1 is an up-bond out of the last bead otherwise; t1 = last + c1, t2 = t1 + b, t3 = t2 + c1 are beads N, N+1, N+2 and s1 = x0 - u2, s2 = s1 - u1, s3 = s2 - u2 beads -1, -2, -3; A(x, c1) counts the pairs (t_j, x_p) at chain separation at least 3 at squared distance 3, 8, 11, followed by [b' is a down-bond], and B(x) the same for the s_j, followed by 0.  Then (a) (h, g)(x1 o x2) = (h, g)(x1) + (h, g)(x2) + A(x1, c1) + B(x2), B(x1 o x2) = B(x1), and A(x1 o x2, phi(c1'')) = A(x2, c1'') for every bond admissible for x2, the phi(c1'') being the bonds admissible for the concatenation: (h, g) + A + B is exactly additive for all bridges; (b) clean bridges (b' up, A = 0, B = 0 - the same set as in XVIII.7) concatenate to clean bridges; (c) a head of two beads and a tail of three turn every bridge into a clean one with (h, g) = (h, g)(x) + A(x, c1) + B(x), a head of one bead fails for a bridge with 8 beads and a tail of two for a bridge with 12; 0 <= A <= (1, 6, 10; 1) and 0 <= B <= (0, 3, 4; 0), both attained, so that the concatenation of a bridge with 21 beads and one with 14 has the error (1, 9, 14; 1) of norm 60; (d) (h, g)/N is within 108/(N + 3) of the exact point ((h, g) + A + B)/(N + 3); (e) five clean bridges with 4, 5, 7, 8, 10 beads have vectors (h3, h8, h11, g; N + 3) of determinant 1")
+def t_ls_coboundary(rng, trials):
+    add = lambda p, v: (p[0] + v[0], p[1] + v[1], p[2] + v[2])
+    sub = lambda p, q: (p[0] - q[0], p[1] - q[1], p[2] - q[2])
+    neg = lambda v: (-v[0], -v[1], -v[2])
+    vsum = lambda *vs: tuple(sum(v[k] for v in vs) for k in range(4))
+
+    def admissible(x):
+        bp = sub(x[-2], x[-3])
+        if bp[1] == 1:
+            return [bp]
+        return [sub(q, x[-1]) for q in ls_nbrs(x[-1]) if q[1] == x[-1][1] + 1]
+
+    def above(x, c1):
+        b = sub(x[-1], x[-2])
+        t1 = add(x[-1], c1); t2 = add(t1, b); t3 = add(t2, c1)
+        return [t1, t2, t3]
+
+    def below(x):
+        u1, u2 = sub(x[1], x[0]), sub(x[2], x[1])
+        s1 = add(x[0], neg(u2)); s2 = add(s1, neg(u1)); s3 = add(s2, neg(u2))
+        return [s1, s2, s3]
+
+    def end_counts(x, sites, index_of_site):
+        cnt = [0, 0, 0]
+        for j, s in enumerate(sites):
+            for p, xp in enumerate(x):
+                if abs(index_of_site(j) - p) >= 3:                    # chain separation at least 3
+                    d = ls_sq(s, xp)
+                    if d in (3, 8, 11):
+                        cnt[(3, 8, 11).index(d)] += 1
+        return cnt
+
+    def A_of(x, c1):
+        N = len(x)
+        down = sub(x[-2], x[-3])[1] == -1
+        return tuple(end_counts(x, above(x, c1), lambda j: N + j)) + (int(down),)
+
+    def B_of(x):
+        return tuple(end_counts(x, below(x), lambda j: -1 - j)) + (0,)
+
+    def is_clean(x):
+        bp = sub(x[-2], x[-3])
+        return bp[1] == 1 and A_of(x, bp) == (0, 0, 0, 0) and B_of(x) == (0, 0, 0, 0)
+
+    def concat(x1, c1, x2):
+        """x1, t1, t2, t3, phi(x2); phi the height-preserving signed permutation that maps the first two bonds of x2 to (c1, b)"""
+        b = sub(x1[-1], x1[-2])
+        t = above(x1, c1)
+        Q = add(t[2], b)
+        u1, u2 = sub(x2[1], x2[0]), sub(x2[2], x2[1])
+        maps = []
+        for perm, sg in LS_SIGNED_PERMS:
+            if (perm[1], sg[1]) != (1, 1):
+                continue
+            phi = lambda v, perm=perm, sg=sg: (sg[0] * v[perm[0]], sg[1] * v[perm[1]], sg[2] * v[perm[2]])
+            if phi(u1) == c1 and phi(u2) == b:
+                maps.append(phi)
+        if len(maps) != 1:
+            return None, None
+        phi = maps[0]
+        return x1 + t + [add(Q, phi(sub(p, x2[0]))) for p in x2], phi
+
+    def extend(x, c1, head, tail):
+        s, t = below(x), above(x, c1)
+        return list(reversed(s[:head])) + x + t[:tail]
+
+    stats = dict(bridges=0, pairs=0, nonzero_error=0, with_B=0, two_bonds_differ=0, clean_pairs=0, cleaned=0,
+                 head1_fails=0, largest_A=(0, 0, 0, 0), largest_B=(0, 0, 0, 0), closest_108=0.0)
+    nmax = 9
+    br = [w for N in range(3, nmax + 1) for w in ls_enum(N, bridge=True)]
+    info = []
+    for x in br:
+        hg = ls_profile(x)
+        ad = admissible(x)
+        As = [A_of(x, c) for c in ad]
+        Bx = B_of(x)
+        info.append((x, hg, ad, As, Bx))
+        stats["bridges"] += 1
+        if any(a > m for A in As for a, m in zip(A, (1, 6, 10, 1))) or any(a > m for a, m in zip(Bx, (0, 3, 4, 0))) \
+                or min(min(A) for A in As) < 0 or min(Bx) < 0:
+            return False, dict(reason="an end correction leaves the box [0, (1, 6, 10; 1)] or [0, (0, 3, 4; 0)]", N=len(x))
+        for A in As:
+            stats["largest_A"] = tuple(max(a, b) for a, b in zip(stats["largest_A"], A))
+        stats["largest_B"] = tuple(max(a, b) for a, b in zip(stats["largest_B"], Bx))
+        if len(As) == 2 and As[0] != As[1]:
+            stats["two_bonds_differ"] += 1
+        # (c) head 2 + tail 3; (d) the exact point
+        N = len(x)
+        for c, A in zip(ad, As):
+            head, tail = 2, 3                                            # the claim of (c): two and three beads
+            xh = extend(x, c, head, tail)
+            if not (ls_valid_walk(xh) and ls_is_bridge(xh) and len(xh) == N + head + tail):
+                return False, dict(reason="head and tail do not give a bridge", N=N)
+            if not is_clean(xh):
+                return False, dict(reason="a bridge with a head of two beads and a tail of three is not clean", N=N, x=x)
+            if ls_profile(xh) != vsum(hg, A, Bx):
+                return False, dict(reason="(h, g) of the cleaned bridge is not (h, g) + A + B", N=N)
+            stats["cleaned"] += 1
+            x1h = extend(x, c, 1, 3)
+            if not is_clean(x1h):
+                stats["head1_fails"] += 1
+                if N < 8:
+                    return False, dict(reason="a head of one bead fails below 8 beads", N=N)
+            q = vsum(hg, A, Bx)
+            dlt = [hg[k] / N - q[k] / (N + 3) for k in range(4)]
+            dist = ls_cnorm(dlt[:3]) + abs(dlt[3])
+            if dist > 108 / (N + 3) + 1e-12:
+                return False, dict(reason="(h, g)/N is farther than 108/(N + 3) from the exact point", N=N, dist=dist)
+            stats["closest_108"] = max(stats["closest_108"], dist * (N + 3) / 108)
+    # the definition of clean agrees with the one of XVIII.7 (a three-bead bridge above or below changes nothing)
+    z3 = ls_enum(3, bridge=True)[0]
+    for x, hg, ad, As, Bx in info:
+        if len(x) > 8:
+            continue
+        old = False
+        if sub(x[-2], x[-3])[1] == 1:
+            top, _, n1 = ls_concat(x, z3, 0)
+            bot, _, n2 = ls_concat(z3, x, 0)
+            old = n1 == 1 and n2 == 1 and ls_profile(top) == hg and ls_profile(bot) == hg
+        if old != is_clean(x):
+            return False, dict(reason="the two definitions of a clean bridge differ", x=x)
+
+    def check_pair(i1, k1, i2):
+        x1, hg1, ad1, As1, B1 = info[i1]
+        x2, hg2, ad2, As2, B2 = info[i2]
+        c1 = ad1[k1]
+        y, phi = concat(x1, c1, x2)
+        if y is None or not (ls_valid_walk(y) and ls_is_bridge(y) and len(y) == len(x1) + len(x2) + 3):
+            return dict(reason="the concatenation is not a bridge with N1 + N2 + 3 beads, or the symmetry is not unique")
+        hy = ls_profile(y)
+        if hy != vsum(hg1, hg2, As1[k1], B2):
+            return dict(reason="(h, g)(x1 o x2) is not (h, g)(x1) + (h, g)(x2) + A(x1, c1) + B(x2)",
+                        got=hy, want=vsum(hg1, hg2, As1[k1], B2))
+        if B_of(y) != B1:
+            return dict(reason="B(x1 o x2) is not B(x1)")
+        ady = admissible(y)
+        if sorted(ady) != sorted(phi(c) for c in ad2):
+            return dict(reason="the bonds admissible for the concatenation are not the images of those admissible for x2")
+        for c2, A2 in zip(ad2, As2):
+            if A_of(y, phi(c2)) != A2:
+                return dict(reason="A(x1 o x2, phi(c1'')) is not A(x2, c1'')")
+        cl = is_clean(y)
+        want_clean = B1 == (0, 0, 0, 0) and sub(x2[-2], x2[-3])[1] == 1 and As2[0] == (0, 0, 0, 0)
+        if cl != want_clean:
+            return dict(reason="the concatenation is clean in the wrong cases")
+        stats["pairs"] += 1
+        stats["nonzero_error"] += int(vsum(As1[k1], B2) != (0, 0, 0, 0))
+        stats["with_B"] += int(B2 != (0, 0, 0, 0))
+        if is_clean(x1) and is_clean(x2):
+            if not cl or hy != vsum(hg1, hg2):
+                return dict(reason="two clean bridges do not concatenate to a clean bridge with exactly additive (h, g)")
+            stats["clean_pairs"] += 1
+        return None
+
+    small = [i for i, t in enumerate(info) if len(t[0]) <= 5]
+    for i1 in small:
+        for i2 in small:
+            for k1 in range(len(info[i1][2])):
+                bad = check_pair(i1, k1, i2)
+                if bad:
+                    return False, bad
+    withB = [i for i, t in enumerate(info) if t[4] != (0, 0, 0, 0)]
+    withA = [i for i, t in enumerate(info) if any(A[:3] != (0, 0, 0) for A in t[3])]
+    if not withB or not withA:
+        return False, dict(reason="no bridge with a nonzero end correction among the bridges tested", **stats)
+    todo = [(int(rng.integers(len(info))), int(rng.integers(len(info)))) for _ in range(max(150, trials))]
+    todo += [(int(rng.integers(len(info))), i2) for i2 in withB[:: max(1, len(withB) // 40)]]
+    todo += [(i1, int(rng.integers(len(info)))) for i1 in withA[:: max(1, len(withA) // 40)]]
+    for i1, i2 in todo:
+        for k1 in range(len(info[i1][2])):
+            bad = check_pair(i1, k1, i2)
+            if bad:
+                return False, bad
+
+    # (c) a tail of two beads fails for a bridge with 12 beads (Scientific Discovery Division, SCI-REV-0011, section 2)
+    x12 = [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 2, 4), (3, 3, 5), (4, 2, 6), (5, 1, 5), (6, 2, 4), (5, 3, 3),
+           (4, 2, 2), (3, 3, 1)]
+    c12 = (-1, 1, 1)
+    if not (ls_valid_walk(x12) and ls_is_bridge(x12) and c12 in admissible(x12)):
+        return False, dict(reason="the 12-bead example is not a bridge with the stated admissible bond")
+    if is_clean(extend(x12, c12, 2, 2)) or not is_clean(extend(x12, c12, 2, 3)):
+        return False, dict(reason="for the 12-bead example a tail of two beads should fail and a tail of three succeed")
+    # attainment of the bounds, and of beta = 60
+    xa = [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 1, 3), (-2, 2, 4), (-3, 3, 3), (-4, 4, 4), (-5, 3, 5), (-4, 2, 6), (-3, 3, 7),
+          (-2, 4, 6), (-1, 3, 5), (0, 4, 4), (1, 3, 3), (2, 4, 2), (3, 3, 1), (2, 2, 0), (1, 3, -1), (0, 4, 0), (-1, 3, 1),
+          (-2, 4, 2)]
+    xb = [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1), (-2, 2, 0), (-1, 1, -1), (0, 2, -2), (1, 1, -3), (2, 2, -4), (3, 3, -3),
+          (4, 2, -2), (3, 1, -1), (2, 2, 0), (1, 3, -1)]
+    ca = (1, 1, 1)
+    if not (ls_valid_walk(xa) and ls_is_bridge(xa) and ls_valid_walk(xb) and ls_is_bridge(xb) and ca in admissible(xa)):
+        return False, dict(reason="the extremal bridges are not bridges")
+    if A_of(xa, ca) != (1, 6, 10, 1) or B_of(xb) != (0, 3, 4, 0):
+        return False, dict(reason="the bounds (1, 6, 10; 1) and (0, 3, 4; 0) are not attained by the stated bridges",
+                           A=A_of(xa, ca), B=B_of(xb))
+    y, _ = concat(xa, ca, xb)
+    err = tuple(a - b - c for a, b, c in zip(ls_profile(y), ls_profile(xa), ls_profile(xb)))
+    if err != (1, 9, 14, 1) or ls_cnorm(err[:3]) + err[3] != 60:
+        return False, dict(reason="the concatenation of the extremal pair does not have the error (1, 9, 14; 1) of norm 60", err=err)
+    # (e) five clean bridges whose vectors (h3, h8, h11, g; N + 3) have determinant 1
+    five = [[(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1)],
+            [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 4, 2)],
+            [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1), (-2, 2, 0), (-3, 3, -1), (-4, 4, 0)],
+            [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 2, 4), (3, 1, 3), (4, 2, 2), (5, 3, 3)],
+            [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 1, 3), (-2, 2, 4), (-1, 3, 5), (0, 4, 4), (1, 3, 3), (2, 4, 2), (3, 5, 3)]]
+    rows = []
+    for w in five:
+        if not (ls_valid_walk(w) and ls_is_bridge(w) and is_clean(w)):
+            return False, dict(reason="one of the five bridges of the lattice certificate is not a clean bridge")
+        rows.append([Fraction(v) for v in ls_profile(w)] + [Fraction(len(w) + 3)])
+    det = Fraction(1)
+    for col in range(5):                                           # exact elimination
+        piv = next((r for r in range(col, 5) if rows[r][col] != 0), None)
+        if piv is None:
+            det = Fraction(0); break
+        if piv != col:
+            rows[col], rows[piv] = rows[piv], rows[col]; det = -det
+        det *= rows[col][col]
+        for r in range(col + 1, 5):
+            f = rows[r][col] / rows[col][col]
+            rows[r] = [a - f * b for a, b in zip(rows[r], rows[col])]
+    if abs(det) != 1:
+        return False, dict(reason="the five vectors of the lattice certificate do not have determinant +-1", det=str(det))
+    if not (stats["nonzero_error"] > 20 and stats["with_B"] > 10 and stats["two_bonds_differ"] > 0 and stats["clean_pairs"] > 50
+            and stats["head1_fails"] > 0 and stats["pairs"] > 1000):
+        return False, dict(reason="cases not exercised", **stats)
     return True, stats
 
 
@@ -10531,6 +10973,525 @@ def t_envelope_sampler(rng, trials):
     if not (width(0.0605, 50000, 0.05) < 7.6e-4 and width(0.0605, 1200, 0.05) < 5e-3 and width(0.0605, 1100, 0.05) > 5e-3):
         return False, dict(reason="the quoted widths", a=width(0.0605, 50000, 0.05), b=width(0.0605, 1200, 0.05))
     if not (stats["sandwiches"] >= 30 and stats["gain"] < 0.5 and stats["best_gain"] > 1 - 1e-9 and stats["runs"] >= 1000):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
+# -----------------------------------------------------------------------------------------------------------------
+# XXV. Known parts with interactions along the chain: nearest-neighbour (Markov) reference measures (theory report
+#      11.32; workstream Y, referee R11, review SCI-REV-0010 of the Scientific Discovery Division)
+# -----------------------------------------------------------------------------------------------------------------
+def mk_chain(fields, couplings):
+    """binary nearest-neighbour chain: pi(x) proportional to exp(-sum_i f_i[x_i] - sum_i J_i[x_i][x_{i+1}]); (confs, pi)"""
+    n = len(fields)
+    confs = list(itertools.product((0, 1), repeat=n))
+    w = np.array([math.exp(-sum(fields[i][x[i]] for i in range(n)) - sum(couplings[i][x[i]][x[i + 1]] for i in range(n - 1)))
+                  for x in confs])
+    return confs, w / w.sum()
+
+
+def mk_dist(confs, d):
+    """d(x, y) = sum_i d[i][x_i][y_i] as a matrix"""
+    X = np.array(confs)
+    D = np.zeros((len(confs), len(confs)))
+    for i in range(X.shape[1]):
+        di = np.array(d[i])
+        D += di[X[:, i][:, None], X[:, i][None, :]]
+    return D
+
+
+def mk_member(rng, D, scale=2.0):
+    """a random member of {psi : psi(x) - psi(y) <= d(x, y)}: an inf-convolution of a random function"""
+    r = rng.normal(0, scale, D.shape[0])
+    return (r[None, :] + D).min(axis=1)
+
+
+def mk_in_class(psi, D, tol=1e-9):
+    return bool(((psi[:, None] - psi[None, :]) <= D + tol).all())
+
+
+def mk_sym_block_law(L, p, prev=None):
+    """law of L consecutive sites of the symmetric binary chain with flip probability p (stationary, or given the
+    letter before the block); configurations as integers, site i = bit i"""
+    P = np.zeros(2 ** L)
+    for x in range(2 ** L):
+        b = [(x >> i) & 1 for i in range(L)]
+        w = 0.5 if prev is None else (p if b[0] != prev else 1 - p)
+        for i in range(L - 1):
+            w *= p if b[i] != b[i + 1] else 1 - p
+        P[x] = w
+    return P
+
+
+def mk_cube_vertices(w, tol=1e-9):
+    """all vertices of {f : |f(x) - f(x^i)| <= w_i} on the cube Q_L, f(0) = 0: a vertex has a connected graph of tight
+    edges, hence a spanning tree of tight edges with signs (L <= 3: 384 trees of Q_3)"""
+    L = len(w)
+    nv = 2 ** L
+    edges = [(x, x | (1 << i), i) for x in range(nv) for i in range(L) if not (x >> i) & 1]
+    ea = np.array([e[0] for e in edges]); eb = np.array([e[1] for e in edges]); ew = np.array([w[e[2]] for e in edges])
+    signs = np.array(list(itertools.product((1.0, -1.0), repeat=nv - 1)))
+    seen = {}
+    for S in itertools.combinations(range(len(edges)), nv - 1):
+        adj = {v: [] for v in range(nv)}
+        for k in S:
+            a, b, i = edges[k]
+            adj[a].append((b, k)); adj[b].append((a, k))
+        col = {k: t for t, k in enumerate(S)}
+        B = np.zeros((nv, nv - 1)); seen_v = {0}; stack = [0]
+        while stack:
+            v = stack.pop()
+            for (u2, k) in adj[v]:
+                if u2 not in seen_v:
+                    seen_v.add(u2); B[u2] = B[v]; B[u2, col[k]] = 1.0; stack.append(u2)
+        if len(seen_v) < nv:
+            continue                                               # not a spanning tree
+        F = (signs * np.array([w[edges[k][2]] for k in S])[None, :]) @ B.T
+        ok = (np.abs(F[:, ea] - F[:, eb]) <= ew[None, :] + tol).all(axis=1)
+        for f in F[ok]:
+            seen[tuple(np.round(f, 9))] = f
+    return np.array([seen[k] for k in sorted(seen)])
+
+
+def mk_heights(L):
+    """integer height functions on Q_L (f(0) = 0, |f(x) - f(x^i)| = 1 on every edge): the vertices for a uniform slope"""
+    nv = 2 ** L
+    order = sorted(range(nv), key=lambda x: (bin(x).count("1"), x))
+    out, f = [], [None] * nv
+
+    def rec(k):
+        if k == nv:
+            out.append(list(f)); return
+        x = order[k]
+        vals = None
+        for i in range(L):
+            y = x ^ (1 << i)
+            if f[y] is not None:
+                c = {f[y] - 1, f[y] + 1}
+                vals = c if vals is None else vals & c
+        for v in sorted(vals):
+            f[x] = v
+            rec(k + 1)
+        f[x] = None
+
+    f[0] = 0
+    rec(1)
+    return np.array(out, float)
+
+
+def mk_rows(pi, V):
+    lp = np.log(np.asarray(pi, float))[None, :] - np.asarray(V, float)
+    lp -= lp.max(axis=1, keepdims=True)
+    P = np.exp(lp)
+    return P / P.sum(axis=1, keepdims=True)
+
+
+def mk_renyi(P, t, iters=400):
+    """Arimoto iteration for F*(t) = max_M -t ln sum_a (sum_phi M pi_phi^t)^(1/t); returns (G_t(M), dual value at the
+    centre of M, M): by weak duality the first is a lower and the second an upper bound for F*(t), for every M"""
+    Pt = P ** t
+    M = np.full(P.shape[0], 1.0 / P.shape[0])
+    for _ in range(iters):
+        s = M @ Pt
+        N = float((s ** (1.0 / t)).sum())
+        r = Pt @ (s ** ((1.0 - t) / t))
+        M = M * (r / N) ** (-t / (1.0 - t))
+        M /= M.sum()
+    s = M @ Pt
+    N = float((s ** (1.0 / t)).sum())
+    r = Pt @ (s ** ((1.0 - t) / t))
+    return -t * math.log(N), -math.log(float(r.min())) + (1.0 - t) * math.log(N), M
+
+
+def mk_capacity(P, iters=3000):
+    """Blahut-Arimoto: (I(M; P), max_phi KL(pi_phi || Q_M)), a lower and an upper bound for the capacity"""
+    M = np.full(P.shape[0], 1.0 / P.shape[0])
+    lP = np.log(P)
+    for _ in range(iters):
+        Q = M @ P
+        kl = (P * (lP - np.log(Q)[None, :])).sum(axis=1)
+        M = M * np.exp(kl - kl.max())
+        M /= M.sum()
+    Q = M @ P
+    kl = (P * (lP - np.log(Q)[None, :])).sum(axis=1)
+    return float(M @ kl), float(kl.max())
+
+
+def mk_ustar(u, p):
+    """the fixed point of x = u + ln[((1-p)e^x + p)/(p e^x + 1 - p)] (p < 1/2): the one-sided slack of the Markov recursion"""
+    x = u
+    for _ in range(400):
+        x = u + math.log(((1 - p) * math.exp(x) + p) / (p * math.exp(x) + 1 - p))
+    return x
+
+
+def mk_cube(u):
+    """the uniform binary cube at slope u: (h, a, E) per site"""
+    Psi = lambda s: math.log(math.cosh(s / 2))
+    v, t = mf_golden(lambda t: -(t * Psi(u) - Psi(t * u)), 1e-6, 1 - 1e-6, tol=1e-12)
+    pu = 1 / (1 + math.exp(u))
+    return -v, math.log(2) + pu * math.log(pu) + (1 - pu) * math.log(1 - pu), Psi(u)
+
+
+@conjecture("XXV.1 Nearest-neighbour chains as known parts: the two exact reductions to products of blocks, and the lower bound for every algorithm (theory report Theorem 11.116(a)-(c); workstream Y, Theorems Y1, Y3 and Lemma A; re-derived by referee R11 and by the Scientific Discovery Division, SCI-REV-0010).  (U) With cuts between blocks, pi = rho e^{-g}/E_rho e^{-g} for the product rho of the free-boundary block laws and g the cut interactions, ln A_pi(psi) = ln A_rho(psi + g) - ln A_rho(g), and psi + g lies in the class of the envelope with the slacks delta^-(a, a') = max_b [J(a, b) - J(a', b)] at the site left of a cut and delta^+(b, b') = max_a [J(a, b) - J(a, b')] at the site right of it - and not in the class without them; (L') for blocks with gaps, the marginal on the blocks is the product of the block marginals times prod rho_j, and for every psi' in the class of the envelope reduced by eps^-/+ at the block ends, psi' + sum ln rho_j is a member of the chain's class with A_pi = A_product(psi') exactly; (A) for any label law M and 0 < t < 1 the soft minimum gamma* of the normalised labels is a member, sum_phi M(phi) (pi_phi/pi_gamma*)^t is the constant e^{-G_t(M)}, and gamma* - (r - Phi_phi)_+ is a member that raises ln A by at least r")
+def t_markov_reductions(rng, trials):
+    stats = dict(chains=0, U=0, U_needs_slack=0, Lp=0, Lp_needs_reduction=0, A=0, worst=0.0)
+    for it in range(max(8, trials // 20)):
+        n = int(rng.integers(5, 8))
+        fields = [rng.normal(0, 0.7, 2) for _ in range(n)]
+        strong = it % 2 == 0
+        coup = [rng.normal(0, 1.2 if strong else 0.25, (2, 2)) for _ in range(n - 1)]
+        d = [np.array([[0.0, rng.uniform(0.3, 1.5)], [rng.uniform(0.3, 1.5), 0.0]]) for _ in range(n)]
+        if not strong:
+            d = [x * 2.5 for x in d]                                 # room for the reduced envelope of (L')
+        confs, pi = mk_chain(fields, coup)
+        D = mk_dist(confs, d)
+        stats["chains"] += 1
+        # ---- (U)
+        cuts = sorted(c for c in range(n - 1) if rng.random() < 0.4) or [int(rng.integers(n - 1))]
+        coup0 = [np.zeros((2, 2)) if c in cuts else coup[c] for c in range(n - 1)]
+        bounds = [0] + [c + 1 for c in cuts] + [n]
+        rho = np.ones(len(confs))
+        for a, b in zip(bounds[:-1], bounds[1:]):                    # product of the free-boundary block laws
+            cb, pb = mk_chain(fields[a:b], coup[a:b - 1])
+            lookup = {x: v for x, v in zip(cb, pb)}
+            rho *= np.array([lookup[x[a:b]] for x in confs])
+        g = np.array([sum(coup[c][x[c]][x[c + 1]] for c in cuts) for x in confs])
+        if abs(rho.sum() - 1) > 1e-12 or np.abs(pi - rho * np.exp(-g) / float(rho @ np.exp(-g))).max() > 1e-12:
+            return False, dict(reason="pi is not rho e^{-g} normalised")
+        dplus = [x.copy() for x in d]
+        dminus_only = [x.copy() for x in d]
+        for c in cuts:
+            J = coup[c]
+            for a in range(2):
+                for a2 in range(2):
+                    if a != a2:
+                        dm = max(J[a][b] - J[a2][b] for b in range(2))
+                        dp = max(J[b][a] - J[b][a2] for b in range(2))
+                        dplus[c][a][a2] += dm; dminus_only[c][a][a2] += dm
+                        dplus[c + 1][a][a2] += dp
+        Dplus, Dhalf = mk_dist(confs, dplus), mk_dist(confs, dminus_only)
+        for _ in range(4):
+            psi = mk_member(rng, D)
+            lhs = math.log(float(pi @ np.exp(-psi)))
+            rhs = math.log(float(rho @ np.exp(-psi - g))) - math.log(float(rho @ np.exp(-g)))
+            stats["worst"] = max(stats["worst"], abs(lhs - rhs))
+            if abs(lhs - rhs) > 1e-10:
+                return False, dict(reason="ln A_pi(psi) is not ln A_rho(psi + g) - ln A_rho(g)", err=abs(lhs - rhs))
+            if not mk_in_class(psi + g, Dplus):
+                return False, dict(reason="psi + g is not in the class of the envelope with the two slacks", cuts=cuts)
+            stats["U"] += 1
+            stats["U_needs_slack"] += int(not mk_in_class(psi + g, D))
+        # ---- (L'): blocks with gaps (only on the chains with weak couplings, where the reduced envelope is nonnegative)
+        if not strong:
+            L1 = int(rng.integers(1, 3)); m = int(rng.integers(0, 2)); L2 = n - L1 - m
+            B1, B2 = list(range(L1)), list(range(L1 + m, n))
+            e1, s2 = L1 - 1, L1 + m
+            X = np.array(confs)
+            def marg(sites):
+                out = {}
+                for x, v in zip(confs, pi):
+                    k = tuple(x[i] for i in sites)
+                    out[k] = out.get(k, 0.0) + v
+                return out
+            mB, m1, m2 = marg(B1 + B2), marg(B1), marg(B2)
+            me, ms, mes = marg([e1]), marg([s2]), marg([e1, s2])
+            rho0 = np.array([[mes[(a, b)] / (me[(a,)] * ms[(b,)]) for b in range(2)] for a in range(2)])
+            for k, v in mB.items():
+                if abs(v - m1[k[:L1]] * m2[k[L1:]] * rho0[k[L1 - 1]][k[L1]]) > 1e-12:
+                    return False, dict(reason="the marginal on the blocks is not the product of the block marginals times rho")
+            lr = np.log(rho0)
+            dred = [x.copy() for x in d]
+            for a in range(2):
+                for a2 in range(2):
+                    if a != a2:
+                        dred[e1][a][a2] -= max(lr[a][b] - lr[a2][b] for b in range(2))
+                        dred[s2][a][a2] -= max(lr[b][a] - lr[b][a2] for b in range(2))
+            if min(dred[e1].min(), dred[s2].min()) >= 0:
+                bc = sorted(mB)
+                pos = {k: t for t, k in enumerate(bc)}
+                prodlaw = np.array([m1[k[:L1]] * m2[k[L1:]] for k in bc])
+                proj = np.array([pos[tuple(x[i] for i in B1 + B2)] for x in confs])
+                corr = np.array([lr[x[e1]][x[s2]] for x in confs])
+                for reduced in (True, False):
+                    Db = mk_dist(bc, [(dred if reduced else d)[i] for i in B1 + B2])
+                    for _ in range(3):
+                        psib = mk_member(rng, Db)
+                        psi = psib[proj] + corr
+                        inside = mk_in_class(psi, D)
+                        if reduced:
+                            if not inside:
+                                return False, dict(reason="psi' + ln rho is not a member of the chain's class")
+                            err = abs(math.log(float(pi @ np.exp(-psi))) - math.log(float(prodlaw @ np.exp(-psib))))
+                            stats["worst"] = max(stats["worst"], err)
+                            if err > 1e-10:
+                                return False, dict(reason="A_pi(psi' + ln rho) is not A_product(psi')", err=err)
+                            stats["Lp"] += 1
+                        else:
+                            stats["Lp_needs_reduction"] += int(not inside)
+        # ---- Lemma A
+        labels = [mk_member(rng, D) for _ in range(6)]
+        M = rng.dirichlet(np.ones(6)); t = float(rng.uniform(0.2, 0.8))
+        tilde = [phi + math.log(float(pi @ np.exp(-phi))) for phi in labels]          # normalised: E_pi e^{-phi~} = 1
+        gibbs = [pi * np.exp(-ph) for ph in tilde]
+        mix = sum(Mk * gk ** t for Mk, gk in zip(M, gibbs))
+        G = -t * math.log(float((mix ** (1 / t)).sum()))
+        gamma = -(1 / t) * np.log(sum(Mk * np.exp(-t * ph) for Mk, ph in zip(M, tilde)))
+        if not mk_in_class(gamma, D):
+            return False, dict(reason="the soft minimum of the labels is not a member of the class")
+        pg = pi * np.exp(-gamma); Ag = float(pg.sum()); pg /= Ag
+        const = sum(Mk * (gk / pg) ** t for Mk, gk in zip(M, gibbs))
+        if np.abs(const - math.exp(-G)).max() > 1e-9 * math.exp(-G):
+            return False, dict(reason="sum_phi M (pi_phi/pi_gamma*)^t is not the constant e^{-G_t(M)}",
+                               spread=float(const.max() - const.min()))
+        r = float(rng.uniform(0.1, 1.5))
+        for ph in tilde:
+            Phi = ph - (gamma + math.log(Ag))
+            if abs(float(pg @ np.exp(-Phi)) - 1) > 1e-9:
+                return False, dict(reason="E_{pi_gamma*} e^{-Phi} is not 1")
+            alt = gamma - np.maximum(r - Phi, 0.0)
+            if not mk_in_class(alt, D):
+                return False, dict(reason="an alternative gamma* - (r - Phi)_+ is not a member of the class")
+            if math.log(float(pi @ np.exp(-alt))) - math.log(Ag) < r - 1e-9:
+                return False, dict(reason="an alternative does not raise ln A by r")
+        stats["A"] += 1
+    if not (stats["U_needs_slack"] > 0 and stats["Lp"] > 5 and stats["Lp_needs_reduction"] > 0 and stats["A"] >= 8):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
+@conjecture("XXV.2 The symmetric binary chain with flip probability p at slope u: what the interaction does to the exponents (theory report Theorem 11.116(d)-(f), Proposition 11.117; workstream Y, Propositions F, J; referee R11, section 4.4; Scientific Discovery Division, SCI-REV-0010, finding M1).  (a) The Markov recursion: for every member phi, every Markov chain Q and 0 < t < 1, sum_x pi_phi^t Q^{1-t} >= prod_i c_i with c_i the least one-site value over the class of the envelope with the one-sided slack d*_i = d_i + G_i (random inhomogeneous chains); (b) the threshold: max over all vertices of KL(pi || pi_phi) is attained by the uniform field and equals ln Z_n(u/2)/Z_n(0) for n <= 4, whose growth rate is E_F = ln[(1-p)cosh(u/2) + sqrt((1-p)^2 sinh^2(u/2) + p^2)] > ln cosh(u/2); (c) at u = 1 the exponent of every algorithm is above the uniform cube's: with block labels of reduced end slopes the product of block Gibbs laws is the Gibbs law of a member of the chain's class (checked end to end on 8 sites), so G_t of one block of 10 sites divided by 10 is a lower bound for every algorithm, and it exceeds 0.029139 at p = 0.3; (d) the direction depends on the slope: at (p, u) = (0.2, 3) the capacity of the block channel of three sites with slopes (u, u, u*), divided by 3 - an upper bound for the non-adaptive exponent at vanishing accuracy - is below the cube's ln 2 - H(1/(1+e^u)), while the threshold is above the cube's at every slope")
+def t_markov_symmetric(rng, trials):
+    stats = dict(F_cases=0, F_smallest=math.inf, F_needs_slack=0, thr=0, block_bound=0.0, reversal=0.0)
+    # ---- (a) the product inequality of the Markov recursion
+    for it in range(max(30, trials // 4)):
+        n = int(rng.integers(3, 7))
+        fields = [rng.normal(0, 0.6, 2) for _ in range(n)]
+        coup = [rng.normal(0, 1.0, (2, 2)) for _ in range(n - 1)]
+        d = [np.array([[0.0, rng.uniform(0.2, 1.5)], [rng.uniform(0.2, 1.5), 0.0]]) for _ in range(n)]
+        confs, pi = mk_chain(fields, coup)
+        D = mk_dist(confs, d)
+        phi = mk_member(rng, D)
+        t = float(rng.uniform(0.15, 0.85))
+        # kernels of pi: P_1 = law of x_1, P_i(b, a) = P(x_i = a | x_{i-1} = b)
+        X = np.array(confs)
+        P1 = np.array([pi[X[:, 0] == a].sum() for a in range(2)])
+        Pk = []
+        for i in range(1, n):
+            K = np.array([[pi[(X[:, i - 1] == b) & (X[:, i] == a)].sum() for a in range(2)] for b in range(2)])
+            Pk.append(K / K.sum(axis=1, keepdims=True))
+        q1 = rng.dirichlet(np.ones(2)); qk = [rng.dirichlet(np.ones(2), size=2) for _ in range(n - 1)]
+        Q = np.array([q1[x[0]] * math.prod(qk[i - 1][x[i - 1]][x[i]] for i in range(1, n)) for x in confs])
+        pphi = pi * np.exp(-phi); pphi /= pphi.sum()
+        lhs = float((pphi ** t * Q ** (1 - t)).sum())
+
+        def bound(with_slack):
+            dstar = [None] * n
+            dstar[n - 1] = d[n - 1].copy()
+            for i in range(n - 2, -1, -1):
+                Gi = np.zeros((2, 2))
+                if with_slack:
+                    K = Pk[i]                                      # kernel from site i to site i + 1
+                    for a in range(2):
+                        for a2 in range(2):
+                            if a != a2:
+                                ends = (math.exp(-dstar[i + 1][1][0]), math.exp(dstar[i + 1][0][1]))
+                                Gi[a][a2] = max(math.log((K[a2][0] + K[a2][1] * r) / (K[a][0] + K[a][1] * r)) for r in ends)
+                dstar[i] = d[i] + Gi
+            prod = 1.0
+            for i in range(n):
+                rows = [P1] if i == 0 else [Pk[i - 1][b] for b in range(2)]
+                qs = [q1] if i == 0 else [qk[i - 1][b] for b in range(2)]
+                ci = math.inf
+                for Pr, qr in zip(rows, qs):
+                    for lam in np.linspace(-dstar[i][0][1], dstar[i][1][0], 201):   # gamma(1) - gamma(0)
+                        gl = Pr * np.exp(-np.array([0.0, lam])); gl /= gl.sum()
+                        ci = min(ci, float((qr ** (1 - t) * gl ** t).sum()))
+                prod *= ci
+            return prod
+
+        b_slack, b_plain = bound(True), bound(False)
+        if lhs < b_slack * (1 - 1e-9):
+            return False, dict(reason="the product bound of the Markov recursion is violated", n=n, t=t, ratio=lhs / b_slack)
+        stats["F_cases"] += 1
+        stats["F_smallest"] = min(stats["F_smallest"], lhs / b_slack)
+        stats["F_needs_slack"] += int(lhs < b_plain * (1 - 1e-9))
+    # a case in which the slack decides: the uniform field on a strongly coupled chain, with the chain itself as Q
+    p, u, n, t = 0.1, 1.0, 8, 0.5
+    pi = mk_sym_block_law(n, p)
+    mag = np.array([sum(1 if (x >> i) & 1 else -1 for i in range(n)) for x in range(2 ** n)], float)
+    pphi = pi * np.exp(u / 2 * mag); pphi /= pphi.sum()
+    lhs = float((pphi ** t * pi ** (1 - t)).sum())
+    us = mk_ustar(u, p)
+
+    def one_site(slope, row):
+        best = math.inf
+        for lam in (-slope, slope):
+            gl = row * np.exp(-np.array([0.0, lam])); gl /= gl.sum()
+            best = min(best, float((row ** (1 - t) * gl ** t).sum()))
+        return best
+    with_slack = one_site(us, np.array([0.5, 0.5])) * one_site(us, np.array([1 - p, p])) ** (n - 2) * one_site(u, np.array([1 - p, p]))
+    without = one_site(u, np.array([0.5, 0.5])) * one_site(u, np.array([1 - p, p])) ** (n - 1)
+    if lhs < with_slack * (1 - 1e-9):
+        return False, dict(reason="the product bound of the Markov recursion is violated by the uniform field", ratio=lhs / with_slack)
+    stats["F_needs_slack"] += int(lhs < without * (1 - 1e-9))
+    # ---- (b) the threshold
+    for p in (0.4, 0.3):
+        u = 1.0
+        lam = 1 - 2 * p
+        EF = math.log((1 - p) * math.cosh(u / 2) + math.sqrt((1 - p) ** 2 * math.sinh(u / 2) ** 2 + p ** 2))
+        if not EF > math.log(math.cosh(u / 2)) + 1e-3:
+            return False, dict(reason="E_F does not exceed the cube's threshold", p=p)
+        for n in (2, 3, 4):
+            pi = mk_sym_block_law(n, p)
+            V = u * mk_heights(n)
+            P = mk_rows(pi, V)
+            kl = (pi[None, :] * (np.log(pi)[None, :] - np.log(P))).sum(axis=1)
+            s = np.array([[1 if (x >> i) & 1 else -1 for i in range(n)] for x in range(2 ** n)], float)
+            m = s.sum(axis=1)
+            target = math.log(float(pi @ np.exp(u / 2 * m)))             # ln Z_n(u/2)/Z_n(0)
+            if abs(float(kl.max()) - target) > 1e-10:
+                return False, dict(reason="the uniform field does not maximise KL(pi || pi_phi) over the vertices, or the value is not ln Z_n(h)/Z_n(0)",
+                                   n=n, p=p, got=float(kl.max()), want=target)
+            stats["thr"] += 1
+        T = lambda hh: np.array([[(1 - p) * math.exp(hh), p * math.exp(-hh)], [p * math.exp(hh), (1 - p) * math.exp(-hh)]])
+        v = np.array([0.5 * math.exp(u / 2), 0.5 * math.exp(-u / 2)]); growth = 0.0
+        for _ in range(400):
+            v2 = v @ T(u / 2); growth = math.log(v2.sum() / v.sum()); v = v2 / v2.sum()
+        if abs(growth - EF) > 1e-9:
+            return False, dict(reason="the growth rate of ln Z_n(u/2)/Z_n(0) is not E_F", growth=growth, EF=EF)
+    # ---- (c) the direction at u = 1: a block certificate
+    p, u, t = 0.3, 1.0, 0.45
+    K = math.log((1 - p) / p)
+    hc, ac, Ec = mk_cube(u)
+    if abs(hc - 0.0291391) > 1e-6:
+        return False, dict(reason="the cube's exponent at u = 1", h=hc)
+
+    def block_labels(L, end):
+        """site-wise labels -sum_i h_i sigma_i s_i with at most two walls; h_i = u/2 inside and `end` at the two ends"""
+        hs = np.array([end] + [u / 2] * (L - 2) + [end])
+        s = np.array([[1 if (x >> i) & 1 else -1 for i in range(L)] for x in range(2 ** L)], float)
+        sig = []
+        for walls in range(3):
+            for W in itertools.combinations(range(1, L), walls):
+                base = np.ones(L)
+                for wpos in W:
+                    base[wpos:] *= -1
+                sig += [base, -base]
+        return np.array([-(s * (hs * sg)[None, :]).sum(axis=1) for sg in sig])
+
+    def end_to_end(L, end):
+        """two blocks of L sites, no gap: is phi_a + phi_b + ln rho_0 in the chain's class, with product Gibbs law?"""
+        lab = block_labels(L, end)
+        n = 2 * L
+        pi = mk_sym_block_law(n, p)
+        piL = mk_sym_block_law(L, p)
+        xs = np.arange(2 ** n)
+        lo, hi = xs & (2 ** L - 1), xs >> L
+        same = ((lo >> (L - 1)) & 1) == (hi & 1)
+        lnrho = np.where(same, math.log(2 * (1 - p)), math.log(2 * p))
+        ok, prodok = True, True
+        for a, b in ((0, 1), (3, 2), (len(lab) - 1, 5), (7, len(lab) - 2)):
+            psi = lab[a][lo] + lab[b][hi] + lnrho
+            for i in range(n):
+                ok &= bool((np.abs(psi - psi[xs ^ (1 << i)]) <= u + 1e-9).all())
+            gl = pi * np.exp(-psi); gl /= gl.sum()
+            ga = piL * np.exp(-lab[a]); ga /= ga.sum(); gb = piL * np.exp(-lab[b]); gb /= gb.sum()
+            prodok &= bool(np.abs(gl - ga[lo] * gb[hi]).max() < 1e-12)
+        return ok, prodok
+
+    ok, prodok = end_to_end(4, (u - K) / 2)
+    if not (ok and prodok):
+        return False, dict(reason="block labels with reduced end slopes: the sum plus ln rho is not a member with product Gibbs law",
+                           member=ok, product=prodok)
+    L = 10
+    G, _, _ = mk_renyi(mk_rows(mk_sym_block_law(L, p), block_labels(L, (u - K) / 2)), t, iters=400)
+    stats["block_bound"] = G / L
+    if not G / L > hc * 1.10:
+        return False, dict(reason="the block certificate does not exceed the cube's exponent", bound=G / L, cube=hc)
+    # ---- (d) the reversal at large slope
+    p, u = 0.2, 3.0
+    us = mk_ustar(u, p)
+    if abs(us - (u + math.log(((1 - p) * math.exp(us) + p) / (p * math.exp(us) + 1 - p)))) > 1e-12 or not u < us < u + math.log((1 - p) / p):
+        return False, dict(reason="the one-sided slack u*", us=us)
+    V = mk_cube_vertices([u, u, us])
+    if len(V) != 96 or len(mk_cube_vertices([1.0, 1.0, 1.0])) != 38 or len(mk_heights(3)) != 38 or len(mk_heights(4)) != 990:
+        return False, dict(reason="vertex counts of the Lipschitz polytopes of small cubes", n=len(V))
+    lowc, upc = mk_capacity(mk_rows(mk_sym_block_law(3, p, prev=0), V))
+    hc, ac, Ec = mk_cube(u)
+    stats["reversal"] = upc / 3 / ac
+    if not (upc / 3 < 0.95 * ac and upc - lowc < 1e-6):
+        return False, dict(reason="at (p, u) = (0.2, 3) the block bound for the capacity exponent is not below the cube's",
+                           bound=upc / 3, cube=ac, bracket=upc - lowc)
+    for uu in (0.5, 1.0, 3.0, 6.0):
+        EF = math.log((1 - p) * math.cosh(uu / 2) + math.sqrt((1 - p) ** 2 * math.sinh(uu / 2) ** 2 + p ** 2))
+        if not EF > mk_cube(uu)[2]:
+            return False, dict(reason="the threshold is not above the cube's at some slope", u=uu)
+    if not (stats["F_cases"] >= 30 and stats["F_needs_slack"] > 0 and stats["thr"] == 6):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
+@conjecture("XXV.3 The small-slope law (theory report Proposition 11.117(b): Propositions R10.1, R10.2 of the Scientific Discovery Division, SCI-REV-0010).  For a finite space with law pi and envelope u d_0, F*(t) = (t(1-t)/2) u^2 V + O(u^3) with V the largest variance of a function that is 1-Lipschitz for d_0; for binary sites with the Hamming envelope and an associated law (a ferromagnetic chain with any fields) V = Var(sum_i s_i)/4, attained by the uniform field; for an antiferromagnetic chain it is the staggered field and Var(sum s_i)/4 is strictly smaller, so the factor is the structure factor at zero wave vector for ferromagnetic chains only; for the symmetric chain Var(sum s_i)/n tends to (1-p)/p")
+def t_markov_small_slope(rng, trials):
+    stats = dict(chains=0, random_f=0, closest=0.0, expansion=[])
+    s_of = lambda n: np.array([[1 if (x >> i) & 1 else -1 for i in range(n)] for x in range(2 ** n)], float)
+    for n in (2, 3, 4):
+        H = mk_heights(n)
+        s = s_of(n)
+        m, stag = s.sum(axis=1), (s * np.array([(-1) ** i for i in range(n)])[None, :]).sum(axis=1)
+        var = lambda pi, f: float(pi @ (f - pi @ f) ** 2)
+        for p in (0.2, 0.3, 0.45, 0.7, 0.85):
+            pi = mk_sym_block_law(n, p)
+            V = max(var(pi, f) for f in H)
+            want = var(pi, m if p < 0.5 else stag) / 4
+            if abs(V - want) > 1e-12:
+                return False, dict(reason="the largest variance of a Lipschitz function is not that of the uniform (ferromagnet) or staggered (antiferromagnet) field",
+                                   n=n, p=p, V=V, want=want)
+            if p > 0.5 and not var(pi, m) / 4 < V - 1e-3:
+                return False, dict(reason="for an antiferromagnetic chain Var(sum s)/4 should be strictly below V", n=n, p=p)
+            stats["chains"] += 1
+    # associated laws with fields: every 1-Lipschitz function has variance at most Var(sum s)/4
+    for it in range(max(20, trials // 10)):
+        n = int(rng.integers(3, 7))
+        fields = [np.array([0.0, rng.normal(0, 1.0)]) for _ in range(n)]
+        coup = [np.array([[0.0, k], [k, 0.0]]) for k in rng.uniform(0.0, 1.5, n - 1)]   # a penalty on unequal neighbours
+        confs, pi = mk_chain(fields, coup)
+        D = mk_dist(confs, [np.array([[0.0, 1.0], [1.0, 0.0]])] * n)
+        m = np.array([sum(2 * b - 1 for b in x) for x in confs], float)
+        vm = float(pi @ (m - pi @ m) ** 2) / 4
+        for _ in range(5):
+            f = mk_member(rng, D, scale=float(rng.choice([0.5, 2.0, 6.0])))
+            vf = float(pi @ (f - pi @ f) ** 2)
+            if vf > vm + 1e-10:
+                return False, dict(reason="a 1-Lipschitz function has a larger variance than half the magnetisation under an associated law",
+                                   n=n, vf=vf, vm=vm)
+            stats["closest"] = max(stats["closest"], vf / vm)
+            stats["random_f"] += 1
+    # the expansion of the game function at second order
+    n, p = 3, 0.3
+    pi = mk_sym_block_law(n, p)
+    H = mk_heights(n)
+    V = max(float(pi @ (f - pi @ f) ** 2) for f in H)
+    fstar = max(H, key=lambda f: float(pi @ (f - pi @ f) ** 2))
+    for u in (0.1, 0.05):
+        for t in (0.3, 0.5):
+            # lower bound: the two labels +-u f* with equal weights; upper bound: the centre Q = pi (weak duality)
+            P2 = mk_rows(pi, np.array([u * fstar, -u * fstar]))
+            lo = -t * math.log(float(((0.5 * P2[0] ** t + 0.5 * P2[1] ** t) ** (1 / t)).sum()))
+            P = mk_rows(pi, u * H)
+            up = max(-math.log(float((row ** t * pi ** (1 - t)).sum())) for row in P)
+            coef = t * (1 - t) * u * u / 2
+            stats["expansion"].append((round(lo / coef / V, 4), round(up / coef / V, 4)))
+            if not ((1 - 2.5 * u) * V * coef < lo <= up + 1e-15 and up < (1 + 2.5 * u) * V * coef):
+                return False, dict(reason="F*(t) is not (t(1-t)/2) u^2 V to second order", u=u, t=t, lower=lo / coef, upper=up / coef, V=V)
+    # the structure factor of the symmetric chain
+    for p in (0.1, 0.3, 0.45):
+        lam, n = 1 - 2 * p, 4000
+        varm = n + 2 * sum((n - k) * lam ** k for k in range(1, n))
+        if abs(varm / n - (1 - p) / p) > 0.01 * (1 - p) / p:
+            return False, dict(reason="Var(sum s)/n does not tend to (1-p)/p", p=p, got=varm / n)
+    if not (stats["chains"] == 15 and stats["random_f"] >= 100 and stats["closest"] > 0.3):
         return False, dict(reason="cases not exercised", **stats)
     return True, stats
 
