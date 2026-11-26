@@ -37,7 +37,7 @@ message: **nats per site** (the constant `a` differs from type to type).
    lower bound for every algorithm that is computable exactly at every `n`; it exceeds the
    asymptotic exponent by a term that shrinks with `n`.
 5. **Literal runs** **[L]** (§6): the algorithm with the transferred constants, run literally
-   on cubes of 11–16 sites with explicit energy tables — no invalid bracket, none wider
+   on cubes of 8–16 sites with explicit energy tables — no invalid bracket, none wider
    than certified, no abort, no cost above the bound; two negative controls fail as they
    should.
 6. The non-additivity of the exponents that §11.26 proves is numerically invisible for
