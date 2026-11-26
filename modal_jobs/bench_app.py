@@ -173,7 +173,7 @@ def _refuse(todo, total_worst, dirty, jobs, ledgers, max_usd):
 
 
 @app.local_entrypoint()
-def launch(driver: str = "nested_bench", job: str = "smoke", ledger: str = "", dry: bool = False, max_usd: float = 60.0):
+def launch(driver: str = "nested_bench", job: str = "smoke", ledger: str = "", dry: bool = False, max_usd: float = 60.0, tiers: str = ""):
     """Detached mode, for jobs that outlive a session:
 
         modal run --detach modal_jobs/bench_app.py::launch --driver D --job a+b --ledger M-0xx+M-0yy
@@ -181,8 +181,15 @@ def launch(driver: str = "nested_bench", job: str = "smoke", ledger: str = "", d
 
     Every task writes its result (or its failure) into the modal.Dict ``STORE``; the app ends by itself when the
     last task ends or reaches its timeout.  Tasks whose result is already in the Dict or in the local file are not
-    started again."""
+    started again.  ``--tiers m+l`` submits only the tasks of those tiers (to stay under the container cap while
+    another job runs); the rest is submitted by a later call with the other tiers — never repeat a tier whose tasks
+    may still be running, they would be started twice."""
     todo, total_worst, commit, dirty, jobs, ledgers = _plan(driver, job, ledger)
+    if tiers:
+        keep = set(tiers.split("+"))
+        todo = [x for x in todo if x[0].get("tier", "m") in keep]
+        total_worst = sum(tier_cost(x[0].get("tier", "m")) for x in todo)
+        print(f"restricted to tiers {sorted(keep)}: {len(todo)} tasks, worst case ${total_worst:.2f}", flush=True)
     if dry or not todo:
         return
     _refuse(todo, total_worst, dirty, jobs, ledgers, max_usd)
