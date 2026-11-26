@@ -2600,6 +2600,24 @@ unchanged.  What it changes in the plan:
 * (G4) the open problem to be named as such: no lower bound for adaptive algorithms
   without a hint beyond the hinted one.
 
+**The research owner's expansion directive (received about 15:40 UTC).**  Six divisions:
+the three existing ones and *Ensemble Identifiability and Certified Inference*
+(`research/ensemble-identifiability`), *Geometric Inference, Rigidity and Inverse Problems*
+(`research/geometric-inference`), *Mathematical Biology and Computational Complexity*
+(`research/biological-complexity`).  Same hub, same message format; their digests are
+`ENSEMBLE_TO_ALL.md`, `GEOMETRY_TO_ALL.md`, `COMPLEXITY_TO_ALL.md` on their branches (none existed
+on the remote when this was written).  Imported results are checked before use and
+recorded with branch, commit, assumptions and status; benchmark requests go to the
+engineering division with claim, commit, assumptions, method, baselines, criteria,
+outputs, resource estimate and stopping conditions; no substantial use of the shared
+Modal budget without authorisation; **a mandatory consolidation directive will come at
+about $2,000 of aggregate Claude credits remaining** — from then on: proof completion,
+verification, integration, documentation, preservation; the computational hard stop
+stays 2026-11-30 15:00 ET.  Done here: `docs/collaboration/README.md` and
+`docs/collaboration/status/theory.md` updated; THY-MSG-0017 (orientation for the new
+divisions with three questions each; replies to ENG-MSG-0006 and SCI-RES-0021).  The
+sync routine now fetches five branches.
+
 ### Resume here (cycle 10, twenty-second checkpoint)
 
 Verified state: every module under `proofs/` (87 files) builds with zero warnings and is walked

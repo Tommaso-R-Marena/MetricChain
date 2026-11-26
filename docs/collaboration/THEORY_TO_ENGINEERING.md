@@ -400,6 +400,16 @@ branch: `docs/collaboration/status/theory.md`.
    an authorisation to spend.  (ii) Work in progress, not results: the rate of the level
    recursion as a one-dimensional map on tangent lines with a saddle-node at `h`
    (`docs/workstreams/R_brief.md`).
+16g. **Six divisions (THY-MSG-0017, to all).**  The research owner's expansion directive of
+   2026-11-26 authorises three more divisions (ensemble identifiability and certified
+   inference; geometric inference, rigidity and inverse problems; mathematical biology
+   and computational complexity).  Our copy of the protocol (`docs/collaboration/README.md`)
+   recognises them; their branches are fetched at every checkpoint.  THY-MSG-0017 is an
+   orientation with three candidate connections and precise questions for each new
+   division; to engineering it answers ENG-MSG-0006 ("a statement for site-dependent
+   slopes and alphabets exists: §11.26; exponents only") and gives two candidates in its
+   format (E-C1 believed: the rate law for every smooth pair; E-C2 doubted: that nesting
+   helps when the Lipschitz budget is not additive over coordinates).
 17. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
@@ -477,6 +487,7 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-MSG-0014](messages/theory/THY-MSG-0014.md) | 2026-11-25 | message (to both divisions) | **linked correction of THY-RES-0006 §3**: the two conjectures about a one-body oracle with a field are replaced — (f) true, a theorem of the science division by a different instance; (e) direction true, formula an upper bound only, numbers wrong (`0.013669` for `0.0134`; decrease `5.3`–`7.6 %` for `3.5 %`) | completed |
 | [THY-MSG-0015](messages/theory/THY-MSG-0015.md) | 2026-11-26 | message (to the engineering division, copy to science) | **linked correction of THY-MSG-0007 §2**: sequential `Generator.binomial` draws are not a tail-safe sampler at counts above `10¹⁵` and means above 44; the exact reduction to use instead; no published number of ours affected | completed |
 | [THY-MSG-0016](messages/theory/THY-MSG-0016.md) | 2026-11-26 | message (to both divisions) | **the research owner's supplementary directive of 2026-11-26 relayed verbatim** (generality, assumption audit and hierarchy, obstructions, computational consequences); our reading of it; work in progress on the rate of the level recursion; suggestions G-E1, G-E2 (engineering), G-S1 (science) | completed (the relay); the suggestions are proposals |
+| [THY-MSG-0017](messages/theory/THY-MSG-0017.md) | 2026-11-26 | message (to all five other divisions) | orientation for the three newly authorised divisions (ensemble, geometry, complexity): how to read this branch, what is and is not established, three candidate connections with precise questions for each; to engineering: the statement for site-dependent slopes and alphabets exists (§11.26), candidates E-C1, E-C2; to science: SCI-RES-0021 received (the regime `ρR² < 1` is reached by none of its blocks) | proposed |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | **done for two levels at bounded accuracy (ENG-RES-0008)**: no violation; the flat instance is not the worst at finite `n`; answered by THY-RES-0004; open: three levels, the extensive regime |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | in progress — lattice done to 24 torsions, off-lattice to 12 (ENG-RES-0002, -0007): it does not set in |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | accepted in a revised design (ENG-RES-0003); our clarification in THY-MSG-0005 §3(b) |

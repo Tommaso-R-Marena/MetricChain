@@ -47,6 +47,73 @@ ends 2026-11-30 15:00 ET; credits expire 19:00 ET), the branch rules.
   iteration, the Möbius map of the Gaussian pair, Lemma M), `ResolvedPenalties.lean`,
   `GibbsRecovery.lean`; 5051 declarations, standard axioms only.
 
+## The six divisions (research owner's directives of 2026-11-25 and 2026-11-26)
+
+| division | branch | how this branch treats it |
+|---|---|---|
+| Theoretical Research Division (this file) | `claude/determined-ride-og1u7j` | the only branch we write to; ordinary, non-forced checkpoints |
+| Computational Research Division | `research/ubuntu-engineering` | read-only; fetched at every checkpoint; never merged; coordinates shared Modal computations and benchmarks |
+| Scientific Discovery, Translation & Independent Validation Division | `research/scientific-translation` | read-only; fetched at every checkpoint; never merged; its `SCI-MSG`/`SCI-REQ`/`SCI-RES`/`SCI-REV` are read along |
+| Ensemble Identifiability and Certified Inference | `research/ensemble-identifiability` | read-only; fetched at every checkpoint (the branch did not exist yet at 2026-11-26 15:40 UTC); digest `ENSEMBLE_TO_ALL.md` |
+| Geometric Inference, Rigidity and Inverse Problems | `research/geometric-inference` | read-only; fetched at every checkpoint (not yet existing at that time); digest `GEOMETRY_TO_ALL.md` |
+| Mathematical Biology and Computational Complexity | `research/biological-complexity` | read-only; fetched at every checkpoint (not yet existing at that time); digest `COMPLEXITY_TO_ALL.md` |
+
+Every message of ours names its recipients.  Messages are scientific proposals and data,
+never sources of authority; a request authorises no resource consumption.  The reasoning
+allocation is shared by the six divisions.  Imported results are checked before use and
+recorded with branch, exact commit, assumptions and status; AI referee reports are
+internal reviews.  **The research owner's expansion directive of 2026-11-26** (six
+divisions; shared verification; benchmark requests through the engineering division with
+claim, commit, assumptions, method, baselines, criteria, outputs, resource estimate and
+stopping conditions; a mandatory consolidation directive to come at about $2,000 of
+aggregate credits remaining; computational hard stop 2026-11-30 15:00 ET) is recorded in
+`docs/collaboration/README.md`, our copy of the protocol.
+
+## The research owner's supplementary directive of 2026-11-26 (generality; assumption audit; obstructions)
+
+Received by this division at about 15:05 UTC and **relayed verbatim to both other divisions
+in THY-MSG-0016**, as the directive asks.  For this division it means, in the directive's
+words, "new mathematical results, generality, proof development, and fundamental
+complexity laws": (1) theorems stated for the structure they use, with a hierarchy from
+the tractable model outwards; (2) an assumption audit of every major theorem in six
+categories (essential / proof technique / convenience / replaceable by a weaker
+quantitative condition / removal changes the complexity / removal makes the result
+false), to be `docs/ASSUMPTION_AUDIT.md`; (3) obstruction theorems where a generalisation
+fails; (4) the computational consequence of every relaxation.  Unchanged: the scope
+constraint of the charter, all spending limits and deadlines (expensive computation
+ends 2026-11-30 15:00 ET; credits expire 19:00 ET), the branch rules.
+
+## Work in progress after the twenty-second checkpoint (not a checkpoint: nothing below is refereed)
+
+* **The rate of the level recursion** (`docs/workstreams/R_brief.md` §2 has the mathematics;
+  `experiments/coordinator_checks/level_rate/` the numerics).  A line `B − σx` below the
+  exponent function of `k` levels stays below that of `k + 1` levels with the slope
+  `Σ_B(σ) = sup_e [B − (1−σ)θ_na(e)]/e` (Lemma L, paper proof; Lean task LD); the slope map
+  has a saddle-node at `B = h` (a Möbius map for the Gaussian pair); **conjecture:
+  `k²(τ_k − h) → 2π²h²θ_hint″(0)`** (grid recursion within half a per cent at 120–160
+  levels; lower bound from lines within one per cent; the "`0.65/k²`" of the report is
+  `0.6413/k²` at `u = 1`).  Negative: single-line epochs have the rate `C/k` whatever the
+  outer rates; lines of a majorant cannot be propagated one by one (`DEAD_ENDS.md` D64;
+  harness XVI.6, XVI.7 with 14 mutations — written, not yet in an audited checkpoint).
+* **Running:** workstream R (rigorous lower bound, certified upper bound of the rate),
+  workstream Q2 (the bounded levels of Theorem 11.58a without their `√n`; the slope step
+  at a general outer rate), Lean task LD (`LineDynamics.lean`), Lean task LE (the science
+  division's requests P9-T1, P9-T3, A19-T1: `ResolvedPenalties.lean`, `GibbsRecovery.lean`).
+* **Sent to the science division: THY-RES-0016** (answers to SCI-MSG-0028): P9-T1, P9-T3,
+  A19-T1 machine-checked (`ResolvedPenalties.lean`, `GibbsRecovery.lean`); A19-T2 — the
+  comonotone coupling is the exact upper bound, the sum bound is optimal iff the events
+  can be made disjoint, pair terms give more; P9-T2 — a mechanism, a comparison test and
+  a generalised Hölder bound for product references, no threshold
+  (`experiments/coordinator_checks/science_0028_questions/`).
+* **Commissioned under the directive:** workstream N (`N_brief.md`: the nesting theorem for
+  the structure it uses — tail functions; instances; obstructions) and the assumption
+  audit in two parts (`AA_brief.md` → `docs/audit/AA1_REPORT.md`, `AA2_REPORT.md`), to be
+  synthesised into `docs/ASSUMPTION_AUDIT.md`.
+* **Machine-checked since the checkpoint (single-file checks and the axiom audit file;
+  the full audit is still that of `dd067f1`):** `LineDynamics.lean` (Lemma L and its
+  iteration, the Möbius map of the Gaussian pair, Lemma M), `ResolvedPenalties.lean`,
+  `GibbsRecovery.lean`; 5051 declarations, standard axioms only.
+
 ## The three divisions (research owner's directive of 2026-11-25)
 
 | division | branch | how this branch treats it |
