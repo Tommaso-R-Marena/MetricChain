@@ -5105,7 +5105,9 @@ For `y ≤ g`, (iii) gives `T_{k+1}(y) − θ_hint(y) ≤ (1 − y/s)·m_k`, and
 
 At `u = 1`: `κ = 0.0427`, `c₁ = 0.712 = 6.4a`, `c₂ = 6.35`.  So the exponent `θ_hint(g) + η` needs at most
 `⌈A(g)/η⌉` levels: the number of levels behind Theorems 11.54 and 11.58 is explicit.  The bound is
-a rate, not the rate — numerically `(τ_k − h)/a ≈ 0.65/k²` (§11.19, remark (1)) —, and a one-sided
+a rate, not the rate — the rate is `2π²h²θ_hint″(0)/k²`, that is `(τ_k − h)/a → 0.641/k²` at `u = 1`
+(Theorem 11.53b below; "`≈ 0.65/k²`" numerically in §11.19, remark (1)), and over the class of all
+convex pairs `1/k` cannot be improved (remark (2) there) —, and a one-sided
 evaluation of the recursion of the cube on a grid, an upper bound of every `T_k`, stays below it
 at all `40` levels computed, for `u = ½, 1, 2` (`experiments/coordinator_checks/nested_review_R6/t4_rate.py`,
 which has the proof in full).  By itself the rate does not make the `o(n)` of Theorems 11.54
@@ -5114,6 +5116,171 @@ have to be bounded uniformly in `k`.  The first version of this remark said that
 not.  **For an explicit schedule built on the epochs of this proof they are, and the
 `o(n)` of Theorem 11.58 is `O(√(n ln n))` — Theorem 11.58a.**  (At extensive accuracies the
 term of Theorem 11.54 is still unquantified.)
+
+**Theorem 11.53a (the recursion at the level of lines: the slope map, and a saddle-node at the hinted exponent) [V for (a), (b′), (d) and for the iteration in (c): `LineDynamics.lean`; P for (b), (c), (e): the coordinator's proofs, `docs/workstreams/R_REPORT.md` §§1–5, under independent internal review when this was written — two referees, one for the lower bound and the slope map, one for the upper bound; their findings and what was done about them are in the research log and in `docs/workstreams/R_REVIEW_A.md`, `R_REVIEW_B.md`].**
+*Everything here is a statement about the non-adaptive exponent function alone: nothing of
+the cube is used beyond it.*  Let `θ = θ_na ≥ 0` be convex and nonincreasing on `(0, ∞)` with
+`θ(0+) = a < ∞`, let `h` be its fixed point (`θ(h) = h`, by (11.18.1)), assume `h < a`, and put
+
+    J(t)  =  inf_{e > 0} [ (1 − t)·θ(e) + t·e ],        0 ≤ t ≤ 1.
+
+`J` is concave, `J ≤ h`, and `J(t) = h` exactly when `−t/(1 − t)` is a subgradient of `θ` at `h`; so `max J = h`,
+attained at a single point `L` when `θ` is differentiable at `h`.  Geometrically `J(t)` is the largest
+intercept of a line of slope `−t` below the graph of `θ_hint`, continued along the shear of
+(11.18.1) to negative arguments: `θ_hint(x) = sup_t [J(t) − tx]`, `θ_hint′(0) = −L`, `θ_hint″(0) = −1/J″(L)`.
+For the cube `J(t) = Λ(tu) − tΛ(u)` with `Λ(v) = ln(2/(1 + e^{−v}))`; for the Gaussian pair `J(t) = t − t²`.
+
+(a) **Lemma L (a line below `T` stays below one more level) [V: `line_le_Rstep`, `line_le_min_Rstep`].**
+Let `0 ≤ σ ≤ σ′`, let `T` be bounded above with `T(x) ≥ B − σx` for all `x > 0`, and let
+`(1 − σ)·θ(e) + σ′·e ≥ B` for every `e > 0`.  Then `R[T](g) ≥ B − σ′g` for every `g > 0`, hence
+`min(T, R[T])(g) ≥ B − σ′g`.
+*Proof.*  For any `φ, β` let `e′ = (g − β)/φ`, `μ = φθ(e′)` and evaluate the bracket of (11.18.2) at
+`γ₀ = max(β, μ)`: it is `μ + (1−φ)T(γ₀/(1−φ)) ≥ μ + (1−φ)B − σγ₀`.  If `μ ≥ β` this is
+`(1−φ)B + (1−σ)φθ(e′) ≥ B − σ′φe′ ≥ B − σ′g`; if `μ < β` it is at least
+`(1−σ)φθ(e′) + (1−φ)B − σβ ≥ B − σ′(g − β) − σβ ≥ B − σ′g`.  ∎
+
+(b) **The slope map [P].**  The least admissible `σ′` in (a) is
+
+    Σ(B, σ)  =  sup_{e > 0} [B − (1 − σ)·θ(e)]/e,
+
+finite if `B < (1 − σ)·a` and infinite if `B > (1 − σ)·a`.  It is a supremum of functions that are
+*affine in `(B, σ)`* with nonnegative coefficients: **`Σ` is jointly convex and nondecreasing in
+both arguments.**  Through `J`: `Σ(B, σ) − σ` is the least `w` with `(1 + w)·J((σ + w)/(1 + w)) ≥ B`.  Hence
+`Σ(B, σ) ≥ σ` iff `B ≥ J(σ)`; the fixed points of `σ ↦ Σ(B, σ)` are the solutions of `J(σ) = B` — for `B < h`
+a stable one below `L` (the tangent lines of `θ_hint`) and an unstable one above, for `B = h` only `L`,
+for `B > h` none — and `Σ(B, σ) − σ ≥ (B − h)/h` for all `σ` when `B ≥ h`.  **The hinted exponent is the
+saddle-node value of the slope map.**  If `J` is twice differentiable at `L` with
+`J″(L) = −1/θ_hint″(0) < 0`, then for `B = h + δ`, uniformly as `δ → 0` and `σ → L`,
+
+    Σ(B, σ) − σ  =  [ δ + (σ − L)²/(2θ_hint″(0)) ]/h · (1 + o(1)).
+
+(b′) **The Gaussian pair [V: `gauss_slope_map`, `gauss_slope_map_least`].**  `Σ(B, σ) = B(1 − σ)/(1 − σ − B)`, a
+Möbius map of `1 − σ` with trace `1 − 2B` and determinant `B²`: parabolic at `B = ¼ = h` with the fixed
+point `σ = ½ = L`, elliptic for `B > ¼` — a rotation by the angle `arctan(√(4B − 1)/(1 − 2B)) ≈ 4√(B − ¼)`
+per level in the angular coordinate of the projective line.
+
+(c) **A lower bound for every level [V for the iteration: `lines_le_exactRec`, `le_sSup_exactRec`; P
+for the rest].**  Let `p_0 ≡ 0` and `p_{j+1}(B) = Σ(B, p_j(B))` (the *orbit curves*: the slopes of the
+flat line with intercept `B` after `j` levels; `p_1(B)` is the slope of the tangent line of `θ` with
+intercept `B`).  Every curve `p_j(B)` is convex and nondecreasing in `B` (composition of the jointly
+convex `Σ` with a convex function), and `p_j ≤ p_{j+1}`.  If `p_k(B) < ∞` then `T_k(x) ≥ B − p_k(B)·x` for all
+`x > 0`; in particular
+
+    τ_k  ≥  sup{ B : p_k(B) < ∞ }.
+
+For the Gaussian pair this is the root of `(k − 1)·ψ(B) + φ₀(B) = π`, `ψ` the rotation angle of (b′)
+and `φ₀(B) = arccot((1 − 3B)/((1 − B)√(4B − 1)))` — `(3 − √5)/2 = 0.381966` at `k = 2`, and
+`¼ + (π²/16)/(k + ½)²·(1 + O(k⁻²))` (closed form checked against the orbit: harness XVI.6);
+machine-checked instances: `T_2(0+) ≥ 3/8`, `T_3(0+) ≥ 3/10` (`gauss_level_two_ge`, `gauss_level_three_ge`).
+
+(d) **Lemma M (a majorant with nondecreasing `x + M(x)`, one level) [V: `StepLE.monotoneS_step`,
+`StepLE.line_step`, `StepLE.line_step_rate`].**  Let `T` be nonincreasing and `T ≤ M` on `(0, R]` with `x + M(x)`
+nondecreasing there.  For `g > 0`, `0 < φ < 1`, `e = g/φ`, `μ = φθ(e) > 0` and `X = μ/(1 − φ) ≤ R`:
+`R[T](g) ≤ (1 − φ)(X + M(X))`.  For a line `M(x) = B − σx`, `σ ≤ 1`: `R[T](g) ≤ B − σ′g` with
+`σ′ = [B − (1 − σ)θ(e)]/e`, for `g ≤ Re/(θ(e) + R)` — the slope step of Theorem 11.58a at a general outer
+rate (`e = h` there).
+
+(e) **One level for a convex family of lines [P: Lemma M and Sion's minimax theorem].**  Let `b > 0`,
+let `W : [0, b] → [0, 1]` be convex, nondecreasing and continuous, and let `T` be nonincreasing and
+below the upper envelope `max_{B ≤ b} (B − W(B)x)` of the lines with intercept `B` and slope `−W(B)`.
+Then for every `g > 0`
+
+    R[T](g)  ≤  sup{ B − Σ(B, W(B))·g  :  0 ≤ B ≤ b,  Σ(B, W(B)) < ∞ }:
+
+**on a convex family of lines the level operator acts line by line, through the slope
+map**, and the lines whose image slope is infinite — those with `B > (1 − W(B))·a` — drop out.
+*Proof.*  By (d) with `R = ∞`, `R[T](g) ≤ inf_{e > g} max_𝓔 Φ`, where `Φ(e; B, s) = B − (g/e)(B − (1 − s)θ(e))` and
+`𝓔 = {(B, s) : B ≤ b, W(B) ≤ s ≤ 1}` is compact and — because `W` is convex — convex.  `Φ` is affine in
+`(B, s)` and, because `θ` is convex and `s ≤ 1`, quasi-convex in `e` (the set where it is at most `c`
+is `{e : g(1 − s)θ(e) + (B − c)e − gB ≤ 0}`).  By Sion's minimax theorem the infimum and the maximum
+commute, and for a single line `inf_{e > g} Φ` is `B − Σ(B, s)g` if the line `x ↦ B − Σ(B, s)x` touches
+`(1 − s)θ` beyond `g`, and `(1 − s)θ(g)` otherwise — the value at `g` of the tangent line of `(1 − s)θ` at
+`g`, which is the image of a line `(B″, s)` with `B″ ≤ B`, again in `𝓔` because `W` is nondecreasing.  ∎
+(Details and the cases: `R_REPORT.md` §5.)  Numerically the inequality is an equality for `β → 0`
+(240 random convex families, to `2·10⁻⁶·a`: harness XVI.8).  **Convexity of the family cannot be
+dropped**: for a concave `W` the right side is exceeded (by up to `0.07·a` in the same test), and
+propagating the lines of a majorant one by one gave `τ₃ ≤ ⅓` for the Gaussian pair, where
+`τ₃ ≥ 1/(2√2)` (`DEAD_ENDS.md` D64, harness XVI.7).
+
+**Theorem 11.53b (the rate of the level recursion) [P: the coordinator's proof, `docs/workstreams/R_REPORT.md`, under independent internal review when this was written — two referees, one for the lower bound and the slope map, one for the upper bound; their findings and what was done about them are in the research log and in `docs/workstreams/R_REVIEW_A.md`, `R_REVIEW_B.md`; numerical checks: harness XVI.8 (thirteen mutations), `experiments/workstreams/R`].**
+*In the setting of Theorem 11.53a let `J` have a unique maximiser `L ∈ (0, 1)` and be twice
+differentiable there, `J(t) = h − (t − L)²/(2ϑ) + o((t − L)²)` with `0 < ϑ < ∞` (so `ϑ = θ_hint″(0)`; if `θ` is `C²`
+near `h` with `θ″(h) > 0` this holds with `ϑ = θ″(h)/(1 + |θ′(h)|)³`).  Then*
+
+    lim_{k → ∞} k²·(τ_k − h)  =  2π²·h²·θ_hint″(0).
+
+For the cube the constant is `2π²h²/(u²ρ_h(1 − ρ_h))`, `ρ_h = Λ₁/u` (`0.0711473 = 0.64129·a` at `u = 1`, `0.70193·a`
+at `u = 2`); for the Gaussian pair `π²/16`.  The "`0.65/k²`" of §11.19, remark (1), is this number.
+
+*Proof in outline* (in full: `R_REPORT.md` §§6–8).  *The passage time.*  By Theorem 11.53a(b), for
+`B = h + δ` the map `σ ↦ Σ(B, σ)` has no fixed point but a bottleneck at `L` of width `√δ`, and the
+number `N(δ)` of steps that the orbit of the flat line needs to exceed a slope level `L + η`
+satisfies `√δ·N(δ) → π·h·√(2θ_hint″(0))` (comparison with `∫ dσ/(δ + (σ − L)²/(2θ_hint″(0)))`; outside a
+window around `L` the steps are bounded below).  *Lower bound.*  By Theorem 11.53a(c), `τ_k ≥ h + δ`
+as long as `k < N(δ)`.  *Upper bound.*  By Theorem 11.53a(e) an upper bound for the next level
+is a **convex sub-solution of the slope map**: a convex `W′ ≤ Σ(·, W(·))` with values in `[0, 1]` on
+the intercepts that are left.  The orbit curves, cut at the level `L + η` and continued by
+their tangent lines, are convex, and the cut curve of level `j + 1` lies below the image of
+the cut curve of level `j` — because `B ↦ Σ(B, W(B))` is convex for convex `W`, and a tangent line
+of a convex function is a global minorant.  What remains is that the cut curve stays
+below slope one where it is used (the *range condition*).  Started from the flat majorant
+at a level `k₁` with `τ_{k₁} ≤ h + ε₁` — which exists by the remark above, `τ_k − h ≤ c₁/(k + c₂)` — it holds at
+every later level if `η` and `ε₁` are small: the slope of the cut curve at most multiplies by
+the derivative `∂Σ/∂σ` near the fixed point, which is close to one there (the multiplier of
+the saddle-node is `θ(h)/h = 1`), while the room below slope one exceeds what is needed by
+the margin `h/a`.  This gives `τ_{k₁+j+1} ≤ B_t(j) + (1 − L − η)/m_j`, with `B_t(j)` the intercept at which
+the `j`-th orbit curve reaches the level and `m_j = p_j′(B_t(j))` its slope there; `B_t(j) − h` is determined by
+`N(δ) = j`, and `1/m_j` is of smaller order.  ∎
+
+*Remarks.*
+(1) *A sandwich between two points of one family of curves.*  For every `k`, `τ_k` is at least the
+intercept at which the `k`-th orbit curve blows up, and for large `k` at most the intercept
+at which a curve `k₁ + 1` levels earlier reaches the slope `L + η`, plus a term of relative
+order `1/k`.  Numerically (floating point, not certified): with `c_*² = 2π²h²θ_hint″(0)`, the
+lower bound behaves like `c_*²/(k + ½)²` (ratio `0.9902, 0.9938, 0.9969` at `k = 100, 160, 320`,
+Gaussian pair; `0.9918` at `k = 120`, cube `u = 1`), the recursion itself on a grid like
+`c_*²/(k + c)²` with `c ≈ 0.15`–`0.25` (`0.9982` at `k = 160`; `0.9959` at `k = 120`), the exact dynamics of
+convex majorants like `c_*²/(k + c′)²` with `c′ ≈ 0`–`0.08` (`1.00006` at `k = 160`; `0.99903`), and the chain
+of the proof, restarted at `h + 0.02`, gives `1.031·c_*²/j²` after `j = 1000` further levels
+(`experiments/coordinator_checks/level_rate`, `experiments/workstreams/R`).  The restart is
+needed: from `h + 0.15` the range condition fails for the Gaussian pair.
+(2) *Where the law changes.*  The structural part — Lemma L, Lemma M, the convexity of `Σ`,
+(c), (e), the sub-solutions — holds for every convex nonincreasing `θ` with `h < a`.  The
+twice differentiable maximum of `J` enters through the passage time and the multiplier.
+**If `θ` has a kink at its fixed point** — one-sided slopes `−r₂ < −r₁` at `h` — then `J = h` on
+`[L₁, L₂]`, `L_i = r_i/(1 + r_i)`, the slope map moves by exactly `δ/h` per level across this interval, and
+`τ_k − h ≥ (L₂ − L₁)·h/(k + 2)` for every `k` (Proposition K of the report; example
+`θ(e) = max(1 − 3e, ½ − e, 0)`): together with the general bound `c₁/(k + c₂)` the rate is `Θ(1/k)`.
+So over all convex pairs the rate `O(1/k)` of the remark above cannot be improved, and
+the `1/k²` of the cube is a consequence of the smoothness and strict convexity of `θ_na` at
+its fixed point.  Heuristically, `h − J(t) ≍ |t − L|^p` gives `τ_k − h ≍ k^{−p/(p−1)}` for `p > 1`, and
+geometric convergence for a corner of `J` (`θ` affine near `h`); only the lower halves of
+these follow from (c) as it stands.
+(3) *What it means, and what it does not.*  The theorem is about the operator `R` — the
+analysis of the nested algorithms at the level of exponents: `k` nested levels, *analysed by
+`R`*, have the exponent `h + (c_*² + o(1))/k²` at accuracy zero.  It is not a statement about
+algorithms that are not nested in this way, the `o(1)` has no rate (no certified constants at
+finite `k`), and it gives no cost at finite `n`: with `k ≍ n^{1/3}` levels and a loss of `O(ln n)` per
+level one would expect `n·h + O(n^{1/3}(ln n)^{2/3})`, but that needs the sub-exponential factors
+of `k` levels uniformly in `k` and **is not established** (the schedule of Theorem 11.58a, built
+on single lines, is confined to `O(√(n ln n))` because single-line epochs have the rate `1/k`
+only: `DEAD_ENDS.md` D64).
+(4) *Not machine-checked:* (b), the passage time, (e) (it needs a minimax theorem), the
+sub-solution argument and the range condition.  Machine-checked: Lemmas L and M, the
+iteration of (c), the Gaussian slope map, three numerical instances.
+(5) *The profile at positive accuracy* **[a sketch and numerics: `R_REPORT.md` §8a]**.  Both
+bounds are envelopes of lines over the same orbit curves, and at accuracies `x = ζh/k` they
+give
+
+    k²·[ T_k(ζh/k) − θ_hint(ζh/k) ]  →  h²·θ_hint″(0)·f(ζ),      f(ζ) = sup{ 2z² + 2ζ·z·cot z : z ∈ (0, π) or z ∈ i(0, ∞) } − ζ²/2,
+
+`f(0) = 2π²`, `f(3) = 3/2`; `f` solves `ζf′²/2 + ζf′ + (ζ − 2)f = 0`, the similarity equation of a
+continuum caricature of the recursion (`∂_kD = −x[D/h + (∂_xD)²/(2hθ_hint″(0))]` for the defect
+`D = T_k − θ_hint`), through its folded saddle.  The uniform estimate that the limit needs is
+not written out; numerically the envelope of the minorant lines increases to `f` for the
+Gaussian pair and for the cube alike (`5.61, 5.79, 5.89, 5.94` at `ζ = 1`, `k = 20, 40, 80, 160`, against
+`f(1) = 5.992`), and the recursion on a grid has `11.74, 9.07, 5.98, 2.93, 1.50, 0.40` at
+`ζ = ¼, ½, 1, 2, 3, 5`, `k = 160`, against `11.77, 9.09, 5.99, 2.93, 1.50, 0.39`.
 
 **Theorem 11.54 (the adaptive exponent without a hint) [P: Theorems 11.25(a), 11.44, 11.52, 11.53].**
 For every `u > 0`, `0 < ε₁ < ε*` and `0 < δ < ½`, the least number of evaluations with which a
@@ -5785,7 +5952,7 @@ accuracy (`τ₁ = a`, `τ_{k+1} = inf_φ sup_{γ≥0}[min(γ, φa) + (1−φ)T_
 `τ_k/a = 0.5004, 0.361, 0.311, 0.290, 0.280, …, 0.2631` for `k = 2, 3, 4, 5, 6, …, 40` at `u = 1`, against
 `h/a = 0.2626` (the first value from the closed form
 `τ₂ = min_φ max{(1−φ)a, φa + (1−φ)θ_na(φa/(1−φ))}`; earlier versions had the grid values `0.5006` and
-`0.2627` — Scientific Discovery Division, SCI-REV-0014, m9; both re-computed); `(τ_k − h)/a ≈ 0.65/k²`; `max_g(T_k − θ_hint)(g) = τ_k − h` **[N; workstream; `τ₂` re-computed by
+`0.2627` — Scientific Discovery Division, SCI-REV-0014, m9; both re-computed); `(τ_k − h)/a ≈ 0.65/k²` — now Theorem 11.53b: `k²(τ_k − h)/a → 2π²h²θ_hint″(0)/a = 0.6413` at `u = 1` —; `max_g(T_k − θ_hint)(g) = τ_k − h` **[N; workstream; `τ₂` re-computed by
 the coordinator]**.  The algorithm of the proof has about `ln(a/h)·a/η` bounded levels on top of
 an extensive family: nothing one would run.  *At the flat instance, with the outer
 fraction `φ` tuned for that instance,* the exact cost of two
@@ -11766,7 +11933,7 @@ its branch.
    accuracies (Theorem 11.54), where the method should give `O(√(n ln n))` as well.  Any such bound must come from non-flat instances (on the
    flat one the doubling two-sample bracket stops at the hinted cost up to a polynomial
    factor).  (ii) **Depth** — `k` nested levels have the exponent `τ_k > h` at bounded accuracy,
-   `(τ_k − h)/a ≈ 0.65/k²` numerically; is there a lower bound for a restricted class (a bounded
+   `τ_k − h = (2π²h²θ_hint″(0) + o(1))/k²` (Theorem 11.53b; a paper proof, `0.641·a/k²` at `u = 1`); is there a lower bound for a restricted class (a bounded
    number of levels, or of rounds of adaptivity) that matches `τ_k`?  **Rounds** (§11.24;
    refereed, SCI-REV-0003): every nested algorithm with fixed levels needs a number of
    rounds independent of `n`; the two-round exponent is at least `0.359a` (`liminf`) and at
