@@ -166,3 +166,113 @@ def validate_structure(cert: ZCertificate) -> None:
     if not isinstance(cert.claim, dict) or set(cert.claim) - {"ln_z_lo", "ln_z_hi"} \
             or not all(isinstance(v, Fraction) for v in cert.claim.values()):
         raise MalformedZCertificate("claim may hold ln_z_lo and ln_z_hi as Fractions")
+
+
+# ---------------------------------------------------------------------------------------------
+# File format `structbio-zcert/1` (detached: the instance is named by its checksum)
+# ---------------------------------------------------------------------------------------------
+
+def _fraction_text(value: Fraction) -> str:
+    return f"{value.numerator}/{value.denominator}"
+
+
+def _fraction_from_text(text, what: str) -> Fraction:
+    parts = text.split("/") if isinstance(text, str) else []
+    if len(parts) != 2 or not all(t.lstrip("-").isdigit() for t in parts) or int(parts[1]) <= 0:
+        raise MalformedZCertificate(f"{what}: expected a rational written 'p/q' with q > 0")
+    value = Fraction(int(parts[0]), int(parts[1]))
+    if _fraction_text(value) != text:
+        raise MalformedZCertificate(f"{what}: the rational is not in lowest terms / canonical form")
+    return value
+
+
+def _node_to_json(node: dict) -> dict:
+    out = {"steps": [dict(step) for step in node["steps"]]}
+    if node.get("branch") is None:
+        out["order"] = [int(v) for v in node["order"]]
+    else:
+        out["branch"] = int(node["branch"])
+        out["children"] = {str(int(a)): _node_to_json(child) for a, child in sorted(node["children"].items())}
+    return out
+
+
+def _node_from_json(doc) -> dict:
+    from .mincert import MalformedCertificate, _strict_int      # shared strict helpers
+    if not isinstance(doc, dict) or not isinstance(doc.get("steps"), list):
+        raise MalformedZCertificate("a node needs a list of steps")
+    try:
+        steps = []
+        for step in doc["steps"]:
+            if not isinstance(step, dict):
+                raise MalformedZCertificate("a step must be an object")
+            if step.get("op") == "prune":
+                steps.append({"op": "prune", "site": _strict_int(step.get("site"), "site"),
+                              "remove": _strict_int(step.get("remove"), "remove"),
+                              "dominator": _strict_int(step.get("dominator"), "dominator")})
+            elif step.get("op") == "relax":
+                pair, f, g = step.get("pair"), step.get("f"), step.get("g")
+                if not all(isinstance(v, list) for v in (pair, f, g)):
+                    raise MalformedZCertificate("relax: pair, f and g must be lists")
+                steps.append({"op": "relax", "pair": [_strict_int(v, "pair") for v in pair],
+                              "f": [_strict_int(v, "f") for v in f], "g": [_strict_int(v, "g") for v in g]})
+            else:
+                raise MalformedZCertificate(f"unknown step {step.get('op')!r}")
+        if "branch" in doc:
+            children = doc.get("children")
+            if not isinstance(children, dict):
+                raise MalformedZCertificate("branch: children must be an object")
+            kids = {}
+            for a, child in children.items():
+                if not (isinstance(a, str) and a.isdigit() and str(int(a)) == a):
+                    raise MalformedZCertificate(f"branch: child key {a!r} is not a canonical natural number")
+                kids[int(a)] = _node_from_json(child)
+            return {"steps": steps, "branch": _strict_int(doc["branch"], "branch"), "children": kids}
+        order = doc.get("order")
+        if not isinstance(order, list):
+            raise MalformedZCertificate("a leaf node needs an elimination order")
+        return {"steps": steps, "order": [_strict_int(v, "order") for v in order]}
+    except MalformedCertificate as exc:
+        raise MalformedZCertificate(str(exc)) from exc
+
+
+def dumps(cert: ZCertificate) -> str:
+    """Serialise a Z certificate (detached: the instance is named by `mincert.model_sha256`)."""
+    import json
+    from .mincert import model_sha256
+    doc = {"format": "structbio-zcert/1", "model_sha256": model_sha256(cert.model),
+           "beta": _fraction_text(cert.beta), "domains": [[int(a) for a in d] for d in cert.domains],
+           "keep": None if cert.keep is None else int(cert.keep),
+           "claim": {k: _fraction_text(v) for k, v in sorted(cert.claim.items())},
+           "root": _node_to_json(cert.root_node()),
+           "meta": json.dumps(cert.meta, sort_keys=True)}
+    return json.dumps(doc, separators=(",", ":"))
+
+
+def loads(text: str, model: PairModel) -> ZCertificate:
+    """Parse a Z certificate strictly (duplicate keys, non-integer numbers, non-canonical rationals
+    and wrong shapes are errors) for the instance `model`, whose checksum must be the recorded one."""
+    from .mincert import MalformedCertificate, _meta_from_text, _strict_int, _strict_load, model_sha256
+    try:
+        doc = _strict_load(text)
+        if not isinstance(doc, dict) or doc.get("format") != "structbio-zcert/1":
+            raise MalformedZCertificate("unknown format")
+        if set(doc) - {"format", "model_sha256", "beta", "domains", "keep", "claim", "root", "meta"}:
+            raise MalformedZCertificate("unknown field")
+        if model_sha256(model) != doc.get("model_sha256"):
+            raise MalformedZCertificate("the instance does not have the checksum recorded in the certificate")
+        domains, claim = doc.get("domains"), doc.get("claim")
+        if not isinstance(domains, list) or not all(isinstance(d, list) for d in domains) or not isinstance(claim, dict):
+            raise MalformedZCertificate("need 'domains' (list of lists) and 'claim' (object)")
+        root = _node_from_json(doc.get("root"))
+        keep = doc.get("keep")
+        cert = ZCertificate(model=model, beta=_fraction_from_text(doc.get("beta"), "beta"),
+                            domains=[[_strict_int(a, "domain") for a in d] for d in domains],
+                            steps=root["steps"], order=root.get("order", []),
+                            keep=None if keep is None else _strict_int(keep, "keep"),
+                            claim={k: _fraction_from_text(v, k) for k, v in claim.items()},
+                            meta=_meta_from_text(doc.get("meta")),
+                            branch=root.get("branch"), children=root.get("children"))
+    except MalformedCertificate as exc:
+        raise MalformedZCertificate(str(exc)) from exc
+    validate_structure(cert)
+    return cert

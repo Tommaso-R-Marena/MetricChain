@@ -184,3 +184,26 @@ def test_a_branch_without_a_child_for_some_state_is_rejected():
         assert not check_partition_certificate(bad, max_entries=6).accepted
         return
     pytest.fail("no branched certificate was produced")
+
+
+def test_z_certificate_files_round_trip_strictly_and_are_judged_identically():
+    from metricchain_sb import zcert
+    dense = random_pair_model(101, n=5, kmax=3, density=1.0, scale_bits=2, kmin=3)
+    for model, kwargs in ((models()[2], dict(tau=30, theta=2)),
+                          (dense, dict(tau=None, theta=None, max_entries=6, max_leaves=5000)),
+                          (models()[4], dict(keep=0, tau=None, theta=1))):
+        cert = certify_partition(model, BETA, **kwargs)
+        text = zcert.dumps(cert)
+        back = zcert.loads(text, model=model)
+        assert zcert.dumps(back) == text
+        limit = kwargs.get("max_entries", 5_000_000)
+        a = check_partition_certificate(cert, max_entries=limit)
+        b = check_partition_certificate(back, max_entries=limit)
+        assert a.accepted and b.accepted and (a.ln_z_lo, a.ln_z_hi) == (b.ln_z_lo, b.ln_z_hi)
+        assert a.populations == b.populations
+        with pytest.raises(zcert.MalformedZCertificate):
+            zcert.loads(text, model=models()[7])                          # another instance: checksum mismatch
+        with pytest.raises(zcert.MalformedZCertificate):
+            zcert.loads(text[:-1] + ',"keep":null}', model=model)         # duplicate key
+        with pytest.raises(zcert.MalformedZCertificate):
+            zcert.loads(text.replace('"domains":[[', '"domains":[[0.5,', 1), model=model)   # a non-integer state
