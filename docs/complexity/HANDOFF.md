@@ -137,6 +137,7 @@ lake env lean experiments/complexity/lean/JordanOrbit.lean
 lake env lean experiments/complexity/lean/NanuqFinite.lean   # 3.5 min, needs about 11 GB; do not run it next to other heavy jobs
 lake env lean experiments/complexity/lean/FourPartition.lean  # CX-V4
 lake env lean experiments/complexity/lean/NanuqPattern.lean   # CX-V5: Corollary 5' on six points (prints the axioms)
+lake env lean experiments/complexity/lean/ChainGadgets.lean   # CX-V6: the gadget inequalities of the chain note (prints the axioms; 8 s)
 ```
 
 ## Things a successor must not do
