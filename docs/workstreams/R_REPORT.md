@@ -504,6 +504,7 @@ harness XVI.6; the conjugation is routine and is not written out]**: `(3 − √
 |---|---|---|
 | `r1_checks.py` | joint convexity and monotonicity of `Σ` (12 000 random midpoints); convexity of the orbit curves; (Σ6); Lemma PT; Proposition U by brute force — the bracket of `R` minimised over `φ` at `β → 0` against the envelope of the image lines, for random convex piecewise-linear `W`; a negative control with a concave `W`; Proposition K | all pass (`out_r1_checks.txt`): `√δ·N_t(δ)/c_* = 0.764, 0.906, 0.968, 0.990, 0.997` at `δ/h = 10⁻², …, 10⁻⁶` (Gaussian; the cube alike); Proposition U holds **with equality** up to the discretisation (`2·10⁻⁶·a`, 240 cases); with a concave `W` the line-by-line value is exceeded by up to `0.07·a` |
 | `r2_chain.py pair s_t−L b_0−h [levels]` | the restarted chain of §6: case A/B, `B_t(j)`, `m_j`, `E_j`, `b_j`, the range condition, the ratio of consecutive slopes against its bound; `j²(b_j − h)/c_*²` | `out_r2_chain_gauss.txt` (`1.031` at `j = 1000`), `out_r2_chain_cube1.txt` (`1.049` at `j = 600`), `out_r2_chain_gauss_st015.txt`, `out_r2_chain_gauss_wide.txt` (range condition fails) |
+| `r3_gauss_exact_lb.py` | **exact** lower bounds for the Gaussian pair at finite `k` (Proposition A with the orbit in rational arithmetic: no rounding; the chain behind it is machine-checked) | `τ_k ≥ 0.381966011, 0.307978528, 0.255679562, 0.250376448, 0.250023947` at `k = 2, 3, 10, 40, 160`; `(k + ½)²(τ_k − ¼) ≥ 1.0151, 1.0010, 1.00005` times `π²/16` at `k = 10, 40, 160` (`out_r3_gauss_exact_lb.txt`) |
 | `level_rate/lines_lb*.py` | `B_∞(k)` (lower bound) for the Gaussian pair, the cube, four biased cubes | ratio to `c_*²`: `0.9902, 0.9938, 0.9969` at `k = 100, 160, 320` (Gaussian) |
 | `level_rate/dual_ub_*.py` | the exact dynamics of convex majorants on grids | ratio `1.00016, 1.00006, 1.00001` at `k = 100, 160, 320` (Gaussian); `0.99873, 0.99903` at `120, 160` (cube `u = 1`) |
 | `level_rate/iterate_exact.py` | the recursion itself on a grid (not one-sided) | ratio `0.9960, 0.9982` at `100, 160` (Gaussian); `0.99467, 0.99585` at `100, 120` (cube) |
@@ -514,9 +515,11 @@ harness XVI.6; the conjugation is routine and is not written out]**: `(3 − √
 1. **Review.**  When first committed, nothing in this file had been read by anyone but its
    author.  Independent internal reviews are commissioned; their outcome is recorded in
    the research log and in the theory report (Theorem 11.53a).
-2. **No certified constants at finite `k`.**  The `o(1)` terms are not quantified; the restart
-   level `k₁` is not computed.  A certified two-sided table (interval arithmetic) of
-   `B_∞(k) ≤ τ_k ≤ b_j` is a finite computation that has not been done.
+2. **No certified upper constants at finite `k`.**  The `o(1)` terms are not quantified; the
+   restart level `k₁` is not computed.  From below the bound is exact for the Gaussian pair
+   (`r3_gauss_exact_lb.py`: rational arithmetic on top of the machine-checked chain); for the
+   cube it would need interval arithmetic for the slope map.  A certified *upper* table needs
+   a certified restart value and has not been done.
 3. **Not machine-checked:** Proposition U (it needs Sion's minimax theorem), Lemma T,
    Proposition C, Lemma RC, Lemma PT, (Σ6).  Machine-checked: Lemma L and the iteration of
    Proposition A, Lemma M, the Gaussian slope map and three numerical instances.
