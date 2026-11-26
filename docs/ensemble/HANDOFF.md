@@ -24,3 +24,17 @@
    owner issues the consolidation directive (about $2,000 of credit left across sessions):
    stop exploring; close proofs, verify, integrate, document, preserve.
 6. **State.**  See "Resume here" in `RESEARCH_LOG.md`.
+7. **Conventions that are easy to break.**  (i) `scripts/audit_all.sh` scans `proofs/` for
+   forbidden tokens: do not write the words for an incomplete proof, the tactic that gives
+   up a goal, or an anonymous example, even in comments; every module must be imported by
+   `proofs/AxiomAudit.lean`, with `#print axioms` lines for its headline theorems and named
+   non-vacuity witnesses; the build must be free of warnings (unused section variables
+   need `omit … in`, unused `simp` arguments must be removed, `push_neg` is deprecated in
+   this Mathlib — use `push Not`).  (ii) A single Lean file is checked with
+   `lake env lean proofs/Ensemble/<File>.lean` after `lake build` of its imports; the full
+   build of the branch takes tens of minutes on four cores.  (iii) Every number quoted in
+   the report must come from a script under `experiments/ensemble/` that `run_all.py` runs.
+8. **Where the mathematics is most fragile.**  Part II of the report (genericity; real
+   against complex algebraic geometry; the two cited rigidity theorems), then Theorem E11
+   (asymptotic random-matrix input), then Theorem E12(c) (the union bound over
+   neighbourhoods).  An internal adversarial review was commissioned at checkpoint 1.

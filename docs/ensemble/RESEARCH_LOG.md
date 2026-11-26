@@ -5,8 +5,23 @@
 *(Updated at every checkpoint.  A successor should read `HANDOFF.md` first, then this
 section, then `OPEN_OBLIGATIONS.md`.)*
 
-State at registration (2026-11-26, 16:00 UTC): the division exists, nothing is proved yet.
-The first research cycle is described in the entry below.
+**State after checkpoint 1 (2026-11-26).**  `ENSEMBLE_REPORT.md` version 1: Theorems E1–E12 in
+three parts (exposedness and the bridge to Theorem 2.4; laws of observables and ensemble
+rigidity; pair data on the cube).  Lean: `proofs/Ensemble/Exposedness.lean`,
+`RenyiHeppes.lean` (seven headline theorems, two witnesses).  Numerics:
+`experiments/ensemble/run_all.py`.  Sent: ENSEMBLE-MSG-0001 (introduction), -0002 (checkpoint).
+
+**Next, in this order.**
+1. Apply the internal adversarial review of the report (OB1) — corrections as linked
+   messages, entries in `DEAD_ENDS.md`.
+2. Problem O1 numerically at `n ≤ 16` (probability that `K` random vertices of the cut
+   polytope form a face, by linear programming), to locate the threshold in `[1, 6.34]`.
+3. Finite temperature (Problem O7): identification inside an envelope class; the
+   polytope of the class in the weights; exposed points relative to `k`-body data.
+4. Quantitative ensemble rigidity (O4) and conformers with common rigid parts (O3) — with
+   the Geometric Inference Division once it exists.
+5. Noise (O8): the modulus of continuity for the classes of the report.
+6. Obligations OB2–OB9 (sources, the programme's full audit on this branch).
 
 ---
 
@@ -62,3 +77,43 @@ priorities (all to be proved or refuted; nothing below is a result):
    with certificates.
 5. **Finite temperature.**  Identifiability inside an envelope class; relation between
    the instances that are hard for evaluations and those that are easy for ensemble data.
+
+
+---
+
+## 2026-11-26 — Cycle 1: what an ensemble is determined by
+
+**Synchronisation.**  Theory `a844b5a`, science `2b4ccdf`, engineering `88feab9` (no change
+since registration); the geometry and complexity branches do not exist yet.
+
+**Investigated and proved** (details in the report; novelty in `PRIOR_ART.md`).
+* Part I.  The characterisation of identified ensembles (E1) by a theorem of the
+  alternative; the exact modulus for one conformation by Sion's theorem (E2) and the
+  observation that its constraint is the sharp-minimum inequality of theory report
+  Theorem 2.4 — the bridge is machine-checked with `robust_certified_iff` as a lemma; the
+  first-order constant for finite ensembles (E3).
+* Part II.  The pigeonhole proof of Rényi–Heppes works for any features that are
+  `r`-determining (E4, machine-checked for finite spaces; sharp).  For frameworks the
+  pigeonhole is useless and the right notion is the chimera; the dimension count that
+  excludes chimeras for generic tuples is exactly connectivity of the algebraic matroid
+  (E5).  With the 2022 theorem that globally rigid graphs have connected rigidity matroids,
+  ensemble rigidity is equivalent to global rigidity (E7); `2K` moments per edge (E8).
+* Part III.  Pair data on the cube: the projector certificate; capacity of order `n`
+  (E10, with Odlyzko's theorem), failure beyond `6.34n` (E11, Gaussian signs); the
+  adaptivity gap (E12).
+
+**Refuted, withdrawn or superseded:** `DEAD_ENDS.md` ED1–ED6 (a question the literature had
+answered; a capacity constant that was Odlyzko's; a kinematic heuristic contradicted by a
+theorem; unlabeled PCA is a neighbour, not a special case; two numerical controls with
+wrong expectations; counting bits does not bound adaptive designs).
+
+**Verified.**  Lean modules compile without warnings; axioms standard.  Numerical checks
+T1–T3, R1–R6, C1–C6 pass (`experiments/ensemble/output.txt`).
+
+**Communicated.**  ENSEMBLE-MSG-0002.
+
+**Reassessment.**  The strongest statements are the bridge (E2(c)), ensemble rigidity (E7,
+E8) and the capacity/adaptivity picture (E10–E12).  Their common weakness is the
+idealisation to point conformers and exact data; the next cycles go to finite temperature
+and to noise.  The most likely place for an error is Part II (genericity, real against
+complex varieties) — the review is asked to attack it first.
