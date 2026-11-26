@@ -1,0 +1,8 @@
+M1 1440 cases (n,q) in (6,2),(4,3),(8,2), K in 1,2,3,5, three residual families, beta in 0.3,1,3:
+   lower inequality violated: 0;  upper inequality violated: 0;  smallest slack of the upper end: 5.793e-03
+M2 control: the one-average product width fails in 0 of the cases with K >= 2 (largest gap/width = 0.000); violation of the control if 0
+   perfectly correlated reference (two point masses 0^n, 1^n), Delta = |x|, n = 6, beta = 1: truth -0.6907; one-average bound -2.2500 (violated: True); K = 2 bracket [-0.6907, 0.0593] (holds: True)
+M3 K = |X| point masses: lower end = truth = 0.043302 (the bracket is then the exact value plus a useless upper width)
+M4 the width beta^2 sum c_i^2/8 does not depend on K (by construction); it is extensive.
+TOTAL violations: 1
+END item2d_mixture_sandwich

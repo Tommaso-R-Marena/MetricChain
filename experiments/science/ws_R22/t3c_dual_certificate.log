@@ -1,0 +1,11 @@
+=== R22: a linear certificate beyond phi for states that share rigid segments (grid of all re-hingings); weights 0.37/0.63
+| case | n | hinges | torsion differences (rad) | grid conformations | t* = best quadratic growth of a certificate with |Lambda_ij| <= 1 | ||Lambda||_1 | stability constant ||Lambda||_1 / t* | growth of phi (Theorem G) on the same grid, same normalisation | phi(X_2) - phi(X_1) |
+|---|---|---|---|---|---|---|---|---|---|
+| one torsion (control) | 20 | [8] | [1.484] | 144 | -0.0000e+00 | 151.09 | nan | -1.83e-12 | 1e-13 |
+| two torsions | 20 | [5, 12] | [1.309, 2.356] | 2304 | 3.1090e-01 | 149.74 | 4.816e+02 | -2.17e-14 | 4e-14 |
+| two torsions | 20 | [6, 11] | [-1.833, 1.047] | 2304 | 6.3535e-01 | 149.74 | 2.357e+02 | -3.59e-14 | 1e-13 |
+| two torsions | 26 | [8, 16] | [2.618, -1.309] | 2304 | 1.1327e+00 | 273.64 | 2.416e+02 | -1.67e-14 | 4e-13 |
+| two half-turns (control) | 20 | [5, 12] | [3.142, 3.142] | 2304 | -8.0220e-16 | 147.16 | nan | -1.59e-14 | 6e-14 |
+| three torsions | 26 | [5, 12, 19] | [1.571, -2.094, 2.618] | 13824 | 7.5346e-01 | 267.13 | 3.545e+02 | 5.50e-02 | 1e-12 |
+violations (controls must give t* = 0; two and three torsions t* > 0; phi must have growth 0 for two torsions): 0
+ALL DONE 10.3 s

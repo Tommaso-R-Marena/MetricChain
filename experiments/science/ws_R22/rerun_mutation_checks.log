@@ -1,0 +1,12 @@
+caught  stack_no_sqrt                  -> stacking_identity                    baseline passes
+caught  collinear_no_scale             -> obstruction_collinear                baseline passes
+caught  four_atom_weights              -> four_atom_mixture                    baseline passes
+caught  midpoint_asymmetric            -> affine_flex_midpoint                 baseline passes
+caught  threshold_minus_one            -> conic_threshold_float                baseline passes
+caught  drop_angle_edges               -> conic_threshold_float                baseline passes
+caught  demix_wrong_block              -> demix_recovers                       baseline passes
+caught  band_K_plus_2                  -> jacobian_exact                       baseline passes
+caught  lemma_R_minus_one              -> lemma_R_reachability                 baseline passes
+caught  certificate_wrong_projector    -> dual_certificate                     baseline passes
+caught  six_atoms_is_seven             -> six_atoms_have_a_quadric_in_4d       baseline passes
+11 of 11 mutations caught

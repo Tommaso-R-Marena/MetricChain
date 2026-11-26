@@ -3733,6 +3733,40 @@ enumerated instances compared with our own logs.  All of its findings are accept
     control shows the concentration of the sample).  Not done: the remainder bound of a
     down-closed family that is not a ball, and a run (`OPEN_PROBLEMS.md` D14).
 
+86. **The transition of a floor is where one displaced state outweighs the reference:
+    the least ratio (cost)/(penalty) over states, computed** [P for the bound, one
+    line; M for the numbers, exact `(min,+)` and `(+,×)` passes;
+    `pi_inference/floor_ground_state.py`, four logs `floor_ground_state_*.log`;
+    prediction written at 17:49 UTC before the script existed — **met in four of
+    four**].  Item 84 ended on "a prediction of `λ_c` needs the least ratio over
+    states".  With `c(x) = ln Z(m₀) + βm₀(x) ≥ 0` and `b(x) = β·pen(x) ≥ 0`,
+    `G(λ) = max_x[λb(x) − c(x)] = −β·min_x m_λ(x) − ln Z(m₀) ≤ ln Z(m_λ) − ln Z(m₀)` (one
+    term of a sum of positive terms); `G` is convex, piecewise linear, one `(min,+)` pass
+    per `λ`.  `λ_kink`: the ground state of the floor stops being that of `m₀`;
+    **`λ_gs = min_x c(x)/b(x)`**: `G = 0`.
+
+    | case | `λ_c` (scan, item 84) | `λ_kink` | **`λ_gs`** | predicted | `λ_gs/λ_c` | minimiser: sites off, `b*`, `c*` (`kT`) | `(λ_gs − λ_c)·b*` (nats) | equal weights from the two entropies |
+    |---|---|---|---|---|---|---|---|---|
+    | Lys₁₂, order 4, band 4 | 15.324 | 15.284 | **15.497** | 15.3 – 16.8 (met) | 1.011 | 10 of 12; 6.21; 96.2 | 1.07 | 15.298 |
+    | Lys₁₂, order 4, band 7 | 18.805 | 18.847 | **19.093** | 18.8 – 20.3 (met) | 1.015 | 11 of 12; 5.36; 102.3 | 1.55 | 18.871 |
+    | Lys₁₂, order 3, band 7 | 1.3176 | 1.3349 | **1.3556** | 1.32 – 1.42 (met) | 1.029 | 10 of 12; 64.0; 86.8 | 2.43 | 1.3296 |
+    | (LKSE)₃, order 3, band 7 | 0.19835 | 0.19937 | **0.20486** | 0.198 – 0.21 (met) | 1.033 | 12 of 12; 647.6; 132.7 | 4.22 | 0.20046 |
+
+    The same state is the ground state just above `λ_kink` and the minimiser of the
+    ratio in every case; no exact sample of the floor at `λ_gs` or `2λ_gs` (3 559 to
+    3 972 per case with a positive penalty) has a smaller ratio, and the control at
+    1.05 times the ratio finds 1 100 to 3 400.  **What it gives.**  (i) [P] For
+    `λ ≥ λ_gs` the floor has lost at least `(λ − λ_gs)·b*`: for (LKSE)₃ at order 3, one
+    state accounts for 514.9 of the 658.9 nats that workstream P9 reported as lost.
+    (ii) [M] The measured transition lies 1 to 3 % below `λ_gs`; the difference times
+    `b*` is an entropy of 1 to 4 nats, and the two-phase estimate with both entropies
+    agrees with the scan to 0.2 – 1.1 %.  (iii) A safety factor that needs no sampling:
+    39 `(min,+)` passes per case.  **What it is not:** a lower bound of `λ_c` (the
+    entropy has the other sign), and a cheap criterion only where a minimum over
+    states is cheap — for the unreduced penalty, tables on every `m`-subset, it is a
+    ground-state problem (put to the Complexity division, SCI-MSG-0031 §2).  Limits:
+    four cases of one family; double precision; the 3 % is measured, not bounded.
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every

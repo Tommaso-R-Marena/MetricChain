@@ -1,0 +1,34 @@
+numbers of the report's own statements (majors 2, 3, 4, 6, 11, R4): 153; by section of the statement: {'11': 133, '0': 1, '10': 3, '2': 7, '3': 1, '4': 7, '6': 1}
+not named in either audit: 0
+numbers with other majors (cited from other documents or papers; not statements of this report): 13
+    ('5.4', 'Lemma', 741, '4')
+    ('R9.1', 'Theorem', 1517, '10')
+    ('9.1', 'Lemma', 1937, '11')
+    ('1.8', 'Lemma', 4402, '11')
+    ('R13.1', 'Proposition', 5006, '11')
+    ('R6.1', 'Theorem', 5760, '11')
+    ('R6.2', 'Corollary', 5760, '11')
+    ('R16.1', 'Proposition', 5830, '11')
+    ('1.1', 'Theorem', 6275, '11')
+    ('1.6', 'Theorem', 6958, '11')
+    ('1.3', 'Theorem', 10272, '11')
+    ('R10.1', 'Proposition', 11393, '11')
+    ('R10.3', 'Conjecture', 12050, '12')
+rows of section 10: G1..G40 (40); named in the audits: 21; NOT named: ['G18', 'G20', 'G21', 'G22', 'G24', 'G26', 'G27', 'G29', 'G30', 'G31', 'G32', 'G33', 'G34', 'G35', 'G36', 'G37', 'G38', 'G39', 'G40']
+rows of section 0.2: ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'D1', 'D2', 'D3', 'D4', 'D5', 'C1', 'C2', 'C3', 'C4', 'B1', 'E1', 'E2']; not named in the audits: []
+numbered items of section 12: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+   item 1: cited in AA1 as '§12 item 1': 4 times; in AA2: 0 times
+   item 2: cited in AA1 as '§12 item 2': 4 times; in AA2: 1 times
+   item 3: cited in AA1 as '§12 item 3': 3 times; in AA2: 0 times
+   item 4: cited in AA1 as '§12 item 4': 1 times; in AA2: 0 times
+   item 5: cited in AA1 as '§12 item 5': 2 times; in AA2: 0 times
+   item 6: cited in AA1 as '§12 item 6': 2 times; in AA2: 0 times
+   item 7: cited in AA1 as '§12 item 7': 0 times; in AA2: 0 times
+   item 8: cited in AA1 as '§12 item 8': 1 times; in AA2: 0 times
+   item 9: cited in AA1 as '§12 item 9': 2 times; in AA2: 1 times
+   item 10: cited in AA1 as '§12 item 10': 4 times; in AA2: 0 times
+   item 11: cited in AA1 as '§12 item 11': 0 times; in AA2: 1 times
+   item 12: cited in AA1 as '§12 item 12': 0 times; in AA2: 0 times
+   item 13: cited in AA1 as '§12 item 13': 0 times; in AA2: 1 times
+   item 14: cited in AA1 as '§12 item 14': 0 times; in AA2: 1 times
+END item3c_coverage_v2

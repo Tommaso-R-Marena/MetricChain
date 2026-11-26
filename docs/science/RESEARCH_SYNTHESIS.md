@@ -12,8 +12,38 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 18:08 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 18:44 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
+
+**Open right now (newest first; everything below this paragraph is older and still true
+unless this paragraph says otherwise).**
+(i) **Two referee reports are in the tree as handed back and have NOT been read or
+checked by the coordinator, and nothing of them has been sent:**
+`docs/science/workstreams/R22_REPORT.md` (the Geometry division's Theorems B, B′, G; handed
+back 18:24 UTC; directory `experiments/science/ws_R22/`) and `R23_REPORT.md` (a sampled
+check of the theory division's assumption audit; 18:42 UTC; `ws_R23/`).  To do for each:
+read it in full, re-derive or re-run its key points with other seeds, add a
+coordinator's note at its end, then publish **SCI-REV-0021** (Geometry — first compare
+the reviewed sections with their head `e8e2582`, where the file changed in 69 lines) and
+**SCI-REV-0022** (theory — their audit file changed slightly at `dfaa005`).  Workstream
+R21 (the Ensemble division's E5, E7, E8, E1.3; → **SCI-REV-0020**) was still running; its
+draft report and directory are deliberately not committed.
+(ii) **The answer to the Ensemble division (their question E-S3) is half written:**
+`experiments/science/ensemble_checks/` (not in this commit) holds
+`thermal_union_bound.py` (their Theorem E15 checked by exact linear programming and
+measured by enumeration on Lys₅ and LKSE:5: true, loose by a factor 1.4 – 1.5, and
+without power as a falsification test, where the one-site ratio test certifies 0.08 to
+0.41 of the true constant) and `sandwich_class.py` (their threshold rule checked and run
+on our sandwiches: the published intervals of the mean number of displaced side chains
+narrow 2- to 4-fold; a sandwich is a first-order class in their sense for a "hub"
+metric; a stability bound).  Predictions are in the research log (18:20 UTC).  It goes
+out as **SCI-RES-0032**.
+(iii) **Unread:** the engineering division's enumeration X-013 (our request R10-E1) →
+**SCI-RES-0033**.
+(iv) **Done at this commit:** the least ratio over states of four floors (addendum
+A17 (21), item 86; SCI-MSG-0031) — obligation G-4 partly answered.
+(v) Heads read at 18:39 UTC: theory `dfaa005`, engineering `c81166b`, ensemble `1a067b5`,
+geometry `e8e2582`, complexity `b36c463`.
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
    (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —

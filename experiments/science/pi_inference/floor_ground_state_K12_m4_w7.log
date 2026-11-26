@@ -1,0 +1,18 @@
+=== K12 on H, tau 0.7: 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; order m = 4, band 7; 495 raw stage-2 tables of workstream P9 (sum of their maxima 18.17 kT)
+(0) ball of radius 3: 96366 values; guiding Gibbs sample (seed 4242): 1.23 sites off the anchor on average [130s]
+(1) floor without penalty built (140 evaluated terms exact in a window, 80 reduced, 10 pairs beyond the band); K(T): workstream P9's stored choice; penalty tables in the window form: 0 on one site, 21 on pairs, 312 on larger sub-tuples; sum of their maxima 17.86 kT [130s, peak RSS 1031 MB]
+(2) ln Z(m_0) = 517.1328893 (no penalty); slope at 0: beta <pen>_0 = 9.74842e-05 nats per unit of lambda; 4 exact samples per lambda
+(a) ln Z(m_0) here 517.1328893; in the committed scan 517.1328893; measured lambda_c there 18.805 [308s]
+(b) ground state of m_0: 0 sites off the anchor, log-weight G(0) = -1.3202; the anchor: log-weight -1.3202, penalty 0 (must be 0); control: least energy among 2000 exact samples of m_0 minus the (min,+) value = 3.979e-13 (must be >= 0)
+(c) lambda_kink in [18.847, 18.847]: the ground state of the floor just above it has 11 sites off the anchor, penalty b = 5.356 kT, cost c = 102.3 (c - c of the m_0 ground state) / b = 18.847
+(d) lambda_gs in [19.093, 19.093] (G = 0): minimiser with 11 of 12 sites off the anchor, penalty b* = 5.3561 kT, cost c* = 102.27; c*/b* = 19.093 (must equal lambda_gs); the same state as just above lambda_kink: True
+| at | lambda | G (one state) | ln Z(m_lambda) - ln Z(m_0) (exact) | difference (the entropy the one-state bound misses) | sites off in the ground state |
+|---|---|---|---|---|---|
+| lambda_kink | 18.847 | -1.3185 | 0.7414 | 2.0598 | 11 |
+| measured lambda_c | 18.805 | -1.3202 | 0.6334 | 1.9536 | 0 |
+| lambda_gs | 19.093 | 0.0003 | 1.5908 | 1.5905 | 11 |
+(e) G <= ln Z(m_lambda) - ln Z(m_0): 0 violations in 3 (must be 0)
+(f) the ratio c/b of 3614 exact samples of the floor at lambda_gs and at twice that (those with a positive penalty): least 19.09332 against c*/b* = 19.09332; below c*/b*: 0 (must be 0); control, below 1.05 c*/b*: 1508 (must be positive: the minimiser has the ratio c*/b*)
+(h) two phases: entropy of the reference phase S_a = 1.3202; entropy of the displaced phase S_d = ln(Z_d / its largest term) at lambda_kink: 1.4110, measured lambda_c: 1.1948, lambda_gs: 1.3621; equal weights predicted at lambda_gs - (S_d - reference growth) / b* = 18.871 (measured lambda_c, where the mean number of displaced sites is n/2: 18.805); lambda_kink + (S_a - S_d) / b* = 18.871
+(g) lambda_gs / measured lambda_c = 1.0154; (lambda_gs - lambda_c) b* = 1.546 nats (the entropy by which the displaced phase wins earlier); lambda_kink / lambda_c = 1.0023
+ALL DONE 1070 s; 39 (min,+) passes; peak RSS 1963 MB

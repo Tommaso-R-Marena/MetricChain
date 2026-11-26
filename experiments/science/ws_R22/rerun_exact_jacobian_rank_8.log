@@ -1,0 +1,37 @@
+== rational bond angle ==
+complete averaged data at n = 2K+3 (K >= 2; the parameter count excludes smaller n)
+  K= 2 n=  7 parameters=   9 data=  10 rank_p=   9 OK
+  K= 3 n=  9 parameters=  20 data=  21 rank_p=  20 OK
+  K= 4 n= 11 parameters=  35 data=  36 rank_p=  35 OK
+  K= 5 n= 13 parameters=  54 data=  55 rank_p=  54 OK
+  K= 6 n= 15 parameters=  77 data=  78 rank_p=  77 OK
+  K= 7 n= 17 parameters= 104 data= 105 rank_p= 104 OK
+  K= 8 n= 19 parameters= 135 data= 136 rank_p= 135 OK
+band-limited data, w = K+3, at n = (K^2+3K+4)/2 (the parameter count excludes smaller n and w = K+2)
+  K= 1 w= 4 n=  4 parameters=   1 data=   1 rank_p=   1 OK
+  K= 2 w= 5 n=  7 parameters=   9 data=   9 rank_p=   9 OK
+  K= 3 w= 6 n= 11 parameters=  26 data=  26 rank_p=  26 OK
+  K= 4 w= 7 n= 16 parameters=  55 data=  55 rank_p=  55 OK
+  K= 5 w= 8 n= 22 parameters=  99 data=  99 rank_p=  99 OK
+  K= 6 w= 9 n= 29 parameters= 161 data= 161 rank_p= 161 OK
+  K= 7 w=10 n= 37 parameters= 244 data= 244 rank_p= 244 OK
+  K= 8 w=11 n= 46 parameters= 351 data= 351 rank_p= 351 OK
+== tetrahedral bond angle ==
+complete averaged data at n = 2K+3 (K >= 2; the parameter count excludes smaller n)
+  K= 2 n=  7 parameters=   9 data=  10 rank_p=   9 OK
+  K= 3 n=  9 parameters=  20 data=  21 rank_p=  20 OK
+  K= 4 n= 11 parameters=  35 data=  36 rank_p=  35 OK
+  K= 5 n= 13 parameters=  54 data=  55 rank_p=  54 OK
+  K= 6 n= 15 parameters=  77 data=  78 rank_p=  77 OK
+  K= 7 n= 17 parameters= 104 data= 105 rank_p= 104 OK
+  K= 8 n= 19 parameters= 135 data= 136 rank_p= 135 OK
+band-limited data, w = K+3, at n = (K^2+3K+4)/2 (the parameter count excludes smaller n and w = K+2)
+  K= 1 w= 4 n=  4 parameters=   1 data=   1 rank_p=   1 OK
+  K= 2 w= 5 n=  7 parameters=   9 data=   9 rank_p=   9 OK
+  K= 3 w= 6 n= 11 parameters=  26 data=  26 rank_p=  26 OK
+  K= 4 w= 7 n= 16 parameters=  55 data=  55 rank_p=  55 OK
+  K= 5 w= 8 n= 22 parameters=  99 data=  99 rank_p=  99 OK
+  K= 6 w= 9 n= 29 parameters= 161 data= 161 rank_p= 161 OK
+  K= 7 w=10 n= 37 parameters= 244 data= 244 rank_p= 244 OK
+  K= 8 w=11 n= 46 parameters= 351 data= 351 rank_p= 351 OK
+ALL OK

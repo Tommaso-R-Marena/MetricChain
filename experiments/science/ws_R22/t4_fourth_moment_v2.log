@@ -1,0 +1,11 @@
+=== R22: one differing torsion, data <d^2> alone (control) and <d^2> with <d^4>; grid of 360 angles on each of the two circles (rotations, reflections)
+| n | hinge | torsion difference (deg) | data | rank of the data map on the 720 columns | LP1: minimal mass on the two true states | LP2 at eps = 1e-3, 1e-4, 1e-5 (relative) |
+|---|---|---|---|---|---|---|
+| 16 | 6 | 77 | <d^2> (control) | 5 | 0.000000 | 0.0000, 0.0000, 0.0000 |
+| 16 | 6 | 77 | <d^2> and <d^4> | 9 | 1.000000 | 0.0000, 0.8354, 0.9814 |
+| 20 | 9 | 131 | <d^2> (control) | 5 | 0.000000 | 0.0000, 0.0000, 0.0000 |
+| 20 | 9 | 131 | <d^2> and <d^4> | 9 | 1.000000 | 0.8085, 0.9801, 0.9980 |
+| 26 | 11 | 203 | <d^2> (control) | 5 | 0.000000 | 0.0000, 0.0000, 0.0000 |
+| 26 | 11 | 203 | <d^2> and <d^4> | 9 | 1.000000 | 0.7742, 0.9774, 0.9977 |
+violations (control must give 0; with <d^4> the prediction is 1): 0
+ALL DONE 9.4 s

@@ -1,0 +1,75 @@
+=== R22 3(c) route A: linear images of the stacked pair that are chains, then a linear programme (Theorem B')
+unit bonds, cos(bond angle) = -0.3333; weights (0.37, 0.63); seed 2203
+
+--- (0) control: generic pair, n = 12 ((CC) holds): the enumeration may find only the two states
+    dim N(z) = 1; 106 of 300 starts converged; distinct linear images found: 2; of these the two states: 2
+
+--- (1) control: ONE differing torsion (must be non-identifiable): linear images form a continuum
+    n = 16, hinge torsion [6]: affine rank of z = 5 (of 6); dim N(z) = 10; 300 of 300 starts converged to 300 distinct linear images (300 of them other shapes)
+    linear programme over the true states and the 300 images: minimal mass on the two true states = 0.000e+00 (status 0); 0 = a competing ensemble of other conformations exists (expected)
+
+--- (2) TWO differing torsions, long segments
+| n | hinges | thetas | dim N | LM: converged/starts | distinct images | match the 8 predicted | predicted all found | max |e-length err| of predicted | max phi of predicted | alternating affine dependency residual | LP: min mass on true states |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 16 | [4, 9] | +0.857, -2.457 | 6 | 400/400 | 8 | 8 | 8 | 3.1e-15 | 3.1e-28 | 3.6e-14 | 1.000000000 |
+| 16 | [3, 8] | -0.577, -1.467 | 6 | 400/400 | 7 | 7 | 7 | 2.2e-15 | 4.5e-29 | 1.4e-14 | 1.000000000 |  <-- differs from the prediction
+| 20 | [5, 12] | +2.097, -2.036 | 6 | 400/400 | 8 | 8 | 8 | 3.6e-15 | 1.4e-28 | 2.1e-14 | 1.000000000 |
+| 20 | [6, 11] | -1.675, +2.169 | 6 | 400/400 | 8 | 8 | 8 | 3.1e-15 | 1.1e-28 | 2.1e-14 | 1.000000000 |
+| 26 | [7, 16] | +0.789, +1.386 | 6 | 400/400 | 8 | 8 | 8 | 2.7e-15 | 1.2e-28 | 3.8e-14 | 1.000000000 |
+| 26 | [9, 15] | +2.263, -2.004 | 6 | 400/400 | 8 | 8 | 8 | 3.1e-15 | 4.2e-28 | 5.0e-14 | 1.000000000 |
+| 14 | [3, 7] | +2.543, -1.449 | 6 | 400/400 | 8 | 8 | 8 | 1.8e-15 | 3.3e-29 | 1.1e-14 | 1.000000000 |
+| 14 | [4, 8] | +1.607, +2.330 | 6 | 400/400 | 8 | 8 | 8 | 3.6e-15 | 1.5e-28 | 8.9e-15 | 1.000000000 |
+    two torsions: 1 of 8 cases differ from the paper prediction (8 images = the predicted ones; P1-P2+Pi-Pii+Piii-Piv+Pv-Pvi = 0; LP minimum 1)
+
+--- (2h) the half-turn case theta1 = theta2 = pi (predicted NOT identifiable)
+| n | hinges | max |D(X1)+D(X2)-D(Yv)-D(Yvi)| | Procrustes d_P^2 of Yv, Yvi to the nearer true state | LP: min mass on true states | 1 - 2 min(w) |
+|---|---|---|---|---|---|
+| 16 | [4, 9] | 2.1e-14 | 38.194, 15.260 | 0.260000000 | 0.260000000 |
+| 20 | [5, 12] | 2.8e-14 | 7.831, 7.320 | 0.260000000 | 0.260000000 |
+| 26 | [8, 16] | 2.8e-14 | 14.294, 13.643 | 0.260000000 | 0.260000000 |
+    LP minimum of the mass on the true states for theta1 = theta2 = pi-0.3: 1.000000; pi-0.1: 1.000000; pi-0.01: 1.000000; pi-0.0: 0.260000
+    half-turn case: 0 of 3 cases differ from the prediction (identity exact, competitor of other shapes, LP minimum 1 - 2 min w)
+
+--- (3) THREE differing torsions, long segments
+| n | hinges | dim N | LM: converged/starts | distinct images | of these the two states | LP: min mass on true states |
+|---|---|---|---|---|---|---|
+| 20 | [4, 9, 14] | 3 | 198/400 | 2 | 2 | 1.000000000 |
+| 20 | [3, 8, 13] | 3 | 296/400 | 2 | 2 | 1.000000000 |
+| 26 | [5, 12, 19] | 3 | 225/400 | 2 | 2 | 1.000000000 |
+| 26 | [6, 11, 18] | 3 | 180/400 | 2 | 2 | 1.000000000 |
+| 32 | [7, 15, 23] | 3 | 235/400 | 2 | 2 | 1.000000000 |
+| 18 | [3, 7, 11] | 3 | 400/400 | 2 | 2 | 1.000000000 |
+    three torsions: 0 of 6 cases with a linear image other than the two states
+
+--- (3h) three differing torsions, all half-turns (information; no paper prediction)
+    n = 20, hinges [4, 9, 14], thetas pi: dim N = 3; 231/400 converged; distinct images 2; LP minimum on true states 1.000000000
+    n = 26, hinges [5, 12, 19], thetas pi: dim N = 3; 135/400 converged; distinct images 2; LP minimum on true states 1.000000000
+
+--- (4) short segments (fewer than 5 atoms between hinges: the segment's edge directions lie on a conic)
+    n = 16, hinges [5, 6] (segment sizes [8, 3, 9]): dim N = 9; 400/400 converged; distinct images 4; LP minimum on true states 1.000000 (status 0)
+    n = 16, hinges [5, 7] (segment sizes [8, 4, 8]): dim N = 7; 400/400 converged; distinct images 400; LP minimum on true states 0.000000 (status 0)
+    n = 16, hinges [5, 8] (segment sizes [8, 5, 7]): dim N = 6; 400/400 converged; distinct images 8; LP minimum on true states 1.000000 (status 0)
+    n = 16, hinges [1, 8] (segment sizes [4, 9, 7]): dim N = 6; 400/400 converged; distinct images 7; LP minimum on true states 1.000000 (status 0)
+    n = 16, hinges [2, 8] (segment sizes [5, 8, 7]): dim N = 6; 400/400 converged; distinct images 8; LP minimum on true states 1.000000 (status 0)
+
+--- summary
+    1 torsion (control)            n = 16: 300 linear images; LP minimum of the mass on the two true states 0.000000
+    2 torsions                     n = 16:   8 linear images; LP minimum of the mass on the two true states 1.000000
+    2 torsions                     n = 16:   7 linear images; LP minimum of the mass on the two true states 1.000000
+    2 torsions                     n = 20:   8 linear images; LP minimum of the mass on the two true states 1.000000
+    2 torsions                     n = 20:   8 linear images; LP minimum of the mass on the two true states 1.000000
+    2 torsions                     n = 26:   8 linear images; LP minimum of the mass on the two true states 1.000000
+    2 torsions                     n = 26:   8 linear images; LP minimum of the mass on the two true states 1.000000
+    2 torsions                     n = 14:   8 linear images; LP minimum of the mass on the two true states 1.000000
+    2 torsions                     n = 14:   8 linear images; LP minimum of the mass on the two true states 1.000000
+    2 torsions, both half-turns    n = 16:   8 linear images; LP minimum of the mass on the two true states 0.260000
+    2 torsions, both half-turns    n = 20:   8 linear images; LP minimum of the mass on the two true states 0.260000
+    2 torsions, both half-turns    n = 26:   8 linear images; LP minimum of the mass on the two true states 0.260000
+    3 torsions                     n = 20:   2 linear images; LP minimum of the mass on the two true states 1.000000
+    3 torsions                     n = 20:   2 linear images; LP minimum of the mass on the two true states 1.000000
+    3 torsions                     n = 26:   2 linear images; LP minimum of the mass on the two true states 1.000000
+    3 torsions                     n = 26:   2 linear images; LP minimum of the mass on the two true states 1.000000
+    3 torsions                     n = 32:   2 linear images; LP minimum of the mass on the two true states 1.000000
+    3 torsions                     n = 18:   2 linear images; LP minimum of the mass on the two true states 1.000000
+control violations: generic pair 0, one torsion 0;  prediction violations: two torsions 1, half-turn 0, three torsions 0
+ALL DONE 25.1 s

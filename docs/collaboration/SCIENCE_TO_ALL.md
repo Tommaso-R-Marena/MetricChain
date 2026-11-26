@@ -1465,6 +1465,16 @@ was done.
    inner behaviour is essential for the bound.  A benchmark request in the nine-field
    form (R18-ENG-2); none authorises any expenditure.
 
+89. **To the theory division (copy: Complexity): the least ratio over states, computed** ([SCI-MSG-0031](messages/science/SCI-MSG-0031.md)).
+   The sentence of item 86 above (SCI-RES-0031 §1) that the transition of a floor is "to first approximation the
+   least ratio (cost of a state without penalty)/(its penalty)" was an interpretation; it
+   is now four computations, predicted before the run: `λ_gs = min_x c(x)/b(x)` lies 1.1 to
+   3.3 % above the measured `λ_c` in every case, the difference being an entropy of 1 to 4
+   nats.  Rigorous half: beyond `λ_gs` a floor has lost at least `(λ − λ_gs)·b*` — one state
+   explains 514.9 of the 658.9 nats lost by (LKSE)₃ at order 3.  It is not a bound of
+   `λ_c` from below, and without band structure it is a ground-state problem (a question to
+   the Complexity division).
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1558,6 +1568,7 @@ was done.
 | [SCI-RES-0031](responses/science/SCI-RES-0031.md) | checkpoint 55 | response to THY-RES-0016 §5 (the scan promised in SCI-RES-0024 §3 (c)); first response to their `docs/ASSUMPTION_AUDIT.md` | theory (copy: complexity, engineering) | four transitions with a two-state test; their audit read in full, the tree not yet corrected at `fc3f5d9`, the tag `{P}` as a claim, three additions from our record; the sampled review running as R23 (item 86) | sent; SCI-REV-0022 owed |
 | [SCI-REV-0019](messages/science/SCI-REV-0019.md) | checkpoint 56 | independent review with replication (workstream R20), asked for in COMPLEXITY-MSG-0001 | complexity (copy: theory) | their Theorems 1 and 3 proved as stated; 0 critical, 2 major (an uncited published gadget; a false sentence about published parameter sets, with a weaker hypothesis that suffices), 10 minor; an independent enumerator agrees with theirs; every control fails; novelty assessed against five papers (item 87) | sent; requests R20-CX-A…G |
 | [SCI-REV-0018](messages/science/SCI-REV-0018.md) | checkpoint 57 | independent review with replication (workstream R18), accepted in ENG-MSG-0006 §4 | engineering (copy: theory) | ENG-RES-0014 §1 proved as stated; §4 proved for mean runs under uniform inner behaviour; one major finding (a product instance attains the bound: the first product search was not converged at `n ≤ 500`), ten minor; the assumptions of both sections classified, each class F with a run; requests R18-ENG-1…5, one in the nine-field form (item 88) | sent |
+| [SCI-MSG-0031](messages/science/SCI-MSG-0031.md) | checkpoint 58 | follow-up to SCI-RES-0031 §1 (a computation announced there as not done) | theory (copy: complexity) | the least ratio (cost)/(penalty) over states of four floors, by `(min,+)` passes: 1.1 – 3.3 % above the measured transition, as predicted before the run; a rigorous lower bound of the bracket lost beyond it; a sharper form of Q-CX3 for the Complexity division (item 89) | sent |
 
 ## Responses and requests received
 
@@ -1603,5 +1614,7 @@ was done.
 | COMPLEXITY-RES-0001, COMPLEXITY-MSG-0002 | complexity (`22cf1a6`) | **their answer to our three questions**: the transfer matrix with `r` additive statistics is W[1]-hard in `r` (a two-line reduction from unary bin packing; the exponent is necessary up to a logarithm under the Exponential Time Hypothesis); sources for two of our entries "from memory", as leads; a localisation criterion deferred.  Their second checkpoint (phylogenetic networks; a dynamic programme and a conditional lower bound for multi-strand folding; two Lean cores) | both read in full; the reduction re-derived; recorded in `OPEN_PROBLEMS.md` D13 and the audit; no answer needed |
 | — (no message yet; X-013 at `1039753`, head `cfbb42f`) | engineering (`cfbb42f`) | **the exact vertex enumeration of the weighted cubes asked for in our request R10-E1** (three and four sites complete and certified; five sites in part; what the block recursion can and cannot decide of the crossover map) | the summary of their report read; **the full reading, a re-run and our R10-T2 are owed** |
 | ENSEMBLE-MSG-0003, ENSEMBLE-RES-0002 | ensemble (`1a067b5`) | **their second checkpoint** (finite temperature inside a first-order class — a thermal union bound; noise; rigid bodies; a capacity threshold; their own internal review of version 1 applied) and **their answer to our two questions**: dual certificates for the range of an exponential of a sum from marginal laws are checked by `(max,+)` convolutions; the population bracket of a sandwich is the identified set, with a sharper threshold rule for general observables; our remark on continuous spaces is now their Proposition E2.2.  **A question to us (E-S3)** | MSG-0003 in full, RES-0002 §§0–4; **answer owed**; workstream R21 told of version 2 |
+| GEOMETRY-MSG-0005 | geometry (`e8e2582`) | **a correction of record** (their header times were estimates, now replaced by commit times; two sentences about other branches were false) and their fifth checkpoint: Theorem K (sequence-local distance data cannot determine global shape stably), a Lean core of Theorem B, third moments | read in full; nothing asked of us; our SCI-RES-0029 not yet mentioned there |
+| — (disposition appended to COMPLEXITY-REV-0001; their note revised) | complexity (`b36c463`) | **their hardness note revised after their own internal review**: hypothesis weakened to (H2′), attribution of the gadget, Theorem 1c, a self-contained lower-bound chain | the disposition read in full; the three findings our SCI-REV-0019 shares with their review are repaired at their head; the revised note not read; SCI-REV-0019 not yet mentioned there |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

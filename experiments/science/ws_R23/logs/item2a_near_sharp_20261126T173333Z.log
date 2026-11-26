@@ -1,0 +1,59 @@
+=== R23 item 2(a): near-sharp two-state sites, zero residual ===
+homogeneous family: e_i = 10 n, c_i = 10 n + 9  (margin 0.9/n < 1/n), integers
+  n= 1: A0 certifies (UB-LB=0) ; points of A0 covered only by themselves: True ; ILP min cover = 2 (status 0)
+  n= 2: A0 certifies (UB-LB=0) ; points of A0 covered only by themselves: True ; ILP min cover = 3 (status 0)
+  n= 3: A0 certifies (UB-LB=0) ; points of A0 covered only by themselves: True ; ILP min cover = 4 (status 0)
+  n= 4: A0 certifies (UB-LB=0) ; points of A0 covered only by themselves: True ; ILP min cover = 5 (status 0)
+  n= 5: A0 certifies (UB-LB=0) ; points of A0 covered only by themselves: True ; ILP min cover = 6 (status 0)
+  n= 6: A0 certifies (UB-LB=0) ; points of A0 covered only by themselves: True ; ILP min cover = 7 (status 0)
+  n= 7: A0 certifies (UB-LB=0) ; points of A0 covered only by themselves: True ; ILP min cover = 8 (status 0)
+  n= 8: A0 certifies (UB-LB=0) ; points of A0 covered only by themselves: True ; ILP min cover = 9 (status 0)
+  n= 9: A0 certifies (UB-LB=0) ; points of A0 covered only by themselves: True ; ILP min cover = 10 (status 0)
+  n=10: A0 certifies (UB-LB=0) ; points of A0 covered only by themselves: True ; ILP min cover = 11 (status 0)
+  n=11: A0 certifies (UB-LB=0) ; points of A0 covered only by themselves: True
+  n=12: A0 certifies (UB-LB=0) ; points of A0 covered only by themselves: True
+T1 A0={0,e_i} is an exact certificate by the direct definition, n=1..12: violations = 0 
+T2 each point of A0 is covered by no other centre (exhaustive over 2^n centres), n=1..12: violations = 0 
+T4 ILP exact minimum cover equals n+1, n=1..10: violations = 0 
+  n=1: subsets of size <= n tested: 2, certificates among them: 0; certificates of size n+1: 1 (expected exactly 1, namely A0)
+  n=2: subsets of size <= n tested: 10, certificates among them: 0; certificates of size n+1: 1 (expected exactly 1, namely A0)
+  n=3: subsets of size <= n tested: 92, certificates among them: 0; certificates of size n+1: 1 (expected exactly 1, namely A0)
+  n=4: subsets of size <= n tested: 2516, certificates among them: 0; certificates of size n+1: 1 (expected exactly 1, namely A0)
+T3 no subset of size <= n certifies; exactly one of size n+1 (all subsets, direct definition), n=1..4: violations = 0 
+T5a heterogeneous (random integer e_i, margins in (0,1/n)), 180 instances n=2..10: A0 certifies: violations = 0 
+T5b same instances: {0,e_1..e_n} is a fooling set (no centre covers two of them) => N >= n+1: violations = 0 
+T5c ILP exact minimum cover = n+1 (n=2..8, 6 instances each): violations = 0 
+T5d arbitrary non-sharp two-state sites (180 random instances, any margins): fooling set => N >= n+1: violations = 0 
+--- controls ---
+C1 sharp sites (c = e): the single evaluation {0} is an exact certificate, n=1..12: violations = 0 
+  C2 n= 3 margin=1.1/(n-1): A0 certifies? False (UB-LB=2); ILP min cover = 5
+  C2 n= 4 margin=1.1/(n-1): A0 certifies? False (UB-LB=3); ILP min cover = 6
+  C2 n= 5 margin=1.1/(n-1): A0 certifies? False (UB-LB=4); ILP min cover = 7
+  C2 n= 6 margin=1.1/(n-1): A0 certifies? False (UB-LB=5); ILP min cover = 8
+  C2 n= 7 margin=1.1/(n-1): A0 certifies? False (UB-LB=6); ILP min cover = 9
+  C2 n= 8 margin=1.1/(n-1): A0 certifies? False (UB-LB=7); ILP min cover = 10
+  C2 n= 9 margin=1.1/(n-1): A0 certifies? False (UB-LB=8); ILP min cover = 11
+  C2 n=10 margin=1.1/(n-1): A0 certifies? False (UB-LB=9); ILP min cover = 12
+C2 margin just above 1/(n-1): A0 fails and min cover >= n+2, n=3..10 (violation = control did not react): violations = 0 
+B  boundary margin = 1/(n-1) exactly: A0 still certifies, n=2..10 (so '< 1/n' is sufficient, '<= 1/(n-1)' is the exact threshold): violations = 0 
+  C3 margin 1 (e=1, c=2): ILP minimum cover vs the report's machine-checked lower bound (6/5)^n and the trivial 2^n
+     n=1: min cover = 2  (6/5)^n = 1.200  n+1 = 2  status 0
+     n=2: min cover = 3  (6/5)^n = 1.440  n+1 = 3  status 0
+     n=3: min cover = 5  (6/5)^n = 1.728  n+1 = 4  status 0
+     n=4: min cover = 6  (6/5)^n = 2.074  n+1 = 5  status 0
+     n=5: min cover = 9  (6/5)^n = 2.488  n+1 = 6  status 0
+     n=6: min cover = 13  (6/5)^n = 2.986  n+1 = 7  status 0
+     n=7: min cover = 18  (6/5)^n = 3.583  n+1 = 8  status 0
+     n=8: min cover = 23  (6/5)^n = 4.300  n+1 = 9  status 0
+C3 margin 1: min cover >= (6/5)^n, n=1..8: violations = 0 
+C4 negative control: A0 minus one unit vector does not certify, n=2..8 (violation = it certified): violations = 0 
+--- exponent of a two-state site, R*(rho) = max_x [ln(1+x) - ln(1+x^(1/rho))], rho = e/c ---
+  margin  1.000: R* = 0.188226   R*/margin = 0.1882
+  margin  0.100: R* = 0.026528   R*/margin = 0.2653
+  margin  0.010: R* = 0.002771   R*/margin = 0.2771
+  margin  0.001: R* = 0.000278   R*/margin = 0.2783
+  control rho=1/2: R* = 0.1882 (report: 0.1882)
+  limit of R*/margin as margin -> 0: W(1/e) = 0.27846
+TOTAL violations (tests + controls that did not react): 0
+elapsed 9.5 s
+END item2a_near_sharp

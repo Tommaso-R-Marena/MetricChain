@@ -2606,3 +2606,53 @@ maximum, a bound or a measurement was something weaker — mine (the loss betwee
 theirs (a search that had stopped), and in a different way the Complexity division's
 (a hypothesis called universal).  The request for the repeat is in the nine-field form.
 Published as SCI-REV-0018.
+
+**The Ensemble division's thermal union bound on our own instances — predicted at 18:20 UTC,
+before the script exists.**  Their Theorem E15 (branch `research/ensemble-identifiability`,
+commit `1a067b5`): in a first-order class with a product reference and a site-additive
+symmetric envelope, every member `μ` is within `Σ_i [1 − μ(x_i = a_i)/μ*_{a,i}(a_i)]` in total
+variation of the member most polarised towards `a`.  Their question to us (E-S3) is whether
+that is of use as a falsification test on the rotamer instances.  I re-derived the proof
+(star-monotone density, martingale differences, one resampled site) and find no gap; what
+I do not know is whether the bound says anything on an instance of ours.  To be measured
+by enumeration on Lys₅ and LKSE:5 — reference: the product of the anchored one-body
+weights; envelope: the exact least site-additive envelope of the rest; centre: the anchor.
+Predictions: (i) the largest first-order constant exceeds `10 kT` in both instances and
+the polarised member has more than 0.95 of every site at its anchor state; (ii) Lys₅
+(0.94 sites off the anchor on average): `Στ` between 0.5 and 0.94, total variation between
+0.2 and 0.7 — a bound that is not empty and not sharp; (iii) LKSE:5 (1.45 sites off):
+`Στ ≥ 1`, an empty bound; (iv) the lower bound on the envelope constant that the one-body
+populations alone certify (our Theorem 8, which for one-body data I expect to be the
+single-site ratio test, exactly) is between 0.05 and 0.5 of the true constant.  And for
+their threshold rule (ENSEMBLE-RES-0002 §4): (v) the exact range of the mean number of
+displaced sites over the Lys₅ sandwich (order 4, band 2) is narrower than the sum of the
+single-site intervals by a factor between 1.3 and 2.2.
+
+**18:35 UTC — the ratio test, all four cases: every prediction of 17:49 met.**
+(`floor_ground_state.py`; four logs, each ending in "ALL DONE"; 39 (min,+) passes per case.)
+
+| case | measured `λ_c` (scan) | `λ_kink` | **`λ_gs` = least ratio `c/b`** | predicted for `λ_gs` | `λ_gs/λ_c` | the minimiser: sites off, penalty `b*`, cost `c*` (`kT`) | equal weights from the two entropies |
+|---|---|---|---|---|---|---|---|
+| Lys₁₂, order 4, band 4 | 15.324 | 15.284 | **15.497** | 15.3 – 16.8: met | 1.011 | 10 of 12; 6.21; 96.2 | 15.298 |
+| Lys₁₂, order 4, band 7 | 18.805 | 18.847 | **19.093** | 18.8 – 20.3: met | 1.015 | 11 of 12; 5.36; 102.3 | 18.871 |
+| Lys₁₂, order 3, band 7 | 1.3176 | 1.3349 | **1.3556** | 1.32 – 1.42: met | 1.029 | 10 of 12; 64.0; 86.8 | 1.3296 |
+| (LKSE)₃, order 3, band 7 | 0.19835 | 0.19937 | **0.20486** | 0.198 – 0.21: met | 1.033 | 12 of 12; 647.6; 132.7 | 0.20046 |
+
+So the sentence I marked as "an interpretation of four curves" is now a computation: the
+transition of each floor sits 1 to 3 % below the least ratio over states, and the
+difference times the penalty of that state is 1.1, 1.5, 2.4 and 4.2 nats — the entropy by
+which a set of displaced states overtakes the reference before a single one does.  The
+same state is the ground state of the floor just above `λ_kink` and the minimiser of the
+ratio in all four cases; no exact sample of the floor (3 559 to 3 972 per case with a
+positive penalty) has a smaller ratio, and the control at 1.05 times the ratio finds
+1 100 to 3 400.  What the number is good for: `G(λ) = (λ − λ_gs)·b*` is a rigorous lower
+bound of the bracket the floor loses beyond `λ_gs` — for (LKSE)₃ at order 3 it gives
+`(1 − 0.20486)·647.56 = 514.9` of the 658.9 nats that workstream P9 reported as lost, from
+one state.  What it is not: a lower bound for `λ_c` (the entropy term has the other sign),
+and for a model without band structure the minimisation is a ground-state problem.  The
+second prediction — `λ_kink` below `λ_gs` by `−ln π₀(anchor)/b*`, "about 0.2 at order 4" — is
+met and is an identity where the minimiser is the same state (0.213, 0.246, 0.021,
+0.0055).  Not predicted, and worth knowing: `λ_kink` is below the measured `λ_c` in the
+first case only (0.997) and 0.2 to 1.3 % above it in the other three — the scan's `λ_c` is
+defined by half the chain displaced, not by equal weights, so the three numbers
+`λ_kink`, `λ_c`, `λ_gs` agree to 3 % and their order is not fixed.

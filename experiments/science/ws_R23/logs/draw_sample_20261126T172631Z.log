@@ -1,0 +1,15 @@
+AA1: population tokens inside entries: {'E': 52, 'P': 16, 'C': 26, 'Q': 39, 'X': 13, 'F': 47, '?': 23} total 216
+AA1 {P}: N=16 m=6 k=2 start=1 -> #1 l.364 (E8), #3 l.522 (E15), #5 l.679 (E20), #7 l.762 (E25), #9 l.1115 (E37), #11 l.1262 (E42)
+AA1 {F}: N=47 m=5 k=9 start=3 -> #3 l.195 (E3), #12 l.491 (E14), #21 l.743 (E24), #30 l.891 (E29), #39 l.1110 (E37)
+AA1 {Q}: N=39 m=3 k=13 start=11 -> #11 l.498 (E14), #24 l.927 (E31), #37 l.1438 (E48)
+AA1 {?}: N=23 m=2 k=11 start=6 -> #6 l.768 (E25), #17 l.1392 (E46)
+AA2: population tokens inside entries: {'E': 63, 'P': 62, 'C': 29, 'Q': 28, 'X': 18, 'F': 52, '?': 45} total 297
+AA2 {P}: N=62 m=6 k=10 start=8 -> #8 l.337 (Entry 10), #18 l.446 (Entry 15), #28 l.617 (Entry 24), #38 l.887 (Entry 40), #48 l.1099 (Entry 56), #58 l.1386 (Entry 73)
+AA2 {F}: N=52 m=5 k=10 start=8 -> #8 l.352 (Entry 11), #18 l.606 (Entry 23), #28 l.931 (Entry 43), #38 l.1114 (Entry 57), #48 l.1357 (Entry 72)
+AA2 {Q}: N=28 m=3 k=9 start=4 -> #4 l.200 (Entry 4), #13 l.594 (Entry 22), #22 l.1233 (Entry 64)
+AA2 {?}: N=45 m=2 k=22 start=0 -> #0 l.406 (Entry 13), #22 l.908 (Entry 41)
+rebuild order (take the first two that are finite computable objects): AA2 l.1357, AA2 l.1114, AA2 l.931, AA2 l.352, AA1 l.743, AA1 l.1110, AA2 l.606, AA1 l.491, AA1 l.891, AA1 l.195
+citations of our messages: N=27; distinct messages: ['SCI-RES-0005', 'SCI-REV-0001', 'SCI-REV-0002', 'SCI-REV-0003', 'SCI-REV-0005', 'SCI-REV-0006', 'SCI-REV-0007', 'SCI-REV-0010', 'SCI-REV-0012', 'SCI-REV-0013', 'SCI-REV-0015', 'SCI-REV-0016']
+citation sample: AA1 l.839 SCI-REV-0012, AA1 l.1380 SCI-REV-0006, AA2 l.449 SCI-REV-0016, AA2 l.944 SCI-REV-0003, AA2 l.1071 SCI-REV-0005
+clock (UTC): 20261126T172631Z
+END draw_sample

@@ -1,0 +1,33 @@
+=== R1: adjacency of boxes (Theorem 11.115(d)) ===
+  n=1 k=2: pairs of boxes 16; criterion WITH non-emptiness wrong in 0; WITHOUT it wrong in 7  e.g. {}  vs  {}
+  n=2 k=1: pairs of boxes 16; criterion WITH non-emptiness wrong in 0; WITHOUT it wrong in 6  e.g. {} x {0}  vs  {} x {0}
+  n=2 k=2: pairs of boxes 256; criterion WITH non-emptiness wrong in 0; WITHOUT it wrong in 98  e.g. {} x {0}  vs  {} x {0}
+  n=2 k=3: pairs of boxes 4096; criterion WITH non-emptiness wrong in 0; WITHOUT it wrong in 1110  e.g. {} x {0}  vs  {} x {0}
+  n=3 k=2: pairs of boxes 4096; criterion WITH non-emptiness wrong in 0; WITHOUT it wrong in 1029  e.g. {} x {0} x {0}  vs  {} x {0} x {0}
+R1a the criterion with the non-emptiness clause is exact (all pairs): violations = 0 
+R1b the criterion without the clause fails somewhere (violation = it never fails): violations = 0 (failures: 2250)
+  the Lean example ({} x {0} against {0} x {0}): separating sites = 1 (<= 1), first box empty -> no move: counterexample confirmed = True
+=== R2: three letters, Hamming envelope: is the uniform site law the hardest? (threshold E) ===
+  three letters, u = 1, uniform law      : E in [0.119499092, 0.119499092]   closed form Psi_3(1) = 0.119499092   (report: 0.119499)
+  three letters, u = 1, pi=(0.05,0.5,0.45): E in [0.120196008, 0.120196008]   (report: 0.120196)
+  two-letter cube, u = 1                  : ln cosh(1/2) = 0.120114507   (report: 0.120115)
+R2a duality gaps below 1e-8: violations = 0 
+R2b the uniform value equals the closed form to 1e-8: violations = 0 
+R2c the counterexample: certified LOWER bound for (0.05,0.5,0.45) exceeds certified UPPER bound for uniform (violation = it does not): violations = 0 (0.120196 > 0.119499; report 0.120196 > 0.119499)
+R2d the report's two numbers reproduced to 6 decimals: violations = 0 
+  control, two letters u = 1: E(1/2) in [0.120114507, 0.120114507] against ln cosh(1/2) = 0.120114507
+R2e control: for two letters no field makes E larger than at p = 1/2 (9 fields): violations = 0 
+  grid of 171 three-letter laws (mesh 0.05) at u = 1: 27 have a certified E above the uniform law's; largest 0.120196 at [0.5  0.45 0.05]
+=== R3: Theorem 11.14 with beta < 0 (AA1 l.743) ===
+  two points, d = 1, g = 0, beta = -1, product coupling: lhs = 0.000, rhs = -0.500  ->  lhs <= rhs is False
+R3 the inequality fails for beta < 0 (violation = it holds): violations = 0 
+R3 control beta = +1: inequality holds: violations = 0 
+=== R4: Lemma 11.62 at q = 1 (AA2 l.606) ===
+  Q_3, u = 1: sup over proper D of the tail functional = 5.4259; constant hat-w = 13.8519, t = 1: E(hat-w - t)_+ = 12.8519 > t*Xi = 5.4259
+R4 with mu0(hat-w > t) = 1 the bound E(hat-w - t)_+ <= t*Xi fails (violation = it holds): violations = 0 
+=== R5: flat 4-state site, u = 1, eps1 = 0 (Theorem 11.27, D38; AA1 l.1110) ===
+  D(rho_m || 1 - m/k) for m = 1,2,3: {1: 0.02841, 2: 0.02914, 3: 0.01759}  (report: single dips m=1: 0.02841; boxes of pairs m=2: 0.02914)
+R5 the two numbers of the report reproduced: violations = 0 
+TOTAL violations: 0
+elapsed 180.8 s
+END item1_rebuild_F_two

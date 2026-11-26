@@ -1,0 +1,17 @@
+r22lib self-test (controls of the library itself)
+  cos=-0.3333 n=5: bond err 2.2e-16, 1-3 err 4.4e-16, tangent err 1.5e-10
+  cos=-0.3333 n=9: bond err 2.2e-16, 1-3 err 8.9e-16, tangent err 4.1e-10
+  cos=-0.3333 n=14: bond err 4.4e-16, 1-3 err 1.3e-15, tangent err 7.7e-10
+  cos=-0.3846 n=5: bond err 4.4e-16, 1-3 err 8.9e-16, tangent err 2.1e-10
+  cos=-0.3846 n=9: bond err 4.4e-16, 1-3 err 1.3e-15, tangent err 4.3e-10
+  cos=-0.3846 n=14: bond err 1.6e-15, 1-3 err 3.6e-15, tangent err 7.2e-10
+  cos=-0.3584 n=5: bond err 3.3e-16, 1-3 err 4.4e-16, tangent err 9.9e-11
+  cos=-0.3584 n=9: bond err 4.4e-16, 1-3 err 1.3e-15, tangent err 3.9e-10
+  cos=-0.3584 n=14: bond err 2.2e-16, 1-3 err 4.4e-16, tangent err 5.0e-10
+  exact chain vs float chain: max diff 9.4e-16; exact bond/1-3 identities hold: True
+  rank_exact on a 6x9 integer matrix built with rank <= 4: exact 4, numpy 4
+  rank_exact on a 12x10 integer matrix built with rank <= 7: exact 7, numpy 7
+  rank_exact on a 20x21 integer matrix built with rank <= 20: exact 20, numpy 20
+  procrustes2 of a reflected, rotated, shifted copy: 7.1e-15; of another chain: 13.535; align err 8.9e-16
+self-test violations: 0
+ALL DONE 0.0 s
