@@ -1541,7 +1541,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G37 | **The anchored expansion at every order: remainder identity, anchored constants, shares of every level; the ball is necessary for deterministic certificates.**  `g(y) − I_{m−1}g(y) = Σ_{T ⊆ S, |T| = m} Δ_T g(z_T; y_T)` with base points equal to the reference on `T`; hence a remainder bound by anchored constants, site penalties `γ_i = (1/m)Σ_{T∋i}c_T` that cover every set of sites, and a sandwich of `g` from its values on the Hamming ball of radius `m − 1`.  On a class closed under adding functions of order below `m`, every deterministic algorithm that certifies a minimum or a free energy evaluates at least as many configurations as that ball contains, on every input; with a hint, `k^{m−1}ln(1/δ)` random evaluations refute a wrong function of order below `m`.  **Since the nineteenth checkpoint:** the identity for every down-closed family of evaluated subsets; shares of every level `k`, ordered from the envelope to the constant, with windows and arbitrary allocations; the allocation for a law (the upper end convex, the lower end concave, to first order "charge the least probable sub-pattern"); **and the necessity of the ball does not extend to randomised algorithms as first claimed — a finite bound of unspecified width costs `⌈k^{m−1} ln(1/δ)⌉` random evaluations whatever the number of sites (the science division's counter-algorithm), the count survives on one site, and for a prescribed width it is a conjecture** | `anchored_remainder_identity`, `anchored_remainder_bound`, `cover_of_site_shares_order`, `cover_of_equal_shares`, `anchored_remainder_site_penalties`, and since the nineteenth checkpoint `downClosed_remainder_identity`, `mixedDiff_context_bound`, `cover_of_level_shares`, `level_shares_antitone`, `level_window_le`, `cover_of_subset_shares`, `affine_half_large` (the science division's) **[V]**; the necessity of the ball for deterministic algorithms, the one-site count for randomised ones, the allocation for a law **[P]**; the randomised count at prescribed width **[C]**; harness XI.19, XI.20, XI.22, XI.23 **[N]** | cycle 10; **the first version of the randomised statement was false as written (the science division's review SCI-REV-0013; `DEAD_ENDS.md` D60)**; **the identity and the allocation are the science division's (workstream P3), machine-checked here at its request; the necessity statement is ours, a dimension count; anchored (cut-HDMR) expansions are classical — no novelty claimed for the identity by either division, prior art read at abstract level by the division only** |
 | G38 | **Barrier and trap certificates on top of the kernels.**  A lower bound on a minimax barrier is a cut whose wall is certified by the min kernel (or the residual kernel); a decision tree with inside, wall and outside leaves is checked by three tests and certifies that every walk of single-site moves between two configurations visits energy at least `L`; box adjacency is decided exactly; a tree cut can certify a barrier that no box cut sees; for every stationary dynamics the survival probability in a basin is bounded below by wall and basin weights from the partition kernel.  The soundness proof of the partition kernel does not use more of the rationals than an ordered commutative semiring | `cut_sound`, `box_cut_barrier`, `certified_trap_height`, `trap_certificate`, `box_trap_certificate` (the science division's file, adopted) and `bverify_sound`, `bverifyR_sound`, `bverifyR_trap_height`, `bverifyOn_sound`, `Dom.adjacent_iff`, `maze_barrier_exact`, `maze_boxCut_start_le` **[V]**; the semiring statement: a compiled copy of the proof, not in the library | cycle 10; **the observation, the statements and the certificate format are the science division's (workstream K); the tree checker and its proof are ours (workstream BK); the cut criterion for bottleneck paths is classical; not refereed; no harness test, the checkers are tested by kernel-evaluated instances** |
 | G39 | **A known part with interactions along the chain** (a nearest-neighbour Gibbs measure as reference).  Two exact reductions to products of blocks — cut interactions move into the residual at the price of a slack in the envelope at the block ends; blocks with gaps embed exactly with a reduced envelope — make the block site functions exactly sub- and super-additive, so a limit game function exists with monotone brackets; the whole chain as one super-site gives a lower bound for every algorithm at every length and accuracy; a Markov recursion bounds the game function with a slack at one end only.  For the symmetric two-state chain without a field the three numbers of the game function are above the uniform cube's at slope `u = 1` (the hinted one by 38–54 % at flip probability `0.3`, the threshold by `×1.94`), by the factor `Var(Σs_i)/n` at a fixed length to second order in the slope — its limit is the structure factor `(1−p)/p`; for any finite space with a symmetric envelope the factor is the largest variance of a Lipschitz function —, and **two of them are below the cube's at strong envelopes where the coupling is not weak (the non-adaptive one for `p ≤ 0.3` from `u = 3`, the hinted one for `p ≤ 0.2` from `u = 4`, in the cells computed)**; the threshold rises at every slope; the stratified fixed sample of §11.26 does not transfer (class-wise quantile truncations leave the class) | `softMin_expected_queries_ge`, `softMinLabel_admissible`, `renyiG_eq`, `renyiG_le_log_card` **[V]** (Theorem 11.116(c): the lower bound for every algorithm from any law on labels, for any reference measure); `cut_coupling_admissible`, `cut_coupling_partition`, `gap_embedding_admissible`, `gap_embedding_partition` **[V]** (the two reductions (a), (b) in their two-block form; the iteration over the cuts on paper); the rest of Theorem 11.116 and Proposition 11.117 **[P]**, their evaluation **[N]** with duality brackets; harness XXV.1–XXV.3 with 15 mutations | cycle 10, workstream Y; **refereed by R11 (no critical finding; what the brackets are brackets of) and reviewed and replicated by the Scientific Discovery Division (SCI-REV-0010), which found that the direction of the effect depends on the slope — our first summary said "upwards" — and proved the small-slope law that the workstream had observed numerically**; upper bounds on costs are conditional on Theorems 11.95, 11.98(d), 11.101(b) for super-sites and hold for extensive accuracies in an iterated limit; one synthetic model; prior art not searched systematically (the ingredients — transfer matrices, association, Rényi capacities of channels with memory, moment Lyapunov exponents — are classical) |
-| G40 | **The sub-exponential term of the adaptive cost without a hint.**  At every bounded accuracy the least number of evaluations of an adaptive algorithm without a hint on the cube class is between `exp(n·h − O(1))` and `exp(n·h + O(√(n ln n)))` (Theorem 11.58a): an explicit schedule of about `√(n/ln n)` nested levels chosen by certified cost, built on the epochs of the machine-checked rate.  Two kinds of level: a *slope step* runs at an accuracy `x ≫ ln n` with the closure threshold `e^{x − O(1)}`, where the closing radius is `ρ_h·n_o` and the outer sample costs `e^{n_o h}` up to the factor `n_o + 1` (Lemma 11.55(d)) — it loses `(a/h + 4)·ln n + O(1)` nats; a *drop* works at a bounded threshold and loses `e^{O(√n)}` (Lemma 11.55(c), with the leading constant `u`), one per epoch, with summable constants.  The failure probabilities handed down are uniform over the depth because the outer block's `n_o ln 2` is taken out of the dimension.  The earlier text called `n^{3/4}` the heuristic limit of the method; that was wrong | the epoch arithmetic **[V]** (`RateFull.lean`, the Scientific Discovery Division's); the hinted lower bound **[V]** (Theorem 11.25(a)) with three lines **[P]**; Lemmas 11.55(c), (d), the two steps, the induction over epochs and the choice of the depth **[P]**; harness XVI.5 (the two lemmas on exact tables, the arithmetic, the accuracies of both kinds of level, the lower bound) **[N]**; the formula and nests of up to seven levels evaluated exactly by the workstream and by the referee **[N]** | cycle 10, workstream Q (commissioned at the twenty-first checkpoint), every step re-derived by the coordinator; **refereed (`reviews/R12`: "the main claim survives, with the constants as stated", no major finding, six minor points applied)**; rests on Theorem 11.56 (paper, refereed, replicated in part by two divisions) in a regime no simulation covers; not machine-checked; **prior art not searched** (the question is internal to this report's algorithm family) |
+| G40 | **The sub-exponential term of the adaptive cost without a hint.**  At every bounded accuracy the least number of evaluations of an adaptive algorithm without a hint on the cube class is between `exp(n·h − O(1))` and `exp(n·h + O(√(n ln n)))` (Theorem 11.58a): an explicit schedule of about `√(n/ln n)` nested levels, built on the epochs of the machine-checked rate (each level as in the proof; the choice of servers by certified cost is optional).  Two kinds of level: a *slope step* is built at accuracies `x̂ ≥ X₀(n) = 1 + ln(6(n+1)) + 2u + e^u + h` on an outer block of `⌊(x̂ − X₀(n))/h⌋ + 1` sites with the closure threshold `e^{x̂ − O(1)}`, where the closing radius is at least `ρ_h·n_o` and the outer sample costs at most `e^{n_o h}` up to polynomial factors (Lemma 11.55(d)) — it loses `(a/h + 4)·ln n + O_{u,δ}(1)` nats (`39` at `u = 1`); a *drop* works at a bounded threshold and loses `e^{O(√n)}` (Lemma 11.55(c), with the leading constant `u`), one per epoch, with summable constants.  The failure probabilities handed down are uniform over the depth because the outer block's `n_o ln 2` is taken out of the dimension.  The earlier text called `n^{3/4}` the heuristic limit of the method; that was wrong | the epoch arithmetic **[V]** (`RateFull.lean`, the Scientific Discovery Division's); the hinted lower bound **[V]** (Theorem 11.25(a)) with three lines **[P]**; Lemmas 11.55(c), (d), the two steps, the induction over epochs and the choice of the depth **[P]**; harness XVI.5 (the two lemmas on exact tables, the arithmetic, the accuracies of both kinds of level, the lower bound) **[N]**; the formula and nests of up to seven levels evaluated exactly by the workstream and by the referee **[N]** | cycle 10, workstream Q (commissioned at the twenty-first checkpoint), every step re-derived by the coordinator; **refereed (`reviews/R12`: "the main claim survives, with the constants as stated", no major finding, six minor points applied)**; **reviewed with replication by the Scientific Discovery Division (SCI-REV-0017: "proved as stated, given its inputs", nine minor points applied; the bound reproduced from the text alone)**; rests on Theorem 11.56 (paper, refereed, replicated in part by two divisions) in a regime that no run with real inner procedures covers (the outer loop of a slope step has been run against a simulated inner oracle); not machine-checked; **prior art not searched** (the question is internal to this report's algorithm family) |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -5564,26 +5564,38 @@ coordinator; **refereed (R12, `docs/reviews/R12_referee_report.md`): "the main c
 with the constants as stated", no major finding, every new statement re-derived; with
 independent code about 220 million node checks of the nested design, 523 000 one-level
 checks with worst-case inner families and 0.9 million checks in exact arithmetic,
-without a violation; six minor points — applied here**; rests on Theorem 11.56 with its abort test before every query (paper, refereed R8,
+without a violation; six minor points — applied here**; **reviewed with replication by the Scientific
+Discovery Division (SCI-REV-0017, its workstream R17): "proved as stated, given its inputs", no
+critical and no major finding, nine minor ones — applied here; the bound's numbers reproduced
+from the text alone, the lower bound re-derived, and the outer loop of a slope step run against
+a simulated inner oracle for the first time (530 runs, no violation of Theorem 11.56)**; rests on Theorem 11.56 with its abort test before every query (paper, refereed R8,
 reviewed by the Scientific Discovery Division), Lemma 11.55, Proposition 11.57(a) and the
 epoch arithmetic of the rate (**V**, `RateFull.lean`); harness XVI.5 for the two lemmas, the
 arithmetic and the lower bound; not machine-checked].**
 Fix `u > 0`.  Let `N(n; ε, δ)` be the least `C` such that some randomised adaptive algorithm
-without a hint makes at most `C` evaluations in every run at every member of `L_u(Q_n)` and
-is `(ε/2, δ)`-correct on the class.  Let `d_0 = h/(a−h)`, `J_m = ⌈d_m⌉`,
+without a hint — a finite mixture of deterministic adaptive algorithms, the class of
+Theorem 11.25(a); the algorithm of the upper bound is one (proof of Theorem 11.58) — makes
+at most `C` evaluations in every run at every member of `L_u(Q_n)` and is `(ε/2, δ)`-correct on
+the class.  Let `d_0 = h/(a−h)`, `J_m = ⌈d_m⌉`,
 `d_{m+1} = d_m(J_m a + h)/(J_m a − h d_m)`, `k_0 = 1`, `k_{m+1} = k_m + J_m + 1` be the epoch sequences of the
 rate, and `B_m = h(1 + 1/d_m)`, so that `B_0 = a`, `B_{m+1} = B_m·J_m a/(J_m a + h)` and
 `B_m − h ≤ c₁/(k_m + c₂)`.
 (a) *Explicit, for every `n`.*  For every `n ≥ 1`, `ε > 0`, `0 < δ < 1` and every number of
-epochs `M ≥ 0` there is an explicit design with `k_M` nested levels of Algorithm 2L⁺ over
-the two-sample bracket — every parameter a closed formula in `(u, n, ε, δ, M)`, every rung
-served by the admissible procedure with the smaller certified bound (remark (1b)) — with
+epochs `M ≥ 0` there is an explicit design — `k_M − 1` nested levels of Algorithm 2L⁺ over
+the two-sample bracket (`k_M` counts the bracket), each built as in steps 3 and 4 of the
+proof wherever it is defined (the accuracy is handed to the inner family otherwise); its
+parameters are formulas in `(u, n, ε, δ, M)` and the closing radius of each level, which is
+read from the tables of that level's outer cube — with
 
     ln N(n; ε, δ)  ≤  n·B_M + 𝓔_M(n, ε, δ),
-    𝓔_M  ≤  C₁(u, ε)·√n  +  (k_M − 1 − M)·[ (a/h + 4)·ln n + O(1) ]  +  M·O(ln n + ln(1/ε) + ln M)  +  O(ln n + ln(1/ε)),
+    𝓔_M  ≤  C₁(u, ε)·√n  +  (k_M − 1 − M)·[ (a/h + 4)·ln n + O_{u,δ}(1) ]  +  M·O(ln n + ln(1/ε) + ln M)  +  O(ln n + ln(1/ε)),
 
 the second line as long as `(k_M − 1)·O(ln n) ≤ n` (the explicit `𝓔_M`, a sum of one term per
-level, and every `O`: the workstream's (5.2) and Proposition Q9a).  `C₁` is a convergent
+level, and every `O`: the workstream's (5.2) and Proposition Q9a; the `O_{u,δ}(1)` of a slope
+step is `31, 39, 60, 178` nats at `u = ½, 1, 2, 4` and `δ = 0.05`, uniform in the level and the
+epoch, and in `δ` as long as `ln(1/δ) = O(n)` — the science division's computation).  Serving a
+node by the admissible procedure with the smaller certified bound (remark (1b)) can only
+lower the cost; the bound does not need it.  `C₁` is a convergent
 series that does not depend on the number of levels — about `5.5` at `u = 1`, `ε = 1`.
 (b) *The order.*  For every fixed `ε > 0` and `0 < δ < 1`,
 
@@ -5623,10 +5635,14 @@ holds for every `0 < δ < 1`.)
 counted `≈ 1/η` bounded levels, each losing `e^{O(√n)}`.  In the recursion whose rate is
 proved there are two kinds of level, and only one of them is a bounded level.
 A **slope step** (step (i) of the proof of the rate: outer fraction `g/h` at the accuracy
-rate `g`) is run at an accuracy `x ≫ ln n`, on an outer block of only `≈ x/h` sites, with the
-closure threshold `θ = e^{x − O(1)}`; by Lemma 11.55(d) its outer sample costs `e^{n_o h}` up to
-the factor `n_o + 1`, and the whole step loses a *polynomial* factor,
-`(a/h + 4)·ln n + O(1)` nats.  A **drop** (step (ii): a fixed outer fraction) works at a
+rate `g`) is built at accuracies `x̂ ≥ X₀(n) = 1 + ln(6(n+1)) + 2u + e^u + h` (a threshold: `13.7`
+nats at `u = 1`, `n = 470`; below it the accuracy is passed to the inner family), on an outer
+block of `n_o = ⌊(x̂ − X₀(n))/h⌋ + 1` sites — about `X₀(n)/h` fewer than `x̂/h` —, with the closure
+threshold `θ = e^{x̂−1} − (3e+1) − (2p_u)^n/e ≥ e^{x̂−1}/2`; by Lemma 11.55(d) its closing radius is
+at least `min{n_o − 1, ⌊ρ_h n_o⌋ + 1}` and its outer sample has at most `e^{P_M}·(n_o + 1)·e^{n_o h}`
+points (bounds: the exact radius of the level as built is larger, `168` against `152` at
+`u = 1`, `n = 2000`, `n_o = 400`), and the whole step loses a *polynomial* factor,
+`(a/h + 4)·ln n + O_{u,δ}(1)` nats.  A **drop** (step (ii): a fixed outer fraction) works at a
 bounded threshold and loses `e^{O(√n_o)}` by Lemma 11.55(c) — but there is one drop per
 epoch, the number of epochs up to level `k` is `O(ln k)`, and the outer fractions of the
 drops decrease geometrically, so all the `√`-losses together are `C₁√n`.  Hence `k` levels
@@ -5650,7 +5666,8 @@ base family is of type `(a, 0, ∞; E_base)` with `E_base = u√((d/2)·ℓ⁰_x
 `ln(1/δ′) + n_i·ln 2 ≤ [ln(1/δ) + n·ln 2] + ln(4L) + P_M`.  The `n_o·ln 2` that the outer sample adds
 to `ln(1/δ′)` is taken out of the dimension, so the quantity `ln(1/δ) + (dimension)·ln 2` grows
 by `O(ln n)` per level and by nothing else; every `K` in a nest of any depth is
-`O(n + k·ln n + ln(1/δ))`.
+`O(η^{−2}(n + k·ln n + ln(1/δ)))`, with `η = ½` in a slope step and `η = c_m` in the drop of epoch
+`m` (only `ln K` enters the bound).
 *3. The slope step* (Proposition Q6).  Let a family be of type `(B, σ, R; E)` with `B ≥ h`,
 `0 ≤ σ ≤ 1`, and `R ≤ h` or `R = ∞`, `σ = 0`.  For the accuracy `x̂ = min(x, R′n)`, `R′ = Rh/(h + R)`
 (`h` if `R = ∞`), take Algorithm 2L⁺ with `n_o = ⌊(x̂ − 1 − c_log(n))/h⌋`,
@@ -5682,21 +5699,24 @@ accuracy above `0.519·ε̂` whatever `M` (the proof of Theorem 11.58 halves the
 every bounded level).  Unrolling the error terms gives (a): `k_M − 1 − M` slope steps, `M`
 drops whose `√`-terms are `u√(φ_m n ℓ_{c_m}/2)·B_{m+1}/a` with `φ_m = h/(J_m a + h) ≤ r̄^{-1}(1+κ)^{-m}` — a
 convergent series — and the base.
-*6. The number of levels* (Theorem Q9).  `k_{m+1} < (1 + r̄)k_m`; with `ℓ_S = (a/h + 4) ln n + O(1)`,
+*6. The number of levels* (Theorem Q9).  `k_{m+1} < (1 + r̄)k_m`; with `ℓ_S = (a/h + 4) ln n + O_{u,δ}(1)`,
 `k† = √((1 + r̄)c₁n/ℓ_S)` and `M` the last epoch with `k_M ≤ k†`:
 `n(B_M − h) + k_M ℓ_S ≤ 2√((1 + r̄)c₁nℓ_S)`, and `M = O(ln n)`.  For `n` below the threshold of
 the asymptotics, `N ≤ 2ⁿ`.  ∎
 
 *Numbers.*  Evaluated from the formula of (a) at `u = 1`, `ε = 1`, `δ = 0.05` and the best `M`
 (the workstream's table, formula evaluation only; `h = 0.2626a`): the bound is `0.71·na` at
-`n = 6.4·10⁴` (13 levels), `0.37·na` at `10⁶` (43 levels), `0.273·na` at `10⁸` and `0.2637·na` at
+`n = 6.4·10⁴` (13 levels, the bracket included), `0.37·na` at `10⁶` (43 levels), `0.273·na` at `10⁸` and `0.2637·na` at
 `10^{10}`; it is below the non-adaptive exponent `n·a` from `n ≈ 2.1·10⁴` on (the referee's scan;
 the workstream says `3·10⁴`);
 `(bound − nh)/√(n ln n)` lies between `2.4` and `3.8` for `1.6·10⁴ ≤ n ≤ 10^{12}`, while
 `(bound − nh)/n^{3/4}` falls from `1.0` to `0.013`.  The exact certified cost of the design was
 evaluated by the workstream for three nested levels up to `n = 6.4·10⁴`, five up to
-`1.6·10⁴` and seven up to `4·10³`: on the `3.8·10⁶` nodes of these nests every inequality of
-the induction holds.  The referee, with an implementation of its own: all twelve rows of
+`1.6·10⁴` and seven up to `4·10³`: in the `3.8·10⁶` checks made in these nests — every slope and
+drop node, and three accuracies (the two ends and the middle) of every ladder served by the
+base bracket — every inequality of the induction holds (the science division's referee
+checked every node of nests of the same design, the base brackets included: 2.8 million,
+no violation).  The referee, with an implementation of its own: all twelve rows of
 the formula table and every number of the nest tables reproduced; the two inductive
 steps on `523 000` levels with worst-case inner families, far outside the epoch schedule
 (least slack `2.2` nats for the slope step, against error terms of `48` to `8 096`: the step is
@@ -5736,7 +5756,10 @@ call counted with its certified bound" (with that rule a nested run costs exactl
 certified bound in every run and the test never fires on the good event; with the rule
 as it was worded before this checkpoint the theorem would lose `ln(1 + k_M/2)` nats and
 nothing else — the referee's argument).  The statement of Theorem 11.56 covers all this;
-no simulation does, and none can: the smallest slope step exists at `n = 187` (`u = 2.5`;
+no run with real inner procedures does, and none can (the outer loop of a slope step has
+been run against a simulated inner oracle by the science division — 27 designs, 530 runs,
+thresholds `e^{12}` to `e^{79}`, valid and invalid inner answers — without a violation of any
+claim of Theorem 11.56: SCI-REV-0017): the smallest slope step exists at `n = 187` (`u = 2.5`;
 at `n = 202` for `u = 2`, `470` for `u = 1`), its certified bound there is `e^{142}` (`e^{125}`, `e^{101}`),
 and a run of it that does not abort makes at least `e^{49}` (`e^{43}`, `e^{36}`) evaluations (the
 referee's computation); the checks of this theorem evaluate bounds, not runs.  (vi) **The
