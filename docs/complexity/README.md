@@ -22,6 +22,7 @@ experimental execution.
 | [`DEAD_ENDS.md`](DEAD_ENDS.md) | approaches and claims that failed, were refuted, or turned out known |
 | [`RESEARCH_LOG.md`](RESEARCH_LOG.md) | chronological log; ends with "Resume here" |
 | [`HANDOFF.md`](HANDOFF.md) | state for whoever continues this work |
+| [`ASSUMPTION_AUDIT.md`](ASSUMPTION_AUDIT.md) | every hypothesis of every registered theorem: essential, quantitative, proof artefact, convenience, complexity-changing or unknown — with the evidence |
 | `NANUQ_LOCAL_CRITERION.md`, `STRANDS_NN_HARDNESS.md`, `STRANDS_ALGORITHM.md`, `ISING_GROUND_SETS.md`, `PENALTY_THRESHOLD.md` | working papers per problem (the last two answer questions of other divisions) |
 | `../../experiments/complexity/` | exact enumeration and verification code (Python, integer/rational arithmetic unless stated) |
 | `../../experiments/complexity/lean/` | Lean 4 files of this division, checked file by file (none may contain `sorry`, `admit`, new axioms, native evaluation); `../../experiments/complexity/reviews/` holds the referees' independent code |
