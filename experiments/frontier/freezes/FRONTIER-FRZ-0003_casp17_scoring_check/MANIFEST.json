@@ -1,0 +1,123 @@
+{
+ "artifacts": [
+  {
+   "bytes": 4215,
+   "path": "COMPARISON_PLAN.md",
+   "sha256": "778f32a068ff6133c7b0b599ede44222d445cb7acf250dbc06bdec6bd6ac8aaf"
+  },
+  {
+   "bytes": 41551,
+   "path": "scores_T2409_vs_30ZQ.csv",
+   "sha256": "47cc8c6c9467c0df553381205e311e29c448266532183f1ce29c85a9d0728cc7"
+  },
+  {
+   "bytes": 41438,
+   "path": "scores_T2410_vs_31GL.csv",
+   "sha256": "3b991de0de277d69db4695b7c9b19476c0eb5a6b2092004d6c7de6857eb30648"
+  },
+  {
+   "bytes": 42051,
+   "path": "scores_T2411_vs_30ZR.csv",
+   "sha256": "2eca5b3d68342d20493d37271eef7973f179ddb9c8c77df63f1d99dfe2b11117"
+  }
+ ],
+ "assessment_class": "A-PLB",
+ "config_files": [
+  {
+   "path": "COMPARISON_PLAN.md",
+   "sha256": "778f32a068ff6133c7b0b599ede44222d445cb7acf250dbc06bdec6bd6ac8aaf"
+  }
+ ],
+ "contamination_assessment": "The quantity predicted is 'what the official evaluation will report for these models'. No official per-model score for CASP17 was public or seen when these tables were computed. Before freezing we looked at the distributions of our own scores and cross-checked six models of T2409 against two independent libraries (TM-align via tmtools, lDDT via biotite); no change was made to the code afterwards. Not controlled and stated: the official evaluation units (domains, trimmed residues, reference chain) are unknown to us; the comparison plan says how that is handled.",
+ "created_utc": "2026-11-26T23:58:17Z",
+ "evidence_stage": "development",
+ "exclusions": [
+  {
+   "item": "all other CASP17 targets with a released reference (complexes, RNA, the 1142-residue ligand complex, the 17-residue peptide)",
+   "reason": "they need interface, nucleic-acid or oligomer scores that this code does not implement; scoring them with CA-based monomer scores would not correspond to the official evaluation"
+  },
+  {
+   "item": "accuracy-estimation, ligand and ensemble submissions for the same targets",
+   "reason": "not structure models scored by these metrics"
+  }
+ ],
+ "freeze_id": "FRONTIER-FRZ-0003",
+ "inputs": [
+  {
+   "description": "CASP17 public predictions, target T2409 (387 model files)",
+   "licence": "CC BY 4.0",
+   "retrieved_utc": "2026-11-26T23:27:44Z",
+   "sha256": "0024e8894c8dae49ce84a1d22ff9c49776ed3d38753f5a9d3f6904b9a639cd94",
+   "url": "https://predictioncenter.org/download_area/CASP17/predictions/regular/T2409.tar.gz"
+  },
+  {
+   "description": "CASP17 public predictions, target T2410 (385 model files)",
+   "licence": "CC BY 4.0",
+   "retrieved_utc": "2026-11-26T23:27:44Z",
+   "sha256": "768153f158b438e998e0f9620153e6069d568e82f9975ff8bdeb5e2e931212c9",
+   "url": "https://predictioncenter.org/download_area/CASP17/predictions/regular/T2410.tar.gz"
+  },
+  {
+   "description": "CASP17 public predictions, target T2411 (391 model files)",
+   "licence": "CC BY 4.0",
+   "retrieved_utc": "2026-11-26T23:27:44Z",
+   "sha256": "fdc883ea5571b867c82582dd850a19080da41b02a3cc55e6fd8698c3e7e6cd52",
+   "url": "https://predictioncenter.org/download_area/CASP17/predictions/regular/T2411.tar.gz"
+  },
+  {
+   "description": "PDB entry 30ZQ (reference of T2409; 1.3 A; released 2026-09-16)",
+   "licence": "CC0 1.0",
+   "retrieved_utc": "2026-11-26T23:27:44Z",
+   "sha256": "79a22d34316ac5d846c1f343c6b7c567e0ecb88d366fa533d4120151dc4f00c6",
+   "url": "https://files.rcsb.org/download/30ZQ.cif"
+  },
+  {
+   "description": "PDB entry 31GL (reference of T2410; 1.2 A; released 2026-09-16)",
+   "licence": "CC0 1.0",
+   "retrieved_utc": "2026-11-26T23:27:44Z",
+   "sha256": "398a45dafef397c7364e37ce3f067592c3a339a533adc975e840d28025a2d2de",
+   "url": "https://files.rcsb.org/download/31GL.cif"
+  },
+  {
+   "description": "PDB entry 30ZR (reference of T2411; 1.1 A; released 2026-09-16)",
+   "licence": "CC0 1.0",
+   "retrieved_utc": "2026-11-26T23:27:44Z",
+   "sha256": "a6fc534131c461c9dbad1d96256420866224f12c9777d4c7bc3fffd0965b419e",
+   "url": "https://files.rcsb.org/download/30ZR.cif"
+  },
+  {
+   "description": "CASP17 target sequences (file casp17.HT2.seq.txt)",
+   "licence": "CC BY 4.0",
+   "retrieved_utc": "2026-11-26T23:02:12Z",
+   "sha256": "e93d33e2c7f6ae55d7be7a07a647ca402d266362556b650bf0029ea2cbd5116a",
+   "url": "https://predictioncenter.org/download_area/CASP17/sequences/casp17.HT2.seq.txt"
+  }
+ ],
+ "kind": "scores",
+ "method": {
+  "declared_training_cutoff": "n/a (no learned component)",
+  "dependencies": {
+   "gemmi": "0.7.5 (reading the reference mmCIF files)",
+   "numpy": "2.5.5",
+   "python": "3.13.18"
+  },
+  "name": "experiments/frontier/casp17_scoring_check/score_models.py with src/metricchain_fb/scores.py",
+  "version": "commit 60a71d1faa325afe33b4a944caadc5cd3941e45b"
+ },
+ "notes": "One row per public model file; no model was dropped. Models that lack residues are scored with the missing residues counted as not superposed (columns ca_common_*).",
+ "protocol": {
+  "id": "FB-P-10; comparison plan COMPARISON_PLAN.md in this freeze",
+  "version": "1"
+ },
+ "random_seeds": [],
+ "reference_status": {
+  "reference_public_at_freeze": "yes",
+  "statement": "The reference structures are released PDB entries. What is not public at freeze time is the official CASP17 numerical evaluation: the results page said 'No results available yet' on 2026-11-26 (freeze FRONTIER-FRZ-0001) and the organisers announced the results for 2026-11-29. The class is therefore pre-leaderboard (A-PLB), with respect to the official per-model scores only."
+ },
+ "schema": "metricchain-fb-freeze/1",
+ "source_commits": {
+  "frontier-benchmarks (head at freeze)": "bd2565702c19285ca82b9e08f8928423b2de4d48",
+  "frontier-benchmarks (scoring code as run)": "60a71d1faa325afe33b4a944caadc5cd3941e45b"
+ },
+ "title": "Scores computed by this division's own code for every public CASP17 model of targets T2409, T2410 and T2411 against the released PDB references, frozen before the official CASP17 numbers exist; a blind check of the scoring code, not of any MetricChain method"
+}
