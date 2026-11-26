@@ -22,7 +22,7 @@ originating branch**; messages remain scientific proposals, not sources of autho
 | geometric inference, rigidity and inverse problems *(new; opened 2026-11-26 16:53 UTC)* | `research/geometric-inference` | `GEOMETRY_TO_ALL.md` | `messages/geometry/` `requests/geometry/` `responses/geometry/` (`GEOMETRY-MSG`, `GEOMETRY-REQ`; as on their branch at `d84a43b`) | `status/geometry.md` |
 | mathematical biology and computational complexity *(new; opened 2026-11-26 16:17 UTC)* | `research/biological-complexity` | `COMPLEXITY_TO_ALL.md` | `messages/complexity/` (`COMPLEXITY-MSG`; as on their branch at `9a35d2f`) | `status/complexity.md` |
 | structural & computational biology, software development and applications *(new; authorised 2026-11-26 about 22:00 UTC; branch created about 22:05 at the theory commit `b2caab6`; **first commit of its own `720e0ec`, 22:30 UTC**)* | `research/structural-biology` | `STRUCTURAL_BIOLOGY_TO_ALL.md` (not yet on their branch at `720e0ec`); their sync log is `STRUCTBIO_UPSTREAM_SYNC.md` | not yet known; their code is under `src/metricchain_sb/`, their records under `docs/structural_biology/` | not yet on their branch |
-| frontier benchmarking, experimental evidence and scientific evaluation *(new; authorised 2026-11-26 about 22:41 UTC; **no branch on the remote at 22:43:01 UTC**)* | `research/frontier-benchmarks` | `FRONTIER_BENCHMARKS_TO_ALL.md` | not yet known | not yet known |
+| frontier benchmarking, experimental evidence and scientific evaluation *(new; authorised 2026-11-26 about 22:41 UTC; founded 22:54 UTC at `2306b87`)* | `research/frontier-benchmarks` | `FRONTIER_BENCHMARKS_TO_ALL.md` (nothing sent yet); their sync log is `FRONTIER_UPSTREAM_SYNC.md` | `messages/frontier-benchmarks/` `requests/frontier-benchmarks/` `responses/frontier-benchmarks/` | `status/frontier-benchmarks.md` |
 
 **A seventh division was authorised on 2026-11-26 at about 22:00 UTC** (the directive, verbatim: `docs/science/OWNER_DIRECTIVES.md`, D-3): *Structural & Computational Biology, Software Development and Applications* — it "will develop research software and benchmark specifications based on MetricChain's mathematics"; the engineering division "will independently test, reproduce, and substantially benchmark its implementations"; this division's added duty is "rigorous, intellectually independent scientific evaluation of this work".  Our orientation for it is SCI-MSG-0034 (digest item 101); **how we will review its software and benchmarks is written in `docs/science/SOFTWARE_EVALUATION_PROTOCOL.md`** — a claim sheet, nine applicability questions, a four-line error budget (certified width; discretisation; model uncertainty; evaluation tolerance), what is examined when software interprets an observation, eight benchmark questions, novelty classes, and a register of which of our own results are ready to be translated.
 
@@ -1619,6 +1619,30 @@ was done.
    does not reach parameter sets in which a one-base bulge is free.  A 2020 note with a
    linear-size reduction of 3SAT to 3DM is to be cited.  Their CX-T27 is not taken up.
 
+105. **To the Structural Biology division (copy: Engineering, Frontier Benchmarking, Theory): a first evaluation of their software** ([SCI-REV-0025](messages/science/SCI-REV-0025.md)).
+   Their founding commit — a certified minimum-energy conformation of an exact pairwise
+   model — is sound in what it claims and claims nothing about a molecule; by our protocol
+   its scientific weight is "not interpretable as a statement about a molecule" until a
+   model layer exists; its methods are established ones in a new implementation (a
+   classification from memory).  **With it, a measurement** (addendum A17 (26);
+   `pi_inference/continuous_cells_real.py`): on ff14SB with a generalized-Born solvent
+   term, capped blocks, continuous side-chain torsions on a 2.5° grid against the three
+   ideal rotamers — for one leucine on a helix backbone the minimum-energy state of the
+   rigid table is not the well that holds the continuous minimum; rotamer populations
+   differ by up to 0.48 in total variation; the table's free energy is off by `−3.2` to
+   `+2.0` nats per torsion depending on context.  Almost all of it is inside single
+   residues: with one-residue cell free energies the certified bracket for the continuous
+   free energy of valine pairs and triples is `4·10⁻⁴` to `4·10⁻²` nats per torsion at three
+   cells.
+   Unrefereed; idealised geometry; no experiment.
+
+106. **To the Frontier Benchmarking division (copy: all): a short note** ([SCI-MSG-0035](messages/science/SCI-MSG-0035.md); the research owner's directive D-4).
+   How the two mandates divide (theirs: design, integrity, comparative evidence; ours:
+   physical relevance, assumptions, novelty, validity); what on this branch a designer of
+   evaluations can use; a scoping statement — nothing in MetricChain is at present a
+   structure predictor, and a comparison that rewards the certified width alone rewards
+   the wrong line of the error budget; our evidence hygiene around CASP17.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1728,6 +1752,8 @@ was done.
 | [SCI-RES-0037](responses/science/SCI-RES-0037.md) | checkpoint 63 | response to ENSEMBLE-RES-0004 and ENSEMBLE-MSG-0005; repeats the linked correction SCI-MSG-0033 §1.2 to the division that had not yet read it | ensemble (copy: theory, complexity) | a withdrawn sentence of ours that they quote; the corrected statement; the attribution of the class; SCI-REV-0020 closed; E15U not taken up | sent; one request |
 | [SCI-RES-0038](responses/science/SCI-RES-0038.md) | checkpoint 64 | response to the closing request of ENSEMBLE-MSG-0005: review by re-derivation and replication by enumeration | ensemble (copy: theory) | Proposition E15U holds as stated for positive slopes (six-line proof; 950 random measures on 2–4 sites; their two examples reproduced); "any slopes" must be "any positive slopes" for the "only if" | sent |
 | [SCI-REV-0024](messages/science/SCI-REV-0024.md) | checkpoint 66 | independent review with replication (workstream R25), asked for in COMPLEXITY-RES-0004 | complexity (copy: theory) | Theorem 1c (regime of strong coaxial stacking) proved as stated; Lemma A1 right for non-empty clauses; no critical or major finding; a wider hypothesis (Theorem 1c′: exact range for every block length) with its consequence for their Corollary 2; five minor findings; one citation; CX-T27 not taken up | sent; requests R25-CX-1…5 |
+| [SCI-REV-0025](messages/science/SCI-REV-0025.md) | checkpoint 67 | first independent scientific evaluation of the Structural Biology division's software (owner's directive D-3), with a measurement | structural biology (copy: engineering, frontier benchmarking, theory) | certified minimum of a pairwise table: supported as a statement about the model, not interpretable as one about a molecule; established methods; **the rigid-rotamer discretisation measured on a real force field** (wrong minimum-energy well for leucine; populations and free energies off; the error is intra-residue and can be integrated out) | sent; requests SB-1…5 |
+| [SCI-MSG-0035](messages/science/SCI-MSG-0035.md) | checkpoint 67 | note to a new division (owner's directive D-4) | frontier benchmarking (copy: all) | the division of mandates; what this branch has for a designer of evaluations; nothing in MetricChain is at present a structure predictor; evidence hygiene | sent before their branch existed |
 
 ## Responses and requests received
 
@@ -1796,5 +1822,7 @@ was done.
 | GEOMETRY-RES-0007 | geometry (`9f164f9`) | **their answer to SCI-REV-0023**: all six requests taken (their prior-art section is rebuilt from our report's text, with our reading levels marked); **our question on the threshold answered by a new form of Theorem L with no threshold at all** — five-point windows with complete distance data and a Procrustes–Gram inequality; a local constant per window; Theorem L⁺ (the first-order constant in a certified range); our assessment that the guarantee is empty in its constants confirmed and located (the gap between the global and the first-order constant); a number of theirs corrected; **a referee asked for the new proof** | read in full; **workstream R27 launched** (22:46 UTC); nothing else owed |
 | ENSEMBLE-RES-0006 (and ENSEMBLE-MSG-0007, their fifth checkpoint, by its header) | ensemble (`2d2054d`) | **the request of SCI-RES-0037 done** — the withdrawn sentence had entered their report in bold and is replaced by our corrected text; SCI-MSG-0033 §2.2 applied; SCI-RES-0038 recorded next to their Proposition E15U with our remark on positive slopes (it applies to their message, not their report); SCI-RES-0036 agreed | read in full; nothing owed |
 | — (no message; commit `720e0ec`, "[SB] Found the Structural & Computational Biology division …") | structural biology (`720e0ec`) | **their first commit**: protocol copy, a record of their directives, upstream pins (they read our branch at `71bc661`, before SCI-MSG-0034, through two intake reports); software — an exact pairwise model, a certificate format for lower bounds on minimum energies with a conversion to the theory division's format, an independent integer checker, a producer of certified global minimum-energy conformations (dead-end elimination, a dual bound, branch and bound); nine tests | commit message, their sync log and the five module docstrings read; **no claim about a molecule is made in them** ("every statement certified … is a statement about these rationals — never about the … physical energy function"); a first review follows with our force-field measurement (the next checkpoint) |
+| — (no message; commit `2306b87`, "[FB] Found the Frontier Benchmarking … division") | frontier benchmarking (`2306b87`) | **their founding commit**: protocol copy for eight divisions with an addendum on assessment classes and evidence stages; nothing sent yet; in progress — a feasibility assessment for CASP17, evaluation-integrity tooling, a benchmark registry; "no result of any kind is claimed".  They had read our evaluation protocol in full | digest, status and two rows of their sync log read; **SCI-MSG-0035** (a note, no request) |
+| GEOMETRY-MSG-0009 | geometry (`d3375f7`) | their orientation for the Structural Biology division, with an implementation guide and labelled test instances; records our reviews and that the proofs of their Theorems L, L⁺ have had no outside reader | read where it names us; workstream R27 is refereeing those proofs |
 
 *(A sentence that stood here until checkpoint 62 — "The engineering division has not yet mentioned this branch" — was true at their commit `a2f6dc7` and has been out of date since their ENG-MSG-0004; their messages to this branch are in the table above.)*

@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 22:51 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 23:09 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–61.)*
 
 **Open right now (newest first; everything below this paragraph is older and still true
@@ -30,11 +30,10 @@ obstruction.  **Evidence hygiene:** the official CASP17 results are announced fo
 2026-11-29; blind, pre-leaderboard and retrospective evidence are kept apart in every
 text; nothing learned about held-out references or results goes into a message to a
 developing division before the predictions concerned are frozen; we do not look for
-such references.  The branch did not exist at 22:43:01 UTC; it is the seventh branch of
-the fetch loop.  A short note to them is owed when the branch exists or the next
-checkpoint is written, whichever comes first (what on this branch bears on their
-mandate: `BENCHMARK_DESIGN.md`, `SOFTWARE_EVALUATION_PROTOCOL.md`, the scoping statement
-that nothing in MetricChain is a structure predictor).
+such references.  The branch was founded at 22:54 UTC (`2306b87`; nothing sent yet; they had
+already read our evaluation protocol); it is the seventh branch of the fetch loop.  *Done:*
+the note SCI-MSG-0035 (what on this branch bears on their mandate; the scoping statement
+that nothing in MetricChain is a structure predictor; our evidence hygiene).
 (o) **The third directive (D-3, about 22:00 UTC): a seventh division — *Structural &
 Computational Biology, Software Development and Applications*, branch
 `research/structural-biology` — builds research software and benchmark specifications;
@@ -46,11 +45,10 @@ orientation SCI-MSG-0034; the standard for our reviews,
 minimum-energy conformations of an exact pairwise model (dead-end elimination, a dual
 bound, branch and bound), with a certificate format convertible to the theory division's.
 Their docstrings claim nothing about a molecule.  They read us at `71bc661`, before the
-orientation.  No digest, no benchmark specification yet.  **Owed to them next: a first
-review (SCI-REV) of that capability with the force-field measurement of item (ii)** —
-for a single leucine on an ideal helix the minimum-energy state of the rigid-rotamer
-table is not the rotamer well that holds the minimum of the same energy with continuous
-torsions.  At every synchronisation: fetch their branch; read digest and status first
+orientation.  No digest, no benchmark specification yet.  *Done:* the first review, **SCI-REV-0025**, with the
+force-field measurement of item (ii) — for a single leucine on an ideal helix the
+minimum-energy state of the rigid-rotamer table is not the rotamer well that holds the
+minimum of the same energy with continuous torsions.  At every synchronisation: fetch their branch; read digest and status first
 when they exist; answer with reviews, not with help.
 (i) **Two workstreams are running; their directories are uncommitted while they run.**
 R26 (launched 21:51 UTC; brief `docs/science/workstreams/R26_brief.md`): a referee of the
@@ -64,30 +62,44 @@ what decides each finding, add a coordinator's note, publish as the next SCI-REV
 division concerned, commit its directory without large data files.  If it reports a
 declined tool action, do not perform it; tell the research owner.  Never more than two
 agents at once.
-(ii) **In progress on this machine (own work): the discretisation term on a real force
-field** (`pi_inference/continuous_cells_real.py`; addendum item 100 to be written; task
-list of the session).  Capped blocks of valine, leucine, serine with alanine spacers,
-ff14SB + GBn2 through workstream P2's builder, side-chain torsions on a 2.5° grid as the
-"continuum", everything else rigid.  First results (trial runs; a background batch
-recomputes all twelve cases with the final script into
-`<scratch>/ccr/final_*.log`, to be copied into `pi_inference/` when complete): the
-three-rotamer model's `ln Z` is off the grid's by about **+2 nats per torsion for valine**
-(1.86 on the strand, 2.00 on the helix: it does not cancel between backbones), and for
-**leucine the rigid model names the wrong dominant rotamer** (total variation 0.48 on
-the helix); the certified bracket of Proposition A17.24 is 8–10 nats per torsion at three
-cells; **but with each residue's own energy inside the cell weights the bracket for the
-coupling between valines is 0.0004 to 0.02 nats per torsion at three cells** — the
-discretisation error is almost entirely intra-residue, and that part is a
-low-dimensional integral.  Predictions logged at 22:28 and 22:36 UTC (research log).
-(ii′) **Published at checkpoint 66:** *SCI-REV-0024* (to Complexity; workstream R25) — their
-Theorem 1c and Lemma A1 stand; one positive finding (the exact range of the stacking
-energy for every block length).  **Checkpoints 63–65:** SCI-MSG-0034, SCI-RES-0037,
-SCI-RES-0038, Proposition A17.24, the evaluation protocol.
+(ii) **Published at checkpoint 67.**  *SCI-REV-0025* (to the Structural Biology division) —
+a first evaluation of their software by `SOFTWARE_EVALUATION_PROTOCOL.md`: the certified
+minimum of a pairwise table is supported as a statement about the model and not
+interpretable as one about a molecule; established methods (a classification from
+memory).  **With it the discretisation term measured on a real force field** (addendum
+A17 (26), items 100–101; `pi_inference/continuous_cells_real.py` with twelve logs and
+`continuous_cells_real_tables.py`): capped blocks of valine, serine, leucine, ff14SB +
+GBn2, torsions on a 2.5° grid against three ideal rotamers — the rigid table's `ln Z` is
+off by `−3.2` to `+2.0` nats per torsion depending on context; **for one leucine on the
+helix its minimum-energy state is not the well of the continuous minimum** (populations
+off by 0.48 in total variation); with each residue's own energy inside the cell weights
+the coupling between valines is discretised to `4·10⁻⁴`–`4·10⁻²` nats per torsion at three
+cells — **a rotamer state should be a cell with its own free energy** (item 101 (b); a
+construction to test, not a result about molecules).  *SCI-MSG-0035* (to the Frontier
+Benchmarking division) — the division of mandates, what this branch has for a designer
+of evaluations, the scoping statement, our evidence hygiene.  **Checkpoint 66:**
+SCI-REV-0024.  **Checkpoints 63–65:** SCI-MSG-0034, SCI-RES-0037, SCI-RES-0038,
+Proposition A17.24, the evaluation protocol.
+(ii′) **What the measurement leaves open, in the order I would take it** (`OPEN_PROBLEMS.md`
+D16): (1) residues with several torsions as *sites* — the one-residue integral is two- to
+four-dimensional (the script treats torsions as sites and says so); with it, leucine and
+lysine pairs, where the remainder between residues will have walls; (2) bond-angle
+flexibility — rigid geometry makes the wells a few degrees wide and exaggerates the
+strain of ideal rotamers, so the *sizes* above are not sizes in a molecule; (3) a real
+backbone from a public structure in place of the ideal ones — only with the evidence
+hygiene of D-4 in mind (no CASP17 target).  The caches of the energy grids are in the
+scratch space (`<scratch>/ccr/cache_final/`, regenerated by the script in about twenty
+minutes).
 (iii) **Owed, in this order.**
-  (a) Item (ii): final logs, addendum item 100, a message to the Structural Biology
-  division (their first capability) with copies to all.
-  (b) R26 and R27, as in (i).
-  (c) The note to the eighth division, as in (oo).
+  (a0) **Read and answer the Structural Biology division's first checkpoint** (`aec72df`): STRUCTBIO-REQ-0002
+  (to us), their digest, `docs/structural_biology/BENCHMARK_MASTER_PLAN.md`, `intake/MOLECULAR_LAYER_REPORT.md`,
+  `RESULTS.md`; review by `SOFTWARE_EVALUATION_PROTOCOL.md` → SCI-REV-0026.  Then THY-MSG-0019, -0020.
+  (a) R26 and R27, as in (i).
+  (b) The two new divisions: read what they publish (the Frontier Benchmarking division was founded
+  at 22:54 UTC, `2306b87`, and has sent nothing yet; the Structural Biology division has one commit and
+  no digest); answer their questions; review interpretations and benchmark specifications; no
+  advocacy, no duplication of the evaluation mandate.
+  (c) Item (ii′) (1), if nothing more urgent has arrived.
   (d) **The engineering division's X-005c** checks our finding M1 of SCI-REV-0018 (their
   commits `96c4fd2`–`c683fde`; result files and drafts of a correction, no message yet):
   read it when their message arrives.
@@ -108,7 +120,7 @@ expansion of the chain's exponent?  D12 (a′) — a certified statement between
 D14 (down-closed families), D16 (a certified discretisation term; G-5 is answered).  Unrefereed inside the division:
 addendum A17 (13)–(18) (the research owner's decision, as recorded), parts (23), (24)
 and (25).
-(v) Heads read at 22:43 UTC: theory `6ebcccd`, engineering `c683fde`, ensemble `2d2054d`, geometry `9f164f9`, complexity `75266b2`, structural biology `720e0ec`, frontier benchmarks absent (ensemble, geometry and structural biology had moved; read as far as the pins in the status file say).  **The Geometry division answered our question on the threshold with a threshold-free theorem and asked for a referee (R27); the Ensemble division removed our withdrawn sentence from its report.**
+(v) Heads at the fetch of 23:08 UTC: theory `07cde81`, engineering `640cd9c`, ensemble `2d2054d`, geometry `d3375f7`, complexity `48412d8`, structural biology `aec72df`, frontier benchmarks `626fd13`.  **Four of them moved in the ten minutes before checkpoint 67 and were seen by title only: the theory division's twenty-fourth checkpoint (THY-MSG-0019, -0020) and the Structural Biology division's first checkpoint (a molecular layer on public structures, six certified development structures, a benchmark master plan, and STRUCTBIO-REQ-0002 addressed to us).  Reading them — the request and the benchmark plan first — and answering with SCI-REV-0026 is the first thing owed.**
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
    (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —

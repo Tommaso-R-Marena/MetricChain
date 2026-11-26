@@ -33,7 +33,7 @@ size go to the engineering division as nine-field requests (`docs/collaboration/
 |---|---|---|
 | fixed structural assumptions | which degrees of freedom are frozen; what the conclusion becomes if they move by their thermal amplitude | with backbone torsions free nothing is pairwise: vacuum ff14SB mixed differences up to 28 kcal/mol, 12 at separation seven (`PHYSICAL_APPLICABILITY.md` §1) |
 | simplified molecular representations | what was coarse-grained; whether the observable is defined on the fine model | lattice chains, bead chains and rotamer models are all on this branch; none is a molecule |
-| discretised conformational spaces | the discretisation term, as a number in the units of the result | Proposition A17.24: second order in the cell size; on a toy chain 1.3 nats per angle at three cells per angle, `10⁻³` at about 150 (addendum A17 (25)); no real energy function tested |
+| discretised conformational spaces | the discretisation term, as a number in the units of the result | Proposition A17.24: second order in the cell size; on a toy chain 1.3 nats per angle at three cells per angle (addendum A17 (25)).  **On a real force field (addendum A17 (26)):** the rigid-rotamer table's free energy is off the continuous one by `−3.2` to `+2.0` nats per torsion; for leucine its minimum-energy state is not the well of the continuous minimum; with one-residue cell free energies the coupling between valines is discretised to `4·10⁻⁴`–`4·10⁻²` nats per torsion at three cells |
 | inaccessible physical constants | which constants the guarantee needs and how each was obtained: proved, evaluated, measured on a grid, fitted | class constants measured on grids are lower bounds, not bounds; held-out maxima up to ten times fitted ones; by analysis alone a loss of 33 to 1 400 (`PHYSICAL_APPLICABILITY.md` §§0, 2) |
 | unjustified independence assumptions | which variables are treated as independent, and the coupling that was dropped | the query-complexity exponents are for independent sites; with a cooperative known part the direction depends on the envelope (SCI-REV-0010; SCI-RES-0033) |
 | restricted interaction structures | band width, order, pairwise form: what is outside, and its certified size | the solvent term is pairwise only up to third-order constants of 0.003–0.2 kcal/mol for neutral side chains; compact and charged cases cost orders more (SCI-MSG-0024, -0027) |
@@ -51,8 +51,9 @@ Every certified or estimated number is reviewed as four numbers in the same unit
 4. **the evaluation tolerance** — rounding and convergence of every evaluated term, proved or assumed.
 
 *The same exercise on this branch's best certificate* (Lys₁₂ on an ideal helix, `9.5·10¹⁰` rotamer assignments;
-SCI-MSG-0028, SCI-RES-0035): line 1: `8·10⁻⁵` nats.  Line 2: not bounded; on a toy chain of angles a bound of this
-kind is of order a nat per angle at rotamer resolution.  Line 3: of order `kT` per residue between force fields
+SCI-MSG-0028, SCI-RES-0035): line 1: `8·10⁻⁵` nats.  Line 2: not bounded for that instance; measured on small blocks of the same force field
+(addendum A17 (26)): nats per torsion in absolute terms, tenths of a nat per torsion in a difference between
+backbones, and a different dominant rotamer for leucine.  Line 3: of order `kT` per residue between force fields
 of one lineage.  Line 4: `10⁻⁴`–`10⁻³` nats at order 5, from an evaluator tolerance of `10⁻⁷` kcal/mol that is
 assumed, not proved.  *Verdict by our own standard:* line 1 is not the headline; what the certificate removes
 is sampling error from a model-relative number, and for this model an ordinary estimate already agrees with it
@@ -133,7 +134,7 @@ and, when they concern a published statement of another division, sent to that d
 | robust ranges of macrostate ratios (A11, A13, A14) | [P], with A11 and A13 machine-checked in this division's second Lean wave; exact linear programmes as checks; one worked model | no referee workstream (`INDEPENDENT_VALIDATION.md`) | n/a | for unfrustrated known parts and monotone macrostates only |
 | divergence criteria for surrogates (A17, B10) | [P] in print; [M] ours | literature workstream A3 | n/a | as a diagnostic, yes |
 | certified kinetics on voxel graphs | [V] + [P] | workstream K; Lean re-compiled | the prefactor is outside the programme | not as physical rates |
-| cell-wise sandwich for continuous variables (A17.24) | [P] + [N] on a toy | none | it *is* line 2 | as the definition of line 2; needs certified oscillations for a real energy |
+| cell-wise sandwich for continuous variables (A17.24), with one-residue cell free energies (item 101 (b)) | [P] + [N] on a toy; [M] on valine, serine, leucine blocks of one force field | none | it *is* line 2 | as the definition of line 2 and as a construction to test; needs residues with several torsions as sites, certified oscillations, and cases with walls between residues |
 
 *What would change this register:* an independent implementation of the constants; a proved evaluator
 tolerance; A17.24 run on a real torsional energy; one physical system taken through §4.

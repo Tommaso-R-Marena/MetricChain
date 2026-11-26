@@ -1,0 +1,45 @@
+=== Ace-VAAV-NMe (4 residues, 2 side-chain torsions), backbone H (-57.0, -47.0), ff14SB + GBn2, 300 K; every torsion on 144 points (2.5 deg), 20736 conformations (computed in 31 s)
+energy range over the grid: vacuum -26.01 .. 2623 kcal/mol; GBn2 -35.35 .. -33.73; total range 4446 kT
+(a) ln Z of the grid model (energy zero at the grid minimum; uniform reference): -6.739397; with every second grid point: -6.738803 (difference +5.94e-04)
+(b) three-rotamer model (every torsion at 60, 180, 300 deg; each rotamer weighs a third of the circle): ln Z = -13.0937; minus the grid: -6.3543 nats = -3.1772 per torsion
+    minimised-rotamer model (cell minimum over 120-degree cells): ln Z = -2.1972; minus the grid: +4.5422 nats = +2.2711 per torsion
+    populations of the 9 rotamer cells: grid against rigid rotamers: largest difference 0.0000, total variation 0.0000; grid against minimised rotamers: largest 0.0000, total variation 0.0000
+    most populated cell: grid 1.0000 (cell (np.int64(1), np.int64(1))), rigid rotamers 1.0000 (cell (np.int64(1), np.int64(1))), minimised 0.9999 (cell (np.int64(1), np.int64(1)))
+    minimum-energy state: rigid rotamers — cell (1, 1) (gap to the next rotamer state 15.458 kT); continuous energy — cell (1, 1) (at torsions 177.5, 167.5 deg); the same cell: True
+    cell (index of the 120-degree cell of each torsion; 0, 1, 2 = centred at 60, 180, 300 deg): population grid / rigid rotamer / minimised;  E_rot - E_min [kT];  width term [nats]
+      (1, 1):  1.0000 / 1.0000 / 0.9999;     10.896;    4.542
+      (2, 1):  0.0000 / 0.0000 / 0.0000;     17.199;    4.799
+      (0, 1):  0.0000 / 0.0000 / 0.0000;     13.295;    4.861
+      (1, 0):  0.0000 / 0.0000 / 0.0000;   1739.041;    5.901
+      (2, 0):  0.0000 / 0.0000 / 0.0000;   1745.651;    6.168
+      (0, 0):  0.0000 / 0.0000 / 0.0000;   1741.529;    6.220
+      (1, 2):  0.0000 / 0.0000 / 0.0000;   1641.809;    5.693
+      (2, 2):  0.0000 / 0.0000 / 0.0000;   1648.187;    5.945
+      (0, 2):  0.0000 / 0.0000 / 0.0000;   1644.143;    6.012
+    population-weighted width term: 4.5422 nats = 2.2711 per torsion; spread of the width term over cells with population above 1 %: 4.542 .. 4.542
+(c) brackets for ln Z from k cells per angle [nats; widths per torsion in the last three columns]
+    k   cell   minima/maxima bracket             width    Jensen end    bounded-differences end (all H)   best modes: upper end    width    threshold   | per torsion: first-order   all-H     best
+     3 120.00  [  -412.8786,     -2.1972] 4.107e+02     -116.1626      2.39188e+06 (2.392e+06)            -2.1972    1.140e+02       12     |   2.053e+02  1.196e+06  5.698e+01
+     6  60.00  [   -46.5667,     -2.8951] 4.367e+01      -22.6167      2.02316e+06 (2.023e+06)            -2.8951    1.972e+01        6     |   2.184e+01  1.012e+06  9.861e+00
+    12  30.00  [   -24.7021,     -4.2798] 2.042e+01      -10.3915      2.00348e+06 (2.003e+06)            -4.2798    6.112e+00        6     |   1.021e+01  1.002e+06  3.056e+00
+    18  20.00  [   -20.3825,     -4.9339] 1.545e+01       -8.7406      1.91257e+06 (1.913e+06)            -4.9339    3.807e+00        4     |   7.724e+00  9.563e+05  1.903e+00
+    24  15.00  [   -14.7930,     -5.0666] 9.726e+00       -8.5581      1.28234e+06 (1.282e+06)            -5.0979    3.460e+00        3     |   4.863e+00  6.412e+05  1.730e+00
+    36  10.00  [    -9.4753,     -5.4666] 4.009e+00       -7.3040           789870 (7.899e+05)            -5.7185    1.585e+00        4     |   2.004e+00  3.949e+05  7.927e-01
+    48   7.50  [    -8.2368,     -5.7950] 2.442e+00       -6.9899           509585 (5.096e+05)            -6.2082    7.817e-01        4     |   1.221e+00  2.548e+05  3.909e-01
+    72   5.00  [    -7.7834,     -6.0468] 1.737e+00       -6.9017           241616 (2.416e+05)            -6.5017    4.000e-01        8     |   8.683e-01  1.208e+05  2.000e-01
+   144   2.50  [    -7.2123,     -6.3621] 8.502e-01       -6.8199          64740.9 (6.475e+04)            -6.7309    8.901e-02        4     |   4.251e-01  3.237e+04  4.450e-02
+(d) tilted reference: one-body slices through the grid minimum (torsions at 177.5, 167.5 deg); sum of the one-site ln z_i = -6.7394; ln <exp(-V)> = +0.0000; remainder V over the grid: -0.02125 .. 0.4842 kT
+    k   cell    Jensen end (one-site cell free energies, cell-averaged remainder): gap to the grid, per torsion     best certified upper end: gap, per torsion    threshold
+     3 120.00        -6.7394    2.329e-09  1.165e-09                                        -6.7376    1.837e-03  9.185e-04      all H
+     6  60.00        -6.7394    2.328e-09  1.164e-09                                        -6.7387    6.913e-04  3.457e-04      all H
+    12  30.00        -6.7394    2.320e-09  1.160e-09                                        -6.7394    1.931e-06  9.657e-07      all H
+    18  20.00        -6.7394    1.889e-09  9.445e-10                                        -6.7394    2.086e-07  1.043e-07      all H
+    24  15.00        -6.7394    1.412e-09  7.062e-10                                        -6.7394    6.720e-08  3.360e-08      all H
+    36  10.00        -6.7394    1.192e-09  5.959e-10                                        -6.7394    1.930e-08  9.648e-09      all H
+    48   7.50        -6.7394    9.449e-10  4.724e-10                                        -6.7394    7.317e-09  3.659e-09      all H
+    72   5.00        -6.7394    6.130e-10  3.065e-10                                        -6.7394    2.321e-09  1.161e-09      all H
+   144   2.50        -6.7394    3.703e-10  1.851e-10                                        -6.7394    3.257e-10  1.628e-10      all H
+summary VAAV H, tilted reference: at three cells per torsion the Jensen model is 0.0000 nats per torsion below the grid (uniform reference: 54.712); the certified upper end is 0.000918 per torsion above
+summary VAAV H: rotamer model minus grid -3.1772 nats per torsion; minimised rotamers minus grid +2.2711; best certified bracket per torsion: k=3: 57, k=6: 9.86, k=12: 3.06, k=18: 1.9, k=24: 1.73, k=36: 0.793, k=48: 0.391, k=72: 0.2, k=144: 0.0445
+controls: the Jensen value as an upper end is violated in 9 of 9 partitions; all-M reproduces the bound by minima (asserted); every bracket contains the grid value (asserted)
+ALL DONE  31.2 s  peak memory 123 MB

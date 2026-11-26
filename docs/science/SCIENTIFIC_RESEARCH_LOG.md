@@ -3074,3 +3074,20 @@ running.  The Ensemble division found that my withdrawn sentence had entered the
 it.  The Structural Biology division made its first commit (22:30): certified minimum-energy conformations of a
 pairwise model, with docstrings that claim nothing about a molecule.
 
+**23:09 UTC — the force-field measurement, complete; outcomes of the predictions of 22:36; the first evaluation of the new division's software.**
+*All twelve cases* were recomputed by the final script (energies included) and the tables are generated from the
+logs.  *Predictions of 22:36:* (5) "with residue terms in the cell weights the Jensen model is within 0.05 nats
+per residue at three cells" — **met**, by four orders (at most `1.2·10⁻⁵`); (6) "the certified upper end at three
+cells is still wider than 1 nat per residue" — **missed by two to three orders** (`4·10⁻⁴` to `4·10⁻²`): I had
+assumed that neighbouring valine side chains clash somewhere on the torus, and they do not — the coupling stays
+within two `kT`.  The interesting half of this evening's work is that wrong assumption: the discretisation
+error of a rotamer model is, for these blocks, a single-residue matter.
+*What I did not plan and what matters most:* a single leucine.  The rigid table's minimum-energy state is not in
+the well of the continuous minimum.  That sentence is the content of SCI-REV-0025 — the first evaluation of
+the Structural Biology division's software, whose first capability is a certified minimum of such a table.
+Their documentation claims nothing about molecules, and the review says so first.
+*A check on myself:* the novelty paragraph of that review is from memory and is labelled so; I did not search.
+The offsets I report are for rigid bond geometry, which makes wells a few degrees wide; I wrote that limitation
+into the addendum, the review and the status row, because the numbers are large enough to be quoted without it.
+*The eighth division* founded itself at 22:54 and had read our evaluation protocol before I had written to it.
+

@@ -4263,6 +4263,119 @@ same statement for a real torsional energy with certified oscillations; whether 
 discrete and the continuous free energy — the mean of `ln(k_i · v_{i,s})`-type terms, a vibrational entropy — is
 what a rotamer model should be corrected by, which is a modelling question and not ours to decide by a bound.
 
+### (26) The discretisation term on a real force field: what a rigid-rotamer model gets wrong, by how much, and what repairs most of it [M — exact for a grid model of capped peptide blocks under ff14SB + GBn2; N for the brackets; added 2026-11-26 after checkpoint 66; unrefereed]
+
+*Why.*  Item 99 ended "no real energy function was put through it".  The same evening the research owner made
+this division the scientific evaluator of software built on these certificates (D-3) — whose first capability
+is a certified minimum-energy conformation of a rotamer table — and of what "discretised conformational spaces"
+cost.  The tools of workstream P2 were on the machine.
+
+*Protocol* (`pi_inference/continuous_cells_real.py`; one log per case; tables by
+`continuous_cells_real_tables.py`).  Workstream P2's builder, imported unmodified: Ace-X…-NMe with residues from
+valine (`χ₁`), serine (`χ₁` and the hydroxyl torsion), leucine (`χ₁`, `χ₂`) and alanine as a spacer; P2's ideal helix
+`(−57°, −47°)` and strand `(−139°, 135°)` backbones; bond lengths, bond angles and the backbone rigid, so that the
+side-chain torsions are the only degrees of freedom; energy = ff14SB vacuum + GBn2 polarisation (OpenMM 8.6.1);
+`kT = 0.596` kcal/mol.  **The "continuum"** is every torsion on a grid of 2.5° (two torsions; 20 736
+conformations) or 5° (three torsions; 373 248), with the uniform reference measure; dropping every second grid
+point changes `ln Z` by at most `6·10⁻⁴` on the 2.5° grids and `1.2·10⁻³` on the 5° ones.  **The rigid-rotamer model** — the kind of model parts (13)–(24) certify —
+has every torsion at 60°, 180°, 300°, each rotamer standing for a third of the circle; **the minimised-rotamer
+model** uses the minimum of the energy over each 120° cell in place of the rotamer's energy.  Everything is exact
+for the grid model; the brackets are those of Proposition A17.24 with every inequality asserted.
+
+**100. Measurements.**
+
+| block, backbone (grid) | rigid rotamers: `ln Z` minus the grid's | cell-minimised rotamers: the same | populations of rotamer cells, total variation from the grid's: rigid | minimised | minimum-energy state of the rigid table in the cell of the continuous minimum? |
+|---|---|---|---|---|---|
+| Ace-VV-NMe, helix (2.5°) | +2.001 | +2.011 | 0.0001 | 0.0000 | yes |
+| Ace-VV-NMe, strand (2.5°) | +1.857 | +1.940 | 0.0091 | 0.0056 | yes |
+| Ace-VAV-NMe, helix (2.5°) | +1.995 | +1.999 | 0.0000 | 0.0000 | yes |
+| Ace-VAV-NMe, strand (2.5°) | +1.850 | +1.939 | 0.0087 | 0.0057 | yes |
+| Ace-VAAV-NMe, helix (2.5°) | -3.177 | +2.271 | 0.0000 | 0.0000 | yes |
+| Ace-VAAAV-NMe, helix (2.5°) | -3.076 | +2.276 | 0.0000 | 0.0000 | yes |
+| Ace-VVV-NMe, helix (5°) | +1.992 | +1.992 | 0.0000 | 0.0000 | yes |
+| Ace-VVV-NMe, strand (5°) | +1.856 | +1.894 | 0.0122 | 0.0059 | yes |
+| Ace-S-NMe, helix (2.5°) | +1.042 | +1.214 | 0.0561 | 0.0799 | yes |
+| Ace-S-NMe, strand (2.5°) | +1.024 | +1.180 | 0.1466 | 0.0554 | yes |
+| Ace-L-NMe, helix (2.5°) | -0.580 | +1.769 | 0.4808 | 0.0444 | **no** |
+| Ace-L-NMe, strand (2.5°) | -0.616 | +1.763 | 0.2746 | 0.0442 | yes |
+
+| block, backbone | uniform reference, whole energy as one term: k = 3 | 12 | 72 | 144 | range of the remainder after one-site slices [kT] | tilted reference: Jensen end below the grid at k = 3 | certified upper end above the grid at k = 3 | at k = 12 |
+|---|---|---|---|---|---|---|---|---|
+| Ace-VV-NMe, helix | 10.5 | 3.4 | 0.083 | 0.0196 | -2.01 to 0.919 | 7.2e-07 | 0.0184 | 1.66e-05 |
+| Ace-VV-NMe, strand | 8.13 | 2.67 | 0.0679 | 0.0163 | -0.175 to 0.0597 | 3.0e-07 | 0.000723 | 1.07e-05 |
+| Ace-VAV-NMe, helix | 15.5 | 3.38 | 0.0804 | 0.0191 | -0.0159 to 0.0609 | 1.8e-08 | 0.000372 | 5.79e-06 |
+| Ace-VAV-NMe, strand | 8.16 | 2.67 | 0.0682 | 0.0163 | -0.187 to 0.117 | 1.2e-05 | 0.00733 | 0.000415 |
+| Ace-VAAV-NMe, helix | 57 | 3.06 | 0.2 | 0.0445 | -0.0213 to 0.484 | 1.2e-09 | 0.000919 | 9.66e-07 |
+| Ace-VAAAV-NMe, helix | 56.7 | 3.07 | 0.204 | 0.046 | -0.285 to 0.183 | 3.6e-06 | 0.0157 | 0.000864 |
+| Ace-VVV-NMe, helix | 14 | 3.39 | 0.0812 | — | -4.22 to 0.789 | 1.3e-06 | 0.0362 | 4.6e-05 |
+| Ace-VVV-NMe, strand | 8.12 | 2.68 | 0.0683 | — | -0.508 to 0.155 | 8.8e-06 | 0.00855 | 0.00032 |
+| Ace-S-NMe, helix | 2.97 | 0.865 | 0.0216 | 0.00526 | -9.07 to 8.94 | 1.0e-01 | 2.77 | 0.169 |
+| Ace-S-NMe, strand | 3.04 | 0.852 | 0.0197 | 0.00481 | -8.25 to 1.61 | 2.5e-02 | 1.93 | 0.0883 |
+| Ace-L-NMe, helix | 6.85e+03 | 1.54 | 0.256 | 0.133 | -1.10e+03 to 1.29e+10 | 3.0e-01 | 546 | 328 |
+| Ace-L-NMe, strand | 5.26e+03 | 1.56 | 0.259 | 0.127 | -1.30e+03 to 3.63e+07 | 1.7e-01 | 632 | 526 |
+
+(i) **The free energy of the rigid-rotamer model is off the continuous one by one to three nats per torsion, and
+not by a constant.**  For valine the offset is about `+2` (a rotamer sits at the bottom of a well a few degrees
+wide and is given the weight of 120°); it differs by `0.143` nats per torsion between helix and strand for the
+same dipeptide block, and between two helical contexts it changes sign: `+2.001` for neighbours, `−3.177` when the
+second valine is three residues on — there the minimum of its well sits at 167.5°, and the ideal rotamer at 180°
+is 10.9 `kT` up the wall (both torsions together).  With cell-minimised energies the offset is `+1.89` to `+2.28`
+for valine: a vibrational term that varies by a few tenths of a nat per torsion with the context.  (On the 5° grid of the
+helical tripeptide the minimum falls on the ideal rotamers, so the two models coincide there.)
+(ii) **For leucine the rigid table names the wrong state.**  A single capped leucine on the helix backbone: the
+continuous energy has 0.55 of its weight in the well around `(300°, 180°)` and 0.35 around `(180°, 60°)`; the
+rigid-rotamer table gives 0.17 and 0.83 — total variation 0.48 — and **its minimum-energy state is the second,
+with a gap of 1.56 `kT` to the next state, while the minimum of the same energy with continuous torsions lies in
+the first** (at `(287.5°, 157.5°)`; the best point of the rigid table's cell is 0.56 `kT` above it).  The ideal
+rotamers are strained by 5.9 and 3.8 `kT`, and two cells with 4–6 % of the weight have their ideal rotamer inside
+a steric clash.  On the strand: total variation 0.27.  Serine: 0.06 and 0.15.  Valine: at most 0.012.  With
+cell-minimised energies the populations agree to within 0.08 in every case.
+(iii) **The bracket of Proposition A17.24 with the whole energy as one term is useless at rotamer resolution on
+a real force field**: 8 to 57 nats per torsion at three cells for valine, thousands for leucine (a cell contains
+clashes); 0.07 to 0.2 at 5° cells; 0.016 to 0.046 at 2.5°.  The toy chain of item 98 was kinder by a factor of
+about twenty at fine cells.
+(iv) **Almost all of it is intra-residue, and that part can be integrated exactly.**  Take as reference measure
+of each residue the Boltzmann weight of its own one-site slice of the energy through the grid minimum (remark 2
+of item 97) and discretise only the remainder.  For two valines — neighbours, `i, i+2`, `i, i+3`, `i, i+4` on the
+helix; neighbours and `i, i+2` on the strand — the remainder stays within `[−2.0, +0.9] kT` over the whole torus
+(within `±0.5` in five of the six cases), the discrete model with one-site cell free energies and cell-averaged
+remainder is below the continuous `ln Z` by at most `1.2·10⁻⁵` nats per torsion **at three cells per torsion**,
+and the certified upper end is above it by `4·10⁻⁴` to `2·10⁻²` at three cells and by at most `9·10⁻⁴` at twelve.
+For three valines in a row (5° grid) the remainder is within `[−4.2, +0.8] kT` on the helix and `[−0.5, +0.2]` on the
+strand, and the upper end is `0.036` and `0.0086` nats per torsion above at three cells, `5·10⁻⁵` and `3·10⁻⁴` at twelve.
+(v) **Two torsions of one residue are not two sites.**  The same construction with `χ₁` and `χ₂` of one serine or
+one leucine as separate sites leaves a remainder of `±9 kT` (serine) or a steric clash (leucine), and its bracket
+is useless: a residue's torsions have to be integrated jointly inside its cells — a two- to four-dimensional
+integral per residue and cell, which is what the 20 736-point grids above are for one residue.
+(vi) *Predictions* (research log, 22:28 and 22:36 UTC, before the scripts existed): the rigid offset "between 0.5
+and 2 nats per residue" — missed at the upper end by 0.0006 on the helix, and wrong in kind for the blocks with
+spacers, where it is negative; "helix and strand differ by at least 0.1" — met (0.143); "the bracket is wider than
+2, 0.5, 0.05 at 3, 12, 72 cells" — met; "with residue terms in the cell weights the Jensen model is within 0.05
+nats per residue at three cells" — met, with four orders to spare; "the certified upper end at three cells is
+still wider than 1 nat per residue" — **missed by one and a half to three orders** (`4·10⁻⁴` to `4·10⁻²`): I had
+assumed clashes between neighbouring valines, and there are none.
+
+**101. What it means, and its limits.**
+(a) **For this energy model a rigid-rotamer table is not a controlled approximation of the continuous
+ensemble.**  Its free energy is off by nats per torsion in a context-dependent way, and for the first side
+chain with two torsions that we tried its dominant and its minimum-energy state are not those of the same
+force field with continuous torsions.  A bracket of `10⁻⁴` nats for the table (parts (19)–(24)), or a certified
+minimum of the table, is a statement about the table.
+(b) **A constructive reading.**  Make a rotamer state a *cell with its own free energy*, computed by a
+low-dimensional integral over the residue's own torsions with the other residues at an anchor, and make the pair
+tables cell averages under that measure.  This discrete model is a certified lower model of the continuous
+partition function (Jensen), it reproduces single-residue populations exactly by construction, and for valine
+pairs and triples the certified upper end is `4·10⁻⁴` to `4·10⁻²` nats per torsion away at three cells per torsion.  Whether that
+survives longer and charged side chains — for which workstreams P8 and P9 found pair tables of tens of `kT` — is
+not known; the remainder there will contain walls, and the mode M of item 97 will have to carry them.
+(c) **Limits of the measurement.**  Capped model blocks of at most five residues; ideal fixed backbones; rigid
+bond lengths and angles, which make the wells narrower than they are in a molecule (the thermal width of `χ₁`
+here is a few degrees) and so exaggerate the strain of ideal rotamers — the direction of every effect is as
+measured for this model, its size in a molecule is not established by it; one force field and one solvent
+model; three residue types; the "continuum" is a grid.  P2's rotamer states are the ideal staggered values after
+a clash filter, so the rigid model above is the one this branch has certified, but libraries with off-ideal
+rotamer positions would be strained less.  No comparison with any measurement.
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every
