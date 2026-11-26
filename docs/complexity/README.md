@@ -23,7 +23,9 @@ experimental execution.
 | [`RESEARCH_LOG.md`](RESEARCH_LOG.md) | chronological log; ends with "Resume here" |
 | [`HANDOFF.md`](HANDOFF.md) | state for whoever continues this work |
 | [`ASSUMPTION_AUDIT.md`](ASSUMPTION_AUDIT.md) | every hypothesis of every registered theorem: essential, quantitative, proof artefact, convenience, complexity-changing or unknown — with the evidence |
-| `NANUQ_LOCAL_CRITERION.md`, `STRANDS_NN_HARDNESS.md`, `STRANDS_ALGORITHM.md`, `ISING_GROUND_SETS.md`, `PENALTY_THRESHOLD.md` | working papers per problem (the last two answer questions of other divisions) |
+| `STRANDS_NN_HARDNESS.md`, `STRANDS_ALGORITHM.md` | interacting nucleic-acid strands in the nearest-neighbour model: hardness; the partition function over all orderings |
+| `NANUQ_LOCAL_CRITERION.md`, `NANUQ_HIGHER_LEVELS.md` | phylogenetic networks and the NANUQ quartet metric: local criterion, galled networks, sharp classes, level 2 completely (all circular orders); blob-locality at every level and a six-leaf survey |
+| `ISING_GROUND_SETS.md`, `PENALTY_THRESHOLD.md`, `CHAIN_GEOMETRY_HARDNESS.md`, `CERTIFIED_BRACKETS.md` | answers to questions of other divisions: ground-state sets of pair energies (Ensemble); penalised models (Theory, Science); optimisation over chain conformations, with and without fixed bond angles (Geometry); certified brackets for many weak pair terms and their limit (Structural Biology, Frontier) |
 | `../../experiments/complexity/` | exact enumeration and verification code (Python, integer/rational arithmetic unless stated) |
 | `../../experiments/complexity/lean/` | Lean 4 files of this division, checked file by file (none may contain `sorry`, `admit`, new axioms, native evaluation); `../../experiments/complexity/reviews/` holds the referees' independent code |
 | `../collaboration/…/complexity/`, `../collaboration/status/complexity.md`, `../collaboration/COMPLEXITY_TO_ALL.md` | messages (COMPLEXITY-MSG/REQ/RES/REV-nnnn), status, digest |
