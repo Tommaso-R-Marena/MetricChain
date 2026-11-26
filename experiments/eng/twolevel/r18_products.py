@@ -223,7 +223,7 @@ def cell_data(key: tuple, later_rounds: bool = False) -> dict:
     cost, anyp = load("x005_cost.jsonl")[key], load("x005_anyplacement.jsonl")[key]
     sources = [cost, anyp]
     if later_rounds:
-        for name in ("x005c_search.jsonl", "x005c_seeds.jsonl"):
+        for name in ("x005c_search.jsonl", "x005c_seeds.jsonl", "x005c_round2.jsonl"):
             if (RES / name).exists():
                 sources += [json.loads(line) for line in (RES / name).read_text().splitlines()
                             if (lambda r: (r["u"], r["n"], r["phi"]) == key)(json.loads(line))]
@@ -239,9 +239,10 @@ def task_list(job: str) -> list[dict]:
         return [dict(u=u, n=n, phi=phi, seed=1, mult=1) for u in run_search.US for n in (1000, 4000) for phi in (0.35, 0.5)]
     if job == "seeds":
         return [dict(u=u, n=n, phi=phi, seed=seed, mult=3) for u in run_search.US for n in SMALL for phi in (0.5, 0.85) for seed in (2, 3)]
-    if job == "round2":
-        # a second round on every cell of the three sizes: two more seeds, starting from every maximiser found so far
-        return [dict(u=u, n=n, phi=phi, seed=seed, mult=3) for u in run_search.US for n in SMALL for phi in run_search.PHIS for seed in (4, 5)]
+    if job in ("round2", "round3"):
+        # a further round on every cell of the three sizes: two more seeds, starting from every maximiser found so far
+        seeds = (4, 5) if job == "round2" else (6, 7)
+        return [dict(u=u, n=n, phi=phi, seed=seed, mult=3) for u in run_search.US for n in SMALL for phi in run_search.PHIS for seed in seeds]
     raise ValueError(job)
 
 
@@ -251,7 +252,7 @@ def task_id(job: str, t: dict) -> str:
 
 def tasks(job: str) -> list[dict]:
     """Driver interface of modal_jobs/bench_app.py: one task per cell, with what it needs from the stored files."""
-    return [dict(t, id=task_id(job, t), tier="m", cell=cell_data((t["u"], t["n"], t["phi"]), later_rounds=(job == "round2")))
+    return [dict(t, id=task_id(job, t), tier="m", cell=cell_data((t["u"], t["n"], t["phi"]), later_rounds=job in ("round2", "round3")))
             for t in task_list(job)]
 
 
@@ -290,7 +291,7 @@ def cross_cell(key: tuple) -> dict:
     u, n, phi = key
     cost, anyp = load("x005_cost.jsonl")[key], load("x005_anyplacement.jsonl")[key]
     rows = [("M-008", cost), ("M-014", anyp)]
-    for name in ("search", "seeds", "round2"):
+    for name in ("search", "seeds", "round2", "round3"):
         path = RES / f"x005c_{name}.jsonl"
         if path.exists():
             rows += [(name, r) for r in (json.loads(line) for line in path.read_text().splitlines()) if (r["u"], r["n"], r["phi"]) == key]
@@ -377,7 +378,7 @@ def _commit() -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("job", choices=("stored", "search", "seeds", "large", "round2", "cross", "science"))
+    ap.add_argument("job", choices=("stored", "search", "seeds", "large", "round2", "round3", "cross", "science"))
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--dir", type=Path)
     args = ap.parse_args()

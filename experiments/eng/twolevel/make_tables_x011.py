@@ -30,15 +30,30 @@ def f4(x) -> str:
     return "—" if x is None else f"{x:.4f}"
 
 
+PUBLISHED = RESULTS / "x011_published_rows.json"
+
+
+def split(name: str) -> tuple[list[dict], list[dict]]:
+    """(rows used by the published messages, rows that arrived later) of a result file.  The manifest
+    ``x011_published_rows.json`` lists, per result file, the task ids that were stored when ENG-RES-0015 and
+    ENG-RES-0016 were published; their tables are generated from exactly those rows, so that ``--verify`` keeps
+    holding while detached jobs append further rows.  Without a manifest (drafts) every row counts as published."""
+    rows = jl(name)
+    if not PUBLISHED.exists():
+        return rows, []
+    ids = set(json.loads(PUBLISHED.read_text()).get(name, []))
+    return [r for r in rows if r.get("task_id") in ids], [r for r in rows if r.get("task_id") not in ids]
+
+
 # ---------------------------------------------------------------------------------------------
 # X-011a: certified bounds
 # ---------------------------------------------------------------------------------------------
 def bounds_blocks() -> dict[str, str]:
-    """ENG-RES-0015 has the sizes up to 8000 (blocks x011_bounds, ...); the larger sizes of job M-016, which were
-    still running when it was published, are in blocks with the suffix _large (the addendum)."""
-    allrows = jl("x011_certified1.jsonl")
-    out = _bounds_blocks([r for r in allrows if r["n"] <= 8000], "")
-    out.update(_bounds_blocks([r for r in allrows if r["n"] > 8000], "_large"))
+    """ENG-RES-0015 has the rows of job M-016 that were stored when it was published (blocks x011_bounds, ...); the
+    sizes that were still running are in blocks with the suffix _large (the addendum)."""
+    first, later = split("x011_certified1.jsonl")
+    out = _bounds_blocks(first, "")
+    out.update(_bounds_blocks(later, "_large"))
     return out
 
 
@@ -149,6 +164,30 @@ def _bounds_blocks(rows: list[dict], suffix: str) -> dict[str, str]:
             cells.append(f"{gain:.0f}; {realised:.0f}; {max(0.0, realised) / gain:.2f}")
         lines.append(f"| {n} | " + " | ".join(cells) + " |")
     blocks["x011_level_gain" + suffix] = "\n".join(lines)
+    # per family, at the sizes of prediction H13 (n >= 16 000): the share of each level's gain in the limit that is kept
+    big = [n for n in sizes if n >= 16000]
+    if big:
+        lines = ["| `n` | family | level 3: share kept | level 4 | level 5 | level 6 |", "|---|---|---|---|---|---|"]
+        for n in big:
+            for fam in ("theory", "wide"):
+                r = by.get((n, fam))
+                if r is None:
+                    continue
+                na = n * r["a"]
+                cells = []
+                for k in (1, 2, 3, 4):
+                    if k + 1 > len(r["rows"]) or k + 1 not in C_UP:
+                        cells.append("—")
+                        continue
+                    v0, _, c0 = best(r, k)
+                    v1, _, c1 = best(r, k + 1)
+                    if v0 is None or v1 is None:
+                        cells.append("—")
+                        continue
+                    share = (v0 - v1) / (C_UP[k] - C_UP[k + 1])
+                    cells.append(f"{max(0.0, share):.2f}" + ("" if (c0 and c1) else "*"))
+                lines.append(f"| {n} | {fam} | " + " | ".join(cells) + " |")
+        blocks["x011_h13" + suffix] = "\n".join(lines)
     return blocks
 
 
@@ -426,12 +465,7 @@ def hetero_blocks() -> dict[str, str]:
             + f".  Blocks of one type against mixed blocks: `{min(d[2] for d in diffs):.2f}`–`{max(d[2] for d in diffs):.2f}` of the mixed bound.  "
             f"The union of the two families is better than blocks of one type alone in {sum(1 for d in diffs if d[5])} of {len(diffs)} rows.")
     pp = RESULTS / "x014_profile1.jsonl"
-    allprof = jl("x014_profile1.jsonl")
-    # ENG-RES-0016 has the ten binnings finished when it was published; the two that were still running
-    # (n = 16 000 with m = 3 and m = 8) go into the block x014_profile_late of the addendum
-    late = {(16000, 3), (16000, 8)}
-    prof = [r for r in allprof if (r["n"], r["m"]) not in late]
-    prof_late = [r for r in allprof if (r["n"], r["m"]) in late]
+    prof, prof_late = split("x014_profile1.jsonl")
     if prof_late:
         pl = ["| `n` | classes `m` | exponent of the binned class | certified bound per site with 2 / 3 / 4 / 5 levels | best / exponent of the profile |", "|---|---|---|---|---|"]
         for r in sorted(prof_late, key=lambda r: (r["n"], r["m"])):
@@ -539,11 +573,13 @@ def nested_literal_blocks() -> dict[str, str]:
 
 
 def stage2_blocks() -> dict[str, str]:
-    """X-011 stage 2 (job M-020): both rules of design on the same instances, three slopes.  ENG-RES-0015 has
-    n = 4000 (complete when it was published); n = 16 000 is in blocks with the suffix _16k (the addendum)."""
-    allrows = jl("x011_instances2.jsonl")
-    out = _stage2_blocks([r for r in allrows if r["n"] <= 4000], "")
-    out.update(_stage2_blocks([r for r in allrows if r["n"] > 4000], "_16k"))
+    """X-011 stage 2 (job M-020): both rules of design on the same instances, three slopes.  ENG-RES-0015 has the
+    rows that were stored when it was published; every group (u, n) that received a row afterwards is shown again,
+    with all its rows, in blocks with the suffix _late (the addendum)."""
+    first, later = split("x011_instances2.jsonl")
+    out = _stage2_blocks(first, "")
+    changed = {(r["u"], r["n"]) for r in later}
+    out.update(_stage2_blocks([r for r in first + later if (r["u"], r["n"]) in changed], "_late"))
     return out
 
 

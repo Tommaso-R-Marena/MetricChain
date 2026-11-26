@@ -41,9 +41,9 @@ message: **nats per site** (the constant `a` differs from type to type).
    to a quarter of the sites are steep.  Mixed outer blocks with your sorted-slope bound
    (Lemma N14), put into the same recursion, give the homogeneous bound again to within
    five per cent once a quarter of the sites is steep, and six to ten per cent less
-   where a tenth is (§5.1).  A continuous profile of slopes, binned into three or four
-   classes, is certified at `2.1`–`2.6` times its exponent, against `3.1`–`3.5` for the
-   homogeneous algorithm (§5.2).
+   where a tenth is (§5.1).  A continuous profile of slopes, binned into three classes,
+   is certified at `2.0`–`2.6` times its exponent, against `3.1`–`3.5` for the homogeneous
+   algorithm (§5.2).
 4. **Lower bound** **[P, X]** (§3): the argument of Theorem 11.25(a) with weighted dips gives a
    lower bound for every algorithm that is computable exactly at every `n`; it exceeds the
    asymptotic exponent by a term that shrinks with `n`.
@@ -339,8 +339,10 @@ is a bound for the original (your Proposition N19 does this at the level of expo
 | 4000 | 8 | 0.05240 | 0.2937 / 0.2336 / 0.1833 / 0.1833* | 3.92 |
 | 16000 | 1 | 0.09728 | 0.1834 / 0.1548 / 0.1429 / 0.1429* | 3.06 |
 | 16000 | 2 | 0.07055 | 0.1793 / 0.1212 / 0.1070 / 0.1070* | 2.29 |
+| 16000 | 3 | 0.06229 | 0.1594 / 0.1257 / 0.0952 / 0.0952* | 2.04 |
 | 16000 | 4 | 0.05828 | 0.2001 / 0.1135 / 0.1000 / 0.1000* | 2.14 |
 | 16000 | 6 | 0.05434 | 0.2453 / 0.1628 / 0.1111 / 0.1111* | 2.38 |
+| 16000 | 8 | 0.05241 | 0.2694 / 0.2035 / 0.1476 / 0.1476* | 3.16 |
 <!-- /TABLE:x014_profile -->
 
 <!-- TABLE:x014_profile_caption -->
@@ -350,15 +352,14 @@ Slopes equally spaced on `[0.5, 2]`; asymptotic exponent of the profile itself `
 Reading (hypotheses H5 and H6 of the protocol, written before job M-022).  Finer binning
 lowers the exponent of the binned class towards that of the profile — `0.0973` with one
 class, `0.0524` with eight, `0.0467` for the profile itself — and makes every block smaller,
-which raises its finite-size cost.  The certified bound is best at three or four
-classes: `0.1225` (`m = 3`) at `n = 4000` and `0.1000` (`m = 4`) at `n = 16 000`, that is `2.6` and `2.1`
-times the profile's exponent, where treating all sites as the steepest (`m = 1`) gives
-`3.5` and `3.1`.  **H5** (four and six classes beat two once the nesting is deep) holds for
-four classes and is **refuted for six**, at both sizes.  **H6** (no binning reaches twice
-the profile's exponent at `n = 16 000`) holds for the four binnings that finished; `m = 3`
-and `m = 8` at `n = 16 000` were still running and follow in the addendum.  Every search
-with five levels ran into its time limit without finding a design better than the best
-with four.
+which raises its finite-size cost.  The certified bound is best at three classes at
+both sizes: `0.1225` at `n = 4000` and `0.0952` at `n = 16 000`, that is `2.62` and `2.04` times the
+profile's exponent, where treating all sites as the steepest (`m = 1`) gives `3.54` and
+`3.06`.  **H5** (four and six classes beat two once the nesting is deep) holds for four
+classes and is **refuted for six**, at both sizes.  **H6** (no binning reaches twice the
+profile's exponent at `n = 16 000`) holds, narrowly: the best of the six binnings is at
+`2.04`.  Every search with five levels ran into its time limit without finding a design
+better than the best with four.
 
 ## 6. Literal runs on small cubes **[L]**
 

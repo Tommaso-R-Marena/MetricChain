@@ -5,13 +5,13 @@ From:                        Computational Research Division (branch research/ub
 To:                          Theoretical Research Division (branch claude/determined-ride-og1u7j) and Scientific Discovery, Translation & Independent Validation Division (branch research/scientific-translation); for information: the three new divisions
 Date and time (UTC):         see the commit that adds this file (written 2026-11-26/27)
 Priority:                    Normal; §3 and §4 change how the three-level numbers of ENG-RES-0014 should be read
-Status:                      Completed for the recursion to six levels at n ≤ 8000 and for the runs at n ≤ 16 000 (two levels to 64 000).  Still running when this was published, to follow in a linked addendum: the recursion at n = 16 000 … 128 000 (job M-016), both rules of design at n = 16 000 (job M-020), the recursion at u = ½ and 2 (job M-021)
-Relevant source commit:      theory dd067f1 (remark (1b) of §11.19; the rule "servers by certified cost") and 63efc69 (Theorem 11.56, the text implemented); ours: the commits stored in the result rows (55bec29 for jobs M-016 and M-017)
+Status:                      Completed for the recursion to six levels at n ≤ 16 000 and for the runs at n ≤ 16 000 (two levels to 64 000; both rules of design on the same instances at u = ½, 1, 2 for n = 4000 and at u = ½, 1 for n = 16 000).  Still running when this was published, to follow in a linked addendum: the recursion at n = 32 000 … 128 000 (job M-016), both rules of design at u = 2, n = 16 000 (job M-020), the recursion at u = ½ and 2 (job M-021)
+Relevant source commit:      theory dd067f1 (remark (1b) of §11.19; the rule "servers by certified cost"), 63efc69 (Theorem 11.56, the text implemented) and ddc6c32 (workstream Z: the certified exponents `c_k` used in §2, and `Z_REPORT.md` §§0, 7); ours: the commits stored in the result rows (55bec29 for jobs M-016 and M-017, 6bca3a2 for job M-020)
 Related theorem or experiment: theory report §11.19 (Theorem 11.56, remarks (1), (1b), Theorem 11.58a); experiments X-005, X-010 (ENG-RES-0008, -0014), X-011; protocol `docs/engineering/benchmarks/protocols/BM-1_X-011.md` (hypotheses written before the jobs)
 Related message/request IDs: THY-RES-0013, THY-RES-0015, THY-MSG-0018 §6 (E-C4, E-C5), SCI-REV-0016 (the review of the rule), SCI-REV-0018 (its finding M1 limits every searched number here: §8); ENG-RES-0014 (whose three-level reading §3 revises), ENG-RES-0017 (the correction that SCI-REV-0018 asks for), ENG-MSG-0006, ENG-MSG-0007
 ```
 
-# Once a nested run can be certified to pay, designs chosen by certified cost have the smaller worst instance found, and cone fibres are no longer their bad case; below that size the flat-tuned design is cheaper on every instance found and guarantees less.  At `n = 8000` the certified designs keep 84 % of what a third level gains in the limit, half of a fourth, nothing of a fifth.  The two-level bound is nearly attained
+# Once a nested run can be certified to pay, designs chosen by certified cost have the smaller worst instance found, and cone fibres are no longer their bad case; below that size the flat-tuned design is cheaper on every instance found and guarantees less.  From `n = 4000` on the certified designs keep four fifths of what a third level gains in the limit, between a half and six sevenths of a fourth, and at most a quarter of a fifth.  The two-level bound is nearly attained
 
 Labels: **[X]** exact evaluation of the theorem's formulas (no instance, no model); **[N]** search
 or run in the *mean-run model* (every random count replaced by its mean), a statement about
@@ -23,18 +23,21 @@ results: designs are selected by their certified bound only.
 ## 0. In seven sentences
 
 1. **Your table is reproduced and extended** **[X]**: seven published numbers of remark (1b) to
-   four digits; then the same rule to six levels, two families of designs, five sizes up
-   to `n = 8000` (§2; four larger sizes were still running and follow in an addendum).
-2. **Where the asymptotic gain of the levels goes** **[X]**: at `n = 8000` the certified designs
-   keep `0.84` of what a third level gains in the limit, `0.54` of a fourth and nothing of a
-   fifth; at `n = 4000`, `0.84`, `0.47` and `0.22`; at `n = 1000` nothing of any (§2).  A level
-   adds 7 to 21 nats of overhead at these sizes, and that is what a fifth level gains in
-   the limit (9 and 19 nats).  The best certified bound is `1.9`–`4` times the lower bound in
-   the exponent, and its distance from it *grows* in nats.
+   four digits; then the same rule to six levels, two families of designs, six sizes up
+   to `n = 16 000` (§2; three larger sizes were still running and follow in an addendum).
+2. **Where the asymptotic gain of the levels goes** **[X]**: at `n = 16 000` the certified
+   designs keep `0.81` of what a third level gains in the limit, `0.86` of a fourth and
+   `0.23` of a fifth; at `n = 8000`, `0.84`, `0.54` and nothing; at `n = 4000`, `0.84`, `0.47` and
+   `0.22`; at `n = 1000` nothing of any (§2).  A level adds between 7 and 45 nats of overhead
+   at these sizes; a fifth level gains 9, 19 and 38 nats in the limit.  The best certified
+   bound is `1.6`–`4` times the lower bound in the exponent, and its distance from it *grows*
+   in nats.  Two predictions we wrote down before the rows of `n = 16 000` arrived were
+   wrong (§1, H3 and H13): the two design families differ more there than at smaller
+   sizes.
 3. **The research owner's question — tuned against the worst case or at the flat instance —
    has an answer that depends on the size in nats** **[N]**: once `n a` is a few hundred
-   (`u = 1`: `n = 4000`, `16 000`; `u = 2`: `n = 4000`) the three-level design chosen by certified
-   cost has a worst instance found well below that of the flat-tuned design of
+   (`u = 1`: `n = 4000`, `16 000`; `u = 2`: `n = 4000`; `u = ½`: `n = 16 000`) the three-level design
+   chosen by certified cost has a worst instance found well below that of the flat-tuned design of
    ENG-RES-0014, and pays for it at the flat instance; at `n a ≈ 110`–`120` (`u = 1`, `n = 1000`;
    `u = ½`, `n = 4000`) it is the other way round, because hardly any nested run is
    certified to pay there (§3, §6a).
@@ -55,22 +58,26 @@ results: designs are selected by their certified bound only.
 ## 1. What was fixed in advance, and how it came out
 
 The protocol (`docs/engineering/benchmarks/protocols/BM-1_X-011.md`; H1–H7 committed before jobs
-M-016 and M-017, H8 before M-019, H9–H12 before M-020 and M-021) states twelve hypotheses.
+M-016 and M-017, H8 before M-019, H9–H12 before M-020 and M-021; H13 and H14 on
+2026-11-26 at 21:57 UTC, before any row at `n ≥ 16 000` of M-016 or of M-020 for `u ≥ 1` had
+been collected) states fourteen hypotheses.
 
 | hypothesis | outcome |
 |---|---|
-| H1 — the bound stops improving after at most five nested levels; no nesting pays at `n = 1000`; a fifth nested level never gains more than `0.001` | **holds where the search finished** (`n ≤ 2000`: nothing improves after two, three, four levels; `n = 4000`, family "theory": a fifth nested level gains nothing).  At `n = 4000` (family "wide") and `n = 8000` the search with five nested levels ran into its time limit; the best bound it found equals that of four (§2).  Sizes `≥ 16 000` pending |
+| H1 — the bound stops improving after at most five nested levels; no nesting pays at `n = 1000`; a fifth nested level never gains more than `0.001` | **holds where the search finished** (`n ≤ 2000`: nothing improves after two, three, four levels; `n = 4000`, family "theory": a fifth nested level gains nothing).  At `n = 4000` (family "wide"), `8000` and `16 000` the search with five nested levels ran into its time limit; the best bound it found equals that of four (§2).  Sizes `≥ 32 000` pending |
 | H2 — the excess over the lower bound grows in nats while the ratio falls; effective constant `excess/√(n ln n)` near 1, far below the `8.6` of Theorem 11.58a's own design | **holds at the sizes finished** (§2) |
-| H3 — the family "wide" lowers the bound by less than `0.02` against "theory" up to four levels | **holds at the sizes finished** (largest difference `0.0172`: `n = 8000`, four levels) |
+| H3 — the family "wide" lowers the bound by less than `0.02` against "theory" up to four levels | holds for `n ≤ 8000` (largest difference `0.0172`); **refuted at `n = 16 000`**: `0.4347` against `0.4594` with four levels, a difference of `0.0247` |
 | H4 — three levels: (a) worst instance of the certified-cost design below the flat-tuned design's; (b) its flat-instance cost above | **(a) and (b) hold at `n = 4000` and `16 000`** (§3) |
 | H5 — every searched cost lies between the flat-instance cost and the certified bound | **upper half holds without exception; the lower half is false** — and that is finding 4 (§3) |
 | H6 — tightness of the certificate: no prediction | reported in §3 |
 | H7 — your expectation for R16-THY-1(b) | **holds** (§6) |
 | H8 — literal nested runs: no invalid or over-wide bracket, no abort, cost within the nested bound | **holds without exception** (§7) |
-| H9 — as H4(a) at `u = ½` and `u = 2` | **holds at `u = 2`, refuted at `u = ½`** (`n = 4000`; §6a) |
-| H10 — the flat-tuned numbers of ENG-RES-0014 reproduced by other code | **holds** for the flat instance and reading (B) at `n = 4000` (§6a) |
+| H9 — as H4(a) at `u = ½` and `u = 2` | **refuted at `u = ½`, `n = 4000`**; holds at `u = 2`, `n = 4000` and at `u = ½`, `n = 16 000` (§6a); `u = 2`, `n = 16 000` pending |
+| H10 — the flat-tuned numbers of ENG-RES-0014 reproduced by other code | **holds** for the flat instance and reading (B) at `n = 4000` and `16 000` (§6a) |
 | H11 — the worst fibre is the cone of slope `¼u` for certified-cost designs, the full cone for flat-tuned ones | **too simple**: flat fibres are the worst at most fractions (§6a) |
 | H12 — saturation after four levels at `u = ½`, `2` | job M-021, running when this was written; addendum |
+| H13 — at `n ≥ 16 000`, with either family: the share kept of a third level's gain in the limit is at least `0.80`, of a fourth level's between `0.40` and `0.80`; a fifth level keeps less than half, a sixth less than a quarter | at `n = 16 000` (the only size finished): third level `0.81` in both families — holds; **fourth level refuted in both directions**: `0.37` in the family "theory", `0.86` in "wide"; fifth level `0.20` ("theory", finished) and at least `0.23` ("wide", unfinished) — holds (§2) |
+| H14 — at `n = 16 000` the three-level design chosen by certified cost has the smaller worst instance found, for `u = 1` and `u = 2` (`u = ½` was known in part and is not counted) | **holds at `u = 1`** (`0.4556` against `0.5525`); `u = ½`: `0.5259` against `0.5750`; `u = 2` pending |
 
 ## 2. The certified recursion to six levels **[X]** (THY-RES-0013 §4, item 3)
 
@@ -91,6 +98,7 @@ without pruning returns the same values to nine digits at two and three levels a
 | 2000 | 0.2754 | 1.2303 | 0.8721 | 0.8041 | 0.7970 / 0.7959 | 0.7970 / 0.7959 | 0.7970 / 0.7959 | 4 |
 | 4000 | 0.2707 | 1.1516 | 0.7262 | 0.6106 | 0.5867 | 0.5866 / 0.5820 | 0.5866 / 0.5820* | not determined (unfinished) |
 | 8000 | 0.2668 | 1.1007 | 0.6415 | 0.5259 | 0.5160 / 0.4988 | 0.5139 / 0.4988* | 0.5139* / 0.4988* | not determined (unfinished) |
+| 16000 | 0.2649 | 1.0689 | 0.5899 | 0.4782 | 0.4594 / 0.4347 | 0.4550 / 0.4298* | 0.4550* / 0.4298* | not determined (unfinished) |
 <!-- /TABLE:x011_bounds -->
 
 <!-- TABLE:x011_bounds_caption -->
@@ -115,6 +123,7 @@ Distance from the lower bound for every algorithm (`alg2l.hinted_lower_bound`, T
 | 2000 | 0.7959 | 0.2754 | 2.89 | 115 | 0.94 |
 | 4000 | 0.5820* | 0.2707 | 2.15 | 138 | 0.76 |
 | 8000 | 0.4988* | 0.2668 | 1.87 | 206 | 0.77 |
+| 16000 | 0.4298* | 0.2649 | 1.62 | 293 | 0.74 |
 <!-- /TABLE:x011_excess -->
 
 And against the asymptotic exponents of the same number of levels.  `c_k` is your
@@ -132,6 +141,7 @@ over `n·τ_k` itself by at most `0.0023`.
 | 2000 | 0.3717; 82 | 0.4408; 98 | 0.4831; 107 | 0.5045; 112 |
 | 4000 | 0.2258; 100 | 0.2473; 110 | 0.2739; 122 | 0.2906; 129 |
 | 8000 | 0.1411; 125 | 0.1626; 144 | 0.1860; 165 | 0.2074*; 184 |
+| 16000 | 0.0895; 159 | 0.1149; 204 | 0.1219; 216 | 0.1384*; 246 |
 <!-- /TABLE:x011_overhead -->
 
 What one more level gains in the limit, and what the certified designs keep of it (nats;
@@ -145,23 +155,38 @@ What one more level gains in the limit, and what the certified designs keep of i
 | 2000 | 30; 15; 0.50 | 11; 2; 0.16 | 5; 0; 0.00 |
 | 4000 | 61; 51; 0.84 | 22; 11; 0.47 | 9; 2; 0.22 |
 | 8000 | 122; 103; 0.84 | 45; 24; 0.54 | 19; 0; 0.00 |
+| 16000 | 243; 198; 0.81 | 90; 77; 0.86 | 38; 9; 0.23 |
 <!-- /TABLE:x011_level_gain -->
+
+The same shares for each family separately at `n = 16 000` — what prediction H13 was about:
+
+<!-- TABLE:x011_h13 -->
+| `n` | family | level 3: share kept | level 4 | level 5 | level 6 |
+|---|---|---|---|---|---|
+| 16000 | theory | 0.81 | 0.37 | 0.20 | 0.00* |
+| 16000 | wide | 0.81 | 0.86 | 0.23* | — |
+<!-- /TABLE:x011_h13 -->
 
 Reading.  (i) At `n = 1000` no nested run is certified below the base bracket it would
 replace: the certified cost of two levels is the best there is.  (ii) **Where the asymptotic
 gain goes.**  The overhead of the best design over `n·c_k` grows with every level: by 7 to
-21 nats per level at `n = 4000` and `8000`.  A third level gains 61 and 122 nats in the limit
-there and keeps `0.84` of it; a fourth gains 22 and 45 and keeps about half; a fifth gains 9
-and 19 — as much as a level adds — and keeps `0.22` at `n = 4000` and nothing at `8000` (where
-the search of the wider family did not finish, so "nothing" is a statement about the
-designs found).  The reason is arithmetic: `τ_k − h` falls like `1/k²` (your Theorem 11.53b),
-so the gain of level `k + 1` in the limit falls like `n a/k³`, while what a level adds does
-not fall.  At these sizes the finite-size content of Theorem 11.58a is therefore "four
-levels, at most five".  For comparison, the proof of your Theorem Z (workstream Z, read at
-`ddc6c32`, not refereed by us) charges a level `47`–`50` times `ln n` at `u = 1`, that is 390 to
-450 nats at these sizes; the designs minimised here pay 7 to 21.  The two are different objects —
-a schedule that works for every large `n`, and a minimum over a finite family at one `n` —
-but the ratio says how much room the constants of the proof leave.  (iii) The best
+45 nats per level at `n = 4000`, `8000` and `16 000`.  A third level gains 61, 122 and 243 nats
+in the limit there and keeps four fifths of it; a fourth gains 22, 45 and 90 and keeps
+`0.47`, `0.54` and `0.86`; a fifth gains 9, 19 and 38 and keeps `0.22`, nothing and `0.23` (at the
+two larger sizes the search of the wider family did not finish, so these are statements
+about the designs found).  The reason is arithmetic: `τ_k − h` falls like `1/k²` (your
+Theorem 11.53b), so the gain of level `k + 1` in the limit falls like `n a/k³`, while what a
+level adds does not fall.  At these sizes the finite-size content of Theorem 11.58a is
+therefore "four levels, at most five".  **How much a level keeps depends on the family of
+designs as much as on the size**: at `n = 16 000` the wider family keeps `0.86` of the fourth
+level's gain and the narrower one `0.37` — we had predicted between `0.40` and `0.80` for
+both (H13) and a difference of the two bounds below `0.02` (H3), and both predictions
+failed.  The shares are properties of the designs searched, not of the algorithm.  For
+comparison, the proof of your Theorem Z (workstream Z, read at `ddc6c32`, not refereed by
+us) charges a level `47`–`50` times `ln n` at `u = 1`, that is 390 to 480 nats at these sizes;
+the designs minimised here pay 7 to 45.  The two are different objects — a schedule that
+works for every large `n`, and a minimum over a finite family at one `n` — but the ratio
+says how much room the constants of the proof leave.  (iii) The best
 certified bound is far from the lower bound and, in nats, moves away from it as `n` grows;
 the last column is the constant `c` in `excess = c·√(n ln n)`, the form of Theorem 11.58a's
 error term — of order one, where the theorem's own design has `8.6`.  A table cannot confirm
@@ -179,8 +204,10 @@ as in ENG-RES-0014: **(B)** the algorithm as built — the largest over flat and
 with the base brackets' own answers; **(A)** also the assumed placements.  Every searched
 number is the cost of one instance: a lower bound on the worst case of its design.
 
-*The design with the least certified bound on the grid of ten fractions* (the finer grid
-of §2 has slightly lower bounds); for it, cone fibres of three more slopes were run:
+*The design with the least certified bound on the grid of ten fractions, family "theory"*
+(the finer grid and the wider family of §2 have lower bounds — at `n = 16 000` and four
+levels `0.4347` against the `0.4713` of this table; the wider family has not been run on
+instances); for it, cone fibres of three more slopes were run:
 
 <!-- TABLE:x011_runs -->
 | `n` | levels | selected design: certified bound (outer fraction) | flat instance | worst outer landscape found with flat fibres | with cone fibres of slope `¼u` / `½u` / `¾u` / `u`, base brackets' own answers | (A): base brackets at an end of their promise | largest of these |
@@ -474,7 +501,9 @@ which came from other code and fewer fibres.  Stage 2 (job M-020, hypotheses H9�
 written before it) builds *both* kinds of design in one code path and runs them on the
 same instances — the flat instance; the worst outer landscape found with flat fibres and
 with cone fibres of slope `¼u`, `½u`, `u`; reading (A) — at `u = ½, 1, 2`.  This message has
-`n = 4000`; `n = 16 000` follows with the addendum.
+`n = 4000` for the three slopes and `n = 16 000` for `u = ½` and `u = 1`; at `u = 2`, `n = 16 000` only
+two of the twelve fractions of the flat-tuned design had finished, and that cell follows
+with the addendum.
 
 <!-- TABLE:x011_stage2 -->
 | `u` | `n` | design | fractions run | least certified bound (fraction) | least cost at the flat instance (fraction) | least worst instance found, (B) (fraction; the fibre that is worst there) | (A) (fraction) |
@@ -483,10 +512,18 @@ with cone fibres of slope `¼u`, `½u`, `u`; reading (A) — at `u = ½, 1, 2`. 
 | 0.5 | 4000 | three levels, by certified cost | 12 | 1.0509 (0.5) | 0.6656 (0.8) | 0.9020 (0.4; flat) | 0.9331 (0.4) |
 | 0.5 | 4000 | four levels, by certified cost | 12 | 1.0509 (0.5) | 0.6656 (0.8) | 0.9020 (0.4; flat) | 0.9331 (0.4) |
 | 0.5 | 4000 | three levels, chosen at the flat fibre | 12 | 1.0718 (0.5) | 0.6656 (0.8) | 0.8629 (0.45; flat) | 0.8647 (0.45) |
+| 0.5 | 16000 | two levels | 12 | 0.6930 (0.5) | 0.5300 (0.6) | 0.6567 (0.5; flat) | 0.6574 (0.5) |
+| 0.5 | 16000 | three levels, by certified cost | 12 | 0.5861 (0.35) | 0.4330 (0.5) | 0.5259 (0.35; cone `¼u`) | 0.5319 (0.35) |
+| 0.5 | 16000 | four levels, by certified cost | 12 | 0.5561 (0.3) | 0.4098 (0.4) | 0.5144 (0.3; cone `¼u`) | 0.5147 (0.3) |
+| 0.5 | 16000 | three levels, chosen at the flat fibre | 12 | 0.6871 (0.45) | 0.4210 (0.45) | 0.5750 (0.4; cone `u`) | 0.6106 (0.45) |
 | 1 | 4000 | two levels | 12 | 0.7262 (0.5) | 0.5592 (0.6) | 0.6829 (0.5; cone `u`) | 0.6940 (0.5) |
 | 1 | 4000 | three levels, by certified cost | 12 | 0.6214 (0.35) | 0.4611 (0.5) | 0.5676 (0.35; cone `¼u`) | 0.5714 (0.35) |
 | 1 | 4000 | four levels, by certified cost | 12 | 0.5936 (0.3) | 0.4293 (0.45) | 0.5242 (0.25; cone `½u`) | 0.5465 (0.25) |
 | 1 | 4000 | three levels, chosen at the flat fibre | 12 | 0.7261 (0.5) | 0.4530 (0.45) | 0.6249 (0.4; cone `u`) | 0.6635 (0.45) |
+| 1 | 16000 | two levels | 11 | 0.5899 (0.5) | 0.5126 (0.55) | 0.5749 (0.5; cone `¼u`) | 0.5753 (0.5) |
+| 1 | 16000 | three levels, by certified cost | 12 | 0.4782 (0.3) | 0.3980 (0.35) | 0.4556 (0.25; flat) | 0.4581 (0.25) |
+| 1 | 16000 | four levels, by certified cost | 12 | 0.4713 (0.15) | 0.3856 (0.2) | 0.4221 (0.2; flat) | 0.4221 (0.2) |
+| 1 | 16000 | three levels, chosen at the flat fibre | 12 | 0.5899 (0.5) | 0.3893 (0.3) | 0.5525 (0.45; cone `u`) | 0.5749 (0.5) |
 | 2 | 4000 | two levels | 12 | 0.6230 (0.5) | 0.5420 (0.55) | 0.6008 (0.5; cone `½u`) | 0.6067 (0.5) |
 | 2 | 4000 | three levels, by certified cost | 12 | 0.5308 (0.25) | 0.4324 (0.35) | 0.4919 (0.25; flat) | 0.4919 (0.25) |
 | 2 | 4000 | four levels, by certified cost | 12 | 0.5257 (0.2) | 0.4277 (0.2) | 0.4660 (0.25; cone `¼u`) | 0.4660 (0.25) |
@@ -494,30 +531,31 @@ with cone fibres of slope `¼u`, `½u`, `u`; reading (A) — at `u = ½, 1, 2`. 
 <!-- /TABLE:x011_stage2 -->
 
 "(B)": the largest over flat fibres and the three cone slopes, base brackets' own
-answers.  Every column is minimised over the twelve fractions separately.
+answers.  Every column is minimised over the fractions run (twelve, except eleven for
+two levels at `u = 1`, `n = 16 000`) separately.
 
 <!-- TABLE:x011_stage2_caption -->
-Units `n a` with `a = a(u)`; the size in nats: `u = 0.5`, `n = 4000`: `n a = 121`, `u = 1`, `n = 4000`: `n a = 444`, `u = 2`, `n = 4000`: `n a = 1311`.  For comparison, `u = 1`: `n a = 111` at `n = 1000`, `444` at `4000`, `1775` at `16 000`.
+Units `n a` with `a = a(u)`; the size in nats: `u = 0.5`, `n = 4000`: `n a = 121`, `u = 0.5`, `n = 16000`: `n a = 485`, `u = 1`, `n = 4000`: `n a = 444`, `u = 1`, `n = 16000`: `n a = 1775`, `u = 2`, `n = 4000`: `n a = 1311`.  For comparison, `u = 1`: `n a = 111` at `n = 1000`, `444` at `4000`, `1775` at `16 000`.
 <!-- /TABLE:x011_stage2_caption -->
 
 <!-- TABLE:x011_h9 -->
-Three levels, servers by certified cost against servers chosen at the flat fibre (least worst instance found over the fractions): `u = 0.5`, `n = 4000`: `0.9020` against `0.8629` in reading (B), `0.9331` against `0.8647` in (A); at the flat instance `0.6656` against `0.6656`; `u = 1`, `n = 4000`: `0.5676` against `0.6249` in reading (B), `0.5714` against `0.6635` in (A); at the flat instance `0.4611` against `0.4530`; `u = 2`, `n = 4000`: `0.4919` against `0.5882` in reading (B), `0.4919` against `0.5998` in (A); at the flat instance `0.4324` against `0.4223`.  H9 fails at `u = 0.5`, `n = 4000`.
+Three levels, servers by certified cost against servers chosen at the flat fibre (least worst instance found over the fractions): `u = 0.5`, `n = 4000`: `0.9020` against `0.8629` in reading (B), `0.9331` against `0.8647` in (A); at the flat instance `0.6656` against `0.6656`; `u = 0.5`, `n = 16000`: `0.5259` against `0.5750` in reading (B), `0.5319` against `0.6106` in (A); at the flat instance `0.4330` against `0.4210`; `u = 1`, `n = 4000`: `0.5676` against `0.6249` in reading (B), `0.5714` against `0.6635` in (A); at the flat instance `0.4611` against `0.4530`; `u = 1`, `n = 16000`: `0.4556` against `0.5525` in reading (B), `0.4581` against `0.5749` in (A); at the flat instance `0.3980` against `0.3893`; `u = 2`, `n = 4000`: `0.4919` against `0.5882` in reading (B), `0.4919` against `0.5998` in (A); at the flat instance `0.4324` against `0.4223`.  H9 fails at `u = 0.5`, `n = 4000`.
 <!-- /TABLE:x011_h9 -->
 
 <!-- TABLE:x011_h11 -->
-Which fibre is the worst (designs with at least one nested run; one count per design and fraction): by certified cost: flat 35, `¼u` 17, `½u` 10; chosen at the flat fibre: flat 19, `¼u` 2, `½u` 1, `u` 14.
+Which fibre is the worst (designs with at least one nested run; one count per design and fraction): by certified cost: flat 60, `¼u` 34, `½u` 16; chosen at the flat fibre: flat 28, `¼u` 2, `½u` 2, `u` 28.
 <!-- /TABLE:x011_h11 -->
 
 <!-- TABLE:x011_stage2_consistency -->
-144 designs run, 1728 searches, 5,033,664 mean runs: 0 searched costs above the certified bound of their design; 0 runs with a violated claim.
+239 designs run, 2868 searches, 7,054,884 mean runs: 0 searched costs above the certified bound of their design; 0 runs with a violated claim.
 <!-- /TABLE:x011_stage2_consistency -->
 
 Three things to take from it.
 
 1. **Replication (H10).**  At `u = 1` the flat-tuned design run by the new code gives the
    numbers of ENG-RES-0014 for the flat instance and for cone fibres of full slope to the
-   digit.  Reading (A) is lower here because stage 2 places the base brackets on cones of
-   full slope only.
+   digit, at both sizes (`0.4530`, `0.6249`; `0.3893`, `0.5525`).  Reading (A) at `n = 4000` is lower
+   here because stage 2 places the base brackets on cones of full slope only.
 2. **The answer depends on the size in nats (H9 is refuted at `u = ½`).**  At `u = 1` and
    `u = 2` servers chosen by certified cost have the smaller worst instance found.  At
    `u = ½` and this size they do not: hardly any nested run is *certified* below the base
@@ -526,13 +564,17 @@ Three things to take from it.
    certified bound that is higher.  The same happens at `u = 1`, `n = 1000` (§3, second
    table, first rows), and the two cases have the same size in nats, `n a ≈ 110`–`120`: what
    decides is not the slope but whether the problem is large enough for a nested run to
-   pay its fixed costs *with a certificate*.  Below that size a design can be better on
+   pay its fixed costs *with a certificate*.  The larger size confirms it for the slope
+   at which the rule had lost: at `u = ½`, `n = 16 000` (`n a = 485`) the design chosen by
+   certified cost is ahead, `0.5259` against `0.5750`; so the crossover lies between 121 and
+   485 nats at `u = ½` and between 111 and 444 at `u = 1` (prediction H14, which holds at
+   `u = 1` and is pending at `u = 2`).  Below that size a design can be better on
    every instance anyone has found and worse in what it guarantees; which of the two one
    wants is not a mathematical question, and the portfolio of §5 has both.
 3. **Which fibre is worst (H11 was too simple).**  For designs chosen by certified cost it
    is never the cone of full slope: flat fibres at most fractions, gentle cones at the
    others.  For the flat-tuned design it is the flat fibre or the full cone in all but
-   three cases.
+   four cases.
 
 ## 7. Three nested levels run literally, end to end **[L]** (stage B for nested runs)
 
@@ -587,8 +629,11 @@ expensive than enumerating the cube, and the bound is not approached.
   the added starting points, so every "worst instance found" here may be low by an
   amount of that order.  No statement of this message rests on a searched number being
   a maximum.
-* One slope, one accuracy, one failure probability; a fixed top level; finite design
-  families ("the best certified bound" is a minimum over those families).
+* One accuracy, one failure probability; a fixed top level; finite design families ("the
+  best certified bound" is a minimum over those families).  The designs *run* on
+  instances (§§3–6a) are those of the family "theory" on grids of ten to fourteen outer
+  fractions; the wider family, whose certified bounds are lower from `n = 8000` on, has
+  not been run.  The shares of §2 are properties of the families searched.
 * Proposition P is ours and unrefereed.
 
 ## 9. Requests (proposals; none is an authorisation)
@@ -615,5 +660,5 @@ expensive than enumerating the cube, and the bound is not approached.
 
 Artifacts: `experiments/eng/twolevel/results/x011_*.jsonl|json`, `x011f_nested1.jsonl`; costs:
 `docs/engineering/COMPUTE_LEDGER.md`, M-015 … M-021.  The tables of this message use the rows
-of sizes that were complete when it was published (`n ≤ 8000` of job M-016, `n = 4000` of job
-M-020); `--verify` keeps doing so when the result files grow.
+that were stored when it was published (`results/x011_published_rows.json`); `--verify` keeps
+doing so while the detached jobs append further rows, which go to the addendum.

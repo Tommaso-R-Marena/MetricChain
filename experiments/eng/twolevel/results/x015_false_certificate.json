@@ -1,0 +1,206 @@
+{
+ "instance": {
+  "lA": -6.835684877961858,
+  "A": 0.0010747310035597053,
+  "jump": 11.765210624888306,
+  "c": 0.7353256640555191,
+  "largest_edge": 11.765210624888304,
+  "spike_share": 0.9998636362091428,
+  "V_by_weight": {
+   "9": 1.2043382724145702e-07,
+   "10": 2.2185401324322226e-06,
+   "11": 0.2855179009482031,
+   "12": 0.9752830924051199
+  },
+  "tu_violation": 174737.13204596515,
+  "tu_violation_at_weight": 10,
+  "tu_violation_at_tau": 73456.61231784172,
+  "condition_c": {
+   "kc": 11.765210624888306,
+   "bound": 2.0
+  }
+ },
+ "parameters": {
+  "m": 12,
+  "k": 16,
+  "u": 1.0,
+  "J": 4.0,
+  "tau": 10.5
+ },
+ "rows": [
+  {
+   "outer_slope": 1.0,
+   "x_out": 4.372621125259244,
+   "K": 225,
+   "J": 66,
+   "m_max": 15,
+   "r_dag": 4,
+   "runs": 120,
+   "closed": 120,
+   "invalid": 120,
+   "upper_below_A": 120,
+   "lower_above_A": 0,
+   "aborted": 0,
+   "bad_sampling_certificates": 0,
+   "too_wide": 0,
+   "seconds": 0.8757069110870361,
+   "factor_A_over_upper": {
+    "median": 111.13218138410437,
+    "min": 111.13218138410437,
+    "max": 111.13218138410437
+   },
+   "outer_points": {
+    "median": 900.0,
+    "min": 900,
+    "max": 900
+   },
+   "queries_median": 3426.0,
+   "outer_cube": 4096,
+   "design": "lam=1, eta=1/2, eta'=1, b=1, theta=20",
+   "tail_function": "assumed class (slope u on every site)"
+  },
+  {
+   "outer_slope": 11.765210624888304,
+   "x_out": 4.372621124895957,
+   "K": 264,
+   "J": 324,
+   "m_max": 28,
+   "r_dag": -1,
+   "runs": 24,
+   "closed": 24,
+   "invalid": 0,
+   "upper_below_A": 0,
+   "lower_above_A": 0,
+   "aborted": 0,
+   "bad_sampling_certificates": 0,
+   "too_wide": 0,
+   "seconds": 36.8626606464386,
+   "factor_A_over_upper": null,
+   "outer_points": {
+    "median": 4325376.0,
+    "min": 4325376,
+    "max": 4325376
+   },
+   "queries_median": 8801740.0,
+   "outer_cube": 4096,
+   "design": "lam=1, eta=1/2, eta'=1, b=1, theta=20",
+   "tail_function": "true class of V (slope k c on the outer sites)"
+  },
+  {
+   "outer_slope": 1.0,
+   "x_out": 3.3179509803394236,
+   "K": 230,
+   "J": 66,
+   "m_max": 21,
+   "r_dag": 1,
+   "runs": 120,
+   "closed": 120,
+   "invalid": 120,
+   "upper_below_A": 120,
+   "lower_above_A": 0,
+   "aborted": 0,
+   "bad_sampling_certificates": 0,
+   "too_wide": 0,
+   "seconds": 0.6263217926025391,
+   "factor_A_over_upper": {
+    "median": 111.13218138410437,
+    "min": 111.13218138410437,
+    "max": 111.13218138410437
+   },
+   "outer_points": {
+    "median": 920.0,
+    "min": 920,
+    "max": 920
+   },
+   "queries_median": 3500.0,
+   "outer_cube": 4096,
+   "design": "lam=1, eta=1/2, eta'=1, b=1, theta=1",
+   "tail_function": "assumed class (slope u on every site)"
+  },
+  {
+   "outer_slope": 11.765210624888304,
+   "x_out": 3.3179509792964157,
+   "K": 264,
+   "J": 324,
+   "m_max": 28,
+   "r_dag": -1,
+   "runs": 24,
+   "closed": 24,
+   "invalid": 0,
+   "upper_below_A": 0,
+   "lower_above_A": 0,
+   "aborted": 0,
+   "bad_sampling_certificates": 0,
+   "too_wide": 0,
+   "seconds": 34.86482048034668,
+   "factor_A_over_upper": null,
+   "outer_points": {
+    "median": 4325376.0,
+    "min": 4325376,
+    "max": 4325376
+   },
+   "queries_median": 8801740.0,
+   "outer_cube": 4096,
+   "design": "lam=1, eta=1/2, eta'=1, b=1, theta=1",
+   "tail_function": "true class of V (slope k c on the outer sites)"
+  },
+  {
+   "outer_slope": 1.0,
+   "x_out": 1.6779990279992278,
+   "K": 815,
+   "J": 130,
+   "m_max": 24,
+   "r_dag": 0,
+   "runs": 120,
+   "closed": 120,
+   "invalid": 120,
+   "upper_below_A": 120,
+   "lower_above_A": 0,
+   "aborted": 0,
+   "bad_sampling_certificates": 0,
+   "too_wide": 0,
+   "seconds": 0.9115426540374756,
+   "factor_A_over_upper": {
+    "median": 185.1770255357673,
+    "min": 112.3155434618321,
+    "max": 185.1770255357673
+   },
+   "outer_points": {
+    "median": 1630.0,
+    "min": 1630,
+    "max": 1630
+   },
+   "queries_median": 7014.5,
+   "outer_cube": 4096,
+   "design": "lam=1/2, eta=eta'=theta=1/4, b=1/2",
+   "tail_function": "assumed class (slope u on every site)"
+  },
+  {
+   "outer_slope": 11.765210624888304,
+   "x_out": 1.677999022622604,
+   "K": 941,
+   "J": 647,
+   "m_max": 40,
+   "r_dag": -1,
+   "runs": 24,
+   "closed": 24,
+   "invalid": 0,
+   "upper_below_A": 0,
+   "lower_above_A": 0,
+   "aborted": 0,
+   "bad_sampling_certificates": 0,
+   "too_wide": 0,
+   "seconds": 72.09863901138306,
+   "factor_A_over_upper": null,
+   "outer_points": {
+    "median": 7708672.0,
+    "min": 7708672,
+    "max": 7708672
+   },
+   "queries_median": 15892823.5,
+   "outer_cube": 4096,
+   "design": "lam=1/2, eta=eta'=theta=1/4, b=1/2",
+   "tail_function": "true class of V (slope k c on the outer sites)"
+  }
+ ]
+}
