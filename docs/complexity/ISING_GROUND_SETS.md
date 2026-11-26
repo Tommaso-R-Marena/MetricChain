@@ -212,3 +212,41 @@ way (ℓ1-rigidity of a subset of the hypercube, with the given embedding)?
 | `table_k5.py` | 150 orbits for `K = 5` (log: `table_k5.log`) | 17 s |
 | `span_rule.py` | Proposition 5 and Corollary 7 on all orbits for `K = 4, 5`; shows that the converse of Proposition 5 fails | seconds |
 | `test_theory.py` | Theorem 2 (full system against reduced system), the `K = 4` rule on random instances with `n ≤ 9`, Proposition 5, Corollary 7, the Sidon criterion | 30 s |
+
+## 9. Addendum: sums of squares and question E-C2 (ENSEMBLE-MSG-0004 §4)
+
+"Is there a known lower bound on the sum-of-squares degree needed to certify that given sign vectors are
+exactly the ground states of a given four-body energy?"
+
+**Proposition 11 (interpolation bound) [P].**  Let `E ≥ 0` on the cube `{±1}^n` be a sum of squares of
+polynomials of degree at most `d'` (modulo `x_i² = 1`), and let `Z` be its zero set.  Then every summand
+vanishes on `Z`, so (a) `Z` is the common zero set, on the cube, of polynomials of degree at most `d'`; and
+(b) if `E` is not identically zero, some non-zero multilinear polynomial of degree at most `d'` vanishes on
+`Z`; in particular `|Z| < D_{d'} = Σ_{j ≤ d'} C(n,j)` whenever the points of `Z` are in general position for
+degree `d'` (the evaluations of the monomials of degree at most `d'` at the points of `Z` have rank
+`min(|Z|, D_{d'})`).  Conversely, for a set `V` that is the common zero set of the polynomials of degree at
+most `d'` vanishing on it, the sum of the squares of a basis of these polynomials is an energy of order at
+most `2d'` with a certificate of degree `2d'` and ground-state set exactly `V`.
+
+*Proof.*  `0 = E(v) = Σ_i s_i(v)²` at every `v ∈ Z`.  ∎
+
+So for `K` conformers in general position, certifying a non-zero energy that vanishes on them needs
+sum-of-squares degree at least `2d'` with `D_{d'} > K`: degree 4 up to `K ≈ n²/2` (the range of the natural
+certificate), **at least 6 beyond `n²/2`, at least 8 beyond `n³/6`**.  This is a gap that grows with `K`, but in
+the range `K = O(n³)` of the Ensemble division's table only up to degree 8; it does not show that degree 6 or
+8 suffices — the natural certificate of degree `2d'` is an energy of order `2d'`, not a four-body energy, and
+whether a *four-body* energy exposing `K > n²/2` random conformers has a certificate of degree 6 we do not
+know.
+
+**Known bounds [K; from search snippets and memory, sources not read].**  Worst case over polynomials:
+Laurent (2003) — for `n` odd, level `⌊n/2⌋` of the Lasserre hierarchy is not exact for the cut polytope of the
+complete graph (a pair energy: `(Σx_i)² ≥ 1`), and Fawzi–Saunderson–Parrilo (2016) that level `⌈n/2⌉` always
+suffices for quadratics; Sakaue–Takeda–Kim–Ito (2017) — level `⌈(n+2d−1)/2⌉` suffices for polynomials of
+degree `2d` on the cube; Kurpisz–Leppänen–Mastrolilli (arXiv:1605.03019) — that level is necessary for some
+polynomial of degree `2d` when `n` is odd.  So for four-body energies the worst-case degree is `(n+3)/2`
+levels: a gap linear in `n` exists, for specific energies whose ground-state sets we have not examined (the
+pair example has exponentially many ground states).  Average case: degree `Ω(n)` is needed to certify the
+ground energy of random sparse 3- or 4-body parity energies (Grigoriev 2001; Schoenebeck 2008), with
+degree–density trade-offs for all constraint densities (Kothari–Mori–O'Donnell–Witmer 2017); these concern
+the value of the ground energy, not the ground-state set, and energies with far fewer terms than `n²`.
+
