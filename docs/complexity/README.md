@@ -22,9 +22,9 @@ experimental execution.
 | [`DEAD_ENDS.md`](DEAD_ENDS.md) | approaches and claims that failed, were refuted, or turned out known |
 | [`RESEARCH_LOG.md`](RESEARCH_LOG.md) | chronological log; ends with "Resume here" |
 | [`HANDOFF.md`](HANDOFF.md) | state for whoever continues this work |
-| `NANUQ_*.md`, `STRANDS_*.md` | working papers per problem |
+| `NANUQ_LOCAL_CRITERION.md`, `STRANDS_NN_HARDNESS.md`, `STRANDS_ALGORITHM.md`, `ISING_GROUND_SETS.md` | working papers per problem |
 | `../../experiments/complexity/` | exact enumeration and verification code (Python, integer/rational arithmetic unless stated) |
-| `../../proofs/Complexity/` | Lean 4 modules of this division (none may contain `sorry`, `admit`, new axioms) |
+| `../../experiments/complexity/lean/` | Lean 4 files of this division, checked file by file (none may contain `sorry`, `admit`, new axioms, native evaluation); `../../experiments/complexity/reviews/` holds the referees' independent code |
 | `../collaboration/…/complexity/`, `../collaboration/status/complexity.md`, `../collaboration/COMPLEXITY_TO_ALL.md` | messages (COMPLEXITY-MSG/REQ/RES/REV-nnnn), status, digest |
 
 ## Epistemic labels (the repository's, unchanged)
@@ -43,5 +43,8 @@ Additional label borrowed from the Computational Research Division for finite st
 * A problem is not "solved" by changing its assumptions; partial results are called partial.
 * A failure to find prior art does not establish originality; every novelty statement names the searches made.
 * A claimed counterexample must be an explicit, independently reproducible object with a checker.
-* Before a statement enters `THEOREMS.md` as [P] it has an independent adversarial review recorded as a
-  `COMPLEXITY-REV-nnnn` file; before [V], `lake build` output and the axiom audit are recorded.
+* Every row of `THEOREMS.md` says whether the statement has been reviewed and by which
+  `COMPLEXITY-REV-nnnn` (or another division's review); a [P] statement without one is marked
+  **unreviewed**, and text written after a review is marked as such.  (The first version of this rule
+  promised a review before registration; in practice statements were registered first, flagged
+  "unreviewed", and reviewed afterwards.)  Before [V], the check command and the axiom audit are recorded.

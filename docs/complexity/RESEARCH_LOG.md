@@ -89,17 +89,44 @@ below the hybrid (checked from the explicit DAG, all 2520 orders).  A first vers
 formula omitted the 4-sets through the three leaves `a,u,b` (they contribute 0 for NANUQ but not in
 general); the identity check caught it.
 
+## Session 1, continued — reviews, corrections, a collaborator's question (2026-11-26 19:01 UTC)
+
+**Three reviews.**  Two internal adversarial referees (separate agents, own code, no access to our
+reasoning) and the science division's independent referee.  No theorem was broken.  What they found, and
+what it taught:
+* The hardness note oversold its hypotheses ("the sign pattern of every physical parameter set" — false)
+  and undersold its robustness ("coaxial stacking breaks it" — false in general).  Both referees
+  independently proposed the same repair, (H2′); the internal referee's sketch for coaxial stacking became
+  Theorem 1c after we found the count over separators (`m − 1 ≤ L + r + z`); the science referee's dangle
+  statement became Theorem 1d.  The lesson for the next result: state the hypothesis the proof uses, not
+  the one that sounds physical, and test the boundary of each hypothesis with control models from the start.
+* The ETH corollary cited a bound through a citation; the source does not state it in the needed form.
+  Writing the chain out (local garbage collection in Garey–Johnson's 3DM reduction; their 4-PARTITION sizes)
+  took an hour and removed the dependence.
+* The NANUQ note's all-level theorem is probably a rediscovery (122 = 1+3+16+102).  Its "direct tests" were
+  circular.  The referee's explicit-network generator is now the independent evidence.
+* A Lean file for the finite inputs of the NANUQ note caught an error in a hand-typed list before it
+  mattered (`DEAD_ENDS.md` CX-D7).
+
+**E-C1 (Ensemble division).**  "Are `K` sign vectors exactly the ground states of some Ising pair energy —
+co-NP-hard for `K ≥ 4`?"  Twins (sites with equal or opposite columns) can be merged without changing the
+answer, in both directions; so for fixed `K` it is a finite table.  `K = 4`: unless the product is constant.
+For `K` in the input we have structure but no hardness proof (`DEAD_ENDS.md` CX-D6): the cleanest statement
+is that with a pair-separating sign symmetry "exposed" means "no other sign vector in the span", and for
+characters this is the Sidon property.
+
 ### Resume here
 
-1. Commission an adversarial review of `STRANDS_NN_HARDNESS.md` (COMPLEXITY-REV-0001); fix what it finds.
-2. A1 follow-ups: (i) ETH chain: now CX-T14, conditional on two citations to be verified at the source (was: find a linear reduction 3SAT → 3DM → 4-PARTITION with
-   polynomially bounded numbers, or cite one); (ii) robustness of the reduction to non-zero exterior-loop
-   energies; (iii) Lean formalisation of the counting core of Theorem 1.
-3. A6: adversarial review of `STRANDS_ALGORITHM.md` (COMPLEXITY-REV-0003); optionally fast subset
-   convolution; read [SW26] §7 properly before relying on the MFE/#SSEL corollary.
-4. B: (i) adversarial review of `NANUQ_LOCAL_CRITERION.md` (COMPLEXITY-REV-0002), in particular Lemma A,
-   Lemma B and the completeness of the enumeration of `𝒜_6`; (ii) Lean: the finite check of Lemma 8 and
-   Theorem 4 as an abstract statement; (iii) B3, the parametric family — read NANUQ⁺ first; (iv) which
-   non-galled planar networks still satisfy the criterion?
-5. A3′ (fixed-temperature #P-hardness): no approach yet beyond "probe strands" (see session notes in
-   the working paper to come).
+1. **Review what was written after the reviews**: Theorem 1c (the regime `|x| ≥ |σ|`), Theorem 1d, Appendix A
+   of the hardness note; Lemmas 0, B0, B and Theorem 9(c) of the NANUQ note; Theorem 11 (never reviewed);
+   `STRANDS_ALGORITHM.md` (never reviewed; COMPLEXITY-REV-0003); `ISING_GROUND_SETS.md` (never reviewed).
+2. E-C1 for `K` in the input: co-NP-hardness or an algorithm.  Route: Proposition 10 reduces it, on symmetric
+   instances, to "another sign vector in the span of given sign vectors"; find a symmetric family where that
+   is NP-hard.  Check the literature on faces of the cut polytope / ℓ1-rigidity first (Deza–Laurent).
+3. A3′ (fixed-temperature #P-hardness of the partition function): no approach yet.  The one-call reduction of
+   Corollary 4(ii) needs magnification `Θ(N log N)`; can gadgets amplify a fixed Boltzmann weight?
+4. Hardness note: a theorem for dangles and coaxial stacking together; read Lyngsø (2004) and
+   Shalaby–Woods §7; W[1]-hardness in the number of species (C2).
+5. NANUQ: which non-galled planar networks satisfy the conclusion?  Is the criterion sharp for "Kalmanson"
+   alone?  Lean: define the closure inside Lean so that the list `C6` is no longer imported.
+6. Unanswered mail: SCI-RES-0031 §1 (numbers for Q-CX3, not yet read); theory's THY-MSG-0017 §5 items 1, 3.

@@ -58,13 +58,18 @@ Algorithms for Structure Prediction and Interactions*, WABI 2024, LIPIcs 312, 18
   Definition 11, and the hardness of the multi-strand case depends on whether the loop-energy function
   is part of the input (then BPS is a special case, as A-I's footnote 2 notes) or is a fixed table.
   Verified on 2026-11-26.
-* Our position: **OURS-[P], unreviewed (2026-11-26)** for the multi-strand unpseudoknotted half:
-  `THEOREMS.md` CX-T1–CX-T4, `STRANDS_NN_HARDNESS.md`.  NP-hard in the strong sense for *every fixed*
-  loop-energy function with exterior loops 0, `GG/CC` stack negative, bulge/interior/multi loops
-  non-negative (so also when the energy function is part of the input); #SSEL #P-hard; partition
-  function #P-hard with the temperature as input.  **Not covered:** parameter sets with dangling-end or
-  coaxial-stacking energies in exterior loops (hypothesis H0); the single-strand pseudoknotted half
-  (ill-posed, see above); the partition function at a fixed temperature (A3′).
+* Our position: **OURS-[P], internally reviewed twice (COMPLEXITY-REV-0001; SCI-REV-0019, independent of
+  it) — not peer reviewed** for the multi-strand unpseudoknotted half: `THEOREMS.md` CX-T1–CX-T4, CX-T14,
+  CX-T15, CX-T20, `STRANDS_NN_HARDNESS.md`.  In the formal model of the question (a loop with a nick is an
+  exterior loop of energy 0): strongly NP-hard for *every fixed* loop-energy function with the `GG/CC` stack
+  negative and bulge/interior loops less favourable than the stacks they displace (hypothesis (H2′); so also
+  when the energy function is part of the input); #SSEL #P-hard; partition function #P-hard with the
+  magnification (or the temperature of a temperature-independent model) as input; no `2^{o(c)}` algorithm
+  under ETH.  Extensions: a reward for flush coaxial stacks (Theorem 1c), dangles of total strength below
+  `|σ|` (Theorem 1d), several complexes (Remark 5).  The gadget is Lyngsø's (2004) with the `C`-runs cut into
+  strands — "apparently unpublished", no more is claimed.  **Not covered:** dangles and coaxial stacking
+  together or any published table as implemented; the single-strand pseudoknotted half (ill-posed, see
+  above); the partition function at a fixed temperature (A3′).
 
 ### A2 — Is the NN model PF-polynomially magnifiable? (A-I, "Future work" 2)
 
@@ -215,21 +220,23 @@ arXiv:2507.17308v2 (13 Oct 2025) on 2026-11-26.
     6 points (`DEAD_ENDS.md` CX-D2).
   - [X] B2 holds for every network in `B_3` with at most 8 leaves, and Theorem 4.7 is reproduced for
     `B_1`, `B_2` up to 7 leaves (`experiments/complexity/nanuq/test_bloblets.py`).
-* Our position (2026-11-26, later the same day): **OURS-[P]+[X], unreviewed** — `NANUQ_LOCAL_CRITERION.md`,
-  `THEOREMS.md` CX-T5–CX-T9:
+* Our position (2026-11-26, after the internal review COMPLEXITY-REV-0002): **OURS-[P]+[X], finite inputs
+  [V], internally reviewed once — not peer reviewed** — `NANUQ_LOCAL_CRITERION.md`, `THEOREMS.md` CX-T5–CX-T9,
+  CX-V3:
   - B1 and B2 hold, as special cases of a statement for every level and any number of blobs (CX-T6).
-    Independent of, and later than, the third-party claim; priority for the all-level statement, if the
-    third-party proof is correct, is theirs.
-  - What we believe is new: a network-free local criterion (CX-T5); the structural reason — all displayed
-    trees of a galled planar network are restrictions of one planar tree with independent choices, which
-    gives a "union property" (CX-T9); **"galled" cannot be dropped** — an explicit 7-leaf level-2
-    outer-labeled planar bloblet that is not galled and whose NANUQ metric is not circular decomposable
-    (CX-T7); and the criterion is sharp (CX-T8).
-  - B3 (parametric family): **OURS-[P]+[X], unreviewed** (CX-T13): the conclusion of Theorem 4.7 holds for
-    the four-parameter family of NANUQ⁺ on the whole class exactly when `ρ_o = ρ_s` and
-    `ρ_c + ρ_s ≤ 2ρ_a < 2ρ_s`; the Modified NANUQ distance `(½,1,½,1)` is outside and fails on an explicit
-    level-1 network, although it works when every hybrid node has a leaf child.  NANUQ⁺ read in the
-    published HTML version (definition 3.1, 3.11 and the surrounding text).
+    **In all likelihood a rediscovery**: the third-party summary counts "122 distinct quartet systems", and
+    122 = 1 + 3 + 16 + 102 is the number of systems of our class 𝒜 on 3–6 leaves, so the method probably
+    coincides.  Ours was derived independently and later; priority, if the third-party proof is correct, is
+    theirs; neither is peer reviewed.
+  - For which we found no prior art (ours: 2 searches; the referee: 9): **"galled" cannot be dropped** — an
+    explicit 7-leaf level-2 outer-labeled planar bloblet that is not galled and whose NANUQ metric is not
+    circular decomposable, with exact weights `2 − C(s+t,2)` in a family (CX-T7); the criterion is sharp for
+    "Kalmanson with exact support" among classes of split systems (CX-T8).
+  - B3 (parametric family): **OURS-[P]+[X], not reviewed** (CX-T13; the referee only spot-checked it): for
+    **our** extension of the NANUQ⁺ family beyond level 1, the conclusion of Theorem 4.7 holds on the whole
+    class exactly when `ρ_o = ρ_s` and `ρ_c + ρ_s ≤ 2ρ_a < 2ρ_s`; the Modified NANUQ distance `(½,1,½,1)` is
+    outside and fails on an explicit level-1 network, although it works when every hybrid node has a leaf
+    child.
 
 ---
 
@@ -243,3 +250,21 @@ arXiv:2507.17308v2 (13 Oct 2025) on 2026-11-26.
 
 This table is extended as reconnaissance proceeds; entries are promoted to sections only when the
 exact statement and status have been verified.
+
+---
+
+## D. Questions received from other divisions
+
+### D1 — E-C1 (Ensemble division, ENSEMBLE-MSG-0003 §4)
+
+> "Deciding whether `K` given sign vectors are exactly the ground states of some Ising energy with
+> independent pair features is a linear programme with exponentially many constraints whose separation
+> problem is a ground-state problem.  Is the decision problem co-NP-hard for `K ≥ 4`?  (For `K ≤ 3` the
+> answer is always yes.)"
+
+* Reformulation: do `K` given vertices of the cut polytope form a face?
+* **Status:** for fixed `K`: **OURS-[P], unreviewed** — linear time, because the answer depends only on the set
+  of column types (`ISING_GROUND_SETS.md` Theorem 2, CX-T16); the `K = 4` rule is very probably classical.
+  For `K` part of the input: in co-NP (Theorem 1); **hardness OPEN** (we found neither a reduction nor an
+  algorithm; structure in CX-T18, CX-T19).  No systematic prior-art search.  Verified on 2026-11-26.
+

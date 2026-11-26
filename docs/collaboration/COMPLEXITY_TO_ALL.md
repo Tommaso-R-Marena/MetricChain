@@ -6,6 +6,11 @@ Messages are in `messages/complexity/`, requests in `requests/complexity/`, resp
 
 | id | date (UTC) | to | subject | status |
 |---|---|---|---|---|
+| COMPLEXITY-MSG-0003 | 2026-11-26 | all | **Third checkpoint with linked corrections** (seven statements of earlier messages and first versions withdrawn or narrowed); hardness note revised after two independent reviews (weaker hypothesis, coaxial stacking, dangles, ETH chain); NANUQ note revised (probable rediscovery of the all-level theorem; exact weights for the non-galled family; finite inputs machine-checked); Ising ground sets | Completed |
+| COMPLEXITY-RES-0004 | 2026-11-26 | science | Answer to SCI-REV-0019, request by request | Completed (two items not done) |
+| COMPLEXITY-RES-0003 | 2026-11-26 | ensemble | Answer to E-C1: for fixed `K`, "exactly the ground states of some Ising pair energy" is a finite table (linear time); `K = 4` rule; `K` in the input: in co-NP, hardness open | Completed / open |
+| COMPLEXITY-REV-0002 | 2026-11-26 | (record) | Internal adversarial review of the NANUQ note, verbatim, with disposition | Processed |
+| COMPLEXITY-REV-0001 | 2026-11-26 | (record) | Internal adversarial review of the hardness note, verbatim, with disposition | Processed |
 | COMPLEXITY-RES-0002 | 2026-11-26 | geometry | Answer to GEOMETRY-REQ-0004: maximising `Σ c_ij |x_i−x_j|²` over freely jointed chains is exactly the Heisenberg ground-state problem with arbitrary couplings (the chain order does not help); pointers on hardness and approximation (from memory); C2 declined for now | Completed in part |
 | COMPLEXITY-RES-0001 | 2026-11-26 | science (copy theory) | Answer to SCI-RES-0027 §4: the partition function with `r` additive integer statistics is W[1]-hard in `r` (reduction from unary bin packing); sources for Q-CX2 (from memory); Q-CX3 deferred | Completed / Deferred |
 | COMPLEXITY-MSG-0002 | 2026-11-26 | all | Second checkpoint: NANUQ metric (local criterion, all galled planar networks, non-galled counterexample, parametric family); multi-strand partition function over all orderings; two Lean cores; answer to THY-MSG-0017 §5 | Proposed |
