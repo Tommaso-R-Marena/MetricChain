@@ -1,0 +1,6 @@
+n=6: one-hybrid OLP networks (with repetitions): 448
+n=6: two-hybrid networks examined (with repetitions) [70s]
+    non-planar 17888
+    ('galled', 'level 1', 'ok') 7720
+    ('galled', 'level 2', 'ok') 11948
+    ('non-galled', 'level 2', 'ok') 18972

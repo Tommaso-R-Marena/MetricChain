@@ -1,0 +1,9 @@
+seed=404 mode=step: generated 3171, accepted (galled, OLP, LSA, distinct) 2500 in 143s
+   stats: {'ok': 2500, 'grow_failed': 671}
+   galled-criteria mismatches (Def 2.3(vi) vs articulation vs ancestor), over all generated: 0
+   failures of the theorem: 0
+   by leaves: {11: 817, 12: 840, 13: 843}
+   by #hybrids: {3: 557, 4: 515, 5: 503, 6: 435, 7: 307, 8: 183}
+   by level: {1: 101, 2: 553, 3: 688, 4: 526, 5: 327, 6: 181, 7: 102, 8: 22}
+   by #non-trivial blobs: {1: 747, 2: 988, 3: 558, 4: 169, 5: 37, 6: 1}
+   by #hybrids with non-leaf child: {0: 666, 1: 1002, 2: 602, 3: 192, 4: 31, 5: 7}

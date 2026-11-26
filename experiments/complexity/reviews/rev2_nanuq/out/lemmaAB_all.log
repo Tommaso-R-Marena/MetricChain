@@ -1,0 +1,4 @@
+networks: 72210 {'nets': 72210, 'restrictions_tested': 1422762, 'nets_all_leaf_children': 35240}
+distinct (n, split system) pairs: 21384
+Lemma B: {'tested': 4000, 'N1_valid_binary': 4000, 'N1_LSA': 4000, 'N1_galled': 4000, 'N1_OLP': 4000, 'N1_leaves_4+': 3537, 'N2_valid_binary': 4000, 'N2_LSA': 4000, 'N2_galled': 4000, 'N2_OLP': 4000, 'N2_leaves_3': 2098, 'identity_ok': 4000, 'N2_leaves_4+': 1902, 'N1_leaves_3': 304, 'N1_leaves_2': 159}
+6-leaf systems realised by generated networks: 108 | all in C_6: True | C_6 systems not realised: 0 | in A_6: 102

@@ -1,0 +1,4 @@
+n=7: 11 tree shapes
+   after 1 insertion(s): {(1, 'galled OLP'): 1206, (1, 'inserted'): 1206, (1, 'level', 1): 1206, (1, 'ok'): 1206}  [2s]
+   after 2 insertion(s): {(2, 'galled OLP'): 74314, (2, 'inserted'): 206398, (2, 'level', 1): 31760, (2, 'level', 2): 42554, (2, 'ok'): 74314}  [216s]
+failures: 0

@@ -1,0 +1,40 @@
+instances: 112 (YES 67, NO 45); energies in 0.01 kcal/mol
+
+=== rna_turner2004: GG/CC stack = -330; 210 distinct bulge/interior loops occur; min energy 30 (A-G=C-C-C=G-); negative: 0; generalised hypothesis g > sigma*iota violated by 0 loops (min of g - sigma*iota = 380)
+    with the NNDB single-nucleotide bulge rule (special C bulge, -RT ln states): negative loops: [(-108, 'C-C-C=G-G='), (-18, 'C-C=G-G-G=')]
+  exterior 0 (theorem's model)                                   NO: MFE>E_til 45 ok/ 0 bad (min gap 330) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  dangles 'all' (d2 style)                                       NO: MFE>E_til 45 ok/ 0 bad (min gap 100) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  dangles 'some'                                                 NO: MFE>E_til 45 ok/ 0 bad (min gap 120) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  coax(flush)=stack, no dangles                                  NO: MFE>E_til 45 ok/ 0 bad (min gap 50) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  coax(flush)=stack + dangles 'some'                             NO: MFE>E_til 45 ok/ 0 bad (min gap 120) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  NNDB 1-nt bulge rule | exterior 0                              NO: MFE>E_til 45 ok/ 0 bad (min gap 330) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  NNDB 1-nt bulge rule | dangles 'all'                           NO: MFE>E_til 45 ok/ 0 bad (min gap 100) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  NNDB 1-nt bulge rule | coax + dangles 'some'                   NO: MFE>E_til 45 ok/ 0 bad (min gap 120) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+
+=== rna_turner1999: GG/CC stack = -330; 210 distinct bulge/interior loops occur; min energy 30 (A-G=C-C-C=G-); negative: 0; generalised hypothesis g > sigma*iota violated by 0 loops (min of g - sigma*iota = 380)
+  exterior 0 (theorem's model)                                   NO: MFE>E_til 45 ok/ 0 bad (min gap 330) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  dangles 'all' (d2 style)                                       NO: MFE>E_til 45 ok/ 0 bad (min gap 120) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  dangles 'some'                                                 NO: MFE>E_til 45 ok/ 0 bad (min gap 120) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  coax(flush)=stack, no dangles                                  NO: MFE>E_til 45 ok/ 0 bad (min gap 50) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  coax(flush)=stack + dangles 'some'                             NO: MFE>E_til 45 ok/ 0 bad (min gap 120) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+
+=== rna_andronescu2007: GG/CC stack = -271; 210 distinct bulge/interior loops occur; min energy -4 (C-C-C=G-G-G=); negative: 1; generalised hypothesis g > sigma*iota violated by 0 loops (min of g - sigma*iota = 311)
+  exterior 0 (theorem's model)                                   NO: MFE>E_til 45 ok/ 0 bad (min gap 271) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  dangles 'all' (d2 style)                                       NO: MFE>E_til 45 ok/ 0 bad (min gap 57) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  dangles 'some'                                                 NO: MFE>E_til 45 ok/ 0 bad (min gap 57) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  coax(flush)=stack, no dangles                                  NO: MFE>E_til 45 ok/ 0 bad (min gap 40) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  coax(flush)=stack + dangles 'some'                             NO: MFE>E_til 45 ok/ 0 bad (min gap 57) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+
+=== dna_mathews2004: GG/CC stack = -180; 210 distinct bulge/interior loops occur; min energy 100 (C-C-C=G-G-G=); negative: 0; generalised hypothesis g > sigma*iota violated by 0 loops (min of g - sigma*iota = 290)
+  exterior 0 (theorem's model)                                   NO: MFE>E_til 45 ok/ 0 bad (min gap 180) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  dangles 'all' (d2 style)                                       NO: MFE>E_til 45 ok/ 0 bad (min gap 50) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  dangles 'some'                                                 NO: MFE>E_til 45 ok/ 0 bad (min gap 50) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  coax(flush)=stack, no dangles                                  NO: MFE>E_til 45 ok/ 0 bad (min gap 110) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  coax(flush)=stack + dangles 'some'                             NO: MFE>E_til 45 ok/ 0 bad (min gap 50) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+
+=== dna_mathews1999: GG/CC stack = -190; 210 distinct bulge/interior loops occur; min energy 100 (C-C-C=G-G-G=); negative: 0; generalised hypothesis g > sigma*iota violated by 0 loops (min of g - sigma*iota = 380)
+  exterior 0 (theorem's model)                                   NO: MFE>E_til 45 ok/ 0 bad (min gap 190) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  dangles 'all' (d2 style)                                       NO: MFE>E_til 45 ok/ 0 bad (min gap 80) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  dangles 'some'                                                 NO: MFE>E_til 45 ok/ 0 bad (min gap 80) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  coax(flush)=stack, no dangles                                  NO: MFE>E_til 45 ok/ 0 bad (min gap 190) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
+  coax(flush)=stack + dangles 'some'                             NO: MFE>E_til 45 ok/ 0 bad (min gap 80) | YES: MFE==E_til 67/ 0 | minima==tilings 67/ 0  
