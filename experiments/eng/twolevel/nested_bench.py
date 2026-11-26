@@ -246,6 +246,10 @@ def tasks(job: str) -> list[dict]:
     if job == "smoke":
         out.append(dict(func="certified_cell", tier="s", kwargs=dict(u=1.0, n=1000, family="theory", max_levels=3, time_limit=900)))
         out.append(dict(func="instance_cell", tier="s", kwargs=dict(u=1.0, n=1000, phi=0.5, family="theory", nested_levels=2, budget=150, budget_general=80)))
+    elif job == "smoke2":
+        out.append(dict(func="certified_cell", tier="s", kwargs=dict(u=1.0, n=1400, family="theory", max_levels=2, time_limit=600)))
+        out.append(dict(func="certified_cell", tier="m", kwargs=dict(u=1.0, n=2000, family="theory", max_levels=2, time_limit=600)))
+        out.append(dict(func="instance_cell", tier="m", kwargs=dict(u=1.0, n=1000, phi=0.45, family="theory", nested_levels=1, readings=["B"], budget=60, budget_general=30)))
     elif job == "certified1":
         # stage 1 of Q-01: u = 1, nine sizes, two design families, up to five nested levels
         for n in SIZES:
@@ -265,7 +269,7 @@ def tasks(job: str) -> list[dict]:
             b, bg = BUDGET_LARGE
             for phi in (0.65, 0.60, 0.55, 0.50, 0.45, 0.40):
                 out.append(dict(func="instance_cell", tier="l" if n <= 32000 else "xl",
-                                kwargs=dict(u=1.0, n=n, phi=phi, family="theory", nested_levels=1, readings=("B", "A"), budget=b, budget_general=bg)))
+                                kwargs=dict(u=1.0, n=n, phi=phi, family="theory", nested_levels=1, readings=["B", "A"], budget=b, budget_general=bg)))
     else:
         raise ValueError(job)
     for t_ in out:
