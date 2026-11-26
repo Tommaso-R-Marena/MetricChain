@@ -430,6 +430,99 @@ def _scale(s: float) -> str:
     return "1" if s == 1 else "1/" + str(round(1 / s))
 
 
+def x010_blocks() -> dict[str, str]:
+    """X-010 (three levels), X-005b (instances that are not products), the recheck of the classification rule."""
+    blocks: dict[str, str] = {}
+    fp = RESULTS / "x010_three_levels_flat.json"
+    if fp.exists():
+        d = json.loads(fp.read_text())
+        rows = d["rows"]
+        lines = ["| `n` | `φ₁` | two levels: here (referee) | three levels: here (referee) | `C_max` of three levels with flat middle costs: here (referee) | rungs served by the middle level: here (referee) | width of the returned bracket |",
+                 "|---|---|---|---|---|---|---|"]
+        same = tot = 0
+        for r in sorted(rows, key=lambda r: (r["n"], r["phi"])):
+            ref = r["referee"]
+            mine = (round(r["two"], 4), round(r["three"], 4), round(r["cmax3"], 4))
+            same += sum(abs(m - t) < 5e-5 for m, t in zip(mine, ref[:3])) + int(r["served"] == ref[3])
+            tot += 4
+            lines.append(f"| {r['n']} | {r['phi']:.2f} | {r['two']:.4f} ({ref[0]:.4f}) | {r['three']:.4f} ({ref[1]:.4f}) | {r['cmax3']:.4f} ({ref[2]:.4f}) | {r['served']} ({ref[3]}) | {r['width']:.3f} |")
+        blocks["three_flat"] = "\n".join(lines)
+        blocks["three_flat_summary"] = (f"{same} of {tot} published numbers of the referee's three-level table (`u = 1`; {len(rows)} rows: two levels, three levels, "
+                                        f"the cost bound, the number of rungs served by the middle level) are reproduced to the digit given; "
+                                        f"the longest row takes {max(r['seconds'] for r in rows):.0f} s here.")
+    wp = RESULTS / "x010_three_levels.jsonl"
+    rows = [json.loads(line) for line in wp.read_text().splitlines() if line.strip()] if wp.exists() else []
+    if rows:
+        lines = ["| `n` | `φ₁` | two levels: flat | two levels: worst found | three levels: flat | three levels: worst outer landscape, flat fibres (**lower bound**) | "
+                 "three levels: worst outer landscape, middle level at its cost bound (**upper bound**, two inner behaviours) | certified `C_max` of three levels | hinted lower bound |",
+                 "|---|---|---|---|---|---|---|---|---|"]
+        for r in sorted(rows, key=lambda r: (r["n"], r["phi"])):
+            lines.append(f"| {r['n']} | {r['phi']:.2f} | {r['flat2']:.4f} | {r['worst2']:.4f} | {r['flat3']:.4f} | {r['worst3_flat_fibres']:.4f} | {r['worst3_capped_middle']:.4f} | "
+                         f"{r['cmax3_certified']:.4f} | {r['lower']:.4f} |")
+        blocks["three_worst"] = "\n".join(lines)
+        lines = ["| `n` | cells | two levels: flat (best `φ₁`) | two levels: worst (best `φ₁`) | three levels: flat (best `φ₁`) | three levels, lower bound of the worst case (best `φ₁`) | "
+                 "three levels, upper bound (best `φ₁`) | hinted lower bound |", "|---|---|---|---|---|---|---|---|"]
+        for n in sorted({r["n"] for r in rows}):
+            rs = [r for r in rows if r["n"] == n]
+
+            def best(key):
+                r = min(rs, key=lambda r: r[key])
+                return f"{r[key]:.4f} ({r['phi']:.2f})"
+            lines.append(f"| {n} | {len(rs)} | {best('flat2')} | {best('worst2')} | {best('flat3')} | {best('worst3_flat_fibres')} | {best('worst3_capped_middle')} | {rs[0]['lower']:.4f} |")
+        blocks["three_worst_best"] = "\n".join(lines)
+        nviol = sum(s["violations"] for r in rows for s in r["searches"])
+        nsearch = sum(len(r["searches"]) for r in rows)
+        neval = sum(s["n_eval"] for r in rows for s in r["searches"])
+        blocks["three_worst_summary"] = (f"{len(rows)} cells, {nsearch} searches, {neval:,} mean runs; searches in which a claim of Theorem 11.56 was violated by the outer run: {nviol}.")
+    npth = RESULTS / "x005_nonproduct_bound.json"
+    if npth.exists():
+        d = json.loads(npth.read_text())
+        lines = ["| `u` | cells | largest increase of a cell's worst cost when every fibre may sit anywhere in its trivial bracket (`ln`; in units of `n a`) | "
+                 "largest gap of that bound over the product cost at a single stored instance (`ln`; in units of `n a`) |", "|---|---|---|---|"]
+        for u in sorted(d["by_u"], key=float):
+            b = d["by_u"][u]
+            inc = b["worst_increase_at"]["increase"] if b["worst_increase_at"] else 0.0
+            lines.append(f"| {u} | {b['cells']} | `{inc:.1e}`; `{b['max_worst_increase_over_na']:.1e}` | `{b['max_gap']:.2g}`; `{b['max_gap_over_na']:.2g}` |")
+        blocks["nonproduct"] = "\n".join(lines)
+        blocks["nonproduct_summary"] = (f"{len(d['cells'])} cells of job M-008, the stored maximisers of {len(d['cells']) * 4:,} searches: with the refinement windows replaced by their "
+                                        f"union over all feasible places of a fibre, the largest increase of a cell's worst cost is "
+                                        f"`{max((b['worst_increase_at']['increase'] if b['worst_increase_at'] else 0.0) for b in d['by_u'].values()):.1e}` in the logarithm; "
+                                        f"bounds above `C_max`: {d['above_Cmax']}.")
+    rp = RESULTS / "x005_recheck_classification.json"
+    if rp.exists():
+        d = json.loads(rp.read_text())["jobs"]
+        tot = sum(j["searches"] for j in d.values())
+        blocks["recheck_classification"] = (
+            f"All {tot:,} stored maximisers of X-005 re-evaluated with the generalised evaluator: in a corner of the classification rule: "
+            f"{sum(j['in_corner'] for j in d.values())}; cost changed by the exact rule: {sum(j['changed'] for j in d.values())}; claims violated under the exact rule: "
+            f"{sum(j['violations_exact'] for j in d.values())}; the convention of the published runs reproduces the stored value in "
+            f"{sum(j['legacy_reproduces_stored'] for j in d.values()):,} of {tot:,} searches (the others are the rounding-decided ties of ENG-MSG-0003 §5, "
+            f"largest difference `{max(j['max_abs_legacy_minus_stored'] for j in d.values()):.2f}` in the logarithm).")
+    ap_ = RESULTS / "x005_anyplacement.jsonl"
+    rows = [json.loads(line) for line in ap_.read_text().splitlines() if line.strip()] if ap_.exists() else []
+    cp = RESULTS / "x005_cost.jsonl"
+    if rows and cp.exists():
+        prod = {(c["u"], c["n"], c["phi"]): max(s["best_value"] for s in c["searches"]) for c in (json.loads(line) for line in cp.read_text().splitlines())}
+        lines = ["| `u` | cells | largest excess of the placement-free bound (searched) over the worst product instance (searched), in units of `n a` | where | "
+                 "cells in which the bound exceeds the product worst by more than `0.001 n a` | smallest (most negative) difference |", "|---|---|---|---|---|---|"]
+        alld = []
+        for u in sorted({r["u"] for r in rows}):
+            ds = []
+            for r in rows:
+                if r["u"] != u:
+                    continue
+                na = r["n"] * r["a"]
+                b = max(s["best_value"] for s in r["searches"])
+                ds.append(((b - prod[(r["u"], r["n"], r["phi"])]) / na, r["n"], r["phi"]))
+            alld += ds
+            top = max(ds)
+            lines.append(f"| {u:g} | {len(ds)} | `{top[0]:+.5f}` | `n = {top[1]}`, `φ = {top[2]:.2f}` | {sum(d[0] > 1e-3 for d in ds)} | `{min(ds)[0]:+.5f}` |")
+        blocks["anyplacement"] = "\n".join(lines)
+        blocks["anyplacement_summary"] = (f"{len(rows)} cells (the sizes up to `n = {max(r['n'] for r in rows):,}`).  Searching the placement-free bound directly raises the worst case found by at most "
+                                          f"`{max(d[0] for d in alld):+.5f}` in units of `n a` (`n = {max(alld)[1]}`, `φ = {max(alld)[2]:.2f}`); in {sum(d[0] > 1e-3 for d in alld)} cells by more than `0.001`.")
+    return blocks
+
+
 def x009_blocks() -> dict[str, str]:
     """X-009: C_max of Theorem 11.56 against the non-adaptive lower bound (SCI-REV-0007 R6-E1)."""
     sp = RESULTS / "x009_separation.json"
@@ -512,6 +605,7 @@ def x006b_blocks() -> dict[str, str]:
             + f".  Chi-square tests of the Poissonisation step against the exact law, {len(d['chi_square'])} cases from `n = 12` to `n = 2⁶¹`: p-values between "
             f"{min(c['p_value'] for c in d['chi_square']):.2f} and {max(c['p_value'] for c in d['chi_square']):.2f}.")
     blocks.update(x009_blocks())
+    blocks.update(x010_blocks())
     xb, xa = RESULTS / "x006b_sampled.jsonl", RESULTS / "x006_sampled.jsonl"
     if not (xb.exists() and xa.exists()):
         return blocks

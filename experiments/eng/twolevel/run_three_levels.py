@@ -38,19 +38,61 @@ def work(task: dict) -> dict:
     return r
 
 
+OUT2 = Path(__file__).resolve().parent / "results" / "x010_two_levels_flat_fibres.jsonl"
+
+
+def work2(task: dict) -> dict:
+    return three_levels.worst_two_levels_flat_fibres(**task)
+
+
+OUT3 = Path(__file__).resolve().parent / "results" / "x010_three_levels_cone.jsonl"
+CONE_VARIANTS = tuple((slope, orc) for slope in (0.0, 0.5, 1.0) for orc in ("bottom", "top"))
+
+
+def work3(task: dict) -> dict:
+    return three_levels.worst_case_cone_fibres(**task)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, nargs="*", default=[1000, 4000])
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--two-flat", action="store_true", help="only the column 'two levels, worst outer landscape, flat fibres'")
+    ap.add_argument("--cone", action="store_true", help="three levels with cone fibres (slopes 0, u/2, u; two inner behaviours)")
     args = ap.parse_args()
     commit = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+    if args.cone:
+        done = set()
+        if OUT3.exists():
+            for line in OUT3.read_text().splitlines():
+                r = json.loads(line)
+                done.add((r["u"], r["n"], r["phi"], r["slope"], r["oracle"]))
+        todo = [dict(t, slope=sl, oracle=orc) for t in tasks(args.n) for (sl, orc) in CONE_VARIANTS if (t["u"], t["n"], t["phi"], sl, orc) not in done]
+        print(f"{len(todo)} runs to do ({len(done)} stored)", flush=True)
+        with mp.Pool(args.workers) as pool, OUT3.open("a") as fh:
+            for k, r in enumerate(pool.imap_unordered(work3, todo), 1):
+                r.update(commit=commit, job="local")
+                fh.write(json.dumps(r) + "\n")
+                fh.flush()
+                if k % 12 == 0 or k == len(todo):
+                    print(f"[{k}/{len(todo)}]", flush=True)
+        return 0
+    out, fn = (OUT2, work2) if args.two_flat else (OUT, work)
     done = set()
-    if OUT.exists():
-        for line in OUT.read_text().splitlines():
+    if out.exists():
+        for line in out.read_text().splitlines():
             r = json.loads(line)
             done.add((r["u"], r["n"], r["phi"]))
     todo = [t for t in tasks(args.n) if (t["u"], t["n"], t["phi"]) not in done]
     print(f"{len(todo)} cells to do ({len(done)} stored)", flush=True)
+    if args.two_flat:
+        with mp.Pool(args.workers) as pool, out.open("a") as fh:
+            for k, r in enumerate(pool.imap_unordered(fn, todo), 1):
+                r.update(commit=commit, job="local")
+                fh.write(json.dumps(r) + "\n")
+                fh.flush()
+                print(f"[{k}/{len(todo)}] n={r['n']} phi={r['phi']:.2f}: two levels, worst outer landscape, flat fibres {r['worst2_flat_fibres']:.4f}", flush=True)
+        return 0
     with mp.Pool(args.workers) as pool, OUT.open("a") as fh:
         for k, r in enumerate(pool.imap_unordered(work, todo), 1):
             r.update(commit=commit, job="local")

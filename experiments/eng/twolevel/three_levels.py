@@ -164,28 +164,17 @@ def rung_table(u: float, n: int, phi: float, *, lam: float = 0.2, eta: float = 0
                xs=tuple(xs), ldelta=-l_inv_delta)
     outer = tables(n_o, u)
     C = constants(P, outer)
-    est = cube_constants(u).eps_star
     rows = []
     for l in range(1, Lr + 1):
         x = xs[l]
         c0, a0, b0, k0 = k0_flat(n_i, u, x, C.l_inv_delta_p)
         row = dict(l=l, x=x, k0=(c0, a0, b0, k0), middle=None)
-        g = x / n_i
-        if not (g >= 0.9 * est or n_i < 50):
-            cands = []
-            if x >= 8:
-                bm = x / 4
-                lth = (x - bm) + math.log1p(-(3 * math.e + 1 + (2 / (1 + math.exp(u))) ** n_i * math.exp(-bm)) * math.exp(-(x - bm)))
-                p0 = min(0.7, max(0.05, g / (g + theta_hint(u, g))))
-                for p2 in (p0, min(0.8, 1.5 * p0)):
-                    if 2 * u * (n_i - int(p2 * n_i)) > bm * 1.5:
-                        cands.append(flat_run(u, n_i, p2, lam=1.0, eta=0.5, etap=1.0, ltheta=lth, b=bm, Lr=30, bounded=False, l_inv_delta=C.l_inv_delta_p))
-            else:
-                c = min(x / 12, 1 / 3)
-                cands.append(flat_run(u, n_i, 0.55, lam=c, eta=c, etap=c, theta=c, b=x / 2, Lr=30, bounded=True, l_inv_delta=C.l_inv_delta_p))
-            if cands:
-                cm = min(cands, key=lambda r: r["lcost"])
-                row["middle"] = (cm["lcost"], -cm["lL"], cm["lU"], cm["lCmax"])
+        cands = [(kw, flat_run(u, n_i, l_inv_delta=C.l_inv_delta_p, **kw)) for kw in middle_designs(u, n_i, x)]
+        if cands:
+            kw, cm = min(cands, key=lambda t: t[1]["lcost"])
+            assert cm["xout"] <= x + 1e-9
+            row["middle"] = (cm["lcost"], -cm["lL"], cm["lU"], cm["lCmax"])
+            row["design"] = kw
         rows.append(row)
     return dict(P=P, outer=outer, C=C, rows=rows, n_o=n_o, n_i=n_i)
 
@@ -237,6 +226,120 @@ def worst_case(u: float, n: int, phi: float, budget: int = 4000, budget_general:
     out["worst3_flat_fibres"] = search("three levels, flat fibres", ev3, "bottom", pos3, 0.0)
     out["worst3_capped_middle"] = max(search("three levels, middle at its cap", ev3u, orc, None, None) for orc in ("bottom", "top"))
     return out
+
+
+def middle_designs(u: float, d: int, x: float) -> list[dict]:
+    """The referee's candidates for the middle level in dimension d at accuracy x (keyword arguments of ``flat_run`` /
+    ``cone_run`` without the failure probability); empty where only K0 is tried."""
+    est = cube_constants(u).eps_star
+    g = x / d
+    if g >= 0.9 * est or d < 50:
+        return []
+    out = []
+    if x >= 8:
+        bm = x / 4
+        lth = (x - bm) + math.log1p(-(3 * math.e + 1 + (2 / (1 + math.exp(u))) ** d * math.exp(-bm)) * math.exp(-(x - bm)))
+        p0 = min(0.7, max(0.05, g / (g + theta_hint(u, g))))
+        for p2 in (p0, min(0.8, 1.5 * p0)):
+            if 2 * u * (d - int(p2 * d)) > bm * 1.5:
+                out.append(dict(phi=p2, lam=1.0, eta=0.5, etap=1.0, ltheta=lth, b=bm, Lr=30, bounded=False))
+    else:
+        c = min(x / 12, 1 / 3)
+        out.append(dict(phi=0.55, lam=c, eta=c, etap=c, theta=c, b=x / 2, Lr=30, bounded=True))
+    return out
+
+
+def cone_run(u: float, n: int, phi: float, slope: float, oracle: str, *, lam: float = 0.2, eta: float = 0.05, etap: float = 0.05,
+             theta: float = 0.05, ltheta: float | None = None, b: float = 0.5, Lr: int = 40, bounded: bool = True,
+             l_inv_delta: float = math.log(20.0)) -> dict:
+    """Algorithm 2L+ with base brackets inside, at the level of expectations, on the cone psi(z) = slope u |z| of
+    dimension n (reference point at the apex).  The cone is additive over coordinates, so it is a product instance
+    for *every* split into an outer and an inner block: the outer landscape is the cone on the outer block and every
+    fibre is the cone on the inner block.  Inner behaviour ``oracle`` ("bottom"/"top") for the base brackets.
+    Returns the cost and where the average sits in the returned bracket (alpha, beta)."""
+    from metricchain_eng.twolevel.meanrun import radial_law
+
+    n_o = min(max(int(math.floor(phi * n)), 1), n - 1)
+    n_i = n - n_o
+    x0 = 2 * u * n_i
+    xs = [x0 * (b / x0) ** (l / Lr) for l in range(Lr + 1)]
+    xs[-1] = b
+    lth = math.log(theta) if ltheta is None else ltheta
+    nu1 = max(1.0, 2 * math.exp(u) * n_o / math.exp(lth)) if bounded else 1.0
+    P = Params(n=n, n_o=n_o, u=u, lam=lam, eta=eta, etap=etap, theta=math.inf, nu1=nu1, b=b, delta=1.0, xs=tuple(xs),
+               ltheta=lth, ldelta=-l_inv_delta)
+    outer = tables(n_o, u)
+    C = constants(P, outer)
+    lC = np.array([-math.inf] + [k0_flat(n_i, u, xs[l], C.l_inv_delta_p)[0] for l in range(1, Lr + 1)])     # the cost of K0 does not depend on the fibre
+    ev = Evaluator(P, outer, lC=lC)
+    c_in = n_i * math.log((1 + math.exp(-slope * u)) / 2)
+    F = slope * u * np.arange(n_o + 1, dtype=float)
+    R = ev.run(Instance(radial_law(F, outer, shift=c_in), psi0=0.0, t0=u * n_i + c_in), oracle)
+    return dict(lcost=R.lcost, alpha=R.lA - R.lL, beta=R.lU - R.lA, lA=R.lA, width=R.lU - R.lL, xout=C.x_out, lCmax=R.lCmax, closed=R.closed,
+                violations=R.violations(), status=R.status)
+
+
+def worst_case_cone_fibres(u: float, n: int, phi: float, slope: float, oracle: str, budget: int = 4000, budget_general: int = 2000,
+                           seed: int = 1, k: int = 8) -> dict:
+    """Three levels on a real instance with adversarial fibres: psi(a, z) = F_o(a) + slope u |z|, the outer landscape
+    F_o searched (the families of X-005), every fibre the cone of slope ``slope`` u in the inner dimension.
+
+    The servers of the rungs are those chosen at the flat fibre (the design does not know the instance).  A rung
+    served by K0 costs what K0 costs and returns a bracket placed by ``oracle``; a rung served by the middle level
+    costs the mean run of that two-level design *on the cone* (``cone_run``, same ``oracle`` for its base brackets)
+    and returns the bracket that run returns.  Every value is the cost of one instance under one valid inner
+    behaviour: a lower bound on the worst case of three levels."""
+    from metricchain_eng.twolevel.adversary import Family, Search
+
+    a = cube_constants(u).a
+    T = rung_table(u, n, phi)
+    P, outer, C, rows = T["P"], T["outer"], T["C"], T["rows"]
+    n_i = P.n_i
+    lC, alphas, betas, mid_cost_flat, mid_cost_cone, bad = [-math.inf], [], [], [], [], 0
+    for r in rows:
+        x = r["x"]
+        use_mid = r["middle"] is not None and r["middle"][0] < r["k0"][0]
+        if use_mid:
+            m = cone_run(u, n_i, slope=slope, oracle=oracle, l_inv_delta=C.l_inv_delta_p, **r["design"])
+            bad += int((not m["closed"]) or bool(m["violations"]))
+            assert m["alpha"] >= -1e-9 and m["beta"] >= -1e-9 and m["alpha"] + m["beta"] <= x + 1e-9, (m, x)
+            lC.append(m["lcost"])
+            alphas.append(max(m["alpha"], 0.0))
+            betas.append(max(m["beta"], 0.0))
+            mid_cost_flat.append(r["middle"][0])
+            mid_cost_cone.append(m["lcost"])
+        else:
+            lC.append(r["k0"][0])
+            alphas.append(0.0 if oracle == "bottom" else x)
+            betas.append(x if oracle == "bottom" else 0.0)
+    ev = Evaluator(P, outer, lC=np.array(lC))
+    c_in = n_i * math.log((1 + math.exp(-slope * u)) / 2)
+    best, neval, nviol = -math.inf, 0, 0
+    for monotone, bud in ((True, budget), (False, budget_general)):
+        S = Search(Family(ev, k=k, monotone=monotone), "bottom", "cost", positions=(alphas, betas), fixed_c_in=c_in)
+        res = S.run(bud, seed=seed)
+        best, neval, nviol = max(best, res.best_value), neval + res.n_eval, nviol + len(res.violations)
+    return dict(u=u, n=n, phi=phi, slope=slope, oracle=oracle, worst3_cone_fibres=best / (n * a), n_eval=neval, outer_violations=nviol,
+                middle_runs_not_closed_or_violating=bad, served_by_middle=len(mid_cost_cone),
+                largest_middle_cost_ratio=max((c - f for c, f in zip(mid_cost_cone, mid_cost_flat)), default=0.0))
+
+
+def worst_two_levels_flat_fibres(u: float, n: int, phi: float, budget: int = 4000, budget_general: int = 2000, seed: int = 1, k: int = 8) -> dict:
+    """Two levels (every rung served by K0) on adversarial outer landscapes with **flat fibres**: the like-for-like
+    partner of "three levels, flat fibres" in ``worst_case`` -- the same instances, one level fewer."""
+    from metricchain_eng.twolevel.adversary import Family, Search
+
+    a = cube_constants(u).a
+    T = rung_table(u, n, phi)
+    P, outer, rows = T["P"], T["outer"], T["rows"]
+    ev2 = Evaluator(P, outer, lC=np.array([-math.inf] + [r["k0"][0] for r in rows]))
+    pos2 = ([r["k0"][1] for r in rows], [r["k0"][2] for r in rows])
+    best, neval = -math.inf, 0
+    for monotone, bud in ((True, budget), (False, budget_general)):
+        S = Search(Family(ev2, k=k, monotone=monotone), "bottom", "cost", positions=pos2, fixed_c_in=0.0)
+        res = S.run(bud, seed=seed)
+        best, neval = max(best, res.best_value), neval + res.n_eval
+    return dict(u=u, n=n, phi=phi, worst2_flat_fibres=best / (n * a), n_eval=neval)
 
 
 def three_level_row(u: float, n: int, phi: float) -> dict:

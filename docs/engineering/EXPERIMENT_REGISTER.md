@@ -145,6 +145,36 @@ commit that adds or last changes the files named).  Costs are in
 | Code | `experiments/eng/twolevel/separation.py`; blocks `separation_*` of `make_tables.py` |
 | Result, interpretation, limitations | ENG-RES-0013 §3 |
 
+## X-005b  Algorithm 2L⁺: instances that are not products; the classification rule rechecked; convergence at the two largest sizes
+
+| field | value |
+|---|---|
+| Scientific purpose | Three doubts about X-005, two of them raised by the Scientific Discovery Division (SCI-REV-0008 §4 (1), (2)).  (i) Its search family has one place `t₀` for all fibres: can an instance whose fibres sit at different places of their trivial brackets cost more?  (ii) Its mean runs classified sample points by a convention (`W > s e^{−b}` or `W > s`): does the exact rule of the algorithm give the same runs?  (iii) Were the searches at `n = 64 000` and `128 000`, which had the smallest budgets, converged? |
+| Source commit | engineering `f0c8375` for the generalised evaluator and the local scripts; jobs M-013 (`909751b`) and M-014 (in the rows); algorithm text as X-005 |
+| Mathematical dependencies | the classification threshold `c = max_l min(b − A_l, B_l)` and the union-of-windows bound **[P; ours; unrefereed]** (`meanrun.rung_positions`; ENG-RES-0014 §§1, 4) |
+| Execution environment | local for (i) at the stored maximisers and for (ii) (2 minutes each, single core); Modal job M-014 for (i) as a search objective; Modal job M-013 for (iii) |
+| Configuration | (i) every stored maximiser of job M-008 with `t₀` ranging over `[n_i(u − Λ₁), n_i(2u − Λ₁)]`; then the searches of M-008 for `n ≤ 16 000` with the bound as objective.  (ii) all 2 624 stored maximisers.  (iii) `n ∈ {64 000, 128 000}`, `u ∈ {½, 1, 2}`, `φ = 0.5`, seeds 2 and 3, three times the budgets of M-008 |
+| Outputs | `experiments/eng/twolevel/results/x005_nonproduct_bound.json`, `x005_anyplacement.jsonl`, `x005_recheck_classification.json`, `x005_converge2.jsonl` |
+| Validation | the generalised evaluator (Python reference and C kernel) against literal step-by-step runs for centred and off-centre brackets and in both corners of the rule; the convention of the published runs reproduces 2 615 of 2 624 stored values (the rest are the rounding-decided ties of ENG-MSG-0003 §5) |
+| Code | `src/metricchain_eng/twolevel/meanrun.py` (`rung_positions`), `meanrun_kernel.c`, `ckernel.py`, `adversary.py` (objective `cost_any_placement`); `experiments/eng/twolevel/nonproduct_bound.py`, `recheck_classification.py`, `run_search.py` (jobs `anyplacement`, `converge2`) |
+| Limitation stated up front | uniform inner behaviours "bottom" and "top"; ball level sets; expectation level.  Point-dependent inner behaviours are not covered |
+| Result, interpretation, limitations | ENG-RES-0014 §§1, 4, 5 |
+
+## X-010  Three nested levels of Algorithm 2L⁺: the flat instance and the worst outer landscape
+
+| field | value |
+|---|---|
+| Scientific purpose | THY-RES-0004 §7 (1): does the gap between the flat instance and the worst instance, found for two levels in X-005, compound when a third level is nested?  And: does an independent implementation reproduce the referee's exact three-level numbers at the flat instance (THY-MSG-0007 §3)? |
+| Source commit | engineering `f0c8375`; theory `9408e33` for the design (docstring of `experiments/reviews/R8/r8_flat3.py`, `r8_flat.py`) and the numbers to reproduce (`experiments/reviews/R8/out/flat3_a.txt`) |
+| Mathematical dependencies | Theorem 11.56 applied to itself (the middle level is Algorithm 2L⁺ with base brackets inside) **[P]**; Proposition K0 **[P]**; the extensive-regime constants of theory report §11.18 **[P]**; the positions rule of X-005b **[P; ours]** |
+| Execution environment | local: the flat table in 5 seconds; the worst-case grid in a process pool of 6 |
+| Configuration | `u = 1`; outer level `b = 0.5`, `λ = 0.2`, `η = η′ = θ = 0.05`, `δ = 0.05`, geometric ladder of 40 rungs; middle level as in the referee's script (30 rungs; two designs, for `x ≥ 8` and `x < 8`); `n ∈ {1000, 4000, 16 000}`, twelve outer fractions 0.25 … 0.80; searches over the two profile families of X-005, budgets 4 000 + 2 000 (2 500 + 1 250 at `n = 16 000`), seed 1 |
+| Outputs | `experiments/eng/twolevel/results/x010_three_levels_flat.json`, `x010_three_levels.jsonl` |
+| Validation | 48 published numbers of the referee (two levels, three levels, the cost bound, rungs served by the middle level; 12 rows) reproduced to the digit given |
+| Code | `experiments/eng/twolevel/three_levels.py`, `run_three_levels.py`; blocks `three_*` of `make_tables.py` |
+| Limitation stated up front | **no fibre landscape is searched**: fibres are flat (a lower bound on the worst case) or represented by the middle level's cost bound (not a certified bound: it is itself searched over outer landscapes); the choice of server per rung is tuned at the flat fibre; one slope; expectation level |
+| Result, interpretation, limitations | ENG-RES-0014 §§2, 3 |
+
 ## X-007  Off-lattice chain: distance entropy of profile classes, 5–14 torsions; single-flip constants against Proposition 11.74
 
 | field | value |

@@ -124,6 +124,7 @@ def tasks(job: str) -> list[dict]:
     claims    searches that maximise the slack of a claim of Theorem 11.56 instead of the cost
     converge  larger budgets and other seeds on a few cells (is the search budget the limitation?)
     converge2 the same question at the two largest sizes, phi = 0.5, all three slopes
+    anyplacement  the grid of "cost" with the placement-free upper bound as objective (instances that are not products)
     """
     out = []
     if job == "cost":
@@ -144,6 +145,14 @@ def tasks(job: str) -> list[dict]:
                 for seed in (2, 3):
                     bud = (20000, 10000) if n <= 1000 else (12000, 6000)
                     out.append(dict(u=1.0, n=n, phi=phi, budget=bud[0], budget_general=bud[1], seed=seed, objectives=("cost",)))
+    elif job == "anyplacement":
+        # X-005b: the grid and budgets of job "cost", maximising the upper bound on the evaluations of every instance
+        # with a given law of fibre averages, whatever the places of its fibres in their trivial brackets
+        # sizes up to 16 000 (360 cells, about a fifth of the core-hours of the whole grid); at the three largest sizes
+        # the bound is evaluated at the stored maximisers only (nonproduct_bound.py)
+        for t in tasks("cost"):
+            if t["n"] <= 16000:
+                out.append(dict(t, objectives=("cost_any_placement",)))
     elif job == "converge2":
         # the two largest sizes had the smallest budgets in job M-008 (SCI-REV-0008, R7-ENG-4): three times those
         # budgets and two other seeds, at the outer fraction that is best against the worst instance there
