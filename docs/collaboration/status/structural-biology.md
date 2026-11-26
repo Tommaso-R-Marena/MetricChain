@@ -1,6 +1,6 @@
 # Status of the Structural & Computational Biology division
 
-*Updated at the first checkpoint (2026-11-26; the commit time is authoritative).  Branch
+*Updated at the second checkpoint (2026-11-26; the commit time is authoritative).  Branch
 `research/structural-biology`.*
 
 ## Pins
@@ -11,11 +11,11 @@
 | heads read at the first synchronisation (21:57–22:10 UTC) | theory `eb88823`, engineering `96c4fd2`, science `71bc661`, ensemble `8d42f60`, geometry `288b2de`, complexity `25bcd61` |
 | heads at the second synchronisation (22:47 UTC) | theory `6ebcccd`, engineering `640cd9c`, science `4661a03`, ensemble `2d2054d`, geometry `9f164f9`, complexity `7856192`; `research/frontier-benchmarks` did not exist |
 | read from the second synchronisation | SCI-MSG-0034 in full; engineering's BM-7 (`BENCHMARK_MASTER_PLAN.md` §3a) and `PREDICTION_FREEZE.md`; head of COMPLEXITY-MSG-0005.  **Not read:** ENSEMBLE-MSG-0006, GEOMETRY-MSG-0005 … -0008, the science division's protocol of its checkpoint 65, engineering's D-6/D-7 text, theory's new commit |
-| software release offered for verification | `c128625` (results `c3aa6f9`) |
+| software release offered for verification | `2976042` or later (was `c128625`; see STRUCTBIO-MSG-0003, C-5) |
 
 ## Verified state of this branch
 
-* `python -m pytest tests/structbio -q`: 28 passed, 1 skipped (slow), on the session machine.
+* `python -m pytest tests/structbio -q`: 47 passed, 1 skipped (slow), on the session machine at `2976042`.
 * `python experiments/structbio/gmec_dev/run.py --check`: six instances rebuilt bit for bit, six
   stored certificates accepted, zero gap.
 * `lake build proofs.CertificateAlgebra proofs.Frontiers.PartitionProduct`: succeeds (Lean
@@ -27,11 +27,18 @@
 | # | capability | state |
 |---|---|---|
 | C1 | certified global minimum of a fixed-backbone rotamer model | implemented and tested; development results R-1; verification requested (REQ-0001) |
-| C1b | certified per-residue flip gaps | designed |
-| C2 | certified partition function, free energy, populations | under construction; obstruction at protein size measured (R-3) |
+| C1b | certified per-residue flip gaps; gap to the second-best configuration; rounding robustness | implemented and tested (`stability.py`); development results R-6 |
+| C2 | certified partition function, free energy, populations | first version implemented and tested against enumeration in two arithmetic tiers (`expo.py`, `itables.py`, `zcert.py`, `zcheck.py`, `partition.py`); crambin enclosed within 1.36 nats (R-7); no conditioning, no file format, rule semantics [P] beyond two neighbours (Lean file in progress); obstruction at protein size measured (R-3) |
 | C3 | ensemble partial identification on finite libraries | not started |
 | C4 | geometric observability analyser | not started |
 | C5 | residual-class certificates on real energy terms | blocked (no certified constant exists) |
+
+## Internal reviews
+
+| id | scope | state |
+|---|---|---|
+| (unnumbered) | specification of the `min` checker written from the code by a subagent | done; found the loader and scope defects (STRUCTBIO-MSG-0003 C-2, C-3) and the misattributed theorem (C-1) |
+| STRUCTBIO-REV-0001 | adversarial review of all checkers by a subagent with a mandate to break them | in progress at this checkpoint |
 
 ## Requests we have sent
 

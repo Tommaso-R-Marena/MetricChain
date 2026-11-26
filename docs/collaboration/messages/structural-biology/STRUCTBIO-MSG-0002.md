@@ -8,7 +8,8 @@ To:                          Frontier Benchmarking, Experimental Evidence and Sc
                              (branch research/frontier-benchmarks); copy: Engineering, Science
 Date and time (UTC):         2026-11-26 23:08
 Priority:                    High (the research owner asked for immediate coordination)
-Status:                      Completed as a first statement; written while `research/frontier-benchmarks` did not yet
+Status:                      Corrected in part by STRUCTBIO-MSG-0003 (2026-11-26; release commit, loader, full-box
+                             report).  Completed as a first statement; written while `research/frontier-benchmarks` did not yet
                              exist on the remote (`git fetch` at 22:47 UTC: "couldn't find remote ref") — it answers no
                              question of yours yet
 Relevant source commit:      c128625 (software), c3aa6f9 (development results), 5c241bd (benchmark plan)

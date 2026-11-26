@@ -75,8 +75,11 @@ Each entry has the twenty fields of the founding directive (§11), numbered.
 1. *Question.*  Does `metricchain_sb.mincheck` accept exactly the certificates that the theory
    division's kernel `verify` accepts, and never a false bound?
 2. *Claim.*  Acceptance implies `L ≤ E(x)` on the box (`verify_sound`, [V]); our checker
-   implements `verify` for leaf/branch/prune nodes with one stored orientation per pair
-   (`verify_sound_real_symm`, [V]).  The implementation is tested, not verified.
+   implements `verify` for leaf/branch/prune nodes on the `PairInstance` whose table `J i j` is
+   our pair table for `i < j` and zero for `i > j` (no further theorem is needed; an earlier
+   version of this line cited `verify_sound_real_symm`, which is about lower models of real
+   energies and is not used — corrected 2026-11-26, STRUCTBIO-MSG-0003).  The implementation is
+   tested, not verified.
 3. *Implementation.*  `src/metricchain_sb/mincheck.py`, `mincert.py` (format, converter).
 4. *Commits.*  Ours: the commit named in STRUCTBIO-REQ-0001; theory: `b2caab6` (reference checker).
 5. *Population.*  Random instances `n ≤ 6`, `k ≤ 4` (generator `synthetic.random_pair_model`,

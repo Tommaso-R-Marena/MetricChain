@@ -36,6 +36,23 @@ checker, which sets `sys.setrecursionlimit(20000)`.  *Fix:* the test lowers the 
 explicitly.  *Lesson:* a regression test must be watched failing against the defect it is
 for.
 
+**SB-DEF-05 — a loader that could read one file two ways (found 2026-11-26 by a subagent
+writing the checker's specification).**  `mincert.loads` accepted duplicate JSON keys and
+truncated non-integers through `int()`.  No unsound acceptance; an ambiguity of the trusted
+input.  *Fix (commit 263dd18):* strict parsing; metadata as opaque text.  Linked correction:
+STRUCTBIO-MSG-0003, C-2.
+
+**SB-DEF-06 — acceptance without a statement of scope (same review).**  A certificate over a
+sub-box is accepted for that sub-box; nothing reported whether the root box was the full state
+set.  *Fix (commit 263dd18):* `CheckResult.full_box`, enforced by the development driver.
+STRUCTBIO-MSG-0003, C-3.
+
+**SB-DEF-07 — a product of interval tables labelled with the wrong scope (found by the first
+test of the partition-function checker, before any result existed).**  Multiplying three
+factors pairwise, the intermediate product was given the scope of the whole bucket instead of
+the union of its two operands.  The checker crashed on the next reshape; nothing was accepted.
+*Fix (commit 2976042):* `multiply` computes the union itself.
+
 ## Approaches that do not work as hoped
 
 **SB-D-E-01 — exact elimination with first-order relaxation of weak pairs, for the partition
@@ -74,3 +91,14 @@ version of the benchmark plan, commit 5c241bd).  The development rows already sh
 **SB-D-E-05 — "treewidth at least 10" for ubiquitin's strong graph** (a draft of
 STRUCTBIO-MSG-0001, never committed).  The number is the width of a min-fill elimination
 order, an *upper* bound on the treewidth; the committed text says so.
+
+**SB-D-E-06 — a theorem cited for a purpose it does not serve** (STRUCTBIO-MSG-0001 and
+STRUCTBIO-REQ-0001, commit aec72df).  `verify_sound_real_symm` was cited, with the wrong file,
+as the justification for one stored orientation per pair table.  It is about lower models of
+real energies and is not used; `verify_sound` alone suffices.  Corrected by the linked message
+STRUCTBIO-MSG-0003 (C-1) and in the living documents; the original messages stand with a
+status pointer.
+
+**SB-D-E-07 — hypothesis H2b of the benchmark plan** ("at least 90 % of contact models up to
+60 sites certified within 600 s").  The first synthetic rows (RESULTS R-5) show abstentions at
+40 sites within 120 s.  Kept as written in the plan; expected to fail.

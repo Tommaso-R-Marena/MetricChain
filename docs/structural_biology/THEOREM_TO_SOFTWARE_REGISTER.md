@@ -60,7 +60,7 @@ has considered and set aside, using the fifteen fields of the founding directive
 12. Software: **C1**.
     - `model.py`: `PairModel`, the published instance.
     - `mincheck.py`: the independent integer checker, with the semantics of `verify` restricted to
-      leaf/branch/prune (with `verify_sound_real_symm` for one-orientation pair tables).
+      leaf/branch/prune.  (Coordinator, 2026-11-26: one-orientation pair tables are the `PairInstance` with `J j i = 0` for `j > i`, so `verify_sound` alone applies; `verify_sound_real_symm` — in `proofs/Frontiers/SymmetricPairHypothesis.lean`, about lower models of real energies — is not used.)
     - `gmec.py`: the untrusted producer.
 13. Competing methods:
     - toulbar2 and OSPREY emit no checkable proofs;
@@ -558,7 +558,7 @@ has considered and set aside, using the fifteen fields of the founding directive
 
 | link | content |
 |---|---|
-| **theorem** | `verify_sound` (CA:308): `verify c I D L = true → ∀ x, InBox D x → L ≤ I.energy x`; with `verify_sound_real_symm` for one-orientation pair tables. Label [V]; not refereed beyond R1's reading of the statements (T1 R1) |
+| **theorem** | `verify_sound` (CA:308): `verify c I D L = true → ∀ x, InBox D x → L ≤ I.energy x`; applied to the `PairInstance` with `J j i = 0` for `j > i` (one stored orientation per pair needs no further theorem). Label [V]; not refereed beyond R1's reading of the statements (T1 R1) |
 | **assumptions** | a finite product box of per-site rotamer lists; exact rational (dyadic) unary and pair tables; nodes leaf / branch / prune only; no `sum` and no `split` |
 | **representation** | `model.py` `PairModel`: integer tables in units of `2**-scale_bits`, pair tables stored for `i < j`, ragged domains inside a common alphabet. `mincert.py`: compact format `structbio-mincert/1` (leaf = messages; prune = `(site, remove, dominator)`) with exact conversion to `metricchain-cert/1`; `u`, `p`, `ℓ` are recomputed as the largest admissible values, so both formats accept exactly the same claims |
 | **implementation** | producer `gmec.py`: untrusted — Goldstein DEE, floating-point MPLP dual, ICM incumbents, depth-first branch and bound; claims `L = U − ε`. Checker `mincheck.py`: integer additions, minima and comparisons only; magnitudes ≤ `2**62` checked before arithmetic; never raises. Baseline `baselines/toulbar2.py`: same integer instance, no checkable certificate (label [H] for us) |

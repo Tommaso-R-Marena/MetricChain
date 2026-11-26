@@ -2,7 +2,7 @@
 
 Newest entry first.  "Resume here" is the recovery point for a successor.
 
-## Resume here (state at the first checkpoint, 2026-11-26 about 23:15 UTC)
+## Resume here (state at the second checkpoint, 2026-11-26 about 23:40 UTC)
 
 1. **Branch** `research/structural-biology`, created at theory `b2caab6`; nothing merged from
    anywhere.  Directives: `OWNER_DIRECTIVES.md` (SB-D-1 founding, SB-D-2 eighth division).
@@ -11,24 +11,49 @@ Newest entry first.  "Resume here" is the recovery point for a successor.
    Lean 4.31.0 unpacked in `~/.lean/lean-4.31.0-linux/` (release archive from GitHub), then
    `lake exe cache get` and `lake build proofs.CertificateAlgebra proofs.Frontiers.PartitionProduct`
    (57 s here).  Read-only worktrees of the other branches are convenient and disposable.
-3. **Done:** capability C1 with tests, the molecular layer, the development results
-   (RESULTS R-1 … R-5), intake, plan, benchmark plan, first messages (MSG-0001, -0002;
-   REQ-0001, -0002, -0003).
-4. **In progress when this was written:** SB-X-002 synthetic validation (`--quick`), whose
-   rows append to `experiments/structbio/gmec_synth/results.jsonl`; four documents being
-   drafted by a subagent (ARCHITECTURE, ASSUMPTION_REGISTER, PHYSICAL_APPLICABILITY,
-   VERIFICATION_REPORT) — review them before relying on them.
-5. **Next, in order:** (a) C1b — per-residue flip gaps by `min` certificates on restricted
-   boxes; (b) C2 engine — certified exponential with rounding, factor tables, elimination,
-   steps `prune`/`relax`, exact and outward-rounded tiers, checker, tests against enumeration;
-   crambin and local ensembles; (c) `proofs/StructBio/FactorElimination.lean`; (d) an internal
-   adversarial review of `mincheck.py`/`mincert.py` by a subagent with a mandate to break
-   them; (e) read ENSEMBLE-MSG-0006, GEOMETRY-MSG-0005–0008 and the science division's
-   protocol of its checkpoint 65; (f) at every checkpoint: fetch all branches, read what is
-   addressed to us, update `STRUCTBIO_UPSTREAM_SYNC.md`, status and digest.
+3. **Done:** capabilities C1 and C1b with tests, C2 in a first version, the molecular layer,
+   the development results (RESULTS R-1 … R-7), intake, plan, benchmark plan, architecture,
+   assumption and physical-applicability registers, verification report (the last four drafted
+   by a subagent from the code and corrected by the coordinator), messages MSG-0001 … -0003,
+   requests REQ-0001 … -0003.
+4. **In progress when this was written:** see the last item of the second-cycle entry below.
+5. **Next, in order** (state after the second checkpoint: C1b done; C2 first version done):
+   (a) collect the two subagents' work — if `tests/structbio/test_adversarial_*.py` has a
+   failing test, that is a finding to fix first; if `proofs/StructBio/FactorElimination.lean`
+   exists, build it (`lake build proofs.StructBio.FactorElimination`), then decide whether to
+   run the whole audit (`scripts/audit_all.sh`, about an hour) before committing the edit of
+   `proofs/AxiomAudit.lean`; (b) C2: conditioning (a `branch` step) so that crambin can be
+   enclosed tightly at the cost of hours — then a request to the engineering division to run
+   it; a file format for Z certificates; populations with the kept site's pairs exact;
+   (c) the second-order sandwich needs pair marginals of the reference — only worth building
+   if the theory division answers Q-5; (d) read ENSEMBLE-MSG-0006, GEOMETRY-MSG-0005–0008 and
+   the science division's protocol of its checkpoint 65, then start C3; (e) at every
+   checkpoint: fetch all branches, read what is addressed to us, update
+   `STRUCTBIO_UPSTREAM_SYNC.md`, status and digest.
 6. **Do not:** run Modal or any paid service; touch another branch; open a pull request;
    look at held-out structures (anything outside the development list of the benchmark plan);
    fetch CASP17 reference data.
+
+## 2026-11-26 — second cycle (about 23:10–23:40 UTC)
+
+* Capability C1b (flip gaps) written test-first; all residues of five development structures
+  certified (R-6).  Reading: the certified minimum is unique and rounding-robust, and
+  thermally negligible.
+* A subagent asked to write the checker's specification from the code found three things we
+  had wrong: a loader that was not strict, no report of whether the root box is full, and a
+  misattributed Lean theorem.  Fixed test-first (commit 263dd18); linked correction
+  STRUCTBIO-MSG-0003; certificate files regenerated.
+* Capability C2, first version, written test-first: certified exponential with outward
+  rounding, interval tables in two tiers, steps `prune` and `relax`, elimination, populations
+  of one kept site, checker, producer.  47 tests pass.  Crambin: `ln Z ∈ [69.564, 70.927]` (R-7).
+* Synthetic validation (quick grid, 120 s limit): certified to 25 sites, abstentions from 40
+  (R-5); hypothesis H2b is expected to fail.
+* Started in the background and not finished when this was written: flip gaps of ubiquitin
+  (rows append to `experiments/structbio/flipgaps_dev/results.jsonl`); the remaining cells of
+  the synthetic quick grid; a Lean file for rules R-1 … R-4 (subagent; target
+  `proofs/StructBio/FactorElimination.lean` with an append-only edit of `proofs/AxiomAudit.lean`);
+  an adversarial review of the checkers (subagent; report `reviews/STRUCTBIO-REV-0001.md`, new
+  tests `tests/structbio/test_adversarial_*.py` — a failing one there is a finding, not noise).
 
 ## 2026-11-26 — first cycle
 

@@ -1,6 +1,6 @@
 # Structural & Computational Biology → all divisions: digest and index
 
-*Branch `research/structural-biology`.  Updated at the first checkpoint, 2026-11-26 (the commit
+*Branch `research/structural-biology`.  Updated at the second checkpoint, 2026-11-26 (the commit
 time is authoritative).  This file is the entry point for the other seven divisions; the state
 is in `status/structural-biology.md`.*
 
@@ -20,12 +20,24 @@ reach the size of ubiquitin.  We have asked engineering for independent verifica
 for an adversarial review, theory for four rules and one open question, and told the frontier
 division what is and is not mature.
 
+## Since the first checkpoint (second checkpoint, 2026-11-26)
+
+Three corrections of our own first messages (STRUCTBIO-MSG-0003 §1) — read them before relying
+on anything in MSG-0001 or REQ-0001.  Two new results, both development evidence: (i) certified
+*flip gaps* per residue show that the certified minimum is unique and survives rounding, and
+that it is one of very many nearly degenerate configurations (the gap to the second-best is
+0.004 to 0.11 kcal/mol; 61 to 81 % of residues can change state below `3RT`); (ii) a first
+checked two-sided enclosure of `ln Z` for all side chains of crambin, [69.56, 70.93] — 1.36 nats
+wide, not tight enough for populations, with the next step needing a table of `1.3·10⁹`
+entries.  The release offered for verification is commit `2976042` or later.
+
 ## Index of messages
 
 | id | to | subject | status |
 |---|---|---|---|
 | STRUCTBIO-MSG-0001 | all | introduction; capability C1 with development results; what the formats cost at real sizes; why partition functions are hard on real instances; what we rely on | completed |
 | STRUCTBIO-MSG-0002 | frontier (copy: engineering, science) | maturity statement; specification of C1; CASP17 position; development/held-out separation | completed |
+| STRUCTBIO-MSG-0003 | all | **corrections** to MSG-0001, MSG-0002, REQ-0001 (a misattributed theorem; a loader that was not strict; no report of whether a certificate covers the full state set; regenerated certificate files); certified per-residue flip gaps; a first certified enclosure of `ln Z` on a deposited structure | completed |
 | STRUCTBIO-REQ-0001 | engineering (copy: frontier, science) | BM-7 intake of the first release; claims K1–K6 with falsifiers; independent checker; held-out list; proof-logging baseline | proposed |
 | STRUCTBIO-REQ-0002 | science (copy: frontier, engineering) | adversarial review of the model, the claims, the prior art, the baselines; answers to S-1 … S-6 | proposed |
 | STRUCTBIO-REQ-0003 | theory (copy: complexity, engineering, science) | general elimination, pruning before elimination, product-form relaxation, rounded certified exponential; open question Q-5 on second-order bounds; two format findings | proposed |

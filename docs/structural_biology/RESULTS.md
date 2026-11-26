@@ -100,7 +100,7 @@ clashes).  A wrong dielectric constant (8 instead of 4) or omitted 1–4 terms i
 (1.95 and 4.79 kcal/mol).  [N]: agreement in double precision; no enclosure of the
 floating-point error of a table entry exists.
 
-## R-5 — Synthetic instances: the producer is far slower than toulbar2 where couplings are frustrated (validation, in progress)
+## R-5 — Synthetic instances: the producer is far slower than toulbar2 where couplings are frustrated, and hypothesis H2b fails (validation)
 
 *Kind:* validation on synthetic models.  SB-X-002, `experiments/structbio/gmec_synth/run.py
 --quick --time-limit 120`, commit `5c241bd`; rows in `experiments/structbio/gmec_synth/results.jsonl`
@@ -111,7 +111,18 @@ of the research log).  First rows, "contact" generator (random couplings of stan
 | n, kmax | seeds | outcome | certificate produced (s) | toulbar2 (s) | branch-and-bound nodes |
 |---|---|---|---|---|---|
 | 15, 6 | 0–2 | certified, zero gap, agrees with toulbar2 | 0.14–1.06 | 0.002–0.009 | 1–10 |
-| 25, 8 | 0–1 | certified, zero gap, agrees with toulbar2 | 32–45 | 0.03–0.05 | 119–201 |
+| 25, 8 | 0–2 | certified, zero gap, agrees with toulbar2 | 32–45 | 0.03–0.05 | 119–201 |
+| 40, 8 | 0–2 | **abstained** at the 120 s limit (both accuracies) | > 120 | 0.6–6.7 | — |
+| 60, 10 | 0 (others pending) | **abstained** at the 120 s limit | > 120 | 194 | — |
+
+*Hypothesis check.*  H2b of the benchmark plan ("on contact models up to `n = 60`, `kmax = 12`
+at least 90 % are certified within 600 s") was written before this run; at a 120 s limit the
+certified fraction is 0 of 3 at `n = 40`.  The limit differs from the hypothesis' 600 s, but
+the growth from 25 to 40 sites (hundreds of nodes at 25) leaves little doubt: **H2b is
+expected to fail**, and the full run of SB-BM-2 should settle it.  These synthetic instances
+are also much harder for toulbar2 than the real ones (194 s at 60 sites against 1.9 s for
+ubiquitin's 65), i.e. the generator is more frustrated than the proteins it was meant to
+resemble (noted as a bias of SB-BM-2).
 
 Reading.  Where strong couplings are random (frustrated), the plain pairwise dual bound is
 loose and our depth-first search needs hundreds of nodes at 25 sites: 600 to 1 700 times
@@ -119,6 +130,64 @@ slower than toulbar2, whose bounds and heuristics are far stronger.  The real st
 R-1 behave differently (one node, or four): there dead-end elimination and the dual bound
 nearly close the problem.  Certified optimality at toulbar2's speed on hard instances would
 need its search with proof logging, which does not exist (`PRIOR_ART.md` §B).
+
+## R-6 — Certified per-residue flip gaps: the certified minimum is unique, survives rounding, and is thermally negligible (development evidence)
+
+*Kind:* development.  *Experiment:* SB-X-003, `experiments/structbio/flipgaps_dev/run.py`, commit
+`263dd18`; one zero-gap certificate per residue on the box without that residue's state in the
+minimiser (label [CK] each; [M]).  *Reproduce:* `python experiments/structbio/flipgaps_dev/run.py --check 1CRN`.
+
+| PDB | residues | gap to the second-best configuration (kcal/mol) | rounding margin (kcal/mol) | minimiser of the float tables too | residues with gap < `RT` | < `3RT` | wall time, 4 processes (s) |
+|---|---|---|---|---|---|---|---|
+| 1CRN | 26 | 0.0451 | 0.00017 | yes | 14 | 21 | 4 |
+| 5PTI | 36 | 0.0243 | 0.00032 | yes | 21 | 28 | 29 |
+| 1BPI | 36 | 0.1102 | 0.00032 | yes | 10 | 22 | 28 |
+| 1PGA | 46 | 0.0068 | 0.00052 | yes | 20 | 36 | 73 |
+| 2IGD | 49 | 0.0039 | 0.00058 | yes | 26 | 33 | 80 |
+| 1UBQ | 65 | (appended to `results.jsonl` when its run ends) | | | | | |
+
+`RT = 0.593` kcal/mol.  Crambin, per residue (largest gaps): Tyr29 55.8, Tyr44 18.3, Arg17 6.5,
+Arg10 3.3, Ile35 3.1 kcal/mol; the fourteen smallest are below 0.6 (hydroxyl rotamers of Thr and
+Ser lowest: 0.045, 0.057).
+
+What it shows.  (1) Uniqueness of the minimiser, certified.  (2) Robustness to rounding: the
+gap exceeds twice the rounding margin in every structure, so the minimiser of the integer
+tables is the unique minimiser of the float tables as well (a corollary tested in
+`tests/structbio/test_stability.py`).  (3) The unfavourable part, and the scientifically
+relevant one: the gap to the second-best configuration is a few hundredths of a kcal/mol or
+less, and 61 to 81 % of the residues can change state for less than `3RT`.  The certified
+global minimum of this model is one configuration among very many of nearly equal energy; it
+is not a description of the model's ensemble, let alone of the protein.  These are the first
+numbers here that the exact solver's answer does not already contain; an uncertified solver
+could compute the same values by restricted solves, without a checkable proof.
+
+## R-7 — A first certified enclosure of ln Z on a deposited structure, and where it stops (development evidence)
+
+*Kind:* development.  *Experiment:* SB-X-004, `experiments/structbio/lnz_dev/run.py 1CRN
+--exact-check`, commit `2976042`; rows in `experiments/structbio/lnz_dev/results.jsonl`.  Label [CP]
+(rule semantics [V] for chains, paper argument beyond; checker implementation tested against
+60-digit enumeration in two arithmetic tiers).  Crambin, 26 residues, all 325 pair tables,
+`β = 1000/593` per kcal/mol, thermal pruning margin 12 kcal/mol (233 eliminations, total loss
+below `10⁻⁹` nats):
+
+| relaxation threshold (kcal/mol) | pairs kept exact | largest table | certified `ln Z` (float tier) | width (nats) | time (s) |
+|---|---|---|---|---|---|
+| 1.0 | 21 | `8.6·10³` | [63.1425, 76.9461] | 13.80 | 0.4 |
+| 0.3 | 29 | `7.8·10⁴` | [66.8176, 73.3317] | 6.51 | 0.4 |
+| 0.1 | 40 | `1.9·10⁵` | [68.4694, 71.8347] | 3.37 | 0.7 |
+| 0.03 | 59 | `1.9·10⁶` | [69.5638, 70.9272] | 1.36 | 1.6 |
+| 0.01 | — | `1.3·10⁹` needed | abstained (budget `3·10⁷` entries) | — | — |
+
+Exact-rational tier at threshold 1.0: [63.14249423974886, 76.94606796481926] in 9.4 s — inside
+the float tier's [63.14249423974757, 76.94606796482172].  `−β E(x*) = 61.51`.
+
+What it shows.  The pipeline from a deposited structure to a checked two-sided bound on a
+partition function runs, and its two arithmetic tiers agree.  What is unfavourable: the
+enclosure is 1.36 nats wide at the last affordable threshold — entirely first-order loss of the
+266 relaxed pairs — which is useless for populations; the next threshold needs a table of
+`1.3·10⁹` entries; ubiquitin is out of reach (R-3).  No baseline has been run: toulbar2's
+`Z*ε` and the K\*-family algorithms give floating-point `ε`-brackets without certificates on
+such instances, and we have not compared widths or times with them.
 
 ---
 

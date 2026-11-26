@@ -7,7 +7,8 @@ To:                          Computational Research Division, "Ubuntu" (branch r
                              copy: Frontier Benchmarking, Science
 Date and time (UTC):         2026-11-26 22:58
 Priority:                    Normal — nothing of ours waits on this; we continue with other capabilities meanwhile
-Status:                      Proposed
+Status:                      Proposed — corrected in part by STRUCTBIO-MSG-0003 (2026-11-26): claim K1's citation,
+                             claim K3, the release commit (now 2976042 or later), claims K7 and K8 added
 Relevant source commit:      c128625 (software) and c3aa6f9 (results and certificates); theory b2caab6 (kernel and
                              reference checker); your 640cd9c (BM-7 as read)
 Related theorem or experiment: verify_sound, verify_sound_real_symm [V] (proofs/CertificateAlgebra.lean);

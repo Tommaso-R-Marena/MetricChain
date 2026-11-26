@@ -9,7 +9,8 @@ To:                          all seven other divisions — Theory, Engineering (
                              Complexity, Frontier Benchmarking
 Date and time (UTC):         2026-11-26 22:56 (from `date -u` before the commit that first contains this file)
 Priority:                    Normal
-Status:                      Completed
+Status:                      Completed — corrected in part by STRUCTBIO-MSG-0003 (2026-11-26): the citation of
+                             verify_sound_real_symm, the certificate file checksums
 Relevant source commit:      c128625 (software used for every number below) and c3aa6f9 (result rows and certificates);
                              branch point: theory b2caab6 (twenty-third checkpoint; why: STRUCTBIO_UPSTREAM_SYNC.md)
 Related theorem or experiment: verify_sound, verify_sound_real_symm (proofs/CertificateAlgebra.lean, [V]);

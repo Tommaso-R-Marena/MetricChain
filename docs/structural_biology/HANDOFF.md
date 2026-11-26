@@ -1,6 +1,6 @@
 # Handoff of the Structural & Computational Biology division
 
-*For a successor session or a human reader.  State at the first checkpoint, 2026-11-26.  The
+*For a successor session or a human reader.  State at the second checkpoint, 2026-11-26.  The
 recovery point with exact next steps is `RESEARCH_LOG.md`, "Resume here"; this file is the
 map.*
 
@@ -18,20 +18,24 @@ releases or publications without the owner's authorisation.
 |---|---|---|
 | exact pairwise model, instance files | `src/metricchain_sb/model.py`, `modelio.py` | tested |
 | `min` certificates: format, converter to `metricchain-cert/1` | `mincert.py` | tested |
-| independent checker | `mincheck.py` (140 lines) | tested against enumeration and the theory division's reference checker; not formally verified |
+| independent checker | `mincheck.py` | tested against enumeration and the theory division's reference checker; not formally verified; reports whether the root box is full |
+| certified flip gaps (C1b) | `stability.py` | tested; development results R-6 |
+| certified exponential, interval tables | `expo.py`, `itables.py` | tested against 80-digit references; the float tier is rigorous under stated IEEE-754 assumptions |
+| Z certificates, checker, producer (C2, first version) | `zcert.py`, `zcheck.py`, `partition.py` | tested against 60-digit enumeration in two tiers; no conditioning, no file format; rule semantics [P] beyond two neighbours |
 | producer (dead-end elimination, MPLP dual bound, branch and bound) | `gmec.py` | untrusted by design; adequate on real structures, slow on frustrated synthetic ones |
 | molecular layer (public structure → rotamer model → tables) | `molecular/` | validated numerically against an independent OpenMM system |
 | baseline | `baselines/toulbar2.py` | toulbar2 on the identical integer instance |
-| experiments | `experiments/structbio/gmec_dev/` (SB-X-001, done), `gmec_synth/` (SB-X-002, quick run) | rows in `results.jsonl`; certificates in `certs/` |
+| experiments | `experiments/structbio/gmec_dev/` (SB-X-001), `gmec_synth/` (SB-X-002, quick grid), `flipgaps_dev/` (SB-X-003), `lnz_dev/` (SB-X-004) | rows in each `results.jsonl`; `min` certificates in `gmec_dev/certs/` |
 | documents | `docs/structural_biology/` | see the index in `docs/collaboration/STRUCTURAL_BIOLOGY_TO_ALL.md` |
 
 ## The one-paragraph scientific state
 
 A certified global minimum of a fixed-backbone rotamer model is achievable on real structures
-(six of six development structures, zero gap, seconds), agrees with an established exact
-solver, and so far tells us nothing that solver did not: the value of the certificate is
-assurance, not information, until it is used for statements no solver gives (per-residue
-gaps, populations).  Certified partition functions on whole proteins are blocked at the size
+(six of six development structures, zero gap, seconds) and agrees with an established exact
+solver, which is faster.  Certified flip gaps then show what that minimum is worth: it is
+unique and survives rounding, and it is one of very many nearly degenerate configurations
+(second-best within 0.004–0.11 kcal/mol).  A first checked enclosure of `ln Z` exists for
+crambin (1.36 nats wide).  Certified partition functions on whole proteins are blocked at the size
 of ubiquitin by dense weak couplings; the obstruction is measured and a precise question is
 with the theory division.  Every number is model-conditional, and the model (in vacuo,
 `ε = 4r`, rigid rotamers) is crude: it puts ubiquitin's side chains 139 kcal/mol below the
