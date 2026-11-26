@@ -532,19 +532,26 @@ def x010_blocks() -> dict[str, str]:
                 return f"{v:.4f} ({ph:.2f})"
             have2 = all(B2(r)[0] is not None for r in rs)
             lines.append(f"| {n} | {cell(lambda r: r['flat2'])} | " + (cell(lambda r: B2(r)[0]) if have2 else "—") + f" | {cell(lambda r: r['worst2'])} | "
-                         f"{cell(lambda r: r['flat3'])} | **{cell(lambda r: B3(r)[0])}** | {cell(lambda r: A3(r)[0])} | {cell(lambda r: r['worst3_capped_middle'])} | "
+                         f"{cell(lambda r: r['flat3'])} | **{cell(lambda r: B3(r)[0])}** | "
+                         + (cell(lambda r: A3(r)[0]) if any((r["n"], r["phi"]) in any_3 for r in rs) else "not run") + f" | {cell(lambda r: r['worst3_capped_middle'])} | "
                          f"{cell(lambda r: r['cmax3_certified'])} | {rs[0]['lower']:.4f} |")
             summ.append(dict(n=n, f2=best(lambda r: r["flat2"])[0], a2=best(lambda r: r["worst2"])[0], f3=best(lambda r: r["flat3"])[0],
                              b3=best(lambda r: B3(r)[0])[0], a3=best(lambda r: A3(r)[0])[0], cap=best(lambda r: r["worst3_capped_middle"])[0],
                              b2=best(lambda r: B2(r)[0])[0] if have2 else None,
+                             b3_flat=best(lambda r: r["worst3_flat_fibres"])[0],
+                             b2_flat=best(lambda r: two_flat[(r["n"], r["phi"])])[0] if all((r["n"], r["phi"]) in two_flat for r in rs) else None,
                              cover=(sum((r["n"], r["phi"]) in k0_3 for r in rs), sum((r["n"], r["phi"]) in any_3 for r in rs), sum((r["n"], r["phi"]) in k0_2 for r in rs), len(rs))))
         blocks["three_worst_best"] = "\n".join(lines)
-        lines = ["| `n` | three levels over two levels: at the flat instance | under (B) | under (A) | flat → worst, two levels: (B), (A) | "
-                 "flat → worst, three levels: (B), (A) | three levels with the middle level at its bound over two levels (A) | cells with cone-fibre runs: three levels K0 / three levels assumed / two levels K0 |",
-                 "|---|---|---|---|---|---|---|---|"]
+        lines = ["| `n` | three levels over two levels: at the flat instance | worst outer landscape, flat fibres only | under (B) | under (A) | "
+                 "worst over flat, two levels: flat fibres only, (B), (A) | worst over flat, three levels: flat fibres only, (B), (A) | "
+                 "three levels with the middle level at its bound over two levels (A) | cells with cone-fibre runs: three levels K0 / three levels assumed / two levels K0 |",
+                 "|---|---|---|---|---|---|---|---|---|"]
         for q in summ:
-            lines.append(f"| {q['n']} | {q['f3'] / q['f2']:.2f} | " + (f"{q['b3'] / q['b2']:.2f}" if q["b2"] else "—") + f" | {q['a3'] / q['a2']:.2f} | "
-                         + (f"{q['b2'] / q['f2']:.2f}" if q["b2"] else "—") + f", {q['a2'] / q['f2']:.2f} | {q['b3'] / q['f3']:.2f}, {q['a3'] / q['f3']:.2f} | {q['cap'] / q['a2']:.2f} | "
+            a_done = q["cover"][1] > 0
+            lines.append(f"| {q['n']} | {q['f3'] / q['f2']:.2f} | " + (f"{q['b3_flat'] / q['b2_flat']:.2f}" if q["b2_flat"] else "—") + " | "
+                         + (f"{q['b3'] / q['b2']:.2f}" if q["b2"] else "—") + " | " + (f"{q['a3'] / q['a2']:.2f}" if a_done else "not run") + " | "
+                         + (f"{q['b2_flat'] / q['f2']:.2f}" if q["b2_flat"] else "—") + ", " + (f"{q['b2'] / q['f2']:.2f}" if q["b2"] else "—") + f", {q['a2'] / q['f2']:.2f} | "
+                         f"{q['b3_flat'] / q['f3']:.2f}, {q['b3'] / q['f3']:.2f}, " + (f"{q['a3'] / q['f3']:.2f}" if a_done else "not run") + f" | {q['cap'] / q['a2']:.2f} | "
                          f"{q['cover'][0]} / {q['cover'][1]} / {q['cover'][2]} of {q['cover'][3]} |")
         blocks["three_worst_ratios"] = "\n".join(lines)
         nviol = sum(s["violations"] for r in rows for s in r["searches"]) + sum(r["outer_violations"] for r in cone_rows + cone2_rows)
@@ -591,8 +598,8 @@ def x010_blocks() -> dict[str, str]:
             f"All {tot:,} stored maximisers of X-005 re-evaluated with the generalised evaluator: in a corner of the classification rule: "
             f"{sum(j['in_corner'] for j in d.values())}; cost changed by the exact rule: {sum(j['changed'] for j in d.values())}; claims violated under the exact rule: "
             f"{sum(j['violations_exact'] for j in d.values())}; the convention of the published runs reproduces the stored value in "
-            f"{sum(j['legacy_reproduces_stored'] for j in d.values()):,} of {tot:,} searches (the others are the rounding-decided ties of ENG-MSG-0003 §5, "
-            f"largest difference `{max(j['max_abs_legacy_minus_stored'] for j in d.values()):.2f}` in the logarithm).")
+            f"{sum(j['legacy_reproduces_stored'] for j in d.values()):,} of {tot:,} searches (the others were stored by job M-008 before the tie rule of ENG-MSG-0003 §5 "
+            f"existed and are changed by that rule, by at most `{max(j['max_abs_legacy_minus_stored'] for j in d.values()):.2f}` in the logarithm — the recheck of ENG-RES-0008).")
     ap_ = RESULTS / "x005_anyplacement.jsonl"
     rows = [json.loads(line) for line in ap_.read_text().splitlines() if line.strip()] if ap_.exists() else []
     cp = RESULTS / "x005_cost.jsonl"
@@ -613,6 +620,22 @@ def x010_blocks() -> dict[str, str]:
             top = max(ds)
             lines.append(f"| {u:g} | {len(ds)} | `{top[0]:+.5f}` | `n = {top[1]}`, `φ = {top[2]:.2f}` | {sum(d[0] > 1e-3 for d in ds)} | `{min(ds)[0]:+.5f}` |")
         blocks["anyplacement"] = "\n".join(lines)
+        # the effect on the headline of ENG-RES-0008: the best outer fraction against the worst instance
+        grid_p, grid_b = defaultdict(dict), defaultdict(dict)
+        for r in rows:
+            na = r["n"] * r["a"]
+            pw = prod[(r["u"], r["n"], r["phi"])] / na
+            grid_p[(r["u"], r["n"])][r["phi"]] = pw
+            grid_b[(r["u"], r["n"])][r["phi"]] = max(pw, max(s["best_value"] for s in r["searches"]) / na)
+        inc = [(min(grid_b[k].values()) - min(grid_p[k].values()), k) for k in grid_p if len(grid_p[k]) == len(run_search.PHIS)]
+        top = max(inc)
+        by_n = defaultdict(float)
+        for d_, n_, _ in alld:
+            by_n[n_] = max(by_n[n_], d_)
+        blocks["anyplacement_minimax"] = (
+            f"Effect on the number ENG-RES-0008 reports — the worst case at the best outer fraction — over the {len(inc)} pairs `(u, n)`: it rises in "
+            f"{sum(x[0] > 1e-6 for x in inc)} of them, by at most `{top[0]:.4f}` in units of `n a` (`u = {top[1][0]:g}`, `n = {top[1][1]}`).  By size, the largest excess of the bound "
+            f"in any cell: " + ", ".join(f"`{n_}`: `{by_n[n_]:.4f}`" for n_ in sorted(by_n)) + ".")
         blocks["anyplacement_summary"] = (f"{len(rows)} cells (the sizes up to `n = {max(r['n'] for r in rows):,}`).  Searching the placement-free bound directly raises the worst case found by at most "
                                           f"`{max(d[0] for d in alld):+.5f}` in units of `n a` (`n = {max(alld)[1]}`, `φ = {max(alld)[2]:.2f}`); in {sum(d[0] > 1e-3 for d in alld)} cells by more than `0.001`.")
     return blocks

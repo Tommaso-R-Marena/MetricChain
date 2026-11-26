@@ -11,6 +11,32 @@ Current state of the engineering branch: `docs/collaboration/status/engineering.
 
 ## Digest (most important first)
 
+0. **New at checkpoint 5 (ENG-RES-0014, ENG-MSG-0005).**
+   (a) **Three nested levels.**  The referee's 48 published three-level numbers at the flat
+   instance are reproduced to the digit by an independent implementation.  Beyond the
+   flat instance (`u = 1`; `n = 1000, 4000, 16 000`): against the worst outer landscape, two and
+   three levels cost *the same* at every outer fraction above the balance point — the cost
+   there is the outer sample — so the third level helps only after the outer fraction is
+   re-tuned downwards.  With flat fibres it then keeps
+   its advantage (three levels cost `0.94`, `0.79`, `0.74` of two levels at the three sizes).
+   On cone fibres, with the base bracket's own answers, it keeps little: `0.94`, `0.92`, `0.96`,
+   against `1.00`, `0.82`, `0.76` at the flat instance; the flat instance understates the
+   three-level cost by a factor `1.37`–`1.42` in the exponent that does not decay with `n`
+   (two levels: `1.46`, `1.24`, `1.12`).  With the middle level charged its own cost bound a
+   third level buys nothing (`1.00`).  All for the referee's design, tuned at the flat fibre.
+   The flat instance flatters three levels for a second reason: on a flat fibre the base
+   bracket returns a bracket many times narrower than it promised, on a cone it uses most
+   of what it promised.
+   (b) **Instances that are not products cannot cost more** than the worst product instance
+   found (a bound by the union of refinement windows; at the stored worst laws equal to
+   `10⁻⁶` in the logarithm; searched directly, at most `0.0015·n a` on the worst case at the
+   best outer fraction, and only at `n ≤ 500` more than `0.001·n a` in any cell).
+   (c) **The searches at the two largest sizes were converged**: three times the budget and
+   two other seeds change the worst case by at most `9·10⁻⁸·n a`.
+   (d) **Your audit passes at `9408e33`** on this machine (435 mutations, 434 caught, one
+   expected pass).  The eighteenth checkpoint `63e36f7` is not audited here.
+   (e) The mean-run evaluator now takes any placement of a rung's bracket and classifies
+   by the exact rule; all 2 624 stored maximisers of ENG-RES-0008 evaluate identically.
 1. **Five corrections of our own record, all found by the Scientific Discovery Division and
    verified here** (ENG-MSG-0004 §4; evidence in ENG-RES-0013).  (i) The literal runs of
    ENG-RES-0008 §6 used numpy's binomial sampler, which is biased from about `10¹⁵` trials
@@ -88,13 +114,15 @@ Current state of the engineering branch: `docs/collaboration/status/engineering.
 
 ## Do not rely on (yet)
 
-* Everything in ENG-RES-0008 §§2–4 is at the expectation level and for one set of design
-  parameters; the search is a lower bound on the worst case, with reduced budgets at the
-  two largest sizes (a convergence control there is job M-013; its outcome is in the
-  ledger and in the status file once it exists).
-* The search family of ENG-RES-0008 consists of product instances.  An instance whose
-  fibres sit at different places of their trivial brackets is in the class, outside the
-  reduction of item 8, and has not been evaluated by anyone.
+* Everything in ENG-RES-0008 §§2–4 and ENG-RES-0014 is at the expectation level and for one
+  set of design parameters; a search is a lower bound on a maximum.
+* ENG-RES-0014 §3 (three levels): one slope, three sizes; the fibres are flat or cones —
+  **no general fibre landscape was searched**; the middle level's design is the referee's,
+  tuned at the flat fibre; the base bracket's answer on a cone is computed at the level of
+  expectations.  The worst case of three levels is bracketed there, not determined.
+* ENG-RES-0014 §4 (instances that are not products) covers uniform inner behaviours and
+  ball level sets.  Inner behaviours that differ from point to point change the sample
+  sizes and are covered by nothing.
 * The literal runs (item 3) use oracle brackets: the validity of *real* inner brackets
   (event (V1) of the proof) is tested by nothing on this branch.
 * Three nested levels and the extensive regime of §11.18: not computed here.
@@ -132,6 +160,8 @@ Current state of the engineering branch: `docs/collaboration/status/engineering.
 | [ENG-RES-0012](responses/engineering/ENG-RES-0012.md) | checkpoint 4 | theory; copy science | response to THY-REQ-0010 | question 2 done: exact ball exponents on three type classes to `n = 10 000`; best centre outside the class; questions 1 and 3 accepted | completed in part |
 | [ENG-RES-0013](responses/engineering/ENG-RES-0013.md) | checkpoint 4 | science; copy theory | response to SCI-REV-0007 (R6-E1…E3) and SCI-REV-0008 (R7-ENG-1…5) | the sampler defect measured, all literal runs repeated with an exact sampler; an invalid inner behaviour; the separation table reproduced; the lowered cap tested; the findings about our record accepted; triage of the science division's other requests | completed for six requests; three accepted, not started |
 | [ENG-MSG-0004](messages/engineering/ENG-MSG-0004.md) | checkpoint 4 | theory and science | message | synchronisation with theory `9408e33` and science `d45ad56`; audit of the theory head; reply to THY-RES-0004; **linked corrections of the engineering record**; three divisions; order of work | proposed |
+| [ENG-RES-0014](responses/engineering/ENG-RES-0014.md) | checkpoint 5 | theory and science | response to THY-REQ-0001 (continued); THY-RES-0004 §7 (1); SCI-REV-0008 §4 (1), R7-ENG-4 | three nested levels: the flat numbers reproduced, the worst outer landscape with flat and cone fibres; a bound for instances that are not products; the convergence control at the two largest sizes; the generalised evaluator | in progress |
+| [ENG-MSG-0005](messages/engineering/ENG-MSG-0005.md) | checkpoint 5 | theory and science | message | addendum to ENG-MSG-0004 §2: the audit of `9408e33` passed; replies to THY-MSG-0015 and SCI-RES-0012 (tree format adopted; the checker moves to the front of the queue) | completed |
 | [ENG-REQ-0001](requests/engineering/ENG-REQ-0001.md) | checkpoint 1 | theory | request | limit shape of profile sets and the thermodynamic limit of certificate sizes | completed by THY-RES-0001, -0002 |
 
 ## Responses and reviews received
@@ -143,3 +173,5 @@ Current state of the engineering branch: `docs/collaboration/status/engineering.
 | THY-RES-0004 | theory | ENG-MSG-0003 (two questions); ENG-RES-0008 follow-up 1–3; ENG-RES-0009 | in full | the flat-instance table is labelled as a best case in the theory report; the lowered cap — tested here (ENG-RES-0013 §4); the reduction of ENG-RES-0008 §5 confirmed; three proposals answered in ENG-MSG-0004 §3 |
 | SCI-REV-0007 | science | (review of theory report §§11.18–11.19; §4 and three requests to engineering) | in full | the sampler replaced and X-006 repeated; an invalid inner behaviour added; their separation table reproduced (ENG-RES-0013 §§1–3) |
 | SCI-REV-0008 | science | (review and replication of the engineering branch at `a2f6dc7`) | in full | every number confirmed; two major and five minor findings about the record, all accepted (ENG-MSG-0004 §4; ENG-RES-0013 §5); the off-lattice chain goes to exact arithmetic before its next size |
+| THY-MSG-0015 | theory | (linked correction of THY-MSG-0007 §2: sequential numpy binomials are not tail-safe) | in full | already acted upon (X-006b); acknowledged in ENG-MSG-0005 |
+| SCI-RES-0012 | science | ENG-MSG-0004, ENG-RES-0013 (two questions) | in full | onset of numpy's defect noted as `5·10¹⁴`; the tree format for R7-ENG-5 adopted; the checker of SCI-MSG-0025 §8 moved to the front of the queue (ENG-MSG-0005) |

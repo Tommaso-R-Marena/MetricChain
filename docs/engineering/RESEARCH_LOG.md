@@ -355,67 +355,83 @@ Algorithm 2L⁺, and sent two new requests.  Answers: ENG-MSG-0003, ENG-RES-0008
 * numpy's defect depends on the bits of `n` (nothing at `2⁵⁰`, `2⁵²`; present at `10¹⁵`, `2⁵³`):
   consistent with a cancellation in the acceptance test of its rejection sampler; not
   confirmed in the source.
-* Three levels: on a cone fibre the middle level can cost `e^{30}` times what it costs on a
-  flat fibre at the same rung (`n = 1000`), yet the three-level total moves little, because
-  the rungs where that happens are not the ones that dominate.  Which rung dominates, as
-  a function of the outer fraction, is the thing to understand before designing the
-  middle level against the worst case instead of at the flat fibre.
-* For the base bracket K0 on a non-flat fibre the evaluator uses the two extreme valid
-  placements; K0's own placement at the level of expectations is computable and would
-  remove an adversarial freedom the real procedure does not have.
+* **Three levels: the flat instance is the cheap case twice.**  Against the worst outer
+  landscape a third level changes nothing above the balance point (the cost is the outer
+  sample) and keeps its advantage below it; on cone fibres, with the base bracket's own
+  answers, most of the advantage goes (three over two levels: 0.94, 0.92, 0.96 at
+  `n = 1000, 4000, 16 000`, against 1.00, 0.82, 0.76 at the flat instance) and the flat
+  instance understates the three-level cost by a factor near 1.4 that does not decay over
+  this range.  The cause is in the table of ENG-RES-0014 §3: on a flat fibre the base
+  bracket returns a bracket many times narrower than promised, on a cone it uses most of
+  the promised ratio, and the referee's design chooses servers and splits at the flat
+  fibre.  **Not known:** whether a middle level designed against wide brackets restores
+  the advantage at these sizes; what a fibre landscape searched in full would add.
+* The base bracket's answer on a general fibre is a functional of the fibre's weight law
+  (`t̂` = a quantile, `Â = E min(w, t̂)`), so the two-level evaluator could carry it for any
+  radial fibre, not only cones; then the two extreme placements "bottom"/"top" would be
+  needed only for reading (A).
 
 ---
 
 ## Resume here
 
-State at the end of session 3: see `docs/collaboration/status/engineering.md` for the table
-of requests (two other divisions now); the list below is the order of work
-(ENG-MSG-0004 §6).
+State at the end of session 3 (checkpoint 5): see `docs/collaboration/status/engineering.md`
+for the table of requests (two other divisions now); the list below is the order of work
+(ENG-MSG-0004 §6 as changed by ENG-MSG-0005).
 
 0. **At the start of every session:** `git fetch origin claude/determined-ride-og1u7j
    research/scientific-translation`; follow `docs/collaboration/UPSTREAM_SYNC.md` for both;
    read new THY-/SCI- messages addressed to engineering (the science digest
    `SCIENCE_TO_ALL.md` has a section "Engineering division"); read `COMPUTE_LEDGER.md`
    ("Policy") before any remote job; `modal app list` must show no engineering app
-   running.  If job M-013 is not marked completed in the ledger, its rows are in
-   `experiments/eng/twolevel/results/x005_converge2.jsonl` (the job resumes from that file)
-   and its outcome still has to be written up (table block `converge` takes them once
-   `make_tables.py` reads the file).
-1. **THY-REQ-0001, what is left** (the theory division's first wish, THY-RES-0004 §7):
-   (a) **three levels at the worst instance.**  Design: a nested mean run in which, at
-   every rung, the cost of an inner call and the position of the fibre average inside
-   the returned bracket come from a two-level mean run on the fibre.  First deliverable:
-   the sandwich "inner cost = flat instance" / "inner cost = worst instance per rung"
-   at one slope and three sizes; read `experiments/reviews/R8/r8_flat3.py` on the theory
-   branch for the design of the middle level first.  The evaluator needs a per-rung
-   position `t_l` instead of the two oracles "bottom"/"top" (Python reference first, then
-   the C kernel).  (b) **Instances that are not products**: fibres at different places of
-   their trivial brackets (per-atom `t0` in the law of the outer landscape) — the first
-   thing a hostile referee would attack (SCI-REV-0008 §4).  (c) the extensive regime of
-   §11.18 (`Params.theta` must become a logarithm first).  (d) real inner brackets
-   (`DEAD_ENDS.md` ED-7) with the batched schedule of Theorem 11.84 **and its stopping
-   rule** (THY-MSG-0013 §3).
-2. **The off-lattice chain in exact arithmetic over `ℚ[cos θ]`** (SCI-REV-0008, R7-ENG-3;
+   running.  Commit before launching anything whose rows store a commit; stop processes by
+   PID, never with `pkill -f <script name>`.
+1. **The checker of the science division's sandwich certificate** (SCI-MSG-0025 §8 on
+   `research/scientific-translation`; not read yet).  Promised as the first item not yet
+   started (ENG-MSG-0005); the science division calls it the request of theirs that
+   matters most, and a checker is what this division is for.  Read the specification,
+   then decide in writing (ENG-RES-0015) before writing code.
+2. **THY-REQ-0001, what is left** after ENG-RES-0014 (three levels at `u = 1` done in a first
+   form; instances that are not products bounded; convergence done):
+   (a) **a middle level designed against wide brackets** — choose the server of each rung
+   and the split of the middle level by their cost on cone fibres, or by `C_max`, instead
+   of at the flat fibre, and see whether the third level's advantage returns
+   (`three_levels.rung_table` holds both costs already);
+   (b) **the fibre landscape searched** — the base bracket's answer is a functional of the
+   fibre's weight law (`three_levels.k0_cone` does it for cones): generalise it to any
+   radial fibre and search fibre and outer landscape together; note that a fibre must be
+   a product instance for every split the middle level makes, which cones are and
+   radial profiles are not;
+   (c) other slopes (`u = ½, 2`) for ENG-RES-0014 §3; reading (A) at `n = 16 000`;
+   (d) the extensive regime of §11.18 (the evaluator now takes `θ` and `δ` as logarithms);
+   (e) real inner brackets (`DEAD_ENDS.md` ED-7) with the batched schedule of Theorem 11.84
+   **and its stopping rule** (THY-MSG-0013 §3);
+   (f) inner behaviours that differ from point to point (ENG-RES-0014 §4 leaves them open).
+3. **The off-lattice chain in exact arithmetic over `ℚ[cos θ]`** (SCI-REV-0008, R7-ENG-3;
    specification in the science branch, `docs/science/workstreams/R7_REPORT.md` §7, not
    read yet).  Nothing off-lattice at 13 torsions or beyond before it.  Then what is left
    of THY-REQ-0002, with both lower ends printed and the covers stored (R7-ENG-2), and a
-   certified branch and bound for the nine optima that rest on one solver (R7-ENG-5).
-3. **THY-REQ-0003** in the revised design of ENG-RES-0003, remainder `η(1 + ‖λ‖₁)`.
-4. Small accepted items: SCI-REV-0004 §6 (three proposals at the cone with a field);
+   certified branch and bound for the nine optima that rest on one solver (R7-ENG-5), in
+   the tree format of SCI-RES-0012 §3.
+4. **THY-REQ-0003** in the revised design of ENG-RES-0003, remainder `η(1 + ‖λ‖₁)`.
+5. Small accepted items: SCI-REV-0004 §6 (three proposals at the cone with a field);
    SCI-REV-0010 R10-E1 (vertices of two weighted cubes); the design search of
    ENG-RES-0013 §3 if the science division wants it.  None of the three messages has
    been read beyond its request line.
-5. THY-REQ-0009 (plan in ENG-RES-0011); THY-REQ-0010 questions 1 and 3; THY-REQ-0007
+6. THY-REQ-0009 (plan in ENG-RES-0011); THY-REQ-0010 questions 1 and 3; THY-REQ-0007
    (ENG-RES-0010); THY-REQ-0008 items 1–4 together with the science division's
    enumeration requests (class tables of bridges, full pair-distance histograms: one
    remote job, to be bounded in the ledger first).
-6. **E-1** in the form the science division gave it (the native kernel against
-   pseudo-Boolean proof logging), with THY-REQ-0004; then the checker of SCI-MSG-0020 §6.
-7. The science division's requests on real peptides (rotamers, an implicit-solvent
-   energy): inside the scope the research owner authorised (fixed-sequence structural
-   characterisation; no sequence design, no optimisation of function), but each needs
-   external inputs that must be reviewed before use; none has been read.  Decide per
-   request after reading.
+7. **E-1** in the form the science division gave it (the native kernel against
+   pseudo-Boolean proof logging), with THY-REQ-0004.
+8. The science division's requests on peptides (rotamers, an implicit-solvent energy):
+   inside the scope the research owner authorised (fixed-sequence structural
+   characterisation; no sequence design, no optimisation of function).  The science
+   division states that its instances are synthetic homopeptides built by its own code
+   with the parameters of a public force-field package (SCI-RES-0012 §4); none of the
+   requests has been read.  Decide per request after reading.
+9. The audit of the theory head `63e36f7` (eighteenth checkpoint; seven new Lean files) has
+   not been run; nothing here depends on those files.
 
 Worktree of the theory branch (read only; never end a shell command inside it):
 `git worktree add --detach ../MetricChain-theory-<sha> <sha>`, then
@@ -433,5 +449,7 @@ python -m pytest tests/eng -q
 python experiments/eng/chain_cover/run_lattice.py --check
 python experiments/eng/chain_cover/make_tables.py --verify docs/collaboration/responses/engineering/ENG-RES-0002.md
 python experiments/eng/twolevel/controls.py --theory ../MetricChain-theory-63efc69      # needs a checkout of the theory branch
-python experiments/eng/twolevel/make_tables.py --verify docs/collaboration/responses/engineering/ENG-RES-0008.md
+python experiments/eng/twolevel/make_tables.py --verify docs/collaboration/responses/engineering/ENG-RES-0008.md    # likewise -0013, -0014
+python experiments/eng/slices/make_tables.py --verify docs/collaboration/responses/engineering/ENG-RES-0012.md
+python experiments/eng/twolevel/three_levels.py --check                                 # the referee's three-level numbers
 ```
