@@ -1,0 +1,19 @@
+m   u    parameters        | pi_*      r_dag  J    K    Mbar     | runs  closed cap abort | invalid width cert chernoff (iii) (iv) | levels left pop/neg | largest sample
+10  1    bounded th=.3     | 0.000977  0      40   215  7.89e+08 | 32    28     4   0     | 0       0     0    0        0     0    | 599 / 1 | 440320
+10  1    small th, nu1=1   | 0.000977  -1     40   214  2.31e+08 | 32    28     4   0     | 0       0     0    0        0     0    | 602 / 19 | 876544
+10  1    extensive th=40   | 0.377     4      20   193  6.03e+05 | 32    32     0   0     | 0       0     0    0        0     0    | 252 / 1 | 1544
+10  1    eta=1/4 th=.2     | 0.000977  0      80   754  1.2e+09  | 32    28     4   0     | 0       0     0    0        0     0    | 1253 / 2 | 1544192
+12  0.5  bounded th=.3     | 0.0193    2      24   203  2.75e+07 | 32    32     0   0     | 0       0     0    0        0     0    | 346 / 0 | 25984
+12  0.5  small th, nu1=1   | 0.000244  0      24   206  5.41e+08 | 32    28     4   0     | 0       0     0    0        0     0    | 377 / 33 | 421888
+12  0.5  extensive th=40   | 0.997     10     12   176  1.29e+05 | 32    32     0   0     | 0       0     0    0        0     0    | 162 / 0 | 704
+12  0.5  eta=1/4 th=.2     | 0.00317   1      48   718  2.55e+08 | 32    32     0   0     | 0       0     0    0        0     0    | 664 / 0 | 91904
+11  2    bounded th=.3     | 0.000488  -1     88   231  5.07e+09 | 32    28     4   0     | 0       0     0    0        0     0    | 1196 / 29 | 1892352
+11  2    small th, nu1=1   | 0.000488  -1     88   230  1.08e+09 | 32    28     4   0     | 0       0     0    0        0     0    | 1205 / 52 | 1884160
+11  2    extensive th=40   | 0.00586   1      44   214  9.21e+07 | 32    32     0   0     | 0       0     0    0        0     0    | 480 / 22 | 876544
+11  2    eta=1/4 th=.2     | 0.000488  -1     176  809  7.69e+09 | 32    28     4   0     | 0       0     0    0        0     0    | 2455 / 63 | 3313664
+13  0.7  bounded th=.3     | 0.00171   1      37   213  4.3e+08  | 32    32     0   0     | 0       0     0    0        0     0    | 517 / 0 | 436224
+13  0.7  small th, nu1=1   | 0.000122  0      37   215  1.72e+09 | 32    28     4   0     | 0       0     0    0        0     0    | 566 / 39 | 3522560
+13  0.7  extensive th=40   | 0.867     8      19   191  2.47e+05 | 32    32     0   0     | 0       0     0    0        0     0    | 230 / 0 | 764
+13  0.7  eta=1/4 th=.2     | 0.00171   1      73   746  6.52e+08 | 32    32     0   0     | 0       0     0    0        0     0    | 984 / 0 | 763904
+TOTAL: runs 512, closed 480, stopped by (c0) 32, aborts 0 | invalid 0, width violations 0, false certificates 0, Chernoff events violated 0, (iii) violated 0, (iv) violated 0, stops above J 0 | levels left: 11888 populated, 261 negligible; floating-point ties s_J = V_max resolved at level J+1: 8   (49 s)
+claim (v), the count: 12629 levels reached; M_j^neg p(s_j e^-x) above the bound: 0;  points above s_j e^{-x_l} more than cnt(x_l): 0

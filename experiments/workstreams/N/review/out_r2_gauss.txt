@@ -1,0 +1,50 @@
+G-A  closed forms against quadrature of  int_0^inf L e^{Lr} Phi(-t-r) dr  and  int_0^inf L e^{-Lr} Phi(c+r) dr
+     30 pairs (L, q): largest relative difference 9.50e-14
+     half-line dips attain both functions: largest relative difference 5.33e-15
+G-B  (TU), (TL) on R^1: random piecewise-linear psi with slopes in [-L, L], V = e^{-psi}; EXACT integration
+     (on a linear piece psi = alpha + sigma x:  int e^{-psi} phi = e^{-alpha + sigma^2/2} [Phi(x + sigma)])
+     worst cases (L, mass, complementary mass, kind): upper (0.5, np.float64(5.371283383183745e-13), np.float64(0.999999999999463), 1)   lower (3.0, np.float64(1.5884176190612862e-06), np.float64(0.9999984115823809), 1)
+     400 functions, 8173 levels: largest E(V-s)+/(s Xi_L(p(s))) = 1.0000000000   smallest E min(V,s)/(s Theta_L(pbar(s))) = 1.0000000000
+G-C  dips e^{L dist(x, D^c)} on sets D that are not half-spaces: excess / Xi_L(gamma(D))  (must be <= 1)
+     balls, complements of balls (n = 2, 3, 10, 50), strips and their complements: largest ratio 0.871284
+     lower function, S a ball or the complement of a ball: smallest ratio 1.000001 (must be >= 1)
+G-D  profile inequalities:  e^{(L-t)^2/2} [0<=t<=L]  <=  1 + Xi_L(q)/q  <=  3(1+t) e^{(L-t)_+^2/2} [t>=0]
+     violations on a grid of 24 060 pairs: upper 0, lower 0
+     Xi_L(q)/q against L/(t-L), L = 2:  t=4: 0.7805 / 1.0000  t=8: 0.3187 / 0.3333  t=16: 0.1415 / 0.1429  t=30: 0.0713 / 0.0714
+G-E  Proposition N10(b), V = e^{L a_1}, A = e^{L^2/2}
+     E min(V, e^{Lt}) = A[Phi(t-L) + e^{Lt-L^2/2}Phi(-t)] <= A e^{-(L-t)^2/2} on 0 <= t <= L: violations 0 of 5050
+     L    x_out   t_x (exact root)   L - sqrt(2 x_out)   1/p(t_x) = 1/Phi(-t_x)   2 e^{(L-sqrt(2x))^2/2}   ratio
+     2    0.200   2.5102             1.3675              165.8                    5.095                    32.5
+     2    1.000   1.1541             0.5858              8.05                     2.374                    3.39
+     2    1.800   0.4319             0.1026              3.004                    2.011                    1.49
+     3    0.450   3.0445             2.0513              858.1                    16.4                     52.3
+     3    2.250   1.3470             0.8787              11.24                    2.942                    3.82
+     3    4.050   0.4014             0.1540              2.906                    2.024                    1.44
+     5    1.250   4.2274             3.4189              8.46e+04                 690.5                    123
+     5    6.250   1.8281             1.4645              29.61                    5.844                    5.07
+     5    11.250  0.4280             0.2566              2.991                    2.067                    1.45
+     8    3.200   6.1183             5.4702              2.114e+09                6.291e+06                336
+     8    16.000  2.6282             2.3431              233                      31.13                    7.48
+     8    28.800  0.5340             0.4105              3.371                    2.176                    1.55
+G-F  Theorem N1' / Proposition N10(b): own implementation of the unbounded variant on V = e^{L a}, a ~ N(0,1)
+     (reference point 0: ell0 = E e^{-L|x|}, u0 = E e^{L|x|}; rung 0 = a valid bracket of ratio Phi(L)/Phi(-L))
+     L=2.5 theta=0.5: pi_*=3.58e-13 (t-L=4.68) J=70 K=240 Mbar=1.22e+18 x_out=2.024 | runs 12 closed 12 invalid 0 width-bad 0 | levels <= 19 | M_max min 491520, N10(b) bound 360.4 | U/L max 4.519
+     L=3 theta=2: pi_*=8.77e-05 (t-L=0.75) J=35 K=214 Mbar=2.25e+09 x_out=2.357 | runs 12 closed 12 invalid 0 width-bad 0 | levels <= 22 | M_max min 219136, N10(b) bound 402.2 | U/L max 7.270
+     L=3.5 theta=20: pi_*=0.0266 (t-L=-1.57) J=14 K=191 Mbar=6.04e+06 x_out=3.893 | runs 12 closed 12 invalid 0 width-bad 0 | levels <= 10 | M_max min 24448, N10(b) bound 327.6 | U/L max 37.343
+     L=2 theta=0.3: pi_*=0.00179 (t-L=0.91) J=43 K=709 Mbar=1.13e+08 x_out=1.380 | runs 12 closed 12 invalid 0 width-bad 0 | levels <= 26 | M_max min 181504, N10(b) bound 1201 | U/L max 2.300
+G-G  Proposition N11
+     cap bound sigma(omega_1 >= s) <= e^{-n s^2/2}: largest ratio on a grid (n = 2 .. 1e5) = 0.5000
+     median(chi^2_k)/k, k = 1..1999, 1e4, 1e5, 1e6: largest 0.999999 (must be < 1)
+     L    t     n        hypothesis n >= max(4t^2, L T^2 t)   hit bound e^{-t^2/2}  max hit fraction   effect A(g)-1   proved bound   half-space   effect/half-space
+     1    0.5   6        yes                                  0.8825                0.3303             0.40163         -0.042269      0.38292      1.0489
+     1    1     6        yes                                  0.6065                0.1816             0.14519         -0.011396      0.14461      1.0040
+     2    1     22       yes                                  0.6065                0.1643             0.67603         0.032672       0.68269      0.9902
+     2    2     44       yes                                  0.1353                0.02207            0.039326        0.0037825      0.044918     0.8755
+     3    1     56       yes                                  0.6065                0.1608             4.1568          0.42262        4.2211       0.9848
+     3    1     1000     yes                                  0.6065                0.1588             4.2176          0.42262        4.2211       0.9992
+     3    1     10000    yes                                  0.6065                0.1587             4.2207          0.42262        4.2211       0.9999
+     3    3     165      yes                                  0.01111               0.00123            0.0035285       0.00056926     0.0042046    0.8392
+     4    2     224      yes                                  0.1353                0.02263            0.90189         0.10062        0.9545       0.9449
+     5    2.5   500      yes                                  0.04394               0.006138           0.92366         0.1089         0.98758      0.9353
+     3    1     30       NO                                   0.6065                0.1628             4.0972          0.42262        4.2211       0.9706
+violations: 0   (41.8 s)
