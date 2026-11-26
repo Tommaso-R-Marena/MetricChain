@@ -53,7 +53,7 @@ synthetic family (a long template and many homopolymer strands) and says nothing
 | multiloop weights of the form `m_a·m_b^b·m_c^u` | **C** | the usual condition for a polynomial recursion; general multiloop energies are not covered |
 | general interior-loop weights | none | **corrected after REV-0003:** the factor `L_0^4` does not come from the interior loops alone — the tables are decomposed by the rightmost top-level pair with both ends free, `Θ(ℓ L_0)` per entry in any loop model; last-base recursions *and* the usual interior-loop treatment would give `L_0^3` (not done) |
 | a bounded number of species for polynomial time | **C**, essential unless P = NP | by §1 the problem is NP-hard for unboundedly many species; `3^c`-type cost for distinct strands, optimal up to the base under ETH (CX-T14) |
-| unit-cost arithmetic | **V**, hides a factor | for the decoding of Proposition 5 the numbers have `O(cGN²)` bits (`α = (N log₂ 24 + O(1))·k_BT ln 2/ε`) |
+| unit-cost arithmetic | **V**, hides a factor | for the decoding of Proposition 5 the numbers have `O(N·E_max/ε)` bits (`E_max` = largest absolute loop energy of a structure; corrected after REV-0005, the earlier `O(cGN²)` had an unnecessary factor `c` and hid that `G` grows with `N` for affine multiloops) (`α = (N log₂ 24 + O(1))·k_BT ln 2/ε`) |
 | loop energies integer multiples of a unit `ε` (Proposition 5) | **Q** | needed to separate levels by digits; the free energy contains `k_BT ln R`, which is why the decoding is done per symmetry class |
 | weights depending on loop sizes only | **T** of our implementation, not of the theorem | the referee's implementation has letter-dependent weights and agrees with brute force |
 | MFE and level counts from the fixed-point sums | **proved after REV-0003** (Proposition 5, the referee's argument) | the first version cited [SW26, §7], whose decoding is per ordering and does not apply |
@@ -139,3 +139,27 @@ Found by the reviews COMPLEXITY-REV-0003 and -0004 (2026-11-26) and corrected in
   changes" — inaccurate; "a sporadic orbit" — a member of a family;
 * **NANUQ note:** a proof step of Lemma 0 was missing; the witness of Theorem 11(c) was described
   ambiguously.
+
+Found by the review COMPLEXITY-REV-0005 (2026-11-26, 22:43 UTC) and corrected in the notes — again mostly
+statements about what is ours:
+
+* **Ising note:** Proposition 13 (degree-2 certificates ⇔ no other sign vector in the span) stood under "no
+  source found"; it is a two-line corollary of Laurent–Poljak's Theorems 2.7 and 2.9, which the note already
+  cited for another statement.  Proposition 13′ (random states) is a weak form of Odlyzko's theorem of 1988,
+  and the sentence "we have not determined up to which `K`" described as open what that theorem and Irmatov
+  (2024) answer (every `K ≤ n − 1`).  "Time `2^K·poly(n)`" for the exposedness decision should have been
+  `2^{O(K)}·poly(n)`.
+* **algorithm note:** "the problem is NP-complete for unboundedly many strands (Theorem 6)" in the base-pair
+  model — wrong: that theorem of Boehmer et al. needs a richer energy model, as its authors say; and the
+  novelty paragraph omitted their sentence that the extension to the Turner model "does not pose any
+  algorithmic challenges".  The bit bound `O(cGN²)` carried an unnecessary factor and hid that `G` grows with
+  `N`.
+* **NANUQ note:** Corollary 14(v) said "Kalmanson" where only "Kalmanson for the induced circular order" is
+  proved; the dichotomy of Lemma C was stated without its source (Huber et al., arXiv:2408.12997, Lemma 4.2);
+  one sentence of §7.1, Remark 1 ("positive weight on a split that no tree has") was asserted without proof.
+
+**Pattern (third time):** the mathematics has held up under five reviews; the errors are in novelty and
+attribution statements and in sentences added in passing.  Rule adopted: a statement of the form "no source
+found" is written only after a search aimed at the *nearest classical formulation* of the statement (here:
+"span of random ±1 vectors", "faces of the elliptope", "level-2 generators"), not at our own wording of it.
+

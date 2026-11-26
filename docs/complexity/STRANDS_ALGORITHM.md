@@ -1,7 +1,8 @@
 # The magnified partition function of interacting strands without enumerating strand orderings
 
 Working paper of the complexity division, first version 2026-11-26; **revised 2026-11-26 after the internal
-adversarial review `COMPLEXITY-REV-0003`** (what changed: §7; internal AI review, not peer review).
+adversarial reviews `COMPLEXITY-REV-0003` and, for Proposition 5 and the attribution paragraph,
+`COMPLEXITY-REV-0005`** (what changed: §7; internal AI reviews, not peer review).
 Register: `THEOREMS.md` CX-T10–CX-T12, CX-T30.
 Problem: `OPEN_PROBLEMS.md` A6 — Shalaby and Woods, arXiv:2611.27945v2 (cited [SW26]), "Future work" 3
 and 4:
@@ -29,10 +30,12 @@ O( L_0^4 · Σ_{d | gcd(n_1,…,n_k)}  Π_i C(n_i/d + 2, 2) )      arithmetic op
 **polynomial in `c` for every fixed number of species** (`O(N^4 c^{2k})`).  For loop energies that are integer
 multiples of a unit, the **minimum free energy and the number of structures at every energy level,
 separately for every degree of symmetry**, are obtained within the same operation count from one
-evaluation (Proposition 5); the numbers involved have `O(cN²)` bits.
+evaluation (Proposition 5); the numbers involved have `O(N·E_max/ε)` bits, `E_max` the largest absolute loop
+energy of a structure and `ε` the energy unit — `O(N²)` for a fixed energy function.
 
-**What is and is not ours** (rewritten after the review; the first version of this paragraph was wrong —
-REV-0003, finding 1).
+**What is and is not ours** (rewritten after REV-0003, whose finding 1 showed the first version to be wrong, and
+again after REV-0005, findings 11–13: one statement about a cited theorem was wrong and one sentence of the
+source that bears on novelty was missing).
 
 * *In print for the base-pair model.*  Boehmer, Berkemer, Will and Ponty, journal version (Algorithms Mol.
   Biol. 21:4, first published December 2025; this is the version [SW26] cite as [3]), section "Translation
@@ -42,18 +45,36 @@ REV-0003, finding 1).
   energy multiplied by `r`; a recursion over symmetry degrees (Lemma 14); **Theorem 4: "The partition
   function Z over m strands can be computed in time O(3^m · n^3 · m^2)"**; Remark 3: the correction
   `kT log r` of Dirks et al. can be added; Remark 4: the technique carries over to their count-indexed
-  algorithm for triplet repeats (Theorem 5, polynomial for a bounded number of different strands), and the
-  problem is NP-complete for unboundedly many (Theorem 6).  We had read only the conference version (WABI
-  2024: Theorem 14 for the minimum free energy, Remark 15 with a sketch, Theorem 16), and wrote that the
-  closed treatment over all orderings was "not found in print".  It was in print, for the base-pair model.
-  Our marked nick inside a designated nest (§3) and their marked base pair encode the same quotient
-  construction.
+  algorithm for triplet repeats (Theorem 5, polynomial for a bounded number of different strands) and to
+  their strand-soup setting (Theorem 8, polynomial in the numbers `m`, `p` of that setting).  We had read only
+  the conference version (WABI 2024: Theorem 14 for the minimum free energy, Remark 15 with a sketch,
+  Theorem 16), and wrote that the closed treatment over all orderings was "not found in print".  It was in
+  print, for the base-pair model.  Our marked nick inside a designated nest (§3) and their marked base pair
+  encode the same quotient construction.
+* *What the same paper says about the nearest-neighbour model* (REV-0005, finding 12; read by the referee in
+  the journal version, not by us).  It has a section "Incorporating a simple nearest-neighbor energy model"
+  (minimum free energy for the strand soup, `O(n⁴m²p³)`), and its conclusion says: "it is desirable to
+  describe in detail how to extend the MFE Strand Interaction algorithm to the full thermodynamic setting
+  considered in [13].  While the extension to the Turner model does not pose any algorithmic challenges, …".
+  **So the originators of the method regard the extension to the nearest-neighbour model as routine and did
+  not write it out, while [SW26] list it as open.**  This note writes it out.
+* *Hardness, corrected* (REV-0005, finding 11).  The previous version said that the problem "is NP-complete
+  for unboundedly many (Theorem 6)" strands in the base-pair model of Boehmer et al.  Their Theorem 6 ("Unary
+  Triplet Repeat Multi-Strand MFE is NP-complete") is proved in a richer model — a base-pair reward `−m³`, a
+  multiloop penalty, an association reward and minimum hairpin size 3, with several complexes allowed — and
+  the authors write: "Our reduction requires more than the naive base pair maximization model."  Hardness in
+  the base-pair model for a number of strands linear in `N` is attributed by [SW26] to its reference [5] and
+  by Boehmer et al. to their reference [14] (reference numbers as reported by the referee; in our register
+  the hardness result for the base-pair model is `PRIOR_ART.md` A-V, Condon–Hajiaghayi–Thachuk 2021).
 * *In print for a fixed ordering in the nearest-neighbour model.*  The central loop of a symmetric
-  structure (our Lemma 3) is Lemma 18 of Shalaby and Woods (ICALP 2025, arXiv:2407.09676); nests are
+  structure (our Lemma 3) is Lemma 18 of Shalaby and Woods (ICALP 2025) in the numbering of
+  arXiv:2407.09676v1 — [SW26], Remark 29, cites the same statement as "lemma 20 of [44]"; nests are
   [SW26] Definition 25 and Remark 26; the nest that crosses the border of a period, with its two cases, is
   [SW26] Lemma 31, Eqs. (39)–(40) and Algorithm 6.
-* *What this note adds*, as far as the referee and we could find: the same programme **in the
-  nearest-neighbour model over all orderings** — the central face charged as a multiloop
+* *What this note adds*, as far as the referees and we could find: the same programme **written out in the
+  nearest-neighbour model over all orderings** — an extension that Boehmer et al. call free of algorithmic
+  challenges (previous item) and that we therefore do not present as a new idea — the central face charged as
+  a multiloop
   `m_a^α (m_b^k m_c^u)^{dα}` or, for `d = 2` and one nest per period, as a two-pair loop; top levels without
   nicks; exterior loops summed over sub-multisets — for **arbitrary magnification `α`** with the closed
   formula (1); the operation count in terms of the multiplicities of the species; the decoding of minimum
@@ -64,8 +85,10 @@ REV-0003, finding 1).
 Together with `STRANDS_NN_HARDNESS.md` (NP-hardness for unboundedly many species): **in the
 nearest-neighbour model the number of strands is not the parameter that makes multi-strand folding hard;
 the number of species is.**  Bounded species: polynomial.  Unbounded species: NP-hard, even with one
-long strand and homopolymers.  For the base-pair model of Boehmer et al. this dichotomy is their
-Theorems 5 and 6.
+long strand and homopolymers.  Boehmer et al. have the corresponding pair of statements for triplet
+repeats: polynomial for a bounded number of different strands in the base-pair model (their Theorem 5), and
+NP-complete for unboundedly many in the richer model described above (their Theorem 6) — not in the
+base-pair maximisation model, as the previous version of this paragraph said.
 
 ## 1. Model
 
@@ -288,7 +311,12 @@ symmetry `R` and loop energy `mε` is `N_R(m)·R/c`; and
 MFE  =  min { mε + k_BT ln R  :  R | g,  N_R(m) > 0 }  +  (c − 1) ΔG_assoc .
 ```
 
-All numbers have `O(cGN²)` bits; the number of arithmetic operations is that of Theorem 1.
+All numbers have `O(N·E_max/ε)` bits, where `E_max ≤ GNε` bounds the absolute loop energy of a structure or
+partial structure; the number of arithmetic operations is that of Theorem 1.  (With affine multiloops a
+single loop energy grows with the size of the loop, so a bound `G` on single loops grows with `N`; the bound
+is therefore stated through `E_max`, which is `O(N)` for a fixed energy function.  The factor `c` of the
+previous version was unnecessary: the tables for `F_d` use the weights to the power `d`, but on structures
+of the quotient, whose energy is `1/d` of that of the structure they represent — REV-0005, finding 15.)
 
 *Proof.*  `F_d` is the sum of `w(S)` over the pairs whose symmetry is a multiple of `d` (Lemma 2), so the
 first equality is Möbius inversion on the divisors of `g`.  The number of pairs `(Y,S)` is at most
@@ -298,10 +326,10 @@ points), which bounds every `N_R(m)`.  A physical structure with symmetry `R` is
 tables for `F_d` use the weights to the power `d ≤ c`.  ∎
 
 So `α = Θ(N)` is `α = (N log_2 24 + O(1)) · ε^{-1} k_BT ln 2`; the unit-cost count hides a factor
-`Õ(cGN²)` in bit operations.  A symmetry-naive `(min,+)` version of the recursion does **not** give the
+`Õ(N·E_max/ε)` in bit operations.  A symmetry-naive `(min,+)` version of the recursion does **not** give the
 minimum free energy: it returns `min_d (m_d + k_BT ln d)`, with `m_d` the least energy among structures whose
-symmetry is a *multiple* of `d`, which lies below the true value whenever the loop-energy minimiser is
-symmetric (this is the difficulty that Shalaby and Woods handle by backtracking in their ICALP paper).
+symmetry is a *multiple* of `d`, which lies below the true value if and only if every loop-energy minimiser
+is symmetric (this is the difficulty that Shalaby and Woods handle by backtracking in their ICALP paper).
 
 `level_counts.py` implements Proposition 5 with exact integers and compares the table `(R, m) ↦` number of
 physical structures with exhaustive enumeration on 17 systems (symmetry degrees 2, 3, 4, 5, 6): all
@@ -345,7 +373,7 @@ The proofs are paper proofs with one internal review.
    the sparsification lemma).  Whether the problem is fixed-parameter
    tractable in the number of species `k` (our bound is `c^{O(k)}`) is open (`OPEN_PROBLEMS.md` C2).
 3. *MFE and density of states.*  See §4a (Proposition 5): per symmetry class, from the `F_d` at one
-   magnification, with numbers of `O(cGN²)` bits.  The coefficients `J_{1−α}(d)` of formula (1) are negative
+   magnification, with numbers of `O(N·E_max/ε)` bits.  The coefficients `J_{1−α}(d)` of formula (1) are negative
    for `α > 1`, so `Q_α` itself is an alternating sum of large terms; Proposition 5 uses the `F_d` directly and
    exact arithmetic, not floating point.
 4. *Model.*  Dangles, coaxial stacking and other context-dependent exterior-loop terms are not covered.
@@ -369,3 +397,25 @@ The proofs are paper proofs with one internal review.
 | 5: validation narrower than the statement; implementation edges | scope paragraph in §5; `multiset_dp.py` refuses duplicated species and weight 0 at magnification ≤ 0, and has a minimum hairpin size as a pairing constraint; `test_multiset_dp_edges.py` |
 | 6: Remark 5 on the source of `L_0^4` was wrong | Remark 5 rewritten; `ASSUMPTION_AUDIT.md` §2 |
 | 7: notation `Ω̄`; a stale remark; the constant in `α = Θ(N)` | §1; Remark 2; Proposition 5 |
+
+**Changes after the review COMPLEXITY-REV-0005** (Proposition 5 and the paragraph "What is and is not ours").  The
+referee found Proposition 5 correct (its own enumerator, which works by the action of the cyclic group on pairs
+`(Y,S)` — a different method from our orbits of label permutations — agrees with `level_counts.py` on 22 systems
+with 3 473 physical structures and symmetries 1, 2, 3, 4, 6; the symmetry-naive value is too low in 10 of them).
+
+| finding | change |
+|---|---|
+| 11 (major): the statement that Theorem 6 of Boehmer et al. is about the base-pair model was wrong | §0, item "Hardness, corrected", and the closing paragraph of §0 |
+| 12 (major, bears on novelty): the journal version of Boehmer et al. says that the extension to the Turner model "does not pose any algorithmic challenges", and has a section with a simple nearest-neighbour model, Theorem 8 and Remark 4 | §0, item "What the same paper says about the nearest-neighbour model"; "What this note adds" now says "written out", not a new idea |
+| 13: "Lemma 18" is the numbering of arXiv:2407.09676v1 | said, with the number used by [SW26] |
+| 14: "whenever the loop-energy minimiser is symmetric" | "if and only if every loop-energy minimiser is symmetric" (§4a) |
+| 15: the bit bound | stated as `O(N·E_max/ε)`; the factor `c` removed, with the reason (§0, Proposition 5, §6 Remark 3) |
+
+The referee's strongest objection, in its words: "Sub-multiset dynamic programming over all orderings, the symmetry
+quotient with a marked element, inclusion–exclusion over symmetry degrees and count-indexing for few species are
+all in Boehmer et al., who say the Turner extension poses no algorithmic challenge.  The note writes that exercise
+out with L⁴ instead of L³ and validates it for N ≤ 16.  Proposition 5 is the digit trick of [SW26] §7 plus Möbius
+inversion."  We accept this description of the algorithm note: its content is a worked-out and tested extension,
+and the answer it gives to the question that [SW26] list as open is one that the originators of the method had
+already called routine.
+

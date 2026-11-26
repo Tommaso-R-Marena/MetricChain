@@ -10,8 +10,9 @@ Ensemble Identifiability division (ENSEMBLE-MSG-0003 §4):
 
 Register: `THEOREMS.md` CX-T16–CX-T19, CX-T25, CX-T28, CX-T29.  **Revised 2026-11-26 after the internal
 adversarial review `COMPLEXITY-REV-0004`** (what changed: §10; internal AI review, not peer review).
-Corollary 5a, Propositions 12, 13, 13′ and Theorem 14 were added after that review and have not been seen
-by a referee.  Labels: [P] paper proof, [X] exact finite computation with certificates verified in
+Corollary 5a, Propositions 12, 13, 13′ and Theorem 14 were added after that review and were examined in the
+internal review `COMPLEXITY-REV-0005`, which found the mathematics correct and two attributions missing
+(Propositions 13 and 13′ are known in substance; what changed: §10).  Labels: [P] paper proof, [X] exact finite computation with certificates verified in
 rational arithmetic, [K] known, cited.
 
 ## 0. Answer
@@ -25,15 +26,18 @@ rational arithmetic, [K] known, cited.
   (130 non-degenerate orbits of type sets, 6 of them not exposed; §4).  The one orbit not explained by a
   constant product consists of the five *singleton* states, the first member of a second infinite family
   of obstructions (Proposition 12).
-* For `K` part of the input the problem is in co-NP (Theorem 1) and is **decidable in time `2^K·poly(n)`**
+* For `K` part of the input the problem is in co-NP (Theorem 1) and is **decidable in time `2^{O(K)}·poly(n)`**
   (Corollary 5a, pointed out by the referee), hence in polynomial time for `K = O(log n)`.  **Whether it is
   co-NP-hard for larger `K` we do not know**; the referee could not decide it either.
 * **A natural variant is classified completely** (added after the review): the configurations are exactly
   the ground states of a pair energy that has a *sum-of-squares certificate of degree 2* if and only if
-  their linear span contains no other sign vector (Proposition 13); deciding this is **co-NP-complete**,
-  takes time `2^K·poly(n)`, and — assuming the exponential time hypothesis — not `2^{o(K)}·poly(n)`
-  (Theorem 14; the reduction was found by the referee).  For up to `n/20` uniformly random configurations
-  it holds with probability `1 − e^{−Ω(n)}` (Proposition 13′).
+  their linear span contains no other sign vector (Proposition 13 — in substance a corollary of
+  Laurent–Poljak's description of the faces and normal cones of the elliptope); deciding this is
+  **co-NP-complete**, takes time `2^K·poly(n)`, and — assuming the exponential time hypothesis — not
+  `2^{o(K)}·poly(n)` (Theorem 14; the reduction was found by the referee of REV-0004).  For uniformly random
+  configurations the condition fails with probability `4·C(K,3)(3/4)^n` up to exponentially smaller terms,
+  for every `K ≤ n − 1` [K: Odlyzko 1988 for `K ≤ n − 10n/ln n`; Irmatov 2024 for `K ≤ n − 1`]; Proposition 13′
+  is an elementary explicit bound for `K ≤ n/20`.
 * §5 gives further structure: an exact criterion in `K` dimensions (Theorem 6), sufficient conditions
   (Corollary 7, the isometric condition), families of obstructions (Lemmas 8, 9), and a class of instances
   with enough symmetry for which "exposed" is "no other sign vector in the span" (Proposition 10) — for
@@ -43,10 +47,11 @@ rational arithmetic, [K] known, cited.
   their description of the faces of the elliptope, the `K = 4` obstruction and the tables up to five types
   are in the literature on small cut polytopes, and Tropp (2018) proves that `r ≤ √(cn)` random
   configurations generate a simplicial face of the elliptope with high probability.  We claim no novelty
-  for §§2–4 or for Proposition 5 and Corollary 7.  For Theorem 6, Lemma 9, Proposition 10 with the Sidon
-  criterion, Proposition 13 and Theorem 14 neither the referee nor we found a source, which is not
-  evidence of novelty (the energy of Proposition 13 is the classical projection rule of associative
-  memories).
+  for §§2–4, for Proposition 5 and Corollary 7, for Proposition 13 (it follows in two lines from
+  Laurent–Poljak's Theorems 2.7 and 2.9; its energy is the projection rule of associative memories) or for
+  Proposition 13′ (a weak form of Odlyzko's theorem of 1988) — the last two attributions were supplied by the
+  referee of REV-0005.  For Theorem 6, Lemma 9, Proposition 10 with the Sidon criterion and Theorem 14 neither
+  the referees nor we found a source, which is not evidence of novelty.
 
 ## 1. Setting
 
@@ -98,7 +103,7 @@ P = NP.  The table is invariant under permuting the `K` states and negating sing
 
 (The table itself is computed by finitely many linear programmes with up to `2^{2^{K−1}−1}` constraints;
 its size is doubly exponential in `K`.  For growing `K` one does not use the table: Corollary 5a decides an
-instance in time `2^K·poly(n)`.  The first version said here "this does not help when `K` grows" and
+instance in time `2^{O(K)}·poly(n)`.  The first version said here "this does not help when `K` grows" and
 overlooked that — REV-0004, finding 3.)
 
 *Remark (fields).*  An energy with fields `Σ h_i x_i` is a pair energy with one additional site whose spin
@@ -173,22 +178,27 @@ Proposition 5 is not new: by Laurent–Poljak (their Theorem 2.7, as used in the
 the smallest face of the elliptope containing a matrix `X_0` is `{X : ker X ⊇ ker X_0}`, and for
 `X_0 = (1/K) Σ_k x^k x^{kT}` the cut matrices in it are the `yy^T` with `y ∈ L`.
 
-**Corollary 5a (decision in time `2^K·poly(n)`) [P; pointed out by the referee, REV-0004 finding 3].**  `L`
+**Corollary 5a (decision in time `2^{O(K)}·poly(n)`) [P; pointed out by the referee, REV-0004 finding 3].**  `L`
 contains at most `2^{r−1}` states, `r = dim L ≤ K` (a vector of `L` is determined by its entries at `r` sites
 whose columns are linearly independent), and they can be listed in time `O(2^r rn)` after a Gaussian
 elimination.  By Proposition 5 the certificate of Theorem 1 can be sought among these states only — a
-linear programme with at most `2^{K−1} + K` variables.  So "is `V` exposed?" is decided in time
-`2^K·poly(n)`: **in polynomial time for `K = O(log n)`.**
+linear programme with at most `2^{K−1} + K` variables and `O(n²)` equations.  So "is `V` exposed?" is decided
+in time `2^{O(K)}·poly(n)`: **in polynomial time for `K = O(log n)`.**  (The list alone, hence the span problem
+of Theorem 14, takes time `2^K·poly(n)` literally.  For the linear programme a polynomial-time method gives
+`2^{O(K)}·poly(n)`; the bound `2^K·poly(n)` written in the previous version would need a method whose cost is
+linear in the number of variables — REV-0005, finding 9.)
 
 (`span_algorithm.py`: exact arithmetic for the list; both answers certified — "not exposed" by the
 certificate of Theorem 1, "exposed" by a rational `J` separating `V` strictly from the other sign vectors
 of `L`.  It agrees with the linear programme over all states on all 255 type sets for `K = 4` and on 900
 random type sets for `K = 5, 6, 7`; the referee compared 3 895 instances.  `K = 12`, `n = 80`: 6 seconds.)
 
-**Proposition 13 (certificates of degree 2) [P; added after the review].**  The following are equivalent.
+**Proposition 13 (certificates of degree 2) [K in substance — a corollary of Laurent–Poljak, see below; the
+proof given is self-contained].**  The following are equivalent.
 (i) Some pair energy `E_J` has ground-state set exactly `V`, and `E_J − min E_J` is, on the cube, a sum of
 squares of polynomials of degree at most 1 (a sum-of-squares certificate of degree 2; equivalently the
-semidefinite relaxation over the elliptope is exact for `E_J`).
+semidefinite relaxation over the elliptope is exact for `E_J` — strong duality with dual attainment holds
+because `X = I` is strictly feasible).
 (ii) `L` contains no sign vector other than `±` the states of `V`.
 In that case `E(x) = x^T(I − Π_L)x = dist(x, L)²`, with `Π_L` the orthogonal projector onto `L`, is such an
 energy; it has rational coefficients.
@@ -199,14 +209,26 @@ let `E_J − E_0 = Σ_i (a_i·x + b_i)²` on the cube.  As `E_J` is even, averag
 `E_J − E_0 = x^T A x + Σ_i b_i²` with `A = Σ_i a_i a_i^T`.  At a ground state both terms vanish; so `b = 0`
 and `A x^k = 0` for all `k`; hence `A` vanishes on `L`, and every sign vector of `L` is a ground state.  ∎
 
+*Attribution (REV-0005, finding 8).*  The first version listed Proposition 13 under "no source found".  It
+follows in two lines from the report of Laurent and Poljak that this note already cites for Proposition 5:
+their Theorem 2.7 (every face of the elliptope is `F_W = {X : ker X ⊇ W}`, and the smallest face containing
+`X_0` is `{X : ker X ⊇ ker X_0}`) and their Theorem 2.9 (the normal cone of a face is
+`{D − M : D diagonal, M ⪰ 0, ⟨M, A⟩ = 0}` — these `D − M` are exactly the certificates of degree 2); their
+Example 3.8 uses that the cut matrices of `F_W` are the `ff^T` with `f ⊥ W`.  (Theorems 2.7, 2.9 and Example 3.8
+as read by the referee of REV-0005, pp. 1–7 of the report; we read pp. 13–14 only.)  The referee did not find
+the statement verbatim in the language of sums of squares.  The energy `x^T(I − Π_L)x` is the projection rule
+(pseudo-inverse rule) of associative memories, for which the question "which other sign vectors lie in the span
+of the stored patterns" was asked by Kanter and Sompolinsky (Phys. Rev. A 35 (1987) 380; not read by anyone
+here).
+
 So the gap between Proposition 5 ("not exposed ⇒ another sign vector in `L`") and its failing converse is
 exactly the gap between degree 2 and higher degree: **a set with another sign vector in its span can still
 be exposed, but then no exposing pair energy has a certificate of degree 2.**  On the `K = 5` table (ii)
-holds for 21 053 of the 60 973 exposed type sets.  The energy `x^T(I − Π_L)x` is the *projection rule* of
-the theory of associative memories [K; from memory, not consulted].  `degree2_certificates.py` checks the
+holds for 21 053 of the 60 973 exposed type sets.  `degree2_certificates.py` checks the
 statement with exact arithmetic on random sets (the zero set of `x^T(I − Π_L)x` over all states).
 
-**Proposition 13′ (random states) [P].**  If `x^1,…,x^K` are independent and uniform in `{±1}^n`, then
+**Proposition 13′ (random states; an elementary bound) [P; superseded by the known theorem quoted after the
+proof].**  If `x^1,…,x^K` are independent and uniform in `{±1}^n`, then
 
 ```
 P( L contains a sign vector other than ± x^k )  ≤  2^{K−n} + C(n,K)·2^K·(3/4)^{n−K} ,
@@ -225,19 +247,36 @@ and a value taken twice counts for two of the four outcomes.  A union bound over
 second term.  With `C(n,K) ≤ (en/K)^K` and `K = cn`, the exponent is
 `n[c(1 + ln(1/c) + ln 2) + (1 − c) ln(3/4)]`, increasing in `c` and equal to `−0.0389 n` at `c = 1/20`.  ∎
 
+*The known theorem (REV-0005, finding 7; we had missed it).*  The probability `P(K,n)` that the span of `K`
+independent uniform sign vectors contains another sign vector is the subject of A. M. Odlyzko, *On subspaces
+spanned by random selections of ±1 vectors*, J. Combin. Theory Ser. A 47 (1988) 124–133, written for exactly
+this question about associative memories:
+
+```
+P(K,n)  =  4·C(K,3)·(3/4)^n  +  O(K⁴ (5/8)^n)  +  O((7/10)^n)          for  K ≤ n − 10n/ln n     [K: Odlyzko 1988],
+P(K,n)  =  4·C(K,3)·(3/4)^n  +  O(K⁴ (5/8)^n)  +  O((5/8 + o(1))^n)    for  K ≤ n − 1            [K: Irmatov 2024, arXiv:2405.05082].
+```
+
+(Both as quoted in Irmatov's Theorems 1.1 and 1.2, read by the referee and, on 2026-11-26, by a fetch of ours;
+Odlyzko's paper itself could not be opened by either — its bibliographic data are given from the referee's
+report.)  So the leading term is the event that some `±x^a ± x^b ± x^c` is a sign vector — each of these
+`4·C(K,3)` vectors (up to a global sign) is one with probability exactly `(3/4)^n` — and **the condition of
+Proposition 13 holds with probability tending to 1 for every `K ≤ n − 1`**: the question "up to which `K`" that the
+previous version left open has this answer, and its sentence that these vectors "dominate", supported there by
+simulations, is a theorem.  Proposition 13′ remains only as a bound with explicit constants and a five-line
+proof.
+
 For comparison [K, Tropp 2018, Theorems 2.9–2.11 and Fact 2.7; read by us]: the stronger property that
 `conv{x^k x^{kT}}` is a (simplicial) face of the elliptope holds with probability at least
-`1 − K² exp(−n/K²)`, and never for `K(K−1) > 2(n−1)`.  We have not determined up to which `K` the span of
-`K` random states contains no other sign vector; `n/20` is what the union bound gives.
+`1 − K² exp(−n/K²)`, and never for `K(K−1) > 2(n−1)`.
 
-*For small systems the event is common.*  Each of the `4·C(K,3)` vectors `±x^a ± x^b ± x^c` (up to a global
-sign) is a sign vector with probability exactly `(3/4)^n`, and these dominate: in simulations
-(`degree2_certificates.py`, 60 trials each) the span contained another sign vector in 12 % of the cases
-for `n = 12, K = 3` (first-order estimate `4·(3/4)^12 = 13 %`), 13 % for `n = 16, K = 4` (estimate 16 %),
-85 % for `n = 12, K = 6`, 77 % for `n = 16, K = 8`, and always for `K ≥ 3n/4` at these sizes.  So for the
-sizes of an explicit enumeration a random set of states is typically exposed (Corollary 7 needs many
-types, but the exact decision says so) **without** being exposed by an energy with a certificate of
-degree 2; the bound of Proposition 13′ only becomes effective for `n` in the hundreds
+*For small systems the event is common.*  In simulations (`degree2_certificates.py`, 60 trials each) the span
+contained another sign vector in 12 % of the cases for `n = 12, K = 3` (leading term `4·(3/4)^12 = 13 %`), 13 % for
+`n = 16, K = 4` (leading term 16 %), 85 % for `n = 12, K = 6`, 77 % for `n = 16, K = 8`, and always for `K ≥ 3n/4`
+at these sizes — the asymptotic statement above is far from effective there (the terms `K⁴(5/8)^n` are not
+small).  So for the sizes of an explicit enumeration a random set of states is typically exposed (Corollary 7
+needs many types, but the exact decision says so) **without** being exposed by an energy with a certificate
+of degree 2; the bound of Proposition 13′ only becomes effective for `n` in the hundreds
 (`n = 100, K = 5`: `0.003`; `n = 200, K = 10`: `4·10^{−5}`).
 
 **Theorem 6 (criterion in `K` dimensions) [P].**  Suppose the states are linearly independent (the types
@@ -317,7 +356,7 @@ and 12 random subsets of `F_2^4` (`test_theory.py`).
 |---|---|
 | `K` fixed | linear time (Theorem 2); not co-NP-hard unless P = NP |
 | `K = O(log n)` | polynomial time (Corollary 5a) |
-| `K` part of the input, "is `V` exposed?" | in co-NP (Theorem 1); time `2^K·poly(n)` (Corollary 5a); polynomial sufficient conditions for "exposed" (Corollary 7, the isometric condition) and for "not exposed" (Lemma 8: `O(K^4 n)`); **hardness open** |
+| `K` part of the input, "is `V` exposed?" | in co-NP (Theorem 1); time `2^{O(K)}·poly(n)` (Corollary 5a); polynomial sufficient conditions for "exposed" (Corollary 7, the isometric condition) and for "not exposed" (Lemma 8: `O(K^4 n)`); **hardness open** |
 | `K` part of the input, "is `V` exposed by an energy with a certificate of degree 2?" (⇔ no other sign vector in the span) | **co-NP-complete**; time `2^K·poly(n)`; not `2^{o(K)}·poly(n)` under ETH (Theorem 14) |
 
 **Theorem 14 (the span problem) [P; the reduction was found by the referee of REV-0004 and checked by us].**
@@ -346,9 +385,14 @@ would give an entry `≤ −3`; so `|U| ≤ 1` and `v` is `𝟙` or some `x^k`.
 `Σ_{k∈U} x^k − x^z + (2 − |U|)𝟙` has entries `±1` at all sites (at `A_i ∪ A_j ∪ {z}`:
 `3 − 2|U ∩ (A_i ∪ A_j)| ∈ {1, −1}`) and is not `±` a state.
 So the span contains another sign vector iff the instance is satisfiable.  (a) follows with Proposition 13.
-(b): the reduction has `K = N + 2` and polynomially many sites, and positive 1-in-3-SAT has no algorithm of
-running time `2^{o(N)}` under ETH [K; by the sparsification lemma and the standard linear-size reductions
-from 3-SAT — not re-derived here].  (c): in the notation of Theorem 6 every `c ∈ C` has `c_z = −1` and
+(b): the reduction has `K = N + 2` and `n = O(N + M²)` sites, and positive 1-in-3-SAT has no algorithm of
+running time `2^{o(N)}` under ETH: by the sparsification lemma [K; Impagliazzo–Paturi–Zane, cited from memory]
+3-SAT has no `2^{o(N+M)}` algorithm, Schaefer's clause gadget turns a 3-SAT clause into a constant number of
+1-in-3 clauses with a constant number of new variables, and a negated variable `x′ = ¬x` is forced by three
+positive clauses `R(x,x′,a)`, `R(x,x′,b)`, `R(a,b,c)` with new variables `a, b, c` (exactly one of `x, x′, a` and
+exactly one of `x, x′, b` is true, so `a = b`; then `R(a,b,c)` forces `a = b = 0`, hence exactly one of `x, x′` is
+true) — both gadgets have constant size, so the number of variables of the positive instance is linear in
+`N + M` (the two gadgets as spelled out by the referee of REV-0005, finding 10).  (c): in the notation of Theorem 6 every `c ∈ C` has `c_z = −1` and
 `c_k = 1` for `k` in a non-empty set `U`, so the entries `(k,z)` of `cc^T` are `≤ 0` and one of them is `−1`; no
 convex combination of such matrices is diagonal, and `V` is exposed.  ∎
 
@@ -389,12 +433,17 @@ downloaded the texts; "we" read the pages named from those downloads.
 | A. Deza, M. Deza, report LIENS-95-1 (face lattice of the cut polytope on five nodes) | by the referee (§1, §3); **not by us** | `f_3 = 1780`, so 40 four-sets of vertices are not faces — the number Theorem 3 gives on five sites (we recomputed: of the 1 820 four-subsets of the 16 states, 1 780 are exposed and 40 are not, all with constant product).  The referee notes a misprint in the report's `f_7` |
 | N. Wang, J. Rauh, H. Massam, arXiv:1603.04843 | by the referee (introduction, §2.2); **not by us** | the same decision problem appears in statistics as the recognition of facial sets (existence of the maximum-likelihood estimate); no hardness statement found there |
 | Deza–Laurent–Poljak, *The cut cone III*; Deza–Laurent, *The cut cone: simplicial faces and linear dependencies*; the book *Geometry of Cuts and Metrics* | abstract / bibliographic record only (referee); the book was not accessible | — |
+| Laurent–Poljak (the report above), Theorems 2.7, 2.9, Example 3.8 | pp. 1–7 and 12–15 as page images by the referee of REV-0005; **not by us** beyond pp. 13–14 | faces of the elliptope are given by kernels; normal cones are `{D − M}` ⇒ Proposition 13 in two lines |
+| A. M. Odlyzko, *On subspaces spanned by random selections of ±1 vectors*, J. Combin. Theory Ser. A 47 (1988) 124–133 | **not opened** (HTTP 503/403 for the referee of REV-0005 and for us); statement known through Irmatov's quotation | `P(K,n) = 4C(K,3)(3/4)^n + O(K⁴(5/8)^n) + O((7/10)^n)` for `K ≤ n − 10n/ln n` ⇒ supersedes Proposition 13′ |
+| A. A. Irmatov, *On linear-combinatorial problems associated with subspaces spanned by {±1}-vectors*, arXiv:2405.05082v1 (2024) | abstract and pp. 1–2 by the referee of REV-0005; abstract and Theorems 1.1, 1.2 by a fetch of ours | the same asymptotics for all `K ≤ n − 1`, error `O((5/8 + o(1))^n)`; quotes Odlyzko's theorem; says the question comes from Kanter and Sompolinsky's associative memories |
+| I. Kanter, H. Sompolinsky, *Associative recall of memory without errors*, Phys. Rev. A 35 (1987) 380 | **not read** by anyone here (reference as given by the referee of REV-0005) | the projection rule; origin of the question on sign vectors in the span |
 
 * **Not found**, by the referee (searches listed in the report) or by us: a complexity result on
   recognising faces of the cut polytope from a vertex list; Theorem 6 in this form; Lemma 9; Proposition 10
-  with the Sidon criterion; Proposition 13; Theorem 14.  A failure to find them is not evidence of novelty.
-  The fact that the sign vectors in the span are ground states of the projection energy is classical in the
-  theory of associative memories (quoted from memory by the referee and by us; no source read).
+  with the Sidon criterion; Theorem 14.  A failure to find them is not evidence of novelty.  (Proposition 13
+  stood in this list until REV-0005: it is a corollary of Laurent–Poljak's Theorems 2.7 and 2.9, and the fact
+  that the sign vectors in the span are ground states of the projection energy is classical in the theory of
+  associative memories.)
 * Everything concerns the complete set of pair features (with or without fields; §3, remark).  A restricted
   interaction graph changes the twin argument (twins must be twins in the graph).
 * "Exposed" means exactly the global ground states.  Stability under single flips is a different, easy
@@ -474,5 +523,21 @@ the value of the ground energy, not the ground-state set, and energies with far 
 | 7: thin tests; a floating-point rank where an exact test was promised | `span_rule.py` now uses the exact routine; coverage paragraph in §8 |
 | 8: Lemma 9 had no proof; "non-linear" should be "not ± a character" | proof added; wording corrected |
 
-Added after the review and not seen by a referee: Proposition 13, Proposition 13′ and the consequences (a),
-(b) of Theorem 14.
+Added after that review: Proposition 13, Proposition 13′ and the consequences (a), (b) of Theorem 14.
+
+**Changes after the review COMPLEXITY-REV-0005** (Corollary 5a, Propositions 12, 13, 13′, Theorem 14, the corrected
+formulation with cut metrics).  The referee found the mathematics correct (Proposition 12 for `m = 4..8` by the
+full linear programme; Proposition 13 on 400 instances; Theorem 14 re-derived case by case and tested on 820
+instances) and the attributions incomplete:
+
+| finding | change |
+|---|---|
+| 7 (major, prior art): Proposition 13′ is a weak form of Odlyzko's theorem (1988); "up to which `K`" is answered there and by Irmatov (2024) | the known theorem is quoted after Proposition 13′, which is relabelled as an elementary bound; §0; §7 |
+| 8 (major, attribution): Proposition 13 follows from Laurent–Poljak's Theorems 2.7 and 2.9 and was listed under "no source found" | relabelled "[K] in substance"; attribution paragraph after the proof; §0; §7 |
+| 9: "time `2^K·poly(n)`" for the exposedness decision needs a linear-programming method linear in the number of variables | `2^{O(K)}·poly(n)` in §0, Corollary 5a and the table; `2^K·poly(n)` kept for the span problem, where it is literal |
+| 10: the ETH statement of Theorem 14(b) can be made self-contained; one line on strong duality in Proposition 13(i) | both added |
+
+The referee's strongest objection, in its words: "Proposition 13 is Laurent–Poljak 1993/95 restated with the 1980s
+projection rule.  Proposition 13′ is a weak form of Odlyzko 1988, written for exactly this memory model.
+Theorem 14 is a routine Partition-style reduction which, by its own item (c), says nothing about the original
+question E-C1.  That question is still open."  We agree with each sentence.

@@ -1,9 +1,9 @@
 # The NANUQ metric: a local criterion, all galled planar networks, and why "galled" cannot be dropped
 
 Working paper of the complexity division, first version 2026-11-26; **revised 2026-11-26 after the internal
-adversarial reviews `COMPLEXITY-REV-0002` and `COMPLEXITY-REV-0004`** (what changed: §11); §7.1 and §7.2 are
-later additions that no referee has seen.  Register: `THEOREMS.md` CX-T5–CX-T9, CX-T13,
-CX-V3.  Problem: `OPEN_PROBLEMS.md` B (Holtgrefe, Allman, Baños, van Iersel, Moulton, Rhodes, Wicke,
+adversarial reviews `COMPLEXITY-REV-0002`, `COMPLEXITY-REV-0004` and `COMPLEXITY-REV-0005`** (what changed: §11;
+the third covers the later additions, Corollary 5′, §7.1 and §7.2).  Register: `THEOREMS.md` CX-T5–CX-T9, CX-T13,
+CX-T26, CX-T27, CX-V3, CX-V5.  Problem: `OPEN_PROBLEMS.md` B (Holtgrefe, Allman, Baños, van Iersel, Moulton, Rhodes, Wicke,
 *Distinguishing Phylogenetic Level-2 Networks with Quartets and Inter-Taxon Quartet Distances*, Bull. Math.
 Biol. 2025; cited as [HABIMRW] by the numbering of arXiv:2507.17308v2).  References are listed in §12.
 
@@ -40,7 +40,7 @@ networks of the class (B1) and circular decomposability for level-3 bloblets (B2
    support**: each of the 23 six-point systems it excludes is, or becomes after doubling a few leaves, a
    system whose metric fails — in most cases by having the wrong support while remaining Kalmanson.  This
    is a statement about classes of split systems, not about classes of networks (§7).
-   **Theorem 10′ (added after the review, unreviewed)** [P + X] gives the sharp class for "Kalmanson" alone:
+   **Theorem 10′ (added after the first review; internally reviewed in REV-0005)** [P + X] gives the sharp class for "Kalmanson" alone:
    the systems none of whose six-point restrictions contains its three 3-splits without containing all
    six 2-splits (133 of the 150 six-point systems instead of 127); each of the 17 excluded six-point
    systems becomes, after two of its leaves are replaced by clades of at most three leaves, a system whose
@@ -49,9 +49,10 @@ networks of the class (B1) and circular decomposability for level-3 bloblets (B2
    distances of NANUQ⁺ the conclusion holds on the whole class exactly when `ρ_o = ρ_s` and
    `ρ_c + ρ_s ≤ 2ρ_a < 2ρ_s`; the *Modified NANUQ* distance is outside this set and fails on an explicit
    level-1 network with eight leaves, but it works when every hybrid node has a leaf child.
-6. **Theorem 12 (level 2 completely; added after the review, unreviewed)** [P + X].  An outer-labeled planar
-   blob with two hybrid nodes is galled or *nested* (one hybrid node below the other), and a nested blob
-   has a three-parameter list of positions.  In an outer-labeled planar network of level at most 2 the only
+6. **Theorem 12 (level 2 completely; added after the first review; internally reviewed in REV-0005)** [P + X].
+   An outer-labeled planar blob with two hybrid nodes is galled or *nested* (one hybrid node below the other;
+   this dichotomy is known — Huber, van Iersel, Jones, Moulton, Veenema-Nipius, arXiv:2408.12997, Lemma 4.2), and
+   a nested blob has a three-parameter list of positions.  In an outer-labeled planar network of level at most 2 the only
    splits whose weight can have the wrong sign are the *critical splits*, one per nested blob, and the
    weight of a critical split is `β_1·G + ξ_1·R − Σ β_jβ_l`, an explicit polynomial in the numbers of leaves
    hanging at the positions.  So for level 2 the statement of B1 holds for a network **if and only if** these
@@ -125,10 +126,11 @@ version (REV-0004, finding 9; the argument is the referee's).  (1) *Every node o
 the down part to `y` passes through `ℓ`, and so does the one continued to `y'`.  If `ℓ` were not on the part
 from the root to `a`, it would lie strictly below `a` on both down parts, which have only `a` in common.
 (2) *`ℓ` is an apex.*  `ℓ` is not a hybrid node (its child would be a lower stable ancestor) and not a
-leaf.  If there were no two paths from `ℓ` to two different leaves of `Y` with only `ℓ` in common, then by
-Menger's theorem (join all leaves of `Y` to a new sink) one node other than `ℓ` would lie on all paths from
-`ℓ` to `Y`; it is not a leaf since `|Y| ≥ 2`, and it would be a lower stable ancestor.  So `ℓ ∈ U`, and by (1)
-no edge of `U` enters `ℓ`.  (3) *Every other node `b` of `U` has an entering edge in `U`.*  This is clear
+leaf.  Join all leaves of `Y` to a new sink; `ℓ` is not adjacent to the sink, since it is not a leaf.  Two
+internally disjoint paths from `ℓ` to the sink are two paths from `ℓ` to two different leaves of `Y` with only
+`ℓ` in common.  If there were no such two paths, then by Menger's theorem one node other than `ℓ` and the sink
+would lie on all paths from `ℓ` to `Y`; it is not a leaf since `|Y| ≥ 2`, and it would be a lower stable
+ancestor.  So `ℓ ∈ U`, and by (1) no edge of `U` enters `ℓ`.  (3) *Every other node `b` of `U` has an entering edge in `U`.*  This is clear
 if `b` lies on an up-down path of which it is not the apex.  Let `b ≠ ℓ` be the apex of an up-down path with down
 parts `D_1` to `y_1` and `D_2` to `y_2`.  As `b` is below `ℓ` it is not a stable ancestor, so there is a path
 `P` from `ℓ` to some `y ∈ Y` avoiding `b`; let `R` be a path from `ℓ` to `b`, `c` the last node of `R` on `P`
@@ -142,7 +144,8 @@ two paths from `c`, to `y_1 ≠ y_2`, with only `c` in common.  In both cases we
 
 Consequently every node of `U` is reached from `ℓ`, a switching of `U` (one entering edge kept at every node
 with two entering edges in `U`) is a tree rooted at `ℓ` that contains `Y`, and `N|_Y` is a semi-directed
-network with rooted partner `U`.  (⊇) Let `S` be a switching of `N` and `S_Y` the union of its paths between leaves of `Y`.
+network of which `U` with its degree-2 nodes suppressed is a rooted partner (by (2) applied in `U`, its root `ℓ`
+is the least stable ancestor of `Y` in `U`).  (⊇) Let `S` be a switching of `N` and `S_Y` the union of its paths between leaves of `Y`.
 Then `S_Y ⊆ U`, and `S_Y` contains at most one hybrid edge at each node; a switching of `U` that keeps, at
 each of its hybrid nodes, the edge lying in `S_Y` if there is one contains `S_Y`, and being a tree it
 displays the same tree on `Y` as `S`.  (⊆) Let `S'` be a switching of `U`.  Choose a switching `S` of `N`
@@ -577,7 +580,7 @@ displayed by any network of that class on six leaves.
 
 ### 7.1 The sharp class for "Kalmanson" alone, as a forbidden six-leaf pattern
 
-*Added 2026-11-26 after the review; not seen by any referee.*
+*Added 2026-11-26 after the first reviews; internally reviewed in COMPLEXITY-REV-0005 (changes: §11).*
 
 Six points in circular order have nine non-trivial circular splits: six 2-splits `{x_k,x_{k+1}} | rest` and
 three 3-splits.  The 3-splits are pairwise incompatible, and a 2-split `{x_k,x_{k+1}}` is incompatible with
@@ -604,7 +607,8 @@ contains its three 3-splits and not the 2-split `{z,w}`, and let `Σ_6(m)` be ob
 α_S / 2  =  Φ4 + m·(Φ5(z) + Φ5(w)) − m²/2 ,
 ```
 
-with `Φ4`, `Φ5(z)`, `Φ5(w)` the terms of `Σ_6`.  It is negative for every `m ≥ 5`.
+with `Φ4`, `Φ5(z)`, `Φ5(w)` the terms of `Σ_6`.  It is negative for every `m ≥ 5`.  (The proof uses nothing about
+caterpillars: the formula holds for arbitrary clades `Z`, `W` with `m` leaves each.)
 (d) [X]  Exactly 17 six-point tree-generated systems contain their three 3-splits and miss a 2-split; they
 form four classes under rotation and reflection: all nine splits except one 2-split (6 systems), except
 two antipodal 2-splits (3), except two 2-splits at distance two (6), except three alternate 2-splits (2).
@@ -613,7 +617,11 @@ Hence
 miss a 2-split and the 3-split incompatible with it.  For each of the 17, the weight in (c) is negative
 already for some `m ≤ 3` (at most ten leaves; the formula of (c) agrees with the computed weights for
 `m = 1,…,6`), and for the least such `m` the metric `d_{Σ_6(m)}` is Kalmanson for **no** circular order of
-its leaves.
+its leaves.  The least `m` is 1, 2, 3 for 3, 6, 8 of the 17 systems.  Unlike the formula, the statement about
+all circular orders depends on the clades: it was computed for caterpillar clades whose cherry consists of the
+first two leaves in the circular order (the clade `((…((x_1,x_2),x_3),…),x_m)`, which arises by replacing the
+first leaf by a cherry repeatedly); the referee of REV-0005 recomputed it for all four planar orientations of
+the two caterpillars (102 cases, brute force over all `(n−1)!/2` orders), with the same result.
 
 *Consequently: a class of tree-generated circular split systems that is closed under restriction and under
 replacing a leaf by a cherry has, for all its members, a NANUQ metric that is Kalmanson — for the given
@@ -658,7 +666,12 @@ leaves by cherries repeatedly); by (d) one of them is Kalmanson for no circular 
 **Remarks.**  1. *Two sharp classes, both given by forbidden six-point restrictions.*  `𝒦′` forbids the four
 dihedral classes of (d); `𝒦` (Theorem 10, exact support) forbids these and a fifth one, "all nine splits
 except a 2-split and the 3-split incompatible with it" (`127 = 133 − 6`).  A system of `𝒦′ ∖ 𝒦` has a
-Kalmanson metric which gives positive weight to a split that no tree of the system has.
+Kalmanson metric (Theorem 10′(a)); that this metric always gives positive weight to a split that no tree of
+the system has is **not proved** — the six-point term with `Φ6 > 0` need not be a term of a split of the larger
+system, because its end leaves need not be adjacent there (REV-0005, finding 3).  [X] It holds for all systems
+of `𝒦′ ∖ 𝒦` on six, seven and eight points (6, 273 and 7 816 systems) and for 438 random ones on nine and ten
+points (the referee's `t9_seven.py`, `t9b_eight.py`, `t9c_random.py`).  What Theorem 10 does give: such a system
+has a restriction or a blow-up in which the support is wrong.
 
 2. *What it says about networks.*  Let `𝒩` be a class of outer-labeled planar binary semi-directed networks
 that is closed under passing to subnetworks `N|_Y` and under replacing a leaf by a cherry.  By Lemma 1,
@@ -679,7 +692,7 @@ themselves have a Kalmanson metric.
 
 ### 7.2 Level 2 completely: one critical split per nested blob
 
-*Added 2026-11-26 after the review; not seen by any referee.*
+*Added 2026-11-26 after the first reviews; internally reviewed in COMPLEXITY-REV-0005 (changes: §11).*
 
 Theorem 7 settles the galled networks, and §6 gives one family that is not galled and in which the
 conclusion fails.  For level 2 the picture can be completed.  There is exactly one further kind of blob;
@@ -735,6 +748,19 @@ third, `C`, leaves it; the other hybrid node `h_2` is an interior node of `C`; t
 contains `C`, hence an edge entering `h_1`: the blob is not galled, and `h_1` is an ancestor of `h_2`.
 
 If `N` is outer-labeled planar and `𝔅` is of the nested kind, then `A` or `B` has no position.
+
+*Attribution (REV-0005, finding 2).*  The dichotomy is known: it is Lemma 4.2 with Figure 8 of Huber, van Iersel,
+Jones, Moulton and Veenema-Nipius, "When are quarnets sufficient to reconstruct semi-directed phylogenetic
+networks?", arXiv:2408.12997 (v3 of 3 August 2025; the first version was titled "Encoding semi-directed
+phylogenetic networks with quarnets"): "The semi-directed level-2 generators are as pictured in Figure 8", the
+proof distinguishing (a) one reticulation at an end vertex of the theta graph and the other at an interior vertex
+of one of the three paths — our nested kind — and (b) the two reticulations at interior vertices of two distinct
+paths — our galled kind.  We had not seen it; the referee found it and reports that the proof there asserts,
+without details, that the other placements cannot be oriented.  (Inspected: §4 with the proof by the referee; the
+statement and the case distinction again by a fetch of the HTML version on 2026-11-26.)  What the proof below
+adds to the known statement: the orientation argument, the location of the source, the path on which the second
+hybrid node lies, the case of parallel edges, and the last sentence (the path without positions in an
+outer-labeled planar network).  Lemma C is therefore **[K] for the dichotomy, [P] for these additions**.
 
 *Proof.*  Every node of `𝔅` other than the source has one parent in `𝔅`, the hybrid nodes two; so `𝔅` has
 `|V(𝔅)| + 1` edges, i.e. two independent cycles.  Suppressing the nodes of degree two leaves a 2-connected
@@ -825,7 +851,10 @@ splits of the six leaves except the 2-split formed by the second and third of th
 system is globally good (one of the 141 of §7).
 If some cut edge has at least two leaves of `Y` on each side, `Σ|_Y` is by Lemma D(i) and Lemma 7(ii) a
 substitution of two tree-generated systems with at least three leaves each; there are 624 such
-substitutions on six points and all are 6-locally good [X].  Otherwise direct every cut edge towards its
+substitutions on six points (quadruples `(Σ_1, Σ_2, p, r)`; they give 74 different systems) and all are 6-locally
+good [X].  (This is not an independent fact: the factors have at most five leaves, every tree-generated system
+on at most five points lies in `𝒜`, so these systems lie in `𝒞_6` and are covered by Lemma 8 — REV-0005,
+finding 4.)  Otherwise direct every cut edge towards its
 side with at least five leaves of `Y`.  The blobs (and the tree nodes outside the blobs) with the cut
 edges form a tree, and a directed tree has a node `𝔅` all of whose edges point to it; each of its pendant
 subnetworks contains at most one leaf of `Y`; so `𝔅` is not a leaf and not a tree node (three pendant
@@ -907,7 +936,8 @@ following are equivalent.
 (ii) `Split(T(N)) ∈ 𝒦`.  (iii) `Split(T(N)) ∈ 𝒦′`.
 (iv) `N` and every network obtained from `N` by replacing leaves by clades satisfy the conclusion (circular
 decomposable, support the displayed splits).
-(v) All these networks have a Kalmanson NANUQ metric.
+(v) All these networks have a NANUQ metric that is Kalmanson **for the induced circular order** (the order in
+which the network, with its clades, is outer-labeled planar).
 
 *Proof.*  By Step 1 a six-point restriction that is not 6-locally good needs three `b`-positions and a
 `c`-position, or four `b`-positions, of a nested blob with `k_1 ≥ 1`, and such positions exist exactly when
@@ -915,7 +945,17 @@ decomposable, support the displayed splits).
 (ii) ⇒ (iv): `𝒦` is closed under replacing leaves by clades (Theorem 10(c)), and Theorem 4.  (iv) ⇒ (v) is
 trivial.  (v) ⇒ (i): if `j, l ∈ M`, replace one leaf at `b_j` and one at `b_l` by clades of `m` leaves; the
 new network is of the same kind, `β_1`, `G`, `ξ_1`, `R` are unchanged, and by Theorem 12(b) the critical weight
-is `β_1G + ξ_1R − (β_j + m − 1)(β_l + m − 1) − …`, negative for large `m`.  ∎
+is `β_1G + ξ_1R − (β_j + m − 1)(β_l + m − 1) − …`, negative for large `m`; so for the induced order the metric of
+the new network is not Kalmanson.  ∎
+
+*What (v) does not say (REV-0005, finding 1).*  The first version wrote "(v) All these networks have a Kalmanson
+NANUQ metric", which can be read as "for some circular order"; the proof above gives the failure for the induced
+order only, and Theorem 10′(d) cannot be invoked, because the networks obtained from one network by attaching
+clades are not a class closed under restriction.  **Whether a network that violates (i) always has a blow-up whose
+metric is Kalmanson for no circular order at all is not proved.**  Evidence [X], by the referee of REV-0005
+(`reviews/rev5_nanuq_ising_strands/t15_cor14v.py`, `t7_orders.py`): 120 blow-ups constructed as in the proof (60 of
+them not bloblets, at most ten leaves) and 150 further networks that are not bloblets and have a negative critical
+weight — none is Kalmanson for any circular order; and the nine bloblets of Corollary 13.
 
 **Remarks.**  1. *Why the middle positions.*  Take leaves `z, w` at two different `b`-positions together with
 leaves at `b_1`, `c_1` (or `b_{k_B}`), `y`, `x_1`.  The three 3-splits of Corollary 5′ come from `T_2` (the arm of
@@ -1029,8 +1069,9 @@ number of blobs it is not sufficient — Modified NANUQ lies in it and fails on 
 * Nothing about networks that are not outer-labeled planar.
 * The non-galled planar networks for which the conclusion survives are classified for level 2 only
   (Theorem 12); for level 3 and above the blobs that are not galled have not been listed.  Theorem 12 says
-  nothing about circular orders other than the planar one when a critical weight is negative (checked only
-  for the bloblets with at most nine leaves).
+  nothing about circular orders other than the planar one when a critical weight is negative (computed only:
+  the nine bloblets with at most nine leaves, and the 270 instances of the referee of REV-0005 — in all of
+  them no circular order works); accordingly Corollary 14(v) is about the induced order.
 * For "Kalmanson" without exact support the sharp class is `𝒦′` (Theorem 10′, §7.1) — for classes closed
   under restriction and cherry replacement; nothing is shown about a single system outside `𝒦′` (§7.1,
   Remark 3), and the six-leaf outer-labeled planar networks that display the forbidden pattern are not
@@ -1039,11 +1080,16 @@ number of blobs it is not sufficient — Modified NANUQ lies in it and fails on 
   is sufficient; our necessity witnesses use pendant clades).
 * Theorem 7 was reached independently, but after a third-party claim of the same statement whose method
   probably coincides with ours (§0).
-* The proofs are paper proofs by this division with two internal adversarial reviews (REV-0002; REV-0004 for
-  Lemma 0, Lemma B0, Lemma B, Theorem 9(c) and Theorem 11), which are not academic peer review.  Theorem 11
-  rests on a computed table of local forms that no kernel checks (the second referee reproduced the table
-  and checked 2 971 networks on the extreme rays of both parameter domains).  Corollary 5′, §7.1 and §7.2
-  were written after both reviews.
+* The proofs are paper proofs by this division with three internal adversarial reviews (REV-0002; REV-0004 for
+  Lemma 0, Lemma B0, Lemma B, Theorem 9(c) and Theorem 11; REV-0005 for Corollary 5′, §7.1, §7.2 and the
+  completed Lemma 0), which are not academic peer review.  Theorem 11 rests on a computed table of local forms
+  that no kernel checks (the second referee reproduced the table and checked 2 971 networks on the extreme
+  rays of both parameter domains); Theorem 12 rests on the table of Step 4, which the third referee reproduced
+  from explicit networks but no kernel checks.
+* The strongest objection of the third referee, in its words: Theorem 12 "classifies split weights for the
+  planar order only"; the blob in question is the second level-2 generator, which is known; where a critical
+  weight is negative the note does not show that the metric fails for every circular order; and these networks
+  lie outside the class about which [HABIMRW] conjecture anything.
 
 ## 10. Reproduction
 
@@ -1128,6 +1174,26 @@ outer-labeled planar networks of level at most 2 and so answers, for level 2, th
 §6, Remark 3.  The referee of REV-0004 saw an uncommitted draft of Corollary 5′ and Theorem 10′ and reports
 incidental checks only (Corollary 5′ on 150 × 12 labellings; the formula of Theorem 10′(c) on 68 values).
 
+**Changes after the review COMPLEXITY-REV-0005** (Corollary 5′, §7.1, §7.2, the completed Lemma 0).  The referee
+found no false statement; with its own code, written from the definitions of [HABIMRW], it tested Lemmas C and D,
+the four trees, Theorem 12 and the corollaries on 1 035 352 outer-labeled planar networks with two hybrid nodes
+(all tree shapes on 4–8 leaves, exhaustive hybrid insertion), 362 792 with three hybrid nodes and level at most 2,
+and 31 000 random networks with up to 16 leaves; four deliberately wrong variants of the formula of Theorem 12(b)
+were caught, the formula of the note never.
+
+| finding | change |
+|---|---|
+| 1 (major under one reading): Corollary 14, (v) ⇒ (i) is proved for the induced circular order only | (v) now says "for the induced circular order"; the paragraph "What (v) does not say" states that the all-orders version is not proved and records the referee's evidence (270 instances) |
+| 2: the dichotomy of Lemma C is Lemma 4.2 of Huber et al., arXiv:2408.12997 | attribution paragraph after Lemma C; §0 item 6; §12; `PRIOR_ART.md` B-VIII; Lemma C is [K] for the dichotomy, [P] for the orientation argument, the source, parallel edges and the planarity statement |
+| 3: the last sentence of §7.1, Remark 1 is not proved | sentence replaced: stated as not proved, with the range in which it was computed (all systems on 6–8 points; samples on 9–10) |
+| 4: "624 substitutions" are 624 quadruples giving 74 systems, and are covered by Lemma 8 | said so in Step 1 of the proof of Theorem 12 |
+| 5: the formula of Theorem 10′(c) holds for arbitrary clades; the "no circular order" statement of (d) depends on the clades | both said; the clades used are described, and the referee's recomputation for all four orientations of the caterpillars is cited |
+| 6: wording of Lemma 0, step (2) and of the last sentence before "(⊇)" | reworded as the referee asks |
+
+Not reviewed by anyone: `NANUQ_HIGHER_LEVELS.md` (Theorem A and the six-leaf survey) and the Lean file
+`NanuqPattern.lean` (kernel-checked, so its content is not in doubt, but the correspondence between the file and
+the note was not examined by a referee).
+
 ## 12. References
 
 * [HABIMRW] N. Holtgrefe, E. S. Allman, H. Baños, L. van Iersel, V. Moulton, J. A. Rhodes, K. Wicke,
@@ -1141,7 +1207,11 @@ incidental checks only (Corollary 5′ on 150 × 12 labellings; the formula of T
   through [HABIMRW] Prop. 2.8).
 * Third-party entry "All-level NANUQ circularity and exact displayed-split support", vibemathed.com,
   submitted 2026-09-30 (public summary read; the linked repository not inspected) — `PRIOR_ART.md` B-II.
-* COMPLEXITY-REV-0002, internal adversarial review of this note
+* K. T. Huber, L. van Iersel, M. Jones, V. Moulton, L. Veenema-Nipius, *When are quarnets sufficient to
+  reconstruct semi-directed phylogenetic networks?*, arXiv:2408.12997 (v3, 2025; v1 titled *Encoding
+  semi-directed phylogenetic networks with quarnets*) — Lemma 4.2: the semi-directed level-2 generators.  Found by
+  the referee of REV-0005, who read §4; statement and proof outline confirmed by us from the HTML version.
+* COMPLEXITY-REV-0002, -0004, -0005, internal adversarial reviews of this note
   (`docs/collaboration/messages/complexity/`).
 
 ## Appendix B.  The 17 classes of `𝒞_6`

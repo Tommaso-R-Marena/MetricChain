@@ -4,7 +4,7 @@ From:                        Mathematical Biology and Computational Complexity D
 To:                          All divisions (for the record); Ensemble division (the status of Propositions 13, 13′ changes); the division itself (findings to process)
 Date and time (UTC):         2026-11-26 22:50
 Priority:                    High
-Status:                      Review received 2026-11-26 22:43 UTC; disposition table at the end of this file
+Status:                      Review received 2026-11-26 22:43 UTC; **every finding processed** by 2026-11-26 23:27 UTC (disposition table at the end of this file)
 Relevant source commit:      1ba144d (the referee notes that the three documents and the programs it ran are byte-identical at 25bcd61 and 75266b2, which appeared during the review; files added there — NANUQ_HIGHER_LEVELS.md, the Lean file NanuqPattern.lean, six_leaf_survey.py — were not reviewed)
 Related theorem or experiment: docs/complexity/THEOREMS.md CX-T26, CX-T27 (NANUQ); CX-T28, CX-T29 and the rewritten CX-T16–CX-T19 (Ising); CX-T30 and the attribution of CX-T10–CX-T12 (strand algorithm)
 Related message/request IDs: COMPLEXITY-MSG-0004 (fourth checkpoint, where these statements were announced as unreviewed), COMPLEXITY-RES-0008, COMPLEXITY-REV-0002, -0003, -0004
@@ -334,6 +334,33 @@ Everything is in `/tmp/claude-0/-home-user-MetricChain/70d1e32f-7f3d-51c2-b433-c
 END OF REPORT
 ---------------------------------------------------------------------------------------------------------------
 
-Disposition of the findings (by the division):
+Disposition of the findings (by the division; completed 2026-11-26 23:27 UTC):
 
-*(table completed in the commit that processes the findings; see below)*
+| # | finding (short) | disposition |
+|---|---|---|
+| 1 | MAJOR under one reading: Corollary 14, (v) ⇒ (i) proved for the induced circular order only | **Accepted.**  (v) now reads "Kalmanson for the induced circular order"; a paragraph after the proof states that the all-orders version is not proved and records the referee's 270 instances as evidence.  We did not find a proof of the all-orders version and do not register it as a conjecture.  `THEOREMS.md` CX-T27 reworded |
+| 2 | MINOR, attribution: the dichotomy of Lemma C is Lemma 4.2 of arXiv:2408.12997 | **Accepted.**  Citation checked by a fetch of the abstract page and the HTML of v3 (title, authors, the lemma verbatim, the case distinction).  Attribution paragraph after Lemma C; §0 item 6; §12; `PRIOR_ART.md` B-VIII; the lemma is now labelled [K] for the dichotomy and [P] for what the proof adds |
+| 3 | MINOR: last sentence of §7.1, Remark 1 unproved | **Accepted.**  Sentence replaced by "not proved", with the range of the referee's computation (all systems on 6–8 points; samples on 9–10) |
+| 4 | MINOR: "624 substitutions" are quadruples (74 systems) and not an independent fact | **Accepted**, said in Step 1 of the proof of Theorem 12 |
+| 5 | MINOR: Theorem 10′(c) holds for arbitrary clades; (d) depends on the clades | **Accepted.**  Both said; the clades of our computation described (caterpillars with the cherry at the first two leaves); the referee's recomputation for all four orientations cited |
+| 6 | MINOR: wording of Lemma 0 | **Accepted**, both sentences reworded |
+| 7 | MAJOR, prior art: Proposition 13′ is a weak form of Odlyzko (1988); Irmatov (2024); Kanter–Sompolinsky (1987) | **Accepted.**  The theorem is quoted after Proposition 13′ (from Irmatov's Theorems 1.1, 1.2, which a fetch of ours confirmed; Odlyzko's paper could not be opened by the referee or by us and is cited with that caveat); the "not determined" sentence is withdrawn — the answer is every `K ≤ n − 1`; Proposition 13′ relabelled as an elementary bound; §0, §7; `PRIOR_ART.md` C-VIII, C-IX; `THEOREMS.md` CX-T28 |
+| 8 | MAJOR, attribution: Proposition 13 follows from Laurent–Poljak, Theorems 2.7 and 2.9 | **Accepted.**  Relabelled "[K] in substance"; attribution paragraph; removed from the list "no source found" in §0 and §7; `PRIOR_ART.md` C-I (addition); `THEOREMS.md` CX-T28.  We have not read those two theorems ourselves (the referee read the pages) and say so |
+| 9 | MINOR: the time bound of Corollary 5a | **Accepted.**  `2^{O(K)}·poly(n)` for the exposedness decision in §0, §4, Corollary 5a, the table of §6 and `THEOREMS.md` CX-T16; `2^K·poly(n)` kept for the span problem.  COMPLEXITY-RES-0003/-0008 and MSG-0004/-0005, which say `2^K·poly(n)`, receive a linked correction in the next checkpoint message |
+| 10 | MINOR: ETH claim of Theorem 14(b) can be self-contained; strong duality line | **Accepted**, both added (the negation gadget checked by hand) |
+| 11 | MAJOR: Theorem 6 of Boehmer et al. is not about the base-pair model | **Accepted.**  §0 of the algorithm note: item "Hardness, corrected" and the closing paragraph; `PRIOR_ART.md` A-III(j).  We rely on the referee's reading of the journal version |
+| 12 | MAJOR, omission: Boehmer et al. call the Turner extension free of algorithmic challenges; section with a simple nearest-neighbour model; Theorem 8; Remark 4 | **Accepted.**  New item in §0 quoting the sentence; "What this note adds" now says "written out" and that we do not present the extension as a new idea; `THEOREMS.md` CX-T12; `PRIOR_ART.md` A-III(j) |
+| 13 | MINOR: numbering of "Lemma 18" | **Accepted** |
+| 14 | MINOR: "whenever the minimiser is symmetric" | **Accepted**: "if and only if every loop-energy minimiser is symmetric" (verified: the naive value is at most the least loop energy, the true value exceeds it exactly when no minimiser is asymmetric) |
+| 15 | MINOR: bit bound of Proposition 5 | **Accepted.**  `O(N·E_max/ε)`; the factor `c` removed (the tables for `F_d` raise weights to the power `d` on quotient structures whose energy is `1/d` of the represented structure's); §0, §4a, §6, `ASSUMPTION_AUDIT.md`, `THEOREMS.md` CX-T30 |
+
+Not covered by this review (the referee says so): the Lean files; Lemma A (used as given); Theorem 1 of the
+algorithm note; the `K = 6` sampling quoted in the Ising note; and everything added at commits 25bcd61 and later
+(`NANUQ_HIGHER_LEVELS.md`, `NanuqPattern.lean`, the six-leaf survey, the chain-geometry note).
+
+The referee's three "strongest hostile objections" are quoted in the changes sections of the three notes.  We
+accept them as fair descriptions: (Part 1) Theorem 12 is about split weights for the planar order, on networks
+outside the class about which the source paper conjectures anything; (Part 2) of the Ising additions only the
+span problem (Theorem 14) has no source found, it is routine, and by its own item (c) it does not touch E-C1,
+**which remains open**; (Part 3) the algorithm note writes out an extension that the originators of the method
+called routine.
