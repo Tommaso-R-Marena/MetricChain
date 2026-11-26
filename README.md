@@ -18,7 +18,7 @@ evaluation only.
 | how the program evolved and what is open | [`docs/RESEARCH_LOG.md`](docs/RESEARCH_LOG.md) |
 | what turned out false, weaker, or already known | [`docs/DEAD_ENDS.md`](docs/DEAD_ENDS.md) |
 | the literature checks behind the novelty assessments | [`docs/prior_art/`](docs/prior_art) |
-| the independent referee reports on the theory report (nine so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md), [`R5`](docs/reviews/R5_referee_report.md), [`R6`](docs/reviews/R6_referee_report.md), [`R7`](docs/reviews/R7_referee_report.md), [`R8`](docs/reviews/R8_referee_report.md), [`R9`](docs/reviews/R9_referee_report.md) |
+| the independent referee reports on the theory report (twelve so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md), [`R5`](docs/reviews/R5_referee_report.md), [`R6`](docs/reviews/R6_referee_report.md), [`R7`](docs/reviews/R7_referee_report.md), [`R8`](docs/reviews/R8_referee_report.md), [`R9`](docs/reviews/R9_referee_report.md), [`R10`](docs/reviews/R10_referee_report.md), [`R11`](docs/reviews/R11_referee_report.md), [`R12`](docs/reviews/R12_referee_report.md) |
 | the independent reviews of the workstream reports | [`docs/reviews/`](docs/reviews) (`R_B_review.md`, `R_C_review.md`, `R_D_review.md`, `R_E_review.md`, `R_G_review.md`, `R_P_review.md`) |
 | collaboration between three research divisions on three branches — this one (theory), the Computational Research Division (`research/ubuntu-engineering`) and the Scientific Discovery, Translation & Independent Validation Division (`research/scientific-translation`); the other two branches are read-only from here and are never merged: protocol, status, messages, requests and responses | [`docs/collaboration/`](docs/collaboration/README.md), digest in [`THEORY_TO_ENGINEERING.md`](docs/collaboration/THEORY_TO_ENGINEERING.md), state in [`status/theory.md`](docs/collaboration/status/theory.md) |
 | reports of independent exploratory workstreams (as delivered; not part of the theory report unless it says so) | [`docs/workstreams/`](docs/workstreams) |
@@ -114,7 +114,9 @@ at what cost?*  Certificates are coverings in a slack quasi-metric with radii eq
 points' own optimality gaps.  The size of the smallest one equals, instance by instance, the
 number of evaluations of the best deterministic algorithm that is correct on the whole class
 *and may be tailored to that instance*; no single algorithm achieves it on all instances.  With
-only a first-order envelope, on product landscapes one evaluation suffices iff every site is
+only a first-order envelope, on product landscapes (independent sites of finitely many types
+that are fixed as the system grows, and an additive residual that stays strictly inside the
+envelope) one evaluation suffices iff every site is
 sharp; otherwise the number is exponential in the number of non-sharp sites, with an exact
 exponent (a rate–distortion function).  At finite temperature, for accuracies that are neither
 extensive nor exponentially small, the same formula holds with the energy gap replaced by the
@@ -140,15 +142,20 @@ threshold of the whole class, for algorithms that are given nothing, is the smal
 oscillation of a tilted site pressure, for every alphabet (for two-state sites: the largest
 chord gap of the pressure).  The lower bounds and both tensorisations are machine-checked;
 the rest are paper proofs, among them the matching upper bound of the exponent below the
-threshold, which an independent referee checked.  A known part turns out to be nothing but the
+threshold, which an independent referee checked.  For minima and their certificates — not for
+free energies — a known part turns out to be nothing but the
 gradient part of an asymmetric envelope (normal form, machine-checked).  Second-order
 structure does not rescue certification when its constants are dense: the uncertainty left by
 any set of evaluations grows quadratically with the distance to it (machine-checked), so the
 price is exponential unless the excitation energies are of the order of `c·n`.
 The exponential price is a property of the *class*, not of a certificate format and not
-of worst-case reasoning as such: the lower bounds hold at every instance, so no procedure
-that is correct on a first-order class can be cheap on any of its subclasses, and a
-cheaper paradigm must say which members it gives up.  Two classes with other geometry are
+of worst-case reasoning as such: every instance has its own lower bound, which holds for
+every procedure that is correct on the first-order class, so no such procedure can be cheap
+at an instance whose own bound is large, in whatever subclass that instance lies (the bound
+can be small: one evaluation for the minimum at a sharp instance, two at a cone given as a
+hint, and a
+class-correct procedure costs `n + 3` on every cone — theory report, Theorem 11.45(d)), and a
+paradigm that is cheaper there must say which members it gives up.  Two classes with other geometry are
 treated next to it — a Hilbert ball, in which evaluations combine linearly (the
 hypercircle band, machine-checked: `HilbertBall.lean`; proposed by the Scientific
 Discovery Division), and a box around a known part that can be sampled (below).
@@ -237,8 +244,11 @@ over levels, prior art — now written into the text; the referee found no error
 accounting beyond one closure rule, which the harness had found as well).  On the cube
 class, adaptive randomised algorithms without a hint have, in the worst case, exactly the
 exponent `KL((Λ₁+ε₁)/u ‖ ½)` that Theorem 11.25 gives for algorithms with a hint, while
-non-adaptive ones have the larger exponent of (i): at the exponential scale a hint is worth
-nothing to an adaptive algorithm.  The upper bound is a nested "layer-cake" algorithm (an
+non-adaptive ones have the larger exponent of (i): at the exponential scale, in the worst
+case over the cube class, a hint is worth
+nothing to an adaptive algorithm (with a field the hinted exponent at the zero residual is
+strictly below the worst case without a hint, (v)).
+The upper bound is a nested "layer-cake" algorithm (an
 independent workstream's): a uniform sample of an outer block of coordinates, brackets of
 the fibre averages refined only as far as a one-sided test against a ladder of levels
 requires, and the tail lemma once at the top.  One level maps an exponent function `T` to
@@ -288,8 +298,10 @@ accuracy a product measure with the right marginal, which is not the Gibbs measu
 ties with the flat histogram in that lower bound, as the Scientific Discovery Division
 pointed out: capacity equals information radius); and the isoperimetric input is not that of
 a fixed product measure but a new asymptotic statement for a "flat-histogram" reference
-instance, proved by the method of types.  A field always helps: every exponent decreases
-with the strength of the field (proved by the coordinator, refereed).  Machine-checked: the
+instance, proved by the method of types.  For two-state sites a field always helps: every
+exponent decreases
+with the strength of the field (proved by the coordinator, refereed; with three or more
+states it does not always help, (xi)).  Machine-checked: the
 identity between the three rates (`FieldShift.lean`) and the convergence of the exact
 recursion for any pair of exponent functions with the abstract properties; the central
 formulas were re-computed by the coordinator and, independently, by the referee
@@ -300,7 +312,9 @@ optimal among fixed samples up to a polynomial factor, for every `n` — the tru
 lemma and the lower bound are machine-checked (`TypeQuantiles.lean`,
 `SymmetricSampling.lean`), the matching upper bound is a paper proof; the exponents for
 such known parts are item (viii).
-(vi) *The common structure* (theory report §11.21; workstream M; machine-checked).  In both
+(vi) *The common structure* (theory report §11.21; workstream M; the theorem about game
+functions is machine-checked, the statements about algorithms are the paper proofs of (i),
+(iii)–(v)).  In both
 cases the non-adaptive curve is the hinted curve sheared by its own height — with a budget
 of `e^{nθ}` evaluations a non-adaptive algorithm certifies an accuracy rate that is worse by
 exactly `θ` — and the analytic core is one theorem about arbitrary game functions `F` on
@@ -355,8 +369,12 @@ are hardest to exclude are shells of configurations in the barrier region — no
 around a point, which miss the exponent by more than a factor two, and, beyond a small
 accuracy, not even sets built around one centre: the extremal sets constrain only part of
 the system** (found by the workstream against the coordinator's brief; D49).  A
-ferromagnetic interaction never makes the problem harder than no interaction, and a
-shallow barrier is invisible to every exponent.  Open: what adaptive algorithms can do
+ferromagnetic interaction of this mean-field kind never makes the problem harder than no
+interaction (a ferromagnetic coupling along the chain can: item (xviii)), and a shallow
+barrier can be invisible to the exponents: in zero field and at moderate slopes they equal
+the uniform cube's up to a coupling beyond the critical one — proved as a local statement,
+numerical beyond that, and at large slopes and small accuracies the junction comes earlier.
+Open: what adaptive algorithms can do
 (the nested algorithm does not transfer; see (x)), and the value of the exponent with two
 phases beyond small accuracies.
 (ix) *Rounds of adaptivity* (theory report §11.24; workstream U,
@@ -427,9 +445,11 @@ replication (SCI-REV-0005): nothing false; two gaps in the written proof of the 
 upper bound — the isoperimetric statement it rests on was stated in the workstream's
 report only, and a uniformity over compositions was asserted, not proved — both closed
 in the theory report; its twelve minor findings corrected; the nested algorithm has
-never been simulated**).  The setting the certificate formats were built for: a fixed
+never been simulated**).  The setting the certificate formats were built for, except
+that the known part is restricted to single-site terms (the formats allow pairwise
+ones): a fixed
 sequence of
-site types, any number of states per site, single-site known parts, envelopes that need
+site types, any number of states per site, envelopes that need
 not be symmetric.  All three exponents come from one function, and the kinds of sites
 combine through a common *slope*, not at a common accuracy (their exponents do not add).
 **The single-site ingredient is a classical object: a Rényi capacity of the channel that
@@ -450,7 +470,8 @@ which the two-state cube attains to leading order.  Machine-checked here: the ge
 inequalities behind the every-`n` lower bounds (the product step for several kinds of
 sites is on paper) and the two
 elementary steps behind "the hardest instance is the Rényi centre" (`RenyiCentre.lean`).
-(xii) *Evaluations together with local experimental data* (theory report §11.27; a question
+(xii) *Evaluations together with local ensemble-averaged data* (exact low-order marginals
+of the ensemble — an idealisation of local experimental data; theory report §11.27; a question
 of the Scientific Discovery Division, which proved the adaptive case).  On the cube class,
 knowing all `k`-body marginals of the true ensemble exactly changes neither the adaptive
 nor the non-adaptive exponent, for every fixed `k`: the hard instances can be symmetrised
@@ -490,8 +511,11 @@ the Scientific Discovery Division after its measurements on force-field terms;
 **elementary, partly machine-checked in `BoxClass.lean`, not refereed, no novelty claimed
 beyond the placement**).  If the energy is a known function whose ensemble can be sampled
 exactly plus a remainder with pointwise bounds, the number of evaluations that certifies
-the free energy is the Boltzmann factor of *how far below the known function the truth
-may lie* — a free-energy distance in `k_BT` — divided by the accuracy.  **The system enters
+the free energy, with the instance as a hint, is the Boltzmann factor of *how far below the
+known function the truth
+may lie* — a free-energy distance in `k_BT` — divided by the accuracy (without a hint the
+worst case is of the order of the Boltzmann factor of the width of the class divided by the
+square of the accuracy).  **The system enters
 only through that distance, not through its number of states or variables**; for a
 remainder that is a sum over a growing system the distance grows with it, so the
 exponential is moved into the right coordinate, not removed (our first statement of this

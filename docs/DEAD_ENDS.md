@@ -2357,3 +2357,13 @@ solution through a folded saddle, a Kepler problem — three independent routes 
 same `2π²`) and only then looking for the discrete statement that can be proved; and
 comparing every candidate bound with the grid recursion at small `k`, where an error of
 this kind is large.
+
+## D65. A hypothesis lost on adoption, again: "second-order classes below the Curie–Weiss coupling cost polynomially many evaluations" — FALSE unless the known part is additive  **[audit AA1: `experiments/audit/AA1/aa1_04_second_order_known_part.py`]**
+
+Theorem 11.33(a) of the theory report was adopted from workstream D without its hypothesis
+"`f` additive" — the failure mode of D62, item 1; found by the assumption audit
+(`audit/AA1_REPORT.md`, Err-1).  Without it (a) is false: a known part that confines the ensemble
+to a code (extended Golay code, `n = 24`, `w = 4`: `(1 − 2δ)·4096` evaluations at `ε < 10⁻³`;
+Gilbert–Varshamov codes: exponentially many at every `w > 0`) or a pairwise one of ferromagnetic
+blocks (`exp(Θ(n^{1/3}))` at `w = 4`) makes disjoint droplets sensitive.  Restored, with a remark
+after the theorem.  *Lesson:* that of D62; statements adopted before it need the same check.

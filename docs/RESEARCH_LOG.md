@@ -2650,8 +2650,10 @@ by it (SCI-RES-0008); §11.30 (a)–(e) were re-derived by that division from th
 (no error; SCI-RES-0007, -0008), its part (f) and Proposition 11.112 are that division's,
 re-derived by us on paper and tested, not machine-checked;
 Proposition 11.81(c) in its completed form, the remark on sample sizes after Theorem 11.56,
-the `χ²` bound and the rate in Theorem 11.97(c); **the rate `O(1/k)` for the level recursion
-(remark after Theorem 11.53) and the duality statement of Proposition 11.18b(e)**.  **Not
+the `χ²` bound and the rate in Theorem 11.97(c); **the duality statement of Proposition
+11.18b(e)** (the rate `O(1/k)` for the level recursion, remark after Theorem 11.53, was listed
+here; it has since been refereed and machine-checked by the Scientific Discovery Division:
+SCI-REV-0014, `RateFull.lean`, item 0a below).  **Not
 refereed:** the revised Theorem 11.44,
 Proposition 11.50, Propositions 11.100, 11.102, 11.103(a)–(c); Proposition 11.113b(b), (c);
 Proposition 11.18f(c″) beyond the parts the science division stated; the sign-blind lemma
