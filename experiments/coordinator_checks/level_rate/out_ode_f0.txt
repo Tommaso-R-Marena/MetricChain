@@ -1,0 +1,3 @@
+eps 0.01 f0 = 19.739208776  f(60) = 6.30469e-23  min disc on plus branch 4.40753e-5  f(2)= 2.9309971
+eps 0.001 f0 = 19.7392088022  f(60) = 6.30469e-23  min disc on plus branch 4.44074e-7  f(2)= 2.9312056
+eps 0.0001 f0 = 19.7392088022  f(60) = 6.30469e-23  min disc on plus branch 4.44407e-9  f(2)= 2.9309847

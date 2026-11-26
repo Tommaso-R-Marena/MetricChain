@@ -1,0 +1,22 @@
+(1) comonotone coupling is the maximum of E e^{+-beta S}: violations 0 in 240000 couplings; largest ratio 1.000000000000
+(2) P(S_g>0) = [0.25, 0.25, 0.25]  sum = 0.750   1 + sum E y_g = 1.600000   exact minimum over couplings = 1.600000   attained
+(2) P(S_g>0) = [0.375, 0.375, 0.25]  sum = 1.000   1 + sum E y_g = 1.850000   exact minimum over couplings = 1.850000   attained
+(2) P(S_g>0) = [0.375, 0.375, 0.375]  sum = 1.125   1 + sum E y_g = 1.900000   exact minimum over couplings = 1.935000   NOT attained (minimum is larger by 0.0350)
+(2) P(S_g>0) = [0.5, 0.375, 0.375]  sum = 1.250   1 + sum E y_g = 1.987500   exact minimum over couplings = 2.057500   NOT attained (minimum is larger by 0.0700)
+(2) P(S_g>0) = [0.5, 0.5, 0.5]  sum = 1.500   1 + sum E y_g = 2.200000   exact minimum over couplings = 2.340000   NOT attained (minimum is larger by 0.1400)
+(2) P(S_g>0) = [0.75, 0.625, 0.5]  sum = 1.875   1 + sum E y_g = 2.537500   exact minimum over couplings = 3.048750   NOT attained (minimum is larger by 0.5112)
+(3) 1 + sum E y_g + sum_{known pairs} E[y_g y_g'] <= E prod (1 + y_g): violations 0 in 20000
+(P9-T2) toy chains, product reference:  beta  ln<e^{beta sum gamma}> exact   site-reduced floor   Finner bound   first order beta<sum gamma>
+        scale 0.05   1.0      0.02967      0.47929      0.04099      0.02719
+        scale 0.20   1.0      0.14381      2.28179      0.89620      0.09048
+        scale 0.60   1.0      2.83214     12.43599     15.34504      0.23976
+        scale 1.50   1.0     13.48522     25.03119     29.30730      0.72860
+        scale 0.05   1.0      0.01747      0.42436      0.02619      0.01611
+        scale 0.20   1.0      0.12485      2.11524      1.31125      0.08258
+        scale 0.60   1.0      3.23404     12.72728     15.59332      0.35795
+        scale 1.50   1.0     20.03400     34.40994     46.06649      0.66963
+        scale 0.05   1.0      0.03461      0.47621      0.04370      0.03225
+        scale 0.20   1.0      0.14856      2.67105      1.40005      0.08919
+        scale 0.60   1.0      3.71396     13.80590     16.63396      0.50733
+        scale 1.50   1.0     21.52375     36.56294     47.02553      1.11991
+(P9-T2) exact <= site-reduced floor: violations 0 of 12;  exact <= Finner bound: violations 0 of 12
