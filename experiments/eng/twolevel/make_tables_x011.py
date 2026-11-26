@@ -393,9 +393,41 @@ def rung_blocks() -> dict[str, str]:
     return blocks
 
 
+def nested_literal_blocks() -> dict[str, str]:
+    rows = jl("x011f_nested1.jsonl")
+    if not rows:
+        return {}
+    cfg = defaultdict(lambda: defaultdict(int))
+    meta = {}
+    for r in rows:
+        c = cfg[r["config"]]
+        for key in ("runs", "closed", "invalid", "too_wide", "aborted", "over_budget", "mid_runs", "mid_aborts", "mid_invalid", "mid_too_wide"):
+            c[key] += r[key]
+        m = meta.setdefault(r["config"], dict(sizes=r["sizes"], slopes=r["slopes"], x_out=r["x_out"], lCmax=r["lCmax"], real=0.0, thm=0.0, width=0.0))
+        m["real"] = max(m["real"], r["max_lq_real"])
+        m["thm"] = max(m["thm"], r["max_lq_thm"])
+        m["width"] = max(m["width"], r["max_width"])
+    lines = ["| blocks (top outer, middle outer, base) and their slopes | runs | closed | final bracket misses the truth | wider than certified | aborted | nested runs | "
+             "of them aborted / missing their truth / too wide | widest bracket (certified accuracy) | `ln` queries: made / theorem's count / nested bound |",
+             "|---|---|---|---|---|---|---|---|---|---|"]
+    tot = defaultdict(int)
+    for ci in sorted(cfg):
+        c, m = cfg[ci], meta[ci]
+        lines.append(f"| {tuple(m['sizes'])} sites, slopes {tuple(m['slopes'])} | {c['runs']} | {c['closed']} | {c['invalid']} | {c['too_wide']} | {c['aborted']} | {c['mid_runs']:,} | "
+                     f"{c['mid_aborts']} / {c['mid_invalid']} / {c['mid_too_wide']} | {m['width']:.3f} ({m['x_out']:.3f}) | {m['real']:.1f} / {m['thm']:.1f} / {m['lCmax']:.1f} |")
+        for key in c:
+            tot[key] += c[key]
+    blocks = {"x011_nested_literal": "\n".join(lines)}
+    blocks["x011_nested_literal_summary"] = (
+        f"{tot['runs']:,} end-to-end runs of three nested levels ({len(rows)} tasks, eight kinds of energy table): {tot['closed']:,} closed, {tot['invalid']} final brackets that miss the "
+        f"truth, {tot['too_wide']} wider than certified, {tot['aborted']} aborted, {tot['over_budget']} above the nested cost bound; {tot['mid_runs']:,} real nested runs, of which "
+        f"{tot['mid_aborts']} aborted, {tot['mid_invalid']} returned a bracket that misses its fibre average and {tot['mid_too_wide']} one wider than certified.")
+    return blocks
+
+
 def build() -> dict[str, str]:
     blocks = {}
-    for fn in (bounds_blocks, runs_blocks, rung_blocks, cone_blocks, hetero_blocks):
+    for fn in (bounds_blocks, runs_blocks, rung_blocks, cone_blocks, nested_literal_blocks, hetero_blocks):
         blocks.update(fn())
     return blocks
 

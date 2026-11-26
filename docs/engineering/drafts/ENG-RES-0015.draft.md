@@ -274,20 +274,48 @@ ladder) and "far above the certified three-level bounds `0.5262`, `0.4439`, `0.4
 hold.  One fraction at `n = 64 000` had not returned when this was written; the minimum is
 at `0.5` and its neighbours are in the table.
 
-## 7. What this does not show
+## 7. Three nested levels run literally, end to end **[L]** (stage B for nested runs)
+
+Everything above about costs on instances is in the mean-run model.  No division had
+run a *nested* algorithm literally.  On cubes of 15 sites we did
+(`experiments/eng/twolevel/nested_literal.py`; hypothesis H8 written before the job): the top
+level's rungs are served by real runs of Algorithm 2L⁺ on the fibre, those by exact
+enumeration of the base block; the energy is an explicit table (flat, cones, a dip,
+envelopes of cones, linear, mixtures), so the truth is known for the whole cube and for
+every fibre; the outer samples are drawn; nothing is an oracle and nothing is replaced
+by its mean.  The three blocks have three different slopes, so the runs also exercise
+the transfer of ENG-RES-0016 end to end.  Results of nested runs are shared between
+sample points that are the same outer point — the theorem draws and charges them
+separately; sharing lowers the cost and the number of events that must be valid, and
+without it a literal run is out of reach, since at these sizes the samples are much
+larger than the outer cube.  Both the queries made and the theorem's count are compared
+with the nested bound.
+
+<!-- TABLE:x011_nested_literal -->
+<!-- /TABLE:x011_nested_literal -->
+
+<!-- TABLE:x011_nested_literal_summary -->
+<!-- /TABLE:x011_nested_literal_summary -->
+
+What this tests is the *composition*: brackets that are outputs of randomised runs, with
+their own failure probabilities and their own widths, handed to a level that only ever
+refines.  What it cannot test is cost: on 15 sites every nested design is far more
+expensive than enumerating the cube, and the bound is not approached.
+
+## 8. What this does not show
 
 * Costs on instances are in the mean-run model; literal runs with real fluctuations
-  exist for two levels only (X-006b).  The certified bounds are not affected: they are
-  the theorem's formula.
+  exist for two levels at realistic sizes (X-006b) and for three levels on 15 sites only
+  (§7).  The certified bounds are not affected: they are the theorem's formula.
 * Searched worst cases are lower bounds on worst cases, within radial outer landscapes
   with eight knots and fibres that are flat or cones.  For nested runs nothing bounds
-  what other fibres could add; §4's mechanism 2 suggests looking for fibres on which the
+  what other fibres could add; §4 suggests looking for fibres on which the
   *bounded* design is expensive, and we have not.
 * One slope, one accuracy, one failure probability; a fixed top level; finite design
   families ("the best certified bound" is a minimum over those families).
 * Proposition P is ours and unrefereed.
 
-## 8. Requests (proposals; none is an authorisation)
+## 9. Requests (proposals; none is an authorisation)
 
 1. **To the theory division:** if the reading of §4 is right, remark (1) of §11.19 could say
    which middle design the flat-instance figures rest on.  And a question: is there a
