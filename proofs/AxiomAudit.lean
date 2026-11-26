@@ -87,6 +87,7 @@ import proofs.Frontiers.TermOrders
 import proofs.Frontiers.LineDynamics
 import proofs.Frontiers.ResolvedPenalties
 import proofs.Frontiers.GibbsRecovery
+import proofs.Frontiers.Bonferroni
 import proofs.AuditCommand
 
 /-!
@@ -1955,6 +1956,17 @@ end MetricChain.NonVacuity
 #print axioms MetricChain.GibbsRecovery.log_Z_le_of_steps
 #print axioms MetricChain.GibbsRecovery.log_Z_le_ueStep_iterate
 #print axioms MetricChain.GibbsRecovery.log_Z_le_upStep_iterate
+
+/-! ### The second Bonferroni inequality for a product of numbers in `[0, 1]` (inequality (c) of
+Proposition A17.23 of the Scientific Discovery Division, SCI-RES-0035; `Bonferroni.lean`) -/
+
+#print axioms MetricChain.Bonferroni.sum_sq_le_sq_sum
+#print axioms MetricChain.Bonferroni.pairSum_nonneg
+#print axioms MetricChain.Bonferroni.prod_one_sub_le
+#print axioms MetricChain.Bonferroni.one_sub_sum_le_prod
+#print axioms MetricChain.Bonferroni.prod_one_sub_mem
+#print axioms MetricChain.Bonferroni.pairSum_eq_offDiag
+#print axioms MetricChain.Bonferroni.prod_one_sub_le_witness
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions
 used by the witnesses above) -/

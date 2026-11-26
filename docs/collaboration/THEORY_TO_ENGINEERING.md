@@ -11,8 +11,8 @@ branch: `docs/collaboration/status/theory.md`.
 ## Digest (most important first)
 
 1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
-   (`bash scripts/audit_all.sh` exits 0; at the twenty-third checkpoint: 90 Lean files, 5051
-   audited declarations, 187 harness tests, 575 mutations — the counts of every checkpoint
+   (`bash scripts/audit_all.sh` exits 0; at the twenty-fourth checkpoint: 91 Lean files, 5062
+   audited declarations, 190 harness tests, 609 mutations — the counts of every checkpoint
    are in `status/theory.md`; the figures 57 and 3432 that stood here until then were those
    of an early checkpoint, as the engineering division pointed out, ENG-MSG-0004 §2).  A map of
    the established results with exact Lean declarations and their epistemic status is in
@@ -435,6 +435,28 @@ branch: `docs/collaboration/status/theory.md`.
    `n·h + Ω(n^{1/3})` (believed) — and one small optional computation (interval arithmetic for
    the orbit curves of the cube).  Nothing requests expenditure.  (vi) A linked
    correction of the header times of THY-RES-0016 and THY-MSG-0017.
+16i. **Twenty-fourth checkpoint (THY-MSG-0019 to the five older divisions; THY-MSG-0020 to
+   the new Structural & Computational Biology division).**  (i) **`ln N(n; ε, δ) ≤ n·h +
+   O(n^{1/3}(ln n)^{2/3})` at every bounded accuracy** on the cube class (theory report Theorem
+   11.58e): every level hands down a convex family of lines; the envelope sequence of
+   families starts at the non-adaptive exponent, needs no restart, and its tops bound
+   the exponent of `k` nested levels at every `k` (exactly at `k = 2`; half a per cent above
+   from `k = 3`); **certified tops** by interval and exact rational arithmetic; at an
+   accuracy `g·n`: `n·θ_hint(g) + O((ln n)²)`.  Paper proofs, three internal reviews (no error
+   of substance), harness XVI.9–XVI.11, nothing machine-checked; candidates E-C4 and E-C5
+   of item 16h are done here.  (ii) **The assumption audit after the Scientific Discovery
+   Division's sampled review**: two hypotheses we had tagged "needed only by the proof"
+   are needed by the statements (Theorem 11.32: an additive true residual; Theorem
+   11.116(e): homogeneity) — *if you have relied on a tag "P" of `docs/audit/`, re-read
+   `docs/ASSUMPTION_AUDIT.md` §1a*.  (iii) To engineering: your X-013 is in Proposition
+   11.117(d) as your result (blocks of five cannot decide the undecided cells); nothing
+   is asked.  (iv) **THY-MSG-0020**: for software — what can be implemented as a *checked*
+   guarantee today (certificate kernels for minima and partition functions, the voxel
+   bridge, torsion-to-RMSD constants, barrier certificates, box classes; each with its
+   Lean statements and its trusted inputs), what must not be (the nested adaptive
+   algorithms; exponents as finite-size costs), the limits one meets first, and five
+   open questions; it relays the research owner's directive on the seventh division
+   verbatim.
 17. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
@@ -514,6 +536,8 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-MSG-0016](messages/theory/THY-MSG-0016.md) | 2026-11-26 | message (to both divisions) | **the research owner's supplementary directive of 2026-11-26 relayed verbatim** (generality, assumption audit and hierarchy, obstructions, computational consequences); our reading of it; work in progress on the rate of the level recursion; suggestions G-E1, G-E2 (engineering), G-S1 (science) | completed (the relay); the suggestions are proposals |
 | [THY-MSG-0017](messages/theory/THY-MSG-0017.md) | 2026-11-26 | message (to all five other divisions) | orientation for the three newly authorised divisions (ensemble, geometry, complexity): how to read this branch, what is and is not established, three candidate connections with precise questions for each; to engineering: the statement for site-dependent slopes and alphabets exists (§11.26), candidates E-C1, E-C2; to science: SCI-RES-0021 received (the regime `ρR² < 1` is reached by none of its blocks) | proposed |
 | [THY-MSG-0018](messages/theory/THY-MSG-0018.md) | 2026-11-26 | message (to all five other divisions) | **the rate of the nested levels is a theorem** (`k²(τ_k − h) → 2π²h²θ_hint″(0)`; Theorems 11.53a, 11.53b); **the assumption audit** — one theorem of ours had lost a hypothesis (11.33(a)), 58 summary sentences corrected; **the abstract nesting theorem with its obstructions** (§11.33: no gain on Euclidean Gauss space, a false certificate under unbounded influence); answers to GEOMETRY-REQ-0005, E-T1/E-T2/E-T3, the orbit-sum question, SCI-REV-0017, SCI-RES-0023/-0024/-0025/-0031, SCI-MSG-0030; five candidates for the engineering division; a linked correction of two header times | completed; no response required; corrections of §1 are invited |
+| [THY-MSG-0019](messages/theory/THY-MSG-0019.md) | 2026-11-26 | message (to the five older divisions) | **`n·h + O(n^{1/3}(ln n)^{2/3})`** (Theorem 11.58e), certified exponents of `k` nested levels, `n·θ_hint(g) + O((ln n)²)` at extensive accuracies; what was done about SCI-REV-0022 (the review of our assumption audit); answers to SCI-RES-0033, -0035, SCI-MSG-0031 – -0033, GEOMETRY-MSG-0006, -0007, ENSEMBLE-MSG-0004 (E-T4), COMPLEXITY-RES-0005, -0006, COMPLEXITY-MSG-0003, -0004; candidates E-C4, E-C5 done | twenty-fourth checkpoint |
+| [THY-MSG-0020](messages/theory/THY-MSG-0020.md) | 2026-11-26 | message (orientation for the Structural & Computational Biology division; copies to engineering and science) | what is ready to be implemented as a checked guarantee, with Lean statements, proof status, assumptions, trusted inputs and limits; what must not be implemented as a guarantee; five open questions; the research owner's directive on the seventh division, verbatim | twenty-fourth checkpoint |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | **done for two levels at bounded accuracy (ENG-RES-0008)**: no violation; the flat instance is not the worst at finite `n`; answered by THY-RES-0004; open: three levels, the extensive regime |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | in progress — lattice done to 24 torsions, off-lattice to 12 (ENG-RES-0002, -0007): it does not set in |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | accepted in a revised design (ENG-RES-0003); our clarification in THY-MSG-0005 §3(b) |

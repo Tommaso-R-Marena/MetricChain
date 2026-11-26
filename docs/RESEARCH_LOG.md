@@ -2760,7 +2760,218 @@ no output; the coordinator wrote the proof), workstreams N and Q2, the audits AA
 AA2, the editor that applied the audit's corrections, the referees of R (two), of N and
 of Q2, the Lean tasks LD and LE.
 
-### Resume here (cycle 10, twenty-third checkpoint)
+### Cycle 10, twenty-fourth checkpoint (2026-11-26, night): the `1/k²` law at finite `n` — `n·h + O(n^{1/3}(ln n)^{2/3})`; certified exponents of `k` levels; extensive accuracies; the audit audited; a seventh division
+
+**The result of the checkpoint: Theorem 11.58e** (theory report §11.19; proofs in
+`docs/workstreams/Z_REPORT.md` and `Z_ADDENDUM.md`).  "Theorem C" of the previous "Resume here" is
+proved, and more than was planned:
+
+    ln N(n; ε, δ) ≤ n·h + O(n^{1/3}(ln n)^{2/3})   (bounded accuracy),        ln N(n; g·n, δ) ≤ n·θ_hint(g) + O((ln n)²)   (0 < g < ε*).
+
+*How.*  (1) Workstream Q2 (delivered and refereed at the turn of the checkpoints; Lemma
+11.58b, Proposition 11.58c, Theorem 11.58d): one level over a family whose certified cost
+is a maximum of lines; no `√n` from the drops; a chain of levels with short outer blocks
+returns to a bounded accuracy for an additive term paid once.  (2) The coordinator's
+`Z_REPORT.md`: every level hands down the grid of a *convex* family of lines; the minimax
+step of the rate proof (Proposition U) gives the next family; a chain after every level
+keeps the least accuracy bounded (without it the loss is `½k²ln n`); the unrolling.  First
+for the cut orbit curves of the rate proof over a base of ten epochs.  (3) The addendum:
+what the assembly needs of a sequence of families is *admissibility* (two inequalities);
+the **envelope sequence** — cap at slope one, lower convex envelope of the image — is
+admissible from the non-adaptive exponent with no restart and no range condition, has
+the smallest tops (a comparison lemma), converges (a fixed-rate sequence in closed form:
+a ten-line proof of the rate `O(1/k)` without epochs) at the sharp rate, and bounds the
+exponent of `k` nested levels **at every `k`**.  (4) At a positive accuracy rate the
+exponent of the schedule converges geometrically in the number of levels (orbits below
+the fixed point contract; near the bottom the envelope is the image itself).
+
+*Found on the way, each recorded where it belongs.*
+* **Exactness.**  `τ₂ = b₂` for every pair (Proposition A12: at vanishing accuracy a level
+  sees the family below it only through its slope-capped hull, the convex envelope loses
+  nothing, and the hull of the non-adaptive exponent is the first envelope).  From the
+  third level on the recursion is strictly better (`τ₃ = 0.3612·a < b₃ = 0.3633·a`): the true
+  second level uses a positive inner tolerance and lies below its envelope majorant where
+  the third level looks.  The referee of the addendum found both independently.
+* **Certified tops** (Proposition A13; `experiments/workstreams/Z/z6_certified_tops.py`): a
+  *lower* bound of the slope map needs no optimisation, so a sequence of maxima of lines
+  built from interval-arithmetic pairs `(e, ϑ ≥ θ_na(e))`, rounded outwards, with the hull,
+  the cap and the tops checked in exact rational arithmetic, is admissible.  `τ_k/a ≤
+  0.500411, 0.363301, 0.312792, 0.291377, 0.281324` (`k = 2…6`), `0.262652` at `k = 400`, `u = 1`.
+* **An observation, not proved:** the defect of the envelope majorant is largest at
+  accuracy zero at every level computed (it would make the `n^{1/3}` bound uniform in the
+  accuracy); the obvious induction fails from about ten levels on (D68 item 7).
+
+*How it was verified.*  Three internal referees with independent code — `Q2_REVIEW.md`
+(Lemma U, Proposition T, Theorem A: correct as stated; a million levels, 3.5 million chain
+levels), `Z_REVIEW.md` (every step of the assembly; Z1(2) with two-sided brackets on 16 280
+cases; 200 000 exactly evaluated levels at slopes `¼…4`; nests of two to seven levels, 5.26
+million node checks), `Z_ADDENDUM_REVIEW.md` (every statement of the addendum re-derived;
+the envelope sequence, the comparison, the second and third level of the recursion, the
+geometric convergence replicated with code that shares nothing with ours): **no error of
+substance; 23 findings of wording and numbers, all applied** (D68).  Harness XVI.9 (12
+mutations), XVI.10 (11), XVI.11 (11) — all caught.  Exact evaluations by the coordinator:
+89 208 + 90 000 single levels; nests in envelope mode (three levels at `n = 3 000`, `u = 2`:
+462 595 checks; **two levels over the real base at `n = 50 000`, `u = 1`: certified
+`e^{2818}` against `e^{5547}` non-adaptive, `n·h = 1457`; 285 761 checks**), no violation.
+*What it is not:* see the theorem's own list — not the true order, not effective, not a
+practical algorithm, not beyond the uniform cube, not machine-checked; A6a/A6b (the
+equality at two levels, the certified tops) are unrefereed.
+
+**The assumption audit was itself reviewed** (the Scientific Discovery Division's
+SCI-REV-0022: 32 of 513 tags by a rule fixed in advance).  Its tag "false when removed"
+can be trusted (8 of 10); its tag "needed only by the proof" could not (6 of 12): **two
+such hypotheses are needed by the statements** — "the true residual is additive" in
+Theorem 11.32 (at a boundary member `n + 1` evaluations certify against a bound of `2ⁿ`;
+with second differences up to `κc` the sandwich holds with `(1 ∓ κ)c`; replicated here with
+a linear programme of our own) and homogeneity in Theorem 11.116(e) (the limit need not
+exist) — four are of unknown status, and one statement of ignorance contradicted
+Proposition 11.81(c).  Both theorems were stated with their hypotheses; the audit's
+classification was wrong.  Applied: remarks in the report, tags corrected in place in
+both audit reports with appendices, the synthesis (§1a; counts; arithmetic), D67.
+
+**Other divisions, this checkpoint.**  Read at engineering `96c4fd2`, science `71bc661`,
+ensemble `8d42f60`, geometry `288b2de`, complexity `25bcd61`; all answered in THY-MSG-0019.
+Checked here with our own code or argument: SCI-REV-0022 F1; the science division's
+weak-coupling coefficient for chains (`a_cube(u) + (K²/4)F*(u)`, one sign change at
+`u₀ = 1.505534`: confirmed by a brute-force capacity computation; now in Proposition
+11.117(d) as its result, with the engineering division's finding that blocks of five
+cannot decide the undecided cells, and the open question whether it is the expansion of
+`a_∞`); inequality (c) of its Proposition A17.23 (second Bonferroni under the floor).  Our
+pair-term bound through a lower mixing coefficient (THY-MSG-0018 §2) is right and
+recovers at most `1.6` per cent of the pair term on that division's instances —
+withdrawn as a suggestion.  The science division re-ran our audit at `b2caab6` on its
+machine: passed.  **One new Lean file**, `Bonferroni.lean` (the second Bonferroni
+inequality for a product of numbers in `[0, 1]`, with the first; written and compiled by
+the coordinator): the inequality that the science division's new upper end rests on.
+
+**A seventh and an eighth division** were authorised by the research owner during this
+checkpoint (directives of 2026-11-26, about 21:58 and 22:45 UTC, both relayed verbatim in
+THY-MSG-0020): *Structural & Computational Biology, Software Development and Applications*,
+branch `research/structural-biology` (first commit `720e0ec` at 22:30 UTC, read; it forked
+from our twenty-third checkpoint and builds a producer and an exact checker of minimum
+certificates on the semantics of our kernel, stating correctly that the implementation is
+tested, not verified), and *Frontier Benchmarking, Experimental Evidence and Scientific
+Evaluation*, branch `research/frontier-benchmarks` (not yet on the remote), which designs
+independent evaluations and keeps benchmark integrity; we answer its questions and do
+not duplicate its mandate (THY-MSG-0020 §7: our theorems predict no structural accuracy;
+what can be tested is soundness, tightness, cost against exact baselines, and the limits
+as predictions).  Our
+mission is unchanged; we owe it mathematical implementation support (specifications,
+hypotheses, constants, soundness and failure conditions, Lean declarations) and treat
+its obstructions as mathematical questions.  THY-MSG-0020 is the orientation it asks for:
+what is ready to be implemented as a checked guarantee (the certificate kernels, the
+partition kernel, the voxel bridge, torsion-to-RMSD constants, barrier certificates, box
+classes), what is not (the nested adaptive algorithms, exponents as costs), the limits
+one meets first, and five open questions in order of consequence.
+
+**Numbers of the audit that closes the checkpoint.**  `bash scripts/audit_all.sh`: **AUDIT PASSED** (23:01 UTC) — 91 Lean files (49 212 lines; one new, `Bonferroni.lean`), 5062 audited declarations on the three standard axioms, 692 headline theorems; harness: 190 tests (161 survive, 29 documented refutations), also run in full for the stored output; mutation tests: 609 mutations, 608 caught, one expected pass, 156 baseline runs; benchmarks, reference checker, conformance vectors and document references (3027 declarations indexed) pass.  A first run of the audit stopped at its token scan (an `example` in the new Lean file: D68 item 9).
+
+**Subagents of this checkpoint** (each with a written brief in the repository, none with
+authority beyond it): the referees of `Z_REPORT.md` and of `Z_ADDENDUM.md`.  Everything else
+— the assembly, the addendum, the certified computation, the exactness result, the
+application of SCI-REV-0022 — is the coordinator's.
+
+### Resume here (cycle 10, twenty-fourth checkpoint)
+
+**State.**  Every module under `proofs/` (91 files, 49 212 lines) builds with zero warnings and is walked by the axiom audit (5062 declarations; 692 headline theorems); the harness (190 registered tests: 161 that must survive, 29 documented refutations) and its mutation tests (609 mutations: 608 caught, one expected pass; 156 baseline runs; crashing mutants rejected) pass; `bash scripts/audit_all.sh` exits 0 (`AUDIT PASSED`, 2026-11-26 23:01 UTC).  **Eight divisions** work on eight branches: this one;
+`research/ubuntu-engineering` (Computational Research); `research/scientific-translation`
+(Scientific Discovery); `research/ensemble-identifiability`; `research/geometric-inference`;
+`research/biological-complexity`; and, authorised on 2026-11-26 at night,
+`research/structural-biology` (Structural & Computational Biology, Software Development and
+Applications — first commit `720e0ec`, forked from our `b2caab6`) and
+`research/frontier-benchmarks` (Frontier Benchmarking, Experimental Evidence and Scientific
+Evaluation — not yet on the remote when this was written; its digest will be
+`docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md`).  All other branches are read-only for us and are
+fetched at every checkpoint (`docs/collaboration/status/theory.md` has the routine and the
+log).  **A mandatory consolidation directive of the research owner is expected** (at about
+$2,000 of aggregate credits remaining): from then on proof completion, verification,
+integration, documentation, preservation, and high-value implementation obligations
+only; the computational hard stop is 2026-11-30 15:00 ET; no shared computing budget is
+used by this branch.
+**Read first, in this order:** this block; theory report Theorem 11.58e (the result of the
+checkpoint) with `docs/workstreams/Z_REPORT.md`, `Z_ADDENDUM.md` and their two reviews;
+`docs/ASSUMPTION_AUDIT.md` (§1a: how far its tags can be trusted; §6a: the new theorems;
+§8: the open classifications); `docs/collaboration/status/theory.md`; THY-MSG-0019 and
+THY-MSG-0020 (the orientation for the new division, with the directive verbatim).
+
+**What is new and what it rests on.**  Theorem 11.58e — `n·h + O(n^{1/3}(ln n)^{2/3})` at bounded
+accuracy, `n·θ_hint(g) + O((ln n)²)` at an accuracy `g·n`, certified upper bounds for the exponent
+of `k` nested levels — is a paper proof refereed internally by three referees (no error of
+substance); its parts A6a (the equality at two levels) and A6b (the certified tops) are
+the coordinator's and unrefereed; nothing of it is machine-checked.  "Theorem C" of the
+previous version of this section (item 0-C below) is thereby done.
+
+**Open, in priority order (new at this checkpoint; the older items follow unchanged).**
+
+0-A. **A level step that carries the inner tolerance.**  The recursion itself is strictly
+   better than the envelope sequence from the third level on (`τ₃ = 0.3612·a < b₃ = 0.3633·a`)
+   because the true level uses a tolerance `β > 0` and the line-by-line step (Lemma M of
+   `R_REPORT.md`, Proposition U) uses `β = 0`.  *Question:* is there a description of
+   `R[M]` for the envelope `M` of a convex family that keeps `β` — a family of lines *with
+   ranges* (the types of workstream Q2 have ranges; its drops are steps with `β > 0`) —
+   and does it solve the recursion exactly?  Start from `experiments/workstreams/Z/z7_exactness.py`
+   (the second level: the minimising `β/g` falls from `0.45` to `0.007` as `g` grows) and from
+   Proposition A12.  Same limit constant, so no gain in the order; a gain at every finite
+   depth and possibly an exact solution.
+0-B. **Uniformity in the accuracy.**  Numerically `sup_g [M_k(g) − θ_hint(g)] = b_k − h` for the
+   envelope majorants (`z8_defect_profile.py`; `k ≤ 60`, `u = 1, 2`) — equivalently the envelope
+   curve lies above the fixed-point curve of the slope map shifted right by `b_k − h`.  With
+   it Theorem 11.58e(e) holds at every accuracy relative to `n·θ_hint(x̂/n)`.  A pointwise
+   contraction of the defect by `θ_hint(g)/(g + θ_hint(g))` covers `g ≳ 2h/k`, the slopes of the
+   top lines cover `g ≲ c/k²`; the window in between is the scaling regime of the
+   bottleneck (Proposition S of `R_REPORT.md`, a sketch).  *Done at this checkpoint, unrefereed*
+   (`Z_ADDENDUM.md` A9a): the constant of Theorem 11.58e(g) is of order `1/g` for small rates,
+   which gives `n·θ_hint(x̂/n) + O((n/x̂)(ln n)²)` for accuracies between `√n·ln n` and `g₀·n`; what
+   stays open is the range of accuracies between bounded and `n^{2/3}`, where only
+   `O(x̂ + n^{1/3}(ln n)^{2/3})` is proved.
+0-C′. **Is `n·h + Ω(n^{1/3})` a barrier?**  For analyses of nested levels through types the
+   missing lemma is "every level that lowers the exponent loses an additive constant
+   against its type" (the referee's F4); for all algorithms nothing is known between
+   `n·h − O(1)` and the upper bound.
+0-D. **Lean items, in order.**  (i) *Done at this checkpoint* (`Bonferroni.lean`): the second
+   Bonferroni inequality `Π(1 − c_h) ≤ 1 − Σ c_h + Σ_{h<h′} c_h c_h′` for `c_h ∈ [0, 1]` — inequality (c)
+   of the Scientific Discovery Division's Proposition A17.23 (SCI-RES-0035); what is left
+   of that proposition for Lean is the averaging step on top of `GibbsRecovery.lean`.
+   (ii) Proposition A12 (the slope-capped hull; the
+   value of the level formula on an envelope) and Proposition A13 (multi-rate lines are
+   below the slope map) are pure convex analysis and would make the certified tops
+   machine-checked statements given the level recursion.  (iii) Proposition U needs a
+   minimax theorem (not in Mathlib in the form needed).
+0-zero. **Unread inbound.**  At 23:02 UTC, after the audit of this checkpoint had passed, every
+   other branch had moved (engineering `640cd9c`, science `169c6b1`, ensemble `2d2054d`, geometry
+   `d3375f7`, complexity `48412d8`; frontier benchmarks `626fd13`, its first commit).  None of
+   that has been read: read it first (`docs/collaboration/status/theory.md`, synchronisation
+   log), starting with what is addressed to theory.
+0-E. **The seventh and eighth divisions.**  Fetch `research/structural-biology` and
+   `research/frontier-benchmarks`; read `docs/collaboration/STRUCTURAL_BIOLOGY_TO_ALL.md` and
+   `FRONTIER_BENCHMARKS_TO_ALL.md`.  For the eighth: answer scientific questions within our
+   responsibilities, investigate mathematical limitations that an evaluation exposes, do
+   not duplicate its evaluation mandate (THY-MSG-0020 §7 states what our theorems can and
+   cannot contribute: they predict no structural accuracy).  For the seventh: its first
+   commit builds a producer and an exact checker of minimum certificates on the semantics
+   of our kernel and tests it against `experiments/reference_checker.py`; answer precise obstructions as one of
+   "missing theorem / unnecessary assumption / ineffective proof / complexity barrier /
+   stronger certificate / better representation / impossibility".  The mathematically
+   consequential question we put to it is Q1 of THY-MSG-0020: certified class constants
+   for one concrete residual model.  Do not present a production checker as verified
+   because a Lean theorem about a Lean function exists.
+0-F. **The Scientific Discovery Division's questions** (`docs/ASSUMPTION_AUDIT.md` §8): a
+   two-sided tail estimate with polynomial precision for the `p`-biased cube — now the
+   single missing ingredient for transferring Lemma 11.58b – Theorem 11.58e to a field;
+   an adaptive algorithm at the cube's exponent for the antiferromagnetic Curie–Weiss
+   part; whether `a_cube(u) + (K²/4)F*(u)` is the weak-coupling expansion of the chain
+   exponent `a_∞` (Proposition 11.117(d)).
+0-G. **A referee for A6a and A6b** of `Z_ADDENDUM.md` and for `z6_certified_tops.py` (its
+   rounding directions and exact checks are stated at its head; the referee of the
+   addendum compared its 30 tops with its own envelope tops — all above, by at most
+   `6·10⁻⁷·a` — but did not review the script).
+0-H. **Effective constants.**  `n₀` and `C′` of Theorem 11.58e; a bound that is certified end
+   to end at one size (certified tops + the exact unrolling; the exact nests reach two
+   levels over the real base at `n = 50 000`).
+
+**The state of the previous checkpoint, kept** (item 0-C below is done; "six divisions" is
+seven; the counts are those of the twenty-third checkpoint):
+
 
 Verified state: every module under `proofs/` (90 files) builds with zero warnings and is walked
 by the axiom audit (5051 declarations); the harness (187 registered tests: 158 that must
@@ -2820,7 +3031,7 @@ the bridge theorem (read only).  **Nothing received is unapplied** except the op
 parts of L4-T3 of SCI-MSG-0023, P5-T1(i) (item 0-first), R16-THY-5 and R15-T6 (items below);
 the other branches are read at engineering `c81166b`, science `32bcd7f`, ensemble `1a067b5`, geometry `e8e2582`, complexity `61fb68b`.  In priority order (items 0-C to 0-X are those of the twenty-third checkpoint; in item 0-zero-zero below, (a) is superseded by 0-C and (b) by 0-Q2):
 
-0-C. **Theorem C (not established; the strongest open step of the programme).**  *Claim:*
+0-C. **Theorem C — DONE at the twenty-fourth checkpoint: Theorem 11.58e** (the plan below is kept as the record of how it was found; its steps (I)–(V) are §§2–6 of `docs/workstreams/Z_REPORT.md`, and the envelope sequence of the addendum replaced the restart of step (I) and the base of step (IV)).  *Claim:*
    on the cube class, at every bounded accuracy, `ln N(n; ε, δ) ≤ n·h + O(n^{1/3}(ln n)^{2/3})`
    (Theorem 11.58a has `O(√(n ln n))`).  *Why it should be true:* the rate theorem gives
    `τ_k − h ≈ C/k²`; if every level loses `O(ln n)` in the logarithm of the certified cost,

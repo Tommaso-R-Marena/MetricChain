@@ -475,7 +475,7 @@ names the statement or check that supports it.  Evidence in brackets.*
 | | a restart near the fixed point; a range condition | P | the envelope sequence needs neither (Proposition A5 of the addendum, refereed) |
 | Theorem 11.58e (f) | parts (a), (e) | E | the certified numbers are rigorous *given* those paper statements; the arithmetic is interval and exact |
 | Theorem 11.58e (g) | `θ_na(e) → 0`; `J` differentiable below its maximiser | P | differentiability only names a subgradient — any supergradient does (the referee, §2.8) |
-| | a fixed rate `g` | ? | the constant of the proof is of order `1/g²`; a statement uniform in `g`, or at accuracies between bounded and extensive, is not proved (numerically the defect is largest at accuracy zero for `k ≤ 60`) |
+| | a fixed rate `g` | Q | for small rates the constant is of order `1/g` under (H1), which covers the accuracies from `√n·ln n` up (the addendum's A9a; unrefereed); between bounded accuracies and `n^{2/3}` only `O(x̂ + n^{1/3}(ln n)^{2/3})` is proved (numerically the defect is largest at accuracy zero for `k ≤ 60`, which would close it) |
 | all of 11.58b–e | the uniform cube, independent blocks | Q / E | as for Lemma 11.58b; with dependence see §11.33 (a certified class-relative influence, or a false certificate) |
 | | free computation | X (not counted) | the design computes the curves and one minimisation per level |
 | | effectiveness | — | `n₀`, `C′` and the rate at which the tops approach `h` are not produced by the proofs |

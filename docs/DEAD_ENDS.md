@@ -2529,3 +2529,8 @@ What was wrong, and is kept here:
    in the outer fraction with the minimiser at a kink; refined, it is `0.361189·a` (the
    referee: `0.361184·a`).  *Rule:* a minimum over a grid is reported with the grid refined
    until the digits quoted are stable.
+9. **An `example` in a Lean file.**  The first audit of the checkpoint stopped at its token
+   scan: the non-vacuity witness of `Bonferroni.lean` was written as an `example`, which the
+   audit forbids because the axiom walk does not see unnamed declarations.  It is now the
+   named theorem `prod_one_sub_le_witness`.  (The standalone compilation had passed; the
+   audit is the gate.)

@@ -1482,6 +1482,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/LineDynamics.lean` | `line_le_Rstep`, `line_le_min_Rstep`, `slopes_nonneg`, `lines_le_exactRec`, `exists_sub_le_exactRec`, `le_sSup_exactRec`, `gauss_slope_map`, `gauss_slope_map_least`, `gauss_tangent_line`, `gauss_slope_le`, `gauss_lines_le_exactRec`, `gauss_level_two_minorant`, `gauss_level_two_ge`, `gauss_level_three_minorant`, `gauss_level_three_ge`, `StepLE.monotoneS_step`, `StepLE.line_step`, `StepLE.line_step_slope`, `StepLE.line_step_rate`, `stepLE_Rstep`, `exactRec_line_step`, `gauss_level_two_majorant` (the level recursion at the level of lines: a line below `T` stays below one more level with the slope given by the slope map, and iterating; a majorant with nondecreasing `x + M(x)` on a range, one level; the Gaussian slope map is a Möbius map and is least; numerical instances `T_2(0+) ≥ 3/8`, `T_3(0+) ≥ 3/10`, `T_2(g) ≤ 1 − 4g` on `(0, 1/5]`; Theorem 11.53a(a), (b′), (c), (d)) |
 | `proofs/Frontiers/ResolvedPenalties.lean` | `resolved_allocation`, `resolved_allocation_univ`, `order_pos_of_weights`, `fibreOff`, `maxTable`, `maxTable_congr`, `le_maxTable`, `maxTable_nonneg`, `maxTable_le`, `resolved_allocation_max`, `reduction_step`, `anchored_remainder_bound_orders_state`, `anchored_remainder_bound_orders_off_anchor`, `resolved_remainder_bound` (**statements of the Scientific Discovery Division** — its Proposition P and Theorem R, SCI-MSG-0028, requests P9-T1 and P9-T3 —, proofs re-derived and machine-checked here: a sum of state-dependent constants over the `m`-subsets of the changed sites is dominated by tables indexed by sub-tuples to which each constant is distributed with weights summing to one; the least such tables; the reduction of a table to a smaller sub-tuple; the remainder bound of the anchored expansion with constants that depend on the state; §11.7, Theorem 11.18d and Proposition 11.18f) |
 | `proofs/Frontiers/GibbsRecovery.lean` | `Z`, `avg`, `lower_jensen`, `lower_product`, `avg_ceiling_le_avg_true`, `upper_jensen`, `upper_product`, `ueStep`, `upStep`, `log_Z_le_of_steps`, `log_Z_le_ueStep_iterate`, `log_Z_le_upStep_iterate`, `ueStep_iterate_antitone`, `upStep_iterate_antitone` (**a statement of the Scientific Discovery Division** — its Proposition A17.19, SCI-MSG-0028, request A19-T1 —, machine-checked here: four inequalities that recover `ln Z` of an energy lying between a floor model and a ceiling model from the partition functions of the two models and means under the ceiling model of slack functions that bound the two gaps from below; the two iterated upper bounds are valid at every step and do not increase; the lower Jensen form needs no sign condition on the slacks) |
+| `proofs/Frontiers/Bonferroni.lean` | `pairSum`, `sum_sq_le_sq_sum`, `pairSum_nonneg`, `pairSum_insert`, `prod_one_sub_le`, `one_sub_sum_le_prod`, `prod_one_sub_mem`, `pairSum_eq_offDiag` (the second Bonferroni inequality for a product of numbers in `[0, 1]`, `∏(1 − c_i) ≤ 1 − Σc_i + Σ_{pairs} c_ic_j`, with the first as its lower partner — inequality (c) of the Scientific Discovery Division's Proposition A17.23 (its SCI-RES-0035: an upper end for a partition function from the laws of single held sites and of pairs of held sites under the floor); the statement and the induction are that division's, the file is the coordinator's; twenty-fourth checkpoint) |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -6231,9 +6232,13 @@ and by (d) with `k = O(ln n)` levels
 
     ln N(n; g·n, δ)  ≤  n·θ_hint(g) + C(u, g)·(ln n)²        (n ≥ n₀(u, δ, g)),
 
-where Theorem 11.54 has `o(n)`.  The constant of this proof is of order `1/g²` as `g → 0`; the true number of
-levels is of order `(h/g)·ln n` (at a fixed rate the defect decays like `κ^k`, `κ = 1 − g/(J(t) + (1 − t)g)` at
-`J′(t) = g`), which is not proved.
+where Theorem 11.54 has `o(n)`.  *Small rates* (added after the reviews; unrefereed): under (H1) the
+constant is of order `1/g` — there are `g₀`, `C`, `C₄` with `ln N(n; g·n, δ) ≤ n·θ_hint(g) + (C/g)(ln n)²` for all
+`C₄ ln n/√n ≤ g ≤ g₀`, i.e. `ln N(n; x̂, δ) ≤ n·θ_hint(x̂/n) + C·(n/x̂)·(ln n)²` for accuracies between `√n·ln n` and
+`g₀·n` (the contraction of the orbits at the intercept `h − η` is `1 − Θ(√η)` under (H1), and the lines
+that matter at the rate `g` sit at `η ≍ g²`).  The true number of levels is of order `(h/g)·ln n` (at a
+fixed rate the defect decays like `κ^k`, `κ = 1 − g/(J(t) + (1 − t)g)` at `J′(t) = g`); the proof has `48h`
+in place of `h`.
 
 *Proof* (the two reports have every step).  (a): in the proof of Theorem 11.53b the level operator is bounded
 by `inf_e max Φ` over the convex set of lines `{(B, s) : W_j(B) ≤ s ≤ 1}`; by Sion's minimax theorem this is
@@ -6302,8 +6307,9 @@ for every convex pair of exponent functions with infinite slope at zero (with a 
 point the tops decrease like `1/k` and the bound is again `O(√(n ln n))`); (b)–(d) and the costs in (g) need
 the level theorem with a tail function that is sharp up to polynomial factors at every block size,
 known for the uniform cube only (§11.33; with a field the isoperimetric statement is asymptotic).
-(vi) **Uniform in the accuracy**: (e) is for bounded and (g) for extensive accuracies; in between the
-same schedule gives `n·M_{W_k, b_k}(x̂/n)` plus the level losses, and numerically the defect
+(vi) **Uniform in the accuracy**: (e) is for bounded accuracies and (g) for accuracies above
+`√n·ln n`; the error term of (g) is below `n^{1/3}(ln n)^{2/3}` only from `x̂ ≈ n^{2/3}(ln n)^{4/3}` on, and between
+that and the bounded accuracies what is proved is `n·θ_hint(x̂/n) + O(x̂ + n^{1/3}(ln n)^{2/3})`.  Numerically the defect
 `M_{W_k, b_k}(g) − θ_hint(g)` is largest at `g = 0` for every `k ≤ 60` (so that the bound of (e) would hold at every
 accuracy relative to `n·θ_hint(x̂/n)`), which is not proved — the obvious induction fails from about ten levels
 on.  (vii) Machine checks: none.

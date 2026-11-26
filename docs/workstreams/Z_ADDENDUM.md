@@ -6,7 +6,7 @@ they are called certified.  **Refereed internally** (an AI referee, not external
 `docs/workstreams/Z_ADDENDUM_REVIEW.md`, with its own code in
 `experiments/workstreams/Z/review_addendum/` — "no error of substance; every numbered statement
 is correct as stated or correct after a repair of wording"; its ten findings are applied
-below and listed in the note that follows.  **Sections A6a and A6b were added after the
+below and listed in the note that follows.  **Sections A6a, A6b and A9a were added after the
 review and have not been seen by the referee.**  Notation and the quoted
 statements are those of `Z_REPORT.md` §1 and of `R_REPORT.md` (`θ = θ_na` satisfying (H0), (H1) there;
 `a = θ(0+)`, `h` the fixed point, `Σ` the slope map, `p_j` the orbit curves, `M_{W,b}`, `𝓔(W, b)`).*
@@ -460,6 +460,62 @@ constant of order `1/g` is the heuristic value (the profile of `R_REPORT.md` §8
 — constant at `g = 0`, and falling off like `2ζ²e^{−ζ}/(2π²)`, `ζ = kg/h`, at positive rates (at `ζ = 8`:
 `0.0022` predicted by the profile, `0.002` computed).
 
+## A9a. Small rates: a constant of order `1/g`, and the accuracies between `√n` and `n`  *(added after the review; not seen by the referee)*
+
+The proof of Proposition A11 loses in two places when `g` is small: it bounds `J′(t₁(B))` from
+below by `η/L`, and it asks the geometric term to be below a third of the margin.  Neither
+is needed.  *Hypotheses:* those of A9 and (H1); `ϑ := θ_hint″(0) = −1/J″(L)`.
+
+**Lemma A9′ [P].**  *There is `η₀ > 0` such that for `0 < η ≤ η₀`, `B ≤ h − η` and `i ≥ 0`:*
+`t₁(B) − p_i(B) ≤ t₁(B)·μ_η^i`, *`μ_η := h/(h + ½√(η/ϑ))`.*
+*Proof.*  By (H1), `J(t) = h − (L − t)²/(2ϑ) + o((L − t)²)`: there is `r₀ > 0` with `J(t) ≤ h − (L − t)²/(4ϑ)` on
+`[L − r₀, L]`; put `η₀ := h − J(L − r₀)`.  For `η ≤ η₀`, `t₁(h − η) ≥ L − r₀`, so `η ≥ (L − t₁(h − η))²/(4ϑ)`, i.e.
+`L − t₁(h − η) ≤ 2√(ϑη)`.  For `B ≤ h − η`: `J′(t₁(B)) ≥ J′(t₁(h − η)) ≥ η/(L − t₁(h − η)) ≥ ½√(η/ϑ)` (`J′` is
+nonincreasing; concavity).  The proof of Lemma A9 with this bound in place of `η/L`.  ∎
+
+**Proposition A11′ [P].**  *There are `g₀ > 0` and `C₃` such that for every `0 < g ≤ g₀` there is
+`k₂(g) ≤ C₃/g` with*
+
+    M_{W_k, b_k}(g)  ≤  θ_hint(g) + g·(1 + g/(48h))^{−(k − k₂(g))}        for all k ≥ k₂(g).
+
+*Proof.*  `m(g) := θ_hint(g) − (h − Lg) = ½ϑg² + o(g²)`; let `g₀` be such that `m(g) ≥ ϑg²/4`, `η_g := ϑg²/576 ≤ η₀`
+and `g ≤ 48h` on `(0, g₀]`.  Then `(L − t₁(h − η_g))·g ≤ 2√(ϑη_g)·g = ϑg²/12 ≤ m/3`.  Let `k₂(g)` be the first `k`
+with `b_k − h < η_g(1 − L)/L` and `b_k − h ≤ ϑg²/12`; since `sup_k k²(b_k − h) < ∞` (Proposition A7),
+`k₂(g) ≤ C₃/g`.  For `k ≥ k₂(g)`, `i := k − k₂(g)`: Lemma A10 gives `W_k ≥ p_{i+1}` on `[0, h − η_g]`, and Lemma A9′
+`p_{i+1} ≥ t₁ − μ^i`, `μ := μ_{η_g} = (1 + g/(48h))^{−1}`.  Lines with `B ≤ h − η_g`: `B − W_k(B)g ≤ θ_hint(g) + gμ^i`,
+as in A11.  Lines with `h − η_g ≤ B ≤ b_k`: `B − W_k(B)g ≤ (h − Lg) + (b_k − h) + (L − t₁(h − η_g))g + gμ^i`
+`≤ θ_hint(g) − m/3 + gμ^i` — below `θ_hint(g) + gμ^i` whatever the size of the last term.  ∎
+
+**Theorem Z‴ (small rates, and the accuracies between `√n` and `n`) [P, conditional as Theorem Z′].**
+*Fix `u`, `δ`.  There are `g₀ > 0`, `n₀`, `C` and `C₄` such that for all `n ≥ n₀` and all rates
+`C₄·ln n/√n ≤ g ≤ g₀`*
+
+    ln N(n; g·n, δ)  ≤  n·θ_hint(g) + (C/g)·(ln n)² ;
+
+*equivalently, for accuracies `C₄·√n·ln n ≤ x̂ ≤ g₀·n`:  `ln N(n; x̂, δ) ≤ n·θ_hint(x̂/n) + C·(n/x̂)·(ln n)²`.*
+*Proof.*  Take `k = k₂(g) + ⌈ln(g·n)/ln(1 + g/(48h))⌉` in Proposition A11′: `n·g·μ^{k − k₂} ≤ 1`, and
+`ln(1 + x) ≥ x/2` on `[0, 1]` gives `k ≤ C₃/g + 96h·ln(gn)/g + 1 ≤ (C₅/g)·ln n`.  The type of the `k`-th family
+at the accuracy `x̂ = g·n` (Proposition Z4 holds at every accuracy above `𝒳`, with error
+functions that do not depend on the accuracy — the referee, on Theorem Z″) costs at most
+`n·M_{W_k, b_k}(g) + k·c_Z·ln n + C′ ln n`, for `k ≤ n^{1/2}`: that is the lower limit on `g`.  ∎
+
+So the constant of Theorem Z″ is of order `1/g` as `g → 0` — the order of the heuristic, with
+`48h` where the profile has `h` — and **the error term is at most `n^{1/3}(ln n)^{2/3}` from
+`x̂ ≈ n^{2/3}(ln n)^{4/3}` on**.  What is proved for the accuracies below that: `ln N(n; x̂, δ) ≤ ln N(n; 1, δ)`
+`≤ n·θ_hint(x̂/n) + L·x̂ + O(n^{1/3}(ln n)^{2/3})` (Theorem Z′ and `h − θ_hint(g) ≤ L·g`), so the two bounds
+together leave an error of up to order `√n·ln n` around `x̂ ≈ √n·ln n`.  The numerical
+observation of A8′ below would remove it.
+
+*A8′ (an observation, not proved) [N].*  For the envelope sequence of the cube,
+`sup_{g ≥ 0} [M_{W_k, b_k}(g) − θ_hint(g)] = b_k − h` at every level computed (`k ≤ 60`, `u = 1, 2`;
+`z8_defect_profile.py`): the defect is largest at accuracy zero.  By duality this says that
+`W_k(B) ≥ t₁(B − (b_k − h))` on `[0, b_k]`: the envelope curve lies above the fixed-point curve
+shifted to the right by `b_k − h`.  If it holds for all `k`, then
+`ln N(n; x̂, δ) ≤ n·θ_hint(x̂/n) + O(n^{1/3}(ln n)^{2/3})` uniformly in the accuracy.  The induction
+"the image of the shifted curve dominates the next shifted curve" needs
+`(b_k − h)²/(ϑh²) ≥ b_k − b_{k+1}` near the top and fails from about ten levels on; the least
+margin is in fact near the *bottom* of the curves (`DEAD_ENDS.md` D68 item 7).
+
 ## A10. What is not proved
 
 * Everything listed in §9 of `Z_REPORT.md`.
@@ -469,6 +525,8 @@ constant of order `1/g` is the heuristic value (the profile of `R_REPORT.md` §8
 * The envelope sequence is **not** the level recursion: `τ₂ = b₂`, and `τ_j < b_j` from the third
   level on (A6a; numerically).  A step for families that also carries the inner tolerance
   — which is what the recursion gains — is not written.
-* In A9 the constant `C(u, g)` is not tracked, the intermediate accuracies are a heuristic,
-  and the matching lower bound at extensive accuracies is the hinted one of the theory
-  report (Theorems 11.25(a), 11.54), not re-derived here.
+* In A9 the constant `C(u, g)` is not tracked beyond its order (A9a: `1/g` for small rates;
+  unrefereed); between `x̂ ≈ √n` and `n^{2/3}` the error term is not shown to be `O(n^{1/3}(ln n)^{2/3})`
+  (A9a: it would follow from the observation A8′); and the matching lower bound at
+  extensive accuracies is the hinted one of the theory report (Theorems 11.25(a), 11.54),
+  not re-derived here.

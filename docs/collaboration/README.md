@@ -1,9 +1,13 @@
 # MetricChain collaboration hub
 
-Six independent research divisions work on this repository under the research owner's
+Eight independent research divisions work on this repository under the research owner's
 direction (the third was introduced on 2026-11-25; three more were authorised on
 2026-11-26 by the directive "Authorized research expansion and cross-division
-collaboration"):
+collaboration"; a seventh — research software — by the directive "Seventh-Division
+Coordination and Mathematical Translation" of 2026-11-26, about 21:58 UTC; an eighth —
+independent evaluation — by the directive "Frontier Scientific Evaluation and
+Eighth-Division Coordination" of 2026-11-26, about 22:45 UTC; the last two directives are
+relayed verbatim in `messages/theory/THY-MSG-0020.md`):
 
 | division | branch (writes only here) | mandate (the research owner's words, shortened) |
 |---|---|---|
@@ -13,11 +17,13 @@ collaboration"):
 | **Ensemble Identifiability and Certified Inference** (ensemble) | `research/ensemble-identifiability` | measure theory, moment problems, ensemble identifiability, partial identification, optimal transport, information theory, minimax inference, certified uncertainty |
 | **Geometric Inference, Rigidity and Inverse Problems** (geometry) | `research/geometric-inference` | quantitative rigidity, distance geometry, reconstructability, stability, articulated-chain mathematics, tomographic inverse problems, geometric observability |
 | **Mathematical Biology and Computational Complexity** (complexity) | `research/biological-complexity` | resolution of published mathematical open problems, complexity classifications, counting complexity, combinatorial mathematics, rigorous algorithms |
+| **Structural & Computational Biology, Software Development and Applications** (structural biology; authorised by the research owner on 2026-11-26, about 21:58 UTC) | `research/structural-biology` | translation of mathematically justified results into research-grade computational structural biology software and rigorous benchmark specifications; reviewed, tested and benchmarked by the engineering division; the theory division gives mathematical implementation support (specifications, hypotheses, constants, soundness and failure conditions, Lean declarations) and does not present an implementation as formally verified because a related theorem is machine-checked; digest `STRUCTURAL_BIOLOGY_TO_ALL.md` |
+| **Frontier Benchmarking, Experimental Evidence and Scientific Evaluation** (frontier benchmarks; authorised by the research owner on 2026-11-26, about 22:45 UTC) | `research/frontier-benchmarks` | independent scientific evaluations of the programme's mathematical and computational innovations against the strongest relevant contemporary approaches and appropriately scoped experimental evidence; benchmark integrity (frozen predictions, contamination controls, separation of development and held-out evidence; strict distinction between blind, pre-leaderboard and retrospective assessment); communicates scientifically consequential deficiencies; the mathematical divisions answer its questions within their responsibilities and do not duplicate its mandate; substantial shared computation stays with the engineering division; digest `FRONTIER_BENCHMARKS_TO_ALL.md` |
 
 Each division writes exclusively to its own branch and reads the others' branches without
 modifying them.  No automatic merges, no force pushes, no changes to `main`, no pull requests
 without the research owner's explicit authorisation; no second repository and no competing
-communication system.  The six divisions are equal, intellectually independent
+communication system.  The eight divisions are equal, intellectually independent
 collaborators with complementary responsibilities and draw on one shared allocation of
 resources.  This file is the theory branch's copy of the common protocol; every division
 keeps its own copy.
@@ -47,6 +53,8 @@ docs/collaboration/
     ENSEMBLE_TO_ALL.md            ensemble    digest (on research/ensemble-identifiability)
     GEOMETRY_TO_ALL.md            geometry    digest (on research/geometric-inference)
     COMPLEXITY_TO_ALL.md          complexity  digest (on research/biological-complexity)
+    STRUCTURAL_BIOLOGY_TO_ALL.md  structural biology  digest (on research/structural-biology)
+    FRONTIER_BENCHMARKS_TO_ALL.md frontier benchmarks digest (on research/frontier-benchmarks)
     messages/ensemble/            ensemble    its messages; requests/ensemble/, responses/ensemble/, status/ensemble.md likewise
     messages/geometry/            geometry    its messages; requests/geometry/, responses/geometry/, status/geometry.md likewise
     messages/complexity/          complexity  its messages; requests/complexity/, responses/complexity/, status/complexity.md likewise
@@ -143,12 +151,14 @@ git fetch origin research/scientific-translation
 git log -1 origin/research/scientific-translation
 git ls-tree -r --name-only origin/research/scientific-translation docs/collaboration docs/science
 git show origin/research/scientific-translation:docs/collaboration/SCIENCE_TO_ALL.md
-for b in ensemble-identifiability geometric-inference biological-complexity; do
+for b in ensemble-identifiability geometric-inference biological-complexity structural-biology frontier-benchmarks; do
     git fetch origin research/$b && git log -1 origin/research/$b      # a branch may not exist yet
 done
 git show origin/research/ensemble-identifiability:docs/collaboration/ENSEMBLE_TO_ALL.md
 git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.md
 git show origin/research/biological-complexity:docs/collaboration/COMPLEXITY_TO_ALL.md
+git show origin/research/structural-biology:docs/collaboration/STRUCTURAL_BIOLOGY_TO_ALL.md
+git show origin/research/frontier-benchmarks:docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md
 ```
 
 and symmetrically `git fetch origin claude/determined-ride-og1u7j` for the other divisions.

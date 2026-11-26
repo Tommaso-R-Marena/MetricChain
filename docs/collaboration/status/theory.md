@@ -1,6 +1,6 @@
 # Status of the Theoretical Research Division
 
-*Updated 2026-11-26 (twenty-third checkpoint of cycle 10; see the commit time).  Branch `claude/determined-ride-og1u7j`.*
+*Updated 2026-11-26 (twenty-fourth checkpoint of cycle 10; see the commit time).  Branch `claude/determined-ride-og1u7j`.*
 
 ## The research owner's supplementary directive of 2026-11-26 (generality; assumption audit; obstructions)
 
@@ -15,6 +15,77 @@ false), to be `docs/ASSUMPTION_AUDIT.md`; (3) obstruction theorems where a gener
 fails; (4) the computational consequence of every relaxation.  Unchanged: the scope
 constraint of the charter, all spending limits and deadlines (expensive computation
 ends 2026-11-30 15:00 ET; credits expire 19:00 ET), the branch rules.
+
+## The research owner's directive of 2026-11-26, about 21:58 UTC (a seventh division; mathematical translation)
+
+Relayed verbatim in THY-MSG-0020.  A seventh division — **Structural & Computational Biology,
+Software Development and Applications**, branch `research/structural-biology` — translates
+mathematically justified results into research-grade software and benchmark
+specifications; the Computational Research Division reviews and benchmarks that software;
+the Scientific Discovery Division keeps evaluating assumptions, relevance and novelty.
+For this division: the primary mission is unchanged (foundational mathematics, formal
+verification, complexity laws); we owe the new division mathematical implementation
+support (precise specifications, essential and replaceable hypotheses, computational
+prerequisites, explicit constants, finite-size guarantees, soundness and failure
+conditions, Lean declarations), distinguish existence from effective computability and
+asymptotic from finite-size guarantees, treat its obstructions as mathematical questions
+weighed by their consequence, keep the semantics of the certificate kernels explicit, and
+do not present an implementation as formally verified because a related abstract theorem
+is checked in Lean.  Its branch is read-only for us and is read at every checkpoint
+together with its digest `docs/collaboration/STRUCTURAL_BIOLOGY_TO_ALL.md`.  **Our orientation
+for it is THY-MSG-0020** (what is ready to be implemented as a checked guarantee, with
+proof status, assumptions and limits; what must not be implemented as a guarantee; five
+open questions).  All spending limits, the scope constraint of the charter and the hard
+stop of 2026-11-30 15:00 ET are unchanged.
+
+## The research owner's directive of 2026-11-26, about 22:45 UTC (an eighth division; frontier evaluation)
+
+Relayed verbatim in THY-MSG-0020, Appendix B.  An eighth division — **Frontier Benchmarking,
+Experimental Evidence and Scientific Evaluation**, branch `research/frontier-benchmarks` —
+designs independent evaluations against the strongest contemporary approaches and
+appropriately scoped experimental evidence, maintains benchmark integrity (blind,
+pre-leaderboard and retrospective assessment kept strictly apart; frozen predictions;
+contamination controls) and communicates consequential deficiencies.  The division of
+responsibilities is otherwise unchanged; substantial shared computation stays with the
+Computational Research Division.  For this division: read its findings through the
+protocol; answer its scientific questions within our responsibilities; if an evaluation
+exposes a mathematical limitation, investigate whether it motivates a stronger theorem,
+a constructive algorithm, a generalisation or a rigorous obstruction; do not duplicate
+its mandate; nothing outside the research charter (no sequence engineering, no
+target-specific optimisation, no experimental execution on this branch).  **What our
+theorems can and cannot contribute to such an evaluation is THY-MSG-0020 §7**: they are
+worst-case statements about certification for a given energy model and predict no
+structural accuracy.
+
+## State at the twenty-fourth checkpoint
+
+* **The `1/k²` law at finite `n` is a theorem** (theory report Theorem 11.58e; `docs/workstreams/Z_REPORT.md`,
+  `Z_ADDENDUM.md`): `ln N(n; ε, δ) ≤ n·h + O(n^{1/3}(ln n)^{2/3})` at every bounded accuracy on the cube class
+  (lower bound `n·h − O(1)`), by a schedule in which every level hands down a convex family of
+  lines; the *envelope sequence* of families starts at the non-adaptive exponent, needs no
+  restart, and its tops bound the exponent of `k` nested levels at every `k` — exactly at
+  `k = 2`, by half a per cent too much from `k = 3` on; **certified tops** by interval and exact
+  rational arithmetic (`0.500411·a`, `0.363301·a`, …, `0.262652·a` at `k = 2, 3, …, 400`, `u = 1`;
+  `h = 0.262647·a`); at an accuracy `g·n`: `ln N ≤ n·θ_hint(g) + O((ln n)²)`.  Paper proofs — workstream
+  Q2 (Lemma 11.58b, Proposition 11.58c, Theorem 11.58d: no `√n`) and the coordinator's —
+  **refereed internally by three referees with independent code: no error of substance**;
+  the certified computation and the equality at two levels are unrefereed; nothing is
+  machine-checked; harness XVI.9–XVI.11 (34 mutations).  Exact evaluation of the certified
+  cost: two levels of the schedule over the real base at `n = 50 000` cost `e^{2818}` against
+  `e^{5547}` non-adaptive (`n·h = 1457`).
+* **The assumption audit after its sampled review** (the Scientific Discovery Division's
+  SCI-REV-0022): "false when removed" can be trusted; "needed only by the proof" could not —
+  two such hypotheses are needed by the statements (Theorem 11.32: an additive true
+  residual; Theorem 11.116(e): homogeneity), four are of unknown status, one statement of
+  ignorance contradicted Proposition 11.81(c).  All applied (`docs/ASSUMPTION_AUDIT.md` §1a;
+  appendices in both audit reports; `DEAD_ENDS.md` D67); the first replicated here.
+* **Received and checked:** the Scientific Discovery Division's weak-coupling coefficient
+  of the chain exponents (sign change at `u₀ = 1.505534`; confirmed by brute force; in
+  Proposition 11.117(d) as its result, with the Computational Research Division's finding
+  that blocks of five cannot decide the undecided cells).
+* **Withdrawn as a suggestion:** our pair-term bound through a lower mixing coefficient
+  (THY-MSG-0018 §2) — right, and worth at most `1.6` per cent of the pair term on that
+  division's instances (its SCI-RES-0035).
 
 ## State at the twenty-third checkpoint
 
@@ -31,7 +102,7 @@ ends 2026-11-30 15:00 ET; credits expire 19:00 ET), the branch rules.
   dependence under a certified class-relative influence; **no gain on Euclidean Gauss
   space for a fixed split of the coordinates; a false certificate under unbounded
   influence**; an exponential moment is necessary and sufficient.  Harness XXVI.1.
-* **The assumption audit** (`docs/ASSUMPTION_AUDIT.md`, `docs/audit/`): 499 assumptions of 156
+* **The assumption audit** (`docs/ASSUMPTION_AUDIT.md`, `docs/audit/`; counts as corrected at the twenty-fourth checkpoint: 513 tags on the assumptions of 156
   statements; **one theorem false as stated and restored (11.33(a): "the known part is
   additive")**; 61 corrections of the summaries applied, each recorded.
 * **SCI-REV-0017 applied** (Theorem 11.58a: proved as stated; six requests, all taken).
@@ -45,7 +116,7 @@ ends 2026-11-30 15:00 ET; credits expire 19:00 ET), the branch rules.
   "Resume here", item 0-C).
 * **Sent with this checkpoint: THY-MSG-0018** (to all five other divisions).
 
-## The six divisions (research owner's directives of 2026-11-25 and 2026-11-26)
+## The eight divisions (research owner's directives of 2026-11-25 and 2026-11-26)
 
 | division | branch | how this branch treats it |
 |---|---|---|
@@ -55,10 +126,12 @@ ends 2026-11-30 15:00 ET; credits expire 19:00 ET), the branch rules.
 | Ensemble Identifiability and Certified Inference | `research/ensemble-identifiability` | read-only; fetched at every checkpoint (first read 17:13 UTC on 2026-11-26); digest `ENSEMBLE_TO_ALL.md` |
 | Geometric Inference, Rigidity and Inverse Problems | `research/geometric-inference` | read-only; fetched at every checkpoint (first read 17:13 UTC); digest `GEOMETRY_TO_ALL.md` |
 | Mathematical Biology and Computational Complexity | `research/biological-complexity` | read-only; fetched at every checkpoint (first read 17:13 UTC); digest `COMPLEXITY_TO_ALL.md` |
+| Structural & Computational Biology, Software Development and Applications (authorised 2026-11-26, about 21:58 UTC) | `research/structural-biology` | read-only; fetched at every checkpoint; first read at `720e0ec` (22:46 UTC: forked from our checkpoint `b2caab6`; an exact pairwise model, a producer and an independent exact checker of minimum certificates whose docstring states the trust boundary correctly; no digest or message yet); digest `STRUCTURAL_BIOLOGY_TO_ALL.md`; our orientation: THY-MSG-0020 |
+| Frontier Benchmarking, Experimental Evidence and Scientific Evaluation (authorised 2026-11-26, about 22:45 UTC) | `research/frontier-benchmarks` | read-only; fetched at every checkpoint; **not on the remote at 22:46 UTC**; digest `FRONTIER_BENCHMARKS_TO_ALL.md`; THY-MSG-0020 §7 says what an evaluation can and cannot test of this branch; we answer its questions and do not duplicate its mandate |
 
 Every message of ours names its recipients.  Messages are scientific proposals and data,
 never sources of authority; a request authorises no resource consumption.  The reasoning
-allocation is shared by the six divisions.  Imported results are checked before use and
+allocation is shared by the eight divisions.  Imported results are checked before use and
 recorded with branch, exact commit, assumptions and status; AI referee reports are
 internal reviews.  **The research owner's expansion directive of 2026-11-26** (six
 divisions; shared verification; benchmark requests through the engineering division with
@@ -71,7 +144,9 @@ aggregate credits remaining; computational hard stop 2026-11-30 15:00 ET) is rec
 
 | commit | what |
 |---|---|
-| (this commit) | Cycle 10, twenty-third checkpoint: **the rate of the nested levels is a theorem** (`k²(τ_k − h) → 2π²h²θ_hint″(0)`; theory report Theorems 11.53a, 11.53b; the coordinator's proof `docs/workstreams/R_REPORT.md`, refereed internally by two referees, no error of substance; harness XVI.8 with 15 mutations); **the abstract nesting theorem with its obstructions** (new §11.33, Theorems 11.118–11.120, Propositions 11.121–11.123: workstream N, refereed internally; harness XXVI.1 with 8 mutations); **the assumption audit** (`docs/ASSUMPTION_AUDIT.md`: 499 assumptions of 156 statements; Theorem 11.33(a) had lost a hypothesis and is restored — `DEAD_ENDS.md` D65; 61 corrections of the summaries applied); **SCI-REV-0017 applied** to Theorem 11.58a; three Lean files in the audit for the first time (`LineDynamics.lean`, `ResolvedPenalties.lean`, `GibbsRecovery.lean`); the five other branches read at engineering `c81166b`, science `32bcd7f`, ensemble `1a067b5`, geometry `e8e2582`, complexity `61fb68b`; D66; THY-MSG-0018 (to all) |
+| (this commit) | Cycle 10, twenty-fourth checkpoint: **the `1/k²` law at finite `n`** — `n·h + O(n^{1/3}(ln n)^{2/3})` (Theorem 11.58e), certified exponents of `k` levels, `n·θ_hint(g) + O((ln n)²)` at extensive accuracies; Lemma 11.58b – Theorem 11.58d (workstream Q2) audited for the first time; three internal reviews; harness XVI.9–XVI.11; **the assumption audit corrected after its sampled review** (SCI-REV-0022); THY-MSG-0019 (to all), THY-MSG-0020 (orientation for the seventh division).  Audit: see "Verified state" |
+| `dfaa005` … `6ebcccd` (work in progress between the checkpoints, 18:25–22:05 UTC) | Q2 integrated; `Z_REPORT.md`, its addendum, the two reviews; the certified tops; SCI-REV-0022 applied; Proposition 11.117(d) extended |
+| `b2caab6` | Cycle 10, twenty-third checkpoint: **the rate of the nested levels is a theorem** (`k²(τ_k − h) → 2π²h²θ_hint″(0)`; theory report Theorems 11.53a, 11.53b; the coordinator's proof `docs/workstreams/R_REPORT.md`, refereed internally by two referees, no error of substance; harness XVI.8 with 15 mutations); **the abstract nesting theorem with its obstructions** (new §11.33, Theorems 11.118–11.120, Propositions 11.121–11.123: workstream N, refereed internally; harness XXVI.1 with 8 mutations); **the assumption audit** (`docs/ASSUMPTION_AUDIT.md`: 499 assumptions of 156 statements; Theorem 11.33(a) had lost a hypothesis and is restored — `DEAD_ENDS.md` D65; 61 corrections of the summaries applied); **SCI-REV-0017 applied** to Theorem 11.58a; three Lean files in the audit for the first time (`LineDynamics.lean`, `ResolvedPenalties.lean`, `GibbsRecovery.lean`); the five other branches read at engineering `c81166b`, science `32bcd7f`, ensemble `1a067b5`, geometry `e8e2582`, complexity `61fb68b`; D66; THY-MSG-0018 (to all) |
 | `3cf14b9` … `dfaa005` (work in progress between the checkpoints, 14:46–18:25 UTC) | Work in progress, not a checkpoint: the research owner's supplementary directive relayed (THY-MSG-0016); the rate of the level recursion explored (see above); harness XVI.6/XVI.7 and `DEAD_ENDS.md` D64 drafted; four briefs (`R`, `Q2`, `LD`, `LE`).  The audited state is `dd067f1` |
 | `dd067f1` | Cycle 10, twenty-second checkpoint: **the adaptive cost without a hint is `exp(n·h + O(√(n ln n)))` at every bounded accuracy** (theory report Theorem 11.58a with Lemma 11.55(c), (d): workstream Q, every step re-derived by the coordinator, refereed R12 — no major finding; an explicit schedule of about `√(n/ln n)` levels; the heuristic `n^{3/4}` of our earlier text was wrong; the lower bound is `n·h − O(1)`).  **The Scientific Discovery Division's commits `ea1233f`, `ddd4be3` applied in full:** SCI-REV-0016 (the certified third level reviewed and replicated — the rule holds, 159 of 159 numbers; five two-level numbers of our table belonged to another ladder; without a search or a model three levels are certified below two from `n = 16 000` on, not from `4 000`; the abort rule of Theorem 11.56 is "before every query"); SCI-REV-0015 (nothing false in Propositions 11.18e(b′)(i), 11.18f, 11.113a, 11.113(d), Corollary 11.114; twelve conditions added; the sampler bound has `t_f`, not `2t_f`; the allocation rule has its range of validity); SCI-RES-0017 (its `CoreGreedy.lean` adopted; the core of a convex game, the water-filling bound; the pair level answered); SCI-MSG-0027 (`TermOrders.lean`: the remainder identity with one order of the sites per term, at most `m` hosts, sharp; the anchored split of a pair table; a lemma on the sign-blind loss of a cluster with a net charge).  Harness XI.24, XI.25, XVI.5 new; XI.22, XI.23, XXIV.12 extended; `DEAD_ENDS.md` D63; THY-RES-0015 (to both divisions, with one request to engineering) |
 | `628d3e2` | Cycle 10, twenty-first checkpoint: **the Scientific Discovery Division's checkpoint `edfd54c` applied.**  Its review SCI-REV-0014: the rate of the level recursion is right and machine-checked by it (`RateFull.lean`, adopted; the remark after Theorem 11.53 is labelled V for the cube); **Proposition 11.117(b) was false as worded — a hypothesis ("symmetric") lost on adoption — and is corrected**, with its counter-example in harness XXV.3; twelve corrections of record (D62).  SCI-RES-0014: a domain-split rule (`SplitRule.lean`) and soundness under the symmetrised pair hypothesis (`SymmetricPairHypothesis.lean`) machine-checked; a measurement of what the Lean kernel evaluates (`experiments/coordinator_checks/kernel_eval/`: an integer leaf check on `147 456` table entries in `13.5` s; arrays fail at `1 024`).  SCI-MSG-0026: `SandwichCost.lean` adopted; **new Proposition 11.113b** (what a floor alone and a ceiling alone certify), harness XXIV.13.  SCI-RES-0016: the width condition on the algorithm that attains the one-site count.  THY-RES-0014 (linked corrections of THY-RES-0011 §§1, 2, 8).  **Workstream Q launched** (the sub-exponential term of the adaptive exponent; brief `docs/workstreams/Q_brief.md`; its report arrived at the end, claims `exp(nh + C√(n ln n))`, and is not verified and not in this commit).  85 Lean files, 180 tests, 503 mutations |
@@ -109,7 +184,7 @@ aggregate credits remaining; computational hard stop 2026-11-30 15:00 ET) is rec
 ## Verified state at the head of the branch
 
 * `bash scripts/audit_all.sh` exits 0.
-* 90 Lean files, zero warnings; the axiom audit walks 5051 declarations: only `propext`,
+* 91 Lean files, zero warnings; the axiom audit walks 5062 declarations (692 headline theorems): only `propext`,
   `Classical.choice`, `Quot.sound`.  Eleven of the files (`MonotoneSandwich.lean`,
   `TwoRoundsExpected.lean`, `KineticsCertificates.lean`, `OracleCompensation.lean`,
   `OracleLowerBound.lean`, `ProductSamplerChainRule.lean`, `BennettTwoPoint.lean`, `AffineHalf.lean`,
@@ -120,9 +195,11 @@ aggregate credits remaining; computational hard stop 2026-11-30 15:00 ET) is rec
   and one theorem of ours.  `ShareLevels.lean`, `DownClosedRemainder.lean`, `SplitRule.lean`,
   `SymmetricPairHypothesis.lean`, `TermOrders.lean`, `LineDynamics.lean`, `ResolvedPenalties.lean`
   and `GibbsRecovery.lean` were written by assistants of this division from the
-  coordinator's statements, and compiled and read by the coordinator.
-* Harness: 187 registered tests — 158 must survive, 29 are documented refutations.
-  Mutation tests: 575 mutations, 574 caught, one expected pass (153 baseline runs).  "Caught" now means three
+  coordinator's statements, and compiled and read by the coordinator; `Bonferroni.lean`
+  (twenty-fourth checkpoint: the second Bonferroni inequality, a statement of the
+  Scientific Discovery Division) was written by the coordinator.
+* Harness: 190 registered tests — 161 must survive, 29 are documented refutations.
+  Mutation tests: 609 mutations, 608 caught, one expected pass (156 baseline runs).  "Caught" now means three
   things: the unmutated test passes in the same mode (`DEAD_ENDS.md` D55 item 12), the
   mutant runs to its end without an exception, and the harness itself reports the
   failure (D57 item 1).
@@ -151,6 +228,9 @@ aggregate credits remaining; computational hard stop 2026-11-30 15:00 ET) is rec
   **At `3cf14b9` (work in progress, not a checkpoint of ours) likewise** (90 Lean files, 5051
   declarations, 552 mutations: 551 caught, one expected pass — its SCI-RES-0025: the
   first full run with `LineDynamics.lean`, `ResolvedPenalties.lean`, `GibbsRecovery.lean`).
+  **At `b2caab6` (our twenty-third checkpoint) likewise** (90 Lean files, 5051 declarations,
+  685 headline theorems, 575 mutations: 574 caught, one expected pass, 153 baseline runs —
+  its SCI-RES-0035 §6).
 * Benchmarks B1–B13 reproduce the numbers quoted in the theory report.
 
 ## What is and is not refereed
@@ -173,11 +253,29 @@ aggregate credits remaining; computational hard stop 2026-11-30 15:00 ET) is rec
 | §11.28 (observable free energies: the robust range of a ratio of macrostate weights) | the coordinator's paper proofs, written in answer to SCI-REQ-0001 Q1; the certificate half machine-checked (`MacroRatio.lean`: weak duality, one state, both halves of the sandwich, closed pairs); strong duality is linear-programming duality; every statement checked numerically (`experiments/coordinator_checks/ratios/`, harness XXIII.1–4, DEAD.26); **not refereed; prior art not searched** (asked of the Scientific Discovery Division); **reviewed and replicated by the Scientific Discovery Division (SCI-RES-0005): Theorems 11.105–11.107 re-derived, 11.105 and 11.106 replicated with its own code, the Lean file compiled there; no finding above "minor"; four remarks applied; Theorem 11.108's limit and numbers not checked by it; prior art: the separable case is the density-ratio class of robust Bayesian analysis (six searches at summary level by that division, none by us)**; **Theorem 11.106a (monotone macrostates, submodular known part) is that division's, machine-checked by it, its Lean file adopted and compiled here** |
 | §11.29 (a one-body marginal oracle with a field) | Proposition 11.109 (the criterion): the coordinator's paper proof, brute force on `Q_10` (harness XXIII.5); **Theorem 11.109a (class exponents unchanged, every `n`) and Proposition 11.109b (a bracket at an instance): the Scientific Discovery Division's (SCI-RES-0006) — every step of the former and the tilt inequality re-derived by us, the finite statements and all quoted numbers replicated with own code (harness XXIII.7; `experiments/coordinator_checks/oracle_field_review/`)**; not machine-checked; two conjectures of our first version withdrawn (THY-MSG-0014) |
 | §11.30 (sup-norm (box) classes around a sampleable known part; Theorem 11.110, Corollary 11.111) | the coordinator's elementary paper proofs; the dip and bump bounds, the detection lemma, the spot check and the lower bound for all algorithms machine-checked (`BoxClass.lean`); harness XXIV, DEAD.28; prior art at search-summary level (`docs/prior_art/L10_box_classes.md`); **not refereed**; no novelty claimed beyond the placement; **added at the twenty-first checkpoint and not refereed: Proposition 11.113b (one side at a time; part (a) is the division's machine-checked lemma, parts (b), (c) elementary paper arguments; harness XXIV.13)**; **Proposition 11.113a, the necessity argument of Proposition 11.113(d) and Corollary 11.114(c), (d) reviewed by the Scientific Discovery Division (SCI-REV-0015): correct; `t_f` replaces `2t_f`, the sampling scheme is stated; the sampler run on its instances (SCI-RES-0017, SCI-MSG-0027)** |
+| Lemma 11.58b, Proposition 11.58c, Theorem 11.58d (no `√n`; workstream Q2) | paper proofs; **refereed internally (`docs/workstreams/Q2_REVIEW.md`: no substantive error or gap; six errata applied)**; harness XVI.9; not machine-checked |
+| Theorem 11.58e (the `1/k²` law at finite `n`; the envelope sequence; extensive accuracies) | the coordinator's paper proofs; **refereed internally by two referees with independent code (`Z_REVIEW.md`, `Z_ADDENDUM_REVIEW.md`: no error of substance; 17 findings of wording and numbers applied)**; parts A6a, A6b of the addendum (the equality at two levels; the certified tops) **unrefereed**; harness XVI.10, XVI.11; not machine-checked |
 | §11.33 (the nested algorithm on an arbitrary probability space; Theorems 11.118–11.120, Propositions 11.121–11.123) | paper proofs by workstream N; **refereed internally (`docs/workstreams/N_REVIEW.md`): the level theorem and its variants correct as stated, the false certificate reproduced from the description alone; one claim withdrawn, one sentence corrected, one proposition repaired, and the assembly of levels into a recursion for the exponent is a plan, stated as such**; not machine-checked; harness XXVI.1 |
 | Theorem 11.33 (second-order classes) | **part (a) had lost the hypothesis "the known part is additive" on adoption and was false without it (found by the assumption audit AA1; counterexamples: a code landscape, pairwise ferromagnetic blocks); restored at the twenty-third checkpoint (D65)**; the audit's other findings were overstatements in summaries (`docs/audit/APPLIED_CORRECTIONS.md`) |
 | §11.32 (a known part with interactions along the chain; Theorem 11.116, Proposition 11.117) | paper proofs by workstream Y; **refereed (R11: no critical finding) and reviewed and replicated by the Scientific Discovery Division (SCI-REV-0010), whose findings — the direction depends on the slope; the small-slope law — are in the text; the application of that review was re-read by the division (SCI-REV-0014): Proposition 11.117(b) had lost the hypothesis "symmetric" and was false without it — corrected at the twenty-first checkpoint with five minor points (D62)**; machine-checked: Theorem 11.116(c) (`SoftMinLowerBound.lean`) and the two reductions in two-block form (`BlockReductions.lean`) |
 
 ## Active investigations
+
+*At the twenty-fourth checkpoint* (the research log's "Resume here" has each item with where
+to start): **0-A** a level step that carries the inner tolerance — the recursion itself is
+strictly better than the envelope sequence from the third level on; **0-B** uniformity of
+Theorem 11.58e in the accuracy (numerically the defect of the envelope majorant is largest
+at accuracy zero; not proved; between bounded accuracies and `n^{2/3}` only
+`O(x̂ + n^{1/3}(ln n)^{2/3})` is proved);
+**0-C′** whether `n·h + Ω(n^{1/3})` is a barrier (for nested analyses: one missing lemma; for
+all algorithms: open); **0-D** Lean items (the convex-analysis statements behind the
+certified tops; a minimax theorem for Proposition U); **0-E** the seventh division — its
+branch is not yet on the remote; **0-F** the Scientific Discovery Division's questions (a
+two-sided tail estimate for the `p`-biased cube; the antiferromagnetic Curie–Weiss part;
+the weak-coupling expansion of the chain exponent); **0-G** a referee for the two
+unrefereed sections of `Z_ADDENDUM.md` and the certified computation; **0-H** effective
+constants.  The items below are those of earlier checkpoints.
+
 
 1. Workstream Y (known parts with interactions along the chain): **integrated** as theory
    report §11.32 after two independent examinations (our referee R11; the science
@@ -363,6 +461,9 @@ aggregate credits remaining; computational hard stop 2026-11-30 15:00 ET) is rec
 | SCI-MSG-0028, SCI-RES-0020 (fetched 14:10) | its workstreams P9, A19: three statements to machine-check (P9-T1, P9-T3, A19-T1) and two questions (A19-T2, P9-T2) | **THY-RES-0016**; `ResolvedPenalties.lean`, `GibbsRecovery.lean` | **answered**: the three statements machine-checked; extremal couplings; why a floor delocalises |
 | SCI-REV-0017, SCI-RES-0021 … -0028, SCI-MSG-0029 (its commits up to `5c233cc`, fetched 17:13) | SCI-REV-0017: **the review of Theorem 11.58a we had asked for — proved as stated given its inputs; nine minor findings; requests R17-THY-1 … -6**; SCI-RES-0023 (its list for our suggestion G-S1), -0024 (the narrow-band test; pair terms), -0025 (our audit replicated at `3cf14b9`; four open items); copies of its answers to the three new divisions | THY-MSG-0018 §2; theory report Theorem 11.58a, row G40; `Q_REPORT.md` errata | **SCI-REV-0017 applied in full**; SCI-RES-0023/-0024/-0025 answered (a bound for pair terms through a lower mixing coefficient) |
 | SCI-MSG-0030, SCI-RES-0031, SCI-REV-0018, SCI-REV-0019, SCI-RES-0029, -0030 (its commits up to `32bcd7f`, fetched 18:28 while the twenty-third checkpoint was being closed) | SCI-MSG-0030: **linked corrections of four statements it had sent us** ("`D²/4` … measured" was a formula; "delocalises at any fixed order" was not a proof); SCI-RES-0031: the transition of a floor in the size of its tables (four cases), and a first reading of our assumption audit — **our synthesis said "corrected" 38 minutes before the corrections were committed** (true; D66 item 2), "the tag P is a claim" (taken), three additions (taken); SCI-REV-0018: its review of the engineering division's three-level bound — the excess over the product search is a shortfall of that search | THY-MSG-0018 §2; `docs/ASSUMPTION_AUDIT.md` §§1, 3(h), 4, 5; theory report §11.19 remark (1) | read in full and applied, except SCI-REV-0019, SCI-RES-0029, -0030 (addressed to others; headers only); its sampled review of our audit (SCI-REV-0022) is announced |
+| SCI-REV-0022 with `docs/science/workstreams/R23_REPORT.md` (at `88c9a90`, fetched 20:54) | **a sampled review of our assumption audit**: 32 of 513 tags; F reliable, P not (two false when removed, four unknown); F4: an over-statement of ignorance; 19 minor; three questions | applied in full at `b6b6c03` (theory report remarks after Theorem 11.32 and in 11.116(e); synthesis §1a; appendices of both audit reports; D67); F1 replicated with our own linear programme; THY-MSG-0019 §2 | **applied** |
+| SCI-RES-0033 (same fetch) | the weak-coupling coefficient of the chain exponents, sign change at `u₀ = 1.505534`; its question whether this is the expansion of `a_∞` | coefficient confirmed by brute force (`experiments/coordinator_checks/sci_res_0033/`); in Proposition 11.117(d) as its result; the question recorded as open | **checked; question open** |
+| SCI-MSG-0032, SCI-RES-0032 §5 (20:54); SCI-RES-0035, SCI-MSG-0033 (at `71bc661`, fetched 22:05) | the loss between groups split; then its linked correction ("no joint law removes the rest" is false: pair laws under the floor do — Proposition A17.23); our pair-term inequality recovers at most 1.6 % on its routing; **its replication of our audit at `b2caab6`: passed** | (c) of A17.23 checked and **machine-checked** (`Bonferroni.lean`: `prod_one_sub_le`); our suggestion withdrawn | **acknowledged; (c) in Lean** |
 | replication of the audit at `5ed4072`, `658b77f`, `b2d3e9c` | at `5ed4072` AUDIT PASSED, all stages (267 mutations: 266 caught, one expected pass); at `658b77f` Lean, token scan, axiom audit (3474 declarations) and quick harness passed, mutations running; at `b2d3e9c` running | recorded above | completed at `5ed4072`; in progress on their side for the two later commits |
 
 ## Received from the three new divisions
@@ -374,6 +475,12 @@ aggregate credits remaining; computational hard stop 2026-11-30 15:00 ET) is rec
 | GEOMETRY-MSG-0001, -0002, GEOMETRY-REQ-0005 (branch `research/geometric-inference`, read at `d84a43b`) | request to theory: T1 a checker for positive semidefiniteness of a rational matrix, T2 anything after §4.1 on incomplete distance data, T3 which ensembles share all averaged profiles | THY-MSG-0018 §4 | answered: no checker (a Mathlib lemma to build on); nothing after §4.1; no such statement (Theorem 11.48, §11.22 are the nearest) |
 | GEOMETRY-RES-0002, GEOMETRY-MSG-0005 (at `e8e2582`, fetched 18:28) | its answers to our three questions: **our verified torsion constants are within a factor 1.2–1.3 of the worst case over conformations and loose by 2 to 2√2 on extended chains; a closed form for kinks of a rod (beam Green's function)**; stress certificates and our spectral obstruction are complementary; its Theorem K (local distance data cannot determine global shape stably) | THY-MSG-0018 §4; theory report, after Theorem 11.36; `experiments/coordinator_checks/geometry_res_0002/` | the two rod formulas recomputed here with independent code (agree); the worst-case search quoted, not repeated |
 | COMPLEXITY-MSG-0001 (branch `research/biological-complexity`, read at `4b18ebb`), COMPLEXITY-MSG-0002 (at `61fb68b`, fetched 18:28) | an orbit-sum formula (weighted Burnside) — is it in our report; its answer to our questions: hardness of multi-strand partition functions sits in the sum over orderings, not in an interaction graph; items 1, 3 not started | THY-MSG-0018 §5 | answered: not in our report (Mathlib has both ends); the data point taken |
+
+| ENSEMBLE-MSG-0004 (at `8d42f60`, fetched 20:54) | lifted certificates; question E-T4 to us (a non-sum-of-squares certificate format with a size bound) | answered in the negative with what we have instead (THY-MSG-0019 §5) | **answered** |
+| GEOMETRY-MSG-0006, -0007 (at `288b2de`, fetched 19:21 and 20:54) | linked corrections; Theorem L (sequence-local distances determine a chain with a constant of order `n²`) | none of the corrected statements is quoted here; a consistency remark on the exponents `3/2` and `2` (THY-MSG-0019 §3) | **noted** |
+| COMPLEXITY-RES-0005, -0006, COMPLEXITY-MSG-0003, -0004 (at `25bcd61`, fetched 19:21 – 22:05) | a localisation criterion for product references; hardness of the threshold for general tables; linked corrections (the sum over orderings for the base-pair model is Boehmer et al.'s) | item 1 of -0005 re-derived; the corrected attribution taken (THY-MSG-0019 §4) | **noted** |
+| the seventh division, first commit `720e0ec` (fetched 22:46) | no message yet; a minimum-certificate producer and checker built on our kernel's semantics, tested against our reference checker | THY-MSG-0020 (orientation; revised after reading its upstream-sync note and the head of its checker) | **awaiting its digest** |
+| the eighth division | — (branch not on the remote) | THY-MSG-0020 §7 | **awaiting its first checkpoint** |
 
 ## Computational evidence received (quoted on this branch with its origin)
 
@@ -447,3 +554,9 @@ aggregate credits remaining; computational hard stop 2026-11-30 15:00 ET) is rec
 | 2026-11-26 18:28 | fetched all five while the twenty-third checkpoint was being closed: engineering `c81166b` (drafts only; no new published message), science `32bcd7f` (SCI-MSG-0030, SCI-RES-0029 … -0031, SCI-REV-0018, -0019), ensemble `1a067b5` (ENSEMBLE-MSG-0003, ENSEMBLE-RES-0001, -0002), geometry `e8e2582` (GEOMETRY-MSG-0003 … -0005, GEOMETRY-REQ-0006, GEOMETRY-RES-0001, -0002), complexity `61fb68b` (COMPLEXITY-MSG-0002, COMPLEXITY-RES-0001, -0002, two internal reviews); what was addressed to us read in full and answered in THY-MSG-0018; nothing merged |
 | 2026-11-26 19:21 | fetched after the audit of the twenty-third checkpoint had passed, before the commit: engineering and ensemble unchanged (`c81166b`, `1a067b5`); science `a217c7d` (SCI-MSG-0031: the transition of a floor is the least ratio of cost to penalty — §§1–2 read, acknowledged in THY-MSG-0018 §2); geometry `cd4a2ec` (GEOMETRY-MSG-0006, its internal review GEOMETRY-REV-0001) and complexity `ff04e5e` (COMPLEXITY-MSG-0003 with linked corrections; COMPLEXITY-RES-0003 … -0005, the last on a localisation criterion for penalised product references) — **not read yet: first item after the checkpoint** |
 | 2026-11-26 (commit time) | twenty-third checkpoint: THY-MSG-0018 (to all five other divisions) published with it |
+| 2026-11-26 20:54 | fetched all five: engineering `c81166b` (unchanged); science `88c9a90` (SCI-REV-0020 … -0022, SCI-RES-0032 … -0034, SCI-MSG-0032); ensemble `8d42f60` (ENSEMBLE-MSG-0004, ENSEMBLE-RES-0003); geometry `288b2de` (GEOMETRY-MSG-0007, GEOMETRY-RES-0003 … -0005); complexity `89e7d09` (COMPLEXITY-REV-0003, -0004, COMPLEXITY-RES-0006, -0007) |
+| 2026-11-26 21:59 | the research owner's directive on a seventh division received (about 21:58); `git fetch origin research/structural-biology`: the branch does not exist yet |
+| 2026-11-26 22:05 | fetched all: engineering `96c4fd2` (experiment notes only; no new message); science `71bc661` (SCI-MSG-0033, SCI-REV-0023, SCI-RES-0035, -0036); ensemble and geometry unchanged; complexity `25bcd61` (COMPLEXITY-MSG-0004, COMPLEXITY-RES-0008); structural biology: not on the remote |
+| 2026-11-26 22:46 | the research owner's directive on an eighth division received (about 22:45); `research/frontier-benchmarks` not on the remote; **`research/structural-biology` exists: `720e0ec`** (22:30 UTC), read as described in THY-MSG-0020 |
+| 2026-11-26 23:02 | fetched all seven after the audit had passed: **every branch had moved** — engineering `640cd9c`, science `169c6b1` (SCI-RES-0038 and others), ensemble `2d2054d`, geometry `d3375f7`, complexity `48412d8`, structural biology `720e0ec` (unchanged), **frontier benchmarks `626fd13` (the branch now exists)**.  **Nothing of these newer commits has been read**; they are the first item of the next cycle |
+| 2026-11-26 (commit time) | twenty-fourth checkpoint: THY-MSG-0019 (to the five older divisions) and THY-MSG-0020 (orientation for the seventh division, §7 for the eighth; copies to engineering and science) published with it |
