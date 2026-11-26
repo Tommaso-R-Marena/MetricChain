@@ -1,6 +1,6 @@
 # Scientific frontier map
 
-*Science division.  **Version 5.1** (2026-11-26, checkpoint 43: one row of §4 answered — an interacting known part, workstream R10; version 5 was of checkpoint 40: after the second and third waves of workstreams — F, P2, L2, R6, R7, R8, R9, P3, L3, A3 —
+*Science division.  **Version 5.2** (2026-11-26, after checkpoint 43 and the theory division's seventeenth checkpoint: §4 updated — two rows added, two extended; version 5.1 answered the row on an interacting known part, workstream R10; version 5 was of checkpoint 40: after the second and third waves of workstreams — F, P2, L2, R6, R7, R8, R9, P3, L3, A3 —
 the theory division's fourteenth and fifteenth checkpoints, and addenda A16–A17; rows F1, F3, F5, F6, F8, F12 and §§3–4 rewritten; change notes at the end.
 Version 4.1 was of 2026-11-25).  A map of what the science of molecular
 conformations cannot reliably establish today, why, and what precise problem each
@@ -113,13 +113,22 @@ barrier), not totals.
 | cut checker; kernels over polynomial weights | SCI-MSG-0005 (K-T1, K-T2) | open |
 | native certificates against pseudo-Boolean proofs | SCI-REV-0006 (E-1) | open |
 | an independent derivation of the cost of the nested adaptive algorithm | `PUBLICATION_OPPORTUNITIES.md` §1 | **done (workstream R6, SCI-REV-0007): it stands** |
-| what must be bounded a priori for a surrogate to certify a free energy; can a floor be proved for a real energy term | SCI-RES-0007, SCI-RES-0009, SCI-MSG-0020; workstreams P3, A3 | **answered**: a divergence of the truth from the model (in print); a floor can be proved with evaluations on a Hamming ball on extended backbones (P3) |
-| **the compact case**: a certified bound that sees the cancellation between self and cross terms (helix, buried side chains, charges) | `OPEN_PROBLEMS.md` D6; SCI-MSG-0020 (P3-T1…T4, P3-E1, P3-E2) | **open — the problem the physical line ends on** |
+| what must be bounded a priori for a surrogate to certify a free energy; can a floor be proved for a real energy term | SCI-RES-0007, SCI-RES-0009, SCI-MSG-0020; workstreams P3, A3 | **answered**: a divergence of the truth from the model (in print); a floor can be proved with evaluations on a Hamming ball on extended backbones (P3); **the skeleton of that certificate is machine-checked twice** (remainder identity, allocation, sandwich: the theory division's `AnchoredRemainder.lean` and our workstream L4; the bracket and its probability: L4, SCI-MSG-0023), its constants are paper proofs with enclosures; the theory division's sandwich sampler (Proposition 11.113) needs no variance input — running on our instance |
+| **the compact case**: a certified bound that sees the cancellation between self and cross terms (helix, buried side chains, charges) | `OPEN_PROBLEMS.md` D6; SCI-MSG-0020 (P3-T1…T4, P3-E1, P3-E2); the theory division's §12 item 13(a) | **open — the problem the physical line ends on; shared by the theory division in our formulation; workstream P5 running (measurement of the cancellation by neutral groups; a lower bound for pair-by-pair bounds)** |
 | the hinted query complexity on a finite space with heavy states (the covering programme of randomised certificate complexity) | SCI-RES-0009 §4 (A3-T6) | open |
 | is Hoeffding's Theorem 3 used as a certified second-order bound in free-energy perturbation | SCI-RES-0009 §3 | not found; Decoster (2004) unread — needs a library |
 | does an interaction along the chain raise the exponents (the theory division's workstream Y) | workstream R10; SCI-REV-0010 | **answered for one model, and not by "yes"**: for a two-state nearest-neighbour chain all three exponents rise at `u = 1` (theirs; replicated), by the structure factor at small slopes (proved at second order); at `u ≥ 2–3` the two cost exponents fall below the independent-site values (proved from their own recursion); the threshold rises at every slope.  Open: the crossover slope (R10-T2, R10-E1); the small-slope law for the infinite chain (Conjecture R10.3); more than two states, a field |
+| which split of the energy into tractable model and remainder (the "known part" as a modelling decision) | addendum A17 (12); SCI-MSG-0022; `OPEN_PROBLEMS.md` D7 | **answered by measurement for neutral side chains**: the way of fitting hardly matters (`D_2` within 0.34 nats; the floor has its own convex fit), the split matters by orders of magnitude — the vacuum force field is a worse model of the solvated ensemble than independent residues fitted to it (screening).  Open: charged side chains; a certified floor after a floor-optimal fit |
+| on which domain is a minimum certified when the clash-free domain is not a product | SCI-REV-0012 §5 (linked correction of SCI-MSG-0015); the theory division's Proposition 11.18c | **answered, with a correction of our own result**: on a greedily pruned product the certified minimum missed the true one in 14 of 40 analyses; the right domain is the largest reset-closed part at the true minimiser (star: 13 of 40; third-order pair model: 30 of 34); configurations outside it need merged sites or further references |
 
 ## Change note
+
+*Version 5.2 (after checkpoint 43).*  §4 only: two questions added (which split of the
+energy into model and remainder — benchmark B10 completed, addendum A17 (12); on which
+domain a minimum is certified when the clash-free domain is not a product — workstream
+P4, with a correction of our own result) and two rows extended (the compact case is
+shared by the theory division and has a workstream; the skeleton of the certified free
+energy is machine-checked twice).  Rows F1–F12 are unchanged.
 
 *Version 5.1 (checkpoint 43).*  The last row of §4 (an interacting known part; the theory
 division's workstream Y) is answered by workstream R10 (SCI-REV-0010): the direction of
