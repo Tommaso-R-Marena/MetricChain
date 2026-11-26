@@ -39,6 +39,11 @@ networks of the class (B1) and circular decomposability for level-3 bloblets (B2
    support**: each of the 23 six-point systems it excludes is, or becomes after doubling a few leaves, a
    system whose metric fails — in most cases by having the wrong support while remaining Kalmanson.  This
    is a statement about classes of split systems, not about classes of networks (§7).
+   **Theorem 10′ (added after the review, unreviewed)** [P + X] gives the sharp class for "Kalmanson" alone:
+   the systems none of whose six-point restrictions contains its three 3-splits without containing all
+   six 2-splits (133 of the 150 six-point systems instead of 127); each of the 17 excluded six-point
+   systems becomes, after two of its leaves are replaced by clades of at most three leaves, a system whose
+   metric is Kalmanson for no circular order (§7.1).
 5. **Theorem 11 (the parametric family, problem B3)** [P + X].  For the four-parameter family of quartet
    distances of NANUQ⁺ the conclusion holds on the whole class exactly when `ρ_o = ρ_s` and
    `ρ_c + ρ_s ≤ 2ρ_a < 2ρ_s`; the *Modified NANUQ* distance is outside this set and fails on an explicit
@@ -50,7 +55,8 @@ arithmetic (programs in `experiments/complexity/nanuq/`, listed in §10), [V] ch
 of systems, of Proposition 2 on five and six points, and the numbers 150 / 141 / 127 of §7 — not the
 general proofs), [K] a known result that we cite.
 
-Numbering.  Lemmas and propositions are numbered 1–8, A, B, 0, B0; theorems 4, 6, 7, 9, 10, 11.  The theorem
+Numbering.  Lemmas and propositions are numbered 1–8, A, B, 0, B0 (and Corollary 5′); theorems 4, 6, 7, 9,
+10, 10′, 11.  The theorem
 numbers are kept from the first version because other files cite them ("Theorem 6" was "Theorem 6′").
 
 ---
@@ -234,6 +240,23 @@ one separating `{z,w}` from `{a_1,a_2,a_3,a_4}`; and some tree displays `wa_2|a_
 
 So negativity is the failure of a *union property*: two displayed splits that both cut `{z,w}` off, from
 `a_1a_2a_3` and from `a_2a_3a_4`, without any displayed split cutting `{z,w}` off from all four.
+
+**Corollary 5′ (the three-split form) [P; re-checked [X]].**  Let `Σ_6` be the restriction of `Σ` to the six
+leaves `w, a_1, a_2, a_3, a_4, z` (this circular order).  Then `Φ6 < 0` if and only if `Σ_6` contains the
+three 3-splits of these six leaves and does not contain the 2-split `{z,w} | {a_1,a_2,a_3,a_4}`.
+
+*Proof.*  The splits of `Σ_6` are the restrictions of the splits of the trees of `Σ`.  A circular split of
+the six leaves that separates `{z,w}` from `{a_1,a_2,a_3}` is `{z,w}|{a_1,…,a_4}` or
+`P_1 = {a_4,z,w}|{a_1,a_2,a_3}`; one that separates `{z,w}` from `{a_2,a_3,a_4}` is `{z,w}|{a_1,…,a_4}` or
+`P_2 = {z,w,a_1}|{a_2,a_3,a_4}`; and a tree displays `wa_2|a_3z` iff it has a split that restricts to
+`Q = {w,a_1,a_2}|{a_3,a_4,z}`, the only circular split separating `{w,a_2}` from `{a_3,z}`.  So the four
+conditions of Lemma 5 say `P_1, P_2, Q ∈ Σ_6` and `{z,w}|{a_1,…,a_4} ∉ Σ_6`; and `P_1, P_2, Q` are the three
+3-splits.  ∎
+
+(`kalmanson_only.py extra` confirms the equivalence for all 150 six-point systems in all twelve
+labellings.)  The three 3-splits of six points are pairwise incompatible, so they come from three
+different trees; the condition says that, in restriction to the six leaves, these three trees exist
+while no tree has the cherry `{z,w}`.
 
 ---
 
@@ -499,7 +522,9 @@ positive weight on an undisplayed split (the second type in (a)); according to t
 minimal blow-ups in (b) likewise remain Kalmanson with a wrong support, larger blow-ups reach a negative
 weight for 17 of the 23 excluded systems, and for the 6 systems missing a 2-split and its crossing 3-split
 no blow-up with multiplicities `≤ 3` and at most 11 leaves does.  So for "Kalmanson" alone the criterion is
-not known to be sharp.  (ii) The closure operations are those of abstract split systems.  (iii) The
+not sharp; the sharp class for "Kalmanson" alone is the larger class `𝒦′` of §7.1 (Theorem 10′, added after
+the review), which explains both observations of the referee.  (ii) The closure operations are those of
+abstract split systems.  (iii) The
 statement is about classes of split systems: 19 of the 127 systems are not displayed by any network of the
 class of [HABIMRW] on six leaves (next paragraph), so nothing sharp is claimed about classes of networks.
 
@@ -507,6 +532,108 @@ By §5 the galled outer-labeled planar networks on six leaves give systems of `�
 127 (and exactly 108 according to a second generator, `multiblob.py`, which builds networks blob by blob and
 respects the existence of a rooted partner); the remaining 19 systems satisfy the criterion and are not
 displayed by any network of that class on six leaves.
+
+### 7.1 The sharp class for "Kalmanson" alone, as a forbidden six-leaf pattern
+
+*Added 2026-11-26 after the review; not seen by any referee.*
+
+Six points in circular order have nine non-trivial circular splits: six 2-splits `{x_k,x_{k+1}} | rest` and
+three 3-splits.  The 3-splits are pairwise incompatible, and a 2-split `{x_k,x_{k+1}}` is incompatible with
+exactly one of them, the one that separates `x_k` from `x_{k+1}`.
+
+**Definition.**  `𝒦′` is the class of tree-generated circular split systems `Σ` such that *every six-point
+restriction of `Σ` that contains its three 3-splits contains all its 2-splits* (and is then the system of
+all circular splits of the six points).  By Corollary 5′ this is the condition "`Φ6 ≥ 0` in every six-point
+restriction and every labelling" — the criterion of Theorem 4 without the requirement that the terms
+vanish on undisplayed splits.  So `𝒦 ⊆ 𝒦′`.
+
+**Theorem 10′ [P + X].**
+(a) If `Σ ∈ 𝒦′` has `n ≥ 4` points, then `d_Σ` is circular decomposable for `C`, and `α_ij > 0` for every
+`S_ij ∈ Σ` (the support contains `Σ`; it may be larger).
+(b) `𝒦′` contains every tree-generated system on at most five points and the split system of every tree,
+and it is closed under restriction and under substitution `∘`; in particular under replacing a leaf by a
+cherry, or by any clade.
+(c) Let `Σ_6` be a tree-generated system on six points `u_1, z, w, u_p, v_1, v_q` (this circular order) that
+contains its three 3-splits and not the 2-split `{z,w}`, and let `Σ_6(m)` be obtained from it by replacing
+`z` and `w` by caterpillar clades `Z` and `W` of `m` leaves each.  In `d_{Σ_6(m)}` the split
+`S = {u_1} ∪ Z ∪ W ∪ {u_p} | {v_1, v_q}` has weight
+
+```
+α_S / 2  =  Φ4 + m·(Φ5(z) + Φ5(w)) − m²/2 ,
+```
+
+with `Φ4`, `Φ5(z)`, `Φ5(w)` the terms of `Σ_6`.  It is negative for every `m ≥ 5`.
+(d) [X]  Exactly 17 six-point tree-generated systems contain their three 3-splits and miss a 2-split; they
+form four classes under rotation and reflection: all nine splits except one 2-split (6 systems), except
+two antipodal 2-splits (3), except two 2-splits at distance two (6), except three alternate 2-splits (2).
+Hence
+`|𝒦′_6| = 150 − 17 = 133 = 127 + 6`; the six systems of `𝒦′_6` that are not 6-locally good are those that
+miss a 2-split and the 3-split incompatible with it.  For each of the 17, the weight in (c) is negative
+already for some `m ≤ 3` (at most ten leaves; the formula of (c) agrees with the computed weights for
+`m = 1,…,6`), and for the least such `m` the metric `d_{Σ_6(m)}` is Kalmanson for **no** circular order of
+its leaves.
+
+*Consequently: a class of tree-generated circular split systems that is closed under restriction and under
+replacing a leaf by a cherry has, for all its members, a NANUQ metric that is Kalmanson — for the given
+order or, equivalently for such a class, for some circular order — if and only if it is contained in `𝒦′`,
+i.e. if and only if none of its six-point members contains the three 3-splits without containing all six
+2-splits.*
+
+*Proof.*  (a)  By Proposition 2, `α_ij/2` is a sum of `Φ4 ≥ 0`, of terms `Φ5 ≥ 0` (Lemma 4, applied to the
+five-point restrictions), and of terms `Φ6`, `Φ6'`, which are `≥ 0` by Corollary 5′ and the definition of
+`𝒦′`.  If `S_ij ∈ Σ` then `Φ4 > 0` (Lemma 3).  Trivial splits have `α/2 ≥ n − 2 > 0` (Lemma 4).
+
+(b)  A system on at most five points has no six-point restriction; the splits of a tree are pairwise
+compatible, so no restriction of a tree contains two 3-splits; a restriction of a restriction is a
+restriction.  Let `Σ = Σ_1 ∘_{p,r} Σ_2` with `Σ_1, Σ_2 ∈ 𝒦′` (it is tree-generated, by the trees `T_1 ∘ T_2`),
+and let `Y` be six of its leaves, `Y_1 = Y ∩ X_1`, `Y_2 = Y ∩ X_2`.  If `|Y_1| ≤ 1` or `|Y_2| ≤ 1` then by
+Lemma 7(ii) `Σ|_Y` is, up to the name of one leaf, a six-point restriction of a factor, and the condition
+holds.  Otherwise `Σ|_Y = Σ_1|_{Y_1 ∪ p} ∘ Σ_2|_{Y_2 ∪ r}` contains the non-trivial split `S_0 = Y_1 | Y_2`, and
+every split of `Σ|_Y` has a side that contains `Y_1` or `Y_2`, hence is compatible with `S_0`.  But `S_0` is a
+3-split or a 2-split of the six points, and is incompatible with two, respectively one, of the three
+3-splits.  So `Σ|_Y` does not contain the three 3-splits, and there is nothing to check.  Replacing a leaf
+by a clade is a substitution of a tree.
+
+(c)  Proposition 2 for `Σ_6(m)` and `S` (here `V∖Y = ∅`):
+`α_S/2 = Φ4 + Σ_{x ∈ Z∪W} Φ5(x) + Σ_{ {x,y} ⊆ Z∪W } Φ6(x,y)`, each term being a function of the restriction
+of `Σ_6(m)` to the leaves involved.  For `x ∈ Z`, `y ∈ W` the restriction to `{u_1,x,y,u_p,v_1,v_q}` is `Σ_6`
+with `z, w` renamed, so `Φ6(x,y) = Φ6(z,w)`, which is negative by Corollary 5′ and therefore `−½` (Lemma
+5).  Likewise `Φ5(x) = Φ5(z)` for `x ∈ Z`, `Φ5(y) = Φ5(w)` for `y ∈ W`, and `Φ4` is that of `Σ_6`.  For two
+leaves `x, y` of the same clade, the splits of `Σ_6(m)` that separate `x` from `y` are splits of the clade,
+with one side inside it; so in each of the four 4-sets occurring in `Φ6(x,y)` only the quartet with the
+cherry `xy` is displayed, all four weights are `1`, and `Φ6(x,y) = 1 + 1 − 1 − 1 = 0`.  There are `m²`
+pairs of the first kind: this is the formula.  Since `Φ4 ≤ 2` and `Φ5 ≤ 1` (Lemma 4),
+`α_S/2 ≤ 2 + 2m − m²/2 < 0` for `m ≥ 5`.
+
+(d)  `kalmanson_only.py` (the counts, the formula for `m ≤ 6`, the least `m`) and `kalmanson_only.py extra`
+(the search over all circular orders, by backtracking with the four-point conditions; the search is
+tested on the 133 metrics of `𝒦′_6` with scrambled labels, for each of which it finds an order).
+
+*The equivalence.*  "If" is (a).  "Only if": a member outside `𝒦′` has a six-point restriction `Σ_6` as in
+(c), after a rotation; `Σ_6` and all `Σ_6(m)` belong to the class (a caterpillar clade arises by replacing
+leaves by cherries repeatedly); by (d) one of them is Kalmanson for no circular order.  ∎
+
+**Remarks.**  1. *Two sharp classes, both given by forbidden six-point restrictions.*  `𝒦′` forbids the four
+dihedral classes of (d); `𝒦` (Theorem 10, exact support) forbids these and a fifth one, "all nine splits
+except a 2-split and the 3-split incompatible with it" (`127 = 133 − 6`).  A system of `𝒦′ ∖ 𝒦` has a
+Kalmanson metric which gives positive weight to a split that no tree of the system has.
+
+2. *What it says about networks.*  Let `𝒩` be a class of outer-labeled planar binary semi-directed networks
+that is closed under passing to subnetworks `N|_Y` and under replacing a leaf by a cherry.  By Lemma 1,
+Lemma 0 and Theorem 10′: **`d_N` is Kalmanson for all `N ∈ 𝒩` if and only if no network of `𝒩` on six leaves
+displays the three 3-splits of its leaf order without displaying all six 2-splits** (and the support is
+exactly the displayed splits for all `N ∈ 𝒩` iff, in addition, no six-leaf network of `𝒩` displays exactly
+the nine splits minus a 2-split and the 3-split incompatible with it — Theorem 10).  So the question
+"for which outer-labeled planar networks that are not galled does the conclusion survive" (§6, Remark 3)
+is, for classes closed under these two operations, a question about six-leaf networks.  For a single
+network only the "if" direction holds: a network whose six-leaf subnetworks avoid the pattern has a
+Kalmanson metric, and so do all networks obtained from it by attaching clades in place of leaves.  The
+seven-leaf network `N*` of §6 has five six-leaf subnetworks with the pattern (`forbidden_in_nstar.py`), as
+it must.
+
+3. *What is not shown.*  For a single system outside `𝒦′` we do not show that it, or one of its own
+blow-ups, fails: the argument blows up a six-point restriction.  On six points 14 of the 17 systems of (d)
+themselves have a Kalmanson metric.
 
 ---
 
@@ -587,7 +714,10 @@ number of blobs it is not sufficient — Modified NANUQ lies in it and fails on 
 
 * Nothing about networks that are not outer-labeled planar.
 * The non-galled planar networks for which the conclusion survives are not classified (§6, Remark 3).
-* For "Kalmanson" without exact support the sharpness of the criterion is open (§7).
+* For "Kalmanson" without exact support the sharp class is `𝒦′` (Theorem 10′, §7.1) — for classes closed
+  under restriction and cherry replacement; nothing is shown about a single system outside `𝒦′` (§7.1,
+  Remark 3), and the six-leaf outer-labeled planar networks that display the forbidden pattern are not
+  described in terms of the network (number of hybrids, their positions).
 * For the class of bloblets alone the exact parameter domain is not determined (condition (b) of Theorem 11
   is sufficient; our necessity witnesses use pendant clades).
 * Theorem 7 was reached independently, but after a third-party claim of the same statement whose method
@@ -608,6 +738,7 @@ Our programs: `experiments/complexity/nanuq/` (Python 3 + `networkx`).
 | `verify_class.py` | Lemma 8: `𝒜_n`, `𝒞_n` for `n ≤ 6`; agreement with a second generator (`multiblob.py`) | ≈ 1 min |
 | `class_table6.py` | Appendix B | seconds |
 | `characterize6.py` | the numbers 150 / 141 / 127 / 108, Theorem 10 | ≈ 2 min |
+| `kalmanson_only.py`, `kalmanson_only.py extra`, `forbidden_in_nstar.py` | Corollary 5′ on all six-point systems; Theorem 10′(d): 133 = 127 + 6, the 17 excluded systems, the formula of (c) for `m ≤ 6`, no circular order for the least failing blow-ups; the pattern in `N*` | seconds |
 | `test_bloblets.py k n…`, `test_multiblob.py n` | the conclusion of Theorem 7 on all bloblets of level `k` / all networks with `n` leaves, **as generated from twin trees and substitution** | minutes |
 | `counterexample7.py`, `verify_nongalled.py`, `verify_nongalled2.py`, `nongalled_family.py`, `nongalled_formula.py` | Theorem 9 | seconds–minutes |
 | `exhaust_all_systems.py`, `exhaust_tree_generated.py` | CX-D2 | seconds |
@@ -658,6 +789,10 @@ all 108 systems of the list `C6` are 6-locally good.  Axioms: `propext`, `Quot.s
 | 12: print the classes of `𝒞_6` | Appendix B (`class_table6.py`); kernel check of the same fact in Lean |
 | 13: undefined labels, numbering, no bibliography | labels and numbering note in §0; "Theorem 6′" renamed; §12 |
 | 14: the reading of "4-cycle" above level 1 is ours | stated in §8 |
+
+Added later on 2026-11-26 and not seen by the referee of REV-0002: Corollary 5′ (§3) and §7.1 (Theorem 10′),
+which settle the question left open in finding 10 ("for Kalmanson alone the criterion is not known to be
+sharp") by replacing the class.
 
 ## 12. References
 

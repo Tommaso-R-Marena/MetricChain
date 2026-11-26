@@ -60,6 +60,7 @@ partition function.
 | B-III | *Encoding level-3 semi-directed phylogenetic networks by quarnets and quinnets*, arXiv:2610.07855 | PDF downloaded; **not yet read** | — |
 | B-IV | Chepoi, Fichet, *A note on circular decomposable metrics*, Geom. Dedicata 69 (1998) | **not read**; used through B-I Prop. 2.8 | Kalmanson ⇔ circular decomposable; split weights `α_ij` |
 | B-V | Allman, Baños, Rhodes, *NANUQ*, Algorithms Mol. Biol. 14 (2019) | **not read**; known through B-I | level-1 case |
+| B-VII | Weisstein, E. W., "NANUQ Distance", MathWorld, https://mathworld.wolfram.com/NANUQDistance.html ("Last Updated: Wed Nov 25 2026") | page fetched on 2026-11-26 through a page-reading sub-agent; **its report read, not the page itself** (short quotations only) | a secondary source: the definition of B-I; the theorem of B-I for level-2 networks with one non-trivial blob; the claim B-II, described as a "computer-assisted project" whose "complete theorem had not been formalized in Lean or independently reviewed by a specialist" as of 1 Oct 2026.  Three references (B-V, B-I, B-II).  According to the report the page says nothing on networks that are not galled, on counterexamples, on the necessity of a hypothesis, on "Kalmanson", on sharpness or forbidden configurations, or on the parametric family |
 | B-VI | Allman, Baños, Rhodes, Wicke, *NANUQ⁺: A divide-and-conquer approach to network estimation*, Algorithms Mol. Biol. 20:14 (2025), doi:10.1186/s13015-025-00274-w | published HTML fetched (2026-11-26); **read: the section "Quartet distances" (Definition 3.1, Lemmas 3.2–3.3, Definition 3.11, Theorem 3.14) and the appendix paragraph on the NANUQ distance**; the rest skimmed | the parametric family `ρ = (ρ_c,ρ_s,ρ_a,ρ_o)`; Modified NANUQ `(½,1,½,1)`; the authors state that they "do not make claims as to whether distances other than the NANUQ one fit any particular combinatorial structure in a precise sense" |
 
 Searches (2026-11-26, "extended" mode):
@@ -69,6 +70,13 @@ Searches (2026-11-26, "extended" mode):
    → B-I (arXiv, journal, PMC), a *Correction* to B-I dated 2026-01-14 (a figure; PMC12804282, title only),
    the NANUQ and NANUQ⁺ papers; **nothing** on whether "galled" is necessary and no non-galled example.
 
+3. (2026-11-26, about 20:15 UTC, "standard" mode; done before registering CX-T26)
+   `NANUQ metric circular decomposable Kalmanson outer-labeled planar network conjecture level-2 quartet distance split weights`
+   and `"NANUQ" distance "circular decomposable" OR "Kalmanson" phylogenetic network non-galled counterexample 2026`
+   → B-I (arXiv v1, v2, journal, a university repository copy), the Correction, the NANUQ papers, and a
+   MathWorld page (B-VII below).  **Nothing** on a sharp class, on forbidden six-leaf configurations, on
+   3-splits, or on networks that are not galled.
+
 Searches by the referee (REV-0002; nine web searches and four page fetches, 2026-11-26): (i) no proof or
 disproof of the Section 6 conjectures of B-I other than B-II — nothing on arXiv or in a journal, no follow-up
 in the first author's publication list, B-III only cites NANUQ⁺; (ii) nothing on the necessity of "galled" or
@@ -77,5 +85,7 @@ concerns an omitted figure panel.
 
 Consequences for novelty statements: CX-T6 (and with it the method, CX-T5, CX-T9) is to be described as **an
 independent rediscovery, in all likelihood, of the unreviewed claim B-II, whose proof we have not seen**; no
-priority is claimed for it.  For CX-T7 (galled cannot be dropped), CX-T8 (sharpness) and CX-T13 (parametric
-family, in our extension) no prior art was found; a failure to find it is not proof of novelty.
+priority is claimed for it.  For CX-T7 (galled cannot be dropped), CX-T8 (sharpness), CX-T26 (the sharp
+class for "Kalmanson" alone, as a forbidden six-leaf pattern) and CX-T13 (parametric family, in our
+extension) no prior art was found; a failure to find it is not proof of novelty.  Since B-II names a
+"six-label reduction" and we have not seen its text, a statement like Corollary 5′ may well be in it.

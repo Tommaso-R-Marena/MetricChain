@@ -1,0 +1,15 @@
+X1  substitutions of tree-generated systems (3+5, 4+4, 5+3 leaves) on six points: 624 cases, all 6-locally good: True
+X2  16555 six-point restrictions of the systems Sigma[k] with at most 10 leaves: 6-locally good except the sub-configurations [(3, 1, 1), (4, 1, 0)], which are 'all nine splits except the 2-split of the 2nd and 3rd b-leaf' and are globally good: True
+X3  local terms of S* (twice the values of the note), by type of leaf:
+      2*Phi4: [('k2=0', 2), ('k2>=1', 2)]
+      [k2>=1] 2*Phi5: {'b': 0, 'b1': 1, 'c': 1, 'c1': 1, 'x': 1, 'x1': 1, 'y': 1}
+      [k2>=1] 2*Phi6, different positions: {'b,b': -1, 'b,c': 0, 'b,c1': 0, 'b1,b': 0, 'b1,c': 1, 'b1,c1': 1, 'c,c': 0, 'c,c1': 0, 'x,x': 0, 'x,x1': 1, 'y,x': 0, 'y,x1': 1}
+      [k2>=1] 2*Phi6, same position: [0]
+      [k2=0] 2*Phi5: {'b': 0, 'b1': 1, 'bK': 1, 'x': 1, 'x1': 1, 'y': 1}
+      [k2=0] 2*Phi6, different positions: {'b,b': -1, 'b,bK': 0, 'b1,b': 0, 'b1,bK': 1, 'x,x': 0, 'x,x1': 1, 'y,x': 0, 'y,x1': 1}
+      [k2=0] 2*Phi6, same position: [0]
+      the type determines the value: True | Proposition 2 and the formula reproduce alpha(S*): True
+T12 all 445 bloblets N[kB,k1,k2] with 4..13 leaves: every split other than S* has the correct sign and alpha(S*) = k1 + k2 - C(kB-1,2)  resp.  k1 + 1 - C(kB-2,2): True   (negative: 66, zero: 9)
+T13 1500 random glued networks (up to 14 leaves; 850 with a non-galled blob having k1 >= 1, kB >= 2; 1045 splits S*, of which 97 have weight <= 0): only the splits S* can fail and their weights equal the formula: True
+ORD the 9 bloblets with at most 9 leaves and alpha(S*) < 0 are Kalmanson for no circular order: True
+ALL OK

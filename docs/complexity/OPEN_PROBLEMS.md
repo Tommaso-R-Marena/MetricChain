@@ -231,7 +231,9 @@ arXiv:2507.17308v2 (13 Oct 2025) on 2026-11-26.
   - For which we found no prior art (ours: 2 searches; the referee: 9): **"galled" cannot be dropped** — an
     explicit 7-leaf level-2 outer-labeled planar bloblet that is not galled and whose NANUQ metric is not
     circular decomposable, with exact weights `2 − C(s+t,2)` in a family (CX-T7); the criterion is sharp for
-    "Kalmanson with exact support" among classes of split systems (CX-T8).
+    "Kalmanson with exact support" among classes of split systems (CX-T8); for "Kalmanson" alone the sharp
+    class is given by a forbidden six-leaf pattern — three 3-splits without all six 2-splits (CX-T26,
+    unreviewed).
   - B3 (parametric family): **OURS-[P]+[X], not reviewed** (CX-T13; the referee only spot-checked it): for
     **our** extension of the NANUQ⁺ family beyond level 1, the conclusion of Theorem 4.7 holds on the whole
     class exactly when `ρ_o = ρ_s` and `ρ_c + ρ_s ≤ 2ρ_a < 2ρ_s`; the Modified NANUQ distance `(½,1,½,1)` is
