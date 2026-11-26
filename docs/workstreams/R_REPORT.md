@@ -9,6 +9,20 @@ are labelled **[V]** (machine-checked: `proofs/Frontiers/LineDynamics.lean`), **
 proof below, **not yet refereed** when this file was first committed — see §12 for the
 state of the reviews), **[N]** (numerical), **[C]** (conjecture or heuristic).*
 
+> **Reviewed (2026-11-26, the same day).**  Two independent internal referees, each with its
+> own code, read the proof in halves: `R_REVIEW_B.md` (§§1–4, 7, 8 lower bound, 9, 10) and
+> `R_REVIEW_A.md` (§§5, 6, 8 upper bound, and Corollary E).  **Neither found an error of
+> substance**; both tried to break the statements numerically on pairs the author had
+> not used (a brute force on the operator `R` itself in 480 cases, 2 700 cases of the
+> minimax identity, the chain on six pairs, the recursion itself iterated to 61 levels on
+> five pairs: the constant `2π²h²ϑ` confirmed to `0.1` per cent).  Their minor findings — two
+> wrong expository sentences, one wrong remark that the proof does not use, an
+> over-statement of what a numerical check shows, unwritten routine steps — are corrected
+> in the text below, each marked with the referee who found it.  New in the text since
+> the version they read: Corollary E (reviewed by referee A), Propositions G and S and the
+> paragraph on one-sided curvatures (not reviewed; S and the upper half of the last are
+> labelled as sketches).  Internal reviews are not external peer review.
+
 ## 0. Result
 
 Let `θ = θ_na` be the non-adaptive exponent function of a pair, `h` its fixed point
@@ -115,8 +129,9 @@ for the Gaussian pair; its proof, "Step I with numbers" of the remark after Theo
 11.53, uses only that the `T_k` are nonincreasing and bounded by `a`, `θ(h) = h`, and the
 continuity of `θ` at `h`).  We use it only through `τ_k → h`.  *Every `θ` with (H0) is covered:* the
 shear defines its partner — for `x ≥ h` put `θ_hint(x − θ(x)) := θ(x)`; `x ↦ x − θ(x)` is continuous
-and strictly increasing from `0` at `x = h` — and `(θ, θ_hint)` is a `HintPair` with the constant `1`
-in its lower bound: (11.18.1) holds by construction, `e + θ_hint(e) = x` is nondecreasing, and
+and strictly increasing from `0` at `x = h` — and `(θ, θ_hint)` is a `HintPair` (with `E = h` for its range and the constant `1`
+in its lower bound; its proof uses only that `θ ≤ a`, `θ(h) = h` and the continuity of `θ` at `h` —
+traced in the Lean file by referee A): (11.18.1) holds by construction, `e + θ_hint(e) = x` is nondecreasing, and
 `θ_hint(e) = x − e ≥ h − e` (referee B, who asked for this sentence).
 
 ## 2. The slope map
@@ -240,10 +255,11 @@ nonincreasing with slopes in `[−1, 0]` (so `x + M_{W,b}(x)` is nondecreasing),
 with `x + M(x)` nondecreasing.  For `g > 0`, `e > g` with `θ(e) > 0`, and `X = g·θ(e)/(e − g)`:*
 `R[T](g) ≤ (1 − g/e)·(X + M(X))`.  (This is the choice `φ = g/e`, `β → 0` in `R`; `θ` is continuous at `e`.)
 If `θ(e) = 0` the same choice gives `R[T](g) ≤ (1 − g/e)·sup T` (the outer term `μ_β = φθ((g − β)/φ)` tends
-to zero with `β`).
+to zero with `β`) — this case is a two-line paper argument **[P]**, not part of the Lean lemma;
+and the Lean lemma is quoted for `T ≥ 0` (`stepLE_Rstep`), which holds for every `T_k` (referee A).
 
 **Proposition U [P].**  *Let `b > 0`, let `W : [0, b] → [0, 1]` be convex, nondecreasing and continuous,
-and let `T` be nonincreasing with `T ≤ M_{W,b}` on `(0, ∞)`.  Then for every `g > 0`*
+and let `T ≥ 0` be nonincreasing with `T ≤ M_{W,b}` on `(0, ∞)`.  Then for every `g > 0`*
 
     R[T](g)  ≤  sup{ B − Σ(B, W(B))·g  :  0 ≤ B ≤ b,  Σ(B, W(B)) < ∞ }.
 
@@ -289,13 +305,27 @@ map**: sequences `(W_j, b_j)` with `W_{j+1} ≤ Σ(·, W_j(·))` and `W_{j+1} �
 requirements pull against each other: `W_{j+1}` has to stay below the image, which blows
 up near `b_{j+1}`, *and* below one, *and* convex.
 
-*Remarks.*  (1) The *exact* dynamics of the best convex majorant is: `S_{k+1}` = the lower convex
-envelope of `min(1, Σ(B, S_k(B)))` on `[0, τ_{k+1}]` with the value one at `τ_{k+1}` = the root of
-`S_k(B) = 1 − B/a`; since `Σ(·, S_k(·))` is convex, this is "cut by the tangent line through
-`(τ_{k+1}, 1)`".  The scripts `dual_ub_gauss.py`, `dual_ub_cube.py` iterate it on grids.  The proof below does
-not use it.  (2) Convexity of `W` is used for the minimax theorem; without it the
-statement is false (harness XVI.7: for the Gaussian pair the line-by-line formula gives
-`τ₃ ≤ ⅓`, while `τ₃ ≥ 1/(2√2)`).
+*Remarks.*  (1) *For `θ` with infinite slope at zero* (the cube, the Gaussian pair) the exact
+dynamics of the best convex majorant is: `S_{k+1}` = the lower convex envelope of
+`min(1, Σ(B, S_k(B)))` on `[0, τ_{k+1}]` with the value one at `τ_{k+1}` = the root of `S_k(B) = 1 − B/a`; since
+`Σ(·, S_k(·))` is convex, this is "cut by the tangent line through `(τ_{k+1}, 1)`".  The scripts
+`dual_ub_gauss.py`, `dual_ub_cube.py` iterate it on grids.  The proof below does not use it.  *For a
+finite slope at zero the rule is wrong as stated* (referee A): `Σ` is then finite on the
+boundary `B = (1 − s)a`, with the value `(τ/a)·|θ′(0+)|`, possibly below one — for `θ = (1 − 0.8e)₊` and
+`S_0 = 0` the rule would give `S_1(B) = B`, whose envelope `(1 − x)₊` is *below* `T_1 = θ`; the endpoint
+value is `min(1, Σ)`, and the cut applies only if that is one.
+(2) Convexity of `W` is used for the minimax theorem; without it the line-by-line value
+is not a bound (harness XVI.7: for the Gaussian pair the line-by-line formula gives
+`τ₃ ≤ ⅓`, while `τ₃ ≥ 1/(2√2)`; referee A, by brute force on `R` itself in 17 non-convex cases:
+the value is that of the convex hull of the family, strictly above the line-by-line
+one).  So is "nondecreasing" (referee A: `W = 0.5(1 − B/1.2)`, Gaussian pair, `g = 0.1`:
+`R = 0.4675` against a line-by-line value `0.3306`).  With `W(0) > 0` the statement is true and
+vacuous for `T ≥ 0`.
+(3) *What is an equality and what is not* (referee A).  The minimax identity is exact:
+`inf_{e>g} F(e)` equals the right side of Proposition U (to `10⁻¹²` in 2 700 cases).  `R[T]` itself can
+be smaller — it also has `R[T](g) ≤ T(g−)`, from tolerances `β` close to `g` — e.g. for the
+Gaussian pair, `W(B) = 2B` on `[0, 0.4]`, `g = 0.45`: the right side is `0.0673` and `R[M_W](g) ≤ 0.04`.
+This does not matter for the recursion, which takes `min(T_k, R[T_k])`.
 
 ## 6. Sub-solutions by cutting the orbit curves
 
@@ -319,8 +349,8 @@ case B from some `j` on, by (P3).)
 (b) `W_{j+1}(B) ≤ Σ(B, W_j(B))` for all `B ∈ [0, b_0]` and all `j ≥ 0`.*
 *Proof.*  (a) The slopes of `p_j` to the left of `B_t(j)` are at most `m_j`, and a supporting line
 is a minorant.  (b) `H_j := Σ(·, W_j(·))` is convex on `[0, b_0]` (as in (P1)), and `H_j = p_{j+1}` wherever
-`W_j = p_j`, that is on `[0, B_t(j)]` (on all of `[0, b_0]` in case A).  If `j + 1` is in case A there is
-nothing to prove.  Otherwise `B_t(j + 1) < B_t(j)`; on `[0, B_t(j + 1)]`, `W_{j+1} = p_{j+1} = H_j`; and beyond,
+`W_j = p_j`, that is on `[0, B_t(j)]` (on all of `[0, b_0]` in case A: read `B_t(j) = b_0` there).  If
+`j + 1` is in case A there is nothing to prove.  Otherwise `B_t(j + 1) < B_t(j)`; on `[0, B_t(j + 1)]`, `W_{j+1} = p_{j+1} = H_j`; and beyond,
 `W_{j+1}` is the line through `(B_t(j + 1), H_j(B_t(j + 1)))` whose slope is the left derivative of `H_j`
 there — a subgradient of the convex function `H_j` at an interior point of the set where
 it is finite — hence a global minorant of `H_j`.  ∎
@@ -344,8 +374,8 @@ part, because `s_t < 1 − B_t(j)/a`).  ∎
     (C1)   Σ(h, s_t) < 1,
     (C2)   D(h, s_t) + λ̄·(1 − s_t − h/a) < 1 − s_t,     λ̄ := max{θ(e)/e : e ∈ 𝓜(h, σ_*)},   Σ(h, σ_*) = s_t,  σ_* ∈ (L, s_t).
 
-*Then there is `ε₁ > 0` such that for every `b_0 ∈ (h, h + ε₁]` the range condition holds for all
-`j ≥ 0`.  Moreover (C1) and (C2) hold for every `s_t ∈ (L, L + η₀]`, for some `η₀ > 0`.*
+*Then there is `ε₁ > 0`, with `h + ε₁ < (1 − s_t)·a`, such that for every `b_0 ∈ (h, h + ε₁]` the range
+condition holds for all `j ≥ 0`.  Moreover (C1) and (C2) hold for every `s_t ∈ (L, L + η₀]`, for some `η₀ > 0`.*
 
 *Proof.*  Let `j ≥ 0`.  If `j + 1` is in case A, `W_{j+1} = p_{j+1} ≤ s_t < 1` on `[0, b_0]`.  Let `j + 1` be in case B.
 (α) *`j` in case A.*  `W_{j+1}(b_{j+1}) ≤ W_{j+1}(b_0) ≤ p_{j+1}(b_0) = Σ(b_0, p_j(b_0)) ≤ Σ(b_0, s_t)`, and `Σ(·, s_t)` is continuous at
@@ -367,10 +397,15 @@ letting `B ↑ B₁`:
 
 (`p_j′(B₁−) ≤ p_j′(B_t(j)−) = m_j` by convexity, as `B₁ < B_t(j)`).  And `m_j ≥ (s_t − p_j(h))/(B_t(j) − h) ≥ (s_t − L)/(b_0 − h)`
 (left derivative against a chord; (P2)).
-*Uniformity.*  As `b_0 ↓ h`, uniformly in all such `j`: `B₁ → h`; `σ₁ → σ_*` (it is the solution of
-`Σ(B₁, σ₁) = s_t`, and `Σ(h, ·)` is strictly increasing on `[L, s_t]`, being convex, `≥` the identity,
-and equal to it at `L`); the maximisers stay in a compact subset of `(0, ∞)` and their limit
-points lie in `𝓜(h, σ_*)`, so `limsup θ(e₁)/e₁ ≤ λ̄`; and `1/(e₁m_j) → 0`.  Hence
+*Uniformity.*  The index `j` enters only through `B_t(j), B_t(j + 1) ∈ (h, b_0)` and through
+`m_j ≥ (s_t − L)/(b_0 − h)`.  As `b_0 ↓ h`, uniformly in all such `j`: `B₁ → h`; `σ₁ → σ_*` — it is the solution of
+`Σ(B₁, σ₁) = s_t`; it is at most `σ_*` because `Σ(B₁, ·) ≥ Σ(h, ·)`; it exceeds `L` for `b_0` close to `h`,
+because `Σ(B₁, σ) ≤ Σ(B₁, L) → Σ(h, L) = L < s_t` for `σ ≤ L`; and `Σ(h, ·)` is strictly increasing on
+`[L, s_t]`, being convex, `≥` the identity, and equal to it at `L` —; the points `(B₁, σ₁)` then lie in a
+compact subset of the open regular region on which `Σ = s_t > 0`, so the maximisers stay in a
+compact subset of `(0, ∞)` (a maximiser has `B − (1 − σ)θ(e) > 0`, which bounds it below, and
+`e ≤ B/Σ`) and their limit points lie in `𝓜(h, σ_*)`, so `limsup θ(e₁)/e₁ ≤ λ̄`; and `1/(e₁m_j) → 0`.
+(The two steps "exceeds `L`" and "compact subset" were supplied by referee A.)  Hence
 
     limsup_{b_0 ↓ h} sup_j [ m_{j+1}·(E_j − B_t(j + 1)) ]  ≤  D(h, s_t) + λ̄·(1 − s_t − h/a)  <  1 − s_t
 
@@ -468,7 +503,8 @@ transform of the `k`-th orbit curve.*
 wherever it is finite: image slopes never exceed one.  `T_1 = θ` has slopes in `[−1, 0]` and is
 the envelope of its tangent lines, `θ = M_{p_1, a}`.  If `T_k ≤ M_{p_k, b_k}` with `b_k = B_∞(k)`, Corollary U′
 applies with `W′ = Σ(·, p_k(·)) = p_{k+1}` — convex, nondecreasing, with values in `[0, 1]` on the set
-where it is finite — and gives `T_{k+1} ≤ M_{p_{k+1}, b_{k+1}}`.  ∎
+where it is finite — and gives `T_{k+1} ≤ M_{p_{k+1}, b_{k+1}}`.  (For a finite slope at zero `B_∞(k)` is
+attained and `p_k` is continuous on `[0, B_∞(k)]`: referee A, who supplied this step.)  ∎
 For such pairs no cut, no range condition and no restart is needed, and Theorem R
 follows from Lemma PT alone.  Checked by the referee with an implementation of the
 recursion itself: for `0.3e^{−e}`, `e^{−0.8e}`, `0.5e^{−2e}`, `(1 − e)₊` the recursion and the orbit agree to
@@ -606,7 +642,7 @@ Machine-checked instances: `T_2(0+) ≥ 3/8`, `T_3(0+) ≥ 3/10` (`gauss_level_t
 
 | script | what it checks | result |
 |---|---|---|
-| `r1_checks.py` | joint convexity and monotonicity of `Σ` (12 000 random midpoints); convexity of the orbit curves; (Σ6); Lemma PT; Proposition U by brute force — the bracket of `R` minimised over `φ` at `β → 0` against the envelope of the image lines, for random convex piecewise-linear `W`; a negative control with a concave `W`; Proposition K | all pass (`out_r1_checks.txt`): `√δ·N_t(δ)/c_* = 0.764, 0.906, 0.968, 0.990, 0.997` at `δ/h = 10⁻², …, 10⁻⁶` (Gaussian; the cube alike); Proposition U holds **with equality** up to the discretisation (`2·10⁻⁶·a`, 240 cases); with a concave `W` the line-by-line value is exceeded by up to `0.07·a` |
+| `r1_checks.py` | joint convexity and monotonicity of `Σ` (12 000 random midpoints); convexity of the orbit curves; (Σ6); Lemma PT; Proposition U by brute force — the bracket of `R` minimised over `φ` at `β → 0` against the envelope of the image lines, for random convex piecewise-linear `W`; a negative control with a concave `W`; Proposition K | all pass (`out_r1_checks.txt`): `√δ·N_t(δ)/c_* = 0.764, 0.906, 0.968, 0.990, 0.997` at `δ/h = 10⁻², …, 10⁻⁶` (Gaussian; the cube alike); the minimax value `inf_e F(e)` of the `β → 0` family equals the right side of Proposition U up to the discretisation (`2·10⁻⁶·a`, 240 cases) — this is not a brute force on `R`, which can be smaller (remark (3) of §5; referee A did the brute force on `R` itself: 480 cases, `R ≤` the bound to `7·10⁻¹²·a`); with a concave `W` the value of the convex hull exceeds the line-by-line value by up to `0.07·a` |
 | `r2_chain.py pair s_t−L b_0−h [levels]` | the restarted chain of §6: case A/B, `B_t(j)`, `m_j`, `E_j`, `b_j`, the range condition, the ratio of consecutive slopes against its bound; `j²(b_j − h)/c_*²` | `out_r2_chain_gauss.txt` (`1.031` at `j = 1000`), `out_r2_chain_cube1.txt` (`1.049` at `j = 600`), `out_r2_chain_gauss_st015.txt`, `out_r2_chain_gauss_wide.txt` (range condition fails) |
 | `r3_gauss_exact_lb.py` | **exact** lower bounds for the Gaussian pair at finite `k` (Proposition A with the orbit in rational arithmetic: no rounding; the chain behind it is machine-checked) | `τ_k ≥ 0.381966011, 0.307978528, 0.255679562, 0.250376448, 0.250023947` at `k = 2, 3, 10, 40, 160`; `(k + ½)²(τ_k − ¼) ≥ 1.0151, 1.0010, 1.00005` times `π²/16` at `k = 10, 40, 160` (`out_r3_gauss_exact_lb.txt`) |
 | `r4_profile.py` | the closed form `f` of §8a, the residual of its differential equation, and the lower envelope of the lines of Proposition A at `k = 20 … 160` for two pairs | `out_r4_profile.txt` (increasing to `f`; the two pairs agree to three digits) |
@@ -617,9 +653,9 @@ Machine-checked instances: `T_2(0+) ≥ 3/8`, `T_3(0+) ≥ 3/10` (`gauss_level_t
 
 ## 12. What is not done
 
-1. **Review.**  When first committed, nothing in this file had been read by anyone but its
-   author.  Independent internal reviews are commissioned; their outcome is recorded in
-   the research log and in the theory report (Theorem 11.53a).
+1. **Review.**  Two independent internal reviews (see the note at the head): no error of
+   substance; minor findings applied.  Not reviewed: Propositions G and S, the paragraph
+   on one-sided curvatures.  Not external peer review.
 2. **No certified upper constants at finite `k`.**  The `o(1)` terms are not quantified; the
    restart level `k₁` is not computed.  From below the bound is exact for the Gaussian pair
    (`r3_gauss_exact_lb.py`: rational arithmetic on top of the machine-checked chain); for the

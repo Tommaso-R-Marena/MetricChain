@@ -30,8 +30,8 @@ corrections to the theory report and the README are recorded item by item in
 `docs/audit/APPLIED_CORRECTIONS.md`.  The table for the nested algorithm rests on workstream
 N, which has since been refereed internally (`docs/workstreams/N_REVIEW.md`: the level theorem
 correct as stated; six rows of its table reclassified — the counts below are the revised
-ones); the rate theorem is refereed in its lower half and under review in its upper half
-at the time of writing.
+ones); the rate theorem has been refereed internally in both halves (no error of
+substance).
 Classifications are judgements with evidence attached; where the evidence is "not known"
 the reports say so, and §8 collects those cases.  Line numbers in the two audit reports
 and in the record of corrections refer to the theory report and the README as the audits
@@ -68,7 +68,7 @@ LEVEL 0  THE UNIFORM CUBE, one slope, no known part, exact evaluations, worst ca
            adaptive without a hint = hinted: θ_hint (extensive accuracy) 11.54; h (bounded) 11.58  [P]
            n·h − O(1) ≤ ln N ≤ n·h + O(√(n ln n))                             11.58a [P]
            rounds of adaptivity; k-body marginal oracle changes no exponent   11.84–11.87, 11.104 [P]
-           k nested levels: exponent h + (2π²h²θ_hint″(0) + o(1))/k²          R_REPORT [P, under review]
+           k nested levels: exponent h + (2π²h²θ_hint″(0) + o(1))/k²          Theorem 11.53b [P, refereed internally]
          the only level with an exact tail function (Harper) and a bounded-accuracy adaptive theorem
     |
     |  lost: exact isoperimetry (AA2 S1), every bounded-accuracy adaptive bound, the sub-exponential
