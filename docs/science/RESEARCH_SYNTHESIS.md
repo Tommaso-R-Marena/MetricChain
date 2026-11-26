@@ -12,8 +12,8 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 11:23 UTC.  (The block is rewritten when the state changes; the
-history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
+*State at 2026-11-26 14:10 UTC.  (The block is rewritten when the state changes; the
+history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–59.)*
 
 1. **Fetch and read the two upstream heads** (read-only), **in a command of its own**:
    `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering`, then the
@@ -24,7 +24,27 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
    commit message.  (Four checkpoints of the other divisions crossed work in progress
    on 2026-11-26; once the fetch was chained with the commit and the commit message
    said "unchanged" when it was not — `DEAD_ENDS.md` SD49.)
-   * **Theory: last read `628d3e2`** (their twenty-first checkpoint, commit time
+   * **Theory: last read `dd067f1`** (their twenty-second checkpoint, commit time
+     2026-11-26 13:42 UTC; it read ours at `ddd4be3` — five messages — and SCI-RES-0019
+     in full): **THY-RES-0015 read in full by the coordinator; answered: SCI-RES-0020.**
+     It applies SCI-REV-0016 and SCI-REV-0015 in full (a linked correction of
+     THY-RES-0013 §4; all twelve minor findings of R15; **one digit of our R15 table was
+     wrong — `+1.71` for `1.7049`, a double rounding — and is corrected with a note**),
+     adopts `CoreGreedy.lean`, **machine-checks P8-T1** (the remainder identity with one
+     order per term, "at most `m` hosts", its sharpness) **and A18-T1** (the split around
+     the anchor) in `TermOrders.lean`, answers P8-T2 with a lemma
+     (`SB ≤ (1 + ρ)/(1 − ρR²)·R²·t` for a kernel that varies little over the atoms in
+     range) and A17-T1…T3, and **offers a new theorem for review: Theorem 11.58a,
+     `exp(n·h + O(√(n ln n)))` evaluations for adaptive algorithms without a hint**
+     (their workstream Q; refereed by their R12).  **Taken: workstream R17** (below).
+     Not read by us: `TermOrders.lean`, the amended report, `Q_REPORT.md` beyond its
+     first page and §8, their referee's report.  **Their audit at this head: the
+     replication was started at 14:03:44 UTC and was running when this was written**
+     (`<scratchpad>/audit_dd067f1/`, log `<scratchpad>/audit_all_dd067f1.log`; when it
+     ends, copy the log to `experiments/science/audit_replication/audit_all_dd067f1.log`
+     and write `INDEPENDENT_VALIDATION.md` §1.12; if the container was lost, re-run as
+     §1.11 describes).
+     *Before it:* `628d3e2` (their twenty-first checkpoint, commit time
      2026-11-26 10:27 UTC; it fetched ours at `ddd4be3` and read SCI-REV-0016 in full,
      nothing yet of SCI-RES-0017, SCI-REV-0015, SCI-RES-0018, SCI-MSG-0027):
      THY-RES-0014 read in full by the coordinator; **answered: SCI-RES-0019**.  It
@@ -85,13 +105,21 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
      result files, most of ENG-RES-0011 and -0012.  Offered: an independent checker of
      their branch-and-bound trees if they adopt the format of SCI-RES-0012 §3.  Their
      most useful next step for us: the stand-alone checker of the free-energy
-     certificate (specification: SCI-MSG-0025 §8).
+     certificate (specification: SCI-MSG-0025 §8).  **Sent since their checkpoint 5 and
+     unanswered:** SCI-MSG-0027 §7 (P8-E2, P8-E4 — the latter since done by our
+     workstream P9 —, A18-E1, P8-E3, A18-E2), SCI-RES-0019 §6 (A18-E3: serine at thirty
+     residues, about 40 CPU-hours, prediction registered), **SCI-MSG-0028 §7** (A19-E2: a
+     proved evaluation tolerance of `g`, now a visible line of the certificate; A19-E3,
+     A19-E1, P9-E2, P9-E4).
    * **What the theory division has read of ours:** at `edfd54c` SCI-REV-0014 and
      SCI-RES-0015 in full and the others by their heads, nothing applied yet; before
      that up to `4b80f89` (SCI-REV-0013,
      SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0012, SCI-RES-0013 and addenda A17 (14), (15)
-     "in part" — all applied or answered in THY-RES-0012).  **Not yet read by them, in
-     the order they should read it:** SCI-REV-0016 (the review they offered),
+     "in part" — all applied or answered in THY-RES-0012); at `628d3e2` SCI-REV-0016 in
+     full.  **Not yet read by them, in the order they should read it:** **SCI-MSG-0028**
+     (penalties resolved by rotamer state; the slack of the band recovered — charged
+     dodecamers certified within `10⁻⁴`–`10⁻⁵` nats; requests P9-T1, P9-T3, A19-T1 and
+     the question P9-T2), SCI-RES-0019 (answers THY-RES-0014),
      SCI-MSG-0027 (the charged case; their nested sampler on two charged peptides;
      request P8-T1), SCI-RES-0016 (answers THY-RES-0012; says what
      crossed), SCI-RES-0017 (their nested sampler and allocation rule, run),
@@ -118,10 +146,19 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
      their audit at `f7df44f`~~ — **done, passes** (`INDEPENDENT_VALIDATION.md` §1.9);
      (i) ~~a test of the allocation rule of Proposition 11.18f~~ — **done:
      SCI-RES-0017** (finding 9l).  **Accepted in SCI-RES-0018:** (j) ~~the review of
-     THY-RES-0013 §4~~ — **done: SCI-REV-0016** (finding 9o).  Nothing is owed to
-     them at this checkpoint.
+     THY-RES-0013 §4~~ — **done: SCI-REV-0016** (finding 9o).  **Owed since their
+     twenty-second checkpoint (SCI-RES-0020):** (k) the answer to their question whether
+     lysine head-to-head pairs are in the regime `ρR² < 1` of their sign-blind lemma — a
+     computation: for the subset and state of workstream P8's validation case (Lys₅,
+     order 4, largest remainder; `ws_P8/p8_02_signblind.py` has the kernel matrices),
+     the mixed-difference kernel restricted to the atom pairs of two ammonium groups,
+     its mean and spread, and `R = Σ|q|/|Σq|` from our parameter files; (l) the review of
+     Theorem 11.58a — **workstream R17, running**; (m) the replication of their audit at
+     `dd067f1` — running.
    * **Expect from them:** the answer to SCI-RES-0017, SCI-REV-0015, SCI-RES-0018,
      SCI-MSG-0027 and SCI-REV-0016 ("a separate message", THY-RES-0014 §7);
+     P9-T1, P9-T3, A19-T1 and the questions P9-T2, A19-T2 (SCI-MSG-0028: Proposition P
+     and Proposition A17.19 in Lean; when does a floor delocalise);
      R16-THY-1…6 (SCI-REV-0016: which of 1(a), 1(b) they take;
      whether the flat-instance table enters their remark (1b)); P8-T1, P8-T2, A18-T1
      (SCI-MSG-0027: the remainder identity with a term-dependent order in Lean, "at
@@ -134,10 +171,12 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
      them at `f7df44f`: R12-T1…T6 (all adopted), P6-T1…T3, P5-T2, P5-T3, P5-T1 in part.
      **Answered by them at `628d3e2`:** R13-T1…T6 (all applied), P7-T1…T4 (done; P7-T5
      open on both sides), A16-T1, A16-T2 — strike these from the list above.
-2. **Workstreams running when this was written: one, P9** (below).  No run of the
-   coordinator is going.  (Two runs were finished after SCI-MSG-0027 went out and are
-   in addendum A17 (18) but in no message yet — send them with P9's results: Lys₁₂
-   from the order-4 ball, item 62; Ser₂₀ with the sampler, item 62a.)  Each workstream writes notes from its first
+     **Answered by them at `dd067f1`:** R16-THY-1(a), -2, -3, -4, -6 (5 open), R15-T1…T5
+     (T6 not taken up), A17-T1…T3, P8-T1, P8-T2, A18-T1 — strike these too.  What they
+     have not seen: SCI-MSG-0028 and SCI-RES-0020.
+2. **Workstreams running when this was written: one, R17** (below).  One run of the
+   coordinator is going: the replication of the theory division's audit at `dd067f1`
+   (item 1).  Each workstream writes notes from its first
    minute to `experiments/science/ws_<ID>/NOTES.md` and a report to
    `docs/science/workstreams/<ID>_REPORT.md`; **a draft is not a statement of the
    division**.  When one reports: read it in full, re-derive or recompute its key
@@ -161,17 +200,38 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
      end-to-end check of `nested_sampler_ext.py` on Lys₅ reads the anchor from
      `ws_P8/out/m1_K5_H_0.70.npz` (`python3 -B ws_P8/p8_01_measure.py K5 H 0.70`, eight
      minutes); `lys_enum_check.py` needs only the committed JSON files.
-   * **P9** (`P9_brief.md`; **launched 10:25 UTC, running when this was written**) —
-     penalties resolved by rotamer state, the lever workstream P8 named (its request
-     P8-E4): P8's code has every block bound per state of the block's host side chains
-     before it takes the maximum; P9 is to keep the dependence (site, pair and triple
-     tables), prove the tables valid, validate at every state of Lys₄, Lys₅, LKSE:5
-     with a control that must fail, and measure the gain on the certified brackets of
-     Lys₁₂ (orders 4, 5) and (LKSE)₃.  Numbers to beat (triple form, band 7, split
-     around the anchor): 0.0567 nats (Lys₁₂, order 5), 1.4125 (Lys₁₂, order 4), 4.30
-     ((LKSE)₃).  Notes: `experiments/science/ws_P9/NOTES.md`; draft:
-     `workstreams/P9_REPORT.md` — **a draft until the coordinator has read and verified
-     it** (every-state check with own code; re-run).
+   * **P9** (`P9_brief.md`; launched 10:25 UTC, handed back 12:21 UTC) — penalties
+     resolved by rotamer state.  **Read in full, checked and published: SCI-MSG-0028**
+     (finding 9p; `workstreams/P9_REPORT.md` with the coordinator's note at its end,
+     which lives in `experiments/science/ws_P9/report_parts/90_coordinator_note.md` —
+     the report is generated by `ws_P9/mk_report.py`).  The coordinator's checks are in
+     `experiments/science/p9_verification/`; the recovery of the band's slack that
+     followed (finding 9q) is in `experiments/science/pi_inference/slack_recovery.py`
+     and `first_order_recovery.py`.  **What of P9's data is in the repository:** its
+     scripts, notes, 60 logs, JSON records and `not_cited/` (13 logs of failed or
+     superseded runs, kept under that name as its brief prescribed).  **Not in the
+     repository: its tables** — `ws_P9/cache/` (0.52 GB: the raw tables `theta2_*.npz`,
+     Gibbs samples) and `ws_P9/out/*.npz` (0.64 GB: the allocated tables and P9's choice
+     of sub-tuples).  **From a fresh clone,** `p9_verification/*.py` and
+     `first_order_recovery.py` need them: for each case run, in `ws_P9/`,
+     `python3 -B p9_02_gibbs.py <SEQ>` and `python3 -B p9_03_tables.py <SEQ> <m>
+     --keeptabs` (K12 at orders 3, 4, 5: under a minute, 87 s, 378 s; LKSE:12 at order 5
+     in two parts — P9_REPORT §7), which in turn need workstream P8's balls (see P8
+     above); the enumerated tests of the recovery need `python3 -B
+     p9_verification/dump_theta2.py K5 4` (and `K5 5`, `LKSE:5 4`), seconds each.
+   * **R17** (`R17_brief.md`; **launched 14:07 UTC, running when this was written**) —
+     referee of the theory division's Theorem 11.58a (their workstream Q:
+     `exp(n·h + O(√(n ln n)))` for adaptive algorithms without a hint), which they offered
+     for review in THY-RES-0015 §7: the slope step (Proposition Q6, Lemma Q4) against
+     the contract of an inner procedure that workstream R16 wrote down, the invariant
+     on failure probabilities and dimensions, the schedule and its uniformity in the
+     number of levels, the lower bound as stated (`n·h − O(1)` in their message,
+     `n·h − O(ln n)` on page one of their report), the bound's numbers with own code,
+     re-runs.  It reads the export `<scratchpad>/thy_ro_dd067f1/` (lost with the
+     container: `git archive dd067f1 docs experiments/workstreams/Q experiments/reviews/R12
+     experiments/reviews/R8 experiments/coordinator_checks | tar -x -C <dir>`).  Notes:
+     `experiments/science/ws_R17/NOTES.md`; draft: `workstreams/R17_REPORT.md` — **a draft
+     until the coordinator has read and checked it**; then SCI-REV-0017.
    * **R16** (`R16_brief.md`; launched 08:45 UTC, handed back 10:00 UTC) — the review of
      THY-RES-0013 §4 that the theory division offered.  **Done and published:
      SCI-REV-0016** (`R16_REPORT.md` with a coordinator's note; finding 9o).
@@ -195,7 +255,9 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
      and how far it reaches (A17 (15), (16); SCI-MSG-0026), the audit at `63e36f7`,
      the theory division's nested sampler and allocation rule on real instances
      (A17 (17); SCI-RES-0017), R15 (SCI-REV-0015), the audit at `f7df44f`, P8 and the
-     charged case (A17 (18); SCI-MSG-0027), R16 (SCI-REV-0016).
+     charged case (A17 (18); SCI-MSG-0027), R16 (SCI-REV-0016), the answer to the theory
+     division's twenty-first checkpoint (SCI-RES-0019) with their audit at `628d3e2`,
+     P9 and the recovery of the band's slack (A17 (19); SCI-MSG-0028).
    * Read-only exports used by the workstreams are in the session scratchpad and are
      **lost with the container** (re-create with `git archive <commit> | tar -x -C <dir>`):
      the theory tree at `63e36f7` (`thy_ro_63e36f7/`), at `9408e33`, at `24a3c27`.
@@ -232,9 +294,9 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
      passed to the user and the agent's work not be done in its place).**  Nothing
      was reviewed.  The coordinator did not relaunch it with other words and did not
      substitute for it.  Those four addenda, and SCI-MSG-0026 which reports two of
-     them, therefore rest on their author's own checks; so do A17 (17) and A17 (18),
-     written since (one section of (17) was reviewed by workstream R15, and two
-     lemmas are machine-checked).  (vii) Workstream P8 ran four enumeration passes far
+     them, therefore rest on their author's own checks; so do A17 (17), A17 (18) and
+     A17 (19), written since (one section of (17) was reviewed by workstream R15, and
+     two lemmas are machine-checked).  (vii) Workstream P8 ran four enumeration passes far
      above the 3 GB limit (11.7 GB measured when it killed one, 06:46 UTC, after the
      coordinator had seen the process); cause found by P8 — a reference cycle in
      `ws_P5/p5lib.anch_walk` — and worked around in its own wrapper; **the fault is
@@ -249,7 +311,15 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
      container.  (ix) The first replication of the theory division's audit at
      `628d3e2` stopped in the build step with "failed to create thread": a
      virtual-memory cap the coordinator had set, not a fault of their files; re-run
-     without the cap (`INDEPENDENT_VALIDATION.md` §1.11).
+     without the cap (`INDEPENDENT_VALIDATION.md` §1.11).  (x) The recovery of the
+     band's slack went through four versions of its code on 2026-11-26; the six
+     twelve-residue runs were started four times, and the logs of the first three
+     versions (two complete, the rest partial) were moved to the session scratchpad,
+     not committed (`DEAD_ENDS.md` SD64); every number in SCI-MSG-0028 §4–§5 is from
+     the final version except where it says otherwise.  (xi) Workstream P9 was the one
+     subagent of this stretch: by the harness's count 0.29 million tokens and 424 tool
+     calls in 115 minutes; the coordinator's own consumption is not visible from here.
+     Nothing in this stretch used Modal or any paid resource beyond the model itself.
    * **Rules learned the hard way** (`DEAD_ENDS.md` SD39, SD43, SD45, SD48, SD49): a log
      file is committed only from a run that reached its last line, and a script cited
      in a message is re-run from a clean copy first; mathematics derived quickly in a
@@ -263,7 +333,12 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–57.)*
      not quoted next to data it does not hold for; when independent tests pass and
      one fails by a round physical constant, read the failing test first; a
      first-order estimate of a bracket is a lower estimate — break it on purpose
-     before relying on it.
+     before relying on it.  From SD62–SD64: a check is reported with the number of
+     violations of its control, and where the control passes the check is said to
+     have no power; before a cause is written down, the first-order size of every
+     candidate is computed on the same sample (the fourth time this rule was
+     needed); a run is "of record" only after the method has been run once end to end
+     on a full-size case and the residual it leaves has been decomposed.
 3. Then take the top item of §7.
 
 Rules that bind the division (from the research owner's charter; none may be relaxed
@@ -525,6 +600,70 @@ published statements are linked messages, never silent rewrites.
    begins near `5·10¹⁴` trials, not `10¹⁷` (*and lower still — between `2·10¹⁴` and
    `2.5·10¹⁴` by the theory division's second scan; linked correction SCI-RES-0016 §4*),
    and our "corrected" re-run had never exercised its correction; the sizes of our separation statement were first sizes of a grid.
+9q. **The slack of the band taken back out of the bracket; the rounding allowance as
+    the next term [P, elementary, for Proposition A17.19; X on Lys₅ and LKSE:5; M;
+    unrefereed] (addendum A17 (19), items 69–75; SCI-MSG-0028 §4–§6).**  After finding
+    9p a certified bracket was the width of the models without any penalty — what the
+    band gives up.  That slack is a *known table*: for a pair beyond the band the
+    model's part minus the pair's own energy; for an evaluated term that fits no
+    window its maximum over the sites given up minus the term; for a subset charged
+    to a sub-tuple the allocated table minus the subset's own bound.  **Proposition
+    A17.19:** for non-negative `s₊ ≤ m₊ − E`, `s₋ ≤ E − m₋` written as sums over groups,
+    `ln Z(E) ≥ ln Z(m₊) + ln(1 + Σ_g⟨e^{βS⁺_g} − 1⟩)` and
+    `ln Z(E) ≤ ln Z(m₋) − ln(1 + C′e^{ln Z(m₊) − v})`, `C′ = Σ_g⟨(e^{βS⁻_g} − 1)e^{βS⁺_g}⟩`,
+    all means under the ceiling model — Gibbs–Bogoliubov in both directions, with the
+    mean under the true ensemble traded for one under the ceiling.  The means are
+    exact: the transfer matrix is run with one site *held* at each of its states and
+    the joint law of the last window read off (the mirrored chain serves the other
+    end); items that share the held site form a group and are treated exactly
+    together — which is why each item is held at the site its reduction *keeps*.
+    **Results (band 7):** Lys₁₂ from the order-4 ball (96 366 evaluations) 0.0073 →
+    **`8.3·10⁻⁵` nats** `[517.1285101, 517.1285931]`; from the order-5 ball **`2.2·10⁻⁵`**;
+    (LKSE)₃ 0.0168 → **`1.43·10⁻⁴`** `[655.6126377, 655.6127810]`; (LKSE)₃ order 4 0.0191 →
+    0.0015; Ser₁₂ 0.0111 → 0.0018; Lys₁₂ order 3 0.077 → 0.061 (the envelope).  The
+    sampled intervals lie inside, or — Lys₁₂ at order 5 — are now the wider of the two.
+    **A band of 4 with the recovery (`6.9·10⁻⁴`) beats a band of 7 without (0.0073).**
+    Every state of Lys₅ (three order/band pairs) and LKSE:5: the hypotheses with margin
+    exactly the constant allowance, group means against enumeration to `10⁻¹²`, the
+    exact `ln Z` inside (Lys₅, order 5, band 3: 0.0187 → `7.1·10⁻⁶`).  **The next term
+    was a bookkeeping choice:** workstream P6 allocates the floating-point allowance of
+    the evaluated terms (`ε_g = 10⁻⁷` kcal/mol per value of `g` — P3's allowance,
+    unproved for the evaluator's summation order) to sites and pairs, which costs
+    `10⁻⁴`–`10⁻³` nats at order 5; attached to each term's own table it is charged only
+    when the term is.  *What is left:* the envelope — the resolved bound itself; the
+    losses between groups (of the order of `D²/4`); items without a route (chains
+    longer than twice the band need a backward message: not built); `ε_g`.  *Prior
+    art:* not found in our reports and three web queries; nothing more is claimed.
+    Four versions of the code in three hours; only the last has logs in the tree.
+
+9p. **Penalties resolved by rotamer state [P for workstream P9's statements,
+    re-derived by the coordinator; X; M; unrefereed; one implementation] (workstream
+    P9; addendum A17 (19), items 65–68; SCI-MSG-0028 §1–§3).**  Workstream P8's
+    constants are maxima over the rotamers of a term's hosts *and* of the non-host
+    sites of a subset; workstream P3's theorem is stated with the increments that
+    occur.  **Theorem R:** `|g − I_{m−1}g|(x) ≤ Σ_{T⊆S(x)} Θ_T(x_T)` with all sites of `T` at
+    their actual states (P8's Theorem AH before its maximum).  **Proposition P:** any
+    allocation of `Θ_T` to tables on sub-tuples by maxima over the *other* sites is a
+    valid penalty.  The host's rotamer alone is a weak dependence; the non-host sites
+    are the lever (typical subset bound 42–590 times below P8's constant; even the
+    state-independent maxima are 41–61 % of it).  With every subset charged to one
+    sub-tuple that fits a window (band 7): **Lys₁₂ 0.0073 nats from the order-4 ball,
+    0.077 from the order-3 ball (3 841 evaluations); (LKSE)₃ 0.017 and, from its
+    order-4 ball, 0.019; Ser₁₂ 0.0117** — the models without any penalty plus a few per
+    cent.  (LKSE)₃ at order 3 has no certificate: its floor delocalises, and **when a
+    floor delocalises is not predicted by anything we have** (P9 was wrong five times
+    of nine; the same window form with P8's constants gives 0.72 nats where the
+    first-order number is 0.012).  The theory division's nested sampler with the
+    resolved envelope: (LKSE)₃ `[655.612610, 655.612778]` from 90 evaluations; Lys₁₂
+    from the order-3 ball and 12 000 evaluations `[517.128107, 517.128879]` (run by the
+    coordinator; there the envelope no longer helps).  *Checked by the coordinator:*
+    the statements; the raw tables against exact anchored terms at every state with
+    `m` side chains off the anchor (5 million states, orders 3 and 4; two controls
+    fail); every bracket digit for digit with another driver from tables re-built out
+    of the raw ones; one sampler run with another seed.  *Not checked:* stage 1; forms
+    S, B; at order 5 no per-entry check exists at twelve residues.  The sandwich check
+    at sampled states has no power at order 5 (`DEAD_ENDS.md` SD62).
+
 9o. **The review the theory division offered at its twentieth checkpoint [P, X;
    workstream R16]** (SCI-REV-0016).  Their certified third level — serve every rung by
    the candidate of smallest certified cost — is right: a two-level run of Theorem
@@ -652,7 +791,11 @@ independent code; every workstream's Lean file re-compiled by the coordinator; o
 scripts of every workstream re-run.  **Not checked by anyone outside the theory division:
 the cost of the nested adaptive algorithm (Theorems 11.52, 11.56) — workstream R6 is on
 it.**  Not replicated: most of workstream P's measurements (two numbers re-run).  Nothing
-in any branch has been compared with a measurement.
+in any branch has been compared with a measurement.  **The certificate line of
+2026-11-26 (addenda A17 (13)–(19)) has had no referee**: its checks are the author's and
+the workstreams' — exhaustive on the enumerated instances, per-entry at twelve residues
+where a ball exists, and re-runs with second drivers; the stage-2 tables of workstream
+P9 exist in one implementation.
 
 ## 4. Our own errors (all corrected with linked messages; `DEAD_ENDS.md` has the list)
 
@@ -714,9 +857,13 @@ certificate and a compiled evaluator with a proved rounding bound (P3-E1, P3-E2)
 buried environment (P2-E1), exact arithmetic for the off-lattice chain at 13 torsions
 (R7-ENG-3), native certificates against pseudo-Boolean proofs (E-1), bridge tables
 (R3-E1, R9-E1), the vertex enumeration that decides the crossover of workstream Y
-(R10-E1).
+(R10-E1).  **Added on 2026-11-26** (all unanswered): to theory — P8-T1, P9-T1, P9-T3,
+A19-T1 (four short statements for Lean) and the questions P8-T2, P9-T2, A19-T2; to
+engineering — A19-E2 (a proved evaluation tolerance of `g`: first), A19-E3, A19-E1,
+P9-E2, P9-E4, A18-E1, P8-E2, and A18-E3 (serine at thirty residues, about 40
+CPU-hours).
 
-## 7. What to do next, ranked (revised 2026-11-26 after the fifth wave and after addenda A17 (16), (17), (18); items 2 and 3 rewritten)
+## 7. What to do next, ranked (revised 2026-11-26 after the fifth wave and after addenda A17 (16)–(19); items 2 and 3 rewritten; item 2(a) rewritten after (19))
 
 1. **Done at checkpoint 43: R10** (the theory division's workstream Y; SCI-REV-0010;
    finding 9d).  Done by the coordinator right after it: the law at *fixed length* for the
@@ -743,23 +890,30 @@ buried environment (P2-E1), exact arithmetic for the off-lattice chain at 13 tor
    (finding 9l) the theory division's nested sampler on our sandwiches (the serine
    helix within `5·10⁻⁴` nats at probability 0.95 from the order-5 ball) and optimal
    site shares (the core of a convex game; Frank–Wolfe).  Left:
-   (a) **the charged case** (findings 9j, 9n): **done for the homopolymer** — Lys₁₂ is
-   certified within 0.057 nats at order 5 and sampled within `3·10⁻⁵` (workstream P8's
-   constants, the split around the anchor, the nested sampler).  Left, in order of
-   value: (i) **penalties resolved by rotamer state** (P8's request P8-E4: in the proof
-   of Theorem AH the host states are those of the state itself before the maximum is
-   taken; a site or pair penalty table that keeps the dependence fits the band models
-   as they are; the room is four to five orders of magnitude in Boltzmann mean) — the
-   natural next workstream; (ii) **the state-wise constants beyond twelve residues**
-   (no closed form over the subsets; P8's hybrid — closed form with anchored hosts
-   minus an enumerated correction inside a window — is proposed, not run), then a
-   charged sequence at twenty residues; (iii) **the mixed-charge sequence
-   deterministically** (`βΓ₅ = 43` for (LKSE)₃; its remaining constants sit on neutral
-   pairs, where a sign-blind bound cannot be sharp — the open problem of finding 9j);
-   (iv) the first-order-optimal split of a far pair (a Kantorovich dual; the split
-   around the anchor is one feasible point); (v) optimal site shares (finding 9l) on
-   the models with the new split;
-   (a′) **the referee of our own certificate work** (addenda A17 (13)–(18)): not
+   (a) **the charged case** (findings 9j, 9n, 9p, 9q): **done at twelve residues, for
+   the homopolymer and for the mixed sequence** — Lys₁₂ certified within `8.3·10⁻⁵`
+   nats from the order-4 ball, (LKSE)₃ within `1.4·10⁻⁴` (workstream P9's resolved
+   tables in the window form; the band's slack recovered; the allowance attached
+   term by term).  Left, in order of value: (i) **a referee** for addenda A17 (13)–(19)
+   (the research owner's decision, §0) and **an independent implementation of the
+   stage-2 tables** (request P9-E2); (ii) **beyond twelve residues**: held-site passes
+   with a backward message (the recovery covers chains up to twice the band as it
+   stands), the recovery on the certificates we already have (serine at twenty,
+   leucine at thirty residues: reductions are 17 % and more of those brackets — one
+   afternoon), then resolved tables for a charged sequence at twenty residues (no
+   closed form over the subsets: P9's hybrid, request P9-E4); (iii) **the envelope** —
+   what is left once the slack is out (0.06 nats for Lys₁₂ at order 3, `10⁻³` for
+   serine at order 5): P9's candidate is the hull of the Born integral given the
+   states of the subset's sites; (iv) **when does a floor delocalise** (request P9-T2;
+   (LKSE)₃ at order 3) — nothing we have predicts it; (v) **the band as a design
+   variable**: band 4 with the recovery beats band 7 without, with arrays hundreds of
+   times smaller — what band minimises cost at a prescribed bracket, and does it
+   open larger rotamer libraries; (vi) the evaluation tolerance `ε_g` (request A19-E2);
+   (vii) the first-order-optimal split of a far pair (a Kantorovich dual; the split
+   around the anchor is one feasible point; with the recovery it matters only through
+   the second-order losses); (viii) optimal site shares (finding 9l) on the models
+   with the new split;
+   (a′) **the referee of our own certificate work** (addenda A17 (13)–(19)): not
    done — workstream R14 was stopped at launch by a platform safeguard (§0); needs
    the research owner's decision; if a review is made, its findings go out as a
    linked message, as SCI-MSG-0026 says;

@@ -9,3 +9,4 @@ ws_*/scratch/*.bak
 # the coordinator's regenerable caches
 pi_inference/helix_pair_form_cache/
 pi_inference/serine_helix_reach_cache/
+p9_verification/cache/

@@ -354,6 +354,28 @@ our review R12 found two sentences to replace and no theorem false (SCI-REV-0013
 The charter's rule stands: no manuscript or external representation without the
 owner's authorisation.
 
+*Note after addendum A17 (19) (2026-11-26; SCI-MSG-0028).*  **The arc gained its
+cleanest single statement and its referee's list grew by one line.**  (1) *What was
+gained.*  For the charged dodecapeptide: a deterministic bracket of `8.3·10⁻⁵` nats
+from 96 366 evaluations of the energy (it was 0.057 from 1.6 million three hours
+earlier), `2.2·10⁻⁵` from the larger ball; the mixed-charge sequence within
+`1.4·10⁻⁴`.  Two ideas carry it and both are short: keep the remainder bound as a
+function of the rotamers instead of its maximum (workstream P9), and treat what the
+band gives up as what it is — a known table whose mean under the ceiling model is
+computable exactly (Proposition A17.19).  The second is the publishable kernel if
+anything here is: a certified, sampling-free first-order correction to a relaxed
+(mini-bucket-like) bound on a partition function, with a proof of four lines and an
+exhaustive test.  (2) *What a referee would ask, added to the list below.*  Is the
+correction known?  We found the two-sided Gibbs–Bogoliubov inequality with a mean
+under each ensemble and the weighted-mini-bucket line (Hölder weights, cost
+shifting), not this use — from our own prior-art reports and three web queries,
+i.e. a statement about a few searches.  A proper search of the graphical-models
+literature on corrections to mini-bucket bounds is the first thing to do before
+any claim.  And: the evaluation tolerance of the energy (`10⁻⁷` kcal/mol, unproved)
+is now of the size of the result.  (3) Unchanged: one implementation, paper proofs,
+no referee (A17 (13)–(19)), a test-bed energy model; no manuscript or external
+representation without the owner's authorisation.
+
 *Note after addendum A17 (18) and workstream P8 (2026-11-26; SCI-MSG-0027).*  **The
 arc now has its hardest instance class — charged side chains — and a result that a
 reader outside the programme would notice; it is further than ever from being

@@ -1,0 +1,17 @@
+=== p9_03_tables K12 on H, tau 0.7, order 5, window 7; started 2026-11-26 10:58:40 UTC
+    276 atoms, 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; 792 subsets of order 5, 792 in this run; sum over them of the number of states of T: 1.769e+07
+    subset 203/792 done, 120 s (0.59 s per subset), RSS now 519 MB
+    subset 467/792 done, 241 s (0.52 s per subset), RSS now 597 MB
+    subset 776/792 done, 361 s (0.47 s per subset), RSS now 665 MB
+    subset 792/792 done, 366 s (0.46 s per subset), RSS now 671 MB
+    stage 2 > stage 1 at 0 table entries (must be 0)
+--- 792 subsets of order 5.  Gamma_5 in kT:  P8's Sb 2.54032, P8's SAb 2.40483 | stage 1: joint maximum 2.33671, median over the states 0.882231, minimum 0.598893 | stage 2: joint maximum 0.98685, median 0.0040736, minimum 6.05386e-06
+    stage 1: joint maximum / SAb per subset: min 0.901, median 0.993, max 1.0000; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 3.302e-06 kT; window form: 461 tables, sub-tuples kept by size: 2: 7, 3: 150, 4: 439, 5: 196
+    stage 2: joint maximum / SAb per subset: min 0.226, median 0.434, max 0.7636; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 4.679e-08 kT; window form: 446 tables, sub-tuples kept by size: 2: 12, 3: 185, 4: 399, 5: 196
+    my recorded constants against P8's stored per-subset values (ws_P8/out/g12b_K12_H_0.70_m5.npz): largest relative deviation 'Sb' 0.0e+00, 'SAb' 0.0e+00
+    Gibbs sample 777 (960 states): mean of beta x envelope: stage 1 0, stage 2 0; largest: 0, 0; states with a non-zero envelope: 0
+    Gibbs sample 4242 (960 states): mean of beta x envelope: stage 1 2.836e-06, stage 2 1.006e-09; largest: 0.001735, 7.679e-07; states with a non-zero envelope: 3
+    stage-2 tables Theta_T of 792 subsets stored in cache/theta2_K12_H_0.70_m5.npz
+foreign writes attempted during import (refused): 0
+ALL DONE 378 s; peak RSS 640 MB
+exit 0

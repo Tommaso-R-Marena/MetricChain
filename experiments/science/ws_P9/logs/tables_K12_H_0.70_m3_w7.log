@@ -1,0 +1,12 @@
+=== p9_03_tables K12 on H, tau 0.7, order 3, window 7; started 2026-11-26 11:17:35 UTC
+    276 atoms, 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; 220 subsets of order 3, 220 in this run; sum over them of the number of states of T: 9.252e+04
+    subset 220/220 done, 17 s (0.08 s per subset), RSS now 290 MB
+    stage 2 > stage 1 at 0 table entries (must be 0)
+--- 220 subsets of order 3.  Gamma_3 in kT:  P8's Sb 408.105, P8's SAb 375.105 | stage 1: joint maximum 372.743, median over the states 138.286, minimum 97.1993 | stage 2: joint maximum 272.109, median 9.75835, minimum 0.352865
+    stage 1: joint maximum / SAb per subset: min 0.938, median 0.999, max 1.0000; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 0.183 kT; window form: 180 tables, sub-tuples kept by size: 1: 4, 2: 76, 3: 140
+    stage 2: joint maximum / SAb per subset: min 0.391, median 0.673, max 0.9403; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 0.03478 kT; window form: 175 tables, sub-tuples kept by size: 1: 7, 2: 73, 3: 140
+    Gibbs sample 777 (960 states): mean of beta x envelope: stage 1 0.1418, stage 2 0.02633; largest: 5.423, 1.352; states with a non-zero envelope: 83
+    Gibbs sample 4242 (960 states): mean of beta x envelope: stage 1 0.1669, stage 2 0.03174; largest: 10.89, 3.161; states with a non-zero envelope: 91
+    stage-2 tables Theta_T of 220 subsets stored in cache/theta2_K12_H_0.70_m3.npz
+foreign writes attempted during import (refused): 0
+ALL DONE 29 s; peak RSS 277 MB

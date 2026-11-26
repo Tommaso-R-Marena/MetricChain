@@ -126,6 +126,29 @@ barrier), not totals.
 
 ## Change note
 
+*Note after addendum A17 (19), workstream P9 and the recovery of the band's slack
+(2026-11-26, three hours after the note below; no new version of the table; two of the
+three frontiers named below have moved).*  **(i) The mixed-charge sequence is certified
+deterministically** — (LKSE)₃ within 0.017 nats with workstream P9's state-resolved
+penalties, within `1.4·10⁻⁴` after the slack of the band is taken back out
+(Proposition A17.19: Gibbs–Bogoliubov in both directions with exact means under the
+ceiling model); Lys₁₂ within `8.3·10⁻⁵` nats from 96 366 evaluations, and within
+`2.2·10⁻⁵` from its order-5 ball — narrower than the interval the nested sampler gave
+in the note below.  (ii) Charged chains beyond twelve residues: unchanged, and now
+with two concrete obstacles — the resolved tables have no closed form over the
+subsets, and the recovery as built serves chains of at most twice the band.
+**The frontier is now, in this order:** the *envelope* (the resolved bound itself —
+what is left when everything known has been taken out: 0.06 nats for Lys₁₂ from an
+order-3 ball, `10⁻³` for serine at order 5; only sampling or a tighter remainder
+theorem removes it); *when a floor delocalises*, which nothing we have predicts
+((LKSE)₃ at order 3 has no certificate); the *evaluation tolerance* of the energy
+itself (`10⁻⁷` kcal/mol per value, unproved for the evaluator — at `10⁻⁴` nats it is
+a line of the certificate); and (iii) of the note below, unchanged and more pressing
+again: no independent implementation, paper proofs, **A17 (13)–(19) unrefereed**.  A
+design consequence worth a row when the table is next revised: with the recovery a
+band of 4 does better than a band of 7 without it, so the transfer matrix need not
+be as wide as memory allows.
+
 *Note after addendum A17 (18) and workstream P8 (2026-11-26; no new version of the table;
 the frontier named in version 5.4 has moved).*  Version 5.4 named the constants of
 charged side chains as the frontier of the certificate line.  **For the charged

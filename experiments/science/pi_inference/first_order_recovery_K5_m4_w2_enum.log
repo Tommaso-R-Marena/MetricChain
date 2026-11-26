@@ -1,0 +1,20 @@
+=== K5 on H, tau 0.7: 5 sites, states per site [14, 14, 12, 7, 7], 115248 states, anchor [10, 10, 8, 3, 3]; order m = 4, band 2; 5 raw stage-2 tables of workstream P9 from p9_verification/cache (sum of their maxima 1.0472 kT)
+(0) ball of radius 3: 9636 values (ws_P8/cache/ball_K5_H_0.70_M3_8b9e31c706.npz); guiding Gibbs sample (seed 4242, uncertified): 0.94 sites off the anchor on average [17s]
+(1) sandwich (window form of P9's stage 2; K(T): workstream P9's stored choice); 3 evaluated terms exact in a window, 7 reduced, 3 pairs beyond the band.  With workstream P6's allocation of the floating-point allowance (as P9 built it): [251.332486, 251.380139], width 0.0476533; with the allowance attached to each evaluated term: certified bracket [251.332487, 251.380138], width D = 0.0476513 nats [0s, peak RSS 264 MB]
+(2) exact means under the CEILING model, by the transfer matrix with one site held at each of its states in turn: 25 items, 4 by the forward route, 10 on the mirrored chain, 11 without a route; groups (held sites): fwd0, fwd1, rev3, rev4; largest deviation of a clamped total mass from one: 7.3e-14 [0s, peak RSS 264 MB]
+| class | side | items | with a route | beta x mean on the Gibbs sample of the true ensemble (nats): items with a route; without |
+|---|---|---|---|---|
+| far | ceiling | 3 | 3 | 0.0717431; 0 |
+| far | floor | 3 | 3 | 0.0285289; 0 |
+| term | ceiling | 7 | 4 | 0.000172384; 6.43618e-05 |
+| term | floor | 7 | 4 | 0.000786883; 3.05102e-05 |
+| alloc | both | 5 | 0 | 0; 0.00097802 |
+| recovered | lower end by (LJ) | by (LP) | upper end by (UE) | by (UP) | corrected bracket: best lower, best upper | width (nats) | D / width |
+|---|---|---|---|---|---|---|---|
+| nothing (the sandwich) | — | — | — | — | [251.3324869, 251.3801382] | **0.04765** | 1.0 |
+| far pairs | 251.3420447 | 251.3473010 | 251.3555900 | 251.3512904 | [251.3473010, 251.3512904] | **0.003989** | 11.9 |
+| far pairs and out-of-window terms | 251.3422943 | 251.3475751 | 251.3547949 | 251.3504878 | [251.3475751, 251.3504878] | **0.002913** | 16.4 |
+| far pairs, terms and the allocation of the penalty | 251.3422943 | 251.3475751 | 251.3547949 | 251.3504878 | [251.3475751, 251.3504878] | **0.002913** | 16.4 |
+(3) EVERY state (115248): hypotheses m_+ - E >= s_+ and E - m_- >= s_- violated at 0 states (smallest margin 1.00e-07 kcal/mol); controls that must fail: every item doubled: 229329 violations; far items of floor and ceiling exchanged: 112163 violations; the group means (a, e, b, c, cp) by enumeration against the transfer matrix: largest relative deviation 9.2e-13
+    exact ln Z = 251.3484449: inside every corrected bracket: True; distances to the ends of the last one: 8.698e-04, 2.043e-03; for comparison, ln Z of the models with the routed items put back exactly (by enumeration; no band model can hold them): [251.3476279, 251.3492972], width 0.001669 [19s]
+ALL DONE 36 s; peak RSS 264 MB

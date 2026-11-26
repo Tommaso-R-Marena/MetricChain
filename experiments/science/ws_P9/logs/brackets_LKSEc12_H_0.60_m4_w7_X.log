@@ -1,0 +1,13 @@
+=== p9_05_brackets LKSE:12 on H, tau 0.6: order m = 4, band 7; sources ['ref', 's1', 's2'], forms ['S', 'B', 'T', 'W']; started 2026-11-26 11:41:30 UTC
+    12 sites, states per site [2, 29, 9, 12, 2, 14, 9, 12, 2, 16, 9, 13], 7.09201e+10 assignments, anchor [1, 14, 1, 6, 1, 6, 2, 6, 1, 7, 2, 7]; P8's 'SAb' constants from ws_P8/out/g12b_LKSEc12_H_0.60_m4.npz: Gamma_4 = 295.8 kT; my recorded ones differ by at most 0.0e+00 (relative)
+    ball of radius 3: 181268 values, ws_P8/cache/ball_LKSEc12_H_0.60_M4_32ecb5f469.npz (states equal pwmodel.ball_states row by row; 1000 random values re-evaluated here: largest deviation 0.0e+00 kcal/mol) [5s]
+    Gibbs samples of ws_P9/cache (coordinator's sampler): seed 4242 guides the reductions, seed 777 is the check sample (960 states, 2.82 sites off the anchor on average)
+(0) the models with ALL penalties zero (not a sandwich: what the reductions of the evaluated terms cost): width 0.0166949 nats; 140 evaluated terms exact in the window, 80 reduced, 10 pairs beyond the band (1 anchored, kept site i, 9 anchored, kept site j, 0 P3) [18s, peak RSS 853 MB]
+| source | form | certified bracket of ln Z | width (nats) | beta x mean of m_+ - m_- on the check sample | sandwich violated at Gibbs states | exact samples of the floor: sites off the anchor (mean); violations | seconds |
+|---|---|---|---|---|---|---|---|
+| s2 | W | [655.603013, 655.622116] | **0.0191** | 0.01976 | 0 | 2000 samples: 2.82; 0 | 57 (peak RSS 1043 MB) |
+| s2 | T | [655.203848, 656.350724] | **1.147** | 1.054 | 0 | 2000 samples: 3.45; 0 | 29 (peak RSS 1043 MB) |
+| s1 | W | [655.452259, 821.956407] | **166.5** | 0.7382 | 0 | — | 36 (peak RSS 1043 MB) |
+| cJ2 | W | [655.449624, 812.459249] | **157** | 0.7997 | 0 | — | 38 (peak RSS 1043 MB) |
+foreign writes attempted during import (refused): 0
+ALL DONE 184 s; peak RSS 1043 MB

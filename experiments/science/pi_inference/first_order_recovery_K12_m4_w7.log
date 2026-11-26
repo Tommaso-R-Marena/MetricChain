@@ -1,0 +1,21 @@
+=== K12 on H, tau 0.7: 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], 9.49117e+10 states, anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; order m = 4, band 7; 495 raw stage-2 tables of workstream P9 from ws_P9/cache (sum of their maxima 18.17 kT)
+(0) ball of radius 3: 96366 values (ws_P8/cache/ball_K12_H_0.70_M3_ebe4086eaa.npz); guiding Gibbs sample (seed 4242, uncertified): 1.23 sites off the anchor on average [130s]
+(1) sandwich (window form of P9's stage 2; K(T): workstream P9's stored choice); 140 evaluated terms exact in a window, 80 reduced, 10 pairs beyond the band.  With workstream P6's allocation of the floating-point allowance (as P9 built it): [517.125649, 517.132996], width 0.00734678; with the allowance attached to each evaluated term: certified bracket [517.125658, 517.132987], width D = 0.00732946 nats [87s, peak RSS 1974 MB]
+(2) exact means under the CEILING model, by the transfer matrix with one site held at each of its states in turn: 465 items, 161 by the forward route, 219 on the mirrored chain, 85 without a route; groups (held sites): fwd0, fwd1, fwd2, fwd3, rev8, rev9, rev10, rev11; largest deviation of a clamped total mass from one: 1.1e-12 [182s, peak RSS 2732 MB]
+| class | side | items | with a route | beta x mean on the Gibbs sample of the true ensemble (nats): items with a route; without |
+|---|---|---|---|---|
+| far | ceiling | 10 | 10 | 0.00293584; 0 |
+| far | floor | 10 | 10 | 0.00450277; 0 |
+| term | ceiling | 80 | 80 | 1.87679e-05; 0 |
+| term | floor | 80 | 80 | 1.06521e-05; 0 |
+| alloc | both | 285 | 200 | 8.52218e-05; 3.37868e-06 |
+| recovered | lower end by (LJ) | by (LP) | upper end by (UE) | by (UP) | corrected bracket: best lower, best upper | width (nats) | D / width |
+|---|---|---|---|---|---|---|---|
+| nothing (the sandwich) | — | — | — | — | [517.1256580, 517.1329875] | **0.007329** | 1.0 |
+| far pairs | 517.1284056 | 517.1284262 | 517.1287091 | 517.1286723 | [517.1284262, 517.1286723] | **0.0002461** | 29.8 |
+| far pairs and out-of-window terms | 517.1284230 | 517.1284438 | 517.1286976 | 517.1286607 | [517.1284438, 517.1286607] | **0.0002169** | 33.8 |
+| far pairs, terms and the allocation of the penalty | 517.1284891 | 517.1285101 | 517.1286303 | 517.1285931 | [517.1285101, 517.1285931] | **8.297e-05** | 88.3 |
+(3) hypotheses m_+ - E >= s_+ and E - m_- >= s_- with new evaluations of the energy — states, violations (smallest margin, kcal/mol): Gibbs (seed 20261126): 480, 0 (1.0e-07); exact samples of the floor: 1000, 0 (1.0e-07); exact samples of the ceiling: 1000, 0 (1.0e-07); uniformly random: 300, 0 (3.4e-03); exactly 4 sites off: 1000, 0 (6.8e-06); exactly 5 sites off: 1000, 0 (1.5e-05); one or two sites off (inside the ball): 600, 0 (3.0e-07) — total 5380 states, 0 violations; controls that must fail on the same states: every item doubled: 6123 violations; far items of floor and ceiling exchanged: 2554 violations [94s]
+    sum <S+> against 20000 exact samples of the ceiling: exact 0.00283107, sampled 0.00279069 ± 4.8e-05 nats (-0.8 standard errors) [23s]
+    sum <S-> against 20000 exact samples of the ceiling: exact 0.00432083, sampled 0.00422668 ± 6.5e-05 nats (-1.4 standard errors) [23s]
+ALL DONE 515 s; peak RSS 2732 MB

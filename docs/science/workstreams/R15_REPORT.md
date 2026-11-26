@@ -437,13 +437,20 @@ of equal shares (a hypothesis that held in 326 of the 595).
 |---|---|---|---|---|---|---|---|
 | 4 frozen (0.01) + 4 mobile (0.3) | 0.03 | 0.280 | 0.057 | 0.055 | 0.242 | 0.048 | −0.76 |
 | | 0.1 | 1.102 | 0.260 | 0.230 | 0.675 | 0.137 | −0.55 |
-| | 0.3 | 4.866 | 3.185 | 1.978 | 1.257 | 0.315 | +1.71 |
+| | 0.3 | 4.866 | 3.185 | 1.978 | 1.257 | 0.315 | +1.70 † |
 | | 1.0 | 33.12 | 36.12 | 32.87 | 1.465 | 0.586 | +16.4 |
 | graded 0.01 … 0.4 | 0.1 | 1.196 | 0.344 | 0.344 | 0.739 | 0.151 | −0.41 |
-| | 0.3 | 5.370 | 4.073 | 3.457 | 1.389 | 0.298 | +1.71 |
+| | 0.3 | 5.370 | 4.073 | 3.457 | 1.389 | 0.298 | +1.70 † |
 | nearly homogeneous, `p ≈ 0.05` | 0.03 | 0.096 | 0.106 | 0.096 | 0.079 | 0.070 | −2.31 |
 | | 0.1 | 0.409 | 0.617 | 0.409 | 0.211 | 0.160 | −0.84 |
 | | 0.3 | 2.523 | 6.045 | 2.523 | 0.372 | 0.241 | +3.36 |
+
+† *Corrected by the coordinator on 2026-11-26 (linked correction: SCI-RES-0020 §2).*  These two entries were
+printed as `+1.71`.  The value is `21·0.3 − ln 99 = 1.7049` (the most frozen site carries the 21 triples through
+it and costs `ln(0.99/0.01)`); the script prints it as `1.705` (`logs/item2_allocation.log`, line 50) and the report
+rounded that a second time.  Found by the theory division when it reproduced this table with independent code
+(THY-RES-0015 §2: "every digit but one").  No other entry of the table is affected and nothing was derived from
+the digit.
 
 and, in closed form, nearly homogeneous ensembles of `n` sites with `c` chosen so that `U(equal)` is `0.2`,
 resp. `1.0`: `U(vertex) = 0.28, 0.23, 0.21`, resp. `2.49, 1.78, 1.27`, for `n = 6, 12, 30`.

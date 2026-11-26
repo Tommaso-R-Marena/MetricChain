@@ -1951,3 +1951,251 @@ states at 3.3 ms each on a loaded core (19 CPU-hours), the table 142 506 constan
 0.46 s each (18 CPU-hours); and the library as written cannot hold the ball (its states
 as 64-bit integers are 4.6 GB — my first probe died on that allocation).  Sent to the
 engineering division as request A18-E3 in SCI-RES-0019 §6, prediction included.
+
+### Cycle 59 — workstream P9 read while it finishes; its brackets re-derived with a driver of mine before they are published
+
+**Written before my re-run (clock: 12:14 UTC).**  P9's draft (read in full except its
+verdict and its sampler section, which its generator has not produced yet) claims that
+with penalty tables resolved by the rotamers of *all* sites of a subset, and each subset
+charged in full to one sub-tuple that fits a window, Lys₁₂ is certified within
+0.007347 nats from the order-4 ball (`[517.125649, 517.132996]`) and (LKSE)₃ within
+0.01699 from the order-5 ball — the width of the penalty-free models plus one to three
+per cent.  Its raw tables passed my checks (every state with four side chains off the
+anchor: no entry below the exact anchored term, smallest ratio 8.25).  What I have not
+checked is everything between the raw tables and the bracket: the allocation, the way the
+tables enter the models, the sandwich at states that are not P9's.
+`p9_verification/resolved_brackets.py` re-builds the window-form and triple-form tables
+from the raw ones with my code, compares them with what P9 stored, builds the models with
+my driver, and checks the sandwich at my own states (Gibbs with my seed, exact samples of
+floor **and ceiling**, uniformly random, exactly `m` and `m + 1` sites off) with controls
+that must fail.  *Cost, written before the run:* about 45 s per pair of models at band 7
+(five pairs), two Gibbs samples (five minutes together), 7 000 new energies at 3.3 ms:
+ten to twelve minutes per instance and order, 2–2.5 GB.  *Compared with:* P9's two
+brackets of Lys₁₂ at order 4, form W `[517.125649, 517.132996]` and form T
+`[517.075039, 517.186576]`, and its penalty-free width 0.007132.  *Expectation:* the same
+digits — its driver calls my model builder, so a difference would be in the tables or in
+how they are added, and that is what the run is for.  The controls: without the tables
+the sandwich must fail at many states; I do not know whether tables a hundred times
+smaller fail at any of my states — the raw bound is at least eight times the exact term
+at its tightest, and the Gibbs states sit near the anchor where little is charged.
+
+**My re-run of P9's brackets (clock: 12:40 UTC; five of six cases finished).**  Tables
+re-built from P9's raw tables with my code equal its stored tables exactly (deviation
+0.0) in every case; envelope ≤ tables at 32 000–40 000 random states per case, with
+equality where the envelope is a single entry (window form), both controls fail; and
+the brackets come out digit for digit: Lys₁₂ order 4 `[517.125649, 517.132996]` (W),
+`[517.075039, 517.186576]` (T); order 3 `[517.108870, 517.185731]`, `[516.827371, 517.659419]`;
+(LKSE)₃ order 4 `[655.603013, 655.622116]`, `[655.203848, 656.350724]`; Ser₁₂ order 5
+`[227.363089, 227.374782]`, `[227.357675, 227.380236]`.  The sandwich at 6 980 states of
+mine per case: no violation.  **What the controls say about that last check:** without
+the tables the sandwich fails at 18 (Lys₁₂, order 4), 829–929 (order 3), 92 ((LKSE)₃)
+states and at **none** for Ser₁₂ — for serine the sandwich check at my states has no
+power at all; with tables a hundred times smaller it still fails at 4, 207, 3 states
+(window form) and never with tables ten times smaller.  So the sandwich check cannot
+see a table that is too small by a factor ten; the table-level checks (every state with
+`m` sites off against the exact anchored term; envelope against tables with equality)
+are the ones with teeth, as expected at 12:13.
+
+**An idea while reading P9's last line ("the brackets are now the reductions of the
+band, which I did not touch") — and a prediction before any twelve-residue run
+(clock: 12:40 UTC).**  The slack of a reduction is not unknown: for a pair beyond the band
+the ceiling's part minus the pair's table is a function of two sites that the band
+model cannot hold but anyone can evaluate.  Gibbs–Bogoliubov then gives
+`ln Z(E) ≥ ln Z(m₊) + β⟨s₊⟩_{m₊}` for any known `0 ≤ s₊ ≤ m₊ − E`, and from the other side
+`ln Z(E) ≤ ln Z(m₋) − β⟨s₋⟩_E` with `⟨s₋⟩_E ≥ ⟨s₋⟩_{m₊} Z(m₊)/Z(E)` because `s₋ ≥ 0` and
+`E ≤ m₊` — means under the *ceiling model alone*, which the transfer matrix gives
+exactly when one site is held at each of its states in turn and the joint law of the
+last window is read off (`pi_inference/slack_recovery.py`; searched: no such use in our
+addenda — the two-sided Bogoliubov bracket is there as a datum and the far pairs only
+as a choice of split; literature not searched).  Tested at every state of Lys₅ at band
+2 (`first_order_recovery.py K5 4 2 --enum`): hypotheses hold at all 115 248 states with
+margin exactly the constant allowance `10⁻⁷`, both controls fail, the group means agree
+with enumeration to `3·10⁻¹³`, the exact `ln Z` is inside; bracket 0.0477 → 0.0106 —
+only a factor 4.5 there, because at band 2 the "far" pairs are helix neighbours and
+their slack is of order `kT` (an exact treatment of the same items would give 0.0017).
+*Prediction for band 7, where the far pairs are eight residues apart and their slack
+is small:* Lys₁₂ from the order-4 ball, `D = 0.007347`: after the far pairs
+`3·10⁻⁴` nats (range 2–5·10⁻⁴: what the penalties and the 80 reduced triples leave, plus
+a second-order loss of about `D/2` times the recovered amount); with the triples
+`2.7·10⁻⁴`; with the allocation slack of the penalty, where a route exists, `1·10⁻⁴`
+(range `4·10⁻⁵`–`2.5·10⁻⁴`).  (LKSE)₃ from the order-5 ball, `D = 0.01699`: `8·10⁻⁴`
+after the far pairs, `5·10⁻⁴` with the terms, `3·10⁻⁴` with the allocation — less sure:
+its four-site terms have no route when two sites are at each end.  *Cost:* one pair
+of models (90 s), 47 + 28 clamped runs at half a transfer-matrix pass each (five
+minutes), 6 000 new energies; ten minutes, 3 GB.  *Compared with:* the sampled
+intervals, which must lie inside — `[517.128526, 517.128559]` for Lys₁₂ (mine, 0.95) and
+`[655.612673, 655.612715]` for (LKSE)₃ (P9's run of my sampler, 0.95).
+
+**The first twelve-residue run against the prediction (clock: 13:01 UTC).**  Lys₁₂ from the
+order-4 ball, first version of the code (Jensen below and above; its log is not kept —
+the code changed afterwards): after the far pairs `3.3·10⁻⁴` (predicted `3·10⁻⁴`), with the
+80 triples `3.1·10⁻⁴` (predicted `2.7·10⁻⁴`), with the allocation slack of the 200 of 285
+subsets that have a route **`1.74·10⁻⁴`** (predicted `1·10⁻⁴`, range `4·10⁻⁵`–`2.5·10⁻⁴`):
+`[517.1284920, 517.1286657]`, and my sampled interval `[517.128526, 517.128559]` lies
+inside it.  Hypotheses at 5 380 states of mine: no violation, margin exactly the constant
+allowance `10⁻⁷` at the Gibbs states and at the samples of floor and ceiling; both
+controls fail (5 788 and 2 526 violations).  What I had not foreseen: the run took 18
+minutes, not ten — every elimination with a held site re-added a hundred tables; and the
+upper end keeps a Jensen gap of about `10⁻⁴` because a far pair's slack is rare but not
+small when it occurs (`βs ≈ 0.1`).  Both repaired before the runs of record: the term
+arrays are cached (one addition per elimination), and a second upper end (UP) uses the
+exact exponential within each group, as the lower end (LP) already did.  On Lys₅ the
+bracket of the test moves from 0.0106 to 0.0083 with it (exact value inside, group means
+against enumeration `3·10⁻¹³`).
+*Predictions for the remaining runs, written now:* Lys₁₂ order 5: `7·10⁻⁵`
+(`4·10⁻⁵`–`1.2·10⁻⁴`); Lys₁₂ order 4 with (UP): `1·10⁻⁴` (`6·10⁻⁵`–`1.7·10⁻⁴`);
+Lys₁₂ order 3 (`D = 0.077`, of which 0.070 is penalty): 0.035 (0.015–0.06) — at order 3
+most subsets fit a window and are charged their own table, which is envelope, not
+allocation slack, and no recovery touches that; (LKSE)₃ order 4 (`D = 0.0191`): `1·10⁻³`
+(`5·10⁻⁴`–`2·10⁻³`); (LKSE)₃ order 5 as written at 12:40 (`3·10⁻⁴`); Ser₁₂ order 5
+(`D = 0.0117`): `2.5·10⁻³` (`1.5`–`4·10⁻³`) — a mobile ensemble, the slack is frequent,
+and its four-site terms have no route when two sites sit at each end.
+
+**P9's sampler run from the order-4 ball replicated with my driver and another seed
+(clock: 13:04 UTC; `p9_verification/nested_resolved.py`, seed 2026113740 where P9 had
+2026112740).**  (LKSE)₃: as the theory division states the bound
+`[655.612563, 655.612815]` (P9: `[655.612562, 655.612814]`); two-end form with empirical
+Bernstein `[655.612658, 655.612720]` (P9: `[655.612657, 655.612719]`); 15 392 of 400 000
+proposals accepted (P9: 15 158), 1 200 evaluated, none outside either sandwich.  Two
+independent runs, the same interval to the sixth decimal: the proposals carry the
+estimate, and 400 000 of them pin it.
+*A run P9 could not make (memory), predicted before I start it:* Lys₁₂ from the order-3
+ball — 3 841 evaluations — with the resolved envelope, 12 000 evaluations and 400 000
+proposals.  Outer bracket 0.0769; I expect a mean acceptance `ρ` near one half (the
+envelope is not small at this order), and a width of `5·10⁻⁴` nats in the two-end form
+with empirical Bernstein (range `3·10⁻⁴`–`10⁻³`), about `1.5·10⁻³` as the theory division
+states the bound (P9 wrote `2·10⁻³` at 11:47).  It must contain `[517.128526, 517.128559]`
+or at least overlap it.
+
+**Two more turns of the same screw, and the runs of record restarted (clock: 13:14 UTC).**
+The second version of the code (cached term arrays: 182 s for the held-site passes
+instead of 812; upper end (UP)) gave Lys₁₂ at order 4 `[517.1284920, 517.1286504]`,
+`1.58·10⁻⁴` — (UP) moved the upper end by `1.5·10⁻⁵` only, not by the `10⁻⁴` I had
+expected two entries above: the Jensen gap was not the loss.  The loss is in how the
+items are *grouped*.  Each group — the items that share a held site — is treated exactly;
+across groups only a product inequality holds.  My routing held the *left* site of a
+far pair, but nine of the ten pairs keep the *right* site in their reduction, so the
+slacks of all pairs with the same kept site occur at the same states and sat in
+different groups.  Holding the kept site instead (`slack_recovery.route` with a
+preference; the mirrored chain serves it) puts them into one group.  On Lys₅ at band 2
+the bracket of the test goes from 0.0083 to **0.0029** with it (sandwich 0.0477; an exact
+treatment of the same items would give 0.0017).  The two chains that had started with the
+second version were stopped (one complete log, Lys₁₂ order 4; one partial, (LKSE)₃
+order 5 — `3.8·10⁻⁴` there, predicted `3·10⁻⁴`); their logs are not kept; all six
+twelve-residue cases restarted with the final code at 13:11.
+*The enumerated tests of record, final code* (`first_order_recovery_*_enum.log`; every
+state; exact `ln Z` inside every corrected bracket; hypotheses violated at no state, margin
+exactly `10⁻⁷`; both controls fail; group means against enumeration within `3·10⁻¹²`):
+Lys₅ order 4 band 2: 0.0477 → 0.00292; band 3: 0.0189 → `6.6·10⁻⁵`; order 5 band 3:
+0.0187 → `9.8·10⁻⁶` (an exact treatment of the routed items: `4.2·10⁻⁶`); LKSE:5 order 4
+band 2: 0.205 → 0.0016.
+
+**What is left after the recovery is a rounding allowance — found by asking where
+`2.9·10⁻⁴` nats of (LKSE)₃ come from (clock: 13:23 UTC).**  Third version of the code
+(kept-site grouping), stopped after two cases: Lys₁₂ order 4 `[517.1285006, 517.1286028]`,
+**`1.02·10⁻⁴`** (predicted `1·10⁻⁴`); (LKSE)₃ order 5 `[655.6125161, 655.6129056]`,
+`3.9·10⁻⁴` — no better than with the old grouping (`3.8·10⁻⁴`), and its allocation slack is
+only `10⁻⁵`.  So what is the rest?  Not the envelope (`3·10⁻⁶`, P9).  It is workstream
+P6's allocation of the *floating-point allowance* of the evaluated terms: every `d_U` is
+an alternating sum of `2^{|U|}` values of `g`, each allowed an error `ε_g = 10⁻⁷` kcal/mol
+(P3: an a-priori worst case of `3·10⁻⁸`, not proved for the evaluator's summation order;
+measured errors `2·10⁻¹²`), and P6 allocates the allowance of all terms through a pair
+to that pair: `1.5·10⁻⁵` kcal/mol per in-band pair at order 5, charged whenever the pair
+is off the anchor — although nearly all of those terms are not.  First-order cost on the
+Gibbs samples (`2β⟨allowance⟩`, measured now): Lys₁₂ `3.9·10⁻⁶`, `2.2·10⁻⁵`, `1.06·10⁻⁴`
+at orders 3, 4, 5; (LKSE)₃ `9·10⁻⁶`, `5.8·10⁻⁵`, **`2.7·10⁻⁴`**; Ser₁₂ `3·10⁻⁵`,
+`2.2·10⁻⁴`, **`1.0·10⁻³`**.  It grows sevenfold per order while the truncation error
+falls: once the band's slack is recovered, order 5 is *worse* than order 4 for Lys₁₂.
+The allowance is not slack (the rounding error is unknown), but its allocation is a
+choice: attached to each term's own table — `d_U ∓ 2^{|U|}ε_g` where all sites of `U` are
+off the anchor — it is charged only when the term is.  Built into the driver (fourth
+and final version; the sandwich with P6's allocation is printed beside it); Lys₅ at every
+state: hypotheses hold, exact value inside.  *Prediction for the runs of record:* the
+corrected brackets fall by about the numbers above — Lys₁₂ order 4 `8·10⁻⁵`, (LKSE)₃
+order 5 `1.2·10⁻⁴`, Lys₁₂ order 5 `3·10⁻⁵`–`6·10⁻⁵`, Ser₁₂ `1.5·10⁻³` instead of
+`2.5·10⁻³`.  All six restarted at 13:23.
+
+**Runs of record, final code, first two cases (clock: 13:35 UTC).**  Lys₁₂ order 4:
+sandwich with the allowance attached term by term `[517.125658, 517.132987]` (0.007329;
+with P6's allocation 0.007347, P9's number); corrected **`[517.1285101, 517.1285931]`,
+`8.3·10⁻⁵`** (predicted `8·10⁻⁵`); my sampled interval of part (18) inside.  (LKSE)₃
+order 5: sandwich `[655.604165, 655.620921]` (0.016757; with P6's allocation 0.016987);
+corrected **`[655.6126377, 655.6127810]`, `1.43·10⁻⁴`** (predicted `1.2·10⁻⁴`); P9's and
+my sampled intervals inside.  Hypotheses at 5 380 states each: no violation; the means
+against 20 000 exact samples of the ceiling within 1.4 standard errors.
+*A question the recovery raises, with a prediction before the run:* if the band's slack
+can be taken back, can the band be narrower?  Lys₁₂ order 4 at **band 6** (arrays seven
+times smaller; fifteen far pairs, now including the `i, i+7` pairs two helical turns
+apart): I expect a sandwich of about 0.05 nats (0.02–0.08) and a corrected bracket of
+about `10⁻³` (`3·10⁻⁴`–`3·10⁻³`) — the slack of closer pairs is larger when it occurs,
+and Lys₅ at band 2 shows what that costs.
+
+**Band 6 against the prediction; orders 3 and 4 of record (clock: 13:41 UTC).**  Lys₁₂
+order 4 at band 6: sandwich `[517.117635, 517.139075]`, 0.0214 (predicted 0.05, range
+0.02–0.08: at the lower edge); corrected **`[517.1284536, 517.1287322]`, `2.8·10⁻⁴`**
+(predicted `10⁻³`, range `3·10⁻⁴`–`3·10⁻³`: just below my range); 214 s and 1.4 GB
+against 515 s and 2.7 GB at band 7; my sampled interval inside.  **Band 6 with the
+recovery is 26 times tighter than band 7 without it.**  Lys₁₂ order 3: sandwich 0.0769 →
+0.0611 (predicted 0.035, range 0.015–0.06: just above my range) — the envelope, as
+expected in kind: `2β⟨envelope⟩` is 0.053–0.064 on the two Gibbs samples.  (LKSE)₃ order 4:
+0.0191 → **0.00154** `[655.6119691, 655.6135057]` (predicted `10⁻³`, range
+`5·10⁻⁴`–`2·10⁻³`); the envelope there is `8·10⁻⁴`.
+*Next, predicted now:* band 5 (twenty-one far pairs, from six residues apart; twelve
+sites are more than `2w`, so some items have no route): sandwich 0.04 (0.025–0.1),
+corrected `7·10⁻⁴` (`3·10⁻⁴`–`2·10⁻³`).  Band 4 (far pairs from five apart): sandwich
+0.1 (0.05–0.3), corrected `3·10⁻³` (`10⁻³`–`10⁻²`).
+
+**The runs of record, complete (clock: 14:01 UTC; final code; nine twelve-residue
+logs and four enumerated ones, every one ending with its last line).**  Band 7:
+
+| case | sandwich | corrected | predicted |
+|---|---|---|---|
+| Lys₁₂, order 3 | 0.07686 | 0.0611 | 0.035, range 0.015–0.06 — just above |
+| Lys₁₂, order 4 | 0.007329 | `8.3·10⁻⁵` | `8·10⁻⁵` |
+| Lys₁₂, order 5 | 0.007138 | `2.2·10⁻⁵` | `3`–`6·10⁻⁵` — below |
+| (LKSE)₃, order 4 | 0.019067 | 0.00154 | `10⁻³`, range `5·10⁻⁴`–`2·10⁻³` |
+| (LKSE)₃, order 5 | 0.016757 | `1.43·10⁻⁴` | `1.2·10⁻⁴` |
+| Ser₁₂, order 5 | 0.011076 | 0.00179 | `1.5·10⁻³` |
+
+Bands 5 and 4 for Lys₁₂ at order 4: sandwiches 0.0253 and 0.0288 (predicted 0.04 and
+0.1 — the second well below my range: the pairs five and six residues apart cost
+less than I thought once the split around the anchor is in), corrected `4.2·10⁻⁴`
+and `6.9·10⁻⁴` (predicted `7·10⁻⁴` and `3·10⁻³` — the second below my range).
+The sampler from the order-3 ball of Lys₁₂ (run at 13:05): two-end form with empirical
+Bernstein `[517.128107, 517.128879]`, `7.7·10⁻⁴` (predicted `5·10⁻⁴`, in range); as
+stated 0.0025 (predicted 0.0015 — too low: 78 % of the proposals are accepted, I had
+said "near one half").
+*What the afternoon was.*  P9 handed back at 12:21 with brackets fifty to two hundred
+times tighter than the morning's and the sentence that what is left is the band,
+untouched.  By 13:50 the band's slack was out as well — four versions of one small
+module, each made necessary by a number that did not fit: a run three times slower
+than its estimate (cached arrays), an upper end that did not move when I expected it
+to (the grouping, not Jensen), a residual that was neither envelope nor allocation
+(the allowance).  Three of my explanations were wrong before the measurement that
+replaced them; they are in `DEAD_ENDS.md` (SD63).  What I would do differently:
+decompose the residual of the *first* full-size run before starting six more.
+*Left open on purpose:* the recovery on Ser₂₀ and Leu₃₀ (needs the backward message);
+two held sites; the question of which band to use.
+
+**The fetch before the commit found the theory division at a new head (clock: 14:10 UTC).**
+`dd067f1`, their twenty-second checkpoint, commit time 13:42 UTC, found at 14:02:12 by
+the fetch made in a command of its own when SCI-MSG-0028 and every record were ready;
+nothing was staged.  THY-RES-0015 read in full.  They applied both of our reviews,
+machine-checked the remainder identity with one order per term with the hypothesis my
+check of workstream P8 had sharpened ("at most `m` hosts") and its sharpness, and the
+split around the anchor; answered the sign-blind question with a lemma and asked one
+back; and offer a new theorem — `exp(n·h + O(√(n ln n)))` for adaptive algorithms
+without a hint — for review.  They also reproduced a table of our workstream R15 "to
+every digit but one".  The digit was ours: `21·0.3 − ln 99 = 1.7049`, printed by the
+script as 1.705 and rounded a second time in the report to +1.71, in two rows.
+Corrected with a note under the table (SCI-RES-0020 §2).  A double rounding is a new
+kind of error for this record; the check that found it was somebody else's
+replication, which is what replications are for.
+Done before the commit: the correction; SCI-MSG-0028 adjusted (its request P9-T3 is
+their new identity; header); **workstream R17 launched at 14:07** — a referee for their
+Theorem 11.58a, with the contract of workstream R16 as its checklist and one question
+of mine (their message says `n·h − O(1)` for the lower bound, page one of their report
+`n·h − O(ln n)`); their audit at the new head started at 14:03:44; SCI-RES-0020.
+Owed: whether lysine head groups are in the regime `ρR² < 1` of their lemma — the
+loss P8 measured (5.1) equals their `R² ≈ 4.9` for a constant kernel, which is
+suggestive and not a measurement.

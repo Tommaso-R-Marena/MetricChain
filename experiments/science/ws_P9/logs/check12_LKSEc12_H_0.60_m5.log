@@ -1,0 +1,16 @@
+=== p9_06_check12 LKSE:12 on H, tau 0.6, order 5; started 2026-11-26 11:14:48 UTC
+    12 sites, states per site [2, 29, 9, 12, 2, 14, 9, 12, 2, 16, 9, 13], anchor [1, 14, 1, 6, 1, 6, 2, 6, 1, 7, 2, 7]; 792 stage-2 tables Theta_T read from ws_P9/cache
+(b) self-test of the interpolation formula against the grid recursion (random table, M = 1..4): largest deviation 2.5e-14; ball of radius 4 from ws_P8/cache/ball_LKSEc12_H_0.60_M4_32ecb5f469.npz; 2000 uniformly random states, 250 for each number s of sites off the anchor, g evaluated here [9s]
+| s | states | largest |g - I g| (kcal/mol) | violations of |g - I g| <= resolved envelope | smallest envelope / |g - I g| | median envelope (kcal/mol): resolved stage 2; P8's constants | control (tables rolled by one rotamer): violations |
+|---|---|---|---|---|---|---|
+| 5 | 250 | 0.0005403 | 0 | 19.74 | 0.000124; 0.0112 | 2 |
+| 6 | 250 | 0.00242 | 0 | 32.78 | 0.00225; 0.119 | 1 |
+| 7 | 250 | 0.001501 | 0 | 13.57 | 0.0106; 0.493 | 1 |
+| 8 | 250 | 0.003958 | 0 | 41.44 | 0.0406; 1.47 | 0 |
+| 9 | 250 | 0.004004 | 0 | 35.68 | 0.108; 3.55 | 0 |
+| 10 | 250 | 0.00855 | 0 | 62.42 | 0.288; 7.85 | 0 |
+| 11 | 250 | 0.00828 | 0 | 126.69 | 0.648; 13.8 | 0 |
+| 12 | 250 | 0.01649 | 0 | 123.09 | 1.14; 25.5 | 0 |
+    in all: 0 violations at 2000 random states; smallest ratio 13.57; control: 4 violations
+foreign writes attempted during import (refused): 0
+ALL DONE 12 s; peak RSS 1378 MB

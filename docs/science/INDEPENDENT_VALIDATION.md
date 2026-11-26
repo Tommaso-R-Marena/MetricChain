@@ -819,6 +819,47 @@ audit script).
   (read only); the (LKSE)₃ bracket of table T10 was reproduced by my test script
   (`[654.863818, 659.350547]`), not by the re-run driver.  **Unrefereed.**
 
+* **P9 (penalties resolved by rotamer state; before SCI-MSG-0028) and addendum A17 (19) —
+  a review of the statements, per-entry checks with independent code, a re-derivation
+  of every bracket with another driver, a replication of one sampler run; the stage-2
+  tables themselves were computed by nobody but P9.**  *Kinds of check, kept apart.*
+  (1) **Review:** Lemma T′, Theorem R, Corollary J, Proposition P, Corollary S re-derived
+  by the coordinator; no gap found.  (2) **Own code for the left side, P9's raw tables on
+  the right** (`p9_verification/resolved_enum_check.py`, `resolved_check12.py`): every
+  state of Lys₄, Lys₅, LKSE:5 at every order (`R ≤ B₂ ≤ B₁ ≤ B_SAb`, no violation); at
+  twelve residues every state with exactly `m` side chains off the anchor against the
+  exact anchored term — 92 525 and 1 524 690 states of Lys₁₂ (orders 3, 4), 175 185 and
+  3 290 515 of (LKSE)₃ — no violation, smallest ratio 8.25–15.05, two controls that fail
+  (14 334 – 1 853 296 and 438 – 170 176 violations); at order 5, 2 000 random states per
+  peptide (necessary condition only: no ball of radius 5 exists).  (3) **Another
+  driver, tables re-built from the raw ones** (`resolved_brackets.py`): the window-form
+  tables and triple sums equal P9's stored ones exactly; "envelope ≤ tables" at
+  32 000 – 40 000 random states per case with equality where the envelope is one entry,
+  two wrong allocations fail; **twelve brackets (six cases, two forms) digit for
+  digit**; produced twice (the model builder gained an optional output in between):
+  identical.  (4) **The sandwich at 6 980 states of mine per case and form** — no
+  violation; *its control:* with the tables left out it fails at 829–929, 18, 92 states
+  (Lys₁₂ orders 3, 4; (LKSE)₃ order 4) and at none at order 5 or for serine; with tables
+  ten times smaller never (`DEAD_ENDS.md` SD62) — the checks with teeth are (2) and (3).
+  (5) **Replication of a sampler run** (`nested_resolved.py`, my driver, another seed):
+  (LKSE)₃ from the order-4 ball `[655.612563, 655.612815]` / `[655.612658, 655.612720]`
+  against P9's `[655.612562, 655.612814]` / `[655.612657, 655.612719]`; and one run P9 did
+  not make (Lys₁₂ from the order-3 ball, predicted before).  (6) **A17 (19), the
+  recovery** (`slack_recovery.py`, `first_order_recovery.py`): on Lys₅ (three order/band
+  combinations) and LKSE:5 the two hypotheses at every state (margin exactly the
+  constant allowance), two controls that fail at up to 229 329 states, the group means
+  from the held-site passes against enumeration (`10⁻¹²`), the exact `ln Z` inside every
+  corrected bracket; at twelve residues the hypotheses at 5 380 states per case with
+  new energies (nine cases: no violation, both controls fail), the means against
+  20 000 exact samples of the ceiling (within 1.6 standard errors; the Lys₁₂ rows share
+  a seed), and every corrected bracket against the sampled interval of the same `ln Z`
+  (contains it, or — Lys₁₂ at order 5 — overlaps it and is the narrower).  Four versions
+  of the code; the logs of the first three are not kept (`DEAD_ENDS.md` SD64).  **Not
+  checked by anyone:** P9's implementation of the stage-2 evaluation beyond (2); the
+  stage-1 tables; the forms S and B; P3's interval enclosures; the evaluation
+  tolerance `ε_g` of the solvent term (unproved for the evaluator: workstream P3's own
+  statement).  **Unrefereed.**
+
 ## 3. Not validated by us
 
 Everything not listed above.  In particular the paper proofs of theory report §§11.16–11.17,

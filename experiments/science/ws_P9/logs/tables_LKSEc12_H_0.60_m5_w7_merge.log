@@ -1,0 +1,10 @@
+=== p9_03_tables LKSE:12 on H, tau 0.6, order 5, window 7, merging 2 parts; started 2026-11-26 11:04:40 UTC
+    merged 2 part files into out/tables_LKSEc12_H_0.60_m5_w7.npz
+--- 792 subsets of order 5.  Gamma_5 in kT:  P8's Sb 44.5426, P8's SAb 42.8363 | stage 1: joint maximum 42.624, median over the states 31.2108, minimum 28.1006 | stage 2: joint maximum 26.093, median 1.01694, minimum 0.0273921
+    stage 1: joint maximum / SAb per subset: min 0.933, median 0.998, max 1.0000; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 0.004796 kT; window form: 472 tables, sub-tuples kept by size: 2: 1, 3: 119, 4: 476, 5: 196
+    stage 2: joint maximum / SAb per subset: min 0.217, median 0.542, max 0.9449; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 1.848e-06 kT; window form: 454 tables, sub-tuples kept by size: 2: 5, 3: 141, 4: 450, 5: 196
+    my recorded constants against P8's stored per-subset values (ws_P8/out/g12b_LKSEc12_H_0.60_m5.npz): largest relative deviation 'Sb' 0.0e+00, 'SAb' 0.0e+00
+    Gibbs sample 777 (960 states): mean of beta x envelope: stage 1 0.005035, stage 2 6.148e-07; largest: 0.7849, 0.000189; states with a non-zero envelope: 96
+    Gibbs sample 4242 (960 states): mean of beta x envelope: stage 1 0.005689, stage 2 8.192e-07; largest: 0.7703, 0.0004586; states with a non-zero envelope: 122
+foreign writes attempted during import (refused): 0
+ALL DONE 1 s; peak RSS 285 MB

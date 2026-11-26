@@ -1,0 +1,6 @@
+=== LKSE:12 on H, tau 0.6: 12 sites, states per site [2, 29, 9, 12, 2, 14, 9, 12, 2, 16, 9, 13], anchor [1, 14, 1, 6, 1, 6, 2, 6, 1, 7, 2, 7]; order m = 5; 792 tables of workstream P9 (41385519 entries, from 2 file(s)); all entries positive: True; sum of the per-subset maxima 26.09 kT, of the per-subset minima 0.02739 kT
+(0) ball of radius 4 from ws_P8/cache/ball_LKSEc12_H_0.60_M4_32ecb5f469.npz: 3471783 states equal to pwmodel.ball_states block by block; 2000 random values re-evaluated: largest deviation 0.0e+00 kcal/mol [8s]
+(a) not possible: the ball has radius 4 < m = 5
+(b) uniformly random states: 2000 states; |g - I_4 g| <= sum of P9's tables: violations 0; largest remainder 0.009516 kcal/mol; ratio bound/remainder (remainder > 1e-9; 1980 states): smallest 23.31, median 731.2; mean of the resolved bound 0.6665 kT against 7.058 kT with the per-subset maxima (ratio 10.6); control C2 (tables reversed): 20 violations [83s]
+(b) Gibbs states with at least m sites off the anchor: 116 states; |g - I_4 g| <= sum of P9's tables: violations 0; largest remainder 1.247e-06 kcal/mol; ratio bound/remainder (remainder > 1e-9; 26 states): smallest 69.47, median 382.3; mean of the resolved bound 5.393e-06 kT against 0.021 kT with the per-subset maxima (ratio 3893.0); control C2 (tables reversed): 0 violations [83s]
+ALL DONE 83 s; peak RSS 1140 MB

@@ -28,11 +28,14 @@ import itertools
 import numpy as np
 
 
-def build_window_models_occ(WindowModel, k, x0, c0, h, J, d, w, const, M, gs, g2, eta, XG, far_pairs="anchored"):
+def build_window_models_occ(WindowModel, k, x0, c0, h, J, d, w, const, M, gs, g2, eta, XG, far_pairs="anchored", out=None):
     """as window_model.build_window_models, with rule "occ" for the terms that do not fit a window and (far_pairs =
     "anchored") the anchored split for the pairs beyond the band.  XG: (N, n) states of a sample of the true ensemble.
     Returns (lo, up, info); info additionally has 'first_order': the sample mean of the summed (max - min) of all
-    reduced terms and far pairs, in kcal/mol (the first-order cost of the reductions, times beta, in nats)."""
+    reduced terms and far pairs, in kcal/mol (the first-order cost of the reductions, times beta, in nats).
+    out (optional dict; added for slack_recovery.py, changes nothing else): receives the choices made --
+    out["choice"][U] = (sample mean, sup slack, kept positions, minimum, maximum over the given-up sites) and
+    out["fchoice"][(i, j)] = (A, B, kept site "i" or "j", (minimum, maximum of the rest over the other site))."""
     n = len(k); XG = np.atleast_2d(XG)
 
     def maximal_windows(U):
@@ -69,6 +72,8 @@ def build_window_models_occ(WindowModel, k, x0, c0, h, J, d, w, const, M, gs, g2
                     (float((c3[1] - c3[0])[XG[:, i]].mean()), float((c3[1] - c3[0]).max()), 2, (np.zeros(k[i]), b3, "i", c3))]
             best = min(cand, key=lambda t: t[:3]); fchoice[(i, j)] = best[3]
             info["far_first_order"] += best[0]; info["far_kind"][("anchored, kept site i", "anchored, kept site j", "P3")[best[2]]] += 1
+    if out is not None:
+        out["choice"] = choice; out["fchoice"] = fchoice
     for mdl, sense in ((lo, -1), (up, +1)):
         mdl.const = c0 + float(d[()]) + sense * const
         for i in range(n):

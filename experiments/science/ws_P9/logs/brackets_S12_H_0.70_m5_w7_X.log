@@ -1,0 +1,15 @@
+=== p9_05_brackets S12 on H, tau 0.7: order m = 5, band 7; sources ['ref', 's1', 's2'], forms ['S', 'B', 'T', 'W']; started 2026-11-26 11:32:18 UTC
+    12 sites, states per site [9, 9, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], 4.89776e+09 assignments, anchor [7, 7, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2]; P8's 'SAb' constants from ws_P8/out/g12b_S12_H_0.70_m5.npz: Gamma_5 = 0.1381 kT; my recorded ones differ by at most 0.0e+00 (relative)
+    ball of radius 4: 481506 values, ws_P8/cache/ball_S12_H_0.70_M4_64e3d07719.npz (states equal pwmodel.ball_states row by row; 1000 random values re-evaluated here: largest deviation 0.0e+00 kcal/mol) [2s]
+    Gibbs samples of ws_P9/cache (coordinator's sampler): seed 4242 guides the reductions, seed 777 is the check sample (960 states, 6.27 sites off the anchor on average)
+(0) the models with ALL penalties zero (not a sandwich: what the reductions of the evaluated terms cost): width 0.00909569 nats; 350 evaluated terms exact in the window, 365 reduced, 10 pairs beyond the band (0 anchored, kept site i, 10 anchored, kept site j, 0 P3) [2s, peak RSS 325 MB]
+| source | form | certified bracket of ln Z | width (nats) | beta x mean of m_+ - m_- on the check sample | sandwich violated at Gibbs states | exact samples of the floor: sites off the anchor (mean); violations | seconds |
+|---|---|---|---|---|---|---|---|
+| ref | T | [227.341786, 227.396479] | **0.05469** | 0.05474 | 0 | — | 2 (peak RSS 325 MB) |
+| s2 | T | [227.357675, 227.380236] | **0.02256** | 0.02237 | 0 | 2000 samples: 6.34; 0 | 5 (peak RSS 325 MB) |
+| sab | W | [227.357722, 227.380312] | **0.02259** | 0.02291 | 0 | — | 4 (peak RSS 325 MB) |
+| s2 | W | [227.363089, 227.374782] | **0.01169** | 0.01154 | 0 | 2000 samples: 6.33; 0 | 6 (peak RSS 359 MB) |
+| cJ2 | T | [227.349132, 227.388924] | **0.03979** | 0.03972 | 0 | — | 3 (peak RSS 359 MB) |
+| s1 | T | [227.343781, 227.394418] | **0.05064** | 0.05062 | 0 | — | 2 (peak RSS 359 MB) |
+foreign writes attempted during import (refused): 0
+ALL DONE 26 s; peak RSS 359 MB

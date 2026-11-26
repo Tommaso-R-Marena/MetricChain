@@ -1,0 +1,11 @@
+=== p9_03_tables LKSE:12 on H, tau 0.6, order 5, window 7, part 1 of 2; started 2026-11-26 11:00:31 UTC
+    213 atoms, 12 sites, states per site [2, 29, 9, 12, 2, 14, 9, 12, 2, 16, 9, 13], anchor [1, 14, 1, 6, 1, 6, 2, 6, 1, 7, 2, 7]; 792 subsets of order 5, 396 in this run; sum over them of the number of states of T: 2.196e+07
+    subset 219/396 done, 123 s (0.56 s per subset), RSS now 875 MB
+    subset 389/396 done, 243 s (0.62 s per subset), RSS now 1157 MB
+    subset 396/396 done, 246 s (0.62 s per subset), RSS now 1157 MB
+    stage 2 > stage 1 at 0 table entries (must be 0)
+    part file written: out/tabpart_LKSEc12_H_0.60_m5_w7_p1of2.npz (396 subsets); run the other parts, then --merge 2
+    stage-2 tables Theta_T of 396 subsets stored in cache/theta2_LKSEc12_H_0.60_m5_p1of2.npz
+foreign writes attempted during import (refused): 0
+ALL DONE 249 s; peak RSS 1128 MB
+exit 0

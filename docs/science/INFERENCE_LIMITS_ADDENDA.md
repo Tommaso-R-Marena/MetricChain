@@ -3077,6 +3077,308 @@ site shares as the core of a convex game with its consequences (items 52–54), 
     (part (17)) on top of these models; twenty residues with a charged sequence; a
     referee.
 
+### (19) Penalties resolved by rotamer state (workstream P9, checked) — and the band's own slack taken back out of the bracket [P for validity: workstream P9's Theorem R and Proposition P, re-derived by the coordinator, and Proposition A17.19 below (elementary); X on Lys₅ and LKSE:5; M for the numbers; added 2026-11-26; not refereed]
+
+*What is whose.*  Items 65–68: workstream P9 (`workstreams/P9_REPORT.md`, with the
+coordinator's note at its end); the checks named there as mine are mine.  Items 69–75:
+the coordinator (`pi_inference/slack_recovery.py`, `first_order_recovery.py`).  Nothing in
+this part has been read by a referee; the part continues (18), whose items are numbered
+58–64.
+
+65. **Workstream P9: the penalty of a subset as a function of the rotamers of its
+    sites** [P9; P].  Workstream P8's constants `ĉ_T` are maxima over the rotamers of
+    the sites of `T` — of the hosts, which P8's code had in hand, and of the non-host
+    sites, whose increments `δ̄ = max_y |C(y) − C(x⁰)|` P3's computable forms take as
+    maxima.  P3's theorem is *stated* with the increments that occur; P9 evaluated it so.
+    **Theorem R**: `|g − I_{m−1}g|(x) ≤ Σ_{T⊆S(x), |T|=m} Θ_T(x_T)`, block by block, with the
+    hosts in `T` *and* the non-host sites of `T` at their actual states, hosts outside
+    `T` at the anchor (P8's Theorem AH before its maximum).  **Proposition P**: for any
+    weights `w_{T,U}` on the sub-tuples of `T`, the tables
+    `γ_U(b_U) = Σ_{T⊇U} w_{T,U} max{Θ_T(y_T) : y_U = b_U}` (zero when a site of `U` is at
+    the anchor) are a valid penalty — the actual `x_T` is among the points of the
+    maximum; and a table that does not fit the band may be reduced by maxima over the
+    sites given up.  With `Θ_T` constant these are P3's site form, P6's Lemmas A, A′ and
+    the theory division's allocations (Proposition 11.18f).  *What the resolution is
+    worth* (P9's numbers): the dependence on the *host's* rotamer alone is weak (site
+    penalty 0.72–1.00 of the constant one at the visited rotamers); with the non-host
+    sites resolved the typical subset bound is 42–590 times below P8's constant, and
+    even its maximum over the states is 41–61 % of it — new state-independent constants
+    `βΓ_m = 18.2, 0.99` (Lys₁₂, orders 4, 5) and `26.1` ((LKSE)₃, order 5) where P8 has
+    `34.0, 2.40, 42.8`.  The bound is still far from the truth: at its tightest state
+    8–15 times the exact term, in Boltzmann mean 255–880 times the remainder on the
+    enumerated instances (P8's constants: `9·10³`–`4·10⁵`).
+
+66. **Checked by the coordinator before publication** [M; `experiments/science/p9_verification/`].
+    §1 of the report re-derived, no gap found.  The raw tables against exact
+    remainders with my code: at every state of Lys₄, Lys₅, LKSE:5 and every order
+    (`R ≤ B₂ ≤ B₁ ≤ B_SAb`, no violation); at twelve residues **every** state with exactly
+    `m` side chains off the anchor against the exact anchored term — 92 525 and 1 524 690
+    states of Lys₁₂ (orders 3, 4), 175 185 and 3 290 515 of (LKSE)₃ — no violation,
+    smallest ratio 8.25–15.05, and two deliberately wrong tables fail (minimum in place
+    of the value: 14 334 – 1 853 296 violations; table reversed: 438 – 170 176); at order
+    5, where no ball of radius 5 exists, 2 000 random states per peptide (a necessary
+    condition only).  From the raw tables to the brackets with a driver of mine
+    (`resolved_brackets.py`): the tables re-built equal P9's stored ones exactly;
+    "envelope ≤ tables" at 32 000 – 40 000 random states per case, with equality where
+    the envelope is one entry, and failing for two wrong allocations; **all twelve
+    brackets of the next item reproduced digit for digit**; the sandwich at 6 980 states
+    of mine per case and form, no violation.  *How much the last check can see:* with
+    the tables left out it fails at 829–929 states (Lys₁₂, order 3), 18 (order 4), 92
+    ((LKSE)₃, order 4) and at **none** at order 5 or for serine; with tables ten times
+    smaller it never fails.  The checks with teeth are the per-entry ones.  *Not
+    checked by me:* the stage-1 tables, the forms S and B, the rows with constants,
+    P3's enclosures.
+
+67. **The brackets** [M; validity P; band 7, helix; the models of part (18): exact
+    window terms, occupancy-aware reductions, far pairs split around the anchor].
+    "T": equal shares on triples (the form of part (18)); "W": every subset charged in
+    full to one sub-tuple of its sites that fits a window.
+
+    | peptide | order (ball) | P8's constants, T (part (18)) | resolved, T | **resolved, W** | reductions alone |
+    |---|---|---|---|---|---|
+    | Lys₁₂ | 3 (3 841) | none | 0.832 | **0.0769** `[517.108870, 517.185731]` | 0.00710 |
+    | Lys₁₂ | 4 (96 366) | 1.41 | 0.1115 | **0.00735** `[517.125649, 517.132996]` | 0.00713 |
+    | Lys₁₂ | 5 (1 621 056) | 0.0567 | 0.0160 | **0.00723** `[517.125705, 517.132938]` | 0.00713 |
+    | (LKSE)₃ | 4 (181 268) | none | 1.147 | **0.0191** `[655.603013, 655.622116]` | 0.0167 |
+    | (LKSE)₃ | 5 (3 471 783) | 4.30 | 0.1946 | **0.0170** `[655.604050, 655.621038]` | 0.0167 |
+    | Ser₁₂ | 5 (481 506) | 0.0547 (P3's closed form: 0.0872) | 0.0226 | **0.0117** `[227.363089, 227.374782]` | 0.0091 |
+
+    (LKSE)₃ at order 3 is not certified (659 nats: the floor delocalises completely,
+    although the first-order number on a sample of the true ensemble is 0.4; P9 could
+    not predict on which side of that threshold a set of tables lies, and was wrong
+    about it five times of nine — its request P9-T2).  **The sequence that part (18)
+    called "reachable by sampling and not deterministically" is certified
+    deterministically within 0.017 nats, and from its order-4 ball within 0.019;
+    Lys₁₂ is certified from 96 366 evaluations more tightly than it was from
+    1 621 056.**  In the window form the bracket is the width of the models *without any
+    penalty* plus one to three per cent (14 % for (LKSE)₃ at order 4): what the band
+    gives up — ten pairs of side chains more than seven residues apart, and the
+    evaluated terms that fit no window.  P9 did not touch that; items 69–74 do.
+
+68. **The sampler with the resolved envelope** [M; the algorithm is the theory
+    division's Proposition 11.113a; probability 0.95, given the sandwiches].  P9 ran
+    the coordinator's `nested_sampler.main()` with the window-form sandwich outside and
+    the fully resolved `Σ_{T⊆S(x)} Θ_T(x_T)` as envelope.  (LKSE)₃ from the order-5 ball:
+    the envelope's own bracket falls from 1.23 nats (P8's constants) to `3.5·10⁻⁶`;
+    as the theory division states the bound `[655.612610, 655.612778]` (`1.7·10⁻⁴`),
+    two-end form with empirical Bernstein `[655.612673, 655.612715]` (`4.3·10⁻⁵`), from
+    400 000 proposals and **90** new evaluations (part (18): 0.188 and 0.041 from
+    4 000 000 proposals and 12 000 evaluations).  From the order-4 ball:
+    `[655.612562, 655.612814]` and `[655.612657, 655.612719]` with 1 200 evaluations —
+    **repeated by the coordinator with another driver and another seed**
+    (`p9_verification/nested_resolved.py`): `[655.612563, 655.612815]` and
+    `[655.612658, 655.612720]`.  *A run P9 could not make (memory), made by the
+    coordinator:* Lys₁₂ from the **order-3** ball — 3 841 evaluations — with 12 000 more:
+    as stated `[517.127247, 517.129738]` (0.0025), two-end with empirical Bernstein
+    `[517.128107, 517.128879]` (`7.7·10⁻⁴`; predicted `5·10⁻⁴`, range `3·10⁻⁴`–`10⁻³`); it
+    contains the interval of part (18).  There the envelope no longer helps: 78 % of the
+    proposals are accepted for evaluation and the plain sampler with the same 12 000
+    evaluations is as narrow (`7.8·10⁻⁴`) — at order 3 the resolved bound is the size of
+    the outer sandwich itself.
+
+69. **The slack of the band is a table, and a table can be averaged** [P, elementary:
+    Proposition A17.19].  For a pair beyond the band the ceiling model holds
+    `A(x_i) + B(x_j) + max_{x_i} D(x_i, x_j)` where the energy has `P(x_i, x_j)`; the
+    difference `s⁺_{ij}(x_i, x_j) ≥ 0` is a function of two sites that no band model can
+    hold but that is known exactly.  The same for an evaluated term replaced by its
+    maximum over the sites given up, and for a subset `T` charged to a sub-tuple `K`
+    (`[max over the given-up sites of Θ_T](x_K) − Θ_T(x_T)[T ⊆ S(x)] ≥ 0`, because the
+    remainder is bounded by the envelope, not only by the allocated tables).
+    *Let `m₋ ≤ E ≤ m₊`, and let `s₊ = Σ_g S⁺_g`, `s₋ = Σ_g S⁻_g` be sums of non-negative
+    functions with `m₊ − E ≥ s₊` and `E − m₋ ≥ s₋` pointwise; `⟨·⟩` is the mean under the
+    ceiling model `e^{−βm₊}/Z(m₊)`.  Then*
+
+        (LJ)  ln Z(E) ≥ ln Z(m₊) + β Σ_g ⟨S⁺_g⟩,
+        (LP)  ln Z(E) ≥ ln Z(m₊) + ln( 1 + Σ_g ⟨e^{βS⁺_g} − 1⟩ ),
+        (UE)  ln Z(E) ≤ u*,  u_{t+1} = ln Z(m₋) − β C e^{ln Z(m₊) − u_t},      C  = Σ_g ⟨S⁻_g e^{βS⁺_g}⟩,
+        (UP)  ln Z(E) ≤ v*,  v_{t+1} = ln Z(m₋) − ln(1 + C′ e^{ln Z(m₊) − v_t}),  C′ = Σ_g ⟨(e^{βS⁻_g} − 1) e^{βS⁺_g}⟩,
+
+    *with `u_0 = v_0 = ln Z(m₋)`; every iterate is an upper bound.*
+    *Proof.*  `Z(E)/Z(m₊) = ⟨e^{β(m₊−E)}⟩ ≥ ⟨e^{βs₊}⟩`; Jensen gives (LJ);
+    `∏_g(1 + y_g) ≥ 1 + Σ_g y_g` for `y_g = e^{βS⁺_g} − 1 ≥ 0` gives (LP).  Above:
+    `Z(m₋)/Z(E) = ⟨e^{β(E−m₋)}⟩_E ≥ ⟨e^{βs₋}⟩_E`, a mean under the **true** ensemble; by
+    Jensen it is at least `e^{β Σ_g⟨S⁻_g⟩_E}`, by the product inequality at least
+    `1 + Σ_g ⟨e^{βS⁻_g} − 1⟩_E`.  For any `X ≥ 0`, since `e^{−βE} ≥ e^{−βm₊} e^{βs₊} ≥ e^{−βm₊} e^{βS⁺_g}`,
+
+        ⟨X⟩_E = Σ_x X e^{−βE} / Z(E)  ≥  Z(m₊) ⟨X e^{βS⁺_g}⟩ / Z(E)  ≥  ⟨X e^{βS⁺_g}⟩ e^{ln Z(m₊) − u}
+
+    for every upper bound `u` of `ln Z(E)`; with `X = S⁻_g` this is (UE), with
+    `X = e^{βS⁻_g} − 1` it is (UP).  ∎
+    (LJ) and the Jensen step of (UE) are the Gibbs–Bogoliubov inequality in its two
+    directions.  The two-sided form is in print with a mean under each ensemble
+    (Reible, Hartmann and Delle Site, Lett. Math. Phys. 112, 97 (2022),
+    arXiv:2111.10282 — seen in search summaries only, not read); what makes it
+    computable here is the change of measure in the last display, which trades the
+    mean under the true ensemble for a mean under the ceiling model at the price of
+    the factor `e^{ln Z(m₊) − u} ≥ e^{−D}`.  *Searched:* our own addenda (the two-sided
+    bracket is used in part (7) as a datum; far pairs appear in (18) only as a choice of
+    split), and three web queries (two-sided Bogoliubov bounds; one-ensemble variants;
+    mini-bucket bounds with corrections for dropped terms): nothing of this form was
+    found.  A reduction by minimum or maximum is the sum-max limit of a mini-bucket
+    relaxation, and that literature tightens such bounds by Hölder weights and by
+    shifting cost between the parts (Liu and Ihler, ICML 2011, and the anytime search
+    bounds of Lou, Dechter and Ihler — both in workstream L2's prior-art report,
+    `docs/prior_art/L2_relaxations_partition.md`, C8(a), verified there), not, as far as
+    that report and the summaries show, by a perturbative correction with exact
+    marginals of the relaxed model.  **"Not found in our reports and in three queries"
+    is all that is claimed.**
+
+70. **Computing the means exactly** [P, elementary; mine].  What is needed is the law
+    of a table on sites that do not fit a window, under a band model.  If all sites of
+    an item but one lie in the last `w` sites of the chain, run the transfer matrix
+    with that one site **held** at each of its states in turn and read the joint law of
+    the last `w` sites from the final array ("fwd"); the mirrored chain serves the
+    items whose sites but the last lie in the first `w` ("rev").  All items that share
+    the held site form a group `g`; `S_g` is a function of the held site and of one
+    window, so every `⟨φ(S_g)⟩` is exact.  For a chain of at most `2w` sites every far
+    pair and every triple has a route; an item without one is left out, which keeps
+    the bound valid.  Cost for Lys₁₂ at band 7: 47 + 28 held-site passes of about half
+    a transfer-matrix run each (three minutes once the arrays of the terms are
+    cached).  *Which site to hold matters for tightness:* the slack of a far pair occurs
+    when the site its reduction **keeps** is off the anchor, so all pairs that keep the
+    same site have their slack at the same states; held at that site they are one
+    group and are treated exactly together, held at the other end they fall into
+    different groups and the product inequality loses their cross terms (on Lys₅ at
+    band 2: 0.0083 against 0.0029 nats).
+
+71. **Every state of Lys₅ and LKSE:5** [X; `first_order_recovery_*_enum.log`].  The
+    hypotheses `m₊ − E ≥ s₊` and `E − m₋ ≥ s₋` hold at every state, with a smallest margin
+    of exactly the constant allowance `10⁻⁷` kcal/mol (inside the ball the accounting is
+    an identity); every item doubled violates them at 22 687 – 229 329 states, and the
+    far items of floor and ceiling exchanged at 12 011 – 112 163; the group means from
+    the held-site passes agree with enumeration to `10⁻¹²`; the exact `ln Z` is inside
+    every corrected bracket.
+
+    | instance, order, band | sandwich `D` | corrected bracket | width | `D` / width | the same items put back exactly (enumeration) |
+    |---|---|---|---|---|---|
+    | Lys₅, 4, band 2 | 0.0477 | `[251.3475751, 251.3504878]` | 0.00291 | 16 | 0.00167 |
+    | Lys₅, 4, band 3 | 0.0189 | `[251.3484184, 251.3484828]` | `6.4·10⁻⁵` | 294 | `5.0·10⁻⁵` |
+    | Lys₅, 5, band 3 | 0.0187 | `[251.3484424, 251.3484495]` | `7.1·10⁻⁶` | 2 633 | `1.6·10⁻⁶` |
+    | LKSE:5, 4, band 2 | 0.205 | `[276.4668782, 276.4684894]` | 0.0016 | 128 | `8.8·10⁻⁴` |
+
+    (exact `ln Z`: 251.3484449 and 276.4672934.)  At band 2 the "far" pairs are helix
+    neighbours and their slack is of order `kT`; the inequalities then lose a factor
+    two against an exact treatment of the same items.
+
+72. **What was left after the recovery: a rounding allowance — and where to put it**
+    [M; P for validity, elementary].  With the grouping of item 70 the corrected bracket
+    of (LKSE)₃ at order 5 was still `3.9·10⁻⁴` nats, and neither its envelope
+    (`3·10⁻⁶`) nor its allocation slack (`10⁻⁵`) accounts for that.  It is workstream
+    P6's allocation of the **floating-point allowance** of the evaluated terms.  Every
+    `d_U` is an alternating sum of `2^{|U|}` values of `g`, each allowed an error
+    `ε_g = 10⁻⁷` kcal/mol (workstream P3: an a-priori worst case of `3·10⁻⁸` for the
+    evaluator's sums, "not proved for the summation order of the evaluator used";
+    measured errors `2·10⁻¹²`), and P6 charges the allowance of every term through a pair
+    to that pair — `1.5·10⁻⁵` kcal/mol per in-band pair at order 5 — whenever the pair is
+    off the anchor, although nearly all of those terms are not.  First-order cost
+    `2β⟨allowance⟩` on the Gibbs samples:
+
+    | | order 3 | order 4 | order 5 |
+    |---|---|---|---|
+    | Lys₁₂ (1.2 side chains off the anchor on average) | `3.9·10⁻⁶` | `2.2·10⁻⁵` | `1.06·10⁻⁴` |
+    | (LKSE)₃ (2.8) | `9.4·10⁻⁶` | `5.8·10⁻⁵` | `2.7·10⁻⁴` |
+    | Ser₁₂ (6.3) | `3.2·10⁻⁵` | `2.2·10⁻⁴` | `1.04·10⁻³` |
+
+    It grows five- to sevenfold per order while the truncation error falls: once the band's slack
+    is recovered, a higher order is no longer free.  The allowance is not slack — the
+    rounding error is unknown — but **its allocation is a choice**: attached to each
+    term's own table, `d_U ∓ 2^{|U|}ε_g` where all sites of `U` are off the anchor (elsewhere
+    `d_U` vanishes exactly), it is charged only when the term is.  The lowered table is a
+    minorant of the true term and the raised one a majorant, and so is every minimum or
+    maximum of them over sites given up.  The sandwiches of items 73–74 are built so
+    (`first_order_recovery.py`; each log prints P9's bracket, with P6's allocation, beside
+    it).  Effect on the sandwich: Lys₁₂ 0.007347 → 0.007329 (order 4) and 0.007233 →
+    0.007138 (order 5); (LKSE)₃ 0.016987 → 0.016757; Ser₁₂ 0.011693 → 0.011076.  Effect
+    on the corrected bracket (the code version before this change — its logs are not
+    kept — against the final one): Lys₁₂ order 4 `1.02·10⁻⁴` → `8.3·10⁻⁵`; (LKSE)₃ order 5
+    `3.9·10⁻⁴` → `1.43·10⁻⁴`.
+    What `ε_g` itself should be is a question for whoever evaluates `g` (request A19-E2).
+
+73. **Twelve residues** [M; validity P; `first_order_recovery_*.log`; band 7; predictions
+    in the research log, cycle 59].  "Sandwich": P9's window form with the allowance
+    attached term by term.  The three columns add the far pairs, then the evaluated
+    terms that fit no window, then the allocation slack of the penalty.
+
+    | peptide, order (ball) | sandwich `D` | far pairs | + terms | **+ allocation: corrected bracket** | `D` / width | items: with a route / all |
+    |---|---|---|---|---|---|---|
+    | Lys₁₂, 3 (3 841) | 0.07686 | 0.0703 | 0.0703 | **0.0611** `[517.1160739, 517.1771913]` | 1.3 | 100 / 100 |
+    | Lys₁₂, 4 (96 366) | 0.007329 | `2.5·10⁻⁴` | `2.2·10⁻⁴` | **`8.3·10⁻⁵`** `[517.1285101, 517.1285931]` | 88 | 380 / 465 |
+    | Lys₁₂, 5 (1 621 056) | 0.007138 | `5.2·10⁻⁵` | `2.2·10⁻⁵` | **`2.2·10⁻⁵`** `[517.1285395, 517.1285614]` | 327 | 818 / 1 346 |
+    | (LKSE)₃, 4 (181 268) | 0.019067 | 0.00296 | 0.00250 | **0.00154** `[655.6119691, 655.6135057]` | 12 | 380 / 465 |
+    | (LKSE)₃, 5 (3 471 783) | 0.016757 | `6.2·10⁻⁴` | `1.5·10⁻⁴` | **`1.43·10⁻⁴`** `[655.6126377, 655.6127810]` | 117 | 818 / 1 346 |
+    | Ser₁₂, 5 (481 506) | 0.011076 | 0.00437 | 0.00198 | **0.00179** `[227.3678308, 227.3696220]` | 6.2 | 818 / 1 346 |
+
+    *Checks, every row:* the two hypotheses at 5 380 states of mine with new evaluations
+    of the energy (Gibbs states, exact samples of floor and ceiling, random states,
+    states with `m` and `m + 1` side chains off, states inside the ball) — no violation,
+    and at the Gibbs states and the samples the margin is exactly the constant allowance
+    `10⁻⁷` (inside the ball the accounting is an identity); every item doubled violates
+    them at 4 341 – 10 011 of those states, the far items of floor and ceiling exchanged
+    at 1 316 – 4 138; the exact means against 20 000 exact samples of the ceiling: within
+    1.6 standard errors in all twelve comparisons (the six for Lys₁₂ share a seed and
+    nearly the same ceiling and all lie 0.8–1.6 standard errors low; those for (LKSE)₃
+    and Ser₁₂ are within 0.3 — the test of the means is item 71, not this).  *Against the sampler:* every
+    corrected bracket contains the sampled interval of the same `ln Z` — Lys₁₂:
+    `[517.128526, 517.128559]` of part (18), except that at order 5 the deterministic
+    bracket is now the narrower of the two and the intervals overlap
+    (`[517.1285395, 517.1285614]` against `[517.128526, 517.128559]`); (LKSE)₃:
+    `[655.612658, 655.612720]` (item 68); Ser₁₂: `[227.368425, 227.368972]` of part (17).
+    *Against the predictions:* Lys₁₂ order 4 `8·10⁻⁵` predicted; (LKSE)₃ order 5
+    `1.2·10⁻⁴`; order 4 `10⁻³` (range `5·10⁻⁴`–`2·10⁻³`); Ser₁₂ `1.5·10⁻³`; Lys₁₂ order 5
+    `3·10⁻⁵`–`6·10⁻⁵` (found below the range); Lys₁₂ order 3 0.035, range 0.015–0.06 (found
+    just above it).  **Lys₁₂ — `9.5·10¹⁰` states — is certified within `8.3·10⁻⁵` nats
+    from 96 366 evaluations and within `2.2·10⁻⁵` from the order-5 ball; (LKSE)₃ within
+    `1.4·10⁻⁴`.**  *What is left in each row:* the envelope where it is not small —
+    `2β⟨Σ_{T⊆S(x)} Θ_T⟩` on the two Gibbs samples is 0.053–0.064 for Lys₁₂ at order 3,
+    `8·10⁻⁴` for (LKSE)₃ at order 4, `1.3·10⁻³` for Ser₁₂ (and `10⁻⁵`–`10⁻⁴`, `10⁻⁹`,
+    `10⁻⁶` for the three other rows) — and otherwise what the inequalities lose between
+    groups (the factor `e^{ln Z(m₊) − u}` of (UE), (UP) costs about `D/2` times the amount
+    recovered above: `1.3·10⁻⁵` for Lys₁₂, `7·10⁻⁵` for (LKSE)₃) and the items without
+    a route.
+
+74. **A narrower band** [M; Lys₁₂, order 4; `first_order_recovery_K12_m4_w{4,5,6}.log`;
+    sub-tuples chosen by the rule of item 67 with my own code, since P9 stored choices
+    for band 7 only].  If the band's slack can be taken back, the band need not be as
+    wide as memory allows.
+
+    | band | pairs beyond it | sandwich `D` | **corrected** | items with a route / all | run time, peak memory |
+    |---|---|---|---|---|---|
+    | 7 | 10 | 0.00733 | **`8.3·10⁻⁵`** | 380 / 465 | 515 s, 2.7 GB |
+    | 6 | 15 | 0.0214 | **`2.8·10⁻⁴`** `[517.1284536, 517.1287322]` | 420 / 610 | 214 s, 1.4 GB |
+    | 5 | 21 | 0.0253 | **`4.2·10⁻⁴`** `[517.1284057, 517.1288274]` | 352 / 742 | 199 s, 1.1 GB |
+    | 4 | 28 | 0.0288 | **`6.9·10⁻⁴`** `[517.1283040, 517.1289915]` | 262 / 854 | 192 s, 1.1 GB |
+
+    (The times of the narrow bands are the Gibbs samples and the checks; the transfer
+    matrices take seconds.)  **Band 4 with the recovery is ten times tighter than band 7
+    without it**, with arrays 343 to 2 352 times smaller; every bracket contains the sampled
+    interval.  Predicted before the runs: sandwich 0.05, 0.04, 0.1 (found 0.021, 0.025,
+    0.029 — the last below my range); corrected `10⁻³`, `7·10⁻⁴`, `3·10⁻³` (found
+    `2.8·10⁻⁴`, `4.2·10⁻⁴`, `6.9·10⁻⁴` — the first and the last below my ranges).  At bands
+    5 and 4 the chain is longer than `2w` and half to two thirds of the items have no
+    route; a held-site pass with a backward message would serve them (not built).
+
+75. **What this part changes** [summary].  (i) The slack of the charged case was, twice,
+    a maximum taken too early: over the hosts' rotamers (P8), then over the rotamers
+    of the other sites of a subset (P9) — the theorem never asked for either.  (ii) With
+    the resolved tables in the window form the certificate holds one order earlier
+    (Lys₁₂ from 3 841 or 96 366 evaluations, (LKSE)₃ from 181 268) and what it then
+    measures is the band.  (iii) The band's slack is known and comes back out by a
+    classical inequality with exact marginals: **deterministic brackets of `10⁻⁴`–`10⁻⁵`
+    nats for the charged twelve-residue peptides**, narrower than the sampled interval
+    of part (18) in one case, and a band of 4 or 5 does where 7 was needed.  (iv) What
+    is left is, in this order: the envelope — the resolved bound itself, still 255–880
+    times the remainder in Boltzmann mean, which only sampling (item 68: 90
+    evaluations) or a tighter theorem removes; the losses between groups; the items
+    without a route; and the evaluation tolerance `ε_g`, now a line of its own.
+    (v) *Not done:* held-site passes for chains longer than `2w` (a backward message);
+    two held sites for the items with two sites at each end; the recovery on the older
+    certificates of parts (10)–(17) (serine at twenty, leucine at thirty residues: their
+    reductions are 17 % and more of the bracket); a criterion for when a floor
+    delocalises (P9's request P9-T2; (LKSE)₃ at order 3 has none); resolved tables beyond
+    twelve residues (no closed form over the subsets); an independent implementation
+    of the stage-2 tables; **a referee** — parts (13)–(19) have had none except for Lemma
+    A17.16, the greedy lemma and one section of SCI-RES-0017.
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every

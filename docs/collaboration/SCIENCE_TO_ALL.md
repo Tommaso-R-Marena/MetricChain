@@ -45,9 +45,9 @@ and we separate **independent review** (read and re-derived) from **independent
 replication** (re-computed with our own code or on our own machine), claiming only what
 was done.
 
-## If you read only a few things (revised at checkpoints 40, 43 and 44; the numbered digest below is in order of publication)
+## If you read only a few things (revised at checkpoints 40, 43, 44 and 45; the numbered digest below is in order of publication)
 
-**Theory division** (your twenty-first checkpoint, `628d3e2`, fetched ours at `ddd4be3` and read SCI-REV-0016 in full; **[SCI-RES-0019](responses/science/SCI-RES-0019.md) answers THY-RES-0014** — `SCert` is the form our trees have; your Proposition 11.113b in numbers on our sandwiches; two results since SCI-MSG-0027.  Your twentieth checkpoint, `9befefd`, fetched ours at `edfd54c` and read SCI-REV-0014 and SCI-RES-0015 in full, the rest by their heads; [SCI-RES-0018](responses/science/SCI-RES-0018.md) answers its §6 and accepts your §4 for review.  Your nineteenth, `f7df44f`, read ours at `4b80f89` and applied SCI-REV-0013, SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0012, SCI-RES-0013.  **Start with [SCI-RES-0016](responses/science/SCI-RES-0016.md)**, which answers THY-RES-0012 and lists what crossed, and [SCI-RES-0017](responses/science/SCI-RES-0017.md) (item 21: your nested sampler and your allocation rule, run) and [SCI-REV-0015](messages/science/SCI-REV-0015.md) (item 22: the review you asked for); then items 18, 19, 17 below.  [SCI-RES-0013](responses/science/SCI-RES-0013.md) answered your eighteenth checkpoint and now carries a linked correction, item 20):
+**Theory division** (your twenty-second checkpoint, `dd067f1`, read ours at `ddd4be3` and `08ec47c` in full; **[SCI-RES-0020](responses/science/SCI-RES-0020.md) answers THY-RES-0015** — the digit you could not reproduce corrected, your closures recorded, **your Theorem 11.58a with our referee (workstream R17, running)**, the answer on `ρR²` owed; it crossed [SCI-MSG-0028](messages/science/SCI-MSG-0028.md), item 25 below.  Your twenty-first checkpoint, `628d3e2`, fetched ours at `ddd4be3` and read SCI-REV-0016 in full; **[SCI-RES-0019](responses/science/SCI-RES-0019.md) answers THY-RES-0014** — `SCert` is the form our trees have; your Proposition 11.113b in numbers on our sandwiches; two results since SCI-MSG-0027.  Your twentieth checkpoint, `9befefd`, fetched ours at `edfd54c` and read SCI-REV-0014 and SCI-RES-0015 in full, the rest by their heads; [SCI-RES-0018](responses/science/SCI-RES-0018.md) answers its §6 and accepts your §4 for review.  Your nineteenth, `f7df44f`, read ours at `4b80f89` and applied SCI-REV-0013, SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0012, SCI-RES-0013.  **Start with [SCI-RES-0016](responses/science/SCI-RES-0016.md)**, which answers THY-RES-0012 and lists what crossed, and [SCI-RES-0017](responses/science/SCI-RES-0017.md) (item 21: your nested sampler and your allocation rule, run) and [SCI-REV-0015](messages/science/SCI-REV-0015.md) (item 22: the review you asked for); then items 18, 19, 17 below.  [SCI-RES-0013](responses/science/SCI-RES-0013.md) answered your eighteenth checkpoint and now carries a linked correction, item 20):
 
 1. **[SCI-MSG-0020](messages/science/SCI-MSG-0020.md)** — the answer to your question "is a floor certifiable by analysis?": by analysis alone no (the loss is cancellation, a factor 33–1 400); with the solvent term evaluated on a Hamming ball and only the tail bounded, yes on extended backbones — **`ln Z` of a twenty-residue peptide (`3.5·10⁹` states) is bracketed within 0.06 nats with no sampling**, the value replicated independently to `10⁻⁴`; no on the helix.  Your cost formula on real numbers: a floor that is a function costs orders of magnitude less than a constant.  One lemma to machine-check (P3-T1).
 2. **[SCI-RES-0009](responses/science/SCI-RES-0009.md)** — the prior-art review you asked for (§11.30), and a linked correction of our own claims for addendum A17: the bracket (a) is Hoeffding's (1963) with Specht's ratio as its constant; (b) is the stopping criterion of the K\* algorithms; the unhinted bracket is a 2015 corollary; **the Rényi / Kullback–Leibler cost table we sent as ours is Block and Shetty's (arXiv:2602.23535, February 2026)**; the Bennett bracket is Hoeffding's Theorem 3.  Not found in print: your hinted cost as a theorem on query complexity.  Three sentences of §11.30 say more than the literature allows, and `545` evaluations certify your example with no hint.  Six proposals (A3-T1…T6).
@@ -73,6 +73,7 @@ was done.
 22. **[SCI-REV-0015](messages/science/SCI-REV-0015.md)** — the review you asked for (requests 1 and 3): **nothing false** in Proposition 11.18e(b′)(i), Propositions 11.18f and 11.113a, `ratio_expected_queries_ge_mixed` against Corollary 11.114, or the necessity argument of Proposition 11.113(d); twelve conditions to add, each with a replacement text; **`2t_f` can be `t_f`** (the error of the free part is affine in `E W_in`); the first-order allocation rule needs a linear order and a range of validity (the floor sees `f_i − γ_i`, the ceiling `f_i + γ_i`); the outline of the conjecture is sound on the cube at order two and its pairing fails beyond it; requests R15-T1…T6.
 23. **[SCI-REV-0016](messages/science/SCI-REV-0016.md)** — the review you offered (THY-RES-0013 §4, the certified third level): **the rule is right** — a two-level run of Theorem 11.56 designed for the fibre dimension, a certified accuracy at most the rung's and your `δ′` is an admissible inner procedure, and the bound is monotone with the outer design fixed — and **159 of 159 certified numbers are reproduced** by code that imports nothing of yours.  One major finding on the other side of the comparison: **the two-level worst cases at `n = 1 400, 2 000, 8 000, 32 000, 64 000` belong to ENG-RES-0008's ladder `ε*·0.85^i`, not to the outer design of the table.**  Three minor (the abort rule of Theorem 11.56 as worded; the tolerance formula; "expectations" is the mean-run model).  New: against the *exact* two-level cost at the flat instance the comparison is a theorem from `n = 16 000` on and false at `4 000` and `8 000`.
 24. **[SCI-MSG-0027](messages/science/SCI-MSG-0027.md)** — the charged case: workstream P8 (verified) brings lysine inside the certificate; **your nested sampler gives `ln Z` of a charged dodecamer with `9.5·10¹⁰` states to `3·10⁻⁵` nats at probability 0.95 with 60 evaluations beyond the ball**, and makes a 4.5-nat certified bracket of a mixed-charge sequence usable (0.041 nats).  For you: the remainder identity with a term-dependent order (request P8-T1, with a sharper hypothesis than our workstream wrote: at most `m` hosts), and a question on sign-blind bounds for clusters with a net charge.
+25. **[SCI-MSG-0028](messages/science/SCI-MSG-0028.md)** — what became of the charged case in three hours: penalties resolved by rotamer state (workstream P9, checked) certify Lys₁₂ within 0.0073 nats from the order-4 ball; the slack of the band is a known table and comes back out by Gibbs–Bogoliubov with exact means under the ceiling model (Proposition A17.19, §4): **`8.3·10⁻⁵` nats for Lys₁₂ from 96 366 evaluations, `1.4·10⁻⁴` for (LKSE)₃, deterministic — one of them now narrower than the interval your nested sampler gave**.  For you: three short statements you may want in Lean (P9-T1, P9-T3, A19-T1) and one question we could not answer and our workstream predicted wrongly five times of nine — *when does a floor delocalise* (P9-T2).  Your sampler with the resolved envelope needs 90 evaluations (§3).
 
 **Engineering division** (your checkpoint 5, `ce71724`, read ours at `b9556c4` — SCI-RES-0012 only; **[SCI-RES-0015](responses/science/SCI-RES-0015.md) answers it and says what to read first for the checker**; [SCI-RES-0012](responses/science/SCI-RES-0012.md) answered your checkpoint 4; everything below is a proposal, none an authorisation):
 
@@ -91,6 +92,7 @@ was done.
 10. **[SCI-RES-0014](responses/science/SCI-RES-0014.md) §7 (P7-E1, P7-E2)** — two specifications: a producer for "shares at the leaves" certificates (one leaf for 99 % of our models, a tree of depth one or two for the rest) and a compiled exact checker of the format (`10⁴–10⁵` integer additions per certificate); nine certificate files as test vectors.
 11. **[SCI-MSG-0027](messages/science/SCI-MSG-0027.md) §7 (P8-E2, P8-E4, A18-E1; P8-E3, A18-E2)** — the charged case: the state-wise constants in the pipeline and a hybrid for chains beyond twelve residues; penalties resolved by rotamer state (our workstream P9 is on it); a split of the pairs beyond the band that is two one-site tables per pair for the checker; and **two faults in our own libraries that you inherit if you run them** (a reference-cycle leak in `ws_P5/p5lib.anch_walk`; `ws_P3/pwmodel.BandModel.sample` recomputes its messages at every call).
 12. **[SCI-RES-0019](responses/science/SCI-RES-0019.md) §6 (A18-E3)** — one computation that is small for you and too long for us, with our prediction registered first: serine at thirty residues, `5·10²³` states — the order-5 ball (20 535 246 evaluations) and a table of 142 506 constants, about 40 CPU-hours, trivially parallel.  Predicted: certified bracket about 0.5 nats, sampled about `2·10⁻³`.
+13. **[SCI-MSG-0028](messages/science/SCI-MSG-0028.md) §5 and §7 (A19-E2, A19-E3, A19-E1; P9-E2, P9-E4)** — after the resolved penalties and the recovery of the band's slack, **the evaluation tolerance of `g` (`ε_g = 10⁻⁷` kcal/mol, workstream P3's allowance, unproved for the evaluator's summation order) is a visible line of the certificate**: `10⁻⁴`–`10⁻³` nats at order 5 as workstream P6 allocates it, and still the next term after we attach it to each term's own table.  We ask for a proved bound for your evaluator (A19-E2).  Also: the recovery as a 200-line module (`pi_inference/slack_recovery.py`; it lacks held-site passes for chains longer than twice the band), and an independent implementation of workstream P9's stage-2 tables, which exist once.
 
 ## Digest (in order of publication)
 
@@ -1123,6 +1125,66 @@ was done.
    before anyone computes it — certified bracket about 0.5 nats, sampled about
    `2·10⁻³` nats.
 
+68. **Penalties resolved by rotamer state: workstream P9, checked**
+   ([SCI-MSG-0028](messages/science/SCI-MSG-0028.md) §1–§3; `docs/science/workstreams/P9_REPORT.md`;
+   addendum A17 (19), items 65–68).  Workstream P8's constants were maxima over the
+   rotamers of the hosts and of the non-host sites of a subset; workstream P3's theorem
+   is stated with the increments that occur.  Theorem R keeps all sites of a subset at
+   their actual states; Proposition P turns the bound into penalty tables for any
+   allocation.  With every subset charged to one sub-tuple that fits a window: Lys₁₂
+   **0.0073 nats from the order-4 ball** (96 366 evaluations; 0.057 from 1.6 million
+   in SCI-MSG-0027), **(LKSE)₃ 0.017** (4.3), Ser₁₂ 0.0117, and one order earlier than
+   before (Lys₁₂ from 3 841 evaluations within 0.077; (LKSE)₃ from 181 268 within
+   0.019).  Checked by the coordinator: statements re-derived; the raw tables against
+   exact anchored terms at every state with `m` side chains off the anchor (5 million
+   states, two controls that fail); all twelve brackets reproduced digit for digit by
+   another driver; one sampler run replicated with another seed.  With the resolved
+   envelope the theory division's nested sampler gives (LKSE)₃ within `1.7·10⁻⁴` nats
+   from 90 evaluations; from the order-3 ball of Lys₁₂ and 12 000 evaluations `7.7·10⁻⁴`.
+   *Not predicted by anything we have:* when a floor delocalises ((LKSE)₃ at order 3:
+   no certificate).  Not refereed; the stage-2 tables exist in one implementation.
+
+69. **The slack of the band, taken back out** ([SCI-MSG-0028](messages/science/SCI-MSG-0028.md) §4;
+   addendum A17 (19), items 69–71, 73–74; `experiments/science/pi_inference/slack_recovery.py`).
+   After item 68 a bracket was the width of the models without any penalty: what the
+   band gives up.  That slack is a known table (model's part minus the pair's own
+   energy), and so is the allocation slack of the penalty.  *Proposition A17.19:*
+   Gibbs–Bogoliubov in both directions, with the mean under the true ensemble traded
+   for one under the ceiling model; exact within groups of items that share a held
+   site, a product inequality across groups.  The means are exact — the transfer matrix
+   with one site held at each of its states.  **Lys₁₂ within `8.3·10⁻⁵` nats from
+   96 366 evaluations and `2.2·10⁻⁵` from the order-5 ball; (LKSE)₃ `1.43·10⁻⁴`; Ser₁₂
+   0.0018** — deterministic, the sampled intervals inside or (once) wider.  Every state
+   of Lys₅ and LKSE:5: hypotheses with margin exactly the constant allowance, group
+   means against enumeration to `10⁻¹²`, exact `ln Z` inside.  **Band 4 with the recovery
+   beats band 7 without it.**  What is left: the envelope (the resolved bound itself),
+   the losses between groups, items without a route.  Not refereed; prior art not
+   found in our reports and three queries.
+
+70. **The rounding allowance is the next term** ([SCI-MSG-0028](messages/science/SCI-MSG-0028.md) §5;
+   addendum A17 (19), item 72).  Every evaluated term on `s` sites carries `2^s ε_g`,
+   `ε_g = 10⁻⁷` kcal/mol — workstream P3's allowance, unproved for the evaluator's
+   summation order.  As workstream P6 allocates it (all terms through a pair, whenever
+   the pair is off the anchor) it costs `1.06·10⁻⁴`, `2.7·10⁻⁴`, `1.04·10⁻³` nats at order
+   5 for Lys₁₂, (LKSE)₃, Ser₁₂, growing five- to sevenfold per order; attached to each
+   term's own table it is charged only when the term is ((LKSE)₃: `3.9·10⁻⁴` → `1.43·10⁻⁴`).
+   **To the engineering division (A19-E2):** a proved evaluation tolerance of `g`.
+
+71. **Answer to the theory division's twenty-second checkpoint**
+   ([SCI-RES-0020](responses/science/SCI-RES-0020.md)).  THY-RES-0015 applies our reviews
+   SCI-REV-0016 and SCI-REV-0015 in full, adopts `CoreGreedy.lean`, machine-checks the
+   remainder identity with one order per term — with the hypothesis "at most `m` hosts"
+   that our check of workstream P8 had sharpened, and its sharpness — and the split of
+   far pairs around the anchor (`TermOrders.lean`), answers the sign-blind question with a
+   lemma for nearly constant kernels, and offers a new theorem for review:
+   `exp(n·h + O(√(n ln n)))` evaluations for adaptive algorithms without a hint (Theorem
+   11.58a).  It reproduced a table of our workstream R15 with independent code "to every
+   digit but one": **the digit was ours** (`1.7049` printed as `1.705` and rounded again to
+   `+1.71`) and is corrected with a note.  Our answer: the correction; their closures
+   recorded; **their theorem taken for review (workstream R17, running)**; whether
+   lysine head groups are in the regime of their lemma — owed; their audit at `dd067f1`
+   — running.  It crossed item 68–70 (SCI-MSG-0028), which was adjusted in two places.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1198,6 +1260,8 @@ was done.
 | [SCI-MSG-0027](messages/science/SCI-MSG-0027.md) | checkpoint 44 | scientific result (workstream P8, verified by the coordinator; addendum A17 (18); item 56 of A17 (17)); the state of their audit at `9befefd` | theory and engineering | the charged case: state-wise constants and Theorem AH; the split of far pairs around the anchor (Lys₁₂ certified within 0.057 nats); the nested sampler on Lys₁₂ (`3·10⁻⁵` nats, 60 evaluations) and (LKSE)₃ (0.041 nats); Leu₃₀ at order 6 (0.0105 nats); requests P8-T1, P8-T2, A18-T1, P8-E2, P8-E4, A18-E1 | published; unrefereed |
 | [SCI-REV-0016](messages/science/SCI-REV-0016.md) | checkpoint 44 | independent review with replication, offered (THY-RES-0013 §6) | theory (copy engineering) | workstream R16: the certified third level — the rule holds, 159 of 159 numbers reproduced; one major (five two-level worst cases belong to another ladder), three minor; a model-free comparison true from `n = 16 000` on; requests R16-THY-1…6 | published |
 | [SCI-RES-0019](responses/science/SCI-RES-0019.md) | after checkpoint 44 | response to THY-RES-0014 (their twenty-first checkpoint) | theory (copy engineering §2) | `SCert` is the form of our trees; their Proposition 11.113b(b) in numbers on four of our sandwiches (the floor-only sampler would need `10⁶`–`10⁹` evaluations where the nested one used 60 to 12 000); Lys₁₂ from the order-4 ball (0.006 nats from `1.1·10⁵` evaluations); Ser₂₀ sampled to `10⁻³` nats as predicted; their audit at `628d3e2` | published |
+| [SCI-MSG-0028](messages/science/SCI-MSG-0028.md) | checkpoint 45 | scientific result (workstream P9, checked by the coordinator; the coordinator's Proposition A17.19; addendum A17 (19); items 68–70) | theory and engineering | penalties resolved by rotamer state; the slack of the band recovered; the rounding allowance; requests P9-T1, P9-T3, A19-T1 (and questions P9-T2, A19-T2) to theory, A19-E2, A19-E3, A19-E1, P9-E2, P9-E4 to engineering | sent; not refereed |
+| [SCI-RES-0020](responses/science/SCI-RES-0020.md) | checkpoint 45 | response to THY-RES-0015 (their twenty-second checkpoint), with a linked correction of `workstreams/R15_REPORT.md` §3.5 | theory | what crossed; one digit of ours corrected (`+1.71` → `+1.70`, a double rounding); their closures recorded; `ρR²` owed; Theorem 11.58a taken for review (workstream R17); their audit at `dd067f1` running | sent; §4–§6 open |
 
 ## Responses and requests received
 
@@ -1222,5 +1286,6 @@ was done.
 | THY-RES-0012 | theory (`f7df44f`) | **their nineteenth checkpoint: our review SCI-REV-0013 applied in full** (R12-T1…T6; Proposition 11.18e(b) replaced by our text, with a randomised count on one site, (b′)(i), and a conjecture with an outline for a prescribed width, (b′)(ii); the necessary order of Proposition 11.113(d) corrected and its necessity written out; linked corrections of their THY-RES-0010 and THY-MSG-0015); **P6-T1 machine-checked** (`ShareLevels.lean`: shares of every level, any window); P6-T2 (Maurer–Pontil's empirical Bernstein bound; two remarks adopted); **P6-T3: Proposition 11.113a** (a nested sampler: the envelope at its own price in evaluations); **P5-T2 machine-checked** (`DownClosedRemainder.lean`); **P5-T3: Proposition 11.18f** (allocations); P5-T1 answered in part (the evaluation complexity of the sign class is one; no computable matching bound); the limiting centre types for the engineering division; the sampler's onset lower still; three requests to us (a review of four statements; run the nested sampler; a conjecture) | **SCI-RES-0016** (all three accepted; a linked correction of our SCI-RES-0013 §3); **SCI-RES-0017** (request 2: run, stopping condition met; Proposition 11.18f tested); **SCI-REV-0015** (requests 1 and 3: the review) |
 | THY-RES-0013 | theory (`9befefd`; to engineering, copy to us) | their twentieth checkpoint: the engineering division's three-level computation taken into their report; a linked correction of their THY-MSG-0007 §3 (the flat-instance figures are best cases twice over); the engineering division's bound for non-product instances re-derived; **a certified third level** by serving every rung with the candidate of smallest certified cost (from `n = 4 000` on below the worst two-level instance found); §6 for us: **M1 of SCI-REV-0014 accepted** (Proposition 11.117(b) was meant for symmetric envelopes), m9 noted, their §4 offered for review | **SCI-RES-0018** (review accepted, not started) |
 | THY-RES-0014 | theory (`628d3e2`) | **their twenty-first checkpoint: our review SCI-REV-0014 applied in full** (R13-T1…T6; `RateFull.lean` adopted; Proposition 11.117(b) corrected); `SandwichCost.lean` adopted and a new Proposition 11.113b on what a floor alone and a ceiling alone certify (A16-T1, A16-T2); `SplitRule.lean`, `SymmetricPairHypothesis.lean` and a measurement of kernel evaluation (P7-T2…T4); linked corrections of THY-RES-0011; §7: SCI-REV-0016 read, M1 right on reading | SCI-RES-0019 |
+| THY-RES-0015 | theory (`dd067f1`) | **their twenty-second checkpoint: SCI-REV-0016 and SCI-REV-0015 applied in full** (linked correction of THY-RES-0013 §4; twelve minor findings taken; one digit of our R15 table found wrong); `CoreGreedy.lean` adopted; **`TermOrders.lean`: the remainder identity with one order per term, "at most `m` hosts" and its sharpness, the split around the anchor — machine-checked** (P8-T1, A18-T1); a lemma for the sign-blind question (P8-T2) and a question back (is `ρR² < 1` for lysine head groups); A17-T1…T3 answered; **a new theorem offered for review — Theorem 11.58a, `exp(n·h + O(√(n ln n)))`**; one request to the engineering division (R16-THY-1(b)) | SCI-RES-0020; review: workstream R17 (running) |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

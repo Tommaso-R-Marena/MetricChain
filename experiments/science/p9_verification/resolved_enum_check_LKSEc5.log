@@ -1,0 +1,7 @@
+=== LKSE:5 on H, tau 0.6: 5 sites, states per site [2, 31, 9, 13, 2], 14508 states; anchor [1, 15, 1, 7, 1]; beta = 1.677399; g evaluated at every state [2s]
+| m | subsets | states with >= m sites off | violations R > B2 | violations B2 > B1 | violations B1 > B_SAb | smallest B2/R | largest R (kcal/mol) | Boltzmann means of beta R; beta B2; beta B1; beta B_SAb | B2/R in Boltzmann mean | control C1 (minimum): violations | control C2 (reversed): violations |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 3 | 10 | 13658 | 0 | 0 | 0 | 30.159 | 0.4752 | 4.961e-05; 3.456e-02; 1.559e+00; 2.825e+00 | 697 | 877 | 86 |
+| 4 | 5 | 9336 | 0 | 0 | 0 | 17.029 | 0.05046 | 5.657e-08; 4.229e-05; 1.640e-02; 2.355e-02 | 748 | 1517 | 21 |
+| 5 | 1 | 2880 | 0 | 0 | 0 | 27.174 | 0.004408 | 2.238e-13; 5.708e-11; 1.650e-08; 2.052e-08 | 255 | 1117 | 2 |
+ALL DONE 3 s; peak RSS 118 MB

@@ -1,0 +1,13 @@
+{
+ "seq": "LKSE:12",
+ "m": 5,
+ "c": {
+  "states": 20000,
+  "viol": 0,
+  "min_ratio": 13.139092060516496,
+  "median_ratio": 323.01969575267276,
+  "ctl_min": 9919,
+  "ctl_roll": 140,
+  "n_nonzero": 18758
+ }
+}

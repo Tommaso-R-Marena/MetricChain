@@ -1,0 +1,6 @@
+=== p9_08_chaincheck K12 on H, order 4, band 7; started 2026-11-26 12:02:48 UTC
+    form S: 5000 uniformly random states (10.5 sites off the anchor on average); penalty of the coordinator's recipe: mean 17.7083 kcal/mol; largest deviation of my chain 7.11e-15 kcal/mol (relative 4.3e-16); my chain below the recipe by more than 1e-9 relative at 0 states
+    form B: 5000 uniformly random states (10.5 sites off the anchor on average); penalty of the coordinator's recipe: mean 15.5559 kcal/mol; largest deviation of my chain 2.23e-10 kcal/mol (relative 2.0e-11); my chain below the recipe by more than 1e-9 relative at 0 states
+    form T: 5000 uniformly random states (10.5 sites off the anchor on average); penalty of the coordinator's recipe: mean 13.8006 kcal/mol; largest deviation of my chain 1.64e-09 kcal/mol (relative 2.5e-10); my chain below the recipe by more than 1e-9 relative at 0 states
+foreign writes attempted during import (refused): 0
+ALL DONE 0 s; peak RSS 82 MB

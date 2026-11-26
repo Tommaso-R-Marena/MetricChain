@@ -1,0 +1,117 @@
+=== p9_03_tables K12 on H, tau 0.7, order 3, window 7; started 2026-11-26 11:17:35 UTC
+    276 atoms, 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; 220 subsets of order 3, 220 in this run; sum over them of the number of states of T: 9.252e+04
+    subset 220/220 done, 17 s (0.08 s per subset), RSS now 290 MB
+    stage 2 > stage 1 at 0 table entries (must be 0)
+--- 220 subsets of order 3.  Gamma_3 in kT:  P8's Sb 408.105, P8's SAb 375.105 | stage 1: joint maximum 372.743, median over the states 138.286, minimum 97.1993 | stage 2: joint maximum 272.109, median 9.75835, minimum 0.352865
+    stage 1: joint maximum / SAb per subset: min 0.938, median 0.999, max 1.0000; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 0.183 kT; window form: 180 tables, sub-tuples kept by size: 1: 4, 2: 76, 3: 140
+    stage 2: joint maximum / SAb per subset: min 0.391, median 0.673, max 0.9403; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 0.03478 kT; window form: 175 tables, sub-tuples kept by size: 1: 7, 2: 73, 3: 140
+    Gibbs sample 777 (960 states): mean of beta x envelope: stage 1 0.1418, stage 2 0.02633; largest: 5.423, 1.352; states with a non-zero envelope: 83
+    Gibbs sample 4242 (960 states): mean of beta x envelope: stage 1 0.1669, stage 2 0.03174; largest: 10.89, 3.161; states with a non-zero envelope: 91
+    stage-2 tables Theta_T of 220 subsets stored in cache/theta2_K12_H_0.70_m3.npz
+foreign writes attempted during import (refused): 0
+ALL DONE 29 s; peak RSS 277 MB
+=== p9_04_gain K12 on H, tau 0.7: order m = 3, band / window 7; started 2026-11-26 11:18:04 UTC
+    12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; 220 subsets; Gamma_3 (kT): SAb 375.1, joint maxima stage 1 372.74, stage 2 272.11; pooled Gibbs sample: 1920 states, off-anchor frequencies 0.40 0.23 0.23 0.03 0.02 0.02 0.02 0.03 0.04 0.05 0.07 0.06
+(A) SITE FORM, site by site.  gamma^SAb in kT; ratios to it.
+| site | states | off-anchor visits in the pooled sample | beta gamma_i^SAb | stage 1: max_b, typical, min_b | stage 2: max_b, typical, min_b |
+|---|---|---|---|---|---|
+| 0 | 14 | 776 | 26.76 | 0.880, 0.624, 0.6193 | 0.434, 0.348, 0.0982 |
+| 1 | 14 | 447 | 37.42 | 0.887, 0.698, 0.6941 | 0.444, 0.370, 0.0893 |
+| 2 | 12 | 433 | 33.56 | 0.925, 0.781, 0.7764 | 0.533, 0.429, 0.1014 |
+| 3 | 7 | 56 | 31.76 | 0.868, 0.708, 0.6513 | 0.513, 0.214, 0.1421 |
+| 4 | 7 | 43 | 45.74 | 0.807, 0.700, 0.6886 | 0.431, 0.225, 0.1774 |
+| 5 | 7 | 39 | 40.54 | 0.809, 0.686, 0.6748 | 0.446, 0.172, 0.1430 |
+| 6 | 7 | 35 | 35.42 | 0.805, 0.669, 0.6593 | 0.471, 0.155, 0.1383 |
+| 7 | 7 | 49 | 38.58 | 0.809, 0.684, 0.6680 | 0.456, 0.158, 0.1279 |
+| 8 | 7 | 77 | 29.37 | 0.906, 0.712, 0.7035 | 0.456, 0.108, 0.0915 |
+| 9 | 7 | 97 | 21.65 | 0.908, 0.788, 0.7819 | 0.472, 0.091, 0.0693 |
+| 10 | 7 | 129 | 19.69 | 0.906, 0.784, 0.7801 | 0.485, 0.079, 0.0647 |
+| 11 | 7 | 124 | 14.61 | 0.930, 0.804, 0.8026 | 0.525, 0.072, 0.0680 |
+    by rotamer (non-anchor states in the order of the domain): frequency in the pooled sample / stage-1 ratio / stage-2 ratio
+      site 0: 0.000/0.64/0.366  0.002/0.63/0.342  0.010/0.62/0.357  0.358/0.62/0.359  0.006/0.62/0.362  0.002/0.63/0.337  0.000/0.66/0.330  0.001/0.66/0.118  0.008/0.63/0.098  0.003/0.83/0.389  0.013/0.71/0.207  0.003/0.64/0.139  0.000/0.88/0.434
+      site 1: 0.000/0.72/0.432  0.000/0.70/0.380  0.003/0.72/0.444  0.207/0.69/0.390  0.000/0.72/0.444  0.003/0.70/0.364  0.000/0.74/0.379  0.000/0.74/0.138  0.005/0.70/0.089  0.001/0.84/0.296  0.009/0.76/0.170  0.004/0.71/0.112  0.000/0.89/0.337
+      site 2: 0.003/0.81/0.515  0.202/0.78/0.452  0.001/0.81/0.533  0.002/0.78/0.421  0.000/0.83/0.439  0.000/0.83/0.157  0.005/0.78/0.101  0.003/0.92/0.309  0.009/0.84/0.183  0.003/0.78/0.120  0.000/0.86/0.252
+      site 3: 0.000/0.71/0.206  0.006/0.65/0.142  0.002/0.83/0.373  0.019/0.72/0.217  0.002/0.69/0.241  0.000/0.87/0.513
+      site 4: 0.000/0.79/0.353  0.006/0.70/0.285  0.002/0.76/0.281  0.012/0.69/0.177  0.002/0.69/0.258  0.000/0.81/0.431
+      site 5: 0.000/0.81/0.383  0.002/0.71/0.310  0.002/0.74/0.225  0.016/0.67/0.143  0.001/0.69/0.267  0.000/0.81/0.446
+      site 6: 0.000/0.79/0.375  0.001/0.68/0.254  0.002/0.73/0.227  0.015/0.66/0.138  0.000/0.67/0.263  0.000/0.80/0.471
+      site 7: 0.000/0.80/0.373  0.001/0.70/0.290  0.005/0.73/0.204  0.018/0.67/0.128  0.001/0.70/0.325  0.000/0.81/0.456
+      site 8: 0.000/0.91/0.456  0.001/0.79/0.358  0.019/0.70/0.092  0.019/0.71/0.102  0.001/0.78/0.383  0.000/0.81/0.415
+      site 9: 0.000/0.88/0.356  0.001/0.88/0.399  0.016/0.78/0.077  0.032/0.78/0.069  0.002/0.88/0.463  0.000/0.91/0.472
+      site 10: 0.000/0.88/0.356  0.002/0.88/0.413  0.027/0.78/0.071  0.039/0.78/0.065  0.001/0.88/0.485  0.000/0.91/0.469
+      site 11: 0.000/0.92/0.431  0.001/0.93/0.514  0.030/0.80/0.068  0.034/0.80/0.068  0.000/0.91/0.525  0.000/0.88/0.363
+(B) every share form and source on the two Gibbs samples: 2 beta <pen> [ln<e^(beta pen)> - ln<e^(-beta pen)>; largest beta pen].  Sample 777 first, then 4242.
+| form | P8's constants SAb | joint maxima of stage 1 (constants) | joint maxima of stage 2 (constants) | resolved, stage 1 | resolved, stage 2 | stage 2 / SAb (first order, sample 777; 4242) |
+|---|---|---|---|---|---|---|
+| S | 70.2 [141; 147] / 74 [183; 189] | 69.7 [140; 146] / 73.5 [182; 187] | 48.8 [97.9; 103] / 51.5 [131; 137] | 49.1 [96.7; 102] / 52.1 [128; 133] | 22.1 [39.2; 44.2] / 23.7 [46.4; 51.9] | 0.315; 0.32 |
+| B | 8.6 [47.6; 53.6] / 9.18 [64.5; 70.5] | 8.51 [47.2; 53.2] / 9.09 [64; 70] | 5.62 [30.4; 36.6] / 6 [44.6; 50.8] | 4.79 [21.6; 27.7] / 5.15 [32.3; 38.4] | 1.7 [4.31; 8.46] / 1.82 [8.3; 14.7] | 0.197; 0.198 |
+| T | 2.72 [15.9; 20.9] / 2.94 [27.9; 34.1] | 2.69 [15.6; 20.7] / 2.9 [27.5; 33.6] | 1.68 [9.14; 14.6] / 1.82 [16.1; 22.3] | 1.92 [4.19; 8.26] / 2.02 [8.18; 13.9] | 0.775 [0.847; 2.82] / 0.815 [0.952; 4.69] | 0.285; 0.277 |
+| W | 0.75 [12.3; 18.4] / 0.907 [23.3; 30] | 0.741 [12.1; 18.2] / 0.897 [22.9; 29.7] | 0.483 [7.01; 13.2] / 0.59 [13.8; 20] | 0.382 [1.54; 5.69] / 0.436 [5.14; 11.2] | 0.0621 [0.0722; 1.35] / 0.0734 [0.104; 3.16] | 0.0827; 0.0809 |
+(C) envelopes sum over T inside S(x): 2 beta <env> [exponential estimate; largest], sample 777 / 4242
+    SAb: 0.624 [12.1; 18.1] / 0.775 [22.9; 29.8]
+    cJ1: 0.616 [11.9; 17.9] / 0.766 [22.6; 29.4]
+    cJ2: 0.406 [6.88; 13] / 0.509 [13; 19.8]
+    s1: 0.284 [1.28; 5.42] / 0.334 [4.6; 10.9]
+    s2: 0.0527 [0.0628; 1.35] / 0.0635 [0.0944; 3.16]
+foreign writes attempted during import (refused): 0
+ALL DONE 0 s; peak RSS 65 MB
+=== p9_03_tables LKSE:12 on H, tau 0.6, order 3, window 7; started 2026-11-26 11:18:05 UTC
+    213 atoms, 12 sites, states per site [2, 29, 9, 12, 2, 14, 9, 12, 2, 16, 9, 13], anchor [1, 14, 1, 6, 1, 6, 2, 6, 1, 7, 2, 7]; 220 subsets of order 3, 220 in this run; sum over them of the number of states of T: 1.752e+05
+    subset 220/220 done, 17 s (0.08 s per subset), RSS now 236 MB
+    stage 2 > stage 1 at 0 table entries (must be 0)
+--- 220 subsets of order 3.  Gamma_3 in kT:  P8's Sb 1778.1, P8's SAb 1660.05 | stage 1: joint maximum 1649.92, median over the states 1141.99, minimum 1022.01 | stage 2: joint maximum 1234.83, median 265.994, minimum 86.5441
+    stage 1: joint maximum / SAb per subset: min 0.949, median 0.999, max 1.0000; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 8.285 kT; window form: 186 tables, sub-tuples kept by size: 2: 80, 3: 140
+    stage 2: joint maximum / SAb per subset: min 0.346, median 0.704, max 1.0000; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 0.1752 kT; window form: 180 tables, sub-tuples kept by size: 1: 1, 2: 79, 3: 140
+    Gibbs sample 777 (960 states): mean of beta x envelope: stage 1 7.608, stage 2 0.1324; largest: 173, 5.611; states with a non-zero envelope: 555
+    Gibbs sample 4242 (960 states): mean of beta x envelope: stage 1 8.55, stage 2 0.1478; largest: 180.8, 5.643; states with a non-zero envelope: 576
+    stage-2 tables Theta_T of 220 subsets stored in cache/theta2_LKSEc12_H_0.60_m3.npz
+foreign writes attempted during import (refused): 0
+ALL DONE 19 s; peak RSS 225 MB
+=== p9_04_gain LKSE:12 on H, tau 0.6: order m = 3, band / window 7; started 2026-11-26 11:18:25 UTC
+    12 sites, states per site [2, 29, 9, 12, 2, 14, 9, 12, 2, 16, 9, 13], anchor [1, 14, 1, 6, 1, 6, 2, 6, 1, 7, 2, 7]; 220 subsets; Gamma_3 (kT): SAb 1660, joint maxima stage 1 1649.9, stage 2 1234.8; pooled Gibbs sample: 1920 states, off-anchor frequencies 0.12 0.35 0.57 0.34 0.00 0.04 0.26 0.33 0.00 0.06 0.35 0.44
+(A) SITE FORM, site by site.  gamma^SAb in kT; ratios to it.
+| site | states | off-anchor visits in the pooled sample | beta gamma_i^SAb | stage 1: max_b, typical, min_b | stage 2: max_b, typical, min_b |
+|---|---|---|---|---|---|
+| 0 | 2 | 234 | 84.33 | 0.995, 0.995, 0.9947 | 0.832, 0.832, 0.8320 |
+| 1 | 29 | 665 | 140.7 | 0.943, 0.832, 0.8302 | 0.460, 0.241, 0.0606 |
+| 2 | 9 | 1102 | 90.88 | 0.873, 0.763, 0.7195 | 0.544, 0.242, 0.2053 |
+| 3 | 12 | 661 | 151.5 | 0.962, 0.883, 0.8552 | 0.633, 0.216, 0.1806 |
+| 4 | 2 | 0 | 209.2 | 0.996, nan, 0.9956 | 0.832, nan, 0.8318 |
+| 5 | 14 | 69 | 186.6 | 0.940, 0.848, 0.8472 | 0.560, 0.080, 0.0686 |
+| 6 | 9 | 508 | 150.2 | 0.951, 0.708, 0.7018 | 0.617, 0.312, 0.2709 |
+| 7 | 12 | 642 | 202.5 | 0.916, 0.856, 0.8503 | 0.662, 0.161, 0.1414 |
+| 8 | 2 | 0 | 165.3 | 0.996, nan, 0.9959 | 0.831, nan, 0.8307 |
+| 9 | 16 | 116 | 99.75 | 0.968, 0.918, 0.9111 | 0.569, 0.064, 0.0458 |
+| 10 | 9 | 669 | 89.16 | 0.943, 0.651, 0.6459 | 0.615, 0.288, 0.2600 |
+| 11 | 13 | 838 | 89.92 | 0.980, 0.810, 0.7995 | 0.710, 0.081, 0.0765 |
+    by rotamer (non-anchor states in the order of the domain): frequency in the pooled sample / stage-1 ratio / stage-2 ratio
+      site 0: 0.122/0.99/0.832
+      site 1: 0.000/0.86/0.340  0.000/0.87/0.388  0.000/0.87/0.415  0.000/0.86/0.371  0.000/0.85/0.350  0.000/0.85/0.291  0.001/0.83/0.253  0.008/0.84/0.261  0.306/0.83/0.253  0.005/0.84/0.269  0.003/0.83/0.243  0.000/0.85/0.252  0.000/0.85/0.080  0.007/0.84/0.061  0.012/0.86/0.082  0.004/0.84/0.075  0.000/0.91/0.205  0.000/0.89/0.350  0.000/0.94/0.460  0.000/0.87/0.365  0.000/0.86/0.308  0.000/0.91/0.380  0.000/0.84/0.302  0.000/0.85/0.374  0.000/0.84/0.325  0.000/0.86/0.414  0.000/0.84/0.311  0.000/0.85/0.351
+      site 2: 0.378/0.78/0.240  0.003/0.87/0.390  0.033/0.75/0.334  0.105/0.72/0.205  0.055/0.74/0.263  0.000/0.87/0.544  0.000/0.77/0.268  0.000/0.86/0.499
+      site 3: 0.000/0.87/0.600  0.000/0.88/0.574  0.000/0.88/0.599  0.000/0.86/0.633  0.000/0.86/0.610  0.000/0.86/0.615  0.097/0.87/0.181  0.198/0.87/0.186  0.000/0.96/0.437  0.000/0.93/0.374  0.049/0.95/0.405
+      site 4: 0.000/1.00/0.832
+      site 5: 0.000/0.89/0.532  0.000/0.89/0.560  0.000/0.86/0.433  0.000/0.86/0.443  0.000/0.85/0.114  0.004/0.85/0.097  0.028/0.85/0.069  0.004/0.86/0.145  0.000/0.94/0.295  0.000/0.86/0.262  0.000/0.89/0.308  0.000/0.87/0.328  0.000/0.87/0.295
+      site 6: 0.010/0.73/0.273  0.012/0.72/0.271  0.040/0.72/0.355  0.142/0.70/0.303  0.061/0.71/0.320  0.000/0.93/0.579  0.000/0.85/0.436  0.000/0.95/0.617
+      site 7: 0.000/0.87/0.591  0.000/0.87/0.566  0.000/0.88/0.583  0.000/0.90/0.656  0.000/0.88/0.621  0.000/0.92/0.662  0.089/0.85/0.141  0.193/0.85/0.143  0.000/0.89/0.277  0.000/0.87/0.244  0.053/0.88/0.257
+      site 8: 0.000/1.00/0.831
+      site 9: 0.000/0.96/0.525  0.000/0.95/0.513  0.000/0.96/0.569  0.000/0.96/0.563  0.000/0.94/0.132  0.001/0.94/0.139  0.023/0.92/0.053  0.030/0.91/0.046  0.005/0.95/0.193  0.000/0.97/0.269  0.000/0.91/0.095  0.001/0.91/0.098  0.000/0.92/0.110  0.000/0.93/0.145  0.000/0.94/0.148
+      site 10: 0.017/0.68/0.276  0.017/0.69/0.260  0.028/0.65/0.294  0.187/0.65/0.289  0.099/0.65/0.293  0.000/0.94/0.615  0.000/0.84/0.456  0.000/0.94/0.604
+      site 11: 0.000/0.87/0.572  0.000/0.86/0.549  0.000/0.87/0.555  0.000/0.94/0.667  0.000/0.92/0.625  0.000/0.98/0.710  0.000/0.81/0.088  0.085/0.82/0.087  0.182/0.82/0.081  0.000/0.80/0.078  0.000/0.80/0.082  0.169/0.80/0.077
+(B) every share form and source on the two Gibbs samples: 2 beta <pen> [ln<e^(beta pen)> - ln<e^(-beta pen)>; largest beta pen].  Sample 777 first, then 4242.
+| form | P8's constants SAb | joint maxima of stage 1 (constants) | joint maxima of stage 2 (constants) | resolved, stage 1 | resolved, stage 2 | stage 2 / SAb (first order, sample 777; 4242) |
+|---|---|---|---|---|---|---|
+/home/user/MetricChain/experiments/science/ws_P9/p9_04_gain.py:66: RuntimeWarning: overflow encountered in exp
+  return dict(first=2.0 * float(b.mean()), expo=float(np.log(np.exp(b).mean()) - np.log(np.exp(-b).mean())), largest=float(b.max()))
+| S | 698 [inf; 1.01e+03] / 717 [inf; 1.04e+03] | 694 [inf; 1e+03] / 712 [inf; 1.03e+03] | 502 [inf; 724] / 516 [inf; 756] | 564 [inf; 833] / 580 [inf; 873] | 157 [265; 268] / 165 [254; 257] | 0.225; 0.23 |
+| B | 161 [601; 605] / 174 [604; 608] | 160 [597; 601] / 172 [599; 603] | 113 [417; 421] / 122 [428; 432] | 103 [400; 404] / 112 [428; 432] | 11.5 [53.2; 58.6] / 13 [47.9; 53.1] | 0.0712; 0.0748 |
+| T | 51.6 [361; 365] / 57.2 [365; 369] | 51.1 [358; 363] / 56.6 [362; 367] | 35.6 [245; 250] / 39.8 [235; 239] | 29.9 [192; 196] / 32.9 [200; 204] | 4.24 [9.86; 15.4] / 4.78 [10.6; 16] | 0.0821; 0.0836 |
+| W | 37.5 [349; 355] / 42 [374; 380] | 37.1 [347; 353] / 41.6 [371; 377] | 26 [236; 242] / 29.4 [235; 241] | 17.8 [178; 184] / 19.8 [181; 186] | 0.386 [0.928; 5.96] / 0.429 [0.84; 6.05] | 0.0103; 0.0102 |
+(C) envelopes sum over T inside S(x): 2 beta <env> [exponential estimate; largest], sample 777 / 4242
+    SAb: 34.1 [335; 341] / 38.5 [341; 347]
+    cJ1: 33.8 [333; 338] / 38.2 [339; 345]
+    cJ2: 23.9 [226; 232] / 27.2 [223; 229]
+    s1: 15.2 [167; 173] / 17.1 [175; 181]
+    s2: 0.265 [0.671; 5.61] / 0.296 [0.593; 5.64]
+foreign writes attempted during import (refused): 0
+ALL DONE 0 s; peak RSS 69 MB
+exit 0
