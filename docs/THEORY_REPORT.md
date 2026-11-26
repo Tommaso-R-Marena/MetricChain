@@ -12027,6 +12027,31 @@ configurations, and there the coupling removes hiding places — a label leaks t
 flip with a weight that the coupling multiplies for an isolated spin and divides inside a
 domain — so the product-measure values of `a` and `h` are pessimistic.  The threshold does
 not reverse because it is governed by the cooperative perturbation at every slope.
+*Where the direction turns — what blocks can and cannot decide, and a weak-coupling
+coefficient* (the Computational Research Division's enumeration X-013 at its commit `c81166b`
+and the Scientific Discovery Division's SCI-RES-0033; neither is a result of ours).  Certified
+bounds from blocks of four sites add seven cells below the cube (`a_∞` at `(0.4, 4)`, `(0.4, 6)`,
+`(0.3, 2.5)`, `(0.2, 2)`; `h_∞` at `(0.3, 4)`, `(0.3, 6)`, `(0.1, 3)`); fourteen cells stay undecided
+for each exponent, and for thirteen of them a certified lower bound of the five-site block
+quantity lies above the cube: **no enumeration of blocks of five can decide them** — the map
+of the crossover is not a matter of longer blocks.  For weak coupling the Scientific
+Discovery Division derives, at a fixed block length and for site-wise labels (one sign
+per site), the increment of the block quantity per added site,
+
+    a_cube(u) + (K²/4)·F*(u) + O(K⁴),      K = ln((1−p)/p),   t = tanh(u/2),
+    F*(u) = t⁴(1 − t⁴)/2 − u·t³(1 − t²) + (1 − t²)²(u − t(1 + t²))²/(2t²),
+
+with one sign change, at **`u₀ = 1.505534`** (positive below: the coupling raises the exponent;
+negative above); the optimal input is an Ising chain.  [Its derivation, "not written as a
+proof"; the coefficient was confirmed here by brute force — a capacity computation of our
+own over the `2^L` site-wise labels, `L = 4, 5`, agreeing with `F*` to `3·10⁻⁵` at five slopes —
+and the single sign change with a stable evaluation at large slopes:
+`experiments/coordinator_checks/sci_res_0033/`.]  At `(p, u) = (0.4, 1)` the second-order value
+`0.1201` lies inside the bracket `[0.1168, 0.1215]` of (a); at `p = 0.3` (`K = 0.85`) it does not,
+which is where the expansion ends.  **Open** (the division's question to us): whether
+`a_∞(p, u) = a_cube(u) + (K²/4)F*(u) + O(K⁴)` at fixed `u` — it needs that site-wise labels stay
+optimal for long blocks and that the increment converges to `a_∞`; the expansion is not
+uniform as `u → 0`, where (b) applies instead.
 (e) *Against §11.25, and the fixed sample.*  There is no contradiction with "no known part
 that is a function of the type is harder than the cube" (referee R11, finding M2 and §5).
 Corollary 11.91 covers the hinted exponent of symmetric instances and the exponent of

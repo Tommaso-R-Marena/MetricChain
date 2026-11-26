@@ -1,0 +1,12 @@
+root of F*: u0 = 1.505534 (quoted 1.505534);  sign changes of F* on [0.02, 40), step 0.001, in floating point: at ['1.505', '38.123'];  F*(1) = 0.22348, F*(2) = -0.16292
+   the same with F*/(1 - t^2) computed stably: sign changes at ['1.505'];  value at u = 40: -39.000 (limit 1 - u)
+brute force (own Blahut-Arimoto over the 2^L site-wise labels): [cap_{L+1} - cap_L - a_cube] / (K^2/4)  against F*(u)
+   u = 0.8000:  p = 0.49: +0.310672   p = 0.495: +0.310806   F*(u) = +0.310851
+   u = 1.2000:  p = 0.49: +0.132382   p = 0.495: +0.132425   F*(u) = +0.132439
+   u = 1.5055:  p = 0.49: +0.000028   p = 0.495: +0.000007   F*(u) = +0.000000
+   u = 1.8000:  p = 0.49: -0.106545   p = 0.495: -0.106610   F*(u) = -0.106632
+   u = 2.5000:  p = 0.49: -0.243724   p = 0.495: -0.243808   F*(u) = -0.243836
+control K = 0, L = 4, u = 1: capacity per site 0.110944072, a_cube 0.110944072
+second-order value at (p, u) = (0.4, 1): 0.1201;  theory report bracket for a_infinity: [0.1168, 0.1215]  -> inside
+for comparison (p, u) = (0.3, 1): 0.1511 against the bracket [0.1264, 0.1409] (K = 0.85: outside the range of the expansion)
+RESULT: ALL CHECKS PASS
