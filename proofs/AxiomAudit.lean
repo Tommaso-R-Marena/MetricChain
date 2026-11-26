@@ -62,6 +62,10 @@ import proofs.Frontiers.MonotoneSandwich
 import proofs.Frontiers.ThirdOrderModel
 import proofs.Frontiers.ShareCertificates
 import proofs.Frontiers.HilbertBall
+import proofs.Frontiers.BoxRatio
+import proofs.Frontiers.AnchoredRemainder
+import proofs.Frontiers.KineticsCertificates
+import proofs.Frontiers.BarrierCertificate
 import proofs.AuditCommand
 
 /-!
@@ -530,8 +534,22 @@ import proofs.AuditCommand
 #print axioms MetricChain.BoxClass.dipAlt_mem
 #print axioms MetricChain.BoxClass.logZ_dipAlt_gt
 #print axioms MetricChain.BoxClass.box_expected_queries_ge
+#print axioms MetricChain.BoxClass.bumpAlt_mem
+#print axioms MetricChain.BoxClass.logZ_bumpAlt_gt
+#print axioms MetricChain.BoxClass.box_expected_queries_ge_mixed
+#print axioms MetricChain.BoxClass.detect_ge_of_proportional
+#print axioms MetricChain.BoxClass.box_spotCheck_correct_of_proportional
 #print axioms MetricChain.BoxClass.jensen_bracket
 #print axioms MetricChain.BoxClass.centre_weights
+
+-- A ratio of two macrostate weights in a box class (theory report §11.30, Corollary 11.114)
+#print axioms MetricChain.BoxClass.ratio_core
+#print axioms MetricChain.BoxClass.ratio_detect_ge
+#print axioms MetricChain.BoxClass.ratio_spotCheck_correct
+#print axioms MetricChain.BoxClass.logRatio_dipAlt_gt
+#print axioms MetricChain.BoxClass.logRatio_dipAlt_lt
+#print axioms MetricChain.BoxClass.ratio_expected_queries_ge
+#print axioms MetricChain.BoxClass.ratio_witness
 
 -- The stochastic sandwich for monotone macrostates (theory report §11.28, Theorem 11.106a; the Scientific Discovery
 -- Division's file, adopted)
@@ -1635,6 +1653,51 @@ theorem hintRecursion_witness {g : ℝ} (hg : 0 < g) (hg1 : g < 1) :
       (fun _ _ _ => le_rfl) (fun _ => hanti) ⟨1, hbdd⟩ (fun _ => hnn) hg hg1 hη
 
 end MetricChain.NonVacuity
+
+-- The remainder of the anchored expansion as an identity; site penalties of every order (theory report Theorem 11.18d;
+-- the statement is the Scientific Discovery Division's, SCI-MSG-0020)
+#print axioms MetricChain.anchored_remainder_identity_mixConfig
+#print axioms MetricChain.anchored_remainder_identity
+#print axioms MetricChain.remainderBase_on
+#print axioms MetricChain.anchored_remainder_bound
+#print axioms MetricChain.cover_of_site_shares_order
+#print axioms MetricChain.cover_of_equal_shares
+#print axioms MetricChain.anchored_remainder_site_penalties
+#print axioms MetricChain.anchored_remainder_witness
+
+-- Barrier certificates: the Scientific Discovery Division's file (adopted) and the tree checker (theory report §11.31)
+#print axioms MetricChain.Kinetics.cut_sound
+#print axioms MetricChain.Kinetics.level_cut_sound
+#print axioms MetricChain.Kinetics.robust_cut_sound
+#print axioms MetricChain.Kinetics.robust_path_sound
+#print axioms MetricChain.Kinetics.box_cut_barrier
+#print axioms MetricChain.Kinetics.box_cut_barrier_residual
+#print axioms MetricChain.Kinetics.certified_trap_height
+#print axioms MetricChain.Kinetics.ferro_barrier
+#print axioms MetricChain.Kinetics.ferroResidual_trap
+#print axioms MetricChain.Kinetics.trap_survival
+#print axioms MetricChain.Kinetics.trap_certificate
+#print axioms MetricChain.Kinetics.trap_certificate_weighted
+#print axioms MetricChain.Kinetics.box_trap_certificate
+#print axioms MetricChain.Kinetics.ferroW_trap
+#print axioms MetricChain.Dom.adjacent_iff
+#print axioms MetricChain.CutTree.leaves_partition
+#print axioms MetricChain.cutCheck_sound
+#print axioms MetricChain.cutCheck_boxAdjacent_iff
+#print axioms MetricChain.bcheck_sound
+#print axioms MetricChain.bverify_sound
+#print axioms MetricChain.bverify_sound_rev
+#print axioms MetricChain.bverify_sound_real
+#print axioms MetricChain.bverifyR_sound
+#print axioms MetricChain.bverifyR_trap_height
+#print axioms MetricChain.bverifyRTop_sound
+#print axioms MetricChain.bverifyOn_sound
+#print axioms MetricChain.ferro_barrier_exact
+#print axioms MetricChain.maze_barrier_exact
+#print axioms MetricChain.maze_boxCut_start_le
+#print axioms MetricChain.maze_boxCut_target_le
+#print axioms MetricChain.ferroWellR_trap
+#print axioms MetricChain.scan_barrier_exact
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions
 used by the witnesses above) -/

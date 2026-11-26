@@ -1,0 +1,4 @@
+p=0.3 G=201: E_inf <= 0.232400 (safe; lower iterate value 0.232400, 23 sweeps);  E_F = 0.232400;  excess 2.97e-11   [0 s]
+p=0.3 G=401: E_inf <= 0.232400 (safe; lower iterate value 0.232400, 23 sweeps);  E_F = 0.232400;  excess 2.97e-11   [0 s]
+p=0.3 G=801: E_inf <= 0.232400 (safe; lower iterate value 0.232400, 23 sweeps);  E_F = 0.232400;  excess 2.97e-11   [0 s]
+0.3 s

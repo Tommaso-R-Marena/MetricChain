@@ -1,0 +1,4 @@
+p=0.4 L=12 t=0.459: 846 Arimoto iterations from the uniform law:  G_L = 0.408732440 (report 0.408732091);  Lambda_blk = -0.000417507;  bound = 0.034026 (report 0.034026);  labels with weight > 1e-5: 110
+p=0.3 L=14 t=0.434: 399 Arimoto iterations from the uniform law:  G_L = 0.564820677 (report 0.564818823);  Lambda_blk = -0.003202968;  bound = 0.040116 (report 0.040115);  labels with weight > 1e-5: 132
+p=0.2 L=14 t=0.409: 399 Arimoto iterations from the uniform law:  G_L = 0.638253076 (report 0.638251913);  Lambda_blk = -0.013864424;  bound = 0.044599 (report 0.044599);  labels with weight > 1e-5: 78
+p=0.1 L=14 t=0.38: 399 Arimoto iterations from the uniform law:  G_L = 0.669311241 (report 0.669310392);  Lambda_blk = -0.048020277;  bound = 0.044378 (report 0.044378);  labels with weight > 1e-5: 40

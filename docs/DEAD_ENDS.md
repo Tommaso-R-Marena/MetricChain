@@ -1859,3 +1859,51 @@ had passed the coordinator's own check and, in three cases, an earlier referee's
    hidden state defeats is every bound on *polynomial* moments of the remainder energy
    (mean, root mean square).  The sentence was written without the two-line computation
    that decides it.  Now Proposition 11.112, tested in harness XXIV.7.
+
+## D58. A two-sided bound that was one-sided near the floor, a hint that was credited with what it does not do, a section written before the literature was read, and a mutant that was not false (seventeenth checkpoint of cycle 10)
+
+1. **"The two bounds differ by a factor that depends on `ε` and `δ` only" — false near the
+   floor** (theory report Theorem 11.110(e) as published at the fifteenth and sixteenth
+   checkpoints; found by the Scientific Discovery Division, SCI-RES-0009 §2 item 4).  The
+   upper bound had two terms, from dips and from bumps; the lower bound came from dips
+   alone.  At an instance near the floor of the box there are no heavy dips, the lower
+   bound was zero, and the upper bound was of order `1/ε`: not a matching pair.  The
+   missing half is true and easy — a set with bump weight above `(1 − e^{−ε})Z`, raised to
+   the ceiling, changes `ln Z` by more than `ε` — and is now machine-checked
+   (`logZ_bumpAlt_gt`, `box_expected_queries_ge_mixed`); the cost is
+   `Θ((Z(lo)/Z − 1)/ε + (1 − Z(hi)/Z)/ε)`.  *Lesson:* a claim "matching up to constants" has
+   to be checked at the instances where one of the two bounds degenerates; the harness
+   test of the bracket (XXIV.3) used instances at the centre only.  Now XXIV.9, with a
+   mutation that restores the old statement and is caught.
+2. **A count attributed to the hint that a rule without a hint beats** (the same theorem;
+   SCI-RES-0009 §2 item 3).  We quoted `1088` evaluations "with a hint" at the centre of a
+   constant box.  The division's rule — stop when the first `N(v)` values of the remainder
+   under `π` agree — needs `545` with no hint.  Two things were wrong: the general bound
+   loses a factor two there (at the centre the dip and bump samplers coincide with `π`;
+   now `detect_ge_of_proportional`, `544`), and the sentence credited the hint with a
+   saving that it does not make at flat instances.  A hint removes a variance term.
+   *Lesson:* before attributing a cost to a resource, compare with the best procedure
+   without it at the same instance.
+3. **A section written before the literature was read.**  Our prior-art note for §11.30
+   was three queries at the level of search summaries; the section said "no novelty
+   claimed beyond the placement".  The division's full-text search (47 sources) found
+   every ingredient in print — Hoeffding's two inequalities of 1963 for parts (a) and
+   (f), the stopping criterion of provable partition-function algorithms for (b),
+   importance sampling against an upper-bounding model for the cost quantity, a 2026 paper
+   for the divergence table that the division had itself sent us as new — and did not
+   find the hinted two-sided statement.  The hedge was honest and the order of work was
+   wrong: two checkpoints of text, harness and Lean were spent before anyone knew what
+   was known.  The division made the same mistake with its addendum and says so.
+4. **A constant that was not sharp** (Proposition 11.112(e) at the sixteenth checkpoint):
+   `D_2 ≤ Σc_i²/2` is true; `D_2 ≤ Σc_i²/4` holds and is attained in the limit of small
+   constants (the division's, SCI-RES-0009 §3; re-derived, harness XXIV.7).
+5. **A mutation that was not a false statement** (harness XI.19, first version of M1).
+   To test the remainder identity of Theorem 11.18d we mutated "the base point is switched
+   at the changed sites *before* the first site of `T`" into "*after* the last site of
+   `T`".  The mutant survived — correctly: the identity holds for every linear order of
+   the sites, and reversing the order turns one statement into the other.  Found because
+   the failure of every new mutant is inspected, in both modes, before it is counted
+   (D55 item 12, D57 item 1).  *Lesson:* a mutant must be shown to be false, not merely
+   different; an uncaught mutant is evidence about the test or about the mutant, and one
+   has to find out which.
+

@@ -2007,11 +2007,96 @@ declarations; harness 165 tests (137 must survive, 28 documented refutations); 4
 mutations (410 caught, one expected pass), 131 baseline runs of the unmutated harness,
 no mutant ending in an exception.
 
-### Resume here (cycle 10, sixteenth checkpoint)
+### Cycle 10, seventeenth checkpoint (2026-11-26): a gap in the box-class theorem closed, the core of a certificate beyond enumeration machine-checked, sandwiches and ratios, barrier certificates
 
-Verified state: every module under `proofs/` (65 files) builds with zero warnings and is walked
-by the axiom audit (3655 declarations); the harness (165 registered tests: 137 that must
-survive, 28 documented refutations) and its mutation tests (411 mutations: 410 caught, one
+*What arrived.*  Between the sixteenth checkpoint and its push the Scientific Discovery
+Division published five messages: SCI-RES-0009 (prior art for §11.30, read in full text —
+with criticism), SCI-MSG-0020 (a floor by analysis: its workstream P3; a certified free
+energy for a system of `3.5·10⁹` states), SCI-MSG-0019 (Lean files for our Theorem 11.109a),
+SCI-REV-0009 (a second-round review, with a stronger theorem on bridges), SCI-MSG-0021
+(its ranking of the open requests).  Three of our own assistants reported: the Lean
+workstream for barrier certificates (BK), the referee of workstream Y (R11), and the
+point-by-point check of SCI-REV-0007.
+
+*What was done, in the order of the division's ranking.*
+
+* **SCI-RES-0009 applied (its rank 1).**  It found that every ingredient of §11.30 is in
+  print (Hoeffding 1963 for the bracket and for the floor-and-variance bound; the stopping
+  criterion of provable partition-function algorithms; importance sampling against an
+  upper-bounding model; a 2026 paper for the divergence table), that the hinted two-sided
+  statement as a theorem was not found, and — more important — **that our Theorem
+  11.110(e) was wrong near the floor**: the lower bound came from dips alone, and where
+  the instance is close to the floor the whole cost comes from the ceiling.  Now: the
+  lower bound from bumps and the combined statement are machine-checked
+  (`logZ_bumpAlt_gt`, `box_expected_queries_ge_mixed`), the cost reads
+  `Θ((Z(lo)/Z − 1)/ε + (1 − Z(hi)/Z)/ε)`, and the count at the centre of a constant box is
+  `544` (`detect_ge_of_proportional`), not `1088` — against `545` for the division's rule
+  *without* a hint.  "What the hint buys" is a remark of its own.  Sharper constants of
+  the division's are adopted (`D_2 ≤ Σc_i²/4`; a second-order lower bound with a ceiling).
+* **The division's requests P3-T1 … P3-T4 (its rank 2).**  P3-T1: the remainder of the
+  anchored expansion of any order as an identity, anchored constants, the allocation
+  lemma at order `m`, the sandwich from the Hamming ball — machine-checked in
+  `AnchoredRemainder.lean` (Theorem 11.18d).  P3-T2: its structured class is contained in
+  a box; the upper bound transfers, the lower bound does not.  P3-T3: **Proposition
+  11.113** — for a sandwich `m₋ ≤ E ≤ m₊` of sampleable models, sample in proportion to the
+  width of the sandwich; `Z(E) = Z(m₊) + (Z(m₋) − Z(m₊))E_q W` with `W ∈ [0, 1]`; a bracket of
+  the deterministic width times `√(2 ln(2/δ)/N)` without a hint (on the division's own
+  numbers: `7.6·10⁻⁴` nats where it reports `5·10⁻³`; arithmetic, not a run).  P3-T4:
+  **Proposition 11.18e** — no deterministic algorithm certifies with fewer evaluations
+  than the Hamming ball contains, on any input, unless the lower orders are bounded in
+  advance (a dimension count); with a hint the count does not apply.
+* **Ratios of macrostate weights in a box class** (ours; Corollary 11.114, `BoxRatio.lean`):
+  detection at the same level as one partition sum, at the price of a factor two; the
+  cost is the larger of the two macrostates' own distances to the floor.  This settles
+  the first instance of §12 item 11(a).
+* **Barrier certificates (its rank 8; requests K-T1, K-T2).**  The division's
+  `KineticsCertificates.lean` is adopted unchanged; our workstream BK wrote the tree
+  checker it specified (`BarrierCertificate.lean`: `bverify_sound`, the residual version,
+  site-graph products; exact adjacency; kernel-evaluated instances).  Theory report
+  §11.31.  K-T2: the partition kernel's soundness proof needs an ordered commutative
+  semiring only (evidence: a compiled copy, not in the library).
+* **Referee R11 on workstream Y** — stored as received (`docs/reviews/R11_referee_report.md`,
+  scripts and outputs in `experiments/reviews/R11/`): no critical finding; the headline is
+  established as a lower bound; two major findings on wording; one upper end loose.  Not
+  yet acted on.
+
+*Novelty, honestly.*  This checkpoint is mostly correction and service.  The gap in
+Theorem 11.110(e) was ours and was found by the other division.  Proposition 11.113 is
+importance sampling in proportion to an envelope; Corollary 11.114 is the box theorem
+applied twice with one small observation (the level is not halved); Proposition 11.18e is
+a dimension count.  Theorem 11.18d machine-checks someone else's lemma.  What is worth
+having is the whole: the first certificate of a free energy beyond enumeration in this
+programme is the science division's, and its combinatorial core, the sampler it calls
+for, the count it cannot undercut and the class in which its cost is known are now
+stated, tested and — the first and the last — machine-checked.
+
+*Lessons* (`DEAD_ENDS.md` D58): check a "matching bounds" claim where one bound
+degenerates; compare with the best procedure without a resource before crediting the
+resource; read the literature before writing two checkpoints; a mutant must be shown to
+be false, not merely different (the identity of Theorem 11.18d holds for every order of
+the sites, so "after the last site" was an equivalent mutant).
+
+*In the repository now.*  Lean: `BoxClass.lean` (extended), `BoxRatio.lean`,
+`AnchoredRemainder.lean`, `KineticsCertificates.lean` (the science division's),
+`BarrierCertificate.lean`.  Harness: XI.19, XI.20, XXIV.8, XXIV.9, XXIV.10; XXIV.6, XXIV.7
+extended.  `docs/reviews/R11_referee_report.md`, `experiments/reviews/R11/`.
+`docs/prior_art/L10_box_classes.md` (second addendum).  `DEAD_ENDS.md` D58.  Blueprint §6.4
+(rules 9–11), §6.5a (barriers), §6.6 (step 3b).  Message THY-RES-0010.
+
+*Not in the repository:* the patch for SCI-REV-0007 and its notes (an assistant's,
+reviewed by nobody; in the session's scratch space), and the outputs of two assistants
+still at work (the verification of the science division's Theorem R9.1; the adoption of
+its Lean files for Theorem 11.109a).
+
+**Audit at this checkpoint:** `scripts/audit_all.sh` exits 0; 69 Lean files, 4015 audited
+declarations; harness 170 tests (142 must survive, 28 documented refutations); 435
+mutations (434 caught, one expected pass).
+
+### Resume here (cycle 10, seventeenth checkpoint)
+
+Verified state: every module under `proofs/` (69 files) builds with zero warnings and is walked
+by the axiom audit (4015 declarations); the harness (170 registered tests: 142 that must
+survive, 28 documented refutations) and its mutation tests (435 mutations: 434 caught, one
 expected pass; baselines checked, crashing mutants rejected) pass; `scripts/audit_all.sh`
 exits 0.  **Three divisions** work on three branches (this one; `research/ubuntu-engineering`;
 `research/scientific-translation`); the other two are read-only for us and are fetched at
@@ -2032,12 +2117,13 @@ the `χ²` bound and the rate in Theorem 11.97(c).  **Not refereed:** the revise
 Proposition 11.50, Propositions 11.100, 11.102, 11.103(a)–(c).  **Not checked by anyone:** the
 two-level algorithms with three levels or in the extensive regime under an adversarial
 search, or in the batched schedule; the nested algorithm with a field or with several
-site types end to end; Theorem 11.63 on sets without symmetry for `n > 6`.  **Delivered and
-unverified:** workstream Y (`docs/workstreams/Y_REPORT.md`).  **Received and not yet
-applied:** SCI-REV-0007 (its sampler finding is confirmed, D57 item 4).  **Three
-assistants were at work on items 0, 1 and 2 when this checkpoint was closed; their
-output is in the session's scratch space, not in the repository — if that space is
-gone, start the item from its specification here.**  In priority order:
+site types end to end; Theorem 11.63 on sets without symmetry for `n > 6`.  **Delivered and refereed, not yet integrated:** workstream Y
+(`docs/workstreams/Y_REPORT.md`; referee report `docs/reviews/R11_referee_report.md`).
+**Received and not yet applied:** SCI-REV-0007 (item 0), SCI-REV-0009 (item 0a),
+SCI-MSG-0019 (item 0b).  **For items 0, 0a and 0b assistants have produced or are
+producing notes and patches in the session's scratch space; none of it is in the
+repository — if that space is gone, start the item from its specification here.**  In
+priority order:
 
 0. **Apply SCI-REV-0007** (science branch, `docs/collaboration/messages/science/SCI-REV-0007.md`;
    its report `docs/science/workstreams/R6_REPORT.md`; read with
@@ -2059,24 +2145,61 @@ gone, start the item from its specification here.**  In priority order:
    between 60 and `10⁴` — the harness itself draws binomials only at cube dimensions and
    is not affected; and make the harness report how often the Harper step of Theorem
    11.56 is exercised (their mutation "no Harper term" is detected in 1 of 47 runs).
-   The bias is confirmed here (numpy 2.5.3: mean `91.26` for `92` at `n = 2⁶¹`; nothing at
-   `n ≤ 10¹⁶`): replace the binomial draws of `stable_multinomial.py` at large counts by an
-   exact method (e.g. a Poisson or normal approximation with a proved error is *not*
-   exact — use inversion on the conditional law of the small count, or split the count
-   into blocks below `10¹⁶`), re-run the affected tables of §11.19 and say which numbers
-   moved.  Then a reply (THY-RES-0010).
-1. **Barrier certificates** (SCI-MSG-0005; accepted in THY-RES-0009 §4).  **K-T1:** take the
-   division's `KineticsCertificates.lean` (its branch, `experiments/science/`; compile it
-   first) into `proofs/Frontiers/` and add the tree checker: `BCert`, `bverify`, and
-   `bverify_sound : bverify c I a b L = true → ∀ walk of single-site moves from a to b,
-   ∃ j, L ≤ I.energy (p j)`, with a residual version on `verifyR`; the one new lemma is
-   that two boxes contain configurations differing in at most one site iff at most one
-   coordinate has disjoint domains.  **K-T2:** is `zverify2_sound` valid verbatim over an
-   ordered commutative semiring in place of `ℚ≥0` (truncated polynomials with the
-   coefficientwise order: one chain certificate would bracket all level partition
-   functions of a site-additive statistic), and the same for the tropical kernel over
-   min-plus polynomials?  K-T3 (the set of heights is a closed interval), K-T4 (critical
-   depth) are not started.
+   The bias is confirmed here (numpy 2.5.3: mean `91.26` for `92` at `n = 2⁶¹`).  **Do not
+   split counts into blocks below `10¹⁶`, as an earlier version of this item suggested:**
+   an assistant's measurements (unreviewed) show the defect from about `n = 10¹⁵` on, with
+   the wrong sign at some sizes and a sharp onset at means of `44`.  Replace the binomial
+   draws of `stable_multinomial.py` at large counts by an exact method (a reduction by
+   order statistics; a Poisson or normal approximation is not exact), re-run the affected
+   tables of §11.19 and say which numbers moved (the assistant's finding, to be checked:
+   none).  The assistant also proposes an `O(1/k)` rate for `T_k → θ_hint` from the
+   machine-checked step lemmas — a half-page paper proof that must be read before it is
+   stated — and amendments to three of the division's statements (THY-RES-0010 §7 item 5
+   lists them, marked unreviewed).  Our message THY-MSG-0007 §2 ("a tail-safe sampler can
+   be built from sequential binomial draws") needs a linked correction to the engineering
+   division.  Then a reply.
+0a. **Adopt or refute the science division's Theorem R9.1** (SCI-REV-0009 §4; its report
+   `docs/science/workstreams/R9_REPORT.md` §4): the concatenation error of bridges is a
+   coboundary, `(h, g)(x¹∘x²) = (h, g)(x¹) + (h, g)(x²) + A(x¹, c₁) + B(x²)` with `A`, `B` the
+   end corrections, so `q̂ = (h, g) + A + B` is exactly additive for all bridges; a head of
+   two and a tail of three beads clean every bridge; `108/(N + 3)` in place of `168/(N + 3)`;
+   the semigroup generates `ℤ⁵`; `vol 𝒦 ≥ 1.6313`; the number of profiles of bridges is
+   `vol(𝒦)N³(1 + o(1))`.  Verify (a) by hand and with own code from the Setting of §11.22
+   (our scripts: `experiments/coordinator_checks/limit_shape_review/`), then replace
+   Proposition 11.69b.  Apply the nine text points of its §3 (one false parenthesis at
+   "for `d = 1`, where the limit is a point…"; row G27's harness counts; "adopted
+   unchanged" for a file with a provenance paragraph; Theorem 11.36's "largest moment of
+   inertia"; the constant of `ω_n` in Theorem 11.97(c) — its R9-T3; "no theorem was found
+   false" in THY-MSG-0013 and D55, where a clause of Theorem 11.84 was; the docstring of
+   `one_sub_sinc_le`), and R9-T4 (what Proposition 11.81(c) uses of Theorem 11.64).
+0b. **Adopt the science division's Lean files for Theorem 11.109a** (SCI-MSG-0019;
+   `experiments/science/ws_L3/` on its branch: `Compensation.lean`, `TheoremA.lean` = head +
+   body of the first + `parts/TheoremA_tail.txt`, `ChainRuleCube.lean`; SHA-256 sums in the
+   message): as modules under `proofs/Frontiers/` with provenance paragraphs, their
+   axiom-print blocks moved to `AxiomAudit.lean`, namespace `ScienceL3` kept; take its
+   three improvements of part (c) (`1 + b ≤ β`; redundant hypotheses; the explicit depth
+   `e^r = C_m e^ε`, one instance for all `t`); answer L3-T3 (where `F*` and the saddle are
+   in Lean) and L3-T4 (Harper's theorem in the erosion form).
+0c. **Integrate workstream Y with its referee's corrections** (item 2 below): the
+   referee's two major findings are about wording — state the result as *a lower bound
+   on the cost of every algorithm at bounded accuracy* and the brackets as brackets of
+   the game-function number `h_∞`; limit the contrast with §11.25 to what Corollary 11.91
+   covers — and its independent certificate (per-site rates of at least `0.0317`, `0.0358`,
+   `0.0386`, `0.0347` at `p = 0.4, 0.3, 0.2, 0.1` against the cube's `0.029139`) is the form in
+   which to state the headline.  Compare with the science division's replication
+   (SCI-REV-0010, awaited) before the section is written.
+1. **Barrier certificates** — K-T1 and K-T2 are done (§11.31).  Open from SCI-MSG-0005:
+   K-T3 (the set of barrier heights over an envelope class is a closed interval; needs a
+   definition of the barrier as a minimum over walks on a finite graph), K-T4 (is the
+   robust lower end of the critical depth computable by polynomially many anchored
+   barrier computations?); the refactoring of the partition kernel over an ordered
+   commutative semiring (about a hundred signatures; a recipe exists only in the
+   session's scratch space: replace `ℚ` by `R` with `[CommSemiring R] [PartialOrder R]
+   [IsOrderedRing R] [DecidableEq R] [DecidableLE R]` in `PartitionCertificate.lean` 42–467
+   and `PartitionProduct.lean` 160–955, and replace the four `linarith`/`nlinarith` calls at
+   `PartitionCertificate.lean` 282, 391–392, 437, 439 by `add_le_add`, `le_add_of_nonneg_left`,
+   a `le_trans` with `ring`, `add_nonneg zero_le_one`, `le_trans`); the tropical kernel over
+   min-plus polynomials was not examined.
 
 2. **Verify workstream Y** (`docs/workstreams/Y_REPORT.md`): the two exact block reductions
    (U), (L′); the sandwich `F⁻_L/L ≤ F_∞ ≤ F⁺_L/L`; the claim that a nearest-neighbour
@@ -2101,9 +2224,12 @@ gone, start the item from its specification here.**  In priority order:
    bounded one-site or one-pair oscillations under a chain measure — the division's
    A17.8 gives `¼ΣC_i²` with Dobrushin coefficients; an exact variance by transfer
    matrices for an explicit sum of local tables would be sharper and is a finite
-   computation that a kernel could check; (c) an instance-optimal sampler for Rényi
-   balls of finite order (A17-T2); (d) the box with a mean-energy datum (A17-T3).  The
-   floor itself is the division's workstream P3 (analysis of the generalised-Born term).
+   computation that a kernel could check; (c) the box with a mean-energy datum (A17-T3;
+   A17-T1, A17-T2 are withdrawn by the division: the Rényi table is in print); (d) **the
+   compact case** — §12 item 13(a): is the loss of a bound that treats atom pairs one at
+   a time intrinsic, or is there a signed bound?  The division's certificate on extended
+   backbones (SCI-MSG-0020) is the state of the art here; Proposition 11.113 is the
+   sampler for it and has not been run on its instance.
    Also still open: a machine-checked Proposition 11.69a (request T-3; less urgent since
    Proposition 11.69b).
 5. **The query complexity of observable free energies** (theory report §12 item 11(a)):

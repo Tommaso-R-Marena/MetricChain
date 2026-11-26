@@ -1257,6 +1257,60 @@ MUTS["XXIV"] += [
      [('            bound = p * p * K / (8 * (p - 1))', '            bound = p * K / (8 * (p - 1))')], 'XXIV.7'),
 ]
 
+MUTS["XXIV"] += [
+    ('XXIV.6 M5: Hoeffding\'s bound with the weights of the two-point law exchanged',
+     [('        ph = a / (a + b)', '        ph = b / (a + b)')], 'XXIV.6'),
+    ('XXIV.6 M6: the second-order lower bound with the curvature at the ceiling taken on the wrong side',
+     [('        lower2 = math.log1p(s2 * phi2(-a))', '        lower2 = math.log1p(s2 * phi2(a))')], 'XXIV.6'),
+    ('XXIV.7 M7: the sharp bound from one-site oscillations without the divergence term of one site',
+     [('            sharp = sum((p - 1) * c * c / 8 + Lfun(c) for c in cs)', '            sharp = sum((p - 1) * c * c / 8 for c in cs)')], 'XXIV.7'),
+    ('XXIV.8 M1: the detection bound of a ratio claimed at twice the level',
+     [('            bound = 0.5 * min(pM(WA, UA, VA, eta), pM(WB, UB, VB, eta))', '            bound = 0.5 * min(pM(WA, UA, VA, 2 * eta), pM(WB, UB, VB, 2 * eta))')], 'XXIV.8'),
+    ('XXIV.8 M2: the detection bound of a ratio without the factor one half of the mixture',
+     [('            bound = 0.5 * min(pM(WA, UA, VA, eta), pM(WB, UB, VB, eta))', '            bound = 1.0 * min(pM(WA, UA, VA, eta), pM(WB, UB, VB, eta))')], 'XXIV.8'),
+    ('XXIV.8 M3: the rise of the log-ratio bounded by the dips of one macrostate alone',
+     [('        up = math.log1p(float(dipA[D].sum()) / WA) - math.log1p(-float(bumpB[D].sum()) / WB)', '        up = math.log1p(float(dipA[D].sum()) / WA)')], 'XXIV.8'),
+    ('XXIV.8 M4: sets with half the dip weight claimed to change the ratio by more than eps',
+     [('            thr = math.expm1(eps) * W\n            number', '            thr = 0.5 * math.expm1(eps) * W\n            number')], 'XXIV.8'),
+    ('XXIV.8 M5: the cost number of a macrostate computed with the weights of the whole system',
+     [('        numbers.append((float((w * A) @ np.exp(-lo)) / float((w * A) @ np.exp(-r)) - 1,', '        numbers.append((float(w @ np.exp(-lo)) / float(w @ np.exp(-r)) - 1,')], 'XXIV.8'),
+    ('XXIV.9 M1: sets with half the bump weight claimed to change ln Z by more than eps',
+     [('        thr_d, thr_b = math.expm1(eps) * Z, -math.expm1(-eps) * Z', '        thr_d, thr_b = math.expm1(eps) * Z, 0.5 * -math.expm1(-eps) * Z')], 'XXIV.9'),
+    ('XXIV.9 M2: the two-sided statement with the packing number of the dips alone (the first version of the theorem)',
+     [('        k = max(kd, kb)\n        p = min(1.0, 0.5', '        k = kd\n        p = min(1.0, 0.5')], 'XXIV.9'),
+    ('XXIV.9 M3: detection at the centre claimed at twice the bound',
+     [('            bound = min(math.expm1(eta) / U, -math.expm1(-eta) / V)\n            stats["centre_closest"]', '            bound = 2 * min(math.expm1(eta) / U, -math.expm1(-eta) / V)\n            stats["centre_closest"]')], 'XXIV.9'),
+    ('XXIV.9 M4: the rule without a hint sized for dips only',
+     [('        qv = min(math.expm1(eta) / math.expm1(rho_m + v), -math.expm1(-eta)) if rho_m + v > 0 else -math.expm1(-eta)', '        qv = math.expm1(eta) / math.expm1(rho_m + v) if rho_m + v > 0 else -math.expm1(-eta)')], 'XXIV.9'),
+    ('XXIV.10 M1: the sampled variable measured from the lower model',
+     [('            W = np.where(wq > 0, (np.exp(-E) - np.exp(-mhi)) / np.where(wq > 0, wq, 1.0), 0.0)', '            W = np.where(wq > 0, (np.exp(-mlo) - np.exp(-E)) / np.where(wq > 0, wq, 1.0), 0.0)')], 'XXIV.10'),
+    ('XXIV.10 M2: the rejection sampler accepting with the Boltzmann factor of the gap',
+     [('        acc = -np.expm1(-(mhi - mlo))', '        acc = np.exp(-(mhi - mlo))')], 'XXIV.10'),
+    ('XXIV.10 M3: a bracket of a quarter of the Hoeffding width',
+     [('        t = math.sqrt(math.log(2 / delta) / (2 * n))\n        draws', '        t = 0.25 * math.sqrt(math.log(2 / delta) / (2 * n))\n        draws')], 'XXIV.10'),
+    ('XXIV.10 M4: the gain over plain sampling claimed to be the square of E d/max d',
+     [('        if dZ * t > plain * (1 + 1e-12) or abs(dZ * t / plain - ratio) > 1e-9:', '        if dZ * t > plain * (1 + 1e-12) or abs(dZ * t / plain - ratio ** 2) > 1e-9:')], 'XXIV.10'),
+]
+
+MUTS["XI"] += [
+    ('XI.19 M1: the base point of the remainder term switched at the changed sites before the last site of the set',
+     [('                    z = tuple(y[i] if (i in S and i < T[0]) else x0[i] for i in range(n))', '                    z = tuple(y[i] if (i in S and i < T[-1] and i not in T) else x0[i] for i in range(n))')], 'XI.19'),
+    ('XI.19 M2: every remainder term taken at the reference itself',
+     [('                    z = tuple(y[i] if (i in S and i < T[0]) else x0[i] for i in range(n))', '                    z = x0')], 'XI.19'),
+    ('XI.19 M3: site penalties with shares 1/(m + 1)',
+     [('            gamma = [sum(c for T, c in c_anch.items() if i in T) / m for i in range(n)]', '            gamma = [sum(c for T, c in c_anch.items() if i in T) / (m + 1) for i in range(n)]')], 'XI.19'),
+    ('XI.19 M4: anchored constants taken at the reference configuration only',
+     [('                    if any(z[i] != x0[i] for i in T):', '                    if z != x0:')], 'XI.19'),
+    ('XI.20 M1: the dimension count with k states off the reference',
+     [('            n_ball = sum(math.comb(n, j) * (k - 1) ** j for j in range(m))', '            n_ball = sum(math.comb(n, j) * k ** j for j in range(m))')], 'XI.20'),
+    ('XI.20 M2: a hidden direction claimed for the whole ball',
+     [('np.array(ball[:-1])', 'np.array(ball)')], 'XI.20'),
+    ('XI.20 M4: the support of a function of order below m claimed to be a fraction k^-(m-2) at least',
+     [('                if frac < k ** (-(m - 1)) - 1e-12:', '                if frac < k ** (-(m - 2)) - 1e-12:')], 'XI.20'),
+    ('XI.20 M3: the functions of order m counted among those of order below m',
+     [('            for j in range(m):\n                for U in itertools.combinations(range(n), j):\n                    for a in itertools.product(*[[s for s in range(k) if s != x0[i]] for i in U]):', '            for j in range(m + 1):\n                for U in itertools.combinations(range(n), j):\n                    for a in itertools.product(*[[s for s in range(k) if s != x0[i]] for i in U]):')], 'XI.20'),
+]
+
 which = sys.argv[1:] or list(MUTS)
 for key in which:
     for item in MUTS[key]:

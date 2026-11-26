@@ -1,0 +1,14 @@
+p=0.4 t=0.45: closed form (uniform field, Q = pi) 0.039018;  safe relaxed value at q~ = p: G=201: 0.039758  G=401: 0.039388  G=801: 0.039203  G=1601: 0.039111   [1 s]
+p=0.3 t=0.43: closed form (uniform field, Q = pi) 0.048861;  safe relaxed value at q~ = p: G=201: 0.049477  G=401: 0.049169  G=801: 0.049015  G=1601: 0.048938   [3 s]
+p=0.2 t=0.419: closed form (uniform field, Q = pi) 0.053851;  safe relaxed value at q~ = p: G=201: 0.054880  G=401: 0.054217  G=801: 0.053955  G=1601: 0.053903   [7 s]
+p=0.1 t=0.38: closed form (uniform field, Q = pi) 0.043550;  safe relaxed value at q~ = p: G=201: 0.073790  G=401: 0.072197  G=801: 0.071443  G=1601: 0.071130   [17 s]
+
+p=0.2 t=0.419 G=801 q~=0.16: safe bound 0.059908
+p=0.2 t=0.419 G=801 q~=0.17: safe bound 0.057571
+p=0.2 t=0.419 G=801 q~=0.18: safe bound 0.055803
+p=0.2 t=0.419 G=801 q~=0.19: safe bound 0.054537
+p=0.2 t=0.419 G=801 q~=0.195: safe bound 0.054127
+p=0.2 t=0.419 G=801 q~=0.2: safe bound 0.053955
+p=0.2 t=0.419 G=801 q~=0.205: safe bound 0.055022
+p=0.2 t=0.419 G=801 q~=0.21: safe bound 0.056101
+25.2 s

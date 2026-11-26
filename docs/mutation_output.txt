@@ -166,6 +166,22 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.18 M5: the second-order remainder claimed to be at most half the sum of the pair constants
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.19 M1: the base point of the remainder term switched at the changed sites before the last site of the set
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.19 M2: every remainder term taken at the reference itself
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.19 M3: site penalties with shares 1/(m + 1)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.19 M4: anchored constants taken at the reference configuration only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.20 M1: the dimension count with k states off the reference
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.20 M2: a hidden direction claimed for the whole ball
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.20 M4: the support of a function of order below m claimed to be a fraction k^-(m-2) at least
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.20 M3: the functions of order m counted among those of order below m
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.14 M1: normal form built from the known part itself instead of its Pasch-Hausdorff envelope
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.14 M2: client form compared with the transposed centre form
@@ -820,6 +836,38 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXIV.7 M6: the bound from one-site oscillations linear in the order
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M5: Hoeffding's bound with the weights of the two-point law exchanged
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M6: the second-order lower bound with the curvature at the ceiling taken on the wrong side
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M7: the sharp bound from one-site oscillations without the divergence term of one site
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.8 M1: the detection bound of a ratio claimed at twice the level
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.8 M2: the detection bound of a ratio without the factor one half of the mixture
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.8 M3: the rise of the log-ratio bounded by the dips of one macrostate alone
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.8 M4: sets with half the dip weight claimed to change the ratio by more than eps
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.8 M5: the cost number of a macrostate computed with the weights of the whole system
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.9 M1: sets with half the bump weight claimed to change ln Z by more than eps
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.9 M2: the two-sided statement with the packing number of the dips alone (the first version of the theorem)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.9 M3: detection at the centre claimed at twice the bound
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.9 M4: the rule without a hint sized for dips only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.10 M1: the sampled variable measured from the lower model
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.10 M2: the rejection sampler accepting with the Boltzmann factor of the gap
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.10 M3: a bracket of a quarter of the Hoeffding width
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.10 M4: the gain over plain sampling claimed to be the square of E d/max d
+                  exit=1  1 TEST(S) MISBEHAVED
 
-411 mutations: 410 caught, 1 expected pass, 0 not as expected
-131 baseline runs of the unmutated harness (one per selection): 131 behave as expected, 0 misbehave
+435 mutations: 434 caught, 1 expected pass, 0 not as expected
+136 baseline runs of the unmutated harness (one per selection): 136 behave as expected, 0 misbehave

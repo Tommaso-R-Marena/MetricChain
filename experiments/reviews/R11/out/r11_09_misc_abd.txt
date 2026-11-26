@@ -1,0 +1,21 @@
+== (a) slope dependence at p = 0.3 (report: lower/cube 2.271 2.209 2.022 1.736 1.328 0.994 0.925 0.928; upper/cube 2.33 2.33 2.29 2.17 1.88 1.46 1.26 1.16; E_F/cube 2.332 2.327 2.294 2.194 1.935 1.546 1.348 1.243) ==
+u= 0.05: cube h = 7.811076e-05;  lower/cube = 2.271 (t=0.494, c=2.485);  upper/cube = 2.331;  E_F/cube = 2.332;  chi = (1-p)/p = 2.333   [1 s]
+u= 0.10: cube h = 3.122723e-04;  lower/cube = 2.209 (t=0.488, c=2.135);  upper/cube = 2.326;  E_F/cube = 2.327;  chi = (1-p)/p = 2.333   [2 s]
+u= 0.25: cube h = 1.944268e-03;  lower/cube = 2.022 (t=0.472, c=1.663);  upper/cube = 2.289;  E_F/cube = 2.294;  chi = (1-p)/p = 2.333   [4 s]
+u= 0.50: cube h = 7.672866e-03;  lower/cube = 1.736 (t=0.452, c=1.283);  upper/cube = 2.174;  E_F/cube = 2.194;  chi = (1-p)/p = 2.333   [5 s]
+u= 1.00: cube h = 2.913914e-02;  lower/cube = 1.328 (t=0.431, c=0.859);  upper/cube = 1.882;  E_F/cube = 1.935;  chi = (1-p)/p = 2.333   [6 s]
+u= 2.00: cube h = 9.728091e-02;  lower/cube = 0.994 (t=0.423, c=0.373);  upper/cube = 1.461;  E_F/cube = 1.546;  chi = (1-p)/p = 2.333   [7 s]
+u= 3.00: cube h = 1.728309e-01;  lower/cube = 0.925 (t=0.419, c=0.076);  upper/cube = 1.258;  E_F/cube = 1.348;  chi = (1-p)/p = 2.333   [8 s]
+u= 4.00: cube h = 2.392496e-01;  lower/cube = 0.928 (t=0.392, c=0.000);  upper/cube = 1.159;  E_F/cube = 1.243;  chi = (1-p)/p = 2.333   [9 s]
+
+== (b) a >= G_inf(t; c)/(1-t) at t = 0.999 (report: 0.116817 (p=0.4, c=0.42), 0.123875 (0.3, 0.52), 0.122445 (0.2, 0.51), 0.101876 (0.1, 0.42);  cube a = 0.110944) ==
+p=0.4: G_inf(0.999; c)/(0.001) = 0.116817 at c = 0.421;  N=96 vs 160: 3.7e-12
+p=0.3: G_inf(0.999; c)/(0.001) = 0.123875 at c = 0.521;  N=96 vs 160: 1.5e-11
+p=0.2: G_inf(0.999; c)/(0.001) = 0.122445 at c = 0.512;  N=96 vs 160: 2.2e-13
+p=0.1: G_inf(0.999; c)/(0.001) = 0.101876 at c = 0.425;  N=96 vs 160: 1.1e-12
+
+== (d) strong coupling at u = 1: Prop. H lower bound (report: below the cube at p = 0.02: 0.0274) ==
+p=0.05: max_(t,c) G_inf = 0.034299 (t=0.328, c=0.828);  cube 0.029139;  E_F = 0.4503
+p=0.02: max_(t,c) G_inf = 0.027390 (t=0.279, c=0.864);  cube 0.029139;  E_F = 0.4800
+p=0.01: max_(t,c) G_inf = 0.023164 (t=0.243, c=0.915);  cube 0.029139;  E_F = 0.4900
+11.9 s

@@ -1,0 +1,33 @@
+== (1) formula of Proposition H against the brute-force Renyi form ==
+63 cases (n = 6, 8, 10; p = 0.4, 0.3, 0.1; t = 0.3, 0.45, 0.7; several c): max |brute force - formula| = 4.44e-15
+n=8, p=0.3, t=0.431, c=0.86: G_t(M_c) = 0.305572778 (per site 0.038197; cube n F(t) = 0.229814)
+   gamma* in the class: largest |gamma*(x)-gamma*(x^i)| - u = -4.270e-01 (<= 0 admissible)
+   max |ln pi_gamma* - ln( pi E_M0[e^(th sigma.s)]^(1/t) / norm )| = 1.78e-15
+   gamma* depends on the bonds only: max spread within a bond pattern = 5.66e-15;  osc gamma* = 1.3389
+
+== (2) n -> infinity: G_inf(t; c), maximised over (t, c) (report: 0.033503 (0.458, 0.774), 0.038695 (0.431, 0.859), 0.041770 (0.402, 0.861), 0.039608 (0.364, 0.833)) ==
+cube: h = 0.029139 at t* = 0.4900
+p=0.5: h >= 0.029139 at t* = 0.490, c* = 0.000 (N=64 vs 128: 2.9e-15);  ratio to the cube 1.000;  i.i.d. labels (c=0): 0.029139 at t = 0.490
+p=0.4: h >= 0.033503 at t* = 0.458, c* = 0.774 (N=64 vs 128: 3.8e-15);  ratio to the cube 1.150;  i.i.d. labels (c=0): 0.028907 at t = 0.490
+p=0.3: h >= 0.038695 at t* = 0.431, c* = 0.859 (N=64 vs 128: 8.9e-16);  ratio to the cube 1.328;  i.i.d. labels (c=0): 0.028151 at t = 0.489
+p=0.2: h >= 0.041770 at t* = 0.402, c* = 0.861 (N=64 vs 128: 5.0e-15);  ratio to the cube 1.433;  i.i.d. labels (c=0): 0.026626 at t = 0.488
+p=0.1: h >= 0.039608 at t* = 0.364, c* = 0.833 (N=64 vs 128: 3.1e-15);  ratio to the cube 1.359;  i.i.d. labels (c=0): 0.023418 at t = 0.480
+
+== (3a) p -> 1/2 ==
+p=0.45: max_(t,c) G_inf = 0.0308515 at t = 0.4734, c = 0.6290;   cube 0.0291391;  c=0: 0.0290819
+p=0.48: max_(t,c) G_inf = 0.0295439 at t = 0.4844, c = 0.4009;   cube 0.0291391;  c=0: 0.0291300
+p=0.49: max_(t,c) G_inf = 0.0292554 at t = 0.4881, c = 0.2427;   cube 0.0291391;  c=0: 0.0291369
+p=0.499: max_(t,c) G_inf = 0.0291404 at t = 0.4900, c = 0.0270;   cube 0.0291391;  c=0: 0.0291391
+p=0.4999: max_(t,c) G_inf = 0.0291392 at t = 0.4900, c = 0.0027;   cube 0.0291391;  c=0: 0.0291391
+   p = 1/2 exactly, any c:  G_inf(t*, c) for c = 0, 0.3, 0.8: 0.0291391 0.0289785 0.0277761  (c = 0 is the cube; c > 0 must be smaller)
+
+== (3b) finite n against the limit (p = 0.3, t = 0.431, c = 0.859) ==
+n= 6: G_t(M_c) = 0.227882  per site 0.037980   (cube: 0.028727 per site;  limit 0.038695)
+n= 8: G_t(M_c) = 0.305539  per site 0.038192  increment per site 0.038828   (cube: 0.028727 per site;  limit 0.038695)
+n=10: G_t(M_c) = 0.383000  per site 0.038300  increment per site 0.038730   (cube: 0.028727 per site;  limit 0.038695)
+n=12: G_t(M_c) = 0.460408  per site 0.038367  increment per site 0.038704   (cube: 0.028727 per site;  limit 0.038695)
+n=14: G_t(M_c) = 0.537803  per site 0.038414  increment per site 0.038697   (cube: 0.028727 per site;  limit 0.038695)
+n=16: G_t(M_c) = 0.615194  per site 0.038450  increment per site 0.038695   (cube: 0.028727 per site;  limit 0.038695)
+n=18: G_t(M_c) = 0.692583  per site 0.038477  increment per site 0.038695   (cube: 0.028727 per site;  limit 0.038695)
+n=20: G_t(M_c) = 0.769973  per site 0.038499  increment per site 0.038695   (cube: 0.028727 per site;  limit 0.038695)
+6.0 s

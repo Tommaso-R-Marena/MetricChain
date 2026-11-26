@@ -45,3 +45,32 @@ full-text reading (its workstream A3) had not reported when this was written.
 | the variance bound `¼Σc_i²` used in Theorem 11.110(f) | the Efron–Stein inequality with bounded differences | **from memory** |
 
 No novelty is claimed for any row by either division.
+
+## Second addendum (seventeenth checkpoint, 26 November 2026): what the Scientific Discovery Division's full-text search found
+
+**Reading level: the division's, not ours.**  Its workstream A3 read 47 sources in the
+passages that matter; its coordinator re-read twenty passages; the list of what could not
+be accessed is in its message SCI-RES-0009 §4 and its report
+`docs/science/workstreams/A3_REPORT.md` on its branch.  We repeated none of it.  Our own
+contribution to this addendum is two search summaries (one query each) confirming that the
+two records named first below exist with the stated titles, authors and identifiers.
+
+| statement in §11.30 | in print, according to the division's reading | what it did not find |
+|---|---|---|
+| Theorem 11.110(a): the bracket with `L(w)` | W. Hoeffding, J. Amer. Statist. Assoc. 58 (1963) 13–30, Lemma 1 and (4.12)–(4.15): the bound with the mean known, of which ours is the maximum over the mean; `e^{L(w)}` is Specht's ratio (Specht 1960, through a secondary source); the same quantity as the "maxkl" of bounded-range mechanisms (Dong, Durfee, Rogers, arXiv:1909.13830) | nothing |
+| (b): the range after evaluations, the mass a deterministic certificate needs | the stopping criterion of provable partition-function algorithms in computational protein design: Georgiev, Lilien, Donald, J. Comput. Chem. 29 (2008) 1527–1542, Proposition 3 (a function floor from pairwise lower bounds, no ceiling) — a literature about sequence design, cited here for the certificate scheme on one fixed state only | the ceiling term, the closed form of `q*`, the necessity half |
+| (c)–(e): the hinted cost | the cost quantity: Liu, Fisher, Ihler, *Probabilistic variational bounds for graphical models* (NeurIPS 2015), weights bounded by an upper-bounding model; the rate `max(σ², εμ)·ln(2/δ)/(εμ)²` of Dagum, Karp, Luby, Ross (2000), read through restatements (its proof is reported incomplete in arXiv:0711.2801, whose author's own result implies the statement); the hint: Aaronson, arXiv:quant-ph/0210020, randomised certificate complexity; without a hint: Block and Shetty (below), Theorem 6; a linear dependence on a density-ratio bound: Mathé and Novak, arXiv:math/0611285 | **the instance-wise two-sided statement with a hint in the query model, with its sampler** |
+| "without a hint": the empirical Bernstein bracket | Liu–Fisher–Ihler, Corollary 3.2, attributed there to Maurer and Pontil | nothing |
+| (f): floor and variance | Hoeffding (1963), Theorem 3, inequality (2.8) with the extremal two-point law (2.10); the closed form (2.9) is Bennett's (1962); as a bound on the moment generating function: Fan, Grama, Liu, arXiv:1109.4359, Lemma 3.1; the lower bound with a ceiling: Liao and Berg, arXiv:1707.08644, Theorem 1 | its use as a certified second-order bound in free-energy perturbation (one possibly relevant paper, Decoster 2004, could not be opened) |
+| Proposition 11.112: divergence balls | A. Block, A. Shetty, *Partition function estimation under bounded f-divergence*, arXiv:2602.23535 (26 February 2026; proceedings of COLT 2026): upper and lower bounds without a hint, in the sampling model; earlier for Rényi orders, for all randomised algorithms that use function values: R. Kunsch, E. Novak, D. Rudolf, arXiv:1805.08637, J. Complexity 53 (2019); mean estimation with heavy tails (Bubeck, Cesa-Bianchi, Lugosi, arXiv:1209.1727; Devroye, Lerasle, Lugosi, Oliveira, arXiv:1509.05845) | the reading as a verification cost; the statement that polynomial moments of the remainder do not suffice |
+| (e) of the proposition: divergences from one-site oscillations | Cesar and Rogers, arXiv:2004.07223, Lemma 3.2 (bounded-range pairs); Bun and Steinke, arXiv:1605.02065, Lemma 2.2 (composition); for chains: Chazottes, Collet, Külske, Redig, arXiv:math/0503483; Kontorovich and Ramanan, Ann. Probab. 36 (2008) | the sharp form as stated (a direct corollary) |
+| the asymmetry of the two sides; that an estimated variance certifies nothing | Grosse, Ghahramani, Adams, arXiv:1511.02543; Bahadur and Savage (1956, through a secondary source); Chatterjee and Diaconis, arXiv:1511.01437, Theorem 2.1 | a query-complexity statement of the asymmetry |
+
+*Consequences drawn in the theory report:* the attributions in Theorem 11.110(a), (f) and
+Proposition 11.112; the mean-dependent form of (a); the corrected two-sided statement (e);
+the remark "what the hint buys"; the prior-art paragraph of §11.30, which now says that
+every ingredient is in print and what was not found.  Not searched by anyone: the
+statement for ratios (Corollary 11.114) and the sandwich sampler (Proposition 11.113) —
+the latter is importance sampling in proportion to an envelope and is certainly classical
+in the theory of randomised integration; we cite no source for it.
+

@@ -1,0 +1,32 @@
+== (1) the constraint (*) and the chain rule, brute force on random members ==
+60 random cases (n = 3..7): |theta_+-| - u <= 1.55e-15;  |lam_i| - u* (last site: - u) <= 2.22e-16;  (*) residual 5.55e-16;  chain-rule identity 4.44e-16
+
+== (2) n = 3: exact maximum over all vertices against the safe finite-horizon recursion ==
+p=0.4 t=0.3 q~=0.40: exact max over 38 vertices 0.091715;  safe recursion G=201: 0.093914, G=801: 0.092410;  safe >= exact: True
+p=0.4 t=0.3 q~=0.32: exact max over 38 vertices 0.091278;  safe recursion G=201: 0.093421, G=801: 0.091949;  safe >= exact: True
+p=0.4 t=0.3 q~=0.50: exact max over 38 vertices 0.107200;  safe recursion G=201: 0.109472, G=801: 0.107923;  safe >= exact: True
+p=0.4 t=0.45 q~=0.40: exact max over 38 vertices 0.105947;  safe recursion G=201: 0.109121, G=801: 0.106905;  safe >= exact: True
+p=0.4 t=0.45 q~=0.32: exact max over 38 vertices 0.102160;  safe recursion G=201: 0.105253, G=801: 0.103082;  safe >= exact: True
+p=0.4 t=0.45 q~=0.50: exact max over 38 vertices 0.128050;  safe recursion G=201: 0.131326, G=801: 0.129051;  safe >= exact: True
+p=0.4 t=0.7 q~=0.40: exact max over 38 vertices 0.086403;  safe recursion G=201: 0.091034, G=801: 0.087692;  safe >= exact: True
+p=0.4 t=0.7 q~=0.32: exact max over 38 vertices 0.079289;  safe recursion G=201: 0.086057, G=801: 0.082154;  safe >= exact: True
+p=0.4 t=0.7 q~=0.50: exact max over 38 vertices 0.109913;  safe recursion G=201: 0.114645, G=801: 0.111248;  safe >= exact: True
+p=0.3 t=0.3 q~=0.30: exact max over 38 vertices 0.109368;  safe recursion G=201: 0.112662, G=801: 0.110055;  safe >= exact: True
+p=0.3 t=0.3 q~=0.24: exact max over 38 vertices 0.107822;  safe recursion G=201: 0.110984, G=801: 0.108484;  safe >= exact: True
+p=0.3 t=0.3 q~=0.50: exact max over 38 vertices 0.160681;  safe recursion G=201: 0.164379, G=801: 0.161449;  safe >= exact: True
+p=0.3 t=0.45 q~=0.30: exact max over 38 vertices 0.124835;  safe recursion G=201: 0.129209, G=801: 0.125777;  safe >= exact: True
+p=0.3 t=0.45 q~=0.24: exact max over 38 vertices 0.120268;  safe recursion G=201: 0.124456, G=801: 0.121177;  safe >= exact: True
+p=0.3 t=0.45 q~=0.50: exact max over 38 vertices 0.193119;  safe recursion G=201: 0.198066, G=801: 0.194172;  safe >= exact: True
+p=0.3 t=0.7 q~=0.30: exact max over 38 vertices 0.099547;  safe recursion G=201: 0.105051, G=801: 0.100813;  safe >= exact: True
+p=0.3 t=0.7 q~=0.24: exact max over 38 vertices 0.092555;  safe recursion G=201: 0.097875, G=801: 0.093789;  safe >= exact: True
+p=0.3 t=0.7 q~=0.50: exact max over 38 vertices 0.166076;  safe recursion G=201: 0.172131, G=801: 0.167441;  safe >= exact: True
+p=0.1 t=0.3 q~=0.10: exact max over 38 vertices 0.143298;  safe recursion G=201: 0.149885, G=801: 0.144356;  safe >= exact: True
+p=0.1 t=0.3 q~=0.08: exact max over 38 vertices 0.142106;  safe recursion G=201: 0.148523, G=801: 0.143132;  safe >= exact: True
+p=0.1 t=0.3 q~=0.50: exact max over 38 vertices 0.375324;  safe recursion G=201: 0.384620, G=801: 0.377031;  safe >= exact: True
+p=0.1 t=0.45 q~=0.10: exact max over 38 vertices 0.158697;  safe recursion G=201: 0.166141, G=801: 0.159961;  safe >= exact: True
+p=0.1 t=0.45 q~=0.08: exact max over 38 vertices 0.156237;  safe recursion G=201: 0.163451, G=801: 0.157459;  safe >= exact: True
+p=0.1 t=0.45 q~=0.50: exact max over 38 vertices 0.433842;  safe recursion G=201: 0.444676, G=801: 0.435839;  safe >= exact: True
+p=0.1 t=0.7 q~=0.10: exact max over 38 vertices 0.119874;  safe recursion G=201: 0.126631, G=801: 0.121189;  safe >= exact: True
+p=0.1 t=0.7 q~=0.08: exact max over 38 vertices 0.116734;  safe recursion G=201: 0.123289, G=801: 0.118013;  safe >= exact: True
+p=0.1 t=0.7 q~=0.50: exact max over 38 vertices 0.343088;  safe recursion G=201: 0.352311, G=801: 0.344888;  safe >= exact: True
+4.3 s

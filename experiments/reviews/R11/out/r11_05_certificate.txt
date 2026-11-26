@@ -1,0 +1,8 @@
+== Part A: per-site rate G_t^(L)(M_L)/(L+m) of the reduced-end block family (exact for every k) ==
+cube: h = 0.029139 (exact exponent of the uniform cube at bounded accuracy, u = 1)
+p=0.4 m=0 (end slope u-kappa_m = 0.595) t=0.46: L=4: 0.024191  L=6: 0.027386  L=8: 0.029143  L=10: 0.030182  L=12: 0.030876  L=14: 0.031353  L=16: 0.031680
+      best L=16 (<= 2 walls), t refined to 0.454: rate = 0.031684 (dual over the label set 0.031684);  ratio to the cube 1.087;  labels with weight > 1e-5: 78   [327 s]
+p=0.3 m=0 (end slope u-kappa_m = 0.153) t=0.43: L=4: 0.020674  L=6: 0.028078  L=8: 0.030868  L=10: 0.032922  L=12: 0.034184  L=14: 0.035122  L=16: 0.035811
+      best L=16 (<= 2 walls), t refined to 0.433: rate = 0.035812 (dual over the label set 0.035812);  ratio to the cube 1.229;  labels with weight > 1e-5: 44   [418 s]
+p=0.2 m=1 (end slope u-kappa_m = 0.246) t=0.41: L=4: 0.020748  L=6: 0.029578  L=8: 0.032213  L=10: 0.034814  L=12: 0.036501  L=14: 0.037681  L=16: 0.038631
+      best L=16 (<= 2 walls), t refined to 0.409: rate = 0.038631 (dual over the label set 0.038631);  ratio to the cube 1.326;  labels with weight > 1e-5: 34   [485 s]

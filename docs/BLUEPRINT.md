@@ -464,9 +464,11 @@ lower side (Gibbs–Bogoliubov, a mean):
 both sides, given a proposed remainder r (a hint; e.g. a surrogate that is then spot-checked):
     sampler  q = ½·dip/U + ½·bump/V,   dip = π(e^{−lo} − e^{−r}),  bump = π(e^{−r} − e^{−hi})
     N = ⌈ ln(1/δ)/p(ε/2) ⌉,   p(η) = min{1, ½ min((e^η − 1)Z/(Z(lo) − Z), (1 − e^{−η})Z/(Z − Z(hi)))}   verified
-    N ≤ ⌈ 2 ln(1/δ) · max((Z(lo)/Z(r) − 1)/(e^{ε/2} − 1), 1/(1 − e^{−ε/2})) ⌉
+    N = ⌈ ln(1/δ) · max(1, 2(Z(lo)/Z(r) − 1)/(e^{ε/2} − 1), 2(1 − Z(hi)/Z(r))/(1 − e^{−ε/2})) ⌉
+    where dip and bump are proportional (the centre of a constant box): sampler π, and both factors 2 disappear        verified
 no algorithm of any kind does better than
-    (1 − 2δ) ⌊ (Z(lo)/Z(r) − 1) / (2(e^ε − 1)) ⌋   evaluations                                          verified
+    (1 − 2δ) · max( ⌊(Z(lo)/Z(r) − 1)/(2(e^ε − 1))⌋ , ⌊(1 − Z(hi)/Z(r))/(2(1 − e^{−ε}))⌋ )   evaluations        verified
+        (floor and ceiling: near the floor of the box the second term is the whole bound)
 ```
 
 Rules that follow.  (1) What you pay for is the **floor** — how far below the known function
@@ -509,6 +511,35 @@ the model* (Proposition 11.112: an a-priori bound `κ` on the Rényi divergence 
 costs about `e^{κ}/ε^{p/(p−1)}` evaluations with a hint); the root-mean-square error under the
 model, which is what a fit reports, bounds none of them, and on the division's instances it
 fell while the price rose by thirteen orders of magnitude.
+(9) **A hint is not always needed.**  If the first values of the remainder under `π` all agree
+— a flat instance, e.g. a surrogate that is exact — stop after
+`N(v) = ⌈ln(1/δ)/q(v)⌉ + 1` equal values `v`, `q(v) = min{(e^η − 1)/(e^{ρ₋ + v} − 1), 1 − e^{−η}}`,
+and return `ln Z₀ − v`: wrong by more than `η` with probability at most `δ` on every member of
+the box (theory report §11.30, "what the hint buys"; the Scientific Discovery Division's
+rule).  A hint removes a variance term and nothing else.
+(10) **If you have a ceiling as well as a floor — a sandwich `m₋ ≤ E ≤ m₊` of two models you
+can sample — sample where the sandwich is wide** (Proposition 11.113; paper-level, harness
+XXIV.10):
+
+```
+ENVELOPE-SAMPLER(lower model m₋, upper model m₊ with known Z(m₋), Z(m₊); energy oracle E; N; δ):
+  repeat until N points are accepted:
+      draw x from the Gibbs measure of m₋                         # exact: transfer matrix or elimination
+      accept x with probability 1 − exp(−(m₊(x) − m₋(x)))         # no evaluation of E for rejected points
+  for each accepted x:   W(x) ← (e^{−E(x)} − e^{−m₊(x)}) / (e^{−m₋(x)} − e^{−m₊(x)})      # in [0, 1]
+  Ŵ ← mean of W;   t ← sqrt( ln(2/δ) / (2N) )
+  return   Z(m₊) + (Z(m₋) − Z(m₊))·max(Ŵ − t, 0)   ≤   Z(E)   ≤   Z(m₊) + (Z(m₋) − Z(m₊))·min(Ŵ + t, 1)
+```
+
+No hint, no range term, nothing exponential; the bracket never leaves the deterministic
+one and its width is the deterministic width times `√(2 ln(2/δ)/N)`.  The verifier, not the
+producer, must draw the points.  (11) **A free-energy difference between two macrostates**
+is certified by the same spot check with half of the samples from each macrostate's own
+sampler (Corollary 11.114, `proofs/Frontiers/BoxRatio.lean`): the detection level is the
+same as for one partition sum, the price is a factor two, the cost is the larger of the
+two macrostates' own distances to the floor — and exact sampling *conditional on each
+macrostate* is required, which a chain model provides for macrostates defined by one
+site or by a counting statistic and a general macrostate does not.
 
 ### 6.5 Multi-state comparison
 
@@ -539,6 +570,35 @@ a threshold of an order parameter) no plan is needed: the extreme residuals are 
 strongest uniform fields the envelope allows, and the range is the difference of two
 free energies in those fields (Theorem 11.106).  This format is **not** part of the JSON
 schema or of the verified kernel; it is a design note.
+
+### 6.5a Barriers between two configurations
+
+A lower bound `L` on the minimax barrier between `a` and `b` under single-site moves is
+certified by a **cut** (theory report §11.31; `proofs/Frontiers/KineticsCertificates.lean`,
+written by the Scientific Discovery Division, and `proofs/Frontiers/BarrierCertificate.lean`).
+The certificate is a decision tree over the sites, with `branch` nodes (one child per state
+of a site, as in `Cert.branch`) and `split` nodes (the states of a list against the others);
+every leaf has a box and a label:
+
+```
+inside            the box belongs to the region S around a
+wall c            every configuration of the box has energy ≥ L, certified by the min-kernel certificate c
+outside           the box is beyond the wall
+checker (bverify):   1. verify accepts every wall certificate on its box for the bound L
+                     2. no inside box is adjacent to an outside box
+                        (adjacent: both non-empty, and at most one site has disjoint domains — exact)
+                     3. a lies in an inside box, b in no inside box
+claim (bverify_sound):   every walk of single-site moves from a to b visits a configuration of energy ≥ L      verified
+```
+
+With residual leaves (`RCert`, `bverifyR`) the claim holds for the true energy and every
+residual of the class, and the barrier is at least `L − (E₀(a) + v_a)` above an evaluated
+anchor.  For move sets in which each site moves along its own graph (a torsion to a
+neighbouring arc) use `bverifyOn`.  Check 2 runs one adjacency test per pair of an inside
+and an outside leaf; there is no verified statement on certificate size, and none can be
+polynomial in general: deciding whether a barrier on a chain is zero is PSPACE-complete
+(the division cites Wrochna).  A tree can certify barriers that box cuts cannot.  This
+format is **not** yet part of the JSON schema or of the reference checker.
 
 ### 6.6 What a residual certificate will cost, and the second-order alternative
 
@@ -652,6 +712,26 @@ Discovery Division: for polar and charged side chains in rotamer variables the s
 for this reason and the ball certifies).  And the pairwise model is a relaxation, not the
 exact envelope (which is a three-body function).  As everywhere: the constants are the
 producer's obligation; measured maxima over an enumerated domain are not certified bounds.
+
+**Step 3b — any order: the ball of radius `m − 1` and site penalties** (theory report Theorem
+11.18d, Proposition 11.18e; `proofs/Frontiers/AnchoredRemainder.lean`; the recipe is the
+Scientific Discovery Division's, its workstream P3).  With certified constants `c_T` of order
+`m` — and it suffices to bound the mixed differences at base points that agree with the
+reference on `T` — evaluate the residual on the Hamming ball of radius `m − 1` and use
+
+```
+I_{m−1}g(x) − Σ_{i changed} γ_i   ≤   g(x)   ≤   I_{m−1}g(x) + Σ_{i changed} γ_i ,        γ_i = (1/m) Σ_{T ∋ i, |T| = m} c_T        verified
+```
+
+Both sides use the ball values only.  For `m ≥ 4` they contain the evaluated terms of orders
+three and above and are not pairwise: to obtain models the kernels accept, replace those
+terms (and the pairs beyond a band, for a chain) by pointwise minorants on the lower side
+and majorants on the upper side — the division's construction, a paper proof of its own,
+which then gives a sandwich for rule (10) of §6.4.  The number of evaluations,
+`Σ_{j<m} C(n,j)(k−1)^j`, cannot be reduced by any deterministic procedure unless the terms of
+order below `m` are bounded in advance (Proposition 11.18e): each order costs a factor of
+about `nk/m` in evaluations and, in the division's measurements on extended backbones, buys
+a factor 20–50 in the certified remainder.  On helices it buys 5–8 and the recipe fails.
 
 **Step 4 — a probabilistic guarantee instead (free energies).**  When a statement that holds
 with probability `1 − δ` is acceptable, the free-energy difference between the target and a
@@ -1074,7 +1154,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 411 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 435 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  Before the first mutant of a test it runs the unmutated test in

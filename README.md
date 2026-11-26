@@ -507,7 +507,38 @@ an a-priori bound on a Rényi or Kullback–Leibler divergence of the true ensem
 model can take its place at a price in the accuracy, while the root-mean-square error
 that a fit reports certifies nothing on its own.  On that division's enumerated
 force-field instances the prices range from negligible to astronomically large and are
-not predicted by fit quality; none of those numbers is a certificate.
+not predicted by fit quality; none of those numbers is a certificate.  Its search of the
+literature then showed that every ingredient of this item is in print (Hoeffding's
+inequalities of 1963; the stopping criterion of provable partition-function algorithms;
+a paper of 2026 on partition functions under divergence bounds) and that the
+statement with a hint, as a theorem, was not found; and it exposed a gap of ours — near
+the floor of the class the cost comes from the *ceiling*, a term our first statement
+lacked and which is now machine-checked.  Three additions of our own followed: at a flat
+instance a hint is worth nothing, in general it removes a variance term; for an energy
+sandwiched between two models that can be sampled, sampling in proportion to the width
+of the sandwich certifies the free energy without a hint; and a free-energy *difference*
+between two macrostates costs the larger of the two macrostates' own distances to the
+floor — independent of how rare they are, possibly far more than the free energy of the
+whole.
+(xvi) *What a certificate of a real free energy looks like* (theory report Theorems 11.18a,
+11.18d; the Scientific Discovery Division's workstreams P2 and P3).  That division measured
+that a solvent term in rotamer variables is pairwise up to small remainders and then
+built, for a twenty-residue model peptide on an extended backbone, a bracket for the
+free energy from 87 441 evaluations out of `3.5·10⁹` states: evaluate the many-body term on
+a Hamming ball around an anchor, bound what lies beyond by proved constants, and sandwich
+the energy between two chain models.  Our part is the combinatorial core, machine-checked
+at its request: the error of the anchored expansion of any order is an explicit sum of
+mixed differences anchored at the reference, site penalties cover it, and — a negative
+result — no deterministic procedure can do with fewer evaluations than the ball contains
+unless the lower-order terms are bounded in advance.  Everything else in that certificate
+is the division's paper proofs and unreviewed code, it is relative to a force-field
+model, and it fails for helices and charged side chains.
+(xvii) *Barriers* (theory report §11.31; the Scientific Discovery Division's idea and
+statements, its Lean file adopted, a tree checker of ours machine-checked).  A lower
+bound on the barrier between two configurations is a cut whose wall is certified by the
+kernels that already exist; the same cut with partition sums bounds how long a sampler
+stays trapped.  Negative results of that division come with it: no transfer matrix for
+barriers exists, and discrete rates are relative to the move set.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

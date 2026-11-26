@@ -1,0 +1,30 @@
+== (1) Proposition I against the definitions ==
+L=3 k=2 p=0.3 t=0.43: direct 0.131022730207  formula 0.131022730207  |c_def - c_matrix| <= 3.3e-16;  per block: G_L 0.066994, ln E[c^t]/(k-1) 0.007779 (operator Lambda_blk 0.008227), t ln E_Q/(k-1) 0.010745 (t ln lam_Q 0.011482)
+L=3 k=3 p=0.3 t=0.43: direct 0.208319233561  formula 0.208319233561  |c_def - c_matrix| <= 7.8e-16;  per block: G_L 0.069731, ln E[c^t]/(k-1) -0.004677 (operator Lambda_blk -0.004768), t ln E_Q/(k-1) -0.004240 (t ln lam_Q -0.004368)
+L=3 k=2 p=0.1 t=0.7: direct 0.129891800139  formula 0.129891800139  |c_def - c_matrix| <= 4.4e-16;  per block: G_L 0.074849, ln E[c^t]/(k-1) 0.015106 (operator Lambda_blk 0.031980), t ln E_Q/(k-1) 0.034912 (t ln lam_Q 0.062230)
+L=4 k=2 p=0.2 t=0.3: direct 0.218068410231  formula 0.218068410231  |c_def - c_matrix| <= 8.9e-16;  per block: G_L 0.110948, ln E[c^t]/(k-1) -0.003185 (operator Lambda_blk -0.003158), t ln E_Q/(k-1) 0.000643 (t ln lam_Q 0.000746)
+L=2 k=4 p=0.4 t=0.55: direct 0.168017764827  formula 0.168017764827  |c_def - c_matrix| <= 8.9e-16;  per block: G_L 0.042630, ln E[c^t]/(k-1) 0.006386 (operator Lambda_blk 0.006441), t ln E_Q/(k-1) 0.007220 (t ln lam_Q 0.007295)
+largest deviation: 9.99e-16
+
+== (2) headline lower ends: site-wise labels with <= 2 walls per block ==
+p=0.4 L=12 t=0.459: 134 labels (40 with weight > 1e-5);  G_L = [0.408903199, 0.408903201] (dual over these labels);  Lambda_blk: N=64 -0.000420636, N=128 -0.000420636; exact increments k=1->2: -0.0004206, k=2->3 (weights > 1e-7): -0.0004206;  ln lam_Q = 4.44e-16
+      bound per site = 0.034040   (report 0.034026;  cube 0.029139;  ratio 1.168)   [9 s]
+      t-scan: t=0.439: 0.033991  t=0.449: 0.034029  t=0.469: 0.034024  t=0.479: 0.033980   [24 s]
+      L-scan (<= 2 walls): L=8: 0.033899  L=10: 0.033990   [0 s]
+      uniform fields only (0 walls): L=3: 0.033455  L=4: 0.033161  L=5: 0.032401  L=6: 0.031418
+p=0.3 L=14 t=0.434: 184 labels (38 with weight > 1e-5);  G_L = [0.565252063, 0.565252066] (dual over these labels);  Lambda_blk: N=64 -0.003250283, N=128 -0.003250283; exact increments k=1->2: -0.0032503, k=2->3 (weights > 1e-7): -0.0032503;  ln lam_Q = 4.44e-16
+      bound per site = 0.040143   (report 0.040115;  cube 0.029139;  ratio 1.378)   [8 s]
+      t-scan: t=0.414: 0.040087  t=0.424: 0.040131  t=0.444: 0.040123  t=0.454: 0.040072   [34 s]
+      L-scan (<= 2 walls): L=8: 0.039776  L=10: 0.039921  L=12: 0.040059   [8 s]
+      uniform fields only (0 walls): L=3: 0.038751  L=4: 0.039414  L=5: 0.038893  L=6: 0.037764
+p=0.2 L=14 t=0.409: 184 labels (30 with weight > 1e-5);  G_L = [0.638522422, 0.638522425] (dual over these labels);  Lambda_blk: N=64 -0.013869765, N=128 -0.013869765; exact increments k=1->2: -0.0138697, k=2->3 (weights > 1e-7): -0.0138698;  ln lam_Q = -1.33e-15
+      bound per site = 0.044618   (report 0.044599;  cube 0.029139;  ratio 1.531)   [12 s]
+      t-scan: t=0.389: 0.044551  t=0.399: 0.044603  t=0.419: 0.044598  t=0.429: 0.044546   [53 s]
+      L-scan (<= 2 walls): L=8: 0.043810  L=10: 0.044267  L=12: 0.044431   [10 s]
+      uniform fields only (0 walls): L=3: 0.041698  L=4: 0.043636  L=5: 0.043626  L=6: 0.042494
+p=0.1 L=14 t=0.38: 184 labels (22 with weight > 1e-5);  G_L = [0.669412758, 0.669412762] (dual over these labels);  Lambda_blk: N=64 -0.048571164, N=128 -0.048571164; exact increments k=1->2: -0.0485822, k=2->3 (weights > 1e-7): -0.0485712;  ln lam_Q = 1.55e-15
+      bound per site = 0.044346   (report 0.044378;  cube 0.029139;  ratio 1.522)   [12 s]
+      t-scan: t=0.360: 0.044276  t=0.370: 0.044321  t=0.390: 0.044336  t=0.400: 0.044291   [42 s]
+      L-scan (<= 2 walls): L=8: 0.042049  L=10: 0.043470  L=12: 0.044167   [9 s]
+      uniform fields only (0 walls): L=3: 0.039292  L=4: 0.042081  L=5: 0.042824  L=6: 0.042144
+223.0 s

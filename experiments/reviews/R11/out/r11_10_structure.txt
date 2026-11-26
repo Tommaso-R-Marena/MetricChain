@@ -1,0 +1,29 @@
+== (a) vertex counts ==
+n=1: 2 height functions;  spanning-tree enumeration: 2 vertices;  same set: True
+n=2: 6 height functions;  spanning-tree enumeration: 6 vertices;  same set: True
+n=3: 38 height functions;  spanning-tree enumeration: 38 vertices;  same set: True
+n=4: 990 height functions
+
+== (b) exact F*_n(0.45)/n at p = 0.4 (report: 0.02895, 0.03280, 0.03359, 0.03354) ==
+   n=1: [0.02895, 0.02895]  n=2: [0.03280, 0.03280]  n=3: [0.03359, 0.03359]  n=4: [0.03354, 0.03354]
+
+== (c) n = 4: all 990 vertices against the 16 site-wise labels ==
+   16 of the 990 vertices are site-wise labels
+   p=0.4: a_4 = [0.4684951, 0.4684951] (site-wise only 0.4684951); weight off site-wise labels 0.0000 (on +-min(|x|,4-|x|): 0.0000)
+          F*_4(0.45) = [0.1341423, 0.1341423] (site-wise only 0.1341423), weight off site-wise 0.0e+00;  E_4 = [0.6191308, 0.6191308], ln Z_4(h)/Z_4(0) = 0.6191308   [2 s]
+   p=0.3: a_4 = [0.5091319, 0.5091319] (site-wise only 0.5091319); weight off site-wise labels 0.0000 (on +-min(|x|,4-|x|): 0.0000)
+          F*_4(0.45) = [0.1606804, 0.1606804] (site-wise only 0.1606804), weight off site-wise 0.0e+00;  E_4 = [0.7772709, 0.7772709], ln Z_4(h)/Z_4(0) = 0.7772709   [2 s]
+   p=0.1: a_4 = [0.5726559, 0.5726559] (site-wise only 0.5626014); weight off site-wise labels 0.0920 (on +-min(|x|,4-|x|): 0.0920)
+          F*_4(0.45) = [0.2133601, 0.2133601] (site-wise only 0.2133601), weight off site-wise 0.0e+00;  E_4 = [1.1350712, 1.1350712], ln Z_4(h)/Z_4(0) = 1.1350712   [2 s]
+
+== (d) the Renyi centre is not Markov (n = 4, t = 0.45) ==
+   p=0.4: I(x1;x3|x2) under Q* = 2.90e-03  (under pi: 0.0e+00);  support of M*: 4 labels (other labels too)
+   p=0.3: I(x1;x3|x2) under Q* = 5.73e-03  (under pi: 2.0e-17);  support of M*: 2 labels (uniform fields only)
+   p=0.1: I(x1;x3|x2) under Q* = 1.15e-03  (under pi: -1.0e-16);  support of M*: 2 labels (uniform fields only)
+
+== (e) Lemma B with all vertices ==
+   p=0.3 t=0.3: F*[X1 x X2] = [0.086271878, 0.086271878];  F*[X1] + F*[X2] = 0.086271878
+   p=0.3 t=0.6: F*[X1 x X2] = [0.093178790, 0.093178793];  F*[X1] + F*[X2] = 0.093178790
+   p=0.1 t=0.3: F*[X1 x X2] = [0.100521000, 0.100521004];  F*[X1] + F*[X2] = 0.100521000
+   p=0.1 t=0.6: F*[X1 x X2] = [0.107457682, 0.107457690];  F*[X1] + F*[X2] = 0.107457682
+2.5 s

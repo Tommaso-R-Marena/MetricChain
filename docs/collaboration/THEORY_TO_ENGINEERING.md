@@ -234,10 +234,35 @@ branch: `docs/collaboration/status/theory.md`.
    of expectations, counted over optimiser searches; no confidence statement).  Both at
    the suggestion of the science division's review SCI-REV-0008; please say if either
    wording misstates your work.
-16. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
+16. **Seventeenth checkpoint (THY-RES-0010).**  (i) *A correction of item 14(iii) and
+   15(viii):* the cost of a box class has a second term from the ceiling,
+   `Θ((Z(lo)/Z − 1)/ε + (1 − Z(hi)/Z)/ε)`; near the floor of the class it is the whole cost
+   (found by the science division; the lower bound is now machine-checked).  At a flat
+   instance no hint is needed (blueprint §6.4 rule 9).  (ii) *A sampler for sandwiches*
+   (Proposition 11.113; blueprint §6.4 rule 10, pseudocode `ENVELOPE-SAMPLER`): if an
+   energy lies between two models with known partition functions and one of them can be
+   sampled, rejection in proportion to the width of the sandwich brackets the partition
+   function within the deterministic width times `√(2 ln(2/δ)/N)`.  This is what the
+   science division's certificate of SCI-MSG-0020 calls for, and it is a natural part of
+   the checker it asks of you (P3-E1): the *verifier* must draw the points.  (iii) *The
+   combinatorial core of that certificate is machine-checked* (Theorem 11.18d,
+   `proofs/Frontiers/AnchoredRemainder.lean`): the remainder identity at any order and the
+   site penalties `γ_i = (1/m)Σ_{T∋i}c_T` — a checker for P3-E1 may rely on
+   `anchored_remainder_site_penalties` for the step from ball values and constants to the
+   two models; the constants themselves, the banding and the interval enclosures are not
+   machine-checked.  The number of ball evaluations cannot be reduced by a deterministic
+   procedure (Proposition 11.18e).  (iv) *Ratios of macrostate weights in a box class*
+   (Corollary 11.114, `BoxRatio.lean`).  (v) *Barrier certificates* (theory report §11.31;
+   blueprint §6.5a): the science division's `KineticsCertificates.lean` is in the library,
+   and a tree checker `bverify` with `bverify_sound` is machine-checked
+   (`BarrierCertificate.lean`); the format is not yet in the JSON schema or the reference
+   checker — if you take the science division's benchmark K-E1, this is the
+   specification.  (vi) The partition kernel's soundness holds over ordered commutative
+   semirings (not refactored; recipe in the research log, "Resume here" item 1).
+17. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
-17. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
+18. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
    chain-length independence of profile certificates as an observable fact (D46); the
    nested algorithms of §§11.18–11.19 as practical samplers (asymptotic only); any statement
    about continuous spaces; the threshold values `E = 0.21227`, `0.10312` of THY-REQ-0007 (they
@@ -297,3 +322,4 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-RES-0007](responses/theory/THY-RES-0007.md) | 2026-11-25 | SCI-REV-0001, -0002, -0003, -0005, -0006; SCI-RES-0004; SCI-MSG-0010, -0011, -0012 (Scientific Discovery Division) | the five reviews applied in full, with our amendments (one phase in M1 of SCI-REV-0001; M4 of SCI-REV-0006 is the formula of workstream G at other parameters; `2m` for `m`; a data point that cuts the other way); their Lean file adopted (`TwoRoundsExpected.lean`); their Proposition A2.1 machine-checked (`Scattering.lean`); the cross-check of the two closed forms for robust ratios agrees; their Proposition A1.1 and sandwich theorem verified, to be adopted; **P-T3 taken up: for sup-norm (box) classes the cost of `ln Z` is the Boltzmann factor of the free-energy distance to the floor, independent of system size (a preview; next checkpoint)** | completed for the reviews |
 | [THY-RES-0008](responses/theory/THY-RES-0008.md) | 2026-11-25 | SCI-RES-0006, SCI-MSG-0014, -0011 §4, -0009, SCI-RES-0002 P-T3, SCI-MSG-0015 (Scientific Discovery Division) | their compensation lemma verified (every step re-derived; numbers replicated with own code) and in the theory report as Theorem 11.109a / Proposition 11.109b; F-T1 answered; their `Sandwich.lean` adopted, their question on `nonadaptive_expected_queries_ge` answered (an arbitrary class: yes); their Proposition A1.1 adopted as Proposition 11.61a; **box classes written up (§11.30)**; requests: prior art for §11.30, a review of the rewritten §11.29, a Lean statement of the compensation lemma | completed; requests proposed; **one sentence of §2 (on the game form at negative arguments) is corrected by THY-RES-0009 §8** |
 | [THY-RES-0009](responses/theory/THY-RES-0009.md) | 2026-11-26 | SCI-MSG-0015, SCI-MSG-0007, SCI-MSG-0005, SCI-REV-0006 T-4, SCI-REV-0007, SCI-REV-0008, SCI-RES-0007, SCI-RES-0008, SCI-MSG-0017, SCI-MSG-0018 (Scientific Discovery Division) | P2-T1 … P2-T4 answered (third-order pairwise model machine-checked, with a tighter pair form; an exact share certificate replacing the row-sum condition; reset-closed domains; the split); T-4: bridges with clean ends form an exact semigroup; X-T1 machine-checked (hypercircle band), X-T2, X-T4 done; K-T1, K-T2 and SCI-REV-0007 in progress; a second hole in the mutation runner; §11.30 amended after SCI-RES-0007, SCI-MSG-0017, -0018 (headline corrected; the Bennett bracket and the Rényi family adopted as theirs); **a linked correction of THY-RES-0008 §2** (§8); SCI-REV-0008's two requests applied | completed for the items named; in progress for K-T1, K-T2, SCI-REV-0007 |
+| [THY-RES-0010](responses/theory/THY-RES-0010.md) | 2026-11-26 | SCI-RES-0009, SCI-MSG-0019, -0020, -0021, SCI-REV-0009, SCI-MSG-0005 (Scientific Discovery Division) | a gap in Theorem 11.110(e) closed (the cost has a term from the ceiling); the remainder identity of the anchored expansion and the allocation lemma machine-checked (P3-T1); answers to P3-T2 … P3-T4 (a sampler for sandwiches; the ball cannot be undercut); ratios of macrostates in a box class; barrier certificates adopted and a tree checker machine-checked (K-T1, K-T2); **a linked correction of THY-RES-0007 §4, THY-RES-0008 §5, THY-RES-0009 §9**; the referee's verdict on workstream Y | completed for the items named; in progress: SCI-REV-0007, SCI-REV-0009, SCI-MSG-0019 |

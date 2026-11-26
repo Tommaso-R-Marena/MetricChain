@@ -3493,6 +3493,141 @@ def qc_cube_kstar(logex, log_target):
     return len(logex)
 
 
+@conjecture("XI.19 The remainder of the anchored expansion as an identity, anchored constants and site penalties at every order (theory report Theorem 11.18d; AnchoredRemainder.lean; the statement is Proposition 1 of the Scientific Discovery Division's workstream P3, SCI-MSG-0020): for every function, reference x0, configuration y and order m >= 1, g(y) - I_{m-1} g(y) is the sum over the m-subsets T of the changed sites of the mixed difference over T at the base point that equals y at the changed sites before min T and x0 elsewhere; hence |g - I_{m-1} g| is at most the sum of anchored constants (mixed differences at base points equal to x0 on T), which never exceed the uniform constants, equal them for two states per site and are strictly smaller for some functions with three; the site penalties gamma_i = (1/m) sum over T containing i of c_T cover the m-subsets of every set of sites, with equality for the full set; and I_{m-1} g -/+ the sum of gamma_i over the changed sites is a sandwich of g")
+def t_remainder_identity(rng, trials):
+    stats = dict(identities=0, worst=0.0, strictly_smaller=0, equal_binary=0, sandwiches=0, tightest=math.inf)
+    shapes = [(3, 2), (3, 3), (4, 2), (4, 3), (3, 4), (5, 2), (5, 3)]
+    for it in range(max(7, trials // 8)):
+        n, k = shapes[it % len(shapes)]
+        confs = all_configs(n, k)
+        g = so_random_function(rng, n, k, ((1, 1.0), (2, 0.5), (3, 0.3), (n, 0.1)))
+        x0 = tuple(int(v) for v in rng.integers(0, k, size=n))
+        heavy = (n, k) in ((3, 2), (3, 3), (4, 2), (4, 3))          # constants by enumeration only where cheap
+        for m in range(1, n + 1):
+            interp = so_interpolant(g, n, k, m, x0)
+            for y in confs:
+                S = [i for i in range(n) if y[i] != x0[i]]
+                total = 0.0
+                for T in itertools.combinations(S, m):
+                    z = tuple(y[i] if (i in S and i < T[0]) else x0[i] for i in range(n))
+                    total += so_mixed_diff(g, z, T, {i: y[i] for i in T})
+                err = abs((g[y] - interp[y]) - total)
+                stats["worst"] = max(stats["worst"], err)
+                stats["identities"] += 1
+                if err > 1e-9:
+                    return False, dict(reason="the remainder of the anchored expansion is not the sum of the mixed differences at the stated base points",
+                                       n=n, k=k, m=m, err=err)
+            if not heavy or m > 3:
+                continue
+            # anchored constants: base points that agree with the reference on T, every context elsewhere, every target
+            c_anch, c_unif = {}, so_constants(g, n, k, m)
+            for T in itertools.combinations(range(n), m):
+                best = 0.0
+                for z in confs:
+                    if any(z[i] != x0[i] for i in T):
+                        continue
+                    for bt in itertools.product(range(k), repeat=m):
+                        best = max(best, abs(so_mixed_diff(g, z, T, dict(zip(T, bt)))))
+                c_anch[T] = best
+                if best > c_unif[T] + 1e-9:
+                    return False, dict(reason="an anchored constant exceeds the uniform constant", T=T)
+                if k == 2:
+                    if abs(best - c_unif[T]) > 1e-9:
+                        return False, dict(reason="with two states per site the anchored and the uniform constants should coincide", T=T)
+                    stats["equal_binary"] += 1
+                elif best < c_unif[T] - 1e-6:
+                    stats["strictly_smaller"] += 1
+            gamma = [sum(c for T, c in c_anch.items() if i in T) / m for i in range(n)]
+            for r in range(n + 1):
+                for S in itertools.combinations(range(n), r):
+                    lhs = sum(c_anch[T] for T in itertools.combinations(S, m))
+                    rhs = sum(gamma[i] for i in S)
+                    if lhs > rhs + 1e-9:
+                        return False, dict(reason="the site penalties do not cover the m-subsets of a set of sites", S=S, m=m)
+                    if r == n and abs(lhs - rhs) > 1e-9:
+                        return False, dict(reason="for the full set of sites the site penalties should add up to the sum of the constants", m=m)
+            for y in confs:
+                S = [i for i in range(n) if y[i] != x0[i]]
+                rem = sum(c_anch[T] for T in itertools.combinations(S, m))
+                pen = sum(gamma[i] for i in S)
+                if abs(g[y] - interp[y]) > rem + 1e-9:
+                    return False, dict(reason="the remainder exceeds the sum of the anchored constants", m=m)
+                if not (interp[y] - pen - 1e-9 <= g[y] <= interp[y] + pen + 1e-9):
+                    return False, dict(reason="the sandwich by site penalties is violated", m=m)
+                if pen > 0:
+                    stats["tightest"] = min(stats["tightest"], (pen - abs(g[y] - interp[y])) / pen)
+                stats["sandwiches"] += 1
+    if not (stats["identities"] > 500 and stats["strictly_smaller"] > 0 and stats["equal_binary"] > 0 and stats["sandwiches"] > 100):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
+@conjecture("XI.20 The Hamming ball is necessary for a deterministic certificate (theory report Proposition 11.18e; an answer to the Scientific Discovery Division's question P3-T4, SCI-MSG-0020): the functions of order below m form a space of dimension N_ball = sum_{j<m} C(n,j)(k-1)^j on which the evaluations at the ball of radius m - 1 are unisolvent; for every set Q of fewer than N_ball configurations there is a function h of order below m, not identically zero, that vanishes on Q; its mixed differences of order m vanish, so g + t h has the order-m constants of g and the values of g on Q for every t, while its minimum tends to minus infinity; and a function of order below m that is not identically zero is non-zero on a fraction at least k^-(m-1) of the configurations, with equality for the indicator of a cylinder on m - 1 sites — so that a hinted function of order below m is refuted by k^(m-1) ln(1/delta) random evaluations, whatever the number of sites")
+def t_ball_necessary(rng, trials):
+    stats = dict(cases=0, largest=0, thinnest=math.inf)
+    shapes = [(3, 2), (3, 3), (4, 2), (4, 3), (5, 2), (3, 4)]
+    for it in range(max(6, trials // 10)):
+        n, k = shapes[it % len(shapes)]
+        confs = all_configs(n, k)
+        x0 = tuple(int(v) for v in rng.integers(0, k, size=n))
+        for m in range(1, n + 1):
+            # the anchored basis of the functions of order below m: cylinders on fewer than m sites with states off the reference
+            basis = []
+            for j in range(m):
+                for U in itertools.combinations(range(n), j):
+                    for a in itertools.product(*[[s for s in range(k) if s != x0[i]] for i in U]):
+                        basis.append((U, a))
+            n_ball = sum(math.comb(n, j) * (k - 1) ** j for j in range(m))
+            if len(basis) != n_ball:
+                return False, dict(reason="the number of anchored basis functions is not N_ball", n=n, k=k, m=m)
+            M = np.array([[1.0 if all(x[i] == s for i, s in zip(U, a)) else 0.0 for (U, a) in basis] for x in confs])
+            if np.linalg.matrix_rank(M) != n_ball:
+                return False, dict(reason="the functions of order below m do not have dimension N_ball", n=n, k=k, m=m)
+            ball = [idx for idx, x in enumerate(confs) if sum(x[i] != x0[i] for i in range(n)) < m]
+            if len(ball) != n_ball or np.linalg.matrix_rank(M[ball]) != n_ball:
+                return False, dict(reason="the Hamming ball is not unisolvent for the functions of order below m", n=n, k=k, m=m)
+            # a non-zero function of order below m is non-zero on a fraction at least k^-(m-1) of the configurations
+            for trial in range(5):
+                if trial == 0:
+                    idxs, coeffs = np.array([len(basis) - 1]), np.array([1.0])   # a cylinder on m - 1 sites
+                else:
+                    idxs = rng.choice(len(basis), size=min(len(basis), int(rng.integers(1, 6))), replace=False)
+                    coeffs = rng.integers(-2, 3, size=len(idxs)).astype(float)
+                f = M[:, idxs] @ coeffs
+                if np.abs(f).max() < 1e-9:
+                    continue
+                frac = float((np.abs(f) > 1e-9).mean())
+                if frac < k ** (-(m - 1)) - 1e-12:
+                    return False, dict(reason="a non-zero function of order below m vanishes on more than the fraction 1 - k^-(m-1) of the configurations",
+                                       n=n, k=k, m=m, frac=frac)
+                stats["thinnest"] = min(stats["thinnest"], frac * k ** (m - 1))
+            if n_ball < 2:
+                continue
+            Q = rng.choice(len(confs), size=n_ball - 1, replace=False) if it % 2 else np.array(ball[:-1])
+            _, sv, vt = np.linalg.svd(M[Q])
+            coeff = vt[-1]                                          # a direction in the kernel of the evaluations on Q
+            h = M @ coeff
+            if np.abs(M[Q] @ coeff).max() > 1e-9 or np.abs(h).max() < 1e-6:
+                return False, dict(reason="no nonzero function of order below m vanishes on a set of fewer than N_ball configurations",
+                                   n=n, k=k, m=m)
+            hd = {x: float(v) for x, v in zip(confs, h)}
+            if m <= n:
+                for _ in range(6):
+                    T = tuple(sorted(rng.choice(n, size=m, replace=False).tolist()))
+                    x = confs[int(rng.integers(len(confs)))]
+                    b = {i: int(rng.integers(k)) for i in T}
+                    if abs(so_mixed_diff(hd, x, T, b)) > 1e-9:
+                        return False, dict(reason="a function of order below m has a nonzero mixed difference of order m", m=m)
+            g = rng.normal(0, 1, len(confs))
+            if min(float((g + 1e9 * h).min()), float((g - 1e9 * h).min())) > float(g.min()) - 1e3:
+                return False, dict(reason="the minimum does not become unbounded along the hidden direction")
+            stats["cases"] += 1
+            stats["largest"] = max(stats["largest"], n_ball)
+    if stats["cases"] < 15 or abs(stats["thinnest"] - 1) > 1e-9:
+        return False, dict(reason="cases not exercised, or the bound on the support never attained", **stats)
+    return True, stats
+
+
 @conjecture("XI.14 Normal form: with f^d = min_x [f(x) + d(x, .)], sigma(a,y) = d(a,y) + f^d(a) - f^d(y) >= 0 and E^d = f^d + g, min(f + g') = min(f^d + g') on the admissible class, and for every evaluated set A the certified lower bound and the value upper bound of (d, f, g) are the lower bound and the incumbent of the instance (sigma, 0, E^d) without known part; s(a,y) - gap^d(y) = sigma(a,y) - gap^d(a)")
 def t_normal_form(rng, trials):
     stats = dict(sets=0, instances=0, strict_point_gap=0)
@@ -9810,10 +9945,10 @@ def t_box_empirical_bernstein(rng, trials):
     return True, stats
 
 
-@conjecture("XXIV.6 A one-sided floor and an a-priori variance bracket the free energy without an exponential bill (theory report Theorem 11.110(f); Bennett's inequality in its two-point form — proposed for this place by the Scientific Discovery Division, SCI-MSG-0018): if the remainder r has mean r_bar, lies above r_bar - b and has variance at most sigma^2 under the known measure, then 0 <= K = ln E exp(-(r - r_bar)) <= W(b, sigma^2) = ln[(b^2 e^{-sigma^2/b} + sigma^2 e^b)/(b^2 + sigma^2)] <= (sigma^2/b^2)(e^b - 1 - b); the first bound is attained by the law with a state at the floor of probability sigma^2/(b^2 + sigma^2); it is monotone in b and in sigma^2, so that bounds on both suffice; and it is far below the two-point Jensen gap L(w) of the two-sided width when the variance is small")
+@conjecture("XXIV.6 A one-sided floor and an a-priori variance bracket the free energy without an exponential bill (theory report Theorem 11.110(f); Bennett's inequality in its two-point form — proposed for this place by the Scientific Discovery Division, SCI-MSG-0018): if the remainder r has mean r_bar, lies above r_bar - b and has variance at most sigma^2 under the known measure, then 0 <= K = ln E exp(-(r - r_bar)) <= W(b, sigma^2) = ln[(b^2 e^{-sigma^2/b} + sigma^2 e^b)/(b^2 + sigma^2)] <= (sigma^2/b^2)(e^b - 1 - b); the first bound is attained by the law with a state at the floor of probability sigma^2/(b^2 + sigma^2); it is monotone in b and in sigma^2, so that bounds on both suffice; and it is far below the two-point Jensen gap L(w) of the two-sided width when the variance is small.  With a ceiling a above the mean as well (Hoeffding 1963, as read by the Scientific Discovery Division, SCI-RES-0009): K <= -w p + ln(1 - p + p e^w) <= L(w) for w = a + b, p = a/w, with equality for two-point laws; and ln(1 + Var (e^-a - 1 + a)/a^2) <= K <= W <= ln(1 + (sigma^2/b^2)(e^b - 1 - b)), so that a floor and a ceiling bracket the error of first-order perturbation theory on both sides")
 def t_bennett_bracket(rng, trials):
     W = lambda b, s2: math.log((b * b * math.exp(-s2 / b) + s2 * math.exp(b)) / (b * b + s2))
-    stats = dict(laws=0, worst=-math.inf, attained=0, closest=math.inf, gain=0.0)
+    stats = dict(laws=0, worst=-math.inf, attained=0, closest=math.inf, gain=0.0, hoeffding_closest=math.inf, lower_closest=math.inf)
     for _ in range(max(400, 4 * trials)):
         k = int(rng.integers(2, 9))
         pr = rng.dirichlet(np.ones(k) * float(rng.choice([0.3, 1.0, 3.0])))
@@ -9847,23 +9982,39 @@ def t_bennett_bracket(rng, trials):
         if K > Lw + 1e-10:
             return False, dict(reason="the centred cumulant exceeds the two-point Jensen gap of the width", K=K, L=Lw)
         stats["gain"] = max(stats["gain"], Lw - w)
+        # with the ceiling a = max x as well: Hoeffding's bound with the mean known, and second-order bounds on both sides
+        a = float(x.max())
+        ph = a / (a + b)
+        hoeff = -(a + b) * ph + math.log(1 - ph + ph * math.exp(a + b))
+        if K > hoeff + 1e-10 or hoeff > Lw + 1e-10:
+            return False, dict(reason="the centred cumulant exceeds Hoeffding's bound with the mean known, or that bound exceeds L(w)",
+                               K=K, hoeffding=hoeff, L=Lw)
+        phi2 = lambda v: (math.exp(v) - 1 - v) / (v * v) if abs(v) > 1e-3 else 0.5 + v / 6 + v * v / 24 + v ** 3 / 120
+        lower2 = math.log1p(s2 * phi2(-a))
+        middle = math.log1p(s2 * phi2(b))
+        if K < lower2 - 1e-10 or w > middle + 1e-10:
+            return False, dict(reason="the second-order bounds ln(1 + Var phi(-a)) <= K <= W <= ln(1 + Var phi(b)) fail",
+                               K=K, lower=lower2, W=w, middle=middle)
+        stats["hoeffding_closest"] = min(stats["hoeffding_closest"], hoeff - K)
+        if K > 1e-6:
+            stats["lower_closest"] = min(stats["lower_closest"], (K - lower2) / K)
         stats["laws"] += 1
     # the regime of the measured instances: a floor of a few units and a small variance
     if not (W(3.7, 0.036 ** 2) < 3.5e-3 and W(0.08, 0.19 ** 2) < 0.0165):
         return False, dict(reason="values of W at the two quoted parameter pairs", a=W(3.7, 0.036 ** 2), b=W(0.08, 0.19 ** 2))
-    if stats["laws"] < 100 or stats["gain"] <= 0:
-        return False, dict(reason="cases not exercised", **stats)
+    if stats["laws"] < 100 or stats["gain"] <= 0 or stats["hoeffding_closest"] > 1e-9 or stats["lower_closest"] > 0.05:
+        return False, dict(reason="cases not exercised, or a bound never close to attained", **stats)
     return True, stats
 
 
-@conjecture("XXIV.7 The floor is the end p = infinity of a family (theory report Proposition 11.112; the statements are the Scientific Discovery Division's, addendum A17 of its inference-limits notes and SCI-RES-0007, re-derived here).  With Y = exp(-r), mu = E Y under the known measure and the Renyi ball {||Y||_p <= B}: (a) two members that differ exactly on D satisfy pi(D) >= (|mu - mu'|/B)^(p/(p-1)), with equality in the limit of a flat alternative on an empty background; (b) hence every member whose ln mu differs from the hint's by more than eps differs from it on a set of mass at least q* = ((1 - e^-eps) mu/B)^(p/(p-1)), and the constant 1 - e^-eps cannot be replaced by e^eps - 1; (c) the alternative hint + (B - B0) q^(-1/p) on a set of mass q stays in the ball and raises mu by exactly (B - B0) q^(1-1/p), so that disjoint sets of mass above q_low = ((e^eps - 1) mu/(B - B0))^(p/(p-1)) give at least floor(1/(2 q_low)) alternatives, and the sample size of (b) is within the factor 2 ln(1/delta)/(1-2 delta) * (e^eps B/(B - B0))^(p/(p-1)) of the lower bound; (d) for p >= 2, ||Y||_2^2 <= mu^((p-2)/(p-1)) B^(p/(p-1)), with equality at two-level members; (e) Kullback-Leibler balls at the centre: every alternative with |ln mu'| > eps differs on a set of mass at least exp(-(kappa + ln 2)/(1 - e^-eps)), attained up to 1 per cent at eps = ln 2, and the two-level alternatives reach down to q_kappa with (1 - e^-eps) ln(eta/q_kappa) = kappa + eps up to a correction of order q_kappa; (f) on a product measure, one-site oscillations c_i give D_p <= p^2 sum c_i^2/(8(p-1)), and the additive instance on the uniform cube has D_p = n[ln cosh(pu/2) - p ln cosh(u/2)]/(p-1); (g) a root-mean-square bound alone allows a change of ln mu by 86 at sigma = 0.1")
+@conjecture("XXIV.7 The floor is the end p = infinity of a family (theory report Proposition 11.112; the statements are the Scientific Discovery Division's, addendum A17 of its inference-limits notes and SCI-RES-0007, re-derived here).  With Y = exp(-r), mu = E Y under the known measure and the Renyi ball {||Y||_p <= B}: (a) two members that differ exactly on D satisfy pi(D) >= (|mu - mu'|/B)^(p/(p-1)), with equality in the limit of a flat alternative on an empty background; (b) hence every member whose ln mu differs from the hint's by more than eps differs from it on a set of mass at least q* = ((1 - e^-eps) mu/B)^(p/(p-1)), and the constant 1 - e^-eps cannot be replaced by e^eps - 1; (c) the alternative hint + (B - B0) q^(-1/p) on a set of mass q stays in the ball and raises mu by exactly (B - B0) q^(1-1/p), so that disjoint sets of mass above q_low = ((e^eps - 1) mu/(B - B0))^(p/(p-1)) give at least floor(1/(2 q_low)) alternatives, and the sample size of (b) is within the factor 2 ln(1/delta)/(1-2 delta) * (e^eps B/(B - B0))^(p/(p-1)) of the lower bound; (d) for p >= 2, ||Y||_2^2 <= mu^((p-2)/(p-1)) B^(p/(p-1)), with equality at two-level members; (e) Kullback-Leibler balls at the centre: every alternative with |ln mu'| > eps differs on a set of mass at least exp(-(kappa + ln 2)/(1 - e^-eps)), attained up to 1 per cent at eps = ln 2, and the two-level alternatives reach down to q_kappa with (1 - e^-eps) ln(eta/q_kappa) = kappa + eps up to a correction of order q_kappa; (f) on a product measure, one-site oscillations c_i give D_p <= sum_i [(p-1) c_i^2/8 + L(c_i)] <= p sum c_i^2/8 <= p^2 sum c_i^2/(8(p-1)) (the first, sharp form is the Scientific Discovery Division's, SCI-RES-0009: a variance bound for the tilted law of one site plus the largest divergence of a pair of laws with bounded log-ratio), attained to within a per cent by the additive instance on the uniform cube at small slope, where D_p = n[ln cosh(pu/2) - p ln cosh(u/2)]/(p-1); (g) a root-mean-square bound alone allows a change of ln mu by 86 at sigma = 0.1")
 def t_renyi_family(rng, trials):
     orders = [1.5, 2.0, 3.0, 6.0, math.inf]
     expo = lambda p: 1.0 if math.isinf(p) else p / (p - 1)
     inv = lambda p: 0.0 if math.isinf(p) else 1.0 / p
     norm = lambda pr, Y, p: float(Y.max()) if math.isinf(p) else float(pr @ Y ** p) ** (1 / p)
     stats = dict(alternatives=0, closest=math.inf, two_level=0, closest_spot=math.inf, packings=0,
-                 norm_closest=math.inf, kl=0, kl_closest=math.inf, cube=0, cube_largest=0.0)
+                 norm_closest=math.inf, kl=0, kl_closest=math.inf, cube=0, cube_largest=0.0, cube_sharp=0.0)
     for it in range(max(60, trials)):
         p = orders[it % len(orders)]
         e = expo(p)
@@ -10034,7 +10185,9 @@ def t_renyi_family(rng, trials):
             r = X @ rng.normal(0, 0.6, n) + np.einsum("vi,ij,vj->v", X, J, X) + rng.normal(0, 0.2, 2 ** n)
         pr = np.prod(np.where(X == 1, pp, 1 - pp), axis=1)
         idx = np.arange(2 ** n)
-        K = sum(float(np.abs(r - r[idx ^ (1 << i)]).max()) ** 2 for i in range(n))
+        cs = [float(np.abs(r - r[idx ^ (1 << i)]).max()) for i in range(n)]
+        K = sum(c * c for c in cs)
+        Lfun = lambda c: math.log(math.expm1(c) / c) - 1 + c / math.expm1(c) if c > 1e-9 else c * c / 8
         Y = np.exp(-(r - r.min()))
         mu = float(pr @ Y)
         for p in (1.5, 2.0, 4.0):
@@ -10043,6 +10196,11 @@ def t_renyi_family(rng, trials):
             stats["cube_largest"] = max(stats["cube_largest"], dp / bound)
             if dp > bound + 1e-9:
                 return False, dict(reason="a Renyi divergence exceeds the bound from one-site oscillations", p=p, dp=dp, bound=bound)
+            sharp = sum((p - 1) * c * c / 8 + Lfun(c) for c in cs)
+            if dp > sharp + 1e-9 or sharp > p * K / 8 + 1e-12 or p * K / 8 > bound + 1e-12:
+                return False, dict(reason="the chain D_p <= sum[(p-1)c^2/8 + L(c)] <= pK/8 <= p^2 K/(8(p-1)) fails",
+                                   p=p, dp=dp, sharp=sharp, K=K)
+            stats["cube_sharp"] = max(stats["cube_sharp"], dp / sharp)
             if additive:
                 exact = n * (math.log(math.cosh(p * u / 2)) - p * math.log(math.cosh(u / 2))) / (p - 1)
                 if abs(dp - exact) > 1e-9 * (1 + exact):
@@ -10058,8 +10216,322 @@ def t_renyi_family(rng, trials):
         return False, dict(reason="the size of the dip that a root-mean-square budget allows", d=d, change=change)
     if not (stats["closest"] < 1.001 and stats["closest_spot"] < 1.05 and stats["norm_closest"] < 1.001
             and stats["kl_closest"] < 1.01 and stats["packings"] >= 8 and stats["cube"] >= 12
-            and stats["cube_largest"] > 0.7 and stats["kl"] >= 30):
+            and stats["cube_largest"] > 0.7 and stats["cube_sharp"] > 0.99 and stats["kl"] >= 30):
         return False, dict(reason="cases not exercised, or a bound never close to attained", **stats)
+    return True, stats
+
+
+@conjecture("XXIV.8 A ratio of two macrostate weights in a box class (theory report Corollary 11.113; BoxRatio.lean).  With W_M = sum over the macrostate M of pi e^{-r} and the dip and bump weights restricted to M: (a) a member that differs from r on D raises ln(W_A/W_B) by at most ln(1 + dip_A(D)/W_A) - ln(1 - bump_B(D)/W_B) and lowers it by at most ln(1 + dip_B(D)/W_B) - ln(1 - bump_A(D)/W_A), with equality for the floor on one macrostate and the ceiling on the other; (b) if the change exceeds eta, D has probability at least (1/2) min(p_A(eta), p_B(eta)) under the mixture of the two macrostates' samplers, p_M(eta) = (1/2) min((e^eta - 1) W_M/U_M, (1 - e^-eta) W_M/V_M) — the same level eta as for one partition sum, attained when one macrostate alone changes; (c) a set inside one macrostate with dip weight above (e^eps - 1) W_M changes the ratio by more than eps, the greedy packings give at least floor((W_M(lo)/W_M - 1)/(2(e^eps - 1))) such sets in each macrostate, and the sample size of the spot check is within the factor 8 ln(1/delta)(e^(eps/2) + 1)/(1 - 2 delta) of the lower bound; (d) the cost number max_M (W_M(lo)/W_M - 1) does not depend on the weights of the macrostates and can be far above Z(lo)/Z - 1 of the whole system")
+def t_box_ratio(rng, trials):
+    stats = dict(alternatives=0, extremal=0, closest=math.inf, packings=0, widest_factor=0.0)
+
+    def setup(pr, lo, hi, r, M):
+        w = pr * M
+        W = float(w @ np.exp(-r))
+        dip = w * (np.exp(-lo) - np.exp(-r))
+        bump = w * (np.exp(-r) - np.exp(-hi))
+        return W, dip, bump
+
+    def pM(W, U, V, eta):
+        return 0.5 * min(math.expm1(eta) * W / U, -math.expm1(-eta) * W / V)
+
+    for it in range(max(60, trials)):
+        N = int(rng.integers(12, 60))
+        pr = rng.dirichlet(np.ones(N))
+        lo = -rng.uniform(0.2, 4.0, N)
+        hi = rng.uniform(0.2, 4.0, N)
+        r = lo + (hi - lo) * rng.random(N)
+        lab = rng.integers(0, 3, N)                              # 0: in A, 1: in B, 2: in neither
+        lab[:2] = 0; lab[2:4] = 1
+        A, B = (lab == 0).astype(float), (lab == 1).astype(float)
+        tight = it % 4 == 0
+        if tight:                                               # a deep floor in A, a shallow box in B
+            lo = np.where(A == 1, lo - 6.0, -1e-3)
+            hi = np.where(A == 1, hi, 1e-3)
+            r = np.where(A == 1, r, 0.0)
+        D = rng.random(N) < float(rng.uniform(0.05, 0.5))
+        if tight:                                               # one macrostate alone, the hint at its ceiling there
+            D = D & (A == 1)
+            if not D.any():
+                D[0] = True
+            r = np.where(D, hi, r)
+        elif not D.any():
+            D[int(rng.integers(N))] = True
+        WA, dipA, bumpA = setup(pr, lo, hi, r, A)
+        WB, dipB, bumpB = setup(pr, lo, hi, r, B)
+        UA, VA, UB, VB = float(dipA.sum()), float(bumpA.sum()), float(dipB.sum()), float(bumpB.sum())
+        if min(UA, VA, UB, VB) <= 1e-12:
+            continue
+        q = 0.5 * (0.5 * dipA / UA + 0.5 * bumpA / VA) + 0.5 * (0.5 * dipB / UB + 0.5 * bumpB / VB)
+        if abs(float(q.sum()) - 1) > 1e-9:
+            return False, dict(reason="the mixed sampler is not a probability vector")
+        rho = math.log(WA / WB)
+        up = math.log1p(float(dipA[D].sum()) / WA) - math.log1p(-float(bumpB[D].sum()) / WB)
+        down = math.log1p(float(dipB[D].sum()) / WB) - math.log1p(-float(bumpA[D].sum()) / WA)
+        alts = [np.where(D, np.where(A == 1, lo, np.where(B == 1, hi, r)), r),      # extremal upwards
+                np.where(D, np.where(A == 1, hi, np.where(B == 1, lo, r)), r),      # extremal downwards
+                np.where(D, lo, r), np.where(D, hi, r),
+                np.where(D, lo + (hi - lo) * rng.random(N), r)]
+        for k, r1 in enumerate(alts):
+            change = math.log(float((pr * A) @ np.exp(-r1)) / float((pr * B) @ np.exp(-r1))) - rho
+            if change > up + 1e-9 or change < -down - 1e-9:
+                return False, dict(reason="a member of the box changes the log-ratio by more than the dip and bump weights allow",
+                                   change=change, up=up, down=down)
+            if (k == 0 and abs(change - up) > 1e-9) or (k == 1 and abs(change + down) > 1e-9):
+                return False, dict(reason="the extremal alternative does not attain the bound on the change of the log-ratio",
+                                   k=k, change=change, up=up, down=down)
+            stats["extremal"] += k < 2
+            if abs(change) < 1e-9:
+                continue
+            eta = abs(change) * 0.999
+            bound = 0.5 * min(pM(WA, UA, VA, eta), pM(WB, UB, VB, eta))
+            differs = r1 != r
+            qD = float(q[differs].sum())
+            stats["alternatives"] += 1
+            stats["closest"] = min(stats["closest"], qD / bound)
+            if qD < bound * (1 - 1e-9):
+                return False, dict(reason="a member whose log-ratio differs by more than eta differs from the hint on a set of smaller probability than the detection bound",
+                                   eta=eta, qD=qD, bound=bound)
+    # (c) packings in both macrostates on a fine-grained measure, and the size of the bracket
+    for rhoA, rhoB, eps, delta in ((3.0, 1.0, 0.2, 0.05), (2.0, 2.0, 0.5, 0.1), (1.0, 5.0, 0.1, 0.05), (4.0, 0.5, 1.0, 0.05)):
+        N = 40000
+        pr = rng.dirichlet(np.ones(N) * 5.0)
+        A = (np.arange(N) % 2 == 0).astype(float); B = 1 - A
+        lo = np.where(A == 1, -rhoA, -rhoB); hi = np.full(N, 1.0); r = np.zeros(N)
+        counts, numbers = [], []
+        for M, sign in ((A, 1.0), (B, -1.0)):
+            W, dip, bump = setup(pr, lo, hi, r, M)
+            other = float((pr * (1 - M)) @ np.exp(-r))           # the other macrostate here: the complement
+            thr = math.expm1(eps) * W
+            number = float((pr * M) @ np.exp(-lo)) / W - 1
+            numbers.append(number)
+            if float(dip.max()) > thr:
+                counts.append(None); continue
+            groups, acc = 0, 0.0
+            for d in dip[M == 1]:
+                acc += float(d)
+                if acc > thr:
+                    change = sign * (math.log((W + acc) / other) - math.log(W / other))   # the other weight is untouched
+                    if abs(change) <= eps:
+                        return False, dict(reason="a group of the packing does not change the log-ratio by more than eps", eps=eps)
+                    groups += 1; acc = 0.0
+            if groups < math.floor(number / (2 * math.expm1(eps))):
+                return False, dict(reason="fewer disjoint dips in a macrostate than floor((W_M(lo)/W_M - 1)/(2(e^eps - 1)))",
+                                   groups=groups, number=number)
+            counts.append(groups)
+        if None in counts:
+            continue
+        WA, dipA, bumpA = setup(pr, lo, hi, r, A)
+        WB, dipB, bumpB = setup(pr, lo, hi, r, B)
+        p = min(1.0, 0.5 * min(pM(WA, float(dipA.sum()), float(bumpA.sum()), eps / 2),
+                               pM(WB, float(dipB.sum()), float(bumpB.sum()), eps / 2)))
+        upper = math.ceil(math.log(1 / delta) / p)
+        closed = math.ceil(4 * math.log(1 / delta) * max(max(numbers) / math.expm1(eps / 2), 1 / -math.expm1(-eps / 2)))
+        if upper > closed:
+            return False, dict(reason="the sample size of the spot check exceeds its closed form", upper=upper, closed=closed)
+        lower = (1 - 2 * delta) * sum(counts)
+        factor = 8 * math.log(1 / delta) * (math.exp(eps / 2) + 1) / (1 - 2 * delta)
+        if max(counts) >= 5:
+            stats["widest_factor"] = max(stats["widest_factor"], upper / lower / factor)
+            if upper > factor * lower * 1.3 + 1:
+                return False, dict(reason="the sample size of the spot check is not within the stated factor of the lower bound",
+                                   upper=upper, lower=lower, factor=factor)
+        stats["packings"] += 1
+    # (d) a rare macrostate with a deep floor: cheap for the whole system, expensive for the ratio
+    N = 2000
+    pr = np.full(N, 1.0 / N)
+    A = (np.arange(N) < 20).astype(float)
+    numbers = []
+    for scale in (1.0, 1e-6):
+        w = pr * np.where(A == 1, scale, 1.0); w = w / w.sum()
+        lo = np.where(A == 1, -8.0, -0.1); r = np.zeros(N)
+        numbers.append((float((w * A) @ np.exp(-lo)) / float((w * A) @ np.exp(-r)) - 1,
+                        float(w @ np.exp(-lo)) / float(w @ np.exp(-r)) - 1))
+    if abs(numbers[0][0] - numbers[1][0]) > 1e-9 * numbers[0][0] or abs(numbers[0][0] - math.expm1(8.0)) > 1e-6 * math.expm1(8.0):
+        return False, dict(reason="the cost number of a macrostate depends on the weight of the macrostate", numbers=numbers)
+    if not (numbers[1][1] < 0.12 and numbers[1][0] > 2000):
+        return False, dict(reason="the rare macrostate with a deep floor is not cheap for the whole system and expensive for the ratio",
+                           numbers=numbers)
+    if not (stats["closest"] < 1.01 and stats["alternatives"] >= 100 and stats["packings"] >= 3):
+        return False, dict(reason="cases not exercised, or the detection bound never close to attained", **stats)
+    return True, stats
+
+
+@conjecture("XXIV.9 Box classes, floor and ceiling, with and without a hint (theory report Theorem 11.110(d), (e) as corrected and the remark 'what the hint buys'; BoxClass.lean: logZ_bumpAlt_gt, box_expected_queries_ge_mixed, detect_ge_of_proportional; the corrections are due to the Scientific Discovery Division's prior-art review, SCI-RES-0009).  (a) A set whose bump weight exceeds (1 - e^-eps) Z changes ln Z by more than eps when raised to the ceiling; (b) with k the larger of the greedy packing numbers of dips and of bumps, (1 - 2 delta) k <= cost <= 4 ln(1/delta)(e^(eps/2) + 1)(k + 1) + 1 at every instance of a fine-grained box — near the floor the dips give k = 0 and the bumps carry the bound, which the statement with dips alone missed; (c) where bump and dip weights are proportional (the centre of a constant box) the detection probability is min((e^eta - 1) Z/U, (1 - e^-eta) Z/V), twice the general bound, so that the spot check needs 544 samples at rho = 3, eps = 0.2, delta = 0.05 where the general count is 1088; (d) without a hint: draw from the known measure, let v be the first value of the remainder and stop if the first N(v) = ceil(ln(1/delta)/q(v)) + 1 values all equal v, q(v) = min((e^eta - 1)/(e^(rho + v) - 1), 1 - e^-eta); the output -v is off by more than eta with probability at most delta on every member of the box, and N(0) = 545 at the same parameters: at a flat instance the hint is worth nothing")
+def t_box_floor_ceiling(rng, trials):
+    stats = dict(bump_sets=0, near_floor=0, widest_factor=0.0, centre_closest=math.inf, members=0, worst_failure=0.0)
+    # (a), (b): fine-grained boxes at instances between the floor and the ceiling
+    for case in range(12):
+        N = 30000
+        pr = rng.dirichlet(np.ones(N) * 5.0)
+        rho_m, rho_p = float(rng.uniform(0.5, 4.0)), float(rng.uniform(0.5, 4.0))
+        lo, hi = np.full(N, -rho_m), np.full(N, rho_p)
+        mode = case % 3
+        if mode == 0:                                              # near the floor: no heavy dips
+            r = lo + 1e-4 * rng.random(N)
+        elif mode == 1:                                            # anywhere in the box
+            r = lo + (hi - lo) * rng.random(N)
+        else:                                                      # near the ceiling
+            r = hi - 1e-4 * rng.random(N)
+        eps, delta = float(rng.choice([0.1, 0.3, 1.0])), float(rng.choice([0.05, 0.1]))
+        Z = float(pr @ np.exp(-r))
+        dip = pr * (np.exp(-lo) - np.exp(-r)); bump = pr * (np.exp(-r) - np.exp(-hi))
+        U, V = float(dip.sum()), float(bump.sum())
+        thr_d, thr_b = math.expm1(eps) * Z, -math.expm1(-eps) * Z
+        if float(dip.max()) > thr_d or float(bump.max()) > thr_b:
+            continue
+        kd = kb = 0
+        acc = 0.0
+        for d in dip:
+            acc += float(d)
+            if acc > thr_d:
+                if math.log((Z + acc) / Z) <= eps:
+                    return False, dict(reason="a dip set above the threshold does not change ln Z by more than eps")
+                kd += 1; acc = 0.0
+        acc = 0.0
+        for b in bump:
+            acc += float(b)
+            if acc > thr_b:
+                if math.log(Z / (Z - acc)) <= eps:
+                    return False, dict(reason="a bump set above the threshold does not change ln Z by more than eps",
+                                       acc=acc, Z=Z, eps=eps)
+                kb += 1; acc = 0.0
+                stats["bump_sets"] += 1
+        if kd < math.floor(U / (2 * thr_d)) or kb < math.floor(V / (2 * thr_b)):
+            return False, dict(reason="fewer disjoint sets than the greedy bound", kd=kd, kb=kb)
+        k = max(kd, kb)
+        p = min(1.0, 0.5 * min(math.expm1(eps / 2) * Z / U, -math.expm1(-eps / 2) * Z / V))
+        upper = math.ceil(math.log(1 / delta) / p)
+        factor = 4 * math.log(1 / delta) * (math.exp(eps / 2) + 1)
+        if upper > factor * (k + 1) + 1:
+            return False, dict(reason="the sample size of the spot check exceeds 4 ln(1/delta)(e^(eps/2) + 1)(k + 1) + 1",
+                               upper=upper, k=k, kd=kd, kb=kb)
+        stats["widest_factor"] = max(stats["widest_factor"], upper / (factor * (k + 1) + 1))
+        if mode == 0:
+            # with dips alone the lower bound would be zero while the spot check still needs many samples
+            if not (kd == 0 and kb >= 1 and upper > 5):
+                return False, dict(reason="near the floor the dips should give no lower bound and the bumps one", kd=kd, kb=kb, upper=upper)
+            stats["near_floor"] += 1
+    # (c) the centre of a constant box: detection without the factor one half
+    for _ in range(max(40, trials // 2)):
+        N = int(rng.integers(10, 80))
+        pr = rng.dirichlet(np.ones(N))
+        rho_m, rho_p = float(rng.uniform(0.3, 4.0)), float(rng.uniform(0.3, 4.0))
+        U, V = math.expm1(rho_m), -math.expm1(-rho_p)             # Z = 1 at the centre
+        D = rng.random(N) < float(rng.uniform(0.02, 0.6))
+        if not D.any():
+            D[int(rng.integers(N))] = True
+        q = float(pr[D].sum())
+        for r1 in (np.where(D, -rho_m, 0.0), np.where(D, rho_p, 0.0), np.where(D, rng.uniform(-rho_m, rho_p, N), 0.0)):
+            change = abs(math.log(float(pr @ np.exp(-r1))))
+            if change < 1e-9:
+                continue
+            eta = change * 0.999
+            bound = min(math.expm1(eta) / U, -math.expm1(-eta) / V)
+            stats["centre_closest"] = min(stats["centre_closest"], q / bound)
+            if q < bound * (1 - 1e-9):
+                return False, dict(reason="at the centre of a constant box a member that changes ln Z by more than eta differs on a set of mass below the bound without the factor one half",
+                                   q=q, bound=bound, eta=eta)
+    eta, delta = 0.1, 0.05
+    n_centre = math.ceil(math.log(1 / delta) / min(math.expm1(eta) / math.expm1(3.0), -math.expm1(-eta) / -math.expm1(-3.0)))
+    n_general = math.ceil(math.log(1 / delta) / (0.5 * min(math.expm1(eta) / math.expm1(3.0), -math.expm1(-eta) / -math.expm1(-3.0))))
+    if (n_centre, n_general) != (544, 1088):
+        return False, dict(reason="the sample sizes at rho = 3, eps = 0.2, delta = 0.05", centre=n_centre, general=n_general)
+
+    # (d) the rule without a hint: exact failure probability on members with two and three levels
+    def N_rule(v, rho_m, eta, delta):
+        qv = min(math.expm1(eta) / math.expm1(rho_m + v), -math.expm1(-eta)) if rho_m + v > 0 else -math.expm1(-eta)
+        return math.ceil(math.log(1 / delta) / qv) + 1
+    if N_rule(0.0, 3.0, 0.1, 0.05) != 545:
+        return False, dict(reason="the length of the unhinted rule at the centre", N=N_rule(0.0, 3.0, 0.1, 0.05))
+    for it in range(max(200, 3 * trials)):
+        rho_m, rho_p = float(rng.uniform(0.5, 4.0)), float(rng.uniform(0.5, 4.0))
+        eta, delta = float(rng.choice([0.05, 0.1, 0.5])), float(rng.choice([0.05, 0.1]))
+        L = int(rng.integers(2, 4))
+        if it % 2 == 0:
+            # adversarial: a main level whose mass is just small enough for a deep dip to change ln Z by more than eta
+            v = float(rng.uniform(-rho_m + 0.3, rho_p))
+            qv = min(math.expm1(eta) / math.expm1(rho_m + v), -math.expm1(-eta))
+            s_main = 1 - qv * float(rng.uniform(1.0005, 1.3))
+            masses = np.array([s_main] + list((1 - s_main) * rng.dirichlet(np.ones(L - 1))))
+            values = np.array([v] + [-rho_m] * (L - 1)) if it % 4 == 0 else np.array([v] + [rho_p] * (L - 1))
+        else:
+            masses = rng.dirichlet(np.ones(L) * float(rng.choice([0.3, 1.0])))
+            values = rng.uniform(-rho_m, rho_p, L)
+        lnmu = math.log(float(masses @ np.exp(-values)))
+        failure = 0.0
+        for s_l, v_l in zip(masses, values):
+            if abs(lnmu + v_l) > eta:                              # the output -v_l would be wrong
+                failure += float(s_l) ** N_rule(float(v_l), rho_m, eta, delta)
+        stats["members"] += 1
+        stats["worst_failure"] = max(stats["worst_failure"], failure / delta)
+        if failure > delta * (1 + 1e-9):
+            return False, dict(reason="the rule without a hint returns a wrong value with probability above delta",
+                               failure=failure, delta=delta, masses=masses.tolist(), values=values.tolist())
+    if not (stats["near_floor"] >= 2 and stats["bump_sets"] > 0 and stats["centre_closest"] < 1.01
+            and stats["worst_failure"] > 0.5 and stats["members"] >= 200):
+        return False, dict(reason="cases not exercised, or a bound never close to attained", **stats)
+    return True, stats
+
+
+@conjecture("XXIV.10 A sandwich of two sampleable models: sample where the bracket is wide (theory report Proposition 11.113; an answer to the Scientific Discovery Division's question P3-T3, SCI-MSG-0020).  If m_- <= E <= m_+ pointwise and both models have known partition functions, then with q proportional to e^{-m_-} - e^{-m_+} and W = (e^{-E} - e^{-m_+})/(e^{-m_-} - e^{-m_+}) in [0, 1]: (a) Z(E) = Z(m_+) + (Z(m_-) - Z(m_+)) E_q W exactly; (b) q is the law of an accepted draw when x from the Gibbs measure of m_- is accepted with probability 1 - e^{-(m_+(x) - m_-(x))}, and the acceptance rate is 1 - Z(m_+)/Z(m_-); (c) hence N samples of q bracket Z(E) within (Z(m_-) - Z(m_+)) sqrt(ln(2/delta)/(2N)) with probability 1 - delta (Hoeffding for a variable in [0, 1]; coverage simulated), the bracket never leaves the deterministic one, and its half-width is that of plain sampling from the lower model times E d/max d <= 1, d = 1 - e^{-(m_+ - m_-)}; (d) for a deterministic width of 0.0605 nats, 50 000 samples at delta = 0.05 give a width of at most 7.6e-4 nats, and 1 200 samples one of at most 5e-3")
+def t_envelope_sampler(rng, trials):
+    stats = dict(sandwiches=0, runs=0, misses=0, gain=math.inf, best_gain=0.0)
+    for it in range(max(40, trials // 2)):
+        N = int(rng.integers(6, 60))
+        mlo = rng.normal(0, 1.5, N)
+        gap = rng.exponential(float(rng.choice([0.05, 0.5, 2.0])), N) * (rng.random(N) < 0.8)   # some states with no gap
+        if it % 5 == 0:
+            gap = np.full(N, float(rng.uniform(0.1, 1.0)))         # a constant gap: no gain over plain sampling
+        mhi = mlo + gap
+        E = mlo + gap * rng.random(N)
+        Zlo, Zhi, ZE = float(np.exp(-mlo).sum()), float(np.exp(-mhi).sum()), float(np.exp(-E).sum())
+        dZ = Zlo - Zhi
+        if dZ <= 1e-12 * Zlo:
+            continue
+        wq = np.exp(-mlo) - np.exp(-mhi)
+        q = wq / dZ
+        with np.errstate(divide="ignore", invalid="ignore"):
+            W = np.where(wq > 0, (np.exp(-E) - np.exp(-mhi)) / np.where(wq > 0, wq, 1.0), 0.0)
+        if W.min() < -1e-12 or W.max() > 1 + 1e-12:
+            return False, dict(reason="the sampled variable leaves [0, 1]", lo=float(W.min()), hi=float(W.max()))
+        theta = float(q @ W)
+        if abs(Zhi + dZ * theta - ZE) > 1e-10 * ZE:
+            return False, dict(reason="the partition sum is not Z(m+) + (Z(m-) - Z(m+)) E_q W", lhs=Zhi + dZ * theta, rhs=ZE)
+        # (b) rejection from the Gibbs measure of the lower model
+        pi_lo = np.exp(-mlo) / Zlo
+        acc = -np.expm1(-(mhi - mlo))
+        rate = float(pi_lo @ acc)
+        if abs(rate - (1 - Zhi / Zlo)) > 1e-10 or np.abs(pi_lo * acc / rate - q).max() > 1e-10:
+            return False, dict(reason="the accepted draws of the rejection sampler do not have the law q", rate=rate)
+        # (c) coverage of the Hoeffding bracket, and the comparison with plain sampling
+        delta, n = 0.1, 60
+        t = math.sqrt(math.log(2 / delta) / (2 * n))
+        draws = rng.choice(N, size=(40, n), p=q)
+        est = W[draws].mean(axis=1)
+        lo_b = Zhi + dZ * np.clip(est - t, 0.0, 1.0)
+        hi_b = Zhi + dZ * np.clip(est + t, 0.0, 1.0)
+        if (lo_b < Zhi * (1 - 1e-12)).any() or (hi_b > Zlo * (1 + 1e-12)).any():
+            return False, dict(reason="the sampled bracket leaves the deterministic bracket")
+        stats["runs"] += 40
+        stats["misses"] += int(((ZE < lo_b * (1 - 1e-12)) | (ZE > hi_b * (1 + 1e-12))).sum())
+        ratio = float(pi_lo @ acc) / float(acc.max())               # E d / max d
+        plain = Zlo * float(acc.max()) * t                           # plain sampling of e^{-(E - m-)} in [e^{-u_max}, 1]
+        if dZ * t > plain * (1 + 1e-12) or abs(dZ * t / plain - ratio) > 1e-9:
+            return False, dict(reason="the half-width is not that of plain sampling times E d/max d", ratio=ratio)
+        if it % 5 == 0 and abs(ratio - 1) > 1e-9:
+            return False, dict(reason="with a constant gap the two samplers should coincide", ratio=ratio)
+        stats["gain"] = min(stats["gain"], ratio)
+        stats["best_gain"] = max(stats["best_gain"], ratio)
+        stats["sandwiches"] += 1
+    if stats["misses"] > 0.1 * stats["runs"]:
+        return False, dict(reason="the bracket misses more often than delta", **stats)
+    # (d) the two numbers
+    width = lambda Delta, n, delta: 2 * math.sqrt(math.log(2 / delta) / (2 * n)) * math.expm1(Delta)
+    if not (width(0.0605, 50000, 0.05) < 7.6e-4 and width(0.0605, 1200, 0.05) < 5e-3 and width(0.0605, 1100, 0.05) > 5e-3):
+        return False, dict(reason="the quoted widths", a=width(0.0605, 50000, 0.05), b=width(0.0605, 1200, 0.05))
+    if not (stats["sandwiches"] >= 30 and stats["gain"] < 0.5 and stats["best_gain"] > 1 - 1e-9 and stats["runs"] >= 1000):
+        return False, dict(reason="cases not exercised", **stats)
     return True, stats
 
 
