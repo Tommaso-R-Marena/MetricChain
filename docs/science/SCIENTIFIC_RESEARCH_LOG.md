@@ -3008,3 +3008,15 @@ frozen site to the script after writing the remark, not before.  No prediction w
 was a check of a stated theorem, and the outcome "holds" was what the proof already said).  Their proof was not
 read; SCI-RES-0038 says so in its first line.
 
+**22:27 UTC — a standard written before the first claim arrives.**  The new division has not committed
+anything, and three divisions have already sent it orientations that grade their own results by "readiness for
+implementation".  I wrote down how this division will review what comes (`SOFTWARE_EVALUATION_PROTOCOL.md`): a
+claim sheet, the directive's nine applicability questions with what this branch has on each, a four-line error
+budget, the prerequisites of a retrospective validation, the eight benchmark questions, novelty classes, the
+form of a review, and a register of which of our own results are ready.  The useful discipline was applying the
+budget to our own best certificate first: `8·10⁻⁵` nats certified; discretisation unbounded here and of order a
+nat per angle on a toy; the model uncertain at `kT` per residue; the evaluation tolerance assumed.  By the
+standard I am about to apply to others, our headline number is "removes sampling error only".  The Geometry
+division accepted SCI-REV-0023 in substance twenty-three minutes after it was sent and put a head note over its
+own text.
+

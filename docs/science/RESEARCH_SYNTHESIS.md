@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 22:23 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 22:27 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–61.)*
 
 **Open right now (newest first; everything below this paragraph is older and still true
@@ -33,8 +33,14 @@ it appeared between 22:00:26 and 22:09:54 UTC, points at the theory division's c
 `b2caab6` and has no commit, digest or mailbox of its own.  **At every synchronisation:
 fetch it (it is the sixth branch of the fetch loop); when it has a digest, read digest
 and status first, then their first benchmark specification; answer with a review
-(SCI-REV), not with help.**  The Complexity division has also sent them an orientation
-(COMPLEXITY-MSG-0005, skimmed).
+(SCI-REV), not with help.**  **The standard for those reviews is written down:
+`docs/science/SOFTWARE_EVALUATION_PROTOCOL.md`** (claim sheet; the directive's nine applicability
+questions with what this branch has on each; a four-line error budget, worked on our own best
+certificate; observation models and the prerequisites of a retrospective validation; the eight
+benchmark questions; novelty classes; the form of a review; a readiness register of our own
+results).  The Complexity, Ensemble and (announced) Geometry divisions send them orientations of
+their own (COMPLEXITY-MSG-0005, ENSEMBLE-MSG-0006: skimmed); **the readiness grades in those are
+claims our reviews will have to check when software exists.**
 (i) **Two workstreams are running; their directories are uncommitted while they run.**
 R25 (launched 21:03 UTC; brief `docs/science/workstreams/R25_brief.md`): the second look
 the Complexity division asked for (their Theorem 1c in one regime, their Lemma A1) —
@@ -95,7 +101,7 @@ expansion of the chain's exponent?  D12 (a′) — a certified statement between
 D14 (down-closed families), D16 (a certified discretisation term; G-5 is answered).  Unrefereed inside the division:
 addendum A17 (13)–(18) (the research owner's decision, as recorded), parts (23), (24)
 and (25).
-(v) Heads read at 22:21 UTC: theory `6ebcccd`, engineering `5f85c81`, ensemble `d7cbd91`, geometry `b0734aa`, complexity `75266b2`, structural biology `b2caab6` (engineering, ensemble and geometry had moved; read as far as the pins in the status file say).  **The Geometry division accepted SCI-REV-0023 in substance within 23 minutes (GEOMETRY-MSG-0008 §3) and announces an answer to our question on the threshold as GEOMETRY-RES-0007: read it when it comes — `OPEN_PROBLEMS.md` C6.**
+(v) Heads read at 22:26 UTC: theory `6ebcccd`, engineering `c683fde`, ensemble `d7cbd91`, geometry `b0734aa`, complexity `75266b2`, structural biology `b2caab6` (only engineering had moved since 22:21: drafts of their correction after our SCI-REV-0018, by title; read as far as the pins in the status file say).  **The Geometry division accepted SCI-REV-0023 in substance within 23 minutes (GEOMETRY-MSG-0008 §3) and announces an answer to our question on the threshold as GEOMETRY-RES-0007: read it when it comes — `OPEN_PROBLEMS.md` C6.**
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
    (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —
@@ -615,13 +621,16 @@ preservation.
 
 | artifact | what it is |
 |---|---|
-| `docs/collaboration/SCIENCE_TO_ALL.md` | digest (27 items) and index of every message sent |
-| `docs/collaboration/messages/science/` | `SCI-MSG-0001…0013` (findings, corrections, prioritisation), `SCI-REV-0001…0006` (reviews) |
+| `docs/collaboration/SCIENCE_TO_ALL.md` | our copy of the protocol (seven divisions); digest (103 items at checkpoint 65) and index of every message sent; a table of what was received |
+| `docs/collaboration/messages/science/` | `SCI-MSG-0001…0034` (findings, corrections, relays of the owner's directives, the orientation for the Structural Biology division), `SCI-REV-0001…0023` (reviews) |
 | `docs/collaboration/requests/science/SCI-REQ-0001.md` | four theoretical questions to the theory division |
-| `docs/collaboration/responses/science/SCI-RES-0001…0005` | answers to the theory division: THY-REQ-0011 (in full), THY-RES-0005, THY-RES-0006 §5 (§11.29 still owed, with workstream F) |
-| `docs/collaboration/status/science.md` | investigations, findings S1–S36 with status, outstanding requests |
+| `docs/collaboration/responses/science/SCI-RES-0001…0038` | answers to the other divisions (the digest's index says to whom and about what) |
+| `docs/collaboration/status/science.md` | governing documents, pins, investigations and workstreams, findings S1–S101 with status, outstanding requests, requests received |
 | `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md` | what was read upstream, at which commit, how deeply; dependencies; sync log |
-| `docs/science/INFERENCE_LIMITS.md` (v3) and `INFERENCE_LIMITS_ADDENDA.md` (A1–A16) | our own mathematics: what evaluations, averaged data and thermodynamic data determine |
+| `docs/science/OWNER_DIRECTIVES.md` | the research owner's directives in the owner's words: D-1 (generality; text in SCI-MSG-0029), D-2 (six divisions), D-3 (a seventh division; this division evaluates its software) — **read first** |
+| `docs/science/INFERENCE_LIMITS.md` (v3) and `INFERENCE_LIMITS_ADDENDA.md` (A1–A17; A17 has parts (1)–(25), items 1–99) | our own mathematics: what evaluations, averaged data and thermodynamic data determine; the certified free energies (A17 (13)–(24)); continuous site variables (A17 (25)) |
+| `docs/science/ASSUMPTION_AUDIT.md` | every assumption of our own statements in the six classes of D-1; obligations G-1…G-8 with their state |
+| `docs/science/SOFTWARE_EVALUATION_PROTOCOL.md` (v1) | how this division reviews the Structural Biology division's software and benchmarks (D-3): claim sheet, applicability questions, the four-line error budget, observation models, benchmark questions, novelty classes, a readiness register of our own results |
 | `docs/science/PHYSICAL_APPLICABILITY.md` | what the mathematics means for molecules; the measured class constants |
 | `docs/science/ALTERNATIVE_FRAMEWORKS.md` (v2) | polytope against ellipsoid; six models of ignorance (version 2 adds the higher-order envelope with ball data and the divergence bound against a sampleable model), and what the measurements decided between them |
 | `docs/science/SCIENTIFIC_FRONTIER_MAP.md` (v5.1) | twelve limitations of the science, their kind, where the programme stands |
