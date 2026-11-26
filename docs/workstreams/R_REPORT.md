@@ -440,6 +440,50 @@ restart two levels back from `k = 4` on (`ub_subsolution.py`: `κ₀ = 2`) and t
 behaves like `c_*²/(k + c)²` with `c ≈ 0.15–0.25`, between `c = ½` (lower bound) and `c ≈ 0`
 (the exact dynamics of convex majorants).
 
+## 8a. The profile at positive accuracy: a closed form for the similarity solution
+
+**Proposition S (the scaled defect) [P-sketch — see the status below; N].**  *Under (H0), (H1), for
+every `ζ ≥ 0`,*
+
+    lim_{k → ∞} k²·[ T_k(ζh/k) − θ_hint(ζh/k) ]  =  h²·ϑ·f(ζ),
+    f(ζ)  =  sup{ 2z² + 2ζ·z·cot z  :  z ∈ (0, π)  or  z = iy, y > 0 }  −  ζ²/2
+
+*(for imaginary `z`: `−2y² + 2ζ·y·coth y`).*  `f(0) = 2π²` is Theorem R.  `f` is decreasing and convex,
+`f(3) = 3/2`, `f′(2) = −2`; the supremum is attained at a real `z` for `ζ < 3` (intercepts above `h`) and
+at an imaginary one for `ζ > 3` (intercepts below `h`, where the orbit approaches the stable
+fixed point); and `f` solves
+
+    ζ·f′²/2 + ζ·f′ + (ζ − 2)·f = 0,
+
+the similarity equation of the continuum heuristic `∂_kD = −x·[D/h + (∂_xD)²/(2q)]`, `q = hϑ`, of
+the brief (§2.4), through its folded saddle `(3, 3/2)`: the heuristic is a theorem about
+Legendre transforms of the orbit curves.
+
+*Derivation.*  Both bounds are envelopes of lines over the same curves: `T_k(x) ≥ sup_B [B − p_k(B)x]`
+(Proposition A) and `T_{k₁+j}(x) ≤ max_{B ≤ b_j} [B − W_j(B)x]` (Proposition C; for `x ≍ 1/j` the maximum
+is at slopes within `O(1/j)` of `L`, where `W_j = p_j`).  With `A = 1/(2ϑ)`, `B = h + δ`, the comparison
+of the proof of Lemma PT gives the *position* of the orbit after `k` steps, not only the
+number of steps: `p_k(h + δ) − L = −√(δ/A)·cot(√(Aδ)·k/h)·(1 + o(1))` for `δ > 0` (and the same with
+`coth` for `δ < 0`), uniformly for `z = √(Aδ)·k/h` in compact subsets of `(0, π)`.  With
+`δ = z²h²/(Ak²)`, `x = ζh/k` and `θ_hint(x) = h − Lx + ϑx²/2 + o(x²)`:
+
+    B − p_k(B)·x − θ_hint(x)  =  (h²ϑ/k²)·[ 2z² + 2ζ·z·cot z − ζ²/2 ] + o(k⁻²).
+
+The equation for `f`: at the maximiser, `f′ = 2z·cot z − ζ`, and the stationarity condition
+`2z + ζ(cot z − z/sin²z) = 0` eliminates `z`.
+
+*Status.*  The two envelope bounds are Propositions A and C.  The uniform position
+estimate is the argument of Lemma PT read for positions; it is **not written out**, and
+the exchange of the limit with the supremum over `z` (the maximiser stays in a compact
+subset of `(0, π)` for `0 < ζ < 3`) is not written out either.  Numerically
+(`r4_profile.py`, `out_r4_profile.txt`): the lower envelope of the lines of Proposition A,
+computed from the exact orbit curves, increases to `f` for both pairs — at `ζ = 1`:
+`5.611, 5.793, 5.891, 5.941` at `k = 20, 40, 80, 160` (Gaussian; the cube at `u = 1` agrees to
+three digits) against `f(1) = 5.992` — and the recursion itself on a grid has
+`11.742, 9.068, 5.980, 2.933, 1.501, 0.396` at `ζ = ¼, ½, 1, 2, 3, 5` and `k = 160` against
+`f = 11.765, 9.089, 5.992, 2.935, 1.500, 0.388`; the residual of the differential equation
+is below `2·10⁻⁴` on the closed form (finite differences).
+
 ## 9. Other shapes of the maximum of `J`: where the law changes
 
 The proof separates what is structural from what is (H1).
@@ -505,6 +549,7 @@ harness XVI.6; the conjugation is routine and is not written out]**: `(3 − √
 | `r1_checks.py` | joint convexity and monotonicity of `Σ` (12 000 random midpoints); convexity of the orbit curves; (Σ6); Lemma PT; Proposition U by brute force — the bracket of `R` minimised over `φ` at `β → 0` against the envelope of the image lines, for random convex piecewise-linear `W`; a negative control with a concave `W`; Proposition K | all pass (`out_r1_checks.txt`): `√δ·N_t(δ)/c_* = 0.764, 0.906, 0.968, 0.990, 0.997` at `δ/h = 10⁻², …, 10⁻⁶` (Gaussian; the cube alike); Proposition U holds **with equality** up to the discretisation (`2·10⁻⁶·a`, 240 cases); with a concave `W` the line-by-line value is exceeded by up to `0.07·a` |
 | `r2_chain.py pair s_t−L b_0−h [levels]` | the restarted chain of §6: case A/B, `B_t(j)`, `m_j`, `E_j`, `b_j`, the range condition, the ratio of consecutive slopes against its bound; `j²(b_j − h)/c_*²` | `out_r2_chain_gauss.txt` (`1.031` at `j = 1000`), `out_r2_chain_cube1.txt` (`1.049` at `j = 600`), `out_r2_chain_gauss_st015.txt`, `out_r2_chain_gauss_wide.txt` (range condition fails) |
 | `r3_gauss_exact_lb.py` | **exact** lower bounds for the Gaussian pair at finite `k` (Proposition A with the orbit in rational arithmetic: no rounding; the chain behind it is machine-checked) | `τ_k ≥ 0.381966011, 0.307978528, 0.255679562, 0.250376448, 0.250023947` at `k = 2, 3, 10, 40, 160`; `(k + ½)²(τ_k − ¼) ≥ 1.0151, 1.0010, 1.00005` times `π²/16` at `k = 10, 40, 160` (`out_r3_gauss_exact_lb.txt`) |
+| `r4_profile.py` | the closed form `f` of §8a, the residual of its differential equation, and the lower envelope of the lines of Proposition A at `k = 20 … 160` for two pairs | `out_r4_profile.txt` (increasing to `f`; the two pairs agree to three digits) |
 | `level_rate/lines_lb*.py` | `B_∞(k)` (lower bound) for the Gaussian pair, the cube, four biased cubes | ratio to `c_*²`: `0.9902, 0.9938, 0.9969` at `k = 100, 160, 320` (Gaussian) |
 | `level_rate/dual_ub_*.py` | the exact dynamics of convex majorants on grids | ratio `1.00016, 1.00006, 1.00001` at `k = 100, 160, 320` (Gaussian); `0.99873, 0.99903` at `120, 160` (cube `u = 1`) |
 | `level_rate/iterate_exact.py` | the recursion itself on a grid (not one-sided) | ratio `0.9960, 0.9982` at `100, 160` (Gaussian); `0.99467, 0.99585` at `100, 120` (cube) |
@@ -523,10 +568,9 @@ harness XVI.6; the conjugation is routine and is not written out]**: `(3 − √
 3. **Not machine-checked:** Proposition U (it needs Sion's minimax theorem), Lemma T,
    Proposition C, Lemma RC, Lemma PT, (Σ6).  Machine-checked: Lemma L and the iteration of
    Proposition A, Lemma M, the Gaussian slope map and three numerical instances.
-4. **Positive accuracy.**  The theorem is about `τ_k = T_k(0+)`.  The profile `T_k(x) − θ_hint(x)`
-   at `x ≍ 1/k` should follow the similarity solution of the brief (§2.4, `f(0) = 2π²`); the
-   lower half is contained in Proposition A (the lines `B − p_k(B)x` for all `B`), the upper
-   half in Proposition C (`T ≤ M_{W_j, b_j}`), but the comparison has not been written.
+4. **Positive accuracy.**  The theorem is about `τ_k = T_k(0+)`.  The profile at `x ≍ 1/k` has the
+   closed form of §8a; its proof is a sketch (a uniform position estimate is not written
+   out).
 5. **Finite `n`.**  With a schedule of `k ≍ n^{1/3}` levels and a loss of `O(ln n)` per level one
    expects `n·h + O(n^{1/3}(ln n)^{2/3})` for the adaptive cost; this needs the uniform
    sub-exponential factors (workstream Q2) and is **not established**.
