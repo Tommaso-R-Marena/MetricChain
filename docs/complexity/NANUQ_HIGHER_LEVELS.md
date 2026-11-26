@@ -37,6 +37,20 @@ If the term `Φ6(z,w)` of `S` ([LC] Proposition 2) is negative, or is non-zero a
 then these six leaves lie at six different positions of one blob.  For a given split there is at most one
 blob for which this can happen: the blob at four different positions of which its end leaves lie.
 
+(e) Let the end leaves of `S` lie at four different positions `π_1, π_2 | π_3, π_4` of a blob `𝔅` ("`S` cuts
+`𝔅`").  Then
+
+```
+α_S / 2  =  Φ4  +  Σ_π  m_π · Φ5(π)  +  Σ_{π < ρ}  m_π m_ρ · Φ6(π, ρ) ,
+```
+
+where `π`, `ρ` run over the positions of `𝔅` on either side of `S`, `m_π` is the size of `π` minus the number
+of end leaves at `π`, the last sum is over pairs of *different* positions on the same side, and `Φ4`, `Φ5(π)`,
+`Φ6(π,ρ)` are the local terms of the bloblet `𝔅°` in which the positions `π_1,…,π_4` carry cherries (one leaf
+of each cherry being the end leaf).  So the weight of a split that cuts a blob is a polynomial of degree at
+most two in the sizes of the positions, with coefficients determined by the blob alone; a split that cuts
+no blob has weight `≥ 0`, positive iff it is displayed.
+
 *Proof.*  (a) is Step 1 of the proof of [LC] Theorem 12, which nowhere uses the level: if some cut edge has
 at least two leaves of `Y` on each side, `Σ|_Y` is a substitution of two tree-generated systems with at
 least three leaves each ([LC] Lemma D(i), Lemma 7(ii)), and the 624 such systems on six points are all
@@ -53,7 +67,12 @@ the proofs of [LC] Theorem 10 and Theorem 10′ are the systems of the networks 
 replacing leaves by clades, and one of them fails as stated.
 (d) The first sentence is (a) with the definition of "6-locally good".  If the end leaves of `S` lie at four
 different positions of `𝔅` and `𝔅'` is another blob, then `𝔅'` lies in one pendant subnetwork `P` of `𝔅`, and all
-leaves outside `P` — at least three of the four end leaves — lie in one pendant subnetwork of `𝔅'`.  ∎
+leaves outside `P` — at least three of the four end leaves — lie in one pendant subnetwork of `𝔅'`.
+(e) is Step 4 of the proof of [LC] Theorem 12, which uses only Lemma D: two further leaves at one position
+contribute `Φ6 = 0` (at most one end leaf lies at that position, and the two terms containing it cancel);
+in every other term each position is met at most twice, so by Lemma D(iii) the term is a local term of
+`Σ(𝔅)` with cherries at the positions met twice, and it depends only on the positions of the further
+leaves.  The last sentence of (e) is (d) together with [LC] Lemmas 3 and 4.  ∎
 
 So the question "for which outer-labeled planar networks does the conclusion hold, and keep holding when
 leaves are replaced by clades" is, at every level, a question about **single blobs with six positions**:
@@ -70,11 +89,13 @@ Lemma D instead of Lemma B and no induction.
 **Corollary C (level 2).**  [LC] Corollary 14: a blob with two hybrid nodes has `Σ(𝔅) ∈ 𝒦` (equivalently
 `∈ 𝒦′`) iff it is galled, or nested with at most one middle position.
 
-**Remark (what Theorem A does not give).**  It decides the robust question.  For a single network a blob
-outside `𝒦` does not imply failure: the weight of each affected split is a polynomial of degree two in the
-sizes of the positions of its blob, with coefficients that are local terms of the blob's bloblet on at
-most six positions, and its sign has to be computed — as [LC] Theorem 12 does for the nested blob with two
-hybrid nodes, where the answer is not monotone in the number of leaves.
+**Remark (what Theorem A gives and does not give).**  (b)–(c) decide the robust question.  For a single
+network a blob outside `𝒦` does not imply failure: by (e) the weight of each split that cuts the blob is a
+polynomial of degree two in the sizes of its positions, and its sign has to be computed — as [LC]
+Theorem 12 does for the nested blob with two hybrid nodes, where the answer is not monotone in the number
+of leaves.  (e) makes this a finite procedure for every blob: a blob with `p` positions has `p(p−3)/2`
+splits to examine, and each polynomial needs the local terms of the bloblet with at most two leaves per
+position.  What is missing beyond level 2 is the list of blobs.
 
 ## 2. Six leaves and three hybrid nodes
 
