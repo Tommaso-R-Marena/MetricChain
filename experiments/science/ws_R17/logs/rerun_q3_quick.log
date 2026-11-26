@@ -1,0 +1,71 @@
+# Workstream Q, check 3: exact certified cost of the design G_M against Theorem Q8.  eps = 0.8715, delta = 0.05
+
+# u = 1.0: a = 0.110944, h = 0.029139, h/a = 0.2626;  B_M/a = 1.0000, 0.7920, 0.6272;  levels k_M = [1, 3, 5];  J_m = [1, 1]
+#      n   M  levels   exact 'proof'   exact 'min'    Theorem Q8     n B_M     | in units of n a: proof    min     bound    B_M/a  |  bound - exact(min)   nodes checked   violations   least slack: induction / Lemma Q3 / Lemma Q4   time
+    1000   0     1        149.70         149.70        213.89      110.94   |              1.3493   1.3493   1.9279   1.0000  |         64.18               1          0             64.18 /      inf /    inf            0 s
+    1000   1     3        149.70         149.70        433.80       87.87   |              1.3493   1.3493   3.9101   0.7920  |        284.10              86          0             43.52 /    98.43 /   4.12            0 s
+#            top drop ('min'): pass-through ({'noshift': 164.3, 'passthrough': 149.7})
+    1000   2     5        150.97         150.97        640.26       69.59   |              1.3607   1.3607   5.7710   0.6272  |        489.29             527          0             40.36 /    98.43 /   0.03            0 s
+#            top drop ('min'): pass-through ({'noshift': 196.4, 'passthrough': 151.0})
+#            [two-level design of K_REPORT 6.4 at n_o = n/2 (r8_flat.flat_run): ln C_max = 126.30 = 1.1384 n a]
+    1400   0     1        199.89         199.89        267.85      155.32   |              1.2869   1.2869   1.7245   1.0000  |         67.96               1          0             67.96 /      inf /    inf            0 s
+    1400   1     3        199.89         199.89        482.63      123.01   |              1.2869   1.2869   3.1073   0.7920  |        282.74             140          0             50.67 /    95.07 /   3.30            0 s
+#            top drop ('min'): pass-through ({'noshift': 204.7, 'passthrough': 199.9})
+    1400   2     5        200.01         200.01        685.46       97.42   |              1.2877   1.2877   4.4132   0.6272  |        485.45            1333          0             39.66 /    95.07 /   0.03            0 s
+#            top drop ('min'): pass-through ({'noshift': 228.5, 'passthrough': 200.0})
+#            [two-level design of K_REPORT 6.4 at n_o = n/2 (r8_flat.flat_run): ln C_max = 154.28 = 0.9933 n a]
+    2000   0     1        272.99         272.99        346.37      221.89   |              1.2303   1.2303   1.5610   1.0000  |         73.38               1          0             73.38 /      inf /    inf            0 s
+    2000   1     3        272.99         265.31        551.71      175.73   |              1.2303   1.1957   2.4864   0.7920  |        286.40             224          0             57.28 /    90.24 /   1.66            0 s
+#            top drop ('min'): noshift; n_o = 416, r_dag = 85, K = 66985, ln 2Mbar = 104.9, ln(1/delta') = 112.4; largest term: rung 48 of 48 at accuracy 0.68; candidates {'noshift': 265.3, 'passthrough': 273.0}
+    2000   2     5        273.11         265.47        747.52      139.18   |              1.2308   1.1964   3.3689   0.6272  |        482.04            3359          0             39.59 /    90.24 /   0.03            0 s
+#            top drop ('min'): pass-through ({'noshift': 288.7, 'passthrough': 265.5})
+#            [two-level design of K_REPORT 6.4 at n_o = n/2 (r8_flat.flat_run): ln C_max = 193.51 = 0.8721 n a]
+    4000   0     1        511.07         511.07        598.14      443.78   |              1.1516   1.1516   1.3478   1.0000  |         87.06               1          0             87.06 /      inf /    inf            0 s
+    4000   1     3        511.07         458.20        766.06      351.47   |              1.1516   1.0325   1.7262   0.7920  |        307.86             495          0             56.97 /    79.18 /   3.12            0 s
+#            top drop ('min'): noshift; n_o = 832, r_dag = 186, K = 72013, ln 2Mbar = 162.8, ln(1/delta') = 171.1; largest term: rung 94 of 94 at accuracy 0.68; candidates {'noshift': 458.2, 'passthrough': 511.1}
+    4000   2     5        512.26         449.75        933.09      278.36   |              1.1543   1.0135   2.1026   0.6272  |        483.35           16311          0             39.40 /    79.18 /   0.03            3 s
+#            top drop ('min'): noshift; n_o = 832, r_dag = 182, K = 661772, ln 2Mbar = 171.1, ln(1/delta') = 179.3; largest term: rung 70 of 94 at accuracy 24.00; candidates {'noshift': 449.7, 'passthrough': 459.5}
+#            [two-level design of K_REPORT 6.4 at n_o = n/2 (r8_flat.flat_run): ln C_max = 322.25 = 0.7262 n a]
+    8000   0     1        976.90         976.90       1083.60      887.55   |              1.1007   1.1007   1.2209   1.0000  |        106.70               1          0            106.70 /      inf /    inf            0 s
+    8000   1     3        969.85         832.92       1173.39      702.93   |              1.0927   0.9384   1.3221   0.7920  |        340.48            3436          0             56.63 /    70.81 /   3.63            2 s
+#            top drop ('min'): noshift; n_o = 1664, r_dag = 395, K = 77264, ln 2Mbar = 270.8, ln(1/delta') = 279.7; largest term: rung 186 of 186 at accuracy 0.68; candidates {'shift': 940.9, 'noshift': 832.9, 'passthrough': 976.9}
+#            [two-level design of K_REPORT 6.4 at n_o = n/2 (r8_flat.flat_run): ln C_max = 569.38 = 0.6415 n a]
+   16000   0     1       1897.35        1897.35       2029.54     1775.11   |              1.0689   1.0689   1.1433   1.0000  |        132.18               1          0            132.18 /      inf /    inf            0 s
+   16000   1     3       1728.68        1568.21       1969.97     1405.86   |              0.9738   0.8834   1.1098   0.7920  |        401.77            6840          0             56.10 /    73.45 /   0.03            8 s
+#            top drop ('min'): noshift; n_o = 3328, r_dag = 820, K = 82690, ln 2Mbar = 479.1, ln(1/delta') = 488.7; largest term: rung 371 of 371 at accuracy 0.68; candidates {'shift': 1701.9, 'noshift': 1568.2, 'passthrough': 1897.4}
+#            [two-level design of K_REPORT 6.4 at n_o = n/2 (r8_flat.flat_run): ln C_max = 1047.08 = 0.5899 n a]
+   32000   0     1       3717.86        3717.86       3886.64     3550.21   |              1.0472   1.0472   1.0948   1.0000  |        168.78               1          0            168.78 /      inf /    inf            0 s
+   32000   1     3       3215.36        3018.49       3504.10     2811.72   |              0.9057   0.8502   0.9870   0.7920  |        485.61           13597          0             56.11 /    89.13 /   2.69           30 s
+#            top drop ('min'): noshift; n_o = 6656, r_dag = 1684, K = 88210, ln 2Mbar = 880.4, ln(1/delta') = 890.7; largest term: rung 740 of 740 at accuracy 0.68; candidates {'shift': 3189.0, 'noshift': 3018.5, 'passthrough': 3717.9}
+#            [two-level design of K_REPORT 6.4 at n_o = n/2 (r8_flat.flat_run): ln C_max = 2004.45 = 0.5646 n a]
+   64000   0     1       7331.53        7331.53       7552.23     7100.42   |              1.0325   1.0325   1.0636   1.0000  |        220.70               1          0            220.70 /      inf /    inf            0 s
+   64000   1     3       6136.99        5893.74       6493.03     5623.44   |              0.8643   0.8301   0.9145   0.7920  |        599.28           27040          0             55.96 /   110.20 /   3.70          125 s
+#            top drop ('min'): noshift; n_o = 13312, r_dag = 3430, K = 93804, ln 2Mbar = 1664.0, ln(1/delta') = 1675.0; largest term: rung 1479 of 1479 at accuracy 0.68; candidates {'shift': 6114.4, 'noshift': 5893.7, 'passthrough': 7331.5}
+#            [two-level design of K_REPORT 6.4 at n_o = n/2 (r8_flat.flat_run): ln C_max = 3839.07 = 0.5407 n a]
+
+# u = 2.0: a = 0.327813, h = 0.097281, h/a = 0.2968;  B_M/a = 1.0000, 0.7712, 0.5947;  levels k_M = [1, 3, 5];  J_m = [1, 1]
+#      n   M  levels   exact 'proof'   exact 'min'    Theorem Q8     n B_M     | in units of n a: proof    min     bound    B_M/a  |  bound - exact(min)   nodes checked   violations   least slack: induction / Lemma Q3 / Lemma Q4   time
+    1000   0     1        402.73         402.73        750.67      327.81   |              1.2285   1.2285   2.2899   1.0000  |        347.93               1          0            347.93 /      inf /    inf            0 s
+    1000   1     3        402.73         364.55       1260.70      252.79   |              1.2285   1.1121   3.8458   0.7712  |        896.15             368          0             85.10 /   491.28 /   0.10            0 s
+#            top drop ('min'): noshift; n_o = 228, r_dag = 10, K = 69100, ln 2Mbar = 143.4, ln(1/delta') = 151.4; largest term: rung 77 of 77 at accuracy 0.68; candidates {'noshift': 364.6, 'passthrough': 402.7}
+    4000   0     1       1448.00        1448.00       1735.49     1311.25   |              1.1043   1.1043   1.3235   1.0000  |        287.49               1          0            287.49 /      inf /    inf            0 s
+    4000   1     3       1448.00        1182.56       2036.06     1011.18   |              1.1043   0.9019   1.5528   0.7712  |        853.50            1708          0            105.77 /   452.91 /   2.97            1 s
+#            top drop ('min'): noshift; n_o = 915, r_dag = 73, K = 79681, ln 2Mbar = 408.5, ln(1/delta') = 417.9; largest term: rung 302 of 302 at accuracy 0.68; candidates {'noshift': 1182.6, 'passthrough': 1448.0}
+   16000   0     1       5507.37        5507.37       5878.81     5245.01   |              1.0500   1.0500   1.1208   1.0000  |        371.44               1          0            371.44 /      inf /    inf            0 s
+   16000   1     3       4793.01        4331.00       5293.17     4044.72   |              0.9138   0.8257   1.0092   0.7712  |        962.17           22759          0            110.28 /   377.66 /   1.54           30 s
+#            top drop ('min'): noshift; n_o = 3661, r_dag = 363, K = 90726, ln 2Mbar = 1385.5, ln(1/delta') = 1396.2; largest term: rung 1202 of 1202 at accuracy 0.68; candidates {'shift': 4754.0, 'noshift': 4331.0, 'passthrough': 5507.4}
+
+# u = 0.5: a = 0.030300, h = 0.007673, h/a = 0.2532;  B_M/a = 1.0000, 0.7979, 0.6367;  levels k_M = [1, 3, 5];  J_m = [1, 1]
+#      n   M  levels   exact 'proof'   exact 'min'    Theorem Q8     n B_M     | in units of n a: proof    min     bound    B_M/a  |  bound - exact(min)   nodes checked   violations   least slack: induction / Lemma Q3 / Lemma Q4   time
+    4000   0     1        150.77         150.77        203.07      121.20   |              1.2440   1.2440   1.6755   1.0000  |         52.30               1          0             52.30 /      inf /    inf            0 s
+    4000   1     3        150.77         150.77        379.06       96.71   |              1.2440   1.2440   3.1275   0.7979  |        228.29              97          0             40.76 /    37.92 /   4.64            0 s
+#            top drop ('min'): pass-through ({'noshift': 166.3, 'passthrough': 150.8})
+   16000   0     1        533.78         533.78        609.65      484.80   |              1.1010   1.1010   1.2575   1.0000  |         75.87               1          0             75.87 /      inf /    inf            0 s
+   16000   1     3        575.02         479.70        748.53      386.84   |              1.1861   0.9895   1.5440   0.7979  |        268.84            1770          0             41.28 /    37.04 /   2.74            2 s
+#            top drop ('min'): noshift; n_o = 3233, r_dag = 1154, K = 74248, ln 2Mbar = 163.6, ln(1/delta') = 171.9; largest term: rung 99 of 99 at accuracy 0.68; candidates {'shift': 548.7, 'noshift': 479.7, 'passthrough': 533.8}
+   64000   0     1       2026.84        2026.84       2147.24     1939.19   |              1.0452   1.0452   1.1073   1.0000  |        120.39               1          0            120.39 /      inf /    inf            0 s
+   64000   1     3       1815.15        1682.97       2050.59     1547.35   |              0.9360   0.8679   1.0574   0.7979  |        367.62            7162          0             40.76 /    54.34 /   5.11           39 s
+#            top drop ('min'): noshift; n_o = 12932, r_dag = 4749, K = 85011, ln 2Mbar = 493.0, ln(1/delta') = 502.7; largest term: rung 393 of 393 at accuracy 0.68; candidates {'shift': 1791.0, 'noshift': 1683.0, 'passthrough': 2026.8}
+
+violations of proved inequalities: 0   [250 s]
+R17-WRAPPER LAST LINE: completed; wall 250.0 s; peak RSS 64.7 MB

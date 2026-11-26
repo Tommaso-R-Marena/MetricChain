@@ -1,0 +1,9 @@
+# u n n_o xhat | (i) theta vs threshold | (ii) lemma bound vs exact Gamma~(r_1) | sum | r_1, first r with Gamma~(r) > c_eta theta (= r_dag + 1 if [P] decides), ln Gamma~ there, ln(c_eta theta)
+1 2000 400 26.782 | 2.32 | 6.91 | 9.22 | r_1=152, first=169, lnGamma~(first)=25.18, lnGamma~(r_1)=15.46, ln(c_eta theta)=24.68
+1 3000 1000 44.670 | 1.81 | 7.36 | 9.16 | r_1=380, first=398, lnGamma~(first)=43.09, lnGamma~(r_1)=33.41, ln(c_eta theta)=42.57
+1 600 8 14.156 | 4.91 | 4.31 | 9.22 | r_1=4, first=None, lnGamma~(first)=nan, lnGamma~(r_1)=2.84, ln(c_eta theta)=12.06
+2 600 100 30.356 | 2.53 | 10.38 | 12.90 | r_1=29, first=40, lnGamma~(first)=29.42, lnGamma~(r_1)=15.35, ln(c_eta theta)=28.26
+2 1200 600 79.689 | 1.43 | 11.89 | 13.32 | r_1=170, first=183, lnGamma~(first)=78.73, lnGamma~(r_1)=64.27, ln(c_eta theta)=77.59
+0.5 2500 250 15.187 | 3.00 | 5.70 | 8.70 | r_1=110, first=135, lnGamma~(first)=13.35, lnGamma~(r_1)=4.39, ln(c_eta theta)=13.09
+1 64000 63362 1864.905 | 0.72 | 9.15 | 9.87 | r_1=24071, first=24091, lnGamma~(first)=1863.15, lnGamma~(r_1)=1852.94, ln(c_eta theta)=1862.81
+LAST LINE r17_radius_cause.py: completed; wall 1.0 s; peak RSS 40.1 MB

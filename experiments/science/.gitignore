@@ -10,3 +10,5 @@ ws_*/scratch/*.bak
 pi_inference/helix_pair_form_cache/
 pi_inference/serine_helix_reach_cache/
 p9_verification/cache/
+# a scratch copy of another division's scripts (re-created by git archive; see the coordinator's note of R17_REPORT.md)
+ws_R17/rerun_copy/

@@ -1,0 +1,9 @@
+
+== C_1 (Proposition Q9a; report: 1.6 + 3.9 = 5.5 at u=1, eps=1, 44 epochs; referee: base 1.597,
+   drops 2.34, 3.47, 3.931, 3.936, 3.936 after 5, 13, 44, 120, 400 epochs; eps=0.1: 6.31; u=1/2: 2.43; u=2: 11.87) ==
+u=1 eps=1: M=5: base 1.5819 drops 2.3393 sum 3.9212 (alpha_0=0.6277); M=13: base 1.5917 drops 3.4713 sum 5.0630 (alpha_0=0.5838); M=44: base 1.5970 drops 3.9313 sum 5.5284 (alpha_0=0.5611); M=120: base 1.5986 drops 3.9357 sum 5.5343 (alpha_0=0.5547); M=400: base 1.5993 drops 3.9357 sum 5.5350 (alpha_0=0.5520)
+u=1 eps=0.1: M=5: base 1.8957 drops 2.6438 sum 4.5395 (alpha_0=0.0617); M=13: base 1.9053 drops 3.8924 sum 5.7978 (alpha_0=0.0573); M=44: base 1.9105 drops 4.3940 sum 6.3046 (alpha_0=0.0550); M=120: base 1.9121 drops 4.3988 sum 6.3108 (alpha_0=0.0544); M=400: base 1.9127 drops 4.3988 sum 6.3115 (alpha_0=0.0541)
+u=0.5 eps=1: M=5: base 0.6619 drops 1.0769 sum 1.7387 (alpha_0=0.6277); M=13: base 0.6677 drops 1.5492 sum 2.2169 (alpha_0=0.5838); M=44: base 0.6709 drops 1.7572 sum 2.4281 (alpha_0=0.5611); M=120: base 0.6719 drops 1.7596 sum 2.4315 (alpha_0=0.5547); M=400: base 0.6722 drops 1.7596 sum 2.4319 (alpha_0=0.5520)
+u=2 eps=1: M=5: base 4.0012 drops 5.3154 sum 9.3166 (alpha_0=0.6277); M=13: base 4.0167 drops 7.2239 sum 11.2406 (alpha_0=0.5838); M=44: base 4.0252 drops 7.8436 sum 11.8688 (alpha_0=0.5611); M=120: base 4.0277 drops 7.8464 sum 11.8741 (alpha_0=0.5547); M=400: base 4.0287 drops 7.8464 sum 11.8751 (alpha_0=0.5520)
+crude geometric majorant of the drops part (u=1, eps=1; referee: 81): 80.67
+LAST LINE r17_formula.py series: completed; wall 0.0 s; peak RSS 13.1 MB

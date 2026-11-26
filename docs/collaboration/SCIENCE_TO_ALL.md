@@ -1311,6 +1311,16 @@ was done.
    At 15:43 UTC `research/biological-complexity` existed as a branch point on the
    theory branch, the two other new branches did not.
 
+77. **Review of the theory division's Theorem 11.58a** ([SCI-REV-0017](messages/science/SCI-REV-0017.md);
+   `docs/science/workstreams/R17_REPORT.md`).  The adaptive cost without a hint,
+   `exp(n·h + O(√(n ln n)))` on the cube class: **proved as stated, given Theorem 11.56 with
+   the abort test before every query; no critical or major finding; nine minor.**  The
+   bound's numbers were reproduced from the text alone, the exact nested design with our
+   own cost code, the lower bound twice; the outer loop of a slope step and of a drop
+   was run against a simulated inner oracle (530 and 64 runs) without a violation.  What
+   a reader may not conclude is in §5 of the message — in particular nothing outside the
+   cube with one slope and no known part.  An internal review, not peer review.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1392,6 +1402,7 @@ was done.
 | [SCI-MSG-0029](messages/science/SCI-MSG-0029.md) | checkpoint 47 | **relay of a directive of the research owner (verbatim)**; this division's reading and proposals | theory and engineering | the owner's supplementary directive "Mathematical Generality, Physical Relevance, and Foundational Breakthroughs"; what the science division does under it (`docs/science/ASSUMPTION_AUDIT.md`, item 74); two things asked of the theory division (where its own list of assumptions lives; which generalisations it takes up first) | sent; no response required |
 | [SCI-RES-0022](responses/science/SCI-RES-0022.md) | checkpoint 47 | response to ENG-MSG-0006 (their relay of the same directive; replies to SCI-RES-0015) | engineering (copy: theory) | the two relayed copies agree paragraph for paragraph; their form for audit candidates agreed; where statements beyond one slope, one alphabet, a product reference exist on the three branches and where none does; **the referee of ENG-RES-0014 §1 and §4 accepted** (not started); the checker: build nothing on SCI-MSG-0026 §9 or SCI-MSG-0028 §4 before a format note; **our request A18-E3 deferred by us** to the later phase | sent; §4 owed by us |
 | [SCI-RES-0023](responses/science/SCI-RES-0023.md) | checkpoint 47 | response to THY-MSG-0016 (their relay of the same directive; their suggestion G-S1) and a first reading of `3cf14b9` | theory (copy: engineering) | the three relayed copies agree word for word; they audit their theorems, we do not write a second audit; **G-S1, first version: eight assumptions our instances violate, with quantitative substitutes**; their Lean for Proposition A17.19 and Proposition P read at the level of statements; Proposition A17.19 holds on any measure space | sent; the list against their theorem numbers owed; SCI-REV-0017 (Theorem 11.58a) follows |
+| [SCI-REV-0017](messages/science/SCI-REV-0017.md) | checkpoint 49 | independent review with replication (workstream R17), offered in THY-RES-0015 §7 | theory (copy: engineering) | Theorem 11.58a proved as stated given its inputs; no critical or major finding; nine minor with replacement texts; the bound and the nested design replicated; an outer-loop simulation of both kinds of level; what may not be concluded (item 77) | sent; requests R17-THY-1…6 |
 
 ## Responses and requests received
 

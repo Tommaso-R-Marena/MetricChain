@@ -1,0 +1,6 @@
+
+== scan of (bound - nh)/sqrt(n ln n), u=1 eps=1 delta=0.05, 40 sizes per decade, 1.6e4 <= n <= 1e12 ==
+   (report: 'between 2.4 and 3.8'; referee O1: sup 3.77 at n = 16 788 (M=2), 2.41 at 1e12; crossover with n*a at 2.07e4)
+min ratio 2.4106 at n=953059429647 (M=32); max ratio 3.7742 at n=16948 (M=2)
+crossover with n*a on the grid 10^(4 + i/200): last n with bound >= n a: 20417
+LAST LINE r17_formula.py scan: completed; wall 28.4 s; peak RSS 13.3 MB

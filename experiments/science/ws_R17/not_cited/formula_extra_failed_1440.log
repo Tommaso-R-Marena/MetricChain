@@ -1,0 +1,17 @@
+== (1) eps_n = n^-A, u = 1, delta = 0.05: ratio (bound - nh)/sqrt(n ln n) at the best M ==
+A=0.5: 1e3: 2.84 (M=0); 1e4: 3.69 (M=0); 1e5: 4.31 (M=5); 1e6: 3.89 (M=10); 1e8: 3.34 (M=17); 1e10: 3.21 (M=25); 1e12: 3.12 (M=32)
+A=1: 1e3: 3.59 (M=0); 1e4: 3.95 (M=0); 1e5: 4.86 (M=5); 1e6: 4.41 (M=9); 1e8: 3.82 (M=17); 1e10: 3.69 (M=25); 1e12: 3.62 (M=32)
+Traceback (most recent call last):
+  File "/home/user/MetricChain/experiments/science/ws_R17/scripts/r17_formula_extra.py", line 17, in <module>
+    best, rows, ep = F.best_M(C, n, n ** (-A), math.log(20.0))
+                     ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MetricChain/experiments/science/ws_R17/scripts/r17_formula.py", line 249, in best_M
+    Etot = E_total(C, n, eps, ln_inv_delta, M, ep=ep)
+  File "/home/user/MetricChain/experiments/science/ws_R17/scripts/r17_formula.py", line 228, in E_total
+    base = E_base(C, n, alpha[0], Lam)
+  File "/home/user/MetricChain/experiments/science/ws_R17/scripts/r17_formula.py", line 182, in E_base
+    l0 = ell0_x(C, x)
+  File "/home/user/MetricChain/experiments/science/ws_R17/scripts/r17_formula.py", line 172, in ell0_x
+    v = math.log(2 * math.exp(3 * C.u + min(x / 2, math.log(3))) / (math.exp(x / 2) - 1))
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+ZeroDivisionError: float division by zero

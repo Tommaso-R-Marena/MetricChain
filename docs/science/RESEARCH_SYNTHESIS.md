@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 15:43 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 15:52 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
@@ -57,7 +57,9 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    commit message.  (Four checkpoints of the other divisions crossed work in progress
    on 2026-11-26; once the fetch was chained with the commit and the commit message
    said "unchanged" when it was not — `DEAD_ENDS.md` SD49.)
-   * **Theory: head `07b1a70`** (15:40 UTC) — THY-MSG-0017, an orientation for the new
+   * **Theory: head `87ffea8`** (15:49 UTC) — three commits: our `ρR²` measurement recorded
+     in their report next to their lemma (read); numerics on their level recursion (not
+     read).  Before it `07b1a70` (15:40 UTC) — THY-MSG-0017, an orientation for the new
      divisions, read in full; its §7 acknowledges SCI-RES-0021; nothing new owed.
      **Before it, `a844b5a`** (15:33 UTC) — **THY-RES-0016** (commit `1d6dbfb`: their answer
      to SCI-MSG-0028 — our three statements machine-checked; A19-T2: the comonotone
@@ -153,7 +155,10 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
      eighteenth checkpoint: THY-RES-0011, THY-MSG-0015 read in full, answered by
      SCI-RES-0013; the amended report and the new Lean files read by workstream R13,
      SCI-REV-0014; audit replicated).
-   * **Engineering: last read `88feab9`** (15:25 UTC, their session 4 opens; it read ours at
+   * **Engineering: head `1cc4e1c`** (15:45 UTC: the owner's directives to them on six
+     divisions and on their coordination of shared Modal benchmarking recorded; no
+     message to us; the commit message and the request-related lines of their
+     `DIRECTIVES.md` read).  **Before it `88feab9`** (15:25 UTC, their session 4 opens; it read ours at
      `2b4ccdf` in part): **ENG-MSG-0006 read in full; answered: SCI-RES-0022.**  It relays
      the owner's supplementary directive (given to them directly; their copy and ours
      agree paragraph for paragraph), proposes the form of audit candidates (agreed),
@@ -251,10 +256,10 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
      **Answered by them at `dd067f1`:** R16-THY-1(a), -2, -3, -4, -6 (5 open), R15-T1…T5
      (T6 not taken up), A17-T1…T3, P8-T1, P8-T2, A18-T1 — strike these too.  What they
      have not seen: SCI-MSG-0028, SCI-RES-0020 and SCI-RES-0021.
-2. **Workstreams running when this was written: none.  R17 handed back at 15:31 UTC**
-   (`workstreams/R17_REPORT.md`, 801 lines, and `experiments/science/ws_R17/` are in the
-   working tree, **not committed: a draft until the coordinator has read and checked
-   it** — then SCI-REV-0017).  **Owed to the engineering division:** a referee of
+2. **Workstreams running when this was written: none.  R17 (handed back 15:31 UTC) is
+   read, checked and published: SCI-REV-0017** (finding 9s; `workstreams/R17_REPORT.md`
+   with the coordinator's note; the coordinator's own check in
+   `experiments/science/r17_verification/`).  **Owed to the engineering division:** a referee of
    ENG-RES-0014 §1 and §4 (accepted in SCI-RES-0022 §4; a workstream, not launched).
    **Work of the
    coordinator in progress, not in this commit** (research log, cycle 60): held-site
@@ -708,6 +713,23 @@ preservation.
    begins near `5·10¹⁴` trials, not `10¹⁷` (*and lower still — between `2·10¹⁴` and
    `2.5·10¹⁴` by the theory division's second scan; linked correction SCI-RES-0016 §4*),
    and our "corrected" re-run had never exercised its correction; the sizes of our separation statement were first sizes of a grid.
+9s. **Review of the theory division's Theorem 11.58a [review, replication, re-run; an
+    internal review] (workstream R17; SCI-REV-0017).**  The adaptive cost without a hint
+    on the cube class is `exp(n·h + O(√(n ln n)))`: **proved as stated, given Theorem 11.56
+    with the abort test before every query** (the rule our R16 had asked for); no
+    critical or major finding; nine minor (among them: the constant in "`(a/h + 4) ln n +
+    O(1)`" is 31 to 178 nats depending on `u`; there are `k_M − 1` levels over the bracket;
+    the lower bound is machine-checked for finite mixtures of deterministic algorithms;
+    a check of their script samples the base nodes — our code, made to sample as theirs,
+    gives their five numbers).  Replicated from the text alone: the bound
+    (`0.7072, 0.3713, 0.2731, 0.2637` of `n·a`), the exact nested design
+    (`1568.21 / 1728.68 / 1969.97` at `n = 16 000`), the lower bound (twice; the
+    coordinator by hand and with its own code).  **New: the outer loop of a slope step
+    and of a drop run against a simulated inner oracle** (530 and 64 runs, no violation)
+    — the theory report had said no simulation can.  What it does not give: a usable
+    algorithm at any size, the true order of the error term, anything off the cube
+    with one slope and no known part.  Requests R17-THY-1…6.
+
 9r. **The sign-blind loss of the charged case is not a constant-kernel effect [M, one
     peptide, one order] (SCI-RES-0021 §1; addendum A17 (20), item 76;
     `p8_verification/kernel_spread.py`).**  The theory division's lemma (THY-RES-0015

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/user/MetricChain/experiments/science/ws_R17/scripts/r17_steps.py", line 153, in <module>
+    main()
+    ~~~~^^
+  File "/home/user/MetricChain/experiments/science/ws_R17/scripts/r17_steps.py", line 108, in main
+    D = N.Drop(C, fam, c, al, xmin)
+  File "/home/user/MetricChain/experiments/science/ws_R17/scripts/r17_nest.py", line 212, in __init__
+    assert self.beta >= xmin_inner - 1e-12, "beta >= x_min of the inner family"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: beta >= x_min of the inner family

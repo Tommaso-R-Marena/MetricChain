@@ -1,0 +1,9 @@
+u=1 done so far: slope levels 2505 (violations 0), drops with shift 90 (0), without shift 336 (0)  [40 s]
+u=2 done so far: slope levels 6075 (violations 0), drops with shift 168 (0), without shift 672 (0)  [53 s]
+u=0.5 done so far: slope levels 7830 (violations 0), drops with shift 216 (0), without shift 1008 (0)  [60 s]
+
+SLOPE STEP (Proposition Q6), saturating inner family: 7830 levels (84 with a capped ladder); violations 0; least slack bound - exact = 3.28 nats at (2.0, 16000, '-8e+05', 'off schedule', 'B/h=1.000 sigma=1.000 R/h=1.0000', 'xhat=778.25 n_o=7754', 'c_S=78.0')
+DROP with shift (Proposition Q7): 216 levels; violations 0; least slack 6.27 at (2.0, 40000, '-4e+04', 'off schedule', 'B/h=1.000 R/h=1.0000 c=0.125', 'c_D=184.8')
+DROP without shift: 1008 levels; violations 0; least slack 57.82 at (0.5, 1000, '-1e+03', 'off schedule', 'B/h=1.000 R/h=1.0000 c=0.125')
+violations recorded by the level checks inside r17_nest (x_out, Lemma Q4/Q3, (4.1)/(4.2), (2.1), Q6/Q7 with E): 0 []
+LAST LINE r17_steps.py: completed; wall 60.3 s; peak RSS 40.1 MB
