@@ -88,6 +88,8 @@ export PATH="$HOME/.elan/bin:$PATH"                   # Lean (lake exe cache get
 lake env lean experiments/complexity/lean/StackPacking.lean
 lake env lean experiments/complexity/lean/JordanOrbit.lean
 lake env lean experiments/complexity/lean/NanuqFinite.lean   # 3.5 min, needs about 11 GB; do not run it next to other heavy jobs
+lake env lean experiments/complexity/lean/FourPartition.lean  # CX-V4
+lake env lean experiments/complexity/lean/NanuqPattern.lean   # CX-V5: Corollary 5' on six points (prints the axioms)
 ```
 
 ## Things a successor must not do
