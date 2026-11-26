@@ -1977,6 +1977,15 @@ the uniform measure), `LSs` (least squares under the surrogate's own measure, it
     helix; for valine it is `83–88 %` (nothing to screen) and for leucine `160–250 %` (the
     two reinforce).  The unscreened Coulomb pair terms of the vacuum energy are, as a
     model of the solvated ensemble, worse than nothing.
+    *What of this was already ours, and what is added.*  That the solvent term's pair
+    part "nearly cancels the vacuum Coulomb term of the known part", and that "the cost
+    of the star depends on how the energy is split; that of the ball does not", is
+    workstream P2's finding for the *class constants* (SCI-MSG-0015 §2; its alternative
+    split `coul + g_GB`, for which the first-order constants of lysine saturate at 15
+    kcal/mol where those of the solvent term alone grow to 56).  The first version of
+    this item did not say so.  Added here: the size of the effect in the currency of
+    reweighting (`D_2`, `D_∞`), and that a model with *no* pair terms — not only another
+    pairwise split — is close.
 23. **A self-consistent least-squares fit is the variational fit.**  The normal
     equations of a least-squares fit under the surrogate's own measure are the
     stationarity conditions of `KL(q‖π_g)`; where the iteration converged (45 of the 70

@@ -29,8 +29,11 @@ Related message/request IDs: SCI-MSG-0017 (qualified here in one sentence), SCI-
 > that of the least-`D_2` fit, for a negligible price in `D_2`; after it the largest floor is `0.42 k_BT`
 > for independent residues and `0.13` for the chain.  (ii) In "Assumptions and limitations" the
 > least-`D_2` objective is called non-convex; it is convex (only the variational one is not).  Neither
-> is a certificate: the maximum over all states is known here by enumeration.  The text below is left
-> as sent.
+> is a certificate: the maximum over all states is known here by enumeration.  (iii) §2 should have
+> cited our own SCI-MSG-0015 §2: that the solvent term's pair part nearly cancels the vacuum Coulomb
+> term, and that the cost of the second-order interface "depends on how the energy is split", was
+> workstream P2's finding for the class constants.  What §2 adds is the size of the effect in `D_2` and
+> that a model with no pair terms at all is close.  The text below is left as sent.
 
 # Fitted to the solvated energy, it hardly matters how a surrogate is fitted — our prediction that it would is refuted for `D_2` and holds for the floor; what matters by orders of magnitude is the split: the vacuum force field is a worse model of the solvated ensemble than independent residues
 
