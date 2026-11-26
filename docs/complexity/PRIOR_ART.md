@@ -86,6 +86,7 @@ concerns an omitted figure panel.
 Consequences for novelty statements: CX-T6 (and with it the method, CX-T5, CX-T9) is to be described as **an
 independent rediscovery, in all likelihood, of the unreviewed claim B-II, whose proof we have not seen**; no
 priority is claimed for it.  For CX-T7 (galled cannot be dropped), CX-T8 (sharpness), CX-T26 (the sharp
-class for "Kalmanson" alone, as a forbidden six-leaf pattern) and CX-T13 (parametric family, in our
-extension) no prior art was found; a failure to find it is not proof of novelty.  Since B-II names a
+class for "Kalmanson" alone, as a forbidden six-leaf pattern), CX-T27 (the classification for level 2:
+nested blobs, critical splits and their weights) and CX-T13 (parametric family, in our extension) no prior
+art was found; a failure to find it is not proof of novelty.  Since B-II names a
 "six-label reduction" and we have not seen its text, a statement like Corollary 5′ may well be in it.

@@ -130,18 +130,52 @@ dangles) by the same accounting as 1c/1d: `E − E** = (|σ|−|x|)j + |x|L + P 
 4-PARTITION reduction (`FourPartition.lean`); the 24 permutation cases are handled uniformly by naming the
 witnesses through selector functions before the case split.
 
+## Session 1, continued — two more reviews; NANUQ: the sharp class and level 2 (2026-11-26 20:38 UTC)
+
+* **NANUQ, "Kalmanson" alone (CX-T26).**  Started from the item "is the criterion sharp for Kalmanson alone?".
+  Counting the six-point systems with all six-leaf terms non-negative gave 133 (not 127); the six extra
+  systems are those that only give weight to an undisplayed split.  Rewriting Lemma 5 in terms of the
+  six-point restriction gave Corollary 5′: `Φ6 < 0` iff the three 3-splits are present and the 2-split
+  `{z,w}` is absent.  With that, closure under substitution is two lines, and blowing up `z`, `w` into clades
+  of `m` leaves gives weight `2Φ4 + 2m(Φ5+Φ5) − m²` (pairs inside a clade contribute 0).  The 17 minimal
+  failing blow-ups are Kalmanson for no circular order (backtracking search).  §7.1 of the note.
+* **NANUQ, level 2 completely (CX-T27).**  The seven-leaf counterexample contains the forbidden pattern in
+  five of its six-leaf subnetworks, which suggested classifying by the pattern.  A blob with two hybrid nodes
+  is a theta graph; orienting it gives exactly two kinds, galled and *nested*; planarity empties one path.
+  The nested blob is a three-parameter family `N[k_B,k_1,k_2]` with four trees.  Tables showed that only one
+  split ever fails, with weight `k_1 + k_2 − C(k_B−1,2)` (resp. `k_1 + 1 − C(k_B−2,2)`), **not monotone** in the
+  numbers of leaves: `N[4,1,1]` fails, `N[4,1,2]` has weight 0, `N[4,1,3]` is fine.  With pendant subnetworks the
+  weight is `β_1G + ξ_1R − e_2(middle sizes)`; derived from Proposition 2 with a table of local terms by type
+  of leaf, and tested on explicit rooted networks with the independent calculator (`level2_explicit.py`).
+  The proof needs two finite facts on six points (624 substitutions; restrictions of the family) and
+  Corollary 5′.  §7.2 of the note.  A first guess recorded here because it was wrong: I expected the
+  pattern-free condition (`k_B ≤ 2`, or `k_B = 3` and no `c`-position) to be the answer for bloblets; it is
+  only the answer for the robust question (Corollary 14).
+* **COMPLEXITY-REV-0003 received** (algorithm note, hardness additions): no theorem broken.  Major: the
+  novelty paragraph of the algorithm note is wrong as worded — the journal version of Boehmer et al. (2025)
+  has the base-pair-model partition function over all orderings with rotational symmetry; we had read the
+  conference version only.  Major: the minimum-free-energy clause of Theorem 1 is unproved.
+* **COMPLEXITY-REV-0004 received** (Ising note, NANUQ additions): no false theorem.  Major: the ℓ1-rigidity
+  reformulation in §6 of the Ising note is wrong; Corollary 7 and Proposition 5 are published
+  (Laurent–Poljak 1995/96); a `2^K·poly(n)` algorithm follows from our own Proposition 5 and was overlooked;
+  Lemma 0 of the NANUQ note has an unproved step.
+* Both reports are saved verbatim; register rows carry notices; **dispositions are pending** (next item).
+
 ### Resume here
 
-1. **Review what was written after the reviews**: Theorem 1c (the regime `|x| ≥ |σ|`), Theorem 1d, Appendix A
-   of the hardness note; Lemmas 0, B0, B and Theorem 9(c) of the NANUQ note; Theorem 11 (never reviewed);
-   `STRANDS_ALGORITHM.md` (never reviewed; COMPLEXITY-REV-0003); `ISING_GROUND_SETS.md` (never reviewed).
-2. E-C1 for `K` in the input: co-NP-hardness or an algorithm.  Route: Proposition 10 reduces it, on symmetric
-   instances, to "another sign vector in the span of given sign vectors"; find a symmetric family where that
-   is NP-hard.  Check the literature on faces of the cut polytope / ℓ1-rigidity first (Deza–Laurent).
-3. A3′ (fixed-temperature #P-hardness of the partition function): no approach yet.  The one-call reduction of
-   Corollary 4(ii) needs magnification `Θ(N log N)`; can gadgets amplify a fixed Boltzmann weight?
-4. Hardness note: a theorem for dangles and coaxial stacking together; read Lyngsø (2004) and
-   Shalaby–Woods §7; W[1]-hardness in the number of species (C2).
-5. NANUQ: which non-galled planar networks satisfy the conclusion?  Is the criterion sharp for "Kalmanson"
-   alone?  Lean: define the closure inside Lean so that the list `C6` is no longer imported.
-6. Unanswered mail: SCI-RES-0031 §1 (numbers for Q-CX3, not yet read); theory's THY-MSG-0017 §5 items 1, 3.
+1. **Process COMPLEXITY-REV-0003 and -0004 in full** (task list in the two files' headers; the referees'
+   working directories are `scratchpad/review3`, `scratchpad/review4` of the session — copy the programs to
+   `experiments/complexity/reviews/rev3_strands/`, `rev4_ising_nanuq/`).  Order: (a) Lemma 0 gap (the new
+   §7.2 depends on it); (b) the wrong sentence and the prior art in the Ising note, the `2^K` algorithm, and a
+   linked correction to COMPLEXITY-RES-0003 for the Ensemble division; (c) the novelty paragraph and the MFE
+   clause of the algorithm note; (d) the minor findings.
+2. Have §7.1 and §7.2 of the NANUQ note reviewed (never seen by a referee); a Lean check of Corollary 5′ on
+   six points and of the two finite facts of Theorem 12, Step 1, would be cheap.
+3. E-C1 for `K` in the input: now "polynomial for `K = O(log n)`, open beyond"; the referee could not decide
+   hardness either.  Read Laurent–Poljak and Deza–Laurent before any further attempt.
+4. A3′ (fixed-temperature #P-hardness of the partition function): no approach yet.
+5. Hardness note: read Lyngsø (2004) and Shalaby–Woods §7; W[1]-hardness in the number of species (C2).
+6. NANUQ: level 3 blobs that are not galled (list the generators, as in Lemma C); Lean: define the closure
+   inside Lean so that the list `C6` is no longer imported.
+7. Unanswered mail: SCI-RES-0031 §1 (numbers for Q-CX3, not yet read); theory's THY-MSG-0017 §5 item 1;
+   R20-CX-G.

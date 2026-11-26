@@ -48,6 +48,15 @@ networks of the class (B1) and circular decomposability for level-3 bloblets (B2
    distances of NANUQ⁺ the conclusion holds on the whole class exactly when `ρ_o = ρ_s` and
    `ρ_c + ρ_s ≤ 2ρ_a < 2ρ_s`; the *Modified NANUQ* distance is outside this set and fails on an explicit
    level-1 network with eight leaves, but it works when every hybrid node has a leaf child.
+6. **Theorem 12 (level 2 completely; added after the review, unreviewed)** [P + X].  An outer-labeled planar
+   blob with two hybrid nodes is galled or *nested* (one hybrid node below the other), and a nested blob
+   has a three-parameter list of positions.  In an outer-labeled planar network of level at most 2 the only
+   splits whose weight can have the wrong sign are the *critical splits*, one per nested blob, and the
+   weight of a critical split is `β_1·G + ξ_1·R − Σ β_jβ_l`, an explicit polynomial in the numbers of leaves
+   hanging at the positions.  So for level 2 the statement of B1 holds for a network **if and only if** these
+   numbers are positive; for bloblets: `k_1 + k_2 > C(k_B − 1, 2)`, resp. `k_1 + 1 > C(k_B − 2, 2)` when no leaf
+   hangs between the lower hybrid node and the far branch node (§7.2).  This contains both formulas of
+   Theorem 9.
 
 Labels: [P] paper proof (ours; internally reviewed only), [X] exact finite computation with integer
 arithmetic (programs in `experiments/complexity/nanuq/`, listed in §10), [V] checked by the Lean kernel
@@ -55,8 +64,8 @@ arithmetic (programs in `experiments/complexity/nanuq/`, listed in §10), [V] ch
 of systems, of Proposition 2 on five and six points, and the numbers 150 / 141 / 127 of §7 — not the
 general proofs), [K] a known result that we cite.
 
-Numbering.  Lemmas and propositions are numbered 1–8, A, B, 0, B0 (and Corollary 5′); theorems 4, 6, 7, 9,
-10, 10′, 11.  The theorem
+Numbering.  Lemmas and propositions are numbered 1–8, A, B, 0, B0, C, D (and Corollary 5′); theorems 4, 6,
+7, 9, 10, 10′, 11, 12 (with Corollaries 13, 14).  The theorem
 numbers are kept from the first version because other files cite them ("Theorem 6" was "Theorem 6′").
 
 ---
@@ -488,8 +497,8 @@ order" (shown for `N*`).
    two hybrid nodes on 4, 5 and 6 leaves (obtained by hybrid insertion) none violates the conclusion.
 3. *Most non-galled planar networks still satisfy the conclusion.*  In the referee's enumeration on 7
    leaves, of 60 196 non-galled insertion sequences 664 give a negative weight (all bloblets) and 1 252 a
-   wrong support only (none of them bloblets).  We have not classified the non-galled planar networks for
-   which the conclusion holds.
+   wrong support only (none of them bloblets).  For level 2 the networks for which the conclusion holds
+   are now classified (§7.2, Theorem 12, added after the review); for higher levels they are not.
 
 ---
 
@@ -635,6 +644,270 @@ it must.
 blow-ups, fails: the argument blows up a six-point restriction.  On six points 14 of the 17 systems of (d)
 themselves have a Kalmanson metric.
 
+### 7.2 Level 2 completely: one critical split per nested blob
+
+*Added 2026-11-26 after the review; not seen by any referee.*
+
+Theorem 7 settles the galled networks, and §6 gives one family that is not galled and in which the
+conclusion fails.  For level 2 the picture can be completed.  There is exactly one further kind of blob;
+in a network containing such blobs only one split per blob can go wrong; and the weight of that split is
+an explicit polynomial in the numbers of leaves that hang at the positions of the blob.
+
+**Blobs, positions, sizes.**  Let `N` be a binary semi-directed network with rooted partner `N⁺`, and `𝔅` a
+blob of `N⁺` containing hybrid nodes (the two edges entering a hybrid node lie on a common cycle, hence in
+one blob).  A node of `𝔅` has two or three edges in `𝔅`.  If it has two, it is the root or it has exactly one
+further edge, a cut edge; in the latter case the node is a *position* of `𝔅`, the part of the network beyond
+the cut edge is its *pendant subnetwork*, and the number of leaves there is its *size* (`≥ 1`).  Every leaf of
+`N` lies in the pendant subnetwork of exactly one position.  Exactly one node of `𝔅` has no parent in `𝔅`,
+the *source*: the root, or the position whose pendant subnetwork contains the root (two edges entering `𝔅`
+from outside would lie on a cycle).  `𝔅°` is the bloblet obtained by replacing every pendant subnetwork by
+one leaf (if the source is a position, a new root is placed on its pendant edge), and
+`Σ(𝔅) = Split(T(𝔅°))`, a split system on the set of positions.
+
+**Lemma D (cut edges and pendant subnetworks) [P].**  Let `Σ = Split(T(N))`.
+(i) If a cut edge separates the leaves into two non-empty sets `X_1 | X_2`, this split belongs to every
+displayed tree, and for `x_1 ∈ X_1`, `x_2 ∈ X_2`:  `Σ = Σ|_{X_1 ∪ {x_2}} ∘_{x_2, x_1} Σ|_{X_2 ∪ {x_1}}`.
+(ii) If a set `Y` of leaves meets every pendant subnetwork of `𝔅` in at most one leaf, then
+`Σ|_Y = Σ(𝔅)|_Y`, each leaf standing for its position.
+(iii) If `Y` meets some pendant subnetworks in two leaves and the others in at most one, then `Σ|_Y` is
+obtained from the restriction of `Σ(𝔅)` to the positions met by replacing each position met twice by a
+cherry.
+
+*Proof.*  (i) A hybrid edge lies on a cycle, so a cut edge is not a hybrid edge and belongs to every
+switching, which is a spanning tree (proof of Lemma 0); so every displayed tree has the split `X_1|X_2`.
+Splits of one tree are compatible, hence every split `A|B` of `Σ` has a side inside `X_1` or inside `X_2`.
+If `A ⊆ X_1`, then `A | (B ∩ X_1) ∪ {x_2}` is its restriction to `X_1 ∪ {x_2}` and replacing `x_2` by `X_2`
+gives `A|B` back; likewise for `A ⊆ X_2`: this shows `⊆`.  Conversely a split of `Σ|_{X_1 ∪ {x_2}}` is the
+restriction of some `A|B ∈ Σ`; if `A ⊆ X_1` the substitution returns `A|B`; if `A ⊆ X_2` the restriction is
+`{x_2} | X_1` (or empty) and the substitution returns `X_2|X_1 ∈ Σ`.  (ii) A switching of `N⁺` contains
+exactly one of the two edges entering each hybrid node of `𝔅`, i.e. a switching of `𝔅`, and all of these
+occur; a path of the spanning tree between two nodes of `𝔅` stays in `𝔅` (it cannot use a cut edge twice);
+and the path from a leaf of a pendant subnetwork to any leaf outside it passes through its cut edge.  So
+the tree displayed on `Y` is the tree spanned in the switching of `𝔅` by the positions met, with a leaf hung
+at each: the tree that this switching displays in `𝔅°`.  (iii) By (i) the two leaves in the pendant
+subnetwork of a position form a cherry in the restriction to `Y` of every displayed tree; apply (i) to this
+cherry and (ii) to `Y` minus one leaf of each such pair.  ∎
+
+**Lemma C (the two kinds of blob with two hybrid nodes) [P].**  Let `𝔅` be a blob with exactly two hybrid
+nodes.  With its nodes of degree two suppressed it is a *theta graph*: two *branch nodes* joined by three
+internally disjoint paths, whose interior nodes are the positions and possibly the root.  Exactly one of
+the following holds.
+
+*Galled kind.*  The hybrid nodes are interior nodes of two different paths.  Each of them lies, with its
+two entering edges, on a cycle that avoids the hybrid edges of the other.
+
+*Nested kind.*  One hybrid node `h_1` is a branch node; two of the paths, `A` and `B`, enter it and the
+third, `C`, leaves it; the other hybrid node `h_2` is an interior node of `C`; the source lies on `A`, on
+`B`, or on `C` between `h_2` and the other branch node `t`.  Every cycle through the two edges entering `h_2`
+contains `C`, hence an edge entering `h_1`: the blob is not galled, and `h_1` is an ancestor of `h_2`.
+
+If `N` is outer-labeled planar and `𝔅` is of the nested kind, then `A` or `B` has no position.
+
+*Proof.*  Every node of `𝔅` other than the source has one parent in `𝔅`, the hybrid nodes two; so `𝔅` has
+`|V(𝔅)| + 1` edges, i.e. two independent cycles.  Suppressing the nodes of degree two leaves a 2-connected
+cubic multigraph with two independent cycles; it has two nodes and three edges, and these are parallel
+(loops would give cut vertices).  An interior node of a path has its two path edges and a cut edge, or is
+the root.  Both path edges enter it if it is a hybrid node, both leave it if it is the source, and
+otherwise one enters and one leaves.  So along a path the direction changes exactly at hybrid nodes and at
+the source.  A branch node is a hybrid node (two paths enter, one leaves) or a tree node (one enters, two
+leave); it is not the source.
+
+(1) *Both hybrid nodes interior, on different paths `P_1`, `P_2`.*  The cycle formed by `P_1` and the third
+path contains no edge entering the hybrid node of `P_2`, and symmetrically: the galled kind.
+(2) *Both interior on the same path.*  The direction must change between them, so the source lies between
+them and the path leaves both branch nodes.  The other two paths contain neither a hybrid node nor the
+source, so they are directed; each branch node is a tree node entered by exactly one of them; so one is
+directed from the first branch node to the second and the other back: a directed cycle.  Impossible.
+(3) *One hybrid node `h_1` at a branch node, the other, `h_2`, interior.*  Let `A`, `B` enter `h_1` and `C`
+leave it.  If `h_2` is on `C` we have the nested kind: the part of `C` between `h_1` and `h_2` is directed
+from `h_1` to `h_2` and contains no source (a source there would make its first edge enter `h_1`).  If `h_2`
+is on `A`, the path `A` enters both `h_2` and `h_1`, so the source lies between them on `A`; then `B` is
+directed from `t` to `h_1` and `C` from `h_1` to `t`: a directed cycle.  Impossible.
+(4) *Both at the branch nodes.*  The path leaving `h_1` contains neither a hybrid node nor the source (a
+source would make it enter `h_1`), so it enters `h_2`; likewise the path leaving `h_2` enters `h_1`; they
+form a directed cycle.  Impossible.
+
+*Planarity.*  In a planar embedding the theta graph has three faces, each bounded by two of the paths, and
+one path is not on the boundary of the outer face.  A pendant subnetwork is connected, attached at one
+node, and contains a leaf; if all leaves are on the outer face it lies there, so the path away from the
+outer face has no position.  `C` has the position `h_2`.  ∎
+
+**Positions of a nested blob in an outer-labeled planar network.**  Call `A` the path without positions.
+The positions are `b_1,…,b_{k_B}` on `B`, counted from `h_1`; `x_1,…,x_{k_1}` on `C` between `h_1` and `h_2`,
+counted from `h_1`; `y = h_2`; and `c_1,…,c_{k_2}` on `C` between `h_2` and `t`, counted from `h_2`.  Around the
+outer face the pendant subnetworks appear, each as a block of consecutive leaves, in the order
+
+```
+b_1, …, b_{k_B},  c_{k_2}, …, c_1,  y,  x_{k_1}, …, x_1 .
+```
+
+Their sizes are denoted `β_j`, `γ_e`, `η`, `ξ_a`.  The bloblet `𝔅°` is called `N[k_B,k_1,k_2]`; it has four
+switchings (at `h_1` keep the edge from `B` or the edge `A`; at `h_2` keep the edge from the `x`-side or from
+the `c`-side), with the trees
+
+```
+T_1 (B, x-side):   caterpillar   c_1 … c_{k_2}   b_{k_B} … b_1   x_1 … x_{k_1}   y
+T_2 (A, x-side):   three arms at t:    (b_1 … b_{k_B}),    (c_1 … c_{k_2}),    (y, x_{k_1} … x_1)
+T_3 (B, c-side):   caterpillar   y   c_1 … c_{k_2}   b_{k_B} … b_1   x_1 … x_{k_1}
+T_4 (A, c-side):   three arms at t:    (b_1 … b_{k_B}),    (y, c_1 … c_{k_2}),    (x_{k_1} … x_1)
+```
+
+(an arm is listed from its far end towards `t`; `level2_fourtrees_check.py` compares these trees with the
+switchings of the explicit rooted network for all 155 bloblets with at most nine leaves).  `Σ[k_B,k_1,k_2]` is
+the union of their split systems.  The
+network `N*` of §6 is `N[4,1,1]`, and the bloblet version of `N(s,t)` is `N[s+t+1,1,1]`.  The restriction of
+`Σ[k_B,k_1,k_2]` to a set of positions containing `y` is `Σ[k']` for the numbers `k'` of positions kept on the
+three sides; a restriction without `y` has only two trees.  For `k_B ≤ 1` one has `T_1 = T_2` and `T_3 = T_4`.
+
+The *critical split* `S*_𝔅` of a nested blob separates the leaves at the positions `x_1,…,x_{k_1}, y` from the
+leaves at the positions `b_j` and `c_e`.  It is a split of `T_1` and of `T_2`, so it is displayed.
+
+**Theorem 12 (outer-labeled planar networks of level at most 2) [P + X].**  Let `N` be a binary
+semi-directed network of level at most 2 on `n ≥ 4` leaves, outer-labeled planar with circular order `C`.
+
+(a) Every circular split that is not the critical split of a nested blob with `k_1 ≥ 1` and `k_B ≥ 2` has
+weight `α ≥ 0`, with `α > 0` if and only if it is displayed.
+
+(b) For a nested blob with `k_1 ≥ 1` and `k_B ≥ 2`,
+
+```
+α(S*)  =  β_1·G  +  ξ_1·R  −  Σ_{ j < l in M }  β_j β_l ,          R = η + ξ_2 + … + ξ_{k_1} ,
+```
+
+where `G = γ_1 + … + γ_{k_2}` and `M = {2, …, k_B}` if `k_2 ≥ 1`, and `G = β_{k_B}` and `M = {2, …, k_B − 1}` if
+`k_2 = 0`.
+
+(c) Consequently `d_N` is circular decomposable with support exactly `Split(T(N))` if and only if
+`α(S*_𝔅) > 0` for every nested blob `𝔅` with `k_1 ≥ 1` and `k_B ≥ 2`; and `d_N` is Kalmanson for `C` if and
+only if these numbers are `≥ 0`.  (The first property does not depend on a circular order: the split
+metrics of the circular splits of `C` are linearly independent, so a metric that is a positive combination
+of the splits of `Split(T(N))`, which are circular for `C`, has exactly these weights `α`.)
+
+*Proof.*  Write `Σ = Split(T(N))`; by Lemma 1, `d_N = d_Σ`.
+
+*Step 1: six leaves.*  We claim that for six leaves `Y` the restriction `Σ|_Y` is 6-locally good, **or** `Y`
+meets six different positions of a nested blob — three `b`-positions, an `x`-position, `y` and a
+`c`-position, or four `b`-positions, an `x`-position and `y` — and then `Σ|_Y` consists of all circular
+splits of the six leaves except the 2-split formed by the second and third of the `b`-leaves; such a
+system is globally good (one of the 141 of §7).
+If some cut edge has at least two leaves of `Y` on each side, `Σ|_Y` is by Lemma D(i) and Lemma 7(ii) a
+substitution of two tree-generated systems with at least three leaves each; there are 624 such
+substitutions on six points and all are 6-locally good [X].  Otherwise direct every cut edge towards its
+side with at least five leaves of `Y`.  The blobs (and the tree nodes outside the blobs) with the cut
+edges form a tree, and a directed tree has a node `𝔅` all of whose edges point to it; each of its pendant
+subnetworks contains at most one leaf of `Y`; so `𝔅` is not a leaf and not a tree node (three pendant
+subnetworks), but a blob with at least six positions, and
+`Σ|_Y = Σ(𝔅)|_Y` (Lemma D(ii)).  If `𝔅` has one hybrid node or is of the galled kind, `𝔅°` is an
+outer-labeled planar network in which every hybrid node is adjacent to a leaf, so `Σ(𝔅) ∈ 𝒜` (Lemma A),
+its restriction is in `𝒜_6` (Lemma 7(i)) and is 6-locally good (Lemma 8).  If `𝔅` is nested, `Σ|_Y` is a
+six-point restriction of some `Σ[k']` with at most seven positions, and these were computed [X]: all are
+6-locally good except `Σ[3,1,1]` and `Σ[4,1,0]`, which are as described.
+
+*Step 2: which terms can be wrong.*  Let `S = U|V` be a non-trivial circular split with end leaves
+`u_1,u_p,v_1,v_q`, and `z,w` two further leaves on one side, say in `U`; let `Σ_6` be the restriction of `Σ` to
+these six leaves, in which `S` becomes the 2-split `{v_1,v_q}`.  If `Σ_6` is 6-locally good then `Φ6(z,w) ≥ 0`,
+with equality if `S ∉ Σ`.  Otherwise `Σ_6` is all nine splits except one 2-split `D`.  By Corollary 5′,
+`Φ6(z,w) < 0` iff `D = {z,w}`.  If `S ∉ Σ` then `{v_1,v_q} ∉ Σ_6` (Lemma 3), so `D = {v_1,v_q}`; as `Σ_6` is
+globally good the weight of `D` in `d_{Σ_6}` is `0`, and by Proposition 2 this weight is
+`2(Φ4 + Φ5(z) + Φ5(w) + Φ6(z,w))` with `Φ4 = Φ5(z) = Φ5(w) = 0`; so `Φ6(z,w) = 0`.
+
+*Step 3: only the critical split.*  So a term `Φ6(z,w)` is negative only if the six leaves lie at
+positions `b_i, b_j, b_l, c_e, y, x_a` or `b_i, b_j, b_l, b_m, y, x_a` of a nested blob (`i < j < l < m`), with `z`,
+`w` at `b_j`, `b_l`; then `u_1` is at `b_i`, `u_p` at `c_e` (resp. `b_m`), and `v_1, v_q` at `y, x_a` (or the same with
+the two directions of `C` exchanged).  The end leaves `u_p, v_1` are neighbours in `C`, and so are `v_q, u_1`;
+since the pendant subnetworks are blocks of `C` in the order displayed above, this forces `e = 1` (resp.
+`m = k_B` and `k_2 = 0`), `a = 1`, `i = 1`, and `U` is the set of all leaves at the `b`- and `c`-positions:
+`S = S*_𝔅`.  For every other split all terms of Proposition 2 are `≥ 0` (the `Φ5` by Lemma 4), they all vanish
+if the split is not displayed, and `Φ4 > 0` if it is (Lemma 3); trivial splits are positive by Lemma 4.
+This is (a) — the negative terms need three `b`-positions, so nothing fails for `k_B ≤ 2` either, in
+accordance with (b).
+
+*Step 4: the weight of the critical split.*  Let `u_1` be the first leaf at `b_1`, `u_p` the last leaf at `c_1`
+(at `b_{k_B}` if `k_2 = 0`), `v_1` the first leaf at `y`, `v_q` the last leaf at `x_1`; these four positions are
+different.  A term of Proposition 2 for `S*` involves the four end leaves and one or two further leaves.
+*Two further leaves at the same position `P`:* at most one end leaf is in `P`; for `a, b ∉ P` the cut edge of
+`P` gives `w(zw|ab) = 1`; if an end leaf `e ∈ P`, the two terms of `Φ6` that contain `e` are `w(zw|e a)` and
+`w(zw|e b)` with `a, b ∉ P`, they carry opposite signs, and they are equal because the quartets displayed on
+`{z,w,e,o}` do not depend on the leaf `o ∉ P`; the other two terms are `+1` and `−1`.  So `Φ6(z,w) = 0`.  *Otherwise* every position is met at most
+twice, and by Lemma D(iii) the term is a term of a system `Σ[k']` with at most six positions in which some
+positions are replaced by cherries; it depends only on the *types* of the further leaves: at `b_1`, at `b_j`
+with `j ∈ M`, at `c_1`, at `c_e` with `e ≥ 2`, at `b_{k_B}` (if `k_2 = 0`), at `y`, at `x_1`, at `x_a` with `a ≥ 2`.  The
+values were computed for every type and every pair of types [X]:
+
+```
+Φ4 = 1;      Φ5 = 0 for a leaf at a position of M,     Φ5 = ½ for every other leaf;
+Φ6 = −½  for two leaves at different positions of M;
+Φ6 = +½  for a leaf at b_1 with a leaf at a c-position (at b_{k_B} if k_2 = 0),
+         and for a leaf at x_1 with a leaf at y or at another x-position;
+Φ6 = 0   for all other pairs of leaves at different positions.
+```
+
+In `U` there are `β_1 − 1` further leaves at `b_1` and `G − 1` at the `c`-positions (resp. at `b_{k_B}`); in `V`
+there are `ξ_1 − 1` further leaves at `x_1` and `R − 1` elsewhere.  Hence
+
+```
+α(S*)/2 = 1 + ½[(β_1−1) + (G−1) + (β_1−1)(G−1)] + ½[(ξ_1−1) + (R−1) + (ξ_1−1)(R−1)] − ½ Σ_{j<l in M} β_j β_l
+        = ½ β_1 G + ½ ξ_1 R − ½ Σ_{j<l in M} β_j β_l .
+```
+
+(c) follows from (a) and (b).  ∎
+
+**Corollary 13 (level-2 bloblets) [P + X].**  An outer-labeled planar level-2 bloblet is galled — and then
+satisfies the conclusion ([HABIMRW] Theorem 4.7) — or it is some `N[k_B,k_1,k_2]`.  For `k_1 ≥ 1`, `k_B ≥ 2` the
+critical split of `N[k_B,k_1,k_2]` has weight
+
+```
+α(S*) = k_1 + k_2 − C(k_B − 1, 2)   if k_2 ≥ 1,            α(S*) = k_1 + 1 − C(k_B − 2, 2)   if k_2 = 0,
+```
+
+and `d_N` is circular decomposable with support `Split(T(N))` if and only if `k_1 = 0`, or `k_B ≤ 1`, or this
+number is positive.  The smallest bloblets with a negative weight are `N[4,1,1] = N*` and `N[5,1,0]` (seven
+leaves, weight `−1`); in `N[4,1,2]`, `N[4,2,1]`, `N[5,2,0]` (eight leaves) the weight is `0`: the metric is
+Kalmanson but the displayed split `S*` is missing from its support.  Both formulas of Theorem 9(c) are
+instances of Theorem 12(b): `N[s+t+1,1,1]` gives `2 − C(s+t,2)`, and three `b`-positions of sizes `1, t, s`
+with `k_1 = k_2 = 1` give `2 − st`.  [X] The nine bloblets with at most nine leaves and a negative weight
+are Kalmanson for no circular order.
+
+**Corollary 14 (the robust form) [P + X].**  For an outer-labeled planar network `N` of level at most 2 the
+following are equivalent.
+(i) Every nested blob with `k_1 ≥ 1` has at most one position in `M`: `k_B ≤ 2`, or `k_B = 3` and `k_2 = 0`.
+(ii) `Split(T(N)) ∈ 𝒦`.  (iii) `Split(T(N)) ∈ 𝒦′`.
+(iv) `N` and every network obtained from `N` by replacing leaves by clades satisfy the conclusion (circular
+decomposable, support the displayed splits).
+(v) All these networks have a Kalmanson NANUQ metric.
+
+*Proof.*  By Step 1 a six-point restriction that is not 6-locally good needs three `b`-positions and a
+`c`-position, or four `b`-positions, of a nested blob with `k_1 ≥ 1`, and such positions exist exactly when
+`M` has at least two elements; the two exceptional systems are not in `𝒦′_6` either.  So (i) ⇔ (ii) ⇔ (iii).
+(ii) ⇒ (iv): `𝒦` is closed under replacing leaves by clades (Theorem 10(c)), and Theorem 4.  (iv) ⇒ (v) is
+trivial.  (v) ⇒ (i): if `j, l ∈ M`, replace one leaf at `b_j` and one at `b_l` by clades of `m` leaves; the
+new network is of the same kind, `β_1`, `G`, `ξ_1`, `R` are unchanged, and by Theorem 12(b) the critical weight
+is `β_1G + ξ_1R − (β_j + m − 1)(β_l + m − 1) − …`, negative for large `m`.  ∎
+
+**Remarks.**  1. *Why the middle positions.*  Take leaves `z, w` at two different `b`-positions together with
+leaves at `b_1`, `c_1` (or `b_{k_B}`), `y`, `x_1`.  The three 3-splits of Corollary 5′ come from `T_2` (the arm of
+the `b`-leaves) and from the two caterpillars `T_1`, `T_3`.  The 2-split `{z,w}` would need a tree in which `z`
+and `w` form a cherry, and two `b`-leaves form a cherry only at the far end of the arm of `T_2`, `T_4` (one of
+them at `b_1`) or, if `k_2 = 0`, at the end of the caterpillar `T_1` (one of them at `b_{k_B}`).  Leaves at one
+and the same position form a clade and do not interact; that is why the sizes enter through the second
+elementary symmetric function of the middle positions.
+2. *Agreement with the survey of §6, Remark 3.*  With seven leaves the formula is negative only for the
+bloblets `N[4,1,1]` and `N[5,1,0]`, and it vanishes when one position of `M` in `N[3,1,1]` or `N[4,1,0]` carries
+a cherry: negative weights only in bloblets, wrong supports only outside bloblets — which is what the
+enumeration of the referee of REV-0002 showed (664 and 1 252 insertion sequences).
+3. *Scope.*  Theorem 12 is about level at most 2.  For higher levels the same method applies in principle
+(by Step 1 of the proof, a six-leaf restriction that is not 6-locally good comes from six positions of
+one blob, for any network), but the blobs that are not galled have not been listed.
+4. *Evidence.*  `level2_classification.py`: the two finite facts of Step 1 (624 substitutions; 16 555
+six-point restrictions of the systems `Σ[k]` with at most ten leaves), the table of Step 4 with the check
+that the type determines the value, all 445 bloblets with at most 13 leaves, 1 500 random systems glued
+from nested blobs, trees and systems of `𝒞` (1 045 critical splits, 97 with weight `≤ 0`), and the search
+over circular orders.  `level2_explicit.py` does not use the four trees above: it builds **explicit rooted
+networks** with nested blobs entered through the root or through a cut edge, level-1 cycles and trees as
+pendant subnetworks, and computes the metric from the switchings with `netcalc.py`: 920 networks with
+at most 12 leaves (194 with several blobs), 571 critical splits (190 with weight `≤ 0`), about 27 500
+other splits: no deviation from Theorem 12.
+
 ---
 
 ## 8. The parametric family of quartet distances (problem B3)
@@ -713,7 +986,11 @@ number of blobs it is not sufficient — Modified NANUQ lies in it and fails on 
 ## 9. What is not shown
 
 * Nothing about networks that are not outer-labeled planar.
-* The non-galled planar networks for which the conclusion survives are not classified (§6, Remark 3).
+* The non-galled planar networks for which the conclusion survives are classified for level 2 only
+  (Theorem 12); for level 3 and above the blobs that are not galled have not been listed.  Theorem 12 says
+  nothing about circular orders other than the planar one when a critical weight is negative (checked only
+  for the bloblets with at most nine leaves), and it rests on Lemma 0, whose proof has a gap found by
+  REV-0004 (the statement is true; the repair is pending in this file).
 * For "Kalmanson" without exact support the sharp class is `𝒦′` (Theorem 10′, §7.1) — for classes closed
   under restriction and cherry replacement; nothing is shown about a single system outside `𝒦′` (§7.1,
   Remark 3), and the six-leaf outer-labeled planar networks that display the forbidden pattern are not
@@ -738,6 +1015,10 @@ Our programs: `experiments/complexity/nanuq/` (Python 3 + `networkx`).
 | `verify_class.py` | Lemma 8: `𝒜_n`, `𝒞_n` for `n ≤ 6`; agreement with a second generator (`multiblob.py`) | ≈ 1 min |
 | `class_table6.py` | Appendix B | seconds |
 | `characterize6.py` | the numbers 150 / 141 / 127 / 108, Theorem 10 | ≈ 2 min |
+| `level2_nongalled.py`, `level2_failures.py` | the family `N[k_B,k_1,k_2]` from its four trees; tables of pattern-freeness and of failing splits | minutes |
+| `level2_classification.py 13 1500 7` | Theorem 12: the finite facts of Step 1, the table of Step 4, all bloblets with at most 13 leaves, 1 500 random glued systems, no circular order for the failing bloblets with at most 9 leaves (log: `level2_classification_big.log`) | ≈ 1 min |
+| `level2_explicit.py N seed maxleaves` | Theorem 12 on **explicit rooted networks** (only `netcalc.py`; independent of the four trees and of Lemmas C, D); logs for `120 1 10`, `400 2 12`, `400 3 11` | minutes |
+| `level2_fourtrees_check.py` | the four trees of §7.2 are the trees displayed by the explicit network, 155 bloblets | seconds |
 | `kalmanson_only.py`, `kalmanson_only.py extra`, `forbidden_in_nstar.py` | Corollary 5′ on all six-point systems; Theorem 10′(d): 133 = 127 + 6, the 17 excluded systems, the formula of (c) for `m ≤ 6`, no circular order for the least failing blow-ups; the pattern in `N*` | seconds |
 | `test_bloblets.py k n…`, `test_multiblob.py n` | the conclusion of Theorem 7 on all bloblets of level `k` / all networks with `n` leaves, **as generated from twin trees and substitution** | minutes |
 | `counterexample7.py`, `verify_nongalled.py`, `verify_nongalled2.py`, `nongalled_family.py`, `nongalled_formula.py` | Theorem 9 | seconds–minutes |
@@ -792,7 +1073,10 @@ all 108 systems of the list `C6` are 6-locally good.  Axioms: `propext`, `Quot.s
 
 Added later on 2026-11-26 and not seen by the referee of REV-0002: Corollary 5′ (§3) and §7.1 (Theorem 10′),
 which settle the question left open in finding 10 ("for Kalmanson alone the criterion is not known to be
-sharp") by replacing the class.
+sharp") by replacing the class; and §7.2 (Lemmas C, D, Theorem 12, Corollaries 13, 14), which classifies the
+outer-labeled planar networks of level at most 2 and so answers, for level 2, the question left open in
+§6, Remark 3.  The referee of REV-0004 saw an uncommitted draft of Corollary 5′ and Theorem 10′ and reports
+incidental checks only (Corollary 5′ on 150 × 12 labellings; the formula of Theorem 10′(c) on 68 values).
 
 ## 12. References
 

@@ -1,6 +1,6 @@
 # Handoff (complexity division)
 
-*Updated 2026-11-26 19:01 UTC, session 1 (after the reviews).*
+*Updated 2026-11-26 20:38 UTC, session 1 (two further reviews received, dispositions pending; NANUQ level 2).*
 
 ## State in a few lines
 
@@ -26,8 +26,14 @@
   cluster bracket and an explicit criterion for product references, the threshold as a max-flow, NP-hardness
   of "has the floor left its reference?" for general tables and polynomial cases.  **Unreviewed**; no new
   mathematics claimed.
-* Two further internal reviews were commissioned at 19:05 UTC (algorithm note and hardness additions;
-  Ising note and NANUQ additions) — to be recorded as COMPLEXITY-REV-0003 and -0004.
+* **Two further internal reviews arrived at about 20:25 UTC** and are saved verbatim as COMPLEXITY-REV-0003
+  (algorithm note, hardness additions) and COMPLEXITY-REV-0004 (Ising note, NANUQ additions).  No theorem
+  broken, but: a wrong novelty paragraph (algorithm note), an unproved clause (MFE), a wrong reformulation
+  and missing prior art (Ising note), a proof gap (NANUQ Lemma 0).  **The notes are not yet corrected**; the
+  affected rows of `THEOREMS.md` carry notices.  First item of "Resume here".
+* **NANUQ, new and unreviewed** (CX-T26, CX-T27): the sharp class for "Kalmanson" alone as a forbidden
+  six-leaf pattern (§7.1), and the complete classification of the outer-labeled planar networks of level at
+  most 2 — one critical split per nested blob, with an explicit weight (§7.2).
 * The two starting problems of the brief changed status when verified: A2 solved elsewhere; B1/B2
   claimed elsewhere.  See `OPEN_PROBLEMS.md`.
 * Next steps: `RESEARCH_LOG.md`, "Resume here".
@@ -49,6 +55,11 @@ python3 counterexample7.py                            # CX-T7: the 7-leaf non-ga
 python3 verify_nongalled.py; python3 verify_nongalled2.py
 python3 nongalled_formula.py                          # CX-T7: exact weights in the family
 python3 export_lean_lists.py                          # the list C6 in the Lean file is the computed closure
+python3 kalmanson_only.py; python3 kalmanson_only.py extra   # CX-T26 (seconds)
+python3 forbidden_in_nstar.py                         # the forbidden pattern inside the 7-leaf counterexample
+python3 level2_classification.py 13 1500 7            # CX-T27: finite facts, table of local terms, bloblets, glued systems
+python3 level2_explicit.py 400 2 12                   # CX-T27 on explicit rooted networks (independent calculator; minutes)
+python3 level2_fourtrees_check.py                     # the four trees of the nested blob against explicit networks
 cd ../reviews/rev2_nanuq                              # the NANUQ referee's independent explicit-network tests
 python3 t_exhaust.py 5 2                              # (see ../README.md for the rest)
 cd ../../strands

@@ -233,7 +233,10 @@ arXiv:2507.17308v2 (13 Oct 2025) on 2026-11-26.
     circular decomposable, with exact weights `2 − C(s+t,2)` in a family (CX-T7); the criterion is sharp for
     "Kalmanson with exact support" among classes of split systems (CX-T8); for "Kalmanson" alone the sharp
     class is given by a forbidden six-leaf pattern — three 3-splits without all six 2-splits (CX-T26,
-    unreviewed).
+    unreviewed); and **for level 2 the scope of B1 is determined exactly** (CX-T27, unreviewed): an
+    outer-labeled planar network of level ≤ 2 satisfies the conclusion iff, for each of its *nested* blobs
+    (the only kind that is not galled), `β_1·G + ξ_1·R > Σ_{j<l∈M} β_jβ_l` in the numbers of leaves hanging at
+    the positions of the blob; for bloblets `k_1 + k_2 > C(k_B − 1, 2)`.
   - B3 (parametric family): **OURS-[P]+[X], not reviewed** (CX-T13; the referee only spot-checked it): for
     **our** extension of the NANUQ⁺ family beyond level 1, the conclusion of Theorem 4.7 holds on the whole
     class exactly when `ρ_o = ρ_s` and `ρ_c + ρ_s ≤ 2ρ_a < 2ρ_s`; the Modified NANUQ distance `(½,1,½,1)` is
