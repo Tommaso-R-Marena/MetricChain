@@ -1,5 +1,13 @@
 # MetricChain
 
+> **Branch `research/geometric-inference` — Geometric Inference, Rigidity and Inverse Problems
+> Division.**  This branch was created from the theory checkpoint `a844b5a`; everything below
+> this note is the theory division's README as it was there.  This division's own work:
+> [`docs/geometry/ENSEMBLE_RIGIDITY.md`](docs/geometry/ENSEMBLE_RIGIDITY.md) (results and
+> proofs), [`docs/geometry/HANDOFF.md`](docs/geometry/HANDOFF.md) (where things are, commands),
+> [`docs/collaboration/GEOMETRY_TO_ALL.md`](docs/collaboration/GEOMETRY_TO_ALL.md) (messages),
+> `proofs/Geometry/`, `experiments/geometry/`.
+
 Theory and certificate kernels for fixed-sequence articulated chain molecules: certified
 conformational energy minimisation, certified partition functions, realizability and geometric
 stability.  The theorems marked **[V]** in the theory report — including the soundness theorems

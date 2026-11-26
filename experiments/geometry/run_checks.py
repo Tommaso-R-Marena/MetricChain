@@ -1,0 +1,464 @@
+"""Test harness of the Geometric Inference division (cycle 1: ensemble rigidity).
+
+Every test checks a statement of docs/geometry/ENSEMBLE_RIGIDITY.md on synthetic instances, in
+exact arithmetic where the statement is an exact computation.  A test returns (ok, message).
+`GEOM_MUT=<name>` plants one error (see mutation_checks.py): the corresponding test must fail.
+
+Usage:  python3 run_checks.py [--quick] [--only NAME]
+"""
+import os
+import sys
+import time
+import itertools
+import numpy as np
+from fractions import Fraction
+
+from geomlib import (chain, edm, stack, sym_index, quad_row, sym_from_vec, edge_vectors,
+                     conic_matrix, kabsch_rmsd)
+import exact_conic_rank
+import exact_jacobian_rank
+import exact_4d_extreme
+import demix as demix_mod
+import hierarchy_example
+
+MUT = os.environ.get("GEOM_MUT", "")
+QUICK = "--quick" in sys.argv
+TESTS = []
+
+
+def test(f):
+    TESTS.append(f)
+    return f
+
+
+def rand_ensemble(K, n, rng, theta=np.deg2rad(111.0)):
+    w = rng.dirichlet(np.ones(K) * 3)
+    Xs = [chain(n, rng.uniform(-np.pi, np.pi, n - 3), theta=theta) for _ in range(K)]
+    return w, Xs
+
+
+def nullity(A, ncols, tol=1e-9):
+    s = np.linalg.svd(A, compute_uv=False)
+    return ncols - int((s > tol * s[0]).sum())
+
+
+# ------------------------------------------------------------------ section 2, 3
+@test
+def stacking_identity():
+    """Lemma 2.1: M(mu) = EDM of the stacked configuration."""
+    rng = np.random.default_rng(1)
+    worst = 0.0
+    for K, n in [(1, 6), (2, 9), (3, 14), (5, 20)]:
+        w, Xs = rand_ensemble(K, n, rng)
+        M = sum(wk * edm(X) for wk, X in zip(w, Xs))
+        Z = np.hstack([(wk if MUT == "stack_no_sqrt" else np.sqrt(wk)) * X for wk, X in zip(w, Xs)])
+        worst = max(worst, np.abs(M - edm(Z)).max())
+    return worst < 1e-10, f"max deviation {worst:.2e}"
+
+
+@test
+def obstruction_collinear():
+    """Proposition 3.1(a): D(X) is the mean of the three scaled collinear coordinate configurations."""
+    rng = np.random.default_rng(2)
+    X = rng.normal(size=(9, 3))
+    scale = 1.0 if MUT == "collinear_no_scale" else np.sqrt(3)
+    M = sum(edm(scale * X[:, [c]]) for c in range(3)) / 3
+    dev = np.abs(M - edm(X)).max()
+    return dev < 1e-10, f"deviation {dev:.2e}"
+
+
+@test
+def obstruction_rotation():
+    """Proposition 3.1(b),(c): a rotated stack has the same M; its blocks violate the bond
+    constraints (generically), so the rotated mixture is not an ensemble of chains."""
+    rng = np.random.default_rng(3)
+    w, Xs = rand_ensemble(2, 12, rng)
+    Z = stack(Xs, w)
+    Q, _ = np.linalg.qr(rng.normal(size=(6, 6)))
+    Z2 = Z @ Q
+    same = np.abs(edm(Z) - edm(Z2)).max()
+    blocks = [Z2[:, :3], Z2[:, 3:]]
+    # bond lengths of block k would have to be constant (= sqrt(w'_k)) along the chain
+    spread = max(np.ptp(np.linalg.norm(B[1:] - B[:-1], axis=1)) for B in blocks)
+    return same < 1e-10 and spread > 1e-2, f"M deviation {same:.1e}; bond-length spread of rotated blocks {spread:.3f}"
+
+
+@test
+def four_atom_mixture():
+    """Example 3.3: a non-planar 4-atom chain has the M of a cis/trans mixture."""
+    theta = np.deg2rad(111.0)
+    t = 1.1
+    D = edm(chain(4, [t], theta=theta))
+    Dcis, Dtrans = edm(chain(4, [0.0], theta=theta)), edm(chain(4, [np.pi], theta=theta))
+    wc = (1 + np.cos(t)) / 2
+    if MUT == "four_atom_weights":
+        wc = 1 - wc
+    dev = np.abs(wc * Dcis + (1 - wc) * Dtrans - D).max()
+    return dev < 1e-10, f"deviation {dev:.2e}"
+
+
+@test
+def bcc_example():
+    """Example 3.2: a freely jointed chain with bond vectors (+-1,+-1,+-1)/sqrt 3 is a mixture of
+    three collinear freely jointed chains."""
+    rng = np.random.default_rng(4)
+    U = rng.choice([-1.0, 1.0], size=(10, 3)) / np.sqrt(3)
+    X = np.vstack([np.zeros(3), np.cumsum(U, axis=0)])
+    rods = [np.sqrt(3) * X[:, [c]] for c in range(3)]
+    unit = all(np.allclose(np.abs(R[1:] - R[:-1]), 1.0) for R in rods)
+    dev = np.abs(sum(edm(R) for R in rods) / 3 - edm(X)).max()
+    return unit and dev < 1e-10, f"rods have unit bonds: {unit}; deviation {dev:.2e}"
+
+
+# ------------------------------------------------------------------ section 4
+@test
+def affine_flex_midpoint():
+    """Theorem A (iii)=>(ii): a quadric through the edge directions gives two chains with the same
+    bond data whose squared distances average to those of X (4 atoms: 5 edges, dim Sym(3) = 6)."""
+    rng = np.random.default_rng(5)
+    X = chain(4, [0.8])
+    A = conic_matrix(X)
+    idx = sym_index(3)
+    S = sym_from_vec(np.linalg.svd(A)[2][-1], 3, idx)
+    t = 0.5 / np.abs(np.linalg.eigvalsh(S)).max()
+    def image(tt):
+        lam, Q = np.linalg.eigh(np.eye(3) + tt * S)
+        return X @ (Q * np.sqrt(lam)) @ Q.T
+    Xp, Xm = image(t), image(-2 * t if MUT == "midpoint_asymmetric" else -t)
+    E0 = [(0, 1), (1, 2), (2, 3), (0, 2), (1, 3)]
+    keep = max(abs(edm(Y)[i, j] - edm(X)[i, j]) for Y in (Xp, Xm) for (i, j) in E0)
+    mid = np.abs((edm(Xp) + edm(Xm)) / 2 - edm(X)).max()
+    moved = abs(edm(Xp)[0, 3] - edm(X)[0, 3])
+    return keep < 1e-10 and mid < 1e-10 and moved > 1e-3, \
+        f"bond data preserved to {keep:.1e}; midpoint deviation {mid:.1e}; d14^2 moved by {moved:.3f}"
+
+
+@test
+def conic_threshold_float():
+    """Theorem C(b),(d): dim N(z) = max(K-1, dim Sym(3K) - (2n-3)) at bond angle 111 degrees."""
+    rng = np.random.default_rng(6)
+    bad = []
+    for K in (1, 2, 3) if QUICK else (1, 2, 3, 4):
+        n0 = -(-(9 * K * K + K + 8) // 4)
+        if MUT == "threshold_minus_one":
+            n0 -= 1
+        dim = 3 * K * (3 * K + 1) // 2
+        for n in (n0 - 1, n0, n0 + 2):
+            w, Xs = rand_ensemble(K, n, rng)
+            Z = stack(Xs, w)
+            A = conic_matrix(Z, angles=(MUT != "drop_angle_edges"))
+            nul = nullity(A, dim)
+            want = (K - 1) if n >= n0 else dim - (2 * n - 3)
+            if nul != want:
+                bad.append((K, n, nul, want))
+    return not bad, f"mismatches {bad}" if bad else "nullities as predicted"
+
+
+@test
+def conic_threshold_exact():
+    """Theorem C(b): exact rank D_K at n0(K), two bond geometries, bond+angle and bonds only."""
+    Kmax = 4 if QUICK else 8
+    bad = []
+    for geometry in ("rational", "tetrahedral"):
+        for angles in (True, False):
+            for K in range(1, Kmax + 1):
+                n, dim, r, s, good = exact_conic_rank.check(K, geometry, angles)
+                if not good:
+                    bad.append((geometry, angles, K, r))
+    return not bad, f"failures {bad}" if bad else f"rank D_K attained for K <= {Kmax}"
+
+
+@test
+def trivial_quadrics_only():
+    """Theorem B, hypothesis (CC) made explicit: at the threshold the null space of the conic
+    system is spanned by sum_k s_k E_k with sum_k w_k s_k = 0."""
+    rng = np.random.default_rng(7)
+    K, n = 3, 23
+    w, Xs = rand_ensemble(K, n, rng)
+    Z = stack(Xs, w)
+    idx = sym_index(3 * K)
+    A = conic_matrix(Z)
+    null = np.linalg.svd(A)[2][len(idx) - (K - 1):]
+    worst = 0.0
+    for v in null:
+        S = sym_from_vec(v, 3 * K, idx)
+        s = [S[3 * k, 3 * k] for k in range(K)]
+        T = np.kron(np.diag(s), np.eye(3))
+        worst = max(worst, np.abs(S - T).max(), abs(sum(wk * sk for wk, sk in zip(w, s))))
+    return worst < 1e-7, f"distance of the null space from the trivial quadrics {worst:.1e}"
+
+
+@test
+def demix_recovers():
+    """Proposition 6.1: DEMIX returns the ensemble at and above the threshold (exact data)."""
+    rng = np.random.default_rng(8)
+    worst = 0.0
+    for K, n in [(2, 12), (3, 23), (3, 28)] + ([] if QUICK else [(4, 39)]):
+        w, Xs = rand_ensemble(K, n, rng)
+        M = sum(wk * edm(X) for wk, X in zip(w, Xs))
+        edges, lengths = demix_mod.chain_edges(n)
+        out = demix_mod.demix(M, edges, lengths)
+        if not out["ok"]:
+            return False, f"K={K} n={n}: {out['reason']}"
+        if MUT == "demix_wrong_block":
+            out["states"] = [np.roll(S, 1, axis=1) * np.array([1.0, 1.0, 1.3]) for S in out["states"]]
+        e, dw = demix_mod.match_error(Xs, w, out)
+        worst = max(worst, e, dw)
+    return worst < 1e-5, f"max state RMSD / weight error {worst:.2e}"
+
+
+@test
+def demix_refuses_below_threshold():
+    """Below the threshold the certificate (nullity = K - 1) fails and DEMIX refuses."""
+    rng = np.random.default_rng(9)
+    w, Xs = rand_ensemble(2, 11, rng)
+    M = sum(wk * edm(X) for wk, X in zip(w, Xs))
+    edges, lengths = demix_mod.chain_edges(11)
+    out = demix_mod.demix(M, edges, lengths)
+    return (not out["ok"]) and out["certificate"]["nullity"] == 2, str(out.get("reason"))
+
+
+# ------------------------------------------------------------------ section 5.3, 5.4
+@test
+def jacobian_exact():
+    """Theorem H: exact full column rank at n = 2K+3 (complete) and w = K+3, n = (K^2+3K+4)/2."""
+    Kmax = 4 if QUICK else 7
+    bad = []
+    for geometry in ("rational", "tetrahedral"):
+        for K in range(2, Kmax + 1):
+            P, D, r, good = exact_jacobian_rank.check(K, 2 * K + 3, 2 * K + 3, geometry)
+            if not good:
+                bad.append(("complete", geometry, K, r, P))
+        for K in range(1, Kmax + 1):
+            w = K + 2 if MUT == "band_K_plus_2" else K + 3
+            n = (K * K + 3 * K + 4) // 2
+            P, D, r, good = exact_jacobian_rank.check(K, n, w, geometry)
+            if not good:
+                bad.append(("band", geometry, K, r, P))
+    return not bad, f"failures {bad[:4]}" if bad else f"full column rank for K <= {Kmax}"
+
+
+@test
+def band_K_plus_2_never():
+    """Theorem H(b), necessity: for w = K+2 (K >= 2) the data are fewer than the parameters."""
+    bad = []
+    for K in range(2, 12):
+        w = K + 2
+        for n in range(w + 1, 400):
+            data = sum(n - s for s in range(3, w + 1))
+            if data >= K * (n - 2) - 1:
+                bad.append((K, n))
+                break
+    return not bad, f"counterexamples to the count {bad}" if bad else "data < parameters for all n < 400"
+
+
+@test
+def trilateration_band():
+    """Theorem F': with separation 3K+1 the stacked configuration is determined by trilateration
+    in R^{3K} (K = 2: every 7 consecutive stacked points affinely independent; the next point is
+    then determined by its distances to them)."""
+    rng = np.random.default_rng(10)
+    K, n = 2, 14
+    w, Xs = rand_ensemble(K, n, rng)
+    Z = stack(Xs, w)
+    m = 3 * K
+    worst_gap, worst_err = np.inf, 0.0
+    for i in range(n - m - 1):
+        P = Z[i:i + m + 1]
+        B = (P[1:] - P[0]).T                      # m x m
+        worst_gap = min(worst_gap, np.linalg.svd(B, compute_uv=False)[-1])
+        d2 = ((P - Z[i + m + 1]) ** 2).sum(1)
+        # solve for the point from its squared distances to the m+1 points
+        rhs = 0.5 * ((P[1:] ** 2).sum(1) - (P[0] ** 2).sum() - d2[1:] + d2[0])
+        y = np.linalg.solve((P[1:] - P[0]), rhs)
+        worst_err = max(worst_err, np.abs(y - Z[i + m + 1]).max())
+    return worst_gap > 1e-4 and worst_err < 1e-7, f"min simplex singular value {worst_gap:.2e}; reconstruction error {worst_err:.1e}"
+
+
+@test
+def lemma_R_reachability():
+    """Lemma R: m0 = max(2, ceil(pi/beta)) steps of angle alpha reach every point of the sphere,
+    and m0 - 1 steps do not (checked on the interval recursion for the angular distance)."""
+    def reach(alpha, m, grid=20001):
+        rho = np.linspace(0, np.pi, grid)
+        cur = np.abs(rho - alpha) < np.pi / (grid - 1)          # J_1 = {alpha}
+        for _ in range(m - 1):
+            nxt = np.zeros(grid, bool)
+            for r in rho[cur]:
+                lo, hi = abs(r - alpha), min(r + alpha, 2 * np.pi - r - alpha)
+                nxt |= (rho >= lo - 1e-9) & (rho <= hi + 1e-9)
+            cur = nxt
+        return cur.mean()
+    bad = []
+    for deg in (40.0, 69.0, 70.53, 90.0, 100.0, 125.0, 150.0):
+        alpha = np.deg2rad(deg)
+        beta = min(alpha, np.pi - alpha)
+        m0 = max(2, int(np.ceil(np.pi / beta - 1e-12)))
+        if MUT == "lemma_R_minus_one":
+            m0 -= 1
+        full = reach(alpha, m0) > 0.999
+        short = reach(alpha, m0 - 1) > 0.999 if m0 > 1 else False
+        if not full or short:
+            bad.append((deg, m0, full, short))
+    return not bad, f"failures {bad}" if bad else "full sphere exactly from m0 steps on"
+
+
+# ------------------------------------------------------------------ section 7
+def certificate_setup(K, n, rng):
+    w, Xs = rand_ensemble(K, n, rng)
+    Z = stack(Xs, w)
+    B = np.hstack([np.ones((n, 1)), Z])
+    Qb, _ = np.linalg.qr(B)
+    Pi = Qb @ Qb.T
+    Pperp = np.eye(n) - Pi
+    return w, Xs, Z, (Pi if MUT == "certificate_wrong_projector" else Pperp)
+
+
+@test
+def dual_certificate():
+    """Theorem G(a),(c): phi(X) = ||Pi_perp X||^2 = -1/2 <Pi_perp, D(X)> vanishes on the states, is
+    positive on other chains, and its ensemble average is a linear function of M."""
+    rng = np.random.default_rng(11)
+    K, n = 2, 14
+    w, Xs, Z, Pp = certificate_setup(K, n, rng)
+    phi = lambda X: np.trace(X.T @ Pp @ X)
+    at_states = max(abs(phi(X)) for X in Xs)
+    others = [chain(n, rng.uniform(-np.pi, np.pi, n - 3)) for _ in range(200)]
+    vals = np.array([phi(X) for X in others])
+    lin = max(abs(phi(X) + 0.5 * (Pp * edm(X)).sum()) for X in others[:20])
+    return at_states < 1e-9 and vals.min() > 1e-4 and lin < 1e-9, \
+        f"phi at states {at_states:.1e}; min over 200 random chains {vals.min():.3f}; linearity defect {lin:.1e}"
+
+
+@test
+def quadratic_growth_local():
+    """Theorem G(b), local part: under (CC), Pi_perp is positive definite on the flexes of each
+    state modulo isometries (so phi grows quadratically away from the states)."""
+    rng = np.random.default_rng(12)
+    K, n = 2, 14
+    w, Xs, Z, Pp = certificate_setup(K, n, rng)
+    out = []
+    for X in Xs:
+        # tangent vectors: torsional velocity fields
+        T = []
+        for m in range(n - 3):
+            ax = X[m + 2] - X[m + 1]
+            ax /= np.linalg.norm(ax)
+            V = np.zeros((n, 3))
+            V[m + 3:] = np.cross(ax, X[m + 3:] - X[m + 2])
+            T.append(V)
+        # remove infinitesimal isometries
+        iso = [np.tile(e, (n, 1)) for e in np.eye(3)] + [np.cross(e, X) for e in np.eye(3)]
+        Bi = np.array([v.flatten() for v in iso]).T
+        Qi, _ = np.linalg.qr(Bi)
+        Tm = np.array([v.flatten() - Qi @ (Qi.T @ v.flatten()) for v in T]).T        # 3n x (n-3)
+        Gm = Tm.T @ Tm
+        Hm = sum((Tm.reshape(n, 3, -1)[:, c, :]).T @ Pp @ Tm.reshape(n, 3, -1)[:, c, :] for c in range(3))
+        ev = np.linalg.eigvals(np.linalg.solve(Gm, Hm)).real
+        out.append(ev.min())
+    return min(out) > 1e-6, f"local growth constants {np.round(out, 5).tolist()}"
+
+
+@test
+def infinitesimal_identifiability_under_CC():
+    """Theorem G(d), the bracketed step: under (CC) the Jacobian of the K-state parametrisation
+    has full column rank (complete data)."""
+    import explore_jacobian as ej
+    K, n = 2, 12
+    pairs = ej.band_pairs(n, n)
+    Jm = ej.jac(K, n, pairs, seed=13)
+    r = ej.rank(Jm)
+    return r == K * (n - 3) + K - 1, f"rank {r} of {K * (n - 3) + K - 1}"
+
+
+@test
+def w2_exponent_is_sharp():
+    """Theorem G(e): splitting a state symmetrically by eps changes M at order eps^2."""
+    rng = np.random.default_rng(14)
+    n = 14
+    w = np.array([0.4, 0.6])
+    t1, t2 = rng.uniform(-np.pi, np.pi, n - 3), rng.uniform(-np.pi, np.pi, n - 3)
+    v = rng.normal(size=n - 3)
+    M0 = w[0] * edm(chain(n, t1)) + w[1] * edm(chain(n, t2))
+    ratios = []
+    for eps in (1e-2, 5e-3, 2.5e-3):
+        M = w[0] / 2 * (edm(chain(n, t1 + eps * v)) + edm(chain(n, t1 - eps * v))) + w[1] * edm(chain(n, t2))
+        ratios.append(np.linalg.norm(M - M0) / eps ** 2)
+    spread = np.ptp(ratios) / np.mean(ratios)
+    return spread < 0.01, f"||dM||/eps^2 = {np.round(ratios, 4).tolist()}"
+
+
+# ------------------------------------------------------------------ section 8
+@test
+def extreme_4d_witness():
+    """Theorem D(b): exact rational 7-atom chain in R^4 with no quadric through its edge directions."""
+    return exact_4d_extreme.main() == 0, "rank 10 of the quadric system, bond vectors span R^4"
+
+
+@test
+def six_atoms_have_a_quadric_in_4d():
+    """Theorem D(a) at n = 6: a 4D chain has 9 edge directions and dim Sym(4) = 10, so it is never
+    an extreme point (it decomposes into chains of lower rank)."""
+    rng = np.random.default_rng(15)
+    natoms = 7 if MUT == "six_atoms_is_seven" else 6
+    gamma = -np.cos(np.deg2rad(111.0))
+    U = [rng.normal(size=4)]
+    U[0] /= np.linalg.norm(U[0])
+    for a in range(1, natoms - 1):
+        v = rng.normal(size=4)
+        v -= (v @ U[-1]) * U[-1]
+        v /= np.linalg.norm(v)
+        U.append(gamma * U[-1] + np.sqrt(1 - gamma ** 2) * v)
+    Y = np.vstack([np.zeros(4), np.cumsum(U, axis=0)])
+    nul = nullity(conic_matrix(Y), 10)
+    return nul >= 1, f"dimension of the space of quadrics {nul}"
+
+
+@test
+def hierarchy_instance():
+    """Theorem E(d): globally rigid 6-atom chain, not ensemble-rigid (two-state ensemble with the
+    same averaged data on F)."""
+    ok, checks = hierarchy_example.main(0, verbose=False)
+    return ok, f"mixture deviation on F {checks['max_dev_mixture_vs_X_on_F']:.1e}; states differ from X on F by {checks['Xp_differs_from_X_on_F']:.2f}, {checks['Xm_differs_from_X_on_F']:.2f}"
+
+
+@test
+def second_moment_of_rotated_data():
+    """Corollary 9.1: E[(g x_i)(g x_j)^T] = <x_i, x_j>/3 * I for Haar-random g in O(3)
+    (Monte Carlo, 2e5 rotations, tolerance 1e-2)."""
+    rng = np.random.default_rng(16)
+    a, b = rng.normal(size=3), rng.normal(size=3)
+    N = 40000 if QUICK else 200000
+    A = rng.normal(size=(N, 3, 3))
+    Q, R = np.linalg.qr(A)
+    Q = Q * np.sign(np.einsum("nii->ni", R))[:, None, :]
+    ga, gb = Q @ a, Q @ b
+    Mom = np.einsum("ni,nj->ij", ga, gb) / N
+    dev = np.abs(Mom - (a @ b) / 3 * np.eye(3)).max()
+    return dev < 2e-2, f"deviation {dev:.1e}"
+
+
+def main():
+    only = None
+    if "--only" in sys.argv:
+        only = sys.argv[sys.argv.index("--only") + 1]
+    failed = []
+    t0 = time.time()
+    for f in TESTS:
+        if only and f.__name__ != only:
+            continue
+        t = time.time()
+        try:
+            ok, msg = f()
+        except Exception as e:                       # a crash is a failure of the harness
+            ok, msg = False, f"EXCEPTION {type(e).__name__}: {e}"
+        print(f"{'PASS' if ok else 'FAIL'}  {f.__name__:38s} {msg}   [{time.time() - t:.1f}s]", flush=True)
+        if not ok:
+            failed.append(f.__name__)
+    n = len([f for f in TESTS if not only or f.__name__ == only])
+    print(f"{n - len(failed)} of {n} tests passed in {time.time() - t0:.0f}s" + (f"; FAILED: {failed}" if failed else ""))
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

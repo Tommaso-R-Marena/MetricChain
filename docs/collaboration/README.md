@@ -1,5 +1,27 @@
 # MetricChain collaboration hub
 
+> **This is the Geometric Inference division's copy of the common protocol** (branch
+> `research/geometric-inference`, created from the theory checkpoint `a844b5a`).  Since the
+> research owner's mandate of 2026-11-26 there are six divisions; the table and the layout
+> below are extended accordingly, the rules are unchanged.  The theory division's text is
+> otherwise kept as it was at `a844b5a`.
+
+| division (2026-11-26) | branch (writes only here) |
+|---|---|
+| Theory | `claude/determined-ride-og1u7j` |
+| Engineering (Computational Research) | `research/ubuntu-engineering` |
+| Science (Scientific Discovery, Translation & Independent Validation) | `research/scientific-translation` |
+| Ensemble (Ensemble Identifiability) | `research/ensemble-identifiability` |
+| **Geometry (Geometric Inference, Rigidity and Inverse Problems)** | `research/geometric-inference` |
+| Complexity (Biological Complexity) | `research/biological-complexity` |
+
+Geometry's paths: `docs/collaboration/messages/geometry/` (GEOMETRY-MSG-nnnn, GEOMETRY-REV-nnnn),
+`requests/geometry/` (GEOMETRY-REQ-nnnn), `responses/geometry/` (GEOMETRY-RES-nnnn),
+`status/geometry.md`, `GEOMETRY_TO_ALL.md` (digest and index); research documents in
+`docs/geometry/`; Lean in `proofs/Geometry/`; experiments in `experiments/geometry/`.  The
+division adds one label to those below: **[P, exact]** — a paper proof whose finite part is an
+exact (rational or modular) computation, with the script named.
+
 Three independent research divisions work on this repository (the third was introduced by
 the research owner on 2026-11-25):
 

@@ -87,6 +87,7 @@ import proofs.Frontiers.TermOrders
 import proofs.Frontiers.LineDynamics
 import proofs.Frontiers.ResolvedPenalties
 import proofs.Frontiers.GibbsRecovery
+import proofs.Geometry.EnsembleRigidity
 import proofs.AuditCommand
 
 /-!
@@ -1955,6 +1956,21 @@ end MetricChain.NonVacuity
 #print axioms MetricChain.GibbsRecovery.log_Z_le_of_steps
 #print axioms MetricChain.GibbsRecovery.log_Z_le_ueStep_iterate
 #print axioms MetricChain.GibbsRecovery.log_Z_le_upStep_iterate
+
+/-! ### Geometric Inference division: second-moment rigidity of ensembles
+(`proofs/Geometry/EnsembleRigidity.lean`; docs/geometry/ENSEMBLE_RIGIDITY.md) -/
+
+#print axioms MetricChain.Geometry.stacked_sqdist
+#print axioms MetricChain.Geometry.stress_energy_eq
+#print axioms MetricChain.Geometry.mixture_energy_eq
+#print axioms MetricChain.Geometry.stress_certificate
+#print axioms MetricChain.Geometry.block_coeff_nonneg
+#print axioms MetricChain.Geometry.block_rigidity
+#print axioms MetricChain.Geometry.sqdist_midpoint_of_conic
+#print axioms MetricChain.Geometry.globallyRigid_of_ensembleRigid
+#print axioms MetricChain.Geometry.ensembleRigid_of_universal
+#print axioms MetricChain.Geometry.fourAtom_not_ensembleRigid_witness
+#print axioms MetricChain.Geometry.block_rigidity_nonvacuous
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions
 used by the witnesses above) -/
