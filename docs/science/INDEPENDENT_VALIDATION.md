@@ -450,6 +450,27 @@ added since `b2d3e9c`; running the harness in its full (non-quick) mode.
   imported files were used as compiled in our tree (built on `5ed4072`).  Not read line
   by line: the other declarations; `ChainRuleCube.lean`.  *Kind of check:* machine
   verification plus a reading of the statements by one person.
+* **L4 (Lean; after checkpoint 43):** the three files of `experiments/science/ws_L4/` re-compiled
+  by the coordinator one at a time with `lake env lean` (23, 11 and 27 seconds): **three exit
+  codes 0, no error, no warning; no `sorry`, `admit`, `native_decide`, `axiom`, `unsafe`; 96
+  `#print axioms` lines, 94 with exactly `propext, Classical.choice, Quot.sound`, two with
+  `propext, Quot.sound`** — the counts of the workstream's own last run.  Read against the
+  paper statements: 15 theorems and 7 definitions (`remainder_identity`, `switchedBase_apply`,
+  `abs_remainder_le_of_anchored`, `allocation_lemma`, `cover_of_site_shares_order`,
+  `anchored_sandwich`; `key_exp_ineq`, `mgf_le_bennettB`, `integral_exp_le_bennettB`,
+  `remainder_bracket`, `deterministic_bracket`, `bennettW_sub_antitone`,
+  `deterministic_bracket_sharp`, `ceiling_lower_bound`, `iid_certificate_delta`).  The one new
+  statement (the sharper upper end) re-derived by hand and checked with independent lines
+  on `2·10⁵` random triples and 19 823 random finite laws.  `HigherOrderEnvelope.lean`, which
+  the companion file imports, compared with `cmp`: identical in our tree and at `24a3c27`.
+  **The theory division's own `AnchoredRemainder.lean` (their seventeenth checkpoint,
+  `9408e33`; sha256 `976f2168…c78376`)**, which proves the same identity, allocation and
+  sandwich: every statement read by the coordinator next to ours (they agree; table in
+  SCI-MSG-0023 §2), and a copy with four `#print axioms` lines compiled against our tree
+  (exit 0; `propext, Classical.choice, Quot.sound`).
+  Not done: reading the proofs; compiling `bennett_bracket_weights` against the theory
+  division's `BoxClass.lean` (not in our tree).  *The workstream's script-generated report
+  was not adopted; `workstreams/L4_REPORT.md` is the coordinator's (process note at its head).*
 * **P3 (a floor by analysis; checkpoint 40) — review, re-runs, and an independent
   replication of the headline number.**  *Re-derived by the coordinator:* the remainder
   identity (Proposition 1), the chain rule for mixed differences with its first

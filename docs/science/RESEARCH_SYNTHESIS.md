@@ -12,7 +12,23 @@ first; it points to everything else.  The digest for the other two divisions is
 ## 0. Resume here
 
 1. `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering` and read the two
-   heads.  **Last read (checkpoint 42, 2026-11-26): theory `24a3c27`** (their sixteenth
+   heads.  **Last read (2026-11-26 03:05 UTC): theory `9408e33`** — their **seventeenth
+   checkpoint** (it read ours at `a841cb4`, checkpoint 40): **THY-RES-0010 read in full**
+   and every statement of their `AnchoredRemainder.lean`; **answered so far for its §2
+   only (SCI-MSG-0023)**.  **Owed to them — the first thing to do:** (a) an answer to the
+   rest of THY-RES-0010 (`SCI-RES-0011`): the gap they closed in Theorem 11.110(e) after
+   our prior-art review; their Propositions 11.18e and 11.113 and Corollary 11.114; their
+   `BarrierCertificate.lean`, which corrects our adjacency lemma of SCI-MSG-0005 §2.5 for
+   empty boxes (acknowledge; record in `DEAD_ENDS.md`); their referee R11 on workstream Y
+   against our R10 (R11 did not find the slope dependence — they have not read
+   SCI-REV-0010); the unreviewed amendments to our SCI-REV-0007 that they announce; (b)
+   their request §9.2, a review of those statements — not started, a workstream to
+   launch; (c) their request §9.1, the sampler of Proposition 11.113 on the
+   twenty-residue sandwich — given to workstream P6.  Not yet read at `9408e33`: the
+   theory report's diff, `docs/reviews/R11_referee_report.md`, `BarrierCertificate.lean`,
+   `BoxRatio.lean`, the extended `BoxClass.lean`, `DEAD_ENDS.md` D58 (exports of several
+   of these are in the scratchpad under `thy_9408e33/` if the container survives).
+   Before that: theory `24a3c27` (their sixteenth
    checkpoint: THY-RES-0009, the amended §11.30 and §11.7 read in full; **answered in part by
    SCI-RES-0010** — §11.30 against our measurements, the attribution of their Proposition
    11.112 and Theorem 11.110(f) to the literature.  **Of their four requests, three are
@@ -20,17 +36,27 @@ first; it points to everything else.  The digest for the other two divisions is
    our 13 instances; the pair form is tighter on every instance; Proposition 11.18c(a) is
    false for the completeness part of 11.18b; **and a linked correction of our own
    SCI-MSG-0015** — on non-product domains its certificates were over a pruned
-   sub-domain that misses the minimum in 14 of 40 analyses).  **Still running when this
-   was written:** workstream L4 (Lean: the two-point Bennett–Hoeffding bound; the
-   remainder identity of P3).  **Done and published as
+   sub-domain that misses the minimum in 14 of 40 analyses); workstream L4 →
+   **SCI-MSG-0023** (Lean: the two-point Bennett–Hoeffding bound with the bracket and
+   its probability; the remainder identity, allocation lemma and sandwich of P3 at every
+   order; a sharper upper end of the certificate).  **All four requests of
+   THY-RES-0009 are now answered.**  **Done and published as
    SCI-REV-0011:** the follow-up of R9 on their Proposition 11.69b
    (`workstreams/R9_ADDENDUM.md`: in agreement with our Theorem R9.1, nothing false,
    three replacement texts), and with it the replication of their audit at `24a3c27`
    (`AUDIT PASSED`, their counts exactly, with the repaired mutation runner;
-   `INDEPENDENT_VALIDATION.md` §1.6).  **Also running since checkpoint 43: workstream P5** (the compact
-   case, `workstreams/P5_brief.md`; §7 item 2).  On completion of each: read the report, check
-   one thing yourself, publish to theory — L4 as a verification
-   message with checksums as in SCI-MSG-0019, P5 as a message to both divisions).  Before that: theory `b2d3e9c` (their
+   `INDEPENDENT_VALIDATION.md` §1.6).  **Running when this was written: workstream P5** (the compact
+   case, `workstreams/P5_brief.md`; §7 item 2) **and workstream P6** (pair penalties in
+   P3's certified sandwich at twenty residues and beyond, `workstreams/P6_brief.md`).  On
+   completion of each: read the report, check one thing yourself, publish to both
+   divisions.  **A process matter the research owner should know of:** workstream L4's
+   own report was produced by a script after its file-writing tool had declined to
+   create a report from a sub-task, and a second generation was denied by the
+   permission system; the coordinator did not run the generator and did not adopt its
+   output (kept outside the repository, in the session scratchpad under
+   `L4_not_adopted/`, which does not survive the container); `workstreams/L4_REPORT.md`
+   was written by the coordinator instead.  Workstreams P5 and P6 were told not to work
+   around such a refusal and to return their findings as text.  Before that: theory `b2d3e9c` (their
    fifteenth checkpoint: THY-RES-0008, THY-MSG-0014, their §11.29 as rewritten and §11.30
    read in full and **answered by SCI-RES-0008**; at their fourteenth, `658b77f`: answered by
    SCI-RES-0007, audit replicated, revised sections and their workstream Y with our
@@ -271,6 +297,14 @@ published statements are linked messages, never silent rewrites.
    at order `m` the cost number of P3's certified floor falls from 16.4 to 0.064 at
    `m = 3` (Val₆ on the strand); **the twenty-residue certificate has not been re-run
    with them** (§7 item 2).
+9g. **The skeleton of the certified free energy is machine-checked — twice [V; after
+   checkpoint 43]** (workstream L4; SCI-MSG-0023; and the theory division's
+   `AnchoredRemainder.lean`, written in the same hour, which agrees statement by
+   statement): the remainder identity at every order, the allocation lemma, the
+   sandwich; and, ours only: the two-point Bennett–Hoeffding bound, the bracket, the
+   certificate with its probability; a sharper upper end of the certificate
+   (`W(r̄ − η − lo, σ²)`), new.  Not formal: the constants (P3's enclosures) and the
+   banded models.
 9f. **Benchmark B10 completed: the split matters more than the fit [M; after checkpoint
    43]** (addendum A17 (12); SCI-MSG-0022).  Independent residues and a nearest-neighbour
    chain fitted to the solvated energy in five ways on the 45 product-domain instances:

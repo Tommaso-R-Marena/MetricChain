@@ -1,0 +1,27 @@
+import Mathlib
+import proofs.Frontiers.HigherOrderEnvelope
+
+/-!
+# The remainder identity of the anchored expansion — stated for the theory division's declarations
+
+Science division, workstream L4, Part A.  This file is **generated** by `assemble.py`: it is
+Parts 1–6 of `RemainderIdentity.lean` (same directory), verbatim, on top of
+`import proofs.Frontiers.HigherOrderEnvelope` (read-only; the theory division's compiled file)
+instead of the copies of Part 0 of that file.  With `open MetricChain`, the names `mixConfig`,
+`mixedDiff`, `HigherDiffBound`, `supp`, `anchoredInterp` and the basic lemmas used in the proofs
+are here the theory division's own declarations `MetricChain.mixConfig`, `MetricChain.mixedDiff`,
+`MetricChain.HigherDiffBound`, `MetricChain.supp`, `MetricChain.anchoredInterp`, …  So the
+theorems of this file are statements about the objects of the theory report's Theorem 11.18
+(`MetricChain.higherOrder_remainder`), which `ScienceL4.abs_remainder_le_of_class` re-derives from
+the identity.  Item 1 of Part A of the brief is `MetricChain.anchored_decomposition` (reused, not
+re-proved here).  See `RemainderIdentity.lean` for the description of the contents.
+-/
+
+set_option autoImplicit false
+
+namespace ScienceL4
+
+open Finset MetricChain
+
+variable {ι : Type*} {σ : ι → Type*}
+

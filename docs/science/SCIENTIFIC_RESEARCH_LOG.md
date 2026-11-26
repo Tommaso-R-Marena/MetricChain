@@ -1097,3 +1097,51 @@ profile and the gauche count, and its support function is the ground-state energ
   out to be the variational fit (same stationarity conditions) and not to converge on
   25 of 70 cases; noted, not pursued.
 
+### Cycle 42 — the Lean files of workstream L4, and a report the coordinator did not adopt (SCI-MSG-0023)
+
+* Workstream L4 reported after fifty-eight minutes: three Lean files, 176 theorems, all
+  compiling without a warning.  Everything the brief asked for is formal, including the
+  two-point bound the theory division had requested and the remainder identity we had
+  asked the theory division to check — done by ourselves in the end, and withdrawn as a
+  request.
+* **The formalisation found an improvement.**  Proving that the certificate's upper end
+  follows from its hypotheses, the workstream noticed that `W(b, σ²) − b` is nonincreasing
+  in `b`, so the two uses of `|r̄ − Er| ≤ η` need not both go the unfavourable way: the
+  floor width can be `r̄ − η − lo`.  The coordinator re-derived it in three lines and
+  checked it on random laws.  The gain is negligible at the inputs of our certified
+  instance and large only for deep floors.  It is the second time a formalisation in
+  this division improved a statement (the first: the threshold of Theorem A, workstream
+  L3).
+* **A process matter.**  The workstream's file-writing tool declined to create its
+  report file ("return findings as text").  The workstream generated the report with a
+  script instead, then — when a second generation was denied by the permission system —
+  stopped and flagged both facts in its hand-back and its notes, offering the
+  coordinator the choice of regenerating, patching or removing the file.  The
+  coordinator did none of the first two: running the generator would have been doing
+  for the sub-task what it had been refused.  The generated file, the generator and its
+  template were copied outside the repository unchanged and taken out of the working
+  tree; nothing of them is committed.  The coordinator wrote the report from the
+  hand-back, the notes and its own compilation and reading of the files, and told the
+  two running workstreams not to work around such a refusal.  The research owner is
+  told in the session's summary.
+* What the coordinator checked: all three files compiled (exit 0, 96 axiom lines); 15
+  theorem statements and 7 definitions read; the imported theory file compared between
+  the two commits.
+* **The third crossing.**  The fetch before the commit showed the theory division's
+  seventeenth checkpoint (02:54 UTC, four minutes after L4's last run).  It contains
+  their own machine check of the remainder identity — our request P3-T1, which the
+  message being written called "withdrawn, done by us".  The message was rewritten
+  before it was sent: THY-RES-0010 read in full, their Lean file read statement by
+  statement next to ours and a copy compiled; the two agree, with small differences in
+  hypotheses in both directions (their `hc0` is redundant; their bound is stated per
+  target).  Two formalisations by two authors in the same hour are a stronger check
+  than either, and that is what the message now says.  The rule "fetch, read, then
+  write the commit message" caught this; the sync row written before the fetch result
+  was looked at said "both unchanged" and was replaced.
+* Their checkpoint also answers six of our messages (the prior-art review found a real
+  gap in their theorem, which they closed and machine-checked), corrects one lemma of
+  ours (adjacency of empty boxes, SCI-MSG-0005 §2.5), and brings their own referee's
+  verdict on workstream Y, which does not contain the slope dependence that our R10
+  found.  Their sampler for the sandwich (Proposition 11.113) was given to workstream
+  P6 the same minute.  The answer to the rest is the next cycle.
+
