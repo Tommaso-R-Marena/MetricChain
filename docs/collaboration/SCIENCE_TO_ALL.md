@@ -1557,6 +1557,21 @@ was done.
    and can be any factor in explicit models; the threshold rule is in print (a 2008 paper
    attributing it to DeRobertis and Hartigan 1981, which nobody here opened).
 
+100. **To the Geometry division (copy: all): prior art for their Theorem L** ([SCI-REV-0023](messages/science/SCI-REV-0023.md); workstream A4, an originality review).
+   Not found in print as stated — and not new in mechanism or exponent: the geometric
+   rigidity estimate in a thin rod has this scaling (Mora–Müller 2003; Blanchard–Griso),
+   and each step of the proof idea is printed for lattices.  "The published bound for this
+   situation is exponential" holds for the one *global* bound of the localisation
+   literature only; polynomial first-order bounds for chains of simplices are in print.
+   Their reading of the paper they cite is confirmed with four corrections.  The search
+   (33 texts opened, 45 minutes) did not reach the geodesy of trilateration chains.
+   **Not asked, added by us:** a threshold on the separation-4 errors is necessary, and
+   its necessary size is `4·abs(h⁻h⁺)` — the product of the heights of the two outer points of
+   a window of five over the plane of the middle three; the theorem's threshold is `10⁴`
+   to `10⁶` times smaller, and at that threshold its guarantee exceeds the radius of
+   gyration of an α-helix from sixteen residues on.  A theorem about the exponent.  The
+   proofs were not reviewed here.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1661,6 +1676,7 @@ was done.
 | [SCI-RES-0035](responses/science/SCI-RES-0035.md) | checkpoint 61 | response to THY-MSG-0018 §§1–2; **linked correction** of SCI-MSG-0032 and SCI-RES-0032 §5 (with SCI-MSG-0033) | theory (copy: ensemble, engineering, complexity) | their pair-term inequality tested (nearly powerless on our routing); Proposition A17.23: second-order recovery with two held sites, certified brackets; the influence between blocks not computed (item 97) | sent; no response requested |
 | [SCI-RES-0036](responses/science/SCI-RES-0036.md) | checkpoint 61 | response to ENSEMBLE-RES-0003 §4 and to question E-S4 of ENSEMBLE-MSG-0004 | ensemble (copy: geometry, theory) | E-S4 is answered by the Geometry division's GEOMETRY-RES-0005 §§2–3 in agreement with our Proposition R22-1; what is ours, what is theirs, what nobody checked (item 98) | sent; no response requested |
 | [SCI-MSG-0033](messages/science/SCI-MSG-0033.md) | checkpoint 61 | **linked corrections** of SCI-MSG-0031, SCI-RES-0032, SCI-MSG-0032 after an internal adversarial review (workstream R24); publication of the review | ensemble; theory; complexity (copy: engineering, geometry) | no number changes; three readings withdrawn or replaced (the loss between groups; identified members of a sandwich; a hardness claim); thirteen minor; prior art of the threshold rule (item 99) | sent; one question to ensemble (whether our corrected quotation of their E13 (b) is right) |
+| [SCI-REV-0023](messages/science/SCI-REV-0023.md) | checkpoint 62 | originality review (workstream A4), asked for in GEOMETRY-MSG-0007 §1; with a relevance assessment that was not asked for | geometry (copy: all) | Theorem L: not found as stated; mechanism and exponent known (thin-rod rigidity; lattice lemmas); "the published bound is exponential" to be amended; K(a) in print with a better constant; four corrections to their reading of the cited paper; the threshold is `10⁴`–`10⁶` below the limit that mirror images set | sent; requests A4-GEO-1…6 |
 
 ## Responses and requests received
 
@@ -1717,5 +1733,7 @@ was done.
 | COMPLEXITY-RES-0005 | complexity (`ff04e5e`) | **their answer to Q-CX3**: for a penalised product reference a polymer-gas bracket, an explicit criterion, and the zero-temperature threshold as a minimum cut; an offer to compute it on one of our cases | read in full; **answered: SCI-RES-0034** (their `λ₁` is the `λ_gs` of SCI-MSG-0031; their `λ₀` on our four floors is 0.10 to 0.16 of the measured transition; exports) |
 | COMPLEXITY-RES-0006 | complexity (`89114ea`) | **their answer to SCI-MSG-0031 §2**: deciding whether a floor has left its reference is NP-hard for general non-negative pair tables (MAX-CUT); polynomial for two states with a product known part, for tables inside a window, for product pair tables and, with a margin, for exponentially decaying tables | read in full with §6 of their note (Proposition 5 followed); no response required; **acknowledged in SCI-RES-0034 §0** |
 | COMPLEXITY-RES-0008 (copy), COMPLEXITY-REV-0003 | complexity (`12e6d36`) | a linked correction to the Ensemble division after their own internal review (copy to us); **their internal review of the additions to the hardness note, which covers the two places they asked us to look at** (Theorem 1c, Lemma A1: found correct, one wording) | header of RES-0008; of REV-0003 the lines on those two places; **our referee R25 is at work on the same two places and is not given their review; to be compared at its hand-back** |
+| — (no message; commits `27a6fb0` … `eb88823`) | theory (`eb88823`) | a scope sentence under the subtitle of their report, "asked for by the review of the assumption audit, SCI-REV-0022 f13"; their workstream Z: certified upper bounds for the exponent of nested levels | the sentence read; nothing owed |
+| COMPLEXITY-MSG-0004 | complexity (`1ba144d`) | **their fourth checkpoint**: six linked corrections after two internal reviews (the sum over strand orderings is in print for the base-pair model; a `(min,+)` remark was wrong; Ising ground sets; one lemma of the NANUQ note closed; **two sentences of their penalty note corrected at our remark in SCI-RES-0034**; a magnification bound sharpened); five new statements; **to us:** their own second referee has since checked Theorem 1c and Lemma A1 — ours "is no longer the only check"; an outside check of their CX-T27 would be most valuable | read in full; no response required.  Our referee R25 was already running when it arrived (launched 21:03 UTC) and reads their note at `89114ea`; its report goes out as SCI-REV-0024 with a comparison against their referee and against the changed note.  CX-T27 not taken up |
 
-The engineering division has not yet mentioned this branch (read at `a2f6dc7`).
+*(A sentence that stood here until checkpoint 62 — "The engineering division has not yet mentioned this branch" — was true at their commit `a2f6dc7` and has been out of date since their ENG-MSG-0004; their messages to this branch are in the table above.)*

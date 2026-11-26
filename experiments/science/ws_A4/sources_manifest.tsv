@@ -1,0 +1,35 @@
+# name	address	what	lines	bytes	sha256 of the text extraction (pdftotext -layout; .html for the HTML rendering)
+acv_2310.10900v3	https://arxiv.org/pdf/2310.10900v3	Arias-Castro & Vishwanath (read in full)	1090	77763	4e5aecd6367dc6b8f086252af551badb22288249263714f9ee3c22ad34404436
+acv_html_v3	https://arxiv.org/html/2310.10900v3	same paper, HTML rendering (equation numbers only)	2194	470123	8a905210d6bddd536a0b29ba0d9920c3b37dfead5e598a41a4c6238f0eedf4a1
+ajp_1810.09569	https://arxiv.org/pdf/1810.09569	Arias-Castro, Javanmard, Pelletier	1897	124930	ff27518f9a4ec319eb94228de1b08c4efc4f2d4480569fa8583ae0a34edf8e30
+almost_1908.03802	https://arxiv.org/pdf/1908.03802	Holmes-Cerfon, Theran, Gortler	3032	201358	11b4e0919007cc2e7b8e3daa688421992ba3bb4774fb9c83ce1f514bfd2d4985
+alp_1601.05968	https://arxiv.org/pdf/1601.05968	Alicandro, Lazzaroni, Palombaro	1939	138709	377053a581e8322bd2dfab5fcea7bcec6bb98018272a56c11859fc114a015bf9
+asap3d_1111.3304	https://arxiv.org/pdf/1111.3304	Cucuringu, Singer, Cowburn	2791	189617	0249d8c348e9f1e7265af46db1c30e48bae0e70c21a8e01d7e696dc7552ea0df
+bg_1010.3614	https://arxiv.org/pdf/1010.3614	Blanchard, Griso	2026	119092	6054369704aed61c18feff986cb70305811897688e151feea48bc82e58f4b6a8
+bss_1204.3873	https://arxiv.org/pdf/1204.3873	Bandeira, Singer, Spielman	1208	93546	80386b5ec08dc58af68d99a4b8b1d97793eb9f12faa34d73084f8f0c654559bd
+changsahai_2006	https://www.ocf.berkeley.edu/~chechang/docs/Eurasip06.pdf	Chang, Sahai	1021	96360	82cae1be0fc2e2b19bb84fecd48ef66c6fa587a1ff1b7d2aaf3870d10d7b82f2
+cks_1306.5226	https://arxiv.org/pdf/1306.5226v5	Chaudhury, Khoo, Singer	1938	121869	1de191ac02e0970393ad55db0a431278c08e69c9f41e4858c08a29a8bbda2606
+comp_1807.00108	https://arxiv.org/pdf/1807.00108	component-based localisation	718	85894	525997e4f64bc95c5bffed6cdcb5da8586e4ad07e24f25b41a781028a8dc1ef6
+dkvw_1410.6852	https://arxiv.org/pdf/1410.6852	Drusvyatskiy, Krislock, Voronin, Wolkowicz	1699	100281	3748ddb7ce13f3b52428731b6bf6f361f00e5735d69b188d16c1dfedcf4e339e
+dmdgp_survey	https://www.lix.polytechnique.fr/~liberti/dmdgp-survey.pdf	Lavor, Liberti, Maculan, Mucherino (survey)	964	55688	d9c1066067f44834ddb7c65b7787aeffc4a0be42a6b5294011f9c84e12652c33
+ds_0703119	https://arxiv.org/pdf/cs/0703119	Daitch, Spielman	1215	70547	a5f14009de90e71f90b37cb736178a692c0548df822b9566e6119107a64220cb
+edg_1205.0349	https://arxiv.org/pdf/1205.0349	Liberti, Lavor, Maculan, Mucherino (Euclidean distance geometry)	3612	243086	0d90285086785c8f225b2ff01797de18f1203752a12075d69bfb4828791a373f
+fjm_hierarchy_2005	https://files-www.mis.mpg.de/mpi-typo3/preprints/2005/preprint2005_7.pdf	Friesecke, James, Mueller (hierarchy of plate models)	3203	161358	5d48f16e62fed439ab4e2e8b48b777cb89ce5817ef60ebfc4169174fef273dff
+gac_2505.16015	https://arxiv.org/pdf/2505.16015	Alvarez-Hamelin, Giribet, Mas, Presenza	679	44102	900b57e69fab2e365c73ac9eabd1724a51d6cd4c549b0005dcf598dc84b89427
+hr_2608.00863	https://arxiv.org/pdf/2608.00863	Harutyunyan, Rodrigues	1289	77835	4b8598085b1b8e75599790a4e5037c236423d88aadf067448cf92f10ff6be2d1
+ibp	https://www.lix.polytechnique.fr/~liberti/bp-interval.pdf	Lavor, Liberti, Mucherino (interval BP)	798	53169	b3eba6f21e20e2ea40d8b30db6f18ed3983065cc6f78bb1fd225f99aa5e05905
+ind_1805.09442	https://arxiv.org/pdf/1805.09442	Kyng, Peng, Schwieterman, Zhang	2580	160350	ed139c371b7760e184a5ac106f9a211194f419a55cc12029a42015500626ef04
+jm_1103.1417	https://arxiv.org/pdf/1103.1417	Javanmard, Montanari	2611	166457	ef819dc2941b6474a00f299798e941cb9939db4ec8f71ff4bc84a063713df434
+lnpr_2304.01306	https://arxiv.org/pdf/2304.01306	Lew, Nevo, Peled, Raz (rigidity expander graphs)	1411	69686	e1cae7b9e6594a471a4f2799747cd2bda65766063446c83cab3039587eda4d39
+lps_1501.07505	https://arxiv.org/pdf/1501.07505	Lazzaroni, Palombaro, Schloemerkemper	1167	70958	2996df0509ed74034d81873386f157e1e22144e1adc95ba98a9589c38d3bb644
+mm_ihp_2004	https://www.numdam.org/item/10.1016/j.anihpc.2003.08.001.pdf	Mora, Mueller (Ann. IHP 2004)	1507	89269	96954cce125e1477b451449a085258d2aff0ed407b8d30caa8306c56bf0259e9
+mm_rods_2002	https://files-www.mis.mpg.de/mpi-typo3/preprints/2002/preprint2002_93.pdf	Mora, Mueller (rods, preprint 93/2002)	1117	57041	d1bd89477fcc196c53cad0266319c014f99c3c68eaba0778e5de74fa5cc79f02
+moore2004	https://people.csail.mit.edu/teller/pubs/MooreEtAlSensys2004.pdf	Moore, Leonard, Rus, Teller	912	103663	dc46f88cf107a994fe1ef1c2e240964d4b9d4898f1be6e17a631b0630359caee
+nsr_1907.06441v4	https://arxiv.org/pdf/1907.06441v4	Zhao (withdrawn manuscript, v4)	890	60056	a850a4a49fae9abbf5cd539c65a6eb187a6db8be0e56e4f95b287719ba2720d3
+scardia_0803.0923	https://arxiv.org/pdf/0803.0923	Scardia	1387	95378	075c99b57d023b43ddcb9439039ca8a5cbed7d59e9a03f971336e653244d8d8f
+sel_2604.21094	https://arxiv.org/pdf/2604.21094	Nguyen-Cong, Hy, Dinh	2979	185190	806080d18e78b772bf56d5de708d3e952bc26127f2ff800aa5d0ee8f9873d8f9
+stzy_1010.2262	https://arxiv.org/pdf/1010.2262	Shamsi, Taheri, Zhu, Ye	1092	72261	9bfa739538ad05333674af252261cfb426d708363661317e1bb0d52e5b67c6c9
+swy_ima	https://conservancy.umn.edu/server/api/core/bitstreams/37b6934d-88a0-4f8d-b7b3-adaa920235eb/content	Wu, Wu, Yuan (IMA preprint 2175)	664	43524	e6631080eced60cdd2874bd0c077d9d5417d0e18256525addfb0870cdee23a8e
+sz_2208.04199	https://arxiv.org/pdf/2208.04199	Schmidt, Zeman	2060	138985	de545f17b6bf9442507d7c5fb57e1b4db43c6b68cb869252a2598b663aa191e8
+vaisala_0201098	https://arxiv.org/pdf/math/0201098	Vaisala (survey of nearisometries)	656	35517	11a242d9cab44e42b0f308e8e5994adfaf1d2a16e47ed0b08076a3f477f421fd
+yale_main2	https://www.eng.yale.edu/controls/pending/main2.pdf	Aspnes et al. (A Theory of Network Localization, manuscript)	1362	98483	afa28a0d9b14b10826fc88852d572e0aee2b0a7cd3ca5196e571747bad7f056e

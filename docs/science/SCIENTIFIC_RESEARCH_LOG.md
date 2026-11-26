@@ -2887,3 +2887,36 @@ mutations, 574 caught, one expected pass.
 *A formatting defect found on the way:* a row I wrote today broke a table through the
 pipes of an absolute value; a scan found the same in nine older rows (repaired) and a
 different cell count in twenty-two more (listed in the handoff).
+
+### Cycle 61 — the literature workstream on the Geometry division's Theorem L; a threshold that is four to six orders too small (26 November 2026, 21:20–21:48 UTC)
+
+*A4 handed back at 21:28 UTC* (0.73 million tokens; 123 logged queries and addresses; 33 texts
+opened).  I read all 956 lines.  Its verdict — *known in a different setting, the transfer
+not in print* — rests on a handful of passages, so I downloaded five of the sources again
+and read those passages: the checksums of my text extractions equal the ones in its
+manifest, and every quotation is there as quoted.  Its most useful find is a negative
+one: a 2018 paper on trusses reports an exponential loss "due to the accumulation of
+rotational operators" in its own lemma and asks whether that is an artefact — the
+Geometry division's frame comparison answers that for thick chains.
+*What I added.*  Reading their statement with the directive's question in mind ("a general
+theorem with computationally vacuous guarantees should be explicitly identified as such"),
+I computed the one thing their text leaves qualitative: how large the separation-4 change
+of the mirror-image competitor is.  It is `4h⁻h⁺` — two lines — so no threshold can exceed
+that, and it is at least `4τ²/√3`.  Their sufficient threshold is `τ⁴/(73D²)`.  **No
+prediction was written down before this run — a lapse against my own rule.**  The estimate
+I had in mind while deriving the formula was "three to four orders for thick chains"
+(from `169(D/τ)²` with `D/τ` between 3 and 10); it is not a recorded prediction and is
+not counted as one.  Computed: `2.1·10⁴` on the helix; on strand-like traces `10⁵` to
+`4·10⁶` — I had not thought about strands at all, where four consecutive points are
+nearly coplanar and even the *necessary* gap is a few hundredths of an ångström.
+At its own threshold the theorem's bound is 4.2, 11.8, 295 Å for 12, 20, 100 residues.
+*An error of mine caught before publication:* the closed form of that bound in my draft of
+the review carried a spurious `1/√n`; the script asserts the closed form against the
+direct evaluation, and the draft disagreed with the script.  And the crossover length
+("fifteen residues") was first a hand estimate; it is now asserted in the script (below
+the radius of gyration at 15, above at 16).
+*A gap in my own records:* the requests of the three reviews of checkpoint 59 had never
+been entered in the table of outstanding requests; added now with their present state.
+*The band-7 trial* of the second-order recovery is still running after twenty minutes
+for 420 passes: about three seconds a pass, hours for the full computation, for a
+bracket that is already `8·10⁻⁵` nats.  Not pursued at band 7.

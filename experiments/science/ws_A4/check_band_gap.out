@@ -1,0 +1,13 @@
+n= 12 K=3: a(P)=0.89678 <= a(C_n)=3.26795 <= 3.83818;  a(P) <= a(C_2n)=0.92188 <= 0.95954;  lambda_7(stiffness, random X)=0.00158 <= a(P): True
+n= 12 K=4: a(P)=1.80069 <= a(C_n)=6.26795 <= 8.22467;  a(P) <= a(C_2n)=1.92188 <= 2.05617;  lambda_7(stiffness, random X)=0.06112 <= a(P): True
+n= 12 K=6: a(P)=4.40152 <= a(C_n)=14.00000 <= 24.94817;  a(P) <= a(C_2n)=5.40425 <= 6.23704;  lambda_7(stiffness, random X)=0.17314 <= a(P): True
+n= 20 K=3: a(P)=0.33853 <= a(C_n)=1.30428 <= 1.38174;  a(P) <= a(C_2n)=0.34050 <= 0.34544;  lambda_7(stiffness, random X)=0.00002 <= a(P): True
+n= 20 K=4: a(P)=0.71268 <= a(C_n)=2.68625 <= 2.96088;  a(P) <= a(C_2n)=0.72246 <= 0.74022;  lambda_7(stiffness, random X)=0.00433 <= a(P): True
+n= 20 K=6: a(P)=2.03933 <= a(C_n)=7.30428 <= 8.98134;  a(P) <= a(C_2n)=2.13268 <= 2.24534;  lambda_7(stiffness, random X)=0.09716 <= a(P): True
+n= 40 K=3: a(P)=0.08599 <= a(C_n)=0.34050 <= 0.34544;  a(P) <= a(C_2n)=0.08605 <= 0.08636;  lambda_7(stiffness, random X)=0.00000 <= a(P): True
+n= 40 K=4: a(P)=0.18363 <= a(C_n)=0.72246 <= 0.74022;  a(P) <= a(C_2n)=0.18394 <= 0.18506;  lambda_7(stiffness, random X)=0.00469 <= a(P): True
+n= 40 K=6: a(P)=0.55117 <= a(C_n)=2.13268 <= 2.24534;  a(P) <= a(C_2n)=0.55416 <= 0.56133;  lambda_7(stiffness, random X)=0.01884 <= a(P): True
+n= 80 K=3: a(P)=0.02157 <= a(C_n)=0.08605 <= 0.08636;  a(P) <= a(C_2n)=0.02157 <= 0.02159;  lambda_7(stiffness, random X)=0.00000 <= a(P): True
+n= 80 K=4: a(P)=0.04618 <= a(C_n)=0.18394 <= 0.18506;  a(P) <= a(C_2n)=0.04619 <= 0.04626;  lambda_7(stiffness, random X)=0.00026 <= a(P): True
+n= 80 K=6: a(P)=0.13979 <= a(C_n)=0.55416 <= 0.56133;  a(P) <= a(C_2n)=0.13988 <= 0.14033;  lambda_7(stiffness, random X)=0.00512 <= a(P): True
+ALL OK

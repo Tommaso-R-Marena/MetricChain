@@ -12,49 +12,63 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 21:18 UTC.  (The block is rewritten when the state changes; the
-history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
+*State at 2026-11-26 21:48 UTC.  (The block is rewritten when the state changes; the
+history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–61.)*
 
 **Open right now (newest first; everything below this paragraph is older and still true
 unless this paragraph says otherwise).**
-(i) **Two workstreams are running; their directories are uncommitted while they run.**
-A4 (launched 20:32 UTC; brief `docs/science/workstreams/A4_brief.md`): prior art for the
-Geometry division's Theorem L — report to come as `workstreams/A4_REPORT.md`, notes in
-`experiments/science/ws_A4/`.  R25 (launched 21:03 UTC; brief `workstreams/R25_brief.md`):
-the second look the Complexity division asked for (their Theorem 1c in one regime, their
-Lemma A1) — `workstreams/R25_REPORT.md`, `experiments/science/ws_R25/`.  **When either
-hands back:** read the report in full, check what decides each finding (for A4: open the
-two or three deciding sources yourself), add a coordinator's note, publish as a review to
-the division that asked (A4: Geometry; R25: Complexity, copy Theory), commit its
-directory (complete logs only).  If it reports a declined tool action, do not perform
-it; tell the research owner.
-(ii) **Published at this commit (checkpoint 61).**  *SCI-MSG-0033* — linked corrections of
-our three messages of the evening after the review by workstream R24 (no number wrong;
-three readings withdrawn or replaced: what joint laws recover of the loss between groups;
-which members of a sandwich averaged data identify; a hardness claim).  *SCI-RES-0035* (to
-theory) — their pair-term inequality tested (nearly powerless on our routing) and
-**Proposition A17.23: second-order recovery with two held sites** (addendum A17 (24),
-item 94; `pi_inference/held_pair_exact.py`): **Lys₁₂ at order 4, band 4, certified within
-`0.0002148` nats instead of `0.0006449`** (`[517.1284375, 517.1286523]`); the five-residue
-brackets narrowed by 0.440, 0.224, 0.777, 0.472.  *SCI-RES-0036* (to Ensemble) — their question E-S4.
-The theory division's audit at its twenty-third checkpoint `b2caab6` passes on this
-machine (validation §1.16).
+(i) **One workstream is running; its directory is uncommitted while it runs.**
+R25 (launched 21:03 UTC; brief `docs/science/workstreams/R25_brief.md`): the second look
+the Complexity division asked for (their Theorem 1c in one regime, their Lemma A1) —
+`workstreams/R25_REPORT.md`, `experiments/science/ws_R25/` (it writes result files of
+several megabytes there: commit scripts, logs and the report, not those).  **When it
+hands back:** read the report in full, check what decides each finding, compare with
+the Complexity division's own referee on the same two places (COMPLEXITY-REV-0003 at
+`12e6d36`, which R25 was deliberately not given), add a coordinator's note, publish as
+SCI-REV-0024 to Complexity (copy Theory), commit its directory.  If it reports a declined
+tool action, do not perform it; tell the research owner.  **Their note has changed since the
+version R25 reads** (`1ba144d`, after their own review: Lemma A1 now for clauses of between
+one and three literals; Corollary 4 (ii); a new §9a) and COMPLEXITY-MSG-0004 §4 says our
+look "is no longer the only check": compare R25's findings with the new version before
+publishing, and say in the same message that their CX-T27 (an outside check they would
+value) has not been taken up.
+**Briefed and not launched:** R26 (`workstreams/R26_brief.md`) — a referee of the theory
+division's §11.33 (nesting on general spaces: the class-relative influence, which it is
+asked to compute on a band model; the false certificate; the abstract level theorem).
+Launch it when R25 is back, if credits allow; never more than two agents at once.
+(ii) **Published at this commit (checkpoint 62).**  *SCI-REV-0023* (to Geometry; workstream
+A4, an originality review): their Theorem L — a global stability bound of order `n²` from
+distances of sequence separation at most 4 — was not found in print as stated; mechanism
+and exponent are those of the geometric rigidity estimate in thin rods, each step is
+printed for lattices; their sentence "the published bound is exponential" needs an
+amendment; four corrections to their reading of the paper they cite; and, not asked, **our
+own assessment of the threshold** (`geometry_checks/theorem_l_threshold.py`): a threshold
+is necessary, its necessary size is four times the product of two heights, theirs is
+`10⁴` to `10⁶` times smaller, and at it the bound exceeds the radius of gyration of a helix
+from sixteen residues on (`OPEN_PROBLEMS.md` C6).  Also at this commit: the assumption
+table of Proposition A17.23 (addendum item 96); `ASSUMPTION_AUDIT.md` G-4 and G-7 (c)
+updated; three request rows that had been missing from the status file since checkpoint
+59 (SCI-REV-0020, -0021, -0022); an addendum E to `PRIOR_ART_MATRIX.md`.
 (iii) **Owed, in this order.**
-  (a) A4 and R25, as in (i).
-  (b) **Second-order recovery where it is not yet run** (`held_pair_exact.py`): Lys₁₂ at
-  band 7 (the ceiling route takes any subset of quadruples — `--budget`; the floor route
-  needs all 2 422 pairs of held states, and a pass costs more at band 7: time one first),
-  (LKSE)₃ at order 4 (first-order bracket 0.0014 nats; on LKSE:5 the floor route closed
-  0.47), Lys₂₀.  Workstream R24's comonotone upper end from single-group laws under the
+  (a) R25, as in (i).
+  (b) **Second-order recovery where it is not yet run** (`held_pair_exact.py`): at band 7 a
+  pass costs about three seconds (a trial with sixty quadruples — 420 passes — was still
+  running after twenty minutes when this was written; its log is in the scratch space
+  and is not committed), so the floor route (2 422 passes) and the ceiling route over all
+  sampled quadruples are hours on this machine for a bracket that is already `8·10⁻⁵`
+  nats: **not worth running at Lys₁₂ band 7.**  Worth running: (LKSE)₃ at order 4
+  (first-order bracket 0.0014 nats; on LKSE:5 the floor route closed 0.47) — time one pass
+  first; Lys₂₀.  Workstream R24's comonotone upper end from single-group laws under the
   floor is valid and not implemented.
   (c) **From THY-MSG-0018:** the class-relative influence between blocks for one of our
-  band models (their Theorem 11.119 (b); unread) — before any nested run on a dependent
-  known part; their rate theorem (11.53a, b; their Proposition U) and their §11.33 are
-  offered for attack — a referee workstream if credits allow.
+  band models (their Theorem 11.119 (b); unread by the coordinator) — before any nested
+  run on a dependent known part; this is item 1 of the brief of R26.
   (d) A formatting defect: sixteen older rows of the findings table in
   `docs/collaboration/status/science.md` (S46–S61) and six index rows of the digest have a
-  cell count different from their header; nine rows with literal pipes in code spans
-  were repaired at this checkpoint.
+  cell count different from their header.
+  (e) `PUBLICATION_OPPORTUNITIES.md` (version 2, 25 November) and the body of
+  `PRIOR_ART_MATRIX.md` (version 1) predate the three new divisions: a new version of each
+  is owed.
 (iv) **Next own mathematics** (`OPEN_PROBLEMS.md`): I7 (i) — is `a_cube + (K²/4)F*` the
 expansion of the chain's exponent?  D12 (a′) — a certified statement between `λ₀` and
 `0.8 λ_c`; with workstream R24's remark that `F(λ)` is exact and convex on a band model,
@@ -62,7 +76,7 @@ expansion of the chain's exponent?  D12 (a′) — a certified statement between
 G-5 (continuous variables), D14 (down-closed families).  Unrefereed inside the division:
 addendum A17 (13)–(18) (the research owner's decision, as recorded), part (23) and
 part (24).
-(v) Heads read at 21:16 UTC: theory `4692f59`, engineering `c81166b`, ensemble `8d42f60`, geometry `288b2de`, complexity `12e6d36` (theory, ensemble and complexity had moved; read as far as the pins in the status file say).
+(v) Heads read at 21:46 UTC: theory `eb88823`, engineering `2259daa`, ensemble `8d42f60`, geometry `288b2de`, complexity `1ba144d` (theory, engineering and complexity had moved; read as far as the pins in the status file say — COMPLEXITY-MSG-0004, their fourth checkpoint, in full: two sentences of their penalty note corrected at our remark; no response required).
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
    (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —

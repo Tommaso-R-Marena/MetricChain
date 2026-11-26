@@ -85,3 +85,14 @@ search and page fetching; publishers' full texts were often not accessible; seve
 classical sources (Novak 1988–1996; Harper 1966; Kiefer 1959; Chernoff 1959; Burnashev
 1976; Betrò–Guglielmi) were cited through papers that describe them.  The lists of what
 was *not accessed* are in `A1_REPORT.md` §4.10 and §9.5, `SM_REPORT.md`, `A2_REPORT.md`.
+
+## E. Addendum, 26 November 2026: statements of the three new divisions that this division checked (index only)
+
+*Version 1 above covers three branches and is otherwise unchanged; a full second version is owed.  The rows
+below point to the reviews; reading levels are there.*
+
+| statement (division) | class our search supports | closest prior art | where |
+|---|---|---|---|
+| Theorem L — global stability of order `n²` from distances of sequence separation at most 4 (Geometry, `288b2de`) | **(3)/(5)**: known in a different setting, the transfer not found in print; not a new mechanism | geometric rigidity in thin rods (Mora–Müller 2003; Blanchard–Griso); lattice lemmas (Alicandro–Lazzaroni–Palombaro; Schmidt–Zeman); the one published *global* bound for this graph is exponential (Arias-Castro–Vishwanath); first-order polynomial bounds in print (Daitch–Spielman; Kyng et al.; Lew et al.) | SCI-REV-0023; `workstreams/A4_REPORT.md` |
+| Theorem K(a) — every configuration has a first-order constant of order at least `n/K^{3/2}` (Geometry) | **(1)**: a corollary of printed statements (no novelty claimed by them) | Lew–Nevo–Peled–Raz 2023, Theorem 1.6 and Proposition 7.7; Presenza et al. 2022; Jordán–Tanigawa for the plane | the same |
+| other statements of the new divisions reviewed for correctness, with prior-art findings inside the reviews | see the reviews | — | SCI-REV-0019 (Complexity: the hardness note), SCI-REV-0021 (Geometry: Theorems B, B′, G — one of them known in dimension one, as they record), SCI-REV-0020 (Ensemble), SCI-MSG-0033 (a threshold rule of ours and theirs is in print) |
